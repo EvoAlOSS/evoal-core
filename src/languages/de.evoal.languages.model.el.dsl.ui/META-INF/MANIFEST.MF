@@ -1,0 +1,25 @@
+Manifest-Version: 1.0
+Automatic-Module-Name: de.evoal.languages.model.el.dsl.ui
+Bundle-ManifestVersion: 2
+Bundle-Name: de.evoal.languages.model.el.dsl.ui
+Bundle-Vendor: EvoAl Project
+Bundle-Version: 1.0.0.qualifier
+Bundle-SymbolicName: de.evoal.languages.model.el.dsl.ui; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: de.evoal.languages.model.el.dsl,
+ de.evoal.languages.model.el.dsl.ide,
+ de.evoal.languages.model.el,
+ org.eclipse.xtext.ui,
+ org.eclipse.xtext.ui.shared,
+ org.eclipse.xtext.ui.codetemplates.ui,
+ org.eclipse.ui.editors;bundle-version="3.5.0",
+ org.eclipse.ui.ide;bundle-version="3.5.0",
+ org.eclipse.ui,
+ org.eclipse.compare,
+ org.eclipse.xtext.builder
+Import-Package: org.apache.log4j
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Export-Package: de.evoal.languages.model.el.dsl.ui.contentassist;x-friends:="de.evoal.languages.model.ddl.dsl.ui",
+ de.evoal.languages.model.el.dsl.ui.internal,
+ de.evoal.languages.model.el.dsl.ui.quickfix;x-friends:="de.evoal.languages.model.ddl.dsl.ui"
+Bundle-Activator: de.evoal.languages.model.el.dsl.ui.internal.DslActivator

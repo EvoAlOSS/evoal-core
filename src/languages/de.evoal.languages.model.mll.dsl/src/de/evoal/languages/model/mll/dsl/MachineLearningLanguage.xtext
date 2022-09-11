@@ -1,0 +1,71 @@
+grammar de.evoal.languages.model.mll.dsl.MachineLearningLanguage with de.evoal.languages.model.instance.dsl.InstanceLanguage
+
+import "https://www.evoal.de/languages/mll/1.0.0" 
+import "https://www.evoal.de/languages/ddl/1.0.0" as ddl
+import "https://www.evoal.de/languages/dl/1.0.0" as dl
+
+MachineLearningConfigurationRule returns MachineLearningConfiguration:
+	(uses += UseRule)*
+
+	(definitions+=SurrogateDefinitionRule)*
+	(predictions+= PredictionRule)*
+;
+
+UseRule returns Use:
+	'use' importURI = STRING ';'
+;
+
+SurrogateDefinitionRule returns SurrogateDefinition: 
+	"prediction" name = STRING
+	"maps"
+		inputs += [ddl::DataDescription|StringOrId] ("," inputs += [ddl::DataDescription|StringOrId])* 
+	"to"
+		outputs += [ddl::DataDescription|StringOrId] ("," outputs += [ddl::DataDescription|StringOrId])* 
+
+	"using"
+		(layers += SurrogateLayerRule)+
+;
+
+SurrogateLayerRule returns SurrogateLayer:
+	"layer" name = STRING
+	"with"
+		(functions += PartialSurrogateFunctionRule)+
+;
+		
+PartialSurrogateFunctionRule returns PartialSurrogateFunction:
+	"function" name = [dl::TypeDefinition|StringOrId]
+	"mapping"
+		inputs += [ddl::DataDescription|StringOrId] ("," inputs += [ddl::DataDescription|StringOrId])* 
+	"to"
+		outputs += [ddl::DataDescription|StringOrId] ("," outputs += [ddl::DataDescription|StringOrId])* 
+	("with" "parameters"
+		((parameters += InstanceLanguage::AttributeRule)+ ))?
+;
+
+PredictionRule returns Prediction:
+	"predict"
+		outputs += [ddl::DataDescription|StringOrId] ("," outputs += [ddl::DataDescription|StringOrId])* 
+	"from"
+		inputs += [ddl::DataDescription|StringOrId] ("," inputs += [ddl::DataDescription|StringOrId])* 
+	"using"
+		definition = [SurrogateDefinition|StringOrId]
+	"measure"
+		quality = BlockStatementRule;
+      
+StatementRule returns Statement:
+	CallStatementRule | BlockStatementRule;
+
+BlockStatementRule returns BlockStatement:
+	{BlockStatement} '{'
+	    (statements += StatementRule)*
+	'}'
+;
+
+CallStatementRule returns CallStatement:
+	call = CallRule ';'
+;
+
+@Override
+FunctionNameRule returns DefinedFunctionName:
+	definition = [dl::FunctionDefinition|StringOrId]
+;

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated model -->
+      <package
+            uri="https://www.evoal.de/languages/instance/1.0.0"
+            class="de.evoal.languages.model.instance.InstancePackage"
+            genModel="model/model.genmodel"/>
+   </extension>
+
+</plugin>

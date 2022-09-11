@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin>
+	<extension point="org.eclipse.emf.ecore.generated_package">
+		<package
+			uri = "https://www.evoal.de/languages/eal/1.0.0"
+			class = "de.evoal.languages.model.eal.dsl.model.ModelPackage"
+			genModel = "model/generated/EvolutionaryAlgorithmLanguage.genmodel" />
+	</extension>
+</plugin>

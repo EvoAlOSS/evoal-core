@@ -1,0 +1,29 @@
+Manifest-Version: 1.0
+Automatic-Module-Name: de.evoal.languages.model.dl.dsl
+Bundle-ManifestVersion: 2
+Bundle-Name: de.evoal.languages.model.dl.dsl
+Bundle-Vendor: EvoAl Project
+Bundle-Version: 1.0.0.qualifier
+Bundle-SymbolicName: de.evoal.languages.model.dl.dsl; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.eclipse.xtext,
+ org.eclipse.xtext.xbase,
+ org.eclipse.equinox.common;bundle-version="3.5.0",
+ org.eclipse.emf.ecore,
+ org.eclipse.xtext.xbase.lib;bundle-version="2.14.0",
+ org.eclipse.xtext.util,
+ org.eclipse.emf.common,
+ org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
+ de.evoal.languages.model.el;bundle-version="1.0.0",
+ de.evoal.languages.model.el.dsl;bundle-version="1.0.0",
+ de.evoal.languages.model.dl;bundle-version="1.0.0";visibility:=reexport
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Export-Package: de.evoal.languages.model.dl.dsl,
+ de.evoal.languages.model.dl.dsl.generator,
+ de.evoal.languages.model.dl.dsl.scoping,
+ de.evoal.languages.model.dl.dsl.validation,
+ de.evoal.languages.model.dl.dsl.parser.antlr,
+ de.evoal.languages.model.dl.dsl.parser.antlr.internal,
+ de.evoal.languages.model.dl.dsl.serializer,
+ de.evoal.languages.model.dl.dsl.services
+Import-Package: org.apache.log4j

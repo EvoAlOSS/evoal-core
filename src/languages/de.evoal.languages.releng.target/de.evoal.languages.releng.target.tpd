@@ -1,0 +1,14 @@
+target "EvoAl Languages Target"
+
+with requirements, source
+
+location "http://download.eclipse.org/releases/2021-09" {
+  org.eclipse.equinox.sdk.feature.group lazy
+  org.eclipse.equinox.p2.sdk.feature.group lazy
+  org.eclipse.xtext.sdk.feature.group lazy
+  org.eclipse.graphiti.feature.feature.group lazy
+
+  // IDE for starting a debug eclipse
+  org.eclipse.platform.feature.group lazy
+  org.antlr.runtime [3.2.0,4.0.0)
+}

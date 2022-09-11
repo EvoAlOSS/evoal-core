@@ -1,0 +1,16 @@
+target
+.settings
+*~
+dependency-reduced-pom.xml
+.DS_Store
+log
+out
+bin
+test-bin
+*.class
+*.xtendbin
+.launch
+*._trace
+xtend-gen
+.idea
+*.iml

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="instance" nsURI="https://www.evoal.de/languages/instance/1.0.0"
+    nsPrefix="ins">
+  <eAnnotations source="http://www.eclipse.org/OCL/Import">
+    <details key="ddl" value="platform:/resource/de.evoal.languages.model.ddl/model/model.ecore#/"/>
+    <details key="dl" value="platform:/resource/de.evoal.languages.model.dl/model/model.ecore#/"/>
+    <details key="el" value="platform:/resource/de.evoal.languages.model.el/model/model.ecore#/"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="Instance" eSuperTypes="#//Value">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="name" eType="ecore:EClass ../../de.evoal.languages.model.dl/model/model.ecore#//TypeDefinition"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
+        eType="#//Attribute" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Attribute">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="name" eType="#//NameOrMisc"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//Value"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NameOrMisc"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Name" eSuperTypes="#//NameOrMisc">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="name" eType="ecore:EClass ../../de.evoal.languages.model.dl/model/model.ecore#//NamedAttributeDefinition"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Misc" eSuperTypes="#//NameOrMisc">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Value"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Array" eSuperTypes="#//Value">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="values" upperBound="-1"
+        eType="#//Value" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LiteralValue" eSuperTypes="#//Value">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="literal" eType="ecore:EClass ../../de.evoal.languages.model.el/model/model.ecore#//Literal"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataReference" eSuperTypes="#//Value">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="definition" eType="ecore:EClass ../../de.evoal.languages.model.ddl/model/model.ecore#//DataDescription"/>
+  </eClassifiers>
+</ecore:EPackage>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/de.evoal.languages.model.el/src-gen" editDirectory="/de.evoal.languages.el.model.edit/src-gen"
+    modelPluginID="de.evoal.languages.model.el" modelName="ExpressionLanguage" editPluginClass="de.evoal.languages.el.provider.ExpressionLanguageEditPlugin"
+    editorPluginClass="de.evoal.languages.el.presentation.ExpressionLanguageEditorPlugin"
+    rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" testsDirectory="/de.evoal.languages.el.model.tests/src-gen"
+    testSuiteClass="de.evoal.languages.el.tests.ExpressionLanguageAllTests" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="8.0" copyrightFields="false" operationReflection="true" importOrganizing="true">
+  <foreignModel>model.ecore</foreignModel>
+  <genPackages prefix="EL" basePackage="de.evoal.languages.model" disposableProviderFactory="true"
+      generateModelWizard="false" ecorePackage="model.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="model.ecore#//ComparisonOperator">
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//ComparisonOperator/GreaterThan"/>
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//ComparisonOperator/GreaterEqual"/>
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//ComparisonOperator/Equal"/>
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//ComparisonOperator/Unequal"/>
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//ComparisonOperator/LessEqual"/>
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//ComparisonOperator/LessThan"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="model.ecore#//AddOrSubtractOperator">
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//AddOrSubtractOperator/Add"/>
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//AddOrSubtractOperator/Subtract"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="model.ecore#//MultiplyDivideModuloOperator">
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//MultiplyDivideModuloOperator/Multiply"/>
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//MultiplyDivideModuloOperator/Divide"/>
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//MultiplyDivideModuloOperator/Modulo"/>
+    </genEnums>
+    <genClasses image="false" ecoreClass="model.ecore#//Expression"/>
+    <genClasses ecoreClass="model.ecore#//OrExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//OrExpression/subExpressions"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//XorExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//XorExpression/subExpressions"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//AndExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//AndExpression/subExpressions"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//NotExpression">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//NotExpression/negated"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//NotExpression/operand"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//ComparisonExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//ComparisonExpression/leftOperand"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//ComparisonExpression/comparison"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//PartialComparisonExpression">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//PartialComparisonExpression/operator"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//PartialComparisonExpression/subExpression"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//AddOrSubtractExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//AddOrSubtractExpression/leftOperand"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//AddOrSubtractExpression/operators"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//AddOrSubtractExpression/operands"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//MultiplyDivideModuloExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//MultiplyDivideModuloExpression/leftOperand"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//MultiplyDivideModuloExpression/operators"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//MultiplyDivideModuloExpression/operands"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//PowerOfExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//PowerOfExpression/leftOperand"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//PowerOfExpression/rightOperand"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//UnaryAddOrSubtractExpression">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//UnaryAddOrSubtractExpression/operators"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//UnaryAddOrSubtractExpression/subExpression"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="model.ecore#//CallOrLiteralOrReferenceOrParantheses"/>
+    <genClasses image="false" ecoreClass="model.ecore#//Literal"/>
+    <genClasses image="false" ecoreClass="model.ecore#//NumberLiteral"/>
+    <genClasses ecoreClass="model.ecore#//IntegerLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//IntegerLiteral/value"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//DoubleLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//DoubleLiteral/value"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//StringLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//StringLiteral/value"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//BooleanLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//BooleanLiteral/value"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//Call">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//Call/function"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//Call/parameters"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//Parantheses">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//Parantheses/subExpression"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="model.ecore#//FunctionName"/>
+    <genClasses ecoreClass="model.ecore#//ValueReference"/>
+  </genPackages>
+</genmodel:GenModel>

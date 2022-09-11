@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature id="de.evoal.languages.releng.feature">
+      <category name="de.evoal.langugages"/>
+   </feature>
+   <category-def name="de.evoal.langugages" label="EvoAl&apos;s DSLs">
+      <description>
+         Features belonging to EvoAl&apos;s DSLs
+      </description>
+   </category-def>
+</site>

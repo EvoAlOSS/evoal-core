@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<templates>
+	<template autoinsert="true"
+			  context="de.evoal.languages.model.ddl.dsl.DataDescriptionLanguage.DataTypeRule"
+			  deleted="false"
+			  description="Creates a data type definition"
+			  enabled="true"
+			  id="de.evoal.languages.model.ddl.dsl.ui.templates.createdatatype"
+			  name="Create data type">${quotient:Enum('ScaleType')} type ${Name}
+  description: ${Description}
+  with constraints:
+    ${cursor}</template>
+
+	<template autoinsert="true"
+			  context="de.evoal.languages.model.ddl.dsl.DataDescriptionLanguage.DataDescriptionRule"
+			  deleted="false"
+			  description="Creates an untyped data definition"
+			  enabled="true"
+			  id="de.evoal.languages.model.ddl.dsl.ui.templates.createuntypeddata"
+			  name="Create untyped data">${quotient:Enum('ScaleType')} ${real:Enum('RepresentationType')} data ${Name}
+		with constraints :
+		    ${cursor}
+	;</template>
+
+
+	<template autoinsert="true"
+			  context="de.evoal.languages.model.ddl.dsl.DataDescriptionLanguage.DataDescriptionRule"
+			  deleted="false"
+			  description="Creates a typed data definition"
+			  enabled="true"
+			  id="de.evoal.languages.model.ddl.dsl.ui.templates.createtypeddata"
+			  name="Create typed data">${real:Enum('RepresentationType')} data ${Name} of type ${Type:CrossReference('TypedDataDescription.type')}
+		with constraints :
+		    ${cursor}
+	;</template>
+	
+</templates>

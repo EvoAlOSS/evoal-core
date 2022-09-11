@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="de.evoal.languages.releng.feature"
+      label="EvoAl DSLs"
+      version="1.0.0.qualifier"
+      provider-name="EvoAl Project">
+
+   <description>
+      [Enter Feature Description here.]
+   </description>
+
+   <copyright url="http://www.example.com/copyright">
+      [Enter Copyright Description here.]
+   </copyright>
+
+   <license url="">
+      [Enter License Description here.]
+   </license>
+
+   <url>
+      <discovery label="EvoAl&apos;s Homepage" url="https://www.evoal.de"/>
+   </url>
+
+   <requires>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.emf.ecore"/>
+      <import plugin="org.eclipse.xtext"/>
+      <import plugin="org.eclipse.xtext.xbase"/>
+      <import plugin="org.eclipse.equinox.common" version="3.5.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.xtext.xbase.lib" version="2.14.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.xtext.util"/>
+      <import plugin="org.apache.log4j"/>
+      <import plugin="org.eclipse.xtext.ide"/>
+      <import plugin="org.eclipse.xtext.xbase.ide"/>
+      <import plugin="org.eclipse.xtext.ui"/>
+      <import plugin="org.eclipse.xtext.ui.shared"/>
+      <import plugin="org.eclipse.xtext.ui.codetemplates.ui"/>
+      <import plugin="org.eclipse.ui.editors" version="3.5.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ui.ide" version="3.5.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ui"/>
+      <import plugin="org.eclipse.compare"/>
+      <import plugin="org.eclipse.xtext.builder"/>
+      <import plugin="org.eclipse.emf.common"/>
+      <import plugin="de.evoal.languages.model.ddl" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="de.evoal.languages.model.dl.dsl" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="de.evoal.languages.model.el" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.antlr.runtime" version="3.2.0" match="compatible"/>
+      <import plugin="de.evoal.languages.model.el.dsl" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="de.evoal.languages.model.el.dsl.ui" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="de.evoal.languages.model.dl" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="de.evoal.languages.model.instance" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="de.evoal.languages.model.eal" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="de.evoal.languages.model.instance.dsl" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="de.evoal.languages.model.instance.dsl.ui" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="de.evoal.languages.model.ddl.dsl" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="de.evoal.languages.model.el.dsl.ide" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="de.evoal.languages.model.dl.dsl.ui" version="1.0.0" match="greaterOrEqual"/>
+   </requires>
+
+   <plugin
+         id="de.evoal.languages.model.ddl"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="de.evoal.languages.model.ddl.dsl"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="de.evoal.languages.model.ddl.dsl.ide"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="de.evoal.languages.model.ddl.dsl.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="de.evoal.languages.model.dl"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="de.evoal.languages.model.dl.dsl"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="de.evoal.languages.model.dl.dsl.ide"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="de.evoal.languages.model.dl.dsl.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="de.evoal.languages.model.eal"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="de.evoal.languages.model.eal.dsl"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="de.evoal.languages.model.eal.dsl.ide"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="de.evoal.languages.model.eal.dsl.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="de.evoal.languages.model.el"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="de.evoal.languages.model.el.dsl"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="de.evoal.languages.model.el.dsl.ide"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="de.evoal.languages.model.el.dsl.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="de.evoal.languages.model.instance"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="de.evoal.languages.model.instance.dsl"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="de.evoal.languages.model.instance.dsl.ide"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="de.evoal.languages.model.instance.dsl.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="de.evoal.languages.model.mll"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="de.evoal.languages.model.mll.dsl"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="de.evoal.languages.model.mll.dsl.ide"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="de.evoal.languages.model.mll.dsl.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+</feature>

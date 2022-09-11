@@ -1,0 +1,125 @@
+grammar de.evoal.languages.model.el.dsl.ExpressionLanguage with org.eclipse.xtext.common.Terminals
+
+import "https://www.evoal.de/languages/el/1.0.0" 
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
+
+
+ExpressionRule returns Expression:
+	OrExpressionRule
+;
+
+OrExpressionRule returns OrExpression:
+	subExpressions += XorExpressionRule ( "OR" subExpressions += XorExpressionRule )*
+;
+
+XorExpressionRule returns XorExpression:
+	subExpressions += AndExpressionRule ( "XOR" subExpressions += AndExpressionRule )*
+;
+
+AndExpressionRule returns AndExpression:
+	subExpressions += NotExpressionRule ( "AND" subExpressions += NotExpressionRule )*
+;
+
+NotExpressionRule returns NotExpression:
+	( negated ?= "!")? operand = ComparisonExpressionRule
+;
+
+ComparisonExpressionRule returns ComparisonExpression:
+	leftOperand = AddOrSubtractExpressionRule ( comparison += PartialComparisonExpressionRule )*
+;
+
+PartialComparisonExpressionRule returns PartialComparisonExpression :
+	operator = ComparisonOperatorRule subExpression = AddOrSubtractExpressionRule
+;
+
+enum ComparisonOperatorRule returns ComparisonOperator :
+	GreaterThan = ">=" |
+	GreaterEqual = ">" |
+	Equal = "=" |
+	Unequal = "!=" |
+	LessEqual = "<" |
+	LessThan = "<="
+;
+
+AddOrSubtractExpressionRule returns AddOrSubtractExpression:
+	leftOperand = MultiplyDivideModuloExpressionRule (operators+=AddOrSubtractOperatorRule operands += MultiplyDivideModuloExpressionRule)*
+;
+
+enum AddOrSubtractOperatorRule returns AddOrSubtractOperator:
+	Add = '+' | Subtract = '-'
+;
+
+MultiplyDivideModuloExpressionRule returns MultiplyDivideModuloExpression :
+	leftOperand = PowerOfExpressionRule (operators+= MultiplyDivideModuloOperatorRule operands += PowerOfExpressionRule)*
+;
+
+enum MultiplyDivideModuloOperatorRule returns MultiplyDivideModuloOperator:
+	Multiply = '*' | Divide = "/" | Modulo = '%'
+;
+
+PowerOfExpressionRule returns PowerOfExpression :
+	leftOperand = UnaryAddOrSubtractExpressionRule ('^' rightOperand = PowerOfExpressionRule)?
+;
+
+UnaryAddOrSubtractExpressionRule returns UnaryAddOrSubtractExpression :
+	( operators+=AddOrSubtractOperatorRule )* subExpression = LiteralOrReferenceRule
+;
+
+LiteralOrReferenceRule returns CallOrLiteralOrReferenceOrParantheses:
+	CallRule | LiteralRule | ParanthesesRule | ValueReferenceRule;
+
+ParanthesesRule returns Parantheses:
+	'(' subExpression = ExpressionRule ')'
+;
+
+CallRule returns Call:
+	function=FunctionNameRule '(' (parameters += ExpressionRule (',' parameters += ExpressionRule)* )? ')'
+;
+
+
+FunctionNameRule returns FunctionName:
+	{FunctionName} 'call'
+;
+
+ValueReferenceRule returns ValueReference:
+	{ValueReference} 'value'
+;
+
+LiteralRule returns Literal:
+	NumberLiteralRule
+		| StringLiteralRule
+		| BooleanLiteralRule
+;
+
+NumberLiteralRule returns NumberLiteral:
+	DoubleLiteralRule | IntegerLiteralRule
+;
+
+DoubleLiteralRule returns DoubleLiteral :
+	value = DOUBLE
+;
+
+
+IntegerLiteralRule returns IntegerLiteral:
+	value = INT
+;
+
+StringLiteralRule returns StringLiteral:
+	value = STRING
+;
+
+BooleanLiteralRule returns BooleanLiteral:
+	{BooleanLiteral} (value ?= 'true' |  'false')
+;
+
+StringOrId:
+	QUOTED_ID | ID;
+
+DOUBLE returns ecore::EDouble : INT'.'INT;
+
+@Override
+terminal STRING:
+	'"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"';
+	
+terminal QUOTED_ID:
+	"'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'";
