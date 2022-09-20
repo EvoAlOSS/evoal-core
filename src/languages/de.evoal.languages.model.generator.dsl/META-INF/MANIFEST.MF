@@ -16,16 +16,14 @@ Require-Bundle: org.eclipse.xtext,
  org.eclipse.emf.common,
  org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
  de.evoal.languages.model.dl;bundle-version="1.0.0",
- de.evoal.languages.model.ddl;bundle-version="1.0.0"
+ de.evoal.languages.model.ddl;bundle-version="1.0.0",
+ de.evoal.languages.model.generator;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Export-Package: de.evoal.languages.model.generator.dsl,
  de.evoal.languages.model.generator.dsl.services,
  de.evoal.languages.model.generator.dsl.validation,
  de.evoal.languages.model.generator.dsl.parser.antlr.internal,
- de.evoal.languages.model.generator.dsl.generatorDSL,
  de.evoal.languages.model.generator.dsl.serializer,
- de.evoal.languages.model.generator.dsl.generatorDSL.impl,
- de.evoal.languages.model.generator.dsl.generatorDSL.util,
  de.evoal.languages.model.generator.dsl.scoping,
  de.evoal.languages.model.generator.dsl.generator,
  de.evoal.languages.model.generator.dsl.parser.antlr

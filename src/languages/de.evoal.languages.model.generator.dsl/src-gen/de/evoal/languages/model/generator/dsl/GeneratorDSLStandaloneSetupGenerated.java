@@ -5,9 +5,7 @@ package de.evoal.languages.model.generator.dsl;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import de.evoal.languages.model.generator.dsl.generatorDSL.GeneratorDSLPackage;
 import de.evoal.languages.model.instance.dsl.InstanceLanguageStandaloneSetup;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.resource.IResourceFactory;
@@ -30,9 +28,6 @@ public class GeneratorDSLStandaloneSetupGenerated implements ISetup {
 	}
 	
 	public void register(Injector injector) {
-		if (!EPackage.Registry.INSTANCE.containsKey("http://www.evoal.de/languages/model/generator/dsl/GeneratorDSL")) {
-			EPackage.Registry.INSTANCE.put("http://www.evoal.de/languages/model/generator/dsl/GeneratorDSL", GeneratorDSLPackage.eINSTANCE);
-		}
 		IResourceFactory resourceFactory = injector.getInstance(IResourceFactory.class);
 		IResourceServiceProvider serviceProvider = injector.getInstance(IResourceServiceProvider.class);
 		

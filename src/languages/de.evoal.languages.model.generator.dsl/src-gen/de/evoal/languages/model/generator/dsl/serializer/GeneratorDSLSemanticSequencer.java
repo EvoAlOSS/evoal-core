@@ -23,22 +23,22 @@ import de.evoal.languages.model.el.StringLiteral;
 import de.evoal.languages.model.el.UnaryAddOrSubtractExpression;
 import de.evoal.languages.model.el.ValueReference;
 import de.evoal.languages.model.el.XorExpression;
-import de.evoal.languages.model.generator.dsl.generatorDSL.ApplyStatement;
-import de.evoal.languages.model.generator.dsl.generatorDSL.Configuration;
-import de.evoal.languages.model.generator.dsl.generatorDSL.CounterRange;
-import de.evoal.languages.model.generator.dsl.generatorDSL.ForStatement;
-import de.evoal.languages.model.generator.dsl.generatorDSL.FunctionDefinitionReference;
-import de.evoal.languages.model.generator.dsl.generatorDSL.FunctionReferences;
-import de.evoal.languages.model.generator.dsl.generatorDSL.Functions;
-import de.evoal.languages.model.generator.dsl.generatorDSL.GeneratorDSLPackage;
-import de.evoal.languages.model.generator.dsl.generatorDSL.GeneratorDefinition;
-import de.evoal.languages.model.generator.dsl.generatorDSL.GeneratorDefinitionReference;
-import de.evoal.languages.model.generator.dsl.generatorDSL.GeneratorReferences;
-import de.evoal.languages.model.generator.dsl.generatorDSL.Generators;
-import de.evoal.languages.model.generator.dsl.generatorDSL.LoopVariable;
-import de.evoal.languages.model.generator.dsl.generatorDSL.ParametrizedFunctionDefinition;
-import de.evoal.languages.model.generator.dsl.generatorDSL.ParametrizedFunctionDefinitionReference;
-import de.evoal.languages.model.generator.dsl.generatorDSL.Use;
+import de.evoal.languages.model.generator.ApplyStatement;
+import de.evoal.languages.model.generator.Configuration;
+import de.evoal.languages.model.generator.CounterRange;
+import de.evoal.languages.model.generator.ForStatement;
+import de.evoal.languages.model.generator.FunctionDefinitionReference;
+import de.evoal.languages.model.generator.FunctionReferences;
+import de.evoal.languages.model.generator.Functions;
+import de.evoal.languages.model.generator.GeneratorDefinition;
+import de.evoal.languages.model.generator.GeneratorDefinitionReference;
+import de.evoal.languages.model.generator.GeneratorPackage;
+import de.evoal.languages.model.generator.GeneratorReferences;
+import de.evoal.languages.model.generator.Generators;
+import de.evoal.languages.model.generator.LoopVariable;
+import de.evoal.languages.model.generator.ParametrizedFunctionDefinition;
+import de.evoal.languages.model.generator.ParametrizedFunctionDefinitionReference;
+import de.evoal.languages.model.generator.Use;
 import de.evoal.languages.model.generator.dsl.services.GeneratorDSLGrammarAccess;
 import de.evoal.languages.model.instance.Array;
 import de.evoal.languages.model.instance.Attribute;
@@ -128,51 +128,51 @@ public class GeneratorDSLSemanticSequencer extends InstanceLanguageSemanticSeque
 				sequence_XorExpressionRule(context, (XorExpression) semanticObject); 
 				return; 
 			}
-		else if (epackage == GeneratorDSLPackage.eINSTANCE)
+		else if (epackage == GeneratorPackage.eINSTANCE)
 			switch (semanticObject.eClass().getClassifierID()) {
-			case GeneratorDSLPackage.APPLY_STATEMENT:
+			case GeneratorPackage.APPLY_STATEMENT:
 				sequence_ApplyStatementRule(context, (ApplyStatement) semanticObject); 
 				return; 
-			case GeneratorDSLPackage.CONFIGURATION:
+			case GeneratorPackage.CONFIGURATION:
 				sequence_ConfigurationRule(context, (Configuration) semanticObject); 
 				return; 
-			case GeneratorDSLPackage.COUNTER_RANGE:
+			case GeneratorPackage.COUNTER_RANGE:
 				sequence_CounterRangeRule(context, (CounterRange) semanticObject); 
 				return; 
-			case GeneratorDSLPackage.FOR_STATEMENT:
+			case GeneratorPackage.FOR_STATEMENT:
 				sequence_ForStatementRule(context, (ForStatement) semanticObject); 
 				return; 
-			case GeneratorDSLPackage.FUNCTION_DEFINITION_REFERENCE:
+			case GeneratorPackage.FUNCTION_DEFINITION_REFERENCE:
 				sequence_FunctionDefinitionReferenceRule(context, (FunctionDefinitionReference) semanticObject); 
 				return; 
-			case GeneratorDSLPackage.FUNCTION_REFERENCES:
+			case GeneratorPackage.FUNCTION_REFERENCES:
 				sequence_FunctionReferencesRule(context, (FunctionReferences) semanticObject); 
 				return; 
-			case GeneratorDSLPackage.FUNCTIONS:
+			case GeneratorPackage.FUNCTIONS:
 				sequence_FunctionsRule(context, (Functions) semanticObject); 
 				return; 
-			case GeneratorDSLPackage.GENERATOR_DEFINITION:
+			case GeneratorPackage.GENERATOR_DEFINITION:
 				sequence_GeneratorDefinitionRule(context, (GeneratorDefinition) semanticObject); 
 				return; 
-			case GeneratorDSLPackage.GENERATOR_DEFINITION_REFERENCE:
+			case GeneratorPackage.GENERATOR_DEFINITION_REFERENCE:
 				sequence_GeneratorDefinitionReferenceRule(context, (GeneratorDefinitionReference) semanticObject); 
 				return; 
-			case GeneratorDSLPackage.GENERATOR_REFERENCES:
+			case GeneratorPackage.GENERATOR_REFERENCES:
 				sequence_GeneratorReferencesRule(context, (GeneratorReferences) semanticObject); 
 				return; 
-			case GeneratorDSLPackage.GENERATORS:
+			case GeneratorPackage.GENERATORS:
 				sequence_GeneratorsRule(context, (Generators) semanticObject); 
 				return; 
-			case GeneratorDSLPackage.LOOP_VARIABLE:
+			case GeneratorPackage.LOOP_VARIABLE:
 				sequence_LoopVariableReference(context, (LoopVariable) semanticObject); 
 				return; 
-			case GeneratorDSLPackage.PARAMETRIZED_FUNCTION_DEFINITION:
+			case GeneratorPackage.PARAMETRIZED_FUNCTION_DEFINITION:
 				sequence_ParametrizedFunctionDefinitionRule(context, (ParametrizedFunctionDefinition) semanticObject); 
 				return; 
-			case GeneratorDSLPackage.PARAMETRIZED_FUNCTION_DEFINITION_REFERENCE:
+			case GeneratorPackage.PARAMETRIZED_FUNCTION_DEFINITION_REFERENCE:
 				sequence_ParametrizedFunctionDefinitionReferenceRule(context, (ParametrizedFunctionDefinitionReference) semanticObject); 
 				return; 
-			case GeneratorDSLPackage.USE:
+			case GeneratorPackage.USE:
 				sequence_UseRule(context, (Use) semanticObject); 
 				return; 
 			}
@@ -214,14 +214,14 @@ public class GeneratorDSLSemanticSequencer extends InstanceLanguageSemanticSeque
 	 */
 	protected void sequence_ApplyStatementRule(ISerializationContext context, ApplyStatement semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, GeneratorDSLPackage.Literals.APPLY_STATEMENT__FILE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, GeneratorDSLPackage.Literals.APPLY_STATEMENT__FILE));
-			if (transientValues.isValueTransient(semanticObject, GeneratorDSLPackage.Literals.APPLY_STATEMENT__COUNT) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, GeneratorDSLPackage.Literals.APPLY_STATEMENT__COUNT));
-			if (transientValues.isValueTransient(semanticObject, GeneratorDSLPackage.Literals.APPLY_STATEMENT__FUNCTION) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, GeneratorDSLPackage.Literals.APPLY_STATEMENT__FUNCTION));
-			if (transientValues.isValueTransient(semanticObject, GeneratorDSLPackage.Literals.APPLY_STATEMENT__GENERATOR) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, GeneratorDSLPackage.Literals.APPLY_STATEMENT__GENERATOR));
+			if (transientValues.isValueTransient(semanticObject, GeneratorPackage.Literals.APPLY_STATEMENT__FILE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, GeneratorPackage.Literals.APPLY_STATEMENT__FILE));
+			if (transientValues.isValueTransient(semanticObject, GeneratorPackage.Literals.APPLY_STATEMENT__COUNT) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, GeneratorPackage.Literals.APPLY_STATEMENT__COUNT));
+			if (transientValues.isValueTransient(semanticObject, GeneratorPackage.Literals.APPLY_STATEMENT__FUNCTION) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, GeneratorPackage.Literals.APPLY_STATEMENT__FUNCTION));
+			if (transientValues.isValueTransient(semanticObject, GeneratorPackage.Literals.APPLY_STATEMENT__GENERATOR) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, GeneratorPackage.Literals.APPLY_STATEMENT__GENERATOR));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getApplyStatementRuleAccess().getFileSTRINGTerminalRuleCall_1_0(), semanticObject.getFile());
@@ -263,10 +263,10 @@ public class GeneratorDSLSemanticSequencer extends InstanceLanguageSemanticSeque
 	 */
 	protected void sequence_CounterRangeRule(ISerializationContext context, CounterRange semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, GeneratorDSLPackage.Literals.COUNTER_RANGE__START) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, GeneratorDSLPackage.Literals.COUNTER_RANGE__START));
-			if (transientValues.isValueTransient(semanticObject, GeneratorDSLPackage.Literals.COUNTER_RANGE__END) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, GeneratorDSLPackage.Literals.COUNTER_RANGE__END));
+			if (transientValues.isValueTransient(semanticObject, GeneratorPackage.Literals.COUNTER_RANGE__START) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, GeneratorPackage.Literals.COUNTER_RANGE__START));
+			if (transientValues.isValueTransient(semanticObject, GeneratorPackage.Literals.COUNTER_RANGE__END) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, GeneratorPackage.Literals.COUNTER_RANGE__END));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getCounterRangeRuleAccess().getStartINTTerminalRuleCall_1_0(), semanticObject.getStart());
@@ -299,11 +299,11 @@ public class GeneratorDSLSemanticSequencer extends InstanceLanguageSemanticSeque
 	 */
 	protected void sequence_FunctionDefinitionReferenceRule(ISerializationContext context, FunctionDefinitionReference semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, GeneratorDSLPackage.Literals.FUNCTION_DEFINITION_REFERENCE__DEFINITION) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, GeneratorDSLPackage.Literals.FUNCTION_DEFINITION_REFERENCE__DEFINITION));
+			if (transientValues.isValueTransient(semanticObject, GeneratorPackage.Literals.FUNCTION_DEFINITION_REFERENCE__DEFINITION) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, GeneratorPackage.Literals.FUNCTION_DEFINITION_REFERENCE__DEFINITION));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getFunctionDefinitionReferenceRuleAccess().getDefinitionFunctionDefinitionStringOrIdParserRuleCall_2_0_1(), semanticObject.eGet(GeneratorDSLPackage.Literals.FUNCTION_DEFINITION_REFERENCE__DEFINITION, false));
+		feeder.accept(grammarAccess.getFunctionDefinitionReferenceRuleAccess().getDefinitionFunctionDefinitionStringOrIdParserRuleCall_2_0_1(), semanticObject.eGet(GeneratorPackage.Literals.FUNCTION_DEFINITION_REFERENCE__DEFINITION, false));
 		feeder.finish();
 	}
 	
@@ -343,11 +343,11 @@ public class GeneratorDSLSemanticSequencer extends InstanceLanguageSemanticSeque
 	 */
 	protected void sequence_GeneratorDefinitionReferenceRule(ISerializationContext context, GeneratorDefinitionReference semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, GeneratorDSLPackage.Literals.GENERATOR_DEFINITION_REFERENCE__DEFINITION) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, GeneratorDSLPackage.Literals.GENERATOR_DEFINITION_REFERENCE__DEFINITION));
+			if (transientValues.isValueTransient(semanticObject, GeneratorPackage.Literals.GENERATOR_DEFINITION_REFERENCE__DEFINITION) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, GeneratorPackage.Literals.GENERATOR_DEFINITION_REFERENCE__DEFINITION));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getGeneratorDefinitionReferenceRuleAccess().getDefinitionGeneratorDefinitionStringOrIdParserRuleCall_1_0_1(), semanticObject.eGet(GeneratorDSLPackage.Literals.GENERATOR_DEFINITION_REFERENCE__DEFINITION, false));
+		feeder.accept(grammarAccess.getGeneratorDefinitionReferenceRuleAccess().getDefinitionGeneratorDefinitionStringOrIdParserRuleCall_1_0_1(), semanticObject.eGet(GeneratorPackage.Literals.GENERATOR_DEFINITION_REFERENCE__DEFINITION, false));
 		feeder.finish();
 	}
 	
@@ -361,10 +361,10 @@ public class GeneratorDSLSemanticSequencer extends InstanceLanguageSemanticSeque
 	 */
 	protected void sequence_GeneratorDefinitionRule(ISerializationContext context, GeneratorDefinition semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, GeneratorDSLPackage.Literals.GENERATOR_DEFINITION__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, GeneratorDSLPackage.Literals.GENERATOR_DEFINITION__NAME));
-			if (transientValues.isValueTransient(semanticObject, GeneratorDSLPackage.Literals.GENERATOR_DEFINITION__DEFINITION) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, GeneratorDSLPackage.Literals.GENERATOR_DEFINITION__DEFINITION));
+			if (transientValues.isValueTransient(semanticObject, GeneratorPackage.Literals.GENERATOR_DEFINITION__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, GeneratorPackage.Literals.GENERATOR_DEFINITION__NAME));
+			if (transientValues.isValueTransient(semanticObject, GeneratorPackage.Literals.GENERATOR_DEFINITION__DEFINITION) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, GeneratorPackage.Literals.GENERATOR_DEFINITION__DEFINITION));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getGeneratorDefinitionRuleAccess().getNameStringOrIdParserRuleCall_1_0(), semanticObject.getName());
@@ -409,11 +409,11 @@ public class GeneratorDSLSemanticSequencer extends InstanceLanguageSemanticSeque
 	 */
 	protected void sequence_LoopVariableReference(ISerializationContext context, LoopVariable semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, GeneratorDSLPackage.Literals.LOOP_VARIABLE__DEFINITION) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, GeneratorDSLPackage.Literals.LOOP_VARIABLE__DEFINITION));
+			if (transientValues.isValueTransient(semanticObject, GeneratorPackage.Literals.LOOP_VARIABLE__DEFINITION) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, GeneratorPackage.Literals.LOOP_VARIABLE__DEFINITION));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getLoopVariableReferenceAccess().getDefinitionForStatementIDTerminalRuleCall_1_0_1(), semanticObject.eGet(GeneratorDSLPackage.Literals.LOOP_VARIABLE__DEFINITION, false));
+		feeder.accept(grammarAccess.getLoopVariableReferenceAccess().getDefinitionForStatementIDTerminalRuleCall_1_0_1(), semanticObject.eGet(GeneratorPackage.Literals.LOOP_VARIABLE__DEFINITION, false));
 		feeder.finish();
 	}
 	
@@ -429,11 +429,11 @@ public class GeneratorDSLSemanticSequencer extends InstanceLanguageSemanticSeque
 	 */
 	protected void sequence_ParametrizedFunctionDefinitionReferenceRule(ISerializationContext context, ParametrizedFunctionDefinitionReference semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, GeneratorDSLPackage.Literals.PARAMETRIZED_FUNCTION_DEFINITION_REFERENCE__DEFINITION) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, GeneratorDSLPackage.Literals.PARAMETRIZED_FUNCTION_DEFINITION_REFERENCE__DEFINITION));
+			if (transientValues.isValueTransient(semanticObject, GeneratorPackage.Literals.PARAMETRIZED_FUNCTION_DEFINITION_REFERENCE__DEFINITION) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, GeneratorPackage.Literals.PARAMETRIZED_FUNCTION_DEFINITION_REFERENCE__DEFINITION));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getParametrizedFunctionDefinitionReferenceRuleAccess().getDefinitionFunctionDefinitionReferenceStringOrIdParserRuleCall_2_0_1(), semanticObject.eGet(GeneratorDSLPackage.Literals.PARAMETRIZED_FUNCTION_DEFINITION_REFERENCE__DEFINITION, false));
+		feeder.accept(grammarAccess.getParametrizedFunctionDefinitionReferenceRuleAccess().getDefinitionFunctionDefinitionReferenceStringOrIdParserRuleCall_2_0_1(), semanticObject.eGet(GeneratorPackage.Literals.PARAMETRIZED_FUNCTION_DEFINITION_REFERENCE__DEFINITION, false));
 		feeder.finish();
 	}
 	
@@ -447,10 +447,10 @@ public class GeneratorDSLSemanticSequencer extends InstanceLanguageSemanticSeque
 	 */
 	protected void sequence_ParametrizedFunctionDefinitionRule(ISerializationContext context, ParametrizedFunctionDefinition semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, GeneratorDSLPackage.Literals.PARAMETRIZED_FUNCTION_DEFINITION__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, GeneratorDSLPackage.Literals.PARAMETRIZED_FUNCTION_DEFINITION__NAME));
-			if (transientValues.isValueTransient(semanticObject, GeneratorDSLPackage.Literals.PARAMETRIZED_FUNCTION_DEFINITION__DEFINITION) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, GeneratorDSLPackage.Literals.PARAMETRIZED_FUNCTION_DEFINITION__DEFINITION));
+			if (transientValues.isValueTransient(semanticObject, GeneratorPackage.Literals.PARAMETRIZED_FUNCTION_DEFINITION__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, GeneratorPackage.Literals.PARAMETRIZED_FUNCTION_DEFINITION__NAME));
+			if (transientValues.isValueTransient(semanticObject, GeneratorPackage.Literals.PARAMETRIZED_FUNCTION_DEFINITION__DEFINITION) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, GeneratorPackage.Literals.PARAMETRIZED_FUNCTION_DEFINITION__DEFINITION));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getParametrizedFunctionDefinitionRuleAccess().getNameStringOrIdParserRuleCall_1_0(), semanticObject.getName());
@@ -468,8 +468,8 @@ public class GeneratorDSLSemanticSequencer extends InstanceLanguageSemanticSeque
 	 */
 	protected void sequence_UseRule(ISerializationContext context, Use semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, GeneratorDSLPackage.Literals.USE__IMPORT_URI) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, GeneratorDSLPackage.Literals.USE__IMPORT_URI));
+			if (transientValues.isValueTransient(semanticObject, GeneratorPackage.Literals.USE__IMPORT_URI) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, GeneratorPackage.Literals.USE__IMPORT_URI));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getUseRuleAccess().getImportURISTRINGTerminalRuleCall_1_0(), semanticObject.getImportURI());

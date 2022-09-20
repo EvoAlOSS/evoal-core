@@ -1,8 +1,7 @@
 grammar de.evoal.languages.model.generator.dsl.GeneratorDSL with de.evoal.languages.model.instance.dsl.InstanceLanguage
 
-generate generatorDSL "http://www.evoal.de/languages/model/generator/dsl/GeneratorDSL"
-
 import "https://www.evoal.de/languages/dl/1.0.0"
+import "https://www.evoal.de/languages/generator/1.0.0"
 
 ConfigurationRule returns Configuration:
 	(uses += UseRule)*
