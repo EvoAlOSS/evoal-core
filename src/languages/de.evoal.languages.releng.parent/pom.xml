@@ -301,6 +301,10 @@
 		<module>../de.evoal.languages.model.eal.dsl.ide</module>
 		<module>../de.evoal.languages.model.eal.dsl.ui</module>
 
+		<module>../de.evoal.languages.model.generator.dsl</module>
+		<module>../de.evoal.languages.model.generator.dsl.ide</module>
+		<module>../de.evoal.languages.model.generator.dsl.ui</module>
+
 		<module>../de.evoal.languages.releng.feature</module>
 		<module>../de.evoal.languages.releng.site</module>
 	</modules>

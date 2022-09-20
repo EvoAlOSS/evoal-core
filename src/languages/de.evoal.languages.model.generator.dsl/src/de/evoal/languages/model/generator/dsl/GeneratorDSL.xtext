@@ -1,0 +1,96 @@
+grammar de.evoal.languages.model.generator.dsl.GeneratorDSL with de.evoal.languages.model.instance.dsl.InstanceLanguage
+
+generate generatorDSL "http://www.evoal.de/languages/model/generator/dsl/GeneratorDSL"
+
+import "https://www.evoal.de/languages/dl/1.0.0"
+
+ConfigurationRule returns Configuration:
+	(uses += UseRule)*
+	(generators += GeneratorDefinitionRule)*
+	(functions += ParametrizedFunctionDefinitionRule)*
+
+	(statements	+= StatementRule)*
+;
+
+UseRule returns Use:
+	'use' importURI = STRING ';'
+;
+
+
+ParametrizedFunctionDefinitionRule returns ParametrizedFunctionDefinition:
+	'function' name = StringOrId 'using'
+	   definition = InstanceRule
+	';'
+;
+
+GeneratorDefinitionRule returns GeneratorDefinition:
+	'generator' name = StringOrId 'using'
+		definition = InstanceRule
+	';'
+;
+
+StatementRule returns Statement:
+	ForStatementRule | ApplyStatementRule	
+;
+
+ForStatementRule returns ForStatement:
+	'for' name = ID 'in' range = RangeRule 'loop'
+		(statements += StatementRule)*
+	'end'
+;
+
+RangeRule returns Range:
+	FunctionsRule | GeneratorsRule | CounterRangeRule
+;
+
+CounterRangeRule returns CounterRange:
+	'[' start = INT 'to' end = INT ']'
+;
+
+FunctionsRule returns Functions:
+	{Functions} 'functions' (functionReferences = FunctionReferencesRule)?
+;
+
+FunctionReferencesRule returns FunctionReferences:
+	'[' functions += FunctionDefReferenceRule (',' functions += FunctionDefReferenceRule)* ']'
+;
+
+GeneratorsRule returns Generators:
+	{Generators} 'generators' (generatorReferences = GeneratorReferencesRule)?
+;
+
+GeneratorReferencesRule returns GeneratorReferences:
+	'[' generators += [GeneratorDefinition|StringOrId] (',' generators += [GeneratorDefinition|StringOrId])* ']'
+;
+
+ApplyStatementRule returns ApplyStatement:
+	'write' file = STRING 'with' count = INT 'samples' 'from' 'applying'  function = FunctionReferenceRule 'on' generator = GeneratorReferenceRule ';'
+;
+
+GeneratorReferenceRule returns GeneratorReference:
+	GeneratorDefinitionReferenceRule | LoopVariableReference	
+;
+
+GeneratorDefinitionReferenceRule returns GeneratorDefinitionReference:
+	'generator' definition = [ GeneratorDefinition | StringOrId ]
+;
+
+FunctionReferenceRule returns FunctionReference:
+	FunctionDefReferenceRule | LoopVariableReference
+;
+
+FunctionDefReferenceRule returns FunctionDefReference:
+	FunctionDefinitionReferenceRule | ParametrizedFunctionDefinitionReferenceRule
+;
+
+LoopVariableReference returns LoopVariable:
+	{LoopVariable} definition = [ForStatement | ID]
+;
+
+FunctionDefinitionReferenceRule returns FunctionDefinitionReference:
+	{FunctionDefinitionReference} 'definition' definition = [FunctionDefinition|StringOrId]	
+;
+
+ParametrizedFunctionDefinitionReferenceRule returns ParametrizedFunctionDefinitionReference:
+	{ParametrizedFunctionDefinitionReference} 'function' definition = [FunctionDefinitionReference|StringOrId]
+;

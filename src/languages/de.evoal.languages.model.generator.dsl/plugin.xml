@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin>
+	<extension point="org.eclipse.emf.ecore.generated_package">
+		<package
+			uri = "http://www.evoal.de/languages/model/generator/dsl/GeneratorDSL"
+			class = "de.evoal.languages.model.generator.dsl.generatorDSL.GeneratorDSLPackage"
+			genModel = "model/generated/GeneratorDSL.genmodel" />
+	</extension>
+</plugin>
