@@ -920,7 +920,7 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 		initEReference(getFunctionDefinitionReference_Definition(), theDlPackage.getTypeDefinition(), null, "definition", null, 0, 1, FunctionDefinitionReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(parametrizedFunctionDefinitionReferenceEClass, ParametrizedFunctionDefinitionReference.class, "ParametrizedFunctionDefinitionReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getParametrizedFunctionDefinitionReference_Definition(), this.getFunctionDefinitionReference(), null, "definition", null, 0, 1, ParametrizedFunctionDefinitionReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getParametrizedFunctionDefinitionReference_Definition(), this.getParametrizedFunctionDefinition(), null, "definition", null, 0, 1, ParametrizedFunctionDefinitionReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

@@ -711,15 +711,15 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 		private final Action cParametrizedFunctionDefinitionReferenceAction_0 = (Action)cGroup.eContents().get(0);
 		private final Keyword cFunctionKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Assignment cDefinitionAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final CrossReference cDefinitionFunctionDefinitionReferenceCrossReference_2_0 = (CrossReference)cDefinitionAssignment_2.eContents().get(0);
-		private final RuleCall cDefinitionFunctionDefinitionReferenceStringOrIdParserRuleCall_2_0_1 = (RuleCall)cDefinitionFunctionDefinitionReferenceCrossReference_2_0.eContents().get(1);
+		private final CrossReference cDefinitionParametrizedFunctionDefinitionCrossReference_2_0 = (CrossReference)cDefinitionAssignment_2.eContents().get(0);
+		private final RuleCall cDefinitionParametrizedFunctionDefinitionStringOrIdParserRuleCall_2_0_1 = (RuleCall)cDefinitionParametrizedFunctionDefinitionCrossReference_2_0.eContents().get(1);
 		
 		//ParametrizedFunctionDefinitionReferenceRule returns ParametrizedFunctionDefinitionReference:
-		//    {ParametrizedFunctionDefinitionReference} 'function' definition = [FunctionDefinitionReference|StringOrId]
+		//    {ParametrizedFunctionDefinitionReference} 'function' definition = [ParametrizedFunctionDefinition|StringOrId]
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{ParametrizedFunctionDefinitionReference} 'function' definition = [FunctionDefinitionReference|StringOrId]
+		//{ParametrizedFunctionDefinitionReference} 'function' definition = [ParametrizedFunctionDefinition|StringOrId]
 		public Group getGroup() { return cGroup; }
 		
 		//{ParametrizedFunctionDefinitionReference}
@@ -728,14 +728,14 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 		//'function'
 		public Keyword getFunctionKeyword_1() { return cFunctionKeyword_1; }
 		
-		//definition = [FunctionDefinitionReference|StringOrId]
+		//definition = [ParametrizedFunctionDefinition|StringOrId]
 		public Assignment getDefinitionAssignment_2() { return cDefinitionAssignment_2; }
 		
-		//[FunctionDefinitionReference|StringOrId]
-		public CrossReference getDefinitionFunctionDefinitionReferenceCrossReference_2_0() { return cDefinitionFunctionDefinitionReferenceCrossReference_2_0; }
+		//[ParametrizedFunctionDefinition|StringOrId]
+		public CrossReference getDefinitionParametrizedFunctionDefinitionCrossReference_2_0() { return cDefinitionParametrizedFunctionDefinitionCrossReference_2_0; }
 		
 		//StringOrId
-		public RuleCall getDefinitionFunctionDefinitionReferenceStringOrIdParserRuleCall_2_0_1() { return cDefinitionFunctionDefinitionReferenceStringOrIdParserRuleCall_2_0_1; }
+		public RuleCall getDefinitionParametrizedFunctionDefinitionStringOrIdParserRuleCall_2_0_1() { return cDefinitionParametrizedFunctionDefinitionStringOrIdParserRuleCall_2_0_1; }
 	}
 	
 	
@@ -1053,7 +1053,7 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 	}
 	
 	//ParametrizedFunctionDefinitionReferenceRule returns ParametrizedFunctionDefinitionReference:
-	//    {ParametrizedFunctionDefinitionReference} 'function' definition = [FunctionDefinitionReference|StringOrId]
+	//    {ParametrizedFunctionDefinitionReference} 'function' definition = [ParametrizedFunctionDefinition|StringOrId]
 	//;
 	public ParametrizedFunctionDefinitionReferenceRuleElements getParametrizedFunctionDefinitionReferenceRuleAccess() {
 		return pParametrizedFunctionDefinitionReferenceRule;

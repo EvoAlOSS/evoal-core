@@ -1200,7 +1200,7 @@ ruleParametrizedFunctionDefinitionReferenceRule returns [EObject current=null]
 					}
 				}
 				{
-					newCompositeNode(grammarAccess.getParametrizedFunctionDefinitionReferenceRuleAccess().getDefinitionFunctionDefinitionReferenceCrossReference_2_0());
+					newCompositeNode(grammarAccess.getParametrizedFunctionDefinitionReferenceRuleAccess().getDefinitionParametrizedFunctionDefinitionCrossReference_2_0());
 				}
 				ruleStringOrId
 				{

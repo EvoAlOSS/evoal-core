@@ -26,12 +26,12 @@ public interface ParametrizedFunctionDefinitionReference extends FunctionDefRefe
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Definition</em>' reference.
-	 * @see #setDefinition(FunctionDefinitionReference)
+	 * @see #setDefinition(ParametrizedFunctionDefinition)
 	 * @see de.evoal.languages.model.generator.GeneratorPackage#getParametrizedFunctionDefinitionReference_Definition()
 	 * @model
 	 * @generated
 	 */
-	FunctionDefinitionReference getDefinition();
+	ParametrizedFunctionDefinition getDefinition();
 
 	/**
 	 * Sets the value of the '{@link de.evoal.languages.model.generator.ParametrizedFunctionDefinitionReference#getDefinition <em>Definition</em>}' reference.
@@ -41,6 +41,6 @@ public interface ParametrizedFunctionDefinitionReference extends FunctionDefRefe
 	 * @see #getDefinition()
 	 * @generated
 	 */
-	void setDefinition(FunctionDefinitionReference value);
+	void setDefinition(ParametrizedFunctionDefinition value);
 
 } // ParametrizedFunctionDefinitionReference

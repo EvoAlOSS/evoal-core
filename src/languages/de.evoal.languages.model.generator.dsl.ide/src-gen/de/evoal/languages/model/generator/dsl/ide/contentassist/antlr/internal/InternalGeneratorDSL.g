@@ -6014,13 +6014,13 @@ rule__ParametrizedFunctionDefinitionReferenceRule__DefinitionAssignment_2
 	}
 :
 	(
-		{ before(grammarAccess.getParametrizedFunctionDefinitionReferenceRuleAccess().getDefinitionFunctionDefinitionReferenceCrossReference_2_0()); }
+		{ before(grammarAccess.getParametrizedFunctionDefinitionReferenceRuleAccess().getDefinitionParametrizedFunctionDefinitionCrossReference_2_0()); }
 		(
-			{ before(grammarAccess.getParametrizedFunctionDefinitionReferenceRuleAccess().getDefinitionFunctionDefinitionReferenceStringOrIdParserRuleCall_2_0_1()); }
+			{ before(grammarAccess.getParametrizedFunctionDefinitionReferenceRuleAccess().getDefinitionParametrizedFunctionDefinitionStringOrIdParserRuleCall_2_0_1()); }
 			ruleStringOrId
-			{ after(grammarAccess.getParametrizedFunctionDefinitionReferenceRuleAccess().getDefinitionFunctionDefinitionReferenceStringOrIdParserRuleCall_2_0_1()); }
+			{ after(grammarAccess.getParametrizedFunctionDefinitionReferenceRuleAccess().getDefinitionParametrizedFunctionDefinitionStringOrIdParserRuleCall_2_0_1()); }
 		)
-		{ after(grammarAccess.getParametrizedFunctionDefinitionReferenceRuleAccess().getDefinitionFunctionDefinitionReferenceCrossReference_2_0()); }
+		{ after(grammarAccess.getParametrizedFunctionDefinitionReferenceRuleAccess().getDefinitionParametrizedFunctionDefinitionCrossReference_2_0()); }
 	)
 ;
 finally {

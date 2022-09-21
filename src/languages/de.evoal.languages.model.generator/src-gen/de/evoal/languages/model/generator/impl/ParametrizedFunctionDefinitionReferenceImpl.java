@@ -5,6 +5,7 @@ package de.evoal.languages.model.generator.impl;
 
 import de.evoal.languages.model.generator.FunctionDefinitionReference;
 import de.evoal.languages.model.generator.GeneratorPackage;
+import de.evoal.languages.model.generator.ParametrizedFunctionDefinition;
 import de.evoal.languages.model.generator.ParametrizedFunctionDefinitionReference;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -36,7 +37,7 @@ public class ParametrizedFunctionDefinitionReferenceImpl extends FunctionDefRefe
 	 * @generated
 	 * @ordered
 	 */
-	protected FunctionDefinitionReference definition;
+	protected ParametrizedFunctionDefinition definition;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -63,10 +64,10 @@ public class ParametrizedFunctionDefinitionReferenceImpl extends FunctionDefRefe
 	 * @generated
 	 */
 	@Override
-	public FunctionDefinitionReference getDefinition() {
+	public ParametrizedFunctionDefinition getDefinition() {
 		if (definition != null && definition.eIsProxy()) {
 			InternalEObject oldDefinition = (InternalEObject)definition;
-			definition = (FunctionDefinitionReference)eResolveProxy(oldDefinition);
+			definition = (ParametrizedFunctionDefinition)eResolveProxy(oldDefinition);
 			if (definition != oldDefinition) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, GeneratorPackage.PARAMETRIZED_FUNCTION_DEFINITION_REFERENCE__DEFINITION, oldDefinition, definition));
@@ -80,7 +81,7 @@ public class ParametrizedFunctionDefinitionReferenceImpl extends FunctionDefRefe
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public FunctionDefinitionReference basicGetDefinition() {
+	public ParametrizedFunctionDefinition basicGetDefinition() {
 		return definition;
 	}
 
@@ -90,8 +91,8 @@ public class ParametrizedFunctionDefinitionReferenceImpl extends FunctionDefRefe
 	 * @generated
 	 */
 	@Override
-	public void setDefinition(FunctionDefinitionReference newDefinition) {
-		FunctionDefinitionReference oldDefinition = definition;
+	public void setDefinition(ParametrizedFunctionDefinition newDefinition) {
+		ParametrizedFunctionDefinition oldDefinition = definition;
 		definition = newDefinition;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, GeneratorPackage.PARAMETRIZED_FUNCTION_DEFINITION_REFERENCE__DEFINITION, oldDefinition, definition));
@@ -121,7 +122,7 @@ public class ParametrizedFunctionDefinitionReferenceImpl extends FunctionDefRefe
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case GeneratorPackage.PARAMETRIZED_FUNCTION_DEFINITION_REFERENCE__DEFINITION:
-				setDefinition((FunctionDefinitionReference)newValue);
+				setDefinition((ParametrizedFunctionDefinition)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -136,7 +137,7 @@ public class ParametrizedFunctionDefinitionReferenceImpl extends FunctionDefRefe
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case GeneratorPackage.PARAMETRIZED_FUNCTION_DEFINITION_REFERENCE__DEFINITION:
-				setDefinition((FunctionDefinitionReference)null);
+				setDefinition((ParametrizedFunctionDefinition)null);
 				return;
 		}
 		super.eUnset(featureID);

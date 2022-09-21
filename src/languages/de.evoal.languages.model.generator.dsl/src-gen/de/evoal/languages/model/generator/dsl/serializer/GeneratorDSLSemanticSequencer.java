@@ -425,7 +425,7 @@ public class GeneratorDSLSemanticSequencer extends InstanceLanguageSemanticSeque
 	 *     ParametrizedFunctionDefinitionReferenceRule returns ParametrizedFunctionDefinitionReference
 	 *
 	 * Constraint:
-	 *     definition=[FunctionDefinitionReference|StringOrId]
+	 *     definition=[ParametrizedFunctionDefinition|StringOrId]
 	 */
 	protected void sequence_ParametrizedFunctionDefinitionReferenceRule(ISerializationContext context, ParametrizedFunctionDefinitionReference semanticObject) {
 		if (errorAcceptor != null) {
@@ -433,7 +433,7 @@ public class GeneratorDSLSemanticSequencer extends InstanceLanguageSemanticSeque
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, GeneratorPackage.Literals.PARAMETRIZED_FUNCTION_DEFINITION_REFERENCE__DEFINITION));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getParametrizedFunctionDefinitionReferenceRuleAccess().getDefinitionFunctionDefinitionReferenceStringOrIdParserRuleCall_2_0_1(), semanticObject.eGet(GeneratorPackage.Literals.PARAMETRIZED_FUNCTION_DEFINITION_REFERENCE__DEFINITION, false));
+		feeder.accept(grammarAccess.getParametrizedFunctionDefinitionReferenceRuleAccess().getDefinitionParametrizedFunctionDefinitionStringOrIdParserRuleCall_2_0_1(), semanticObject.eGet(GeneratorPackage.Literals.PARAMETRIZED_FUNCTION_DEFINITION_REFERENCE__DEFINITION, false));
 		feeder.finish();
 	}
 	

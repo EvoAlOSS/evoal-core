@@ -18366,21 +18366,21 @@ public class InternalGeneratorDSLParser extends AbstractInternalContentAssistPar
             // InternalGeneratorDSL.g:6016:2: ( ( ruleStringOrId ) )
             // InternalGeneratorDSL.g:6017:3: ( ruleStringOrId )
             {
-             before(grammarAccess.getParametrizedFunctionDefinitionReferenceRuleAccess().getDefinitionFunctionDefinitionReferenceCrossReference_2_0()); 
+             before(grammarAccess.getParametrizedFunctionDefinitionReferenceRuleAccess().getDefinitionParametrizedFunctionDefinitionCrossReference_2_0()); 
             // InternalGeneratorDSL.g:6018:3: ( ruleStringOrId )
             // InternalGeneratorDSL.g:6019:4: ruleStringOrId
             {
-             before(grammarAccess.getParametrizedFunctionDefinitionReferenceRuleAccess().getDefinitionFunctionDefinitionReferenceStringOrIdParserRuleCall_2_0_1()); 
+             before(grammarAccess.getParametrizedFunctionDefinitionReferenceRuleAccess().getDefinitionParametrizedFunctionDefinitionStringOrIdParserRuleCall_2_0_1()); 
             pushFollow(FOLLOW_2);
             ruleStringOrId();
 
             state._fsp--;
 
-             after(grammarAccess.getParametrizedFunctionDefinitionReferenceRuleAccess().getDefinitionFunctionDefinitionReferenceStringOrIdParserRuleCall_2_0_1()); 
+             after(grammarAccess.getParametrizedFunctionDefinitionReferenceRuleAccess().getDefinitionParametrizedFunctionDefinitionStringOrIdParserRuleCall_2_0_1()); 
 
             }
 
-             after(grammarAccess.getParametrizedFunctionDefinitionReferenceRuleAccess().getDefinitionFunctionDefinitionReferenceCrossReference_2_0()); 
+             after(grammarAccess.getParametrizedFunctionDefinitionReferenceRuleAccess().getDefinitionParametrizedFunctionDefinitionCrossReference_2_0()); 
 
             }
 
