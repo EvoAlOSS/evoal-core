@@ -41,7 +41,6 @@ public class InstanceLanguageScopeProvider extends AbstractInstanceLanguageScope
 		
 	@Override
 	public IScope getScope(final EObject context, final EReference reference) {
-		System.err.println("[IL] Get scope of " + context + " -- " + reference);
 		
 		if(context instanceof Instance && InstancePackage.Literals.NAME__NAME.equals(reference)) {
 			final Instance instance = (Instance)context;
