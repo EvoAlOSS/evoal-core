@@ -87,9 +87,9 @@ LoopVariableReference returns LoopVariable:
 ;
 
 FunctionDefinitionReferenceRule returns FunctionDefinitionReference:
-	{FunctionDefinitionReference} 'definition' definition = [FunctionDefinition|StringOrId]	
+	{FunctionDefinitionReference} 'definition' definition = [TypeDefinition|StringOrId]	
 ;
 
 ParametrizedFunctionDefinitionReferenceRule returns ParametrizedFunctionDefinitionReference:
-	{ParametrizedFunctionDefinitionReference} 'function' definition = [FunctionDefinitionReference|StringOrId]
+	{ParametrizedFunctionDefinitionReference} 'function' definition = [ParametrizedFunctionDefinition|StringOrId]
 ;

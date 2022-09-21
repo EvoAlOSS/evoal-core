@@ -77,10 +77,10 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="definition" eType="#//ForStatement"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FunctionDefinitionReference" eSuperTypes="#//FunctionDefReference">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="definition" eType="ecore:EClass ../../de.evoal.languages.model.dl/model/model.ecore#//FunctionDefinition"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="definition" eType="ecore:EClass ../../de.evoal.languages.model.dl/model/model.ecore#//TypeDefinition"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ParametrizedFunctionDefinitionReference"
       eSuperTypes="#//FunctionDefReference">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="definition" eType="#//FunctionDefinitionReference"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="definition" eType="#//ParametrizedFunctionDefinition"/>
   </eClassifiers>
 </ecore:EPackage>

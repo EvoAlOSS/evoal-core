@@ -917,7 +917,7 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 		initEReference(getLoopVariable_Definition(), this.getForStatement(), null, "definition", null, 0, 1, LoopVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(functionDefinitionReferenceEClass, FunctionDefinitionReference.class, "FunctionDefinitionReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getFunctionDefinitionReference_Definition(), theDlPackage.getFunctionDefinition(), null, "definition", null, 0, 1, FunctionDefinitionReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getFunctionDefinitionReference_Definition(), theDlPackage.getTypeDefinition(), null, "definition", null, 0, 1, FunctionDefinitionReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(parametrizedFunctionDefinitionReferenceEClass, ParametrizedFunctionDefinitionReference.class, "ParametrizedFunctionDefinitionReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getParametrizedFunctionDefinitionReference_Definition(), this.getFunctionDefinitionReference(), null, "definition", null, 0, 1, ParametrizedFunctionDefinitionReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

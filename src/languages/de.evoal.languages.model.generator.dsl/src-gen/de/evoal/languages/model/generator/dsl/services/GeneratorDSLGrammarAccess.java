@@ -679,15 +679,15 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 		private final Action cFunctionDefinitionReferenceAction_0 = (Action)cGroup.eContents().get(0);
 		private final Keyword cDefinitionKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Assignment cDefinitionAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final CrossReference cDefinitionFunctionDefinitionCrossReference_2_0 = (CrossReference)cDefinitionAssignment_2.eContents().get(0);
-		private final RuleCall cDefinitionFunctionDefinitionStringOrIdParserRuleCall_2_0_1 = (RuleCall)cDefinitionFunctionDefinitionCrossReference_2_0.eContents().get(1);
+		private final CrossReference cDefinitionTypeDefinitionCrossReference_2_0 = (CrossReference)cDefinitionAssignment_2.eContents().get(0);
+		private final RuleCall cDefinitionTypeDefinitionStringOrIdParserRuleCall_2_0_1 = (RuleCall)cDefinitionTypeDefinitionCrossReference_2_0.eContents().get(1);
 		
 		//FunctionDefinitionReferenceRule returns FunctionDefinitionReference:
-		//    {FunctionDefinitionReference} 'definition' definition = [FunctionDefinition|StringOrId]
+		//    {FunctionDefinitionReference} 'definition' definition = [TypeDefinition|StringOrId]
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{FunctionDefinitionReference} 'definition' definition = [FunctionDefinition|StringOrId]
+		//{FunctionDefinitionReference} 'definition' definition = [TypeDefinition|StringOrId]
 		public Group getGroup() { return cGroup; }
 		
 		//{FunctionDefinitionReference}
@@ -696,14 +696,14 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 		//'definition'
 		public Keyword getDefinitionKeyword_1() { return cDefinitionKeyword_1; }
 		
-		//definition = [FunctionDefinition|StringOrId]
+		//definition = [TypeDefinition|StringOrId]
 		public Assignment getDefinitionAssignment_2() { return cDefinitionAssignment_2; }
 		
-		//[FunctionDefinition|StringOrId]
-		public CrossReference getDefinitionFunctionDefinitionCrossReference_2_0() { return cDefinitionFunctionDefinitionCrossReference_2_0; }
+		//[TypeDefinition|StringOrId]
+		public CrossReference getDefinitionTypeDefinitionCrossReference_2_0() { return cDefinitionTypeDefinitionCrossReference_2_0; }
 		
 		//StringOrId
-		public RuleCall getDefinitionFunctionDefinitionStringOrIdParserRuleCall_2_0_1() { return cDefinitionFunctionDefinitionStringOrIdParserRuleCall_2_0_1; }
+		public RuleCall getDefinitionTypeDefinitionStringOrIdParserRuleCall_2_0_1() { return cDefinitionTypeDefinitionStringOrIdParserRuleCall_2_0_1; }
 	}
 	public class ParametrizedFunctionDefinitionReferenceRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.generator.dsl.GeneratorDSL.ParametrizedFunctionDefinitionReferenceRule");
@@ -1042,7 +1042,7 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 	}
 	
 	//FunctionDefinitionReferenceRule returns FunctionDefinitionReference:
-	//    {FunctionDefinitionReference} 'definition' definition = [FunctionDefinition|StringOrId]
+	//    {FunctionDefinitionReference} 'definition' definition = [TypeDefinition|StringOrId]
 	//;
 	public FunctionDefinitionReferenceRuleElements getFunctionDefinitionReferenceRuleAccess() {
 		return pFunctionDefinitionReferenceRule;

@@ -18317,21 +18317,21 @@ public class InternalGeneratorDSLParser extends AbstractInternalContentAssistPar
             // InternalGeneratorDSL.g:5997:2: ( ( ruleStringOrId ) )
             // InternalGeneratorDSL.g:5998:3: ( ruleStringOrId )
             {
-             before(grammarAccess.getFunctionDefinitionReferenceRuleAccess().getDefinitionFunctionDefinitionCrossReference_2_0()); 
+             before(grammarAccess.getFunctionDefinitionReferenceRuleAccess().getDefinitionTypeDefinitionCrossReference_2_0()); 
             // InternalGeneratorDSL.g:5999:3: ( ruleStringOrId )
             // InternalGeneratorDSL.g:6000:4: ruleStringOrId
             {
-             before(grammarAccess.getFunctionDefinitionReferenceRuleAccess().getDefinitionFunctionDefinitionStringOrIdParserRuleCall_2_0_1()); 
+             before(grammarAccess.getFunctionDefinitionReferenceRuleAccess().getDefinitionTypeDefinitionStringOrIdParserRuleCall_2_0_1()); 
             pushFollow(FOLLOW_2);
             ruleStringOrId();
 
             state._fsp--;
 
-             after(grammarAccess.getFunctionDefinitionReferenceRuleAccess().getDefinitionFunctionDefinitionStringOrIdParserRuleCall_2_0_1()); 
+             after(grammarAccess.getFunctionDefinitionReferenceRuleAccess().getDefinitionTypeDefinitionStringOrIdParserRuleCall_2_0_1()); 
 
             }
 
-             after(grammarAccess.getFunctionDefinitionReferenceRuleAccess().getDefinitionFunctionDefinitionCrossReference_2_0()); 
+             after(grammarAccess.getFunctionDefinitionReferenceRuleAccess().getDefinitionTypeDefinitionCrossReference_2_0()); 
 
             }
 

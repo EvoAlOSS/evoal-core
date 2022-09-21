@@ -2977,7 +2977,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
             					}
             				
 
-            					newCompositeNode(grammarAccess.getFunctionDefinitionReferenceRuleAccess().getDefinitionFunctionDefinitionCrossReference_2_0());
+            					newCompositeNode(grammarAccess.getFunctionDefinitionReferenceRuleAccess().getDefinitionTypeDefinitionCrossReference_2_0());
             				
             pushFollow(FOLLOW_2);
             ruleStringOrId();

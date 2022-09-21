@@ -5,6 +5,7 @@ package de.evoal.languages.model.generator.impl;
 
 import de.evoal.languages.model.dl.FunctionDefinition;
 
+import de.evoal.languages.model.dl.TypeDefinition;
 import de.evoal.languages.model.generator.FunctionDefinitionReference;
 import de.evoal.languages.model.generator.GeneratorPackage;
 
@@ -37,7 +38,7 @@ public class FunctionDefinitionReferenceImpl extends FunctionDefReferenceImpl im
 	 * @generated
 	 * @ordered
 	 */
-	protected FunctionDefinition definition;
+	protected TypeDefinition definition;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -64,10 +65,10 @@ public class FunctionDefinitionReferenceImpl extends FunctionDefReferenceImpl im
 	 * @generated
 	 */
 	@Override
-	public FunctionDefinition getDefinition() {
+	public TypeDefinition getDefinition() {
 		if (definition != null && definition.eIsProxy()) {
 			InternalEObject oldDefinition = (InternalEObject)definition;
-			definition = (FunctionDefinition)eResolveProxy(oldDefinition);
+			definition = (TypeDefinition)eResolveProxy(oldDefinition);
 			if (definition != oldDefinition) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, GeneratorPackage.FUNCTION_DEFINITION_REFERENCE__DEFINITION, oldDefinition, definition));
@@ -81,7 +82,7 @@ public class FunctionDefinitionReferenceImpl extends FunctionDefReferenceImpl im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public FunctionDefinition basicGetDefinition() {
+	public TypeDefinition basicGetDefinition() {
 		return definition;
 	}
 
@@ -91,8 +92,8 @@ public class FunctionDefinitionReferenceImpl extends FunctionDefReferenceImpl im
 	 * @generated
 	 */
 	@Override
-	public void setDefinition(FunctionDefinition newDefinition) {
-		FunctionDefinition oldDefinition = definition;
+	public void setDefinition(TypeDefinition newDefinition) {
+		TypeDefinition oldDefinition = definition;
 		definition = newDefinition;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, GeneratorPackage.FUNCTION_DEFINITION_REFERENCE__DEFINITION, oldDefinition, definition));
@@ -122,7 +123,7 @@ public class FunctionDefinitionReferenceImpl extends FunctionDefReferenceImpl im
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case GeneratorPackage.FUNCTION_DEFINITION_REFERENCE__DEFINITION:
-				setDefinition((FunctionDefinition)newValue);
+				setDefinition((TypeDefinition)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -137,7 +138,7 @@ public class FunctionDefinitionReferenceImpl extends FunctionDefReferenceImpl im
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case GeneratorPackage.FUNCTION_DEFINITION_REFERENCE__DEFINITION:
-				setDefinition((FunctionDefinition)null);
+				setDefinition((TypeDefinition)null);
 				return;
 		}
 		super.eUnset(featureID);

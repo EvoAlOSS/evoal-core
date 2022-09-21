@@ -4,6 +4,7 @@
 package de.evoal.languages.model.generator;
 
 import de.evoal.languages.model.dl.FunctionDefinition;
+import de.evoal.languages.model.dl.TypeDefinition;
 
 /**
  * <!-- begin-user-doc -->
@@ -27,12 +28,12 @@ public interface FunctionDefinitionReference extends FunctionDefReference {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Definition</em>' reference.
-	 * @see #setDefinition(FunctionDefinition)
+	 * @see #setDefinition(TypeDefinition)
 	 * @see de.evoal.languages.model.generator.GeneratorPackage#getFunctionDefinitionReference_Definition()
 	 * @model
 	 * @generated
 	 */
-	FunctionDefinition getDefinition();
+	TypeDefinition getDefinition();
 
 	/**
 	 * Sets the value of the '{@link de.evoal.languages.model.generator.FunctionDefinitionReference#getDefinition <em>Definition</em>}' reference.
@@ -42,6 +43,6 @@ public interface FunctionDefinitionReference extends FunctionDefReference {
 	 * @see #getDefinition()
 	 * @generated
 	 */
-	void setDefinition(FunctionDefinition value);
+	void setDefinition(TypeDefinition value);
 
 } // FunctionDefinitionReference

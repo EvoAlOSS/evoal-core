@@ -5995,13 +5995,13 @@ rule__FunctionDefinitionReferenceRule__DefinitionAssignment_2
 	}
 :
 	(
-		{ before(grammarAccess.getFunctionDefinitionReferenceRuleAccess().getDefinitionFunctionDefinitionCrossReference_2_0()); }
+		{ before(grammarAccess.getFunctionDefinitionReferenceRuleAccess().getDefinitionTypeDefinitionCrossReference_2_0()); }
 		(
-			{ before(grammarAccess.getFunctionDefinitionReferenceRuleAccess().getDefinitionFunctionDefinitionStringOrIdParserRuleCall_2_0_1()); }
+			{ before(grammarAccess.getFunctionDefinitionReferenceRuleAccess().getDefinitionTypeDefinitionStringOrIdParserRuleCall_2_0_1()); }
 			ruleStringOrId
-			{ after(grammarAccess.getFunctionDefinitionReferenceRuleAccess().getDefinitionFunctionDefinitionStringOrIdParserRuleCall_2_0_1()); }
+			{ after(grammarAccess.getFunctionDefinitionReferenceRuleAccess().getDefinitionTypeDefinitionStringOrIdParserRuleCall_2_0_1()); }
 		)
-		{ after(grammarAccess.getFunctionDefinitionReferenceRuleAccess().getDefinitionFunctionDefinitionCrossReference_2_0()); }
+		{ after(grammarAccess.getFunctionDefinitionReferenceRuleAccess().getDefinitionTypeDefinitionCrossReference_2_0()); }
 	)
 ;
 finally {

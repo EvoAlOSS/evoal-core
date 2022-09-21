@@ -1154,7 +1154,7 @@ ruleFunctionDefinitionReferenceRule returns [EObject current=null]
 					}
 				}
 				{
-					newCompositeNode(grammarAccess.getFunctionDefinitionReferenceRuleAccess().getDefinitionFunctionDefinitionCrossReference_2_0());
+					newCompositeNode(grammarAccess.getFunctionDefinitionReferenceRuleAccess().getDefinitionTypeDefinitionCrossReference_2_0());
 				}
 				ruleStringOrId
 				{
