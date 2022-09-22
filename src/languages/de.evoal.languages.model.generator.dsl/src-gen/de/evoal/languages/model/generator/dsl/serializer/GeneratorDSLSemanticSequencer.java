@@ -27,17 +27,10 @@ import de.evoal.languages.model.generator.ApplyStatement;
 import de.evoal.languages.model.generator.Configuration;
 import de.evoal.languages.model.generator.CounterRange;
 import de.evoal.languages.model.generator.ForStatement;
-import de.evoal.languages.model.generator.FunctionDefinitionReference;
-import de.evoal.languages.model.generator.FunctionReferences;
-import de.evoal.languages.model.generator.Functions;
-import de.evoal.languages.model.generator.GeneratorDefinition;
-import de.evoal.languages.model.generator.GeneratorDefinitionReference;
 import de.evoal.languages.model.generator.GeneratorPackage;
-import de.evoal.languages.model.generator.GeneratorReferences;
-import de.evoal.languages.model.generator.Generators;
-import de.evoal.languages.model.generator.LoopVariable;
-import de.evoal.languages.model.generator.ParametrizedFunctionDefinition;
-import de.evoal.languages.model.generator.ParametrizedFunctionDefinitionReference;
+import de.evoal.languages.model.generator.PipelineArray;
+import de.evoal.languages.model.generator.PipelineDefinition;
+import de.evoal.languages.model.generator.PipelineReference;
 import de.evoal.languages.model.generator.Use;
 import de.evoal.languages.model.generator.dsl.services.GeneratorDSLGrammarAccess;
 import de.evoal.languages.model.instance.Array;
@@ -142,35 +135,14 @@ public class GeneratorDSLSemanticSequencer extends InstanceLanguageSemanticSeque
 			case GeneratorPackage.FOR_STATEMENT:
 				sequence_ForStatementRule(context, (ForStatement) semanticObject); 
 				return; 
-			case GeneratorPackage.FUNCTION_DEFINITION_REFERENCE:
-				sequence_FunctionDefinitionReferenceRule(context, (FunctionDefinitionReference) semanticObject); 
+			case GeneratorPackage.PIPELINE_ARRAY:
+				sequence_PipelineArrayRule(context, (PipelineArray) semanticObject); 
 				return; 
-			case GeneratorPackage.FUNCTION_REFERENCES:
-				sequence_FunctionReferencesRule(context, (FunctionReferences) semanticObject); 
+			case GeneratorPackage.PIPELINE_DEFINITION:
+				sequence_PipelineDefinitionRule(context, (PipelineDefinition) semanticObject); 
 				return; 
-			case GeneratorPackage.FUNCTIONS:
-				sequence_FunctionsRule(context, (Functions) semanticObject); 
-				return; 
-			case GeneratorPackage.GENERATOR_DEFINITION:
-				sequence_GeneratorDefinitionRule(context, (GeneratorDefinition) semanticObject); 
-				return; 
-			case GeneratorPackage.GENERATOR_DEFINITION_REFERENCE:
-				sequence_GeneratorDefinitionReferenceRule(context, (GeneratorDefinitionReference) semanticObject); 
-				return; 
-			case GeneratorPackage.GENERATOR_REFERENCES:
-				sequence_GeneratorReferencesRule(context, (GeneratorReferences) semanticObject); 
-				return; 
-			case GeneratorPackage.GENERATORS:
-				sequence_GeneratorsRule(context, (Generators) semanticObject); 
-				return; 
-			case GeneratorPackage.LOOP_VARIABLE:
-				sequence_LoopVariableReference(context, (LoopVariable) semanticObject); 
-				return; 
-			case GeneratorPackage.PARAMETRIZED_FUNCTION_DEFINITION:
-				sequence_ParametrizedFunctionDefinitionRule(context, (ParametrizedFunctionDefinition) semanticObject); 
-				return; 
-			case GeneratorPackage.PARAMETRIZED_FUNCTION_DEFINITION_REFERENCE:
-				sequence_ParametrizedFunctionDefinitionReferenceRule(context, (ParametrizedFunctionDefinitionReference) semanticObject); 
+			case GeneratorPackage.PIPELINE_REFERENCE:
+				sequence_PipelineReferenceRule(context, (PipelineReference) semanticObject); 
 				return; 
 			case GeneratorPackage.USE:
 				sequence_UseRule(context, (Use) semanticObject); 
@@ -210,25 +182,10 @@ public class GeneratorDSLSemanticSequencer extends InstanceLanguageSemanticSeque
 	 *     ApplyStatementRule returns ApplyStatement
 	 *
 	 * Constraint:
-	 *     (file=STRING count=INT function=FunctionReferenceRule generator=GeneratorReferenceRule)
+	 *     (file=STRING count=INT pipelines+=PipelineReferenceRule pipelines+=PipelineReferenceRule*)
 	 */
 	protected void sequence_ApplyStatementRule(ISerializationContext context, ApplyStatement semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, GeneratorPackage.Literals.APPLY_STATEMENT__FILE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, GeneratorPackage.Literals.APPLY_STATEMENT__FILE));
-			if (transientValues.isValueTransient(semanticObject, GeneratorPackage.Literals.APPLY_STATEMENT__COUNT) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, GeneratorPackage.Literals.APPLY_STATEMENT__COUNT));
-			if (transientValues.isValueTransient(semanticObject, GeneratorPackage.Literals.APPLY_STATEMENT__FUNCTION) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, GeneratorPackage.Literals.APPLY_STATEMENT__FUNCTION));
-			if (transientValues.isValueTransient(semanticObject, GeneratorPackage.Literals.APPLY_STATEMENT__GENERATOR) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, GeneratorPackage.Literals.APPLY_STATEMENT__GENERATOR));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getApplyStatementRuleAccess().getFileSTRINGTerminalRuleCall_1_0(), semanticObject.getFile());
-		feeder.accept(grammarAccess.getApplyStatementRuleAccess().getCountINTTerminalRuleCall_3_0(), semanticObject.getCount());
-		feeder.accept(grammarAccess.getApplyStatementRuleAccess().getFunctionFunctionReferenceRuleParserRuleCall_7_0(), semanticObject.getFunction());
-		feeder.accept(grammarAccess.getApplyStatementRuleAccess().getGeneratorGeneratorReferenceRuleParserRuleCall_9_0(), semanticObject.getGenerator());
-		feeder.finish();
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -238,13 +195,8 @@ public class GeneratorDSLSemanticSequencer extends InstanceLanguageSemanticSeque
 	 *
 	 * Constraint:
 	 *     (
-	 *         (uses+=UseRule+ ((generators+=GeneratorDefinitionRule+ statements+=StatementRule+) | statements+=StatementRule+)) | 
-	 *         (
-	 *             ((uses+=UseRule+ generators+=GeneratorDefinitionRule+) | generators+=GeneratorDefinitionRule+)? 
-	 *             functions+=ParametrizedFunctionDefinitionRule+ 
-	 *             statements+=StatementRule+
-	 *         ) | 
-	 *         (generators+=GeneratorDefinitionRule+ statements+=StatementRule+) | 
+	 *         (uses+=UseRule* pipelines+=PipelineDefinitionRule+ statements+=StatementRule+) | 
+	 *         (uses+=UseRule* statements+=StatementRule+) | 
 	 *         statements+=StatementRule+
 	 *     )?
 	 */
@@ -290,171 +242,43 @@ public class GeneratorDSLSemanticSequencer extends InstanceLanguageSemanticSeque
 	
 	/**
 	 * Contexts:
-	 *     FunctionReferenceRule returns FunctionDefinitionReference
-	 *     FunctionDefReferenceRule returns FunctionDefinitionReference
-	 *     FunctionDefinitionReferenceRule returns FunctionDefinitionReference
+	 *     RangeRule returns PipelineArray
+	 *     PipelineArrayRule returns PipelineArray
 	 *
 	 * Constraint:
-	 *     definition=[TypeDefinition|StringOrId]
+	 *     (references+=PipelineReferenceRule references+=PipelineReferenceRule*)?
 	 */
-	protected void sequence_FunctionDefinitionReferenceRule(ISerializationContext context, FunctionDefinitionReference semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, GeneratorPackage.Literals.FUNCTION_DEFINITION_REFERENCE__DEFINITION) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, GeneratorPackage.Literals.FUNCTION_DEFINITION_REFERENCE__DEFINITION));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getFunctionDefinitionReferenceRuleAccess().getDefinitionTypeDefinitionStringOrIdParserRuleCall_2_0_1(), semanticObject.eGet(GeneratorPackage.Literals.FUNCTION_DEFINITION_REFERENCE__DEFINITION, false));
-		feeder.finish();
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     FunctionReferencesRule returns FunctionReferences
-	 *
-	 * Constraint:
-	 *     (functions+=FunctionDefReferenceRule functions+=FunctionDefReferenceRule*)
-	 */
-	protected void sequence_FunctionReferencesRule(ISerializationContext context, FunctionReferences semanticObject) {
+	protected void sequence_PipelineArrayRule(ISerializationContext context, PipelineArray semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
 	 * Contexts:
-	 *     RangeRule returns Functions
-	 *     FunctionsRule returns Functions
+	 *     PipelineDefinitionRule returns PipelineDefinition
 	 *
 	 * Constraint:
-	 *     functionReferences=FunctionReferencesRule?
+	 *     (name=StringOrId (definitions+=InstanceRule definitions+=InstanceRule*)?)
 	 */
-	protected void sequence_FunctionsRule(ISerializationContext context, Functions semanticObject) {
+	protected void sequence_PipelineDefinitionRule(ISerializationContext context, PipelineDefinition semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
 	 * Contexts:
-	 *     GeneratorReferenceRule returns GeneratorDefinitionReference
-	 *     GeneratorDefinitionReferenceRule returns GeneratorDefinitionReference
+	 *     PipelineReferenceRule returns PipelineReference
 	 *
 	 * Constraint:
-	 *     definition=[GeneratorDefinition|StringOrId]
+	 *     pipeline=[PipelineDefinition|StringOrId]
 	 */
-	protected void sequence_GeneratorDefinitionReferenceRule(ISerializationContext context, GeneratorDefinitionReference semanticObject) {
+	protected void sequence_PipelineReferenceRule(ISerializationContext context, PipelineReference semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, GeneratorPackage.Literals.GENERATOR_DEFINITION_REFERENCE__DEFINITION) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, GeneratorPackage.Literals.GENERATOR_DEFINITION_REFERENCE__DEFINITION));
+			if (transientValues.isValueTransient(semanticObject, GeneratorPackage.Literals.PIPELINE_REFERENCE__PIPELINE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, GeneratorPackage.Literals.PIPELINE_REFERENCE__PIPELINE));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getGeneratorDefinitionReferenceRuleAccess().getDefinitionGeneratorDefinitionStringOrIdParserRuleCall_1_0_1(), semanticObject.eGet(GeneratorPackage.Literals.GENERATOR_DEFINITION_REFERENCE__DEFINITION, false));
-		feeder.finish();
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     GeneratorDefinitionRule returns GeneratorDefinition
-	 *
-	 * Constraint:
-	 *     (name=StringOrId definition=InstanceRule)
-	 */
-	protected void sequence_GeneratorDefinitionRule(ISerializationContext context, GeneratorDefinition semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, GeneratorPackage.Literals.GENERATOR_DEFINITION__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, GeneratorPackage.Literals.GENERATOR_DEFINITION__NAME));
-			if (transientValues.isValueTransient(semanticObject, GeneratorPackage.Literals.GENERATOR_DEFINITION__DEFINITION) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, GeneratorPackage.Literals.GENERATOR_DEFINITION__DEFINITION));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getGeneratorDefinitionRuleAccess().getNameStringOrIdParserRuleCall_1_0(), semanticObject.getName());
-		feeder.accept(grammarAccess.getGeneratorDefinitionRuleAccess().getDefinitionInstanceRuleParserRuleCall_3_0(), semanticObject.getDefinition());
-		feeder.finish();
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     GeneratorReferencesRule returns GeneratorReferences
-	 *
-	 * Constraint:
-	 *     (generators+=[GeneratorDefinition|StringOrId] generators+=[GeneratorDefinition|StringOrId]*)
-	 */
-	protected void sequence_GeneratorReferencesRule(ISerializationContext context, GeneratorReferences semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     RangeRule returns Generators
-	 *     GeneratorsRule returns Generators
-	 *
-	 * Constraint:
-	 *     generatorReferences=GeneratorReferencesRule?
-	 */
-	protected void sequence_GeneratorsRule(ISerializationContext context, Generators semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     GeneratorReferenceRule returns LoopVariable
-	 *     FunctionReferenceRule returns LoopVariable
-	 *     LoopVariableReference returns LoopVariable
-	 *
-	 * Constraint:
-	 *     definition=[ForStatement|ID]
-	 */
-	protected void sequence_LoopVariableReference(ISerializationContext context, LoopVariable semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, GeneratorPackage.Literals.LOOP_VARIABLE__DEFINITION) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, GeneratorPackage.Literals.LOOP_VARIABLE__DEFINITION));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getLoopVariableReferenceAccess().getDefinitionForStatementIDTerminalRuleCall_1_0_1(), semanticObject.eGet(GeneratorPackage.Literals.LOOP_VARIABLE__DEFINITION, false));
-		feeder.finish();
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     FunctionReferenceRule returns ParametrizedFunctionDefinitionReference
-	 *     FunctionDefReferenceRule returns ParametrizedFunctionDefinitionReference
-	 *     ParametrizedFunctionDefinitionReferenceRule returns ParametrizedFunctionDefinitionReference
-	 *
-	 * Constraint:
-	 *     definition=[ParametrizedFunctionDefinition|StringOrId]
-	 */
-	protected void sequence_ParametrizedFunctionDefinitionReferenceRule(ISerializationContext context, ParametrizedFunctionDefinitionReference semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, GeneratorPackage.Literals.PARAMETRIZED_FUNCTION_DEFINITION_REFERENCE__DEFINITION) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, GeneratorPackage.Literals.PARAMETRIZED_FUNCTION_DEFINITION_REFERENCE__DEFINITION));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getParametrizedFunctionDefinitionReferenceRuleAccess().getDefinitionParametrizedFunctionDefinitionStringOrIdParserRuleCall_2_0_1(), semanticObject.eGet(GeneratorPackage.Literals.PARAMETRIZED_FUNCTION_DEFINITION_REFERENCE__DEFINITION, false));
-		feeder.finish();
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     ParametrizedFunctionDefinitionRule returns ParametrizedFunctionDefinition
-	 *
-	 * Constraint:
-	 *     (name=StringOrId definition=InstanceRule)
-	 */
-	protected void sequence_ParametrizedFunctionDefinitionRule(ISerializationContext context, ParametrizedFunctionDefinition semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, GeneratorPackage.Literals.PARAMETRIZED_FUNCTION_DEFINITION__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, GeneratorPackage.Literals.PARAMETRIZED_FUNCTION_DEFINITION__NAME));
-			if (transientValues.isValueTransient(semanticObject, GeneratorPackage.Literals.PARAMETRIZED_FUNCTION_DEFINITION__DEFINITION) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, GeneratorPackage.Literals.PARAMETRIZED_FUNCTION_DEFINITION__DEFINITION));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getParametrizedFunctionDefinitionRuleAccess().getNameStringOrIdParserRuleCall_1_0(), semanticObject.getName());
-		feeder.accept(grammarAccess.getParametrizedFunctionDefinitionRuleAccess().getDefinitionInstanceRuleParserRuleCall_3_0(), semanticObject.getDefinition());
+		feeder.accept(grammarAccess.getPipelineReferenceRuleAccess().getPipelinePipelineDefinitionStringOrIdParserRuleCall_0_1(), semanticObject.eGet(GeneratorPackage.Literals.PIPELINE_REFERENCE__PIPELINE, false));
 		feeder.finish();
 	}
 	

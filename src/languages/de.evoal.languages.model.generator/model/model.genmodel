@@ -10,20 +10,15 @@
       fileExtensions="generator" ecorePackage="model.ecore#/">
     <genClasses ecoreClass="model.ecore#//Configuration">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//Configuration/uses"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//Configuration/generators"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//Configuration/functions"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//Configuration/pipelines"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//Configuration/statements"/>
     </genClasses>
     <genClasses ecoreClass="model.ecore#//Use">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//Use/importURI"/>
     </genClasses>
-    <genClasses ecoreClass="model.ecore#//ParametrizedFunctionDefinition">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//ParametrizedFunctionDefinition/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//ParametrizedFunctionDefinition/definition"/>
-    </genClasses>
-    <genClasses ecoreClass="model.ecore#//GeneratorDefinition">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//GeneratorDefinition/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//GeneratorDefinition/definition"/>
+    <genClasses ecoreClass="model.ecore#//PipelineDefinition">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//PipelineDefinition/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//PipelineDefinition/definitions"/>
     </genClasses>
     <genClasses ecoreClass="model.ecore#//Statement"/>
     <genClasses ecoreClass="model.ecore#//ForStatement">
@@ -36,38 +31,16 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//CounterRange/start"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//CounterRange/end"/>
     </genClasses>
-    <genClasses ecoreClass="model.ecore#//Functions">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//Functions/functionReferences"/>
+    <genClasses ecoreClass="model.ecore#//PipelineArray">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//PipelineArray/references"/>
     </genClasses>
-    <genClasses ecoreClass="model.ecore#//FunctionReferences">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//FunctionReferences/functions"/>
-    </genClasses>
-    <genClasses ecoreClass="model.ecore#//Generators">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//Generators/generatorReferences"/>
-    </genClasses>
-    <genClasses ecoreClass="model.ecore#//GeneratorReferences">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//GeneratorReferences/generators"/>
+    <genClasses ecoreClass="model.ecore#//PipelineReference">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//PipelineReference/pipeline"/>
     </genClasses>
     <genClasses ecoreClass="model.ecore#//ApplyStatement">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//ApplyStatement/file"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//ApplyStatement/count"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//ApplyStatement/function"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//ApplyStatement/generator"/>
-    </genClasses>
-    <genClasses ecoreClass="model.ecore#//GeneratorReference"/>
-    <genClasses ecoreClass="model.ecore#//GeneratorDefinitionReference">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//GeneratorDefinitionReference/definition"/>
-    </genClasses>
-    <genClasses ecoreClass="model.ecore#//FunctionReference"/>
-    <genClasses ecoreClass="model.ecore#//FunctionDefReference"/>
-    <genClasses ecoreClass="model.ecore#//LoopVariable">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//LoopVariable/definition"/>
-    </genClasses>
-    <genClasses ecoreClass="model.ecore#//FunctionDefinitionReference">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//FunctionDefinitionReference/definition"/>
-    </genClasses>
-    <genClasses ecoreClass="model.ecore#//ParametrizedFunctionDefinitionReference">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//ParametrizedFunctionDefinitionReference/definition"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//ApplyStatement/pipelines"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

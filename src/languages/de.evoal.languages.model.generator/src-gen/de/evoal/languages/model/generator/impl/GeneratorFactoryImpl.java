@@ -59,24 +59,14 @@ public class GeneratorFactoryImpl extends EFactoryImpl implements GeneratorFacto
 		switch (eClass.getClassifierID()) {
 			case GeneratorPackage.CONFIGURATION: return createConfiguration();
 			case GeneratorPackage.USE: return createUse();
-			case GeneratorPackage.PARAMETRIZED_FUNCTION_DEFINITION: return createParametrizedFunctionDefinition();
-			case GeneratorPackage.GENERATOR_DEFINITION: return createGeneratorDefinition();
+			case GeneratorPackage.PIPELINE_DEFINITION: return createPipelineDefinition();
 			case GeneratorPackage.STATEMENT: return createStatement();
 			case GeneratorPackage.FOR_STATEMENT: return createForStatement();
 			case GeneratorPackage.RANGE: return createRange();
 			case GeneratorPackage.COUNTER_RANGE: return createCounterRange();
-			case GeneratorPackage.FUNCTIONS: return createFunctions();
-			case GeneratorPackage.FUNCTION_REFERENCES: return createFunctionReferences();
-			case GeneratorPackage.GENERATORS: return createGenerators();
-			case GeneratorPackage.GENERATOR_REFERENCES: return createGeneratorReferences();
+			case GeneratorPackage.PIPELINE_ARRAY: return createPipelineArray();
+			case GeneratorPackage.PIPELINE_REFERENCE: return createPipelineReference();
 			case GeneratorPackage.APPLY_STATEMENT: return createApplyStatement();
-			case GeneratorPackage.GENERATOR_REFERENCE: return createGeneratorReference();
-			case GeneratorPackage.GENERATOR_DEFINITION_REFERENCE: return createGeneratorDefinitionReference();
-			case GeneratorPackage.FUNCTION_REFERENCE: return createFunctionReference();
-			case GeneratorPackage.FUNCTION_DEF_REFERENCE: return createFunctionDefReference();
-			case GeneratorPackage.LOOP_VARIABLE: return createLoopVariable();
-			case GeneratorPackage.FUNCTION_DEFINITION_REFERENCE: return createFunctionDefinitionReference();
-			case GeneratorPackage.PARAMETRIZED_FUNCTION_DEFINITION_REFERENCE: return createParametrizedFunctionDefinitionReference();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -110,20 +100,9 @@ public class GeneratorFactoryImpl extends EFactoryImpl implements GeneratorFacto
 	 * @generated
 	 */
 	@Override
-	public ParametrizedFunctionDefinition createParametrizedFunctionDefinition() {
-		ParametrizedFunctionDefinitionImpl parametrizedFunctionDefinition = new ParametrizedFunctionDefinitionImpl();
-		return parametrizedFunctionDefinition;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public GeneratorDefinition createGeneratorDefinition() {
-		GeneratorDefinitionImpl generatorDefinition = new GeneratorDefinitionImpl();
-		return generatorDefinition;
+	public PipelineDefinition createPipelineDefinition() {
+		PipelineDefinitionImpl pipelineDefinition = new PipelineDefinitionImpl();
+		return pipelineDefinition;
 	}
 
 	/**
@@ -176,9 +155,9 @@ public class GeneratorFactoryImpl extends EFactoryImpl implements GeneratorFacto
 	 * @generated
 	 */
 	@Override
-	public Functions createFunctions() {
-		FunctionsImpl functions = new FunctionsImpl();
-		return functions;
+	public PipelineArray createPipelineArray() {
+		PipelineArrayImpl pipelineArray = new PipelineArrayImpl();
+		return pipelineArray;
 	}
 
 	/**
@@ -187,31 +166,9 @@ public class GeneratorFactoryImpl extends EFactoryImpl implements GeneratorFacto
 	 * @generated
 	 */
 	@Override
-	public FunctionReferences createFunctionReferences() {
-		FunctionReferencesImpl functionReferences = new FunctionReferencesImpl();
-		return functionReferences;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Generators createGenerators() {
-		GeneratorsImpl generators = new GeneratorsImpl();
-		return generators;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public GeneratorReferences createGeneratorReferences() {
-		GeneratorReferencesImpl generatorReferences = new GeneratorReferencesImpl();
-		return generatorReferences;
+	public PipelineReference createPipelineReference() {
+		PipelineReferenceImpl pipelineReference = new PipelineReferenceImpl();
+		return pipelineReference;
 	}
 
 	/**
@@ -223,83 +180,6 @@ public class GeneratorFactoryImpl extends EFactoryImpl implements GeneratorFacto
 	public ApplyStatement createApplyStatement() {
 		ApplyStatementImpl applyStatement = new ApplyStatementImpl();
 		return applyStatement;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public GeneratorReference createGeneratorReference() {
-		GeneratorReferenceImpl generatorReference = new GeneratorReferenceImpl();
-		return generatorReference;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public GeneratorDefinitionReference createGeneratorDefinitionReference() {
-		GeneratorDefinitionReferenceImpl generatorDefinitionReference = new GeneratorDefinitionReferenceImpl();
-		return generatorDefinitionReference;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public FunctionReference createFunctionReference() {
-		FunctionReferenceImpl functionReference = new FunctionReferenceImpl();
-		return functionReference;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public FunctionDefReference createFunctionDefReference() {
-		FunctionDefReferenceImpl functionDefReference = new FunctionDefReferenceImpl();
-		return functionDefReference;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public LoopVariable createLoopVariable() {
-		LoopVariableImpl loopVariable = new LoopVariableImpl();
-		return loopVariable;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public FunctionDefinitionReference createFunctionDefinitionReference() {
-		FunctionDefinitionReferenceImpl functionDefinitionReference = new FunctionDefinitionReferenceImpl();
-		return functionDefinitionReference;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ParametrizedFunctionDefinitionReference createParametrizedFunctionDefinitionReference() {
-		ParametrizedFunctionDefinitionReferenceImpl parametrizedFunctionDefinitionReference = new ParametrizedFunctionDefinitionReferenceImpl();
-		return parametrizedFunctionDefinitionReference;
 	}
 
 	/**

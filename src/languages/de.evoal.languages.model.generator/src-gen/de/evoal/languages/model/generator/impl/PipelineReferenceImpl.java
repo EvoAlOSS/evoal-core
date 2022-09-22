@@ -3,9 +3,9 @@
  */
 package de.evoal.languages.model.generator.impl;
 
-import de.evoal.languages.model.generator.ForStatement;
 import de.evoal.languages.model.generator.GeneratorPackage;
-import de.evoal.languages.model.generator.LoopVariable;
+import de.evoal.languages.model.generator.PipelineDefinition;
+import de.evoal.languages.model.generator.PipelineReference;
 
 import org.eclipse.emf.common.notify.Notification;
 
@@ -13,37 +13,38 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Loop Variable</b></em>'.
+ * An implementation of the model object '<em><b>Pipeline Reference</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link de.evoal.languages.model.generator.impl.LoopVariableImpl#getDefinition <em>Definition</em>}</li>
+ *   <li>{@link de.evoal.languages.model.generator.impl.PipelineReferenceImpl#getPipeline <em>Pipeline</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class LoopVariableImpl extends GeneratorReferenceImpl implements LoopVariable {
+public class PipelineReferenceImpl extends MinimalEObjectImpl.Container implements PipelineReference {
 	/**
-	 * The cached value of the '{@link #getDefinition() <em>Definition</em>}' reference.
+	 * The cached value of the '{@link #getPipeline() <em>Pipeline</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getDefinition()
+	 * @see #getPipeline()
 	 * @generated
 	 * @ordered
 	 */
-	protected ForStatement definition;
+	protected PipelineDefinition pipeline;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected LoopVariableImpl() {
+	protected PipelineReferenceImpl() {
 		super();
 	}
 
@@ -54,7 +55,7 @@ public class LoopVariableImpl extends GeneratorReferenceImpl implements LoopVari
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return GeneratorPackage.Literals.LOOP_VARIABLE;
+		return GeneratorPackage.Literals.PIPELINE_REFERENCE;
 	}
 
 	/**
@@ -63,16 +64,16 @@ public class LoopVariableImpl extends GeneratorReferenceImpl implements LoopVari
 	 * @generated
 	 */
 	@Override
-	public ForStatement getDefinition() {
-		if (definition != null && definition.eIsProxy()) {
-			InternalEObject oldDefinition = (InternalEObject)definition;
-			definition = (ForStatement)eResolveProxy(oldDefinition);
-			if (definition != oldDefinition) {
+	public PipelineDefinition getPipeline() {
+		if (pipeline != null && pipeline.eIsProxy()) {
+			InternalEObject oldPipeline = (InternalEObject)pipeline;
+			pipeline = (PipelineDefinition)eResolveProxy(oldPipeline);
+			if (pipeline != oldPipeline) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, GeneratorPackage.LOOP_VARIABLE__DEFINITION, oldDefinition, definition));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, GeneratorPackage.PIPELINE_REFERENCE__PIPELINE, oldPipeline, pipeline));
 			}
 		}
-		return definition;
+		return pipeline;
 	}
 
 	/**
@@ -80,8 +81,8 @@ public class LoopVariableImpl extends GeneratorReferenceImpl implements LoopVari
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ForStatement basicGetDefinition() {
-		return definition;
+	public PipelineDefinition basicGetPipeline() {
+		return pipeline;
 	}
 
 	/**
@@ -90,11 +91,11 @@ public class LoopVariableImpl extends GeneratorReferenceImpl implements LoopVari
 	 * @generated
 	 */
 	@Override
-	public void setDefinition(ForStatement newDefinition) {
-		ForStatement oldDefinition = definition;
-		definition = newDefinition;
+	public void setPipeline(PipelineDefinition newPipeline) {
+		PipelineDefinition oldPipeline = pipeline;
+		pipeline = newPipeline;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, GeneratorPackage.LOOP_VARIABLE__DEFINITION, oldDefinition, definition));
+			eNotify(new ENotificationImpl(this, Notification.SET, GeneratorPackage.PIPELINE_REFERENCE__PIPELINE, oldPipeline, pipeline));
 	}
 
 	/**
@@ -105,9 +106,9 @@ public class LoopVariableImpl extends GeneratorReferenceImpl implements LoopVari
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case GeneratorPackage.LOOP_VARIABLE__DEFINITION:
-				if (resolve) return getDefinition();
-				return basicGetDefinition();
+			case GeneratorPackage.PIPELINE_REFERENCE__PIPELINE:
+				if (resolve) return getPipeline();
+				return basicGetPipeline();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -120,8 +121,8 @@ public class LoopVariableImpl extends GeneratorReferenceImpl implements LoopVari
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case GeneratorPackage.LOOP_VARIABLE__DEFINITION:
-				setDefinition((ForStatement)newValue);
+			case GeneratorPackage.PIPELINE_REFERENCE__PIPELINE:
+				setPipeline((PipelineDefinition)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -135,8 +136,8 @@ public class LoopVariableImpl extends GeneratorReferenceImpl implements LoopVari
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case GeneratorPackage.LOOP_VARIABLE__DEFINITION:
-				setDefinition((ForStatement)null);
+			case GeneratorPackage.PIPELINE_REFERENCE__PIPELINE:
+				setPipeline((PipelineDefinition)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -150,10 +151,10 @@ public class LoopVariableImpl extends GeneratorReferenceImpl implements LoopVari
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case GeneratorPackage.LOOP_VARIABLE__DEFINITION:
-				return definition != null;
+			case GeneratorPackage.PIPELINE_REFERENCE__PIPELINE:
+				return pipeline != null;
 		}
 		return super.eIsSet(featureID);
 	}
 
-} //LoopVariableImpl
+} //PipelineReferenceImpl

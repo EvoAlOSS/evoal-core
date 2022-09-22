@@ -77,22 +77,13 @@ public interface GeneratorPackage extends EPackage {
 	int CONFIGURATION__USES = 0;
 
 	/**
-	 * The feature id for the '<em><b>Generators</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Pipelines</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONFIGURATION__GENERATORS = 1;
-
-	/**
-	 * The feature id for the '<em><b>Functions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONFIGURATION__FUNCTIONS = 2;
+	int CONFIGURATION__PIPELINES = 1;
 
 	/**
 	 * The feature id for the '<em><b>Statements</b></em>' containment reference list.
@@ -101,7 +92,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONFIGURATION__STATEMENTS = 3;
+	int CONFIGURATION__STATEMENTS = 2;
 
 	/**
 	 * The number of structural features of the '<em>Configuration</em>' class.
@@ -110,7 +101,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONFIGURATION_FEATURE_COUNT = 4;
+	int CONFIGURATION_FEATURE_COUNT = 3;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.generator.impl.UseImpl <em>Use</em>}' class.
@@ -141,14 +132,14 @@ public interface GeneratorPackage extends EPackage {
 	int USE_FEATURE_COUNT = 1;
 
 	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.generator.impl.ParametrizedFunctionDefinitionImpl <em>Parametrized Function Definition</em>}' class.
+	 * The meta object id for the '{@link de.evoal.languages.model.generator.impl.PipelineDefinitionImpl <em>Pipeline Definition</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.generator.impl.ParametrizedFunctionDefinitionImpl
-	 * @see de.evoal.languages.model.generator.impl.GeneratorPackageImpl#getParametrizedFunctionDefinition()
+	 * @see de.evoal.languages.model.generator.impl.PipelineDefinitionImpl
+	 * @see de.evoal.languages.model.generator.impl.GeneratorPackageImpl#getPipelineDefinition()
 	 * @generated
 	 */
-	int PARAMETRIZED_FUNCTION_DEFINITION = 2;
+	int PIPELINE_DEFINITION = 2;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -157,62 +148,25 @@ public interface GeneratorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PARAMETRIZED_FUNCTION_DEFINITION__NAME = 0;
+	int PIPELINE_DEFINITION__NAME = 0;
 
 	/**
-	 * The feature id for the '<em><b>Definition</b></em>' containment reference.
+	 * The feature id for the '<em><b>Definitions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PARAMETRIZED_FUNCTION_DEFINITION__DEFINITION = 1;
+	int PIPELINE_DEFINITION__DEFINITIONS = 1;
 
 	/**
-	 * The number of structural features of the '<em>Parametrized Function Definition</em>' class.
+	 * The number of structural features of the '<em>Pipeline Definition</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PARAMETRIZED_FUNCTION_DEFINITION_FEATURE_COUNT = 2;
-
-	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.generator.impl.GeneratorDefinitionImpl <em>Definition</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.generator.impl.GeneratorDefinitionImpl
-	 * @see de.evoal.languages.model.generator.impl.GeneratorPackageImpl#getGeneratorDefinition()
-	 * @generated
-	 */
-	int GENERATOR_DEFINITION = 3;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int GENERATOR_DEFINITION__NAME = 0;
-
-	/**
-	 * The feature id for the '<em><b>Definition</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int GENERATOR_DEFINITION__DEFINITION = 1;
-
-	/**
-	 * The number of structural features of the '<em>Definition</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int GENERATOR_DEFINITION_FEATURE_COUNT = 2;
+	int PIPELINE_DEFINITION_FEATURE_COUNT = 2;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.generator.impl.StatementImpl <em>Statement</em>}' class.
@@ -222,7 +176,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see de.evoal.languages.model.generator.impl.GeneratorPackageImpl#getStatement()
 	 * @generated
 	 */
-	int STATEMENT = 4;
+	int STATEMENT = 3;
 
 	/**
 	 * The number of structural features of the '<em>Statement</em>' class.
@@ -241,7 +195,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see de.evoal.languages.model.generator.impl.GeneratorPackageImpl#getForStatement()
 	 * @generated
 	 */
-	int FOR_STATEMENT = 5;
+	int FOR_STATEMENT = 4;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -287,7 +241,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see de.evoal.languages.model.generator.impl.GeneratorPackageImpl#getRange()
 	 * @generated
 	 */
-	int RANGE = 6;
+	int RANGE = 5;
 
 	/**
 	 * The number of structural features of the '<em>Range</em>' class.
@@ -306,7 +260,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see de.evoal.languages.model.generator.impl.GeneratorPackageImpl#getCounterRange()
 	 * @generated
 	 */
-	int COUNTER_RANGE = 7;
+	int COUNTER_RANGE = 6;
 
 	/**
 	 * The feature id for the '<em><b>Start</b></em>' attribute.
@@ -336,116 +290,60 @@ public interface GeneratorPackage extends EPackage {
 	int COUNTER_RANGE_FEATURE_COUNT = RANGE_FEATURE_COUNT + 2;
 
 	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.generator.impl.FunctionsImpl <em>Functions</em>}' class.
+	 * The meta object id for the '{@link de.evoal.languages.model.generator.impl.PipelineArrayImpl <em>Pipeline Array</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.generator.impl.FunctionsImpl
-	 * @see de.evoal.languages.model.generator.impl.GeneratorPackageImpl#getFunctions()
+	 * @see de.evoal.languages.model.generator.impl.PipelineArrayImpl
+	 * @see de.evoal.languages.model.generator.impl.GeneratorPackageImpl#getPipelineArray()
 	 * @generated
 	 */
-	int FUNCTIONS = 8;
+	int PIPELINE_ARRAY = 7;
 
 	/**
-	 * The feature id for the '<em><b>Function References</b></em>' containment reference.
+	 * The feature id for the '<em><b>References</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FUNCTIONS__FUNCTION_REFERENCES = RANGE_FEATURE_COUNT + 0;
+	int PIPELINE_ARRAY__REFERENCES = RANGE_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the '<em>Functions</em>' class.
+	 * The number of structural features of the '<em>Pipeline Array</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FUNCTIONS_FEATURE_COUNT = RANGE_FEATURE_COUNT + 1;
+	int PIPELINE_ARRAY_FEATURE_COUNT = RANGE_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.generator.impl.FunctionReferencesImpl <em>Function References</em>}' class.
+	 * The meta object id for the '{@link de.evoal.languages.model.generator.impl.PipelineReferenceImpl <em>Pipeline Reference</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.generator.impl.FunctionReferencesImpl
-	 * @see de.evoal.languages.model.generator.impl.GeneratorPackageImpl#getFunctionReferences()
+	 * @see de.evoal.languages.model.generator.impl.PipelineReferenceImpl
+	 * @see de.evoal.languages.model.generator.impl.GeneratorPackageImpl#getPipelineReference()
 	 * @generated
 	 */
-	int FUNCTION_REFERENCES = 9;
+	int PIPELINE_REFERENCE = 8;
 
 	/**
-	 * The feature id for the '<em><b>Functions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FUNCTION_REFERENCES__FUNCTIONS = 0;
-
-	/**
-	 * The number of structural features of the '<em>Function References</em>' class.
+	 * The feature id for the '<em><b>Pipeline</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FUNCTION_REFERENCES_FEATURE_COUNT = 1;
+	int PIPELINE_REFERENCE__PIPELINE = 0;
 
 	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.generator.impl.GeneratorsImpl <em>Generators</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.generator.impl.GeneratorsImpl
-	 * @see de.evoal.languages.model.generator.impl.GeneratorPackageImpl#getGenerators()
-	 * @generated
-	 */
-	int GENERATORS = 10;
-
-	/**
-	 * The feature id for the '<em><b>Generator References</b></em>' containment reference.
+	 * The number of structural features of the '<em>Pipeline Reference</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int GENERATORS__GENERATOR_REFERENCES = RANGE_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Generators</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int GENERATORS_FEATURE_COUNT = RANGE_FEATURE_COUNT + 1;
-
-	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.generator.impl.GeneratorReferencesImpl <em>References</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.generator.impl.GeneratorReferencesImpl
-	 * @see de.evoal.languages.model.generator.impl.GeneratorPackageImpl#getGeneratorReferences()
-	 * @generated
-	 */
-	int GENERATOR_REFERENCES = 11;
-
-	/**
-	 * The feature id for the '<em><b>Generators</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int GENERATOR_REFERENCES__GENERATORS = 0;
-
-	/**
-	 * The number of structural features of the '<em>References</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int GENERATOR_REFERENCES_FEATURE_COUNT = 1;
+	int PIPELINE_REFERENCE_FEATURE_COUNT = 1;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.generator.impl.ApplyStatementImpl <em>Apply Statement</em>}' class.
@@ -455,7 +353,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see de.evoal.languages.model.generator.impl.GeneratorPackageImpl#getApplyStatement()
 	 * @generated
 	 */
-	int APPLY_STATEMENT = 12;
+	int APPLY_STATEMENT = 9;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' attribute.
@@ -476,22 +374,13 @@ public interface GeneratorPackage extends EPackage {
 	int APPLY_STATEMENT__COUNT = STATEMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Function</b></em>' containment reference.
+	 * The feature id for the '<em><b>Pipelines</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int APPLY_STATEMENT__FUNCTION = STATEMENT_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Generator</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int APPLY_STATEMENT__GENERATOR = STATEMENT_FEATURE_COUNT + 3;
+	int APPLY_STATEMENT__PIPELINES = STATEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Apply Statement</em>' class.
@@ -500,176 +389,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APPLY_STATEMENT_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 4;
-
-	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.generator.impl.GeneratorReferenceImpl <em>Reference</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.generator.impl.GeneratorReferenceImpl
-	 * @see de.evoal.languages.model.generator.impl.GeneratorPackageImpl#getGeneratorReference()
-	 * @generated
-	 */
-	int GENERATOR_REFERENCE = 13;
-
-	/**
-	 * The number of structural features of the '<em>Reference</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int GENERATOR_REFERENCE_FEATURE_COUNT = 0;
-
-	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.generator.impl.GeneratorDefinitionReferenceImpl <em>Definition Reference</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.generator.impl.GeneratorDefinitionReferenceImpl
-	 * @see de.evoal.languages.model.generator.impl.GeneratorPackageImpl#getGeneratorDefinitionReference()
-	 * @generated
-	 */
-	int GENERATOR_DEFINITION_REFERENCE = 14;
-
-	/**
-	 * The feature id for the '<em><b>Definition</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int GENERATOR_DEFINITION_REFERENCE__DEFINITION = GENERATOR_REFERENCE_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Definition Reference</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int GENERATOR_DEFINITION_REFERENCE_FEATURE_COUNT = GENERATOR_REFERENCE_FEATURE_COUNT + 1;
-
-	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.generator.impl.FunctionReferenceImpl <em>Function Reference</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.generator.impl.FunctionReferenceImpl
-	 * @see de.evoal.languages.model.generator.impl.GeneratorPackageImpl#getFunctionReference()
-	 * @generated
-	 */
-	int FUNCTION_REFERENCE = 15;
-
-	/**
-	 * The number of structural features of the '<em>Function Reference</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FUNCTION_REFERENCE_FEATURE_COUNT = 0;
-
-	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.generator.impl.FunctionDefReferenceImpl <em>Function Def Reference</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.generator.impl.FunctionDefReferenceImpl
-	 * @see de.evoal.languages.model.generator.impl.GeneratorPackageImpl#getFunctionDefReference()
-	 * @generated
-	 */
-	int FUNCTION_DEF_REFERENCE = 16;
-
-	/**
-	 * The number of structural features of the '<em>Function Def Reference</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FUNCTION_DEF_REFERENCE_FEATURE_COUNT = FUNCTION_REFERENCE_FEATURE_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.generator.impl.LoopVariableImpl <em>Loop Variable</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.generator.impl.LoopVariableImpl
-	 * @see de.evoal.languages.model.generator.impl.GeneratorPackageImpl#getLoopVariable()
-	 * @generated
-	 */
-	int LOOP_VARIABLE = 17;
-
-	/**
-	 * The feature id for the '<em><b>Definition</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LOOP_VARIABLE__DEFINITION = GENERATOR_REFERENCE_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Loop Variable</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LOOP_VARIABLE_FEATURE_COUNT = GENERATOR_REFERENCE_FEATURE_COUNT + 1;
-
-	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.generator.impl.FunctionDefinitionReferenceImpl <em>Function Definition Reference</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.generator.impl.FunctionDefinitionReferenceImpl
-	 * @see de.evoal.languages.model.generator.impl.GeneratorPackageImpl#getFunctionDefinitionReference()
-	 * @generated
-	 */
-	int FUNCTION_DEFINITION_REFERENCE = 18;
-
-	/**
-	 * The feature id for the '<em><b>Definition</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FUNCTION_DEFINITION_REFERENCE__DEFINITION = FUNCTION_DEF_REFERENCE_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Function Definition Reference</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FUNCTION_DEFINITION_REFERENCE_FEATURE_COUNT = FUNCTION_DEF_REFERENCE_FEATURE_COUNT + 1;
-
-	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.generator.impl.ParametrizedFunctionDefinitionReferenceImpl <em>Parametrized Function Definition Reference</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.generator.impl.ParametrizedFunctionDefinitionReferenceImpl
-	 * @see de.evoal.languages.model.generator.impl.GeneratorPackageImpl#getParametrizedFunctionDefinitionReference()
-	 * @generated
-	 */
-	int PARAMETRIZED_FUNCTION_DEFINITION_REFERENCE = 19;
-
-	/**
-	 * The feature id for the '<em><b>Definition</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PARAMETRIZED_FUNCTION_DEFINITION_REFERENCE__DEFINITION = FUNCTION_DEF_REFERENCE_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Parametrized Function Definition Reference</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PARAMETRIZED_FUNCTION_DEFINITION_REFERENCE_FEATURE_COUNT = FUNCTION_DEF_REFERENCE_FEATURE_COUNT + 1;
+	int APPLY_STATEMENT_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 3;
 
 
 	/**
@@ -694,26 +414,15 @@ public interface GeneratorPackage extends EPackage {
 	EReference getConfiguration_Uses();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.generator.Configuration#getGenerators <em>Generators</em>}'.
+	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.generator.Configuration#getPipelines <em>Pipelines</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Generators</em>'.
-	 * @see de.evoal.languages.model.generator.Configuration#getGenerators()
+	 * @return the meta object for the containment reference list '<em>Pipelines</em>'.
+	 * @see de.evoal.languages.model.generator.Configuration#getPipelines()
 	 * @see #getConfiguration()
 	 * @generated
 	 */
-	EReference getConfiguration_Generators();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.generator.Configuration#getFunctions <em>Functions</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Functions</em>'.
-	 * @see de.evoal.languages.model.generator.Configuration#getFunctions()
-	 * @see #getConfiguration()
-	 * @generated
-	 */
-	EReference getConfiguration_Functions();
+	EReference getConfiguration_Pipelines();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.generator.Configuration#getStatements <em>Statements</em>}'.
@@ -748,68 +457,36 @@ public interface GeneratorPackage extends EPackage {
 	EAttribute getUse_ImportURI();
 
 	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.generator.ParametrizedFunctionDefinition <em>Parametrized Function Definition</em>}'.
+	 * Returns the meta object for class '{@link de.evoal.languages.model.generator.PipelineDefinition <em>Pipeline Definition</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Parametrized Function Definition</em>'.
-	 * @see de.evoal.languages.model.generator.ParametrizedFunctionDefinition
+	 * @return the meta object for class '<em>Pipeline Definition</em>'.
+	 * @see de.evoal.languages.model.generator.PipelineDefinition
 	 * @generated
 	 */
-	EClass getParametrizedFunctionDefinition();
+	EClass getPipelineDefinition();
 
 	/**
-	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.generator.ParametrizedFunctionDefinition#getName <em>Name</em>}'.
+	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.generator.PipelineDefinition#getName <em>Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see de.evoal.languages.model.generator.ParametrizedFunctionDefinition#getName()
-	 * @see #getParametrizedFunctionDefinition()
+	 * @see de.evoal.languages.model.generator.PipelineDefinition#getName()
+	 * @see #getPipelineDefinition()
 	 * @generated
 	 */
-	EAttribute getParametrizedFunctionDefinition_Name();
+	EAttribute getPipelineDefinition_Name();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link de.evoal.languages.model.generator.ParametrizedFunctionDefinition#getDefinition <em>Definition</em>}'.
+	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.generator.PipelineDefinition#getDefinitions <em>Definitions</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Definition</em>'.
-	 * @see de.evoal.languages.model.generator.ParametrizedFunctionDefinition#getDefinition()
-	 * @see #getParametrizedFunctionDefinition()
+	 * @return the meta object for the containment reference list '<em>Definitions</em>'.
+	 * @see de.evoal.languages.model.generator.PipelineDefinition#getDefinitions()
+	 * @see #getPipelineDefinition()
 	 * @generated
 	 */
-	EReference getParametrizedFunctionDefinition_Definition();
-
-	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.generator.GeneratorDefinition <em>Definition</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Definition</em>'.
-	 * @see de.evoal.languages.model.generator.GeneratorDefinition
-	 * @generated
-	 */
-	EClass getGeneratorDefinition();
-
-	/**
-	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.generator.GeneratorDefinition#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see de.evoal.languages.model.generator.GeneratorDefinition#getName()
-	 * @see #getGeneratorDefinition()
-	 * @generated
-	 */
-	EAttribute getGeneratorDefinition_Name();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link de.evoal.languages.model.generator.GeneratorDefinition#getDefinition <em>Definition</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Definition</em>'.
-	 * @see de.evoal.languages.model.generator.GeneratorDefinition#getDefinition()
-	 * @see #getGeneratorDefinition()
-	 * @generated
-	 */
-	EReference getGeneratorDefinition_Definition();
+	EReference getPipelineDefinition_Definitions();
 
 	/**
 	 * Returns the meta object for class '{@link de.evoal.languages.model.generator.Statement <em>Statement</em>}'.
@@ -907,88 +584,46 @@ public interface GeneratorPackage extends EPackage {
 	EAttribute getCounterRange_End();
 
 	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.generator.Functions <em>Functions</em>}'.
+	 * Returns the meta object for class '{@link de.evoal.languages.model.generator.PipelineArray <em>Pipeline Array</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Functions</em>'.
-	 * @see de.evoal.languages.model.generator.Functions
+	 * @return the meta object for class '<em>Pipeline Array</em>'.
+	 * @see de.evoal.languages.model.generator.PipelineArray
 	 * @generated
 	 */
-	EClass getFunctions();
+	EClass getPipelineArray();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link de.evoal.languages.model.generator.Functions#getFunctionReferences <em>Function References</em>}'.
+	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.generator.PipelineArray#getReferences <em>References</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Function References</em>'.
-	 * @see de.evoal.languages.model.generator.Functions#getFunctionReferences()
-	 * @see #getFunctions()
+	 * @return the meta object for the containment reference list '<em>References</em>'.
+	 * @see de.evoal.languages.model.generator.PipelineArray#getReferences()
+	 * @see #getPipelineArray()
 	 * @generated
 	 */
-	EReference getFunctions_FunctionReferences();
+	EReference getPipelineArray_References();
 
 	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.generator.FunctionReferences <em>Function References</em>}'.
+	 * Returns the meta object for class '{@link de.evoal.languages.model.generator.PipelineReference <em>Pipeline Reference</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Function References</em>'.
-	 * @see de.evoal.languages.model.generator.FunctionReferences
+	 * @return the meta object for class '<em>Pipeline Reference</em>'.
+	 * @see de.evoal.languages.model.generator.PipelineReference
 	 * @generated
 	 */
-	EClass getFunctionReferences();
+	EClass getPipelineReference();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.generator.FunctionReferences#getFunctions <em>Functions</em>}'.
+	 * Returns the meta object for the reference '{@link de.evoal.languages.model.generator.PipelineReference#getPipeline <em>Pipeline</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Functions</em>'.
-	 * @see de.evoal.languages.model.generator.FunctionReferences#getFunctions()
-	 * @see #getFunctionReferences()
+	 * @return the meta object for the reference '<em>Pipeline</em>'.
+	 * @see de.evoal.languages.model.generator.PipelineReference#getPipeline()
+	 * @see #getPipelineReference()
 	 * @generated
 	 */
-	EReference getFunctionReferences_Functions();
-
-	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.generator.Generators <em>Generators</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Generators</em>'.
-	 * @see de.evoal.languages.model.generator.Generators
-	 * @generated
-	 */
-	EClass getGenerators();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link de.evoal.languages.model.generator.Generators#getGeneratorReferences <em>Generator References</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Generator References</em>'.
-	 * @see de.evoal.languages.model.generator.Generators#getGeneratorReferences()
-	 * @see #getGenerators()
-	 * @generated
-	 */
-	EReference getGenerators_GeneratorReferences();
-
-	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.generator.GeneratorReferences <em>References</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>References</em>'.
-	 * @see de.evoal.languages.model.generator.GeneratorReferences
-	 * @generated
-	 */
-	EClass getGeneratorReferences();
-
-	/**
-	 * Returns the meta object for the reference list '{@link de.evoal.languages.model.generator.GeneratorReferences#getGenerators <em>Generators</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Generators</em>'.
-	 * @see de.evoal.languages.model.generator.GeneratorReferences#getGenerators()
-	 * @see #getGeneratorReferences()
-	 * @generated
-	 */
-	EReference getGeneratorReferences_Generators();
+	EReference getPipelineReference_Pipeline();
 
 	/**
 	 * Returns the meta object for class '{@link de.evoal.languages.model.generator.ApplyStatement <em>Apply Statement</em>}'.
@@ -1023,140 +658,15 @@ public interface GeneratorPackage extends EPackage {
 	EAttribute getApplyStatement_Count();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link de.evoal.languages.model.generator.ApplyStatement#getFunction <em>Function</em>}'.
+	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.generator.ApplyStatement#getPipelines <em>Pipelines</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Function</em>'.
-	 * @see de.evoal.languages.model.generator.ApplyStatement#getFunction()
+	 * @return the meta object for the containment reference list '<em>Pipelines</em>'.
+	 * @see de.evoal.languages.model.generator.ApplyStatement#getPipelines()
 	 * @see #getApplyStatement()
 	 * @generated
 	 */
-	EReference getApplyStatement_Function();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link de.evoal.languages.model.generator.ApplyStatement#getGenerator <em>Generator</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Generator</em>'.
-	 * @see de.evoal.languages.model.generator.ApplyStatement#getGenerator()
-	 * @see #getApplyStatement()
-	 * @generated
-	 */
-	EReference getApplyStatement_Generator();
-
-	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.generator.GeneratorReference <em>Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Reference</em>'.
-	 * @see de.evoal.languages.model.generator.GeneratorReference
-	 * @generated
-	 */
-	EClass getGeneratorReference();
-
-	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.generator.GeneratorDefinitionReference <em>Definition Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Definition Reference</em>'.
-	 * @see de.evoal.languages.model.generator.GeneratorDefinitionReference
-	 * @generated
-	 */
-	EClass getGeneratorDefinitionReference();
-
-	/**
-	 * Returns the meta object for the reference '{@link de.evoal.languages.model.generator.GeneratorDefinitionReference#getDefinition <em>Definition</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Definition</em>'.
-	 * @see de.evoal.languages.model.generator.GeneratorDefinitionReference#getDefinition()
-	 * @see #getGeneratorDefinitionReference()
-	 * @generated
-	 */
-	EReference getGeneratorDefinitionReference_Definition();
-
-	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.generator.FunctionReference <em>Function Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Function Reference</em>'.
-	 * @see de.evoal.languages.model.generator.FunctionReference
-	 * @generated
-	 */
-	EClass getFunctionReference();
-
-	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.generator.FunctionDefReference <em>Function Def Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Function Def Reference</em>'.
-	 * @see de.evoal.languages.model.generator.FunctionDefReference
-	 * @generated
-	 */
-	EClass getFunctionDefReference();
-
-	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.generator.LoopVariable <em>Loop Variable</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Loop Variable</em>'.
-	 * @see de.evoal.languages.model.generator.LoopVariable
-	 * @generated
-	 */
-	EClass getLoopVariable();
-
-	/**
-	 * Returns the meta object for the reference '{@link de.evoal.languages.model.generator.LoopVariable#getDefinition <em>Definition</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Definition</em>'.
-	 * @see de.evoal.languages.model.generator.LoopVariable#getDefinition()
-	 * @see #getLoopVariable()
-	 * @generated
-	 */
-	EReference getLoopVariable_Definition();
-
-	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.generator.FunctionDefinitionReference <em>Function Definition Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Function Definition Reference</em>'.
-	 * @see de.evoal.languages.model.generator.FunctionDefinitionReference
-	 * @generated
-	 */
-	EClass getFunctionDefinitionReference();
-
-	/**
-	 * Returns the meta object for the reference '{@link de.evoal.languages.model.generator.FunctionDefinitionReference#getDefinition <em>Definition</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Definition</em>'.
-	 * @see de.evoal.languages.model.generator.FunctionDefinitionReference#getDefinition()
-	 * @see #getFunctionDefinitionReference()
-	 * @generated
-	 */
-	EReference getFunctionDefinitionReference_Definition();
-
-	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.generator.ParametrizedFunctionDefinitionReference <em>Parametrized Function Definition Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Parametrized Function Definition Reference</em>'.
-	 * @see de.evoal.languages.model.generator.ParametrizedFunctionDefinitionReference
-	 * @generated
-	 */
-	EClass getParametrizedFunctionDefinitionReference();
-
-	/**
-	 * Returns the meta object for the reference '{@link de.evoal.languages.model.generator.ParametrizedFunctionDefinitionReference#getDefinition <em>Definition</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Definition</em>'.
-	 * @see de.evoal.languages.model.generator.ParametrizedFunctionDefinitionReference#getDefinition()
-	 * @see #getParametrizedFunctionDefinitionReference()
-	 * @generated
-	 */
-	EReference getParametrizedFunctionDefinitionReference_Definition();
+	EReference getApplyStatement_Pipelines();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -1199,20 +709,12 @@ public interface GeneratorPackage extends EPackage {
 		EReference CONFIGURATION__USES = eINSTANCE.getConfiguration_Uses();
 
 		/**
-		 * The meta object literal for the '<em><b>Generators</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Pipelines</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CONFIGURATION__GENERATORS = eINSTANCE.getConfiguration_Generators();
-
-		/**
-		 * The meta object literal for the '<em><b>Functions</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CONFIGURATION__FUNCTIONS = eINSTANCE.getConfiguration_Functions();
+		EReference CONFIGURATION__PIPELINES = eINSTANCE.getConfiguration_Pipelines();
 
 		/**
 		 * The meta object literal for the '<em><b>Statements</b></em>' containment reference list feature.
@@ -1241,14 +743,14 @@ public interface GeneratorPackage extends EPackage {
 		EAttribute USE__IMPORT_URI = eINSTANCE.getUse_ImportURI();
 
 		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.generator.impl.ParametrizedFunctionDefinitionImpl <em>Parametrized Function Definition</em>}' class.
+		 * The meta object literal for the '{@link de.evoal.languages.model.generator.impl.PipelineDefinitionImpl <em>Pipeline Definition</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.generator.impl.ParametrizedFunctionDefinitionImpl
-		 * @see de.evoal.languages.model.generator.impl.GeneratorPackageImpl#getParametrizedFunctionDefinition()
+		 * @see de.evoal.languages.model.generator.impl.PipelineDefinitionImpl
+		 * @see de.evoal.languages.model.generator.impl.GeneratorPackageImpl#getPipelineDefinition()
 		 * @generated
 		 */
-		EClass PARAMETRIZED_FUNCTION_DEFINITION = eINSTANCE.getParametrizedFunctionDefinition();
+		EClass PIPELINE_DEFINITION = eINSTANCE.getPipelineDefinition();
 
 		/**
 		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
@@ -1256,41 +758,15 @@ public interface GeneratorPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute PARAMETRIZED_FUNCTION_DEFINITION__NAME = eINSTANCE.getParametrizedFunctionDefinition_Name();
+		EAttribute PIPELINE_DEFINITION__NAME = eINSTANCE.getPipelineDefinition_Name();
 
 		/**
-		 * The meta object literal for the '<em><b>Definition</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Definitions</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference PARAMETRIZED_FUNCTION_DEFINITION__DEFINITION = eINSTANCE.getParametrizedFunctionDefinition_Definition();
-
-		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.generator.impl.GeneratorDefinitionImpl <em>Definition</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.generator.impl.GeneratorDefinitionImpl
-		 * @see de.evoal.languages.model.generator.impl.GeneratorPackageImpl#getGeneratorDefinition()
-		 * @generated
-		 */
-		EClass GENERATOR_DEFINITION = eINSTANCE.getGeneratorDefinition();
-
-		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute GENERATOR_DEFINITION__NAME = eINSTANCE.getGeneratorDefinition_Name();
-
-		/**
-		 * The meta object literal for the '<em><b>Definition</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference GENERATOR_DEFINITION__DEFINITION = eINSTANCE.getGeneratorDefinition_Definition();
+		EReference PIPELINE_DEFINITION__DEFINITIONS = eINSTANCE.getPipelineDefinition_Definitions();
 
 		/**
 		 * The meta object literal for the '{@link de.evoal.languages.model.generator.impl.StatementImpl <em>Statement</em>}' class.
@@ -1373,76 +849,40 @@ public interface GeneratorPackage extends EPackage {
 		EAttribute COUNTER_RANGE__END = eINSTANCE.getCounterRange_End();
 
 		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.generator.impl.FunctionsImpl <em>Functions</em>}' class.
+		 * The meta object literal for the '{@link de.evoal.languages.model.generator.impl.PipelineArrayImpl <em>Pipeline Array</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.generator.impl.FunctionsImpl
-		 * @see de.evoal.languages.model.generator.impl.GeneratorPackageImpl#getFunctions()
+		 * @see de.evoal.languages.model.generator.impl.PipelineArrayImpl
+		 * @see de.evoal.languages.model.generator.impl.GeneratorPackageImpl#getPipelineArray()
 		 * @generated
 		 */
-		EClass FUNCTIONS = eINSTANCE.getFunctions();
+		EClass PIPELINE_ARRAY = eINSTANCE.getPipelineArray();
 
 		/**
-		 * The meta object literal for the '<em><b>Function References</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>References</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference FUNCTIONS__FUNCTION_REFERENCES = eINSTANCE.getFunctions_FunctionReferences();
+		EReference PIPELINE_ARRAY__REFERENCES = eINSTANCE.getPipelineArray_References();
 
 		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.generator.impl.FunctionReferencesImpl <em>Function References</em>}' class.
+		 * The meta object literal for the '{@link de.evoal.languages.model.generator.impl.PipelineReferenceImpl <em>Pipeline Reference</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.generator.impl.FunctionReferencesImpl
-		 * @see de.evoal.languages.model.generator.impl.GeneratorPackageImpl#getFunctionReferences()
+		 * @see de.evoal.languages.model.generator.impl.PipelineReferenceImpl
+		 * @see de.evoal.languages.model.generator.impl.GeneratorPackageImpl#getPipelineReference()
 		 * @generated
 		 */
-		EClass FUNCTION_REFERENCES = eINSTANCE.getFunctionReferences();
+		EClass PIPELINE_REFERENCE = eINSTANCE.getPipelineReference();
 
 		/**
-		 * The meta object literal for the '<em><b>Functions</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Pipeline</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference FUNCTION_REFERENCES__FUNCTIONS = eINSTANCE.getFunctionReferences_Functions();
-
-		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.generator.impl.GeneratorsImpl <em>Generators</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.generator.impl.GeneratorsImpl
-		 * @see de.evoal.languages.model.generator.impl.GeneratorPackageImpl#getGenerators()
-		 * @generated
-		 */
-		EClass GENERATORS = eINSTANCE.getGenerators();
-
-		/**
-		 * The meta object literal for the '<em><b>Generator References</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference GENERATORS__GENERATOR_REFERENCES = eINSTANCE.getGenerators_GeneratorReferences();
-
-		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.generator.impl.GeneratorReferencesImpl <em>References</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.generator.impl.GeneratorReferencesImpl
-		 * @see de.evoal.languages.model.generator.impl.GeneratorPackageImpl#getGeneratorReferences()
-		 * @generated
-		 */
-		EClass GENERATOR_REFERENCES = eINSTANCE.getGeneratorReferences();
-
-		/**
-		 * The meta object literal for the '<em><b>Generators</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference GENERATOR_REFERENCES__GENERATORS = eINSTANCE.getGeneratorReferences_Generators();
+		EReference PIPELINE_REFERENCE__PIPELINE = eINSTANCE.getPipelineReference_Pipeline();
 
 		/**
 		 * The meta object literal for the '{@link de.evoal.languages.model.generator.impl.ApplyStatementImpl <em>Apply Statement</em>}' class.
@@ -1471,122 +911,12 @@ public interface GeneratorPackage extends EPackage {
 		EAttribute APPLY_STATEMENT__COUNT = eINSTANCE.getApplyStatement_Count();
 
 		/**
-		 * The meta object literal for the '<em><b>Function</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Pipelines</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference APPLY_STATEMENT__FUNCTION = eINSTANCE.getApplyStatement_Function();
-
-		/**
-		 * The meta object literal for the '<em><b>Generator</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference APPLY_STATEMENT__GENERATOR = eINSTANCE.getApplyStatement_Generator();
-
-		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.generator.impl.GeneratorReferenceImpl <em>Reference</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.generator.impl.GeneratorReferenceImpl
-		 * @see de.evoal.languages.model.generator.impl.GeneratorPackageImpl#getGeneratorReference()
-		 * @generated
-		 */
-		EClass GENERATOR_REFERENCE = eINSTANCE.getGeneratorReference();
-
-		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.generator.impl.GeneratorDefinitionReferenceImpl <em>Definition Reference</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.generator.impl.GeneratorDefinitionReferenceImpl
-		 * @see de.evoal.languages.model.generator.impl.GeneratorPackageImpl#getGeneratorDefinitionReference()
-		 * @generated
-		 */
-		EClass GENERATOR_DEFINITION_REFERENCE = eINSTANCE.getGeneratorDefinitionReference();
-
-		/**
-		 * The meta object literal for the '<em><b>Definition</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference GENERATOR_DEFINITION_REFERENCE__DEFINITION = eINSTANCE.getGeneratorDefinitionReference_Definition();
-
-		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.generator.impl.FunctionReferenceImpl <em>Function Reference</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.generator.impl.FunctionReferenceImpl
-		 * @see de.evoal.languages.model.generator.impl.GeneratorPackageImpl#getFunctionReference()
-		 * @generated
-		 */
-		EClass FUNCTION_REFERENCE = eINSTANCE.getFunctionReference();
-
-		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.generator.impl.FunctionDefReferenceImpl <em>Function Def Reference</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.generator.impl.FunctionDefReferenceImpl
-		 * @see de.evoal.languages.model.generator.impl.GeneratorPackageImpl#getFunctionDefReference()
-		 * @generated
-		 */
-		EClass FUNCTION_DEF_REFERENCE = eINSTANCE.getFunctionDefReference();
-
-		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.generator.impl.LoopVariableImpl <em>Loop Variable</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.generator.impl.LoopVariableImpl
-		 * @see de.evoal.languages.model.generator.impl.GeneratorPackageImpl#getLoopVariable()
-		 * @generated
-		 */
-		EClass LOOP_VARIABLE = eINSTANCE.getLoopVariable();
-
-		/**
-		 * The meta object literal for the '<em><b>Definition</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference LOOP_VARIABLE__DEFINITION = eINSTANCE.getLoopVariable_Definition();
-
-		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.generator.impl.FunctionDefinitionReferenceImpl <em>Function Definition Reference</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.generator.impl.FunctionDefinitionReferenceImpl
-		 * @see de.evoal.languages.model.generator.impl.GeneratorPackageImpl#getFunctionDefinitionReference()
-		 * @generated
-		 */
-		EClass FUNCTION_DEFINITION_REFERENCE = eINSTANCE.getFunctionDefinitionReference();
-
-		/**
-		 * The meta object literal for the '<em><b>Definition</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference FUNCTION_DEFINITION_REFERENCE__DEFINITION = eINSTANCE.getFunctionDefinitionReference_Definition();
-
-		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.generator.impl.ParametrizedFunctionDefinitionReferenceImpl <em>Parametrized Function Definition Reference</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.generator.impl.ParametrizedFunctionDefinitionReferenceImpl
-		 * @see de.evoal.languages.model.generator.impl.GeneratorPackageImpl#getParametrizedFunctionDefinitionReference()
-		 * @generated
-		 */
-		EClass PARAMETRIZED_FUNCTION_DEFINITION_REFERENCE = eINSTANCE.getParametrizedFunctionDefinitionReference();
-
-		/**
-		 * The meta object literal for the '<em><b>Definition</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference PARAMETRIZED_FUNCTION_DEFINITION_REFERENCE__DEFINITION = eINSTANCE.getParametrizedFunctionDefinitionReference_Definition();
+		EReference APPLY_STATEMENT__PIPELINES = eINSTANCE.getApplyStatement_Pipelines();
 
 	}
 

@@ -32,24 +32,20 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cUsesAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cUsesUseRuleParserRuleCall_0_0 = (RuleCall)cUsesAssignment_0.eContents().get(0);
-		private final Assignment cGeneratorsAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cGeneratorsGeneratorDefinitionRuleParserRuleCall_1_0 = (RuleCall)cGeneratorsAssignment_1.eContents().get(0);
-		private final Assignment cFunctionsAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cFunctionsParametrizedFunctionDefinitionRuleParserRuleCall_2_0 = (RuleCall)cFunctionsAssignment_2.eContents().get(0);
-		private final Assignment cStatementsAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cStatementsStatementRuleParserRuleCall_3_0 = (RuleCall)cStatementsAssignment_3.eContents().get(0);
+		private final Assignment cPipelinesAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cPipelinesPipelineDefinitionRuleParserRuleCall_1_0 = (RuleCall)cPipelinesAssignment_1.eContents().get(0);
+		private final Assignment cStatementsAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cStatementsStatementRuleParserRuleCall_2_0 = (RuleCall)cStatementsAssignment_2.eContents().get(0);
 		
 		//ConfigurationRule returns Configuration:
 		//    (uses += UseRule)*
-		//    (generators += GeneratorDefinitionRule)*
-		//    (functions += ParametrizedFunctionDefinitionRule)*
+		//    (pipelines += PipelineDefinitionRule)*
 		//    (statements    += StatementRule)*
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//(uses += UseRule)*
-		//(generators += GeneratorDefinitionRule)*
-		//(functions += ParametrizedFunctionDefinitionRule)*
+		//(pipelines += PipelineDefinitionRule)*
 		//(statements    += StatementRule)*
 		public Group getGroup() { return cGroup; }
 		
@@ -59,23 +55,17 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 		//UseRule
 		public RuleCall getUsesUseRuleParserRuleCall_0_0() { return cUsesUseRuleParserRuleCall_0_0; }
 		
-		//(generators += GeneratorDefinitionRule)*
-		public Assignment getGeneratorsAssignment_1() { return cGeneratorsAssignment_1; }
+		//(pipelines += PipelineDefinitionRule)*
+		public Assignment getPipelinesAssignment_1() { return cPipelinesAssignment_1; }
 		
-		//GeneratorDefinitionRule
-		public RuleCall getGeneratorsGeneratorDefinitionRuleParserRuleCall_1_0() { return cGeneratorsGeneratorDefinitionRuleParserRuleCall_1_0; }
-		
-		//(functions += ParametrizedFunctionDefinitionRule)*
-		public Assignment getFunctionsAssignment_2() { return cFunctionsAssignment_2; }
-		
-		//ParametrizedFunctionDefinitionRule
-		public RuleCall getFunctionsParametrizedFunctionDefinitionRuleParserRuleCall_2_0() { return cFunctionsParametrizedFunctionDefinitionRuleParserRuleCall_2_0; }
+		//PipelineDefinitionRule
+		public RuleCall getPipelinesPipelineDefinitionRuleParserRuleCall_1_0() { return cPipelinesPipelineDefinitionRuleParserRuleCall_1_0; }
 		
 		//(statements	+= StatementRule)*
-		public Assignment getStatementsAssignment_3() { return cStatementsAssignment_3; }
+		public Assignment getStatementsAssignment_2() { return cStatementsAssignment_2; }
 		
 		//StatementRule
-		public RuleCall getStatementsStatementRuleParserRuleCall_3_0() { return cStatementsStatementRuleParserRuleCall_3_0; }
+		public RuleCall getStatementsStatementRuleParserRuleCall_2_0() { return cStatementsStatementRuleParserRuleCall_2_0; }
 	}
 	public class UseRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.generator.dsl.GeneratorDSL.UseRule");
@@ -105,31 +95,36 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 		//';'
 		public Keyword getSemicolonKeyword_2() { return cSemicolonKeyword_2; }
 	}
-	public class ParametrizedFunctionDefinitionRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.generator.dsl.GeneratorDSL.ParametrizedFunctionDefinitionRule");
+	public class PipelineDefinitionRuleElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.generator.dsl.GeneratorDSL.PipelineDefinitionRule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cFunctionKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cPipelineKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameStringOrIdParserRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
-		private final Keyword cUsingKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cDefinitionAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cDefinitionInstanceRuleParserRuleCall_3_0 = (RuleCall)cDefinitionAssignment_3.eContents().get(0);
-		private final Keyword cSemicolonKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Keyword cLeftSquareBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
+		private final Assignment cDefinitionsAssignment_3_0 = (Assignment)cGroup_3.eContents().get(0);
+		private final RuleCall cDefinitionsInstanceRuleParserRuleCall_3_0_0 = (RuleCall)cDefinitionsAssignment_3_0.eContents().get(0);
+		private final Group cGroup_3_1 = (Group)cGroup_3.eContents().get(1);
+		private final Keyword cCommaKeyword_3_1_0 = (Keyword)cGroup_3_1.eContents().get(0);
+		private final Assignment cDefinitionsAssignment_3_1_1 = (Assignment)cGroup_3_1.eContents().get(1);
+		private final RuleCall cDefinitionsInstanceRuleParserRuleCall_3_1_1_0 = (RuleCall)cDefinitionsAssignment_3_1_1.eContents().get(0);
+		private final Keyword cRightSquareBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
-		//ParametrizedFunctionDefinitionRule returns ParametrizedFunctionDefinition:
-		//    'function' name = StringOrId 'using'
-		//       definition = InstanceRule
-		//    ';'
+		//PipelineDefinitionRule returns PipelineDefinition:
+		//    'pipeline' name = StringOrId '['
+		//        (definitions += InstanceRule (',' definitions += InstanceRule)*)?
+		//    ']'
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'function' name = StringOrId 'using'
-		//   definition = InstanceRule
-		//';'
+		//'pipeline' name = StringOrId '['
+		//    (definitions += InstanceRule (',' definitions += InstanceRule)*)?
+		//']'
 		public Group getGroup() { return cGroup; }
 		
-		//'function'
-		public Keyword getFunctionKeyword_0() { return cFunctionKeyword_0; }
+		//'pipeline'
+		public Keyword getPipelineKeyword_0() { return cPipelineKeyword_0; }
 		
 		//name = StringOrId
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
@@ -137,61 +132,32 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 		//StringOrId
 		public RuleCall getNameStringOrIdParserRuleCall_1_0() { return cNameStringOrIdParserRuleCall_1_0; }
 		
-		//'using'
-		public Keyword getUsingKeyword_2() { return cUsingKeyword_2; }
+		//'['
+		public Keyword getLeftSquareBracketKeyword_2() { return cLeftSquareBracketKeyword_2; }
 		
-		//definition = InstanceRule
-		public Assignment getDefinitionAssignment_3() { return cDefinitionAssignment_3; }
+		//(definitions += InstanceRule (',' definitions += InstanceRule)*)?
+		public Group getGroup_3() { return cGroup_3; }
 		
-		//InstanceRule
-		public RuleCall getDefinitionInstanceRuleParserRuleCall_3_0() { return cDefinitionInstanceRuleParserRuleCall_3_0; }
-		
-		//';'
-		public Keyword getSemicolonKeyword_4() { return cSemicolonKeyword_4; }
-	}
-	public class GeneratorDefinitionRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.generator.dsl.GeneratorDSL.GeneratorDefinitionRule");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cGeneratorKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cNameStringOrIdParserRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
-		private final Keyword cUsingKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cDefinitionAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cDefinitionInstanceRuleParserRuleCall_3_0 = (RuleCall)cDefinitionAssignment_3.eContents().get(0);
-		private final Keyword cSemicolonKeyword_4 = (Keyword)cGroup.eContents().get(4);
-		
-		//GeneratorDefinitionRule returns GeneratorDefinition:
-		//    'generator' name = StringOrId 'using'
-		//        definition = InstanceRule
-		//    ';'
-		//;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//'generator' name = StringOrId 'using'
-		//    definition = InstanceRule
-		//';'
-		public Group getGroup() { return cGroup; }
-		
-		//'generator'
-		public Keyword getGeneratorKeyword_0() { return cGeneratorKeyword_0; }
-		
-		//name = StringOrId
-		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
-		
-		//StringOrId
-		public RuleCall getNameStringOrIdParserRuleCall_1_0() { return cNameStringOrIdParserRuleCall_1_0; }
-		
-		//'using'
-		public Keyword getUsingKeyword_2() { return cUsingKeyword_2; }
-		
-		//definition = InstanceRule
-		public Assignment getDefinitionAssignment_3() { return cDefinitionAssignment_3; }
+		//definitions += InstanceRule
+		public Assignment getDefinitionsAssignment_3_0() { return cDefinitionsAssignment_3_0; }
 		
 		//InstanceRule
-		public RuleCall getDefinitionInstanceRuleParserRuleCall_3_0() { return cDefinitionInstanceRuleParserRuleCall_3_0; }
+		public RuleCall getDefinitionsInstanceRuleParserRuleCall_3_0_0() { return cDefinitionsInstanceRuleParserRuleCall_3_0_0; }
 		
-		//';'
-		public Keyword getSemicolonKeyword_4() { return cSemicolonKeyword_4; }
+		//(',' definitions += InstanceRule)*
+		public Group getGroup_3_1() { return cGroup_3_1; }
+		
+		//','
+		public Keyword getCommaKeyword_3_1_0() { return cCommaKeyword_3_1_0; }
+		
+		//definitions += InstanceRule
+		public Assignment getDefinitionsAssignment_3_1_1() { return cDefinitionsAssignment_3_1_1; }
+		
+		//InstanceRule
+		public RuleCall getDefinitionsInstanceRuleParserRuleCall_3_1_1_0() { return cDefinitionsInstanceRuleParserRuleCall_3_1_1_0; }
+		
+		//']'
+		public Keyword getRightSquareBracketKeyword_4() { return cRightSquareBracketKeyword_4; }
 	}
 	public class StatementRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.generator.dsl.GeneratorDSL.StatementRule");
@@ -272,26 +238,22 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 	public class RangeRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.generator.dsl.GeneratorDSL.RangeRule");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cFunctionsRuleParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cGeneratorsRuleParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		private final RuleCall cCounterRangeRuleParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		private final RuleCall cPipelineArrayRuleParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cCounterRangeRuleParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//RangeRule returns Range:
-		//    FunctionsRule | GeneratorsRule | CounterRangeRule
+		//    PipelineArrayRule | CounterRangeRule
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//FunctionsRule | GeneratorsRule | CounterRangeRule
+		//PipelineArrayRule | CounterRangeRule
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
-		//FunctionsRule
-		public RuleCall getFunctionsRuleParserRuleCall_0() { return cFunctionsRuleParserRuleCall_0; }
-		
-		//GeneratorsRule
-		public RuleCall getGeneratorsRuleParserRuleCall_1() { return cGeneratorsRuleParserRuleCall_1; }
+		//PipelineArrayRule
+		public RuleCall getPipelineArrayRuleParserRuleCall_0() { return cPipelineArrayRuleParserRuleCall_0; }
 		
 		//CounterRangeRule
-		public RuleCall getCounterRangeRuleParserRuleCall_2() { return cCounterRangeRuleParserRuleCall_2; }
+		public RuleCall getCounterRangeRuleParserRuleCall_1() { return cCounterRangeRuleParserRuleCall_1; }
 	}
 	public class CounterRangeRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.generator.dsl.GeneratorDSL.CounterRangeRule");
@@ -333,157 +295,81 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 		//']'
 		public Keyword getRightSquareBracketKeyword_4() { return cRightSquareBracketKeyword_4; }
 	}
-	public class FunctionsRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.generator.dsl.GeneratorDSL.FunctionsRule");
+	public class PipelineArrayRuleElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.generator.dsl.GeneratorDSL.PipelineArrayRule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cFunctionsAction_0 = (Action)cGroup.eContents().get(0);
-		private final Keyword cFunctionsKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Assignment cFunctionReferencesAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cFunctionReferencesFunctionReferencesRuleParserRuleCall_2_0 = (RuleCall)cFunctionReferencesAssignment_2.eContents().get(0);
-		
-		//FunctionsRule returns Functions:
-		//    {Functions} 'functions' (functionReferences = FunctionReferencesRule)?
-		//;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//{Functions} 'functions' (functionReferences = FunctionReferencesRule)?
-		public Group getGroup() { return cGroup; }
-		
-		//{Functions}
-		public Action getFunctionsAction_0() { return cFunctionsAction_0; }
-		
-		//'functions'
-		public Keyword getFunctionsKeyword_1() { return cFunctionsKeyword_1; }
-		
-		//(functionReferences = FunctionReferencesRule)?
-		public Assignment getFunctionReferencesAssignment_2() { return cFunctionReferencesAssignment_2; }
-		
-		//FunctionReferencesRule
-		public RuleCall getFunctionReferencesFunctionReferencesRuleParserRuleCall_2_0() { return cFunctionReferencesFunctionReferencesRuleParserRuleCall_2_0; }
-	}
-	public class FunctionReferencesRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.generator.dsl.GeneratorDSL.FunctionReferencesRule");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cLeftSquareBracketKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cFunctionsAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cFunctionsFunctionDefReferenceRuleParserRuleCall_1_0 = (RuleCall)cFunctionsAssignment_1.eContents().get(0);
+		private final Action cPipelineArrayAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cPipelinesKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
-		private final Keyword cCommaKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
-		private final Assignment cFunctionsAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
-		private final RuleCall cFunctionsFunctionDefReferenceRuleParserRuleCall_2_1_0 = (RuleCall)cFunctionsAssignment_2_1.eContents().get(0);
-		private final Keyword cRightSquareBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Keyword cLeftSquareBracketKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
+		private final Assignment cReferencesAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
+		private final RuleCall cReferencesPipelineReferenceRuleParserRuleCall_2_1_0 = (RuleCall)cReferencesAssignment_2_1.eContents().get(0);
+		private final Group cGroup_2_2 = (Group)cGroup_2.eContents().get(2);
+		private final Keyword cCommaKeyword_2_2_0 = (Keyword)cGroup_2_2.eContents().get(0);
+		private final Assignment cReferencesAssignment_2_2_1 = (Assignment)cGroup_2_2.eContents().get(1);
+		private final RuleCall cReferencesPipelineReferenceRuleParserRuleCall_2_2_1_0 = (RuleCall)cReferencesAssignment_2_2_1.eContents().get(0);
+		private final Keyword cRightSquareBracketKeyword_2_3 = (Keyword)cGroup_2.eContents().get(3);
 		
-		//FunctionReferencesRule returns FunctionReferences:
-		//    '[' functions += FunctionDefReferenceRule (',' functions += FunctionDefReferenceRule)* ']'
+		//PipelineArrayRule returns PipelineArray:
+		//    {PipelineArray} 'pipelines' ('[' references += PipelineReferenceRule (',' references += PipelineReferenceRule)* ']')?
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'[' functions += FunctionDefReferenceRule (',' functions += FunctionDefReferenceRule)* ']'
+		//{PipelineArray} 'pipelines' ('[' references += PipelineReferenceRule (',' references += PipelineReferenceRule)* ']')?
 		public Group getGroup() { return cGroup; }
 		
-		//'['
-		public Keyword getLeftSquareBracketKeyword_0() { return cLeftSquareBracketKeyword_0; }
+		//{PipelineArray}
+		public Action getPipelineArrayAction_0() { return cPipelineArrayAction_0; }
 		
-		//functions += FunctionDefReferenceRule
-		public Assignment getFunctionsAssignment_1() { return cFunctionsAssignment_1; }
+		//'pipelines'
+		public Keyword getPipelinesKeyword_1() { return cPipelinesKeyword_1; }
 		
-		//FunctionDefReferenceRule
-		public RuleCall getFunctionsFunctionDefReferenceRuleParserRuleCall_1_0() { return cFunctionsFunctionDefReferenceRuleParserRuleCall_1_0; }
-		
-		//(',' functions += FunctionDefReferenceRule)*
+		//('[' references += PipelineReferenceRule (',' references += PipelineReferenceRule)* ']')?
 		public Group getGroup_2() { return cGroup_2; }
 		
-		//','
-		public Keyword getCommaKeyword_2_0() { return cCommaKeyword_2_0; }
-		
-		//functions += FunctionDefReferenceRule
-		public Assignment getFunctionsAssignment_2_1() { return cFunctionsAssignment_2_1; }
-		
-		//FunctionDefReferenceRule
-		public RuleCall getFunctionsFunctionDefReferenceRuleParserRuleCall_2_1_0() { return cFunctionsFunctionDefReferenceRuleParserRuleCall_2_1_0; }
-		
-		//']'
-		public Keyword getRightSquareBracketKeyword_3() { return cRightSquareBracketKeyword_3; }
-	}
-	public class GeneratorsRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.generator.dsl.GeneratorDSL.GeneratorsRule");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cGeneratorsAction_0 = (Action)cGroup.eContents().get(0);
-		private final Keyword cGeneratorsKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Assignment cGeneratorReferencesAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cGeneratorReferencesGeneratorReferencesRuleParserRuleCall_2_0 = (RuleCall)cGeneratorReferencesAssignment_2.eContents().get(0);
-		
-		//GeneratorsRule returns Generators:
-		//    {Generators} 'generators' (generatorReferences = GeneratorReferencesRule)?
-		//;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//{Generators} 'generators' (generatorReferences = GeneratorReferencesRule)?
-		public Group getGroup() { return cGroup; }
-		
-		//{Generators}
-		public Action getGeneratorsAction_0() { return cGeneratorsAction_0; }
-		
-		//'generators'
-		public Keyword getGeneratorsKeyword_1() { return cGeneratorsKeyword_1; }
-		
-		//(generatorReferences = GeneratorReferencesRule)?
-		public Assignment getGeneratorReferencesAssignment_2() { return cGeneratorReferencesAssignment_2; }
-		
-		//GeneratorReferencesRule
-		public RuleCall getGeneratorReferencesGeneratorReferencesRuleParserRuleCall_2_0() { return cGeneratorReferencesGeneratorReferencesRuleParserRuleCall_2_0; }
-	}
-	public class GeneratorReferencesRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.generator.dsl.GeneratorDSL.GeneratorReferencesRule");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cLeftSquareBracketKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cGeneratorsAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final CrossReference cGeneratorsGeneratorDefinitionCrossReference_1_0 = (CrossReference)cGeneratorsAssignment_1.eContents().get(0);
-		private final RuleCall cGeneratorsGeneratorDefinitionStringOrIdParserRuleCall_1_0_1 = (RuleCall)cGeneratorsGeneratorDefinitionCrossReference_1_0.eContents().get(1);
-		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
-		private final Keyword cCommaKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
-		private final Assignment cGeneratorsAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
-		private final CrossReference cGeneratorsGeneratorDefinitionCrossReference_2_1_0 = (CrossReference)cGeneratorsAssignment_2_1.eContents().get(0);
-		private final RuleCall cGeneratorsGeneratorDefinitionStringOrIdParserRuleCall_2_1_0_1 = (RuleCall)cGeneratorsGeneratorDefinitionCrossReference_2_1_0.eContents().get(1);
-		private final Keyword cRightSquareBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
-		
-		//GeneratorReferencesRule returns GeneratorReferences:
-		//    '[' generators += [GeneratorDefinition|StringOrId] (',' generators += [GeneratorDefinition|StringOrId])* ']'
-		//;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//'[' generators += [GeneratorDefinition|StringOrId] (',' generators += [GeneratorDefinition|StringOrId])* ']'
-		public Group getGroup() { return cGroup; }
-		
 		//'['
-		public Keyword getLeftSquareBracketKeyword_0() { return cLeftSquareBracketKeyword_0; }
+		public Keyword getLeftSquareBracketKeyword_2_0() { return cLeftSquareBracketKeyword_2_0; }
 		
-		//generators += [GeneratorDefinition|StringOrId]
-		public Assignment getGeneratorsAssignment_1() { return cGeneratorsAssignment_1; }
+		//references += PipelineReferenceRule
+		public Assignment getReferencesAssignment_2_1() { return cReferencesAssignment_2_1; }
 		
-		//[GeneratorDefinition|StringOrId]
-		public CrossReference getGeneratorsGeneratorDefinitionCrossReference_1_0() { return cGeneratorsGeneratorDefinitionCrossReference_1_0; }
+		//PipelineReferenceRule
+		public RuleCall getReferencesPipelineReferenceRuleParserRuleCall_2_1_0() { return cReferencesPipelineReferenceRuleParserRuleCall_2_1_0; }
 		
-		//StringOrId
-		public RuleCall getGeneratorsGeneratorDefinitionStringOrIdParserRuleCall_1_0_1() { return cGeneratorsGeneratorDefinitionStringOrIdParserRuleCall_1_0_1; }
-		
-		//(',' generators += [GeneratorDefinition|StringOrId])*
-		public Group getGroup_2() { return cGroup_2; }
+		//(',' references += PipelineReferenceRule)*
+		public Group getGroup_2_2() { return cGroup_2_2; }
 		
 		//','
-		public Keyword getCommaKeyword_2_0() { return cCommaKeyword_2_0; }
+		public Keyword getCommaKeyword_2_2_0() { return cCommaKeyword_2_2_0; }
 		
-		//generators += [GeneratorDefinition|StringOrId]
-		public Assignment getGeneratorsAssignment_2_1() { return cGeneratorsAssignment_2_1; }
+		//references += PipelineReferenceRule
+		public Assignment getReferencesAssignment_2_2_1() { return cReferencesAssignment_2_2_1; }
 		
-		//[GeneratorDefinition|StringOrId]
-		public CrossReference getGeneratorsGeneratorDefinitionCrossReference_2_1_0() { return cGeneratorsGeneratorDefinitionCrossReference_2_1_0; }
-		
-		//StringOrId
-		public RuleCall getGeneratorsGeneratorDefinitionStringOrIdParserRuleCall_2_1_0_1() { return cGeneratorsGeneratorDefinitionStringOrIdParserRuleCall_2_1_0_1; }
+		//PipelineReferenceRule
+		public RuleCall getReferencesPipelineReferenceRuleParserRuleCall_2_2_1_0() { return cReferencesPipelineReferenceRuleParserRuleCall_2_2_1_0; }
 		
 		//']'
-		public Keyword getRightSquareBracketKeyword_3() { return cRightSquareBracketKeyword_3; }
+		public Keyword getRightSquareBracketKeyword_2_3() { return cRightSquareBracketKeyword_2_3; }
+	}
+	public class PipelineReferenceRuleElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.generator.dsl.GeneratorDSL.PipelineReferenceRule");
+		private final Assignment cPipelineAssignment = (Assignment)rule.eContents().get(1);
+		private final CrossReference cPipelinePipelineDefinitionCrossReference_0 = (CrossReference)cPipelineAssignment.eContents().get(0);
+		private final RuleCall cPipelinePipelineDefinitionStringOrIdParserRuleCall_0_1 = (RuleCall)cPipelinePipelineDefinitionCrossReference_0.eContents().get(1);
+		
+		//PipelineReferenceRule returns PipelineReference:
+		//    pipeline = [PipelineDefinition|StringOrId]
+		//;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//pipeline = [PipelineDefinition|StringOrId]
+		public Assignment getPipelineAssignment() { return cPipelineAssignment; }
+		
+		//[PipelineDefinition|StringOrId]
+		public CrossReference getPipelinePipelineDefinitionCrossReference_0() { return cPipelinePipelineDefinitionCrossReference_0; }
+		
+		//StringOrId
+		public RuleCall getPipelinePipelineDefinitionStringOrIdParserRuleCall_0_1() { return cPipelinePipelineDefinitionStringOrIdParserRuleCall_0_1; }
 	}
 	public class ApplyStatementRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.generator.dsl.GeneratorDSL.ApplyStatementRule");
@@ -496,20 +382,23 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 		private final RuleCall cCountINTTerminalRuleCall_3_0 = (RuleCall)cCountAssignment_3.eContents().get(0);
 		private final Keyword cSamplesKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		private final Keyword cFromKeyword_5 = (Keyword)cGroup.eContents().get(5);
-		private final Keyword cApplyingKeyword_6 = (Keyword)cGroup.eContents().get(6);
-		private final Assignment cFunctionAssignment_7 = (Assignment)cGroup.eContents().get(7);
-		private final RuleCall cFunctionFunctionReferenceRuleParserRuleCall_7_0 = (RuleCall)cFunctionAssignment_7.eContents().get(0);
-		private final Keyword cOnKeyword_8 = (Keyword)cGroup.eContents().get(8);
-		private final Assignment cGeneratorAssignment_9 = (Assignment)cGroup.eContents().get(9);
-		private final RuleCall cGeneratorGeneratorReferenceRuleParserRuleCall_9_0 = (RuleCall)cGeneratorAssignment_9.eContents().get(0);
-		private final Keyword cSemicolonKeyword_10 = (Keyword)cGroup.eContents().get(10);
+		private final Keyword cExecutingKeyword_6 = (Keyword)cGroup.eContents().get(6);
+		private final Keyword cLeftSquareBracketKeyword_7 = (Keyword)cGroup.eContents().get(7);
+		private final Assignment cPipelinesAssignment_8 = (Assignment)cGroup.eContents().get(8);
+		private final RuleCall cPipelinesPipelineReferenceRuleParserRuleCall_8_0 = (RuleCall)cPipelinesAssignment_8.eContents().get(0);
+		private final Group cGroup_9 = (Group)cGroup.eContents().get(9);
+		private final Keyword cCommaKeyword_9_0 = (Keyword)cGroup_9.eContents().get(0);
+		private final Assignment cPipelinesAssignment_9_1 = (Assignment)cGroup_9.eContents().get(1);
+		private final RuleCall cPipelinesPipelineReferenceRuleParserRuleCall_9_1_0 = (RuleCall)cPipelinesAssignment_9_1.eContents().get(0);
+		private final Keyword cRightSquareBracketKeyword_10 = (Keyword)cGroup.eContents().get(10);
+		private final Keyword cSKeyword_11 = (Keyword)cGroup.eContents().get(11);
 		
 		//ApplyStatementRule returns ApplyStatement:
-		//    'write' file = STRING 'with' count = INT 'samples' 'from' 'applying'  function = FunctionReferenceRule 'on' generator = GeneratorReferenceRule ';'
+		//    'write' file = STRING 'with' count = INT 'samples' 'from' 'executing' '[' pipelines += PipelineReferenceRule (',' pipelines += PipelineReferenceRule)* ']' 's;'
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'write' file = STRING 'with' count = INT 'samples' 'from' 'applying'  function = FunctionReferenceRule 'on' generator = GeneratorReferenceRule ';'
+		//'write' file = STRING 'with' count = INT 'samples' 'from' 'executing' '[' pipelines += PipelineReferenceRule (',' pipelines += PipelineReferenceRule)* ']' 's;'
 		public Group getGroup() { return cGroup; }
 		
 		//'write'
@@ -536,229 +425,48 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 		//'from'
 		public Keyword getFromKeyword_5() { return cFromKeyword_5; }
 		
-		//'applying'
-		public Keyword getApplyingKeyword_6() { return cApplyingKeyword_6; }
+		//'executing'
+		public Keyword getExecutingKeyword_6() { return cExecutingKeyword_6; }
 		
-		//function = FunctionReferenceRule
-		public Assignment getFunctionAssignment_7() { return cFunctionAssignment_7; }
+		//'['
+		public Keyword getLeftSquareBracketKeyword_7() { return cLeftSquareBracketKeyword_7; }
 		
-		//FunctionReferenceRule
-		public RuleCall getFunctionFunctionReferenceRuleParserRuleCall_7_0() { return cFunctionFunctionReferenceRuleParserRuleCall_7_0; }
+		//pipelines += PipelineReferenceRule
+		public Assignment getPipelinesAssignment_8() { return cPipelinesAssignment_8; }
 		
-		//'on'
-		public Keyword getOnKeyword_8() { return cOnKeyword_8; }
+		//PipelineReferenceRule
+		public RuleCall getPipelinesPipelineReferenceRuleParserRuleCall_8_0() { return cPipelinesPipelineReferenceRuleParserRuleCall_8_0; }
 		
-		//generator = GeneratorReferenceRule
-		public Assignment getGeneratorAssignment_9() { return cGeneratorAssignment_9; }
+		//(',' pipelines += PipelineReferenceRule)*
+		public Group getGroup_9() { return cGroup_9; }
 		
-		//GeneratorReferenceRule
-		public RuleCall getGeneratorGeneratorReferenceRuleParserRuleCall_9_0() { return cGeneratorGeneratorReferenceRuleParserRuleCall_9_0; }
+		//','
+		public Keyword getCommaKeyword_9_0() { return cCommaKeyword_9_0; }
 		
-		//';'
-		public Keyword getSemicolonKeyword_10() { return cSemicolonKeyword_10; }
-	}
-	public class GeneratorReferenceRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.generator.dsl.GeneratorDSL.GeneratorReferenceRule");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cGeneratorDefinitionReferenceRuleParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cLoopVariableReferenceParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		//pipelines += PipelineReferenceRule
+		public Assignment getPipelinesAssignment_9_1() { return cPipelinesAssignment_9_1; }
 		
-		//GeneratorReferenceRule returns GeneratorReference:
-		//    GeneratorDefinitionReferenceRule | LoopVariableReference
-		//;
-		@Override public ParserRule getRule() { return rule; }
+		//PipelineReferenceRule
+		public RuleCall getPipelinesPipelineReferenceRuleParserRuleCall_9_1_0() { return cPipelinesPipelineReferenceRuleParserRuleCall_9_1_0; }
 		
-		//GeneratorDefinitionReferenceRule | LoopVariableReference
-		public Alternatives getAlternatives() { return cAlternatives; }
+		//']'
+		public Keyword getRightSquareBracketKeyword_10() { return cRightSquareBracketKeyword_10; }
 		
-		//GeneratorDefinitionReferenceRule
-		public RuleCall getGeneratorDefinitionReferenceRuleParserRuleCall_0() { return cGeneratorDefinitionReferenceRuleParserRuleCall_0; }
-		
-		//LoopVariableReference
-		public RuleCall getLoopVariableReferenceParserRuleCall_1() { return cLoopVariableReferenceParserRuleCall_1; }
-	}
-	public class GeneratorDefinitionReferenceRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.generator.dsl.GeneratorDSL.GeneratorDefinitionReferenceRule");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cGeneratorKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cDefinitionAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final CrossReference cDefinitionGeneratorDefinitionCrossReference_1_0 = (CrossReference)cDefinitionAssignment_1.eContents().get(0);
-		private final RuleCall cDefinitionGeneratorDefinitionStringOrIdParserRuleCall_1_0_1 = (RuleCall)cDefinitionGeneratorDefinitionCrossReference_1_0.eContents().get(1);
-		
-		//GeneratorDefinitionReferenceRule returns GeneratorDefinitionReference:
-		//    'generator' definition = [ GeneratorDefinition | StringOrId ]
-		//;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//'generator' definition = [ GeneratorDefinition | StringOrId ]
-		public Group getGroup() { return cGroup; }
-		
-		//'generator'
-		public Keyword getGeneratorKeyword_0() { return cGeneratorKeyword_0; }
-		
-		//definition = [ GeneratorDefinition | StringOrId ]
-		public Assignment getDefinitionAssignment_1() { return cDefinitionAssignment_1; }
-		
-		//[ GeneratorDefinition | StringOrId ]
-		public CrossReference getDefinitionGeneratorDefinitionCrossReference_1_0() { return cDefinitionGeneratorDefinitionCrossReference_1_0; }
-		
-		//StringOrId
-		public RuleCall getDefinitionGeneratorDefinitionStringOrIdParserRuleCall_1_0_1() { return cDefinitionGeneratorDefinitionStringOrIdParserRuleCall_1_0_1; }
-	}
-	public class FunctionReferenceRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.generator.dsl.GeneratorDSL.FunctionReferenceRule");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cFunctionDefReferenceRuleParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cLoopVariableReferenceParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		
-		//FunctionReferenceRule returns FunctionReference:
-		//    FunctionDefReferenceRule | LoopVariableReference
-		//;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//FunctionDefReferenceRule | LoopVariableReference
-		public Alternatives getAlternatives() { return cAlternatives; }
-		
-		//FunctionDefReferenceRule
-		public RuleCall getFunctionDefReferenceRuleParserRuleCall_0() { return cFunctionDefReferenceRuleParserRuleCall_0; }
-		
-		//LoopVariableReference
-		public RuleCall getLoopVariableReferenceParserRuleCall_1() { return cLoopVariableReferenceParserRuleCall_1; }
-	}
-	public class FunctionDefReferenceRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.generator.dsl.GeneratorDSL.FunctionDefReferenceRule");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cFunctionDefinitionReferenceRuleParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cParametrizedFunctionDefinitionReferenceRuleParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		
-		//FunctionDefReferenceRule returns FunctionDefReference:
-		//    FunctionDefinitionReferenceRule | ParametrizedFunctionDefinitionReferenceRule
-		//;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//FunctionDefinitionReferenceRule | ParametrizedFunctionDefinitionReferenceRule
-		public Alternatives getAlternatives() { return cAlternatives; }
-		
-		//FunctionDefinitionReferenceRule
-		public RuleCall getFunctionDefinitionReferenceRuleParserRuleCall_0() { return cFunctionDefinitionReferenceRuleParserRuleCall_0; }
-		
-		//ParametrizedFunctionDefinitionReferenceRule
-		public RuleCall getParametrizedFunctionDefinitionReferenceRuleParserRuleCall_1() { return cParametrizedFunctionDefinitionReferenceRuleParserRuleCall_1; }
-	}
-	public class LoopVariableReferenceElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.generator.dsl.GeneratorDSL.LoopVariableReference");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cLoopVariableAction_0 = (Action)cGroup.eContents().get(0);
-		private final Assignment cDefinitionAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final CrossReference cDefinitionForStatementCrossReference_1_0 = (CrossReference)cDefinitionAssignment_1.eContents().get(0);
-		private final RuleCall cDefinitionForStatementIDTerminalRuleCall_1_0_1 = (RuleCall)cDefinitionForStatementCrossReference_1_0.eContents().get(1);
-		
-		//LoopVariableReference returns LoopVariable:
-		//    {LoopVariable} definition = [ForStatement | ID]
-		//;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//{LoopVariable} definition = [ForStatement | ID]
-		public Group getGroup() { return cGroup; }
-		
-		//{LoopVariable}
-		public Action getLoopVariableAction_0() { return cLoopVariableAction_0; }
-		
-		//definition = [ForStatement | ID]
-		public Assignment getDefinitionAssignment_1() { return cDefinitionAssignment_1; }
-		
-		//[ForStatement | ID]
-		public CrossReference getDefinitionForStatementCrossReference_1_0() { return cDefinitionForStatementCrossReference_1_0; }
-		
-		//ID
-		public RuleCall getDefinitionForStatementIDTerminalRuleCall_1_0_1() { return cDefinitionForStatementIDTerminalRuleCall_1_0_1; }
-	}
-	public class FunctionDefinitionReferenceRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.generator.dsl.GeneratorDSL.FunctionDefinitionReferenceRule");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cFunctionDefinitionReferenceAction_0 = (Action)cGroup.eContents().get(0);
-		private final Keyword cDefinitionKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Assignment cDefinitionAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final CrossReference cDefinitionTypeDefinitionCrossReference_2_0 = (CrossReference)cDefinitionAssignment_2.eContents().get(0);
-		private final RuleCall cDefinitionTypeDefinitionStringOrIdParserRuleCall_2_0_1 = (RuleCall)cDefinitionTypeDefinitionCrossReference_2_0.eContents().get(1);
-		
-		//FunctionDefinitionReferenceRule returns FunctionDefinitionReference:
-		//    {FunctionDefinitionReference} 'definition' definition = [TypeDefinition|StringOrId]
-		//;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//{FunctionDefinitionReference} 'definition' definition = [TypeDefinition|StringOrId]
-		public Group getGroup() { return cGroup; }
-		
-		//{FunctionDefinitionReference}
-		public Action getFunctionDefinitionReferenceAction_0() { return cFunctionDefinitionReferenceAction_0; }
-		
-		//'definition'
-		public Keyword getDefinitionKeyword_1() { return cDefinitionKeyword_1; }
-		
-		//definition = [TypeDefinition|StringOrId]
-		public Assignment getDefinitionAssignment_2() { return cDefinitionAssignment_2; }
-		
-		//[TypeDefinition|StringOrId]
-		public CrossReference getDefinitionTypeDefinitionCrossReference_2_0() { return cDefinitionTypeDefinitionCrossReference_2_0; }
-		
-		//StringOrId
-		public RuleCall getDefinitionTypeDefinitionStringOrIdParserRuleCall_2_0_1() { return cDefinitionTypeDefinitionStringOrIdParserRuleCall_2_0_1; }
-	}
-	public class ParametrizedFunctionDefinitionReferenceRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.generator.dsl.GeneratorDSL.ParametrizedFunctionDefinitionReferenceRule");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cParametrizedFunctionDefinitionReferenceAction_0 = (Action)cGroup.eContents().get(0);
-		private final Keyword cFunctionKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Assignment cDefinitionAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final CrossReference cDefinitionParametrizedFunctionDefinitionCrossReference_2_0 = (CrossReference)cDefinitionAssignment_2.eContents().get(0);
-		private final RuleCall cDefinitionParametrizedFunctionDefinitionStringOrIdParserRuleCall_2_0_1 = (RuleCall)cDefinitionParametrizedFunctionDefinitionCrossReference_2_0.eContents().get(1);
-		
-		//ParametrizedFunctionDefinitionReferenceRule returns ParametrizedFunctionDefinitionReference:
-		//    {ParametrizedFunctionDefinitionReference} 'function' definition = [ParametrizedFunctionDefinition|StringOrId]
-		//;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//{ParametrizedFunctionDefinitionReference} 'function' definition = [ParametrizedFunctionDefinition|StringOrId]
-		public Group getGroup() { return cGroup; }
-		
-		//{ParametrizedFunctionDefinitionReference}
-		public Action getParametrizedFunctionDefinitionReferenceAction_0() { return cParametrizedFunctionDefinitionReferenceAction_0; }
-		
-		//'function'
-		public Keyword getFunctionKeyword_1() { return cFunctionKeyword_1; }
-		
-		//definition = [ParametrizedFunctionDefinition|StringOrId]
-		public Assignment getDefinitionAssignment_2() { return cDefinitionAssignment_2; }
-		
-		//[ParametrizedFunctionDefinition|StringOrId]
-		public CrossReference getDefinitionParametrizedFunctionDefinitionCrossReference_2_0() { return cDefinitionParametrizedFunctionDefinitionCrossReference_2_0; }
-		
-		//StringOrId
-		public RuleCall getDefinitionParametrizedFunctionDefinitionStringOrIdParserRuleCall_2_0_1() { return cDefinitionParametrizedFunctionDefinitionStringOrIdParserRuleCall_2_0_1; }
+		//'s;'
+		public Keyword getSKeyword_11() { return cSKeyword_11; }
 	}
 	
 	
 	private final ConfigurationRuleElements pConfigurationRule;
 	private final UseRuleElements pUseRule;
-	private final ParametrizedFunctionDefinitionRuleElements pParametrizedFunctionDefinitionRule;
-	private final GeneratorDefinitionRuleElements pGeneratorDefinitionRule;
+	private final PipelineDefinitionRuleElements pPipelineDefinitionRule;
 	private final StatementRuleElements pStatementRule;
 	private final ForStatementRuleElements pForStatementRule;
 	private final RangeRuleElements pRangeRule;
 	private final CounterRangeRuleElements pCounterRangeRule;
-	private final FunctionsRuleElements pFunctionsRule;
-	private final FunctionReferencesRuleElements pFunctionReferencesRule;
-	private final GeneratorsRuleElements pGeneratorsRule;
-	private final GeneratorReferencesRuleElements pGeneratorReferencesRule;
+	private final PipelineArrayRuleElements pPipelineArrayRule;
+	private final PipelineReferenceRuleElements pPipelineReferenceRule;
 	private final ApplyStatementRuleElements pApplyStatementRule;
-	private final GeneratorReferenceRuleElements pGeneratorReferenceRule;
-	private final GeneratorDefinitionReferenceRuleElements pGeneratorDefinitionReferenceRule;
-	private final FunctionReferenceRuleElements pFunctionReferenceRule;
-	private final FunctionDefReferenceRuleElements pFunctionDefReferenceRule;
-	private final LoopVariableReferenceElements pLoopVariableReference;
-	private final FunctionDefinitionReferenceRuleElements pFunctionDefinitionReferenceRule;
-	private final ParametrizedFunctionDefinitionReferenceRuleElements pParametrizedFunctionDefinitionReferenceRule;
 	
 	private final Grammar grammar;
 	
@@ -779,24 +487,14 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 		this.gaTerminals = gaTerminals;
 		this.pConfigurationRule = new ConfigurationRuleElements();
 		this.pUseRule = new UseRuleElements();
-		this.pParametrizedFunctionDefinitionRule = new ParametrizedFunctionDefinitionRuleElements();
-		this.pGeneratorDefinitionRule = new GeneratorDefinitionRuleElements();
+		this.pPipelineDefinitionRule = new PipelineDefinitionRuleElements();
 		this.pStatementRule = new StatementRuleElements();
 		this.pForStatementRule = new ForStatementRuleElements();
 		this.pRangeRule = new RangeRuleElements();
 		this.pCounterRangeRule = new CounterRangeRuleElements();
-		this.pFunctionsRule = new FunctionsRuleElements();
-		this.pFunctionReferencesRule = new FunctionReferencesRuleElements();
-		this.pGeneratorsRule = new GeneratorsRuleElements();
-		this.pGeneratorReferencesRule = new GeneratorReferencesRuleElements();
+		this.pPipelineArrayRule = new PipelineArrayRuleElements();
+		this.pPipelineReferenceRule = new PipelineReferenceRuleElements();
 		this.pApplyStatementRule = new ApplyStatementRuleElements();
-		this.pGeneratorReferenceRule = new GeneratorReferenceRuleElements();
-		this.pGeneratorDefinitionReferenceRule = new GeneratorDefinitionReferenceRuleElements();
-		this.pFunctionReferenceRule = new FunctionReferenceRuleElements();
-		this.pFunctionDefReferenceRule = new FunctionDefReferenceRuleElements();
-		this.pLoopVariableReference = new LoopVariableReferenceElements();
-		this.pFunctionDefinitionReferenceRule = new FunctionDefinitionReferenceRuleElements();
-		this.pParametrizedFunctionDefinitionReferenceRule = new ParametrizedFunctionDefinitionReferenceRuleElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -836,8 +534,7 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 	
 	//ConfigurationRule returns Configuration:
 	//    (uses += UseRule)*
-	//    (generators += GeneratorDefinitionRule)*
-	//    (functions += ParametrizedFunctionDefinitionRule)*
+	//    (pipelines += PipelineDefinitionRule)*
 	//    (statements    += StatementRule)*
 	//;
 	public ConfigurationRuleElements getConfigurationRuleAccess() {
@@ -859,30 +556,17 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 		return getUseRuleAccess().getRule();
 	}
 	
-	//ParametrizedFunctionDefinitionRule returns ParametrizedFunctionDefinition:
-	//    'function' name = StringOrId 'using'
-	//       definition = InstanceRule
-	//    ';'
+	//PipelineDefinitionRule returns PipelineDefinition:
+	//    'pipeline' name = StringOrId '['
+	//        (definitions += InstanceRule (',' definitions += InstanceRule)*)?
+	//    ']'
 	//;
-	public ParametrizedFunctionDefinitionRuleElements getParametrizedFunctionDefinitionRuleAccess() {
-		return pParametrizedFunctionDefinitionRule;
+	public PipelineDefinitionRuleElements getPipelineDefinitionRuleAccess() {
+		return pPipelineDefinitionRule;
 	}
 	
-	public ParserRule getParametrizedFunctionDefinitionRuleRule() {
-		return getParametrizedFunctionDefinitionRuleAccess().getRule();
-	}
-	
-	//GeneratorDefinitionRule returns GeneratorDefinition:
-	//    'generator' name = StringOrId 'using'
-	//        definition = InstanceRule
-	//    ';'
-	//;
-	public GeneratorDefinitionRuleElements getGeneratorDefinitionRuleAccess() {
-		return pGeneratorDefinitionRule;
-	}
-	
-	public ParserRule getGeneratorDefinitionRuleRule() {
-		return getGeneratorDefinitionRuleAccess().getRule();
+	public ParserRule getPipelineDefinitionRuleRule() {
+		return getPipelineDefinitionRuleAccess().getRule();
 	}
 	
 	//StatementRule returns Statement:
@@ -910,7 +594,7 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 	}
 	
 	//RangeRule returns Range:
-	//    FunctionsRule | GeneratorsRule | CounterRangeRule
+	//    PipelineArrayRule | CounterRangeRule
 	//;
 	public RangeRuleElements getRangeRuleAccess() {
 		return pRangeRule;
@@ -931,52 +615,30 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 		return getCounterRangeRuleAccess().getRule();
 	}
 	
-	//FunctionsRule returns Functions:
-	//    {Functions} 'functions' (functionReferences = FunctionReferencesRule)?
+	//PipelineArrayRule returns PipelineArray:
+	//    {PipelineArray} 'pipelines' ('[' references += PipelineReferenceRule (',' references += PipelineReferenceRule)* ']')?
 	//;
-	public FunctionsRuleElements getFunctionsRuleAccess() {
-		return pFunctionsRule;
+	public PipelineArrayRuleElements getPipelineArrayRuleAccess() {
+		return pPipelineArrayRule;
 	}
 	
-	public ParserRule getFunctionsRuleRule() {
-		return getFunctionsRuleAccess().getRule();
+	public ParserRule getPipelineArrayRuleRule() {
+		return getPipelineArrayRuleAccess().getRule();
 	}
 	
-	//FunctionReferencesRule returns FunctionReferences:
-	//    '[' functions += FunctionDefReferenceRule (',' functions += FunctionDefReferenceRule)* ']'
+	//PipelineReferenceRule returns PipelineReference:
+	//    pipeline = [PipelineDefinition|StringOrId]
 	//;
-	public FunctionReferencesRuleElements getFunctionReferencesRuleAccess() {
-		return pFunctionReferencesRule;
+	public PipelineReferenceRuleElements getPipelineReferenceRuleAccess() {
+		return pPipelineReferenceRule;
 	}
 	
-	public ParserRule getFunctionReferencesRuleRule() {
-		return getFunctionReferencesRuleAccess().getRule();
-	}
-	
-	//GeneratorsRule returns Generators:
-	//    {Generators} 'generators' (generatorReferences = GeneratorReferencesRule)?
-	//;
-	public GeneratorsRuleElements getGeneratorsRuleAccess() {
-		return pGeneratorsRule;
-	}
-	
-	public ParserRule getGeneratorsRuleRule() {
-		return getGeneratorsRuleAccess().getRule();
-	}
-	
-	//GeneratorReferencesRule returns GeneratorReferences:
-	//    '[' generators += [GeneratorDefinition|StringOrId] (',' generators += [GeneratorDefinition|StringOrId])* ']'
-	//;
-	public GeneratorReferencesRuleElements getGeneratorReferencesRuleAccess() {
-		return pGeneratorReferencesRule;
-	}
-	
-	public ParserRule getGeneratorReferencesRuleRule() {
-		return getGeneratorReferencesRuleAccess().getRule();
+	public ParserRule getPipelineReferenceRuleRule() {
+		return getPipelineReferenceRuleAccess().getRule();
 	}
 	
 	//ApplyStatementRule returns ApplyStatement:
-	//    'write' file = STRING 'with' count = INT 'samples' 'from' 'applying'  function = FunctionReferenceRule 'on' generator = GeneratorReferenceRule ';'
+	//    'write' file = STRING 'with' count = INT 'samples' 'from' 'executing' '[' pipelines += PipelineReferenceRule (',' pipelines += PipelineReferenceRule)* ']' 's;'
 	//;
 	public ApplyStatementRuleElements getApplyStatementRuleAccess() {
 		return pApplyStatementRule;
@@ -984,83 +646,6 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 	
 	public ParserRule getApplyStatementRuleRule() {
 		return getApplyStatementRuleAccess().getRule();
-	}
-	
-	//GeneratorReferenceRule returns GeneratorReference:
-	//    GeneratorDefinitionReferenceRule | LoopVariableReference
-	//;
-	public GeneratorReferenceRuleElements getGeneratorReferenceRuleAccess() {
-		return pGeneratorReferenceRule;
-	}
-	
-	public ParserRule getGeneratorReferenceRuleRule() {
-		return getGeneratorReferenceRuleAccess().getRule();
-	}
-	
-	//GeneratorDefinitionReferenceRule returns GeneratorDefinitionReference:
-	//    'generator' definition = [ GeneratorDefinition | StringOrId ]
-	//;
-	public GeneratorDefinitionReferenceRuleElements getGeneratorDefinitionReferenceRuleAccess() {
-		return pGeneratorDefinitionReferenceRule;
-	}
-	
-	public ParserRule getGeneratorDefinitionReferenceRuleRule() {
-		return getGeneratorDefinitionReferenceRuleAccess().getRule();
-	}
-	
-	//FunctionReferenceRule returns FunctionReference:
-	//    FunctionDefReferenceRule | LoopVariableReference
-	//;
-	public FunctionReferenceRuleElements getFunctionReferenceRuleAccess() {
-		return pFunctionReferenceRule;
-	}
-	
-	public ParserRule getFunctionReferenceRuleRule() {
-		return getFunctionReferenceRuleAccess().getRule();
-	}
-	
-	//FunctionDefReferenceRule returns FunctionDefReference:
-	//    FunctionDefinitionReferenceRule | ParametrizedFunctionDefinitionReferenceRule
-	//;
-	public FunctionDefReferenceRuleElements getFunctionDefReferenceRuleAccess() {
-		return pFunctionDefReferenceRule;
-	}
-	
-	public ParserRule getFunctionDefReferenceRuleRule() {
-		return getFunctionDefReferenceRuleAccess().getRule();
-	}
-	
-	//LoopVariableReference returns LoopVariable:
-	//    {LoopVariable} definition = [ForStatement | ID]
-	//;
-	public LoopVariableReferenceElements getLoopVariableReferenceAccess() {
-		return pLoopVariableReference;
-	}
-	
-	public ParserRule getLoopVariableReferenceRule() {
-		return getLoopVariableReferenceAccess().getRule();
-	}
-	
-	//FunctionDefinitionReferenceRule returns FunctionDefinitionReference:
-	//    {FunctionDefinitionReference} 'definition' definition = [TypeDefinition|StringOrId]
-	//;
-	public FunctionDefinitionReferenceRuleElements getFunctionDefinitionReferenceRuleAccess() {
-		return pFunctionDefinitionReferenceRule;
-	}
-	
-	public ParserRule getFunctionDefinitionReferenceRuleRule() {
-		return getFunctionDefinitionReferenceRuleAccess().getRule();
-	}
-	
-	//ParametrizedFunctionDefinitionReferenceRule returns ParametrizedFunctionDefinitionReference:
-	//    {ParametrizedFunctionDefinitionReference} 'function' definition = [ParametrizedFunctionDefinition|StringOrId]
-	//;
-	public ParametrizedFunctionDefinitionReferenceRuleElements getParametrizedFunctionDefinitionReferenceRuleAccess() {
-		return pParametrizedFunctionDefinitionReferenceRule;
-	}
-	
-	public ParserRule getParametrizedFunctionDefinitionReferenceRuleRule() {
-		return getParametrizedFunctionDefinitionReferenceRuleAccess().getRule();
 	}
 	
 	//InstanceRule returns Instance:

@@ -4,9 +4,8 @@
 package de.evoal.languages.model.generator.impl;
 
 import de.evoal.languages.model.generator.Configuration;
-import de.evoal.languages.model.generator.GeneratorDefinition;
 import de.evoal.languages.model.generator.GeneratorPackage;
-import de.evoal.languages.model.generator.ParametrizedFunctionDefinition;
+import de.evoal.languages.model.generator.PipelineDefinition;
 import de.evoal.languages.model.generator.Statement;
 import de.evoal.languages.model.generator.Use;
 
@@ -33,8 +32,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * </p>
  * <ul>
  *   <li>{@link de.evoal.languages.model.generator.impl.ConfigurationImpl#getUses <em>Uses</em>}</li>
- *   <li>{@link de.evoal.languages.model.generator.impl.ConfigurationImpl#getGenerators <em>Generators</em>}</li>
- *   <li>{@link de.evoal.languages.model.generator.impl.ConfigurationImpl#getFunctions <em>Functions</em>}</li>
+ *   <li>{@link de.evoal.languages.model.generator.impl.ConfigurationImpl#getPipelines <em>Pipelines</em>}</li>
  *   <li>{@link de.evoal.languages.model.generator.impl.ConfigurationImpl#getStatements <em>Statements</em>}</li>
  * </ul>
  *
@@ -52,24 +50,14 @@ public class ConfigurationImpl extends MinimalEObjectImpl.Container implements C
 	protected EList<Use> uses;
 
 	/**
-	 * The cached value of the '{@link #getGenerators() <em>Generators</em>}' containment reference list.
+	 * The cached value of the '{@link #getPipelines() <em>Pipelines</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getGenerators()
+	 * @see #getPipelines()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<GeneratorDefinition> generators;
-
-	/**
-	 * The cached value of the '{@link #getFunctions() <em>Functions</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getFunctions()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<ParametrizedFunctionDefinition> functions;
+	protected EList<PipelineDefinition> pipelines;
 
 	/**
 	 * The cached value of the '{@link #getStatements() <em>Statements</em>}' containment reference list.
@@ -119,24 +107,11 @@ public class ConfigurationImpl extends MinimalEObjectImpl.Container implements C
 	 * @generated
 	 */
 	@Override
-	public EList<GeneratorDefinition> getGenerators() {
-		if (generators == null) {
-			generators = new EObjectContainmentEList<GeneratorDefinition>(GeneratorDefinition.class, this, GeneratorPackage.CONFIGURATION__GENERATORS);
+	public EList<PipelineDefinition> getPipelines() {
+		if (pipelines == null) {
+			pipelines = new EObjectContainmentEList<PipelineDefinition>(PipelineDefinition.class, this, GeneratorPackage.CONFIGURATION__PIPELINES);
 		}
-		return generators;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EList<ParametrizedFunctionDefinition> getFunctions() {
-		if (functions == null) {
-			functions = new EObjectContainmentEList<ParametrizedFunctionDefinition>(ParametrizedFunctionDefinition.class, this, GeneratorPackage.CONFIGURATION__FUNCTIONS);
-		}
-		return functions;
+		return pipelines;
 	}
 
 	/**
@@ -162,10 +137,8 @@ public class ConfigurationImpl extends MinimalEObjectImpl.Container implements C
 		switch (featureID) {
 			case GeneratorPackage.CONFIGURATION__USES:
 				return ((InternalEList<?>)getUses()).basicRemove(otherEnd, msgs);
-			case GeneratorPackage.CONFIGURATION__GENERATORS:
-				return ((InternalEList<?>)getGenerators()).basicRemove(otherEnd, msgs);
-			case GeneratorPackage.CONFIGURATION__FUNCTIONS:
-				return ((InternalEList<?>)getFunctions()).basicRemove(otherEnd, msgs);
+			case GeneratorPackage.CONFIGURATION__PIPELINES:
+				return ((InternalEList<?>)getPipelines()).basicRemove(otherEnd, msgs);
 			case GeneratorPackage.CONFIGURATION__STATEMENTS:
 				return ((InternalEList<?>)getStatements()).basicRemove(otherEnd, msgs);
 		}
@@ -182,10 +155,8 @@ public class ConfigurationImpl extends MinimalEObjectImpl.Container implements C
 		switch (featureID) {
 			case GeneratorPackage.CONFIGURATION__USES:
 				return getUses();
-			case GeneratorPackage.CONFIGURATION__GENERATORS:
-				return getGenerators();
-			case GeneratorPackage.CONFIGURATION__FUNCTIONS:
-				return getFunctions();
+			case GeneratorPackage.CONFIGURATION__PIPELINES:
+				return getPipelines();
 			case GeneratorPackage.CONFIGURATION__STATEMENTS:
 				return getStatements();
 		}
@@ -205,13 +176,9 @@ public class ConfigurationImpl extends MinimalEObjectImpl.Container implements C
 				getUses().clear();
 				getUses().addAll((Collection<? extends Use>)newValue);
 				return;
-			case GeneratorPackage.CONFIGURATION__GENERATORS:
-				getGenerators().clear();
-				getGenerators().addAll((Collection<? extends GeneratorDefinition>)newValue);
-				return;
-			case GeneratorPackage.CONFIGURATION__FUNCTIONS:
-				getFunctions().clear();
-				getFunctions().addAll((Collection<? extends ParametrizedFunctionDefinition>)newValue);
+			case GeneratorPackage.CONFIGURATION__PIPELINES:
+				getPipelines().clear();
+				getPipelines().addAll((Collection<? extends PipelineDefinition>)newValue);
 				return;
 			case GeneratorPackage.CONFIGURATION__STATEMENTS:
 				getStatements().clear();
@@ -232,11 +199,8 @@ public class ConfigurationImpl extends MinimalEObjectImpl.Container implements C
 			case GeneratorPackage.CONFIGURATION__USES:
 				getUses().clear();
 				return;
-			case GeneratorPackage.CONFIGURATION__GENERATORS:
-				getGenerators().clear();
-				return;
-			case GeneratorPackage.CONFIGURATION__FUNCTIONS:
-				getFunctions().clear();
+			case GeneratorPackage.CONFIGURATION__PIPELINES:
+				getPipelines().clear();
 				return;
 			case GeneratorPackage.CONFIGURATION__STATEMENTS:
 				getStatements().clear();
@@ -255,10 +219,8 @@ public class ConfigurationImpl extends MinimalEObjectImpl.Container implements C
 		switch (featureID) {
 			case GeneratorPackage.CONFIGURATION__USES:
 				return uses != null && !uses.isEmpty();
-			case GeneratorPackage.CONFIGURATION__GENERATORS:
-				return generators != null && !generators.isEmpty();
-			case GeneratorPackage.CONFIGURATION__FUNCTIONS:
-				return functions != null && !functions.isEmpty();
+			case GeneratorPackage.CONFIGURATION__PIPELINES:
+				return pipelines != null && !pipelines.isEmpty();
 			case GeneratorPackage.CONFIGURATION__STATEMENTS:
 				return statements != null && !statements.isEmpty();
 		}

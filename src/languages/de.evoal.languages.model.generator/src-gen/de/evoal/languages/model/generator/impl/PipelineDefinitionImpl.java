@@ -3,13 +3,17 @@
  */
 package de.evoal.languages.model.generator.impl;
 
-import de.evoal.languages.model.generator.GeneratorDefinition;
 import de.evoal.languages.model.generator.GeneratorPackage;
+import de.evoal.languages.model.generator.PipelineDefinition;
 
 import de.evoal.languages.model.instance.Instance;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -17,21 +21,24 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
+
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Definition</b></em>'.
+ * An implementation of the model object '<em><b>Pipeline Definition</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link de.evoal.languages.model.generator.impl.GeneratorDefinitionImpl#getName <em>Name</em>}</li>
- *   <li>{@link de.evoal.languages.model.generator.impl.GeneratorDefinitionImpl#getDefinition <em>Definition</em>}</li>
+ *   <li>{@link de.evoal.languages.model.generator.impl.PipelineDefinitionImpl#getName <em>Name</em>}</li>
+ *   <li>{@link de.evoal.languages.model.generator.impl.PipelineDefinitionImpl#getDefinitions <em>Definitions</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class GeneratorDefinitionImpl extends MinimalEObjectImpl.Container implements GeneratorDefinition {
+public class PipelineDefinitionImpl extends MinimalEObjectImpl.Container implements PipelineDefinition {
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -53,21 +60,21 @@ public class GeneratorDefinitionImpl extends MinimalEObjectImpl.Container implem
 	protected String name = NAME_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getDefinition() <em>Definition</em>}' containment reference.
+	 * The cached value of the '{@link #getDefinitions() <em>Definitions</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getDefinition()
+	 * @see #getDefinitions()
 	 * @generated
 	 * @ordered
 	 */
-	protected Instance definition;
+	protected EList<Instance> definitions;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected GeneratorDefinitionImpl() {
+	protected PipelineDefinitionImpl() {
 		super();
 	}
 
@@ -78,7 +85,7 @@ public class GeneratorDefinitionImpl extends MinimalEObjectImpl.Container implem
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return GeneratorPackage.Literals.GENERATOR_DEFINITION;
+		return GeneratorPackage.Literals.PIPELINE_DEFINITION;
 	}
 
 	/**
@@ -101,7 +108,7 @@ public class GeneratorDefinitionImpl extends MinimalEObjectImpl.Container implem
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, GeneratorPackage.GENERATOR_DEFINITION__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, GeneratorPackage.PIPELINE_DEFINITION__NAME, oldName, name));
 	}
 
 	/**
@@ -110,43 +117,11 @@ public class GeneratorDefinitionImpl extends MinimalEObjectImpl.Container implem
 	 * @generated
 	 */
 	@Override
-	public Instance getDefinition() {
-		return definition;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetDefinition(Instance newDefinition, NotificationChain msgs) {
-		Instance oldDefinition = definition;
-		definition = newDefinition;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, GeneratorPackage.GENERATOR_DEFINITION__DEFINITION, oldDefinition, newDefinition);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
+	public EList<Instance> getDefinitions() {
+		if (definitions == null) {
+			definitions = new EObjectContainmentEList<Instance>(Instance.class, this, GeneratorPackage.PIPELINE_DEFINITION__DEFINITIONS);
 		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setDefinition(Instance newDefinition) {
-		if (newDefinition != definition) {
-			NotificationChain msgs = null;
-			if (definition != null)
-				msgs = ((InternalEObject)definition).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - GeneratorPackage.GENERATOR_DEFINITION__DEFINITION, null, msgs);
-			if (newDefinition != null)
-				msgs = ((InternalEObject)newDefinition).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - GeneratorPackage.GENERATOR_DEFINITION__DEFINITION, null, msgs);
-			msgs = basicSetDefinition(newDefinition, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, GeneratorPackage.GENERATOR_DEFINITION__DEFINITION, newDefinition, newDefinition));
+		return definitions;
 	}
 
 	/**
@@ -157,8 +132,8 @@ public class GeneratorDefinitionImpl extends MinimalEObjectImpl.Container implem
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case GeneratorPackage.GENERATOR_DEFINITION__DEFINITION:
-				return basicSetDefinition(null, msgs);
+			case GeneratorPackage.PIPELINE_DEFINITION__DEFINITIONS:
+				return ((InternalEList<?>)getDefinitions()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -171,10 +146,10 @@ public class GeneratorDefinitionImpl extends MinimalEObjectImpl.Container implem
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case GeneratorPackage.GENERATOR_DEFINITION__NAME:
+			case GeneratorPackage.PIPELINE_DEFINITION__NAME:
 				return getName();
-			case GeneratorPackage.GENERATOR_DEFINITION__DEFINITION:
-				return getDefinition();
+			case GeneratorPackage.PIPELINE_DEFINITION__DEFINITIONS:
+				return getDefinitions();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -184,14 +159,16 @@ public class GeneratorDefinitionImpl extends MinimalEObjectImpl.Container implem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case GeneratorPackage.GENERATOR_DEFINITION__NAME:
+			case GeneratorPackage.PIPELINE_DEFINITION__NAME:
 				setName((String)newValue);
 				return;
-			case GeneratorPackage.GENERATOR_DEFINITION__DEFINITION:
-				setDefinition((Instance)newValue);
+			case GeneratorPackage.PIPELINE_DEFINITION__DEFINITIONS:
+				getDefinitions().clear();
+				getDefinitions().addAll((Collection<? extends Instance>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -205,11 +182,11 @@ public class GeneratorDefinitionImpl extends MinimalEObjectImpl.Container implem
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case GeneratorPackage.GENERATOR_DEFINITION__NAME:
+			case GeneratorPackage.PIPELINE_DEFINITION__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case GeneratorPackage.GENERATOR_DEFINITION__DEFINITION:
-				setDefinition((Instance)null);
+			case GeneratorPackage.PIPELINE_DEFINITION__DEFINITIONS:
+				getDefinitions().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -223,10 +200,10 @@ public class GeneratorDefinitionImpl extends MinimalEObjectImpl.Container implem
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case GeneratorPackage.GENERATOR_DEFINITION__NAME:
+			case GeneratorPackage.PIPELINE_DEFINITION__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case GeneratorPackage.GENERATOR_DEFINITION__DEFINITION:
-				return definition != null;
+			case GeneratorPackage.PIPELINE_DEFINITION__DEFINITIONS:
+				return definitions != null && !definitions.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -247,4 +224,4 @@ public class GeneratorDefinitionImpl extends MinimalEObjectImpl.Container implem
 		return result.toString();
 	}
 
-} //GeneratorDefinitionImpl
+} //PipelineDefinitionImpl

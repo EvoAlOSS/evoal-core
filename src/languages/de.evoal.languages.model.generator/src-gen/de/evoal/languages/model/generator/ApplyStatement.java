@@ -3,6 +3,7 @@
  */
 package de.evoal.languages.model.generator;
 
+import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -15,8 +16,7 @@ package de.evoal.languages.model.generator;
  * <ul>
  *   <li>{@link de.evoal.languages.model.generator.ApplyStatement#getFile <em>File</em>}</li>
  *   <li>{@link de.evoal.languages.model.generator.ApplyStatement#getCount <em>Count</em>}</li>
- *   <li>{@link de.evoal.languages.model.generator.ApplyStatement#getFunction <em>Function</em>}</li>
- *   <li>{@link de.evoal.languages.model.generator.ApplyStatement#getGenerator <em>Generator</em>}</li>
+ *   <li>{@link de.evoal.languages.model.generator.ApplyStatement#getPipelines <em>Pipelines</em>}</li>
  * </ul>
  *
  * @see de.evoal.languages.model.generator.GeneratorPackage#getApplyStatement()
@@ -69,47 +69,16 @@ public interface ApplyStatement extends Statement {
 	void setCount(int value);
 
 	/**
-	 * Returns the value of the '<em><b>Function</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Pipelines</b></em>' containment reference list.
+	 * The list contents are of type {@link de.evoal.languages.model.generator.PipelineReference}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Function</em>' containment reference.
-	 * @see #setFunction(FunctionReference)
-	 * @see de.evoal.languages.model.generator.GeneratorPackage#getApplyStatement_Function()
-	 * @model containment="true"
+	 * @return the value of the '<em>Pipelines</em>' containment reference list.
+	 * @see de.evoal.languages.model.generator.GeneratorPackage#getApplyStatement_Pipelines()
+	 * @model containment="true" ordered="false"
+	 *        annotation="http://www.eclipse.org/OCL/Collection nullFree='false'"
 	 * @generated
 	 */
-	FunctionReference getFunction();
-
-	/**
-	 * Sets the value of the '{@link de.evoal.languages.model.generator.ApplyStatement#getFunction <em>Function</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Function</em>' containment reference.
-	 * @see #getFunction()
-	 * @generated
-	 */
-	void setFunction(FunctionReference value);
-
-	/**
-	 * Returns the value of the '<em><b>Generator</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Generator</em>' containment reference.
-	 * @see #setGenerator(GeneratorReference)
-	 * @see de.evoal.languages.model.generator.GeneratorPackage#getApplyStatement_Generator()
-	 * @model containment="true"
-	 * @generated
-	 */
-	GeneratorReference getGenerator();
-
-	/**
-	 * Sets the value of the '{@link de.evoal.languages.model.generator.ApplyStatement#getGenerator <em>Generator</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Generator</em>' containment reference.
-	 * @see #getGenerator()
-	 * @generated
-	 */
-	void setGenerator(GeneratorReference value);
+	EList<PipelineReference> getPipelines();
 
 } // ApplyStatement

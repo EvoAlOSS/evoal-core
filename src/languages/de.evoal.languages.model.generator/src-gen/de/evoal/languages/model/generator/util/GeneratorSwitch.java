@@ -79,15 +79,9 @@ public class GeneratorSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case GeneratorPackage.PARAMETRIZED_FUNCTION_DEFINITION: {
-				ParametrizedFunctionDefinition parametrizedFunctionDefinition = (ParametrizedFunctionDefinition)theEObject;
-				T result = caseParametrizedFunctionDefinition(parametrizedFunctionDefinition);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case GeneratorPackage.GENERATOR_DEFINITION: {
-				GeneratorDefinition generatorDefinition = (GeneratorDefinition)theEObject;
-				T result = caseGeneratorDefinition(generatorDefinition);
+			case GeneratorPackage.PIPELINE_DEFINITION: {
+				PipelineDefinition pipelineDefinition = (PipelineDefinition)theEObject;
+				T result = casePipelineDefinition(pipelineDefinition);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -117,29 +111,16 @@ public class GeneratorSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case GeneratorPackage.FUNCTIONS: {
-				Functions functions = (Functions)theEObject;
-				T result = caseFunctions(functions);
-				if (result == null) result = caseRange(functions);
+			case GeneratorPackage.PIPELINE_ARRAY: {
+				PipelineArray pipelineArray = (PipelineArray)theEObject;
+				T result = casePipelineArray(pipelineArray);
+				if (result == null) result = caseRange(pipelineArray);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case GeneratorPackage.FUNCTION_REFERENCES: {
-				FunctionReferences functionReferences = (FunctionReferences)theEObject;
-				T result = caseFunctionReferences(functionReferences);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case GeneratorPackage.GENERATORS: {
-				Generators generators = (Generators)theEObject;
-				T result = caseGenerators(generators);
-				if (result == null) result = caseRange(generators);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case GeneratorPackage.GENERATOR_REFERENCES: {
-				GeneratorReferences generatorReferences = (GeneratorReferences)theEObject;
-				T result = caseGeneratorReferences(generatorReferences);
+			case GeneratorPackage.PIPELINE_REFERENCE: {
+				PipelineReference pipelineReference = (PipelineReference)theEObject;
+				T result = casePipelineReference(pipelineReference);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -147,56 +128,6 @@ public class GeneratorSwitch<T> extends Switch<T> {
 				ApplyStatement applyStatement = (ApplyStatement)theEObject;
 				T result = caseApplyStatement(applyStatement);
 				if (result == null) result = caseStatement(applyStatement);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case GeneratorPackage.GENERATOR_REFERENCE: {
-				GeneratorReference generatorReference = (GeneratorReference)theEObject;
-				T result = caseGeneratorReference(generatorReference);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case GeneratorPackage.GENERATOR_DEFINITION_REFERENCE: {
-				GeneratorDefinitionReference generatorDefinitionReference = (GeneratorDefinitionReference)theEObject;
-				T result = caseGeneratorDefinitionReference(generatorDefinitionReference);
-				if (result == null) result = caseGeneratorReference(generatorDefinitionReference);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case GeneratorPackage.FUNCTION_REFERENCE: {
-				FunctionReference functionReference = (FunctionReference)theEObject;
-				T result = caseFunctionReference(functionReference);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case GeneratorPackage.FUNCTION_DEF_REFERENCE: {
-				FunctionDefReference functionDefReference = (FunctionDefReference)theEObject;
-				T result = caseFunctionDefReference(functionDefReference);
-				if (result == null) result = caseFunctionReference(functionDefReference);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case GeneratorPackage.LOOP_VARIABLE: {
-				LoopVariable loopVariable = (LoopVariable)theEObject;
-				T result = caseLoopVariable(loopVariable);
-				if (result == null) result = caseGeneratorReference(loopVariable);
-				if (result == null) result = caseFunctionReference(loopVariable);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case GeneratorPackage.FUNCTION_DEFINITION_REFERENCE: {
-				FunctionDefinitionReference functionDefinitionReference = (FunctionDefinitionReference)theEObject;
-				T result = caseFunctionDefinitionReference(functionDefinitionReference);
-				if (result == null) result = caseFunctionDefReference(functionDefinitionReference);
-				if (result == null) result = caseFunctionReference(functionDefinitionReference);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case GeneratorPackage.PARAMETRIZED_FUNCTION_DEFINITION_REFERENCE: {
-				ParametrizedFunctionDefinitionReference parametrizedFunctionDefinitionReference = (ParametrizedFunctionDefinitionReference)theEObject;
-				T result = caseParametrizedFunctionDefinitionReference(parametrizedFunctionDefinitionReference);
-				if (result == null) result = caseFunctionDefReference(parametrizedFunctionDefinitionReference);
-				if (result == null) result = caseFunctionReference(parametrizedFunctionDefinitionReference);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -235,32 +166,17 @@ public class GeneratorSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Parametrized Function Definition</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Pipeline Definition</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Parametrized Function Definition</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Pipeline Definition</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseParametrizedFunctionDefinition(ParametrizedFunctionDefinition object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Definition</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Definition</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseGeneratorDefinition(GeneratorDefinition object) {
+	public T casePipelineDefinition(PipelineDefinition object) {
 		return null;
 	}
 
@@ -325,62 +241,32 @@ public class GeneratorSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Functions</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Pipeline Array</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Functions</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Pipeline Array</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseFunctions(Functions object) {
+	public T casePipelineArray(PipelineArray object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Function References</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Pipeline Reference</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Function References</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Pipeline Reference</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseFunctionReferences(FunctionReferences object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Generators</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Generators</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseGenerators(Generators object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>References</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>References</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseGeneratorReferences(GeneratorReferences object) {
+	public T casePipelineReference(PipelineReference object) {
 		return null;
 	}
 
@@ -396,111 +282,6 @@ public class GeneratorSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseApplyStatement(ApplyStatement object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Reference</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Reference</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseGeneratorReference(GeneratorReference object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Definition Reference</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Definition Reference</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseGeneratorDefinitionReference(GeneratorDefinitionReference object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Function Reference</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Function Reference</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseFunctionReference(FunctionReference object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Function Def Reference</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Function Def Reference</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseFunctionDefReference(FunctionDefReference object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Loop Variable</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Loop Variable</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseLoopVariable(LoopVariable object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Function Definition Reference</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Function Definition Reference</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseFunctionDefinitionReference(FunctionDefinitionReference object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Parametrized Function Definition Reference</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Parametrized Function Definition Reference</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseParametrizedFunctionDefinitionReference(ParametrizedFunctionDefinitionReference object) {
 		return null;
 	}
 

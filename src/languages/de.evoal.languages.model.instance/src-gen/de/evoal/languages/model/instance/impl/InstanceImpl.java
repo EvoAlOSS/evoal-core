@@ -137,6 +137,16 @@ public class InstanceImpl extends ValueImpl implements Instance {
 	 * @generated
 	 */
 	@Override
+	public Attribute findAttribute(final String name) {
+		return getAttributes().stream().filter(n -> n.getName().equals(name)).findFirst().orElse(null);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case InstancePackage.INSTANCE__ATTRIBUTES:

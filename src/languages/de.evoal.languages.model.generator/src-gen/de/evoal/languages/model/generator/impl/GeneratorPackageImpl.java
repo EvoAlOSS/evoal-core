@@ -13,21 +13,11 @@ import de.evoal.languages.model.generator.ApplyStatement;
 import de.evoal.languages.model.generator.Configuration;
 import de.evoal.languages.model.generator.CounterRange;
 import de.evoal.languages.model.generator.ForStatement;
-import de.evoal.languages.model.generator.FunctionDefReference;
-import de.evoal.languages.model.generator.FunctionDefinitionReference;
-import de.evoal.languages.model.generator.FunctionReference;
-import de.evoal.languages.model.generator.FunctionReferences;
-import de.evoal.languages.model.generator.Functions;
-import de.evoal.languages.model.generator.GeneratorDefinition;
-import de.evoal.languages.model.generator.GeneratorDefinitionReference;
 import de.evoal.languages.model.generator.GeneratorFactory;
 import de.evoal.languages.model.generator.GeneratorPackage;
-import de.evoal.languages.model.generator.GeneratorReference;
-import de.evoal.languages.model.generator.GeneratorReferences;
-import de.evoal.languages.model.generator.Generators;
-import de.evoal.languages.model.generator.LoopVariable;
-import de.evoal.languages.model.generator.ParametrizedFunctionDefinition;
-import de.evoal.languages.model.generator.ParametrizedFunctionDefinitionReference;
+import de.evoal.languages.model.generator.PipelineArray;
+import de.evoal.languages.model.generator.PipelineDefinition;
+import de.evoal.languages.model.generator.PipelineReference;
 import de.evoal.languages.model.generator.Range;
 import de.evoal.languages.model.generator.Statement;
 import de.evoal.languages.model.generator.Use;
@@ -67,14 +57,7 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass parametrizedFunctionDefinitionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass generatorDefinitionEClass = null;
+	private EClass pipelineDefinitionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -109,28 +92,14 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass functionsEClass = null;
+	private EClass pipelineArrayEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass functionReferencesEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass generatorsEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass generatorReferencesEClass = null;
+	private EClass pipelineReferenceEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -138,55 +107,6 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 	 * @generated
 	 */
 	private EClass applyStatementEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass generatorReferenceEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass generatorDefinitionReferenceEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass functionReferenceEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass functionDefReferenceEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass loopVariableEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass functionDefinitionReferenceEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass parametrizedFunctionDefinitionReferenceEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -281,7 +201,7 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 	 * @generated
 	 */
 	@Override
-	public EReference getConfiguration_Generators() {
+	public EReference getConfiguration_Pipelines() {
 		return (EReference)configurationEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -291,18 +211,8 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 	 * @generated
 	 */
 	@Override
-	public EReference getConfiguration_Functions() {
-		return (EReference)configurationEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EReference getConfiguration_Statements() {
-		return (EReference)configurationEClass.getEStructuralFeatures().get(3);
+		return (EReference)configurationEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -331,8 +241,8 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 	 * @generated
 	 */
 	@Override
-	public EClass getParametrizedFunctionDefinition() {
-		return parametrizedFunctionDefinitionEClass;
+	public EClass getPipelineDefinition() {
+		return pipelineDefinitionEClass;
 	}
 
 	/**
@@ -341,8 +251,8 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 	 * @generated
 	 */
 	@Override
-	public EAttribute getParametrizedFunctionDefinition_Name() {
-		return (EAttribute)parametrizedFunctionDefinitionEClass.getEStructuralFeatures().get(0);
+	public EAttribute getPipelineDefinition_Name() {
+		return (EAttribute)pipelineDefinitionEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -351,38 +261,8 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 	 * @generated
 	 */
 	@Override
-	public EReference getParametrizedFunctionDefinition_Definition() {
-		return (EReference)parametrizedFunctionDefinitionEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getGeneratorDefinition() {
-		return generatorDefinitionEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getGeneratorDefinition_Name() {
-		return (EAttribute)generatorDefinitionEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getGeneratorDefinition_Definition() {
-		return (EReference)generatorDefinitionEClass.getEStructuralFeatures().get(1);
+	public EReference getPipelineDefinition_Definitions() {
+		return (EReference)pipelineDefinitionEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -481,8 +361,8 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 	 * @generated
 	 */
 	@Override
-	public EClass getFunctions() {
-		return functionsEClass;
+	public EClass getPipelineArray() {
+		return pipelineArrayEClass;
 	}
 
 	/**
@@ -491,8 +371,8 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 	 * @generated
 	 */
 	@Override
-	public EReference getFunctions_FunctionReferences() {
-		return (EReference)functionsEClass.getEStructuralFeatures().get(0);
+	public EReference getPipelineArray_References() {
+		return (EReference)pipelineArrayEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -501,8 +381,8 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 	 * @generated
 	 */
 	@Override
-	public EClass getFunctionReferences() {
-		return functionReferencesEClass;
+	public EClass getPipelineReference() {
+		return pipelineReferenceEClass;
 	}
 
 	/**
@@ -511,48 +391,8 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 	 * @generated
 	 */
 	@Override
-	public EReference getFunctionReferences_Functions() {
-		return (EReference)functionReferencesEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getGenerators() {
-		return generatorsEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getGenerators_GeneratorReferences() {
-		return (EReference)generatorsEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getGeneratorReferences() {
-		return generatorReferencesEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getGeneratorReferences_Generators() {
-		return (EReference)generatorReferencesEClass.getEStructuralFeatures().get(0);
+	public EReference getPipelineReference_Pipeline() {
+		return (EReference)pipelineReferenceEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -591,128 +431,8 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 	 * @generated
 	 */
 	@Override
-	public EReference getApplyStatement_Function() {
+	public EReference getApplyStatement_Pipelines() {
 		return (EReference)applyStatementEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getApplyStatement_Generator() {
-		return (EReference)applyStatementEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getGeneratorReference() {
-		return generatorReferenceEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getGeneratorDefinitionReference() {
-		return generatorDefinitionReferenceEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getGeneratorDefinitionReference_Definition() {
-		return (EReference)generatorDefinitionReferenceEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getFunctionReference() {
-		return functionReferenceEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getFunctionDefReference() {
-		return functionDefReferenceEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getLoopVariable() {
-		return loopVariableEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getLoopVariable_Definition() {
-		return (EReference)loopVariableEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getFunctionDefinitionReference() {
-		return functionDefinitionReferenceEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getFunctionDefinitionReference_Definition() {
-		return (EReference)functionDefinitionReferenceEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getParametrizedFunctionDefinitionReference() {
-		return parametrizedFunctionDefinitionReferenceEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getParametrizedFunctionDefinitionReference_Definition() {
-		return (EReference)parametrizedFunctionDefinitionReferenceEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -746,20 +466,15 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 		// Create classes and their features
 		configurationEClass = createEClass(CONFIGURATION);
 		createEReference(configurationEClass, CONFIGURATION__USES);
-		createEReference(configurationEClass, CONFIGURATION__GENERATORS);
-		createEReference(configurationEClass, CONFIGURATION__FUNCTIONS);
+		createEReference(configurationEClass, CONFIGURATION__PIPELINES);
 		createEReference(configurationEClass, CONFIGURATION__STATEMENTS);
 
 		useEClass = createEClass(USE);
 		createEAttribute(useEClass, USE__IMPORT_URI);
 
-		parametrizedFunctionDefinitionEClass = createEClass(PARAMETRIZED_FUNCTION_DEFINITION);
-		createEAttribute(parametrizedFunctionDefinitionEClass, PARAMETRIZED_FUNCTION_DEFINITION__NAME);
-		createEReference(parametrizedFunctionDefinitionEClass, PARAMETRIZED_FUNCTION_DEFINITION__DEFINITION);
-
-		generatorDefinitionEClass = createEClass(GENERATOR_DEFINITION);
-		createEAttribute(generatorDefinitionEClass, GENERATOR_DEFINITION__NAME);
-		createEReference(generatorDefinitionEClass, GENERATOR_DEFINITION__DEFINITION);
+		pipelineDefinitionEClass = createEClass(PIPELINE_DEFINITION);
+		createEAttribute(pipelineDefinitionEClass, PIPELINE_DEFINITION__NAME);
+		createEReference(pipelineDefinitionEClass, PIPELINE_DEFINITION__DEFINITIONS);
 
 		statementEClass = createEClass(STATEMENT);
 
@@ -774,41 +489,16 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 		createEAttribute(counterRangeEClass, COUNTER_RANGE__START);
 		createEAttribute(counterRangeEClass, COUNTER_RANGE__END);
 
-		functionsEClass = createEClass(FUNCTIONS);
-		createEReference(functionsEClass, FUNCTIONS__FUNCTION_REFERENCES);
+		pipelineArrayEClass = createEClass(PIPELINE_ARRAY);
+		createEReference(pipelineArrayEClass, PIPELINE_ARRAY__REFERENCES);
 
-		functionReferencesEClass = createEClass(FUNCTION_REFERENCES);
-		createEReference(functionReferencesEClass, FUNCTION_REFERENCES__FUNCTIONS);
-
-		generatorsEClass = createEClass(GENERATORS);
-		createEReference(generatorsEClass, GENERATORS__GENERATOR_REFERENCES);
-
-		generatorReferencesEClass = createEClass(GENERATOR_REFERENCES);
-		createEReference(generatorReferencesEClass, GENERATOR_REFERENCES__GENERATORS);
+		pipelineReferenceEClass = createEClass(PIPELINE_REFERENCE);
+		createEReference(pipelineReferenceEClass, PIPELINE_REFERENCE__PIPELINE);
 
 		applyStatementEClass = createEClass(APPLY_STATEMENT);
 		createEAttribute(applyStatementEClass, APPLY_STATEMENT__FILE);
 		createEAttribute(applyStatementEClass, APPLY_STATEMENT__COUNT);
-		createEReference(applyStatementEClass, APPLY_STATEMENT__FUNCTION);
-		createEReference(applyStatementEClass, APPLY_STATEMENT__GENERATOR);
-
-		generatorReferenceEClass = createEClass(GENERATOR_REFERENCE);
-
-		generatorDefinitionReferenceEClass = createEClass(GENERATOR_DEFINITION_REFERENCE);
-		createEReference(generatorDefinitionReferenceEClass, GENERATOR_DEFINITION_REFERENCE__DEFINITION);
-
-		functionReferenceEClass = createEClass(FUNCTION_REFERENCE);
-
-		functionDefReferenceEClass = createEClass(FUNCTION_DEF_REFERENCE);
-
-		loopVariableEClass = createEClass(LOOP_VARIABLE);
-		createEReference(loopVariableEClass, LOOP_VARIABLE__DEFINITION);
-
-		functionDefinitionReferenceEClass = createEClass(FUNCTION_DEFINITION_REFERENCE);
-		createEReference(functionDefinitionReferenceEClass, FUNCTION_DEFINITION_REFERENCE__DEFINITION);
-
-		parametrizedFunctionDefinitionReferenceEClass = createEClass(PARAMETRIZED_FUNCTION_DEFINITION_REFERENCE);
-		createEReference(parametrizedFunctionDefinitionReferenceEClass, PARAMETRIZED_FUNCTION_DEFINITION_REFERENCE__DEFINITION);
+		createEReference(applyStatementEClass, APPLY_STATEMENT__PIPELINES);
 	}
 
 	/**
@@ -836,7 +526,6 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 
 		// Obtain other dependent packages
 		InstancePackage theInstancePackage = (InstancePackage)EPackage.Registry.INSTANCE.getEPackage(InstancePackage.eNS_URI);
-		DlPackage theDlPackage = (DlPackage)EPackage.Registry.INSTANCE.getEPackage(DlPackage.eNS_URI);
 
 		// Create type parameters
 
@@ -845,33 +534,21 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 		// Add supertypes to classes
 		forStatementEClass.getESuperTypes().add(this.getStatement());
 		counterRangeEClass.getESuperTypes().add(this.getRange());
-		functionsEClass.getESuperTypes().add(this.getRange());
-		generatorsEClass.getESuperTypes().add(this.getRange());
+		pipelineArrayEClass.getESuperTypes().add(this.getRange());
 		applyStatementEClass.getESuperTypes().add(this.getStatement());
-		generatorDefinitionReferenceEClass.getESuperTypes().add(this.getGeneratorReference());
-		functionDefReferenceEClass.getESuperTypes().add(this.getFunctionReference());
-		loopVariableEClass.getESuperTypes().add(this.getGeneratorReference());
-		loopVariableEClass.getESuperTypes().add(this.getFunctionReference());
-		functionDefinitionReferenceEClass.getESuperTypes().add(this.getFunctionDefReference());
-		parametrizedFunctionDefinitionReferenceEClass.getESuperTypes().add(this.getFunctionDefReference());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(configurationEClass, Configuration.class, "Configuration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getConfiguration_Uses(), this.getUse(), null, "uses", null, 0, -1, Configuration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getConfiguration_Generators(), this.getGeneratorDefinition(), null, "generators", null, 0, -1, Configuration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getConfiguration_Functions(), this.getParametrizedFunctionDefinition(), null, "functions", null, 0, -1, Configuration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getConfiguration_Pipelines(), this.getPipelineDefinition(), null, "pipelines", null, 0, -1, Configuration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getConfiguration_Statements(), this.getStatement(), null, "statements", null, 0, -1, Configuration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(useEClass, Use.class, "Use", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getUse_ImportURI(), ecorePackage.getEString(), "importURI", null, 0, 1, Use.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(parametrizedFunctionDefinitionEClass, ParametrizedFunctionDefinition.class, "ParametrizedFunctionDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getParametrizedFunctionDefinition_Name(), ecorePackage.getEString(), "name", null, 0, 1, ParametrizedFunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getParametrizedFunctionDefinition_Definition(), theInstancePackage.getInstance(), null, "definition", null, 0, 1, ParametrizedFunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(generatorDefinitionEClass, GeneratorDefinition.class, "GeneratorDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getGeneratorDefinition_Name(), ecorePackage.getEString(), "name", null, 0, 1, GeneratorDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getGeneratorDefinition_Definition(), theInstancePackage.getInstance(), null, "definition", null, 0, 1, GeneratorDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(pipelineDefinitionEClass, PipelineDefinition.class, "PipelineDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getPipelineDefinition_Name(), ecorePackage.getEString(), "name", null, 0, 1, PipelineDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPipelineDefinition_Definitions(), theInstancePackage.getInstance(), null, "definitions", null, 0, -1, PipelineDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		initEClass(statementEClass, Statement.class, "Statement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -886,41 +563,16 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 		initEAttribute(getCounterRange_Start(), ecorePackage.getEInt(), "start", null, 1, 1, CounterRange.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCounterRange_End(), ecorePackage.getEInt(), "end", null, 1, 1, CounterRange.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(functionsEClass, Functions.class, "Functions", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getFunctions_FunctionReferences(), this.getFunctionReferences(), null, "functionReferences", null, 0, 1, Functions.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(pipelineArrayEClass, PipelineArray.class, "PipelineArray", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getPipelineArray_References(), this.getPipelineReference(), null, "references", null, 0, -1, PipelineArray.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
-		initEClass(functionReferencesEClass, FunctionReferences.class, "FunctionReferences", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getFunctionReferences_Functions(), this.getFunctionDefReference(), null, "functions", null, 0, -1, FunctionReferences.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(generatorsEClass, Generators.class, "Generators", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getGenerators_GeneratorReferences(), this.getGeneratorReferences(), null, "generatorReferences", null, 0, 1, Generators.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(generatorReferencesEClass, GeneratorReferences.class, "GeneratorReferences", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getGeneratorReferences_Generators(), this.getGeneratorDefinition(), null, "generators", null, 0, -1, GeneratorReferences.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(pipelineReferenceEClass, PipelineReference.class, "PipelineReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getPipelineReference_Pipeline(), this.getPipelineDefinition(), null, "pipeline", null, 1, 1, PipelineReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(applyStatementEClass, ApplyStatement.class, "ApplyStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getApplyStatement_File(), ecorePackage.getEString(), "file", null, 0, 1, ApplyStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getApplyStatement_Count(), ecorePackage.getEInt(), "count", null, 1, 1, ApplyStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getApplyStatement_Function(), this.getFunctionReference(), null, "function", null, 0, 1, ApplyStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getApplyStatement_Generator(), this.getGeneratorReference(), null, "generator", null, 0, 1, ApplyStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(generatorReferenceEClass, GeneratorReference.class, "GeneratorReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(generatorDefinitionReferenceEClass, GeneratorDefinitionReference.class, "GeneratorDefinitionReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getGeneratorDefinitionReference_Definition(), this.getGeneratorDefinition(), null, "definition", null, 0, 1, GeneratorDefinitionReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(functionReferenceEClass, FunctionReference.class, "FunctionReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(functionDefReferenceEClass, FunctionDefReference.class, "FunctionDefReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(loopVariableEClass, LoopVariable.class, "LoopVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getLoopVariable_Definition(), this.getForStatement(), null, "definition", null, 0, 1, LoopVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(functionDefinitionReferenceEClass, FunctionDefinitionReference.class, "FunctionDefinitionReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getFunctionDefinitionReference_Definition(), theDlPackage.getTypeDefinition(), null, "definition", null, 0, 1, FunctionDefinitionReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(parametrizedFunctionDefinitionReferenceEClass, ParametrizedFunctionDefinitionReference.class, "ParametrizedFunctionDefinitionReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getParametrizedFunctionDefinitionReference_Definition(), this.getParametrizedFunctionDefinition(), null, "definition", null, 0, 1, ParametrizedFunctionDefinitionReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getApplyStatement_Pipelines(), this.getPipelineReference(), null, "pipelines", null, 0, -1, ApplyStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);
@@ -928,6 +580,8 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 		// Create annotations
 		// http://www.eclipse.org/OCL/Import
 		createImportAnnotations();
+		// http://www.eclipse.org/OCL/Collection
+		createCollectionAnnotations();
 	}
 
 	/**
@@ -945,6 +599,34 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 			   "dl", "platform:/resource/de.evoal.languages.model.dl/model/model.ecore#/",
 			   "ecore", "http://www.eclipse.org/emf/2002/Ecore",
 			   "ins", "platform:/resource/de.evoal.languages.model.instance/model/model.ecore#/"
+		   });
+	}
+
+	/**
+	 * Initializes the annotations for <b>http://www.eclipse.org/OCL/Collection</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createCollectionAnnotations() {
+		String source = "http://www.eclipse.org/OCL/Collection";
+		addAnnotation
+		  (getPipelineDefinition_Definitions(),
+		   source,
+		   new String[] {
+			   "nullFree", "false"
+		   });
+		addAnnotation
+		  (getPipelineArray_References(),
+		   source,
+		   new String[] {
+			   "nullFree", "false"
+		   });
+		addAnnotation
+		  (getApplyStatement_Pipelines(),
+		   source,
+		   new String[] {
+			   "nullFree", "false"
 		   });
 	}
 

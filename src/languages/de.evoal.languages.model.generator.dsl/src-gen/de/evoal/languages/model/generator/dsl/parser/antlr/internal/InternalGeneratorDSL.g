@@ -99,18 +99,18 @@ ruleConfigurationRule returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getConfigurationRuleAccess().getGeneratorsGeneratorDefinitionRuleParserRuleCall_1_0());
+					newCompositeNode(grammarAccess.getConfigurationRuleAccess().getPipelinesPipelineDefinitionRuleParserRuleCall_1_0());
 				}
-				lv_generators_1_0=ruleGeneratorDefinitionRule
+				lv_pipelines_1_0=rulePipelineDefinitionRule
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getConfigurationRuleRule());
 					}
 					add(
 						$current,
-						"generators",
-						lv_generators_1_0,
-						"de.evoal.languages.model.generator.dsl.GeneratorDSL.GeneratorDefinitionRule");
+						"pipelines",
+						lv_pipelines_1_0,
+						"de.evoal.languages.model.generator.dsl.GeneratorDSL.PipelineDefinitionRule");
 					afterParserOrEnumRuleCall();
 				}
 			)
@@ -118,28 +118,9 @@ ruleConfigurationRule returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getConfigurationRuleAccess().getFunctionsParametrizedFunctionDefinitionRuleParserRuleCall_2_0());
+					newCompositeNode(grammarAccess.getConfigurationRuleAccess().getStatementsStatementRuleParserRuleCall_2_0());
 				}
-				lv_functions_2_0=ruleParametrizedFunctionDefinitionRule
-				{
-					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getConfigurationRuleRule());
-					}
-					add(
-						$current,
-						"functions",
-						lv_functions_2_0,
-						"de.evoal.languages.model.generator.dsl.GeneratorDSL.ParametrizedFunctionDefinitionRule");
-					afterParserOrEnumRuleCall();
-				}
-			)
-		)*
-		(
-			(
-				{
-					newCompositeNode(grammarAccess.getConfigurationRuleAccess().getStatementsStatementRuleParserRuleCall_3_0());
-				}
-				lv_statements_3_0=ruleStatementRule
+				lv_statements_2_0=ruleStatementRule
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getConfigurationRuleRule());
@@ -147,7 +128,7 @@ ruleConfigurationRule returns [EObject current=null]
 					add(
 						$current,
 						"statements",
-						lv_statements_3_0,
+						lv_statements_2_0,
 						"de.evoal.languages.model.generator.dsl.GeneratorDSL.StatementRule");
 					afterParserOrEnumRuleCall();
 				}
@@ -201,15 +182,15 @@ ruleUseRule returns [EObject current=null]
 	)
 ;
 
-// Entry rule entryRuleParametrizedFunctionDefinitionRule
-entryRuleParametrizedFunctionDefinitionRule returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getParametrizedFunctionDefinitionRuleRule()); }
-	iv_ruleParametrizedFunctionDefinitionRule=ruleParametrizedFunctionDefinitionRule
-	{ $current=$iv_ruleParametrizedFunctionDefinitionRule.current; }
+// Entry rule entryRulePipelineDefinitionRule
+entryRulePipelineDefinitionRule returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getPipelineDefinitionRuleRule()); }
+	iv_rulePipelineDefinitionRule=rulePipelineDefinitionRule
+	{ $current=$iv_rulePipelineDefinitionRule.current; }
 	EOF;
 
-// Rule ParametrizedFunctionDefinitionRule
-ruleParametrizedFunctionDefinitionRule returns [EObject current=null]
+// Rule PipelineDefinitionRule
+rulePipelineDefinitionRule returns [EObject current=null]
 @init {
 	enterRule();
 }
@@ -217,19 +198,19 @@ ruleParametrizedFunctionDefinitionRule returns [EObject current=null]
 	leaveRule();
 }:
 	(
-		otherlv_0='function'
+		otherlv_0='pipeline'
 		{
-			newLeafNode(otherlv_0, grammarAccess.getParametrizedFunctionDefinitionRuleAccess().getFunctionKeyword_0());
+			newLeafNode(otherlv_0, grammarAccess.getPipelineDefinitionRuleAccess().getPipelineKeyword_0());
 		}
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getParametrizedFunctionDefinitionRuleAccess().getNameStringOrIdParserRuleCall_1_0());
+					newCompositeNode(grammarAccess.getPipelineDefinitionRuleAccess().getNameStringOrIdParserRuleCall_1_0());
 				}
 				lv_name_1_0=ruleStringOrId
 				{
 					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getParametrizedFunctionDefinitionRuleRule());
+						$current = createModelElementForParent(grammarAccess.getPipelineDefinitionRuleRule());
 					}
 					set(
 						$current,
@@ -240,101 +221,59 @@ ruleParametrizedFunctionDefinitionRule returns [EObject current=null]
 				}
 			)
 		)
-		otherlv_2='using'
+		otherlv_2='['
 		{
-			newLeafNode(otherlv_2, grammarAccess.getParametrizedFunctionDefinitionRuleAccess().getUsingKeyword_2());
+			newLeafNode(otherlv_2, grammarAccess.getPipelineDefinitionRuleAccess().getLeftSquareBracketKeyword_2());
 		}
 		(
 			(
-				{
-					newCompositeNode(grammarAccess.getParametrizedFunctionDefinitionRuleAccess().getDefinitionInstanceRuleParserRuleCall_3_0());
-				}
-				lv_definition_3_0=ruleInstanceRule
-				{
-					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getParametrizedFunctionDefinitionRuleRule());
+				(
+					{
+						newCompositeNode(grammarAccess.getPipelineDefinitionRuleAccess().getDefinitionsInstanceRuleParserRuleCall_3_0_0());
 					}
-					set(
-						$current,
-						"definition",
-						lv_definition_3_0,
-						"de.evoal.languages.model.instance.dsl.InstanceLanguage.InstanceRule");
-					afterParserOrEnumRuleCall();
-				}
+					lv_definitions_3_0=ruleInstanceRule
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getPipelineDefinitionRuleRule());
+						}
+						add(
+							$current,
+							"definitions",
+							lv_definitions_3_0,
+							"de.evoal.languages.model.instance.dsl.InstanceLanguage.InstanceRule");
+						afterParserOrEnumRuleCall();
+					}
+				)
 			)
-		)
-		otherlv_4=';'
-		{
-			newLeafNode(otherlv_4, grammarAccess.getParametrizedFunctionDefinitionRuleAccess().getSemicolonKeyword_4());
-		}
-	)
-;
-
-// Entry rule entryRuleGeneratorDefinitionRule
-entryRuleGeneratorDefinitionRule returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getGeneratorDefinitionRuleRule()); }
-	iv_ruleGeneratorDefinitionRule=ruleGeneratorDefinitionRule
-	{ $current=$iv_ruleGeneratorDefinitionRule.current; }
-	EOF;
-
-// Rule GeneratorDefinitionRule
-ruleGeneratorDefinitionRule returns [EObject current=null]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
-	(
-		otherlv_0='generator'
-		{
-			newLeafNode(otherlv_0, grammarAccess.getGeneratorDefinitionRuleAccess().getGeneratorKeyword_0());
-		}
-		(
 			(
+				otherlv_4=','
 				{
-					newCompositeNode(grammarAccess.getGeneratorDefinitionRuleAccess().getNameStringOrIdParserRuleCall_1_0());
+					newLeafNode(otherlv_4, grammarAccess.getPipelineDefinitionRuleAccess().getCommaKeyword_3_1_0());
 				}
-				lv_name_1_0=ruleStringOrId
-				{
-					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getGeneratorDefinitionRuleRule());
-					}
-					set(
-						$current,
-						"name",
-						lv_name_1_0,
-						"de.evoal.languages.model.el.dsl.ExpressionLanguage.StringOrId");
-					afterParserOrEnumRuleCall();
-				}
-			)
-		)
-		otherlv_2='using'
+				(
+					(
+						{
+							newCompositeNode(grammarAccess.getPipelineDefinitionRuleAccess().getDefinitionsInstanceRuleParserRuleCall_3_1_1_0());
+						}
+						lv_definitions_5_0=ruleInstanceRule
+						{
+							if ($current==null) {
+								$current = createModelElementForParent(grammarAccess.getPipelineDefinitionRuleRule());
+							}
+							add(
+								$current,
+								"definitions",
+								lv_definitions_5_0,
+								"de.evoal.languages.model.instance.dsl.InstanceLanguage.InstanceRule");
+							afterParserOrEnumRuleCall();
+						}
+					)
+				)
+			)*
+		)?
+		otherlv_6=']'
 		{
-			newLeafNode(otherlv_2, grammarAccess.getGeneratorDefinitionRuleAccess().getUsingKeyword_2());
-		}
-		(
-			(
-				{
-					newCompositeNode(grammarAccess.getGeneratorDefinitionRuleAccess().getDefinitionInstanceRuleParserRuleCall_3_0());
-				}
-				lv_definition_3_0=ruleInstanceRule
-				{
-					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getGeneratorDefinitionRuleRule());
-					}
-					set(
-						$current,
-						"definition",
-						lv_definition_3_0,
-						"de.evoal.languages.model.instance.dsl.InstanceLanguage.InstanceRule");
-					afterParserOrEnumRuleCall();
-				}
-			)
-		)
-		otherlv_4=';'
-		{
-			newLeafNode(otherlv_4, grammarAccess.getGeneratorDefinitionRuleAccess().getSemicolonKeyword_4());
+			newLeafNode(otherlv_6, grammarAccess.getPipelineDefinitionRuleAccess().getRightSquareBracketKeyword_4());
 		}
 	)
 ;
@@ -483,29 +422,20 @@ ruleRangeRule returns [EObject current=null]
 }:
 	(
 		{
-			newCompositeNode(grammarAccess.getRangeRuleAccess().getFunctionsRuleParserRuleCall_0());
+			newCompositeNode(grammarAccess.getRangeRuleAccess().getPipelineArrayRuleParserRuleCall_0());
 		}
-		this_FunctionsRule_0=ruleFunctionsRule
+		this_PipelineArrayRule_0=rulePipelineArrayRule
 		{
-			$current = $this_FunctionsRule_0.current;
+			$current = $this_PipelineArrayRule_0.current;
 			afterParserOrEnumRuleCall();
 		}
 		    |
 		{
-			newCompositeNode(grammarAccess.getRangeRuleAccess().getGeneratorsRuleParserRuleCall_1());
+			newCompositeNode(grammarAccess.getRangeRuleAccess().getCounterRangeRuleParserRuleCall_1());
 		}
-		this_GeneratorsRule_1=ruleGeneratorsRule
+		this_CounterRangeRule_1=ruleCounterRangeRule
 		{
-			$current = $this_GeneratorsRule_1.current;
-			afterParserOrEnumRuleCall();
-		}
-		    |
-		{
-			newCompositeNode(grammarAccess.getRangeRuleAccess().getCounterRangeRuleParserRuleCall_2());
-		}
-		this_CounterRangeRule_2=ruleCounterRangeRule
-		{
-			$current = $this_CounterRangeRule_2.current;
+			$current = $this_CounterRangeRule_1.current;
 			afterParserOrEnumRuleCall();
 		}
 	)
@@ -578,15 +508,15 @@ ruleCounterRangeRule returns [EObject current=null]
 	)
 ;
 
-// Entry rule entryRuleFunctionsRule
-entryRuleFunctionsRule returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getFunctionsRuleRule()); }
-	iv_ruleFunctionsRule=ruleFunctionsRule
-	{ $current=$iv_ruleFunctionsRule.current; }
+// Entry rule entryRulePipelineArrayRule
+entryRulePipelineArrayRule returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getPipelineArrayRuleRule()); }
+	iv_rulePipelineArrayRule=rulePipelineArrayRule
+	{ $current=$iv_rulePipelineArrayRule.current; }
 	EOF;
 
-// Rule FunctionsRule
-ruleFunctionsRule returns [EObject current=null]
+// Rule PipelineArrayRule
+rulePipelineArrayRule returns [EObject current=null]
 @init {
 	enterRule();
 }
@@ -597,165 +527,80 @@ ruleFunctionsRule returns [EObject current=null]
 		(
 			{
 				$current = forceCreateModelElement(
-					grammarAccess.getFunctionsRuleAccess().getFunctionsAction_0(),
+					grammarAccess.getPipelineArrayRuleAccess().getPipelineArrayAction_0(),
 					$current);
 			}
 		)
-		otherlv_1='functions'
+		otherlv_1='pipelines'
 		{
-			newLeafNode(otherlv_1, grammarAccess.getFunctionsRuleAccess().getFunctionsKeyword_1());
+			newLeafNode(otherlv_1, grammarAccess.getPipelineArrayRuleAccess().getPipelinesKeyword_1());
 		}
 		(
-			(
-				{
-					newCompositeNode(grammarAccess.getFunctionsRuleAccess().getFunctionReferencesFunctionReferencesRuleParserRuleCall_2_0());
-				}
-				lv_functionReferences_2_0=ruleFunctionReferencesRule
-				{
-					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getFunctionsRuleRule());
-					}
-					set(
-						$current,
-						"functionReferences",
-						lv_functionReferences_2_0,
-						"de.evoal.languages.model.generator.dsl.GeneratorDSL.FunctionReferencesRule");
-					afterParserOrEnumRuleCall();
-				}
-			)
-		)?
-	)
-;
-
-// Entry rule entryRuleFunctionReferencesRule
-entryRuleFunctionReferencesRule returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getFunctionReferencesRuleRule()); }
-	iv_ruleFunctionReferencesRule=ruleFunctionReferencesRule
-	{ $current=$iv_ruleFunctionReferencesRule.current; }
-	EOF;
-
-// Rule FunctionReferencesRule
-ruleFunctionReferencesRule returns [EObject current=null]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
-	(
-		otherlv_0='['
-		{
-			newLeafNode(otherlv_0, grammarAccess.getFunctionReferencesRuleAccess().getLeftSquareBracketKeyword_0());
-		}
-		(
-			(
-				{
-					newCompositeNode(grammarAccess.getFunctionReferencesRuleAccess().getFunctionsFunctionDefReferenceRuleParserRuleCall_1_0());
-				}
-				lv_functions_1_0=ruleFunctionDefReferenceRule
-				{
-					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getFunctionReferencesRuleRule());
-					}
-					add(
-						$current,
-						"functions",
-						lv_functions_1_0,
-						"de.evoal.languages.model.generator.dsl.GeneratorDSL.FunctionDefReferenceRule");
-					afterParserOrEnumRuleCall();
-				}
-			)
-		)
-		(
-			otherlv_2=','
+			otherlv_2='['
 			{
-				newLeafNode(otherlv_2, grammarAccess.getFunctionReferencesRuleAccess().getCommaKeyword_2_0());
+				newLeafNode(otherlv_2, grammarAccess.getPipelineArrayRuleAccess().getLeftSquareBracketKeyword_2_0());
 			}
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getFunctionReferencesRuleAccess().getFunctionsFunctionDefReferenceRuleParserRuleCall_2_1_0());
+						newCompositeNode(grammarAccess.getPipelineArrayRuleAccess().getReferencesPipelineReferenceRuleParserRuleCall_2_1_0());
 					}
-					lv_functions_3_0=ruleFunctionDefReferenceRule
+					lv_references_3_0=rulePipelineReferenceRule
 					{
 						if ($current==null) {
-							$current = createModelElementForParent(grammarAccess.getFunctionReferencesRuleRule());
+							$current = createModelElementForParent(grammarAccess.getPipelineArrayRuleRule());
 						}
 						add(
 							$current,
-							"functions",
-							lv_functions_3_0,
-							"de.evoal.languages.model.generator.dsl.GeneratorDSL.FunctionDefReferenceRule");
+							"references",
+							lv_references_3_0,
+							"de.evoal.languages.model.generator.dsl.GeneratorDSL.PipelineReferenceRule");
 						afterParserOrEnumRuleCall();
 					}
 				)
 			)
-		)*
-		otherlv_4=']'
-		{
-			newLeafNode(otherlv_4, grammarAccess.getFunctionReferencesRuleAccess().getRightSquareBracketKeyword_3());
-		}
-	)
-;
-
-// Entry rule entryRuleGeneratorsRule
-entryRuleGeneratorsRule returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getGeneratorsRuleRule()); }
-	iv_ruleGeneratorsRule=ruleGeneratorsRule
-	{ $current=$iv_ruleGeneratorsRule.current; }
-	EOF;
-
-// Rule GeneratorsRule
-ruleGeneratorsRule returns [EObject current=null]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
-	(
-		(
-			{
-				$current = forceCreateModelElement(
-					grammarAccess.getGeneratorsRuleAccess().getGeneratorsAction_0(),
-					$current);
-			}
-		)
-		otherlv_1='generators'
-		{
-			newLeafNode(otherlv_1, grammarAccess.getGeneratorsRuleAccess().getGeneratorsKeyword_1());
-		}
-		(
 			(
+				otherlv_4=','
 				{
-					newCompositeNode(grammarAccess.getGeneratorsRuleAccess().getGeneratorReferencesGeneratorReferencesRuleParserRuleCall_2_0());
+					newLeafNode(otherlv_4, grammarAccess.getPipelineArrayRuleAccess().getCommaKeyword_2_2_0());
 				}
-				lv_generatorReferences_2_0=ruleGeneratorReferencesRule
-				{
-					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getGeneratorsRuleRule());
-					}
-					set(
-						$current,
-						"generatorReferences",
-						lv_generatorReferences_2_0,
-						"de.evoal.languages.model.generator.dsl.GeneratorDSL.GeneratorReferencesRule");
-					afterParserOrEnumRuleCall();
-				}
-			)
+				(
+					(
+						{
+							newCompositeNode(grammarAccess.getPipelineArrayRuleAccess().getReferencesPipelineReferenceRuleParserRuleCall_2_2_1_0());
+						}
+						lv_references_5_0=rulePipelineReferenceRule
+						{
+							if ($current==null) {
+								$current = createModelElementForParent(grammarAccess.getPipelineArrayRuleRule());
+							}
+							add(
+								$current,
+								"references",
+								lv_references_5_0,
+								"de.evoal.languages.model.generator.dsl.GeneratorDSL.PipelineReferenceRule");
+							afterParserOrEnumRuleCall();
+						}
+					)
+				)
+			)*
+			otherlv_6=']'
+			{
+				newLeafNode(otherlv_6, grammarAccess.getPipelineArrayRuleAccess().getRightSquareBracketKeyword_2_3());
+			}
 		)?
 	)
 ;
 
-// Entry rule entryRuleGeneratorReferencesRule
-entryRuleGeneratorReferencesRule returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getGeneratorReferencesRuleRule()); }
-	iv_ruleGeneratorReferencesRule=ruleGeneratorReferencesRule
-	{ $current=$iv_ruleGeneratorReferencesRule.current; }
+// Entry rule entryRulePipelineReferenceRule
+entryRulePipelineReferenceRule returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getPipelineReferenceRuleRule()); }
+	iv_rulePipelineReferenceRule=rulePipelineReferenceRule
+	{ $current=$iv_rulePipelineReferenceRule.current; }
 	EOF;
 
-// Rule GeneratorReferencesRule
-ruleGeneratorReferencesRule returns [EObject current=null]
+// Rule PipelineReferenceRule
+rulePipelineReferenceRule returns [EObject current=null]
 @init {
 	enterRule();
 }
@@ -763,52 +608,20 @@ ruleGeneratorReferencesRule returns [EObject current=null]
 	leaveRule();
 }:
 	(
-		otherlv_0='['
-		{
-			newLeafNode(otherlv_0, grammarAccess.getGeneratorReferencesRuleAccess().getLeftSquareBracketKeyword_0());
-		}
 		(
-			(
-				{
-					if ($current==null) {
-						$current = createModelElement(grammarAccess.getGeneratorReferencesRuleRule());
-					}
-				}
-				{
-					newCompositeNode(grammarAccess.getGeneratorReferencesRuleAccess().getGeneratorsGeneratorDefinitionCrossReference_1_0());
-				}
-				ruleStringOrId
-				{
-					afterParserOrEnumRuleCall();
-				}
-			)
-		)
-		(
-			otherlv_2=','
 			{
-				newLeafNode(otherlv_2, grammarAccess.getGeneratorReferencesRuleAccess().getCommaKeyword_2_0());
+				if ($current==null) {
+					$current = createModelElement(grammarAccess.getPipelineReferenceRuleRule());
+				}
 			}
-			(
-				(
-					{
-						if ($current==null) {
-							$current = createModelElement(grammarAccess.getGeneratorReferencesRuleRule());
-						}
-					}
-					{
-						newCompositeNode(grammarAccess.getGeneratorReferencesRuleAccess().getGeneratorsGeneratorDefinitionCrossReference_2_1_0());
-					}
-					ruleStringOrId
-					{
-						afterParserOrEnumRuleCall();
-					}
-				)
-			)
-		)*
-		otherlv_4=']'
-		{
-			newLeafNode(otherlv_4, grammarAccess.getGeneratorReferencesRuleAccess().getRightSquareBracketKeyword_3());
-		}
+			{
+				newCompositeNode(grammarAccess.getPipelineReferenceRuleAccess().getPipelinePipelineDefinitionCrossReference_0());
+			}
+			ruleStringOrId
+			{
+				afterParserOrEnumRuleCall();
+			}
+		)
 	)
 ;
 
@@ -880,334 +693,66 @@ ruleApplyStatementRule returns [EObject current=null]
 		{
 			newLeafNode(otherlv_5, grammarAccess.getApplyStatementRuleAccess().getFromKeyword_5());
 		}
-		otherlv_6='applying'
+		otherlv_6='executing'
 		{
-			newLeafNode(otherlv_6, grammarAccess.getApplyStatementRuleAccess().getApplyingKeyword_6());
+			newLeafNode(otherlv_6, grammarAccess.getApplyStatementRuleAccess().getExecutingKeyword_6());
+		}
+		otherlv_7='['
+		{
+			newLeafNode(otherlv_7, grammarAccess.getApplyStatementRuleAccess().getLeftSquareBracketKeyword_7());
 		}
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getApplyStatementRuleAccess().getFunctionFunctionReferenceRuleParserRuleCall_7_0());
+					newCompositeNode(grammarAccess.getApplyStatementRuleAccess().getPipelinesPipelineReferenceRuleParserRuleCall_8_0());
 				}
-				lv_function_7_0=ruleFunctionReferenceRule
+				lv_pipelines_8_0=rulePipelineReferenceRule
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getApplyStatementRuleRule());
 					}
-					set(
+					add(
 						$current,
-						"function",
-						lv_function_7_0,
-						"de.evoal.languages.model.generator.dsl.GeneratorDSL.FunctionReferenceRule");
+						"pipelines",
+						lv_pipelines_8_0,
+						"de.evoal.languages.model.generator.dsl.GeneratorDSL.PipelineReferenceRule");
 					afterParserOrEnumRuleCall();
 				}
 			)
 		)
-		otherlv_8='on'
-		{
-			newLeafNode(otherlv_8, grammarAccess.getApplyStatementRuleAccess().getOnKeyword_8());
-		}
 		(
-			(
-				{
-					newCompositeNode(grammarAccess.getApplyStatementRuleAccess().getGeneratorGeneratorReferenceRuleParserRuleCall_9_0());
-				}
-				lv_generator_9_0=ruleGeneratorReferenceRule
-				{
-					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getApplyStatementRuleRule());
-					}
-					set(
-						$current,
-						"generator",
-						lv_generator_9_0,
-						"de.evoal.languages.model.generator.dsl.GeneratorDSL.GeneratorReferenceRule");
-					afterParserOrEnumRuleCall();
-				}
-			)
-		)
-		otherlv_10=';'
-		{
-			newLeafNode(otherlv_10, grammarAccess.getApplyStatementRuleAccess().getSemicolonKeyword_10());
-		}
-	)
-;
-
-// Entry rule entryRuleGeneratorReferenceRule
-entryRuleGeneratorReferenceRule returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getGeneratorReferenceRuleRule()); }
-	iv_ruleGeneratorReferenceRule=ruleGeneratorReferenceRule
-	{ $current=$iv_ruleGeneratorReferenceRule.current; }
-	EOF;
-
-// Rule GeneratorReferenceRule
-ruleGeneratorReferenceRule returns [EObject current=null]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
-	(
-		{
-			newCompositeNode(grammarAccess.getGeneratorReferenceRuleAccess().getGeneratorDefinitionReferenceRuleParserRuleCall_0());
-		}
-		this_GeneratorDefinitionReferenceRule_0=ruleGeneratorDefinitionReferenceRule
-		{
-			$current = $this_GeneratorDefinitionReferenceRule_0.current;
-			afterParserOrEnumRuleCall();
-		}
-		    |
-		{
-			newCompositeNode(grammarAccess.getGeneratorReferenceRuleAccess().getLoopVariableReferenceParserRuleCall_1());
-		}
-		this_LoopVariableReference_1=ruleLoopVariableReference
-		{
-			$current = $this_LoopVariableReference_1.current;
-			afterParserOrEnumRuleCall();
-		}
-	)
-;
-
-// Entry rule entryRuleGeneratorDefinitionReferenceRule
-entryRuleGeneratorDefinitionReferenceRule returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getGeneratorDefinitionReferenceRuleRule()); }
-	iv_ruleGeneratorDefinitionReferenceRule=ruleGeneratorDefinitionReferenceRule
-	{ $current=$iv_ruleGeneratorDefinitionReferenceRule.current; }
-	EOF;
-
-// Rule GeneratorDefinitionReferenceRule
-ruleGeneratorDefinitionReferenceRule returns [EObject current=null]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
-	(
-		otherlv_0='generator'
-		{
-			newLeafNode(otherlv_0, grammarAccess.getGeneratorDefinitionReferenceRuleAccess().getGeneratorKeyword_0());
-		}
-		(
-			(
-				{
-					if ($current==null) {
-						$current = createModelElement(grammarAccess.getGeneratorDefinitionReferenceRuleRule());
-					}
-				}
-				{
-					newCompositeNode(grammarAccess.getGeneratorDefinitionReferenceRuleAccess().getDefinitionGeneratorDefinitionCrossReference_1_0());
-				}
-				ruleStringOrId
-				{
-					afterParserOrEnumRuleCall();
-				}
-			)
-		)
-	)
-;
-
-// Entry rule entryRuleFunctionReferenceRule
-entryRuleFunctionReferenceRule returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getFunctionReferenceRuleRule()); }
-	iv_ruleFunctionReferenceRule=ruleFunctionReferenceRule
-	{ $current=$iv_ruleFunctionReferenceRule.current; }
-	EOF;
-
-// Rule FunctionReferenceRule
-ruleFunctionReferenceRule returns [EObject current=null]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
-	(
-		{
-			newCompositeNode(grammarAccess.getFunctionReferenceRuleAccess().getFunctionDefReferenceRuleParserRuleCall_0());
-		}
-		this_FunctionDefReferenceRule_0=ruleFunctionDefReferenceRule
-		{
-			$current = $this_FunctionDefReferenceRule_0.current;
-			afterParserOrEnumRuleCall();
-		}
-		    |
-		{
-			newCompositeNode(grammarAccess.getFunctionReferenceRuleAccess().getLoopVariableReferenceParserRuleCall_1());
-		}
-		this_LoopVariableReference_1=ruleLoopVariableReference
-		{
-			$current = $this_LoopVariableReference_1.current;
-			afterParserOrEnumRuleCall();
-		}
-	)
-;
-
-// Entry rule entryRuleFunctionDefReferenceRule
-entryRuleFunctionDefReferenceRule returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getFunctionDefReferenceRuleRule()); }
-	iv_ruleFunctionDefReferenceRule=ruleFunctionDefReferenceRule
-	{ $current=$iv_ruleFunctionDefReferenceRule.current; }
-	EOF;
-
-// Rule FunctionDefReferenceRule
-ruleFunctionDefReferenceRule returns [EObject current=null]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
-	(
-		{
-			newCompositeNode(grammarAccess.getFunctionDefReferenceRuleAccess().getFunctionDefinitionReferenceRuleParserRuleCall_0());
-		}
-		this_FunctionDefinitionReferenceRule_0=ruleFunctionDefinitionReferenceRule
-		{
-			$current = $this_FunctionDefinitionReferenceRule_0.current;
-			afterParserOrEnumRuleCall();
-		}
-		    |
-		{
-			newCompositeNode(grammarAccess.getFunctionDefReferenceRuleAccess().getParametrizedFunctionDefinitionReferenceRuleParserRuleCall_1());
-		}
-		this_ParametrizedFunctionDefinitionReferenceRule_1=ruleParametrizedFunctionDefinitionReferenceRule
-		{
-			$current = $this_ParametrizedFunctionDefinitionReferenceRule_1.current;
-			afterParserOrEnumRuleCall();
-		}
-	)
-;
-
-// Entry rule entryRuleLoopVariableReference
-entryRuleLoopVariableReference returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getLoopVariableReferenceRule()); }
-	iv_ruleLoopVariableReference=ruleLoopVariableReference
-	{ $current=$iv_ruleLoopVariableReference.current; }
-	EOF;
-
-// Rule LoopVariableReference
-ruleLoopVariableReference returns [EObject current=null]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
-	(
-		(
+			otherlv_9=','
 			{
-				$current = forceCreateModelElement(
-					grammarAccess.getLoopVariableReferenceAccess().getLoopVariableAction_0(),
-					$current);
+				newLeafNode(otherlv_9, grammarAccess.getApplyStatementRuleAccess().getCommaKeyword_9_0());
 			}
-		)
-		(
 			(
-				{
-					if ($current==null) {
-						$current = createModelElement(grammarAccess.getLoopVariableReferenceRule());
+				(
+					{
+						newCompositeNode(grammarAccess.getApplyStatementRuleAccess().getPipelinesPipelineReferenceRuleParserRuleCall_9_1_0());
 					}
-				}
-				otherlv_1=RULE_ID
-				{
-					newLeafNode(otherlv_1, grammarAccess.getLoopVariableReferenceAccess().getDefinitionForStatementCrossReference_1_0());
-				}
+					lv_pipelines_10_0=rulePipelineReferenceRule
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getApplyStatementRuleRule());
+						}
+						add(
+							$current,
+							"pipelines",
+							lv_pipelines_10_0,
+							"de.evoal.languages.model.generator.dsl.GeneratorDSL.PipelineReferenceRule");
+						afterParserOrEnumRuleCall();
+					}
+				)
 			)
-		)
-	)
-;
-
-// Entry rule entryRuleFunctionDefinitionReferenceRule
-entryRuleFunctionDefinitionReferenceRule returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getFunctionDefinitionReferenceRuleRule()); }
-	iv_ruleFunctionDefinitionReferenceRule=ruleFunctionDefinitionReferenceRule
-	{ $current=$iv_ruleFunctionDefinitionReferenceRule.current; }
-	EOF;
-
-// Rule FunctionDefinitionReferenceRule
-ruleFunctionDefinitionReferenceRule returns [EObject current=null]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
-	(
-		(
-			{
-				$current = forceCreateModelElement(
-					grammarAccess.getFunctionDefinitionReferenceRuleAccess().getFunctionDefinitionReferenceAction_0(),
-					$current);
-			}
-		)
-		otherlv_1='definition'
+		)*
+		otherlv_11=']'
 		{
-			newLeafNode(otherlv_1, grammarAccess.getFunctionDefinitionReferenceRuleAccess().getDefinitionKeyword_1());
+			newLeafNode(otherlv_11, grammarAccess.getApplyStatementRuleAccess().getRightSquareBracketKeyword_10());
 		}
-		(
-			(
-				{
-					if ($current==null) {
-						$current = createModelElement(grammarAccess.getFunctionDefinitionReferenceRuleRule());
-					}
-				}
-				{
-					newCompositeNode(grammarAccess.getFunctionDefinitionReferenceRuleAccess().getDefinitionTypeDefinitionCrossReference_2_0());
-				}
-				ruleStringOrId
-				{
-					afterParserOrEnumRuleCall();
-				}
-			)
-		)
-	)
-;
-
-// Entry rule entryRuleParametrizedFunctionDefinitionReferenceRule
-entryRuleParametrizedFunctionDefinitionReferenceRule returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getParametrizedFunctionDefinitionReferenceRuleRule()); }
-	iv_ruleParametrizedFunctionDefinitionReferenceRule=ruleParametrizedFunctionDefinitionReferenceRule
-	{ $current=$iv_ruleParametrizedFunctionDefinitionReferenceRule.current; }
-	EOF;
-
-// Rule ParametrizedFunctionDefinitionReferenceRule
-ruleParametrizedFunctionDefinitionReferenceRule returns [EObject current=null]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
-	(
-		(
-			{
-				$current = forceCreateModelElement(
-					grammarAccess.getParametrizedFunctionDefinitionReferenceRuleAccess().getParametrizedFunctionDefinitionReferenceAction_0(),
-					$current);
-			}
-		)
-		otherlv_1='function'
+		otherlv_12='s;'
 		{
-			newLeafNode(otherlv_1, grammarAccess.getParametrizedFunctionDefinitionReferenceRuleAccess().getFunctionKeyword_1());
+			newLeafNode(otherlv_12, grammarAccess.getApplyStatementRuleAccess().getSKeyword_11());
 		}
-		(
-			(
-				{
-					if ($current==null) {
-						$current = createModelElement(grammarAccess.getParametrizedFunctionDefinitionReferenceRuleRule());
-					}
-				}
-				{
-					newCompositeNode(grammarAccess.getParametrizedFunctionDefinitionReferenceRuleAccess().getDefinitionParametrizedFunctionDefinitionCrossReference_2_0());
-				}
-				ruleStringOrId
-				{
-					afterParserOrEnumRuleCall();
-				}
-			)
-		)
 	)
 ;
 

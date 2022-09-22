@@ -17,8 +17,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link de.evoal.languages.model.generator.Configuration#getUses <em>Uses</em>}</li>
- *   <li>{@link de.evoal.languages.model.generator.Configuration#getGenerators <em>Generators</em>}</li>
- *   <li>{@link de.evoal.languages.model.generator.Configuration#getFunctions <em>Functions</em>}</li>
+ *   <li>{@link de.evoal.languages.model.generator.Configuration#getPipelines <em>Pipelines</em>}</li>
  *   <li>{@link de.evoal.languages.model.generator.Configuration#getStatements <em>Statements</em>}</li>
  * </ul>
  *
@@ -40,28 +39,16 @@ public interface Configuration extends EObject {
 	EList<Use> getUses();
 
 	/**
-	 * Returns the value of the '<em><b>Generators</b></em>' containment reference list.
-	 * The list contents are of type {@link de.evoal.languages.model.generator.GeneratorDefinition}.
+	 * Returns the value of the '<em><b>Pipelines</b></em>' containment reference list.
+	 * The list contents are of type {@link de.evoal.languages.model.generator.PipelineDefinition}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Generators</em>' containment reference list.
-	 * @see de.evoal.languages.model.generator.GeneratorPackage#getConfiguration_Generators()
+	 * @return the value of the '<em>Pipelines</em>' containment reference list.
+	 * @see de.evoal.languages.model.generator.GeneratorPackage#getConfiguration_Pipelines()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<GeneratorDefinition> getGenerators();
-
-	/**
-	 * Returns the value of the '<em><b>Functions</b></em>' containment reference list.
-	 * The list contents are of type {@link de.evoal.languages.model.generator.ParametrizedFunctionDefinition}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Functions</em>' containment reference list.
-	 * @see de.evoal.languages.model.generator.GeneratorPackage#getConfiguration_Functions()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<ParametrizedFunctionDefinition> getFunctions();
+	EList<PipelineDefinition> getPipelines();
 
 	/**
 	 * Returns the value of the '<em><b>Statements</b></em>' containment reference list.

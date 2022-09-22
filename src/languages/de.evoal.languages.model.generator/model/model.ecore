@@ -10,25 +10,23 @@
   <eClassifiers xsi:type="ecore:EClass" name="Configuration">
     <eStructuralFeatures xsi:type="ecore:EReference" name="uses" upperBound="-1" eType="#//Use"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="generators" upperBound="-1"
-        eType="#//GeneratorDefinition" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="functions" upperBound="-1"
-        eType="#//ParametrizedFunctionDefinition" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pipelines" upperBound="-1"
+        eType="#//PipelineDefinition" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="statements" upperBound="-1"
         eType="#//Statement" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Use">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="importURI" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ParametrizedFunctionDefinition">
+  <eClassifiers xsi:type="ecore:EClass" name="PipelineDefinition">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="definition" eType="ecore:EClass ../../de.evoal.languages.model.instance/model/model.ecore#//Instance"
-        containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="GeneratorDefinition">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="definition" eType="ecore:EClass ../../de.evoal.languages.model.instance/model/model.ecore#//Instance"
-        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="definitions" ordered="false"
+        upperBound="-1" eType="ecore:EClass ../../de.evoal.languages.model.instance/model/model.ecore#//Instance"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/OCL/Collection">
+        <details key="nullFree" value="false"/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Statement"/>
   <eClassifiers xsi:type="ecore:EClass" name="ForStatement" eSuperTypes="#//Statement">
@@ -43,44 +41,26 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="start" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="end" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Functions" eSuperTypes="#//Range">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="functionReferences" eType="#//FunctionReferences"
-        containment="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PipelineArray" eSuperTypes="#//Range">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="references" ordered="false"
+        upperBound="-1" eType="#//PipelineReference" containment="true">
+      <eAnnotations source="http://www.eclipse.org/OCL/Collection">
+        <details key="nullFree" value="false"/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="FunctionReferences">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="functions" upperBound="-1"
-        eType="#//FunctionDefReference" containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Generators" eSuperTypes="#//Range">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="generatorReferences" eType="#//GeneratorReferences"
-        containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="GeneratorReferences">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="generators" unique="false"
-        upperBound="-1" eType="#//GeneratorDefinition"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PipelineReference">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pipeline" lowerBound="1"
+        eType="#//PipelineDefinition"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ApplyStatement" eSuperTypes="#//Statement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="file" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="count" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="function" eType="#//FunctionReference"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="generator" eType="#//GeneratorReference"
-        containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="GeneratorReference"/>
-  <eClassifiers xsi:type="ecore:EClass" name="GeneratorDefinitionReference" eSuperTypes="#//GeneratorReference">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="definition" eType="#//GeneratorDefinition"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="FunctionReference"/>
-  <eClassifiers xsi:type="ecore:EClass" name="FunctionDefReference" eSuperTypes="#//FunctionReference"/>
-  <eClassifiers xsi:type="ecore:EClass" name="LoopVariable" eSuperTypes="#//GeneratorReference #//FunctionReference">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="definition" eType="#//ForStatement"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="FunctionDefinitionReference" eSuperTypes="#//FunctionDefReference">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="definition" eType="ecore:EClass ../../de.evoal.languages.model.dl/model/model.ecore#//TypeDefinition"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ParametrizedFunctionDefinitionReference"
-      eSuperTypes="#//FunctionDefReference">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="definition" eType="#//ParametrizedFunctionDefinition"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pipelines" ordered="false"
+        upperBound="-1" eType="#//PipelineReference" containment="true">
+      <eAnnotations source="http://www.eclipse.org/OCL/Collection">
+        <details key="nullFree" value="false"/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
 </ecore:EPackage>

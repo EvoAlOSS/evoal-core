@@ -11,6 +11,9 @@
     <genClasses ecoreClass="model.ecore#//Instance">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//Instance/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//Instance/attributes"/>
+      <genOperations ecoreOperation="model.ecore#//Instance/findAttribute" body="return getAttributes().stream().filter(n -> n.getName().equals(name)).findFirst().orElse(null);">
+        <genParameters ecoreParameter="model.ecore#//Instance/findAttribute/name"/>
+      </genOperations>
     </genClasses>
     <genClasses ecoreClass="model.ecore#//Attribute">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//Attribute/name"/>

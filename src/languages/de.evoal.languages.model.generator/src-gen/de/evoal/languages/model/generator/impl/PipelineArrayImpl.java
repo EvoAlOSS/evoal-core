@@ -3,9 +3,9 @@
  */
 package de.evoal.languages.model.generator.impl;
 
-import de.evoal.languages.model.generator.FunctionDefReference;
-import de.evoal.languages.model.generator.FunctionReferences;
 import de.evoal.languages.model.generator.GeneratorPackage;
+import de.evoal.languages.model.generator.PipelineArray;
+import de.evoal.languages.model.generator.PipelineReference;
 
 import java.util.Collection;
 
@@ -16,41 +16,39 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Function References</b></em>'.
+ * An implementation of the model object '<em><b>Pipeline Array</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link de.evoal.languages.model.generator.impl.FunctionReferencesImpl#getFunctions <em>Functions</em>}</li>
+ *   <li>{@link de.evoal.languages.model.generator.impl.PipelineArrayImpl#getReferences <em>References</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class FunctionReferencesImpl extends MinimalEObjectImpl.Container implements FunctionReferences {
+public class PipelineArrayImpl extends RangeImpl implements PipelineArray {
 	/**
-	 * The cached value of the '{@link #getFunctions() <em>Functions</em>}' containment reference list.
+	 * The cached value of the '{@link #getReferences() <em>References</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getFunctions()
+	 * @see #getReferences()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<FunctionDefReference> functions;
+	protected EList<PipelineReference> references;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected FunctionReferencesImpl() {
+	protected PipelineArrayImpl() {
 		super();
 	}
 
@@ -61,7 +59,7 @@ public class FunctionReferencesImpl extends MinimalEObjectImpl.Container impleme
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return GeneratorPackage.Literals.FUNCTION_REFERENCES;
+		return GeneratorPackage.Literals.PIPELINE_ARRAY;
 	}
 
 	/**
@@ -70,11 +68,11 @@ public class FunctionReferencesImpl extends MinimalEObjectImpl.Container impleme
 	 * @generated
 	 */
 	@Override
-	public EList<FunctionDefReference> getFunctions() {
-		if (functions == null) {
-			functions = new EObjectContainmentEList<FunctionDefReference>(FunctionDefReference.class, this, GeneratorPackage.FUNCTION_REFERENCES__FUNCTIONS);
+	public EList<PipelineReference> getReferences() {
+		if (references == null) {
+			references = new EObjectContainmentEList<PipelineReference>(PipelineReference.class, this, GeneratorPackage.PIPELINE_ARRAY__REFERENCES);
 		}
-		return functions;
+		return references;
 	}
 
 	/**
@@ -85,8 +83,8 @@ public class FunctionReferencesImpl extends MinimalEObjectImpl.Container impleme
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case GeneratorPackage.FUNCTION_REFERENCES__FUNCTIONS:
-				return ((InternalEList<?>)getFunctions()).basicRemove(otherEnd, msgs);
+			case GeneratorPackage.PIPELINE_ARRAY__REFERENCES:
+				return ((InternalEList<?>)getReferences()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -99,8 +97,8 @@ public class FunctionReferencesImpl extends MinimalEObjectImpl.Container impleme
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case GeneratorPackage.FUNCTION_REFERENCES__FUNCTIONS:
-				return getFunctions();
+			case GeneratorPackage.PIPELINE_ARRAY__REFERENCES:
+				return getReferences();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -114,9 +112,9 @@ public class FunctionReferencesImpl extends MinimalEObjectImpl.Container impleme
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case GeneratorPackage.FUNCTION_REFERENCES__FUNCTIONS:
-				getFunctions().clear();
-				getFunctions().addAll((Collection<? extends FunctionDefReference>)newValue);
+			case GeneratorPackage.PIPELINE_ARRAY__REFERENCES:
+				getReferences().clear();
+				getReferences().addAll((Collection<? extends PipelineReference>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -130,8 +128,8 @@ public class FunctionReferencesImpl extends MinimalEObjectImpl.Container impleme
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case GeneratorPackage.FUNCTION_REFERENCES__FUNCTIONS:
-				getFunctions().clear();
+			case GeneratorPackage.PIPELINE_ARRAY__REFERENCES:
+				getReferences().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -145,10 +143,10 @@ public class FunctionReferencesImpl extends MinimalEObjectImpl.Container impleme
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case GeneratorPackage.FUNCTION_REFERENCES__FUNCTIONS:
-				return functions != null && !functions.isEmpty();
+			case GeneratorPackage.PIPELINE_ARRAY__REFERENCES:
+				return references != null && !references.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
 
-} //FunctionReferencesImpl
+} //PipelineArrayImpl

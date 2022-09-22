@@ -4,17 +4,23 @@
 package de.evoal.languages.model.generator.impl;
 
 import de.evoal.languages.model.generator.ApplyStatement;
-import de.evoal.languages.model.generator.FunctionReference;
 import de.evoal.languages.model.generator.GeneratorPackage;
-import de.evoal.languages.model.generator.GeneratorReference;
+import de.evoal.languages.model.generator.PipelineReference;
+
+import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -26,8 +32,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <ul>
  *   <li>{@link de.evoal.languages.model.generator.impl.ApplyStatementImpl#getFile <em>File</em>}</li>
  *   <li>{@link de.evoal.languages.model.generator.impl.ApplyStatementImpl#getCount <em>Count</em>}</li>
- *   <li>{@link de.evoal.languages.model.generator.impl.ApplyStatementImpl#getFunction <em>Function</em>}</li>
- *   <li>{@link de.evoal.languages.model.generator.impl.ApplyStatementImpl#getGenerator <em>Generator</em>}</li>
+ *   <li>{@link de.evoal.languages.model.generator.impl.ApplyStatementImpl#getPipelines <em>Pipelines</em>}</li>
  * </ul>
  *
  * @generated
@@ -74,24 +79,14 @@ public class ApplyStatementImpl extends StatementImpl implements ApplyStatement 
 	protected int count = COUNT_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getFunction() <em>Function</em>}' containment reference.
+	 * The cached value of the '{@link #getPipelines() <em>Pipelines</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getFunction()
+	 * @see #getPipelines()
 	 * @generated
 	 * @ordered
 	 */
-	protected FunctionReference function;
-
-	/**
-	 * The cached value of the '{@link #getGenerator() <em>Generator</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getGenerator()
-	 * @generated
-	 * @ordered
-	 */
-	protected GeneratorReference generator;
+	protected EList<PipelineReference> pipelines;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -164,88 +159,11 @@ public class ApplyStatementImpl extends StatementImpl implements ApplyStatement 
 	 * @generated
 	 */
 	@Override
-	public FunctionReference getFunction() {
-		return function;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetFunction(FunctionReference newFunction, NotificationChain msgs) {
-		FunctionReference oldFunction = function;
-		function = newFunction;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, GeneratorPackage.APPLY_STATEMENT__FUNCTION, oldFunction, newFunction);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
+	public EList<PipelineReference> getPipelines() {
+		if (pipelines == null) {
+			pipelines = new EObjectContainmentEList<PipelineReference>(PipelineReference.class, this, GeneratorPackage.APPLY_STATEMENT__PIPELINES);
 		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setFunction(FunctionReference newFunction) {
-		if (newFunction != function) {
-			NotificationChain msgs = null;
-			if (function != null)
-				msgs = ((InternalEObject)function).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - GeneratorPackage.APPLY_STATEMENT__FUNCTION, null, msgs);
-			if (newFunction != null)
-				msgs = ((InternalEObject)newFunction).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - GeneratorPackage.APPLY_STATEMENT__FUNCTION, null, msgs);
-			msgs = basicSetFunction(newFunction, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, GeneratorPackage.APPLY_STATEMENT__FUNCTION, newFunction, newFunction));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public GeneratorReference getGenerator() {
-		return generator;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetGenerator(GeneratorReference newGenerator, NotificationChain msgs) {
-		GeneratorReference oldGenerator = generator;
-		generator = newGenerator;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, GeneratorPackage.APPLY_STATEMENT__GENERATOR, oldGenerator, newGenerator);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setGenerator(GeneratorReference newGenerator) {
-		if (newGenerator != generator) {
-			NotificationChain msgs = null;
-			if (generator != null)
-				msgs = ((InternalEObject)generator).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - GeneratorPackage.APPLY_STATEMENT__GENERATOR, null, msgs);
-			if (newGenerator != null)
-				msgs = ((InternalEObject)newGenerator).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - GeneratorPackage.APPLY_STATEMENT__GENERATOR, null, msgs);
-			msgs = basicSetGenerator(newGenerator, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, GeneratorPackage.APPLY_STATEMENT__GENERATOR, newGenerator, newGenerator));
+		return pipelines;
 	}
 
 	/**
@@ -256,10 +174,8 @@ public class ApplyStatementImpl extends StatementImpl implements ApplyStatement 
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case GeneratorPackage.APPLY_STATEMENT__FUNCTION:
-				return basicSetFunction(null, msgs);
-			case GeneratorPackage.APPLY_STATEMENT__GENERATOR:
-				return basicSetGenerator(null, msgs);
+			case GeneratorPackage.APPLY_STATEMENT__PIPELINES:
+				return ((InternalEList<?>)getPipelines()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -276,10 +192,8 @@ public class ApplyStatementImpl extends StatementImpl implements ApplyStatement 
 				return getFile();
 			case GeneratorPackage.APPLY_STATEMENT__COUNT:
 				return getCount();
-			case GeneratorPackage.APPLY_STATEMENT__FUNCTION:
-				return getFunction();
-			case GeneratorPackage.APPLY_STATEMENT__GENERATOR:
-				return getGenerator();
+			case GeneratorPackage.APPLY_STATEMENT__PIPELINES:
+				return getPipelines();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -289,6 +203,7 @@ public class ApplyStatementImpl extends StatementImpl implements ApplyStatement 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -298,11 +213,9 @@ public class ApplyStatementImpl extends StatementImpl implements ApplyStatement 
 			case GeneratorPackage.APPLY_STATEMENT__COUNT:
 				setCount((Integer)newValue);
 				return;
-			case GeneratorPackage.APPLY_STATEMENT__FUNCTION:
-				setFunction((FunctionReference)newValue);
-				return;
-			case GeneratorPackage.APPLY_STATEMENT__GENERATOR:
-				setGenerator((GeneratorReference)newValue);
+			case GeneratorPackage.APPLY_STATEMENT__PIPELINES:
+				getPipelines().clear();
+				getPipelines().addAll((Collection<? extends PipelineReference>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -322,11 +235,8 @@ public class ApplyStatementImpl extends StatementImpl implements ApplyStatement 
 			case GeneratorPackage.APPLY_STATEMENT__COUNT:
 				setCount(COUNT_EDEFAULT);
 				return;
-			case GeneratorPackage.APPLY_STATEMENT__FUNCTION:
-				setFunction((FunctionReference)null);
-				return;
-			case GeneratorPackage.APPLY_STATEMENT__GENERATOR:
-				setGenerator((GeneratorReference)null);
+			case GeneratorPackage.APPLY_STATEMENT__PIPELINES:
+				getPipelines().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -344,10 +254,8 @@ public class ApplyStatementImpl extends StatementImpl implements ApplyStatement 
 				return FILE_EDEFAULT == null ? file != null : !FILE_EDEFAULT.equals(file);
 			case GeneratorPackage.APPLY_STATEMENT__COUNT:
 				return count != COUNT_EDEFAULT;
-			case GeneratorPackage.APPLY_STATEMENT__FUNCTION:
-				return function != null;
-			case GeneratorPackage.APPLY_STATEMENT__GENERATOR:
-				return generator != null;
+			case GeneratorPackage.APPLY_STATEMENT__PIPELINES:
+				return pipelines != null && !pipelines.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

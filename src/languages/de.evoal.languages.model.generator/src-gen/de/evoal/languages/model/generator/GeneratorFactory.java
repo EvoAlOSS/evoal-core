@@ -41,22 +41,13 @@ public interface GeneratorFactory extends EFactory {
 	Use createUse();
 
 	/**
-	 * Returns a new object of class '<em>Parametrized Function Definition</em>'.
+	 * Returns a new object of class '<em>Pipeline Definition</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Parametrized Function Definition</em>'.
+	 * @return a new object of class '<em>Pipeline Definition</em>'.
 	 * @generated
 	 */
-	ParametrizedFunctionDefinition createParametrizedFunctionDefinition();
-
-	/**
-	 * Returns a new object of class '<em>Definition</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Definition</em>'.
-	 * @generated
-	 */
-	GeneratorDefinition createGeneratorDefinition();
+	PipelineDefinition createPipelineDefinition();
 
 	/**
 	 * Returns a new object of class '<em>Statement</em>'.
@@ -95,40 +86,22 @@ public interface GeneratorFactory extends EFactory {
 	CounterRange createCounterRange();
 
 	/**
-	 * Returns a new object of class '<em>Functions</em>'.
+	 * Returns a new object of class '<em>Pipeline Array</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Functions</em>'.
+	 * @return a new object of class '<em>Pipeline Array</em>'.
 	 * @generated
 	 */
-	Functions createFunctions();
+	PipelineArray createPipelineArray();
 
 	/**
-	 * Returns a new object of class '<em>Function References</em>'.
+	 * Returns a new object of class '<em>Pipeline Reference</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Function References</em>'.
+	 * @return a new object of class '<em>Pipeline Reference</em>'.
 	 * @generated
 	 */
-	FunctionReferences createFunctionReferences();
-
-	/**
-	 * Returns a new object of class '<em>Generators</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Generators</em>'.
-	 * @generated
-	 */
-	Generators createGenerators();
-
-	/**
-	 * Returns a new object of class '<em>References</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>References</em>'.
-	 * @generated
-	 */
-	GeneratorReferences createGeneratorReferences();
+	PipelineReference createPipelineReference();
 
 	/**
 	 * Returns a new object of class '<em>Apply Statement</em>'.
@@ -138,69 +111,6 @@ public interface GeneratorFactory extends EFactory {
 	 * @generated
 	 */
 	ApplyStatement createApplyStatement();
-
-	/**
-	 * Returns a new object of class '<em>Reference</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Reference</em>'.
-	 * @generated
-	 */
-	GeneratorReference createGeneratorReference();
-
-	/**
-	 * Returns a new object of class '<em>Definition Reference</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Definition Reference</em>'.
-	 * @generated
-	 */
-	GeneratorDefinitionReference createGeneratorDefinitionReference();
-
-	/**
-	 * Returns a new object of class '<em>Function Reference</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Function Reference</em>'.
-	 * @generated
-	 */
-	FunctionReference createFunctionReference();
-
-	/**
-	 * Returns a new object of class '<em>Function Def Reference</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Function Def Reference</em>'.
-	 * @generated
-	 */
-	FunctionDefReference createFunctionDefReference();
-
-	/**
-	 * Returns a new object of class '<em>Loop Variable</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Loop Variable</em>'.
-	 * @generated
-	 */
-	LoopVariable createLoopVariable();
-
-	/**
-	 * Returns a new object of class '<em>Function Definition Reference</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Function Definition Reference</em>'.
-	 * @generated
-	 */
-	FunctionDefinitionReference createFunctionDefinitionReference();
-
-	/**
-	 * Returns a new object of class '<em>Parametrized Function Definition Reference</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Parametrized Function Definition Reference</em>'.
-	 * @generated
-	 */
-	ParametrizedFunctionDefinitionReference createParametrizedFunctionDefinitionReference();
 
 	/**
 	 * Returns the package supported by this factory.

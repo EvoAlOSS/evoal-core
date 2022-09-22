@@ -5,8 +5,7 @@ import "https://www.evoal.de/languages/generator/1.0.0"
 
 ConfigurationRule returns Configuration:
 	(uses += UseRule)*
-	(generators += GeneratorDefinitionRule)*
-	(functions += ParametrizedFunctionDefinitionRule)*
+	(pipelines += PipelineDefinitionRule)*
 
 	(statements	+= StatementRule)*
 ;
@@ -15,17 +14,10 @@ UseRule returns Use:
 	'use' importURI = STRING ';'
 ;
 
-
-ParametrizedFunctionDefinitionRule returns ParametrizedFunctionDefinition:
-	'function' name = StringOrId 'using'
-	   definition = InstanceRule
-	';'
-;
-
-GeneratorDefinitionRule returns GeneratorDefinition:
-	'generator' name = StringOrId 'using'
-		definition = InstanceRule
-	';'
+PipelineDefinitionRule returns PipelineDefinition:
+	'pipeline' name = StringOrId '['
+		(definitions += InstanceRule (',' definitions += InstanceRule)*)?
+	']'
 ;
 
 StatementRule returns Statement:
@@ -39,57 +31,21 @@ ForStatementRule returns ForStatement:
 ;
 
 RangeRule returns Range:
-	FunctionsRule | GeneratorsRule | CounterRangeRule
+	PipelineArrayRule | CounterRangeRule
 ;
 
 CounterRangeRule returns CounterRange:
 	'[' start = INT 'to' end = INT ']'
 ;
 
-FunctionsRule returns Functions:
-	{Functions} 'functions' (functionReferences = FunctionReferencesRule)?
+PipelineArrayRule returns PipelineArray:
+	{PipelineArray} 'pipelines' ('[' references += PipelineReferenceRule (',' references += PipelineReferenceRule)* ']')?
 ;
 
-FunctionReferencesRule returns FunctionReferences:
-	'[' functions += FunctionDefReferenceRule (',' functions += FunctionDefReferenceRule)* ']'
-;
-
-GeneratorsRule returns Generators:
-	{Generators} 'generators' (generatorReferences = GeneratorReferencesRule)?
-;
-
-GeneratorReferencesRule returns GeneratorReferences:
-	'[' generators += [GeneratorDefinition|StringOrId] (',' generators += [GeneratorDefinition|StringOrId])* ']'
+PipelineReferenceRule returns PipelineReference:
+	pipeline = [PipelineDefinition|StringOrId]
 ;
 
 ApplyStatementRule returns ApplyStatement:
-	'write' file = STRING 'with' count = INT 'samples' 'from' 'applying'  function = FunctionReferenceRule 'on' generator = GeneratorReferenceRule ';'
-;
-
-GeneratorReferenceRule returns GeneratorReference:
-	GeneratorDefinitionReferenceRule | LoopVariableReference	
-;
-
-GeneratorDefinitionReferenceRule returns GeneratorDefinitionReference:
-	'generator' definition = [ GeneratorDefinition | StringOrId ]
-;
-
-FunctionReferenceRule returns FunctionReference:
-	FunctionDefReferenceRule | LoopVariableReference
-;
-
-FunctionDefReferenceRule returns FunctionDefReference:
-	FunctionDefinitionReferenceRule | ParametrizedFunctionDefinitionReferenceRule
-;
-
-LoopVariableReference returns LoopVariable:
-	{LoopVariable} definition = [ForStatement | ID]
-;
-
-FunctionDefinitionReferenceRule returns FunctionDefinitionReference:
-	{FunctionDefinitionReference} 'definition' definition = [TypeDefinition|StringOrId]	
-;
-
-ParametrizedFunctionDefinitionReferenceRule returns ParametrizedFunctionDefinitionReference:
-	{ParametrizedFunctionDefinitionReference} 'function' definition = [ParametrizedFunctionDefinition|StringOrId]
+	'write' file = STRING 'with' count = INT 'samples' 'from' 'executing' '[' pipelines += PipelineReferenceRule (',' pipelines += PipelineReferenceRule)* ']' 's;'
 ;

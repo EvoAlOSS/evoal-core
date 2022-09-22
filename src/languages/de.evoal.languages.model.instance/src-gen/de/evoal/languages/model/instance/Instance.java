@@ -59,4 +59,12 @@ public interface Instance extends Value {
 	 */
 	EList<Attribute> getAttributes();
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model nameRequired="true"
+	 * @generated
+	 */
+	Attribute findAttribute(String name);
+
 } // Instance

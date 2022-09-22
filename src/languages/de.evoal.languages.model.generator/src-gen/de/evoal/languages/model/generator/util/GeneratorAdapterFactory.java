@@ -77,12 +77,8 @@ public class GeneratorAdapterFactory extends AdapterFactoryImpl {
 				return createUseAdapter();
 			}
 			@Override
-			public Adapter caseParametrizedFunctionDefinition(ParametrizedFunctionDefinition object) {
-				return createParametrizedFunctionDefinitionAdapter();
-			}
-			@Override
-			public Adapter caseGeneratorDefinition(GeneratorDefinition object) {
-				return createGeneratorDefinitionAdapter();
+			public Adapter casePipelineDefinition(PipelineDefinition object) {
+				return createPipelineDefinitionAdapter();
 			}
 			@Override
 			public Adapter caseStatement(Statement object) {
@@ -101,52 +97,16 @@ public class GeneratorAdapterFactory extends AdapterFactoryImpl {
 				return createCounterRangeAdapter();
 			}
 			@Override
-			public Adapter caseFunctions(Functions object) {
-				return createFunctionsAdapter();
+			public Adapter casePipelineArray(PipelineArray object) {
+				return createPipelineArrayAdapter();
 			}
 			@Override
-			public Adapter caseFunctionReferences(FunctionReferences object) {
-				return createFunctionReferencesAdapter();
-			}
-			@Override
-			public Adapter caseGenerators(Generators object) {
-				return createGeneratorsAdapter();
-			}
-			@Override
-			public Adapter caseGeneratorReferences(GeneratorReferences object) {
-				return createGeneratorReferencesAdapter();
+			public Adapter casePipelineReference(PipelineReference object) {
+				return createPipelineReferenceAdapter();
 			}
 			@Override
 			public Adapter caseApplyStatement(ApplyStatement object) {
 				return createApplyStatementAdapter();
-			}
-			@Override
-			public Adapter caseGeneratorReference(GeneratorReference object) {
-				return createGeneratorReferenceAdapter();
-			}
-			@Override
-			public Adapter caseGeneratorDefinitionReference(GeneratorDefinitionReference object) {
-				return createGeneratorDefinitionReferenceAdapter();
-			}
-			@Override
-			public Adapter caseFunctionReference(FunctionReference object) {
-				return createFunctionReferenceAdapter();
-			}
-			@Override
-			public Adapter caseFunctionDefReference(FunctionDefReference object) {
-				return createFunctionDefReferenceAdapter();
-			}
-			@Override
-			public Adapter caseLoopVariable(LoopVariable object) {
-				return createLoopVariableAdapter();
-			}
-			@Override
-			public Adapter caseFunctionDefinitionReference(FunctionDefinitionReference object) {
-				return createFunctionDefinitionReferenceAdapter();
-			}
-			@Override
-			public Adapter caseParametrizedFunctionDefinitionReference(ParametrizedFunctionDefinitionReference object) {
-				return createParametrizedFunctionDefinitionReferenceAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -197,30 +157,16 @@ public class GeneratorAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.generator.ParametrizedFunctionDefinition <em>Parametrized Function Definition</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.generator.PipelineDefinition <em>Pipeline Definition</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.evoal.languages.model.generator.ParametrizedFunctionDefinition
+	 * @see de.evoal.languages.model.generator.PipelineDefinition
 	 * @generated
 	 */
-	public Adapter createParametrizedFunctionDefinitionAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.generator.GeneratorDefinition <em>Definition</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.evoal.languages.model.generator.GeneratorDefinition
-	 * @generated
-	 */
-	public Adapter createGeneratorDefinitionAdapter() {
+	public Adapter createPipelineDefinitionAdapter() {
 		return null;
 	}
 
@@ -281,58 +227,30 @@ public class GeneratorAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.generator.Functions <em>Functions</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.generator.PipelineArray <em>Pipeline Array</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.evoal.languages.model.generator.Functions
+	 * @see de.evoal.languages.model.generator.PipelineArray
 	 * @generated
 	 */
-	public Adapter createFunctionsAdapter() {
+	public Adapter createPipelineArrayAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.generator.FunctionReferences <em>Function References</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.generator.PipelineReference <em>Pipeline Reference</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.evoal.languages.model.generator.FunctionReferences
+	 * @see de.evoal.languages.model.generator.PipelineReference
 	 * @generated
 	 */
-	public Adapter createFunctionReferencesAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.generator.Generators <em>Generators</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.evoal.languages.model.generator.Generators
-	 * @generated
-	 */
-	public Adapter createGeneratorsAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.generator.GeneratorReferences <em>References</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.evoal.languages.model.generator.GeneratorReferences
-	 * @generated
-	 */
-	public Adapter createGeneratorReferencesAdapter() {
+	public Adapter createPipelineReferenceAdapter() {
 		return null;
 	}
 
@@ -347,104 +265,6 @@ public class GeneratorAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createApplyStatementAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.generator.GeneratorReference <em>Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.evoal.languages.model.generator.GeneratorReference
-	 * @generated
-	 */
-	public Adapter createGeneratorReferenceAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.generator.GeneratorDefinitionReference <em>Definition Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.evoal.languages.model.generator.GeneratorDefinitionReference
-	 * @generated
-	 */
-	public Adapter createGeneratorDefinitionReferenceAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.generator.FunctionReference <em>Function Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.evoal.languages.model.generator.FunctionReference
-	 * @generated
-	 */
-	public Adapter createFunctionReferenceAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.generator.FunctionDefReference <em>Function Def Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.evoal.languages.model.generator.FunctionDefReference
-	 * @generated
-	 */
-	public Adapter createFunctionDefReferenceAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.generator.LoopVariable <em>Loop Variable</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.evoal.languages.model.generator.LoopVariable
-	 * @generated
-	 */
-	public Adapter createLoopVariableAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.generator.FunctionDefinitionReference <em>Function Definition Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.evoal.languages.model.generator.FunctionDefinitionReference
-	 * @generated
-	 */
-	public Adapter createFunctionDefinitionReferenceAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.generator.ParametrizedFunctionDefinitionReference <em>Parametrized Function Definition Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.evoal.languages.model.generator.ParametrizedFunctionDefinitionReference
-	 * @generated
-	 */
-	public Adapter createParametrizedFunctionDefinitionReferenceAdapter() {
 		return null;
 	}
 
