@@ -6,6 +6,7 @@ package de.evoal.languages.model.generator.impl;
 import de.evoal.languages.model.generator.GeneratorPackage;
 import de.evoal.languages.model.generator.PipelineDefinition;
 
+import de.evoal.languages.model.generator.Step;
 import de.evoal.languages.model.instance.Instance;
 
 import java.util.Collection;
@@ -33,7 +34,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * </p>
  * <ul>
  *   <li>{@link de.evoal.languages.model.generator.impl.PipelineDefinitionImpl#getName <em>Name</em>}</li>
- *   <li>{@link de.evoal.languages.model.generator.impl.PipelineDefinitionImpl#getDefinitions <em>Definitions</em>}</li>
+ *   <li>{@link de.evoal.languages.model.generator.impl.PipelineDefinitionImpl#getSteps <em>Steps</em>}</li>
  * </ul>
  *
  * @generated
@@ -60,14 +61,14 @@ public class PipelineDefinitionImpl extends MinimalEObjectImpl.Container impleme
 	protected String name = NAME_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getDefinitions() <em>Definitions</em>}' containment reference list.
+	 * The cached value of the '{@link #getSteps() <em>Steps</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getDefinitions()
+	 * @see #getSteps()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Instance> definitions;
+	protected EList<Step> steps;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -117,11 +118,11 @@ public class PipelineDefinitionImpl extends MinimalEObjectImpl.Container impleme
 	 * @generated
 	 */
 	@Override
-	public EList<Instance> getDefinitions() {
-		if (definitions == null) {
-			definitions = new EObjectContainmentEList<Instance>(Instance.class, this, GeneratorPackage.PIPELINE_DEFINITION__DEFINITIONS);
+	public EList<Step> getSteps() {
+		if (steps == null) {
+			steps = new EObjectContainmentEList<Step>(Step.class, this, GeneratorPackage.PIPELINE_DEFINITION__STEPS);
 		}
-		return definitions;
+		return steps;
 	}
 
 	/**
@@ -132,8 +133,8 @@ public class PipelineDefinitionImpl extends MinimalEObjectImpl.Container impleme
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case GeneratorPackage.PIPELINE_DEFINITION__DEFINITIONS:
-				return ((InternalEList<?>)getDefinitions()).basicRemove(otherEnd, msgs);
+			case GeneratorPackage.PIPELINE_DEFINITION__STEPS:
+				return ((InternalEList<?>)getSteps()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -148,8 +149,8 @@ public class PipelineDefinitionImpl extends MinimalEObjectImpl.Container impleme
 		switch (featureID) {
 			case GeneratorPackage.PIPELINE_DEFINITION__NAME:
 				return getName();
-			case GeneratorPackage.PIPELINE_DEFINITION__DEFINITIONS:
-				return getDefinitions();
+			case GeneratorPackage.PIPELINE_DEFINITION__STEPS:
+				return getSteps();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -166,9 +167,9 @@ public class PipelineDefinitionImpl extends MinimalEObjectImpl.Container impleme
 			case GeneratorPackage.PIPELINE_DEFINITION__NAME:
 				setName((String)newValue);
 				return;
-			case GeneratorPackage.PIPELINE_DEFINITION__DEFINITIONS:
-				getDefinitions().clear();
-				getDefinitions().addAll((Collection<? extends Instance>)newValue);
+			case GeneratorPackage.PIPELINE_DEFINITION__STEPS:
+				getSteps().clear();
+				getSteps().addAll((Collection<? extends Step>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -185,8 +186,8 @@ public class PipelineDefinitionImpl extends MinimalEObjectImpl.Container impleme
 			case GeneratorPackage.PIPELINE_DEFINITION__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case GeneratorPackage.PIPELINE_DEFINITION__DEFINITIONS:
-				getDefinitions().clear();
+			case GeneratorPackage.PIPELINE_DEFINITION__STEPS:
+				getSteps().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -202,8 +203,8 @@ public class PipelineDefinitionImpl extends MinimalEObjectImpl.Container impleme
 		switch (featureID) {
 			case GeneratorPackage.PIPELINE_DEFINITION__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case GeneratorPackage.PIPELINE_DEFINITION__DEFINITIONS:
-				return definitions != null && !definitions.isEmpty();
+			case GeneratorPackage.PIPELINE_DEFINITION__STEPS:
+				return steps != null && !steps.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

@@ -50,6 +50,15 @@ public interface GeneratorFactory extends EFactory {
 	PipelineDefinition createPipelineDefinition();
 
 	/**
+	 * Returns a new object of class '<em>Step</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Step</em>'.
+	 * @generated
+	 */
+	Step createStep();
+
+	/**
 	 * Returns a new object of class '<em>Statement</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -102,6 +111,24 @@ public interface GeneratorFactory extends EFactory {
 	 * @generated
 	 */
 	PipelineReference createPipelineReference();
+
+	/**
+	 * Returns a new object of class '<em>Pipeline Definition Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Pipeline Definition Reference</em>'.
+	 * @generated
+	 */
+	PipelineDefinitionReference createPipelineDefinitionReference();
+
+	/**
+	 * Returns a new object of class '<em>Variable Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Variable Reference</em>'.
+	 * @generated
+	 */
+	VariableReference createVariableReference();
 
 	/**
 	 * Returns a new object of class '<em>Apply Statement</em>'.

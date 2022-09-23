@@ -81,6 +81,10 @@ public class GeneratorAdapterFactory extends AdapterFactoryImpl {
 				return createPipelineDefinitionAdapter();
 			}
 			@Override
+			public Adapter caseStep(Step object) {
+				return createStepAdapter();
+			}
+			@Override
 			public Adapter caseStatement(Statement object) {
 				return createStatementAdapter();
 			}
@@ -103,6 +107,14 @@ public class GeneratorAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter casePipelineReference(PipelineReference object) {
 				return createPipelineReferenceAdapter();
+			}
+			@Override
+			public Adapter casePipelineDefinitionReference(PipelineDefinitionReference object) {
+				return createPipelineDefinitionReferenceAdapter();
+			}
+			@Override
+			public Adapter caseVariableReference(VariableReference object) {
+				return createVariableReferenceAdapter();
 			}
 			@Override
 			public Adapter caseApplyStatement(ApplyStatement object) {
@@ -167,6 +179,20 @@ public class GeneratorAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createPipelineDefinitionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.generator.Step <em>Step</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.evoal.languages.model.generator.Step
+	 * @generated
+	 */
+	public Adapter createStepAdapter() {
 		return null;
 	}
 
@@ -251,6 +277,34 @@ public class GeneratorAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createPipelineReferenceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.generator.PipelineDefinitionReference <em>Pipeline Definition Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.evoal.languages.model.generator.PipelineDefinitionReference
+	 * @generated
+	 */
+	public Adapter createPipelineDefinitionReferenceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.generator.VariableReference <em>Variable Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.evoal.languages.model.generator.VariableReference
+	 * @generated
+	 */
+	public Adapter createVariableReferenceAdapter() {
 		return null;
 	}
 

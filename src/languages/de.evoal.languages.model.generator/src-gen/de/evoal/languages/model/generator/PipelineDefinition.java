@@ -19,7 +19,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link de.evoal.languages.model.generator.PipelineDefinition#getName <em>Name</em>}</li>
- *   <li>{@link de.evoal.languages.model.generator.PipelineDefinition#getDefinitions <em>Definitions</em>}</li>
+ *   <li>{@link de.evoal.languages.model.generator.PipelineDefinition#getSteps <em>Steps</em>}</li>
  * </ul>
  *
  * @see de.evoal.languages.model.generator.GeneratorPackage#getPipelineDefinition()
@@ -50,16 +50,16 @@ public interface PipelineDefinition extends EObject {
 	void setName(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Definitions</b></em>' containment reference list.
-	 * The list contents are of type {@link de.evoal.languages.model.instance.Instance}.
+	 * Returns the value of the '<em><b>Steps</b></em>' containment reference list.
+	 * The list contents are of type {@link de.evoal.languages.model.generator.Step}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Definitions</em>' containment reference list.
-	 * @see de.evoal.languages.model.generator.GeneratorPackage#getPipelineDefinition_Definitions()
+	 * @return the value of the '<em>Steps</em>' containment reference list.
+	 * @see de.evoal.languages.model.generator.GeneratorPackage#getPipelineDefinition_Steps()
 	 * @model containment="true" ordered="false"
 	 *        annotation="http://www.eclipse.org/OCL/Collection nullFree='false'"
 	 * @generated
 	 */
-	EList<Instance> getDefinitions();
+	EList<Step> getSteps();
 
 } // PipelineDefinition

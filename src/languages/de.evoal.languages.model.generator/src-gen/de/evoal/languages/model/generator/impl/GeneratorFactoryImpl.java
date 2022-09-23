@@ -60,12 +60,15 @@ public class GeneratorFactoryImpl extends EFactoryImpl implements GeneratorFacto
 			case GeneratorPackage.CONFIGURATION: return createConfiguration();
 			case GeneratorPackage.USE: return createUse();
 			case GeneratorPackage.PIPELINE_DEFINITION: return createPipelineDefinition();
+			case GeneratorPackage.STEP: return createStep();
 			case GeneratorPackage.STATEMENT: return createStatement();
 			case GeneratorPackage.FOR_STATEMENT: return createForStatement();
 			case GeneratorPackage.RANGE: return createRange();
 			case GeneratorPackage.COUNTER_RANGE: return createCounterRange();
 			case GeneratorPackage.PIPELINE_ARRAY: return createPipelineArray();
 			case GeneratorPackage.PIPELINE_REFERENCE: return createPipelineReference();
+			case GeneratorPackage.PIPELINE_DEFINITION_REFERENCE: return createPipelineDefinitionReference();
+			case GeneratorPackage.VARIABLE_REFERENCE: return createVariableReference();
 			case GeneratorPackage.APPLY_STATEMENT: return createApplyStatement();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -103,6 +106,17 @@ public class GeneratorFactoryImpl extends EFactoryImpl implements GeneratorFacto
 	public PipelineDefinition createPipelineDefinition() {
 		PipelineDefinitionImpl pipelineDefinition = new PipelineDefinitionImpl();
 		return pipelineDefinition;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Step createStep() {
+		StepImpl step = new StepImpl();
+		return step;
 	}
 
 	/**
@@ -169,6 +183,28 @@ public class GeneratorFactoryImpl extends EFactoryImpl implements GeneratorFacto
 	public PipelineReference createPipelineReference() {
 		PipelineReferenceImpl pipelineReference = new PipelineReferenceImpl();
 		return pipelineReference;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public PipelineDefinitionReference createPipelineDefinitionReference() {
+		PipelineDefinitionReferenceImpl pipelineDefinitionReference = new PipelineDefinitionReferenceImpl();
+		return pipelineDefinitionReference;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public VariableReference createVariableReference() {
+		VariableReferenceImpl variableReference = new VariableReferenceImpl();
+		return variableReference;
 	}
 
 	/**

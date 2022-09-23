@@ -10,38 +10,11 @@ import org.eclipse.emf.ecore.EObject;
  * A representation of the model object '<em><b>Pipeline Reference</b></em>'.
  * <!-- end-user-doc -->
  *
- * <p>
- * The following features are supported:
- * </p>
- * <ul>
- *   <li>{@link de.evoal.languages.model.generator.PipelineReference#getPipeline <em>Pipeline</em>}</li>
- * </ul>
  *
  * @see de.evoal.languages.model.generator.GeneratorPackage#getPipelineReference()
  * @model
  * @generated
  */
 public interface PipelineReference extends EObject {
-	/**
-	 * Returns the value of the '<em><b>Pipeline</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Pipeline</em>' reference.
-	 * @see #setPipeline(PipelineDefinition)
-	 * @see de.evoal.languages.model.generator.GeneratorPackage#getPipelineReference_Pipeline()
-	 * @model required="true"
-	 * @generated
-	 */
-	PipelineDefinition getPipeline();
-
-	/**
-	 * Sets the value of the '{@link de.evoal.languages.model.generator.PipelineReference#getPipeline <em>Pipeline</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Pipeline</em>' reference.
-	 * @see #getPipeline()
-	 * @generated
-	 */
-	void setPipeline(PipelineDefinition value);
 
 } // PipelineReference

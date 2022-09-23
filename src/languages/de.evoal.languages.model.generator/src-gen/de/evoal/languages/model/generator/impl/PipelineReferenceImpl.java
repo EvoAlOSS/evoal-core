@@ -19,26 +19,10 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Pipeline Reference</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * The following features are implemented:
- * </p>
- * <ul>
- *   <li>{@link de.evoal.languages.model.generator.impl.PipelineReferenceImpl#getPipeline <em>Pipeline</em>}</li>
- * </ul>
  *
  * @generated
  */
 public class PipelineReferenceImpl extends MinimalEObjectImpl.Container implements PipelineReference {
-	/**
-	 * The cached value of the '{@link #getPipeline() <em>Pipeline</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getPipeline()
-	 * @generated
-	 * @ordered
-	 */
-	protected PipelineDefinition pipeline;
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -56,105 +40,6 @@ public class PipelineReferenceImpl extends MinimalEObjectImpl.Container implemen
 	@Override
 	protected EClass eStaticClass() {
 		return GeneratorPackage.Literals.PIPELINE_REFERENCE;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public PipelineDefinition getPipeline() {
-		if (pipeline != null && pipeline.eIsProxy()) {
-			InternalEObject oldPipeline = (InternalEObject)pipeline;
-			pipeline = (PipelineDefinition)eResolveProxy(oldPipeline);
-			if (pipeline != oldPipeline) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, GeneratorPackage.PIPELINE_REFERENCE__PIPELINE, oldPipeline, pipeline));
-			}
-		}
-		return pipeline;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public PipelineDefinition basicGetPipeline() {
-		return pipeline;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setPipeline(PipelineDefinition newPipeline) {
-		PipelineDefinition oldPipeline = pipeline;
-		pipeline = newPipeline;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, GeneratorPackage.PIPELINE_REFERENCE__PIPELINE, oldPipeline, pipeline));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case GeneratorPackage.PIPELINE_REFERENCE__PIPELINE:
-				if (resolve) return getPipeline();
-				return basicGetPipeline();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case GeneratorPackage.PIPELINE_REFERENCE__PIPELINE:
-				setPipeline((PipelineDefinition)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void eUnset(int featureID) {
-		switch (featureID) {
-			case GeneratorPackage.PIPELINE_REFERENCE__PIPELINE:
-				setPipeline((PipelineDefinition)null);
-				return;
-		}
-		super.eUnset(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case GeneratorPackage.PIPELINE_REFERENCE__PIPELINE:
-				return pipeline != null;
-		}
-		return super.eIsSet(featureID);
 	}
 
 } //PipelineReferenceImpl

@@ -85,6 +85,12 @@ public class GeneratorSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case GeneratorPackage.STEP: {
+				Step step = (Step)theEObject;
+				T result = caseStep(step);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case GeneratorPackage.STATEMENT: {
 				Statement statement = (Statement)theEObject;
 				T result = caseStatement(statement);
@@ -121,6 +127,20 @@ public class GeneratorSwitch<T> extends Switch<T> {
 			case GeneratorPackage.PIPELINE_REFERENCE: {
 				PipelineReference pipelineReference = (PipelineReference)theEObject;
 				T result = casePipelineReference(pipelineReference);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case GeneratorPackage.PIPELINE_DEFINITION_REFERENCE: {
+				PipelineDefinitionReference pipelineDefinitionReference = (PipelineDefinitionReference)theEObject;
+				T result = casePipelineDefinitionReference(pipelineDefinitionReference);
+				if (result == null) result = casePipelineReference(pipelineDefinitionReference);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case GeneratorPackage.VARIABLE_REFERENCE: {
+				VariableReference variableReference = (VariableReference)theEObject;
+				T result = caseVariableReference(variableReference);
+				if (result == null) result = casePipelineReference(variableReference);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -177,6 +197,21 @@ public class GeneratorSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T casePipelineDefinition(PipelineDefinition object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Step</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Step</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseStep(Step object) {
 		return null;
 	}
 
@@ -267,6 +302,36 @@ public class GeneratorSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T casePipelineReference(PipelineReference object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Pipeline Definition Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Pipeline Definition Reference</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePipelineDefinitionReference(PipelineDefinitionReference object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Variable Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Variable Reference</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseVariableReference(VariableReference object) {
 		return null;
 	}
 

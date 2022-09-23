@@ -17,11 +17,14 @@ import de.evoal.languages.model.generator.GeneratorFactory;
 import de.evoal.languages.model.generator.GeneratorPackage;
 import de.evoal.languages.model.generator.PipelineArray;
 import de.evoal.languages.model.generator.PipelineDefinition;
+import de.evoal.languages.model.generator.PipelineDefinitionReference;
 import de.evoal.languages.model.generator.PipelineReference;
 import de.evoal.languages.model.generator.Range;
 import de.evoal.languages.model.generator.Statement;
+import de.evoal.languages.model.generator.Step;
 import de.evoal.languages.model.generator.Use;
 
+import de.evoal.languages.model.generator.VariableReference;
 import de.evoal.languages.model.instance.InstancePackage;
 
 import org.eclipse.emf.ecore.EAttribute;
@@ -64,6 +67,13 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass stepEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass statementEClass = null;
 
 	/**
@@ -100,6 +110,20 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 	 * @generated
 	 */
 	private EClass pipelineReferenceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass pipelineDefinitionReferenceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass variableReferenceEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -261,8 +285,48 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 	 * @generated
 	 */
 	@Override
-	public EReference getPipelineDefinition_Definitions() {
+	public EReference getPipelineDefinition_Steps() {
 		return (EReference)pipelineDefinitionEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getStep() {
+		return stepEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getStep_Instance() {
+		return (EReference)stepEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getStep_Reads() {
+		return (EReference)stepEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getStep_Writes() {
+		return (EReference)stepEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -391,8 +455,38 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 	 * @generated
 	 */
 	@Override
-	public EReference getPipelineReference_Pipeline() {
-		return (EReference)pipelineReferenceEClass.getEStructuralFeatures().get(0);
+	public EClass getPipelineDefinitionReference() {
+		return pipelineDefinitionReferenceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getPipelineDefinitionReference_Pipeline() {
+		return (EReference)pipelineDefinitionReferenceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getVariableReference() {
+		return variableReferenceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getVariableReference_Loop() {
+		return (EReference)variableReferenceEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -474,7 +568,12 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 
 		pipelineDefinitionEClass = createEClass(PIPELINE_DEFINITION);
 		createEAttribute(pipelineDefinitionEClass, PIPELINE_DEFINITION__NAME);
-		createEReference(pipelineDefinitionEClass, PIPELINE_DEFINITION__DEFINITIONS);
+		createEReference(pipelineDefinitionEClass, PIPELINE_DEFINITION__STEPS);
+
+		stepEClass = createEClass(STEP);
+		createEReference(stepEClass, STEP__INSTANCE);
+		createEReference(stepEClass, STEP__READS);
+		createEReference(stepEClass, STEP__WRITES);
 
 		statementEClass = createEClass(STATEMENT);
 
@@ -493,7 +592,12 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 		createEReference(pipelineArrayEClass, PIPELINE_ARRAY__REFERENCES);
 
 		pipelineReferenceEClass = createEClass(PIPELINE_REFERENCE);
-		createEReference(pipelineReferenceEClass, PIPELINE_REFERENCE__PIPELINE);
+
+		pipelineDefinitionReferenceEClass = createEClass(PIPELINE_DEFINITION_REFERENCE);
+		createEReference(pipelineDefinitionReferenceEClass, PIPELINE_DEFINITION_REFERENCE__PIPELINE);
+
+		variableReferenceEClass = createEClass(VARIABLE_REFERENCE);
+		createEReference(variableReferenceEClass, VARIABLE_REFERENCE__LOOP);
 
 		applyStatementEClass = createEClass(APPLY_STATEMENT);
 		createEAttribute(applyStatementEClass, APPLY_STATEMENT__FILE);
@@ -535,6 +639,8 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 		forStatementEClass.getESuperTypes().add(this.getStatement());
 		counterRangeEClass.getESuperTypes().add(this.getRange());
 		pipelineArrayEClass.getESuperTypes().add(this.getRange());
+		pipelineDefinitionReferenceEClass.getESuperTypes().add(this.getPipelineReference());
+		variableReferenceEClass.getESuperTypes().add(this.getPipelineReference());
 		applyStatementEClass.getESuperTypes().add(this.getStatement());
 
 		// Initialize classes and features; add operations and parameters
@@ -548,7 +654,12 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 
 		initEClass(pipelineDefinitionEClass, PipelineDefinition.class, "PipelineDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getPipelineDefinition_Name(), ecorePackage.getEString(), "name", null, 0, 1, PipelineDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getPipelineDefinition_Definitions(), theInstancePackage.getInstance(), null, "definitions", null, 0, -1, PipelineDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getPipelineDefinition_Steps(), this.getStep(), null, "steps", null, 0, -1, PipelineDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+
+		initEClass(stepEClass, Step.class, "Step", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getStep_Instance(), theInstancePackage.getInstance(), null, "instance", null, 1, 1, Step.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getStep_Reads(), theInstancePackage.getDataReference(), null, "reads", null, 0, -1, Step.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getStep_Writes(), theInstancePackage.getDataReference(), null, "writes", null, 0, -1, Step.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		initEClass(statementEClass, Statement.class, "Statement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -567,7 +678,12 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 		initEReference(getPipelineArray_References(), this.getPipelineReference(), null, "references", null, 0, -1, PipelineArray.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		initEClass(pipelineReferenceEClass, PipelineReference.class, "PipelineReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getPipelineReference_Pipeline(), this.getPipelineDefinition(), null, "pipeline", null, 1, 1, PipelineReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(pipelineDefinitionReferenceEClass, PipelineDefinitionReference.class, "PipelineDefinitionReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getPipelineDefinitionReference_Pipeline(), this.getPipelineDefinition(), null, "pipeline", null, 1, 1, PipelineDefinitionReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(variableReferenceEClass, VariableReference.class, "VariableReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getVariableReference_Loop(), this.getForStatement(), null, "loop", null, 1, 1, VariableReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(applyStatementEClass, ApplyStatement.class, "ApplyStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getApplyStatement_File(), ecorePackage.getEString(), "file", null, 0, 1, ApplyStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -596,6 +712,7 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 		  (this,
 		   source,
 		   new String[] {
+			   "ddl", "platform:/resource/de.evoal.languages.model.ddl/model/model.ecore#/",
 			   "dl", "platform:/resource/de.evoal.languages.model.dl/model/model.ecore#/",
 			   "ecore", "http://www.eclipse.org/emf/2002/Ecore",
 			   "ins", "platform:/resource/de.evoal.languages.model.instance/model/model.ecore#/"
@@ -611,7 +728,19 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 	protected void createCollectionAnnotations() {
 		String source = "http://www.eclipse.org/OCL/Collection";
 		addAnnotation
-		  (getPipelineDefinition_Definitions(),
+		  (getPipelineDefinition_Steps(),
+		   source,
+		   new String[] {
+			   "nullFree", "false"
+		   });
+		addAnnotation
+		  (getStep_Reads(),
+		   source,
+		   new String[] {
+			   "nullFree", "false"
+		   });
+		addAnnotation
+		  (getStep_Writes(),
 		   source,
 		   new String[] {
 			   "nullFree", "false"

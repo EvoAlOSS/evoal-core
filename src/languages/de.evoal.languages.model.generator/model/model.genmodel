@@ -18,7 +18,12 @@
     </genClasses>
     <genClasses ecoreClass="model.ecore#//PipelineDefinition">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//PipelineDefinition/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//PipelineDefinition/definitions"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//PipelineDefinition/steps"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//Step">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//Step/instance"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//Step/reads"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//Step/writes"/>
     </genClasses>
     <genClasses ecoreClass="model.ecore#//Statement"/>
     <genClasses ecoreClass="model.ecore#//ForStatement">
@@ -34,8 +39,12 @@
     <genClasses ecoreClass="model.ecore#//PipelineArray">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//PipelineArray/references"/>
     </genClasses>
-    <genClasses ecoreClass="model.ecore#//PipelineReference">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//PipelineReference/pipeline"/>
+    <genClasses ecoreClass="model.ecore#//PipelineReference"/>
+    <genClasses ecoreClass="model.ecore#//PipelineDefinitionReference">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//PipelineDefinitionReference/pipeline"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//VariableReference">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//VariableReference/loop"/>
     </genClasses>
     <genClasses ecoreClass="model.ecore#//ApplyStatement">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//ApplyStatement/file"/>

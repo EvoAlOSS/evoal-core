@@ -16,8 +16,16 @@ UseRule returns Use:
 
 PipelineDefinitionRule returns PipelineDefinition:
 	'pipeline' name = StringOrId '['
-		(definitions += InstanceRule (',' definitions += InstanceRule)*)?
+		steps += StepRule*
 	']'
+;
+
+StepRule returns Step:
+	'step' '{'
+ 	    'component' instance = InstanceRule
+ 	    ('reads' '[' (reads += DataReferenceRule (',' reads += DataReferenceRule)*)? ']' ';')?
+ 	    ('writes' '[' (writes += DataReferenceRule (',' writes += DataReferenceRule)*)? ']' ';')?
+	'}'
 ;
 
 StatementRule returns Statement:
@@ -43,9 +51,17 @@ PipelineArrayRule returns PipelineArray:
 ;
 
 PipelineReferenceRule returns PipelineReference:
-	pipeline = [PipelineDefinition|StringOrId]
+	PipelineDefinitionReferenceRule | VariableReferenceRule;
+	
+PipelineDefinitionReferenceRule returns PipelineDefinitionReference:
+	'pipeline' pipeline = [PipelineDefinition|StringOrId]
 ;
 
+VariableReferenceRule returns VariableReference:
+	loop = [ForStatement|ID]
+;
+
+
 ApplyStatementRule returns ApplyStatement:
-	'write' file = STRING 'with' count = INT 'samples' 'from' 'executing' '[' pipelines += PipelineReferenceRule (',' pipelines += PipelineReferenceRule)* ']' 's;'
+	'write' file = STRING 'with' count = INT 'samples' 'from' 'executing' '[' pipelines += PipelineReferenceRule (',' pipelines += PipelineReferenceRule)* ']' ';'
 ;
