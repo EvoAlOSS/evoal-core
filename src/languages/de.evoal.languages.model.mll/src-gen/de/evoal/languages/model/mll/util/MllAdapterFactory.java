@@ -102,6 +102,26 @@ public class MllAdapterFactory extends AdapterFactoryImpl {
 				return createBlockStatementAdapter();
 			}
 			@Override
+			public Adapter casePredictStatement(PredictStatement object) {
+				return createPredictStatementAdapter();
+			}
+			@Override
+			public Adapter caseForStatement(ForStatement object) {
+				return createForStatementAdapter();
+			}
+			@Override
+			public Adapter caseRange(Range object) {
+				return createRangeAdapter();
+			}
+			@Override
+			public Adapter caseCounterRange(CounterRange object) {
+				return createCounterRangeAdapter();
+			}
+			@Override
+			public Adapter caseStringLiteralRange(StringLiteralRange object) {
+				return createStringLiteralRangeAdapter();
+			}
+			@Override
 			public Adapter caseDefinedFunctionName(DefinedFunctionName object) {
 				return createDefinedFunctionNameAdapter();
 			}
@@ -242,6 +262,76 @@ public class MllAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createBlockStatementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.mll.PredictStatement <em>Predict Statement</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.evoal.languages.model.mll.PredictStatement
+	 * @generated
+	 */
+	public Adapter createPredictStatementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.mll.ForStatement <em>For Statement</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.evoal.languages.model.mll.ForStatement
+	 * @generated
+	 */
+	public Adapter createForStatementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.mll.Range <em>Range</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.evoal.languages.model.mll.Range
+	 * @generated
+	 */
+	public Adapter createRangeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.mll.CounterRange <em>Counter Range</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.evoal.languages.model.mll.CounterRange
+	 * @generated
+	 */
+	public Adapter createCounterRangeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.mll.StringLiteralRange <em>String Literal Range</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.evoal.languages.model.mll.StringLiteralRange
+	 * @generated
+	 */
+	public Adapter createStringLiteralRangeAdapter() {
 		return null;
 	}
 

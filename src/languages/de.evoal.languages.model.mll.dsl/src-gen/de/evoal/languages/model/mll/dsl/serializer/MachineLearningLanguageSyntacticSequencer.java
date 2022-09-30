@@ -23,11 +23,13 @@ public class MachineLearningLanguageSyntacticSequencer extends AbstractSyntactic
 
 	protected MachineLearningLanguageGrammarAccess grammarAccess;
 	protected AbstractElementAlias match_InstanceRule___LeftCurlyBracketKeyword_1_0_RightCurlyBracketKeyword_1_2__q;
+	protected AbstractElementAlias match_PredictStatementRule___AndKeyword_4_0_MeasureKeyword_4_1_EndKeyword_4_3__q;
 	
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (MachineLearningLanguageGrammarAccess) access;
 		match_InstanceRule___LeftCurlyBracketKeyword_1_0_RightCurlyBracketKeyword_1_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getInstanceRuleAccess().getLeftCurlyBracketKeyword_1_0()), new TokenAlias(false, false, grammarAccess.getInstanceRuleAccess().getRightCurlyBracketKeyword_1_2()));
+		match_PredictStatementRule___AndKeyword_4_0_MeasureKeyword_4_1_EndKeyword_4_3__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getPredictStatementRuleAccess().getAndKeyword_4_0()), new TokenAlias(false, false, grammarAccess.getPredictStatementRuleAccess().getMeasureKeyword_4_1()), new TokenAlias(false, false, grammarAccess.getPredictStatementRuleAccess().getEndKeyword_4_3()));
 	}
 	
 	@Override
@@ -44,6 +46,8 @@ public class MachineLearningLanguageSyntacticSequencer extends AbstractSyntactic
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
 			if (match_InstanceRule___LeftCurlyBracketKeyword_1_0_RightCurlyBracketKeyword_1_2__q.equals(syntax))
 				emit_InstanceRule___LeftCurlyBracketKeyword_1_0_RightCurlyBracketKeyword_1_2__q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_PredictStatementRule___AndKeyword_4_0_MeasureKeyword_4_1_EndKeyword_4_3__q.equals(syntax))
+				emit_PredictStatementRule___AndKeyword_4_0_MeasureKeyword_4_1_EndKeyword_4_3__q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else acceptNodes(getLastNavigableState(), syntaxNodes);
 		}
 	}
@@ -56,6 +60,17 @@ public class MachineLearningLanguageSyntacticSequencer extends AbstractSyntactic
 	 *     name=[TypeDefinition|StringOrId] (ambiguity) (rule end)
 	 */
 	protected void emit_InstanceRule___LeftCurlyBracketKeyword_1_0_RightCurlyBracketKeyword_1_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
+	 *     ('and' 'measure' 'end')?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     filename=STRING (ambiguity) (rule end)
+	 */
+	protected void emit_PredictStatementRule___AndKeyword_4_0_MeasureKeyword_4_1_EndKeyword_4_3__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	

@@ -33,6 +33,7 @@ public class MachineLearningLanguageParser extends AbstractContentAssistParser {
 		
 		private static void init(ImmutableMap.Builder<AbstractElement, String> builder, MachineLearningLanguageGrammarAccess grammarAccess) {
 			builder.put(grammarAccess.getStatementRuleAccess().getAlternatives(), "rule__StatementRule__Alternatives");
+			builder.put(grammarAccess.getRangeRuleAccess().getAlternatives(), "rule__RangeRule__Alternatives");
 			builder.put(grammarAccess.getNameOrMiscRuleAccess().getAlternatives(), "rule__NameOrMiscRule__Alternatives");
 			builder.put(grammarAccess.getValueRuleAccess().getAlternatives(), "rule__ValueRule__Alternatives");
 			builder.put(grammarAccess.getLiteralOrReferenceRuleAccess().getAlternatives(), "rule__LiteralOrReferenceRule__Alternatives");
@@ -53,9 +54,12 @@ public class MachineLearningLanguageParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getPartialSurrogateFunctionRuleAccess().getGroup_4(), "rule__PartialSurrogateFunctionRule__Group_4__0");
 			builder.put(grammarAccess.getPartialSurrogateFunctionRuleAccess().getGroup_7(), "rule__PartialSurrogateFunctionRule__Group_7__0");
 			builder.put(grammarAccess.getPartialSurrogateFunctionRuleAccess().getGroup_8(), "rule__PartialSurrogateFunctionRule__Group_8__0");
-			builder.put(grammarAccess.getPredictionRuleAccess().getGroup(), "rule__PredictionRule__Group__0");
-			builder.put(grammarAccess.getPredictionRuleAccess().getGroup_2(), "rule__PredictionRule__Group_2__0");
-			builder.put(grammarAccess.getPredictionRuleAccess().getGroup_5(), "rule__PredictionRule__Group_5__0");
+			builder.put(grammarAccess.getPredictStatementRuleAccess().getGroup(), "rule__PredictStatementRule__Group__0");
+			builder.put(grammarAccess.getPredictStatementRuleAccess().getGroup_4(), "rule__PredictStatementRule__Group_4__0");
+			builder.put(grammarAccess.getForStatementRuleAccess().getGroup(), "rule__ForStatementRule__Group__0");
+			builder.put(grammarAccess.getCounterRangeRuleAccess().getGroup(), "rule__CounterRangeRule__Group__0");
+			builder.put(grammarAccess.getStringLiterRangeRuleAccess().getGroup(), "rule__StringLiterRangeRule__Group__0");
+			builder.put(grammarAccess.getStringLiterRangeRuleAccess().getGroup_2(), "rule__StringLiterRangeRule__Group_2__0");
 			builder.put(grammarAccess.getBlockStatementRuleAccess().getGroup(), "rule__BlockStatementRule__Group__0");
 			builder.put(grammarAccess.getCallStatementRuleAccess().getGroup(), "rule__CallStatementRule__Group__0");
 			builder.put(grammarAccess.getInstanceRuleAccess().getGroup(), "rule__InstanceRule__Group__0");
@@ -90,7 +94,7 @@ public class MachineLearningLanguageParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getDOUBLEAccess().getGroup(), "rule__DOUBLE__Group__0");
 			builder.put(grammarAccess.getMachineLearningConfigurationRuleAccess().getUsesAssignment_0(), "rule__MachineLearningConfigurationRule__UsesAssignment_0");
 			builder.put(grammarAccess.getMachineLearningConfigurationRuleAccess().getDefinitionsAssignment_1(), "rule__MachineLearningConfigurationRule__DefinitionsAssignment_1");
-			builder.put(grammarAccess.getMachineLearningConfigurationRuleAccess().getPredictionsAssignment_2(), "rule__MachineLearningConfigurationRule__PredictionsAssignment_2");
+			builder.put(grammarAccess.getMachineLearningConfigurationRuleAccess().getStatementsAssignment_2(), "rule__MachineLearningConfigurationRule__StatementsAssignment_2");
 			builder.put(grammarAccess.getUseRuleAccess().getImportURIAssignment_1(), "rule__UseRule__ImportURIAssignment_1");
 			builder.put(grammarAccess.getSurrogateDefinitionRuleAccess().getNameAssignment_1(), "rule__SurrogateDefinitionRule__NameAssignment_1");
 			builder.put(grammarAccess.getSurrogateDefinitionRuleAccess().getInputsAssignment_3(), "rule__SurrogateDefinitionRule__InputsAssignment_3");
@@ -106,12 +110,16 @@ public class MachineLearningLanguageParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getPartialSurrogateFunctionRuleAccess().getOutputsAssignment_6(), "rule__PartialSurrogateFunctionRule__OutputsAssignment_6");
 			builder.put(grammarAccess.getPartialSurrogateFunctionRuleAccess().getOutputsAssignment_7_1(), "rule__PartialSurrogateFunctionRule__OutputsAssignment_7_1");
 			builder.put(grammarAccess.getPartialSurrogateFunctionRuleAccess().getParametersAssignment_8_2(), "rule__PartialSurrogateFunctionRule__ParametersAssignment_8_2");
-			builder.put(grammarAccess.getPredictionRuleAccess().getOutputsAssignment_1(), "rule__PredictionRule__OutputsAssignment_1");
-			builder.put(grammarAccess.getPredictionRuleAccess().getOutputsAssignment_2_1(), "rule__PredictionRule__OutputsAssignment_2_1");
-			builder.put(grammarAccess.getPredictionRuleAccess().getInputsAssignment_4(), "rule__PredictionRule__InputsAssignment_4");
-			builder.put(grammarAccess.getPredictionRuleAccess().getInputsAssignment_5_1(), "rule__PredictionRule__InputsAssignment_5_1");
-			builder.put(grammarAccess.getPredictionRuleAccess().getDefinitionAssignment_7(), "rule__PredictionRule__DefinitionAssignment_7");
-			builder.put(grammarAccess.getPredictionRuleAccess().getQualityAssignment_9(), "rule__PredictionRule__QualityAssignment_9");
+			builder.put(grammarAccess.getPredictStatementRuleAccess().getSurrogateAssignment_1(), "rule__PredictStatementRule__SurrogateAssignment_1");
+			builder.put(grammarAccess.getPredictStatementRuleAccess().getFilenameAssignment_3(), "rule__PredictStatementRule__FilenameAssignment_3");
+			builder.put(grammarAccess.getPredictStatementRuleAccess().getStatementsAssignment_4_2(), "rule__PredictStatementRule__StatementsAssignment_4_2");
+			builder.put(grammarAccess.getForStatementRuleAccess().getNameAssignment_1(), "rule__ForStatementRule__NameAssignment_1");
+			builder.put(grammarAccess.getForStatementRuleAccess().getRangeAssignment_3(), "rule__ForStatementRule__RangeAssignment_3");
+			builder.put(grammarAccess.getForStatementRuleAccess().getStatementsAssignment_5(), "rule__ForStatementRule__StatementsAssignment_5");
+			builder.put(grammarAccess.getCounterRangeRuleAccess().getStartAssignment_1(), "rule__CounterRangeRule__StartAssignment_1");
+			builder.put(grammarAccess.getCounterRangeRuleAccess().getEndAssignment_3(), "rule__CounterRangeRule__EndAssignment_3");
+			builder.put(grammarAccess.getStringLiterRangeRuleAccess().getElementsAssignment_1(), "rule__StringLiterRangeRule__ElementsAssignment_1");
+			builder.put(grammarAccess.getStringLiterRangeRuleAccess().getElementsAssignment_2_1(), "rule__StringLiterRangeRule__ElementsAssignment_2_1");
 			builder.put(grammarAccess.getBlockStatementRuleAccess().getStatementsAssignment_2(), "rule__BlockStatementRule__StatementsAssignment_2");
 			builder.put(grammarAccess.getCallStatementRuleAccess().getCallAssignment_0(), "rule__CallStatementRule__CallAssignment_0");
 			builder.put(grammarAccess.getFunctionNameRuleAccess().getDefinitionAssignment(), "rule__FunctionNameRule__DefinitionAssignment");

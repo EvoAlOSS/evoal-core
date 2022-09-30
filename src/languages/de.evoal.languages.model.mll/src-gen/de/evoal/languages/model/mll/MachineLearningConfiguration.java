@@ -21,7 +21,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link de.evoal.languages.model.mll.MachineLearningConfiguration#getUses <em>Uses</em>}</li>
  *   <li>{@link de.evoal.languages.model.mll.MachineLearningConfiguration#getDefinitions <em>Definitions</em>}</li>
- *   <li>{@link de.evoal.languages.model.mll.MachineLearningConfiguration#getPredictions <em>Predictions</em>}</li>
+ *   <li>{@link de.evoal.languages.model.mll.MachineLearningConfiguration#getStatements <em>Statements</em>}</li>
  * </ul>
  *
  * @see de.evoal.languages.model.mll.MllPackage#getMachineLearningConfiguration()
@@ -62,19 +62,19 @@ public interface MachineLearningConfiguration extends EObject {
 	EList<SurrogateDefinition> getDefinitions();
 
 	/**
-	 * Returns the value of the '<em><b>Predictions</b></em>' containment reference list.
-	 * The list contents are of type {@link de.evoal.languages.model.mll.Prediction}.
+	 * Returns the value of the '<em><b>Statements</b></em>' containment reference list.
+	 * The list contents are of type {@link de.evoal.languages.model.mll.Statement}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * List of predictions.
 	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Predictions</em>' containment reference list.
-	 * @see de.evoal.languages.model.mll.MllPackage#getMachineLearningConfiguration_Predictions()
+	 * @return the value of the '<em>Statements</em>' containment reference list.
+	 * @see de.evoal.languages.model.mll.MllPackage#getMachineLearningConfiguration_Statements()
 	 * @model containment="true" ordered="false"
 	 *        annotation="http://www.eclipse.org/OCL/Collection nullFree='false'"
 	 * @generated
 	 */
-	EList<Prediction> getPredictions();
+	EList<Statement> getStatements();
 
 } // MachineLearningConfiguration

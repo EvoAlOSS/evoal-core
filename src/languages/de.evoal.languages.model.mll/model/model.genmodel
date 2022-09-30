@@ -15,7 +15,7 @@
     <genClasses ecoreClass="model.ecore#//MachineLearningConfiguration">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//MachineLearningConfiguration/uses"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//MachineLearningConfiguration/definitions"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//MachineLearningConfiguration/predictions"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//MachineLearningConfiguration/statements"/>
     </genClasses>
     <genClasses ecoreClass="model.ecore#//SurrogateDefinition">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//SurrogateDefinition/name"/>
@@ -45,6 +45,24 @@
     </genClasses>
     <genClasses ecoreClass="model.ecore#//BlockStatement">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//BlockStatement/statements"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//PredictStatement">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//PredictStatement/surrogate"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//PredictStatement/filename"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//PredictStatement/statements"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//ForStatement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//ForStatement/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//ForStatement/range"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//ForStatement/statements"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="model.ecore#//Range"/>
+    <genClasses ecoreClass="model.ecore#//CounterRange">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//CounterRange/start"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//CounterRange/end"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//StringLiteralRange">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//StringLiteralRange/elements"/>
     </genClasses>
     <genClasses ecoreClass="model.ecore#//DefinedFunctionName">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//DefinedFunctionName/definition"/>

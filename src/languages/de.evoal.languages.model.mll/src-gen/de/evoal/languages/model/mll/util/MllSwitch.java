@@ -118,6 +118,40 @@ public class MllSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case MllPackage.PREDICT_STATEMENT: {
+				PredictStatement predictStatement = (PredictStatement)theEObject;
+				T result = casePredictStatement(predictStatement);
+				if (result == null) result = caseStatement(predictStatement);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case MllPackage.FOR_STATEMENT: {
+				ForStatement forStatement = (ForStatement)theEObject;
+				T result = caseForStatement(forStatement);
+				if (result == null) result = caseStatement(forStatement);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case MllPackage.RANGE: {
+				Range range = (Range)theEObject;
+				T result = caseRange(range);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case MllPackage.COUNTER_RANGE: {
+				CounterRange counterRange = (CounterRange)theEObject;
+				T result = caseCounterRange(counterRange);
+				if (result == null) result = caseRange(counterRange);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case MllPackage.STRING_LITERAL_RANGE: {
+				StringLiteralRange stringLiteralRange = (StringLiteralRange)theEObject;
+				T result = caseStringLiteralRange(stringLiteralRange);
+				if (result == null) result = caseRange(stringLiteralRange);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case MllPackage.DEFINED_FUNCTION_NAME: {
 				DefinedFunctionName definedFunctionName = (DefinedFunctionName)theEObject;
 				T result = caseDefinedFunctionName(definedFunctionName);
@@ -252,6 +286,81 @@ public class MllSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseBlockStatement(BlockStatement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Predict Statement</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Predict Statement</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePredictStatement(PredictStatement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>For Statement</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>For Statement</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseForStatement(ForStatement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Range</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Range</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseRange(Range object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Counter Range</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Counter Range</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCounterRange(CounterRange object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>String Literal Range</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>String Literal Range</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseStringLiteralRange(StringLiteralRange object) {
 		return null;
 	}
 

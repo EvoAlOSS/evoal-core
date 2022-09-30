@@ -27,7 +27,7 @@ import org.eclipse.emf.ecore.EReference;
  * <!-- end-model-doc -->
  * @see de.evoal.languages.model.mll.MllFactory
  * @model kind="package"
- *        annotation="http://www.eclipse.org/OCL/Import ddl='platform:/resource/de.evoal.languages.model.ddl/model/model.ecore#/' dl='platform:/resource/de.evoal.languages.model.dl/model/model.ecore#/' instance='platform:/resource/de.evoal.languages.model.instance/model/model.ecore#/' el='platform:/resource/de.evoal.languages.model.el/model/model.ecore#/'"
+ *        annotation="http://www.eclipse.org/OCL/Import ddl='platform:/resource/de.evoal.languages.model.ddl/model/model.ecore#/' dl='platform:/resource/de.evoal.languages.model.dl/model/model.ecore#/' el='platform:/resource/de.evoal.languages.model.el/model/model.ecore#/' instance='platform:/resource/de.evoal.languages.model.instance/model/model.ecore#/'"
  * @generated
  */
 public interface MllPackage extends EPackage {
@@ -92,13 +92,13 @@ public interface MllPackage extends EPackage {
 	int MACHINE_LEARNING_CONFIGURATION__DEFINITIONS = 1;
 
 	/**
-	 * The feature id for the '<em><b>Predictions</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Statements</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MACHINE_LEARNING_CONFIGURATION__PREDICTIONS = 2;
+	int MACHINE_LEARNING_CONFIGURATION__STATEMENTS = 2;
 
 	/**
 	 * The number of structural features of the '<em>Machine Learning Configuration</em>' class.
@@ -387,6 +387,182 @@ public interface MllPackage extends EPackage {
 	int BLOCK_STATEMENT_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 1;
 
 	/**
+	 * The meta object id for the '{@link de.evoal.languages.model.mll.impl.PredictStatementImpl <em>Predict Statement</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.evoal.languages.model.mll.impl.PredictStatementImpl
+	 * @see de.evoal.languages.model.mll.impl.MllPackageImpl#getPredictStatement()
+	 * @generated
+	 */
+	int PREDICT_STATEMENT = 8;
+
+	/**
+	 * The feature id for the '<em><b>Surrogate</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PREDICT_STATEMENT__SURROGATE = STATEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Filename</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PREDICT_STATEMENT__FILENAME = STATEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Statements</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PREDICT_STATEMENT__STATEMENTS = STATEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>Predict Statement</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PREDICT_STATEMENT_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 3;
+
+	/**
+	 * The meta object id for the '{@link de.evoal.languages.model.mll.impl.ForStatementImpl <em>For Statement</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.evoal.languages.model.mll.impl.ForStatementImpl
+	 * @see de.evoal.languages.model.mll.impl.MllPackageImpl#getForStatement()
+	 * @generated
+	 */
+	int FOR_STATEMENT = 9;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FOR_STATEMENT__NAME = STATEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Range</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FOR_STATEMENT__RANGE = STATEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Statements</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FOR_STATEMENT__STATEMENTS = STATEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>For Statement</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FOR_STATEMENT_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 3;
+
+	/**
+	 * The meta object id for the '{@link de.evoal.languages.model.mll.impl.RangeImpl <em>Range</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.evoal.languages.model.mll.impl.RangeImpl
+	 * @see de.evoal.languages.model.mll.impl.MllPackageImpl#getRange()
+	 * @generated
+	 */
+	int RANGE = 10;
+
+	/**
+	 * The number of structural features of the '<em>Range</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RANGE_FEATURE_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link de.evoal.languages.model.mll.impl.CounterRangeImpl <em>Counter Range</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.evoal.languages.model.mll.impl.CounterRangeImpl
+	 * @see de.evoal.languages.model.mll.impl.MllPackageImpl#getCounterRange()
+	 * @generated
+	 */
+	int COUNTER_RANGE = 11;
+
+	/**
+	 * The feature id for the '<em><b>Start</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COUNTER_RANGE__START = RANGE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>End</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COUNTER_RANGE__END = RANGE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Counter Range</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COUNTER_RANGE_FEATURE_COUNT = RANGE_FEATURE_COUNT + 2;
+
+	/**
+	 * The meta object id for the '{@link de.evoal.languages.model.mll.impl.StringLiteralRangeImpl <em>String Literal Range</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.evoal.languages.model.mll.impl.StringLiteralRangeImpl
+	 * @see de.evoal.languages.model.mll.impl.MllPackageImpl#getStringLiteralRange()
+	 * @generated
+	 */
+	int STRING_LITERAL_RANGE = 12;
+
+	/**
+	 * The feature id for the '<em><b>Elements</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING_LITERAL_RANGE__ELEMENTS = RANGE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>String Literal Range</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING_LITERAL_RANGE_FEATURE_COUNT = RANGE_FEATURE_COUNT + 1;
+
+	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.mll.impl.DefinedFunctionNameImpl <em>Defined Function Name</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -394,7 +570,7 @@ public interface MllPackage extends EPackage {
 	 * @see de.evoal.languages.model.mll.impl.MllPackageImpl#getDefinedFunctionName()
 	 * @generated
 	 */
-	int DEFINED_FUNCTION_NAME = 8;
+	int DEFINED_FUNCTION_NAME = 13;
 
 	/**
 	 * The feature id for the '<em><b>Definition</b></em>' reference.
@@ -422,7 +598,7 @@ public interface MllPackage extends EPackage {
 	 * @see de.evoal.languages.model.mll.impl.MllPackageImpl#getUse()
 	 * @generated
 	 */
-	int USE = 9;
+	int USE = 14;
 
 	/**
 	 * The feature id for the '<em><b>Import URI</b></em>' attribute.
@@ -476,15 +652,15 @@ public interface MllPackage extends EPackage {
 	EReference getMachineLearningConfiguration_Definitions();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.mll.MachineLearningConfiguration#getPredictions <em>Predictions</em>}'.
+	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.mll.MachineLearningConfiguration#getStatements <em>Statements</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Predictions</em>'.
-	 * @see de.evoal.languages.model.mll.MachineLearningConfiguration#getPredictions()
+	 * @return the meta object for the containment reference list '<em>Statements</em>'.
+	 * @see de.evoal.languages.model.mll.MachineLearningConfiguration#getStatements()
 	 * @see #getMachineLearningConfiguration()
 	 * @generated
 	 */
-	EReference getMachineLearningConfiguration_Predictions();
+	EReference getMachineLearningConfiguration_Statements();
 
 	/**
 	 * Returns the meta object for class '{@link de.evoal.languages.model.mll.SurrogateDefinition <em>Surrogate Definition</em>}'.
@@ -733,6 +909,155 @@ public interface MllPackage extends EPackage {
 	EReference getBlockStatement_Statements();
 
 	/**
+	 * Returns the meta object for class '{@link de.evoal.languages.model.mll.PredictStatement <em>Predict Statement</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Predict Statement</em>'.
+	 * @see de.evoal.languages.model.mll.PredictStatement
+	 * @generated
+	 */
+	EClass getPredictStatement();
+
+	/**
+	 * Returns the meta object for the reference '{@link de.evoal.languages.model.mll.PredictStatement#getSurrogate <em>Surrogate</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Surrogate</em>'.
+	 * @see de.evoal.languages.model.mll.PredictStatement#getSurrogate()
+	 * @see #getPredictStatement()
+	 * @generated
+	 */
+	EReference getPredictStatement_Surrogate();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.mll.PredictStatement#getFilename <em>Filename</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Filename</em>'.
+	 * @see de.evoal.languages.model.mll.PredictStatement#getFilename()
+	 * @see #getPredictStatement()
+	 * @generated
+	 */
+	EAttribute getPredictStatement_Filename();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.mll.PredictStatement#getStatements <em>Statements</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Statements</em>'.
+	 * @see de.evoal.languages.model.mll.PredictStatement#getStatements()
+	 * @see #getPredictStatement()
+	 * @generated
+	 */
+	EReference getPredictStatement_Statements();
+
+	/**
+	 * Returns the meta object for class '{@link de.evoal.languages.model.mll.ForStatement <em>For Statement</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>For Statement</em>'.
+	 * @see de.evoal.languages.model.mll.ForStatement
+	 * @generated
+	 */
+	EClass getForStatement();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.mll.ForStatement#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see de.evoal.languages.model.mll.ForStatement#getName()
+	 * @see #getForStatement()
+	 * @generated
+	 */
+	EAttribute getForStatement_Name();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link de.evoal.languages.model.mll.ForStatement#getRange <em>Range</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Range</em>'.
+	 * @see de.evoal.languages.model.mll.ForStatement#getRange()
+	 * @see #getForStatement()
+	 * @generated
+	 */
+	EReference getForStatement_Range();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.mll.ForStatement#getStatements <em>Statements</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Statements</em>'.
+	 * @see de.evoal.languages.model.mll.ForStatement#getStatements()
+	 * @see #getForStatement()
+	 * @generated
+	 */
+	EReference getForStatement_Statements();
+
+	/**
+	 * Returns the meta object for class '{@link de.evoal.languages.model.mll.Range <em>Range</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Range</em>'.
+	 * @see de.evoal.languages.model.mll.Range
+	 * @generated
+	 */
+	EClass getRange();
+
+	/**
+	 * Returns the meta object for class '{@link de.evoal.languages.model.mll.CounterRange <em>Counter Range</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Counter Range</em>'.
+	 * @see de.evoal.languages.model.mll.CounterRange
+	 * @generated
+	 */
+	EClass getCounterRange();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.mll.CounterRange#getStart <em>Start</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Start</em>'.
+	 * @see de.evoal.languages.model.mll.CounterRange#getStart()
+	 * @see #getCounterRange()
+	 * @generated
+	 */
+	EAttribute getCounterRange_Start();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.mll.CounterRange#getEnd <em>End</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>End</em>'.
+	 * @see de.evoal.languages.model.mll.CounterRange#getEnd()
+	 * @see #getCounterRange()
+	 * @generated
+	 */
+	EAttribute getCounterRange_End();
+
+	/**
+	 * Returns the meta object for class '{@link de.evoal.languages.model.mll.StringLiteralRange <em>String Literal Range</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>String Literal Range</em>'.
+	 * @see de.evoal.languages.model.mll.StringLiteralRange
+	 * @generated
+	 */
+	EClass getStringLiteralRange();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.mll.StringLiteralRange#getElements <em>Elements</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Elements</em>'.
+	 * @see de.evoal.languages.model.mll.StringLiteralRange#getElements()
+	 * @see #getStringLiteralRange()
+	 * @generated
+	 */
+	EReference getStringLiteralRange_Elements();
+
+	/**
 	 * Returns the meta object for class '{@link de.evoal.languages.model.mll.DefinedFunctionName <em>Defined Function Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -823,12 +1148,12 @@ public interface MllPackage extends EPackage {
 		EReference MACHINE_LEARNING_CONFIGURATION__DEFINITIONS = eINSTANCE.getMachineLearningConfiguration_Definitions();
 
 		/**
-		 * The meta object literal for the '<em><b>Predictions</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Statements</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference MACHINE_LEARNING_CONFIGURATION__PREDICTIONS = eINSTANCE.getMachineLearningConfiguration_Predictions();
+		EReference MACHINE_LEARNING_CONFIGURATION__STATEMENTS = eINSTANCE.getMachineLearningConfiguration_Statements();
 
 		/**
 		 * The meta object literal for the '{@link de.evoal.languages.model.mll.impl.SurrogateDefinitionImpl <em>Surrogate Definition</em>}' class.
@@ -1027,6 +1352,128 @@ public interface MllPackage extends EPackage {
 		 * @generated
 		 */
 		EReference BLOCK_STATEMENT__STATEMENTS = eINSTANCE.getBlockStatement_Statements();
+
+		/**
+		 * The meta object literal for the '{@link de.evoal.languages.model.mll.impl.PredictStatementImpl <em>Predict Statement</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.evoal.languages.model.mll.impl.PredictStatementImpl
+		 * @see de.evoal.languages.model.mll.impl.MllPackageImpl#getPredictStatement()
+		 * @generated
+		 */
+		EClass PREDICT_STATEMENT = eINSTANCE.getPredictStatement();
+
+		/**
+		 * The meta object literal for the '<em><b>Surrogate</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PREDICT_STATEMENT__SURROGATE = eINSTANCE.getPredictStatement_Surrogate();
+
+		/**
+		 * The meta object literal for the '<em><b>Filename</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PREDICT_STATEMENT__FILENAME = eINSTANCE.getPredictStatement_Filename();
+
+		/**
+		 * The meta object literal for the '<em><b>Statements</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PREDICT_STATEMENT__STATEMENTS = eINSTANCE.getPredictStatement_Statements();
+
+		/**
+		 * The meta object literal for the '{@link de.evoal.languages.model.mll.impl.ForStatementImpl <em>For Statement</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.evoal.languages.model.mll.impl.ForStatementImpl
+		 * @see de.evoal.languages.model.mll.impl.MllPackageImpl#getForStatement()
+		 * @generated
+		 */
+		EClass FOR_STATEMENT = eINSTANCE.getForStatement();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute FOR_STATEMENT__NAME = eINSTANCE.getForStatement_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Range</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference FOR_STATEMENT__RANGE = eINSTANCE.getForStatement_Range();
+
+		/**
+		 * The meta object literal for the '<em><b>Statements</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference FOR_STATEMENT__STATEMENTS = eINSTANCE.getForStatement_Statements();
+
+		/**
+		 * The meta object literal for the '{@link de.evoal.languages.model.mll.impl.RangeImpl <em>Range</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.evoal.languages.model.mll.impl.RangeImpl
+		 * @see de.evoal.languages.model.mll.impl.MllPackageImpl#getRange()
+		 * @generated
+		 */
+		EClass RANGE = eINSTANCE.getRange();
+
+		/**
+		 * The meta object literal for the '{@link de.evoal.languages.model.mll.impl.CounterRangeImpl <em>Counter Range</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.evoal.languages.model.mll.impl.CounterRangeImpl
+		 * @see de.evoal.languages.model.mll.impl.MllPackageImpl#getCounterRange()
+		 * @generated
+		 */
+		EClass COUNTER_RANGE = eINSTANCE.getCounterRange();
+
+		/**
+		 * The meta object literal for the '<em><b>Start</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute COUNTER_RANGE__START = eINSTANCE.getCounterRange_Start();
+
+		/**
+		 * The meta object literal for the '<em><b>End</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute COUNTER_RANGE__END = eINSTANCE.getCounterRange_End();
+
+		/**
+		 * The meta object literal for the '{@link de.evoal.languages.model.mll.impl.StringLiteralRangeImpl <em>String Literal Range</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.evoal.languages.model.mll.impl.StringLiteralRangeImpl
+		 * @see de.evoal.languages.model.mll.impl.MllPackageImpl#getStringLiteralRange()
+		 * @generated
+		 */
+		EClass STRING_LITERAL_RANGE = eINSTANCE.getStringLiteralRange();
+
+		/**
+		 * The meta object literal for the '<em><b>Elements</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference STRING_LITERAL_RANGE__ELEMENTS = eINSTANCE.getStringLiteralRange_Elements();
 
 		/**
 		 * The meta object literal for the '{@link de.evoal.languages.model.mll.impl.DefinedFunctionNameImpl <em>Defined Function Name</em>}' class.

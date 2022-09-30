@@ -34,11 +34,14 @@ import de.evoal.languages.model.instance.Name;
 import de.evoal.languages.model.instance.dsl.serializer.InstanceLanguageSemanticSequencer;
 import de.evoal.languages.model.mll.BlockStatement;
 import de.evoal.languages.model.mll.CallStatement;
+import de.evoal.languages.model.mll.CounterRange;
 import de.evoal.languages.model.mll.DefinedFunctionName;
+import de.evoal.languages.model.mll.ForStatement;
 import de.evoal.languages.model.mll.MachineLearningConfiguration;
 import de.evoal.languages.model.mll.MllPackage;
 import de.evoal.languages.model.mll.PartialSurrogateFunction;
-import de.evoal.languages.model.mll.Prediction;
+import de.evoal.languages.model.mll.PredictStatement;
+import de.evoal.languages.model.mll.StringLiteralRange;
 import de.evoal.languages.model.mll.SurrogateDefinition;
 import de.evoal.languages.model.mll.SurrogateLayer;
 import de.evoal.languages.model.mll.Use;
@@ -151,8 +154,14 @@ public class MachineLearningLanguageSemanticSequencer extends InstanceLanguageSe
 			case MllPackage.CALL_STATEMENT:
 				sequence_CallStatementRule(context, (CallStatement) semanticObject); 
 				return; 
+			case MllPackage.COUNTER_RANGE:
+				sequence_CounterRangeRule(context, (CounterRange) semanticObject); 
+				return; 
 			case MllPackage.DEFINED_FUNCTION_NAME:
 				sequence_FunctionNameRule(context, (DefinedFunctionName) semanticObject); 
+				return; 
+			case MllPackage.FOR_STATEMENT:
+				sequence_ForStatementRule(context, (ForStatement) semanticObject); 
 				return; 
 			case MllPackage.MACHINE_LEARNING_CONFIGURATION:
 				sequence_MachineLearningConfigurationRule(context, (MachineLearningConfiguration) semanticObject); 
@@ -160,8 +169,11 @@ public class MachineLearningLanguageSemanticSequencer extends InstanceLanguageSe
 			case MllPackage.PARTIAL_SURROGATE_FUNCTION:
 				sequence_PartialSurrogateFunctionRule(context, (PartialSurrogateFunction) semanticObject); 
 				return; 
-			case MllPackage.PREDICTION:
-				sequence_PredictionRule(context, (Prediction) semanticObject); 
+			case MllPackage.PREDICT_STATEMENT:
+				sequence_PredictStatementRule(context, (PredictStatement) semanticObject); 
+				return; 
+			case MllPackage.STRING_LITERAL_RANGE:
+				sequence_StringLiterRangeRule(context, (StringLiteralRange) semanticObject); 
 				return; 
 			case MllPackage.SURROGATE_DEFINITION:
 				sequence_SurrogateDefinitionRule(context, (SurrogateDefinition) semanticObject); 
@@ -179,7 +191,6 @@ public class MachineLearningLanguageSemanticSequencer extends InstanceLanguageSe
 	
 	/**
 	 * Contexts:
-	 *     StatementRule returns BlockStatement
 	 *     BlockStatementRule returns BlockStatement
 	 *
 	 * Constraint:
@@ -211,6 +222,41 @@ public class MachineLearningLanguageSemanticSequencer extends InstanceLanguageSe
 	
 	/**
 	 * Contexts:
+	 *     RangeRule returns CounterRange
+	 *     CounterRangeRule returns CounterRange
+	 *
+	 * Constraint:
+	 *     (start=INT end=INT)
+	 */
+	protected void sequence_CounterRangeRule(ISerializationContext context, CounterRange semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, MllPackage.Literals.COUNTER_RANGE__START) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MllPackage.Literals.COUNTER_RANGE__START));
+			if (transientValues.isValueTransient(semanticObject, MllPackage.Literals.COUNTER_RANGE__END) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MllPackage.Literals.COUNTER_RANGE__END));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getCounterRangeRuleAccess().getStartINTTerminalRuleCall_1_0(), semanticObject.getStart());
+		feeder.accept(grammarAccess.getCounterRangeRuleAccess().getEndINTTerminalRuleCall_3_0(), semanticObject.getEnd());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     StatementRule returns ForStatement
+	 *     ForStatementRule returns ForStatement
+	 *
+	 * Constraint:
+	 *     (name=ID range=RangeRule statements+=StatementRule*)
+	 */
+	protected void sequence_ForStatementRule(ISerializationContext context, ForStatement semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     FunctionNameRule returns DefinedFunctionName
 	 *
 	 * Constraint:
@@ -233,9 +279,9 @@ public class MachineLearningLanguageSemanticSequencer extends InstanceLanguageSe
 	 *
 	 * Constraint:
 	 *     (
-	 *         (uses+=UseRule* definitions+=SurrogateDefinitionRule+ predictions+=PredictionRule+) | 
-	 *         (uses+=UseRule* predictions+=PredictionRule+) | 
-	 *         predictions+=PredictionRule+
+	 *         (uses+=UseRule* definitions+=SurrogateDefinitionRule+ statements+=StatementRule+) | 
+	 *         (uses+=UseRule* statements+=StatementRule+) | 
+	 *         statements+=StatementRule+
 	 *     )?
 	 */
 	protected void sequence_MachineLearningConfigurationRule(ISerializationContext context, MachineLearningConfiguration semanticObject) {
@@ -264,19 +310,26 @@ public class MachineLearningLanguageSemanticSequencer extends InstanceLanguageSe
 	
 	/**
 	 * Contexts:
-	 *     PredictionRule returns Prediction
+	 *     PredictStatementRule returns PredictStatement
+	 *     StatementRule returns PredictStatement
 	 *
 	 * Constraint:
-	 *     (
-	 *         outputs+=[DataDescription|StringOrId] 
-	 *         outputs+=[DataDescription|StringOrId]* 
-	 *         inputs+=[DataDescription|StringOrId] 
-	 *         inputs+=[DataDescription|StringOrId]* 
-	 *         definition=[SurrogateDefinition|StringOrId] 
-	 *         quality=BlockStatementRule
-	 *     )
+	 *     (surrogate=[SurrogateDefinition|StringOrId] filename=STRING statements+=StatementRule*)
 	 */
-	protected void sequence_PredictionRule(ISerializationContext context, Prediction semanticObject) {
+	protected void sequence_PredictStatementRule(ISerializationContext context, PredictStatement semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     RangeRule returns StringLiteralRange
+	 *     StringLiterRangeRule returns StringLiteralRange
+	 *
+	 * Constraint:
+	 *     (elements+=StringLiteralRule elements+=StringLiteralRule*)
+	 */
+	protected void sequence_StringLiterRangeRule(ISerializationContext context, StringLiteralRange semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

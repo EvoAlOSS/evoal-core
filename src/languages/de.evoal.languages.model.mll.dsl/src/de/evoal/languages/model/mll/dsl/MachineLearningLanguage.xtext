@@ -8,7 +8,7 @@ MachineLearningConfigurationRule returns MachineLearningConfiguration:
 	(uses += UseRule)*
 
 	(definitions+=SurrogateDefinitionRule)*
-	(predictions+= PredictionRule)*
+	(statements += StatementRule)*
 ;
 
 UseRule returns Use:
@@ -42,23 +42,41 @@ PartialSurrogateFunctionRule returns PartialSurrogateFunction:
 		((parameters += InstanceLanguage::AttributeRule)+ ))?
 ;
 
-PredictionRule returns Prediction:
-	"predict"
-		outputs += [ddl::DataDescription|StringOrId] ("," outputs += [ddl::DataDescription|StringOrId])* 
-	"from"
-		inputs += [ddl::DataDescription|StringOrId] ("," inputs += [ddl::DataDescription|StringOrId])* 
-	"using"
-		definition = [SurrogateDefinition|StringOrId]
-	"measure"
-		quality = BlockStatementRule;
+PredictStatementRule returns PredictStatement:
+	"predict" surrogate = [SurrogateDefinition|StringOrId]
+		'from' filename = STRING
+		('and' 'measure'
+			(statements += StatementRule)*
+		 'end'
+		)?;
+
       
 StatementRule returns Statement:
-	CallStatementRule | BlockStatementRule;
+	CallStatementRule | ForStatementRule | PredictStatementRule;
+	
+ForStatementRule returns ForStatement:
+	'for' name = ID 'in' range = RangeRule 'loop'
+		(statements += StatementRule)*
+	'end'
+;
+
+RangeRule returns Range:
+	CounterRangeRule | StringLiterRangeRule	
+;
+
+CounterRangeRule returns CounterRange:
+	'[' start = INT 'to' end = INT ']'
+;
+
+StringLiterRangeRule returns StringLiteralRange:
+	'[' elements += StringLiteralRule (',' elements += StringLiteralRule)* ']'
+;
 
 BlockStatementRule returns BlockStatement:
-	{BlockStatement} '{'
+	{BlockStatement}
+	'begin'
 	    (statements += StatementRule)*
-	'}'
+	'end'
 ;
 
 CallStatementRule returns CallStatement:

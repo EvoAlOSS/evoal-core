@@ -63,6 +63,10 @@ public class MllFactoryImpl extends EFactoryImpl implements MllFactory {
 			case MllPackage.PREDICTION: return createPrediction();
 			case MllPackage.CALL_STATEMENT: return createCallStatement();
 			case MllPackage.BLOCK_STATEMENT: return createBlockStatement();
+			case MllPackage.PREDICT_STATEMENT: return createPredictStatement();
+			case MllPackage.FOR_STATEMENT: return createForStatement();
+			case MllPackage.COUNTER_RANGE: return createCounterRange();
+			case MllPackage.STRING_LITERAL_RANGE: return createStringLiteralRange();
 			case MllPackage.DEFINED_FUNCTION_NAME: return createDefinedFunctionName();
 			case MllPackage.USE: return createUse();
 			default:
@@ -145,6 +149,50 @@ public class MllFactoryImpl extends EFactoryImpl implements MllFactory {
 	public BlockStatement createBlockStatement() {
 		BlockStatementImpl blockStatement = new BlockStatementImpl();
 		return blockStatement;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public PredictStatement createPredictStatement() {
+		PredictStatementImpl predictStatement = new PredictStatementImpl();
+		return predictStatement;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ForStatement createForStatement() {
+		ForStatementImpl forStatement = new ForStatementImpl();
+		return forStatement;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public CounterRange createCounterRange() {
+		CounterRangeImpl counterRange = new CounterRangeImpl();
+		return counterRange;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public StringLiteralRange createStringLiteralRange() {
+		StringLiteralRangeImpl stringLiteralRange = new StringLiteralRangeImpl();
+		return stringLiteralRange;
 	}
 
 	/**

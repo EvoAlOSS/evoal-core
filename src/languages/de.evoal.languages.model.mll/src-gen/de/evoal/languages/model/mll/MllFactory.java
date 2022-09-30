@@ -85,6 +85,42 @@ public interface MllFactory extends EFactory {
 	BlockStatement createBlockStatement();
 
 	/**
+	 * Returns a new object of class '<em>Predict Statement</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Predict Statement</em>'.
+	 * @generated
+	 */
+	PredictStatement createPredictStatement();
+
+	/**
+	 * Returns a new object of class '<em>For Statement</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>For Statement</em>'.
+	 * @generated
+	 */
+	ForStatement createForStatement();
+
+	/**
+	 * Returns a new object of class '<em>Counter Range</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Counter Range</em>'.
+	 * @generated
+	 */
+	CounterRange createCounterRange();
+
+	/**
+	 * Returns a new object of class '<em>String Literal Range</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>String Literal Range</em>'.
+	 * @generated
+	 */
+	StringLiteralRange createStringLiteralRange();
+
+	/**
 	 * Returns a new object of class '<em>Defined Function Name</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

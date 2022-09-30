@@ -125,18 +125,18 @@ ruleMachineLearningConfigurationRule returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getMachineLearningConfigurationRuleAccess().getPredictionsPredictionRuleParserRuleCall_2_0());
+					newCompositeNode(grammarAccess.getMachineLearningConfigurationRuleAccess().getStatementsStatementRuleParserRuleCall_2_0());
 				}
-				lv_predictions_2_0=rulePredictionRule
+				lv_statements_2_0=ruleStatementRule
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getMachineLearningConfigurationRuleRule());
 					}
 					add(
 						$current,
-						"predictions",
-						lv_predictions_2_0,
-						"de.evoal.languages.model.mll.dsl.MachineLearningLanguage.PredictionRule");
+						"statements",
+						lv_statements_2_0,
+						"de.evoal.languages.model.mll.dsl.MachineLearningLanguage.StatementRule");
 					afterParserOrEnumRuleCall();
 				}
 			)
@@ -580,15 +580,15 @@ rulePartialSurrogateFunctionRule returns [EObject current=null]
 	)
 ;
 
-// Entry rule entryRulePredictionRule
-entryRulePredictionRule returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getPredictionRuleRule()); }
-	iv_rulePredictionRule=rulePredictionRule
-	{ $current=$iv_rulePredictionRule.current; }
+// Entry rule entryRulePredictStatementRule
+entryRulePredictStatementRule returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getPredictStatementRuleRule()); }
+	iv_rulePredictStatementRule=rulePredictStatementRule
+	{ $current=$iv_rulePredictStatementRule.current; }
 	EOF;
 
-// Rule PredictionRule
-rulePredictionRule returns [EObject current=null]
+// Rule PredictStatementRule
+rulePredictStatementRule returns [EObject current=null]
 @init {
 	enterRule();
 }
@@ -598,7 +598,7 @@ rulePredictionRule returns [EObject current=null]
 	(
 		otherlv_0='predict'
 		{
-			newLeafNode(otherlv_0, grammarAccess.getPredictionRuleAccess().getPredictKeyword_0());
+			newLeafNode(otherlv_0, grammarAccess.getPredictStatementRuleAccess().getPredictKeyword_0());
 		}
 		(
 			(
@@ -607,59 +607,11 @@ rulePredictionRule returns [EObject current=null]
 				}
 				{
 					if ($current==null) {
-						$current = createModelElement(grammarAccess.getPredictionRuleRule());
+						$current = createModelElement(grammarAccess.getPredictStatementRuleRule());
 					}
 				}
 				{
-					newCompositeNode(grammarAccess.getPredictionRuleAccess().getOutputsDataDescriptionCrossReference_1_0());
-				}
-				ruleStringOrId
-				{
-					afterParserOrEnumRuleCall();
-				}
-			)
-		)
-		(
-			otherlv_2=','
-			{
-				newLeafNode(otherlv_2, grammarAccess.getPredictionRuleAccess().getCommaKeyword_2_0());
-			}
-			(
-				(
-					{
-						/* */
-					}
-					{
-						if ($current==null) {
-							$current = createModelElement(grammarAccess.getPredictionRuleRule());
-						}
-					}
-					{
-						newCompositeNode(grammarAccess.getPredictionRuleAccess().getOutputsDataDescriptionCrossReference_2_1_0());
-					}
-					ruleStringOrId
-					{
-						afterParserOrEnumRuleCall();
-					}
-				)
-			)
-		)*
-		otherlv_4='from'
-		{
-			newLeafNode(otherlv_4, grammarAccess.getPredictionRuleAccess().getFromKeyword_3());
-		}
-		(
-			(
-				{
-					/* */
-				}
-				{
-					if ($current==null) {
-						$current = createModelElement(grammarAccess.getPredictionRuleRule());
-					}
-				}
-				{
-					newCompositeNode(grammarAccess.getPredictionRuleAccess().getInputsDataDescriptionCrossReference_4_0());
+					newCompositeNode(grammarAccess.getPredictStatementRuleAccess().getSurrogateSurrogateDefinitionCrossReference_1_0());
 				}
 				ruleStringOrId
 				{
@@ -667,77 +619,61 @@ rulePredictionRule returns [EObject current=null]
 				}
 			)
 		)
-		(
-			otherlv_6=','
-			{
-				newLeafNode(otherlv_6, grammarAccess.getPredictionRuleAccess().getCommaKeyword_5_0());
-			}
-			(
-				(
-					{
-						/* */
-					}
-					{
-						if ($current==null) {
-							$current = createModelElement(grammarAccess.getPredictionRuleRule());
-						}
-					}
-					{
-						newCompositeNode(grammarAccess.getPredictionRuleAccess().getInputsDataDescriptionCrossReference_5_1_0());
-					}
-					ruleStringOrId
-					{
-						afterParserOrEnumRuleCall();
-					}
-				)
-			)
-		)*
-		otherlv_8='using'
+		otherlv_2='from'
 		{
-			newLeafNode(otherlv_8, grammarAccess.getPredictionRuleAccess().getUsingKeyword_6());
+			newLeafNode(otherlv_2, grammarAccess.getPredictStatementRuleAccess().getFromKeyword_2());
 		}
 		(
 			(
+				lv_filename_3_0=RULE_STRING
 				{
-					/* */
+					newLeafNode(lv_filename_3_0, grammarAccess.getPredictStatementRuleAccess().getFilenameSTRINGTerminalRuleCall_3_0());
 				}
 				{
 					if ($current==null) {
-						$current = createModelElement(grammarAccess.getPredictionRuleRule());
+						$current = createModelElement(grammarAccess.getPredictStatementRuleRule());
 					}
-				}
-				{
-					newCompositeNode(grammarAccess.getPredictionRuleAccess().getDefinitionSurrogateDefinitionCrossReference_7_0());
-				}
-				ruleStringOrId
-				{
-					afterParserOrEnumRuleCall();
-				}
-			)
-		)
-		otherlv_10='measure'
-		{
-			newLeafNode(otherlv_10, grammarAccess.getPredictionRuleAccess().getMeasureKeyword_8());
-		}
-		(
-			(
-				{
-					newCompositeNode(grammarAccess.getPredictionRuleAccess().getQualityBlockStatementRuleParserRuleCall_9_0());
-				}
-				lv_quality_11_0=ruleBlockStatementRule
-				{
-					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getPredictionRuleRule());
-					}
-					set(
+					setWithLastConsumed(
 						$current,
-						"quality",
-						lv_quality_11_0,
-						"de.evoal.languages.model.mll.dsl.MachineLearningLanguage.BlockStatementRule");
-					afterParserOrEnumRuleCall();
+						"filename",
+						lv_filename_3_0,
+						"de.evoal.languages.model.el.dsl.ExpressionLanguage.STRING");
 				}
 			)
 		)
+		(
+			otherlv_4='and'
+			{
+				newLeafNode(otherlv_4, grammarAccess.getPredictStatementRuleAccess().getAndKeyword_4_0());
+			}
+			otherlv_5='measure'
+			{
+				newLeafNode(otherlv_5, grammarAccess.getPredictStatementRuleAccess().getMeasureKeyword_4_1());
+			}
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getPredictStatementRuleAccess().getStatementsStatementRuleParserRuleCall_4_2_0());
+					}
+					lv_statements_6_0=ruleStatementRule
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getPredictStatementRuleRule());
+						}
+						add(
+							$current,
+							"statements",
+							lv_statements_6_0,
+							"de.evoal.languages.model.mll.dsl.MachineLearningLanguage.StatementRule");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)*
+			otherlv_7='end'
+			{
+				newLeafNode(otherlv_7, grammarAccess.getPredictStatementRuleAccess().getEndKeyword_4_3());
+			}
+		)?
 	)
 ;
 
@@ -773,25 +709,37 @@ ruleStatementRule returns [EObject current=null]
 			/* */
 		}
 		{
-			newCompositeNode(grammarAccess.getStatementRuleAccess().getBlockStatementRuleParserRuleCall_1());
+			newCompositeNode(grammarAccess.getStatementRuleAccess().getForStatementRuleParserRuleCall_1());
 		}
-		this_BlockStatementRule_1=ruleBlockStatementRule
+		this_ForStatementRule_1=ruleForStatementRule
 		{
-			$current = $this_BlockStatementRule_1.current;
+			$current = $this_ForStatementRule_1.current;
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		{
+			/* */
+		}
+		{
+			newCompositeNode(grammarAccess.getStatementRuleAccess().getPredictStatementRuleParserRuleCall_2());
+		}
+		this_PredictStatementRule_2=rulePredictStatementRule
+		{
+			$current = $this_PredictStatementRule_2.current;
 			afterParserOrEnumRuleCall();
 		}
 	)
 ;
 
-// Entry rule entryRuleBlockStatementRule
-entryRuleBlockStatementRule returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getBlockStatementRuleRule()); }
-	iv_ruleBlockStatementRule=ruleBlockStatementRule
-	{ $current=$iv_ruleBlockStatementRule.current; }
+// Entry rule entryRuleForStatementRule
+entryRuleForStatementRule returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getForStatementRuleRule()); }
+	iv_ruleForStatementRule=ruleForStatementRule
+	{ $current=$iv_ruleForStatementRule.current; }
 	EOF;
 
-// Rule BlockStatementRule
-ruleBlockStatementRule returns [EObject current=null]
+// Rule ForStatementRule
+ruleForStatementRule returns [EObject current=null]
 @init {
 	enterRule();
 }
@@ -799,42 +747,257 @@ ruleBlockStatementRule returns [EObject current=null]
 	leaveRule();
 }:
 	(
-		(
-			{
-				/* */
-			}
-			{
-				$current = forceCreateModelElement(
-					grammarAccess.getBlockStatementRuleAccess().getBlockStatementAction_0(),
-					$current);
-			}
-		)
-		otherlv_1='{'
+		otherlv_0='for'
 		{
-			newLeafNode(otherlv_1, grammarAccess.getBlockStatementRuleAccess().getLeftCurlyBracketKeyword_1());
+			newLeafNode(otherlv_0, grammarAccess.getForStatementRuleAccess().getForKeyword_0());
+		}
+		(
+			(
+				lv_name_1_0=RULE_ID
+				{
+					newLeafNode(lv_name_1_0, grammarAccess.getForStatementRuleAccess().getNameIDTerminalRuleCall_1_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getForStatementRuleRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"name",
+						lv_name_1_0,
+						"org.eclipse.xtext.common.Terminals.ID");
+				}
+			)
+		)
+		otherlv_2='in'
+		{
+			newLeafNode(otherlv_2, grammarAccess.getForStatementRuleAccess().getInKeyword_2());
 		}
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getBlockStatementRuleAccess().getStatementsStatementRuleParserRuleCall_2_0());
+					newCompositeNode(grammarAccess.getForStatementRuleAccess().getRangeRangeRuleParserRuleCall_3_0());
 				}
-				lv_statements_2_0=ruleStatementRule
+				lv_range_3_0=ruleRangeRule
 				{
 					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getBlockStatementRuleRule());
+						$current = createModelElementForParent(grammarAccess.getForStatementRuleRule());
+					}
+					set(
+						$current,
+						"range",
+						lv_range_3_0,
+						"de.evoal.languages.model.mll.dsl.MachineLearningLanguage.RangeRule");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		otherlv_4='loop'
+		{
+			newLeafNode(otherlv_4, grammarAccess.getForStatementRuleAccess().getLoopKeyword_4());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getForStatementRuleAccess().getStatementsStatementRuleParserRuleCall_5_0());
+				}
+				lv_statements_5_0=ruleStatementRule
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getForStatementRuleRule());
 					}
 					add(
 						$current,
 						"statements",
-						lv_statements_2_0,
+						lv_statements_5_0,
 						"de.evoal.languages.model.mll.dsl.MachineLearningLanguage.StatementRule");
 					afterParserOrEnumRuleCall();
 				}
 			)
 		)*
-		otherlv_3='}'
+		otherlv_6='end'
 		{
-			newLeafNode(otherlv_3, grammarAccess.getBlockStatementRuleAccess().getRightCurlyBracketKeyword_3());
+			newLeafNode(otherlv_6, grammarAccess.getForStatementRuleAccess().getEndKeyword_6());
+		}
+	)
+;
+
+// Entry rule entryRuleRangeRule
+entryRuleRangeRule returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getRangeRuleRule()); }
+	iv_ruleRangeRule=ruleRangeRule
+	{ $current=$iv_ruleRangeRule.current; }
+	EOF;
+
+// Rule RangeRule
+ruleRangeRule returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		{
+			/* */
+		}
+		{
+			newCompositeNode(grammarAccess.getRangeRuleAccess().getCounterRangeRuleParserRuleCall_0());
+		}
+		this_CounterRangeRule_0=ruleCounterRangeRule
+		{
+			$current = $this_CounterRangeRule_0.current;
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		{
+			/* */
+		}
+		{
+			newCompositeNode(grammarAccess.getRangeRuleAccess().getStringLiterRangeRuleParserRuleCall_1());
+		}
+		this_StringLiterRangeRule_1=ruleStringLiterRangeRule
+		{
+			$current = $this_StringLiterRangeRule_1.current;
+			afterParserOrEnumRuleCall();
+		}
+	)
+;
+
+// Entry rule entryRuleCounterRangeRule
+entryRuleCounterRangeRule returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getCounterRangeRuleRule()); }
+	iv_ruleCounterRangeRule=ruleCounterRangeRule
+	{ $current=$iv_ruleCounterRangeRule.current; }
+	EOF;
+
+// Rule CounterRangeRule
+ruleCounterRangeRule returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0='['
+		{
+			newLeafNode(otherlv_0, grammarAccess.getCounterRangeRuleAccess().getLeftSquareBracketKeyword_0());
+		}
+		(
+			(
+				lv_start_1_0=RULE_INT
+				{
+					newLeafNode(lv_start_1_0, grammarAccess.getCounterRangeRuleAccess().getStartINTTerminalRuleCall_1_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getCounterRangeRuleRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"start",
+						lv_start_1_0,
+						"org.eclipse.xtext.common.Terminals.INT");
+				}
+			)
+		)
+		otherlv_2='to'
+		{
+			newLeafNode(otherlv_2, grammarAccess.getCounterRangeRuleAccess().getToKeyword_2());
+		}
+		(
+			(
+				lv_end_3_0=RULE_INT
+				{
+					newLeafNode(lv_end_3_0, grammarAccess.getCounterRangeRuleAccess().getEndINTTerminalRuleCall_3_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getCounterRangeRuleRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"end",
+						lv_end_3_0,
+						"org.eclipse.xtext.common.Terminals.INT");
+				}
+			)
+		)
+		otherlv_4=']'
+		{
+			newLeafNode(otherlv_4, grammarAccess.getCounterRangeRuleAccess().getRightSquareBracketKeyword_4());
+		}
+	)
+;
+
+// Entry rule entryRuleStringLiterRangeRule
+entryRuleStringLiterRangeRule returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getStringLiterRangeRuleRule()); }
+	iv_ruleStringLiterRangeRule=ruleStringLiterRangeRule
+	{ $current=$iv_ruleStringLiterRangeRule.current; }
+	EOF;
+
+// Rule StringLiterRangeRule
+ruleStringLiterRangeRule returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0='['
+		{
+			newLeafNode(otherlv_0, grammarAccess.getStringLiterRangeRuleAccess().getLeftSquareBracketKeyword_0());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getStringLiterRangeRuleAccess().getElementsStringLiteralRuleParserRuleCall_1_0());
+				}
+				lv_elements_1_0=ruleStringLiteralRule
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getStringLiterRangeRuleRule());
+					}
+					add(
+						$current,
+						"elements",
+						lv_elements_1_0,
+						"de.evoal.languages.model.el.dsl.ExpressionLanguage.StringLiteralRule");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		(
+			otherlv_2=','
+			{
+				newLeafNode(otherlv_2, grammarAccess.getStringLiterRangeRuleAccess().getCommaKeyword_2_0());
+			}
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getStringLiterRangeRuleAccess().getElementsStringLiteralRuleParserRuleCall_2_1_0());
+					}
+					lv_elements_3_0=ruleStringLiteralRule
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getStringLiterRangeRuleRule());
+						}
+						add(
+							$current,
+							"elements",
+							lv_elements_3_0,
+							"de.evoal.languages.model.el.dsl.ExpressionLanguage.StringLiteralRule");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+		)*
+		otherlv_4=']'
+		{
+			newLeafNode(otherlv_4, grammarAccess.getStringLiterRangeRuleAccess().getRightSquareBracketKeyword_3());
 		}
 	)
 ;

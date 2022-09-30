@@ -4,7 +4,7 @@ package de.evoal.languages.model.mll.impl;
 
 import de.evoal.languages.model.mll.MachineLearningConfiguration;
 import de.evoal.languages.model.mll.MllPackage;
-import de.evoal.languages.model.mll.Prediction;
+import de.evoal.languages.model.mll.Statement;
 import de.evoal.languages.model.mll.SurrogateDefinition;
 import de.evoal.languages.model.mll.Use;
 
@@ -32,7 +32,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <ul>
  *   <li>{@link de.evoal.languages.model.mll.impl.MachineLearningConfigurationImpl#getUses <em>Uses</em>}</li>
  *   <li>{@link de.evoal.languages.model.mll.impl.MachineLearningConfigurationImpl#getDefinitions <em>Definitions</em>}</li>
- *   <li>{@link de.evoal.languages.model.mll.impl.MachineLearningConfigurationImpl#getPredictions <em>Predictions</em>}</li>
+ *   <li>{@link de.evoal.languages.model.mll.impl.MachineLearningConfigurationImpl#getStatements <em>Statements</em>}</li>
  * </ul>
  *
  * @generated
@@ -59,14 +59,14 @@ public class MachineLearningConfigurationImpl extends MinimalEObjectImpl.Contain
 	protected EList<SurrogateDefinition> definitions;
 
 	/**
-	 * The cached value of the '{@link #getPredictions() <em>Predictions</em>}' containment reference list.
+	 * The cached value of the '{@link #getStatements() <em>Statements</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getPredictions()
+	 * @see #getStatements()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Prediction> predictions;
+	protected EList<Statement> statements;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -119,11 +119,11 @@ public class MachineLearningConfigurationImpl extends MinimalEObjectImpl.Contain
 	 * @generated
 	 */
 	@Override
-	public EList<Prediction> getPredictions() {
-		if (predictions == null) {
-			predictions = new EObjectContainmentEList<Prediction>(Prediction.class, this, MllPackage.MACHINE_LEARNING_CONFIGURATION__PREDICTIONS);
+	public EList<Statement> getStatements() {
+		if (statements == null) {
+			statements = new EObjectContainmentEList<Statement>(Statement.class, this, MllPackage.MACHINE_LEARNING_CONFIGURATION__STATEMENTS);
 		}
-		return predictions;
+		return statements;
 	}
 
 	/**
@@ -138,8 +138,8 @@ public class MachineLearningConfigurationImpl extends MinimalEObjectImpl.Contain
 				return ((InternalEList<?>)getUses()).basicRemove(otherEnd, msgs);
 			case MllPackage.MACHINE_LEARNING_CONFIGURATION__DEFINITIONS:
 				return ((InternalEList<?>)getDefinitions()).basicRemove(otherEnd, msgs);
-			case MllPackage.MACHINE_LEARNING_CONFIGURATION__PREDICTIONS:
-				return ((InternalEList<?>)getPredictions()).basicRemove(otherEnd, msgs);
+			case MllPackage.MACHINE_LEARNING_CONFIGURATION__STATEMENTS:
+				return ((InternalEList<?>)getStatements()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -156,8 +156,8 @@ public class MachineLearningConfigurationImpl extends MinimalEObjectImpl.Contain
 				return getUses();
 			case MllPackage.MACHINE_LEARNING_CONFIGURATION__DEFINITIONS:
 				return getDefinitions();
-			case MllPackage.MACHINE_LEARNING_CONFIGURATION__PREDICTIONS:
-				return getPredictions();
+			case MllPackage.MACHINE_LEARNING_CONFIGURATION__STATEMENTS:
+				return getStatements();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -179,9 +179,9 @@ public class MachineLearningConfigurationImpl extends MinimalEObjectImpl.Contain
 				getDefinitions().clear();
 				getDefinitions().addAll((Collection<? extends SurrogateDefinition>)newValue);
 				return;
-			case MllPackage.MACHINE_LEARNING_CONFIGURATION__PREDICTIONS:
-				getPredictions().clear();
-				getPredictions().addAll((Collection<? extends Prediction>)newValue);
+			case MllPackage.MACHINE_LEARNING_CONFIGURATION__STATEMENTS:
+				getStatements().clear();
+				getStatements().addAll((Collection<? extends Statement>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -201,8 +201,8 @@ public class MachineLearningConfigurationImpl extends MinimalEObjectImpl.Contain
 			case MllPackage.MACHINE_LEARNING_CONFIGURATION__DEFINITIONS:
 				getDefinitions().clear();
 				return;
-			case MllPackage.MACHINE_LEARNING_CONFIGURATION__PREDICTIONS:
-				getPredictions().clear();
+			case MllPackage.MACHINE_LEARNING_CONFIGURATION__STATEMENTS:
+				getStatements().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -220,8 +220,8 @@ public class MachineLearningConfigurationImpl extends MinimalEObjectImpl.Contain
 				return uses != null && !uses.isEmpty();
 			case MllPackage.MACHINE_LEARNING_CONFIGURATION__DEFINITIONS:
 				return definitions != null && !definitions.isEmpty();
-			case MllPackage.MACHINE_LEARNING_CONFIGURATION__PREDICTIONS:
-				return predictions != null && !predictions.isEmpty();
+			case MllPackage.MACHINE_LEARNING_CONFIGURATION__STATEMENTS:
+				return statements != null && !statements.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
