@@ -403,14 +403,14 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 		private final Keyword cAndKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
 		private final Keyword cMeasureKeyword_4_1 = (Keyword)cGroup_4.eContents().get(1);
 		private final Assignment cStatementsAssignment_4_2 = (Assignment)cGroup_4.eContents().get(2);
-		private final RuleCall cStatementsStatementRuleParserRuleCall_4_2_0 = (RuleCall)cStatementsAssignment_4_2.eContents().get(0);
+		private final RuleCall cStatementsCallStatementRuleParserRuleCall_4_2_0 = (RuleCall)cStatementsAssignment_4_2.eContents().get(0);
 		private final Keyword cEndKeyword_4_3 = (Keyword)cGroup_4.eContents().get(3);
 		
 		//PredictStatementRule returns PredictStatement:
 		//    "predict" surrogate = [SurrogateDefinition|StringOrId]
 		//        'from' filename = STRING
 		//        ('and' 'measure'
-		//            (statements += StatementRule)*
+		//            (statements += CallStatementRule)*
 		//         'end'
 		//        )?;
 		@Override public ParserRule getRule() { return rule; }
@@ -418,7 +418,7 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 		//"predict" surrogate = [SurrogateDefinition|StringOrId]
 		//    'from' filename = STRING
 		//    ('and' 'measure'
-		//        (statements += StatementRule)*
+		//        (statements += CallStatementRule)*
 		//     'end'
 		//    )?
 		public Group getGroup() { return cGroup; }
@@ -445,7 +445,7 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 		public RuleCall getFilenameSTRINGTerminalRuleCall_3_0() { return cFilenameSTRINGTerminalRuleCall_3_0; }
 		
 		//('and' 'measure'
-		//    (statements += StatementRule)*
+		//    (statements += CallStatementRule)*
 		// 'end'
 		//)?
 		public Group getGroup_4() { return cGroup_4; }
@@ -456,11 +456,11 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 		//'measure'
 		public Keyword getMeasureKeyword_4_1() { return cMeasureKeyword_4_1; }
 		
-		//(statements += StatementRule)*
+		//(statements += CallStatementRule)*
 		public Assignment getStatementsAssignment_4_2() { return cStatementsAssignment_4_2; }
 		
-		//StatementRule
-		public RuleCall getStatementsStatementRuleParserRuleCall_4_2_0() { return cStatementsStatementRuleParserRuleCall_4_2_0; }
+		//CallStatementRule
+		public RuleCall getStatementsCallStatementRuleParserRuleCall_4_2_0() { return cStatementsCallStatementRuleParserRuleCall_4_2_0; }
 		
 		//'end'
 		public Keyword getEndKeyword_4_3() { return cEndKeyword_4_3; }
@@ -891,7 +891,7 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 	//    "predict" surrogate = [SurrogateDefinition|StringOrId]
 	//        'from' filename = STRING
 	//        ('and' 'measure'
-	//            (statements += StatementRule)*
+	//            (statements += CallStatementRule)*
 	//         'end'
 	//        )?;
 	public PredictStatementRuleElements getPredictStatementRuleAccess() {

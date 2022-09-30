@@ -5662,9 +5662,9 @@ rule__PredictStatementRule__StatementsAssignment_4_2
 	}
 :
 	(
-		{ before(grammarAccess.getPredictStatementRuleAccess().getStatementsStatementRuleParserRuleCall_4_2_0()); }
-		ruleStatementRule
-		{ after(grammarAccess.getPredictStatementRuleAccess().getStatementsStatementRuleParserRuleCall_4_2_0()); }
+		{ before(grammarAccess.getPredictStatementRuleAccess().getStatementsCallStatementRuleParserRuleCall_4_2_0()); }
+		ruleCallStatementRule
+		{ after(grammarAccess.getPredictStatementRuleAccess().getStatementsCallStatementRuleParserRuleCall_4_2_0()); }
 	)
 ;
 finally {

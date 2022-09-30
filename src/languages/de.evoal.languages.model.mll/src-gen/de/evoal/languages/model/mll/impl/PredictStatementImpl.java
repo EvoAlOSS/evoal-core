@@ -2,9 +2,9 @@
  */
 package de.evoal.languages.model.mll.impl;
 
+import de.evoal.languages.model.mll.CallStatement;
 import de.evoal.languages.model.mll.MllPackage;
 import de.evoal.languages.model.mll.PredictStatement;
-import de.evoal.languages.model.mll.Statement;
 import de.evoal.languages.model.mll.SurrogateDefinition;
 
 import java.util.Collection;
@@ -76,7 +76,7 @@ public class PredictStatementImpl extends StatementImpl implements PredictStatem
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Statement> statements;
+	protected EList<CallStatement> statements;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -166,9 +166,9 @@ public class PredictStatementImpl extends StatementImpl implements PredictStatem
 	 * @generated
 	 */
 	@Override
-	public EList<Statement> getStatements() {
+	public EList<CallStatement> getStatements() {
 		if (statements == null) {
-			statements = new EObjectContainmentEList<Statement>(Statement.class, this, MllPackage.PREDICT_STATEMENT__STATEMENTS);
+			statements = new EObjectContainmentEList<CallStatement>(CallStatement.class, this, MllPackage.PREDICT_STATEMENT__STATEMENTS);
 		}
 		return statements;
 	}
@@ -223,7 +223,7 @@ public class PredictStatementImpl extends StatementImpl implements PredictStatem
 				return;
 			case MllPackage.PREDICT_STATEMENT__STATEMENTS:
 				getStatements().clear();
-				getStatements().addAll((Collection<? extends Statement>)newValue);
+				getStatements().addAll((Collection<? extends CallStatement>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

@@ -653,9 +653,9 @@ rulePredictStatementRule returns [EObject current=null]
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getPredictStatementRuleAccess().getStatementsStatementRuleParserRuleCall_4_2_0());
+						newCompositeNode(grammarAccess.getPredictStatementRuleAccess().getStatementsCallStatementRuleParserRuleCall_4_2_0());
 					}
-					lv_statements_6_0=ruleStatementRule
+					lv_statements_6_0=ruleCallStatementRule
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getPredictStatementRuleRule());
@@ -664,7 +664,7 @@ rulePredictStatementRule returns [EObject current=null]
 							$current,
 							"statements",
 							lv_statements_6_0,
-							"de.evoal.languages.model.mll.dsl.MachineLearningLanguage.StatementRule");
+							"de.evoal.languages.model.mll.dsl.MachineLearningLanguage.CallStatementRule");
 						afterParserOrEnumRuleCall();
 					}
 				)

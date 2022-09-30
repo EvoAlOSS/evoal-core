@@ -69,7 +69,7 @@ public interface PredictStatement extends Statement {
 
 	/**
 	 * Returns the value of the '<em><b>Statements</b></em>' containment reference list.
-	 * The list contents are of type {@link de.evoal.languages.model.mll.Statement}.
+	 * The list contents are of type {@link de.evoal.languages.model.mll.CallStatement}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Statements</em>' containment reference list.
@@ -78,6 +78,6 @@ public interface PredictStatement extends Statement {
 	 *        annotation="http://www.eclipse.org/OCL/Collection nullFree='false'"
 	 * @generated
 	 */
-	EList<Statement> getStatements();
+	EList<CallStatement> getStatements();
 
 } // PredictStatement

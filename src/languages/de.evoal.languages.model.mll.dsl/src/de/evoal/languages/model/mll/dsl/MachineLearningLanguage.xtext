@@ -46,7 +46,7 @@ PredictStatementRule returns PredictStatement:
 	"predict" surrogate = [SurrogateDefinition|StringOrId]
 		'from' filename = STRING
 		('and' 'measure'
-			(statements += StatementRule)*
+			(statements += CallStatementRule)*
 		 'end'
 		)?;
 
