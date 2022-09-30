@@ -8,6 +8,7 @@ import de.evoal.languages.model.dl.TypeDefinition;
 import de.evoal.languages.model.instance.Attribute;
 import de.evoal.languages.model.instance.Instance;
 import de.evoal.languages.model.instance.InstancePackage;
+import de.evoal.languages.model.instance.Name;
 
 import java.util.Collection;
 
@@ -138,7 +139,11 @@ public class InstanceImpl extends ValueImpl implements Instance {
 	 */
 	@Override
 	public Attribute findAttribute(final String name) {
-		return getAttributes().stream().filter(n -> n.getName().equals(name)).findFirst().orElse(null);
+		return this.getAttributes()
+		                         .stream()
+		                         .filter(n -> name.equals(((Name)n.getName()).getName().getName()))
+		                         .findFirst()
+		                         .orElse(null);
 	}
 
 	/**

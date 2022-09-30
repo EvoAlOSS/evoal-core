@@ -11,7 +11,7 @@
     <genClasses ecoreClass="model.ecore#//Instance">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//Instance/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//Instance/attributes"/>
-      <genOperations ecoreOperation="model.ecore#//Instance/findAttribute" body="return getAttributes().stream().filter(n -> n.getName().equals(name)).findFirst().orElse(null);">
+      <genOperations ecoreOperation="model.ecore#//Instance/findAttribute" body="return this.getAttributes()&#xA;                 .stream()&#xA;                 .filter(n -> name.equals(((%de.evoal.languages.model.instance.Name%)n.getName()).getName().getName()))&#xA;                 .findFirst()&#xA;                 .orElse(null);">
         <genParameters ecoreParameter="model.ecore#//Instance/findAttribute/name"/>
       </genOperations>
     </genClasses>
