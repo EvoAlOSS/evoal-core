@@ -1517,21 +1517,42 @@ ruleDoubleLiteralRule returns [EObject current=null]
 }:
 	(
 		(
-			{
-				newCompositeNode(grammarAccess.getDoubleLiteralRuleAccess().getValueDOUBLEParserRuleCall_0());
-			}
-			lv_value_0_0=ruleDOUBLE
-			{
-				if ($current==null) {
-					$current = createModelElementForParent(grammarAccess.getDoubleLiteralRuleRule());
+			(
+				{
+					newCompositeNode(grammarAccess.getDoubleLiteralRuleAccess().getLiteralDOUBLEParserRuleCall_0_0());
 				}
-				set(
-					$current,
-					"value",
-					lv_value_0_0,
-					"de.evoal.languages.model.el.dsl.ExpressionLanguage.DOUBLE");
-				afterParserOrEnumRuleCall();
-			}
+				lv_literal_0_0=ruleDOUBLE
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getDoubleLiteralRuleRule());
+					}
+					set(
+						$current,
+						"literal",
+						lv_literal_0_0,
+						"de.evoal.languages.model.el.dsl.ExpressionLanguage.DOUBLE");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getDoubleLiteralRuleAccess().getFactorFactorRuleEnumRuleCall_1_0());
+				}
+				lv_factor_1_0=ruleFactorRule
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getDoubleLiteralRuleRule());
+					}
+					set(
+						$current,
+						"factor",
+						lv_factor_1_0,
+						"de.evoal.languages.model.el.dsl.ExpressionLanguage.FactorRule");
+					afterParserOrEnumRuleCall();
+				}
+			)
 		)
 	)
 ;
@@ -1553,20 +1574,41 @@ ruleIntegerLiteralRule returns [EObject current=null]
 }:
 	(
 		(
-			lv_value_0_0=RULE_INT
-			{
-				newLeafNode(lv_value_0_0, grammarAccess.getIntegerLiteralRuleAccess().getValueINTTerminalRuleCall_0());
-			}
-			{
-				if ($current==null) {
-					$current = createModelElement(grammarAccess.getIntegerLiteralRuleRule());
+			(
+				lv_literal_0_0=RULE_INT
+				{
+					newLeafNode(lv_literal_0_0, grammarAccess.getIntegerLiteralRuleAccess().getLiteralINTTerminalRuleCall_0_0());
 				}
-				setWithLastConsumed(
-					$current,
-					"value",
-					lv_value_0_0,
-					"org.eclipse.xtext.common.Terminals.INT");
-			}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getIntegerLiteralRuleRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"literal",
+						lv_literal_0_0,
+						"org.eclipse.xtext.common.Terminals.INT");
+				}
+			)
+		)
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getIntegerLiteralRuleAccess().getFactorFactorRuleEnumRuleCall_1_0());
+				}
+				lv_factor_1_0=ruleFactorRule
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getIntegerLiteralRuleRule());
+					}
+					set(
+						$current,
+						"factor",
+						lv_factor_1_0,
+						"de.evoal.languages.model.el.dsl.ExpressionLanguage.FactorRule");
+					afterParserOrEnumRuleCall();
+				}
+			)
 		)
 	)
 ;
@@ -1841,6 +1883,177 @@ ruleMultiplyDivideModuloOperatorRule returns [Enumerator current=null]
 			{
 				$current = grammarAccess.getMultiplyDivideModuloOperatorRuleAccess().getModuloEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
 				newLeafNode(enumLiteral_2, grammarAccess.getMultiplyDivideModuloOperatorRuleAccess().getModuloEnumLiteralDeclaration_2());
+			}
+		)
+	)
+;
+
+// Rule FactorRule
+ruleFactorRule returns [Enumerator current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			enumLiteral_0='Y'
+			{
+				$current = grammarAccess.getFactorRuleAccess().getYottaEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
+				newLeafNode(enumLiteral_0, grammarAccess.getFactorRuleAccess().getYottaEnumLiteralDeclaration_0());
+			}
+		)
+		    |
+		(
+			enumLiteral_1='Z'
+			{
+				$current = grammarAccess.getFactorRuleAccess().getZettaEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
+				newLeafNode(enumLiteral_1, grammarAccess.getFactorRuleAccess().getZettaEnumLiteralDeclaration_1());
+			}
+		)
+		    |
+		(
+			enumLiteral_2='E'
+			{
+				$current = grammarAccess.getFactorRuleAccess().getExaEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
+				newLeafNode(enumLiteral_2, grammarAccess.getFactorRuleAccess().getExaEnumLiteralDeclaration_2());
+			}
+		)
+		    |
+		(
+			enumLiteral_3='P'
+			{
+				$current = grammarAccess.getFactorRuleAccess().getPetaEnumLiteralDeclaration_3().getEnumLiteral().getInstance();
+				newLeafNode(enumLiteral_3, grammarAccess.getFactorRuleAccess().getPetaEnumLiteralDeclaration_3());
+			}
+		)
+		    |
+		(
+			enumLiteral_4='T'
+			{
+				$current = grammarAccess.getFactorRuleAccess().getTeraEnumLiteralDeclaration_4().getEnumLiteral().getInstance();
+				newLeafNode(enumLiteral_4, grammarAccess.getFactorRuleAccess().getTeraEnumLiteralDeclaration_4());
+			}
+		)
+		    |
+		(
+			enumLiteral_5='G'
+			{
+				$current = grammarAccess.getFactorRuleAccess().getGigaEnumLiteralDeclaration_5().getEnumLiteral().getInstance();
+				newLeafNode(enumLiteral_5, grammarAccess.getFactorRuleAccess().getGigaEnumLiteralDeclaration_5());
+			}
+		)
+		    |
+		(
+			enumLiteral_6='M'
+			{
+				$current = grammarAccess.getFactorRuleAccess().getMegaEnumLiteralDeclaration_6().getEnumLiteral().getInstance();
+				newLeafNode(enumLiteral_6, grammarAccess.getFactorRuleAccess().getMegaEnumLiteralDeclaration_6());
+			}
+		)
+		    |
+		(
+			enumLiteral_7='k'
+			{
+				$current = grammarAccess.getFactorRuleAccess().getKiloEnumLiteralDeclaration_7().getEnumLiteral().getInstance();
+				newLeafNode(enumLiteral_7, grammarAccess.getFactorRuleAccess().getKiloEnumLiteralDeclaration_7());
+			}
+		)
+		    |
+		(
+			enumLiteral_8='h'
+			{
+				$current = grammarAccess.getFactorRuleAccess().getHectoEnumLiteralDeclaration_8().getEnumLiteral().getInstance();
+				newLeafNode(enumLiteral_8, grammarAccess.getFactorRuleAccess().getHectoEnumLiteralDeclaration_8());
+			}
+		)
+		    |
+		(
+			enumLiteral_9='da'
+			{
+				$current = grammarAccess.getFactorRuleAccess().getDekaEnumLiteralDeclaration_9().getEnumLiteral().getInstance();
+				newLeafNode(enumLiteral_9, grammarAccess.getFactorRuleAccess().getDekaEnumLiteralDeclaration_9());
+			}
+		)
+		    |
+		(
+			enumLiteral_10='d'
+			{
+				$current = grammarAccess.getFactorRuleAccess().getDeciEnumLiteralDeclaration_10().getEnumLiteral().getInstance();
+				newLeafNode(enumLiteral_10, grammarAccess.getFactorRuleAccess().getDeciEnumLiteralDeclaration_10());
+			}
+		)
+		    |
+		(
+			enumLiteral_11='c'
+			{
+				$current = grammarAccess.getFactorRuleAccess().getCentiEnumLiteralDeclaration_11().getEnumLiteral().getInstance();
+				newLeafNode(enumLiteral_11, grammarAccess.getFactorRuleAccess().getCentiEnumLiteralDeclaration_11());
+			}
+		)
+		    |
+		(
+			enumLiteral_12='m'
+			{
+				$current = grammarAccess.getFactorRuleAccess().getMilliEnumLiteralDeclaration_12().getEnumLiteral().getInstance();
+				newLeafNode(enumLiteral_12, grammarAccess.getFactorRuleAccess().getMilliEnumLiteralDeclaration_12());
+			}
+		)
+		    |
+		(
+			enumLiteral_13='\u00B5'
+			{
+				$current = grammarAccess.getFactorRuleAccess().getMicroEnumLiteralDeclaration_13().getEnumLiteral().getInstance();
+				newLeafNode(enumLiteral_13, grammarAccess.getFactorRuleAccess().getMicroEnumLiteralDeclaration_13());
+			}
+		)
+		    |
+		(
+			enumLiteral_14='n'
+			{
+				$current = grammarAccess.getFactorRuleAccess().getNanoEnumLiteralDeclaration_14().getEnumLiteral().getInstance();
+				newLeafNode(enumLiteral_14, grammarAccess.getFactorRuleAccess().getNanoEnumLiteralDeclaration_14());
+			}
+		)
+		    |
+		(
+			enumLiteral_15='p'
+			{
+				$current = grammarAccess.getFactorRuleAccess().getPikoEnumLiteralDeclaration_15().getEnumLiteral().getInstance();
+				newLeafNode(enumLiteral_15, grammarAccess.getFactorRuleAccess().getPikoEnumLiteralDeclaration_15());
+			}
+		)
+		    |
+		(
+			enumLiteral_16='f'
+			{
+				$current = grammarAccess.getFactorRuleAccess().getFemtoEnumLiteralDeclaration_16().getEnumLiteral().getInstance();
+				newLeafNode(enumLiteral_16, grammarAccess.getFactorRuleAccess().getFemtoEnumLiteralDeclaration_16());
+			}
+		)
+		    |
+		(
+			enumLiteral_17='a'
+			{
+				$current = grammarAccess.getFactorRuleAccess().getAttoEnumLiteralDeclaration_17().getEnumLiteral().getInstance();
+				newLeafNode(enumLiteral_17, grammarAccess.getFactorRuleAccess().getAttoEnumLiteralDeclaration_17());
+			}
+		)
+		    |
+		(
+			enumLiteral_18='z'
+			{
+				$current = grammarAccess.getFactorRuleAccess().getZeptoEnumLiteralDeclaration_18().getEnumLiteral().getInstance();
+				newLeafNode(enumLiteral_18, grammarAccess.getFactorRuleAccess().getZeptoEnumLiteralDeclaration_18());
+			}
+		)
+		    |
+		(
+			enumLiteral_19='y'
+			{
+				$current = grammarAccess.getFactorRuleAccess().getYoctoEnumLiteralDeclaration_19().getEnumLiteral().getInstance();
+				newLeafNode(enumLiteral_19, grammarAccess.getFactorRuleAccess().getYoctoEnumLiteralDeclaration_19());
 			}
 		)
 	)

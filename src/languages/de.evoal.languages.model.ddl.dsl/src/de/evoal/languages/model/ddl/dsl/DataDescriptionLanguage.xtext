@@ -43,7 +43,7 @@ DataDescriptionRule returns DataDescription:
 ;
 
 TypedDataDescriptionRule returns TypedDataDescription:
-	representation=RepresentationType 'data' name = StringOrId 'of' 'type' type = [DataType|ID] ('with' 'constraints' ':' (constraints += StatementRule)*)?
+	representation=RepresentationType 'data' name = StringOrId 'of' 'type' type = [DataType|StringOrId] ('with' 'constraints' ':' (constraints += StatementRule)*)?
 	';'
 ;
 

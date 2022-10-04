@@ -14,6 +14,7 @@ import de.evoal.languages.model.el.DoubleLiteral;
 import de.evoal.languages.model.el.ELFactory;
 import de.evoal.languages.model.el.ELPackage;
 import de.evoal.languages.model.el.Expression;
+import de.evoal.languages.model.el.Factor;
 import de.evoal.languages.model.el.FunctionName;
 import de.evoal.languages.model.el.IntegerLiteral;
 import de.evoal.languages.model.el.Literal;
@@ -33,6 +34,7 @@ import de.evoal.languages.model.el.XorExpression;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -219,6 +221,13 @@ public class ELPackageImpl extends EPackageImpl implements ELPackage {
 	 * @generated
 	 */
 	private EEnum multiplyDivideModuloOperatorEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum factorEEnum = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -617,6 +626,26 @@ public class ELPackageImpl extends EPackageImpl implements ELPackage {
 	 * @generated
 	 */
 	@Override
+	public EAttribute getNumberLiteral_Factor() {
+		return (EAttribute)numberLiteralEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getNumberLiteral__GetValue() {
+		return numberLiteralEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getIntegerLiteral() {
 		return integerLiteralEClass;
 	}
@@ -627,8 +656,18 @@ public class ELPackageImpl extends EPackageImpl implements ELPackage {
 	 * @generated
 	 */
 	@Override
-	public EAttribute getIntegerLiteral_Value() {
+	public EAttribute getIntegerLiteral_Literal() {
 		return (EAttribute)integerLiteralEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getIntegerLiteral__GetValue() {
+		return integerLiteralEClass.getEOperations().get(0);
 	}
 
 	/**
@@ -647,8 +686,18 @@ public class ELPackageImpl extends EPackageImpl implements ELPackage {
 	 * @generated
 	 */
 	@Override
-	public EAttribute getDoubleLiteral_Value() {
+	public EAttribute getDoubleLiteral_Literal() {
 		return (EAttribute)doubleLiteralEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getDoubleLiteral__GetValue() {
+		return doubleLiteralEClass.getEOperations().get(0);
 	}
 
 	/**
@@ -797,6 +846,16 @@ public class ELPackageImpl extends EPackageImpl implements ELPackage {
 	 * @generated
 	 */
 	@Override
+	public EEnum getFactor() {
+		return factorEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public ELFactory getELFactory() {
 		return (ELFactory)getEFactoryInstance();
 	}
@@ -866,12 +925,16 @@ public class ELPackageImpl extends EPackageImpl implements ELPackage {
 		literalEClass = createEClass(LITERAL);
 
 		numberLiteralEClass = createEClass(NUMBER_LITERAL);
+		createEAttribute(numberLiteralEClass, NUMBER_LITERAL__FACTOR);
+		createEOperation(numberLiteralEClass, NUMBER_LITERAL___GET_VALUE);
 
 		integerLiteralEClass = createEClass(INTEGER_LITERAL);
-		createEAttribute(integerLiteralEClass, INTEGER_LITERAL__VALUE);
+		createEAttribute(integerLiteralEClass, INTEGER_LITERAL__LITERAL);
+		createEOperation(integerLiteralEClass, INTEGER_LITERAL___GET_VALUE);
 
 		doubleLiteralEClass = createEClass(DOUBLE_LITERAL);
-		createEAttribute(doubleLiteralEClass, DOUBLE_LITERAL__VALUE);
+		createEAttribute(doubleLiteralEClass, DOUBLE_LITERAL__LITERAL);
+		createEOperation(doubleLiteralEClass, DOUBLE_LITERAL___GET_VALUE);
 
 		stringLiteralEClass = createEClass(STRING_LITERAL);
 		createEAttribute(stringLiteralEClass, STRING_LITERAL__VALUE);
@@ -894,6 +957,7 @@ public class ELPackageImpl extends EPackageImpl implements ELPackage {
 		comparisonOperatorEEnum = createEEnum(COMPARISON_OPERATOR);
 		addOrSubtractOperatorEEnum = createEEnum(ADD_OR_SUBTRACT_OPERATOR);
 		multiplyDivideModuloOperatorEEnum = createEEnum(MULTIPLY_DIVIDE_MODULO_OPERATOR);
+		factorEEnum = createEEnum(FACTOR);
 	}
 
 	/**
@@ -982,12 +1046,19 @@ public class ELPackageImpl extends EPackageImpl implements ELPackage {
 		initEClass(literalEClass, Literal.class, "Literal", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(numberLiteralEClass, NumberLiteral.class, "NumberLiteral", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getNumberLiteral_Factor(), this.getFactor(), "factor", "None", 1, 1, NumberLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEOperation(getNumberLiteral__GetValue(), ecorePackage.getEJavaObject(), "getValue", 1, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(integerLiteralEClass, IntegerLiteral.class, "IntegerLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getIntegerLiteral_Value(), ecorePackage.getEInt(), "value", null, 1, 1, IntegerLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getIntegerLiteral_Literal(), ecorePackage.getEInt(), "literal", null, 1, 1, IntegerLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEOperation(getIntegerLiteral__GetValue(), ecorePackage.getEIntegerObject(), "getValue", 1, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(doubleLiteralEClass, DoubleLiteral.class, "DoubleLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getDoubleLiteral_Value(), ecorePackage.getEDouble(), "value", null, 1, 1, DoubleLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDoubleLiteral_Literal(), ecorePackage.getEDouble(), "literal", null, 1, 1, DoubleLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEOperation(getDoubleLiteral__GetValue(), ecorePackage.getEDoubleObject(), "getValue", 1, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(stringLiteralEClass, StringLiteral.class, "StringLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getStringLiteral_Value(), ecorePackage.getEString(), "value", null, 1, 1, StringLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1023,6 +1094,29 @@ public class ELPackageImpl extends EPackageImpl implements ELPackage {
 		addEEnumLiteral(multiplyDivideModuloOperatorEEnum, MultiplyDivideModuloOperator.MULTIPLY);
 		addEEnumLiteral(multiplyDivideModuloOperatorEEnum, MultiplyDivideModuloOperator.DIVIDE);
 		addEEnumLiteral(multiplyDivideModuloOperatorEEnum, MultiplyDivideModuloOperator.MODULO);
+
+		initEEnum(factorEEnum, Factor.class, "Factor");
+		addEEnumLiteral(factorEEnum, Factor.YOTTA);
+		addEEnumLiteral(factorEEnum, Factor.ZETTA);
+		addEEnumLiteral(factorEEnum, Factor.EXA);
+		addEEnumLiteral(factorEEnum, Factor.PETA);
+		addEEnumLiteral(factorEEnum, Factor.TERA);
+		addEEnumLiteral(factorEEnum, Factor.GIGA);
+		addEEnumLiteral(factorEEnum, Factor.MEGA);
+		addEEnumLiteral(factorEEnum, Factor.KILO);
+		addEEnumLiteral(factorEEnum, Factor.HECTO);
+		addEEnumLiteral(factorEEnum, Factor.DEKA);
+		addEEnumLiteral(factorEEnum, Factor.NONE);
+		addEEnumLiteral(factorEEnum, Factor.DECI);
+		addEEnumLiteral(factorEEnum, Factor.CENTI);
+		addEEnumLiteral(factorEEnum, Factor.MILLI);
+		addEEnumLiteral(factorEEnum, Factor.MICRO);
+		addEEnumLiteral(factorEEnum, Factor.NANO);
+		addEEnumLiteral(factorEEnum, Factor.PIKO);
+		addEEnumLiteral(factorEEnum, Factor.FEMTO);
+		addEEnumLiteral(factorEEnum, Factor.ATTO);
+		addEEnumLiteral(factorEEnum, Factor.ZEPTO);
+		addEEnumLiteral(factorEEnum, Factor.YOCTO);
 
 		// Create resource
 		createResource(eNS_URI);

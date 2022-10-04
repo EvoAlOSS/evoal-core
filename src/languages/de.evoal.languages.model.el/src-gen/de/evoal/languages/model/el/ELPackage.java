@@ -5,6 +5,7 @@ package de.evoal.languages.model.el;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -604,13 +605,31 @@ public interface ELPackage extends EPackage {
 	int NUMBER_LITERAL = 13;
 
 	/**
+	 * The feature id for the '<em><b>Factor</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NUMBER_LITERAL__FACTOR = LITERAL_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Number Literal</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NUMBER_LITERAL_FEATURE_COUNT = LITERAL_FEATURE_COUNT + 0;
+	int NUMBER_LITERAL_FEATURE_COUNT = LITERAL_FEATURE_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NUMBER_LITERAL___GET_VALUE = LITERAL_OPERATION_COUNT + 0;
 
 	/**
 	 * The number of operations of the '<em>Number Literal</em>' class.
@@ -619,7 +638,7 @@ public interface ELPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NUMBER_LITERAL_OPERATION_COUNT = LITERAL_OPERATION_COUNT + 0;
+	int NUMBER_LITERAL_OPERATION_COUNT = LITERAL_OPERATION_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.el.impl.IntegerLiteralImpl <em>Integer Literal</em>}' class.
@@ -632,13 +651,22 @@ public interface ELPackage extends EPackage {
 	int INTEGER_LITERAL = 14;
 
 	/**
-	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * The feature id for the '<em><b>Factor</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INTEGER_LITERAL__VALUE = NUMBER_LITERAL_FEATURE_COUNT + 0;
+	int INTEGER_LITERAL__FACTOR = NUMBER_LITERAL__FACTOR;
+
+	/**
+	 * The feature id for the '<em><b>Literal</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTEGER_LITERAL__LITERAL = NUMBER_LITERAL_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Integer Literal</em>' class.
@@ -650,13 +678,22 @@ public interface ELPackage extends EPackage {
 	int INTEGER_LITERAL_FEATURE_COUNT = NUMBER_LITERAL_FEATURE_COUNT + 1;
 
 	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTEGER_LITERAL___GET_VALUE = NUMBER_LITERAL_OPERATION_COUNT + 0;
+
+	/**
 	 * The number of operations of the '<em>Integer Literal</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INTEGER_LITERAL_OPERATION_COUNT = NUMBER_LITERAL_OPERATION_COUNT + 0;
+	int INTEGER_LITERAL_OPERATION_COUNT = NUMBER_LITERAL_OPERATION_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.el.impl.DoubleLiteralImpl <em>Double Literal</em>}' class.
@@ -669,13 +706,22 @@ public interface ELPackage extends EPackage {
 	int DOUBLE_LITERAL = 15;
 
 	/**
-	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * The feature id for the '<em><b>Factor</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DOUBLE_LITERAL__VALUE = NUMBER_LITERAL_FEATURE_COUNT + 0;
+	int DOUBLE_LITERAL__FACTOR = NUMBER_LITERAL__FACTOR;
+
+	/**
+	 * The feature id for the '<em><b>Literal</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOUBLE_LITERAL__LITERAL = NUMBER_LITERAL_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Double Literal</em>' class.
@@ -687,13 +733,22 @@ public interface ELPackage extends EPackage {
 	int DOUBLE_LITERAL_FEATURE_COUNT = NUMBER_LITERAL_FEATURE_COUNT + 1;
 
 	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOUBLE_LITERAL___GET_VALUE = NUMBER_LITERAL_OPERATION_COUNT + 0;
+
+	/**
 	 * The number of operations of the '<em>Double Literal</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DOUBLE_LITERAL_OPERATION_COUNT = NUMBER_LITERAL_OPERATION_COUNT + 0;
+	int DOUBLE_LITERAL_OPERATION_COUNT = NUMBER_LITERAL_OPERATION_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.el.impl.StringLiteralImpl <em>String Literal</em>}' class.
@@ -937,6 +992,16 @@ public interface ELPackage extends EPackage {
 	 * @generated
 	 */
 	int MULTIPLY_DIVIDE_MODULO_OPERATOR = 24;
+
+	/**
+	 * The meta object id for the '{@link de.evoal.languages.model.el.Factor <em>Factor</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.evoal.languages.model.el.Factor
+	 * @see de.evoal.languages.model.el.impl.ELPackageImpl#getFactor()
+	 * @generated
+	 */
+	int FACTOR = 25;
 
 
 	/**
@@ -1289,6 +1354,27 @@ public interface ELPackage extends EPackage {
 	EClass getNumberLiteral();
 
 	/**
+	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.el.NumberLiteral#getFactor <em>Factor</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Factor</em>'.
+	 * @see de.evoal.languages.model.el.NumberLiteral#getFactor()
+	 * @see #getNumberLiteral()
+	 * @generated
+	 */
+	EAttribute getNumberLiteral_Factor();
+
+	/**
+	 * Returns the meta object for the '{@link de.evoal.languages.model.el.NumberLiteral#getValue() <em>Get Value</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Value</em>' operation.
+	 * @see de.evoal.languages.model.el.NumberLiteral#getValue()
+	 * @generated
+	 */
+	EOperation getNumberLiteral__GetValue();
+
+	/**
 	 * Returns the meta object for class '{@link de.evoal.languages.model.el.IntegerLiteral <em>Integer Literal</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1299,15 +1385,25 @@ public interface ELPackage extends EPackage {
 	EClass getIntegerLiteral();
 
 	/**
-	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.el.IntegerLiteral#getValue <em>Value</em>}'.
+	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.el.IntegerLiteral#getLiteral <em>Literal</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Value</em>'.
-	 * @see de.evoal.languages.model.el.IntegerLiteral#getValue()
+	 * @return the meta object for the attribute '<em>Literal</em>'.
+	 * @see de.evoal.languages.model.el.IntegerLiteral#getLiteral()
 	 * @see #getIntegerLiteral()
 	 * @generated
 	 */
-	EAttribute getIntegerLiteral_Value();
+	EAttribute getIntegerLiteral_Literal();
+
+	/**
+	 * Returns the meta object for the '{@link de.evoal.languages.model.el.IntegerLiteral#getValue() <em>Get Value</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Value</em>' operation.
+	 * @see de.evoal.languages.model.el.IntegerLiteral#getValue()
+	 * @generated
+	 */
+	EOperation getIntegerLiteral__GetValue();
 
 	/**
 	 * Returns the meta object for class '{@link de.evoal.languages.model.el.DoubleLiteral <em>Double Literal</em>}'.
@@ -1320,15 +1416,25 @@ public interface ELPackage extends EPackage {
 	EClass getDoubleLiteral();
 
 	/**
-	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.el.DoubleLiteral#getValue <em>Value</em>}'.
+	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.el.DoubleLiteral#getLiteral <em>Literal</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Value</em>'.
-	 * @see de.evoal.languages.model.el.DoubleLiteral#getValue()
+	 * @return the meta object for the attribute '<em>Literal</em>'.
+	 * @see de.evoal.languages.model.el.DoubleLiteral#getLiteral()
 	 * @see #getDoubleLiteral()
 	 * @generated
 	 */
-	EAttribute getDoubleLiteral_Value();
+	EAttribute getDoubleLiteral_Literal();
+
+	/**
+	 * Returns the meta object for the '{@link de.evoal.languages.model.el.DoubleLiteral#getValue() <em>Get Value</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Value</em>' operation.
+	 * @see de.evoal.languages.model.el.DoubleLiteral#getValue()
+	 * @generated
+	 */
+	EOperation getDoubleLiteral__GetValue();
 
 	/**
 	 * Returns the meta object for class '{@link de.evoal.languages.model.el.StringLiteral <em>String Literal</em>}'.
@@ -1474,6 +1580,16 @@ public interface ELPackage extends EPackage {
 	 * @generated
 	 */
 	EEnum getMultiplyDivideModuloOperator();
+
+	/**
+	 * Returns the meta object for enum '{@link de.evoal.languages.model.el.Factor <em>Factor</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Factor</em>'.
+	 * @see de.evoal.languages.model.el.Factor
+	 * @generated
+	 */
+	EEnum getFactor();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -1791,6 +1907,22 @@ public interface ELPackage extends EPackage {
 		EClass NUMBER_LITERAL = eINSTANCE.getNumberLiteral();
 
 		/**
+		 * The meta object literal for the '<em><b>Factor</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute NUMBER_LITERAL__FACTOR = eINSTANCE.getNumberLiteral_Factor();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Value</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation NUMBER_LITERAL___GET_VALUE = eINSTANCE.getNumberLiteral__GetValue();
+
+		/**
 		 * The meta object literal for the '{@link de.evoal.languages.model.el.impl.IntegerLiteralImpl <em>Integer Literal</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1801,12 +1933,20 @@ public interface ELPackage extends EPackage {
 		EClass INTEGER_LITERAL = eINSTANCE.getIntegerLiteral();
 
 		/**
-		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Literal</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute INTEGER_LITERAL__VALUE = eINSTANCE.getIntegerLiteral_Value();
+		EAttribute INTEGER_LITERAL__LITERAL = eINSTANCE.getIntegerLiteral_Literal();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Value</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation INTEGER_LITERAL___GET_VALUE = eINSTANCE.getIntegerLiteral__GetValue();
 
 		/**
 		 * The meta object literal for the '{@link de.evoal.languages.model.el.impl.DoubleLiteralImpl <em>Double Literal</em>}' class.
@@ -1819,12 +1959,20 @@ public interface ELPackage extends EPackage {
 		EClass DOUBLE_LITERAL = eINSTANCE.getDoubleLiteral();
 
 		/**
-		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Literal</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute DOUBLE_LITERAL__VALUE = eINSTANCE.getDoubleLiteral_Value();
+		EAttribute DOUBLE_LITERAL__LITERAL = eINSTANCE.getDoubleLiteral_Literal();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Value</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation DOUBLE_LITERAL___GET_VALUE = eINSTANCE.getDoubleLiteral__GetValue();
 
 		/**
 		 * The meta object literal for the '{@link de.evoal.languages.model.el.impl.StringLiteralImpl <em>String Literal</em>}' class.
@@ -1955,6 +2103,16 @@ public interface ELPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum MULTIPLY_DIVIDE_MODULO_OPERATOR = eINSTANCE.getMultiplyDivideModuloOperator();
+
+		/**
+		 * The meta object literal for the '{@link de.evoal.languages.model.el.Factor <em>Factor</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.evoal.languages.model.el.Factor
+		 * @see de.evoal.languages.model.el.impl.ELPackageImpl#getFactor()
+		 * @generated
+		 */
+		EEnum FACTOR = eINSTANCE.getFactor();
 
 	}
 

@@ -638,7 +638,7 @@ public class EvolutionaryAlgorithmLanguageGrammarAccess extends AbstractElementF
 	}
 	
 	//DoubleLiteralRule returns DoubleLiteral :
-	//    value = DOUBLE
+	//    literal = DOUBLE factor = FactorRule
 	//;
 	public ExpressionLanguageGrammarAccess.DoubleLiteralRuleElements getDoubleLiteralRuleAccess() {
 		return gaExpressionLanguage.getDoubleLiteralRuleAccess();
@@ -649,7 +649,7 @@ public class EvolutionaryAlgorithmLanguageGrammarAccess extends AbstractElementF
 	}
 	
 	//IntegerLiteralRule returns IntegerLiteral:
-	//    value = INT
+	//    literal = INT factor = FactorRule
 	//;
 	public ExpressionLanguageGrammarAccess.IntegerLiteralRuleElements getIntegerLiteralRuleAccess() {
 		return gaExpressionLanguage.getIntegerLiteralRuleAccess();
@@ -668,6 +668,36 @@ public class EvolutionaryAlgorithmLanguageGrammarAccess extends AbstractElementF
 	
 	public ParserRule getStringLiteralRuleRule() {
 		return getStringLiteralRuleAccess().getRule();
+	}
+	
+	//enum FactorRule returns Factor:
+	//    Yotta = 'Y' |
+	//    Zetta = 'Z' |
+	//    Exa = 'E' |
+	//    Peta = 'P' |
+	//    Tera = 'T' |
+	//    Giga = 'G' |
+	//    Mega = 'M' |
+	//    Kilo = 'k' |
+	//    Hecto = 'h' |
+	//    Deka = 'da' |
+	//    Deci = 'd' |
+	//    Centi = 'c' |
+	//    Milli = 'm' |
+	//    Micro = 'µ' |
+	//    Nano = 'n' |
+	//    Piko = 'p' |
+	//    Femto = 'f' |
+	//    Atto = 'a' |
+	//    Zepto = 'z' |
+	//    Yocto = 'y'
+	//;
+	public ExpressionLanguageGrammarAccess.FactorRuleElements getFactorRuleAccess() {
+		return gaExpressionLanguage.getFactorRuleAccess();
+	}
+	
+	public EnumRule getFactorRuleRule() {
+		return getFactorRuleAccess().getRule();
 	}
 	
 	//BooleanLiteralRule returns BooleanLiteral:

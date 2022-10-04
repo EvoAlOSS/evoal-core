@@ -23,7 +23,7 @@ import java.util.HashMap;
 @SuppressWarnings("all")
 public class InternalMachineLearningLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_STRING", "RULE_ID", "RULE_INT", "RULE_QUOTED_ID", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'use'", "';'", "'prediction'", "'maps'", "','", "'to'", "'using'", "'layer'", "'with'", "'function'", "'mapping'", "'parameters'", "'predict'", "'from'", "'and'", "'measure'", "'end'", "'for'", "'in'", "'loop'", "'['", "']'", "'{'", "'}'", "':='", "'data'", "'OR'", "'XOR'", "'AND'", "'!'", "'^'", "'('", "')'", "'value'", "'true'", "'false'", "'.'", "'>='", "'>'", "'='", "'!='", "'<'", "'<='", "'+'", "'-'", "'*'", "'/'", "'%'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_STRING", "RULE_ID", "RULE_INT", "RULE_QUOTED_ID", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'use'", "';'", "'prediction'", "'maps'", "','", "'to'", "'using'", "'layer'", "'with'", "'function'", "'mapping'", "'parameters'", "'predict'", "'from'", "'and'", "'measure'", "'end'", "'for'", "'in'", "'loop'", "'['", "']'", "'{'", "'}'", "':='", "'data'", "'OR'", "'XOR'", "'AND'", "'!'", "'^'", "'('", "')'", "'value'", "'true'", "'false'", "'.'", "'>='", "'>'", "'='", "'!='", "'<'", "'<='", "'+'", "'-'", "'*'", "'/'", "'%'", "'Y'", "'Z'", "'E'", "'P'", "'T'", "'G'", "'M'", "'k'", "'h'", "'da'", "'d'", "'c'", "'m'", "'\\u00B5'", "'n'", "'p'", "'f'", "'a'", "'z'", "'y'"
     };
     public static final int T__50=50;
     public static final int T__19=19;
@@ -43,6 +43,8 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
     public static final int T__52=52;
     public static final int T__53=53;
     public static final int T__54=54;
+    public static final int T__60=60;
+    public static final int T__61=61;
     public static final int RULE_ID=5;
     public static final int RULE_QUOTED_ID=7;
     public static final int T__26=26;
@@ -51,25 +53,43 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
     public static final int RULE_INT=6;
     public static final int T__29=29;
     public static final int T__22=22;
+    public static final int T__66=66;
     public static final int RULE_ML_COMMENT=8;
     public static final int T__23=23;
+    public static final int T__67=67;
     public static final int T__24=24;
+    public static final int T__68=68;
     public static final int T__25=25;
+    public static final int T__69=69;
+    public static final int T__62=62;
+    public static final int T__63=63;
     public static final int T__20=20;
+    public static final int T__64=64;
     public static final int T__21=21;
+    public static final int T__65=65;
+    public static final int T__70=70;
+    public static final int T__71=71;
+    public static final int T__72=72;
     public static final int RULE_STRING=4;
     public static final int RULE_SL_COMMENT=9;
     public static final int T__37=37;
     public static final int T__38=38;
     public static final int T__39=39;
     public static final int T__33=33;
+    public static final int T__77=77;
     public static final int T__34=34;
+    public static final int T__78=78;
     public static final int T__35=35;
+    public static final int T__79=79;
     public static final int T__36=36;
+    public static final int T__73=73;
     public static final int EOF=-1;
     public static final int T__30=30;
+    public static final int T__74=74;
     public static final int T__31=31;
+    public static final int T__75=75;
     public static final int T__32=32;
+    public static final int T__76=76;
     public static final int RULE_WS=10;
     public static final int RULE_ANY_OTHER=11;
     public static final int T__48=48;
@@ -7365,11 +7385,11 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
             if ( (LA37_0==RULE_INT) ) {
                 int LA37_1 = input.LA(2);
 
-                if ( (LA37_1==48) ) {
-                    alt37=1;
-                }
-                else if ( (LA37_1==EOF||LA37_1==13||LA37_1==16||LA37_1==33||(LA37_1>=38 && LA37_1<=40)||LA37_1==42||LA37_1==44||(LA37_1>=49 && LA37_1<=59)) ) {
+                if ( ((LA37_1>=60 && LA37_1<=79)) ) {
                     alt37=2;
+                }
+                else if ( (LA37_1==48) ) {
+                    alt37=1;
                 }
                 else {
                     if (state.backtracking>0) {state.failed=true; return current;}
@@ -7506,49 +7526,92 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start "ruleDoubleLiteralRule"
-    // InternalMachineLearningLanguage.g:2565:1: ruleDoubleLiteralRule returns [EObject current=null] : ( (lv_value_0_0= ruleDOUBLE ) ) ;
+    // InternalMachineLearningLanguage.g:2565:1: ruleDoubleLiteralRule returns [EObject current=null] : ( ( (lv_literal_0_0= ruleDOUBLE ) ) ( (lv_factor_1_0= ruleFactorRule ) ) ) ;
     public final EObject ruleDoubleLiteralRule() throws RecognitionException {
         EObject current = null;
 
-        AntlrDatatypeRuleToken lv_value_0_0 = null;
+        AntlrDatatypeRuleToken lv_literal_0_0 = null;
+
+        Enumerator lv_factor_1_0 = null;
 
 
 
         	enterRule();
 
         try {
-            // InternalMachineLearningLanguage.g:2571:2: ( ( (lv_value_0_0= ruleDOUBLE ) ) )
-            // InternalMachineLearningLanguage.g:2572:2: ( (lv_value_0_0= ruleDOUBLE ) )
+            // InternalMachineLearningLanguage.g:2571:2: ( ( ( (lv_literal_0_0= ruleDOUBLE ) ) ( (lv_factor_1_0= ruleFactorRule ) ) ) )
+            // InternalMachineLearningLanguage.g:2572:2: ( ( (lv_literal_0_0= ruleDOUBLE ) ) ( (lv_factor_1_0= ruleFactorRule ) ) )
             {
-            // InternalMachineLearningLanguage.g:2572:2: ( (lv_value_0_0= ruleDOUBLE ) )
-            // InternalMachineLearningLanguage.g:2573:3: (lv_value_0_0= ruleDOUBLE )
+            // InternalMachineLearningLanguage.g:2572:2: ( ( (lv_literal_0_0= ruleDOUBLE ) ) ( (lv_factor_1_0= ruleFactorRule ) ) )
+            // InternalMachineLearningLanguage.g:2573:3: ( (lv_literal_0_0= ruleDOUBLE ) ) ( (lv_factor_1_0= ruleFactorRule ) )
             {
-            // InternalMachineLearningLanguage.g:2573:3: (lv_value_0_0= ruleDOUBLE )
-            // InternalMachineLearningLanguage.g:2574:4: lv_value_0_0= ruleDOUBLE
+            // InternalMachineLearningLanguage.g:2573:3: ( (lv_literal_0_0= ruleDOUBLE ) )
+            // InternalMachineLearningLanguage.g:2574:4: (lv_literal_0_0= ruleDOUBLE )
+            {
+            // InternalMachineLearningLanguage.g:2574:4: (lv_literal_0_0= ruleDOUBLE )
+            // InternalMachineLearningLanguage.g:2575:5: lv_literal_0_0= ruleDOUBLE
             {
             if ( state.backtracking==0 ) {
 
-              				newCompositeNode(grammarAccess.getDoubleLiteralRuleAccess().getValueDOUBLEParserRuleCall_0());
-              			
+              					newCompositeNode(grammarAccess.getDoubleLiteralRuleAccess().getLiteralDOUBLEParserRuleCall_0_0());
+              				
             }
-            pushFollow(FOLLOW_2);
-            lv_value_0_0=ruleDOUBLE();
+            pushFollow(FOLLOW_52);
+            lv_literal_0_0=ruleDOUBLE();
 
             state._fsp--;
             if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
-              				if (current==null) {
-              					current = createModelElementForParent(grammarAccess.getDoubleLiteralRuleRule());
-              				}
-              				set(
-              					current,
-              					"value",
-              					lv_value_0_0,
-              					"de.evoal.languages.model.el.dsl.ExpressionLanguage.DOUBLE");
-              				afterParserOrEnumRuleCall();
-              			
+              					if (current==null) {
+              						current = createModelElementForParent(grammarAccess.getDoubleLiteralRuleRule());
+              					}
+              					set(
+              						current,
+              						"literal",
+              						lv_literal_0_0,
+              						"de.evoal.languages.model.el.dsl.ExpressionLanguage.DOUBLE");
+              					afterParserOrEnumRuleCall();
+              				
             }
+
+            }
+
+
+            }
+
+            // InternalMachineLearningLanguage.g:2592:3: ( (lv_factor_1_0= ruleFactorRule ) )
+            // InternalMachineLearningLanguage.g:2593:4: (lv_factor_1_0= ruleFactorRule )
+            {
+            // InternalMachineLearningLanguage.g:2593:4: (lv_factor_1_0= ruleFactorRule )
+            // InternalMachineLearningLanguage.g:2594:5: lv_factor_1_0= ruleFactorRule
+            {
+            if ( state.backtracking==0 ) {
+
+              					newCompositeNode(grammarAccess.getDoubleLiteralRuleAccess().getFactorFactorRuleEnumRuleCall_1_0());
+              				
+            }
+            pushFollow(FOLLOW_2);
+            lv_factor_1_0=ruleFactorRule();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              					if (current==null) {
+              						current = createModelElementForParent(grammarAccess.getDoubleLiteralRuleRule());
+              					}
+              					set(
+              						current,
+              						"factor",
+              						lv_factor_1_0,
+              						"de.evoal.languages.model.el.dsl.ExpressionLanguage.FactorRule");
+              					afterParserOrEnumRuleCall();
+              				
+            }
+
+            }
+
 
             }
 
@@ -7577,7 +7640,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start "entryRuleIntegerLiteralRule"
-    // InternalMachineLearningLanguage.g:2594:1: entryRuleIntegerLiteralRule returns [EObject current=null] : iv_ruleIntegerLiteralRule= ruleIntegerLiteralRule EOF ;
+    // InternalMachineLearningLanguage.g:2615:1: entryRuleIntegerLiteralRule returns [EObject current=null] : iv_ruleIntegerLiteralRule= ruleIntegerLiteralRule EOF ;
     public final EObject entryRuleIntegerLiteralRule() throws RecognitionException {
         EObject current = null;
 
@@ -7585,8 +7648,8 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
 
 
         try {
-            // InternalMachineLearningLanguage.g:2594:59: (iv_ruleIntegerLiteralRule= ruleIntegerLiteralRule EOF )
-            // InternalMachineLearningLanguage.g:2595:2: iv_ruleIntegerLiteralRule= ruleIntegerLiteralRule EOF
+            // InternalMachineLearningLanguage.g:2615:59: (iv_ruleIntegerLiteralRule= ruleIntegerLiteralRule EOF )
+            // InternalMachineLearningLanguage.g:2616:2: iv_ruleIntegerLiteralRule= ruleIntegerLiteralRule EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getIntegerLiteralRuleRule()); 
@@ -7617,43 +7680,86 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start "ruleIntegerLiteralRule"
-    // InternalMachineLearningLanguage.g:2601:1: ruleIntegerLiteralRule returns [EObject current=null] : ( (lv_value_0_0= RULE_INT ) ) ;
+    // InternalMachineLearningLanguage.g:2622:1: ruleIntegerLiteralRule returns [EObject current=null] : ( ( (lv_literal_0_0= RULE_INT ) ) ( (lv_factor_1_0= ruleFactorRule ) ) ) ;
     public final EObject ruleIntegerLiteralRule() throws RecognitionException {
         EObject current = null;
 
-        Token lv_value_0_0=null;
+        Token lv_literal_0_0=null;
+        Enumerator lv_factor_1_0 = null;
+
 
 
         	enterRule();
 
         try {
-            // InternalMachineLearningLanguage.g:2607:2: ( ( (lv_value_0_0= RULE_INT ) ) )
-            // InternalMachineLearningLanguage.g:2608:2: ( (lv_value_0_0= RULE_INT ) )
+            // InternalMachineLearningLanguage.g:2628:2: ( ( ( (lv_literal_0_0= RULE_INT ) ) ( (lv_factor_1_0= ruleFactorRule ) ) ) )
+            // InternalMachineLearningLanguage.g:2629:2: ( ( (lv_literal_0_0= RULE_INT ) ) ( (lv_factor_1_0= ruleFactorRule ) ) )
             {
-            // InternalMachineLearningLanguage.g:2608:2: ( (lv_value_0_0= RULE_INT ) )
-            // InternalMachineLearningLanguage.g:2609:3: (lv_value_0_0= RULE_INT )
+            // InternalMachineLearningLanguage.g:2629:2: ( ( (lv_literal_0_0= RULE_INT ) ) ( (lv_factor_1_0= ruleFactorRule ) ) )
+            // InternalMachineLearningLanguage.g:2630:3: ( (lv_literal_0_0= RULE_INT ) ) ( (lv_factor_1_0= ruleFactorRule ) )
             {
-            // InternalMachineLearningLanguage.g:2609:3: (lv_value_0_0= RULE_INT )
-            // InternalMachineLearningLanguage.g:2610:4: lv_value_0_0= RULE_INT
+            // InternalMachineLearningLanguage.g:2630:3: ( (lv_literal_0_0= RULE_INT ) )
+            // InternalMachineLearningLanguage.g:2631:4: (lv_literal_0_0= RULE_INT )
             {
-            lv_value_0_0=(Token)match(input,RULE_INT,FOLLOW_2); if (state.failed) return current;
+            // InternalMachineLearningLanguage.g:2631:4: (lv_literal_0_0= RULE_INT )
+            // InternalMachineLearningLanguage.g:2632:5: lv_literal_0_0= RULE_INT
+            {
+            lv_literal_0_0=(Token)match(input,RULE_INT,FOLLOW_52); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
-              				newLeafNode(lv_value_0_0, grammarAccess.getIntegerLiteralRuleAccess().getValueINTTerminalRuleCall_0());
-              			
+              					newLeafNode(lv_literal_0_0, grammarAccess.getIntegerLiteralRuleAccess().getLiteralINTTerminalRuleCall_0_0());
+              				
             }
             if ( state.backtracking==0 ) {
 
-              				if (current==null) {
-              					current = createModelElement(grammarAccess.getIntegerLiteralRuleRule());
-              				}
-              				setWithLastConsumed(
-              					current,
-              					"value",
-              					lv_value_0_0,
-              					"org.eclipse.xtext.common.Terminals.INT");
-              			
+              					if (current==null) {
+              						current = createModelElement(grammarAccess.getIntegerLiteralRuleRule());
+              					}
+              					setWithLastConsumed(
+              						current,
+              						"literal",
+              						lv_literal_0_0,
+              						"org.eclipse.xtext.common.Terminals.INT");
+              				
             }
+
+            }
+
+
+            }
+
+            // InternalMachineLearningLanguage.g:2648:3: ( (lv_factor_1_0= ruleFactorRule ) )
+            // InternalMachineLearningLanguage.g:2649:4: (lv_factor_1_0= ruleFactorRule )
+            {
+            // InternalMachineLearningLanguage.g:2649:4: (lv_factor_1_0= ruleFactorRule )
+            // InternalMachineLearningLanguage.g:2650:5: lv_factor_1_0= ruleFactorRule
+            {
+            if ( state.backtracking==0 ) {
+
+              					newCompositeNode(grammarAccess.getIntegerLiteralRuleAccess().getFactorFactorRuleEnumRuleCall_1_0());
+              				
+            }
+            pushFollow(FOLLOW_2);
+            lv_factor_1_0=ruleFactorRule();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              					if (current==null) {
+              						current = createModelElementForParent(grammarAccess.getIntegerLiteralRuleRule());
+              					}
+              					set(
+              						current,
+              						"factor",
+              						lv_factor_1_0,
+              						"de.evoal.languages.model.el.dsl.ExpressionLanguage.FactorRule");
+              					afterParserOrEnumRuleCall();
+              				
+            }
+
+            }
+
 
             }
 
@@ -7682,7 +7788,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start "entryRuleStringLiteralRule"
-    // InternalMachineLearningLanguage.g:2629:1: entryRuleStringLiteralRule returns [EObject current=null] : iv_ruleStringLiteralRule= ruleStringLiteralRule EOF ;
+    // InternalMachineLearningLanguage.g:2671:1: entryRuleStringLiteralRule returns [EObject current=null] : iv_ruleStringLiteralRule= ruleStringLiteralRule EOF ;
     public final EObject entryRuleStringLiteralRule() throws RecognitionException {
         EObject current = null;
 
@@ -7690,8 +7796,8 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
 
 
         try {
-            // InternalMachineLearningLanguage.g:2629:58: (iv_ruleStringLiteralRule= ruleStringLiteralRule EOF )
-            // InternalMachineLearningLanguage.g:2630:2: iv_ruleStringLiteralRule= ruleStringLiteralRule EOF
+            // InternalMachineLearningLanguage.g:2671:58: (iv_ruleStringLiteralRule= ruleStringLiteralRule EOF )
+            // InternalMachineLearningLanguage.g:2672:2: iv_ruleStringLiteralRule= ruleStringLiteralRule EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getStringLiteralRuleRule()); 
@@ -7722,7 +7828,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start "ruleStringLiteralRule"
-    // InternalMachineLearningLanguage.g:2636:1: ruleStringLiteralRule returns [EObject current=null] : ( (lv_value_0_0= RULE_STRING ) ) ;
+    // InternalMachineLearningLanguage.g:2678:1: ruleStringLiteralRule returns [EObject current=null] : ( (lv_value_0_0= RULE_STRING ) ) ;
     public final EObject ruleStringLiteralRule() throws RecognitionException {
         EObject current = null;
 
@@ -7732,14 +7838,14 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
         	enterRule();
 
         try {
-            // InternalMachineLearningLanguage.g:2642:2: ( ( (lv_value_0_0= RULE_STRING ) ) )
-            // InternalMachineLearningLanguage.g:2643:2: ( (lv_value_0_0= RULE_STRING ) )
+            // InternalMachineLearningLanguage.g:2684:2: ( ( (lv_value_0_0= RULE_STRING ) ) )
+            // InternalMachineLearningLanguage.g:2685:2: ( (lv_value_0_0= RULE_STRING ) )
             {
-            // InternalMachineLearningLanguage.g:2643:2: ( (lv_value_0_0= RULE_STRING ) )
-            // InternalMachineLearningLanguage.g:2644:3: (lv_value_0_0= RULE_STRING )
+            // InternalMachineLearningLanguage.g:2685:2: ( (lv_value_0_0= RULE_STRING ) )
+            // InternalMachineLearningLanguage.g:2686:3: (lv_value_0_0= RULE_STRING )
             {
-            // InternalMachineLearningLanguage.g:2644:3: (lv_value_0_0= RULE_STRING )
-            // InternalMachineLearningLanguage.g:2645:4: lv_value_0_0= RULE_STRING
+            // InternalMachineLearningLanguage.g:2686:3: (lv_value_0_0= RULE_STRING )
+            // InternalMachineLearningLanguage.g:2687:4: lv_value_0_0= RULE_STRING
             {
             lv_value_0_0=(Token)match(input,RULE_STRING,FOLLOW_2); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -7787,7 +7893,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start "entryRuleBooleanLiteralRule"
-    // InternalMachineLearningLanguage.g:2664:1: entryRuleBooleanLiteralRule returns [EObject current=null] : iv_ruleBooleanLiteralRule= ruleBooleanLiteralRule EOF ;
+    // InternalMachineLearningLanguage.g:2706:1: entryRuleBooleanLiteralRule returns [EObject current=null] : iv_ruleBooleanLiteralRule= ruleBooleanLiteralRule EOF ;
     public final EObject entryRuleBooleanLiteralRule() throws RecognitionException {
         EObject current = null;
 
@@ -7795,8 +7901,8 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
 
 
         try {
-            // InternalMachineLearningLanguage.g:2664:59: (iv_ruleBooleanLiteralRule= ruleBooleanLiteralRule EOF )
-            // InternalMachineLearningLanguage.g:2665:2: iv_ruleBooleanLiteralRule= ruleBooleanLiteralRule EOF
+            // InternalMachineLearningLanguage.g:2706:59: (iv_ruleBooleanLiteralRule= ruleBooleanLiteralRule EOF )
+            // InternalMachineLearningLanguage.g:2707:2: iv_ruleBooleanLiteralRule= ruleBooleanLiteralRule EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getBooleanLiteralRuleRule()); 
@@ -7827,7 +7933,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start "ruleBooleanLiteralRule"
-    // InternalMachineLearningLanguage.g:2671:1: ruleBooleanLiteralRule returns [EObject current=null] : ( () ( ( (lv_value_1_0= 'true' ) ) | otherlv_2= 'false' ) ) ;
+    // InternalMachineLearningLanguage.g:2713:1: ruleBooleanLiteralRule returns [EObject current=null] : ( () ( ( (lv_value_1_0= 'true' ) ) | otherlv_2= 'false' ) ) ;
     public final EObject ruleBooleanLiteralRule() throws RecognitionException {
         EObject current = null;
 
@@ -7838,14 +7944,14 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
         	enterRule();
 
         try {
-            // InternalMachineLearningLanguage.g:2677:2: ( ( () ( ( (lv_value_1_0= 'true' ) ) | otherlv_2= 'false' ) ) )
-            // InternalMachineLearningLanguage.g:2678:2: ( () ( ( (lv_value_1_0= 'true' ) ) | otherlv_2= 'false' ) )
+            // InternalMachineLearningLanguage.g:2719:2: ( ( () ( ( (lv_value_1_0= 'true' ) ) | otherlv_2= 'false' ) ) )
+            // InternalMachineLearningLanguage.g:2720:2: ( () ( ( (lv_value_1_0= 'true' ) ) | otherlv_2= 'false' ) )
             {
-            // InternalMachineLearningLanguage.g:2678:2: ( () ( ( (lv_value_1_0= 'true' ) ) | otherlv_2= 'false' ) )
-            // InternalMachineLearningLanguage.g:2679:3: () ( ( (lv_value_1_0= 'true' ) ) | otherlv_2= 'false' )
+            // InternalMachineLearningLanguage.g:2720:2: ( () ( ( (lv_value_1_0= 'true' ) ) | otherlv_2= 'false' ) )
+            // InternalMachineLearningLanguage.g:2721:3: () ( ( (lv_value_1_0= 'true' ) ) | otherlv_2= 'false' )
             {
-            // InternalMachineLearningLanguage.g:2679:3: ()
-            // InternalMachineLearningLanguage.g:2680:4: 
+            // InternalMachineLearningLanguage.g:2721:3: ()
+            // InternalMachineLearningLanguage.g:2722:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -7862,7 +7968,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
 
             }
 
-            // InternalMachineLearningLanguage.g:2689:3: ( ( (lv_value_1_0= 'true' ) ) | otherlv_2= 'false' )
+            // InternalMachineLearningLanguage.g:2731:3: ( ( (lv_value_1_0= 'true' ) ) | otherlv_2= 'false' )
             int alt38=2;
             int LA38_0 = input.LA(1);
 
@@ -7881,13 +7987,13 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
             }
             switch (alt38) {
                 case 1 :
-                    // InternalMachineLearningLanguage.g:2690:4: ( (lv_value_1_0= 'true' ) )
+                    // InternalMachineLearningLanguage.g:2732:4: ( (lv_value_1_0= 'true' ) )
                     {
-                    // InternalMachineLearningLanguage.g:2690:4: ( (lv_value_1_0= 'true' ) )
-                    // InternalMachineLearningLanguage.g:2691:5: (lv_value_1_0= 'true' )
+                    // InternalMachineLearningLanguage.g:2732:4: ( (lv_value_1_0= 'true' ) )
+                    // InternalMachineLearningLanguage.g:2733:5: (lv_value_1_0= 'true' )
                     {
-                    // InternalMachineLearningLanguage.g:2691:5: (lv_value_1_0= 'true' )
-                    // InternalMachineLearningLanguage.g:2692:6: lv_value_1_0= 'true'
+                    // InternalMachineLearningLanguage.g:2733:5: (lv_value_1_0= 'true' )
+                    // InternalMachineLearningLanguage.g:2734:6: lv_value_1_0= 'true'
                     {
                     lv_value_1_0=(Token)match(input,46,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -7913,7 +8019,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
                     }
                     break;
                 case 2 :
-                    // InternalMachineLearningLanguage.g:2705:4: otherlv_2= 'false'
+                    // InternalMachineLearningLanguage.g:2747:4: otherlv_2= 'false'
                     {
                     otherlv_2=(Token)match(input,47,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -7952,7 +8058,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start "entryRuleStringOrId"
-    // InternalMachineLearningLanguage.g:2714:1: entryRuleStringOrId returns [String current=null] : iv_ruleStringOrId= ruleStringOrId EOF ;
+    // InternalMachineLearningLanguage.g:2756:1: entryRuleStringOrId returns [String current=null] : iv_ruleStringOrId= ruleStringOrId EOF ;
     public final String entryRuleStringOrId() throws RecognitionException {
         String current = null;
 
@@ -7960,8 +8066,8 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
 
 
         try {
-            // InternalMachineLearningLanguage.g:2714:50: (iv_ruleStringOrId= ruleStringOrId EOF )
-            // InternalMachineLearningLanguage.g:2715:2: iv_ruleStringOrId= ruleStringOrId EOF
+            // InternalMachineLearningLanguage.g:2756:50: (iv_ruleStringOrId= ruleStringOrId EOF )
+            // InternalMachineLearningLanguage.g:2757:2: iv_ruleStringOrId= ruleStringOrId EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getStringOrIdRule()); 
@@ -7992,7 +8098,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start "ruleStringOrId"
-    // InternalMachineLearningLanguage.g:2721:1: ruleStringOrId returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_QUOTED_ID_0= RULE_QUOTED_ID | this_ID_1= RULE_ID ) ;
+    // InternalMachineLearningLanguage.g:2763:1: ruleStringOrId returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_QUOTED_ID_0= RULE_QUOTED_ID | this_ID_1= RULE_ID ) ;
     public final AntlrDatatypeRuleToken ruleStringOrId() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -8003,10 +8109,10 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
         	enterRule();
 
         try {
-            // InternalMachineLearningLanguage.g:2727:2: ( (this_QUOTED_ID_0= RULE_QUOTED_ID | this_ID_1= RULE_ID ) )
-            // InternalMachineLearningLanguage.g:2728:2: (this_QUOTED_ID_0= RULE_QUOTED_ID | this_ID_1= RULE_ID )
+            // InternalMachineLearningLanguage.g:2769:2: ( (this_QUOTED_ID_0= RULE_QUOTED_ID | this_ID_1= RULE_ID ) )
+            // InternalMachineLearningLanguage.g:2770:2: (this_QUOTED_ID_0= RULE_QUOTED_ID | this_ID_1= RULE_ID )
             {
-            // InternalMachineLearningLanguage.g:2728:2: (this_QUOTED_ID_0= RULE_QUOTED_ID | this_ID_1= RULE_ID )
+            // InternalMachineLearningLanguage.g:2770:2: (this_QUOTED_ID_0= RULE_QUOTED_ID | this_ID_1= RULE_ID )
             int alt39=2;
             int LA39_0 = input.LA(1);
 
@@ -8025,7 +8131,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
             }
             switch (alt39) {
                 case 1 :
-                    // InternalMachineLearningLanguage.g:2729:3: this_QUOTED_ID_0= RULE_QUOTED_ID
+                    // InternalMachineLearningLanguage.g:2771:3: this_QUOTED_ID_0= RULE_QUOTED_ID
                     {
                     this_QUOTED_ID_0=(Token)match(input,RULE_QUOTED_ID,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -8042,7 +8148,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
                     }
                     break;
                 case 2 :
-                    // InternalMachineLearningLanguage.g:2737:3: this_ID_1= RULE_ID
+                    // InternalMachineLearningLanguage.g:2779:3: this_ID_1= RULE_ID
                     {
                     this_ID_1=(Token)match(input,RULE_ID,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -8083,7 +8189,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start "entryRuleDOUBLE"
-    // InternalMachineLearningLanguage.g:2748:1: entryRuleDOUBLE returns [String current=null] : iv_ruleDOUBLE= ruleDOUBLE EOF ;
+    // InternalMachineLearningLanguage.g:2790:1: entryRuleDOUBLE returns [String current=null] : iv_ruleDOUBLE= ruleDOUBLE EOF ;
     public final String entryRuleDOUBLE() throws RecognitionException {
         String current = null;
 
@@ -8091,8 +8197,8 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
 
 
         try {
-            // InternalMachineLearningLanguage.g:2748:46: (iv_ruleDOUBLE= ruleDOUBLE EOF )
-            // InternalMachineLearningLanguage.g:2749:2: iv_ruleDOUBLE= ruleDOUBLE EOF
+            // InternalMachineLearningLanguage.g:2790:46: (iv_ruleDOUBLE= ruleDOUBLE EOF )
+            // InternalMachineLearningLanguage.g:2791:2: iv_ruleDOUBLE= ruleDOUBLE EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getDOUBLERule()); 
@@ -8123,7 +8229,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start "ruleDOUBLE"
-    // InternalMachineLearningLanguage.g:2755:1: ruleDOUBLE returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_INT_0= RULE_INT kw= '.' this_INT_2= RULE_INT ) ;
+    // InternalMachineLearningLanguage.g:2797:1: ruleDOUBLE returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_INT_0= RULE_INT kw= '.' this_INT_2= RULE_INT ) ;
     public final AntlrDatatypeRuleToken ruleDOUBLE() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -8135,13 +8241,13 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
         	enterRule();
 
         try {
-            // InternalMachineLearningLanguage.g:2761:2: ( (this_INT_0= RULE_INT kw= '.' this_INT_2= RULE_INT ) )
-            // InternalMachineLearningLanguage.g:2762:2: (this_INT_0= RULE_INT kw= '.' this_INT_2= RULE_INT )
+            // InternalMachineLearningLanguage.g:2803:2: ( (this_INT_0= RULE_INT kw= '.' this_INT_2= RULE_INT ) )
+            // InternalMachineLearningLanguage.g:2804:2: (this_INT_0= RULE_INT kw= '.' this_INT_2= RULE_INT )
             {
-            // InternalMachineLearningLanguage.g:2762:2: (this_INT_0= RULE_INT kw= '.' this_INT_2= RULE_INT )
-            // InternalMachineLearningLanguage.g:2763:3: this_INT_0= RULE_INT kw= '.' this_INT_2= RULE_INT
+            // InternalMachineLearningLanguage.g:2804:2: (this_INT_0= RULE_INT kw= '.' this_INT_2= RULE_INT )
+            // InternalMachineLearningLanguage.g:2805:3: this_INT_0= RULE_INT kw= '.' this_INT_2= RULE_INT
             {
-            this_INT_0=(Token)match(input,RULE_INT,FOLLOW_52); if (state.failed) return current;
+            this_INT_0=(Token)match(input,RULE_INT,FOLLOW_53); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               			current.merge(this_INT_0);
@@ -8195,7 +8301,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start "ruleComparisonOperatorRule"
-    // InternalMachineLearningLanguage.g:2786:1: ruleComparisonOperatorRule returns [Enumerator current=null] : ( (enumLiteral_0= '>=' ) | (enumLiteral_1= '>' ) | (enumLiteral_2= '=' ) | (enumLiteral_3= '!=' ) | (enumLiteral_4= '<' ) | (enumLiteral_5= '<=' ) ) ;
+    // InternalMachineLearningLanguage.g:2828:1: ruleComparisonOperatorRule returns [Enumerator current=null] : ( (enumLiteral_0= '>=' ) | (enumLiteral_1= '>' ) | (enumLiteral_2= '=' ) | (enumLiteral_3= '!=' ) | (enumLiteral_4= '<' ) | (enumLiteral_5= '<=' ) ) ;
     public final Enumerator ruleComparisonOperatorRule() throws RecognitionException {
         Enumerator current = null;
 
@@ -8210,10 +8316,10 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
         	enterRule();
 
         try {
-            // InternalMachineLearningLanguage.g:2792:2: ( ( (enumLiteral_0= '>=' ) | (enumLiteral_1= '>' ) | (enumLiteral_2= '=' ) | (enumLiteral_3= '!=' ) | (enumLiteral_4= '<' ) | (enumLiteral_5= '<=' ) ) )
-            // InternalMachineLearningLanguage.g:2793:2: ( (enumLiteral_0= '>=' ) | (enumLiteral_1= '>' ) | (enumLiteral_2= '=' ) | (enumLiteral_3= '!=' ) | (enumLiteral_4= '<' ) | (enumLiteral_5= '<=' ) )
+            // InternalMachineLearningLanguage.g:2834:2: ( ( (enumLiteral_0= '>=' ) | (enumLiteral_1= '>' ) | (enumLiteral_2= '=' ) | (enumLiteral_3= '!=' ) | (enumLiteral_4= '<' ) | (enumLiteral_5= '<=' ) ) )
+            // InternalMachineLearningLanguage.g:2835:2: ( (enumLiteral_0= '>=' ) | (enumLiteral_1= '>' ) | (enumLiteral_2= '=' ) | (enumLiteral_3= '!=' ) | (enumLiteral_4= '<' ) | (enumLiteral_5= '<=' ) )
             {
-            // InternalMachineLearningLanguage.g:2793:2: ( (enumLiteral_0= '>=' ) | (enumLiteral_1= '>' ) | (enumLiteral_2= '=' ) | (enumLiteral_3= '!=' ) | (enumLiteral_4= '<' ) | (enumLiteral_5= '<=' ) )
+            // InternalMachineLearningLanguage.g:2835:2: ( (enumLiteral_0= '>=' ) | (enumLiteral_1= '>' ) | (enumLiteral_2= '=' ) | (enumLiteral_3= '!=' ) | (enumLiteral_4= '<' ) | (enumLiteral_5= '<=' ) )
             int alt40=6;
             switch ( input.LA(1) ) {
             case 49:
@@ -8256,10 +8362,10 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
 
             switch (alt40) {
                 case 1 :
-                    // InternalMachineLearningLanguage.g:2794:3: (enumLiteral_0= '>=' )
+                    // InternalMachineLearningLanguage.g:2836:3: (enumLiteral_0= '>=' )
                     {
-                    // InternalMachineLearningLanguage.g:2794:3: (enumLiteral_0= '>=' )
-                    // InternalMachineLearningLanguage.g:2795:4: enumLiteral_0= '>='
+                    // InternalMachineLearningLanguage.g:2836:3: (enumLiteral_0= '>=' )
+                    // InternalMachineLearningLanguage.g:2837:4: enumLiteral_0= '>='
                     {
                     enumLiteral_0=(Token)match(input,49,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -8275,10 +8381,10 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
                     }
                     break;
                 case 2 :
-                    // InternalMachineLearningLanguage.g:2802:3: (enumLiteral_1= '>' )
+                    // InternalMachineLearningLanguage.g:2844:3: (enumLiteral_1= '>' )
                     {
-                    // InternalMachineLearningLanguage.g:2802:3: (enumLiteral_1= '>' )
-                    // InternalMachineLearningLanguage.g:2803:4: enumLiteral_1= '>'
+                    // InternalMachineLearningLanguage.g:2844:3: (enumLiteral_1= '>' )
+                    // InternalMachineLearningLanguage.g:2845:4: enumLiteral_1= '>'
                     {
                     enumLiteral_1=(Token)match(input,50,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -8294,10 +8400,10 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
                     }
                     break;
                 case 3 :
-                    // InternalMachineLearningLanguage.g:2810:3: (enumLiteral_2= '=' )
+                    // InternalMachineLearningLanguage.g:2852:3: (enumLiteral_2= '=' )
                     {
-                    // InternalMachineLearningLanguage.g:2810:3: (enumLiteral_2= '=' )
-                    // InternalMachineLearningLanguage.g:2811:4: enumLiteral_2= '='
+                    // InternalMachineLearningLanguage.g:2852:3: (enumLiteral_2= '=' )
+                    // InternalMachineLearningLanguage.g:2853:4: enumLiteral_2= '='
                     {
                     enumLiteral_2=(Token)match(input,51,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -8313,10 +8419,10 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
                     }
                     break;
                 case 4 :
-                    // InternalMachineLearningLanguage.g:2818:3: (enumLiteral_3= '!=' )
+                    // InternalMachineLearningLanguage.g:2860:3: (enumLiteral_3= '!=' )
                     {
-                    // InternalMachineLearningLanguage.g:2818:3: (enumLiteral_3= '!=' )
-                    // InternalMachineLearningLanguage.g:2819:4: enumLiteral_3= '!='
+                    // InternalMachineLearningLanguage.g:2860:3: (enumLiteral_3= '!=' )
+                    // InternalMachineLearningLanguage.g:2861:4: enumLiteral_3= '!='
                     {
                     enumLiteral_3=(Token)match(input,52,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -8332,10 +8438,10 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
                     }
                     break;
                 case 5 :
-                    // InternalMachineLearningLanguage.g:2826:3: (enumLiteral_4= '<' )
+                    // InternalMachineLearningLanguage.g:2868:3: (enumLiteral_4= '<' )
                     {
-                    // InternalMachineLearningLanguage.g:2826:3: (enumLiteral_4= '<' )
-                    // InternalMachineLearningLanguage.g:2827:4: enumLiteral_4= '<'
+                    // InternalMachineLearningLanguage.g:2868:3: (enumLiteral_4= '<' )
+                    // InternalMachineLearningLanguage.g:2869:4: enumLiteral_4= '<'
                     {
                     enumLiteral_4=(Token)match(input,53,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -8351,10 +8457,10 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
                     }
                     break;
                 case 6 :
-                    // InternalMachineLearningLanguage.g:2834:3: (enumLiteral_5= '<=' )
+                    // InternalMachineLearningLanguage.g:2876:3: (enumLiteral_5= '<=' )
                     {
-                    // InternalMachineLearningLanguage.g:2834:3: (enumLiteral_5= '<=' )
-                    // InternalMachineLearningLanguage.g:2835:4: enumLiteral_5= '<='
+                    // InternalMachineLearningLanguage.g:2876:3: (enumLiteral_5= '<=' )
+                    // InternalMachineLearningLanguage.g:2877:4: enumLiteral_5= '<='
                     {
                     enumLiteral_5=(Token)match(input,54,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -8394,7 +8500,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start "ruleAddOrSubtractOperatorRule"
-    // InternalMachineLearningLanguage.g:2845:1: ruleAddOrSubtractOperatorRule returns [Enumerator current=null] : ( (enumLiteral_0= '+' ) | (enumLiteral_1= '-' ) ) ;
+    // InternalMachineLearningLanguage.g:2887:1: ruleAddOrSubtractOperatorRule returns [Enumerator current=null] : ( (enumLiteral_0= '+' ) | (enumLiteral_1= '-' ) ) ;
     public final Enumerator ruleAddOrSubtractOperatorRule() throws RecognitionException {
         Enumerator current = null;
 
@@ -8405,10 +8511,10 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
         	enterRule();
 
         try {
-            // InternalMachineLearningLanguage.g:2851:2: ( ( (enumLiteral_0= '+' ) | (enumLiteral_1= '-' ) ) )
-            // InternalMachineLearningLanguage.g:2852:2: ( (enumLiteral_0= '+' ) | (enumLiteral_1= '-' ) )
+            // InternalMachineLearningLanguage.g:2893:2: ( ( (enumLiteral_0= '+' ) | (enumLiteral_1= '-' ) ) )
+            // InternalMachineLearningLanguage.g:2894:2: ( (enumLiteral_0= '+' ) | (enumLiteral_1= '-' ) )
             {
-            // InternalMachineLearningLanguage.g:2852:2: ( (enumLiteral_0= '+' ) | (enumLiteral_1= '-' ) )
+            // InternalMachineLearningLanguage.g:2894:2: ( (enumLiteral_0= '+' ) | (enumLiteral_1= '-' ) )
             int alt41=2;
             int LA41_0 = input.LA(1);
 
@@ -8427,10 +8533,10 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
             }
             switch (alt41) {
                 case 1 :
-                    // InternalMachineLearningLanguage.g:2853:3: (enumLiteral_0= '+' )
+                    // InternalMachineLearningLanguage.g:2895:3: (enumLiteral_0= '+' )
                     {
-                    // InternalMachineLearningLanguage.g:2853:3: (enumLiteral_0= '+' )
-                    // InternalMachineLearningLanguage.g:2854:4: enumLiteral_0= '+'
+                    // InternalMachineLearningLanguage.g:2895:3: (enumLiteral_0= '+' )
+                    // InternalMachineLearningLanguage.g:2896:4: enumLiteral_0= '+'
                     {
                     enumLiteral_0=(Token)match(input,55,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -8446,10 +8552,10 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
                     }
                     break;
                 case 2 :
-                    // InternalMachineLearningLanguage.g:2861:3: (enumLiteral_1= '-' )
+                    // InternalMachineLearningLanguage.g:2903:3: (enumLiteral_1= '-' )
                     {
-                    // InternalMachineLearningLanguage.g:2861:3: (enumLiteral_1= '-' )
-                    // InternalMachineLearningLanguage.g:2862:4: enumLiteral_1= '-'
+                    // InternalMachineLearningLanguage.g:2903:3: (enumLiteral_1= '-' )
+                    // InternalMachineLearningLanguage.g:2904:4: enumLiteral_1= '-'
                     {
                     enumLiteral_1=(Token)match(input,56,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -8489,7 +8595,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start "ruleMultiplyDivideModuloOperatorRule"
-    // InternalMachineLearningLanguage.g:2872:1: ruleMultiplyDivideModuloOperatorRule returns [Enumerator current=null] : ( (enumLiteral_0= '*' ) | (enumLiteral_1= '/' ) | (enumLiteral_2= '%' ) ) ;
+    // InternalMachineLearningLanguage.g:2914:1: ruleMultiplyDivideModuloOperatorRule returns [Enumerator current=null] : ( (enumLiteral_0= '*' ) | (enumLiteral_1= '/' ) | (enumLiteral_2= '%' ) ) ;
     public final Enumerator ruleMultiplyDivideModuloOperatorRule() throws RecognitionException {
         Enumerator current = null;
 
@@ -8501,10 +8607,10 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
         	enterRule();
 
         try {
-            // InternalMachineLearningLanguage.g:2878:2: ( ( (enumLiteral_0= '*' ) | (enumLiteral_1= '/' ) | (enumLiteral_2= '%' ) ) )
-            // InternalMachineLearningLanguage.g:2879:2: ( (enumLiteral_0= '*' ) | (enumLiteral_1= '/' ) | (enumLiteral_2= '%' ) )
+            // InternalMachineLearningLanguage.g:2920:2: ( ( (enumLiteral_0= '*' ) | (enumLiteral_1= '/' ) | (enumLiteral_2= '%' ) ) )
+            // InternalMachineLearningLanguage.g:2921:2: ( (enumLiteral_0= '*' ) | (enumLiteral_1= '/' ) | (enumLiteral_2= '%' ) )
             {
-            // InternalMachineLearningLanguage.g:2879:2: ( (enumLiteral_0= '*' ) | (enumLiteral_1= '/' ) | (enumLiteral_2= '%' ) )
+            // InternalMachineLearningLanguage.g:2921:2: ( (enumLiteral_0= '*' ) | (enumLiteral_1= '/' ) | (enumLiteral_2= '%' ) )
             int alt42=3;
             switch ( input.LA(1) ) {
             case 57:
@@ -8532,10 +8638,10 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
 
             switch (alt42) {
                 case 1 :
-                    // InternalMachineLearningLanguage.g:2880:3: (enumLiteral_0= '*' )
+                    // InternalMachineLearningLanguage.g:2922:3: (enumLiteral_0= '*' )
                     {
-                    // InternalMachineLearningLanguage.g:2880:3: (enumLiteral_0= '*' )
-                    // InternalMachineLearningLanguage.g:2881:4: enumLiteral_0= '*'
+                    // InternalMachineLearningLanguage.g:2922:3: (enumLiteral_0= '*' )
+                    // InternalMachineLearningLanguage.g:2923:4: enumLiteral_0= '*'
                     {
                     enumLiteral_0=(Token)match(input,57,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -8551,10 +8657,10 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
                     }
                     break;
                 case 2 :
-                    // InternalMachineLearningLanguage.g:2888:3: (enumLiteral_1= '/' )
+                    // InternalMachineLearningLanguage.g:2930:3: (enumLiteral_1= '/' )
                     {
-                    // InternalMachineLearningLanguage.g:2888:3: (enumLiteral_1= '/' )
-                    // InternalMachineLearningLanguage.g:2889:4: enumLiteral_1= '/'
+                    // InternalMachineLearningLanguage.g:2930:3: (enumLiteral_1= '/' )
+                    // InternalMachineLearningLanguage.g:2931:4: enumLiteral_1= '/'
                     {
                     enumLiteral_1=(Token)match(input,58,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -8570,10 +8676,10 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
                     }
                     break;
                 case 3 :
-                    // InternalMachineLearningLanguage.g:2896:3: (enumLiteral_2= '%' )
+                    // InternalMachineLearningLanguage.g:2938:3: (enumLiteral_2= '%' )
                     {
-                    // InternalMachineLearningLanguage.g:2896:3: (enumLiteral_2= '%' )
-                    // InternalMachineLearningLanguage.g:2897:4: enumLiteral_2= '%'
+                    // InternalMachineLearningLanguage.g:2938:3: (enumLiteral_2= '%' )
+                    // InternalMachineLearningLanguage.g:2939:4: enumLiteral_2= '%'
                     {
                     enumLiteral_2=(Token)match(input,59,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -8610,6 +8716,555 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
         return current;
     }
     // $ANTLR end "ruleMultiplyDivideModuloOperatorRule"
+
+
+    // $ANTLR start "ruleFactorRule"
+    // InternalMachineLearningLanguage.g:2949:1: ruleFactorRule returns [Enumerator current=null] : ( (enumLiteral_0= 'Y' ) | (enumLiteral_1= 'Z' ) | (enumLiteral_2= 'E' ) | (enumLiteral_3= 'P' ) | (enumLiteral_4= 'T' ) | (enumLiteral_5= 'G' ) | (enumLiteral_6= 'M' ) | (enumLiteral_7= 'k' ) | (enumLiteral_8= 'h' ) | (enumLiteral_9= 'da' ) | (enumLiteral_10= 'd' ) | (enumLiteral_11= 'c' ) | (enumLiteral_12= 'm' ) | (enumLiteral_13= '\\u00B5' ) | (enumLiteral_14= 'n' ) | (enumLiteral_15= 'p' ) | (enumLiteral_16= 'f' ) | (enumLiteral_17= 'a' ) | (enumLiteral_18= 'z' ) | (enumLiteral_19= 'y' ) ) ;
+    public final Enumerator ruleFactorRule() throws RecognitionException {
+        Enumerator current = null;
+
+        Token enumLiteral_0=null;
+        Token enumLiteral_1=null;
+        Token enumLiteral_2=null;
+        Token enumLiteral_3=null;
+        Token enumLiteral_4=null;
+        Token enumLiteral_5=null;
+        Token enumLiteral_6=null;
+        Token enumLiteral_7=null;
+        Token enumLiteral_8=null;
+        Token enumLiteral_9=null;
+        Token enumLiteral_10=null;
+        Token enumLiteral_11=null;
+        Token enumLiteral_12=null;
+        Token enumLiteral_13=null;
+        Token enumLiteral_14=null;
+        Token enumLiteral_15=null;
+        Token enumLiteral_16=null;
+        Token enumLiteral_17=null;
+        Token enumLiteral_18=null;
+        Token enumLiteral_19=null;
+
+
+        	enterRule();
+
+        try {
+            // InternalMachineLearningLanguage.g:2955:2: ( ( (enumLiteral_0= 'Y' ) | (enumLiteral_1= 'Z' ) | (enumLiteral_2= 'E' ) | (enumLiteral_3= 'P' ) | (enumLiteral_4= 'T' ) | (enumLiteral_5= 'G' ) | (enumLiteral_6= 'M' ) | (enumLiteral_7= 'k' ) | (enumLiteral_8= 'h' ) | (enumLiteral_9= 'da' ) | (enumLiteral_10= 'd' ) | (enumLiteral_11= 'c' ) | (enumLiteral_12= 'm' ) | (enumLiteral_13= '\\u00B5' ) | (enumLiteral_14= 'n' ) | (enumLiteral_15= 'p' ) | (enumLiteral_16= 'f' ) | (enumLiteral_17= 'a' ) | (enumLiteral_18= 'z' ) | (enumLiteral_19= 'y' ) ) )
+            // InternalMachineLearningLanguage.g:2956:2: ( (enumLiteral_0= 'Y' ) | (enumLiteral_1= 'Z' ) | (enumLiteral_2= 'E' ) | (enumLiteral_3= 'P' ) | (enumLiteral_4= 'T' ) | (enumLiteral_5= 'G' ) | (enumLiteral_6= 'M' ) | (enumLiteral_7= 'k' ) | (enumLiteral_8= 'h' ) | (enumLiteral_9= 'da' ) | (enumLiteral_10= 'd' ) | (enumLiteral_11= 'c' ) | (enumLiteral_12= 'm' ) | (enumLiteral_13= '\\u00B5' ) | (enumLiteral_14= 'n' ) | (enumLiteral_15= 'p' ) | (enumLiteral_16= 'f' ) | (enumLiteral_17= 'a' ) | (enumLiteral_18= 'z' ) | (enumLiteral_19= 'y' ) )
+            {
+            // InternalMachineLearningLanguage.g:2956:2: ( (enumLiteral_0= 'Y' ) | (enumLiteral_1= 'Z' ) | (enumLiteral_2= 'E' ) | (enumLiteral_3= 'P' ) | (enumLiteral_4= 'T' ) | (enumLiteral_5= 'G' ) | (enumLiteral_6= 'M' ) | (enumLiteral_7= 'k' ) | (enumLiteral_8= 'h' ) | (enumLiteral_9= 'da' ) | (enumLiteral_10= 'd' ) | (enumLiteral_11= 'c' ) | (enumLiteral_12= 'm' ) | (enumLiteral_13= '\\u00B5' ) | (enumLiteral_14= 'n' ) | (enumLiteral_15= 'p' ) | (enumLiteral_16= 'f' ) | (enumLiteral_17= 'a' ) | (enumLiteral_18= 'z' ) | (enumLiteral_19= 'y' ) )
+            int alt43=20;
+            switch ( input.LA(1) ) {
+            case 60:
+                {
+                alt43=1;
+                }
+                break;
+            case 61:
+                {
+                alt43=2;
+                }
+                break;
+            case 62:
+                {
+                alt43=3;
+                }
+                break;
+            case 63:
+                {
+                alt43=4;
+                }
+                break;
+            case 64:
+                {
+                alt43=5;
+                }
+                break;
+            case 65:
+                {
+                alt43=6;
+                }
+                break;
+            case 66:
+                {
+                alt43=7;
+                }
+                break;
+            case 67:
+                {
+                alt43=8;
+                }
+                break;
+            case 68:
+                {
+                alt43=9;
+                }
+                break;
+            case 69:
+                {
+                alt43=10;
+                }
+                break;
+            case 70:
+                {
+                alt43=11;
+                }
+                break;
+            case 71:
+                {
+                alt43=12;
+                }
+                break;
+            case 72:
+                {
+                alt43=13;
+                }
+                break;
+            case 73:
+                {
+                alt43=14;
+                }
+                break;
+            case 74:
+                {
+                alt43=15;
+                }
+                break;
+            case 75:
+                {
+                alt43=16;
+                }
+                break;
+            case 76:
+                {
+                alt43=17;
+                }
+                break;
+            case 77:
+                {
+                alt43=18;
+                }
+                break;
+            case 78:
+                {
+                alt43=19;
+                }
+                break;
+            case 79:
+                {
+                alt43=20;
+                }
+                break;
+            default:
+                if (state.backtracking>0) {state.failed=true; return current;}
+                NoViableAltException nvae =
+                    new NoViableAltException("", 43, 0, input);
+
+                throw nvae;
+            }
+
+            switch (alt43) {
+                case 1 :
+                    // InternalMachineLearningLanguage.g:2957:3: (enumLiteral_0= 'Y' )
+                    {
+                    // InternalMachineLearningLanguage.g:2957:3: (enumLiteral_0= 'Y' )
+                    // InternalMachineLearningLanguage.g:2958:4: enumLiteral_0= 'Y'
+                    {
+                    enumLiteral_0=(Token)match(input,60,FOLLOW_2); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      				current = grammarAccess.getFactorRuleAccess().getYottaEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
+                      				newLeafNode(enumLiteral_0, grammarAccess.getFactorRuleAccess().getYottaEnumLiteralDeclaration_0());
+                      			
+                    }
+
+                    }
+
+
+                    }
+                    break;
+                case 2 :
+                    // InternalMachineLearningLanguage.g:2965:3: (enumLiteral_1= 'Z' )
+                    {
+                    // InternalMachineLearningLanguage.g:2965:3: (enumLiteral_1= 'Z' )
+                    // InternalMachineLearningLanguage.g:2966:4: enumLiteral_1= 'Z'
+                    {
+                    enumLiteral_1=(Token)match(input,61,FOLLOW_2); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      				current = grammarAccess.getFactorRuleAccess().getZettaEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
+                      				newLeafNode(enumLiteral_1, grammarAccess.getFactorRuleAccess().getZettaEnumLiteralDeclaration_1());
+                      			
+                    }
+
+                    }
+
+
+                    }
+                    break;
+                case 3 :
+                    // InternalMachineLearningLanguage.g:2973:3: (enumLiteral_2= 'E' )
+                    {
+                    // InternalMachineLearningLanguage.g:2973:3: (enumLiteral_2= 'E' )
+                    // InternalMachineLearningLanguage.g:2974:4: enumLiteral_2= 'E'
+                    {
+                    enumLiteral_2=(Token)match(input,62,FOLLOW_2); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      				current = grammarAccess.getFactorRuleAccess().getExaEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
+                      				newLeafNode(enumLiteral_2, grammarAccess.getFactorRuleAccess().getExaEnumLiteralDeclaration_2());
+                      			
+                    }
+
+                    }
+
+
+                    }
+                    break;
+                case 4 :
+                    // InternalMachineLearningLanguage.g:2981:3: (enumLiteral_3= 'P' )
+                    {
+                    // InternalMachineLearningLanguage.g:2981:3: (enumLiteral_3= 'P' )
+                    // InternalMachineLearningLanguage.g:2982:4: enumLiteral_3= 'P'
+                    {
+                    enumLiteral_3=(Token)match(input,63,FOLLOW_2); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      				current = grammarAccess.getFactorRuleAccess().getPetaEnumLiteralDeclaration_3().getEnumLiteral().getInstance();
+                      				newLeafNode(enumLiteral_3, grammarAccess.getFactorRuleAccess().getPetaEnumLiteralDeclaration_3());
+                      			
+                    }
+
+                    }
+
+
+                    }
+                    break;
+                case 5 :
+                    // InternalMachineLearningLanguage.g:2989:3: (enumLiteral_4= 'T' )
+                    {
+                    // InternalMachineLearningLanguage.g:2989:3: (enumLiteral_4= 'T' )
+                    // InternalMachineLearningLanguage.g:2990:4: enumLiteral_4= 'T'
+                    {
+                    enumLiteral_4=(Token)match(input,64,FOLLOW_2); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      				current = grammarAccess.getFactorRuleAccess().getTeraEnumLiteralDeclaration_4().getEnumLiteral().getInstance();
+                      				newLeafNode(enumLiteral_4, grammarAccess.getFactorRuleAccess().getTeraEnumLiteralDeclaration_4());
+                      			
+                    }
+
+                    }
+
+
+                    }
+                    break;
+                case 6 :
+                    // InternalMachineLearningLanguage.g:2997:3: (enumLiteral_5= 'G' )
+                    {
+                    // InternalMachineLearningLanguage.g:2997:3: (enumLiteral_5= 'G' )
+                    // InternalMachineLearningLanguage.g:2998:4: enumLiteral_5= 'G'
+                    {
+                    enumLiteral_5=(Token)match(input,65,FOLLOW_2); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      				current = grammarAccess.getFactorRuleAccess().getGigaEnumLiteralDeclaration_5().getEnumLiteral().getInstance();
+                      				newLeafNode(enumLiteral_5, grammarAccess.getFactorRuleAccess().getGigaEnumLiteralDeclaration_5());
+                      			
+                    }
+
+                    }
+
+
+                    }
+                    break;
+                case 7 :
+                    // InternalMachineLearningLanguage.g:3005:3: (enumLiteral_6= 'M' )
+                    {
+                    // InternalMachineLearningLanguage.g:3005:3: (enumLiteral_6= 'M' )
+                    // InternalMachineLearningLanguage.g:3006:4: enumLiteral_6= 'M'
+                    {
+                    enumLiteral_6=(Token)match(input,66,FOLLOW_2); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      				current = grammarAccess.getFactorRuleAccess().getMegaEnumLiteralDeclaration_6().getEnumLiteral().getInstance();
+                      				newLeafNode(enumLiteral_6, grammarAccess.getFactorRuleAccess().getMegaEnumLiteralDeclaration_6());
+                      			
+                    }
+
+                    }
+
+
+                    }
+                    break;
+                case 8 :
+                    // InternalMachineLearningLanguage.g:3013:3: (enumLiteral_7= 'k' )
+                    {
+                    // InternalMachineLearningLanguage.g:3013:3: (enumLiteral_7= 'k' )
+                    // InternalMachineLearningLanguage.g:3014:4: enumLiteral_7= 'k'
+                    {
+                    enumLiteral_7=(Token)match(input,67,FOLLOW_2); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      				current = grammarAccess.getFactorRuleAccess().getKiloEnumLiteralDeclaration_7().getEnumLiteral().getInstance();
+                      				newLeafNode(enumLiteral_7, grammarAccess.getFactorRuleAccess().getKiloEnumLiteralDeclaration_7());
+                      			
+                    }
+
+                    }
+
+
+                    }
+                    break;
+                case 9 :
+                    // InternalMachineLearningLanguage.g:3021:3: (enumLiteral_8= 'h' )
+                    {
+                    // InternalMachineLearningLanguage.g:3021:3: (enumLiteral_8= 'h' )
+                    // InternalMachineLearningLanguage.g:3022:4: enumLiteral_8= 'h'
+                    {
+                    enumLiteral_8=(Token)match(input,68,FOLLOW_2); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      				current = grammarAccess.getFactorRuleAccess().getHectoEnumLiteralDeclaration_8().getEnumLiteral().getInstance();
+                      				newLeafNode(enumLiteral_8, grammarAccess.getFactorRuleAccess().getHectoEnumLiteralDeclaration_8());
+                      			
+                    }
+
+                    }
+
+
+                    }
+                    break;
+                case 10 :
+                    // InternalMachineLearningLanguage.g:3029:3: (enumLiteral_9= 'da' )
+                    {
+                    // InternalMachineLearningLanguage.g:3029:3: (enumLiteral_9= 'da' )
+                    // InternalMachineLearningLanguage.g:3030:4: enumLiteral_9= 'da'
+                    {
+                    enumLiteral_9=(Token)match(input,69,FOLLOW_2); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      				current = grammarAccess.getFactorRuleAccess().getDekaEnumLiteralDeclaration_9().getEnumLiteral().getInstance();
+                      				newLeafNode(enumLiteral_9, grammarAccess.getFactorRuleAccess().getDekaEnumLiteralDeclaration_9());
+                      			
+                    }
+
+                    }
+
+
+                    }
+                    break;
+                case 11 :
+                    // InternalMachineLearningLanguage.g:3037:3: (enumLiteral_10= 'd' )
+                    {
+                    // InternalMachineLearningLanguage.g:3037:3: (enumLiteral_10= 'd' )
+                    // InternalMachineLearningLanguage.g:3038:4: enumLiteral_10= 'd'
+                    {
+                    enumLiteral_10=(Token)match(input,70,FOLLOW_2); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      				current = grammarAccess.getFactorRuleAccess().getDeciEnumLiteralDeclaration_10().getEnumLiteral().getInstance();
+                      				newLeafNode(enumLiteral_10, grammarAccess.getFactorRuleAccess().getDeciEnumLiteralDeclaration_10());
+                      			
+                    }
+
+                    }
+
+
+                    }
+                    break;
+                case 12 :
+                    // InternalMachineLearningLanguage.g:3045:3: (enumLiteral_11= 'c' )
+                    {
+                    // InternalMachineLearningLanguage.g:3045:3: (enumLiteral_11= 'c' )
+                    // InternalMachineLearningLanguage.g:3046:4: enumLiteral_11= 'c'
+                    {
+                    enumLiteral_11=(Token)match(input,71,FOLLOW_2); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      				current = grammarAccess.getFactorRuleAccess().getCentiEnumLiteralDeclaration_11().getEnumLiteral().getInstance();
+                      				newLeafNode(enumLiteral_11, grammarAccess.getFactorRuleAccess().getCentiEnumLiteralDeclaration_11());
+                      			
+                    }
+
+                    }
+
+
+                    }
+                    break;
+                case 13 :
+                    // InternalMachineLearningLanguage.g:3053:3: (enumLiteral_12= 'm' )
+                    {
+                    // InternalMachineLearningLanguage.g:3053:3: (enumLiteral_12= 'm' )
+                    // InternalMachineLearningLanguage.g:3054:4: enumLiteral_12= 'm'
+                    {
+                    enumLiteral_12=(Token)match(input,72,FOLLOW_2); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      				current = grammarAccess.getFactorRuleAccess().getMilliEnumLiteralDeclaration_12().getEnumLiteral().getInstance();
+                      				newLeafNode(enumLiteral_12, grammarAccess.getFactorRuleAccess().getMilliEnumLiteralDeclaration_12());
+                      			
+                    }
+
+                    }
+
+
+                    }
+                    break;
+                case 14 :
+                    // InternalMachineLearningLanguage.g:3061:3: (enumLiteral_13= '\\u00B5' )
+                    {
+                    // InternalMachineLearningLanguage.g:3061:3: (enumLiteral_13= '\\u00B5' )
+                    // InternalMachineLearningLanguage.g:3062:4: enumLiteral_13= '\\u00B5'
+                    {
+                    enumLiteral_13=(Token)match(input,73,FOLLOW_2); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      				current = grammarAccess.getFactorRuleAccess().getMicroEnumLiteralDeclaration_13().getEnumLiteral().getInstance();
+                      				newLeafNode(enumLiteral_13, grammarAccess.getFactorRuleAccess().getMicroEnumLiteralDeclaration_13());
+                      			
+                    }
+
+                    }
+
+
+                    }
+                    break;
+                case 15 :
+                    // InternalMachineLearningLanguage.g:3069:3: (enumLiteral_14= 'n' )
+                    {
+                    // InternalMachineLearningLanguage.g:3069:3: (enumLiteral_14= 'n' )
+                    // InternalMachineLearningLanguage.g:3070:4: enumLiteral_14= 'n'
+                    {
+                    enumLiteral_14=(Token)match(input,74,FOLLOW_2); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      				current = grammarAccess.getFactorRuleAccess().getNanoEnumLiteralDeclaration_14().getEnumLiteral().getInstance();
+                      				newLeafNode(enumLiteral_14, grammarAccess.getFactorRuleAccess().getNanoEnumLiteralDeclaration_14());
+                      			
+                    }
+
+                    }
+
+
+                    }
+                    break;
+                case 16 :
+                    // InternalMachineLearningLanguage.g:3077:3: (enumLiteral_15= 'p' )
+                    {
+                    // InternalMachineLearningLanguage.g:3077:3: (enumLiteral_15= 'p' )
+                    // InternalMachineLearningLanguage.g:3078:4: enumLiteral_15= 'p'
+                    {
+                    enumLiteral_15=(Token)match(input,75,FOLLOW_2); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      				current = grammarAccess.getFactorRuleAccess().getPikoEnumLiteralDeclaration_15().getEnumLiteral().getInstance();
+                      				newLeafNode(enumLiteral_15, grammarAccess.getFactorRuleAccess().getPikoEnumLiteralDeclaration_15());
+                      			
+                    }
+
+                    }
+
+
+                    }
+                    break;
+                case 17 :
+                    // InternalMachineLearningLanguage.g:3085:3: (enumLiteral_16= 'f' )
+                    {
+                    // InternalMachineLearningLanguage.g:3085:3: (enumLiteral_16= 'f' )
+                    // InternalMachineLearningLanguage.g:3086:4: enumLiteral_16= 'f'
+                    {
+                    enumLiteral_16=(Token)match(input,76,FOLLOW_2); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      				current = grammarAccess.getFactorRuleAccess().getFemtoEnumLiteralDeclaration_16().getEnumLiteral().getInstance();
+                      				newLeafNode(enumLiteral_16, grammarAccess.getFactorRuleAccess().getFemtoEnumLiteralDeclaration_16());
+                      			
+                    }
+
+                    }
+
+
+                    }
+                    break;
+                case 18 :
+                    // InternalMachineLearningLanguage.g:3093:3: (enumLiteral_17= 'a' )
+                    {
+                    // InternalMachineLearningLanguage.g:3093:3: (enumLiteral_17= 'a' )
+                    // InternalMachineLearningLanguage.g:3094:4: enumLiteral_17= 'a'
+                    {
+                    enumLiteral_17=(Token)match(input,77,FOLLOW_2); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      				current = grammarAccess.getFactorRuleAccess().getAttoEnumLiteralDeclaration_17().getEnumLiteral().getInstance();
+                      				newLeafNode(enumLiteral_17, grammarAccess.getFactorRuleAccess().getAttoEnumLiteralDeclaration_17());
+                      			
+                    }
+
+                    }
+
+
+                    }
+                    break;
+                case 19 :
+                    // InternalMachineLearningLanguage.g:3101:3: (enumLiteral_18= 'z' )
+                    {
+                    // InternalMachineLearningLanguage.g:3101:3: (enumLiteral_18= 'z' )
+                    // InternalMachineLearningLanguage.g:3102:4: enumLiteral_18= 'z'
+                    {
+                    enumLiteral_18=(Token)match(input,78,FOLLOW_2); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      				current = grammarAccess.getFactorRuleAccess().getZeptoEnumLiteralDeclaration_18().getEnumLiteral().getInstance();
+                      				newLeafNode(enumLiteral_18, grammarAccess.getFactorRuleAccess().getZeptoEnumLiteralDeclaration_18());
+                      			
+                    }
+
+                    }
+
+
+                    }
+                    break;
+                case 20 :
+                    // InternalMachineLearningLanguage.g:3109:3: (enumLiteral_19= 'y' )
+                    {
+                    // InternalMachineLearningLanguage.g:3109:3: (enumLiteral_19= 'y' )
+                    // InternalMachineLearningLanguage.g:3110:4: enumLiteral_19= 'y'
+                    {
+                    enumLiteral_19=(Token)match(input,79,FOLLOW_2); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      				current = grammarAccess.getFactorRuleAccess().getYoctoEnumLiteralDeclaration_19().getEnumLiteral().getInstance();
+                      				newLeafNode(enumLiteral_19, grammarAccess.getFactorRuleAccess().getYoctoEnumLiteralDeclaration_19());
+                      			
+                    }
+
+                    }
+
+
+                    }
+                    break;
+
+            }
+
+
+            }
+
+            if ( state.backtracking==0 ) {
+
+              	leaveRule();
+
+            }
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleFactorRule"
 
     // Delegated rules
 
@@ -8667,6 +9322,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
     public static final BitSet FOLLOW_49 = new BitSet(new long[]{0x0000080000000000L});
     public static final BitSet FOLLOW_50 = new BitSet(new long[]{0x0180FA21000000F0L});
     public static final BitSet FOLLOW_51 = new BitSet(new long[]{0x0000100000010000L});
-    public static final BitSet FOLLOW_52 = new BitSet(new long[]{0x0001000000000000L});
+    public static final BitSet FOLLOW_52 = new BitSet(new long[]{0xF000000000000000L,0x000000000000FFFFL});
+    public static final BitSet FOLLOW_53 = new BitSet(new long[]{0x0001000000000000L});
 
 }

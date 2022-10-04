@@ -12,7 +12,7 @@ package de.evoal.languages.model.el;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link de.evoal.languages.model.el.IntegerLiteral#getValue <em>Value</em>}</li>
+ *   <li>{@link de.evoal.languages.model.el.IntegerLiteral#getLiteral <em>Literal</em>}</li>
  * </ul>
  *
  * @see de.evoal.languages.model.el.ELPackage#getIntegerLiteral()
@@ -21,25 +21,33 @@ package de.evoal.languages.model.el;
  */
 public interface IntegerLiteral extends NumberLiteral {
 	/**
-	 * Returns the value of the '<em><b>Value</b></em>' attribute.
+	 * Returns the value of the '<em><b>Literal</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Value</em>' attribute.
-	 * @see #setValue(int)
-	 * @see de.evoal.languages.model.el.ELPackage#getIntegerLiteral_Value()
+	 * @return the value of the '<em>Literal</em>' attribute.
+	 * @see #setLiteral(int)
+	 * @see de.evoal.languages.model.el.ELPackage#getIntegerLiteral_Literal()
 	 * @model required="true"
 	 * @generated
 	 */
-	int getValue();
+	int getLiteral();
 
 	/**
-	 * Sets the value of the '{@link de.evoal.languages.model.el.IntegerLiteral#getValue <em>Value</em>}' attribute.
+	 * Sets the value of the '{@link de.evoal.languages.model.el.IntegerLiteral#getLiteral <em>Literal</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Value</em>' attribute.
-	 * @see #getValue()
+	 * @param value the new value of the '<em>Literal</em>' attribute.
+	 * @see #getLiteral()
 	 * @generated
 	 */
-	void setValue(int value);
+	void setLiteral(int value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" required="true"
+	 * @generated
+	 */
+	Integer getValue();
 
 } // IntegerLiteral

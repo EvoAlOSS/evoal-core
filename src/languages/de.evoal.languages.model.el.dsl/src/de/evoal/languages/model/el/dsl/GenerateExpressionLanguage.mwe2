@@ -31,6 +31,10 @@ Workflow {
 			
 			fragment = ecore2xtext.Ecore2XtextValueConverterServiceFragment2 auto-inject {}
 			
+			labelProvider = ui.labeling.LabelProviderFragment2 auto-inject {}
+			outline = ui.outline.OutlineTreeProviderFragment2 auto-inject {}
+			quickOutline = ui.outline.QuickOutlineFragment2 auto-inject {}
+			
 			formatter = {
 				generateStub = true
 				generateXtendStub = true

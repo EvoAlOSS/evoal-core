@@ -5,8 +5,10 @@ package de.evoal.languages.model.el.impl;
 import de.evoal.languages.model.el.ELPackage;
 import de.evoal.languages.model.el.IntegerLiteral;
 
+import java.lang.reflect.InvocationTargetException;
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -19,31 +21,31 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link de.evoal.languages.model.el.impl.IntegerLiteralImpl#getValue <em>Value</em>}</li>
+ *   <li>{@link de.evoal.languages.model.el.impl.IntegerLiteralImpl#getLiteral <em>Literal</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class IntegerLiteralImpl extends NumberLiteralImpl implements IntegerLiteral {
 	/**
-	 * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
+	 * The default value of the '{@link #getLiteral() <em>Literal</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getValue()
+	 * @see #getLiteral()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int VALUE_EDEFAULT = 0;
+	protected static final int LITERAL_EDEFAULT = 0;
 
 	/**
-	 * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
+	 * The cached value of the '{@link #getLiteral() <em>Literal</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getValue()
+	 * @see #getLiteral()
 	 * @generated
 	 * @ordered
 	 */
-	protected int value = VALUE_EDEFAULT;
+	protected int literal = LITERAL_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -70,8 +72,8 @@ public class IntegerLiteralImpl extends NumberLiteralImpl implements IntegerLite
 	 * @generated
 	 */
 	@Override
-	public int getValue() {
-		return value;
+	public int getLiteral() {
+		return literal;
 	}
 
 	/**
@@ -80,11 +82,22 @@ public class IntegerLiteralImpl extends NumberLiteralImpl implements IntegerLite
 	 * @generated
 	 */
 	@Override
-	public void setValue(int newValue) {
-		int oldValue = value;
-		value = newValue;
+	public void setLiteral(int newLiteral) {
+		int oldLiteral = literal;
+		literal = newLiteral;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ELPackage.INTEGER_LITERAL__VALUE, oldValue, value));
+			eNotify(new ENotificationImpl(this, Notification.SET, ELPackage.INTEGER_LITERAL__LITERAL, oldLiteral, literal));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Integer getValue() {
+		return (int)(literal * Math.pow(10, super.getFactor().getValue()));
+		
 	}
 
 	/**
@@ -95,8 +108,8 @@ public class IntegerLiteralImpl extends NumberLiteralImpl implements IntegerLite
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ELPackage.INTEGER_LITERAL__VALUE:
-				return getValue();
+			case ELPackage.INTEGER_LITERAL__LITERAL:
+				return getLiteral();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -109,8 +122,8 @@ public class IntegerLiteralImpl extends NumberLiteralImpl implements IntegerLite
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ELPackage.INTEGER_LITERAL__VALUE:
-				setValue((Integer)newValue);
+			case ELPackage.INTEGER_LITERAL__LITERAL:
+				setLiteral((Integer)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -124,8 +137,8 @@ public class IntegerLiteralImpl extends NumberLiteralImpl implements IntegerLite
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ELPackage.INTEGER_LITERAL__VALUE:
-				setValue(VALUE_EDEFAULT);
+			case ELPackage.INTEGER_LITERAL__LITERAL:
+				setLiteral(LITERAL_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -139,10 +152,24 @@ public class IntegerLiteralImpl extends NumberLiteralImpl implements IntegerLite
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ELPackage.INTEGER_LITERAL__VALUE:
-				return value != VALUE_EDEFAULT;
+			case ELPackage.INTEGER_LITERAL__LITERAL:
+				return literal != LITERAL_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		switch (operationID) {
+			case ELPackage.INTEGER_LITERAL___GET_VALUE:
+				return getValue();
+		}
+		return super.eInvoke(operationID, arguments);
 	}
 
 	/**
@@ -155,8 +182,8 @@ public class IntegerLiteralImpl extends NumberLiteralImpl implements IntegerLite
 		if (eIsProxy()) return super.toString();
 
 		StringBuilder result = new StringBuilder(super.toString());
-		result.append(" (value: ");
-		result.append(value);
+		result.append(" (literal: ");
+		result.append(literal);
 		result.append(')');
 		return result.toString();
 	}

@@ -12,7 +12,7 @@ package de.evoal.languages.model.el;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link de.evoal.languages.model.el.DoubleLiteral#getValue <em>Value</em>}</li>
+ *   <li>{@link de.evoal.languages.model.el.DoubleLiteral#getLiteral <em>Literal</em>}</li>
  * </ul>
  *
  * @see de.evoal.languages.model.el.ELPackage#getDoubleLiteral()
@@ -21,25 +21,33 @@ package de.evoal.languages.model.el;
  */
 public interface DoubleLiteral extends NumberLiteral {
 	/**
-	 * Returns the value of the '<em><b>Value</b></em>' attribute.
+	 * Returns the value of the '<em><b>Literal</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Value</em>' attribute.
-	 * @see #setValue(double)
-	 * @see de.evoal.languages.model.el.ELPackage#getDoubleLiteral_Value()
+	 * @return the value of the '<em>Literal</em>' attribute.
+	 * @see #setLiteral(double)
+	 * @see de.evoal.languages.model.el.ELPackage#getDoubleLiteral_Literal()
 	 * @model required="true"
 	 * @generated
 	 */
-	double getValue();
+	double getLiteral();
 
 	/**
-	 * Sets the value of the '{@link de.evoal.languages.model.el.DoubleLiteral#getValue <em>Value</em>}' attribute.
+	 * Sets the value of the '{@link de.evoal.languages.model.el.DoubleLiteral#getLiteral <em>Literal</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Value</em>' attribute.
-	 * @see #getValue()
+	 * @param value the new value of the '<em>Literal</em>' attribute.
+	 * @see #getLiteral()
 	 * @generated
 	 */
-	void setValue(double value);
+	void setLiteral(double value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" required="true"
+	 * @generated
+	 */
+	Double getValue();
 
 } // DoubleLiteral

@@ -5,6 +5,12 @@
 package de.evoal.languages.model.el.dsl.ui.labeling;
 
 import com.google.inject.Inject;
+
+import de.evoal.languages.model.el.Factor;
+import de.evoal.languages.model.el.IntegerLiteral;
+
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
 
@@ -29,4 +35,12 @@ public class ExpressionLanguageLabelProvider extends DefaultEObjectLabelProvider
 //	String image(Greeting ele) {
 //		return "Greeting.gif";
 //	}
+	
+	String text(Factor f) {
+		return "HALLO";
+	}
+
+	String text(IntegerLiteral il) {
+		return "HALLO2";
+	}
 }

@@ -96,17 +96,41 @@ NumberLiteralRule returns NumberLiteral:
 ;
 
 DoubleLiteralRule returns DoubleLiteral :
-	value = DOUBLE
+	literal = DOUBLE factor = FactorRule
 ;
 
 
 IntegerLiteralRule returns IntegerLiteral:
-	value = INT
+	literal = INT factor = FactorRule
 ;
 
 StringLiteralRule returns StringLiteral:
 	value = STRING
 ;
+
+enum FactorRule returns Factor:
+	Yotta = 'Y' |
+	Zetta = 'Z' |
+	Exa = 'E' |
+	Peta = 'P' |
+	Tera = 'T' |
+	Giga = 'G' |
+	Mega = 'M' |
+	Kilo = 'k' |
+	Hecto = 'h' |
+	Deka = 'da' |
+	Deci = 'd' |
+	Centi = 'c' |
+	Milli = 'm' |
+	Micro = 'µ' |
+	Nano = 'n' |
+	Piko = 'p' |
+	Femto = 'f' |
+	Atto = 'a' |
+	Zepto = 'z' |
+	Yocto = 'y'
+;
+
 
 BooleanLiteralRule returns BooleanLiteral:
 	{BooleanLiteral} (value ?= 'true' |  'false')

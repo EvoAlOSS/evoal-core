@@ -219,7 +219,7 @@ public class DataDescriptionLanguageSemanticSequencer extends ExpressionLanguage
 	 *     TypedDataDescriptionRule returns TypedDataDescription
 	 *
 	 * Constraint:
-	 *     (representation=RepresentationType name=StringOrId type=[DataType|ID] constraints+=StatementRule*)
+	 *     (representation=RepresentationType name=StringOrId type=[DataType|StringOrId] constraints+=StatementRule*)
 	 */
 	protected void sequence_TypedDataDescriptionRule(ISerializationContext context, TypedDataDescription semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

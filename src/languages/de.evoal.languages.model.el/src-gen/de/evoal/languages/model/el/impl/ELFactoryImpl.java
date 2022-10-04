@@ -94,6 +94,8 @@ public class ELFactoryImpl extends EFactoryImpl implements ELFactory {
 				return createAddOrSubtractOperatorFromString(eDataType, initialValue);
 			case ELPackage.MULTIPLY_DIVIDE_MODULO_OPERATOR:
 				return createMultiplyDivideModuloOperatorFromString(eDataType, initialValue);
+			case ELPackage.FACTOR:
+				return createFactorFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -113,6 +115,8 @@ public class ELFactoryImpl extends EFactoryImpl implements ELFactory {
 				return convertAddOrSubtractOperatorToString(eDataType, instanceValue);
 			case ELPackage.MULTIPLY_DIVIDE_MODULO_OPERATOR:
 				return convertMultiplyDivideModuloOperatorToString(eDataType, instanceValue);
+			case ELPackage.FACTOR:
+				return convertFactorToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -373,6 +377,26 @@ public class ELFactoryImpl extends EFactoryImpl implements ELFactory {
 	 * @generated
 	 */
 	public String convertMultiplyDivideModuloOperatorToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Factor createFactorFromString(EDataType eDataType, String initialValue) {
+		Factor result = Factor.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertFactorToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

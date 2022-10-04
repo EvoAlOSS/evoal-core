@@ -131,7 +131,7 @@ public class DataDescriptionLanguageSyntacticSequencer extends AbstractSyntactic
 	 *     ('with' 'constraints' ':')?
 	 *
 	 * This ambiguous syntax occurs at:
-	 *     type=[DataType|ID] (ambiguity) ';' (rule end)
+	 *     type=[DataType|StringOrId] (ambiguity) ';' (rule end)
 	 */
 	protected void emit_TypedDataDescriptionRule___WithKeyword_6_0_ConstraintsKeyword_6_1_ColonKeyword_6_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);

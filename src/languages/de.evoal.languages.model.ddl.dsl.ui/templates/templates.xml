@@ -6,10 +6,20 @@
 			  description="Creates a data type definition"
 			  enabled="true"
 			  id="de.evoal.languages.model.ddl.dsl.ui.templates.createdatatype"
-			  name="Create data type">${quotient:Enum('ScaleType')} type ${Name}
-  description: ${Description}
+			  name="New data type">${quotient:Enum('ScaleType')} type '${name}'
+  description: "${description}"
+    ${cursor};</template>
+
+	<template autoinsert="true"
+			  context="de.evoal.languages.model.ddl.dsl.DataDescriptionLanguage.DataTypeRule"
+			  deleted="false"
+			  description="Creates a data type definition with constraints"
+			  enabled="true"
+			  id="de.evoal.languages.model.ddl.dsl.ui.templates.createdatatypewithconstraints"
+			  name="New constrainted data type">${quotient:Enum('ScaleType')} type '${name}'
+  description: "${description}"
   with constraints:
-    ${cursor}</template>
+    ${cursor};</template>
 
 	<template autoinsert="true"
 			  context="de.evoal.languages.model.ddl.dsl.DataDescriptionLanguage.DataDescriptionRule"
@@ -17,10 +27,8 @@
 			  description="Creates an untyped data definition"
 			  enabled="true"
 			  id="de.evoal.languages.model.ddl.dsl.ui.templates.createuntypeddata"
-			  name="Create untyped data">${quotient:Enum('ScaleType')} ${real:Enum('RepresentationType')} data ${Name}
-		with constraints :
-		    ${cursor}
-	;</template>
+			  name="New untyped data">${quotient:Enum('ScaleType')} ${real:Enum('RepresentationType')} data '${name}'
+		    ${cursor};</template>
 
 
 	<template autoinsert="true"
@@ -29,9 +37,7 @@
 			  description="Creates a typed data definition"
 			  enabled="true"
 			  id="de.evoal.languages.model.ddl.dsl.ui.templates.createtypeddata"
-			  name="Create typed data">${real:Enum('RepresentationType')} data ${Name} of type ${Type:CrossReference('TypedDataDescription.type')}
-		with constraints :
-		    ${cursor}
-	;</template>
+			  name="New typed data">${real:Enum('RepresentationType')} data ${Name} of type ${Type:CrossReference('TypedDataDescription.type')}
+		    ${cursor};</template>
 	
 </templates>

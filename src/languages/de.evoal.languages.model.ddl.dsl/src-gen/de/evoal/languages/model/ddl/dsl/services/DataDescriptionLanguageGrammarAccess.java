@@ -262,7 +262,7 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 		private final Keyword cTypeKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		private final Assignment cTypeAssignment_5 = (Assignment)cGroup.eContents().get(5);
 		private final CrossReference cTypeDataTypeCrossReference_5_0 = (CrossReference)cTypeAssignment_5.eContents().get(0);
-		private final RuleCall cTypeDataTypeIDTerminalRuleCall_5_0_1 = (RuleCall)cTypeDataTypeCrossReference_5_0.eContents().get(1);
+		private final RuleCall cTypeDataTypeStringOrIdParserRuleCall_5_0_1 = (RuleCall)cTypeDataTypeCrossReference_5_0.eContents().get(1);
 		private final Group cGroup_6 = (Group)cGroup.eContents().get(6);
 		private final Keyword cWithKeyword_6_0 = (Keyword)cGroup_6.eContents().get(0);
 		private final Keyword cConstraintsKeyword_6_1 = (Keyword)cGroup_6.eContents().get(1);
@@ -272,12 +272,12 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 		private final Keyword cSemicolonKeyword_7 = (Keyword)cGroup.eContents().get(7);
 		
 		//TypedDataDescriptionRule returns TypedDataDescription:
-		//    representation=RepresentationType 'data' name = StringOrId 'of' 'type' type = [DataType|ID] ('with' 'constraints' ':' (constraints += StatementRule)*)?
+		//    representation=RepresentationType 'data' name = StringOrId 'of' 'type' type = [DataType|StringOrId] ('with' 'constraints' ':' (constraints += StatementRule)*)?
 		//    ';'
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//representation=RepresentationType 'data' name = StringOrId 'of' 'type' type = [DataType|ID] ('with' 'constraints' ':' (constraints += StatementRule)*)?
+		//representation=RepresentationType 'data' name = StringOrId 'of' 'type' type = [DataType|StringOrId] ('with' 'constraints' ':' (constraints += StatementRule)*)?
 		//';'
 		public Group getGroup() { return cGroup; }
 		
@@ -302,14 +302,14 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 		//'type'
 		public Keyword getTypeKeyword_4() { return cTypeKeyword_4; }
 		
-		//type = [DataType|ID]
+		//type = [DataType|StringOrId]
 		public Assignment getTypeAssignment_5() { return cTypeAssignment_5; }
 		
-		//[DataType|ID]
+		//[DataType|StringOrId]
 		public CrossReference getTypeDataTypeCrossReference_5_0() { return cTypeDataTypeCrossReference_5_0; }
 		
-		//ID
-		public RuleCall getTypeDataTypeIDTerminalRuleCall_5_0_1() { return cTypeDataTypeIDTerminalRuleCall_5_0_1; }
+		//StringOrId
+		public RuleCall getTypeDataTypeStringOrIdParserRuleCall_5_0_1() { return cTypeDataTypeStringOrIdParserRuleCall_5_0_1; }
 		
 		//('with' 'constraints' ':' (constraints += StatementRule)*)?
 		public Group getGroup_6() { return cGroup_6; }
@@ -757,7 +757,7 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 	}
 	
 	//TypedDataDescriptionRule returns TypedDataDescription:
-	//    representation=RepresentationType 'data' name = StringOrId 'of' 'type' type = [DataType|ID] ('with' 'constraints' ':' (constraints += StatementRule)*)?
+	//    representation=RepresentationType 'data' name = StringOrId 'of' 'type' type = [DataType|StringOrId] ('with' 'constraints' ':' (constraints += StatementRule)*)?
 	//    ';'
 	//;
 	public TypedDataDescriptionRuleElements getTypedDataDescriptionRuleAccess() {
@@ -1054,7 +1054,7 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 	}
 	
 	//DoubleLiteralRule returns DoubleLiteral :
-	//    value = DOUBLE
+	//    literal = DOUBLE factor = FactorRule
 	//;
 	public ExpressionLanguageGrammarAccess.DoubleLiteralRuleElements getDoubleLiteralRuleAccess() {
 		return gaExpressionLanguage.getDoubleLiteralRuleAccess();
@@ -1065,7 +1065,7 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 	}
 	
 	//IntegerLiteralRule returns IntegerLiteral:
-	//    value = INT
+	//    literal = INT factor = FactorRule
 	//;
 	public ExpressionLanguageGrammarAccess.IntegerLiteralRuleElements getIntegerLiteralRuleAccess() {
 		return gaExpressionLanguage.getIntegerLiteralRuleAccess();
@@ -1084,6 +1084,36 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 	
 	public ParserRule getStringLiteralRuleRule() {
 		return getStringLiteralRuleAccess().getRule();
+	}
+	
+	//enum FactorRule returns Factor:
+	//    Yotta = 'Y' |
+	//    Zetta = 'Z' |
+	//    Exa = 'E' |
+	//    Peta = 'P' |
+	//    Tera = 'T' |
+	//    Giga = 'G' |
+	//    Mega = 'M' |
+	//    Kilo = 'k' |
+	//    Hecto = 'h' |
+	//    Deka = 'da' |
+	//    Deci = 'd' |
+	//    Centi = 'c' |
+	//    Milli = 'm' |
+	//    Micro = 'µ' |
+	//    Nano = 'n' |
+	//    Piko = 'p' |
+	//    Femto = 'f' |
+	//    Atto = 'a' |
+	//    Zepto = 'z' |
+	//    Yocto = 'y'
+	//;
+	public ExpressionLanguageGrammarAccess.FactorRuleElements getFactorRuleAccess() {
+		return gaExpressionLanguage.getFactorRuleAccess();
+	}
+	
+	public EnumRule getFactorRuleRule() {
+		return getFactorRuleAccess().getRule();
 	}
 	
 	//BooleanLiteralRule returns BooleanLiteral:

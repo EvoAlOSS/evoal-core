@@ -5,8 +5,10 @@ package de.evoal.languages.model.el.impl;
 import de.evoal.languages.model.el.DoubleLiteral;
 import de.evoal.languages.model.el.ELPackage;
 
+import java.lang.reflect.InvocationTargetException;
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -19,31 +21,31 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link de.evoal.languages.model.el.impl.DoubleLiteralImpl#getValue <em>Value</em>}</li>
+ *   <li>{@link de.evoal.languages.model.el.impl.DoubleLiteralImpl#getLiteral <em>Literal</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class DoubleLiteralImpl extends NumberLiteralImpl implements DoubleLiteral {
 	/**
-	 * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
+	 * The default value of the '{@link #getLiteral() <em>Literal</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getValue()
+	 * @see #getLiteral()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final double VALUE_EDEFAULT = 0.0;
+	protected static final double LITERAL_EDEFAULT = 0.0;
 
 	/**
-	 * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
+	 * The cached value of the '{@link #getLiteral() <em>Literal</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getValue()
+	 * @see #getLiteral()
 	 * @generated
 	 * @ordered
 	 */
-	protected double value = VALUE_EDEFAULT;
+	protected double literal = LITERAL_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -70,8 +72,8 @@ public class DoubleLiteralImpl extends NumberLiteralImpl implements DoubleLitera
 	 * @generated
 	 */
 	@Override
-	public double getValue() {
-		return value;
+	public double getLiteral() {
+		return literal;
 	}
 
 	/**
@@ -80,11 +82,22 @@ public class DoubleLiteralImpl extends NumberLiteralImpl implements DoubleLitera
 	 * @generated
 	 */
 	@Override
-	public void setValue(double newValue) {
-		double oldValue = value;
-		value = newValue;
+	public void setLiteral(double newLiteral) {
+		double oldLiteral = literal;
+		literal = newLiteral;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ELPackage.DOUBLE_LITERAL__VALUE, oldValue, value));
+			eNotify(new ENotificationImpl(this, Notification.SET, ELPackage.DOUBLE_LITERAL__LITERAL, oldLiteral, literal));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Double getValue() {
+		return literal * Math.pow(10, super.getFactor().getValue());
+		
 	}
 
 	/**
@@ -95,8 +108,8 @@ public class DoubleLiteralImpl extends NumberLiteralImpl implements DoubleLitera
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ELPackage.DOUBLE_LITERAL__VALUE:
-				return getValue();
+			case ELPackage.DOUBLE_LITERAL__LITERAL:
+				return getLiteral();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -109,8 +122,8 @@ public class DoubleLiteralImpl extends NumberLiteralImpl implements DoubleLitera
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ELPackage.DOUBLE_LITERAL__VALUE:
-				setValue((Double)newValue);
+			case ELPackage.DOUBLE_LITERAL__LITERAL:
+				setLiteral((Double)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -124,8 +137,8 @@ public class DoubleLiteralImpl extends NumberLiteralImpl implements DoubleLitera
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ELPackage.DOUBLE_LITERAL__VALUE:
-				setValue(VALUE_EDEFAULT);
+			case ELPackage.DOUBLE_LITERAL__LITERAL:
+				setLiteral(LITERAL_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -139,10 +152,24 @@ public class DoubleLiteralImpl extends NumberLiteralImpl implements DoubleLitera
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ELPackage.DOUBLE_LITERAL__VALUE:
-				return value != VALUE_EDEFAULT;
+			case ELPackage.DOUBLE_LITERAL__LITERAL:
+				return literal != LITERAL_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		switch (operationID) {
+			case ELPackage.DOUBLE_LITERAL___GET_VALUE:
+				return getValue();
+		}
+		return super.eInvoke(operationID, arguments);
 	}
 
 	/**
@@ -155,8 +182,8 @@ public class DoubleLiteralImpl extends NumberLiteralImpl implements DoubleLitera
 		if (eIsProxy()) return super.toString();
 
 		StringBuilder result = new StringBuilder(super.toString());
-		result.append(" (value: ");
-		result.append(value);
+		result.append(" (literal: ");
+		result.append(literal);
 		result.append(')');
 		return result.toString();
 	}

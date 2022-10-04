@@ -4,10 +4,78 @@
  */
 package de.evoal.languages.model.el.dsl.ui.contentassist;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jface.resource.FontDescriptor;
+import org.eclipse.jface.text.contentassist.ICompletionProposal;
+import org.eclipse.jface.viewers.StyledString;
+import org.eclipse.swt.graphics.FontData;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
+import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
+import org.eclipse.xtext.ui.label.StylerFactory;
 
+import com.google.inject.Inject;
+
+/*
+ * 		StyledString message = new StyledString();
+		message.append("µ - micro");
+		acceptor.accept(createCompletionProposal("µ", message, null, context));
+ */
 /**
  * See https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#content-assist
  * on how to customize the content assistant.
  */
 public class ExpressionLanguageProposalProvider extends AbstractExpressionLanguageProposalProvider {
+
+
+	@Override
+	protected StyledString getKeywordDisplayString(Keyword keyword) {
+		switch (keyword.getValue()) {
+		case "Y":
+			return new StyledString("Y").append(" — Yotta (10e24)", StyledString.DECORATIONS_STYLER);
+		case "Z":
+			return new StyledString("Z").append(" — Zeta (10e21)", StyledString.DECORATIONS_STYLER);
+		case "E":
+			return new StyledString("E").append(" — Exa (10e18)", StyledString.DECORATIONS_STYLER);
+		case "P":
+			return new StyledString("P").append(" — Peta (10e15)", StyledString.DECORATIONS_STYLER);
+		case "T":
+			return new StyledString("T").append(" — Tera (10e12)", StyledString.DECORATIONS_STYLER);
+		case "G":
+			return new StyledString("G").append(" — Giga (10e9)", StyledString.DECORATIONS_STYLER);
+		case "M":
+			return new StyledString("M").append(" — Mega (10e6)", StyledString.DECORATIONS_STYLER);
+		case "k":
+			return new StyledString("k").append(" — kilo (10e3)", StyledString.DECORATIONS_STYLER);
+		case "h":
+			return new StyledString("h").append(" — hecto (10e2)", StyledString.DECORATIONS_STYLER);
+		case "da":
+			return new StyledString("da").append(" — deka (10e1)", StyledString.DECORATIONS_STYLER);
+		case "d":
+			return new StyledString("d").append(" — deci (10e-1)", StyledString.DECORATIONS_STYLER);
+		case "c":
+			return new StyledString("c").append(" — centi (10e-2)", StyledString.DECORATIONS_STYLER);
+		case "m":
+			return new StyledString("m").append(" — milli (10e-3)", StyledString.DECORATIONS_STYLER);
+		case "µ":
+			return new StyledString("µ").append(" — micro (10e-6)", StyledString.DECORATIONS_STYLER);
+		case "n":
+			return new StyledString("n").append(" — nano (10e-9)", StyledString.DECORATIONS_STYLER);
+		case "p":
+			return new StyledString("p").append(" — piko (10e-12)", StyledString.DECORATIONS_STYLER);
+		case "f":
+			return new StyledString("f").append(" — femto (10e-15)", StyledString.DECORATIONS_STYLER);
+		case "a":
+			return new StyledString("a").append(" — atto (10e-18)", StyledString.DECORATIONS_STYLER);
+		case "z":
+			return new StyledString("z").append(" — zepto (10e-21)", StyledString.DECORATIONS_STYLER);
+		case "y":
+			return new StyledString("y — yocto").append(" (10e-24)", StyledString.DECORATIONS_STYLER);
+		}
+		
+		return super.getKeywordDisplayString(keyword);
+	}
+
 }

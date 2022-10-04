@@ -26,6 +26,29 @@
       <genEnumLiterals ecoreEnumLiteral="model.ecore#//MultiplyDivideModuloOperator/Divide"/>
       <genEnumLiterals ecoreEnumLiteral="model.ecore#//MultiplyDivideModuloOperator/Modulo"/>
     </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="model.ecore#//Factor">
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//Factor/Yotta"/>
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//Factor/Zetta"/>
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//Factor/Exa"/>
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//Factor/Peta"/>
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//Factor/Tera"/>
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//Factor/Giga"/>
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//Factor/Mega"/>
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//Factor/Kilo"/>
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//Factor/Hecto"/>
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//Factor/Deka"/>
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//Factor/None"/>
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//Factor/Deci"/>
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//Factor/Centi"/>
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//Factor/Milli"/>
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//Factor/Micro"/>
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//Factor/Nano"/>
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//Factor/Piko"/>
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//Factor/Femto"/>
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//Factor/Atto"/>
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//Factor/Zepto"/>
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//Factor/Yocto"/>
+    </genEnums>
     <genClasses image="false" ecoreClass="model.ecore#//Expression"/>
     <genClasses ecoreClass="model.ecore#//OrExpression">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//OrExpression/subExpressions"/>
@@ -68,12 +91,17 @@
     </genClasses>
     <genClasses image="false" ecoreClass="model.ecore#//CallOrLiteralOrReferenceOrParantheses"/>
     <genClasses image="false" ecoreClass="model.ecore#//Literal"/>
-    <genClasses image="false" ecoreClass="model.ecore#//NumberLiteral"/>
+    <genClasses image="false" ecoreClass="model.ecore#//NumberLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//NumberLiteral/factor"/>
+      <genOperations ecoreOperation="model.ecore#//NumberLiteral/getValue"/>
+    </genClasses>
     <genClasses ecoreClass="model.ecore#//IntegerLiteral">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//IntegerLiteral/value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//IntegerLiteral/literal"/>
+      <genOperations ecoreOperation="model.ecore#//IntegerLiteral/getValue" body="return (int)(literal * Math.pow(10, super.getFactor().getValue()));&#xA;"/>
     </genClasses>
     <genClasses ecoreClass="model.ecore#//DoubleLiteral">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//DoubleLiteral/value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//DoubleLiteral/literal"/>
+      <genOperations ecoreOperation="model.ecore#//DoubleLiteral/getValue" body="return literal * Math.pow(10, super.getFactor().getValue());&#xA;"/>
     </genClasses>
     <genClasses ecoreClass="model.ecore#//StringLiteral">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//StringLiteral/value"/>

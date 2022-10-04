@@ -575,35 +575,59 @@ public class ExpressionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 	}
 	public class DoubleLiteralRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.el.dsl.ExpressionLanguage.DoubleLiteralRule");
-		private final Assignment cValueAssignment = (Assignment)rule.eContents().get(1);
-		private final RuleCall cValueDOUBLEParserRuleCall_0 = (RuleCall)cValueAssignment.eContents().get(0);
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cLiteralAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cLiteralDOUBLEParserRuleCall_0_0 = (RuleCall)cLiteralAssignment_0.eContents().get(0);
+		private final Assignment cFactorAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cFactorFactorRuleEnumRuleCall_1_0 = (RuleCall)cFactorAssignment_1.eContents().get(0);
 		
 		//DoubleLiteralRule returns DoubleLiteral :
-		//    value = DOUBLE
+		//    literal = DOUBLE factor = FactorRule
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//value = DOUBLE
-		public Assignment getValueAssignment() { return cValueAssignment; }
+		//literal = DOUBLE factor = FactorRule
+		public Group getGroup() { return cGroup; }
+		
+		//literal = DOUBLE
+		public Assignment getLiteralAssignment_0() { return cLiteralAssignment_0; }
 		
 		//DOUBLE
-		public RuleCall getValueDOUBLEParserRuleCall_0() { return cValueDOUBLEParserRuleCall_0; }
+		public RuleCall getLiteralDOUBLEParserRuleCall_0_0() { return cLiteralDOUBLEParserRuleCall_0_0; }
+		
+		//factor = FactorRule
+		public Assignment getFactorAssignment_1() { return cFactorAssignment_1; }
+		
+		//FactorRule
+		public RuleCall getFactorFactorRuleEnumRuleCall_1_0() { return cFactorFactorRuleEnumRuleCall_1_0; }
 	}
 	public class IntegerLiteralRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.el.dsl.ExpressionLanguage.IntegerLiteralRule");
-		private final Assignment cValueAssignment = (Assignment)rule.eContents().get(1);
-		private final RuleCall cValueINTTerminalRuleCall_0 = (RuleCall)cValueAssignment.eContents().get(0);
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cLiteralAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cLiteralINTTerminalRuleCall_0_0 = (RuleCall)cLiteralAssignment_0.eContents().get(0);
+		private final Assignment cFactorAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cFactorFactorRuleEnumRuleCall_1_0 = (RuleCall)cFactorAssignment_1.eContents().get(0);
 		
 		//IntegerLiteralRule returns IntegerLiteral:
-		//    value = INT
+		//    literal = INT factor = FactorRule
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//value = INT
-		public Assignment getValueAssignment() { return cValueAssignment; }
+		//literal = INT factor = FactorRule
+		public Group getGroup() { return cGroup; }
+		
+		//literal = INT
+		public Assignment getLiteralAssignment_0() { return cLiteralAssignment_0; }
 		
 		//INT
-		public RuleCall getValueINTTerminalRuleCall_0() { return cValueINTTerminalRuleCall_0; }
+		public RuleCall getLiteralINTTerminalRuleCall_0_0() { return cLiteralINTTerminalRuleCall_0_0; }
+		
+		//factor = FactorRule
+		public Assignment getFactorAssignment_1() { return cFactorAssignment_1; }
+		
+		//FactorRule
+		public RuleCall getFactorFactorRuleEnumRuleCall_1_0() { return cFactorFactorRuleEnumRuleCall_1_0; }
 	}
 	public class StringLiteralRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.el.dsl.ExpressionLanguage.StringLiteralRule");
@@ -829,6 +853,216 @@ public class ExpressionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 		//'%'
 		public Keyword getModuloPercentSignKeyword_2_0() { return cModuloPercentSignKeyword_2_0; }
 	}
+	public class FactorRuleElements extends AbstractElementFinder.AbstractEnumRuleElementFinder {
+		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.el.dsl.ExpressionLanguage.FactorRule");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final EnumLiteralDeclaration cYottaEnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
+		private final Keyword cYottaYKeyword_0_0 = (Keyword)cYottaEnumLiteralDeclaration_0.eContents().get(0);
+		private final EnumLiteralDeclaration cZettaEnumLiteralDeclaration_1 = (EnumLiteralDeclaration)cAlternatives.eContents().get(1);
+		private final Keyword cZettaZKeyword_1_0 = (Keyword)cZettaEnumLiteralDeclaration_1.eContents().get(0);
+		private final EnumLiteralDeclaration cExaEnumLiteralDeclaration_2 = (EnumLiteralDeclaration)cAlternatives.eContents().get(2);
+		private final Keyword cExaEKeyword_2_0 = (Keyword)cExaEnumLiteralDeclaration_2.eContents().get(0);
+		private final EnumLiteralDeclaration cPetaEnumLiteralDeclaration_3 = (EnumLiteralDeclaration)cAlternatives.eContents().get(3);
+		private final Keyword cPetaPKeyword_3_0 = (Keyword)cPetaEnumLiteralDeclaration_3.eContents().get(0);
+		private final EnumLiteralDeclaration cTeraEnumLiteralDeclaration_4 = (EnumLiteralDeclaration)cAlternatives.eContents().get(4);
+		private final Keyword cTeraTKeyword_4_0 = (Keyword)cTeraEnumLiteralDeclaration_4.eContents().get(0);
+		private final EnumLiteralDeclaration cGigaEnumLiteralDeclaration_5 = (EnumLiteralDeclaration)cAlternatives.eContents().get(5);
+		private final Keyword cGigaGKeyword_5_0 = (Keyword)cGigaEnumLiteralDeclaration_5.eContents().get(0);
+		private final EnumLiteralDeclaration cMegaEnumLiteralDeclaration_6 = (EnumLiteralDeclaration)cAlternatives.eContents().get(6);
+		private final Keyword cMegaMKeyword_6_0 = (Keyword)cMegaEnumLiteralDeclaration_6.eContents().get(0);
+		private final EnumLiteralDeclaration cKiloEnumLiteralDeclaration_7 = (EnumLiteralDeclaration)cAlternatives.eContents().get(7);
+		private final Keyword cKiloKKeyword_7_0 = (Keyword)cKiloEnumLiteralDeclaration_7.eContents().get(0);
+		private final EnumLiteralDeclaration cHectoEnumLiteralDeclaration_8 = (EnumLiteralDeclaration)cAlternatives.eContents().get(8);
+		private final Keyword cHectoHKeyword_8_0 = (Keyword)cHectoEnumLiteralDeclaration_8.eContents().get(0);
+		private final EnumLiteralDeclaration cDekaEnumLiteralDeclaration_9 = (EnumLiteralDeclaration)cAlternatives.eContents().get(9);
+		private final Keyword cDekaDaKeyword_9_0 = (Keyword)cDekaEnumLiteralDeclaration_9.eContents().get(0);
+		private final EnumLiteralDeclaration cDeciEnumLiteralDeclaration_10 = (EnumLiteralDeclaration)cAlternatives.eContents().get(10);
+		private final Keyword cDeciDKeyword_10_0 = (Keyword)cDeciEnumLiteralDeclaration_10.eContents().get(0);
+		private final EnumLiteralDeclaration cCentiEnumLiteralDeclaration_11 = (EnumLiteralDeclaration)cAlternatives.eContents().get(11);
+		private final Keyword cCentiCKeyword_11_0 = (Keyword)cCentiEnumLiteralDeclaration_11.eContents().get(0);
+		private final EnumLiteralDeclaration cMilliEnumLiteralDeclaration_12 = (EnumLiteralDeclaration)cAlternatives.eContents().get(12);
+		private final Keyword cMilliMKeyword_12_0 = (Keyword)cMilliEnumLiteralDeclaration_12.eContents().get(0);
+		private final EnumLiteralDeclaration cMicroEnumLiteralDeclaration_13 = (EnumLiteralDeclaration)cAlternatives.eContents().get(13);
+		private final Keyword cMicroMicroSignKeyword_13_0 = (Keyword)cMicroEnumLiteralDeclaration_13.eContents().get(0);
+		private final EnumLiteralDeclaration cNanoEnumLiteralDeclaration_14 = (EnumLiteralDeclaration)cAlternatives.eContents().get(14);
+		private final Keyword cNanoNKeyword_14_0 = (Keyword)cNanoEnumLiteralDeclaration_14.eContents().get(0);
+		private final EnumLiteralDeclaration cPikoEnumLiteralDeclaration_15 = (EnumLiteralDeclaration)cAlternatives.eContents().get(15);
+		private final Keyword cPikoPKeyword_15_0 = (Keyword)cPikoEnumLiteralDeclaration_15.eContents().get(0);
+		private final EnumLiteralDeclaration cFemtoEnumLiteralDeclaration_16 = (EnumLiteralDeclaration)cAlternatives.eContents().get(16);
+		private final Keyword cFemtoFKeyword_16_0 = (Keyword)cFemtoEnumLiteralDeclaration_16.eContents().get(0);
+		private final EnumLiteralDeclaration cAttoEnumLiteralDeclaration_17 = (EnumLiteralDeclaration)cAlternatives.eContents().get(17);
+		private final Keyword cAttoAKeyword_17_0 = (Keyword)cAttoEnumLiteralDeclaration_17.eContents().get(0);
+		private final EnumLiteralDeclaration cZeptoEnumLiteralDeclaration_18 = (EnumLiteralDeclaration)cAlternatives.eContents().get(18);
+		private final Keyword cZeptoZKeyword_18_0 = (Keyword)cZeptoEnumLiteralDeclaration_18.eContents().get(0);
+		private final EnumLiteralDeclaration cYoctoEnumLiteralDeclaration_19 = (EnumLiteralDeclaration)cAlternatives.eContents().get(19);
+		private final Keyword cYoctoYKeyword_19_0 = (Keyword)cYoctoEnumLiteralDeclaration_19.eContents().get(0);
+		
+		//enum FactorRule returns Factor:
+		//    Yotta = 'Y' |
+		//    Zetta = 'Z' |
+		//    Exa = 'E' |
+		//    Peta = 'P' |
+		//    Tera = 'T' |
+		//    Giga = 'G' |
+		//    Mega = 'M' |
+		//    Kilo = 'k' |
+		//    Hecto = 'h' |
+		//    Deka = 'da' |
+		//    Deci = 'd' |
+		//    Centi = 'c' |
+		//    Milli = 'm' |
+		//    Micro = 'µ' |
+		//    Nano = 'n' |
+		//    Piko = 'p' |
+		//    Femto = 'f' |
+		//    Atto = 'a' |
+		//    Zepto = 'z' |
+		//    Yocto = 'y'
+		//;
+		public EnumRule getRule() { return rule; }
+		
+		//Yotta = 'Y' |
+		//Zetta = 'Z' |
+		//Exa = 'E' |
+		//Peta = 'P' |
+		//Tera = 'T' |
+		//Giga = 'G' |
+		//Mega = 'M' |
+		//Kilo = 'k' |
+		//Hecto = 'h' |
+		//Deka = 'da' |
+		//Deci = 'd' |
+		//Centi = 'c' |
+		//Milli = 'm' |
+		//Micro = 'µ' |
+		//Nano = 'n' |
+		//Piko = 'p' |
+		//Femto = 'f' |
+		//Atto = 'a' |
+		//Zepto = 'z' |
+		//Yocto = 'y'
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//Yotta = 'Y'
+		public EnumLiteralDeclaration getYottaEnumLiteralDeclaration_0() { return cYottaEnumLiteralDeclaration_0; }
+		
+		//'Y'
+		public Keyword getYottaYKeyword_0_0() { return cYottaYKeyword_0_0; }
+		
+		//Zetta = 'Z'
+		public EnumLiteralDeclaration getZettaEnumLiteralDeclaration_1() { return cZettaEnumLiteralDeclaration_1; }
+		
+		//'Z'
+		public Keyword getZettaZKeyword_1_0() { return cZettaZKeyword_1_0; }
+		
+		//Exa = 'E'
+		public EnumLiteralDeclaration getExaEnumLiteralDeclaration_2() { return cExaEnumLiteralDeclaration_2; }
+		
+		//'E'
+		public Keyword getExaEKeyword_2_0() { return cExaEKeyword_2_0; }
+		
+		//Peta = 'P'
+		public EnumLiteralDeclaration getPetaEnumLiteralDeclaration_3() { return cPetaEnumLiteralDeclaration_3; }
+		
+		//'P'
+		public Keyword getPetaPKeyword_3_0() { return cPetaPKeyword_3_0; }
+		
+		//Tera = 'T'
+		public EnumLiteralDeclaration getTeraEnumLiteralDeclaration_4() { return cTeraEnumLiteralDeclaration_4; }
+		
+		//'T'
+		public Keyword getTeraTKeyword_4_0() { return cTeraTKeyword_4_0; }
+		
+		//Giga = 'G'
+		public EnumLiteralDeclaration getGigaEnumLiteralDeclaration_5() { return cGigaEnumLiteralDeclaration_5; }
+		
+		//'G'
+		public Keyword getGigaGKeyword_5_0() { return cGigaGKeyword_5_0; }
+		
+		//Mega = 'M'
+		public EnumLiteralDeclaration getMegaEnumLiteralDeclaration_6() { return cMegaEnumLiteralDeclaration_6; }
+		
+		//'M'
+		public Keyword getMegaMKeyword_6_0() { return cMegaMKeyword_6_0; }
+		
+		//Kilo = 'k'
+		public EnumLiteralDeclaration getKiloEnumLiteralDeclaration_7() { return cKiloEnumLiteralDeclaration_7; }
+		
+		//'k'
+		public Keyword getKiloKKeyword_7_0() { return cKiloKKeyword_7_0; }
+		
+		//Hecto = 'h'
+		public EnumLiteralDeclaration getHectoEnumLiteralDeclaration_8() { return cHectoEnumLiteralDeclaration_8; }
+		
+		//'h'
+		public Keyword getHectoHKeyword_8_0() { return cHectoHKeyword_8_0; }
+		
+		//Deka = 'da'
+		public EnumLiteralDeclaration getDekaEnumLiteralDeclaration_9() { return cDekaEnumLiteralDeclaration_9; }
+		
+		//'da'
+		public Keyword getDekaDaKeyword_9_0() { return cDekaDaKeyword_9_0; }
+		
+		//Deci = 'd'
+		public EnumLiteralDeclaration getDeciEnumLiteralDeclaration_10() { return cDeciEnumLiteralDeclaration_10; }
+		
+		//'d'
+		public Keyword getDeciDKeyword_10_0() { return cDeciDKeyword_10_0; }
+		
+		//Centi = 'c'
+		public EnumLiteralDeclaration getCentiEnumLiteralDeclaration_11() { return cCentiEnumLiteralDeclaration_11; }
+		
+		//'c'
+		public Keyword getCentiCKeyword_11_0() { return cCentiCKeyword_11_0; }
+		
+		//Milli = 'm'
+		public EnumLiteralDeclaration getMilliEnumLiteralDeclaration_12() { return cMilliEnumLiteralDeclaration_12; }
+		
+		//'m'
+		public Keyword getMilliMKeyword_12_0() { return cMilliMKeyword_12_0; }
+		
+		//Micro = 'µ'
+		public EnumLiteralDeclaration getMicroEnumLiteralDeclaration_13() { return cMicroEnumLiteralDeclaration_13; }
+		
+		//'µ'
+		public Keyword getMicroMicroSignKeyword_13_0() { return cMicroMicroSignKeyword_13_0; }
+		
+		//Nano = 'n'
+		public EnumLiteralDeclaration getNanoEnumLiteralDeclaration_14() { return cNanoEnumLiteralDeclaration_14; }
+		
+		//'n'
+		public Keyword getNanoNKeyword_14_0() { return cNanoNKeyword_14_0; }
+		
+		//Piko = 'p'
+		public EnumLiteralDeclaration getPikoEnumLiteralDeclaration_15() { return cPikoEnumLiteralDeclaration_15; }
+		
+		//'p'
+		public Keyword getPikoPKeyword_15_0() { return cPikoPKeyword_15_0; }
+		
+		//Femto = 'f'
+		public EnumLiteralDeclaration getFemtoEnumLiteralDeclaration_16() { return cFemtoEnumLiteralDeclaration_16; }
+		
+		//'f'
+		public Keyword getFemtoFKeyword_16_0() { return cFemtoFKeyword_16_0; }
+		
+		//Atto = 'a'
+		public EnumLiteralDeclaration getAttoEnumLiteralDeclaration_17() { return cAttoEnumLiteralDeclaration_17; }
+		
+		//'a'
+		public Keyword getAttoAKeyword_17_0() { return cAttoAKeyword_17_0; }
+		
+		//Zepto = 'z'
+		public EnumLiteralDeclaration getZeptoEnumLiteralDeclaration_18() { return cZeptoEnumLiteralDeclaration_18; }
+		
+		//'z'
+		public Keyword getZeptoZKeyword_18_0() { return cZeptoZKeyword_18_0; }
+		
+		//Yocto = 'y'
+		public EnumLiteralDeclaration getYoctoEnumLiteralDeclaration_19() { return cYoctoEnumLiteralDeclaration_19; }
+		
+		//'y'
+		public Keyword getYoctoYKeyword_19_0() { return cYoctoYKeyword_19_0; }
+	}
 	
 	private final ExpressionRuleElements pExpressionRule;
 	private final OrExpressionRuleElements pOrExpressionRule;
@@ -854,6 +1088,7 @@ public class ExpressionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 	private final DoubleLiteralRuleElements pDoubleLiteralRule;
 	private final IntegerLiteralRuleElements pIntegerLiteralRule;
 	private final StringLiteralRuleElements pStringLiteralRule;
+	private final FactorRuleElements eFactorRule;
 	private final BooleanLiteralRuleElements pBooleanLiteralRule;
 	private final StringOrIdElements pStringOrId;
 	private final DOUBLEElements pDOUBLE;
@@ -893,6 +1128,7 @@ public class ExpressionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 		this.pDoubleLiteralRule = new DoubleLiteralRuleElements();
 		this.pIntegerLiteralRule = new IntegerLiteralRuleElements();
 		this.pStringLiteralRule = new StringLiteralRuleElements();
+		this.eFactorRule = new FactorRuleElements();
 		this.pBooleanLiteralRule = new BooleanLiteralRuleElements();
 		this.pStringOrId = new StringOrIdElements();
 		this.pDOUBLE = new DOUBLEElements();
@@ -1165,7 +1401,7 @@ public class ExpressionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 	}
 	
 	//DoubleLiteralRule returns DoubleLiteral :
-	//    value = DOUBLE
+	//    literal = DOUBLE factor = FactorRule
 	//;
 	public DoubleLiteralRuleElements getDoubleLiteralRuleAccess() {
 		return pDoubleLiteralRule;
@@ -1176,7 +1412,7 @@ public class ExpressionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 	}
 	
 	//IntegerLiteralRule returns IntegerLiteral:
-	//    value = INT
+	//    literal = INT factor = FactorRule
 	//;
 	public IntegerLiteralRuleElements getIntegerLiteralRuleAccess() {
 		return pIntegerLiteralRule;
@@ -1195,6 +1431,36 @@ public class ExpressionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 	
 	public ParserRule getStringLiteralRuleRule() {
 		return getStringLiteralRuleAccess().getRule();
+	}
+	
+	//enum FactorRule returns Factor:
+	//    Yotta = 'Y' |
+	//    Zetta = 'Z' |
+	//    Exa = 'E' |
+	//    Peta = 'P' |
+	//    Tera = 'T' |
+	//    Giga = 'G' |
+	//    Mega = 'M' |
+	//    Kilo = 'k' |
+	//    Hecto = 'h' |
+	//    Deka = 'da' |
+	//    Deci = 'd' |
+	//    Centi = 'c' |
+	//    Milli = 'm' |
+	//    Micro = 'µ' |
+	//    Nano = 'n' |
+	//    Piko = 'p' |
+	//    Femto = 'f' |
+	//    Atto = 'a' |
+	//    Zepto = 'z' |
+	//    Yocto = 'y'
+	//;
+	public FactorRuleElements getFactorRuleAccess() {
+		return eFactorRule;
+	}
+	
+	public EnumRule getFactorRuleRule() {
+		return getFactorRuleAccess().getRule();
 	}
 	
 	//BooleanLiteralRule returns BooleanLiteral:
