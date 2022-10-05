@@ -4632,11 +4632,11 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
             if ( (LA23_0==RULE_INT) ) {
                 int LA23_1 = input.LA(2);
 
-                if ( (LA23_1==32) ) {
-                    alt23=1;
-                }
-                else if ( ((LA23_1>=44 && LA23_1<=63)) ) {
+                if ( (LA23_1==EOF||LA23_1==13||(LA23_1>=19 && LA23_1<=20)||(LA23_1>=22 && LA23_1<=24)||LA23_1==26||LA23_1==28||(LA23_1>=33 && LA23_1<=63)) ) {
                     alt23=2;
+                }
+                else if ( (LA23_1==32) ) {
+                    alt23=1;
                 }
                 else {
                     NoViableAltException nvae =
@@ -4747,7 +4747,7 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
 
 
     // $ANTLR start "ruleDoubleLiteralRule"
-    // InternalEvolutionaryAlgorithmLanguage.g:1731:1: ruleDoubleLiteralRule returns [EObject current=null] : ( ( (lv_literal_0_0= ruleDOUBLE ) ) ( (lv_factor_1_0= ruleFactorRule ) ) ) ;
+    // InternalEvolutionaryAlgorithmLanguage.g:1731:1: ruleDoubleLiteralRule returns [EObject current=null] : ( ( (lv_literal_0_0= ruleDOUBLE ) ) ( (lv_factor_1_0= ruleFactorRule ) )? ) ;
     public final EObject ruleDoubleLiteralRule() throws RecognitionException {
         EObject current = null;
 
@@ -4760,11 +4760,11 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalEvolutionaryAlgorithmLanguage.g:1737:2: ( ( ( (lv_literal_0_0= ruleDOUBLE ) ) ( (lv_factor_1_0= ruleFactorRule ) ) ) )
-            // InternalEvolutionaryAlgorithmLanguage.g:1738:2: ( ( (lv_literal_0_0= ruleDOUBLE ) ) ( (lv_factor_1_0= ruleFactorRule ) ) )
+            // InternalEvolutionaryAlgorithmLanguage.g:1737:2: ( ( ( (lv_literal_0_0= ruleDOUBLE ) ) ( (lv_factor_1_0= ruleFactorRule ) )? ) )
+            // InternalEvolutionaryAlgorithmLanguage.g:1738:2: ( ( (lv_literal_0_0= ruleDOUBLE ) ) ( (lv_factor_1_0= ruleFactorRule ) )? )
             {
-            // InternalEvolutionaryAlgorithmLanguage.g:1738:2: ( ( (lv_literal_0_0= ruleDOUBLE ) ) ( (lv_factor_1_0= ruleFactorRule ) ) )
-            // InternalEvolutionaryAlgorithmLanguage.g:1739:3: ( (lv_literal_0_0= ruleDOUBLE ) ) ( (lv_factor_1_0= ruleFactorRule ) )
+            // InternalEvolutionaryAlgorithmLanguage.g:1738:2: ( ( (lv_literal_0_0= ruleDOUBLE ) ) ( (lv_factor_1_0= ruleFactorRule ) )? )
+            // InternalEvolutionaryAlgorithmLanguage.g:1739:3: ( (lv_literal_0_0= ruleDOUBLE ) ) ( (lv_factor_1_0= ruleFactorRule ) )?
             {
             // InternalEvolutionaryAlgorithmLanguage.g:1739:3: ( (lv_literal_0_0= ruleDOUBLE ) )
             // InternalEvolutionaryAlgorithmLanguage.g:1740:4: (lv_literal_0_0= ruleDOUBLE )
@@ -4797,34 +4797,45 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
 
             }
 
-            // InternalEvolutionaryAlgorithmLanguage.g:1758:3: ( (lv_factor_1_0= ruleFactorRule ) )
-            // InternalEvolutionaryAlgorithmLanguage.g:1759:4: (lv_factor_1_0= ruleFactorRule )
-            {
-            // InternalEvolutionaryAlgorithmLanguage.g:1759:4: (lv_factor_1_0= ruleFactorRule )
-            // InternalEvolutionaryAlgorithmLanguage.g:1760:5: lv_factor_1_0= ruleFactorRule
-            {
+            // InternalEvolutionaryAlgorithmLanguage.g:1758:3: ( (lv_factor_1_0= ruleFactorRule ) )?
+            int alt24=2;
+            int LA24_0 = input.LA(1);
 
-            					newCompositeNode(grammarAccess.getDoubleLiteralRuleAccess().getFactorFactorRuleEnumRuleCall_1_0());
-            				
-            pushFollow(FOLLOW_2);
-            lv_factor_1_0=ruleFactorRule();
-
-            state._fsp--;
-
-
-            					if (current==null) {
-            						current = createModelElementForParent(grammarAccess.getDoubleLiteralRuleRule());
-            					}
-            					set(
-            						current,
-            						"factor",
-            						lv_factor_1_0,
-            						"de.evoal.languages.model.el.dsl.ExpressionLanguage.FactorRule");
-            					afterParserOrEnumRuleCall();
-            				
-
+            if ( ((LA24_0>=44 && LA24_0<=63)) ) {
+                alt24=1;
             }
+            switch (alt24) {
+                case 1 :
+                    // InternalEvolutionaryAlgorithmLanguage.g:1759:4: (lv_factor_1_0= ruleFactorRule )
+                    {
+                    // InternalEvolutionaryAlgorithmLanguage.g:1759:4: (lv_factor_1_0= ruleFactorRule )
+                    // InternalEvolutionaryAlgorithmLanguage.g:1760:5: lv_factor_1_0= ruleFactorRule
+                    {
 
+                    					newCompositeNode(grammarAccess.getDoubleLiteralRuleAccess().getFactorFactorRuleEnumRuleCall_1_0());
+                    				
+                    pushFollow(FOLLOW_2);
+                    lv_factor_1_0=ruleFactorRule();
+
+                    state._fsp--;
+
+
+                    					if (current==null) {
+                    						current = createModelElementForParent(grammarAccess.getDoubleLiteralRuleRule());
+                    					}
+                    					set(
+                    						current,
+                    						"factor",
+                    						lv_factor_1_0,
+                    						"de.evoal.languages.model.el.dsl.ExpressionLanguage.FactorRule");
+                    					afterParserOrEnumRuleCall();
+                    				
+
+                    }
+
+
+                    }
+                    break;
 
             }
 
@@ -4887,7 +4898,7 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
 
 
     // $ANTLR start "ruleIntegerLiteralRule"
-    // InternalEvolutionaryAlgorithmLanguage.g:1788:1: ruleIntegerLiteralRule returns [EObject current=null] : ( ( (lv_literal_0_0= RULE_INT ) ) ( (lv_factor_1_0= ruleFactorRule ) ) ) ;
+    // InternalEvolutionaryAlgorithmLanguage.g:1788:1: ruleIntegerLiteralRule returns [EObject current=null] : ( ( (lv_literal_0_0= RULE_INT ) ) ( (lv_factor_1_0= ruleFactorRule ) )? ) ;
     public final EObject ruleIntegerLiteralRule() throws RecognitionException {
         EObject current = null;
 
@@ -4899,11 +4910,11 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalEvolutionaryAlgorithmLanguage.g:1794:2: ( ( ( (lv_literal_0_0= RULE_INT ) ) ( (lv_factor_1_0= ruleFactorRule ) ) ) )
-            // InternalEvolutionaryAlgorithmLanguage.g:1795:2: ( ( (lv_literal_0_0= RULE_INT ) ) ( (lv_factor_1_0= ruleFactorRule ) ) )
+            // InternalEvolutionaryAlgorithmLanguage.g:1794:2: ( ( ( (lv_literal_0_0= RULE_INT ) ) ( (lv_factor_1_0= ruleFactorRule ) )? ) )
+            // InternalEvolutionaryAlgorithmLanguage.g:1795:2: ( ( (lv_literal_0_0= RULE_INT ) ) ( (lv_factor_1_0= ruleFactorRule ) )? )
             {
-            // InternalEvolutionaryAlgorithmLanguage.g:1795:2: ( ( (lv_literal_0_0= RULE_INT ) ) ( (lv_factor_1_0= ruleFactorRule ) ) )
-            // InternalEvolutionaryAlgorithmLanguage.g:1796:3: ( (lv_literal_0_0= RULE_INT ) ) ( (lv_factor_1_0= ruleFactorRule ) )
+            // InternalEvolutionaryAlgorithmLanguage.g:1795:2: ( ( (lv_literal_0_0= RULE_INT ) ) ( (lv_factor_1_0= ruleFactorRule ) )? )
+            // InternalEvolutionaryAlgorithmLanguage.g:1796:3: ( (lv_literal_0_0= RULE_INT ) ) ( (lv_factor_1_0= ruleFactorRule ) )?
             {
             // InternalEvolutionaryAlgorithmLanguage.g:1796:3: ( (lv_literal_0_0= RULE_INT ) )
             // InternalEvolutionaryAlgorithmLanguage.g:1797:4: (lv_literal_0_0= RULE_INT )
@@ -4931,34 +4942,45 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
 
             }
 
-            // InternalEvolutionaryAlgorithmLanguage.g:1814:3: ( (lv_factor_1_0= ruleFactorRule ) )
-            // InternalEvolutionaryAlgorithmLanguage.g:1815:4: (lv_factor_1_0= ruleFactorRule )
-            {
-            // InternalEvolutionaryAlgorithmLanguage.g:1815:4: (lv_factor_1_0= ruleFactorRule )
-            // InternalEvolutionaryAlgorithmLanguage.g:1816:5: lv_factor_1_0= ruleFactorRule
-            {
+            // InternalEvolutionaryAlgorithmLanguage.g:1814:3: ( (lv_factor_1_0= ruleFactorRule ) )?
+            int alt25=2;
+            int LA25_0 = input.LA(1);
 
-            					newCompositeNode(grammarAccess.getIntegerLiteralRuleAccess().getFactorFactorRuleEnumRuleCall_1_0());
-            				
-            pushFollow(FOLLOW_2);
-            lv_factor_1_0=ruleFactorRule();
-
-            state._fsp--;
-
-
-            					if (current==null) {
-            						current = createModelElementForParent(grammarAccess.getIntegerLiteralRuleRule());
-            					}
-            					set(
-            						current,
-            						"factor",
-            						lv_factor_1_0,
-            						"de.evoal.languages.model.el.dsl.ExpressionLanguage.FactorRule");
-            					afterParserOrEnumRuleCall();
-            				
-
+            if ( ((LA25_0>=44 && LA25_0<=63)) ) {
+                alt25=1;
             }
+            switch (alt25) {
+                case 1 :
+                    // InternalEvolutionaryAlgorithmLanguage.g:1815:4: (lv_factor_1_0= ruleFactorRule )
+                    {
+                    // InternalEvolutionaryAlgorithmLanguage.g:1815:4: (lv_factor_1_0= ruleFactorRule )
+                    // InternalEvolutionaryAlgorithmLanguage.g:1816:5: lv_factor_1_0= ruleFactorRule
+                    {
 
+                    					newCompositeNode(grammarAccess.getIntegerLiteralRuleAccess().getFactorFactorRuleEnumRuleCall_1_0());
+                    				
+                    pushFollow(FOLLOW_2);
+                    lv_factor_1_0=ruleFactorRule();
+
+                    state._fsp--;
+
+
+                    					if (current==null) {
+                    						current = createModelElementForParent(grammarAccess.getIntegerLiteralRuleRule());
+                    					}
+                    					set(
+                    						current,
+                    						"factor",
+                    						lv_factor_1_0,
+                    						"de.evoal.languages.model.el.dsl.ExpressionLanguage.FactorRule");
+                    					afterParserOrEnumRuleCall();
+                    				
+
+                    }
+
+
+                    }
+                    break;
 
             }
 
@@ -5145,22 +5167,22 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
             }
 
             // InternalEvolutionaryAlgorithmLanguage.g:1894:3: ( ( (lv_value_1_0= 'true' ) ) | otherlv_2= 'false' )
-            int alt24=2;
-            int LA24_0 = input.LA(1);
+            int alt26=2;
+            int LA26_0 = input.LA(1);
 
-            if ( (LA24_0==30) ) {
-                alt24=1;
+            if ( (LA26_0==30) ) {
+                alt26=1;
             }
-            else if ( (LA24_0==31) ) {
-                alt24=2;
+            else if ( (LA26_0==31) ) {
+                alt26=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 24, 0, input);
+                    new NoViableAltException("", 26, 0, input);
 
                 throw nvae;
             }
-            switch (alt24) {
+            switch (alt26) {
                 case 1 :
                     // InternalEvolutionaryAlgorithmLanguage.g:1895:4: ( (lv_value_1_0= 'true' ) )
                     {
@@ -5276,22 +5298,22 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
             // InternalEvolutionaryAlgorithmLanguage.g:1933:2: (this_QUOTED_ID_0= RULE_QUOTED_ID | this_ID_1= RULE_ID )
             {
             // InternalEvolutionaryAlgorithmLanguage.g:1933:2: (this_QUOTED_ID_0= RULE_QUOTED_ID | this_ID_1= RULE_ID )
-            int alt25=2;
-            int LA25_0 = input.LA(1);
+            int alt27=2;
+            int LA27_0 = input.LA(1);
 
-            if ( (LA25_0==RULE_QUOTED_ID) ) {
-                alt25=1;
+            if ( (LA27_0==RULE_QUOTED_ID) ) {
+                alt27=1;
             }
-            else if ( (LA25_0==RULE_ID) ) {
-                alt25=2;
+            else if ( (LA27_0==RULE_ID) ) {
+                alt27=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 25, 0, input);
+                    new NoViableAltException("", 27, 0, input);
 
                 throw nvae;
             }
-            switch (alt25) {
+            switch (alt27) {
                 case 1 :
                     // InternalEvolutionaryAlgorithmLanguage.g:1934:3: this_QUOTED_ID_0= RULE_QUOTED_ID
                     {
@@ -5456,46 +5478,46 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
             // InternalEvolutionaryAlgorithmLanguage.g:1998:2: ( (enumLiteral_0= '>=' ) | (enumLiteral_1= '>' ) | (enumLiteral_2= '=' ) | (enumLiteral_3= '!=' ) | (enumLiteral_4= '<' ) | (enumLiteral_5= '<=' ) )
             {
             // InternalEvolutionaryAlgorithmLanguage.g:1998:2: ( (enumLiteral_0= '>=' ) | (enumLiteral_1= '>' ) | (enumLiteral_2= '=' ) | (enumLiteral_3= '!=' ) | (enumLiteral_4= '<' ) | (enumLiteral_5= '<=' ) )
-            int alt26=6;
+            int alt28=6;
             switch ( input.LA(1) ) {
             case 33:
                 {
-                alt26=1;
+                alt28=1;
                 }
                 break;
             case 34:
                 {
-                alt26=2;
+                alt28=2;
                 }
                 break;
             case 35:
                 {
-                alt26=3;
+                alt28=3;
                 }
                 break;
             case 36:
                 {
-                alt26=4;
+                alt28=4;
                 }
                 break;
             case 37:
                 {
-                alt26=5;
+                alt28=5;
                 }
                 break;
             case 38:
                 {
-                alt26=6;
+                alt28=6;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 26, 0, input);
+                    new NoViableAltException("", 28, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt26) {
+            switch (alt28) {
                 case 1 :
                     // InternalEvolutionaryAlgorithmLanguage.g:1999:3: (enumLiteral_0= '>=' )
                     {
@@ -5636,22 +5658,22 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
             // InternalEvolutionaryAlgorithmLanguage.g:2057:2: ( (enumLiteral_0= '+' ) | (enumLiteral_1= '-' ) )
             {
             // InternalEvolutionaryAlgorithmLanguage.g:2057:2: ( (enumLiteral_0= '+' ) | (enumLiteral_1= '-' ) )
-            int alt27=2;
-            int LA27_0 = input.LA(1);
+            int alt29=2;
+            int LA29_0 = input.LA(1);
 
-            if ( (LA27_0==39) ) {
-                alt27=1;
+            if ( (LA29_0==39) ) {
+                alt29=1;
             }
-            else if ( (LA27_0==40) ) {
-                alt27=2;
+            else if ( (LA29_0==40) ) {
+                alt29=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 27, 0, input);
+                    new NoViableAltException("", 29, 0, input);
 
                 throw nvae;
             }
-            switch (alt27) {
+            switch (alt29) {
                 case 1 :
                     // InternalEvolutionaryAlgorithmLanguage.g:2058:3: (enumLiteral_0= '+' )
                     {
@@ -5725,31 +5747,31 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
             // InternalEvolutionaryAlgorithmLanguage.g:2084:2: ( (enumLiteral_0= '*' ) | (enumLiteral_1= '/' ) | (enumLiteral_2= '%' ) )
             {
             // InternalEvolutionaryAlgorithmLanguage.g:2084:2: ( (enumLiteral_0= '*' ) | (enumLiteral_1= '/' ) | (enumLiteral_2= '%' ) )
-            int alt28=3;
+            int alt30=3;
             switch ( input.LA(1) ) {
             case 41:
                 {
-                alt28=1;
+                alt30=1;
                 }
                 break;
             case 42:
                 {
-                alt28=2;
+                alt30=2;
                 }
                 break;
             case 43:
                 {
-                alt28=3;
+                alt30=3;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 28, 0, input);
+                    new NoViableAltException("", 30, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt28) {
+            switch (alt30) {
                 case 1 :
                     // InternalEvolutionaryAlgorithmLanguage.g:2085:3: (enumLiteral_0= '*' )
                     {
@@ -5857,116 +5879,116 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
             // InternalEvolutionaryAlgorithmLanguage.g:2119:2: ( (enumLiteral_0= 'Y' ) | (enumLiteral_1= 'Z' ) | (enumLiteral_2= 'E' ) | (enumLiteral_3= 'P' ) | (enumLiteral_4= 'T' ) | (enumLiteral_5= 'G' ) | (enumLiteral_6= 'M' ) | (enumLiteral_7= 'k' ) | (enumLiteral_8= 'h' ) | (enumLiteral_9= 'da' ) | (enumLiteral_10= 'd' ) | (enumLiteral_11= 'c' ) | (enumLiteral_12= 'm' ) | (enumLiteral_13= '\\u00B5' ) | (enumLiteral_14= 'n' ) | (enumLiteral_15= 'p' ) | (enumLiteral_16= 'f' ) | (enumLiteral_17= 'a' ) | (enumLiteral_18= 'z' ) | (enumLiteral_19= 'y' ) )
             {
             // InternalEvolutionaryAlgorithmLanguage.g:2119:2: ( (enumLiteral_0= 'Y' ) | (enumLiteral_1= 'Z' ) | (enumLiteral_2= 'E' ) | (enumLiteral_3= 'P' ) | (enumLiteral_4= 'T' ) | (enumLiteral_5= 'G' ) | (enumLiteral_6= 'M' ) | (enumLiteral_7= 'k' ) | (enumLiteral_8= 'h' ) | (enumLiteral_9= 'da' ) | (enumLiteral_10= 'd' ) | (enumLiteral_11= 'c' ) | (enumLiteral_12= 'm' ) | (enumLiteral_13= '\\u00B5' ) | (enumLiteral_14= 'n' ) | (enumLiteral_15= 'p' ) | (enumLiteral_16= 'f' ) | (enumLiteral_17= 'a' ) | (enumLiteral_18= 'z' ) | (enumLiteral_19= 'y' ) )
-            int alt29=20;
+            int alt31=20;
             switch ( input.LA(1) ) {
             case 44:
                 {
-                alt29=1;
+                alt31=1;
                 }
                 break;
             case 45:
                 {
-                alt29=2;
+                alt31=2;
                 }
                 break;
             case 46:
                 {
-                alt29=3;
+                alt31=3;
                 }
                 break;
             case 47:
                 {
-                alt29=4;
+                alt31=4;
                 }
                 break;
             case 48:
                 {
-                alt29=5;
+                alt31=5;
                 }
                 break;
             case 49:
                 {
-                alt29=6;
+                alt31=6;
                 }
                 break;
             case 50:
                 {
-                alt29=7;
+                alt31=7;
                 }
                 break;
             case 51:
                 {
-                alt29=8;
+                alt31=8;
                 }
                 break;
             case 52:
                 {
-                alt29=9;
+                alt31=9;
                 }
                 break;
             case 53:
                 {
-                alt29=10;
+                alt31=10;
                 }
                 break;
             case 54:
                 {
-                alt29=11;
+                alt31=11;
                 }
                 break;
             case 55:
                 {
-                alt29=12;
+                alt31=12;
                 }
                 break;
             case 56:
                 {
-                alt29=13;
+                alt31=13;
                 }
                 break;
             case 57:
                 {
-                alt29=14;
+                alt31=14;
                 }
                 break;
             case 58:
                 {
-                alt29=15;
+                alt31=15;
                 }
                 break;
             case 59:
                 {
-                alt29=16;
+                alt31=16;
                 }
                 break;
             case 60:
                 {
-                alt29=17;
+                alt31=17;
                 }
                 break;
             case 61:
                 {
-                alt29=18;
+                alt31=18;
                 }
                 break;
             case 62:
                 {
-                alt29=19;
+                alt31=19;
                 }
                 break;
             case 63:
                 {
-                alt29=20;
+                alt31=20;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 29, 0, input);
+                    new NoViableAltException("", 31, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt29) {
+            switch (alt31) {
                 case 1 :
                     // InternalEvolutionaryAlgorithmLanguage.g:2120:3: (enumLiteral_0= 'Y' )
                     {
@@ -6360,7 +6382,7 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
     public static final BitSet FOLLOW_25 = new BitSet(new long[]{0x0000000008000000L});
     public static final BitSet FOLLOW_26 = new BitSet(new long[]{0x00000180FA2400F0L});
     public static final BitSet FOLLOW_27 = new BitSet(new long[]{0x0000000010080000L});
-    public static final BitSet FOLLOW_28 = new BitSet(new long[]{0xFFFFF00000000000L});
+    public static final BitSet FOLLOW_28 = new BitSet(new long[]{0xFFFFF00000000002L});
     public static final BitSet FOLLOW_29 = new BitSet(new long[]{0x0000000100000000L});
     public static final BitSet FOLLOW_30 = new BitSet(new long[]{0x0000000000000040L});
 

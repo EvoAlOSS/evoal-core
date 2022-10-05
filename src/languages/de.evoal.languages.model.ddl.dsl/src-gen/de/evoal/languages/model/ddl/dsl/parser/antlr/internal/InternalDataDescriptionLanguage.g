@@ -1848,7 +1848,7 @@ ruleDoubleLiteralRule returns [EObject current=null]
 					afterParserOrEnumRuleCall();
 				}
 			)
-		)
+		)?
 	)
 ;
 
@@ -1904,7 +1904,7 @@ ruleIntegerLiteralRule returns [EObject current=null]
 					afterParserOrEnumRuleCall();
 				}
 			)
-		)
+		)?
 	)
 ;
 

@@ -582,11 +582,11 @@ public class ExpressionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 		private final RuleCall cFactorFactorRuleEnumRuleCall_1_0 = (RuleCall)cFactorAssignment_1.eContents().get(0);
 		
 		//DoubleLiteralRule returns DoubleLiteral :
-		//    literal = DOUBLE factor = FactorRule
+		//    literal = DOUBLE (factor = FactorRule)?
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//literal = DOUBLE factor = FactorRule
+		//literal = DOUBLE (factor = FactorRule)?
 		public Group getGroup() { return cGroup; }
 		
 		//literal = DOUBLE
@@ -595,7 +595,7 @@ public class ExpressionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 		//DOUBLE
 		public RuleCall getLiteralDOUBLEParserRuleCall_0_0() { return cLiteralDOUBLEParserRuleCall_0_0; }
 		
-		//factor = FactorRule
+		//(factor = FactorRule)?
 		public Assignment getFactorAssignment_1() { return cFactorAssignment_1; }
 		
 		//FactorRule
@@ -610,11 +610,11 @@ public class ExpressionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 		private final RuleCall cFactorFactorRuleEnumRuleCall_1_0 = (RuleCall)cFactorAssignment_1.eContents().get(0);
 		
 		//IntegerLiteralRule returns IntegerLiteral:
-		//    literal = INT factor = FactorRule
+		//    literal = INT (factor = FactorRule)?
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//literal = INT factor = FactorRule
+		//literal = INT (factor = FactorRule)?
 		public Group getGroup() { return cGroup; }
 		
 		//literal = INT
@@ -623,7 +623,7 @@ public class ExpressionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 		//INT
 		public RuleCall getLiteralINTTerminalRuleCall_0_0() { return cLiteralINTTerminalRuleCall_0_0; }
 		
-		//factor = FactorRule
+		//(factor = FactorRule)?
 		public Assignment getFactorAssignment_1() { return cFactorAssignment_1; }
 		
 		//FactorRule
@@ -1401,7 +1401,7 @@ public class ExpressionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 	}
 	
 	//DoubleLiteralRule returns DoubleLiteral :
-	//    literal = DOUBLE factor = FactorRule
+	//    literal = DOUBLE (factor = FactorRule)?
 	//;
 	public DoubleLiteralRuleElements getDoubleLiteralRuleAccess() {
 		return pDoubleLiteralRule;
@@ -1412,7 +1412,7 @@ public class ExpressionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 	}
 	
 	//IntegerLiteralRule returns IntegerLiteral:
-	//    literal = INT factor = FactorRule
+	//    literal = INT (factor = FactorRule)?
 	//;
 	public IntegerLiteralRuleElements getIntegerLiteralRuleAccess() {
 		return pIntegerLiteralRule;

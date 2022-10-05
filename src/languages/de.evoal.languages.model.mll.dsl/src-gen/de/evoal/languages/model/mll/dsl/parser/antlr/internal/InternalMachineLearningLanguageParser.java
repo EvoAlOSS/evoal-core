@@ -7385,11 +7385,11 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
             if ( (LA37_0==RULE_INT) ) {
                 int LA37_1 = input.LA(2);
 
-                if ( ((LA37_1>=60 && LA37_1<=79)) ) {
-                    alt37=2;
-                }
-                else if ( (LA37_1==48) ) {
+                if ( (LA37_1==48) ) {
                     alt37=1;
+                }
+                else if ( (LA37_1==EOF||LA37_1==13||LA37_1==16||LA37_1==33||(LA37_1>=38 && LA37_1<=40)||LA37_1==42||LA37_1==44||(LA37_1>=49 && LA37_1<=79)) ) {
+                    alt37=2;
                 }
                 else {
                     if (state.backtracking>0) {state.failed=true; return current;}
@@ -7526,7 +7526,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start "ruleDoubleLiteralRule"
-    // InternalMachineLearningLanguage.g:2565:1: ruleDoubleLiteralRule returns [EObject current=null] : ( ( (lv_literal_0_0= ruleDOUBLE ) ) ( (lv_factor_1_0= ruleFactorRule ) ) ) ;
+    // InternalMachineLearningLanguage.g:2565:1: ruleDoubleLiteralRule returns [EObject current=null] : ( ( (lv_literal_0_0= ruleDOUBLE ) ) ( (lv_factor_1_0= ruleFactorRule ) )? ) ;
     public final EObject ruleDoubleLiteralRule() throws RecognitionException {
         EObject current = null;
 
@@ -7539,11 +7539,11 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
         	enterRule();
 
         try {
-            // InternalMachineLearningLanguage.g:2571:2: ( ( ( (lv_literal_0_0= ruleDOUBLE ) ) ( (lv_factor_1_0= ruleFactorRule ) ) ) )
-            // InternalMachineLearningLanguage.g:2572:2: ( ( (lv_literal_0_0= ruleDOUBLE ) ) ( (lv_factor_1_0= ruleFactorRule ) ) )
+            // InternalMachineLearningLanguage.g:2571:2: ( ( ( (lv_literal_0_0= ruleDOUBLE ) ) ( (lv_factor_1_0= ruleFactorRule ) )? ) )
+            // InternalMachineLearningLanguage.g:2572:2: ( ( (lv_literal_0_0= ruleDOUBLE ) ) ( (lv_factor_1_0= ruleFactorRule ) )? )
             {
-            // InternalMachineLearningLanguage.g:2572:2: ( ( (lv_literal_0_0= ruleDOUBLE ) ) ( (lv_factor_1_0= ruleFactorRule ) ) )
-            // InternalMachineLearningLanguage.g:2573:3: ( (lv_literal_0_0= ruleDOUBLE ) ) ( (lv_factor_1_0= ruleFactorRule ) )
+            // InternalMachineLearningLanguage.g:2572:2: ( ( (lv_literal_0_0= ruleDOUBLE ) ) ( (lv_factor_1_0= ruleFactorRule ) )? )
+            // InternalMachineLearningLanguage.g:2573:3: ( (lv_literal_0_0= ruleDOUBLE ) ) ( (lv_factor_1_0= ruleFactorRule ) )?
             {
             // InternalMachineLearningLanguage.g:2573:3: ( (lv_literal_0_0= ruleDOUBLE ) )
             // InternalMachineLearningLanguage.g:2574:4: (lv_literal_0_0= ruleDOUBLE )
@@ -7580,38 +7580,49 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
 
             }
 
-            // InternalMachineLearningLanguage.g:2592:3: ( (lv_factor_1_0= ruleFactorRule ) )
-            // InternalMachineLearningLanguage.g:2593:4: (lv_factor_1_0= ruleFactorRule )
-            {
-            // InternalMachineLearningLanguage.g:2593:4: (lv_factor_1_0= ruleFactorRule )
-            // InternalMachineLearningLanguage.g:2594:5: lv_factor_1_0= ruleFactorRule
-            {
-            if ( state.backtracking==0 ) {
+            // InternalMachineLearningLanguage.g:2592:3: ( (lv_factor_1_0= ruleFactorRule ) )?
+            int alt38=2;
+            int LA38_0 = input.LA(1);
 
-              					newCompositeNode(grammarAccess.getDoubleLiteralRuleAccess().getFactorFactorRuleEnumRuleCall_1_0());
-              				
+            if ( ((LA38_0>=60 && LA38_0<=79)) ) {
+                alt38=1;
             }
-            pushFollow(FOLLOW_2);
-            lv_factor_1_0=ruleFactorRule();
+            switch (alt38) {
+                case 1 :
+                    // InternalMachineLearningLanguage.g:2593:4: (lv_factor_1_0= ruleFactorRule )
+                    {
+                    // InternalMachineLearningLanguage.g:2593:4: (lv_factor_1_0= ruleFactorRule )
+                    // InternalMachineLearningLanguage.g:2594:5: lv_factor_1_0= ruleFactorRule
+                    {
+                    if ( state.backtracking==0 ) {
 
-            state._fsp--;
-            if (state.failed) return current;
-            if ( state.backtracking==0 ) {
+                      					newCompositeNode(grammarAccess.getDoubleLiteralRuleAccess().getFactorFactorRuleEnumRuleCall_1_0());
+                      				
+                    }
+                    pushFollow(FOLLOW_2);
+                    lv_factor_1_0=ruleFactorRule();
 
-              					if (current==null) {
-              						current = createModelElementForParent(grammarAccess.getDoubleLiteralRuleRule());
-              					}
-              					set(
-              						current,
-              						"factor",
-              						lv_factor_1_0,
-              						"de.evoal.languages.model.el.dsl.ExpressionLanguage.FactorRule");
-              					afterParserOrEnumRuleCall();
-              				
-            }
+                    state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
 
-            }
+                      					if (current==null) {
+                      						current = createModelElementForParent(grammarAccess.getDoubleLiteralRuleRule());
+                      					}
+                      					set(
+                      						current,
+                      						"factor",
+                      						lv_factor_1_0,
+                      						"de.evoal.languages.model.el.dsl.ExpressionLanguage.FactorRule");
+                      					afterParserOrEnumRuleCall();
+                      				
+                    }
 
+                    }
+
+
+                    }
+                    break;
 
             }
 
@@ -7680,7 +7691,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start "ruleIntegerLiteralRule"
-    // InternalMachineLearningLanguage.g:2622:1: ruleIntegerLiteralRule returns [EObject current=null] : ( ( (lv_literal_0_0= RULE_INT ) ) ( (lv_factor_1_0= ruleFactorRule ) ) ) ;
+    // InternalMachineLearningLanguage.g:2622:1: ruleIntegerLiteralRule returns [EObject current=null] : ( ( (lv_literal_0_0= RULE_INT ) ) ( (lv_factor_1_0= ruleFactorRule ) )? ) ;
     public final EObject ruleIntegerLiteralRule() throws RecognitionException {
         EObject current = null;
 
@@ -7692,11 +7703,11 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
         	enterRule();
 
         try {
-            // InternalMachineLearningLanguage.g:2628:2: ( ( ( (lv_literal_0_0= RULE_INT ) ) ( (lv_factor_1_0= ruleFactorRule ) ) ) )
-            // InternalMachineLearningLanguage.g:2629:2: ( ( (lv_literal_0_0= RULE_INT ) ) ( (lv_factor_1_0= ruleFactorRule ) ) )
+            // InternalMachineLearningLanguage.g:2628:2: ( ( ( (lv_literal_0_0= RULE_INT ) ) ( (lv_factor_1_0= ruleFactorRule ) )? ) )
+            // InternalMachineLearningLanguage.g:2629:2: ( ( (lv_literal_0_0= RULE_INT ) ) ( (lv_factor_1_0= ruleFactorRule ) )? )
             {
-            // InternalMachineLearningLanguage.g:2629:2: ( ( (lv_literal_0_0= RULE_INT ) ) ( (lv_factor_1_0= ruleFactorRule ) ) )
-            // InternalMachineLearningLanguage.g:2630:3: ( (lv_literal_0_0= RULE_INT ) ) ( (lv_factor_1_0= ruleFactorRule ) )
+            // InternalMachineLearningLanguage.g:2629:2: ( ( (lv_literal_0_0= RULE_INT ) ) ( (lv_factor_1_0= ruleFactorRule ) )? )
+            // InternalMachineLearningLanguage.g:2630:3: ( (lv_literal_0_0= RULE_INT ) ) ( (lv_factor_1_0= ruleFactorRule ) )?
             {
             // InternalMachineLearningLanguage.g:2630:3: ( (lv_literal_0_0= RULE_INT ) )
             // InternalMachineLearningLanguage.g:2631:4: (lv_literal_0_0= RULE_INT )
@@ -7728,38 +7739,49 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
 
             }
 
-            // InternalMachineLearningLanguage.g:2648:3: ( (lv_factor_1_0= ruleFactorRule ) )
-            // InternalMachineLearningLanguage.g:2649:4: (lv_factor_1_0= ruleFactorRule )
-            {
-            // InternalMachineLearningLanguage.g:2649:4: (lv_factor_1_0= ruleFactorRule )
-            // InternalMachineLearningLanguage.g:2650:5: lv_factor_1_0= ruleFactorRule
-            {
-            if ( state.backtracking==0 ) {
+            // InternalMachineLearningLanguage.g:2648:3: ( (lv_factor_1_0= ruleFactorRule ) )?
+            int alt39=2;
+            int LA39_0 = input.LA(1);
 
-              					newCompositeNode(grammarAccess.getIntegerLiteralRuleAccess().getFactorFactorRuleEnumRuleCall_1_0());
-              				
+            if ( ((LA39_0>=60 && LA39_0<=79)) ) {
+                alt39=1;
             }
-            pushFollow(FOLLOW_2);
-            lv_factor_1_0=ruleFactorRule();
+            switch (alt39) {
+                case 1 :
+                    // InternalMachineLearningLanguage.g:2649:4: (lv_factor_1_0= ruleFactorRule )
+                    {
+                    // InternalMachineLearningLanguage.g:2649:4: (lv_factor_1_0= ruleFactorRule )
+                    // InternalMachineLearningLanguage.g:2650:5: lv_factor_1_0= ruleFactorRule
+                    {
+                    if ( state.backtracking==0 ) {
 
-            state._fsp--;
-            if (state.failed) return current;
-            if ( state.backtracking==0 ) {
+                      					newCompositeNode(grammarAccess.getIntegerLiteralRuleAccess().getFactorFactorRuleEnumRuleCall_1_0());
+                      				
+                    }
+                    pushFollow(FOLLOW_2);
+                    lv_factor_1_0=ruleFactorRule();
 
-              					if (current==null) {
-              						current = createModelElementForParent(grammarAccess.getIntegerLiteralRuleRule());
-              					}
-              					set(
-              						current,
-              						"factor",
-              						lv_factor_1_0,
-              						"de.evoal.languages.model.el.dsl.ExpressionLanguage.FactorRule");
-              					afterParserOrEnumRuleCall();
-              				
-            }
+                    state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
 
-            }
+                      					if (current==null) {
+                      						current = createModelElementForParent(grammarAccess.getIntegerLiteralRuleRule());
+                      					}
+                      					set(
+                      						current,
+                      						"factor",
+                      						lv_factor_1_0,
+                      						"de.evoal.languages.model.el.dsl.ExpressionLanguage.FactorRule");
+                      					afterParserOrEnumRuleCall();
+                      				
+                    }
 
+                    }
+
+
+                    }
+                    break;
 
             }
 
@@ -7969,23 +7991,23 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
             }
 
             // InternalMachineLearningLanguage.g:2731:3: ( ( (lv_value_1_0= 'true' ) ) | otherlv_2= 'false' )
-            int alt38=2;
-            int LA38_0 = input.LA(1);
+            int alt40=2;
+            int LA40_0 = input.LA(1);
 
-            if ( (LA38_0==46) ) {
-                alt38=1;
+            if ( (LA40_0==46) ) {
+                alt40=1;
             }
-            else if ( (LA38_0==47) ) {
-                alt38=2;
+            else if ( (LA40_0==47) ) {
+                alt40=2;
             }
             else {
                 if (state.backtracking>0) {state.failed=true; return current;}
                 NoViableAltException nvae =
-                    new NoViableAltException("", 38, 0, input);
+                    new NoViableAltException("", 40, 0, input);
 
                 throw nvae;
             }
-            switch (alt38) {
+            switch (alt40) {
                 case 1 :
                     // InternalMachineLearningLanguage.g:2732:4: ( (lv_value_1_0= 'true' ) )
                     {
@@ -8113,23 +8135,23 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
             // InternalMachineLearningLanguage.g:2770:2: (this_QUOTED_ID_0= RULE_QUOTED_ID | this_ID_1= RULE_ID )
             {
             // InternalMachineLearningLanguage.g:2770:2: (this_QUOTED_ID_0= RULE_QUOTED_ID | this_ID_1= RULE_ID )
-            int alt39=2;
-            int LA39_0 = input.LA(1);
+            int alt41=2;
+            int LA41_0 = input.LA(1);
 
-            if ( (LA39_0==RULE_QUOTED_ID) ) {
-                alt39=1;
+            if ( (LA41_0==RULE_QUOTED_ID) ) {
+                alt41=1;
             }
-            else if ( (LA39_0==RULE_ID) ) {
-                alt39=2;
+            else if ( (LA41_0==RULE_ID) ) {
+                alt41=2;
             }
             else {
                 if (state.backtracking>0) {state.failed=true; return current;}
                 NoViableAltException nvae =
-                    new NoViableAltException("", 39, 0, input);
+                    new NoViableAltException("", 41, 0, input);
 
                 throw nvae;
             }
-            switch (alt39) {
+            switch (alt41) {
                 case 1 :
                     // InternalMachineLearningLanguage.g:2771:3: this_QUOTED_ID_0= RULE_QUOTED_ID
                     {
@@ -8320,47 +8342,47 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
             // InternalMachineLearningLanguage.g:2835:2: ( (enumLiteral_0= '>=' ) | (enumLiteral_1= '>' ) | (enumLiteral_2= '=' ) | (enumLiteral_3= '!=' ) | (enumLiteral_4= '<' ) | (enumLiteral_5= '<=' ) )
             {
             // InternalMachineLearningLanguage.g:2835:2: ( (enumLiteral_0= '>=' ) | (enumLiteral_1= '>' ) | (enumLiteral_2= '=' ) | (enumLiteral_3= '!=' ) | (enumLiteral_4= '<' ) | (enumLiteral_5= '<=' ) )
-            int alt40=6;
+            int alt42=6;
             switch ( input.LA(1) ) {
             case 49:
                 {
-                alt40=1;
+                alt42=1;
                 }
                 break;
             case 50:
                 {
-                alt40=2;
+                alt42=2;
                 }
                 break;
             case 51:
                 {
-                alt40=3;
+                alt42=3;
                 }
                 break;
             case 52:
                 {
-                alt40=4;
+                alt42=4;
                 }
                 break;
             case 53:
                 {
-                alt40=5;
+                alt42=5;
                 }
                 break;
             case 54:
                 {
-                alt40=6;
+                alt42=6;
                 }
                 break;
             default:
                 if (state.backtracking>0) {state.failed=true; return current;}
                 NoViableAltException nvae =
-                    new NoViableAltException("", 40, 0, input);
+                    new NoViableAltException("", 42, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt40) {
+            switch (alt42) {
                 case 1 :
                     // InternalMachineLearningLanguage.g:2836:3: (enumLiteral_0= '>=' )
                     {
@@ -8515,23 +8537,23 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
             // InternalMachineLearningLanguage.g:2894:2: ( (enumLiteral_0= '+' ) | (enumLiteral_1= '-' ) )
             {
             // InternalMachineLearningLanguage.g:2894:2: ( (enumLiteral_0= '+' ) | (enumLiteral_1= '-' ) )
-            int alt41=2;
-            int LA41_0 = input.LA(1);
+            int alt43=2;
+            int LA43_0 = input.LA(1);
 
-            if ( (LA41_0==55) ) {
-                alt41=1;
+            if ( (LA43_0==55) ) {
+                alt43=1;
             }
-            else if ( (LA41_0==56) ) {
-                alt41=2;
+            else if ( (LA43_0==56) ) {
+                alt43=2;
             }
             else {
                 if (state.backtracking>0) {state.failed=true; return current;}
                 NoViableAltException nvae =
-                    new NoViableAltException("", 41, 0, input);
+                    new NoViableAltException("", 43, 0, input);
 
                 throw nvae;
             }
-            switch (alt41) {
+            switch (alt43) {
                 case 1 :
                     // InternalMachineLearningLanguage.g:2895:3: (enumLiteral_0= '+' )
                     {
@@ -8611,32 +8633,32 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
             // InternalMachineLearningLanguage.g:2921:2: ( (enumLiteral_0= '*' ) | (enumLiteral_1= '/' ) | (enumLiteral_2= '%' ) )
             {
             // InternalMachineLearningLanguage.g:2921:2: ( (enumLiteral_0= '*' ) | (enumLiteral_1= '/' ) | (enumLiteral_2= '%' ) )
-            int alt42=3;
+            int alt44=3;
             switch ( input.LA(1) ) {
             case 57:
                 {
-                alt42=1;
+                alt44=1;
                 }
                 break;
             case 58:
                 {
-                alt42=2;
+                alt44=2;
                 }
                 break;
             case 59:
                 {
-                alt42=3;
+                alt44=3;
                 }
                 break;
             default:
                 if (state.backtracking>0) {state.failed=true; return current;}
                 NoViableAltException nvae =
-                    new NoViableAltException("", 42, 0, input);
+                    new NoViableAltException("", 44, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt42) {
+            switch (alt44) {
                 case 1 :
                     // InternalMachineLearningLanguage.g:2922:3: (enumLiteral_0= '*' )
                     {
@@ -8752,117 +8774,117 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
             // InternalMachineLearningLanguage.g:2956:2: ( (enumLiteral_0= 'Y' ) | (enumLiteral_1= 'Z' ) | (enumLiteral_2= 'E' ) | (enumLiteral_3= 'P' ) | (enumLiteral_4= 'T' ) | (enumLiteral_5= 'G' ) | (enumLiteral_6= 'M' ) | (enumLiteral_7= 'k' ) | (enumLiteral_8= 'h' ) | (enumLiteral_9= 'da' ) | (enumLiteral_10= 'd' ) | (enumLiteral_11= 'c' ) | (enumLiteral_12= 'm' ) | (enumLiteral_13= '\\u00B5' ) | (enumLiteral_14= 'n' ) | (enumLiteral_15= 'p' ) | (enumLiteral_16= 'f' ) | (enumLiteral_17= 'a' ) | (enumLiteral_18= 'z' ) | (enumLiteral_19= 'y' ) )
             {
             // InternalMachineLearningLanguage.g:2956:2: ( (enumLiteral_0= 'Y' ) | (enumLiteral_1= 'Z' ) | (enumLiteral_2= 'E' ) | (enumLiteral_3= 'P' ) | (enumLiteral_4= 'T' ) | (enumLiteral_5= 'G' ) | (enumLiteral_6= 'M' ) | (enumLiteral_7= 'k' ) | (enumLiteral_8= 'h' ) | (enumLiteral_9= 'da' ) | (enumLiteral_10= 'd' ) | (enumLiteral_11= 'c' ) | (enumLiteral_12= 'm' ) | (enumLiteral_13= '\\u00B5' ) | (enumLiteral_14= 'n' ) | (enumLiteral_15= 'p' ) | (enumLiteral_16= 'f' ) | (enumLiteral_17= 'a' ) | (enumLiteral_18= 'z' ) | (enumLiteral_19= 'y' ) )
-            int alt43=20;
+            int alt45=20;
             switch ( input.LA(1) ) {
             case 60:
                 {
-                alt43=1;
+                alt45=1;
                 }
                 break;
             case 61:
                 {
-                alt43=2;
+                alt45=2;
                 }
                 break;
             case 62:
                 {
-                alt43=3;
+                alt45=3;
                 }
                 break;
             case 63:
                 {
-                alt43=4;
+                alt45=4;
                 }
                 break;
             case 64:
                 {
-                alt43=5;
+                alt45=5;
                 }
                 break;
             case 65:
                 {
-                alt43=6;
+                alt45=6;
                 }
                 break;
             case 66:
                 {
-                alt43=7;
+                alt45=7;
                 }
                 break;
             case 67:
                 {
-                alt43=8;
+                alt45=8;
                 }
                 break;
             case 68:
                 {
-                alt43=9;
+                alt45=9;
                 }
                 break;
             case 69:
                 {
-                alt43=10;
+                alt45=10;
                 }
                 break;
             case 70:
                 {
-                alt43=11;
+                alt45=11;
                 }
                 break;
             case 71:
                 {
-                alt43=12;
+                alt45=12;
                 }
                 break;
             case 72:
                 {
-                alt43=13;
+                alt45=13;
                 }
                 break;
             case 73:
                 {
-                alt43=14;
+                alt45=14;
                 }
                 break;
             case 74:
                 {
-                alt43=15;
+                alt45=15;
                 }
                 break;
             case 75:
                 {
-                alt43=16;
+                alt45=16;
                 }
                 break;
             case 76:
                 {
-                alt43=17;
+                alt45=17;
                 }
                 break;
             case 77:
                 {
-                alt43=18;
+                alt45=18;
                 }
                 break;
             case 78:
                 {
-                alt43=19;
+                alt45=19;
                 }
                 break;
             case 79:
                 {
-                alt43=20;
+                alt45=20;
                 }
                 break;
             default:
                 if (state.backtracking>0) {state.failed=true; return current;}
                 NoViableAltException nvae =
-                    new NoViableAltException("", 43, 0, input);
+                    new NoViableAltException("", 45, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt43) {
+            switch (alt45) {
                 case 1 :
                     // InternalMachineLearningLanguage.g:2957:3: (enumLiteral_0= 'Y' )
                     {
@@ -9322,7 +9344,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
     public static final BitSet FOLLOW_49 = new BitSet(new long[]{0x0000080000000000L});
     public static final BitSet FOLLOW_50 = new BitSet(new long[]{0x0180FA21000000F0L});
     public static final BitSet FOLLOW_51 = new BitSet(new long[]{0x0000100000010000L});
-    public static final BitSet FOLLOW_52 = new BitSet(new long[]{0xF000000000000000L,0x000000000000FFFFL});
+    public static final BitSet FOLLOW_52 = new BitSet(new long[]{0xF000000000000002L,0x000000000000FFFFL});
     public static final BitSet FOLLOW_53 = new BitSet(new long[]{0x0001000000000000L});
 
 }

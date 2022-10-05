@@ -638,7 +638,7 @@ public class EvolutionaryAlgorithmLanguageGrammarAccess extends AbstractElementF
 	}
 	
 	//DoubleLiteralRule returns DoubleLiteral :
-	//    literal = DOUBLE factor = FactorRule
+	//    literal = DOUBLE (factor = FactorRule)?
 	//;
 	public ExpressionLanguageGrammarAccess.DoubleLiteralRuleElements getDoubleLiteralRuleAccess() {
 		return gaExpressionLanguage.getDoubleLiteralRuleAccess();
@@ -649,7 +649,7 @@ public class EvolutionaryAlgorithmLanguageGrammarAccess extends AbstractElementF
 	}
 	
 	//IntegerLiteralRule returns IntegerLiteral:
-	//    literal = INT factor = FactorRule
+	//    literal = INT (factor = FactorRule)?
 	//;
 	public ExpressionLanguageGrammarAccess.IntegerLiteralRuleElements getIntegerLiteralRuleAccess() {
 		return gaExpressionLanguage.getIntegerLiteralRuleAccess();

@@ -3625,7 +3625,7 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
                 if ( (LA5_1==61) ) {
                     alt5=1;
                 }
-                else if ( ((LA5_1>=24 && LA5_1<=43)) ) {
+                else if ( (LA5_1==EOF||(LA5_1>=13 && LA5_1<=43)||LA5_1==45||(LA5_1>=51 && LA5_1<=52)||(LA5_1>=54 && LA5_1<=57)||LA5_1==59) ) {
                     alt5=2;
                 }
                 else {
@@ -11382,27 +11382,38 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
 
 
     // $ANTLR start "rule__DoubleLiteralRule__Group__1__Impl"
-    // InternalEvolutionaryAlgorithmLanguage.g:3585:1: rule__DoubleLiteralRule__Group__1__Impl : ( ( rule__DoubleLiteralRule__FactorAssignment_1 ) ) ;
+    // InternalEvolutionaryAlgorithmLanguage.g:3585:1: rule__DoubleLiteralRule__Group__1__Impl : ( ( rule__DoubleLiteralRule__FactorAssignment_1 )? ) ;
     public final void rule__DoubleLiteralRule__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalEvolutionaryAlgorithmLanguage.g:3589:1: ( ( ( rule__DoubleLiteralRule__FactorAssignment_1 ) ) )
-            // InternalEvolutionaryAlgorithmLanguage.g:3590:1: ( ( rule__DoubleLiteralRule__FactorAssignment_1 ) )
+            // InternalEvolutionaryAlgorithmLanguage.g:3589:1: ( ( ( rule__DoubleLiteralRule__FactorAssignment_1 )? ) )
+            // InternalEvolutionaryAlgorithmLanguage.g:3590:1: ( ( rule__DoubleLiteralRule__FactorAssignment_1 )? )
             {
-            // InternalEvolutionaryAlgorithmLanguage.g:3590:1: ( ( rule__DoubleLiteralRule__FactorAssignment_1 ) )
-            // InternalEvolutionaryAlgorithmLanguage.g:3591:2: ( rule__DoubleLiteralRule__FactorAssignment_1 )
+            // InternalEvolutionaryAlgorithmLanguage.g:3590:1: ( ( rule__DoubleLiteralRule__FactorAssignment_1 )? )
+            // InternalEvolutionaryAlgorithmLanguage.g:3591:2: ( rule__DoubleLiteralRule__FactorAssignment_1 )?
             {
              before(grammarAccess.getDoubleLiteralRuleAccess().getFactorAssignment_1()); 
-            // InternalEvolutionaryAlgorithmLanguage.g:3592:2: ( rule__DoubleLiteralRule__FactorAssignment_1 )
-            // InternalEvolutionaryAlgorithmLanguage.g:3592:3: rule__DoubleLiteralRule__FactorAssignment_1
-            {
-            pushFollow(FOLLOW_2);
-            rule__DoubleLiteralRule__FactorAssignment_1();
+            // InternalEvolutionaryAlgorithmLanguage.g:3592:2: ( rule__DoubleLiteralRule__FactorAssignment_1 )?
+            int alt30=2;
+            int LA30_0 = input.LA(1);
 
-            state._fsp--;
+            if ( ((LA30_0>=24 && LA30_0<=43)) ) {
+                alt30=1;
+            }
+            switch (alt30) {
+                case 1 :
+                    // InternalEvolutionaryAlgorithmLanguage.g:3592:3: rule__DoubleLiteralRule__FactorAssignment_1
+                    {
+                    pushFollow(FOLLOW_2);
+                    rule__DoubleLiteralRule__FactorAssignment_1();
 
+                    state._fsp--;
+
+
+                    }
+                    break;
 
             }
 
@@ -11547,27 +11558,38 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
 
 
     // $ANTLR start "rule__IntegerLiteralRule__Group__1__Impl"
-    // InternalEvolutionaryAlgorithmLanguage.g:3639:1: rule__IntegerLiteralRule__Group__1__Impl : ( ( rule__IntegerLiteralRule__FactorAssignment_1 ) ) ;
+    // InternalEvolutionaryAlgorithmLanguage.g:3639:1: rule__IntegerLiteralRule__Group__1__Impl : ( ( rule__IntegerLiteralRule__FactorAssignment_1 )? ) ;
     public final void rule__IntegerLiteralRule__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalEvolutionaryAlgorithmLanguage.g:3643:1: ( ( ( rule__IntegerLiteralRule__FactorAssignment_1 ) ) )
-            // InternalEvolutionaryAlgorithmLanguage.g:3644:1: ( ( rule__IntegerLiteralRule__FactorAssignment_1 ) )
+            // InternalEvolutionaryAlgorithmLanguage.g:3643:1: ( ( ( rule__IntegerLiteralRule__FactorAssignment_1 )? ) )
+            // InternalEvolutionaryAlgorithmLanguage.g:3644:1: ( ( rule__IntegerLiteralRule__FactorAssignment_1 )? )
             {
-            // InternalEvolutionaryAlgorithmLanguage.g:3644:1: ( ( rule__IntegerLiteralRule__FactorAssignment_1 ) )
-            // InternalEvolutionaryAlgorithmLanguage.g:3645:2: ( rule__IntegerLiteralRule__FactorAssignment_1 )
+            // InternalEvolutionaryAlgorithmLanguage.g:3644:1: ( ( rule__IntegerLiteralRule__FactorAssignment_1 )? )
+            // InternalEvolutionaryAlgorithmLanguage.g:3645:2: ( rule__IntegerLiteralRule__FactorAssignment_1 )?
             {
              before(grammarAccess.getIntegerLiteralRuleAccess().getFactorAssignment_1()); 
-            // InternalEvolutionaryAlgorithmLanguage.g:3646:2: ( rule__IntegerLiteralRule__FactorAssignment_1 )
-            // InternalEvolutionaryAlgorithmLanguage.g:3646:3: rule__IntegerLiteralRule__FactorAssignment_1
-            {
-            pushFollow(FOLLOW_2);
-            rule__IntegerLiteralRule__FactorAssignment_1();
+            // InternalEvolutionaryAlgorithmLanguage.g:3646:2: ( rule__IntegerLiteralRule__FactorAssignment_1 )?
+            int alt31=2;
+            int LA31_0 = input.LA(1);
 
-            state._fsp--;
+            if ( ((LA31_0>=24 && LA31_0<=43)) ) {
+                alt31=1;
+            }
+            switch (alt31) {
+                case 1 :
+                    // InternalEvolutionaryAlgorithmLanguage.g:3646:3: rule__IntegerLiteralRule__FactorAssignment_1
+                    {
+                    pushFollow(FOLLOW_2);
+                    rule__IntegerLiteralRule__FactorAssignment_1();
 
+                    state._fsp--;
+
+
+                    }
+                    break;
 
             }
 

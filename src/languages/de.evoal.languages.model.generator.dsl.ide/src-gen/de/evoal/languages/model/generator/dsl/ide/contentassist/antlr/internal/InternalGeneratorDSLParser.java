@@ -4568,11 +4568,11 @@ public class InternalGeneratorDSLParser extends AbstractInternalContentAssistPar
             if ( (LA8_0==RULE_INT) ) {
                 int LA8_1 = input.LA(2);
 
-                if ( (LA8_1==77) ) {
-                    alt8=1;
-                }
-                else if ( ((LA8_1>=24 && LA8_1<=43)) ) {
+                if ( (LA8_1==EOF||(LA8_1>=13 && LA8_1<=43)||LA8_1==45||LA8_1==48||LA8_1==54||(LA8_1>=69 && LA8_1<=72)||LA8_1==74) ) {
                     alt8=2;
+                }
+                else if ( (LA8_1==77) ) {
+                    alt8=1;
                 }
                 else {
                     NoViableAltException nvae =
@@ -17333,27 +17333,38 @@ public class InternalGeneratorDSLParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__DoubleLiteralRule__Group__1__Impl"
-    // InternalGeneratorDSL.g:5546:1: rule__DoubleLiteralRule__Group__1__Impl : ( ( rule__DoubleLiteralRule__FactorAssignment_1 ) ) ;
+    // InternalGeneratorDSL.g:5546:1: rule__DoubleLiteralRule__Group__1__Impl : ( ( rule__DoubleLiteralRule__FactorAssignment_1 )? ) ;
     public final void rule__DoubleLiteralRule__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalGeneratorDSL.g:5550:1: ( ( ( rule__DoubleLiteralRule__FactorAssignment_1 ) ) )
-            // InternalGeneratorDSL.g:5551:1: ( ( rule__DoubleLiteralRule__FactorAssignment_1 ) )
+            // InternalGeneratorDSL.g:5550:1: ( ( ( rule__DoubleLiteralRule__FactorAssignment_1 )? ) )
+            // InternalGeneratorDSL.g:5551:1: ( ( rule__DoubleLiteralRule__FactorAssignment_1 )? )
             {
-            // InternalGeneratorDSL.g:5551:1: ( ( rule__DoubleLiteralRule__FactorAssignment_1 ) )
-            // InternalGeneratorDSL.g:5552:2: ( rule__DoubleLiteralRule__FactorAssignment_1 )
+            // InternalGeneratorDSL.g:5551:1: ( ( rule__DoubleLiteralRule__FactorAssignment_1 )? )
+            // InternalGeneratorDSL.g:5552:2: ( rule__DoubleLiteralRule__FactorAssignment_1 )?
             {
              before(grammarAccess.getDoubleLiteralRuleAccess().getFactorAssignment_1()); 
-            // InternalGeneratorDSL.g:5553:2: ( rule__DoubleLiteralRule__FactorAssignment_1 )
-            // InternalGeneratorDSL.g:5553:3: rule__DoubleLiteralRule__FactorAssignment_1
-            {
-            pushFollow(FOLLOW_2);
-            rule__DoubleLiteralRule__FactorAssignment_1();
+            // InternalGeneratorDSL.g:5553:2: ( rule__DoubleLiteralRule__FactorAssignment_1 )?
+            int alt44=2;
+            int LA44_0 = input.LA(1);
 
-            state._fsp--;
+            if ( ((LA44_0>=24 && LA44_0<=43)) ) {
+                alt44=1;
+            }
+            switch (alt44) {
+                case 1 :
+                    // InternalGeneratorDSL.g:5553:3: rule__DoubleLiteralRule__FactorAssignment_1
+                    {
+                    pushFollow(FOLLOW_2);
+                    rule__DoubleLiteralRule__FactorAssignment_1();
 
+                    state._fsp--;
+
+
+                    }
+                    break;
 
             }
 
@@ -17498,27 +17509,38 @@ public class InternalGeneratorDSLParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__IntegerLiteralRule__Group__1__Impl"
-    // InternalGeneratorDSL.g:5600:1: rule__IntegerLiteralRule__Group__1__Impl : ( ( rule__IntegerLiteralRule__FactorAssignment_1 ) ) ;
+    // InternalGeneratorDSL.g:5600:1: rule__IntegerLiteralRule__Group__1__Impl : ( ( rule__IntegerLiteralRule__FactorAssignment_1 )? ) ;
     public final void rule__IntegerLiteralRule__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalGeneratorDSL.g:5604:1: ( ( ( rule__IntegerLiteralRule__FactorAssignment_1 ) ) )
-            // InternalGeneratorDSL.g:5605:1: ( ( rule__IntegerLiteralRule__FactorAssignment_1 ) )
+            // InternalGeneratorDSL.g:5604:1: ( ( ( rule__IntegerLiteralRule__FactorAssignment_1 )? ) )
+            // InternalGeneratorDSL.g:5605:1: ( ( rule__IntegerLiteralRule__FactorAssignment_1 )? )
             {
-            // InternalGeneratorDSL.g:5605:1: ( ( rule__IntegerLiteralRule__FactorAssignment_1 ) )
-            // InternalGeneratorDSL.g:5606:2: ( rule__IntegerLiteralRule__FactorAssignment_1 )
+            // InternalGeneratorDSL.g:5605:1: ( ( rule__IntegerLiteralRule__FactorAssignment_1 )? )
+            // InternalGeneratorDSL.g:5606:2: ( rule__IntegerLiteralRule__FactorAssignment_1 )?
             {
              before(grammarAccess.getIntegerLiteralRuleAccess().getFactorAssignment_1()); 
-            // InternalGeneratorDSL.g:5607:2: ( rule__IntegerLiteralRule__FactorAssignment_1 )
-            // InternalGeneratorDSL.g:5607:3: rule__IntegerLiteralRule__FactorAssignment_1
-            {
-            pushFollow(FOLLOW_2);
-            rule__IntegerLiteralRule__FactorAssignment_1();
+            // InternalGeneratorDSL.g:5607:2: ( rule__IntegerLiteralRule__FactorAssignment_1 )?
+            int alt45=2;
+            int LA45_0 = input.LA(1);
 
-            state._fsp--;
+            if ( ((LA45_0>=24 && LA45_0<=43)) ) {
+                alt45=1;
+            }
+            switch (alt45) {
+                case 1 :
+                    // InternalGeneratorDSL.g:5607:3: rule__IntegerLiteralRule__FactorAssignment_1
+                    {
+                    pushFollow(FOLLOW_2);
+                    rule__IntegerLiteralRule__FactorAssignment_1();
 
+                    state._fsp--;
+
+
+                    }
+                    break;
 
             }
 

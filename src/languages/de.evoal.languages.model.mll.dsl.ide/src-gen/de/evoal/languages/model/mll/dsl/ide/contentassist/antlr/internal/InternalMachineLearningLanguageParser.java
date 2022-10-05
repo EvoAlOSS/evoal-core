@@ -4908,11 +4908,11 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
             if ( (LA7_0==RULE_INT) ) {
                 int LA7_1 = input.LA(2);
 
-                if ( (LA7_1==77) ) {
-                    alt7=1;
-                }
-                else if ( ((LA7_1>=24 && LA7_1<=43)) ) {
+                if ( (LA7_1==EOF||(LA7_1>=13 && LA7_1<=43)||LA7_1==45||LA7_1==50||LA7_1==65||(LA7_1>=70 && LA7_1<=73)||LA7_1==75) ) {
                     alt7=2;
+                }
+                else if ( (LA7_1==77) ) {
+                    alt7=1;
                 }
                 else {
                     if (state.backtracking>0) {state.failed=true; return ;}
@@ -18119,29 +18119,40 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__DoubleLiteralRule__Group__1__Impl"
-    // InternalMachineLearningLanguage.g:5367:1: rule__DoubleLiteralRule__Group__1__Impl : ( ( rule__DoubleLiteralRule__FactorAssignment_1 ) ) ;
+    // InternalMachineLearningLanguage.g:5367:1: rule__DoubleLiteralRule__Group__1__Impl : ( ( rule__DoubleLiteralRule__FactorAssignment_1 )? ) ;
     public final void rule__DoubleLiteralRule__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalMachineLearningLanguage.g:5371:1: ( ( ( rule__DoubleLiteralRule__FactorAssignment_1 ) ) )
-            // InternalMachineLearningLanguage.g:5372:1: ( ( rule__DoubleLiteralRule__FactorAssignment_1 ) )
+            // InternalMachineLearningLanguage.g:5371:1: ( ( ( rule__DoubleLiteralRule__FactorAssignment_1 )? ) )
+            // InternalMachineLearningLanguage.g:5372:1: ( ( rule__DoubleLiteralRule__FactorAssignment_1 )? )
             {
-            // InternalMachineLearningLanguage.g:5372:1: ( ( rule__DoubleLiteralRule__FactorAssignment_1 ) )
-            // InternalMachineLearningLanguage.g:5373:2: ( rule__DoubleLiteralRule__FactorAssignment_1 )
+            // InternalMachineLearningLanguage.g:5372:1: ( ( rule__DoubleLiteralRule__FactorAssignment_1 )? )
+            // InternalMachineLearningLanguage.g:5373:2: ( rule__DoubleLiteralRule__FactorAssignment_1 )?
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getDoubleLiteralRuleAccess().getFactorAssignment_1()); 
             }
-            // InternalMachineLearningLanguage.g:5374:2: ( rule__DoubleLiteralRule__FactorAssignment_1 )
-            // InternalMachineLearningLanguage.g:5374:3: rule__DoubleLiteralRule__FactorAssignment_1
-            {
-            pushFollow(FOLLOW_2);
-            rule__DoubleLiteralRule__FactorAssignment_1();
+            // InternalMachineLearningLanguage.g:5374:2: ( rule__DoubleLiteralRule__FactorAssignment_1 )?
+            int alt44=2;
+            int LA44_0 = input.LA(1);
 
-            state._fsp--;
-            if (state.failed) return ;
+            if ( ((LA44_0>=24 && LA44_0<=43)) ) {
+                alt44=1;
+            }
+            switch (alt44) {
+                case 1 :
+                    // InternalMachineLearningLanguage.g:5374:3: rule__DoubleLiteralRule__FactorAssignment_1
+                    {
+                    pushFollow(FOLLOW_2);
+                    rule__DoubleLiteralRule__FactorAssignment_1();
+
+                    state._fsp--;
+                    if (state.failed) return ;
+
+                    }
+                    break;
 
             }
 
@@ -18292,29 +18303,40 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__IntegerLiteralRule__Group__1__Impl"
-    // InternalMachineLearningLanguage.g:5421:1: rule__IntegerLiteralRule__Group__1__Impl : ( ( rule__IntegerLiteralRule__FactorAssignment_1 ) ) ;
+    // InternalMachineLearningLanguage.g:5421:1: rule__IntegerLiteralRule__Group__1__Impl : ( ( rule__IntegerLiteralRule__FactorAssignment_1 )? ) ;
     public final void rule__IntegerLiteralRule__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalMachineLearningLanguage.g:5425:1: ( ( ( rule__IntegerLiteralRule__FactorAssignment_1 ) ) )
-            // InternalMachineLearningLanguage.g:5426:1: ( ( rule__IntegerLiteralRule__FactorAssignment_1 ) )
+            // InternalMachineLearningLanguage.g:5425:1: ( ( ( rule__IntegerLiteralRule__FactorAssignment_1 )? ) )
+            // InternalMachineLearningLanguage.g:5426:1: ( ( rule__IntegerLiteralRule__FactorAssignment_1 )? )
             {
-            // InternalMachineLearningLanguage.g:5426:1: ( ( rule__IntegerLiteralRule__FactorAssignment_1 ) )
-            // InternalMachineLearningLanguage.g:5427:2: ( rule__IntegerLiteralRule__FactorAssignment_1 )
+            // InternalMachineLearningLanguage.g:5426:1: ( ( rule__IntegerLiteralRule__FactorAssignment_1 )? )
+            // InternalMachineLearningLanguage.g:5427:2: ( rule__IntegerLiteralRule__FactorAssignment_1 )?
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getIntegerLiteralRuleAccess().getFactorAssignment_1()); 
             }
-            // InternalMachineLearningLanguage.g:5428:2: ( rule__IntegerLiteralRule__FactorAssignment_1 )
-            // InternalMachineLearningLanguage.g:5428:3: rule__IntegerLiteralRule__FactorAssignment_1
-            {
-            pushFollow(FOLLOW_2);
-            rule__IntegerLiteralRule__FactorAssignment_1();
+            // InternalMachineLearningLanguage.g:5428:2: ( rule__IntegerLiteralRule__FactorAssignment_1 )?
+            int alt45=2;
+            int LA45_0 = input.LA(1);
 
-            state._fsp--;
-            if (state.failed) return ;
+            if ( ((LA45_0>=24 && LA45_0<=43)) ) {
+                alt45=1;
+            }
+            switch (alt45) {
+                case 1 :
+                    // InternalMachineLearningLanguage.g:5428:3: rule__IntegerLiteralRule__FactorAssignment_1
+                    {
+                    pushFollow(FOLLOW_2);
+                    rule__IntegerLiteralRule__FactorAssignment_1();
+
+                    state._fsp--;
+                    if (state.failed) return ;
+
+                    }
+                    break;
 
             }
 

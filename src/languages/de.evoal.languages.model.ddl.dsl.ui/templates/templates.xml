@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?> 
 <templates>
 	<template autoinsert="true"
+			  context="de.evoal.languages.model.ddl.dsl.DataDescriptionLanguage.UseRule"
+			  deleted="false"
+			  description="Creates a use statement"
+			  enabled="true"
+			  id="de.evoal.languages.model.ddl.dsl.ui.templates.createuse"
+			  name="Use Statement">use "${cursor}";
+</template>
+
+	<template autoinsert="true"
 			  context="de.evoal.languages.model.ddl.dsl.DataDescriptionLanguage.DataTypeRule"
 			  deleted="false"
 			  description="Creates a data type definition"

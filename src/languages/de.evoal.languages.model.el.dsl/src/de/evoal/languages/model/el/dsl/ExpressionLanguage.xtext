@@ -96,12 +96,12 @@ NumberLiteralRule returns NumberLiteral:
 ;
 
 DoubleLiteralRule returns DoubleLiteral :
-	literal = DOUBLE factor = FactorRule
+	literal = DOUBLE (factor = FactorRule)?
 ;
 
 
 IntegerLiteralRule returns IntegerLiteral:
-	literal = INT factor = FactorRule
+	literal = INT (factor = FactorRule)?
 ;
 
 StringLiteralRule returns StringLiteral:

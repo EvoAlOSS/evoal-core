@@ -709,7 +709,7 @@ public class InstanceLanguageGrammarAccess extends AbstractElementFinder.Abstrac
 	}
 	
 	//DoubleLiteralRule returns DoubleLiteral :
-	//    literal = DOUBLE factor = FactorRule
+	//    literal = DOUBLE (factor = FactorRule)?
 	//;
 	public ExpressionLanguageGrammarAccess.DoubleLiteralRuleElements getDoubleLiteralRuleAccess() {
 		return gaExpressionLanguage.getDoubleLiteralRuleAccess();
@@ -720,7 +720,7 @@ public class InstanceLanguageGrammarAccess extends AbstractElementFinder.Abstrac
 	}
 	
 	//IntegerLiteralRule returns IntegerLiteral:
-	//    literal = INT factor = FactorRule
+	//    literal = INT (factor = FactorRule)?
 	//;
 	public ExpressionLanguageGrammarAccess.IntegerLiteralRuleElements getIntegerLiteralRuleAccess() {
 		return gaExpressionLanguage.getIntegerLiteralRuleAccess();

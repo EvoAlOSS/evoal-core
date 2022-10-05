@@ -3412,11 +3412,11 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
                 {
                 int LA3_1 = input.LA(2);
 
-                if ( (LA3_1==67) ) {
-                    alt3=1;
-                }
-                else if ( (LA3_1==EOF||(LA3_1>=21 && LA3_1<=31)||LA3_1==57||(LA3_1>=63 && LA3_1<=66)||(LA3_1>=68 && LA3_1<=69)) ) {
+                if ( (LA3_1==EOF||(LA3_1>=21 && LA3_1<=31)||LA3_1==57||(LA3_1>=63 && LA3_1<=66)||(LA3_1>=68 && LA3_1<=69)) ) {
                     alt3=4;
+                }
+                else if ( (LA3_1==67) ) {
+                    alt3=1;
                 }
                 else {
                     if (state.backtracking>0) {state.failed=true; return ;}
@@ -3699,11 +3699,11 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
             if ( (LA5_0==RULE_INT) ) {
                 int LA5_1 = input.LA(2);
 
-                if ( ((LA5_1>=32 && LA5_1<=51)) ) {
-                    alt5=2;
-                }
-                else if ( (LA5_1==70) ) {
+                if ( (LA5_1==70) ) {
                     alt5=1;
+                }
+                else if ( (LA5_1==EOF||(LA5_1>=21 && LA5_1<=51)||LA5_1==57||(LA5_1>=63 && LA5_1<=66)||(LA5_1>=68 && LA5_1<=69)) ) {
+                    alt5=2;
                 }
                 else {
                     if (state.backtracking>0) {state.failed=true; return ;}
@@ -14085,29 +14085,40 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__DoubleLiteralRule__Group__1__Impl"
-    // InternalDataDescriptionLanguage.g:4139:1: rule__DoubleLiteralRule__Group__1__Impl : ( ( rule__DoubleLiteralRule__FactorAssignment_1 ) ) ;
+    // InternalDataDescriptionLanguage.g:4139:1: rule__DoubleLiteralRule__Group__1__Impl : ( ( rule__DoubleLiteralRule__FactorAssignment_1 )? ) ;
     public final void rule__DoubleLiteralRule__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:4143:1: ( ( ( rule__DoubleLiteralRule__FactorAssignment_1 ) ) )
-            // InternalDataDescriptionLanguage.g:4144:1: ( ( rule__DoubleLiteralRule__FactorAssignment_1 ) )
+            // InternalDataDescriptionLanguage.g:4143:1: ( ( ( rule__DoubleLiteralRule__FactorAssignment_1 )? ) )
+            // InternalDataDescriptionLanguage.g:4144:1: ( ( rule__DoubleLiteralRule__FactorAssignment_1 )? )
             {
-            // InternalDataDescriptionLanguage.g:4144:1: ( ( rule__DoubleLiteralRule__FactorAssignment_1 ) )
-            // InternalDataDescriptionLanguage.g:4145:2: ( rule__DoubleLiteralRule__FactorAssignment_1 )
+            // InternalDataDescriptionLanguage.g:4144:1: ( ( rule__DoubleLiteralRule__FactorAssignment_1 )? )
+            // InternalDataDescriptionLanguage.g:4145:2: ( rule__DoubleLiteralRule__FactorAssignment_1 )?
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getDoubleLiteralRuleAccess().getFactorAssignment_1()); 
             }
-            // InternalDataDescriptionLanguage.g:4146:2: ( rule__DoubleLiteralRule__FactorAssignment_1 )
-            // InternalDataDescriptionLanguage.g:4146:3: rule__DoubleLiteralRule__FactorAssignment_1
-            {
-            pushFollow(FOLLOW_2);
-            rule__DoubleLiteralRule__FactorAssignment_1();
+            // InternalDataDescriptionLanguage.g:4146:2: ( rule__DoubleLiteralRule__FactorAssignment_1 )?
+            int alt40=2;
+            int LA40_0 = input.LA(1);
 
-            state._fsp--;
-            if (state.failed) return ;
+            if ( ((LA40_0>=32 && LA40_0<=51)) ) {
+                alt40=1;
+            }
+            switch (alt40) {
+                case 1 :
+                    // InternalDataDescriptionLanguage.g:4146:3: rule__DoubleLiteralRule__FactorAssignment_1
+                    {
+                    pushFollow(FOLLOW_2);
+                    rule__DoubleLiteralRule__FactorAssignment_1();
+
+                    state._fsp--;
+                    if (state.failed) return ;
+
+                    }
+                    break;
 
             }
 
@@ -14258,29 +14269,40 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__IntegerLiteralRule__Group__1__Impl"
-    // InternalDataDescriptionLanguage.g:4193:1: rule__IntegerLiteralRule__Group__1__Impl : ( ( rule__IntegerLiteralRule__FactorAssignment_1 ) ) ;
+    // InternalDataDescriptionLanguage.g:4193:1: rule__IntegerLiteralRule__Group__1__Impl : ( ( rule__IntegerLiteralRule__FactorAssignment_1 )? ) ;
     public final void rule__IntegerLiteralRule__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalDataDescriptionLanguage.g:4197:1: ( ( ( rule__IntegerLiteralRule__FactorAssignment_1 ) ) )
-            // InternalDataDescriptionLanguage.g:4198:1: ( ( rule__IntegerLiteralRule__FactorAssignment_1 ) )
+            // InternalDataDescriptionLanguage.g:4197:1: ( ( ( rule__IntegerLiteralRule__FactorAssignment_1 )? ) )
+            // InternalDataDescriptionLanguage.g:4198:1: ( ( rule__IntegerLiteralRule__FactorAssignment_1 )? )
             {
-            // InternalDataDescriptionLanguage.g:4198:1: ( ( rule__IntegerLiteralRule__FactorAssignment_1 ) )
-            // InternalDataDescriptionLanguage.g:4199:2: ( rule__IntegerLiteralRule__FactorAssignment_1 )
+            // InternalDataDescriptionLanguage.g:4198:1: ( ( rule__IntegerLiteralRule__FactorAssignment_1 )? )
+            // InternalDataDescriptionLanguage.g:4199:2: ( rule__IntegerLiteralRule__FactorAssignment_1 )?
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getIntegerLiteralRuleAccess().getFactorAssignment_1()); 
             }
-            // InternalDataDescriptionLanguage.g:4200:2: ( rule__IntegerLiteralRule__FactorAssignment_1 )
-            // InternalDataDescriptionLanguage.g:4200:3: rule__IntegerLiteralRule__FactorAssignment_1
-            {
-            pushFollow(FOLLOW_2);
-            rule__IntegerLiteralRule__FactorAssignment_1();
+            // InternalDataDescriptionLanguage.g:4200:2: ( rule__IntegerLiteralRule__FactorAssignment_1 )?
+            int alt41=2;
+            int LA41_0 = input.LA(1);
 
-            state._fsp--;
-            if (state.failed) return ;
+            if ( ((LA41_0>=32 && LA41_0<=51)) ) {
+                alt41=1;
+            }
+            switch (alt41) {
+                case 1 :
+                    // InternalDataDescriptionLanguage.g:4200:3: rule__IntegerLiteralRule__FactorAssignment_1
+                    {
+                    pushFollow(FOLLOW_2);
+                    rule__IntegerLiteralRule__FactorAssignment_1();
+
+                    state._fsp--;
+                    if (state.failed) return ;
+
+                    }
+                    break;
 
             }
 

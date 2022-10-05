@@ -180,19 +180,10 @@ public class ExpressionLanguageSemanticSequencer extends AbstractDelegatingSeman
 	 *     DoubleLiteralRule returns DoubleLiteral
 	 *
 	 * Constraint:
-	 *     (literal=DOUBLE factor=FactorRule)
+	 *     (literal=DOUBLE factor=FactorRule?)
 	 */
 	protected void sequence_DoubleLiteralRule(ISerializationContext context, DoubleLiteral semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, ELPackage.Literals.DOUBLE_LITERAL__LITERAL) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ELPackage.Literals.DOUBLE_LITERAL__LITERAL));
-			if (transientValues.isValueTransient(semanticObject, ELPackage.Literals.NUMBER_LITERAL__FACTOR) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ELPackage.Literals.NUMBER_LITERAL__FACTOR));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getDoubleLiteralRuleAccess().getLiteralDOUBLEParserRuleCall_0_0(), semanticObject.getLiteral());
-		feeder.accept(grammarAccess.getDoubleLiteralRuleAccess().getFactorFactorRuleEnumRuleCall_1_0(), semanticObject.getFactor());
-		feeder.finish();
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -216,19 +207,10 @@ public class ExpressionLanguageSemanticSequencer extends AbstractDelegatingSeman
 	 *     IntegerLiteralRule returns IntegerLiteral
 	 *
 	 * Constraint:
-	 *     (literal=INT factor=FactorRule)
+	 *     (literal=INT factor=FactorRule?)
 	 */
 	protected void sequence_IntegerLiteralRule(ISerializationContext context, IntegerLiteral semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, ELPackage.Literals.INTEGER_LITERAL__LITERAL) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ELPackage.Literals.INTEGER_LITERAL__LITERAL));
-			if (transientValues.isValueTransient(semanticObject, ELPackage.Literals.NUMBER_LITERAL__FACTOR) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ELPackage.Literals.NUMBER_LITERAL__FACTOR));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getIntegerLiteralRuleAccess().getLiteralINTTerminalRuleCall_0_0(), semanticObject.getLiteral());
-		feeder.accept(grammarAccess.getIntegerLiteralRuleAccess().getFactorFactorRuleEnumRuleCall_1_0(), semanticObject.getFactor());
-		feeder.finish();
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	

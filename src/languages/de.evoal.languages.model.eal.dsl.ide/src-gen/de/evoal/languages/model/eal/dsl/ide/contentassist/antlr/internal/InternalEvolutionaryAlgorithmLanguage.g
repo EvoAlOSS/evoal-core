@@ -3589,7 +3589,7 @@ rule__DoubleLiteralRule__Group__1__Impl
 :
 (
 	{ before(grammarAccess.getDoubleLiteralRuleAccess().getFactorAssignment_1()); }
-	(rule__DoubleLiteralRule__FactorAssignment_1)
+	(rule__DoubleLiteralRule__FactorAssignment_1)?
 	{ after(grammarAccess.getDoubleLiteralRuleAccess().getFactorAssignment_1()); }
 )
 ;
@@ -3643,7 +3643,7 @@ rule__IntegerLiteralRule__Group__1__Impl
 :
 (
 	{ before(grammarAccess.getIntegerLiteralRuleAccess().getFactorAssignment_1()); }
-	(rule__IntegerLiteralRule__FactorAssignment_1)
+	(rule__IntegerLiteralRule__FactorAssignment_1)?
 	{ after(grammarAccess.getIntegerLiteralRuleAccess().getFactorAssignment_1()); }
 )
 ;

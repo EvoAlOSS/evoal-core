@@ -4,25 +4,9 @@
  */
 package de.evoal.languages.model.el.dsl.ui.contentassist;
 
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jface.resource.FontDescriptor;
-import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.viewers.StyledString;
-import org.eclipse.swt.graphics.FontData;
-import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.Keyword;
-import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
-import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
-import org.eclipse.xtext.ui.label.StylerFactory;
 
-import com.google.inject.Inject;
-
-/*
- * 		StyledString message = new StyledString();
-		message.append("µ - micro");
-		acceptor.accept(createCompletionProposal("µ", message, null, context));
- */
 /**
  * See https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#content-assist
  * on how to customize the content assistant.
@@ -31,7 +15,7 @@ public class ExpressionLanguageProposalProvider extends AbstractExpressionLangua
 
 
 	@Override
-	protected StyledString getKeywordDisplayString(Keyword keyword) {
+	protected StyledString getKeywordDisplayString(final Keyword keyword) {
 		switch (keyword.getValue()) {
 		case "Y":
 			return new StyledString("Y").append(" — Yotta (10e24)", StyledString.DECORATIONS_STYLER);
@@ -72,7 +56,7 @@ public class ExpressionLanguageProposalProvider extends AbstractExpressionLangua
 		case "z":
 			return new StyledString("z").append(" — zepto (10e-21)", StyledString.DECORATIONS_STYLER);
 		case "y":
-			return new StyledString("y — yocto").append(" (10e-24)", StyledString.DECORATIONS_STYLER);
+			return new StyledString("y").append(" — yocto (10e-24)", StyledString.DECORATIONS_STYLER);
 		}
 		
 		return super.getKeywordDisplayString(keyword);
