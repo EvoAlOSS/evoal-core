@@ -58,8 +58,8 @@ public class MllFactoryImpl extends EFactoryImpl implements MllFactory {
 		switch (eClass.getClassifierID()) {
 			case MllPackage.MACHINE_LEARNING_CONFIGURATION: return createMachineLearningConfiguration();
 			case MllPackage.SURROGATE_DEFINITION: return createSurrogateDefinition();
-			case MllPackage.SURROGATE_LAYER: return createSurrogateLayer();
-			case MllPackage.PARTIAL_SURROGATE_FUNCTION: return createPartialSurrogateFunction();
+			case MllPackage.SURROGATE_LAYER_DEFINITION: return createSurrogateLayerDefinition();
+			case MllPackage.PARTIAL_SURROGATE_FUNCTION_DEFINITION: return createPartialSurrogateFunctionDefinition();
 			case MllPackage.PREDICTION: return createPrediction();
 			case MllPackage.CALL_STATEMENT: return createCallStatement();
 			case MllPackage.BLOCK_STATEMENT: return createBlockStatement();
@@ -102,9 +102,9 @@ public class MllFactoryImpl extends EFactoryImpl implements MllFactory {
 	 * @generated
 	 */
 	@Override
-	public SurrogateLayer createSurrogateLayer() {
-		SurrogateLayerImpl surrogateLayer = new SurrogateLayerImpl();
-		return surrogateLayer;
+	public SurrogateLayerDefinition createSurrogateLayerDefinition() {
+		SurrogateLayerDefinitionImpl surrogateLayerDefinition = new SurrogateLayerDefinitionImpl();
+		return surrogateLayerDefinition;
 	}
 
 	/**
@@ -113,9 +113,9 @@ public class MllFactoryImpl extends EFactoryImpl implements MllFactory {
 	 * @generated
 	 */
 	@Override
-	public PartialSurrogateFunction createPartialSurrogateFunction() {
-		PartialSurrogateFunctionImpl partialSurrogateFunction = new PartialSurrogateFunctionImpl();
-		return partialSurrogateFunction;
+	public PartialSurrogateFunctionDefinition createPartialSurrogateFunctionDefinition() {
+		PartialSurrogateFunctionDefinitionImpl partialSurrogateFunctionDefinition = new PartialSurrogateFunctionDefinitionImpl();
+		return partialSurrogateFunctionDefinition;
 	}
 
 	/**

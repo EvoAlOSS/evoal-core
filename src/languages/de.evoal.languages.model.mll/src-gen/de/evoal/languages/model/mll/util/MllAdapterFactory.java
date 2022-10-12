@@ -78,12 +78,12 @@ public class MllAdapterFactory extends AdapterFactoryImpl {
 				return createSurrogateDefinitionAdapter();
 			}
 			@Override
-			public Adapter caseSurrogateLayer(SurrogateLayer object) {
-				return createSurrogateLayerAdapter();
+			public Adapter caseSurrogateLayerDefinition(SurrogateLayerDefinition object) {
+				return createSurrogateLayerDefinitionAdapter();
 			}
 			@Override
-			public Adapter casePartialSurrogateFunction(PartialSurrogateFunction object) {
-				return createPartialSurrogateFunctionAdapter();
+			public Adapter casePartialSurrogateFunctionDefinition(PartialSurrogateFunctionDefinition object) {
+				return createPartialSurrogateFunctionDefinitionAdapter();
 			}
 			@Override
 			public Adapter casePrediction(Prediction object) {
@@ -182,30 +182,30 @@ public class MllAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.mll.SurrogateLayer <em>Surrogate Layer</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.mll.SurrogateLayerDefinition <em>Surrogate Layer Definition</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.evoal.languages.model.mll.SurrogateLayer
+	 * @see de.evoal.languages.model.mll.SurrogateLayerDefinition
 	 * @generated
 	 */
-	public Adapter createSurrogateLayerAdapter() {
+	public Adapter createSurrogateLayerDefinitionAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.mll.PartialSurrogateFunction <em>Partial Surrogate Function</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.mll.PartialSurrogateFunctionDefinition <em>Partial Surrogate Function Definition</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.evoal.languages.model.mll.PartialSurrogateFunction
+	 * @see de.evoal.languages.model.mll.PartialSurrogateFunctionDefinition
 	 * @generated
 	 */
-	public Adapter createPartialSurrogateFunctionAdapter() {
+	public Adapter createPartialSurrogateFunctionDefinitionAdapter() {
 		return null;
 	}
 

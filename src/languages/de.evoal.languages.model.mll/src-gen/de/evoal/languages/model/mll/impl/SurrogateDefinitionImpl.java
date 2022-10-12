@@ -6,7 +6,7 @@ import de.evoal.languages.model.ddl.DataDescription;
 
 import de.evoal.languages.model.mll.MllPackage;
 import de.evoal.languages.model.mll.SurrogateDefinition;
-import de.evoal.languages.model.mll.SurrogateLayer;
+import de.evoal.languages.model.mll.SurrogateLayerDefinition;
 
 import java.util.Collection;
 
@@ -90,7 +90,7 @@ public class SurrogateDefinitionImpl extends MinimalEObjectImpl.Container implem
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<SurrogateLayer> layers;
+	protected EList<SurrogateLayerDefinition> layers;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -166,9 +166,9 @@ public class SurrogateDefinitionImpl extends MinimalEObjectImpl.Container implem
 	 * @generated
 	 */
 	@Override
-	public EList<SurrogateLayer> getLayers() {
+	public EList<SurrogateLayerDefinition> getLayers() {
 		if (layers == null) {
-			layers = new EObjectContainmentEList<SurrogateLayer>(SurrogateLayer.class, this, MllPackage.SURROGATE_DEFINITION__LAYERS);
+			layers = new EObjectContainmentEList<SurrogateLayerDefinition>(SurrogateLayerDefinition.class, this, MllPackage.SURROGATE_DEFINITION__LAYERS);
 		}
 		return layers;
 	}
@@ -229,7 +229,7 @@ public class SurrogateDefinitionImpl extends MinimalEObjectImpl.Container implem
 				return;
 			case MllPackage.SURROGATE_DEFINITION__LAYERS:
 				getLayers().clear();
-				getLayers().addAll((Collection<? extends SurrogateLayer>)newValue);
+				getLayers().addAll((Collection<? extends SurrogateLayerDefinition>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

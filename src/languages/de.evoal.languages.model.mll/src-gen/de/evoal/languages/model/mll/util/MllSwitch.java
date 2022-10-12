@@ -80,15 +80,15 @@ public class MllSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case MllPackage.SURROGATE_LAYER: {
-				SurrogateLayer surrogateLayer = (SurrogateLayer)theEObject;
-				T result = caseSurrogateLayer(surrogateLayer);
+			case MllPackage.SURROGATE_LAYER_DEFINITION: {
+				SurrogateLayerDefinition surrogateLayerDefinition = (SurrogateLayerDefinition)theEObject;
+				T result = caseSurrogateLayerDefinition(surrogateLayerDefinition);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case MllPackage.PARTIAL_SURROGATE_FUNCTION: {
-				PartialSurrogateFunction partialSurrogateFunction = (PartialSurrogateFunction)theEObject;
-				T result = casePartialSurrogateFunction(partialSurrogateFunction);
+			case MllPackage.PARTIAL_SURROGATE_FUNCTION_DEFINITION: {
+				PartialSurrogateFunctionDefinition partialSurrogateFunctionDefinition = (PartialSurrogateFunctionDefinition)theEObject;
+				T result = casePartialSurrogateFunctionDefinition(partialSurrogateFunctionDefinition);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -200,32 +200,32 @@ public class MllSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Surrogate Layer</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Surrogate Layer Definition</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Surrogate Layer</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Surrogate Layer Definition</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseSurrogateLayer(SurrogateLayer object) {
+	public T caseSurrogateLayerDefinition(SurrogateLayerDefinition object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Partial Surrogate Function</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Partial Surrogate Function Definition</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Partial Surrogate Function</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Partial Surrogate Function Definition</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T casePartialSurrogateFunction(PartialSurrogateFunction object) {
+	public T casePartialSurrogateFunctionDefinition(PartialSurrogateFunctionDefinition object) {
 		return null;
 	}
 

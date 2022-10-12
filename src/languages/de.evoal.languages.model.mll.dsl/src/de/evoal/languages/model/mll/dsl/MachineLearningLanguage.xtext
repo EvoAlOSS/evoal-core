@@ -23,16 +23,16 @@ SurrogateDefinitionRule returns SurrogateDefinition:
 		outputs += [ddl::DataDescription|StringOrId] ("," outputs += [ddl::DataDescription|StringOrId])* 
 
 	"using"
-		(layers += SurrogateLayerRule)+
+		(layers += SurrogateLayerDefinitionRule)+
 ;
 
-SurrogateLayerRule returns SurrogateLayer:
+SurrogateLayerDefinitionRule returns SurrogateLayerDefinition:
 	"layer" name = STRING
 	"with"
-		(functions += PartialSurrogateFunctionRule)+
+		(functions += PartialSurrogateFunctionDefinitionRule)+
 ;
 		
-PartialSurrogateFunctionRule returns PartialSurrogateFunction:
+PartialSurrogateFunctionDefinitionRule returns PartialSurrogateFunctionDefinition:
 	"function" name = [dl::TypeDefinition|StringOrId]
 	"mapping"
 		inputs += [ddl::DataDescription|StringOrId] ("," inputs += [ddl::DataDescription|StringOrId])* 

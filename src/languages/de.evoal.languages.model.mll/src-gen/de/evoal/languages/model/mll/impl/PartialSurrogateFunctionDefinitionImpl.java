@@ -9,7 +9,7 @@ import de.evoal.languages.model.dl.TypeDefinition;
 import de.evoal.languages.model.instance.Attribute;
 
 import de.evoal.languages.model.mll.MllPackage;
-import de.evoal.languages.model.mll.PartialSurrogateFunction;
+import de.evoal.languages.model.mll.PartialSurrogateFunctionDefinition;
 
 import java.util.Collection;
 
@@ -30,21 +30,21 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Partial Surrogate Function</b></em>'.
+ * An implementation of the model object '<em><b>Partial Surrogate Function Definition</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link de.evoal.languages.model.mll.impl.PartialSurrogateFunctionImpl#getName <em>Name</em>}</li>
- *   <li>{@link de.evoal.languages.model.mll.impl.PartialSurrogateFunctionImpl#getInputs <em>Inputs</em>}</li>
- *   <li>{@link de.evoal.languages.model.mll.impl.PartialSurrogateFunctionImpl#getOutputs <em>Outputs</em>}</li>
- *   <li>{@link de.evoal.languages.model.mll.impl.PartialSurrogateFunctionImpl#getParameters <em>Parameters</em>}</li>
+ *   <li>{@link de.evoal.languages.model.mll.impl.PartialSurrogateFunctionDefinitionImpl#getName <em>Name</em>}</li>
+ *   <li>{@link de.evoal.languages.model.mll.impl.PartialSurrogateFunctionDefinitionImpl#getInputs <em>Inputs</em>}</li>
+ *   <li>{@link de.evoal.languages.model.mll.impl.PartialSurrogateFunctionDefinitionImpl#getOutputs <em>Outputs</em>}</li>
+ *   <li>{@link de.evoal.languages.model.mll.impl.PartialSurrogateFunctionDefinitionImpl#getParameters <em>Parameters</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class PartialSurrogateFunctionImpl extends MinimalEObjectImpl.Container implements PartialSurrogateFunction {
+public class PartialSurrogateFunctionDefinitionImpl extends MinimalEObjectImpl.Container implements PartialSurrogateFunctionDefinition {
 	/**
 	 * The cached value of the '{@link #getName() <em>Name</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -90,7 +90,7 @@ public class PartialSurrogateFunctionImpl extends MinimalEObjectImpl.Container i
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected PartialSurrogateFunctionImpl() {
+	protected PartialSurrogateFunctionDefinitionImpl() {
 		super();
 	}
 
@@ -101,7 +101,7 @@ public class PartialSurrogateFunctionImpl extends MinimalEObjectImpl.Container i
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return MllPackage.Literals.PARTIAL_SURROGATE_FUNCTION;
+		return MllPackage.Literals.PARTIAL_SURROGATE_FUNCTION_DEFINITION;
 	}
 
 	/**
@@ -116,7 +116,7 @@ public class PartialSurrogateFunctionImpl extends MinimalEObjectImpl.Container i
 			name = (TypeDefinition)eResolveProxy(oldName);
 			if (name != oldName) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, MllPackage.PARTIAL_SURROGATE_FUNCTION__NAME, oldName, name));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, MllPackage.PARTIAL_SURROGATE_FUNCTION_DEFINITION__NAME, oldName, name));
 			}
 		}
 		return name;
@@ -141,7 +141,7 @@ public class PartialSurrogateFunctionImpl extends MinimalEObjectImpl.Container i
 		TypeDefinition oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MllPackage.PARTIAL_SURROGATE_FUNCTION__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, MllPackage.PARTIAL_SURROGATE_FUNCTION_DEFINITION__NAME, oldName, name));
 	}
 
 	/**
@@ -152,7 +152,7 @@ public class PartialSurrogateFunctionImpl extends MinimalEObjectImpl.Container i
 	@Override
 	public EList<DataDescription> getInputs() {
 		if (inputs == null) {
-			inputs = new EObjectResolvingEList<DataDescription>(DataDescription.class, this, MllPackage.PARTIAL_SURROGATE_FUNCTION__INPUTS);
+			inputs = new EObjectResolvingEList<DataDescription>(DataDescription.class, this, MllPackage.PARTIAL_SURROGATE_FUNCTION_DEFINITION__INPUTS);
 		}
 		return inputs;
 	}
@@ -165,7 +165,7 @@ public class PartialSurrogateFunctionImpl extends MinimalEObjectImpl.Container i
 	@Override
 	public EList<DataDescription> getOutputs() {
 		if (outputs == null) {
-			outputs = new EObjectResolvingEList<DataDescription>(DataDescription.class, this, MllPackage.PARTIAL_SURROGATE_FUNCTION__OUTPUTS);
+			outputs = new EObjectResolvingEList<DataDescription>(DataDescription.class, this, MllPackage.PARTIAL_SURROGATE_FUNCTION_DEFINITION__OUTPUTS);
 		}
 		return outputs;
 	}
@@ -178,7 +178,7 @@ public class PartialSurrogateFunctionImpl extends MinimalEObjectImpl.Container i
 	@Override
 	public EList<Attribute> getParameters() {
 		if (parameters == null) {
-			parameters = new EObjectContainmentEList<Attribute>(Attribute.class, this, MllPackage.PARTIAL_SURROGATE_FUNCTION__PARAMETERS);
+			parameters = new EObjectContainmentEList<Attribute>(Attribute.class, this, MllPackage.PARTIAL_SURROGATE_FUNCTION_DEFINITION__PARAMETERS);
 		}
 		return parameters;
 	}
@@ -191,7 +191,7 @@ public class PartialSurrogateFunctionImpl extends MinimalEObjectImpl.Container i
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case MllPackage.PARTIAL_SURROGATE_FUNCTION__PARAMETERS:
+			case MllPackage.PARTIAL_SURROGATE_FUNCTION_DEFINITION__PARAMETERS:
 				return ((InternalEList<?>)getParameters()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -205,14 +205,14 @@ public class PartialSurrogateFunctionImpl extends MinimalEObjectImpl.Container i
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case MllPackage.PARTIAL_SURROGATE_FUNCTION__NAME:
+			case MllPackage.PARTIAL_SURROGATE_FUNCTION_DEFINITION__NAME:
 				if (resolve) return getName();
 				return basicGetName();
-			case MllPackage.PARTIAL_SURROGATE_FUNCTION__INPUTS:
+			case MllPackage.PARTIAL_SURROGATE_FUNCTION_DEFINITION__INPUTS:
 				return getInputs();
-			case MllPackage.PARTIAL_SURROGATE_FUNCTION__OUTPUTS:
+			case MllPackage.PARTIAL_SURROGATE_FUNCTION_DEFINITION__OUTPUTS:
 				return getOutputs();
-			case MllPackage.PARTIAL_SURROGATE_FUNCTION__PARAMETERS:
+			case MllPackage.PARTIAL_SURROGATE_FUNCTION_DEFINITION__PARAMETERS:
 				return getParameters();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -227,18 +227,18 @@ public class PartialSurrogateFunctionImpl extends MinimalEObjectImpl.Container i
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case MllPackage.PARTIAL_SURROGATE_FUNCTION__NAME:
+			case MllPackage.PARTIAL_SURROGATE_FUNCTION_DEFINITION__NAME:
 				setName((TypeDefinition)newValue);
 				return;
-			case MllPackage.PARTIAL_SURROGATE_FUNCTION__INPUTS:
+			case MllPackage.PARTIAL_SURROGATE_FUNCTION_DEFINITION__INPUTS:
 				getInputs().clear();
 				getInputs().addAll((Collection<? extends DataDescription>)newValue);
 				return;
-			case MllPackage.PARTIAL_SURROGATE_FUNCTION__OUTPUTS:
+			case MllPackage.PARTIAL_SURROGATE_FUNCTION_DEFINITION__OUTPUTS:
 				getOutputs().clear();
 				getOutputs().addAll((Collection<? extends DataDescription>)newValue);
 				return;
-			case MllPackage.PARTIAL_SURROGATE_FUNCTION__PARAMETERS:
+			case MllPackage.PARTIAL_SURROGATE_FUNCTION_DEFINITION__PARAMETERS:
 				getParameters().clear();
 				getParameters().addAll((Collection<? extends Attribute>)newValue);
 				return;
@@ -254,16 +254,16 @@ public class PartialSurrogateFunctionImpl extends MinimalEObjectImpl.Container i
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case MllPackage.PARTIAL_SURROGATE_FUNCTION__NAME:
+			case MllPackage.PARTIAL_SURROGATE_FUNCTION_DEFINITION__NAME:
 				setName((TypeDefinition)null);
 				return;
-			case MllPackage.PARTIAL_SURROGATE_FUNCTION__INPUTS:
+			case MllPackage.PARTIAL_SURROGATE_FUNCTION_DEFINITION__INPUTS:
 				getInputs().clear();
 				return;
-			case MllPackage.PARTIAL_SURROGATE_FUNCTION__OUTPUTS:
+			case MllPackage.PARTIAL_SURROGATE_FUNCTION_DEFINITION__OUTPUTS:
 				getOutputs().clear();
 				return;
-			case MllPackage.PARTIAL_SURROGATE_FUNCTION__PARAMETERS:
+			case MllPackage.PARTIAL_SURROGATE_FUNCTION_DEFINITION__PARAMETERS:
 				getParameters().clear();
 				return;
 		}
@@ -278,16 +278,16 @@ public class PartialSurrogateFunctionImpl extends MinimalEObjectImpl.Container i
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case MllPackage.PARTIAL_SURROGATE_FUNCTION__NAME:
+			case MllPackage.PARTIAL_SURROGATE_FUNCTION_DEFINITION__NAME:
 				return name != null;
-			case MllPackage.PARTIAL_SURROGATE_FUNCTION__INPUTS:
+			case MllPackage.PARTIAL_SURROGATE_FUNCTION_DEFINITION__INPUTS:
 				return inputs != null && !inputs.isEmpty();
-			case MllPackage.PARTIAL_SURROGATE_FUNCTION__OUTPUTS:
+			case MllPackage.PARTIAL_SURROGATE_FUNCTION_DEFINITION__OUTPUTS:
 				return outputs != null && !outputs.isEmpty();
-			case MllPackage.PARTIAL_SURROGATE_FUNCTION__PARAMETERS:
+			case MllPackage.PARTIAL_SURROGATE_FUNCTION_DEFINITION__PARAMETERS:
 				return parameters != null && !parameters.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
 
-} //PartialSurrogateFunctionImpl
+} //PartialSurrogateFunctionDefinitionImpl

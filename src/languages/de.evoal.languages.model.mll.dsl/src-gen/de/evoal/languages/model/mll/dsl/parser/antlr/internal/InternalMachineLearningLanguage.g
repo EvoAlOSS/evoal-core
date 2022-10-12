@@ -330,9 +330,9 @@ ruleSurrogateDefinitionRule returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getSurrogateDefinitionRuleAccess().getLayersSurrogateLayerRuleParserRuleCall_9_0());
+					newCompositeNode(grammarAccess.getSurrogateDefinitionRuleAccess().getLayersSurrogateLayerDefinitionRuleParserRuleCall_9_0());
 				}
-				lv_layers_11_0=ruleSurrogateLayerRule
+				lv_layers_11_0=ruleSurrogateLayerDefinitionRule
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getSurrogateDefinitionRuleRule());
@@ -341,7 +341,7 @@ ruleSurrogateDefinitionRule returns [EObject current=null]
 						$current,
 						"layers",
 						lv_layers_11_0,
-						"de.evoal.languages.model.mll.dsl.MachineLearningLanguage.SurrogateLayerRule");
+						"de.evoal.languages.model.mll.dsl.MachineLearningLanguage.SurrogateLayerDefinitionRule");
 					afterParserOrEnumRuleCall();
 				}
 			)
@@ -349,15 +349,15 @@ ruleSurrogateDefinitionRule returns [EObject current=null]
 	)
 ;
 
-// Entry rule entryRuleSurrogateLayerRule
-entryRuleSurrogateLayerRule returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getSurrogateLayerRuleRule()); }
-	iv_ruleSurrogateLayerRule=ruleSurrogateLayerRule
-	{ $current=$iv_ruleSurrogateLayerRule.current; }
+// Entry rule entryRuleSurrogateLayerDefinitionRule
+entryRuleSurrogateLayerDefinitionRule returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getSurrogateLayerDefinitionRuleRule()); }
+	iv_ruleSurrogateLayerDefinitionRule=ruleSurrogateLayerDefinitionRule
+	{ $current=$iv_ruleSurrogateLayerDefinitionRule.current; }
 	EOF;
 
-// Rule SurrogateLayerRule
-ruleSurrogateLayerRule returns [EObject current=null]
+// Rule SurrogateLayerDefinitionRule
+ruleSurrogateLayerDefinitionRule returns [EObject current=null]
 @init {
 	enterRule();
 }
@@ -367,17 +367,17 @@ ruleSurrogateLayerRule returns [EObject current=null]
 	(
 		otherlv_0='layer'
 		{
-			newLeafNode(otherlv_0, grammarAccess.getSurrogateLayerRuleAccess().getLayerKeyword_0());
+			newLeafNode(otherlv_0, grammarAccess.getSurrogateLayerDefinitionRuleAccess().getLayerKeyword_0());
 		}
 		(
 			(
 				lv_name_1_0=RULE_STRING
 				{
-					newLeafNode(lv_name_1_0, grammarAccess.getSurrogateLayerRuleAccess().getNameSTRINGTerminalRuleCall_1_0());
+					newLeafNode(lv_name_1_0, grammarAccess.getSurrogateLayerDefinitionRuleAccess().getNameSTRINGTerminalRuleCall_1_0());
 				}
 				{
 					if ($current==null) {
-						$current = createModelElement(grammarAccess.getSurrogateLayerRuleRule());
+						$current = createModelElement(grammarAccess.getSurrogateLayerDefinitionRuleRule());
 					}
 					setWithLastConsumed(
 						$current,
@@ -389,23 +389,23 @@ ruleSurrogateLayerRule returns [EObject current=null]
 		)
 		otherlv_2='with'
 		{
-			newLeafNode(otherlv_2, grammarAccess.getSurrogateLayerRuleAccess().getWithKeyword_2());
+			newLeafNode(otherlv_2, grammarAccess.getSurrogateLayerDefinitionRuleAccess().getWithKeyword_2());
 		}
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getSurrogateLayerRuleAccess().getFunctionsPartialSurrogateFunctionRuleParserRuleCall_3_0());
+					newCompositeNode(grammarAccess.getSurrogateLayerDefinitionRuleAccess().getFunctionsPartialSurrogateFunctionDefinitionRuleParserRuleCall_3_0());
 				}
-				lv_functions_3_0=rulePartialSurrogateFunctionRule
+				lv_functions_3_0=rulePartialSurrogateFunctionDefinitionRule
 				{
 					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getSurrogateLayerRuleRule());
+						$current = createModelElementForParent(grammarAccess.getSurrogateLayerDefinitionRuleRule());
 					}
 					add(
 						$current,
 						"functions",
 						lv_functions_3_0,
-						"de.evoal.languages.model.mll.dsl.MachineLearningLanguage.PartialSurrogateFunctionRule");
+						"de.evoal.languages.model.mll.dsl.MachineLearningLanguage.PartialSurrogateFunctionDefinitionRule");
 					afterParserOrEnumRuleCall();
 				}
 			)
@@ -413,15 +413,15 @@ ruleSurrogateLayerRule returns [EObject current=null]
 	)
 ;
 
-// Entry rule entryRulePartialSurrogateFunctionRule
-entryRulePartialSurrogateFunctionRule returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getPartialSurrogateFunctionRuleRule()); }
-	iv_rulePartialSurrogateFunctionRule=rulePartialSurrogateFunctionRule
-	{ $current=$iv_rulePartialSurrogateFunctionRule.current; }
+// Entry rule entryRulePartialSurrogateFunctionDefinitionRule
+entryRulePartialSurrogateFunctionDefinitionRule returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getPartialSurrogateFunctionDefinitionRuleRule()); }
+	iv_rulePartialSurrogateFunctionDefinitionRule=rulePartialSurrogateFunctionDefinitionRule
+	{ $current=$iv_rulePartialSurrogateFunctionDefinitionRule.current; }
 	EOF;
 
-// Rule PartialSurrogateFunctionRule
-rulePartialSurrogateFunctionRule returns [EObject current=null]
+// Rule PartialSurrogateFunctionDefinitionRule
+rulePartialSurrogateFunctionDefinitionRule returns [EObject current=null]
 @init {
 	enterRule();
 }
@@ -431,7 +431,7 @@ rulePartialSurrogateFunctionRule returns [EObject current=null]
 	(
 		otherlv_0='function'
 		{
-			newLeafNode(otherlv_0, grammarAccess.getPartialSurrogateFunctionRuleAccess().getFunctionKeyword_0());
+			newLeafNode(otherlv_0, grammarAccess.getPartialSurrogateFunctionDefinitionRuleAccess().getFunctionKeyword_0());
 		}
 		(
 			(
@@ -440,11 +440,11 @@ rulePartialSurrogateFunctionRule returns [EObject current=null]
 				}
 				{
 					if ($current==null) {
-						$current = createModelElement(grammarAccess.getPartialSurrogateFunctionRuleRule());
+						$current = createModelElement(grammarAccess.getPartialSurrogateFunctionDefinitionRuleRule());
 					}
 				}
 				{
-					newCompositeNode(grammarAccess.getPartialSurrogateFunctionRuleAccess().getNameTypeDefinitionCrossReference_1_0());
+					newCompositeNode(grammarAccess.getPartialSurrogateFunctionDefinitionRuleAccess().getNameTypeDefinitionCrossReference_1_0());
 				}
 				ruleStringOrId
 				{
@@ -454,7 +454,7 @@ rulePartialSurrogateFunctionRule returns [EObject current=null]
 		)
 		otherlv_2='mapping'
 		{
-			newLeafNode(otherlv_2, grammarAccess.getPartialSurrogateFunctionRuleAccess().getMappingKeyword_2());
+			newLeafNode(otherlv_2, grammarAccess.getPartialSurrogateFunctionDefinitionRuleAccess().getMappingKeyword_2());
 		}
 		(
 			(
@@ -463,11 +463,11 @@ rulePartialSurrogateFunctionRule returns [EObject current=null]
 				}
 				{
 					if ($current==null) {
-						$current = createModelElement(grammarAccess.getPartialSurrogateFunctionRuleRule());
+						$current = createModelElement(grammarAccess.getPartialSurrogateFunctionDefinitionRuleRule());
 					}
 				}
 				{
-					newCompositeNode(grammarAccess.getPartialSurrogateFunctionRuleAccess().getInputsDataDescriptionCrossReference_3_0());
+					newCompositeNode(grammarAccess.getPartialSurrogateFunctionDefinitionRuleAccess().getInputsDataDescriptionCrossReference_3_0());
 				}
 				ruleStringOrId
 				{
@@ -478,7 +478,7 @@ rulePartialSurrogateFunctionRule returns [EObject current=null]
 		(
 			otherlv_4=','
 			{
-				newLeafNode(otherlv_4, grammarAccess.getPartialSurrogateFunctionRuleAccess().getCommaKeyword_4_0());
+				newLeafNode(otherlv_4, grammarAccess.getPartialSurrogateFunctionDefinitionRuleAccess().getCommaKeyword_4_0());
 			}
 			(
 				(
@@ -487,11 +487,11 @@ rulePartialSurrogateFunctionRule returns [EObject current=null]
 					}
 					{
 						if ($current==null) {
-							$current = createModelElement(grammarAccess.getPartialSurrogateFunctionRuleRule());
+							$current = createModelElement(grammarAccess.getPartialSurrogateFunctionDefinitionRuleRule());
 						}
 					}
 					{
-						newCompositeNode(grammarAccess.getPartialSurrogateFunctionRuleAccess().getInputsDataDescriptionCrossReference_4_1_0());
+						newCompositeNode(grammarAccess.getPartialSurrogateFunctionDefinitionRuleAccess().getInputsDataDescriptionCrossReference_4_1_0());
 					}
 					ruleStringOrId
 					{
@@ -502,7 +502,7 @@ rulePartialSurrogateFunctionRule returns [EObject current=null]
 		)*
 		otherlv_6='to'
 		{
-			newLeafNode(otherlv_6, grammarAccess.getPartialSurrogateFunctionRuleAccess().getToKeyword_5());
+			newLeafNode(otherlv_6, grammarAccess.getPartialSurrogateFunctionDefinitionRuleAccess().getToKeyword_5());
 		}
 		(
 			(
@@ -511,11 +511,11 @@ rulePartialSurrogateFunctionRule returns [EObject current=null]
 				}
 				{
 					if ($current==null) {
-						$current = createModelElement(grammarAccess.getPartialSurrogateFunctionRuleRule());
+						$current = createModelElement(grammarAccess.getPartialSurrogateFunctionDefinitionRuleRule());
 					}
 				}
 				{
-					newCompositeNode(grammarAccess.getPartialSurrogateFunctionRuleAccess().getOutputsDataDescriptionCrossReference_6_0());
+					newCompositeNode(grammarAccess.getPartialSurrogateFunctionDefinitionRuleAccess().getOutputsDataDescriptionCrossReference_6_0());
 				}
 				ruleStringOrId
 				{
@@ -526,7 +526,7 @@ rulePartialSurrogateFunctionRule returns [EObject current=null]
 		(
 			otherlv_8=','
 			{
-				newLeafNode(otherlv_8, grammarAccess.getPartialSurrogateFunctionRuleAccess().getCommaKeyword_7_0());
+				newLeafNode(otherlv_8, grammarAccess.getPartialSurrogateFunctionDefinitionRuleAccess().getCommaKeyword_7_0());
 			}
 			(
 				(
@@ -535,11 +535,11 @@ rulePartialSurrogateFunctionRule returns [EObject current=null]
 					}
 					{
 						if ($current==null) {
-							$current = createModelElement(grammarAccess.getPartialSurrogateFunctionRuleRule());
+							$current = createModelElement(grammarAccess.getPartialSurrogateFunctionDefinitionRuleRule());
 						}
 					}
 					{
-						newCompositeNode(grammarAccess.getPartialSurrogateFunctionRuleAccess().getOutputsDataDescriptionCrossReference_7_1_0());
+						newCompositeNode(grammarAccess.getPartialSurrogateFunctionDefinitionRuleAccess().getOutputsDataDescriptionCrossReference_7_1_0());
 					}
 					ruleStringOrId
 					{
@@ -551,21 +551,21 @@ rulePartialSurrogateFunctionRule returns [EObject current=null]
 		(
 			otherlv_10='with'
 			{
-				newLeafNode(otherlv_10, grammarAccess.getPartialSurrogateFunctionRuleAccess().getWithKeyword_8_0());
+				newLeafNode(otherlv_10, grammarAccess.getPartialSurrogateFunctionDefinitionRuleAccess().getWithKeyword_8_0());
 			}
 			otherlv_11='parameters'
 			{
-				newLeafNode(otherlv_11, grammarAccess.getPartialSurrogateFunctionRuleAccess().getParametersKeyword_8_1());
+				newLeafNode(otherlv_11, grammarAccess.getPartialSurrogateFunctionDefinitionRuleAccess().getParametersKeyword_8_1());
 			}
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getPartialSurrogateFunctionRuleAccess().getParametersAttributeRuleParserRuleCall_8_2_0());
+						newCompositeNode(grammarAccess.getPartialSurrogateFunctionDefinitionRuleAccess().getParametersAttributeRuleParserRuleCall_8_2_0());
 					}
 					lv_parameters_12_0=ruleAttributeRule
 					{
 						if ($current==null) {
-							$current = createModelElementForParent(grammarAccess.getPartialSurrogateFunctionRuleRule());
+							$current = createModelElementForParent(grammarAccess.getPartialSurrogateFunctionDefinitionRuleRule());
 						}
 						add(
 							$current,

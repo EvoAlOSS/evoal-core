@@ -2,11 +2,11 @@
  */
 package de.evoal.languages.model.mll.impl;
 
-import de.evoal.languages.model.el.ELPackage;
-
 import de.evoal.languages.model.ddl.DdlPackage;
 
 import de.evoal.languages.model.dl.DlPackage;
+
+import de.evoal.languages.model.el.ELPackage;
 
 import de.evoal.languages.model.instance.InstancePackage;
 
@@ -18,14 +18,14 @@ import de.evoal.languages.model.mll.ForStatement;
 import de.evoal.languages.model.mll.MachineLearningConfiguration;
 import de.evoal.languages.model.mll.MllFactory;
 import de.evoal.languages.model.mll.MllPackage;
-import de.evoal.languages.model.mll.PartialSurrogateFunction;
+import de.evoal.languages.model.mll.PartialSurrogateFunctionDefinition;
 import de.evoal.languages.model.mll.PredictStatement;
 import de.evoal.languages.model.mll.Prediction;
 import de.evoal.languages.model.mll.Range;
 import de.evoal.languages.model.mll.Statement;
 import de.evoal.languages.model.mll.StringLiteralRange;
 import de.evoal.languages.model.mll.SurrogateDefinition;
-import de.evoal.languages.model.mll.SurrogateLayer;
+import de.evoal.languages.model.mll.SurrogateLayerDefinition;
 import de.evoal.languages.model.mll.Use;
 
 import org.eclipse.emf.ecore.EAttribute;
@@ -61,14 +61,14 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass surrogateLayerEClass = null;
+	private EClass surrogateLayerDefinitionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass partialSurrogateFunctionEClass = null;
+	private EClass partialSurrogateFunctionDefinitionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -310,8 +310,8 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 	 * @generated
 	 */
 	@Override
-	public EClass getSurrogateLayer() {
-		return surrogateLayerEClass;
+	public EClass getSurrogateLayerDefinition() {
+		return surrogateLayerDefinitionEClass;
 	}
 
 	/**
@@ -320,8 +320,8 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 	 * @generated
 	 */
 	@Override
-	public EAttribute getSurrogateLayer_Name() {
-		return (EAttribute)surrogateLayerEClass.getEStructuralFeatures().get(0);
+	public EAttribute getSurrogateLayerDefinition_Name() {
+		return (EAttribute)surrogateLayerDefinitionEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -330,8 +330,8 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getSurrogateLayer_Functions() {
-		return (EReference)surrogateLayerEClass.getEStructuralFeatures().get(1);
+	public EReference getSurrogateLayerDefinition_Functions() {
+		return (EReference)surrogateLayerDefinitionEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -340,8 +340,8 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 	 * @generated
 	 */
 	@Override
-	public EClass getPartialSurrogateFunction() {
-		return partialSurrogateFunctionEClass;
+	public EClass getPartialSurrogateFunctionDefinition() {
+		return partialSurrogateFunctionDefinitionEClass;
 	}
 
 	/**
@@ -350,8 +350,8 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getPartialSurrogateFunction_Name() {
-		return (EReference)partialSurrogateFunctionEClass.getEStructuralFeatures().get(0);
+	public EReference getPartialSurrogateFunctionDefinition_Name() {
+		return (EReference)partialSurrogateFunctionDefinitionEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -360,8 +360,8 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getPartialSurrogateFunction_Inputs() {
-		return (EReference)partialSurrogateFunctionEClass.getEStructuralFeatures().get(1);
+	public EReference getPartialSurrogateFunctionDefinition_Inputs() {
+		return (EReference)partialSurrogateFunctionDefinitionEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -370,8 +370,8 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getPartialSurrogateFunction_Outputs() {
-		return (EReference)partialSurrogateFunctionEClass.getEStructuralFeatures().get(2);
+	public EReference getPartialSurrogateFunctionDefinition_Outputs() {
+		return (EReference)partialSurrogateFunctionDefinitionEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -380,8 +380,8 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getPartialSurrogateFunction_Parameters() {
-		return (EReference)partialSurrogateFunctionEClass.getEStructuralFeatures().get(3);
+	public EReference getPartialSurrogateFunctionDefinition_Parameters() {
+		return (EReference)partialSurrogateFunctionDefinitionEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -704,15 +704,15 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 		createEReference(surrogateDefinitionEClass, SURROGATE_DEFINITION__OUTPUTS);
 		createEReference(surrogateDefinitionEClass, SURROGATE_DEFINITION__LAYERS);
 
-		surrogateLayerEClass = createEClass(SURROGATE_LAYER);
-		createEAttribute(surrogateLayerEClass, SURROGATE_LAYER__NAME);
-		createEReference(surrogateLayerEClass, SURROGATE_LAYER__FUNCTIONS);
+		surrogateLayerDefinitionEClass = createEClass(SURROGATE_LAYER_DEFINITION);
+		createEAttribute(surrogateLayerDefinitionEClass, SURROGATE_LAYER_DEFINITION__NAME);
+		createEReference(surrogateLayerDefinitionEClass, SURROGATE_LAYER_DEFINITION__FUNCTIONS);
 
-		partialSurrogateFunctionEClass = createEClass(PARTIAL_SURROGATE_FUNCTION);
-		createEReference(partialSurrogateFunctionEClass, PARTIAL_SURROGATE_FUNCTION__NAME);
-		createEReference(partialSurrogateFunctionEClass, PARTIAL_SURROGATE_FUNCTION__INPUTS);
-		createEReference(partialSurrogateFunctionEClass, PARTIAL_SURROGATE_FUNCTION__OUTPUTS);
-		createEReference(partialSurrogateFunctionEClass, PARTIAL_SURROGATE_FUNCTION__PARAMETERS);
+		partialSurrogateFunctionDefinitionEClass = createEClass(PARTIAL_SURROGATE_FUNCTION_DEFINITION);
+		createEReference(partialSurrogateFunctionDefinitionEClass, PARTIAL_SURROGATE_FUNCTION_DEFINITION__NAME);
+		createEReference(partialSurrogateFunctionDefinitionEClass, PARTIAL_SURROGATE_FUNCTION_DEFINITION__INPUTS);
+		createEReference(partialSurrogateFunctionDefinitionEClass, PARTIAL_SURROGATE_FUNCTION_DEFINITION__OUTPUTS);
+		createEReference(partialSurrogateFunctionDefinitionEClass, PARTIAL_SURROGATE_FUNCTION_DEFINITION__PARAMETERS);
 
 		predictionEClass = createEClass(PREDICTION);
 		createEReference(predictionEClass, PREDICTION__DEFINITION);
@@ -806,17 +806,17 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 		initEAttribute(getSurrogateDefinition_Name(), ecorePackage.getEString(), "name", null, 1, 1, SurrogateDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSurrogateDefinition_Inputs(), theDdlPackage.getDataDescription(), null, "inputs", null, 1, -1, SurrogateDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getSurrogateDefinition_Outputs(), theDdlPackage.getDataDescription(), null, "outputs", null, 1, -1, SurrogateDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEReference(getSurrogateDefinition_Layers(), this.getSurrogateLayer(), null, "layers", null, 1, -1, SurrogateDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getSurrogateDefinition_Layers(), this.getSurrogateLayerDefinition(), null, "layers", null, 1, -1, SurrogateDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
-		initEClass(surrogateLayerEClass, SurrogateLayer.class, "SurrogateLayer", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getSurrogateLayer_Name(), ecorePackage.getEString(), "name", null, 1, 1, SurrogateLayer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getSurrogateLayer_Functions(), this.getPartialSurrogateFunction(), null, "functions", null, 1, -1, SurrogateLayer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(surrogateLayerDefinitionEClass, SurrogateLayerDefinition.class, "SurrogateLayerDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getSurrogateLayerDefinition_Name(), ecorePackage.getEString(), "name", null, 1, 1, SurrogateLayerDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSurrogateLayerDefinition_Functions(), this.getPartialSurrogateFunctionDefinition(), null, "functions", null, 1, -1, SurrogateLayerDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(partialSurrogateFunctionEClass, PartialSurrogateFunction.class, "PartialSurrogateFunction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getPartialSurrogateFunction_Name(), theDlPackage.getTypeDefinition(), null, "name", null, 1, 1, PartialSurrogateFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getPartialSurrogateFunction_Inputs(), theDdlPackage.getDataDescription(), null, "inputs", null, 1, -1, PartialSurrogateFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEReference(getPartialSurrogateFunction_Outputs(), theDdlPackage.getDataDescription(), null, "outputs", null, 1, -1, PartialSurrogateFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEReference(getPartialSurrogateFunction_Parameters(), theInstancePackage.getAttribute(), null, "parameters", null, 0, -1, PartialSurrogateFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEClass(partialSurrogateFunctionDefinitionEClass, PartialSurrogateFunctionDefinition.class, "PartialSurrogateFunctionDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getPartialSurrogateFunctionDefinition_Name(), theDlPackage.getTypeDefinition(), null, "name", null, 1, 1, PartialSurrogateFunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPartialSurrogateFunctionDefinition_Inputs(), theDdlPackage.getDataDescription(), null, "inputs", null, 1, -1, PartialSurrogateFunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getPartialSurrogateFunctionDefinition_Outputs(), theDdlPackage.getDataDescription(), null, "outputs", null, 1, -1, PartialSurrogateFunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getPartialSurrogateFunctionDefinition_Parameters(), theInstancePackage.getAttribute(), null, "parameters", null, 0, -1, PartialSurrogateFunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		initEClass(predictionEClass, Prediction.class, "Prediction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getPrediction_Definition(), this.getSurrogateDefinition(), null, "definition", null, 1, 1, Prediction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -881,6 +881,7 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 		   new String[] {
 			   "ddl", "platform:/resource/de.evoal.languages.model.ddl/model/model.ecore#/",
 			   "dl", "platform:/resource/de.evoal.languages.model.dl/model/model.ecore#/",
+			   "ecore", "http://www.eclipse.org/emf/2002/Ecore",
 			   "el", "platform:/resource/de.evoal.languages.model.el/model/model.ecore#/",
 			   "instance", "platform:/resource/de.evoal.languages.model.instance/model/model.ecore#/"
 		   });
@@ -931,25 +932,25 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 			   "nullFree", "false"
 		   });
 		addAnnotation
-		  (getSurrogateLayer_Functions(),
+		  (getSurrogateLayerDefinition_Functions(),
 		   source,
 		   new String[] {
 			   "nullFree", "false"
 		   });
 		addAnnotation
-		  (getPartialSurrogateFunction_Inputs(),
+		  (getPartialSurrogateFunctionDefinition_Inputs(),
 		   source,
 		   new String[] {
 			   "nullFree", "false"
 		   });
 		addAnnotation
-		  (getPartialSurrogateFunction_Outputs(),
+		  (getPartialSurrogateFunctionDefinition_Outputs(),
 		   source,
 		   new String[] {
 			   "nullFree", "false"
 		   });
 		addAnnotation
-		  (getPartialSurrogateFunction_Parameters(),
+		  (getPartialSurrogateFunctionDefinition_Parameters(),
 		   source,
 		   new String[] {
 			   "nullFree", "false"

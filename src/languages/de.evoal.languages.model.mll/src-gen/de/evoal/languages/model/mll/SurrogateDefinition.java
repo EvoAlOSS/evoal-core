@@ -78,7 +78,7 @@ public interface SurrogateDefinition extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Layers</b></em>' containment reference list.
-	 * The list contents are of type {@link de.evoal.languages.model.mll.SurrogateLayer}.
+	 * The list contents are of type {@link de.evoal.languages.model.mll.SurrogateLayerDefinition}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Layers</em>' containment reference list.
@@ -87,6 +87,6 @@ public interface SurrogateDefinition extends EObject {
 	 *        annotation="http://www.eclipse.org/OCL/Collection nullFree='false'"
 	 * @generated
 	 */
-	EList<SurrogateLayer> getLayers();
+	EList<SurrogateLayerDefinition> getLayers();
 
 } // SurrogateDefinition

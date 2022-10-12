@@ -122,7 +122,7 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 		private final RuleCall cOutputsDataDescriptionStringOrIdParserRuleCall_7_1_0_1 = (RuleCall)cOutputsDataDescriptionCrossReference_7_1_0.eContents().get(1);
 		private final Keyword cUsingKeyword_8 = (Keyword)cGroup.eContents().get(8);
 		private final Assignment cLayersAssignment_9 = (Assignment)cGroup.eContents().get(9);
-		private final RuleCall cLayersSurrogateLayerRuleParserRuleCall_9_0 = (RuleCall)cLayersAssignment_9.eContents().get(0);
+		private final RuleCall cLayersSurrogateLayerDefinitionRuleParserRuleCall_9_0 = (RuleCall)cLayersAssignment_9.eContents().get(0);
 		
 		//SurrogateDefinitionRule returns SurrogateDefinition:
 		//    "prediction" name = STRING
@@ -131,7 +131,7 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 		//    "to"
 		//        outputs += [ddl::DataDescription|StringOrId] ("," outputs += [ddl::DataDescription|StringOrId])*
 		//    "using"
-		//        (layers += SurrogateLayerRule)+
+		//        (layers += SurrogateLayerDefinitionRule)+
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
@@ -141,7 +141,7 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 		//"to"
 		//    outputs += [ddl::DataDescription|StringOrId] ("," outputs += [ddl::DataDescription|StringOrId])*
 		//"using"
-		//    (layers += SurrogateLayerRule)+
+		//    (layers += SurrogateLayerDefinitionRule)+
 		public Group getGroup() { return cGroup; }
 		
 		//"prediction"
@@ -210,32 +210,32 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 		//"using"
 		public Keyword getUsingKeyword_8() { return cUsingKeyword_8; }
 		
-		//(layers += SurrogateLayerRule)+
+		//(layers += SurrogateLayerDefinitionRule)+
 		public Assignment getLayersAssignment_9() { return cLayersAssignment_9; }
 		
-		//SurrogateLayerRule
-		public RuleCall getLayersSurrogateLayerRuleParserRuleCall_9_0() { return cLayersSurrogateLayerRuleParserRuleCall_9_0; }
+		//SurrogateLayerDefinitionRule
+		public RuleCall getLayersSurrogateLayerDefinitionRuleParserRuleCall_9_0() { return cLayersSurrogateLayerDefinitionRuleParserRuleCall_9_0; }
 	}
-	public class SurrogateLayerRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.mll.dsl.MachineLearningLanguage.SurrogateLayerRule");
+	public class SurrogateLayerDefinitionRuleElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.mll.dsl.MachineLearningLanguage.SurrogateLayerDefinitionRule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cLayerKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameSTRINGTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		private final Keyword cWithKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		private final Assignment cFunctionsAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cFunctionsPartialSurrogateFunctionRuleParserRuleCall_3_0 = (RuleCall)cFunctionsAssignment_3.eContents().get(0);
+		private final RuleCall cFunctionsPartialSurrogateFunctionDefinitionRuleParserRuleCall_3_0 = (RuleCall)cFunctionsAssignment_3.eContents().get(0);
 		
-		//SurrogateLayerRule returns SurrogateLayer:
+		//SurrogateLayerDefinitionRule returns SurrogateLayerDefinition:
 		//    "layer" name = STRING
 		//    "with"
-		//        (functions += PartialSurrogateFunctionRule)+
+		//        (functions += PartialSurrogateFunctionDefinitionRule)+
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"layer" name = STRING
 		//"with"
-		//    (functions += PartialSurrogateFunctionRule)+
+		//    (functions += PartialSurrogateFunctionDefinitionRule)+
 		public Group getGroup() { return cGroup; }
 		
 		//"layer"
@@ -250,14 +250,14 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 		//"with"
 		public Keyword getWithKeyword_2() { return cWithKeyword_2; }
 		
-		//(functions += PartialSurrogateFunctionRule)+
+		//(functions += PartialSurrogateFunctionDefinitionRule)+
 		public Assignment getFunctionsAssignment_3() { return cFunctionsAssignment_3; }
 		
-		//PartialSurrogateFunctionRule
-		public RuleCall getFunctionsPartialSurrogateFunctionRuleParserRuleCall_3_0() { return cFunctionsPartialSurrogateFunctionRuleParserRuleCall_3_0; }
+		//PartialSurrogateFunctionDefinitionRule
+		public RuleCall getFunctionsPartialSurrogateFunctionDefinitionRuleParserRuleCall_3_0() { return cFunctionsPartialSurrogateFunctionDefinitionRuleParserRuleCall_3_0; }
 	}
-	public class PartialSurrogateFunctionRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.mll.dsl.MachineLearningLanguage.PartialSurrogateFunctionRule");
+	public class PartialSurrogateFunctionDefinitionRuleElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.mll.dsl.MachineLearningLanguage.PartialSurrogateFunctionDefinitionRule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cFunctionKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -287,7 +287,7 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 		private final Assignment cParametersAssignment_8_2 = (Assignment)cGroup_8.eContents().get(2);
 		private final RuleCall cParametersAttributeRuleParserRuleCall_8_2_0 = (RuleCall)cParametersAssignment_8_2.eContents().get(0);
 		
-		//PartialSurrogateFunctionRule returns PartialSurrogateFunction:
+		//PartialSurrogateFunctionDefinitionRule returns PartialSurrogateFunctionDefinition:
 		//    "function" name = [dl::TypeDefinition|StringOrId]
 		//    "mapping"
 		//        inputs += [ddl::DataDescription|StringOrId] ("," inputs += [ddl::DataDescription|StringOrId])*
@@ -736,8 +736,8 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 	private final MachineLearningConfigurationRuleElements pMachineLearningConfigurationRule;
 	private final UseRuleElements pUseRule;
 	private final SurrogateDefinitionRuleElements pSurrogateDefinitionRule;
-	private final SurrogateLayerRuleElements pSurrogateLayerRule;
-	private final PartialSurrogateFunctionRuleElements pPartialSurrogateFunctionRule;
+	private final SurrogateLayerDefinitionRuleElements pSurrogateLayerDefinitionRule;
+	private final PartialSurrogateFunctionDefinitionRuleElements pPartialSurrogateFunctionDefinitionRule;
 	private final PredictStatementRuleElements pPredictStatementRule;
 	private final StatementRuleElements pStatementRule;
 	private final ForStatementRuleElements pForStatementRule;
@@ -768,8 +768,8 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 		this.pMachineLearningConfigurationRule = new MachineLearningConfigurationRuleElements();
 		this.pUseRule = new UseRuleElements();
 		this.pSurrogateDefinitionRule = new SurrogateDefinitionRuleElements();
-		this.pSurrogateLayerRule = new SurrogateLayerRuleElements();
-		this.pPartialSurrogateFunctionRule = new PartialSurrogateFunctionRuleElements();
+		this.pSurrogateLayerDefinitionRule = new SurrogateLayerDefinitionRuleElements();
+		this.pPartialSurrogateFunctionDefinitionRule = new PartialSurrogateFunctionDefinitionRuleElements();
 		this.pPredictStatementRule = new PredictStatementRuleElements();
 		this.pStatementRule = new StatementRuleElements();
 		this.pForStatementRule = new ForStatementRuleElements();
@@ -847,7 +847,7 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 	//    "to"
 	//        outputs += [ddl::DataDescription|StringOrId] ("," outputs += [ddl::DataDescription|StringOrId])*
 	//    "using"
-	//        (layers += SurrogateLayerRule)+
+	//        (layers += SurrogateLayerDefinitionRule)+
 	//;
 	public SurrogateDefinitionRuleElements getSurrogateDefinitionRuleAccess() {
 		return pSurrogateDefinitionRule;
@@ -857,20 +857,20 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 		return getSurrogateDefinitionRuleAccess().getRule();
 	}
 	
-	//SurrogateLayerRule returns SurrogateLayer:
+	//SurrogateLayerDefinitionRule returns SurrogateLayerDefinition:
 	//    "layer" name = STRING
 	//    "with"
-	//        (functions += PartialSurrogateFunctionRule)+
+	//        (functions += PartialSurrogateFunctionDefinitionRule)+
 	//;
-	public SurrogateLayerRuleElements getSurrogateLayerRuleAccess() {
-		return pSurrogateLayerRule;
+	public SurrogateLayerDefinitionRuleElements getSurrogateLayerDefinitionRuleAccess() {
+		return pSurrogateLayerDefinitionRule;
 	}
 	
-	public ParserRule getSurrogateLayerRuleRule() {
-		return getSurrogateLayerRuleAccess().getRule();
+	public ParserRule getSurrogateLayerDefinitionRuleRule() {
+		return getSurrogateLayerDefinitionRuleAccess().getRule();
 	}
 	
-	//PartialSurrogateFunctionRule returns PartialSurrogateFunction:
+	//PartialSurrogateFunctionDefinitionRule returns PartialSurrogateFunctionDefinition:
 	//    "function" name = [dl::TypeDefinition|StringOrId]
 	//    "mapping"
 	//        inputs += [ddl::DataDescription|StringOrId] ("," inputs += [ddl::DataDescription|StringOrId])*
@@ -879,12 +879,12 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 	//    ("with" "parameters"
 	//        ((parameters += InstanceLanguage::AttributeRule)+ ))?
 	//;
-	public PartialSurrogateFunctionRuleElements getPartialSurrogateFunctionRuleAccess() {
-		return pPartialSurrogateFunctionRule;
+	public PartialSurrogateFunctionDefinitionRuleElements getPartialSurrogateFunctionDefinitionRuleAccess() {
+		return pPartialSurrogateFunctionDefinitionRule;
 	}
 	
-	public ParserRule getPartialSurrogateFunctionRuleRule() {
-		return getPartialSurrogateFunctionRuleAccess().getRule();
+	public ParserRule getPartialSurrogateFunctionDefinitionRuleRule() {
+		return getPartialSurrogateFunctionDefinitionRuleAccess().getRule();
 	}
 	
 	//PredictStatementRule returns PredictStatement:

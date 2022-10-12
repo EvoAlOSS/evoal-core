@@ -27,7 +27,7 @@ import org.eclipse.emf.ecore.EReference;
  * <!-- end-model-doc -->
  * @see de.evoal.languages.model.mll.MllFactory
  * @model kind="package"
- *        annotation="http://www.eclipse.org/OCL/Import ddl='platform:/resource/de.evoal.languages.model.ddl/model/model.ecore#/' dl='platform:/resource/de.evoal.languages.model.dl/model/model.ecore#/' el='platform:/resource/de.evoal.languages.model.el/model/model.ecore#/' instance='platform:/resource/de.evoal.languages.model.instance/model/model.ecore#/'"
+ *        annotation="http://www.eclipse.org/OCL/Import ddl='platform:/resource/de.evoal.languages.model.ddl/model/model.ecore#/' dl='platform:/resource/de.evoal.languages.model.dl/model/model.ecore#/' ecore='http://www.eclipse.org/emf/2002/Ecore' el='platform:/resource/de.evoal.languages.model.el/model/model.ecore#/' instance='platform:/resource/de.evoal.languages.model.instance/model/model.ecore#/'"
  * @generated
  */
 public interface MllPackage extends EPackage {
@@ -165,14 +165,14 @@ public interface MllPackage extends EPackage {
 	int SURROGATE_DEFINITION_FEATURE_COUNT = 4;
 
 	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.mll.impl.SurrogateLayerImpl <em>Surrogate Layer</em>}' class.
+	 * The meta object id for the '{@link de.evoal.languages.model.mll.impl.SurrogateLayerDefinitionImpl <em>Surrogate Layer Definition</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.mll.impl.SurrogateLayerImpl
-	 * @see de.evoal.languages.model.mll.impl.MllPackageImpl#getSurrogateLayer()
+	 * @see de.evoal.languages.model.mll.impl.SurrogateLayerDefinitionImpl
+	 * @see de.evoal.languages.model.mll.impl.MllPackageImpl#getSurrogateLayerDefinition()
 	 * @generated
 	 */
-	int SURROGATE_LAYER = 2;
+	int SURROGATE_LAYER_DEFINITION = 2;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -181,7 +181,7 @@ public interface MllPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SURROGATE_LAYER__NAME = 0;
+	int SURROGATE_LAYER_DEFINITION__NAME = 0;
 
 	/**
 	 * The feature id for the '<em><b>Functions</b></em>' containment reference list.
@@ -190,26 +190,26 @@ public interface MllPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SURROGATE_LAYER__FUNCTIONS = 1;
+	int SURROGATE_LAYER_DEFINITION__FUNCTIONS = 1;
 
 	/**
-	 * The number of structural features of the '<em>Surrogate Layer</em>' class.
+	 * The number of structural features of the '<em>Surrogate Layer Definition</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SURROGATE_LAYER_FEATURE_COUNT = 2;
+	int SURROGATE_LAYER_DEFINITION_FEATURE_COUNT = 2;
 
 	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.mll.impl.PartialSurrogateFunctionImpl <em>Partial Surrogate Function</em>}' class.
+	 * The meta object id for the '{@link de.evoal.languages.model.mll.impl.PartialSurrogateFunctionDefinitionImpl <em>Partial Surrogate Function Definition</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.mll.impl.PartialSurrogateFunctionImpl
-	 * @see de.evoal.languages.model.mll.impl.MllPackageImpl#getPartialSurrogateFunction()
+	 * @see de.evoal.languages.model.mll.impl.PartialSurrogateFunctionDefinitionImpl
+	 * @see de.evoal.languages.model.mll.impl.MllPackageImpl#getPartialSurrogateFunctionDefinition()
 	 * @generated
 	 */
-	int PARTIAL_SURROGATE_FUNCTION = 3;
+	int PARTIAL_SURROGATE_FUNCTION_DEFINITION = 3;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' reference.
@@ -218,7 +218,7 @@ public interface MllPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PARTIAL_SURROGATE_FUNCTION__NAME = 0;
+	int PARTIAL_SURROGATE_FUNCTION_DEFINITION__NAME = 0;
 
 	/**
 	 * The feature id for the '<em><b>Inputs</b></em>' reference list.
@@ -227,7 +227,7 @@ public interface MllPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PARTIAL_SURROGATE_FUNCTION__INPUTS = 1;
+	int PARTIAL_SURROGATE_FUNCTION_DEFINITION__INPUTS = 1;
 
 	/**
 	 * The feature id for the '<em><b>Outputs</b></em>' reference list.
@@ -236,7 +236,7 @@ public interface MllPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PARTIAL_SURROGATE_FUNCTION__OUTPUTS = 2;
+	int PARTIAL_SURROGATE_FUNCTION_DEFINITION__OUTPUTS = 2;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -245,16 +245,16 @@ public interface MllPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PARTIAL_SURROGATE_FUNCTION__PARAMETERS = 3;
+	int PARTIAL_SURROGATE_FUNCTION_DEFINITION__PARAMETERS = 3;
 
 	/**
-	 * The number of structural features of the '<em>Partial Surrogate Function</em>' class.
+	 * The number of structural features of the '<em>Partial Surrogate Function Definition</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PARTIAL_SURROGATE_FUNCTION_FEATURE_COUNT = 4;
+	int PARTIAL_SURROGATE_FUNCTION_DEFINITION_FEATURE_COUNT = 4;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.mll.impl.PredictionImpl <em>Prediction</em>}' class.
@@ -717,90 +717,90 @@ public interface MllPackage extends EPackage {
 	EReference getSurrogateDefinition_Layers();
 
 	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.mll.SurrogateLayer <em>Surrogate Layer</em>}'.
+	 * Returns the meta object for class '{@link de.evoal.languages.model.mll.SurrogateLayerDefinition <em>Surrogate Layer Definition</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Surrogate Layer</em>'.
-	 * @see de.evoal.languages.model.mll.SurrogateLayer
+	 * @return the meta object for class '<em>Surrogate Layer Definition</em>'.
+	 * @see de.evoal.languages.model.mll.SurrogateLayerDefinition
 	 * @generated
 	 */
-	EClass getSurrogateLayer();
+	EClass getSurrogateLayerDefinition();
 
 	/**
-	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.mll.SurrogateLayer#getName <em>Name</em>}'.
+	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.mll.SurrogateLayerDefinition#getName <em>Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see de.evoal.languages.model.mll.SurrogateLayer#getName()
-	 * @see #getSurrogateLayer()
+	 * @see de.evoal.languages.model.mll.SurrogateLayerDefinition#getName()
+	 * @see #getSurrogateLayerDefinition()
 	 * @generated
 	 */
-	EAttribute getSurrogateLayer_Name();
+	EAttribute getSurrogateLayerDefinition_Name();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.mll.SurrogateLayer#getFunctions <em>Functions</em>}'.
+	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.mll.SurrogateLayerDefinition#getFunctions <em>Functions</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Functions</em>'.
-	 * @see de.evoal.languages.model.mll.SurrogateLayer#getFunctions()
-	 * @see #getSurrogateLayer()
+	 * @see de.evoal.languages.model.mll.SurrogateLayerDefinition#getFunctions()
+	 * @see #getSurrogateLayerDefinition()
 	 * @generated
 	 */
-	EReference getSurrogateLayer_Functions();
+	EReference getSurrogateLayerDefinition_Functions();
 
 	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.mll.PartialSurrogateFunction <em>Partial Surrogate Function</em>}'.
+	 * Returns the meta object for class '{@link de.evoal.languages.model.mll.PartialSurrogateFunctionDefinition <em>Partial Surrogate Function Definition</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Partial Surrogate Function</em>'.
-	 * @see de.evoal.languages.model.mll.PartialSurrogateFunction
+	 * @return the meta object for class '<em>Partial Surrogate Function Definition</em>'.
+	 * @see de.evoal.languages.model.mll.PartialSurrogateFunctionDefinition
 	 * @generated
 	 */
-	EClass getPartialSurrogateFunction();
+	EClass getPartialSurrogateFunctionDefinition();
 
 	/**
-	 * Returns the meta object for the reference '{@link de.evoal.languages.model.mll.PartialSurrogateFunction#getName <em>Name</em>}'.
+	 * Returns the meta object for the reference '{@link de.evoal.languages.model.mll.PartialSurrogateFunctionDefinition#getName <em>Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Name</em>'.
-	 * @see de.evoal.languages.model.mll.PartialSurrogateFunction#getName()
-	 * @see #getPartialSurrogateFunction()
+	 * @see de.evoal.languages.model.mll.PartialSurrogateFunctionDefinition#getName()
+	 * @see #getPartialSurrogateFunctionDefinition()
 	 * @generated
 	 */
-	EReference getPartialSurrogateFunction_Name();
+	EReference getPartialSurrogateFunctionDefinition_Name();
 
 	/**
-	 * Returns the meta object for the reference list '{@link de.evoal.languages.model.mll.PartialSurrogateFunction#getInputs <em>Inputs</em>}'.
+	 * Returns the meta object for the reference list '{@link de.evoal.languages.model.mll.PartialSurrogateFunctionDefinition#getInputs <em>Inputs</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference list '<em>Inputs</em>'.
-	 * @see de.evoal.languages.model.mll.PartialSurrogateFunction#getInputs()
-	 * @see #getPartialSurrogateFunction()
+	 * @see de.evoal.languages.model.mll.PartialSurrogateFunctionDefinition#getInputs()
+	 * @see #getPartialSurrogateFunctionDefinition()
 	 * @generated
 	 */
-	EReference getPartialSurrogateFunction_Inputs();
+	EReference getPartialSurrogateFunctionDefinition_Inputs();
 
 	/**
-	 * Returns the meta object for the reference list '{@link de.evoal.languages.model.mll.PartialSurrogateFunction#getOutputs <em>Outputs</em>}'.
+	 * Returns the meta object for the reference list '{@link de.evoal.languages.model.mll.PartialSurrogateFunctionDefinition#getOutputs <em>Outputs</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference list '<em>Outputs</em>'.
-	 * @see de.evoal.languages.model.mll.PartialSurrogateFunction#getOutputs()
-	 * @see #getPartialSurrogateFunction()
+	 * @see de.evoal.languages.model.mll.PartialSurrogateFunctionDefinition#getOutputs()
+	 * @see #getPartialSurrogateFunctionDefinition()
 	 * @generated
 	 */
-	EReference getPartialSurrogateFunction_Outputs();
+	EReference getPartialSurrogateFunctionDefinition_Outputs();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.mll.PartialSurrogateFunction#getParameters <em>Parameters</em>}'.
+	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.mll.PartialSurrogateFunctionDefinition#getParameters <em>Parameters</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Parameters</em>'.
-	 * @see de.evoal.languages.model.mll.PartialSurrogateFunction#getParameters()
-	 * @see #getPartialSurrogateFunction()
+	 * @see de.evoal.languages.model.mll.PartialSurrogateFunctionDefinition#getParameters()
+	 * @see #getPartialSurrogateFunctionDefinition()
 	 * @generated
 	 */
-	EReference getPartialSurrogateFunction_Parameters();
+	EReference getPartialSurrogateFunctionDefinition_Parameters();
 
 	/**
 	 * Returns the meta object for class '{@link de.evoal.languages.model.mll.Prediction <em>Prediction</em>}'.
@@ -1198,14 +1198,14 @@ public interface MllPackage extends EPackage {
 		EReference SURROGATE_DEFINITION__LAYERS = eINSTANCE.getSurrogateDefinition_Layers();
 
 		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.mll.impl.SurrogateLayerImpl <em>Surrogate Layer</em>}' class.
+		 * The meta object literal for the '{@link de.evoal.languages.model.mll.impl.SurrogateLayerDefinitionImpl <em>Surrogate Layer Definition</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.mll.impl.SurrogateLayerImpl
-		 * @see de.evoal.languages.model.mll.impl.MllPackageImpl#getSurrogateLayer()
+		 * @see de.evoal.languages.model.mll.impl.SurrogateLayerDefinitionImpl
+		 * @see de.evoal.languages.model.mll.impl.MllPackageImpl#getSurrogateLayerDefinition()
 		 * @generated
 		 */
-		EClass SURROGATE_LAYER = eINSTANCE.getSurrogateLayer();
+		EClass SURROGATE_LAYER_DEFINITION = eINSTANCE.getSurrogateLayerDefinition();
 
 		/**
 		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
@@ -1213,7 +1213,7 @@ public interface MllPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute SURROGATE_LAYER__NAME = eINSTANCE.getSurrogateLayer_Name();
+		EAttribute SURROGATE_LAYER_DEFINITION__NAME = eINSTANCE.getSurrogateLayerDefinition_Name();
 
 		/**
 		 * The meta object literal for the '<em><b>Functions</b></em>' containment reference list feature.
@@ -1221,17 +1221,17 @@ public interface MllPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference SURROGATE_LAYER__FUNCTIONS = eINSTANCE.getSurrogateLayer_Functions();
+		EReference SURROGATE_LAYER_DEFINITION__FUNCTIONS = eINSTANCE.getSurrogateLayerDefinition_Functions();
 
 		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.mll.impl.PartialSurrogateFunctionImpl <em>Partial Surrogate Function</em>}' class.
+		 * The meta object literal for the '{@link de.evoal.languages.model.mll.impl.PartialSurrogateFunctionDefinitionImpl <em>Partial Surrogate Function Definition</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.mll.impl.PartialSurrogateFunctionImpl
-		 * @see de.evoal.languages.model.mll.impl.MllPackageImpl#getPartialSurrogateFunction()
+		 * @see de.evoal.languages.model.mll.impl.PartialSurrogateFunctionDefinitionImpl
+		 * @see de.evoal.languages.model.mll.impl.MllPackageImpl#getPartialSurrogateFunctionDefinition()
 		 * @generated
 		 */
-		EClass PARTIAL_SURROGATE_FUNCTION = eINSTANCE.getPartialSurrogateFunction();
+		EClass PARTIAL_SURROGATE_FUNCTION_DEFINITION = eINSTANCE.getPartialSurrogateFunctionDefinition();
 
 		/**
 		 * The meta object literal for the '<em><b>Name</b></em>' reference feature.
@@ -1239,7 +1239,7 @@ public interface MllPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference PARTIAL_SURROGATE_FUNCTION__NAME = eINSTANCE.getPartialSurrogateFunction_Name();
+		EReference PARTIAL_SURROGATE_FUNCTION_DEFINITION__NAME = eINSTANCE.getPartialSurrogateFunctionDefinition_Name();
 
 		/**
 		 * The meta object literal for the '<em><b>Inputs</b></em>' reference list feature.
@@ -1247,7 +1247,7 @@ public interface MllPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference PARTIAL_SURROGATE_FUNCTION__INPUTS = eINSTANCE.getPartialSurrogateFunction_Inputs();
+		EReference PARTIAL_SURROGATE_FUNCTION_DEFINITION__INPUTS = eINSTANCE.getPartialSurrogateFunctionDefinition_Inputs();
 
 		/**
 		 * The meta object literal for the '<em><b>Outputs</b></em>' reference list feature.
@@ -1255,7 +1255,7 @@ public interface MllPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference PARTIAL_SURROGATE_FUNCTION__OUTPUTS = eINSTANCE.getPartialSurrogateFunction_Outputs();
+		EReference PARTIAL_SURROGATE_FUNCTION_DEFINITION__OUTPUTS = eINSTANCE.getPartialSurrogateFunctionDefinition_Outputs();
 
 		/**
 		 * The meta object literal for the '<em><b>Parameters</b></em>' containment reference list feature.
@@ -1263,7 +1263,7 @@ public interface MllPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference PARTIAL_SURROGATE_FUNCTION__PARAMETERS = eINSTANCE.getPartialSurrogateFunction_Parameters();
+		EReference PARTIAL_SURROGATE_FUNCTION_DEFINITION__PARAMETERS = eINSTANCE.getPartialSurrogateFunctionDefinition_Parameters();
 
 		/**
 		 * The meta object literal for the '{@link de.evoal.languages.model.mll.impl.PredictionImpl <em>Prediction</em>}' class.

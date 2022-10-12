@@ -14,38 +14,38 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Partial Surrogate Function</b></em>'.
+ * A representation of the model object '<em><b>Partial Surrogate Function Definition</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link de.evoal.languages.model.mll.PartialSurrogateFunction#getName <em>Name</em>}</li>
- *   <li>{@link de.evoal.languages.model.mll.PartialSurrogateFunction#getInputs <em>Inputs</em>}</li>
- *   <li>{@link de.evoal.languages.model.mll.PartialSurrogateFunction#getOutputs <em>Outputs</em>}</li>
- *   <li>{@link de.evoal.languages.model.mll.PartialSurrogateFunction#getParameters <em>Parameters</em>}</li>
+ *   <li>{@link de.evoal.languages.model.mll.PartialSurrogateFunctionDefinition#getName <em>Name</em>}</li>
+ *   <li>{@link de.evoal.languages.model.mll.PartialSurrogateFunctionDefinition#getInputs <em>Inputs</em>}</li>
+ *   <li>{@link de.evoal.languages.model.mll.PartialSurrogateFunctionDefinition#getOutputs <em>Outputs</em>}</li>
+ *   <li>{@link de.evoal.languages.model.mll.PartialSurrogateFunctionDefinition#getParameters <em>Parameters</em>}</li>
  * </ul>
  *
- * @see de.evoal.languages.model.mll.MllPackage#getPartialSurrogateFunction()
+ * @see de.evoal.languages.model.mll.MllPackage#getPartialSurrogateFunctionDefinition()
  * @model
  * @generated
  */
-public interface PartialSurrogateFunction extends EObject {
+public interface PartialSurrogateFunctionDefinition extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Name</em>' reference.
 	 * @see #setName(TypeDefinition)
-	 * @see de.evoal.languages.model.mll.MllPackage#getPartialSurrogateFunction_Name()
+	 * @see de.evoal.languages.model.mll.MllPackage#getPartialSurrogateFunctionDefinition_Name()
 	 * @model required="true"
 	 * @generated
 	 */
 	TypeDefinition getName();
 
 	/**
-	 * Sets the value of the '{@link de.evoal.languages.model.mll.PartialSurrogateFunction#getName <em>Name</em>}' reference.
+	 * Sets the value of the '{@link de.evoal.languages.model.mll.PartialSurrogateFunctionDefinition#getName <em>Name</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Name</em>' reference.
@@ -60,7 +60,7 @@ public interface PartialSurrogateFunction extends EObject {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Inputs</em>' reference list.
-	 * @see de.evoal.languages.model.mll.MllPackage#getPartialSurrogateFunction_Inputs()
+	 * @see de.evoal.languages.model.mll.MllPackage#getPartialSurrogateFunctionDefinition_Inputs()
 	 * @model required="true" ordered="false"
 	 *        annotation="http://www.eclipse.org/OCL/Collection nullFree='false'"
 	 * @generated
@@ -73,7 +73,7 @@ public interface PartialSurrogateFunction extends EObject {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Outputs</em>' reference list.
-	 * @see de.evoal.languages.model.mll.MllPackage#getPartialSurrogateFunction_Outputs()
+	 * @see de.evoal.languages.model.mll.MllPackage#getPartialSurrogateFunctionDefinition_Outputs()
 	 * @model required="true" ordered="false"
 	 *        annotation="http://www.eclipse.org/OCL/Collection nullFree='false'"
 	 * @generated
@@ -86,11 +86,11 @@ public interface PartialSurrogateFunction extends EObject {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Parameters</em>' containment reference list.
-	 * @see de.evoal.languages.model.mll.MllPackage#getPartialSurrogateFunction_Parameters()
+	 * @see de.evoal.languages.model.mll.MllPackage#getPartialSurrogateFunctionDefinition_Parameters()
 	 * @model containment="true" ordered="false"
 	 *        annotation="http://www.eclipse.org/OCL/Collection nullFree='false'"
 	 * @generated
 	 */
 	EList<Attribute> getParameters();
 
-} // PartialSurrogateFunction
+} // PartialSurrogateFunctionDefinition

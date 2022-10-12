@@ -40,22 +40,22 @@ public interface MllFactory extends EFactory {
 	SurrogateDefinition createSurrogateDefinition();
 
 	/**
-	 * Returns a new object of class '<em>Surrogate Layer</em>'.
+	 * Returns a new object of class '<em>Surrogate Layer Definition</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Surrogate Layer</em>'.
+	 * @return a new object of class '<em>Surrogate Layer Definition</em>'.
 	 * @generated
 	 */
-	SurrogateLayer createSurrogateLayer();
+	SurrogateLayerDefinition createSurrogateLayerDefinition();
 
 	/**
-	 * Returns a new object of class '<em>Partial Surrogate Function</em>'.
+	 * Returns a new object of class '<em>Partial Surrogate Function Definition</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Partial Surrogate Function</em>'.
+	 * @return a new object of class '<em>Partial Surrogate Function Definition</em>'.
 	 * @generated
 	 */
-	PartialSurrogateFunction createPartialSurrogateFunction();
+	PartialSurrogateFunctionDefinition createPartialSurrogateFunctionDefinition();
 
 	/**
 	 * Returns a new object of class '<em>Prediction</em>'.

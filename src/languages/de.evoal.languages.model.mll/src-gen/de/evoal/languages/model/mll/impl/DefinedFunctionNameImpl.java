@@ -2,9 +2,9 @@
  */
 package de.evoal.languages.model.mll.impl;
 
-import de.evoal.languages.model.el.impl.FunctionNameImpl;
-
 import de.evoal.languages.model.dl.FunctionDefinition;
+
+import de.evoal.languages.model.el.impl.FunctionNameImpl;
 
 import de.evoal.languages.model.mll.DefinedFunctionName;
 import de.evoal.languages.model.mll.MllPackage;

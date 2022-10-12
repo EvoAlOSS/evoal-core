@@ -558,7 +558,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start "ruleSurrogateDefinitionRule"
-    // InternalMachineLearningLanguage.g:200:1: ruleSurrogateDefinitionRule returns [EObject current=null] : (otherlv_0= 'prediction' ( (lv_name_1_0= RULE_STRING ) ) otherlv_2= 'maps' ( ( ruleStringOrId ) ) (otherlv_4= ',' ( ( ruleStringOrId ) ) )* otherlv_6= 'to' ( ( ruleStringOrId ) ) (otherlv_8= ',' ( ( ruleStringOrId ) ) )* otherlv_10= 'using' ( (lv_layers_11_0= ruleSurrogateLayerRule ) )+ ) ;
+    // InternalMachineLearningLanguage.g:200:1: ruleSurrogateDefinitionRule returns [EObject current=null] : (otherlv_0= 'prediction' ( (lv_name_1_0= RULE_STRING ) ) otherlv_2= 'maps' ( ( ruleStringOrId ) ) (otherlv_4= ',' ( ( ruleStringOrId ) ) )* otherlv_6= 'to' ( ( ruleStringOrId ) ) (otherlv_8= ',' ( ( ruleStringOrId ) ) )* otherlv_10= 'using' ( (lv_layers_11_0= ruleSurrogateLayerDefinitionRule ) )+ ) ;
     public final EObject ruleSurrogateDefinitionRule() throws RecognitionException {
         EObject current = null;
 
@@ -576,11 +576,11 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
         	enterRule();
 
         try {
-            // InternalMachineLearningLanguage.g:206:2: ( (otherlv_0= 'prediction' ( (lv_name_1_0= RULE_STRING ) ) otherlv_2= 'maps' ( ( ruleStringOrId ) ) (otherlv_4= ',' ( ( ruleStringOrId ) ) )* otherlv_6= 'to' ( ( ruleStringOrId ) ) (otherlv_8= ',' ( ( ruleStringOrId ) ) )* otherlv_10= 'using' ( (lv_layers_11_0= ruleSurrogateLayerRule ) )+ ) )
-            // InternalMachineLearningLanguage.g:207:2: (otherlv_0= 'prediction' ( (lv_name_1_0= RULE_STRING ) ) otherlv_2= 'maps' ( ( ruleStringOrId ) ) (otherlv_4= ',' ( ( ruleStringOrId ) ) )* otherlv_6= 'to' ( ( ruleStringOrId ) ) (otherlv_8= ',' ( ( ruleStringOrId ) ) )* otherlv_10= 'using' ( (lv_layers_11_0= ruleSurrogateLayerRule ) )+ )
+            // InternalMachineLearningLanguage.g:206:2: ( (otherlv_0= 'prediction' ( (lv_name_1_0= RULE_STRING ) ) otherlv_2= 'maps' ( ( ruleStringOrId ) ) (otherlv_4= ',' ( ( ruleStringOrId ) ) )* otherlv_6= 'to' ( ( ruleStringOrId ) ) (otherlv_8= ',' ( ( ruleStringOrId ) ) )* otherlv_10= 'using' ( (lv_layers_11_0= ruleSurrogateLayerDefinitionRule ) )+ ) )
+            // InternalMachineLearningLanguage.g:207:2: (otherlv_0= 'prediction' ( (lv_name_1_0= RULE_STRING ) ) otherlv_2= 'maps' ( ( ruleStringOrId ) ) (otherlv_4= ',' ( ( ruleStringOrId ) ) )* otherlv_6= 'to' ( ( ruleStringOrId ) ) (otherlv_8= ',' ( ( ruleStringOrId ) ) )* otherlv_10= 'using' ( (lv_layers_11_0= ruleSurrogateLayerDefinitionRule ) )+ )
             {
-            // InternalMachineLearningLanguage.g:207:2: (otherlv_0= 'prediction' ( (lv_name_1_0= RULE_STRING ) ) otherlv_2= 'maps' ( ( ruleStringOrId ) ) (otherlv_4= ',' ( ( ruleStringOrId ) ) )* otherlv_6= 'to' ( ( ruleStringOrId ) ) (otherlv_8= ',' ( ( ruleStringOrId ) ) )* otherlv_10= 'using' ( (lv_layers_11_0= ruleSurrogateLayerRule ) )+ )
-            // InternalMachineLearningLanguage.g:208:3: otherlv_0= 'prediction' ( (lv_name_1_0= RULE_STRING ) ) otherlv_2= 'maps' ( ( ruleStringOrId ) ) (otherlv_4= ',' ( ( ruleStringOrId ) ) )* otherlv_6= 'to' ( ( ruleStringOrId ) ) (otherlv_8= ',' ( ( ruleStringOrId ) ) )* otherlv_10= 'using' ( (lv_layers_11_0= ruleSurrogateLayerRule ) )+
+            // InternalMachineLearningLanguage.g:207:2: (otherlv_0= 'prediction' ( (lv_name_1_0= RULE_STRING ) ) otherlv_2= 'maps' ( ( ruleStringOrId ) ) (otherlv_4= ',' ( ( ruleStringOrId ) ) )* otherlv_6= 'to' ( ( ruleStringOrId ) ) (otherlv_8= ',' ( ( ruleStringOrId ) ) )* otherlv_10= 'using' ( (lv_layers_11_0= ruleSurrogateLayerDefinitionRule ) )+ )
+            // InternalMachineLearningLanguage.g:208:3: otherlv_0= 'prediction' ( (lv_name_1_0= RULE_STRING ) ) otherlv_2= 'maps' ( ( ruleStringOrId ) ) (otherlv_4= ',' ( ( ruleStringOrId ) ) )* otherlv_6= 'to' ( ( ruleStringOrId ) ) (otherlv_8= ',' ( ( ruleStringOrId ) ) )* otherlv_10= 'using' ( (lv_layers_11_0= ruleSurrogateLayerDefinitionRule ) )+
             {
             otherlv_0=(Token)match(input,14,FOLLOW_6); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -852,7 +852,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
               			newLeafNode(otherlv_10, grammarAccess.getSurrogateDefinitionRuleAccess().getUsingKeyword_8());
               		
             }
-            // InternalMachineLearningLanguage.g:330:3: ( (lv_layers_11_0= ruleSurrogateLayerRule ) )+
+            // InternalMachineLearningLanguage.g:330:3: ( (lv_layers_11_0= ruleSurrogateLayerDefinitionRule ) )+
             int cnt6=0;
             loop6:
             do {
@@ -866,18 +866,18 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
 
                 switch (alt6) {
             	case 1 :
-            	    // InternalMachineLearningLanguage.g:331:4: (lv_layers_11_0= ruleSurrogateLayerRule )
+            	    // InternalMachineLearningLanguage.g:331:4: (lv_layers_11_0= ruleSurrogateLayerDefinitionRule )
             	    {
-            	    // InternalMachineLearningLanguage.g:331:4: (lv_layers_11_0= ruleSurrogateLayerRule )
-            	    // InternalMachineLearningLanguage.g:332:5: lv_layers_11_0= ruleSurrogateLayerRule
+            	    // InternalMachineLearningLanguage.g:331:4: (lv_layers_11_0= ruleSurrogateLayerDefinitionRule )
+            	    // InternalMachineLearningLanguage.g:332:5: lv_layers_11_0= ruleSurrogateLayerDefinitionRule
             	    {
             	    if ( state.backtracking==0 ) {
 
-            	      					newCompositeNode(grammarAccess.getSurrogateDefinitionRuleAccess().getLayersSurrogateLayerRuleParserRuleCall_9_0());
+            	      					newCompositeNode(grammarAccess.getSurrogateDefinitionRuleAccess().getLayersSurrogateLayerDefinitionRuleParserRuleCall_9_0());
             	      				
             	    }
             	    pushFollow(FOLLOW_13);
-            	    lv_layers_11_0=ruleSurrogateLayerRule();
+            	    lv_layers_11_0=ruleSurrogateLayerDefinitionRule();
 
             	    state._fsp--;
             	    if (state.failed) return current;
@@ -890,7 +890,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
             	      						current,
             	      						"layers",
             	      						lv_layers_11_0,
-            	      						"de.evoal.languages.model.mll.dsl.MachineLearningLanguage.SurrogateLayerRule");
+            	      						"de.evoal.languages.model.mll.dsl.MachineLearningLanguage.SurrogateLayerDefinitionRule");
             	      					afterParserOrEnumRuleCall();
             	      				
             	    }
@@ -935,28 +935,28 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
     // $ANTLR end "ruleSurrogateDefinitionRule"
 
 
-    // $ANTLR start "entryRuleSurrogateLayerRule"
-    // InternalMachineLearningLanguage.g:353:1: entryRuleSurrogateLayerRule returns [EObject current=null] : iv_ruleSurrogateLayerRule= ruleSurrogateLayerRule EOF ;
-    public final EObject entryRuleSurrogateLayerRule() throws RecognitionException {
+    // $ANTLR start "entryRuleSurrogateLayerDefinitionRule"
+    // InternalMachineLearningLanguage.g:353:1: entryRuleSurrogateLayerDefinitionRule returns [EObject current=null] : iv_ruleSurrogateLayerDefinitionRule= ruleSurrogateLayerDefinitionRule EOF ;
+    public final EObject entryRuleSurrogateLayerDefinitionRule() throws RecognitionException {
         EObject current = null;
 
-        EObject iv_ruleSurrogateLayerRule = null;
+        EObject iv_ruleSurrogateLayerDefinitionRule = null;
 
 
         try {
-            // InternalMachineLearningLanguage.g:353:59: (iv_ruleSurrogateLayerRule= ruleSurrogateLayerRule EOF )
-            // InternalMachineLearningLanguage.g:354:2: iv_ruleSurrogateLayerRule= ruleSurrogateLayerRule EOF
+            // InternalMachineLearningLanguage.g:353:69: (iv_ruleSurrogateLayerDefinitionRule= ruleSurrogateLayerDefinitionRule EOF )
+            // InternalMachineLearningLanguage.g:354:2: iv_ruleSurrogateLayerDefinitionRule= ruleSurrogateLayerDefinitionRule EOF
             {
             if ( state.backtracking==0 ) {
-               newCompositeNode(grammarAccess.getSurrogateLayerRuleRule()); 
+               newCompositeNode(grammarAccess.getSurrogateLayerDefinitionRuleRule()); 
             }
             pushFollow(FOLLOW_1);
-            iv_ruleSurrogateLayerRule=ruleSurrogateLayerRule();
+            iv_ruleSurrogateLayerDefinitionRule=ruleSurrogateLayerDefinitionRule();
 
             state._fsp--;
             if (state.failed) return current;
             if ( state.backtracking==0 ) {
-               current =iv_ruleSurrogateLayerRule; 
+               current =iv_ruleSurrogateLayerDefinitionRule; 
             }
             match(input,EOF,FOLLOW_2); if (state.failed) return current;
 
@@ -972,12 +972,12 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
         }
         return current;
     }
-    // $ANTLR end "entryRuleSurrogateLayerRule"
+    // $ANTLR end "entryRuleSurrogateLayerDefinitionRule"
 
 
-    // $ANTLR start "ruleSurrogateLayerRule"
-    // InternalMachineLearningLanguage.g:360:1: ruleSurrogateLayerRule returns [EObject current=null] : (otherlv_0= 'layer' ( (lv_name_1_0= RULE_STRING ) ) otherlv_2= 'with' ( (lv_functions_3_0= rulePartialSurrogateFunctionRule ) )+ ) ;
-    public final EObject ruleSurrogateLayerRule() throws RecognitionException {
+    // $ANTLR start "ruleSurrogateLayerDefinitionRule"
+    // InternalMachineLearningLanguage.g:360:1: ruleSurrogateLayerDefinitionRule returns [EObject current=null] : (otherlv_0= 'layer' ( (lv_name_1_0= RULE_STRING ) ) otherlv_2= 'with' ( (lv_functions_3_0= rulePartialSurrogateFunctionDefinitionRule ) )+ ) ;
+    public final EObject ruleSurrogateLayerDefinitionRule() throws RecognitionException {
         EObject current = null;
 
         Token otherlv_0=null;
@@ -990,16 +990,16 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
         	enterRule();
 
         try {
-            // InternalMachineLearningLanguage.g:366:2: ( (otherlv_0= 'layer' ( (lv_name_1_0= RULE_STRING ) ) otherlv_2= 'with' ( (lv_functions_3_0= rulePartialSurrogateFunctionRule ) )+ ) )
-            // InternalMachineLearningLanguage.g:367:2: (otherlv_0= 'layer' ( (lv_name_1_0= RULE_STRING ) ) otherlv_2= 'with' ( (lv_functions_3_0= rulePartialSurrogateFunctionRule ) )+ )
+            // InternalMachineLearningLanguage.g:366:2: ( (otherlv_0= 'layer' ( (lv_name_1_0= RULE_STRING ) ) otherlv_2= 'with' ( (lv_functions_3_0= rulePartialSurrogateFunctionDefinitionRule ) )+ ) )
+            // InternalMachineLearningLanguage.g:367:2: (otherlv_0= 'layer' ( (lv_name_1_0= RULE_STRING ) ) otherlv_2= 'with' ( (lv_functions_3_0= rulePartialSurrogateFunctionDefinitionRule ) )+ )
             {
-            // InternalMachineLearningLanguage.g:367:2: (otherlv_0= 'layer' ( (lv_name_1_0= RULE_STRING ) ) otherlv_2= 'with' ( (lv_functions_3_0= rulePartialSurrogateFunctionRule ) )+ )
-            // InternalMachineLearningLanguage.g:368:3: otherlv_0= 'layer' ( (lv_name_1_0= RULE_STRING ) ) otherlv_2= 'with' ( (lv_functions_3_0= rulePartialSurrogateFunctionRule ) )+
+            // InternalMachineLearningLanguage.g:367:2: (otherlv_0= 'layer' ( (lv_name_1_0= RULE_STRING ) ) otherlv_2= 'with' ( (lv_functions_3_0= rulePartialSurrogateFunctionDefinitionRule ) )+ )
+            // InternalMachineLearningLanguage.g:368:3: otherlv_0= 'layer' ( (lv_name_1_0= RULE_STRING ) ) otherlv_2= 'with' ( (lv_functions_3_0= rulePartialSurrogateFunctionDefinitionRule ) )+
             {
             otherlv_0=(Token)match(input,19,FOLLOW_6); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
-              			newLeafNode(otherlv_0, grammarAccess.getSurrogateLayerRuleAccess().getLayerKeyword_0());
+              			newLeafNode(otherlv_0, grammarAccess.getSurrogateLayerDefinitionRuleAccess().getLayerKeyword_0());
               		
             }
             // InternalMachineLearningLanguage.g:372:3: ( (lv_name_1_0= RULE_STRING ) )
@@ -1011,13 +1011,13 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
             lv_name_1_0=(Token)match(input,RULE_STRING,FOLLOW_14); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
-              					newLeafNode(lv_name_1_0, grammarAccess.getSurrogateLayerRuleAccess().getNameSTRINGTerminalRuleCall_1_0());
+              					newLeafNode(lv_name_1_0, grammarAccess.getSurrogateLayerDefinitionRuleAccess().getNameSTRINGTerminalRuleCall_1_0());
               				
             }
             if ( state.backtracking==0 ) {
 
               					if (current==null) {
-              						current = createModelElement(grammarAccess.getSurrogateLayerRuleRule());
+              						current = createModelElement(grammarAccess.getSurrogateLayerDefinitionRuleRule());
               					}
               					setWithLastConsumed(
               						current,
@@ -1035,10 +1035,10 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
             otherlv_2=(Token)match(input,20,FOLLOW_15); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
-              			newLeafNode(otherlv_2, grammarAccess.getSurrogateLayerRuleAccess().getWithKeyword_2());
+              			newLeafNode(otherlv_2, grammarAccess.getSurrogateLayerDefinitionRuleAccess().getWithKeyword_2());
               		
             }
-            // InternalMachineLearningLanguage.g:394:3: ( (lv_functions_3_0= rulePartialSurrogateFunctionRule ) )+
+            // InternalMachineLearningLanguage.g:394:3: ( (lv_functions_3_0= rulePartialSurrogateFunctionDefinitionRule ) )+
             int cnt7=0;
             loop7:
             do {
@@ -1052,31 +1052,31 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
 
                 switch (alt7) {
             	case 1 :
-            	    // InternalMachineLearningLanguage.g:395:4: (lv_functions_3_0= rulePartialSurrogateFunctionRule )
+            	    // InternalMachineLearningLanguage.g:395:4: (lv_functions_3_0= rulePartialSurrogateFunctionDefinitionRule )
             	    {
-            	    // InternalMachineLearningLanguage.g:395:4: (lv_functions_3_0= rulePartialSurrogateFunctionRule )
-            	    // InternalMachineLearningLanguage.g:396:5: lv_functions_3_0= rulePartialSurrogateFunctionRule
+            	    // InternalMachineLearningLanguage.g:395:4: (lv_functions_3_0= rulePartialSurrogateFunctionDefinitionRule )
+            	    // InternalMachineLearningLanguage.g:396:5: lv_functions_3_0= rulePartialSurrogateFunctionDefinitionRule
             	    {
             	    if ( state.backtracking==0 ) {
 
-            	      					newCompositeNode(grammarAccess.getSurrogateLayerRuleAccess().getFunctionsPartialSurrogateFunctionRuleParserRuleCall_3_0());
+            	      					newCompositeNode(grammarAccess.getSurrogateLayerDefinitionRuleAccess().getFunctionsPartialSurrogateFunctionDefinitionRuleParserRuleCall_3_0());
             	      				
             	    }
             	    pushFollow(FOLLOW_16);
-            	    lv_functions_3_0=rulePartialSurrogateFunctionRule();
+            	    lv_functions_3_0=rulePartialSurrogateFunctionDefinitionRule();
 
             	    state._fsp--;
             	    if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	      					if (current==null) {
-            	      						current = createModelElementForParent(grammarAccess.getSurrogateLayerRuleRule());
+            	      						current = createModelElementForParent(grammarAccess.getSurrogateLayerDefinitionRuleRule());
             	      					}
             	      					add(
             	      						current,
             	      						"functions",
             	      						lv_functions_3_0,
-            	      						"de.evoal.languages.model.mll.dsl.MachineLearningLanguage.PartialSurrogateFunctionRule");
+            	      						"de.evoal.languages.model.mll.dsl.MachineLearningLanguage.PartialSurrogateFunctionDefinitionRule");
             	      					afterParserOrEnumRuleCall();
             	      				
             	    }
@@ -1118,31 +1118,31 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
         }
         return current;
     }
-    // $ANTLR end "ruleSurrogateLayerRule"
+    // $ANTLR end "ruleSurrogateLayerDefinitionRule"
 
 
-    // $ANTLR start "entryRulePartialSurrogateFunctionRule"
-    // InternalMachineLearningLanguage.g:417:1: entryRulePartialSurrogateFunctionRule returns [EObject current=null] : iv_rulePartialSurrogateFunctionRule= rulePartialSurrogateFunctionRule EOF ;
-    public final EObject entryRulePartialSurrogateFunctionRule() throws RecognitionException {
+    // $ANTLR start "entryRulePartialSurrogateFunctionDefinitionRule"
+    // InternalMachineLearningLanguage.g:417:1: entryRulePartialSurrogateFunctionDefinitionRule returns [EObject current=null] : iv_rulePartialSurrogateFunctionDefinitionRule= rulePartialSurrogateFunctionDefinitionRule EOF ;
+    public final EObject entryRulePartialSurrogateFunctionDefinitionRule() throws RecognitionException {
         EObject current = null;
 
-        EObject iv_rulePartialSurrogateFunctionRule = null;
+        EObject iv_rulePartialSurrogateFunctionDefinitionRule = null;
 
 
         try {
-            // InternalMachineLearningLanguage.g:417:69: (iv_rulePartialSurrogateFunctionRule= rulePartialSurrogateFunctionRule EOF )
-            // InternalMachineLearningLanguage.g:418:2: iv_rulePartialSurrogateFunctionRule= rulePartialSurrogateFunctionRule EOF
+            // InternalMachineLearningLanguage.g:417:79: (iv_rulePartialSurrogateFunctionDefinitionRule= rulePartialSurrogateFunctionDefinitionRule EOF )
+            // InternalMachineLearningLanguage.g:418:2: iv_rulePartialSurrogateFunctionDefinitionRule= rulePartialSurrogateFunctionDefinitionRule EOF
             {
             if ( state.backtracking==0 ) {
-               newCompositeNode(grammarAccess.getPartialSurrogateFunctionRuleRule()); 
+               newCompositeNode(grammarAccess.getPartialSurrogateFunctionDefinitionRuleRule()); 
             }
             pushFollow(FOLLOW_1);
-            iv_rulePartialSurrogateFunctionRule=rulePartialSurrogateFunctionRule();
+            iv_rulePartialSurrogateFunctionDefinitionRule=rulePartialSurrogateFunctionDefinitionRule();
 
             state._fsp--;
             if (state.failed) return current;
             if ( state.backtracking==0 ) {
-               current =iv_rulePartialSurrogateFunctionRule; 
+               current =iv_rulePartialSurrogateFunctionDefinitionRule; 
             }
             match(input,EOF,FOLLOW_2); if (state.failed) return current;
 
@@ -1158,12 +1158,12 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
         }
         return current;
     }
-    // $ANTLR end "entryRulePartialSurrogateFunctionRule"
+    // $ANTLR end "entryRulePartialSurrogateFunctionDefinitionRule"
 
 
-    // $ANTLR start "rulePartialSurrogateFunctionRule"
-    // InternalMachineLearningLanguage.g:424:1: rulePartialSurrogateFunctionRule returns [EObject current=null] : (otherlv_0= 'function' ( ( ruleStringOrId ) ) otherlv_2= 'mapping' ( ( ruleStringOrId ) ) (otherlv_4= ',' ( ( ruleStringOrId ) ) )* otherlv_6= 'to' ( ( ruleStringOrId ) ) (otherlv_8= ',' ( ( ruleStringOrId ) ) )* (otherlv_10= 'with' otherlv_11= 'parameters' ( (lv_parameters_12_0= ruleAttributeRule ) )+ )? ) ;
-    public final EObject rulePartialSurrogateFunctionRule() throws RecognitionException {
+    // $ANTLR start "rulePartialSurrogateFunctionDefinitionRule"
+    // InternalMachineLearningLanguage.g:424:1: rulePartialSurrogateFunctionDefinitionRule returns [EObject current=null] : (otherlv_0= 'function' ( ( ruleStringOrId ) ) otherlv_2= 'mapping' ( ( ruleStringOrId ) ) (otherlv_4= ',' ( ( ruleStringOrId ) ) )* otherlv_6= 'to' ( ( ruleStringOrId ) ) (otherlv_8= ',' ( ( ruleStringOrId ) ) )* (otherlv_10= 'with' otherlv_11= 'parameters' ( (lv_parameters_12_0= ruleAttributeRule ) )+ )? ) ;
+    public final EObject rulePartialSurrogateFunctionDefinitionRule() throws RecognitionException {
         EObject current = null;
 
         Token otherlv_0=null;
@@ -1189,7 +1189,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
             otherlv_0=(Token)match(input,21,FOLLOW_9); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
-              			newLeafNode(otherlv_0, grammarAccess.getPartialSurrogateFunctionRuleAccess().getFunctionKeyword_0());
+              			newLeafNode(otherlv_0, grammarAccess.getPartialSurrogateFunctionDefinitionRuleAccess().getFunctionKeyword_0());
               		
             }
             // InternalMachineLearningLanguage.g:436:3: ( ( ruleStringOrId ) )
@@ -1206,13 +1206,13 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
             if ( state.backtracking==0 ) {
 
               					if (current==null) {
-              						current = createModelElement(grammarAccess.getPartialSurrogateFunctionRuleRule());
+              						current = createModelElement(grammarAccess.getPartialSurrogateFunctionDefinitionRuleRule());
               					}
               				
             }
             if ( state.backtracking==0 ) {
 
-              					newCompositeNode(grammarAccess.getPartialSurrogateFunctionRuleAccess().getNameTypeDefinitionCrossReference_1_0());
+              					newCompositeNode(grammarAccess.getPartialSurrogateFunctionDefinitionRuleAccess().getNameTypeDefinitionCrossReference_1_0());
               				
             }
             pushFollow(FOLLOW_17);
@@ -1234,7 +1234,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
             otherlv_2=(Token)match(input,22,FOLLOW_9); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
-              			newLeafNode(otherlv_2, grammarAccess.getPartialSurrogateFunctionRuleAccess().getMappingKeyword_2());
+              			newLeafNode(otherlv_2, grammarAccess.getPartialSurrogateFunctionDefinitionRuleAccess().getMappingKeyword_2());
               		
             }
             // InternalMachineLearningLanguage.g:459:3: ( ( ruleStringOrId ) )
@@ -1251,13 +1251,13 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
             if ( state.backtracking==0 ) {
 
               					if (current==null) {
-              						current = createModelElement(grammarAccess.getPartialSurrogateFunctionRuleRule());
+              						current = createModelElement(grammarAccess.getPartialSurrogateFunctionDefinitionRuleRule());
               					}
               				
             }
             if ( state.backtracking==0 ) {
 
-              					newCompositeNode(grammarAccess.getPartialSurrogateFunctionRuleAccess().getInputsDataDescriptionCrossReference_3_0());
+              					newCompositeNode(grammarAccess.getPartialSurrogateFunctionDefinitionRuleAccess().getInputsDataDescriptionCrossReference_3_0());
               				
             }
             pushFollow(FOLLOW_10);
@@ -1294,7 +1294,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
             	    otherlv_4=(Token)match(input,16,FOLLOW_9); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
-            	      				newLeafNode(otherlv_4, grammarAccess.getPartialSurrogateFunctionRuleAccess().getCommaKeyword_4_0());
+            	      				newLeafNode(otherlv_4, grammarAccess.getPartialSurrogateFunctionDefinitionRuleAccess().getCommaKeyword_4_0());
             	      			
             	    }
             	    // InternalMachineLearningLanguage.g:483:4: ( ( ruleStringOrId ) )
@@ -1311,13 +1311,13 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
             	    if ( state.backtracking==0 ) {
 
             	      						if (current==null) {
-            	      							current = createModelElement(grammarAccess.getPartialSurrogateFunctionRuleRule());
+            	      							current = createModelElement(grammarAccess.getPartialSurrogateFunctionDefinitionRuleRule());
             	      						}
             	      					
             	    }
             	    if ( state.backtracking==0 ) {
 
-            	      						newCompositeNode(grammarAccess.getPartialSurrogateFunctionRuleAccess().getInputsDataDescriptionCrossReference_4_1_0());
+            	      						newCompositeNode(grammarAccess.getPartialSurrogateFunctionDefinitionRuleAccess().getInputsDataDescriptionCrossReference_4_1_0());
             	      					
             	    }
             	    pushFollow(FOLLOW_10);
@@ -1348,7 +1348,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
             otherlv_6=(Token)match(input,17,FOLLOW_9); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
-              			newLeafNode(otherlv_6, grammarAccess.getPartialSurrogateFunctionRuleAccess().getToKeyword_5());
+              			newLeafNode(otherlv_6, grammarAccess.getPartialSurrogateFunctionDefinitionRuleAccess().getToKeyword_5());
               		
             }
             // InternalMachineLearningLanguage.g:507:3: ( ( ruleStringOrId ) )
@@ -1365,13 +1365,13 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
             if ( state.backtracking==0 ) {
 
               					if (current==null) {
-              						current = createModelElement(grammarAccess.getPartialSurrogateFunctionRuleRule());
+              						current = createModelElement(grammarAccess.getPartialSurrogateFunctionDefinitionRuleRule());
               					}
               				
             }
             if ( state.backtracking==0 ) {
 
-              					newCompositeNode(grammarAccess.getPartialSurrogateFunctionRuleAccess().getOutputsDataDescriptionCrossReference_6_0());
+              					newCompositeNode(grammarAccess.getPartialSurrogateFunctionDefinitionRuleAccess().getOutputsDataDescriptionCrossReference_6_0());
               				
             }
             pushFollow(FOLLOW_18);
@@ -1408,7 +1408,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
             	    otherlv_8=(Token)match(input,16,FOLLOW_9); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
-            	      				newLeafNode(otherlv_8, grammarAccess.getPartialSurrogateFunctionRuleAccess().getCommaKeyword_7_0());
+            	      				newLeafNode(otherlv_8, grammarAccess.getPartialSurrogateFunctionDefinitionRuleAccess().getCommaKeyword_7_0());
             	      			
             	    }
             	    // InternalMachineLearningLanguage.g:531:4: ( ( ruleStringOrId ) )
@@ -1425,13 +1425,13 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
             	    if ( state.backtracking==0 ) {
 
             	      						if (current==null) {
-            	      							current = createModelElement(grammarAccess.getPartialSurrogateFunctionRuleRule());
+            	      							current = createModelElement(grammarAccess.getPartialSurrogateFunctionDefinitionRuleRule());
             	      						}
             	      					
             	    }
             	    if ( state.backtracking==0 ) {
 
-            	      						newCompositeNode(grammarAccess.getPartialSurrogateFunctionRuleAccess().getOutputsDataDescriptionCrossReference_7_1_0());
+            	      						newCompositeNode(grammarAccess.getPartialSurrogateFunctionDefinitionRuleAccess().getOutputsDataDescriptionCrossReference_7_1_0());
             	      					
             	    }
             	    pushFollow(FOLLOW_18);
@@ -1473,13 +1473,13 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
                     otherlv_10=(Token)match(input,20,FOLLOW_19); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
-                      				newLeafNode(otherlv_10, grammarAccess.getPartialSurrogateFunctionRuleAccess().getWithKeyword_8_0());
+                      				newLeafNode(otherlv_10, grammarAccess.getPartialSurrogateFunctionDefinitionRuleAccess().getWithKeyword_8_0());
                       			
                     }
                     otherlv_11=(Token)match(input,23,FOLLOW_20); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
-                      				newLeafNode(otherlv_11, grammarAccess.getPartialSurrogateFunctionRuleAccess().getParametersKeyword_8_1());
+                      				newLeafNode(otherlv_11, grammarAccess.getPartialSurrogateFunctionDefinitionRuleAccess().getParametersKeyword_8_1());
                       			
                     }
                     // InternalMachineLearningLanguage.g:560:4: ( (lv_parameters_12_0= ruleAttributeRule ) )+
@@ -1527,7 +1527,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
                     	    {
                     	    if ( state.backtracking==0 ) {
 
-                    	      						newCompositeNode(grammarAccess.getPartialSurrogateFunctionRuleAccess().getParametersAttributeRuleParserRuleCall_8_2_0());
+                    	      						newCompositeNode(grammarAccess.getPartialSurrogateFunctionDefinitionRuleAccess().getParametersAttributeRuleParserRuleCall_8_2_0());
                     	      					
                     	    }
                     	    pushFollow(FOLLOW_21);
@@ -1538,7 +1538,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
                     	    if ( state.backtracking==0 ) {
 
                     	      						if (current==null) {
-                    	      							current = createModelElementForParent(grammarAccess.getPartialSurrogateFunctionRuleRule());
+                    	      							current = createModelElementForParent(grammarAccess.getPartialSurrogateFunctionDefinitionRuleRule());
                     	      						}
                     	      						add(
                     	      							current,
@@ -1592,7 +1592,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
         }
         return current;
     }
-    // $ANTLR end "rulePartialSurrogateFunctionRule"
+    // $ANTLR end "rulePartialSurrogateFunctionDefinitionRule"
 
 
     // $ANTLR start "entryRulePredictStatementRule"

@@ -3,8 +3,8 @@
 package de.evoal.languages.model.mll.impl;
 
 import de.evoal.languages.model.mll.MllPackage;
-import de.evoal.languages.model.mll.PartialSurrogateFunction;
-import de.evoal.languages.model.mll.SurrogateLayer;
+import de.evoal.languages.model.mll.PartialSurrogateFunctionDefinition;
+import de.evoal.languages.model.mll.SurrogateLayerDefinition;
 
 import java.util.Collection;
 
@@ -24,19 +24,19 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Surrogate Layer</b></em>'.
+ * An implementation of the model object '<em><b>Surrogate Layer Definition</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link de.evoal.languages.model.mll.impl.SurrogateLayerImpl#getName <em>Name</em>}</li>
- *   <li>{@link de.evoal.languages.model.mll.impl.SurrogateLayerImpl#getFunctions <em>Functions</em>}</li>
+ *   <li>{@link de.evoal.languages.model.mll.impl.SurrogateLayerDefinitionImpl#getName <em>Name</em>}</li>
+ *   <li>{@link de.evoal.languages.model.mll.impl.SurrogateLayerDefinitionImpl#getFunctions <em>Functions</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class SurrogateLayerImpl extends MinimalEObjectImpl.Container implements SurrogateLayer {
+public class SurrogateLayerDefinitionImpl extends MinimalEObjectImpl.Container implements SurrogateLayerDefinition {
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -65,14 +65,14 @@ public class SurrogateLayerImpl extends MinimalEObjectImpl.Container implements 
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<PartialSurrogateFunction> functions;
+	protected EList<PartialSurrogateFunctionDefinition> functions;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected SurrogateLayerImpl() {
+	protected SurrogateLayerDefinitionImpl() {
 		super();
 	}
 
@@ -83,7 +83,7 @@ public class SurrogateLayerImpl extends MinimalEObjectImpl.Container implements 
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return MllPackage.Literals.SURROGATE_LAYER;
+		return MllPackage.Literals.SURROGATE_LAYER_DEFINITION;
 	}
 
 	/**
@@ -106,7 +106,7 @@ public class SurrogateLayerImpl extends MinimalEObjectImpl.Container implements 
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MllPackage.SURROGATE_LAYER__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, MllPackage.SURROGATE_LAYER_DEFINITION__NAME, oldName, name));
 	}
 
 	/**
@@ -115,9 +115,9 @@ public class SurrogateLayerImpl extends MinimalEObjectImpl.Container implements 
 	 * @generated
 	 */
 	@Override
-	public EList<PartialSurrogateFunction> getFunctions() {
+	public EList<PartialSurrogateFunctionDefinition> getFunctions() {
 		if (functions == null) {
-			functions = new EObjectContainmentEList<PartialSurrogateFunction>(PartialSurrogateFunction.class, this, MllPackage.SURROGATE_LAYER__FUNCTIONS);
+			functions = new EObjectContainmentEList<PartialSurrogateFunctionDefinition>(PartialSurrogateFunctionDefinition.class, this, MllPackage.SURROGATE_LAYER_DEFINITION__FUNCTIONS);
 		}
 		return functions;
 	}
@@ -130,7 +130,7 @@ public class SurrogateLayerImpl extends MinimalEObjectImpl.Container implements 
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case MllPackage.SURROGATE_LAYER__FUNCTIONS:
+			case MllPackage.SURROGATE_LAYER_DEFINITION__FUNCTIONS:
 				return ((InternalEList<?>)getFunctions()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -144,9 +144,9 @@ public class SurrogateLayerImpl extends MinimalEObjectImpl.Container implements 
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case MllPackage.SURROGATE_LAYER__NAME:
+			case MllPackage.SURROGATE_LAYER_DEFINITION__NAME:
 				return getName();
-			case MllPackage.SURROGATE_LAYER__FUNCTIONS:
+			case MllPackage.SURROGATE_LAYER_DEFINITION__FUNCTIONS:
 				return getFunctions();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -161,12 +161,12 @@ public class SurrogateLayerImpl extends MinimalEObjectImpl.Container implements 
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case MllPackage.SURROGATE_LAYER__NAME:
+			case MllPackage.SURROGATE_LAYER_DEFINITION__NAME:
 				setName((String)newValue);
 				return;
-			case MllPackage.SURROGATE_LAYER__FUNCTIONS:
+			case MllPackage.SURROGATE_LAYER_DEFINITION__FUNCTIONS:
 				getFunctions().clear();
-				getFunctions().addAll((Collection<? extends PartialSurrogateFunction>)newValue);
+				getFunctions().addAll((Collection<? extends PartialSurrogateFunctionDefinition>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -180,10 +180,10 @@ public class SurrogateLayerImpl extends MinimalEObjectImpl.Container implements 
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case MllPackage.SURROGATE_LAYER__NAME:
+			case MllPackage.SURROGATE_LAYER_DEFINITION__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case MllPackage.SURROGATE_LAYER__FUNCTIONS:
+			case MllPackage.SURROGATE_LAYER_DEFINITION__FUNCTIONS:
 				getFunctions().clear();
 				return;
 		}
@@ -198,9 +198,9 @@ public class SurrogateLayerImpl extends MinimalEObjectImpl.Container implements 
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case MllPackage.SURROGATE_LAYER__NAME:
+			case MllPackage.SURROGATE_LAYER_DEFINITION__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case MllPackage.SURROGATE_LAYER__FUNCTIONS:
+			case MllPackage.SURROGATE_LAYER_DEFINITION__FUNCTIONS:
 				return functions != null && !functions.isEmpty();
 		}
 		return super.eIsSet(featureID);
@@ -222,4 +222,4 @@ public class SurrogateLayerImpl extends MinimalEObjectImpl.Container implements 
 		return result.toString();
 	}
 
-} //SurrogateLayerImpl
+} //SurrogateLayerDefinitionImpl
