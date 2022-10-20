@@ -586,13 +586,22 @@ public interface ELPackage extends EPackage {
 	int LITERAL_FEATURE_COUNT = CALL_OR_LITERAL_OR_REFERENCE_OR_PARANTHESES_FEATURE_COUNT + 0;
 
 	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LITERAL___GET_VALUE = CALL_OR_LITERAL_OR_REFERENCE_OR_PARANTHESES_OPERATION_COUNT + 0;
+
+	/**
 	 * The number of operations of the '<em>Literal</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LITERAL_OPERATION_COUNT = CALL_OR_LITERAL_OR_REFERENCE_OR_PARANTHESES_OPERATION_COUNT + 0;
+	int LITERAL_OPERATION_COUNT = CALL_OR_LITERAL_OR_REFERENCE_OR_PARANTHESES_OPERATION_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.el.impl.NumberLiteralImpl <em>Number Literal</em>}' class.
@@ -779,6 +788,15 @@ public interface ELPackage extends EPackage {
 	int STRING_LITERAL_FEATURE_COUNT = LITERAL_FEATURE_COUNT + 1;
 
 	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING_LITERAL___GET_VALUE = LITERAL___GET_VALUE;
+
+	/**
 	 * The number of operations of the '<em>String Literal</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -814,6 +832,15 @@ public interface ELPackage extends EPackage {
 	 * @ordered
 	 */
 	int BOOLEAN_LITERAL_FEATURE_COUNT = LITERAL_FEATURE_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_LITERAL___GET_VALUE = LITERAL___GET_VALUE;
 
 	/**
 	 * The number of operations of the '<em>Boolean Literal</em>' class.
@@ -1342,6 +1369,16 @@ public interface ELPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getLiteral();
+
+	/**
+	 * Returns the meta object for the '{@link de.evoal.languages.model.el.Literal#getValue() <em>Get Value</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Value</em>' operation.
+	 * @see de.evoal.languages.model.el.Literal#getValue()
+	 * @generated
+	 */
+	EOperation getLiteral__GetValue();
 
 	/**
 	 * Returns the meta object for class '{@link de.evoal.languages.model.el.NumberLiteral <em>Number Literal</em>}'.
@@ -1895,6 +1932,14 @@ public interface ELPackage extends EPackage {
 		 * @generated
 		 */
 		EClass LITERAL = eINSTANCE.getLiteral();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Value</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation LITERAL___GET_VALUE = eINSTANCE.getLiteral__GetValue();
 
 		/**
 		 * The meta object literal for the '{@link de.evoal.languages.model.el.impl.NumberLiteralImpl <em>Number Literal</em>}' class.

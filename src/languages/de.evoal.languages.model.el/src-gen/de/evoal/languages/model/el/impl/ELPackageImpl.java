@@ -616,6 +616,16 @@ public class ELPackageImpl extends EPackageImpl implements ELPackage {
 	 * @generated
 	 */
 	@Override
+	public EOperation getLiteral__GetValue() {
+		return literalEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getNumberLiteral() {
 		return numberLiteralEClass;
 	}
@@ -923,6 +933,7 @@ public class ELPackageImpl extends EPackageImpl implements ELPackage {
 		callOrLiteralOrReferenceOrParanthesesEClass = createEClass(CALL_OR_LITERAL_OR_REFERENCE_OR_PARANTHESES);
 
 		literalEClass = createEClass(LITERAL);
+		createEOperation(literalEClass, LITERAL___GET_VALUE);
 
 		numberLiteralEClass = createEClass(NUMBER_LITERAL);
 		createEAttribute(numberLiteralEClass, NUMBER_LITERAL__FACTOR);
@@ -1044,6 +1055,8 @@ public class ELPackageImpl extends EPackageImpl implements ELPackage {
 		initEClass(callOrLiteralOrReferenceOrParanthesesEClass, CallOrLiteralOrReferenceOrParantheses.class, "CallOrLiteralOrReferenceOrParantheses", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(literalEClass, Literal.class, "Literal", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEOperation(getLiteral__GetValue(), ecorePackage.getEJavaObject(), "getValue", 1, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(numberLiteralEClass, NumberLiteral.class, "NumberLiteral", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getNumberLiteral_Factor(), this.getFactor(), "factor", "None", 1, 1, NumberLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

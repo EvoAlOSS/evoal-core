@@ -14,4 +14,12 @@ package de.evoal.languages.model.el;
  * @generated
  */
 public interface Literal extends CallOrLiteralOrReferenceOrParantheses {
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" required="true"
+	 * @generated
+	 */
+	Object getValue();
 } // Literal

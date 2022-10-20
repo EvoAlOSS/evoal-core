@@ -90,7 +90,9 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//UnaryAddOrSubtractExpression/subExpression"/>
     </genClasses>
     <genClasses image="false" ecoreClass="model.ecore#//CallOrLiteralOrReferenceOrParantheses"/>
-    <genClasses image="false" ecoreClass="model.ecore#//Literal"/>
+    <genClasses image="false" ecoreClass="model.ecore#//Literal">
+      <genOperations ecoreOperation="model.ecore#//Literal/getValue"/>
+    </genClasses>
     <genClasses image="false" ecoreClass="model.ecore#//NumberLiteral">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//NumberLiteral/factor"/>
       <genOperations ecoreOperation="model.ecore#//NumberLiteral/getValue"/>
