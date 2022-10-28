@@ -44,11 +44,12 @@ PartialSurrogateFunctionDefinitionRule returns PartialSurrogateFunctionDefinitio
 
 PredictStatementRule returns PredictStatement:
 	"predict" surrogate = [SurrogateDefinition|StringOrId]
-		'from' filename = STRING
+		'from' trainingData = STRING
 		('and' 'measure'
 			(statements += CallStatementRule)*
 		 'end'
-		)?;
+		)?
+		'and' 'store' 'to' modelFilename = STRING;
 
       
 StatementRule returns Statement:

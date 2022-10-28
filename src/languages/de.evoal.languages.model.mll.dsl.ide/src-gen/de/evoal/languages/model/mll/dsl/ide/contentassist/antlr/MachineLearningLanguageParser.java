@@ -114,8 +114,9 @@ public class MachineLearningLanguageParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getPartialSurrogateFunctionDefinitionRuleAccess().getOutputsAssignment_7_1(), "rule__PartialSurrogateFunctionDefinitionRule__OutputsAssignment_7_1");
 			builder.put(grammarAccess.getPartialSurrogateFunctionDefinitionRuleAccess().getParametersAssignment_8_2(), "rule__PartialSurrogateFunctionDefinitionRule__ParametersAssignment_8_2");
 			builder.put(grammarAccess.getPredictStatementRuleAccess().getSurrogateAssignment_1(), "rule__PredictStatementRule__SurrogateAssignment_1");
-			builder.put(grammarAccess.getPredictStatementRuleAccess().getFilenameAssignment_3(), "rule__PredictStatementRule__FilenameAssignment_3");
+			builder.put(grammarAccess.getPredictStatementRuleAccess().getTrainingDataAssignment_3(), "rule__PredictStatementRule__TrainingDataAssignment_3");
 			builder.put(grammarAccess.getPredictStatementRuleAccess().getStatementsAssignment_4_2(), "rule__PredictStatementRule__StatementsAssignment_4_2");
+			builder.put(grammarAccess.getPredictStatementRuleAccess().getModelFilenameAssignment_8(), "rule__PredictStatementRule__ModelFilenameAssignment_8");
 			builder.put(grammarAccess.getForStatementRuleAccess().getNameAssignment_1(), "rule__ForStatementRule__NameAssignment_1");
 			builder.put(grammarAccess.getForStatementRuleAccess().getRangeAssignment_3(), "rule__ForStatementRule__RangeAssignment_3");
 			builder.put(grammarAccess.getForStatementRuleAccess().getStatementsAssignment_5(), "rule__ForStatementRule__StatementsAssignment_5");

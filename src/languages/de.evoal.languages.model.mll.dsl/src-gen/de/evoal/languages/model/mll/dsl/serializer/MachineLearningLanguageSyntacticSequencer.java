@@ -68,7 +68,7 @@ public class MachineLearningLanguageSyntacticSequencer extends AbstractSyntactic
 	 *     ('and' 'measure' 'end')?
 	 *
 	 * This ambiguous syntax occurs at:
-	 *     filename=STRING (ambiguity) (rule end)
+	 *     trainingData=STRING (ambiguity) 'and' 'store' 'to' modelFilename=STRING
 	 */
 	protected void emit_PredictStatementRule___AndKeyword_4_0_MeasureKeyword_4_1_EndKeyword_4_3__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);

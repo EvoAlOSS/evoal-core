@@ -625,9 +625,9 @@ rulePredictStatementRule returns [EObject current=null]
 		}
 		(
 			(
-				lv_filename_3_0=RULE_STRING
+				lv_trainingData_3_0=RULE_STRING
 				{
-					newLeafNode(lv_filename_3_0, grammarAccess.getPredictStatementRuleAccess().getFilenameSTRINGTerminalRuleCall_3_0());
+					newLeafNode(lv_trainingData_3_0, grammarAccess.getPredictStatementRuleAccess().getTrainingDataSTRINGTerminalRuleCall_3_0());
 				}
 				{
 					if ($current==null) {
@@ -635,8 +635,8 @@ rulePredictStatementRule returns [EObject current=null]
 					}
 					setWithLastConsumed(
 						$current,
-						"filename",
-						lv_filename_3_0,
+						"trainingData",
+						lv_trainingData_3_0,
 						"de.evoal.languages.model.el.dsl.ExpressionLanguage.STRING");
 				}
 			)
@@ -674,6 +674,36 @@ rulePredictStatementRule returns [EObject current=null]
 				newLeafNode(otherlv_7, grammarAccess.getPredictStatementRuleAccess().getEndKeyword_4_3());
 			}
 		)?
+		otherlv_8='and'
+		{
+			newLeafNode(otherlv_8, grammarAccess.getPredictStatementRuleAccess().getAndKeyword_5());
+		}
+		otherlv_9='store'
+		{
+			newLeafNode(otherlv_9, grammarAccess.getPredictStatementRuleAccess().getStoreKeyword_6());
+		}
+		otherlv_10='to'
+		{
+			newLeafNode(otherlv_10, grammarAccess.getPredictStatementRuleAccess().getToKeyword_7());
+		}
+		(
+			(
+				lv_modelFilename_11_0=RULE_STRING
+				{
+					newLeafNode(lv_modelFilename_11_0, grammarAccess.getPredictStatementRuleAccess().getModelFilenameSTRINGTerminalRuleCall_8_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getPredictStatementRuleRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"modelFilename",
+						lv_modelFilename_11_0,
+						"de.evoal.languages.model.el.dsl.ExpressionLanguage.STRING");
+				}
+			)
+		)
 	)
 ;
 

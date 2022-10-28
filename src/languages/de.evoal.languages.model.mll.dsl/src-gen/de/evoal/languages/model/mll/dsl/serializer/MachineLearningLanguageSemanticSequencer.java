@@ -314,7 +314,7 @@ public class MachineLearningLanguageSemanticSequencer extends InstanceLanguageSe
 	 *     StatementRule returns PredictStatement
 	 *
 	 * Constraint:
-	 *     (surrogate=[SurrogateDefinition|StringOrId] filename=STRING statements+=CallStatementRule*)
+	 *     (surrogate=[SurrogateDefinition|StringOrId] trainingData=STRING statements+=CallStatementRule* modelFilename=STRING)
 	 */
 	protected void sequence_PredictStatementRule(ISerializationContext context, PredictStatement semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

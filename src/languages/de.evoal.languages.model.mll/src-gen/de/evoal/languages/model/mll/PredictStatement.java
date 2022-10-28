@@ -14,7 +14,8 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  * <ul>
  *   <li>{@link de.evoal.languages.model.mll.PredictStatement#getSurrogate <em>Surrogate</em>}</li>
- *   <li>{@link de.evoal.languages.model.mll.PredictStatement#getFilename <em>Filename</em>}</li>
+ *   <li>{@link de.evoal.languages.model.mll.PredictStatement#getModelFilename <em>Model Filename</em>}</li>
+ *   <li>{@link de.evoal.languages.model.mll.PredictStatement#getTrainingData <em>Training Data</em>}</li>
  *   <li>{@link de.evoal.languages.model.mll.PredictStatement#getStatements <em>Statements</em>}</li>
  * </ul>
  *
@@ -46,26 +47,48 @@ public interface PredictStatement extends Statement {
 	void setSurrogate(SurrogateDefinition value);
 
 	/**
-	 * Returns the value of the '<em><b>Filename</b></em>' attribute.
+	 * Returns the value of the '<em><b>Model Filename</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Filename</em>' attribute.
-	 * @see #setFilename(String)
-	 * @see de.evoal.languages.model.mll.MllPackage#getPredictStatement_Filename()
+	 * @return the value of the '<em>Model Filename</em>' attribute.
+	 * @see #setModelFilename(String)
+	 * @see de.evoal.languages.model.mll.MllPackage#getPredictStatement_ModelFilename()
 	 * @model required="true"
 	 * @generated
 	 */
-	String getFilename();
+	String getModelFilename();
 
 	/**
-	 * Sets the value of the '{@link de.evoal.languages.model.mll.PredictStatement#getFilename <em>Filename</em>}' attribute.
+	 * Sets the value of the '{@link de.evoal.languages.model.mll.PredictStatement#getModelFilename <em>Model Filename</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Filename</em>' attribute.
-	 * @see #getFilename()
+	 * @param value the new value of the '<em>Model Filename</em>' attribute.
+	 * @see #getModelFilename()
 	 * @generated
 	 */
-	void setFilename(String value);
+	void setModelFilename(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Training Data</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Training Data</em>' attribute.
+	 * @see #setTrainingData(String)
+	 * @see de.evoal.languages.model.mll.MllPackage#getPredictStatement_TrainingData()
+	 * @model required="true"
+	 * @generated
+	 */
+	String getTrainingData();
+
+	/**
+	 * Sets the value of the '{@link de.evoal.languages.model.mll.PredictStatement#getTrainingData <em>Training Data</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Training Data</em>' attribute.
+	 * @see #getTrainingData()
+	 * @generated
+	 */
+	void setTrainingData(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Statements</b></em>' containment reference list.

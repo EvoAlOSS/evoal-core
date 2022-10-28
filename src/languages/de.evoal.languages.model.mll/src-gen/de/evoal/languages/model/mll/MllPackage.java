@@ -406,13 +406,22 @@ public interface MllPackage extends EPackage {
 	int PREDICT_STATEMENT__SURROGATE = STATEMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Filename</b></em>' attribute.
+	 * The feature id for the '<em><b>Model Filename</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PREDICT_STATEMENT__FILENAME = STATEMENT_FEATURE_COUNT + 1;
+	int PREDICT_STATEMENT__MODEL_FILENAME = STATEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Training Data</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PREDICT_STATEMENT__TRAINING_DATA = STATEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Statements</b></em>' containment reference list.
@@ -421,7 +430,7 @@ public interface MllPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PREDICT_STATEMENT__STATEMENTS = STATEMENT_FEATURE_COUNT + 2;
+	int PREDICT_STATEMENT__STATEMENTS = STATEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Predict Statement</em>' class.
@@ -430,7 +439,7 @@ public interface MllPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PREDICT_STATEMENT_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 3;
+	int PREDICT_STATEMENT_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.mll.impl.ForStatementImpl <em>For Statement</em>}' class.
@@ -930,15 +939,26 @@ public interface MllPackage extends EPackage {
 	EReference getPredictStatement_Surrogate();
 
 	/**
-	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.mll.PredictStatement#getFilename <em>Filename</em>}'.
+	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.mll.PredictStatement#getModelFilename <em>Model Filename</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Filename</em>'.
-	 * @see de.evoal.languages.model.mll.PredictStatement#getFilename()
+	 * @return the meta object for the attribute '<em>Model Filename</em>'.
+	 * @see de.evoal.languages.model.mll.PredictStatement#getModelFilename()
 	 * @see #getPredictStatement()
 	 * @generated
 	 */
-	EAttribute getPredictStatement_Filename();
+	EAttribute getPredictStatement_ModelFilename();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.mll.PredictStatement#getTrainingData <em>Training Data</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Training Data</em>'.
+	 * @see de.evoal.languages.model.mll.PredictStatement#getTrainingData()
+	 * @see #getPredictStatement()
+	 * @generated
+	 */
+	EAttribute getPredictStatement_TrainingData();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.mll.PredictStatement#getStatements <em>Statements</em>}'.
@@ -1372,12 +1392,20 @@ public interface MllPackage extends EPackage {
 		EReference PREDICT_STATEMENT__SURROGATE = eINSTANCE.getPredictStatement_Surrogate();
 
 		/**
-		 * The meta object literal for the '<em><b>Filename</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Model Filename</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute PREDICT_STATEMENT__FILENAME = eINSTANCE.getPredictStatement_Filename();
+		EAttribute PREDICT_STATEMENT__MODEL_FILENAME = eINSTANCE.getPredictStatement_ModelFilename();
+
+		/**
+		 * The meta object literal for the '<em><b>Training Data</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PREDICT_STATEMENT__TRAINING_DATA = eINSTANCE.getPredictStatement_TrainingData();
 
 		/**
 		 * The meta object literal for the '<em><b>Statements</b></em>' containment reference list feature.

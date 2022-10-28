@@ -5,9 +5,7 @@ package de.evoal.languages.model.mll;
 import de.evoal.languages.model.ddl.DataDescription;
 
 import de.evoal.languages.model.dl.TypeDefinition;
-
 import de.evoal.languages.model.instance.Attribute;
-
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EObject;

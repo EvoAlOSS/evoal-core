@@ -5,9 +5,7 @@ package de.evoal.languages.model.mll.impl;
 import de.evoal.languages.model.ddl.DataDescription;
 
 import de.evoal.languages.model.dl.TypeDefinition;
-
 import de.evoal.languages.model.instance.Attribute;
-
 import de.evoal.languages.model.mll.MllPackage;
 import de.evoal.languages.model.mll.PartialSurrogateFunctionDefinition;
 

@@ -510,7 +510,7 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 	 * @generated
 	 */
 	@Override
-	public EAttribute getPredictStatement_Filename() {
+	public EAttribute getPredictStatement_ModelFilename() {
 		return (EAttribute)predictStatementEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -520,8 +520,18 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 	 * @generated
 	 */
 	@Override
+	public EAttribute getPredictStatement_TrainingData() {
+		return (EAttribute)predictStatementEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EReference getPredictStatement_Statements() {
-		return (EReference)predictStatementEClass.getEStructuralFeatures().get(2);
+		return (EReference)predictStatementEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -730,7 +740,8 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 
 		predictStatementEClass = createEClass(PREDICT_STATEMENT);
 		createEReference(predictStatementEClass, PREDICT_STATEMENT__SURROGATE);
-		createEAttribute(predictStatementEClass, PREDICT_STATEMENT__FILENAME);
+		createEAttribute(predictStatementEClass, PREDICT_STATEMENT__MODEL_FILENAME);
+		createEAttribute(predictStatementEClass, PREDICT_STATEMENT__TRAINING_DATA);
 		createEReference(predictStatementEClass, PREDICT_STATEMENT__STATEMENTS);
 
 		forStatementEClass = createEClass(FOR_STATEMENT);
@@ -834,7 +845,8 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 
 		initEClass(predictStatementEClass, PredictStatement.class, "PredictStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getPredictStatement_Surrogate(), this.getSurrogateDefinition(), null, "surrogate", null, 1, 1, PredictStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getPredictStatement_Filename(), ecorePackage.getEString(), "filename", null, 1, 1, PredictStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPredictStatement_ModelFilename(), ecorePackage.getEString(), "modelFilename", null, 1, 1, PredictStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPredictStatement_TrainingData(), ecorePackage.getEString(), "trainingData", null, 1, 1, PredictStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPredictStatement_Statements(), this.getCallStatement(), null, "statements", null, 0, -1, PredictStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		initEClass(forStatementEClass, ForStatement.class, "ForStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
