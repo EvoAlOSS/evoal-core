@@ -1,9 +1,9 @@
-package de.evoal.core.api.model.io;
+package de.evoal.core.api.properties.io;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import de.evoal.core.api.model.Properties;
-import de.evoal.core.api.model.PropertySpecification;
+import de.evoal.core.api.properties.Properties;
+import de.evoal.core.api.properties.PropertySpecification;
 import lombok.SneakyThrows;
 
 import java.io.File;

@@ -1,0 +1,24 @@
+package de.evoal.core.main.ea.alterer.mutator;
+
+import de.evoal.core.main.ea.functions.correlation.model.Correlation;
+
+import java.util.Random;
+import java.util.random.RandomGenerator;
+
+import static io.jenetics.internal.math.Randoms.indexes;
+
+public class SwapCorrelationMutatorMemento implements CorrelationMutatorMemento<SwapCorrelationMutatorMemento> {
+    private int [][] indices = null;
+
+    public int [][] getIndices(final RandomGenerator random, final int length, final double probability) {
+        if(indices == null) {
+            indices = indexes(random, length, probability).mapToObj(i -> new int[] {i, random.nextInt(length)}).toArray(i -> new int [i][]);
+        }
+
+        return indices;
+    }
+
+    @Override
+    public void apply(final SwapCorrelationMutatorMemento context, final Correlation correlation) {
+    }
+}

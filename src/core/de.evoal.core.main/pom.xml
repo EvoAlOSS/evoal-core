@@ -1,0 +1,283 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>de.evoal.core</groupId>
+		<artifactId>releng.parent</artifactId>
+		<version>0.9.0-SNAPSHOT</version>
+
+		<relativePath>../de.evoal.core.releng.parent</relativePath>
+	</parent>
+
+	<artifactId>core.main</artifactId>
+	<name>EvoAl - Core - Main</name>
+
+	<properties>
+		<javax.activation.version>1.2.0</javax.activation.version>
+
+		<!-- DeltaSpike uses this version in its documentation. Newer version didn't work for some reasons. -->
+		<weld.version>3.1.9.Final</weld.version>
+	</properties>
+
+	<dependencies>
+		<!-- Weld for CDI (@runtime) -->
+		<dependency>
+			<groupId>org.jboss.weld.se</groupId>
+			<artifactId>weld-se-core</artifactId>
+			<version>${weld.version}</version>
+		</dependency>
+
+		<!--  Jandex results in a NPE at the moment -->
+		<dependency>
+			<groupId>org.jboss</groupId>
+			<artifactId>jandex</artifactId>
+			<version>2.4.1.Final</version>
+			<scope>runtime</scope>
+		</dependency>
+
+		<!-- logback for logging (@runtime) -->
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>1.4.0</version>
+			<scope>runtime</scope>
+		</dependency>
+
+		<!-- deltaspike -->
+		<dependency>
+			<groupId>org.apache.deltaspike.core</groupId>
+			<artifactId>deltaspike-core-api</artifactId>
+			<version>${deltaspike.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.deltaspike.cdictrl</groupId>
+			<artifactId>deltaspike-cdictrl-api</artifactId>
+			<version>${deltaspike.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.deltaspike.cdictrl</groupId>
+			<artifactId>deltaspike-cdictrl-weld</artifactId>
+			<version>${deltaspike.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.deltaspike.core</groupId>
+			<artifactId>deltaspike-core-impl</artifactId>
+			<version>${deltaspike.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+
+		<!-- Include dependencies of parent -->
+		<!-- CDI APIs -->
+		<dependency>
+			<groupId>jakarta.enterprise</groupId>
+			<artifactId>jakarta.enterprise.cdi-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.annotation</groupId>
+			<artifactId>javax.annotation-api</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
+		<!-- Logging API -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<scope>compile</scope>
+		</dependency>
+
+		<!-- CSV IO -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-csv</artifactId>
+			<version>1.8</version>
+		</dependency>
+
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>core.api</artifactId>
+		</dependency>
+<!--
+		<dependency>
+			<groupId>org.mariuszgromada.math</groupId>
+			<artifactId>MathParser.org-mXparser</artifactId>
+			<version>4.4.2</version>
+		</dependency>
+-->
+		<!-- dependencies to language models -->
+		<dependency>
+			<groupId>de.evoal.languages</groupId>
+			<artifactId>de.evoal.languages.model.ddl</artifactId>
+			<version>${evoal.languages.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>de.evoal.languages</groupId>
+			<artifactId>de.evoal.languages.model.dl</artifactId>
+			<version>${evoal.languages.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>de.evoal.languages</groupId>
+			<artifactId>de.evoal.languages.model.eal</artifactId>
+			<version>${evoal.languages.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>de.evoal.languages</groupId>
+			<artifactId>de.evoal.languages.model.el</artifactId>
+			<version>${evoal.languages.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>de.evoal.languages</groupId>
+			<artifactId>de.evoal.languages.model.instance</artifactId>
+			<version>${evoal.languages.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>de.evoal.languages</groupId>
+			<artifactId>de.evoal.languages.model.mll</artifactId>
+			<version>${evoal.languages.version}</version>
+		</dependency>
+
+		<!-- dependencies to DSLs -->
+		<dependency>
+			<groupId>de.evoal.languages</groupId>
+			<artifactId>de.evoal.languages.model.ddl.dsl</artifactId>
+			<version>${evoal.languages.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>de.evoal.languages</groupId>
+			<artifactId>de.evoal.languages.model.dl.dsl</artifactId>
+			<version>${evoal.languages.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>de.evoal.languages</groupId>
+			<artifactId>de.evoal.languages.model.eal.dsl</artifactId>
+			<version>${evoal.languages.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>de.evoal.languages</groupId>
+			<artifactId>de.evoal.languages.model.el.dsl</artifactId>
+			<version>${evoal.languages.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>de.evoal.languages</groupId>
+			<artifactId>de.evoal.languages.model.instance.dsl</artifactId>
+			<version>${evoal.languages.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>de.evoal.languages</groupId>
+			<artifactId>de.evoal.languages.model.mll.dsl</artifactId>
+			<version>${evoal.languages.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+
+		<!-- Xtext -->
+		<dependency>
+			<groupId>org.eclipse.emf</groupId>
+			<artifactId>org.eclipse.emf.ecore</artifactId>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.eclipse.emf</groupId>
+			<artifactId>org.eclipse.emf.common</artifactId>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext</artifactId>
+			<scope>compile</scope>
+		</dependency>
+
+		<!-- Printing tables to the console -->
+		<!--
+		<dependency>
+			<groupId>de.vandermeer</groupId>
+			<artifactId>asciitable</artifactId>
+			<version>0.3.2</version>
+		</dependency>
+		-->
+
+		<dependency>
+			<groupId>io.jenetics</groupId>
+			<artifactId>jenetics.ext</artifactId>
+			<version>${jenetics.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.decimal4j</groupId>
+			<artifactId>decimal4j</artifactId>
+			<version>1.0.3</version>
+			<scope>compile</scope>
+		</dependency>
+
+
+		<!-- XML IO -->
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>generator.main</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}/modules</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifest>
+							<mainClass>de.evoal.core.main.Evoal</mainClass>
+							<addClasspath>true</addClasspath>
+							<classpathPrefix>modules/</classpathPrefix>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<compilerArgs>
+						<arg>--add-exports</arg>
+						<arg>io.jenetics.base/io.jenetics.internal.math=de.evoal.core.main</arg>
+					</compilerArgs>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
