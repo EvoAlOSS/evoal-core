@@ -132,7 +132,7 @@ evoal:unit:
 
 evoal:deploy:
   stage: Release
-  needs: ["dsl:unit"]
+  needs: ["evoal:compile", "evoal:unit"]
   tags:
     - docker
   image: $EVOAL_IMAGE
