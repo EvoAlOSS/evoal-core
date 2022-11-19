@@ -32,4 +32,6 @@ module de.evoal.generator.main {
     opens de.evoal.generator.main.cdi;
     opens de.evoal.generator.main.functions;
     opens de.evoal.generator.main.generators;
+
+    exports de.evoal.generator.api;
 }
