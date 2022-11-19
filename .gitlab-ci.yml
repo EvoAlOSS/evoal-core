@@ -130,21 +130,34 @@ evoal:unit:
 #############################################################
 ## Remaining deploy steps
 
-evoal:package:
-  stage: Package
+evoal:deploy:
+  stage: Release
+  needs: ["dsl:unit"]
   tags:
     - docker
   image: $EVOAL_IMAGE
   script:
-    - mvn $MAVEN_CLI_OPTS -f $EVOAL_POM -DskipTests=true package
-  artifacts:
-    name: "$CI_JOB_NAME-$CI_COMMIT_REF_NAME.binaries.evoal.zip"
-    when: always
-    paths:
-      - src/evoal/de.evoal.main/target/main-*.jar
+    - mvn $MAVEN_CLI_OPTS -f $EVOAL_POM -DskipTests=true deploy
   only:
     changes:
       - src/evoal/**/*
+
+
+#evoal:package:
+#  stage: Package
+#  tags:
+#    - docker
+#  image: $EVOAL_IMAGE
+#  script:
+#    - mvn $MAVEN_CLI_OPTS -f $EVOAL_POM -DskipTests=true package
+#  artifacts:
+#    name: "$CI_JOB_NAME-$CI_COMMIT_REF_NAME.binaries.evoal.zip"
+#    when: always
+#    paths:
+#      - src/evoal/de.evoal.main/target/main-*.jar
+#  only:
+#    changes:
+#      - src/evoal/**/*
 
 #.docker_login: &docker_login
 #  before_script: 
