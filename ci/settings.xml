@@ -15,7 +15,7 @@
       </configuration>
     </server>
     <server>
-      <id>gitlab-maven-data-processing</id>
+      <id>evoal-artifacts</id>
       <configuration>
         <httpHeaders>
           <property>
