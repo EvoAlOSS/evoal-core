@@ -24,7 +24,8 @@ variables:
   MAVEN_CLI_OPTS: "-s ci/settings.xml --batch-mode --errors --fail-at-end --show-version -DinstallAtEnd=true -DdeployAtEnd=true $MAVEN_OPTS"
 
   # custom docker image for building our Java stuff
-  IMAGE: gitlab.informatik.uni-bremen.de:5005/evoal/source/evoal-core/evoal/eclipse-mirror:2021-09
+  ECLIPSE_IMAGE: gitlab.informatik.uni-bremen.de:5005/evoal/source/evoal-core/evoal/eclipse-mirror:2021-09
+  EVOAL_IMAGE: library/maven:3.8.6-eclipse-temurin-17-alpine
 
   ######################
   # pom.xml to build
@@ -62,7 +63,7 @@ dsl:compile:
   stage: Domain Specific Languages
   tags:
     - docker
-  image: $IMAGE
+  image: $ECLIPSE_IMAGE
   script:
     - mvn $MAVEN_CLI_OPTS -f $LANGUAGES_POM -pl "!de.evoal.languages:de.evoal.languages.releng.site" compile
   only:
@@ -74,7 +75,7 @@ dsl:unit:
   needs: ["dsl:compile"]
   tags:
     - docker
-  image: $IMAGE
+  image: $ECLIPSE_IMAGE
   script:
     - mvn $MAVEN_CLI_OPTS -f $LANGUAGES_POM verify
   only:
@@ -86,7 +87,7 @@ dsl:deploy:
   needs: ["dsl:unit"]
   tags:
     - docker
-  image: $IMAGE
+  image: $ECLIPSE_IMAGE
   script:
     - mvn $MAVEN_CLI_OPTS -f $LANGUAGES_POM -DskipTests=true deploy
   only:
@@ -100,7 +101,7 @@ evoal:compile:
   stage: Compile
   tags:
     - docker
-  image: $IMAGE
+  image: $EVOAL_IMAGE
   script:
     - mvn $MAVEN_CLI_OPTS -f $EVOAL_POM compile
   only:
@@ -114,7 +115,7 @@ evoal:unit:
   stage: Unit Test
   tags:
     - docker
-  image: $IMAGE
+  image: $EVOAL_IMAGE
   script:
     - mvn $MAVEN_CLI_OPTS -f $EVOAL_POM verify
   only:
@@ -133,7 +134,7 @@ evoal:package:
   stage: Package
   tags:
     - docker
-  image: $IMAGE
+  image: $EVOAL_IMAGE
   script:
     - mvn $MAVEN_CLI_OPTS -f $EVOAL_POM -DskipTests=true package
   artifacts:
