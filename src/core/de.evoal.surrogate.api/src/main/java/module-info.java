@@ -18,7 +18,7 @@ module de.evoal.surrogate.api {
     requires io.jenetics.base;
 
 
-    requires de.evoal.core.api;
+    requires de.evoal.core;
     requires de.evoal.languages.model.ddl;
     requires de.evoal.languages.model.dl;
     requires de.evoal.languages.model.el;

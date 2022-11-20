@@ -4,6 +4,6 @@ module de.evoal.surrogate.simple {
     requires lombok;
     requires org.slf4j;
 
-    requires de.evoal.core.api;
+    requires de.evoal.core;
     requires de.evoal.surrogate.api;
 }

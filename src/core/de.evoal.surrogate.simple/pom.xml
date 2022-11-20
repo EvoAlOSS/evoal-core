@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>de.evoal.core</groupId>
+		<groupId>de.evoal</groupId>
 		<artifactId>releng.parent</artifactId>
 		<version>0.9.0-SNAPSHOT</version>
 
-		<relativePath>../de.evoal.core.releng.parent</relativePath>
+		<relativePath>../de.evoal.releng.parent</relativePath>
 	</parent>
 
 	<artifactId>surrogate.simple</artifactId>
@@ -17,7 +17,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>core.api</artifactId>
+			<artifactId>core</artifactId>
 			<scope>provided</scope>
 		</dependency>
 

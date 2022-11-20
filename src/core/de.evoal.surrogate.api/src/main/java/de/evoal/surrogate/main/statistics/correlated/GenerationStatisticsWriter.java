@@ -17,7 +17,6 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.context.Dependent;
 import lombok.extern.slf4j.Slf4j;
 
-import org.apache.commons.math3.util.Pair;
 import smile.math.matrix.Matrix;
 
 import javax.inject.Inject;

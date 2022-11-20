@@ -23,7 +23,7 @@ module de.evoal.generator.main {
     requires de.evoal.languages.model.el.dsl;
     requires de.evoal.languages.model.generator.dsl;
 
-    requires de.evoal.core.api;
+    requires de.evoal.core;
     requires guice;
     requires commons.math3;
 
