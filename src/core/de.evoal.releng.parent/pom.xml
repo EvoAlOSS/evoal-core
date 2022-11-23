@@ -147,6 +147,93 @@
                 <artifactId>core</artifactId>
                 <version>${project.version}</version>
             </dependency>
+
+
+            <!-- dependencies to language models -->
+            <dependency>
+                <groupId>de.evoal.languages</groupId>
+                <artifactId>de.evoal.languages.model.ddl</artifactId>
+                <version>${evoal.languages.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>de.evoal.languages</groupId>
+                <artifactId>de.evoal.languages.model.dl</artifactId>
+                <version>${evoal.languages.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>de.evoal.languages</groupId>
+                <artifactId>de.evoal.languages.model.eal</artifactId>
+                <version>${evoal.languages.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>de.evoal.languages</groupId>
+                <artifactId>de.evoal.languages.model.el</artifactId>
+                <version>${evoal.languages.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>de.evoal.languages</groupId>
+                <artifactId>de.evoal.languages.model.instance</artifactId>
+                <version>${evoal.languages.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>de.evoal.languages</groupId>
+                <artifactId>de.evoal.languages.model.mll</artifactId>
+                <version>${evoal.languages.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <!-- dependencies to DSLs -->
+            <dependency>
+                <groupId>de.evoal.languages</groupId>
+                <artifactId>de.evoal.languages.model.ddl.dsl</artifactId>
+                <version>${evoal.languages.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>de.evoal.languages</groupId>
+                <artifactId>de.evoal.languages.model.dl.dsl</artifactId>
+                <version>${evoal.languages.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>de.evoal.languages</groupId>
+                <artifactId>de.evoal.languages.model.eal.dsl</artifactId>
+                <version>${evoal.languages.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>de.evoal.languages</groupId>
+                <artifactId>de.evoal.languages.model.el.dsl</artifactId>
+                <version>${evoal.languages.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>de.evoal.languages</groupId>
+                <artifactId>de.evoal.languages.model.instance.dsl</artifactId>
+                <version>${evoal.languages.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>de.evoal.languages</groupId>
+                <artifactId>de.evoal.languages.model.mll.dsl</artifactId>
+                <version>${evoal.languages.version}</version>
+                <scope>provided</scope>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -156,6 +243,27 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>3.2.2</version>
+                <configuration>
+                    <outputDirectory>${project.build.directory}/${project.artifactId}</outputDirectory>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/${project.artifactId}</outputDirectory>
+                            <includeScope>runtime</includeScope>
+                            <excludeScope>provided</excludeScope>
+                            <excludeTransitive>true</excludeTransitive>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
 

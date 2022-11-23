@@ -22,11 +22,19 @@
 	</properties>
 
 	<dependencies>
+		<!-- Prevent me from typing -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<scope>compile</scope>
+		</dependency>
+
 		<!-- Weld for CDI (@runtime) -->
 		<dependency>
 			<groupId>org.jboss.weld.se</groupId>
 			<artifactId>weld-se-core</artifactId>
 			<version>${weld.version}</version>
+			<scope>compile</scope>
 		</dependency>
 
 		<!--  Jandex results in a NPE at the moment -->
@@ -50,18 +58,21 @@
 			<groupId>org.apache.deltaspike.core</groupId>
 			<artifactId>deltaspike-core-api</artifactId>
 			<version>${deltaspike.version}</version>
+			<scope>compile</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.apache.deltaspike.cdictrl</groupId>
 			<artifactId>deltaspike-cdictrl-api</artifactId>
 			<version>${deltaspike.version}</version>
+			<scope>compile</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.apache.deltaspike.cdictrl</groupId>
 			<artifactId>deltaspike-cdictrl-weld</artifactId>
 			<version>${deltaspike.version}</version>
+			<scope>compile</scope>
 		</dependency>
 
 		<dependency>
@@ -74,15 +85,21 @@
 		<!-- Include dependencies of parent -->
 		<!-- CDI APIs -->
 		<dependency>
+			<groupId>jakarta.inject</groupId>
+			<artifactId>jakarta.inject-api</artifactId>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
 			<groupId>jakarta.enterprise</groupId>
 			<artifactId>jakarta.enterprise.cdi-api</artifactId>
-			<scope>provided</scope>
+			<scope>compile</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>javax.annotation</groupId>
 			<artifactId>javax.annotation-api</artifactId>
-			<scope>runtime</scope>
+			<scope>compile</scope>
 		</dependency>
 
 		<!-- JSON API -->
@@ -90,6 +107,7 @@
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
 			<version>${jackson.version}</version>
+			<scope>compile</scope>
 		</dependency>
 
 		<!-- Logging API -->
@@ -104,6 +122,7 @@
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-csv</artifactId>
 			<version>1.8</version>
+			<scope>compile</scope>
 		</dependency>
 
 
@@ -112,36 +131,42 @@
 			<groupId>de.evoal.languages</groupId>
 			<artifactId>de.evoal.languages.model.ddl</artifactId>
 			<version>${evoal.languages.version}</version>
+			<scope>compile</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>de.evoal.languages</groupId>
 			<artifactId>de.evoal.languages.model.dl</artifactId>
 			<version>${evoal.languages.version}</version>
+			<scope>compile</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>de.evoal.languages</groupId>
 			<artifactId>de.evoal.languages.model.eal</artifactId>
 			<version>${evoal.languages.version}</version>
+			<scope>compile</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>de.evoal.languages</groupId>
 			<artifactId>de.evoal.languages.model.el</artifactId>
 			<version>${evoal.languages.version}</version>
+			<scope>compile</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>de.evoal.languages</groupId>
 			<artifactId>de.evoal.languages.model.instance</artifactId>
 			<version>${evoal.languages.version}</version>
+			<scope>compile</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>de.evoal.languages</groupId>
 			<artifactId>de.evoal.languages.model.mll</artifactId>
 			<version>${evoal.languages.version}</version>
+			<scope>compile</scope>
 		</dependency>
 
 		<!-- dependencies to DSLs -->
@@ -156,18 +181,21 @@
 			<groupId>de.evoal.languages</groupId>
 			<artifactId>de.evoal.languages.model.dl.dsl</artifactId>
 			<version>${evoal.languages.version}</version>
+			<scope>compile</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>de.evoal.languages</groupId>
 			<artifactId>de.evoal.languages.model.eal.dsl</artifactId>
 			<version>${evoal.languages.version}</version>
+			<scope>compile</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>de.evoal.languages</groupId>
 			<artifactId>de.evoal.languages.model.el.dsl</artifactId>
 			<version>${evoal.languages.version}</version>
+			<scope>compile</scope>
 		</dependency>
 
 		<dependency>
@@ -207,6 +235,7 @@
 			<groupId>io.jenetics</groupId>
 			<artifactId>jenetics.ext</artifactId>
 			<version>${jenetics.version}</version>
+			<scope>compile</scope>
 		</dependency>
 
 		<dependency>
@@ -222,17 +251,34 @@
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-math3</artifactId>
 			<version>3.6.1</version>
+			<scope>compile</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>com.github.haifengl</groupId>
 			<artifactId>smile-math</artifactId>
 			<version>${smile.version}</version>
+			<scope>compile</scope>
 		</dependency>
 	</dependencies>
 
 	<build>
 		<plugins>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+<!--				<configuration>
+					<archive>
+						<manifest>
+							<mainClass>de.evoal.core.main.Evoal</mainClass>
+							<addClasspath>true</addClasspath>
+							<classpathPrefix>modules/</classpathPrefix>
+						</manifest>
+					</archive>
+				</configuration>
+-->			</plugin>
+
 			<plugin>
 				<artifactId>maven-dependency-plugin</artifactId>
 				<executions>
@@ -242,24 +288,14 @@
 							<goal>copy-dependencies</goal>
 						</goals>
 						<configuration>
-							<outputDirectory>${project.build.directory}/modules</outputDirectory>
+							<outputDirectory>${project.build.directory}/${project.artifactId}</outputDirectory>
+							<includeScope>runtime</includeScope>
+							<excludeScope>test</excludeScope>
+							<excludeScope>system</excludeScope>
+							<excludeTransitive>false</excludeTransitive>
 						</configuration>
 					</execution>
 				</executions>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<configuration>
-					<archive>
-						<manifest>
-							<mainClass>de.evoal.core.main.Evoal</mainClass>
-							<addClasspath>true</addClasspath>
-							<classpathPrefix>modules/</classpathPrefix>
-						</manifest>
-					</archive>
-				</configuration>
 			</plugin>
 
 			<plugin>
