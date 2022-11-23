@@ -98,40 +98,4 @@
 			<version>${evoal.languages.version}</version>
 		</dependency>
 	</dependencies>
-
-	<build>
-		<plugins>
-			<plugin>
-				<artifactId>maven-dependency-plugin</artifactId>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>copy-dependencies</goal>
-						</goals>
-						<configuration>
-							<outputDirectory>${project.build.directory}/${project.artifactId}-dependencies</outputDirectory>
-							<includeScope>runtime</includeScope>
-							<excludeScope>provided</excludeScope>
-							<excludeTransitive>true</excludeTransitive>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<configuration>
-					<archive>
-						<manifestFile>src/main/resources/META-INF/MANIFEST.MF</manifestFile>
-						<manifest>
-							<addClasspath>true</addClasspath>
-							<classpathPrefix>${project.artifactId}-dependencies/</classpathPrefix>
-						</manifest>
-					</archive>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
 </project>
