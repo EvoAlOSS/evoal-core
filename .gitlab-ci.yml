@@ -31,6 +31,7 @@ variables:
   # pom.xml to build
   LANGUAGES_POM: "src/languages/de.evoal.languages.releng.parent/pom.xml"
   EVOAL_POM: "src/core/de.evoal.releng.parent/pom.xml"
+  PLUGIN_POM: "src/core/de.evoal.core.plugin/pom.xml"
   MIRROR_POM: "src/mirror/pom.xml"
 
 #before_script:
@@ -103,6 +104,7 @@ evoal:compile:
     - docker
   image: $EVOAL_IMAGE
   script:
+    - mvn $MAVEN_CLI_OPTS -f $PLUGIN_POM install
     - mvn $MAVEN_CLI_OPTS -f $EVOAL_POM compile
   only:
     changes:
@@ -117,6 +119,7 @@ evoal:unit:
     - docker
   image: $EVOAL_IMAGE
   script:
+    - mvn $MAVEN_CLI_OPTS -f $PLUGIN_POM install
     - mvn $MAVEN_CLI_OPTS -f $EVOAL_POM verify
   only:
     changes:
