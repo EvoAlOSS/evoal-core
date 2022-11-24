@@ -115,6 +115,7 @@ evoal:compile:
 ## Remaining unit tests
 evoal:unit:
   stage: Unit Test
+  dependencies: ["evoal:compile"]
   tags:
     - docker
   image: $EVOAL_IMAGE
@@ -135,11 +136,12 @@ evoal:unit:
 
 evoal:deploy:
   stage: Release
-  needs: ["evoal:compile", "evoal:unit"]
+  dependencies: ["evoal:compile"]
   tags:
     - docker
   image: $EVOAL_IMAGE
   script:
+    - mvn $MAVEN_CLI_OPTS -f $PLUGIN_POM install
     - mvn $MAVEN_CLI_OPTS -f $EVOAL_POM -DskipTests=true deploy
   only:
     changes:
