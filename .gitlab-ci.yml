@@ -106,7 +106,7 @@ evoal:compile:
     - mvn $MAVEN_CLI_OPTS -f $EVOAL_POM compile
   only:
     changes:
-      - src/evoal/**/*
+      - src/core/**/*
 
 
 #############################################################
@@ -120,7 +120,7 @@ evoal:unit:
     - mvn $MAVEN_CLI_OPTS -f $EVOAL_POM verify
   only:
     changes:
-      - src/evoal/**/*
+      - src/core/**/*
 
 
 #############################################################
@@ -140,7 +140,10 @@ evoal:deploy:
     - mvn $MAVEN_CLI_OPTS -f $EVOAL_POM -DskipTests=true deploy
   only:
     changes:
-      - src/evoal/**/*
+      - src/core/**/*
+
+#############################################################
+## Remaining release steps
 
 
 #evoal:package:
@@ -154,10 +157,10 @@ evoal:deploy:
 #    name: "$CI_JOB_NAME-$CI_COMMIT_REF_NAME.binaries.evoal.zip"
 #    when: always
 #    paths:
-#      - src/evoal/de.evoal.main/target/main-*.jar
+#      - src/core/de.evoal.main/target/main-*.jar
 #  only:
 #    changes:
-#      - src/evoal/**/*
+#      - src/core/**/*
 
 #.docker_login: &docker_login
 #  before_script: 
@@ -183,4 +186,4 @@ evoal:deploy:
 #    - docker build -f evoal.Dockerfile .
 #  only:
 #    changes:
-#      - src/evoal/**/*
+#      - src/core/**/*

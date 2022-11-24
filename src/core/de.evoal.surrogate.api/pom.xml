@@ -5,97 +5,10 @@
 
 	<parent>
 		<groupId>de.evoal</groupId>
-		<artifactId>releng.parent</artifactId>
+		<artifactId>core.plugin</artifactId>
 		<version>0.9.0-SNAPSHOT</version>
-
-		<relativePath>../de.evoal.releng.parent</relativePath>
 	</parent>
 
 	<artifactId>surrogate.api</artifactId>
 	<name>EvoAl - Surrogate - API</name>
-
-	<dependencies>
-		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>core</artifactId>
-			<scope>provided</scope>
-		</dependency>
-
-		<!-- DSL dependencies -->
-		<!-- Xtext -->
-		<dependency>
-			<groupId>org.eclipse.emf</groupId>
-			<artifactId>org.eclipse.emf.ecore</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.eclipse.emf</groupId>
-			<artifactId>org.eclipse.emf.common</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.eclipse.xtext</groupId>
-			<artifactId>org.eclipse.xtext</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>de.evoal.languages</groupId>
-			<artifactId>de.evoal.languages.model.ddl</artifactId>
-			<version>${evoal.languages.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>de.evoal.languages</groupId>
-			<artifactId>de.evoal.languages.model.dl</artifactId>
-			<version>${evoal.languages.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>de.evoal.languages</groupId>
-			<artifactId>de.evoal.languages.model.el</artifactId>
-			<version>${evoal.languages.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>de.evoal.languages</groupId>
-			<artifactId>de.evoal.languages.model.instance</artifactId>
-			<version>${evoal.languages.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>de.evoal.languages</groupId>
-			<artifactId>de.evoal.languages.model.mll</artifactId>
-			<version>${evoal.languages.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>de.evoal.languages</groupId>
-			<artifactId>de.evoal.languages.model.ddl.dsl</artifactId>
-			<version>${evoal.languages.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>de.evoal.languages</groupId>
-			<artifactId>de.evoal.languages.model.dl.dsl</artifactId>
-			<version>${evoal.languages.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>de.evoal.languages</groupId>
-			<artifactId>de.evoal.languages.model.el.dsl</artifactId>
-			<version>${evoal.languages.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>de.evoal.languages</groupId>
-			<artifactId>de.evoal.languages.model.instance.dsl</artifactId>
-			<version>${evoal.languages.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>de.evoal.languages</groupId>
-			<artifactId>de.evoal.languages.model.mll.dsl</artifactId>
-			<version>${evoal.languages.version}</version>
-		</dependency>
-	</dependencies>
 </project>
