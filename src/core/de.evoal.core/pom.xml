@@ -174,7 +174,7 @@
 			<groupId>de.evoal.languages</groupId>
 			<artifactId>de.evoal.languages.model.ddl.dsl</artifactId>
 			<version>${evoal.languages.version}</version>
-			<scope>runtime</scope>
+			<scope>compile</scope>
 		</dependency>
 
 		<dependency>

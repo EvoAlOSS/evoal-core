@@ -28,20 +28,20 @@ public class HeuristicSearchMain implements MainClass {
 
 	@Override
 	public void run() {
-		final String predictiveFileName = board.get(BlackboardEntry.PREDICTIVE_FUNCTION_FILE);
+		final String outputFolder = board.get(BlackboardEntry.EVALUATION_OUTPUT_FOLDER);
 		final String heuristicFileName = board.get(BlackboardEntry.EA_CONFIGURATION_FILE);
 
-		final File outputBaseDir = HeuristicSearchUtils.calculateOutputBaseDir(new File(predictiveFileName), new File(heuristicFileName));
+		final File outputBaseDir = HeuristicSearchUtils.calculateOutputBaseDir(new File(outputFolder), new File(heuristicFileName));
 
 		HeuristicSearchUtils.addColumn(context,"target", ColumnType.Integer, 0);
 		HeuristicSearchUtils.addColumn(context,"run", ColumnType.Integer, 0);
 
 		board.bind(BlackboardEntry.EVALUATION_OUTPUT_FOLDER, outputBaseDir);
 		board.bind(BlackboardEntry.EVALUATION_RUN, "0");
-
+/*
 		final Stream<Pair<Properties, Properties>> targets = (Stream<Pair<Properties, Properties>>)BeanProvider.getContextualReference("target-stream");
 		setTarget(targets, board);
-
+*/
 		BeanFactory.create(HeuristicSearch.class)
 				   .run();
 	}
@@ -51,7 +51,7 @@ public class HeuristicSearchMain implements MainClass {
 					targets.findFirst()
 						   .orElseThrow(() -> {throw new IllegalStateException("No target point found");});
 
-		board.bind(BlackboardEntry.TARGET_PROPERTIES_SOURCE, targetProperties.getFirst());
+// TODO		board.bind(BlackboardEntry.TARGET_PROPERTIES_SOURCE, targetProperties.getFirst());
 		board.bind(BlackboardEntry.TARGET_PROPERTIES, targetProperties.getSecond());
 	}
 }

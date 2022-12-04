@@ -6,8 +6,10 @@
   </appender>
 
   <logger name="de.evoal" level="INFO" />
+  <logger name="org.jboss.weld" level="DEBUG" />
+  <logger name="org.jboss.weld.level" level="DEBUG" />
 
-  <root level="WARN">
+  <root level="INFO">
     <appender-ref ref="STDOUT" />
   </root>
 </configuration>

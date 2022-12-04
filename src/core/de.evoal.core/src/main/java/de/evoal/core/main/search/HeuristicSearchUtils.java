@@ -25,12 +25,7 @@ public final class HeuristicSearchUtils {
         return col;
     }
 
-    public static File calculateOutputBaseDir(final File predictiveFile, final File heuristicFile) {
-        String outputDirname = predictiveFile.toString();
-        outputDirname = outputDirname.split("\\.")[0];
-        outputDirname = outputDirname.replace("input/", "output/");
-        final File outputDir = new File(outputDirname);
-
-        return new File(outputDir, heuristicFile.getName().split("\\.")[0]);
+    public static File calculateOutputBaseDir(final File outputFolder, final File heuristicFile) {
+        return new File(outputFolder, heuristicFile.getName().split("\\.")[0]);
     }
 }

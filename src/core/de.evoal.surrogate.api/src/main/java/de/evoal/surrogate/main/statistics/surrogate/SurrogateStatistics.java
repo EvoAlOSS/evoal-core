@@ -5,12 +5,11 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.Dependent;
-import javax.inject.Inject;
 import javax.inject.Named;
 
 import de.evoal.core.api.statistics.*;
 import de.evoal.core.api.ea.codec.CustomCodec;
-import de.evoal.core.api.ea.fitness.type.FitnessType;
+import de.evoal.core.api.ea.fitness.comparator.FitnessValue;
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.languages.model.instance.Instance;
@@ -32,19 +31,19 @@ public class SurrogateStatistics implements StatisticsWriter {
     /**
      * The predictive function used.
      */
-    @Inject
+    //@Inject
     protected SurrogateFunction predictive;
 
     /**
      * Encoding for converting between ea and domain.
      */
-    @Inject
+    // TODO @Inject
     private CustomCodec encoding;
 
-    @Inject @Named("target-properties-specification")
+    //@Inject @Named("target-properties-specification")
     private PropertiesSpecification targetSpecification;
 
-    @Inject
+    // TODO @Inject
     private WriterStrategy strategy;
 
     private Writer writer;
@@ -73,7 +72,7 @@ public class SurrogateStatistics implements StatisticsWriter {
         writer = strategy.create("prediction-by-individual", columns);
     }
 
-    private Object[] dataOfPhenotype(final int index, final long generation, Phenotype<?, FitnessType> phenotype) {
+    private Object[] dataOfPhenotype(final int index, final long generation, Phenotype<?, FitnessValue> phenotype) {
         final Object [] data = new Object[2 + targetSpecification.size()];
 
         data[0] = generation;
@@ -91,8 +90,8 @@ public class SurrogateStatistics implements StatisticsWriter {
     }
 
     @SneakyThrows(WriterException.class)
-    public void add(final EvolutionResult<?, FitnessType> evolutionResult) {
-        final ISeq<Phenotype<?, FitnessType>> population = (ISeq<Phenotype<?, FitnessType>>)(Object)evolutionResult.population();
+    public void add(final EvolutionResult<?, FitnessValue> evolutionResult) {
+        final ISeq<Phenotype<?, FitnessValue>> population = (ISeq<Phenotype<?, FitnessValue>>)(Object)evolutionResult.population();
 
         for(int i = 0; i < population.size(); ++i) {
             writer.addRecord(dataOfPhenotype(i, evolutionResult.generation(), population.get(i)));

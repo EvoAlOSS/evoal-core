@@ -8,12 +8,11 @@ import javax.enterprise.context.Dependent;
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.Produces;
 
+import de.evoal.languages.model.ddl.dsl.DataDescriptionLanguageStandaloneSetup;
 import de.evoal.languages.model.dl.dsl.DefinitionLanguageStandaloneSetup;
 import de.evoal.languages.model.eal.EAModel;
 import de.evoal.languages.model.eal.dsl.EvolutionaryAlgorithmLanguageStandaloneSetup;
-import de.evoal.languages.model.dl.impl.DlPackageImpl;
 import de.evoal.languages.model.eal.impl.EALPackageImpl;
-import de.evoal.languages.model.el.dsl.ExpressionLanguageStandaloneSetup;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -31,7 +30,7 @@ public class EvolutionaryAlgorithmModelLoader {
     private EAModel model;
 
     public void load(final @Observes BlackboardEntry entry) {
-        if(!BlackboardEntry.EA_CONFIGURATION_FILE.equals(entry)) {
+        if(!entry.isSame(BlackboardEntry.EA_CONFIGURATION_FILE)) {
             return;
         }
 
@@ -43,7 +42,6 @@ public class EvolutionaryAlgorithmModelLoader {
             log.error("Unable to read evolutionary algorithm configuration file '{}'", configurationFileName);
             throw new IllegalArgumentException("Unable to read evolutionary algorithm configuration file: " + configurationFileName);
         }
-
 
         initializeEMF();
 
@@ -86,17 +84,9 @@ public class EvolutionaryAlgorithmModelLoader {
      */
     private void initializeEMF() {
         EALPackageImpl.init();
-        DlPackageImpl.init();
-        EALPackageImpl.init();
 
-        /*
-        if (!EPackage.Registry.INSTANCE.containsKey("https://www.evoal.de/languages/idl/1.0.0")) {
-            EPackage.Registry.INSTANCE.put("https://www.evoal.de/languages/idl/1.0.0", DlPackage.eINSTANCE);
-        }
-*/
-        ExpressionLanguageStandaloneSetup.doSetup();
-        DefinitionLanguageStandaloneSetup.doSetup();
         EvolutionaryAlgorithmLanguageStandaloneSetup.doSetup();
+        DataDescriptionLanguageStandaloneSetup.doSetup();
     }
 
     @Produces

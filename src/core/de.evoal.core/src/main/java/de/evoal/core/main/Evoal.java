@@ -60,6 +60,5 @@ public final class Evoal {
         for(final Bean<MainClass> bean : beans) {
             log.error("    {}", bean.getName());
         }
-
     }
 }

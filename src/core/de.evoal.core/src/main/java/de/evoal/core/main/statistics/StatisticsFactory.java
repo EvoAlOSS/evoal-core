@@ -8,6 +8,7 @@ import de.evoal.languages.model.instance.Array;
 import de.evoal.languages.model.instance.Instance;
 import de.evoal.core.main.statistics.internal.MultipleStatisticsWriter;
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.Dependent;
 import javax.enterprise.inject.Produces;
 
 import org.apache.commons.math3.util.Pair;
@@ -18,6 +19,7 @@ import javax.inject.Named;
 @ApplicationScoped
 public class StatisticsFactory {
     @Produces
+    @Dependent
     @Named("statistics")
     public StatisticsWriter create(final @ConfigurationValue(entry = BlackboardEntry.EA_CONFIGURATION, access = "statistics") Instance instance) {
         Requirements.requireSize(instance.getAttributes(), 1);

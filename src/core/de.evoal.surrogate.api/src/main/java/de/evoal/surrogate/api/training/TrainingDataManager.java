@@ -9,7 +9,6 @@ import javax.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
 public class TrainingDataManager {
-
     @Getter
     @Setter
     private PropertiesStreamSupplier trainingStream;

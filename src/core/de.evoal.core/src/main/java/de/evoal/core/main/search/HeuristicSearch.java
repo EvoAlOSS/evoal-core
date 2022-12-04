@@ -5,19 +5,19 @@ import java.time.Duration;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.function.Function;
 
 import de.evoal.core.api.board.BlackboardEntry;
 import de.evoal.core.api.board.Blackboard;
 import de.evoal.core.api.cdi.BlackboardValue;
 import de.evoal.core.api.cdi.ConfigurationValue;
-import de.evoal.core.main.ea.alterer.AltererFactory;
 import de.evoal.core.api.utils.LanguageHelper;
 import de.evoal.core.api.ea.codec.CustomCodec;
-import de.evoal.core.api.ea.fitness.type.FitnessType;
+import de.evoal.core.api.ea.fitness.comparator.FitnessValue;
 
-import de.evoal.core.api.ea.fitness.FitnessEvaluator;
 import de.evoal.core.api.statistics.StatisticsWriter;
+import de.evoal.core.main.ea.fitness.JeneticsFitnessFunction;
+import de.evoal.core.api.ea.initial.InitialPopulation;
+import de.evoal.core.main.jenetics.ConstraintList;
 import de.evoal.languages.model.eal.EAModel;
 import de.evoal.languages.model.instance.Array;
 import de.evoal.languages.model.instance.Attribute;
@@ -29,13 +29,14 @@ import io.jenetics.stat.MinMax;
 import io.jenetics.util.Factory;
 import lombok.extern.slf4j.Slf4j;
 
+import javax.enterprise.context.Dependent;
 import javax.enterprise.inject.Instance;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 
 @Slf4j
-public class HeuristicSearch<G extends Gene<?, G>> {
+@Dependent
+public class HeuristicSearch {
 	@Inject
 	private Blackboard board;
 
@@ -55,57 +56,56 @@ public class HeuristicSearch<G extends Gene<?, G>> {
 
 	@Inject
 	@ConfigurationValue(entry = BlackboardEntry.EA_CONFIGURATION, access = "algorithm.number_of_generations")
-	private int numberOfGenerations = 100;
+	private int numberOfGenerations;
 
 	@Inject
 	@ConfigurationValue(entry = BlackboardEntry.EA_CONFIGURATION, access = "algorithm.size_of_population")
-	private int sizeOfPopulation = 100;
+	private int sizeOfPopulation;
 
 	@Inject
 	@ConfigurationValue(entry = BlackboardEntry.EA_CONFIGURATION, access = "algorithm.maximum_age")
-	private int maximumAge = 100;
+	private int maximumAge;
 
-	private final Map<String, List<Alterer<G, FitnessType>>> alterers = new HashMap<>();
+	private final Map<String, List<Alterer<?, FitnessValue>>> alterers = new HashMap<>();
 
-	@Inject
+	// TODO @Inject
 	private CustomCodec encoding;
 
 	private final ExecutorService executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
 
 	@Inject
-	@Named("evaluator")
-	private FitnessEvaluator fitnessEvaluator;
+	private JeneticsFitnessFunction fitnessFunction;
 
-	@Inject @Named("offspring")
-	private Selector offspringSelector;
+	// TODO	@Inject @Named("offspring")
+	// TODO private Selector offspringSelector;
 
-	@Inject @Named("statistics")
+	// TODO @Inject @Named("statistics")
 	private StatisticsWriter statistics;
 
-	@Inject @Named("survivor")
-	private Selector survivorSelector;
+// TODO	@Inject @Named("survivor")
+// TODO	private Selector survivorSelector;
 
-	@Inject
-	private AltererFactory factory;
+// TODO	@Inject
+// TODO	private AltererFactory factory;
 
-	@Inject
+	// TODO @Inject
 	private Instance<List<Constraint>> constraints;
 
 
-	@Inject
-	private Function<Engine, EvolutionStream> initalStreamFactory;
+	// TODO @Inject
+	private InitialPopulation initalStreamFactory;
 
 	public void run() {
 		setup();
 
-        final Factory<Genotype<G>> gtf = encoding.encoding();
+        final Factory<Genotype<?>> gtf = encoding.encoding();
 
-		final Constraint<G, FitnessType> constraint = new ListConstraint(constraints.get());
+		final Constraint<?, FitnessValue> constraint = new ConstraintList(constraints.get());
 
-        final Engine<G, FitnessType> engine= Engine.builder(this.fitnessEvaluator, encoding)
+        final Engine<?, FitnessValue> engine= Engine.builder(this.fitnessFunction, encoding)
 											.alterers(flattenAltererMap())
-											.offspringSelector(this.offspringSelector)
-											.survivorsSelector(this.survivorSelector)
+				// TODO.offspringSelector(this.offspringSelector)
+				// TODO.survivorsSelector(this.survivorSelector)
 											.optimize(Optimize.MAXIMUM)
 											.populationSize(sizeOfPopulation)
 											.constraint(constraint)
@@ -113,10 +113,10 @@ public class HeuristicSearch<G extends Gene<?, G>> {
 											.executor(executor)
 											.build();
         
-        EvolutionStatistics<FitnessType, MinMax<FitnessType>> statistics = EvolutionStatistics.ofComparable();
-		EvolutionStream<G, FitnessType> initialStream = initalStreamFactory.apply(engine);
+        EvolutionStatistics<FitnessValue, MinMax<FitnessValue>> statistics = EvolutionStatistics.ofComparable();
+		EvolutionStream<?, FitnessValue> initialStream = initalStreamFactory.create(engine);
 
-        final EvolutionResult<G, FitnessType> result
+        final EvolutionResult<?, FitnessValue> result
         		=  initialStream.limit(Limits.byFixedGeneration(numberOfGenerations))
         						.limit(Limits.byExecutionTime(Duration.ofMinutes(5)))
 //		        				.parallel()
@@ -142,24 +142,24 @@ public class HeuristicSearch<G extends Gene<?, G>> {
 			final Array array = (Array) category.getValue();
 
 			for(final Value alterer : array.getValues()) {
-				this.alterers
-						.computeIfAbsent(name, k -> new ArrayList<>())
-						.add(factory.create((de.evoal.languages.model.instance.Instance)alterer));
+// TODO				this.alterers
+// TODO					.computeIfAbsent(name, k -> new ArrayList<>())
+// TODO					.add(factory.create((de.evoal.languages.model.instance.Instance)alterer));
 			}
 		}
 
 
 	}
 
-	private Alterer<G, FitnessType> flattenAltererMap() {
-		Alterer<G, FitnessType> result = null;
+	private <G extends Gene<?, G>> Alterer<?, FitnessValue> flattenAltererMap() {
+		Alterer<G, FitnessValue> result = null;
 
-		for(final Map.Entry<String, List<Alterer<G, FitnessType>>> entry : alterers.entrySet()) {
-			for(final Alterer<G, FitnessType> e : entry.getValue()) {
+		for(final Map.Entry<String, List<Alterer<?, FitnessValue>>> entry : alterers.entrySet()) {
+			for(final Alterer<?, FitnessValue> e : entry.getValue()) {
 				if(result == null) {
-					result = e;
+					result = (Alterer<G, FitnessValue>) e;
 				} else {
-					result = Alterer.of(result, e);
+					result = Alterer.of(result, (Alterer<G, FitnessValue>)  e);
 				}
 			}
 		}

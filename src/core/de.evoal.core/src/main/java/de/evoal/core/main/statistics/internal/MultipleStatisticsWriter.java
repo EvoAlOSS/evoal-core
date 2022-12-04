@@ -1,8 +1,8 @@
 package de.evoal.core.main.statistics.internal;
 
+import de.evoal.core.api.ea.fitness.comparator.FitnessValue;
 import de.evoal.languages.model.instance.Instance;
 import de.evoal.core.api.statistics.StatisticsWriter;
-import de.evoal.core.api.ea.fitness.type.FitnessType;
 import io.jenetics.engine.EvolutionResult;
 
 import java.util.Arrays;
@@ -15,7 +15,7 @@ public class MultipleStatisticsWriter implements StatisticsWriter {
     }
 
     @Override
-    public void add(final EvolutionResult<?, FitnessType> evolutionResult) {
+    public void add(final EvolutionResult<?, FitnessValue> evolutionResult) {
         Arrays.stream(writers).forEach(w -> w.add(evolutionResult));
     }
 

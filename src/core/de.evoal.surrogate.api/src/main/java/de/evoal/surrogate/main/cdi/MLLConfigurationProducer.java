@@ -32,7 +32,7 @@ import java.util.Optional;
 @Slf4j
 public class MLLConfigurationProducer {
     public void loadModel(final @Observes BlackboardEntry value, final Blackboard board) {
-        if(!SurrogateBlackboardEntry.SURROGATE_CONFIGURATION_FILE.equals(value.getLabel())) {
+        if(!value.isSame(SurrogateBlackboardEntry.SURROGATE_CONFIGURATION_FILE)) {
             return;
         }
 

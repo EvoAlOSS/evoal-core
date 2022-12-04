@@ -1,6 +1,6 @@
 package de.evoal.core.api.statistics;
 
-import de.evoal.core.api.ea.fitness.type.FitnessType;
+import de.evoal.core.api.ea.fitness.comparator.FitnessValue;
 import de.evoal.languages.model.instance.Instance;
 import io.jenetics.engine.EvolutionResult;
 
@@ -19,7 +19,7 @@ public interface StatisticsWriter {
     /**
      * Adds a evaluation result to the statistics.
      */
-    public void add(final EvolutionResult<?, FitnessType> result);
+    public void add(final EvolutionResult<?, FitnessValue> result);
 
     /**
      * Passes the writer configuration.

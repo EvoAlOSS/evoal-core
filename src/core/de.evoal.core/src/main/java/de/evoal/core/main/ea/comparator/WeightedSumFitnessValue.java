@@ -1,0 +1,55 @@
+package de.evoal.core.main.ea.comparator;
+
+import de.evoal.core.api.ea.fitness.comparator.FitnessValue;
+import de.evoal.core.api.utils.Requirements;
+import lombok.Getter;
+import lombok.NonNull;
+
+import java.util.Arrays;
+
+import static de.evoal.core.api.utils.Requirements.requireSameSize;
+
+public class WeightedSumFitnessValue implements FitnessValue {
+    @Getter
+    private final @NonNull double[] fitnessValues;
+    private final @NonNull double[] normalizedWeights;
+
+    private WeightedSumFitnessValue(final @NonNull double[] weights, final @NonNull double[] fitnessValues) {
+        Requirements.requireSameSize(weights, fitnessValues);
+
+        this.normalizedWeights = new double[weights.length];
+        System.arraycopy(weights, 0, normalizedWeights, 0, weights.length);
+        this.fitnessValues = fitnessValues;
+
+        final double sumOfWeights = Arrays.stream(weights).sum();
+        for(int i = 0; i < normalizedWeights.length; ++i) {
+            normalizedWeights[i] = normalizedWeights[i] / sumOfWeights;
+        }
+    }
+
+    public static FitnessValue of(final double [] weights, final double [] fitnessValues) {
+        return new WeightedSumFitnessValue(weights, fitnessValues);
+    }
+
+    @Override
+    public int compareTo(final FitnessValue other) {
+        if(!(other instanceof WeightedSumFitnessValue)) {
+            throw new IllegalArgumentException("Only allowed to compare WeightedSumFitnessValue");
+        }
+
+        double ownFitness = 0.0;
+        double otherFitness = 0.0;
+
+        for(int index = 0; index < fitnessValues.length; ++index) {
+            ownFitness = ownFitness - this.normalizedWeights[index] * Math.abs(this.fitnessValues[index]);
+            otherFitness = otherFitness - this.normalizedWeights[index] * Math.abs(((WeightedSumFitnessValue)other).getFitnessValues()[index]);
+        }
+
+        return ownFitness == otherFitness ? 0 : (int)Math.signum(ownFitness - otherFitness);
+    }
+
+    @Override
+    public String toString() {
+    	return "WeightedSum [fit=" + Arrays.toString(fitnessValues) + ", w" + Arrays.toString(normalizedWeights) + "]";
+    }
+}

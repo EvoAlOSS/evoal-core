@@ -3,9 +3,7 @@ package de.evoal.surrogate.main.statistics.correlated;
 import de.evoal.core.api.statistics.*;
 import de.evoal.core.api.utils.LanguageHelper;
 import de.evoal.languages.model.instance.Instance;
-import de.evoal.core.api.board.BlackboardEntry;
-import de.evoal.core.api.cdi.ConfigurationValue;
-import de.evoal.core.api.ea.fitness.type.FitnessType;
+import de.evoal.core.api.ea.fitness.comparator.FitnessValue;
 import de.evoal.core.api.ea.codec.CustomCodec;
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;
@@ -38,38 +36,38 @@ public class GenerationStatisticsWriter implements StatisticsWriter {
     /**
      * List of all existing fitness functions.
      */
-    private List<Function<Properties, FitnessType>> functions;
+    private List<Function<Properties, Properties>> functions;
 
     /**
      * List of all function names
      */
-    @Inject @Named("function-names")
+    // TODO @Inject @Named("function-names")
     private List<String> functionNames;
 
     /**
      * Encoding for converting between ea and domain.
      */
-    @Inject
+    // TODO @Inject
     private CustomCodec encoding;
 
     private long startTime;
 
-    private EvolutionResult<?, FitnessType> generationWithBestIndividual;
+    private EvolutionResult<?, FitnessValue> generationWithBestIndividual;
     private long endTime;
 
     @Inject
-    private Provider<Function<Properties, FitnessType>> fitnessFactory;
+    private Provider<Function<Properties, Properties>> fitnessFactory;
 
-    @Inject @ConfigurationValue(entry = BlackboardEntry.EA_CONFIGURATION, access = "algorithm.fitness")
+    // TODO @Inject @ConfigurationValue(entry = BlackboardEntry.EA_CONFIGURATION, access = "algorithm.fitness")
     private Instance config;
 
     @Inject
     private TrainingDataManager manager;
 
-    @Inject @Named("source-properties-specification")
+    // TODO @Inject @Named("source-properties-specification")
     private PropertiesSpecification sourceSpec;
 
-    @Inject @Named("target-properties-specification")
+    // TODO @Inject @Named("target-properties-specification")
     private PropertiesSpecification targetSpec;
     private List<Properties> sourceTrainingPoints;
 
@@ -77,7 +75,7 @@ public class GenerationStatisticsWriter implements StatisticsWriter {
      * Creates a new GenerationStatistics instance.
      */
 
-    @Inject
+    // TODO @Inject
     private WriterStrategy strategy;
 
     @PostConstruct
@@ -255,8 +253,8 @@ public class GenerationStatisticsWriter implements StatisticsWriter {
         final Properties candidate = (Properties) encoding.decode(generationWithBestIndividual.bestPhenotype().genotype());
 
         for(int i = 0; i < functions.size(); ++i) {
-            final FitnessType fitness = functions.get(i).apply(candidate);
-            data[3 + i] = fitness.getFitnessValues()[0];
+            final FitnessValue fitness = (FitnessValue) functions.get(i).apply(candidate);
+            data[3 + i] = fitness;
             throw new IllegalArgumentException("fix me");
         }
 
@@ -286,11 +284,11 @@ public class GenerationStatisticsWriter implements StatisticsWriter {
         throw new IllegalStateException("We have to change the actual fitness type by looking up the correct definition.");
     }
 
-    public void add(final EvolutionResult<?, FitnessType> evolutionResult) {
+    public void add(final EvolutionResult<?, FitnessValue> evolutionResult) {
         updateBestGeneration(evolutionResult);
     }
 
-    private void updateBestGeneration(final EvolutionResult<?, FitnessType> generation) {
+    private void updateBestGeneration(final EvolutionResult<?, FitnessValue> generation) {
         if(generationWithBestIndividual == null) {
             generationWithBestIndividual = generation;
         } else if(generationWithBestIndividual.bestFitness().compareTo(generation.bestFitness()) <= 0) {

@@ -2,6 +2,7 @@ package de.evoal.surrogate.api.function;
 
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;
+import de.evoal.surrogate.api.configuration.SurrogateConfiguration;
 import lombok.Data;
 import lombok.NonNull;
 

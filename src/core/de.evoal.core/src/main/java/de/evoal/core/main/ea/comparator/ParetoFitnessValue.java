@@ -1,25 +1,29 @@
-package de.evoal.core.main.ea.comparator.pareto;
+package de.evoal.core.main.ea.comparator;
 
 import java.util.Arrays;
 
-import de.evoal.core.api.ea.fitness.type.FitnessType;
+import de.evoal.core.api.ea.fitness.comparator.FitnessValue;
 import io.jenetics.ext.moea.Vec;
 import lombok.NonNull;
 
-public class ParetoComparatorType implements FitnessType {
+public class ParetoFitnessValue implements FitnessValue {
     private final Vec<double []> fitnessValues;
 
-    private ParetoComparatorType(final @NonNull double[] fitnessValues) {
+    private ParetoFitnessValue(final @NonNull double[] fitnessValues) {
         this.fitnessValues = Vec.of(fitnessValues);
     }
 
-    public static FitnessType of(final double [] fitnessValues) {
-        return new ParetoComparatorType(fitnessValues);
+    public static FitnessValue of(final double [] fitnessValues) {
+        return new ParetoFitnessValue(fitnessValues);
     }
 
     @Override
-    public int compareTo(final FitnessType other) {
-        return this.makeAbsolute().compareTo(((ParetoComparatorType)other).makeAbsolute());
+    public int compareTo(final FitnessValue other) {
+        if(!(other instanceof ParetoFitnessValue)) {
+            throw new IllegalArgumentException("Only allowed to compare pareto fitness values");
+        }
+
+        return this.makeAbsolute().compareTo(((ParetoFitnessValue)other).makeAbsolute());
     }
     
     private final Vec<double[]> makeAbsolute(){
@@ -29,11 +33,6 @@ public class ParetoComparatorType implements FitnessType {
     			                                       .toArray();
     	
     	return Vec.of(negativeAbsoluteValues);
-    }
-
-    @Override
-    public double[] getFitnessValues() {
-        return fitnessValues.data();
     }
 
     @Override

@@ -33,7 +33,7 @@ import org.eclipse.xtext.resource.XtextResourceSet;
 @Slf4j
 public class GeneratorConfigurationProducer {
     public void loadModel(final @Observes BlackboardEntry value, final Blackboard board) {
-        if(!GeneratorBlackboardEntry.GENERATOR_CONFIGURATION_FILE.equals(value.getLabel())) {
+        if(!value.isSame(GeneratorBlackboardEntry.GENERATOR_CONFIGURATION_FILE)) {
             return;
         }
 
