@@ -24,6 +24,6 @@ public class IdentityFunction extends AbstractPartialSurrogateFunction {
 	}
 
 	public double [] apply(final Properties input) {
-		return new double[] {input.get(propertyIndex)};
+		return new double[] {input.getAsDouble(propertyIndex)};
 	}
 }

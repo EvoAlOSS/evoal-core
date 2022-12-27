@@ -2,6 +2,7 @@ package de.evoal.generator.main.benchmarks;
 
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertySpecification;
+import de.evoal.core.api.utils.Requirements;
 import de.evoal.generator.api.AbstractGeneratorFunction;
 import de.evoal.generator.api.GeneratorFunction;
 import de.evoal.generator.main.utils.ELHelper;
@@ -31,7 +32,7 @@ public class Ackley extends AbstractGeneratorFunction {
         double sum2 = 0.0;
 
         for(final PropertySpecification ps : readSpecification.getProperties()) {
-            double read_i = in.get(ps);
+            double read_i = in.getAsDouble(ps);
 
         	sum1 += Math.pow(read_i, 2.0);
         	sum2 += Math.cos(c * read_i);

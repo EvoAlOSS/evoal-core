@@ -38,10 +38,7 @@ public class HeuristicSearchMain implements MainClass {
 
 		board.bind(BlackboardEntry.EVALUATION_OUTPUT_FOLDER, outputBaseDir);
 		board.bind(BlackboardEntry.EVALUATION_RUN, "0");
-/*
-		final Stream<Pair<Properties, Properties>> targets = (Stream<Pair<Properties, Properties>>)BeanProvider.getContextualReference("target-stream");
-		setTarget(targets, board);
-*/
+
 		BeanFactory.create(HeuristicSearch.class)
 				   .run();
 	}
@@ -51,7 +48,6 @@ public class HeuristicSearchMain implements MainClass {
 					targets.findFirst()
 						   .orElseThrow(() -> {throw new IllegalStateException("No target point found");});
 
-// TODO		board.bind(BlackboardEntry.TARGET_PROPERTIES_SOURCE, targetProperties.getFirst());
 		board.bind(BlackboardEntry.TARGET_PROPERTIES, targetProperties.getSecond());
 	}
 }

@@ -50,7 +50,7 @@ public class RSquareCalculator implements SurrogateInformationCalculator {
 
 		final double [][] yValues = pairStream.get()
 											  .map(Pair::getSecond)
-				   							  .map(Properties::getValues)
+				   							  .map(Properties::getValuesAsDouble)
 											  .toArray(size -> new double[size][]);
 
 		final double [] means = new double [yValues[0].length];
@@ -75,11 +75,10 @@ public class RSquareCalculator implements SurrogateInformationCalculator {
 							final Properties input = pair.getFirst();
 							final Properties calculated = function.apply(input);
 
-							double [] values = new double[calculated.size()];
-							System.arraycopy(calculated.getValues(), 0, values, 0, values.length);
+							double [] values = calculated.getValuesAsDouble();
 
 							for(int i = 0; i < values.length; ++i) {
-								values[i] = Math.pow(pair.getSecond().get(i) - values[i], 2);
+								values[i] = Math.pow(pair.getSecond().getAsDouble(i) - values[i], 2);
 							}
 
 							return values;

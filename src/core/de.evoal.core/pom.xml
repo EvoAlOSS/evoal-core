@@ -313,6 +313,10 @@
 					<compilerArgs>
 						<arg>--add-exports</arg>
 						<arg>io.jenetics.base/io.jenetics.internal.math=de.evoal.core</arg>
+						<arg>--add-exports</arg>
+						<arg>io.jenetics.base/io.jenetics.internal.util=de.evoal.core</arg>
+						<arg>--add-exports</arg>
+						<arg>io.jenetics.base/io.jenetics.internal.collection=de.evoal.core</arg>
 					</compilerArgs>
 					<forceJavacCompilerUse>true</forceJavacCompilerUse>
 				</configuration>

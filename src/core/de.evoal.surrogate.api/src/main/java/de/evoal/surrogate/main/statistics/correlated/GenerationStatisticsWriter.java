@@ -142,14 +142,14 @@ public class GenerationStatisticsWriter implements StatisticsWriter {
             for(int d = 0; d < dimensions; ++d) {
                 final double value = sourceTrainingPoints
                                             .get(t)
-                                            .get(d);
+                                            .getAsDouble(d);
                 trainingsMatrix.set(d, t, value);
                 onTheFlyMatrix.set(d, t, value);
             }
         }
 
         for(int d = 0; d < dimensions; ++d) {
-            onTheFlyMatrix.set(d, onTheFlySize - 1, candidate.get(d));
+            onTheFlyMatrix.set(d, onTheFlySize - 1, candidate.getAsDouble(d));
         }
 
         final Matrix trainingsCovarianceMatrix = calculateCovarianceMatrix(trainingsMatrix);
@@ -178,10 +178,10 @@ public class GenerationStatisticsWriter implements StatisticsWriter {
             final Genotype<?> genotype = genotypes.get(i);
             final Properties individual = (Properties) encoding.decode(genotype);
 
-            final double [] data = individual.getValues();
+            final Object [] data = individual.getValues();
 
             for(int j = 0; j < data.length; ++j) {
-                result.set(i, j, data[j]);
+                result.set(i, j, (Double)data[j]);
             }
         }
 

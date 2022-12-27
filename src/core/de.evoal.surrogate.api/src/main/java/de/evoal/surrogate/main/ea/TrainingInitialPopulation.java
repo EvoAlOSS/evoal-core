@@ -15,12 +15,9 @@ import io.jenetics.engine.EvolutionStream;
 import io.jenetics.util.ISeq;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-@Dependent
-@Named("training")
 public class TrainingInitialPopulation<G extends Gene<?, G>, C extends Comparable<C>> implements InitialPopulation<G, C> {
 
     @Inject
@@ -48,20 +45,19 @@ public class TrainingInitialPopulation<G extends Gene<?, G>, C extends Comparabl
                                                     .build();
     }
 
-    // TODO @Inject
-    private CustomCodec<G> encoding;
+    @Inject
+    private CustomCodec encoding;
 
     private EvolutionInit<G> createTargetBasedInitialPopulation() {
         return EvolutionInit.of(createInitialPopulation(), 1l);
     }
 
     private ISeq<Genotype<G>> createInitialPopulation() {
-        return
-                manager.getTrainingStream()
+        return manager.getTrainingStream()
                        .apply(totalSpecification)
                        .unordered()
                        .limit(sizeOfPopulation)
-                       .map(encoding::encode)
+                       .map(((CustomCodec<G>)encoding)::encode)
                        .collect(ISeq.toISeq());
     }
 

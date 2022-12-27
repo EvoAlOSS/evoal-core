@@ -30,7 +30,7 @@ public final class KernelHelper {
 
 	public static final String TOLERANCE_PARAMETER = "tolerance";
 
-	private static final String KERNEL_PARAMETER = "kernel";
+	public static final String KERNEL_PARAMETER = "kernel";
 
 	/**
 	 * Logger instance
@@ -57,7 +57,7 @@ public final class KernelHelper {
 	public static KernelMachine<double []> fromParameters(final List<Parameter> parameters, final List<Parameter> kernelParameters) {
 		final Map<String, Object> kernelParameterMap = toMap(kernelParameters);
 
-		final MercerKernel<double []> kernel = toKernel(toMap(parameters));
+		final MercerKernel<double []> kernel = toKernel(toMap(parameters), kernelParameterMap);
 		final double[][] instances =(double[][]) kernelParameterMap.get("instances");
 		final double[] weight = (double[]) kernelParameterMap.get("weights");
 		final double b = (double)kernelParameterMap.get("intercept");
@@ -73,10 +73,10 @@ public final class KernelHelper {
 		return new GaussianKernel(sigma);
 	}
 
-	public static MercerKernel<double []> toKernel(final Map<String, Object> parameters) {
-		log.info("  Using kernel '{}'", parameters.get(KERNEL_PARAMETER));
+	public static MercerKernel<double []> toKernel(final Map<String, Object> parameters, final Map<String, Object> state) {
+		log.info("  Using kernel '{}'", state.get(KERNEL_PARAMETER));
 
-		switch((String)parameters.get(KERNEL_PARAMETER)) {
+		switch((String)state.get(KERNEL_PARAMETER)) {
 		case "gaussian": {
 			final double sigma = (double)parameters.get(SIGMA_PARAMETER);
 
@@ -142,13 +142,14 @@ public final class KernelHelper {
 		throw new IllegalArgumentException("The kernel " + parameters.get(KERNEL_PARAMETER) + " is not supported.");
 	}
 
-	public static List<Parameter> toParameters(final Regression<double[]> regression) {
+	public static List<Parameter> toParameters(final Regression<double[]> regression, final String kernelName) {
 		final KernelMachine<double []> machine = (KernelMachine<double[]>)regression;
 		
 		final List<Parameter> result = new LinkedList<>();
 		addParameter("weights", machine.weights(), result);
 		addParameter("intercept", machine.intercept(), result);
 		addParameter("instances", machine.instances(), result);
+		addParameter(KERNEL_PARAMETER, kernelName, result);
 
 		return result;
 	}

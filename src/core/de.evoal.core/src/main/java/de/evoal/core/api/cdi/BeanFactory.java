@@ -1,5 +1,6 @@
 package de.evoal.core.api.cdi;
 
+import de.evoal.core.api.ea.initial.InitialPopulation;
 import de.evoal.core.api.utils.Requirements;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.deltaspike.core.api.provider.BeanProvider;
@@ -22,15 +23,18 @@ public final class BeanFactory {
         log.info("Creating bean of type {}.", type);
         try {
             return BeanProvider.getContextualReference(type);
-        } catch(final IllegalStateException e) {
+        } catch(final IllegalStateException | IllegalArgumentException e) {
             log.error("Failed to create contextual reference of type '{}'.", type);
-            final Set<Bean<T>> beans = BeanProvider.getBeanDefinitions(type, true, true);
-
-            final String existingBeans = beans.stream().map(Bean::getName).collect(Collectors.joining(", "));
-            log.error("  existing beans are: {}", existingBeans);
-
+            logInstantiationError(type, e);
             throw e;
         }
+    }
+
+    private static <T> void logInstantiationError(Class<T> type, RuntimeException e) {
+        final Set<Bean<T>> beans = BeanProvider.getBeanDefinitions(type, true, true);
+
+        final String existingBeans = beans.stream().map(Bean::getName).collect(Collectors.joining(", "));
+        log.error("  existing beans are: {}", existingBeans);
     }
 
     /**
@@ -50,14 +54,14 @@ public final class BeanFactory {
 
         try {
             return BeanProvider.getContextualReference(name, false, type);
-        } catch(final IllegalStateException e) {
+        } catch(final IllegalStateException | IllegalArgumentException e) {
             log.error("Failed to create contextual reference of type '{}' with name '{}'.", type, name);
-            final Set<Bean<T>> beans = BeanProvider.getBeanDefinitions(type, true, true);
-
-            final String existingBeans = beans.stream().map(Bean::getName).collect(Collectors.joining(", "));
-            log.error("  existing beans are: {}", existingBeans);
-
+            logInstantiationError(type, e);
             throw e;
         }
+    }
+
+    public static void injectFields(final Object instance) {
+        BeanProvider.injectFields(instance);
     }
 }

@@ -32,7 +32,7 @@ public class LinearFunctionFactory extends AbstractPartialSurrogateFunctionFacto
 		provider.get()
 				.forEach(coordinate -> {
 					log.info("Mapping - ({}) to ({}).", coordinate.getFirst(), coordinate.getSecond());
-					regression.addData(coordinate.getFirst().get(0), coordinate.getSecond().get(0));
+					regression.addData(coordinate.getFirst().getAsDouble(0), coordinate.getSecond().getAsDouble(0));
 				});
 
 		return new LinearFunction(configuration, LinearFunction.toParameters(regression), requiredInput, actualInput, producedOutput);

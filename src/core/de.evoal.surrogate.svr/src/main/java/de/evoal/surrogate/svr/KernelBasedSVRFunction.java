@@ -21,8 +21,8 @@ public class KernelBasedSVRFunction extends AbstractPartialSurrogateFunction {
 
 	private final double gamma;
 
-	public KernelBasedSVRFunction(final PartialFunctionConfiguration configuration, final KernelMachine<double []> regression, final PropertiesSpecification input, final PropertiesSpecification actualInput, final PropertiesSpecification output, final double gamma) {
-		super(configuration, KernelHelper.toParameters(regression), input, output);
+	public KernelBasedSVRFunction(final PartialFunctionConfiguration configuration, final KernelMachine<double []> regression, final String kernelName, final PropertiesSpecification input, final PropertiesSpecification actualInput, final PropertiesSpecification output, final double gamma) {
+		super(configuration, KernelHelper.toParameters(regression, kernelName), input, output);
 		
 		this.indices = input.getProperties().stream().mapToInt(p -> actualInput.indexOf(p)).toArray();
 
@@ -35,7 +35,7 @@ public class KernelBasedSVRFunction extends AbstractPartialSurrogateFunction {
 		final double [] data = new double[indices.length];
 
 		for(int i = 0; i < data.length; ++i) {
-			data[i] = input.get(indices[i]);
+			data[i] = input.getAsDouble(indices[i]);
 		}
 
 		return new double [] {regression.predict(data)};

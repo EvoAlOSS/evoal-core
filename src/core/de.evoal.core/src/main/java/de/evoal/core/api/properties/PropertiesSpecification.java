@@ -81,6 +81,10 @@ public class PropertiesSpecification {
 		return this.indices.containsKey(spec);
 	}
 
+	public PropertySpecification get(final int i) {
+		return properties.get(i);
+	}
+
 	public List<PropertySpecification> getProperties() {
 		return Collections.unmodifiableList(properties);
 	}

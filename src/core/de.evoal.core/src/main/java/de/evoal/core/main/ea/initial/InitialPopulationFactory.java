@@ -8,19 +8,26 @@ import de.evoal.languages.model.instance.Instance;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.Dependent;
 import javax.enterprise.inject.Produces;
+import javax.inject.Inject;
+import javax.inject.Named;
 
-@ApplicationScoped
+@Dependent
 public class InitialPopulationFactory {
+
+	@Inject
+	@ConfigurationValue(entry = BlackboardEntry.EA_CONFIGURATION, access = "algorithm.initialization")
+	private Instance initialization;
+
 	/**
-	 * Creates a initial generation based on the heuristic configuration.
+	 * Creates an initial generation based on the heuristic configuration.
 	 *
 	 * Blackboard slots used:
 	 * <ul>
 	 *   <li>{@link BlackboardEntry#EA_CONFIGURATION}.</li>
 	 * </ul>
 	 */
-	@Produces @Dependent
-	public InitialPopulation create(@ConfigurationValue(entry = BlackboardEntry.EA_CONFIGURATION, access = "algorithm.initialization") final Instance initialization) {
+	@Produces @Dependent @Named("initial")
+	public InitialPopulation create() {
 		return BeanFactory.create(initialization.getName().getName(), InitialPopulation.class)
 						  .init(initialization);
 	}

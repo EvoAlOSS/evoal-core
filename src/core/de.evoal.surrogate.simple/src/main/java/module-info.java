@@ -6,4 +6,5 @@ module de.evoal.surrogate.simple {
 
     requires de.evoal.core;
     requires de.evoal.surrogate.api;
+    requires jakarta.inject.api;
 }

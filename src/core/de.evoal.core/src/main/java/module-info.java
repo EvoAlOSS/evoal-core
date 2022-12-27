@@ -55,11 +55,10 @@ module de.evoal.core {
     exports de.evoal.core.api.statistics;
     exports de.evoal.core.api.utils;
 
-//    opens de.evoal.core.api to weld.core.impl;
+
     opens de.evoal.core.api.board to weld.core.impl;
     opens de.evoal.core.api.cdi to weld.core.impl;
     opens de.evoal.core.api.ea to weld.core.impl;
-    opens de.evoal.core.api.ea.codec to weld.core.impl;
     opens de.evoal.core.api.ea.constraints to weld.core.impl;
     opens de.evoal.core.api.ea.fitness to weld.core.impl;
     opens de.evoal.core.api.properties to weld.core.impl;
@@ -68,12 +67,21 @@ module de.evoal.core {
     opens de.evoal.core.api.statistics to weld.core.impl;
     opens de.evoal.core.api.utils to weld.core.impl;
 
-    opens de.evoal.core.main.ea.fitness to weld.core.impl;
+    opens de.evoal.core.main.ea.alterer to weld.core.impl;
+    opens de.evoal.core.main.ea.alterer.mutator to weld.core.impl;
+    opens de.evoal.core.main.ea.codec to weld.core.impl;
+    opens de.evoal.core.main.ea.codec.chromosome to weld.core.impl;
     opens de.evoal.core.main.ea.comparator to weld.core.impl;
+    opens de.evoal.core.main.ea.fitness to weld.core.impl;
     opens de.evoal.core.main.ea.initial to weld.core.impl;
+    opens de.evoal.core.main.ea.producer to weld.core.impl;
     opens de.evoal.core.main.producer to weld.core.impl;
     opens de.evoal.core.main.search to weld.core.impl;
     opens de.evoal.core.main.statistics to weld.core.impl;
+    opens de.evoal.core.main.statistics.fitness to weld.core.impl;
+    opens de.evoal.core.main.statistics.individuals to weld.core.impl;
+    opens de.evoal.core.main.statistics.nop to weld.core.impl;
+    opens de.evoal.core.main.statistics.writer.csv to weld.core.impl;
 
     /*
     opens de.evoal.core.main.ddl.correlation to weld.core.impl;
@@ -85,11 +93,5 @@ module de.evoal.core {
     opens de.evoal.core.main.ddl.deviation to weld.core.impl;
     opens de.evoal.core.main.ea.alterer to weld.core.impl;
     opens de.evoal.core.main.ea.alterer.mutator to weld.core.impl;
-    opens de.evoal.core.main.statistics to weld.core.impl;
-    opens de.evoal.core.main.statistics.constraint to weld.core.impl;
-    opens de.evoal.core.main.statistics.individuals to weld.core.impl;
-    opens de.evoal.core.main.statistics.nop to weld.core.impl;
-    opens de.evoal.core.main.statistics.rangeCorrelated to weld.core.impl;
-    opens de.evoal.core.main.statistics.writer.csv to weld.core.impl;
 */
 }

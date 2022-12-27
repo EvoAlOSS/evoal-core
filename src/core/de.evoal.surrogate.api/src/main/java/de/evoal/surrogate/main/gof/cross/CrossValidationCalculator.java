@@ -120,7 +120,7 @@ public class CrossValidationCalculator implements SurrogateInformationCalculator
 
 									for (int cvi = 0; cvi < calculated.size(); ++cvi) {
 										//correctness[cvi] = correctness[cvi] + Math.abs((calculated.get(cvi) - predicted.get(cvi)) / calculated.get(cvi));
-										correctness[cvi] = correctness[cvi] + Math.abs(calculated.get(cvi) - predicted.get(cvi));
+										correctness[cvi] = correctness[cvi] + Math.abs(calculated.getAsDouble(cvi) - predicted.getAsDouble(cvi));
 									}
 								});
 

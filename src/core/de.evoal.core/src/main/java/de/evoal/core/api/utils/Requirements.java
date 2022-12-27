@@ -42,6 +42,24 @@ public final class Requirements {
     }
 
     /**
+     * Requires the arrays to be present and of same size.
+     *
+     * @param a The first array.
+     * @param b The second array.
+     *
+     * @throws NullPointerException iff either {@code a} or {@code b} is {@code null}.
+     * @throws IllegalArgumentException iff the size of {@code a} and {@code b} differ.
+     */
+    public static <T>void requireSameSize(final double [] a, final T [] b) {
+        Objects.requireNonNull(a, "Array is not allowed to be null");
+        Objects.requireNonNull(b, "Array is not allowed to be null");
+
+        if(a.length != b.length) {
+            throw new IllegalArgumentException("Arrays are expected to have the same size: " + a.length + " -- " + b.length);
+        }
+    }
+
+    /**
      * Requires the collections to be present and of same size.
      *
      * @param a The first collection.

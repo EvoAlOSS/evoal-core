@@ -30,32 +30,23 @@ public final class LanguageHelper {
         for(final String part : parts) {
             try {
                 if(!(current instanceof Instance)) {
-                    log.error("Failed to lookup part '{}' of path '{}'.", part, path);
+                    log.error("Failed to lookup part '{}' of path '{}' in '{}'.", part, path, current);
                     throw new IllegalStateException("EA configuration is not valid.");
                 }
 
-                boolean foundAttribute = false;
-                for(final Attribute attr : ((Instance)current).getAttributes()) {
-                    final NameOrMisc nom = attr.getName();
+                final Attribute attribute = ((Instance)current).findAttribute(part);
 
-                    if(nom instanceof Misc && ((Misc)nom).getName().equals(part)) {
-                        current =  attr.getValue();
-                        foundAttribute = true;
-                        break;
-                    } else if(nom instanceof Name && ((Name)nom).getName().getName().equals(part)) {
-                        current =  attr.getValue();
-                        foundAttribute = true;
-                        break;
-                    }
-                }
-
-                if(!foundAttribute && "name".equals(part)) {
+                if(attribute != null) {
+                    current = attribute.getValue();
+                } else if("name".equals(part)) {
                     current = ((Instance)current).getName().getName();
-                    foundAttribute = true;
-                }
-
-                if(!foundAttribute) {
-                    log.error("Failed to lookup part '{}' of path '{}'. Returning null.", part, path);
+                } else {
+                    log.warn("Failed to lookup part '{}' of path '{}'. Returning null.", part, path);
+                    log.warn("Current instance is: {}", ((Instance) current).getName().getName());
+                    log.warn("Available attributes:");
+                    for(final Attribute a : ((Instance) current).getAttributes()) {
+                        log.warn("  {}", ((Name)a.getName()).getName().getName());
+                    }
                     return null;
                 }
             } catch(final NullPointerException e) {
@@ -78,8 +69,11 @@ public final class LanguageHelper {
             }
         }
 
-        log.debug("Mapping " + path + " to " + current + " of type " + current.getClass());
-
+        if(current instanceof Instance) {
+            log.debug("Mapping '{}' to instance with name '{}'.", path, ((Instance)current).getName().getName());
+        } else {
+            log.debug("Mapping '{}' to '{}'.", path, current);
+        }
         return (T) current;
     }
 

@@ -4,10 +4,11 @@ import de.evoal.core.api.board.Blackboard;
 import de.evoal.core.api.board.BlackboardEntry;
 import de.evoal.core.api.ea.fitness.FitnessFunction;
 import de.evoal.core.api.properties.Properties;
+import de.evoal.core.api.properties.PropertiesSpecification;
+import de.evoal.core.api.properties.PropertySpecification;
 import de.evoal.core.api.utils.Requirements;
-import de.evoal.languages.model.instance.Array;
-import de.evoal.languages.model.instance.Attribute;
-import de.evoal.languages.model.instance.Instance;
+import de.evoal.languages.model.ddl.DataDescription;
+import de.evoal.languages.model.instance.*;
 import org.apache.commons.math3.util.Pair;
 
 import javax.enterprise.context.Dependent;
@@ -29,18 +30,21 @@ public class DistanceFitness extends FitnessDecorator {
 
     @Override
     public double[] evaluate(final Properties properties) {
-        final double [] target = this.target.getValues();
+        final Object [] target = this.target.getValues();
         final double [] current = decoratedFunction.evaluate(properties);
 
-        Requirements.requireSameSize(current, target);
-
+        Requirements.<Object>requireSameSize(current, target);
 
         final double result[] = new double[target.length];
         for(int i = 0; i  < target.length; ++i) {
-            result[i] = target[i] - current[i];
+            result[i] = difference(target[i], current[i]);
         }
 
         return result;
+    }
+
+    private double difference(final Object o, final double v) {
+        return ((Number)o).doubleValue() - v;
     }
 
     @Override
@@ -53,13 +57,36 @@ public class DistanceFitness extends FitnessDecorator {
             this.target = board.get(BlackboardEntry.TARGET_PROPERTIES);
         } else {
             this.target = toProperties((Array)target.getValue());
+            board.bind(BlackboardEntry.TARGET_PROPERTIES, this.target);
         }
 
         return this;
     }
 
-    private static Properties toProperties(final Array value) {
+    private static Properties toProperties(final Array array) {
+        PropertiesSpecification specification = PropertiesSpecification.builder()
+                                                                       .add(array.getValues()
+                                                                                 .stream()
+                                                                                 .map(Instance.class::cast)
+                                                                                 .map(i -> i.findAttribute("name"))
+                                                                                 .map(Attribute::getValue)
+                                                                                 .map(DataReference.class::cast)
+                                                                                 .map(DataReference::getDefinition)
+                                                                                 .map(DataDescription::getName)
+                                                                           )
+                                                                       .build();
 
-        return null;
+        final Properties properties = new Properties(specification);
+        array.getValues()
+                .stream()
+                .map(Instance.class::cast)
+                .forEach(i -> {
+                    final String name = ((DataReference)i.findAttribute("name").getValue()).getDefinition().getName();
+                    final Object value = ((LiteralValue)i.findAttribute("val").getValue()).getLiteral().getValue();
+
+                    properties.put(new PropertySpecification(name), value);
+                });
+
+        return properties;
     }
 }

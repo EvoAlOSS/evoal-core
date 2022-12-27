@@ -25,12 +25,15 @@ public abstract class KernelBasedSVRFunctionFactory extends AbstractPartialSurro
 	 */
 	private final Function<Map<String, Object>, MercerKernel<double[]>> toKernel;
 
-	public KernelBasedSVRFunctionFactory(final Function<Map<String, Object>, MercerKernel<double []>> toKernel) {
+	private final String nameOfKernel;
+
+	public KernelBasedSVRFunctionFactory(final Function<Map<String, Object>, MercerKernel<double []>> toKernel, final String nameOfKernel) {
 		this.toKernel = toKernel;
+		this.nameOfKernel = nameOfKernel;
 	}
 
 	@Override
-	protected PartialSurrogateFunction calculateRegression(final PartialFunctionConfiguration configuration, List<Parameter> parameters, PropertiesSpecification actualInput, PropertiesSpecification requiredInput, PropertiesSpecification producedOutput, PropertiesPairStreamSupplier provider) {
+	protected PartialSurrogateFunction calculateRegression(final PartialFunctionConfiguration configuration, final List<Parameter> parameters, PropertiesSpecification actualInput, PropertiesSpecification requiredInput, PropertiesSpecification producedOutput, PropertiesPairStreamSupplier provider) {
 		log.info("Calculate SVR surrogate from {} to {}.", requiredInput, producedOutput);
 
 		Requirements.requireSizeGreaterThean(requiredInput.getProperties(), 0);
@@ -41,8 +44,8 @@ public abstract class KernelBasedSVRFunctionFactory extends AbstractPartialSurro
 
 		provider.get()
 				.forEach(p -> {
-					sources.add(p.getFirst().getValues());
-					targets.add(p.getSecond().get(0));
+					sources.add(p.getFirst().getValuesAsDouble());
+					targets.add(p.getSecond().getAsDouble(0));
 				});
 
 		log.info("Using {} points for regression.", sources.size());
@@ -59,6 +62,6 @@ public abstract class KernelBasedSVRFunctionFactory extends AbstractPartialSurro
 
 		final KernelMachine<double []> regression = SVR.fit(sourceArray, targetArray, toKernel.apply(params), epsilon, margin, tolerance);
 
-		return new KernelBasedSVRFunction(configuration, regression, requiredInput, actualInput, producedOutput, margin);
+		return new KernelBasedSVRFunction(configuration, regression, nameOfKernel, requiredInput, actualInput, producedOutput, margin);
 	}
 }

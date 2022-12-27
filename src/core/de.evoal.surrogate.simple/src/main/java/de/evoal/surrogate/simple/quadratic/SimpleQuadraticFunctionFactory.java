@@ -33,7 +33,7 @@ public final class SimpleQuadraticFunctionFactory extends AbstractPartialSurroga
 		provider.get()
 				.forEach(coordinate -> {
 					log.info("Mapping - ({}) to ({}).", coordinate.getFirst(), coordinate.getSecond());
-					regression.addData(Math.pow(coordinate.getFirst().get(0), 2), coordinate.getSecond().get(0));
+					regression.addData(Math.pow(coordinate.getFirst().getAsDouble(0), 2), coordinate.getSecond().getAsDouble(0));
 				});
 
 		return new SimpleQuadraticFunction(configuration, LinearFunction.toParameters(regression), requiredInput, actualInput, producedOutput);

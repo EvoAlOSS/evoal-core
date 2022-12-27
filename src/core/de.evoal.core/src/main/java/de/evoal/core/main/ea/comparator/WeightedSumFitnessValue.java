@@ -52,4 +52,15 @@ public class WeightedSumFitnessValue implements FitnessValue {
     public String toString() {
     	return "WeightedSum [fit=" + Arrays.toString(fitnessValues) + ", w" + Arrays.toString(normalizedWeights) + "]";
     }
+
+    @Override
+    public Object[] toStatistics() {
+        final Object [] result = new Object[fitnessValues.length];
+
+        for(int i = 0; i < result.length; ++i) {
+            result[i] = fitnessValues[i];
+        }
+
+        return result;
+    }
 }

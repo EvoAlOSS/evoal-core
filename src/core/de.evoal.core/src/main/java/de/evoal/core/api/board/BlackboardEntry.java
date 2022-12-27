@@ -5,7 +5,7 @@ public final class BlackboardEntry {
     /**
      * The target properties to search for.
      */
-    public static final String TARGET_PROPERTIES = "TARGET_PROPERTIES";
+    public static final String TARGET_PROPERTIES = "core:target-properties";
 
     //    public static final String TARGET_PROPERTIES_SOURCE = "TARGET_PROPERTIES_SOURCE";
 
@@ -15,14 +15,9 @@ public final class BlackboardEntry {
 //    public static final String CONSTRAINT_VALIDATION_FOLDER = "CONSTRAINT_VALIDATION_FOLDER";
 
     /**
-     * Chooses the evaluation kind.
-     */
-//    public static final String EVALUATION = "EVALUATION";
-
-    /**
      * Number of evaluation runs.
      */
-//    public static final String EVALUATION_ITERATIONS = "EVALUATION_ITERATIONS";
+    public static final String EVALUATION_ITERATIONS = "core:evaluation-iterations";
 
     /**
      * The evaluation run number.
@@ -59,20 +54,6 @@ public final class BlackboardEntry {
      */
     public static final String MAIN = "core:main";
 
-    /**
-     * The trained predictive function
-     */
-//    public static final String PREDICTIVE_FUNCTION = "PREDICTIVE_FUNCTION";
-
-    /**
-     * The predictive configuration to use
-     */
-//    public static final String PREDICTIVE_FUNCTION_CONFIGURATION = "PREDICTIVE_FUNCTION_CONFIGURATION";
-
-    /**
-     * File containing the predictive function file.
-     */
-//    public static final String PREDICTIVE_FUNCTION_FILE = "PREDICTIVE_FUNCTION_FILE";
 
     /**
      * Targets.
@@ -82,12 +63,7 @@ public final class BlackboardEntry {
     /**
      * File containing targets for evaluation.
      */
-//    public static final String TARGETS_FILE = "TARGETS_FILE";
-
-    /**
-     * File containing the training points.
-     */
-//    public static final String TRAINING_POINT_FILE = "TRAINING_POINT_FILE";
+    public static final String TARGET_POINTS_FILE = "core:target-points-file";
 
     private final String label;
 

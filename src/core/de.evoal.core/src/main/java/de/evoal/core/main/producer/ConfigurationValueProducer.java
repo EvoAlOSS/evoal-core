@@ -44,6 +44,14 @@ public class ConfigurationValueProducer {
 
     @Produces
     @ConfigurationValue(entry = BlackboardEntry.EA_CONFIGURATION, access = "")
+    public final Array injectArrayValue(final InjectionPoint ip, final Blackboard board) {
+        final ConfigurationValue value = ip.getAnnotated().getAnnotation(ConfigurationValue.class);
+
+        return lookup(board.get(value.entry()), value.access());
+    }
+
+    @Produces
+    @ConfigurationValue(entry = BlackboardEntry.EA_CONFIGURATION, access = "")
     public final Instance injectInstanceValue(final InjectionPoint ip, final Blackboard board) {
         final ConfigurationValue value = ip.getAnnotated().getAnnotation(ConfigurationValue.class);
 

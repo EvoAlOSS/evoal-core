@@ -14,7 +14,12 @@ public final class SurrogateBlackboardEntry {
     /**
      * File containing a pre-trained surrogate.
      */
-    public static final String PRETRAINED_SURROGATE_FILE = "surrogate:pre-trained";
+    public static final String SURROGATE_PRETRAINED_FILE = "surrogate:pre-trained";
+
+    /**
+     * File containing the training data.
+     */
+    public static final String SURROGATE_TRAINING_DATA_FILE = "surrogate:training-data";
 
     private SurrogateBlackboardEntry() {}
 }

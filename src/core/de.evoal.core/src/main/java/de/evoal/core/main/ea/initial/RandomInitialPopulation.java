@@ -6,12 +6,12 @@ import io.jenetics.Gene;
 import io.jenetics.engine.Engine;
 import io.jenetics.engine.EvolutionStream;
 
+import javax.enterprise.context.Dependent;
 import javax.inject.Named;
 
-@Named("random")
 public class RandomInitialPopulation<G extends Gene<?, G>, C extends Comparable<C>> implements InitialPopulation<G, C> {
     @Override
-    public InitialPopulation init(Instance initialization) {
+    public InitialPopulation init(final Instance initialization) {
         // this is not the function you are looking for.
         return this;
     }

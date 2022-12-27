@@ -61,7 +61,7 @@ public class LinearFunction extends AbstractPartialSurrogateFunction {
 		final PropertySpecification inputProperty = input.getProperties().get(0);
 		final int propertyIndex = actualInput.indexOf(inputProperty);
 		
-		this.regression = vector -> intercept + slope * vector.get(propertyIndex);
+		this.regression = vector -> intercept + slope * vector.getAsDouble(propertyIndex);
 	}
 
 	public double [] apply(final Properties input) {

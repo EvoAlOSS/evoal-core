@@ -24,7 +24,7 @@ public class Rastrigin extends AbstractGeneratorFunction {
         double value = a * n;
 
         for(final PropertySpecification ps : readSpecification.getProperties()) {
-            double read_i = in.get(ps);
+            double read_i = in.getAsDouble(ps);
 
             value += (Math.pow(read_i, 2.0) - a * Math.cos(2 * Math.PI * read_i));
         }

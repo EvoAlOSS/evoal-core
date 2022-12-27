@@ -28,7 +28,17 @@ public class PropertiesWriter implements AutoCloseable {
         for(final PropertySpecification spec : properties.getSpecification().getProperties()) {
             jsonGenerator.writeStartObject();
             jsonGenerator.writeStringField("name", spec.name());
-            jsonGenerator.writeNumberField("value", properties.get(spec));
+
+            final Object value = properties.get(spec);
+            if(value instanceof Double || value instanceof Float) {
+                jsonGenerator.writeNumberField("value", ((Number)properties.get(spec)).doubleValue());
+            } else if(value instanceof Integer) {
+                jsonGenerator.writeNumberField("value", ((Number)properties.get(spec)).longValue());
+            } else if(value instanceof Boolean) {
+                jsonGenerator.writeBooleanField("value", (Boolean)properties.get(spec));
+            } else if(value instanceof String) {
+                jsonGenerator.writeStringField("value", (String)properties.get(spec));
+            }
             jsonGenerator.writeEndObject();
         }
         jsonGenerator.writeEndArray();

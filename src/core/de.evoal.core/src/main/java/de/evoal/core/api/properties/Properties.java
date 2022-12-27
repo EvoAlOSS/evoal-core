@@ -7,17 +7,25 @@ import java.util.Objects;
 public class Properties {
     private final PropertiesSpecification specification;
 
-    private final double[] values;
+    private final Object[] values;
 
     public Properties(final PropertiesSpecification specification) {
         this.specification = specification;
-        this.values = new double[specification.properties.size()];
+        this.values = new Object[specification.properties.size()];
+    }
+
+    public Properties(final PropertiesSpecification specification, final Object[] data) {
+        this(specification);
+
+        System.arraycopy(data, 0, this.values, 0, data.length);
     }
 
     public Properties(final PropertiesSpecification specification, final double[] data) {
         this(specification);
 
-        System.arraycopy(data, 0, this.values, 0, data.length);
+        for(int i = 0; i < data.length; ++i) {
+            this.values[i] = data[i];
+        }
     }
 
     public Properties(final Properties other) {
@@ -34,23 +42,41 @@ public class Properties {
         return result;
     }
 
-    public double get(int i) {
+    public Object get(int i) {
         return values[i];
     }
 
-    public double get(final PropertySpecification spec) {
+    public Double getAsDouble(int i) {
+        return (Double)values[i];
+    }
+
+    public Object get(final PropertySpecification spec) {
         return values[specification.indexOf(spec)];
+    }
+
+    public Double getAsDouble(final PropertySpecification spec) {
+        return (Double)values[specification.indexOf(spec)];
     }
 
     public PropertiesSpecification getSpecification() {
         return specification;
     }
 
-    public double[] getValues() {
+    public Object[] getValues() {
         return values;
     }
 
-    public final double put(final PropertySpecification property, double d) {
+    public double[] getValuesAsDouble() {
+        final double [] values = new double[this.values.length];
+
+        for(int i = 0; i < values.length; ++i) {
+            values[i] = (Double)this.values[i];
+        }
+
+        return values;
+    }
+
+    public final Object put(final PropertySpecification property, Object d) {
         final Integer index = specification.indices.get(property);
 
         if(index == null) {
@@ -60,11 +86,11 @@ public class Properties {
         return put(index, d);
     }
 
-    public final double put(final int index, double d) {
+    public final Object put(final int index, Object d) {
         return values[index] = d;
     }
 
-    public void set(final int index, final double value) {
+    public void set(final int index, final Object value) {
         values[index] = value;
     }
 

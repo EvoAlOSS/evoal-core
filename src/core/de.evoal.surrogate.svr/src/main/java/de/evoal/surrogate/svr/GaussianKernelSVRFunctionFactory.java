@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 @Slf4j
 public class GaussianKernelSVRFunctionFactory extends KernelBasedSVRFunctionFactory {
 	public GaussianKernelSVRFunctionFactory() {
-		super(KernelHelper::toGaussianKernel);
+		super(KernelHelper::toGaussianKernel, "gaussian");
 	}
 
 	@Override
@@ -41,6 +41,6 @@ public class GaussianKernelSVRFunctionFactory extends KernelBasedSVRFunctionFact
 										   .findFirst()
 										   .orElse(0.1);
 
-		return new KernelBasedSVRFunction(configuration, regression, requiredInput, actualInput, producedOutput, margin);
+		return new KernelBasedSVRFunction(configuration, regression, "gaussian", requiredInput, actualInput, producedOutput, margin);
 	}
 }

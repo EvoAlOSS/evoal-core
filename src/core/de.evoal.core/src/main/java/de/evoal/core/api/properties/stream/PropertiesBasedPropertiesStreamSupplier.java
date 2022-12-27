@@ -31,4 +31,8 @@ public class PropertiesBasedPropertiesStreamSupplier implements PropertiesStream
     public Stream<Properties> get() {
         return properties.stream();
     }
+
+    public int size() {
+        return properties.size();
+    }
 }

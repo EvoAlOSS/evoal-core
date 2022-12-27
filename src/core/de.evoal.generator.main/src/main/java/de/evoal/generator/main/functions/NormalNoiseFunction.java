@@ -43,7 +43,7 @@ public class NormalNoiseFunction extends AbstractGeneratorFunction {
 		for(int i = 0; i < dimension; ++i) {
 			final PropertySpecification ps = writeSpecification.getProperties().get(i);
 
-			double value = result.get(ps) + distributions.get(i).sample();
+			double value = result.getAsDouble(ps) + distributions.get(i).sample();
 
 			result.put(ps, value);
 		}

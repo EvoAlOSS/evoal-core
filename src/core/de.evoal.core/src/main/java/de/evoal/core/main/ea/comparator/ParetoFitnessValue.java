@@ -39,4 +39,15 @@ public class ParetoFitnessValue implements FitnessValue {
     public String toString() {
     	return "ParetoComparatorType [values=" + fitnessValues + "]";
     }
+
+    @Override
+    public Object[] toStatistics() {
+        final Object [] result = new Object[fitnessValues.length()];
+
+        for(int i = 0; i < result.length; ++i) {
+            result[i] = fitnessValues.data()[i];
+        }
+
+        return result;
+    }
 }

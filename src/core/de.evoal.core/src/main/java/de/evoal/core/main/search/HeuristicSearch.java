@@ -10,13 +10,16 @@ import de.evoal.core.api.board.BlackboardEntry;
 import de.evoal.core.api.board.Blackboard;
 import de.evoal.core.api.cdi.BlackboardValue;
 import de.evoal.core.api.cdi.ConfigurationValue;
+import de.evoal.core.api.ea.initial.InitialPopulation;
 import de.evoal.core.api.utils.LanguageHelper;
 import de.evoal.core.api.ea.codec.CustomCodec;
 import de.evoal.core.api.ea.fitness.comparator.FitnessValue;
 
 import de.evoal.core.api.statistics.StatisticsWriter;
+import de.evoal.core.main.ea.alterer.AltererFactory;
+import de.evoal.core.main.ea.codec.DynamicCodec;
 import de.evoal.core.main.ea.fitness.JeneticsFitnessFunction;
-import de.evoal.core.api.ea.initial.InitialPopulation;
+import de.evoal.core.main.ea.initial.InitialPopulationFactory;
 import de.evoal.core.main.jenetics.ConstraintList;
 import de.evoal.languages.model.eal.EAModel;
 import de.evoal.languages.model.instance.Array;
@@ -28,11 +31,13 @@ import io.jenetics.engine.*;
 import io.jenetics.stat.MinMax;
 import io.jenetics.util.Factory;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.deltaspike.core.api.provider.BeanProvider;
 
 import javax.enterprise.context.Dependent;
 import javax.enterprise.inject.Instance;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 @Slf4j
 @Dependent
@@ -68,53 +73,53 @@ public class HeuristicSearch {
 
 	private final Map<String, List<Alterer<?, FitnessValue>>> alterers = new HashMap<>();
 
-	// TODO @Inject
-	private CustomCodec encoding;
+	@Inject
+	private DynamicCodec encoding;
 
 	private final ExecutorService executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
 
 	@Inject
 	private JeneticsFitnessFunction fitnessFunction;
 
-	// TODO	@Inject @Named("offspring")
-	// TODO private Selector offspringSelector;
+	@Inject @Named("offspring")
+	private Selector offspringSelector;
 
-	// TODO @Inject @Named("statistics")
+	@Inject @Named("statistics")
 	private StatisticsWriter statistics;
 
-// TODO	@Inject @Named("survivor")
-// TODO	private Selector survivorSelector;
+	@Inject @Named("survivor")
+	private Selector survivorSelector;
 
-// TODO	@Inject
-// TODO	private AltererFactory factory;
+	@Inject
+	private AltererFactory factory;
 
 	// TODO @Inject
 	private Instance<List<Constraint>> constraints;
 
 
-	// TODO @Inject
-	private InitialPopulation initalStreamFactory;
+	@Inject @Named("initial")
+	private InitialPopulation initalStream;
 
 	public void run() {
 		setup();
 
         final Factory<Genotype<?>> gtf = encoding.encoding();
 
-		final Constraint<?, FitnessValue> constraint = new ConstraintList(constraints.get());
+		//final Constraint<?, FitnessValue> constraint = new ConstraintList(constraints.get());
 
         final Engine<?, FitnessValue> engine= Engine.builder(this.fitnessFunction, encoding)
 											.alterers(flattenAltererMap())
-				// TODO.offspringSelector(this.offspringSelector)
-				// TODO.survivorsSelector(this.survivorSelector)
+											.offspringSelector(this.offspringSelector)
+											.survivorsSelector(this.survivorSelector)
 											.optimize(Optimize.MAXIMUM)
 											.populationSize(sizeOfPopulation)
-											.constraint(constraint)
+// TODO											.constraint(constraint)
 											.maximalPhenotypeAge(maximumAge)
 											.executor(executor)
 											.build();
         
         EvolutionStatistics<FitnessValue, MinMax<FitnessValue>> statistics = EvolutionStatistics.ofComparable();
-		EvolutionStream<?, FitnessValue> initialStream = initalStreamFactory.create(engine);
+		EvolutionStream<?, FitnessValue> initialStream = initalStream.create(engine);
 
         final EvolutionResult<?, FitnessValue> result
         		=  initialStream.limit(Limits.byFixedGeneration(numberOfGenerations))
@@ -142,13 +147,11 @@ public class HeuristicSearch {
 			final Array array = (Array) category.getValue();
 
 			for(final Value alterer : array.getValues()) {
-// TODO				this.alterers
-// TODO					.computeIfAbsent(name, k -> new ArrayList<>())
-// TODO					.add(factory.create((de.evoal.languages.model.instance.Instance)alterer));
+				this.alterers
+					.computeIfAbsent(name, k -> new ArrayList<>())
+					.add(factory.create((de.evoal.languages.model.instance.Instance)alterer));
 			}
 		}
-
-
 	}
 
 	private <G extends Gene<?, G>> Alterer<?, FitnessValue> flattenAltererMap() {

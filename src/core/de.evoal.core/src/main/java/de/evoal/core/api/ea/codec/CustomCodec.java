@@ -11,6 +11,7 @@ import io.jenetics.engine.Codec;
  * @param <G> The gene type.
  */
 public interface CustomCodec<G extends Gene<?, G>> extends Codec<Properties, G> {
+
     /**
      * Encodes an individual according to the codes into a genotype.
      *

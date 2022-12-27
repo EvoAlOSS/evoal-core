@@ -3,10 +3,11 @@ package de.evoal.surrogate.main.cdi;
 import de.evoal.core.api.board.Blackboard;
 import de.evoal.core.api.board.BlackboardEntry;
 import de.evoal.core.api.properties.PropertiesSpecification;
+import de.evoal.core.api.utils.Requirements;
 import de.evoal.surrogate.api.SurrogateBlackboardEntry;
 import de.evoal.surrogate.api.configuration.SurrogateConfiguration;
 import de.evoal.surrogate.api.function.SurrogateFunction;
-import lombok.Getter;
+import de.evoal.surrogate.main.internal.SurrogateFactory;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 
@@ -14,7 +15,6 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.Dependent;
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.Produces;
-import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.File;
 import java.util.function.Function;
@@ -26,13 +26,14 @@ public class SurrogateProducer {
     private SurrogateConfiguration configuration;
 
     public void setPreTrainedSurrogate(final @Observes BlackboardEntry event, final Blackboard board, final Function<@NonNull File, @NonNull SurrogateConfiguration> loader) {
-        if(!event.isSame(SurrogateBlackboardEntry.PRETRAINED_SURROGATE_FILE)) {
+        if(!event.isSame(SurrogateBlackboardEntry.SURROGATE_PRETRAINED_FILE)) {
             return;
         }
 
-        final String filename = board.get(SurrogateBlackboardEntry.PRETRAINED_SURROGATE_FILE);
+        final String filename = board.get(SurrogateBlackboardEntry.SURROGATE_PRETRAINED_FILE);
         final File file = new File(filename);
 
+        log.info("Using pre-trained surrogate model {}.", filename);
         if(!file.exists()) {
             log.error("Cannot find pre-trained surrogate model: {}", file);
             return;
@@ -69,5 +70,14 @@ public class SurrogateProducer {
                         .getOutputDimensions()
                         .stream())
                 .build();
+    }
+
+    @Produces @Dependent
+    public SurrogateFunction createSurrogateFunction() {
+        final SurrogateConfiguration configuration = this.configuration;
+
+        Requirements.requireNotNull(configuration);
+
+        return SurrogateFactory.create(configuration, null);
     }
 }
