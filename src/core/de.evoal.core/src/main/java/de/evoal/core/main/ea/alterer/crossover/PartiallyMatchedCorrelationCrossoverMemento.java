@@ -1,6 +1,6 @@
 package de.evoal.core.main.ea.alterer.crossover;
 
-import de.evoal.core.main.ea.model.Correlation;
+import de.evoal.core.api.ea.correlations.Correlation;
 import io.jenetics.internal.math.Subset;
 import io.jenetics.util.RandomRegistry;
 

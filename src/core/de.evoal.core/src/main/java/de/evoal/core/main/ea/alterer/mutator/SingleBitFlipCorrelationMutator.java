@@ -1,10 +1,9 @@
 package de.evoal.core.main.ea.alterer.mutator;
 
-import de.evoal.core.main.ea.model.Correlations;
+import de.evoal.core.api.ea.correlations.Correlations;
 import io.jenetics.*;
 import io.jenetics.util.MSeq;
 
-import java.util.Random;
 import java.util.random.RandomGenerator;
 
 public class SingleBitFlipCorrelationMutator<

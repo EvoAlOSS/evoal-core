@@ -1,7 +1,7 @@
 package de.evoal.core.main.ea.alterer.mutator;
 
 
-import de.evoal.core.main.ea.model.Correlation;
+import de.evoal.core.api.ea.correlations.Correlation;
 
 /**
  * Memento to preserve the state of correlation-aware mutator.

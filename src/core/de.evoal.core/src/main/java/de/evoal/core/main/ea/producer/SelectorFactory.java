@@ -5,6 +5,7 @@ import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.core.api.utils.LanguageHelper;
 import de.evoal.languages.model.instance.Instance;
 import io.jenetics.*;
+import io.jenetics.util.Seq;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
@@ -35,7 +36,6 @@ public class SelectorFactory {
 			case "exponential_rank_selector": return createExponentialRankSelector(config);
 			case "linear_rank_selector": return createLinearRankSelector(config);
 			case "boltzmann_selector": return createBoltzmannSelector(config);
-			case "probability_selector": return createProbabilitySelector(config);
 			case "stochastic_universal_selector": return createStochasticUniversalSelector(config);
 			case "tournament_selector": return createTournamentSelector(config);
 			case "truncation_selector": return createTruncationSelector(config);
@@ -51,8 +51,9 @@ public class SelectorFactory {
 	}
 
 	private static <G extends Gene<?,G>, C extends Comparable<? super C>> Selector<G, C> createExponentialRankSelector(final Instance config) {
-		// TODO Auto-generated method stub
-		return null;
+		final Double c = LanguageHelper.lookup(config, "c");
+
+		return new ExponentialRankSelector<>(c);
 	}
 
 	private static <G extends Gene<?,G>, C extends Comparable<? super C>> Selector<G, C> createTruncationSelector(final Instance config) {
@@ -66,13 +67,7 @@ public class SelectorFactory {
 	}
 
 	private static <G extends Gene<?,G>, C extends Comparable<? super C>> Selector<G, C> createStochasticUniversalSelector(final Instance config) {
-		
 		return (Selector<G,C>) new StochasticUniversalSelector<>();
-	}
-
-	private static <G extends Gene<?,G>, C extends Comparable<? super C>> Selector<G, C> createProbabilitySelector(final Instance config) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	private static <G extends Gene<?,G>, C extends Comparable<? super C>> Selector<G, C> createLinearRankSelector(final Instance config) {

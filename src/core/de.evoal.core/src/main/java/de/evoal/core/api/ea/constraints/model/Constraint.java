@@ -26,7 +26,7 @@ public class Constraint {
     /**
      * The applicable constraint function.
      */
-    private Function<Properties, Double> function;
+    private Function<Properties, Object> function;
 
     /**
      * List of used properties.
@@ -43,7 +43,7 @@ public class Constraint {
         final ConstraintResult result = new ConstraintResult();
 
         result.setConstraint(this);
-        result.setComparisonDifference(function.apply(properties));
+        result.setComparisonDifference(((Number)function.apply(properties)).doubleValue());
         result.getUsedProperties().addAll(usedProperties);
         result.setType(getConstraintType());
 

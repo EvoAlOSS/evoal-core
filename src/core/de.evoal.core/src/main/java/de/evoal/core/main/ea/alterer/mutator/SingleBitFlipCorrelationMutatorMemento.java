@@ -1,10 +1,9 @@
 package de.evoal.core.main.ea.alterer.mutator;
 
-import de.evoal.core.main.ea.model.Correlation;
+import de.evoal.core.api.ea.correlations.Correlation;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Random;
 import java.util.random.RandomGenerator;
 
 public class SingleBitFlipCorrelationMutatorMemento implements CorrelationMutatorMemento<SingleBitFlipCorrelationMutatorMemento> {

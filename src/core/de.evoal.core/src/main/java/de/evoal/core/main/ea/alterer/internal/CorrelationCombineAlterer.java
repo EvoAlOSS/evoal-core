@@ -1,7 +1,7 @@
 package de.evoal.core.main.ea.alterer.internal;
 
-import de.evoal.core.main.ea.model.Correlation;
-import de.evoal.core.main.ea.model.Correlations;
+import de.evoal.core.api.ea.correlations.Correlation;
+import de.evoal.core.api.ea.correlations.Correlations;
 import io.jenetics.*;
 import io.jenetics.util.BaseSeq;
 import io.jenetics.util.MSeq;

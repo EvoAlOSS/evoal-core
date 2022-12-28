@@ -1,5 +1,7 @@
 package de.evoal.surrogate.main.statistics.correlated;
 
+import de.evoal.core.api.board.BlackboardEntry;
+import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.core.api.statistics.*;
 import de.evoal.core.api.utils.LanguageHelper;
 import de.evoal.languages.model.instance.Instance;
@@ -47,7 +49,7 @@ public class GenerationStatisticsWriter implements StatisticsWriter {
     /**
      * Encoding for converting between ea and domain.
      */
-    // TODO @Inject
+    @Inject
     private CustomCodec encoding;
 
     private long startTime;
@@ -58,24 +60,24 @@ public class GenerationStatisticsWriter implements StatisticsWriter {
     @Inject
     private Provider<Function<Properties, Properties>> fitnessFactory;
 
-    // TODO @Inject @ConfigurationValue(entry = BlackboardEntry.EA_CONFIGURATION, access = "algorithm.fitness")
+    @Inject @ConfigurationValue(entry = BlackboardEntry.EA_CONFIGURATION, access = "algorithm.fitness")
     private Instance config;
 
     @Inject
     private TrainingDataManager manager;
 
-    // TODO @Inject @Named("source-properties-specification")
+    @Inject @Named("surrogate-source-properties-specification")
     private PropertiesSpecification sourceSpec;
 
-    // TODO @Inject @Named("target-properties-specification")
+    @Inject @Named("surrogate-target-properties-specification")
     private PropertiesSpecification targetSpec;
-    private List<Properties> sourceTrainingPoints;
+        private List<Properties> sourceTrainingPoints;
 
     /**
      * Creates a new GenerationStatistics instance.
      */
 
-    // TODO @Inject
+    @Inject
     private WriterStrategy strategy;
 
     @PostConstruct

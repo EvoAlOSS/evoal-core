@@ -1,7 +1,7 @@
 package de.evoal.core.main.ea.alterer.mutator;
 
 import de.evoal.core.api.board.Blackboard;
-import de.evoal.core.main.ea.model.Correlations;
+import de.evoal.core.api.ea.correlations.Correlations;
 import io.jenetics.Alterer;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;

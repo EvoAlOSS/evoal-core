@@ -1,6 +1,6 @@
 package de.evoal.core.main.ea.alterer.mutator;
 
-import de.evoal.core.main.ea.model.Correlations;
+import de.evoal.core.api.ea.correlations.Correlations;
 import io.jenetics.NumericGene;
 
 import java.util.random.RandomGenerator;

@@ -1,6 +1,6 @@
 package de.evoal.core.main.ea.alterer.mutator;
 
-import de.evoal.core.main.ea.model.Correlation;
+import de.evoal.core.api.ea.correlations.Correlation;
 import lombok.Data;
 
 import java.util.Random;

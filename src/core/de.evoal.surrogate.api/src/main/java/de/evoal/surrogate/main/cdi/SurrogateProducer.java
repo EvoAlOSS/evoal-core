@@ -2,10 +2,14 @@ package de.evoal.surrogate.main.cdi;
 
 import de.evoal.core.api.board.Blackboard;
 import de.evoal.core.api.board.BlackboardEntry;
+import de.evoal.core.api.properties.PropertiesDependencies;
 import de.evoal.core.api.properties.PropertiesSpecification;
+import de.evoal.core.api.properties.PropertySpecification;
 import de.evoal.core.api.utils.Requirements;
 import de.evoal.surrogate.api.SurrogateBlackboardEntry;
 import de.evoal.surrogate.api.configuration.SurrogateConfiguration;
+import de.evoal.surrogate.api.function.FunctionCombiner;
+import de.evoal.surrogate.api.function.PartialSurrogateFunction;
 import de.evoal.surrogate.api.function.SurrogateFunction;
 import de.evoal.surrogate.main.internal.SurrogateFactory;
 import lombok.NonNull;
@@ -80,4 +84,31 @@ public class SurrogateProducer {
 
         return SurrogateFactory.create(configuration, null);
     }
+
+    @Produces @Named("output-dependencies") // FIXME Should be part of core to not wire core and surrogate the hard way.
+    public PropertiesDependencies calculateOutputDependencies(
+            @Named("surrogate-source-properties-specification") final PropertiesSpecification source,
+            final SurrogateFunction function,
+            @Named("surrogate-target-properties-specification") final PropertiesSpecification target) {
+
+        return _calculate(function, 0, new PropertiesDependencies(source));
+    }
+
+    private PropertiesDependencies _calculate(final SurrogateFunction function, final int index, final PropertiesDependencies dependencies) {
+        if(index == function.getMappings().size()) {
+            return dependencies;
+        }
+
+        final FunctionCombiner current = function.getMappings().get(index);
+        final PropertiesDependencies next = new PropertiesDependencies(current.getOutputSpecification());
+
+        for(final PartialSurrogateFunction fn : current.getFunctions()){
+            for(final PropertySpecification ops : fn.getOutputProperty().getProperties()) {
+                next.add(ops, fn.getUsedProperties());
+            }
+        }
+
+        return _calculate(function, index + 1, next);
+    }
+
 }

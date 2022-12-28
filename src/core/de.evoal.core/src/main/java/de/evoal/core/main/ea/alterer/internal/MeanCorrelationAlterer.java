@@ -1,6 +1,6 @@
 package de.evoal.core.main.ea.alterer.internal;
 
-import de.evoal.core.main.ea.model.Correlations;
+import de.evoal.core.api.ea.correlations.Correlations;
 import io.jenetics.*;
 import io.jenetics.util.Mean;
 

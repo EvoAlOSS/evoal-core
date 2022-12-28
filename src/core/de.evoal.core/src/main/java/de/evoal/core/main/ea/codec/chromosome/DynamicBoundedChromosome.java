@@ -1,10 +1,15 @@
 package de.evoal.core.main.ea.codec.chromosome;
 
+import de.evoal.core.api.ea.correlations.Range;
 import de.evoal.languages.model.ddl.DataDescription;
 import de.evoal.languages.model.instance.Instance;
 import io.jenetics.util.DoubleRange;
 
+import javax.enterprise.context.Dependent;
+import javax.enterprise.inject.Produces;
+import javax.inject.Named;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public abstract class DynamicBoundedChromosome extends DynamicChromosome {

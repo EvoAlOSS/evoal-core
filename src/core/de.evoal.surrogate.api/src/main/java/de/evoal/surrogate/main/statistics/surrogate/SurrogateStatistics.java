@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.Dependent;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import de.evoal.core.api.statistics.*;
@@ -37,13 +38,14 @@ public class SurrogateStatistics implements StatisticsWriter {
     /**
      * Encoding for converting between ea and domain.
      */
-    // TODO @Inject
+    @Inject
     private CustomCodec encoding;
 
-    //@Inject @Named("target-properties-specification")
+    @Inject
+    @Named("surrogate-target-properties-specification")
     private PropertiesSpecification targetSpecification;
 
-    // TODO @Inject
+    @Inject
     private WriterStrategy strategy;
 
     private Writer writer;

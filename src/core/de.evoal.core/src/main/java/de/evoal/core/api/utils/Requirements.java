@@ -240,4 +240,20 @@ public final class Requirements {
 
         return value;
     }
+
+    /**
+     * Requires the value to be a valid instance of the given class.
+     *
+     * @param value The value to check.
+     * @param clazz The class for checking
+     * @return {@code true} iff {@code value instanceof clazz}.
+     */
+    public static void requireInstanceOf(final Object value, final Class<?> clazz) {
+        requireNotNull(value);
+        requireNotNull(clazz);
+
+        if(!clazz.isInstance(value)) {
+            throw new IllegalArgumentException("Passed object " + Objects.toString(value) + " is not an instance of: " + clazz);
+        }
+    }
 }

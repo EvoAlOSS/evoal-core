@@ -8,7 +8,7 @@ import de.evoal.core.main.ea.alterer.internal.MeanCorrelationAlterer;
 import de.evoal.core.main.ea.alterer.mutator.SingleBitFlipCorrelationMutator;
 import de.evoal.core.main.ea.alterer.mutator.SingleBitFlipMutator;
 import de.evoal.core.main.ea.alterer.mutator.SwapCorrelationMutator;
-import de.evoal.core.main.ea.model.Correlations;
+import de.evoal.core.api.ea.correlations.Correlations;
 import de.evoal.languages.model.instance.Instance;
 import de.evoal.core.api.utils.LanguageHelper;
 import io.jenetics.*;

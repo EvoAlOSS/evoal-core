@@ -45,7 +45,9 @@ module de.evoal.core {
     exports de.evoal.core.api.ea.codec;
     exports de.evoal.core.api.ea.constraints.model;
     exports de.evoal.core.api.ea.constraints.strategies;
+    exports de.evoal.core.api.ea.constraints.calculation;
     exports de.evoal.core.api.ea.constraints.strategies.fitness;
+    exports de.evoal.core.api.ea.correlations;
     exports de.evoal.core.api.ea.fitness;
     exports de.evoal.core.api.ea.fitness.comparator;
     exports de.evoal.core.api.ea.initial;
@@ -72,6 +74,12 @@ module de.evoal.core {
     opens de.evoal.core.main.ea.codec to weld.core.impl;
     opens de.evoal.core.main.ea.codec.chromosome to weld.core.impl;
     opens de.evoal.core.main.ea.comparator to weld.core.impl;
+    opens de.evoal.core.main.ea.constraints.deviation to weld.core.impl;
+    opens de.evoal.core.main.ea.constraints.constraint to weld.core.impl;
+    opens de.evoal.core.main.ea.constraints.constraint.strategies.calculations to weld.core.impl;
+    opens de.evoal.core.main.ea.constraints.constraint.strategies.constraint to weld.core.impl;
+    opens de.evoal.core.main.ea.constraints.constraint.strategies.fitness to weld.core.impl;
+    opens de.evoal.core.main.ea.constraints.correlation to weld.core.impl;
     opens de.evoal.core.main.ea.fitness to weld.core.impl;
     opens de.evoal.core.main.ea.initial to weld.core.impl;
     opens de.evoal.core.main.ea.producer to weld.core.impl;
@@ -82,16 +90,6 @@ module de.evoal.core {
     opens de.evoal.core.main.statistics.individuals to weld.core.impl;
     opens de.evoal.core.main.statistics.nop to weld.core.impl;
     opens de.evoal.core.main.statistics.writer.csv to weld.core.impl;
-
-    /*
-    opens de.evoal.core.main.ddl.correlation to weld.core.impl;
-    opens de.evoal.core.main.ddl.constraint to weld.core.impl;
-    opens de.evoal.core.main.ddl.constraint.strategies to weld.core.impl;
-    opens de.evoal.core.main.ddl.constraint.strategies.calculations to weld.core.impl;
-    opens de.evoal.core.main.ddl.constraint.strategies.constraint to weld.core.impl;
-    opens de.evoal.core.main.ddl.constraint.strategies.fitness to weld.core.impl;
-    opens de.evoal.core.main.ddl.deviation to weld.core.impl;
-    opens de.evoal.core.main.ea.alterer to weld.core.impl;
-    opens de.evoal.core.main.ea.alterer.mutator to weld.core.impl;
-*/
+    opens de.evoal.core.api.ea.correlations to weld.core.impl;
+    opens de.evoal.core.api.ea.constraints.calculation to weld.core.impl;
 }

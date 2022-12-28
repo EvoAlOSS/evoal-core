@@ -1,8 +1,8 @@
 package de.evoal.core.main.ea.alterer.mutator;
 
 import de.evoal.core.main.ea.alterer.internal.AbstractCorrelationAlterer;
-import de.evoal.core.main.ea.model.Correlation;
-import de.evoal.core.main.ea.model.Correlations;
+import de.evoal.core.api.ea.correlations.Correlation;
+import de.evoal.core.api.ea.correlations.Correlations;
 import io.jenetics.*;
 import io.jenetics.internal.math.Probabilities;
 import io.jenetics.util.ISeq;
