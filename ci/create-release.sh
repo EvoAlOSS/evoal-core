@@ -1,6 +1,8 @@
 #!/bin/bash
 
-RELEASE_PLUGINS=generator.main surrogate.api surrogate.simple surrogate.svr
+set -e -x
+
+RELEASE_PLUGINS="generator.main surrogate.api surrogate.simple surrogate.svr"
 
 cp src/languages/de.evoal.languages.releng.site/target/de.evoal.languages.releng.site-*.zip "evoal/eclipse-update-site.zip"
 
@@ -8,7 +10,8 @@ mkdir -p evoal/plugins
 cp -r src/core/de.evoal.core/target/core evoal/modules
 
 for NAME in $RELEASE_PLUGINS; do
-  cp -r src/core/de.evoal.$NAME/target/$NAME evoal/plugins/$NAME
+    echo "Copying plugin $NAME"
+    cp -r src/core/de.evoal.$NAME/target/$NAME evoal/plugins/$NAME
 done
 
 rm evoal/modules/jboss-annotations-api*
