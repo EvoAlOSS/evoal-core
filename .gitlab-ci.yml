@@ -153,13 +153,23 @@ evoal:deploy:
   only:
     changes:
       - src/core/**/*
+  artifacts:
+    untracked: false
+    when: on_success
+    expire_in: "30 days"
+    paths:
+      - src/core/*/target/*
 
 #############################################################
 ## Remaining release steps
 
 all:package:
   stage: Release
-  dependencies: ["evoal:deploy", "dsl:deploy"]
+  needs:
+    - job: "dsl:deploy"
+      artifacts: true
+    - job: "evoal:deploy"
+      artifacts: true
   tags:
     - docker
   image: $EVOAL_IMAGE
