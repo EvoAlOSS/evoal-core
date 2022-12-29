@@ -48,7 +48,7 @@ variables:
 # To keep cache across branches add 'key: "$CI_JOB_REF_NAME"'
 cache:
   paths:
-    - $HOME/.m2/repository
+    - .m2/repository
 
 stages:
   - Domain Specific Languages
@@ -68,9 +68,6 @@ dsl:compile:
   image: $ECLIPSE_IMAGE
   script:
     - mvn $MAVEN_CLI_OPTS -f $LANGUAGES_POM -pl "!de.evoal.languages:de.evoal.languages.releng.site" compile
-  only:
-    changes:
-      - src/languages/**/*
 
 dsl:unit:
   stage: Domain Specific Languages
@@ -80,9 +77,6 @@ dsl:unit:
   image: $ECLIPSE_IMAGE
   script:
     - mvn $MAVEN_CLI_OPTS -f $LANGUAGES_POM verify
-  only:
-    changes:
-      - src/languages/**/*
 
 dsl:deploy:
   stage: Domain Specific Languages
@@ -92,9 +86,6 @@ dsl:deploy:
   image: $ECLIPSE_IMAGE
   script:
     - mvn $MAVEN_CLI_OPTS -f $LANGUAGES_POM -DskipTests=true deploy
-  only:
-    changes:
-      - src/languages/**/*
   artifacts:
     untracked: false
     when: on_success
@@ -113,9 +104,6 @@ evoal:compile:
   script:
     - mvn $MAVEN_CLI_OPTS -f $PLUGIN_POM install
     - mvn $MAVEN_CLI_OPTS -f $EVOAL_POM compile
-  only:
-    changes:
-      - src/core/**/*
 
 
 #############################################################
@@ -129,9 +117,6 @@ evoal:unit:
   script:
     - mvn $MAVEN_CLI_OPTS -f $PLUGIN_POM install
     - mvn $MAVEN_CLI_OPTS -f $EVOAL_POM verify
-  only:
-    changes:
-      - src/core/**/*
 
 
 #############################################################
@@ -150,9 +135,6 @@ evoal:deploy:
   script:
     - mvn $MAVEN_CLI_OPTS -f $PLUGIN_POM install
     - mvn $MAVEN_CLI_OPTS -f $EVOAL_POM -DskipTests=true deploy
-  only:
-    changes:
-      - src/core/**/*
   artifacts:
     untracked: false
     when: on_success
