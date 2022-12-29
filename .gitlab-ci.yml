@@ -159,7 +159,7 @@ all:package:
       artifacts: true
   tags:
     - docker
-  image: $EVOAL_IMAGE
+  image: benferreri/alpine-zip
   script:
     - ci/create-release.sh "$CI_JOB_NAME"
   artifacts:
