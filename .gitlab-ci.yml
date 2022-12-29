@@ -68,10 +68,15 @@ dsl:compile:
   image: $ECLIPSE_IMAGE
   script:
     - mvn $MAVEN_CLI_OPTS -f $LANGUAGES_POM -pl "!de.evoal.languages:de.evoal.languages.releng.site" compile
+  artifacts:
+    untracked: true
+    when: on_success
+    expire_in: "30 days"
 
 dsl:unit:
   stage: Domain Specific Languages
-  needs: ["dsl:compile"]
+  dependencies: 
+    - "dsl:compile"
   tags:
     - docker
   image: $ECLIPSE_IMAGE
@@ -80,7 +85,9 @@ dsl:unit:
 
 dsl:deploy:
   stage: Domain Specific Languages
-  needs: ["dsl:unit"]
+  dependencies: 
+    - "dsl:compile"
+    - "dsl:unit"
   tags:
     - docker
   image: $ECLIPSE_IMAGE

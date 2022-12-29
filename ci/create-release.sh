@@ -15,13 +15,14 @@ for NAME in $RELEASE_PLUGINS; do
     cp -r src/core/de.evoal.$NAME/target/$NAME evoal/plugins/$NAME
 done
 
-rm evoal/modules/jboss-annotations-api*
+# remove multiple definitions of javax stuff
+rm evoal/modules/javax.inject*
 rm evoal/modules/javax.annotation-api-*
 rm evoal/modules/jsr305-*
+# remove multiple definietions of CDI stuff
+rm evoal/modules/jboss-annotations-api*
 rm evoal/modules/jboss-interceptors-api*
 rm evoal/modules/jboss-el-api*
-rm evoal/modules/jboss-annotations-api*
-rm evoal/modules/javax.inject*
 
 # Now, we do have to do a small hack to fix an Xtext/jigsaw issue (multiple modules have classes
 #  in the same package which is not supported by jigsaw). Therefore, we merge the modules and create
