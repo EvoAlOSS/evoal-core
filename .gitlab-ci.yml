@@ -94,6 +94,12 @@ dsl:deploy:
   only:
     changes:
       - src/languages/**/*
+  artifacts:
+    untracked: false
+    when: on_success
+    expire_in: "30 days"
+    paths:
+      - src/languages/de.evoal.languages.releng.site/target/de.evoal.languages.releng.site-*.zip
 
 
 #############################################################
@@ -150,45 +156,38 @@ evoal:deploy:
 #############################################################
 ## Remaining release steps
 
+all:package:
+  stage: Package
+  dependencies: ["evoal:deploy", "languages:deploy"]
+  tags:
+    - docker
+  image: $EVOAL_IMAGE
+  script:
+    - ci/create-release.sh "$CI_JOB_NAME"
+  artifacts:
+    name: "$CI_JOB_NAME-$CI_COMMIT_REF_NAME.binaries.evoal.zip"
+    when: always
+    paths:
+      - evoal
 
-#evoal:package:
-#  stage: Package
-#  tags:
-#    - docker
-#  image: $EVOAL_IMAGE
-#  script:
-#    - mvn $MAVEN_CLI_OPTS -f $EVOAL_POM -DskipTests=true package
-#  artifacts:
-#    name: "$CI_JOB_NAME-$CI_COMMIT_REF_NAME.binaries.evoal.zip"
-#    when: always
-#    paths:
-#      - src/core/de.evoal.main/target/main-*.jar
-#  only:
-#    changes:
-#      - src/core/**/*
 
-#.docker_login: &docker_login
-#  before_script: 
-#    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-#
-#evoal:docker:
-#  <<: *docker_login
-#  variables:    
-#    # Disable TLS
-#    DOCKER_TLS_CERTDIR: ""
-#    # allow to talk to docker service 
-#    DOCKER_HOST: tcp://localhost:2375
+
+#release:
 #  stage: Release
-#  tags:
-#    - docker
-#  image: docker:20
-#  services:
-#    - name: docker:20-dind
-#      alias: dindservice
+#  needs:
+#    - job: "dsl:deploy"
+#      artifacts: true
+#    - job: "evoal:deploy"
+#      artifacts: true
+#  image: registry.gitlab.com/gitlab-org/release-cli:latest
+#  rules:
+#    - if: $CI_COMMIT_TAG
 #  script:
-#    - docker -version
-#    - cd docker
-#    - docker build -f evoal.Dockerfile .
-#  only:
-#    changes:
-#      - src/core/**/*
+#    - echo "running release_job for $TAG"
+#  release:                                         # See https://docs.gitlab.com/ee/ci/yaml/#release for available properties
+#    name: 'Release $CI_COMMIT_TAG'
+#    tag_name: 'v0.$CI_PIPELINE_IID'                # The version is incremented per pipeline.
+#    description: 'v0.$CI_PIPELINE_IID'
+#    ref: '$CI_COMMIT_TAG'                          # The tag is created from the pipeline SHA.
+
+
