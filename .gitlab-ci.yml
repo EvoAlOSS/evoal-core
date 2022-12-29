@@ -85,7 +85,6 @@ dsl:deploy:
     - "dsl:compile"
   needs:
     - "dsl:unit"
-    - "dsl:compile"
   tags:
     - docker
   image: $ECLIPSE_IMAGE
@@ -159,7 +158,7 @@ all:package:
       artifacts: true
   tags:
     - docker
-  image: benferreri/alpine-zip
+  image: ubuntu:lunar
   script:
     - ci/create-release.sh "$CI_JOB_NAME"
   artifacts:
