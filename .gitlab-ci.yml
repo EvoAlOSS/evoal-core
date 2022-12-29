@@ -85,6 +85,7 @@ dsl:deploy:
     - "dsl:compile"
   needs:
     - "dsl:unit"
+    - "dsl:compile"
   tags:
     - docker
   image: $ECLIPSE_IMAGE
