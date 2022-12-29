@@ -56,6 +56,7 @@ stages:
   - Unit Test
   - Integration Test
   - Package
+  - Deploy
   - Release
 
 #############################################################
@@ -141,7 +142,7 @@ evoal:unit:
 ## Remaining deploy steps
 
 evoal:deploy:
-  stage: Release
+  stage: Deploy
   dependencies: ["evoal:compile"]
   tags:
     - docker
@@ -157,8 +158,8 @@ evoal:deploy:
 ## Remaining release steps
 
 all:package:
-  stage: Package
-  dependencies: ["evoal:deploy", "languages:deploy"]
+  stage: Release
+  dependencies: ["evoal:deploy", "dsl:deploy"]
   tags:
     - docker
   image: $EVOAL_IMAGE
