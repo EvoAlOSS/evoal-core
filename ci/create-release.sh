@@ -34,7 +34,7 @@ pushd xtext-merge
   unzip -o ../modules/org.eclipse.xtext-*.jar
   rm ../modules/org.eclipse.xtext.util-*.jar
   rm ../modules/org.eclipse.xtext-*.jar
-  zip -r9 ../modules/org.eclipse.xtext.jar *
+  jar Mcf ../modules/org.eclipse.xtext.jar *
 popd
 rm -rf xtext-merge
 
