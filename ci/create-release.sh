@@ -8,7 +8,7 @@ mkdir -p evoal/plugins
 cp -r src/core/de.evoal.core/target/core evoal/modules
 
 for NAME in $RELEASE_PLUGINS; do
-  cp -r de.evoal.$NAME/target/$NAME evoal/plugins/$NAME
+  cp -r src/core/de.evoal.$NAME/target/$NAME evoal/plugins/$NAME
 done
 
 rm evoal/modules/jboss-annotations-api*
