@@ -24,9 +24,9 @@ rm evoal/modules/jboss-annotations-api*
 rm evoal/modules/jboss-interceptors-api*
 rm evoal/modules/jboss-el-api*
 
-# Now, we do have to do a small hack to fix an Xtext/jigsaw issue (multiple modules have classes
-#  in the same package which is not supported by jigsaw). Therefore, we merge the modules and create
-#  a single jar file.
+# Now, we do have to do a small hack to fix an Xtext/jigsaw issue. Xtext is not yet modularized
+#  and multiple 'modules' have classes in the same package which is not supported by jigsaw.
+#  Therefore, we merge the modules and create a single module.
 cd evoal
 mkdir xtext-merge
 pushd xtext-merge
@@ -38,5 +38,5 @@ pushd xtext-merge
 popd
 rm -rf xtext-merge
 
-# Let's copy the scripts to the correct location
-cp ../src/scripts/*sh evoal
+# let's copy the scripts to the correct location
+cp ../src/scripts/*sh .

@@ -52,11 +52,7 @@ cache:
 
 stages:
   - Domain Specific Languages
-  - Compile
-  - Unit Test
-  - Integration Test
-  - Package
-  - Deploy
+  - EvoAl
   - Release
 
 #############################################################
@@ -100,20 +96,22 @@ dsl:deploy:
 #############################################################
 ## Remaining compile steps
 evoal:compile:
-  stage: Compile
+  stage: EvoAl
   tags:
     - docker
   image: $EVOAL_IMAGE
   script:
     - mvn $MAVEN_CLI_OPTS -f $PLUGIN_POM install
     - mvn $MAVEN_CLI_OPTS -f $EVOAL_POM compile
-
+  artifacts:
+    untracked: true
+    when: on_success
+    expire_in: "30 days"
 
 #############################################################
 ## Remaining unit tests
 evoal:unit:
-  stage: Unit Test
-  dependencies: ["evoal:compile"]
+  stage: EvoAl
   tags:
     - docker
   image: $EVOAL_IMAGE
@@ -130,8 +128,12 @@ evoal:unit:
 ## Remaining deploy steps
 
 evoal:deploy:
-  stage: Deploy
-  dependencies: ["evoal:compile"]
+  stage: EvoAl
+  dependencies:
+    - "evoal:compile"
+  needs:
+    - "evoal:compile"
+    - "evoal:unit"
   tags:
     - docker
   image: $EVOAL_IMAGE
