@@ -104,9 +104,12 @@ evoal:compile:
     - mvn $MAVEN_CLI_OPTS -f $PLUGIN_POM install
     - mvn $MAVEN_CLI_OPTS -f $EVOAL_POM compile
   artifacts:
-    untracked: true
+    untracked: false
     when: on_success
     expire_in: "30 days"
+    paths:
+      - src/core/*/target/*
+
 
 #############################################################
 ## Remaining unit tests
