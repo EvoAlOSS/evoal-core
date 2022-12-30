@@ -39,4 +39,4 @@ popd
 rm -rf xtext-merge
 
 # Let's copy the scripts to the correct location
-cp src/scripts/*sh evoal
+cp ../src/scripts/*sh evoal

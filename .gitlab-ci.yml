@@ -71,8 +71,6 @@ dsl:compile:
 
 dsl:unit:
   stage: Domain Specific Languages
-  dependencies: 
-    - "dsl:compile"
   tags:
     - docker
   image: $ECLIPSE_IMAGE
