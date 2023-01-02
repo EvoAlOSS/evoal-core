@@ -39,4 +39,4 @@ popd
 rm -rf xtext-merge
 
 # let's copy the scripts to the correct location
-cp ../src/scripts/*sh .
+cp ../src/release/* .
