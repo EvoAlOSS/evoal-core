@@ -104,6 +104,7 @@ evoal:unit:
     - docker
   image: $EVOAL_IMAGE
   script:
+    - mvn $MAVEN_CLI_OPTS -f $PLUGIN_POM install
     - mvn $MAVEN_CLI_OPTS -f $EVOAL_POM verify
   artifacts:
     when: always
