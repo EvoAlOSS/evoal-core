@@ -12,6 +12,7 @@ import javax.inject.Named;
 
 import de.evoal.core.api.cdi.BlackboardValue;
 import de.evoal.core.api.cdi.MainClass;
+import de.evoal.core.api.utils.InitializationException;
 import de.evoal.generator.api.*;
 import de.evoal.generator.main.generators.GeneratorFactory;
 import de.evoal.generator.main.internal.Pipeline;
@@ -63,7 +64,14 @@ public class DataGenerator implements MainClass {
 			final Pipeline pipeline = new Pipeline(pipelineName,
 												   definition.getSteps()
 															 .stream()
-															 .map(factory::create)
+															 .map(f -> {
+																 try {
+																	 return factory.create(f);
+																 } catch(final InitializationException e) {
+																	 log.error("Failed to initialize generator function:", e);
+																	 throw new RuntimeException("Failed to initialize generator function.", e);
+																 }
+															 })
 															 .collect(Collectors.toList()));
 
 			result.put(pipelineName, pipeline);

@@ -1,5 +1,6 @@
 package de.evoal.generator.main.generators;
 
+import de.evoal.core.api.utils.InitializationException;
 import de.evoal.generator.api.GeneratorFunction;
 import de.evoal.languages.model.el.DoubleLiteral;
 import de.evoal.languages.model.generator.Step;
@@ -15,7 +16,7 @@ import javax.inject.Named;
 public class MultivariateNormalDistribution extends MultivariateRealDistributionBase {
 
     @Override
-    public GeneratorFunction init(final Step configuration) {
+    public GeneratorFunction init(final Step configuration) throws InitializationException {
         super.init(configuration);
 
         double [] means = readMeans(configuration.getInstance());

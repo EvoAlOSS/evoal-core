@@ -5,6 +5,7 @@ import java.util.List;
 
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertySpecification;
+import de.evoal.core.api.utils.InitializationException;
 import de.evoal.generator.api.AbstractGeneratorFunction;
 import de.evoal.generator.api.GeneratorFunction;
 import de.evoal.generator.main.utils.ELHelper;
@@ -24,7 +25,7 @@ public class NormalNoiseFunction extends AbstractGeneratorFunction {
 	 */
 	private List<RealDistribution> distributions = new ArrayList<>();
 
-	public GeneratorFunction init(final Step configuration) {
+	public GeneratorFunction init(final Step configuration) throws InitializationException {
 		super.init(configuration);
 
 		ELHelper.readDistributions(configuration.getInstance(), "distributions")
