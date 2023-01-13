@@ -1,0 +1,491 @@
+/**
+ * Root element for an evolutionary algorithm configuration.
+ */
+type configuration {
+	/**
+	 * A freely selectable name for the configuration.
+	 */
+	name : string;
+	
+	/**
+	 * The algorithm configuration.
+	 */
+	algorithm : instance algorithm;
+	
+	/**
+	 * Configuration of statistics to measure and to write.
+	 */
+	statistics : instance statistics;
+}
+
+type algorithm {
+	number_of_generations : int;
+	size_of_population : int;
+	maximum_age : int;
+	maximize : boolean;
+	
+	genotype : array instance chromosome;
+
+	initialization : instance random | training;
+	encoding  : instance encoding;
+	constraint_handling : instance constraint_handling;
+	selectors : instance selectors;
+	alterers : instance alterers;
+
+	fitness : instance 'fitness-function';
+	comparator : instance comparator;
+}
+
+abstract type chromosome {
+	genes : array instance gene;
+}
+
+type 'bit-chromosome' extends chromosome {
+    scale : int;
+}
+
+type 'gray-chromosome' extends 'bit-chromosome' {
+    scale : int;
+}
+
+type 'double-chromosome' extends chromosome {
+}
+
+type 'integer-chromosome' extends chromosome {
+}
+
+
+type gene { content : data; }
+
+
+abstract type comparator {}
+
+type 'weighted-sum' extends comparator {
+	weights : array float;
+}
+
+type pareto extends comparator {
+}
+
+/**
+ * Abstract base class for functions to map the individual to the target values.
+ */
+abstract type 'fitness-function' {}
+
+/**
+ * Abstract base class for all fitness functions that call a subsequent fitness function during calculation.
+ */
+abstract type 'decorated-fitness-function' extends 'fitness-function' {
+	/**
+	 * Fitness function we are calling during the fitness calculation.
+	 */
+	function : instance 'fitness-function';
+	
+}
+
+/**
+ * Fitness function that calculates the difference between a fitness value and a
+ *   target value to optimize to:<br/>
+ * 
+ * <mathml>
+ *   <math>
+ *     <mrow>
+ *       <mi>f</mi>
+ *       <mi>i</mi>
+ *       <mi>t</mi>
+ *       <mi>n</mi>
+ *       <mi>e</mi>
+ *       <mi>s</mi>
+ *       <mi>s</mi>
+ *       <mo>=</mo>
+ *       <mi>f</mi>
+ *       <mi>u</mi>
+ *       <mi>n</mi>
+ *       <mi>c</mi>
+ *       <mi>t</mi>
+ *       <mi>i</mi>
+ *       <mi>o</mi>
+ *       <mi>n</mi>
+ *       <mo form="prefix" stretchy="false">(</mo>
+ *       <mi>i</mi>
+ *       <mi>n</mi>
+ *       <mi>d</mi>
+ *       <mo form="postfix" stretchy="false">)</mo>
+ *       <mo>−</mo>
+ *       <mi>t</mi>
+ *       <mi>a</mi>
+ *       <mi>r</mi>
+ *       <mi>g</mi>
+ *       <mi>e</mi>
+ *       <mi>t</mi>
+ *     </mrow>
+ *   </math>
+ * </mathml>
+ */
+type distance extends 'decorated-fitness-function' {
+		target : array instance variable;
+}
+
+type variable {
+	name : data;
+	val : literal;
+}
+
+abstract type 'goal-function' extends 'fitness-function' {
+	'maps-to' : array data;
+}
+
+/**
+ * Calculating fitness value by using a surrogate function:<br/>
+ * 
+ * <mathml>
+ *   <math>
+ *     <mrow>
+ *       <mi>f</mi>
+ *       <mi>i</mi>
+ *       <mi>t</mi>
+ *       <mi>n</mi>
+ *       <mi>e</mi>
+ *       <mi>s</mi>
+ *       <mi>s</mi>
+ *       <mo>=</mo>
+ *       <mi>s</mi>
+ *       <mi>u</mi>
+ *       <mi>r</mi>
+ *       <mi>r</mi>
+ *       <mi>o</mi>
+ *       <mi>g</mi>
+ *       <mi>a</mi>
+ *       <mi>t</mi>
+ *       <mi>e</mi>
+ *       <mo form="prefix" stretchy="false">(</mo>
+ *       <mi>i</mi>
+ *       <mi>n</mi>
+ *       <mi>d</mi>
+ *       <mo form="postfix" stretchy="false">)</mo>
+ *     </mrow>
+ *   </math>
+ * </mathml>
+ */
+type surrogate extends 'goal-function' {
+}
+
+/**
+ * Calculating fitness value by using a known function:<br/>
+ * 
+ * <mathml>
+ *   <math>
+ *     <mrow>
+ *       <mi>f</mi>
+ *       <mi>i</mi>
+ *       <mi>t</mi>
+ *       <mi>n</mi>
+ *       <mi>e</mi>
+ *       <mi>s</mi>
+ *       <mi>s</mi>
+ *       <mo>=</mo>
+ *       <mi>n</mi>
+ *       <mi>o</mi>
+ *       <mi>r</mi>
+ *       <mi>m</mi>
+ *       <mi>a</mi>
+ *       <mi>l</mi>
+ *       <mo form="prefix" stretchy="false">(</mo>
+ *       <mi>i</mi>
+ *       <mi>n</mi>
+ *       <mi>d</mi>
+ *       <mo form="postfix" stretchy="false">)</mo>
+ *     </mrow>
+ *   </math>
+ * </mathml>
+ */
+type normal extends 'fitness-function' {
+}
+
+type adjusted extends 'decorated-fitness-function' {
+}
+
+type 'adjusted-modified' extends 'decorated-fitness-function' {
+}
+
+type density extends 'decorated-fitness-function' {
+	exponent : float;
+	root_exponent : float;
+	
+	kind : string;
+}
+
+type density2 extends 'decorated-fitness-function' {
+	exponent : float;
+	root_exponent : float;
+
+	kind : string;
+}
+
+type training {
+}
+
+type random {
+}
+
+abstract type encoding {}
+
+type double_to_properties extends encoding {
+	bounded_operations : boolean;
+}
+
+type bit_to_properties extends encoding {
+	bounded_operations : boolean;
+}
+
+type gray_bit_to_properties extends encoding {
+	bounded_operations : boolean;
+}
+
+type constraint_handling {
+	unnamed : instance handling;
+}
+
+type handling {
+	calculation : instance normal | standard_deviation;
+	handling : instance kill_at_birth | malus_for_fitness;
+}
+
+type standard_deviation {
+	factor : float;
+}
+
+type kill_at_birth {
+}
+
+type malus_for_fitness {
+	smoothing : float;
+}
+
+type selectors {
+	survivor : instance selector;
+	offspring : instance selector;
+}
+
+abstract type selector {
+}
+
+type elite_selector extends selector {
+	count : int;
+	nonEliteSelector : instance selector;
+}
+
+type boltzmann_selector extends selector {
+	beta : float;
+}
+
+type exponential_rank_selector extends selector {
+}
+
+type linear_rank_selector extends selector {
+	nminus : int;
+}
+
+type monte_carlo_selector extends selector {	
+}
+
+type probability_selector extends selector {	
+}
+
+type stochastic_universal_selector extends selector {	
+}
+
+type tournament_selector extends selector {
+	size : int;
+}
+
+type truncation_selector extends selector {
+	worst_rank : int;
+}
+
+type alterers {
+	crossover : array instance crossover;
+	mutator : array instance mutator ;
+}
+
+abstract type crossover {}
+
+type mean_alterer extends crossover {
+	probability : float;
+}
+
+type correlation_mean_alterer extends crossover {
+	probability : float;
+}
+
+type partial_matched_alterer extends crossover {
+	probability : float;
+}
+
+type correlation_partial_matched_alterer extends crossover {
+	probability : float;
+}
+
+type line_crossover extends crossover {
+	probability : float;
+	position : float;
+}
+
+type correlation_line_crossover extends crossover {
+	probability : float;
+	position : float;
+}
+
+type multi_point_crossover extends crossover {
+	probability : float;
+	count : int;
+}
+
+type correlation_multi_point_crossover extends crossover {
+	probability : float;
+	count : int;
+}
+
+type single_point_crossover extends crossover {
+	probability : float;
+}
+
+type correlation_single_point_crossover extends crossover {
+	probability : float;
+}
+
+type uniform_crossover extends crossover {
+	crossover_probability : float;
+	swap_probability : float;
+}
+
+type correlation_uniform_crossover extends crossover {
+	crossover_probability : float;
+	swap_probability : float;
+}
+
+abstract type mutator {
+}
+
+type gaussian_mutator extends mutator {
+	probability : float;
+}
+
+type correlation_gaussian_mutator {
+	probability : float;
+	threshold : float;
+}	
+
+type swap_mutator extends mutator {
+	probability : float;
+}
+
+type correlation_swap_mutator extends mutator {
+	probability : float;
+	threshold : float;
+}
+
+type bit_flip_mutator extends mutator  {
+	probability : float;
+}	
+
+type correlation_bit_flip_mutator extends mutator {
+	probability : float;
+	threshold : float;
+}	
+
+type statistics {
+	writer : array instance statistics_writer;
+}
+
+abstract type statistics_writer {
+}
+
+/**
+ * Not functional at the moment.
+ */
+type approximative extends statistics_writer {
+	fitness : array instance 'fitness-function';
+	
+}
+
+/**
+ * Creates a file named '<tt>constraint-statistics.csv</tt>' containing
+ *   information on each generation and constraint violations:
+ * 
+ * <ul>
+ *   <li>generation</li>
+ *   <li>for each constraint:
+ *      <ul>
+ *        <li>number of violating individuals</li>
+ *        <li>sum of differences</li>
+ *        <li>min of differences</li>
+ *        <li>avg of differences</li>
+ *        <li>max of differences</li>
+ *      </ul>
+ *   </li>
+ * </ul>
+ */
+type constraint_statistics extends statistics_writer {}
+
+/**
+ * Creates a file named '<tt>best-individual-statistics.csv</tt>' containing the
+ *   following information for the individual with the best fitness result:
+ * 
+ * <ul>
+ *   <li>generation</li>
+ *   <li>individual string</li>
+ *   <li>age of individual</li>
+ *   <li>???</li>
+ * </ul>
+ */
+type correlated extends statistics_writer {}
+
+/**
+ * Creates a file named '<tt>fitness-by-individual.csv</tt>' containing for each individual
+ *   of each generation the following information:
+ * 
+ *  <ul>
+ *    <li>generation</li>
+ *    <li>index of individual</li>
+ *    <li>fitness value of each predicted value of the individual</li>
+ *  </ul>
+ */
+type fitness_per_individual extends statistics_writer {}
+
+/**
+ * Creates a file named '<tt>individuals.csv</tt>' containing for each individual
+ *   the following information:
+ * 
+ *  <ul>
+ *    <li>generation</li>
+ *    <li>index of individual</li>
+ *    <li>text representation of individual</li>
+ *    <li>age</li>
+ *    <li>each property value of the individual</li>
+ *  </ul>
+ */
+type individuals extends statistics_writer {}
+
+/**
+ * Does not write any statistics. Can be used to disable statistics output.
+ */
+type none extends statistics_writer {}
+
+/**
+ * Creates a file named '<tt>prediction-by-individual.csv</tt>' containing the
+ *   predicted value(s) of each individual for each generation of the EA run:
+ * 
+ * <ul>
+ *   <li>generation</li>
+ *   <li>index of individual</li>
+ *   <li>each predicted value of the individual</li>
+ * </ul>
+ */
+type prediction_per_individual extends statistics_writer {}
+
+/**
+ * Creates a file named '<tt'>hypercube-correlation-distances.csv</tt>' with
+ *   some weird hypercube info.
+ */
+type range_correlated extends statistics_writer {}
