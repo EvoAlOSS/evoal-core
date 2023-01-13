@@ -30,12 +30,12 @@ public class PropertiesReader implements AutoCloseable, Iterator<Properties> {
     private Properties readProperties() throws IOException {
         assertStartArray();
 
-        final Map<String, Double> entries = new TreeMap<>();
+        final Map<String, Object> entries = new TreeMap<>();
         while(!JsonToken.END_ARRAY.equals(jsonParser.currentToken())) {
             Requirements.requireEqual(jsonParser.currentToken(), JsonToken.START_OBJECT);
 
             String name = null;
-            double value = 0.0;
+            Object value = null;
 
             while(!JsonToken.END_OBJECT.equals(jsonParser.currentToken())) {
                 final String fieldName = jsonParser.nextFieldName();
@@ -44,8 +44,20 @@ public class PropertiesReader implements AutoCloseable, Iterator<Properties> {
                     name = jsonParser.nextTextValue();
                 } else if("value".equals(fieldName)) {
                     final JsonToken token = jsonParser.nextValue();
-                    assert(token == JsonToken.VALUE_NUMBER_FLOAT);
-                    value = jsonParser.getDoubleValue();
+
+                    if(token == JsonToken.VALUE_NUMBER_FLOAT) {
+                        value = jsonParser.getDoubleValue();
+                    } else if(token == JsonToken.VALUE_STRING) {
+                        value = jsonParser.getValueAsString();
+                    } else if(token == JsonToken.VALUE_FALSE) {
+                        value = false;
+                    } else if(token == JsonToken.VALUE_TRUE) {
+                        value = true;
+                    } else if(token == JsonToken.VALUE_NUMBER_INT) {
+                        value = jsonParser.getValueAsInt();
+                    } else {
+                        throw new RuntimeException("Unsupported token type " + token);
+                    }
                 }
             }
             assertEndObject();

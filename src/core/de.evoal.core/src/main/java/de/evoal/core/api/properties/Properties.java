@@ -155,7 +155,7 @@ public class Properties {
     }
 
 
-    public Properties putAll(final Map<String, Double> values) {
+    public Properties putAll(final Map<String, Object> values) {
         for(final PropertySpecification spec : getSpecification().getProperties()) {
             put(spec, values.get(spec.name()));
         }
