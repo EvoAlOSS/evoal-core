@@ -33,7 +33,7 @@ public abstract class KernelBasedSVRFunctionFactory extends AbstractPartialSurro
 	}
 
 	@Override
-	protected PartialSurrogateFunction calculateRegression(final PartialFunctionConfiguration configuration, final List<Parameter> parameters, PropertiesSpecification actualInput, PropertiesSpecification requiredInput, PropertiesSpecification producedOutput, PropertiesPairStreamSupplier provider) {
+	protected PartialSurrogateFunction calculateRegression(final PartialFunctionConfiguration configuration, final List<Parameter> parameters, final PropertiesSpecification actualInput, final PropertiesSpecification requiredInput, final PropertiesSpecification producedOutput, final PropertiesPairStreamSupplier provider) {
 		log.info("Calculate SVR surrogate from {} to {}.", requiredInput, producedOutput);
 
 		Requirements.requireSizeGreaterThean(requiredInput.getProperties(), 0);

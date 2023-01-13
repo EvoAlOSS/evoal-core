@@ -70,7 +70,8 @@ public class Properties {
         final double [] values = new double[this.values.length];
 
         for(int i = 0; i < values.length; ++i) {
-            values[i] = (Double)this.values[i];
+            // TODO I think we should link the properties to the corresponding data and use the type information we have to cast this correctly.
+            values[i] = ((Number)this.values[i]).doubleValue();
         }
 
         return values;

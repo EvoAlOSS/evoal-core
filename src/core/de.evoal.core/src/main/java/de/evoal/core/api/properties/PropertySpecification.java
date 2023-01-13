@@ -1,5 +1,6 @@
 package de.evoal.core.api.properties;
 
+import de.evoal.languages.model.ddl.DataDescription;
 import lombok.NonNull;
 
 import java.util.Objects;

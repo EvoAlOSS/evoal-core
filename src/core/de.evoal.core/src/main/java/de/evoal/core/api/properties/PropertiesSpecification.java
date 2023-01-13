@@ -10,21 +10,7 @@ public class PropertiesSpecification {
 
 		public Builder() {
 		}
-
-		/*
-		public Builder add(final PropertySpecification property) {
-			properties.add(property);
-
-			return this;
-		}
-
-		public Builder add(final String propertyName) {
-			add(new PropertySpecification(propertyName));
-
-			return this;
-		}
-		*/
-
+		
 		public Builder add(final Stream<String> names) {
 			names.forEach(n -> properties.add(new PropertySpecification(n)));
 
@@ -42,7 +28,7 @@ public class PropertiesSpecification {
 		}
 	}
 
-	Map<PropertySpecification, Integer> indices = new HashMap<>();
+	final Map<PropertySpecification, Integer> indices = new HashMap<>();
 
 	final List<PropertySpecification> properties;
 
