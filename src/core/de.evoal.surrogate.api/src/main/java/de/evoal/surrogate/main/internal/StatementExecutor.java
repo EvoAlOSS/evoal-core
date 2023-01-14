@@ -1,7 +1,9 @@
 package de.evoal.surrogate.main.internal;
 
 import de.evoal.core.api.cdi.BeanFactory;
+import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.utils.ConstantSwitch;
+import de.evoal.languages.model.ddl.DataDescription;
 import de.evoal.languages.model.el.Call;
 import de.evoal.languages.model.el.StringLiteral;
 import de.evoal.languages.model.mll.*;
@@ -14,6 +16,7 @@ import de.evoal.surrogate.api.training.TrainingDataManager;
 import lombok.NonNull;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+import org.eclipse.emf.common.util.EList;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
@@ -61,7 +64,7 @@ public class StatementExecutor extends MllSwitch<Object> {
 
     @Override
     public Object caseCallStatement(final CallStatement call) {
-        log.info("Have to call stuff: {}", call.getCall().getFunction());
+        log.warn("Have to call stuff: {}", call.getCall().getFunction());
 
         return null;
     }
@@ -89,7 +92,17 @@ public class StatementExecutor extends MllSwitch<Object> {
         log.info("Applying {} to {}.", definition.getName(), input);
 
         final long startTime = System.currentTimeMillis();
-        manager.setTrainingStream(new FileBasedPropertiesStreamSupplier(input));
+
+        // collect specifications
+        final PropertiesSpecification inputSpec = collectSpecification(definition.getInputs());
+        final PropertiesSpecification outputSpec = collectSpecification(definition.getOutputs());
+        final PropertiesSpecification trainingSpec = PropertiesSpecification.builder()
+                                                                            .add(inputSpec)
+                                                                            .add(outputSpec)
+                                                                            .build();
+
+        manager.setTrainingStream(new FileBasedPropertiesStreamSupplier(input, trainingSpec));
+
         this.definition = definition;
         this.config = SurrogateConfiguration.from(definition);
 
@@ -102,6 +115,12 @@ public class StatementExecutor extends MllSwitch<Object> {
         statements.forEach(this::handleGoodnessOfFitCall);
 
         saveTrainedSurrogateFunctionFunction(output);
+    }
+
+    private PropertiesSpecification collectSpecification(final List<DataDescription> descriptions) {
+        return PropertiesSpecification.builder()
+                .add(descriptions.stream())
+                .build();
     }
 
     private void handleGoodnessOfFitCall(final CallStatement statement) {
@@ -203,6 +222,7 @@ public class StatementExecutor extends MllSwitch<Object> {
 
     private void saveTrainedSurrogateFunctionFunction(final File outputFilename) {
         log.info("Storing pre-calculated predictive functions to '{}' ...", outputFilename);
+        outputFilename.getParentFile().mkdirs();
         surrogateWriter.accept(config, outputFilename);
         log.info("Storing file was successful.");
     }

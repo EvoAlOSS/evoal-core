@@ -9,6 +9,7 @@ import de.evoal.languages.model.instance.Attribute;
 import de.evoal.languages.model.instance.DataReference;
 import de.evoal.languages.model.instance.Instance;
 import io.jenetics.Chromosome;
+import org.apache.commons.math3.util.Pair;
 
 import java.util.Collections;
 import java.util.List;
@@ -33,10 +34,8 @@ public abstract class DynamicChromosome {
 
         this.dataRepresented = Collections.unmodifiableList(dataRepresented);
         this.specification = PropertiesSpecification.builder()
-                                                    .add(dataRepresented.stream()
-                                                                        .map(DataDescription::getName)
-                                                        )
-                .build();
+                                                    .add(dataRepresented.stream())
+                                                    .build();
     }
 
     public abstract Chromosome toJenetics();

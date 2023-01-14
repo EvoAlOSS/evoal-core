@@ -16,6 +16,7 @@ import io.jenetics.Gene;
 import io.jenetics.Genotype;
 import io.jenetics.util.Factory;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.math3.util.Pair;
 
 import java.util.List;
 import java.util.function.Function;
@@ -59,7 +60,6 @@ public class DynamicCodec<G extends Gene<?, G>> implements CustomCodec<G> {
                                                    .map(Attribute::getValue)
                                                    .map(DataReference.class::cast)
                                                    .map(DataReference::getDefinition)
-                                                   .map(DataDescription::getName)
                                           )
                                   .distinct())
                        .build();

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;
+import de.evoal.core.api.properties.PropertySpecification;
 import de.evoal.core.api.utils.Requirements;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -13,14 +14,28 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
+import java.util.stream.Collectors;
 
 @Slf4j
 public class PropertiesReader implements AutoCloseable, Iterator<Properties> {
 
     private final JsonParser jsonParser;
 
-    public PropertiesReader(final File inputFile) throws IOException {
+    private final Set<String> properties;
+
+    private final PropertiesSpecification specification;
+
+    public PropertiesReader(final File inputFile, final PropertiesSpecification specification) throws IOException {
+        log.info("Creating properties reader for {}.", specification);
+        this.specification = specification;
+
+        properties = specification.getProperties()
+                                  .stream()
+                                  .map(PropertySpecification::name)
+                                  .collect(Collectors.toSet());
+
         final ObjectMapper mapper = new ObjectMapper();
         jsonParser = mapper.createParser(inputFile);
         jsonParser.nextToken();
@@ -67,11 +82,27 @@ public class PropertiesReader implements AutoCloseable, Iterator<Properties> {
 
         assertEndArray();
 
-        final PropertiesSpecification spec = PropertiesSpecification.builder()
-                                                                    .add(entries.keySet().stream())
-                                                                    .build();
+        try {
+            final PropertiesSpecification spec =
+                    PropertiesSpecification.builder()
+                                           .add(entries.keySet()
+                                                       .stream()
+                                                       .filter(properties::contains)
+                                                       .map(specification::find)
+                                                       .map(PropertySpecification::type)
+                                               )
+                                           .build();
 
-        return new Properties(spec).putAll(entries);
+            return new Properties(spec).putAll(entries);
+        } catch(final NullPointerException e) {
+            log.error("Failed to read properties file entry {} for specification {}.", entries, specification);
+
+            entries.keySet()
+                    .stream()
+                    .filter(k -> !properties.contains(k))
+                    .forEach(n -> System.err.println("There is no properties specification for " + n));
+            throw e;
+        }
     }
 
     private void assertEndArray() throws IOException {

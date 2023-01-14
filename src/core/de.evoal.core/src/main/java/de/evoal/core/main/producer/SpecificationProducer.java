@@ -8,6 +8,7 @@ import de.evoal.languages.model.instance.Array;
 import de.evoal.languages.model.instance.Attribute;
 import de.evoal.languages.model.instance.DataReference;
 import de.evoal.languages.model.instance.Instance;
+import org.apache.commons.math3.util.Pair;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.Dependent;
@@ -46,10 +47,8 @@ public class SpecificationProducer {
     @Dependent
     @Named("genotype-specification")
     public PropertiesSpecification createSourceSpecification(final @Named("genotype-description") List<DataDescription> descriptions) {
-        final Stream<String> names = descriptions
-                                             .stream()
-                                             .map(DataDescription::getName);
-
-        return PropertiesSpecification.builder().add(names).build();
+        return PropertiesSpecification.builder()
+                                      .add(descriptions.stream())
+                                      .build();
     }
 }

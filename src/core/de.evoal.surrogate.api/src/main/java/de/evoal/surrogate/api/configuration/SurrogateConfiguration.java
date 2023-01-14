@@ -1,5 +1,6 @@
 package de.evoal.surrogate.api.configuration;
 
+import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.languages.model.mll.SurrogateDefinition;
 import de.evoal.surrogate.api.function.SurrogateFunction;
 import lombok.Data;

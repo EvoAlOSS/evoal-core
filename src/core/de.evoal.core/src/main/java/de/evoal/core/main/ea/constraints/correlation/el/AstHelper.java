@@ -17,6 +17,6 @@ public final class AstHelper {
     public static int findChromosomeIndex(final PropertiesSpecification specification, final Expression expression) {
         final String name = new StringSwitch().doSwitch(expression);
 
-        return specification.indexOf(new PropertySpecification(name));
+        return specification.indexOf(name);
     }
 }

@@ -52,7 +52,7 @@ public class FunctionCombiner implements MappingFunction {
 		final Properties output = new Properties(outputSpecification);
 
 		for(final PartialSurrogateFunction entry : functions) {
-			final double [] values = entry.apply(input);
+			final Object [] values = entry.apply(input);
 
 			for(int index = 0; index < values.length; ++index) {
 				output.set(indices.get(entry.getOutputProperty().getProperties().get(index)), values[index]);

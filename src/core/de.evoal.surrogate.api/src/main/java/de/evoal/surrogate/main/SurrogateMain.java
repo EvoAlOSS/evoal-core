@@ -27,6 +27,8 @@ public class SurrogateMain implements MainClass {
     @BlackboardValue(SurrogateBlackboardEntry.SURROGATE_CONFIGURATION)
     private MachineLearningConfiguration mlConfiguration;
 
+    @Inject
+
     @Override
     public void run() {
         log.info("Training surrogate models and measuring GOF values.");

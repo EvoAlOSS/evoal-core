@@ -43,8 +43,7 @@ public abstract class AbstractGeneratorFunction implements GeneratorFunction {
         final PropertiesSpecification.Builder builder = PropertiesSpecification.builder();
 
         builder.add(references.stream()
-                              .map(DataReference::getDefinition)
-                              .map(DataDescription::getName));
+                              .map(DataReference::getDefinition));
 
         return builder.build();
     }

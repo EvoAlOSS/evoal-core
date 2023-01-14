@@ -8,6 +8,7 @@ import de.evoal.surrogate.api.configuration.Parameter;
 import de.evoal.surrogate.api.configuration.PartialFunctionConfiguration;
 import de.evoal.surrogate.api.function.AbstractPartialSurrogateFunction;
 import de.evoal.core.api.properties.Properties;
+import de.evoal.surrogate.api.function.ConverterFunctions;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.math3.stat.regression.SimpleRegression;
 
@@ -47,7 +48,7 @@ public class SimpleQuadraticFunction extends AbstractPartialSurrogateFunction {
 	/**
 	 * Actual function for prediction.
 	 */
-	private final Function<Properties, Double> regression;
+	private final Function<Properties, Object> regression;
 
 	public SimpleQuadraticFunction(final PartialFunctionConfiguration configuration, final List<Parameter> functionParameters, final PropertiesSpecification input, final PropertiesSpecification actualInput, final PropertiesSpecification output) {
 		super(configuration, functionParameters, input, output);
@@ -59,12 +60,15 @@ public class SimpleQuadraticFunction extends AbstractPartialSurrogateFunction {
 
 		final PropertySpecification inputProperty = input.getProperties().get(0);
 		final int propertyIndex = actualInput.indexOf(inputProperty);
-		
-		this.regression = vector -> intercept + slope * vector.getAsDouble(propertyIndex);
+
+		final Function<Properties, Double> inputConverter = ConverterFunctions.convertToDouble(inputProperty.type().getRepresentation(), propertyIndex);
+		final Function<Double, Object> outputConverter = ConverterFunctions.convertDoubleTo(output.get(0).type().getRepresentation());
+
+		this.regression = vector -> outputConverter.apply(intercept + slope * Math.pow(inputConverter.apply(vector), 2.0));
 	}
 
-	public double [] apply(final Properties input) {
-		return new double [] {regression.apply(input)};
+	public Object [] apply(final Properties input) {
+		return new Object [] {regression.apply(input)};
 	}
 
 	private double getIntercept() {

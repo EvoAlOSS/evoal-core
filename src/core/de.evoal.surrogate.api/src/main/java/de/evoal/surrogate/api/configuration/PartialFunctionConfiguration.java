@@ -1,9 +1,13 @@
 package de.evoal.surrogate.api.configuration;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import de.evoal.core.api.properties.PropertiesSpecification;
+import de.evoal.core.api.properties.PropertySpecification;
 import de.evoal.languages.model.ddl.DataDescription;
 import de.evoal.languages.model.mll.PartialSurrogateFunctionDefinition;
 import de.evoal.surrogate.api.function.PartialSurrogateFunction;
 import lombok.Data;
+import org.eclipse.emf.common.util.EList;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,6 +20,9 @@ import java.util.stream.Collectors;
  */
 @Data
 public class PartialFunctionConfiguration {
+	@JsonIgnore
+	private PropertiesSpecification inputData;
+
 	/**
 	 * List of required input dimensions
 	 */
@@ -31,6 +38,9 @@ public class PartialFunctionConfiguration {
 	 * List of calculated properties.
 	 */
 	private final List<String> outputDimensions = new ArrayList<>();
+
+	@JsonIgnore
+	private PropertiesSpecification outputData;
 
 	/**
 	 * Function-specific configuration parameters.
@@ -63,20 +73,11 @@ public class PartialFunctionConfiguration {
 		final PartialFunctionConfiguration configuration = new PartialFunctionConfiguration();
 		configuration.setName(definition.getName().getName());
 
-		final List<String> inputs =
-				definition.getInputs()
-  						  .stream()
-						  .map(DataDescription::getName)
-						  .collect(Collectors.toList());
+		final List<DataDescription> inputs = definition.getInputs();
+		final List<DataDescription> outputs = definition.getOutputs();
 
-		final List<String> outputs =
-				definition.getOutputs()
-						  .stream()
-						  .map(DataDescription::getName)
-						  .collect(Collectors.toList());
-
-		configuration.getInputDimensions().addAll(inputs);
-		configuration.getOutputDimensions().addAll(outputs);
+		configuration.setInputData(PropertiesSpecification.builder().add(inputs.stream()).build());
+		configuration.setOutputData(PropertiesSpecification.builder().add(outputs.stream()).build());
 
 		definition.getParameters()
 				  .stream()
@@ -90,10 +91,8 @@ public class PartialFunctionConfiguration {
 		final PartialFunctionConfiguration configuration = new PartialFunctionConfiguration();
 		configuration.setName(config.getName());
 
-		configuration.getInputDimensions()
-					 .addAll(config.getInputDimensions());
-		configuration.getOutputDimensions()
-					 .addAll(config.getOutputDimensions());
+		configuration.setInputData(config.getInputData());
+		configuration.setOutputData(config.getOutputData());
 
 		config.getParameters()
 			  .stream()
@@ -101,5 +100,24 @@ public class PartialFunctionConfiguration {
 			  .forEach(p -> configuration.getParameters().add(p));
 
 		return configuration;
+	}
+
+
+	protected void setInputData(final PropertiesSpecification spec) {
+		inputData = PropertiesSpecification.builder().add(spec).build();
+
+		spec.getProperties()
+			.stream()
+			.map(PropertySpecification::name)
+			.forEach(inputDimensions::add);
+	}
+
+	protected void setOutputData(final PropertiesSpecification spec) {
+		outputData = PropertiesSpecification.builder().add(spec).build();
+
+		spec.getProperties()
+			.stream()
+			.map(PropertySpecification::name)
+			.forEach(outputDimensions::add);
 	}
 }

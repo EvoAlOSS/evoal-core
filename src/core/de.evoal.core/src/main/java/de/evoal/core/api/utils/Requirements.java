@@ -103,7 +103,7 @@ public final class Requirements {
      * @throws NullPointerException iff either {@code a} or {@code b} is {@code null}.
      * @throws IllegalArgumentException iff the size of {@code a} and {@code b} differ.
      */
-    public static void requireSizeGreaterThean(final Collection<?> collection, final int size) {
+    public static void requireSizeGreaterThan(final Collection<?> collection, final int size) {
         Objects.requireNonNull(collection, "Collection is not allowed to be null");
 
         if(collection.size() <= size) {

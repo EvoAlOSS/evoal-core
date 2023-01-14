@@ -59,7 +59,7 @@ public class SurrogateProducer {
         return PropertiesSpecification.builder()
                 .add(config.getMappings()
                            .get(0)
-                           .getInputDimensions()
+                           .getInputData()
                            .stream())
                 .build();
     }
@@ -70,8 +70,8 @@ public class SurrogateProducer {
     public PropertiesSpecification createTargetProperties(final SurrogateConfiguration config) {
         return PropertiesSpecification.builder()
                 .add(config.getMappings()
-                        .get(config.getMappings().size() - 1)
-                        .getOutputDimensions()
+                        .get(0)
+                        .getOutputData()
                         .stream())
                 .build();
     }
@@ -110,5 +110,4 @@ public class SurrogateProducer {
 
         return _calculate(function, index + 1, next);
     }
-
 }

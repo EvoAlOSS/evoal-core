@@ -52,7 +52,8 @@ public class TargetPointLoader {
             throw new IllegalArgumentException("Unable to read target points file: " + inputFile);
         }
 
-        loadedProperties = new PropertiesBasedPropertiesStreamSupplier(new FileBasedPropertiesStreamSupplier(inputFile).get().collect(Collectors.toList()));
+        // TODO FIXME PROPERTIES
+        loadedProperties = new PropertiesBasedPropertiesStreamSupplier(new FileBasedPropertiesStreamSupplier(inputFile, PropertiesSpecification.builder().build()).get().collect(Collectors.toList()));
         log.info("Loaded {} target points from '{}'", loadedProperties.size(), inputFile);
     }
 

@@ -2,6 +2,7 @@ package de.evoal.surrogate.main.ea;
 
 import de.evoal.core.api.ea.fitness.FitnessFunction;
 import de.evoal.core.api.properties.Properties;
+import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.languages.model.instance.Instance;
 import de.evoal.surrogate.api.function.SurrogateFunction;
 

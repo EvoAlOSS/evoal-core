@@ -11,6 +11,7 @@ import de.evoal.surrogate.api.function.AbstractPartialSurrogateFunction;
 
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.properties.PropertySpecification;
+import de.evoal.surrogate.api.function.ConverterFunctions;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.math3.stat.regression.SimpleRegression;
 
@@ -47,7 +48,7 @@ public class LinearFunction extends AbstractPartialSurrogateFunction {
 	/**
 	 * Actual function for prediction.
 	 */
-	private final Function<Properties, Double> regression;
+	private final Function<Properties, Object> regression;
 
 	public LinearFunction(final PartialFunctionConfiguration configuration, final List<Parameter> functionParameters, final PropertiesSpecification input, final PropertiesSpecification actualInput, final PropertiesSpecification output) {
 		super(configuration, functionParameters, input, output);
@@ -57,15 +58,17 @@ public class LinearFunction extends AbstractPartialSurrogateFunction {
 
 		log.info("Using linear regression f(x) = {} * x + {}.", slope, intercept);
 
-
 		final PropertySpecification inputProperty = input.getProperties().get(0);
 		final int propertyIndex = actualInput.indexOf(inputProperty);
+
+		final Function<Properties, Double> inputConverter = ConverterFunctions.convertToDouble(inputProperty.type().getRepresentation(), propertyIndex);
+		final Function<Double, Object> outputConverter = ConverterFunctions.convertDoubleTo(output.get(0).type().getRepresentation());
 		
-		this.regression = vector -> intercept + slope * vector.getAsDouble(propertyIndex);
+		this.regression = vector -> outputConverter.apply(intercept + slope * inputConverter.apply(vector));
 	}
 
-	public double [] apply(final Properties input) {
-		return new double [] {regression.apply(input)};
+	public Object [] apply(final Properties input) {
+		return new Object [] {regression.apply(input)};
 	}
 
 	private double getIntercept() {

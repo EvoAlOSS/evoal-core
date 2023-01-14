@@ -1,5 +1,6 @@
 package de.evoal.core.api.properties.stream;
 
+import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.properties.io.PropertiesReader;
 import lombok.extern.slf4j.Slf4j;
 
@@ -17,11 +18,11 @@ public class FileBasedPropertiesStreamSupplier extends PropertiesBasedProperties
      *
      * @param filename The file to read.
      */
-    public FileBasedPropertiesStreamSupplier(final File filename) {
+    public FileBasedPropertiesStreamSupplier(final File filename, final PropertiesSpecification specification) {
         super(Collections.emptyList());
         log.info("Creating properties stream for {}.", filename);
 
-        try(final PropertiesReader reader = new PropertiesReader(filename)) {
+        try(final PropertiesReader reader = new PropertiesReader(filename, specification)) {
             while(reader.hasNext()) {
                 properties.add(reader.next());
             }

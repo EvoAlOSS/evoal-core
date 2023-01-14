@@ -75,13 +75,14 @@ public class RSquareCalculator implements SurrogateInformationCalculator {
 							final Properties input = pair.getFirst();
 							final Properties calculated = function.apply(input);
 
-							double [] values = calculated.getValuesAsDouble();
+							final Object [] values = calculated.getValues();
+							final double [] distances = new double[values.length];
 
 							for(int i = 0; i < values.length; ++i) {
-								values[i] = Math.pow(pair.getSecond().getAsDouble(i) - values[i], 2);
+								distances[i] = Math.pow(((Number)pair.getSecond().get(i)).doubleValue() - ((Number)values[i]).doubleValue(), 2);
 							}
 
-							return values;
+							return distances;
 						}).toArray(size -> new double [size][]);
 
 		for(int y = 0; y < errors[0].length; ++y) {

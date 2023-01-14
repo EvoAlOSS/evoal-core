@@ -2,43 +2,78 @@ package de.evoal.surrogate.svr;
 
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;
+import de.evoal.languages.model.ddl.RepresentationType;
 import de.evoal.surrogate.api.configuration.PartialFunctionConfiguration;
 import de.evoal.surrogate.api.function.AbstractPartialSurrogateFunction;
 
+import de.evoal.surrogate.api.function.ConverterFunctions;
 import smile.regression.KernelMachine;
 
+import java.util.LinkedList;
+import java.util.List;
+import java.util.function.Function;
+
 public class KernelBasedSVRFunction extends AbstractPartialSurrogateFunction {
+
+	/**
+	 *
+	 */
+	private final double gamma;
 
 	/**
 	 * Indices of input data
 	 */
 	private final int[] indices;
 
+	private final Function<Properties, Double> [] inputConverters;
+
+	private final Function<Double, Object> outputConverter;
+
 	/**
 	 * Actual SVR
 	 */
 	private final KernelMachine<double []> regression;
 
-	private final double gamma;
-
 	public KernelBasedSVRFunction(final PartialFunctionConfiguration configuration, final KernelMachine<double []> regression, final String kernelName, final PropertiesSpecification input, final PropertiesSpecification actualInput, final PropertiesSpecification output, final double gamma) {
 		super(configuration, KernelHelper.toParameters(regression, kernelName), input, output);
-		
-		this.indices = input.getProperties().stream().mapToInt(p -> actualInput.indexOf(p)).toArray();
+
+		final List<Function<Properties, Double>> inputConverts = new LinkedList<>();
+
+		this.indices = input.getProperties()
+							.stream()
+						    .mapToInt(s -> {
+								final int index = actualInput.indexOf(s);
+
+								inputConverts.add(ConverterFunctions.convertToDouble(s.type().getRepresentation(), index));
+
+								return  index;
+							})
+							.toArray();
+
+		this.inputConverters = inputConverts.toArray(new Function[0]);
+
+		// Calculate output converter
+		final RepresentationType outputType = output.getProperties().get(0).type().getRepresentation();
+		outputConverter = ConverterFunctions.convertDoubleTo(outputType);
 
 		this.regression = regression;
 		this.gamma = gamma;
 	}
 
 	@Override
-	public double [] apply(final Properties input) {
-		final double [] data = new double[indices.length];
+	public Object [] apply(final Properties input) {
+		final double [] inputData = new double[indices.length];
 
-		for(int i = 0; i < data.length; ++i) {
-			data[i] = input.getAsDouble(indices[i]);
+		for(int i = 0; i < inputData.length; ++i) {
+			inputData[i] = inputConverters[i].apply(input);
 		}
 
-		return new double [] {regression.predict(data)};
+		final double predictedValue = regression.predict(inputData);
+
+		final Object [] outputData = new Object[1];
+		outputData[0] = outputConverter.apply(predictedValue);
+
+		return outputData;
 	}
 
 	public KernelMachine<double []> getRegression() {

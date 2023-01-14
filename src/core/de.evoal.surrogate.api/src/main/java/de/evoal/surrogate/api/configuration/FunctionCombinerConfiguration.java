@@ -1,10 +1,14 @@
 package de.evoal.surrogate.api.configuration;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.languages.model.ddl.DataDescription;
 import de.evoal.languages.model.mll.PartialSurrogateFunctionDefinition;
 import de.evoal.languages.model.mll.SurrogateLayerDefinition;
 import de.evoal.surrogate.api.function.FunctionCombiner;
 import lombok.Data;
+import lombok.Setter;
+import org.eclipse.emf.common.util.EList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +29,9 @@ public class FunctionCombinerConfiguration {
      */
     private final List<String> inputDimensions = new ArrayList<>();
 
+    @JsonIgnore
+    private final List<DataDescription> inputData = new ArrayList<>();
+
     /**
      * Name of the mapping.
      */
@@ -35,28 +42,49 @@ public class FunctionCombinerConfiguration {
      */
     private final List<String> outputDimensions = new ArrayList<>();
 
+    @JsonIgnore
+    private final List<DataDescription> outputData = new ArrayList<>();
+
+    protected void setInputData(final List<DataDescription> data) {
+        inputData.clear();
+        inputData.addAll(data);
+
+        data.stream()
+                .map(DataDescription::getName)
+                .forEach(inputDimensions::add);
+    }
+
+    protected void setOutputData(final List<DataDescription> data) {
+        outputData.clear();
+        outputData.addAll(data);
+
+        data.stream()
+                .map(DataDescription::getName)
+                .forEach(outputDimensions::add);
+    }
+
     public static FunctionCombinerConfiguration from(final SurrogateLayerDefinition definition) {
         final FunctionCombinerConfiguration configuration = new FunctionCombinerConfiguration();
         configuration.setName(definition.getName());
 
-        final List<String> inputs =
+        final List<DataDescription> inputs =
                 definition.getFunctions()
                           .stream()
                           .map(PartialSurrogateFunctionDefinition::getInputs)
-                          .flatMap(l -> l.stream().map(DataDescription::getName))
+                          .flatMap(EList::stream)
                           .distinct()
                           .collect(Collectors.toList());
 
-        final List<String> outputs =
+        final List<DataDescription> outputs =
                 definition.getFunctions()
                         .stream()
                         .map(PartialSurrogateFunctionDefinition::getOutputs)
-                        .flatMap(l -> l.stream().map(DataDescription::getName))
+                        .flatMap(EList::stream)
                         .distinct()
                         .collect(Collectors.toList());
 
-        configuration.getInputDimensions().addAll(inputs);
-        configuration.getOutputDimensions().addAll(outputs);
+        configuration.setInputData(inputs);
+        configuration.setOutputData(outputs);
 
         definition.getFunctions()
                 .stream()
@@ -70,10 +98,8 @@ public class FunctionCombinerConfiguration {
         final FunctionCombinerConfiguration configuration = new FunctionCombinerConfiguration();
         configuration.setName(config.getName());
 
-        configuration.getInputDimensions()
-                     .addAll(config.getInputDimensions());
-        configuration.getOutputDimensions()
-                     .addAll(config.getOutputDimensions());
+        configuration.setInputData(config.getInputData());
+        configuration.setOutputData(config.getOutputData());
 
         config.getFunctions()
                 .stream()

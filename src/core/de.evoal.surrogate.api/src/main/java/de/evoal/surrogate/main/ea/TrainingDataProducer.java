@@ -2,6 +2,7 @@ package de.evoal.surrogate.main.ea;
 
 import de.evoal.core.api.board.Blackboard;
 import de.evoal.core.api.board.BlackboardEntry;
+import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.properties.stream.FileBasedPropertiesStreamSupplier;
 import de.evoal.surrogate.api.SurrogateBlackboardEntry;
 import de.evoal.surrogate.api.training.TrainingDataManager;
@@ -24,6 +25,7 @@ public class TrainingDataProducer {
 
         log.info("Using training data from {}.", filename);
 
-        manager.setTrainingStream(new FileBasedPropertiesStreamSupplier(trainingFile));
+        // TODO FIXME PROPERTIES
+        manager.setTrainingStream(new FileBasedPropertiesStreamSupplier(trainingFile, PropertiesSpecification.builder().build()));
     }
 }

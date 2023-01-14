@@ -72,7 +72,6 @@ public class DistanceFitness extends FitnessDecorator {
                                                                                  .map(Attribute::getValue)
                                                                                  .map(DataReference.class::cast)
                                                                                  .map(DataReference::getDefinition)
-                                                                                 .map(DataDescription::getName)
                                                                            )
                                                                        .build();
 
@@ -84,7 +83,7 @@ public class DistanceFitness extends FitnessDecorator {
                     final String name = ((DataReference)i.findAttribute("name").getValue()).getDefinition().getName();
                     final Object value = ((LiteralValue)i.findAttribute("val").getValue()).getLiteral().getValue();
 
-                    properties.put(new PropertySpecification(name), value);
+                    properties.put(specification.indexOf(name), value);
                 });
 
         return properties;

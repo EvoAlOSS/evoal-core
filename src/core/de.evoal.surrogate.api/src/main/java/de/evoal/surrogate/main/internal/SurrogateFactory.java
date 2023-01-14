@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 
 import de.evoal.core.api.cdi.BeanFactory;
 import de.evoal.core.api.properties.stream.PropertiesStreamSupplier;
+import de.evoal.languages.model.ddl.DataDescription;
 import de.evoal.surrogate.api.configuration.FunctionCombinerConfiguration;
 import de.evoal.surrogate.api.configuration.PartialFunctionConfiguration;
 import de.evoal.surrogate.api.configuration.SurrogateConfiguration;
@@ -53,17 +54,25 @@ public final class SurrogateFactory {
 
 		// map source values to properties
 		final PropertiesSpecification sourceSpecification =
-				createProperties(subConfiguration.stream()
-												 .flatMap(psf -> psf.getInputDimensions().stream()));
+				mergeSpecifications(subConfiguration.stream()
+													.map(PartialFunctionConfiguration::getInputData));
 
 		// map source values to properties
 		final PropertiesSpecification targetSpecification =
-				createProperties(subConfiguration.stream()
-												 .flatMap(psf -> psf.getOutputDimensions().stream()));
+				mergeSpecifications(subConfiguration.stream()
+													.map(PartialFunctionConfiguration::getOutputData));
 
 		final List<PartialSurrogateFunction> subFunctions = createFunctions(subConfiguration, sourceSpecification, targetSpecification, trainingPoints);
 
 		return new FunctionCombiner(subFunctions, sourceSpecification, targetSpecification);
+	}
+
+	private static PropertiesSpecification mergeSpecifications(final Stream<PropertiesSpecification> stream) {
+		final PropertiesSpecification.Builder builder = PropertiesSpecification.builder();
+
+		stream.forEach(builder::add);
+
+		return builder.build();
 	}
 
 	private static List<PartialSurrogateFunction> createFunctions(final List<PartialFunctionConfiguration> configurations, final PropertiesSpecification source, final PropertiesSpecification target, final PropertiesStreamSupplier trainingPoints) {
@@ -79,24 +88,11 @@ public final class SurrogateFactory {
 
 	public static PartialSurrogateFunction create(final PartialFunctionConfiguration config, final PropertiesSpecification source, final PropertiesSpecification target, final PropertiesStreamSupplier trainingPoints) {
 		log.info("Calculating mapping function '{}'.", config.getName());
-		final PropertiesSpecification functionTargetSpecification =
-				PropertiesSpecification.builder()
-									   .add(config.getOutputDimensions().stream())
-									   .build();
-
-		final PropertiesSpecification functionSourceSpecification =
-				PropertiesSpecification.builder()
-						.add(config.getInputDimensions().stream())
-						.build();
+		final PropertiesSpecification functionTargetSpecification = config.getOutputData();
+		final PropertiesSpecification functionSourceSpecification = config.getInputData();
 
 		final PartialSurrogateFunctionFactory factory = BeanFactory.create(config.getName(), PartialSurrogateFunctionFactory.class);
 		return factory.create(config, source, functionSourceSpecification, functionTargetSpecification, trainingPoints);
-	}
-
-	private static PropertiesSpecification createProperties(final Stream<String> descriptors) {
-		return PropertiesSpecification.builder()
-									  .add(descriptors)
-									  .build();
 	}
 
 	public SurrogateFactory(final SurrogateConfiguration config, final PropertiesStreamSupplier factory) {

@@ -8,7 +8,7 @@ import java.util.Objects;
 /**
  * A property of the input or output domain is a simple label.
  */
-public record PropertySpecification(@NonNull String name) implements Comparable {
+public record PropertySpecification(@NonNull String name, DataDescription type) implements Comparable {
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -21,6 +21,10 @@ public record PropertySpecification(@NonNull String name) implements Comparable 
 		return Objects.equals(name, other.name);
 	}
 
+	@Override
+	public int hashCode() {
+		return Objects.hash(name);
+	}
 
 	@Override
 	public String toString() {

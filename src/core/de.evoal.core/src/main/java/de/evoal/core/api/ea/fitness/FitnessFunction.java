@@ -1,6 +1,7 @@
 package de.evoal.core.api.ea.fitness;
 
 import de.evoal.core.api.properties.Properties;
+import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.languages.model.instance.Instance;
 
 import java.util.function.Function;

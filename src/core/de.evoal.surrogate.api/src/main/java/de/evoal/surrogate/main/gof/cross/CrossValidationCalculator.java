@@ -81,10 +81,10 @@ public class CrossValidationCalculator implements SurrogateInformationCalculator
 		double [][] data = new double[rowLength - 1][k];
 
 		final PropertiesSpecification mappingInput = PropertiesSpecification.builder()
-																			.add(originalMapping.getInputDimensions().stream())
+																			.add(originalMapping.getInputData().stream())
 																			.build();
 		final PropertiesSpecification mappingOutput = PropertiesSpecification.builder()
-																			 .add(originalMapping.getOutputDimensions().stream())
+																			 .add(originalMapping.getOutputData().stream())
 																			 .build();
 
 		final PropertiesSpecification [] fInputs = new PropertiesSpecification [originalMapping.getFunctions().size()];
@@ -100,14 +100,8 @@ public class CrossValidationCalculator implements SurrogateInformationCalculator
 				final PartialFunctionConfiguration fConfig = PartialFunctionConfiguration.from(trainingMapping.getFunctions()
 																			.get(func));
 
-				final PropertiesSpecification fInput = PropertiesSpecification.builder()
-																			  .add(fConfig.getInputDimensions().stream())
-																			  .build();
-				final PropertiesSpecification fOutput = PropertiesSpecification.builder()
-																			   .add(fConfig.getOutputDimensions().stream())
-																			   .build();
-
-
+				final PropertiesSpecification fInput = fConfig.getInputData();
+				final PropertiesSpecification fOutput = fConfig.getOutputData();
 				final PartialSurrogateFunction mapping = SurrogateFactory.create(fConfig, fInput, fOutput, trainingSupplier);
 
 				// sum of prediction errors in this partition for each output property
@@ -120,7 +114,7 @@ public class CrossValidationCalculator implements SurrogateInformationCalculator
 
 									for (int cvi = 0; cvi < calculated.size(); ++cvi) {
 										//correctness[cvi] = correctness[cvi] + Math.abs((calculated.get(cvi) - predicted.get(cvi)) / calculated.get(cvi));
-										correctness[cvi] = correctness[cvi] + Math.abs(calculated.getAsDouble(cvi) - predicted.getAsDouble(cvi));
+										correctness[cvi] = correctness[cvi] + Math.abs(((Number)calculated.get(cvi)).doubleValue() - ((Number)predicted.get(cvi)).doubleValue());
 									}
 								});
 

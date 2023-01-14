@@ -66,10 +66,6 @@ public class ReflectiveSerializer extends StdSerializer<Object> {
     }
 
     private void serializeArray(final double [][] o, final JsonGenerator jsonGenerator) throws IOException {
-        if(o.length == 0) {
-            System.err.println("Here we are");
-        }
-
         jsonGenerator.writeStartObject();
         jsonGenerator.writeStringField("type", "array(array(double))");
         jsonGenerator.writeNumberField("size-1", o.length);

@@ -55,11 +55,12 @@ public class DeviationProducer {
         final String propertyName = ElHelper.findValueReference(constraint.getParameters().get(0));
         final double deviation = ElHelper.findNumber(constraint.getParameters().get(1)).doubleValue();
 
-        final PropertySpecification spec = new PropertySpecification(propertyName);
+        final int specIndex = specification.indexOf(propertyName);
+        final PropertySpecification spec = specification.get(specIndex);
 
         final Deviation result = new Deviation();
         result.setSpecification(spec);
-        result.setIndex(specification.indexOf(spec));
+        result.setIndex(specIndex);
         result.setDeviation(deviation);
 
         return Optional.of(result);

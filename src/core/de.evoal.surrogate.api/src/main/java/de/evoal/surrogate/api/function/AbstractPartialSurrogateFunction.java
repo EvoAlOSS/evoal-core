@@ -1,6 +1,7 @@
 package de.evoal.surrogate.api.function;
 
 import java.util.List;
+import java.util.function.Function;
 
 import de.evoal.surrogate.api.configuration.Parameter;
 import de.evoal.surrogate.api.configuration.PartialFunctionConfiguration;
@@ -10,7 +11,8 @@ import de.evoal.core.api.properties.PropertiesSpecification;
  * Base class for regression functions storing the input and output properties.
  */
 public abstract class AbstractPartialSurrogateFunction implements PartialSurrogateFunction {
-	protected static void addParameter(final String name, final Object value, final List<Parameter> parameters) {
+
+    protected static void addParameter(final String name, final Object value, final List<Parameter> parameters) {
 		final Parameter parameter = Parameter.builder()
 				.name(name)
 				.value(value)

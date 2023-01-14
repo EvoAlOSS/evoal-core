@@ -1,5 +1,8 @@
 package de.evoal.core.api.properties;
 
+import de.evoal.languages.model.ddl.DataDescription;
+import org.apache.commons.math3.util.Pair;
+
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -10,9 +13,16 @@ public class PropertiesSpecification {
 
 		public Builder() {
 		}
-		
-		public Builder add(final Stream<String> names) {
-			names.forEach(n -> properties.add(new PropertySpecification(n)));
+
+/*
+		public Builder add(final Stream<Pair<String, DataDescription>> specs) {
+			specs.forEach(s -> properties.add(new PropertySpecification(s.getFirst(), s.getSecond())));
+
+			return this;
+		}
+*/
+		public Builder add(final Stream<DataDescription> data) {
+			data.forEach(d -> properties.add(new PropertySpecification(d.getName(), d)));
 
 			return this;
 		}
@@ -67,6 +77,10 @@ public class PropertiesSpecification {
 		return this.indices.containsKey(spec);
 	}
 
+	public PropertySpecification find(final String name) {
+		return properties.get(indexOf(name));
+	}
+
 	public PropertySpecification get(final int i) {
 		return properties.get(i);
 	}
@@ -77,6 +91,10 @@ public class PropertiesSpecification {
 
 	public int indexOf(final PropertySpecification spec) {
 		return indices.get(spec);
+	}
+
+	public int indexOf(final String name) {
+		return indices.get(new PropertySpecification(name, null));
 	}
 
 	public int size() {

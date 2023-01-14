@@ -20,7 +20,7 @@ public interface PartialSurrogateFunction {
 	 * @param input The input properties for the regression.
 	 * @return The calculated value.
 	 */
-	public double  [] apply(final Properties input);
+	public Object [] apply(final Properties input);
 
 	/**
 	 * @return The generated property.

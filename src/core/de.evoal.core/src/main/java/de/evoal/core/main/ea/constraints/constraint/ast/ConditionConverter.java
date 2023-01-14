@@ -219,7 +219,7 @@ public class ConditionConverter extends ELSwitch<Object> {
 
         final DataReference reference = (DataReference)object;
         final String propertyName = reference.getDefinition().getName();
-        final int propertyIndex = specification.indexOf(new PropertySpecification(propertyName));
+        final int propertyIndex = specification.indexOf(propertyName);
 
         usedProperties.add(specification.getProperties().get(propertyIndex));
 
