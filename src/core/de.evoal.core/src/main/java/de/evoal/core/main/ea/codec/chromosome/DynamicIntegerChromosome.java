@@ -2,6 +2,7 @@ package de.evoal.core.main.ea.codec.chromosome;
 
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertySpecification;
+import de.evoal.core.api.properties.info.PropertiesBoundaries;
 import de.evoal.core.main.jenetics.BoundedDoubleChromosome;
 import de.evoal.core.main.jenetics.BoundedDoubleGene;
 import de.evoal.core.main.jenetics.BoundedIntegerChromosome;
@@ -10,6 +11,7 @@ import io.jenetics.Chromosome;
 import io.jenetics.util.IntRange;
 
 import javax.enterprise.context.Dependent;
+import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.ArrayList;
 import java.util.List;

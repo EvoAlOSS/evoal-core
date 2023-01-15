@@ -1,13 +1,19 @@
 package de.evoal.core.main.ea.codec.chromosome;
 
+import de.evoal.core.api.properties.PropertySpecification;
+import de.evoal.core.api.properties.info.PropertiesBoundaries;
 import de.evoal.languages.model.ddl.DataDescription;
 import de.evoal.languages.model.instance.Instance;
 import io.jenetics.util.DoubleRange;
 
+import javax.inject.Inject;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public abstract class DynamicBoundedDoubleChromosome extends DynamicChromosome {
+    @Inject
+    private PropertiesBoundaries boundaries;
+
     protected List<DoubleRange> ranges;
 
     @Override
@@ -20,7 +26,8 @@ public abstract class DynamicBoundedDoubleChromosome extends DynamicChromosome {
     }
 
     protected DoubleRange toRange(final DataDescription dataDescription) {
-        // TODO Find actual ranges from DDL
-        return DoubleRange.of(-(Double.MAX_VALUE/2), (Double.MAX_VALUE/2));
+        PropertiesBoundaries.Boundaries bounds = boundaries.get(new PropertySpecification(dataDescription.getName(), dataDescription));
+
+        return DoubleRange.of(bounds.lower().doubleValue(), bounds.upper().doubleValue());
     }
 }
