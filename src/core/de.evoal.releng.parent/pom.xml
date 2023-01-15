@@ -29,9 +29,13 @@
         <module>../de.evoal.core</module>
         <module>../de.evoal.core.plugin</module>
         <module>../de.evoal.generator.main</module>
+
         <module>../de.evoal.surrogate.api</module>
         <module>../de.evoal.surrogate.simple</module>
         <module>../de.evoal.surrogate.svr</module>
+
+        <module>../de.evoal.approximative.density</module>
+<!--        <module>../de.evoal.approximative.interval</module> -->
 <!--        <module>../de.evoal.surrogate.neural</module> -->
     </modules>
 

@@ -1,0 +1,13 @@
+/**
+ * Measures density information using kernel density.
+ * 
+ * @param bandwith Width for density calculation.
+ */
+def void 'density-estimation-1'(float bandwidth);
+
+/**
+ * Measures density information using a gaussian kernel.
+ * 
+ * @param bandwith Width for density calculation.
+ */
+def void 'density-estimation-2'(float bandwidth);

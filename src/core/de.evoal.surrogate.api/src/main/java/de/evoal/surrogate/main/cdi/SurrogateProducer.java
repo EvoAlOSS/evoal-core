@@ -2,7 +2,7 @@ package de.evoal.surrogate.main.cdi;
 
 import de.evoal.core.api.board.Blackboard;
 import de.evoal.core.api.board.BlackboardEntry;
-import de.evoal.core.api.properties.PropertiesDependencies;
+import de.evoal.core.api.properties.info.PropertiesDependencies;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.properties.PropertySpecification;
 import de.evoal.core.api.utils.Requirements;

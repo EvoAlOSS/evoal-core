@@ -92,4 +92,7 @@ module de.evoal.core {
     opens de.evoal.core.main.statistics.writer.csv to weld.core.impl;
     opens de.evoal.core.api.ea.correlations to weld.core.impl;
     opens de.evoal.core.api.ea.constraints.calculation to weld.core.impl;
+    exports de.evoal.core.main.ea.fitness;
+    exports de.evoal.core.api.properties.info;
+    opens de.evoal.core.api.properties.info to weld.core.impl;
 }

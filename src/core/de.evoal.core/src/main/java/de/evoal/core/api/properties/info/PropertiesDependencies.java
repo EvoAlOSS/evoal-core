@@ -1,4 +1,4 @@
-package de.evoal.core.api.properties;
+package de.evoal.core.api.properties.info;
 
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.properties.PropertySpecification;

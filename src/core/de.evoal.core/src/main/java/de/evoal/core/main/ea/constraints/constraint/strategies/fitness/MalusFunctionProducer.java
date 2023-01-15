@@ -4,7 +4,7 @@ import de.evoal.core.api.ea.constraints.model.Constraint;
 import de.evoal.core.api.ea.constraints.model.Constraints;
 import de.evoal.core.api.ea.constraints.strategies.fitness.MalusForFitnessStrategy;
 import de.evoal.core.api.ea.constraints.strategies.fitness.MalusFunction;
-import de.evoal.core.api.properties.PropertiesDependencies;
+import de.evoal.core.api.properties.info.PropertiesDependencies;
 import de.evoal.core.api.utils.LanguageHelper;
 import de.evoal.core.api.ea.constraints.calculation.CalculationFactory;
 import de.evoal.core.api.ea.constraints.calculation.CalculationStrategy;
