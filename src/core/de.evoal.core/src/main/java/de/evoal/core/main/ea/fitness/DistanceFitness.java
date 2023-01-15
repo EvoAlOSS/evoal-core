@@ -5,17 +5,13 @@ import de.evoal.core.api.board.BlackboardEntry;
 import de.evoal.core.api.ea.fitness.FitnessFunction;
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;
-import de.evoal.core.api.properties.PropertySpecification;
 import de.evoal.core.api.utils.Requirements;
-import de.evoal.languages.model.ddl.DataDescription;
 import de.evoal.languages.model.instance.*;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.math3.util.Pair;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.util.stream.Stream;
 
 @Dependent
 @Named("distance")
@@ -39,14 +35,14 @@ public class DistanceFitness extends FitnessDecorator {
 
         final double result[] = new double[target.length];
         for(int i = 0; i  < target.length; ++i) {
-            result[i] = difference(target[i], current[i]);
+            result[i] = distance(target[i], current[i]);
         }
 
         return result;
     }
 
-    private double difference(final Object o, final double v) {
-        return ((Number)o).doubleValue() - v;
+    private double distance(final Object o, final double v) {
+        return Math.abs(((Number)o).doubleValue() - v);
     }
 
     @Override

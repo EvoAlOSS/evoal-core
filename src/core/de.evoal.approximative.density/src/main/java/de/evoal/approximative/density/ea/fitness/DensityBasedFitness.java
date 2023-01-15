@@ -118,7 +118,7 @@ public abstract class DensityBasedFitness extends FitnessDecorator {
             final double probability = probabilityCalculator.apply(sourceData, targetData, candidate, predictedValue);
 
             // DO WE HAVE TO FIX THIS?
-            fitness[i] = -((Math.abs(current[i])) * Math.pow(probability, rootExponent) + (1 - probability) * 1 / Math.pow(probability, exponent));
+            fitness[i] = current[i] * Math.pow(probability, rootExponent) + (1 - probability) * 1 / Math.pow(probability, exponent);
         }
 
         return fitness;
