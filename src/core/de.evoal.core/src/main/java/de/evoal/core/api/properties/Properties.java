@@ -50,12 +50,20 @@ public class Properties {
         return (Double)values[i];
     }
 
+    public Integer getAsInteger(int i) {
+        return (Integer)values[i];
+    }
+
     public Object get(final PropertySpecification spec) {
         return values[specification.indexOf(spec)];
     }
 
     public Double getAsDouble(final PropertySpecification spec) {
         return (Double)values[specification.indexOf(spec)];
+    }
+
+    public Integer getAsInteger(final PropertySpecification spec) {
+        return (Integer)values[specification.indexOf(spec)];
     }
 
     public PropertiesSpecification getSpecification() {

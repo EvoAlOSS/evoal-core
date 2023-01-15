@@ -6,7 +6,10 @@ import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.properties.PropertySpecification;
 import static de.evoal.core.main.ea.constraints.constraint.utils.ArithmeticNumberOperations.*;
+
+import de.evoal.languages.model.ddl.DataDescription;
 import de.evoal.languages.model.ddl.DataReference;
+import de.evoal.languages.model.ddl.SelfReference;
 import de.evoal.languages.model.el.*;
 import de.evoal.languages.model.el.util.ELSwitch;
 
@@ -19,10 +22,12 @@ public class ConditionConverter extends ELSwitch<Object> {
     private Function<Properties, Object> function;
     private final List<PropertySpecification> usedProperties = new ArrayList<>();
     private final PropertiesSpecification specification;
+    private final DataDescription context;
     private ConstraintType type;
 
-    public ConditionConverter(final PropertiesSpecification specification) {
+    public ConditionConverter(final PropertiesSpecification specification, final DataDescription context) {
         this.specification = specification;
+        this.context = context;
     }
 
     @Override
@@ -213,6 +218,16 @@ public class ConditionConverter extends ELSwitch<Object> {
 
     @Override
     public Object caseValueReference(final ValueReference object) {
+        if(object instanceof SelfReference) {
+            Requirements.requireNotNull(context);
+            final String propertyName = context.getName();
+            final int propertyIndex = specification.indexOf(propertyName);
+
+            usedProperties.add(specification.getProperties().get(propertyIndex));
+
+            return (Function<Properties, Object>) properties -> properties.get(propertyIndex);
+        }
+
         if(!(object instanceof DataReference)) {
             throw new IllegalStateException("Value reference is not a data reference.");
         }

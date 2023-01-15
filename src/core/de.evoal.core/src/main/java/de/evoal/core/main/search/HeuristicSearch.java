@@ -68,6 +68,10 @@ public class HeuristicSearch {
 	private int sizeOfPopulation;
 
 	@Inject
+	@ConfigurationValue(entry = BlackboardEntry.EA_CONFIGURATION, access = "algorithm.maximize")
+	private Boolean maximize;
+
+	@Inject
 	@ConfigurationValue(entry = BlackboardEntry.EA_CONFIGURATION, access = "algorithm.maximum_age")
 	private int maximumAge;
 
@@ -111,7 +115,7 @@ public class HeuristicSearch {
 											.alterers(flattenAltererMap())
 											.offspringSelector(this.offspringSelector)
 											.survivorsSelector(this.survivorSelector)
-											.optimize(Optimize.MAXIMUM)
+											.optimize(maximize ? Optimize.MAXIMUM : Optimize.MINIMUM)
 											.populationSize(sizeOfPopulation)
 // TODO											.constraint(constraint)
 											.maximalPhenotypeAge(maximumAge)

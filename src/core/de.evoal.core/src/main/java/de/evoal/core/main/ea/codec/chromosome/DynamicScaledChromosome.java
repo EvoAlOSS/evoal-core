@@ -7,7 +7,7 @@ import de.evoal.languages.model.instance.Instance;
 import de.evoal.languages.model.instance.LiteralValue;
 import io.jenetics.util.DoubleRange;
 
-public abstract class DynamicScaledChromosome extends DynamicBoundedChromosome {
+public abstract class DynamicScaledChromosome extends DynamicBoundedDoubleChromosome {
     protected int scale;
 
     @Override

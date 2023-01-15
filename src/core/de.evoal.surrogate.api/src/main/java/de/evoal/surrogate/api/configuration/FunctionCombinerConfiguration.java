@@ -45,19 +45,21 @@ public class FunctionCombinerConfiguration {
     @JsonIgnore
     private final List<DataDescription> outputData = new ArrayList<>();
 
-    protected void setInputData(final List<DataDescription> data) {
+    public void setInputData(final List<DataDescription> data) {
         inputData.clear();
         inputData.addAll(data);
 
+        inputDimensions.clear();
         data.stream()
                 .map(DataDescription::getName)
                 .forEach(inputDimensions::add);
     }
 
-    protected void setOutputData(final List<DataDescription> data) {
+    public void setOutputData(final List<DataDescription> data) {
         outputData.clear();
         outputData.addAll(data);
 
+        outputDimensions.clear();
         data.stream()
                 .map(DataDescription::getName)
                 .forEach(outputDimensions::add);

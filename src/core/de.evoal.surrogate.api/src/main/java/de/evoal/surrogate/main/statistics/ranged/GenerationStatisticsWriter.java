@@ -4,6 +4,7 @@ import de.evoal.core.api.ea.correlations.Range;
 import de.evoal.core.api.ea.fitness.comparator.FitnessValue;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.properties.PropertySpecification;
+import de.evoal.core.api.properties.info.PropertiesBoundaries;
 import de.evoal.core.api.statistics.*;
 import de.evoal.core.api.ea.codec.CustomCodec;
 import de.evoal.core.api.properties.Properties;
@@ -35,8 +36,8 @@ public class GenerationStatisticsWriter implements StatisticsWriter {
     @Inject
     private CustomCodec encoding;
 
-    @Inject @Named("genotype-limits")
-    private Map<PropertySpecification, Range> limits;
+    @Inject
+    private PropertiesBoundaries limits;
 
     @Inject @Named("genotype-specification")
     private PropertiesSpecification specification;
@@ -61,7 +62,7 @@ public class GenerationStatisticsWriter implements StatisticsWriter {
     public void init() {
         final List<PropertyRange> rangesOfProperties = extractPropertyRangesFromCorrelations();
         
-        generateHypercubesFromRanges(rangesOfProperties, limits.size());
+        generateHypercubesFromRanges(rangesOfProperties, specification.size());
 
         createWriter();
     }
@@ -154,8 +155,8 @@ public class GenerationStatisticsWriter implements StatisticsWriter {
 
     	for(final PropertySpecification spec : specification.getProperties()) {
     		final SortedSet<Double> boundaries = new TreeSet<>();
-            boundaries.add(limits.get(spec).getLower());
-            boundaries.add(limits.get(spec).getUpper());
+            boundaries.add(limits.get(spec).lower().doubleValue());
+            boundaries.add(limits.get(spec).upper().doubleValue());
 
             listOfBoundaries.add(boundaries);
     	}

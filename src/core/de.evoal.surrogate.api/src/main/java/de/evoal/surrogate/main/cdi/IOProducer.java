@@ -1,7 +1,9 @@
 package de.evoal.surrogate.main.cdi;
 
 import java.io.*;
+import java.util.Map;
 import java.util.function.BiConsumer;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -9,6 +11,7 @@ import javax.enterprise.inject.Produces;
 import javax.inject.Named;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import de.evoal.core.api.properties.PropertySpecification;
 import de.evoal.surrogate.api.configuration.SurrogateConfiguration;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
@@ -24,16 +27,16 @@ public class IOProducer {
 	@Produces
 	@Named("surrogate-loader")
 	public Function<@NonNull File, @NonNull SurrogateConfiguration> createSurrogateLoader() {
-		return (file) -> loadPredictiveConfiguration(file);
+		return IOProducer::loadPredictiveConfiguration;
 	}
 
 	@Produces
 	@Named("surrogate-writer")
 	public BiConsumer<@NonNull SurrogateConfiguration, @NonNull File> createSurrogateWriter() {
-		return (config, file) -> storePredictiveConfiguration(config, file);
+		return IOProducer::storePredictiveConfiguration;
 	}
 
-	private static SurrogateConfiguration loadPredictiveConfiguration(final File file) {
+	private static SurrogateConfiguration loadPredictiveConfiguration(final @NonNull File file) {
 		log.info("Loading predictive configuration from {}.", file);
 		try(final InputStream is = new FileInputStream(file)) {
 			return new ObjectMapper().readValue(is, SurrogateConfiguration.class);

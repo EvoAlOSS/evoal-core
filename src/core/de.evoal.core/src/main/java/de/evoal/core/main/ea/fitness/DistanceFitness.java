@@ -9,6 +9,7 @@ import de.evoal.core.api.properties.PropertySpecification;
 import de.evoal.core.api.utils.Requirements;
 import de.evoal.languages.model.ddl.DataDescription;
 import de.evoal.languages.model.instance.*;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.math3.util.Pair;
 
 import javax.enterprise.context.Dependent;
@@ -18,6 +19,7 @@ import java.util.stream.Stream;
 
 @Dependent
 @Named("distance")
+@Slf4j
 public class DistanceFitness extends FitnessDecorator {
 
     @Inject
@@ -57,6 +59,7 @@ public class DistanceFitness extends FitnessDecorator {
             this.target = board.get(BlackboardEntry.TARGET_PROPERTIES);
         } else {
             this.target = toProperties((Array)target.getValue());
+            log.info("Binding target properties based on information found in MLL to {}.", this.target);
             board.bind(BlackboardEntry.TARGET_PROPERTIES, this.target);
         }
 

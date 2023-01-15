@@ -4,48 +4,49 @@ import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertySpecification;
 import de.evoal.core.main.jenetics.BoundedDoubleChromosome;
 import de.evoal.core.main.jenetics.BoundedDoubleGene;
+import de.evoal.core.main.jenetics.BoundedIntegerChromosome;
+import de.evoal.core.main.jenetics.BoundedIntegerGene;
 import io.jenetics.Chromosome;
-import io.jenetics.util.DoubleRange;
+import io.jenetics.util.IntRange;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Named;
 import java.util.ArrayList;
 import java.util.List;
-
 import java.util.stream.Collectors;
 
 @Dependent
-@Named("double-chromosome")
-public class DynamicDoubleChromosome extends DynamicBoundedDoubleChromosome {
+@Named("integer-chromosome")
+public class DynamicIntegerChromosome extends DynamicBoundedIntegerChromosome {
     @Override
     public Chromosome toJenetics() {
-        final List<BoundedDoubleGene> genes = ranges.stream()
-                                                    .map(BoundedDoubleGene::of)
+        final List<BoundedIntegerGene> genes = ranges.stream()
+                                                    .map(BoundedIntegerGene::of)
                                                     .collect(Collectors.toList());
 
-        return BoundedDoubleChromosome.of(genes);
+        return BoundedIntegerChromosome.of(genes);
     }
 
     @Override
     public Chromosome toJenetics(final Properties values) {
-        final List<BoundedDoubleGene> genes = new ArrayList<>(ranges.size());
+        final List<BoundedIntegerGene> genes = new ArrayList<>(ranges.size());
 
         for(int i = 0; i < ranges.size(); ++i) {
-            final DoubleRange range = ranges.get(i);
-            final double value = values.getAsDouble(specification.get(i));
+            final IntRange range = ranges.get(i);
+            final int value = values.getAsInteger(specification.get(i));
 
-            genes.add(BoundedDoubleGene.of(value, range));
+            genes.add(BoundedIntegerGene.of(value, range));
         }
 
-        return BoundedDoubleChromosome.of(genes);
+        return BoundedIntegerChromosome.of(genes);
     }
 
     @Override
     public Properties toProperties(final Chromosome chromosome, final Properties properties) {
-        final BoundedDoubleChromosome doubleChromosome = (BoundedDoubleChromosome) chromosome;
+        final BoundedIntegerChromosome integerChromosome = (BoundedIntegerChromosome) chromosome;
 
         for(int i = 0; i < specification.size(); ++i) {
-            final double value = doubleChromosome.get(i).doubleValue();
+            final int value = integerChromosome.get(i).intValue();
             final PropertySpecification spec = specification.get(i);
 
             properties.put(spec, value);

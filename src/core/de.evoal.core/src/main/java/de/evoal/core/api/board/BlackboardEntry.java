@@ -7,12 +7,10 @@ public final class BlackboardEntry {
      */
     public static final String TARGET_PROPERTIES = "core:target-properties";
 
-    //    public static final String TARGET_PROPERTIES_SOURCE = "TARGET_PROPERTIES_SOURCE";
-
     /**
-     * Folder containing the constraint validation models.
+     * Folder containing the constraint files.
      */
-//    public static final String CONSTRAINT_VALIDATION_FOLDER = "CONSTRAINT_VALIDATION_FOLDER";
+    public static final String CONSTRAINT_FOLDER = "core:constraint-folder";
 
     /**
      * Number of evaluation runs.

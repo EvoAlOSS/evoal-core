@@ -1,6 +1,7 @@
 package de.evoal.core.main.ea.constraints.deviation;
 
 import de.evoal.core.api.ea.codec.CustomCodec;
+import de.evoal.core.api.ea.constraints.model.DataConstraints;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.properties.PropertySpecification;
 import javax.enterprise.context.ApplicationScoped;
@@ -11,6 +12,7 @@ import javax.inject.Named;
 import de.evoal.core.main.ea.constraints.deviation.model.Deviation;
 import de.evoal.core.main.ea.constraints.deviation.model.Deviations;
 import de.evoal.core.main.ea.constraints.el.ElHelper;
+import de.evoal.languages.model.ddl.DataDescription;
 import de.evoal.languages.model.el.Call;
 import de.evoal.languages.model.el.Expression;
 import de.evoal.languages.model.el.FunctionName;
@@ -28,31 +30,38 @@ public class DeviationProducer {
     @Produces
     @ApplicationScoped
     public Deviations create(
-            final @Named("data-constraints") Collection<Expression> expressions,
+            final DataConstraints constraints,
             final CustomCodec codec) {
         this.specification = specification;
         final Deviations deviations = new Deviations(specification);
 
-        expressions.stream()
-                   .map(ElHelper::findCall)
-                   .filter(Objects::nonNull)
-                   .map(Call.class::cast)
-                   .filter(c -> "standardDeviation".equals(((de.evoal.languages.model.ddl.FunctionName)c.getFunction()).getDefinition().getName()))
-                   .map(c -> convert(c))
-                   .filter(Optional::isPresent)
-                   .map(Optional::get)
-                   .forEach(deviations::add);
+        constraints.stream()
+                   .forEach(p -> {
+                       final DataDescription context = p.getFirst();
+
+                       p.getSecond()
+                        .stream()
+                        .map(ElHelper::findCall)
+                        .filter(Objects::nonNull)
+                        .map(Call.class::cast)
+                        .filter(c -> "standardDeviation".equals(((de.evoal.languages.model.ddl.FunctionName)c.getFunction()).getDefinition().getName()))
+                        .map(c -> convert(c, context))
+                        .filter(Optional::isPresent)
+                        .map(Optional::get)
+                        .forEach(deviations::add);
+
+                   });
 
         return deviations;
     }
 
-    private Optional<Deviation> convert(final Call constraint) {
+    private Optional<Deviation> convert(final Call constraint, final DataDescription context) {
         if(constraint.getParameters().size() != 1) {
             log.error("Deviation has more than two parameters. Skipping.");
             return Optional.empty();
         }
 
-        final String propertyName = ElHelper.findValueReference(constraint.getParameters().get(0));
+        final String propertyName = ElHelper.findValueReference(constraint.getParameters().get(0), context);
         final double deviation = ElHelper.findNumber(constraint.getParameters().get(1)).doubleValue();
 
         final int specIndex = specification.indexOf(propertyName);

@@ -17,6 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.inject.Provider;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -30,21 +31,18 @@ public class FitnessStatistics implements StatisticsWriter {
 
     @Inject
     @BlackboardValue(BlackboardEntry.TARGET_PROPERTIES)
-    private Properties targetSpecification;
+    private Provider<Properties> targetSpecification;
 
     @Inject
     private WriterStrategy strategy;
 
     private Writer writer;
 
-    @PostConstruct
-    @SneakyThrows(WriterException.class)
-    private void init() {
-        createWriter();
-    }
-
     @Override
+    @SneakyThrows(WriterException.class)
     public StatisticsWriter init(Instance configuration) {
+        createWriter();
+
         return this;
     }
 
@@ -54,15 +52,15 @@ public class FitnessStatistics implements StatisticsWriter {
         columns.add(new Column("generation", ColumnType.Integer));
         columns.add(new Column("index", ColumnType.Integer));
 
-        for(int i = 0; i < targetSpecification.size(); ++i) {
-            columns.add(new Column("fitness-value-" + targetSpecification.getSpecification().get(i).name(), ColumnType.Double));
+        for(int i = 0; i < targetSpecification.get().size(); ++i) {
+            columns.add(new Column("fitness-value-" + targetSpecification.get().getSpecification().get(i).name(), ColumnType.Double));
         }
 
         writer = strategy.create("fitness-by-individual", columns);
     }
 
     private Object[] dataOfPhenotype(final int index, final long generation, Phenotype<?, FitnessValue> phenotype) {
-        final Object [] data = new Object[2 + targetSpecification.size()];
+        final Object [] data = new Object[2 + targetSpecification.get().size()];
 
         data[0] = generation;
         data[1] = index;

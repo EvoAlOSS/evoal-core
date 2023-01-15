@@ -2,7 +2,7 @@ package de.evoal.surrogate.api;
 
 public final class SurrogateBlackboardEntry {
     /**
-     * Loaded generator configuration.
+     * Loaded surrogate configuration.
      */
     public static final String SURROGATE_CONFIGURATION = "surrogate:configuration";
 

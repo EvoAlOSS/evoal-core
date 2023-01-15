@@ -60,6 +60,7 @@ public abstract class DensityBasedFitness extends FitnessDecorator {
     @Override
     public FitnessFunction init(final Instance config) {
         log.info("Setting up density-based fitness calculation.");
+        super.init(config);
 
         kind = LanguageHelper.lookup(config, "kind");
         exponent = LanguageHelper.lookup(config, "exponent");
@@ -136,7 +137,7 @@ public abstract class DensityBasedFitness extends FitnessDecorator {
     private double sourceBasedProbabilityCalculator(final DensityData [] sourceData, final DensityData targetData, final Properties candidate, final double predicted) {
         double result = 1.0;
         for(int i = 0; i < candidate.size(); ++i) {
-            final double probability = sourceData[i].probability(candidate.getAsDouble(i));
+            final double probability = sourceData[i].probability(((Number)candidate.get(i)).doubleValue());
             final double offset = 1 / ((Number)ranges.get(surrogate.getInputSpecification().get(i))).doubleValue();
 
             result *= Math.min(1.0, probability + offset);

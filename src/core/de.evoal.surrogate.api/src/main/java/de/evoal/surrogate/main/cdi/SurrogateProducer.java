@@ -6,14 +6,24 @@ import de.evoal.core.api.properties.info.PropertiesDependencies;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.properties.PropertySpecification;
 import de.evoal.core.api.utils.Requirements;
+import de.evoal.languages.model.ddl.DataDescription;
+import de.evoal.languages.model.instance.DataReference;
+import de.evoal.languages.model.mll.MachineLearningConfiguration;
+import de.evoal.languages.model.mll.PartialSurrogateFunctionDefinition;
+import de.evoal.languages.model.mll.SurrogateDefinition;
 import de.evoal.surrogate.api.SurrogateBlackboardEntry;
+import de.evoal.surrogate.api.configuration.FunctionCombinerConfiguration;
+import de.evoal.surrogate.api.configuration.PartialFunctionConfiguration;
 import de.evoal.surrogate.api.configuration.SurrogateConfiguration;
 import de.evoal.surrogate.api.function.FunctionCombiner;
 import de.evoal.surrogate.api.function.PartialSurrogateFunction;
 import de.evoal.surrogate.api.function.SurrogateFunction;
 import de.evoal.surrogate.main.internal.SurrogateFactory;
+import lombok.Data;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
+import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.ecore.EObject;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.Dependent;
@@ -21,7 +31,11 @@ import javax.enterprise.event.Observes;
 import javax.enterprise.inject.Produces;
 import javax.inject.Named;
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.BiFunction;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @ApplicationScoped
 @Slf4j
@@ -44,6 +58,114 @@ public class SurrogateProducer {
         }
 
         this.configuration = loader.apply(file);
+        
+        final EObject mlConfiguration = board.get(SurrogateBlackboardEntry.SURROGATE_CONFIGURATION);
+        final EObject eaConfiguration = board.get(BlackboardEntry.EA_CONFIGURATION);
+
+        final Map<String, PropertySpecification> specifications = new HashMap<>();
+        addDataFrom(specifications, mlConfiguration);
+        addDataFrom(specifications, eaConfiguration);
+
+        linkData(specifications);
+    }
+
+    private void linkData(final Map<String, PropertySpecification> specifications) {
+        for(final FunctionCombinerConfiguration fcc : configuration.getMappings()) {
+            for(final PartialFunctionConfiguration pfc : fcc.getFunctions()) {
+                pfc.setInputData(
+                        PropertiesSpecification.builder()
+                                .add(
+                                        pfc.getInputDimensions()
+                                                .stream()
+                                                .map(specifications::get)
+                                                .map(PropertySpecification::type)
+                                )
+                                .build()
+
+                );
+
+                pfc.setOutputData(
+                        PropertiesSpecification.builder()
+                                .add(
+                                        pfc.getOutputDimensions()
+                                                .stream()
+                                                .map(specifications::get)
+                                                .map(PropertySpecification::type)
+                                )
+                                .build()
+
+                );
+            }
+
+
+            fcc.setInputData(
+                fcc.getInputDimensions()
+                        .stream()
+                        .map(specifications::get)
+                        .map(PropertySpecification::type)
+                        .collect(Collectors.toList())
+
+            );
+
+            fcc.setOutputData(
+                fcc.getOutputDimensions()
+                        .stream()
+                        .map(specifications::get)
+                        .map(PropertySpecification::type)
+                        .collect(Collectors.toList())
+            );
+        }
+    }
+
+    private void addDataFrom(final Map<String, PropertySpecification> specifications, final EObject eTree) {
+        final TreeIterator<EObject> contentIterator = eTree.eAllContents();
+        while(contentIterator.hasNext()) {
+            final EObject content = contentIterator.next();
+
+            if(content instanceof DataReference) {
+                final DataReference ref = (DataReference)content;
+                final PropertySpecification spec = new PropertySpecification(ref.getDefinition().getName(), ref.getDefinition());
+
+                specifications.put(spec.name(), spec);
+            } else if(content instanceof SurrogateDefinition) {
+                final SurrogateDefinition def = (SurrogateDefinition)content;
+                def.getInputs()
+                        .stream()
+                        .forEach(descr -> {
+                            final PropertySpecification spec = new PropertySpecification(descr.getName(), descr);
+
+                            specifications.put(spec.name(), spec);
+                        });
+
+                def.getOutputs()
+                        .stream()
+                        .forEach(descr -> {
+                            final PropertySpecification spec = new PropertySpecification(descr.getName(), descr);
+
+                            specifications.put(spec.name(), spec);
+                        });
+
+            } else if(content instanceof PartialSurrogateFunctionDefinition) {
+                final PartialSurrogateFunctionDefinition def = (PartialSurrogateFunctionDefinition)content;
+                def.getInputs()
+                        .stream()
+                        .forEach(descr -> {
+                            final PropertySpecification spec = new PropertySpecification(descr.getName(), descr);
+
+                            specifications.put(spec.name(), spec);
+                        });
+
+                def.getOutputs()
+                        .stream()
+                        .forEach(descr -> {
+                            final PropertySpecification spec = new PropertySpecification(descr.getName(), descr);
+
+                            specifications.put(spec.name(), spec);
+                        });
+
+            }
+
+        }
     }
 
     @Produces
@@ -77,7 +199,7 @@ public class SurrogateProducer {
     }
 
     @Produces @Dependent
-    public SurrogateFunction createSurrogateFunction() {
+    public SurrogateFunction createSurrogateFunction(final Blackboard board) {
         final SurrogateConfiguration configuration = this.configuration;
 
         Requirements.requireNotNull(configuration);

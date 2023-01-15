@@ -1,6 +1,7 @@
 package de.evoal.core.main.ea.constraints.correlation;
 
 import de.evoal.core.api.ea.codec.CustomCodec;
+import de.evoal.core.api.ea.constraints.model.DataConstraints;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
@@ -10,13 +11,12 @@ import de.evoal.core.main.ea.constraints.el.ElHelper;
 import de.evoal.core.api.ea.correlations.Correlation;
 import de.evoal.core.api.ea.correlations.Correlations;
 import de.evoal.core.api.ea.correlations.RangedCorrelation;
+import de.evoal.languages.model.ddl.DataDescription;
 import de.evoal.languages.model.el.Call;
-import de.evoal.languages.model.el.Expression;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.inject.Named;
 
-import java.util.Collection;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -33,29 +33,35 @@ public class CorrelationsProducer {
 
     @Produces
     @ApplicationScoped
-    public Correlations createCorrelations(final @Named("data-constraints") Collection<Expression> expressions,
+    public Correlations createCorrelations(final DataConstraints constraints,
                                            final @Named("genotype-specification") PropertiesSpecification specification,
                                            final CustomCodec codec) {
         this.codec = codec;
         this.specification = specification;
         final Correlations correlations = new Correlations(codec);
 
-        expressions.stream()
-                .map(ElHelper::findCall)
-                .filter(Objects::nonNull)
-                .map(Call.class::cast)
-                .filter(c -> "connection".equals(((de.evoal.languages.model.ddl.FunctionName)c.getFunction()).getDefinition().getName()))
-                .map(c -> convert(c))
-                .filter(Optional::isPresent)
-                .map(Optional::get)
-                .forEach(correlations.getCorrelations()::add);
+        constraints.stream()
+                        .forEach(p -> {
+                            final DataDescription context = p.getFirst();
+
+                            p.getSecond()
+                             .stream()
+                             .map(ElHelper::findCall)
+                             .filter(Objects::nonNull)
+                             .map(Call.class::cast)
+                             .filter(c -> "connection".equals(((de.evoal.languages.model.ddl.FunctionName)c.getFunction()).getDefinition().getName()))
+                             .map(c -> convert(c, context))
+                             .filter(Optional::isPresent)
+                             .map(Optional::get)
+                             .forEach(correlations.getCorrelations()::add);
+                        });
 
         log.info("Loaded {} correlations.", correlations.getCorrelations().size());
 
         return correlations;
     }
 
-    private Optional<Correlation> convert(final Call constraint) {
+    private Optional<Correlation> convert(final Call constraint, DataDescription context) {
         if(constraint.getParameters().size() == 3) {
             final Correlation result = new Correlation();
             result.setChromosomeOne(AstHelper.findChromosomeIndex(specification, constraint.getParameters().get(0)));

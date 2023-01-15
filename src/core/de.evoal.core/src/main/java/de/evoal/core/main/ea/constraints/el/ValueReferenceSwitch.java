@@ -1,12 +1,21 @@
 package de.evoal.core.main.ea.constraints.el;
 
+import de.evoal.core.api.utils.Requirements;
+import de.evoal.languages.model.ddl.DataDescription;
 import de.evoal.languages.model.ddl.DataReference;
+import de.evoal.languages.model.ddl.SelfReference;
 import de.evoal.languages.model.el.*;
 import de.evoal.languages.model.el.util.ELSwitch;
 
 import java.util.Objects;
 
 public class ValueReferenceSwitch extends ELSwitch<String> {
+    private final DataDescription context;
+
+    public ValueReferenceSwitch(final DataDescription context) {
+        this.context = context;
+    }
+
     @Override
     public String caseOrExpression(final OrExpression object) {
         Objects.equals(object.getSubExpressions().size(), 1);
@@ -106,6 +115,11 @@ public class ValueReferenceSwitch extends ELSwitch<String> {
 
     @Override
     public String caseValueReference(final ValueReference object) {
+        if(object instanceof SelfReference) {
+            Requirements.requireNotNull(context);
+            return context.getName();
+        }
+
         if(!(object instanceof DataReference)) {
             throw new IllegalStateException("Value reference is not a data reference.");
         }

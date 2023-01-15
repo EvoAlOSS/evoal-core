@@ -1,13 +1,8 @@
-/**
- * Measures density information using kernel density.
- * 
- * @param bandwith Width for density calculation.
- */
-def void density1(float bandwidth);
+abstract type density extends 'decorated-fitness-function' {
+	kind : string;
+	exponent : float;
+	root_exponent : float;
+}
 
-/**
- * Measures density information using a gaussian kernel.
- * 
- * @param bandwith Width for density calculation.
- */
-def void density2(float bandwidth);
+type density1 extends density {}
+type density2 extends density {}

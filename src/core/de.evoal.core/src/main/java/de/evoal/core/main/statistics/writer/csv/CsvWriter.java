@@ -46,7 +46,6 @@ public class CsvWriter implements Writer {
 
     @Override
     public void addRecord(final Object[] data) throws WriterException {
-        System.err.println("Adding data to file.");
         try {
             for(final Column column : context.getColumns()) {
                 csvPrinter.print(context.get(column));

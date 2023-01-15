@@ -103,18 +103,20 @@ public class PartialFunctionConfiguration {
 	}
 
 
-	protected void setInputData(final PropertiesSpecification spec) {
+	public void setInputData(final PropertiesSpecification spec) {
 		inputData = PropertiesSpecification.builder().add(spec).build();
 
+		inputDimensions.clear();
 		spec.getProperties()
 			.stream()
 			.map(PropertySpecification::name)
 			.forEach(inputDimensions::add);
 	}
 
-	protected void setOutputData(final PropertiesSpecification spec) {
+	public void setOutputData(final PropertiesSpecification spec) {
 		outputData = PropertiesSpecification.builder().add(spec).build();
 
+		outputDimensions.clear();
 		spec.getProperties()
 			.stream()
 			.map(PropertySpecification::name)

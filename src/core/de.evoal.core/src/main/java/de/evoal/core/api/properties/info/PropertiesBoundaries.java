@@ -7,6 +7,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class PropertiesBoundaries {
+    public void add(final PropertySpecification specification, final Boundaries boundaries) {
+        System.err.println("Mapping " + specification + " --> " + boundaries);
+        boundariesMap.put(specification, boundaries);
+    }
+
     public record Boundaries(Number lower, Number upper) {}
 
     private Map<PropertySpecification, Boundaries> boundariesMap = new HashMap<>();
@@ -14,7 +19,6 @@ public class PropertiesBoundaries {
 
     public Boundaries get(final PropertySpecification specification) {
         return boundariesMap.get(specification);
-
     }
 
     public Collection<PropertySpecification> getSpecifications() {
