@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 public class JeneticsConstraintProducer {
     @Produces
     public List<io.jenetics.engine.Constraint> create(
-            final @ConfigurationValue(entry = BlackboardEntry.EA_CONFIGURATION, access = "algorithm.constraint_handling") Instance handlerConfiguration,
+            final @ConfigurationValue(entry = BlackboardEntry.EA_CONFIGURATION, access = "algorithm.handling") Instance handlerConfiguration,
             final Constraints constraints,
             final CustomCodec codec,
             final CalculationFactory factory) {

@@ -10,7 +10,6 @@ module de.evoal.core {
     requires deltaspike.cdictrl.weld;
     requires deltaspike.core.api;
 
-
     requires lombok;
 
     requires org.slf4j;
@@ -62,6 +61,7 @@ module de.evoal.core {
     opens de.evoal.core.api.cdi to weld.core.impl;
     opens de.evoal.core.api.ea to weld.core.impl;
     opens de.evoal.core.api.ea.constraints to weld.core.impl;
+    opens de.evoal.core.api.ea.constraints.model to weld.core.impl;
     opens de.evoal.core.api.ea.fitness to weld.core.impl;
     opens de.evoal.core.api.properties to weld.core.impl;
     opens de.evoal.core.api.properties.io to weld.core.impl;

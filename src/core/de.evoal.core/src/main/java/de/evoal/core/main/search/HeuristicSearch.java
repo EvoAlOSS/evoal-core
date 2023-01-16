@@ -31,7 +31,6 @@ import io.jenetics.engine.*;
 import io.jenetics.stat.MinMax;
 import io.jenetics.util.Factory;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.deltaspike.core.api.provider.BeanProvider;
 
 import javax.enterprise.context.Dependent;
 import javax.enterprise.inject.Instance;
@@ -97,7 +96,7 @@ public class HeuristicSearch {
 	@Inject
 	private AltererFactory factory;
 
-	// TODO @Inject
+	@Inject
 	private Instance<List<Constraint>> constraints;
 
 
@@ -109,7 +108,7 @@ public class HeuristicSearch {
 
         final Factory<Genotype<?>> gtf = encoding.encoding();
 
-		//final Constraint<?, FitnessValue> constraint = new ConstraintList(constraints.get());
+		final Constraint<?, FitnessValue> constraint = new ConstraintList(constraints.get());
 
         final Engine<?, FitnessValue> engine= Engine.builder(this.fitnessFunction, encoding)
 											.alterers(flattenAltererMap())
@@ -117,7 +116,7 @@ public class HeuristicSearch {
 											.survivorsSelector(this.survivorSelector)
 											.optimize(maximize ? Optimize.MAXIMUM : Optimize.MINIMUM)
 											.populationSize(sizeOfPopulation)
-// TODO											.constraint(constraint)
+											.constraint(constraint)
 											.maximalPhenotypeAge(maximumAge)
 											.executor(executor)
 											.build();
