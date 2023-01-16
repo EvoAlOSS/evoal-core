@@ -25,9 +25,9 @@ public class Constraints {
      * @param properties Properties to use
      * @return A non-null list of constraint results.
      */
-    public List<ConstraintResult> apply(final Properties properties) {
+    public List<ConstraintResult> apply(final Properties genotype, final Properties fitness) {
         return constraints.stream()
-                .map(c -> c.apply(properties))
+                .map(c -> c.apply(genotype, fitness))
                 .collect(Collectors.toList());
     }
 }

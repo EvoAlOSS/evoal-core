@@ -17,7 +17,7 @@ public interface CalculationStrategy {
      * @param properties Properties of an individual to check.
      * @return A non-null non-empty list of constraint handling results.
      */
-    public @NonNull CalculationResult calculate(final Properties properties);
+    public @NonNull CalculationResult calculate(final Properties genotype, final Properties fitness);
 
     /**
      * Initialises the strategy with the constraint and the calculation configuration.

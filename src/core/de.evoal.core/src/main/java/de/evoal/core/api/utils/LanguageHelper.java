@@ -5,6 +5,8 @@ import de.evoal.languages.model.instance.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.function.Predicate;
+
 /**
  * Helper class for processing eal files.
  */
@@ -77,4 +79,7 @@ public final class LanguageHelper {
         return (T) current;
     }
 
+    public static Predicate<? super Value> filterInstanceByType(final String instanceTypeName) {
+        return i -> instanceTypeName.equals(((Instance)i).getName().getName());
+    }
 }

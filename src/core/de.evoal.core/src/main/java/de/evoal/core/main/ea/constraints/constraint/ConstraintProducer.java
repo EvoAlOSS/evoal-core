@@ -1,5 +1,7 @@
 package de.evoal.core.main.ea.constraints.constraint;
 
+import de.evoal.core.api.board.BlackboardEntry;
+import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.core.api.ea.constraints.model.Constraint;
 import de.evoal.core.api.ea.constraints.model.Constraints;
 import de.evoal.core.api.ea.codec.CustomCodec;
@@ -7,12 +9,18 @@ import de.evoal.core.api.ea.constraints.model.DataConstraints;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
+import javax.inject.Named;
 
 import de.evoal.core.main.ea.constraints.el.ElHelper;
+import de.evoal.core.main.ea.fitness.JeneticsFitnessFunction;
 import de.evoal.languages.model.ddl.DataDescription;
 import de.evoal.languages.model.ddl.FunctionName;
 import de.evoal.languages.model.el.Call;
 import de.evoal.core.main.ea.constraints.constraint.ast.ConditionConverter;
+import de.evoal.languages.model.instance.Array;
+import de.evoal.languages.model.instance.Attribute;
+import de.evoal.languages.model.instance.DataReference;
+import de.evoal.languages.model.instance.Instance;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Objects;
@@ -21,13 +29,16 @@ import java.util.Optional;
 @ApplicationScoped
 @Slf4j
 public class ConstraintProducer {
-    private PropertiesSpecification specification;
+    private PropertiesSpecification fitnessSpec;
+    private PropertiesSpecification genoSpec;
 
     @Produces
     @ApplicationScoped
     public Constraints create(final DataConstraints constraints,
-                              final CustomCodec codec) {
-        this.specification = specification;
+                              @Named("genotype-specification") final PropertiesSpecification genoSpec,
+                              @ConfigurationValue(entry = BlackboardEntry.EA_CONFIGURATION, access = "algorithm.fitness") final Instance fitnessConfig) {
+        this.genoSpec = genoSpec;
+        this.fitnessSpec = toInnerSpecification(fitnessConfig);
 
         final Constraints result = new Constraints();
 
@@ -51,6 +62,25 @@ public class ConstraintProducer {
         return result;
     }
 
+    private PropertiesSpecification toInnerSpecification(final Instance fitnessConfig) {
+        final Attribute subFunction = fitnessConfig.findAttribute("function");
+
+        if(subFunction != null) {
+            return toInnerSpecification((Instance)subFunction.getValue());
+        }
+
+        final Attribute mapping = fitnessConfig.findAttribute("maps-to");
+
+        return PropertiesSpecification.builder()
+                        .add(((Array)mapping.getValue())
+                                            .getValues()
+                                            .stream()
+                                            .map(DataReference.class::cast)
+                                            .map(DataReference::getDefinition)
+                        )
+                        .build();
+    }
+
     private Optional<Constraint> convert(final Call constraint, DataDescription context) {
         if(constraint.getParameters().size() != 2) {
             log.error("Constraint has more than two parameters. Skipping.");
@@ -60,7 +90,7 @@ public class ConstraintProducer {
         final Constraint result = new Constraint();
         result.setGroup(ElHelper.findString(constraint.getParameters().get(1)));
 
-        final ConditionConverter converter = new ConditionConverter(specification, context);
+        final ConditionConverter converter = new ConditionConverter(genoSpec, fitnessSpec, context);
         converter.doSwitch(constraint.getParameters().get(0));
 
         result.setFunction(converter.getFunction());

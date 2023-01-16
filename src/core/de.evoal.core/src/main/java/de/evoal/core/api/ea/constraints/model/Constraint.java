@@ -5,7 +5,7 @@ import de.evoal.core.api.properties.PropertySpecification;
 import lombok.Data;
 
 import java.util.List;
-import java.util.function.Function;
+import java.util.function.BiFunction;
 
 /**
  * A single evaluable constraint. A constraint ca be applied to an individual
@@ -26,7 +26,7 @@ public class Constraint {
     /**
      * The applicable constraint function.
      */
-    private Function<Properties, Object> function;
+    private BiFunction<Properties, Properties, Object> function;
 
     /**
      * List of used properties.
@@ -39,11 +39,11 @@ public class Constraint {
      * @param properties The individual to check.
      * @return The result of the constraint's evaluation.
      */
-    public ConstraintResult apply(final Properties properties) {
+    public ConstraintResult apply(final Properties genotypeProps, final Properties fitnessProps) {
         final ConstraintResult result = new ConstraintResult();
 
         result.setConstraint(this);
-        result.setComparisonDifference(((Number)function.apply(properties)).doubleValue());
+        result.setComparisonDifference(((Number)function.apply(genotypeProps, fitnessProps)).doubleValue());
         result.getUsedProperties().addAll(usedProperties);
         result.setType(getConstraintType());
 

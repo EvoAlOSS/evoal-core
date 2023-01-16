@@ -322,6 +322,8 @@
 						<arg>io.jenetics.base/io.jenetics.internal.util=de.evoal.core</arg>
 						<arg>--add-exports</arg>
 						<arg>io.jenetics.base/io.jenetics.internal.collection=de.evoal.core</arg>
+						<arg>--add-exports</arg>
+						<arg>org.eclipse.xtext.util/org.eclipse.xtext.util=de.evoal.core</arg>
 					</compilerArgs>
 					<forceJavacCompilerUse>true</forceJavacCompilerUse>
 				</configuration>

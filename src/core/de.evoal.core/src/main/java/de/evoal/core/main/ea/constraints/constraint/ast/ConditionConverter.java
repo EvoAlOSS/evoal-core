@@ -16,17 +16,19 @@ import de.evoal.languages.model.el.util.ELSwitch;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.function.Function;
+import java.util.function.BiFunction;
 
 public class ConditionConverter extends ELSwitch<Object> {
-    private Function<Properties, Object> function;
+    private BiFunction<Properties, Properties, Object> function;
     private final List<PropertySpecification> usedProperties = new ArrayList<>();
-    private final PropertiesSpecification specification;
+    private final PropertiesSpecification genoSpec;
+    private final PropertiesSpecification fitnessSpec;
     private final DataDescription context;
     private ConstraintType type;
 
-    public ConditionConverter(final PropertiesSpecification specification, final DataDescription context) {
-        this.specification = specification;
+    public ConditionConverter(final PropertiesSpecification genoSpec, final PropertiesSpecification fitnessSpec, final DataDescription context) {
+        this.genoSpec = genoSpec;
+        this.fitnessSpec = fitnessSpec;
         this.context = context;
     }
 
@@ -70,20 +72,20 @@ public class ConditionConverter extends ELSwitch<Object> {
     public Object caseComparisonExpression(ComparisonExpression object) {
         Requirements.requireSize(object.getComparison(), 1);
 
-        final Function<Properties, Object> leftValue = (Function<Properties, Object>) doSwitch(object.getLeftOperand());
-        final Function<Properties, Object> rightValue = (Function<Properties, Object>) doSwitch(object.getComparison().get(0).getSubExpression());
+        final BiFunction<Properties, Properties, Object> leftValue = (BiFunction<Properties, Properties, Object>) doSwitch(object.getLeftOperand());
+        final BiFunction<Properties, Properties, Object> rightValue = (BiFunction<Properties, Properties, Object>) doSwitch(object.getComparison().get(0).getSubExpression());
 
         switch (object.getComparison().get(0).getOperator()) {
             case EQUAL:
             case GREATER_EQUAL:
             case GREATER_THAN: {
-                function = properties -> minus(leftValue.apply(properties), rightValue.apply(properties));
+                function = (gen, fit) -> minus(leftValue.apply(gen, fit), rightValue.apply(gen, fit));
                 break;
             }
             case LESS_EQUAL:
             case LESS_THAN:
             {
-                function = properties -> minus(rightValue.apply(properties), leftValue.apply(properties));
+                function = (gen, fit) -> minus(rightValue.apply(gen, fit), leftValue.apply(gen, fit));
                 break;
             }
             case UNEQUAL: {
@@ -114,22 +116,22 @@ public class ConditionConverter extends ELSwitch<Object> {
 
     @Override
     public Object caseAddOrSubtractExpression(final AddOrSubtractExpression object) {
-        Function<Properties, Object> value = (Function<Properties, Object>) doSwitch(object.getLeftOperand());
+        BiFunction<Properties, Properties, Object> value = (BiFunction<Properties, Properties, Object>) doSwitch(object.getLeftOperand());
 
         for(int i = 0; i < object.getOperators().size(); ++i) {
             final AddOrSubtractOperator operator = object.getOperators().get(i);
-            final Function<Properties, Object> rOp = (Function<Properties, Object>) doSwitch(object.getOperands().get(i));
+            final BiFunction<Properties, Properties, Object> rOp = (BiFunction<Properties, Properties, Object>) doSwitch(object.getOperands().get(i));
 
             switch (operator) {
                 case ADD: {
-                    final Function<Properties, Object> lOp = value;
-                    value = properties -> add(lOp.apply(properties), rOp.apply(properties));
+                    final BiFunction<Properties, Properties, Object> lOp = value;
+                    value = (gen, fit) -> add(lOp.apply(gen, fit), rOp.apply(gen, fit));
                     break;
                 }
 
                 case SUBTRACT: {
-                    final Function<Properties, Object> lOp = value;
-                    value = properties -> minus(lOp.apply(properties), rOp.apply(properties));
+                    final BiFunction<Properties, Properties, Object> lOp = value;
+                    value = (gen, fit) -> minus(lOp.apply(gen, fit), rOp.apply(gen, fit));
                     break;
                 }
             }
@@ -139,28 +141,28 @@ public class ConditionConverter extends ELSwitch<Object> {
 
     @Override
     public Object caseMultiplyDivideModuloExpression(MultiplyDivideModuloExpression object) {
-        Function<Properties, Object> value = (Function<Properties, Object>) doSwitch(object.getLeftOperand());
+        BiFunction<Properties, Properties, Object> value = (BiFunction<Properties, Properties, Object>) doSwitch(object.getLeftOperand());
 
         for(int i = 0; i < object.getOperators().size(); ++i) {
             final MultiplyDivideModuloOperator operator = object.getOperators().get(i);
-            final Function<Properties, Object> rOp = (Function<Properties, Object>) doSwitch(object.getOperands().get(i));
+            final BiFunction<Properties, Properties, Object> rOp = (BiFunction<Properties, Properties, Object>) doSwitch(object.getOperands().get(i));
 
             switch (operator) {
                 case DIVIDE: {
-                    final Function<Properties, Object> lOp = value;
-                    value = properties -> divide(lOp.apply(properties), rOp.apply(properties));
+                    final BiFunction<Properties, Properties, Object> lOp = value;
+                    value = (gen, fit) -> divide(lOp.apply(gen, fit), rOp.apply(gen, fit));
                     break;
                 }
 
                 case MODULO: {
-                    final Function<Properties, Object> lOp = value;
-                    value = properties -> modulo(lOp.apply(properties), rOp.apply(properties));
+                    final BiFunction<Properties, Properties, Object> lOp = value;
+                    value = (gen, fit) -> modulo(lOp.apply(gen, fit), rOp.apply(gen, fit));
                     break;
                 }
 
                 case MULTIPLY: {
-                    final Function<Properties, Object> lOp = value;
-                    value = properties -> multiply(lOp.apply(properties), rOp.apply(properties));
+                    final BiFunction<Properties, Properties, Object> lOp = value;
+                    value = (gen, fit) -> multiply(lOp.apply(gen, fit), rOp.apply(gen, fit));
                     break;
                 }
             }
@@ -170,20 +172,20 @@ public class ConditionConverter extends ELSwitch<Object> {
 
     @Override
     public Object casePowerOfExpression(PowerOfExpression object) {
-        Function<Properties, Object> value = (Function<Properties, Object>) doSwitch(object.getLeftOperand());
+        BiFunction<Properties, Properties, Object> value = (BiFunction<Properties, Properties, Object>) doSwitch(object.getLeftOperand());
 
         if(object.getRightOperand() != null) {
-            final Function<Properties, Object> lOp = value;
-            final Function<Properties, Object> rOp = (Function<Properties, Object>) doSwitch(object.getRightOperand());
+            final BiFunction<Properties, Properties, Object> lOp = value;
+            final BiFunction<Properties, Properties, Object> rOp = (BiFunction<Properties, Properties, Object>) doSwitch(object.getRightOperand());
 
-            value = properties -> pow(lOp.apply(properties), rOp.apply(properties));
+            value = (gen, fit) -> pow(lOp.apply(gen, fit), rOp.apply(gen, fit));
         }
         return value;
     }
 
     @Override
     public Object caseUnaryAddOrSubtractExpression(UnaryAddOrSubtractExpression object) {
-        Function<Properties, Object> value = (Function<Properties, Object>) doSwitch(object.getSubExpression());
+        BiFunction<Properties, Properties, Object> value = (BiFunction<Properties, Properties, Object>) doSwitch(object.getSubExpression());
 
         for(final AddOrSubtractOperator operator : object.getOperators()) {
             switch (operator) {
@@ -193,8 +195,8 @@ public class ConditionConverter extends ELSwitch<Object> {
                 }
 
                 case SUBTRACT: {
-                    final Function<Properties, Object> lOp = value;
-                    value = properties -> minus(0, lOp.apply(properties));
+                    final BiFunction<Properties, Properties, Object> lOp = value;
+                    value = (gen, fit) -> minus(0, lOp.apply(gen, fit));
                     break;
                 }
             }
@@ -203,17 +205,17 @@ public class ConditionConverter extends ELSwitch<Object> {
 
     @Override
     public Object caseIntegerLiteral(final IntegerLiteral object) {
-        return (Function<Properties, Object>) properties -> (double)object.getValue();
+        return (BiFunction<Properties, Properties, Object>) (gen, fit) -> (double)object.getValue();
     }
 
     @Override
     public Object caseDoubleLiteral(final DoubleLiteral object) {
-        return (Function<Properties, Object>) properties -> object.getValue();
+        return (BiFunction<Properties, Properties, Object>) (gen, fit) -> object.getValue();
     }
 
     @Override
     public Object caseStringLiteral(final StringLiteral object) {
-        return (Function<Properties, Object>) properties -> Double.parseDouble(object.getValue());
+        return (BiFunction<Properties, Properties, Object>) (gen, fit) -> Double.parseDouble(object.getValue());
     }
 
     @Override
@@ -221,24 +223,45 @@ public class ConditionConverter extends ELSwitch<Object> {
         if(object instanceof SelfReference) {
             Requirements.requireNotNull(context);
             final String propertyName = context.getName();
-            final int propertyIndex = specification.indexOf(propertyName);
+            if(fitnessSpec.contains(new PropertySpecification(context.getName(), context))) {
+                final int propertyIndex = fitnessSpec.indexOf(propertyName);
 
-            usedProperties.add(specification.getProperties().get(propertyIndex));
+                usedProperties.add(fitnessSpec.getProperties().get(propertyIndex));
 
-            return (Function<Properties, Object>) properties -> properties.get(propertyIndex);
+                return (BiFunction<Properties, Properties, Object>) (gen, fit) -> fit.get(propertyIndex);
+
+            } else {
+                final int propertyIndex = genoSpec.indexOf(propertyName);
+
+                usedProperties.add(genoSpec.getProperties().get(propertyIndex));
+
+                return (BiFunction<Properties, Properties, Object>) (gen, fit) -> gen.get(propertyIndex);
+
+            }
         }
 
         if(!(object instanceof DataReference)) {
             throw new IllegalStateException("Value reference is not a data reference.");
         }
 
-        final DataReference reference = (DataReference)object;
-        final String propertyName = reference.getDefinition().getName();
-        final int propertyIndex = specification.indexOf(propertyName);
+        final DataReference reference = (DataReference) object;
+        final DataDescription description = reference.getDefinition();
+        if(fitnessSpec.contains(new PropertySpecification(description.getName(), description))) {
+            final String propertyName = description.getName();
+            final int propertyIndex = fitnessSpec.indexOf(propertyName);
 
-        usedProperties.add(specification.getProperties().get(propertyIndex));
+            usedProperties.add(fitnessSpec.getProperties().get(propertyIndex));
 
-        return (Function<Properties, Object>) properties -> properties.get(propertyIndex);
+            return (BiFunction<Properties, Properties, Object>) (gen, fit) -> fit.get(propertyIndex);
+        } else {
+            final String propertyName = description.getName();
+            final int propertyIndex = genoSpec.indexOf(propertyName);
+
+            usedProperties.add(genoSpec.getProperties().get(propertyIndex));
+
+            return (BiFunction<Properties, Properties, Object>) (gen, fit) -> gen.get(propertyIndex);
+
+        }
     }
 
     @Override
@@ -256,7 +279,7 @@ public class ConditionConverter extends ELSwitch<Object> {
         return doSwitch(object.getSubExpression());
     }
 
-    public Function<Properties, Object> getFunction() {
+    public BiFunction<Properties, Properties, Object> getFunction() {
         return function;
     }
 

@@ -16,6 +16,7 @@ import de.evoal.languages.model.eal.impl.EALPackageImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 
@@ -61,6 +62,9 @@ public class EvolutionaryAlgorithmModelLoader {
 
             final Resource resource = resourceSet.getResource(modelURI, true);
             resource.load(resourceSet.getLoadOptions());
+
+            resourceSet.getResources()
+                       .forEach(EcoreUtil::resolveAll);
             if(!resource.getErrors().isEmpty()) {
                 for(Resource.Diagnostic diagnostic : resource.getErrors()) {
                     log.error("Error while processing rule '{}': {}", configurationFile, diagnostic);
@@ -70,6 +74,10 @@ public class EvolutionaryAlgorithmModelLoader {
                 for(Resource.Diagnostic diagnostic : resource.getWarnings()) {
                     log.error("Warning while processing rule '{}': {}", configurationFile, diagnostic);
                 }
+            }
+
+            if(!resource.getErrors().isEmpty()) {
+                throw new IllegalArgumentException("EAL file contains errors. Please fix the file.");
             }
 
             model = (EAModel) resource.getContents().get(0);

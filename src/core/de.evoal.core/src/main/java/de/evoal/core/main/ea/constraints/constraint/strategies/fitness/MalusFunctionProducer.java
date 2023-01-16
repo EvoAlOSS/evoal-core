@@ -17,6 +17,7 @@ import javax.enterprise.inject.Produces;
 
 import de.evoal.core.main.ea.constraints.constraint.strategies.fitness.internal.MalusForFitnessFunction;
 import de.evoal.core.main.ea.constraints.constraint.utils.ConfigurationUtils;
+import de.evoal.languages.model.instance.Array;
 import de.evoal.languages.model.instance.Attribute;
 import de.evoal.languages.model.instance.Instance;
 import de.evoal.languages.model.instance.Misc;
@@ -29,7 +30,7 @@ import java.util.*;
 public class MalusFunctionProducer {
     @ApplicationScoped @Produces
     public MalusForFitnessStrategy create(
-            final @ConfigurationValue(entry = BlackboardEntry.EA_CONFIGURATION, access = "algorithm.constraint_handling") Instance handlerConfiguration,
+            final @ConfigurationValue(entry = BlackboardEntry.EA_CONFIGURATION, access = "algorithm.handlers") Array handlers,
             final Constraints constraints,
             final @Named("genotype-specification") PropertiesSpecification source,
             final @Named("output-dependencies") PropertiesDependencies dependencies,
@@ -38,10 +39,10 @@ public class MalusFunctionProducer {
         final MalusForFitnessStrategy resultingFunction = new MalusForFitnessStrategy(target.size());
 
         // collect group information to handle
-        final List<Attribute> groups = ConfigurationUtils.findByHandlerName(handlerConfiguration, "malusForFitness");
+        final List<Instance> groups = ConfigurationUtils.findConstraintHandlerByHandlingStrategy(handlers, "malus-for-fitness");
 
         // collect all constraints for each index (of the appropriate groups)
-        final List<List<Pair<Constraint, Attribute>>> constraintsForIndex = new ArrayList<>(source.size());
+        final List<List<Pair<Constraint, Instance>>> constraintsForIndex = new ArrayList<>(source.size());
         for(int index = 0; index < source.size(); ++index) {
             constraintsForIndex.add(new ArrayList<>());
         }
@@ -49,7 +50,7 @@ public class MalusFunctionProducer {
         for(final Constraint constraint : constraints.getConstraints()) {
             final String group = constraint.getGroup();
 
-            for(final Attribute info : groups) {
+            for(final Instance info : groups) {
                 if(((Misc)info.getName()).getName().equals(group)) {
                     for(final PropertySpecification ps : constraint.getUsedProperties()) {
                         final int index = source.indexOf(ps);
@@ -66,9 +67,9 @@ public class MalusFunctionProducer {
             for(final PropertySpecification ips : dependencies.get(target.getProperties().get(index))) {
                 final int ipsIndex = source.indexOf(ips);
 
-                for(final Pair<Constraint, Attribute> pair : constraintsForIndex.get(ipsIndex)) {
+                for(final Pair<Constraint, Instance> pair : constraintsForIndex.get(ipsIndex)) {
                     final Constraint constraint = pair.getFirst();
-                    final Attribute configuration = pair.getSecond();
+                    final Instance configuration = pair.getSecond();
 
                     // prevent constraints from being applied multiple times per fitness value
                     if(applied.contains(constraint)) {
@@ -78,9 +79,9 @@ public class MalusFunctionProducer {
 
                     final CalculationStrategy calculation = factory.create(constraint);
 
-                    final String handlerName = LanguageHelper.lookup((Instance) configuration.getValue(), "name");
+                    final String handlerName = LanguageHelper.lookup(configuration, "name");
 
-                    final MalusFunction strategy = new MalusForFitnessFunction(constraint, LanguageHelper.lookup((Instance)configuration.getValue(), "handling"), index) ;
+                    final MalusFunction strategy = new MalusForFitnessFunction(constraint, LanguageHelper.lookup(configuration, "handling"), index) ;
                     resultingFunction.add(index, strategy);
                }
             }

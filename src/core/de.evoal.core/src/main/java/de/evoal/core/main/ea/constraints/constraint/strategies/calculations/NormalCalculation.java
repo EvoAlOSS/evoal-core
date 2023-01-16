@@ -18,8 +18,8 @@ public class NormalCalculation implements CalculationStrategy {
     private Constraint constraint;
 
     @Override
-    public @NonNull CalculationResult calculate(final Properties properties) {
-        return new CalculationResult(constraint.apply(properties));
+    public @NonNull CalculationResult calculate(final Properties genotype, final Properties fitness) {
+        return new CalculationResult(constraint.apply(genotype, fitness));
     }
 
     @Override

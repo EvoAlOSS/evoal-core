@@ -94,7 +94,8 @@ public class ConstraintStatistics implements StatisticsWriter {
                 population.stream()
                         .map(Phenotype::genotype)
                         .map(g -> (Properties)codec.decode(g))
-                        .map(strategy::calculate)
+                        // TODO .map(strategy::calculate)
+                        .map(CalculationResult.class::cast)
                         .collect(Collectors.toList());
 
             final long invalid = calculationResults

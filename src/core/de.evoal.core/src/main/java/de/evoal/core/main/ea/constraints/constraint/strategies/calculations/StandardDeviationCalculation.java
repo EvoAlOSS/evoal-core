@@ -39,13 +39,14 @@ public class StandardDeviationCalculation implements CalculationStrategy {
     private List<Pair<Integer, Double>> allowedDeviations;
 
     @Override
-    public @NonNull CalculationResult calculate(final Properties properties) {
-        return new CalculationResult(calculateMinimalDifference(0, new HashMap<>(), properties));
+    public @NonNull CalculationResult calculate(final Properties genotype, final Properties fitness) {
+        return new CalculationResult(calculateMinimalDifference(0, new HashMap<>(), genotype, fitness));
     }
 
-    private ConstraintResult calculateMinimalDifference(final int index, final Map<Integer, Double> differences, final Properties properties) {
+    // TODO Adapt fitness
+    private ConstraintResult calculateMinimalDifference(final int index, final Map<Integer, Double> differences, final Properties genotype, final Properties fitness) {
         if(index == allowedDeviations.size()) {
-            final Properties adaptedProperties = new Properties(properties);
+            final Properties adaptedProperties = new Properties(genotype);
 
             for(final Map.Entry<Integer, Double> entry : differences.entrySet()) {
                 final Integer propIndex = entry.getKey();
@@ -53,14 +54,14 @@ public class StandardDeviationCalculation implements CalculationStrategy {
                 adaptedProperties.put(propIndex, value);
             }
 
-            return constraint.apply(adaptedProperties);
+            return constraint.apply(adaptedProperties, fitness);
         }
 
         final Pair<Integer, Double> deviation = allowedDeviations.get(index);
 
         // no deviation
         differences.put(deviation.getFirst(), 0.0);
-        ConstraintResult minimalResult = calculateMinimalDifference(index + 1, differences, properties);
+        ConstraintResult minimalResult = calculateMinimalDifference(index + 1, differences, genotype, fitness);
 
         if(CalculationResult.isSuccessful(minimalResult) || deviation.getSecond() == 0.0) {
             return minimalResult;
@@ -69,7 +70,7 @@ public class StandardDeviationCalculation implements CalculationStrategy {
         // - deviation
         {
             differences.put(deviation.getFirst(), -deviation.getSecond() * factor);
-            ConstraintResult result = calculateMinimalDifference(index + 1, differences, properties);
+            ConstraintResult result = calculateMinimalDifference(index + 1, differences, genotype, fitness);
 
             if(CalculationResult.isSuccessful(result)) {
                 return result;
@@ -81,7 +82,7 @@ public class StandardDeviationCalculation implements CalculationStrategy {
         // + deviation
         {
             differences.put(deviation.getFirst(), deviation.getSecond() * factor);
-            ConstraintResult result = calculateMinimalDifference(index + 1, differences, properties);
+            ConstraintResult result = calculateMinimalDifference(index + 1, differences, genotype, fitness);
 
             if(CalculationResult.isSuccessful(result)) {
                 return result;
