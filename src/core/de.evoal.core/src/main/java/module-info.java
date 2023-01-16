@@ -51,11 +51,11 @@ module de.evoal.core {
     exports de.evoal.core.api.ea.fitness.comparator;
     exports de.evoal.core.api.ea.initial;
     exports de.evoal.core.api.properties;
+    exports de.evoal.core.api.properties.info;
     exports de.evoal.core.api.properties.io;
     exports de.evoal.core.api.properties.stream;
     exports de.evoal.core.api.statistics;
     exports de.evoal.core.api.utils;
-
 
     opens de.evoal.core.api.board to weld.core.impl;
     opens de.evoal.core.api.cdi to weld.core.impl;
@@ -92,7 +92,5 @@ module de.evoal.core {
     opens de.evoal.core.main.statistics.writer.csv to weld.core.impl;
     opens de.evoal.core.api.ea.correlations to weld.core.impl;
     opens de.evoal.core.api.ea.constraints.calculation to weld.core.impl;
-    exports de.evoal.core.main.ea.fitness;
-    exports de.evoal.core.api.properties.info;
     opens de.evoal.core.api.properties.info to weld.core.impl;
 }

@@ -2,6 +2,7 @@ package de.evoal.core.main.ea.fitness;
 
 import de.evoal.core.api.board.Blackboard;
 import de.evoal.core.api.board.BlackboardEntry;
+import de.evoal.core.api.ea.fitness.FitnessDecorator;
 import de.evoal.core.api.ea.fitness.FitnessFunction;
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;

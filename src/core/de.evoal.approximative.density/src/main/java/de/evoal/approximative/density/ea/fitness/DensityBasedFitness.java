@@ -4,11 +4,10 @@ import de.evoal.approximative.density.model.DensityData;
 import de.evoal.core.api.ea.fitness.FitnessFunction;
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;
-import de.evoal.core.api.properties.PropertySpecification;
 import de.evoal.core.api.properties.info.PropertiesRanges;
 import de.evoal.core.api.utils.LanguageHelper;
 import de.evoal.core.api.utils.Requirements;
-import de.evoal.core.main.ea.fitness.FitnessDecorator;
+import de.evoal.core.api.ea.fitness.FitnessDecorator;
 import de.evoal.languages.model.instance.Instance;
 import de.evoal.surrogate.api.configuration.PartialFunctionConfiguration;
 import de.evoal.surrogate.api.function.FunctionCombiner;
@@ -18,9 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import javax.enterprise.inject.Vetoed;
 import javax.inject.Inject;
-import javax.inject.Named;
 import java.util.List;
-import java.util.Map;
 import java.util.function.BiFunction;
 
 @Slf4j

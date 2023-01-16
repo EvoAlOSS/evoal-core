@@ -1,4 +1,4 @@
-package de.evoal.core.main.ea.fitness;
+package de.evoal.core.api.ea.fitness;
 
 import de.evoal.core.api.cdi.BeanFactory;
 import de.evoal.core.api.ea.fitness.FitnessFunction;
