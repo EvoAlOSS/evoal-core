@@ -73,68 +73,107 @@ public final class KernelHelper {
 		return new GaussianKernel(sigma);
 	}
 
+	public static MercerKernel<double []> toHellingerKernel(final Map<String, Object> parameters) {
+		log.info("  Using kernel 'hellinger'");
+		final double sigma = (double) parameters.get(SIGMA_PARAMETER);
+		log.info("    parameter σ={}.", sigma);
+
+		return new HellingerKernel();
+	}
+
+	public static MercerKernel<double []> toHyperbolicTangentKernel(final Map<String, Object> parameters) {
+		log.info("  Using kernel 'hyperbolic-tangent'");
+		final double sigma = (double) parameters.get(SIGMA_PARAMETER);
+		log.info("    parameter σ={}.", sigma);
+		final double scale = (double)parameters.get(SCALE_PARAMETER);
+		final double offset = (double)parameters.get(OFFSET_PARAMETER);
+
+		log.info("    parameter scale is {} and offset is {}.", scale, offset);
+
+		return new HyperbolicTangentKernel(scale, offset);
+	}
+
+	public static MercerKernel<double []> toLaplacianKernel(final Map<String, Object> parameters) {
+		log.info("  Using kernel 'laplacian'");
+		final double sigma = (double) parameters.get(SIGMA_PARAMETER);
+
+		log.info("    parameter σ is {}.", sigma);
+
+		return new LaplacianKernel(sigma);
+	}
+
+	public static MercerKernel<double []> toLinearKernel(final Map<String, Object> parameters) {
+		log.info("  Using kernel 'linear'");
+		final double sigma = (double) parameters.get(SIGMA_PARAMETER);
+		log.info("    parameter σ={}.", sigma);
+
+		return new LinearKernel();
+	}
+
+	public static MercerKernel<double []> toPearsonKernel(final Map<String, Object> parameters) {
+		log.info("  Using kernel 'pearson'");
+		final double sigma = (double) parameters.get(SIGMA_PARAMETER);
+		final double omega = (double)parameters.get("ω");
+		log.info("    parameter ω={} and σ={}.", omega, sigma);
+
+		return new PearsonKernel(omega, sigma);
+	}
+
+	public static MercerKernel<double []> toPolynomialKernel(final Map<String, Object> parameters) {
+		log.info("  Using kernel 'polynomial'");
+		final double sigma = (double) parameters.get(SIGMA_PARAMETER);
+		final int degree = (int)parameters.get(DEGREE_PARAMETER);
+		final double scale = (double)parameters.get(SCALE_PARAMETER);
+		final double offset = (double)parameters.get(OFFSET_PARAMETER);
+
+		log.info("    parameter σ={}.", sigma);
+		log.info("    parameter degeree is {}, scale is {}, and offset is {}.", degree, scale, offset);
+
+		return new PolynomialKernel(degree, scale, offset);
+	}
+
+	public static MercerKernel<double []> toThinPlateSplineKernel(final Map<String, Object> parameters) {
+		log.info("  Using kernel 'thin-plate-spline'");
+		final double sigma = (double) parameters.get(SIGMA_PARAMETER);
+		log.info("    parameter σ={}.", sigma);
+
+		return new ThinPlateSplineKernel(sigma);
+	}
+
 	public static MercerKernel<double []> toKernel(final Map<String, Object> parameters, final Map<String, Object> state) {
 		log.info("  Using kernel '{}'", state.get(KERNEL_PARAMETER));
 
 		switch((String)state.get(KERNEL_PARAMETER)) {
 		case "gaussian": {
-			final double sigma = (double)parameters.get(SIGMA_PARAMETER);
-
-			log.info("    parameter σ={}.", sigma);
-
-			return new GaussianKernel(sigma);
+			return toGaussianKernel(parameters);
 		}
 
 		case "hellinger": {
-			return new HellingerKernel();
+			return toHellingerKernel(parameters);
 		}
 		
 		case "hyperbolic-tangent": {
-			final double scale = (double)parameters.get(SCALE_PARAMETER);
-			final double offset = (double)parameters.get(OFFSET_PARAMETER);
-			
-			log.info("    parameter scale is {} and offset is {}.", scale, offset);
-			
-			return new HyperbolicTangentKernel(scale, offset);
+			toHyperbolicTangentKernel(parameters);
 		}
 
 		case "laplacian": {
-			final double sigma = (double)parameters.get(SIGMA_PARAMETER);
-
-			log.info("    parameter sigma is {}.", sigma);
-
-			return new LaplacianKernel(sigma);
+			return toLaplacianKernel(parameters);
 		}
 
 		case "linear": {
-			return new LinearKernel();
+			return toLinearKernel(parameters);
 		}
 
 		case "pearson": {
-			final double omega = (double)parameters.get("omega");
-			final double sigma = (double)parameters.get(SIGMA_PARAMETER);
-			
-			log.info("    parameter ω={} and σ={}.", omega, sigma);
-
-			return new PearsonKernel(omega, sigma);
+			return toPearsonKernel(parameters);
 		}
 
 		case "polynomial": {
-			final int degree = (int)parameters.get(DEGREE_PARAMETER);
-			final double scale = (double)parameters.get(SCALE_PARAMETER);
-			final double offset = (double)parameters.get(OFFSET_PARAMETER);
-			
-			log.info("    parameter degeree is {}, scale is {}, and offset is {}.", degree, scale, offset);
-
-			return new PolynomialKernel(degree, scale, offset);
+			return toPolynomialKernel(parameters);
 		}
 
 		case "thin-plate-spline": {
-			final double sigma = (double)parameters.get(SIGMA_PARAMETER);
-
-			log.info("    parameter σ={}.", sigma);
-
-			return new ThinPlateSplineKernel(sigma);
+			return toThinPlateSplineKernel(parameters);
 		}
 		}
 		 
