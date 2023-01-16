@@ -1,7 +1,7 @@
 #!/bin/bash
 
-if [ "$#" -ne 6 ]; then
-    echo "Usage: $0 <execution-folder> <ea-file> <mll-file> <pre-trained.pson> <training-points.json> <output>"
+if [ "$#" -ne 7 ]; then
+    echo "Usage: $0 <execution-folder> <ea-file> <mll-file> <pre-trained.pson> <training-points.json> <output> <constraint-folder>"
     exit 1
 fi
 
@@ -25,4 +25,5 @@ java -Dorg.jboss.logging.provider=slf4j\
      "-Bsurrogate:configuration-file=$3" \
      "-Bsurrogate:pre-trained=$4" \
      "-Bsurrogate:training-data=$5"\
-     "-Bcore:evaluation-output-folder=$6"
+     "-Bcore:evaluation-output-folder=$6" \
+     "-Bcore:constraint-folder=$7"

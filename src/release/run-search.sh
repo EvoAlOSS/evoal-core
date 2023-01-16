@@ -21,4 +21,4 @@ java -Dorg.jboss.logging.provider=slf4j\
      -m de.evoal.core/de.evoal.core.main.Evoal \
      "-Bcore:main=heuristic-search" \
      "-Bcore:ea-configuration-file=$2" \
-     "-Bcore:evaluation-output-folder=$3""
+     "-Bcore:evaluation-output-folder=$3"
