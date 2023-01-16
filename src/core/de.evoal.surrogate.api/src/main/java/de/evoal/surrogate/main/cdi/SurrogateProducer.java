@@ -6,9 +6,7 @@ import de.evoal.core.api.properties.info.PropertiesDependencies;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.properties.PropertySpecification;
 import de.evoal.core.api.utils.Requirements;
-import de.evoal.languages.model.ddl.DataDescription;
 import de.evoal.languages.model.instance.DataReference;
-import de.evoal.languages.model.mll.MachineLearningConfiguration;
 import de.evoal.languages.model.mll.PartialSurrogateFunctionDefinition;
 import de.evoal.languages.model.mll.SurrogateDefinition;
 import de.evoal.surrogate.api.SurrogateBlackboardEntry;
@@ -19,7 +17,6 @@ import de.evoal.surrogate.api.function.FunctionCombiner;
 import de.evoal.surrogate.api.function.PartialSurrogateFunction;
 import de.evoal.surrogate.api.function.SurrogateFunction;
 import de.evoal.surrogate.main.internal.SurrogateFactory;
-import lombok.Data;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.emf.common.util.TreeIterator;
@@ -199,12 +196,12 @@ public class SurrogateProducer {
     }
 
     @Produces @Dependent
-    public SurrogateFunction createSurrogateFunction(final Blackboard board) {
+    public SurrogateFunction createSurrogateFunction(final Blackboard board, @Named("genotype-specification") PropertiesSpecification specification) {
         final SurrogateConfiguration configuration = this.configuration;
 
         Requirements.requireNotNull(configuration);
 
-        return SurrogateFactory.create(configuration, null);
+        return SurrogateFactory.create(configuration, specification);
     }
 
     @Produces @Named("output-dependencies") // FIXME Should be part of core to not wire core and surrogate the hard way.

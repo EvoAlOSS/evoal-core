@@ -9,32 +9,37 @@ import java.util.stream.Stream;
 
 public class PropertiesSpecification {
 	public static class Builder {
+
 		private final Set<PropertySpecification> properties = new TreeSet<>();
+
+
+		private final List<PropertySpecification> orderedProperties = new ArrayList<>(20);
 
 		public Builder() {
 		}
 
-/*
-		public Builder add(final Stream<Pair<String, DataDescription>> specs) {
-			specs.forEach(s -> properties.add(new PropertySpecification(s.getFirst(), s.getSecond())));
-
-			return this;
-		}
-*/
 		public Builder add(final Stream<DataDescription> data) {
-			data.forEach(d -> properties.add(new PropertySpecification(d.getName(), d)));
+			data.map(d -> new PropertySpecification(d.getName(), d))
+				.filter(s -> !properties.contains(s))
+				.peek(properties::add)
+				.forEach(orderedProperties::add);
+
 
 			return this;
 		}
 
 		public Builder add(final PropertiesSpecification specification) {
-			properties.addAll(specification.getProperties());
+			specification.getProperties()
+							.stream()
+							.filter(s -> !properties.contains(s))
+							.peek(properties::add)
+							.forEach(orderedProperties::add);
 
 			return this;
 		}
 
 		public PropertiesSpecification build() {
-			return new PropertiesSpecification(properties);
+			return new PropertiesSpecification(orderedProperties);
 		}
 	}
 

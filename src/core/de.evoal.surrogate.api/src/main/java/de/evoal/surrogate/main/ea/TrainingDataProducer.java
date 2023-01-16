@@ -15,6 +15,7 @@ import java.io.File;
 @ApplicationScoped
 @Slf4j
 public class TrainingDataProducer {
+    /*
     public void setTrainingData(final @Observes BlackboardEntry event, final Blackboard board, final TrainingDataManager manager) {
         if (!event.isSame(SurrogateBlackboardEntry.SURROGATE_TRAINING_DATA_FILE)) {
             return;
@@ -28,4 +29,5 @@ public class TrainingDataProducer {
         // TODO FIXME PROPERTIES
         manager.setTrainingStream(new FileBasedPropertiesStreamSupplier(trainingFile, PropertiesSpecification.builder().build()));
     }
+    */
 }

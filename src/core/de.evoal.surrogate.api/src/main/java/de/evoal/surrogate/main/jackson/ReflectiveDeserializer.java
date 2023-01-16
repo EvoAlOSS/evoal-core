@@ -120,13 +120,14 @@ public class ReflectiveDeserializer extends StdDeserializer<Object> {
         parser.nextValue();
         assertFieldName(parser.getCurrentName(), "value");
 
-        parser.nextToken();
+        //JsonToken tok = parser.nextToken();
 
         final double [] result = new double[size];
         for(int i = 0; i < size; ++i) {
             parser.nextValue();
             result[i] = parser.getValueAsDouble();
         }
+        parser.nextToken();
         assertArrayEnd(parser);
 
         return result;
@@ -144,8 +145,6 @@ public class ReflectiveDeserializer extends StdDeserializer<Object> {
         parser.nextValue();
         assertFieldName(parser.getCurrentName(), "value");
 
-        parser.nextToken();
-
         final double [][] result = new double[size1][size2];
         for(int i = 0; i < size1; ++i) {
             for(int j = 0; j < size2; ++j) {
@@ -153,6 +152,7 @@ public class ReflectiveDeserializer extends StdDeserializer<Object> {
                 result[i][j] = parser.getValueAsDouble();
             }
         }
+        parser.nextToken();
         assertArrayEnd(parser);
 
         return result;

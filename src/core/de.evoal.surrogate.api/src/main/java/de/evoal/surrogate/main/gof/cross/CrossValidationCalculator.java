@@ -3,6 +3,7 @@ package de.evoal.surrogate.main.gof.cross;
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.properties.PropertySpecification;
+import de.evoal.core.api.properties.stream.PropertiesBasedPropertiesPairStreamSupplier;
 import de.evoal.core.api.properties.stream.PropertiesStreamSupplier;
 import de.evoal.core.api.utils.Requirements;
 import de.evoal.surrogate.api.SurrogateInformationCalculator;
@@ -106,11 +107,12 @@ public class CrossValidationCalculator implements SurrogateInformationCalculator
 
 				// sum of prediction errors in this partition for each output property
 				final double[] correctness = new double[fOutput.size()];
-				trainingSupplier.getValidationStream()
+				new PropertiesBasedPropertiesPairStreamSupplier(trainingSupplier.getValidationStream(), fInput, fOutput)
 								.get()
-						  		.forEach(source -> {
+						  		.forEach(pair -> {
+								    final Properties source = pair.getFirst();
 									final Properties predicted = new Properties(fOutput, mapping.apply(source));
-									final Properties calculated = Properties.create(fOutput, source);
+									final Properties calculated = pair.getSecond();
 
 									for (int cvi = 0; cvi < calculated.size(); ++cvi) {
 										//correctness[cvi] = correctness[cvi] + Math.abs((calculated.get(cvi) - predicted.get(cvi)) / calculated.get(cvi));

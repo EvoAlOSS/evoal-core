@@ -31,22 +31,22 @@ public class CrossValidationPropertiesStreamSupplier implements PropertiesStream
      */
     private final PropertiesStreamSupplier trainingData;
 
-    private final long traingDataCount;
+    private final long trainingDataCount;
 
     CrossValidationPropertiesStreamSupplier(final PropertiesStreamSupplier trainingData, final int k) {
         this.trainingData = trainingData;
         this.k = k;
-        this.traingDataCount = trainingData.get().count();
+        this.trainingDataCount = trainingData.get().count();
     }
 
     @Override
     public Stream<Properties> get() {
-        final long partitionRest = traingDataCount % k;
+        final long partitionRest = trainingDataCount % k;
 
         // calculate each partition size
         final long partitionSizes[] = new long[k];
         for(int i = 0; i < k; ++i) {
-            partitionSizes[i] = traingDataCount / k + (i < partitionRest ? 1 : 0);
+            partitionSizes[i] = trainingDataCount / k + (i < partitionRest ? 1 : 0);
         }
 
         // calculate counts
@@ -71,12 +71,12 @@ public class CrossValidationPropertiesStreamSupplier implements PropertiesStream
         return new PropertiesStreamSupplier() {
             @Override
             public Stream<Properties> get() {
-                final long partitionRest = traingDataCount % k;
+                final long partitionRest = trainingDataCount % k;
 
                 // calculate each partition size
                 final long partitionSizes[] = new long[k];
                 for(int i = 0; i < k; ++i) {
-                    partitionSizes[i] = traingDataCount / k + (i < partitionRest ? 1 : 0);
+                    partitionSizes[i] = trainingDataCount / k + (i < partitionRest ? 1 : 0);
                 }
 
                 // calculate counts

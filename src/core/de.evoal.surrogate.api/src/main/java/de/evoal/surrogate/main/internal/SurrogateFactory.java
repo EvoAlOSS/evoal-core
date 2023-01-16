@@ -41,19 +41,29 @@ public final class SurrogateFactory {
 		final List<FunctionCombiner> functions =
 				config.getMappings()
 						  .stream()
-						  .map(layer -> createLayerFunction(layer, trainingPoints))
+						  .map(layer -> createLayerFunction(layer, trainingPoints, null))
 						  .collect(Collectors.toList());
 
 		return new SurrogateFunction(functions);
 	}
 
-	private static FunctionCombiner createLayerFunction(final FunctionCombinerConfiguration config, final PropertiesStreamSupplier trainingPoints) {
+	public static SurrogateFunction create(final @NonNull SurrogateConfiguration config, final PropertiesSpecification specification) {
+		final List<FunctionCombiner> functions =
+				config.getMappings()
+						.stream()
+						.map(layer -> createLayerFunction(layer, null, specification))
+						.collect(Collectors.toList());
+
+		return new SurrogateFunction(functions);
+	}
+
+	private static FunctionCombiner createLayerFunction(final FunctionCombinerConfiguration config, final PropertiesStreamSupplier trainingPoints, final PropertiesSpecification specification) {
 		log.info("Creating mapping function for level {}.", config.getName());
 
 		final List<PartialFunctionConfiguration> subConfiguration = config.getFunctions();
 
 		// map source values to properties
-		final PropertiesSpecification sourceSpecification =
+		final PropertiesSpecification sourceSpecification = specification != null ? specification :
 				mergeSpecifications(subConfiguration.stream()
 													.map(PartialFunctionConfiguration::getInputData));
 

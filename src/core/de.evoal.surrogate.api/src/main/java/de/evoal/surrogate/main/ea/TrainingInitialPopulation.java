@@ -1,11 +1,16 @@
 package de.evoal.surrogate.main.ea;
 
+import de.evoal.core.api.board.Blackboard;
 import de.evoal.core.api.board.BlackboardEntry;
 import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.core.api.ea.codec.CustomCodec;
 import de.evoal.core.api.ea.initial.InitialPopulation;
+import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;
+import de.evoal.core.api.properties.stream.FileBasedPropertiesStreamSupplier;
+import de.evoal.core.api.properties.stream.PropertiesStreamSupplier;
 import de.evoal.languages.model.instance.Instance;
+import de.evoal.surrogate.api.SurrogateBlackboardEntry;
 import de.evoal.surrogate.api.training.TrainingDataManager;
 import io.jenetics.Gene;
 import io.jenetics.Genotype;
@@ -13,11 +18,15 @@ import io.jenetics.engine.Engine;
 import io.jenetics.engine.EvolutionInit;
 import io.jenetics.engine.EvolutionStream;
 import io.jenetics.util.ISeq;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.inject.Provider;
+import java.io.File;
 
+@Slf4j
 public class TrainingInitialPopulation<G extends Gene<?, G>, C extends Comparable<C>> implements InitialPopulation<G, C> {
 
     @Inject
@@ -25,10 +34,10 @@ public class TrainingInitialPopulation<G extends Gene<?, G>, C extends Comparabl
     private int sizeOfPopulation;
 
     @Inject
-    private TrainingDataManager manager;
+    private Blackboard board;
 
     @Inject
-    @Named("surrogate-source-properties-specification")
+    @Named("genotype-specification")
     private PropertiesSpecification sourceSpecification;
 
     @Inject
@@ -53,8 +62,16 @@ public class TrainingInitialPopulation<G extends Gene<?, G>, C extends Comparabl
     }
 
     private ISeq<Genotype<G>> createInitialPopulation() {
-        return manager.getTrainingStream()
+        final String filename = board.get(SurrogateBlackboardEntry.SURROGATE_TRAINING_DATA_FILE);
+        final File trainingFile = new File(filename);
+
+        log.info("Using training data from {} for population.", filename);
+
+        final PropertiesStreamSupplier stream = new FileBasedPropertiesStreamSupplier(trainingFile, PropertiesSpecification.builder().add(sourceSpecification).add(targetSpecification).build());
+
+        return stream
                        .apply(totalSpecification)
+                       .map(p -> new Properties(sourceSpecification).putAll(p))
                        .unordered()
                        .limit(sizeOfPopulation)
                        .map(((CustomCodec<G>)encoding)::encode)

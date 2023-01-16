@@ -34,7 +34,7 @@ public class DynamicCodec<G extends Gene<?, G>> implements CustomCodec<G> {
         this.dynamicTemplates = dynamicTemplates;
     }
 
-    static DynamicCodec from(final Array config) {
+    static DynamicCodec from(final Array config, final PropertiesSpecification specification) {
         final DynamicChromosomeFactory factory = BeanFactory.create(DynamicChromosomeFactory.class);
         final List<DynamicChromosome> chromosomes = config.getValues()
                                                           .stream()
@@ -46,23 +46,7 @@ public class DynamicCodec<G extends Gene<?, G>> implements CustomCodec<G> {
                                                       .map(DynamicChromosome::toJenetics)
                                                       .collect(Collectors.toList());
 
-        final PropertiesSpecification specification = PropertiesSpecification.builder()
-                       .add(config.getValues()
-                                  .stream()
-                                  .map(Instance.class::cast)
-                                  .map(i -> i.findAttribute("genes"))
-                                  .map(Attribute::getValue)
-                                  .map(Array.class::cast)
-                                  .map(Array::getValues)
-                                  .flatMap(vs -> vs.stream()
-                                                   .map(Instance.class::cast)
-                                                   .map(i -> i.findAttribute("content"))
-                                                   .map(Attribute::getValue)
-                                                   .map(DataReference.class::cast)
-                                                   .map(DataReference::getDefinition)
-                                          )
-                                  .distinct())
-                       .build();
+
 
         log.info("Created dynamic codec for properties specification {}.", specification);
 
