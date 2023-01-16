@@ -63,9 +63,9 @@ public abstract class KernelBasedSVRFunctionFactory extends AbstractPartialSurro
 		final Map<String, Object> params = parameters.stream()
 													 .collect(Collectors.toMap(Parameter::getName, Parameter::getValue));
 
-		final double epsilon = (double)params.get(KernelHelper.EPSILON_PARAMETER);
-		final double margin = (double)params.get(KernelHelper.SOFT_MARGIN_PARAMETER);
-		final double tolerance = (double)params.get(KernelHelper.TOLERANCE_PARAMETER);
+		final double epsilon = ((Number)params.get(KernelHelper.EPSILON_PARAMETER)).doubleValue();
+		final double margin = ((Number)params.get(KernelHelper.SOFT_MARGIN_PARAMETER)).doubleValue();
+		final double tolerance = ((Number)params.get(KernelHelper.TOLERANCE_PARAMETER)).doubleValue();
 
 		final KernelMachine<double []> regression = SVR.fit(sourceArray, targetArray, toKernel.apply(params), epsilon, margin, tolerance);
 
