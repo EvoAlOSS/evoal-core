@@ -2,7 +2,7 @@
 
 set -e -x
 
-RELEASE_PLUGINS="generator.main surrogate.api surrogate.simple surrogate.svr"
+RELEASE_PLUGINS="generator.main surrogate.api surrogate.simple surrogate.svr approximative.density"
 
 
 mkdir -p evoal/plugins
