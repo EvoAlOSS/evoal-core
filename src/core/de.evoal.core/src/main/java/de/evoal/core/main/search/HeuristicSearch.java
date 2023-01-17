@@ -106,8 +106,6 @@ public class HeuristicSearch {
 	public void run() {
 		setup();
 
-        final Factory<Genotype<?>> gtf = encoding.encoding();
-
 		final Constraint<?, FitnessValue> constraint = new ConstraintList(constraints.get());
 
         final Engine<?, FitnessValue> engine= Engine.builder(this.fitnessFunction, encoding)

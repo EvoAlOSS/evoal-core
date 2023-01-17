@@ -41,8 +41,8 @@ public class WeightedSumFitnessValue implements FitnessValue {
         double otherFitness = 0.0;
 
         for(int index = 0; index < fitnessValues.length; ++index) {
-            ownFitness = ownFitness - this.normalizedWeights[index] * Math.abs(this.fitnessValues[index]);
-            otherFitness = otherFitness - this.normalizedWeights[index] * Math.abs(((WeightedSumFitnessValue)other).getFitnessValues()[index]);
+            ownFitness = ownFitness + this.normalizedWeights[index] * Math.abs(this.fitnessValues[index]);
+            otherFitness = otherFitness + this.normalizedWeights[index] * Math.abs(((WeightedSumFitnessValue)other).getFitnessValues()[index]);
         }
 
         return ownFitness == otherFitness ? 0 : (int)Math.signum(ownFitness - otherFitness);

@@ -35,7 +35,7 @@ public class IndividualStatistics implements StatisticsWriter {
     @Inject
     private CustomCodec encoding;
 
-    @Inject @Named("surrogate-source-properties-specification")
+    @Inject @Named("genotype-specification")
     private PropertiesSpecification sourceSpecification;
 
     @Inject
