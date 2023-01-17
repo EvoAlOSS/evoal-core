@@ -43,7 +43,6 @@ public class BoundaryIdentifier {
         }
 
         final Object [] llc = (Object[]) result;
-        System.err.println(Arrays.toString(llc));
 
         if(llc[0] instanceof Number) {
             final DataDescription descr = (DataDescription) llc[1];

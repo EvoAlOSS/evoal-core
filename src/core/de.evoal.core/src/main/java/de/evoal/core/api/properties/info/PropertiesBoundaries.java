@@ -8,7 +8,6 @@ import java.util.Map;
 
 public class PropertiesBoundaries {
     public void add(final PropertySpecification specification, final Boundaries boundaries) {
-        System.err.println("Mapping " + specification + " --> " + boundaries);
         boundariesMap.put(specification, boundaries);
     }
 

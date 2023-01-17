@@ -11,7 +11,7 @@ public class Properties {
 
     public Properties(final PropertiesSpecification specification) {
         this.specification = specification;
-        this.values = new Object[specification.properties.size()];
+        this.values = new Object[specification.getProperties().size()];
     }
 
     public Properties(final PropertiesSpecification specification, final Object[] data) {

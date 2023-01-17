@@ -17,7 +17,7 @@ import javax.inject.Named;
 @ApplicationScoped
 @Slf4j
 public class DynamicCodecProducer {
-    @Produces @Dependent
+    @Produces @ApplicationScoped
     public DynamicCodec create(@ConfigurationValue(entry = BlackboardEntry.EA_CONFIGURATION, access = "algorithm.genotype") Array config, final @Named("genotype-specification") PropertiesSpecification specification) {
         log.info("Creating encoding for EA problem.");
 

@@ -25,7 +25,7 @@ public class OptimizingFunctionProducer {
     }
 
     @Produces
-    @Dependent
+    @ApplicationScoped
     @Named("optimization-function-configuration")
     public Instance find(final @ConfigurationValue(entry = BlackboardEntry.EA_CONFIGURATION, access = "algorithm.fitness") Instance fitnessConfiguration) {
         return findInner(fitnessConfiguration);
@@ -39,7 +39,7 @@ public class OptimizingFunctionProducer {
     }
 
     @Produces
-    @Dependent
+    @ApplicationScoped
     @Named("optimization-function")
     private FitnessFunction create(final @Named("optimization-function-configuration") Instance configuration) {
         final String fitnessName = configuration.getName().getName();
@@ -47,7 +47,6 @@ public class OptimizingFunctionProducer {
         return BeanProvider.getContextualReference(fitnessName, false, FitnessFunction.class)
                 .init(configuration);
     }
-
 
     private PropertiesSpecification toSpecification(final Instance fitnessConfiguration) {
         return PropertiesSpecification.builder()
@@ -59,7 +58,6 @@ public class OptimizingFunctionProducer {
                 )
                 .build();
     }
-
 
     private static Instance findInner(final Instance fitnessConfig) {
         final Attribute subFunction = fitnessConfig.findAttribute("function");

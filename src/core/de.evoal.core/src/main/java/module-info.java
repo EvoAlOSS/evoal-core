@@ -62,6 +62,7 @@ module de.evoal.core {
     opens de.evoal.core.api.ea to weld.core.impl;
     opens de.evoal.core.api.ea.constraints to weld.core.impl;
     opens de.evoal.core.api.ea.constraints.model to weld.core.impl;
+    opens de.evoal.core.api.ea.constraints.strategies.fitness to weld.core.impl;
     opens de.evoal.core.api.ea.fitness to weld.core.impl;
     opens de.evoal.core.api.properties to weld.core.impl;
     opens de.evoal.core.api.properties.io to weld.core.impl;

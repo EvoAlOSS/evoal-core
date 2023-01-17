@@ -98,7 +98,7 @@ public class MalusFunctionProducer {
 
                     final String handlerName = LanguageHelper.lookup(configuration, "name");
 
-                    final MalusFunction strategy = new MalusForFitnessFunction(constraint, LanguageHelper.lookup(configuration, "handling"), index) ;
+                    final MalusFunction strategy = new MalusForFitnessFunction(constraint, LanguageHelper.lookup(configuration, "constraint-handling"), index) ;
                     resultingFunction.add(index, strategy);
                }
             }
@@ -118,7 +118,7 @@ public class MalusFunctionProducer {
 
                 final String handlerName = LanguageHelper.lookup(configuration, "name");
 
-                final MalusFunction strategy = new MalusForFitnessFunction(constraint, LanguageHelper.lookup(configuration, "handling"), index) ;
+                final MalusFunction strategy = new MalusForFitnessFunction(constraint, LanguageHelper.lookup(configuration, "constraint-handling"), index) ;
                 resultingFunction.add(index, strategy);
             }
         }

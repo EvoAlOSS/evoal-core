@@ -21,7 +21,7 @@ import javax.inject.Named;
 public class MalusFitness extends FitnessDecorator {
 
     @Inject
-    @Named("optimization-output-specification")
+    @Named("optimization-function-output")
     private PropertiesSpecification fitnessSpecification;
 
     @Inject
