@@ -17,57 +17,74 @@ import javax.enterprise.inject.Produces;
 
 import de.evoal.core.main.ea.constraints.constraint.strategies.fitness.internal.MalusForFitnessFunction;
 import de.evoal.core.main.ea.constraints.constraint.utils.ConfigurationUtils;
-import de.evoal.languages.model.instance.Array;
-import de.evoal.languages.model.instance.Attribute;
-import de.evoal.languages.model.instance.Instance;
-import de.evoal.languages.model.instance.Misc;
+import de.evoal.languages.model.instance.*;
 import org.apache.commons.math3.util.Pair;
 
 import javax.inject.Named;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @ApplicationScoped
 public class MalusFunctionProducer {
     @ApplicationScoped @Produces
     public MalusForFitnessStrategy create(
             final @ConfigurationValue(entry = BlackboardEntry.EA_CONFIGURATION, access = "algorithm.handlers") Array handlers,
-            final Constraints constraints,
-            final @Named("genotype-specification") PropertiesSpecification source,
+            final @Named("optimization-function-input") PropertiesSpecification source,
+            final @Named("optimization-function-output") PropertiesSpecification target,
             final @Named("output-dependencies") PropertiesDependencies dependencies,
-            final @Named("surrogate-target-properties-specification") PropertiesSpecification target, // FIXME I don't think that this is correct here since we may not have a surrogate function at hand. But we have to define this usecase in order to be able to fix this issue.
+            final Constraints constraints,
             final CalculationFactory factory) {
+        // select constraint handlers that use malus-for-fitness
+        final List<Instance> relevantHandlers = ConfigurationUtils.findConstraintHandlerByHandlingStrategy(handlers, "malus-for-fitness");
+
+        // collect group names of relevant handlers
+        final Set<String> allGroups = relevantHandlers.stream().map(i -> (String)((LiteralValue)i.findAttribute("category").getValue()).getLiteral().getValue()).collect(Collectors.toSet());
+
+        // resulting strategies
         final MalusForFitnessStrategy resultingFunction = new MalusForFitnessStrategy(target.size());
 
-        // collect group information to handle
-        final List<Instance> groups = ConfigurationUtils.findConstraintHandlerByHandlingStrategy(handlers, "malus-for-fitness");
-
         // collect all constraints for each index (of the appropriate groups)
-        final List<List<Pair<Constraint, Instance>>> constraintsForIndex = new ArrayList<>(source.size());
+        final List<List<Pair<Constraint, Instance>>> constraintsBySourceIndex = new ArrayList<>(source.size());
         for(int index = 0; index < source.size(); ++index) {
-            constraintsForIndex.add(new ArrayList<>());
+            constraintsBySourceIndex.add(new ArrayList<>());
         }
 
-        for(final Constraint constraint : constraints.getConstraints()) {
-            final String group = constraint.getGroup();
-
-            for(final Instance info : groups) {
-                if(((Misc)info.getName()).getName().equals(group)) {
-                    for(final PropertySpecification ps : constraint.getUsedProperties()) {
-                        final int index = source.indexOf(ps);
-                        constraintsForIndex.get(index).add(new Pair<>(constraint, info));
-                    }
-                }
-            }
-        }
-
-        // build MalusFunctionParts
+        final List<List<Pair<Constraint, Instance>>> constraintsByTargetIndex = new ArrayList<>(target.size());
         for(int index = 0; index < target.size(); ++index) {
+            constraintsByTargetIndex.add(new ArrayList<>());
+        }
+
+        constraints.getConstraints()
+                .stream()
+                .filter(c -> allGroups.contains(c.getGroup()))
+                .forEach(constraint -> {
+                    for(final PropertySpecification ps : constraint.getUsedProperties()) {
+                        if(source.equals(ps)) {
+                            // handle source specification
+                            final int index = source.indexOf(ps);
+                            final Instance configuration = ConfigurationUtils.findConstraintHandlerByHandlingStrategyAndCategory(handlers, "malus-for-fitness", constraint.getGroup());
+                            constraintsBySourceIndex.get(index)
+                                    .add(new Pair<>(constraint, configuration));
+                        } else {
+                            // handle target specification
+                            final int index = target.indexOf(ps);
+                            final Instance configuration = ConfigurationUtils.findConstraintHandlerByHandlingStrategyAndCategory(handlers, "malus-for-fitness", constraint.getGroup());
+                            constraintsByTargetIndex.get(index)
+                                    .add(new Pair<>(constraint, configuration));
+                        }
+                    }
+                });
+
+        // build actual malus function for each output
+        for(int index = 0; index < target.size(); ++index) {
+            // keep track of already applied constraints
             final Set<Constraint> applied  = new HashSet<>();
 
+            // iterate over input property specifications that influence the current output specification
             for(final PropertySpecification ips : dependencies.get(target.getProperties().get(index))) {
                 final int ipsIndex = source.indexOf(ips);
 
-                for(final Pair<Constraint, Instance> pair : constraintsForIndex.get(ipsIndex)) {
+                for(final Pair<Constraint, Instance> pair : constraintsBySourceIndex.get(ipsIndex)) {
                     final Constraint constraint = pair.getFirst();
                     final Instance configuration = pair.getSecond();
 
@@ -84,6 +101,25 @@ public class MalusFunctionProducer {
                     final MalusFunction strategy = new MalusForFitnessFunction(constraint, LanguageHelper.lookup(configuration, "handling"), index) ;
                     resultingFunction.add(index, strategy);
                }
+            }
+
+            // iterate over target constraints
+            for(final Pair<Constraint, Instance> pair : constraintsByTargetIndex.get(index)) {
+                final Constraint constraint = pair.getFirst();
+                final Instance configuration = pair.getSecond();
+
+                // prevent constraints from being applied multiple times per fitness value
+                if(applied.contains(constraint)) {
+                    continue;
+                }
+                applied.add(constraint);
+
+                final CalculationStrategy calculation = factory.create(constraint);
+
+                final String handlerName = LanguageHelper.lookup(configuration, "name");
+
+                final MalusFunction strategy = new MalusForFitnessFunction(constraint, LanguageHelper.lookup(configuration, "handling"), index) ;
+                resultingFunction.add(index, strategy);
             }
         }
 

@@ -39,9 +39,9 @@ public class MalusForFitnessStrategy implements HandlingStrategy {
      * @param candidate The individual.
      * @param fitnessValues The calculated fitness values.
      */
-    public void apply(final Properties candidate, double[] fitnessValues) {
-        for(int index = 0; index < fitnessValues.length; ++index) {
-            fitnessValues[index] = malusConversions[index].apply(candidate, fitnessValues[index]);
+    public void apply(final Properties genotype, final Properties fitness) {
+        for(int index = 0; index < fitness.size(); ++index) {
+            fitness.set(index, malusConversions[index].apply(genotype, fitness, fitness.getAsDouble(index)));
         }
     }
 }

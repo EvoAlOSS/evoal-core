@@ -17,10 +17,9 @@ public class MalusForFitnessFunction implements MalusFunction {
     }
 
     @Override
-    public double apply(final Properties properties, double fitnessValue) {
-  //      final ConstraintResult result = constraint.apply(properties);
+    public double apply(final Properties genoProperties, final Properties fitnessProperties, final double fitnessValue) {
+        final ConstraintResult result = constraint.apply(genoProperties, fitnessProperties);
 
-        throw new IllegalStateException("Not yet implemented");
-//        return fitnessValue - smoothing * Math.abs(result.getComparisonDifference());
+        return fitnessValue - smoothing * Math.abs(result.getComparisonDifference());
     }
 }

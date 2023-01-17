@@ -5,7 +5,7 @@ import de.evoal.core.api.properties.Properties;
 
 public class IdentityFunction implements MalusFunction {
     @Override
-    public double apply(final Properties properties, final double fitnessValue) {
+    public double apply(final Properties genoProperties, final Properties fitnessProperties, final double fitnessValue) {
         return fitnessValue;
     }
 }

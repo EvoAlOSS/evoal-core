@@ -82,4 +82,8 @@ public final class LanguageHelper {
     public static Predicate<? super Value> filterInstanceByType(final String instanceTypeName) {
         return i -> instanceTypeName.equals(((Instance)i).getName().getName());
     }
+
+    public static Predicate<? super Instance> filterByAttributesInstanceType(final String attributeName, final String attributeTypeName) {
+        return i -> attributeTypeName.equals(((Instance) i.findAttribute(attributeName).getValue()).getName().getName());
+    }
 }

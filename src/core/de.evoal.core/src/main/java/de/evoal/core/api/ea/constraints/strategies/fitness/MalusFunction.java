@@ -14,5 +14,5 @@ public interface MalusFunction {
      * @param fitnessValue The current fitness value.
      * @return The adapted fitness value.
      */
-    public double apply(final Properties properties, final double fitnessValue);
+    public double apply(final Properties genoProperties, final Properties fitnessPro, final double fitnessValue);
 }

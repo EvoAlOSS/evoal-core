@@ -17,8 +17,19 @@ public final class ConfigurationUtils {
         return handlers.getValues()
                        .stream()
                        .map(Instance.class::cast)
-                       .filter(i -> "constraint-handler".equals(i.getName().getName()))
-                       .filter(i -> name.equals(((Instance)i.findAttribute("constraint-handling").getValue()).getName().getName()))
+                       .filter(LanguageHelper.filterInstanceByType("constraint-handler"))
+                       .filter(LanguageHelper.filterByAttributesInstanceType("constraint-handling", name))
                        .collect(Collectors.toList());
+    }
+
+    public static Instance findConstraintHandlerByHandlingStrategyAndCategory(final Array handlers, final String name, final String category) {
+        return handlers.getValues()
+                .stream()
+                .map(Instance.class::cast)
+                .filter(LanguageHelper.filterInstanceByType("constraint-handler"))
+                .filter(LanguageHelper.filterByAttributesInstanceType("constraint-handling", name))
+                .filter(i -> category.equals(LanguageHelper.lookup(i, "category")))
+                .findFirst()
+                .get();
     }
 }

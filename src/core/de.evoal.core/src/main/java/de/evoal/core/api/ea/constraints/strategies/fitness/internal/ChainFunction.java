@@ -13,9 +13,9 @@ public class ChainFunction implements MalusFunction {
     }
 
     @Override
-    public double apply(final Properties properties, final double fitnessValue) {
-        double adaptedFitnessValue = child.apply(properties, fitnessValue);
+    public double apply(final Properties genoProperties, final Properties fitnessProperties, final double fitnessValue) {
+        double adaptedFitnessValue = child.apply(genoProperties, fitnessProperties, fitnessValue);
 
-        return strategy.apply(properties, adaptedFitnessValue);
+        return strategy.apply(genoProperties, fitnessProperties, adaptedFitnessValue);
     }
 }
