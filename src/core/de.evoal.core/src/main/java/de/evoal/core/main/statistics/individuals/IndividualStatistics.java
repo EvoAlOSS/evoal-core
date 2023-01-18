@@ -59,7 +59,6 @@ public class IndividualStatistics implements StatisticsWriter {
 
         columns.add(new Column("generation", ColumnType.Integer));
         columns.add(new Column("index", ColumnType.Integer));
-        columns.add(new Column("individual", ColumnType.String));
         columns.add(new Column("age", ColumnType.Integer));
 
         for(int i = 0; i < sourceSpecification.size(); ++i) {
@@ -77,11 +76,10 @@ public class IndividualStatistics implements StatisticsWriter {
 
         data[0] = generation;
         data[1] = index;
-        data[2] = individual.toString();
-        data[3] = phenotype.age(generation);
+        data[2] = phenotype.age(generation);
 
         for(int i = 0; i < individual.size(); ++i) {
-            data[4 + i] = individual.getValues()[i];
+            data[3 + i] = individual.getValues()[i];
         }
 
         return data;
