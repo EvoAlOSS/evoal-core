@@ -3,6 +3,7 @@ package de.evoal.core.main.ea.constraints.constraint.strategies.constraint;
 import de.evoal.core.api.ea.constraints.calculation.CalculationStrategy;
 import de.evoal.core.api.ea.constraints.strategies.HandlingStrategy;
 import de.evoal.core.api.ea.codec.CustomCodec;
+import de.evoal.core.api.ea.constraints.strategies.RepairStrategy;
 import de.evoal.core.api.ea.fitness.FitnessFunction;
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;

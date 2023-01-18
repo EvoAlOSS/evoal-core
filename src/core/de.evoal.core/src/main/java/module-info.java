@@ -94,4 +94,5 @@ module de.evoal.core {
     opens de.evoal.core.api.ea.correlations to weld.core.impl;
     opens de.evoal.core.api.ea.constraints.calculation to weld.core.impl;
     opens de.evoal.core.api.properties.info to weld.core.impl;
+    opens de.evoal.core.api.ea.constraints.strategies to weld.core.impl;
 }
