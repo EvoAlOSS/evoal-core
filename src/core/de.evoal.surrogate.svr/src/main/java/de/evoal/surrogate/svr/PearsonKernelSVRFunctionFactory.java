@@ -30,6 +30,31 @@ public class PearsonKernelSVRFunctionFactory extends KernelBasedSVRFunctionFacto
 										   .findFirst()
 										   .orElse(0.1);
 
-		return new KernelBasedSVRFunction(configuration, regression, "pearson", requiredInput, actualInput, producedOutput, margin);
+		final double[] sourceMeans = (double [])configuration.getState()
+				.stream()
+				.filter(p -> "kernel-source-means".equals(p.getName()))
+				.map(Parameter::getValue)
+				.findFirst()
+				.get();
+		final double[] sourceSDs = (double [])configuration.getState()
+				.stream()
+				.filter(p -> "kernel-source-sds".equals(p.getName()))
+				.map(Parameter::getValue)
+				.findFirst()
+				.get();;
+		final double[] targetMeans = (double [])configuration.getState()
+				.stream()
+				.filter(p -> "kernel-target-means".equals(p.getName()))
+				.map(Parameter::getValue)
+				.findFirst()
+				.get();;
+		final double[] targetSDs = (double [])configuration.getState()
+				.stream()
+				.filter(p -> "kernel-target-sds".equals(p.getName()))
+				.map(Parameter::getValue)
+				.findFirst()
+				.get();;
+
+		return new KernelBasedSVRFunction(configuration, regression, "pearson", requiredInput, actualInput, producedOutput, margin, sourceMeans, sourceSDs, targetMeans, targetSDs);
 	}
 }

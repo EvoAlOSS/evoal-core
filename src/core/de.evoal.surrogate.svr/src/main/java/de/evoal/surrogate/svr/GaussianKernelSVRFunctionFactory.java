@@ -1,25 +1,14 @@
 package de.evoal.surrogate.svr;
 
 import de.evoal.core.api.properties.PropertiesSpecification;
-import de.evoal.core.api.properties.stream.PropertiesPairStreamSupplier;
-import de.evoal.core.api.utils.Requirements;
 import de.evoal.surrogate.api.configuration.Parameter;
 import de.evoal.surrogate.api.configuration.PartialFunctionConfiguration;
-import de.evoal.surrogate.api.function.AbstractPartialSurrogateFunctionFactory;
 import de.evoal.surrogate.api.function.PartialSurrogateFunction;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import smile.math.kernel.MercerKernel;
 import smile.regression.KernelMachine;
-import smile.regression.SVR;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Named;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 @Dependent
 @Named("gaussian-svr")
@@ -41,6 +30,33 @@ public class GaussianKernelSVRFunctionFactory extends KernelBasedSVRFunctionFact
 										   .findFirst()
 										   .orElse(0.1);
 
-		return new KernelBasedSVRFunction(configuration, regression, "gaussian", requiredInput, actualInput, producedOutput, margin);
+		final double[] sourceMeans = (double [])configuration.getState()
+				.stream()
+				.filter(p -> "kernel-source-means".equals(p.getName()))
+				.map(Parameter::getValue)
+				.findFirst()
+				.get();
+		final double[] sourceSDs = (double [])configuration.getState()
+				.stream()
+				.filter(p -> "kernel-source-sds".equals(p.getName()))
+				.map(Parameter::getValue)
+				.findFirst()
+				.get();;
+		final double[] targetMeans = (double [])configuration.getState()
+				.stream()
+				.filter(p -> "kernel-target-means".equals(p.getName()))
+				.map(Parameter::getValue)
+				.findFirst()
+				.get();;
+		final double[] targetSDs = (double [])configuration.getState()
+				.stream()
+				.filter(p -> "kernel-target-sds".equals(p.getName()))
+				.map(Parameter::getValue)
+				.findFirst()
+				.get();;
+
+
+
+		return new KernelBasedSVRFunction(configuration, regression, "gaussian", requiredInput, actualInput, producedOutput, margin, sourceMeans, sourceSDs, targetMeans, targetSDs);
 	}
 }

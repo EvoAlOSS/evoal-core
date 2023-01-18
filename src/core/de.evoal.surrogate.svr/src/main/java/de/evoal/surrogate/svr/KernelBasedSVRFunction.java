@@ -3,6 +3,7 @@ package de.evoal.surrogate.svr;
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.languages.model.ddl.RepresentationType;
+import de.evoal.surrogate.api.configuration.Parameter;
 import de.evoal.surrogate.api.configuration.PartialFunctionConfiguration;
 import de.evoal.surrogate.api.function.AbstractPartialSurrogateFunction;
 
@@ -33,9 +34,17 @@ public class KernelBasedSVRFunction extends AbstractPartialSurrogateFunction {
 	 * Actual SVR
 	 */
 	private final KernelMachine<double []> regression;
+	private final double[] sourceMeans;
+	private final double[] sourceSDs;
+	private final double[] targetMeans;
+	private final double[] targetSDs;
 
-	public KernelBasedSVRFunction(final PartialFunctionConfiguration configuration, final KernelMachine<double []> regression, final String kernelName, final PropertiesSpecification input, final PropertiesSpecification actualInput, final PropertiesSpecification output, final double gamma) {
+	public KernelBasedSVRFunction(final PartialFunctionConfiguration configuration, final KernelMachine<double []> regression, final String kernelName, final PropertiesSpecification input, final PropertiesSpecification actualInput, final PropertiesSpecification output, final double gamma, final double[] sourceMeans, final double[] sourceSDs, final double[] targetMeans, final double[] targetSDs) {
 		super(configuration, KernelHelper.toParameters(regression, kernelName), input, output);
+		this.sourceMeans = sourceMeans;
+		this.sourceSDs = sourceSDs;
+		this.targetMeans = targetMeans;
+		this.targetSDs = targetSDs;
 
 		final List<Function<Properties, Double>> inputConverts = new LinkedList<>();
 
@@ -58,6 +67,14 @@ public class KernelBasedSVRFunction extends AbstractPartialSurrogateFunction {
 
 		this.regression = regression;
 		this.gamma = gamma;
+
+		final List<Parameter> parameters = new LinkedList<>();
+		addParameter("kernel-source-means", sourceMeans, parameters);
+		addParameter("kernel-source-sds", sourceSDs, parameters);
+		addParameter("kernel-target-means", targetMeans, parameters);
+		addParameter("kernel-target-sds", targetSDs, parameters);
+
+		getParameters().addAll(parameters);
 	}
 
 	@Override
@@ -65,10 +82,10 @@ public class KernelBasedSVRFunction extends AbstractPartialSurrogateFunction {
 		final double [] inputData = new double[indices.length];
 
 		for(int i = 0; i < inputData.length; ++i) {
-			inputData[i] = inputConverters[i].apply(input);
+			inputData[i] = (inputConverters[i].apply(input) - sourceMeans[i]) / sourceSDs[i];
 		}
 
-		final double predictedValue = regression.predict(inputData);
+		final double predictedValue = (regression.predict(inputData) * targetSDs[0]) + targetMeans[0];
 
 		final Object [] outputData = new Object[1];
 		outputData[0] = outputConverter.apply(predictedValue);

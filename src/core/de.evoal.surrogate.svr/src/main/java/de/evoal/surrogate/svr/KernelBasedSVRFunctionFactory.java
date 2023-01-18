@@ -11,13 +11,13 @@ import de.evoal.surrogate.api.configuration.PartialFunctionConfiguration;
 import de.evoal.surrogate.api.function.AbstractPartialSurrogateFunctionFactory;
 import de.evoal.surrogate.api.function.PartialSurrogateFunction;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.math3.stat.descriptive.moment.Mean;
+import org.apache.commons.math3.stat.descriptive.moment.StandardDeviation;
 import smile.math.kernel.MercerKernel;
 import smile.regression.KernelMachine;
 import smile.regression.SVR;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -60,6 +60,33 @@ public abstract class KernelBasedSVRFunctionFactory extends AbstractPartialSurro
 		double [][] sourceArray = sources.toArray(new double [][] {});
 		double [] targetArray = targets.stream().mapToDouble(Double.class::cast).toArray();
 
+		double [] sourceMeans = new double [requiredInput.size()];
+		double [] sourceSD = new double [requiredInput.size()];
+
+		double [] targetMean = new double [1];
+		double [] targetSD = new double [1];
+
+		for(int propertyIndex = 0; propertyIndex < requiredInput.size(); ++propertyIndex) {
+			double [] values = new double [sourceArray.length];
+			for(int individualIndex = 0; individualIndex < sourceArray.length; ++individualIndex) {
+				values[individualIndex] = sourceArray[individualIndex][propertyIndex];
+			}
+
+			calculateStatisticalInformation(values, propertyIndex, sourceMeans, sourceSD);
+		}
+		calculateStatisticalInformation(targetArray, 0, targetMean, targetSD);
+
+
+		// start scaling of trainings data
+		for(int individualIndex = 0; individualIndex < sourceArray.length; ++individualIndex) {
+			for (int propertyIndex = 0; propertyIndex < requiredInput.size(); ++propertyIndex) {
+				sourceArray[individualIndex][propertyIndex] = (sourceArray[individualIndex][propertyIndex] - sourceMeans[propertyIndex]) / sourceSD[propertyIndex];
+
+			}
+			targetArray[individualIndex] = (targetArray[individualIndex] - targetMean[0]) / targetSD[0];
+		}
+
+
 		final Map<String, Object> params = parameters.stream()
 													 .collect(Collectors.toMap(Parameter::getName, Parameter::getValue));
 
@@ -69,7 +96,12 @@ public abstract class KernelBasedSVRFunctionFactory extends AbstractPartialSurro
 
 		final KernelMachine<double []> regression = SVR.fit(sourceArray, targetArray, toKernel.apply(params), epsilon, margin, tolerance);
 
-		return new KernelBasedSVRFunction(configuration, regression, nameOfKernel, requiredInput, actualInput, producedOutput, margin);
+		return new KernelBasedSVRFunction(configuration, regression, nameOfKernel, requiredInput, actualInput, producedOutput, margin, sourceMeans, sourceSD, targetMean, targetSD);
+	}
+
+	private void calculateStatisticalInformation(final double[] values, final int index, final double[] means, final double[] sds) {
+		means[index] = new Mean().evaluate(values, 0, values.length);
+		sds[index] = new StandardDeviation().evaluate(values);
 	}
 
 	/**
