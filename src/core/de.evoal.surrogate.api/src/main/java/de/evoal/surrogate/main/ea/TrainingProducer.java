@@ -5,6 +5,7 @@ import de.evoal.core.api.cdi.BeanFactory;
 import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.core.api.ea.initial.InitialPopulation;
 import de.evoal.languages.model.instance.Instance;
+import de.evoal.core.api.ea.constraints.strategies.RepairStrategy;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.Dependent;
@@ -27,5 +28,16 @@ public class TrainingProducer {
         population.init(initialization);
 
         return population;
+    }
+
+    @Produces
+    @Dependent
+    @Named("repair-with-training")
+    public RepairStrategy create() {
+
+        final RepairStrategy strategy = new TrainingRepairStrategy();
+        BeanFactory.injectFields(strategy);
+
+        return strategy;
     }
 }

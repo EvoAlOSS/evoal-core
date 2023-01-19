@@ -24,9 +24,8 @@ import java.io.File;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Dependent
-@Named("repair-with-training")
 @Slf4j
+@Dependent
 public class TrainingRepairStrategy<G extends Gene<?, G>, C extends Comparable<? super C>> implements RepairStrategy<G, C> {
     @Inject
     private Blackboard board;
