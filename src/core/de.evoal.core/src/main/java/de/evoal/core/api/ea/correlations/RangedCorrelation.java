@@ -15,20 +15,20 @@ public class RangedCorrelation extends Correlation {
     private Range chromosomeTwoRange;
 
     @Override
-    public boolean matchesSource(int chromosomeIndex, double chromosomeValue) {
+    public boolean matchesSource(int chromosomeIndex, final Number chromosomeValue) {
         if(!super.matchesSource(chromosomeIndex, chromosomeValue)) {
             return false;
         }
 
-        return getChromosomeOneRange().includes(chromosomeValue);
+        return getChromosomeOneRange().includes(chromosomeValue.doubleValue());
     }
 
     @Override
-    public boolean matchesTarget(int chromosomeIndex, double chromosomeValue) {
+    public boolean matchesTarget(int chromosomeIndex, final Number chromosomeValue) {
         if(!super.matchesTarget(chromosomeIndex, chromosomeValue)) {
             return false;
         }
 
-        return getChromosomeTwoRange().includes(chromosomeValue);
+        return getChromosomeTwoRange().includes(chromosomeValue.doubleValue());
     }
 }

@@ -33,7 +33,7 @@ public class Correlations<G extends Gene<?, G>> {
         final Properties properties = codec.decode(genotype);
 
         return correlations.stream()
-                           .filter(c -> c.matchesSource(chromosomeIndex, properties.getAsDouble(chromosomeIndex)))
+                           .filter(c -> c.matchesSource(chromosomeIndex, (Number)properties.get(chromosomeIndex)))
                            .collect(Collectors.toList());
     }
 

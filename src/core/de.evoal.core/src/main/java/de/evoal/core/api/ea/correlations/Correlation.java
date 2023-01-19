@@ -28,11 +28,11 @@ public class Correlation {
      */
     private double correlationFactor;
 
-    public boolean matchesSource(int chromosomeIndex, double chromosomeValue) {
+    public boolean matchesSource(int chromosomeIndex, final Number chromosomeValue) {
         return chromosomeOne == chromosomeIndex;
     }
 
-    public boolean matchesTarget(int chromosomeIndex, double chromosomeValue) {
+    public boolean matchesTarget(int chromosomeIndex, final Number chromosomeValue) {
         return chromosomeTwo == chromosomeIndex;
     }
 }

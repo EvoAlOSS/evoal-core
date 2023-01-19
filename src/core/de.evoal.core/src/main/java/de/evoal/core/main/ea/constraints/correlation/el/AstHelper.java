@@ -2,8 +2,9 @@ package de.evoal.core.main.ea.constraints.correlation.el;
 
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.properties.PropertySpecification;
-import de.evoal.core.main.ea.constraints.el.StringSwitch;
+import de.evoal.core.main.ea.constraints.el.DataReferenceSwitch;
 import de.evoal.core.api.ea.correlations.Range;
+import de.evoal.languages.model.ddl.DataDescription;
 import de.evoal.languages.model.el.Expression;
 
 public final class AstHelper {
@@ -15,8 +16,8 @@ public final class AstHelper {
     }
 
     public static int findChromosomeIndex(final PropertiesSpecification specification, final Expression expression) {
-        final String name = new StringSwitch().doSwitch(expression);
+        final DataDescription data = new DataReferenceSwitch().doSwitch(expression);
 
-        return specification.indexOf(name);
+        return specification.indexOf(data.getName());
     }
 }
