@@ -792,13 +792,25 @@ public class InstanceLanguageGrammarAccess extends AbstractElementFinder.Abstrac
 		return getStringOrIdAccess().getRule();
 	}
 	
-	//DOUBLE returns ecore::EDouble : INT'.'INT;
-	public ExpressionLanguageGrammarAccess.DOUBLEElements getDOUBLEAccess() {
-		return gaExpressionLanguage.getDOUBLEAccess();
+	//terminal fragment DIGIT: '0'..'9';
+	public TerminalRule getDIGITRule() {
+		return gaExpressionLanguage.getDIGITRule();
 	}
 	
-	public ParserRule getDOUBLERule() {
-		return getDOUBLEAccess().getRule();
+	//terminal fragment EXPONENT: 'e' ('+'|'-')? DIGIT+;
+	public TerminalRule getEXPONENTRule() {
+		return gaExpressionLanguage.getEXPONENTRule();
+	}
+	
+	//@Override
+	//terminal INT returns ecore::EInt: '-'? DIGIT+;
+	public TerminalRule getINTRule() {
+		return gaExpressionLanguage.getINTRule();
+	}
+	
+	//terminal DOUBLE returns ecore::EDouble: INT EXPONENT | INT '.' DIGIT* EXPONENT?;
+	public TerminalRule getDOUBLERule() {
+		return gaExpressionLanguage.getDOUBLERule();
 	}
 	
 	//@Override
@@ -817,11 +829,6 @@ public class InstanceLanguageGrammarAccess extends AbstractElementFinder.Abstrac
 	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
-	}
-	
-	//terminal INT returns ecore::EInt: ('0'..'9')+;
-	public TerminalRule getINTRule() {
-		return gaTerminals.getINTRule();
 	}
 	
 	//terminal ML_COMMENT : '/*' -> '*/';

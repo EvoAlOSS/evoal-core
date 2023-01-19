@@ -78,7 +78,6 @@ public class EvolutionaryAlgorithmLanguageParser extends AbstractContentAssistPa
 			builder.put(grammarAccess.getDoubleLiteralRuleAccess().getGroup(), "rule__DoubleLiteralRule__Group__0");
 			builder.put(grammarAccess.getIntegerLiteralRuleAccess().getGroup(), "rule__IntegerLiteralRule__Group__0");
 			builder.put(grammarAccess.getBooleanLiteralRuleAccess().getGroup(), "rule__BooleanLiteralRule__Group__0");
-			builder.put(grammarAccess.getDOUBLEAccess().getGroup(), "rule__DOUBLE__Group__0");
 			builder.put(grammarAccess.getEAModelRuleAccess().getUsesAssignment_0(), "rule__EAModelRule__UsesAssignment_0");
 			builder.put(grammarAccess.getEAModelRuleAccess().getInstanceAssignment_1(), "rule__EAModelRule__InstanceAssignment_1");
 			builder.put(grammarAccess.getEAModelRuleAccess().getConstraintsAssignment_2(), "rule__EAModelRule__ConstraintsAssignment_2");

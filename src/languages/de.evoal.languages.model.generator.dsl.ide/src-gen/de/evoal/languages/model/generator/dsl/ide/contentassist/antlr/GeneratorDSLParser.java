@@ -95,7 +95,6 @@ public class GeneratorDSLParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getDoubleLiteralRuleAccess().getGroup(), "rule__DoubleLiteralRule__Group__0");
 			builder.put(grammarAccess.getIntegerLiteralRuleAccess().getGroup(), "rule__IntegerLiteralRule__Group__0");
 			builder.put(grammarAccess.getBooleanLiteralRuleAccess().getGroup(), "rule__BooleanLiteralRule__Group__0");
-			builder.put(grammarAccess.getDOUBLEAccess().getGroup(), "rule__DOUBLE__Group__0");
 			builder.put(grammarAccess.getConfigurationRuleAccess().getUsesAssignment_0(), "rule__ConfigurationRule__UsesAssignment_0");
 			builder.put(grammarAccess.getConfigurationRuleAccess().getPipelinesAssignment_1(), "rule__ConfigurationRule__PipelinesAssignment_1");
 			builder.put(grammarAccess.getConfigurationRuleAccess().getStatementsAssignment_2(), "rule__ConfigurationRule__StatementsAssignment_2");

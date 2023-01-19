@@ -22,7 +22,7 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_STRING", "RULE_ID", "RULE_INT", "RULE_QUOTED_ID", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'use'", "';'", "'pipeline'", "'['", "']'", "'step'", "'{'", "'component'", "'reads'", "','", "'writes'", "'}'", "'for'", "'in'", "'loop'", "'end'", "'to'", "'pipelines'", "'write'", "'with'", "'samples'", "'from'", "'executing'", "':='", "'data'", "'OR'", "'XOR'", "'AND'", "'!'", "'^'", "'('", "')'", "'call'", "'value'", "'true'", "'false'", "'.'", "'>='", "'>'", "'='", "'!='", "'<'", "'<='", "'+'", "'-'", "'*'", "'/'", "'%'", "'Y'", "'Z'", "'E'", "'P'", "'T'", "'G'", "'M'", "'k'", "'h'", "'da'", "'d'", "'c'", "'m'", "'\\u00B5'", "'n'", "'p'", "'f'", "'a'", "'z'", "'y'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_STRING", "RULE_ID", "RULE_INT", "RULE_DOUBLE", "RULE_QUOTED_ID", "RULE_DIGIT", "RULE_EXPONENT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'use'", "';'", "'pipeline'", "'['", "']'", "'step'", "'{'", "'component'", "'reads'", "','", "'writes'", "'}'", "'for'", "'in'", "'loop'", "'end'", "'to'", "'pipelines'", "'write'", "'with'", "'samples'", "'from'", "'executing'", "':='", "'data'", "'OR'", "'XOR'", "'AND'", "'!'", "'^'", "'('", "')'", "'call'", "'value'", "'true'", "'false'", "'>='", "'>'", "'='", "'!='", "'<'", "'<='", "'+'", "'-'", "'*'", "'/'", "'%'", "'Y'", "'Z'", "'E'", "'P'", "'T'", "'G'", "'M'", "'k'", "'h'", "'da'", "'d'", "'c'", "'m'", "'\\u00B5'", "'n'", "'p'", "'f'", "'a'", "'z'", "'y'"
     };
     public static final int T__50=50;
     public static final int T__19=19;
@@ -32,11 +32,8 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
     public static final int T__17=17;
     public static final int T__18=18;
     public static final int T__55=55;
-    public static final int T__12=12;
     public static final int T__56=56;
-    public static final int T__13=13;
     public static final int T__57=57;
-    public static final int T__14=14;
     public static final int T__58=58;
     public static final int T__51=51;
     public static final int T__52=52;
@@ -45,7 +42,8 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
     public static final int T__60=60;
     public static final int T__61=61;
     public static final int RULE_ID=5;
-    public static final int RULE_QUOTED_ID=7;
+    public static final int RULE_QUOTED_ID=8;
+    public static final int RULE_DIGIT=9;
     public static final int T__26=26;
     public static final int T__27=27;
     public static final int T__28=28;
@@ -53,7 +51,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
     public static final int T__29=29;
     public static final int T__22=22;
     public static final int T__66=66;
-    public static final int RULE_ML_COMMENT=8;
+    public static final int RULE_ML_COMMENT=11;
     public static final int T__23=23;
     public static final int T__67=67;
     public static final int T__24=24;
@@ -70,8 +68,9 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
     public static final int T__71=71;
     public static final int T__72=72;
     public static final int RULE_STRING=4;
-    public static final int RULE_SL_COMMENT=9;
+    public static final int RULE_SL_COMMENT=12;
     public static final int T__37=37;
+    public static final int RULE_DOUBLE=7;
     public static final int T__38=38;
     public static final int T__39=39;
     public static final int T__33=33;
@@ -89,8 +88,11 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
     public static final int T__75=75;
     public static final int T__32=32;
     public static final int T__76=76;
-    public static final int RULE_WS=10;
-    public static final int RULE_ANY_OTHER=11;
+    public static final int T__80=80;
+    public static final int T__81=81;
+    public static final int RULE_WS=13;
+    public static final int RULE_ANY_OTHER=14;
+    public static final int RULE_EXPONENT=10;
     public static final int T__48=48;
     public static final int T__49=49;
     public static final int T__44=44;
@@ -205,7 +207,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
                 int alt1=2;
                 int LA1_0 = input.LA(1);
 
-                if ( (LA1_0==12) ) {
+                if ( (LA1_0==15) ) {
                     alt1=1;
                 }
 
@@ -254,7 +256,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
                 int alt2=2;
                 int LA2_0 = input.LA(1);
 
-                if ( (LA2_0==14) ) {
+                if ( (LA2_0==17) ) {
                     alt2=1;
                 }
 
@@ -303,7 +305,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
                 int alt3=2;
                 int LA3_0 = input.LA(1);
 
-                if ( (LA3_0==24||LA3_0==30) ) {
+                if ( (LA3_0==27||LA3_0==33) ) {
                     alt3=1;
                 }
 
@@ -423,7 +425,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
             // InternalGeneratorDSL.g:155:2: (otherlv_0= 'use' ( (lv_importURI_1_0= RULE_STRING ) ) otherlv_2= ';' )
             // InternalGeneratorDSL.g:156:3: otherlv_0= 'use' ( (lv_importURI_1_0= RULE_STRING ) ) otherlv_2= ';'
             {
-            otherlv_0=(Token)match(input,12,FOLLOW_6); 
+            otherlv_0=(Token)match(input,15,FOLLOW_6); 
 
             			newLeafNode(otherlv_0, grammarAccess.getUseRuleAccess().getUseKeyword_0());
             		
@@ -453,7 +455,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_2=(Token)match(input,13,FOLLOW_2); 
+            otherlv_2=(Token)match(input,16,FOLLOW_2); 
 
             			newLeafNode(otherlv_2, grammarAccess.getUseRuleAccess().getSemicolonKeyword_2());
             		
@@ -538,7 +540,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
             // InternalGeneratorDSL.g:200:2: (otherlv_0= 'pipeline' ( (lv_name_1_0= ruleStringOrId ) ) otherlv_2= '[' ( (lv_steps_3_0= ruleStepRule ) )* otherlv_4= ']' )
             // InternalGeneratorDSL.g:201:3: otherlv_0= 'pipeline' ( (lv_name_1_0= ruleStringOrId ) ) otherlv_2= '[' ( (lv_steps_3_0= ruleStepRule ) )* otherlv_4= ']'
             {
-            otherlv_0=(Token)match(input,14,FOLLOW_8); 
+            otherlv_0=(Token)match(input,17,FOLLOW_8); 
 
             			newLeafNode(otherlv_0, grammarAccess.getPipelineDefinitionRuleAccess().getPipelineKeyword_0());
             		
@@ -573,7 +575,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_2=(Token)match(input,15,FOLLOW_10); 
+            otherlv_2=(Token)match(input,18,FOLLOW_10); 
 
             			newLeafNode(otherlv_2, grammarAccess.getPipelineDefinitionRuleAccess().getLeftSquareBracketKeyword_2());
             		
@@ -583,7 +585,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
                 int alt4=2;
                 int LA4_0 = input.LA(1);
 
-                if ( (LA4_0==17) ) {
+                if ( (LA4_0==20) ) {
                     alt4=1;
                 }
 
@@ -626,7 +628,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
                 }
             } while (true);
 
-            otherlv_4=(Token)match(input,16,FOLLOW_2); 
+            otherlv_4=(Token)match(input,19,FOLLOW_2); 
 
             			newLeafNode(otherlv_4, grammarAccess.getPipelineDefinitionRuleAccess().getRightSquareBracketKeyword_4());
             		
@@ -728,15 +730,15 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
             // InternalGeneratorDSL.g:269:2: (otherlv_0= 'step' otherlv_1= '{' otherlv_2= 'component' ( (lv_instance_3_0= ruleInstanceRule ) ) (otherlv_4= 'reads' otherlv_5= '[' ( ( (lv_reads_6_0= ruleDataReferenceRule ) ) (otherlv_7= ',' ( (lv_reads_8_0= ruleDataReferenceRule ) ) )* )? otherlv_9= ']' otherlv_10= ';' )? (otherlv_11= 'writes' otherlv_12= '[' ( ( (lv_writes_13_0= ruleDataReferenceRule ) ) (otherlv_14= ',' ( (lv_writes_15_0= ruleDataReferenceRule ) ) )* )? otherlv_16= ']' otherlv_17= ';' )? otherlv_18= '}' )
             // InternalGeneratorDSL.g:270:3: otherlv_0= 'step' otherlv_1= '{' otherlv_2= 'component' ( (lv_instance_3_0= ruleInstanceRule ) ) (otherlv_4= 'reads' otherlv_5= '[' ( ( (lv_reads_6_0= ruleDataReferenceRule ) ) (otherlv_7= ',' ( (lv_reads_8_0= ruleDataReferenceRule ) ) )* )? otherlv_9= ']' otherlv_10= ';' )? (otherlv_11= 'writes' otherlv_12= '[' ( ( (lv_writes_13_0= ruleDataReferenceRule ) ) (otherlv_14= ',' ( (lv_writes_15_0= ruleDataReferenceRule ) ) )* )? otherlv_16= ']' otherlv_17= ';' )? otherlv_18= '}'
             {
-            otherlv_0=(Token)match(input,17,FOLLOW_11); 
+            otherlv_0=(Token)match(input,20,FOLLOW_11); 
 
             			newLeafNode(otherlv_0, grammarAccess.getStepRuleAccess().getStepKeyword_0());
             		
-            otherlv_1=(Token)match(input,18,FOLLOW_12); 
+            otherlv_1=(Token)match(input,21,FOLLOW_12); 
 
             			newLeafNode(otherlv_1, grammarAccess.getStepRuleAccess().getLeftCurlyBracketKeyword_1());
             		
-            otherlv_2=(Token)match(input,19,FOLLOW_8); 
+            otherlv_2=(Token)match(input,22,FOLLOW_8); 
 
             			newLeafNode(otherlv_2, grammarAccess.getStepRuleAccess().getComponentKeyword_2());
             		
@@ -775,18 +777,18 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
             int alt7=2;
             int LA7_0 = input.LA(1);
 
-            if ( (LA7_0==20) ) {
+            if ( (LA7_0==23) ) {
                 alt7=1;
             }
             switch (alt7) {
                 case 1 :
                     // InternalGeneratorDSL.g:302:4: otherlv_4= 'reads' otherlv_5= '[' ( ( (lv_reads_6_0= ruleDataReferenceRule ) ) (otherlv_7= ',' ( (lv_reads_8_0= ruleDataReferenceRule ) ) )* )? otherlv_9= ']' otherlv_10= ';'
                     {
-                    otherlv_4=(Token)match(input,20,FOLLOW_9); 
+                    otherlv_4=(Token)match(input,23,FOLLOW_9); 
 
                     				newLeafNode(otherlv_4, grammarAccess.getStepRuleAccess().getReadsKeyword_4_0());
                     			
-                    otherlv_5=(Token)match(input,15,FOLLOW_14); 
+                    otherlv_5=(Token)match(input,18,FOLLOW_14); 
 
                     				newLeafNode(otherlv_5, grammarAccess.getStepRuleAccess().getLeftSquareBracketKeyword_4_1());
                     			
@@ -794,7 +796,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
                     int alt6=2;
                     int LA6_0 = input.LA(1);
 
-                    if ( (LA6_0==36) ) {
+                    if ( (LA6_0==39) ) {
                         alt6=1;
                     }
                     switch (alt6) {
@@ -838,7 +840,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
                                 int alt5=2;
                                 int LA5_0 = input.LA(1);
 
-                                if ( (LA5_0==21) ) {
+                                if ( (LA5_0==24) ) {
                                     alt5=1;
                                 }
 
@@ -847,7 +849,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
                             	case 1 :
                             	    // InternalGeneratorDSL.g:331:6: otherlv_7= ',' ( (lv_reads_8_0= ruleDataReferenceRule ) )
                             	    {
-                            	    otherlv_7=(Token)match(input,21,FOLLOW_16); 
+                            	    otherlv_7=(Token)match(input,24,FOLLOW_16); 
 
                             	    						newLeafNode(otherlv_7, grammarAccess.getStepRuleAccess().getCommaKeyword_4_2_1_0());
                             	    					
@@ -897,11 +899,11 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    otherlv_9=(Token)match(input,16,FOLLOW_7); 
+                    otherlv_9=(Token)match(input,19,FOLLOW_7); 
 
                     				newLeafNode(otherlv_9, grammarAccess.getStepRuleAccess().getRightSquareBracketKeyword_4_3());
                     			
-                    otherlv_10=(Token)match(input,13,FOLLOW_17); 
+                    otherlv_10=(Token)match(input,16,FOLLOW_17); 
 
                     				newLeafNode(otherlv_10, grammarAccess.getStepRuleAccess().getSemicolonKeyword_4_4());
                     			
@@ -915,18 +917,18 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
             int alt10=2;
             int LA10_0 = input.LA(1);
 
-            if ( (LA10_0==22) ) {
+            if ( (LA10_0==25) ) {
                 alt10=1;
             }
             switch (alt10) {
                 case 1 :
                     // InternalGeneratorDSL.g:366:4: otherlv_11= 'writes' otherlv_12= '[' ( ( (lv_writes_13_0= ruleDataReferenceRule ) ) (otherlv_14= ',' ( (lv_writes_15_0= ruleDataReferenceRule ) ) )* )? otherlv_16= ']' otherlv_17= ';'
                     {
-                    otherlv_11=(Token)match(input,22,FOLLOW_9); 
+                    otherlv_11=(Token)match(input,25,FOLLOW_9); 
 
                     				newLeafNode(otherlv_11, grammarAccess.getStepRuleAccess().getWritesKeyword_5_0());
                     			
-                    otherlv_12=(Token)match(input,15,FOLLOW_14); 
+                    otherlv_12=(Token)match(input,18,FOLLOW_14); 
 
                     				newLeafNode(otherlv_12, grammarAccess.getStepRuleAccess().getLeftSquareBracketKeyword_5_1());
                     			
@@ -934,7 +936,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
-                    if ( (LA9_0==36) ) {
+                    if ( (LA9_0==39) ) {
                         alt9=1;
                     }
                     switch (alt9) {
@@ -978,7 +980,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
                                 int alt8=2;
                                 int LA8_0 = input.LA(1);
 
-                                if ( (LA8_0==21) ) {
+                                if ( (LA8_0==24) ) {
                                     alt8=1;
                                 }
 
@@ -987,7 +989,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
                             	case 1 :
                             	    // InternalGeneratorDSL.g:395:6: otherlv_14= ',' ( (lv_writes_15_0= ruleDataReferenceRule ) )
                             	    {
-                            	    otherlv_14=(Token)match(input,21,FOLLOW_16); 
+                            	    otherlv_14=(Token)match(input,24,FOLLOW_16); 
 
                             	    						newLeafNode(otherlv_14, grammarAccess.getStepRuleAccess().getCommaKeyword_5_2_1_0());
                             	    					
@@ -1037,11 +1039,11 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    otherlv_16=(Token)match(input,16,FOLLOW_7); 
+                    otherlv_16=(Token)match(input,19,FOLLOW_7); 
 
                     				newLeafNode(otherlv_16, grammarAccess.getStepRuleAccess().getRightSquareBracketKeyword_5_3());
                     			
-                    otherlv_17=(Token)match(input,13,FOLLOW_18); 
+                    otherlv_17=(Token)match(input,16,FOLLOW_18); 
 
                     				newLeafNode(otherlv_17, grammarAccess.getStepRuleAccess().getSemicolonKeyword_5_4());
                     			
@@ -1051,7 +1053,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_18=(Token)match(input,23,FOLLOW_2); 
+            otherlv_18=(Token)match(input,26,FOLLOW_2); 
 
             			newLeafNode(otherlv_18, grammarAccess.getStepRuleAccess().getRightCurlyBracketKeyword_6());
             		
@@ -1134,10 +1136,10 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
             int alt11=2;
             int LA11_0 = input.LA(1);
 
-            if ( (LA11_0==24) ) {
+            if ( (LA11_0==27) ) {
                 alt11=1;
             }
-            else if ( (LA11_0==30) ) {
+            else if ( (LA11_0==33) ) {
                 alt11=2;
             }
             else {
@@ -1266,7 +1268,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
             // InternalGeneratorDSL.g:487:2: (otherlv_0= 'for' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= 'in' ( (lv_range_3_0= ruleRangeRule ) ) otherlv_4= 'loop' ( (lv_statements_5_0= ruleStatementRule ) )* otherlv_6= 'end' )
             // InternalGeneratorDSL.g:488:3: otherlv_0= 'for' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= 'in' ( (lv_range_3_0= ruleRangeRule ) ) otherlv_4= 'loop' ( (lv_statements_5_0= ruleStatementRule ) )* otherlv_6= 'end'
             {
-            otherlv_0=(Token)match(input,24,FOLLOW_19); 
+            otherlv_0=(Token)match(input,27,FOLLOW_19); 
 
             			newLeafNode(otherlv_0, grammarAccess.getForStatementRuleAccess().getForKeyword_0());
             		
@@ -1296,7 +1298,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_2=(Token)match(input,25,FOLLOW_21); 
+            otherlv_2=(Token)match(input,28,FOLLOW_21); 
 
             			newLeafNode(otherlv_2, grammarAccess.getForStatementRuleAccess().getInKeyword_2());
             		
@@ -1331,7 +1333,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_4=(Token)match(input,26,FOLLOW_23); 
+            otherlv_4=(Token)match(input,29,FOLLOW_23); 
 
             			newLeafNode(otherlv_4, grammarAccess.getForStatementRuleAccess().getLoopKeyword_4());
             		
@@ -1341,7 +1343,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
                 int alt12=2;
                 int LA12_0 = input.LA(1);
 
-                if ( (LA12_0==24||LA12_0==30) ) {
+                if ( (LA12_0==27||LA12_0==33) ) {
                     alt12=1;
                 }
 
@@ -1384,7 +1386,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
                 }
             } while (true);
 
-            otherlv_6=(Token)match(input,27,FOLLOW_2); 
+            otherlv_6=(Token)match(input,30,FOLLOW_2); 
 
             			newLeafNode(otherlv_6, grammarAccess.getForStatementRuleAccess().getEndKeyword_6());
             		
@@ -1467,10 +1469,10 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
             int alt13=2;
             int LA13_0 = input.LA(1);
 
-            if ( (LA13_0==29) ) {
+            if ( (LA13_0==32) ) {
                 alt13=1;
             }
-            else if ( (LA13_0==15) ) {
+            else if ( (LA13_0==18) ) {
                 alt13=2;
             }
             else {
@@ -1595,7 +1597,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
             // InternalGeneratorDSL.g:614:2: (otherlv_0= '[' ( (lv_start_1_0= RULE_INT ) ) otherlv_2= 'to' ( (lv_end_3_0= RULE_INT ) ) otherlv_4= ']' )
             // InternalGeneratorDSL.g:615:3: otherlv_0= '[' ( (lv_start_1_0= RULE_INT ) ) otherlv_2= 'to' ( (lv_end_3_0= RULE_INT ) ) otherlv_4= ']'
             {
-            otherlv_0=(Token)match(input,15,FOLLOW_24); 
+            otherlv_0=(Token)match(input,18,FOLLOW_24); 
 
             			newLeafNode(otherlv_0, grammarAccess.getCounterRangeRuleAccess().getLeftSquareBracketKeyword_0());
             		
@@ -1617,7 +1619,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
             						current,
             						"start",
             						lv_start_1_0,
-            						"org.eclipse.xtext.common.Terminals.INT");
+            						"de.evoal.languages.model.el.dsl.ExpressionLanguage.INT");
             				
 
             }
@@ -1625,7 +1627,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_2=(Token)match(input,28,FOLLOW_24); 
+            otherlv_2=(Token)match(input,31,FOLLOW_24); 
 
             			newLeafNode(otherlv_2, grammarAccess.getCounterRangeRuleAccess().getToKeyword_2());
             		
@@ -1647,7 +1649,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
             						current,
             						"end",
             						lv_end_3_0,
-            						"org.eclipse.xtext.common.Terminals.INT");
+            						"de.evoal.languages.model.el.dsl.ExpressionLanguage.INT");
             				
 
             }
@@ -1655,7 +1657,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_4=(Token)match(input,16,FOLLOW_2); 
+            otherlv_4=(Token)match(input,19,FOLLOW_2); 
 
             			newLeafNode(otherlv_4, grammarAccess.getCounterRangeRuleAccess().getRightSquareBracketKeyword_4());
             		
@@ -1752,7 +1754,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,29,FOLLOW_27); 
+            otherlv_1=(Token)match(input,32,FOLLOW_27); 
 
             			newLeafNode(otherlv_1, grammarAccess.getPipelineArrayRuleAccess().getPipelinesKeyword_1());
             		
@@ -1760,14 +1762,14 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
             int alt15=2;
             int LA15_0 = input.LA(1);
 
-            if ( (LA15_0==15) ) {
+            if ( (LA15_0==18) ) {
                 alt15=1;
             }
             switch (alt15) {
                 case 1 :
                     // InternalGeneratorDSL.g:694:4: otherlv_2= '[' ( (lv_references_3_0= rulePipelineReferenceRule ) ) (otherlv_4= ',' ( (lv_references_5_0= rulePipelineReferenceRule ) ) )* otherlv_6= ']'
                     {
-                    otherlv_2=(Token)match(input,15,FOLLOW_28); 
+                    otherlv_2=(Token)match(input,18,FOLLOW_28); 
 
                     				newLeafNode(otherlv_2, grammarAccess.getPipelineArrayRuleAccess().getLeftSquareBracketKeyword_2_0());
                     			
@@ -1808,7 +1810,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
                         int alt14=2;
                         int LA14_0 = input.LA(1);
 
-                        if ( (LA14_0==21) ) {
+                        if ( (LA14_0==24) ) {
                             alt14=1;
                         }
 
@@ -1817,7 +1819,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
                     	case 1 :
                     	    // InternalGeneratorDSL.g:718:5: otherlv_4= ',' ( (lv_references_5_0= rulePipelineReferenceRule ) )
                     	    {
-                    	    otherlv_4=(Token)match(input,21,FOLLOW_28); 
+                    	    otherlv_4=(Token)match(input,24,FOLLOW_28); 
 
                     	    					newLeafNode(otherlv_4, grammarAccess.getPipelineArrayRuleAccess().getCommaKeyword_2_2_0());
                     	    				
@@ -1861,7 +1863,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
                         }
                     } while (true);
 
-                    otherlv_6=(Token)match(input,16,FOLLOW_2); 
+                    otherlv_6=(Token)match(input,19,FOLLOW_2); 
 
                     				newLeafNode(otherlv_6, grammarAccess.getPipelineArrayRuleAccess().getRightSquareBracketKeyword_2_3());
                     			
@@ -1950,7 +1952,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
             int alt16=2;
             int LA16_0 = input.LA(1);
 
-            if ( (LA16_0==14) ) {
+            if ( (LA16_0==17) ) {
                 alt16=1;
             }
             else if ( (LA16_0==RULE_ID) ) {
@@ -2074,7 +2076,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
             // InternalGeneratorDSL.g:801:2: (otherlv_0= 'pipeline' ( ( ruleStringOrId ) ) )
             // InternalGeneratorDSL.g:802:3: otherlv_0= 'pipeline' ( ( ruleStringOrId ) )
             {
-            otherlv_0=(Token)match(input,14,FOLLOW_8); 
+            otherlv_0=(Token)match(input,17,FOLLOW_8); 
 
             			newLeafNode(otherlv_0, grammarAccess.getPipelineDefinitionReferenceRuleAccess().getPipelineKeyword_0());
             		
@@ -2285,7 +2287,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
             // InternalGeneratorDSL.g:870:2: (otherlv_0= 'write' ( (lv_file_1_0= RULE_STRING ) ) otherlv_2= 'with' ( (lv_count_3_0= RULE_INT ) ) otherlv_4= 'samples' otherlv_5= 'from' otherlv_6= 'executing' otherlv_7= '[' ( (lv_pipelines_8_0= rulePipelineReferenceRule ) ) (otherlv_9= ',' ( (lv_pipelines_10_0= rulePipelineReferenceRule ) ) )* otherlv_11= ']' otherlv_12= ';' )
             // InternalGeneratorDSL.g:871:3: otherlv_0= 'write' ( (lv_file_1_0= RULE_STRING ) ) otherlv_2= 'with' ( (lv_count_3_0= RULE_INT ) ) otherlv_4= 'samples' otherlv_5= 'from' otherlv_6= 'executing' otherlv_7= '[' ( (lv_pipelines_8_0= rulePipelineReferenceRule ) ) (otherlv_9= ',' ( (lv_pipelines_10_0= rulePipelineReferenceRule ) ) )* otherlv_11= ']' otherlv_12= ';'
             {
-            otherlv_0=(Token)match(input,30,FOLLOW_6); 
+            otherlv_0=(Token)match(input,33,FOLLOW_6); 
 
             			newLeafNode(otherlv_0, grammarAccess.getApplyStatementRuleAccess().getWriteKeyword_0());
             		
@@ -2315,7 +2317,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_2=(Token)match(input,31,FOLLOW_24); 
+            otherlv_2=(Token)match(input,34,FOLLOW_24); 
 
             			newLeafNode(otherlv_2, grammarAccess.getApplyStatementRuleAccess().getWithKeyword_2());
             		
@@ -2337,7 +2339,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
             						current,
             						"count",
             						lv_count_3_0,
-            						"org.eclipse.xtext.common.Terminals.INT");
+            						"de.evoal.languages.model.el.dsl.ExpressionLanguage.INT");
             				
 
             }
@@ -2345,19 +2347,19 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_4=(Token)match(input,32,FOLLOW_31); 
+            otherlv_4=(Token)match(input,35,FOLLOW_31); 
 
             			newLeafNode(otherlv_4, grammarAccess.getApplyStatementRuleAccess().getSamplesKeyword_4());
             		
-            otherlv_5=(Token)match(input,33,FOLLOW_32); 
+            otherlv_5=(Token)match(input,36,FOLLOW_32); 
 
             			newLeafNode(otherlv_5, grammarAccess.getApplyStatementRuleAccess().getFromKeyword_5());
             		
-            otherlv_6=(Token)match(input,34,FOLLOW_9); 
+            otherlv_6=(Token)match(input,37,FOLLOW_9); 
 
             			newLeafNode(otherlv_6, grammarAccess.getApplyStatementRuleAccess().getExecutingKeyword_6());
             		
-            otherlv_7=(Token)match(input,15,FOLLOW_28); 
+            otherlv_7=(Token)match(input,18,FOLLOW_28); 
 
             			newLeafNode(otherlv_7, grammarAccess.getApplyStatementRuleAccess().getLeftSquareBracketKeyword_7());
             		
@@ -2398,7 +2400,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
                 int alt17=2;
                 int LA17_0 = input.LA(1);
 
-                if ( (LA17_0==21) ) {
+                if ( (LA17_0==24) ) {
                     alt17=1;
                 }
 
@@ -2407,7 +2409,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
             	case 1 :
             	    // InternalGeneratorDSL.g:951:4: otherlv_9= ',' ( (lv_pipelines_10_0= rulePipelineReferenceRule ) )
             	    {
-            	    otherlv_9=(Token)match(input,21,FOLLOW_28); 
+            	    otherlv_9=(Token)match(input,24,FOLLOW_28); 
 
             	    				newLeafNode(otherlv_9, grammarAccess.getApplyStatementRuleAccess().getCommaKeyword_9_0());
             	    			
@@ -2451,11 +2453,11 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
                 }
             } while (true);
 
-            otherlv_11=(Token)match(input,16,FOLLOW_7); 
+            otherlv_11=(Token)match(input,19,FOLLOW_7); 
 
             			newLeafNode(otherlv_11, grammarAccess.getApplyStatementRuleAccess().getRightSquareBracketKeyword_10());
             		
-            otherlv_12=(Token)match(input,13,FOLLOW_2); 
+            otherlv_12=(Token)match(input,16,FOLLOW_2); 
 
             			newLeafNode(otherlv_12, grammarAccess.getApplyStatementRuleAccess().getSemicolonKeyword_11());
             		
@@ -2569,14 +2571,14 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
             int alt19=2;
             int LA19_0 = input.LA(1);
 
-            if ( (LA19_0==18) ) {
+            if ( (LA19_0==21) ) {
                 alt19=1;
             }
             switch (alt19) {
                 case 1 :
                     // InternalGeneratorDSL.g:1019:4: otherlv_1= '{' ( (lv_attributes_2_0= ruleAttributeRule ) )* otherlv_3= '}'
                     {
-                    otherlv_1=(Token)match(input,18,FOLLOW_34); 
+                    otherlv_1=(Token)match(input,21,FOLLOW_34); 
 
                     				newLeafNode(otherlv_1, grammarAccess.getInstanceRuleAccess().getLeftCurlyBracketKeyword_1_0());
                     			
@@ -2629,7 +2631,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
                         }
                     } while (true);
 
-                    otherlv_3=(Token)match(input,23,FOLLOW_2); 
+                    otherlv_3=(Token)match(input,26,FOLLOW_2); 
 
                     				newLeafNode(otherlv_3, grammarAccess.getInstanceRuleAccess().getRightCurlyBracketKeyword_1_2());
                     			
@@ -2750,7 +2752,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,35,FOLLOW_36); 
+            otherlv_1=(Token)match(input,38,FOLLOW_36); 
 
             			newLeafNode(otherlv_1, grammarAccess.getAttributeRuleAccess().getColonEqualsSignKeyword_1());
             		
@@ -2785,7 +2787,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_3=(Token)match(input,13,FOLLOW_2); 
+            otherlv_3=(Token)match(input,16,FOLLOW_2); 
 
             			newLeafNode(otherlv_3, grammarAccess.getAttributeRuleAccess().getSemicolonKeyword_3());
             		
@@ -3189,12 +3191,12 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
             // InternalGeneratorDSL.g:1234:2: (this_ArrayRule_0= ruleArrayRule | this_DataReferenceRule_1= ruleDataReferenceRule | this_InstanceRule_2= ruleInstanceRule | this_LiteralValueRule_3= ruleLiteralValueRule )
             int alt21=4;
             switch ( input.LA(1) ) {
-            case 15:
+            case 18:
                 {
                 alt21=1;
                 }
                 break;
-            case 36:
+            case 39:
                 {
                 alt21=2;
                 }
@@ -3207,8 +3209,9 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
                 break;
             case RULE_STRING:
             case RULE_INT:
-            case 46:
-            case 47:
+            case RULE_DOUBLE:
+            case 49:
+            case 50:
                 {
                 alt21=4;
                 }
@@ -3385,7 +3388,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,15,FOLLOW_37); 
+            otherlv_1=(Token)match(input,18,FOLLOW_37); 
 
             			newLeafNode(otherlv_1, grammarAccess.getArrayRuleAccess().getLeftSquareBracketKeyword_1());
             		
@@ -3393,7 +3396,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
             int alt23=2;
             int LA23_0 = input.LA(1);
 
-            if ( ((LA23_0>=RULE_STRING && LA23_0<=RULE_QUOTED_ID)||LA23_0==15||LA23_0==36||(LA23_0>=46 && LA23_0<=47)) ) {
+            if ( ((LA23_0>=RULE_STRING && LA23_0<=RULE_QUOTED_ID)||LA23_0==18||LA23_0==39||(LA23_0>=49 && LA23_0<=50)) ) {
                 alt23=1;
             }
             switch (alt23) {
@@ -3437,7 +3440,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
                         int alt22=2;
                         int LA22_0 = input.LA(1);
 
-                        if ( (LA22_0==21) ) {
+                        if ( (LA22_0==24) ) {
                             alt22=1;
                         }
 
@@ -3446,7 +3449,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
                     	case 1 :
                     	    // InternalGeneratorDSL.g:1321:5: otherlv_3= ',' ( (lv_values_4_0= ruleValueRule ) )
                     	    {
-                    	    otherlv_3=(Token)match(input,21,FOLLOW_36); 
+                    	    otherlv_3=(Token)match(input,24,FOLLOW_36); 
 
                     	    					newLeafNode(otherlv_3, grammarAccess.getArrayRuleAccess().getCommaKeyword_2_1_0());
                     	    				
@@ -3496,7 +3499,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_5=(Token)match(input,16,FOLLOW_2); 
+            otherlv_5=(Token)match(input,19,FOLLOW_2); 
 
             			newLeafNode(otherlv_5, grammarAccess.getArrayRuleAccess().getRightSquareBracketKeyword_3());
             		
@@ -3687,7 +3690,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,36,FOLLOW_8); 
+            otherlv_1=(Token)match(input,39,FOLLOW_8); 
 
             			newLeafNode(otherlv_1, grammarAccess.getDataReferenceRuleAccess().getDataKeyword_1());
             		
@@ -3917,7 +3920,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
                 int alt24=2;
                 int LA24_0 = input.LA(1);
 
-                if ( (LA24_0==37) ) {
+                if ( (LA24_0==40) ) {
                     alt24=1;
                 }
 
@@ -3926,7 +3929,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
             	case 1 :
             	    // InternalGeneratorDSL.g:1496:4: otherlv_1= 'OR' ( (lv_subExpressions_2_0= ruleXorExpressionRule ) )
             	    {
-            	    otherlv_1=(Token)match(input,37,FOLLOW_39); 
+            	    otherlv_1=(Token)match(input,40,FOLLOW_39); 
 
             	    				newLeafNode(otherlv_1, grammarAccess.getOrExpressionRuleAccess().getORKeyword_1_0());
             	    			
@@ -4086,7 +4089,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
                 int alt25=2;
                 int LA25_0 = input.LA(1);
 
-                if ( (LA25_0==38) ) {
+                if ( (LA25_0==41) ) {
                     alt25=1;
                 }
 
@@ -4095,7 +4098,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
             	case 1 :
             	    // InternalGeneratorDSL.g:1559:4: otherlv_1= 'XOR' ( (lv_subExpressions_2_0= ruleAndExpressionRule ) )
             	    {
-            	    otherlv_1=(Token)match(input,38,FOLLOW_39); 
+            	    otherlv_1=(Token)match(input,41,FOLLOW_39); 
 
             	    				newLeafNode(otherlv_1, grammarAccess.getXorExpressionRuleAccess().getXORKeyword_1_0());
             	    			
@@ -4255,7 +4258,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
                 int alt26=2;
                 int LA26_0 = input.LA(1);
 
-                if ( (LA26_0==39) ) {
+                if ( (LA26_0==42) ) {
                     alt26=1;
                 }
 
@@ -4264,7 +4267,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
             	case 1 :
             	    // InternalGeneratorDSL.g:1622:4: otherlv_1= 'AND' ( (lv_subExpressions_2_0= ruleNotExpressionRule ) )
             	    {
-            	    otherlv_1=(Token)match(input,39,FOLLOW_39); 
+            	    otherlv_1=(Token)match(input,42,FOLLOW_39); 
 
             	    				newLeafNode(otherlv_1, grammarAccess.getAndExpressionRuleAccess().getANDKeyword_1_0());
             	    			
@@ -4389,7 +4392,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
             int alt27=2;
             int LA27_0 = input.LA(1);
 
-            if ( (LA27_0==40) ) {
+            if ( (LA27_0==43) ) {
                 alt27=1;
             }
             switch (alt27) {
@@ -4399,7 +4402,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
                     // InternalGeneratorDSL.g:1666:4: (lv_negated_0_0= '!' )
                     // InternalGeneratorDSL.g:1667:5: lv_negated_0_0= '!'
                     {
-                    lv_negated_0_0=(Token)match(input,40,FOLLOW_39); 
+                    lv_negated_0_0=(Token)match(input,43,FOLLOW_39); 
 
                     					newLeafNode(lv_negated_0_0, grammarAccess.getNotExpressionRuleAccess().getNegatedExclamationMarkKeyword_0_0());
                     				
@@ -4564,7 +4567,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
                 int alt28=2;
                 int LA28_0 = input.LA(1);
 
-                if ( ((LA28_0>=49 && LA28_0<=54)) ) {
+                if ( ((LA28_0>=51 && LA28_0<=56)) ) {
                     alt28=1;
                 }
 
@@ -4864,7 +4867,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
                 int alt29=2;
                 int LA29_0 = input.LA(1);
 
-                if ( ((LA29_0>=55 && LA29_0<=56)) ) {
+                if ( ((LA29_0>=57 && LA29_0<=58)) ) {
                     alt29=1;
                 }
 
@@ -5061,7 +5064,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
                 int alt30=2;
                 int LA30_0 = input.LA(1);
 
-                if ( ((LA30_0>=57 && LA30_0<=59)) ) {
+                if ( ((LA30_0>=59 && LA30_0<=61)) ) {
                     alt30=1;
                 }
 
@@ -5255,14 +5258,14 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
             int alt31=2;
             int LA31_0 = input.LA(1);
 
-            if ( (LA31_0==41) ) {
+            if ( (LA31_0==44) ) {
                 alt31=1;
             }
             switch (alt31) {
                 case 1 :
                     // InternalGeneratorDSL.g:2007:4: otherlv_1= '^' ( (lv_rightOperand_2_0= rulePowerOfExpressionRule ) )
                     {
-                    otherlv_1=(Token)match(input,41,FOLLOW_39); 
+                    otherlv_1=(Token)match(input,44,FOLLOW_39); 
 
                     				newLeafNode(otherlv_1, grammarAccess.getPowerOfExpressionRuleAccess().getCircumflexAccentKeyword_1_0());
                     			
@@ -5387,7 +5390,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
                 int alt32=2;
                 int LA32_0 = input.LA(1);
 
-                if ( ((LA32_0>=55 && LA32_0<=56)) ) {
+                if ( ((LA32_0>=57 && LA32_0<=58)) ) {
                     alt32=1;
                 }
 
@@ -5543,25 +5546,26 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
             // InternalGeneratorDSL.g:2106:2: (this_CallRule_0= ruleCallRule | this_LiteralRule_1= ruleLiteralRule | this_ParanthesesRule_2= ruleParanthesesRule | this_ValueReferenceRule_3= ruleValueReferenceRule )
             int alt33=4;
             switch ( input.LA(1) ) {
-            case 44:
+            case 47:
                 {
                 alt33=1;
                 }
                 break;
             case RULE_STRING:
             case RULE_INT:
-            case 46:
-            case 47:
+            case RULE_DOUBLE:
+            case 49:
+            case 50:
                 {
                 alt33=2;
                 }
                 break;
-            case 42:
+            case 45:
                 {
                 alt33=3;
                 }
                 break;
-            case 45:
+            case 48:
                 {
                 alt33=4;
                 }
@@ -5724,7 +5728,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
             // InternalGeneratorDSL.g:2160:2: (otherlv_0= '(' ( (lv_subExpression_1_0= ruleExpressionRule ) ) otherlv_2= ')' )
             // InternalGeneratorDSL.g:2161:3: otherlv_0= '(' ( (lv_subExpression_1_0= ruleExpressionRule ) ) otherlv_2= ')'
             {
-            otherlv_0=(Token)match(input,42,FOLLOW_39); 
+            otherlv_0=(Token)match(input,45,FOLLOW_39); 
 
             			newLeafNode(otherlv_0, grammarAccess.getParanthesesRuleAccess().getLeftParenthesisKeyword_0());
             		
@@ -5759,7 +5763,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_2=(Token)match(input,43,FOLLOW_2); 
+            otherlv_2=(Token)match(input,46,FOLLOW_2); 
 
             			newLeafNode(otherlv_2, grammarAccess.getParanthesesRuleAccess().getRightParenthesisKeyword_2());
             		
@@ -5877,7 +5881,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,42,FOLLOW_48); 
+            otherlv_1=(Token)match(input,45,FOLLOW_48); 
 
             			newLeafNode(otherlv_1, grammarAccess.getCallRuleAccess().getLeftParenthesisKeyword_1());
             		
@@ -5885,7 +5889,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
             int alt35=2;
             int LA35_0 = input.LA(1);
 
-            if ( (LA35_0==RULE_STRING||LA35_0==RULE_INT||LA35_0==40||LA35_0==42||(LA35_0>=44 && LA35_0<=47)||(LA35_0>=55 && LA35_0<=56)) ) {
+            if ( (LA35_0==RULE_STRING||(LA35_0>=RULE_INT && LA35_0<=RULE_DOUBLE)||LA35_0==43||LA35_0==45||(LA35_0>=47 && LA35_0<=50)||(LA35_0>=57 && LA35_0<=58)) ) {
                 alt35=1;
             }
             switch (alt35) {
@@ -5929,7 +5933,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
                         int alt34=2;
                         int LA34_0 = input.LA(1);
 
-                        if ( (LA34_0==21) ) {
+                        if ( (LA34_0==24) ) {
                             alt34=1;
                         }
 
@@ -5938,7 +5942,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
                     	case 1 :
                     	    // InternalGeneratorDSL.g:2251:5: otherlv_3= ',' ( (lv_parameters_4_0= ruleExpressionRule ) )
                     	    {
-                    	    otherlv_3=(Token)match(input,21,FOLLOW_39); 
+                    	    otherlv_3=(Token)match(input,24,FOLLOW_39); 
 
                     	    					newLeafNode(otherlv_3, grammarAccess.getCallRuleAccess().getCommaKeyword_2_1_0());
                     	    				
@@ -5988,7 +5992,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_5=(Token)match(input,43,FOLLOW_2); 
+            otherlv_5=(Token)match(input,46,FOLLOW_2); 
 
             			newLeafNode(otherlv_5, grammarAccess.getCallRuleAccess().getRightParenthesisKeyword_3());
             		
@@ -6078,7 +6082,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,44,FOLLOW_2); 
+            otherlv_1=(Token)match(input,47,FOLLOW_2); 
 
             			newLeafNode(otherlv_1, grammarAccess.getFunctionNameRuleAccess().getCallKeyword_1());
             		
@@ -6168,7 +6172,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,45,FOLLOW_2); 
+            otherlv_1=(Token)match(input,48,FOLLOW_2); 
 
             			newLeafNode(otherlv_1, grammarAccess.getValueReferenceRuleAccess().getValueKeyword_1());
             		
@@ -6253,6 +6257,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
             int alt36=3;
             switch ( input.LA(1) ) {
             case RULE_INT:
+            case RULE_DOUBLE:
                 {
                 alt36=1;
                 }
@@ -6262,8 +6267,8 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
                 alt36=2;
                 }
                 break;
-            case 46:
-            case 47:
+            case 49:
+            case 50:
                 {
                 alt36=3;
                 }
@@ -6409,21 +6414,11 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
             int alt37=2;
             int LA37_0 = input.LA(1);
 
-            if ( (LA37_0==RULE_INT) ) {
-                int LA37_1 = input.LA(2);
-
-                if ( (LA37_1==48) ) {
-                    alt37=1;
-                }
-                else if ( (LA37_1==EOF||LA37_1==13||LA37_1==16||LA37_1==21||(LA37_1>=37 && LA37_1<=39)||LA37_1==41||LA37_1==43||(LA37_1>=49 && LA37_1<=79)) ) {
-                    alt37=2;
-                }
-                else {
-                    NoViableAltException nvae =
-                        new NoViableAltException("", 37, 1, input);
-
-                    throw nvae;
-                }
+            if ( (LA37_0==RULE_DOUBLE) ) {
+                alt37=1;
+            }
+            else if ( (LA37_0==RULE_INT) ) {
+                alt37=2;
             }
             else {
                 NoViableAltException nvae =
@@ -6527,12 +6522,11 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleDoubleLiteralRule"
-    // InternalGeneratorDSL.g:2432:1: ruleDoubleLiteralRule returns [EObject current=null] : ( ( (lv_literal_0_0= ruleDOUBLE ) ) ( (lv_factor_1_0= ruleFactorRule ) )? ) ;
+    // InternalGeneratorDSL.g:2432:1: ruleDoubleLiteralRule returns [EObject current=null] : ( ( (lv_literal_0_0= RULE_DOUBLE ) ) ( (lv_factor_1_0= ruleFactorRule ) )? ) ;
     public final EObject ruleDoubleLiteralRule() throws RecognitionException {
         EObject current = null;
 
-        AntlrDatatypeRuleToken lv_literal_0_0 = null;
-
+        Token lv_literal_0_0=null;
         Enumerator lv_factor_1_0 = null;
 
 
@@ -6540,36 +6534,31 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalGeneratorDSL.g:2438:2: ( ( ( (lv_literal_0_0= ruleDOUBLE ) ) ( (lv_factor_1_0= ruleFactorRule ) )? ) )
-            // InternalGeneratorDSL.g:2439:2: ( ( (lv_literal_0_0= ruleDOUBLE ) ) ( (lv_factor_1_0= ruleFactorRule ) )? )
+            // InternalGeneratorDSL.g:2438:2: ( ( ( (lv_literal_0_0= RULE_DOUBLE ) ) ( (lv_factor_1_0= ruleFactorRule ) )? ) )
+            // InternalGeneratorDSL.g:2439:2: ( ( (lv_literal_0_0= RULE_DOUBLE ) ) ( (lv_factor_1_0= ruleFactorRule ) )? )
             {
-            // InternalGeneratorDSL.g:2439:2: ( ( (lv_literal_0_0= ruleDOUBLE ) ) ( (lv_factor_1_0= ruleFactorRule ) )? )
-            // InternalGeneratorDSL.g:2440:3: ( (lv_literal_0_0= ruleDOUBLE ) ) ( (lv_factor_1_0= ruleFactorRule ) )?
+            // InternalGeneratorDSL.g:2439:2: ( ( (lv_literal_0_0= RULE_DOUBLE ) ) ( (lv_factor_1_0= ruleFactorRule ) )? )
+            // InternalGeneratorDSL.g:2440:3: ( (lv_literal_0_0= RULE_DOUBLE ) ) ( (lv_factor_1_0= ruleFactorRule ) )?
             {
-            // InternalGeneratorDSL.g:2440:3: ( (lv_literal_0_0= ruleDOUBLE ) )
-            // InternalGeneratorDSL.g:2441:4: (lv_literal_0_0= ruleDOUBLE )
+            // InternalGeneratorDSL.g:2440:3: ( (lv_literal_0_0= RULE_DOUBLE ) )
+            // InternalGeneratorDSL.g:2441:4: (lv_literal_0_0= RULE_DOUBLE )
             {
-            // InternalGeneratorDSL.g:2441:4: (lv_literal_0_0= ruleDOUBLE )
-            // InternalGeneratorDSL.g:2442:5: lv_literal_0_0= ruleDOUBLE
+            // InternalGeneratorDSL.g:2441:4: (lv_literal_0_0= RULE_DOUBLE )
+            // InternalGeneratorDSL.g:2442:5: lv_literal_0_0= RULE_DOUBLE
             {
+            lv_literal_0_0=(Token)match(input,RULE_DOUBLE,FOLLOW_50); 
 
-            					newCompositeNode(grammarAccess.getDoubleLiteralRuleAccess().getLiteralDOUBLEParserRuleCall_0_0());
+            					newLeafNode(lv_literal_0_0, grammarAccess.getDoubleLiteralRuleAccess().getLiteralDOUBLETerminalRuleCall_0_0());
             				
-            pushFollow(FOLLOW_50);
-            lv_literal_0_0=ruleDOUBLE();
-
-            state._fsp--;
-
 
             					if (current==null) {
-            						current = createModelElementForParent(grammarAccess.getDoubleLiteralRuleRule());
+            						current = createModelElement(grammarAccess.getDoubleLiteralRuleRule());
             					}
-            					set(
+            					setWithLastConsumed(
             						current,
             						"literal",
             						lv_literal_0_0,
             						"de.evoal.languages.model.el.dsl.ExpressionLanguage.DOUBLE");
-            					afterParserOrEnumRuleCall();
             				
 
             }
@@ -6577,19 +6566,19 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalGeneratorDSL.g:2459:3: ( (lv_factor_1_0= ruleFactorRule ) )?
+            // InternalGeneratorDSL.g:2458:3: ( (lv_factor_1_0= ruleFactorRule ) )?
             int alt38=2;
             int LA38_0 = input.LA(1);
 
-            if ( ((LA38_0>=60 && LA38_0<=79)) ) {
+            if ( ((LA38_0>=62 && LA38_0<=81)) ) {
                 alt38=1;
             }
             switch (alt38) {
                 case 1 :
-                    // InternalGeneratorDSL.g:2460:4: (lv_factor_1_0= ruleFactorRule )
+                    // InternalGeneratorDSL.g:2459:4: (lv_factor_1_0= ruleFactorRule )
                     {
-                    // InternalGeneratorDSL.g:2460:4: (lv_factor_1_0= ruleFactorRule )
-                    // InternalGeneratorDSL.g:2461:5: lv_factor_1_0= ruleFactorRule
+                    // InternalGeneratorDSL.g:2459:4: (lv_factor_1_0= ruleFactorRule )
+                    // InternalGeneratorDSL.g:2460:5: lv_factor_1_0= ruleFactorRule
                     {
 
                     					newCompositeNode(grammarAccess.getDoubleLiteralRuleAccess().getFactorFactorRuleEnumRuleCall_1_0());
@@ -6642,7 +6631,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleIntegerLiteralRule"
-    // InternalGeneratorDSL.g:2482:1: entryRuleIntegerLiteralRule returns [EObject current=null] : iv_ruleIntegerLiteralRule= ruleIntegerLiteralRule EOF ;
+    // InternalGeneratorDSL.g:2481:1: entryRuleIntegerLiteralRule returns [EObject current=null] : iv_ruleIntegerLiteralRule= ruleIntegerLiteralRule EOF ;
     public final EObject entryRuleIntegerLiteralRule() throws RecognitionException {
         EObject current = null;
 
@@ -6650,8 +6639,8 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalGeneratorDSL.g:2482:59: (iv_ruleIntegerLiteralRule= ruleIntegerLiteralRule EOF )
-            // InternalGeneratorDSL.g:2483:2: iv_ruleIntegerLiteralRule= ruleIntegerLiteralRule EOF
+            // InternalGeneratorDSL.g:2481:59: (iv_ruleIntegerLiteralRule= ruleIntegerLiteralRule EOF )
+            // InternalGeneratorDSL.g:2482:2: iv_ruleIntegerLiteralRule= ruleIntegerLiteralRule EOF
             {
              newCompositeNode(grammarAccess.getIntegerLiteralRuleRule()); 
             pushFollow(FOLLOW_1);
@@ -6678,7 +6667,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleIntegerLiteralRule"
-    // InternalGeneratorDSL.g:2489:1: ruleIntegerLiteralRule returns [EObject current=null] : ( ( (lv_literal_0_0= RULE_INT ) ) ( (lv_factor_1_0= ruleFactorRule ) )? ) ;
+    // InternalGeneratorDSL.g:2488:1: ruleIntegerLiteralRule returns [EObject current=null] : ( ( (lv_literal_0_0= RULE_INT ) ) ( (lv_factor_1_0= ruleFactorRule ) )? ) ;
     public final EObject ruleIntegerLiteralRule() throws RecognitionException {
         EObject current = null;
 
@@ -6690,17 +6679,17 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalGeneratorDSL.g:2495:2: ( ( ( (lv_literal_0_0= RULE_INT ) ) ( (lv_factor_1_0= ruleFactorRule ) )? ) )
-            // InternalGeneratorDSL.g:2496:2: ( ( (lv_literal_0_0= RULE_INT ) ) ( (lv_factor_1_0= ruleFactorRule ) )? )
+            // InternalGeneratorDSL.g:2494:2: ( ( ( (lv_literal_0_0= RULE_INT ) ) ( (lv_factor_1_0= ruleFactorRule ) )? ) )
+            // InternalGeneratorDSL.g:2495:2: ( ( (lv_literal_0_0= RULE_INT ) ) ( (lv_factor_1_0= ruleFactorRule ) )? )
             {
-            // InternalGeneratorDSL.g:2496:2: ( ( (lv_literal_0_0= RULE_INT ) ) ( (lv_factor_1_0= ruleFactorRule ) )? )
-            // InternalGeneratorDSL.g:2497:3: ( (lv_literal_0_0= RULE_INT ) ) ( (lv_factor_1_0= ruleFactorRule ) )?
+            // InternalGeneratorDSL.g:2495:2: ( ( (lv_literal_0_0= RULE_INT ) ) ( (lv_factor_1_0= ruleFactorRule ) )? )
+            // InternalGeneratorDSL.g:2496:3: ( (lv_literal_0_0= RULE_INT ) ) ( (lv_factor_1_0= ruleFactorRule ) )?
             {
-            // InternalGeneratorDSL.g:2497:3: ( (lv_literal_0_0= RULE_INT ) )
-            // InternalGeneratorDSL.g:2498:4: (lv_literal_0_0= RULE_INT )
+            // InternalGeneratorDSL.g:2496:3: ( (lv_literal_0_0= RULE_INT ) )
+            // InternalGeneratorDSL.g:2497:4: (lv_literal_0_0= RULE_INT )
             {
-            // InternalGeneratorDSL.g:2498:4: (lv_literal_0_0= RULE_INT )
-            // InternalGeneratorDSL.g:2499:5: lv_literal_0_0= RULE_INT
+            // InternalGeneratorDSL.g:2497:4: (lv_literal_0_0= RULE_INT )
+            // InternalGeneratorDSL.g:2498:5: lv_literal_0_0= RULE_INT
             {
             lv_literal_0_0=(Token)match(input,RULE_INT,FOLLOW_50); 
 
@@ -6714,7 +6703,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
             						current,
             						"literal",
             						lv_literal_0_0,
-            						"org.eclipse.xtext.common.Terminals.INT");
+            						"de.evoal.languages.model.el.dsl.ExpressionLanguage.INT");
             				
 
             }
@@ -6722,19 +6711,19 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalGeneratorDSL.g:2515:3: ( (lv_factor_1_0= ruleFactorRule ) )?
+            // InternalGeneratorDSL.g:2514:3: ( (lv_factor_1_0= ruleFactorRule ) )?
             int alt39=2;
             int LA39_0 = input.LA(1);
 
-            if ( ((LA39_0>=60 && LA39_0<=79)) ) {
+            if ( ((LA39_0>=62 && LA39_0<=81)) ) {
                 alt39=1;
             }
             switch (alt39) {
                 case 1 :
-                    // InternalGeneratorDSL.g:2516:4: (lv_factor_1_0= ruleFactorRule )
+                    // InternalGeneratorDSL.g:2515:4: (lv_factor_1_0= ruleFactorRule )
                     {
-                    // InternalGeneratorDSL.g:2516:4: (lv_factor_1_0= ruleFactorRule )
-                    // InternalGeneratorDSL.g:2517:5: lv_factor_1_0= ruleFactorRule
+                    // InternalGeneratorDSL.g:2515:4: (lv_factor_1_0= ruleFactorRule )
+                    // InternalGeneratorDSL.g:2516:5: lv_factor_1_0= ruleFactorRule
                     {
 
                     					newCompositeNode(grammarAccess.getIntegerLiteralRuleAccess().getFactorFactorRuleEnumRuleCall_1_0());
@@ -6787,7 +6776,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleStringLiteralRule"
-    // InternalGeneratorDSL.g:2538:1: entryRuleStringLiteralRule returns [EObject current=null] : iv_ruleStringLiteralRule= ruleStringLiteralRule EOF ;
+    // InternalGeneratorDSL.g:2537:1: entryRuleStringLiteralRule returns [EObject current=null] : iv_ruleStringLiteralRule= ruleStringLiteralRule EOF ;
     public final EObject entryRuleStringLiteralRule() throws RecognitionException {
         EObject current = null;
 
@@ -6795,8 +6784,8 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalGeneratorDSL.g:2538:58: (iv_ruleStringLiteralRule= ruleStringLiteralRule EOF )
-            // InternalGeneratorDSL.g:2539:2: iv_ruleStringLiteralRule= ruleStringLiteralRule EOF
+            // InternalGeneratorDSL.g:2537:58: (iv_ruleStringLiteralRule= ruleStringLiteralRule EOF )
+            // InternalGeneratorDSL.g:2538:2: iv_ruleStringLiteralRule= ruleStringLiteralRule EOF
             {
              newCompositeNode(grammarAccess.getStringLiteralRuleRule()); 
             pushFollow(FOLLOW_1);
@@ -6823,7 +6812,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleStringLiteralRule"
-    // InternalGeneratorDSL.g:2545:1: ruleStringLiteralRule returns [EObject current=null] : ( (lv_value_0_0= RULE_STRING ) ) ;
+    // InternalGeneratorDSL.g:2544:1: ruleStringLiteralRule returns [EObject current=null] : ( (lv_value_0_0= RULE_STRING ) ) ;
     public final EObject ruleStringLiteralRule() throws RecognitionException {
         EObject current = null;
 
@@ -6833,14 +6822,14 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalGeneratorDSL.g:2551:2: ( ( (lv_value_0_0= RULE_STRING ) ) )
-            // InternalGeneratorDSL.g:2552:2: ( (lv_value_0_0= RULE_STRING ) )
+            // InternalGeneratorDSL.g:2550:2: ( ( (lv_value_0_0= RULE_STRING ) ) )
+            // InternalGeneratorDSL.g:2551:2: ( (lv_value_0_0= RULE_STRING ) )
             {
-            // InternalGeneratorDSL.g:2552:2: ( (lv_value_0_0= RULE_STRING ) )
-            // InternalGeneratorDSL.g:2553:3: (lv_value_0_0= RULE_STRING )
+            // InternalGeneratorDSL.g:2551:2: ( (lv_value_0_0= RULE_STRING ) )
+            // InternalGeneratorDSL.g:2552:3: (lv_value_0_0= RULE_STRING )
             {
-            // InternalGeneratorDSL.g:2553:3: (lv_value_0_0= RULE_STRING )
-            // InternalGeneratorDSL.g:2554:4: lv_value_0_0= RULE_STRING
+            // InternalGeneratorDSL.g:2552:3: (lv_value_0_0= RULE_STRING )
+            // InternalGeneratorDSL.g:2553:4: lv_value_0_0= RULE_STRING
             {
             lv_value_0_0=(Token)match(input,RULE_STRING,FOLLOW_2); 
 
@@ -6882,7 +6871,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleBooleanLiteralRule"
-    // InternalGeneratorDSL.g:2573:1: entryRuleBooleanLiteralRule returns [EObject current=null] : iv_ruleBooleanLiteralRule= ruleBooleanLiteralRule EOF ;
+    // InternalGeneratorDSL.g:2572:1: entryRuleBooleanLiteralRule returns [EObject current=null] : iv_ruleBooleanLiteralRule= ruleBooleanLiteralRule EOF ;
     public final EObject entryRuleBooleanLiteralRule() throws RecognitionException {
         EObject current = null;
 
@@ -6890,8 +6879,8 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalGeneratorDSL.g:2573:59: (iv_ruleBooleanLiteralRule= ruleBooleanLiteralRule EOF )
-            // InternalGeneratorDSL.g:2574:2: iv_ruleBooleanLiteralRule= ruleBooleanLiteralRule EOF
+            // InternalGeneratorDSL.g:2572:59: (iv_ruleBooleanLiteralRule= ruleBooleanLiteralRule EOF )
+            // InternalGeneratorDSL.g:2573:2: iv_ruleBooleanLiteralRule= ruleBooleanLiteralRule EOF
             {
              newCompositeNode(grammarAccess.getBooleanLiteralRuleRule()); 
             pushFollow(FOLLOW_1);
@@ -6918,7 +6907,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleBooleanLiteralRule"
-    // InternalGeneratorDSL.g:2580:1: ruleBooleanLiteralRule returns [EObject current=null] : ( () ( ( (lv_value_1_0= 'true' ) ) | otherlv_2= 'false' ) ) ;
+    // InternalGeneratorDSL.g:2579:1: ruleBooleanLiteralRule returns [EObject current=null] : ( () ( ( (lv_value_1_0= 'true' ) ) | otherlv_2= 'false' ) ) ;
     public final EObject ruleBooleanLiteralRule() throws RecognitionException {
         EObject current = null;
 
@@ -6929,14 +6918,14 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalGeneratorDSL.g:2586:2: ( ( () ( ( (lv_value_1_0= 'true' ) ) | otherlv_2= 'false' ) ) )
-            // InternalGeneratorDSL.g:2587:2: ( () ( ( (lv_value_1_0= 'true' ) ) | otherlv_2= 'false' ) )
+            // InternalGeneratorDSL.g:2585:2: ( ( () ( ( (lv_value_1_0= 'true' ) ) | otherlv_2= 'false' ) ) )
+            // InternalGeneratorDSL.g:2586:2: ( () ( ( (lv_value_1_0= 'true' ) ) | otherlv_2= 'false' ) )
             {
-            // InternalGeneratorDSL.g:2587:2: ( () ( ( (lv_value_1_0= 'true' ) ) | otherlv_2= 'false' ) )
-            // InternalGeneratorDSL.g:2588:3: () ( ( (lv_value_1_0= 'true' ) ) | otherlv_2= 'false' )
+            // InternalGeneratorDSL.g:2586:2: ( () ( ( (lv_value_1_0= 'true' ) ) | otherlv_2= 'false' ) )
+            // InternalGeneratorDSL.g:2587:3: () ( ( (lv_value_1_0= 'true' ) ) | otherlv_2= 'false' )
             {
-            // InternalGeneratorDSL.g:2588:3: ()
-            // InternalGeneratorDSL.g:2589:4: 
+            // InternalGeneratorDSL.g:2587:3: ()
+            // InternalGeneratorDSL.g:2588:4: 
             {
 
             				current = forceCreateModelElement(
@@ -6946,14 +6935,14 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalGeneratorDSL.g:2595:3: ( ( (lv_value_1_0= 'true' ) ) | otherlv_2= 'false' )
+            // InternalGeneratorDSL.g:2594:3: ( ( (lv_value_1_0= 'true' ) ) | otherlv_2= 'false' )
             int alt40=2;
             int LA40_0 = input.LA(1);
 
-            if ( (LA40_0==46) ) {
+            if ( (LA40_0==49) ) {
                 alt40=1;
             }
-            else if ( (LA40_0==47) ) {
+            else if ( (LA40_0==50) ) {
                 alt40=2;
             }
             else {
@@ -6964,15 +6953,15 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
             }
             switch (alt40) {
                 case 1 :
-                    // InternalGeneratorDSL.g:2596:4: ( (lv_value_1_0= 'true' ) )
+                    // InternalGeneratorDSL.g:2595:4: ( (lv_value_1_0= 'true' ) )
                     {
-                    // InternalGeneratorDSL.g:2596:4: ( (lv_value_1_0= 'true' ) )
-                    // InternalGeneratorDSL.g:2597:5: (lv_value_1_0= 'true' )
+                    // InternalGeneratorDSL.g:2595:4: ( (lv_value_1_0= 'true' ) )
+                    // InternalGeneratorDSL.g:2596:5: (lv_value_1_0= 'true' )
                     {
-                    // InternalGeneratorDSL.g:2597:5: (lv_value_1_0= 'true' )
-                    // InternalGeneratorDSL.g:2598:6: lv_value_1_0= 'true'
+                    // InternalGeneratorDSL.g:2596:5: (lv_value_1_0= 'true' )
+                    // InternalGeneratorDSL.g:2597:6: lv_value_1_0= 'true'
                     {
-                    lv_value_1_0=(Token)match(input,46,FOLLOW_2); 
+                    lv_value_1_0=(Token)match(input,49,FOLLOW_2); 
 
                     						newLeafNode(lv_value_1_0, grammarAccess.getBooleanLiteralRuleAccess().getValueTrueKeyword_1_0_0());
                     					
@@ -6992,9 +6981,9 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalGeneratorDSL.g:2611:4: otherlv_2= 'false'
+                    // InternalGeneratorDSL.g:2610:4: otherlv_2= 'false'
                     {
-                    otherlv_2=(Token)match(input,47,FOLLOW_2); 
+                    otherlv_2=(Token)match(input,50,FOLLOW_2); 
 
                     				newLeafNode(otherlv_2, grammarAccess.getBooleanLiteralRuleAccess().getFalseKeyword_1_1());
                     			
@@ -7027,7 +7016,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleStringOrId"
-    // InternalGeneratorDSL.g:2620:1: entryRuleStringOrId returns [String current=null] : iv_ruleStringOrId= ruleStringOrId EOF ;
+    // InternalGeneratorDSL.g:2619:1: entryRuleStringOrId returns [String current=null] : iv_ruleStringOrId= ruleStringOrId EOF ;
     public final String entryRuleStringOrId() throws RecognitionException {
         String current = null;
 
@@ -7035,8 +7024,8 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalGeneratorDSL.g:2620:50: (iv_ruleStringOrId= ruleStringOrId EOF )
-            // InternalGeneratorDSL.g:2621:2: iv_ruleStringOrId= ruleStringOrId EOF
+            // InternalGeneratorDSL.g:2619:50: (iv_ruleStringOrId= ruleStringOrId EOF )
+            // InternalGeneratorDSL.g:2620:2: iv_ruleStringOrId= ruleStringOrId EOF
             {
              newCompositeNode(grammarAccess.getStringOrIdRule()); 
             pushFollow(FOLLOW_1);
@@ -7063,7 +7052,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleStringOrId"
-    // InternalGeneratorDSL.g:2627:1: ruleStringOrId returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_QUOTED_ID_0= RULE_QUOTED_ID | this_ID_1= RULE_ID ) ;
+    // InternalGeneratorDSL.g:2626:1: ruleStringOrId returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_QUOTED_ID_0= RULE_QUOTED_ID | this_ID_1= RULE_ID ) ;
     public final AntlrDatatypeRuleToken ruleStringOrId() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -7074,10 +7063,10 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalGeneratorDSL.g:2633:2: ( (this_QUOTED_ID_0= RULE_QUOTED_ID | this_ID_1= RULE_ID ) )
-            // InternalGeneratorDSL.g:2634:2: (this_QUOTED_ID_0= RULE_QUOTED_ID | this_ID_1= RULE_ID )
+            // InternalGeneratorDSL.g:2632:2: ( (this_QUOTED_ID_0= RULE_QUOTED_ID | this_ID_1= RULE_ID ) )
+            // InternalGeneratorDSL.g:2633:2: (this_QUOTED_ID_0= RULE_QUOTED_ID | this_ID_1= RULE_ID )
             {
-            // InternalGeneratorDSL.g:2634:2: (this_QUOTED_ID_0= RULE_QUOTED_ID | this_ID_1= RULE_ID )
+            // InternalGeneratorDSL.g:2633:2: (this_QUOTED_ID_0= RULE_QUOTED_ID | this_ID_1= RULE_ID )
             int alt41=2;
             int LA41_0 = input.LA(1);
 
@@ -7095,7 +7084,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
             }
             switch (alt41) {
                 case 1 :
-                    // InternalGeneratorDSL.g:2635:3: this_QUOTED_ID_0= RULE_QUOTED_ID
+                    // InternalGeneratorDSL.g:2634:3: this_QUOTED_ID_0= RULE_QUOTED_ID
                     {
                     this_QUOTED_ID_0=(Token)match(input,RULE_QUOTED_ID,FOLLOW_2); 
 
@@ -7108,7 +7097,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalGeneratorDSL.g:2643:3: this_ID_1= RULE_ID
+                    // InternalGeneratorDSL.g:2642:3: this_ID_1= RULE_ID
                     {
                     this_ID_1=(Token)match(input,RULE_ID,FOLLOW_2); 
 
@@ -7142,104 +7131,8 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
     // $ANTLR end "ruleStringOrId"
 
 
-    // $ANTLR start "entryRuleDOUBLE"
-    // InternalGeneratorDSL.g:2654:1: entryRuleDOUBLE returns [String current=null] : iv_ruleDOUBLE= ruleDOUBLE EOF ;
-    public final String entryRuleDOUBLE() throws RecognitionException {
-        String current = null;
-
-        AntlrDatatypeRuleToken iv_ruleDOUBLE = null;
-
-
-        try {
-            // InternalGeneratorDSL.g:2654:46: (iv_ruleDOUBLE= ruleDOUBLE EOF )
-            // InternalGeneratorDSL.g:2655:2: iv_ruleDOUBLE= ruleDOUBLE EOF
-            {
-             newCompositeNode(grammarAccess.getDOUBLERule()); 
-            pushFollow(FOLLOW_1);
-            iv_ruleDOUBLE=ruleDOUBLE();
-
-            state._fsp--;
-
-             current =iv_ruleDOUBLE.getText(); 
-            match(input,EOF,FOLLOW_2); 
-
-            }
-
-        }
-
-            catch (RecognitionException re) {
-                recover(input,re);
-                appendSkippedTokens();
-            }
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "entryRuleDOUBLE"
-
-
-    // $ANTLR start "ruleDOUBLE"
-    // InternalGeneratorDSL.g:2661:1: ruleDOUBLE returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_INT_0= RULE_INT kw= '.' this_INT_2= RULE_INT ) ;
-    public final AntlrDatatypeRuleToken ruleDOUBLE() throws RecognitionException {
-        AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
-
-        Token this_INT_0=null;
-        Token kw=null;
-        Token this_INT_2=null;
-
-
-        	enterRule();
-
-        try {
-            // InternalGeneratorDSL.g:2667:2: ( (this_INT_0= RULE_INT kw= '.' this_INT_2= RULE_INT ) )
-            // InternalGeneratorDSL.g:2668:2: (this_INT_0= RULE_INT kw= '.' this_INT_2= RULE_INT )
-            {
-            // InternalGeneratorDSL.g:2668:2: (this_INT_0= RULE_INT kw= '.' this_INT_2= RULE_INT )
-            // InternalGeneratorDSL.g:2669:3: this_INT_0= RULE_INT kw= '.' this_INT_2= RULE_INT
-            {
-            this_INT_0=(Token)match(input,RULE_INT,FOLLOW_51); 
-
-            			current.merge(this_INT_0);
-            		
-
-            			newLeafNode(this_INT_0, grammarAccess.getDOUBLEAccess().getINTTerminalRuleCall_0());
-            		
-            kw=(Token)match(input,48,FOLLOW_24); 
-
-            			current.merge(kw);
-            			newLeafNode(kw, grammarAccess.getDOUBLEAccess().getFullStopKeyword_1());
-            		
-            this_INT_2=(Token)match(input,RULE_INT,FOLLOW_2); 
-
-            			current.merge(this_INT_2);
-            		
-
-            			newLeafNode(this_INT_2, grammarAccess.getDOUBLEAccess().getINTTerminalRuleCall_2());
-            		
-
-            }
-
-
-            }
-
-
-            	leaveRule();
-
-        }
-
-            catch (RecognitionException re) {
-                recover(input,re);
-                appendSkippedTokens();
-            }
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "ruleDOUBLE"
-
-
     // $ANTLR start "ruleComparisonOperatorRule"
-    // InternalGeneratorDSL.g:2692:1: ruleComparisonOperatorRule returns [Enumerator current=null] : ( (enumLiteral_0= '>=' ) | (enumLiteral_1= '>' ) | (enumLiteral_2= '=' ) | (enumLiteral_3= '!=' ) | (enumLiteral_4= '<' ) | (enumLiteral_5= '<=' ) ) ;
+    // InternalGeneratorDSL.g:2653:1: ruleComparisonOperatorRule returns [Enumerator current=null] : ( (enumLiteral_0= '>=' ) | (enumLiteral_1= '>' ) | (enumLiteral_2= '=' ) | (enumLiteral_3= '!=' ) | (enumLiteral_4= '<' ) | (enumLiteral_5= '<=' ) ) ;
     public final Enumerator ruleComparisonOperatorRule() throws RecognitionException {
         Enumerator current = null;
 
@@ -7254,38 +7147,38 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalGeneratorDSL.g:2698:2: ( ( (enumLiteral_0= '>=' ) | (enumLiteral_1= '>' ) | (enumLiteral_2= '=' ) | (enumLiteral_3= '!=' ) | (enumLiteral_4= '<' ) | (enumLiteral_5= '<=' ) ) )
-            // InternalGeneratorDSL.g:2699:2: ( (enumLiteral_0= '>=' ) | (enumLiteral_1= '>' ) | (enumLiteral_2= '=' ) | (enumLiteral_3= '!=' ) | (enumLiteral_4= '<' ) | (enumLiteral_5= '<=' ) )
+            // InternalGeneratorDSL.g:2659:2: ( ( (enumLiteral_0= '>=' ) | (enumLiteral_1= '>' ) | (enumLiteral_2= '=' ) | (enumLiteral_3= '!=' ) | (enumLiteral_4= '<' ) | (enumLiteral_5= '<=' ) ) )
+            // InternalGeneratorDSL.g:2660:2: ( (enumLiteral_0= '>=' ) | (enumLiteral_1= '>' ) | (enumLiteral_2= '=' ) | (enumLiteral_3= '!=' ) | (enumLiteral_4= '<' ) | (enumLiteral_5= '<=' ) )
             {
-            // InternalGeneratorDSL.g:2699:2: ( (enumLiteral_0= '>=' ) | (enumLiteral_1= '>' ) | (enumLiteral_2= '=' ) | (enumLiteral_3= '!=' ) | (enumLiteral_4= '<' ) | (enumLiteral_5= '<=' ) )
+            // InternalGeneratorDSL.g:2660:2: ( (enumLiteral_0= '>=' ) | (enumLiteral_1= '>' ) | (enumLiteral_2= '=' ) | (enumLiteral_3= '!=' ) | (enumLiteral_4= '<' ) | (enumLiteral_5= '<=' ) )
             int alt42=6;
             switch ( input.LA(1) ) {
-            case 49:
+            case 51:
                 {
                 alt42=1;
                 }
                 break;
-            case 50:
+            case 52:
                 {
                 alt42=2;
                 }
                 break;
-            case 51:
+            case 53:
                 {
                 alt42=3;
                 }
                 break;
-            case 52:
+            case 54:
                 {
                 alt42=4;
                 }
                 break;
-            case 53:
+            case 55:
                 {
                 alt42=5;
                 }
                 break;
-            case 54:
+            case 56:
                 {
                 alt42=6;
                 }
@@ -7299,12 +7192,12 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
 
             switch (alt42) {
                 case 1 :
-                    // InternalGeneratorDSL.g:2700:3: (enumLiteral_0= '>=' )
+                    // InternalGeneratorDSL.g:2661:3: (enumLiteral_0= '>=' )
                     {
-                    // InternalGeneratorDSL.g:2700:3: (enumLiteral_0= '>=' )
-                    // InternalGeneratorDSL.g:2701:4: enumLiteral_0= '>='
+                    // InternalGeneratorDSL.g:2661:3: (enumLiteral_0= '>=' )
+                    // InternalGeneratorDSL.g:2662:4: enumLiteral_0= '>='
                     {
-                    enumLiteral_0=(Token)match(input,49,FOLLOW_2); 
+                    enumLiteral_0=(Token)match(input,51,FOLLOW_2); 
 
                     				current = grammarAccess.getComparisonOperatorRuleAccess().getGreaterThanEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
                     				newLeafNode(enumLiteral_0, grammarAccess.getComparisonOperatorRuleAccess().getGreaterThanEnumLiteralDeclaration_0());
@@ -7316,12 +7209,12 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalGeneratorDSL.g:2708:3: (enumLiteral_1= '>' )
+                    // InternalGeneratorDSL.g:2669:3: (enumLiteral_1= '>' )
                     {
-                    // InternalGeneratorDSL.g:2708:3: (enumLiteral_1= '>' )
-                    // InternalGeneratorDSL.g:2709:4: enumLiteral_1= '>'
+                    // InternalGeneratorDSL.g:2669:3: (enumLiteral_1= '>' )
+                    // InternalGeneratorDSL.g:2670:4: enumLiteral_1= '>'
                     {
-                    enumLiteral_1=(Token)match(input,50,FOLLOW_2); 
+                    enumLiteral_1=(Token)match(input,52,FOLLOW_2); 
 
                     				current = grammarAccess.getComparisonOperatorRuleAccess().getGreaterEqualEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
                     				newLeafNode(enumLiteral_1, grammarAccess.getComparisonOperatorRuleAccess().getGreaterEqualEnumLiteralDeclaration_1());
@@ -7333,12 +7226,12 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // InternalGeneratorDSL.g:2716:3: (enumLiteral_2= '=' )
+                    // InternalGeneratorDSL.g:2677:3: (enumLiteral_2= '=' )
                     {
-                    // InternalGeneratorDSL.g:2716:3: (enumLiteral_2= '=' )
-                    // InternalGeneratorDSL.g:2717:4: enumLiteral_2= '='
+                    // InternalGeneratorDSL.g:2677:3: (enumLiteral_2= '=' )
+                    // InternalGeneratorDSL.g:2678:4: enumLiteral_2= '='
                     {
-                    enumLiteral_2=(Token)match(input,51,FOLLOW_2); 
+                    enumLiteral_2=(Token)match(input,53,FOLLOW_2); 
 
                     				current = grammarAccess.getComparisonOperatorRuleAccess().getEqualEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
                     				newLeafNode(enumLiteral_2, grammarAccess.getComparisonOperatorRuleAccess().getEqualEnumLiteralDeclaration_2());
@@ -7350,12 +7243,12 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 4 :
-                    // InternalGeneratorDSL.g:2724:3: (enumLiteral_3= '!=' )
+                    // InternalGeneratorDSL.g:2685:3: (enumLiteral_3= '!=' )
                     {
-                    // InternalGeneratorDSL.g:2724:3: (enumLiteral_3= '!=' )
-                    // InternalGeneratorDSL.g:2725:4: enumLiteral_3= '!='
+                    // InternalGeneratorDSL.g:2685:3: (enumLiteral_3= '!=' )
+                    // InternalGeneratorDSL.g:2686:4: enumLiteral_3= '!='
                     {
-                    enumLiteral_3=(Token)match(input,52,FOLLOW_2); 
+                    enumLiteral_3=(Token)match(input,54,FOLLOW_2); 
 
                     				current = grammarAccess.getComparisonOperatorRuleAccess().getUnequalEnumLiteralDeclaration_3().getEnumLiteral().getInstance();
                     				newLeafNode(enumLiteral_3, grammarAccess.getComparisonOperatorRuleAccess().getUnequalEnumLiteralDeclaration_3());
@@ -7367,12 +7260,12 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 5 :
-                    // InternalGeneratorDSL.g:2732:3: (enumLiteral_4= '<' )
+                    // InternalGeneratorDSL.g:2693:3: (enumLiteral_4= '<' )
                     {
-                    // InternalGeneratorDSL.g:2732:3: (enumLiteral_4= '<' )
-                    // InternalGeneratorDSL.g:2733:4: enumLiteral_4= '<'
+                    // InternalGeneratorDSL.g:2693:3: (enumLiteral_4= '<' )
+                    // InternalGeneratorDSL.g:2694:4: enumLiteral_4= '<'
                     {
-                    enumLiteral_4=(Token)match(input,53,FOLLOW_2); 
+                    enumLiteral_4=(Token)match(input,55,FOLLOW_2); 
 
                     				current = grammarAccess.getComparisonOperatorRuleAccess().getLessEqualEnumLiteralDeclaration_4().getEnumLiteral().getInstance();
                     				newLeafNode(enumLiteral_4, grammarAccess.getComparisonOperatorRuleAccess().getLessEqualEnumLiteralDeclaration_4());
@@ -7384,12 +7277,12 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 6 :
-                    // InternalGeneratorDSL.g:2740:3: (enumLiteral_5= '<=' )
+                    // InternalGeneratorDSL.g:2701:3: (enumLiteral_5= '<=' )
                     {
-                    // InternalGeneratorDSL.g:2740:3: (enumLiteral_5= '<=' )
-                    // InternalGeneratorDSL.g:2741:4: enumLiteral_5= '<='
+                    // InternalGeneratorDSL.g:2701:3: (enumLiteral_5= '<=' )
+                    // InternalGeneratorDSL.g:2702:4: enumLiteral_5= '<='
                     {
-                    enumLiteral_5=(Token)match(input,54,FOLLOW_2); 
+                    enumLiteral_5=(Token)match(input,56,FOLLOW_2); 
 
                     				current = grammarAccess.getComparisonOperatorRuleAccess().getLessThanEnumLiteralDeclaration_5().getEnumLiteral().getInstance();
                     				newLeafNode(enumLiteral_5, grammarAccess.getComparisonOperatorRuleAccess().getLessThanEnumLiteralDeclaration_5());
@@ -7423,7 +7316,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleAddOrSubtractOperatorRule"
-    // InternalGeneratorDSL.g:2751:1: ruleAddOrSubtractOperatorRule returns [Enumerator current=null] : ( (enumLiteral_0= '+' ) | (enumLiteral_1= '-' ) ) ;
+    // InternalGeneratorDSL.g:2712:1: ruleAddOrSubtractOperatorRule returns [Enumerator current=null] : ( (enumLiteral_0= '+' ) | (enumLiteral_1= '-' ) ) ;
     public final Enumerator ruleAddOrSubtractOperatorRule() throws RecognitionException {
         Enumerator current = null;
 
@@ -7434,17 +7327,17 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalGeneratorDSL.g:2757:2: ( ( (enumLiteral_0= '+' ) | (enumLiteral_1= '-' ) ) )
-            // InternalGeneratorDSL.g:2758:2: ( (enumLiteral_0= '+' ) | (enumLiteral_1= '-' ) )
+            // InternalGeneratorDSL.g:2718:2: ( ( (enumLiteral_0= '+' ) | (enumLiteral_1= '-' ) ) )
+            // InternalGeneratorDSL.g:2719:2: ( (enumLiteral_0= '+' ) | (enumLiteral_1= '-' ) )
             {
-            // InternalGeneratorDSL.g:2758:2: ( (enumLiteral_0= '+' ) | (enumLiteral_1= '-' ) )
+            // InternalGeneratorDSL.g:2719:2: ( (enumLiteral_0= '+' ) | (enumLiteral_1= '-' ) )
             int alt43=2;
             int LA43_0 = input.LA(1);
 
-            if ( (LA43_0==55) ) {
+            if ( (LA43_0==57) ) {
                 alt43=1;
             }
-            else if ( (LA43_0==56) ) {
+            else if ( (LA43_0==58) ) {
                 alt43=2;
             }
             else {
@@ -7455,12 +7348,12 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
             }
             switch (alt43) {
                 case 1 :
-                    // InternalGeneratorDSL.g:2759:3: (enumLiteral_0= '+' )
+                    // InternalGeneratorDSL.g:2720:3: (enumLiteral_0= '+' )
                     {
-                    // InternalGeneratorDSL.g:2759:3: (enumLiteral_0= '+' )
-                    // InternalGeneratorDSL.g:2760:4: enumLiteral_0= '+'
+                    // InternalGeneratorDSL.g:2720:3: (enumLiteral_0= '+' )
+                    // InternalGeneratorDSL.g:2721:4: enumLiteral_0= '+'
                     {
-                    enumLiteral_0=(Token)match(input,55,FOLLOW_2); 
+                    enumLiteral_0=(Token)match(input,57,FOLLOW_2); 
 
                     				current = grammarAccess.getAddOrSubtractOperatorRuleAccess().getAddEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
                     				newLeafNode(enumLiteral_0, grammarAccess.getAddOrSubtractOperatorRuleAccess().getAddEnumLiteralDeclaration_0());
@@ -7472,12 +7365,12 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalGeneratorDSL.g:2767:3: (enumLiteral_1= '-' )
+                    // InternalGeneratorDSL.g:2728:3: (enumLiteral_1= '-' )
                     {
-                    // InternalGeneratorDSL.g:2767:3: (enumLiteral_1= '-' )
-                    // InternalGeneratorDSL.g:2768:4: enumLiteral_1= '-'
+                    // InternalGeneratorDSL.g:2728:3: (enumLiteral_1= '-' )
+                    // InternalGeneratorDSL.g:2729:4: enumLiteral_1= '-'
                     {
-                    enumLiteral_1=(Token)match(input,56,FOLLOW_2); 
+                    enumLiteral_1=(Token)match(input,58,FOLLOW_2); 
 
                     				current = grammarAccess.getAddOrSubtractOperatorRuleAccess().getSubtractEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
                     				newLeafNode(enumLiteral_1, grammarAccess.getAddOrSubtractOperatorRuleAccess().getSubtractEnumLiteralDeclaration_1());
@@ -7511,7 +7404,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleMultiplyDivideModuloOperatorRule"
-    // InternalGeneratorDSL.g:2778:1: ruleMultiplyDivideModuloOperatorRule returns [Enumerator current=null] : ( (enumLiteral_0= '*' ) | (enumLiteral_1= '/' ) | (enumLiteral_2= '%' ) ) ;
+    // InternalGeneratorDSL.g:2739:1: ruleMultiplyDivideModuloOperatorRule returns [Enumerator current=null] : ( (enumLiteral_0= '*' ) | (enumLiteral_1= '/' ) | (enumLiteral_2= '%' ) ) ;
     public final Enumerator ruleMultiplyDivideModuloOperatorRule() throws RecognitionException {
         Enumerator current = null;
 
@@ -7523,23 +7416,23 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalGeneratorDSL.g:2784:2: ( ( (enumLiteral_0= '*' ) | (enumLiteral_1= '/' ) | (enumLiteral_2= '%' ) ) )
-            // InternalGeneratorDSL.g:2785:2: ( (enumLiteral_0= '*' ) | (enumLiteral_1= '/' ) | (enumLiteral_2= '%' ) )
+            // InternalGeneratorDSL.g:2745:2: ( ( (enumLiteral_0= '*' ) | (enumLiteral_1= '/' ) | (enumLiteral_2= '%' ) ) )
+            // InternalGeneratorDSL.g:2746:2: ( (enumLiteral_0= '*' ) | (enumLiteral_1= '/' ) | (enumLiteral_2= '%' ) )
             {
-            // InternalGeneratorDSL.g:2785:2: ( (enumLiteral_0= '*' ) | (enumLiteral_1= '/' ) | (enumLiteral_2= '%' ) )
+            // InternalGeneratorDSL.g:2746:2: ( (enumLiteral_0= '*' ) | (enumLiteral_1= '/' ) | (enumLiteral_2= '%' ) )
             int alt44=3;
             switch ( input.LA(1) ) {
-            case 57:
+            case 59:
                 {
                 alt44=1;
                 }
                 break;
-            case 58:
+            case 60:
                 {
                 alt44=2;
                 }
                 break;
-            case 59:
+            case 61:
                 {
                 alt44=3;
                 }
@@ -7553,12 +7446,12 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
 
             switch (alt44) {
                 case 1 :
-                    // InternalGeneratorDSL.g:2786:3: (enumLiteral_0= '*' )
+                    // InternalGeneratorDSL.g:2747:3: (enumLiteral_0= '*' )
                     {
-                    // InternalGeneratorDSL.g:2786:3: (enumLiteral_0= '*' )
-                    // InternalGeneratorDSL.g:2787:4: enumLiteral_0= '*'
+                    // InternalGeneratorDSL.g:2747:3: (enumLiteral_0= '*' )
+                    // InternalGeneratorDSL.g:2748:4: enumLiteral_0= '*'
                     {
-                    enumLiteral_0=(Token)match(input,57,FOLLOW_2); 
+                    enumLiteral_0=(Token)match(input,59,FOLLOW_2); 
 
                     				current = grammarAccess.getMultiplyDivideModuloOperatorRuleAccess().getMultiplyEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
                     				newLeafNode(enumLiteral_0, grammarAccess.getMultiplyDivideModuloOperatorRuleAccess().getMultiplyEnumLiteralDeclaration_0());
@@ -7570,12 +7463,12 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalGeneratorDSL.g:2794:3: (enumLiteral_1= '/' )
+                    // InternalGeneratorDSL.g:2755:3: (enumLiteral_1= '/' )
                     {
-                    // InternalGeneratorDSL.g:2794:3: (enumLiteral_1= '/' )
-                    // InternalGeneratorDSL.g:2795:4: enumLiteral_1= '/'
+                    // InternalGeneratorDSL.g:2755:3: (enumLiteral_1= '/' )
+                    // InternalGeneratorDSL.g:2756:4: enumLiteral_1= '/'
                     {
-                    enumLiteral_1=(Token)match(input,58,FOLLOW_2); 
+                    enumLiteral_1=(Token)match(input,60,FOLLOW_2); 
 
                     				current = grammarAccess.getMultiplyDivideModuloOperatorRuleAccess().getDivideEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
                     				newLeafNode(enumLiteral_1, grammarAccess.getMultiplyDivideModuloOperatorRuleAccess().getDivideEnumLiteralDeclaration_1());
@@ -7587,12 +7480,12 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // InternalGeneratorDSL.g:2802:3: (enumLiteral_2= '%' )
+                    // InternalGeneratorDSL.g:2763:3: (enumLiteral_2= '%' )
                     {
-                    // InternalGeneratorDSL.g:2802:3: (enumLiteral_2= '%' )
-                    // InternalGeneratorDSL.g:2803:4: enumLiteral_2= '%'
+                    // InternalGeneratorDSL.g:2763:3: (enumLiteral_2= '%' )
+                    // InternalGeneratorDSL.g:2764:4: enumLiteral_2= '%'
                     {
-                    enumLiteral_2=(Token)match(input,59,FOLLOW_2); 
+                    enumLiteral_2=(Token)match(input,61,FOLLOW_2); 
 
                     				current = grammarAccess.getMultiplyDivideModuloOperatorRuleAccess().getModuloEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
                     				newLeafNode(enumLiteral_2, grammarAccess.getMultiplyDivideModuloOperatorRuleAccess().getModuloEnumLiteralDeclaration_2());
@@ -7626,7 +7519,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleFactorRule"
-    // InternalGeneratorDSL.g:2813:1: ruleFactorRule returns [Enumerator current=null] : ( (enumLiteral_0= 'Y' ) | (enumLiteral_1= 'Z' ) | (enumLiteral_2= 'E' ) | (enumLiteral_3= 'P' ) | (enumLiteral_4= 'T' ) | (enumLiteral_5= 'G' ) | (enumLiteral_6= 'M' ) | (enumLiteral_7= 'k' ) | (enumLiteral_8= 'h' ) | (enumLiteral_9= 'da' ) | (enumLiteral_10= 'd' ) | (enumLiteral_11= 'c' ) | (enumLiteral_12= 'm' ) | (enumLiteral_13= '\\u00B5' ) | (enumLiteral_14= 'n' ) | (enumLiteral_15= 'p' ) | (enumLiteral_16= 'f' ) | (enumLiteral_17= 'a' ) | (enumLiteral_18= 'z' ) | (enumLiteral_19= 'y' ) ) ;
+    // InternalGeneratorDSL.g:2774:1: ruleFactorRule returns [Enumerator current=null] : ( (enumLiteral_0= 'Y' ) | (enumLiteral_1= 'Z' ) | (enumLiteral_2= 'E' ) | (enumLiteral_3= 'P' ) | (enumLiteral_4= 'T' ) | (enumLiteral_5= 'G' ) | (enumLiteral_6= 'M' ) | (enumLiteral_7= 'k' ) | (enumLiteral_8= 'h' ) | (enumLiteral_9= 'da' ) | (enumLiteral_10= 'd' ) | (enumLiteral_11= 'c' ) | (enumLiteral_12= 'm' ) | (enumLiteral_13= '\\u00B5' ) | (enumLiteral_14= 'n' ) | (enumLiteral_15= 'p' ) | (enumLiteral_16= 'f' ) | (enumLiteral_17= 'a' ) | (enumLiteral_18= 'z' ) | (enumLiteral_19= 'y' ) ) ;
     public final Enumerator ruleFactorRule() throws RecognitionException {
         Enumerator current = null;
 
@@ -7655,108 +7548,108 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalGeneratorDSL.g:2819:2: ( ( (enumLiteral_0= 'Y' ) | (enumLiteral_1= 'Z' ) | (enumLiteral_2= 'E' ) | (enumLiteral_3= 'P' ) | (enumLiteral_4= 'T' ) | (enumLiteral_5= 'G' ) | (enumLiteral_6= 'M' ) | (enumLiteral_7= 'k' ) | (enumLiteral_8= 'h' ) | (enumLiteral_9= 'da' ) | (enumLiteral_10= 'd' ) | (enumLiteral_11= 'c' ) | (enumLiteral_12= 'm' ) | (enumLiteral_13= '\\u00B5' ) | (enumLiteral_14= 'n' ) | (enumLiteral_15= 'p' ) | (enumLiteral_16= 'f' ) | (enumLiteral_17= 'a' ) | (enumLiteral_18= 'z' ) | (enumLiteral_19= 'y' ) ) )
-            // InternalGeneratorDSL.g:2820:2: ( (enumLiteral_0= 'Y' ) | (enumLiteral_1= 'Z' ) | (enumLiteral_2= 'E' ) | (enumLiteral_3= 'P' ) | (enumLiteral_4= 'T' ) | (enumLiteral_5= 'G' ) | (enumLiteral_6= 'M' ) | (enumLiteral_7= 'k' ) | (enumLiteral_8= 'h' ) | (enumLiteral_9= 'da' ) | (enumLiteral_10= 'd' ) | (enumLiteral_11= 'c' ) | (enumLiteral_12= 'm' ) | (enumLiteral_13= '\\u00B5' ) | (enumLiteral_14= 'n' ) | (enumLiteral_15= 'p' ) | (enumLiteral_16= 'f' ) | (enumLiteral_17= 'a' ) | (enumLiteral_18= 'z' ) | (enumLiteral_19= 'y' ) )
+            // InternalGeneratorDSL.g:2780:2: ( ( (enumLiteral_0= 'Y' ) | (enumLiteral_1= 'Z' ) | (enumLiteral_2= 'E' ) | (enumLiteral_3= 'P' ) | (enumLiteral_4= 'T' ) | (enumLiteral_5= 'G' ) | (enumLiteral_6= 'M' ) | (enumLiteral_7= 'k' ) | (enumLiteral_8= 'h' ) | (enumLiteral_9= 'da' ) | (enumLiteral_10= 'd' ) | (enumLiteral_11= 'c' ) | (enumLiteral_12= 'm' ) | (enumLiteral_13= '\\u00B5' ) | (enumLiteral_14= 'n' ) | (enumLiteral_15= 'p' ) | (enumLiteral_16= 'f' ) | (enumLiteral_17= 'a' ) | (enumLiteral_18= 'z' ) | (enumLiteral_19= 'y' ) ) )
+            // InternalGeneratorDSL.g:2781:2: ( (enumLiteral_0= 'Y' ) | (enumLiteral_1= 'Z' ) | (enumLiteral_2= 'E' ) | (enumLiteral_3= 'P' ) | (enumLiteral_4= 'T' ) | (enumLiteral_5= 'G' ) | (enumLiteral_6= 'M' ) | (enumLiteral_7= 'k' ) | (enumLiteral_8= 'h' ) | (enumLiteral_9= 'da' ) | (enumLiteral_10= 'd' ) | (enumLiteral_11= 'c' ) | (enumLiteral_12= 'm' ) | (enumLiteral_13= '\\u00B5' ) | (enumLiteral_14= 'n' ) | (enumLiteral_15= 'p' ) | (enumLiteral_16= 'f' ) | (enumLiteral_17= 'a' ) | (enumLiteral_18= 'z' ) | (enumLiteral_19= 'y' ) )
             {
-            // InternalGeneratorDSL.g:2820:2: ( (enumLiteral_0= 'Y' ) | (enumLiteral_1= 'Z' ) | (enumLiteral_2= 'E' ) | (enumLiteral_3= 'P' ) | (enumLiteral_4= 'T' ) | (enumLiteral_5= 'G' ) | (enumLiteral_6= 'M' ) | (enumLiteral_7= 'k' ) | (enumLiteral_8= 'h' ) | (enumLiteral_9= 'da' ) | (enumLiteral_10= 'd' ) | (enumLiteral_11= 'c' ) | (enumLiteral_12= 'm' ) | (enumLiteral_13= '\\u00B5' ) | (enumLiteral_14= 'n' ) | (enumLiteral_15= 'p' ) | (enumLiteral_16= 'f' ) | (enumLiteral_17= 'a' ) | (enumLiteral_18= 'z' ) | (enumLiteral_19= 'y' ) )
+            // InternalGeneratorDSL.g:2781:2: ( (enumLiteral_0= 'Y' ) | (enumLiteral_1= 'Z' ) | (enumLiteral_2= 'E' ) | (enumLiteral_3= 'P' ) | (enumLiteral_4= 'T' ) | (enumLiteral_5= 'G' ) | (enumLiteral_6= 'M' ) | (enumLiteral_7= 'k' ) | (enumLiteral_8= 'h' ) | (enumLiteral_9= 'da' ) | (enumLiteral_10= 'd' ) | (enumLiteral_11= 'c' ) | (enumLiteral_12= 'm' ) | (enumLiteral_13= '\\u00B5' ) | (enumLiteral_14= 'n' ) | (enumLiteral_15= 'p' ) | (enumLiteral_16= 'f' ) | (enumLiteral_17= 'a' ) | (enumLiteral_18= 'z' ) | (enumLiteral_19= 'y' ) )
             int alt45=20;
             switch ( input.LA(1) ) {
-            case 60:
+            case 62:
                 {
                 alt45=1;
                 }
                 break;
-            case 61:
+            case 63:
                 {
                 alt45=2;
                 }
                 break;
-            case 62:
+            case 64:
                 {
                 alt45=3;
                 }
                 break;
-            case 63:
+            case 65:
                 {
                 alt45=4;
                 }
                 break;
-            case 64:
+            case 66:
                 {
                 alt45=5;
                 }
                 break;
-            case 65:
+            case 67:
                 {
                 alt45=6;
                 }
                 break;
-            case 66:
+            case 68:
                 {
                 alt45=7;
                 }
                 break;
-            case 67:
+            case 69:
                 {
                 alt45=8;
                 }
                 break;
-            case 68:
+            case 70:
                 {
                 alt45=9;
                 }
                 break;
-            case 69:
+            case 71:
                 {
                 alt45=10;
                 }
                 break;
-            case 70:
+            case 72:
                 {
                 alt45=11;
                 }
                 break;
-            case 71:
+            case 73:
                 {
                 alt45=12;
                 }
                 break;
-            case 72:
+            case 74:
                 {
                 alt45=13;
                 }
                 break;
-            case 73:
+            case 75:
                 {
                 alt45=14;
                 }
                 break;
-            case 74:
+            case 76:
                 {
                 alt45=15;
                 }
                 break;
-            case 75:
+            case 77:
                 {
                 alt45=16;
                 }
                 break;
-            case 76:
+            case 78:
                 {
                 alt45=17;
                 }
                 break;
-            case 77:
+            case 79:
                 {
                 alt45=18;
                 }
                 break;
-            case 78:
+            case 80:
                 {
                 alt45=19;
                 }
                 break;
-            case 79:
+            case 81:
                 {
                 alt45=20;
                 }
@@ -7770,12 +7663,12 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
 
             switch (alt45) {
                 case 1 :
-                    // InternalGeneratorDSL.g:2821:3: (enumLiteral_0= 'Y' )
+                    // InternalGeneratorDSL.g:2782:3: (enumLiteral_0= 'Y' )
                     {
-                    // InternalGeneratorDSL.g:2821:3: (enumLiteral_0= 'Y' )
-                    // InternalGeneratorDSL.g:2822:4: enumLiteral_0= 'Y'
+                    // InternalGeneratorDSL.g:2782:3: (enumLiteral_0= 'Y' )
+                    // InternalGeneratorDSL.g:2783:4: enumLiteral_0= 'Y'
                     {
-                    enumLiteral_0=(Token)match(input,60,FOLLOW_2); 
+                    enumLiteral_0=(Token)match(input,62,FOLLOW_2); 
 
                     				current = grammarAccess.getFactorRuleAccess().getYottaEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
                     				newLeafNode(enumLiteral_0, grammarAccess.getFactorRuleAccess().getYottaEnumLiteralDeclaration_0());
@@ -7787,12 +7680,12 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalGeneratorDSL.g:2829:3: (enumLiteral_1= 'Z' )
+                    // InternalGeneratorDSL.g:2790:3: (enumLiteral_1= 'Z' )
                     {
-                    // InternalGeneratorDSL.g:2829:3: (enumLiteral_1= 'Z' )
-                    // InternalGeneratorDSL.g:2830:4: enumLiteral_1= 'Z'
+                    // InternalGeneratorDSL.g:2790:3: (enumLiteral_1= 'Z' )
+                    // InternalGeneratorDSL.g:2791:4: enumLiteral_1= 'Z'
                     {
-                    enumLiteral_1=(Token)match(input,61,FOLLOW_2); 
+                    enumLiteral_1=(Token)match(input,63,FOLLOW_2); 
 
                     				current = grammarAccess.getFactorRuleAccess().getZettaEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
                     				newLeafNode(enumLiteral_1, grammarAccess.getFactorRuleAccess().getZettaEnumLiteralDeclaration_1());
@@ -7804,12 +7697,12 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // InternalGeneratorDSL.g:2837:3: (enumLiteral_2= 'E' )
+                    // InternalGeneratorDSL.g:2798:3: (enumLiteral_2= 'E' )
                     {
-                    // InternalGeneratorDSL.g:2837:3: (enumLiteral_2= 'E' )
-                    // InternalGeneratorDSL.g:2838:4: enumLiteral_2= 'E'
+                    // InternalGeneratorDSL.g:2798:3: (enumLiteral_2= 'E' )
+                    // InternalGeneratorDSL.g:2799:4: enumLiteral_2= 'E'
                     {
-                    enumLiteral_2=(Token)match(input,62,FOLLOW_2); 
+                    enumLiteral_2=(Token)match(input,64,FOLLOW_2); 
 
                     				current = grammarAccess.getFactorRuleAccess().getExaEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
                     				newLeafNode(enumLiteral_2, grammarAccess.getFactorRuleAccess().getExaEnumLiteralDeclaration_2());
@@ -7821,12 +7714,12 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 4 :
-                    // InternalGeneratorDSL.g:2845:3: (enumLiteral_3= 'P' )
+                    // InternalGeneratorDSL.g:2806:3: (enumLiteral_3= 'P' )
                     {
-                    // InternalGeneratorDSL.g:2845:3: (enumLiteral_3= 'P' )
-                    // InternalGeneratorDSL.g:2846:4: enumLiteral_3= 'P'
+                    // InternalGeneratorDSL.g:2806:3: (enumLiteral_3= 'P' )
+                    // InternalGeneratorDSL.g:2807:4: enumLiteral_3= 'P'
                     {
-                    enumLiteral_3=(Token)match(input,63,FOLLOW_2); 
+                    enumLiteral_3=(Token)match(input,65,FOLLOW_2); 
 
                     				current = grammarAccess.getFactorRuleAccess().getPetaEnumLiteralDeclaration_3().getEnumLiteral().getInstance();
                     				newLeafNode(enumLiteral_3, grammarAccess.getFactorRuleAccess().getPetaEnumLiteralDeclaration_3());
@@ -7838,12 +7731,12 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 5 :
-                    // InternalGeneratorDSL.g:2853:3: (enumLiteral_4= 'T' )
+                    // InternalGeneratorDSL.g:2814:3: (enumLiteral_4= 'T' )
                     {
-                    // InternalGeneratorDSL.g:2853:3: (enumLiteral_4= 'T' )
-                    // InternalGeneratorDSL.g:2854:4: enumLiteral_4= 'T'
+                    // InternalGeneratorDSL.g:2814:3: (enumLiteral_4= 'T' )
+                    // InternalGeneratorDSL.g:2815:4: enumLiteral_4= 'T'
                     {
-                    enumLiteral_4=(Token)match(input,64,FOLLOW_2); 
+                    enumLiteral_4=(Token)match(input,66,FOLLOW_2); 
 
                     				current = grammarAccess.getFactorRuleAccess().getTeraEnumLiteralDeclaration_4().getEnumLiteral().getInstance();
                     				newLeafNode(enumLiteral_4, grammarAccess.getFactorRuleAccess().getTeraEnumLiteralDeclaration_4());
@@ -7855,12 +7748,12 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 6 :
-                    // InternalGeneratorDSL.g:2861:3: (enumLiteral_5= 'G' )
+                    // InternalGeneratorDSL.g:2822:3: (enumLiteral_5= 'G' )
                     {
-                    // InternalGeneratorDSL.g:2861:3: (enumLiteral_5= 'G' )
-                    // InternalGeneratorDSL.g:2862:4: enumLiteral_5= 'G'
+                    // InternalGeneratorDSL.g:2822:3: (enumLiteral_5= 'G' )
+                    // InternalGeneratorDSL.g:2823:4: enumLiteral_5= 'G'
                     {
-                    enumLiteral_5=(Token)match(input,65,FOLLOW_2); 
+                    enumLiteral_5=(Token)match(input,67,FOLLOW_2); 
 
                     				current = grammarAccess.getFactorRuleAccess().getGigaEnumLiteralDeclaration_5().getEnumLiteral().getInstance();
                     				newLeafNode(enumLiteral_5, grammarAccess.getFactorRuleAccess().getGigaEnumLiteralDeclaration_5());
@@ -7872,12 +7765,12 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 7 :
-                    // InternalGeneratorDSL.g:2869:3: (enumLiteral_6= 'M' )
+                    // InternalGeneratorDSL.g:2830:3: (enumLiteral_6= 'M' )
                     {
-                    // InternalGeneratorDSL.g:2869:3: (enumLiteral_6= 'M' )
-                    // InternalGeneratorDSL.g:2870:4: enumLiteral_6= 'M'
+                    // InternalGeneratorDSL.g:2830:3: (enumLiteral_6= 'M' )
+                    // InternalGeneratorDSL.g:2831:4: enumLiteral_6= 'M'
                     {
-                    enumLiteral_6=(Token)match(input,66,FOLLOW_2); 
+                    enumLiteral_6=(Token)match(input,68,FOLLOW_2); 
 
                     				current = grammarAccess.getFactorRuleAccess().getMegaEnumLiteralDeclaration_6().getEnumLiteral().getInstance();
                     				newLeafNode(enumLiteral_6, grammarAccess.getFactorRuleAccess().getMegaEnumLiteralDeclaration_6());
@@ -7889,12 +7782,12 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 8 :
-                    // InternalGeneratorDSL.g:2877:3: (enumLiteral_7= 'k' )
+                    // InternalGeneratorDSL.g:2838:3: (enumLiteral_7= 'k' )
                     {
-                    // InternalGeneratorDSL.g:2877:3: (enumLiteral_7= 'k' )
-                    // InternalGeneratorDSL.g:2878:4: enumLiteral_7= 'k'
+                    // InternalGeneratorDSL.g:2838:3: (enumLiteral_7= 'k' )
+                    // InternalGeneratorDSL.g:2839:4: enumLiteral_7= 'k'
                     {
-                    enumLiteral_7=(Token)match(input,67,FOLLOW_2); 
+                    enumLiteral_7=(Token)match(input,69,FOLLOW_2); 
 
                     				current = grammarAccess.getFactorRuleAccess().getKiloEnumLiteralDeclaration_7().getEnumLiteral().getInstance();
                     				newLeafNode(enumLiteral_7, grammarAccess.getFactorRuleAccess().getKiloEnumLiteralDeclaration_7());
@@ -7906,12 +7799,12 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 9 :
-                    // InternalGeneratorDSL.g:2885:3: (enumLiteral_8= 'h' )
+                    // InternalGeneratorDSL.g:2846:3: (enumLiteral_8= 'h' )
                     {
-                    // InternalGeneratorDSL.g:2885:3: (enumLiteral_8= 'h' )
-                    // InternalGeneratorDSL.g:2886:4: enumLiteral_8= 'h'
+                    // InternalGeneratorDSL.g:2846:3: (enumLiteral_8= 'h' )
+                    // InternalGeneratorDSL.g:2847:4: enumLiteral_8= 'h'
                     {
-                    enumLiteral_8=(Token)match(input,68,FOLLOW_2); 
+                    enumLiteral_8=(Token)match(input,70,FOLLOW_2); 
 
                     				current = grammarAccess.getFactorRuleAccess().getHectoEnumLiteralDeclaration_8().getEnumLiteral().getInstance();
                     				newLeafNode(enumLiteral_8, grammarAccess.getFactorRuleAccess().getHectoEnumLiteralDeclaration_8());
@@ -7923,12 +7816,12 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 10 :
-                    // InternalGeneratorDSL.g:2893:3: (enumLiteral_9= 'da' )
+                    // InternalGeneratorDSL.g:2854:3: (enumLiteral_9= 'da' )
                     {
-                    // InternalGeneratorDSL.g:2893:3: (enumLiteral_9= 'da' )
-                    // InternalGeneratorDSL.g:2894:4: enumLiteral_9= 'da'
+                    // InternalGeneratorDSL.g:2854:3: (enumLiteral_9= 'da' )
+                    // InternalGeneratorDSL.g:2855:4: enumLiteral_9= 'da'
                     {
-                    enumLiteral_9=(Token)match(input,69,FOLLOW_2); 
+                    enumLiteral_9=(Token)match(input,71,FOLLOW_2); 
 
                     				current = grammarAccess.getFactorRuleAccess().getDekaEnumLiteralDeclaration_9().getEnumLiteral().getInstance();
                     				newLeafNode(enumLiteral_9, grammarAccess.getFactorRuleAccess().getDekaEnumLiteralDeclaration_9());
@@ -7940,12 +7833,12 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 11 :
-                    // InternalGeneratorDSL.g:2901:3: (enumLiteral_10= 'd' )
+                    // InternalGeneratorDSL.g:2862:3: (enumLiteral_10= 'd' )
                     {
-                    // InternalGeneratorDSL.g:2901:3: (enumLiteral_10= 'd' )
-                    // InternalGeneratorDSL.g:2902:4: enumLiteral_10= 'd'
+                    // InternalGeneratorDSL.g:2862:3: (enumLiteral_10= 'd' )
+                    // InternalGeneratorDSL.g:2863:4: enumLiteral_10= 'd'
                     {
-                    enumLiteral_10=(Token)match(input,70,FOLLOW_2); 
+                    enumLiteral_10=(Token)match(input,72,FOLLOW_2); 
 
                     				current = grammarAccess.getFactorRuleAccess().getDeciEnumLiteralDeclaration_10().getEnumLiteral().getInstance();
                     				newLeafNode(enumLiteral_10, grammarAccess.getFactorRuleAccess().getDeciEnumLiteralDeclaration_10());
@@ -7957,12 +7850,12 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 12 :
-                    // InternalGeneratorDSL.g:2909:3: (enumLiteral_11= 'c' )
+                    // InternalGeneratorDSL.g:2870:3: (enumLiteral_11= 'c' )
                     {
-                    // InternalGeneratorDSL.g:2909:3: (enumLiteral_11= 'c' )
-                    // InternalGeneratorDSL.g:2910:4: enumLiteral_11= 'c'
+                    // InternalGeneratorDSL.g:2870:3: (enumLiteral_11= 'c' )
+                    // InternalGeneratorDSL.g:2871:4: enumLiteral_11= 'c'
                     {
-                    enumLiteral_11=(Token)match(input,71,FOLLOW_2); 
+                    enumLiteral_11=(Token)match(input,73,FOLLOW_2); 
 
                     				current = grammarAccess.getFactorRuleAccess().getCentiEnumLiteralDeclaration_11().getEnumLiteral().getInstance();
                     				newLeafNode(enumLiteral_11, grammarAccess.getFactorRuleAccess().getCentiEnumLiteralDeclaration_11());
@@ -7974,12 +7867,12 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 13 :
-                    // InternalGeneratorDSL.g:2917:3: (enumLiteral_12= 'm' )
+                    // InternalGeneratorDSL.g:2878:3: (enumLiteral_12= 'm' )
                     {
-                    // InternalGeneratorDSL.g:2917:3: (enumLiteral_12= 'm' )
-                    // InternalGeneratorDSL.g:2918:4: enumLiteral_12= 'm'
+                    // InternalGeneratorDSL.g:2878:3: (enumLiteral_12= 'm' )
+                    // InternalGeneratorDSL.g:2879:4: enumLiteral_12= 'm'
                     {
-                    enumLiteral_12=(Token)match(input,72,FOLLOW_2); 
+                    enumLiteral_12=(Token)match(input,74,FOLLOW_2); 
 
                     				current = grammarAccess.getFactorRuleAccess().getMilliEnumLiteralDeclaration_12().getEnumLiteral().getInstance();
                     				newLeafNode(enumLiteral_12, grammarAccess.getFactorRuleAccess().getMilliEnumLiteralDeclaration_12());
@@ -7991,12 +7884,12 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 14 :
-                    // InternalGeneratorDSL.g:2925:3: (enumLiteral_13= '\\u00B5' )
+                    // InternalGeneratorDSL.g:2886:3: (enumLiteral_13= '\\u00B5' )
                     {
-                    // InternalGeneratorDSL.g:2925:3: (enumLiteral_13= '\\u00B5' )
-                    // InternalGeneratorDSL.g:2926:4: enumLiteral_13= '\\u00B5'
+                    // InternalGeneratorDSL.g:2886:3: (enumLiteral_13= '\\u00B5' )
+                    // InternalGeneratorDSL.g:2887:4: enumLiteral_13= '\\u00B5'
                     {
-                    enumLiteral_13=(Token)match(input,73,FOLLOW_2); 
+                    enumLiteral_13=(Token)match(input,75,FOLLOW_2); 
 
                     				current = grammarAccess.getFactorRuleAccess().getMicroEnumLiteralDeclaration_13().getEnumLiteral().getInstance();
                     				newLeafNode(enumLiteral_13, grammarAccess.getFactorRuleAccess().getMicroEnumLiteralDeclaration_13());
@@ -8008,12 +7901,12 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 15 :
-                    // InternalGeneratorDSL.g:2933:3: (enumLiteral_14= 'n' )
+                    // InternalGeneratorDSL.g:2894:3: (enumLiteral_14= 'n' )
                     {
-                    // InternalGeneratorDSL.g:2933:3: (enumLiteral_14= 'n' )
-                    // InternalGeneratorDSL.g:2934:4: enumLiteral_14= 'n'
+                    // InternalGeneratorDSL.g:2894:3: (enumLiteral_14= 'n' )
+                    // InternalGeneratorDSL.g:2895:4: enumLiteral_14= 'n'
                     {
-                    enumLiteral_14=(Token)match(input,74,FOLLOW_2); 
+                    enumLiteral_14=(Token)match(input,76,FOLLOW_2); 
 
                     				current = grammarAccess.getFactorRuleAccess().getNanoEnumLiteralDeclaration_14().getEnumLiteral().getInstance();
                     				newLeafNode(enumLiteral_14, grammarAccess.getFactorRuleAccess().getNanoEnumLiteralDeclaration_14());
@@ -8025,12 +7918,12 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 16 :
-                    // InternalGeneratorDSL.g:2941:3: (enumLiteral_15= 'p' )
+                    // InternalGeneratorDSL.g:2902:3: (enumLiteral_15= 'p' )
                     {
-                    // InternalGeneratorDSL.g:2941:3: (enumLiteral_15= 'p' )
-                    // InternalGeneratorDSL.g:2942:4: enumLiteral_15= 'p'
+                    // InternalGeneratorDSL.g:2902:3: (enumLiteral_15= 'p' )
+                    // InternalGeneratorDSL.g:2903:4: enumLiteral_15= 'p'
                     {
-                    enumLiteral_15=(Token)match(input,75,FOLLOW_2); 
+                    enumLiteral_15=(Token)match(input,77,FOLLOW_2); 
 
                     				current = grammarAccess.getFactorRuleAccess().getPikoEnumLiteralDeclaration_15().getEnumLiteral().getInstance();
                     				newLeafNode(enumLiteral_15, grammarAccess.getFactorRuleAccess().getPikoEnumLiteralDeclaration_15());
@@ -8042,12 +7935,12 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 17 :
-                    // InternalGeneratorDSL.g:2949:3: (enumLiteral_16= 'f' )
+                    // InternalGeneratorDSL.g:2910:3: (enumLiteral_16= 'f' )
                     {
-                    // InternalGeneratorDSL.g:2949:3: (enumLiteral_16= 'f' )
-                    // InternalGeneratorDSL.g:2950:4: enumLiteral_16= 'f'
+                    // InternalGeneratorDSL.g:2910:3: (enumLiteral_16= 'f' )
+                    // InternalGeneratorDSL.g:2911:4: enumLiteral_16= 'f'
                     {
-                    enumLiteral_16=(Token)match(input,76,FOLLOW_2); 
+                    enumLiteral_16=(Token)match(input,78,FOLLOW_2); 
 
                     				current = grammarAccess.getFactorRuleAccess().getFemtoEnumLiteralDeclaration_16().getEnumLiteral().getInstance();
                     				newLeafNode(enumLiteral_16, grammarAccess.getFactorRuleAccess().getFemtoEnumLiteralDeclaration_16());
@@ -8059,12 +7952,12 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 18 :
-                    // InternalGeneratorDSL.g:2957:3: (enumLiteral_17= 'a' )
+                    // InternalGeneratorDSL.g:2918:3: (enumLiteral_17= 'a' )
                     {
-                    // InternalGeneratorDSL.g:2957:3: (enumLiteral_17= 'a' )
-                    // InternalGeneratorDSL.g:2958:4: enumLiteral_17= 'a'
+                    // InternalGeneratorDSL.g:2918:3: (enumLiteral_17= 'a' )
+                    // InternalGeneratorDSL.g:2919:4: enumLiteral_17= 'a'
                     {
-                    enumLiteral_17=(Token)match(input,77,FOLLOW_2); 
+                    enumLiteral_17=(Token)match(input,79,FOLLOW_2); 
 
                     				current = grammarAccess.getFactorRuleAccess().getAttoEnumLiteralDeclaration_17().getEnumLiteral().getInstance();
                     				newLeafNode(enumLiteral_17, grammarAccess.getFactorRuleAccess().getAttoEnumLiteralDeclaration_17());
@@ -8076,12 +7969,12 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 19 :
-                    // InternalGeneratorDSL.g:2965:3: (enumLiteral_18= 'z' )
+                    // InternalGeneratorDSL.g:2926:3: (enumLiteral_18= 'z' )
                     {
-                    // InternalGeneratorDSL.g:2965:3: (enumLiteral_18= 'z' )
-                    // InternalGeneratorDSL.g:2966:4: enumLiteral_18= 'z'
+                    // InternalGeneratorDSL.g:2926:3: (enumLiteral_18= 'z' )
+                    // InternalGeneratorDSL.g:2927:4: enumLiteral_18= 'z'
                     {
-                    enumLiteral_18=(Token)match(input,78,FOLLOW_2); 
+                    enumLiteral_18=(Token)match(input,80,FOLLOW_2); 
 
                     				current = grammarAccess.getFactorRuleAccess().getZeptoEnumLiteralDeclaration_18().getEnumLiteral().getInstance();
                     				newLeafNode(enumLiteral_18, grammarAccess.getFactorRuleAccess().getZeptoEnumLiteralDeclaration_18());
@@ -8093,12 +7986,12 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 20 :
-                    // InternalGeneratorDSL.g:2973:3: (enumLiteral_19= 'y' )
+                    // InternalGeneratorDSL.g:2934:3: (enumLiteral_19= 'y' )
                     {
-                    // InternalGeneratorDSL.g:2973:3: (enumLiteral_19= 'y' )
-                    // InternalGeneratorDSL.g:2974:4: enumLiteral_19= 'y'
+                    // InternalGeneratorDSL.g:2934:3: (enumLiteral_19= 'y' )
+                    // InternalGeneratorDSL.g:2935:4: enumLiteral_19= 'y'
                     {
-                    enumLiteral_19=(Token)match(input,79,FOLLOW_2); 
+                    enumLiteral_19=(Token)match(input,81,FOLLOW_2); 
 
                     				current = grammarAccess.getFactorRuleAccess().getYoctoEnumLiteralDeclaration_19().getEnumLiteral().getInstance();
                     				newLeafNode(enumLiteral_19, grammarAccess.getFactorRuleAccess().getYoctoEnumLiteralDeclaration_19());
@@ -8137,54 +8030,53 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
 
     public static final BitSet FOLLOW_1 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_2 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000041005002L});
-    public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000041004002L});
-    public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000041000002L});
+    public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000208028002L});
+    public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000208020002L});
+    public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000208000002L});
     public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_8 = new BitSet(new long[]{0x00000000000000A0L});
-    public static final BitSet FOLLOW_9 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_10 = new BitSet(new long[]{0x0000000000030000L});
-    public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x0000000000040000L});
-    public static final BitSet FOLLOW_12 = new BitSet(new long[]{0x0000000000080000L});
-    public static final BitSet FOLLOW_13 = new BitSet(new long[]{0x0000000000D00000L});
-    public static final BitSet FOLLOW_14 = new BitSet(new long[]{0x0000001000010000L});
-    public static final BitSet FOLLOW_15 = new BitSet(new long[]{0x0000000000210000L});
-    public static final BitSet FOLLOW_16 = new BitSet(new long[]{0x0000001000000000L});
-    public static final BitSet FOLLOW_17 = new BitSet(new long[]{0x0000000000C00000L});
-    public static final BitSet FOLLOW_18 = new BitSet(new long[]{0x0000000000800000L});
+    public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x0000000000010000L});
+    public static final BitSet FOLLOW_8 = new BitSet(new long[]{0x0000000000000120L});
+    public static final BitSet FOLLOW_9 = new BitSet(new long[]{0x0000000000040000L});
+    public static final BitSet FOLLOW_10 = new BitSet(new long[]{0x0000000000180000L});
+    public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x0000000000200000L});
+    public static final BitSet FOLLOW_12 = new BitSet(new long[]{0x0000000000400000L});
+    public static final BitSet FOLLOW_13 = new BitSet(new long[]{0x0000000006800000L});
+    public static final BitSet FOLLOW_14 = new BitSet(new long[]{0x0000008000080000L});
+    public static final BitSet FOLLOW_15 = new BitSet(new long[]{0x0000000001080000L});
+    public static final BitSet FOLLOW_16 = new BitSet(new long[]{0x0000008000000000L});
+    public static final BitSet FOLLOW_17 = new BitSet(new long[]{0x0000000006000000L});
+    public static final BitSet FOLLOW_18 = new BitSet(new long[]{0x0000000004000000L});
     public static final BitSet FOLLOW_19 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_20 = new BitSet(new long[]{0x0000000002000000L});
-    public static final BitSet FOLLOW_21 = new BitSet(new long[]{0x0000000020008000L});
-    public static final BitSet FOLLOW_22 = new BitSet(new long[]{0x0000000004000000L});
-    public static final BitSet FOLLOW_23 = new BitSet(new long[]{0x0000000049000000L});
+    public static final BitSet FOLLOW_20 = new BitSet(new long[]{0x0000000010000000L});
+    public static final BitSet FOLLOW_21 = new BitSet(new long[]{0x0000000100040000L});
+    public static final BitSet FOLLOW_22 = new BitSet(new long[]{0x0000000020000000L});
+    public static final BitSet FOLLOW_23 = new BitSet(new long[]{0x0000000248000000L});
     public static final BitSet FOLLOW_24 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_25 = new BitSet(new long[]{0x0000000010000000L});
-    public static final BitSet FOLLOW_26 = new BitSet(new long[]{0x0000000000010000L});
-    public static final BitSet FOLLOW_27 = new BitSet(new long[]{0x0000000000008002L});
-    public static final BitSet FOLLOW_28 = new BitSet(new long[]{0x0000000000004020L});
-    public static final BitSet FOLLOW_29 = new BitSet(new long[]{0x0000000080000000L});
-    public static final BitSet FOLLOW_30 = new BitSet(new long[]{0x0000000100000000L});
-    public static final BitSet FOLLOW_31 = new BitSet(new long[]{0x0000000200000000L});
-    public static final BitSet FOLLOW_32 = new BitSet(new long[]{0x0000000400000000L});
-    public static final BitSet FOLLOW_33 = new BitSet(new long[]{0x0000000000040002L});
-    public static final BitSet FOLLOW_34 = new BitSet(new long[]{0x00000000008000B0L});
-    public static final BitSet FOLLOW_35 = new BitSet(new long[]{0x0000000800000000L});
-    public static final BitSet FOLLOW_36 = new BitSet(new long[]{0x0000C010000080F0L});
-    public static final BitSet FOLLOW_37 = new BitSet(new long[]{0x0000C010000180F0L});
-    public static final BitSet FOLLOW_38 = new BitSet(new long[]{0x0000002000000002L});
-    public static final BitSet FOLLOW_39 = new BitSet(new long[]{0x0180F510000080F0L});
-    public static final BitSet FOLLOW_40 = new BitSet(new long[]{0x0000004000000002L});
-    public static final BitSet FOLLOW_41 = new BitSet(new long[]{0x0000008000000002L});
-    public static final BitSet FOLLOW_42 = new BitSet(new long[]{0x007E000000000002L});
-    public static final BitSet FOLLOW_43 = new BitSet(new long[]{0x0180000000000002L});
-    public static final BitSet FOLLOW_44 = new BitSet(new long[]{0x0E00000000000002L});
-    public static final BitSet FOLLOW_45 = new BitSet(new long[]{0x0000020000000002L});
-    public static final BitSet FOLLOW_46 = new BitSet(new long[]{0x0000080000000000L});
-    public static final BitSet FOLLOW_47 = new BitSet(new long[]{0x0000040000000000L});
-    public static final BitSet FOLLOW_48 = new BitSet(new long[]{0x0180FD10000080F0L});
-    public static final BitSet FOLLOW_49 = new BitSet(new long[]{0x0000080000200000L});
-    public static final BitSet FOLLOW_50 = new BitSet(new long[]{0xF000000000000002L,0x000000000000FFFFL});
-    public static final BitSet FOLLOW_51 = new BitSet(new long[]{0x0001000000000000L});
+    public static final BitSet FOLLOW_25 = new BitSet(new long[]{0x0000000080000000L});
+    public static final BitSet FOLLOW_26 = new BitSet(new long[]{0x0000000000080000L});
+    public static final BitSet FOLLOW_27 = new BitSet(new long[]{0x0000000000040002L});
+    public static final BitSet FOLLOW_28 = new BitSet(new long[]{0x0000000000020020L});
+    public static final BitSet FOLLOW_29 = new BitSet(new long[]{0x0000000400000000L});
+    public static final BitSet FOLLOW_30 = new BitSet(new long[]{0x0000000800000000L});
+    public static final BitSet FOLLOW_31 = new BitSet(new long[]{0x0000001000000000L});
+    public static final BitSet FOLLOW_32 = new BitSet(new long[]{0x0000002000000000L});
+    public static final BitSet FOLLOW_33 = new BitSet(new long[]{0x0000000000200002L});
+    public static final BitSet FOLLOW_34 = new BitSet(new long[]{0x0000000004000130L});
+    public static final BitSet FOLLOW_35 = new BitSet(new long[]{0x0000004000000000L});
+    public static final BitSet FOLLOW_36 = new BitSet(new long[]{0x00060080000401F0L});
+    public static final BitSet FOLLOW_37 = new BitSet(new long[]{0x00060080000C01F0L});
+    public static final BitSet FOLLOW_38 = new BitSet(new long[]{0x0000010000000002L});
+    public static final BitSet FOLLOW_39 = new BitSet(new long[]{0x0607A880000401F0L});
+    public static final BitSet FOLLOW_40 = new BitSet(new long[]{0x0000020000000002L});
+    public static final BitSet FOLLOW_41 = new BitSet(new long[]{0x0000040000000002L});
+    public static final BitSet FOLLOW_42 = new BitSet(new long[]{0x01F8000000000002L});
+    public static final BitSet FOLLOW_43 = new BitSet(new long[]{0x0600000000000002L});
+    public static final BitSet FOLLOW_44 = new BitSet(new long[]{0x3800000000000002L});
+    public static final BitSet FOLLOW_45 = new BitSet(new long[]{0x0000100000000002L});
+    public static final BitSet FOLLOW_46 = new BitSet(new long[]{0x0000400000000000L});
+    public static final BitSet FOLLOW_47 = new BitSet(new long[]{0x0000200000000000L});
+    public static final BitSet FOLLOW_48 = new BitSet(new long[]{0x0607E880000401F0L});
+    public static final BitSet FOLLOW_49 = new BitSet(new long[]{0x0000400001000000L});
+    public static final BitSet FOLLOW_50 = new BitSet(new long[]{0xC000000000000002L,0x000000000003FFFFL});
 
 }

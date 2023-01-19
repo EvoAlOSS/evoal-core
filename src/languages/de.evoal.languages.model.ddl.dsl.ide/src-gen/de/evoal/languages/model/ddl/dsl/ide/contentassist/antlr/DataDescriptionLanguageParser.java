@@ -82,7 +82,6 @@ public class DataDescriptionLanguageParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getDoubleLiteralRuleAccess().getGroup(), "rule__DoubleLiteralRule__Group__0");
 			builder.put(grammarAccess.getIntegerLiteralRuleAccess().getGroup(), "rule__IntegerLiteralRule__Group__0");
 			builder.put(grammarAccess.getBooleanLiteralRuleAccess().getGroup(), "rule__BooleanLiteralRule__Group__0");
-			builder.put(grammarAccess.getDOUBLEAccess().getGroup(), "rule__DOUBLE__Group__0");
 			builder.put(grammarAccess.getDataDescriptionModelRuleAccess().getUsesAssignment_1(), "rule__DataDescriptionModelRule__UsesAssignment_1");
 			builder.put(grammarAccess.getDataDescriptionModelRuleAccess().getTypesAssignment_2_2(), "rule__DataDescriptionModelRule__TypesAssignment_2_2");
 			builder.put(grammarAccess.getDataDescriptionModelRuleAccess().getDescriptionsAssignment_3_2(), "rule__DataDescriptionModelRule__DescriptionsAssignment_3_2");

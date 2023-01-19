@@ -87,7 +87,6 @@ public class DefinitionLanguageParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getDoubleLiteralRuleAccess().getGroup(), "rule__DoubleLiteralRule__Group__0");
 			builder.put(grammarAccess.getIntegerLiteralRuleAccess().getGroup(), "rule__IntegerLiteralRule__Group__0");
 			builder.put(grammarAccess.getBooleanLiteralRuleAccess().getGroup(), "rule__BooleanLiteralRule__Group__0");
-			builder.put(grammarAccess.getDOUBLEAccess().getGroup(), "rule__DOUBLE__Group__0");
 			builder.put(grammarAccess.getDefinitionModelRuleAccess().getTypesAssignment_0(), "rule__DefinitionModelRule__TypesAssignment_0");
 			builder.put(grammarAccess.getDefinitionModelRuleAccess().getFunctionsAssignment_1(), "rule__DefinitionModelRule__FunctionsAssignment_1");
 			builder.put(grammarAccess.getTypeDefinitionRuleAccess().getAbstractAssignment_0(), "rule__TypeDefinitionRule__AbstractAssignment_0");

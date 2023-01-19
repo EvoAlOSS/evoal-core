@@ -66,7 +66,6 @@ public class ExpressionLanguageParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getDoubleLiteralRuleAccess().getGroup(), "rule__DoubleLiteralRule__Group__0");
 			builder.put(grammarAccess.getIntegerLiteralRuleAccess().getGroup(), "rule__IntegerLiteralRule__Group__0");
 			builder.put(grammarAccess.getBooleanLiteralRuleAccess().getGroup(), "rule__BooleanLiteralRule__Group__0");
-			builder.put(grammarAccess.getDOUBLEAccess().getGroup(), "rule__DOUBLE__Group__0");
 			builder.put(grammarAccess.getOrExpressionRuleAccess().getSubExpressionsAssignment_0(), "rule__OrExpressionRule__SubExpressionsAssignment_0");
 			builder.put(grammarAccess.getOrExpressionRuleAccess().getSubExpressionsAssignment_1_1(), "rule__OrExpressionRule__SubExpressionsAssignment_1_1");
 			builder.put(grammarAccess.getXorExpressionRuleAccess().getSubExpressionsAssignment_0(), "rule__XorExpressionRule__SubExpressionsAssignment_0");

@@ -75,7 +75,6 @@ public class InstanceLanguageParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getDoubleLiteralRuleAccess().getGroup(), "rule__DoubleLiteralRule__Group__0");
 			builder.put(grammarAccess.getIntegerLiteralRuleAccess().getGroup(), "rule__IntegerLiteralRule__Group__0");
 			builder.put(grammarAccess.getBooleanLiteralRuleAccess().getGroup(), "rule__BooleanLiteralRule__Group__0");
-			builder.put(grammarAccess.getDOUBLEAccess().getGroup(), "rule__DOUBLE__Group__0");
 			builder.put(grammarAccess.getInstanceRuleAccess().getNameAssignment_0(), "rule__InstanceRule__NameAssignment_0");
 			builder.put(grammarAccess.getInstanceRuleAccess().getAttributesAssignment_1_1(), "rule__InstanceRule__AttributesAssignment_1_1");
 			builder.put(grammarAccess.getAttributeRuleAccess().getNameAssignment_0(), "rule__AttributeRule__NameAssignment_0");

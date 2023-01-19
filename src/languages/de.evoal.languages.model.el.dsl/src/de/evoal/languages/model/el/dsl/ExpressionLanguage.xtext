@@ -139,7 +139,11 @@ BooleanLiteralRule returns BooleanLiteral:
 StringOrId:
 	QUOTED_ID | ID;
 
-DOUBLE returns ecore::EDouble : INT'.'INT;
+terminal fragment DIGIT: '0'..'9';
+terminal fragment EXPONENT: 'e' ('+'|'-')? DIGIT+;
+@Override
+terminal INT returns ecore::EInt: '-'? DIGIT+;
+terminal DOUBLE returns ecore::EDouble: INT EXPONENT | INT '.' DIGIT* EXPONENT?;
 
 @Override
 terminal STRING:

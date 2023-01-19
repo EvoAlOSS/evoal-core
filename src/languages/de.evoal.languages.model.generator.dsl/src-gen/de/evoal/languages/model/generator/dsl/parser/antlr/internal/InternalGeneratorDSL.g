@@ -630,7 +630,7 @@ ruleCounterRangeRule returns [EObject current=null]
 						$current,
 						"start",
 						lv_start_1_0,
-						"org.eclipse.xtext.common.Terminals.INT");
+						"de.evoal.languages.model.el.dsl.ExpressionLanguage.INT");
 				}
 			)
 		)
@@ -652,7 +652,7 @@ ruleCounterRangeRule returns [EObject current=null]
 						$current,
 						"end",
 						lv_end_3_0,
-						"org.eclipse.xtext.common.Terminals.INT");
+						"de.evoal.languages.model.el.dsl.ExpressionLanguage.INT");
 				}
 			)
 		)
@@ -908,7 +908,7 @@ ruleApplyStatementRule returns [EObject current=null]
 						$current,
 						"count",
 						lv_count_3_0,
-						"org.eclipse.xtext.common.Terminals.INT");
+						"de.evoal.languages.model.el.dsl.ExpressionLanguage.INT");
 				}
 			)
 		)
@@ -2439,20 +2439,19 @@ ruleDoubleLiteralRule returns [EObject current=null]
 	(
 		(
 			(
+				lv_literal_0_0=RULE_DOUBLE
 				{
-					newCompositeNode(grammarAccess.getDoubleLiteralRuleAccess().getLiteralDOUBLEParserRuleCall_0_0());
+					newLeafNode(lv_literal_0_0, grammarAccess.getDoubleLiteralRuleAccess().getLiteralDOUBLETerminalRuleCall_0_0());
 				}
-				lv_literal_0_0=ruleDOUBLE
 				{
 					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getDoubleLiteralRuleRule());
+						$current = createModelElement(grammarAccess.getDoubleLiteralRuleRule());
 					}
-					set(
+					setWithLastConsumed(
 						$current,
 						"literal",
 						lv_literal_0_0,
 						"de.evoal.languages.model.el.dsl.ExpressionLanguage.DOUBLE");
-					afterParserOrEnumRuleCall();
 				}
 			)
 		)
@@ -2508,7 +2507,7 @@ ruleIntegerLiteralRule returns [EObject current=null]
 						$current,
 						"literal",
 						lv_literal_0_0,
-						"org.eclipse.xtext.common.Terminals.INT");
+						"de.evoal.languages.model.el.dsl.ExpressionLanguage.INT");
 				}
 			)
 		)
@@ -2646,44 +2645,6 @@ ruleStringOrId returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToke
 		}
 		{
 			newLeafNode(this_ID_1, grammarAccess.getStringOrIdAccess().getIDTerminalRuleCall_1());
-		}
-	)
-;
-
-// Entry rule entryRuleDOUBLE
-entryRuleDOUBLE returns [String current=null]:
-	{ newCompositeNode(grammarAccess.getDOUBLERule()); }
-	iv_ruleDOUBLE=ruleDOUBLE
-	{ $current=$iv_ruleDOUBLE.current.getText(); }
-	EOF;
-
-// Rule DOUBLE
-ruleDOUBLE returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
-	(
-		this_INT_0=RULE_INT
-		{
-			$current.merge(this_INT_0);
-		}
-		{
-			newLeafNode(this_INT_0, grammarAccess.getDOUBLEAccess().getINTTerminalRuleCall_0());
-		}
-		kw='.'
-		{
-			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getDOUBLEAccess().getFullStopKeyword_1());
-		}
-		this_INT_2=RULE_INT
-		{
-			$current.merge(this_INT_2);
-		}
-		{
-			newLeafNode(this_INT_2, grammarAccess.getDOUBLEAccess().getINTTerminalRuleCall_2());
 		}
 	)
 ;
@@ -2980,13 +2941,19 @@ ruleFactorRule returns [Enumerator current=null]
 	)
 ;
 
+fragment RULE_DIGIT : '0'..'9';
+
+fragment RULE_EXPONENT : 'e' ('+'|'-')? RULE_DIGIT+;
+
+RULE_INT : '-'? RULE_DIGIT+;
+
+RULE_DOUBLE : (RULE_INT RULE_EXPONENT|RULE_INT '.' RULE_DIGIT* RULE_EXPONENT?);
+
 RULE_STRING : '"' ('\\' .|~(('\\'|'"')))* '"';
 
 RULE_QUOTED_ID : '\'' ('\\' .|~(('\\'|'\'')))* '\'';
 
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
-
-RULE_INT : ('0'..'9')+;
 
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
 

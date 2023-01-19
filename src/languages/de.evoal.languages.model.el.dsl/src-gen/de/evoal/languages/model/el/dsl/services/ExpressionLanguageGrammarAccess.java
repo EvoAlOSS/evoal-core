@@ -577,7 +577,7 @@ public class ExpressionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.el.dsl.ExpressionLanguage.DoubleLiteralRule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cLiteralAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cLiteralDOUBLEParserRuleCall_0_0 = (RuleCall)cLiteralAssignment_0.eContents().get(0);
+		private final RuleCall cLiteralDOUBLETerminalRuleCall_0_0 = (RuleCall)cLiteralAssignment_0.eContents().get(0);
 		private final Assignment cFactorAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cFactorFactorRuleEnumRuleCall_1_0 = (RuleCall)cFactorAssignment_1.eContents().get(0);
 		
@@ -593,7 +593,7 @@ public class ExpressionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 		public Assignment getLiteralAssignment_0() { return cLiteralAssignment_0; }
 		
 		//DOUBLE
-		public RuleCall getLiteralDOUBLEParserRuleCall_0_0() { return cLiteralDOUBLEParserRuleCall_0_0; }
+		public RuleCall getLiteralDOUBLETerminalRuleCall_0_0() { return cLiteralDOUBLETerminalRuleCall_0_0; }
 		
 		//(factor = FactorRule)?
 		public Assignment getFactorAssignment_1() { return cFactorAssignment_1; }
@@ -695,28 +695,6 @@ public class ExpressionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 		
 		//ID
 		public RuleCall getIDTerminalRuleCall_1() { return cIDTerminalRuleCall_1; }
-	}
-	public class DOUBLEElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.el.dsl.ExpressionLanguage.DOUBLE");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final RuleCall cINTTerminalRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
-		private final Keyword cFullStopKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final RuleCall cINTTerminalRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
-		
-		//DOUBLE returns ecore::EDouble : INT'.'INT;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//INT'.'INT
-		public Group getGroup() { return cGroup; }
-		
-		//INT
-		public RuleCall getINTTerminalRuleCall_0() { return cINTTerminalRuleCall_0; }
-		
-		//'.'
-		public Keyword getFullStopKeyword_1() { return cFullStopKeyword_1; }
-		
-		//INT
-		public RuleCall getINTTerminalRuleCall_2() { return cINTTerminalRuleCall_2; }
 	}
 	
 	public class ComparisonOperatorRuleElements extends AbstractElementFinder.AbstractEnumRuleElementFinder {
@@ -1091,7 +1069,10 @@ public class ExpressionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 	private final FactorRuleElements eFactorRule;
 	private final BooleanLiteralRuleElements pBooleanLiteralRule;
 	private final StringOrIdElements pStringOrId;
-	private final DOUBLEElements pDOUBLE;
+	private final TerminalRule tDIGIT;
+	private final TerminalRule tEXPONENT;
+	private final TerminalRule tINT;
+	private final TerminalRule tDOUBLE;
 	private final TerminalRule tSTRING;
 	private final TerminalRule tQUOTED_ID;
 	
@@ -1131,7 +1112,10 @@ public class ExpressionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 		this.eFactorRule = new FactorRuleElements();
 		this.pBooleanLiteralRule = new BooleanLiteralRuleElements();
 		this.pStringOrId = new StringOrIdElements();
-		this.pDOUBLE = new DOUBLEElements();
+		this.tDIGIT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.el.dsl.ExpressionLanguage.DIGIT");
+		this.tEXPONENT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.el.dsl.ExpressionLanguage.EXPONENT");
+		this.tINT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.el.dsl.ExpressionLanguage.INT");
+		this.tDOUBLE = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.el.dsl.ExpressionLanguage.DOUBLE");
 		this.tSTRING = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.el.dsl.ExpressionLanguage.STRING");
 		this.tQUOTED_ID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.el.dsl.ExpressionLanguage.QUOTED_ID");
 	}
@@ -1484,13 +1468,25 @@ public class ExpressionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 		return getStringOrIdAccess().getRule();
 	}
 	
-	//DOUBLE returns ecore::EDouble : INT'.'INT;
-	public DOUBLEElements getDOUBLEAccess() {
-		return pDOUBLE;
+	//terminal fragment DIGIT: '0'..'9';
+	public TerminalRule getDIGITRule() {
+		return tDIGIT;
 	}
 	
-	public ParserRule getDOUBLERule() {
-		return getDOUBLEAccess().getRule();
+	//terminal fragment EXPONENT: 'e' ('+'|'-')? DIGIT+;
+	public TerminalRule getEXPONENTRule() {
+		return tEXPONENT;
+	}
+	
+	//@Override
+	//terminal INT returns ecore::EInt: '-'? DIGIT+;
+	public TerminalRule getINTRule() {
+		return tINT;
+	}
+	
+	//terminal DOUBLE returns ecore::EDouble: INT EXPONENT | INT '.' DIGIT* EXPONENT?;
+	public TerminalRule getDOUBLERule() {
+		return tDOUBLE;
 	}
 	
 	//@Override
@@ -1509,11 +1505,6 @@ public class ExpressionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
-	}
-	
-	//terminal INT returns ecore::EInt: ('0'..'9')+;
-	public TerminalRule getINTRule() {
-		return gaTerminals.getINTRule();
 	}
 	
 	//terminal ML_COMMENT : '/*' -> '*/';

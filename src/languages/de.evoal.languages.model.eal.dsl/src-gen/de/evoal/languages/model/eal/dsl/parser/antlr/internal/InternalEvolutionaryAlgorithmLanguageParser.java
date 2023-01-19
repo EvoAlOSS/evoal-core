@@ -22,7 +22,7 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_STRING", "RULE_ID", "RULE_INT", "RULE_QUOTED_ID", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'use'", "';'", "'constraints'", "'{'", "'}'", "':='", "'['", "','", "']'", "'data'", "'OR'", "'XOR'", "'AND'", "'!'", "'^'", "'('", "')'", "'value'", "'true'", "'false'", "'.'", "'>='", "'>'", "'='", "'!='", "'<'", "'<='", "'+'", "'-'", "'*'", "'/'", "'%'", "'Y'", "'Z'", "'E'", "'P'", "'T'", "'G'", "'M'", "'k'", "'h'", "'da'", "'d'", "'c'", "'m'", "'\\u00B5'", "'n'", "'p'", "'f'", "'a'", "'z'", "'y'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_STRING", "RULE_ID", "RULE_DOUBLE", "RULE_INT", "RULE_QUOTED_ID", "RULE_DIGIT", "RULE_EXPONENT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'use'", "';'", "'constraints'", "'{'", "'}'", "':='", "'['", "','", "']'", "'data'", "'OR'", "'XOR'", "'AND'", "'!'", "'^'", "'('", "')'", "'value'", "'true'", "'false'", "'>='", "'>'", "'='", "'!='", "'<'", "'<='", "'+'", "'-'", "'*'", "'/'", "'%'", "'Y'", "'Z'", "'E'", "'P'", "'T'", "'G'", "'M'", "'k'", "'h'", "'da'", "'d'", "'c'", "'m'", "'\\u00B5'", "'n'", "'p'", "'f'", "'a'", "'z'", "'y'"
     };
     public static final int T__50=50;
     public static final int T__19=19;
@@ -32,11 +32,8 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
     public static final int T__17=17;
     public static final int T__18=18;
     public static final int T__55=55;
-    public static final int T__12=12;
     public static final int T__56=56;
-    public static final int T__13=13;
     public static final int T__57=57;
-    public static final int T__14=14;
     public static final int T__58=58;
     public static final int T__51=51;
     public static final int T__52=52;
@@ -45,24 +42,28 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
     public static final int T__60=60;
     public static final int T__61=61;
     public static final int RULE_ID=5;
-    public static final int RULE_QUOTED_ID=7;
+    public static final int RULE_QUOTED_ID=8;
+    public static final int RULE_DIGIT=9;
     public static final int T__26=26;
     public static final int T__27=27;
     public static final int T__28=28;
-    public static final int RULE_INT=6;
+    public static final int RULE_INT=7;
     public static final int T__29=29;
     public static final int T__22=22;
-    public static final int RULE_ML_COMMENT=8;
+    public static final int RULE_ML_COMMENT=11;
     public static final int T__23=23;
     public static final int T__24=24;
     public static final int T__25=25;
     public static final int T__62=62;
     public static final int T__63=63;
     public static final int T__20=20;
+    public static final int T__64=64;
     public static final int T__21=21;
+    public static final int T__65=65;
     public static final int RULE_STRING=4;
-    public static final int RULE_SL_COMMENT=9;
+    public static final int RULE_SL_COMMENT=12;
     public static final int T__37=37;
+    public static final int RULE_DOUBLE=6;
     public static final int T__38=38;
     public static final int T__39=39;
     public static final int T__33=33;
@@ -73,8 +74,9 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
     public static final int T__30=30;
     public static final int T__31=31;
     public static final int T__32=32;
-    public static final int RULE_WS=10;
-    public static final int RULE_ANY_OTHER=11;
+    public static final int RULE_WS=13;
+    public static final int RULE_ANY_OTHER=14;
+    public static final int RULE_EXPONENT=10;
     public static final int T__48=48;
     public static final int T__49=49;
     public static final int T__44=44;
@@ -189,7 +191,7 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
                 int alt1=2;
                 int LA1_0 = input.LA(1);
 
-                if ( (LA1_0==12) ) {
+                if ( (LA1_0==15) ) {
                     alt1=1;
                 }
 
@@ -267,7 +269,7 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
             int alt2=2;
             int LA2_0 = input.LA(1);
 
-            if ( (LA2_0==14) ) {
+            if ( (LA2_0==17) ) {
                 alt2=1;
             }
             switch (alt2) {
@@ -382,7 +384,7 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
             // InternalEvolutionaryAlgorithmLanguage.g:156:2: (otherlv_0= 'use' ( (lv_importURI_1_0= RULE_STRING ) ) otherlv_2= ';' )
             // InternalEvolutionaryAlgorithmLanguage.g:157:3: otherlv_0= 'use' ( (lv_importURI_1_0= RULE_STRING ) ) otherlv_2= ';'
             {
-            otherlv_0=(Token)match(input,12,FOLLOW_5); 
+            otherlv_0=(Token)match(input,15,FOLLOW_5); 
 
             			newLeafNode(otherlv_0, grammarAccess.getUseRuleAccess().getUseKeyword_0());
             		
@@ -412,7 +414,7 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
 
             }
 
-            otherlv_2=(Token)match(input,13,FOLLOW_2); 
+            otherlv_2=(Token)match(input,16,FOLLOW_2); 
 
             			newLeafNode(otherlv_2, grammarAccess.getUseRuleAccess().getSemicolonKeyword_2());
             		
@@ -506,11 +508,11 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
 
             }
 
-            otherlv_1=(Token)match(input,14,FOLLOW_7); 
+            otherlv_1=(Token)match(input,17,FOLLOW_7); 
 
             			newLeafNode(otherlv_1, grammarAccess.getConstraintRuleAccess().getConstraintsKeyword_1());
             		
-            otherlv_2=(Token)match(input,15,FOLLOW_8); 
+            otherlv_2=(Token)match(input,18,FOLLOW_8); 
 
             			newLeafNode(otherlv_2, grammarAccess.getConstraintRuleAccess().getLeftCurlyBracketKeyword_2());
             		
@@ -563,7 +565,7 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
                 }
             } while (true);
 
-            otherlv_4=(Token)match(input,16,FOLLOW_2); 
+            otherlv_4=(Token)match(input,19,FOLLOW_2); 
 
             			newLeafNode(otherlv_4, grammarAccess.getConstraintRuleAccess().getRightCurlyBracketKeyword_4());
             		
@@ -675,7 +677,7 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
 
             }
 
-            otherlv_1=(Token)match(input,13,FOLLOW_2); 
+            otherlv_1=(Token)match(input,16,FOLLOW_2); 
 
             			newLeafNode(otherlv_1, grammarAccess.getConstraintStatementRuleAccess().getSemicolonKeyword_1());
             		
@@ -879,14 +881,14 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
             int alt5=2;
             int LA5_0 = input.LA(1);
 
-            if ( (LA5_0==15) ) {
+            if ( (LA5_0==18) ) {
                 alt5=1;
             }
             switch (alt5) {
                 case 1 :
                     // InternalEvolutionaryAlgorithmLanguage.g:348:4: otherlv_1= '{' ( (lv_attributes_2_0= ruleAttributeRule ) )* otherlv_3= '}'
                     {
-                    otherlv_1=(Token)match(input,15,FOLLOW_10); 
+                    otherlv_1=(Token)match(input,18,FOLLOW_10); 
 
                     				newLeafNode(otherlv_1, grammarAccess.getInstanceRuleAccess().getLeftCurlyBracketKeyword_1_0());
                     			
@@ -939,7 +941,7 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
                         }
                     } while (true);
 
-                    otherlv_3=(Token)match(input,16,FOLLOW_2); 
+                    otherlv_3=(Token)match(input,19,FOLLOW_2); 
 
                     				newLeafNode(otherlv_3, grammarAccess.getInstanceRuleAccess().getRightCurlyBracketKeyword_1_2());
                     			
@@ -1060,7 +1062,7 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
 
             }
 
-            otherlv_1=(Token)match(input,17,FOLLOW_12); 
+            otherlv_1=(Token)match(input,20,FOLLOW_12); 
 
             			newLeafNode(otherlv_1, grammarAccess.getAttributeRuleAccess().getColonEqualsSignKeyword_1());
             		
@@ -1095,7 +1097,7 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
 
             }
 
-            otherlv_3=(Token)match(input,13,FOLLOW_2); 
+            otherlv_3=(Token)match(input,16,FOLLOW_2); 
 
             			newLeafNode(otherlv_3, grammarAccess.getAttributeRuleAccess().getSemicolonKeyword_3());
             		
@@ -1499,12 +1501,12 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
             // InternalEvolutionaryAlgorithmLanguage.g:563:2: (this_ArrayRule_0= ruleArrayRule | this_DataReferenceRule_1= ruleDataReferenceRule | this_InstanceRule_2= ruleInstanceRule | this_LiteralValueRule_3= ruleLiteralValueRule )
             int alt7=4;
             switch ( input.LA(1) ) {
-            case 18:
+            case 21:
                 {
                 alt7=1;
                 }
                 break;
-            case 21:
+            case 24:
                 {
                 alt7=2;
                 }
@@ -1516,9 +1518,10 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
                 }
                 break;
             case RULE_STRING:
+            case RULE_DOUBLE:
             case RULE_INT:
-            case 30:
-            case 31:
+            case 33:
+            case 34:
                 {
                 alt7=4;
                 }
@@ -1695,7 +1698,7 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
 
             }
 
-            otherlv_1=(Token)match(input,18,FOLLOW_13); 
+            otherlv_1=(Token)match(input,21,FOLLOW_13); 
 
             			newLeafNode(otherlv_1, grammarAccess.getArrayRuleAccess().getLeftSquareBracketKeyword_1());
             		
@@ -1703,7 +1706,7 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
             int alt9=2;
             int LA9_0 = input.LA(1);
 
-            if ( ((LA9_0>=RULE_STRING && LA9_0<=RULE_QUOTED_ID)||LA9_0==18||LA9_0==21||(LA9_0>=30 && LA9_0<=31)) ) {
+            if ( ((LA9_0>=RULE_STRING && LA9_0<=RULE_QUOTED_ID)||LA9_0==21||LA9_0==24||(LA9_0>=33 && LA9_0<=34)) ) {
                 alt9=1;
             }
             switch (alt9) {
@@ -1747,7 +1750,7 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
                         int alt8=2;
                         int LA8_0 = input.LA(1);
 
-                        if ( (LA8_0==19) ) {
+                        if ( (LA8_0==22) ) {
                             alt8=1;
                         }
 
@@ -1756,7 +1759,7 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
                     	case 1 :
                     	    // InternalEvolutionaryAlgorithmLanguage.g:650:5: otherlv_3= ',' ( (lv_values_4_0= ruleValueRule ) )
                     	    {
-                    	    otherlv_3=(Token)match(input,19,FOLLOW_12); 
+                    	    otherlv_3=(Token)match(input,22,FOLLOW_12); 
 
                     	    					newLeafNode(otherlv_3, grammarAccess.getArrayRuleAccess().getCommaKeyword_2_1_0());
                     	    				
@@ -1806,7 +1809,7 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
 
             }
 
-            otherlv_5=(Token)match(input,20,FOLLOW_2); 
+            otherlv_5=(Token)match(input,23,FOLLOW_2); 
 
             			newLeafNode(otherlv_5, grammarAccess.getArrayRuleAccess().getRightSquareBracketKeyword_3());
             		
@@ -1997,7 +2000,7 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
 
             }
 
-            otherlv_1=(Token)match(input,21,FOLLOW_15); 
+            otherlv_1=(Token)match(input,24,FOLLOW_15); 
 
             			newLeafNode(otherlv_1, grammarAccess.getDataReferenceRuleAccess().getDataKeyword_1());
             		
@@ -2227,7 +2230,7 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
                 int alt10=2;
                 int LA10_0 = input.LA(1);
 
-                if ( (LA10_0==22) ) {
+                if ( (LA10_0==25) ) {
                     alt10=1;
                 }
 
@@ -2236,7 +2239,7 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
             	case 1 :
             	    // InternalEvolutionaryAlgorithmLanguage.g:825:4: otherlv_1= 'OR' ( (lv_subExpressions_2_0= ruleXorExpressionRule ) )
             	    {
-            	    otherlv_1=(Token)match(input,22,FOLLOW_17); 
+            	    otherlv_1=(Token)match(input,25,FOLLOW_17); 
 
             	    				newLeafNode(otherlv_1, grammarAccess.getOrExpressionRuleAccess().getORKeyword_1_0());
             	    			
@@ -2396,7 +2399,7 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
                 int alt11=2;
                 int LA11_0 = input.LA(1);
 
-                if ( (LA11_0==23) ) {
+                if ( (LA11_0==26) ) {
                     alt11=1;
                 }
 
@@ -2405,7 +2408,7 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
             	case 1 :
             	    // InternalEvolutionaryAlgorithmLanguage.g:888:4: otherlv_1= 'XOR' ( (lv_subExpressions_2_0= ruleAndExpressionRule ) )
             	    {
-            	    otherlv_1=(Token)match(input,23,FOLLOW_17); 
+            	    otherlv_1=(Token)match(input,26,FOLLOW_17); 
 
             	    				newLeafNode(otherlv_1, grammarAccess.getXorExpressionRuleAccess().getXORKeyword_1_0());
             	    			
@@ -2565,7 +2568,7 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
                 int alt12=2;
                 int LA12_0 = input.LA(1);
 
-                if ( (LA12_0==24) ) {
+                if ( (LA12_0==27) ) {
                     alt12=1;
                 }
 
@@ -2574,7 +2577,7 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
             	case 1 :
             	    // InternalEvolutionaryAlgorithmLanguage.g:951:4: otherlv_1= 'AND' ( (lv_subExpressions_2_0= ruleNotExpressionRule ) )
             	    {
-            	    otherlv_1=(Token)match(input,24,FOLLOW_17); 
+            	    otherlv_1=(Token)match(input,27,FOLLOW_17); 
 
             	    				newLeafNode(otherlv_1, grammarAccess.getAndExpressionRuleAccess().getANDKeyword_1_0());
             	    			
@@ -2699,7 +2702,7 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
             int alt13=2;
             int LA13_0 = input.LA(1);
 
-            if ( (LA13_0==25) ) {
+            if ( (LA13_0==28) ) {
                 alt13=1;
             }
             switch (alt13) {
@@ -2709,7 +2712,7 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
                     // InternalEvolutionaryAlgorithmLanguage.g:995:4: (lv_negated_0_0= '!' )
                     // InternalEvolutionaryAlgorithmLanguage.g:996:5: lv_negated_0_0= '!'
                     {
-                    lv_negated_0_0=(Token)match(input,25,FOLLOW_17); 
+                    lv_negated_0_0=(Token)match(input,28,FOLLOW_17); 
 
                     					newLeafNode(lv_negated_0_0, grammarAccess.getNotExpressionRuleAccess().getNegatedExclamationMarkKeyword_0_0());
                     				
@@ -2874,7 +2877,7 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
                 int alt14=2;
                 int LA14_0 = input.LA(1);
 
-                if ( ((LA14_0>=33 && LA14_0<=38)) ) {
+                if ( ((LA14_0>=35 && LA14_0<=40)) ) {
                     alt14=1;
                 }
 
@@ -3174,7 +3177,7 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
                 int alt15=2;
                 int LA15_0 = input.LA(1);
 
-                if ( ((LA15_0>=39 && LA15_0<=40)) ) {
+                if ( ((LA15_0>=41 && LA15_0<=42)) ) {
                     alt15=1;
                 }
 
@@ -3371,7 +3374,7 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
                 int alt16=2;
                 int LA16_0 = input.LA(1);
 
-                if ( ((LA16_0>=41 && LA16_0<=43)) ) {
+                if ( ((LA16_0>=43 && LA16_0<=45)) ) {
                     alt16=1;
                 }
 
@@ -3565,14 +3568,14 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
             int alt17=2;
             int LA17_0 = input.LA(1);
 
-            if ( (LA17_0==26) ) {
+            if ( (LA17_0==29) ) {
                 alt17=1;
             }
             switch (alt17) {
                 case 1 :
                     // InternalEvolutionaryAlgorithmLanguage.g:1336:4: otherlv_1= '^' ( (lv_rightOperand_2_0= rulePowerOfExpressionRule ) )
                     {
-                    otherlv_1=(Token)match(input,26,FOLLOW_17); 
+                    otherlv_1=(Token)match(input,29,FOLLOW_17); 
 
                     				newLeafNode(otherlv_1, grammarAccess.getPowerOfExpressionRuleAccess().getCircumflexAccentKeyword_1_0());
                     			
@@ -3697,7 +3700,7 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
                 int alt18=2;
                 int LA18_0 = input.LA(1);
 
-                if ( ((LA18_0>=39 && LA18_0<=40)) ) {
+                if ( ((LA18_0>=41 && LA18_0<=42)) ) {
                     alt18=1;
                 }
 
@@ -3859,19 +3862,20 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
                 }
                 break;
             case RULE_STRING:
+            case RULE_DOUBLE:
             case RULE_INT:
-            case 30:
-            case 31:
+            case 33:
+            case 34:
                 {
                 alt19=2;
                 }
                 break;
-            case 27:
+            case 30:
                 {
                 alt19=3;
                 }
                 break;
-            case 29:
+            case 32:
                 {
                 alt19=4;
                 }
@@ -4034,7 +4038,7 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
             // InternalEvolutionaryAlgorithmLanguage.g:1489:2: (otherlv_0= '(' ( (lv_subExpression_1_0= ruleExpressionRule ) ) otherlv_2= ')' )
             // InternalEvolutionaryAlgorithmLanguage.g:1490:3: otherlv_0= '(' ( (lv_subExpression_1_0= ruleExpressionRule ) ) otherlv_2= ')'
             {
-            otherlv_0=(Token)match(input,27,FOLLOW_17); 
+            otherlv_0=(Token)match(input,30,FOLLOW_17); 
 
             			newLeafNode(otherlv_0, grammarAccess.getParanthesesRuleAccess().getLeftParenthesisKeyword_0());
             		
@@ -4069,7 +4073,7 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
 
             }
 
-            otherlv_2=(Token)match(input,28,FOLLOW_2); 
+            otherlv_2=(Token)match(input,31,FOLLOW_2); 
 
             			newLeafNode(otherlv_2, grammarAccess.getParanthesesRuleAccess().getRightParenthesisKeyword_2());
             		
@@ -4187,7 +4191,7 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
 
             }
 
-            otherlv_1=(Token)match(input,27,FOLLOW_26); 
+            otherlv_1=(Token)match(input,30,FOLLOW_26); 
 
             			newLeafNode(otherlv_1, grammarAccess.getCallRuleAccess().getLeftParenthesisKeyword_1());
             		
@@ -4195,7 +4199,7 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
             int alt21=2;
             int LA21_0 = input.LA(1);
 
-            if ( ((LA21_0>=RULE_STRING && LA21_0<=RULE_INT)||LA21_0==25||LA21_0==27||(LA21_0>=29 && LA21_0<=31)||(LA21_0>=39 && LA21_0<=40)) ) {
+            if ( ((LA21_0>=RULE_STRING && LA21_0<=RULE_INT)||LA21_0==28||LA21_0==30||(LA21_0>=32 && LA21_0<=34)||(LA21_0>=41 && LA21_0<=42)) ) {
                 alt21=1;
             }
             switch (alt21) {
@@ -4239,7 +4243,7 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
                         int alt20=2;
                         int LA20_0 = input.LA(1);
 
-                        if ( (LA20_0==19) ) {
+                        if ( (LA20_0==22) ) {
                             alt20=1;
                         }
 
@@ -4248,7 +4252,7 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
                     	case 1 :
                     	    // InternalEvolutionaryAlgorithmLanguage.g:1580:5: otherlv_3= ',' ( (lv_parameters_4_0= ruleExpressionRule ) )
                     	    {
-                    	    otherlv_3=(Token)match(input,19,FOLLOW_17); 
+                    	    otherlv_3=(Token)match(input,22,FOLLOW_17); 
 
                     	    					newLeafNode(otherlv_3, grammarAccess.getCallRuleAccess().getCommaKeyword_2_1_0());
                     	    				
@@ -4298,7 +4302,7 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
 
             }
 
-            otherlv_5=(Token)match(input,28,FOLLOW_2); 
+            otherlv_5=(Token)match(input,31,FOLLOW_2); 
 
             			newLeafNode(otherlv_5, grammarAccess.getCallRuleAccess().getRightParenthesisKeyword_3());
             		
@@ -4388,7 +4392,7 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
 
             }
 
-            otherlv_1=(Token)match(input,29,FOLLOW_2); 
+            otherlv_1=(Token)match(input,32,FOLLOW_2); 
 
             			newLeafNode(otherlv_1, grammarAccess.getValueReferenceRuleAccess().getValueKeyword_1());
             		
@@ -4472,6 +4476,7 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
             // InternalEvolutionaryAlgorithmLanguage.g:1657:2: (this_NumberLiteralRule_0= ruleNumberLiteralRule | this_StringLiteralRule_1= ruleStringLiteralRule | this_BooleanLiteralRule_2= ruleBooleanLiteralRule )
             int alt22=3;
             switch ( input.LA(1) ) {
+            case RULE_DOUBLE:
             case RULE_INT:
                 {
                 alt22=1;
@@ -4482,8 +4487,8 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
                 alt22=2;
                 }
                 break;
-            case 30:
-            case 31:
+            case 33:
+            case 34:
                 {
                 alt22=3;
                 }
@@ -4629,21 +4634,11 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
             int alt23=2;
             int LA23_0 = input.LA(1);
 
-            if ( (LA23_0==RULE_INT) ) {
-                int LA23_1 = input.LA(2);
-
-                if ( (LA23_1==EOF||LA23_1==13||(LA23_1>=19 && LA23_1<=20)||(LA23_1>=22 && LA23_1<=24)||LA23_1==26||LA23_1==28||(LA23_1>=33 && LA23_1<=63)) ) {
-                    alt23=2;
-                }
-                else if ( (LA23_1==32) ) {
-                    alt23=1;
-                }
-                else {
-                    NoViableAltException nvae =
-                        new NoViableAltException("", 23, 1, input);
-
-                    throw nvae;
-                }
+            if ( (LA23_0==RULE_DOUBLE) ) {
+                alt23=1;
+            }
+            else if ( (LA23_0==RULE_INT) ) {
+                alt23=2;
             }
             else {
                 NoViableAltException nvae =
@@ -4747,12 +4742,11 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
 
 
     // $ANTLR start "ruleDoubleLiteralRule"
-    // InternalEvolutionaryAlgorithmLanguage.g:1731:1: ruleDoubleLiteralRule returns [EObject current=null] : ( ( (lv_literal_0_0= ruleDOUBLE ) ) ( (lv_factor_1_0= ruleFactorRule ) )? ) ;
+    // InternalEvolutionaryAlgorithmLanguage.g:1731:1: ruleDoubleLiteralRule returns [EObject current=null] : ( ( (lv_literal_0_0= RULE_DOUBLE ) ) ( (lv_factor_1_0= ruleFactorRule ) )? ) ;
     public final EObject ruleDoubleLiteralRule() throws RecognitionException {
         EObject current = null;
 
-        AntlrDatatypeRuleToken lv_literal_0_0 = null;
-
+        Token lv_literal_0_0=null;
         Enumerator lv_factor_1_0 = null;
 
 
@@ -4760,36 +4754,31 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalEvolutionaryAlgorithmLanguage.g:1737:2: ( ( ( (lv_literal_0_0= ruleDOUBLE ) ) ( (lv_factor_1_0= ruleFactorRule ) )? ) )
-            // InternalEvolutionaryAlgorithmLanguage.g:1738:2: ( ( (lv_literal_0_0= ruleDOUBLE ) ) ( (lv_factor_1_0= ruleFactorRule ) )? )
+            // InternalEvolutionaryAlgorithmLanguage.g:1737:2: ( ( ( (lv_literal_0_0= RULE_DOUBLE ) ) ( (lv_factor_1_0= ruleFactorRule ) )? ) )
+            // InternalEvolutionaryAlgorithmLanguage.g:1738:2: ( ( (lv_literal_0_0= RULE_DOUBLE ) ) ( (lv_factor_1_0= ruleFactorRule ) )? )
             {
-            // InternalEvolutionaryAlgorithmLanguage.g:1738:2: ( ( (lv_literal_0_0= ruleDOUBLE ) ) ( (lv_factor_1_0= ruleFactorRule ) )? )
-            // InternalEvolutionaryAlgorithmLanguage.g:1739:3: ( (lv_literal_0_0= ruleDOUBLE ) ) ( (lv_factor_1_0= ruleFactorRule ) )?
+            // InternalEvolutionaryAlgorithmLanguage.g:1738:2: ( ( (lv_literal_0_0= RULE_DOUBLE ) ) ( (lv_factor_1_0= ruleFactorRule ) )? )
+            // InternalEvolutionaryAlgorithmLanguage.g:1739:3: ( (lv_literal_0_0= RULE_DOUBLE ) ) ( (lv_factor_1_0= ruleFactorRule ) )?
             {
-            // InternalEvolutionaryAlgorithmLanguage.g:1739:3: ( (lv_literal_0_0= ruleDOUBLE ) )
-            // InternalEvolutionaryAlgorithmLanguage.g:1740:4: (lv_literal_0_0= ruleDOUBLE )
+            // InternalEvolutionaryAlgorithmLanguage.g:1739:3: ( (lv_literal_0_0= RULE_DOUBLE ) )
+            // InternalEvolutionaryAlgorithmLanguage.g:1740:4: (lv_literal_0_0= RULE_DOUBLE )
             {
-            // InternalEvolutionaryAlgorithmLanguage.g:1740:4: (lv_literal_0_0= ruleDOUBLE )
-            // InternalEvolutionaryAlgorithmLanguage.g:1741:5: lv_literal_0_0= ruleDOUBLE
+            // InternalEvolutionaryAlgorithmLanguage.g:1740:4: (lv_literal_0_0= RULE_DOUBLE )
+            // InternalEvolutionaryAlgorithmLanguage.g:1741:5: lv_literal_0_0= RULE_DOUBLE
             {
+            lv_literal_0_0=(Token)match(input,RULE_DOUBLE,FOLLOW_28); 
 
-            					newCompositeNode(grammarAccess.getDoubleLiteralRuleAccess().getLiteralDOUBLEParserRuleCall_0_0());
+            					newLeafNode(lv_literal_0_0, grammarAccess.getDoubleLiteralRuleAccess().getLiteralDOUBLETerminalRuleCall_0_0());
             				
-            pushFollow(FOLLOW_28);
-            lv_literal_0_0=ruleDOUBLE();
-
-            state._fsp--;
-
 
             					if (current==null) {
-            						current = createModelElementForParent(grammarAccess.getDoubleLiteralRuleRule());
+            						current = createModelElement(grammarAccess.getDoubleLiteralRuleRule());
             					}
-            					set(
+            					setWithLastConsumed(
             						current,
             						"literal",
             						lv_literal_0_0,
             						"de.evoal.languages.model.el.dsl.ExpressionLanguage.DOUBLE");
-            					afterParserOrEnumRuleCall();
             				
 
             }
@@ -4797,19 +4786,19 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
 
             }
 
-            // InternalEvolutionaryAlgorithmLanguage.g:1758:3: ( (lv_factor_1_0= ruleFactorRule ) )?
+            // InternalEvolutionaryAlgorithmLanguage.g:1757:3: ( (lv_factor_1_0= ruleFactorRule ) )?
             int alt24=2;
             int LA24_0 = input.LA(1);
 
-            if ( ((LA24_0>=44 && LA24_0<=63)) ) {
+            if ( ((LA24_0>=46 && LA24_0<=65)) ) {
                 alt24=1;
             }
             switch (alt24) {
                 case 1 :
-                    // InternalEvolutionaryAlgorithmLanguage.g:1759:4: (lv_factor_1_0= ruleFactorRule )
+                    // InternalEvolutionaryAlgorithmLanguage.g:1758:4: (lv_factor_1_0= ruleFactorRule )
                     {
-                    // InternalEvolutionaryAlgorithmLanguage.g:1759:4: (lv_factor_1_0= ruleFactorRule )
-                    // InternalEvolutionaryAlgorithmLanguage.g:1760:5: lv_factor_1_0= ruleFactorRule
+                    // InternalEvolutionaryAlgorithmLanguage.g:1758:4: (lv_factor_1_0= ruleFactorRule )
+                    // InternalEvolutionaryAlgorithmLanguage.g:1759:5: lv_factor_1_0= ruleFactorRule
                     {
 
                     					newCompositeNode(grammarAccess.getDoubleLiteralRuleAccess().getFactorFactorRuleEnumRuleCall_1_0());
@@ -4862,7 +4851,7 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleIntegerLiteralRule"
-    // InternalEvolutionaryAlgorithmLanguage.g:1781:1: entryRuleIntegerLiteralRule returns [EObject current=null] : iv_ruleIntegerLiteralRule= ruleIntegerLiteralRule EOF ;
+    // InternalEvolutionaryAlgorithmLanguage.g:1780:1: entryRuleIntegerLiteralRule returns [EObject current=null] : iv_ruleIntegerLiteralRule= ruleIntegerLiteralRule EOF ;
     public final EObject entryRuleIntegerLiteralRule() throws RecognitionException {
         EObject current = null;
 
@@ -4870,8 +4859,8 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
 
 
         try {
-            // InternalEvolutionaryAlgorithmLanguage.g:1781:59: (iv_ruleIntegerLiteralRule= ruleIntegerLiteralRule EOF )
-            // InternalEvolutionaryAlgorithmLanguage.g:1782:2: iv_ruleIntegerLiteralRule= ruleIntegerLiteralRule EOF
+            // InternalEvolutionaryAlgorithmLanguage.g:1780:59: (iv_ruleIntegerLiteralRule= ruleIntegerLiteralRule EOF )
+            // InternalEvolutionaryAlgorithmLanguage.g:1781:2: iv_ruleIntegerLiteralRule= ruleIntegerLiteralRule EOF
             {
              newCompositeNode(grammarAccess.getIntegerLiteralRuleRule()); 
             pushFollow(FOLLOW_1);
@@ -4898,7 +4887,7 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
 
 
     // $ANTLR start "ruleIntegerLiteralRule"
-    // InternalEvolutionaryAlgorithmLanguage.g:1788:1: ruleIntegerLiteralRule returns [EObject current=null] : ( ( (lv_literal_0_0= RULE_INT ) ) ( (lv_factor_1_0= ruleFactorRule ) )? ) ;
+    // InternalEvolutionaryAlgorithmLanguage.g:1787:1: ruleIntegerLiteralRule returns [EObject current=null] : ( ( (lv_literal_0_0= RULE_INT ) ) ( (lv_factor_1_0= ruleFactorRule ) )? ) ;
     public final EObject ruleIntegerLiteralRule() throws RecognitionException {
         EObject current = null;
 
@@ -4910,17 +4899,17 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalEvolutionaryAlgorithmLanguage.g:1794:2: ( ( ( (lv_literal_0_0= RULE_INT ) ) ( (lv_factor_1_0= ruleFactorRule ) )? ) )
-            // InternalEvolutionaryAlgorithmLanguage.g:1795:2: ( ( (lv_literal_0_0= RULE_INT ) ) ( (lv_factor_1_0= ruleFactorRule ) )? )
+            // InternalEvolutionaryAlgorithmLanguage.g:1793:2: ( ( ( (lv_literal_0_0= RULE_INT ) ) ( (lv_factor_1_0= ruleFactorRule ) )? ) )
+            // InternalEvolutionaryAlgorithmLanguage.g:1794:2: ( ( (lv_literal_0_0= RULE_INT ) ) ( (lv_factor_1_0= ruleFactorRule ) )? )
             {
-            // InternalEvolutionaryAlgorithmLanguage.g:1795:2: ( ( (lv_literal_0_0= RULE_INT ) ) ( (lv_factor_1_0= ruleFactorRule ) )? )
-            // InternalEvolutionaryAlgorithmLanguage.g:1796:3: ( (lv_literal_0_0= RULE_INT ) ) ( (lv_factor_1_0= ruleFactorRule ) )?
+            // InternalEvolutionaryAlgorithmLanguage.g:1794:2: ( ( (lv_literal_0_0= RULE_INT ) ) ( (lv_factor_1_0= ruleFactorRule ) )? )
+            // InternalEvolutionaryAlgorithmLanguage.g:1795:3: ( (lv_literal_0_0= RULE_INT ) ) ( (lv_factor_1_0= ruleFactorRule ) )?
             {
-            // InternalEvolutionaryAlgorithmLanguage.g:1796:3: ( (lv_literal_0_0= RULE_INT ) )
-            // InternalEvolutionaryAlgorithmLanguage.g:1797:4: (lv_literal_0_0= RULE_INT )
+            // InternalEvolutionaryAlgorithmLanguage.g:1795:3: ( (lv_literal_0_0= RULE_INT ) )
+            // InternalEvolutionaryAlgorithmLanguage.g:1796:4: (lv_literal_0_0= RULE_INT )
             {
-            // InternalEvolutionaryAlgorithmLanguage.g:1797:4: (lv_literal_0_0= RULE_INT )
-            // InternalEvolutionaryAlgorithmLanguage.g:1798:5: lv_literal_0_0= RULE_INT
+            // InternalEvolutionaryAlgorithmLanguage.g:1796:4: (lv_literal_0_0= RULE_INT )
+            // InternalEvolutionaryAlgorithmLanguage.g:1797:5: lv_literal_0_0= RULE_INT
             {
             lv_literal_0_0=(Token)match(input,RULE_INT,FOLLOW_28); 
 
@@ -4934,7 +4923,7 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
             						current,
             						"literal",
             						lv_literal_0_0,
-            						"org.eclipse.xtext.common.Terminals.INT");
+            						"de.evoal.languages.model.el.dsl.ExpressionLanguage.INT");
             				
 
             }
@@ -4942,19 +4931,19 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
 
             }
 
-            // InternalEvolutionaryAlgorithmLanguage.g:1814:3: ( (lv_factor_1_0= ruleFactorRule ) )?
+            // InternalEvolutionaryAlgorithmLanguage.g:1813:3: ( (lv_factor_1_0= ruleFactorRule ) )?
             int alt25=2;
             int LA25_0 = input.LA(1);
 
-            if ( ((LA25_0>=44 && LA25_0<=63)) ) {
+            if ( ((LA25_0>=46 && LA25_0<=65)) ) {
                 alt25=1;
             }
             switch (alt25) {
                 case 1 :
-                    // InternalEvolutionaryAlgorithmLanguage.g:1815:4: (lv_factor_1_0= ruleFactorRule )
+                    // InternalEvolutionaryAlgorithmLanguage.g:1814:4: (lv_factor_1_0= ruleFactorRule )
                     {
-                    // InternalEvolutionaryAlgorithmLanguage.g:1815:4: (lv_factor_1_0= ruleFactorRule )
-                    // InternalEvolutionaryAlgorithmLanguage.g:1816:5: lv_factor_1_0= ruleFactorRule
+                    // InternalEvolutionaryAlgorithmLanguage.g:1814:4: (lv_factor_1_0= ruleFactorRule )
+                    // InternalEvolutionaryAlgorithmLanguage.g:1815:5: lv_factor_1_0= ruleFactorRule
                     {
 
                     					newCompositeNode(grammarAccess.getIntegerLiteralRuleAccess().getFactorFactorRuleEnumRuleCall_1_0());
@@ -5007,7 +4996,7 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleStringLiteralRule"
-    // InternalEvolutionaryAlgorithmLanguage.g:1837:1: entryRuleStringLiteralRule returns [EObject current=null] : iv_ruleStringLiteralRule= ruleStringLiteralRule EOF ;
+    // InternalEvolutionaryAlgorithmLanguage.g:1836:1: entryRuleStringLiteralRule returns [EObject current=null] : iv_ruleStringLiteralRule= ruleStringLiteralRule EOF ;
     public final EObject entryRuleStringLiteralRule() throws RecognitionException {
         EObject current = null;
 
@@ -5015,8 +5004,8 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
 
 
         try {
-            // InternalEvolutionaryAlgorithmLanguage.g:1837:58: (iv_ruleStringLiteralRule= ruleStringLiteralRule EOF )
-            // InternalEvolutionaryAlgorithmLanguage.g:1838:2: iv_ruleStringLiteralRule= ruleStringLiteralRule EOF
+            // InternalEvolutionaryAlgorithmLanguage.g:1836:58: (iv_ruleStringLiteralRule= ruleStringLiteralRule EOF )
+            // InternalEvolutionaryAlgorithmLanguage.g:1837:2: iv_ruleStringLiteralRule= ruleStringLiteralRule EOF
             {
              newCompositeNode(grammarAccess.getStringLiteralRuleRule()); 
             pushFollow(FOLLOW_1);
@@ -5043,7 +5032,7 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
 
 
     // $ANTLR start "ruleStringLiteralRule"
-    // InternalEvolutionaryAlgorithmLanguage.g:1844:1: ruleStringLiteralRule returns [EObject current=null] : ( (lv_value_0_0= RULE_STRING ) ) ;
+    // InternalEvolutionaryAlgorithmLanguage.g:1843:1: ruleStringLiteralRule returns [EObject current=null] : ( (lv_value_0_0= RULE_STRING ) ) ;
     public final EObject ruleStringLiteralRule() throws RecognitionException {
         EObject current = null;
 
@@ -5053,14 +5042,14 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalEvolutionaryAlgorithmLanguage.g:1850:2: ( ( (lv_value_0_0= RULE_STRING ) ) )
-            // InternalEvolutionaryAlgorithmLanguage.g:1851:2: ( (lv_value_0_0= RULE_STRING ) )
+            // InternalEvolutionaryAlgorithmLanguage.g:1849:2: ( ( (lv_value_0_0= RULE_STRING ) ) )
+            // InternalEvolutionaryAlgorithmLanguage.g:1850:2: ( (lv_value_0_0= RULE_STRING ) )
             {
-            // InternalEvolutionaryAlgorithmLanguage.g:1851:2: ( (lv_value_0_0= RULE_STRING ) )
-            // InternalEvolutionaryAlgorithmLanguage.g:1852:3: (lv_value_0_0= RULE_STRING )
+            // InternalEvolutionaryAlgorithmLanguage.g:1850:2: ( (lv_value_0_0= RULE_STRING ) )
+            // InternalEvolutionaryAlgorithmLanguage.g:1851:3: (lv_value_0_0= RULE_STRING )
             {
-            // InternalEvolutionaryAlgorithmLanguage.g:1852:3: (lv_value_0_0= RULE_STRING )
-            // InternalEvolutionaryAlgorithmLanguage.g:1853:4: lv_value_0_0= RULE_STRING
+            // InternalEvolutionaryAlgorithmLanguage.g:1851:3: (lv_value_0_0= RULE_STRING )
+            // InternalEvolutionaryAlgorithmLanguage.g:1852:4: lv_value_0_0= RULE_STRING
             {
             lv_value_0_0=(Token)match(input,RULE_STRING,FOLLOW_2); 
 
@@ -5102,7 +5091,7 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleBooleanLiteralRule"
-    // InternalEvolutionaryAlgorithmLanguage.g:1872:1: entryRuleBooleanLiteralRule returns [EObject current=null] : iv_ruleBooleanLiteralRule= ruleBooleanLiteralRule EOF ;
+    // InternalEvolutionaryAlgorithmLanguage.g:1871:1: entryRuleBooleanLiteralRule returns [EObject current=null] : iv_ruleBooleanLiteralRule= ruleBooleanLiteralRule EOF ;
     public final EObject entryRuleBooleanLiteralRule() throws RecognitionException {
         EObject current = null;
 
@@ -5110,8 +5099,8 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
 
 
         try {
-            // InternalEvolutionaryAlgorithmLanguage.g:1872:59: (iv_ruleBooleanLiteralRule= ruleBooleanLiteralRule EOF )
-            // InternalEvolutionaryAlgorithmLanguage.g:1873:2: iv_ruleBooleanLiteralRule= ruleBooleanLiteralRule EOF
+            // InternalEvolutionaryAlgorithmLanguage.g:1871:59: (iv_ruleBooleanLiteralRule= ruleBooleanLiteralRule EOF )
+            // InternalEvolutionaryAlgorithmLanguage.g:1872:2: iv_ruleBooleanLiteralRule= ruleBooleanLiteralRule EOF
             {
              newCompositeNode(grammarAccess.getBooleanLiteralRuleRule()); 
             pushFollow(FOLLOW_1);
@@ -5138,7 +5127,7 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
 
 
     // $ANTLR start "ruleBooleanLiteralRule"
-    // InternalEvolutionaryAlgorithmLanguage.g:1879:1: ruleBooleanLiteralRule returns [EObject current=null] : ( () ( ( (lv_value_1_0= 'true' ) ) | otherlv_2= 'false' ) ) ;
+    // InternalEvolutionaryAlgorithmLanguage.g:1878:1: ruleBooleanLiteralRule returns [EObject current=null] : ( () ( ( (lv_value_1_0= 'true' ) ) | otherlv_2= 'false' ) ) ;
     public final EObject ruleBooleanLiteralRule() throws RecognitionException {
         EObject current = null;
 
@@ -5149,14 +5138,14 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalEvolutionaryAlgorithmLanguage.g:1885:2: ( ( () ( ( (lv_value_1_0= 'true' ) ) | otherlv_2= 'false' ) ) )
-            // InternalEvolutionaryAlgorithmLanguage.g:1886:2: ( () ( ( (lv_value_1_0= 'true' ) ) | otherlv_2= 'false' ) )
+            // InternalEvolutionaryAlgorithmLanguage.g:1884:2: ( ( () ( ( (lv_value_1_0= 'true' ) ) | otherlv_2= 'false' ) ) )
+            // InternalEvolutionaryAlgorithmLanguage.g:1885:2: ( () ( ( (lv_value_1_0= 'true' ) ) | otherlv_2= 'false' ) )
             {
-            // InternalEvolutionaryAlgorithmLanguage.g:1886:2: ( () ( ( (lv_value_1_0= 'true' ) ) | otherlv_2= 'false' ) )
-            // InternalEvolutionaryAlgorithmLanguage.g:1887:3: () ( ( (lv_value_1_0= 'true' ) ) | otherlv_2= 'false' )
+            // InternalEvolutionaryAlgorithmLanguage.g:1885:2: ( () ( ( (lv_value_1_0= 'true' ) ) | otherlv_2= 'false' ) )
+            // InternalEvolutionaryAlgorithmLanguage.g:1886:3: () ( ( (lv_value_1_0= 'true' ) ) | otherlv_2= 'false' )
             {
-            // InternalEvolutionaryAlgorithmLanguage.g:1887:3: ()
-            // InternalEvolutionaryAlgorithmLanguage.g:1888:4: 
+            // InternalEvolutionaryAlgorithmLanguage.g:1886:3: ()
+            // InternalEvolutionaryAlgorithmLanguage.g:1887:4: 
             {
 
             				current = forceCreateModelElement(
@@ -5166,14 +5155,14 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
 
             }
 
-            // InternalEvolutionaryAlgorithmLanguage.g:1894:3: ( ( (lv_value_1_0= 'true' ) ) | otherlv_2= 'false' )
+            // InternalEvolutionaryAlgorithmLanguage.g:1893:3: ( ( (lv_value_1_0= 'true' ) ) | otherlv_2= 'false' )
             int alt26=2;
             int LA26_0 = input.LA(1);
 
-            if ( (LA26_0==30) ) {
+            if ( (LA26_0==33) ) {
                 alt26=1;
             }
-            else if ( (LA26_0==31) ) {
+            else if ( (LA26_0==34) ) {
                 alt26=2;
             }
             else {
@@ -5184,15 +5173,15 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
             }
             switch (alt26) {
                 case 1 :
-                    // InternalEvolutionaryAlgorithmLanguage.g:1895:4: ( (lv_value_1_0= 'true' ) )
+                    // InternalEvolutionaryAlgorithmLanguage.g:1894:4: ( (lv_value_1_0= 'true' ) )
                     {
-                    // InternalEvolutionaryAlgorithmLanguage.g:1895:4: ( (lv_value_1_0= 'true' ) )
-                    // InternalEvolutionaryAlgorithmLanguage.g:1896:5: (lv_value_1_0= 'true' )
+                    // InternalEvolutionaryAlgorithmLanguage.g:1894:4: ( (lv_value_1_0= 'true' ) )
+                    // InternalEvolutionaryAlgorithmLanguage.g:1895:5: (lv_value_1_0= 'true' )
                     {
-                    // InternalEvolutionaryAlgorithmLanguage.g:1896:5: (lv_value_1_0= 'true' )
-                    // InternalEvolutionaryAlgorithmLanguage.g:1897:6: lv_value_1_0= 'true'
+                    // InternalEvolutionaryAlgorithmLanguage.g:1895:5: (lv_value_1_0= 'true' )
+                    // InternalEvolutionaryAlgorithmLanguage.g:1896:6: lv_value_1_0= 'true'
                     {
-                    lv_value_1_0=(Token)match(input,30,FOLLOW_2); 
+                    lv_value_1_0=(Token)match(input,33,FOLLOW_2); 
 
                     						newLeafNode(lv_value_1_0, grammarAccess.getBooleanLiteralRuleAccess().getValueTrueKeyword_1_0_0());
                     					
@@ -5212,9 +5201,9 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
                     }
                     break;
                 case 2 :
-                    // InternalEvolutionaryAlgorithmLanguage.g:1910:4: otherlv_2= 'false'
+                    // InternalEvolutionaryAlgorithmLanguage.g:1909:4: otherlv_2= 'false'
                     {
-                    otherlv_2=(Token)match(input,31,FOLLOW_2); 
+                    otherlv_2=(Token)match(input,34,FOLLOW_2); 
 
                     				newLeafNode(otherlv_2, grammarAccess.getBooleanLiteralRuleAccess().getFalseKeyword_1_1());
                     			
@@ -5247,7 +5236,7 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleStringOrId"
-    // InternalEvolutionaryAlgorithmLanguage.g:1919:1: entryRuleStringOrId returns [String current=null] : iv_ruleStringOrId= ruleStringOrId EOF ;
+    // InternalEvolutionaryAlgorithmLanguage.g:1918:1: entryRuleStringOrId returns [String current=null] : iv_ruleStringOrId= ruleStringOrId EOF ;
     public final String entryRuleStringOrId() throws RecognitionException {
         String current = null;
 
@@ -5255,8 +5244,8 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
 
 
         try {
-            // InternalEvolutionaryAlgorithmLanguage.g:1919:50: (iv_ruleStringOrId= ruleStringOrId EOF )
-            // InternalEvolutionaryAlgorithmLanguage.g:1920:2: iv_ruleStringOrId= ruleStringOrId EOF
+            // InternalEvolutionaryAlgorithmLanguage.g:1918:50: (iv_ruleStringOrId= ruleStringOrId EOF )
+            // InternalEvolutionaryAlgorithmLanguage.g:1919:2: iv_ruleStringOrId= ruleStringOrId EOF
             {
              newCompositeNode(grammarAccess.getStringOrIdRule()); 
             pushFollow(FOLLOW_1);
@@ -5283,7 +5272,7 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
 
 
     // $ANTLR start "ruleStringOrId"
-    // InternalEvolutionaryAlgorithmLanguage.g:1926:1: ruleStringOrId returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_QUOTED_ID_0= RULE_QUOTED_ID | this_ID_1= RULE_ID ) ;
+    // InternalEvolutionaryAlgorithmLanguage.g:1925:1: ruleStringOrId returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_QUOTED_ID_0= RULE_QUOTED_ID | this_ID_1= RULE_ID ) ;
     public final AntlrDatatypeRuleToken ruleStringOrId() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -5294,10 +5283,10 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalEvolutionaryAlgorithmLanguage.g:1932:2: ( (this_QUOTED_ID_0= RULE_QUOTED_ID | this_ID_1= RULE_ID ) )
-            // InternalEvolutionaryAlgorithmLanguage.g:1933:2: (this_QUOTED_ID_0= RULE_QUOTED_ID | this_ID_1= RULE_ID )
+            // InternalEvolutionaryAlgorithmLanguage.g:1931:2: ( (this_QUOTED_ID_0= RULE_QUOTED_ID | this_ID_1= RULE_ID ) )
+            // InternalEvolutionaryAlgorithmLanguage.g:1932:2: (this_QUOTED_ID_0= RULE_QUOTED_ID | this_ID_1= RULE_ID )
             {
-            // InternalEvolutionaryAlgorithmLanguage.g:1933:2: (this_QUOTED_ID_0= RULE_QUOTED_ID | this_ID_1= RULE_ID )
+            // InternalEvolutionaryAlgorithmLanguage.g:1932:2: (this_QUOTED_ID_0= RULE_QUOTED_ID | this_ID_1= RULE_ID )
             int alt27=2;
             int LA27_0 = input.LA(1);
 
@@ -5315,7 +5304,7 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
             }
             switch (alt27) {
                 case 1 :
-                    // InternalEvolutionaryAlgorithmLanguage.g:1934:3: this_QUOTED_ID_0= RULE_QUOTED_ID
+                    // InternalEvolutionaryAlgorithmLanguage.g:1933:3: this_QUOTED_ID_0= RULE_QUOTED_ID
                     {
                     this_QUOTED_ID_0=(Token)match(input,RULE_QUOTED_ID,FOLLOW_2); 
 
@@ -5328,7 +5317,7 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
                     }
                     break;
                 case 2 :
-                    // InternalEvolutionaryAlgorithmLanguage.g:1942:3: this_ID_1= RULE_ID
+                    // InternalEvolutionaryAlgorithmLanguage.g:1941:3: this_ID_1= RULE_ID
                     {
                     this_ID_1=(Token)match(input,RULE_ID,FOLLOW_2); 
 
@@ -5362,104 +5351,8 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
     // $ANTLR end "ruleStringOrId"
 
 
-    // $ANTLR start "entryRuleDOUBLE"
-    // InternalEvolutionaryAlgorithmLanguage.g:1953:1: entryRuleDOUBLE returns [String current=null] : iv_ruleDOUBLE= ruleDOUBLE EOF ;
-    public final String entryRuleDOUBLE() throws RecognitionException {
-        String current = null;
-
-        AntlrDatatypeRuleToken iv_ruleDOUBLE = null;
-
-
-        try {
-            // InternalEvolutionaryAlgorithmLanguage.g:1953:46: (iv_ruleDOUBLE= ruleDOUBLE EOF )
-            // InternalEvolutionaryAlgorithmLanguage.g:1954:2: iv_ruleDOUBLE= ruleDOUBLE EOF
-            {
-             newCompositeNode(grammarAccess.getDOUBLERule()); 
-            pushFollow(FOLLOW_1);
-            iv_ruleDOUBLE=ruleDOUBLE();
-
-            state._fsp--;
-
-             current =iv_ruleDOUBLE.getText(); 
-            match(input,EOF,FOLLOW_2); 
-
-            }
-
-        }
-
-            catch (RecognitionException re) {
-                recover(input,re);
-                appendSkippedTokens();
-            }
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "entryRuleDOUBLE"
-
-
-    // $ANTLR start "ruleDOUBLE"
-    // InternalEvolutionaryAlgorithmLanguage.g:1960:1: ruleDOUBLE returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_INT_0= RULE_INT kw= '.' this_INT_2= RULE_INT ) ;
-    public final AntlrDatatypeRuleToken ruleDOUBLE() throws RecognitionException {
-        AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
-
-        Token this_INT_0=null;
-        Token kw=null;
-        Token this_INT_2=null;
-
-
-        	enterRule();
-
-        try {
-            // InternalEvolutionaryAlgorithmLanguage.g:1966:2: ( (this_INT_0= RULE_INT kw= '.' this_INT_2= RULE_INT ) )
-            // InternalEvolutionaryAlgorithmLanguage.g:1967:2: (this_INT_0= RULE_INT kw= '.' this_INT_2= RULE_INT )
-            {
-            // InternalEvolutionaryAlgorithmLanguage.g:1967:2: (this_INT_0= RULE_INT kw= '.' this_INT_2= RULE_INT )
-            // InternalEvolutionaryAlgorithmLanguage.g:1968:3: this_INT_0= RULE_INT kw= '.' this_INT_2= RULE_INT
-            {
-            this_INT_0=(Token)match(input,RULE_INT,FOLLOW_29); 
-
-            			current.merge(this_INT_0);
-            		
-
-            			newLeafNode(this_INT_0, grammarAccess.getDOUBLEAccess().getINTTerminalRuleCall_0());
-            		
-            kw=(Token)match(input,32,FOLLOW_30); 
-
-            			current.merge(kw);
-            			newLeafNode(kw, grammarAccess.getDOUBLEAccess().getFullStopKeyword_1());
-            		
-            this_INT_2=(Token)match(input,RULE_INT,FOLLOW_2); 
-
-            			current.merge(this_INT_2);
-            		
-
-            			newLeafNode(this_INT_2, grammarAccess.getDOUBLEAccess().getINTTerminalRuleCall_2());
-            		
-
-            }
-
-
-            }
-
-
-            	leaveRule();
-
-        }
-
-            catch (RecognitionException re) {
-                recover(input,re);
-                appendSkippedTokens();
-            }
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "ruleDOUBLE"
-
-
     // $ANTLR start "ruleComparisonOperatorRule"
-    // InternalEvolutionaryAlgorithmLanguage.g:1991:1: ruleComparisonOperatorRule returns [Enumerator current=null] : ( (enumLiteral_0= '>=' ) | (enumLiteral_1= '>' ) | (enumLiteral_2= '=' ) | (enumLiteral_3= '!=' ) | (enumLiteral_4= '<' ) | (enumLiteral_5= '<=' ) ) ;
+    // InternalEvolutionaryAlgorithmLanguage.g:1952:1: ruleComparisonOperatorRule returns [Enumerator current=null] : ( (enumLiteral_0= '>=' ) | (enumLiteral_1= '>' ) | (enumLiteral_2= '=' ) | (enumLiteral_3= '!=' ) | (enumLiteral_4= '<' ) | (enumLiteral_5= '<=' ) ) ;
     public final Enumerator ruleComparisonOperatorRule() throws RecognitionException {
         Enumerator current = null;
 
@@ -5474,38 +5367,38 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalEvolutionaryAlgorithmLanguage.g:1997:2: ( ( (enumLiteral_0= '>=' ) | (enumLiteral_1= '>' ) | (enumLiteral_2= '=' ) | (enumLiteral_3= '!=' ) | (enumLiteral_4= '<' ) | (enumLiteral_5= '<=' ) ) )
-            // InternalEvolutionaryAlgorithmLanguage.g:1998:2: ( (enumLiteral_0= '>=' ) | (enumLiteral_1= '>' ) | (enumLiteral_2= '=' ) | (enumLiteral_3= '!=' ) | (enumLiteral_4= '<' ) | (enumLiteral_5= '<=' ) )
+            // InternalEvolutionaryAlgorithmLanguage.g:1958:2: ( ( (enumLiteral_0= '>=' ) | (enumLiteral_1= '>' ) | (enumLiteral_2= '=' ) | (enumLiteral_3= '!=' ) | (enumLiteral_4= '<' ) | (enumLiteral_5= '<=' ) ) )
+            // InternalEvolutionaryAlgorithmLanguage.g:1959:2: ( (enumLiteral_0= '>=' ) | (enumLiteral_1= '>' ) | (enumLiteral_2= '=' ) | (enumLiteral_3= '!=' ) | (enumLiteral_4= '<' ) | (enumLiteral_5= '<=' ) )
             {
-            // InternalEvolutionaryAlgorithmLanguage.g:1998:2: ( (enumLiteral_0= '>=' ) | (enumLiteral_1= '>' ) | (enumLiteral_2= '=' ) | (enumLiteral_3= '!=' ) | (enumLiteral_4= '<' ) | (enumLiteral_5= '<=' ) )
+            // InternalEvolutionaryAlgorithmLanguage.g:1959:2: ( (enumLiteral_0= '>=' ) | (enumLiteral_1= '>' ) | (enumLiteral_2= '=' ) | (enumLiteral_3= '!=' ) | (enumLiteral_4= '<' ) | (enumLiteral_5= '<=' ) )
             int alt28=6;
             switch ( input.LA(1) ) {
-            case 33:
+            case 35:
                 {
                 alt28=1;
                 }
                 break;
-            case 34:
+            case 36:
                 {
                 alt28=2;
                 }
                 break;
-            case 35:
+            case 37:
                 {
                 alt28=3;
                 }
                 break;
-            case 36:
+            case 38:
                 {
                 alt28=4;
                 }
                 break;
-            case 37:
+            case 39:
                 {
                 alt28=5;
                 }
                 break;
-            case 38:
+            case 40:
                 {
                 alt28=6;
                 }
@@ -5519,12 +5412,12 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
 
             switch (alt28) {
                 case 1 :
-                    // InternalEvolutionaryAlgorithmLanguage.g:1999:3: (enumLiteral_0= '>=' )
+                    // InternalEvolutionaryAlgorithmLanguage.g:1960:3: (enumLiteral_0= '>=' )
                     {
-                    // InternalEvolutionaryAlgorithmLanguage.g:1999:3: (enumLiteral_0= '>=' )
-                    // InternalEvolutionaryAlgorithmLanguage.g:2000:4: enumLiteral_0= '>='
+                    // InternalEvolutionaryAlgorithmLanguage.g:1960:3: (enumLiteral_0= '>=' )
+                    // InternalEvolutionaryAlgorithmLanguage.g:1961:4: enumLiteral_0= '>='
                     {
-                    enumLiteral_0=(Token)match(input,33,FOLLOW_2); 
+                    enumLiteral_0=(Token)match(input,35,FOLLOW_2); 
 
                     				current = grammarAccess.getComparisonOperatorRuleAccess().getGreaterThanEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
                     				newLeafNode(enumLiteral_0, grammarAccess.getComparisonOperatorRuleAccess().getGreaterThanEnumLiteralDeclaration_0());
@@ -5536,12 +5429,12 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
                     }
                     break;
                 case 2 :
-                    // InternalEvolutionaryAlgorithmLanguage.g:2007:3: (enumLiteral_1= '>' )
+                    // InternalEvolutionaryAlgorithmLanguage.g:1968:3: (enumLiteral_1= '>' )
                     {
-                    // InternalEvolutionaryAlgorithmLanguage.g:2007:3: (enumLiteral_1= '>' )
-                    // InternalEvolutionaryAlgorithmLanguage.g:2008:4: enumLiteral_1= '>'
+                    // InternalEvolutionaryAlgorithmLanguage.g:1968:3: (enumLiteral_1= '>' )
+                    // InternalEvolutionaryAlgorithmLanguage.g:1969:4: enumLiteral_1= '>'
                     {
-                    enumLiteral_1=(Token)match(input,34,FOLLOW_2); 
+                    enumLiteral_1=(Token)match(input,36,FOLLOW_2); 
 
                     				current = grammarAccess.getComparisonOperatorRuleAccess().getGreaterEqualEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
                     				newLeafNode(enumLiteral_1, grammarAccess.getComparisonOperatorRuleAccess().getGreaterEqualEnumLiteralDeclaration_1());
@@ -5553,12 +5446,12 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
                     }
                     break;
                 case 3 :
-                    // InternalEvolutionaryAlgorithmLanguage.g:2015:3: (enumLiteral_2= '=' )
+                    // InternalEvolutionaryAlgorithmLanguage.g:1976:3: (enumLiteral_2= '=' )
                     {
-                    // InternalEvolutionaryAlgorithmLanguage.g:2015:3: (enumLiteral_2= '=' )
-                    // InternalEvolutionaryAlgorithmLanguage.g:2016:4: enumLiteral_2= '='
+                    // InternalEvolutionaryAlgorithmLanguage.g:1976:3: (enumLiteral_2= '=' )
+                    // InternalEvolutionaryAlgorithmLanguage.g:1977:4: enumLiteral_2= '='
                     {
-                    enumLiteral_2=(Token)match(input,35,FOLLOW_2); 
+                    enumLiteral_2=(Token)match(input,37,FOLLOW_2); 
 
                     				current = grammarAccess.getComparisonOperatorRuleAccess().getEqualEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
                     				newLeafNode(enumLiteral_2, grammarAccess.getComparisonOperatorRuleAccess().getEqualEnumLiteralDeclaration_2());
@@ -5570,12 +5463,12 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
                     }
                     break;
                 case 4 :
-                    // InternalEvolutionaryAlgorithmLanguage.g:2023:3: (enumLiteral_3= '!=' )
+                    // InternalEvolutionaryAlgorithmLanguage.g:1984:3: (enumLiteral_3= '!=' )
                     {
-                    // InternalEvolutionaryAlgorithmLanguage.g:2023:3: (enumLiteral_3= '!=' )
-                    // InternalEvolutionaryAlgorithmLanguage.g:2024:4: enumLiteral_3= '!='
+                    // InternalEvolutionaryAlgorithmLanguage.g:1984:3: (enumLiteral_3= '!=' )
+                    // InternalEvolutionaryAlgorithmLanguage.g:1985:4: enumLiteral_3= '!='
                     {
-                    enumLiteral_3=(Token)match(input,36,FOLLOW_2); 
+                    enumLiteral_3=(Token)match(input,38,FOLLOW_2); 
 
                     				current = grammarAccess.getComparisonOperatorRuleAccess().getUnequalEnumLiteralDeclaration_3().getEnumLiteral().getInstance();
                     				newLeafNode(enumLiteral_3, grammarAccess.getComparisonOperatorRuleAccess().getUnequalEnumLiteralDeclaration_3());
@@ -5587,12 +5480,12 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
                     }
                     break;
                 case 5 :
-                    // InternalEvolutionaryAlgorithmLanguage.g:2031:3: (enumLiteral_4= '<' )
+                    // InternalEvolutionaryAlgorithmLanguage.g:1992:3: (enumLiteral_4= '<' )
                     {
-                    // InternalEvolutionaryAlgorithmLanguage.g:2031:3: (enumLiteral_4= '<' )
-                    // InternalEvolutionaryAlgorithmLanguage.g:2032:4: enumLiteral_4= '<'
+                    // InternalEvolutionaryAlgorithmLanguage.g:1992:3: (enumLiteral_4= '<' )
+                    // InternalEvolutionaryAlgorithmLanguage.g:1993:4: enumLiteral_4= '<'
                     {
-                    enumLiteral_4=(Token)match(input,37,FOLLOW_2); 
+                    enumLiteral_4=(Token)match(input,39,FOLLOW_2); 
 
                     				current = grammarAccess.getComparisonOperatorRuleAccess().getLessEqualEnumLiteralDeclaration_4().getEnumLiteral().getInstance();
                     				newLeafNode(enumLiteral_4, grammarAccess.getComparisonOperatorRuleAccess().getLessEqualEnumLiteralDeclaration_4());
@@ -5604,12 +5497,12 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
                     }
                     break;
                 case 6 :
-                    // InternalEvolutionaryAlgorithmLanguage.g:2039:3: (enumLiteral_5= '<=' )
+                    // InternalEvolutionaryAlgorithmLanguage.g:2000:3: (enumLiteral_5= '<=' )
                     {
-                    // InternalEvolutionaryAlgorithmLanguage.g:2039:3: (enumLiteral_5= '<=' )
-                    // InternalEvolutionaryAlgorithmLanguage.g:2040:4: enumLiteral_5= '<='
+                    // InternalEvolutionaryAlgorithmLanguage.g:2000:3: (enumLiteral_5= '<=' )
+                    // InternalEvolutionaryAlgorithmLanguage.g:2001:4: enumLiteral_5= '<='
                     {
-                    enumLiteral_5=(Token)match(input,38,FOLLOW_2); 
+                    enumLiteral_5=(Token)match(input,40,FOLLOW_2); 
 
                     				current = grammarAccess.getComparisonOperatorRuleAccess().getLessThanEnumLiteralDeclaration_5().getEnumLiteral().getInstance();
                     				newLeafNode(enumLiteral_5, grammarAccess.getComparisonOperatorRuleAccess().getLessThanEnumLiteralDeclaration_5());
@@ -5643,7 +5536,7 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
 
 
     // $ANTLR start "ruleAddOrSubtractOperatorRule"
-    // InternalEvolutionaryAlgorithmLanguage.g:2050:1: ruleAddOrSubtractOperatorRule returns [Enumerator current=null] : ( (enumLiteral_0= '+' ) | (enumLiteral_1= '-' ) ) ;
+    // InternalEvolutionaryAlgorithmLanguage.g:2011:1: ruleAddOrSubtractOperatorRule returns [Enumerator current=null] : ( (enumLiteral_0= '+' ) | (enumLiteral_1= '-' ) ) ;
     public final Enumerator ruleAddOrSubtractOperatorRule() throws RecognitionException {
         Enumerator current = null;
 
@@ -5654,17 +5547,17 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalEvolutionaryAlgorithmLanguage.g:2056:2: ( ( (enumLiteral_0= '+' ) | (enumLiteral_1= '-' ) ) )
-            // InternalEvolutionaryAlgorithmLanguage.g:2057:2: ( (enumLiteral_0= '+' ) | (enumLiteral_1= '-' ) )
+            // InternalEvolutionaryAlgorithmLanguage.g:2017:2: ( ( (enumLiteral_0= '+' ) | (enumLiteral_1= '-' ) ) )
+            // InternalEvolutionaryAlgorithmLanguage.g:2018:2: ( (enumLiteral_0= '+' ) | (enumLiteral_1= '-' ) )
             {
-            // InternalEvolutionaryAlgorithmLanguage.g:2057:2: ( (enumLiteral_0= '+' ) | (enumLiteral_1= '-' ) )
+            // InternalEvolutionaryAlgorithmLanguage.g:2018:2: ( (enumLiteral_0= '+' ) | (enumLiteral_1= '-' ) )
             int alt29=2;
             int LA29_0 = input.LA(1);
 
-            if ( (LA29_0==39) ) {
+            if ( (LA29_0==41) ) {
                 alt29=1;
             }
-            else if ( (LA29_0==40) ) {
+            else if ( (LA29_0==42) ) {
                 alt29=2;
             }
             else {
@@ -5675,12 +5568,12 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
             }
             switch (alt29) {
                 case 1 :
-                    // InternalEvolutionaryAlgorithmLanguage.g:2058:3: (enumLiteral_0= '+' )
+                    // InternalEvolutionaryAlgorithmLanguage.g:2019:3: (enumLiteral_0= '+' )
                     {
-                    // InternalEvolutionaryAlgorithmLanguage.g:2058:3: (enumLiteral_0= '+' )
-                    // InternalEvolutionaryAlgorithmLanguage.g:2059:4: enumLiteral_0= '+'
+                    // InternalEvolutionaryAlgorithmLanguage.g:2019:3: (enumLiteral_0= '+' )
+                    // InternalEvolutionaryAlgorithmLanguage.g:2020:4: enumLiteral_0= '+'
                     {
-                    enumLiteral_0=(Token)match(input,39,FOLLOW_2); 
+                    enumLiteral_0=(Token)match(input,41,FOLLOW_2); 
 
                     				current = grammarAccess.getAddOrSubtractOperatorRuleAccess().getAddEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
                     				newLeafNode(enumLiteral_0, grammarAccess.getAddOrSubtractOperatorRuleAccess().getAddEnumLiteralDeclaration_0());
@@ -5692,12 +5585,12 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
                     }
                     break;
                 case 2 :
-                    // InternalEvolutionaryAlgorithmLanguage.g:2066:3: (enumLiteral_1= '-' )
+                    // InternalEvolutionaryAlgorithmLanguage.g:2027:3: (enumLiteral_1= '-' )
                     {
-                    // InternalEvolutionaryAlgorithmLanguage.g:2066:3: (enumLiteral_1= '-' )
-                    // InternalEvolutionaryAlgorithmLanguage.g:2067:4: enumLiteral_1= '-'
+                    // InternalEvolutionaryAlgorithmLanguage.g:2027:3: (enumLiteral_1= '-' )
+                    // InternalEvolutionaryAlgorithmLanguage.g:2028:4: enumLiteral_1= '-'
                     {
-                    enumLiteral_1=(Token)match(input,40,FOLLOW_2); 
+                    enumLiteral_1=(Token)match(input,42,FOLLOW_2); 
 
                     				current = grammarAccess.getAddOrSubtractOperatorRuleAccess().getSubtractEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
                     				newLeafNode(enumLiteral_1, grammarAccess.getAddOrSubtractOperatorRuleAccess().getSubtractEnumLiteralDeclaration_1());
@@ -5731,7 +5624,7 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
 
 
     // $ANTLR start "ruleMultiplyDivideModuloOperatorRule"
-    // InternalEvolutionaryAlgorithmLanguage.g:2077:1: ruleMultiplyDivideModuloOperatorRule returns [Enumerator current=null] : ( (enumLiteral_0= '*' ) | (enumLiteral_1= '/' ) | (enumLiteral_2= '%' ) ) ;
+    // InternalEvolutionaryAlgorithmLanguage.g:2038:1: ruleMultiplyDivideModuloOperatorRule returns [Enumerator current=null] : ( (enumLiteral_0= '*' ) | (enumLiteral_1= '/' ) | (enumLiteral_2= '%' ) ) ;
     public final Enumerator ruleMultiplyDivideModuloOperatorRule() throws RecognitionException {
         Enumerator current = null;
 
@@ -5743,23 +5636,23 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalEvolutionaryAlgorithmLanguage.g:2083:2: ( ( (enumLiteral_0= '*' ) | (enumLiteral_1= '/' ) | (enumLiteral_2= '%' ) ) )
-            // InternalEvolutionaryAlgorithmLanguage.g:2084:2: ( (enumLiteral_0= '*' ) | (enumLiteral_1= '/' ) | (enumLiteral_2= '%' ) )
+            // InternalEvolutionaryAlgorithmLanguage.g:2044:2: ( ( (enumLiteral_0= '*' ) | (enumLiteral_1= '/' ) | (enumLiteral_2= '%' ) ) )
+            // InternalEvolutionaryAlgorithmLanguage.g:2045:2: ( (enumLiteral_0= '*' ) | (enumLiteral_1= '/' ) | (enumLiteral_2= '%' ) )
             {
-            // InternalEvolutionaryAlgorithmLanguage.g:2084:2: ( (enumLiteral_0= '*' ) | (enumLiteral_1= '/' ) | (enumLiteral_2= '%' ) )
+            // InternalEvolutionaryAlgorithmLanguage.g:2045:2: ( (enumLiteral_0= '*' ) | (enumLiteral_1= '/' ) | (enumLiteral_2= '%' ) )
             int alt30=3;
             switch ( input.LA(1) ) {
-            case 41:
+            case 43:
                 {
                 alt30=1;
                 }
                 break;
-            case 42:
+            case 44:
                 {
                 alt30=2;
                 }
                 break;
-            case 43:
+            case 45:
                 {
                 alt30=3;
                 }
@@ -5773,12 +5666,12 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
 
             switch (alt30) {
                 case 1 :
-                    // InternalEvolutionaryAlgorithmLanguage.g:2085:3: (enumLiteral_0= '*' )
+                    // InternalEvolutionaryAlgorithmLanguage.g:2046:3: (enumLiteral_0= '*' )
                     {
-                    // InternalEvolutionaryAlgorithmLanguage.g:2085:3: (enumLiteral_0= '*' )
-                    // InternalEvolutionaryAlgorithmLanguage.g:2086:4: enumLiteral_0= '*'
+                    // InternalEvolutionaryAlgorithmLanguage.g:2046:3: (enumLiteral_0= '*' )
+                    // InternalEvolutionaryAlgorithmLanguage.g:2047:4: enumLiteral_0= '*'
                     {
-                    enumLiteral_0=(Token)match(input,41,FOLLOW_2); 
+                    enumLiteral_0=(Token)match(input,43,FOLLOW_2); 
 
                     				current = grammarAccess.getMultiplyDivideModuloOperatorRuleAccess().getMultiplyEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
                     				newLeafNode(enumLiteral_0, grammarAccess.getMultiplyDivideModuloOperatorRuleAccess().getMultiplyEnumLiteralDeclaration_0());
@@ -5790,12 +5683,12 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
                     }
                     break;
                 case 2 :
-                    // InternalEvolutionaryAlgorithmLanguage.g:2093:3: (enumLiteral_1= '/' )
+                    // InternalEvolutionaryAlgorithmLanguage.g:2054:3: (enumLiteral_1= '/' )
                     {
-                    // InternalEvolutionaryAlgorithmLanguage.g:2093:3: (enumLiteral_1= '/' )
-                    // InternalEvolutionaryAlgorithmLanguage.g:2094:4: enumLiteral_1= '/'
+                    // InternalEvolutionaryAlgorithmLanguage.g:2054:3: (enumLiteral_1= '/' )
+                    // InternalEvolutionaryAlgorithmLanguage.g:2055:4: enumLiteral_1= '/'
                     {
-                    enumLiteral_1=(Token)match(input,42,FOLLOW_2); 
+                    enumLiteral_1=(Token)match(input,44,FOLLOW_2); 
 
                     				current = grammarAccess.getMultiplyDivideModuloOperatorRuleAccess().getDivideEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
                     				newLeafNode(enumLiteral_1, grammarAccess.getMultiplyDivideModuloOperatorRuleAccess().getDivideEnumLiteralDeclaration_1());
@@ -5807,12 +5700,12 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
                     }
                     break;
                 case 3 :
-                    // InternalEvolutionaryAlgorithmLanguage.g:2101:3: (enumLiteral_2= '%' )
+                    // InternalEvolutionaryAlgorithmLanguage.g:2062:3: (enumLiteral_2= '%' )
                     {
-                    // InternalEvolutionaryAlgorithmLanguage.g:2101:3: (enumLiteral_2= '%' )
-                    // InternalEvolutionaryAlgorithmLanguage.g:2102:4: enumLiteral_2= '%'
+                    // InternalEvolutionaryAlgorithmLanguage.g:2062:3: (enumLiteral_2= '%' )
+                    // InternalEvolutionaryAlgorithmLanguage.g:2063:4: enumLiteral_2= '%'
                     {
-                    enumLiteral_2=(Token)match(input,43,FOLLOW_2); 
+                    enumLiteral_2=(Token)match(input,45,FOLLOW_2); 
 
                     				current = grammarAccess.getMultiplyDivideModuloOperatorRuleAccess().getModuloEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
                     				newLeafNode(enumLiteral_2, grammarAccess.getMultiplyDivideModuloOperatorRuleAccess().getModuloEnumLiteralDeclaration_2());
@@ -5846,7 +5739,7 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
 
 
     // $ANTLR start "ruleFactorRule"
-    // InternalEvolutionaryAlgorithmLanguage.g:2112:1: ruleFactorRule returns [Enumerator current=null] : ( (enumLiteral_0= 'Y' ) | (enumLiteral_1= 'Z' ) | (enumLiteral_2= 'E' ) | (enumLiteral_3= 'P' ) | (enumLiteral_4= 'T' ) | (enumLiteral_5= 'G' ) | (enumLiteral_6= 'M' ) | (enumLiteral_7= 'k' ) | (enumLiteral_8= 'h' ) | (enumLiteral_9= 'da' ) | (enumLiteral_10= 'd' ) | (enumLiteral_11= 'c' ) | (enumLiteral_12= 'm' ) | (enumLiteral_13= '\\u00B5' ) | (enumLiteral_14= 'n' ) | (enumLiteral_15= 'p' ) | (enumLiteral_16= 'f' ) | (enumLiteral_17= 'a' ) | (enumLiteral_18= 'z' ) | (enumLiteral_19= 'y' ) ) ;
+    // InternalEvolutionaryAlgorithmLanguage.g:2073:1: ruleFactorRule returns [Enumerator current=null] : ( (enumLiteral_0= 'Y' ) | (enumLiteral_1= 'Z' ) | (enumLiteral_2= 'E' ) | (enumLiteral_3= 'P' ) | (enumLiteral_4= 'T' ) | (enumLiteral_5= 'G' ) | (enumLiteral_6= 'M' ) | (enumLiteral_7= 'k' ) | (enumLiteral_8= 'h' ) | (enumLiteral_9= 'da' ) | (enumLiteral_10= 'd' ) | (enumLiteral_11= 'c' ) | (enumLiteral_12= 'm' ) | (enumLiteral_13= '\\u00B5' ) | (enumLiteral_14= 'n' ) | (enumLiteral_15= 'p' ) | (enumLiteral_16= 'f' ) | (enumLiteral_17= 'a' ) | (enumLiteral_18= 'z' ) | (enumLiteral_19= 'y' ) ) ;
     public final Enumerator ruleFactorRule() throws RecognitionException {
         Enumerator current = null;
 
@@ -5875,108 +5768,108 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
         	enterRule();
 
         try {
-            // InternalEvolutionaryAlgorithmLanguage.g:2118:2: ( ( (enumLiteral_0= 'Y' ) | (enumLiteral_1= 'Z' ) | (enumLiteral_2= 'E' ) | (enumLiteral_3= 'P' ) | (enumLiteral_4= 'T' ) | (enumLiteral_5= 'G' ) | (enumLiteral_6= 'M' ) | (enumLiteral_7= 'k' ) | (enumLiteral_8= 'h' ) | (enumLiteral_9= 'da' ) | (enumLiteral_10= 'd' ) | (enumLiteral_11= 'c' ) | (enumLiteral_12= 'm' ) | (enumLiteral_13= '\\u00B5' ) | (enumLiteral_14= 'n' ) | (enumLiteral_15= 'p' ) | (enumLiteral_16= 'f' ) | (enumLiteral_17= 'a' ) | (enumLiteral_18= 'z' ) | (enumLiteral_19= 'y' ) ) )
-            // InternalEvolutionaryAlgorithmLanguage.g:2119:2: ( (enumLiteral_0= 'Y' ) | (enumLiteral_1= 'Z' ) | (enumLiteral_2= 'E' ) | (enumLiteral_3= 'P' ) | (enumLiteral_4= 'T' ) | (enumLiteral_5= 'G' ) | (enumLiteral_6= 'M' ) | (enumLiteral_7= 'k' ) | (enumLiteral_8= 'h' ) | (enumLiteral_9= 'da' ) | (enumLiteral_10= 'd' ) | (enumLiteral_11= 'c' ) | (enumLiteral_12= 'm' ) | (enumLiteral_13= '\\u00B5' ) | (enumLiteral_14= 'n' ) | (enumLiteral_15= 'p' ) | (enumLiteral_16= 'f' ) | (enumLiteral_17= 'a' ) | (enumLiteral_18= 'z' ) | (enumLiteral_19= 'y' ) )
+            // InternalEvolutionaryAlgorithmLanguage.g:2079:2: ( ( (enumLiteral_0= 'Y' ) | (enumLiteral_1= 'Z' ) | (enumLiteral_2= 'E' ) | (enumLiteral_3= 'P' ) | (enumLiteral_4= 'T' ) | (enumLiteral_5= 'G' ) | (enumLiteral_6= 'M' ) | (enumLiteral_7= 'k' ) | (enumLiteral_8= 'h' ) | (enumLiteral_9= 'da' ) | (enumLiteral_10= 'd' ) | (enumLiteral_11= 'c' ) | (enumLiteral_12= 'm' ) | (enumLiteral_13= '\\u00B5' ) | (enumLiteral_14= 'n' ) | (enumLiteral_15= 'p' ) | (enumLiteral_16= 'f' ) | (enumLiteral_17= 'a' ) | (enumLiteral_18= 'z' ) | (enumLiteral_19= 'y' ) ) )
+            // InternalEvolutionaryAlgorithmLanguage.g:2080:2: ( (enumLiteral_0= 'Y' ) | (enumLiteral_1= 'Z' ) | (enumLiteral_2= 'E' ) | (enumLiteral_3= 'P' ) | (enumLiteral_4= 'T' ) | (enumLiteral_5= 'G' ) | (enumLiteral_6= 'M' ) | (enumLiteral_7= 'k' ) | (enumLiteral_8= 'h' ) | (enumLiteral_9= 'da' ) | (enumLiteral_10= 'd' ) | (enumLiteral_11= 'c' ) | (enumLiteral_12= 'm' ) | (enumLiteral_13= '\\u00B5' ) | (enumLiteral_14= 'n' ) | (enumLiteral_15= 'p' ) | (enumLiteral_16= 'f' ) | (enumLiteral_17= 'a' ) | (enumLiteral_18= 'z' ) | (enumLiteral_19= 'y' ) )
             {
-            // InternalEvolutionaryAlgorithmLanguage.g:2119:2: ( (enumLiteral_0= 'Y' ) | (enumLiteral_1= 'Z' ) | (enumLiteral_2= 'E' ) | (enumLiteral_3= 'P' ) | (enumLiteral_4= 'T' ) | (enumLiteral_5= 'G' ) | (enumLiteral_6= 'M' ) | (enumLiteral_7= 'k' ) | (enumLiteral_8= 'h' ) | (enumLiteral_9= 'da' ) | (enumLiteral_10= 'd' ) | (enumLiteral_11= 'c' ) | (enumLiteral_12= 'm' ) | (enumLiteral_13= '\\u00B5' ) | (enumLiteral_14= 'n' ) | (enumLiteral_15= 'p' ) | (enumLiteral_16= 'f' ) | (enumLiteral_17= 'a' ) | (enumLiteral_18= 'z' ) | (enumLiteral_19= 'y' ) )
+            // InternalEvolutionaryAlgorithmLanguage.g:2080:2: ( (enumLiteral_0= 'Y' ) | (enumLiteral_1= 'Z' ) | (enumLiteral_2= 'E' ) | (enumLiteral_3= 'P' ) | (enumLiteral_4= 'T' ) | (enumLiteral_5= 'G' ) | (enumLiteral_6= 'M' ) | (enumLiteral_7= 'k' ) | (enumLiteral_8= 'h' ) | (enumLiteral_9= 'da' ) | (enumLiteral_10= 'd' ) | (enumLiteral_11= 'c' ) | (enumLiteral_12= 'm' ) | (enumLiteral_13= '\\u00B5' ) | (enumLiteral_14= 'n' ) | (enumLiteral_15= 'p' ) | (enumLiteral_16= 'f' ) | (enumLiteral_17= 'a' ) | (enumLiteral_18= 'z' ) | (enumLiteral_19= 'y' ) )
             int alt31=20;
             switch ( input.LA(1) ) {
-            case 44:
+            case 46:
                 {
                 alt31=1;
                 }
                 break;
-            case 45:
+            case 47:
                 {
                 alt31=2;
                 }
                 break;
-            case 46:
+            case 48:
                 {
                 alt31=3;
                 }
                 break;
-            case 47:
+            case 49:
                 {
                 alt31=4;
                 }
                 break;
-            case 48:
+            case 50:
                 {
                 alt31=5;
                 }
                 break;
-            case 49:
+            case 51:
                 {
                 alt31=6;
                 }
                 break;
-            case 50:
+            case 52:
                 {
                 alt31=7;
                 }
                 break;
-            case 51:
+            case 53:
                 {
                 alt31=8;
                 }
                 break;
-            case 52:
+            case 54:
                 {
                 alt31=9;
                 }
                 break;
-            case 53:
+            case 55:
                 {
                 alt31=10;
                 }
                 break;
-            case 54:
+            case 56:
                 {
                 alt31=11;
                 }
                 break;
-            case 55:
+            case 57:
                 {
                 alt31=12;
                 }
                 break;
-            case 56:
+            case 58:
                 {
                 alt31=13;
                 }
                 break;
-            case 57:
+            case 59:
                 {
                 alt31=14;
                 }
                 break;
-            case 58:
+            case 60:
                 {
                 alt31=15;
                 }
                 break;
-            case 59:
+            case 61:
                 {
                 alt31=16;
                 }
                 break;
-            case 60:
+            case 62:
                 {
                 alt31=17;
                 }
                 break;
-            case 61:
+            case 63:
                 {
                 alt31=18;
                 }
                 break;
-            case 62:
+            case 64:
                 {
                 alt31=19;
                 }
                 break;
-            case 63:
+            case 65:
                 {
                 alt31=20;
                 }
@@ -5990,12 +5883,12 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
 
             switch (alt31) {
                 case 1 :
-                    // InternalEvolutionaryAlgorithmLanguage.g:2120:3: (enumLiteral_0= 'Y' )
+                    // InternalEvolutionaryAlgorithmLanguage.g:2081:3: (enumLiteral_0= 'Y' )
                     {
-                    // InternalEvolutionaryAlgorithmLanguage.g:2120:3: (enumLiteral_0= 'Y' )
-                    // InternalEvolutionaryAlgorithmLanguage.g:2121:4: enumLiteral_0= 'Y'
+                    // InternalEvolutionaryAlgorithmLanguage.g:2081:3: (enumLiteral_0= 'Y' )
+                    // InternalEvolutionaryAlgorithmLanguage.g:2082:4: enumLiteral_0= 'Y'
                     {
-                    enumLiteral_0=(Token)match(input,44,FOLLOW_2); 
+                    enumLiteral_0=(Token)match(input,46,FOLLOW_2); 
 
                     				current = grammarAccess.getFactorRuleAccess().getYottaEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
                     				newLeafNode(enumLiteral_0, grammarAccess.getFactorRuleAccess().getYottaEnumLiteralDeclaration_0());
@@ -6007,12 +5900,12 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
                     }
                     break;
                 case 2 :
-                    // InternalEvolutionaryAlgorithmLanguage.g:2128:3: (enumLiteral_1= 'Z' )
+                    // InternalEvolutionaryAlgorithmLanguage.g:2089:3: (enumLiteral_1= 'Z' )
                     {
-                    // InternalEvolutionaryAlgorithmLanguage.g:2128:3: (enumLiteral_1= 'Z' )
-                    // InternalEvolutionaryAlgorithmLanguage.g:2129:4: enumLiteral_1= 'Z'
+                    // InternalEvolutionaryAlgorithmLanguage.g:2089:3: (enumLiteral_1= 'Z' )
+                    // InternalEvolutionaryAlgorithmLanguage.g:2090:4: enumLiteral_1= 'Z'
                     {
-                    enumLiteral_1=(Token)match(input,45,FOLLOW_2); 
+                    enumLiteral_1=(Token)match(input,47,FOLLOW_2); 
 
                     				current = grammarAccess.getFactorRuleAccess().getZettaEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
                     				newLeafNode(enumLiteral_1, grammarAccess.getFactorRuleAccess().getZettaEnumLiteralDeclaration_1());
@@ -6024,12 +5917,12 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
                     }
                     break;
                 case 3 :
-                    // InternalEvolutionaryAlgorithmLanguage.g:2136:3: (enumLiteral_2= 'E' )
+                    // InternalEvolutionaryAlgorithmLanguage.g:2097:3: (enumLiteral_2= 'E' )
                     {
-                    // InternalEvolutionaryAlgorithmLanguage.g:2136:3: (enumLiteral_2= 'E' )
-                    // InternalEvolutionaryAlgorithmLanguage.g:2137:4: enumLiteral_2= 'E'
+                    // InternalEvolutionaryAlgorithmLanguage.g:2097:3: (enumLiteral_2= 'E' )
+                    // InternalEvolutionaryAlgorithmLanguage.g:2098:4: enumLiteral_2= 'E'
                     {
-                    enumLiteral_2=(Token)match(input,46,FOLLOW_2); 
+                    enumLiteral_2=(Token)match(input,48,FOLLOW_2); 
 
                     				current = grammarAccess.getFactorRuleAccess().getExaEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
                     				newLeafNode(enumLiteral_2, grammarAccess.getFactorRuleAccess().getExaEnumLiteralDeclaration_2());
@@ -6041,12 +5934,12 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
                     }
                     break;
                 case 4 :
-                    // InternalEvolutionaryAlgorithmLanguage.g:2144:3: (enumLiteral_3= 'P' )
+                    // InternalEvolutionaryAlgorithmLanguage.g:2105:3: (enumLiteral_3= 'P' )
                     {
-                    // InternalEvolutionaryAlgorithmLanguage.g:2144:3: (enumLiteral_3= 'P' )
-                    // InternalEvolutionaryAlgorithmLanguage.g:2145:4: enumLiteral_3= 'P'
+                    // InternalEvolutionaryAlgorithmLanguage.g:2105:3: (enumLiteral_3= 'P' )
+                    // InternalEvolutionaryAlgorithmLanguage.g:2106:4: enumLiteral_3= 'P'
                     {
-                    enumLiteral_3=(Token)match(input,47,FOLLOW_2); 
+                    enumLiteral_3=(Token)match(input,49,FOLLOW_2); 
 
                     				current = grammarAccess.getFactorRuleAccess().getPetaEnumLiteralDeclaration_3().getEnumLiteral().getInstance();
                     				newLeafNode(enumLiteral_3, grammarAccess.getFactorRuleAccess().getPetaEnumLiteralDeclaration_3());
@@ -6058,12 +5951,12 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
                     }
                     break;
                 case 5 :
-                    // InternalEvolutionaryAlgorithmLanguage.g:2152:3: (enumLiteral_4= 'T' )
+                    // InternalEvolutionaryAlgorithmLanguage.g:2113:3: (enumLiteral_4= 'T' )
                     {
-                    // InternalEvolutionaryAlgorithmLanguage.g:2152:3: (enumLiteral_4= 'T' )
-                    // InternalEvolutionaryAlgorithmLanguage.g:2153:4: enumLiteral_4= 'T'
+                    // InternalEvolutionaryAlgorithmLanguage.g:2113:3: (enumLiteral_4= 'T' )
+                    // InternalEvolutionaryAlgorithmLanguage.g:2114:4: enumLiteral_4= 'T'
                     {
-                    enumLiteral_4=(Token)match(input,48,FOLLOW_2); 
+                    enumLiteral_4=(Token)match(input,50,FOLLOW_2); 
 
                     				current = grammarAccess.getFactorRuleAccess().getTeraEnumLiteralDeclaration_4().getEnumLiteral().getInstance();
                     				newLeafNode(enumLiteral_4, grammarAccess.getFactorRuleAccess().getTeraEnumLiteralDeclaration_4());
@@ -6075,12 +5968,12 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
                     }
                     break;
                 case 6 :
-                    // InternalEvolutionaryAlgorithmLanguage.g:2160:3: (enumLiteral_5= 'G' )
+                    // InternalEvolutionaryAlgorithmLanguage.g:2121:3: (enumLiteral_5= 'G' )
                     {
-                    // InternalEvolutionaryAlgorithmLanguage.g:2160:3: (enumLiteral_5= 'G' )
-                    // InternalEvolutionaryAlgorithmLanguage.g:2161:4: enumLiteral_5= 'G'
+                    // InternalEvolutionaryAlgorithmLanguage.g:2121:3: (enumLiteral_5= 'G' )
+                    // InternalEvolutionaryAlgorithmLanguage.g:2122:4: enumLiteral_5= 'G'
                     {
-                    enumLiteral_5=(Token)match(input,49,FOLLOW_2); 
+                    enumLiteral_5=(Token)match(input,51,FOLLOW_2); 
 
                     				current = grammarAccess.getFactorRuleAccess().getGigaEnumLiteralDeclaration_5().getEnumLiteral().getInstance();
                     				newLeafNode(enumLiteral_5, grammarAccess.getFactorRuleAccess().getGigaEnumLiteralDeclaration_5());
@@ -6092,12 +5985,12 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
                     }
                     break;
                 case 7 :
-                    // InternalEvolutionaryAlgorithmLanguage.g:2168:3: (enumLiteral_6= 'M' )
+                    // InternalEvolutionaryAlgorithmLanguage.g:2129:3: (enumLiteral_6= 'M' )
                     {
-                    // InternalEvolutionaryAlgorithmLanguage.g:2168:3: (enumLiteral_6= 'M' )
-                    // InternalEvolutionaryAlgorithmLanguage.g:2169:4: enumLiteral_6= 'M'
+                    // InternalEvolutionaryAlgorithmLanguage.g:2129:3: (enumLiteral_6= 'M' )
+                    // InternalEvolutionaryAlgorithmLanguage.g:2130:4: enumLiteral_6= 'M'
                     {
-                    enumLiteral_6=(Token)match(input,50,FOLLOW_2); 
+                    enumLiteral_6=(Token)match(input,52,FOLLOW_2); 
 
                     				current = grammarAccess.getFactorRuleAccess().getMegaEnumLiteralDeclaration_6().getEnumLiteral().getInstance();
                     				newLeafNode(enumLiteral_6, grammarAccess.getFactorRuleAccess().getMegaEnumLiteralDeclaration_6());
@@ -6109,12 +6002,12 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
                     }
                     break;
                 case 8 :
-                    // InternalEvolutionaryAlgorithmLanguage.g:2176:3: (enumLiteral_7= 'k' )
+                    // InternalEvolutionaryAlgorithmLanguage.g:2137:3: (enumLiteral_7= 'k' )
                     {
-                    // InternalEvolutionaryAlgorithmLanguage.g:2176:3: (enumLiteral_7= 'k' )
-                    // InternalEvolutionaryAlgorithmLanguage.g:2177:4: enumLiteral_7= 'k'
+                    // InternalEvolutionaryAlgorithmLanguage.g:2137:3: (enumLiteral_7= 'k' )
+                    // InternalEvolutionaryAlgorithmLanguage.g:2138:4: enumLiteral_7= 'k'
                     {
-                    enumLiteral_7=(Token)match(input,51,FOLLOW_2); 
+                    enumLiteral_7=(Token)match(input,53,FOLLOW_2); 
 
                     				current = grammarAccess.getFactorRuleAccess().getKiloEnumLiteralDeclaration_7().getEnumLiteral().getInstance();
                     				newLeafNode(enumLiteral_7, grammarAccess.getFactorRuleAccess().getKiloEnumLiteralDeclaration_7());
@@ -6126,12 +6019,12 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
                     }
                     break;
                 case 9 :
-                    // InternalEvolutionaryAlgorithmLanguage.g:2184:3: (enumLiteral_8= 'h' )
+                    // InternalEvolutionaryAlgorithmLanguage.g:2145:3: (enumLiteral_8= 'h' )
                     {
-                    // InternalEvolutionaryAlgorithmLanguage.g:2184:3: (enumLiteral_8= 'h' )
-                    // InternalEvolutionaryAlgorithmLanguage.g:2185:4: enumLiteral_8= 'h'
+                    // InternalEvolutionaryAlgorithmLanguage.g:2145:3: (enumLiteral_8= 'h' )
+                    // InternalEvolutionaryAlgorithmLanguage.g:2146:4: enumLiteral_8= 'h'
                     {
-                    enumLiteral_8=(Token)match(input,52,FOLLOW_2); 
+                    enumLiteral_8=(Token)match(input,54,FOLLOW_2); 
 
                     				current = grammarAccess.getFactorRuleAccess().getHectoEnumLiteralDeclaration_8().getEnumLiteral().getInstance();
                     				newLeafNode(enumLiteral_8, grammarAccess.getFactorRuleAccess().getHectoEnumLiteralDeclaration_8());
@@ -6143,12 +6036,12 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
                     }
                     break;
                 case 10 :
-                    // InternalEvolutionaryAlgorithmLanguage.g:2192:3: (enumLiteral_9= 'da' )
+                    // InternalEvolutionaryAlgorithmLanguage.g:2153:3: (enumLiteral_9= 'da' )
                     {
-                    // InternalEvolutionaryAlgorithmLanguage.g:2192:3: (enumLiteral_9= 'da' )
-                    // InternalEvolutionaryAlgorithmLanguage.g:2193:4: enumLiteral_9= 'da'
+                    // InternalEvolutionaryAlgorithmLanguage.g:2153:3: (enumLiteral_9= 'da' )
+                    // InternalEvolutionaryAlgorithmLanguage.g:2154:4: enumLiteral_9= 'da'
                     {
-                    enumLiteral_9=(Token)match(input,53,FOLLOW_2); 
+                    enumLiteral_9=(Token)match(input,55,FOLLOW_2); 
 
                     				current = grammarAccess.getFactorRuleAccess().getDekaEnumLiteralDeclaration_9().getEnumLiteral().getInstance();
                     				newLeafNode(enumLiteral_9, grammarAccess.getFactorRuleAccess().getDekaEnumLiteralDeclaration_9());
@@ -6160,12 +6053,12 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
                     }
                     break;
                 case 11 :
-                    // InternalEvolutionaryAlgorithmLanguage.g:2200:3: (enumLiteral_10= 'd' )
+                    // InternalEvolutionaryAlgorithmLanguage.g:2161:3: (enumLiteral_10= 'd' )
                     {
-                    // InternalEvolutionaryAlgorithmLanguage.g:2200:3: (enumLiteral_10= 'd' )
-                    // InternalEvolutionaryAlgorithmLanguage.g:2201:4: enumLiteral_10= 'd'
+                    // InternalEvolutionaryAlgorithmLanguage.g:2161:3: (enumLiteral_10= 'd' )
+                    // InternalEvolutionaryAlgorithmLanguage.g:2162:4: enumLiteral_10= 'd'
                     {
-                    enumLiteral_10=(Token)match(input,54,FOLLOW_2); 
+                    enumLiteral_10=(Token)match(input,56,FOLLOW_2); 
 
                     				current = grammarAccess.getFactorRuleAccess().getDeciEnumLiteralDeclaration_10().getEnumLiteral().getInstance();
                     				newLeafNode(enumLiteral_10, grammarAccess.getFactorRuleAccess().getDeciEnumLiteralDeclaration_10());
@@ -6177,12 +6070,12 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
                     }
                     break;
                 case 12 :
-                    // InternalEvolutionaryAlgorithmLanguage.g:2208:3: (enumLiteral_11= 'c' )
+                    // InternalEvolutionaryAlgorithmLanguage.g:2169:3: (enumLiteral_11= 'c' )
                     {
-                    // InternalEvolutionaryAlgorithmLanguage.g:2208:3: (enumLiteral_11= 'c' )
-                    // InternalEvolutionaryAlgorithmLanguage.g:2209:4: enumLiteral_11= 'c'
+                    // InternalEvolutionaryAlgorithmLanguage.g:2169:3: (enumLiteral_11= 'c' )
+                    // InternalEvolutionaryAlgorithmLanguage.g:2170:4: enumLiteral_11= 'c'
                     {
-                    enumLiteral_11=(Token)match(input,55,FOLLOW_2); 
+                    enumLiteral_11=(Token)match(input,57,FOLLOW_2); 
 
                     				current = grammarAccess.getFactorRuleAccess().getCentiEnumLiteralDeclaration_11().getEnumLiteral().getInstance();
                     				newLeafNode(enumLiteral_11, grammarAccess.getFactorRuleAccess().getCentiEnumLiteralDeclaration_11());
@@ -6194,12 +6087,12 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
                     }
                     break;
                 case 13 :
-                    // InternalEvolutionaryAlgorithmLanguage.g:2216:3: (enumLiteral_12= 'm' )
+                    // InternalEvolutionaryAlgorithmLanguage.g:2177:3: (enumLiteral_12= 'm' )
                     {
-                    // InternalEvolutionaryAlgorithmLanguage.g:2216:3: (enumLiteral_12= 'm' )
-                    // InternalEvolutionaryAlgorithmLanguage.g:2217:4: enumLiteral_12= 'm'
+                    // InternalEvolutionaryAlgorithmLanguage.g:2177:3: (enumLiteral_12= 'm' )
+                    // InternalEvolutionaryAlgorithmLanguage.g:2178:4: enumLiteral_12= 'm'
                     {
-                    enumLiteral_12=(Token)match(input,56,FOLLOW_2); 
+                    enumLiteral_12=(Token)match(input,58,FOLLOW_2); 
 
                     				current = grammarAccess.getFactorRuleAccess().getMilliEnumLiteralDeclaration_12().getEnumLiteral().getInstance();
                     				newLeafNode(enumLiteral_12, grammarAccess.getFactorRuleAccess().getMilliEnumLiteralDeclaration_12());
@@ -6211,12 +6104,12 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
                     }
                     break;
                 case 14 :
-                    // InternalEvolutionaryAlgorithmLanguage.g:2224:3: (enumLiteral_13= '\\u00B5' )
+                    // InternalEvolutionaryAlgorithmLanguage.g:2185:3: (enumLiteral_13= '\\u00B5' )
                     {
-                    // InternalEvolutionaryAlgorithmLanguage.g:2224:3: (enumLiteral_13= '\\u00B5' )
-                    // InternalEvolutionaryAlgorithmLanguage.g:2225:4: enumLiteral_13= '\\u00B5'
+                    // InternalEvolutionaryAlgorithmLanguage.g:2185:3: (enumLiteral_13= '\\u00B5' )
+                    // InternalEvolutionaryAlgorithmLanguage.g:2186:4: enumLiteral_13= '\\u00B5'
                     {
-                    enumLiteral_13=(Token)match(input,57,FOLLOW_2); 
+                    enumLiteral_13=(Token)match(input,59,FOLLOW_2); 
 
                     				current = grammarAccess.getFactorRuleAccess().getMicroEnumLiteralDeclaration_13().getEnumLiteral().getInstance();
                     				newLeafNode(enumLiteral_13, grammarAccess.getFactorRuleAccess().getMicroEnumLiteralDeclaration_13());
@@ -6228,12 +6121,12 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
                     }
                     break;
                 case 15 :
-                    // InternalEvolutionaryAlgorithmLanguage.g:2232:3: (enumLiteral_14= 'n' )
+                    // InternalEvolutionaryAlgorithmLanguage.g:2193:3: (enumLiteral_14= 'n' )
                     {
-                    // InternalEvolutionaryAlgorithmLanguage.g:2232:3: (enumLiteral_14= 'n' )
-                    // InternalEvolutionaryAlgorithmLanguage.g:2233:4: enumLiteral_14= 'n'
+                    // InternalEvolutionaryAlgorithmLanguage.g:2193:3: (enumLiteral_14= 'n' )
+                    // InternalEvolutionaryAlgorithmLanguage.g:2194:4: enumLiteral_14= 'n'
                     {
-                    enumLiteral_14=(Token)match(input,58,FOLLOW_2); 
+                    enumLiteral_14=(Token)match(input,60,FOLLOW_2); 
 
                     				current = grammarAccess.getFactorRuleAccess().getNanoEnumLiteralDeclaration_14().getEnumLiteral().getInstance();
                     				newLeafNode(enumLiteral_14, grammarAccess.getFactorRuleAccess().getNanoEnumLiteralDeclaration_14());
@@ -6245,12 +6138,12 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
                     }
                     break;
                 case 16 :
-                    // InternalEvolutionaryAlgorithmLanguage.g:2240:3: (enumLiteral_15= 'p' )
+                    // InternalEvolutionaryAlgorithmLanguage.g:2201:3: (enumLiteral_15= 'p' )
                     {
-                    // InternalEvolutionaryAlgorithmLanguage.g:2240:3: (enumLiteral_15= 'p' )
-                    // InternalEvolutionaryAlgorithmLanguage.g:2241:4: enumLiteral_15= 'p'
+                    // InternalEvolutionaryAlgorithmLanguage.g:2201:3: (enumLiteral_15= 'p' )
+                    // InternalEvolutionaryAlgorithmLanguage.g:2202:4: enumLiteral_15= 'p'
                     {
-                    enumLiteral_15=(Token)match(input,59,FOLLOW_2); 
+                    enumLiteral_15=(Token)match(input,61,FOLLOW_2); 
 
                     				current = grammarAccess.getFactorRuleAccess().getPikoEnumLiteralDeclaration_15().getEnumLiteral().getInstance();
                     				newLeafNode(enumLiteral_15, grammarAccess.getFactorRuleAccess().getPikoEnumLiteralDeclaration_15());
@@ -6262,12 +6155,12 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
                     }
                     break;
                 case 17 :
-                    // InternalEvolutionaryAlgorithmLanguage.g:2248:3: (enumLiteral_16= 'f' )
+                    // InternalEvolutionaryAlgorithmLanguage.g:2209:3: (enumLiteral_16= 'f' )
                     {
-                    // InternalEvolutionaryAlgorithmLanguage.g:2248:3: (enumLiteral_16= 'f' )
-                    // InternalEvolutionaryAlgorithmLanguage.g:2249:4: enumLiteral_16= 'f'
+                    // InternalEvolutionaryAlgorithmLanguage.g:2209:3: (enumLiteral_16= 'f' )
+                    // InternalEvolutionaryAlgorithmLanguage.g:2210:4: enumLiteral_16= 'f'
                     {
-                    enumLiteral_16=(Token)match(input,60,FOLLOW_2); 
+                    enumLiteral_16=(Token)match(input,62,FOLLOW_2); 
 
                     				current = grammarAccess.getFactorRuleAccess().getFemtoEnumLiteralDeclaration_16().getEnumLiteral().getInstance();
                     				newLeafNode(enumLiteral_16, grammarAccess.getFactorRuleAccess().getFemtoEnumLiteralDeclaration_16());
@@ -6279,12 +6172,12 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
                     }
                     break;
                 case 18 :
-                    // InternalEvolutionaryAlgorithmLanguage.g:2256:3: (enumLiteral_17= 'a' )
+                    // InternalEvolutionaryAlgorithmLanguage.g:2217:3: (enumLiteral_17= 'a' )
                     {
-                    // InternalEvolutionaryAlgorithmLanguage.g:2256:3: (enumLiteral_17= 'a' )
-                    // InternalEvolutionaryAlgorithmLanguage.g:2257:4: enumLiteral_17= 'a'
+                    // InternalEvolutionaryAlgorithmLanguage.g:2217:3: (enumLiteral_17= 'a' )
+                    // InternalEvolutionaryAlgorithmLanguage.g:2218:4: enumLiteral_17= 'a'
                     {
-                    enumLiteral_17=(Token)match(input,61,FOLLOW_2); 
+                    enumLiteral_17=(Token)match(input,63,FOLLOW_2); 
 
                     				current = grammarAccess.getFactorRuleAccess().getAttoEnumLiteralDeclaration_17().getEnumLiteral().getInstance();
                     				newLeafNode(enumLiteral_17, grammarAccess.getFactorRuleAccess().getAttoEnumLiteralDeclaration_17());
@@ -6296,12 +6189,12 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
                     }
                     break;
                 case 19 :
-                    // InternalEvolutionaryAlgorithmLanguage.g:2264:3: (enumLiteral_18= 'z' )
+                    // InternalEvolutionaryAlgorithmLanguage.g:2225:3: (enumLiteral_18= 'z' )
                     {
-                    // InternalEvolutionaryAlgorithmLanguage.g:2264:3: (enumLiteral_18= 'z' )
-                    // InternalEvolutionaryAlgorithmLanguage.g:2265:4: enumLiteral_18= 'z'
+                    // InternalEvolutionaryAlgorithmLanguage.g:2225:3: (enumLiteral_18= 'z' )
+                    // InternalEvolutionaryAlgorithmLanguage.g:2226:4: enumLiteral_18= 'z'
                     {
-                    enumLiteral_18=(Token)match(input,62,FOLLOW_2); 
+                    enumLiteral_18=(Token)match(input,64,FOLLOW_2); 
 
                     				current = grammarAccess.getFactorRuleAccess().getZeptoEnumLiteralDeclaration_18().getEnumLiteral().getInstance();
                     				newLeafNode(enumLiteral_18, grammarAccess.getFactorRuleAccess().getZeptoEnumLiteralDeclaration_18());
@@ -6313,12 +6206,12 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
                     }
                     break;
                 case 20 :
-                    // InternalEvolutionaryAlgorithmLanguage.g:2272:3: (enumLiteral_19= 'y' )
+                    // InternalEvolutionaryAlgorithmLanguage.g:2233:3: (enumLiteral_19= 'y' )
                     {
-                    // InternalEvolutionaryAlgorithmLanguage.g:2272:3: (enumLiteral_19= 'y' )
-                    // InternalEvolutionaryAlgorithmLanguage.g:2273:4: enumLiteral_19= 'y'
+                    // InternalEvolutionaryAlgorithmLanguage.g:2233:3: (enumLiteral_19= 'y' )
+                    // InternalEvolutionaryAlgorithmLanguage.g:2234:4: enumLiteral_19= 'y'
                     {
-                    enumLiteral_19=(Token)match(input,63,FOLLOW_2); 
+                    enumLiteral_19=(Token)match(input,65,FOLLOW_2); 
 
                     				current = grammarAccess.getFactorRuleAccess().getYoctoEnumLiteralDeclaration_19().getEnumLiteral().getInstance();
                     				newLeafNode(enumLiteral_19, grammarAccess.getFactorRuleAccess().getYoctoEnumLiteralDeclaration_19());
@@ -6357,33 +6250,31 @@ public class InternalEvolutionaryAlgorithmLanguageParser extends AbstractInterna
 
     public static final BitSet FOLLOW_1 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_2 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x00000000000010A0L});
-    public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000000004002L});
+    public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000000008120L});
+    public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000000020002L});
     public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_8 = new BitSet(new long[]{0x0000000000010020L});
-    public static final BitSet FOLLOW_9 = new BitSet(new long[]{0x0000000000008002L});
-    public static final BitSet FOLLOW_10 = new BitSet(new long[]{0x00000000000100B0L});
-    public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x0000000000020000L});
-    public static final BitSet FOLLOW_12 = new BitSet(new long[]{0x00000000C02400F0L});
-    public static final BitSet FOLLOW_13 = new BitSet(new long[]{0x00000000C03400F0L});
-    public static final BitSet FOLLOW_14 = new BitSet(new long[]{0x0000000000180000L});
-    public static final BitSet FOLLOW_15 = new BitSet(new long[]{0x00000000000000A0L});
-    public static final BitSet FOLLOW_16 = new BitSet(new long[]{0x0000000000400002L});
-    public static final BitSet FOLLOW_17 = new BitSet(new long[]{0x00000180EA2400F0L});
-    public static final BitSet FOLLOW_18 = new BitSet(new long[]{0x0000000000800002L});
-    public static final BitSet FOLLOW_19 = new BitSet(new long[]{0x0000000001000002L});
-    public static final BitSet FOLLOW_20 = new BitSet(new long[]{0x0000007E00000002L});
-    public static final BitSet FOLLOW_21 = new BitSet(new long[]{0x0000018000000002L});
-    public static final BitSet FOLLOW_22 = new BitSet(new long[]{0x00000E0000000002L});
-    public static final BitSet FOLLOW_23 = new BitSet(new long[]{0x0000000004000002L});
-    public static final BitSet FOLLOW_24 = new BitSet(new long[]{0x0000000010000000L});
-    public static final BitSet FOLLOW_25 = new BitSet(new long[]{0x0000000008000000L});
-    public static final BitSet FOLLOW_26 = new BitSet(new long[]{0x00000180FA2400F0L});
-    public static final BitSet FOLLOW_27 = new BitSet(new long[]{0x0000000010080000L});
-    public static final BitSet FOLLOW_28 = new BitSet(new long[]{0xFFFFF00000000002L});
-    public static final BitSet FOLLOW_29 = new BitSet(new long[]{0x0000000100000000L});
-    public static final BitSet FOLLOW_30 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0000000000010000L});
+    public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x0000000000040000L});
+    public static final BitSet FOLLOW_8 = new BitSet(new long[]{0x0000000000080020L});
+    public static final BitSet FOLLOW_9 = new BitSet(new long[]{0x0000000000040002L});
+    public static final BitSet FOLLOW_10 = new BitSet(new long[]{0x0000000000080130L});
+    public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x0000000000100000L});
+    public static final BitSet FOLLOW_12 = new BitSet(new long[]{0x00000006012001F0L});
+    public static final BitSet FOLLOW_13 = new BitSet(new long[]{0x0000000601A001F0L});
+    public static final BitSet FOLLOW_14 = new BitSet(new long[]{0x0000000000C00000L});
+    public static final BitSet FOLLOW_15 = new BitSet(new long[]{0x0000000000000120L});
+    public static final BitSet FOLLOW_16 = new BitSet(new long[]{0x0000000002000002L});
+    public static final BitSet FOLLOW_17 = new BitSet(new long[]{0x00000607512001F0L});
+    public static final BitSet FOLLOW_18 = new BitSet(new long[]{0x0000000004000002L});
+    public static final BitSet FOLLOW_19 = new BitSet(new long[]{0x0000000008000002L});
+    public static final BitSet FOLLOW_20 = new BitSet(new long[]{0x000001F800000002L});
+    public static final BitSet FOLLOW_21 = new BitSet(new long[]{0x0000060000000002L});
+    public static final BitSet FOLLOW_22 = new BitSet(new long[]{0x0000380000000002L});
+    public static final BitSet FOLLOW_23 = new BitSet(new long[]{0x0000000020000002L});
+    public static final BitSet FOLLOW_24 = new BitSet(new long[]{0x0000000080000000L});
+    public static final BitSet FOLLOW_25 = new BitSet(new long[]{0x0000000040000000L});
+    public static final BitSet FOLLOW_26 = new BitSet(new long[]{0x00000607D12001F0L});
+    public static final BitSet FOLLOW_27 = new BitSet(new long[]{0x0000000080400000L});
+    public static final BitSet FOLLOW_28 = new BitSet(new long[]{0xFFFFC00000000002L,0x0000000000000003L});
 
 }
