@@ -137,7 +137,7 @@ public abstract class DensityBasedFitness extends FitnessDecorator {
             final double probability = sourceData[i].probability(((Number)candidate.get(i)).doubleValue());
             final double offset = 1 / ((Number)ranges.get(surrogate.getInputSpecification().get(i))).doubleValue();
 
-            result *= Math.max(1.0, probability + offset);
+            result *= Math.min(1.0, probability + offset);
         }
 
         return result;
@@ -150,6 +150,6 @@ public abstract class DensityBasedFitness extends FitnessDecorator {
         final double probability = targetData.probability(predicted);
         final double offset = 1 / ((Number)ranges.get(surrogate.getOutputSpecification().get(0))).doubleValue();
 
-        return Math.max(1.0, probability + offset);
+        return Math.min(1.0, probability + offset);
     }
 }
