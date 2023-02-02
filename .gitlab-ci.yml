@@ -111,7 +111,7 @@ evoal:unit:
     reports:
        junit: src/core/*/target/surefire-reports/TEST-*.xml
     paths:
-      - - src/core/*/target/surefire-reports/*
+      - src/core/*/target/surefire-reports/*
 
 #############################################################
 ## Remaining integration tests
