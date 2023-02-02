@@ -110,7 +110,8 @@ evoal:unit:
     when: always
     reports:
        junit: src/core/*/target/surefire-reports/TEST-*.xml
-
+    paths:
+      - - src/core/*/target/surefire-reports/*
 
 #############################################################
 ## Remaining integration tests
