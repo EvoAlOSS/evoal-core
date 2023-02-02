@@ -1,53 +1,30 @@
 package de.evoal.core.api.properties.io;
 
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import de.evoal.core.api.properties.Properties;
-import de.evoal.core.api.properties.PropertySpecification;
-import lombok.SneakyThrows;
+import de.evoal.core.api.properties.PropertiesSpecification;
+import de.evoal.core.api.utils.EvoalIOException;
+import lombok.NonNull;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 
-public class PropertiesWriter implements AutoCloseable {
-    private final FileOutputStream outputStream;
-    private final JsonGenerator jsonGenerator;
+/**
+ * Base interface for properties writers. A properties writer's task is to serialize a sequence of properties.
+ */
+public interface PropertiesWriter extends AutoCloseable {
+    /**
+     * Writes a new properties instance to the repository.
+     *
+     * @param properties The properties to write.
+     * @throws EvoalIOException An exception to signal some problem while serialising the data.
+     */
+    public void add(final @NonNull Properties properties) throws EvoalIOException;
 
-    public PropertiesWriter(final File outputFile) throws IOException {
-        outputStream = new FileOutputStream(outputFile);
-
-        final ObjectMapper mapper = new ObjectMapper();
-        jsonGenerator = mapper.createGenerator(outputStream);
-        jsonGenerator.writeStartArray();
-    }
-
-    @SneakyThrows(IOException.class)
-    public void addProperties(final Properties properties) {
-        jsonGenerator.writeStartArray();
-        for(final PropertySpecification spec : properties.getSpecification().getProperties()) {
-            jsonGenerator.writeStartObject();
-            jsonGenerator.writeStringField("name", spec.name());
-
-            final Object value = properties.get(spec);
-            if(value instanceof Double || value instanceof Float) {
-                jsonGenerator.writeNumberField("value", ((Number)properties.get(spec)).doubleValue());
-            } else if(value instanceof Integer) {
-                jsonGenerator.writeNumberField("value", ((Number)properties.get(spec)).longValue());
-            } else if(value instanceof Boolean) {
-                jsonGenerator.writeBooleanField("value", (Boolean)properties.get(spec));
-            } else if(value instanceof String) {
-                jsonGenerator.writeStringField("value", (String)properties.get(spec));
-            }
-            jsonGenerator.writeEndObject();
-        }
-        jsonGenerator.writeEndArray();
-    }
-
-    @Override
-    public void close() throws Exception {
-        jsonGenerator.writeEndArray();
-        jsonGenerator.close();
-        outputStream.close();
-    }
+    /**
+     * Inits the writer with the specification information.
+     *
+     * @param specification The properties specification of the properties to write.
+     *
+     * @return The instance itself.
+     */
+    public PropertiesWriter init(final File outputFile, final PropertiesSpecification specification) throws EvoalIOException;
 }

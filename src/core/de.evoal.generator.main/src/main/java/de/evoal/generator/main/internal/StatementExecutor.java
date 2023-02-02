@@ -2,7 +2,9 @@ package de.evoal.generator.main.internal;
 
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;
+import de.evoal.core.api.properties.io.PropertiesIOFactory;
 import de.evoal.core.api.properties.io.PropertiesWriter;
+import de.evoal.core.api.utils.EvoalIOException;
 import de.evoal.generator.api.GeneratorFunction;
 import de.evoal.languages.model.generator.*;
 import de.evoal.languages.model.generator.util.GeneratorSwitch;
@@ -156,9 +158,18 @@ public class StatementExecutor extends GeneratorSwitch<Object> {
 
         new File(filename).getParentFile().mkdirs();
 
-        try(final PropertiesWriter writer = new PropertiesWriter(new File(filename))) {
+        PropertiesSpecification.Builder resultSpec = PropertiesSpecification.builder();
+        stream.peek(p -> resultSpec.add(p.getSpecification()));
+
+        try(final PropertiesWriter writer = PropertiesIOFactory.writer(new File(filename), resultSpec.build())) {
             stream.limit(count)
-                  .forEach(writer::addProperties);
+                  .forEach(p -> {
+                      try {
+                          writer.add(p);
+                      } catch (final EvoalIOException e) {
+                          log.error("Failed to writer properties.", e);
+                      }
+                  });
         } catch (final Exception e) {
             log.error("Failed to write properties to file '{}'.", filename);
         }
