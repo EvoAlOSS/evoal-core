@@ -39,13 +39,13 @@ popd
 rm -rf xtext-merge
 
 # let's copy the scripts to the correct location
-mkdir bin
+mkdir evoal/bin
 
-cp -r src/core/de.evoal.core/scripts/* "bin"
+cp -r ../src/core/de.evoal.core/scripts/* "bin"
 for NAME in $RELEASE_PLUGINS; do
     echo "Copying scripts of plugin $NAME"
 
-    if [ -e src/core/de.evoal.$NAME/scripts ]; then
-      cp -r src/core/de.evoal.$NAME/scripts/* bin
+    if [ -e ../src/core/de.evoal.$NAME/scripts ]; then
+      cp -r ../src/core/de.evoal.$NAME/scripts/* bin
     fi
 done
