@@ -4,7 +4,7 @@ public final class ArffBlackboardEntry {
     /**
      * The arff file to read.
      */
-    public static final String ARFF_INPUT = "arff:arff-input";
+    public static final String ARFF_INPUT = "arff:input";
 
 
     /**

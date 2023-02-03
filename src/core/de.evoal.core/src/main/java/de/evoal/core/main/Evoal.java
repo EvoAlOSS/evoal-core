@@ -39,7 +39,7 @@ public final class Evoal {
             try {
                 main = BeanProvider.getContextualReference(mainName, false, MainClass.class);
             } catch(final Throwable e) {
-                logMainError();
+                logMainError(e);
                 System.exit(1);
             }
 
@@ -52,8 +52,9 @@ public final class Evoal {
         cdiContainer.shutdown();
     }
 
-    private static void logMainError() {
-        log.error("Name of main class was not set. Please specify the main class via command line (-BMAIN=<name>).");
+    private static void logMainError(final Throwable e) {
+        log.error("Filed to create main.", e);
+        log.error("Name of main class was not set correctly. Please specify the main class via command line (-B{}=<name>).", BlackboardEntry.MAIN);
         Set<Bean<MainClass>> beans = BeanProvider.getBeanDefinitions(MainClass.class, true, true);
         log.error("  possible names are:");
 

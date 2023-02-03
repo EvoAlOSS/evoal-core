@@ -13,7 +13,7 @@ import java.io.FileOutputStream;
 
 @Slf4j
 @Dependent
-@Named("json-writer")
+@Named("arff-writer")
 public class ArffPropertiesWriter implements PropertiesWriter {
     private FileOutputStream outputStream;
 

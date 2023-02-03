@@ -33,16 +33,17 @@ public class BlackboardValueProducer {
     @BlackboardValue(BlackboardEntry.EA_CONFIGURATION)
     public String injectStringValue(final InjectionPoint ip, final Blackboard board) {
         final BlackboardValue value = ip.getAnnotated().getAnnotation(BlackboardValue.class);
+        final Object result = board.get(value.value());
 
-        return castValue(board.get(value.value()));
+        return castValue(result);
     }
 
     @Produces
     @BlackboardValue(BlackboardEntry.EA_CONFIGURATION)
     public File injectFileValue(final InjectionPoint ip, final Blackboard board) {
         final BlackboardValue value = ip.getAnnotated().getAnnotation(BlackboardValue.class);
-
-        return castValue(board.get(value.value()));
+        final Object result = board.get(value.value());
+        return new File(result.toString());
     }
 
     @Produces
