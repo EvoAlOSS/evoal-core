@@ -8,7 +8,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class PropertiesSpecification {
-	public static class Builder {
+
+    public static class Builder {
 
 		private final Set<PropertySpecification> properties = new TreeSet<>();
 
@@ -34,6 +35,14 @@ public class PropertiesSpecification {
 							.filter(s -> !properties.contains(s))
 							.peek(properties::add)
 							.forEach(orderedProperties::add);
+
+			return this;
+		}
+
+		public Builder add(final PropertySpecification specification) {
+			if (!properties.contains(specification)) {
+				properties.add(specification);
+			}
 
 			return this;
 		}
@@ -81,6 +90,11 @@ public class PropertiesSpecification {
 	public boolean contains(final PropertySpecification spec) {
 		return this.indices.containsKey(spec);
 	}
+
+	public boolean contains(final String name) {
+		return this.properties.stream().anyMatch(p -> p.name().equals(name));
+	}
+
 
 	public PropertySpecification find(final String name) {
 		return properties.get(indexOf(name));

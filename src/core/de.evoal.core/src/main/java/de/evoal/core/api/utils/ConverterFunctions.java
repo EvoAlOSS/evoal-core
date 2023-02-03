@@ -1,4 +1,4 @@
-package de.evoal.surrogate.api.function;
+package de.evoal.core.api.utils;
 
 import de.evoal.core.api.properties.Properties;
 import de.evoal.languages.model.ddl.RepresentationType;

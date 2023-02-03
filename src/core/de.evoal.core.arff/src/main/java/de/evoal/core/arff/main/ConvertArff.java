@@ -1,0 +1,112 @@
+package de.evoal.core.arff.main;
+
+import com.google.inject.Injector;
+import de.evoal.core.api.cdi.BlackboardValue;
+import de.evoal.core.api.cdi.MainClass;
+import de.evoal.core.api.properties.PropertiesSpecification;
+import de.evoal.core.api.properties.io.PropertiesIOFactory;
+import de.evoal.core.api.properties.io.PropertiesReader;
+import de.evoal.core.api.properties.io.PropertiesWriter;
+import de.evoal.core.arff.cdi.ArffBlackboardEntry;
+import de.evoal.languages.model.ddl.DataDescriptionModel;
+import de.evoal.languages.model.ddl.dsl.DataDescriptionLanguageStandaloneSetup;
+import lombok.extern.slf4j.Slf4j;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.resource.XtextResourceSet;
+import weka.Run;
+
+import javax.enterprise.context.Dependent;
+import javax.inject.Inject;
+import javax.inject.Named;
+import java.io.File;
+
+@Slf4j
+@Dependent
+@Named("convert-arff-to-json")
+public class ConvertArff implements MainClass {
+
+    @Inject
+    @BlackboardValue(ArffBlackboardEntry.ARFF_INPUT)
+    private File arffFile;
+
+    @Inject
+    @BlackboardValue(ArffBlackboardEntry.DDL_SPECIFICATION)
+    private File ddlFile;
+
+    @Inject
+    @BlackboardValue(ArffBlackboardEntry.OUTPUT_FILE)
+    private File jsonFile;
+
+    @Override
+    public void run() {
+        final PropertiesSpecification specification = readSpecification();
+
+        try (final PropertiesReader reader = PropertiesIOFactory.reader(arffFile, specification);
+             final PropertiesWriter writer = PropertiesIOFactory.writer(jsonFile, specification);
+            ) {
+
+            while(reader.hasNext()) {
+                writer.add(reader.next());
+            }
+        } catch(final Exception e) {
+            log.error("Failed to convert from {} to {}.", arffFile, jsonFile, e);
+        }
+    }
+
+    private PropertiesSpecification readSpecification() {
+        final DataDescriptionModel model = loadSpecificationFile();
+
+        return PropertiesSpecification
+                    .builder()
+                    .add(model.getDescriptions().stream())
+                    .build();
+    }
+
+    private DataDescriptionModel loadSpecificationFile() {
+        log.info("Loading data description configuration from {}.",  ddlFile);
+
+        if(!ddlFile.exists() || ! ddlFile.canRead()) {
+            log.error("Unable to read data description configuration file '{}'", ddlFile);
+            throw new IllegalArgumentException("Unable to read data description configuration file: " + ddlFile);
+        }
+
+        // init EMF + Xtext
+        final Injector dlInjector = new DataDescriptionLanguageStandaloneSetup().createInjectorAndDoEMFRegistration();
+
+        final XtextResourceSet resourceSet = dlInjector.getInstance(XtextResourceSet.class);
+        resourceSet.addLoadOption(XtextResource.OPTION_RESOLVE_ALL, Boolean.TRUE);
+        resourceSet.addLoadOption(XtextResource.OPTION_ENCODING, "UTF-8");
+
+        try {
+            log.info("Continue by loading the DL file.");
+            final URI modelURI = URI.createFileURI(ddlFile.getAbsolutePath());
+
+            log.info("Loading ea model from URI {}.", modelURI);
+
+            final Resource resource = resourceSet.getResource(modelURI, true);
+            resource.load(resourceSet.getLoadOptions());
+
+            if(!resource.getErrors().isEmpty()) {
+                for(Resource.Diagnostic diagnostic : resource.getErrors()) {
+                    log.error("Error while processing rule '{}': {}", ddlFile, diagnostic);
+                }
+            }
+            if(!resource.getWarnings().isEmpty()) {
+                for(Resource.Diagnostic diagnostic : resource.getWarnings()) {
+                    log.error("Warning while processing rule '{}': {}", ddlFile, diagnostic);
+                }
+            }
+
+            if(!resource.getErrors().isEmpty()) {
+                throw new IllegalArgumentException("DL file contains errors. Please fix the file.");
+            }
+
+            return (DataDescriptionModel) resource.getContents().get(0);
+        } catch (final Exception e) {
+            log.error("Unable to load data description configuration file '{}'.", ddlFile, e);
+            throw new RuntimeException("Unable to load data description configuration file: " + ddlFile, e);
+        }
+    }
+}

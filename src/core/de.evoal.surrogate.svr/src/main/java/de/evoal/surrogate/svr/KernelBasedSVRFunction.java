@@ -7,7 +7,7 @@ import de.evoal.surrogate.api.configuration.Parameter;
 import de.evoal.surrogate.api.configuration.PartialFunctionConfiguration;
 import de.evoal.surrogate.api.function.AbstractPartialSurrogateFunction;
 
-import de.evoal.surrogate.api.function.ConverterFunctions;
+import de.evoal.core.api.utils.ConverterFunctions;
 import smile.regression.KernelMachine;
 
 import java.util.LinkedList;

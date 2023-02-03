@@ -28,6 +28,9 @@
     <modules>
         <module>../de.evoal.core</module>
         <module>../de.evoal.core.plugin</module>
+
+        <module>../de.evoal.core.arff</module>
+
         <module>../de.evoal.generator.main</module>
 
         <module>../de.evoal.surrogate.api</module>
