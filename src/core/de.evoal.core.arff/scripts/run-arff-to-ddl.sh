@@ -1,0 +1,20 @@
+#!/bin/bash
+
+source paths.env
+
+if [ "$#" -ne 3 ]; then
+    echo "Usage: $0 <execution-folder> <input.arff> <output.ddl>"
+    exit 1
+fi
+
+cd $1
+
+set -x
+java -Dorg.jboss.logging.provider=slf4j\
+     --module-path "${EVOALPATH}/modules/:$PLUGIN_PATHS" \
+     --add-modules ALL-MODULE-PATH \
+     --add-opens java.base/java.lang=guice \
+     -m de.evoal.core/de.evoal.core.main.Evoal \
+     -Bcore:main=extract-data-definition-from-arff \
+     -Barff:input=$2 \
+     -Barff:output=$3

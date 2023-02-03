@@ -1,15 +1,13 @@
 #!/bin/bash
 
+source paths.env
+
 if [ "$#" -ne 2 ]; then
     echo "Usage: $0 <execution-folder> <generator-file>"
     exit 1
 fi
 
-EVOALPATH="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
-
 cd $1
-
-PLUGIN_PATHS=`ls -d "${EVOALPATH}/plugins"/* | tr '\n' ':'`
 
 set -x
 java -Dorg.jboss.logging.provider=slf4j\
