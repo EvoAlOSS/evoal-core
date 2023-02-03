@@ -41,6 +41,7 @@ rm -rf xtext-merge
 # let's copy the scripts to the correct location
 mkdir bin
 
+cp -r src/core/de.evoal.core/scripts/* "bin"
 for NAME in $RELEASE_PLUGINS; do
     echo "Copying scripts of plugin $NAME"
 
