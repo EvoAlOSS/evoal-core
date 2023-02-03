@@ -4,7 +4,6 @@ set -e -x
 
 RELEASE_PLUGINS="generator.main surrogate.api surrogate.simple surrogate.svr approximative.density core.arff"
 
-
 mkdir -p evoal/plugins
 
 cp src/languages/de.evoal.languages.releng.site/target/de.evoal.languages.releng.site-*.zip "evoal/eclipse-update-site.zip"
@@ -39,7 +38,7 @@ popd
 rm -rf xtext-merge
 
 # let's copy the scripts to the correct location
-mkdir evoal/bin
+mkdir bin
 
 cp -r ../src/core/de.evoal.core/scripts/* "bin"
 for NAME in $RELEASE_PLUGINS; do
