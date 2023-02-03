@@ -10,6 +10,7 @@ import de.evoal.core.api.properties.io.PropertiesWriter;
 import de.evoal.core.arff.cdi.ArffBlackboardEntry;
 import de.evoal.languages.model.ddl.DataDescriptionModel;
 import de.evoal.languages.model.ddl.dsl.DataDescriptionLanguageStandaloneSetup;
+import de.evoal.languages.model.ddl.impl.DdlPackageImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -73,6 +74,8 @@ public class ConvertArff implements MainClass {
         }
 
         // init EMF + Xtext
+        DdlPackageImpl.init();
+        DataDescriptionLanguageStandaloneSetup.doSetup();
         final Injector dlInjector = new DataDescriptionLanguageStandaloneSetup().createInjectorAndDoEMFRegistration();
 
         final XtextResourceSet resourceSet = dlInjector.getInstance(XtextResourceSet.class);

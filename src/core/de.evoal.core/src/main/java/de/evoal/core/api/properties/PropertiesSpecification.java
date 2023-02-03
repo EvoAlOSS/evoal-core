@@ -2,6 +2,7 @@ package de.evoal.core.api.properties;
 
 import de.evoal.languages.model.ddl.DataDescription;
 import org.apache.commons.math3.util.Pair;
+import org.slf4j.LoggerFactory;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -40,8 +41,9 @@ public class PropertiesSpecification {
 		}
 
 		public Builder add(final PropertySpecification specification) {
-			if (!properties.contains(specification)) {
+			if(!properties.contains(specification)) {
 				properties.add(specification);
+				orderedProperties.add(specification);
 			}
 
 			return this;

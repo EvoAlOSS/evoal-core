@@ -15,6 +15,7 @@ import weka.core.converters.ConverterUtils;
 import javax.enterprise.context.Dependent;
 import javax.inject.Named;
 import java.io.File;
+import java.util.Arrays;
 
 @Slf4j
 @Dependent
@@ -77,6 +78,10 @@ public class ArffPropertiesReader implements PropertiesReader {
 
             if(RepresentationType.REAL.equals(rType)) {
                 toProperties = (instance, template, builder) -> {
+                    if(instance.isMissing(index)) {
+                        return decoratee.apply(instance, template, builder);
+                    }
+
                     // add current specification to builder and let the chain complete it
                     builder.add(pSpec);
                     final Properties properties = decoratee.apply(instance, template, builder);
@@ -87,6 +92,10 @@ public class ArffPropertiesReader implements PropertiesReader {
                 };
             } else if(RepresentationType.INTEGER.equals(rType)) {
                 toProperties = (instance, template, builder) -> {
+                    if(instance.isMissing(index)) {
+                        return decoratee.apply(instance, template, builder);
+                    }
+                    
                     // add current specification to builder and let the chain complete it
                     builder.add(pSpec);
                     final Properties properties = decoratee.apply(instance, template, builder);
