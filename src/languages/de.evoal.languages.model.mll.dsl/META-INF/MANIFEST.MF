@@ -16,7 +16,7 @@ Require-Bundle: de.evoal.languages.model.mll,
  org.eclipse.xtext.util,
  org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
  de.evoal.languages.model.instance.dsl;bundle-version="1.0.0";visibility:=reexport
-Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-RequiredExecutionEnvironment: JavaSE-17
 Export-Package: de.evoal.languages.model.mll.dsl,
  de.evoal.languages.model.mll.dsl.generator,
  de.evoal.languages.model.mll.dsl.parser.antlr,

@@ -13,17 +13,17 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<maven.compiler.source>11</maven.compiler.source>
-		<maven.compiler.target>11</maven.compiler.target>
+		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.target>17</maven.compiler.target>
 
-		<tycho.version>2.5.0</tycho.version>
-		<xtend.version>2.25.0</xtend.version>
-		<xtext.version>2.25.0</xtext.version>
+		<tycho.version>3.0.1</tycho.version>
+		<xtend.version>2.29.0</xtend.version>
+		<xtext.version>2.29.0</xtext.version>
 
 		<eclipse.environment>JavaSE-17</eclipse.environment>
 
-		<url.eclipse>http://download.eclipse.org/releases/2021-09</url.eclipse>
-		<url.orbit>https://download.eclipse.org/tools/orbit/downloads/drops/R20210825222808/repository</url.orbit>
+		<url.eclipse>https://download.eclipse.org/releases/2022-12/202212071000</url.eclipse>
+		<url.orbit>https://download.eclipse.org/tools/orbit/downloads/drops/R20221123021534/repository</url.orbit>
 	</properties>
 
 	<build>
@@ -42,11 +42,6 @@
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-source-plugin</artifactId>
-			</plugin>
-
-			<plugin>
-				<groupId>org.eclipse.tycho.extras</groupId>
-				<artifactId>tycho-source-feature-plugin</artifactId>
 			</plugin>
 
 			<plugin>
@@ -135,29 +130,6 @@
 
 				<!-- For each feature we want to produce a source feature as well. -->
 				<plugin>
-					<groupId>org.eclipse.tycho.extras</groupId>
-					<artifactId>tycho-source-feature-plugin</artifactId>
-					<version>${tycho.version}</version>
-					<executions>
-						<execution>
-							<id>source-feature</id>
-							<phase>package</phase>
-							<goals>
-								<goal>source-feature</goal>
-							</goals>
-						</execution>
-					</executions>
-					<configuration>
-						<excludes>
-							<plugin id="org.apache.commons.jxpath" />
-							<plugin id="de.evoal.languages.releng.parent" />
-							<plugin id="de.evoal.languages.releng.target" />
-							<plugin id="de.evoal.languages.releng.site" />
-						</excludes>
-					</configuration>
-				</plugin>
-
-				<plugin>
 					<groupId>org.eclipse.tycho</groupId>
 					<artifactId>tycho-source-plugin</artifactId>
 					<version>${tycho.version}</version>
@@ -167,6 +139,20 @@
 							<goals>
 								<goal>plugin-source</goal>
 							</goals>
+						</execution>
+						<execution>
+							<id>feature-source</id>
+							<goals>
+							    <goal>feature-source</goal>
+							</goals>
+							<configuration>
+								<excludes>
+									<plugin id="org.apache.commons.jxpath" />
+									<plugin id="de.evoal.languages.releng.parent" />
+									<plugin id="de.evoal.languages.releng.target" />
+									<plugin id="de.evoal.languages.releng.site" />
+								</excludes>
+							</configuration>
 						</execution>
 					</executions>
 				</plugin>
@@ -327,7 +313,7 @@
 
 	<repositories>
 		<repository>
-			<id>eclipse-2021-09</id>
+			<id>eclipse-2022-12</id>
 			<url>${url.eclipse}</url>
 			<layout>p2</layout>
 		</repository>

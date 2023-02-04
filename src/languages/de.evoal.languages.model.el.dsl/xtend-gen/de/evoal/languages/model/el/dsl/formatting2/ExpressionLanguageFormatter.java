@@ -23,14 +23,14 @@ public class ExpressionLanguageFormatter extends AbstractFormatter2 {
       document.<XorExpression>format(xorExpression);
     }
   }
-  
+
   protected void _format(final XorExpression xorExpression, @Extension final IFormattableDocument document) {
     EList<AndExpression> _subExpressions = xorExpression.getSubExpressions();
     for (final AndExpression andExpression : _subExpressions) {
       document.<AndExpression>format(andExpression);
     }
   }
-  
+
   public void format(final Object orExpression, final IFormattableDocument document) {
     if (orExpression instanceof XtextResource) {
       _format((XtextResource)orExpression, document);

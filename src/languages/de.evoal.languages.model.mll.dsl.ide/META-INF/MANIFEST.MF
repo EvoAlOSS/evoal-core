@@ -14,6 +14,6 @@ Require-Bundle: de.evoal.languages.model.mll.dsl,
  de.evoal.languages.model.el.dsl.ide;bundle-version="1.0.0",
  de.evoal.languages.model.el.dsl;bundle-version="1.0.0",
  de.evoal.languages.model.dl.dsl;bundle-version="1.0.0"
-Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-RequiredExecutionEnvironment: JavaSE-17
 Export-Package: de.evoal.languages.model.mll.dsl.ide.contentassist.antlr.internal,
  de.evoal.languages.model.mll.dsl.ide.contentassist.antlr

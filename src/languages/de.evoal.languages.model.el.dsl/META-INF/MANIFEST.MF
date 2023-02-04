@@ -13,7 +13,7 @@ Require-Bundle: de.evoal.languages.model.el,
  org.eclipse.xtext.xbase.lib;bundle-version="2.14.0",
  org.eclipse.xtext.util,
  org.antlr.runtime;bundle-version="[3.2.0,3.2.1)"
-Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-RequiredExecutionEnvironment: JavaSE-17
 Export-Package: de.evoal.languages.model.el.dsl.serializer,
  de.evoal.languages.model.el.dsl.parser.antlr.internal,
  de.evoal.languages.model.el.dsl.generator,

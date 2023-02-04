@@ -15,7 +15,7 @@ Require-Bundle: org.eclipse.core.runtime,
  de.evoal.languages.model.instance;bundle-version="1.0.0";visibility:=reexport
 Eclipse-LazyStart: true
 Bundle-ActivationPolicy: lazy
-Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-RequiredExecutionEnvironment: JavaSE-17
 Export-Package: de.evoal.languages.model.mll,
  de.evoal.languages.model.mll.impl,
  de.evoal.languages.model.mll.util

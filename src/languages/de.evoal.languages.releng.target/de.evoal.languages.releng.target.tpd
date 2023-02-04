@@ -2,7 +2,7 @@ target "EvoAl Languages Target"
 
 with requirements, source
 
-location "http://download.eclipse.org/releases/2021-09" {
+location "https://download.eclipse.org/releases/2022-12/202212071000" {
   org.eclipse.equinox.sdk.feature.group lazy
   org.eclipse.equinox.p2.sdk.feature.group lazy
   org.eclipse.xtext.sdk.feature.group lazy

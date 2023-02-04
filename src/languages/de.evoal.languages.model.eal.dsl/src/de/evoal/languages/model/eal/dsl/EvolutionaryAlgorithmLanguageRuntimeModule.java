@@ -5,9 +5,9 @@ package de.evoal.languages.model.eal.dsl;
 
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
-import org.eclipse.xtext.scoping.impl.ImportUriGlobalScopeProvider;
 
 import de.evoal.languages.model.eal.dsl.converter.ValueConverterService;
+import de.evoal.languages.model.eal.dsl.utils.EALGlobalScopeProvider;
 
 /**
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
@@ -15,7 +15,7 @@ import de.evoal.languages.model.eal.dsl.converter.ValueConverterService;
 public class EvolutionaryAlgorithmLanguageRuntimeModule extends AbstractEvolutionaryAlgorithmLanguageRuntimeModule {
 	@Override
 	public Class<? extends IGlobalScopeProvider> bindIGlobalScopeProvider() {
-		return ImportUriGlobalScopeProvider.class;
+		return EALGlobalScopeProvider.class;
 	}
 	
     @Override

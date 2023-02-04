@@ -17,7 +17,7 @@ Require-Bundle: org.eclipse.xtext,
  de.evoal.languages.model.el;bundle-version="1.0.0",
  de.evoal.languages.model.el.dsl;bundle-version="1.0.0",
  de.evoal.languages.model.dl;bundle-version="1.0.0";visibility:=reexport
-Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-RequiredExecutionEnvironment: JavaSE-17
 Export-Package: de.evoal.languages.model.dl.dsl,
  de.evoal.languages.model.dl.dsl.generator,
  de.evoal.languages.model.dl.dsl.scoping,
