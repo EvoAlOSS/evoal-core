@@ -49,7 +49,7 @@
       <import plugin="de.evoal.languages.model.instance" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="de.evoal.languages.model.ddl" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="de.evoal.languages.model.dl.dsl" version="1.0.0" match="greaterOrEqual"/>
-      <import plugin="de.evoal.languages.model.eal" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="de.evoal.languages.model.ol" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="de.evoal.languages.model.instance.dsl" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="de.evoal.languages.model.instance.dsl.ui" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="de.evoal.languages.model.ddl.dsl" version="1.0.0" match="greaterOrEqual"/>
@@ -116,28 +116,28 @@
          unpack="false"/>
 
    <plugin
-         id="de.evoal.languages.model.eal"
+         id="de.evoal.languages.model.ol"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="de.evoal.languages.model.eal.dsl"
+         id="de.evoal.languages.model.ol.dsl"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="de.evoal.languages.model.eal.dsl.ide"
+         id="de.evoal.languages.model.ol.dsl.ide"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="de.evoal.languages.model.eal.dsl.ui"
+         id="de.evoal.languages.model.ol.dsl.ui"
          download-size="0"
          install-size="0"
          version="0.0.0"

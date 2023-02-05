@@ -1,0 +1,36 @@
+grammar de.evoal.languages.model.ol.dsl.OptimisationLanguage with de.evoal.languages.model.instance.dsl.InstanceLanguage
+
+import "https://www.evoal.de/languages/ol/1.0.0" 
+
+import "https://www.evoal.de/languages/dl/1.0.0" as dl
+import "https://www.evoal.de/languages/ddl/1.0.0" as ddl
+import "https://www.evoal.de/languages/instance/1.0.0" as instance
+import "https://www.evoal.de/languages/el/1.0.0" as el
+
+OptimisationModelRule returns OptimisationModel:
+        (uses += UseRule)*
+
+        instance = InstanceRule
+
+        (constraints = ConstraintRule)?
+;
+
+UseRule returns Use:
+        'use' importURI = STRING ';'
+;
+
+ConstraintRule returns Constraint:
+        {Constraint}
+        "constraints" "{"
+                (statements += ConstraintStatementRule)*
+        "}";
+
+
+ConstraintStatementRule returns ConstraintStatement:
+        constraintExpression = CallRule ';'
+;
+
+@Override
+FunctionNameRule returns FunctionName:
+        definition = [dl::FunctionDefinition]
+;

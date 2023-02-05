@@ -291,10 +291,10 @@
 		<module>../de.evoal.languages.model.mll.dsl.ide</module>
 		<module>../de.evoal.languages.model.mll.dsl.ui</module>
 
-		<module>../de.evoal.languages.model.eal</module>
-		<module>../de.evoal.languages.model.eal.dsl</module>
-		<module>../de.evoal.languages.model.eal.dsl.ide</module>
-		<module>../de.evoal.languages.model.eal.dsl.ui</module>
+		<module>../de.evoal.languages.model.ol</module>
+		<module>../de.evoal.languages.model.ol.dsl</module>
+		<module>../de.evoal.languages.model.ol.dsl.ide</module>
+		<module>../de.evoal.languages.model.ol.dsl.ui</module>
 
 		<module>../de.evoal.languages.model.generator</module>
 		<module>../de.evoal.languages.model.generator.dsl</module>
