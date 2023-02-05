@@ -4,7 +4,7 @@ import de.evoal.core.api.board.Blackboard;
 import de.evoal.core.api.board.BlackboardEntry;
 import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.core.api.utils.LanguageHelper;
-import de.evoal.languages.model.eal.EAModel;
+import de.evoal.languages.model.ol.OptimisationModel;
 import de.evoal.languages.model.el.DoubleLiteral;
 import de.evoal.languages.model.instance.Array;
 import de.evoal.languages.model.instance.Instance;
@@ -78,7 +78,7 @@ public class ConfigurationValueProducer {
                 .toArray();
     }
 
-    private static <T> T lookup(final EAModel model, final String access) {
+    private static <T> T lookup(final OptimisationModel model, final String access) {
         return LanguageHelper.lookup(model.getInstance(), access);
     }
 }

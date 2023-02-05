@@ -4,7 +4,7 @@ import de.evoal.core.api.ea.constraints.model.DataConstraints;
 import de.evoal.languages.model.ddl.DataDescription;
 import de.evoal.languages.model.ddl.DataDescriptionModel;
 import de.evoal.languages.model.ddl.TypedDataDescription;
-import de.evoal.languages.model.eal.EAModel;
+import de.evoal.languages.model.ol.OptimisationModel;
 import de.evoal.languages.model.el.Expression;
 import de.evoal.languages.model.instance.DataReference;
 import org.eclipse.emf.common.util.TreeIterator;
@@ -24,7 +24,7 @@ import java.util.stream.StreamSupport;
 @ApplicationScoped
 public class DataConstraintProducer {
     @Produces @Dependent
-    public DataConstraints produceDataInformation(final EAModel model) {
+    public DataConstraints produceDataInformation(final OptimisationModel model) {
         final TreeIterator<EObject> iterator = model.eAllContents();
         Iterable<EObject> iterable = () -> iterator;
 

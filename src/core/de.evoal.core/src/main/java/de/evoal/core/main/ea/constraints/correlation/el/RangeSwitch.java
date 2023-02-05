@@ -97,7 +97,7 @@ public class RangeSwitch extends ELSwitch<Range> {
 
     @Override
     public Range caseCall(final Call object) {
-        final de.evoal.languages.model.eal.FunctionName calledFunction = (de.evoal.languages.model.eal.FunctionName)object.getFunction();
+        final de.evoal.languages.model.ol.FunctionName calledFunction = (de.evoal.languages.model.ol.FunctionName)object.getFunction();
         if(!"range".equals(calledFunction.getDefinition().getName())) {
             throw new IllegalStateException("Searching for range but found: " + calledFunction.getDefinition().getName());
         }

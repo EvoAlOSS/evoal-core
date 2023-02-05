@@ -10,9 +10,9 @@ import javax.enterprise.inject.Produces;
 
 import de.evoal.languages.model.ddl.dsl.DataDescriptionLanguageStandaloneSetup;
 import de.evoal.languages.model.dl.dsl.DefinitionLanguageStandaloneSetup;
-import de.evoal.languages.model.eal.EAModel;
-import de.evoal.languages.model.eal.dsl.EvolutionaryAlgorithmLanguageStandaloneSetup;
-import de.evoal.languages.model.eal.impl.EALPackageImpl;
+import de.evoal.languages.model.ol.OptimisationModel;
+import de.evoal.languages.model.ol.dsl.OptimisationLanguageStandaloneSetup;
+import de.evoal.languages.model.ol.impl.OLPackageImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -28,7 +28,7 @@ import java.io.File;
 public class EvolutionaryAlgorithmModelLoader {
     @Inject
     private Blackboard board;
-    private EAModel model;
+    private OptimisationModel model;
 
     public void load(final @Observes BlackboardEntry entry) {
         if(!entry.isSame(BlackboardEntry.EA_CONFIGURATION_FILE)) {
@@ -46,7 +46,7 @@ public class EvolutionaryAlgorithmModelLoader {
 
         initializeEMF();
 
-        final Injector ealInjector = new EvolutionaryAlgorithmLanguageStandaloneSetup().createInjectorAndDoEMFRegistration();
+        final Injector ealInjector = new OptimisationLanguageStandaloneSetup().createInjectorAndDoEMFRegistration();
         // do not remove the following line even if the injector is not used. Otherwise, parsing eal files breaks.
         final Injector idlInjector = new DefinitionLanguageStandaloneSetup().createInjectorAndDoEMFRegistration();
 
@@ -80,7 +80,7 @@ public class EvolutionaryAlgorithmModelLoader {
                 throw new IllegalArgumentException("EAL file contains errors. Please fix the file.");
             }
 
-            model = (EAModel) resource.getContents().get(0);
+            model = (OptimisationModel) resource.getContents().get(0);
             board.bind(BlackboardEntry.EA_CONFIGURATION, model);
         } catch (final Exception e) {
             log.error("Unable to evolutionary algorithm configuration file '{}'.", configurationFile, e);
@@ -91,15 +91,15 @@ public class EvolutionaryAlgorithmModelLoader {
      * Initialize the model packages and perform the parser setup.
      */
     private void initializeEMF() {
-        EALPackageImpl.init();
+        OLPackageImpl.init();
 
-        EvolutionaryAlgorithmLanguageStandaloneSetup.doSetup();
+        OptimisationLanguageStandaloneSetup.doSetup();
         DataDescriptionLanguageStandaloneSetup.doSetup();
     }
 
     @Produces
     @Dependent
-    public EAModel getConfiguration() {
+    public OptimisationModel getConfiguration() {
         return model;
     }
 }

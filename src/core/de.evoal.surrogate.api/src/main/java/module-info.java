@@ -10,7 +10,6 @@ module de.evoal.surrogate.api {
 
     requires org.eclipse.emf.ecore;
     requires org.eclipse.emf.common;
-    requires guice;
     requires org.eclipse.xtext;
     requires com.fasterxml.jackson.databind;
     requires smile.math;

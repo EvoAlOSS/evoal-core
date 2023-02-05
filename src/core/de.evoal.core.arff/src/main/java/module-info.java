@@ -2,7 +2,6 @@ module de.evoal.core.arff {
     requires jakarta.inject.api;
     requires jakarta.enterprise.cdi.api;
 
-    requires guice;
     requires lombok;
     requires org.slf4j;
 

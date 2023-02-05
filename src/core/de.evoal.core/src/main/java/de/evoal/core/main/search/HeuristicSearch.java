@@ -21,11 +21,11 @@ import de.evoal.core.main.ea.codec.DynamicCodec;
 import de.evoal.core.main.ea.fitness.JeneticsFitnessFunction;
 import de.evoal.core.main.ea.initial.InitialPopulationFactory;
 import de.evoal.core.main.jenetics.ConstraintList;
-import de.evoal.languages.model.eal.EAModel;
 import de.evoal.languages.model.instance.Array;
 import de.evoal.languages.model.instance.Attribute;
 import de.evoal.languages.model.instance.Name;
 import de.evoal.languages.model.instance.Value;
+import de.evoal.languages.model.ol.OptimisationModel;
 import io.jenetics.*;
 import io.jenetics.engine.*;
 import io.jenetics.stat.MinMax;
@@ -137,7 +137,7 @@ public class HeuristicSearch {
 	}
 
 	private void setup() {
-		final EAModel configuration = board.get(BlackboardEntry.EA_CONFIGURATION);
+		final OptimisationModel configuration = board.get(BlackboardEntry.EA_CONFIGURATION);
 
 		final de.evoal.languages.model.instance.Instance alterers = LanguageHelper.lookup(configuration.getInstance(), "algorithm.alterers");
 

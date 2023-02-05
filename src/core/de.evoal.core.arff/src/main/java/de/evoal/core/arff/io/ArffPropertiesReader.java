@@ -95,7 +95,7 @@ public class ArffPropertiesReader implements PropertiesReader {
                     if(instance.isMissing(index)) {
                         return decoratee.apply(instance, template, builder);
                     }
-                    
+
                     // add current specification to builder and let the chain complete it
                     builder.add(pSpec);
                     final Properties properties = decoratee.apply(instance, template, builder);

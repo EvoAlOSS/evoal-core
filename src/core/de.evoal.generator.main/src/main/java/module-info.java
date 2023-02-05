@@ -24,7 +24,6 @@ module de.evoal.generator.main {
     requires de.evoal.languages.model.generator.dsl;
 
     requires de.evoal.core;
-    requires guice;
     requires commons.math3;
 
     opens de.evoal.generator.main;

@@ -21,7 +21,6 @@ module de.evoal.core {
     requires smile.math;
 
     requires decimal4j;
-    requires guice;
 
     requires com.fasterxml.jackson.databind;
 
@@ -33,11 +32,12 @@ module de.evoal.core {
     requires de.evoal.languages.model.ddl.dsl;
     requires de.evoal.languages.model.dl;
     requires de.evoal.languages.model.dl.dsl;
-    requires de.evoal.languages.model.eal;
-    requires de.evoal.languages.model.eal.dsl;
+    requires de.evoal.languages.model.ol;
+    requires de.evoal.languages.model.ol.dsl;
     requires de.evoal.languages.model.el;
     requires de.evoal.languages.model.el.dsl;
     requires de.evoal.languages.model.instance;
+    requires com.google.guice;
 
     exports de.evoal.core.api.board;
     exports de.evoal.core.api.cdi;

@@ -32,7 +32,7 @@ public class LanguageUtils {
     }
 
     private static void loadPackages() {
-        //DataDescriptionLanguageStandaloneSetup.doSetup();
+        DataDescriptionLanguageStandaloneSetup.doSetup();
     }
 
     private static <T extends EObject> T load(final URI modelURI, final Class<T> cl) {
