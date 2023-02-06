@@ -1,4 +1,4 @@
-package de.evoal.core.main.search;
+package de.evoal.core.main.ea.search;
 
 import java.io.File;
 import java.time.Duration;
@@ -11,6 +11,7 @@ import de.evoal.core.api.board.Blackboard;
 import de.evoal.core.api.cdi.BlackboardValue;
 import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.core.api.ea.initial.InitialPopulation;
+import de.evoal.core.api.search.OptimisationAlgorithm;
 import de.evoal.core.api.utils.LanguageHelper;
 import de.evoal.core.api.ea.fitness.comparator.FitnessValue;
 
@@ -37,7 +38,8 @@ import javax.inject.Named;
 
 @Slf4j
 @Dependent
-public class HeuristicSearch {
+@Named("evolutionary-algorithm")
+public class EvolutionaryAlgorithmSearch implements OptimisationAlgorithm {
 	@Inject
 	private Blackboard board;
 
@@ -56,11 +58,11 @@ public class HeuristicSearch {
 	private String run;
 
 	@Inject
-	@ConfigurationValue(entry = BlackboardEntry.OPTIMISATION_CONFIGURATION, access = "algorithm.number_of_generations")
+	@ConfigurationValue(entry = BlackboardEntry.OPTIMISATION_CONFIGURATION, access = "algorithm.number-of-generations")
 	private int numberOfGenerations;
 
 	@Inject
-	@ConfigurationValue(entry = BlackboardEntry.OPTIMISATION_CONFIGURATION, access = "algorithm.size_of_population")
+	@ConfigurationValue(entry = BlackboardEntry.OPTIMISATION_CONFIGURATION, access = "algorithm.size-of-population")
 	private int sizeOfPopulation;
 
 	@Inject
@@ -68,7 +70,7 @@ public class HeuristicSearch {
 	private Boolean maximize;
 
 	@Inject
-	@ConfigurationValue(entry = BlackboardEntry.OPTIMISATION_CONFIGURATION, access = "algorithm.maximum_age")
+	@ConfigurationValue(entry = BlackboardEntry.OPTIMISATION_CONFIGURATION, access = "algorithm.maximum-age")
 	private int maximumAge;
 
 	private final Map<String, List<Alterer<?, FitnessValue>>> alterers = new HashMap<>();
@@ -99,6 +101,11 @@ public class HeuristicSearch {
 
 	@Inject @Named("initial")
 	private InitialPopulation initalStream;
+
+	@Override
+	public OptimisationAlgorithm init(de.evoal.languages.model.instance.Instance instance) {
+		return this;
+	}
 
 	public void run() {
 		setup();

@@ -3,12 +3,15 @@ package de.evoal.core.main.search;
 import de.evoal.core.api.board.Blackboard;
 import de.evoal.core.api.board.BlackboardEntry;
 import de.evoal.core.api.cdi.BeanFactory;
+import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.core.api.cdi.MainClass;
 import de.evoal.core.api.properties.Properties;
 import javax.enterprise.context.ApplicationScoped;
 
+import de.evoal.core.api.search.OptimisationAlgorithm;
 import de.evoal.core.api.statistics.ColumnType;
 import de.evoal.core.api.statistics.WriterContext;
+import de.evoal.languages.model.instance.Instance;
 import org.apache.commons.math3.util.Pair;
 
 import javax.inject.Inject;
@@ -25,6 +28,10 @@ public class HeuristicSearchMain implements MainClass {
 	@Inject
 	private WriterContext context;
 
+	@Inject
+	@ConfigurationValue(entry = BlackboardEntry.OPTIMISATION_CONFIGURATION, access = "algorithm")
+	private Instance algorithmConfiguration;
+
 	@Override
 	public void run() {
 		final String outputFolder = board.get(BlackboardEntry.EVALUATION_OUTPUT_FOLDER);
@@ -38,7 +45,8 @@ public class HeuristicSearchMain implements MainClass {
 		board.bind(BlackboardEntry.EVALUATION_OUTPUT_FOLDER, outputBaseDir);
 		board.bind(BlackboardEntry.EVALUATION_RUN, "0");
 
-		BeanFactory.create(HeuristicSearch.class)
+		BeanFactory.create(OptimisationAlgorithm.class)
+				   .init(algorithmConfiguration)
 				   .run();
 	}
 

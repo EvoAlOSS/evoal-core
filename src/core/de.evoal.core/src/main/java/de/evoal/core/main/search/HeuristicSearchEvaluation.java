@@ -12,6 +12,7 @@ import javax.enterprise.context.ApplicationScoped;
 import de.evoal.core.api.statistics.Column;
 import de.evoal.core.api.statistics.ColumnType;
 import de.evoal.core.api.statistics.WriterContext;
+import de.evoal.core.main.ea.search.EvolutionaryAlgorithmSearch;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.math3.util.Pair;
 
@@ -103,7 +104,7 @@ public class HeuristicSearchEvaluation implements MainClass {
             board.bind(BlackboardEntry.EVALUATION_RUN, run);
             context.bindColumn(runColumn, i);
 
-            BeanFactory.create(HeuristicSearch.class)
+            BeanFactory.create(EvolutionaryAlgorithmSearch.class)
                        .run();
         }
     }

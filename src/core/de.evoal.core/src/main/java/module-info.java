@@ -54,6 +54,7 @@ module de.evoal.core {
     exports de.evoal.core.api.properties.info;
     exports de.evoal.core.api.properties.io;
     exports de.evoal.core.api.properties.stream;
+    exports de.evoal.core.api.search;
     exports de.evoal.core.api.statistics;
     exports de.evoal.core.api.utils;
 
@@ -96,4 +97,6 @@ module de.evoal.core {
     opens de.evoal.core.api.properties.info to weld.core.impl;
     opens de.evoal.core.api.ea.constraints.strategies to weld.core.impl;
     opens de.evoal.core.main.properties to weld.core.impl;
+    opens de.evoal.core.main.ea.search to weld.core.impl;
+
 }
