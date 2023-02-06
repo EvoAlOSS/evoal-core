@@ -28,7 +28,7 @@ import java.io.File;
 public class TrainingInitialPopulation<G extends Gene<?, G>, C extends Comparable<C>> implements InitialPopulation<G, C> {
 
     @Inject
-    @ConfigurationValue(entry = BlackboardEntry.OPTIMISATION_CONFIGURATION, access = "algorithm.size_of_population")
+    @ConfigurationValue(entry = BlackboardEntry.OPTIMISATION_CONFIGURATION, access = "algorithm.size-of-population")
     private int sizeOfPopulation;
 
     @Inject

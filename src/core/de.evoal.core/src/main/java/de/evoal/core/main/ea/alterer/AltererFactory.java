@@ -43,41 +43,41 @@ public class AltererFactory {
 
 		switch(name) {
 			//case "CompositeAlterer": return createCompositeAlterer(config);
-			case "mean_alterer": return createMeanAlterer(config);
-			case "correlation_mean_alterer": return (Alterer<G, FitnessValue>) createCorrelationMeanAlterer(config);
-			case "partial_matched_alterer": return createPartiallyMatchedAlterer(config);
-			case "correlation_partial_matched_alterer": return createCorrelationPartiallyMatchedAlterer(config);
+			case "mean-alterer": return createMeanAlterer(config);
+			case "correlation-mean-alterer": return (Alterer<G, FitnessValue>) createCorrelationMeanAlterer(config);
+			case "partial-matched-alterer": return createPartiallyMatchedAlterer(config);
+			case "correlation-partial-matched-alterer": return createCorrelationPartiallyMatchedAlterer(config);
 
-			case "gaussian_mutator": return createGaussianMutator(config);
-			case "correlation_gaussian_mutator": return createGaussianCorrelationMutator(config);
-			case "swap_mutator": return createSwapMutator(config);
-			case "correlation_swap_mutator": return createCorrelationSwapMutator(config);
-			case "bit_flip_mutator": return createBitFlipMutator(config);
-			case "correlation_bit_flip_mutator": return createCorrelationBitFlipMutator(config);
+			case "gaussian-mutator": return createGaussianMutator(config);
+			case "correlation-gaussian-mutator": return createGaussianCorrelationMutator(config);
+			case "swap-mutator": return createSwapMutator(config);
+			case "correlation-swap-mutator": return createCorrelationSwapMutator(config);
+			case "bit-flip-mutator": return createBitFlipMutator(config);
+			case "correlation-bit-flip-mutator": return createCorrelationBitFlipMutator(config);
 
 //			case "IntermediateCrossover": return createIntermediateCrossover(config);
-			case "line_crossover": return createLineCrossover(config);
-			case "correlation_line_crossover": return createCorrelationLineCrossover(config);
-			case "multi_point_crossover": return createMultiPointCrossover(config);
-			case "correlation_multi_point_crossover": return createCorrelationMultiPointCrossover(config);
-			case "single_point_crossover": return createSinglePointCrossover(config);
-			case "correlation_single_point_crossover": return createCorrelationSinglePointCrossover(config);
-			case "uniform_crossover": return createUniformCrossover(config);
-			case "correlation_uniform_crossover": return createCorrelationUniformCrossover(config);
+			case "line-crossover": return createLineCrossover(config);
+			case "correlation-line-crossover": return createCorrelationLineCrossover(config);
+			case "multi-point-crossover": return createMultiPointCrossover(config);
+			case "correlation-multi-point-crossover": return createCorrelationMultiPointCrossover(config);
+			case "single-point-crossover": return createSinglePointCrossover(config);
+			case "correlation-single-point-crossover": return createCorrelationSinglePointCrossover(config);
+			case "uniform-crossover": return createUniformCrossover(config);
+			case "correlation-uniform-crossover": return createCorrelationUniformCrossover(config);
 		}
 		throw new IllegalStateException("Selector '" + name + "' is unknown.");
 	}
 
 	private <G extends Gene<?, G>> Alterer<G, FitnessValue> createUniformCrossover(final Instance config) {
-		final Double crossoverProbability = LanguageHelper.lookup(config, "crossover_probability");
-		final Double swapProbability = LanguageHelper.lookup(config,"swap_probability");
+		final Double crossoverProbability = LanguageHelper.lookup(config, "crossover-probability");
+		final Double swapProbability = LanguageHelper.lookup(config,"swap-probability");
 
 		return new UniformCrossover<>(crossoverProbability, swapProbability);
 	}
 
 	private <G extends Gene<?, G>> Alterer<G, FitnessValue> createCorrelationUniformCrossover(final Instance config) {
-		final Double crossoverProbability = LanguageHelper.lookup(config, "crossover_probability");
-		final Double swapProbability = LanguageHelper.lookup(config,"swap_probability");
+		final Double crossoverProbability = LanguageHelper.lookup(config, "crossover-probability");
+		final Double swapProbability = LanguageHelper.lookup(config,"swap-probability");
 		
 		return new UniformCorrelationCrossover(crossoverProbability, swapProbability, correlations);
 	}

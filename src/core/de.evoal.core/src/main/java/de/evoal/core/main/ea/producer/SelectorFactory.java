@@ -30,14 +30,14 @@ public class SelectorFactory {
 
 	private <G extends Gene<?, G>, C extends Comparable<? super C>> Selector<G, C> create(final String name, final Instance config) {
 		switch(name) {
-			case "elite_selector": return createEliteSelector(config);
-			case "monte_carlo_selector": return createMonteCarloSelector(config);
-			case "exponential_rank_selector": return createExponentialRankSelector(config);
-			case "linear_rank_selector": return createLinearRankSelector(config);
-			case "boltzmann_selector": return createBoltzmannSelector(config);
-			case "stochastic_universal_selector": return createStochasticUniversalSelector(config);
-			case "tournament_selector": return createTournamentSelector(config);
-			case "truncation_selector": return createTruncationSelector(config);
+			case "elite-selector": return createEliteSelector(config);
+			case "monte-carlo-selector": return createMonteCarloSelector(config);
+			case "exponential-rank-selector": return createExponentialRankSelector(config);
+			case "linear-rank-selector": return createLinearRankSelector(config);
+			case "boltzmann-selector": return createBoltzmannSelector(config);
+			case "stochastic-universal-selector": return createStochasticUniversalSelector(config);
+			case "tournament-selector": return createTournamentSelector(config);
+			case "truncation-selector": return createTruncationSelector(config);
 			
 		}
 		throw new IllegalStateException("Selector '" + name + "' is unknown.");
