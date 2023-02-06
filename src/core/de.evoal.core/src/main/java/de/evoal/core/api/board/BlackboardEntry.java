@@ -28,35 +28,19 @@ public final class BlackboardEntry {
     public static final String EVALUATION_OUTPUT_FOLDER = "core:evaluation-output-folder";
 
     /**
-     * Configuration file containing the configuration fot the standard fitness function.
-     */
-//    public static final String FITNESS_STANDARD_FUNCTION_FILE = "FITNESS_STANDARD_FUNCTION_FILE";
-
-    /**
      * The heuristic configuration.
      */
-    public static final String EA_CONFIGURATION = "core:ea-configuration";
+    public static final String OPTIMISATION_CONFIGURATION = "core:optimisation-configuration";
 
     /**
      * The file containing the ea configuration.
      */
-    public static final String EA_CONFIGURATION_FILE = "core:ea-configuration-file";
-
-    /**
-     * File containing the machine learning file.
-     */
-//    public static final String MACHINE_LEARNING_FILE = "MACHINE_LEARNING_FILE";
+    public static final String OPTIMISATION_CONFIGURATION_FILE = "core:optimisation-configuration-file";
 
     /**
      * Name of the main to run.
      */
     public static final String MAIN = "core:main";
-
-
-    /**
-     * Targets.
-     */
-//    public static final String TARGET_POINTS = "TARGET_POINTS";
 
     /**
      * File containing targets for evaluation.

@@ -11,7 +11,6 @@ import de.evoal.core.api.properties.stream.FileBasedPropertiesStreamSupplier;
 import de.evoal.core.api.properties.stream.PropertiesStreamSupplier;
 import de.evoal.languages.model.instance.Instance;
 import de.evoal.surrogate.api.SurrogateBlackboardEntry;
-import de.evoal.surrogate.api.training.TrainingDataManager;
 import io.jenetics.Gene;
 import io.jenetics.Genotype;
 import io.jenetics.engine.Engine;
@@ -23,14 +22,13 @@ import lombok.extern.slf4j.Slf4j;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.inject.Provider;
 import java.io.File;
 
 @Slf4j
 public class TrainingInitialPopulation<G extends Gene<?, G>, C extends Comparable<C>> implements InitialPopulation<G, C> {
 
     @Inject
-    @ConfigurationValue(entry = BlackboardEntry.EA_CONFIGURATION, access = "algorithm.size_of_population")
+    @ConfigurationValue(entry = BlackboardEntry.OPTIMISATION_CONFIGURATION, access = "algorithm.size_of_population")
     private int sizeOfPopulation;
 
     @Inject

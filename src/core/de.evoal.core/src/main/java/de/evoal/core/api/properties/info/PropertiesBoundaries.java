@@ -15,6 +15,7 @@ public class PropertiesBoundaries {
 
     private Map<PropertySpecification, Boundaries> boundariesMap = new HashMap<>();
 
+    public boolean contains(final PropertySpecification specification) { return boundariesMap.containsKey(specification); }
 
     public Boundaries get(final PropertySpecification specification) {
         return boundariesMap.get(specification);

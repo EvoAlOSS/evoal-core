@@ -20,7 +20,7 @@ java -Dorg.jboss.logging.provider=slf4j\
      --add-exports io.jenetics.base/io.jenetics.internal.util=de.evoal.core \
      -m de.evoal.core/de.evoal.core.main.Evoal \
      -Bcore:main=heuristic-search \
-     "-Bcore:ea-configuration-file=$2" \
+     "-Bcore:optimisation-configuration-file=$2" \
      "-Bsurrogate:configuration-file=$3" \
      "-Bsurrogate:pre-trained=$4" \
      "-Bsurrogate:training-data=$5"\

@@ -8,7 +8,6 @@ import javax.enterprise.context.ApplicationScoped;
 import de.evoal.core.api.utils.LanguageHelper;
 import de.evoal.languages.model.instance.Array;
 import de.evoal.languages.model.instance.Instance;
-import de.evoal.languages.model.instance.LiteralValue;
 import org.apache.deltaspike.core.api.provider.BeanProvider;
 
 import javax.inject.Inject;
@@ -20,7 +19,7 @@ public class CalculationFactory {
     private final Map<String, Instance> calculationConfigurationByCategory = new HashMap<>();
 
     @Inject
-    public CalculationFactory(final @ConfigurationValue(entry = BlackboardEntry.EA_CONFIGURATION, access = "algorithm.handlers") Array handlerConfigurations) {
+    public CalculationFactory(final @ConfigurationValue(entry = BlackboardEntry.OPTIMISATION_CONFIGURATION, access = "algorithm.handlers") Array handlerConfigurations) {
         handlerConfigurations.getValues()
                              .stream()
                              .map(Instance.class::cast)

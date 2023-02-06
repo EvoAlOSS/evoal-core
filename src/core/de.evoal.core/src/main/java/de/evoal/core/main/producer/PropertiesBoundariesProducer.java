@@ -1,6 +1,7 @@
 package de.evoal.core.main.producer;
 
 import de.evoal.core.api.ea.constraints.model.DataConstraints;
+import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.properties.PropertySpecification;
 import de.evoal.core.api.properties.info.PropertiesBoundaries;
 import de.evoal.core.api.properties.info.PropertiesRanges;
@@ -15,7 +16,17 @@ import java.util.Collection;
 @ApplicationScoped
 public class PropertiesBoundariesProducer {
     @Produces @ApplicationScoped
-    public PropertiesBoundaries create(final DataConstraints constraints) {
-        return BoundaryIdentifier.run(constraints);
+    public PropertiesBoundaries create(final DataConstraints constraints, final @Named("genotype-specification") PropertiesSpecification genotypeSpecification) {
+        final PropertiesBoundaries boundaries = BoundaryIdentifier.run(constraints);
+
+        genotypeSpecification
+                .getProperties()
+                .stream()
+                .filter(s -> !boundaries.contains(s))
+                .forEach(s -> {
+                    boundaries.add(s, new PropertiesBoundaries.Boundaries(-Double.MAX_VALUE/2, Double.MAX_VALUE/2));
+                });
+
+        return boundaries;
     }
 }

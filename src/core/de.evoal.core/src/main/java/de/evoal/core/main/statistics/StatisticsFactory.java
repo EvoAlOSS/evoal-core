@@ -21,7 +21,7 @@ public class StatisticsFactory {
     @Produces
     @Dependent
     @Named("statistics")
-    public StatisticsWriter create(final @ConfigurationValue(entry = BlackboardEntry.EA_CONFIGURATION, access = "statistics") Instance instance) {
+    public StatisticsWriter create(final @ConfigurationValue(entry = BlackboardEntry.OPTIMISATION_CONFIGURATION, access = "statistics") Instance instance) {
         Requirements.requireSize(instance.getAttributes(), 1);
         final Array array = (Array)instance.getAttributes().get(0).getValue();
 

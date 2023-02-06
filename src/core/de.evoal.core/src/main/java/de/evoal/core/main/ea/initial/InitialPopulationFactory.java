@@ -5,7 +5,7 @@ import de.evoal.core.api.cdi.BeanFactory;
 import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.core.api.ea.initial.InitialPopulation;
 import de.evoal.languages.model.instance.Instance;
-import javax.enterprise.context.ApplicationScoped;
+
 import javax.enterprise.context.Dependent;
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
@@ -15,7 +15,7 @@ import javax.inject.Named;
 public class InitialPopulationFactory {
 
 	@Inject
-	@ConfigurationValue(entry = BlackboardEntry.EA_CONFIGURATION, access = "algorithm.initialization")
+	@ConfigurationValue(entry = BlackboardEntry.OPTIMISATION_CONFIGURATION, access = "algorithm.initialization")
 	private Instance initialization;
 
 	/**
@@ -23,7 +23,7 @@ public class InitialPopulationFactory {
 	 *
 	 * Blackboard slots used:
 	 * <ul>
-	 *   <li>{@link BlackboardEntry#EA_CONFIGURATION}.</li>
+	 *   <li>{@link BlackboardEntry#OPTIMISATION_CONFIGURATION}.</li>
 	 * </ul>
 	 */
 	@Produces @Dependent @Named("initial")

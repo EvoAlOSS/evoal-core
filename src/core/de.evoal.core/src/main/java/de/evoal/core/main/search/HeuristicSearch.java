@@ -12,14 +12,12 @@ import de.evoal.core.api.cdi.BlackboardValue;
 import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.core.api.ea.initial.InitialPopulation;
 import de.evoal.core.api.utils.LanguageHelper;
-import de.evoal.core.api.ea.codec.CustomCodec;
 import de.evoal.core.api.ea.fitness.comparator.FitnessValue;
 
 import de.evoal.core.api.statistics.StatisticsWriter;
 import de.evoal.core.main.ea.alterer.AltererFactory;
 import de.evoal.core.main.ea.codec.DynamicCodec;
 import de.evoal.core.main.ea.fitness.JeneticsFitnessFunction;
-import de.evoal.core.main.ea.initial.InitialPopulationFactory;
 import de.evoal.core.main.jenetics.ConstraintList;
 import de.evoal.languages.model.instance.Array;
 import de.evoal.languages.model.instance.Attribute;
@@ -29,7 +27,6 @@ import de.evoal.languages.model.ol.OptimisationModel;
 import io.jenetics.*;
 import io.jenetics.engine.*;
 import io.jenetics.stat.MinMax;
-import io.jenetics.util.Factory;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.enterprise.context.Dependent;
@@ -59,19 +56,19 @@ public class HeuristicSearch {
 	private String run;
 
 	@Inject
-	@ConfigurationValue(entry = BlackboardEntry.EA_CONFIGURATION, access = "algorithm.number_of_generations")
+	@ConfigurationValue(entry = BlackboardEntry.OPTIMISATION_CONFIGURATION, access = "algorithm.number_of_generations")
 	private int numberOfGenerations;
 
 	@Inject
-	@ConfigurationValue(entry = BlackboardEntry.EA_CONFIGURATION, access = "algorithm.size_of_population")
+	@ConfigurationValue(entry = BlackboardEntry.OPTIMISATION_CONFIGURATION, access = "algorithm.size_of_population")
 	private int sizeOfPopulation;
 
 	@Inject
-	@ConfigurationValue(entry = BlackboardEntry.EA_CONFIGURATION, access = "algorithm.maximize")
+	@ConfigurationValue(entry = BlackboardEntry.OPTIMISATION_CONFIGURATION, access = "algorithm.maximize")
 	private Boolean maximize;
 
 	@Inject
-	@ConfigurationValue(entry = BlackboardEntry.EA_CONFIGURATION, access = "algorithm.maximum_age")
+	@ConfigurationValue(entry = BlackboardEntry.OPTIMISATION_CONFIGURATION, access = "algorithm.maximum_age")
 	private int maximumAge;
 
 	private final Map<String, List<Alterer<?, FitnessValue>>> alterers = new HashMap<>();
@@ -137,7 +134,7 @@ public class HeuristicSearch {
 	}
 
 	private void setup() {
-		final OptimisationModel configuration = board.get(BlackboardEntry.EA_CONFIGURATION);
+		final OptimisationModel configuration = board.get(BlackboardEntry.OPTIMISATION_CONFIGURATION);
 
 		final de.evoal.languages.model.instance.Instance alterers = LanguageHelper.lookup(configuration.getInstance(), "algorithm.alterers");
 

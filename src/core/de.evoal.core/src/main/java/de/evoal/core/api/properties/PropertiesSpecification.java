@@ -49,6 +49,15 @@ public class PropertiesSpecification {
 			return this;
 		}
 
+		public Builder add(final Collection<PropertySpecification> data) {
+			data.stream()
+				.filter(s -> !properties.contains(s))
+				.peek(properties::add)
+				.forEach(orderedProperties::add);
+
+			return this;
+		}
+
 		public PropertiesSpecification build() {
 			return new PropertiesSpecification(orderedProperties);
 		}

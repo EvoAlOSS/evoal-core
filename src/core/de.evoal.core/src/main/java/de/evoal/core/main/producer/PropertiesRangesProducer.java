@@ -1,5 +1,6 @@
 package de.evoal.core.main.producer;
 
+import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.properties.PropertySpecification;
 import de.evoal.core.api.properties.info.PropertiesBoundaries;
 import de.evoal.core.api.properties.info.PropertiesRanges;

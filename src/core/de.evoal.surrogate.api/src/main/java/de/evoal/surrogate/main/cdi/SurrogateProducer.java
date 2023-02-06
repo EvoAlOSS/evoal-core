@@ -30,7 +30,6 @@ import javax.inject.Named;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -57,7 +56,7 @@ public class SurrogateProducer {
         this.configuration = loader.apply(file);
         
         final EObject mlConfiguration = board.get(SurrogateBlackboardEntry.SURROGATE_CONFIGURATION);
-        final EObject eaConfiguration = board.get(BlackboardEntry.EA_CONFIGURATION);
+        final EObject eaConfiguration = board.get(BlackboardEntry.OPTIMISATION_CONFIGURATION);
 
         final Map<String, PropertySpecification> specifications = new HashMap<>();
         addDataFrom(specifications, mlConfiguration);

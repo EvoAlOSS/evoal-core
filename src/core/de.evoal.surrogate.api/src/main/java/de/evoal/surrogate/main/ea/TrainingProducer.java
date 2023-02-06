@@ -21,7 +21,7 @@ public class TrainingProducer {
     @Produces
     @Dependent
     @Named("training")
-    public InitialPopulation create(@ConfigurationValue(entry = BlackboardEntry.EA_CONFIGURATION, access = "algorithm.initialization") Instance initialization) {
+    public InitialPopulation create(@ConfigurationValue(entry = BlackboardEntry.OPTIMISATION_CONFIGURATION, access = "algorithm.initialization") Instance initialization) {
         final TrainingInitialPopulation population = new TrainingInitialPopulation();
         BeanFactory.injectFields(population);
         population.init();

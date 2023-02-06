@@ -33,7 +33,7 @@ public class HeuristicSearchEvaluation implements MainClass {
     private WriterContext context;
 
     @Inject
-    @BlackboardValue(BlackboardEntry.EA_CONFIGURATION_FILE)
+    @BlackboardValue(BlackboardEntry.OPTIMISATION_CONFIGURATION_FILE)
     private String heuristicFile;
 
     @Inject

@@ -4,7 +4,6 @@ import de.evoal.core.api.board.BlackboardEntry;
 import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.core.api.ea.constraints.model.Constraint;
 import de.evoal.core.api.ea.constraints.model.Constraints;
-import de.evoal.core.api.ea.codec.CustomCodec;
 import de.evoal.core.api.ea.constraints.model.DataConstraints;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import javax.enterprise.context.ApplicationScoped;
@@ -12,7 +11,6 @@ import javax.enterprise.inject.Produces;
 import javax.inject.Named;
 
 import de.evoal.core.main.ea.constraints.el.ElHelper;
-import de.evoal.core.main.ea.fitness.JeneticsFitnessFunction;
 import de.evoal.languages.model.ddl.DataDescription;
 import de.evoal.languages.model.ddl.FunctionName;
 import de.evoal.languages.model.el.Call;
@@ -36,7 +34,7 @@ public class ConstraintProducer {
     @ApplicationScoped
     public Constraints create(final DataConstraints constraints,
                               @Named("genotype-specification") final PropertiesSpecification genoSpec,
-                              @ConfigurationValue(entry = BlackboardEntry.EA_CONFIGURATION, access = "algorithm.fitness") final Instance fitnessConfig) {
+                              @ConfigurationValue(entry = BlackboardEntry.OPTIMISATION_CONFIGURATION, access = "algorithm.fitness") final Instance fitnessConfig) {
         this.genoSpec = genoSpec;
         this.fitnessSpec = toInnerSpecification(fitnessConfig);
 

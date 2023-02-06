@@ -60,7 +60,7 @@ public class GenerationStatisticsWriter implements StatisticsWriter {
     @Inject
     private Provider<Function<Properties, Properties>> fitnessFactory;
 
-    @Inject @ConfigurationValue(entry = BlackboardEntry.EA_CONFIGURATION, access = "algorithm.fitness")
+    @Inject @ConfigurationValue(entry = BlackboardEntry.OPTIMISATION_CONFIGURATION, access = "algorithm.fitness")
     private Instance config;
 
     @Inject

@@ -14,7 +14,6 @@ import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.utils.LanguageHelper;
 import de.evoal.core.main.ea.constraints.constraint.utils.ConfigurationUtils;
 import de.evoal.languages.model.instance.*;
-import org.apache.deltaspike.core.api.provider.BeanProvider;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
@@ -28,7 +27,7 @@ import java.util.stream.Collectors;
 public class JeneticsConstraintProducer {
     @Produces
     public List<io.jenetics.engine.Constraint> create(
-            final @ConfigurationValue(entry = BlackboardEntry.EA_CONFIGURATION, access = "algorithm.handlers") Array handlerConfigurations,
+            final @ConfigurationValue(entry = BlackboardEntry.OPTIMISATION_CONFIGURATION, access = "algorithm.handlers") Array handlerConfigurations,
             final @Named("optimization-function-output") PropertiesSpecification optimizationSpec,
             final @Named("optimization-function")  FitnessFunction function,
             final CustomCodec codec,

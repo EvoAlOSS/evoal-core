@@ -20,7 +20,7 @@ public class RandomProducer {
     @Produces
     @Dependent
     @Named("random")
-    public InitialPopulation create(@ConfigurationValue(entry = BlackboardEntry.EA_CONFIGURATION, access = "algorithm.initialization") Instance initialization) {
+    public InitialPopulation create(@ConfigurationValue(entry = BlackboardEntry.OPTIMISATION_CONFIGURATION, access = "algorithm.initialization") Instance initialization) {
         final InitialPopulation population = new RandomInitialPopulation();
         BeanFactory.injectFields(population);
         population.init(initialization);

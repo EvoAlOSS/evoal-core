@@ -28,7 +28,7 @@ import java.util.stream.Collectors;
 public class MalusFunctionProducer {
     @ApplicationScoped @Produces
     public MalusForFitnessStrategy create(
-            final @ConfigurationValue(entry = BlackboardEntry.EA_CONFIGURATION, access = "algorithm.handlers") Array handlers,
+            final @ConfigurationValue(entry = BlackboardEntry.OPTIMISATION_CONFIGURATION, access = "algorithm.handlers") Array handlers,
             final @Named("optimization-function-input") PropertiesSpecification source,
             final @Named("optimization-function-output") PropertiesSpecification target,
             final @Named("output-dependencies") PropertiesDependencies dependencies,

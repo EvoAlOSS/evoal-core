@@ -25,23 +25,23 @@ import java.io.File;
 
 @ApplicationScoped
 @Slf4j
-public class EvolutionaryAlgorithmModelLoader {
+public class OptimisationModelLoader {
     @Inject
     private Blackboard board;
     private OptimisationModel model;
 
     public void load(final @Observes BlackboardEntry entry) {
-        if(!entry.isSame(BlackboardEntry.EA_CONFIGURATION_FILE)) {
+        if(!entry.isSame(BlackboardEntry.OPTIMISATION_CONFIGURATION_FILE)) {
             return;
         }
 
-        final String configurationFileName = board.get(BlackboardEntry.EA_CONFIGURATION_FILE);
-        log.info("Loading evolutionary algorithm configuration from {}.",  configurationFileName);
+        final String configurationFileName = board.get(BlackboardEntry.OPTIMISATION_CONFIGURATION_FILE);
+        log.info("Loading optimisation configuration from {}.",  configurationFileName);
 
         final File configurationFile = new File(configurationFileName);
         if(!configurationFile.exists() || ! configurationFile.canRead()) {
-            log.error("Unable to read evolutionary algorithm configuration file '{}'", configurationFileName);
-            throw new IllegalArgumentException("Unable to read evolutionary algorithm configuration file: " + configurationFileName);
+            log.error("Unable to read optimisation configuration file '{}'", configurationFileName);
+            throw new IllegalArgumentException("Unable to read optimisation configuration file: " + configurationFileName);
         }
 
         initializeEMF();
@@ -55,10 +55,10 @@ public class EvolutionaryAlgorithmModelLoader {
         resourceSet.addLoadOption(XtextResource.OPTION_ENCODING, "UTF-8");
 
         try {
-            log.info("Continue by loading the EAL file.");
+            log.info("Continue by loading the OL file.");
             final URI modelURI = URI.createFileURI(configurationFile.getAbsolutePath());
 
-            log.info("Loading ea model from URI {}.", modelURI);
+            log.info("Loading ol model from URI {}.", modelURI);
 
             final Resource resource = resourceSet.getResource(modelURI, true);
             resource.load(resourceSet.getLoadOptions());
@@ -81,9 +81,9 @@ public class EvolutionaryAlgorithmModelLoader {
             }
 
             model = (OptimisationModel) resource.getContents().get(0);
-            board.bind(BlackboardEntry.EA_CONFIGURATION, model);
+            board.bind(BlackboardEntry.OPTIMISATION_CONFIGURATION, model);
         } catch (final Exception e) {
-            log.error("Unable to evolutionary algorithm configuration file '{}'.", configurationFile, e);
+            log.error("Unable to load optimisation configuration file '{}'.", configurationFile, e);
          }
     }
 

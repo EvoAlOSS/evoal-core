@@ -15,7 +15,7 @@ import java.util.Map;
 @ApplicationScoped
 public class BlackboardValueProducer {
     @Produces
-    @BlackboardValue(BlackboardEntry.EA_CONFIGURATION)
+    @BlackboardValue(BlackboardEntry.OPTIMISATION_CONFIGURATION)
     public Integer injectIntegerValue(final InjectionPoint ip, final Blackboard board) {
         final BlackboardValue value = ip.getAnnotated().getAnnotation(BlackboardValue.class);
         final Object result = board.get(value.value());
@@ -30,7 +30,7 @@ public class BlackboardValueProducer {
     }
 
     @Produces
-    @BlackboardValue(BlackboardEntry.EA_CONFIGURATION)
+    @BlackboardValue(BlackboardEntry.OPTIMISATION_CONFIGURATION)
     public String injectStringValue(final InjectionPoint ip, final Blackboard board) {
         final BlackboardValue value = ip.getAnnotated().getAnnotation(BlackboardValue.class);
         final Object result = board.get(value.value());
@@ -39,7 +39,7 @@ public class BlackboardValueProducer {
     }
 
     @Produces
-    @BlackboardValue(BlackboardEntry.EA_CONFIGURATION)
+    @BlackboardValue(BlackboardEntry.OPTIMISATION_CONFIGURATION)
     public File injectFileValue(final InjectionPoint ip, final Blackboard board) {
         final BlackboardValue value = ip.getAnnotated().getAnnotation(BlackboardValue.class);
         final Object result = board.get(value.value());
@@ -47,7 +47,7 @@ public class BlackboardValueProducer {
     }
 
     @Produces
-    @BlackboardValue(BlackboardEntry.EA_CONFIGURATION)
+    @BlackboardValue(BlackboardEntry.OPTIMISATION_CONFIGURATION)
     public Map<String, Object> injectMapValue(final InjectionPoint ip, final Blackboard board) {
         final BlackboardValue value = ip.getAnnotated().getAnnotation(BlackboardValue.class);
 
@@ -55,7 +55,7 @@ public class BlackboardValueProducer {
     }
 
     @Produces
-    @BlackboardValue(BlackboardEntry.EA_CONFIGURATION)
+    @BlackboardValue(BlackboardEntry.OPTIMISATION_CONFIGURATION)
     public PropertiesSpecification injectPropertiesSpecification(final InjectionPoint ip, final Blackboard board) {
         final BlackboardValue value = ip.getAnnotated().getAnnotation(BlackboardValue.class);
 
@@ -63,7 +63,7 @@ public class BlackboardValueProducer {
     }
 
     @Produces
-    @BlackboardValue(BlackboardEntry.EA_CONFIGURATION)
+    @BlackboardValue(BlackboardEntry.OPTIMISATION_CONFIGURATION)
     public Properties injectProperties(final InjectionPoint ip, final Blackboard board) {
         final BlackboardValue value = ip.getAnnotated().getAnnotation(BlackboardValue.class);
 

@@ -5,7 +5,6 @@ import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.core.api.utils.LanguageHelper;
 import de.evoal.languages.model.instance.Instance;
 import io.jenetics.*;
-import io.jenetics.util.Seq;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
@@ -17,15 +16,15 @@ public class SelectorFactory {
 	@Produces
 	@Named("survivor")
 	public Selector createSurvivorSelector(
-			@ConfigurationValue(entry = BlackboardEntry.EA_CONFIGURATION, access = "algorithm.selectors.survivor.name") final String name,
-			@ConfigurationValue(entry = BlackboardEntry.EA_CONFIGURATION, access = "algorithm.selectors.survivor") Instance config) {
+			@ConfigurationValue(entry = BlackboardEntry.OPTIMISATION_CONFIGURATION, access = "algorithm.selectors.survivor.name") final String name,
+			@ConfigurationValue(entry = BlackboardEntry.OPTIMISATION_CONFIGURATION, access = "algorithm.selectors.survivor") Instance config) {
 		return create(name, config);
 	}
 
 	@Produces @Named("offspring")
 	public Selector createOffspringSelector(
-			@ConfigurationValue(entry = BlackboardEntry.EA_CONFIGURATION, access = "algorithm.selectors.offspring.name") final String name,
-			@ConfigurationValue(entry = BlackboardEntry.EA_CONFIGURATION, access = "algorithm.selectors.offspring") Instance config) {
+			@ConfigurationValue(entry = BlackboardEntry.OPTIMISATION_CONFIGURATION, access = "algorithm.selectors.offspring.name") final String name,
+			@ConfigurationValue(entry = BlackboardEntry.OPTIMISATION_CONFIGURATION, access = "algorithm.selectors.offspring") Instance config) {
 		return create(name, config);
 	}
 

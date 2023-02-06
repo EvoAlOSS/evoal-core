@@ -27,7 +27,7 @@ public class OptimizingFunctionProducer {
     @Produces
     @ApplicationScoped
     @Named("optimization-function-configuration")
-    public Instance find(final @ConfigurationValue(entry = BlackboardEntry.EA_CONFIGURATION, access = "algorithm.fitness") Instance fitnessConfiguration) {
+    public Instance find(final @ConfigurationValue(entry = BlackboardEntry.OPTIMISATION_CONFIGURATION, access = "algorithm.fitness") Instance fitnessConfiguration) {
         return findInner(fitnessConfiguration);
     }
 
