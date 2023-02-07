@@ -7,7 +7,7 @@
 			class="de.evoal.languages.model.ol.dsl.ui.OptimisationLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
 			contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
 			default="true"
-			extensions="eal"
+			extensions="ol"
 			id="de.evoal.languages.model.ol.dsl.OptimisationLanguage"
 			name="OptimisationLanguage Editor">
 		</editor>
@@ -207,7 +207,7 @@
 	<extension point="org.eclipse.core.contenttype.contentTypes">
 		<content-type
 			base-type="org.eclipse.core.runtime.text"
-			file-extensions="eal"
+			file-extensions="ol"
 			id="de.evoal.languages.model.ol.dsl.OptimisationLanguage.contenttype"
 			name="OptimisationLanguage File"
 			priority="normal">
@@ -218,13 +218,13 @@
 		point="org.eclipse.emf.ecore.extension_parser">
 		<parser
 			class="de.evoal.languages.model.ol.dsl.ui.OptimisationLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
-			type="eal">
+			type="ol">
 		</parser>
 	</extension>
 	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
 		<resourceServiceProvider
 			class="de.evoal.languages.model.ol.dsl.ui.OptimisationLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
-			uriExtension="eal">
+			uriExtension="ol">
 		</resourceServiceProvider>
 	</extension>
 	<!-- marker definitions for de.evoal.languages.model.ol.dsl.OptimisationLanguage -->
@@ -261,7 +261,7 @@
 	<extension point="org.eclipse.xtext.builder.participant">
 		<participant
 			class="de.evoal.languages.model.ol.dsl.ui.OptimisationLanguageExecutableExtensionFactory:org.eclipse.xtext.builder.IXtextBuilderParticipant"
-			fileExtensions="eal"/>
+			fileExtensions="ol"/>
 	</extension>
 	<extension point="org.eclipse.ui.preferencePages">
 		<page
@@ -404,7 +404,7 @@
 	<extension point="org.eclipse.compare.contentViewers">
 		<viewer id="de.evoal.languages.model.ol.dsl.OptimisationLanguage.compare.contentViewers"
 			class="de.evoal.languages.model.ol.dsl.ui.OptimisationLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
-			extensions="eal">
+			extensions="ol">
 		</viewer>
 		<contentTypeBinding
 			contentTypeId="de.evoal.languages.model.ol.dsl.OptimisationLanguage.contenttype"
@@ -413,7 +413,7 @@
 	<extension point="org.eclipse.compare.contentMergeViewers">
 		<viewer id="de.evoal.languages.model.ol.dsl.OptimisationLanguage.compare.contentMergeViewers"
 			class="de.evoal.languages.model.ol.dsl.ui.OptimisationLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
-			extensions="eal" label="OptimisationLanguage Compare">
+			extensions="ol" label="OptimisationLanguage Compare">
 		</viewer>
 		<contentTypeBinding
 			contentTypeId="de.evoal.languages.model.ol.dsl.OptimisationLanguage.contenttype"
@@ -422,12 +422,12 @@
 	<extension point="org.eclipse.ui.editors.documentProviders">
 		<provider id="de.evoal.languages.model.ol.dsl.OptimisationLanguage.editors.documentProviders"
 			class="de.evoal.languages.model.ol.dsl.ui.OptimisationLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.model.XtextDocumentProvider"
-			extensions="eal">
+			extensions="ol">
 		</provider>
 	</extension>
 	<extension point="org.eclipse.team.core.fileTypes">
 		<fileTypes
-			extension="eal"
+			extension="ol"
 			type="text">
 		</fileTypes>
 	</extension>
