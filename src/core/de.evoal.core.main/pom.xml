@@ -11,8 +11,8 @@
 		<relativePath>../de.evoal.releng.parent</relativePath>
 	</parent>
 
-	<artifactId>core</artifactId>
-	<name>EvoAl - Core</name>
+	<artifactId>core.main</artifactId>
+	<name>EvoAl - Core - Main</name>
 
 	<properties>
 		<javax.activation.version>1.2.0</javax.activation.version>
@@ -324,13 +324,13 @@
 					</annotationProcessorPaths>
 					<compilerArgs>
 						<arg>--add-exports</arg>
-						<arg>io.jenetics.base/io.jenetics.internal.math=de.evoal.core</arg>
+						<arg>io.jenetics.base/io.jenetics.internal.math=de.evoal.core.main</arg>
 						<arg>--add-exports</arg>
-						<arg>io.jenetics.base/io.jenetics.internal.util=de.evoal.core</arg>
+						<arg>io.jenetics.base/io.jenetics.internal.util=de.evoal.core.main</arg>
 						<arg>--add-exports</arg>
-						<arg>io.jenetics.base/io.jenetics.internal.collection=de.evoal.core</arg>
+						<arg>io.jenetics.base/io.jenetics.internal.collection=de.evoal.core.main</arg>
 						<arg>--add-exports</arg>
-						<arg>org.eclipse.xtext.util/org.eclipse.xtext.util=de.evoal.core</arg>
+						<arg>org.eclipse.xtext.util/org.eclipse.xtext.util=de.evoal.core.main</arg>
 					</compilerArgs>
 					<forceJavacCompilerUse>true</forceJavacCompilerUse>
 				</configuration>

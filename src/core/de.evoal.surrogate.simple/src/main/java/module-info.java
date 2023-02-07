@@ -4,7 +4,7 @@ module de.evoal.surrogate.simple {
     requires lombok;
     requires org.slf4j;
 
-    requires de.evoal.core;
+    requires de.evoal.core.main;
     requires de.evoal.surrogate.api;
     requires jakarta.inject.api;
 }

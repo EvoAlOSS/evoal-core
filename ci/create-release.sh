@@ -7,7 +7,7 @@ RELEASE_PLUGINS="generator.main surrogate.api surrogate.simple surrogate.svr app
 mkdir -p evoal/plugins
 
 cp src/languages/de.evoal.languages.releng.site/target/de.evoal.languages.releng.site-*.zip "evoal/eclipse-update-site.zip"
-cp -r src/core/de.evoal.core/target/core evoal/modules
+cp -r src/core/de.evoal.core.main/target/core.main evoal/modules
 
 for NAME in $RELEASE_PLUGINS; do
     echo "Copying plugin $NAME"
@@ -40,7 +40,7 @@ rm -rf xtext-merge
 # let's copy the scripts to the correct location
 mkdir bin
 
-cp -r ../src/core/de.evoal.core/scripts/* "bin"
+cp -r ../src/core/de.evoal.core.main/scripts/* "bin"
 for NAME in $RELEASE_PLUGINS; do
     echo "Copying scripts of plugin $NAME"
 

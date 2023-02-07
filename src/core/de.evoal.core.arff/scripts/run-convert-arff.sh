@@ -10,11 +10,7 @@ fi
 cd $1
 
 set -x
-java -Dorg.jboss.logging.provider=slf4j\
-     --module-path "${EVOALPATH}/modules/:$PLUGIN_PATHS" \
-     --add-modules ALL-MODULE-PATH \
-     --add-opens java.base/java.lang=guice \
-     -m de.evoal.core/de.evoal.core.main.Evoal \
+java $CLASSPATH \
      -Bcore:main=convert-arff-to-json \
      -Barff:input=$2 \
      -Barff:ddl-specification=$3 \

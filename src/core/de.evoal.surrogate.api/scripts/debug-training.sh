@@ -10,11 +10,7 @@ fi
 cd $1
 
 set -x
-java -Dorg.jboss.logging.provider=slf4j\
-     -agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=1044\
-     --module-path "${EVOALPATH}/modules/:$PLUGIN_PATHS" \
-     --add-modules ALL-MODULE-PATH \
-     --add-opens java.base/java.lang=guice \
-     -m de.evoal.core/de.evoal.core.main.Evoal \
+java -agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=1044\
+     $CLASSPATH \
      -Bcore:main=surrogate-training \
      "-Bsurrogate:configuration-file=$2"

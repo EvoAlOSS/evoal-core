@@ -8,7 +8,7 @@ module de.evoal.approximative.density {
 
     requires de.evoal.languages.model.instance;
 
-    requires de.evoal.core;
+    requires de.evoal.core.main;
     requires de.evoal.surrogate.api;
 
     requires smile.math;

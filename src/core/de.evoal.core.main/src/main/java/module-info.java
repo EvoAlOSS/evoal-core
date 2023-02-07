@@ -1,4 +1,4 @@
-module de.evoal.core {
+module de.evoal.core.main {
     requires java.base;
     requires java.annotation;
 
@@ -98,5 +98,4 @@ module de.evoal.core {
     opens de.evoal.core.api.ea.constraints.strategies to weld.core.impl;
     opens de.evoal.core.main.properties to weld.core.impl;
     opens de.evoal.core.main.ea.search to weld.core.impl;
-
 }

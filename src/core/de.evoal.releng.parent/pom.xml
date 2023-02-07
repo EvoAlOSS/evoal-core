@@ -26,7 +26,7 @@
     </properties>
 
     <modules>
-        <module>../de.evoal.core</module>
+        <module>../de.evoal.core.main</module>
         <module>../de.evoal.core.plugin</module>
 
         <module>../de.evoal.core.arff</module>

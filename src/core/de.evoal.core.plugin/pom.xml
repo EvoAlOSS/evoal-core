@@ -177,7 +177,7 @@
 		<!-- Dependency to EvoAl core -->
 		<dependency>
 			<groupId>de.evoal</groupId>
-			<artifactId>core</artifactId>
+			<artifactId>core.main</artifactId>
 			<version>${evoal.version}</version>
 			<scope>provided</scope>
 		</dependency>

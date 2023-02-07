@@ -23,7 +23,7 @@ module de.evoal.generator.main {
     requires de.evoal.languages.model.el.dsl;
     requires de.evoal.languages.model.generator.dsl;
 
-    requires de.evoal.core;
+    requires de.evoal.core.main;
     requires commons.math3;
 
     opens de.evoal.generator.main;
