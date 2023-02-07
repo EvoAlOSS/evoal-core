@@ -33,4 +33,5 @@ module de.evoal.generator.main {
     opens de.evoal.generator.main.generators;
 
     exports de.evoal.generator.api;
+    opens de.evoal.generator.api to weld.core.impl;
 }

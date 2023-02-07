@@ -1,13 +1,15 @@
 package de.evoal.core.arff.main;
 
+import de.evoal.core.api.cdi.Application;
 import de.evoal.core.api.cdi.BlackboardValue;
 import de.evoal.core.api.cdi.MainClass;
-import de.evoal.core.arff.cdi.ArffBlackboardEntry;
+import de.evoal.core.arff.cdi.ArffBlackboardEntries;
 import lombok.extern.slf4j.Slf4j;
 import weka.core.Attribute;
 import weka.core.Instances;
 import weka.core.converters.ConverterUtils;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -15,16 +17,19 @@ import java.io.*;
 import java.util.Enumeration;
 
 @Slf4j
-@Dependent
-@Named("extract-data-definition-from-arff")
+@ApplicationScoped
+@Application(
+        name = "extract-data-definition-from-arff",
+        documentation = "Application to automatically create a data definition file (output) based on an arff file (input)."
+)
 public class ExtractDataDefinition implements MainClass {
 
     @Inject
-    @BlackboardValue(ArffBlackboardEntry.ARFF_INPUT)
+    @BlackboardValue(ArffBlackboardEntries.ARFF_INPUT)
     private String arffFile;
 
     @Inject
-    @BlackboardValue(ArffBlackboardEntry.OUTPUT_FILE)
+    @BlackboardValue(ArffBlackboardEntries.OUTPUT_FILE)
     private File ddlFile;
 
     @Override

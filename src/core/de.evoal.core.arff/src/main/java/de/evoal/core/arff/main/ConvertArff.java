@@ -1,13 +1,14 @@
 package de.evoal.core.arff.main;
 
 import com.google.inject.Injector;
+import de.evoal.core.api.cdi.Application;
 import de.evoal.core.api.cdi.BlackboardValue;
 import de.evoal.core.api.cdi.MainClass;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.properties.io.PropertiesIOFactory;
 import de.evoal.core.api.properties.io.PropertiesReader;
 import de.evoal.core.api.properties.io.PropertiesWriter;
-import de.evoal.core.arff.cdi.ArffBlackboardEntry;
+import de.evoal.core.arff.cdi.ArffBlackboardEntries;
 import de.evoal.languages.model.ddl.DataDescriptionModel;
 import de.evoal.languages.model.ddl.dsl.DataDescriptionLanguageStandaloneSetup;
 import de.evoal.languages.model.ddl.impl.DdlPackageImpl;
@@ -16,28 +17,34 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
-import weka.Run;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.File;
 
 @Slf4j
-@Dependent
-@Named("convert-arff-to-json")
+@ApplicationScoped
+@Application(
+        name = "convert-arff-to-json",
+        documentation = """
+Application to extract specific data (specified in a ddl file) from an arff
+file (input) and store it in an output file (output).
+"""
+)
 public class ConvertArff implements MainClass {
 
     @Inject
-    @BlackboardValue(ArffBlackboardEntry.ARFF_INPUT)
+    @BlackboardValue(ArffBlackboardEntries.ARFF_INPUT)
     private File arffFile;
 
     @Inject
-    @BlackboardValue(ArffBlackboardEntry.DDL_SPECIFICATION)
+    @BlackboardValue(ArffBlackboardEntries.DDL_SPECIFICATION)
     private File ddlFile;
 
     @Inject
-    @BlackboardValue(ArffBlackboardEntry.OUTPUT_FILE)
+    @BlackboardValue(ArffBlackboardEntries.OUTPUT_FILE)
     private File jsonFile;
 
     @Override

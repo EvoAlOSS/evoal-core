@@ -1,5 +1,6 @@
 package de.evoal.surrogate.main;
 
+import de.evoal.core.api.cdi.Application;
 import de.evoal.core.api.cdi.BeanFactory;
 import de.evoal.core.api.cdi.BlackboardValue;
 import de.evoal.core.api.cdi.MainClass;
@@ -19,8 +20,13 @@ import lombok.extern.slf4j.Slf4j;
  *   recalculating them.
  */
 @Slf4j
-@Named("surrogate-training")
 @ApplicationScoped
+@Application(
+        name = "surrogate-training",
+        documentation = """
+Application for training a surrogate function based on a given MLL file.
+"""
+)
 public class SurrogateMain implements MainClass {
 
     @Inject

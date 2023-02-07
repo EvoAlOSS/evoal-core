@@ -1,6 +1,5 @@
 package de.evoal.core.api.cdi;
 
-import de.evoal.core.api.ea.initial.InitialPopulation;
 import de.evoal.core.api.utils.Requirements;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.deltaspike.core.api.provider.BeanProvider;

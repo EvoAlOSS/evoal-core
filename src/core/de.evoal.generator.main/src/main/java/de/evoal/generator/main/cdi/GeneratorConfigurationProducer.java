@@ -5,7 +5,7 @@ import com.google.inject.Injector;
 import de.evoal.core.api.board.Blackboard;
 import de.evoal.core.api.board.BlackboardEntry;
 import de.evoal.core.api.cdi.BlackboardValue;
-import de.evoal.generator.api.GeneratorBlackboardEntry;
+import de.evoal.generator.api.GeneratorBlackboardEntries;
 import de.evoal.languages.model.ddl.dsl.DataDescriptionLanguageStandaloneSetup;
 import de.evoal.languages.model.ddl.impl.DdlPackageImpl;
 import de.evoal.languages.model.dl.dsl.DefinitionLanguageStandaloneSetup;
@@ -33,7 +33,7 @@ import org.eclipse.xtext.resource.XtextResourceSet;
 @Slf4j
 public class GeneratorConfigurationProducer {
     public void loadModel(final @Observes BlackboardEntry value, final Blackboard board) {
-        if(!value.isSame(GeneratorBlackboardEntry.GENERATOR_CONFIGURATION_FILE)) {
+        if(!value.isSame(GeneratorBlackboardEntries.GENERATOR_CONFIGURATION_FILE)) {
             return;
         }
 
@@ -56,7 +56,7 @@ public class GeneratorConfigurationProducer {
         }
 
         final Configuration configuration = read(file).get();
-        board.bind(GeneratorBlackboardEntry.GENERATOR_CONFIGURATION, configuration);
+        board.bind(GeneratorBlackboardEntries.GENERATOR_CONFIGURATION, configuration);
     }
 
     /**
@@ -113,7 +113,7 @@ public class GeneratorConfigurationProducer {
     }
 
     @Produces
-    @BlackboardValue(GeneratorBlackboardEntry.GENERATOR_CONFIGURATION)
+    @BlackboardValue(GeneratorBlackboardEntries.GENERATOR_CONFIGURATION)
     public Configuration injectIntegerValue(final InjectionPoint ip, final Blackboard board) {
         final BlackboardValue value = ip.getAnnotated().getAnnotation(BlackboardValue.class);
         final Object result = board.get(value.value());

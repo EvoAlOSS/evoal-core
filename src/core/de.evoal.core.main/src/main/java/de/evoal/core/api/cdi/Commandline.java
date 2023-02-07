@@ -15,7 +15,7 @@ public @interface Commandline {
     /**
      * @return The application that accept this parameter.
      */
-    public @Nonbinding String main();
+    public @Nonbinding String [] main();
 
     /**
      * @return Parameter name.

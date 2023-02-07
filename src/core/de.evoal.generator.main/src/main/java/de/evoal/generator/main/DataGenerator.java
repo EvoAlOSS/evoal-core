@@ -1,8 +1,6 @@
 package de.evoal.generator.main;
 
-import java.io.*;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -10,6 +8,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import de.evoal.core.api.cdi.Application;
 import de.evoal.core.api.cdi.BlackboardValue;
 import de.evoal.core.api.cdi.MainClass;
 import de.evoal.core.api.utils.InitializationException;
@@ -26,6 +25,12 @@ import org.slf4j.LoggerFactory;
  * Main class for EvoAl's data generator.
  */
 @ApplicationScoped
+@Application(
+		name = "data-generator",
+		documentation = """
+Application for generating benchmark data based on a generator file.
+"""
+)
 @Named("data-generator")
 public class DataGenerator implements MainClass {
 
@@ -35,7 +40,7 @@ public class DataGenerator implements MainClass {
 	private final static Logger log = LoggerFactory.getLogger(DataGenerator.class);
 
 	@Inject
-	@BlackboardValue(GeneratorBlackboardEntry.GENERATOR_CONFIGURATION)
+	@BlackboardValue(GeneratorBlackboardEntries.GENERATOR_CONFIGURATION)
 	private Configuration configuration;
 
 	@Inject

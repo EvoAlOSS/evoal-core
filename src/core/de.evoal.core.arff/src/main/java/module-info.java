@@ -17,4 +17,5 @@ module de.evoal.core.arff {
 
     opens de.evoal.core.arff.io to weld.core.impl;
     opens de.evoal.core.arff.main to weld.core.impl;
+    opens de.evoal.core.arff.cdi to weld.core.impl;
 }

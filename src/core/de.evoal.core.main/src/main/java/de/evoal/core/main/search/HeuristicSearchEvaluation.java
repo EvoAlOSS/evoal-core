@@ -25,13 +25,15 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Slf4j
-@Application("""
+@Application(
+        name = "heuristic-search-evaluation",
+documentation = """
 Evaluates a heuristic search using multiple targets.
 
 Each target is searched for 'core:evaluation-iterations' times to allow a
 proper empirical evaluation. 
-""")
-@Named("heuristic-search-evaluation")
+"""
+)
 @ApplicationScoped
 public class HeuristicSearchEvaluation implements MainClass {
     @Inject

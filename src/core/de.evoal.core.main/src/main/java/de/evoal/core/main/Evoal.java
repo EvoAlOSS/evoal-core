@@ -13,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.deltaspike.cdise.api.CdiContainer;
 import org.apache.deltaspike.cdise.api.CdiContainerLoader;
 import org.apache.deltaspike.core.api.provider.BeanProvider;
+import org.apache.deltaspike.core.util.metadata.AnnotationInstanceProvider;
 
 import java.lang.reflect.Field;
 import java.util.*;
@@ -44,7 +45,8 @@ public final class Evoal {
                 MainClass main = null;
 
                 try {
-                    main = BeanProvider.getContextualReference(mainName, false, MainClass.class);
+                    final Application annotation = AnnotationInstanceProvider.of(Application.class, Map.of("name", mainName));
+                    main = BeanProvider.getContextualReference(MainClass.class, annotation);
                 } catch (final Throwable e) {
                     logMainError(e);
                     System.exit(1);
@@ -83,9 +85,13 @@ public final class Evoal {
 
                 final Commandline annotation = field.getAnnotation(Commandline.class);
 
-                parameters.putIfAbsent(annotation.main(), new LinkedList<>());
-                final List<Commandline> annotations = parameters.get(annotation.main());
-                annotations.add(annotation);
+                for(final String main : annotation.main()) {
+                    parameters.putIfAbsent(main, new LinkedList<>());
+
+                    final List<Commandline> annotations = parameters.get(main);
+                    annotations.add(annotation);
+
+                }
             }
         }
 
@@ -93,12 +99,11 @@ public final class Evoal {
         for(final Bean<MainClass> bean : beans) {
             System.out.println();
             System.out.println("--------------------------------------------------------------------------------");
-            System.out.println("  -Bcore:main=" + bean.getName());
-            if(bean.getBeanClass().isAnnotationPresent(Application.class)) {
-                printIntended(4, bean.getBeanClass().getAnnotation(Application.class).value());
-            }
+            final Application app = bean.getBeanClass().getAnnotation(Application.class);
+            System.out.println("  -Bcore:main=" + app.name());
+            printIntended(4, app.documentation());
 
-            final List<Commandline> annotations = parameters.getOrDefault(bean.getName(), new LinkedList<>());
+            final List<Commandline> annotations = parameters.getOrDefault(app.name(), new LinkedList<>());
             for(final Commandline annotation : annotations) {
                 System.out.println();
                 System.out.println("    -B" + annotation.name() + "=");
@@ -132,7 +137,7 @@ public final class Evoal {
         log.error("  possible names are:");
 
         for(final Bean<MainClass> bean : beans) {
-            log.error("    {}", bean.getName());
+            log.error("    {}", bean.getBeanClass().getAnnotation(Application.class).name());
         }
     }
 }

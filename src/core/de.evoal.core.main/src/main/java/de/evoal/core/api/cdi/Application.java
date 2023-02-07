@@ -13,7 +13,12 @@ import java.lang.annotation.*;
 @Target({ElementType.TYPE})
 public @interface Application {
     /**
+     * @return Name of the application.
+     */
+    public String name();
+
+    /**
      * @return The documentation.
      */
-    public @Nonbinding String value();
+    public @Nonbinding String documentation();
 }

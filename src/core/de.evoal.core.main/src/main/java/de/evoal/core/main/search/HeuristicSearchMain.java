@@ -20,11 +20,12 @@ import javax.inject.Named;
 import java.io.File;
 import java.util.stream.Stream;
 
-@Application("""
+@Application(
+		name = "heuristic-search",
+		documentation = """
 This application starts a heuristic search for an optimal solution based on a
 problem specification.
 """)
-@Named("heuristic-search")
 @ApplicationScoped
 public class HeuristicSearchMain implements MainClass {
 	@Inject
