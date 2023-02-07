@@ -1,6 +1,6 @@
 package de.evoal.core.main.ea.fitness;
 
-import de.evoal.core.api.board.BlackboardEntry;
+import de.evoal.core.api.board.CoreBlackboardEntries;
 import de.evoal.core.api.cdi.ConfigurationValue;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -27,12 +27,12 @@ public class FitnessFactory {
 	 * Creates a fitness function based on the heuristic configuration.<br/>
 	 * Blackboard slots used:
 	 * <ul>
-	 *   <li>{@link BlackboardEntry#OPTIMISATION_CONFIGURATION}.</li>
+	 *   <li>{@link CoreBlackboardEntries#OPTIMISATION_CONFIGURATION}.</li>
 	 * </ul>
 	 */
 	@Produces @Dependent
-	public JeneticsFitnessFunction create(final @ConfigurationValue(entry = BlackboardEntry.OPTIMISATION_CONFIGURATION, access = "algorithm.fitness") Instance fitnessConfig,
-										  final @ConfigurationValue(entry = BlackboardEntry.OPTIMISATION_CONFIGURATION, access = "algorithm.comparator") Instance comparatorConfig) {
+	public JeneticsFitnessFunction create(final @ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.fitness") Instance fitnessConfig,
+										  final @ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.comparator") Instance comparatorConfig) {
 		final String fitnessName = fitnessConfig.getName().getName();
 		final String comparatorName = comparatorConfig.getName().getName();
 

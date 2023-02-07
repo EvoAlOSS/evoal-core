@@ -1,6 +1,6 @@
 package de.evoal.surrogate.main.ea;
 
-import de.evoal.core.api.board.BlackboardEntry;
+import de.evoal.core.api.board.CoreBlackboardEntries;
 import de.evoal.core.api.cdi.BeanFactory;
 import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.core.api.ea.initial.InitialPopulation;
@@ -21,7 +21,7 @@ public class TrainingProducer {
     @Produces
     @Dependent
     @Named("training")
-    public InitialPopulation create(@ConfigurationValue(entry = BlackboardEntry.OPTIMISATION_CONFIGURATION, access = "algorithm.initialization") Instance initialization) {
+    public InitialPopulation create(@ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.initialization") Instance initialization) {
         final TrainingInitialPopulation population = new TrainingInitialPopulation();
         BeanFactory.injectFields(population);
         population.init();

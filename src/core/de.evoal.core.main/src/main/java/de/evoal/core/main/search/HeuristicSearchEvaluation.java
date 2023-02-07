@@ -1,6 +1,7 @@
 package de.evoal.core.main.search;
 
-import de.evoal.core.api.board.BlackboardEntry;
+import de.evoal.core.api.board.CoreBlackboardEntries;
+import de.evoal.core.api.cdi.Application;
 import de.evoal.core.api.cdi.BeanFactory;
 import de.evoal.core.api.cdi.BlackboardValue;
 import de.evoal.core.api.cdi.MainClass;
@@ -24,7 +25,13 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Slf4j
-@Named("evaluation")
+@Application("""
+Evaluates a heuristic search using multiple targets.
+
+Each target is searched for 'core:evaluation-iterations' times to allow a
+proper empirical evaluation. 
+""")
+@Named("heuristic-search-evaluation")
 @ApplicationScoped
 public class HeuristicSearchEvaluation implements MainClass {
     @Inject
@@ -34,11 +41,11 @@ public class HeuristicSearchEvaluation implements MainClass {
     private WriterContext context;
 
     @Inject
-    @BlackboardValue(BlackboardEntry.OPTIMISATION_CONFIGURATION_FILE)
+    @BlackboardValue(CoreBlackboardEntries.OPTIMISATION_CONFIGURATION_FILE)
     private String heuristicFile;
 
     @Inject
-    @BlackboardValue(BlackboardEntry.EVALUATION_ITERATIONS)
+    @BlackboardValue(CoreBlackboardEntries.EVALUATION_ITERATIONS)
     private int iterations;
 
     private File outputBaseDir;
@@ -46,7 +53,7 @@ public class HeuristicSearchEvaluation implements MainClass {
     private List<Pair<Properties, Properties>> targets;
 
     @Inject
-    @BlackboardValue(BlackboardEntry.TARGET_POINTS_FILE)
+    @BlackboardValue(CoreBlackboardEntries.TARGET_POINTS_FILE)
     private String targetFile;
 
     @Inject
@@ -64,7 +71,7 @@ public class HeuristicSearchEvaluation implements MainClass {
         log.info("  running {} iterations.", iterations);
 
         /* prepare output directory */
-        this.outputBaseDir = new File(board.<String>get(BlackboardEntry.EVALUATION_OUTPUT_FOLDER));
+        this.outputBaseDir = new File(board.<String>get(CoreBlackboardEntries.EVALUATION_OUTPUT_FOLDER));
 
         targets = targetStream.collect(Collectors.toList());
 
@@ -93,15 +100,15 @@ public class HeuristicSearchEvaluation implements MainClass {
         context.bindColumn(targetColumn, targetIndex);
 
 //        board.bind(BlackboardEntry.TARGET_PROPERTIES_SOURCE, target.getFirst());
-        board.bind(BlackboardEntry.TARGET_PROPERTIES, target.getSecond());
-        board.bind(BlackboardEntry.EVALUATION_OUTPUT_FOLDER, outputBaseDir);
+        board.bind(CoreBlackboardEntries.TARGET_PROPERTIES, target.getSecond());
+        board.bind(CoreBlackboardEntries.EVALUATION_OUTPUT_FOLDER, outputBaseDir);
 
         log.info("Evaluating with target {} -> {}.", targetIndex, target);
 
         for (int i = 0; i < iterations; ++i) {
             log.info("Running {}/{}", i, iterations);
             final String run = convertToString(i, runLength);
-            board.bind(BlackboardEntry.EVALUATION_RUN, run);
+            board.bind(CoreBlackboardEntries.EVALUATION_RUN, run);
             context.bindColumn(runColumn, i);
 
             BeanFactory.create(EvolutionaryAlgorithmSearch.class)

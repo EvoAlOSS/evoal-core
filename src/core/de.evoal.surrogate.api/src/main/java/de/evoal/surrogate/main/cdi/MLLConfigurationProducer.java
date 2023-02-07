@@ -13,7 +13,7 @@ import de.evoal.languages.model.el.impl.ELPackageImpl;
 import de.evoal.languages.model.mll.dsl.MachineLearningLanguageStandaloneSetup;
 import de.evoal.languages.model.mll.MachineLearningConfiguration;
 import de.evoal.languages.model.mll.impl.MllPackageImpl;
-import de.evoal.surrogate.api.SurrogateBlackboardEntry;
+import de.evoal.surrogate.api.SurrogateBlackboardEntries;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -32,7 +32,7 @@ import java.util.Optional;
 @Slf4j
 public class MLLConfigurationProducer {
     public void loadModel(final @Observes BlackboardEntry value, final Blackboard board) {
-        if(!value.isSame(SurrogateBlackboardEntry.SURROGATE_CONFIGURATION_FILE)) {
+        if(!value.isSame(SurrogateBlackboardEntries.SURROGATE_CONFIGURATION_FILE)) {
             return;
         }
 
@@ -55,7 +55,7 @@ public class MLLConfigurationProducer {
         }
 
         final MachineLearningConfiguration configuration = read(file).get();
-        board.bind(SurrogateBlackboardEntry.SURROGATE_CONFIGURATION, configuration);
+        board.bind(SurrogateBlackboardEntries.SURROGATE_CONFIGURATION, configuration);
     }
 
     /**
@@ -112,7 +112,7 @@ public class MLLConfigurationProducer {
     }
 
     @Produces @Dependent
-    @BlackboardValue(SurrogateBlackboardEntry.SURROGATE_CONFIGURATION)
+    @BlackboardValue(SurrogateBlackboardEntries.SURROGATE_CONFIGURATION)
     public MachineLearningConfiguration injectMachineLearningConfiguration(final InjectionPoint ip, final Blackboard board) {
         final BlackboardValue value = ip.getAnnotated().getAnnotation(BlackboardValue.class);
         final Object result = board.get(value.value());

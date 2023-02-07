@@ -1,7 +1,7 @@
 package de.evoal.core.api.ea.constraints.calculation;
 
 import de.evoal.core.api.ea.constraints.model.Constraint;
-import de.evoal.core.api.board.BlackboardEntry;
+import de.evoal.core.api.board.CoreBlackboardEntries;
 import de.evoal.core.api.cdi.ConfigurationValue;
 import javax.enterprise.context.ApplicationScoped;
 
@@ -19,7 +19,7 @@ public class CalculationFactory {
     private final Map<String, Instance> calculationConfigurationByCategory = new HashMap<>();
 
     @Inject
-    public CalculationFactory(final @ConfigurationValue(entry = BlackboardEntry.OPTIMISATION_CONFIGURATION, access = "algorithm.handlers") Array handlerConfigurations) {
+    public CalculationFactory(final @ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.handlers") Array handlerConfigurations) {
         handlerConfigurations.getValues()
                              .stream()
                              .map(Instance.class::cast)

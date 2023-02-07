@@ -1,6 +1,6 @@
 package de.evoal.core.main.statistics.writer.csv;
 
-import de.evoal.core.api.board.BlackboardEntry;
+import de.evoal.core.api.board.CoreBlackboardEntries;
 import de.evoal.core.api.cdi.BlackboardValue;
 import de.evoal.core.api.statistics.Column;
 import de.evoal.core.api.statistics.Writer;
@@ -18,7 +18,7 @@ import java.util.Map;
 @ApplicationScoped
 @Named("csv")
 public class CsvStrategy extends WriterStrategy {
-    @Inject @BlackboardValue(BlackboardEntry.EVALUATION_OUTPUT_FOLDER)
+    @Inject @BlackboardValue(CoreBlackboardEntries.EVALUATION_OUTPUT_FOLDER)
     private File outputFolder;
 
     private final Map<String, CsvWriter> writerMap = new HashMap<>();

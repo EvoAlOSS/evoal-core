@@ -1,6 +1,6 @@
 package de.evoal.core.main.ea.constraints.constraint;
 
-import de.evoal.core.api.board.BlackboardEntry;
+import de.evoal.core.api.board.CoreBlackboardEntries;
 import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.core.api.ea.constraints.model.Constraint;
 import de.evoal.core.api.ea.constraints.model.Constraints;
@@ -34,7 +34,7 @@ public class ConstraintProducer {
     @ApplicationScoped
     public Constraints create(final DataConstraints constraints,
                               @Named("genotype-specification") final PropertiesSpecification genoSpec,
-                              @ConfigurationValue(entry = BlackboardEntry.OPTIMISATION_CONFIGURATION, access = "algorithm.fitness") final Instance fitnessConfig) {
+                              @ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.fitness") final Instance fitnessConfig) {
         this.genoSpec = genoSpec;
         this.fitnessSpec = toInnerSpecification(fitnessConfig);
 

@@ -2,6 +2,7 @@ package de.evoal.surrogate.main.cdi;
 
 import de.evoal.core.api.board.Blackboard;
 import de.evoal.core.api.board.BlackboardEntry;
+import de.evoal.core.api.board.CoreBlackboardEntries;
 import de.evoal.core.api.properties.PropertiesPair;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import javax.enterprise.context.ApplicationScoped;
@@ -33,12 +34,11 @@ public class TargetPointLoader {
      */
     private PropertiesBasedPropertiesStreamSupplier loadedProperties;
 
-
     private PropertiesStreamSupplier targetPoints;
 
     @SneakyThrows
     public void load(final @Observes BlackboardEntry entry) {
-        if (!BlackboardEntry.TARGET_POINTS_FILE.equals(entry)) {
+        if (!CoreBlackboardEntries.TARGET_POINTS_FILE.equals(entry)) {
             return;
         }
 

@@ -1,6 +1,6 @@
 package de.evoal.core.main.statistics;
 
-import de.evoal.core.api.board.BlackboardEntry;
+import de.evoal.core.api.board.CoreBlackboardEntries;
 import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.core.api.statistics.StatisticsWriter;
 import de.evoal.core.api.utils.Requirements;
@@ -21,7 +21,7 @@ public class StatisticsFactory {
     @Produces
     @Dependent
     @Named("statistics")
-    public StatisticsWriter create(final @ConfigurationValue(entry = BlackboardEntry.OPTIMISATION_CONFIGURATION, access = "statistics") Instance instance) {
+    public StatisticsWriter create(final @ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "statistics") Instance instance) {
         Requirements.requireSize(instance.getAttributes(), 1);
         final Array array = (Array)instance.getAttributes().get(0).getValue();
 

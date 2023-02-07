@@ -1,7 +1,7 @@
 package de.evoal.core.main.ea.fitness;
 
 import de.evoal.core.api.board.Blackboard;
-import de.evoal.core.api.board.BlackboardEntry;
+import de.evoal.core.api.board.CoreBlackboardEntries;
 import de.evoal.core.api.ea.fitness.FitnessDecorator;
 import de.evoal.core.api.ea.fitness.FitnessFunction;
 import de.evoal.core.api.properties.Properties;
@@ -53,11 +53,11 @@ public class DistanceFitness extends FitnessDecorator {
         final Attribute target = config.findAttribute("target");
 
         if(target == null) {
-            this.target = board.get(BlackboardEntry.TARGET_PROPERTIES);
+            this.target = board.get(CoreBlackboardEntries.TARGET_PROPERTIES);
         } else {
             this.target = toProperties((Array)target.getValue());
             log.info("Binding target properties based on information found in MLL to {}.", this.target);
-            board.bind(BlackboardEntry.TARGET_PROPERTIES, this.target);
+            board.bind(CoreBlackboardEntries.TARGET_PROPERTIES, this.target);
         }
 
         return this;

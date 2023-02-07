@@ -3,6 +3,7 @@ package de.evoal.core.main.producer;
 import com.google.inject.Injector;
 import de.evoal.core.api.board.Blackboard;
 import de.evoal.core.api.board.BlackboardEntry;
+import de.evoal.core.api.board.CoreBlackboardEntries;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.Dependent;
 import javax.enterprise.event.Observes;
@@ -31,11 +32,11 @@ public class OptimisationModelLoader {
     private OptimisationModel model;
 
     public void load(final @Observes BlackboardEntry entry) {
-        if(!entry.isSame(BlackboardEntry.OPTIMISATION_CONFIGURATION_FILE)) {
+        if(!entry.isSame(CoreBlackboardEntries.OPTIMISATION_CONFIGURATION_FILE)) {
             return;
         }
 
-        final String configurationFileName = board.get(BlackboardEntry.OPTIMISATION_CONFIGURATION_FILE);
+        final String configurationFileName = board.get(CoreBlackboardEntries.OPTIMISATION_CONFIGURATION_FILE);
         log.info("Loading optimisation configuration from {}.",  configurationFileName);
 
         final File configurationFile = new File(configurationFileName);
@@ -81,7 +82,7 @@ public class OptimisationModelLoader {
             }
 
             model = (OptimisationModel) resource.getContents().get(0);
-            board.bind(BlackboardEntry.OPTIMISATION_CONFIGURATION, model);
+            board.bind(CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, model);
         } catch (final Exception e) {
             log.error("Unable to load optimisation configuration file '{}'.", configurationFile, e);
          }

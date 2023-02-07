@@ -1,7 +1,7 @@
 package de.evoal.surrogate.main.ea;
 
 import de.evoal.core.api.board.Blackboard;
-import de.evoal.core.api.board.BlackboardEntry;
+import de.evoal.core.api.board.CoreBlackboardEntries;
 import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.core.api.ea.codec.CustomCodec;
 import de.evoal.core.api.ea.initial.InitialPopulation;
@@ -10,7 +10,7 @@ import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.properties.stream.FileBasedPropertiesStreamSupplier;
 import de.evoal.core.api.properties.stream.PropertiesStreamSupplier;
 import de.evoal.languages.model.instance.Instance;
-import de.evoal.surrogate.api.SurrogateBlackboardEntry;
+import de.evoal.surrogate.api.SurrogateBlackboardEntries;
 import io.jenetics.Gene;
 import io.jenetics.Genotype;
 import io.jenetics.engine.Engine;
@@ -28,7 +28,7 @@ import java.io.File;
 public class TrainingInitialPopulation<G extends Gene<?, G>, C extends Comparable<C>> implements InitialPopulation<G, C> {
 
     @Inject
-    @ConfigurationValue(entry = BlackboardEntry.OPTIMISATION_CONFIGURATION, access = "algorithm.size-of-population")
+    @ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.size-of-population")
     private int sizeOfPopulation;
 
     @Inject
@@ -60,7 +60,7 @@ public class TrainingInitialPopulation<G extends Gene<?, G>, C extends Comparabl
     }
 
     private ISeq<Genotype<G>> createInitialPopulation() {
-        final String filename = board.get(SurrogateBlackboardEntry.SURROGATE_TRAINING_DATA_FILE);
+        final String filename = board.get(SurrogateBlackboardEntries.SURROGATE_TRAINING_DATA_FILE);
         final File trainingFile = new File(filename);
 
         log.info("Using training data from {} for population.", filename);

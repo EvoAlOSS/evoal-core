@@ -1,7 +1,8 @@
 package de.evoal.core.main.search;
 
 import de.evoal.core.api.board.Blackboard;
-import de.evoal.core.api.board.BlackboardEntry;
+import de.evoal.core.api.board.CoreBlackboardEntries;
+import de.evoal.core.api.cdi.Application;
 import de.evoal.core.api.cdi.BeanFactory;
 import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.core.api.cdi.MainClass;
@@ -19,6 +20,10 @@ import javax.inject.Named;
 import java.io.File;
 import java.util.stream.Stream;
 
+@Application("""
+This application starts a heuristic search for an optimal solution based on a
+problem specification.
+""")
 @Named("heuristic-search")
 @ApplicationScoped
 public class HeuristicSearchMain implements MainClass {
@@ -29,21 +34,21 @@ public class HeuristicSearchMain implements MainClass {
 	private WriterContext context;
 
 	@Inject
-	@ConfigurationValue(entry = BlackboardEntry.OPTIMISATION_CONFIGURATION, access = "algorithm")
+	@ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm")
 	private Instance algorithmConfiguration;
 
 	@Override
 	public void run() {
-		final String outputFolder = board.get(BlackboardEntry.EVALUATION_OUTPUT_FOLDER);
-		final String heuristicFileName = board.get(BlackboardEntry.OPTIMISATION_CONFIGURATION_FILE);
+		final String outputFolder = board.get(CoreBlackboardEntries.EVALUATION_OUTPUT_FOLDER);
+		final String heuristicFileName = board.get(CoreBlackboardEntries.OPTIMISATION_CONFIGURATION_FILE);
 
 		final File outputBaseDir = HeuristicSearchUtils.calculateOutputBaseDir(new File(outputFolder), new File(heuristicFileName));
 
 		HeuristicSearchUtils.addColumn(context,"target", ColumnType.Integer, 0);
 		HeuristicSearchUtils.addColumn(context,"run", ColumnType.Integer, 0);
 
-		board.bind(BlackboardEntry.EVALUATION_OUTPUT_FOLDER, outputBaseDir);
-		board.bind(BlackboardEntry.EVALUATION_RUN, "0");
+		board.bind(CoreBlackboardEntries.EVALUATION_OUTPUT_FOLDER, outputBaseDir);
+		board.bind(CoreBlackboardEntries.EVALUATION_RUN, "0");
 
 		BeanFactory.create(OptimisationAlgorithm.class)
 				   .init(algorithmConfiguration)
@@ -55,6 +60,6 @@ public class HeuristicSearchMain implements MainClass {
 					targets.findFirst()
 						   .orElseThrow(() -> {throw new IllegalStateException("No target point found");});
 
-		board.bind(BlackboardEntry.TARGET_PROPERTIES, targetProperties.getSecond());
+		board.bind(CoreBlackboardEntries.TARGET_PROPERTIES, targetProperties.getSecond());
 	}
 }

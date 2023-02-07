@@ -1,6 +1,6 @@
 package de.evoal.surrogate.main.statistics.correlated;
 
-import de.evoal.core.api.board.BlackboardEntry;
+import de.evoal.core.api.board.CoreBlackboardEntries;
 import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.core.api.statistics.*;
 import de.evoal.core.api.utils.LanguageHelper;
@@ -60,7 +60,7 @@ public class GenerationStatisticsWriter implements StatisticsWriter {
     @Inject
     private Provider<Function<Properties, Properties>> fitnessFactory;
 
-    @Inject @ConfigurationValue(entry = BlackboardEntry.OPTIMISATION_CONFIGURATION, access = "algorithm.fitness")
+    @Inject @ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.fitness")
     private Instance config;
 
     @Inject

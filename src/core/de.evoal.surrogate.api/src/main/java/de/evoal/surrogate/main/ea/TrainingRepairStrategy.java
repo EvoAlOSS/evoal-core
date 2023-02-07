@@ -8,15 +8,13 @@ import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.properties.stream.FileBasedPropertiesStreamSupplier;
 import de.evoal.core.api.properties.stream.PropertiesStreamSupplier;
 import de.evoal.languages.model.instance.Instance;
-import de.evoal.surrogate.api.SurrogateBlackboardEntry;
+import de.evoal.surrogate.api.SurrogateBlackboardEntries;
 import io.jenetics.Gene;
 import io.jenetics.Genotype;
 import io.jenetics.Phenotype;
-import io.jenetics.util.ISeq;
 import io.jenetics.util.RandomRegistry;
 import lombok.extern.slf4j.Slf4j;
 
-import javax.annotation.PostConstruct;
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -45,7 +43,7 @@ public class TrainingRepairStrategy<G extends Gene<?, G>, C extends Comparable<?
 
     @Override
     public RepairStrategy init(final Instance configuration) {
-        final String filename = board.get(SurrogateBlackboardEntry.SURROGATE_TRAINING_DATA_FILE);
+        final String filename = board.get(SurrogateBlackboardEntries.SURROGATE_TRAINING_DATA_FILE);
         final File trainingFile = new File(filename);
 
         log.info("Using training data from {} for population.", filename);

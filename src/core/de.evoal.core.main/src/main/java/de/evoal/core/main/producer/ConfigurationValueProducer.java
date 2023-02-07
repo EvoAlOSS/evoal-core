@@ -1,7 +1,7 @@
 package de.evoal.core.main.producer;
 
 import de.evoal.core.api.board.Blackboard;
-import de.evoal.core.api.board.BlackboardEntry;
+import de.evoal.core.api.board.CoreBlackboardEntries;
 import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.core.api.utils.LanguageHelper;
 import de.evoal.languages.model.ol.OptimisationModel;
@@ -19,7 +19,7 @@ import javax.enterprise.inject.spi.InjectionPoint;
 @Slf4j
 public class ConfigurationValueProducer {
     @Produces
-    @ConfigurationValue(entry = BlackboardEntry.OPTIMISATION_CONFIGURATION, access = "")
+    @ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "")
     public Integer injectIntegerValue(final InjectionPoint ip, final Blackboard board) {
         final ConfigurationValue value = ip.getAnnotated().getAnnotation(ConfigurationValue.class);
 
@@ -27,7 +27,7 @@ public class ConfigurationValueProducer {
     }
 
     @Produces
-    @ConfigurationValue(entry = BlackboardEntry.OPTIMISATION_CONFIGURATION, access = "")
+    @ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "")
     public Double injectDoubleValue(final InjectionPoint ip, final Blackboard board) {
         final ConfigurationValue value = ip.getAnnotated().getAnnotation(ConfigurationValue.class);
 
@@ -35,7 +35,7 @@ public class ConfigurationValueProducer {
     }
 
     @Produces
-    @ConfigurationValue(entry = BlackboardEntry.OPTIMISATION_CONFIGURATION, access = "")
+    @ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "")
     public String injectStringValue(final InjectionPoint ip, final Blackboard board) {
         final ConfigurationValue value = ip.getAnnotated().getAnnotation(ConfigurationValue.class);
 
@@ -43,7 +43,7 @@ public class ConfigurationValueProducer {
     }
 
     @Produces
-    @ConfigurationValue(entry = BlackboardEntry.OPTIMISATION_CONFIGURATION, access = "")
+    @ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "")
     public final Array injectArrayValue(final InjectionPoint ip, final Blackboard board) {
         final ConfigurationValue value = ip.getAnnotated().getAnnotation(ConfigurationValue.class);
 
@@ -51,7 +51,7 @@ public class ConfigurationValueProducer {
     }
 
     @Produces
-    @ConfigurationValue(entry = BlackboardEntry.OPTIMISATION_CONFIGURATION, access = "")
+    @ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "")
     public final Instance injectInstanceValue(final InjectionPoint ip, final Blackboard board) {
         final ConfigurationValue value = ip.getAnnotated().getAnnotation(ConfigurationValue.class);
 
@@ -59,7 +59,7 @@ public class ConfigurationValueProducer {
     }
 
     @Produces
-    @ConfigurationValue(entry = BlackboardEntry.OPTIMISATION_CONFIGURATION, access = "")
+    @ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "")
     public Boolean injectBooleanValue(final InjectionPoint ip, final Blackboard board) {
         final ConfigurationValue value = ip.getAnnotated().getAnnotation(ConfigurationValue.class);
 
@@ -67,7 +67,7 @@ public class ConfigurationValueProducer {
     }
     
     @Produces
-    @ConfigurationValue(entry = BlackboardEntry.OPTIMISATION_CONFIGURATION, access = "")
+    @ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "")
     public double [] injectDoubleArrayValue(final InjectionPoint ip, final Blackboard board) {
         final ConfigurationValue value = ip.getAnnotated().getAnnotation(ConfigurationValue.class);
 

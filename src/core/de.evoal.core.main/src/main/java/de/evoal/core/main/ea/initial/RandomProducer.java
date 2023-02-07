@@ -1,6 +1,6 @@
 package de.evoal.core.main.ea.initial;
 
-import de.evoal.core.api.board.BlackboardEntry;
+import de.evoal.core.api.board.CoreBlackboardEntries;
 import de.evoal.core.api.cdi.BeanFactory;
 import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.core.api.ea.initial.InitialPopulation;
@@ -20,7 +20,7 @@ public class RandomProducer {
     @Produces
     @Dependent
     @Named("random")
-    public InitialPopulation create(@ConfigurationValue(entry = BlackboardEntry.OPTIMISATION_CONFIGURATION, access = "algorithm.initialization") Instance initialization) {
+    public InitialPopulation create(@ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.initialization") Instance initialization) {
         final InitialPopulation population = new RandomInitialPopulation();
         BeanFactory.injectFields(population);
         population.init(initialization);

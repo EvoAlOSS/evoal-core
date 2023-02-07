@@ -9,7 +9,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import de.evoal.languages.model.mll.MachineLearningConfiguration;
-import de.evoal.surrogate.api.SurrogateBlackboardEntry;
+import de.evoal.surrogate.api.SurrogateBlackboardEntries;
 import de.evoal.surrogate.main.internal.StatementExecutor;
 import de.evoal.surrogate.main.internal.SymbolTable;
 import lombok.extern.slf4j.Slf4j;
@@ -24,7 +24,7 @@ import lombok.extern.slf4j.Slf4j;
 public class SurrogateMain implements MainClass {
 
     @Inject
-    @BlackboardValue(SurrogateBlackboardEntry.SURROGATE_CONFIGURATION)
+    @BlackboardValue(SurrogateBlackboardEntries.SURROGATE_CONFIGURATION)
     private MachineLearningConfiguration mlConfiguration;
 
     @Inject

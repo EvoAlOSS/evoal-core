@@ -5,7 +5,7 @@ import de.evoal.core.api.ea.constraints.calculation.CalculationStrategy;
 import de.evoal.core.api.ea.constraints.model.Constraint;
 import de.evoal.core.api.ea.constraints.model.Constraints;
 import de.evoal.core.api.ea.constraints.calculation.CalculationFactory;
-import de.evoal.core.api.board.BlackboardEntry;
+import de.evoal.core.api.board.CoreBlackboardEntries;
 import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.core.api.ea.codec.CustomCodec;
 import de.evoal.core.api.ea.constraints.strategies.RepairStrategy;
@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
 public class JeneticsConstraintProducer {
     @Produces
     public List<io.jenetics.engine.Constraint> create(
-            final @ConfigurationValue(entry = BlackboardEntry.OPTIMISATION_CONFIGURATION, access = "algorithm.handlers") Array handlerConfigurations,
+            final @ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.handlers") Array handlerConfigurations,
             final @Named("optimization-function-output") PropertiesSpecification optimizationSpec,
             final @Named("optimization-function")  FitnessFunction function,
             final CustomCodec codec,

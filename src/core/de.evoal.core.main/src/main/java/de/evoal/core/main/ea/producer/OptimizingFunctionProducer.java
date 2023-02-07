@@ -1,6 +1,6 @@
 package de.evoal.core.main.ea.producer;
 
-import de.evoal.core.api.board.BlackboardEntry;
+import de.evoal.core.api.board.CoreBlackboardEntries;
 import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.core.api.ea.fitness.FitnessFunction;
 import de.evoal.core.api.properties.PropertiesSpecification;
@@ -27,7 +27,7 @@ public class OptimizingFunctionProducer {
     @Produces
     @ApplicationScoped
     @Named("optimization-function-configuration")
-    public Instance find(final @ConfigurationValue(entry = BlackboardEntry.OPTIMISATION_CONFIGURATION, access = "algorithm.fitness") Instance fitnessConfiguration) {
+    public Instance find(final @ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.fitness") Instance fitnessConfiguration) {
         return findInner(fitnessConfiguration);
     }
 

@@ -1,6 +1,6 @@
 package de.evoal.core.main.ea.initial;
 
-import de.evoal.core.api.board.BlackboardEntry;
+import de.evoal.core.api.board.CoreBlackboardEntries;
 import de.evoal.core.api.cdi.BeanFactory;
 import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.core.api.ea.initial.InitialPopulation;
@@ -15,7 +15,7 @@ import javax.inject.Named;
 public class InitialPopulationFactory {
 
 	@Inject
-	@ConfigurationValue(entry = BlackboardEntry.OPTIMISATION_CONFIGURATION, access = "algorithm.initialization")
+	@ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.initialization")
 	private Instance initialization;
 
 	/**
@@ -23,7 +23,7 @@ public class InitialPopulationFactory {
 	 *
 	 * Blackboard slots used:
 	 * <ul>
-	 *   <li>{@link BlackboardEntry#OPTIMISATION_CONFIGURATION}.</li>
+	 *   <li>{@link CoreBlackboardEntries#OPTIMISATION_CONFIGURATION}.</li>
 	 * </ul>
 	 */
 	@Produces @Dependent @Named("initial")

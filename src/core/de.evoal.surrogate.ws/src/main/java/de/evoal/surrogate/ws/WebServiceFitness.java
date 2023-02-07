@@ -22,7 +22,7 @@ public class WebServiceFitness implements FitnessFunction {
 
     @Override
     public FitnessFunction init(final Instance config) {
-        LanguageHelper.lookup()
+//        LanguageHelper.lookup();
 
         return this;
     }

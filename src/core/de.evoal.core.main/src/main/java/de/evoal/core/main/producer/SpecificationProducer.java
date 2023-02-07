@@ -1,6 +1,6 @@
 package de.evoal.core.main.producer;
 
-import de.evoal.core.api.board.BlackboardEntry;
+import de.evoal.core.api.board.CoreBlackboardEntries;
 import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.languages.model.ddl.DataDescription;
@@ -21,7 +21,7 @@ public class SpecificationProducer {
     @Produces
     @Dependent
     @Named("genotype-description")
-    public List<DataDescription> createSourceSpecification(final @ConfigurationValue(entry = BlackboardEntry.OPTIMISATION_CONFIGURATION, access = "algorithm.genotype") Array genotype) {
+    public List<DataDescription> createSourceSpecification(final @ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.genotype") Array genotype) {
         final List<DataDescription> descriptors = genotype.getValues()
                 .stream()
                 .map(Instance.class::cast)

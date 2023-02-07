@@ -6,7 +6,7 @@ import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import de.evoal.core.api.board.BlackboardEntry;
+import de.evoal.core.api.board.CoreBlackboardEntries;
 import de.evoal.core.api.board.Blackboard;
 import de.evoal.core.api.cdi.BlackboardValue;
 import de.evoal.core.api.cdi.ConfigurationValue;
@@ -47,30 +47,30 @@ public class EvolutionaryAlgorithmSearch implements OptimisationAlgorithm {
 	 * Location for storing the output.
 	 */
 	@Inject
-	@BlackboardValue(BlackboardEntry.EVALUATION_OUTPUT_FOLDER)
+	@BlackboardValue(CoreBlackboardEntries.EVALUATION_OUTPUT_FOLDER)
 	private File outputDirectory;
 
 	/**
 	 * The actual run
 	 */
 	@Inject
-	@BlackboardValue(BlackboardEntry.EVALUATION_RUN)
+	@BlackboardValue(CoreBlackboardEntries.EVALUATION_RUN)
 	private String run;
 
 	@Inject
-	@ConfigurationValue(entry = BlackboardEntry.OPTIMISATION_CONFIGURATION, access = "algorithm.number-of-generations")
+	@ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.number-of-generations")
 	private int numberOfGenerations;
 
 	@Inject
-	@ConfigurationValue(entry = BlackboardEntry.OPTIMISATION_CONFIGURATION, access = "algorithm.size-of-population")
+	@ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.size-of-population")
 	private int sizeOfPopulation;
 
 	@Inject
-	@ConfigurationValue(entry = BlackboardEntry.OPTIMISATION_CONFIGURATION, access = "algorithm.maximize")
+	@ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.maximize")
 	private Boolean maximize;
 
 	@Inject
-	@ConfigurationValue(entry = BlackboardEntry.OPTIMISATION_CONFIGURATION, access = "algorithm.maximum-age")
+	@ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.maximum-age")
 	private int maximumAge;
 
 	private final Map<String, List<Alterer<?, FitnessValue>>> alterers = new HashMap<>();
@@ -141,7 +141,7 @@ public class EvolutionaryAlgorithmSearch implements OptimisationAlgorithm {
 	}
 
 	private void setup() {
-		final OptimisationModel configuration = board.get(BlackboardEntry.OPTIMISATION_CONFIGURATION);
+		final OptimisationModel configuration = board.get(CoreBlackboardEntries.OPTIMISATION_CONFIGURATION);
 
 		final de.evoal.languages.model.instance.Instance alterers = LanguageHelper.lookup(configuration.getInstance(), "algorithm.alterers");
 

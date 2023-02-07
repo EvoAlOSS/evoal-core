@@ -2,6 +2,7 @@ package de.evoal.surrogate.main.cdi;
 
 import de.evoal.core.api.board.Blackboard;
 import de.evoal.core.api.board.BlackboardEntry;
+import de.evoal.core.api.board.CoreBlackboardEntries;
 import de.evoal.core.api.properties.info.PropertiesDependencies;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.properties.PropertySpecification;
@@ -9,7 +10,7 @@ import de.evoal.core.api.utils.Requirements;
 import de.evoal.languages.model.instance.DataReference;
 import de.evoal.languages.model.mll.PartialSurrogateFunctionDefinition;
 import de.evoal.languages.model.mll.SurrogateDefinition;
-import de.evoal.surrogate.api.SurrogateBlackboardEntry;
+import de.evoal.surrogate.api.SurrogateBlackboardEntries;
 import de.evoal.surrogate.api.configuration.FunctionCombinerConfiguration;
 import de.evoal.surrogate.api.configuration.PartialFunctionConfiguration;
 import de.evoal.surrogate.api.configuration.SurrogateConfiguration;
@@ -40,11 +41,11 @@ public class SurrogateProducer {
     private SurrogateConfiguration configuration;
 
     public void setPreTrainedSurrogate(final @Observes BlackboardEntry event, final Blackboard board, final Function<@NonNull File, @NonNull SurrogateConfiguration> loader) {
-        if(!event.isSame(SurrogateBlackboardEntry.SURROGATE_PRETRAINED_FILE)) {
+        if(!event.isSame(SurrogateBlackboardEntries.SURROGATE_PRETRAINED_FILE)) {
             return;
         }
 
-        final String filename = board.get(SurrogateBlackboardEntry.SURROGATE_PRETRAINED_FILE);
+        final String filename = board.get(SurrogateBlackboardEntries.SURROGATE_PRETRAINED_FILE);
         final File file = new File(filename);
 
         log.info("Using pre-trained surrogate model {}.", filename);
@@ -55,8 +56,8 @@ public class SurrogateProducer {
 
         this.configuration = loader.apply(file);
         
-        final EObject mlConfiguration = board.get(SurrogateBlackboardEntry.SURROGATE_CONFIGURATION);
-        final EObject eaConfiguration = board.get(BlackboardEntry.OPTIMISATION_CONFIGURATION);
+        final EObject mlConfiguration = board.get(SurrogateBlackboardEntries.SURROGATE_CONFIGURATION);
+        final EObject eaConfiguration = board.get(CoreBlackboardEntries.OPTIMISATION_CONFIGURATION);
 
         final Map<String, PropertySpecification> specifications = new HashMap<>();
         addDataFrom(specifications, mlConfiguration);

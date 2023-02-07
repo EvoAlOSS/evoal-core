@@ -1,7 +1,6 @@
 package de.evoal.core.main.statistics.fitness;
 
-import de.evoal.core.api.board.Blackboard;
-import de.evoal.core.api.board.BlackboardEntry;
+import de.evoal.core.api.board.CoreBlackboardEntries;
 import de.evoal.core.api.cdi.BlackboardValue;
 import de.evoal.core.api.ea.fitness.comparator.FitnessValue;
 import de.evoal.core.api.properties.Properties;
@@ -10,7 +9,6 @@ import de.evoal.languages.model.instance.Instance;
 import io.jenetics.Phenotype;
 import io.jenetics.engine.EvolutionResult;
 import io.jenetics.util.ISeq;
-import javax.annotation.PostConstruct;
 import javax.enterprise.context.Dependent;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -30,7 +28,7 @@ import java.util.List;
 public class FitnessStatistics implements StatisticsWriter {
 
     @Inject
-    @BlackboardValue(BlackboardEntry.TARGET_PROPERTIES)
+    @BlackboardValue(CoreBlackboardEntries.TARGET_PROPERTIES)
     private Provider<Properties> targetSpecification;
 
     @Inject
