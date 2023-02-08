@@ -13,6 +13,8 @@ module de.evoal.core.main {
     requires lombok;
 
     requires org.slf4j;
+    requires jul.to.slf4j;
+    requires ch.qos.logback.classic;
 
     requires io.jenetics.base;
     requires io.jenetics.ext;

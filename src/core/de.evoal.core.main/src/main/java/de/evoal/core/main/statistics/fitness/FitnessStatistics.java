@@ -1,9 +1,6 @@
 package de.evoal.core.main.statistics.fitness;
 
-import de.evoal.core.api.board.CoreBlackboardEntries;
-import de.evoal.core.api.cdi.BlackboardValue;
 import de.evoal.core.api.ea.fitness.comparator.FitnessValue;
-import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.statistics.*;
 import de.evoal.languages.model.instance.Instance;

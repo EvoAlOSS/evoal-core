@@ -45,12 +45,18 @@
 			<scope>runtime</scope>
 		</dependency>
 
-		<!-- logback for logging (@runtime) -->
+		<!-- logback for logging -->
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
-			<version>1.4.0</version>
-			<scope>runtime</scope>
+			<version>1.4.5</version>
+		</dependency>
+
+		<!-- Deltaspike uses JUL. Use the JUL bridge to reroute it SLF4J -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jul-to-slf4j</artifactId>
+			<version>2.0.6</version>
 		</dependency>
 
 		<!-- deltaspike -->

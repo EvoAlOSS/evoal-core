@@ -3,8 +3,11 @@ package de.evoal.core.api.board;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.event.Event;
 
+import ch.qos.logback.classic.Level;
+import ch.qos.logback.classic.Logger;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import java.util.HashMap;
@@ -91,6 +94,24 @@ public class Blackboard {
      * @param args The command line arguments.
      */
     public void readArguments(final String[] args) {
+        for(String arg : args) {
+            if(!arg.startsWith("-B")) {
+                continue;
+            }
+
+            arg = arg.substring(2);
+            final int colonIndex = arg.indexOf('=');
+
+            final String entry = arg.substring(0, colonIndex);
+            final String value = arg.substring(colonIndex + 1);
+
+            if(CoreBlackboardEntries.LOGGING_LEVEL.equals(entry)) {
+                final Logger root = (Logger) LoggerFactory.getLogger(org.slf4j.Logger.ROOT_LOGGER_NAME);
+                final Level level = Level.toLevel(value);
+                root.setLevel(level);
+            }
+        }
+
         for(String arg : args) {
             if(!arg.startsWith("-B")) {
                 continue;

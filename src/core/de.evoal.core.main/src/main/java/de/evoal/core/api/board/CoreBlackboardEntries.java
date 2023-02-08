@@ -20,6 +20,12 @@ public class CoreBlackboardEntries implements BlackboardEntries {
     public static final String CONSTRAINT_FOLDER = "core:constraint-folder";
 
     /**
+     * Parameter to specify for logging leven.
+     */
+    @Commandline(main = "",  name = "core:logging", doc = "Logging level to use (ERROR,WARN,INFO,DEBUG)")
+    public static final String LOGGING_LEVEL = "core:logging";
+
+    /**
      * Number of evaluation runs.
      */
     @Commandline(main = "heuristic-search", name = "core:evaluation-iterations", doc = "Number of iterations to run the search.")

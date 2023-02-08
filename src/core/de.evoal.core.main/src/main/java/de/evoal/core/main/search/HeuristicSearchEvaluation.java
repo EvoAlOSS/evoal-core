@@ -31,7 +31,7 @@ documentation = """
 Evaluates a heuristic search using multiple targets.
 
 Each target is searched for 'core:evaluation-iterations' times to allow a
-proper empirical evaluation. 
+proper empirical evaluation.
 """
 )
 @ApplicationScoped

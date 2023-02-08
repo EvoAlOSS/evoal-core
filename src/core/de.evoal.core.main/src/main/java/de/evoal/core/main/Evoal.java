@@ -14,6 +14,7 @@ import org.apache.deltaspike.cdise.api.CdiContainer;
 import org.apache.deltaspike.cdise.api.CdiContainerLoader;
 import org.apache.deltaspike.core.api.provider.BeanProvider;
 import org.apache.deltaspike.core.util.metadata.AnnotationInstanceProvider;
+import org.slf4j.bridge.SLF4JBridgeHandler;
 
 import java.lang.reflect.Field;
 import java.util.*;
@@ -25,14 +26,17 @@ import java.util.*;
 @Slf4j
 public final class Evoal {
     public static void main(final String ... args) {
+        installJavaLoggingToSLF4JBridge();
+
         log.info("Starting up EvoAl");
 
         log.info("Booting CDI container");
         final CdiContainer cdiContainer = CdiContainerLoader.getCdiContainer();
         cdiContainer.boot();
-        cdiContainer.getContextControl().startContext(ApplicationScoped.class);
+        cdiContainer.getContextControl()
+                    .startContext(ApplicationScoped.class);
 
-        if(args.length == 0) {
+        if(args.length == 0 || args.length == 1 && "--help".equals(args[0])) {
             printUsage();
         } else {
             log.info("Setting up black board");
@@ -60,6 +64,11 @@ public final class Evoal {
         
         log.info("Shutting down CDI container");
         cdiContainer.shutdown();
+    }
+
+    private static void installJavaLoggingToSLF4JBridge() {
+        SLF4JBridgeHandler.removeHandlersForRootLogger();
+        SLF4JBridgeHandler.install();
     }
 
     private static void printUsage() {
