@@ -61,7 +61,7 @@ public abstract class DensityBasedFitness extends FitnessDecorator {
 
         kind = LanguageHelper.lookup(config, "kind");
         exponent = LanguageHelper.lookup(config, "exponent");
-        rootExponent = LanguageHelper.lookup(config, "root_exponent");
+        rootExponent = LanguageHelper.lookup(config, "root-exponent");
 
         // TODO Check this section if it is really correct in all cases.
         final List<FunctionCombiner> mappings = surrogate.getMappings();
