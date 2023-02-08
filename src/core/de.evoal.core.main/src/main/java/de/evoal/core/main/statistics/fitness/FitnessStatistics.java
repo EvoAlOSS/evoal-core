@@ -4,6 +4,7 @@ import de.evoal.core.api.board.CoreBlackboardEntries;
 import de.evoal.core.api.cdi.BlackboardValue;
 import de.evoal.core.api.ea.fitness.comparator.FitnessValue;
 import de.evoal.core.api.properties.Properties;
+import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.statistics.*;
 import de.evoal.languages.model.instance.Instance;
 import io.jenetics.Phenotype;
@@ -28,8 +29,9 @@ import java.util.List;
 public class FitnessStatistics implements StatisticsWriter {
 
     @Inject
+    @Named("optimization-function-output")
     @BlackboardValue(CoreBlackboardEntries.TARGET_PROPERTIES)
-    private Provider<Properties> targetSpecification;
+    private Provider<PropertiesSpecification> targetSpecification;
 
     @Inject
     private WriterStrategy strategy;
@@ -51,7 +53,7 @@ public class FitnessStatistics implements StatisticsWriter {
         columns.add(new Column("index", ColumnType.Integer));
 
         for(int i = 0; i < targetSpecification.get().size(); ++i) {
-            columns.add(new Column("fitness-value-" + targetSpecification.get().getSpecification().get(i).name(), ColumnType.Double));
+            columns.add(new Column("fitness-value-" + targetSpecification.get().get(i).name(), ColumnType.Double));
         }
 
         writer = strategy.create("fitness-by-individual", columns);
