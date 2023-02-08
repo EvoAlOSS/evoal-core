@@ -30,7 +30,6 @@ public class FitnessStatistics implements StatisticsWriter {
 
     @Inject
     @Named("optimization-function-output")
-    @BlackboardValue(CoreBlackboardEntries.TARGET_PROPERTIES)
     private Provider<PropertiesSpecification> targetSpecification;
 
     @Inject
