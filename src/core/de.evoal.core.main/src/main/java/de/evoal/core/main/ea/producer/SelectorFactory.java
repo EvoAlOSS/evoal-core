@@ -8,10 +8,14 @@ import io.jenetics.*;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 @ApplicationScoped
 public class SelectorFactory {
+	@Inject
+	@ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.size-of-population")
+	private int sizeOfPopulation;
 
 	@Produces
 	@Named("survivor")
@@ -60,9 +64,9 @@ public class SelectorFactory {
 		return new TruncationSelector<>(worstRank);
 	}
 
-	private static <G extends Gene<?,G>, C extends Comparable<? super C>> Selector<G, C> createTournamentSelector(final Instance config) {
-		int sampleSize = LanguageHelper.lookup(config, "size");
-		return new TournamentSelector<>(sampleSize);
+	private <G extends Gene<?,G>, C extends Comparable<? super C>> Selector<G, C> createTournamentSelector(final Instance config) {
+		int count = (int)(LanguageHelper.<Double>lookup(config, "size-factor") * sizeOfPopulation);
+		return new TournamentSelector<>(count);
 	}
 
 	private static <G extends Gene<?,G>, C extends Comparable<? super C>> Selector<G, C> createStochasticUniversalSelector(final Instance config) {
@@ -82,9 +86,8 @@ public class SelectorFactory {
 	}
 
 	private <G extends Gene<?,G>, C extends Comparable<? super C>> EliteSelector<G,C> createEliteSelector(final Instance config) {
-		
-		int count = LanguageHelper.lookup(config, "count");
-		final Instance nonEliteSelectorConfig = LanguageHelper.lookup(config, "nonEliteSelector");
+		int count = (int)(LanguageHelper.<Double>lookup(config, "size-factor") * sizeOfPopulation);
+		final Instance nonEliteSelectorConfig = LanguageHelper.lookup(config, "non-elite-selector");
 		
 		if(nonEliteSelectorConfig == null) {
 			return new EliteSelector<>(count);
