@@ -12,6 +12,7 @@ import javax.inject.Named;
 import de.evoal.core.main.ea.constraints.deviation.model.Deviation;
 import de.evoal.core.main.ea.constraints.deviation.model.Deviations;
 import de.evoal.core.main.ea.constraints.el.ElHelper;
+import de.evoal.core.main.ea.constraints.el.LogHelper;
 import de.evoal.languages.model.ddl.DataDescription;
 import de.evoal.languages.model.el.Call;
 import de.evoal.languages.model.el.Expression;
@@ -56,8 +57,8 @@ public class DeviationProducer {
     }
 
     private Optional<Deviation> convert(final Call constraint, final DataDescription context) {
-        if(constraint.getParameters().size() != 1) {
-            log.error("Deviation has more than two parameters. Skipping.");
+        if(constraint.getParameters().size() != 2) {
+            LogHelper.parameterMismatch(log, "standardDeviation", constraint, 2);
             return Optional.empty();
         }
 

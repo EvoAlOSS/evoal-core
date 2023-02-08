@@ -11,6 +11,7 @@ import de.evoal.core.main.ea.constraints.el.ElHelper;
 import de.evoal.core.api.ea.correlations.Correlation;
 import de.evoal.core.api.ea.correlations.Correlations;
 import de.evoal.core.api.ea.correlations.RangedCorrelation;
+import de.evoal.core.main.ea.constraints.el.LogHelper;
 import de.evoal.languages.model.ddl.DataDescription;
 import de.evoal.languages.model.el.Call;
 import lombok.extern.slf4j.Slf4j;
@@ -82,7 +83,7 @@ public class CorrelationsProducer {
 
             return Optional.of(result);
         } else {
-            log.error("connection constraint has wrong number of parameters: {}", constraint.getParameters().size());
+            LogHelper.parameterMismatch(log, "connection", constraint, 3);
             return Optional.empty();
         }
     }

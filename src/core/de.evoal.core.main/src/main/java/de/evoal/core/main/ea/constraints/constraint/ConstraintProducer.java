@@ -11,8 +11,10 @@ import javax.enterprise.inject.Produces;
 import javax.inject.Named;
 
 import de.evoal.core.main.ea.constraints.el.ElHelper;
+import de.evoal.core.main.ea.constraints.el.LogHelper;
 import de.evoal.languages.model.ddl.DataDescription;
 import de.evoal.languages.model.ddl.FunctionName;
+import de.evoal.languages.model.ddl.dsl.DataDescriptionLanguageStandaloneSetup;
 import de.evoal.languages.model.el.Call;
 import de.evoal.core.main.ea.constraints.constraint.ast.ConditionConverter;
 import de.evoal.languages.model.instance.Array;
@@ -20,6 +22,7 @@ import de.evoal.languages.model.instance.Attribute;
 import de.evoal.languages.model.instance.DataReference;
 import de.evoal.languages.model.instance.Instance;
 import lombok.extern.slf4j.Slf4j;
+import org.eclipse.xtext.serializer.impl.Serializer;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -37,7 +40,6 @@ public class ConstraintProducer {
                               @ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.fitness") final Instance fitnessConfig) {
         this.genoSpec = genoSpec;
         this.fitnessSpec = toInnerSpecification(fitnessConfig);
-
         final Constraints result = new Constraints();
 
         constraints.stream()
@@ -79,9 +81,9 @@ public class ConstraintProducer {
                         .build();
     }
 
-    private Optional<Constraint> convert(final Call constraint, DataDescription context) {
+    private Optional<Constraint> convert(final Call constraint, final DataDescription context) {
         if(constraint.getParameters().size() != 2) {
-            log.error("Constraint has more than two parameters. Skipping.");
+            LogHelper.parameterMismatch(log,"constraint", constraint, 2);
             return Optional.empty();
         }
 
