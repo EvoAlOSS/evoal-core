@@ -27,11 +27,12 @@ public class LanguageUtils {
     public static <T extends EObject> T load(final @NonNull File path, final Class<T> cl) {
         loadPackages();
         
-        final URI modelURI = URI.createPlatformResourceURI(path.toString(), true);
+        final URI modelURI = URI.createFileURI(path.toString());
         return load(modelURI, cl);
     }
 
     private static void loadPackages() {
+        DdlPackage.eINSTANCE.getName();
         DataDescriptionLanguageStandaloneSetup.doSetup();
     }
 

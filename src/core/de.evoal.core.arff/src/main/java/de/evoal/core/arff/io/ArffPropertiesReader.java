@@ -104,6 +104,20 @@ public class ArffPropertiesReader implements PropertiesReader {
                     properties.put(pSpec, (int)instance.toDoubleArray()[index]);
                     return properties;
                 };
+            } else if(RepresentationType.STRING.equals(rType)) {
+                toProperties = (instance, template, builder) -> {
+                    if(instance.isMissing(index)) {
+                        return decoratee.apply(instance, template, builder);
+                    }
+
+                    // add current specification to builder and let the chain complete it
+                    builder.add(pSpec);
+                    final Properties properties = decoratee.apply(instance, template, builder);
+
+                    // set value and return
+                    properties.put(pSpec, instance.stringValue(index));
+                    return properties;
+                };
             } else {
                 throw new RuntimeException("Not yet supported: " + rType);
             }
