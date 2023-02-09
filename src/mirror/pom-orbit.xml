@@ -1,0 +1,84 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>de.evoal</groupId>
+  <artifactId>p2-mirror-orbit</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <name>Mirror Parent</name>
+  
+  <properties>
+    <tycho.version>3.0.0</tycho.version>
+    <tycho-extras.version>3.0.0</tycho-extras.version>
+
+    <eclipse.environment>JavaSE-17</eclipse.environment>
+    
+    <url.eclipse>https://download.eclipse.org/releases/2022-12/202212071000</url.eclipse>
+    <url.orbit>https://download.eclipse.org/tools/orbit/downloads/drops/R20221123021534/repository</url.orbit>
+  </properties>
+  
+  <build>
+    <plugins>
+      <!-- Activating Maven Tycho -->
+      <plugin>
+        <groupId>org.eclipse.tycho</groupId>
+        <artifactId>tycho-maven-plugin</artifactId>
+        <version>${tycho.version}</version>
+        <extensions>true</extensions>
+      </plugin>
+      
+      <plugin>
+        <groupId>org.eclipse.tycho.extras</groupId>
+        <artifactId>tycho-p2-extras-plugin</artifactId>
+        <version>${tycho.version}</version>
+        <executions>
+          <execution>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>mirror</goal>
+            </goals>
+          </execution>
+        </executions>
+
+        <configuration>
+          <source>
+            <!-- source repositories to mirror from -->
+            <repository>
+              <url>${url.orbit}</url>
+              <layout>p2</layout>
+            </repository>
+          </source>
+
+          <!-- The destination directory to mirror to. -->
+          <destination>${env.HOME}/.m2/p2-mirror/orbit-mirror</destination>
+
+          <!-- Whether only strict dependencies should be followed. -->
+          <!-- "strict" means perfect version match -->
+          <followStrictOnly>false</followStrictOnly>
+
+          <!-- Whether or not to follow optional requirements. -->
+          <includeOptional>true</includeOptional>
+
+          <!-- Whether or not to follow non-greedy requirements. -->
+          <includeNonGreedy>true</includeNonGreedy>
+
+          <!-- Whether to filter the resulting set of IUs to only -->
+          <!-- include the latest version of each IU -->
+          <latestVersionOnly>false</latestVersionOnly>
+
+          <!-- don't mirror artifacts, only metadata -->
+          <mirrorMetadataOnly>false</mirrorMetadataOnly>
+
+          <!-- whether to compress the content.xml/artifacts.xml -->
+          <compress>true</compress>
+          
+          <!-- whether to append to the target repository content -->
+          <append>true</append>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
