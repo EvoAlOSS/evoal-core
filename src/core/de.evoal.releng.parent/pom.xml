@@ -30,6 +30,7 @@
         <module>../de.evoal.core.plugin</module>
 
         <module>../de.evoal.core.arff</module>
+        <module>../de.evoal.core.junit</module>
 
         <module>../de.evoal.generator.main</module>
 

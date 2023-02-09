@@ -1,6 +1,5 @@
-package de.evoal.core.arff.utils;
+package de.evoal.core.junit.resources;
 
-import org.junit.jupiter.api.io.TempDir;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -9,8 +8,6 @@ import java.io.InputStream;
 import java.nio.file.*;
 import java.io.IOException;
 import java.net.URL;
-import java.nio.file.attribute.FileAttribute;
-import java.nio.file.attribute.PosixFileAttributes;
 import java.nio.file.attribute.PosixFilePermission;
 import java.nio.file.attribute.PosixFilePermissions;
 import java.util.Enumeration;

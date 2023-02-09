@@ -1,6 +1,6 @@
 data:
-    cardinal real 'sepallength';
-    cardinal real 'sepalwidth';
-    cardinal real 'petallength';
-    cardinal real 'petalwidth';
-    nominal string 'class';
+    cardinal real data 'sepallength';
+    cardinal real data 'sepalwidth';
+    cardinal real data 'petallength';
+    cardinal real data 'petalwidth';
+    nominal string data 'class';
