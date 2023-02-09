@@ -30,7 +30,7 @@
     <mirrors>
     <mirror>
       <id>local-eclipse-mirror</id>
-      <mirrorOf>eclipse-2021-09</mirrorOf>
+      <mirrorOf>eclipse-2022-12</mirrorOf>
       <url>file:${user.home}/.m2/p2-mirror/eclipse-mirror</url>
       <layout>p2</layout>
       <mirrorOfLayouts>p2</mirrorOfLayouts>
