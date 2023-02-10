@@ -255,4 +255,18 @@
          version="0.0.0"
          unpack="false"/>
 
+   <plugin
+         id="de.evoal.languages.model.utils"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="de.evoal.ui.core"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
 </feature>

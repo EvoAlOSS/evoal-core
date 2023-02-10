@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            class="de.evoal.ui.core.MainWorkbenchPreferencePage"
+            id="de.evoal.ui.core.main"
+            name="EvoAl">
+      </page>
+   </extension>
+   <extension
+         point="de.evoal.languages.model.utils.builtin">
+      <provider
+            class="de.evoal.ui.core.builtin.ReleaseBuiltinProvider">
+      </provider>
+   </extension>
+
+</plugin>

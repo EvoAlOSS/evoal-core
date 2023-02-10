@@ -8,7 +8,7 @@ import org.eclipse.xtext.naming.SimpleNameProvider;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.impl.ImportUriGlobalScopeProvider;
 
-import de.evoal.languages.model.dl.dsl.converter.ValueConverterService;
+import de.evoal.languages.model.utils.converter.ValueConverterService;
 
 import org.eclipse.xtext.conversion.IValueConverterService;
 

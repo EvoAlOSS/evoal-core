@@ -10,7 +10,7 @@ import org.eclipse.xtext.naming.SimpleNameProvider;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.impl.ImportUriGlobalScopeProvider;
 
-import de.evoal.languages.model.ddl.dsl.converter.ValueConverterService;
+import de.evoal.languages.model.utils.converter.ValueConverterService;
 
 /**
  * Use this class to register components to be used at runtime / without the Equinox extension registry.

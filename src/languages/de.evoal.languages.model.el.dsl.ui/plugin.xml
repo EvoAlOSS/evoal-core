@@ -78,9 +78,10 @@
 	<extension
 			point="org.eclipse.ui.preferencePages">
 		<page
+			category="de.evoal.ui.core.main"
 			class="de.evoal.languages.model.el.dsl.ui.ExpressionLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
 			id="de.evoal.languages.model.el.dsl.ExpressionLanguage"
-			name="ExpressionLanguage">
+			name="Expression DSL">
 			<keywordReference id="de.evoal.languages.model.el.dsl.ui.keyword_ExpressionLanguage"/>
 		</page>
 		<page

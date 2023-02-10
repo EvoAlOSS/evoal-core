@@ -1,4 +1,4 @@
-package de.evoal.languages.model.instance.dsl.converter;
+package de.evoal.languages.model.utils.converter;
 
 import java.util.regex.Pattern;
 
@@ -26,7 +26,7 @@ public class StringStripperConverter implements IValueConverter<String> {
 			return null;
 		}
 
-		if (string.startsWith("'")) {
+		if (string.startsWith("\"") || string.startsWith("'")) {
 			return string.substring(1, string.length() - 1);
 		} else {
 			return string;
@@ -42,7 +42,7 @@ public class StringStripperConverter implements IValueConverter<String> {
 		if (isID(value)) {
 			return value;
 		} else {
-			return String.format("'%s'", value);
+			return "\'" + value + "\'";
 		}
 	}
 

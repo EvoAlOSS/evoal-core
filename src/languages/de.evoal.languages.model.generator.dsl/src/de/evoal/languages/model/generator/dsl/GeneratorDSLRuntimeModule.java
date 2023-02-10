@@ -7,7 +7,8 @@ import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.impl.ImportUriGlobalScopeProvider;
 
-import de.evoal.languages.model.generator.dsl.converter.ValueConverterService;
+import de.evoal.languages.model.generator.dsl.scoping.ClasspathGlobalScopeProvider;
+import de.evoal.languages.model.utils.converter.ValueConverterService;
 
 /**
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
@@ -15,7 +16,8 @@ import de.evoal.languages.model.generator.dsl.converter.ValueConverterService;
 public class GeneratorDSLRuntimeModule extends AbstractGeneratorDSLRuntimeModule {
 	@Override
 	public Class<? extends IGlobalScopeProvider> bindIGlobalScopeProvider() {
-		return ImportUriGlobalScopeProvider.class;
+		//return ImportUriGlobalScopeProvider.class;
+		return ClasspathGlobalScopeProvider.class;
 	}
 	
     @Override

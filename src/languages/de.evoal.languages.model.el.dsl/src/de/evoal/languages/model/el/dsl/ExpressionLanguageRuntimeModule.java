@@ -6,7 +6,7 @@ package de.evoal.languages.model.el.dsl;
 
 import org.eclipse.xtext.conversion.IValueConverterService;
 
-import de.evoal.languages.model.el.dsl.converter.ValueConverterService;
+import de.evoal.languages.model.utils.converter.ValueConverterService;
 
 /**
  * Use this class to register components to be used at runtime / without the Equinox extension registry.

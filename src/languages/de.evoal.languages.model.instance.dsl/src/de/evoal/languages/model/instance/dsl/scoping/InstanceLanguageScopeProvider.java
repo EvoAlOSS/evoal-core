@@ -36,8 +36,6 @@ import de.evoal.languages.model.instance.NameOrMisc;
 public class InstanceLanguageScopeProvider extends AbstractInstanceLanguageScopeProvider {
 	@Inject
 	DataDescriptionLanguageScopeProvider dlProvider;
-//	@Inject
-//	DataDefinitionLanguageScopeProvider ddlProvider;
 		
 	@Override
 	public IScope getScope(final EObject context, final EReference reference) {

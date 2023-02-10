@@ -78,9 +78,10 @@
 	<extension
 			point="org.eclipse.ui.preferencePages">
 		<page
+			category="de.evoal.ui.core.main"
 			class="de.evoal.languages.model.instance.dsl.ui.InstanceLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
 			id="de.evoal.languages.model.instance.dsl.Instance"
-			name="Instance">
+			name="Instance DSL">
 			<keywordReference id="de.evoal.languages.model.instance.dsl.ui.keyword_Instance"/>
 		</page>
 		<page

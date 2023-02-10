@@ -78,9 +78,10 @@
 	<extension
 			point="org.eclipse.ui.preferencePages">
 		<page
+			category="de.evoal.ui.core.main"
 			class="de.evoal.languages.model.ol.dsl.ui.OptimisationLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
 			id="de.evoal.languages.model.ol.dsl.OptimisationLanguage"
-			name="OptimisationLanguage">
+			name="Optimisation DSL">
 			<keywordReference id="de.evoal.languages.model.ol.dsl.ui.keyword_OptimisationLanguage"/>
 		</page>
 		<page

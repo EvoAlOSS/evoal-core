@@ -78,9 +78,10 @@
 	<extension
 			point="org.eclipse.ui.preferencePages">
 		<page
+			category="de.evoal.ui.core.main"
 			class="de.evoal.languages.model.ddl.dsl.ui.DataDescriptionLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
 			id="de.evoal.languages.model.ddl.dsl.DataDescriptionLanguage"
-			name="DataDescriptionLanguage">
+			name="Data Description DSL">
 			<keywordReference id="de.evoal.languages.model.ddl.dsl.ui.keyword_DataDescriptionLanguage"/>
 		</page>
 		<page

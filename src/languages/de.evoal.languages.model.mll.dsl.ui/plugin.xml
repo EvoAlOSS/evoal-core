@@ -78,9 +78,10 @@
 	<extension
 			point="org.eclipse.ui.preferencePages">
 		<page
+			category="de.evoal.ui.core.main"
 			class="de.evoal.languages.model.mll.dsl.ui.MachineLearningLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
 			id="de.evoal.languages.model.mll.dsl.MachineLearningLanguage"
-			name="MachineLearningLanguage">
+			name="Machine Learning DSL">
 			<keywordReference id="de.evoal.languages.model.mll.dsl.ui.keyword_MachineLearningLanguage"/>
 		</page>
 		<page

@@ -78,9 +78,10 @@
 	<extension
 			point="org.eclipse.ui.preferencePages">
 		<page
+			category="de.evoal.ui.core.main"
 			class="de.evoal.languages.model.generator.dsl.ui.GeneratorDSLExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
 			id="de.evoal.languages.model.generator.dsl.GeneratorDSL"
-			name="GeneratorDSL">
+			name="Generator DSL">
 			<keywordReference id="de.evoal.languages.model.generator.dsl.ui.keyword_GeneratorDSL"/>
 		</page>
 		<page

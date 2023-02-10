@@ -1,4 +1,4 @@
-package de.evoal.languages.model.dl.dsl.converter;
+package de.evoal.languages.model.utils.converter;
 
 import org.eclipse.xtext.common.services.DefaultTerminalConverters;
 import org.eclipse.xtext.conversion.IValueConverter;

@@ -266,6 +266,9 @@
 	<modules>
 		<module>../de.evoal.languages.releng.target</module>
 
+		<module>../de.evoal.languages.model.utils</module>
+		<module>../de.evoal.ui.core</module>
+		
 		<module>../de.evoal.languages.model.el</module>
 		<module>../de.evoal.languages.model.el.dsl</module>
 		<module>../de.evoal.languages.model.el.dsl.ide</module>
