@@ -114,8 +114,7 @@ public abstract class DensityBasedFitness extends FitnessDecorator {
             final double predictedValue = current[i];
             final double probability = probabilityCalculator.apply(sourceData, targetData, candidate, predictedValue);
 
-            // DO WE HAVE TO FIX THIS?
-            fitness[i] = current[i] * Math.pow(probability, rootExponent) + (1 - probability) * 1 / Math.pow(probability, exponent);
+            fitness[i] = current[i] * Math.pow(probability, rootExponent) + (1 - probability) * 1.0 / Math.pow(probability, exponent);
         }
 
         return fitness;
@@ -129,7 +128,7 @@ public abstract class DensityBasedFitness extends FitnessDecorator {
     }
 
     /**
-     * "This is fine."
+     * "Now, it's really fine."
      */
     private double sourceBasedProbabilityCalculator(final DensityData [] sourceData, final DensityData targetData, final Properties candidate, final double predicted) {
         double result = 1.0;
@@ -137,7 +136,7 @@ public abstract class DensityBasedFitness extends FitnessDecorator {
             final double probability = sourceData[i].probability(((Number)candidate.get(i)).doubleValue());
             final double offset = 1 / ((Number)ranges.get(surrogate.getInputSpecification().get(i))).doubleValue();
 
-            result *= Math.min(1.0, probability + offset);
+            result *= Math.pow(Math.min(1.0, probability + offset), 1.0 / candidate.size());
         }
 
         return result;
