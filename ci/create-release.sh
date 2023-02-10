@@ -27,15 +27,18 @@ rm evoal/modules/jboss-el-api*
 #  and multiple 'modules' have classes in the same package which is not supported by jigsaw.
 #  Therefore, we merge the modules and create a single module.
 cd evoal
-mkdir xtext-merge
-pushd xtext-merge
-  unzip -o ../modules/org.eclipse.xtext.util-*.jar
-  unzip -o ../modules/org.eclipse.xtext-*.jar
-  rm ../modules/org.eclipse.xtext.util-*.jar
-  rm ../modules/org.eclipse.xtext-*.jar
-  jar Mcf ../modules/org.eclipse.xtext.jar *
-popd
-rm -rf xtext-merge
+#mkdir xtext-merge
+#pushd xtext-merge
+#  unzip -o ../modules/org.eclipse.xtext.util-*.jar
+#  unzip -o ../modules/org.eclipse.xtext-*.jar
+#  rm ../modules/org.eclipse.xtext.util-*.jar
+#  rm ../modules/org.eclipse.xtext-*.jar
+#  jar Mcf ../modules/org.eclipse.xtext.jar *
+#popd
+#rm -rf xtext-merge
+
+# remove xtext util since we merged it to xtext
+rm modules/org.eclipse.xtext.util-*
 
 # let's copy the scripts to the correct location
 mkdir bin
