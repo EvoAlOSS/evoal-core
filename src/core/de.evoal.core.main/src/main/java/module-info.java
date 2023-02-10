@@ -39,6 +39,7 @@ module de.evoal.core.main {
     requires de.evoal.languages.model.el;
     requires de.evoal.languages.model.el.dsl;
     requires de.evoal.languages.model.instance;
+    requires de.evoal.languages.model.utils;
     requires com.google.guice;
 
     exports de.evoal.core.api.board;
@@ -100,4 +101,6 @@ module de.evoal.core.main {
     opens de.evoal.core.api.ea.constraints.strategies to weld.core.impl;
     opens de.evoal.core.main.properties to weld.core.impl;
     opens de.evoal.core.main.ea.search to weld.core.impl;
+
+    provides de.evoal.languages.model.utils.builtin.BuiltinProvider with de.evoal.core.main.language.ModuleBuiltinProvider;
 }

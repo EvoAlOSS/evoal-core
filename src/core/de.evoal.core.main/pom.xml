@@ -218,6 +218,12 @@
 			<scope>runtime</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>de.evoal.languages</groupId>
+			<artifactId>de.evoal.languages.model.utils</artifactId>
+			<version>${evoal.languages.version}</version>
+		</dependency>
+
 		<!-- Xtext -->
 		<dependency>
 			<groupId>org.eclipse.emf</groupId>

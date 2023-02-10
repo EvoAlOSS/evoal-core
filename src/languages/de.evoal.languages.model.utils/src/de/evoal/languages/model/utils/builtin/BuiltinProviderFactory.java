@@ -3,6 +3,7 @@ package de.evoal.languages.model.utils.builtin;
 
 import java.util.Iterator;
 import java.util.ServiceLoader;
+import java.util.function.Supplier;
 
 public final class BuiltinProviderFactory {
 	public static BuiltinProvider create() {
@@ -12,6 +13,13 @@ public final class BuiltinProviderFactory {
 			return iterator.next();
 		}
 		
-		return new ExtensionPointLookup().get();
+		
+		try {
+			final Class<Supplier<BuiltinProvider>> clazz = (Class<Supplier<BuiltinProvider>>) Class.forName("de.evoal.languages.model.utils.builtin.ExtensionPointLookup");
+			return clazz.newInstance().get();
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
 	}
 }
