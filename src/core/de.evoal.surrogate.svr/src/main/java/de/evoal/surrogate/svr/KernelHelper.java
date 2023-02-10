@@ -153,7 +153,7 @@ public final class KernelHelper {
 		}
 		
 		case "hyperbolic-tangent": {
-			toHyperbolicTangentKernel(parameters);
+			return toHyperbolicTangentKernel(parameters);
 		}
 
 		case "laplacian": {
