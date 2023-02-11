@@ -6,8 +6,8 @@ package de.evoal.languages.model.mll.dsl;
 
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
-import org.eclipse.xtext.scoping.impl.ImportUriGlobalScopeProvider;
 
+import de.evoal.languages.model.mll.dsl.scoping.MachineLearningClasspathGlobalScopeProvider;
 import de.evoal.languages.model.utils.converter.ValueConverterService;
 
 /**
@@ -16,7 +16,7 @@ import de.evoal.languages.model.utils.converter.ValueConverterService;
 public class MachineLearningLanguageRuntimeModule extends AbstractMachineLearningLanguageRuntimeModule {
 	@Override
 	public Class<? extends IGlobalScopeProvider> bindIGlobalScopeProvider() {
-		return ImportUriGlobalScopeProvider.class;
+		return MachineLearningClasspathGlobalScopeProvider.class;
 	}
 	
     @Override

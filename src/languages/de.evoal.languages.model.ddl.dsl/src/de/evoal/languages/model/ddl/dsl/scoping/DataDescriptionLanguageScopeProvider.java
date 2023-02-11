@@ -4,10 +4,6 @@
  */
 package de.evoal.languages.model.ddl.dsl.scoping;
 
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
-import org.eclipse.xtext.scoping.IScope;
-
 /**
  * This class contains custom scoping description.
  * 
@@ -15,8 +11,4 @@ import org.eclipse.xtext.scoping.IScope;
  * on how and when to use it.
  */
 public class DataDescriptionLanguageScopeProvider extends AbstractDataDescriptionLanguageScopeProvider {
-	@Override
-	public IScope getScope(final EObject context, final EReference reference) {
-		return super.getScope(context, reference);
-	}
 }

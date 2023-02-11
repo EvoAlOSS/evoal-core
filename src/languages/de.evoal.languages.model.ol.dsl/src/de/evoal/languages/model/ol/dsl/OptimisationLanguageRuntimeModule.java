@@ -7,7 +7,7 @@ package de.evoal.languages.model.ol.dsl;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 
-import de.evoal.languages.model.ol.dsl.utils.OLGlobalScopeProvider;
+import de.evoal.languages.model.ol.dsl.scoping.OptimisationLanguageClasspathGlobalScopeProvider;
 import de.evoal.languages.model.utils.converter.ValueConverterService;
 
 /**
@@ -16,7 +16,7 @@ import de.evoal.languages.model.utils.converter.ValueConverterService;
 public class OptimisationLanguageRuntimeModule extends AbstractOptimisationLanguageRuntimeModule {
     @Override
     public Class<? extends IGlobalScopeProvider> bindIGlobalScopeProvider() {
-            return OLGlobalScopeProvider.class;
+            return OptimisationLanguageClasspathGlobalScopeProvider.class;
     }
 
 	@Override

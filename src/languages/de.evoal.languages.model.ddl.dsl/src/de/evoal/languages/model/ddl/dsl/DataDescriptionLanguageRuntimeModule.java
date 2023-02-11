@@ -8,8 +8,8 @@ import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.SimpleNameProvider;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
-import org.eclipse.xtext.scoping.impl.ImportUriGlobalScopeProvider;
 
+import de.evoal.languages.model.ddl.dsl.scoping.DataDescriptionLanguageClasspathGlobalScopeProvider;
 import de.evoal.languages.model.utils.converter.ValueConverterService;
 
 /**
@@ -18,7 +18,7 @@ import de.evoal.languages.model.utils.converter.ValueConverterService;
 public class DataDescriptionLanguageRuntimeModule extends AbstractDataDescriptionLanguageRuntimeModule {
 	@Override
 	public Class<? extends IGlobalScopeProvider> bindIGlobalScopeProvider() {
-		return ImportUriGlobalScopeProvider.class;
+		return DataDescriptionLanguageClasspathGlobalScopeProvider.class;
 	}
 
 	public Class<? extends IQualifiedNameProvider> bindIQualifiedNameProvider() {

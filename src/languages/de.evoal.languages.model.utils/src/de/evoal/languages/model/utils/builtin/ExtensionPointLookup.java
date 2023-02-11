@@ -1,15 +1,13 @@
 package de.evoal.languages.model.utils.builtin;
 
-import java.util.Arrays;
-import java.util.function.Function;
 import java.util.function.Supplier;
 
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
-import org.eclipse.core.runtime.IExtensionPoint;
-import org.eclipse.core.runtime.InvalidRegistryObjectException;
 import org.eclipse.core.runtime.Platform;
 
+/**
+ * Using Eclipse's extension point mechanism to provide the builtin provider.
+ */
 public class ExtensionPointLookup implements Supplier<BuiltinProvider>{
 
 	@Override
@@ -18,7 +16,6 @@ public class ExtensionPointLookup implements Supplier<BuiltinProvider>{
 		
 		for(final IConfigurationElement element : elements) {
 			try {
-				System.out.println(Arrays.toString(element.getAttributeNames()));
 				return (BuiltinProvider)element.createExecutableExtension("class");
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
@@ -29,5 +26,4 @@ public class ExtensionPointLookup implements Supplier<BuiltinProvider>{
 
 		return null;
 	}
-
 }

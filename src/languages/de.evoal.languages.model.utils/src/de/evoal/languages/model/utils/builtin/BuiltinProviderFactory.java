@@ -13,7 +13,6 @@ public final class BuiltinProviderFactory {
 			return iterator.next();
 		}
 		
-		
 		try {
 			final Class<Supplier<BuiltinProvider>> clazz = (Class<Supplier<BuiltinProvider>>) Class.forName("de.evoal.languages.model.utils.builtin.ExtensionPointLookup");
 			return clazz.newInstance().get();

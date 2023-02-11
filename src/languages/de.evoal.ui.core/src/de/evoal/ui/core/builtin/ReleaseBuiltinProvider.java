@@ -19,15 +19,18 @@ import java.util.jar.JarFile;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
+import org.eclipse.core.runtime.preferences.InstanceScope;
+import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.ui.preferences.ScopedPreferenceStore;
+
 import de.evoal.languages.model.utils.builtin.BuiltinProvider;
 
 public class ReleaseBuiltinProvider implements BuiltinProvider {
-	final String evoalRelease = "/Users/berber/repositories/evoal/source--evoal-core/src/core/environment/";
-
 	@Override
 	public Collection<URI> findBuiltins(final String basename) {
+		final IPreferenceStore store = new ScopedPreferenceStore(InstanceScope.INSTANCE, "de.evoal.ui.core.main");
+		final String evoalRelease = store.getString("release");
 		final PathMatcher jarMatcher = FileSystems.getDefault().getPathMatcher("glob:**/*.jar");
-		
 		final List<URI> result = new LinkedList<>();
 
 		try {
@@ -45,26 +48,26 @@ public class ReleaseBuiltinProvider implements BuiltinProvider {
 			e.printStackTrace();
 		}
 		
-		System.err.println(result);
-		
 		return result;
 	}
 
 	private void findBuiltins(final Path jarFile, final String basename, final List<URI> result) {
+		final String completeBase = "META-INF/definitions/" + basename;
+		
 		try(final ZipFile file = new JarFile(jarFile.toFile())) {
 			final Enumeration<? extends ZipEntry> entries = file.entries();
+			
 			while(entries.hasMoreElements()) {
 				final ZipEntry entry = entries.nextElement();
 				final String name = entry.getName();
 
-				if(name.startsWith(basename) && name.endsWith(".dl")) {
+				if(name.startsWith(completeBase) && name.endsWith(".dl")) {
 					final FileSystem zipFS = FileSystems.newFileSystem(jarFile);
 					final Path fileInZip = zipFS.getPath(name);
 
 					result.add(fileInZip.toUri());
 				}
 			}
-			
 		} catch(final IOException e) {
 			e.printStackTrace();
 		}
