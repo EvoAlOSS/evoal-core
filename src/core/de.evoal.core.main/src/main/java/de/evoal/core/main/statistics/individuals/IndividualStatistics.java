@@ -69,7 +69,7 @@ public class IndividualStatistics implements StatisticsWriter {
     }
 
     private Object[] dataOfPhenotype(final int index, final long generation, Phenotype<?, FitnessValue> phenotype) {
-        final Object [] data = new Object[4 + sourceSpecification.size()];
+        final Object [] data = new Object[3 + sourceSpecification.size()];
 
         final Genotype<?> genotype = phenotype.genotype();
         final Properties individual = (Properties) encoding.decode(genotype);
