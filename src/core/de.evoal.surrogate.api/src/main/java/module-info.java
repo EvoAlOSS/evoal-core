@@ -43,6 +43,7 @@ module de.evoal.surrogate.api {
     opens de.evoal.surrogate.main.internal to weld.core.impl;
     opens de.evoal.surrogate.main.jackson to weld.core.impl, com.fasterxml.jackson.databind;
     opens de.evoal.surrogate.main.gof.cross to weld.core.impl;
+    opens de.evoal.surrogate.main.gof.rmse to weld.core.impl;
     opens de.evoal.surrogate.main.gof.rsquare to weld.core.impl;
     opens de.evoal.surrogate.main.statistics.constraint to weld.core.impl;
     opens de.evoal.surrogate.main.statistics.correlated to weld.core.impl;
