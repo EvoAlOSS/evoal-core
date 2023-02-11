@@ -1,35 +1,35 @@
 package de.evoal.approximative.density.model;
 
+
 import de.evoal.surrogate.api.configuration.Parameter;
 import de.evoal.surrogate.api.configuration.PartialFunctionConfiguration;
-import smile.stat.distribution.KernelDensity;
+import smile.stat.distribution.GaussianDistribution;
 
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class DensityData1 implements DensityData {
-    private final double [] trainingData;
-    private final double bandwidth;
-    private KernelDensity density;
+public class GaussianDensityData implements DensityData {
+    private final GaussianDistribution distribution;
+    private CustomKernelDensity density;
 
-    public DensityData1(final double bandwidth, final double [] trainingData) {
-        this.bandwidth = bandwidth;
-        this.trainingData = trainingData;
+    public GaussianDensityData(final GaussianDistribution distribution) {
+        this.distribution = distribution;
     }
 
-    public DensityData1(final PartialFunctionConfiguration configuration, final String propertyName) {
+    public GaussianDensityData(final PartialFunctionConfiguration configuration, final String propertyName) {
         final Map<String, Object> parameterMap = toMap(configuration.getOutputParameters().get(propertyName));
 
-        bandwidth = (double) parameterMap.get("density-bandwidth");
-        trainingData = (double[]) parameterMap.get("density-training");
+        double mu = (double) parameterMap.get("density-mu");
+        double sigma = (double) parameterMap.get("density-sigma");
 
-        density = new KernelDensity(trainingData, bandwidth);
+        distribution = new GaussianDistribution(mu, sigma);
+        density = new CustomKernelDensity(distribution);
     }
 
     public void attachTo(final PartialFunctionConfiguration configuration, final String propertyName) {
-        attach(configuration, propertyName, "density-bandwidth", bandwidth);
-        attach(configuration, propertyName, "density-training", trainingData);
+        attach(configuration, propertyName, "density-mu", distribution.mu);
+        attach(configuration, propertyName, "density-sigma", distribution.sigma);
     }
 
     private void attach(final PartialFunctionConfiguration regression, final String propertyName, final String name, final Object value) {

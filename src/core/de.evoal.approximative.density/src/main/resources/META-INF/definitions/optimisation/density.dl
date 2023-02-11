@@ -1,0 +1,22 @@
+/**
+ * Base type for density-based fitness value handling.
+ */
+abstract type density extends 'decorated-fitness-function' {
+    /**
+     * Which probability calculation should be used (source-based, target-based, both).
+     */
+	kind : string;
+
+	/**
+	 * Exponent for the formula.
+	 */
+	exponent : float;
+
+	/**
+	 * Exponent for the formula.
+	 */
+	'root-exponent' : float;
+}
+
+type 'kernel-density' extends density {}
+type 'gaussian-density' extends density {}

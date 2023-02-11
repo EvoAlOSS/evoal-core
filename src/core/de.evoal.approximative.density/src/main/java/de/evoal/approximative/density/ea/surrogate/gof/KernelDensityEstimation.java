@@ -1,11 +1,10 @@
 package de.evoal.approximative.density.ea.surrogate.gof;
 
 import de.evoal.approximative.density.model.DensityData;
-import de.evoal.approximative.density.model.DensityData1;
+import de.evoal.approximative.density.model.KernelDensityData;
 import de.evoal.core.api.properties.PropertiesPair;
 import de.evoal.core.api.properties.stream.PropertiesBasedPropertiesPairStreamSupplier;
 import de.evoal.core.api.properties.stream.PropertiesPairStreamSupplier;
-import de.evoal.surrogate.api.SurrogateInformationCalculator;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.enterprise.context.Dependent;
@@ -18,9 +17,9 @@ import java.util.function.Function;
  *   and adds them to the pre-calculated data.
  */
 @Dependent
-@Named("density-estimation-1")
+@Named("kernel-density-estimation")
 @Slf4j
-public class DensityEstimation1 extends AbstractDensityEstimation {
+public class KernelDensityEstimation extends AbstractDensityEstimation {
 
     @Override
     protected DensityData calculateDensityData(final Function<PropertiesPair, Double> mapper) {
@@ -29,6 +28,6 @@ public class DensityEstimation1 extends AbstractDensityEstimation {
                 .mapToDouble(pair -> mapper.apply(pair))
                 .toArray();
 
-        return new DensityData1(bandwidth, data);
+        return new KernelDensityData(bandwidth, data);
     }
 }

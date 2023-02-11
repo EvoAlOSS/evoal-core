@@ -1,35 +1,35 @@
 package de.evoal.approximative.density.model;
 
-
 import de.evoal.surrogate.api.configuration.Parameter;
 import de.evoal.surrogate.api.configuration.PartialFunctionConfiguration;
-import smile.stat.distribution.GaussianDistribution;
+import smile.stat.distribution.KernelDensity;
 
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class DensityData2 implements DensityData {
-    private final GaussianDistribution distribution;
-    private CustomKernelDensity density;
+public class KernelDensityData implements DensityData {
+    private final double [] trainingData;
+    private final double bandwidth;
+    private KernelDensity density;
 
-    public DensityData2(final GaussianDistribution distribution) {
-        this.distribution = distribution;
+    public KernelDensityData(final double bandwidth, final double [] trainingData) {
+        this.bandwidth = bandwidth;
+        this.trainingData = trainingData;
     }
 
-    public DensityData2(final PartialFunctionConfiguration configuration, final String propertyName) {
+    public KernelDensityData(final PartialFunctionConfiguration configuration, final String propertyName) {
         final Map<String, Object> parameterMap = toMap(configuration.getOutputParameters().get(propertyName));
 
-        double mu = (double) parameterMap.get("density-mu");
-        double sigma = (double) parameterMap.get("density-sigma");
+        bandwidth = (double) parameterMap.get("density-bandwidth");
+        trainingData = (double[]) parameterMap.get("density-training");
 
-        distribution = new GaussianDistribution(mu, sigma);
-        density = new CustomKernelDensity(distribution);
+        density = new KernelDensity(trainingData, bandwidth);
     }
 
     public void attachTo(final PartialFunctionConfiguration configuration, final String propertyName) {
-        attach(configuration, propertyName, "density-mu", distribution.mu);
-        attach(configuration, propertyName, "density-sigma", distribution.sigma);
+        attach(configuration, propertyName, "density-bandwidth", bandwidth);
+        attach(configuration, propertyName, "density-training", trainingData);
     }
 
     private void attach(final PartialFunctionConfiguration regression, final String propertyName, final String name, final Object value) {
