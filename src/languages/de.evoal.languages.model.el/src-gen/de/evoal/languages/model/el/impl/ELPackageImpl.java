@@ -756,6 +756,16 @@ public class ELPackageImpl extends EPackageImpl implements ELPackage {
 	 * @generated
 	 */
 	@Override
+	public EOperation getBooleanLiteral__GetValue() {
+		return booleanLiteralEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getCall() {
 		return callEClass;
 	}
@@ -952,6 +962,7 @@ public class ELPackageImpl extends EPackageImpl implements ELPackage {
 
 		booleanLiteralEClass = createEClass(BOOLEAN_LITERAL);
 		createEAttribute(booleanLiteralEClass, BOOLEAN_LITERAL__VALUE);
+		createEOperation(booleanLiteralEClass, BOOLEAN_LITERAL___GET_VALUE);
 
 		callEClass = createEClass(CALL);
 		createEReference(callEClass, CALL__FUNCTION);
@@ -1078,6 +1089,8 @@ public class ELPackageImpl extends EPackageImpl implements ELPackage {
 
 		initEClass(booleanLiteralEClass, BooleanLiteral.class, "BooleanLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getBooleanLiteral_Value(), ecorePackage.getEBoolean(), "value", null, 1, 1, BooleanLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEOperation(getBooleanLiteral__GetValue(), ecorePackage.getEBooleanObject(), "getValue", 1, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(callEClass, Call.class, "Call", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCall_Function(), this.getFunctionName(), null, "function", null, 1, 1, Call.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

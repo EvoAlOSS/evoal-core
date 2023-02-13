@@ -840,7 +840,7 @@ public interface ELPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BOOLEAN_LITERAL___GET_VALUE = LITERAL___GET_VALUE;
+	int BOOLEAN_LITERAL___GET_VALUE = LITERAL_OPERATION_COUNT + 0;
 
 	/**
 	 * The number of operations of the '<em>Boolean Literal</em>' class.
@@ -849,7 +849,7 @@ public interface ELPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BOOLEAN_LITERAL_OPERATION_COUNT = LITERAL_OPERATION_COUNT + 0;
+	int BOOLEAN_LITERAL_OPERATION_COUNT = LITERAL_OPERATION_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.el.impl.CallImpl <em>Call</em>}' class.
@@ -1516,6 +1516,16 @@ public interface ELPackage extends EPackage {
 	EAttribute getBooleanLiteral_Value();
 
 	/**
+	 * Returns the meta object for the '{@link de.evoal.languages.model.el.BooleanLiteral#getValue() <em>Get Value</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Value</em>' operation.
+	 * @see de.evoal.languages.model.el.BooleanLiteral#getValue()
+	 * @generated
+	 */
+	EOperation getBooleanLiteral__GetValue();
+
+	/**
 	 * Returns the meta object for class '{@link de.evoal.languages.model.el.Call <em>Call</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2054,6 +2064,14 @@ public interface ELPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute BOOLEAN_LITERAL__VALUE = eINSTANCE.getBooleanLiteral_Value();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Value</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation BOOLEAN_LITERAL___GET_VALUE = eINSTANCE.getBooleanLiteral__GetValue();
 
 		/**
 		 * The meta object literal for the '{@link de.evoal.languages.model.el.impl.CallImpl <em>Call</em>}' class.

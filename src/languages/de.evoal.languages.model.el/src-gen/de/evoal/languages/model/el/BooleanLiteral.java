@@ -42,4 +42,12 @@ public interface BooleanLiteral extends Literal {
 	 */
 	void setValue(boolean value);
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" required="true"
+	 * @generated
+	 */
+	Boolean getValue();
+
 } // BooleanLiteral

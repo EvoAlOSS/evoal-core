@@ -110,6 +110,7 @@
     </genClasses>
     <genClasses ecoreClass="model.ecore#//BooleanLiteral">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//BooleanLiteral/value"/>
+      <genOperations ecoreOperation="model.ecore#//BooleanLiteral/getValue" body="return isValue();"/>
     </genClasses>
     <genClasses ecoreClass="model.ecore#//Call">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//Call/function"/>

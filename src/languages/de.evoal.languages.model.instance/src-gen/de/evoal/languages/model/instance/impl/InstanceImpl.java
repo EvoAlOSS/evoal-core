@@ -140,10 +140,10 @@ public class InstanceImpl extends ValueImpl implements Instance {
 	@Override
 	public Attribute findAttribute(final String name) {
 		return this.getAttributes()
-		                         .stream()
-		                         .filter(n -> name.equals(((Name)n.getName()).getName().getName()))
-		                         .findFirst()
-		                         .orElse(null);
+		                 .stream()
+		                 .filter(n -> name.equals(((Name)n.getName()).getName().getName()))
+		                 .findFirst()
+		                 .orElse(null);
 	}
 
 	/**
