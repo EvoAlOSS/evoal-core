@@ -1,6 +1,7 @@
 package de.evoal.core.api.utils;
 
 import de.evoal.languages.model.dl.*;
+import de.evoal.languages.model.el.BooleanLiteral;
 import de.evoal.languages.model.instance.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -112,7 +113,8 @@ public final class LanguageHelper {
         } else if(type instanceof StringType) {
             return Objects.toString(((LiteralValue)current).getLiteral().getValue());
         } else if(type instanceof BooleanType) {
-            return Boolean.TRUE.equals(((LiteralValue)current).getLiteral().getValue());
+            // TODO Fix hard call to is value
+            return Boolean.TRUE.equals(((BooleanLiteral)((LiteralValue)current).getLiteral()).isValue());
         }
 
         throw new UnsupportedOperationException("Type " + type.toString() + " is not supported.");
