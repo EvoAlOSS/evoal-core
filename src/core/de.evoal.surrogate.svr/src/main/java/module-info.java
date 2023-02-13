@@ -16,4 +16,6 @@ module de.evoal.surrogate.svr {
     requires de.evoal.surrogate.api;
 
     opens de.evoal.surrogate.svr;
+
+    exports de.evoal.surrogate.svr to de.evoal.approximative.interval;
 }

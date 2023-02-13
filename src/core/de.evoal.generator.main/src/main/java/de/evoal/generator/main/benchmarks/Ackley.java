@@ -3,10 +3,10 @@ package de.evoal.generator.main.benchmarks;
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertySpecification;
 import de.evoal.core.api.utils.InitializationException;
-import de.evoal.core.api.utils.Requirements;
+import de.evoal.core.api.utils.LanguageHelper;
 import de.evoal.generator.api.AbstractGeneratorFunction;
 import de.evoal.generator.api.GeneratorFunction;
-import de.evoal.generator.main.utils.ELHelper;
+import de.evoal.generator.main.utils.ConfigurationHelper;
 import de.evoal.languages.model.generator.Step;
 import lombok.extern.slf4j.Slf4j;
 
@@ -50,9 +50,9 @@ public class Ackley extends AbstractGeneratorFunction {
     public GeneratorFunction init(final Step configuration) throws InitializationException {
         super.init(configuration);
 
-        a = ELHelper.readDouble(configuration.getInstance(), "a");
-        b = ELHelper.readDouble(configuration.getInstance(), "b");
-        c = ELHelper.readDouble(configuration.getInstance(), "c");
+        a = LanguageHelper.lookup(configuration.getInstance(), "a");
+        b = LanguageHelper.lookup(configuration.getInstance(), "b");
+        c = LanguageHelper.lookup(configuration.getInstance(), "c");
 
         return this;
     }

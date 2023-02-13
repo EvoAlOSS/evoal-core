@@ -16,6 +16,10 @@ import org.apache.deltaspike.core.api.provider.BeanProvider;
 import org.apache.deltaspike.core.util.metadata.AnnotationInstanceProvider;
 import org.slf4j.bridge.SLF4JBridgeHandler;
 
+import java.io.IOException;
+import java.io.UncheckedIOException;
+import java.lang.module.ModuleReader;
+import java.lang.module.ResolvedModule;
 import java.lang.reflect.Field;
 import java.util.*;
 
@@ -27,7 +31,23 @@ import java.util.*;
 public final class Evoal {
     public static void main(final String ... args) {
         installJavaLoggingToSLF4JBridge();
+/*
+        final ModuleLayer layer = ModuleLayer.boot();
+        ModuleLayer.boot().configuration().modules().stream()
+                .map(ResolvedModule::reference)
+                .forEach(mref -> {
 
+                    System.out.println(mref.descriptor().name() + " --> " + mref.location().get());
+                    try (ModuleReader reader = mref.open()) {
+                        reader.list().forEach(f -> System.out.println("   " + f));
+                    } catch (IOException ioe) {
+                        throw new UncheckedIOException(ioe);
+                    }
+                });
+
+
+        System.exit(1);
+*/
         log.info("Starting up EvoAl");
 
         log.info("Booting CDI container");

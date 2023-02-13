@@ -10,8 +10,7 @@ import java.util.Collections;
 @Slf4j
 public class ModuleBuiltinProvider implements BuiltinProvider {
     @Override
-    public Collection<URI> findBuiltins(String name) {
-        System.err.println("Builtins");
+    public Collection<URI> findBuiltins(final String name) {
         return Collections.emptyList();
     }
 }

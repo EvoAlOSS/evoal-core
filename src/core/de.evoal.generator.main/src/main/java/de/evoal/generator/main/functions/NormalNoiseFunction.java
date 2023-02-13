@@ -8,7 +8,7 @@ import de.evoal.core.api.properties.PropertySpecification;
 import de.evoal.core.api.utils.InitializationException;
 import de.evoal.generator.api.AbstractGeneratorFunction;
 import de.evoal.generator.api.GeneratorFunction;
-import de.evoal.generator.main.utils.ELHelper;
+import de.evoal.generator.main.utils.ConfigurationHelper;
 import de.evoal.languages.model.generator.Step;
 import org.apache.commons.math3.distribution.NormalDistribution;
 import org.apache.commons.math3.distribution.RealDistribution;
@@ -28,7 +28,7 @@ public class NormalNoiseFunction extends AbstractGeneratorFunction {
 	public GeneratorFunction init(final Step configuration) throws InitializationException {
 		super.init(configuration);
 
-		ELHelper.readDistributions(configuration.getInstance(), "distributions")
+		ConfigurationHelper.readDistributions(configuration.getInstance(), "distributions")
 				.stream()
 				.map(d -> new NormalDistribution(d.μ(), d.σ()))
 				.forEach(distributions::add);

@@ -1,0 +1,48 @@
+abstract type 'svr-surrogate' extends surrogate {}
+
+abstract type 'epsilon-svr' extends surrogate {
+        /**
+         * Some totally <b>accurate</b> description of a very soft margin.
+         */
+        'soft-margin'   : float;
+        tolerance       : float;
+        'ε'             : float;
+}
+
+type  'gaussian-svr' extends 'epsilon-svr' {
+        'σ'             : float;
+}
+
+type 'hellinger-svr' extends 'epsilon-svr' {
+        'σ'             : float;
+}
+
+type 'hyperbolic-tangent-svr' extends 'epsilon-svr' {
+        'σ'             : float;
+        scale           : float;
+        offset          : float;
+}
+
+type 'laplacian-svr' extends 'epsilon-svr' {
+        'σ'             : float;
+}
+
+type 'linear-svr' extends 'epsilon-svr' {
+        'σ'             : float;
+}
+
+type 'pearson-svr' extends 'epsilon-svr' {
+        'σ'             : float;
+        'ω'             : float;
+}
+
+type 'polynomial-svr' extends 'epsilon-svr' {
+        'σ'             : float;
+        'degree'        : int;
+        'scale'         : float;
+        'offset'        : float;
+}
+
+type 'thin-plate-spline-svr' extends 'epsilon-svr' {
+        'σ'             : float;
+}

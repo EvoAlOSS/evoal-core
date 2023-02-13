@@ -1,14 +1,19 @@
 package de.evoal.core.api.utils;
 
-import de.evoal.languages.model.el.*;
+import de.evoal.languages.model.dl.*;
 import de.evoal.languages.model.instance.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.function.DoubleToIntFunction;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 /**
- * Helper class for processing eal files.
+ * Helper class for processing instances.
  */
 public final class LanguageHelper {
     /**
@@ -25,15 +30,25 @@ public final class LanguageHelper {
     public static <T> T lookup(final Instance instance, final String path) {
         log.debug("Locking up '{}':", path);
 
+        if(path == null) {
+            log.warn("Asking for a null-path.");
+            throw new IllegalArgumentException("Path is not allowed to be null");
+        } else if(path.isEmpty()) {
+            return (T)instance;
+        }
+
         final String [] parts = path.split("\\.");
 
         Object current = instance;
 
         for(final String part : parts) {
             try {
-                if(!(current instanceof Instance)) {
+                if(current == null) {
+                    log.error("Unable to select child on null value.");
+                    throw new IllegalStateException("Unable to select child on null value.");
+                } else if(!(current instanceof Instance)) {
                     log.error("Failed to lookup part '{}' of path '{}' in '{}'.", part, path, current);
-                    throw new IllegalStateException("EA configuration is not valid.");
+                    throw new IllegalStateException("Configuration is not valid.");
                 }
 
                 final Attribute attribute = ((Instance)current).findAttribute(part);
@@ -49,25 +64,16 @@ public final class LanguageHelper {
                     for(final Attribute a : ((Instance) current).getAttributes()) {
                         log.warn("  {}", ((Name)a.getName()).getName().getName());
                     }
-                    return null;
+
+                    log.error("Selecting non-existing path '{}'.", path);
+                    throw new IllegalStateException("Selecting non-existing field: " + part);
+                }
+                if(attribute != null) {
+                    current = convertToJava(current, ((Name) attribute.getName()).getName().getType());
                 }
             } catch(final NullPointerException e) {
                 log.error("Failed to lookup part '{}' of path '{}'.", part, path);
                 throw e;
-            }
-        }
-
-        if(current instanceof LiteralValue) {
-            Literal literal = ((LiteralValue)current).getLiteral();
-
-            if(literal instanceof StringLiteral) {
-                current = ((StringLiteral)literal).getValue();
-            } else if(literal instanceof IntegerLiteral) {
-                current = ((IntegerLiteral)literal).getValue();
-            } else if(literal instanceof DoubleLiteral) {
-                current = ((DoubleLiteral)literal).getValue();
-            } else if(literal instanceof BooleanLiteral) {
-                current = ((BooleanLiteral)literal).isValue();
             }
         }
 
@@ -77,6 +83,39 @@ public final class LanguageHelper {
             log.debug("Mapping '{}' to '{}'.", path, current);
         }
         return (T) current;
+    }
+
+    private static Object convertToJava(final Object current, final Type type) {
+        if(current instanceof LiteralValue) {
+            return readLiteral(current, type);
+        } else if(current instanceof Array) {
+            return readArray(current, type);
+        }
+
+        return current;
+    }
+
+    private static Object readArray(final Object current, final Type type) {
+        final Array array = (Array)current;
+
+        return array.getValues()
+                    .stream()
+                    .map(current1 -> convertToJava(current1, ((ArrayType)type).getElements().get(0)))
+                    .toArray();
+    }
+
+    private static Object readLiteral(final Object current, final Type type) {
+        if(type instanceof FloatType) {
+            return ((Number)((LiteralValue)current).getLiteral().getValue()).doubleValue();
+        } else if(type instanceof IntType) {
+            return ((Number)((LiteralValue)current).getLiteral().getValue()).intValue();
+        } else if(type instanceof StringType) {
+            return Objects.toString(((LiteralValue)current).getLiteral().getValue());
+        } else if(type instanceof BooleanType) {
+            return Boolean.TRUE.equals(((LiteralValue)current).getLiteral().getValue());
+        }
+
+        throw new UnsupportedOperationException("Type " + type.toString() + " is not supported.");
     }
 
     public static Predicate<? super Value> filterInstanceByType(final String instanceTypeName) {
