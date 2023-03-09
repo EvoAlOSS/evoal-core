@@ -77,18 +77,6 @@ public class InstanceAdapterFactory extends AdapterFactoryImpl {
 				return createAttributeAdapter();
 			}
 			@Override
-			public Adapter caseNameOrMisc(NameOrMisc object) {
-				return createNameOrMiscAdapter();
-			}
-			@Override
-			public Adapter caseName(Name object) {
-				return createNameAdapter();
-			}
-			@Override
-			public Adapter caseMisc(Misc object) {
-				return createMiscAdapter();
-			}
-			@Override
 			public Adapter caseValue(Value object) {
 				return createValueAdapter();
 			}
@@ -149,48 +137,6 @@ public class InstanceAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createAttributeAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.instance.NameOrMisc <em>Name Or Misc</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.evoal.languages.model.instance.NameOrMisc
-	 * @generated
-	 */
-	public Adapter createNameOrMiscAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.instance.Name <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.evoal.languages.model.instance.Name
-	 * @generated
-	 */
-	public Adapter createNameAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.instance.Misc <em>Misc</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.evoal.languages.model.instance.Misc
-	 * @generated
-	 */
-	public Adapter createMiscAdapter() {
 		return null;
 	}
 

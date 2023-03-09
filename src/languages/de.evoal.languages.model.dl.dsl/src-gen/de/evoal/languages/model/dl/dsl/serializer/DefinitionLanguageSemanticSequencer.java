@@ -6,6 +6,7 @@ package de.evoal.languages.model.dl.dsl.serializer;
 
 import com.google.inject.Inject;
 import de.evoal.languages.model.dl.ArrayType;
+import de.evoal.languages.model.dl.AttributeDefinition;
 import de.evoal.languages.model.dl.BooleanType;
 import de.evoal.languages.model.dl.DataType;
 import de.evoal.languages.model.dl.DefinedFunctionName;
@@ -17,10 +18,8 @@ import de.evoal.languages.model.dl.FunctionDefinition;
 import de.evoal.languages.model.dl.InstanceType;
 import de.evoal.languages.model.dl.IntType;
 import de.evoal.languages.model.dl.LiteralType;
-import de.evoal.languages.model.dl.NamedAttributeDefinition;
 import de.evoal.languages.model.dl.StringType;
 import de.evoal.languages.model.dl.TypeDefinition;
-import de.evoal.languages.model.dl.UnnamedAttributeDefinition;
 import de.evoal.languages.model.dl.VoidType;
 import de.evoal.languages.model.dl.dsl.services.DefinitionLanguageGrammarAccess;
 import de.evoal.languages.model.el.AddOrSubtractExpression;
@@ -69,6 +68,9 @@ public class DefinitionLanguageSemanticSequencer extends ExpressionLanguageSeman
 			case DlPackage.ARRAY_TYPE:
 				sequence_ArrayTypeRule(context, (ArrayType) semanticObject); 
 				return; 
+			case DlPackage.ATTRIBUTE_DEFINITION:
+				sequence_AttributeDefinitionRule(context, (AttributeDefinition) semanticObject); 
+				return; 
 			case DlPackage.BOOLEAN_TYPE:
 				sequence_BooleanTypeRule(context, (BooleanType) semanticObject); 
 				return; 
@@ -99,9 +101,6 @@ public class DefinitionLanguageSemanticSequencer extends ExpressionLanguageSeman
 			case DlPackage.LITERAL_TYPE:
 				sequence_LiteralTypeRule(context, (LiteralType) semanticObject); 
 				return; 
-			case DlPackage.NAMED_ATTRIBUTE_DEFINITION:
-				sequence_NamedAttributeDefinitionRule(context, (NamedAttributeDefinition) semanticObject); 
-				return; 
 			case DlPackage.PARAMETER:
 				sequence_ParameterRule(context, (de.evoal.languages.model.dl.Parameter) semanticObject); 
 				return; 
@@ -110,9 +109,6 @@ public class DefinitionLanguageSemanticSequencer extends ExpressionLanguageSeman
 				return; 
 			case DlPackage.TYPE_DEFINITION:
 				sequence_TypeDefinitionRule(context, (TypeDefinition) semanticObject); 
-				return; 
-			case DlPackage.UNNAMED_ATTRIBUTE_DEFINITION:
-				sequence_UnnamedAttributeDefinitionRule(context, (UnnamedAttributeDefinition) semanticObject); 
 				return; 
 			case DlPackage.VOID_TYPE:
 				sequence_VoidTypeRule(context, (VoidType) semanticObject); 
@@ -188,6 +184,29 @@ public class DefinitionLanguageSemanticSequencer extends ExpressionLanguageSeman
 	 */
 	protected void sequence_ArrayTypeRule(ISerializationContext context, ArrayType semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     AttributeDefinitionRule returns AttributeDefinition
+	 *
+	 * Constraint:
+	 *     (name=StringOrId type=TypeRule)
+	 * </pre>
+	 */
+	protected void sequence_AttributeDefinitionRule(ISerializationContext context, AttributeDefinition semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, DlPackage.Literals.ATTRIBUTE_DEFINITION__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DlPackage.Literals.ATTRIBUTE_DEFINITION__NAME));
+			if (transientValues.isValueTransient(semanticObject, DlPackage.Literals.ATTRIBUTE_DEFINITION__TYPE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DlPackage.Literals.ATTRIBUTE_DEFINITION__TYPE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getAttributeDefinitionRuleAccess().getNameStringOrIdParserRuleCall_0_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getAttributeDefinitionRuleAccess().getTypeTypeRuleParserRuleCall_2_0(), semanticObject.getType());
+		feeder.finish();
 	}
 	
 	
@@ -347,30 +366,6 @@ public class DefinitionLanguageSemanticSequencer extends ExpressionLanguageSeman
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     AttributeDefinitionRule returns NamedAttributeDefinition
-	 *     NamedAttributeDefinitionRule returns NamedAttributeDefinition
-	 *
-	 * Constraint:
-	 *     (name=StringOrId type=TypeRule)
-	 * </pre>
-	 */
-	protected void sequence_NamedAttributeDefinitionRule(ISerializationContext context, NamedAttributeDefinition semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, DlPackage.Literals.NAMED_ATTRIBUTE_DEFINITION__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DlPackage.Literals.NAMED_ATTRIBUTE_DEFINITION__NAME));
-			if (transientValues.isValueTransient(semanticObject, DlPackage.Literals.ATTRIBUTE_DEFINITION__TYPE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DlPackage.Literals.ATTRIBUTE_DEFINITION__TYPE));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getNamedAttributeDefinitionRuleAccess().getNameStringOrIdParserRuleCall_0_0(), semanticObject.getName());
-		feeder.accept(grammarAccess.getNamedAttributeDefinitionRuleAccess().getTypeTypeRuleParserRuleCall_2_0(), semanticObject.getType());
-		feeder.finish();
-	}
-	
-	
-	/**
-	 * <pre>
-	 * Contexts:
 	 *     ParameterRule returns Parameter
 	 *
 	 * Constraint:
@@ -417,27 +412,6 @@ public class DefinitionLanguageSemanticSequencer extends ExpressionLanguageSeman
 	 */
 	protected void sequence_TypeDefinitionRule(ISerializationContext context, TypeDefinition semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * <pre>
-	 * Contexts:
-	 *     AttributeDefinitionRule returns UnnamedAttributeDefinition
-	 *     UnnamedAttributeDefinitionRule returns UnnamedAttributeDefinition
-	 *
-	 * Constraint:
-	 *     type=TypeRule
-	 * </pre>
-	 */
-	protected void sequence_UnnamedAttributeDefinitionRule(ISerializationContext context, UnnamedAttributeDefinition semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, DlPackage.Literals.ATTRIBUTE_DEFINITION__TYPE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DlPackage.Literals.ATTRIBUTE_DEFINITION__TYPE));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getUnnamedAttributeDefinitionRuleAccess().getTypeTypeRuleParserRuleCall_2_0(), semanticObject.getType());
-		feeder.finish();
 	}
 	
 	

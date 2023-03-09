@@ -129,57 +129,6 @@ public class DefinitionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 	}
 	public class AttributeDefinitionRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.dl.dsl.DefinitionLanguage.AttributeDefinitionRule");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cNamedAttributeDefinitionRuleParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cUnnamedAttributeDefinitionRuleParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		
-		//AttributeDefinitionRule returns AttributeDefinition:
-		//    NamedAttributeDefinitionRule | UnnamedAttributeDefinitionRule;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//NamedAttributeDefinitionRule | UnnamedAttributeDefinitionRule
-		public Alternatives getAlternatives() { return cAlternatives; }
-		
-		//NamedAttributeDefinitionRule
-		public RuleCall getNamedAttributeDefinitionRuleParserRuleCall_0() { return cNamedAttributeDefinitionRuleParserRuleCall_0; }
-		
-		//UnnamedAttributeDefinitionRule
-		public RuleCall getUnnamedAttributeDefinitionRuleParserRuleCall_1() { return cUnnamedAttributeDefinitionRuleParserRuleCall_1; }
-	}
-	public class UnnamedAttributeDefinitionRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.dl.dsl.DefinitionLanguage.UnnamedAttributeDefinitionRule");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cUnnamedKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Keyword cColonKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Assignment cTypeAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cTypeTypeRuleParserRuleCall_2_0 = (RuleCall)cTypeAssignment_2.eContents().get(0);
-		private final Keyword cSemicolonKeyword_3 = (Keyword)cGroup.eContents().get(3);
-		
-		//UnnamedAttributeDefinitionRule returns UnnamedAttributeDefinition:
-		//    'unnamed' ':' type = TypeRule ';'
-		//;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//'unnamed' ':' type = TypeRule ';'
-		public Group getGroup() { return cGroup; }
-		
-		//'unnamed'
-		public Keyword getUnnamedKeyword_0() { return cUnnamedKeyword_0; }
-		
-		//':'
-		public Keyword getColonKeyword_1() { return cColonKeyword_1; }
-		
-		//type = TypeRule
-		public Assignment getTypeAssignment_2() { return cTypeAssignment_2; }
-		
-		//TypeRule
-		public RuleCall getTypeTypeRuleParserRuleCall_2_0() { return cTypeTypeRuleParserRuleCall_2_0; }
-		
-		//';'
-		public Keyword getSemicolonKeyword_3() { return cSemicolonKeyword_3; }
-	}
-	public class NamedAttributeDefinitionRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.dl.dsl.DefinitionLanguage.NamedAttributeDefinitionRule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cNameStringOrIdParserRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
@@ -188,7 +137,7 @@ public class DefinitionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 		private final RuleCall cTypeTypeRuleParserRuleCall_2_0 = (RuleCall)cTypeAssignment_2.eContents().get(0);
 		private final Keyword cSemicolonKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
-		//NamedAttributeDefinitionRule returns NamedAttributeDefinition:
+		//AttributeDefinitionRule returns AttributeDefinition:
 		//    name = StringOrId ':' type = TypeRule ';'
 		//;
 		@Override public ParserRule getRule() { return rule; }
@@ -644,8 +593,6 @@ public class DefinitionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 	private final DefinitionModelRuleElements pDefinitionModelRule;
 	private final TypeDefinitionRuleElements pTypeDefinitionRule;
 	private final AttributeDefinitionRuleElements pAttributeDefinitionRule;
-	private final UnnamedAttributeDefinitionRuleElements pUnnamedAttributeDefinitionRule;
-	private final NamedAttributeDefinitionRuleElements pNamedAttributeDefinitionRule;
 	private final TypeRuleElements pTypeRule;
 	private final LiteralTypeRuleElements pLiteralTypeRule;
 	private final InstanceTypeRuleElements pInstanceTypeRule;
@@ -677,8 +624,6 @@ public class DefinitionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 		this.pDefinitionModelRule = new DefinitionModelRuleElements();
 		this.pTypeDefinitionRule = new TypeDefinitionRuleElements();
 		this.pAttributeDefinitionRule = new AttributeDefinitionRuleElements();
-		this.pUnnamedAttributeDefinitionRule = new UnnamedAttributeDefinitionRuleElements();
-		this.pNamedAttributeDefinitionRule = new NamedAttributeDefinitionRuleElements();
 		this.pTypeRule = new TypeRuleElements();
 		this.pLiteralTypeRule = new LiteralTypeRuleElements();
 		this.pInstanceTypeRule = new InstanceTypeRuleElements();
@@ -751,35 +696,14 @@ public class DefinitionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 	}
 	
 	//AttributeDefinitionRule returns AttributeDefinition:
-	//    NamedAttributeDefinitionRule | UnnamedAttributeDefinitionRule;
+	//    name = StringOrId ':' type = TypeRule ';'
+	//;
 	public AttributeDefinitionRuleElements getAttributeDefinitionRuleAccess() {
 		return pAttributeDefinitionRule;
 	}
 	
 	public ParserRule getAttributeDefinitionRuleRule() {
 		return getAttributeDefinitionRuleAccess().getRule();
-	}
-	
-	//UnnamedAttributeDefinitionRule returns UnnamedAttributeDefinition:
-	//    'unnamed' ':' type = TypeRule ';'
-	//;
-	public UnnamedAttributeDefinitionRuleElements getUnnamedAttributeDefinitionRuleAccess() {
-		return pUnnamedAttributeDefinitionRule;
-	}
-	
-	public ParserRule getUnnamedAttributeDefinitionRuleRule() {
-		return getUnnamedAttributeDefinitionRuleAccess().getRule();
-	}
-	
-	//NamedAttributeDefinitionRule returns NamedAttributeDefinition:
-	//    name = StringOrId ':' type = TypeRule ';'
-	//;
-	public NamedAttributeDefinitionRuleElements getNamedAttributeDefinitionRuleAccess() {
-		return pNamedAttributeDefinitionRule;
-	}
-	
-	public ParserRule getNamedAttributeDefinitionRuleRule() {
-		return getNamedAttributeDefinitionRuleAccess().getRule();
 	}
 	
 	//TypeRule returns Type:

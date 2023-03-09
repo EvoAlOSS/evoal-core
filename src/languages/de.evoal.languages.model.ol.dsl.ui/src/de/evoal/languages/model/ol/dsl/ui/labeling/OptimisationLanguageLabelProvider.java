@@ -5,6 +5,13 @@
 package de.evoal.languages.model.ol.dsl.ui.labeling;
 
 import com.google.inject.Inject;
+
+import de.evoal.languages.model.instance.Array;
+import de.evoal.languages.model.instance.Attribute;
+import de.evoal.languages.model.instance.Instance;
+import de.evoal.languages.model.instance.LiteralValue;
+import de.evoal.languages.model.ol.OptimisationModel;
+
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
 
@@ -16,17 +23,35 @@ import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
 public class OptimisationLanguageLabelProvider extends DefaultEObjectLabelProvider {
 
 	@Inject
-	public OptimisationLanguageLabelProvider(AdapterFactoryLabelProvider delegate) {
+	public OptimisationLanguageLabelProvider(final AdapterFactoryLabelProvider delegate) {
 		super(delegate);
 	}
 
 	// Labels and icons can be computed like this:
 	
-//	String text(Greeting ele) {
-//		return "A greeting to " + ele.getName();
-//	}
-//
-//	String image(Greeting ele) {
-//		return "Greeting.gif";
-//	}
+	public String text(final OptimisationModel model) {
+		return "Optimisation";
+	}
+	
+	public String text(final Instance instance) {
+		return instance.getName().getName();
+	}
+	
+	public String text(final Attribute attr) {
+		if(attr.getValue() == null) {
+			return attr.getName().getName();
+		} else if(attr.getValue() instanceof LiteralValue) {
+			return attr.getName().getName() + " := " + super.doGetText(attr.getValue());
+		} else if(attr.getValue() instanceof Array) {
+			return attr.getName().getName() + " := [...]";
+		} else if(attr.getValue() instanceof Instance) {
+			return attr.getName().getName() + " := {...}";
+		} else {
+			return attr.getName().getName() + " := ";
+		}
+	}
+	
+	public String text(final LiteralValue literal) {
+		return literal.getLiteral().getValue().toString();
+	}
 }

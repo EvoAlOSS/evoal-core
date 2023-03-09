@@ -42,7 +42,7 @@ public class OptimizingFunctionProducer {
     @ApplicationScoped
     @Named("optimization-function")
     private FitnessFunction create(final @Named("optimization-function-configuration") Instance configuration) {
-        final String fitnessName = configuration.getName().getName();
+        final String fitnessName = configuration.getDefinition().getName();
 
         return BeanProvider.getContextualReference(fitnessName, false, FitnessFunction.class)
                 .init(configuration);

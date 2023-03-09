@@ -14,13 +14,6 @@ TypeDefinitionRule returns TypeDefinition:
 ;
 
 AttributeDefinitionRule returns AttributeDefinition:
-	NamedAttributeDefinitionRule | UnnamedAttributeDefinitionRule;
-
-UnnamedAttributeDefinitionRule returns UnnamedAttributeDefinition:
-	'unnamed' ':' type = TypeRule ';'
-;
-
-NamedAttributeDefinitionRule returns NamedAttributeDefinition:
 	name = StringOrId ':' type = TypeRule ';'
 ;
 

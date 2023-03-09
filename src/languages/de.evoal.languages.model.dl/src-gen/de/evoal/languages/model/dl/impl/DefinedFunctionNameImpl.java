@@ -3,11 +3,11 @@
  */
 package de.evoal.languages.model.dl.impl;
 
-import de.evoal.languages.model.el.impl.FunctionNameImpl;
-
 import de.evoal.languages.model.dl.DefinedFunctionName;
 import de.evoal.languages.model.dl.DlPackage;
 import de.evoal.languages.model.dl.FunctionDefinition;
+
+import de.evoal.languages.model.el.impl.FunctionNameImpl;
 
 import org.eclipse.emf.common.notify.Notification;
 

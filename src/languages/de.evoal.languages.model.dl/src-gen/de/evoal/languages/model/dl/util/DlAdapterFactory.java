@@ -3,9 +3,9 @@
  */
 package de.evoal.languages.model.dl.util;
 
-import de.evoal.languages.model.el.FunctionName;
-
 import de.evoal.languages.model.dl.*;
+
+import de.evoal.languages.model.el.FunctionName;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
@@ -81,14 +81,6 @@ public class DlAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseAttributeDefinition(AttributeDefinition object) {
 				return createAttributeDefinitionAdapter();
-			}
-			@Override
-			public Adapter caseUnnamedAttributeDefinition(UnnamedAttributeDefinition object) {
-				return createUnnamedAttributeDefinitionAdapter();
-			}
-			@Override
-			public Adapter caseNamedAttributeDefinition(NamedAttributeDefinition object) {
-				return createNamedAttributeDefinitionAdapter();
 			}
 			@Override
 			public Adapter caseType(Type object) {
@@ -209,34 +201,6 @@ public class DlAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createAttributeDefinitionAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.dl.UnnamedAttributeDefinition <em>Unnamed Attribute Definition</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.evoal.languages.model.dl.UnnamedAttributeDefinition
-	 * @generated
-	 */
-	public Adapter createUnnamedAttributeDefinitionAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.dl.NamedAttributeDefinition <em>Named Attribute Definition</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.evoal.languages.model.dl.NamedAttributeDefinition
-	 * @generated
-	 */
-	public Adapter createNamedAttributeDefinitionAdapter() {
 		return null;
 	}
 

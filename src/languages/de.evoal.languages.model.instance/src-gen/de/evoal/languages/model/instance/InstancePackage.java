@@ -3,7 +3,6 @@
  */
 package de.evoal.languages.model.instance;
 
-import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -65,7 +64,7 @@ public interface InstancePackage extends EPackage {
 	 * @see de.evoal.languages.model.instance.impl.InstancePackageImpl#getValue()
 	 * @generated
 	 */
-	int VALUE = 5;
+	int VALUE = 2;
 
 	/**
 	 * The number of structural features of the '<em>Value</em>' class.
@@ -87,13 +86,13 @@ public interface InstancePackage extends EPackage {
 	int INSTANCE = 0;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' reference.
+	 * The feature id for the '<em><b>Definition</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INSTANCE__NAME = VALUE_FEATURE_COUNT + 0;
+	int INSTANCE__DEFINITION = VALUE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Attributes</b></em>' containment reference list.
@@ -124,13 +123,13 @@ public interface InstancePackage extends EPackage {
 	int ATTRIBUTE = 1;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' containment reference.
+	 * The feature id for the '<em><b>Definition</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ATTRIBUTE__NAME = 0;
+	int ATTRIBUTE__DEFINITION = 0;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' containment reference.
@@ -151,81 +150,6 @@ public interface InstancePackage extends EPackage {
 	int ATTRIBUTE_FEATURE_COUNT = 2;
 
 	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.instance.impl.NameOrMiscImpl <em>Name Or Misc</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.instance.impl.NameOrMiscImpl
-	 * @see de.evoal.languages.model.instance.impl.InstancePackageImpl#getNameOrMisc()
-	 * @generated
-	 */
-	int NAME_OR_MISC = 2;
-
-	/**
-	 * The number of structural features of the '<em>Name Or Misc</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NAME_OR_MISC_FEATURE_COUNT = 0;
-
-	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.instance.impl.NameImpl <em>Name</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.instance.impl.NameImpl
-	 * @see de.evoal.languages.model.instance.impl.InstancePackageImpl#getName_()
-	 * @generated
-	 */
-	int NAME = 3;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NAME__NAME = NAME_OR_MISC_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Name</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NAME_FEATURE_COUNT = NAME_OR_MISC_FEATURE_COUNT + 1;
-
-	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.instance.impl.MiscImpl <em>Misc</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.instance.impl.MiscImpl
-	 * @see de.evoal.languages.model.instance.impl.InstancePackageImpl#getMisc()
-	 * @generated
-	 */
-	int MISC = 4;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MISC__NAME = NAME_OR_MISC_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Misc</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MISC_FEATURE_COUNT = NAME_OR_MISC_FEATURE_COUNT + 1;
-
-	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.instance.impl.ArrayImpl <em>Array</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -233,7 +157,7 @@ public interface InstancePackage extends EPackage {
 	 * @see de.evoal.languages.model.instance.impl.InstancePackageImpl#getArray()
 	 * @generated
 	 */
-	int ARRAY = 6;
+	int ARRAY = 3;
 
 	/**
 	 * The feature id for the '<em><b>Values</b></em>' containment reference list.
@@ -261,7 +185,7 @@ public interface InstancePackage extends EPackage {
 	 * @see de.evoal.languages.model.instance.impl.InstancePackageImpl#getLiteralValue()
 	 * @generated
 	 */
-	int LITERAL_VALUE = 7;
+	int LITERAL_VALUE = 4;
 
 	/**
 	 * The feature id for the '<em><b>Literal</b></em>' containment reference.
@@ -289,7 +213,7 @@ public interface InstancePackage extends EPackage {
 	 * @see de.evoal.languages.model.instance.impl.InstancePackageImpl#getDataReference()
 	 * @generated
 	 */
-	int DATA_REFERENCE = 8;
+	int DATA_REFERENCE = 5;
 
 	/**
 	 * The feature id for the '<em><b>Definition</b></em>' reference.
@@ -321,15 +245,15 @@ public interface InstancePackage extends EPackage {
 	EClass getInstance();
 
 	/**
-	 * Returns the meta object for the reference '{@link de.evoal.languages.model.instance.Instance#getName <em>Name</em>}'.
+	 * Returns the meta object for the reference '{@link de.evoal.languages.model.instance.Instance#getDefinition <em>Definition</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Name</em>'.
-	 * @see de.evoal.languages.model.instance.Instance#getName()
+	 * @return the meta object for the reference '<em>Definition</em>'.
+	 * @see de.evoal.languages.model.instance.Instance#getDefinition()
 	 * @see #getInstance()
 	 * @generated
 	 */
-	EReference getInstance_Name();
+	EReference getInstance_Definition();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.instance.Instance#getAttributes <em>Attributes</em>}'.
@@ -353,15 +277,15 @@ public interface InstancePackage extends EPackage {
 	EClass getAttribute();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link de.evoal.languages.model.instance.Attribute#getName <em>Name</em>}'.
+	 * Returns the meta object for the reference '{@link de.evoal.languages.model.instance.Attribute#getDefinition <em>Definition</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Name</em>'.
-	 * @see de.evoal.languages.model.instance.Attribute#getName()
+	 * @return the meta object for the reference '<em>Definition</em>'.
+	 * @see de.evoal.languages.model.instance.Attribute#getDefinition()
 	 * @see #getAttribute()
 	 * @generated
 	 */
-	EReference getAttribute_Name();
+	EReference getAttribute_Definition();
 
 	/**
 	 * Returns the meta object for the containment reference '{@link de.evoal.languages.model.instance.Attribute#getValue <em>Value</em>}'.
@@ -373,58 +297,6 @@ public interface InstancePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getAttribute_Value();
-
-	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.instance.NameOrMisc <em>Name Or Misc</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Name Or Misc</em>'.
-	 * @see de.evoal.languages.model.instance.NameOrMisc
-	 * @generated
-	 */
-	EClass getNameOrMisc();
-
-	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.instance.Name <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Name</em>'.
-	 * @see de.evoal.languages.model.instance.Name
-	 * @generated
-	 */
-	EClass getName_();
-
-	/**
-	 * Returns the meta object for the reference '{@link de.evoal.languages.model.instance.Name#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Name</em>'.
-	 * @see de.evoal.languages.model.instance.Name#getName()
-	 * @see #getName_()
-	 * @generated
-	 */
-	EReference getName_Name();
-
-	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.instance.Misc <em>Misc</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Misc</em>'.
-	 * @see de.evoal.languages.model.instance.Misc
-	 * @generated
-	 */
-	EClass getMisc();
-
-	/**
-	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.instance.Misc#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see de.evoal.languages.model.instance.Misc#getName()
-	 * @see #getMisc()
-	 * @generated
-	 */
-	EAttribute getMisc_Name();
 
 	/**
 	 * Returns the meta object for class '{@link de.evoal.languages.model.instance.Value <em>Value</em>}'.
@@ -532,12 +404,12 @@ public interface InstancePackage extends EPackage {
 		EClass INSTANCE = eINSTANCE.getInstance();
 
 		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Definition</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference INSTANCE__NAME = eINSTANCE.getInstance_Name();
+		EReference INSTANCE__DEFINITION = eINSTANCE.getInstance_Definition();
 
 		/**
 		 * The meta object literal for the '<em><b>Attributes</b></em>' containment reference list feature.
@@ -558,12 +430,12 @@ public interface InstancePackage extends EPackage {
 		EClass ATTRIBUTE = eINSTANCE.getAttribute();
 
 		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Definition</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ATTRIBUTE__NAME = eINSTANCE.getAttribute_Name();
+		EReference ATTRIBUTE__DEFINITION = eINSTANCE.getAttribute_Definition();
 
 		/**
 		 * The meta object literal for the '<em><b>Value</b></em>' containment reference feature.
@@ -572,52 +444,6 @@ public interface InstancePackage extends EPackage {
 		 * @generated
 		 */
 		EReference ATTRIBUTE__VALUE = eINSTANCE.getAttribute_Value();
-
-		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.instance.impl.NameOrMiscImpl <em>Name Or Misc</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.instance.impl.NameOrMiscImpl
-		 * @see de.evoal.languages.model.instance.impl.InstancePackageImpl#getNameOrMisc()
-		 * @generated
-		 */
-		EClass NAME_OR_MISC = eINSTANCE.getNameOrMisc();
-
-		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.instance.impl.NameImpl <em>Name</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.instance.impl.NameImpl
-		 * @see de.evoal.languages.model.instance.impl.InstancePackageImpl#getName_()
-		 * @generated
-		 */
-		EClass NAME = eINSTANCE.getName_();
-
-		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference NAME__NAME = eINSTANCE.getName_Name();
-
-		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.instance.impl.MiscImpl <em>Misc</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.instance.impl.MiscImpl
-		 * @see de.evoal.languages.model.instance.impl.InstancePackageImpl#getMisc()
-		 * @generated
-		 */
-		EClass MISC = eINSTANCE.getMisc();
-
-		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute MISC__NAME = eINSTANCE.getMisc_Name();
 
 		/**
 		 * The meta object literal for the '{@link de.evoal.languages.model.instance.impl.ValueImpl <em>Value</em>}' class.

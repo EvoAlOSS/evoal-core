@@ -58,7 +58,7 @@ public class MachineLearningLanguageSyntacticSequencer extends AbstractSyntactic
 	 *     ('{' '}')?
 	 *
 	 * This ambiguous syntax occurs at:
-	 *     name=[TypeDefinition|StringOrId] (ambiguity) (rule end)
+	 *     definition=[TypeDefinition|StringOrId] (ambiguity) (rule end)
 	 
 	 * </pre>
 	 */

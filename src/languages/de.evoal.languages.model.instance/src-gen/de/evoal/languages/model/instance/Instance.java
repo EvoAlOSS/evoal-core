@@ -16,7 +16,7 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link de.evoal.languages.model.instance.Instance#getName <em>Name</em>}</li>
+ *   <li>{@link de.evoal.languages.model.instance.Instance#getDefinition <em>Definition</em>}</li>
  *   <li>{@link de.evoal.languages.model.instance.Instance#getAttributes <em>Attributes</em>}</li>
  * </ul>
  *
@@ -26,26 +26,26 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface Instance extends Value {
 	/**
-	 * Returns the value of the '<em><b>Name</b></em>' reference.
+	 * Returns the value of the '<em><b>Definition</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Name</em>' reference.
-	 * @see #setName(TypeDefinition)
-	 * @see de.evoal.languages.model.instance.InstancePackage#getInstance_Name()
+	 * @return the value of the '<em>Definition</em>' reference.
+	 * @see #setDefinition(TypeDefinition)
+	 * @see de.evoal.languages.model.instance.InstancePackage#getInstance_Definition()
 	 * @model
 	 * @generated
 	 */
-	TypeDefinition getName();
+	TypeDefinition getDefinition();
 
 	/**
-	 * Sets the value of the '{@link de.evoal.languages.model.instance.Instance#getName <em>Name</em>}' reference.
+	 * Sets the value of the '{@link de.evoal.languages.model.instance.Instance#getDefinition <em>Definition</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Name</em>' reference.
-	 * @see #getName()
+	 * @param value the new value of the '<em>Definition</em>' reference.
+	 * @see #getDefinition()
 	 * @generated
 	 */
-	void setName(TypeDefinition value);
+	void setDefinition(TypeDefinition value);
 
 	/**
 	 * Returns the value of the '<em><b>Attributes</b></em>' containment reference list.

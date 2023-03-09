@@ -11,7 +11,7 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Base class for named and unnamed attributes.
+ * An attribute (similar to a Java field).
  * <!-- end-model-doc -->
  *
  * <p>
@@ -19,10 +19,11 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link de.evoal.languages.model.dl.AttributeDefinition#getType <em>Type</em>}</li>
+ *   <li>{@link de.evoal.languages.model.dl.AttributeDefinition#getName <em>Name</em>}</li>
  * </ul>
  *
  * @see de.evoal.languages.model.dl.DlPackage#getAttributeDefinition()
- * @model abstract="true"
+ * @model
  * @generated
  */
 public interface AttributeDefinition extends EObject {
@@ -50,5 +51,30 @@ public interface AttributeDefinition extends EObject {
 	 * @generated
 	 */
 	void setType(Type value);
+
+	/**
+	 * Returns the value of the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The actual attribute name.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Name</em>' attribute.
+	 * @see #setName(String)
+	 * @see de.evoal.languages.model.dl.DlPackage#getAttributeDefinition_Name()
+	 * @model required="true"
+	 * @generated
+	 */
+	String getName();
+
+	/**
+	 * Sets the value of the '{@link de.evoal.languages.model.dl.AttributeDefinition#getName <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Name</em>' attribute.
+	 * @see #getName()
+	 * @generated
+	 */
+	void setName(String value);
 
 } // AttributeDefinition

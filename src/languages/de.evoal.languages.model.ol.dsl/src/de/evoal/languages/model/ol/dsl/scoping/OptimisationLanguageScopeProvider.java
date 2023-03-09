@@ -12,6 +12,7 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.Scopes;
 
+import de.evoal.languages.model.instance.Instance;
 import de.evoal.languages.model.instance.InstancePackage;
 import de.evoal.languages.model.ol.OptimisationModel;
 
@@ -24,8 +25,14 @@ import de.evoal.languages.model.ol.OptimisationModel;
 public class OptimisationLanguageScopeProvider extends AbstractOptimisationLanguageScopeProvider {
 	@Override
 	public IScope getScope(final EObject context, final EReference reference) {
-		if(context instanceof OptimisationModel && InstancePackage.eINSTANCE.getInstance_Name().equals(reference)) {
-			for( IEObjectDescription element : getDelegate().getScope(context, reference).getAllElements()) {
+		//System.err.println("Asking for scope of :");
+		//System.err.println("  " + context.eClass().getName());
+		//System.err.println("  " + reference.getContainerClass() + "__" + reference.getName());
+
+		if(context instanceof OptimisationModel && InstancePackage.eINSTANCE.getInstance_Definition().equals(reference)) {
+			// Looking for the root-level instance
+			for(final IEObjectDescription element : getDelegate().getScope(context, reference).getAllElements()) {
+				//System.err.println("    <<-- " + element.getName());
 				return Scopes.scopeFor(Collections.singleton(element.getEObjectOrProxy()));
 			}
 		}

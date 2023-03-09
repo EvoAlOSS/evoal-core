@@ -1478,8 +1478,8 @@ public class InternalGeneratorDSLLexer extends Lexer {
     // $ANTLR start "RULE_DIGIT"
     public final void mRULE_DIGIT() throws RecognitionException {
         try {
-            // InternalGeneratorDSL.g:6663:21: ( '0' .. '9' )
-            // InternalGeneratorDSL.g:6663:23: '0' .. '9'
+            // InternalGeneratorDSL.g:6537:21: ( '0' .. '9' )
+            // InternalGeneratorDSL.g:6537:23: '0' .. '9'
             {
             matchRange('0','9'); 
 
@@ -1494,11 +1494,11 @@ public class InternalGeneratorDSLLexer extends Lexer {
     // $ANTLR start "RULE_EXPONENT"
     public final void mRULE_EXPONENT() throws RecognitionException {
         try {
-            // InternalGeneratorDSL.g:6665:24: ( 'e' ( '+' | '-' )? ( RULE_DIGIT )+ )
-            // InternalGeneratorDSL.g:6665:26: 'e' ( '+' | '-' )? ( RULE_DIGIT )+
+            // InternalGeneratorDSL.g:6539:24: ( 'e' ( '+' | '-' )? ( RULE_DIGIT )+ )
+            // InternalGeneratorDSL.g:6539:26: 'e' ( '+' | '-' )? ( RULE_DIGIT )+
             {
             match('e'); 
-            // InternalGeneratorDSL.g:6665:30: ( '+' | '-' )?
+            // InternalGeneratorDSL.g:6539:30: ( '+' | '-' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -1524,7 +1524,7 @@ public class InternalGeneratorDSLLexer extends Lexer {
 
             }
 
-            // InternalGeneratorDSL.g:6665:41: ( RULE_DIGIT )+
+            // InternalGeneratorDSL.g:6539:41: ( RULE_DIGIT )+
             int cnt2=0;
             loop2:
             do {
@@ -1538,7 +1538,7 @@ public class InternalGeneratorDSLLexer extends Lexer {
 
                 switch (alt2) {
             	case 1 :
-            	    // InternalGeneratorDSL.g:6665:41: RULE_DIGIT
+            	    // InternalGeneratorDSL.g:6539:41: RULE_DIGIT
             	    {
             	    mRULE_DIGIT(); 
 
@@ -1568,10 +1568,10 @@ public class InternalGeneratorDSLLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalGeneratorDSL.g:6667:10: ( ( '-' )? ( RULE_DIGIT )+ )
-            // InternalGeneratorDSL.g:6667:12: ( '-' )? ( RULE_DIGIT )+
+            // InternalGeneratorDSL.g:6541:10: ( ( '-' )? ( RULE_DIGIT )+ )
+            // InternalGeneratorDSL.g:6541:12: ( '-' )? ( RULE_DIGIT )+
             {
-            // InternalGeneratorDSL.g:6667:12: ( '-' )?
+            // InternalGeneratorDSL.g:6541:12: ( '-' )?
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -1580,7 +1580,7 @@ public class InternalGeneratorDSLLexer extends Lexer {
             }
             switch (alt3) {
                 case 1 :
-                    // InternalGeneratorDSL.g:6667:12: '-'
+                    // InternalGeneratorDSL.g:6541:12: '-'
                     {
                     match('-'); 
 
@@ -1589,7 +1589,7 @@ public class InternalGeneratorDSLLexer extends Lexer {
 
             }
 
-            // InternalGeneratorDSL.g:6667:17: ( RULE_DIGIT )+
+            // InternalGeneratorDSL.g:6541:17: ( RULE_DIGIT )+
             int cnt4=0;
             loop4:
             do {
@@ -1603,7 +1603,7 @@ public class InternalGeneratorDSLLexer extends Lexer {
 
                 switch (alt4) {
             	case 1 :
-            	    // InternalGeneratorDSL.g:6667:17: RULE_DIGIT
+            	    // InternalGeneratorDSL.g:6541:17: RULE_DIGIT
             	    {
             	    mRULE_DIGIT(); 
 
@@ -1635,15 +1635,15 @@ public class InternalGeneratorDSLLexer extends Lexer {
         try {
             int _type = RULE_DOUBLE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalGeneratorDSL.g:6669:13: ( ( RULE_INT RULE_EXPONENT | RULE_INT '.' ( RULE_DIGIT )* ( RULE_EXPONENT )? ) )
-            // InternalGeneratorDSL.g:6669:15: ( RULE_INT RULE_EXPONENT | RULE_INT '.' ( RULE_DIGIT )* ( RULE_EXPONENT )? )
+            // InternalGeneratorDSL.g:6543:13: ( ( RULE_INT RULE_EXPONENT | RULE_INT '.' ( RULE_DIGIT )* ( RULE_EXPONENT )? ) )
+            // InternalGeneratorDSL.g:6543:15: ( RULE_INT RULE_EXPONENT | RULE_INT '.' ( RULE_DIGIT )* ( RULE_EXPONENT )? )
             {
-            // InternalGeneratorDSL.g:6669:15: ( RULE_INT RULE_EXPONENT | RULE_INT '.' ( RULE_DIGIT )* ( RULE_EXPONENT )? )
+            // InternalGeneratorDSL.g:6543:15: ( RULE_INT RULE_EXPONENT | RULE_INT '.' ( RULE_DIGIT )* ( RULE_EXPONENT )? )
             int alt7=2;
             alt7 = dfa7.predict(input);
             switch (alt7) {
                 case 1 :
-                    // InternalGeneratorDSL.g:6669:16: RULE_INT RULE_EXPONENT
+                    // InternalGeneratorDSL.g:6543:16: RULE_INT RULE_EXPONENT
                     {
                     mRULE_INT(); 
                     mRULE_EXPONENT(); 
@@ -1651,11 +1651,11 @@ public class InternalGeneratorDSLLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalGeneratorDSL.g:6669:39: RULE_INT '.' ( RULE_DIGIT )* ( RULE_EXPONENT )?
+                    // InternalGeneratorDSL.g:6543:39: RULE_INT '.' ( RULE_DIGIT )* ( RULE_EXPONENT )?
                     {
                     mRULE_INT(); 
                     match('.'); 
-                    // InternalGeneratorDSL.g:6669:52: ( RULE_DIGIT )*
+                    // InternalGeneratorDSL.g:6543:52: ( RULE_DIGIT )*
                     loop5:
                     do {
                         int alt5=2;
@@ -1668,7 +1668,7 @@ public class InternalGeneratorDSLLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // InternalGeneratorDSL.g:6669:52: RULE_DIGIT
+                    	    // InternalGeneratorDSL.g:6543:52: RULE_DIGIT
                     	    {
                     	    mRULE_DIGIT(); 
 
@@ -1680,7 +1680,7 @@ public class InternalGeneratorDSLLexer extends Lexer {
                         }
                     } while (true);
 
-                    // InternalGeneratorDSL.g:6669:64: ( RULE_EXPONENT )?
+                    // InternalGeneratorDSL.g:6543:64: ( RULE_EXPONENT )?
                     int alt6=2;
                     int LA6_0 = input.LA(1);
 
@@ -1689,7 +1689,7 @@ public class InternalGeneratorDSLLexer extends Lexer {
                     }
                     switch (alt6) {
                         case 1 :
-                            // InternalGeneratorDSL.g:6669:64: RULE_EXPONENT
+                            // InternalGeneratorDSL.g:6543:64: RULE_EXPONENT
                             {
                             mRULE_EXPONENT(); 
 
@@ -1720,11 +1720,11 @@ public class InternalGeneratorDSLLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalGeneratorDSL.g:6671:13: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' )
-            // InternalGeneratorDSL.g:6671:15: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+            // InternalGeneratorDSL.g:6545:13: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' )
+            // InternalGeneratorDSL.g:6545:15: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
             {
             match('\"'); 
-            // InternalGeneratorDSL.g:6671:19: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+            // InternalGeneratorDSL.g:6545:19: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
             loop8:
             do {
                 int alt8=3;
@@ -1740,7 +1740,7 @@ public class InternalGeneratorDSLLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // InternalGeneratorDSL.g:6671:20: '\\\\' .
+            	    // InternalGeneratorDSL.g:6545:20: '\\\\' .
             	    {
             	    match('\\'); 
             	    matchAny(); 
@@ -1748,7 +1748,7 @@ public class InternalGeneratorDSLLexer extends Lexer {
             	    }
             	    break;
             	case 2 :
-            	    // InternalGeneratorDSL.g:6671:27: ~ ( ( '\\\\' | '\"' ) )
+            	    // InternalGeneratorDSL.g:6545:27: ~ ( ( '\\\\' | '\"' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -1785,11 +1785,11 @@ public class InternalGeneratorDSLLexer extends Lexer {
         try {
             int _type = RULE_QUOTED_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalGeneratorDSL.g:6673:16: ( '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
-            // InternalGeneratorDSL.g:6673:18: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+            // InternalGeneratorDSL.g:6547:16: ( '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalGeneratorDSL.g:6547:18: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
             {
             match('\''); 
-            // InternalGeneratorDSL.g:6673:23: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+            // InternalGeneratorDSL.g:6547:23: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
             loop9:
             do {
                 int alt9=3;
@@ -1805,7 +1805,7 @@ public class InternalGeneratorDSLLexer extends Lexer {
 
                 switch (alt9) {
             	case 1 :
-            	    // InternalGeneratorDSL.g:6673:24: '\\\\' .
+            	    // InternalGeneratorDSL.g:6547:24: '\\\\' .
             	    {
             	    match('\\'); 
             	    matchAny(); 
@@ -1813,7 +1813,7 @@ public class InternalGeneratorDSLLexer extends Lexer {
             	    }
             	    break;
             	case 2 :
-            	    // InternalGeneratorDSL.g:6673:31: ~ ( ( '\\\\' | '\\'' ) )
+            	    // InternalGeneratorDSL.g:6547:31: ~ ( ( '\\\\' | '\\'' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -1850,10 +1850,10 @@ public class InternalGeneratorDSLLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalGeneratorDSL.g:6675:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // InternalGeneratorDSL.g:6675:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalGeneratorDSL.g:6549:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // InternalGeneratorDSL.g:6549:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // InternalGeneratorDSL.g:6675:11: ( '^' )?
+            // InternalGeneratorDSL.g:6549:11: ( '^' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -1862,7 +1862,7 @@ public class InternalGeneratorDSLLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // InternalGeneratorDSL.g:6675:11: '^'
+                    // InternalGeneratorDSL.g:6549:11: '^'
                     {
                     match('^'); 
 
@@ -1880,7 +1880,7 @@ public class InternalGeneratorDSLLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // InternalGeneratorDSL.g:6675:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalGeneratorDSL.g:6549:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop11:
             do {
                 int alt11=2;
@@ -1929,12 +1929,12 @@ public class InternalGeneratorDSLLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalGeneratorDSL.g:6677:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // InternalGeneratorDSL.g:6677:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // InternalGeneratorDSL.g:6551:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // InternalGeneratorDSL.g:6551:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // InternalGeneratorDSL.g:6677:24: ( options {greedy=false; } : . )*
+            // InternalGeneratorDSL.g:6551:24: ( options {greedy=false; } : . )*
             loop12:
             do {
                 int alt12=2;
@@ -1959,7 +1959,7 @@ public class InternalGeneratorDSLLexer extends Lexer {
 
                 switch (alt12) {
             	case 1 :
-            	    // InternalGeneratorDSL.g:6677:52: .
+            	    // InternalGeneratorDSL.g:6551:52: .
             	    {
             	    matchAny(); 
 
@@ -1989,12 +1989,12 @@ public class InternalGeneratorDSLLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalGeneratorDSL.g:6679:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // InternalGeneratorDSL.g:6679:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // InternalGeneratorDSL.g:6553:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // InternalGeneratorDSL.g:6553:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // InternalGeneratorDSL.g:6679:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalGeneratorDSL.g:6553:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop13:
             do {
                 int alt13=2;
@@ -2007,7 +2007,7 @@ public class InternalGeneratorDSLLexer extends Lexer {
 
                 switch (alt13) {
             	case 1 :
-            	    // InternalGeneratorDSL.g:6679:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalGeneratorDSL.g:6553:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -2027,7 +2027,7 @@ public class InternalGeneratorDSLLexer extends Lexer {
                 }
             } while (true);
 
-            // InternalGeneratorDSL.g:6679:40: ( ( '\\r' )? '\\n' )?
+            // InternalGeneratorDSL.g:6553:40: ( ( '\\r' )? '\\n' )?
             int alt15=2;
             int LA15_0 = input.LA(1);
 
@@ -2036,9 +2036,9 @@ public class InternalGeneratorDSLLexer extends Lexer {
             }
             switch (alt15) {
                 case 1 :
-                    // InternalGeneratorDSL.g:6679:41: ( '\\r' )? '\\n'
+                    // InternalGeneratorDSL.g:6553:41: ( '\\r' )? '\\n'
                     {
-                    // InternalGeneratorDSL.g:6679:41: ( '\\r' )?
+                    // InternalGeneratorDSL.g:6553:41: ( '\\r' )?
                     int alt14=2;
                     int LA14_0 = input.LA(1);
 
@@ -2047,7 +2047,7 @@ public class InternalGeneratorDSLLexer extends Lexer {
                     }
                     switch (alt14) {
                         case 1 :
-                            // InternalGeneratorDSL.g:6679:41: '\\r'
+                            // InternalGeneratorDSL.g:6553:41: '\\r'
                             {
                             match('\r'); 
 
@@ -2079,10 +2079,10 @@ public class InternalGeneratorDSLLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalGeneratorDSL.g:6681:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // InternalGeneratorDSL.g:6681:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalGeneratorDSL.g:6555:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalGeneratorDSL.g:6555:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // InternalGeneratorDSL.g:6681:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalGeneratorDSL.g:6555:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt16=0;
             loop16:
             do {
@@ -2136,8 +2136,8 @@ public class InternalGeneratorDSLLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalGeneratorDSL.g:6683:16: ( . )
-            // InternalGeneratorDSL.g:6683:18: .
+            // InternalGeneratorDSL.g:6557:16: ( . )
+            // InternalGeneratorDSL.g:6557:18: .
             {
             matchAny(); 
 
@@ -2746,7 +2746,7 @@ public class InternalGeneratorDSLLexer extends Lexer {
             this.transition = DFA7_transition;
         }
         public String getDescription() {
-            return "6669:15: ( RULE_INT RULE_EXPONENT | RULE_INT '.' ( RULE_DIGIT )* ( RULE_EXPONENT )? )";
+            return "6543:15: ( RULE_INT RULE_EXPONENT | RULE_INT '.' ( RULE_DIGIT )* ( RULE_EXPONENT )? )";
         }
     }
     static final String DFA17_eotS =

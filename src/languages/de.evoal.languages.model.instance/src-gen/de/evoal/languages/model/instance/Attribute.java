@@ -3,6 +3,8 @@
  */
 package de.evoal.languages.model.instance;
 
+import de.evoal.languages.model.dl.AttributeDefinition;
+
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -14,7 +16,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link de.evoal.languages.model.instance.Attribute#getName <em>Name</em>}</li>
+ *   <li>{@link de.evoal.languages.model.instance.Attribute#getDefinition <em>Definition</em>}</li>
  *   <li>{@link de.evoal.languages.model.instance.Attribute#getValue <em>Value</em>}</li>
  * </ul>
  *
@@ -24,26 +26,26 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface Attribute extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Name</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Definition</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Name</em>' containment reference.
-	 * @see #setName(NameOrMisc)
-	 * @see de.evoal.languages.model.instance.InstancePackage#getAttribute_Name()
-	 * @model containment="true"
+	 * @return the value of the '<em>Definition</em>' reference.
+	 * @see #setDefinition(AttributeDefinition)
+	 * @see de.evoal.languages.model.instance.InstancePackage#getAttribute_Definition()
+	 * @model
 	 * @generated
 	 */
-	NameOrMisc getName();
+	AttributeDefinition getDefinition();
 
 	/**
-	 * Sets the value of the '{@link de.evoal.languages.model.instance.Attribute#getName <em>Name</em>}' containment reference.
+	 * Sets the value of the '{@link de.evoal.languages.model.instance.Attribute#getDefinition <em>Definition</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Name</em>' containment reference.
-	 * @see #getName()
+	 * @param value the new value of the '<em>Definition</em>' reference.
+	 * @see #getDefinition()
 	 * @generated
 	 */
-	void setName(NameOrMisc value);
+	void setDefinition(AttributeDefinition value);
 
 	/**
 	 * Returns the value of the '<em><b>Value</b></em>' containment reference.

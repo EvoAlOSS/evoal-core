@@ -34,7 +34,6 @@ public class MachineLearningLanguageParser extends AbstractContentAssistParser {
 		private static void init(ImmutableMap.Builder<AbstractElement, String> builder, MachineLearningLanguageGrammarAccess grammarAccess) {
 			builder.put(grammarAccess.getStatementRuleAccess().getAlternatives(), "rule__StatementRule__Alternatives");
 			builder.put(grammarAccess.getRangeRuleAccess().getAlternatives(), "rule__RangeRule__Alternatives");
-			builder.put(grammarAccess.getNameOrMiscRuleAccess().getAlternatives(), "rule__NameOrMiscRule__Alternatives");
 			builder.put(grammarAccess.getValueRuleAccess().getAlternatives(), "rule__ValueRule__Alternatives");
 			builder.put(grammarAccess.getLiteralOrReferenceRuleAccess().getAlternatives(), "rule__LiteralOrReferenceRule__Alternatives");
 			builder.put(grammarAccess.getLiteralRuleAccess().getAlternatives(), "rule__LiteralRule__Alternatives");
@@ -126,12 +125,10 @@ public class MachineLearningLanguageParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getBlockStatementRuleAccess().getStatementsAssignment_2(), "rule__BlockStatementRule__StatementsAssignment_2");
 			builder.put(grammarAccess.getCallStatementRuleAccess().getCallAssignment_0(), "rule__CallStatementRule__CallAssignment_0");
 			builder.put(grammarAccess.getFunctionNameRuleAccess().getDefinitionAssignment(), "rule__FunctionNameRule__DefinitionAssignment");
-			builder.put(grammarAccess.getInstanceRuleAccess().getNameAssignment_0(), "rule__InstanceRule__NameAssignment_0");
+			builder.put(grammarAccess.getInstanceRuleAccess().getDefinitionAssignment_0(), "rule__InstanceRule__DefinitionAssignment_0");
 			builder.put(grammarAccess.getInstanceRuleAccess().getAttributesAssignment_1_1(), "rule__InstanceRule__AttributesAssignment_1_1");
-			builder.put(grammarAccess.getAttributeRuleAccess().getNameAssignment_0(), "rule__AttributeRule__NameAssignment_0");
+			builder.put(grammarAccess.getAttributeRuleAccess().getDefinitionAssignment_0(), "rule__AttributeRule__DefinitionAssignment_0");
 			builder.put(grammarAccess.getAttributeRuleAccess().getValueAssignment_2(), "rule__AttributeRule__ValueAssignment_2");
-			builder.put(grammarAccess.getNameRuleAccess().getNameAssignment(), "rule__NameRule__NameAssignment");
-			builder.put(grammarAccess.getMiscRuleAccess().getNameAssignment(), "rule__MiscRule__NameAssignment");
 			builder.put(grammarAccess.getArrayRuleAccess().getValuesAssignment_2_0(), "rule__ArrayRule__ValuesAssignment_2_0");
 			builder.put(grammarAccess.getArrayRuleAccess().getValuesAssignment_2_1_1(), "rule__ArrayRule__ValuesAssignment_2_1_1");
 			builder.put(grammarAccess.getLiteralValueRuleAccess().getLiteralAssignment(), "rule__LiteralValueRule__LiteralAssignment");

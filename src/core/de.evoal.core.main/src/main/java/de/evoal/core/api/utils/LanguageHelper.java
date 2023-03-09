@@ -6,12 +6,8 @@ import de.evoal.languages.model.instance.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
-import java.util.function.DoubleToIntFunction;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 /**
  * Helper class for processing instances.
@@ -57,20 +53,20 @@ public final class LanguageHelper {
                 if(attribute != null) {
                     current = attribute.getValue();
                 } else if("name".equals(part)) {
-                    current = ((Instance)current).getName().getName();
+                    current = ((Instance)current).getDefinition().getName();
                 } else {
                     log.warn("Failed to lookup part '{}' of path '{}'. Returning null.", part, path);
-                    log.warn("Current instance is: {}", ((Instance) current).getName().getName());
+                    log.warn("Current instance is: {}", ((Instance) current).getDefinition().getName());
                     log.warn("Available attributes:");
                     for(final Attribute a : ((Instance) current).getAttributes()) {
-                        log.warn("  {}", ((Name)a.getName()).getName().getName());
+                        log.warn("  {}", a.getDefinition().getName());
                     }
 
                     log.error("Selecting non-existing path '{}'.", path);
                     throw new IllegalStateException("Selecting non-existing field: " + part);
                 }
                 if(attribute != null) {
-                    current = convertToJava(current, ((Name) attribute.getName()).getName().getType());
+                    current = convertToJava(current, attribute.getDefinition().getType());
                 }
             } catch(final NullPointerException e) {
                 log.error("Failed to lookup part '{}' of path '{}'.", part, path);
@@ -79,7 +75,7 @@ public final class LanguageHelper {
         }
 
         if(current instanceof Instance) {
-            log.debug("Mapping '{}' to instance with name '{}'.", path, ((Instance)current).getName().getName());
+            log.debug("Mapping '{}' to instance with name '{}'.", path, ((Instance)current).getDefinition().getName());
         } else {
             log.debug("Mapping '{}' to '{}'.", path, current);
         }
@@ -121,10 +117,10 @@ public final class LanguageHelper {
     }
 
     public static Predicate<? super Value> filterInstanceByType(final String instanceTypeName) {
-        return i -> instanceTypeName.equals(((Instance)i).getName().getName());
+        return i -> instanceTypeName.equals(((Instance)i).getDefinition().getName());
     }
 
     public static Predicate<? super Instance> filterByAttributesInstanceType(final String attributeName, final String attributeTypeName) {
-        return i -> attributeTypeName.equals(((Instance) i.findAttribute(attributeName).getValue()).getName().getName());
+        return i -> attributeTypeName.equals(((Instance) i.findAttribute(attributeName).getValue()).getDefinition().getName());
     }
 }

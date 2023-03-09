@@ -10,7 +10,7 @@ import javax.enterprise.context.ApplicationScoped;
 @ApplicationScoped
 public class GeneratorFactory {
     public GeneratorFunction create(final Step configuration) throws InitializationException {
-        final String functionName = configuration.getInstance().getName().getName();
+        final String functionName = configuration.getInstance().getDefinition().getName();
 
         return BeanFactory.create(functionName, GeneratorFunction.class)
                           .init(configuration);

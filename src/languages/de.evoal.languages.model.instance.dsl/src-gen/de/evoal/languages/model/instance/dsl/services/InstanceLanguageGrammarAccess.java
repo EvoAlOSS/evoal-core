@@ -30,9 +30,9 @@ public class InstanceLanguageGrammarAccess extends AbstractElementFinder.Abstrac
 	public class InstanceRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.instance.dsl.InstanceLanguage.InstanceRule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final CrossReference cNameTypeDefinitionCrossReference_0_0 = (CrossReference)cNameAssignment_0.eContents().get(0);
-		private final RuleCall cNameTypeDefinitionStringOrIdParserRuleCall_0_0_1 = (RuleCall)cNameTypeDefinitionCrossReference_0_0.eContents().get(1);
+		private final Assignment cDefinitionAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final CrossReference cDefinitionTypeDefinitionCrossReference_0_0 = (CrossReference)cDefinitionAssignment_0.eContents().get(0);
+		private final RuleCall cDefinitionTypeDefinitionStringOrIdParserRuleCall_0_0_1 = (RuleCall)cDefinitionTypeDefinitionCrossReference_0_0.eContents().get(1);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
 		private final Keyword cLeftCurlyBracketKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
 		private final Assignment cAttributesAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
@@ -40,25 +40,25 @@ public class InstanceLanguageGrammarAccess extends AbstractElementFinder.Abstrac
 		private final Keyword cRightCurlyBracketKeyword_1_2 = (Keyword)cGroup_1.eContents().get(2);
 		
 		//InstanceRule returns Instance:
-		//    name = [dl::TypeDefinition|StringOrId] ('{'
+		//    definition = [dl::TypeDefinition|StringOrId] ('{'
 		//      attributes += AttributeRule*
 		//    '}')?
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//name = [dl::TypeDefinition|StringOrId] ('{'
+		//definition = [dl::TypeDefinition|StringOrId] ('{'
 		//  attributes += AttributeRule*
 		//'}')?
 		public Group getGroup() { return cGroup; }
 		
-		//name = [dl::TypeDefinition|StringOrId]
-		public Assignment getNameAssignment_0() { return cNameAssignment_0; }
+		//definition = [dl::TypeDefinition|StringOrId]
+		public Assignment getDefinitionAssignment_0() { return cDefinitionAssignment_0; }
 		
 		//[dl::TypeDefinition|StringOrId]
-		public CrossReference getNameTypeDefinitionCrossReference_0_0() { return cNameTypeDefinitionCrossReference_0_0; }
+		public CrossReference getDefinitionTypeDefinitionCrossReference_0_0() { return cDefinitionTypeDefinitionCrossReference_0_0; }
 		
 		//StringOrId
-		public RuleCall getNameTypeDefinitionStringOrIdParserRuleCall_0_0_1() { return cNameTypeDefinitionStringOrIdParserRuleCall_0_0_1; }
+		public RuleCall getDefinitionTypeDefinitionStringOrIdParserRuleCall_0_0_1() { return cDefinitionTypeDefinitionStringOrIdParserRuleCall_0_0_1; }
 		
 		//('{'
 		//     attributes += AttributeRule*
@@ -80,26 +80,30 @@ public class InstanceLanguageGrammarAccess extends AbstractElementFinder.Abstrac
 	public class AttributeRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.instance.dsl.InstanceLanguage.AttributeRule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cNameNameOrMiscRuleParserRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
+		private final Assignment cDefinitionAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final CrossReference cDefinitionAttributeDefinitionCrossReference_0_0 = (CrossReference)cDefinitionAssignment_0.eContents().get(0);
+		private final RuleCall cDefinitionAttributeDefinitionStringOrIdParserRuleCall_0_0_1 = (RuleCall)cDefinitionAttributeDefinitionCrossReference_0_0.eContents().get(1);
 		private final Keyword cColonEqualsSignKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Assignment cValueAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cValueValueRuleParserRuleCall_2_0 = (RuleCall)cValueAssignment_2.eContents().get(0);
 		private final Keyword cSemicolonKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//AttributeRule returns Attribute:
-		//    name = NameOrMiscRule ':=' value = ValueRule ';'
+		//    definition = [dl::AttributeDefinition|StringOrId] ':=' value = ValueRule ';'
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//name = NameOrMiscRule ':=' value = ValueRule ';'
+		//definition = [dl::AttributeDefinition|StringOrId] ':=' value = ValueRule ';'
 		public Group getGroup() { return cGroup; }
 		
-		//name = NameOrMiscRule
-		public Assignment getNameAssignment_0() { return cNameAssignment_0; }
+		//definition = [dl::AttributeDefinition|StringOrId]
+		public Assignment getDefinitionAssignment_0() { return cDefinitionAssignment_0; }
 		
-		//NameOrMiscRule
-		public RuleCall getNameNameOrMiscRuleParserRuleCall_0_0() { return cNameNameOrMiscRuleParserRuleCall_0_0; }
+		//[dl::AttributeDefinition|StringOrId]
+		public CrossReference getDefinitionAttributeDefinitionCrossReference_0_0() { return cDefinitionAttributeDefinitionCrossReference_0_0; }
+		
+		//StringOrId
+		public RuleCall getDefinitionAttributeDefinitionStringOrIdParserRuleCall_0_0_1() { return cDefinitionAttributeDefinitionStringOrIdParserRuleCall_0_0_1; }
 		
 		//':='
 		public Keyword getColonEqualsSignKeyword_1() { return cColonEqualsSignKeyword_1; }
@@ -112,62 +116,6 @@ public class InstanceLanguageGrammarAccess extends AbstractElementFinder.Abstrac
 		
 		//';'
 		public Keyword getSemicolonKeyword_3() { return cSemicolonKeyword_3; }
-	}
-	public class NameOrMiscRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.instance.dsl.InstanceLanguage.NameOrMiscRule");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cNameRuleParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cMiscRuleParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		
-		//NameOrMiscRule returns NameOrMisc:
-		//    NameRule | MiscRule
-		//;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//NameRule | MiscRule
-		public Alternatives getAlternatives() { return cAlternatives; }
-		
-		//NameRule
-		public RuleCall getNameRuleParserRuleCall_0() { return cNameRuleParserRuleCall_0; }
-		
-		//MiscRule
-		public RuleCall getMiscRuleParserRuleCall_1() { return cMiscRuleParserRuleCall_1; }
-	}
-	public class NameRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.instance.dsl.InstanceLanguage.NameRule");
-		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
-		private final CrossReference cNameNamedAttributeDefinitionCrossReference_0 = (CrossReference)cNameAssignment.eContents().get(0);
-		private final RuleCall cNameNamedAttributeDefinitionStringOrIdParserRuleCall_0_1 = (RuleCall)cNameNamedAttributeDefinitionCrossReference_0.eContents().get(1);
-		
-		//NameRule returns Name:
-		//    name = [dl::NamedAttributeDefinition|StringOrId]
-		//;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//name = [dl::NamedAttributeDefinition|StringOrId]
-		public Assignment getNameAssignment() { return cNameAssignment; }
-		
-		//[dl::NamedAttributeDefinition|StringOrId]
-		public CrossReference getNameNamedAttributeDefinitionCrossReference_0() { return cNameNamedAttributeDefinitionCrossReference_0; }
-		
-		//StringOrId
-		public RuleCall getNameNamedAttributeDefinitionStringOrIdParserRuleCall_0_1() { return cNameNamedAttributeDefinitionStringOrIdParserRuleCall_0_1; }
-	}
-	public class MiscRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.instance.dsl.InstanceLanguage.MiscRule");
-		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
-		private final RuleCall cNameSTRINGTerminalRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
-		
-		//MiscRule returns Misc:
-		//    name = STRING
-		//;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//name = STRING
-		public Assignment getNameAssignment() { return cNameAssignment; }
-		
-		//STRING
-		public RuleCall getNameSTRINGTerminalRuleCall_0() { return cNameSTRINGTerminalRuleCall_0; }
 	}
 	public class ValueRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.instance.dsl.InstanceLanguage.ValueRule");
@@ -305,9 +253,6 @@ public class InstanceLanguageGrammarAccess extends AbstractElementFinder.Abstrac
 	
 	private final InstanceRuleElements pInstanceRule;
 	private final AttributeRuleElements pAttributeRule;
-	private final NameOrMiscRuleElements pNameOrMiscRule;
-	private final NameRuleElements pNameRule;
-	private final MiscRuleElements pMiscRule;
 	private final ValueRuleElements pValueRule;
 	private final ArrayRuleElements pArrayRule;
 	private final LiteralValueRuleElements pLiteralValueRule;
@@ -328,9 +273,6 @@ public class InstanceLanguageGrammarAccess extends AbstractElementFinder.Abstrac
 		this.gaTerminals = gaTerminals;
 		this.pInstanceRule = new InstanceRuleElements();
 		this.pAttributeRule = new AttributeRuleElements();
-		this.pNameOrMiscRule = new NameOrMiscRuleElements();
-		this.pNameRule = new NameRuleElements();
-		this.pMiscRule = new MiscRuleElements();
 		this.pValueRule = new ValueRuleElements();
 		this.pArrayRule = new ArrayRuleElements();
 		this.pLiteralValueRule = new LiteralValueRuleElements();
@@ -369,7 +311,7 @@ public class InstanceLanguageGrammarAccess extends AbstractElementFinder.Abstrac
 
 	
 	//InstanceRule returns Instance:
-	//    name = [dl::TypeDefinition|StringOrId] ('{'
+	//    definition = [dl::TypeDefinition|StringOrId] ('{'
 	//      attributes += AttributeRule*
 	//    '}')?
 	//;
@@ -382,7 +324,7 @@ public class InstanceLanguageGrammarAccess extends AbstractElementFinder.Abstrac
 	}
 	
 	//AttributeRule returns Attribute:
-	//    name = NameOrMiscRule ':=' value = ValueRule ';'
+	//    definition = [dl::AttributeDefinition|StringOrId] ':=' value = ValueRule ';'
 	//;
 	public AttributeRuleElements getAttributeRuleAccess() {
 		return pAttributeRule;
@@ -390,39 +332,6 @@ public class InstanceLanguageGrammarAccess extends AbstractElementFinder.Abstrac
 	
 	public ParserRule getAttributeRuleRule() {
 		return getAttributeRuleAccess().getRule();
-	}
-	
-	//NameOrMiscRule returns NameOrMisc:
-	//    NameRule | MiscRule
-	//;
-	public NameOrMiscRuleElements getNameOrMiscRuleAccess() {
-		return pNameOrMiscRule;
-	}
-	
-	public ParserRule getNameOrMiscRuleRule() {
-		return getNameOrMiscRuleAccess().getRule();
-	}
-	
-	//NameRule returns Name:
-	//    name = [dl::NamedAttributeDefinition|StringOrId]
-	//;
-	public NameRuleElements getNameRuleAccess() {
-		return pNameRule;
-	}
-	
-	public ParserRule getNameRuleRule() {
-		return getNameRuleAccess().getRule();
-	}
-	
-	//MiscRule returns Misc:
-	//    name = STRING
-	//;
-	public MiscRuleElements getMiscRuleAccess() {
-		return pMiscRule;
-	}
-	
-	public ParserRule getMiscRuleRule() {
-		return getMiscRuleAccess().getRule();
 	}
 	
 	//ValueRule returns Value:

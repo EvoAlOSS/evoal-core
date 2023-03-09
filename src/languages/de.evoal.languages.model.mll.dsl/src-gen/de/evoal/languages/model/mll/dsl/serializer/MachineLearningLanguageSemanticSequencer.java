@@ -29,8 +29,6 @@ import de.evoal.languages.model.instance.DataReference;
 import de.evoal.languages.model.instance.Instance;
 import de.evoal.languages.model.instance.InstancePackage;
 import de.evoal.languages.model.instance.LiteralValue;
-import de.evoal.languages.model.instance.Misc;
-import de.evoal.languages.model.instance.Name;
 import de.evoal.languages.model.instance.dsl.serializer.InstanceLanguageSemanticSequencer;
 import de.evoal.languages.model.mll.BlockStatement;
 import de.evoal.languages.model.mll.CallStatement;
@@ -138,12 +136,6 @@ public class MachineLearningLanguageSemanticSequencer extends InstanceLanguageSe
 				return; 
 			case InstancePackage.LITERAL_VALUE:
 				sequence_LiteralValueRule(context, (LiteralValue) semanticObject); 
-				return; 
-			case InstancePackage.MISC:
-				sequence_MiscRule(context, (Misc) semanticObject); 
-				return; 
-			case InstancePackage.NAME:
-				sequence_NameRule(context, (Name) semanticObject); 
 				return; 
 			}
 		else if (epackage == MllPackage.eINSTANCE)

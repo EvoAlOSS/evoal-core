@@ -41,22 +41,13 @@ public interface DlFactory extends EFactory {
 	TypeDefinition createTypeDefinition();
 
 	/**
-	 * Returns a new object of class '<em>Unnamed Attribute Definition</em>'.
+	 * Returns a new object of class '<em>Attribute Definition</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Unnamed Attribute Definition</em>'.
+	 * @return a new object of class '<em>Attribute Definition</em>'.
 	 * @generated
 	 */
-	UnnamedAttributeDefinition createUnnamedAttributeDefinition();
-
-	/**
-	 * Returns a new object of class '<em>Named Attribute Definition</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Named Attribute Definition</em>'.
-	 * @generated
-	 */
-	NamedAttributeDefinition createNamedAttributeDefinition();
+	AttributeDefinition createAttributeDefinition();
 
 	/**
 	 * Returns a new object of class '<em>Instance Type</em>'.

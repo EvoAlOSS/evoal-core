@@ -1019,7 +1019,7 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 	}
 	
 	//InstanceRule returns Instance:
-	//    name = [dl::TypeDefinition|StringOrId] ('{'
+	//    definition = [dl::TypeDefinition|StringOrId] ('{'
 	//      attributes += AttributeRule*
 	//    '}')?
 	//;
@@ -1032,7 +1032,7 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 	}
 	
 	//AttributeRule returns Attribute:
-	//    name = NameOrMiscRule ':=' value = ValueRule ';'
+	//    definition = [dl::AttributeDefinition|StringOrId] ':=' value = ValueRule ';'
 	//;
 	public InstanceLanguageGrammarAccess.AttributeRuleElements getAttributeRuleAccess() {
 		return gaInstanceLanguage.getAttributeRuleAccess();
@@ -1040,39 +1040,6 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 	
 	public ParserRule getAttributeRuleRule() {
 		return getAttributeRuleAccess().getRule();
-	}
-	
-	//NameOrMiscRule returns NameOrMisc:
-	//    NameRule | MiscRule
-	//;
-	public InstanceLanguageGrammarAccess.NameOrMiscRuleElements getNameOrMiscRuleAccess() {
-		return gaInstanceLanguage.getNameOrMiscRuleAccess();
-	}
-	
-	public ParserRule getNameOrMiscRuleRule() {
-		return getNameOrMiscRuleAccess().getRule();
-	}
-	
-	//NameRule returns Name:
-	//    name = [dl::NamedAttributeDefinition|StringOrId]
-	//;
-	public InstanceLanguageGrammarAccess.NameRuleElements getNameRuleAccess() {
-		return gaInstanceLanguage.getNameRuleAccess();
-	}
-	
-	public ParserRule getNameRuleRule() {
-		return getNameRuleAccess().getRule();
-	}
-	
-	//MiscRule returns Misc:
-	//    name = STRING
-	//;
-	public InstanceLanguageGrammarAccess.MiscRuleElements getMiscRuleAccess() {
-		return gaInstanceLanguage.getMiscRuleAccess();
-	}
-	
-	public ParserRule getMiscRuleRule() {
-		return getMiscRuleAccess().getRule();
 	}
 	
 	//ValueRule returns Value:

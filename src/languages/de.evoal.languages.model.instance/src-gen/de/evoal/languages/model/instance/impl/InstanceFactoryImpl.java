@@ -59,9 +59,6 @@ public class InstanceFactoryImpl extends EFactoryImpl implements InstanceFactory
 		switch (eClass.getClassifierID()) {
 			case InstancePackage.INSTANCE: return createInstance();
 			case InstancePackage.ATTRIBUTE: return createAttribute();
-			case InstancePackage.NAME_OR_MISC: return createNameOrMisc();
-			case InstancePackage.NAME: return createName();
-			case InstancePackage.MISC: return createMisc();
 			case InstancePackage.VALUE: return createValue();
 			case InstancePackage.ARRAY: return createArray();
 			case InstancePackage.LITERAL_VALUE: return createLiteralValue();
@@ -91,39 +88,6 @@ public class InstanceFactoryImpl extends EFactoryImpl implements InstanceFactory
 	public Attribute createAttribute() {
 		AttributeImpl attribute = new AttributeImpl();
 		return attribute;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NameOrMisc createNameOrMisc() {
-		NameOrMiscImpl nameOrMisc = new NameOrMiscImpl();
-		return nameOrMisc;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Name createName() {
-		NameImpl name = new NameImpl();
-		return name;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Misc createMisc() {
-		MiscImpl misc = new MiscImpl();
-		return misc;
 	}
 
 	/**

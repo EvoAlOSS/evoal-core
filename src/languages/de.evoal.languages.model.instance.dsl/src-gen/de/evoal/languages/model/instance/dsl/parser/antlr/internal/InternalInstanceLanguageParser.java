@@ -22,7 +22,7 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_STRING", "RULE_DOUBLE", "RULE_INT", "RULE_QUOTED_ID", "RULE_ID", "RULE_DIGIT", "RULE_EXPONENT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'{'", "'}'", "':='", "';'", "'['", "','", "']'", "'data'", "'OR'", "'XOR'", "'AND'", "'!'", "'^'", "'('", "')'", "'call'", "'value'", "'true'", "'false'", "'>='", "'>'", "'='", "'!='", "'<'", "'<='", "'+'", "'-'", "'*'", "'/'", "'%'", "'Y'", "'Z'", "'E'", "'P'", "'T'", "'G'", "'M'", "'k'", "'h'", "'da'", "'d'", "'c'", "'m'", "'\\u00B5'", "'n'", "'p'", "'f'", "'a'", "'z'", "'y'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_DOUBLE", "RULE_INT", "RULE_STRING", "RULE_QUOTED_ID", "RULE_ID", "RULE_DIGIT", "RULE_EXPONENT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'{'", "'}'", "':='", "';'", "'['", "','", "']'", "'data'", "'OR'", "'XOR'", "'AND'", "'!'", "'^'", "'('", "')'", "'call'", "'value'", "'true'", "'false'", "'>='", "'>'", "'='", "'!='", "'<'", "'<='", "'+'", "'-'", "'*'", "'/'", "'%'", "'Y'", "'Z'", "'E'", "'P'", "'T'", "'G'", "'M'", "'k'", "'h'", "'da'", "'d'", "'c'", "'m'", "'\\u00B5'", "'n'", "'p'", "'f'", "'a'", "'z'", "'y'"
     };
     public static final int T__50=50;
     public static final int T__19=19;
@@ -47,7 +47,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
     public static final int T__26=26;
     public static final int T__27=27;
     public static final int T__28=28;
-    public static final int RULE_INT=6;
+    public static final int RULE_INT=5;
     public static final int T__29=29;
     public static final int T__22=22;
     public static final int RULE_ML_COMMENT=11;
@@ -59,10 +59,10 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
     public static final int T__20=20;
     public static final int T__64=64;
     public static final int T__21=21;
-    public static final int RULE_STRING=4;
+    public static final int RULE_STRING=6;
     public static final int RULE_SL_COMMENT=12;
     public static final int T__37=37;
-    public static final int RULE_DOUBLE=5;
+    public static final int RULE_DOUBLE=4;
     public static final int T__38=38;
     public static final int T__39=39;
     public static final int T__33=33;
@@ -194,7 +194,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
             					}
             				
 
-            					newCompositeNode(grammarAccess.getInstanceRuleAccess().getNameTypeDefinitionCrossReference_0_0());
+            					newCompositeNode(grammarAccess.getInstanceRuleAccess().getDefinitionTypeDefinitionCrossReference_0_0());
             				
             pushFollow(FOLLOW_3);
             ruleStringOrId();
@@ -231,7 +231,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
                         int alt1=2;
                         int LA1_0 = input.LA(1);
 
-                        if ( (LA1_0==RULE_STRING||(LA1_0>=RULE_QUOTED_ID && LA1_0<=RULE_ID)) ) {
+                        if ( ((LA1_0>=RULE_QUOTED_ID && LA1_0<=RULE_ID)) ) {
                             alt1=1;
                         }
 
@@ -343,14 +343,12 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "ruleAttributeRule"
-    // InternalInstanceLanguage.g:137:1: ruleAttributeRule returns [EObject current=null] : ( ( (lv_name_0_0= ruleNameOrMiscRule ) ) otherlv_1= ':=' ( (lv_value_2_0= ruleValueRule ) ) otherlv_3= ';' ) ;
+    // InternalInstanceLanguage.g:137:1: ruleAttributeRule returns [EObject current=null] : ( ( ( ruleStringOrId ) ) otherlv_1= ':=' ( (lv_value_2_0= ruleValueRule ) ) otherlv_3= ';' ) ;
     public final EObject ruleAttributeRule() throws RecognitionException {
         EObject current = null;
 
         Token otherlv_1=null;
         Token otherlv_3=null;
-        EObject lv_name_0_0 = null;
-
         EObject lv_value_2_0 = null;
 
 
@@ -358,35 +356,32 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
         	enterRule();
 
         try {
-            // InternalInstanceLanguage.g:143:2: ( ( ( (lv_name_0_0= ruleNameOrMiscRule ) ) otherlv_1= ':=' ( (lv_value_2_0= ruleValueRule ) ) otherlv_3= ';' ) )
-            // InternalInstanceLanguage.g:144:2: ( ( (lv_name_0_0= ruleNameOrMiscRule ) ) otherlv_1= ':=' ( (lv_value_2_0= ruleValueRule ) ) otherlv_3= ';' )
+            // InternalInstanceLanguage.g:143:2: ( ( ( ( ruleStringOrId ) ) otherlv_1= ':=' ( (lv_value_2_0= ruleValueRule ) ) otherlv_3= ';' ) )
+            // InternalInstanceLanguage.g:144:2: ( ( ( ruleStringOrId ) ) otherlv_1= ':=' ( (lv_value_2_0= ruleValueRule ) ) otherlv_3= ';' )
             {
-            // InternalInstanceLanguage.g:144:2: ( ( (lv_name_0_0= ruleNameOrMiscRule ) ) otherlv_1= ':=' ( (lv_value_2_0= ruleValueRule ) ) otherlv_3= ';' )
-            // InternalInstanceLanguage.g:145:3: ( (lv_name_0_0= ruleNameOrMiscRule ) ) otherlv_1= ':=' ( (lv_value_2_0= ruleValueRule ) ) otherlv_3= ';'
+            // InternalInstanceLanguage.g:144:2: ( ( ( ruleStringOrId ) ) otherlv_1= ':=' ( (lv_value_2_0= ruleValueRule ) ) otherlv_3= ';' )
+            // InternalInstanceLanguage.g:145:3: ( ( ruleStringOrId ) ) otherlv_1= ':=' ( (lv_value_2_0= ruleValueRule ) ) otherlv_3= ';'
             {
-            // InternalInstanceLanguage.g:145:3: ( (lv_name_0_0= ruleNameOrMiscRule ) )
-            // InternalInstanceLanguage.g:146:4: (lv_name_0_0= ruleNameOrMiscRule )
+            // InternalInstanceLanguage.g:145:3: ( ( ruleStringOrId ) )
+            // InternalInstanceLanguage.g:146:4: ( ruleStringOrId )
             {
-            // InternalInstanceLanguage.g:146:4: (lv_name_0_0= ruleNameOrMiscRule )
-            // InternalInstanceLanguage.g:147:5: lv_name_0_0= ruleNameOrMiscRule
+            // InternalInstanceLanguage.g:146:4: ( ruleStringOrId )
+            // InternalInstanceLanguage.g:147:5: ruleStringOrId
             {
 
-            					newCompositeNode(grammarAccess.getAttributeRuleAccess().getNameNameOrMiscRuleParserRuleCall_0_0());
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getAttributeRuleRule());
+            					}
+            				
+
+            					newCompositeNode(grammarAccess.getAttributeRuleAccess().getDefinitionAttributeDefinitionCrossReference_0_0());
             				
             pushFollow(FOLLOW_5);
-            lv_name_0_0=ruleNameOrMiscRule();
+            ruleStringOrId();
 
             state._fsp--;
 
 
-            					if (current==null) {
-            						current = createModelElementForParent(grammarAccess.getAttributeRuleRule());
-            					}
-            					set(
-            						current,
-            						"name",
-            						lv_name_0_0,
-            						"de.evoal.languages.model.instance.dsl.InstanceLanguage.NameOrMiscRule");
             					afterParserOrEnumRuleCall();
             				
 
@@ -399,11 +394,11 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
             			newLeafNode(otherlv_1, grammarAccess.getAttributeRuleAccess().getColonEqualsSignKeyword_1());
             		
-            // InternalInstanceLanguage.g:168:3: ( (lv_value_2_0= ruleValueRule ) )
-            // InternalInstanceLanguage.g:169:4: (lv_value_2_0= ruleValueRule )
+            // InternalInstanceLanguage.g:165:3: ( (lv_value_2_0= ruleValueRule ) )
+            // InternalInstanceLanguage.g:166:4: (lv_value_2_0= ruleValueRule )
             {
-            // InternalInstanceLanguage.g:169:4: (lv_value_2_0= ruleValueRule )
-            // InternalInstanceLanguage.g:170:5: lv_value_2_0= ruleValueRule
+            // InternalInstanceLanguage.g:166:4: (lv_value_2_0= ruleValueRule )
+            // InternalInstanceLanguage.g:167:5: lv_value_2_0= ruleValueRule
             {
 
             					newCompositeNode(grammarAccess.getAttributeRuleAccess().getValueValueRuleParserRuleCall_2_0());
@@ -456,326 +451,8 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
     // $ANTLR end "ruleAttributeRule"
 
 
-    // $ANTLR start "entryRuleNameOrMiscRule"
-    // InternalInstanceLanguage.g:195:1: entryRuleNameOrMiscRule returns [EObject current=null] : iv_ruleNameOrMiscRule= ruleNameOrMiscRule EOF ;
-    public final EObject entryRuleNameOrMiscRule() throws RecognitionException {
-        EObject current = null;
-
-        EObject iv_ruleNameOrMiscRule = null;
-
-
-        try {
-            // InternalInstanceLanguage.g:195:55: (iv_ruleNameOrMiscRule= ruleNameOrMiscRule EOF )
-            // InternalInstanceLanguage.g:196:2: iv_ruleNameOrMiscRule= ruleNameOrMiscRule EOF
-            {
-             newCompositeNode(grammarAccess.getNameOrMiscRuleRule()); 
-            pushFollow(FOLLOW_1);
-            iv_ruleNameOrMiscRule=ruleNameOrMiscRule();
-
-            state._fsp--;
-
-             current =iv_ruleNameOrMiscRule; 
-            match(input,EOF,FOLLOW_2); 
-
-            }
-
-        }
-
-            catch (RecognitionException re) {
-                recover(input,re);
-                appendSkippedTokens();
-            }
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "entryRuleNameOrMiscRule"
-
-
-    // $ANTLR start "ruleNameOrMiscRule"
-    // InternalInstanceLanguage.g:202:1: ruleNameOrMiscRule returns [EObject current=null] : (this_NameRule_0= ruleNameRule | this_MiscRule_1= ruleMiscRule ) ;
-    public final EObject ruleNameOrMiscRule() throws RecognitionException {
-        EObject current = null;
-
-        EObject this_NameRule_0 = null;
-
-        EObject this_MiscRule_1 = null;
-
-
-
-        	enterRule();
-
-        try {
-            // InternalInstanceLanguage.g:208:2: ( (this_NameRule_0= ruleNameRule | this_MiscRule_1= ruleMiscRule ) )
-            // InternalInstanceLanguage.g:209:2: (this_NameRule_0= ruleNameRule | this_MiscRule_1= ruleMiscRule )
-            {
-            // InternalInstanceLanguage.g:209:2: (this_NameRule_0= ruleNameRule | this_MiscRule_1= ruleMiscRule )
-            int alt3=2;
-            int LA3_0 = input.LA(1);
-
-            if ( ((LA3_0>=RULE_QUOTED_ID && LA3_0<=RULE_ID)) ) {
-                alt3=1;
-            }
-            else if ( (LA3_0==RULE_STRING) ) {
-                alt3=2;
-            }
-            else {
-                NoViableAltException nvae =
-                    new NoViableAltException("", 3, 0, input);
-
-                throw nvae;
-            }
-            switch (alt3) {
-                case 1 :
-                    // InternalInstanceLanguage.g:210:3: this_NameRule_0= ruleNameRule
-                    {
-
-                    			newCompositeNode(grammarAccess.getNameOrMiscRuleAccess().getNameRuleParserRuleCall_0());
-                    		
-                    pushFollow(FOLLOW_2);
-                    this_NameRule_0=ruleNameRule();
-
-                    state._fsp--;
-
-
-                    			current = this_NameRule_0;
-                    			afterParserOrEnumRuleCall();
-                    		
-
-                    }
-                    break;
-                case 2 :
-                    // InternalInstanceLanguage.g:219:3: this_MiscRule_1= ruleMiscRule
-                    {
-
-                    			newCompositeNode(grammarAccess.getNameOrMiscRuleAccess().getMiscRuleParserRuleCall_1());
-                    		
-                    pushFollow(FOLLOW_2);
-                    this_MiscRule_1=ruleMiscRule();
-
-                    state._fsp--;
-
-
-                    			current = this_MiscRule_1;
-                    			afterParserOrEnumRuleCall();
-                    		
-
-                    }
-                    break;
-
-            }
-
-
-            }
-
-
-            	leaveRule();
-
-        }
-
-            catch (RecognitionException re) {
-                recover(input,re);
-                appendSkippedTokens();
-            }
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "ruleNameOrMiscRule"
-
-
-    // $ANTLR start "entryRuleNameRule"
-    // InternalInstanceLanguage.g:231:1: entryRuleNameRule returns [EObject current=null] : iv_ruleNameRule= ruleNameRule EOF ;
-    public final EObject entryRuleNameRule() throws RecognitionException {
-        EObject current = null;
-
-        EObject iv_ruleNameRule = null;
-
-
-        try {
-            // InternalInstanceLanguage.g:231:49: (iv_ruleNameRule= ruleNameRule EOF )
-            // InternalInstanceLanguage.g:232:2: iv_ruleNameRule= ruleNameRule EOF
-            {
-             newCompositeNode(grammarAccess.getNameRuleRule()); 
-            pushFollow(FOLLOW_1);
-            iv_ruleNameRule=ruleNameRule();
-
-            state._fsp--;
-
-             current =iv_ruleNameRule; 
-            match(input,EOF,FOLLOW_2); 
-
-            }
-
-        }
-
-            catch (RecognitionException re) {
-                recover(input,re);
-                appendSkippedTokens();
-            }
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "entryRuleNameRule"
-
-
-    // $ANTLR start "ruleNameRule"
-    // InternalInstanceLanguage.g:238:1: ruleNameRule returns [EObject current=null] : ( ( ruleStringOrId ) ) ;
-    public final EObject ruleNameRule() throws RecognitionException {
-        EObject current = null;
-
-
-        	enterRule();
-
-        try {
-            // InternalInstanceLanguage.g:244:2: ( ( ( ruleStringOrId ) ) )
-            // InternalInstanceLanguage.g:245:2: ( ( ruleStringOrId ) )
-            {
-            // InternalInstanceLanguage.g:245:2: ( ( ruleStringOrId ) )
-            // InternalInstanceLanguage.g:246:3: ( ruleStringOrId )
-            {
-            // InternalInstanceLanguage.g:246:3: ( ruleStringOrId )
-            // InternalInstanceLanguage.g:247:4: ruleStringOrId
-            {
-
-            				if (current==null) {
-            					current = createModelElement(grammarAccess.getNameRuleRule());
-            				}
-            			
-
-            				newCompositeNode(grammarAccess.getNameRuleAccess().getNameNamedAttributeDefinitionCrossReference_0());
-            			
-            pushFollow(FOLLOW_2);
-            ruleStringOrId();
-
-            state._fsp--;
-
-
-            				afterParserOrEnumRuleCall();
-            			
-
-            }
-
-
-            }
-
-
-            }
-
-
-            	leaveRule();
-
-        }
-
-            catch (RecognitionException re) {
-                recover(input,re);
-                appendSkippedTokens();
-            }
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "ruleNameRule"
-
-
-    // $ANTLR start "entryRuleMiscRule"
-    // InternalInstanceLanguage.g:264:1: entryRuleMiscRule returns [EObject current=null] : iv_ruleMiscRule= ruleMiscRule EOF ;
-    public final EObject entryRuleMiscRule() throws RecognitionException {
-        EObject current = null;
-
-        EObject iv_ruleMiscRule = null;
-
-
-        try {
-            // InternalInstanceLanguage.g:264:49: (iv_ruleMiscRule= ruleMiscRule EOF )
-            // InternalInstanceLanguage.g:265:2: iv_ruleMiscRule= ruleMiscRule EOF
-            {
-             newCompositeNode(grammarAccess.getMiscRuleRule()); 
-            pushFollow(FOLLOW_1);
-            iv_ruleMiscRule=ruleMiscRule();
-
-            state._fsp--;
-
-             current =iv_ruleMiscRule; 
-            match(input,EOF,FOLLOW_2); 
-
-            }
-
-        }
-
-            catch (RecognitionException re) {
-                recover(input,re);
-                appendSkippedTokens();
-            }
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "entryRuleMiscRule"
-
-
-    // $ANTLR start "ruleMiscRule"
-    // InternalInstanceLanguage.g:271:1: ruleMiscRule returns [EObject current=null] : ( (lv_name_0_0= RULE_STRING ) ) ;
-    public final EObject ruleMiscRule() throws RecognitionException {
-        EObject current = null;
-
-        Token lv_name_0_0=null;
-
-
-        	enterRule();
-
-        try {
-            // InternalInstanceLanguage.g:277:2: ( ( (lv_name_0_0= RULE_STRING ) ) )
-            // InternalInstanceLanguage.g:278:2: ( (lv_name_0_0= RULE_STRING ) )
-            {
-            // InternalInstanceLanguage.g:278:2: ( (lv_name_0_0= RULE_STRING ) )
-            // InternalInstanceLanguage.g:279:3: (lv_name_0_0= RULE_STRING )
-            {
-            // InternalInstanceLanguage.g:279:3: (lv_name_0_0= RULE_STRING )
-            // InternalInstanceLanguage.g:280:4: lv_name_0_0= RULE_STRING
-            {
-            lv_name_0_0=(Token)match(input,RULE_STRING,FOLLOW_2); 
-
-            				newLeafNode(lv_name_0_0, grammarAccess.getMiscRuleAccess().getNameSTRINGTerminalRuleCall_0());
-            			
-
-            				if (current==null) {
-            					current = createModelElement(grammarAccess.getMiscRuleRule());
-            				}
-            				setWithLastConsumed(
-            					current,
-            					"name",
-            					lv_name_0_0,
-            					"de.evoal.languages.model.el.dsl.ExpressionLanguage.STRING");
-            			
-
-            }
-
-
-            }
-
-
-            }
-
-
-            	leaveRule();
-
-        }
-
-            catch (RecognitionException re) {
-                recover(input,re);
-                appendSkippedTokens();
-            }
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "ruleMiscRule"
-
-
     // $ANTLR start "entryRuleValueRule"
-    // InternalInstanceLanguage.g:299:1: entryRuleValueRule returns [EObject current=null] : iv_ruleValueRule= ruleValueRule EOF ;
+    // InternalInstanceLanguage.g:192:1: entryRuleValueRule returns [EObject current=null] : iv_ruleValueRule= ruleValueRule EOF ;
     public final EObject entryRuleValueRule() throws RecognitionException {
         EObject current = null;
 
@@ -783,8 +460,8 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
         try {
-            // InternalInstanceLanguage.g:299:50: (iv_ruleValueRule= ruleValueRule EOF )
-            // InternalInstanceLanguage.g:300:2: iv_ruleValueRule= ruleValueRule EOF
+            // InternalInstanceLanguage.g:192:50: (iv_ruleValueRule= ruleValueRule EOF )
+            // InternalInstanceLanguage.g:193:2: iv_ruleValueRule= ruleValueRule EOF
             {
              newCompositeNode(grammarAccess.getValueRuleRule()); 
             pushFollow(FOLLOW_1);
@@ -811,7 +488,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "ruleValueRule"
-    // InternalInstanceLanguage.g:306:1: ruleValueRule returns [EObject current=null] : (this_ArrayRule_0= ruleArrayRule | this_DataReferenceRule_1= ruleDataReferenceRule | this_InstanceRule_2= ruleInstanceRule | this_LiteralValueRule_3= ruleLiteralValueRule ) ;
+    // InternalInstanceLanguage.g:199:1: ruleValueRule returns [EObject current=null] : (this_ArrayRule_0= ruleArrayRule | this_DataReferenceRule_1= ruleDataReferenceRule | this_InstanceRule_2= ruleInstanceRule | this_LiteralValueRule_3= ruleLiteralValueRule ) ;
     public final EObject ruleValueRule() throws RecognitionException {
         EObject current = null;
 
@@ -828,47 +505,47 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
         	enterRule();
 
         try {
-            // InternalInstanceLanguage.g:312:2: ( (this_ArrayRule_0= ruleArrayRule | this_DataReferenceRule_1= ruleDataReferenceRule | this_InstanceRule_2= ruleInstanceRule | this_LiteralValueRule_3= ruleLiteralValueRule ) )
-            // InternalInstanceLanguage.g:313:2: (this_ArrayRule_0= ruleArrayRule | this_DataReferenceRule_1= ruleDataReferenceRule | this_InstanceRule_2= ruleInstanceRule | this_LiteralValueRule_3= ruleLiteralValueRule )
+            // InternalInstanceLanguage.g:205:2: ( (this_ArrayRule_0= ruleArrayRule | this_DataReferenceRule_1= ruleDataReferenceRule | this_InstanceRule_2= ruleInstanceRule | this_LiteralValueRule_3= ruleLiteralValueRule ) )
+            // InternalInstanceLanguage.g:206:2: (this_ArrayRule_0= ruleArrayRule | this_DataReferenceRule_1= ruleDataReferenceRule | this_InstanceRule_2= ruleInstanceRule | this_LiteralValueRule_3= ruleLiteralValueRule )
             {
-            // InternalInstanceLanguage.g:313:2: (this_ArrayRule_0= ruleArrayRule | this_DataReferenceRule_1= ruleDataReferenceRule | this_InstanceRule_2= ruleInstanceRule | this_LiteralValueRule_3= ruleLiteralValueRule )
-            int alt4=4;
+            // InternalInstanceLanguage.g:206:2: (this_ArrayRule_0= ruleArrayRule | this_DataReferenceRule_1= ruleDataReferenceRule | this_InstanceRule_2= ruleInstanceRule | this_LiteralValueRule_3= ruleLiteralValueRule )
+            int alt3=4;
             switch ( input.LA(1) ) {
             case 19:
                 {
-                alt4=1;
+                alt3=1;
                 }
                 break;
             case 22:
                 {
-                alt4=2;
+                alt3=2;
                 }
                 break;
             case RULE_QUOTED_ID:
             case RULE_ID:
                 {
-                alt4=3;
+                alt3=3;
                 }
                 break;
-            case RULE_STRING:
             case RULE_DOUBLE:
             case RULE_INT:
+            case RULE_STRING:
             case 32:
             case 33:
                 {
-                alt4=4;
+                alt3=4;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 4, 0, input);
+                    new NoViableAltException("", 3, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt4) {
+            switch (alt3) {
                 case 1 :
-                    // InternalInstanceLanguage.g:314:3: this_ArrayRule_0= ruleArrayRule
+                    // InternalInstanceLanguage.g:207:3: this_ArrayRule_0= ruleArrayRule
                     {
 
                     			newCompositeNode(grammarAccess.getValueRuleAccess().getArrayRuleParserRuleCall_0());
@@ -886,7 +563,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 2 :
-                    // InternalInstanceLanguage.g:323:3: this_DataReferenceRule_1= ruleDataReferenceRule
+                    // InternalInstanceLanguage.g:216:3: this_DataReferenceRule_1= ruleDataReferenceRule
                     {
 
                     			newCompositeNode(grammarAccess.getValueRuleAccess().getDataReferenceRuleParserRuleCall_1());
@@ -904,7 +581,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 3 :
-                    // InternalInstanceLanguage.g:332:3: this_InstanceRule_2= ruleInstanceRule
+                    // InternalInstanceLanguage.g:225:3: this_InstanceRule_2= ruleInstanceRule
                     {
 
                     			newCompositeNode(grammarAccess.getValueRuleAccess().getInstanceRuleParserRuleCall_2());
@@ -922,7 +599,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 4 :
-                    // InternalInstanceLanguage.g:341:3: this_LiteralValueRule_3= ruleLiteralValueRule
+                    // InternalInstanceLanguage.g:234:3: this_LiteralValueRule_3= ruleLiteralValueRule
                     {
 
                     			newCompositeNode(grammarAccess.getValueRuleAccess().getLiteralValueRuleParserRuleCall_3());
@@ -962,7 +639,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "entryRuleArrayRule"
-    // InternalInstanceLanguage.g:353:1: entryRuleArrayRule returns [EObject current=null] : iv_ruleArrayRule= ruleArrayRule EOF ;
+    // InternalInstanceLanguage.g:246:1: entryRuleArrayRule returns [EObject current=null] : iv_ruleArrayRule= ruleArrayRule EOF ;
     public final EObject entryRuleArrayRule() throws RecognitionException {
         EObject current = null;
 
@@ -970,8 +647,8 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
         try {
-            // InternalInstanceLanguage.g:353:50: (iv_ruleArrayRule= ruleArrayRule EOF )
-            // InternalInstanceLanguage.g:354:2: iv_ruleArrayRule= ruleArrayRule EOF
+            // InternalInstanceLanguage.g:246:50: (iv_ruleArrayRule= ruleArrayRule EOF )
+            // InternalInstanceLanguage.g:247:2: iv_ruleArrayRule= ruleArrayRule EOF
             {
              newCompositeNode(grammarAccess.getArrayRuleRule()); 
             pushFollow(FOLLOW_1);
@@ -998,7 +675,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "ruleArrayRule"
-    // InternalInstanceLanguage.g:360:1: ruleArrayRule returns [EObject current=null] : ( () otherlv_1= '[' ( ( (lv_values_2_0= ruleValueRule ) ) (otherlv_3= ',' ( (lv_values_4_0= ruleValueRule ) ) )* )? otherlv_5= ']' ) ;
+    // InternalInstanceLanguage.g:253:1: ruleArrayRule returns [EObject current=null] : ( () otherlv_1= '[' ( ( (lv_values_2_0= ruleValueRule ) ) (otherlv_3= ',' ( (lv_values_4_0= ruleValueRule ) ) )* )? otherlv_5= ']' ) ;
     public final EObject ruleArrayRule() throws RecognitionException {
         EObject current = null;
 
@@ -1014,14 +691,14 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
         	enterRule();
 
         try {
-            // InternalInstanceLanguage.g:366:2: ( ( () otherlv_1= '[' ( ( (lv_values_2_0= ruleValueRule ) ) (otherlv_3= ',' ( (lv_values_4_0= ruleValueRule ) ) )* )? otherlv_5= ']' ) )
-            // InternalInstanceLanguage.g:367:2: ( () otherlv_1= '[' ( ( (lv_values_2_0= ruleValueRule ) ) (otherlv_3= ',' ( (lv_values_4_0= ruleValueRule ) ) )* )? otherlv_5= ']' )
+            // InternalInstanceLanguage.g:259:2: ( ( () otherlv_1= '[' ( ( (lv_values_2_0= ruleValueRule ) ) (otherlv_3= ',' ( (lv_values_4_0= ruleValueRule ) ) )* )? otherlv_5= ']' ) )
+            // InternalInstanceLanguage.g:260:2: ( () otherlv_1= '[' ( ( (lv_values_2_0= ruleValueRule ) ) (otherlv_3= ',' ( (lv_values_4_0= ruleValueRule ) ) )* )? otherlv_5= ']' )
             {
-            // InternalInstanceLanguage.g:367:2: ( () otherlv_1= '[' ( ( (lv_values_2_0= ruleValueRule ) ) (otherlv_3= ',' ( (lv_values_4_0= ruleValueRule ) ) )* )? otherlv_5= ']' )
-            // InternalInstanceLanguage.g:368:3: () otherlv_1= '[' ( ( (lv_values_2_0= ruleValueRule ) ) (otherlv_3= ',' ( (lv_values_4_0= ruleValueRule ) ) )* )? otherlv_5= ']'
+            // InternalInstanceLanguage.g:260:2: ( () otherlv_1= '[' ( ( (lv_values_2_0= ruleValueRule ) ) (otherlv_3= ',' ( (lv_values_4_0= ruleValueRule ) ) )* )? otherlv_5= ']' )
+            // InternalInstanceLanguage.g:261:3: () otherlv_1= '[' ( ( (lv_values_2_0= ruleValueRule ) ) (otherlv_3= ',' ( (lv_values_4_0= ruleValueRule ) ) )* )? otherlv_5= ']'
             {
-            // InternalInstanceLanguage.g:368:3: ()
-            // InternalInstanceLanguage.g:369:4: 
+            // InternalInstanceLanguage.g:261:3: ()
+            // InternalInstanceLanguage.g:262:4: 
             {
 
             				current = forceCreateModelElement(
@@ -1035,22 +712,22 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
             			newLeafNode(otherlv_1, grammarAccess.getArrayRuleAccess().getLeftSquareBracketKeyword_1());
             		
-            // InternalInstanceLanguage.g:379:3: ( ( (lv_values_2_0= ruleValueRule ) ) (otherlv_3= ',' ( (lv_values_4_0= ruleValueRule ) ) )* )?
-            int alt6=2;
-            int LA6_0 = input.LA(1);
+            // InternalInstanceLanguage.g:272:3: ( ( (lv_values_2_0= ruleValueRule ) ) (otherlv_3= ',' ( (lv_values_4_0= ruleValueRule ) ) )* )?
+            int alt5=2;
+            int LA5_0 = input.LA(1);
 
-            if ( ((LA6_0>=RULE_STRING && LA6_0<=RULE_ID)||LA6_0==19||LA6_0==22||(LA6_0>=32 && LA6_0<=33)) ) {
-                alt6=1;
+            if ( ((LA5_0>=RULE_DOUBLE && LA5_0<=RULE_ID)||LA5_0==19||LA5_0==22||(LA5_0>=32 && LA5_0<=33)) ) {
+                alt5=1;
             }
-            switch (alt6) {
+            switch (alt5) {
                 case 1 :
-                    // InternalInstanceLanguage.g:380:4: ( (lv_values_2_0= ruleValueRule ) ) (otherlv_3= ',' ( (lv_values_4_0= ruleValueRule ) ) )*
+                    // InternalInstanceLanguage.g:273:4: ( (lv_values_2_0= ruleValueRule ) ) (otherlv_3= ',' ( (lv_values_4_0= ruleValueRule ) ) )*
                     {
-                    // InternalInstanceLanguage.g:380:4: ( (lv_values_2_0= ruleValueRule ) )
-                    // InternalInstanceLanguage.g:381:5: (lv_values_2_0= ruleValueRule )
+                    // InternalInstanceLanguage.g:273:4: ( (lv_values_2_0= ruleValueRule ) )
+                    // InternalInstanceLanguage.g:274:5: (lv_values_2_0= ruleValueRule )
                     {
-                    // InternalInstanceLanguage.g:381:5: (lv_values_2_0= ruleValueRule )
-                    // InternalInstanceLanguage.g:382:6: lv_values_2_0= ruleValueRule
+                    // InternalInstanceLanguage.g:274:5: (lv_values_2_0= ruleValueRule )
+                    // InternalInstanceLanguage.g:275:6: lv_values_2_0= ruleValueRule
                     {
 
                     						newCompositeNode(grammarAccess.getArrayRuleAccess().getValuesValueRuleParserRuleCall_2_0_0());
@@ -1077,30 +754,30 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
                     }
 
-                    // InternalInstanceLanguage.g:399:4: (otherlv_3= ',' ( (lv_values_4_0= ruleValueRule ) ) )*
-                    loop5:
+                    // InternalInstanceLanguage.g:292:4: (otherlv_3= ',' ( (lv_values_4_0= ruleValueRule ) ) )*
+                    loop4:
                     do {
-                        int alt5=2;
-                        int LA5_0 = input.LA(1);
+                        int alt4=2;
+                        int LA4_0 = input.LA(1);
 
-                        if ( (LA5_0==20) ) {
-                            alt5=1;
+                        if ( (LA4_0==20) ) {
+                            alt4=1;
                         }
 
 
-                        switch (alt5) {
+                        switch (alt4) {
                     	case 1 :
-                    	    // InternalInstanceLanguage.g:400:5: otherlv_3= ',' ( (lv_values_4_0= ruleValueRule ) )
+                    	    // InternalInstanceLanguage.g:293:5: otherlv_3= ',' ( (lv_values_4_0= ruleValueRule ) )
                     	    {
                     	    otherlv_3=(Token)match(input,20,FOLLOW_6); 
 
                     	    					newLeafNode(otherlv_3, grammarAccess.getArrayRuleAccess().getCommaKeyword_2_1_0());
                     	    				
-                    	    // InternalInstanceLanguage.g:404:5: ( (lv_values_4_0= ruleValueRule ) )
-                    	    // InternalInstanceLanguage.g:405:6: (lv_values_4_0= ruleValueRule )
+                    	    // InternalInstanceLanguage.g:297:5: ( (lv_values_4_0= ruleValueRule ) )
+                    	    // InternalInstanceLanguage.g:298:6: (lv_values_4_0= ruleValueRule )
                     	    {
-                    	    // InternalInstanceLanguage.g:405:6: (lv_values_4_0= ruleValueRule )
-                    	    // InternalInstanceLanguage.g:406:7: lv_values_4_0= ruleValueRule
+                    	    // InternalInstanceLanguage.g:298:6: (lv_values_4_0= ruleValueRule )
+                    	    // InternalInstanceLanguage.g:299:7: lv_values_4_0= ruleValueRule
                     	    {
 
                     	    							newCompositeNode(grammarAccess.getArrayRuleAccess().getValuesValueRuleParserRuleCall_2_1_1_0());
@@ -1132,7 +809,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
                     	    break;
 
                     	default :
-                    	    break loop5;
+                    	    break loop4;
                         }
                     } while (true);
 
@@ -1169,7 +846,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "entryRuleLiteralValueRule"
-    // InternalInstanceLanguage.g:433:1: entryRuleLiteralValueRule returns [EObject current=null] : iv_ruleLiteralValueRule= ruleLiteralValueRule EOF ;
+    // InternalInstanceLanguage.g:326:1: entryRuleLiteralValueRule returns [EObject current=null] : iv_ruleLiteralValueRule= ruleLiteralValueRule EOF ;
     public final EObject entryRuleLiteralValueRule() throws RecognitionException {
         EObject current = null;
 
@@ -1177,8 +854,8 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
         try {
-            // InternalInstanceLanguage.g:433:57: (iv_ruleLiteralValueRule= ruleLiteralValueRule EOF )
-            // InternalInstanceLanguage.g:434:2: iv_ruleLiteralValueRule= ruleLiteralValueRule EOF
+            // InternalInstanceLanguage.g:326:57: (iv_ruleLiteralValueRule= ruleLiteralValueRule EOF )
+            // InternalInstanceLanguage.g:327:2: iv_ruleLiteralValueRule= ruleLiteralValueRule EOF
             {
              newCompositeNode(grammarAccess.getLiteralValueRuleRule()); 
             pushFollow(FOLLOW_1);
@@ -1205,7 +882,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "ruleLiteralValueRule"
-    // InternalInstanceLanguage.g:440:1: ruleLiteralValueRule returns [EObject current=null] : ( (lv_literal_0_0= ruleLiteralRule ) ) ;
+    // InternalInstanceLanguage.g:333:1: ruleLiteralValueRule returns [EObject current=null] : ( (lv_literal_0_0= ruleLiteralRule ) ) ;
     public final EObject ruleLiteralValueRule() throws RecognitionException {
         EObject current = null;
 
@@ -1216,14 +893,14 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
         	enterRule();
 
         try {
-            // InternalInstanceLanguage.g:446:2: ( ( (lv_literal_0_0= ruleLiteralRule ) ) )
-            // InternalInstanceLanguage.g:447:2: ( (lv_literal_0_0= ruleLiteralRule ) )
+            // InternalInstanceLanguage.g:339:2: ( ( (lv_literal_0_0= ruleLiteralRule ) ) )
+            // InternalInstanceLanguage.g:340:2: ( (lv_literal_0_0= ruleLiteralRule ) )
             {
-            // InternalInstanceLanguage.g:447:2: ( (lv_literal_0_0= ruleLiteralRule ) )
-            // InternalInstanceLanguage.g:448:3: (lv_literal_0_0= ruleLiteralRule )
+            // InternalInstanceLanguage.g:340:2: ( (lv_literal_0_0= ruleLiteralRule ) )
+            // InternalInstanceLanguage.g:341:3: (lv_literal_0_0= ruleLiteralRule )
             {
-            // InternalInstanceLanguage.g:448:3: (lv_literal_0_0= ruleLiteralRule )
-            // InternalInstanceLanguage.g:449:4: lv_literal_0_0= ruleLiteralRule
+            // InternalInstanceLanguage.g:341:3: (lv_literal_0_0= ruleLiteralRule )
+            // InternalInstanceLanguage.g:342:4: lv_literal_0_0= ruleLiteralRule
             {
 
             				newCompositeNode(grammarAccess.getLiteralValueRuleAccess().getLiteralLiteralRuleParserRuleCall_0());
@@ -1270,7 +947,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "entryRuleDataReferenceRule"
-    // InternalInstanceLanguage.g:469:1: entryRuleDataReferenceRule returns [EObject current=null] : iv_ruleDataReferenceRule= ruleDataReferenceRule EOF ;
+    // InternalInstanceLanguage.g:362:1: entryRuleDataReferenceRule returns [EObject current=null] : iv_ruleDataReferenceRule= ruleDataReferenceRule EOF ;
     public final EObject entryRuleDataReferenceRule() throws RecognitionException {
         EObject current = null;
 
@@ -1278,8 +955,8 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
         try {
-            // InternalInstanceLanguage.g:469:58: (iv_ruleDataReferenceRule= ruleDataReferenceRule EOF )
-            // InternalInstanceLanguage.g:470:2: iv_ruleDataReferenceRule= ruleDataReferenceRule EOF
+            // InternalInstanceLanguage.g:362:58: (iv_ruleDataReferenceRule= ruleDataReferenceRule EOF )
+            // InternalInstanceLanguage.g:363:2: iv_ruleDataReferenceRule= ruleDataReferenceRule EOF
             {
              newCompositeNode(grammarAccess.getDataReferenceRuleRule()); 
             pushFollow(FOLLOW_1);
@@ -1306,7 +983,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "ruleDataReferenceRule"
-    // InternalInstanceLanguage.g:476:1: ruleDataReferenceRule returns [EObject current=null] : ( () otherlv_1= 'data' ( ( ruleStringOrId ) ) ) ;
+    // InternalInstanceLanguage.g:369:1: ruleDataReferenceRule returns [EObject current=null] : ( () otherlv_1= 'data' ( ( ruleStringOrId ) ) ) ;
     public final EObject ruleDataReferenceRule() throws RecognitionException {
         EObject current = null;
 
@@ -1316,14 +993,14 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
         	enterRule();
 
         try {
-            // InternalInstanceLanguage.g:482:2: ( ( () otherlv_1= 'data' ( ( ruleStringOrId ) ) ) )
-            // InternalInstanceLanguage.g:483:2: ( () otherlv_1= 'data' ( ( ruleStringOrId ) ) )
+            // InternalInstanceLanguage.g:375:2: ( ( () otherlv_1= 'data' ( ( ruleStringOrId ) ) ) )
+            // InternalInstanceLanguage.g:376:2: ( () otherlv_1= 'data' ( ( ruleStringOrId ) ) )
             {
-            // InternalInstanceLanguage.g:483:2: ( () otherlv_1= 'data' ( ( ruleStringOrId ) ) )
-            // InternalInstanceLanguage.g:484:3: () otherlv_1= 'data' ( ( ruleStringOrId ) )
+            // InternalInstanceLanguage.g:376:2: ( () otherlv_1= 'data' ( ( ruleStringOrId ) ) )
+            // InternalInstanceLanguage.g:377:3: () otherlv_1= 'data' ( ( ruleStringOrId ) )
             {
-            // InternalInstanceLanguage.g:484:3: ()
-            // InternalInstanceLanguage.g:485:4: 
+            // InternalInstanceLanguage.g:377:3: ()
+            // InternalInstanceLanguage.g:378:4: 
             {
 
             				current = forceCreateModelElement(
@@ -1337,11 +1014,11 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
             			newLeafNode(otherlv_1, grammarAccess.getDataReferenceRuleAccess().getDataKeyword_1());
             		
-            // InternalInstanceLanguage.g:495:3: ( ( ruleStringOrId ) )
-            // InternalInstanceLanguage.g:496:4: ( ruleStringOrId )
+            // InternalInstanceLanguage.g:388:3: ( ( ruleStringOrId ) )
+            // InternalInstanceLanguage.g:389:4: ( ruleStringOrId )
             {
-            // InternalInstanceLanguage.g:496:4: ( ruleStringOrId )
-            // InternalInstanceLanguage.g:497:5: ruleStringOrId
+            // InternalInstanceLanguage.g:389:4: ( ruleStringOrId )
+            // InternalInstanceLanguage.g:390:5: ruleStringOrId
             {
 
             					if (current==null) {
@@ -1388,7 +1065,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "entryRuleExpressionRule"
-    // InternalInstanceLanguage.g:515:1: entryRuleExpressionRule returns [EObject current=null] : iv_ruleExpressionRule= ruleExpressionRule EOF ;
+    // InternalInstanceLanguage.g:408:1: entryRuleExpressionRule returns [EObject current=null] : iv_ruleExpressionRule= ruleExpressionRule EOF ;
     public final EObject entryRuleExpressionRule() throws RecognitionException {
         EObject current = null;
 
@@ -1396,8 +1073,8 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
         try {
-            // InternalInstanceLanguage.g:515:55: (iv_ruleExpressionRule= ruleExpressionRule EOF )
-            // InternalInstanceLanguage.g:516:2: iv_ruleExpressionRule= ruleExpressionRule EOF
+            // InternalInstanceLanguage.g:408:55: (iv_ruleExpressionRule= ruleExpressionRule EOF )
+            // InternalInstanceLanguage.g:409:2: iv_ruleExpressionRule= ruleExpressionRule EOF
             {
              newCompositeNode(grammarAccess.getExpressionRuleRule()); 
             pushFollow(FOLLOW_1);
@@ -1424,7 +1101,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "ruleExpressionRule"
-    // InternalInstanceLanguage.g:522:1: ruleExpressionRule returns [EObject current=null] : this_OrExpressionRule_0= ruleOrExpressionRule ;
+    // InternalInstanceLanguage.g:415:1: ruleExpressionRule returns [EObject current=null] : this_OrExpressionRule_0= ruleOrExpressionRule ;
     public final EObject ruleExpressionRule() throws RecognitionException {
         EObject current = null;
 
@@ -1435,8 +1112,8 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
         	enterRule();
 
         try {
-            // InternalInstanceLanguage.g:528:2: (this_OrExpressionRule_0= ruleOrExpressionRule )
-            // InternalInstanceLanguage.g:529:2: this_OrExpressionRule_0= ruleOrExpressionRule
+            // InternalInstanceLanguage.g:421:2: (this_OrExpressionRule_0= ruleOrExpressionRule )
+            // InternalInstanceLanguage.g:422:2: this_OrExpressionRule_0= ruleOrExpressionRule
             {
 
             		newCompositeNode(grammarAccess.getExpressionRuleAccess().getOrExpressionRuleParserRuleCall());
@@ -1470,7 +1147,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "entryRuleOrExpressionRule"
-    // InternalInstanceLanguage.g:540:1: entryRuleOrExpressionRule returns [EObject current=null] : iv_ruleOrExpressionRule= ruleOrExpressionRule EOF ;
+    // InternalInstanceLanguage.g:433:1: entryRuleOrExpressionRule returns [EObject current=null] : iv_ruleOrExpressionRule= ruleOrExpressionRule EOF ;
     public final EObject entryRuleOrExpressionRule() throws RecognitionException {
         EObject current = null;
 
@@ -1478,8 +1155,8 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
         try {
-            // InternalInstanceLanguage.g:540:57: (iv_ruleOrExpressionRule= ruleOrExpressionRule EOF )
-            // InternalInstanceLanguage.g:541:2: iv_ruleOrExpressionRule= ruleOrExpressionRule EOF
+            // InternalInstanceLanguage.g:433:57: (iv_ruleOrExpressionRule= ruleOrExpressionRule EOF )
+            // InternalInstanceLanguage.g:434:2: iv_ruleOrExpressionRule= ruleOrExpressionRule EOF
             {
              newCompositeNode(grammarAccess.getOrExpressionRuleRule()); 
             pushFollow(FOLLOW_1);
@@ -1506,7 +1183,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "ruleOrExpressionRule"
-    // InternalInstanceLanguage.g:547:1: ruleOrExpressionRule returns [EObject current=null] : ( ( (lv_subExpressions_0_0= ruleXorExpressionRule ) ) (otherlv_1= 'OR' ( (lv_subExpressions_2_0= ruleXorExpressionRule ) ) )* ) ;
+    // InternalInstanceLanguage.g:440:1: ruleOrExpressionRule returns [EObject current=null] : ( ( (lv_subExpressions_0_0= ruleXorExpressionRule ) ) (otherlv_1= 'OR' ( (lv_subExpressions_2_0= ruleXorExpressionRule ) ) )* ) ;
     public final EObject ruleOrExpressionRule() throws RecognitionException {
         EObject current = null;
 
@@ -1520,17 +1197,17 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
         	enterRule();
 
         try {
-            // InternalInstanceLanguage.g:553:2: ( ( ( (lv_subExpressions_0_0= ruleXorExpressionRule ) ) (otherlv_1= 'OR' ( (lv_subExpressions_2_0= ruleXorExpressionRule ) ) )* ) )
-            // InternalInstanceLanguage.g:554:2: ( ( (lv_subExpressions_0_0= ruleXorExpressionRule ) ) (otherlv_1= 'OR' ( (lv_subExpressions_2_0= ruleXorExpressionRule ) ) )* )
+            // InternalInstanceLanguage.g:446:2: ( ( ( (lv_subExpressions_0_0= ruleXorExpressionRule ) ) (otherlv_1= 'OR' ( (lv_subExpressions_2_0= ruleXorExpressionRule ) ) )* ) )
+            // InternalInstanceLanguage.g:447:2: ( ( (lv_subExpressions_0_0= ruleXorExpressionRule ) ) (otherlv_1= 'OR' ( (lv_subExpressions_2_0= ruleXorExpressionRule ) ) )* )
             {
-            // InternalInstanceLanguage.g:554:2: ( ( (lv_subExpressions_0_0= ruleXorExpressionRule ) ) (otherlv_1= 'OR' ( (lv_subExpressions_2_0= ruleXorExpressionRule ) ) )* )
-            // InternalInstanceLanguage.g:555:3: ( (lv_subExpressions_0_0= ruleXorExpressionRule ) ) (otherlv_1= 'OR' ( (lv_subExpressions_2_0= ruleXorExpressionRule ) ) )*
+            // InternalInstanceLanguage.g:447:2: ( ( (lv_subExpressions_0_0= ruleXorExpressionRule ) ) (otherlv_1= 'OR' ( (lv_subExpressions_2_0= ruleXorExpressionRule ) ) )* )
+            // InternalInstanceLanguage.g:448:3: ( (lv_subExpressions_0_0= ruleXorExpressionRule ) ) (otherlv_1= 'OR' ( (lv_subExpressions_2_0= ruleXorExpressionRule ) ) )*
             {
-            // InternalInstanceLanguage.g:555:3: ( (lv_subExpressions_0_0= ruleXorExpressionRule ) )
-            // InternalInstanceLanguage.g:556:4: (lv_subExpressions_0_0= ruleXorExpressionRule )
+            // InternalInstanceLanguage.g:448:3: ( (lv_subExpressions_0_0= ruleXorExpressionRule ) )
+            // InternalInstanceLanguage.g:449:4: (lv_subExpressions_0_0= ruleXorExpressionRule )
             {
-            // InternalInstanceLanguage.g:556:4: (lv_subExpressions_0_0= ruleXorExpressionRule )
-            // InternalInstanceLanguage.g:557:5: lv_subExpressions_0_0= ruleXorExpressionRule
+            // InternalInstanceLanguage.g:449:4: (lv_subExpressions_0_0= ruleXorExpressionRule )
+            // InternalInstanceLanguage.g:450:5: lv_subExpressions_0_0= ruleXorExpressionRule
             {
 
             					newCompositeNode(grammarAccess.getOrExpressionRuleAccess().getSubExpressionsXorExpressionRuleParserRuleCall_0_0());
@@ -1557,30 +1234,30 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
             }
 
-            // InternalInstanceLanguage.g:574:3: (otherlv_1= 'OR' ( (lv_subExpressions_2_0= ruleXorExpressionRule ) ) )*
-            loop7:
+            // InternalInstanceLanguage.g:467:3: (otherlv_1= 'OR' ( (lv_subExpressions_2_0= ruleXorExpressionRule ) ) )*
+            loop6:
             do {
-                int alt7=2;
-                int LA7_0 = input.LA(1);
+                int alt6=2;
+                int LA6_0 = input.LA(1);
 
-                if ( (LA7_0==23) ) {
-                    alt7=1;
+                if ( (LA6_0==23) ) {
+                    alt6=1;
                 }
 
 
-                switch (alt7) {
+                switch (alt6) {
             	case 1 :
-            	    // InternalInstanceLanguage.g:575:4: otherlv_1= 'OR' ( (lv_subExpressions_2_0= ruleXorExpressionRule ) )
+            	    // InternalInstanceLanguage.g:468:4: otherlv_1= 'OR' ( (lv_subExpressions_2_0= ruleXorExpressionRule ) )
             	    {
             	    otherlv_1=(Token)match(input,23,FOLLOW_12); 
 
             	    				newLeafNode(otherlv_1, grammarAccess.getOrExpressionRuleAccess().getORKeyword_1_0());
             	    			
-            	    // InternalInstanceLanguage.g:579:4: ( (lv_subExpressions_2_0= ruleXorExpressionRule ) )
-            	    // InternalInstanceLanguage.g:580:5: (lv_subExpressions_2_0= ruleXorExpressionRule )
+            	    // InternalInstanceLanguage.g:472:4: ( (lv_subExpressions_2_0= ruleXorExpressionRule ) )
+            	    // InternalInstanceLanguage.g:473:5: (lv_subExpressions_2_0= ruleXorExpressionRule )
             	    {
-            	    // InternalInstanceLanguage.g:580:5: (lv_subExpressions_2_0= ruleXorExpressionRule )
-            	    // InternalInstanceLanguage.g:581:6: lv_subExpressions_2_0= ruleXorExpressionRule
+            	    // InternalInstanceLanguage.g:473:5: (lv_subExpressions_2_0= ruleXorExpressionRule )
+            	    // InternalInstanceLanguage.g:474:6: lv_subExpressions_2_0= ruleXorExpressionRule
             	    {
 
             	    						newCompositeNode(grammarAccess.getOrExpressionRuleAccess().getSubExpressionsXorExpressionRuleParserRuleCall_1_1_0());
@@ -1599,6 +1276,175 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
             	    							"subExpressions",
             	    							lv_subExpressions_2_0,
             	    							"de.evoal.languages.model.el.dsl.ExpressionLanguage.XorExpressionRule");
+            	    						afterParserOrEnumRuleCall();
+            	    					
+
+            	    }
+
+
+            	    }
+
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop6;
+                }
+            } while (true);
+
+
+            }
+
+
+            }
+
+
+            	leaveRule();
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleOrExpressionRule"
+
+
+    // $ANTLR start "entryRuleXorExpressionRule"
+    // InternalInstanceLanguage.g:496:1: entryRuleXorExpressionRule returns [EObject current=null] : iv_ruleXorExpressionRule= ruleXorExpressionRule EOF ;
+    public final EObject entryRuleXorExpressionRule() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleXorExpressionRule = null;
+
+
+        try {
+            // InternalInstanceLanguage.g:496:58: (iv_ruleXorExpressionRule= ruleXorExpressionRule EOF )
+            // InternalInstanceLanguage.g:497:2: iv_ruleXorExpressionRule= ruleXorExpressionRule EOF
+            {
+             newCompositeNode(grammarAccess.getXorExpressionRuleRule()); 
+            pushFollow(FOLLOW_1);
+            iv_ruleXorExpressionRule=ruleXorExpressionRule();
+
+            state._fsp--;
+
+             current =iv_ruleXorExpressionRule; 
+            match(input,EOF,FOLLOW_2); 
+
+            }
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleXorExpressionRule"
+
+
+    // $ANTLR start "ruleXorExpressionRule"
+    // InternalInstanceLanguage.g:503:1: ruleXorExpressionRule returns [EObject current=null] : ( ( (lv_subExpressions_0_0= ruleAndExpressionRule ) ) (otherlv_1= 'XOR' ( (lv_subExpressions_2_0= ruleAndExpressionRule ) ) )* ) ;
+    public final EObject ruleXorExpressionRule() throws RecognitionException {
+        EObject current = null;
+
+        Token otherlv_1=null;
+        EObject lv_subExpressions_0_0 = null;
+
+        EObject lv_subExpressions_2_0 = null;
+
+
+
+        	enterRule();
+
+        try {
+            // InternalInstanceLanguage.g:509:2: ( ( ( (lv_subExpressions_0_0= ruleAndExpressionRule ) ) (otherlv_1= 'XOR' ( (lv_subExpressions_2_0= ruleAndExpressionRule ) ) )* ) )
+            // InternalInstanceLanguage.g:510:2: ( ( (lv_subExpressions_0_0= ruleAndExpressionRule ) ) (otherlv_1= 'XOR' ( (lv_subExpressions_2_0= ruleAndExpressionRule ) ) )* )
+            {
+            // InternalInstanceLanguage.g:510:2: ( ( (lv_subExpressions_0_0= ruleAndExpressionRule ) ) (otherlv_1= 'XOR' ( (lv_subExpressions_2_0= ruleAndExpressionRule ) ) )* )
+            // InternalInstanceLanguage.g:511:3: ( (lv_subExpressions_0_0= ruleAndExpressionRule ) ) (otherlv_1= 'XOR' ( (lv_subExpressions_2_0= ruleAndExpressionRule ) ) )*
+            {
+            // InternalInstanceLanguage.g:511:3: ( (lv_subExpressions_0_0= ruleAndExpressionRule ) )
+            // InternalInstanceLanguage.g:512:4: (lv_subExpressions_0_0= ruleAndExpressionRule )
+            {
+            // InternalInstanceLanguage.g:512:4: (lv_subExpressions_0_0= ruleAndExpressionRule )
+            // InternalInstanceLanguage.g:513:5: lv_subExpressions_0_0= ruleAndExpressionRule
+            {
+
+            					newCompositeNode(grammarAccess.getXorExpressionRuleAccess().getSubExpressionsAndExpressionRuleParserRuleCall_0_0());
+            				
+            pushFollow(FOLLOW_13);
+            lv_subExpressions_0_0=ruleAndExpressionRule();
+
+            state._fsp--;
+
+
+            					if (current==null) {
+            						current = createModelElementForParent(grammarAccess.getXorExpressionRuleRule());
+            					}
+            					add(
+            						current,
+            						"subExpressions",
+            						lv_subExpressions_0_0,
+            						"de.evoal.languages.model.el.dsl.ExpressionLanguage.AndExpressionRule");
+            					afterParserOrEnumRuleCall();
+            				
+
+            }
+
+
+            }
+
+            // InternalInstanceLanguage.g:530:3: (otherlv_1= 'XOR' ( (lv_subExpressions_2_0= ruleAndExpressionRule ) ) )*
+            loop7:
+            do {
+                int alt7=2;
+                int LA7_0 = input.LA(1);
+
+                if ( (LA7_0==24) ) {
+                    alt7=1;
+                }
+
+
+                switch (alt7) {
+            	case 1 :
+            	    // InternalInstanceLanguage.g:531:4: otherlv_1= 'XOR' ( (lv_subExpressions_2_0= ruleAndExpressionRule ) )
+            	    {
+            	    otherlv_1=(Token)match(input,24,FOLLOW_12); 
+
+            	    				newLeafNode(otherlv_1, grammarAccess.getXorExpressionRuleAccess().getXORKeyword_1_0());
+            	    			
+            	    // InternalInstanceLanguage.g:535:4: ( (lv_subExpressions_2_0= ruleAndExpressionRule ) )
+            	    // InternalInstanceLanguage.g:536:5: (lv_subExpressions_2_0= ruleAndExpressionRule )
+            	    {
+            	    // InternalInstanceLanguage.g:536:5: (lv_subExpressions_2_0= ruleAndExpressionRule )
+            	    // InternalInstanceLanguage.g:537:6: lv_subExpressions_2_0= ruleAndExpressionRule
+            	    {
+
+            	    						newCompositeNode(grammarAccess.getXorExpressionRuleAccess().getSubExpressionsAndExpressionRuleParserRuleCall_1_1_0());
+            	    					
+            	    pushFollow(FOLLOW_13);
+            	    lv_subExpressions_2_0=ruleAndExpressionRule();
+
+            	    state._fsp--;
+
+
+            	    						if (current==null) {
+            	    							current = createModelElementForParent(grammarAccess.getXorExpressionRuleRule());
+            	    						}
+            	    						add(
+            	    							current,
+            	    							"subExpressions",
+            	    							lv_subExpressions_2_0,
+            	    							"de.evoal.languages.model.el.dsl.ExpressionLanguage.AndExpressionRule");
             	    						afterParserOrEnumRuleCall();
             	    					
 
@@ -1635,28 +1481,28 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
         }
         return current;
     }
-    // $ANTLR end "ruleOrExpressionRule"
+    // $ANTLR end "ruleXorExpressionRule"
 
 
-    // $ANTLR start "entryRuleXorExpressionRule"
-    // InternalInstanceLanguage.g:603:1: entryRuleXorExpressionRule returns [EObject current=null] : iv_ruleXorExpressionRule= ruleXorExpressionRule EOF ;
-    public final EObject entryRuleXorExpressionRule() throws RecognitionException {
+    // $ANTLR start "entryRuleAndExpressionRule"
+    // InternalInstanceLanguage.g:559:1: entryRuleAndExpressionRule returns [EObject current=null] : iv_ruleAndExpressionRule= ruleAndExpressionRule EOF ;
+    public final EObject entryRuleAndExpressionRule() throws RecognitionException {
         EObject current = null;
 
-        EObject iv_ruleXorExpressionRule = null;
+        EObject iv_ruleAndExpressionRule = null;
 
 
         try {
-            // InternalInstanceLanguage.g:603:58: (iv_ruleXorExpressionRule= ruleXorExpressionRule EOF )
-            // InternalInstanceLanguage.g:604:2: iv_ruleXorExpressionRule= ruleXorExpressionRule EOF
+            // InternalInstanceLanguage.g:559:58: (iv_ruleAndExpressionRule= ruleAndExpressionRule EOF )
+            // InternalInstanceLanguage.g:560:2: iv_ruleAndExpressionRule= ruleAndExpressionRule EOF
             {
-             newCompositeNode(grammarAccess.getXorExpressionRuleRule()); 
+             newCompositeNode(grammarAccess.getAndExpressionRuleRule()); 
             pushFollow(FOLLOW_1);
-            iv_ruleXorExpressionRule=ruleXorExpressionRule();
+            iv_ruleAndExpressionRule=ruleAndExpressionRule();
 
             state._fsp--;
 
-             current =iv_ruleXorExpressionRule; 
+             current =iv_ruleAndExpressionRule; 
             match(input,EOF,FOLLOW_2); 
 
             }
@@ -1671,12 +1517,12 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
         }
         return current;
     }
-    // $ANTLR end "entryRuleXorExpressionRule"
+    // $ANTLR end "entryRuleAndExpressionRule"
 
 
-    // $ANTLR start "ruleXorExpressionRule"
-    // InternalInstanceLanguage.g:610:1: ruleXorExpressionRule returns [EObject current=null] : ( ( (lv_subExpressions_0_0= ruleAndExpressionRule ) ) (otherlv_1= 'XOR' ( (lv_subExpressions_2_0= ruleAndExpressionRule ) ) )* ) ;
-    public final EObject ruleXorExpressionRule() throws RecognitionException {
+    // $ANTLR start "ruleAndExpressionRule"
+    // InternalInstanceLanguage.g:566:1: ruleAndExpressionRule returns [EObject current=null] : ( ( (lv_subExpressions_0_0= ruleNotExpressionRule ) ) (otherlv_1= 'AND' ( (lv_subExpressions_2_0= ruleNotExpressionRule ) ) )* ) ;
+    public final EObject ruleAndExpressionRule() throws RecognitionException {
         EObject current = null;
 
         Token otherlv_1=null;
@@ -1689,35 +1535,35 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
         	enterRule();
 
         try {
-            // InternalInstanceLanguage.g:616:2: ( ( ( (lv_subExpressions_0_0= ruleAndExpressionRule ) ) (otherlv_1= 'XOR' ( (lv_subExpressions_2_0= ruleAndExpressionRule ) ) )* ) )
-            // InternalInstanceLanguage.g:617:2: ( ( (lv_subExpressions_0_0= ruleAndExpressionRule ) ) (otherlv_1= 'XOR' ( (lv_subExpressions_2_0= ruleAndExpressionRule ) ) )* )
+            // InternalInstanceLanguage.g:572:2: ( ( ( (lv_subExpressions_0_0= ruleNotExpressionRule ) ) (otherlv_1= 'AND' ( (lv_subExpressions_2_0= ruleNotExpressionRule ) ) )* ) )
+            // InternalInstanceLanguage.g:573:2: ( ( (lv_subExpressions_0_0= ruleNotExpressionRule ) ) (otherlv_1= 'AND' ( (lv_subExpressions_2_0= ruleNotExpressionRule ) ) )* )
             {
-            // InternalInstanceLanguage.g:617:2: ( ( (lv_subExpressions_0_0= ruleAndExpressionRule ) ) (otherlv_1= 'XOR' ( (lv_subExpressions_2_0= ruleAndExpressionRule ) ) )* )
-            // InternalInstanceLanguage.g:618:3: ( (lv_subExpressions_0_0= ruleAndExpressionRule ) ) (otherlv_1= 'XOR' ( (lv_subExpressions_2_0= ruleAndExpressionRule ) ) )*
+            // InternalInstanceLanguage.g:573:2: ( ( (lv_subExpressions_0_0= ruleNotExpressionRule ) ) (otherlv_1= 'AND' ( (lv_subExpressions_2_0= ruleNotExpressionRule ) ) )* )
+            // InternalInstanceLanguage.g:574:3: ( (lv_subExpressions_0_0= ruleNotExpressionRule ) ) (otherlv_1= 'AND' ( (lv_subExpressions_2_0= ruleNotExpressionRule ) ) )*
             {
-            // InternalInstanceLanguage.g:618:3: ( (lv_subExpressions_0_0= ruleAndExpressionRule ) )
-            // InternalInstanceLanguage.g:619:4: (lv_subExpressions_0_0= ruleAndExpressionRule )
+            // InternalInstanceLanguage.g:574:3: ( (lv_subExpressions_0_0= ruleNotExpressionRule ) )
+            // InternalInstanceLanguage.g:575:4: (lv_subExpressions_0_0= ruleNotExpressionRule )
             {
-            // InternalInstanceLanguage.g:619:4: (lv_subExpressions_0_0= ruleAndExpressionRule )
-            // InternalInstanceLanguage.g:620:5: lv_subExpressions_0_0= ruleAndExpressionRule
+            // InternalInstanceLanguage.g:575:4: (lv_subExpressions_0_0= ruleNotExpressionRule )
+            // InternalInstanceLanguage.g:576:5: lv_subExpressions_0_0= ruleNotExpressionRule
             {
 
-            					newCompositeNode(grammarAccess.getXorExpressionRuleAccess().getSubExpressionsAndExpressionRuleParserRuleCall_0_0());
+            					newCompositeNode(grammarAccess.getAndExpressionRuleAccess().getSubExpressionsNotExpressionRuleParserRuleCall_0_0());
             				
-            pushFollow(FOLLOW_13);
-            lv_subExpressions_0_0=ruleAndExpressionRule();
+            pushFollow(FOLLOW_14);
+            lv_subExpressions_0_0=ruleNotExpressionRule();
 
             state._fsp--;
 
 
             					if (current==null) {
-            						current = createModelElementForParent(grammarAccess.getXorExpressionRuleRule());
+            						current = createModelElementForParent(grammarAccess.getAndExpressionRuleRule());
             					}
             					add(
             						current,
             						"subExpressions",
             						lv_subExpressions_0_0,
-            						"de.evoal.languages.model.el.dsl.ExpressionLanguage.AndExpressionRule");
+            						"de.evoal.languages.model.el.dsl.ExpressionLanguage.NotExpressionRule");
             					afterParserOrEnumRuleCall();
             				
 
@@ -1726,48 +1572,48 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
             }
 
-            // InternalInstanceLanguage.g:637:3: (otherlv_1= 'XOR' ( (lv_subExpressions_2_0= ruleAndExpressionRule ) ) )*
+            // InternalInstanceLanguage.g:593:3: (otherlv_1= 'AND' ( (lv_subExpressions_2_0= ruleNotExpressionRule ) ) )*
             loop8:
             do {
                 int alt8=2;
                 int LA8_0 = input.LA(1);
 
-                if ( (LA8_0==24) ) {
+                if ( (LA8_0==25) ) {
                     alt8=1;
                 }
 
 
                 switch (alt8) {
             	case 1 :
-            	    // InternalInstanceLanguage.g:638:4: otherlv_1= 'XOR' ( (lv_subExpressions_2_0= ruleAndExpressionRule ) )
+            	    // InternalInstanceLanguage.g:594:4: otherlv_1= 'AND' ( (lv_subExpressions_2_0= ruleNotExpressionRule ) )
             	    {
-            	    otherlv_1=(Token)match(input,24,FOLLOW_12); 
+            	    otherlv_1=(Token)match(input,25,FOLLOW_12); 
 
-            	    				newLeafNode(otherlv_1, grammarAccess.getXorExpressionRuleAccess().getXORKeyword_1_0());
+            	    				newLeafNode(otherlv_1, grammarAccess.getAndExpressionRuleAccess().getANDKeyword_1_0());
             	    			
-            	    // InternalInstanceLanguage.g:642:4: ( (lv_subExpressions_2_0= ruleAndExpressionRule ) )
-            	    // InternalInstanceLanguage.g:643:5: (lv_subExpressions_2_0= ruleAndExpressionRule )
+            	    // InternalInstanceLanguage.g:598:4: ( (lv_subExpressions_2_0= ruleNotExpressionRule ) )
+            	    // InternalInstanceLanguage.g:599:5: (lv_subExpressions_2_0= ruleNotExpressionRule )
             	    {
-            	    // InternalInstanceLanguage.g:643:5: (lv_subExpressions_2_0= ruleAndExpressionRule )
-            	    // InternalInstanceLanguage.g:644:6: lv_subExpressions_2_0= ruleAndExpressionRule
+            	    // InternalInstanceLanguage.g:599:5: (lv_subExpressions_2_0= ruleNotExpressionRule )
+            	    // InternalInstanceLanguage.g:600:6: lv_subExpressions_2_0= ruleNotExpressionRule
             	    {
 
-            	    						newCompositeNode(grammarAccess.getXorExpressionRuleAccess().getSubExpressionsAndExpressionRuleParserRuleCall_1_1_0());
+            	    						newCompositeNode(grammarAccess.getAndExpressionRuleAccess().getSubExpressionsNotExpressionRuleParserRuleCall_1_1_0());
             	    					
-            	    pushFollow(FOLLOW_13);
-            	    lv_subExpressions_2_0=ruleAndExpressionRule();
+            	    pushFollow(FOLLOW_14);
+            	    lv_subExpressions_2_0=ruleNotExpressionRule();
 
             	    state._fsp--;
 
 
             	    						if (current==null) {
-            	    							current = createModelElementForParent(grammarAccess.getXorExpressionRuleRule());
+            	    							current = createModelElementForParent(grammarAccess.getAndExpressionRuleRule());
             	    						}
             	    						add(
             	    							current,
             	    							"subExpressions",
             	    							lv_subExpressions_2_0,
-            	    							"de.evoal.languages.model.el.dsl.ExpressionLanguage.AndExpressionRule");
+            	    							"de.evoal.languages.model.el.dsl.ExpressionLanguage.NotExpressionRule");
             	    						afterParserOrEnumRuleCall();
             	    					
 
@@ -1804,180 +1650,11 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
         }
         return current;
     }
-    // $ANTLR end "ruleXorExpressionRule"
-
-
-    // $ANTLR start "entryRuleAndExpressionRule"
-    // InternalInstanceLanguage.g:666:1: entryRuleAndExpressionRule returns [EObject current=null] : iv_ruleAndExpressionRule= ruleAndExpressionRule EOF ;
-    public final EObject entryRuleAndExpressionRule() throws RecognitionException {
-        EObject current = null;
-
-        EObject iv_ruleAndExpressionRule = null;
-
-
-        try {
-            // InternalInstanceLanguage.g:666:58: (iv_ruleAndExpressionRule= ruleAndExpressionRule EOF )
-            // InternalInstanceLanguage.g:667:2: iv_ruleAndExpressionRule= ruleAndExpressionRule EOF
-            {
-             newCompositeNode(grammarAccess.getAndExpressionRuleRule()); 
-            pushFollow(FOLLOW_1);
-            iv_ruleAndExpressionRule=ruleAndExpressionRule();
-
-            state._fsp--;
-
-             current =iv_ruleAndExpressionRule; 
-            match(input,EOF,FOLLOW_2); 
-
-            }
-
-        }
-
-            catch (RecognitionException re) {
-                recover(input,re);
-                appendSkippedTokens();
-            }
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "entryRuleAndExpressionRule"
-
-
-    // $ANTLR start "ruleAndExpressionRule"
-    // InternalInstanceLanguage.g:673:1: ruleAndExpressionRule returns [EObject current=null] : ( ( (lv_subExpressions_0_0= ruleNotExpressionRule ) ) (otherlv_1= 'AND' ( (lv_subExpressions_2_0= ruleNotExpressionRule ) ) )* ) ;
-    public final EObject ruleAndExpressionRule() throws RecognitionException {
-        EObject current = null;
-
-        Token otherlv_1=null;
-        EObject lv_subExpressions_0_0 = null;
-
-        EObject lv_subExpressions_2_0 = null;
-
-
-
-        	enterRule();
-
-        try {
-            // InternalInstanceLanguage.g:679:2: ( ( ( (lv_subExpressions_0_0= ruleNotExpressionRule ) ) (otherlv_1= 'AND' ( (lv_subExpressions_2_0= ruleNotExpressionRule ) ) )* ) )
-            // InternalInstanceLanguage.g:680:2: ( ( (lv_subExpressions_0_0= ruleNotExpressionRule ) ) (otherlv_1= 'AND' ( (lv_subExpressions_2_0= ruleNotExpressionRule ) ) )* )
-            {
-            // InternalInstanceLanguage.g:680:2: ( ( (lv_subExpressions_0_0= ruleNotExpressionRule ) ) (otherlv_1= 'AND' ( (lv_subExpressions_2_0= ruleNotExpressionRule ) ) )* )
-            // InternalInstanceLanguage.g:681:3: ( (lv_subExpressions_0_0= ruleNotExpressionRule ) ) (otherlv_1= 'AND' ( (lv_subExpressions_2_0= ruleNotExpressionRule ) ) )*
-            {
-            // InternalInstanceLanguage.g:681:3: ( (lv_subExpressions_0_0= ruleNotExpressionRule ) )
-            // InternalInstanceLanguage.g:682:4: (lv_subExpressions_0_0= ruleNotExpressionRule )
-            {
-            // InternalInstanceLanguage.g:682:4: (lv_subExpressions_0_0= ruleNotExpressionRule )
-            // InternalInstanceLanguage.g:683:5: lv_subExpressions_0_0= ruleNotExpressionRule
-            {
-
-            					newCompositeNode(grammarAccess.getAndExpressionRuleAccess().getSubExpressionsNotExpressionRuleParserRuleCall_0_0());
-            				
-            pushFollow(FOLLOW_14);
-            lv_subExpressions_0_0=ruleNotExpressionRule();
-
-            state._fsp--;
-
-
-            					if (current==null) {
-            						current = createModelElementForParent(grammarAccess.getAndExpressionRuleRule());
-            					}
-            					add(
-            						current,
-            						"subExpressions",
-            						lv_subExpressions_0_0,
-            						"de.evoal.languages.model.el.dsl.ExpressionLanguage.NotExpressionRule");
-            					afterParserOrEnumRuleCall();
-            				
-
-            }
-
-
-            }
-
-            // InternalInstanceLanguage.g:700:3: (otherlv_1= 'AND' ( (lv_subExpressions_2_0= ruleNotExpressionRule ) ) )*
-            loop9:
-            do {
-                int alt9=2;
-                int LA9_0 = input.LA(1);
-
-                if ( (LA9_0==25) ) {
-                    alt9=1;
-                }
-
-
-                switch (alt9) {
-            	case 1 :
-            	    // InternalInstanceLanguage.g:701:4: otherlv_1= 'AND' ( (lv_subExpressions_2_0= ruleNotExpressionRule ) )
-            	    {
-            	    otherlv_1=(Token)match(input,25,FOLLOW_12); 
-
-            	    				newLeafNode(otherlv_1, grammarAccess.getAndExpressionRuleAccess().getANDKeyword_1_0());
-            	    			
-            	    // InternalInstanceLanguage.g:705:4: ( (lv_subExpressions_2_0= ruleNotExpressionRule ) )
-            	    // InternalInstanceLanguage.g:706:5: (lv_subExpressions_2_0= ruleNotExpressionRule )
-            	    {
-            	    // InternalInstanceLanguage.g:706:5: (lv_subExpressions_2_0= ruleNotExpressionRule )
-            	    // InternalInstanceLanguage.g:707:6: lv_subExpressions_2_0= ruleNotExpressionRule
-            	    {
-
-            	    						newCompositeNode(grammarAccess.getAndExpressionRuleAccess().getSubExpressionsNotExpressionRuleParserRuleCall_1_1_0());
-            	    					
-            	    pushFollow(FOLLOW_14);
-            	    lv_subExpressions_2_0=ruleNotExpressionRule();
-
-            	    state._fsp--;
-
-
-            	    						if (current==null) {
-            	    							current = createModelElementForParent(grammarAccess.getAndExpressionRuleRule());
-            	    						}
-            	    						add(
-            	    							current,
-            	    							"subExpressions",
-            	    							lv_subExpressions_2_0,
-            	    							"de.evoal.languages.model.el.dsl.ExpressionLanguage.NotExpressionRule");
-            	    						afterParserOrEnumRuleCall();
-            	    					
-
-            	    }
-
-
-            	    }
-
-
-            	    }
-            	    break;
-
-            	default :
-            	    break loop9;
-                }
-            } while (true);
-
-
-            }
-
-
-            }
-
-
-            	leaveRule();
-
-        }
-
-            catch (RecognitionException re) {
-                recover(input,re);
-                appendSkippedTokens();
-            }
-        finally {
-        }
-        return current;
-    }
     // $ANTLR end "ruleAndExpressionRule"
 
 
     // $ANTLR start "entryRuleNotExpressionRule"
-    // InternalInstanceLanguage.g:729:1: entryRuleNotExpressionRule returns [EObject current=null] : iv_ruleNotExpressionRule= ruleNotExpressionRule EOF ;
+    // InternalInstanceLanguage.g:622:1: entryRuleNotExpressionRule returns [EObject current=null] : iv_ruleNotExpressionRule= ruleNotExpressionRule EOF ;
     public final EObject entryRuleNotExpressionRule() throws RecognitionException {
         EObject current = null;
 
@@ -1985,8 +1662,8 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
         try {
-            // InternalInstanceLanguage.g:729:58: (iv_ruleNotExpressionRule= ruleNotExpressionRule EOF )
-            // InternalInstanceLanguage.g:730:2: iv_ruleNotExpressionRule= ruleNotExpressionRule EOF
+            // InternalInstanceLanguage.g:622:58: (iv_ruleNotExpressionRule= ruleNotExpressionRule EOF )
+            // InternalInstanceLanguage.g:623:2: iv_ruleNotExpressionRule= ruleNotExpressionRule EOF
             {
              newCompositeNode(grammarAccess.getNotExpressionRuleRule()); 
             pushFollow(FOLLOW_1);
@@ -2013,7 +1690,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "ruleNotExpressionRule"
-    // InternalInstanceLanguage.g:736:1: ruleNotExpressionRule returns [EObject current=null] : ( ( (lv_negated_0_0= '!' ) )? ( (lv_operand_1_0= ruleComparisonExpressionRule ) ) ) ;
+    // InternalInstanceLanguage.g:629:1: ruleNotExpressionRule returns [EObject current=null] : ( ( (lv_negated_0_0= '!' ) )? ( (lv_operand_1_0= ruleComparisonExpressionRule ) ) ) ;
     public final EObject ruleNotExpressionRule() throws RecognitionException {
         EObject current = null;
 
@@ -2025,25 +1702,25 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
         	enterRule();
 
         try {
-            // InternalInstanceLanguage.g:742:2: ( ( ( (lv_negated_0_0= '!' ) )? ( (lv_operand_1_0= ruleComparisonExpressionRule ) ) ) )
-            // InternalInstanceLanguage.g:743:2: ( ( (lv_negated_0_0= '!' ) )? ( (lv_operand_1_0= ruleComparisonExpressionRule ) ) )
+            // InternalInstanceLanguage.g:635:2: ( ( ( (lv_negated_0_0= '!' ) )? ( (lv_operand_1_0= ruleComparisonExpressionRule ) ) ) )
+            // InternalInstanceLanguage.g:636:2: ( ( (lv_negated_0_0= '!' ) )? ( (lv_operand_1_0= ruleComparisonExpressionRule ) ) )
             {
-            // InternalInstanceLanguage.g:743:2: ( ( (lv_negated_0_0= '!' ) )? ( (lv_operand_1_0= ruleComparisonExpressionRule ) ) )
-            // InternalInstanceLanguage.g:744:3: ( (lv_negated_0_0= '!' ) )? ( (lv_operand_1_0= ruleComparisonExpressionRule ) )
+            // InternalInstanceLanguage.g:636:2: ( ( (lv_negated_0_0= '!' ) )? ( (lv_operand_1_0= ruleComparisonExpressionRule ) ) )
+            // InternalInstanceLanguage.g:637:3: ( (lv_negated_0_0= '!' ) )? ( (lv_operand_1_0= ruleComparisonExpressionRule ) )
             {
-            // InternalInstanceLanguage.g:744:3: ( (lv_negated_0_0= '!' ) )?
-            int alt10=2;
-            int LA10_0 = input.LA(1);
+            // InternalInstanceLanguage.g:637:3: ( (lv_negated_0_0= '!' ) )?
+            int alt9=2;
+            int LA9_0 = input.LA(1);
 
-            if ( (LA10_0==26) ) {
-                alt10=1;
+            if ( (LA9_0==26) ) {
+                alt9=1;
             }
-            switch (alt10) {
+            switch (alt9) {
                 case 1 :
-                    // InternalInstanceLanguage.g:745:4: (lv_negated_0_0= '!' )
+                    // InternalInstanceLanguage.g:638:4: (lv_negated_0_0= '!' )
                     {
-                    // InternalInstanceLanguage.g:745:4: (lv_negated_0_0= '!' )
-                    // InternalInstanceLanguage.g:746:5: lv_negated_0_0= '!'
+                    // InternalInstanceLanguage.g:638:4: (lv_negated_0_0= '!' )
+                    // InternalInstanceLanguage.g:639:5: lv_negated_0_0= '!'
                     {
                     lv_negated_0_0=(Token)match(input,26,FOLLOW_12); 
 
@@ -2064,11 +1741,11 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
             }
 
-            // InternalInstanceLanguage.g:758:3: ( (lv_operand_1_0= ruleComparisonExpressionRule ) )
-            // InternalInstanceLanguage.g:759:4: (lv_operand_1_0= ruleComparisonExpressionRule )
+            // InternalInstanceLanguage.g:651:3: ( (lv_operand_1_0= ruleComparisonExpressionRule ) )
+            // InternalInstanceLanguage.g:652:4: (lv_operand_1_0= ruleComparisonExpressionRule )
             {
-            // InternalInstanceLanguage.g:759:4: (lv_operand_1_0= ruleComparisonExpressionRule )
-            // InternalInstanceLanguage.g:760:5: lv_operand_1_0= ruleComparisonExpressionRule
+            // InternalInstanceLanguage.g:652:4: (lv_operand_1_0= ruleComparisonExpressionRule )
+            // InternalInstanceLanguage.g:653:5: lv_operand_1_0= ruleComparisonExpressionRule
             {
 
             					newCompositeNode(grammarAccess.getNotExpressionRuleAccess().getOperandComparisonExpressionRuleParserRuleCall_1_0());
@@ -2118,7 +1795,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "entryRuleComparisonExpressionRule"
-    // InternalInstanceLanguage.g:781:1: entryRuleComparisonExpressionRule returns [EObject current=null] : iv_ruleComparisonExpressionRule= ruleComparisonExpressionRule EOF ;
+    // InternalInstanceLanguage.g:674:1: entryRuleComparisonExpressionRule returns [EObject current=null] : iv_ruleComparisonExpressionRule= ruleComparisonExpressionRule EOF ;
     public final EObject entryRuleComparisonExpressionRule() throws RecognitionException {
         EObject current = null;
 
@@ -2126,8 +1803,8 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
         try {
-            // InternalInstanceLanguage.g:781:65: (iv_ruleComparisonExpressionRule= ruleComparisonExpressionRule EOF )
-            // InternalInstanceLanguage.g:782:2: iv_ruleComparisonExpressionRule= ruleComparisonExpressionRule EOF
+            // InternalInstanceLanguage.g:674:65: (iv_ruleComparisonExpressionRule= ruleComparisonExpressionRule EOF )
+            // InternalInstanceLanguage.g:675:2: iv_ruleComparisonExpressionRule= ruleComparisonExpressionRule EOF
             {
              newCompositeNode(grammarAccess.getComparisonExpressionRuleRule()); 
             pushFollow(FOLLOW_1);
@@ -2154,7 +1831,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "ruleComparisonExpressionRule"
-    // InternalInstanceLanguage.g:788:1: ruleComparisonExpressionRule returns [EObject current=null] : ( ( (lv_leftOperand_0_0= ruleAddOrSubtractExpressionRule ) ) ( (lv_comparison_1_0= rulePartialComparisonExpressionRule ) )* ) ;
+    // InternalInstanceLanguage.g:681:1: ruleComparisonExpressionRule returns [EObject current=null] : ( ( (lv_leftOperand_0_0= ruleAddOrSubtractExpressionRule ) ) ( (lv_comparison_1_0= rulePartialComparisonExpressionRule ) )* ) ;
     public final EObject ruleComparisonExpressionRule() throws RecognitionException {
         EObject current = null;
 
@@ -2167,17 +1844,17 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
         	enterRule();
 
         try {
-            // InternalInstanceLanguage.g:794:2: ( ( ( (lv_leftOperand_0_0= ruleAddOrSubtractExpressionRule ) ) ( (lv_comparison_1_0= rulePartialComparisonExpressionRule ) )* ) )
-            // InternalInstanceLanguage.g:795:2: ( ( (lv_leftOperand_0_0= ruleAddOrSubtractExpressionRule ) ) ( (lv_comparison_1_0= rulePartialComparisonExpressionRule ) )* )
+            // InternalInstanceLanguage.g:687:2: ( ( ( (lv_leftOperand_0_0= ruleAddOrSubtractExpressionRule ) ) ( (lv_comparison_1_0= rulePartialComparisonExpressionRule ) )* ) )
+            // InternalInstanceLanguage.g:688:2: ( ( (lv_leftOperand_0_0= ruleAddOrSubtractExpressionRule ) ) ( (lv_comparison_1_0= rulePartialComparisonExpressionRule ) )* )
             {
-            // InternalInstanceLanguage.g:795:2: ( ( (lv_leftOperand_0_0= ruleAddOrSubtractExpressionRule ) ) ( (lv_comparison_1_0= rulePartialComparisonExpressionRule ) )* )
-            // InternalInstanceLanguage.g:796:3: ( (lv_leftOperand_0_0= ruleAddOrSubtractExpressionRule ) ) ( (lv_comparison_1_0= rulePartialComparisonExpressionRule ) )*
+            // InternalInstanceLanguage.g:688:2: ( ( (lv_leftOperand_0_0= ruleAddOrSubtractExpressionRule ) ) ( (lv_comparison_1_0= rulePartialComparisonExpressionRule ) )* )
+            // InternalInstanceLanguage.g:689:3: ( (lv_leftOperand_0_0= ruleAddOrSubtractExpressionRule ) ) ( (lv_comparison_1_0= rulePartialComparisonExpressionRule ) )*
             {
-            // InternalInstanceLanguage.g:796:3: ( (lv_leftOperand_0_0= ruleAddOrSubtractExpressionRule ) )
-            // InternalInstanceLanguage.g:797:4: (lv_leftOperand_0_0= ruleAddOrSubtractExpressionRule )
+            // InternalInstanceLanguage.g:689:3: ( (lv_leftOperand_0_0= ruleAddOrSubtractExpressionRule ) )
+            // InternalInstanceLanguage.g:690:4: (lv_leftOperand_0_0= ruleAddOrSubtractExpressionRule )
             {
-            // InternalInstanceLanguage.g:797:4: (lv_leftOperand_0_0= ruleAddOrSubtractExpressionRule )
-            // InternalInstanceLanguage.g:798:5: lv_leftOperand_0_0= ruleAddOrSubtractExpressionRule
+            // InternalInstanceLanguage.g:690:4: (lv_leftOperand_0_0= ruleAddOrSubtractExpressionRule )
+            // InternalInstanceLanguage.g:691:5: lv_leftOperand_0_0= ruleAddOrSubtractExpressionRule
             {
 
             					newCompositeNode(grammarAccess.getComparisonExpressionRuleAccess().getLeftOperandAddOrSubtractExpressionRuleParserRuleCall_0_0());
@@ -2204,23 +1881,23 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
             }
 
-            // InternalInstanceLanguage.g:815:3: ( (lv_comparison_1_0= rulePartialComparisonExpressionRule ) )*
-            loop11:
+            // InternalInstanceLanguage.g:708:3: ( (lv_comparison_1_0= rulePartialComparisonExpressionRule ) )*
+            loop10:
             do {
-                int alt11=2;
-                int LA11_0 = input.LA(1);
+                int alt10=2;
+                int LA10_0 = input.LA(1);
 
-                if ( ((LA11_0>=34 && LA11_0<=39)) ) {
-                    alt11=1;
+                if ( ((LA10_0>=34 && LA10_0<=39)) ) {
+                    alt10=1;
                 }
 
 
-                switch (alt11) {
+                switch (alt10) {
             	case 1 :
-            	    // InternalInstanceLanguage.g:816:4: (lv_comparison_1_0= rulePartialComparisonExpressionRule )
+            	    // InternalInstanceLanguage.g:709:4: (lv_comparison_1_0= rulePartialComparisonExpressionRule )
             	    {
-            	    // InternalInstanceLanguage.g:816:4: (lv_comparison_1_0= rulePartialComparisonExpressionRule )
-            	    // InternalInstanceLanguage.g:817:5: lv_comparison_1_0= rulePartialComparisonExpressionRule
+            	    // InternalInstanceLanguage.g:709:4: (lv_comparison_1_0= rulePartialComparisonExpressionRule )
+            	    // InternalInstanceLanguage.g:710:5: lv_comparison_1_0= rulePartialComparisonExpressionRule
             	    {
 
             	    					newCompositeNode(grammarAccess.getComparisonExpressionRuleAccess().getComparisonPartialComparisonExpressionRuleParserRuleCall_1_0());
@@ -2249,7 +1926,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
             	    break;
 
             	default :
-            	    break loop11;
+            	    break loop10;
                 }
             } while (true);
 
@@ -2276,7 +1953,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "entryRulePartialComparisonExpressionRule"
-    // InternalInstanceLanguage.g:838:1: entryRulePartialComparisonExpressionRule returns [EObject current=null] : iv_rulePartialComparisonExpressionRule= rulePartialComparisonExpressionRule EOF ;
+    // InternalInstanceLanguage.g:731:1: entryRulePartialComparisonExpressionRule returns [EObject current=null] : iv_rulePartialComparisonExpressionRule= rulePartialComparisonExpressionRule EOF ;
     public final EObject entryRulePartialComparisonExpressionRule() throws RecognitionException {
         EObject current = null;
 
@@ -2284,8 +1961,8 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
         try {
-            // InternalInstanceLanguage.g:838:72: (iv_rulePartialComparisonExpressionRule= rulePartialComparisonExpressionRule EOF )
-            // InternalInstanceLanguage.g:839:2: iv_rulePartialComparisonExpressionRule= rulePartialComparisonExpressionRule EOF
+            // InternalInstanceLanguage.g:731:72: (iv_rulePartialComparisonExpressionRule= rulePartialComparisonExpressionRule EOF )
+            // InternalInstanceLanguage.g:732:2: iv_rulePartialComparisonExpressionRule= rulePartialComparisonExpressionRule EOF
             {
              newCompositeNode(grammarAccess.getPartialComparisonExpressionRuleRule()); 
             pushFollow(FOLLOW_1);
@@ -2312,7 +1989,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "rulePartialComparisonExpressionRule"
-    // InternalInstanceLanguage.g:845:1: rulePartialComparisonExpressionRule returns [EObject current=null] : ( ( (lv_operator_0_0= ruleComparisonOperatorRule ) ) ( (lv_subExpression_1_0= ruleAddOrSubtractExpressionRule ) ) ) ;
+    // InternalInstanceLanguage.g:738:1: rulePartialComparisonExpressionRule returns [EObject current=null] : ( ( (lv_operator_0_0= ruleComparisonOperatorRule ) ) ( (lv_subExpression_1_0= ruleAddOrSubtractExpressionRule ) ) ) ;
     public final EObject rulePartialComparisonExpressionRule() throws RecognitionException {
         EObject current = null;
 
@@ -2325,17 +2002,17 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
         	enterRule();
 
         try {
-            // InternalInstanceLanguage.g:851:2: ( ( ( (lv_operator_0_0= ruleComparisonOperatorRule ) ) ( (lv_subExpression_1_0= ruleAddOrSubtractExpressionRule ) ) ) )
-            // InternalInstanceLanguage.g:852:2: ( ( (lv_operator_0_0= ruleComparisonOperatorRule ) ) ( (lv_subExpression_1_0= ruleAddOrSubtractExpressionRule ) ) )
+            // InternalInstanceLanguage.g:744:2: ( ( ( (lv_operator_0_0= ruleComparisonOperatorRule ) ) ( (lv_subExpression_1_0= ruleAddOrSubtractExpressionRule ) ) ) )
+            // InternalInstanceLanguage.g:745:2: ( ( (lv_operator_0_0= ruleComparisonOperatorRule ) ) ( (lv_subExpression_1_0= ruleAddOrSubtractExpressionRule ) ) )
             {
-            // InternalInstanceLanguage.g:852:2: ( ( (lv_operator_0_0= ruleComparisonOperatorRule ) ) ( (lv_subExpression_1_0= ruleAddOrSubtractExpressionRule ) ) )
-            // InternalInstanceLanguage.g:853:3: ( (lv_operator_0_0= ruleComparisonOperatorRule ) ) ( (lv_subExpression_1_0= ruleAddOrSubtractExpressionRule ) )
+            // InternalInstanceLanguage.g:745:2: ( ( (lv_operator_0_0= ruleComparisonOperatorRule ) ) ( (lv_subExpression_1_0= ruleAddOrSubtractExpressionRule ) ) )
+            // InternalInstanceLanguage.g:746:3: ( (lv_operator_0_0= ruleComparisonOperatorRule ) ) ( (lv_subExpression_1_0= ruleAddOrSubtractExpressionRule ) )
             {
-            // InternalInstanceLanguage.g:853:3: ( (lv_operator_0_0= ruleComparisonOperatorRule ) )
-            // InternalInstanceLanguage.g:854:4: (lv_operator_0_0= ruleComparisonOperatorRule )
+            // InternalInstanceLanguage.g:746:3: ( (lv_operator_0_0= ruleComparisonOperatorRule ) )
+            // InternalInstanceLanguage.g:747:4: (lv_operator_0_0= ruleComparisonOperatorRule )
             {
-            // InternalInstanceLanguage.g:854:4: (lv_operator_0_0= ruleComparisonOperatorRule )
-            // InternalInstanceLanguage.g:855:5: lv_operator_0_0= ruleComparisonOperatorRule
+            // InternalInstanceLanguage.g:747:4: (lv_operator_0_0= ruleComparisonOperatorRule )
+            // InternalInstanceLanguage.g:748:5: lv_operator_0_0= ruleComparisonOperatorRule
             {
 
             					newCompositeNode(grammarAccess.getPartialComparisonExpressionRuleAccess().getOperatorComparisonOperatorRuleEnumRuleCall_0_0());
@@ -2362,11 +2039,11 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
             }
 
-            // InternalInstanceLanguage.g:872:3: ( (lv_subExpression_1_0= ruleAddOrSubtractExpressionRule ) )
-            // InternalInstanceLanguage.g:873:4: (lv_subExpression_1_0= ruleAddOrSubtractExpressionRule )
+            // InternalInstanceLanguage.g:765:3: ( (lv_subExpression_1_0= ruleAddOrSubtractExpressionRule ) )
+            // InternalInstanceLanguage.g:766:4: (lv_subExpression_1_0= ruleAddOrSubtractExpressionRule )
             {
-            // InternalInstanceLanguage.g:873:4: (lv_subExpression_1_0= ruleAddOrSubtractExpressionRule )
-            // InternalInstanceLanguage.g:874:5: lv_subExpression_1_0= ruleAddOrSubtractExpressionRule
+            // InternalInstanceLanguage.g:766:4: (lv_subExpression_1_0= ruleAddOrSubtractExpressionRule )
+            // InternalInstanceLanguage.g:767:5: lv_subExpression_1_0= ruleAddOrSubtractExpressionRule
             {
 
             					newCompositeNode(grammarAccess.getPartialComparisonExpressionRuleAccess().getSubExpressionAddOrSubtractExpressionRuleParserRuleCall_1_0());
@@ -2416,7 +2093,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "entryRuleAddOrSubtractExpressionRule"
-    // InternalInstanceLanguage.g:895:1: entryRuleAddOrSubtractExpressionRule returns [EObject current=null] : iv_ruleAddOrSubtractExpressionRule= ruleAddOrSubtractExpressionRule EOF ;
+    // InternalInstanceLanguage.g:788:1: entryRuleAddOrSubtractExpressionRule returns [EObject current=null] : iv_ruleAddOrSubtractExpressionRule= ruleAddOrSubtractExpressionRule EOF ;
     public final EObject entryRuleAddOrSubtractExpressionRule() throws RecognitionException {
         EObject current = null;
 
@@ -2424,8 +2101,8 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
         try {
-            // InternalInstanceLanguage.g:895:68: (iv_ruleAddOrSubtractExpressionRule= ruleAddOrSubtractExpressionRule EOF )
-            // InternalInstanceLanguage.g:896:2: iv_ruleAddOrSubtractExpressionRule= ruleAddOrSubtractExpressionRule EOF
+            // InternalInstanceLanguage.g:788:68: (iv_ruleAddOrSubtractExpressionRule= ruleAddOrSubtractExpressionRule EOF )
+            // InternalInstanceLanguage.g:789:2: iv_ruleAddOrSubtractExpressionRule= ruleAddOrSubtractExpressionRule EOF
             {
              newCompositeNode(grammarAccess.getAddOrSubtractExpressionRuleRule()); 
             pushFollow(FOLLOW_1);
@@ -2452,7 +2129,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "ruleAddOrSubtractExpressionRule"
-    // InternalInstanceLanguage.g:902:1: ruleAddOrSubtractExpressionRule returns [EObject current=null] : ( ( (lv_leftOperand_0_0= ruleMultiplyDivideModuloExpressionRule ) ) ( ( (lv_operators_1_0= ruleAddOrSubtractOperatorRule ) ) ( (lv_operands_2_0= ruleMultiplyDivideModuloExpressionRule ) ) )* ) ;
+    // InternalInstanceLanguage.g:795:1: ruleAddOrSubtractExpressionRule returns [EObject current=null] : ( ( (lv_leftOperand_0_0= ruleMultiplyDivideModuloExpressionRule ) ) ( ( (lv_operators_1_0= ruleAddOrSubtractOperatorRule ) ) ( (lv_operands_2_0= ruleMultiplyDivideModuloExpressionRule ) ) )* ) ;
     public final EObject ruleAddOrSubtractExpressionRule() throws RecognitionException {
         EObject current = null;
 
@@ -2467,17 +2144,17 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
         	enterRule();
 
         try {
-            // InternalInstanceLanguage.g:908:2: ( ( ( (lv_leftOperand_0_0= ruleMultiplyDivideModuloExpressionRule ) ) ( ( (lv_operators_1_0= ruleAddOrSubtractOperatorRule ) ) ( (lv_operands_2_0= ruleMultiplyDivideModuloExpressionRule ) ) )* ) )
-            // InternalInstanceLanguage.g:909:2: ( ( (lv_leftOperand_0_0= ruleMultiplyDivideModuloExpressionRule ) ) ( ( (lv_operators_1_0= ruleAddOrSubtractOperatorRule ) ) ( (lv_operands_2_0= ruleMultiplyDivideModuloExpressionRule ) ) )* )
+            // InternalInstanceLanguage.g:801:2: ( ( ( (lv_leftOperand_0_0= ruleMultiplyDivideModuloExpressionRule ) ) ( ( (lv_operators_1_0= ruleAddOrSubtractOperatorRule ) ) ( (lv_operands_2_0= ruleMultiplyDivideModuloExpressionRule ) ) )* ) )
+            // InternalInstanceLanguage.g:802:2: ( ( (lv_leftOperand_0_0= ruleMultiplyDivideModuloExpressionRule ) ) ( ( (lv_operators_1_0= ruleAddOrSubtractOperatorRule ) ) ( (lv_operands_2_0= ruleMultiplyDivideModuloExpressionRule ) ) )* )
             {
-            // InternalInstanceLanguage.g:909:2: ( ( (lv_leftOperand_0_0= ruleMultiplyDivideModuloExpressionRule ) ) ( ( (lv_operators_1_0= ruleAddOrSubtractOperatorRule ) ) ( (lv_operands_2_0= ruleMultiplyDivideModuloExpressionRule ) ) )* )
-            // InternalInstanceLanguage.g:910:3: ( (lv_leftOperand_0_0= ruleMultiplyDivideModuloExpressionRule ) ) ( ( (lv_operators_1_0= ruleAddOrSubtractOperatorRule ) ) ( (lv_operands_2_0= ruleMultiplyDivideModuloExpressionRule ) ) )*
+            // InternalInstanceLanguage.g:802:2: ( ( (lv_leftOperand_0_0= ruleMultiplyDivideModuloExpressionRule ) ) ( ( (lv_operators_1_0= ruleAddOrSubtractOperatorRule ) ) ( (lv_operands_2_0= ruleMultiplyDivideModuloExpressionRule ) ) )* )
+            // InternalInstanceLanguage.g:803:3: ( (lv_leftOperand_0_0= ruleMultiplyDivideModuloExpressionRule ) ) ( ( (lv_operators_1_0= ruleAddOrSubtractOperatorRule ) ) ( (lv_operands_2_0= ruleMultiplyDivideModuloExpressionRule ) ) )*
             {
-            // InternalInstanceLanguage.g:910:3: ( (lv_leftOperand_0_0= ruleMultiplyDivideModuloExpressionRule ) )
-            // InternalInstanceLanguage.g:911:4: (lv_leftOperand_0_0= ruleMultiplyDivideModuloExpressionRule )
+            // InternalInstanceLanguage.g:803:3: ( (lv_leftOperand_0_0= ruleMultiplyDivideModuloExpressionRule ) )
+            // InternalInstanceLanguage.g:804:4: (lv_leftOperand_0_0= ruleMultiplyDivideModuloExpressionRule )
             {
-            // InternalInstanceLanguage.g:911:4: (lv_leftOperand_0_0= ruleMultiplyDivideModuloExpressionRule )
-            // InternalInstanceLanguage.g:912:5: lv_leftOperand_0_0= ruleMultiplyDivideModuloExpressionRule
+            // InternalInstanceLanguage.g:804:4: (lv_leftOperand_0_0= ruleMultiplyDivideModuloExpressionRule )
+            // InternalInstanceLanguage.g:805:5: lv_leftOperand_0_0= ruleMultiplyDivideModuloExpressionRule
             {
 
             					newCompositeNode(grammarAccess.getAddOrSubtractExpressionRuleAccess().getLeftOperandMultiplyDivideModuloExpressionRuleParserRuleCall_0_0());
@@ -2504,26 +2181,26 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
             }
 
-            // InternalInstanceLanguage.g:929:3: ( ( (lv_operators_1_0= ruleAddOrSubtractOperatorRule ) ) ( (lv_operands_2_0= ruleMultiplyDivideModuloExpressionRule ) ) )*
-            loop12:
+            // InternalInstanceLanguage.g:822:3: ( ( (lv_operators_1_0= ruleAddOrSubtractOperatorRule ) ) ( (lv_operands_2_0= ruleMultiplyDivideModuloExpressionRule ) ) )*
+            loop11:
             do {
-                int alt12=2;
-                int LA12_0 = input.LA(1);
+                int alt11=2;
+                int LA11_0 = input.LA(1);
 
-                if ( ((LA12_0>=40 && LA12_0<=41)) ) {
-                    alt12=1;
+                if ( ((LA11_0>=40 && LA11_0<=41)) ) {
+                    alt11=1;
                 }
 
 
-                switch (alt12) {
+                switch (alt11) {
             	case 1 :
-            	    // InternalInstanceLanguage.g:930:4: ( (lv_operators_1_0= ruleAddOrSubtractOperatorRule ) ) ( (lv_operands_2_0= ruleMultiplyDivideModuloExpressionRule ) )
+            	    // InternalInstanceLanguage.g:823:4: ( (lv_operators_1_0= ruleAddOrSubtractOperatorRule ) ) ( (lv_operands_2_0= ruleMultiplyDivideModuloExpressionRule ) )
             	    {
-            	    // InternalInstanceLanguage.g:930:4: ( (lv_operators_1_0= ruleAddOrSubtractOperatorRule ) )
-            	    // InternalInstanceLanguage.g:931:5: (lv_operators_1_0= ruleAddOrSubtractOperatorRule )
+            	    // InternalInstanceLanguage.g:823:4: ( (lv_operators_1_0= ruleAddOrSubtractOperatorRule ) )
+            	    // InternalInstanceLanguage.g:824:5: (lv_operators_1_0= ruleAddOrSubtractOperatorRule )
             	    {
-            	    // InternalInstanceLanguage.g:931:5: (lv_operators_1_0= ruleAddOrSubtractOperatorRule )
-            	    // InternalInstanceLanguage.g:932:6: lv_operators_1_0= ruleAddOrSubtractOperatorRule
+            	    // InternalInstanceLanguage.g:824:5: (lv_operators_1_0= ruleAddOrSubtractOperatorRule )
+            	    // InternalInstanceLanguage.g:825:6: lv_operators_1_0= ruleAddOrSubtractOperatorRule
             	    {
 
             	    						newCompositeNode(grammarAccess.getAddOrSubtractExpressionRuleAccess().getOperatorsAddOrSubtractOperatorRuleEnumRuleCall_1_0_0());
@@ -2550,11 +2227,11 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
             	    }
 
-            	    // InternalInstanceLanguage.g:949:4: ( (lv_operands_2_0= ruleMultiplyDivideModuloExpressionRule ) )
-            	    // InternalInstanceLanguage.g:950:5: (lv_operands_2_0= ruleMultiplyDivideModuloExpressionRule )
+            	    // InternalInstanceLanguage.g:842:4: ( (lv_operands_2_0= ruleMultiplyDivideModuloExpressionRule ) )
+            	    // InternalInstanceLanguage.g:843:5: (lv_operands_2_0= ruleMultiplyDivideModuloExpressionRule )
             	    {
-            	    // InternalInstanceLanguage.g:950:5: (lv_operands_2_0= ruleMultiplyDivideModuloExpressionRule )
-            	    // InternalInstanceLanguage.g:951:6: lv_operands_2_0= ruleMultiplyDivideModuloExpressionRule
+            	    // InternalInstanceLanguage.g:843:5: (lv_operands_2_0= ruleMultiplyDivideModuloExpressionRule )
+            	    // InternalInstanceLanguage.g:844:6: lv_operands_2_0= ruleMultiplyDivideModuloExpressionRule
             	    {
 
             	    						newCompositeNode(grammarAccess.getAddOrSubtractExpressionRuleAccess().getOperandsMultiplyDivideModuloExpressionRuleParserRuleCall_1_1_0());
@@ -2573,6 +2250,203 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
             	    							"operands",
             	    							lv_operands_2_0,
             	    							"de.evoal.languages.model.el.dsl.ExpressionLanguage.MultiplyDivideModuloExpressionRule");
+            	    						afterParserOrEnumRuleCall();
+            	    					
+
+            	    }
+
+
+            	    }
+
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop11;
+                }
+            } while (true);
+
+
+            }
+
+
+            }
+
+
+            	leaveRule();
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleAddOrSubtractExpressionRule"
+
+
+    // $ANTLR start "entryRuleMultiplyDivideModuloExpressionRule"
+    // InternalInstanceLanguage.g:866:1: entryRuleMultiplyDivideModuloExpressionRule returns [EObject current=null] : iv_ruleMultiplyDivideModuloExpressionRule= ruleMultiplyDivideModuloExpressionRule EOF ;
+    public final EObject entryRuleMultiplyDivideModuloExpressionRule() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleMultiplyDivideModuloExpressionRule = null;
+
+
+        try {
+            // InternalInstanceLanguage.g:866:75: (iv_ruleMultiplyDivideModuloExpressionRule= ruleMultiplyDivideModuloExpressionRule EOF )
+            // InternalInstanceLanguage.g:867:2: iv_ruleMultiplyDivideModuloExpressionRule= ruleMultiplyDivideModuloExpressionRule EOF
+            {
+             newCompositeNode(grammarAccess.getMultiplyDivideModuloExpressionRuleRule()); 
+            pushFollow(FOLLOW_1);
+            iv_ruleMultiplyDivideModuloExpressionRule=ruleMultiplyDivideModuloExpressionRule();
+
+            state._fsp--;
+
+             current =iv_ruleMultiplyDivideModuloExpressionRule; 
+            match(input,EOF,FOLLOW_2); 
+
+            }
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleMultiplyDivideModuloExpressionRule"
+
+
+    // $ANTLR start "ruleMultiplyDivideModuloExpressionRule"
+    // InternalInstanceLanguage.g:873:1: ruleMultiplyDivideModuloExpressionRule returns [EObject current=null] : ( ( (lv_leftOperand_0_0= rulePowerOfExpressionRule ) ) ( ( (lv_operators_1_0= ruleMultiplyDivideModuloOperatorRule ) ) ( (lv_operands_2_0= rulePowerOfExpressionRule ) ) )* ) ;
+    public final EObject ruleMultiplyDivideModuloExpressionRule() throws RecognitionException {
+        EObject current = null;
+
+        EObject lv_leftOperand_0_0 = null;
+
+        Enumerator lv_operators_1_0 = null;
+
+        EObject lv_operands_2_0 = null;
+
+
+
+        	enterRule();
+
+        try {
+            // InternalInstanceLanguage.g:879:2: ( ( ( (lv_leftOperand_0_0= rulePowerOfExpressionRule ) ) ( ( (lv_operators_1_0= ruleMultiplyDivideModuloOperatorRule ) ) ( (lv_operands_2_0= rulePowerOfExpressionRule ) ) )* ) )
+            // InternalInstanceLanguage.g:880:2: ( ( (lv_leftOperand_0_0= rulePowerOfExpressionRule ) ) ( ( (lv_operators_1_0= ruleMultiplyDivideModuloOperatorRule ) ) ( (lv_operands_2_0= rulePowerOfExpressionRule ) ) )* )
+            {
+            // InternalInstanceLanguage.g:880:2: ( ( (lv_leftOperand_0_0= rulePowerOfExpressionRule ) ) ( ( (lv_operators_1_0= ruleMultiplyDivideModuloOperatorRule ) ) ( (lv_operands_2_0= rulePowerOfExpressionRule ) ) )* )
+            // InternalInstanceLanguage.g:881:3: ( (lv_leftOperand_0_0= rulePowerOfExpressionRule ) ) ( ( (lv_operators_1_0= ruleMultiplyDivideModuloOperatorRule ) ) ( (lv_operands_2_0= rulePowerOfExpressionRule ) ) )*
+            {
+            // InternalInstanceLanguage.g:881:3: ( (lv_leftOperand_0_0= rulePowerOfExpressionRule ) )
+            // InternalInstanceLanguage.g:882:4: (lv_leftOperand_0_0= rulePowerOfExpressionRule )
+            {
+            // InternalInstanceLanguage.g:882:4: (lv_leftOperand_0_0= rulePowerOfExpressionRule )
+            // InternalInstanceLanguage.g:883:5: lv_leftOperand_0_0= rulePowerOfExpressionRule
+            {
+
+            					newCompositeNode(grammarAccess.getMultiplyDivideModuloExpressionRuleAccess().getLeftOperandPowerOfExpressionRuleParserRuleCall_0_0());
+            				
+            pushFollow(FOLLOW_17);
+            lv_leftOperand_0_0=rulePowerOfExpressionRule();
+
+            state._fsp--;
+
+
+            					if (current==null) {
+            						current = createModelElementForParent(grammarAccess.getMultiplyDivideModuloExpressionRuleRule());
+            					}
+            					set(
+            						current,
+            						"leftOperand",
+            						lv_leftOperand_0_0,
+            						"de.evoal.languages.model.el.dsl.ExpressionLanguage.PowerOfExpressionRule");
+            					afterParserOrEnumRuleCall();
+            				
+
+            }
+
+
+            }
+
+            // InternalInstanceLanguage.g:900:3: ( ( (lv_operators_1_0= ruleMultiplyDivideModuloOperatorRule ) ) ( (lv_operands_2_0= rulePowerOfExpressionRule ) ) )*
+            loop12:
+            do {
+                int alt12=2;
+                int LA12_0 = input.LA(1);
+
+                if ( ((LA12_0>=42 && LA12_0<=44)) ) {
+                    alt12=1;
+                }
+
+
+                switch (alt12) {
+            	case 1 :
+            	    // InternalInstanceLanguage.g:901:4: ( (lv_operators_1_0= ruleMultiplyDivideModuloOperatorRule ) ) ( (lv_operands_2_0= rulePowerOfExpressionRule ) )
+            	    {
+            	    // InternalInstanceLanguage.g:901:4: ( (lv_operators_1_0= ruleMultiplyDivideModuloOperatorRule ) )
+            	    // InternalInstanceLanguage.g:902:5: (lv_operators_1_0= ruleMultiplyDivideModuloOperatorRule )
+            	    {
+            	    // InternalInstanceLanguage.g:902:5: (lv_operators_1_0= ruleMultiplyDivideModuloOperatorRule )
+            	    // InternalInstanceLanguage.g:903:6: lv_operators_1_0= ruleMultiplyDivideModuloOperatorRule
+            	    {
+
+            	    						newCompositeNode(grammarAccess.getMultiplyDivideModuloExpressionRuleAccess().getOperatorsMultiplyDivideModuloOperatorRuleEnumRuleCall_1_0_0());
+            	    					
+            	    pushFollow(FOLLOW_12);
+            	    lv_operators_1_0=ruleMultiplyDivideModuloOperatorRule();
+
+            	    state._fsp--;
+
+
+            	    						if (current==null) {
+            	    							current = createModelElementForParent(grammarAccess.getMultiplyDivideModuloExpressionRuleRule());
+            	    						}
+            	    						add(
+            	    							current,
+            	    							"operators",
+            	    							lv_operators_1_0,
+            	    							"de.evoal.languages.model.el.dsl.ExpressionLanguage.MultiplyDivideModuloOperatorRule");
+            	    						afterParserOrEnumRuleCall();
+            	    					
+
+            	    }
+
+
+            	    }
+
+            	    // InternalInstanceLanguage.g:920:4: ( (lv_operands_2_0= rulePowerOfExpressionRule ) )
+            	    // InternalInstanceLanguage.g:921:5: (lv_operands_2_0= rulePowerOfExpressionRule )
+            	    {
+            	    // InternalInstanceLanguage.g:921:5: (lv_operands_2_0= rulePowerOfExpressionRule )
+            	    // InternalInstanceLanguage.g:922:6: lv_operands_2_0= rulePowerOfExpressionRule
+            	    {
+
+            	    						newCompositeNode(grammarAccess.getMultiplyDivideModuloExpressionRuleAccess().getOperandsPowerOfExpressionRuleParserRuleCall_1_1_0());
+            	    					
+            	    pushFollow(FOLLOW_17);
+            	    lv_operands_2_0=rulePowerOfExpressionRule();
+
+            	    state._fsp--;
+
+
+            	    						if (current==null) {
+            	    							current = createModelElementForParent(grammarAccess.getMultiplyDivideModuloExpressionRuleRule());
+            	    						}
+            	    						add(
+            	    							current,
+            	    							"operands",
+            	    							lv_operands_2_0,
+            	    							"de.evoal.languages.model.el.dsl.ExpressionLanguage.PowerOfExpressionRule");
             	    						afterParserOrEnumRuleCall();
             	    					
 
@@ -2609,208 +2483,11 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
         }
         return current;
     }
-    // $ANTLR end "ruleAddOrSubtractExpressionRule"
-
-
-    // $ANTLR start "entryRuleMultiplyDivideModuloExpressionRule"
-    // InternalInstanceLanguage.g:973:1: entryRuleMultiplyDivideModuloExpressionRule returns [EObject current=null] : iv_ruleMultiplyDivideModuloExpressionRule= ruleMultiplyDivideModuloExpressionRule EOF ;
-    public final EObject entryRuleMultiplyDivideModuloExpressionRule() throws RecognitionException {
-        EObject current = null;
-
-        EObject iv_ruleMultiplyDivideModuloExpressionRule = null;
-
-
-        try {
-            // InternalInstanceLanguage.g:973:75: (iv_ruleMultiplyDivideModuloExpressionRule= ruleMultiplyDivideModuloExpressionRule EOF )
-            // InternalInstanceLanguage.g:974:2: iv_ruleMultiplyDivideModuloExpressionRule= ruleMultiplyDivideModuloExpressionRule EOF
-            {
-             newCompositeNode(grammarAccess.getMultiplyDivideModuloExpressionRuleRule()); 
-            pushFollow(FOLLOW_1);
-            iv_ruleMultiplyDivideModuloExpressionRule=ruleMultiplyDivideModuloExpressionRule();
-
-            state._fsp--;
-
-             current =iv_ruleMultiplyDivideModuloExpressionRule; 
-            match(input,EOF,FOLLOW_2); 
-
-            }
-
-        }
-
-            catch (RecognitionException re) {
-                recover(input,re);
-                appendSkippedTokens();
-            }
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "entryRuleMultiplyDivideModuloExpressionRule"
-
-
-    // $ANTLR start "ruleMultiplyDivideModuloExpressionRule"
-    // InternalInstanceLanguage.g:980:1: ruleMultiplyDivideModuloExpressionRule returns [EObject current=null] : ( ( (lv_leftOperand_0_0= rulePowerOfExpressionRule ) ) ( ( (lv_operators_1_0= ruleMultiplyDivideModuloOperatorRule ) ) ( (lv_operands_2_0= rulePowerOfExpressionRule ) ) )* ) ;
-    public final EObject ruleMultiplyDivideModuloExpressionRule() throws RecognitionException {
-        EObject current = null;
-
-        EObject lv_leftOperand_0_0 = null;
-
-        Enumerator lv_operators_1_0 = null;
-
-        EObject lv_operands_2_0 = null;
-
-
-
-        	enterRule();
-
-        try {
-            // InternalInstanceLanguage.g:986:2: ( ( ( (lv_leftOperand_0_0= rulePowerOfExpressionRule ) ) ( ( (lv_operators_1_0= ruleMultiplyDivideModuloOperatorRule ) ) ( (lv_operands_2_0= rulePowerOfExpressionRule ) ) )* ) )
-            // InternalInstanceLanguage.g:987:2: ( ( (lv_leftOperand_0_0= rulePowerOfExpressionRule ) ) ( ( (lv_operators_1_0= ruleMultiplyDivideModuloOperatorRule ) ) ( (lv_operands_2_0= rulePowerOfExpressionRule ) ) )* )
-            {
-            // InternalInstanceLanguage.g:987:2: ( ( (lv_leftOperand_0_0= rulePowerOfExpressionRule ) ) ( ( (lv_operators_1_0= ruleMultiplyDivideModuloOperatorRule ) ) ( (lv_operands_2_0= rulePowerOfExpressionRule ) ) )* )
-            // InternalInstanceLanguage.g:988:3: ( (lv_leftOperand_0_0= rulePowerOfExpressionRule ) ) ( ( (lv_operators_1_0= ruleMultiplyDivideModuloOperatorRule ) ) ( (lv_operands_2_0= rulePowerOfExpressionRule ) ) )*
-            {
-            // InternalInstanceLanguage.g:988:3: ( (lv_leftOperand_0_0= rulePowerOfExpressionRule ) )
-            // InternalInstanceLanguage.g:989:4: (lv_leftOperand_0_0= rulePowerOfExpressionRule )
-            {
-            // InternalInstanceLanguage.g:989:4: (lv_leftOperand_0_0= rulePowerOfExpressionRule )
-            // InternalInstanceLanguage.g:990:5: lv_leftOperand_0_0= rulePowerOfExpressionRule
-            {
-
-            					newCompositeNode(grammarAccess.getMultiplyDivideModuloExpressionRuleAccess().getLeftOperandPowerOfExpressionRuleParserRuleCall_0_0());
-            				
-            pushFollow(FOLLOW_17);
-            lv_leftOperand_0_0=rulePowerOfExpressionRule();
-
-            state._fsp--;
-
-
-            					if (current==null) {
-            						current = createModelElementForParent(grammarAccess.getMultiplyDivideModuloExpressionRuleRule());
-            					}
-            					set(
-            						current,
-            						"leftOperand",
-            						lv_leftOperand_0_0,
-            						"de.evoal.languages.model.el.dsl.ExpressionLanguage.PowerOfExpressionRule");
-            					afterParserOrEnumRuleCall();
-            				
-
-            }
-
-
-            }
-
-            // InternalInstanceLanguage.g:1007:3: ( ( (lv_operators_1_0= ruleMultiplyDivideModuloOperatorRule ) ) ( (lv_operands_2_0= rulePowerOfExpressionRule ) ) )*
-            loop13:
-            do {
-                int alt13=2;
-                int LA13_0 = input.LA(1);
-
-                if ( ((LA13_0>=42 && LA13_0<=44)) ) {
-                    alt13=1;
-                }
-
-
-                switch (alt13) {
-            	case 1 :
-            	    // InternalInstanceLanguage.g:1008:4: ( (lv_operators_1_0= ruleMultiplyDivideModuloOperatorRule ) ) ( (lv_operands_2_0= rulePowerOfExpressionRule ) )
-            	    {
-            	    // InternalInstanceLanguage.g:1008:4: ( (lv_operators_1_0= ruleMultiplyDivideModuloOperatorRule ) )
-            	    // InternalInstanceLanguage.g:1009:5: (lv_operators_1_0= ruleMultiplyDivideModuloOperatorRule )
-            	    {
-            	    // InternalInstanceLanguage.g:1009:5: (lv_operators_1_0= ruleMultiplyDivideModuloOperatorRule )
-            	    // InternalInstanceLanguage.g:1010:6: lv_operators_1_0= ruleMultiplyDivideModuloOperatorRule
-            	    {
-
-            	    						newCompositeNode(grammarAccess.getMultiplyDivideModuloExpressionRuleAccess().getOperatorsMultiplyDivideModuloOperatorRuleEnumRuleCall_1_0_0());
-            	    					
-            	    pushFollow(FOLLOW_12);
-            	    lv_operators_1_0=ruleMultiplyDivideModuloOperatorRule();
-
-            	    state._fsp--;
-
-
-            	    						if (current==null) {
-            	    							current = createModelElementForParent(grammarAccess.getMultiplyDivideModuloExpressionRuleRule());
-            	    						}
-            	    						add(
-            	    							current,
-            	    							"operators",
-            	    							lv_operators_1_0,
-            	    							"de.evoal.languages.model.el.dsl.ExpressionLanguage.MultiplyDivideModuloOperatorRule");
-            	    						afterParserOrEnumRuleCall();
-            	    					
-
-            	    }
-
-
-            	    }
-
-            	    // InternalInstanceLanguage.g:1027:4: ( (lv_operands_2_0= rulePowerOfExpressionRule ) )
-            	    // InternalInstanceLanguage.g:1028:5: (lv_operands_2_0= rulePowerOfExpressionRule )
-            	    {
-            	    // InternalInstanceLanguage.g:1028:5: (lv_operands_2_0= rulePowerOfExpressionRule )
-            	    // InternalInstanceLanguage.g:1029:6: lv_operands_2_0= rulePowerOfExpressionRule
-            	    {
-
-            	    						newCompositeNode(grammarAccess.getMultiplyDivideModuloExpressionRuleAccess().getOperandsPowerOfExpressionRuleParserRuleCall_1_1_0());
-            	    					
-            	    pushFollow(FOLLOW_17);
-            	    lv_operands_2_0=rulePowerOfExpressionRule();
-
-            	    state._fsp--;
-
-
-            	    						if (current==null) {
-            	    							current = createModelElementForParent(grammarAccess.getMultiplyDivideModuloExpressionRuleRule());
-            	    						}
-            	    						add(
-            	    							current,
-            	    							"operands",
-            	    							lv_operands_2_0,
-            	    							"de.evoal.languages.model.el.dsl.ExpressionLanguage.PowerOfExpressionRule");
-            	    						afterParserOrEnumRuleCall();
-            	    					
-
-            	    }
-
-
-            	    }
-
-
-            	    }
-            	    break;
-
-            	default :
-            	    break loop13;
-                }
-            } while (true);
-
-
-            }
-
-
-            }
-
-
-            	leaveRule();
-
-        }
-
-            catch (RecognitionException re) {
-                recover(input,re);
-                appendSkippedTokens();
-            }
-        finally {
-        }
-        return current;
-    }
     // $ANTLR end "ruleMultiplyDivideModuloExpressionRule"
 
 
     // $ANTLR start "entryRulePowerOfExpressionRule"
-    // InternalInstanceLanguage.g:1051:1: entryRulePowerOfExpressionRule returns [EObject current=null] : iv_rulePowerOfExpressionRule= rulePowerOfExpressionRule EOF ;
+    // InternalInstanceLanguage.g:944:1: entryRulePowerOfExpressionRule returns [EObject current=null] : iv_rulePowerOfExpressionRule= rulePowerOfExpressionRule EOF ;
     public final EObject entryRulePowerOfExpressionRule() throws RecognitionException {
         EObject current = null;
 
@@ -2818,8 +2495,8 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
         try {
-            // InternalInstanceLanguage.g:1051:62: (iv_rulePowerOfExpressionRule= rulePowerOfExpressionRule EOF )
-            // InternalInstanceLanguage.g:1052:2: iv_rulePowerOfExpressionRule= rulePowerOfExpressionRule EOF
+            // InternalInstanceLanguage.g:944:62: (iv_rulePowerOfExpressionRule= rulePowerOfExpressionRule EOF )
+            // InternalInstanceLanguage.g:945:2: iv_rulePowerOfExpressionRule= rulePowerOfExpressionRule EOF
             {
              newCompositeNode(grammarAccess.getPowerOfExpressionRuleRule()); 
             pushFollow(FOLLOW_1);
@@ -2846,7 +2523,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "rulePowerOfExpressionRule"
-    // InternalInstanceLanguage.g:1058:1: rulePowerOfExpressionRule returns [EObject current=null] : ( ( (lv_leftOperand_0_0= ruleUnaryAddOrSubtractExpressionRule ) ) (otherlv_1= '^' ( (lv_rightOperand_2_0= rulePowerOfExpressionRule ) ) )? ) ;
+    // InternalInstanceLanguage.g:951:1: rulePowerOfExpressionRule returns [EObject current=null] : ( ( (lv_leftOperand_0_0= ruleUnaryAddOrSubtractExpressionRule ) ) (otherlv_1= '^' ( (lv_rightOperand_2_0= rulePowerOfExpressionRule ) ) )? ) ;
     public final EObject rulePowerOfExpressionRule() throws RecognitionException {
         EObject current = null;
 
@@ -2860,17 +2537,17 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
         	enterRule();
 
         try {
-            // InternalInstanceLanguage.g:1064:2: ( ( ( (lv_leftOperand_0_0= ruleUnaryAddOrSubtractExpressionRule ) ) (otherlv_1= '^' ( (lv_rightOperand_2_0= rulePowerOfExpressionRule ) ) )? ) )
-            // InternalInstanceLanguage.g:1065:2: ( ( (lv_leftOperand_0_0= ruleUnaryAddOrSubtractExpressionRule ) ) (otherlv_1= '^' ( (lv_rightOperand_2_0= rulePowerOfExpressionRule ) ) )? )
+            // InternalInstanceLanguage.g:957:2: ( ( ( (lv_leftOperand_0_0= ruleUnaryAddOrSubtractExpressionRule ) ) (otherlv_1= '^' ( (lv_rightOperand_2_0= rulePowerOfExpressionRule ) ) )? ) )
+            // InternalInstanceLanguage.g:958:2: ( ( (lv_leftOperand_0_0= ruleUnaryAddOrSubtractExpressionRule ) ) (otherlv_1= '^' ( (lv_rightOperand_2_0= rulePowerOfExpressionRule ) ) )? )
             {
-            // InternalInstanceLanguage.g:1065:2: ( ( (lv_leftOperand_0_0= ruleUnaryAddOrSubtractExpressionRule ) ) (otherlv_1= '^' ( (lv_rightOperand_2_0= rulePowerOfExpressionRule ) ) )? )
-            // InternalInstanceLanguage.g:1066:3: ( (lv_leftOperand_0_0= ruleUnaryAddOrSubtractExpressionRule ) ) (otherlv_1= '^' ( (lv_rightOperand_2_0= rulePowerOfExpressionRule ) ) )?
+            // InternalInstanceLanguage.g:958:2: ( ( (lv_leftOperand_0_0= ruleUnaryAddOrSubtractExpressionRule ) ) (otherlv_1= '^' ( (lv_rightOperand_2_0= rulePowerOfExpressionRule ) ) )? )
+            // InternalInstanceLanguage.g:959:3: ( (lv_leftOperand_0_0= ruleUnaryAddOrSubtractExpressionRule ) ) (otherlv_1= '^' ( (lv_rightOperand_2_0= rulePowerOfExpressionRule ) ) )?
             {
-            // InternalInstanceLanguage.g:1066:3: ( (lv_leftOperand_0_0= ruleUnaryAddOrSubtractExpressionRule ) )
-            // InternalInstanceLanguage.g:1067:4: (lv_leftOperand_0_0= ruleUnaryAddOrSubtractExpressionRule )
+            // InternalInstanceLanguage.g:959:3: ( (lv_leftOperand_0_0= ruleUnaryAddOrSubtractExpressionRule ) )
+            // InternalInstanceLanguage.g:960:4: (lv_leftOperand_0_0= ruleUnaryAddOrSubtractExpressionRule )
             {
-            // InternalInstanceLanguage.g:1067:4: (lv_leftOperand_0_0= ruleUnaryAddOrSubtractExpressionRule )
-            // InternalInstanceLanguage.g:1068:5: lv_leftOperand_0_0= ruleUnaryAddOrSubtractExpressionRule
+            // InternalInstanceLanguage.g:960:4: (lv_leftOperand_0_0= ruleUnaryAddOrSubtractExpressionRule )
+            // InternalInstanceLanguage.g:961:5: lv_leftOperand_0_0= ruleUnaryAddOrSubtractExpressionRule
             {
 
             					newCompositeNode(grammarAccess.getPowerOfExpressionRuleAccess().getLeftOperandUnaryAddOrSubtractExpressionRuleParserRuleCall_0_0());
@@ -2897,26 +2574,26 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
             }
 
-            // InternalInstanceLanguage.g:1085:3: (otherlv_1= '^' ( (lv_rightOperand_2_0= rulePowerOfExpressionRule ) ) )?
-            int alt14=2;
-            int LA14_0 = input.LA(1);
+            // InternalInstanceLanguage.g:978:3: (otherlv_1= '^' ( (lv_rightOperand_2_0= rulePowerOfExpressionRule ) ) )?
+            int alt13=2;
+            int LA13_0 = input.LA(1);
 
-            if ( (LA14_0==27) ) {
-                alt14=1;
+            if ( (LA13_0==27) ) {
+                alt13=1;
             }
-            switch (alt14) {
+            switch (alt13) {
                 case 1 :
-                    // InternalInstanceLanguage.g:1086:4: otherlv_1= '^' ( (lv_rightOperand_2_0= rulePowerOfExpressionRule ) )
+                    // InternalInstanceLanguage.g:979:4: otherlv_1= '^' ( (lv_rightOperand_2_0= rulePowerOfExpressionRule ) )
                     {
                     otherlv_1=(Token)match(input,27,FOLLOW_12); 
 
                     				newLeafNode(otherlv_1, grammarAccess.getPowerOfExpressionRuleAccess().getCircumflexAccentKeyword_1_0());
                     			
-                    // InternalInstanceLanguage.g:1090:4: ( (lv_rightOperand_2_0= rulePowerOfExpressionRule ) )
-                    // InternalInstanceLanguage.g:1091:5: (lv_rightOperand_2_0= rulePowerOfExpressionRule )
+                    // InternalInstanceLanguage.g:983:4: ( (lv_rightOperand_2_0= rulePowerOfExpressionRule ) )
+                    // InternalInstanceLanguage.g:984:5: (lv_rightOperand_2_0= rulePowerOfExpressionRule )
                     {
-                    // InternalInstanceLanguage.g:1091:5: (lv_rightOperand_2_0= rulePowerOfExpressionRule )
-                    // InternalInstanceLanguage.g:1092:6: lv_rightOperand_2_0= rulePowerOfExpressionRule
+                    // InternalInstanceLanguage.g:984:5: (lv_rightOperand_2_0= rulePowerOfExpressionRule )
+                    // InternalInstanceLanguage.g:985:6: lv_rightOperand_2_0= rulePowerOfExpressionRule
                     {
 
                     						newCompositeNode(grammarAccess.getPowerOfExpressionRuleAccess().getRightOperandPowerOfExpressionRuleParserRuleCall_1_1_0());
@@ -2972,7 +2649,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "entryRuleUnaryAddOrSubtractExpressionRule"
-    // InternalInstanceLanguage.g:1114:1: entryRuleUnaryAddOrSubtractExpressionRule returns [EObject current=null] : iv_ruleUnaryAddOrSubtractExpressionRule= ruleUnaryAddOrSubtractExpressionRule EOF ;
+    // InternalInstanceLanguage.g:1007:1: entryRuleUnaryAddOrSubtractExpressionRule returns [EObject current=null] : iv_ruleUnaryAddOrSubtractExpressionRule= ruleUnaryAddOrSubtractExpressionRule EOF ;
     public final EObject entryRuleUnaryAddOrSubtractExpressionRule() throws RecognitionException {
         EObject current = null;
 
@@ -2980,8 +2657,8 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
         try {
-            // InternalInstanceLanguage.g:1114:73: (iv_ruleUnaryAddOrSubtractExpressionRule= ruleUnaryAddOrSubtractExpressionRule EOF )
-            // InternalInstanceLanguage.g:1115:2: iv_ruleUnaryAddOrSubtractExpressionRule= ruleUnaryAddOrSubtractExpressionRule EOF
+            // InternalInstanceLanguage.g:1007:73: (iv_ruleUnaryAddOrSubtractExpressionRule= ruleUnaryAddOrSubtractExpressionRule EOF )
+            // InternalInstanceLanguage.g:1008:2: iv_ruleUnaryAddOrSubtractExpressionRule= ruleUnaryAddOrSubtractExpressionRule EOF
             {
              newCompositeNode(grammarAccess.getUnaryAddOrSubtractExpressionRuleRule()); 
             pushFollow(FOLLOW_1);
@@ -3008,7 +2685,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "ruleUnaryAddOrSubtractExpressionRule"
-    // InternalInstanceLanguage.g:1121:1: ruleUnaryAddOrSubtractExpressionRule returns [EObject current=null] : ( ( (lv_operators_0_0= ruleAddOrSubtractOperatorRule ) )* ( (lv_subExpression_1_0= ruleLiteralOrReferenceRule ) ) ) ;
+    // InternalInstanceLanguage.g:1014:1: ruleUnaryAddOrSubtractExpressionRule returns [EObject current=null] : ( ( (lv_operators_0_0= ruleAddOrSubtractOperatorRule ) )* ( (lv_subExpression_1_0= ruleLiteralOrReferenceRule ) ) ) ;
     public final EObject ruleUnaryAddOrSubtractExpressionRule() throws RecognitionException {
         EObject current = null;
 
@@ -3021,29 +2698,29 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
         	enterRule();
 
         try {
-            // InternalInstanceLanguage.g:1127:2: ( ( ( (lv_operators_0_0= ruleAddOrSubtractOperatorRule ) )* ( (lv_subExpression_1_0= ruleLiteralOrReferenceRule ) ) ) )
-            // InternalInstanceLanguage.g:1128:2: ( ( (lv_operators_0_0= ruleAddOrSubtractOperatorRule ) )* ( (lv_subExpression_1_0= ruleLiteralOrReferenceRule ) ) )
+            // InternalInstanceLanguage.g:1020:2: ( ( ( (lv_operators_0_0= ruleAddOrSubtractOperatorRule ) )* ( (lv_subExpression_1_0= ruleLiteralOrReferenceRule ) ) ) )
+            // InternalInstanceLanguage.g:1021:2: ( ( (lv_operators_0_0= ruleAddOrSubtractOperatorRule ) )* ( (lv_subExpression_1_0= ruleLiteralOrReferenceRule ) ) )
             {
-            // InternalInstanceLanguage.g:1128:2: ( ( (lv_operators_0_0= ruleAddOrSubtractOperatorRule ) )* ( (lv_subExpression_1_0= ruleLiteralOrReferenceRule ) ) )
-            // InternalInstanceLanguage.g:1129:3: ( (lv_operators_0_0= ruleAddOrSubtractOperatorRule ) )* ( (lv_subExpression_1_0= ruleLiteralOrReferenceRule ) )
+            // InternalInstanceLanguage.g:1021:2: ( ( (lv_operators_0_0= ruleAddOrSubtractOperatorRule ) )* ( (lv_subExpression_1_0= ruleLiteralOrReferenceRule ) ) )
+            // InternalInstanceLanguage.g:1022:3: ( (lv_operators_0_0= ruleAddOrSubtractOperatorRule ) )* ( (lv_subExpression_1_0= ruleLiteralOrReferenceRule ) )
             {
-            // InternalInstanceLanguage.g:1129:3: ( (lv_operators_0_0= ruleAddOrSubtractOperatorRule ) )*
-            loop15:
+            // InternalInstanceLanguage.g:1022:3: ( (lv_operators_0_0= ruleAddOrSubtractOperatorRule ) )*
+            loop14:
             do {
-                int alt15=2;
-                int LA15_0 = input.LA(1);
+                int alt14=2;
+                int LA14_0 = input.LA(1);
 
-                if ( ((LA15_0>=40 && LA15_0<=41)) ) {
-                    alt15=1;
+                if ( ((LA14_0>=40 && LA14_0<=41)) ) {
+                    alt14=1;
                 }
 
 
-                switch (alt15) {
+                switch (alt14) {
             	case 1 :
-            	    // InternalInstanceLanguage.g:1130:4: (lv_operators_0_0= ruleAddOrSubtractOperatorRule )
+            	    // InternalInstanceLanguage.g:1023:4: (lv_operators_0_0= ruleAddOrSubtractOperatorRule )
             	    {
-            	    // InternalInstanceLanguage.g:1130:4: (lv_operators_0_0= ruleAddOrSubtractOperatorRule )
-            	    // InternalInstanceLanguage.g:1131:5: lv_operators_0_0= ruleAddOrSubtractOperatorRule
+            	    // InternalInstanceLanguage.g:1023:4: (lv_operators_0_0= ruleAddOrSubtractOperatorRule )
+            	    // InternalInstanceLanguage.g:1024:5: lv_operators_0_0= ruleAddOrSubtractOperatorRule
             	    {
 
             	    					newCompositeNode(grammarAccess.getUnaryAddOrSubtractExpressionRuleAccess().getOperatorsAddOrSubtractOperatorRuleEnumRuleCall_0_0());
@@ -3072,15 +2749,15 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
             	    break;
 
             	default :
-            	    break loop15;
+            	    break loop14;
                 }
             } while (true);
 
-            // InternalInstanceLanguage.g:1148:3: ( (lv_subExpression_1_0= ruleLiteralOrReferenceRule ) )
-            // InternalInstanceLanguage.g:1149:4: (lv_subExpression_1_0= ruleLiteralOrReferenceRule )
+            // InternalInstanceLanguage.g:1041:3: ( (lv_subExpression_1_0= ruleLiteralOrReferenceRule ) )
+            // InternalInstanceLanguage.g:1042:4: (lv_subExpression_1_0= ruleLiteralOrReferenceRule )
             {
-            // InternalInstanceLanguage.g:1149:4: (lv_subExpression_1_0= ruleLiteralOrReferenceRule )
-            // InternalInstanceLanguage.g:1150:5: lv_subExpression_1_0= ruleLiteralOrReferenceRule
+            // InternalInstanceLanguage.g:1042:4: (lv_subExpression_1_0= ruleLiteralOrReferenceRule )
+            // InternalInstanceLanguage.g:1043:5: lv_subExpression_1_0= ruleLiteralOrReferenceRule
             {
 
             					newCompositeNode(grammarAccess.getUnaryAddOrSubtractExpressionRuleAccess().getSubExpressionLiteralOrReferenceRuleParserRuleCall_1_0());
@@ -3130,7 +2807,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "entryRuleLiteralOrReferenceRule"
-    // InternalInstanceLanguage.g:1171:1: entryRuleLiteralOrReferenceRule returns [EObject current=null] : iv_ruleLiteralOrReferenceRule= ruleLiteralOrReferenceRule EOF ;
+    // InternalInstanceLanguage.g:1064:1: entryRuleLiteralOrReferenceRule returns [EObject current=null] : iv_ruleLiteralOrReferenceRule= ruleLiteralOrReferenceRule EOF ;
     public final EObject entryRuleLiteralOrReferenceRule() throws RecognitionException {
         EObject current = null;
 
@@ -3138,8 +2815,8 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
         try {
-            // InternalInstanceLanguage.g:1171:63: (iv_ruleLiteralOrReferenceRule= ruleLiteralOrReferenceRule EOF )
-            // InternalInstanceLanguage.g:1172:2: iv_ruleLiteralOrReferenceRule= ruleLiteralOrReferenceRule EOF
+            // InternalInstanceLanguage.g:1064:63: (iv_ruleLiteralOrReferenceRule= ruleLiteralOrReferenceRule EOF )
+            // InternalInstanceLanguage.g:1065:2: iv_ruleLiteralOrReferenceRule= ruleLiteralOrReferenceRule EOF
             {
              newCompositeNode(grammarAccess.getLiteralOrReferenceRuleRule()); 
             pushFollow(FOLLOW_1);
@@ -3166,7 +2843,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "ruleLiteralOrReferenceRule"
-    // InternalInstanceLanguage.g:1178:1: ruleLiteralOrReferenceRule returns [EObject current=null] : (this_CallRule_0= ruleCallRule | this_LiteralRule_1= ruleLiteralRule | this_ParanthesesRule_2= ruleParanthesesRule | this_ValueReferenceRule_3= ruleValueReferenceRule ) ;
+    // InternalInstanceLanguage.g:1071:1: ruleLiteralOrReferenceRule returns [EObject current=null] : (this_CallRule_0= ruleCallRule | this_LiteralRule_1= ruleLiteralRule | this_ParanthesesRule_2= ruleParanthesesRule | this_ValueReferenceRule_3= ruleValueReferenceRule ) ;
     public final EObject ruleLiteralOrReferenceRule() throws RecognitionException {
         EObject current = null;
 
@@ -3183,46 +2860,46 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
         	enterRule();
 
         try {
-            // InternalInstanceLanguage.g:1184:2: ( (this_CallRule_0= ruleCallRule | this_LiteralRule_1= ruleLiteralRule | this_ParanthesesRule_2= ruleParanthesesRule | this_ValueReferenceRule_3= ruleValueReferenceRule ) )
-            // InternalInstanceLanguage.g:1185:2: (this_CallRule_0= ruleCallRule | this_LiteralRule_1= ruleLiteralRule | this_ParanthesesRule_2= ruleParanthesesRule | this_ValueReferenceRule_3= ruleValueReferenceRule )
+            // InternalInstanceLanguage.g:1077:2: ( (this_CallRule_0= ruleCallRule | this_LiteralRule_1= ruleLiteralRule | this_ParanthesesRule_2= ruleParanthesesRule | this_ValueReferenceRule_3= ruleValueReferenceRule ) )
+            // InternalInstanceLanguage.g:1078:2: (this_CallRule_0= ruleCallRule | this_LiteralRule_1= ruleLiteralRule | this_ParanthesesRule_2= ruleParanthesesRule | this_ValueReferenceRule_3= ruleValueReferenceRule )
             {
-            // InternalInstanceLanguage.g:1185:2: (this_CallRule_0= ruleCallRule | this_LiteralRule_1= ruleLiteralRule | this_ParanthesesRule_2= ruleParanthesesRule | this_ValueReferenceRule_3= ruleValueReferenceRule )
-            int alt16=4;
+            // InternalInstanceLanguage.g:1078:2: (this_CallRule_0= ruleCallRule | this_LiteralRule_1= ruleLiteralRule | this_ParanthesesRule_2= ruleParanthesesRule | this_ValueReferenceRule_3= ruleValueReferenceRule )
+            int alt15=4;
             switch ( input.LA(1) ) {
             case 30:
                 {
-                alt16=1;
+                alt15=1;
                 }
                 break;
-            case RULE_STRING:
             case RULE_DOUBLE:
             case RULE_INT:
+            case RULE_STRING:
             case 32:
             case 33:
                 {
-                alt16=2;
+                alt15=2;
                 }
                 break;
             case 28:
                 {
-                alt16=3;
+                alt15=3;
                 }
                 break;
             case 31:
                 {
-                alt16=4;
+                alt15=4;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 16, 0, input);
+                    new NoViableAltException("", 15, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt16) {
+            switch (alt15) {
                 case 1 :
-                    // InternalInstanceLanguage.g:1186:3: this_CallRule_0= ruleCallRule
+                    // InternalInstanceLanguage.g:1079:3: this_CallRule_0= ruleCallRule
                     {
 
                     			newCompositeNode(grammarAccess.getLiteralOrReferenceRuleAccess().getCallRuleParserRuleCall_0());
@@ -3240,7 +2917,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 2 :
-                    // InternalInstanceLanguage.g:1195:3: this_LiteralRule_1= ruleLiteralRule
+                    // InternalInstanceLanguage.g:1088:3: this_LiteralRule_1= ruleLiteralRule
                     {
 
                     			newCompositeNode(grammarAccess.getLiteralOrReferenceRuleAccess().getLiteralRuleParserRuleCall_1());
@@ -3258,7 +2935,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 3 :
-                    // InternalInstanceLanguage.g:1204:3: this_ParanthesesRule_2= ruleParanthesesRule
+                    // InternalInstanceLanguage.g:1097:3: this_ParanthesesRule_2= ruleParanthesesRule
                     {
 
                     			newCompositeNode(grammarAccess.getLiteralOrReferenceRuleAccess().getParanthesesRuleParserRuleCall_2());
@@ -3276,7 +2953,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 4 :
-                    // InternalInstanceLanguage.g:1213:3: this_ValueReferenceRule_3= ruleValueReferenceRule
+                    // InternalInstanceLanguage.g:1106:3: this_ValueReferenceRule_3= ruleValueReferenceRule
                     {
 
                     			newCompositeNode(grammarAccess.getLiteralOrReferenceRuleAccess().getValueReferenceRuleParserRuleCall_3());
@@ -3316,7 +2993,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "entryRuleParanthesesRule"
-    // InternalInstanceLanguage.g:1225:1: entryRuleParanthesesRule returns [EObject current=null] : iv_ruleParanthesesRule= ruleParanthesesRule EOF ;
+    // InternalInstanceLanguage.g:1118:1: entryRuleParanthesesRule returns [EObject current=null] : iv_ruleParanthesesRule= ruleParanthesesRule EOF ;
     public final EObject entryRuleParanthesesRule() throws RecognitionException {
         EObject current = null;
 
@@ -3324,8 +3001,8 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
         try {
-            // InternalInstanceLanguage.g:1225:56: (iv_ruleParanthesesRule= ruleParanthesesRule EOF )
-            // InternalInstanceLanguage.g:1226:2: iv_ruleParanthesesRule= ruleParanthesesRule EOF
+            // InternalInstanceLanguage.g:1118:56: (iv_ruleParanthesesRule= ruleParanthesesRule EOF )
+            // InternalInstanceLanguage.g:1119:2: iv_ruleParanthesesRule= ruleParanthesesRule EOF
             {
              newCompositeNode(grammarAccess.getParanthesesRuleRule()); 
             pushFollow(FOLLOW_1);
@@ -3352,7 +3029,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "ruleParanthesesRule"
-    // InternalInstanceLanguage.g:1232:1: ruleParanthesesRule returns [EObject current=null] : (otherlv_0= '(' ( (lv_subExpression_1_0= ruleExpressionRule ) ) otherlv_2= ')' ) ;
+    // InternalInstanceLanguage.g:1125:1: ruleParanthesesRule returns [EObject current=null] : (otherlv_0= '(' ( (lv_subExpression_1_0= ruleExpressionRule ) ) otherlv_2= ')' ) ;
     public final EObject ruleParanthesesRule() throws RecognitionException {
         EObject current = null;
 
@@ -3365,21 +3042,21 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
         	enterRule();
 
         try {
-            // InternalInstanceLanguage.g:1238:2: ( (otherlv_0= '(' ( (lv_subExpression_1_0= ruleExpressionRule ) ) otherlv_2= ')' ) )
-            // InternalInstanceLanguage.g:1239:2: (otherlv_0= '(' ( (lv_subExpression_1_0= ruleExpressionRule ) ) otherlv_2= ')' )
+            // InternalInstanceLanguage.g:1131:2: ( (otherlv_0= '(' ( (lv_subExpression_1_0= ruleExpressionRule ) ) otherlv_2= ')' ) )
+            // InternalInstanceLanguage.g:1132:2: (otherlv_0= '(' ( (lv_subExpression_1_0= ruleExpressionRule ) ) otherlv_2= ')' )
             {
-            // InternalInstanceLanguage.g:1239:2: (otherlv_0= '(' ( (lv_subExpression_1_0= ruleExpressionRule ) ) otherlv_2= ')' )
-            // InternalInstanceLanguage.g:1240:3: otherlv_0= '(' ( (lv_subExpression_1_0= ruleExpressionRule ) ) otherlv_2= ')'
+            // InternalInstanceLanguage.g:1132:2: (otherlv_0= '(' ( (lv_subExpression_1_0= ruleExpressionRule ) ) otherlv_2= ')' )
+            // InternalInstanceLanguage.g:1133:3: otherlv_0= '(' ( (lv_subExpression_1_0= ruleExpressionRule ) ) otherlv_2= ')'
             {
             otherlv_0=(Token)match(input,28,FOLLOW_12); 
 
             			newLeafNode(otherlv_0, grammarAccess.getParanthesesRuleAccess().getLeftParenthesisKeyword_0());
             		
-            // InternalInstanceLanguage.g:1244:3: ( (lv_subExpression_1_0= ruleExpressionRule ) )
-            // InternalInstanceLanguage.g:1245:4: (lv_subExpression_1_0= ruleExpressionRule )
+            // InternalInstanceLanguage.g:1137:3: ( (lv_subExpression_1_0= ruleExpressionRule ) )
+            // InternalInstanceLanguage.g:1138:4: (lv_subExpression_1_0= ruleExpressionRule )
             {
-            // InternalInstanceLanguage.g:1245:4: (lv_subExpression_1_0= ruleExpressionRule )
-            // InternalInstanceLanguage.g:1246:5: lv_subExpression_1_0= ruleExpressionRule
+            // InternalInstanceLanguage.g:1138:4: (lv_subExpression_1_0= ruleExpressionRule )
+            // InternalInstanceLanguage.g:1139:5: lv_subExpression_1_0= ruleExpressionRule
             {
 
             					newCompositeNode(grammarAccess.getParanthesesRuleAccess().getSubExpressionExpressionRuleParserRuleCall_1_0());
@@ -3433,7 +3110,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "entryRuleCallRule"
-    // InternalInstanceLanguage.g:1271:1: entryRuleCallRule returns [EObject current=null] : iv_ruleCallRule= ruleCallRule EOF ;
+    // InternalInstanceLanguage.g:1164:1: entryRuleCallRule returns [EObject current=null] : iv_ruleCallRule= ruleCallRule EOF ;
     public final EObject entryRuleCallRule() throws RecognitionException {
         EObject current = null;
 
@@ -3441,8 +3118,8 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
         try {
-            // InternalInstanceLanguage.g:1271:49: (iv_ruleCallRule= ruleCallRule EOF )
-            // InternalInstanceLanguage.g:1272:2: iv_ruleCallRule= ruleCallRule EOF
+            // InternalInstanceLanguage.g:1164:49: (iv_ruleCallRule= ruleCallRule EOF )
+            // InternalInstanceLanguage.g:1165:2: iv_ruleCallRule= ruleCallRule EOF
             {
              newCompositeNode(grammarAccess.getCallRuleRule()); 
             pushFollow(FOLLOW_1);
@@ -3469,7 +3146,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "ruleCallRule"
-    // InternalInstanceLanguage.g:1278:1: ruleCallRule returns [EObject current=null] : ( ( (lv_function_0_0= ruleFunctionNameRule ) ) otherlv_1= '(' ( ( (lv_parameters_2_0= ruleExpressionRule ) ) (otherlv_3= ',' ( (lv_parameters_4_0= ruleExpressionRule ) ) )* )? otherlv_5= ')' ) ;
+    // InternalInstanceLanguage.g:1171:1: ruleCallRule returns [EObject current=null] : ( ( (lv_function_0_0= ruleFunctionNameRule ) ) otherlv_1= '(' ( ( (lv_parameters_2_0= ruleExpressionRule ) ) (otherlv_3= ',' ( (lv_parameters_4_0= ruleExpressionRule ) ) )* )? otherlv_5= ')' ) ;
     public final EObject ruleCallRule() throws RecognitionException {
         EObject current = null;
 
@@ -3487,17 +3164,17 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
         	enterRule();
 
         try {
-            // InternalInstanceLanguage.g:1284:2: ( ( ( (lv_function_0_0= ruleFunctionNameRule ) ) otherlv_1= '(' ( ( (lv_parameters_2_0= ruleExpressionRule ) ) (otherlv_3= ',' ( (lv_parameters_4_0= ruleExpressionRule ) ) )* )? otherlv_5= ')' ) )
-            // InternalInstanceLanguage.g:1285:2: ( ( (lv_function_0_0= ruleFunctionNameRule ) ) otherlv_1= '(' ( ( (lv_parameters_2_0= ruleExpressionRule ) ) (otherlv_3= ',' ( (lv_parameters_4_0= ruleExpressionRule ) ) )* )? otherlv_5= ')' )
+            // InternalInstanceLanguage.g:1177:2: ( ( ( (lv_function_0_0= ruleFunctionNameRule ) ) otherlv_1= '(' ( ( (lv_parameters_2_0= ruleExpressionRule ) ) (otherlv_3= ',' ( (lv_parameters_4_0= ruleExpressionRule ) ) )* )? otherlv_5= ')' ) )
+            // InternalInstanceLanguage.g:1178:2: ( ( (lv_function_0_0= ruleFunctionNameRule ) ) otherlv_1= '(' ( ( (lv_parameters_2_0= ruleExpressionRule ) ) (otherlv_3= ',' ( (lv_parameters_4_0= ruleExpressionRule ) ) )* )? otherlv_5= ')' )
             {
-            // InternalInstanceLanguage.g:1285:2: ( ( (lv_function_0_0= ruleFunctionNameRule ) ) otherlv_1= '(' ( ( (lv_parameters_2_0= ruleExpressionRule ) ) (otherlv_3= ',' ( (lv_parameters_4_0= ruleExpressionRule ) ) )* )? otherlv_5= ')' )
-            // InternalInstanceLanguage.g:1286:3: ( (lv_function_0_0= ruleFunctionNameRule ) ) otherlv_1= '(' ( ( (lv_parameters_2_0= ruleExpressionRule ) ) (otherlv_3= ',' ( (lv_parameters_4_0= ruleExpressionRule ) ) )* )? otherlv_5= ')'
+            // InternalInstanceLanguage.g:1178:2: ( ( (lv_function_0_0= ruleFunctionNameRule ) ) otherlv_1= '(' ( ( (lv_parameters_2_0= ruleExpressionRule ) ) (otherlv_3= ',' ( (lv_parameters_4_0= ruleExpressionRule ) ) )* )? otherlv_5= ')' )
+            // InternalInstanceLanguage.g:1179:3: ( (lv_function_0_0= ruleFunctionNameRule ) ) otherlv_1= '(' ( ( (lv_parameters_2_0= ruleExpressionRule ) ) (otherlv_3= ',' ( (lv_parameters_4_0= ruleExpressionRule ) ) )* )? otherlv_5= ')'
             {
-            // InternalInstanceLanguage.g:1286:3: ( (lv_function_0_0= ruleFunctionNameRule ) )
-            // InternalInstanceLanguage.g:1287:4: (lv_function_0_0= ruleFunctionNameRule )
+            // InternalInstanceLanguage.g:1179:3: ( (lv_function_0_0= ruleFunctionNameRule ) )
+            // InternalInstanceLanguage.g:1180:4: (lv_function_0_0= ruleFunctionNameRule )
             {
-            // InternalInstanceLanguage.g:1287:4: (lv_function_0_0= ruleFunctionNameRule )
-            // InternalInstanceLanguage.g:1288:5: lv_function_0_0= ruleFunctionNameRule
+            // InternalInstanceLanguage.g:1180:4: (lv_function_0_0= ruleFunctionNameRule )
+            // InternalInstanceLanguage.g:1181:5: lv_function_0_0= ruleFunctionNameRule
             {
 
             					newCompositeNode(grammarAccess.getCallRuleAccess().getFunctionFunctionNameRuleParserRuleCall_0_0());
@@ -3528,22 +3205,22 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
             			newLeafNode(otherlv_1, grammarAccess.getCallRuleAccess().getLeftParenthesisKeyword_1());
             		
-            // InternalInstanceLanguage.g:1309:3: ( ( (lv_parameters_2_0= ruleExpressionRule ) ) (otherlv_3= ',' ( (lv_parameters_4_0= ruleExpressionRule ) ) )* )?
-            int alt18=2;
-            int LA18_0 = input.LA(1);
+            // InternalInstanceLanguage.g:1202:3: ( ( (lv_parameters_2_0= ruleExpressionRule ) ) (otherlv_3= ',' ( (lv_parameters_4_0= ruleExpressionRule ) ) )* )?
+            int alt17=2;
+            int LA17_0 = input.LA(1);
 
-            if ( ((LA18_0>=RULE_STRING && LA18_0<=RULE_INT)||LA18_0==26||LA18_0==28||(LA18_0>=30 && LA18_0<=33)||(LA18_0>=40 && LA18_0<=41)) ) {
-                alt18=1;
+            if ( ((LA17_0>=RULE_DOUBLE && LA17_0<=RULE_STRING)||LA17_0==26||LA17_0==28||(LA17_0>=30 && LA17_0<=33)||(LA17_0>=40 && LA17_0<=41)) ) {
+                alt17=1;
             }
-            switch (alt18) {
+            switch (alt17) {
                 case 1 :
-                    // InternalInstanceLanguage.g:1310:4: ( (lv_parameters_2_0= ruleExpressionRule ) ) (otherlv_3= ',' ( (lv_parameters_4_0= ruleExpressionRule ) ) )*
+                    // InternalInstanceLanguage.g:1203:4: ( (lv_parameters_2_0= ruleExpressionRule ) ) (otherlv_3= ',' ( (lv_parameters_4_0= ruleExpressionRule ) ) )*
                     {
-                    // InternalInstanceLanguage.g:1310:4: ( (lv_parameters_2_0= ruleExpressionRule ) )
-                    // InternalInstanceLanguage.g:1311:5: (lv_parameters_2_0= ruleExpressionRule )
+                    // InternalInstanceLanguage.g:1203:4: ( (lv_parameters_2_0= ruleExpressionRule ) )
+                    // InternalInstanceLanguage.g:1204:5: (lv_parameters_2_0= ruleExpressionRule )
                     {
-                    // InternalInstanceLanguage.g:1311:5: (lv_parameters_2_0= ruleExpressionRule )
-                    // InternalInstanceLanguage.g:1312:6: lv_parameters_2_0= ruleExpressionRule
+                    // InternalInstanceLanguage.g:1204:5: (lv_parameters_2_0= ruleExpressionRule )
+                    // InternalInstanceLanguage.g:1205:6: lv_parameters_2_0= ruleExpressionRule
                     {
 
                     						newCompositeNode(grammarAccess.getCallRuleAccess().getParametersExpressionRuleParserRuleCall_2_0_0());
@@ -3570,30 +3247,30 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
                     }
 
-                    // InternalInstanceLanguage.g:1329:4: (otherlv_3= ',' ( (lv_parameters_4_0= ruleExpressionRule ) ) )*
-                    loop17:
+                    // InternalInstanceLanguage.g:1222:4: (otherlv_3= ',' ( (lv_parameters_4_0= ruleExpressionRule ) ) )*
+                    loop16:
                     do {
-                        int alt17=2;
-                        int LA17_0 = input.LA(1);
+                        int alt16=2;
+                        int LA16_0 = input.LA(1);
 
-                        if ( (LA17_0==20) ) {
-                            alt17=1;
+                        if ( (LA16_0==20) ) {
+                            alt16=1;
                         }
 
 
-                        switch (alt17) {
+                        switch (alt16) {
                     	case 1 :
-                    	    // InternalInstanceLanguage.g:1330:5: otherlv_3= ',' ( (lv_parameters_4_0= ruleExpressionRule ) )
+                    	    // InternalInstanceLanguage.g:1223:5: otherlv_3= ',' ( (lv_parameters_4_0= ruleExpressionRule ) )
                     	    {
                     	    otherlv_3=(Token)match(input,20,FOLLOW_12); 
 
                     	    					newLeafNode(otherlv_3, grammarAccess.getCallRuleAccess().getCommaKeyword_2_1_0());
                     	    				
-                    	    // InternalInstanceLanguage.g:1334:5: ( (lv_parameters_4_0= ruleExpressionRule ) )
-                    	    // InternalInstanceLanguage.g:1335:6: (lv_parameters_4_0= ruleExpressionRule )
+                    	    // InternalInstanceLanguage.g:1227:5: ( (lv_parameters_4_0= ruleExpressionRule ) )
+                    	    // InternalInstanceLanguage.g:1228:6: (lv_parameters_4_0= ruleExpressionRule )
                     	    {
-                    	    // InternalInstanceLanguage.g:1335:6: (lv_parameters_4_0= ruleExpressionRule )
-                    	    // InternalInstanceLanguage.g:1336:7: lv_parameters_4_0= ruleExpressionRule
+                    	    // InternalInstanceLanguage.g:1228:6: (lv_parameters_4_0= ruleExpressionRule )
+                    	    // InternalInstanceLanguage.g:1229:7: lv_parameters_4_0= ruleExpressionRule
                     	    {
 
                     	    							newCompositeNode(grammarAccess.getCallRuleAccess().getParametersExpressionRuleParserRuleCall_2_1_1_0());
@@ -3625,7 +3302,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
                     	    break;
 
                     	default :
-                    	    break loop17;
+                    	    break loop16;
                         }
                     } while (true);
 
@@ -3662,7 +3339,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "entryRuleFunctionNameRule"
-    // InternalInstanceLanguage.g:1363:1: entryRuleFunctionNameRule returns [EObject current=null] : iv_ruleFunctionNameRule= ruleFunctionNameRule EOF ;
+    // InternalInstanceLanguage.g:1256:1: entryRuleFunctionNameRule returns [EObject current=null] : iv_ruleFunctionNameRule= ruleFunctionNameRule EOF ;
     public final EObject entryRuleFunctionNameRule() throws RecognitionException {
         EObject current = null;
 
@@ -3670,8 +3347,8 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
         try {
-            // InternalInstanceLanguage.g:1363:57: (iv_ruleFunctionNameRule= ruleFunctionNameRule EOF )
-            // InternalInstanceLanguage.g:1364:2: iv_ruleFunctionNameRule= ruleFunctionNameRule EOF
+            // InternalInstanceLanguage.g:1256:57: (iv_ruleFunctionNameRule= ruleFunctionNameRule EOF )
+            // InternalInstanceLanguage.g:1257:2: iv_ruleFunctionNameRule= ruleFunctionNameRule EOF
             {
              newCompositeNode(grammarAccess.getFunctionNameRuleRule()); 
             pushFollow(FOLLOW_1);
@@ -3698,7 +3375,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "ruleFunctionNameRule"
-    // InternalInstanceLanguage.g:1370:1: ruleFunctionNameRule returns [EObject current=null] : ( () otherlv_1= 'call' ) ;
+    // InternalInstanceLanguage.g:1263:1: ruleFunctionNameRule returns [EObject current=null] : ( () otherlv_1= 'call' ) ;
     public final EObject ruleFunctionNameRule() throws RecognitionException {
         EObject current = null;
 
@@ -3708,14 +3385,14 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
         	enterRule();
 
         try {
-            // InternalInstanceLanguage.g:1376:2: ( ( () otherlv_1= 'call' ) )
-            // InternalInstanceLanguage.g:1377:2: ( () otherlv_1= 'call' )
+            // InternalInstanceLanguage.g:1269:2: ( ( () otherlv_1= 'call' ) )
+            // InternalInstanceLanguage.g:1270:2: ( () otherlv_1= 'call' )
             {
-            // InternalInstanceLanguage.g:1377:2: ( () otherlv_1= 'call' )
-            // InternalInstanceLanguage.g:1378:3: () otherlv_1= 'call'
+            // InternalInstanceLanguage.g:1270:2: ( () otherlv_1= 'call' )
+            // InternalInstanceLanguage.g:1271:3: () otherlv_1= 'call'
             {
-            // InternalInstanceLanguage.g:1378:3: ()
-            // InternalInstanceLanguage.g:1379:4: 
+            // InternalInstanceLanguage.g:1271:3: ()
+            // InternalInstanceLanguage.g:1272:4: 
             {
 
             				current = forceCreateModelElement(
@@ -3752,7 +3429,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "entryRuleValueReferenceRule"
-    // InternalInstanceLanguage.g:1393:1: entryRuleValueReferenceRule returns [EObject current=null] : iv_ruleValueReferenceRule= ruleValueReferenceRule EOF ;
+    // InternalInstanceLanguage.g:1286:1: entryRuleValueReferenceRule returns [EObject current=null] : iv_ruleValueReferenceRule= ruleValueReferenceRule EOF ;
     public final EObject entryRuleValueReferenceRule() throws RecognitionException {
         EObject current = null;
 
@@ -3760,8 +3437,8 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
         try {
-            // InternalInstanceLanguage.g:1393:59: (iv_ruleValueReferenceRule= ruleValueReferenceRule EOF )
-            // InternalInstanceLanguage.g:1394:2: iv_ruleValueReferenceRule= ruleValueReferenceRule EOF
+            // InternalInstanceLanguage.g:1286:59: (iv_ruleValueReferenceRule= ruleValueReferenceRule EOF )
+            // InternalInstanceLanguage.g:1287:2: iv_ruleValueReferenceRule= ruleValueReferenceRule EOF
             {
              newCompositeNode(grammarAccess.getValueReferenceRuleRule()); 
             pushFollow(FOLLOW_1);
@@ -3788,7 +3465,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "ruleValueReferenceRule"
-    // InternalInstanceLanguage.g:1400:1: ruleValueReferenceRule returns [EObject current=null] : ( () otherlv_1= 'value' ) ;
+    // InternalInstanceLanguage.g:1293:1: ruleValueReferenceRule returns [EObject current=null] : ( () otherlv_1= 'value' ) ;
     public final EObject ruleValueReferenceRule() throws RecognitionException {
         EObject current = null;
 
@@ -3798,14 +3475,14 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
         	enterRule();
 
         try {
-            // InternalInstanceLanguage.g:1406:2: ( ( () otherlv_1= 'value' ) )
-            // InternalInstanceLanguage.g:1407:2: ( () otherlv_1= 'value' )
+            // InternalInstanceLanguage.g:1299:2: ( ( () otherlv_1= 'value' ) )
+            // InternalInstanceLanguage.g:1300:2: ( () otherlv_1= 'value' )
             {
-            // InternalInstanceLanguage.g:1407:2: ( () otherlv_1= 'value' )
-            // InternalInstanceLanguage.g:1408:3: () otherlv_1= 'value'
+            // InternalInstanceLanguage.g:1300:2: ( () otherlv_1= 'value' )
+            // InternalInstanceLanguage.g:1301:3: () otherlv_1= 'value'
             {
-            // InternalInstanceLanguage.g:1408:3: ()
-            // InternalInstanceLanguage.g:1409:4: 
+            // InternalInstanceLanguage.g:1301:3: ()
+            // InternalInstanceLanguage.g:1302:4: 
             {
 
             				current = forceCreateModelElement(
@@ -3842,7 +3519,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "entryRuleLiteralRule"
-    // InternalInstanceLanguage.g:1423:1: entryRuleLiteralRule returns [EObject current=null] : iv_ruleLiteralRule= ruleLiteralRule EOF ;
+    // InternalInstanceLanguage.g:1316:1: entryRuleLiteralRule returns [EObject current=null] : iv_ruleLiteralRule= ruleLiteralRule EOF ;
     public final EObject entryRuleLiteralRule() throws RecognitionException {
         EObject current = null;
 
@@ -3850,8 +3527,8 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
         try {
-            // InternalInstanceLanguage.g:1423:52: (iv_ruleLiteralRule= ruleLiteralRule EOF )
-            // InternalInstanceLanguage.g:1424:2: iv_ruleLiteralRule= ruleLiteralRule EOF
+            // InternalInstanceLanguage.g:1316:52: (iv_ruleLiteralRule= ruleLiteralRule EOF )
+            // InternalInstanceLanguage.g:1317:2: iv_ruleLiteralRule= ruleLiteralRule EOF
             {
              newCompositeNode(grammarAccess.getLiteralRuleRule()); 
             pushFollow(FOLLOW_1);
@@ -3878,7 +3555,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "ruleLiteralRule"
-    // InternalInstanceLanguage.g:1430:1: ruleLiteralRule returns [EObject current=null] : (this_NumberLiteralRule_0= ruleNumberLiteralRule | this_StringLiteralRule_1= ruleStringLiteralRule | this_BooleanLiteralRule_2= ruleBooleanLiteralRule ) ;
+    // InternalInstanceLanguage.g:1323:1: ruleLiteralRule returns [EObject current=null] : (this_NumberLiteralRule_0= ruleNumberLiteralRule | this_StringLiteralRule_1= ruleStringLiteralRule | this_BooleanLiteralRule_2= ruleBooleanLiteralRule ) ;
     public final EObject ruleLiteralRule() throws RecognitionException {
         EObject current = null;
 
@@ -3893,39 +3570,39 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
         	enterRule();
 
         try {
-            // InternalInstanceLanguage.g:1436:2: ( (this_NumberLiteralRule_0= ruleNumberLiteralRule | this_StringLiteralRule_1= ruleStringLiteralRule | this_BooleanLiteralRule_2= ruleBooleanLiteralRule ) )
-            // InternalInstanceLanguage.g:1437:2: (this_NumberLiteralRule_0= ruleNumberLiteralRule | this_StringLiteralRule_1= ruleStringLiteralRule | this_BooleanLiteralRule_2= ruleBooleanLiteralRule )
+            // InternalInstanceLanguage.g:1329:2: ( (this_NumberLiteralRule_0= ruleNumberLiteralRule | this_StringLiteralRule_1= ruleStringLiteralRule | this_BooleanLiteralRule_2= ruleBooleanLiteralRule ) )
+            // InternalInstanceLanguage.g:1330:2: (this_NumberLiteralRule_0= ruleNumberLiteralRule | this_StringLiteralRule_1= ruleStringLiteralRule | this_BooleanLiteralRule_2= ruleBooleanLiteralRule )
             {
-            // InternalInstanceLanguage.g:1437:2: (this_NumberLiteralRule_0= ruleNumberLiteralRule | this_StringLiteralRule_1= ruleStringLiteralRule | this_BooleanLiteralRule_2= ruleBooleanLiteralRule )
-            int alt19=3;
+            // InternalInstanceLanguage.g:1330:2: (this_NumberLiteralRule_0= ruleNumberLiteralRule | this_StringLiteralRule_1= ruleStringLiteralRule | this_BooleanLiteralRule_2= ruleBooleanLiteralRule )
+            int alt18=3;
             switch ( input.LA(1) ) {
             case RULE_DOUBLE:
             case RULE_INT:
                 {
-                alt19=1;
+                alt18=1;
                 }
                 break;
             case RULE_STRING:
                 {
-                alt19=2;
+                alt18=2;
                 }
                 break;
             case 32:
             case 33:
                 {
-                alt19=3;
+                alt18=3;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 19, 0, input);
+                    new NoViableAltException("", 18, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt19) {
+            switch (alt18) {
                 case 1 :
-                    // InternalInstanceLanguage.g:1438:3: this_NumberLiteralRule_0= ruleNumberLiteralRule
+                    // InternalInstanceLanguage.g:1331:3: this_NumberLiteralRule_0= ruleNumberLiteralRule
                     {
 
                     			newCompositeNode(grammarAccess.getLiteralRuleAccess().getNumberLiteralRuleParserRuleCall_0());
@@ -3943,7 +3620,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 2 :
-                    // InternalInstanceLanguage.g:1447:3: this_StringLiteralRule_1= ruleStringLiteralRule
+                    // InternalInstanceLanguage.g:1340:3: this_StringLiteralRule_1= ruleStringLiteralRule
                     {
 
                     			newCompositeNode(grammarAccess.getLiteralRuleAccess().getStringLiteralRuleParserRuleCall_1());
@@ -3961,7 +3638,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 3 :
-                    // InternalInstanceLanguage.g:1456:3: this_BooleanLiteralRule_2= ruleBooleanLiteralRule
+                    // InternalInstanceLanguage.g:1349:3: this_BooleanLiteralRule_2= ruleBooleanLiteralRule
                     {
 
                     			newCompositeNode(grammarAccess.getLiteralRuleAccess().getBooleanLiteralRuleParserRuleCall_2());
@@ -4001,7 +3678,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "entryRuleNumberLiteralRule"
-    // InternalInstanceLanguage.g:1468:1: entryRuleNumberLiteralRule returns [EObject current=null] : iv_ruleNumberLiteralRule= ruleNumberLiteralRule EOF ;
+    // InternalInstanceLanguage.g:1361:1: entryRuleNumberLiteralRule returns [EObject current=null] : iv_ruleNumberLiteralRule= ruleNumberLiteralRule EOF ;
     public final EObject entryRuleNumberLiteralRule() throws RecognitionException {
         EObject current = null;
 
@@ -4009,8 +3686,8 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
         try {
-            // InternalInstanceLanguage.g:1468:58: (iv_ruleNumberLiteralRule= ruleNumberLiteralRule EOF )
-            // InternalInstanceLanguage.g:1469:2: iv_ruleNumberLiteralRule= ruleNumberLiteralRule EOF
+            // InternalInstanceLanguage.g:1361:58: (iv_ruleNumberLiteralRule= ruleNumberLiteralRule EOF )
+            // InternalInstanceLanguage.g:1362:2: iv_ruleNumberLiteralRule= ruleNumberLiteralRule EOF
             {
              newCompositeNode(grammarAccess.getNumberLiteralRuleRule()); 
             pushFollow(FOLLOW_1);
@@ -4037,7 +3714,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "ruleNumberLiteralRule"
-    // InternalInstanceLanguage.g:1475:1: ruleNumberLiteralRule returns [EObject current=null] : (this_DoubleLiteralRule_0= ruleDoubleLiteralRule | this_IntegerLiteralRule_1= ruleIntegerLiteralRule ) ;
+    // InternalInstanceLanguage.g:1368:1: ruleNumberLiteralRule returns [EObject current=null] : (this_DoubleLiteralRule_0= ruleDoubleLiteralRule | this_IntegerLiteralRule_1= ruleIntegerLiteralRule ) ;
     public final EObject ruleNumberLiteralRule() throws RecognitionException {
         EObject current = null;
 
@@ -4050,28 +3727,28 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
         	enterRule();
 
         try {
-            // InternalInstanceLanguage.g:1481:2: ( (this_DoubleLiteralRule_0= ruleDoubleLiteralRule | this_IntegerLiteralRule_1= ruleIntegerLiteralRule ) )
-            // InternalInstanceLanguage.g:1482:2: (this_DoubleLiteralRule_0= ruleDoubleLiteralRule | this_IntegerLiteralRule_1= ruleIntegerLiteralRule )
+            // InternalInstanceLanguage.g:1374:2: ( (this_DoubleLiteralRule_0= ruleDoubleLiteralRule | this_IntegerLiteralRule_1= ruleIntegerLiteralRule ) )
+            // InternalInstanceLanguage.g:1375:2: (this_DoubleLiteralRule_0= ruleDoubleLiteralRule | this_IntegerLiteralRule_1= ruleIntegerLiteralRule )
             {
-            // InternalInstanceLanguage.g:1482:2: (this_DoubleLiteralRule_0= ruleDoubleLiteralRule | this_IntegerLiteralRule_1= ruleIntegerLiteralRule )
-            int alt20=2;
-            int LA20_0 = input.LA(1);
+            // InternalInstanceLanguage.g:1375:2: (this_DoubleLiteralRule_0= ruleDoubleLiteralRule | this_IntegerLiteralRule_1= ruleIntegerLiteralRule )
+            int alt19=2;
+            int LA19_0 = input.LA(1);
 
-            if ( (LA20_0==RULE_DOUBLE) ) {
-                alt20=1;
+            if ( (LA19_0==RULE_DOUBLE) ) {
+                alt19=1;
             }
-            else if ( (LA20_0==RULE_INT) ) {
-                alt20=2;
+            else if ( (LA19_0==RULE_INT) ) {
+                alt19=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 20, 0, input);
+                    new NoViableAltException("", 19, 0, input);
 
                 throw nvae;
             }
-            switch (alt20) {
+            switch (alt19) {
                 case 1 :
-                    // InternalInstanceLanguage.g:1483:3: this_DoubleLiteralRule_0= ruleDoubleLiteralRule
+                    // InternalInstanceLanguage.g:1376:3: this_DoubleLiteralRule_0= ruleDoubleLiteralRule
                     {
 
                     			newCompositeNode(grammarAccess.getNumberLiteralRuleAccess().getDoubleLiteralRuleParserRuleCall_0());
@@ -4089,7 +3766,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 2 :
-                    // InternalInstanceLanguage.g:1492:3: this_IntegerLiteralRule_1= ruleIntegerLiteralRule
+                    // InternalInstanceLanguage.g:1385:3: this_IntegerLiteralRule_1= ruleIntegerLiteralRule
                     {
 
                     			newCompositeNode(grammarAccess.getNumberLiteralRuleAccess().getIntegerLiteralRuleParserRuleCall_1());
@@ -4129,7 +3806,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "entryRuleDoubleLiteralRule"
-    // InternalInstanceLanguage.g:1504:1: entryRuleDoubleLiteralRule returns [EObject current=null] : iv_ruleDoubleLiteralRule= ruleDoubleLiteralRule EOF ;
+    // InternalInstanceLanguage.g:1397:1: entryRuleDoubleLiteralRule returns [EObject current=null] : iv_ruleDoubleLiteralRule= ruleDoubleLiteralRule EOF ;
     public final EObject entryRuleDoubleLiteralRule() throws RecognitionException {
         EObject current = null;
 
@@ -4137,8 +3814,8 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
         try {
-            // InternalInstanceLanguage.g:1504:58: (iv_ruleDoubleLiteralRule= ruleDoubleLiteralRule EOF )
-            // InternalInstanceLanguage.g:1505:2: iv_ruleDoubleLiteralRule= ruleDoubleLiteralRule EOF
+            // InternalInstanceLanguage.g:1397:58: (iv_ruleDoubleLiteralRule= ruleDoubleLiteralRule EOF )
+            // InternalInstanceLanguage.g:1398:2: iv_ruleDoubleLiteralRule= ruleDoubleLiteralRule EOF
             {
              newCompositeNode(grammarAccess.getDoubleLiteralRuleRule()); 
             pushFollow(FOLLOW_1);
@@ -4165,7 +3842,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "ruleDoubleLiteralRule"
-    // InternalInstanceLanguage.g:1511:1: ruleDoubleLiteralRule returns [EObject current=null] : ( ( (lv_literal_0_0= RULE_DOUBLE ) ) ( (lv_factor_1_0= ruleFactorRule ) )? ) ;
+    // InternalInstanceLanguage.g:1404:1: ruleDoubleLiteralRule returns [EObject current=null] : ( ( (lv_literal_0_0= RULE_DOUBLE ) ) ( (lv_factor_1_0= ruleFactorRule ) )? ) ;
     public final EObject ruleDoubleLiteralRule() throws RecognitionException {
         EObject current = null;
 
@@ -4177,17 +3854,17 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
         	enterRule();
 
         try {
-            // InternalInstanceLanguage.g:1517:2: ( ( ( (lv_literal_0_0= RULE_DOUBLE ) ) ( (lv_factor_1_0= ruleFactorRule ) )? ) )
-            // InternalInstanceLanguage.g:1518:2: ( ( (lv_literal_0_0= RULE_DOUBLE ) ) ( (lv_factor_1_0= ruleFactorRule ) )? )
+            // InternalInstanceLanguage.g:1410:2: ( ( ( (lv_literal_0_0= RULE_DOUBLE ) ) ( (lv_factor_1_0= ruleFactorRule ) )? ) )
+            // InternalInstanceLanguage.g:1411:2: ( ( (lv_literal_0_0= RULE_DOUBLE ) ) ( (lv_factor_1_0= ruleFactorRule ) )? )
             {
-            // InternalInstanceLanguage.g:1518:2: ( ( (lv_literal_0_0= RULE_DOUBLE ) ) ( (lv_factor_1_0= ruleFactorRule ) )? )
-            // InternalInstanceLanguage.g:1519:3: ( (lv_literal_0_0= RULE_DOUBLE ) ) ( (lv_factor_1_0= ruleFactorRule ) )?
+            // InternalInstanceLanguage.g:1411:2: ( ( (lv_literal_0_0= RULE_DOUBLE ) ) ( (lv_factor_1_0= ruleFactorRule ) )? )
+            // InternalInstanceLanguage.g:1412:3: ( (lv_literal_0_0= RULE_DOUBLE ) ) ( (lv_factor_1_0= ruleFactorRule ) )?
             {
-            // InternalInstanceLanguage.g:1519:3: ( (lv_literal_0_0= RULE_DOUBLE ) )
-            // InternalInstanceLanguage.g:1520:4: (lv_literal_0_0= RULE_DOUBLE )
+            // InternalInstanceLanguage.g:1412:3: ( (lv_literal_0_0= RULE_DOUBLE ) )
+            // InternalInstanceLanguage.g:1413:4: (lv_literal_0_0= RULE_DOUBLE )
             {
-            // InternalInstanceLanguage.g:1520:4: (lv_literal_0_0= RULE_DOUBLE )
-            // InternalInstanceLanguage.g:1521:5: lv_literal_0_0= RULE_DOUBLE
+            // InternalInstanceLanguage.g:1413:4: (lv_literal_0_0= RULE_DOUBLE )
+            // InternalInstanceLanguage.g:1414:5: lv_literal_0_0= RULE_DOUBLE
             {
             lv_literal_0_0=(Token)match(input,RULE_DOUBLE,FOLLOW_23); 
 
@@ -4209,19 +3886,19 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
             }
 
-            // InternalInstanceLanguage.g:1537:3: ( (lv_factor_1_0= ruleFactorRule ) )?
-            int alt21=2;
-            int LA21_0 = input.LA(1);
+            // InternalInstanceLanguage.g:1430:3: ( (lv_factor_1_0= ruleFactorRule ) )?
+            int alt20=2;
+            int LA20_0 = input.LA(1);
 
-            if ( ((LA21_0>=45 && LA21_0<=64)) ) {
-                alt21=1;
+            if ( ((LA20_0>=45 && LA20_0<=64)) ) {
+                alt20=1;
             }
-            switch (alt21) {
+            switch (alt20) {
                 case 1 :
-                    // InternalInstanceLanguage.g:1538:4: (lv_factor_1_0= ruleFactorRule )
+                    // InternalInstanceLanguage.g:1431:4: (lv_factor_1_0= ruleFactorRule )
                     {
-                    // InternalInstanceLanguage.g:1538:4: (lv_factor_1_0= ruleFactorRule )
-                    // InternalInstanceLanguage.g:1539:5: lv_factor_1_0= ruleFactorRule
+                    // InternalInstanceLanguage.g:1431:4: (lv_factor_1_0= ruleFactorRule )
+                    // InternalInstanceLanguage.g:1432:5: lv_factor_1_0= ruleFactorRule
                     {
 
                     					newCompositeNode(grammarAccess.getDoubleLiteralRuleAccess().getFactorFactorRuleEnumRuleCall_1_0());
@@ -4274,7 +3951,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "entryRuleIntegerLiteralRule"
-    // InternalInstanceLanguage.g:1560:1: entryRuleIntegerLiteralRule returns [EObject current=null] : iv_ruleIntegerLiteralRule= ruleIntegerLiteralRule EOF ;
+    // InternalInstanceLanguage.g:1453:1: entryRuleIntegerLiteralRule returns [EObject current=null] : iv_ruleIntegerLiteralRule= ruleIntegerLiteralRule EOF ;
     public final EObject entryRuleIntegerLiteralRule() throws RecognitionException {
         EObject current = null;
 
@@ -4282,8 +3959,8 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
         try {
-            // InternalInstanceLanguage.g:1560:59: (iv_ruleIntegerLiteralRule= ruleIntegerLiteralRule EOF )
-            // InternalInstanceLanguage.g:1561:2: iv_ruleIntegerLiteralRule= ruleIntegerLiteralRule EOF
+            // InternalInstanceLanguage.g:1453:59: (iv_ruleIntegerLiteralRule= ruleIntegerLiteralRule EOF )
+            // InternalInstanceLanguage.g:1454:2: iv_ruleIntegerLiteralRule= ruleIntegerLiteralRule EOF
             {
              newCompositeNode(grammarAccess.getIntegerLiteralRuleRule()); 
             pushFollow(FOLLOW_1);
@@ -4310,7 +3987,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "ruleIntegerLiteralRule"
-    // InternalInstanceLanguage.g:1567:1: ruleIntegerLiteralRule returns [EObject current=null] : ( ( (lv_literal_0_0= RULE_INT ) ) ( (lv_factor_1_0= ruleFactorRule ) )? ) ;
+    // InternalInstanceLanguage.g:1460:1: ruleIntegerLiteralRule returns [EObject current=null] : ( ( (lv_literal_0_0= RULE_INT ) ) ( (lv_factor_1_0= ruleFactorRule ) )? ) ;
     public final EObject ruleIntegerLiteralRule() throws RecognitionException {
         EObject current = null;
 
@@ -4322,17 +3999,17 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
         	enterRule();
 
         try {
-            // InternalInstanceLanguage.g:1573:2: ( ( ( (lv_literal_0_0= RULE_INT ) ) ( (lv_factor_1_0= ruleFactorRule ) )? ) )
-            // InternalInstanceLanguage.g:1574:2: ( ( (lv_literal_0_0= RULE_INT ) ) ( (lv_factor_1_0= ruleFactorRule ) )? )
+            // InternalInstanceLanguage.g:1466:2: ( ( ( (lv_literal_0_0= RULE_INT ) ) ( (lv_factor_1_0= ruleFactorRule ) )? ) )
+            // InternalInstanceLanguage.g:1467:2: ( ( (lv_literal_0_0= RULE_INT ) ) ( (lv_factor_1_0= ruleFactorRule ) )? )
             {
-            // InternalInstanceLanguage.g:1574:2: ( ( (lv_literal_0_0= RULE_INT ) ) ( (lv_factor_1_0= ruleFactorRule ) )? )
-            // InternalInstanceLanguage.g:1575:3: ( (lv_literal_0_0= RULE_INT ) ) ( (lv_factor_1_0= ruleFactorRule ) )?
+            // InternalInstanceLanguage.g:1467:2: ( ( (lv_literal_0_0= RULE_INT ) ) ( (lv_factor_1_0= ruleFactorRule ) )? )
+            // InternalInstanceLanguage.g:1468:3: ( (lv_literal_0_0= RULE_INT ) ) ( (lv_factor_1_0= ruleFactorRule ) )?
             {
-            // InternalInstanceLanguage.g:1575:3: ( (lv_literal_0_0= RULE_INT ) )
-            // InternalInstanceLanguage.g:1576:4: (lv_literal_0_0= RULE_INT )
+            // InternalInstanceLanguage.g:1468:3: ( (lv_literal_0_0= RULE_INT ) )
+            // InternalInstanceLanguage.g:1469:4: (lv_literal_0_0= RULE_INT )
             {
-            // InternalInstanceLanguage.g:1576:4: (lv_literal_0_0= RULE_INT )
-            // InternalInstanceLanguage.g:1577:5: lv_literal_0_0= RULE_INT
+            // InternalInstanceLanguage.g:1469:4: (lv_literal_0_0= RULE_INT )
+            // InternalInstanceLanguage.g:1470:5: lv_literal_0_0= RULE_INT
             {
             lv_literal_0_0=(Token)match(input,RULE_INT,FOLLOW_23); 
 
@@ -4354,19 +4031,19 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
             }
 
-            // InternalInstanceLanguage.g:1593:3: ( (lv_factor_1_0= ruleFactorRule ) )?
-            int alt22=2;
-            int LA22_0 = input.LA(1);
+            // InternalInstanceLanguage.g:1486:3: ( (lv_factor_1_0= ruleFactorRule ) )?
+            int alt21=2;
+            int LA21_0 = input.LA(1);
 
-            if ( ((LA22_0>=45 && LA22_0<=64)) ) {
-                alt22=1;
+            if ( ((LA21_0>=45 && LA21_0<=64)) ) {
+                alt21=1;
             }
-            switch (alt22) {
+            switch (alt21) {
                 case 1 :
-                    // InternalInstanceLanguage.g:1594:4: (lv_factor_1_0= ruleFactorRule )
+                    // InternalInstanceLanguage.g:1487:4: (lv_factor_1_0= ruleFactorRule )
                     {
-                    // InternalInstanceLanguage.g:1594:4: (lv_factor_1_0= ruleFactorRule )
-                    // InternalInstanceLanguage.g:1595:5: lv_factor_1_0= ruleFactorRule
+                    // InternalInstanceLanguage.g:1487:4: (lv_factor_1_0= ruleFactorRule )
+                    // InternalInstanceLanguage.g:1488:5: lv_factor_1_0= ruleFactorRule
                     {
 
                     					newCompositeNode(grammarAccess.getIntegerLiteralRuleAccess().getFactorFactorRuleEnumRuleCall_1_0());
@@ -4419,7 +4096,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "entryRuleStringLiteralRule"
-    // InternalInstanceLanguage.g:1616:1: entryRuleStringLiteralRule returns [EObject current=null] : iv_ruleStringLiteralRule= ruleStringLiteralRule EOF ;
+    // InternalInstanceLanguage.g:1509:1: entryRuleStringLiteralRule returns [EObject current=null] : iv_ruleStringLiteralRule= ruleStringLiteralRule EOF ;
     public final EObject entryRuleStringLiteralRule() throws RecognitionException {
         EObject current = null;
 
@@ -4427,8 +4104,8 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
         try {
-            // InternalInstanceLanguage.g:1616:58: (iv_ruleStringLiteralRule= ruleStringLiteralRule EOF )
-            // InternalInstanceLanguage.g:1617:2: iv_ruleStringLiteralRule= ruleStringLiteralRule EOF
+            // InternalInstanceLanguage.g:1509:58: (iv_ruleStringLiteralRule= ruleStringLiteralRule EOF )
+            // InternalInstanceLanguage.g:1510:2: iv_ruleStringLiteralRule= ruleStringLiteralRule EOF
             {
              newCompositeNode(grammarAccess.getStringLiteralRuleRule()); 
             pushFollow(FOLLOW_1);
@@ -4455,7 +4132,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "ruleStringLiteralRule"
-    // InternalInstanceLanguage.g:1623:1: ruleStringLiteralRule returns [EObject current=null] : ( (lv_value_0_0= RULE_STRING ) ) ;
+    // InternalInstanceLanguage.g:1516:1: ruleStringLiteralRule returns [EObject current=null] : ( (lv_value_0_0= RULE_STRING ) ) ;
     public final EObject ruleStringLiteralRule() throws RecognitionException {
         EObject current = null;
 
@@ -4465,14 +4142,14 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
         	enterRule();
 
         try {
-            // InternalInstanceLanguage.g:1629:2: ( ( (lv_value_0_0= RULE_STRING ) ) )
-            // InternalInstanceLanguage.g:1630:2: ( (lv_value_0_0= RULE_STRING ) )
+            // InternalInstanceLanguage.g:1522:2: ( ( (lv_value_0_0= RULE_STRING ) ) )
+            // InternalInstanceLanguage.g:1523:2: ( (lv_value_0_0= RULE_STRING ) )
             {
-            // InternalInstanceLanguage.g:1630:2: ( (lv_value_0_0= RULE_STRING ) )
-            // InternalInstanceLanguage.g:1631:3: (lv_value_0_0= RULE_STRING )
+            // InternalInstanceLanguage.g:1523:2: ( (lv_value_0_0= RULE_STRING ) )
+            // InternalInstanceLanguage.g:1524:3: (lv_value_0_0= RULE_STRING )
             {
-            // InternalInstanceLanguage.g:1631:3: (lv_value_0_0= RULE_STRING )
-            // InternalInstanceLanguage.g:1632:4: lv_value_0_0= RULE_STRING
+            // InternalInstanceLanguage.g:1524:3: (lv_value_0_0= RULE_STRING )
+            // InternalInstanceLanguage.g:1525:4: lv_value_0_0= RULE_STRING
             {
             lv_value_0_0=(Token)match(input,RULE_STRING,FOLLOW_2); 
 
@@ -4514,7 +4191,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "entryRuleBooleanLiteralRule"
-    // InternalInstanceLanguage.g:1651:1: entryRuleBooleanLiteralRule returns [EObject current=null] : iv_ruleBooleanLiteralRule= ruleBooleanLiteralRule EOF ;
+    // InternalInstanceLanguage.g:1544:1: entryRuleBooleanLiteralRule returns [EObject current=null] : iv_ruleBooleanLiteralRule= ruleBooleanLiteralRule EOF ;
     public final EObject entryRuleBooleanLiteralRule() throws RecognitionException {
         EObject current = null;
 
@@ -4522,8 +4199,8 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
         try {
-            // InternalInstanceLanguage.g:1651:59: (iv_ruleBooleanLiteralRule= ruleBooleanLiteralRule EOF )
-            // InternalInstanceLanguage.g:1652:2: iv_ruleBooleanLiteralRule= ruleBooleanLiteralRule EOF
+            // InternalInstanceLanguage.g:1544:59: (iv_ruleBooleanLiteralRule= ruleBooleanLiteralRule EOF )
+            // InternalInstanceLanguage.g:1545:2: iv_ruleBooleanLiteralRule= ruleBooleanLiteralRule EOF
             {
              newCompositeNode(grammarAccess.getBooleanLiteralRuleRule()); 
             pushFollow(FOLLOW_1);
@@ -4550,7 +4227,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "ruleBooleanLiteralRule"
-    // InternalInstanceLanguage.g:1658:1: ruleBooleanLiteralRule returns [EObject current=null] : ( () ( ( (lv_value_1_0= 'true' ) ) | otherlv_2= 'false' ) ) ;
+    // InternalInstanceLanguage.g:1551:1: ruleBooleanLiteralRule returns [EObject current=null] : ( () ( ( (lv_value_1_0= 'true' ) ) | otherlv_2= 'false' ) ) ;
     public final EObject ruleBooleanLiteralRule() throws RecognitionException {
         EObject current = null;
 
@@ -4561,14 +4238,14 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
         	enterRule();
 
         try {
-            // InternalInstanceLanguage.g:1664:2: ( ( () ( ( (lv_value_1_0= 'true' ) ) | otherlv_2= 'false' ) ) )
-            // InternalInstanceLanguage.g:1665:2: ( () ( ( (lv_value_1_0= 'true' ) ) | otherlv_2= 'false' ) )
+            // InternalInstanceLanguage.g:1557:2: ( ( () ( ( (lv_value_1_0= 'true' ) ) | otherlv_2= 'false' ) ) )
+            // InternalInstanceLanguage.g:1558:2: ( () ( ( (lv_value_1_0= 'true' ) ) | otherlv_2= 'false' ) )
             {
-            // InternalInstanceLanguage.g:1665:2: ( () ( ( (lv_value_1_0= 'true' ) ) | otherlv_2= 'false' ) )
-            // InternalInstanceLanguage.g:1666:3: () ( ( (lv_value_1_0= 'true' ) ) | otherlv_2= 'false' )
+            // InternalInstanceLanguage.g:1558:2: ( () ( ( (lv_value_1_0= 'true' ) ) | otherlv_2= 'false' ) )
+            // InternalInstanceLanguage.g:1559:3: () ( ( (lv_value_1_0= 'true' ) ) | otherlv_2= 'false' )
             {
-            // InternalInstanceLanguage.g:1666:3: ()
-            // InternalInstanceLanguage.g:1667:4: 
+            // InternalInstanceLanguage.g:1559:3: ()
+            // InternalInstanceLanguage.g:1560:4: 
             {
 
             				current = forceCreateModelElement(
@@ -4578,31 +4255,31 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
             }
 
-            // InternalInstanceLanguage.g:1673:3: ( ( (lv_value_1_0= 'true' ) ) | otherlv_2= 'false' )
-            int alt23=2;
-            int LA23_0 = input.LA(1);
+            // InternalInstanceLanguage.g:1566:3: ( ( (lv_value_1_0= 'true' ) ) | otherlv_2= 'false' )
+            int alt22=2;
+            int LA22_0 = input.LA(1);
 
-            if ( (LA23_0==32) ) {
-                alt23=1;
+            if ( (LA22_0==32) ) {
+                alt22=1;
             }
-            else if ( (LA23_0==33) ) {
-                alt23=2;
+            else if ( (LA22_0==33) ) {
+                alt22=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 23, 0, input);
+                    new NoViableAltException("", 22, 0, input);
 
                 throw nvae;
             }
-            switch (alt23) {
+            switch (alt22) {
                 case 1 :
-                    // InternalInstanceLanguage.g:1674:4: ( (lv_value_1_0= 'true' ) )
+                    // InternalInstanceLanguage.g:1567:4: ( (lv_value_1_0= 'true' ) )
                     {
-                    // InternalInstanceLanguage.g:1674:4: ( (lv_value_1_0= 'true' ) )
-                    // InternalInstanceLanguage.g:1675:5: (lv_value_1_0= 'true' )
+                    // InternalInstanceLanguage.g:1567:4: ( (lv_value_1_0= 'true' ) )
+                    // InternalInstanceLanguage.g:1568:5: (lv_value_1_0= 'true' )
                     {
-                    // InternalInstanceLanguage.g:1675:5: (lv_value_1_0= 'true' )
-                    // InternalInstanceLanguage.g:1676:6: lv_value_1_0= 'true'
+                    // InternalInstanceLanguage.g:1568:5: (lv_value_1_0= 'true' )
+                    // InternalInstanceLanguage.g:1569:6: lv_value_1_0= 'true'
                     {
                     lv_value_1_0=(Token)match(input,32,FOLLOW_2); 
 
@@ -4624,7 +4301,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 2 :
-                    // InternalInstanceLanguage.g:1689:4: otherlv_2= 'false'
+                    // InternalInstanceLanguage.g:1582:4: otherlv_2= 'false'
                     {
                     otherlv_2=(Token)match(input,33,FOLLOW_2); 
 
@@ -4659,7 +4336,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "entryRuleStringOrId"
-    // InternalInstanceLanguage.g:1698:1: entryRuleStringOrId returns [String current=null] : iv_ruleStringOrId= ruleStringOrId EOF ;
+    // InternalInstanceLanguage.g:1591:1: entryRuleStringOrId returns [String current=null] : iv_ruleStringOrId= ruleStringOrId EOF ;
     public final String entryRuleStringOrId() throws RecognitionException {
         String current = null;
 
@@ -4667,8 +4344,8 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
         try {
-            // InternalInstanceLanguage.g:1698:50: (iv_ruleStringOrId= ruleStringOrId EOF )
-            // InternalInstanceLanguage.g:1699:2: iv_ruleStringOrId= ruleStringOrId EOF
+            // InternalInstanceLanguage.g:1591:50: (iv_ruleStringOrId= ruleStringOrId EOF )
+            // InternalInstanceLanguage.g:1592:2: iv_ruleStringOrId= ruleStringOrId EOF
             {
              newCompositeNode(grammarAccess.getStringOrIdRule()); 
             pushFollow(FOLLOW_1);
@@ -4695,7 +4372,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "ruleStringOrId"
-    // InternalInstanceLanguage.g:1705:1: ruleStringOrId returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_QUOTED_ID_0= RULE_QUOTED_ID | this_ID_1= RULE_ID ) ;
+    // InternalInstanceLanguage.g:1598:1: ruleStringOrId returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_QUOTED_ID_0= RULE_QUOTED_ID | this_ID_1= RULE_ID ) ;
     public final AntlrDatatypeRuleToken ruleStringOrId() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -4706,28 +4383,28 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
         	enterRule();
 
         try {
-            // InternalInstanceLanguage.g:1711:2: ( (this_QUOTED_ID_0= RULE_QUOTED_ID | this_ID_1= RULE_ID ) )
-            // InternalInstanceLanguage.g:1712:2: (this_QUOTED_ID_0= RULE_QUOTED_ID | this_ID_1= RULE_ID )
+            // InternalInstanceLanguage.g:1604:2: ( (this_QUOTED_ID_0= RULE_QUOTED_ID | this_ID_1= RULE_ID ) )
+            // InternalInstanceLanguage.g:1605:2: (this_QUOTED_ID_0= RULE_QUOTED_ID | this_ID_1= RULE_ID )
             {
-            // InternalInstanceLanguage.g:1712:2: (this_QUOTED_ID_0= RULE_QUOTED_ID | this_ID_1= RULE_ID )
-            int alt24=2;
-            int LA24_0 = input.LA(1);
+            // InternalInstanceLanguage.g:1605:2: (this_QUOTED_ID_0= RULE_QUOTED_ID | this_ID_1= RULE_ID )
+            int alt23=2;
+            int LA23_0 = input.LA(1);
 
-            if ( (LA24_0==RULE_QUOTED_ID) ) {
-                alt24=1;
+            if ( (LA23_0==RULE_QUOTED_ID) ) {
+                alt23=1;
             }
-            else if ( (LA24_0==RULE_ID) ) {
-                alt24=2;
+            else if ( (LA23_0==RULE_ID) ) {
+                alt23=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 24, 0, input);
+                    new NoViableAltException("", 23, 0, input);
 
                 throw nvae;
             }
-            switch (alt24) {
+            switch (alt23) {
                 case 1 :
-                    // InternalInstanceLanguage.g:1713:3: this_QUOTED_ID_0= RULE_QUOTED_ID
+                    // InternalInstanceLanguage.g:1606:3: this_QUOTED_ID_0= RULE_QUOTED_ID
                     {
                     this_QUOTED_ID_0=(Token)match(input,RULE_QUOTED_ID,FOLLOW_2); 
 
@@ -4740,7 +4417,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 2 :
-                    // InternalInstanceLanguage.g:1721:3: this_ID_1= RULE_ID
+                    // InternalInstanceLanguage.g:1614:3: this_ID_1= RULE_ID
                     {
                     this_ID_1=(Token)match(input,RULE_ID,FOLLOW_2); 
 
@@ -4775,7 +4452,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "ruleComparisonOperatorRule"
-    // InternalInstanceLanguage.g:1732:1: ruleComparisonOperatorRule returns [Enumerator current=null] : ( (enumLiteral_0= '>=' ) | (enumLiteral_1= '>' ) | (enumLiteral_2= '=' ) | (enumLiteral_3= '!=' ) | (enumLiteral_4= '<' ) | (enumLiteral_5= '<=' ) ) ;
+    // InternalInstanceLanguage.g:1625:1: ruleComparisonOperatorRule returns [Enumerator current=null] : ( (enumLiteral_0= '>=' ) | (enumLiteral_1= '>' ) | (enumLiteral_2= '=' ) | (enumLiteral_3= '!=' ) | (enumLiteral_4= '<' ) | (enumLiteral_5= '<=' ) ) ;
     public final Enumerator ruleComparisonOperatorRule() throws RecognitionException {
         Enumerator current = null;
 
@@ -4790,55 +4467,55 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
         	enterRule();
 
         try {
-            // InternalInstanceLanguage.g:1738:2: ( ( (enumLiteral_0= '>=' ) | (enumLiteral_1= '>' ) | (enumLiteral_2= '=' ) | (enumLiteral_3= '!=' ) | (enumLiteral_4= '<' ) | (enumLiteral_5= '<=' ) ) )
-            // InternalInstanceLanguage.g:1739:2: ( (enumLiteral_0= '>=' ) | (enumLiteral_1= '>' ) | (enumLiteral_2= '=' ) | (enumLiteral_3= '!=' ) | (enumLiteral_4= '<' ) | (enumLiteral_5= '<=' ) )
+            // InternalInstanceLanguage.g:1631:2: ( ( (enumLiteral_0= '>=' ) | (enumLiteral_1= '>' ) | (enumLiteral_2= '=' ) | (enumLiteral_3= '!=' ) | (enumLiteral_4= '<' ) | (enumLiteral_5= '<=' ) ) )
+            // InternalInstanceLanguage.g:1632:2: ( (enumLiteral_0= '>=' ) | (enumLiteral_1= '>' ) | (enumLiteral_2= '=' ) | (enumLiteral_3= '!=' ) | (enumLiteral_4= '<' ) | (enumLiteral_5= '<=' ) )
             {
-            // InternalInstanceLanguage.g:1739:2: ( (enumLiteral_0= '>=' ) | (enumLiteral_1= '>' ) | (enumLiteral_2= '=' ) | (enumLiteral_3= '!=' ) | (enumLiteral_4= '<' ) | (enumLiteral_5= '<=' ) )
-            int alt25=6;
+            // InternalInstanceLanguage.g:1632:2: ( (enumLiteral_0= '>=' ) | (enumLiteral_1= '>' ) | (enumLiteral_2= '=' ) | (enumLiteral_3= '!=' ) | (enumLiteral_4= '<' ) | (enumLiteral_5= '<=' ) )
+            int alt24=6;
             switch ( input.LA(1) ) {
             case 34:
                 {
-                alt25=1;
+                alt24=1;
                 }
                 break;
             case 35:
                 {
-                alt25=2;
+                alt24=2;
                 }
                 break;
             case 36:
                 {
-                alt25=3;
+                alt24=3;
                 }
                 break;
             case 37:
                 {
-                alt25=4;
+                alt24=4;
                 }
                 break;
             case 38:
                 {
-                alt25=5;
+                alt24=5;
                 }
                 break;
             case 39:
                 {
-                alt25=6;
+                alt24=6;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 25, 0, input);
+                    new NoViableAltException("", 24, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt25) {
+            switch (alt24) {
                 case 1 :
-                    // InternalInstanceLanguage.g:1740:3: (enumLiteral_0= '>=' )
+                    // InternalInstanceLanguage.g:1633:3: (enumLiteral_0= '>=' )
                     {
-                    // InternalInstanceLanguage.g:1740:3: (enumLiteral_0= '>=' )
-                    // InternalInstanceLanguage.g:1741:4: enumLiteral_0= '>='
+                    // InternalInstanceLanguage.g:1633:3: (enumLiteral_0= '>=' )
+                    // InternalInstanceLanguage.g:1634:4: enumLiteral_0= '>='
                     {
                     enumLiteral_0=(Token)match(input,34,FOLLOW_2); 
 
@@ -4852,10 +4529,10 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 2 :
-                    // InternalInstanceLanguage.g:1748:3: (enumLiteral_1= '>' )
+                    // InternalInstanceLanguage.g:1641:3: (enumLiteral_1= '>' )
                     {
-                    // InternalInstanceLanguage.g:1748:3: (enumLiteral_1= '>' )
-                    // InternalInstanceLanguage.g:1749:4: enumLiteral_1= '>'
+                    // InternalInstanceLanguage.g:1641:3: (enumLiteral_1= '>' )
+                    // InternalInstanceLanguage.g:1642:4: enumLiteral_1= '>'
                     {
                     enumLiteral_1=(Token)match(input,35,FOLLOW_2); 
 
@@ -4869,10 +4546,10 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 3 :
-                    // InternalInstanceLanguage.g:1756:3: (enumLiteral_2= '=' )
+                    // InternalInstanceLanguage.g:1649:3: (enumLiteral_2= '=' )
                     {
-                    // InternalInstanceLanguage.g:1756:3: (enumLiteral_2= '=' )
-                    // InternalInstanceLanguage.g:1757:4: enumLiteral_2= '='
+                    // InternalInstanceLanguage.g:1649:3: (enumLiteral_2= '=' )
+                    // InternalInstanceLanguage.g:1650:4: enumLiteral_2= '='
                     {
                     enumLiteral_2=(Token)match(input,36,FOLLOW_2); 
 
@@ -4886,10 +4563,10 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 4 :
-                    // InternalInstanceLanguage.g:1764:3: (enumLiteral_3= '!=' )
+                    // InternalInstanceLanguage.g:1657:3: (enumLiteral_3= '!=' )
                     {
-                    // InternalInstanceLanguage.g:1764:3: (enumLiteral_3= '!=' )
-                    // InternalInstanceLanguage.g:1765:4: enumLiteral_3= '!='
+                    // InternalInstanceLanguage.g:1657:3: (enumLiteral_3= '!=' )
+                    // InternalInstanceLanguage.g:1658:4: enumLiteral_3= '!='
                     {
                     enumLiteral_3=(Token)match(input,37,FOLLOW_2); 
 
@@ -4903,10 +4580,10 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 5 :
-                    // InternalInstanceLanguage.g:1772:3: (enumLiteral_4= '<' )
+                    // InternalInstanceLanguage.g:1665:3: (enumLiteral_4= '<' )
                     {
-                    // InternalInstanceLanguage.g:1772:3: (enumLiteral_4= '<' )
-                    // InternalInstanceLanguage.g:1773:4: enumLiteral_4= '<'
+                    // InternalInstanceLanguage.g:1665:3: (enumLiteral_4= '<' )
+                    // InternalInstanceLanguage.g:1666:4: enumLiteral_4= '<'
                     {
                     enumLiteral_4=(Token)match(input,38,FOLLOW_2); 
 
@@ -4920,10 +4597,10 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 6 :
-                    // InternalInstanceLanguage.g:1780:3: (enumLiteral_5= '<=' )
+                    // InternalInstanceLanguage.g:1673:3: (enumLiteral_5= '<=' )
                     {
-                    // InternalInstanceLanguage.g:1780:3: (enumLiteral_5= '<=' )
-                    // InternalInstanceLanguage.g:1781:4: enumLiteral_5= '<='
+                    // InternalInstanceLanguage.g:1673:3: (enumLiteral_5= '<=' )
+                    // InternalInstanceLanguage.g:1674:4: enumLiteral_5= '<='
                     {
                     enumLiteral_5=(Token)match(input,39,FOLLOW_2); 
 
@@ -4959,7 +4636,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "ruleAddOrSubtractOperatorRule"
-    // InternalInstanceLanguage.g:1791:1: ruleAddOrSubtractOperatorRule returns [Enumerator current=null] : ( (enumLiteral_0= '+' ) | (enumLiteral_1= '-' ) ) ;
+    // InternalInstanceLanguage.g:1684:1: ruleAddOrSubtractOperatorRule returns [Enumerator current=null] : ( (enumLiteral_0= '+' ) | (enumLiteral_1= '-' ) ) ;
     public final Enumerator ruleAddOrSubtractOperatorRule() throws RecognitionException {
         Enumerator current = null;
 
@@ -4970,31 +4647,31 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
         	enterRule();
 
         try {
-            // InternalInstanceLanguage.g:1797:2: ( ( (enumLiteral_0= '+' ) | (enumLiteral_1= '-' ) ) )
-            // InternalInstanceLanguage.g:1798:2: ( (enumLiteral_0= '+' ) | (enumLiteral_1= '-' ) )
+            // InternalInstanceLanguage.g:1690:2: ( ( (enumLiteral_0= '+' ) | (enumLiteral_1= '-' ) ) )
+            // InternalInstanceLanguage.g:1691:2: ( (enumLiteral_0= '+' ) | (enumLiteral_1= '-' ) )
             {
-            // InternalInstanceLanguage.g:1798:2: ( (enumLiteral_0= '+' ) | (enumLiteral_1= '-' ) )
-            int alt26=2;
-            int LA26_0 = input.LA(1);
+            // InternalInstanceLanguage.g:1691:2: ( (enumLiteral_0= '+' ) | (enumLiteral_1= '-' ) )
+            int alt25=2;
+            int LA25_0 = input.LA(1);
 
-            if ( (LA26_0==40) ) {
-                alt26=1;
+            if ( (LA25_0==40) ) {
+                alt25=1;
             }
-            else if ( (LA26_0==41) ) {
-                alt26=2;
+            else if ( (LA25_0==41) ) {
+                alt25=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 26, 0, input);
+                    new NoViableAltException("", 25, 0, input);
 
                 throw nvae;
             }
-            switch (alt26) {
+            switch (alt25) {
                 case 1 :
-                    // InternalInstanceLanguage.g:1799:3: (enumLiteral_0= '+' )
+                    // InternalInstanceLanguage.g:1692:3: (enumLiteral_0= '+' )
                     {
-                    // InternalInstanceLanguage.g:1799:3: (enumLiteral_0= '+' )
-                    // InternalInstanceLanguage.g:1800:4: enumLiteral_0= '+'
+                    // InternalInstanceLanguage.g:1692:3: (enumLiteral_0= '+' )
+                    // InternalInstanceLanguage.g:1693:4: enumLiteral_0= '+'
                     {
                     enumLiteral_0=(Token)match(input,40,FOLLOW_2); 
 
@@ -5008,10 +4685,10 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 2 :
-                    // InternalInstanceLanguage.g:1807:3: (enumLiteral_1= '-' )
+                    // InternalInstanceLanguage.g:1700:3: (enumLiteral_1= '-' )
                     {
-                    // InternalInstanceLanguage.g:1807:3: (enumLiteral_1= '-' )
-                    // InternalInstanceLanguage.g:1808:4: enumLiteral_1= '-'
+                    // InternalInstanceLanguage.g:1700:3: (enumLiteral_1= '-' )
+                    // InternalInstanceLanguage.g:1701:4: enumLiteral_1= '-'
                     {
                     enumLiteral_1=(Token)match(input,41,FOLLOW_2); 
 
@@ -5047,7 +4724,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "ruleMultiplyDivideModuloOperatorRule"
-    // InternalInstanceLanguage.g:1818:1: ruleMultiplyDivideModuloOperatorRule returns [Enumerator current=null] : ( (enumLiteral_0= '*' ) | (enumLiteral_1= '/' ) | (enumLiteral_2= '%' ) ) ;
+    // InternalInstanceLanguage.g:1711:1: ruleMultiplyDivideModuloOperatorRule returns [Enumerator current=null] : ( (enumLiteral_0= '*' ) | (enumLiteral_1= '/' ) | (enumLiteral_2= '%' ) ) ;
     public final Enumerator ruleMultiplyDivideModuloOperatorRule() throws RecognitionException {
         Enumerator current = null;
 
@@ -5059,40 +4736,40 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
         	enterRule();
 
         try {
-            // InternalInstanceLanguage.g:1824:2: ( ( (enumLiteral_0= '*' ) | (enumLiteral_1= '/' ) | (enumLiteral_2= '%' ) ) )
-            // InternalInstanceLanguage.g:1825:2: ( (enumLiteral_0= '*' ) | (enumLiteral_1= '/' ) | (enumLiteral_2= '%' ) )
+            // InternalInstanceLanguage.g:1717:2: ( ( (enumLiteral_0= '*' ) | (enumLiteral_1= '/' ) | (enumLiteral_2= '%' ) ) )
+            // InternalInstanceLanguage.g:1718:2: ( (enumLiteral_0= '*' ) | (enumLiteral_1= '/' ) | (enumLiteral_2= '%' ) )
             {
-            // InternalInstanceLanguage.g:1825:2: ( (enumLiteral_0= '*' ) | (enumLiteral_1= '/' ) | (enumLiteral_2= '%' ) )
-            int alt27=3;
+            // InternalInstanceLanguage.g:1718:2: ( (enumLiteral_0= '*' ) | (enumLiteral_1= '/' ) | (enumLiteral_2= '%' ) )
+            int alt26=3;
             switch ( input.LA(1) ) {
             case 42:
                 {
-                alt27=1;
+                alt26=1;
                 }
                 break;
             case 43:
                 {
-                alt27=2;
+                alt26=2;
                 }
                 break;
             case 44:
                 {
-                alt27=3;
+                alt26=3;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 27, 0, input);
+                    new NoViableAltException("", 26, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt27) {
+            switch (alt26) {
                 case 1 :
-                    // InternalInstanceLanguage.g:1826:3: (enumLiteral_0= '*' )
+                    // InternalInstanceLanguage.g:1719:3: (enumLiteral_0= '*' )
                     {
-                    // InternalInstanceLanguage.g:1826:3: (enumLiteral_0= '*' )
-                    // InternalInstanceLanguage.g:1827:4: enumLiteral_0= '*'
+                    // InternalInstanceLanguage.g:1719:3: (enumLiteral_0= '*' )
+                    // InternalInstanceLanguage.g:1720:4: enumLiteral_0= '*'
                     {
                     enumLiteral_0=(Token)match(input,42,FOLLOW_2); 
 
@@ -5106,10 +4783,10 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 2 :
-                    // InternalInstanceLanguage.g:1834:3: (enumLiteral_1= '/' )
+                    // InternalInstanceLanguage.g:1727:3: (enumLiteral_1= '/' )
                     {
-                    // InternalInstanceLanguage.g:1834:3: (enumLiteral_1= '/' )
-                    // InternalInstanceLanguage.g:1835:4: enumLiteral_1= '/'
+                    // InternalInstanceLanguage.g:1727:3: (enumLiteral_1= '/' )
+                    // InternalInstanceLanguage.g:1728:4: enumLiteral_1= '/'
                     {
                     enumLiteral_1=(Token)match(input,43,FOLLOW_2); 
 
@@ -5123,10 +4800,10 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 3 :
-                    // InternalInstanceLanguage.g:1842:3: (enumLiteral_2= '%' )
+                    // InternalInstanceLanguage.g:1735:3: (enumLiteral_2= '%' )
                     {
-                    // InternalInstanceLanguage.g:1842:3: (enumLiteral_2= '%' )
-                    // InternalInstanceLanguage.g:1843:4: enumLiteral_2= '%'
+                    // InternalInstanceLanguage.g:1735:3: (enumLiteral_2= '%' )
+                    // InternalInstanceLanguage.g:1736:4: enumLiteral_2= '%'
                     {
                     enumLiteral_2=(Token)match(input,44,FOLLOW_2); 
 
@@ -5162,7 +4839,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "ruleFactorRule"
-    // InternalInstanceLanguage.g:1853:1: ruleFactorRule returns [Enumerator current=null] : ( (enumLiteral_0= 'Y' ) | (enumLiteral_1= 'Z' ) | (enumLiteral_2= 'E' ) | (enumLiteral_3= 'P' ) | (enumLiteral_4= 'T' ) | (enumLiteral_5= 'G' ) | (enumLiteral_6= 'M' ) | (enumLiteral_7= 'k' ) | (enumLiteral_8= 'h' ) | (enumLiteral_9= 'da' ) | (enumLiteral_10= 'd' ) | (enumLiteral_11= 'c' ) | (enumLiteral_12= 'm' ) | (enumLiteral_13= '\\u00B5' ) | (enumLiteral_14= 'n' ) | (enumLiteral_15= 'p' ) | (enumLiteral_16= 'f' ) | (enumLiteral_17= 'a' ) | (enumLiteral_18= 'z' ) | (enumLiteral_19= 'y' ) ) ;
+    // InternalInstanceLanguage.g:1746:1: ruleFactorRule returns [Enumerator current=null] : ( (enumLiteral_0= 'Y' ) | (enumLiteral_1= 'Z' ) | (enumLiteral_2= 'E' ) | (enumLiteral_3= 'P' ) | (enumLiteral_4= 'T' ) | (enumLiteral_5= 'G' ) | (enumLiteral_6= 'M' ) | (enumLiteral_7= 'k' ) | (enumLiteral_8= 'h' ) | (enumLiteral_9= 'da' ) | (enumLiteral_10= 'd' ) | (enumLiteral_11= 'c' ) | (enumLiteral_12= 'm' ) | (enumLiteral_13= '\\u00B5' ) | (enumLiteral_14= 'n' ) | (enumLiteral_15= 'p' ) | (enumLiteral_16= 'f' ) | (enumLiteral_17= 'a' ) | (enumLiteral_18= 'z' ) | (enumLiteral_19= 'y' ) ) ;
     public final Enumerator ruleFactorRule() throws RecognitionException {
         Enumerator current = null;
 
@@ -5191,125 +4868,125 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
         	enterRule();
 
         try {
-            // InternalInstanceLanguage.g:1859:2: ( ( (enumLiteral_0= 'Y' ) | (enumLiteral_1= 'Z' ) | (enumLiteral_2= 'E' ) | (enumLiteral_3= 'P' ) | (enumLiteral_4= 'T' ) | (enumLiteral_5= 'G' ) | (enumLiteral_6= 'M' ) | (enumLiteral_7= 'k' ) | (enumLiteral_8= 'h' ) | (enumLiteral_9= 'da' ) | (enumLiteral_10= 'd' ) | (enumLiteral_11= 'c' ) | (enumLiteral_12= 'm' ) | (enumLiteral_13= '\\u00B5' ) | (enumLiteral_14= 'n' ) | (enumLiteral_15= 'p' ) | (enumLiteral_16= 'f' ) | (enumLiteral_17= 'a' ) | (enumLiteral_18= 'z' ) | (enumLiteral_19= 'y' ) ) )
-            // InternalInstanceLanguage.g:1860:2: ( (enumLiteral_0= 'Y' ) | (enumLiteral_1= 'Z' ) | (enumLiteral_2= 'E' ) | (enumLiteral_3= 'P' ) | (enumLiteral_4= 'T' ) | (enumLiteral_5= 'G' ) | (enumLiteral_6= 'M' ) | (enumLiteral_7= 'k' ) | (enumLiteral_8= 'h' ) | (enumLiteral_9= 'da' ) | (enumLiteral_10= 'd' ) | (enumLiteral_11= 'c' ) | (enumLiteral_12= 'm' ) | (enumLiteral_13= '\\u00B5' ) | (enumLiteral_14= 'n' ) | (enumLiteral_15= 'p' ) | (enumLiteral_16= 'f' ) | (enumLiteral_17= 'a' ) | (enumLiteral_18= 'z' ) | (enumLiteral_19= 'y' ) )
+            // InternalInstanceLanguage.g:1752:2: ( ( (enumLiteral_0= 'Y' ) | (enumLiteral_1= 'Z' ) | (enumLiteral_2= 'E' ) | (enumLiteral_3= 'P' ) | (enumLiteral_4= 'T' ) | (enumLiteral_5= 'G' ) | (enumLiteral_6= 'M' ) | (enumLiteral_7= 'k' ) | (enumLiteral_8= 'h' ) | (enumLiteral_9= 'da' ) | (enumLiteral_10= 'd' ) | (enumLiteral_11= 'c' ) | (enumLiteral_12= 'm' ) | (enumLiteral_13= '\\u00B5' ) | (enumLiteral_14= 'n' ) | (enumLiteral_15= 'p' ) | (enumLiteral_16= 'f' ) | (enumLiteral_17= 'a' ) | (enumLiteral_18= 'z' ) | (enumLiteral_19= 'y' ) ) )
+            // InternalInstanceLanguage.g:1753:2: ( (enumLiteral_0= 'Y' ) | (enumLiteral_1= 'Z' ) | (enumLiteral_2= 'E' ) | (enumLiteral_3= 'P' ) | (enumLiteral_4= 'T' ) | (enumLiteral_5= 'G' ) | (enumLiteral_6= 'M' ) | (enumLiteral_7= 'k' ) | (enumLiteral_8= 'h' ) | (enumLiteral_9= 'da' ) | (enumLiteral_10= 'd' ) | (enumLiteral_11= 'c' ) | (enumLiteral_12= 'm' ) | (enumLiteral_13= '\\u00B5' ) | (enumLiteral_14= 'n' ) | (enumLiteral_15= 'p' ) | (enumLiteral_16= 'f' ) | (enumLiteral_17= 'a' ) | (enumLiteral_18= 'z' ) | (enumLiteral_19= 'y' ) )
             {
-            // InternalInstanceLanguage.g:1860:2: ( (enumLiteral_0= 'Y' ) | (enumLiteral_1= 'Z' ) | (enumLiteral_2= 'E' ) | (enumLiteral_3= 'P' ) | (enumLiteral_4= 'T' ) | (enumLiteral_5= 'G' ) | (enumLiteral_6= 'M' ) | (enumLiteral_7= 'k' ) | (enumLiteral_8= 'h' ) | (enumLiteral_9= 'da' ) | (enumLiteral_10= 'd' ) | (enumLiteral_11= 'c' ) | (enumLiteral_12= 'm' ) | (enumLiteral_13= '\\u00B5' ) | (enumLiteral_14= 'n' ) | (enumLiteral_15= 'p' ) | (enumLiteral_16= 'f' ) | (enumLiteral_17= 'a' ) | (enumLiteral_18= 'z' ) | (enumLiteral_19= 'y' ) )
-            int alt28=20;
+            // InternalInstanceLanguage.g:1753:2: ( (enumLiteral_0= 'Y' ) | (enumLiteral_1= 'Z' ) | (enumLiteral_2= 'E' ) | (enumLiteral_3= 'P' ) | (enumLiteral_4= 'T' ) | (enumLiteral_5= 'G' ) | (enumLiteral_6= 'M' ) | (enumLiteral_7= 'k' ) | (enumLiteral_8= 'h' ) | (enumLiteral_9= 'da' ) | (enumLiteral_10= 'd' ) | (enumLiteral_11= 'c' ) | (enumLiteral_12= 'm' ) | (enumLiteral_13= '\\u00B5' ) | (enumLiteral_14= 'n' ) | (enumLiteral_15= 'p' ) | (enumLiteral_16= 'f' ) | (enumLiteral_17= 'a' ) | (enumLiteral_18= 'z' ) | (enumLiteral_19= 'y' ) )
+            int alt27=20;
             switch ( input.LA(1) ) {
             case 45:
                 {
-                alt28=1;
+                alt27=1;
                 }
                 break;
             case 46:
                 {
-                alt28=2;
+                alt27=2;
                 }
                 break;
             case 47:
                 {
-                alt28=3;
+                alt27=3;
                 }
                 break;
             case 48:
                 {
-                alt28=4;
+                alt27=4;
                 }
                 break;
             case 49:
                 {
-                alt28=5;
+                alt27=5;
                 }
                 break;
             case 50:
                 {
-                alt28=6;
+                alt27=6;
                 }
                 break;
             case 51:
                 {
-                alt28=7;
+                alt27=7;
                 }
                 break;
             case 52:
                 {
-                alt28=8;
+                alt27=8;
                 }
                 break;
             case 53:
                 {
-                alt28=9;
+                alt27=9;
                 }
                 break;
             case 54:
                 {
-                alt28=10;
+                alt27=10;
                 }
                 break;
             case 55:
                 {
-                alt28=11;
+                alt27=11;
                 }
                 break;
             case 56:
                 {
-                alt28=12;
+                alt27=12;
                 }
                 break;
             case 57:
                 {
-                alt28=13;
+                alt27=13;
                 }
                 break;
             case 58:
                 {
-                alt28=14;
+                alt27=14;
                 }
                 break;
             case 59:
                 {
-                alt28=15;
+                alt27=15;
                 }
                 break;
             case 60:
                 {
-                alt28=16;
+                alt27=16;
                 }
                 break;
             case 61:
                 {
-                alt28=17;
+                alt27=17;
                 }
                 break;
             case 62:
                 {
-                alt28=18;
+                alt27=18;
                 }
                 break;
             case 63:
                 {
-                alt28=19;
+                alt27=19;
                 }
                 break;
             case 64:
                 {
-                alt28=20;
+                alt27=20;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 28, 0, input);
+                    new NoViableAltException("", 27, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt28) {
+            switch (alt27) {
                 case 1 :
-                    // InternalInstanceLanguage.g:1861:3: (enumLiteral_0= 'Y' )
+                    // InternalInstanceLanguage.g:1754:3: (enumLiteral_0= 'Y' )
                     {
-                    // InternalInstanceLanguage.g:1861:3: (enumLiteral_0= 'Y' )
-                    // InternalInstanceLanguage.g:1862:4: enumLiteral_0= 'Y'
+                    // InternalInstanceLanguage.g:1754:3: (enumLiteral_0= 'Y' )
+                    // InternalInstanceLanguage.g:1755:4: enumLiteral_0= 'Y'
                     {
                     enumLiteral_0=(Token)match(input,45,FOLLOW_2); 
 
@@ -5323,10 +5000,10 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 2 :
-                    // InternalInstanceLanguage.g:1869:3: (enumLiteral_1= 'Z' )
+                    // InternalInstanceLanguage.g:1762:3: (enumLiteral_1= 'Z' )
                     {
-                    // InternalInstanceLanguage.g:1869:3: (enumLiteral_1= 'Z' )
-                    // InternalInstanceLanguage.g:1870:4: enumLiteral_1= 'Z'
+                    // InternalInstanceLanguage.g:1762:3: (enumLiteral_1= 'Z' )
+                    // InternalInstanceLanguage.g:1763:4: enumLiteral_1= 'Z'
                     {
                     enumLiteral_1=(Token)match(input,46,FOLLOW_2); 
 
@@ -5340,10 +5017,10 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 3 :
-                    // InternalInstanceLanguage.g:1877:3: (enumLiteral_2= 'E' )
+                    // InternalInstanceLanguage.g:1770:3: (enumLiteral_2= 'E' )
                     {
-                    // InternalInstanceLanguage.g:1877:3: (enumLiteral_2= 'E' )
-                    // InternalInstanceLanguage.g:1878:4: enumLiteral_2= 'E'
+                    // InternalInstanceLanguage.g:1770:3: (enumLiteral_2= 'E' )
+                    // InternalInstanceLanguage.g:1771:4: enumLiteral_2= 'E'
                     {
                     enumLiteral_2=(Token)match(input,47,FOLLOW_2); 
 
@@ -5357,10 +5034,10 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 4 :
-                    // InternalInstanceLanguage.g:1885:3: (enumLiteral_3= 'P' )
+                    // InternalInstanceLanguage.g:1778:3: (enumLiteral_3= 'P' )
                     {
-                    // InternalInstanceLanguage.g:1885:3: (enumLiteral_3= 'P' )
-                    // InternalInstanceLanguage.g:1886:4: enumLiteral_3= 'P'
+                    // InternalInstanceLanguage.g:1778:3: (enumLiteral_3= 'P' )
+                    // InternalInstanceLanguage.g:1779:4: enumLiteral_3= 'P'
                     {
                     enumLiteral_3=(Token)match(input,48,FOLLOW_2); 
 
@@ -5374,10 +5051,10 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 5 :
-                    // InternalInstanceLanguage.g:1893:3: (enumLiteral_4= 'T' )
+                    // InternalInstanceLanguage.g:1786:3: (enumLiteral_4= 'T' )
                     {
-                    // InternalInstanceLanguage.g:1893:3: (enumLiteral_4= 'T' )
-                    // InternalInstanceLanguage.g:1894:4: enumLiteral_4= 'T'
+                    // InternalInstanceLanguage.g:1786:3: (enumLiteral_4= 'T' )
+                    // InternalInstanceLanguage.g:1787:4: enumLiteral_4= 'T'
                     {
                     enumLiteral_4=(Token)match(input,49,FOLLOW_2); 
 
@@ -5391,10 +5068,10 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 6 :
-                    // InternalInstanceLanguage.g:1901:3: (enumLiteral_5= 'G' )
+                    // InternalInstanceLanguage.g:1794:3: (enumLiteral_5= 'G' )
                     {
-                    // InternalInstanceLanguage.g:1901:3: (enumLiteral_5= 'G' )
-                    // InternalInstanceLanguage.g:1902:4: enumLiteral_5= 'G'
+                    // InternalInstanceLanguage.g:1794:3: (enumLiteral_5= 'G' )
+                    // InternalInstanceLanguage.g:1795:4: enumLiteral_5= 'G'
                     {
                     enumLiteral_5=(Token)match(input,50,FOLLOW_2); 
 
@@ -5408,10 +5085,10 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 7 :
-                    // InternalInstanceLanguage.g:1909:3: (enumLiteral_6= 'M' )
+                    // InternalInstanceLanguage.g:1802:3: (enumLiteral_6= 'M' )
                     {
-                    // InternalInstanceLanguage.g:1909:3: (enumLiteral_6= 'M' )
-                    // InternalInstanceLanguage.g:1910:4: enumLiteral_6= 'M'
+                    // InternalInstanceLanguage.g:1802:3: (enumLiteral_6= 'M' )
+                    // InternalInstanceLanguage.g:1803:4: enumLiteral_6= 'M'
                     {
                     enumLiteral_6=(Token)match(input,51,FOLLOW_2); 
 
@@ -5425,10 +5102,10 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 8 :
-                    // InternalInstanceLanguage.g:1917:3: (enumLiteral_7= 'k' )
+                    // InternalInstanceLanguage.g:1810:3: (enumLiteral_7= 'k' )
                     {
-                    // InternalInstanceLanguage.g:1917:3: (enumLiteral_7= 'k' )
-                    // InternalInstanceLanguage.g:1918:4: enumLiteral_7= 'k'
+                    // InternalInstanceLanguage.g:1810:3: (enumLiteral_7= 'k' )
+                    // InternalInstanceLanguage.g:1811:4: enumLiteral_7= 'k'
                     {
                     enumLiteral_7=(Token)match(input,52,FOLLOW_2); 
 
@@ -5442,10 +5119,10 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 9 :
-                    // InternalInstanceLanguage.g:1925:3: (enumLiteral_8= 'h' )
+                    // InternalInstanceLanguage.g:1818:3: (enumLiteral_8= 'h' )
                     {
-                    // InternalInstanceLanguage.g:1925:3: (enumLiteral_8= 'h' )
-                    // InternalInstanceLanguage.g:1926:4: enumLiteral_8= 'h'
+                    // InternalInstanceLanguage.g:1818:3: (enumLiteral_8= 'h' )
+                    // InternalInstanceLanguage.g:1819:4: enumLiteral_8= 'h'
                     {
                     enumLiteral_8=(Token)match(input,53,FOLLOW_2); 
 
@@ -5459,10 +5136,10 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 10 :
-                    // InternalInstanceLanguage.g:1933:3: (enumLiteral_9= 'da' )
+                    // InternalInstanceLanguage.g:1826:3: (enumLiteral_9= 'da' )
                     {
-                    // InternalInstanceLanguage.g:1933:3: (enumLiteral_9= 'da' )
-                    // InternalInstanceLanguage.g:1934:4: enumLiteral_9= 'da'
+                    // InternalInstanceLanguage.g:1826:3: (enumLiteral_9= 'da' )
+                    // InternalInstanceLanguage.g:1827:4: enumLiteral_9= 'da'
                     {
                     enumLiteral_9=(Token)match(input,54,FOLLOW_2); 
 
@@ -5476,10 +5153,10 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 11 :
-                    // InternalInstanceLanguage.g:1941:3: (enumLiteral_10= 'd' )
+                    // InternalInstanceLanguage.g:1834:3: (enumLiteral_10= 'd' )
                     {
-                    // InternalInstanceLanguage.g:1941:3: (enumLiteral_10= 'd' )
-                    // InternalInstanceLanguage.g:1942:4: enumLiteral_10= 'd'
+                    // InternalInstanceLanguage.g:1834:3: (enumLiteral_10= 'd' )
+                    // InternalInstanceLanguage.g:1835:4: enumLiteral_10= 'd'
                     {
                     enumLiteral_10=(Token)match(input,55,FOLLOW_2); 
 
@@ -5493,10 +5170,10 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 12 :
-                    // InternalInstanceLanguage.g:1949:3: (enumLiteral_11= 'c' )
+                    // InternalInstanceLanguage.g:1842:3: (enumLiteral_11= 'c' )
                     {
-                    // InternalInstanceLanguage.g:1949:3: (enumLiteral_11= 'c' )
-                    // InternalInstanceLanguage.g:1950:4: enumLiteral_11= 'c'
+                    // InternalInstanceLanguage.g:1842:3: (enumLiteral_11= 'c' )
+                    // InternalInstanceLanguage.g:1843:4: enumLiteral_11= 'c'
                     {
                     enumLiteral_11=(Token)match(input,56,FOLLOW_2); 
 
@@ -5510,10 +5187,10 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 13 :
-                    // InternalInstanceLanguage.g:1957:3: (enumLiteral_12= 'm' )
+                    // InternalInstanceLanguage.g:1850:3: (enumLiteral_12= 'm' )
                     {
-                    // InternalInstanceLanguage.g:1957:3: (enumLiteral_12= 'm' )
-                    // InternalInstanceLanguage.g:1958:4: enumLiteral_12= 'm'
+                    // InternalInstanceLanguage.g:1850:3: (enumLiteral_12= 'm' )
+                    // InternalInstanceLanguage.g:1851:4: enumLiteral_12= 'm'
                     {
                     enumLiteral_12=(Token)match(input,57,FOLLOW_2); 
 
@@ -5527,10 +5204,10 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 14 :
-                    // InternalInstanceLanguage.g:1965:3: (enumLiteral_13= '\\u00B5' )
+                    // InternalInstanceLanguage.g:1858:3: (enumLiteral_13= '\\u00B5' )
                     {
-                    // InternalInstanceLanguage.g:1965:3: (enumLiteral_13= '\\u00B5' )
-                    // InternalInstanceLanguage.g:1966:4: enumLiteral_13= '\\u00B5'
+                    // InternalInstanceLanguage.g:1858:3: (enumLiteral_13= '\\u00B5' )
+                    // InternalInstanceLanguage.g:1859:4: enumLiteral_13= '\\u00B5'
                     {
                     enumLiteral_13=(Token)match(input,58,FOLLOW_2); 
 
@@ -5544,10 +5221,10 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 15 :
-                    // InternalInstanceLanguage.g:1973:3: (enumLiteral_14= 'n' )
+                    // InternalInstanceLanguage.g:1866:3: (enumLiteral_14= 'n' )
                     {
-                    // InternalInstanceLanguage.g:1973:3: (enumLiteral_14= 'n' )
-                    // InternalInstanceLanguage.g:1974:4: enumLiteral_14= 'n'
+                    // InternalInstanceLanguage.g:1866:3: (enumLiteral_14= 'n' )
+                    // InternalInstanceLanguage.g:1867:4: enumLiteral_14= 'n'
                     {
                     enumLiteral_14=(Token)match(input,59,FOLLOW_2); 
 
@@ -5561,10 +5238,10 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 16 :
-                    // InternalInstanceLanguage.g:1981:3: (enumLiteral_15= 'p' )
+                    // InternalInstanceLanguage.g:1874:3: (enumLiteral_15= 'p' )
                     {
-                    // InternalInstanceLanguage.g:1981:3: (enumLiteral_15= 'p' )
-                    // InternalInstanceLanguage.g:1982:4: enumLiteral_15= 'p'
+                    // InternalInstanceLanguage.g:1874:3: (enumLiteral_15= 'p' )
+                    // InternalInstanceLanguage.g:1875:4: enumLiteral_15= 'p'
                     {
                     enumLiteral_15=(Token)match(input,60,FOLLOW_2); 
 
@@ -5578,10 +5255,10 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 17 :
-                    // InternalInstanceLanguage.g:1989:3: (enumLiteral_16= 'f' )
+                    // InternalInstanceLanguage.g:1882:3: (enumLiteral_16= 'f' )
                     {
-                    // InternalInstanceLanguage.g:1989:3: (enumLiteral_16= 'f' )
-                    // InternalInstanceLanguage.g:1990:4: enumLiteral_16= 'f'
+                    // InternalInstanceLanguage.g:1882:3: (enumLiteral_16= 'f' )
+                    // InternalInstanceLanguage.g:1883:4: enumLiteral_16= 'f'
                     {
                     enumLiteral_16=(Token)match(input,61,FOLLOW_2); 
 
@@ -5595,10 +5272,10 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 18 :
-                    // InternalInstanceLanguage.g:1997:3: (enumLiteral_17= 'a' )
+                    // InternalInstanceLanguage.g:1890:3: (enumLiteral_17= 'a' )
                     {
-                    // InternalInstanceLanguage.g:1997:3: (enumLiteral_17= 'a' )
-                    // InternalInstanceLanguage.g:1998:4: enumLiteral_17= 'a'
+                    // InternalInstanceLanguage.g:1890:3: (enumLiteral_17= 'a' )
+                    // InternalInstanceLanguage.g:1891:4: enumLiteral_17= 'a'
                     {
                     enumLiteral_17=(Token)match(input,62,FOLLOW_2); 
 
@@ -5612,10 +5289,10 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 19 :
-                    // InternalInstanceLanguage.g:2005:3: (enumLiteral_18= 'z' )
+                    // InternalInstanceLanguage.g:1898:3: (enumLiteral_18= 'z' )
                     {
-                    // InternalInstanceLanguage.g:2005:3: (enumLiteral_18= 'z' )
-                    // InternalInstanceLanguage.g:2006:4: enumLiteral_18= 'z'
+                    // InternalInstanceLanguage.g:1898:3: (enumLiteral_18= 'z' )
+                    // InternalInstanceLanguage.g:1899:4: enumLiteral_18= 'z'
                     {
                     enumLiteral_18=(Token)match(input,63,FOLLOW_2); 
 
@@ -5629,10 +5306,10 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 20 :
-                    // InternalInstanceLanguage.g:2013:3: (enumLiteral_19= 'y' )
+                    // InternalInstanceLanguage.g:1906:3: (enumLiteral_19= 'y' )
                     {
-                    // InternalInstanceLanguage.g:2013:3: (enumLiteral_19= 'y' )
-                    // InternalInstanceLanguage.g:2014:4: enumLiteral_19= 'y'
+                    // InternalInstanceLanguage.g:1906:3: (enumLiteral_19= 'y' )
+                    // InternalInstanceLanguage.g:1907:4: enumLiteral_19= 'y'
                     {
                     enumLiteral_19=(Token)match(input,64,FOLLOW_2); 
 
@@ -5674,7 +5351,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
     public static final BitSet FOLLOW_1 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_2 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000000008002L});
-    public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000000010190L});
+    public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000000010180L});
     public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000000020000L});
     public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x00000003004801F0L});
     public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x0000000000040000L});

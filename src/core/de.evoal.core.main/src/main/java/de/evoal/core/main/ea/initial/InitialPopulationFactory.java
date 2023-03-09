@@ -28,7 +28,7 @@ public class InitialPopulationFactory {
 	 */
 	@Produces @Dependent @Named("initial")
 	public InitialPopulation create() {
-		return BeanFactory.create(initialization.getName().getName(), InitialPopulation.class)
+		return BeanFactory.create(initialization.getDefinition().getName(), InitialPopulation.class)
 						  .init(initialization);
 	}
 }

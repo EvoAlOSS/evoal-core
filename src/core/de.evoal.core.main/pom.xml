@@ -295,21 +295,6 @@
 
 	<build>
 		<plugins>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-<!--				<configuration>
-					<archive>
-						<manifest>
-							<mainClass>de.evoal.core.main.Evoal</mainClass>
-							<addClasspath>true</addClasspath>
-							<classpathPrefix>modules/</classpathPrefix>
-						</manifest>
-					</archive>
-				</configuration>
--->			</plugin>
-
 			<plugin>
 				<artifactId>maven-dependency-plugin</artifactId>
 				<executions>

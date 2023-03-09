@@ -3,8 +3,6 @@
  */
 package de.evoal.languages.model.dl.impl;
 
-import de.evoal.languages.model.el.ELPackage;
-
 import de.evoal.languages.model.dl.ArrayType;
 import de.evoal.languages.model.dl.AttributeDefinition;
 import de.evoal.languages.model.dl.BooleanType;
@@ -19,13 +17,13 @@ import de.evoal.languages.model.dl.FunctionDefinition;
 import de.evoal.languages.model.dl.InstanceType;
 import de.evoal.languages.model.dl.IntType;
 import de.evoal.languages.model.dl.LiteralType;
-import de.evoal.languages.model.dl.NamedAttributeDefinition;
 import de.evoal.languages.model.dl.Parameter;
 import de.evoal.languages.model.dl.StringType;
 import de.evoal.languages.model.dl.Type;
 import de.evoal.languages.model.dl.TypeDefinition;
-import de.evoal.languages.model.dl.UnnamedAttributeDefinition;
 import de.evoal.languages.model.dl.VoidType;
+
+import de.evoal.languages.model.el.ELPackage;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -61,20 +59,6 @@ public class DlPackageImpl extends EPackageImpl implements DlPackage {
 	 * @generated
 	 */
 	private EClass attributeDefinitionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass unnamedAttributeDefinitionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass namedAttributeDefinitionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -192,7 +176,6 @@ public class DlPackageImpl extends EPackageImpl implements DlPackage {
 	private DlPackageImpl() {
 		super(eNS_URI, DlFactory.eINSTANCE);
 	}
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -344,28 +327,8 @@ public class DlPackageImpl extends EPackageImpl implements DlPackage {
 	 * @generated
 	 */
 	@Override
-	public EClass getUnnamedAttributeDefinition() {
-		return unnamedAttributeDefinitionEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getNamedAttributeDefinition() {
-		return namedAttributeDefinitionEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getNamedAttributeDefinition_Name() {
-		return (EAttribute)namedAttributeDefinitionEClass.getEStructuralFeatures().get(0);
+	public EAttribute getAttributeDefinition_Name() {
+		return (EAttribute)attributeDefinitionEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -629,11 +592,7 @@ public class DlPackageImpl extends EPackageImpl implements DlPackage {
 
 		attributeDefinitionEClass = createEClass(ATTRIBUTE_DEFINITION);
 		createEReference(attributeDefinitionEClass, ATTRIBUTE_DEFINITION__TYPE);
-
-		unnamedAttributeDefinitionEClass = createEClass(UNNAMED_ATTRIBUTE_DEFINITION);
-
-		namedAttributeDefinitionEClass = createEClass(NAMED_ATTRIBUTE_DEFINITION);
-		createEAttribute(namedAttributeDefinitionEClass, NAMED_ATTRIBUTE_DEFINITION__NAME);
+		createEAttribute(attributeDefinitionEClass, ATTRIBUTE_DEFINITION__NAME);
 
 		typeEClass = createEClass(TYPE);
 
@@ -703,8 +662,6 @@ public class DlPackageImpl extends EPackageImpl implements DlPackage {
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
-		unnamedAttributeDefinitionEClass.getESuperTypes().add(this.getAttributeDefinition());
-		namedAttributeDefinitionEClass.getESuperTypes().add(this.getAttributeDefinition());
 		instanceTypeEClass.getESuperTypes().add(this.getType());
 		literalTypeEClass.getESuperTypes().add(this.getType());
 		stringTypeEClass.getESuperTypes().add(this.getLiteralType());
@@ -728,13 +685,9 @@ public class DlPackageImpl extends EPackageImpl implements DlPackage {
 		initEReference(getTypeDefinition_SuperType(), this.getTypeDefinition(), null, "superType", null, 0, 1, TypeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTypeDefinition_Abstract(), ecorePackage.getEBoolean(), "abstract", "false", 1, 1, TypeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(attributeDefinitionEClass, AttributeDefinition.class, "AttributeDefinition", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(attributeDefinitionEClass, AttributeDefinition.class, "AttributeDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAttributeDefinition_Type(), this.getType(), null, "type", null, 1, 1, AttributeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(unnamedAttributeDefinitionEClass, UnnamedAttributeDefinition.class, "UnnamedAttributeDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(namedAttributeDefinitionEClass, NamedAttributeDefinition.class, "NamedAttributeDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getNamedAttributeDefinition_Name(), ecorePackage.getEString(), "name", null, 1, 1, NamedAttributeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAttributeDefinition_Name(), ecorePackage.getEString(), "name", null, 1, 1, AttributeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(typeEClass, Type.class, "Type", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

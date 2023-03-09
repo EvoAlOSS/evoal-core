@@ -80,26 +80,6 @@ public class InstanceSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case InstancePackage.NAME_OR_MISC: {
-				NameOrMisc nameOrMisc = (NameOrMisc)theEObject;
-				T result = caseNameOrMisc(nameOrMisc);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case InstancePackage.NAME: {
-				Name name = (Name)theEObject;
-				T result = caseName(name);
-				if (result == null) result = caseNameOrMisc(name);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case InstancePackage.MISC: {
-				Misc misc = (Misc)theEObject;
-				T result = caseMisc(misc);
-				if (result == null) result = caseNameOrMisc(misc);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case InstancePackage.VALUE: {
 				Value value = (Value)theEObject;
 				T result = caseValue(value);
@@ -158,51 +138,6 @@ public class InstanceSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseAttribute(Attribute object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Name Or Misc</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Name Or Misc</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseNameOrMisc(NameOrMisc object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Name</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Name</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseName(Name object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Misc</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Misc</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseMisc(Misc object) {
 		return null;
 	}
 

@@ -19,13 +19,10 @@ import org.eclipse.xtext.scoping.impl.FilteringScope;
 import de.evoal.languages.model.ddl.dsl.scoping.DataDescriptionLanguageScopeProvider;
 import de.evoal.languages.model.dl.AttributeDefinition;
 import de.evoal.languages.model.dl.InstanceType;
-import de.evoal.languages.model.dl.NamedAttributeDefinition;
 import de.evoal.languages.model.dl.TypeDefinition;
 import de.evoal.languages.model.instance.Attribute;
 import de.evoal.languages.model.instance.Instance;
 import de.evoal.languages.model.instance.InstancePackage;
-import de.evoal.languages.model.instance.Name;
-import de.evoal.languages.model.instance.NameOrMisc;
 
 /**
  * This class contains custom scoping description.
@@ -39,46 +36,36 @@ public class InstanceLanguageScopeProvider extends AbstractInstanceLanguageScope
 		
 	@Override
 	public IScope getScope(final EObject context, final EReference reference) {
-		
-		if(context instanceof Instance && InstancePackage.Literals.NAME__NAME.equals(reference)) {
+//		System.err.println("Asking for scope of :");
+//		System.err.println("  " + context.eClass().getName());
+//		if(context instanceof Instance) {
+//			System.err.println("    " + ((Instance)context).getName().getName());
+//		}
+//		System.err.println("  " + reference.getContainerClass() + "__" + reference.getName());
+
+		if(context instanceof Instance && InstancePackage.Literals.ATTRIBUTE__DEFINITION.equals(reference)) {
 			final Instance instance = (Instance)context;
-			final List<NamedAttributeDefinition> attributes = instance.getAttributes()
-																	  .stream()
-																	  .map(Attribute::getName)
-																	  .filter(Name.class::isInstance)
-																	  .map(Name.class::cast)
-																	  .map(Name::getName)
-																	  .collect(Collectors.toList());
+			final List<AttributeDefinition> usedAttributes =
+					instance.getAttributes()
+						    .stream()
+						    .map(Attribute::getDefinition)
+						    .collect(Collectors.toList());
 			
-			return new FilteringScope(scopeFor(instance), desc -> !attributes.contains(desc.getEObjectOrProxy()));
-		} else if (context instanceof Attribute) {
-			final Attribute attribute = (Attribute)context;
+			return new FilteringScope(scopeFor(instance), desc -> !usedAttributes.contains(desc.getEObjectOrProxy()));
+		} else if (context instanceof Attribute && InstancePackage.Literals.INSTANCE__DEFINITION.equals(reference)) {
+			final Attribute attribute = (Attribute)context;			
+			final AttributeDefinition definition = attribute.getDefinition();
 			
-			if(InstancePackage.Literals.INSTANCE__NAME.equals(reference)) {
-				final NameOrMisc nom = attribute.getName();
-				
-				if(!(nom instanceof Name)) {
-					return super.getScope(context, reference);
-				}
-				
-				final Name name = (Name)nom;
-				final NamedAttributeDefinition nad = name.getName();
-				
-				if(nad.getType() instanceof InstanceType) {
-					return new FilteringScope(super.getScope(context, reference), desc -> {
-						final TypeDefinition def = (TypeDefinition)desc.getEObjectOrProxy();
-						
-						return !def.isAbstract() && inheritsFrom(def, (InstanceType)nad.getType());
-					});
-				} else {
-					System.err.println("  type is " + nad.getType());
-					return IScope.NULLSCOPE;
-				}
+			if(definition.getType() instanceof InstanceType) {
+				return new FilteringScope(super.getScope(context, reference), desc -> {
+					final TypeDefinition def = (TypeDefinition)desc.getEObjectOrProxy();
+					
+					return !def.isAbstract() && inheritsFrom(def, (InstanceType)definition.getType());
+				});
 			} else {
-				System.err.println("Context attribute:");
-				System.err.println("  ??? " + reference.toString());
+				System.err.println("  type is " + definition.getType());
+				return IScope.NULLSCOPE;
 			}
-			return IScope.NULLSCOPE;
 		}
 		/*else if(context instanceof Attribute && InstancePackage.Literals.ATTRIBUTE__NAME.equals(reference)) {
 System.err.println("Attr->Name");
@@ -120,8 +107,10 @@ System.err.println("Attr->Name");
 		} 
 		*/
 
+		//return Scopes.scopeFor(Collections.emptyList()); //super.getScope(context, reference);
 		return super.getScope(context, reference);
 	}
+
 	private boolean inheritsFrom(final TypeDefinition current, final InstanceType parent) {
 		for(final TypeDefinition parentDef : parent.getDefinitions()) {
 			if(current.equals(parentDef)) {
@@ -139,7 +128,7 @@ System.err.println("Attr->Name");
 	}
 	
 	private IScope scopeFor(final Instance instance) {
-		return scopeFor(instance.getName());
+		return scopeFor(instance.getDefinition());
 	}
 
 	private IScope scopeFor(TypeDefinition definition) {
@@ -152,6 +141,8 @@ System.err.println("Attr->Name");
 
 			definition = definition.getSuperType();
 		}
+		
+//		System.err.println("      " + attributes.stream().map(d -> d.ge));
 		
 		return Scopes.scopeFor(attributes);
 	}

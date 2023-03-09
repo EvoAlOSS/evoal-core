@@ -175,78 +175,22 @@ public interface DlPackage extends EPackage {
 	int ATTRIBUTE_DEFINITION__TYPE = 0;
 
 	/**
-	 * The number of structural features of the '<em>Attribute Definition</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ATTRIBUTE_DEFINITION_FEATURE_COUNT = 1;
-
-	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.dl.impl.UnnamedAttributeDefinitionImpl <em>Unnamed Attribute Definition</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.dl.impl.UnnamedAttributeDefinitionImpl
-	 * @see de.evoal.languages.model.dl.impl.DlPackageImpl#getUnnamedAttributeDefinition()
-	 * @generated
-	 */
-	int UNNAMED_ATTRIBUTE_DEFINITION = 3;
-
-	/**
-	 * The feature id for the '<em><b>Type</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UNNAMED_ATTRIBUTE_DEFINITION__TYPE = ATTRIBUTE_DEFINITION__TYPE;
-
-	/**
-	 * The number of structural features of the '<em>Unnamed Attribute Definition</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UNNAMED_ATTRIBUTE_DEFINITION_FEATURE_COUNT = ATTRIBUTE_DEFINITION_FEATURE_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.dl.impl.NamedAttributeDefinitionImpl <em>Named Attribute Definition</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.dl.impl.NamedAttributeDefinitionImpl
-	 * @see de.evoal.languages.model.dl.impl.DlPackageImpl#getNamedAttributeDefinition()
-	 * @generated
-	 */
-	int NAMED_ATTRIBUTE_DEFINITION = 4;
-
-	/**
-	 * The feature id for the '<em><b>Type</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NAMED_ATTRIBUTE_DEFINITION__TYPE = ATTRIBUTE_DEFINITION__TYPE;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NAMED_ATTRIBUTE_DEFINITION__NAME = ATTRIBUTE_DEFINITION_FEATURE_COUNT + 0;
+	int ATTRIBUTE_DEFINITION__NAME = 1;
 
 	/**
-	 * The number of structural features of the '<em>Named Attribute Definition</em>' class.
+	 * The number of structural features of the '<em>Attribute Definition</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NAMED_ATTRIBUTE_DEFINITION_FEATURE_COUNT = ATTRIBUTE_DEFINITION_FEATURE_COUNT + 1;
+	int ATTRIBUTE_DEFINITION_FEATURE_COUNT = 2;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.dl.impl.TypeImpl <em>Type</em>}' class.
@@ -256,7 +200,7 @@ public interface DlPackage extends EPackage {
 	 * @see de.evoal.languages.model.dl.impl.DlPackageImpl#getType()
 	 * @generated
 	 */
-	int TYPE = 5;
+	int TYPE = 3;
 
 	/**
 	 * The number of structural features of the '<em>Type</em>' class.
@@ -275,7 +219,7 @@ public interface DlPackage extends EPackage {
 	 * @see de.evoal.languages.model.dl.impl.DlPackageImpl#getInstanceType()
 	 * @generated
 	 */
-	int INSTANCE_TYPE = 6;
+	int INSTANCE_TYPE = 4;
 
 	/**
 	 * The feature id for the '<em><b>Definitions</b></em>' reference list.
@@ -303,7 +247,7 @@ public interface DlPackage extends EPackage {
 	 * @see de.evoal.languages.model.dl.impl.DlPackageImpl#getLiteralType()
 	 * @generated
 	 */
-	int LITERAL_TYPE = 7;
+	int LITERAL_TYPE = 5;
 
 	/**
 	 * The number of structural features of the '<em>Literal Type</em>' class.
@@ -322,7 +266,7 @@ public interface DlPackage extends EPackage {
 	 * @see de.evoal.languages.model.dl.impl.DlPackageImpl#getStringType()
 	 * @generated
 	 */
-	int STRING_TYPE = 8;
+	int STRING_TYPE = 6;
 
 	/**
 	 * The number of structural features of the '<em>String Type</em>' class.
@@ -341,7 +285,7 @@ public interface DlPackage extends EPackage {
 	 * @see de.evoal.languages.model.dl.impl.DlPackageImpl#getIntType()
 	 * @generated
 	 */
-	int INT_TYPE = 9;
+	int INT_TYPE = 7;
 
 	/**
 	 * The number of structural features of the '<em>Int Type</em>' class.
@@ -360,7 +304,7 @@ public interface DlPackage extends EPackage {
 	 * @see de.evoal.languages.model.dl.impl.DlPackageImpl#getFloatType()
 	 * @generated
 	 */
-	int FLOAT_TYPE = 10;
+	int FLOAT_TYPE = 8;
 
 	/**
 	 * The number of structural features of the '<em>Float Type</em>' class.
@@ -379,7 +323,7 @@ public interface DlPackage extends EPackage {
 	 * @see de.evoal.languages.model.dl.impl.DlPackageImpl#getBooleanType()
 	 * @generated
 	 */
-	int BOOLEAN_TYPE = 11;
+	int BOOLEAN_TYPE = 9;
 
 	/**
 	 * The number of structural features of the '<em>Boolean Type</em>' class.
@@ -398,7 +342,7 @@ public interface DlPackage extends EPackage {
 	 * @see de.evoal.languages.model.dl.impl.DlPackageImpl#getVoidType()
 	 * @generated
 	 */
-	int VOID_TYPE = 12;
+	int VOID_TYPE = 10;
 
 	/**
 	 * The number of structural features of the '<em>Void Type</em>' class.
@@ -417,7 +361,7 @@ public interface DlPackage extends EPackage {
 	 * @see de.evoal.languages.model.dl.impl.DlPackageImpl#getExpressionType()
 	 * @generated
 	 */
-	int EXPRESSION_TYPE = 13;
+	int EXPRESSION_TYPE = 11;
 
 	/**
 	 * The number of structural features of the '<em>Expression Type</em>' class.
@@ -436,7 +380,7 @@ public interface DlPackage extends EPackage {
 	 * @see de.evoal.languages.model.dl.impl.DlPackageImpl#getDataType()
 	 * @generated
 	 */
-	int DATA_TYPE = 14;
+	int DATA_TYPE = 12;
 
 	/**
 	 * The number of structural features of the '<em>Data Type</em>' class.
@@ -455,7 +399,7 @@ public interface DlPackage extends EPackage {
 	 * @see de.evoal.languages.model.dl.impl.DlPackageImpl#getArrayType()
 	 * @generated
 	 */
-	int ARRAY_TYPE = 15;
+	int ARRAY_TYPE = 13;
 
 	/**
 	 * The feature id for the '<em><b>Elements</b></em>' containment reference list.
@@ -483,7 +427,7 @@ public interface DlPackage extends EPackage {
 	 * @see de.evoal.languages.model.dl.impl.DlPackageImpl#getFunctionDefinition()
 	 * @generated
 	 */
-	int FUNCTION_DEFINITION = 16;
+	int FUNCTION_DEFINITION = 14;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -529,7 +473,7 @@ public interface DlPackage extends EPackage {
 	 * @see de.evoal.languages.model.dl.impl.DlPackageImpl#getParameter()
 	 * @generated
 	 */
-	int PARAMETER = 17;
+	int PARAMETER = 15;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -566,7 +510,7 @@ public interface DlPackage extends EPackage {
 	 * @see de.evoal.languages.model.dl.impl.DlPackageImpl#getDefinedFunctionName()
 	 * @generated
 	 */
-	int DEFINED_FUNCTION_NAME = 18;
+	int DEFINED_FUNCTION_NAME = 16;
 
 	/**
 	 * The feature id for the '<em><b>Definition</b></em>' reference.
@@ -695,35 +639,15 @@ public interface DlPackage extends EPackage {
 	EReference getAttributeDefinition_Type();
 
 	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.dl.UnnamedAttributeDefinition <em>Unnamed Attribute Definition</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Unnamed Attribute Definition</em>'.
-	 * @see de.evoal.languages.model.dl.UnnamedAttributeDefinition
-	 * @generated
-	 */
-	EClass getUnnamedAttributeDefinition();
-
-	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.dl.NamedAttributeDefinition <em>Named Attribute Definition</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Named Attribute Definition</em>'.
-	 * @see de.evoal.languages.model.dl.NamedAttributeDefinition
-	 * @generated
-	 */
-	EClass getNamedAttributeDefinition();
-
-	/**
-	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.dl.NamedAttributeDefinition#getName <em>Name</em>}'.
+	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.dl.AttributeDefinition#getName <em>Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see de.evoal.languages.model.dl.NamedAttributeDefinition#getName()
-	 * @see #getNamedAttributeDefinition()
+	 * @see de.evoal.languages.model.dl.AttributeDefinition#getName()
+	 * @see #getAttributeDefinition()
 	 * @generated
 	 */
-	EAttribute getNamedAttributeDefinition_Name();
+	EAttribute getAttributeDefinition_Name();
 
 	/**
 	 * Returns the meta object for class '{@link de.evoal.languages.model.dl.Type <em>Type</em>}'.
@@ -1062,32 +986,12 @@ public interface DlPackage extends EPackage {
 		EReference ATTRIBUTE_DEFINITION__TYPE = eINSTANCE.getAttributeDefinition_Type();
 
 		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.dl.impl.UnnamedAttributeDefinitionImpl <em>Unnamed Attribute Definition</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.dl.impl.UnnamedAttributeDefinitionImpl
-		 * @see de.evoal.languages.model.dl.impl.DlPackageImpl#getUnnamedAttributeDefinition()
-		 * @generated
-		 */
-		EClass UNNAMED_ATTRIBUTE_DEFINITION = eINSTANCE.getUnnamedAttributeDefinition();
-
-		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.dl.impl.NamedAttributeDefinitionImpl <em>Named Attribute Definition</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.dl.impl.NamedAttributeDefinitionImpl
-		 * @see de.evoal.languages.model.dl.impl.DlPackageImpl#getNamedAttributeDefinition()
-		 * @generated
-		 */
-		EClass NAMED_ATTRIBUTE_DEFINITION = eINSTANCE.getNamedAttributeDefinition();
-
-		/**
 		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute NAMED_ATTRIBUTE_DEFINITION__NAME = eINSTANCE.getNamedAttributeDefinition_Name();
+		EAttribute ATTRIBUTE_DEFINITION__NAME = eINSTANCE.getAttributeDefinition_Name();
 
 		/**
 		 * The meta object literal for the '{@link de.evoal.languages.model.dl.impl.TypeImpl <em>Type</em>}' class.

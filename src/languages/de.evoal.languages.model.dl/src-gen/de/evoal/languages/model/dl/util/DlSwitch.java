@@ -3,9 +3,9 @@
  */
 package de.evoal.languages.model.dl.util;
 
-import de.evoal.languages.model.el.FunctionName;
-
 import de.evoal.languages.model.dl.*;
+
+import de.evoal.languages.model.el.FunctionName;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -84,20 +84,6 @@ public class DlSwitch<T> extends Switch<T> {
 			case DlPackage.ATTRIBUTE_DEFINITION: {
 				AttributeDefinition attributeDefinition = (AttributeDefinition)theEObject;
 				T result = caseAttributeDefinition(attributeDefinition);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case DlPackage.UNNAMED_ATTRIBUTE_DEFINITION: {
-				UnnamedAttributeDefinition unnamedAttributeDefinition = (UnnamedAttributeDefinition)theEObject;
-				T result = caseUnnamedAttributeDefinition(unnamedAttributeDefinition);
-				if (result == null) result = caseAttributeDefinition(unnamedAttributeDefinition);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case DlPackage.NAMED_ATTRIBUTE_DEFINITION: {
-				NamedAttributeDefinition namedAttributeDefinition = (NamedAttributeDefinition)theEObject;
-				T result = caseNamedAttributeDefinition(namedAttributeDefinition);
-				if (result == null) result = caseAttributeDefinition(namedAttributeDefinition);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -246,36 +232,6 @@ public class DlSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseAttributeDefinition(AttributeDefinition object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Unnamed Attribute Definition</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Unnamed Attribute Definition</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseUnnamedAttributeDefinition(UnnamedAttributeDefinition object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Named Attribute Definition</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Named Attribute Definition</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseNamedAttributeDefinition(NamedAttributeDefinition object) {
 		return null;
 	}
 

@@ -3,9 +3,10 @@
  */
 package de.evoal.languages.model.instance.impl;
 
+import de.evoal.languages.model.dl.AttributeDefinition;
+
 import de.evoal.languages.model.instance.Attribute;
 import de.evoal.languages.model.instance.InstancePackage;
-import de.evoal.languages.model.instance.NameOrMisc;
 import de.evoal.languages.model.instance.Value;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -25,7 +26,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link de.evoal.languages.model.instance.impl.AttributeImpl#getName <em>Name</em>}</li>
+ *   <li>{@link de.evoal.languages.model.instance.impl.AttributeImpl#getDefinition <em>Definition</em>}</li>
  *   <li>{@link de.evoal.languages.model.instance.impl.AttributeImpl#getValue <em>Value</em>}</li>
  * </ul>
  *
@@ -33,14 +34,14 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  */
 public class AttributeImpl extends MinimalEObjectImpl.Container implements Attribute {
 	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' containment reference.
+	 * The cached value of the '{@link #getDefinition() <em>Definition</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getName()
+	 * @see #getDefinition()
 	 * @generated
 	 * @ordered
 	 */
-	protected NameOrMisc name;
+	protected AttributeDefinition definition;
 
 	/**
 	 * The cached value of the '{@link #getValue() <em>Value</em>}' containment reference.
@@ -77,8 +78,16 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
 	 * @generated
 	 */
 	@Override
-	public NameOrMisc getName() {
-		return name;
+	public AttributeDefinition getDefinition() {
+		if (definition != null && definition.eIsProxy()) {
+			InternalEObject oldDefinition = (InternalEObject)definition;
+			definition = (AttributeDefinition)eResolveProxy(oldDefinition);
+			if (definition != oldDefinition) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, InstancePackage.ATTRIBUTE__DEFINITION, oldDefinition, definition));
+			}
+		}
+		return definition;
 	}
 
 	/**
@@ -86,14 +95,8 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetName(NameOrMisc newName, NotificationChain msgs) {
-		NameOrMisc oldName = name;
-		name = newName;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, InstancePackage.ATTRIBUTE__NAME, oldName, newName);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
+	public AttributeDefinition basicGetDefinition() {
+		return definition;
 	}
 
 	/**
@@ -102,18 +105,11 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
 	 * @generated
 	 */
 	@Override
-	public void setName(NameOrMisc newName) {
-		if (newName != name) {
-			NotificationChain msgs = null;
-			if (name != null)
-				msgs = ((InternalEObject)name).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - InstancePackage.ATTRIBUTE__NAME, null, msgs);
-			if (newName != null)
-				msgs = ((InternalEObject)newName).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - InstancePackage.ATTRIBUTE__NAME, null, msgs);
-			msgs = basicSetName(newName, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, InstancePackage.ATTRIBUTE__NAME, newName, newName));
+	public void setDefinition(AttributeDefinition newDefinition) {
+		AttributeDefinition oldDefinition = definition;
+		definition = newDefinition;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, InstancePackage.ATTRIBUTE__DEFINITION, oldDefinition, definition));
 	}
 
 	/**
@@ -169,8 +165,6 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case InstancePackage.ATTRIBUTE__NAME:
-				return basicSetName(null, msgs);
 			case InstancePackage.ATTRIBUTE__VALUE:
 				return basicSetValue(null, msgs);
 		}
@@ -185,8 +179,9 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case InstancePackage.ATTRIBUTE__NAME:
-				return getName();
+			case InstancePackage.ATTRIBUTE__DEFINITION:
+				if (resolve) return getDefinition();
+				return basicGetDefinition();
 			case InstancePackage.ATTRIBUTE__VALUE:
 				return getValue();
 		}
@@ -201,8 +196,8 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case InstancePackage.ATTRIBUTE__NAME:
-				setName((NameOrMisc)newValue);
+			case InstancePackage.ATTRIBUTE__DEFINITION:
+				setDefinition((AttributeDefinition)newValue);
 				return;
 			case InstancePackage.ATTRIBUTE__VALUE:
 				setValue((Value)newValue);
@@ -219,8 +214,8 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case InstancePackage.ATTRIBUTE__NAME:
-				setName((NameOrMisc)null);
+			case InstancePackage.ATTRIBUTE__DEFINITION:
+				setDefinition((AttributeDefinition)null);
 				return;
 			case InstancePackage.ATTRIBUTE__VALUE:
 				setValue((Value)null);
@@ -237,8 +232,8 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case InstancePackage.ATTRIBUTE__NAME:
-				return name != null;
+			case InstancePackage.ATTRIBUTE__DEFINITION:
+				return definition != null;
 			case InstancePackage.ATTRIBUTE__VALUE:
 				return value != null;
 		}

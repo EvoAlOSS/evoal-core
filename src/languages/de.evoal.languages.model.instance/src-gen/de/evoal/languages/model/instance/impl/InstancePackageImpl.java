@@ -3,11 +3,11 @@
  */
 package de.evoal.languages.model.instance.impl;
 
-import de.evoal.languages.model.el.ELPackage;
-
 import de.evoal.languages.model.ddl.DdlPackage;
 
 import de.evoal.languages.model.dl.DlPackage;
+
+import de.evoal.languages.model.el.ELPackage;
 
 import de.evoal.languages.model.instance.Array;
 import de.evoal.languages.model.instance.Attribute;
@@ -16,12 +16,8 @@ import de.evoal.languages.model.instance.Instance;
 import de.evoal.languages.model.instance.InstanceFactory;
 import de.evoal.languages.model.instance.InstancePackage;
 import de.evoal.languages.model.instance.LiteralValue;
-import de.evoal.languages.model.instance.Misc;
-import de.evoal.languages.model.instance.Name;
-import de.evoal.languages.model.instance.NameOrMisc;
 import de.evoal.languages.model.instance.Value;
 
-import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
@@ -49,27 +45,6 @@ public class InstancePackageImpl extends EPackageImpl implements InstancePackage
 	 * @generated
 	 */
 	private EClass attributeEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass nameOrMiscEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass nameEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass miscEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -117,7 +92,6 @@ public class InstancePackageImpl extends EPackageImpl implements InstancePackage
 	private InstancePackageImpl() {
 		super(eNS_URI, InstanceFactory.eINSTANCE);
 	}
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -181,7 +155,7 @@ public class InstancePackageImpl extends EPackageImpl implements InstancePackage
 	 * @generated
 	 */
 	@Override
-	public EReference getInstance_Name() {
+	public EReference getInstance_Definition() {
 		return (EReference)instanceEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -211,7 +185,7 @@ public class InstancePackageImpl extends EPackageImpl implements InstancePackage
 	 * @generated
 	 */
 	@Override
-	public EReference getAttribute_Name() {
+	public EReference getAttribute_Definition() {
 		return (EReference)attributeEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -223,56 +197,6 @@ public class InstancePackageImpl extends EPackageImpl implements InstancePackage
 	@Override
 	public EReference getAttribute_Value() {
 		return (EReference)attributeEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getNameOrMisc() {
-		return nameOrMiscEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getName_() {
-		return nameEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getName_Name() {
-		return (EReference)nameEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getMisc() {
-		return miscEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getMisc_Name() {
-		return (EAttribute)miscEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -375,20 +299,12 @@ public class InstancePackageImpl extends EPackageImpl implements InstancePackage
 
 		// Create classes and their features
 		instanceEClass = createEClass(INSTANCE);
-		createEReference(instanceEClass, INSTANCE__NAME);
+		createEReference(instanceEClass, INSTANCE__DEFINITION);
 		createEReference(instanceEClass, INSTANCE__ATTRIBUTES);
 
 		attributeEClass = createEClass(ATTRIBUTE);
-		createEReference(attributeEClass, ATTRIBUTE__NAME);
+		createEReference(attributeEClass, ATTRIBUTE__DEFINITION);
 		createEReference(attributeEClass, ATTRIBUTE__VALUE);
-
-		nameOrMiscEClass = createEClass(NAME_OR_MISC);
-
-		nameEClass = createEClass(NAME);
-		createEReference(nameEClass, NAME__NAME);
-
-		miscEClass = createEClass(MISC);
-		createEAttribute(miscEClass, MISC__NAME);
 
 		valueEClass = createEClass(VALUE);
 
@@ -436,31 +352,21 @@ public class InstancePackageImpl extends EPackageImpl implements InstancePackage
 
 		// Add supertypes to classes
 		instanceEClass.getESuperTypes().add(this.getValue());
-		nameEClass.getESuperTypes().add(this.getNameOrMisc());
-		miscEClass.getESuperTypes().add(this.getNameOrMisc());
 		arrayEClass.getESuperTypes().add(this.getValue());
 		literalValueEClass.getESuperTypes().add(this.getValue());
 		dataReferenceEClass.getESuperTypes().add(this.getValue());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(instanceEClass, Instance.class, "Instance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getInstance_Name(), theDlPackage.getTypeDefinition(), null, "name", null, 0, 1, Instance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getInstance_Definition(), theDlPackage.getTypeDefinition(), null, "definition", null, 0, 1, Instance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getInstance_Attributes(), this.getAttribute(), null, "attributes", null, 0, -1, Instance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		EOperation op = addEOperation(instanceEClass, this.getAttribute(), "findAttribute", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "name", 1, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(attributeEClass, Attribute.class, "Attribute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getAttribute_Name(), this.getNameOrMisc(), null, "name", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAttribute_Definition(), theDlPackage.getAttributeDefinition(), null, "definition", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAttribute_Value(), this.getValue(), null, "value", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(nameOrMiscEClass, NameOrMisc.class, "NameOrMisc", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(nameEClass, Name.class, "Name", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getName_Name(), theDlPackage.getNamedAttributeDefinition(), null, "name", null, 0, 1, Name.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(miscEClass, Misc.class, "Misc", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getMisc_Name(), ecorePackage.getEString(), "name", null, 0, 1, Misc.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(valueEClass, Value.class, "Value", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

@@ -28,7 +28,7 @@ public class StatisticsFactory {
         final StatisticsWriter [] writers = array.getValues()
                                                  .stream()
                                                  .map(Instance.class::cast)
-                                                 .map(i -> new Pair<>(BeanProvider.getContextualReference(i.getName().getName(), false, StatisticsWriter.class), i))
+                                                 .map(i -> new Pair<>(BeanProvider.getContextualReference(i.getDefinition().getName(), false, StatisticsWriter.class), i))
                                                  .map(p -> p.getFirst().init(p.getSecond()))
                                                  .toArray(i -> new StatisticsWriter[i]);
 

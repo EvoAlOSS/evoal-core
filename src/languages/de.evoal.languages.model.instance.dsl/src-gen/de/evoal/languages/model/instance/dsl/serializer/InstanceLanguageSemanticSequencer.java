@@ -31,8 +31,6 @@ import de.evoal.languages.model.instance.DataReference;
 import de.evoal.languages.model.instance.Instance;
 import de.evoal.languages.model.instance.InstancePackage;
 import de.evoal.languages.model.instance.LiteralValue;
-import de.evoal.languages.model.instance.Misc;
-import de.evoal.languages.model.instance.Name;
 import de.evoal.languages.model.instance.dsl.services.InstanceLanguageGrammarAccess;
 import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
@@ -130,12 +128,6 @@ public class InstanceLanguageSemanticSequencer extends ExpressionLanguageSemanti
 			case InstancePackage.LITERAL_VALUE:
 				sequence_LiteralValueRule(context, (LiteralValue) semanticObject); 
 				return; 
-			case InstancePackage.MISC:
-				sequence_MiscRule(context, (Misc) semanticObject); 
-				return; 
-			case InstancePackage.NAME:
-				sequence_NameRule(context, (Name) semanticObject); 
-				return; 
 			}
 		if (errorAcceptor != null)
 			errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
@@ -162,18 +154,18 @@ public class InstanceLanguageSemanticSequencer extends ExpressionLanguageSemanti
 	 *     AttributeRule returns Attribute
 	 *
 	 * Constraint:
-	 *     (name=NameOrMiscRule value=ValueRule)
+	 *     (definition=[AttributeDefinition|StringOrId] value=ValueRule)
 	 * </pre>
 	 */
 	protected void sequence_AttributeRule(ISerializationContext context, Attribute semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, InstancePackage.Literals.ATTRIBUTE__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, InstancePackage.Literals.ATTRIBUTE__NAME));
+			if (transientValues.isValueTransient(semanticObject, InstancePackage.Literals.ATTRIBUTE__DEFINITION) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, InstancePackage.Literals.ATTRIBUTE__DEFINITION));
 			if (transientValues.isValueTransient(semanticObject, InstancePackage.Literals.ATTRIBUTE__VALUE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, InstancePackage.Literals.ATTRIBUTE__VALUE));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getAttributeRuleAccess().getNameNameOrMiscRuleParserRuleCall_0_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getAttributeRuleAccess().getDefinitionAttributeDefinitionStringOrIdParserRuleCall_0_0_1(), semanticObject.eGet(InstancePackage.Literals.ATTRIBUTE__DEFINITION, false));
 		feeder.accept(grammarAccess.getAttributeRuleAccess().getValueValueRuleParserRuleCall_2_0(), semanticObject.getValue());
 		feeder.finish();
 	}
@@ -207,7 +199,7 @@ public class InstanceLanguageSemanticSequencer extends ExpressionLanguageSemanti
 	 *     ValueRule returns Instance
 	 *
 	 * Constraint:
-	 *     (name=[TypeDefinition|StringOrId] attributes+=AttributeRule*)
+	 *     (definition=[TypeDefinition|StringOrId] attributes+=AttributeRule*)
 	 * </pre>
 	 */
 	protected void sequence_InstanceRule(ISerializationContext context, Instance semanticObject) {
@@ -232,48 +224,6 @@ public class InstanceLanguageSemanticSequencer extends ExpressionLanguageSemanti
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getLiteralValueRuleAccess().getLiteralLiteralRuleParserRuleCall_0(), semanticObject.getLiteral());
-		feeder.finish();
-	}
-	
-	
-	/**
-	 * <pre>
-	 * Contexts:
-	 *     NameOrMiscRule returns Misc
-	 *     MiscRule returns Misc
-	 *
-	 * Constraint:
-	 *     name=STRING
-	 * </pre>
-	 */
-	protected void sequence_MiscRule(ISerializationContext context, Misc semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, InstancePackage.Literals.MISC__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, InstancePackage.Literals.MISC__NAME));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getMiscRuleAccess().getNameSTRINGTerminalRuleCall_0(), semanticObject.getName());
-		feeder.finish();
-	}
-	
-	
-	/**
-	 * <pre>
-	 * Contexts:
-	 *     NameOrMiscRule returns Name
-	 *     NameRule returns Name
-	 *
-	 * Constraint:
-	 *     name=[NamedAttributeDefinition|StringOrId]
-	 * </pre>
-	 */
-	protected void sequence_NameRule(ISerializationContext context, Name semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, InstancePackage.Literals.NAME__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, InstancePackage.Literals.NAME__NAME));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getNameRuleAccess().getNameNamedAttributeDefinitionStringOrIdParserRuleCall_0_1(), semanticObject.eGet(InstancePackage.Literals.NAME__NAME, false));
 		feeder.finish();
 	}
 	

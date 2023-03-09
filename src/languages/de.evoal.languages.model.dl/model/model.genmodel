@@ -20,10 +20,7 @@
     </genClasses>
     <genClasses ecoreClass="model.ecore#//AttributeDefinition">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//AttributeDefinition/type"/>
-    </genClasses>
-    <genClasses ecoreClass="model.ecore#//UnnamedAttributeDefinition"/>
-    <genClasses ecoreClass="model.ecore#//NamedAttributeDefinition">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//NamedAttributeDefinition/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//AttributeDefinition/name"/>
     </genClasses>
     <genClasses ecoreClass="model.ecore#//Type"/>
     <genClasses ecoreClass="model.ecore#//InstanceType">

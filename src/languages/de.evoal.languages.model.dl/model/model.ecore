@@ -55,9 +55,9 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AttributeDefinition" abstract="true">
+  <eClassifiers xsi:type="ecore:EClass" name="AttributeDefinition">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="Base class for named and unnamed attributes."/>
+      <details key="documentation" value="An attribute (similar to a Java field)."/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="#//Type"
         containment="true">
@@ -65,16 +65,6 @@
         <details key="documentation" value="Type of the attribute."/>
       </eAnnotations>
     </eStructuralFeatures>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="UnnamedAttributeDefinition" eSuperTypes="#//AttributeDefinition">
-    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="Attribute without a specified name."/>
-    </eAnnotations>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="NamedAttributeDefinition" eSuperTypes="#//AttributeDefinition">
-    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="A simple named attribute (similar to a Java field)."/>
-    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The actual attribute name."/>

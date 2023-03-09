@@ -11,7 +11,7 @@ public abstract class FitnessDecorator implements FitnessFunction {
     public FitnessFunction init(final Instance config) {
         final Instance decoratedConfig = (Instance) config.findAttribute("function").getValue();
 
-        decoratedFunction = BeanFactory.create(decoratedConfig.getName().getName(), FitnessFunction.class);
+        decoratedFunction = BeanFactory.create(decoratedConfig.getDefinition().getName(), FitnessFunction.class);
         decoratedFunction.init(decoratedConfig);
 
         return this;

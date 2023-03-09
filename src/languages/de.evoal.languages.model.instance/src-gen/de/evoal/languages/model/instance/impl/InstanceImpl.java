@@ -8,7 +8,6 @@ import de.evoal.languages.model.dl.TypeDefinition;
 import de.evoal.languages.model.instance.Attribute;
 import de.evoal.languages.model.instance.Instance;
 import de.evoal.languages.model.instance.InstancePackage;
-import de.evoal.languages.model.instance.Name;
 
 import java.util.Collection;
 
@@ -33,7 +32,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link de.evoal.languages.model.instance.impl.InstanceImpl#getName <em>Name</em>}</li>
+ *   <li>{@link de.evoal.languages.model.instance.impl.InstanceImpl#getDefinition <em>Definition</em>}</li>
  *   <li>{@link de.evoal.languages.model.instance.impl.InstanceImpl#getAttributes <em>Attributes</em>}</li>
  * </ul>
  *
@@ -41,14 +40,14 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class InstanceImpl extends ValueImpl implements Instance {
 	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' reference.
+	 * The cached value of the '{@link #getDefinition() <em>Definition</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getName()
+	 * @see #getDefinition()
 	 * @generated
 	 * @ordered
 	 */
-	protected TypeDefinition name;
+	protected TypeDefinition definition;
 
 	/**
 	 * The cached value of the '{@link #getAttributes() <em>Attributes</em>}' containment reference list.
@@ -85,16 +84,16 @@ public class InstanceImpl extends ValueImpl implements Instance {
 	 * @generated
 	 */
 	@Override
-	public TypeDefinition getName() {
-		if (name != null && name.eIsProxy()) {
-			InternalEObject oldName = (InternalEObject)name;
-			name = (TypeDefinition)eResolveProxy(oldName);
-			if (name != oldName) {
+	public TypeDefinition getDefinition() {
+		if (definition != null && definition.eIsProxy()) {
+			InternalEObject oldDefinition = (InternalEObject)definition;
+			definition = (TypeDefinition)eResolveProxy(oldDefinition);
+			if (definition != oldDefinition) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, InstancePackage.INSTANCE__NAME, oldName, name));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, InstancePackage.INSTANCE__DEFINITION, oldDefinition, definition));
 			}
 		}
-		return name;
+		return definition;
 	}
 
 	/**
@@ -102,8 +101,8 @@ public class InstanceImpl extends ValueImpl implements Instance {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TypeDefinition basicGetName() {
-		return name;
+	public TypeDefinition basicGetDefinition() {
+		return definition;
 	}
 
 	/**
@@ -112,11 +111,11 @@ public class InstanceImpl extends ValueImpl implements Instance {
 	 * @generated
 	 */
 	@Override
-	public void setName(TypeDefinition newName) {
-		TypeDefinition oldName = name;
-		name = newName;
+	public void setDefinition(TypeDefinition newDefinition) {
+		TypeDefinition oldDefinition = definition;
+		definition = newDefinition;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, InstancePackage.INSTANCE__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, InstancePackage.INSTANCE__DEFINITION, oldDefinition, definition));
 	}
 
 	/**
@@ -141,7 +140,7 @@ public class InstanceImpl extends ValueImpl implements Instance {
 	public Attribute findAttribute(final String name) {
 		return this.getAttributes()
 		                 .stream()
-		                 .filter(n -> name.equals(((Name)n.getName()).getName().getName()))
+		                 .filter(n -> name.equals(n.getDefinition().getName()))
 		                 .findFirst()
 		                 .orElse(null);
 	}
@@ -168,9 +167,9 @@ public class InstanceImpl extends ValueImpl implements Instance {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case InstancePackage.INSTANCE__NAME:
-				if (resolve) return getName();
-				return basicGetName();
+			case InstancePackage.INSTANCE__DEFINITION:
+				if (resolve) return getDefinition();
+				return basicGetDefinition();
 			case InstancePackage.INSTANCE__ATTRIBUTES:
 				return getAttributes();
 		}
@@ -186,8 +185,8 @@ public class InstanceImpl extends ValueImpl implements Instance {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case InstancePackage.INSTANCE__NAME:
-				setName((TypeDefinition)newValue);
+			case InstancePackage.INSTANCE__DEFINITION:
+				setDefinition((TypeDefinition)newValue);
 				return;
 			case InstancePackage.INSTANCE__ATTRIBUTES:
 				getAttributes().clear();
@@ -205,8 +204,8 @@ public class InstanceImpl extends ValueImpl implements Instance {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case InstancePackage.INSTANCE__NAME:
-				setName((TypeDefinition)null);
+			case InstancePackage.INSTANCE__DEFINITION:
+				setDefinition((TypeDefinition)null);
 				return;
 			case InstancePackage.INSTANCE__ATTRIBUTES:
 				getAttributes().clear();
@@ -223,8 +222,8 @@ public class InstanceImpl extends ValueImpl implements Instance {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case InstancePackage.INSTANCE__NAME:
-				return name != null;
+			case InstancePackage.INSTANCE__DEFINITION:
+				return definition != null;
 			case InstancePackage.INSTANCE__ATTRIBUTES:
 				return attributes != null && !attributes.isEmpty();
 		}

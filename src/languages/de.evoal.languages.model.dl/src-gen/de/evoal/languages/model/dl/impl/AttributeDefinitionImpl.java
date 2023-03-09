@@ -25,11 +25,12 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * </p>
  * <ul>
  *   <li>{@link de.evoal.languages.model.dl.impl.AttributeDefinitionImpl#getType <em>Type</em>}</li>
+ *   <li>{@link de.evoal.languages.model.dl.impl.AttributeDefinitionImpl#getName <em>Name</em>}</li>
  * </ul>
  *
  * @generated
  */
-public abstract class AttributeDefinitionImpl extends MinimalEObjectImpl.Container implements AttributeDefinition {
+public class AttributeDefinitionImpl extends MinimalEObjectImpl.Container implements AttributeDefinition {
 	/**
 	 * The cached value of the '{@link #getType() <em>Type</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -39,6 +40,26 @@ public abstract class AttributeDefinitionImpl extends MinimalEObjectImpl.Contain
 	 * @ordered
 	 */
 	protected Type type;
+
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -110,6 +131,29 @@ public abstract class AttributeDefinitionImpl extends MinimalEObjectImpl.Contain
 	 * @generated
 	 */
 	@Override
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DlPackage.ATTRIBUTE_DEFINITION__NAME, oldName, name));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case DlPackage.ATTRIBUTE_DEFINITION__TYPE:
@@ -128,6 +172,8 @@ public abstract class AttributeDefinitionImpl extends MinimalEObjectImpl.Contain
 		switch (featureID) {
 			case DlPackage.ATTRIBUTE_DEFINITION__TYPE:
 				return getType();
+			case DlPackage.ATTRIBUTE_DEFINITION__NAME:
+				return getName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -142,6 +188,9 @@ public abstract class AttributeDefinitionImpl extends MinimalEObjectImpl.Contain
 		switch (featureID) {
 			case DlPackage.ATTRIBUTE_DEFINITION__TYPE:
 				setType((Type)newValue);
+				return;
+			case DlPackage.ATTRIBUTE_DEFINITION__NAME:
+				setName((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -158,6 +207,9 @@ public abstract class AttributeDefinitionImpl extends MinimalEObjectImpl.Contain
 			case DlPackage.ATTRIBUTE_DEFINITION__TYPE:
 				setType((Type)null);
 				return;
+			case DlPackage.ATTRIBUTE_DEFINITION__NAME:
+				setName(NAME_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -172,8 +224,26 @@ public abstract class AttributeDefinitionImpl extends MinimalEObjectImpl.Contain
 		switch (featureID) {
 			case DlPackage.ATTRIBUTE_DEFINITION__TYPE:
 				return type != null;
+			case DlPackage.ATTRIBUTE_DEFINITION__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuilder result = new StringBuilder(super.toString());
+		result.append(" (name: ");
+		result.append(name);
+		result.append(')');
+		return result.toString();
 	}
 
 } //AttributeDefinitionImpl

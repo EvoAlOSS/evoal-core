@@ -3,7 +3,6 @@ package de.evoal.surrogate.api.configuration;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import de.evoal.languages.model.instance.LiteralValue;
-import de.evoal.languages.model.instance.Name;
 import de.evoal.surrogate.main.jackson.ReflectiveDeserializer;
 import de.evoal.surrogate.main.jackson.ReflectiveSerializer;
 import de.evoal.languages.model.instance.Attribute;
@@ -25,7 +24,7 @@ public class Parameter {
 
 	public static Parameter from(final Attribute attribute) {
 		final Parameter parameter = new Parameter();
-		parameter.setName(((Name)attribute.getName()).getName().getName());
+		parameter.setName(attribute.getDefinition().getName());
 		parameter.setValue(((LiteralValue)attribute.getValue()).getLiteral().getValue());
 
 		return parameter;

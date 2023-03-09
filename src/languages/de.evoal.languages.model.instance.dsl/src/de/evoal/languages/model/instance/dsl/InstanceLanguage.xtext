@@ -7,25 +7,13 @@ import "https://www.evoal.de/languages/ddl/1.0.0" as ddl
 import "https://www.evoal.de/languages/el/1.0.0" as el
 
 InstanceRule returns Instance:
-	name = [dl::TypeDefinition|StringOrId] ('{'
+	definition = [dl::TypeDefinition|StringOrId] ('{'
 	  attributes += AttributeRule*
 	'}')?
 ;
 
 AttributeRule returns Attribute:
-	name = NameOrMiscRule ':=' value = ValueRule ';'
-;
-
-NameOrMiscRule returns NameOrMisc:
-	NameRule | MiscRule
-;
-
-NameRule returns Name:
-	name = [dl::NamedAttributeDefinition|StringOrId]
-;
-
-MiscRule returns Misc:
-	name = STRING
+	definition = [dl::AttributeDefinition|StringOrId] ':=' value = ValueRule ';'
 ;
 
 ValueRule returns Value:

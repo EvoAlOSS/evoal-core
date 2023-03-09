@@ -8,7 +8,7 @@ import javax.enterprise.context.ApplicationScoped;
 @ApplicationScoped
 public class DynamicChromosomeFactory {
     public DynamicChromosome create(final Instance specification) {
-        final String chromosomeName = specification.getName().getName();
+        final String chromosomeName = specification.getDefinition().getName();
 
         final DynamicChromosome chromosome = BeanFactory.create(chromosomeName, DynamicChromosome.class);
         chromosome.init(specification);

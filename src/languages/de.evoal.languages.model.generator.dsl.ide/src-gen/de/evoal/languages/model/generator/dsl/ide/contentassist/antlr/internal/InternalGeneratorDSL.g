@@ -424,81 +424,6 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-// Entry rule entryRuleNameOrMiscRule
-entryRuleNameOrMiscRule
-:
-{ before(grammarAccess.getNameOrMiscRuleRule()); }
-	 ruleNameOrMiscRule
-{ after(grammarAccess.getNameOrMiscRuleRule()); } 
-	 EOF 
-;
-
-// Rule NameOrMiscRule
-ruleNameOrMiscRule 
-	@init {
-		int stackSize = keepStackSize();
-	}
-	:
-	(
-		{ before(grammarAccess.getNameOrMiscRuleAccess().getAlternatives()); }
-		(rule__NameOrMiscRule__Alternatives)
-		{ after(grammarAccess.getNameOrMiscRuleAccess().getAlternatives()); }
-	)
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-// Entry rule entryRuleNameRule
-entryRuleNameRule
-:
-{ before(grammarAccess.getNameRuleRule()); }
-	 ruleNameRule
-{ after(grammarAccess.getNameRuleRule()); } 
-	 EOF 
-;
-
-// Rule NameRule
-ruleNameRule 
-	@init {
-		int stackSize = keepStackSize();
-	}
-	:
-	(
-		{ before(grammarAccess.getNameRuleAccess().getNameAssignment()); }
-		(rule__NameRule__NameAssignment)
-		{ after(grammarAccess.getNameRuleAccess().getNameAssignment()); }
-	)
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-// Entry rule entryRuleMiscRule
-entryRuleMiscRule
-:
-{ before(grammarAccess.getMiscRuleRule()); }
-	 ruleMiscRule
-{ after(grammarAccess.getMiscRuleRule()); } 
-	 EOF 
-;
-
-// Rule MiscRule
-ruleMiscRule 
-	@init {
-		int stackSize = keepStackSize();
-	}
-	:
-	(
-		{ before(grammarAccess.getMiscRuleAccess().getNameAssignment()); }
-		(rule__MiscRule__NameAssignment)
-		{ after(grammarAccess.getMiscRuleAccess().getNameAssignment()); }
-	)
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
 // Entry rule entryRuleValueRule
 entryRuleValueRule
 :
@@ -1295,27 +1220,6 @@ rule__PipelineReferenceRule__Alternatives
 		{ before(grammarAccess.getPipelineReferenceRuleAccess().getVariableReferenceRuleParserRuleCall_1()); }
 		ruleVariableReferenceRule
 		{ after(grammarAccess.getPipelineReferenceRuleAccess().getVariableReferenceRuleParserRuleCall_1()); }
-	)
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-rule__NameOrMiscRule__Alternatives
-	@init {
-		int stackSize = keepStackSize();
-	}
-:
-	(
-		{ before(grammarAccess.getNameOrMiscRuleAccess().getNameRuleParserRuleCall_0()); }
-		ruleNameRule
-		{ after(grammarAccess.getNameOrMiscRuleAccess().getNameRuleParserRuleCall_0()); }
-	)
-	|
-	(
-		{ before(grammarAccess.getNameOrMiscRuleAccess().getMiscRuleParserRuleCall_1()); }
-		ruleMiscRule
-		{ after(grammarAccess.getNameOrMiscRuleAccess().getMiscRuleParserRuleCall_1()); }
 	)
 ;
 finally {
@@ -3689,9 +3593,9 @@ rule__InstanceRule__Group__0__Impl
 	}
 :
 (
-	{ before(grammarAccess.getInstanceRuleAccess().getNameAssignment_0()); }
-	(rule__InstanceRule__NameAssignment_0)
-	{ after(grammarAccess.getInstanceRuleAccess().getNameAssignment_0()); }
+	{ before(grammarAccess.getInstanceRuleAccess().getDefinitionAssignment_0()); }
+	(rule__InstanceRule__DefinitionAssignment_0)
+	{ after(grammarAccess.getInstanceRuleAccess().getDefinitionAssignment_0()); }
 )
 ;
 finally {
@@ -3824,9 +3728,9 @@ rule__AttributeRule__Group__0__Impl
 	}
 :
 (
-	{ before(grammarAccess.getAttributeRuleAccess().getNameAssignment_0()); }
-	(rule__AttributeRule__NameAssignment_0)
-	{ after(grammarAccess.getAttributeRuleAccess().getNameAssignment_0()); }
+	{ before(grammarAccess.getAttributeRuleAccess().getDefinitionAssignment_0()); }
+	(rule__AttributeRule__DefinitionAssignment_0)
+	{ after(grammarAccess.getAttributeRuleAccess().getDefinitionAssignment_0()); }
 )
 ;
 finally {
@@ -6010,19 +5914,19 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__InstanceRule__NameAssignment_0
+rule__InstanceRule__DefinitionAssignment_0
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 	(
-		{ before(grammarAccess.getInstanceRuleAccess().getNameTypeDefinitionCrossReference_0_0()); }
+		{ before(grammarAccess.getInstanceRuleAccess().getDefinitionTypeDefinitionCrossReference_0_0()); }
 		(
-			{ before(grammarAccess.getInstanceRuleAccess().getNameTypeDefinitionStringOrIdParserRuleCall_0_0_1()); }
+			{ before(grammarAccess.getInstanceRuleAccess().getDefinitionTypeDefinitionStringOrIdParserRuleCall_0_0_1()); }
 			ruleStringOrId
-			{ after(grammarAccess.getInstanceRuleAccess().getNameTypeDefinitionStringOrIdParserRuleCall_0_0_1()); }
+			{ after(grammarAccess.getInstanceRuleAccess().getDefinitionTypeDefinitionStringOrIdParserRuleCall_0_0_1()); }
 		)
-		{ after(grammarAccess.getInstanceRuleAccess().getNameTypeDefinitionCrossReference_0_0()); }
+		{ after(grammarAccess.getInstanceRuleAccess().getDefinitionTypeDefinitionCrossReference_0_0()); }
 	)
 ;
 finally {
@@ -6044,15 +5948,19 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__AttributeRule__NameAssignment_0
+rule__AttributeRule__DefinitionAssignment_0
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 	(
-		{ before(grammarAccess.getAttributeRuleAccess().getNameNameOrMiscRuleParserRuleCall_0_0()); }
-		ruleNameOrMiscRule
-		{ after(grammarAccess.getAttributeRuleAccess().getNameNameOrMiscRuleParserRuleCall_0_0()); }
+		{ before(grammarAccess.getAttributeRuleAccess().getDefinitionAttributeDefinitionCrossReference_0_0()); }
+		(
+			{ before(grammarAccess.getAttributeRuleAccess().getDefinitionAttributeDefinitionStringOrIdParserRuleCall_0_0_1()); }
+			ruleStringOrId
+			{ after(grammarAccess.getAttributeRuleAccess().getDefinitionAttributeDefinitionStringOrIdParserRuleCall_0_0_1()); }
+		)
+		{ after(grammarAccess.getAttributeRuleAccess().getDefinitionAttributeDefinitionCrossReference_0_0()); }
 	)
 ;
 finally {
@@ -6068,40 +5976,6 @@ rule__AttributeRule__ValueAssignment_2
 		{ before(grammarAccess.getAttributeRuleAccess().getValueValueRuleParserRuleCall_2_0()); }
 		ruleValueRule
 		{ after(grammarAccess.getAttributeRuleAccess().getValueValueRuleParserRuleCall_2_0()); }
-	)
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-rule__NameRule__NameAssignment
-	@init {
-		int stackSize = keepStackSize();
-	}
-:
-	(
-		{ before(grammarAccess.getNameRuleAccess().getNameNamedAttributeDefinitionCrossReference_0()); }
-		(
-			{ before(grammarAccess.getNameRuleAccess().getNameNamedAttributeDefinitionStringOrIdParserRuleCall_0_1()); }
-			ruleStringOrId
-			{ after(grammarAccess.getNameRuleAccess().getNameNamedAttributeDefinitionStringOrIdParserRuleCall_0_1()); }
-		)
-		{ after(grammarAccess.getNameRuleAccess().getNameNamedAttributeDefinitionCrossReference_0()); }
-	)
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-rule__MiscRule__NameAssignment
-	@init {
-		int stackSize = keepStackSize();
-	}
-:
-	(
-		{ before(grammarAccess.getMiscRuleAccess().getNameSTRINGTerminalRuleCall_0()); }
-		RULE_STRING
-		{ after(grammarAccess.getMiscRuleAccess().getNameSTRINGTerminalRuleCall_0()); }
 	)
 ;
 finally {

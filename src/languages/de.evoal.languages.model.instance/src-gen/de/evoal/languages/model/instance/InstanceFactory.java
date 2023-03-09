@@ -41,33 +41,6 @@ public interface InstanceFactory extends EFactory {
 	Attribute createAttribute();
 
 	/**
-	 * Returns a new object of class '<em>Name Or Misc</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Name Or Misc</em>'.
-	 * @generated
-	 */
-	NameOrMisc createNameOrMisc();
-
-	/**
-	 * Returns a new object of class '<em>Name</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Name</em>'.
-	 * @generated
-	 */
-	Name createName();
-
-	/**
-	 * Returns a new object of class '<em>Misc</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Misc</em>'.
-	 * @generated
-	 */
-	Misc createMisc();
-
-	/**
 	 * Returns a new object of class '<em>Value</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

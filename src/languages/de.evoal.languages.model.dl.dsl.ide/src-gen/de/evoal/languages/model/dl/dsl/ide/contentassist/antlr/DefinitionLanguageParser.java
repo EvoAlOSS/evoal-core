@@ -33,7 +33,6 @@ public class DefinitionLanguageParser extends AbstractContentAssistParser {
 		
 		private static void init(ImmutableMap.Builder<AbstractElement, String> builder, DefinitionLanguageGrammarAccess grammarAccess) {
 			builder.put(grammarAccess.getDefinitionModelRuleAccess().getAlternatives(), "rule__DefinitionModelRule__Alternatives");
-			builder.put(grammarAccess.getAttributeDefinitionRuleAccess().getAlternatives(), "rule__AttributeDefinitionRule__Alternatives");
 			builder.put(grammarAccess.getTypeRuleAccess().getAlternatives(), "rule__TypeRule__Alternatives");
 			builder.put(grammarAccess.getLiteralOrReferenceRuleAccess().getAlternatives(), "rule__LiteralOrReferenceRule__Alternatives");
 			builder.put(grammarAccess.getLiteralRuleAccess().getAlternatives(), "rule__LiteralRule__Alternatives");
@@ -46,8 +45,7 @@ public class DefinitionLanguageParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getFactorRuleAccess().getAlternatives(), "rule__FactorRule__Alternatives");
 			builder.put(grammarAccess.getTypeDefinitionRuleAccess().getGroup(), "rule__TypeDefinitionRule__Group__0");
 			builder.put(grammarAccess.getTypeDefinitionRuleAccess().getGroup_3(), "rule__TypeDefinitionRule__Group_3__0");
-			builder.put(grammarAccess.getUnnamedAttributeDefinitionRuleAccess().getGroup(), "rule__UnnamedAttributeDefinitionRule__Group__0");
-			builder.put(grammarAccess.getNamedAttributeDefinitionRuleAccess().getGroup(), "rule__NamedAttributeDefinitionRule__Group__0");
+			builder.put(grammarAccess.getAttributeDefinitionRuleAccess().getGroup(), "rule__AttributeDefinitionRule__Group__0");
 			builder.put(grammarAccess.getLiteralTypeRuleAccess().getGroup(), "rule__LiteralTypeRule__Group__0");
 			builder.put(grammarAccess.getInstanceTypeRuleAccess().getGroup(), "rule__InstanceTypeRule__Group__0");
 			builder.put(grammarAccess.getInstanceTypeRuleAccess().getGroup_3(), "rule__InstanceTypeRule__Group_3__0");
@@ -93,9 +91,8 @@ public class DefinitionLanguageParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getTypeDefinitionRuleAccess().getNameAssignment_2(), "rule__TypeDefinitionRule__NameAssignment_2");
 			builder.put(grammarAccess.getTypeDefinitionRuleAccess().getSuperTypeAssignment_3_1(), "rule__TypeDefinitionRule__SuperTypeAssignment_3_1");
 			builder.put(grammarAccess.getTypeDefinitionRuleAccess().getAttributesAssignment_5(), "rule__TypeDefinitionRule__AttributesAssignment_5");
-			builder.put(grammarAccess.getUnnamedAttributeDefinitionRuleAccess().getTypeAssignment_2(), "rule__UnnamedAttributeDefinitionRule__TypeAssignment_2");
-			builder.put(grammarAccess.getNamedAttributeDefinitionRuleAccess().getNameAssignment_0(), "rule__NamedAttributeDefinitionRule__NameAssignment_0");
-			builder.put(grammarAccess.getNamedAttributeDefinitionRuleAccess().getTypeAssignment_2(), "rule__NamedAttributeDefinitionRule__TypeAssignment_2");
+			builder.put(grammarAccess.getAttributeDefinitionRuleAccess().getNameAssignment_0(), "rule__AttributeDefinitionRule__NameAssignment_0");
+			builder.put(grammarAccess.getAttributeDefinitionRuleAccess().getTypeAssignment_2(), "rule__AttributeDefinitionRule__TypeAssignment_2");
 			builder.put(grammarAccess.getInstanceTypeRuleAccess().getDefinitionsAssignment_2(), "rule__InstanceTypeRule__DefinitionsAssignment_2");
 			builder.put(grammarAccess.getInstanceTypeRuleAccess().getDefinitionsAssignment_3_1(), "rule__InstanceTypeRule__DefinitionsAssignment_3_1");
 			builder.put(grammarAccess.getArrayTypeRuleAccess().getElementsAssignment_1(), "rule__ArrayTypeRule__ElementsAssignment_1");

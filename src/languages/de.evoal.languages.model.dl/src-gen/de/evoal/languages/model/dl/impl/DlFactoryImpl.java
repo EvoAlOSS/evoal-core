@@ -59,8 +59,7 @@ public class DlFactoryImpl extends EFactoryImpl implements DlFactory {
 		switch (eClass.getClassifierID()) {
 			case DlPackage.DEFINITION_MODEL: return createDefinitionModel();
 			case DlPackage.TYPE_DEFINITION: return createTypeDefinition();
-			case DlPackage.UNNAMED_ATTRIBUTE_DEFINITION: return createUnnamedAttributeDefinition();
-			case DlPackage.NAMED_ATTRIBUTE_DEFINITION: return createNamedAttributeDefinition();
+			case DlPackage.ATTRIBUTE_DEFINITION: return createAttributeDefinition();
 			case DlPackage.INSTANCE_TYPE: return createInstanceType();
 			case DlPackage.LITERAL_TYPE: return createLiteralType();
 			case DlPackage.STRING_TYPE: return createStringType();
@@ -107,20 +106,9 @@ public class DlFactoryImpl extends EFactoryImpl implements DlFactory {
 	 * @generated
 	 */
 	@Override
-	public UnnamedAttributeDefinition createUnnamedAttributeDefinition() {
-		UnnamedAttributeDefinitionImpl unnamedAttributeDefinition = new UnnamedAttributeDefinitionImpl();
-		return unnamedAttributeDefinition;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NamedAttributeDefinition createNamedAttributeDefinition() {
-		NamedAttributeDefinitionImpl namedAttributeDefinition = new NamedAttributeDefinitionImpl();
-		return namedAttributeDefinition;
+	public AttributeDefinition createAttributeDefinition() {
+		AttributeDefinitionImpl attributeDefinition = new AttributeDefinitionImpl();
+		return attributeDefinition;
 	}
 
 	/**

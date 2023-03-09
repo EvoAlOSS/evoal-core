@@ -9,22 +9,15 @@
   <genPackages prefix="Instance" basePackage="de.evoal.languages.model" disposableProviderFactory="true"
       fileExtensions="instance" ecorePackage="model.ecore#/">
     <genClasses ecoreClass="model.ecore#//Instance">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//Instance/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//Instance/definition"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//Instance/attributes"/>
-      <genOperations ecoreOperation="model.ecore#//Instance/findAttribute" body="return this.getAttributes()&#xA;                 .stream()&#xA;                 .filter(n -> name.equals(((&lt;%de.evoal.languages.model.instance.Name%>)n.getName()).getName().getName()))&#xA;                 .findFirst()&#xA;                 .orElse(null);">
+      <genOperations ecoreOperation="model.ecore#//Instance/findAttribute" body="return this.getAttributes()&#xA;                 .stream()&#xA;                 .filter(n -> name.equals(n.getDefinition().getName()))&#xA;                 .findFirst()&#xA;                 .orElse(null);">
         <genParameters ecoreParameter="model.ecore#//Instance/findAttribute/name"/>
       </genOperations>
     </genClasses>
     <genClasses ecoreClass="model.ecore#//Attribute">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//Attribute/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//Attribute/definition"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//Attribute/value"/>
-    </genClasses>
-    <genClasses ecoreClass="model.ecore#//NameOrMisc"/>
-    <genClasses ecoreClass="model.ecore#//Name">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//Name/name"/>
-    </genClasses>
-    <genClasses ecoreClass="model.ecore#//Misc">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//Misc/name"/>
     </genClasses>
     <genClasses ecoreClass="model.ecore#//Value"/>
     <genClasses ecoreClass="model.ecore#//Array">

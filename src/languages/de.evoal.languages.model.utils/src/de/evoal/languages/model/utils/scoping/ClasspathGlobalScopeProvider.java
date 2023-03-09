@@ -3,6 +3,7 @@ package de.evoal.languages.model.utils.scoping;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.logging.Logger;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
@@ -20,6 +21,7 @@ import de.evoal.languages.model.utils.builtin.BuiltinProvider;
 import de.evoal.languages.model.utils.builtin.BuiltinProviderFactory;
 
 public abstract class ClasspathGlobalScopeProvider extends ImportUriGlobalScopeProvider {
+	private static Logger log = Logger.getLogger("de.evoal.languages.model.utils.scoping.ClasspathGlobalScopeProvider");
 	@Inject
 	IResourceDescription.Manager mgr;
 	
@@ -29,8 +31,10 @@ public abstract class ClasspathGlobalScopeProvider extends ImportUriGlobalScopeP
 		this.name = name;
 	}
 
+	/*
 	@Override
 	protected IScope getScope(Resource resource, boolean ignoreCase, EClass type, Predicate<IEObjectDescription> predicate) {
+		log.info(() -> "Providing scopes for " + resource.toString());
 		final BuiltinProvider provider = BuiltinProviderFactory.create();
 		final Collection<java.net.URI> files = provider.findBuiltins(name);
 
@@ -42,8 +46,10 @@ public abstract class ClasspathGlobalScopeProvider extends ImportUriGlobalScopeP
 				try {
 					libraryResource = resource.getResourceSet().createResource(libearyResourceURI);
 					libraryResource.load(Collections.emptyMap());
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
+					libraryResource.getWarnings().stream().forEach(System.err::println);
+					libraryResource.getErrors().stream().forEach(System.err::println);
+				} catch (final IOException e) {
+					log.warning(() -> "Failed to load library resource: " + file);
 					e.printStackTrace();
 				}
 			}
@@ -54,5 +60,6 @@ public abstract class ClasspathGlobalScopeProvider extends ImportUriGlobalScopeP
 		
 		return scope;
 	}
+	*/
 }
 

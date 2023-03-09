@@ -241,101 +241,15 @@ ruleAttributeDefinitionRule returns [EObject current=null]
 	leaveRule();
 }:
 	(
-		{
-			newCompositeNode(grammarAccess.getAttributeDefinitionRuleAccess().getNamedAttributeDefinitionRuleParserRuleCall_0());
-		}
-		this_NamedAttributeDefinitionRule_0=ruleNamedAttributeDefinitionRule
-		{
-			$current = $this_NamedAttributeDefinitionRule_0.current;
-			afterParserOrEnumRuleCall();
-		}
-		    |
-		{
-			newCompositeNode(grammarAccess.getAttributeDefinitionRuleAccess().getUnnamedAttributeDefinitionRuleParserRuleCall_1());
-		}
-		this_UnnamedAttributeDefinitionRule_1=ruleUnnamedAttributeDefinitionRule
-		{
-			$current = $this_UnnamedAttributeDefinitionRule_1.current;
-			afterParserOrEnumRuleCall();
-		}
-	)
-;
-
-// Entry rule entryRuleUnnamedAttributeDefinitionRule
-entryRuleUnnamedAttributeDefinitionRule returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getUnnamedAttributeDefinitionRuleRule()); }
-	iv_ruleUnnamedAttributeDefinitionRule=ruleUnnamedAttributeDefinitionRule
-	{ $current=$iv_ruleUnnamedAttributeDefinitionRule.current; }
-	EOF;
-
-// Rule UnnamedAttributeDefinitionRule
-ruleUnnamedAttributeDefinitionRule returns [EObject current=null]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
-	(
-		otherlv_0='unnamed'
-		{
-			newLeafNode(otherlv_0, grammarAccess.getUnnamedAttributeDefinitionRuleAccess().getUnnamedKeyword_0());
-		}
-		otherlv_1=':'
-		{
-			newLeafNode(otherlv_1, grammarAccess.getUnnamedAttributeDefinitionRuleAccess().getColonKeyword_1());
-		}
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getUnnamedAttributeDefinitionRuleAccess().getTypeTypeRuleParserRuleCall_2_0());
-				}
-				lv_type_2_0=ruleTypeRule
-				{
-					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getUnnamedAttributeDefinitionRuleRule());
-					}
-					set(
-						$current,
-						"type",
-						lv_type_2_0,
-						"de.evoal.languages.model.dl.dsl.DefinitionLanguage.TypeRule");
-					afterParserOrEnumRuleCall();
-				}
-			)
-		)
-		otherlv_3=';'
-		{
-			newLeafNode(otherlv_3, grammarAccess.getUnnamedAttributeDefinitionRuleAccess().getSemicolonKeyword_3());
-		}
-	)
-;
-
-// Entry rule entryRuleNamedAttributeDefinitionRule
-entryRuleNamedAttributeDefinitionRule returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getNamedAttributeDefinitionRuleRule()); }
-	iv_ruleNamedAttributeDefinitionRule=ruleNamedAttributeDefinitionRule
-	{ $current=$iv_ruleNamedAttributeDefinitionRule.current; }
-	EOF;
-
-// Rule NamedAttributeDefinitionRule
-ruleNamedAttributeDefinitionRule returns [EObject current=null]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
-	(
-		(
-			(
-				{
-					newCompositeNode(grammarAccess.getNamedAttributeDefinitionRuleAccess().getNameStringOrIdParserRuleCall_0_0());
+					newCompositeNode(grammarAccess.getAttributeDefinitionRuleAccess().getNameStringOrIdParserRuleCall_0_0());
 				}
 				lv_name_0_0=ruleStringOrId
 				{
 					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getNamedAttributeDefinitionRuleRule());
+						$current = createModelElementForParent(grammarAccess.getAttributeDefinitionRuleRule());
 					}
 					set(
 						$current,
@@ -348,17 +262,17 @@ ruleNamedAttributeDefinitionRule returns [EObject current=null]
 		)
 		otherlv_1=':'
 		{
-			newLeafNode(otherlv_1, grammarAccess.getNamedAttributeDefinitionRuleAccess().getColonKeyword_1());
+			newLeafNode(otherlv_1, grammarAccess.getAttributeDefinitionRuleAccess().getColonKeyword_1());
 		}
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getNamedAttributeDefinitionRuleAccess().getTypeTypeRuleParserRuleCall_2_0());
+					newCompositeNode(grammarAccess.getAttributeDefinitionRuleAccess().getTypeTypeRuleParserRuleCall_2_0());
 				}
 				lv_type_2_0=ruleTypeRule
 				{
 					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getNamedAttributeDefinitionRuleRule());
+						$current = createModelElementForParent(grammarAccess.getAttributeDefinitionRuleRule());
 					}
 					set(
 						$current,
@@ -371,7 +285,7 @@ ruleNamedAttributeDefinitionRule returns [EObject current=null]
 		)
 		otherlv_3=';'
 		{
-			newLeafNode(otherlv_3, grammarAccess.getNamedAttributeDefinitionRuleAccess().getSemicolonKeyword_3());
+			newLeafNode(otherlv_3, grammarAccess.getAttributeDefinitionRuleAccess().getSemicolonKeyword_3());
 		}
 	)
 ;

@@ -336,7 +336,7 @@ ruleInstanceRule returns [EObject current=null]
 					}
 				}
 				{
-					newCompositeNode(grammarAccess.getInstanceRuleAccess().getNameTypeDefinitionCrossReference_0_0());
+					newCompositeNode(grammarAccess.getInstanceRuleAccess().getDefinitionTypeDefinitionCrossReference_0_0());
 				}
 				ruleStringOrId
 				{
@@ -395,18 +395,15 @@ ruleAttributeRule returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getAttributeRuleAccess().getNameNameOrMiscRuleParserRuleCall_0_0());
-				}
-				lv_name_0_0=ruleNameOrMiscRule
-				{
 					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getAttributeRuleRule());
+						$current = createModelElement(grammarAccess.getAttributeRuleRule());
 					}
-					set(
-						$current,
-						"name",
-						lv_name_0_0,
-						"de.evoal.languages.model.instance.dsl.InstanceLanguage.NameOrMiscRule");
+				}
+				{
+					newCompositeNode(grammarAccess.getAttributeRuleAccess().getDefinitionAttributeDefinitionCrossReference_0_0());
+				}
+				ruleStringOrId
+				{
 					afterParserOrEnumRuleCall();
 				}
 			)
@@ -438,110 +435,6 @@ ruleAttributeRule returns [EObject current=null]
 		{
 			newLeafNode(otherlv_3, grammarAccess.getAttributeRuleAccess().getSemicolonKeyword_3());
 		}
-	)
-;
-
-// Entry rule entryRuleNameOrMiscRule
-entryRuleNameOrMiscRule returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getNameOrMiscRuleRule()); }
-	iv_ruleNameOrMiscRule=ruleNameOrMiscRule
-	{ $current=$iv_ruleNameOrMiscRule.current; }
-	EOF;
-
-// Rule NameOrMiscRule
-ruleNameOrMiscRule returns [EObject current=null]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
-	(
-		{
-			newCompositeNode(grammarAccess.getNameOrMiscRuleAccess().getNameRuleParserRuleCall_0());
-		}
-		this_NameRule_0=ruleNameRule
-		{
-			$current = $this_NameRule_0.current;
-			afterParserOrEnumRuleCall();
-		}
-		    |
-		{
-			newCompositeNode(grammarAccess.getNameOrMiscRuleAccess().getMiscRuleParserRuleCall_1());
-		}
-		this_MiscRule_1=ruleMiscRule
-		{
-			$current = $this_MiscRule_1.current;
-			afterParserOrEnumRuleCall();
-		}
-	)
-;
-
-// Entry rule entryRuleNameRule
-entryRuleNameRule returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getNameRuleRule()); }
-	iv_ruleNameRule=ruleNameRule
-	{ $current=$iv_ruleNameRule.current; }
-	EOF;
-
-// Rule NameRule
-ruleNameRule returns [EObject current=null]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
-	(
-		(
-			{
-				if ($current==null) {
-					$current = createModelElement(grammarAccess.getNameRuleRule());
-				}
-			}
-			{
-				newCompositeNode(grammarAccess.getNameRuleAccess().getNameNamedAttributeDefinitionCrossReference_0());
-			}
-			ruleStringOrId
-			{
-				afterParserOrEnumRuleCall();
-			}
-		)
-	)
-;
-
-// Entry rule entryRuleMiscRule
-entryRuleMiscRule returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getMiscRuleRule()); }
-	iv_ruleMiscRule=ruleMiscRule
-	{ $current=$iv_ruleMiscRule.current; }
-	EOF;
-
-// Rule MiscRule
-ruleMiscRule returns [EObject current=null]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
-	(
-		(
-			lv_name_0_0=RULE_STRING
-			{
-				newLeafNode(lv_name_0_0, grammarAccess.getMiscRuleAccess().getNameSTRINGTerminalRuleCall_0());
-			}
-			{
-				if ($current==null) {
-					$current = createModelElement(grammarAccess.getMiscRuleRule());
-				}
-				setWithLastConsumed(
-					$current,
-					"name",
-					lv_name_0_0,
-					"de.evoal.languages.model.el.dsl.ExpressionLanguage.STRING");
-			}
-		)
 	)
 ;
 
