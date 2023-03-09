@@ -34,20 +34,20 @@ public class OptimisationLanguageLabelProvider extends DefaultEObjectLabelProvid
 	}
 	
 	public String text(final Instance instance) {
-		return instance.getName().getName();
+		return instance.getDefinition().getName();
 	}
 	
 	public String text(final Attribute attr) {
 		if(attr.getValue() == null) {
-			return attr.getName().getName();
+			return attr.getDefinition().getName();
 		} else if(attr.getValue() instanceof LiteralValue) {
-			return attr.getName().getName() + " := " + super.doGetText(attr.getValue());
+			return attr.getDefinition().getName() + " := " + super.doGetText(attr.getValue());
 		} else if(attr.getValue() instanceof Array) {
-			return attr.getName().getName() + " := [...]";
+			return attr.getDefinition().getName() + " := [...]";
 		} else if(attr.getValue() instanceof Instance) {
-			return attr.getName().getName() + " := {...}";
+			return attr.getDefinition().getName() + " := {...}";
 		} else {
-			return attr.getName().getName() + " := ";
+			return attr.getDefinition().getName() + " := ";
 		}
 	}
 	
