@@ -2,7 +2,7 @@
 
 set -e -x
 
-RELEASE_PLUGINS="generator.main surrogate.api surrogate.simple surrogate.svr approximative.density core.arff"
+RELEASE_PLUGINS="generator.main surrogate.api surrogate.simple surrogate.svr approximative.density core.arff core.ea"
 
 mkdir -p evoal/plugins
 
@@ -18,24 +18,12 @@ done
 rm evoal/modules/javax.inject*
 rm evoal/modules/javax.annotation-api-*
 rm evoal/modules/jsr305-*
-# remove multiple definietions of CDI stuff
+# remove multiple definitions of CDI stuff
 rm evoal/modules/jboss-annotations-api*
 rm evoal/modules/jboss-interceptors-api*
 rm evoal/modules/jboss-el-api*
 
-# Now, we do have to do a small hack to fix an Xtext/jigsaw issue. Xtext is not yet modularized
-#  and multiple 'modules' have classes in the same package which is not supported by jigsaw.
-#  Therefore, we merge the modules and create a single module.
 cd evoal
-#mkdir xtext-merge
-#pushd xtext-merge
-#  unzip -o ../modules/org.eclipse.xtext.util-*.jar
-#  unzip -o ../modules/org.eclipse.xtext-*.jar
-#  rm ../modules/org.eclipse.xtext.util-*.jar
-#  rm ../modules/org.eclipse.xtext-*.jar
-#  jar Mcf ../modules/org.eclipse.xtext.jar *
-#popd
-#rm -rf xtext-merge
 
 # remove xtext util since we merged it to xtext
 rm modules/org.eclipse.xtext.util-*

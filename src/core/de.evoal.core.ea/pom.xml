@@ -21,12 +21,19 @@
 			<scope>compile</scope>
 		</dependency>
 
-	    <dependency>
+		<dependency>
+			<groupId>io.jenetics</groupId>
+			<artifactId>jenetics</artifactId>
+			<version>${jenetics.version}</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
 			<groupId>io.jenetics</groupId>
 			<artifactId>jenetics.ext</artifactId>
 			<version>${jenetics.version}</version>
 			<scope>compile</scope>
-	    </dependency>
+		</dependency>
 
 		<dependency>
 			<groupId>com.github.haifengl</groupId>
