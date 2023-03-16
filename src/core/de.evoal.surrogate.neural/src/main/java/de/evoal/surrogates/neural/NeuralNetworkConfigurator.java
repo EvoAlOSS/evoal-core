@@ -94,7 +94,7 @@ public final class NeuralNetworkConfigurator {
     }
 
     private OptimizationAlgorithm optimizationAlgorithm() {
-        final String name = parameter("optimization-algorithm");
+        final String name = parameter("optimisation-algorithm");
 
         return OptimizationAlgorithm.valueOf(name);
     }

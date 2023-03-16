@@ -16,10 +16,6 @@ import org.apache.deltaspike.core.api.provider.BeanProvider;
 import org.apache.deltaspike.core.util.metadata.AnnotationInstanceProvider;
 import org.slf4j.bridge.SLF4JBridgeHandler;
 
-import java.io.IOException;
-import java.io.UncheckedIOException;
-import java.lang.module.ModuleReader;
-import java.lang.module.ResolvedModule;
 import java.lang.reflect.Field;
 import java.util.*;
 
@@ -29,25 +25,18 @@ import java.util.*;
  */
 @Slf4j
 public final class Evoal {
+
+    /**
+     * Some libraries use Java's unified logging facility. This method installs
+     *   a logging bridge that reroutes all logging from JUL to SLF4J.
+     */
+    private static void installJavaLoggingToSLF4JBridge() {
+        SLF4JBridgeHandler.removeHandlersForRootLogger();
+        SLF4JBridgeHandler.install();
+    }
+
     public static void main(final String ... args) {
         installJavaLoggingToSLF4JBridge();
-/*
-        final ModuleLayer layer = ModuleLayer.boot();
-        ModuleLayer.boot().configuration().modules().stream()
-                .map(ResolvedModule::reference)
-                .forEach(mref -> {
-
-                    System.out.println(mref.descriptor().name() + " --> " + mref.location().get());
-                    try (ModuleReader reader = mref.open()) {
-                        reader.list().forEach(f -> System.out.println("   " + f));
-                    } catch (IOException ioe) {
-                        throw new UncheckedIOException(ioe);
-                    }
-                });
-
-
-        System.exit(1);
-*/
         log.info("Starting up EvoAl");
 
         log.info("Booting CDI container");
@@ -84,11 +73,6 @@ public final class Evoal {
         
         log.info("Shutting down CDI container");
         cdiContainer.shutdown();
-    }
-
-    private static void installJavaLoggingToSLF4JBridge() {
-        SLF4JBridgeHandler.removeHandlersForRootLogger();
-        SLF4JBridgeHandler.install();
     }
 
     private static void printUsage() {

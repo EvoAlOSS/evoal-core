@@ -1,14 +1,14 @@
 package de.evoal.core.main.statistics.fitness;
 
-import de.evoal.core.api.ea.fitness.comparator.FitnessValue;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.statistics.*;
-import de.evoal.languages.model.instance.Instance;
-import io.jenetics.Phenotype;
-import io.jenetics.engine.EvolutionResult;
-import io.jenetics.util.ISeq;
+import de.evoal.core.api.statistics.io.Writer;
+import de.evoal.core.api.statistics.io.WriterException;
+import de.evoal.core.api.statistics.writer.AbstractCandidateStatisticsWriter;
+import de.evoal.core.api.statistics.writer.Column;
+import de.evoal.core.api.statistics.writer.ColumnType;
+
 import javax.enterprise.context.Dependent;
-import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.inject.Inject;
@@ -23,26 +23,14 @@ import java.util.List;
 @Slf4j
 @Named("fitness-per-individual")
 @Dependent
-public class FitnessStatistics implements StatisticsWriter {
+public class FitnessStatistics extends AbstractCandidateStatisticsWriter {
 
     @Inject
-    @Named("optimization-function-output")
+    @Named("optimisation-function-output")
     private Provider<PropertiesSpecification> targetSpecification;
 
-    @Inject
-    private WriterStrategy strategy;
-
-    private Writer writer;
-
     @Override
-    @SneakyThrows(WriterException.class)
-    public StatisticsWriter init(Instance configuration) {
-        createWriter();
-
-        return this;
-    }
-
-    private void createWriter() throws WriterException {
+    protected Writer createWriter() throws WriterException {
         final List<Column> columns = new LinkedList<>();
 
         columns.add(new Column("generation", ColumnType.Integer));
@@ -52,38 +40,20 @@ public class FitnessStatistics implements StatisticsWriter {
             columns.add(new Column("fitness-value-" + targetSpecification.get().get(i).name(), ColumnType.Double));
         }
 
-        writer = strategy.create("fitness-by-individual", columns);
+        return strategy.create("fitness-by-individual", columns);
     }
 
-    private Object[] dataOfPhenotype(final int index, final long generation, Phenotype<?, FitnessValue> phenotype) {
+    @Override
+    protected Object[] toData(final int index, final int iteration, final Candidate candidate) {
         final Object [] data = new Object[2 + targetSpecification.get().size()];
 
-        data[0] = generation;
+        data[0] = iteration;
         data[1] = index;
 
-        final Object [] fitnessValues = phenotype.fitness().toStatistics();
+        final Object [] fitnessValues = candidate.value().toStatistics();
 
-        for(int i = 0; i < fitnessValues.length; ++i) {
-            data[2 + i] = fitnessValues[i];
-        }
+        System.arraycopy(fitnessValues, 0, data, 2, fitnessValues.length);
 
         return data;
-    }
-
-    @SneakyThrows(WriterException.class)
-    public void add(final EvolutionResult<?, FitnessValue> evolutionResult) {
-        final ISeq<Phenotype<?, FitnessValue>> population = (ISeq<Phenotype<?, FitnessValue>>)(Object)evolutionResult.population();
-
-        for(int i = 0; i < population.size(); ++i) {
-            writer.addRecord(dataOfPhenotype(i, evolutionResult.generation(), population.get(i)));
-        }
-    }
-
-    public void write() {
-        try {
-            strategy.close(writer);
-        } catch (final WriterException e) {
-            log.error("Failed to write statistics:", e);
-        }
     }
 }

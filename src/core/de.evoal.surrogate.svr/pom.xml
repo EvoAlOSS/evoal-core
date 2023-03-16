@@ -7,6 +7,7 @@
 		<groupId>de.evoal</groupId>
 		<artifactId>core.plugin</artifactId>
 		<version>0.9.0-SNAPSHOT</version>
+		<relativePath>../de.evoal.core.plugin</relativePath>
 	</parent>
 
 	<artifactId>surrogate.svr</artifactId>

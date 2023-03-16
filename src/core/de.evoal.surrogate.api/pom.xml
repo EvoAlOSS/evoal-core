@@ -7,8 +7,24 @@
 		<groupId>de.evoal</groupId>
 		<artifactId>core.plugin</artifactId>
 		<version>0.9.0-SNAPSHOT</version>
+		<relativePath>../de.evoal.core.plugin</relativePath>
 	</parent>
 
 	<artifactId>surrogate.api</artifactId>
 	<name>EvoAl - Surrogate - API</name>
+
+	<dependencies>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>core.ea</artifactId>
+			<version>${project.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>de.evoal</groupId>
+			<artifactId>core.ea</artifactId>
+			<version>0.9.0-SNAPSHOT</version>
+			<scope>compile</scope>
+		</dependency>
+	</dependencies>
 </project>

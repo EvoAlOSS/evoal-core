@@ -22,7 +22,10 @@ module de.evoal.core.junit {
     requires de.evoal.languages.model.generator.dsl;
     requires de.evoal.languages.model.mll.dsl;
     requires de.evoal.languages.model.ol.dsl;
+    requires de.evoal.languages.model.utils;
 
     exports de.evoal.core.junit.dsl;
     exports de.evoal.core.junit.resources;
+
+    provides de.evoal.languages.model.utils.builtin.BuiltinProvider with de.evoal.core.junit.dsl.NoOpBuiltinProvider;
 }

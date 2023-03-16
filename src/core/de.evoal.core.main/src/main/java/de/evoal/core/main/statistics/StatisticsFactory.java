@@ -1,12 +1,14 @@
 package de.evoal.core.main.statistics;
 
 import de.evoal.core.api.board.CoreBlackboardEntries;
+import de.evoal.core.api.cdi.BeanFactory;
 import de.evoal.core.api.cdi.ConfigurationValue;
-import de.evoal.core.api.statistics.StatisticsWriter;
+import de.evoal.core.api.statistics.writer.StatisticsWriter;
 import de.evoal.core.api.utils.Requirements;
+import de.evoal.core.main.statistics.internal.MultipleStatisticsWriter;
 import de.evoal.languages.model.instance.Array;
 import de.evoal.languages.model.instance.Instance;
-import de.evoal.core.main.statistics.internal.MultipleStatisticsWriter;
+
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.Dependent;
 import javax.enterprise.inject.Produces;
@@ -28,7 +30,7 @@ public class StatisticsFactory {
         final StatisticsWriter [] writers = array.getValues()
                                                  .stream()
                                                  .map(Instance.class::cast)
-                                                 .map(i -> new Pair<>(BeanProvider.getContextualReference(i.getDefinition().getName(), false, StatisticsWriter.class), i))
+                                                 .map(i -> new Pair<>(BeanFactory.create(i.getDefinition().getName(), StatisticsWriter.class), i))
                                                  .map(p -> p.getFirst().init(p.getSecond()))
                                                  .toArray(i -> new StatisticsWriter[i]);
 

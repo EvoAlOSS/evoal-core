@@ -3,23 +3,19 @@ package de.evoal.surrogate.main.statistics.surrogate;
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import de.evoal.core.api.statistics.*;
-import de.evoal.core.api.ea.codec.CustomCodec;
-import de.evoal.core.api.ea.fitness.comparator.FitnessValue;
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;
-import de.evoal.languages.model.instance.Instance;
+import de.evoal.core.api.statistics.io.Writer;
+import de.evoal.core.api.statistics.io.WriterException;
+import de.evoal.core.api.statistics.writer.AbstractCandidateStatisticsWriter;
+import de.evoal.core.api.statistics.writer.Column;
+import de.evoal.core.api.statistics.writer.ColumnType;
 import de.evoal.surrogate.api.function.SurrogateFunction;
-import io.jenetics.Genotype;
-import io.jenetics.Phenotype;
-import io.jenetics.engine.EvolutionResult;
-import io.jenetics.util.ISeq;
-import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -28,40 +24,19 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Named("prediction-per-individual")
 @Dependent
-public class SurrogateStatistics implements StatisticsWriter {
+public class SurrogateStatistics extends AbstractCandidateStatisticsWriter {
     /**
      * The predictive function used.
      */
     //@Inject
     protected SurrogateFunction predictive;
 
-    /**
-     * Encoding for converting between ea and domain.
-     */
-    @Inject
-    private CustomCodec encoding;
-
     @Inject
     @Named("surrogate-target-properties-specification")
     private PropertiesSpecification targetSpecification;
 
-    @Inject
-    private WriterStrategy strategy;
-
-    private Writer writer;
-
-    @PostConstruct
-    @SneakyThrows(WriterException.class)
-    private void init() {
-        createWriter();
-    }
-
     @Override
-    public StatisticsWriter init(Instance configuration) {
-        return this;
-    }
-
-    private void createWriter() throws WriterException {
+    protected Writer createWriter() throws WriterException {
         final List<Column> columns = new LinkedList<>();
 
         columns.add(new Column("generation", ColumnType.Integer));
@@ -71,40 +46,23 @@ public class SurrogateStatistics implements StatisticsWriter {
             columns.add(new Column(targetSpecification.getProperties().get(i).name(), ColumnType.Double));
         }
 
-        writer = strategy.create("prediction-by-individual", columns);
+        return strategy.create("prediction-by-individual", columns);
     }
 
-    private Object[] dataOfPhenotype(final int index, final long generation, Phenotype<?, FitnessValue> phenotype) {
+    @Override
+    protected Object[] toData(final int index, final int iteration, final Candidate candidate) {
         final Object [] data = new Object[2 + targetSpecification.size()];
 
-        data[0] = generation;
+        data[0] = iteration;
         data[1] = index;
 
-        final Genotype<?> genotype = phenotype.genotype();
-        final Properties individual = (Properties) encoding.decode(genotype);
-        final Properties predicted = predictive.apply(individual);
+        final Properties representation = candidate.searchSpaceRepresentation();
+        final Properties predicted = predictive.apply(representation);
 
         for(int i = 0; i < predicted.size(); ++i) {
             data[2 + i] = predicted.getValues()[i];
         }
 
         return data;
-    }
-
-    @SneakyThrows(WriterException.class)
-    public void add(final EvolutionResult<?, FitnessValue> evolutionResult) {
-        final ISeq<Phenotype<?, FitnessValue>> population = (ISeq<Phenotype<?, FitnessValue>>)(Object)evolutionResult.population();
-
-        for(int i = 0; i < population.size(); ++i) {
-            writer.addRecord(dataOfPhenotype(i, evolutionResult.generation(), population.get(i)));
-        }
-    }
-
-    public void write() {
-        try {
-            strategy.close(writer);
-        } catch (final WriterException e) {
-            log.error("Failed to write statistics:", e);
-        }
     }
 }

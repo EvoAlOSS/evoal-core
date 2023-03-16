@@ -7,6 +7,7 @@
 		<groupId>de.evoal</groupId>
 		<artifactId>releng.parent</artifactId>
 		<version>0.9.0-SNAPSHOT</version>
+		<relativePath>../de.evoal.releng.parent</relativePath>
 	</parent>
 
 	<artifactId>core.junit</artifactId>

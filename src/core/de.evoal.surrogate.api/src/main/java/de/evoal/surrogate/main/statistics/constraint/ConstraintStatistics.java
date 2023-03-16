@@ -1,18 +1,18 @@
 package de.evoal.surrogate.main.statistics.constraint;
 
-import de.evoal.core.api.ea.constraints.calculation.CalculationFactory;
-import de.evoal.core.api.ea.constraints.calculation.CalculationStrategy;
-import de.evoal.core.api.ea.fitness.comparator.FitnessValue;
 import de.evoal.core.api.statistics.*;
+import de.evoal.core.api.statistics.io.Writer;
+import de.evoal.core.api.statistics.io.WriterException;
+import de.evoal.core.api.statistics.io.WriterStrategy;
+import de.evoal.core.api.statistics.writer.Column;
+import de.evoal.core.api.statistics.writer.ColumnType;
+import de.evoal.core.api.statistics.writer.StatisticsWriter;
+import de.evoal.core.ea.api.constraints.calculation.CalculationFactory;
+import de.evoal.core.ea.api.constraints.calculation.CalculationStrategy;
+import de.evoal.core.ea.api.constraints.model.ConstraintResult;
+import de.evoal.core.ea.api.constraints.model.Constraints;
+import de.evoal.core.ea.api.constraints.strategies.CalculationResult;
 import de.evoal.languages.model.instance.Instance;
-import de.evoal.core.api.ea.codec.CustomCodec;
-import de.evoal.core.api.ea.constraints.model.ConstraintResult;
-import de.evoal.core.api.ea.constraints.model.Constraints;
-import de.evoal.core.api.ea.constraints.strategies.CalculationResult;
-import de.evoal.core.api.properties.Properties;
-import io.jenetics.Phenotype;
-import io.jenetics.engine.EvolutionResult;
-import io.jenetics.util.ISeq;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.Dependent;
 import lombok.SneakyThrows;
@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.DoubleSummaryStatistics;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Small helper class for collecting and writing the generation-based statistics.
@@ -42,14 +43,7 @@ public class ConstraintStatistics implements StatisticsWriter {
     @Inject
     private Constraints constraints;
 
-    @Inject
-    private CustomCodec codec;
-
     private CalculationStrategy[] calculators;
-
-    private long endTime;
-
-    private long startTime;
 
     @Inject
     private WriterStrategy strategy;
@@ -58,8 +52,6 @@ public class ConstraintStatistics implements StatisticsWriter {
 
     @PostConstruct @SneakyThrows(WriterException.class)
     private void init() {
-        startTime = System.currentTimeMillis();
-
         createColumns();
 
         writer = strategy.create("constraint-statistics", columns);
@@ -82,7 +74,7 @@ public class ConstraintStatistics implements StatisticsWriter {
         }
     }
 
-    private Object[] toData(final long generation, final ISeq<Phenotype<?, FitnessValue>> population) {
+    private Object[] toData(final int generation, final Stream<Candidate> candidates) {
         final Object [] data = new Object[1 + constraints.getConstraints().size() * NUMBER_OF_STATISTICS_PER_CONSTRAINT];
 
         data[0] = generation;
@@ -91,10 +83,9 @@ public class ConstraintStatistics implements StatisticsWriter {
             final CalculationStrategy strategy = calculators[index];
 
             final List<CalculationResult> calculationResults =
-                population.stream()
-                        .map(Phenotype::genotype)
-                        .map(g -> (Properties)codec.decode(g))
-                        // TODO .map(strategy::calculate)
+                candidates
+                        .map(Candidate::searchSpaceRepresentation)
+// TODO                        .map(strategy::calculate)
                         .map(CalculationResult.class::cast)
                         .collect(Collectors.toList());
 
@@ -121,11 +112,14 @@ public class ConstraintStatistics implements StatisticsWriter {
         return data;
     }
 
-    @SneakyThrows(WriterException.class)
-    public void add(final EvolutionResult<?, FitnessValue> evolutionResult) {
-        final ISeq<Phenotype<?, FitnessValue>> population = (ISeq<Phenotype<?, FitnessValue>>)(Object)evolutionResult.population();
-
-        writer.addRecord(toData(evolutionResult.generation(), population));
+    @Override
+    public void add(final IterationResult result) {
+            try {
+                final Object [] data = toData(result.iteration(), result.candidates());
+                writer.addRecord(data);
+            } catch (final WriterException e) {
+                log.error("Failed to add record.", e);
+            }
     }
 
     @Override
@@ -133,8 +127,8 @@ public class ConstraintStatistics implements StatisticsWriter {
         return this;
     }
 
+    @Override
     public void write() {
-        endTime = System.currentTimeMillis();
         try {
             strategy.close(writer);
         } catch (final WriterException e) {

@@ -13,6 +13,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.Dependent;
 import javax.enterprise.inject.Produces;
 import javax.inject.Named;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,9 +22,8 @@ public class SpecificationProducer {
     @Produces
     @Dependent
     @Named("genotype-description")
-    public List<DataDescription> createSourceSpecification(final @ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.genotype") Array genotype) {
-        final List<DataDescription> descriptors = genotype.getValues()
-                .stream()
+    public List<DataDescription> createSourceSpecification(final @ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.genotype") Instance [] genotype) {
+        final List<DataDescription> descriptors = Arrays.stream(genotype)
                 .map(Instance.class::cast)
                 .map(i -> i.findAttribute("genes"))
                 .map(Attribute::getValue)

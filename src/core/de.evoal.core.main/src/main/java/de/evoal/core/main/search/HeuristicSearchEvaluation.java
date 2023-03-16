@@ -1,19 +1,17 @@
 package de.evoal.core.main.search;
 
 import de.evoal.core.api.board.CoreBlackboardEntries;
-import de.evoal.core.api.cdi.Application;
-import de.evoal.core.api.cdi.BeanFactory;
-import de.evoal.core.api.cdi.BlackboardValue;
-import de.evoal.core.api.cdi.MainClass;
+import de.evoal.core.api.cdi.*;
+import de.evoal.core.api.optimisation.OptimisationAlgorithm;
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesPair;
 import de.evoal.core.api.board.Blackboard;
 import javax.enterprise.context.ApplicationScoped;
 
-import de.evoal.core.api.statistics.Column;
-import de.evoal.core.api.statistics.ColumnType;
-import de.evoal.core.api.statistics.WriterContext;
-import de.evoal.core.main.ea.search.EvolutionaryAlgorithmSearch;
+import de.evoal.core.api.statistics.writer.Column;
+import de.evoal.core.api.statistics.writer.ColumnType;
+import de.evoal.core.api.statistics.writer.WriterContext;
+import de.evoal.languages.model.instance.Instance;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.math3.util.Pair;
 
@@ -65,6 +63,10 @@ public class HeuristicSearchEvaluation implements MainClass {
     private Column targetColumn;
     private Column runColumn;
 
+    @Inject
+    @ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm")
+    private Instance algorithmConfiguration;
+
     @Override
     public void run() {
         log.info("Running heuristic search evaluation with the following configuration:");
@@ -113,8 +115,9 @@ public class HeuristicSearchEvaluation implements MainClass {
             board.bind(CoreBlackboardEntries.EVALUATION_RUN, run);
             context.bindColumn(runColumn, i);
 
-            BeanFactory.create(EvolutionaryAlgorithmSearch.class)
-                       .run();
+            BeanFactory.create(OptimisationAlgorithm.class)
+                    .init(algorithmConfiguration)
+                    .run();
         }
     }
 

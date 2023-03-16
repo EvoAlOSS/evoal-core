@@ -1,12 +1,12 @@
 package de.evoal.surrogate.main.ea;
 
 import de.evoal.core.api.board.Blackboard;
-import de.evoal.core.api.ea.codec.CustomCodec;
-import de.evoal.core.api.ea.constraints.strategies.RepairStrategy;
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.properties.stream.FileBasedPropertiesStreamSupplier;
 import de.evoal.core.api.properties.stream.PropertiesStreamSupplier;
+import de.evoal.core.ea.api.codec.CustomCodec;
+import de.evoal.core.ea.api.constraints.strategies.RepairStrategy;
 import de.evoal.languages.model.instance.Instance;
 import de.evoal.surrogate.api.SurrogateBlackboardEntries;
 import io.jenetics.Gene;

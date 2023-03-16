@@ -1,9 +1,8 @@
 package de.evoal.core.main.statistics.nop;
 
-import de.evoal.core.api.ea.fitness.comparator.FitnessValue;
+import de.evoal.core.api.statistics.IterationResult;
 import de.evoal.languages.model.instance.Instance;
-import de.evoal.core.api.statistics.StatisticsWriter;
-import io.jenetics.engine.EvolutionResult;
+import de.evoal.core.api.statistics.writer.StatisticsWriter;
 
 import javax.enterprise.context.Dependent;
 
@@ -13,7 +12,7 @@ import javax.inject.Named;
 @Dependent
 public class NopStatistics implements StatisticsWriter {
     @Override
-    public void add(final EvolutionResult<?, FitnessValue> evolutionResult) {
+    public void add(final IterationResult evolutionResult) {
     }
 
     @Override

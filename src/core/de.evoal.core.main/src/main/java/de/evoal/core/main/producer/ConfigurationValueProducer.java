@@ -52,6 +52,19 @@ public class ConfigurationValueProducer {
 
     @Produces
     @ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "")
+    public final Instance [] injectInstanceArrayValue(final InjectionPoint ip, final Blackboard board) {
+        final ConfigurationValue value = ip.getAnnotated().getAnnotation(ConfigurationValue.class);
+
+        final Object [] array = lookup(board.get(value.entry()), value.access());
+        final Instance [] copy = new Instance[array.length];
+
+        System.arraycopy(array, 0, copy, 0, copy.length);
+
+        return copy;
+    }
+
+    @Produces
+    @ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "")
     public final Instance injectInstanceValue(final InjectionPoint ip, final Blackboard board) {
         final ConfigurationValue value = ip.getAnnotated().getAnnotation(ConfigurationValue.class);
 
@@ -79,6 +92,7 @@ public class ConfigurationValueProducer {
     }
 
     private static <T> T lookup(final OptimisationModel model, final String access) {
+        log.info("Looking up configuration value {}", access);
         return LanguageHelper.lookup(model.getInstance(), access);
     }
 }

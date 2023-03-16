@@ -1,8 +1,6 @@
 package de.evoal.core.api.properties;
 
 import de.evoal.languages.model.ddl.DataDescription;
-import org.apache.commons.math3.util.Pair;
-import org.slf4j.LoggerFactory;
 
 import java.util.*;
 import java.util.stream.Collectors;

@@ -1,11 +1,9 @@
 package de.evoal.core.main.search;
 
-import de.evoal.core.api.statistics.Column;
-import de.evoal.core.api.statistics.ColumnType;
-import de.evoal.core.api.statistics.WriterContext;
+import de.evoal.core.api.statistics.writer.Column;
+import de.evoal.core.api.statistics.writer.ColumnType;
+import de.evoal.core.api.statistics.writer.WriterContext;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.File;
 

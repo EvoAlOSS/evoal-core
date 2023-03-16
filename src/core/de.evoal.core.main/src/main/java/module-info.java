@@ -16,13 +16,7 @@ module de.evoal.core.main {
     requires jul.to.slf4j;
     requires ch.qos.logback.classic;
 
-    requires io.jenetics.base;
-    requires io.jenetics.ext;
-    requires commons.math3;
     requires commons.csv;
-    requires smile.math;
-
-    requires decimal4j;
 
     requires com.fasterxml.jackson.databind;
 
@@ -41,66 +35,41 @@ module de.evoal.core.main {
     requires de.evoal.languages.model.instance;
     requires de.evoal.languages.model.utils;
     requires com.google.guice;
+    requires commons.math3;
 
     exports de.evoal.core.api.board;
     exports de.evoal.core.api.cdi;
-    exports de.evoal.core.api.ea.codec;
-    exports de.evoal.core.api.ea.constraints.model;
-    exports de.evoal.core.api.ea.constraints.strategies;
-    exports de.evoal.core.api.ea.constraints.calculation;
-    exports de.evoal.core.api.ea.constraints.strategies.fitness;
-    exports de.evoal.core.api.ea.correlations;
-    exports de.evoal.core.api.ea.fitness;
-    exports de.evoal.core.api.ea.fitness.comparator;
-    exports de.evoal.core.api.ea.initial;
     exports de.evoal.core.api.properties;
     exports de.evoal.core.api.properties.info;
     exports de.evoal.core.api.properties.io;
     exports de.evoal.core.api.properties.stream;
-    exports de.evoal.core.api.search;
+    exports de.evoal.core.api.optimisation;
     exports de.evoal.core.api.statistics;
+    exports de.evoal.core.api.statistics.io;
+    exports de.evoal.core.api.statistics.writer;
     exports de.evoal.core.api.utils;
 
     opens de.evoal.core.api.board to weld.core.impl;
     opens de.evoal.core.api.cdi to weld.core.impl;
-    opens de.evoal.core.api.ea to weld.core.impl;
-    opens de.evoal.core.api.ea.constraints to weld.core.impl;
-    opens de.evoal.core.api.ea.constraints.model to weld.core.impl;
-    opens de.evoal.core.api.ea.constraints.strategies.fitness to weld.core.impl;
-    opens de.evoal.core.api.ea.fitness to weld.core.impl;
+    opens de.evoal.core.api.optimisation to weld.core.impl;
     opens de.evoal.core.api.properties to weld.core.impl;
+    opens de.evoal.core.api.properties.info to weld.core.impl;
     opens de.evoal.core.api.properties.io to weld.core.impl;
     opens de.evoal.core.api.properties.stream to weld.core.impl;
     opens de.evoal.core.api.statistics to weld.core.impl;
     opens de.evoal.core.api.utils to weld.core.impl;
 
-    opens de.evoal.core.main.ea.alterer to weld.core.impl;
-    opens de.evoal.core.main.ea.alterer.mutator to weld.core.impl;
-    opens de.evoal.core.main.ea.codec to weld.core.impl;
-    opens de.evoal.core.main.ea.codec.chromosome to weld.core.impl;
-    opens de.evoal.core.main.ea.comparator to weld.core.impl;
-    opens de.evoal.core.main.ea.constraints.deviation to weld.core.impl;
-    opens de.evoal.core.main.ea.constraints.constraint to weld.core.impl;
-    opens de.evoal.core.main.ea.constraints.constraint.strategies.calculations to weld.core.impl;
-    opens de.evoal.core.main.ea.constraints.constraint.strategies.constraint to weld.core.impl;
-    opens de.evoal.core.main.ea.constraints.constraint.strategies.fitness to weld.core.impl;
-    opens de.evoal.core.main.ea.constraints.correlation to weld.core.impl;
-    opens de.evoal.core.main.ea.fitness to weld.core.impl;
-    opens de.evoal.core.main.ea.initial to weld.core.impl;
-    opens de.evoal.core.main.ea.producer to weld.core.impl;
+    opens de.evoal.core.main.comparator to weld.core.impl;
     opens de.evoal.core.main.producer to weld.core.impl;
+    opens de.evoal.core.main.properties to weld.core.impl;
     opens de.evoal.core.main.search to weld.core.impl;
     opens de.evoal.core.main.statistics to weld.core.impl;
     opens de.evoal.core.main.statistics.fitness to weld.core.impl;
     opens de.evoal.core.main.statistics.individuals to weld.core.impl;
     opens de.evoal.core.main.statistics.nop to weld.core.impl;
-    opens de.evoal.core.main.statistics.writer.csv to weld.core.impl;
-    opens de.evoal.core.api.ea.correlations to weld.core.impl;
-    opens de.evoal.core.api.ea.constraints.calculation to weld.core.impl;
-    opens de.evoal.core.api.properties.info to weld.core.impl;
-    opens de.evoal.core.api.ea.constraints.strategies to weld.core.impl;
-    opens de.evoal.core.main.properties to weld.core.impl;
-    opens de.evoal.core.main.ea.search to weld.core.impl;
+    opens de.evoal.core.main.statistics.io.csv to weld.core.impl;
+    opens de.evoal.core.api.statistics.io to weld.core.impl;
+    opens de.evoal.core.api.statistics.writer to weld.core.impl;
 
-    provides de.evoal.languages.model.utils.builtin.BuiltinProvider with de.evoal.core.main.language.ModuleBuiltinProvider;
+    //provides de.evoal.languages.model.utils.builtin.BuiltinProvider with ModuleBuiltinProvider;
 }

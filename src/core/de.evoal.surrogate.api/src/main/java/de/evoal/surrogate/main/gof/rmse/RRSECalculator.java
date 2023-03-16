@@ -35,7 +35,7 @@ public class RRSECalculator implements SurrogateInformationCalculator {
 	private SurrogateFunction function;
 
 	/**
-	 * Supplier for the trainings data.
+	 * Supplier for the training data.
 	 */
 	private PropertiesStreamSupplier trainingData;
 
@@ -58,7 +58,6 @@ public class RRSECalculator implements SurrogateInformationCalculator {
 					final Properties actual = function.apply(source);
 
 					for(int i = 0; i < expected.size(); ++i) {
-						System.err.println("  " + expected.getAsDouble(i) + " -- " + actual.getAsDouble(i));
 						data.get(i).add(Math.pow((expected.getAsDouble(i) - actual.getAsDouble(i)) / expected.getAsDouble(i), 2.0));
 					}
 				});

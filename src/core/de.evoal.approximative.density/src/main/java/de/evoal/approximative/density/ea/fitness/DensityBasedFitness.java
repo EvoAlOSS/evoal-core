@@ -1,13 +1,13 @@
 package de.evoal.approximative.density.ea.fitness;
 
 import de.evoal.approximative.density.model.DensityData;
-import de.evoal.core.api.ea.fitness.FitnessFunction;
+import de.evoal.core.api.optimisation.OptimisationFunction;
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.properties.info.PropertiesRanges;
 import de.evoal.core.api.utils.LanguageHelper;
 import de.evoal.core.api.utils.Requirements;
-import de.evoal.core.api.ea.fitness.FitnessDecorator;
+import de.evoal.core.api.optimisation.OptimisationFunctionDecorator;
 import de.evoal.languages.model.instance.Instance;
 import de.evoal.surrogate.api.configuration.PartialFunctionConfiguration;
 import de.evoal.surrogate.api.function.FunctionCombiner;
@@ -22,7 +22,7 @@ import java.util.function.BiFunction;
 
 @Slf4j
 @Vetoed
-public abstract class DensityBasedFitness extends FitnessDecorator {
+public abstract class DensityBasedFitness extends OptimisationFunctionDecorator {
 
     private final BiFunction<PartialFunctionConfiguration, String, DensityData> modelCreator;
 
@@ -55,7 +55,7 @@ public abstract class DensityBasedFitness extends FitnessDecorator {
     }
 
     @Override
-    public FitnessFunction init(final Instance config) {
+    public OptimisationFunction init(final Instance config) {
         log.info("Setting up density-based fitness calculation.");
         super.init(config);
 

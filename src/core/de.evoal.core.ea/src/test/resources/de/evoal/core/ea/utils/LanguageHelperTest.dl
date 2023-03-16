@@ -1,0 +1,12 @@
+type 'parent' {
+	child : instance A;
+}
+
+type A {
+    'float-field'    : float;
+    'string-field'   : string;
+    'integer-field'  : int;
+    'boolean-field'  : boolean;
+    'array-1D-float' : array float;
+    'array-2D-int'   : array  array int;
+}

@@ -1,19 +1,20 @@
 package de.evoal.surrogate.main.statistics.ranged;
 
-import de.evoal.core.api.ea.correlations.Range;
-import de.evoal.core.api.ea.fitness.comparator.FitnessValue;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.properties.PropertySpecification;
 import de.evoal.core.api.properties.info.PropertiesBoundaries;
 import de.evoal.core.api.statistics.*;
-import de.evoal.core.api.ea.codec.CustomCodec;
-import de.evoal.core.api.properties.Properties;
-import de.evoal.core.api.ea.correlations.Correlation;
-import de.evoal.core.api.ea.correlations.Correlations;
-import de.evoal.core.api.ea.correlations.RangedCorrelation;
+import de.evoal.core.api.statistics.io.Writer;
+import de.evoal.core.api.statistics.io.WriterException;
+import de.evoal.core.api.statistics.io.WriterStrategy;
+import de.evoal.core.api.statistics.writer.Column;
+import de.evoal.core.api.statistics.writer.ColumnType;
+import de.evoal.core.api.statistics.writer.StatisticsWriter;
+import de.evoal.core.ea.api.correlations.Correlation;
+import de.evoal.core.ea.api.correlations.Correlations;
+import de.evoal.core.ea.api.correlations.RangedCorrelation;
 import de.evoal.languages.model.instance.Instance;
-import io.jenetics.Genotype;
-import io.jenetics.engine.EvolutionResult;
+
 import java.util.*;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.Dependent;
@@ -30,12 +31,6 @@ import lombok.extern.slf4j.Slf4j;
 @Named("range-correlated")
 @Dependent
 public class GenerationStatisticsWriter implements StatisticsWriter {
-    /**
-     * Encoding for converting between ea and domain.
-     */
-    @Inject
-    private CustomCodec encoding;
-
     @Inject
     private PropertiesBoundaries limits;
 
@@ -96,19 +91,19 @@ public class GenerationStatisticsWriter implements StatisticsWriter {
     }
 
     @Override
-    public void add(final EvolutionResult<?, FitnessValue> evolutionResult) {
-        if(evolutionResult.generation() == 1) {
-            initialGenerationCubes = fillHypercubes(evolutionResult);
+    public void add(final IterationResult result) {
+        if(initialGenerationCubes == null) {
+            initialGenerationCubes = fillHypercubes(result);
         }
 
-        final List<Hypercube> currentCubes = fillHypercubes(evolutionResult);
+        final List<Hypercube> currentCubes = fillHypercubes(result);
     	double[] arrayOfDistances = new double[initialGenerationCubes.size()];
     	for(int i=0; i< arrayOfDistances.length; i++) {
    			arrayOfDistances[i] = currentCubes.get(i).computeSquaredDistanceToCovarianceMatrix(initialGenerationCubes.get(i));
     	}
 
     	Object[] data = new Object[1+ arrayOfDistances.length + 1];
-    	data[0] = evolutionResult.generation();
+    	data[0] = result.iteration();
     	double sum = 0.0;
     	for(int i = 0; i < arrayOfDistances.length; i++) {
     		data[i+1] = arrayOfDistances[i];
@@ -118,23 +113,23 @@ public class GenerationStatisticsWriter implements StatisticsWriter {
     	try {
 			writer.addRecord(data);
 		} catch (Exception e) {
-			log.error("The csv printing didn't work in generation {}", evolutionResult.generation(), e);
+			log.error("The csv printing didn't work in generation {}", result.iteration(), e);
 		}
     }
     
-    private List<Hypercube> fillHypercubes(final EvolutionResult<?, FitnessValue> evolutionResult){
-    	List<Hypercube> currentGeneration = new ArrayList<>();
-    	for(int j = 0; j < hypercubeDefinitions.size(); j++) {
-    		Hypercube hypercube = new Hypercube(hypercubeDefinitions.get(j));
-    		for(int i= 0; i < evolutionResult.population().asList().size(); i++) {
-                final Genotype<?> genotype = evolutionResult.population().asList().get(i).genotype();
-                final Properties domainValues = (Properties) encoding.decode(genotype);
+    private List<Hypercube> fillHypercubes(final IterationResult result){
+    	final List<Hypercube> currentCandidates = new ArrayList<>();
 
-                hypercube.addDataPoint(domainValues);
-        	}
-    		currentGeneration.add(hypercube); 
+    	for(int j = 0; j < hypercubeDefinitions.size(); j++) {
+    		final Hypercube hypercube = new Hypercube(hypercubeDefinitions.get(j));
+
+            result.candidates()
+                    .map(Candidate::searchSpaceRepresentation)
+                    .forEach(hypercube::addDataPoint);
+
+    		currentCandidates.add(hypercube);
     	}
-    	return currentGeneration;
+    	return currentCandidates;
     }
 
     public void write() {

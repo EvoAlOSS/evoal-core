@@ -9,14 +9,13 @@ import de.evoal.core.api.cdi.MainClass;
 import de.evoal.core.api.properties.Properties;
 import javax.enterprise.context.ApplicationScoped;
 
-import de.evoal.core.api.search.OptimisationAlgorithm;
-import de.evoal.core.api.statistics.ColumnType;
-import de.evoal.core.api.statistics.WriterContext;
+import de.evoal.core.api.optimisation.OptimisationAlgorithm;
+import de.evoal.core.api.statistics.writer.ColumnType;
+import de.evoal.core.api.statistics.writer.WriterContext;
 import de.evoal.languages.model.instance.Instance;
 import org.apache.commons.math3.util.Pair;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 import java.io.File;
 import java.util.stream.Stream;
 

@@ -2,17 +2,19 @@ package de.evoal.surrogate.main.statistics.correlated;
 
 import de.evoal.core.api.board.CoreBlackboardEntries;
 import de.evoal.core.api.cdi.ConfigurationValue;
+import de.evoal.core.api.optimisation.OptimisationValue;
 import de.evoal.core.api.statistics.*;
+import de.evoal.core.api.statistics.io.Writer;
+import de.evoal.core.api.statistics.io.WriterException;
+import de.evoal.core.api.statistics.io.WriterStrategy;
+import de.evoal.core.api.statistics.writer.Column;
+import de.evoal.core.api.statistics.writer.ColumnType;
+import de.evoal.core.api.statistics.writer.StatisticsWriter;
 import de.evoal.core.api.utils.LanguageHelper;
 import de.evoal.languages.model.instance.Instance;
-import de.evoal.core.api.ea.fitness.comparator.FitnessValue;
-import de.evoal.core.api.ea.codec.CustomCodec;
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.surrogate.api.training.TrainingDataManager;
-import io.jenetics.Genotype;
-import io.jenetics.engine.EvolutionResult;
-import io.jenetics.util.ISeq;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.Dependent;
 import lombok.extern.slf4j.Slf4j;
@@ -25,6 +27,7 @@ import javax.inject.Provider;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -46,15 +49,10 @@ public class GenerationStatisticsWriter implements StatisticsWriter {
     // TODO @Inject @Named("function-names")
     private List<String> functionNames;
 
-    /**
-     * Encoding for converting between ea and domain.
-     */
-    @Inject
-    private CustomCodec encoding;
 
     private long startTime;
 
-    private EvolutionResult<?, FitnessValue> generationWithBestIndividual;
+    private IterationResult generationWithBestIndividual;
     private long endTime;
 
     @Inject
@@ -169,16 +167,17 @@ public class GenerationStatisticsWriter implements StatisticsWriter {
     }
 
     private Matrix createBestGenerationMatrix() {
-        final ISeq<Genotype<?>> genotypes = (ISeq<Genotype<?>>)(Object)generationWithBestIndividual.genotypes();
+        final List<Candidate> candidates = generationWithBestIndividual.candidates().collect(Collectors.toList());
 
         final int dimensions = sourceSpec.size();
-        final int size = genotypes.size();
+        final Optional<Integer> optSize = generationWithBestIndividual.candidateCount();
+        final int size = optSize.orElse(candidates.size());
 
         final Matrix result = new Matrix(dimensions, size);
 
         for(int i = 0; i < size; ++i) {
-            final Genotype<?> genotype = genotypes.get(i);
-            final Properties individual = (Properties) encoding.decode(genotype);
+            final Candidate candidate = candidates.get(i);
+            final Properties individual = candidate.searchSpaceRepresentation();
 
             final Object [] data = individual.getValues();
 
@@ -245,17 +244,15 @@ public class GenerationStatisticsWriter implements StatisticsWriter {
 
         final Object [] data = new Object[3 + functionNames.size() + (int)Math.pow(sourceSpec.size(), 2) + 2 + (int)Math.pow(sourceSpec.size(), 2) + 2 + 1];
 
-        final Genotype<?> genotype = generationWithBestIndividual.bestPhenotype().genotype();
-        final Properties individual = (Properties) encoding.decode(genotype);
+        final Candidate bestCandidate = generationWithBestIndividual.bestCandidate();
+        final Properties candidate = bestCandidate.searchSpaceRepresentation();
 
-        data[0] = generationWithBestIndividual.generation();
-        data[1] = Arrays.toString(individual.getValues());
-        data[2] = generationWithBestIndividual.bestPhenotype().age(generationWithBestIndividual.generation());
-
-        final Properties candidate = (Properties) encoding.decode(generationWithBestIndividual.bestPhenotype().genotype());
+        data[0] = generationWithBestIndividual.iteration();
+        data[1] = Arrays.toString(candidate.getValues());
+        data[2] = bestCandidate.age();
 
         for(int i = 0; i < functions.size(); ++i) {
-            final FitnessValue fitness = (FitnessValue) functions.get(i).apply(candidate);
+            final OptimisationValue fitness = (OptimisationValue) functions.get(i).apply(candidate);
             data[3 + i] = fitness;
             throw new IllegalArgumentException("fix me");
         }
@@ -286,15 +283,16 @@ public class GenerationStatisticsWriter implements StatisticsWriter {
         throw new IllegalStateException("We have to change the actual fitness type by looking up the correct definition.");
     }
 
-    public void add(final EvolutionResult<?, FitnessValue> evolutionResult) {
-        updateBestGeneration(evolutionResult);
+    @Override
+    public void add(final IterationResult result) {
+        updateBestGeneration(result);
     }
 
-    private void updateBestGeneration(final EvolutionResult<?, FitnessValue> generation) {
+    private void updateBestGeneration(final IterationResult result) {
         if(generationWithBestIndividual == null) {
-            generationWithBestIndividual = generation;
-        } else if(generationWithBestIndividual.bestFitness().compareTo(generation.bestFitness()) <= 0) {
-            generationWithBestIndividual = generation;
+            generationWithBestIndividual = result;
+        } else if(generationWithBestIndividual.bestCandidate().value().compareTo(result.bestCandidate().value()) <= 0) {
+            generationWithBestIndividual = result;
         }
     }
 

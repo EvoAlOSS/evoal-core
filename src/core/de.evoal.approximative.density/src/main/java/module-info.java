@@ -12,6 +12,7 @@ module de.evoal.approximative.density {
     requires de.evoal.surrogate.api;
 
     requires smile.math;
+    requires de.evoal.core.ea;
 
     opens de.evoal.approximative.density.ea.fitness to weld.core.impl;
     opens de.evoal.approximative.density.ea.surrogate.gof to weld.core.impl;

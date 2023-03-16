@@ -41,7 +41,7 @@ public class RMSECalculator implements SurrogateInformationCalculator {
 	private SurrogateFunction function;
 
 	/**
-	 * Supplier for the trainings data.
+	 * Supplier for the training data.
 	 */
 	private PropertiesStreamSupplier trainingData;
 

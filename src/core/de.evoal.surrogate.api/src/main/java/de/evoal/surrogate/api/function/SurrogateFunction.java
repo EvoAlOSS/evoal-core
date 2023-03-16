@@ -9,7 +9,7 @@ import lombok.NonNull;
 import java.util.List;
 
 /**
- * A surrogate function replaces the actual function used in the optimization
+ * A surrogate function replaces the actual function used in the optimisation
  * if the actual function is too expensive to calculate or even unknown. A
  * surrogate function transforms input properties into output properties
  * according to a known oder learned function.

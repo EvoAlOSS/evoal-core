@@ -29,6 +29,7 @@
         <module>../de.evoal.core.main</module>
         <module>../de.evoal.core.plugin</module>
 
+        <module>../de.evoal.core.ea</module>
         <module>../de.evoal.core.arff</module>
         <module>../de.evoal.core.junit</module>
 
@@ -266,6 +267,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
+                <version>3.2.1</version>
                 <executions>
                     <execution>
                         <id>attach-sources</id>
