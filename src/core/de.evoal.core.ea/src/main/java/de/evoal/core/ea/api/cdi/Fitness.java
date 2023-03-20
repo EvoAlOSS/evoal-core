@@ -15,5 +15,5 @@ public @interface Fitness {
     /**
      * @return Name of the fitness calculator.
      */
-    public String value();
+    String value();
 }

@@ -20,25 +20,25 @@ public interface PartialSurrogateFunction {
 	 * @param input The input properties for the regression.
 	 * @return The calculated value.
 	 */
-	public Object [] apply(final Properties input);
+    Object [] apply(final Properties input);
 
 	/**
 	 * @return The generated property.
 	 */
-	public PropertiesSpecification getOutputProperty();
+    PropertiesSpecification getOutputProperty();
 
 	/**
 	 * @return A collection of parameters to restore the regression function.
 	 */
-	public Collection<? extends Parameter> getParameters();
+    Collection<? extends Parameter> getParameters();
 
 	/**
 	 * @return An empty properties vector containing all consumed properties.
 	 */
-	public PropertiesSpecification getUsedProperties();
+    PropertiesSpecification getUsedProperties();
 
 	/**
 	 * @return The configuration object.
 	 */
-	public PartialFunctionConfiguration getConfiguration();
+    PartialFunctionConfiguration getConfiguration();
 }

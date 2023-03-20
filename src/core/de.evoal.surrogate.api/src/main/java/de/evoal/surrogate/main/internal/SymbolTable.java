@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class SymbolTable {
     private final SymbolTable parentTable;
-    private Map<String, Object> bindings = new HashMap<>();
+    private final Map<String, Object> bindings = new HashMap<>();
 
     public SymbolTable(final SymbolTable symbolTable) {
         this.parentTable = symbolTable;

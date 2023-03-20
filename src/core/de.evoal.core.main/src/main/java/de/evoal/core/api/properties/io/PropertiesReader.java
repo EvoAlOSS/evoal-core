@@ -20,5 +20,5 @@ public interface PropertiesReader extends AutoCloseable, Iterator<Properties> {
      *
      * @return The instance itself.
      */
-    public PropertiesReader init(final File input, final PropertiesSpecification specification) throws EvoalIOException;
+    PropertiesReader init(final File input, final PropertiesSpecification specification) throws EvoalIOException;
 }

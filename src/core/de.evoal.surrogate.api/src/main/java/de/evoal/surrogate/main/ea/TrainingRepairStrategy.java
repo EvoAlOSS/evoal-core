@@ -5,13 +5,9 @@ import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.properties.stream.FileBasedPropertiesStreamSupplier;
 import de.evoal.core.api.properties.stream.PropertiesStreamSupplier;
-import de.evoal.core.ea.api.codec.CustomCodec;
-import de.evoal.core.ea.api.constraints.strategies.RepairStrategy;
+import de.evoal.core.api.constraints.strategies.RepairStrategy;
 import de.evoal.languages.model.instance.Instance;
 import de.evoal.surrogate.api.SurrogateBlackboardEntries;
-import io.jenetics.Gene;
-import io.jenetics.Genotype;
-import io.jenetics.Phenotype;
 import io.jenetics.util.RandomRegistry;
 import lombok.extern.slf4j.Slf4j;
 
@@ -24,12 +20,9 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @Dependent
-public class TrainingRepairStrategy<G extends Gene<?, G>, C extends Comparable<? super C>> implements RepairStrategy<G, C> {
+public class TrainingRepairStrategy implements RepairStrategy {
     @Inject
     private Blackboard board;
-
-    @Inject
-    private CustomCodec codec;
 
     @Inject
     @Named("genotype-specification")
@@ -67,13 +60,10 @@ public class TrainingRepairStrategy<G extends Gene<?, G>, C extends Comparable<?
 
 
     @Override
-    public Phenotype apply(final Phenotype<G, C> individual, long generation) {
+    public Properties apply(final Properties candidate, long generation) {
         int index = RandomRegistry.random()
                                   .nextInt(0, trainingData.size());
 
-
-        final Genotype<G> newInstance = codec.encode(trainingData.get(index));
-
-        return Phenotype.of(newInstance, generation);
+        return trainingData.get(index);
     }
 }

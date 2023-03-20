@@ -112,16 +112,12 @@ public final class NeuralNetworkConfigurator {
     private IUpdater updater() {
         final Map<String, Object> updaterConfig = parameter("updater");
 
-        switch (this.<String>value(updaterConfig, "name")) {
-            case "ada-grad": {
-                final double learningRate = value(updaterConfig, "learning-rate");
+        if (NeuralNetworkConfigurator.<String>value(updaterConfig, "name").equals("ada-grad")) {
+            final double learningRate = value(updaterConfig, "learning-rate");
 
-                return new AdaGrad(learningRate);
-            }
-
-            default:
-                throw new IllegalArgumentException("updater unknown: " + value(updaterConfig, "name"));
+            return new AdaGrad(learningRate);
         }
+        throw new IllegalArgumentException("updater unknown: " + value(updaterConfig, "name"));
     }
 
     private WeightInit weightInit() {

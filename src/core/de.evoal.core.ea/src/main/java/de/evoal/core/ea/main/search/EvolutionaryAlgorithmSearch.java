@@ -8,8 +8,10 @@ import java.util.concurrent.Executors;
 
 import de.evoal.core.api.board.CoreBlackboardEntries;
 import de.evoal.core.api.board.Blackboard;
+import de.evoal.core.api.cdi.BeanFactory;
 import de.evoal.core.api.cdi.BlackboardValue;
 import de.evoal.core.api.cdi.ConfigurationValue;
+import de.evoal.core.api.optimisation.InitialCandidatesProvider;
 import de.evoal.core.ea.api.initial.InitialPopulation;
 import de.evoal.core.api.optimisation.OptimisationAlgorithm;
 import de.evoal.core.api.utils.LanguageHelper;
@@ -17,6 +19,7 @@ import de.evoal.core.api.optimisation.OptimisationValue;
 
 import de.evoal.core.api.statistics.writer.StatisticsWriter;
 import de.evoal.core.ea.main.fitness.JeneticsFitnessFunction;
+import de.evoal.core.ea.main.initial.InitialStream;
 import de.evoal.core.ea.main.jenetics.ConstraintList;
 import de.evoal.core.ea.main.alterer.AltererFactory;
 import de.evoal.core.ea.main.codec.DynamicCodec;
@@ -100,7 +103,7 @@ public class EvolutionaryAlgorithmSearch implements OptimisationAlgorithm {
 
 
 	@Inject @Named("initial")
-	private InitialPopulation initalStream;
+	private InitialCandidatesProvider provider;
 
 	@Override
 	public OptimisationAlgorithm init(de.evoal.languages.model.instance.Instance instance) {
@@ -124,7 +127,7 @@ public class EvolutionaryAlgorithmSearch implements OptimisationAlgorithm {
 											.build();
         
         EvolutionStatistics<OptimisationValue, MinMax<OptimisationValue>> statistics = EvolutionStatistics.ofComparable();
-		EvolutionStream<?, OptimisationValue> initialStream = initalStream.create(engine);
+		EvolutionStream<?, OptimisationValue> initialStream = BeanFactory.create(InitialStream.class).init(provider, engine).create();
 		JeneticsStatisticsWriter writer = new JeneticsStatisticsWriter(this.statistics);
 
         final EvolutionResult<?, OptimisationValue> result

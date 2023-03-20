@@ -23,7 +23,7 @@ public class NormalNoiseFunction extends AbstractGeneratorFunction {
 	/**
 	 * The different distributions to apply.
 	 */
-	private List<RealDistribution> distributions = new ArrayList<>();
+	private final List<RealDistribution> distributions = new ArrayList<>();
 
 	public GeneratorFunction init(final Step configuration) throws InitializationException {
 		super.init(configuration);

@@ -1,7 +1,8 @@
 package de.evoal.core.ea.main.alterer.crossover;
 
 import de.evoal.core.api.utils.Requirements;
-import de.evoal.core.ea.api.correlations.Correlations;
+import de.evoal.core.api.correlations.Correlations;
+import de.evoal.core.ea.api.codec.CustomCodec;
 import io.jenetics.NumericGene;
 import io.jenetics.util.MSeq;
 
@@ -27,8 +28,8 @@ public class LineCorrelationCrossover<
      * @throws IllegalArgumentException if the {@code probability} is not in the
      *         valid range of {@code [0, 1]} or if {@code p} is smaller then zero
      */
-    public LineCorrelationCrossover(final double probability, final double p, final Correlations correlations) {
-        super(probability, correlations);
+    public LineCorrelationCrossover(final double probability, final double p, final Correlations correlations, final CustomCodec<G> codec) {
+        super(probability, correlations, codec);
         _p = Requirements.nonNegative(p);
     }
 
@@ -42,8 +43,8 @@ public class LineCorrelationCrossover<
      * @throws IllegalArgumentException if the {@code probability} is not in the
      *         valid range of {@code [0, 1]}
      */
-    public LineCorrelationCrossover(final double probability, final Correlations correlations) {
-        this(probability, 0, correlations);
+    public LineCorrelationCrossover(final double probability, final Correlations correlations, final CustomCodec<G> codec) {
+        this(probability, 0, correlations, codec);
     }
 
     @Override

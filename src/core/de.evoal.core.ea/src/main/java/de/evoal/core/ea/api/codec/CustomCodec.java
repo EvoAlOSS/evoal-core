@@ -18,5 +18,5 @@ public interface CustomCodec<G extends Gene<?, G>> extends Codec<Properties, G> 
      * @param p The individual to code.
      * @return The generated (non-null) genotype.
      */
-    public Genotype<G> encode(final Properties p);
+    Genotype<G> encode(final Properties p);
 }

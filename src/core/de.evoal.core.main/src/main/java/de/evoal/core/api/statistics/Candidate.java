@@ -14,17 +14,17 @@ public interface Candidate {
      *
      * @return The age of the candidate For iteration-based approaches.
      */
-    public default int age() {
+    default int age() {
         return 1;
     }
 
     /**
      * @return The candidate's search space representation.
      */
-    public Properties searchSpaceRepresentation();
+    Properties searchSpaceRepresentation();
 
     /**
      * @return The optimisation value of the candidate.
      */
-    public OptimisationValue value();
+    OptimisationValue value();
 }

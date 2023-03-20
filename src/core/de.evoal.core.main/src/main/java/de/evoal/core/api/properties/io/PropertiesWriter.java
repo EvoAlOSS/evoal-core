@@ -17,7 +17,7 @@ public interface PropertiesWriter extends AutoCloseable {
      * @param properties The properties to write.
      * @throws EvoalIOException An exception to signal some problem while serialising the data.
      */
-    public void add(final @NonNull Properties properties) throws EvoalIOException;
+    void add(final @NonNull Properties properties) throws EvoalIOException;
 
     /**
      * Inits the writer with the specification information.
@@ -26,5 +26,5 @@ public interface PropertiesWriter extends AutoCloseable {
      *
      * @return The instance itself.
      */
-    public PropertiesWriter init(final File outputFile, final PropertiesSpecification specification) throws EvoalIOException;
+    PropertiesWriter init(final File outputFile, final PropertiesSpecification specification) throws EvoalIOException;
 }

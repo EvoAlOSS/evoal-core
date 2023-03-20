@@ -1,6 +1,6 @@
 package de.evoal.core.ea.main.alterer.mutator;
 
-import de.evoal.core.ea.api.correlations.Correlation;
+import de.evoal.core.api.correlations.Correlation;
 import lombok.Getter;
 import lombok.Setter;
 

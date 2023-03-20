@@ -13,10 +13,10 @@ public interface OptimisationAlgorithm {
      *
      * @return The algorithm itself.
      */
-    public OptimisationAlgorithm init(final Instance instance);
+    OptimisationAlgorithm init(final Instance instance);
 
     /**
      * Does the actual optimisation.
      */
-    public void run();
+    void run();
 }

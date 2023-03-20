@@ -1,6 +1,7 @@
 package de.evoal.core.ea.main.alterer.mutator;
 
-import de.evoal.core.ea.api.correlations.Correlations;
+import de.evoal.core.api.correlations.Correlations;
+import de.evoal.core.ea.api.codec.CustomCodec;
 import io.jenetics.*;
 import io.jenetics.util.MSeq;
 
@@ -19,8 +20,8 @@ public class SingleBitFlipCorrelationMutator<
      * @throws IllegalArgumentException if the {@code probability} is not in the
      *          valid range of {@code [0, 1]}.
      */
-    public SingleBitFlipCorrelationMutator(final double probability, final double threshold, final Correlations correlations) {
-        super(probability, threshold, correlations);
+    public SingleBitFlipCorrelationMutator(final double probability, final double threshold, final Correlations correlations, final CustomCodec<BitGene> codec) {
+        super(probability, threshold, correlations, codec);
     }
 
     @Override

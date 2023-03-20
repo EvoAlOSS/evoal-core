@@ -19,11 +19,11 @@ public class ReflectiveDeserializer extends StdDeserializer<Object> {
     }
 
     @Override
-    public Object deserialize(final JsonParser parser, final DeserializationContext context) throws IOException, JsonProcessingException {
+    public Object deserialize(final JsonParser parser, final DeserializationContext context) throws IOException {
         return readObject(parser);
     }
 
-    private Object readObject(final JsonParser parser) throws IOException, JsonProcessingException {
+    private Object readObject(final JsonParser parser) throws IOException {
         assertTokenTypeAndAdvance(parser, JsonToken.START_OBJECT);
 
         final JsonToken nextValue = parser.nextValue();

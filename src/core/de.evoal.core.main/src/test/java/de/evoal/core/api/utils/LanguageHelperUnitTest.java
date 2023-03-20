@@ -37,7 +37,7 @@ public class LanguageHelperUnitTest {
         final Object result = lookup(instance, "");
 
         Assertions.assertNotNull(result);
-        Assertions.assertTrue(instance == result);
+        Assertions.assertSame(instance, result);
     }
 
     @Test

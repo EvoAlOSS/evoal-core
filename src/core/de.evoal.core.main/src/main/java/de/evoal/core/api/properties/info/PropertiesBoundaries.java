@@ -13,7 +13,7 @@ public class PropertiesBoundaries {
 
     public record Boundaries(Number lower, Number upper) {}
 
-    private Map<PropertySpecification, Boundaries> boundariesMap = new HashMap<>();
+    private final Map<PropertySpecification, Boundaries> boundariesMap = new HashMap<>();
 
     public boolean contains(final PropertySpecification specification) { return boundariesMap.containsKey(specification); }
 

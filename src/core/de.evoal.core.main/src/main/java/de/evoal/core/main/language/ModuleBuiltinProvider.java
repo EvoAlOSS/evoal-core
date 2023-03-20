@@ -21,7 +21,7 @@ import java.util.stream.Stream;
  */
 @Slf4j
 public class ModuleBuiltinProvider implements BuiltinProvider {
-    private static Map<String, Collection<URI>> builtinCache = new HashMap<>();
+    private static final Map<String, Collection<URI>> builtinCache = new HashMap<>();
 
     @Override
     public Collection<URI> findBuiltins(final String name) {

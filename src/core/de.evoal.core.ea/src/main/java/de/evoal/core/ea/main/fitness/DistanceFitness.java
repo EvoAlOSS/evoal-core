@@ -32,9 +32,9 @@ public class DistanceFitness extends OptimisationFunctionDecorator {
         final Object [] target = this.target.getValues();
         final double [] current = decoratedFunction.evaluate(properties);
 
-        Requirements.<Object>requireSameSize(current, target);
+        Requirements.requireSameSize(current, target);
 
-        final double result[] = new double[target.length];
+        final double[] result = new double[target.length];
         for(int i = 0; i  < target.length; ++i) {
             result[i] = distance(target[i], current[i]);
         }

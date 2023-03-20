@@ -15,13 +15,13 @@ import java.lang.annotation.RetentionPolicy;
  *
  *   <pre>
  *     @Inject
- *     @ConfigurationValue(entry = BlackboardEntry.EA_CONFIGURATION, access = "algorithm.fitness.exponent")
- *     private double exponent;
+ *     @ConfigurationValue(entry = BlackboardEntry.EA_CONFIGURATION, access = "algorithm.number-of-iterations")
+ *     private int iterations;
  *   </pre>
  *
  *   This example will load the ea configuration from the blackboard and search
- *   for the attribute {@code algorithm}. Afterwards, it looks up the attributes
- *   {@code fitness} and {@code exponent}.
+ *   for the attribute {@code algorithm}. Afterwards, it looks up the attribute
+ *   {@code number-of-generations}.
  */
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
@@ -30,10 +30,10 @@ public @interface ConfigurationValue {
     /**
      * @return The blackboard entry to use for the lookup.
      */
-    public String entry();
+    String entry();
 
     /**
      * @return The access path.
      */
-    public @Nonbinding String access();
+    @Nonbinding String access();
 }

@@ -1,6 +1,6 @@
 package de.evoal.core.ea.main.fitness;
 
-import de.evoal.core.ea.api.constraints.strategies.fitness.MalusForFitnessStrategy;
+import de.evoal.core.api.constraints.strategies.fitness.MalusForFitnessStrategy;
 import de.evoal.core.api.optimisation.OptimisationFunctionDecorator;
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;
@@ -16,7 +16,7 @@ import javax.inject.Named;
 public class MalusFitness extends OptimisationFunctionDecorator {
 
     @Inject
-    @Named("optimisation-function-output")
+    @Named("optimisation-space-specification")
     private PropertiesSpecification fitnessSpecification;
 
     @Inject

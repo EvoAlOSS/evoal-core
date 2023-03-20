@@ -12,7 +12,7 @@ import java.util.List;
 
 public abstract class RealDistributionBase extends AbstractGeneratorFunction {
     @Getter(AccessLevel.PROTECTED)
-    private List<RealDistribution> distributions = new ArrayList<>();
+    private final List<RealDistribution> distributions = new ArrayList<>();
 
     @Override
     public Properties apply(final Properties in) {

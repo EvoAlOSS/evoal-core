@@ -40,19 +40,19 @@ public class LaplacianKernelSVRFunctionFactory extends KernelBasedSVRFunctionFac
 				.filter(p -> "kernel-source-sds".equals(p.getName()))
 				.map(Parameter::getValue)
 				.findFirst()
-				.get();;
+				.get();
 		final double[] targetMeans = (double [])configuration.getState()
 				.stream()
 				.filter(p -> "kernel-target-means".equals(p.getName()))
 				.map(Parameter::getValue)
 				.findFirst()
-				.get();;
+				.get();
 		final double[] targetSDs = (double [])configuration.getState()
 				.stream()
 				.filter(p -> "kernel-target-sds".equals(p.getName()))
 				.map(Parameter::getValue)
 				.findFirst()
-				.get();;
+				.get();
 
 
 		return new KernelBasedSVRFunction(configuration, regression, "laplacian", requiredInput, actualInput, producedOutput, margin, sourceMeans, sourceSDs, targetMeans, targetSDs);

@@ -12,15 +12,15 @@ public interface MappingFunction {
 	/**
 	 * Applies the mapping function.
 	 */
-	public Properties apply(final Properties input);
+    Properties apply(final Properties input);
 
 	/**
 	 * @return An empty input vector with all property headers set.
 	 */
-	public PropertiesSpecification getInputSpecification();
+    PropertiesSpecification getInputSpecification();
 
 	/**
 	 * @return An empty output vector with all property headers set.
 	 */
-	public PropertiesSpecification getOutputSpecification();
+    PropertiesSpecification getOutputSpecification();
 }

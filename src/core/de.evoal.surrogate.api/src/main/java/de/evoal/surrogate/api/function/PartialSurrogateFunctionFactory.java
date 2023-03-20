@@ -24,5 +24,5 @@ public interface PartialSurrogateFunctionFactory {
 	 *
 	 * @return The resulting regression function.
 	 */
-	public PartialSurrogateFunction create(final PartialFunctionConfiguration configuration, final PropertiesSpecification actualInput, final PropertiesSpecification requiredInput, final PropertiesSpecification producedOutput, final PropertiesStreamSupplier training);
+    PartialSurrogateFunction create(final PartialFunctionConfiguration configuration, final PropertiesSpecification actualInput, final PropertiesSpecification requiredInput, final PropertiesSpecification producedOutput, final PropertiesStreamSupplier training);
 }

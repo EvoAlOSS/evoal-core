@@ -26,7 +26,7 @@ import java.util.List;
 public class FitnessStatistics extends AbstractCandidateStatisticsWriter {
 
     @Inject
-    @Named("optimisation-function-output")
+    @Named("optimisation-space-specification")
     private Provider<PropertiesSpecification> targetSpecification;
 
     @Override

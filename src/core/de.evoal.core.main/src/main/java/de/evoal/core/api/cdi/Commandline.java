@@ -15,15 +15,15 @@ public @interface Commandline {
     /**
      * @return The application that accept this parameter.
      */
-    public @Nonbinding String [] main();
+    @Nonbinding String [] main();
 
     /**
      * @return Parameter name.
      */
-    public @Nonbinding String name();
+    @Nonbinding String name();
 
     /**
      * @return The documentation.
      */
-    public @Nonbinding String doc();
+    @Nonbinding String doc();
 }

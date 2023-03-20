@@ -8,5 +8,5 @@ import io.jenetics.engine.EvolutionStream;
 public interface InitialPopulation<G extends Gene<?, G>, C extends Comparable<C>> {
     InitialPopulation init(final Instance initialization);
 
-    public EvolutionStream<G, C> create(final Engine<G, C> engine);
+    EvolutionStream<G, C> create(final Engine<G, C> engine);
 }

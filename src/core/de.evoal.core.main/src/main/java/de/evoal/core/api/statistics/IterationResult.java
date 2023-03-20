@@ -10,21 +10,21 @@ public interface IterationResult {
     /**
      * @return The current iteration number.
      */
-    public int iteration();
+    int iteration();
 
     /**
      * @return Stream of all candidates of the iteration. May be empty.
      */
-    public Stream<Candidate> candidates();
+    Stream<Candidate> candidates();
 
     /**
      * The number of candidates of this iteration if available.
      */
-    public Optional<Integer> candidateCount();
+    Optional<Integer> candidateCount();
 
     /**
      * @return The best candidate of the iteration.
      */
-    public Candidate bestCandidate();
+    Candidate bestCandidate();
 
 }

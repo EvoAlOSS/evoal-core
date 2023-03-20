@@ -12,7 +12,7 @@ public class CustomKernelDensity {
      * The kernel -- a symmetric but not necessarily positive function that
      * integrates to one. Here we just Gaussian density function.
      */
-    private GaussianDistribution gaussian;
+    private final GaussianDistribution gaussian;
 
     /**
      * Constructor. The bandwidth of kernel will be estimated by the rule of thumb.

@@ -1,7 +1,8 @@
 package de.evoal.core.ea.main.alterer.crossover;
 
-import de.evoal.core.ea.api.correlations.Correlation;
-import de.evoal.core.ea.api.correlations.Correlations;
+import de.evoal.core.api.correlations.Correlation;
+import de.evoal.core.api.correlations.Correlations;
+import de.evoal.core.ea.api.codec.CustomCodec;
 import io.jenetics.*;
 import io.jenetics.util.MSeq;
 import io.jenetics.util.RandomRegistry;
@@ -17,7 +18,9 @@ public abstract class CorrelationCrossover<
         >
         extends Recombinator<G, C> {
 
-    private final Correlations<G> correlations;
+    private final Correlations correlations;
+
+    private final CustomCodec<G> codec;
 
     /**
      * Constructs an alterer with a given recombination probability.
@@ -26,10 +29,11 @@ public abstract class CorrelationCrossover<
      * @throws IllegalArgumentException if the {@code probability} is not in the
      *          valid range of {@code [0, 1]}
      */
-    protected CorrelationCrossover(final double probability, final Correlations correlations) {
+    protected CorrelationCrossover(final double probability, final Correlations correlations, final CustomCodec<G> codec) {
         super(probability, 2);
         
         this.correlations = correlations;
+        this.codec = codec;
     }
 
     @Override
@@ -48,7 +52,7 @@ public abstract class CorrelationCrossover<
 
         //Choosing the Chromosome index for crossover.
         final int chIndex = random.nextInt(min(gt1.length(), gt2.length()));
-        final int rootIndex = correlations.findCorrelationRoot(gt1, chIndex);
+        final int rootIndex = correlations.findCorrelationRoot(codec.decode(gt1), chIndex);
 
         final var c1 = MSeq.of(gt1);
         final var c2 = MSeq.of(gt2);
@@ -79,7 +83,7 @@ public abstract class CorrelationCrossover<
         c1.set(chIndex, c1.get(chIndex).newInstance(genes1.toISeq()));
         c2.set(chIndex, c2.get(chIndex).newInstance(genes2.toISeq()));
 
-        for(final Correlation correlation : correlations.find(gt1, chIndex)) {
+        for(final Correlation correlation : correlations.find(codec.decode(gt1), chIndex)) {
             final int targetIndex = correlation.getChromosomeTwo();
 
             correlationOrder += crossover(gt1, gt2, c1, c2, targetIndex, newCrossoverMemento().apply(memento, correlation)); // sum up correlations

@@ -7,6 +7,7 @@ import org.deeplearning4j.util.ModelSerializer;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +28,7 @@ public final class NeuralNetworkHelper {
 
             return Parameter.builder()
                     .name("model")
-                    .value(bos.toString("UTF8"))
+                    .value(bos.toString(StandardCharsets.UTF_8))
                     .build();
         } catch (final IOException e) {
             e.printStackTrace();

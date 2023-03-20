@@ -16,5 +16,5 @@ public @interface BlackboardValue {
     /**
      * @return The entry to inject.
      */
-    public @Nonbinding String value();
+    @Nonbinding String value();
 }

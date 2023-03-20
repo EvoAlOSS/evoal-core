@@ -12,5 +12,5 @@ import de.evoal.languages.model.generator.Step;
 public interface GeneratorFunction {
     GeneratorFunction init(final Step configuration) throws InitializationException;
 
-    public Properties apply(final Properties in);
+    Properties apply(final Properties in);
 }

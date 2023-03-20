@@ -1,6 +1,7 @@
 package de.evoal.core.ea.main.alterer.internal;
 
-import de.evoal.core.ea.api.correlations.Correlations;
+import de.evoal.core.api.correlations.Correlations;
+import de.evoal.core.ea.api.codec.CustomCodec;
 import io.jenetics.*;
 import io.jenetics.util.Mean;
 
@@ -16,15 +17,15 @@ public class MeanCorrelationAlterer<
      * @throws IllegalArgumentException if the {@code probability} is not in the
      *         valid range of {@code [0, 1]}.
      */
-    public MeanCorrelationAlterer(final double probability, final Correlations correlations) {
-        super((x,y) -> (G)((Mean)x).mean(y), probability, correlations);
+    public MeanCorrelationAlterer(final double probability, final Correlations correlations, final CustomCodec<G> codec) {
+        super((x,y) -> (G)((Mean)x).mean(y), probability, correlations, codec);
     }
 
     /**
      * Create a new alterer with alter probability of {@code 0.05}.
      */
-    public MeanCorrelationAlterer(final Correlations correlations) {
-        this(0.05, correlations);
+    public MeanCorrelationAlterer(final Correlations correlations, final CustomCodec<G> codec) {
+        this(0.05, correlations, codec);
     }
 
 }

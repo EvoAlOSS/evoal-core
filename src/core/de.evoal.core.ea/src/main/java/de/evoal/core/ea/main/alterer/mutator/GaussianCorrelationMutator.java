@@ -1,6 +1,7 @@
 package de.evoal.core.ea.main.alterer.mutator;
 
-import de.evoal.core.ea.api.correlations.Correlations;
+import de.evoal.core.api.correlations.Correlations;
+import de.evoal.core.ea.api.codec.CustomCodec;
 import io.jenetics.NumericGene;
 
 import java.util.random.RandomGenerator;
@@ -14,8 +15,8 @@ public class GaussianCorrelationMutator<
         C extends Comparable<? super C>>
         extends CorrelationMutator<G, C, GaussianCorrelationMutatorMemento> {
 
-    public GaussianCorrelationMutator(final double probability, final double threshold, final Correlations correlations) {
-        super(probability, threshold, correlations);
+    public GaussianCorrelationMutator(final double probability, final double threshold, final Correlations correlations, final CustomCodec<G> codec) {
+        super(probability, threshold, correlations, codec);
     }
 
     @Override

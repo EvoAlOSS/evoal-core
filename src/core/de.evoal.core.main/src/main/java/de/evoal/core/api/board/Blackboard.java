@@ -84,7 +84,7 @@ public class Blackboard {
     public void bind(final String entry, final Object element) {
         log.info("Binding entry {} to {}.", entry, element);
 
-        board.put(entry.toString(), element);
+        board.put(entry, element);
         entryEvent.fire(BlackboardEntry.of(entry));
     }
 

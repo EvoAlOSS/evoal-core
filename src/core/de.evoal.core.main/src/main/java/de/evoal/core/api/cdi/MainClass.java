@@ -12,5 +12,5 @@ public interface MainClass {
     /**
      * Run the main.
      */
-    public void run();
+    void run();
 }

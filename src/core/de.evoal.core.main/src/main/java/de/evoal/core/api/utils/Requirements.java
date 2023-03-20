@@ -287,7 +287,7 @@ public final class Requirements {
         requireNotNull(clazz);
 
         if(!clazz.isInstance(value)) {
-            throw new IllegalArgumentException("Passed object " + Objects.toString(value) + " is not an instance of: " + clazz);
+            throw new IllegalArgumentException("Passed object " + value + " is not an instance of: " + clazz);
         }
     }
 }

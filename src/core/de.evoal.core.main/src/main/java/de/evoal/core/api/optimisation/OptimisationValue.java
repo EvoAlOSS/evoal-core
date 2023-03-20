@@ -7,5 +7,5 @@ public interface OptimisationValue extends Comparable<OptimisationValue> {
     /**
      * @return A list of serializable information for optimisation value statistics.
      */
-    public Object [] toStatistics();
+    Object [] toStatistics();
 }

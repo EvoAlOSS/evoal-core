@@ -44,7 +44,7 @@ public class CrossValidationPropertiesStreamSupplier implements PropertiesStream
         final long partitionRest = trainingDataCount % k;
 
         // calculate each partition size
-        final long partitionSizes[] = new long[k];
+        final long[] partitionSizes = new long[k];
         for(int i = 0; i < k; ++i) {
             partitionSizes[i] = trainingDataCount / k + (i < partitionRest ? 1 : 0);
         }
@@ -74,7 +74,7 @@ public class CrossValidationPropertiesStreamSupplier implements PropertiesStream
                 final long partitionRest = trainingDataCount % k;
 
                 // calculate each partition size
-                final long partitionSizes[] = new long[k];
+                final long[] partitionSizes = new long[k];
                 for(int i = 0; i < k; ++i) {
                     partitionSizes[i] = trainingDataCount / k + (i < partitionRest ? 1 : 0);
                 }

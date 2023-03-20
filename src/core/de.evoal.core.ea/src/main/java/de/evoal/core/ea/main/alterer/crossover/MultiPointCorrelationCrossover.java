@@ -1,6 +1,7 @@
 package de.evoal.core.ea.main.alterer.crossover;
 
-import de.evoal.core.ea.api.correlations.Correlations;
+import de.evoal.core.api.correlations.Correlations;
+import de.evoal.core.ea.api.codec.CustomCodec;
 import io.jenetics.Gene;
 import io.jenetics.util.MSeq;
 
@@ -22,8 +23,8 @@ public class MultiPointCorrelationCrossover<
      * @throws IllegalArgumentException if the {@code probability} is not in the
      *         valid range of {@code [0, 1]} or {@code n &lt; 1}.
      */
-    public MultiPointCorrelationCrossover(final double probability, final int n, final Correlations correlations) {
-        super(probability, correlations);
+    public MultiPointCorrelationCrossover(final double probability, final int n, final Correlations correlations, final CustomCodec<G> codec) {
+        super(probability, correlations, codec);
         if (n < 1) {
             throw new IllegalArgumentException(format(
                     "n must be at least 1 but was %d.", n
@@ -39,8 +40,8 @@ public class MultiPointCorrelationCrossover<
      * @throws IllegalArgumentException if the {@code probability} is not in the
      *         valid range of {@code [0, 1]}.
      */
-    public MultiPointCorrelationCrossover(final double probability, final Correlations correlations) {
-        this(probability, 2, correlations);
+    public MultiPointCorrelationCrossover(final double probability, final Correlations correlations, final CustomCodec<G> codec) {
+        this(probability, 2, correlations, codec);
     }
 
     /**
@@ -50,16 +51,16 @@ public class MultiPointCorrelationCrossover<
      * @param n the number of crossover points.
      * @throws IllegalArgumentException if {@code n &lt; 1}.
      */
-    public MultiPointCorrelationCrossover(final int n, final Correlations correlations) {
-        this(0.05, n, correlations);
+    public MultiPointCorrelationCrossover(final int n, final Correlations correlations, final CustomCodec<G> codec) {
+        this(0.05, n, correlations, codec);
     }
 
     /**
      * Create a new crossover instance with two crossover points and crossover
      * probability 0.05.
      */
-    public MultiPointCorrelationCrossover(final Correlations correlations) {
-        this(0.05, 2, correlations);
+    public MultiPointCorrelationCrossover(final Correlations correlations, final CustomCodec<G> codec) {
+        this(0.05, 2, correlations, codec);
     }
 
     /**

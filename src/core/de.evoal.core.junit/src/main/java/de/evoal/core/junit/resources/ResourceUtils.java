@@ -15,7 +15,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public final class ResourceUtils {
-    private static Logger log = LoggerFactory.getLogger(ResourceUtils.class);
+    private static final Logger log = LoggerFactory.getLogger(ResourceUtils.class);
     public static void unpack(final ClassLoader loader, final File destination, final String ... files) throws IOException {
         for(final String base : files) {
             log.info("Searching for file {}.", base);

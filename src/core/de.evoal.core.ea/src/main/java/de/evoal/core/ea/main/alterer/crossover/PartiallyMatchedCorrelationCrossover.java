@@ -1,6 +1,7 @@
 package de.evoal.core.ea.main.alterer.crossover;
 
-import de.evoal.core.ea.api.correlations.Correlations;
+import de.evoal.core.api.correlations.Correlations;
+import de.evoal.core.ea.api.codec.CustomCodec;
 import io.jenetics.EnumGene;
 import io.jenetics.util.MSeq;
 
@@ -12,8 +13,8 @@ public class PartiallyMatchedCorrelationCrossover<
 > extends CorrelationCrossover<EnumGene<T>, C, PartiallyMatchedCorrelationCrossoverMemento>
 {
 
-    public PartiallyMatchedCorrelationCrossover(final double probability, final Correlations correlations) {
-        super(probability, correlations);
+    public PartiallyMatchedCorrelationCrossover(final double probability, final Correlations correlations, final CustomCodec<EnumGene<T>> codec) {
+        super(probability, correlations, codec);
     }
 
     @Override

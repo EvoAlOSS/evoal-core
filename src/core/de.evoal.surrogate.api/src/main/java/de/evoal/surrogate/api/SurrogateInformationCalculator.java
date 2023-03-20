@@ -19,10 +19,10 @@ public interface SurrogateInformationCalculator {
      * @param config
      * @param parameters
      */
-    public void configure(final SurrogateFunction function, final SurrogateConfiguration config, final List<Object> parameters, final PropertiesStreamSupplier trainingData);
+    void configure(final SurrogateFunction function, final SurrogateConfiguration config, final List<Object> parameters, final PropertiesStreamSupplier trainingData);
 
     /**
      * Executes the calculation.
      */
-    public void execute();
+    void execute();
 }

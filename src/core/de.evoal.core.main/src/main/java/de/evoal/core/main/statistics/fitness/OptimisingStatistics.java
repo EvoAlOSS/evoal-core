@@ -30,7 +30,7 @@ public class OptimisingStatistics extends AbstractCandidateStatisticsWriter {
     private OptimisationFunction optimisationFunction;
 
     @Inject
-    @Named("optimisation-function-output")
+    @Named("optimisation-space-specification")
     private PropertiesSpecification targetSpecification;
 
     @Override

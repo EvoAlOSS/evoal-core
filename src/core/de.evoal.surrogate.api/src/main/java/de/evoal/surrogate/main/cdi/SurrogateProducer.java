@@ -119,13 +119,11 @@ public class SurrogateProducer {
         while(contentIterator.hasNext()) {
             final EObject content = contentIterator.next();
 
-            if(content instanceof DataReference) {
-                final DataReference ref = (DataReference)content;
+            if(content instanceof final DataReference ref) {
                 final PropertySpecification spec = new PropertySpecification(ref.getDefinition().getName(), ref.getDefinition());
 
                 specifications.put(spec.name(), spec);
-            } else if(content instanceof SurrogateDefinition) {
-                final SurrogateDefinition def = (SurrogateDefinition)content;
+            } else if(content instanceof final SurrogateDefinition def) {
                 def.getInputs()
                         .stream()
                         .forEach(descr -> {
@@ -142,8 +140,7 @@ public class SurrogateProducer {
                             specifications.put(spec.name(), spec);
                         });
 
-            } else if(content instanceof PartialSurrogateFunctionDefinition) {
-                final PartialSurrogateFunctionDefinition def = (PartialSurrogateFunctionDefinition)content;
+            } else if(content instanceof final PartialSurrogateFunctionDefinition def) {
                 def.getInputs()
                         .stream()
                         .forEach(descr -> {

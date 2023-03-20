@@ -21,7 +21,7 @@ import java.util.Arrays;
 @Dependent
 @Named("arff-reader")
 public class ArffPropertiesReader implements PropertiesReader {
-    private static interface TriFunction<S,T,U,R> {
+    private interface TriFunction<S,T,U,R> {
         /**
          * Applies this function to the given arguments.
          *

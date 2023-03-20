@@ -15,10 +15,10 @@ public @interface Application {
     /**
      * @return Name of the application.
      */
-    public String name();
+    String name();
 
     /**
      * @return The documentation.
      */
-    public @Nonbinding String documentation();
+    @Nonbinding String documentation();
 }

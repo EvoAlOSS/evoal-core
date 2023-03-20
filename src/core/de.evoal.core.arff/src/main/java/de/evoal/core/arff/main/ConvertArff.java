@@ -52,8 +52,8 @@ public class ConvertArff implements MainClass {
         final PropertiesSpecification specification = readSpecification();
 
         try (final PropertiesReader reader = PropertiesIOFactory.reader(arffFile, specification);
-             final PropertiesWriter writer = PropertiesIOFactory.writer(jsonFile, specification);
-            ) {
+             final PropertiesWriter writer = PropertiesIOFactory.writer(jsonFile, specification)
+        ) {
 
             while(reader.hasNext()) {
                 writer.add(reader.next());

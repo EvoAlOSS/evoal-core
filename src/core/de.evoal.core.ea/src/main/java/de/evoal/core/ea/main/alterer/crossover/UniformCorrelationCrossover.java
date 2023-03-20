@@ -1,7 +1,8 @@
 package de.evoal.core.ea.main.alterer.crossover;
 
 import de.evoal.core.api.utils.Requirements;
-import de.evoal.core.ea.api.correlations.Correlations;
+import de.evoal.core.api.correlations.Correlations;
+import de.evoal.core.ea.api.codec.CustomCodec;
 import io.jenetics.Gene;
 import io.jenetics.util.MSeq;
 
@@ -28,9 +29,10 @@ public class UniformCorrelationCrossover<
     public UniformCorrelationCrossover(
             final double crossoverProbability,
             final double swapProbability,
-            final Correlations correlations
+            final Correlations correlations,
+            final CustomCodec<G> codec
     ) {
-        super(crossoverProbability, correlations);
+        super(crossoverProbability, correlations, codec);
 
         Requirements.requireProbability(swapProbability);
         _swapProbability = swapProbability;

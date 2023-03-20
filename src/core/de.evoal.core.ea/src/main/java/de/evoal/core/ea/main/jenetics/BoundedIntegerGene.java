@@ -76,12 +76,12 @@ public class BoundedIntegerGene implements
 
     @Override
     public int intValue() {
-        return (int) _allele;
+        return _allele;
     }
 
     @Override
     public long longValue() {
-        return (long) _allele;
+        return _allele;
     }
 
     @Override

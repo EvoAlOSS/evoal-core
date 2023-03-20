@@ -1,7 +1,8 @@
 package de.evoal.core.ea.main.alterer.mutator;
 
 import de.evoal.core.api.board.Blackboard;
-import de.evoal.core.ea.api.correlations.Correlations;
+import de.evoal.core.api.correlations.Correlations;
+import de.evoal.core.ea.api.codec.CustomCodec;
 import io.jenetics.Alterer;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
@@ -18,8 +19,11 @@ public final class CorrelationMutatorFactory {
     @Inject
     private Blackboard board;
 
+    @Inject
+    private CustomCodec codec;
+
     @Produces
     public BiFunction<Double, Double, Alterer> create(final Correlations correlations) {
-        return (probability, threshold) -> new GaussianCorrelationMutator(probability, threshold, correlations);
+        return (probability, threshold) -> new GaussianCorrelationMutator(probability, threshold, correlations, codec);
     }
 }

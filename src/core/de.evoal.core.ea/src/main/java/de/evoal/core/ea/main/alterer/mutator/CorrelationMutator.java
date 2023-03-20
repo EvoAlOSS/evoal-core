@@ -1,8 +1,9 @@
 package de.evoal.core.ea.main.alterer.mutator;
 
+import de.evoal.core.ea.api.codec.CustomCodec;
 import de.evoal.core.ea.main.alterer.internal.AbstractCorrelationAlterer;
-import de.evoal.core.ea.api.correlations.Correlation;
-import de.evoal.core.ea.api.correlations.Correlations;
+import de.evoal.core.api.correlations.Correlation;
+import de.evoal.core.api.correlations.Correlations;
 import io.jenetics.*;
 import io.jenetics.internal.math.Probabilities;
 import io.jenetics.util.ISeq;
@@ -24,7 +25,9 @@ public abstract class CorrelationMutator<
         extends AbstractCorrelationAlterer<G, C> {
 
     protected final double threshold;
-    private final Correlations<G> correlations;
+    private final Correlations correlations;
+
+    private final CustomCodec<G> codec;
 
     /**
      * Construct a Mutation object which a given mutation probability.
@@ -36,11 +39,12 @@ public abstract class CorrelationMutator<
      * @throws IllegalArgumentException if the {@code probability} is not in the
      *          valid range of {@code [0, 1]}.
      */
-    protected CorrelationMutator(final double probability, final double threshold, final Correlations correlations) {
+    protected CorrelationMutator(final double probability, final double threshold, final Correlations correlations, final CustomCodec<G> codec) {
         super(probability);
         
         this.correlations = correlations;
         this.threshold = threshold;
+        this.codec = codec;
     }
 
     /**
@@ -148,7 +152,7 @@ public abstract class CorrelationMutator<
     protected void propagateCorrelationInfo(final CC [] contexts, final Genotype<G> genotype, final int i) {
         final CC context = contexts[i];
 
-        for(final Correlation correlation : this.correlations.find(genotype, i)) {
+        for(final Correlation correlation : this.correlations.find(codec.decode(genotype), i)) {
             final int targetIndex = Math.max(correlation.getChromosomeOne(), correlation.getChromosomeTwo());
 
             contexts[targetIndex].apply(context, correlation);

@@ -7,11 +7,11 @@ import de.evoal.core.api.statistics.io.WriterStrategy;
 import de.evoal.core.api.statistics.writer.Column;
 import de.evoal.core.api.statistics.writer.ColumnType;
 import de.evoal.core.api.statistics.writer.StatisticsWriter;
-import de.evoal.core.ea.api.constraints.calculation.CalculationFactory;
-import de.evoal.core.ea.api.constraints.calculation.CalculationStrategy;
-import de.evoal.core.ea.api.constraints.model.ConstraintResult;
-import de.evoal.core.ea.api.constraints.model.Constraints;
-import de.evoal.core.ea.api.constraints.strategies.CalculationResult;
+import de.evoal.core.api.constraints.calculation.CalculationFactory;
+import de.evoal.core.api.constraints.calculation.CalculationStrategy;
+import de.evoal.core.api.constraints.model.ConstraintResult;
+import de.evoal.core.api.constraints.model.Constraints;
+import de.evoal.core.api.constraints.strategies.CalculationResult;
 import de.evoal.languages.model.instance.Instance;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.Dependent;
@@ -102,7 +102,7 @@ public class ConstraintStatistics implements StatisticsWriter {
                         .mapToDouble(ConstraintResult::getComparisonDifference)
                         .summaryStatistics();
 
-            data[1 + index * NUMBER_OF_STATISTICS_PER_CONSTRAINT + 0] = invalid;
+            data[1 + index * NUMBER_OF_STATISTICS_PER_CONSTRAINT] = invalid;
             data[1 + index * NUMBER_OF_STATISTICS_PER_CONSTRAINT + 1] = statistics.getSum();
             data[1 + index * NUMBER_OF_STATISTICS_PER_CONSTRAINT + 2] = statistics.getMin();
             data[1 + index * NUMBER_OF_STATISTICS_PER_CONSTRAINT + 3] = statistics.getAverage();

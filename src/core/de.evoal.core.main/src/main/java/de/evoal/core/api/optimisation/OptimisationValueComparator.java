@@ -16,7 +16,7 @@ public interface OptimisationValueComparator extends Function<double [], Optimis
      * @param optimisationValues the raw values.
      * @return the optimisation value for comparison.
      */
-    public default OptimisationValue apply(final double [] optimisationValues) {
+    default OptimisationValue apply(final double [] optimisationValues) {
         return toValue(optimisationValues);
     }
 
@@ -26,7 +26,7 @@ public interface OptimisationValueComparator extends Function<double [], Optimis
      * @param optimisationValues the raw values.
      * @return The calculated optimisation value.
      */
-    public OptimisationValue toValue(final double [] optimisationValues);
+    OptimisationValue toValue(final double [] optimisationValues);
 
 
 

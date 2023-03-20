@@ -18,15 +18,15 @@ public interface StatisticsWriter {
     /**
      * Adds an optimisation result to the statistics.
      */
-    public void add(final IterationResult result);
+    void add(final IterationResult result);
 
     /**
      * Passes the writer configuration.
      */
-    public StatisticsWriter init(final Instance configuration);
+    StatisticsWriter init(final Instance configuration);
 
     /**
      * Write the statistics since the run is completed.
      */
-    public void write();
+    void write();
 }

@@ -1,7 +1,8 @@
 package de.evoal.core.ea.main.alterer.internal;
 
-import de.evoal.core.ea.api.correlations.Correlation;
-import de.evoal.core.ea.api.correlations.Correlations;
+import de.evoal.core.api.correlations.Correlation;
+import de.evoal.core.api.correlations.Correlations;
+import de.evoal.core.ea.api.codec.CustomCodec;
 import io.jenetics.*;
 import io.jenetics.util.BaseSeq;
 import io.jenetics.util.MSeq;
@@ -22,7 +23,9 @@ public abstract class CorrelationCombineAlterer<
 {
 
     private final BinaryOperator<G> _combiner;
-    private final Correlations<G> correlations;
+    private final Correlations correlations;
+
+    private final CustomCodec<G> codec;
 
     /**
      * Create a new combiner alterer with the given arguments.
@@ -36,25 +39,16 @@ public abstract class CorrelationCombineAlterer<
     public CorrelationCombineAlterer(
             final BinaryOperator<G> combiner,
             final double probability,
-            final Correlations correlations
+            final Correlations correlations,
+            final CustomCodec<G> codec
     ) {
         super(probability, 2);
         _combiner = requireNonNull(combiner);
         
         this.correlations = correlations;
+        this.codec = codec;
     }
 
-    /**
-     * Create a new combiner alterer with the given arguments.
-     *
-     * @param combiner the function used for combining two genes
-     * @throws IllegalArgumentException if the {@code probability} is not in the
-     *         valid range of {@code [0, 1]}
-     * @throws NullPointerException if the given {@code combiner} is {@code null}
-     */
-    public CorrelationCombineAlterer(final BinaryOperator<G> combiner, final Correlations correlations) {
-        this(combiner, DEFAULT_ALTER_PROBABILITY, correlations );
-    }
 
     /**
      * Return the combiner function, used by {@code this} alterer.
@@ -82,7 +76,7 @@ public abstract class CorrelationCombineAlterer<
         final int randomIndex = random.nextInt(min(gt1.length(), gt2.length()));
 
         // track the correlations to the first index to handle
-        final int rootIndex = correlations.findCorrelationRoot(gt1, randomIndex);
+        final int rootIndex = correlations.findCorrelationRoot(codec.decode(gt1), randomIndex);
 
         return recombine(population, individuals[0], generation, gt1, gt2, rootIndex);
     }
@@ -99,7 +93,7 @@ public abstract class CorrelationCombineAlterer<
         population.set(individual, Phenotype.of(Genotype.of(c1), generation));
 
         int result = 1;
-        for(final Correlation correlation : correlations.find(gt1, index)) {
+        for(final Correlation correlation : correlations.find(codec.decode(gt1), index)) {
             final int index2 = correlation.getChromosomeTwo();
             final double chromosomeValue2 = getValue(gt1, index2);
 

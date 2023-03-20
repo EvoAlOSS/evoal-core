@@ -3,12 +3,13 @@ package de.evoal.core.ea.main.alterer;
 import java.util.function.BiFunction;
 
 import de.evoal.core.api.optimisation.OptimisationValue;
+import de.evoal.core.ea.api.codec.CustomCodec;
 import de.evoal.core.ea.main.alterer.internal.MeanCorrelationAlterer;
 import de.evoal.core.ea.main.alterer.mutator.SingleBitFlipMutator;
 import de.evoal.core.ea.main.alterer.crossover.*;
 import de.evoal.core.ea.main.alterer.mutator.SingleBitFlipCorrelationMutator;
 import de.evoal.core.ea.main.alterer.mutator.SwapCorrelationMutator;
-import de.evoal.core.ea.api.correlations.Correlations;
+import de.evoal.core.api.correlations.Correlations;
 import de.evoal.languages.model.instance.Instance;
 import de.evoal.core.api.utils.LanguageHelper;
 import io.jenetics.*;
@@ -27,6 +28,9 @@ public class AltererFactory {
 
 	@Inject
 	private BiFunction<Double, Double, Alterer> factory;
+
+	@Inject
+	private CustomCodec codec;
 
 	/**
 	 * Creates an alterer based on the heuristic configuration.
@@ -79,7 +83,7 @@ public class AltererFactory {
 		final Double crossoverProbability = LanguageHelper.lookup(config, "crossover-probability");
 		final Double swapProbability = LanguageHelper.lookup(config,"swap-probability");
 		
-		return new UniformCorrelationCrossover(crossoverProbability, swapProbability, correlations);
+		return new UniformCorrelationCrossover(crossoverProbability, swapProbability, correlations, codec);
 	}
 
 	private <G extends Gene<?, G>> Alterer<G, OptimisationValue> createBitFlipMutator (final Instance config) {
@@ -92,7 +96,7 @@ public class AltererFactory {
 		final Double probability = LanguageHelper.lookup(config, "probability");
 		final Double threshold = LanguageHelper.lookup(config, "threshold");
 
-		return new SingleBitFlipCorrelationMutator(probability, threshold, correlations);
+		return new SingleBitFlipCorrelationMutator(probability, threshold, correlations, codec);
 	}
 
 	private <G extends Gene<?, G>> Alterer<G, OptimisationValue> createSwapMutator (final Instance config) {
@@ -105,7 +109,7 @@ public class AltererFactory {
 		final Double probability = LanguageHelper.lookup(config, "probability");
 		final Double threshold = LanguageHelper.lookup(config, "threshold");
 
-		return new SwapCorrelationMutator<>(probability, threshold, correlations);
+		return new SwapCorrelationMutator<>(probability, threshold, correlations, codec);
 	}
 
 	private <G extends Gene<?, G>> Alterer<G, OptimisationValue> createSinglePointCrossover(final Instance config) {
@@ -117,7 +121,7 @@ public class AltererFactory {
 	private <G extends Gene<?, G>> Alterer<G, OptimisationValue> createCorrelationSinglePointCrossover(final Instance config) {
 		final Double probability = LanguageHelper.lookup(config, "probability");
 
-		return new SinglePointCorrelationCrossover(probability, correlations);
+		return new SinglePointCorrelationCrossover(probability, correlations, codec);
 	}
 
 	private <G extends Gene<?, G>> Alterer<G, OptimisationValue> createPartiallyMatchedAlterer(final Instance config) {
@@ -129,7 +133,7 @@ public class AltererFactory {
 	private <G extends Gene<?, G>> Alterer<G, OptimisationValue> createCorrelationPartiallyMatchedAlterer(final Instance config) {
 		final Double probability = LanguageHelper.lookup(config, "probability");
 
-		return (Alterer<G, OptimisationValue>) new PartiallyMatchedCorrelationCrossover<G, OptimisationValue>(probability, correlations);
+		return (Alterer<G, OptimisationValue>) new PartiallyMatchedCorrelationCrossover<G, OptimisationValue>(probability, correlations, codec);
 	}
 
 	private <G extends Gene<?, G>> Alterer<G, OptimisationValue> createMultiPointCrossover(final Instance config) {
@@ -143,7 +147,7 @@ public class AltererFactory {
 		final Double probability = LanguageHelper.lookup(config, "probability");
 		final Integer count = LanguageHelper.lookup(config, "count");
 
-		return new MultiPointCorrelationCrossover<>(probability, count, correlations);
+		return new MultiPointCorrelationCrossover<>(probability, count, correlations, codec);
 	}
 
 	private <G extends Gene<?, G>> Alterer<G, OptimisationValue> createMeanAlterer(final Instance config) {
@@ -155,7 +159,7 @@ public class AltererFactory {
 	private <G extends NumericGene<?, G> & Mean<G>> Alterer<G, OptimisationValue> createCorrelationMeanAlterer(final Instance config) {
 		final Double probability = LanguageHelper.lookup(config, "probability");
 
-		return  (Alterer<G, OptimisationValue>) new MeanCorrelationAlterer<G, OptimisationValue>(probability, correlations);
+		return new MeanCorrelationAlterer<G, OptimisationValue>(probability, correlations, codec);
 	}
 
 	private <G extends Gene<?, G>> Alterer<G, OptimisationValue> createLineCrossover(final Instance config) {
@@ -169,7 +173,7 @@ public class AltererFactory {
 		final Double probability = LanguageHelper.lookup(config, "probability");
 		final Double position = LanguageHelper.lookup(config, "position");
 
-		return new LineCorrelationCrossover(probability, position, correlations);
+		return new LineCorrelationCrossover(probability, position, correlations, codec);
 	}
 
 	private <G extends Gene<?, G>> Alterer<G, OptimisationValue> createIntermediateCrossover(final Instance config) {

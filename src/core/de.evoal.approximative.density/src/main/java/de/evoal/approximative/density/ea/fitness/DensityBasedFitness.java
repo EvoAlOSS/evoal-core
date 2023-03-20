@@ -114,7 +114,7 @@ public abstract class DensityBasedFitness extends OptimisationFunctionDecorator 
             final double predictedValue = current[i];
             final double probability = probabilityCalculator.apply(sourceData, targetData, candidate, predictedValue);
 
-            fitness[i] = current[i] * Math.pow(probability, rootExponent) + (1 - probability) * 1.0 / Math.pow(probability, exponent);
+            fitness[i] = current[i] * Math.pow(probability, rootExponent) + (1 - probability) / Math.pow(probability, exponent);
         }
 
         return fitness;
