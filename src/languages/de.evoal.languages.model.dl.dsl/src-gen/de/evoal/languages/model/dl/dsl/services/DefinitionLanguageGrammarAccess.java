@@ -29,31 +29,97 @@ public class DefinitionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 	
 	public class DefinitionModelRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.dl.dsl.DefinitionLanguage.DefinitionModelRule");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final Assignment cTypesAssignment_0 = (Assignment)cAlternatives.eContents().get(0);
-		private final RuleCall cTypesTypeDefinitionRuleParserRuleCall_0_0 = (RuleCall)cTypesAssignment_0.eContents().get(0);
-		private final Assignment cFunctionsAssignment_1 = (Assignment)cAlternatives.eContents().get(1);
-		private final RuleCall cFunctionsFunctioDefinitionRuleParserRuleCall_1_0 = (RuleCall)cFunctionsAssignment_1.eContents().get(0);
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cImportsAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cImportsImportRuleParserRuleCall_0_0 = (RuleCall)cImportsAssignment_0.eContents().get(0);
+		private final Keyword cModuleKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cNameQualifiedNameParserRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
+		private final Keyword cLeftCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Alternatives cAlternatives_4 = (Alternatives)cGroup.eContents().get(4);
+		private final Assignment cTypesAssignment_4_0 = (Assignment)cAlternatives_4.eContents().get(0);
+		private final RuleCall cTypesTypeDefinitionRuleParserRuleCall_4_0_0 = (RuleCall)cTypesAssignment_4_0.eContents().get(0);
+		private final Assignment cFunctionsAssignment_4_1 = (Assignment)cAlternatives_4.eContents().get(1);
+		private final RuleCall cFunctionsFunctionDefinitionRuleParserRuleCall_4_1_0 = (RuleCall)cFunctionsAssignment_4_1.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//DefinitionModelRule returns DefinitionModel:
-		//    ((types += TypeDefinitionRule ) | (functions += FunctioDefinitionRule ))*
+		//    (imports += ImportRule)*
+		//    'module' name = QualifiedName '{'
+		//        ((types += TypeDefinitionRule ) | (functions += FunctionDefinitionRule ))*
+		//    '}'
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//((types += TypeDefinitionRule ) | (functions += FunctioDefinitionRule ))*
-		public Alternatives getAlternatives() { return cAlternatives; }
+		//(imports += ImportRule)*
+		//'module' name = QualifiedName '{'
+		//    ((types += TypeDefinitionRule ) | (functions += FunctionDefinitionRule ))*
+		//'}'
+		public Group getGroup() { return cGroup; }
+		
+		//(imports += ImportRule)*
+		public Assignment getImportsAssignment_0() { return cImportsAssignment_0; }
+		
+		//ImportRule
+		public RuleCall getImportsImportRuleParserRuleCall_0_0() { return cImportsImportRuleParserRuleCall_0_0; }
+		
+		//'module'
+		public Keyword getModuleKeyword_1() { return cModuleKeyword_1; }
+		
+		//name = QualifiedName
+		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
+		
+		//QualifiedName
+		public RuleCall getNameQualifiedNameParserRuleCall_2_0() { return cNameQualifiedNameParserRuleCall_2_0; }
+		
+		//'{'
+		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
+		
+		//((types += TypeDefinitionRule ) | (functions += FunctionDefinitionRule ))*
+		public Alternatives getAlternatives_4() { return cAlternatives_4; }
 		
 		//(types += TypeDefinitionRule )
-		public Assignment getTypesAssignment_0() { return cTypesAssignment_0; }
+		public Assignment getTypesAssignment_4_0() { return cTypesAssignment_4_0; }
 		
 		//TypeDefinitionRule
-		public RuleCall getTypesTypeDefinitionRuleParserRuleCall_0_0() { return cTypesTypeDefinitionRuleParserRuleCall_0_0; }
+		public RuleCall getTypesTypeDefinitionRuleParserRuleCall_4_0_0() { return cTypesTypeDefinitionRuleParserRuleCall_4_0_0; }
 		
-		//(functions += FunctioDefinitionRule )
-		public Assignment getFunctionsAssignment_1() { return cFunctionsAssignment_1; }
+		//(functions += FunctionDefinitionRule )
+		public Assignment getFunctionsAssignment_4_1() { return cFunctionsAssignment_4_1; }
 		
-		//FunctioDefinitionRule
-		public RuleCall getFunctionsFunctioDefinitionRuleParserRuleCall_1_0() { return cFunctionsFunctioDefinitionRuleParserRuleCall_1_0; }
+		//FunctionDefinitionRule
+		public RuleCall getFunctionsFunctionDefinitionRuleParserRuleCall_4_1_0() { return cFunctionsFunctionDefinitionRuleParserRuleCall_4_1_0; }
+		
+		//'}'
+		public Keyword getRightCurlyBracketKeyword_5() { return cRightCurlyBracketKeyword_5; }
+	}
+	public class ImportRuleElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.dl.dsl.DefinitionLanguage.ImportRule");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cImportKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cImportedNamespaceAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cImportedNamespaceQualifiedNameParserRuleCall_1_0 = (RuleCall)cImportedNamespaceAssignment_1.eContents().get(0);
+		private final Keyword cSemicolonKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		
+		//ImportRule returns Import:
+		//    'import' importedNamespace = QualifiedName ';'
+		//;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'import' importedNamespace = QualifiedName ';'
+		public Group getGroup() { return cGroup; }
+		
+		//'import'
+		public Keyword getImportKeyword_0() { return cImportKeyword_0; }
+		
+		//importedNamespace = QualifiedName
+		public Assignment getImportedNamespaceAssignment_1() { return cImportedNamespaceAssignment_1; }
+		
+		//QualifiedName
+		public RuleCall getImportedNamespaceQualifiedNameParserRuleCall_1_0() { return cImportedNamespaceQualifiedNameParserRuleCall_1_0; }
+		
+		//';'
+		public Keyword getSemicolonKeyword_2() { return cSemicolonKeyword_2; }
 	}
 	public class TypeDefinitionRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.dl.dsl.DefinitionLanguage.TypeDefinitionRule");
@@ -67,20 +133,20 @@ public class DefinitionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 		private final Keyword cExtendsKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
 		private final Assignment cSuperTypeAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
 		private final CrossReference cSuperTypeTypeDefinitionCrossReference_3_1_0 = (CrossReference)cSuperTypeAssignment_3_1.eContents().get(0);
-		private final RuleCall cSuperTypeTypeDefinitionStringOrIdParserRuleCall_3_1_0_1 = (RuleCall)cSuperTypeTypeDefinitionCrossReference_3_1_0.eContents().get(1);
+		private final RuleCall cSuperTypeTypeDefinitionQualifiedNameParserRuleCall_3_1_0_1 = (RuleCall)cSuperTypeTypeDefinitionCrossReference_3_1_0.eContents().get(1);
 		private final Keyword cLeftCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		private final Assignment cAttributesAssignment_5 = (Assignment)cGroup.eContents().get(5);
 		private final RuleCall cAttributesAttributeDefinitionRuleParserRuleCall_5_0 = (RuleCall)cAttributesAssignment_5.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
 		//TypeDefinitionRule returns TypeDefinition:
-		//    (abstract?='abstract')? 'type' name = StringOrId ('extends' superType = [TypeDefinition|StringOrId])? '{'
+		//    (abstract?='abstract')? 'type' name = StringOrId ('extends' superType = [TypeDefinition|QualifiedName])? '{'
 		//        attributes += AttributeDefinitionRule*
 		//    '}'
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//(abstract?='abstract')? 'type' name = StringOrId ('extends' superType = [TypeDefinition|StringOrId])? '{'
+		//(abstract?='abstract')? 'type' name = StringOrId ('extends' superType = [TypeDefinition|QualifiedName])? '{'
 		//    attributes += AttributeDefinitionRule*
 		//'}'
 		public Group getGroup() { return cGroup; }
@@ -100,20 +166,20 @@ public class DefinitionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 		//StringOrId
 		public RuleCall getNameStringOrIdParserRuleCall_2_0() { return cNameStringOrIdParserRuleCall_2_0; }
 		
-		//('extends' superType = [TypeDefinition|StringOrId])?
+		//('extends' superType = [TypeDefinition|QualifiedName])?
 		public Group getGroup_3() { return cGroup_3; }
 		
 		//'extends'
 		public Keyword getExtendsKeyword_3_0() { return cExtendsKeyword_3_0; }
 		
-		//superType = [TypeDefinition|StringOrId]
+		//superType = [TypeDefinition|QualifiedName]
 		public Assignment getSuperTypeAssignment_3_1() { return cSuperTypeAssignment_3_1; }
 		
-		//[TypeDefinition|StringOrId]
+		//[TypeDefinition|QualifiedName]
 		public CrossReference getSuperTypeTypeDefinitionCrossReference_3_1_0() { return cSuperTypeTypeDefinitionCrossReference_3_1_0; }
 		
-		//StringOrId
-		public RuleCall getSuperTypeTypeDefinitionStringOrIdParserRuleCall_3_1_0_1() { return cSuperTypeTypeDefinitionStringOrIdParserRuleCall_3_1_0_1; }
+		//QualifiedName
+		public RuleCall getSuperTypeTypeDefinitionQualifiedNameParserRuleCall_3_1_0_1() { return cSuperTypeTypeDefinitionQualifiedNameParserRuleCall_3_1_0_1; }
 		
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_4() { return cLeftCurlyBracketKeyword_4; }
@@ -242,21 +308,21 @@ public class DefinitionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 		private final Keyword cInstanceKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Assignment cDefinitionsAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final CrossReference cDefinitionsTypeDefinitionCrossReference_2_0 = (CrossReference)cDefinitionsAssignment_2.eContents().get(0);
-		private final RuleCall cDefinitionsTypeDefinitionStringOrIdParserRuleCall_2_0_1 = (RuleCall)cDefinitionsTypeDefinitionCrossReference_2_0.eContents().get(1);
+		private final RuleCall cDefinitionsTypeDefinitionQualifiedNameParserRuleCall_2_0_1 = (RuleCall)cDefinitionsTypeDefinitionCrossReference_2_0.eContents().get(1);
 		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
 		private final Keyword cVerticalLineKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
 		private final Assignment cDefinitionsAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
 		private final CrossReference cDefinitionsTypeDefinitionCrossReference_3_1_0 = (CrossReference)cDefinitionsAssignment_3_1.eContents().get(0);
-		private final RuleCall cDefinitionsTypeDefinitionStringOrIdParserRuleCall_3_1_0_1 = (RuleCall)cDefinitionsTypeDefinitionCrossReference_3_1_0.eContents().get(1);
+		private final RuleCall cDefinitionsTypeDefinitionQualifiedNameParserRuleCall_3_1_0_1 = (RuleCall)cDefinitionsTypeDefinitionCrossReference_3_1_0.eContents().get(1);
 		
 		//InstanceTypeRule returns InstanceType:
 		//    {InstanceType}
-		//    'instance' definitions += [TypeDefinition|StringOrId] ('|' definitions += [TypeDefinition|StringOrId])*
+		//    'instance' definitions += [TypeDefinition|QualifiedName] ('|' definitions += [TypeDefinition|QualifiedName])*
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{InstanceType}
-		//'instance' definitions += [TypeDefinition|StringOrId] ('|' definitions += [TypeDefinition|StringOrId])*
+		//'instance' definitions += [TypeDefinition|QualifiedName] ('|' definitions += [TypeDefinition|QualifiedName])*
 		public Group getGroup() { return cGroup; }
 		
 		//{InstanceType}
@@ -265,29 +331,29 @@ public class DefinitionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 		//'instance'
 		public Keyword getInstanceKeyword_1() { return cInstanceKeyword_1; }
 		
-		//definitions += [TypeDefinition|StringOrId]
+		//definitions += [TypeDefinition|QualifiedName]
 		public Assignment getDefinitionsAssignment_2() { return cDefinitionsAssignment_2; }
 		
-		//[TypeDefinition|StringOrId]
+		//[TypeDefinition|QualifiedName]
 		public CrossReference getDefinitionsTypeDefinitionCrossReference_2_0() { return cDefinitionsTypeDefinitionCrossReference_2_0; }
 		
-		//StringOrId
-		public RuleCall getDefinitionsTypeDefinitionStringOrIdParserRuleCall_2_0_1() { return cDefinitionsTypeDefinitionStringOrIdParserRuleCall_2_0_1; }
+		//QualifiedName
+		public RuleCall getDefinitionsTypeDefinitionQualifiedNameParserRuleCall_2_0_1() { return cDefinitionsTypeDefinitionQualifiedNameParserRuleCall_2_0_1; }
 		
-		//('|' definitions += [TypeDefinition|StringOrId])*
+		//('|' definitions += [TypeDefinition|QualifiedName])*
 		public Group getGroup_3() { return cGroup_3; }
 		
 		//'|'
 		public Keyword getVerticalLineKeyword_3_0() { return cVerticalLineKeyword_3_0; }
 		
-		//definitions += [TypeDefinition|StringOrId]
+		//definitions += [TypeDefinition|QualifiedName]
 		public Assignment getDefinitionsAssignment_3_1() { return cDefinitionsAssignment_3_1; }
 		
-		//[TypeDefinition|StringOrId]
+		//[TypeDefinition|QualifiedName]
 		public CrossReference getDefinitionsTypeDefinitionCrossReference_3_1_0() { return cDefinitionsTypeDefinitionCrossReference_3_1_0; }
 		
-		//StringOrId
-		public RuleCall getDefinitionsTypeDefinitionStringOrIdParserRuleCall_3_1_0_1() { return cDefinitionsTypeDefinitionStringOrIdParserRuleCall_3_1_0_1; }
+		//QualifiedName
+		public RuleCall getDefinitionsTypeDefinitionQualifiedNameParserRuleCall_3_1_0_1() { return cDefinitionsTypeDefinitionQualifiedNameParserRuleCall_3_1_0_1; }
 	}
 	public class StringTypeRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.dl.dsl.DefinitionLanguage.StringTypeRule");
@@ -467,8 +533,8 @@ public class DefinitionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 		//TypeRule
 		public RuleCall getElementsTypeRuleParserRuleCall_1_0() { return cElementsTypeRuleParserRuleCall_1_0; }
 	}
-	public class FunctioDefinitionRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.dl.dsl.DefinitionLanguage.FunctioDefinitionRule");
+	public class FunctionDefinitionRuleElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.dl.dsl.DefinitionLanguage.FunctionDefinitionRule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cDefKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cTypeAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -486,7 +552,7 @@ public class DefinitionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 		private final Keyword cRightParenthesisKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		private final Keyword cSemicolonKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
-		//FunctioDefinitionRule returns FunctionDefinition:
+		//FunctionDefinitionRule returns FunctionDefinition:
 		//    'def' type = TypeRule name = StringOrId '(' (parameters+=ParameterRule (',' parameters+=ParameterRule)*)? ')' ';'
 		//;
 		@Override public ParserRule getRule() { return rule; }
@@ -571,26 +637,55 @@ public class DefinitionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.dl.dsl.DefinitionLanguage.FunctionNameRule");
 		private final Assignment cDefinitionAssignment = (Assignment)rule.eContents().get(1);
 		private final CrossReference cDefinitionFunctionDefinitionCrossReference_0 = (CrossReference)cDefinitionAssignment.eContents().get(0);
-		private final RuleCall cDefinitionFunctionDefinitionStringOrIdParserRuleCall_0_1 = (RuleCall)cDefinitionFunctionDefinitionCrossReference_0.eContents().get(1);
+		private final RuleCall cDefinitionFunctionDefinitionQualifiedNameParserRuleCall_0_1 = (RuleCall)cDefinitionFunctionDefinitionCrossReference_0.eContents().get(1);
 		
 		//@Override
 		//FunctionNameRule returns DefinedFunctionName:
-		//    definition = [FunctionDefinition|StringOrId]
+		//    definition = [FunctionDefinition|QualifiedName]
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//definition = [FunctionDefinition|StringOrId]
+		//definition = [FunctionDefinition|QualifiedName]
 		public Assignment getDefinitionAssignment() { return cDefinitionAssignment; }
 		
-		//[FunctionDefinition|StringOrId]
+		//[FunctionDefinition|QualifiedName]
 		public CrossReference getDefinitionFunctionDefinitionCrossReference_0() { return cDefinitionFunctionDefinitionCrossReference_0; }
 		
+		//QualifiedName
+		public RuleCall getDefinitionFunctionDefinitionQualifiedNameParserRuleCall_0_1() { return cDefinitionFunctionDefinitionQualifiedNameParserRuleCall_0_1; }
+	}
+	public class QualifiedNameElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.dl.dsl.DefinitionLanguage.QualifiedName");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final RuleCall cStringOrIdParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Keyword cFullStopKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
+		private final RuleCall cStringOrIdParserRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
+		
+		//QualifiedName:
+		//    StringOrId ('.' StringOrId)*
+		//;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//StringOrId ('.' StringOrId)*
+		public Group getGroup() { return cGroup; }
+		
 		//StringOrId
-		public RuleCall getDefinitionFunctionDefinitionStringOrIdParserRuleCall_0_1() { return cDefinitionFunctionDefinitionStringOrIdParserRuleCall_0_1; }
+		public RuleCall getStringOrIdParserRuleCall_0() { return cStringOrIdParserRuleCall_0; }
+		
+		//('.' StringOrId)*
+		public Group getGroup_1() { return cGroup_1; }
+		
+		//'.'
+		public Keyword getFullStopKeyword_1_0() { return cFullStopKeyword_1_0; }
+		
+		//StringOrId
+		public RuleCall getStringOrIdParserRuleCall_1_1() { return cStringOrIdParserRuleCall_1_1; }
 	}
 	
 	
 	private final DefinitionModelRuleElements pDefinitionModelRule;
+	private final ImportRuleElements pImportRule;
 	private final TypeDefinitionRuleElements pTypeDefinitionRule;
 	private final AttributeDefinitionRuleElements pAttributeDefinitionRule;
 	private final TypeRuleElements pTypeRule;
@@ -604,9 +699,10 @@ public class DefinitionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 	private final VoidTypeRuleElements pVoidTypeRule;
 	private final DataTypeRuleElements pDataTypeRule;
 	private final ArrayTypeRuleElements pArrayTypeRule;
-	private final FunctioDefinitionRuleElements pFunctioDefinitionRule;
+	private final FunctionDefinitionRuleElements pFunctionDefinitionRule;
 	private final ParameterRuleElements pParameterRule;
 	private final FunctionNameRuleElements pFunctionNameRule;
+	private final QualifiedNameElements pQualifiedName;
 	
 	private final Grammar grammar;
 	
@@ -622,6 +718,7 @@ public class DefinitionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 		this.gaExpressionLanguage = gaExpressionLanguage;
 		this.gaTerminals = gaTerminals;
 		this.pDefinitionModelRule = new DefinitionModelRuleElements();
+		this.pImportRule = new ImportRuleElements();
 		this.pTypeDefinitionRule = new TypeDefinitionRuleElements();
 		this.pAttributeDefinitionRule = new AttributeDefinitionRuleElements();
 		this.pTypeRule = new TypeRuleElements();
@@ -635,9 +732,10 @@ public class DefinitionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 		this.pVoidTypeRule = new VoidTypeRuleElements();
 		this.pDataTypeRule = new DataTypeRuleElements();
 		this.pArrayTypeRule = new ArrayTypeRuleElements();
-		this.pFunctioDefinitionRule = new FunctioDefinitionRuleElements();
+		this.pFunctionDefinitionRule = new FunctionDefinitionRuleElements();
 		this.pParameterRule = new ParameterRuleElements();
 		this.pFunctionNameRule = new FunctionNameRuleElements();
+		this.pQualifiedName = new QualifiedNameElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -672,7 +770,10 @@ public class DefinitionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 
 	
 	//DefinitionModelRule returns DefinitionModel:
-	//    ((types += TypeDefinitionRule ) | (functions += FunctioDefinitionRule ))*
+	//    (imports += ImportRule)*
+	//    'module' name = QualifiedName '{'
+	//        ((types += TypeDefinitionRule ) | (functions += FunctionDefinitionRule ))*
+	//    '}'
 	//;
 	public DefinitionModelRuleElements getDefinitionModelRuleAccess() {
 		return pDefinitionModelRule;
@@ -682,8 +783,19 @@ public class DefinitionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 		return getDefinitionModelRuleAccess().getRule();
 	}
 	
+	//ImportRule returns Import:
+	//    'import' importedNamespace = QualifiedName ';'
+	//;
+	public ImportRuleElements getImportRuleAccess() {
+		return pImportRule;
+	}
+	
+	public ParserRule getImportRuleRule() {
+		return getImportRuleAccess().getRule();
+	}
+	
 	//TypeDefinitionRule returns TypeDefinition:
-	//    (abstract?='abstract')? 'type' name = StringOrId ('extends' superType = [TypeDefinition|StringOrId])? '{'
+	//    (abstract?='abstract')? 'type' name = StringOrId ('extends' superType = [TypeDefinition|QualifiedName])? '{'
 	//        attributes += AttributeDefinitionRule*
 	//    '}'
 	//;
@@ -730,7 +842,7 @@ public class DefinitionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 	
 	//InstanceTypeRule returns InstanceType:
 	//    {InstanceType}
-	//    'instance' definitions += [TypeDefinition|StringOrId] ('|' definitions += [TypeDefinition|StringOrId])*
+	//    'instance' definitions += [TypeDefinition|QualifiedName] ('|' definitions += [TypeDefinition|QualifiedName])*
 	//;
 	public InstanceTypeRuleElements getInstanceTypeRuleAccess() {
 		return pInstanceTypeRule;
@@ -835,15 +947,15 @@ public class DefinitionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 		return getArrayTypeRuleAccess().getRule();
 	}
 	
-	//FunctioDefinitionRule returns FunctionDefinition:
+	//FunctionDefinitionRule returns FunctionDefinition:
 	//    'def' type = TypeRule name = StringOrId '(' (parameters+=ParameterRule (',' parameters+=ParameterRule)*)? ')' ';'
 	//;
-	public FunctioDefinitionRuleElements getFunctioDefinitionRuleAccess() {
-		return pFunctioDefinitionRule;
+	public FunctionDefinitionRuleElements getFunctionDefinitionRuleAccess() {
+		return pFunctionDefinitionRule;
 	}
 	
-	public ParserRule getFunctioDefinitionRuleRule() {
-		return getFunctioDefinitionRuleAccess().getRule();
+	public ParserRule getFunctionDefinitionRuleRule() {
+		return getFunctionDefinitionRuleAccess().getRule();
 	}
 	
 	//ParameterRule returns Parameter:
@@ -859,7 +971,7 @@ public class DefinitionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 	
 	//@Override
 	//FunctionNameRule returns DefinedFunctionName:
-	//    definition = [FunctionDefinition|StringOrId]
+	//    definition = [FunctionDefinition|QualifiedName]
 	//;
 	public FunctionNameRuleElements getFunctionNameRuleAccess() {
 		return pFunctionNameRule;
@@ -867,6 +979,17 @@ public class DefinitionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 	
 	public ParserRule getFunctionNameRuleRule() {
 		return getFunctionNameRuleAccess().getRule();
+	}
+	
+	//QualifiedName:
+	//    StringOrId ('.' StringOrId)*
+	//;
+	public QualifiedNameElements getQualifiedNameAccess() {
+		return pQualifiedName;
+	}
+	
+	public ParserRule getQualifiedNameRule() {
+		return getQualifiedNameAccess().getRule();
 	}
 	
 	//ExpressionRule returns Expression:

@@ -15,6 +15,7 @@ import de.evoal.languages.model.dl.DlPackage;
 import de.evoal.languages.model.dl.ExpressionType;
 import de.evoal.languages.model.dl.FloatType;
 import de.evoal.languages.model.dl.FunctionDefinition;
+import de.evoal.languages.model.dl.Import;
 import de.evoal.languages.model.dl.InstanceType;
 import de.evoal.languages.model.dl.IntType;
 import de.evoal.languages.model.dl.LiteralType;
@@ -90,7 +91,10 @@ public class DefinitionLanguageSemanticSequencer extends ExpressionLanguageSeman
 				sequence_FloatTypeRule(context, (FloatType) semanticObject); 
 				return; 
 			case DlPackage.FUNCTION_DEFINITION:
-				sequence_FunctioDefinitionRule(context, (FunctionDefinition) semanticObject); 
+				sequence_FunctionDefinitionRule(context, (FunctionDefinition) semanticObject); 
+				return; 
+			case DlPackage.IMPORT:
+				sequence_ImportRule(context, (Import) semanticObject); 
 				return; 
 			case DlPackage.INSTANCE_TYPE:
 				sequence_InstanceTypeRule(context, (InstanceType) semanticObject); 
@@ -246,7 +250,7 @@ public class DefinitionLanguageSemanticSequencer extends ExpressionLanguageSeman
 	 *     DefinitionModelRule returns DefinitionModel
 	 *
 	 * Constraint:
-	 *     (types+=TypeDefinitionRule | functions+=FunctioDefinitionRule)+
+	 *     (imports+=ImportRule* name=QualifiedName (types+=TypeDefinitionRule | functions+=FunctionDefinitionRule)*)
 	 * </pre>
 	 */
 	protected void sequence_DefinitionModelRule(ISerializationContext context, DefinitionModel semanticObject) {
@@ -287,13 +291,13 @@ public class DefinitionLanguageSemanticSequencer extends ExpressionLanguageSeman
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     FunctioDefinitionRule returns FunctionDefinition
+	 *     FunctionDefinitionRule returns FunctionDefinition
 	 *
 	 * Constraint:
 	 *     (type=TypeRule name=StringOrId (parameters+=ParameterRule parameters+=ParameterRule*)?)
 	 * </pre>
 	 */
-	protected void sequence_FunctioDefinitionRule(ISerializationContext context, FunctionDefinition semanticObject) {
+	protected void sequence_FunctionDefinitionRule(ISerializationContext context, FunctionDefinition semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -304,7 +308,7 @@ public class DefinitionLanguageSemanticSequencer extends ExpressionLanguageSeman
 	 *     FunctionNameRule returns DefinedFunctionName
 	 *
 	 * Constraint:
-	 *     definition=[FunctionDefinition|StringOrId]
+	 *     definition=[FunctionDefinition|QualifiedName]
 	 * </pre>
 	 */
 	protected void sequence_FunctionNameRule(ISerializationContext context, DefinedFunctionName semanticObject) {
@@ -313,7 +317,27 @@ public class DefinitionLanguageSemanticSequencer extends ExpressionLanguageSeman
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DlPackage.Literals.DEFINED_FUNCTION_NAME__DEFINITION));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getFunctionNameRuleAccess().getDefinitionFunctionDefinitionStringOrIdParserRuleCall_0_1(), semanticObject.eGet(DlPackage.Literals.DEFINED_FUNCTION_NAME__DEFINITION, false));
+		feeder.accept(grammarAccess.getFunctionNameRuleAccess().getDefinitionFunctionDefinitionQualifiedNameParserRuleCall_0_1(), semanticObject.eGet(DlPackage.Literals.DEFINED_FUNCTION_NAME__DEFINITION, false));
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     ImportRule returns Import
+	 *
+	 * Constraint:
+	 *     importedNamespace=QualifiedName
+	 * </pre>
+	 */
+	protected void sequence_ImportRule(ISerializationContext context, Import semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, DlPackage.Literals.IMPORT__IMPORTED_NAMESPACE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DlPackage.Literals.IMPORT__IMPORTED_NAMESPACE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getImportRuleAccess().getImportedNamespaceQualifiedNameParserRuleCall_1_0(), semanticObject.getImportedNamespace());
 		feeder.finish();
 	}
 	
@@ -325,7 +349,7 @@ public class DefinitionLanguageSemanticSequencer extends ExpressionLanguageSeman
 	 *     InstanceTypeRule returns InstanceType
 	 *
 	 * Constraint:
-	 *     (definitions+=[TypeDefinition|StringOrId] definitions+=[TypeDefinition|StringOrId]*)
+	 *     (definitions+=[TypeDefinition|QualifiedName] definitions+=[TypeDefinition|QualifiedName]*)
 	 * </pre>
 	 */
 	protected void sequence_InstanceTypeRule(ISerializationContext context, InstanceType semanticObject) {
@@ -407,7 +431,7 @@ public class DefinitionLanguageSemanticSequencer extends ExpressionLanguageSeman
 	 *     TypeDefinitionRule returns TypeDefinition
 	 *
 	 * Constraint:
-	 *     (abstract?='abstract'? name=StringOrId superType=[TypeDefinition|StringOrId]? attributes+=AttributeDefinitionRule*)
+	 *     (abstract?='abstract'? name=StringOrId superType=[TypeDefinition|QualifiedName]? attributes+=AttributeDefinitionRule*)
 	 * </pre>
 	 */
 	protected void sequence_TypeDefinitionRule(ISerializationContext context, TypeDefinition semanticObject) {

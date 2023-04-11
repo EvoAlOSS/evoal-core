@@ -9,7 +9,6 @@ import com.google.inject.Singleton;
 import de.evoal.languages.model.el.dsl.services.ExpressionLanguageGrammarAccess;
 import de.evoal.languages.model.instance.dsl.services.InstanceLanguageGrammarAccess;
 import java.util.List;
-import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.EnumRule;
@@ -30,164 +29,217 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 	public class OptimisationModelRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.ol.dsl.OptimisationLanguage.OptimisationModelRule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cUsesAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cUsesUseRuleParserRuleCall_0_0 = (RuleCall)cUsesAssignment_0.eContents().get(0);
-		private final Assignment cInstanceAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cInstanceInstanceRuleParserRuleCall_1_0 = (RuleCall)cInstanceAssignment_1.eContents().get(0);
-		private final Assignment cConstraintsAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cConstraintsConstraintRuleParserRuleCall_2_0 = (RuleCall)cConstraintsAssignment_2.eContents().get(0);
+		private final Assignment cImportsAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cImportsImportRuleParserRuleCall_0_0 = (RuleCall)cImportsAssignment_0.eContents().get(0);
+		private final Assignment cProblemAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cProblemProblemRuleParserRuleCall_1_0 = (RuleCall)cProblemAssignment_1.eContents().get(0);
+		private final Assignment cAlgorithmAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cAlgorithmAlgorithmInstanceRuleParserRuleCall_2_0 = (RuleCall)cAlgorithmAssignment_2.eContents().get(0);
 		
 		//OptimisationModelRule returns OptimisationModel:
-		//        (uses += UseRule)*
-		//        instance = InstanceRule
-		//        (constraints = ConstraintRule)?
+		//    (imports += ImportRule)*
+		//    (problem = ProblemRule)?
+		//    (algorithm = AlgorithmInstanceRule)?
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//(uses += UseRule)*
-		//instance = InstanceRule
-		//(constraints = ConstraintRule)?
+		//(imports += ImportRule)*
+		//(problem = ProblemRule)?
+		//(algorithm = AlgorithmInstanceRule)?
 		public Group getGroup() { return cGroup; }
 		
-		//(uses += UseRule)*
-		public Assignment getUsesAssignment_0() { return cUsesAssignment_0; }
+		//(imports += ImportRule)*
+		public Assignment getImportsAssignment_0() { return cImportsAssignment_0; }
 		
-		//UseRule
-		public RuleCall getUsesUseRuleParserRuleCall_0_0() { return cUsesUseRuleParserRuleCall_0_0; }
+		//ImportRule
+		public RuleCall getImportsImportRuleParserRuleCall_0_0() { return cImportsImportRuleParserRuleCall_0_0; }
 		
-		//instance = InstanceRule
-		public Assignment getInstanceAssignment_1() { return cInstanceAssignment_1; }
+		//(problem = ProblemRule)?
+		public Assignment getProblemAssignment_1() { return cProblemAssignment_1; }
 		
-		//InstanceRule
-		public RuleCall getInstanceInstanceRuleParserRuleCall_1_0() { return cInstanceInstanceRuleParserRuleCall_1_0; }
+		//ProblemRule
+		public RuleCall getProblemProblemRuleParserRuleCall_1_0() { return cProblemProblemRuleParserRuleCall_1_0; }
 		
-		//(constraints = ConstraintRule)?
-		public Assignment getConstraintsAssignment_2() { return cConstraintsAssignment_2; }
+		//(algorithm = AlgorithmInstanceRule)?
+		public Assignment getAlgorithmAssignment_2() { return cAlgorithmAssignment_2; }
 		
-		//ConstraintRule
-		public RuleCall getConstraintsConstraintRuleParserRuleCall_2_0() { return cConstraintsConstraintRuleParserRuleCall_2_0; }
+		//AlgorithmInstanceRule
+		public RuleCall getAlgorithmAlgorithmInstanceRuleParserRuleCall_2_0() { return cAlgorithmAlgorithmInstanceRuleParserRuleCall_2_0; }
 	}
-	public class UseRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.ol.dsl.OptimisationLanguage.UseRule");
+	public class ImportRuleElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.ol.dsl.OptimisationLanguage.ImportRule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cUseKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cImportURIAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cImportURISTRINGTerminalRuleCall_1_0 = (RuleCall)cImportURIAssignment_1.eContents().get(0);
+		private final Keyword cImportKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cImportedNamespaceAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cImportedNamespaceQualifiedNameRuleParserRuleCall_1_0 = (RuleCall)cImportedNamespaceAssignment_1.eContents().get(0);
 		private final Keyword cSemicolonKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
-		//UseRule returns Use:
-		//        'use' importURI = STRING ';'
+		//ImportRule returns Import:
+		//    'import' importedNamespace = QualifiedNameRule ';'
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'use' importURI = STRING ';'
+		//'import' importedNamespace = QualifiedNameRule ';'
 		public Group getGroup() { return cGroup; }
 		
-		//'use'
-		public Keyword getUseKeyword_0() { return cUseKeyword_0; }
+		//'import'
+		public Keyword getImportKeyword_0() { return cImportKeyword_0; }
 		
-		//importURI = STRING
-		public Assignment getImportURIAssignment_1() { return cImportURIAssignment_1; }
+		//importedNamespace = QualifiedNameRule
+		public Assignment getImportedNamespaceAssignment_1() { return cImportedNamespaceAssignment_1; }
 		
-		//STRING
-		public RuleCall getImportURISTRINGTerminalRuleCall_1_0() { return cImportURISTRINGTerminalRuleCall_1_0; }
+		//QualifiedNameRule
+		public RuleCall getImportedNamespaceQualifiedNameRuleParserRuleCall_1_0() { return cImportedNamespaceQualifiedNameRuleParserRuleCall_1_0; }
 		
 		//';'
 		public Keyword getSemicolonKeyword_2() { return cSemicolonKeyword_2; }
 	}
-	public class ConstraintRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.ol.dsl.OptimisationLanguage.ConstraintRule");
+	public class ProblemRuleElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.ol.dsl.OptimisationLanguage.ProblemRule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cConstraintAction_0 = (Action)cGroup.eContents().get(0);
-		private final Keyword cConstraintsKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cStatementsAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cStatementsConstraintStatementRuleParserRuleCall_3_0 = (RuleCall)cStatementsAssignment_3.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Keyword cDeclareKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameStringOrIdParserRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final Keyword cAsKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cProblemAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cProblemInstanceRuleParserRuleCall_3_0 = (RuleCall)cProblemAssignment_3.eContents().get(0);
+		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
+		private final Keyword cDocumentingKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
+		private final Keyword cColonEqualsSignKeyword_4_1 = (Keyword)cGroup_4.eContents().get(1);
+		private final Assignment cDocumentationAssignment_4_2 = (Assignment)cGroup_4.eContents().get(2);
+		private final RuleCall cDocumentationArrayRuleParserRuleCall_4_2_0 = (RuleCall)cDocumentationAssignment_4_2.eContents().get(0);
+		private final Keyword cSemicolonKeyword_4_3 = (Keyword)cGroup_4.eContents().get(3);
 		
-		//ConstraintRule returns Constraint:
-		//        {Constraint}
-		//        "constraints" "{"
-		//                (statements += ConstraintStatementRule)*
-		//        "}";
-		@Override public ParserRule getRule() { return rule; }
-		
-		//{Constraint}
-		//"constraints" "{"
-		//        (statements += ConstraintStatementRule)*
-		//"}"
-		public Group getGroup() { return cGroup; }
-		
-		//{Constraint}
-		public Action getConstraintAction_0() { return cConstraintAction_0; }
-		
-		//"constraints"
-		public Keyword getConstraintsKeyword_1() { return cConstraintsKeyword_1; }
-		
-		//"{"
-		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
-		
-		//(statements += ConstraintStatementRule)*
-		public Assignment getStatementsAssignment_3() { return cStatementsAssignment_3; }
-		
-		//ConstraintStatementRule
-		public RuleCall getStatementsConstraintStatementRuleParserRuleCall_3_0() { return cStatementsConstraintStatementRuleParserRuleCall_3_0; }
-		
-		//"}"
-		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
-	}
-	public class ConstraintStatementRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.ol.dsl.OptimisationLanguage.ConstraintStatementRule");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cConstraintExpressionAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cConstraintExpressionCallRuleParserRuleCall_0_0 = (RuleCall)cConstraintExpressionAssignment_0.eContents().get(0);
-		private final Keyword cSemicolonKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		
-		//ConstraintStatementRule returns ConstraintStatement:
-		//        constraintExpression = CallRule ';'
+		//ProblemRule returns Problem:
+		//    "declare" name = StringOrId "as"
+		//        problem = InstanceRule
+		//    ("documenting" ":=" documentation = ArrayRule ';')?
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//constraintExpression = CallRule ';'
+		//"declare" name = StringOrId "as"
+		//    problem = InstanceRule
+		//("documenting" ":=" documentation = ArrayRule ';')?
 		public Group getGroup() { return cGroup; }
 		
-		//constraintExpression = CallRule
-		public Assignment getConstraintExpressionAssignment_0() { return cConstraintExpressionAssignment_0; }
+		//"declare"
+		public Keyword getDeclareKeyword_0() { return cDeclareKeyword_0; }
 		
-		//CallRule
-		public RuleCall getConstraintExpressionCallRuleParserRuleCall_0_0() { return cConstraintExpressionCallRuleParserRuleCall_0_0; }
+		//name = StringOrId
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+		
+		//StringOrId
+		public RuleCall getNameStringOrIdParserRuleCall_1_0() { return cNameStringOrIdParserRuleCall_1_0; }
+		
+		//"as"
+		public Keyword getAsKeyword_2() { return cAsKeyword_2; }
+		
+		//problem = InstanceRule
+		public Assignment getProblemAssignment_3() { return cProblemAssignment_3; }
+		
+		//InstanceRule
+		public RuleCall getProblemInstanceRuleParserRuleCall_3_0() { return cProblemInstanceRuleParserRuleCall_3_0; }
+		
+		//("documenting" ":=" documentation = ArrayRule ';')?
+		public Group getGroup_4() { return cGroup_4; }
+		
+		//"documenting"
+		public Keyword getDocumentingKeyword_4_0() { return cDocumentingKeyword_4_0; }
+		
+		//":="
+		public Keyword getColonEqualsSignKeyword_4_1() { return cColonEqualsSignKeyword_4_1; }
+		
+		//documentation = ArrayRule
+		public Assignment getDocumentationAssignment_4_2() { return cDocumentationAssignment_4_2; }
+		
+		//ArrayRule
+		public RuleCall getDocumentationArrayRuleParserRuleCall_4_2_0() { return cDocumentationArrayRuleParserRuleCall_4_2_0; }
 		
 		//';'
-		public Keyword getSemicolonKeyword_1() { return cSemicolonKeyword_1; }
+		public Keyword getSemicolonKeyword_4_3() { return cSemicolonKeyword_4_3; }
 	}
-	public class FunctionNameRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.ol.dsl.OptimisationLanguage.FunctionNameRule");
-		private final Assignment cDefinitionAssignment = (Assignment)rule.eContents().get(1);
-		private final CrossReference cDefinitionFunctionDefinitionCrossReference_0 = (CrossReference)cDefinitionAssignment.eContents().get(0);
-		private final RuleCall cDefinitionFunctionDefinitionIDTerminalRuleCall_0_1 = (RuleCall)cDefinitionFunctionDefinitionCrossReference_0.eContents().get(1);
+	public class AlgorithmInstanceRuleElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.ol.dsl.OptimisationLanguage.AlgorithmInstanceRule");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cInstanceKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cForKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cProblemAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final CrossReference cProblemProblemCrossReference_2_0 = (CrossReference)cProblemAssignment_2.eContents().get(0);
+		private final RuleCall cProblemProblemQualifiedNameRuleParserRuleCall_2_0_1 = (RuleCall)cProblemProblemCrossReference_2_0.eContents().get(1);
+		private final Keyword cWithKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Keyword cAlgorithmKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Assignment cAlgorithmAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final RuleCall cAlgorithmInstanceRuleParserRuleCall_5_0 = (RuleCall)cAlgorithmAssignment_5.eContents().get(0);
+		private final Group cGroup_6 = (Group)cGroup.eContents().get(6);
+		private final Keyword cDocumentingKeyword_6_0 = (Keyword)cGroup_6.eContents().get(0);
+		private final Keyword cColonEqualsSignKeyword_6_1 = (Keyword)cGroup_6.eContents().get(1);
+		private final Assignment cDocumentationAssignment_6_2 = (Assignment)cGroup_6.eContents().get(2);
+		private final RuleCall cDocumentationArrayRuleParserRuleCall_6_2_0 = (RuleCall)cDocumentationAssignment_6_2.eContents().get(0);
+		private final Keyword cSemicolonKeyword_6_3 = (Keyword)cGroup_6.eContents().get(3);
 		
-		//@Override
-		//FunctionNameRule returns FunctionName:
-		//        definition = [dl::FunctionDefinition]
+		//AlgorithmInstanceRule returns AlgorithmInstance:
+		//    "instance" "for" problem = [Problem|QualifiedNameRule] "with" "algorithm"
+		//        algorithm = InstanceRule
+		//    ("documenting" ":=" documentation = ArrayRule ';')?
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//definition = [dl::FunctionDefinition]
-		public Assignment getDefinitionAssignment() { return cDefinitionAssignment; }
+		//"instance" "for" problem = [Problem|QualifiedNameRule] "with" "algorithm"
+		//    algorithm = InstanceRule
+		//("documenting" ":=" documentation = ArrayRule ';')?
+		public Group getGroup() { return cGroup; }
 		
-		//[dl::FunctionDefinition]
-		public CrossReference getDefinitionFunctionDefinitionCrossReference_0() { return cDefinitionFunctionDefinitionCrossReference_0; }
+		//"instance"
+		public Keyword getInstanceKeyword_0() { return cInstanceKeyword_0; }
 		
-		//ID
-		public RuleCall getDefinitionFunctionDefinitionIDTerminalRuleCall_0_1() { return cDefinitionFunctionDefinitionIDTerminalRuleCall_0_1; }
+		//"for"
+		public Keyword getForKeyword_1() { return cForKeyword_1; }
+		
+		//problem = [Problem|QualifiedNameRule]
+		public Assignment getProblemAssignment_2() { return cProblemAssignment_2; }
+		
+		//[Problem|QualifiedNameRule]
+		public CrossReference getProblemProblemCrossReference_2_0() { return cProblemProblemCrossReference_2_0; }
+		
+		//QualifiedNameRule
+		public RuleCall getProblemProblemQualifiedNameRuleParserRuleCall_2_0_1() { return cProblemProblemQualifiedNameRuleParserRuleCall_2_0_1; }
+		
+		//"with"
+		public Keyword getWithKeyword_3() { return cWithKeyword_3; }
+		
+		//"algorithm"
+		public Keyword getAlgorithmKeyword_4() { return cAlgorithmKeyword_4; }
+		
+		//algorithm = InstanceRule
+		public Assignment getAlgorithmAssignment_5() { return cAlgorithmAssignment_5; }
+		
+		//InstanceRule
+		public RuleCall getAlgorithmInstanceRuleParserRuleCall_5_0() { return cAlgorithmInstanceRuleParserRuleCall_5_0; }
+		
+		//("documenting" ":=" documentation = ArrayRule ';')?
+		public Group getGroup_6() { return cGroup_6; }
+		
+		//"documenting"
+		public Keyword getDocumentingKeyword_6_0() { return cDocumentingKeyword_6_0; }
+		
+		//":="
+		public Keyword getColonEqualsSignKeyword_6_1() { return cColonEqualsSignKeyword_6_1; }
+		
+		//documentation = ArrayRule
+		public Assignment getDocumentationAssignment_6_2() { return cDocumentationAssignment_6_2; }
+		
+		//ArrayRule
+		public RuleCall getDocumentationArrayRuleParserRuleCall_6_2_0() { return cDocumentationArrayRuleParserRuleCall_6_2_0; }
+		
+		//';'
+		public Keyword getSemicolonKeyword_6_3() { return cSemicolonKeyword_6_3; }
 	}
 	
 	
 	private final OptimisationModelRuleElements pOptimisationModelRule;
-	private final UseRuleElements pUseRule;
-	private final ConstraintRuleElements pConstraintRule;
-	private final ConstraintStatementRuleElements pConstraintStatementRule;
-	private final FunctionNameRuleElements pFunctionNameRule;
+	private final ImportRuleElements pImportRule;
+	private final ProblemRuleElements pProblemRule;
+	private final AlgorithmInstanceRuleElements pAlgorithmInstanceRule;
 	
 	private final Grammar grammar;
 	
@@ -207,10 +259,9 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 		this.gaExpressionLanguage = gaExpressionLanguage;
 		this.gaTerminals = gaTerminals;
 		this.pOptimisationModelRule = new OptimisationModelRuleElements();
-		this.pUseRule = new UseRuleElements();
-		this.pConstraintRule = new ConstraintRuleElements();
-		this.pConstraintStatementRule = new ConstraintStatementRuleElements();
-		this.pFunctionNameRule = new FunctionNameRuleElements();
+		this.pImportRule = new ImportRuleElements();
+		this.pProblemRule = new ProblemRuleElements();
+		this.pAlgorithmInstanceRule = new AlgorithmInstanceRuleElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -249,9 +300,9 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 
 	
 	//OptimisationModelRule returns OptimisationModel:
-	//        (uses += UseRule)*
-	//        instance = InstanceRule
-	//        (constraints = ConstraintRule)?
+	//    (imports += ImportRule)*
+	//    (problem = ProblemRule)?
+	//    (algorithm = AlgorithmInstanceRule)?
 	//;
 	public OptimisationModelRuleElements getOptimisationModelRuleAccess() {
 		return pOptimisationModelRule;
@@ -261,55 +312,45 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 		return getOptimisationModelRuleAccess().getRule();
 	}
 	
-	//UseRule returns Use:
-	//        'use' importURI = STRING ';'
+	//ImportRule returns Import:
+	//    'import' importedNamespace = QualifiedNameRule ';'
 	//;
-	public UseRuleElements getUseRuleAccess() {
-		return pUseRule;
+	public ImportRuleElements getImportRuleAccess() {
+		return pImportRule;
 	}
 	
-	public ParserRule getUseRuleRule() {
-		return getUseRuleAccess().getRule();
+	public ParserRule getImportRuleRule() {
+		return getImportRuleAccess().getRule();
 	}
 	
-	//ConstraintRule returns Constraint:
-	//        {Constraint}
-	//        "constraints" "{"
-	//                (statements += ConstraintStatementRule)*
-	//        "}";
-	public ConstraintRuleElements getConstraintRuleAccess() {
-		return pConstraintRule;
-	}
-	
-	public ParserRule getConstraintRuleRule() {
-		return getConstraintRuleAccess().getRule();
-	}
-	
-	//ConstraintStatementRule returns ConstraintStatement:
-	//        constraintExpression = CallRule ';'
+	//ProblemRule returns Problem:
+	//    "declare" name = StringOrId "as"
+	//        problem = InstanceRule
+	//    ("documenting" ":=" documentation = ArrayRule ';')?
 	//;
-	public ConstraintStatementRuleElements getConstraintStatementRuleAccess() {
-		return pConstraintStatementRule;
+	public ProblemRuleElements getProblemRuleAccess() {
+		return pProblemRule;
 	}
 	
-	public ParserRule getConstraintStatementRuleRule() {
-		return getConstraintStatementRuleAccess().getRule();
+	public ParserRule getProblemRuleRule() {
+		return getProblemRuleAccess().getRule();
 	}
 	
-	//@Override
-	//FunctionNameRule returns FunctionName:
-	//        definition = [dl::FunctionDefinition]
+	//AlgorithmInstanceRule returns AlgorithmInstance:
+	//    "instance" "for" problem = [Problem|QualifiedNameRule] "with" "algorithm"
+	//        algorithm = InstanceRule
+	//    ("documenting" ":=" documentation = ArrayRule ';')?
 	//;
-	public FunctionNameRuleElements getFunctionNameRuleAccess() {
-		return pFunctionNameRule;
+	public AlgorithmInstanceRuleElements getAlgorithmInstanceRuleAccess() {
+		return pAlgorithmInstanceRule;
 	}
 	
-	public ParserRule getFunctionNameRuleRule() {
-		return getFunctionNameRuleAccess().getRule();
+	public ParserRule getAlgorithmInstanceRuleRule() {
+		return getAlgorithmInstanceRuleAccess().getRule();
 	}
 	
 	//InstanceRule returns Instance:
-	//    definition = [dl::TypeDefinition|StringOrId] ('{'
+	//    definition = [dl::TypeDefinition|QualifiedNameRule] ('{'
 	//      attributes += AttributeRule*
 	//    '}')?
 	//;
@@ -376,6 +417,16 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 	
 	public ParserRule getDataReferenceRuleRule() {
 		return getDataReferenceRuleAccess().getRule();
+	}
+	
+	//QualifiedNameRule:
+	//    StringOrId ('.' StringOrId)*;
+	public InstanceLanguageGrammarAccess.QualifiedNameRuleElements getQualifiedNameRuleAccess() {
+		return gaInstanceLanguage.getQualifiedNameRuleAccess();
+	}
+	
+	public ParserRule getQualifiedNameRuleRule() {
+		return getQualifiedNameRuleAccess().getRule();
 	}
 	
 	//ExpressionRule returns Expression:
@@ -567,6 +618,17 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 	
 	public ParserRule getCallRuleRule() {
 		return getCallRuleAccess().getRule();
+	}
+	
+	//FunctionNameRule returns FunctionName:
+	//    {FunctionName} 'call'
+	//;
+	public ExpressionLanguageGrammarAccess.FunctionNameRuleElements getFunctionNameRuleAccess() {
+		return gaExpressionLanguage.getFunctionNameRuleAccess();
+	}
+	
+	public ParserRule getFunctionNameRuleRule() {
+		return getFunctionNameRuleAccess().getRule();
 	}
 	
 	//ValueReferenceRule returns ValueReference:

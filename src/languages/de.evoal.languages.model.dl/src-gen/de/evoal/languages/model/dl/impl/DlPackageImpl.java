@@ -14,10 +14,13 @@ import de.evoal.languages.model.dl.DlPackage;
 import de.evoal.languages.model.dl.ExpressionType;
 import de.evoal.languages.model.dl.FloatType;
 import de.evoal.languages.model.dl.FunctionDefinition;
+import de.evoal.languages.model.dl.Import;
 import de.evoal.languages.model.dl.InstanceType;
 import de.evoal.languages.model.dl.IntType;
 import de.evoal.languages.model.dl.LiteralType;
+import de.evoal.languages.model.dl.Namespace;
 import de.evoal.languages.model.dl.Parameter;
+import de.evoal.languages.model.dl.QualifiedName;
 import de.evoal.languages.model.dl.StringType;
 import de.evoal.languages.model.dl.Type;
 import de.evoal.languages.model.dl.TypeDefinition;
@@ -159,6 +162,20 @@ public class DlPackageImpl extends EPackageImpl implements DlPackage {
 	private EClass definedFunctionNameEClass = null;
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass qualifiedNameEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass importEClass = null;
+
+	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
 	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
 	 * package URI value.
@@ -249,6 +266,26 @@ public class DlPackageImpl extends EPackageImpl implements DlPackage {
 	@Override
 	public EReference getDefinitionModel_Functions() {
 		return (EReference)definitionModelEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getDefinitionModel_Name() {
+		return (EAttribute)definitionModelEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getDefinitionModel_Imports() {
+		return (EReference)definitionModelEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -557,6 +594,36 @@ public class DlPackageImpl extends EPackageImpl implements DlPackage {
 	 * @generated
 	 */
 	@Override
+	public EClass getQualifiedName() {
+		return qualifiedNameEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getImport() {
+		return importEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getImport_ImportedNamespace() {
+		return (EAttribute)importEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public DlFactory getDlFactory() {
 		return (DlFactory)getEFactoryInstance();
 	}
@@ -583,6 +650,8 @@ public class DlPackageImpl extends EPackageImpl implements DlPackage {
 		definitionModelEClass = createEClass(DEFINITION_MODEL);
 		createEReference(definitionModelEClass, DEFINITION_MODEL__TYPES);
 		createEReference(definitionModelEClass, DEFINITION_MODEL__FUNCTIONS);
+		createEAttribute(definitionModelEClass, DEFINITION_MODEL__NAME);
+		createEReference(definitionModelEClass, DEFINITION_MODEL__IMPORTS);
 
 		typeDefinitionEClass = createEClass(TYPE_DEFINITION);
 		createEAttribute(typeDefinitionEClass, TYPE_DEFINITION__NAME);
@@ -629,6 +698,11 @@ public class DlPackageImpl extends EPackageImpl implements DlPackage {
 
 		definedFunctionNameEClass = createEClass(DEFINED_FUNCTION_NAME);
 		createEReference(definedFunctionNameEClass, DEFINED_FUNCTION_NAME__DEFINITION);
+
+		qualifiedNameEClass = createEClass(QUALIFIED_NAME);
+
+		importEClass = createEClass(IMPORT);
+		createEAttribute(importEClass, IMPORT__IMPORTED_NAMESPACE);
 	}
 
 	/**
@@ -678,6 +752,8 @@ public class DlPackageImpl extends EPackageImpl implements DlPackage {
 		initEClass(definitionModelEClass, DefinitionModel.class, "DefinitionModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getDefinitionModel_Types(), this.getTypeDefinition(), null, "types", null, 0, -1, DefinitionModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getDefinitionModel_Functions(), this.getFunctionDefinition(), null, "functions", null, 0, -1, DefinitionModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEAttribute(getDefinitionModel_Name(), ecorePackage.getEString(), "name", null, 1, 1, DefinitionModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDefinitionModel_Imports(), this.getImport(), null, "imports", null, 0, -1, DefinitionModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(typeDefinitionEClass, TypeDefinition.class, "TypeDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getTypeDefinition_Name(), ecorePackage.getEString(), "name", null, 0, 1, TypeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -724,6 +800,11 @@ public class DlPackageImpl extends EPackageImpl implements DlPackage {
 
 		initEClass(definedFunctionNameEClass, DefinedFunctionName.class, "DefinedFunctionName", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getDefinedFunctionName_Definition(), this.getFunctionDefinition(), null, "definition", null, 1, 1, DefinedFunctionName.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(qualifiedNameEClass, QualifiedName.class, "QualifiedName", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(importEClass, Import.class, "Import", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getImport_ImportedNamespace(), ecorePackage.getEString(), "importedNamespace", null, 1, 1, Import.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

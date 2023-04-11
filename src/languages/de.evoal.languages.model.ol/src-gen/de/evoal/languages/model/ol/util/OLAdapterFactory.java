@@ -76,36 +76,16 @@ public class OLAdapterFactory extends AdapterFactoryImpl {
 				return createOptimisationModelAdapter();
 			}
 			@Override
-			public Adapter caseUse(Use object) {
-				return createUseAdapter();
+			public Adapter caseImport(Import object) {
+				return createImportAdapter();
 			}
 			@Override
-			public Adapter caseConstraint(Constraint object) {
-				return createConstraintAdapter();
+			public Adapter caseProblem(Problem object) {
+				return createProblemAdapter();
 			}
 			@Override
-			public Adapter caseConstraintStatement(ConstraintStatement object) {
-				return createConstraintStatementAdapter();
-			}
-			@Override
-			public Adapter caseFunctionName(FunctionName object) {
-				return createFunctionNameAdapter();
-			}
-			@Override
-			public Adapter caseDataReference(DataReference object) {
-				return createDataReferenceAdapter();
-			}
-			@Override
-			public Adapter caseEL_FunctionName(de.evoal.languages.model.el.FunctionName object) {
-				return createEL_FunctionNameAdapter();
-			}
-			@Override
-			public Adapter caseCallOrLiteralOrReferenceOrParantheses(CallOrLiteralOrReferenceOrParantheses object) {
-				return createCallOrLiteralOrReferenceOrParanthesesAdapter();
-			}
-			@Override
-			public Adapter caseValueReference(ValueReference object) {
-				return createValueReferenceAdapter();
+			public Adapter caseAlgorithmInstance(AlgorithmInstance object) {
+				return createAlgorithmInstanceAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -142,114 +122,44 @@ public class OLAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.ol.Use <em>Use</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.ol.Import <em>Import</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.evoal.languages.model.ol.Use
+	 * @see de.evoal.languages.model.ol.Import
 	 * @generated
 	 */
-	public Adapter createUseAdapter() {
+	public Adapter createImportAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.ol.Constraint <em>Constraint</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.ol.Problem <em>Problem</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.evoal.languages.model.ol.Constraint
+	 * @see de.evoal.languages.model.ol.Problem
 	 * @generated
 	 */
-	public Adapter createConstraintAdapter() {
+	public Adapter createProblemAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.ol.ConstraintStatement <em>Constraint Statement</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.ol.AlgorithmInstance <em>Algorithm Instance</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.evoal.languages.model.ol.ConstraintStatement
+	 * @see de.evoal.languages.model.ol.AlgorithmInstance
 	 * @generated
 	 */
-	public Adapter createConstraintStatementAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.ol.FunctionName <em>Function Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.evoal.languages.model.ol.FunctionName
-	 * @generated
-	 */
-	public Adapter createFunctionNameAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.ol.DataReference <em>Data Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.evoal.languages.model.ol.DataReference
-	 * @generated
-	 */
-	public Adapter createDataReferenceAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.el.FunctionName <em>Function Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.evoal.languages.model.el.FunctionName
-	 * @generated
-	 */
-	public Adapter createEL_FunctionNameAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.el.CallOrLiteralOrReferenceOrParantheses <em>Call Or Literal Or Reference Or Parantheses</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.evoal.languages.model.el.CallOrLiteralOrReferenceOrParantheses
-	 * @generated
-	 */
-	public Adapter createCallOrLiteralOrReferenceOrParanthesesAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.el.ValueReference <em>Value Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.evoal.languages.model.el.ValueReference
-	 * @generated
-	 */
-	public Adapter createValueReferenceAdapter() {
+	public Adapter createAlgorithmInstanceAdapter() {
 		return null;
 	}
 

@@ -4,22 +4,49 @@
 package de.evoal.languages.model.generator.dsl;
 
 import org.eclipse.xtext.conversion.IValueConverterService;
+import org.eclipse.xtext.naming.DefaultDeclarativeQualifiedNameProvider;
+import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
+import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
+import org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider;
+
+import com.google.inject.name.Names;
 
 import de.evoal.languages.model.generator.dsl.scoping.GeneratorClasspathGlobalScopeProvider;
+import de.evoal.languages.model.generator.dsl.scoping.GeneratorDSLScopeProvider;
 import de.evoal.languages.model.utils.converter.ValueConverterService;
 
 /**
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
  */
 public class GeneratorDSLRuntimeModule extends AbstractGeneratorDSLRuntimeModule {
+	/*
 	@Override
 	public Class<? extends IGlobalScopeProvider> bindIGlobalScopeProvider() {
 		return GeneratorClasspathGlobalScopeProvider.class;
 	}
-	
+		
     @Override
+	public Class<? extends IScopeProvider> bindIScopeProvider() {
+		return GeneratorDSLScopeProvider.class;
+	}
+
+	@Override
     public Class<? extends IValueConverterService> bindIValueConverterService() {
             return ValueConverterService.class;
     }
+
+	public Class<? extends IQualifiedNameProvider> bindIQualifiedNameProvider() {
+		return DefaultDeclarativeQualifiedNameProvider.class;
+	}
+	
+	@Override
+	public void configureIScopeProviderDelegate(com.google.inject.Binder binder) {
+		binder.bind(IScopeProvider.class)
+				.annotatedWith(
+						Names.named(AbstractDeclarativeScopeProvider.NAMED_DELEGATE))
+				.to(ImportedNamespaceAwareLocalScopeProvider.class);
+	}
+*/
 }

@@ -4,11 +4,18 @@ import "https://www.evoal.de/languages/dl/1.0.0"
 
 
 DefinitionModelRule returns DefinitionModel:
-	((types += TypeDefinitionRule ) | (functions += FunctioDefinitionRule ))*
+	(imports += ImportRule)*
+	'module' name = QualifiedName '{'
+		((types += TypeDefinitionRule ) | (functions += FunctionDefinitionRule ))*
+	'}'
+;
+
+ImportRule returns Import:
+	'import' importedNamespace = QualifiedName ';'
 ;
 
 TypeDefinitionRule returns TypeDefinition:
-	(abstract?='abstract')? 'type' name = StringOrId ('extends' superType = [TypeDefinition|StringOrId])? '{'
+	(abstract?='abstract')? 'type' name = StringOrId ('extends' superType = [TypeDefinition|QualifiedName])? '{'
 		attributes += AttributeDefinitionRule*
 	'}'
 ;
@@ -27,7 +34,7 @@ LiteralTypeRule returns LiteralType:
 
 InstanceTypeRule returns InstanceType:
 	{InstanceType}
-	'instance' definitions += [TypeDefinition|StringOrId] ('|' definitions += [TypeDefinition|StringOrId])*
+	'instance' definitions += [TypeDefinition|QualifiedName] ('|' definitions += [TypeDefinition|QualifiedName])*
 ;
 
 StringTypeRule returns StringType:
@@ -71,7 +78,7 @@ ArrayTypeRule returns ArrayType:
 ;
 
 
-FunctioDefinitionRule returns FunctionDefinition:
+FunctionDefinitionRule returns FunctionDefinition:
 	'def' type = TypeRule name = StringOrId '(' (parameters+=ParameterRule (',' parameters+=ParameterRule)*)? ')' ';'
 ;
 
@@ -79,7 +86,12 @@ ParameterRule returns Parameter:
 	type = TypeRule name = StringOrId
 ;
 
+
 @Override
 FunctionNameRule returns DefinedFunctionName:
-	definition = [FunctionDefinition|StringOrId]
+	definition = [FunctionDefinition|QualifiedName]
+;
+
+QualifiedName:
+	StringOrId ('.' StringOrId)*
 ;

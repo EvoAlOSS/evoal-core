@@ -92,13 +92,31 @@ public interface DlPackage extends EPackage {
 	int DEFINITION_MODEL__FUNCTIONS = 1;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEFINITION_MODEL__NAME = 2;
+
+	/**
+	 * The feature id for the '<em><b>Imports</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEFINITION_MODEL__IMPORTS = 3;
+
+	/**
 	 * The number of structural features of the '<em>Definition Model</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DEFINITION_MODEL_FEATURE_COUNT = 2;
+	int DEFINITION_MODEL_FEATURE_COUNT = 4;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.dl.impl.TypeDefinitionImpl <em>Type Definition</em>}' class.
@@ -532,6 +550,55 @@ public interface DlPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link de.evoal.languages.model.dl.impl.QualifiedNameImpl <em>Qualified Name</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.evoal.languages.model.dl.impl.QualifiedNameImpl
+	 * @see de.evoal.languages.model.dl.impl.DlPackageImpl#getQualifiedName()
+	 * @generated
+	 */
+	int QUALIFIED_NAME = 17;
+
+	/**
+	 * The number of structural features of the '<em>Qualified Name</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int QUALIFIED_NAME_FEATURE_COUNT = 0;
+
+
+	/**
+	 * The meta object id for the '{@link de.evoal.languages.model.dl.impl.ImportImpl <em>Import</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.evoal.languages.model.dl.impl.ImportImpl
+	 * @see de.evoal.languages.model.dl.impl.DlPackageImpl#getImport()
+	 * @generated
+	 */
+	int IMPORT = 18;
+
+	/**
+	 * The feature id for the '<em><b>Imported Namespace</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPORT__IMPORTED_NAMESPACE = 0;
+
+	/**
+	 * The number of structural features of the '<em>Import</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPORT_FEATURE_COUNT = 1;
+
+
+	/**
 	 * Returns the meta object for class '{@link de.evoal.languages.model.dl.DefinitionModel <em>Definition Model</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -562,6 +629,28 @@ public interface DlPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getDefinitionModel_Functions();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.dl.DefinitionModel#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see de.evoal.languages.model.dl.DefinitionModel#getName()
+	 * @see #getDefinitionModel()
+	 * @generated
+	 */
+	EAttribute getDefinitionModel_Name();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.dl.DefinitionModel#getImports <em>Imports</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Imports</em>'.
+	 * @see de.evoal.languages.model.dl.DefinitionModel#getImports()
+	 * @see #getDefinitionModel()
+	 * @generated
+	 */
+	EReference getDefinitionModel_Imports();
 
 	/**
 	 * Returns the meta object for class '{@link de.evoal.languages.model.dl.TypeDefinition <em>Type Definition</em>}'.
@@ -878,6 +967,37 @@ public interface DlPackage extends EPackage {
 	EReference getDefinedFunctionName_Definition();
 
 	/**
+	 * Returns the meta object for class '{@link de.evoal.languages.model.dl.QualifiedName <em>Qualified Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Qualified Name</em>'.
+	 * @see de.evoal.languages.model.dl.QualifiedName
+	 * @generated
+	 */
+	EClass getQualifiedName();
+
+	/**
+	 * Returns the meta object for class '{@link de.evoal.languages.model.dl.Import <em>Import</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Import</em>'.
+	 * @see de.evoal.languages.model.dl.Import
+	 * @generated
+	 */
+	EClass getImport();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.dl.Import#getImportedNamespace <em>Imported Namespace</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Imported Namespace</em>'.
+	 * @see de.evoal.languages.model.dl.Import#getImportedNamespace()
+	 * @see #getImport()
+	 * @generated
+	 */
+	EAttribute getImport_ImportedNamespace();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -924,6 +1044,22 @@ public interface DlPackage extends EPackage {
 		 * @generated
 		 */
 		EReference DEFINITION_MODEL__FUNCTIONS = eINSTANCE.getDefinitionModel_Functions();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DEFINITION_MODEL__NAME = eINSTANCE.getDefinitionModel_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Imports</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DEFINITION_MODEL__IMPORTS = eINSTANCE.getDefinitionModel_Imports();
 
 		/**
 		 * The meta object literal for the '{@link de.evoal.languages.model.dl.impl.TypeDefinitionImpl <em>Type Definition</em>}' class.
@@ -1196,6 +1332,34 @@ public interface DlPackage extends EPackage {
 		 * @generated
 		 */
 		EReference DEFINED_FUNCTION_NAME__DEFINITION = eINSTANCE.getDefinedFunctionName_Definition();
+
+		/**
+		 * The meta object literal for the '{@link de.evoal.languages.model.dl.impl.QualifiedNameImpl <em>Qualified Name</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.evoal.languages.model.dl.impl.QualifiedNameImpl
+		 * @see de.evoal.languages.model.dl.impl.DlPackageImpl#getQualifiedName()
+		 * @generated
+		 */
+		EClass QUALIFIED_NAME = eINSTANCE.getQualifiedName();
+
+		/**
+		 * The meta object literal for the '{@link de.evoal.languages.model.dl.impl.ImportImpl <em>Import</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.evoal.languages.model.dl.impl.ImportImpl
+		 * @see de.evoal.languages.model.dl.impl.DlPackageImpl#getImport()
+		 * @generated
+		 */
+		EClass IMPORT = eINSTANCE.getImport();
+
+		/**
+		 * The meta object literal for the '<em><b>Imported Namespace</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute IMPORT__IMPORTED_NAMESPACE = eINSTANCE.getImport_ImportedNamespace();
 
 	}
 

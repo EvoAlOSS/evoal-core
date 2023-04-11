@@ -10,8 +10,11 @@ import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.xtext.naming.IQualifiedNameProvider;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.Scopes;
 import org.eclipse.xtext.scoping.impl.FilteringScope;
@@ -31,120 +34,139 @@ import de.evoal.languages.model.instance.InstancePackage;
  * on how and when to use it.
  */
 public class InstanceLanguageScopeProvider extends AbstractInstanceLanguageScopeProvider {
-	@Inject
-	DataDescriptionLanguageScopeProvider dlProvider;
-		
+	
+	private static EClass instance = InstancePackage.eINSTANCE.getInstance();
+	private static EReference instanceDefinition = InstancePackage.eINSTANCE.getInstance_Definition();
+
+//	@Inject
+//	IQualifiedNameProvider provider;
+
+	
 	@Override
 	public IScope getScope(final EObject context, final EReference reference) {
-//		System.err.println("Asking for scope of :");
-//		System.err.println("  " + context.eClass().getName());
-//		if(context instanceof Instance) {
-//			System.err.println("    " + ((Instance)context).getName().getName());
-//		}
-//		System.err.println("  " + reference.getContainerClass() + "__" + reference.getName());
-
-		if(context instanceof Instance && InstancePackage.Literals.ATTRIBUTE__DEFINITION.equals(reference)) {
-			final Instance instance = (Instance)context;
-			final List<AttributeDefinition> usedAttributes =
-					instance.getAttributes()
-						    .stream()
-						    .map(Attribute::getDefinition)
-						    .collect(Collectors.toList());
+		System.err.println("[INS] Asking for " + context.eClass().getName() + " --> " + reference.getEContainingClass().getName() + "." + reference.getName());
+		
+		if(instance.equals(context.eClass()) && instanceDefinition.equals(reference)) {
+			final List<TypeDefinition> definitions = new LinkedList<>();
+			TypeDefinition current = ((Instance)context).getDefinition();
 			
-			return new FilteringScope(scopeFor(instance), desc -> !usedAttributes.contains(desc.getEObjectOrProxy()));
-		} else if (context instanceof Attribute && InstancePackage.Literals.INSTANCE__DEFINITION.equals(reference)) {
-			final Attribute attribute = (Attribute)context;			
-			final AttributeDefinition definition = attribute.getDefinition();
-			
-			if(definition.getType() instanceof InstanceType) {
-				return new FilteringScope(super.getScope(context, reference), desc -> {
-					final TypeDefinition def = (TypeDefinition)desc.getEObjectOrProxy();
-					
-					return !def.isAbstract() && inheritsFrom(def, (InstanceType)definition.getType());
-				});
-			} else {
-				System.err.println("  type is " + definition.getType());
-				return IScope.NULLSCOPE;
+			while(current != null) {
+				definitions.add(current);
+				current = current.getSuperType();
 			}
+			
+			return Scopes.scopeFor(definitions, IScope.NULLSCOPE);
 		}
-		/*else if(context instanceof Attribute && InstancePackage.Literals.ATTRIBUTE__NAME.equals(reference)) {
-System.err.println("Attr->Name");
-			final Instance instance = (Instance)context.eContainer();
-			return scopeFor(instance);
-		}*/
-		/*else if(context instanceof Attribute && InstancePackage.Literals.ATTRIBUTE__VALUE.equals(reference)) {
-			final Attribute attribute = (Attribute)context;
-			
-			final NameOrMisc nom = attribute.getName();
-
-			if(nom instanceof Name) {
-				final Name name = (Name) nom;
-				if(name.getName().getType() instanceof InstanceType) {
-					return Scopes.scopeFor(((InstanceType)name.getName().getType()).getDefinitions());
-				}
-			}
-		}*/
-			/*
-		if(context instanceof Name && reference == InstancePackage.Literals.NAME__NAME) {
-			final EObject container = context.eContainer().eContainer();
-			final Optional<EReference> typeAttribute =
-					container.eClass()
-							 .getEAllReferences()
-							 .stream()
-							 .filter(attr -> DlPackage.eINSTANCE.getTypeDefinition().equals(attr.getEType()))
-							 .findFirst();
-			
-			if(typeAttribute.isPresent()) {
-				return scopeFor((TypeDefinition)container.eGet(typeAttribute.get()));
-			}
-		} else if(context instanceof Instance && InstancePackage.Literals.INSTANCE__ATTRIBUTES.equals(reference)) {
-			return scopeFor((Instance)context);
-		} else if(context instanceof Attribute && InstancePackage.Literals.ATTRIBUTE__NAME.equals(reference)) {
-			final Instance instance = (Instance)context.eContainer();
-			return scopeFor(instance);
-		} else if(context instanceof Attribute && InstancePackage.Literals.INSTANCE__NAME.equals(reference)) {
-			System.err.println("xxx");
-		} 
-		*/
-
-		//return Scopes.scopeFor(Collections.emptyList()); //super.getScope(context, reference);
+///*
+//		if(context instanceof Instance) {
+//			System.err.println("[Ins]     instance of " + ((Instance)context).getDefinition().getName());
+//		} else if(context instanceof Attribute) {
+//			System.err.println("[Ins]     attribute of " + ((Attribute)context).getDefinition().getName());
+//		} 
+//		
+//		System.err.println("[Ins]   reference to " + reference.getContainerClass() + "__" + reference.getName());
+//
+//*/
+//		if(context instanceof Instance && InstancePackage.Literals.ATTRIBUTE__DEFINITION.equals(reference)) {
+//			final Instance instance = (Instance)context;
+//						
+//			final IScope parentScope = super.getScope(context, reference);
+//			final IScope childScope = Scopes.scopeFor(instance.getDefinition().getAttributes(), d -> QualifiedName.create(d.getName()), parentScope);
+//
+//			return childScope; // super.getScope(context, reference); // FilteringScope(parentScope, desc -> !usedAttributes.contains(desc.getEObjectOrProxy())); 
+//		} else if (context instanceof Attribute && InstancePackage.Literals.INSTANCE__DEFINITION.equals(reference)) {
+//			final Attribute attribute = (Attribute)context;			
+//			final AttributeDefinition definition = attribute.getDefinition();
+//			
+//			if(definition.getType() instanceof InstanceType) {
+//				return new FilteringScope(super.getScope(context, reference), desc -> {
+//					final TypeDefinition def = (TypeDefinition)desc.getEObjectOrProxy();
+//					
+//					return !def.isAbstract() && inheritsFrom(def, (InstanceType)definition.getType());
+//				});
+//			} else {
+//				System.err.println("  type is " + definition.getType());
+//				return IScope.NULLSCOPE;
+//			}
+//		}
+//		/*else if(context instanceof Attribute && InstancePackage.Literals.ATTRIBUTE__NAME.equals(reference)) {
+//System.err.println("Attr->Name");
+//			final Instance instance = (Instance)context.eContainer();
+//			return scopeFor(instance);
+//		}*/
+//		/*else if(context instanceof Attribute && InstancePackage.Literals.ATTRIBUTE__VALUE.equals(reference)) {
+//			final Attribute attribute = (Attribute)context;
+//			
+//			final NameOrMisc nom = attribute.getName();
+//
+//			if(nom instanceof Name) {
+//				final Name name = (Name) nom;
+//				if(name.getName().getType() instanceof InstanceType) {
+//					return Scopes.scopeFor(((InstanceType)name.getName().getType()).getDefinitions());
+//				}
+//			}
+//		}* /
+//			/ *
+//		if(context instanceof Name && reference == InstancePackage.Literals.NAME__NAME) {
+//			final EObject container = context.eContainer().eContainer();
+//			final Optional<EReference> typeAttribute =
+//					container.eClass()
+//							 .getEAllReferences()
+//							 .stream()
+//							 .filter(attr -> DlPackage.eINSTANCE.getTypeDefinition().equals(attr.getEType()))
+//							 .findFirst();
+//			
+//			if(typeAttribute.isPresent()) {
+//				return scopeFor((TypeDefinition)container.eGet(typeAttribute.get()));
+//			}
+//		} else if(context instanceof Instance && InstancePackage.Literals.INSTANCE__ATTRIBUTES.equals(reference)) {
+//			return scopeFor((Instance)context);
+//		} else if(context instanceof Attribute && InstancePackage.Literals.ATTRIBUTE__NAME.equals(reference)) {
+//			final Instance instance = (Instance)context.eContainer();
+//			return scopeFor(instance);
+//		} else if(context instanceof Attribute && InstancePackage.Literals.INSTANCE__NAME.equals(reference)) {
+//			System.err.println("xxx");
+//		} 
+//		* /
+//*/
+//		//return Scopes.scopeFor(Collections.emptyList()); //super.getScope(context, reference);
 		return super.getScope(context, reference);
 	}
-
-	private boolean inheritsFrom(final TypeDefinition current, final InstanceType parent) {
-		for(final TypeDefinition parentDef : parent.getDefinitions()) {
-			if(current.equals(parentDef)) {
-				return true;
-			}
-		}
-		
-		final TypeDefinition superType = current.getSuperType();
-		
-		if(superType == null) {
-			return false;
-		}
-		
-		return inheritsFrom(superType, parent);
-	}
-	
-	private IScope scopeFor(final Instance instance) {
-		return scopeFor(instance.getDefinition());
-	}
-
-	private IScope scopeFor(TypeDefinition definition) {
-		final List<AttributeDefinition> attributes = new LinkedList<>(); 
-		
-		while(definition != null) {
-			definition.getAttributes()
-			          .stream()
-			          .forEach(attributes::add);
-
-			definition = definition.getSuperType();
-		}
-		
-//		System.err.println("      " + attributes.stream().map(d -> d.ge));
-		
-		return Scopes.scopeFor(attributes);
-	}
+//
+//	private boolean inheritsFrom(final TypeDefinition current, final InstanceType parent) {
+//		for(final TypeDefinition parentDef : parent.getDefinitions()) {
+//			if(current.equals(parentDef)) {
+//				return true;
+//			}
+//		}
+//		
+//		final TypeDefinition superType = current.getSuperType();
+//		
+//		if(superType == null) {
+//			return false;
+//		}
+//		
+//		return inheritsFrom(superType, parent);
+//	}
+//	
+//	private IScope scopeFor(final IScope outer, final Instance instance) {
+//		return scopeFor(outer, instance.getDefinition());
+//	}
+//
+//	private IScope scopeFor(final IScope outer, TypeDefinition definition) {
+//		final List<AttributeDefinition> attributes = new LinkedList<>(); 
+//		
+//		while(definition != null) {
+//			attributes.addAll(definition.getAttributes());
+//
+//			definition = definition.getSuperType();
+//		}
+//
+//		attributes.stream()
+//				  .map(ad -> "  " + ((TypeDefinition)ad.eContainer()).getName() + " -- " + ad.getName())
+//				  .forEach(System.out::println);
+//
+//		return Scopes.scopeFor(attributes, d -> QualifiedName.create(d.getName()), outer);
+//	}
 
 }

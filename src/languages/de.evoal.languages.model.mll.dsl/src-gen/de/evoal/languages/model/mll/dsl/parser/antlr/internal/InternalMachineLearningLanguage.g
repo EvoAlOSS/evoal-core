@@ -1139,7 +1139,7 @@ ruleInstanceRule returns [EObject current=null]
 				{
 					newCompositeNode(grammarAccess.getInstanceRuleAccess().getDefinitionTypeDefinitionCrossReference_0_0());
 				}
-				ruleStringOrId
+				ruleQualifiedNameRule
 				{
 					afterParserOrEnumRuleCall();
 				}
@@ -1476,6 +1476,52 @@ ruleDataReferenceRule returns [EObject current=null]
 				}
 			)
 		)
+	)
+;
+
+// Entry rule entryRuleQualifiedNameRule
+entryRuleQualifiedNameRule returns [String current=null]:
+	{ newCompositeNode(grammarAccess.getQualifiedNameRuleRule()); }
+	iv_ruleQualifiedNameRule=ruleQualifiedNameRule
+	{ $current=$iv_ruleQualifiedNameRule.current.getText(); }
+	EOF;
+
+// Rule QualifiedNameRule
+ruleQualifiedNameRule returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		{
+			newCompositeNode(grammarAccess.getQualifiedNameRuleAccess().getStringOrIdParserRuleCall_0());
+		}
+		this_StringOrId_0=ruleStringOrId
+		{
+			$current.merge(this_StringOrId_0);
+		}
+		{
+			afterParserOrEnumRuleCall();
+		}
+		(
+			kw='.'
+			{
+				$current.merge(kw);
+				newLeafNode(kw, grammarAccess.getQualifiedNameRuleAccess().getFullStopKeyword_1_0());
+			}
+			{
+				newCompositeNode(grammarAccess.getQualifiedNameRuleAccess().getStringOrIdParserRuleCall_1_1());
+			}
+			this_StringOrId_2=ruleStringOrId
+			{
+				$current.merge(this_StringOrId_2);
+			}
+			{
+				afterParserOrEnumRuleCall();
+			}
+		)*
 	)
 ;
 

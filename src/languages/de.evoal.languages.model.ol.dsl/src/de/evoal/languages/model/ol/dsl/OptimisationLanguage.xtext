@@ -8,29 +8,25 @@ import "https://www.evoal.de/languages/instance/1.0.0" as instance
 import "https://www.evoal.de/languages/el/1.0.0" as el
 
 OptimisationModelRule returns OptimisationModel:
-        (uses += UseRule)*
+	(imports += ImportRule)*
 
-        instance = InstanceRule
+	(problem = ProblemRule)?
 
-        (constraints = ConstraintRule)?
+	(algorithm = AlgorithmInstanceRule)?
 ;
 
-UseRule returns Use:
-        'use' importURI = STRING ';'
+ImportRule returns Import:
+	'import' importedNamespace = QualifiedNameRule ';'
 ;
 
-ConstraintRule returns Constraint:
-        {Constraint}
-        "constraints" "{"
-                (statements += ConstraintStatementRule)*
-        "}";
-
-
-ConstraintStatementRule returns ConstraintStatement:
-        constraintExpression = CallRule ';'
+ProblemRule returns Problem:
+	"declare" name = StringOrId "as"
+		problem = InstanceRule
+	("documenting" ":=" documentation = ArrayRule ';')?
 ;
 
-@Override
-FunctionNameRule returns FunctionName:
-        definition = [dl::FunctionDefinition]
+AlgorithmInstanceRule returns AlgorithmInstance:
+	"instance" "for" problem = [Problem|QualifiedNameRule] "with" "algorithm"
+		algorithm = InstanceRule
+	("documenting" ":=" documentation = ArrayRule ';')?
 ;

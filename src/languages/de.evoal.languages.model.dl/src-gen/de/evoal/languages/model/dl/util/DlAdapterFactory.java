@@ -3,6 +3,25 @@
  */
 package de.evoal.languages.model.dl.util;
 
+import de.evoal.languages.model.dl.ArrayType;
+import de.evoal.languages.model.dl.AttributeDefinition;
+import de.evoal.languages.model.dl.BooleanType;
+import de.evoal.languages.model.dl.DataType;
+import de.evoal.languages.model.dl.DefinedFunctionName;
+import de.evoal.languages.model.dl.DefinitionModel;
+import de.evoal.languages.model.dl.DlPackage;
+import de.evoal.languages.model.dl.ExpressionType;
+import de.evoal.languages.model.dl.FloatType;
+import de.evoal.languages.model.dl.FunctionDefinition;
+import de.evoal.languages.model.dl.InstanceType;
+import de.evoal.languages.model.dl.IntType;
+import de.evoal.languages.model.dl.LiteralType;
+import de.evoal.languages.model.dl.Parameter;
+import de.evoal.languages.model.dl.QualifiedName;
+import de.evoal.languages.model.dl.StringType;
+import de.evoal.languages.model.dl.Type;
+import de.evoal.languages.model.dl.TypeDefinition;
+import de.evoal.languages.model.dl.VoidType;
 import de.evoal.languages.model.dl.*;
 
 import de.evoal.languages.model.el.FunctionName;
@@ -137,6 +156,14 @@ public class DlAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseDefinedFunctionName(DefinedFunctionName object) {
 				return createDefinedFunctionNameAdapter();
+			}
+			@Override
+			public Adapter caseQualifiedName(QualifiedName object) {
+				return createQualifiedNameAdapter();
+			}
+			@Override
+			public Adapter caseImport(Import object) {
+				return createImportAdapter();
 			}
 			@Override
 			public Adapter caseFunctionName(FunctionName object) {
@@ -397,6 +424,34 @@ public class DlAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createDefinedFunctionNameAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.dl.QualifiedName <em>Qualified Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.evoal.languages.model.dl.QualifiedName
+	 * @generated
+	 */
+	public Adapter createQualifiedNameAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.dl.Import <em>Import</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.evoal.languages.model.dl.Import
+	 * @generated
+	 */
+	public Adapter createImportAdapter() {
 		return null;
 	}
 

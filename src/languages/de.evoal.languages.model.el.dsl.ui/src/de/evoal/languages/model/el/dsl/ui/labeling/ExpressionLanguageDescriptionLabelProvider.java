@@ -15,11 +15,10 @@ import org.eclipse.xtext.ui.label.DefaultDescriptionLabelProvider;
 public class ExpressionLanguageDescriptionLabelProvider extends DefaultDescriptionLabelProvider {
 
 	// Labels and icons can be computed like this:
-	@Override
-	public String text(IEObjectDescription ele) {
-		System.err.println(ele);
-		return ele.getName().toString();
-	}
+//	@Override
+//	public String text(IEObjectDescription ele) {
+//		return ele.getName().toString();
+//	}
 //	
 //	@Override
 //	public String image(IEObjectDescription ele) {

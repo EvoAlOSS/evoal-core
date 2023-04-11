@@ -5,22 +5,32 @@
 package de.evoal.languages.model.ol.dsl;
 
 import org.eclipse.xtext.conversion.IValueConverterService;
-import org.eclipse.xtext.scoping.IGlobalScopeProvider;
+import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 
-import de.evoal.languages.model.ol.dsl.scoping.OptimisationLanguageClasspathGlobalScopeProvider;
+import de.evoal.languages.model.ol.dsl.scoping.OptimisationLanguageLocalScopeProvider;
 import de.evoal.languages.model.utils.converter.ValueConverterService;
 
 /**
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
  */
 public class OptimisationLanguageRuntimeModule extends AbstractOptimisationLanguageRuntimeModule {
-    @Override
-    public Class<? extends IGlobalScopeProvider> bindIGlobalScopeProvider() {
-            return OptimisationLanguageClasspathGlobalScopeProvider.class;
-    }
+//    @Override TODO What about include hacks?
+//    public Class<? extends IGlobalScopeProvider> bindIGlobalScopeProvider() {
+//            return OptimisationLanguageClasspathGlobalScopeProvider.class;
+//    }
 
+    
 	@Override
-	public Class<? extends IValueConverterService> bindIValueConverterService() {
-	        return ValueConverterService.class;
+	public void configureIScopeProviderDelegate(com.google.inject.Binder binder) {
+		binder.bind(org.eclipse.xtext.scoping.IScopeProvider.class)
+				.annotatedWith(
+						com.google.inject.name.Names
+								.named(AbstractDeclarativeScopeProvider.NAMED_DELEGATE))
+				.to(OptimisationLanguageLocalScopeProvider.class);
 	}
+	
+    @Override
+    public Class<? extends IValueConverterService> bindIValueConverterService() {
+            return ValueConverterService.class;
+    }
 }

@@ -80,18 +80,18 @@ ruleConfigurationRule returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getConfigurationRuleAccess().getUsesUseRuleParserRuleCall_0_0());
+					newCompositeNode(grammarAccess.getConfigurationRuleAccess().getImportsImportRuleParserRuleCall_0_0());
 				}
-				lv_uses_0_0=ruleUseRule
+				lv_imports_0_0=ruleImportRule
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getConfigurationRuleRule());
 					}
 					add(
 						$current,
-						"uses",
-						lv_uses_0_0,
-						"de.evoal.languages.model.generator.dsl.GeneratorDSL.UseRule");
+						"imports",
+						lv_imports_0_0,
+						"de.evoal.languages.model.generator.dsl.GeneratorDSL.ImportRule");
 					afterParserOrEnumRuleCall();
 				}
 			)
@@ -137,15 +137,15 @@ ruleConfigurationRule returns [EObject current=null]
 	)
 ;
 
-// Entry rule entryRuleUseRule
-entryRuleUseRule returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getUseRuleRule()); }
-	iv_ruleUseRule=ruleUseRule
-	{ $current=$iv_ruleUseRule.current; }
+// Entry rule entryRuleImportRule
+entryRuleImportRule returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getImportRuleRule()); }
+	iv_ruleImportRule=ruleImportRule
+	{ $current=$iv_ruleImportRule.current; }
 	EOF;
 
-// Rule UseRule
-ruleUseRule returns [EObject current=null]
+// Rule ImportRule
+ruleImportRule returns [EObject current=null]
 @init {
 	enterRule();
 }
@@ -153,31 +153,32 @@ ruleUseRule returns [EObject current=null]
 	leaveRule();
 }:
 	(
-		otherlv_0='use'
+		otherlv_0='import'
 		{
-			newLeafNode(otherlv_0, grammarAccess.getUseRuleAccess().getUseKeyword_0());
+			newLeafNode(otherlv_0, grammarAccess.getImportRuleAccess().getImportKeyword_0());
 		}
 		(
 			(
-				lv_importURI_1_0=RULE_STRING
 				{
-					newLeafNode(lv_importURI_1_0, grammarAccess.getUseRuleAccess().getImportURISTRINGTerminalRuleCall_1_0());
+					newCompositeNode(grammarAccess.getImportRuleAccess().getImportedNamespaceQualifiedNameRuleParserRuleCall_1_0());
 				}
+				lv_importedNamespace_1_0=ruleQualifiedNameRule
 				{
 					if ($current==null) {
-						$current = createModelElement(grammarAccess.getUseRuleRule());
+						$current = createModelElementForParent(grammarAccess.getImportRuleRule());
 					}
-					setWithLastConsumed(
+					set(
 						$current,
-						"importURI",
-						lv_importURI_1_0,
-						"de.evoal.languages.model.el.dsl.ExpressionLanguage.STRING");
+						"importedNamespace",
+						lv_importedNamespace_1_0,
+						"de.evoal.languages.model.instance.dsl.InstanceLanguage.QualifiedNameRule");
+					afterParserOrEnumRuleCall();
 				}
 			)
 		)
 		otherlv_2=';'
 		{
-			newLeafNode(otherlv_2, grammarAccess.getUseRuleAccess().getSemicolonKeyword_2());
+			newLeafNode(otherlv_2, grammarAccess.getImportRuleAccess().getSemicolonKeyword_2());
 		}
 	)
 ;
@@ -1009,7 +1010,7 @@ ruleInstanceRule returns [EObject current=null]
 				{
 					newCompositeNode(grammarAccess.getInstanceRuleAccess().getDefinitionTypeDefinitionCrossReference_0_0());
 				}
-				ruleStringOrId
+				ruleQualifiedNameRule
 				{
 					afterParserOrEnumRuleCall();
 				}
@@ -1322,6 +1323,52 @@ ruleDataReferenceRule returns [EObject current=null]
 				}
 			)
 		)
+	)
+;
+
+// Entry rule entryRuleQualifiedNameRule
+entryRuleQualifiedNameRule returns [String current=null]:
+	{ newCompositeNode(grammarAccess.getQualifiedNameRuleRule()); }
+	iv_ruleQualifiedNameRule=ruleQualifiedNameRule
+	{ $current=$iv_ruleQualifiedNameRule.current.getText(); }
+	EOF;
+
+// Rule QualifiedNameRule
+ruleQualifiedNameRule returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		{
+			newCompositeNode(grammarAccess.getQualifiedNameRuleAccess().getStringOrIdParserRuleCall_0());
+		}
+		this_StringOrId_0=ruleStringOrId
+		{
+			$current.merge(this_StringOrId_0);
+		}
+		{
+			afterParserOrEnumRuleCall();
+		}
+		(
+			kw='.'
+			{
+				$current.merge(kw);
+				newLeafNode(kw, grammarAccess.getQualifiedNameRuleAccess().getFullStopKeyword_1_0());
+			}
+			{
+				newCompositeNode(grammarAccess.getQualifiedNameRuleAccess().getStringOrIdParserRuleCall_1_1());
+			}
+			this_StringOrId_2=ruleStringOrId
+			{
+				$current.merge(this_StringOrId_2);
+			}
+			{
+				afterParserOrEnumRuleCall();
+			}
+		)*
 	)
 ;
 

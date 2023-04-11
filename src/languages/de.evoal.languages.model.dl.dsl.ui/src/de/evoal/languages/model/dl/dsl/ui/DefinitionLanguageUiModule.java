@@ -4,6 +4,9 @@
 package de.evoal.languages.model.dl.dsl.ui;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.xtext.ui.editor.hover.IEObjectHoverProvider;
+
+import de.evoal.languages.model.dl.dsl.ui.hover.DefinitionLanguageEObjectHoverProvider;
 
 /**
  * Use this class to register components to be used within the Eclipse IDE.
@@ -13,4 +16,9 @@ public class DefinitionLanguageUiModule extends AbstractDefinitionLanguageUiModu
 	public DefinitionLanguageUiModule(AbstractUIPlugin plugin) {
 		super(plugin);
 	}
+	
+	
+    public Class<? extends IEObjectHoverProvider> bindIEObjectHoverProvider() {
+        return DefinitionLanguageEObjectHoverProvider.class;
+    }
 }

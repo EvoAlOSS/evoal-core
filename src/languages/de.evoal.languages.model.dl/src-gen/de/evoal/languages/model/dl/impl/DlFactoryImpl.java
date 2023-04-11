@@ -3,6 +3,25 @@
  */
 package de.evoal.languages.model.dl.impl;
 
+import de.evoal.languages.model.dl.ArrayType;
+import de.evoal.languages.model.dl.AttributeDefinition;
+import de.evoal.languages.model.dl.BooleanType;
+import de.evoal.languages.model.dl.DataType;
+import de.evoal.languages.model.dl.DefinedFunctionName;
+import de.evoal.languages.model.dl.DefinitionModel;
+import de.evoal.languages.model.dl.DlFactory;
+import de.evoal.languages.model.dl.DlPackage;
+import de.evoal.languages.model.dl.ExpressionType;
+import de.evoal.languages.model.dl.FloatType;
+import de.evoal.languages.model.dl.FunctionDefinition;
+import de.evoal.languages.model.dl.InstanceType;
+import de.evoal.languages.model.dl.IntType;
+import de.evoal.languages.model.dl.LiteralType;
+import de.evoal.languages.model.dl.Parameter;
+import de.evoal.languages.model.dl.QualifiedName;
+import de.evoal.languages.model.dl.StringType;
+import de.evoal.languages.model.dl.TypeDefinition;
+import de.evoal.languages.model.dl.VoidType;
 import de.evoal.languages.model.dl.*;
 
 import org.eclipse.emf.ecore.EClass;
@@ -73,6 +92,8 @@ public class DlFactoryImpl extends EFactoryImpl implements DlFactory {
 			case DlPackage.FUNCTION_DEFINITION: return createFunctionDefinition();
 			case DlPackage.PARAMETER: return createParameter();
 			case DlPackage.DEFINED_FUNCTION_NAME: return createDefinedFunctionName();
+			case DlPackage.QUALIFIED_NAME: return createQualifiedName();
+			case DlPackage.IMPORT: return createImport();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -252,6 +273,28 @@ public class DlFactoryImpl extends EFactoryImpl implements DlFactory {
 	public DefinedFunctionName createDefinedFunctionName() {
 		DefinedFunctionNameImpl definedFunctionName = new DefinedFunctionNameImpl();
 		return definedFunctionName;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public QualifiedName createQualifiedName() {
+		QualifiedNameImpl qualifiedName = new QualifiedNameImpl();
+		return qualifiedName;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Import createImport() {
+		ImportImpl import_ = new ImportImpl();
+		return import_;
 	}
 
 	/**

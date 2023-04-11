@@ -12,6 +12,7 @@ import de.evoal.languages.model.el.Call;
 import de.evoal.languages.model.el.ComparisonExpression;
 import de.evoal.languages.model.el.DoubleLiteral;
 import de.evoal.languages.model.el.ELPackage;
+import de.evoal.languages.model.el.FunctionName;
 import de.evoal.languages.model.el.IntegerLiteral;
 import de.evoal.languages.model.el.MultiplyDivideModuloExpression;
 import de.evoal.languages.model.el.NotExpression;
@@ -30,12 +31,11 @@ import de.evoal.languages.model.instance.Instance;
 import de.evoal.languages.model.instance.InstancePackage;
 import de.evoal.languages.model.instance.LiteralValue;
 import de.evoal.languages.model.instance.dsl.serializer.InstanceLanguageSemanticSequencer;
-import de.evoal.languages.model.ol.Constraint;
-import de.evoal.languages.model.ol.ConstraintStatement;
-import de.evoal.languages.model.ol.FunctionName;
+import de.evoal.languages.model.ol.AlgorithmInstance;
+import de.evoal.languages.model.ol.Import;
 import de.evoal.languages.model.ol.OLPackage;
 import de.evoal.languages.model.ol.OptimisationModel;
-import de.evoal.languages.model.ol.Use;
+import de.evoal.languages.model.ol.Problem;
 import de.evoal.languages.model.ol.dsl.services.OptimisationLanguageGrammarAccess;
 import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
@@ -78,6 +78,9 @@ public class OptimisationLanguageSemanticSequencer extends InstanceLanguageSeman
 				return; 
 			case ELPackage.DOUBLE_LITERAL:
 				sequence_DoubleLiteralRule(context, (DoubleLiteral) semanticObject); 
+				return; 
+			case ELPackage.FUNCTION_NAME:
+				sequence_FunctionNameRule(context, (FunctionName) semanticObject); 
 				return; 
 			case ELPackage.INTEGER_LITERAL:
 				sequence_IntegerLiteralRule(context, (IntegerLiteral) semanticObject); 
@@ -133,20 +136,17 @@ public class OptimisationLanguageSemanticSequencer extends InstanceLanguageSeman
 			}
 		else if (epackage == OLPackage.eINSTANCE)
 			switch (semanticObject.eClass().getClassifierID()) {
-			case OLPackage.CONSTRAINT:
-				sequence_ConstraintRule(context, (Constraint) semanticObject); 
+			case OLPackage.ALGORITHM_INSTANCE:
+				sequence_AlgorithmInstanceRule(context, (AlgorithmInstance) semanticObject); 
 				return; 
-			case OLPackage.CONSTRAINT_STATEMENT:
-				sequence_ConstraintStatementRule(context, (ConstraintStatement) semanticObject); 
-				return; 
-			case OLPackage.FUNCTION_NAME:
-				sequence_FunctionNameRule(context, (FunctionName) semanticObject); 
+			case OLPackage.IMPORT:
+				sequence_ImportRule(context, (Import) semanticObject); 
 				return; 
 			case OLPackage.OPTIMISATION_MODEL:
 				sequence_OptimisationModelRule(context, (OptimisationModel) semanticObject); 
 				return; 
-			case OLPackage.USE:
-				sequence_UseRule(context, (Use) semanticObject); 
+			case OLPackage.PROBLEM:
+				sequence_ProblemRule(context, (Problem) semanticObject); 
 				return; 
 			}
 		if (errorAcceptor != null)
@@ -156,13 +156,13 @@ public class OptimisationLanguageSemanticSequencer extends InstanceLanguageSeman
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     ConstraintRule returns Constraint
+	 *     AlgorithmInstanceRule returns AlgorithmInstance
 	 *
 	 * Constraint:
-	 *     statements+=ConstraintStatementRule*
+	 *     (problem=[Problem|QualifiedNameRule] algorithm=InstanceRule documentation=ArrayRule?)
 	 * </pre>
 	 */
-	protected void sequence_ConstraintRule(ISerializationContext context, Constraint semanticObject) {
+	protected void sequence_AlgorithmInstanceRule(ISerializationContext context, AlgorithmInstance semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -170,39 +170,19 @@ public class OptimisationLanguageSemanticSequencer extends InstanceLanguageSeman
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     ConstraintStatementRule returns ConstraintStatement
+	 *     ImportRule returns Import
 	 *
 	 * Constraint:
-	 *     constraintExpression=CallRule
+	 *     importedNamespace=QualifiedNameRule
 	 * </pre>
 	 */
-	protected void sequence_ConstraintStatementRule(ISerializationContext context, ConstraintStatement semanticObject) {
+	protected void sequence_ImportRule(ISerializationContext context, Import semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, OLPackage.Literals.CONSTRAINT_STATEMENT__CONSTRAINT_EXPRESSION) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, OLPackage.Literals.CONSTRAINT_STATEMENT__CONSTRAINT_EXPRESSION));
+			if (transientValues.isValueTransient(semanticObject, OLPackage.Literals.IMPORT__IMPORTED_NAMESPACE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, OLPackage.Literals.IMPORT__IMPORTED_NAMESPACE));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getConstraintStatementRuleAccess().getConstraintExpressionCallRuleParserRuleCall_0_0(), semanticObject.getConstraintExpression());
-		feeder.finish();
-	}
-	
-	
-	/**
-	 * <pre>
-	 * Contexts:
-	 *     FunctionNameRule returns FunctionName
-	 *
-	 * Constraint:
-	 *     definition=[FunctionDefinition|ID]
-	 * </pre>
-	 */
-	protected void sequence_FunctionNameRule(ISerializationContext context, FunctionName semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, OLPackage.Literals.FUNCTION_NAME__DEFINITION) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, OLPackage.Literals.FUNCTION_NAME__DEFINITION));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getFunctionNameRuleAccess().getDefinitionFunctionDefinitionIDTerminalRuleCall_0_1(), semanticObject.eGet(OLPackage.Literals.FUNCTION_NAME__DEFINITION, false));
+		feeder.accept(grammarAccess.getImportRuleAccess().getImportedNamespaceQualifiedNameRuleParserRuleCall_1_0(), semanticObject.getImportedNamespace());
 		feeder.finish();
 	}
 	
@@ -213,7 +193,11 @@ public class OptimisationLanguageSemanticSequencer extends InstanceLanguageSeman
 	 *     OptimisationModelRule returns OptimisationModel
 	 *
 	 * Constraint:
-	 *     (uses+=UseRule* instance=InstanceRule constraints=ConstraintRule?)
+	 *     (
+	 *         (imports+=ImportRule* problem=ProblemRule algorithm=AlgorithmInstanceRule) | 
+	 *         (imports+=ImportRule* algorithm=AlgorithmInstanceRule) | 
+	 *         algorithm=AlgorithmInstanceRule
+	 *     )?
 	 * </pre>
 	 */
 	protected void sequence_OptimisationModelRule(ISerializationContext context, OptimisationModel semanticObject) {
@@ -224,20 +208,14 @@ public class OptimisationLanguageSemanticSequencer extends InstanceLanguageSeman
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     UseRule returns Use
+	 *     ProblemRule returns Problem
 	 *
 	 * Constraint:
-	 *     importURI=STRING
+	 *     (name=StringOrId problem=InstanceRule documentation=ArrayRule?)
 	 * </pre>
 	 */
-	protected void sequence_UseRule(ISerializationContext context, Use semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, OLPackage.Literals.USE__IMPORT_URI) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, OLPackage.Literals.USE__IMPORT_URI));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getUseRuleAccess().getImportURISTRINGTerminalRuleCall_1_0(), semanticObject.getImportURI());
-		feeder.finish();
+	protected void sequence_ProblemRule(ISerializationContext context, Problem semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	

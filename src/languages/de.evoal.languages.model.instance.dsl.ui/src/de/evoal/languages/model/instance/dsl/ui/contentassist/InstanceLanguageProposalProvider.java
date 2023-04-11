@@ -4,10 +4,96 @@
  */
 package de.evoal.languages.model.instance.dsl.ui.contentassist;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jface.text.contentassist.ICompletionProposal;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
+import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
+import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
+
+import com.google.common.base.Predicate;
+
+import de.evoal.languages.model.dl.AttributeDefinition;
+import de.evoal.languages.model.dl.TypeDefinition;
+import de.evoal.languages.model.instance.Attribute;
+import de.evoal.languages.model.instance.Instance;
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#content-assist
  * on how to customize the content assistant.
  */
 public class InstanceLanguageProposalProvider extends AbstractInstanceLanguageProposalProvider {
+	class FilteringCompletionProposalAcceptor extends ICompletionProposalAcceptor.Delegate {
+		private Set<AttributeDefinition> attributeDefinitions = new HashSet<>();
+		private Instance instance;
+
+		public FilteringCompletionProposalAcceptor(final ICompletionProposalAcceptor delegate, final Instance instance) {
+			super(delegate);
+			
+			this.instance = instance;
+			attributeDefinitions.addAll(instance.getDefinition().getAttributes());
+
+			instance.getAttributes()
+					.stream()
+					.map(Attribute::getDefinition)
+					.forEach(attributeDefinitions::remove);
+		}
+
+		@Override
+		public void accept(final ICompletionProposal proposal) {
+			ConfigurableCompletionProposal cp = (ConfigurableCompletionProposal)proposal;
+			final Object b = cp.getAdditionalProposalInfo(new NullProgressMonitor());
+			final String a = proposal.getAdditionalProposalInfo();
+			System.err.println(a);
+			// TODO Auto-generated method stub
+			super.accept(proposal);
+		}
+
+	}
+	
+	@Override
+	public void completeAttributeRule_Definition(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		final CrossReference crossReference = ((CrossReference)assignment.getTerminal());
+		
+		if(model instanceof Instance && "definition".equals(assignment.getFeature())) {
+			final Instance instance = (Instance)model;
+			
+			lookupCrossReference(crossReference, context, acceptor, new Predicate<IEObjectDescription>() {
+
+				@Override
+				public boolean apply(final IEObjectDescription description) {
+					if(!(description.getEObjectOrProxy() instanceof AttributeDefinition)) {
+						return false;
+					}
+					
+					final AttributeDefinition def = (AttributeDefinition)description.getEObjectOrProxy();
+					
+					return isSubtypeOf(instance.getDefinition(), (TypeDefinition)def.eContainer());
+				}
+
+				private static boolean isSubtypeOf(final TypeDefinition subType, final TypeDefinition superType) {
+					if(subType == null) {
+						return false;
+					}
+					
+					if(subType.equals(superType)) {
+						return true;
+					}
+
+					return isSubtypeOf(subType.getSuperType(), superType);
+				}
+				
+			});
+			return;
+		}
+		
+		
+		lookupCrossReference(crossReference, context, acceptor);
+	}
 }

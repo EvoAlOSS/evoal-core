@@ -12,8 +12,14 @@ Workflow {
 			project = StandardProjectConfig {
 				baseName = "de.evoal.languages.model.instance.dsl"
 				rootPath = rootPath
+				runtimeTest = {
+					enabled = false
+				}
 				eclipsePlugin = {
 					enabled = true
+				}
+				eclipsePluginTest = {
+					enabled = false
 				}
 				createEclipseMetaData = true
 			}
@@ -44,6 +50,9 @@ Workflow {
 			}
 			generator = {
 				generateXtendStub = true
+			}
+			scopeProvider = scoping.ImportNamespacesScopingFragment2 {
+				generateXtendStub = false
 			}
 			junitSupport = {
 				junitVersion = "5"

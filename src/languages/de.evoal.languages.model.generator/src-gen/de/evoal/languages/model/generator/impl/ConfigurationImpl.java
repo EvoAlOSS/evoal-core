@@ -5,6 +5,7 @@ package de.evoal.languages.model.generator.impl;
 
 import de.evoal.languages.model.generator.Configuration;
 import de.evoal.languages.model.generator.GeneratorPackage;
+import de.evoal.languages.model.generator.Import;
 import de.evoal.languages.model.generator.PipelineDefinition;
 import de.evoal.languages.model.generator.Statement;
 import de.evoal.languages.model.generator.Use;
@@ -31,7 +32,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link de.evoal.languages.model.generator.impl.ConfigurationImpl#getUses <em>Uses</em>}</li>
+ *   <li>{@link de.evoal.languages.model.generator.impl.ConfigurationImpl#getImports <em>Imports</em>}</li>
  *   <li>{@link de.evoal.languages.model.generator.impl.ConfigurationImpl#getPipelines <em>Pipelines</em>}</li>
  *   <li>{@link de.evoal.languages.model.generator.impl.ConfigurationImpl#getStatements <em>Statements</em>}</li>
  * </ul>
@@ -40,14 +41,14 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class ConfigurationImpl extends MinimalEObjectImpl.Container implements Configuration {
 	/**
-	 * The cached value of the '{@link #getUses() <em>Uses</em>}' containment reference list.
+	 * The cached value of the '{@link #getImports() <em>Imports</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getUses()
+	 * @see #getImports()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Use> uses;
+	protected EList<Import> imports;
 
 	/**
 	 * The cached value of the '{@link #getPipelines() <em>Pipelines</em>}' containment reference list.
@@ -94,11 +95,11 @@ public class ConfigurationImpl extends MinimalEObjectImpl.Container implements C
 	 * @generated
 	 */
 	@Override
-	public EList<Use> getUses() {
-		if (uses == null) {
-			uses = new EObjectContainmentEList<Use>(Use.class, this, GeneratorPackage.CONFIGURATION__USES);
+	public EList<Import> getImports() {
+		if (imports == null) {
+			imports = new EObjectContainmentEList<Import>(Import.class, this, GeneratorPackage.CONFIGURATION__IMPORTS);
 		}
-		return uses;
+		return imports;
 	}
 
 	/**
@@ -135,8 +136,8 @@ public class ConfigurationImpl extends MinimalEObjectImpl.Container implements C
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case GeneratorPackage.CONFIGURATION__USES:
-				return ((InternalEList<?>)getUses()).basicRemove(otherEnd, msgs);
+			case GeneratorPackage.CONFIGURATION__IMPORTS:
+				return ((InternalEList<?>)getImports()).basicRemove(otherEnd, msgs);
 			case GeneratorPackage.CONFIGURATION__PIPELINES:
 				return ((InternalEList<?>)getPipelines()).basicRemove(otherEnd, msgs);
 			case GeneratorPackage.CONFIGURATION__STATEMENTS:
@@ -153,8 +154,8 @@ public class ConfigurationImpl extends MinimalEObjectImpl.Container implements C
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case GeneratorPackage.CONFIGURATION__USES:
-				return getUses();
+			case GeneratorPackage.CONFIGURATION__IMPORTS:
+				return getImports();
 			case GeneratorPackage.CONFIGURATION__PIPELINES:
 				return getPipelines();
 			case GeneratorPackage.CONFIGURATION__STATEMENTS:
@@ -172,9 +173,9 @@ public class ConfigurationImpl extends MinimalEObjectImpl.Container implements C
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case GeneratorPackage.CONFIGURATION__USES:
-				getUses().clear();
-				getUses().addAll((Collection<? extends Use>)newValue);
+			case GeneratorPackage.CONFIGURATION__IMPORTS:
+				getImports().clear();
+				getImports().addAll((Collection<? extends Import>)newValue);
 				return;
 			case GeneratorPackage.CONFIGURATION__PIPELINES:
 				getPipelines().clear();
@@ -196,8 +197,8 @@ public class ConfigurationImpl extends MinimalEObjectImpl.Container implements C
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case GeneratorPackage.CONFIGURATION__USES:
-				getUses().clear();
+			case GeneratorPackage.CONFIGURATION__IMPORTS:
+				getImports().clear();
 				return;
 			case GeneratorPackage.CONFIGURATION__PIPELINES:
 				getPipelines().clear();
@@ -217,8 +218,8 @@ public class ConfigurationImpl extends MinimalEObjectImpl.Container implements C
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case GeneratorPackage.CONFIGURATION__USES:
-				return uses != null && !uses.isEmpty();
+			case GeneratorPackage.CONFIGURATION__IMPORTS:
+				return imports != null && !imports.isEmpty();
 			case GeneratorPackage.CONFIGURATION__PIPELINES:
 				return pipelines != null && !pipelines.isEmpty();
 			case GeneratorPackage.CONFIGURATION__STATEMENTS:

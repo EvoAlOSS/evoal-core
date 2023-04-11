@@ -69,6 +69,8 @@ public class MachineLearningLanguageParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getArrayRuleAccess().getGroup_2(), "rule__ArrayRule__Group_2__0");
 			builder.put(grammarAccess.getArrayRuleAccess().getGroup_2_1(), "rule__ArrayRule__Group_2_1__0");
 			builder.put(grammarAccess.getDataReferenceRuleAccess().getGroup(), "rule__DataReferenceRule__Group__0");
+			builder.put(grammarAccess.getQualifiedNameRuleAccess().getGroup(), "rule__QualifiedNameRule__Group__0");
+			builder.put(grammarAccess.getQualifiedNameRuleAccess().getGroup_1(), "rule__QualifiedNameRule__Group_1__0");
 			builder.put(grammarAccess.getOrExpressionRuleAccess().getGroup(), "rule__OrExpressionRule__Group__0");
 			builder.put(grammarAccess.getOrExpressionRuleAccess().getGroup_1(), "rule__OrExpressionRule__Group_1__0");
 			builder.put(grammarAccess.getXorExpressionRuleAccess().getGroup(), "rule__XorExpressionRule__Group__0");

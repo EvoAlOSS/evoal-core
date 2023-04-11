@@ -9,12 +9,12 @@
   <genPackages prefix="Generator" basePackage="de.evoal.languages.model" disposableProviderFactory="true"
       fileExtensions="generator" ecorePackage="model.ecore#/">
     <genClasses ecoreClass="model.ecore#//Configuration">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//Configuration/uses"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//Configuration/imports"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//Configuration/pipelines"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//Configuration/statements"/>
     </genClasses>
-    <genClasses ecoreClass="model.ecore#//Use">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//Use/importURI"/>
+    <genClasses ecoreClass="model.ecore#//Import">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//Import/importedNamespace"/>
     </genClasses>
     <genClasses ecoreClass="model.ecore#//PipelineDefinition">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//PipelineDefinition/name"/>

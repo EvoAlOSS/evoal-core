@@ -199,7 +199,7 @@ public class InstanceLanguageSemanticSequencer extends ExpressionLanguageSemanti
 	 *     ValueRule returns Instance
 	 *
 	 * Constraint:
-	 *     (definition=[TypeDefinition|StringOrId] attributes+=AttributeRule*)
+	 *     (definition=[TypeDefinition|QualifiedNameRule] attributes+=AttributeRule*)
 	 * </pre>
 	 */
 	protected void sequence_InstanceRule(ISerializationContext context, Instance semanticObject) {

@@ -81,18 +81,18 @@ ruleOptimisationModelRule returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getOptimisationModelRuleAccess().getUsesUseRuleParserRuleCall_0_0());
+					newCompositeNode(grammarAccess.getOptimisationModelRuleAccess().getImportsImportRuleParserRuleCall_0_0());
 				}
-				lv_uses_0_0=ruleUseRule
+				lv_imports_0_0=ruleImportRule
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getOptimisationModelRuleRule());
 					}
 					add(
 						$current,
-						"uses",
-						lv_uses_0_0,
-						"de.evoal.languages.model.ol.dsl.OptimisationLanguage.UseRule");
+						"imports",
+						lv_imports_0_0,
+						"de.evoal.languages.model.ol.dsl.OptimisationLanguage.ImportRule");
 					afterParserOrEnumRuleCall();
 				}
 			)
@@ -100,37 +100,37 @@ ruleOptimisationModelRule returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getOptimisationModelRuleAccess().getInstanceInstanceRuleParserRuleCall_1_0());
+					newCompositeNode(grammarAccess.getOptimisationModelRuleAccess().getProblemProblemRuleParserRuleCall_1_0());
 				}
-				lv_instance_1_0=ruleInstanceRule
+				lv_problem_1_0=ruleProblemRule
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getOptimisationModelRuleRule());
 					}
 					set(
 						$current,
-						"instance",
-						lv_instance_1_0,
-						"de.evoal.languages.model.instance.dsl.InstanceLanguage.InstanceRule");
+						"problem",
+						lv_problem_1_0,
+						"de.evoal.languages.model.ol.dsl.OptimisationLanguage.ProblemRule");
 					afterParserOrEnumRuleCall();
 				}
 			)
-		)
+		)?
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getOptimisationModelRuleAccess().getConstraintsConstraintRuleParserRuleCall_2_0());
+					newCompositeNode(grammarAccess.getOptimisationModelRuleAccess().getAlgorithmAlgorithmInstanceRuleParserRuleCall_2_0());
 				}
-				lv_constraints_2_0=ruleConstraintRule
+				lv_algorithm_2_0=ruleAlgorithmInstanceRule
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getOptimisationModelRuleRule());
 					}
 					set(
 						$current,
-						"constraints",
-						lv_constraints_2_0,
-						"de.evoal.languages.model.ol.dsl.OptimisationLanguage.ConstraintRule");
+						"algorithm",
+						lv_algorithm_2_0,
+						"de.evoal.languages.model.ol.dsl.OptimisationLanguage.AlgorithmInstanceRule");
 					afterParserOrEnumRuleCall();
 				}
 			)
@@ -138,15 +138,15 @@ ruleOptimisationModelRule returns [EObject current=null]
 	)
 ;
 
-// Entry rule entryRuleUseRule
-entryRuleUseRule returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getUseRuleRule()); }
-	iv_ruleUseRule=ruleUseRule
-	{ $current=$iv_ruleUseRule.current; }
+// Entry rule entryRuleImportRule
+entryRuleImportRule returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getImportRuleRule()); }
+	iv_ruleImportRule=ruleImportRule
+	{ $current=$iv_ruleImportRule.current; }
 	EOF;
 
-// Rule UseRule
-ruleUseRule returns [EObject current=null]
+// Rule ImportRule
+ruleImportRule returns [EObject current=null]
 @init {
 	enterRule();
 }
@@ -154,44 +154,45 @@ ruleUseRule returns [EObject current=null]
 	leaveRule();
 }:
 	(
-		otherlv_0='use'
+		otherlv_0='import'
 		{
-			newLeafNode(otherlv_0, grammarAccess.getUseRuleAccess().getUseKeyword_0());
+			newLeafNode(otherlv_0, grammarAccess.getImportRuleAccess().getImportKeyword_0());
 		}
 		(
 			(
-				lv_importURI_1_0=RULE_STRING
 				{
-					newLeafNode(lv_importURI_1_0, grammarAccess.getUseRuleAccess().getImportURISTRINGTerminalRuleCall_1_0());
+					newCompositeNode(grammarAccess.getImportRuleAccess().getImportedNamespaceQualifiedNameRuleParserRuleCall_1_0());
 				}
+				lv_importedNamespace_1_0=ruleQualifiedNameRule
 				{
 					if ($current==null) {
-						$current = createModelElement(grammarAccess.getUseRuleRule());
+						$current = createModelElementForParent(grammarAccess.getImportRuleRule());
 					}
-					setWithLastConsumed(
+					set(
 						$current,
-						"importURI",
-						lv_importURI_1_0,
-						"de.evoal.languages.model.el.dsl.ExpressionLanguage.STRING");
+						"importedNamespace",
+						lv_importedNamespace_1_0,
+						"de.evoal.languages.model.instance.dsl.InstanceLanguage.QualifiedNameRule");
+					afterParserOrEnumRuleCall();
 				}
 			)
 		)
 		otherlv_2=';'
 		{
-			newLeafNode(otherlv_2, grammarAccess.getUseRuleAccess().getSemicolonKeyword_2());
+			newLeafNode(otherlv_2, grammarAccess.getImportRuleAccess().getSemicolonKeyword_2());
 		}
 	)
 ;
 
-// Entry rule entryRuleConstraintRule
-entryRuleConstraintRule returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getConstraintRuleRule()); }
-	iv_ruleConstraintRule=ruleConstraintRule
-	{ $current=$iv_ruleConstraintRule.current; }
+// Entry rule entryRuleProblemRule
+entryRuleProblemRule returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getProblemRuleRule()); }
+	iv_ruleProblemRule=ruleProblemRule
+	{ $current=$iv_ruleProblemRule.current; }
 	EOF;
 
-// Rule ConstraintRule
-ruleConstraintRule returns [EObject current=null]
+// Rule ProblemRule
+ruleProblemRule returns [EObject current=null]
 @init {
 	enterRule();
 }
@@ -199,98 +200,97 @@ ruleConstraintRule returns [EObject current=null]
 	leaveRule();
 }:
 	(
-		(
-			{
-				$current = forceCreateModelElement(
-					grammarAccess.getConstraintRuleAccess().getConstraintAction_0(),
-					$current);
-			}
-		)
-		otherlv_1='constraints'
+		otherlv_0='declare'
 		{
-			newLeafNode(otherlv_1, grammarAccess.getConstraintRuleAccess().getConstraintsKeyword_1());
-		}
-		otherlv_2='{'
-		{
-			newLeafNode(otherlv_2, grammarAccess.getConstraintRuleAccess().getLeftCurlyBracketKeyword_2());
+			newLeafNode(otherlv_0, grammarAccess.getProblemRuleAccess().getDeclareKeyword_0());
 		}
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getConstraintRuleAccess().getStatementsConstraintStatementRuleParserRuleCall_3_0());
+					newCompositeNode(grammarAccess.getProblemRuleAccess().getNameStringOrIdParserRuleCall_1_0());
 				}
-				lv_statements_3_0=ruleConstraintStatementRule
+				lv_name_1_0=ruleStringOrId
 				{
 					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getConstraintRuleRule());
-					}
-					add(
-						$current,
-						"statements",
-						lv_statements_3_0,
-						"de.evoal.languages.model.ol.dsl.OptimisationLanguage.ConstraintStatementRule");
-					afterParserOrEnumRuleCall();
-				}
-			)
-		)*
-		otherlv_4='}'
-		{
-			newLeafNode(otherlv_4, grammarAccess.getConstraintRuleAccess().getRightCurlyBracketKeyword_4());
-		}
-	)
-;
-
-// Entry rule entryRuleConstraintStatementRule
-entryRuleConstraintStatementRule returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getConstraintStatementRuleRule()); }
-	iv_ruleConstraintStatementRule=ruleConstraintStatementRule
-	{ $current=$iv_ruleConstraintStatementRule.current; }
-	EOF;
-
-// Rule ConstraintStatementRule
-ruleConstraintStatementRule returns [EObject current=null]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
-	(
-		(
-			(
-				{
-					newCompositeNode(grammarAccess.getConstraintStatementRuleAccess().getConstraintExpressionCallRuleParserRuleCall_0_0());
-				}
-				lv_constraintExpression_0_0=ruleCallRule
-				{
-					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getConstraintStatementRuleRule());
+						$current = createModelElementForParent(grammarAccess.getProblemRuleRule());
 					}
 					set(
 						$current,
-						"constraintExpression",
-						lv_constraintExpression_0_0,
-						"de.evoal.languages.model.el.dsl.ExpressionLanguage.CallRule");
+						"name",
+						lv_name_1_0,
+						"de.evoal.languages.model.el.dsl.ExpressionLanguage.StringOrId");
 					afterParserOrEnumRuleCall();
 				}
 			)
 		)
-		otherlv_1=';'
+		otherlv_2='as'
 		{
-			newLeafNode(otherlv_1, grammarAccess.getConstraintStatementRuleAccess().getSemicolonKeyword_1());
+			newLeafNode(otherlv_2, grammarAccess.getProblemRuleAccess().getAsKeyword_2());
 		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getProblemRuleAccess().getProblemInstanceRuleParserRuleCall_3_0());
+				}
+				lv_problem_3_0=ruleInstanceRule
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getProblemRuleRule());
+					}
+					set(
+						$current,
+						"problem",
+						lv_problem_3_0,
+						"de.evoal.languages.model.instance.dsl.InstanceLanguage.InstanceRule");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		(
+			otherlv_4='documenting'
+			{
+				newLeafNode(otherlv_4, grammarAccess.getProblemRuleAccess().getDocumentingKeyword_4_0());
+			}
+			otherlv_5=':='
+			{
+				newLeafNode(otherlv_5, grammarAccess.getProblemRuleAccess().getColonEqualsSignKeyword_4_1());
+			}
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getProblemRuleAccess().getDocumentationArrayRuleParserRuleCall_4_2_0());
+					}
+					lv_documentation_6_0=ruleArrayRule
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getProblemRuleRule());
+						}
+						set(
+							$current,
+							"documentation",
+							lv_documentation_6_0,
+							"de.evoal.languages.model.instance.dsl.InstanceLanguage.ArrayRule");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+			otherlv_7=';'
+			{
+				newLeafNode(otherlv_7, grammarAccess.getProblemRuleAccess().getSemicolonKeyword_4_3());
+			}
+		)?
 	)
 ;
 
-// Entry rule entryRuleFunctionNameRule
-entryRuleFunctionNameRule returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getFunctionNameRuleRule()); }
-	iv_ruleFunctionNameRule=ruleFunctionNameRule
-	{ $current=$iv_ruleFunctionNameRule.current; }
+// Entry rule entryRuleAlgorithmInstanceRule
+entryRuleAlgorithmInstanceRule returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getAlgorithmInstanceRuleRule()); }
+	iv_ruleAlgorithmInstanceRule=ruleAlgorithmInstanceRule
+	{ $current=$iv_ruleAlgorithmInstanceRule.current; }
 	EOF;
 
-// Rule FunctionNameRule
-ruleFunctionNameRule returns [EObject current=null]
+// Rule AlgorithmInstanceRule
+ruleAlgorithmInstanceRule returns [EObject current=null]
 @init {
 	enterRule();
 }
@@ -298,17 +298,90 @@ ruleFunctionNameRule returns [EObject current=null]
 	leaveRule();
 }:
 	(
+		otherlv_0='instance'
+		{
+			newLeafNode(otherlv_0, grammarAccess.getAlgorithmInstanceRuleAccess().getInstanceKeyword_0());
+		}
+		otherlv_1='for'
+		{
+			newLeafNode(otherlv_1, grammarAccess.getAlgorithmInstanceRuleAccess().getForKeyword_1());
+		}
 		(
-			{
-				if ($current==null) {
-					$current = createModelElement(grammarAccess.getFunctionNameRuleRule());
+			(
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getAlgorithmInstanceRuleRule());
+					}
 				}
-			}
-			otherlv_0=RULE_ID
-			{
-				newLeafNode(otherlv_0, grammarAccess.getFunctionNameRuleAccess().getDefinitionFunctionDefinitionCrossReference_0());
-			}
+				{
+					newCompositeNode(grammarAccess.getAlgorithmInstanceRuleAccess().getProblemProblemCrossReference_2_0());
+				}
+				ruleQualifiedNameRule
+				{
+					afterParserOrEnumRuleCall();
+				}
+			)
 		)
+		otherlv_3='with'
+		{
+			newLeafNode(otherlv_3, grammarAccess.getAlgorithmInstanceRuleAccess().getWithKeyword_3());
+		}
+		otherlv_4='algorithm'
+		{
+			newLeafNode(otherlv_4, grammarAccess.getAlgorithmInstanceRuleAccess().getAlgorithmKeyword_4());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getAlgorithmInstanceRuleAccess().getAlgorithmInstanceRuleParserRuleCall_5_0());
+				}
+				lv_algorithm_5_0=ruleInstanceRule
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getAlgorithmInstanceRuleRule());
+					}
+					set(
+						$current,
+						"algorithm",
+						lv_algorithm_5_0,
+						"de.evoal.languages.model.instance.dsl.InstanceLanguage.InstanceRule");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		(
+			otherlv_6='documenting'
+			{
+				newLeafNode(otherlv_6, grammarAccess.getAlgorithmInstanceRuleAccess().getDocumentingKeyword_6_0());
+			}
+			otherlv_7=':='
+			{
+				newLeafNode(otherlv_7, grammarAccess.getAlgorithmInstanceRuleAccess().getColonEqualsSignKeyword_6_1());
+			}
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getAlgorithmInstanceRuleAccess().getDocumentationArrayRuleParserRuleCall_6_2_0());
+					}
+					lv_documentation_8_0=ruleArrayRule
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getAlgorithmInstanceRuleRule());
+						}
+						set(
+							$current,
+							"documentation",
+							lv_documentation_8_0,
+							"de.evoal.languages.model.instance.dsl.InstanceLanguage.ArrayRule");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+			otherlv_9=';'
+			{
+				newLeafNode(otherlv_9, grammarAccess.getAlgorithmInstanceRuleAccess().getSemicolonKeyword_6_3());
+			}
+		)?
 	)
 ;
 
@@ -338,7 +411,7 @@ ruleInstanceRule returns [EObject current=null]
 				{
 					newCompositeNode(grammarAccess.getInstanceRuleAccess().getDefinitionTypeDefinitionCrossReference_0_0());
 				}
-				ruleStringOrId
+				ruleQualifiedNameRule
 				{
 					afterParserOrEnumRuleCall();
 				}
@@ -651,6 +724,52 @@ ruleDataReferenceRule returns [EObject current=null]
 				}
 			)
 		)
+	)
+;
+
+// Entry rule entryRuleQualifiedNameRule
+entryRuleQualifiedNameRule returns [String current=null]:
+	{ newCompositeNode(grammarAccess.getQualifiedNameRuleRule()); }
+	iv_ruleQualifiedNameRule=ruleQualifiedNameRule
+	{ $current=$iv_ruleQualifiedNameRule.current.getText(); }
+	EOF;
+
+// Rule QualifiedNameRule
+ruleQualifiedNameRule returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		{
+			newCompositeNode(grammarAccess.getQualifiedNameRuleAccess().getStringOrIdParserRuleCall_0());
+		}
+		this_StringOrId_0=ruleStringOrId
+		{
+			$current.merge(this_StringOrId_0);
+		}
+		{
+			afterParserOrEnumRuleCall();
+		}
+		(
+			kw='.'
+			{
+				$current.merge(kw);
+				newLeafNode(kw, grammarAccess.getQualifiedNameRuleAccess().getFullStopKeyword_1_0());
+			}
+			{
+				newCompositeNode(grammarAccess.getQualifiedNameRuleAccess().getStringOrIdParserRuleCall_1_1());
+			}
+			this_StringOrId_2=ruleStringOrId
+			{
+				$current.merge(this_StringOrId_2);
+			}
+			{
+				afterParserOrEnumRuleCall();
+			}
+		)*
 	)
 ;
 
@@ -1440,7 +1559,7 @@ ruleCallRule returns [EObject current=null]
 						$current,
 						"function",
 						lv_function_0_0,
-						"de.evoal.languages.model.ol.dsl.OptimisationLanguage.FunctionNameRule");
+						"de.evoal.languages.model.el.dsl.ExpressionLanguage.FunctionNameRule");
 					afterParserOrEnumRuleCall();
 				}
 			)
@@ -1498,6 +1617,36 @@ ruleCallRule returns [EObject current=null]
 		otherlv_5=')'
 		{
 			newLeafNode(otherlv_5, grammarAccess.getCallRuleAccess().getRightParenthesisKeyword_3());
+		}
+	)
+;
+
+// Entry rule entryRuleFunctionNameRule
+entryRuleFunctionNameRule returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getFunctionNameRuleRule()); }
+	iv_ruleFunctionNameRule=ruleFunctionNameRule
+	{ $current=$iv_ruleFunctionNameRule.current; }
+	EOF;
+
+// Rule FunctionNameRule
+ruleFunctionNameRule returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			{
+				$current = forceCreateModelElement(
+					grammarAccess.getFunctionNameRuleAccess().getFunctionNameAction_0(),
+					$current);
+			}
+		)
+		otherlv_1='call'
+		{
+			newLeafNode(otherlv_1, grammarAccess.getFunctionNameRuleAccess().getCallKeyword_1());
 		}
 	)
 ;

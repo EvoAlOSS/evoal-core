@@ -151,6 +151,16 @@ public abstract class AbstractDefinitionLanguageRuntimeModule extends DefaultRun
 		return DefinitionLanguageConfigurableIssueCodesProvider.class;
 	}
 	
+	// contributed by org.eclipse.xtext.xtext.generator.generator.GeneratorFragment2
+	public Class<? extends IGenerator2> bindIGenerator2() {
+		return DefinitionLanguageGenerator.class;
+	}
+	
+	// contributed by org.eclipse.xtext.xtext.generator.ecore2xtext.Ecore2XtextValueConverterServiceFragment2
+	public Class<? extends IValueConverterService> bindIValueConverterService() {
+		return Ecore2XtextTerminalConverters.class;
+	}
+	
 	// contributed by org.eclipse.xtext.xtext.generator.scoping.ImportNamespacesScopingFragment2
 	public Class<? extends IScopeProvider> bindIScopeProvider() {
 		return DefinitionLanguageScopeProvider.class;
@@ -194,16 +204,6 @@ public abstract class AbstractDefinitionLanguageRuntimeModule extends DefaultRun
 	// contributed by org.eclipse.xtext.xtext.generator.builder.BuilderIntegrationFragment2
 	public void configureIResourceDescriptionsPersisted(Binder binder) {
 		binder.bind(IResourceDescriptions.class).annotatedWith(Names.named(ResourceDescriptionsProvider.PERSISTED_DESCRIPTIONS)).to(ResourceSetBasedResourceDescriptions.class);
-	}
-	
-	// contributed by org.eclipse.xtext.xtext.generator.generator.GeneratorFragment2
-	public Class<? extends IGenerator2> bindIGenerator2() {
-		return DefinitionLanguageGenerator.class;
-	}
-	
-	// contributed by org.eclipse.xtext.xtext.generator.ecore2xtext.Ecore2XtextValueConverterServiceFragment2
-	public Class<? extends IValueConverterService> bindIValueConverterService() {
-		return Ecore2XtextTerminalConverters.class;
 	}
 	
 }

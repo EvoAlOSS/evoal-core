@@ -9,24 +9,22 @@
   <genPackages prefix="OL" basePackage="de.evoal.languages.model" disposableProviderFactory="true"
       fileExtensions="ol" ecorePackage="model.ecore#/">
     <genClasses ecoreClass="model.ecore#//OptimisationModel">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//OptimisationModel/uses"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//OptimisationModel/instance"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//OptimisationModel/constraints"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//OptimisationModel/imports"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//OptimisationModel/problem"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//OptimisationModel/algorithm"/>
     </genClasses>
-    <genClasses ecoreClass="model.ecore#//Use">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//Use/importURI"/>
+    <genClasses ecoreClass="model.ecore#//Import">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//Import/importedNamespace"/>
     </genClasses>
-    <genClasses ecoreClass="model.ecore#//Constraint">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//Constraint/statements"/>
+    <genClasses ecoreClass="model.ecore#//Problem">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//Problem/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//Problem/problem"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//Problem/documentation"/>
     </genClasses>
-    <genClasses ecoreClass="model.ecore#//ConstraintStatement">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//ConstraintStatement/constraintExpression"/>
-    </genClasses>
-    <genClasses ecoreClass="model.ecore#//FunctionName">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//FunctionName/definition"/>
-    </genClasses>
-    <genClasses ecoreClass="model.ecore#//DataReference">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//DataReference/definition"/>
+    <genClasses ecoreClass="model.ecore#//AlgorithmInstance">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//AlgorithmInstance/problem"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//AlgorithmInstance/algorithm"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//AlgorithmInstance/documentation"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

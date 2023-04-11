@@ -32,49 +32,31 @@ public interface OLFactory extends EFactory {
 	OptimisationModel createOptimisationModel();
 
 	/**
-	 * Returns a new object of class '<em>Use</em>'.
+	 * Returns a new object of class '<em>Import</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Use</em>'.
+	 * @return a new object of class '<em>Import</em>'.
 	 * @generated
 	 */
-	Use createUse();
+	Import createImport();
 
 	/**
-	 * Returns a new object of class '<em>Constraint</em>'.
+	 * Returns a new object of class '<em>Problem</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Constraint</em>'.
+	 * @return a new object of class '<em>Problem</em>'.
 	 * @generated
 	 */
-	Constraint createConstraint();
+	Problem createProblem();
 
 	/**
-	 * Returns a new object of class '<em>Constraint Statement</em>'.
+	 * Returns a new object of class '<em>Algorithm Instance</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Constraint Statement</em>'.
+	 * @return a new object of class '<em>Algorithm Instance</em>'.
 	 * @generated
 	 */
-	ConstraintStatement createConstraintStatement();
-
-	/**
-	 * Returns a new object of class '<em>Function Name</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Function Name</em>'.
-	 * @generated
-	 */
-	FunctionName createFunctionName();
-
-	/**
-	 * Returns a new object of class '<em>Data Reference</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Data Reference</em>'.
-	 * @generated
-	 */
-	DataReference createDataReference();
+	AlgorithmInstance createAlgorithmInstance();
 
 	/**
 	 * Returns the package supported by this factory.

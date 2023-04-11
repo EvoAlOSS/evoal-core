@@ -31,7 +31,6 @@ public abstract class ClasspathGlobalScopeProvider extends ImportUriGlobalScopeP
 		this.name = name;
 	}
 
-	/*
 	@Override
 	protected IScope getScope(Resource resource, boolean ignoreCase, EClass type, Predicate<IEObjectDescription> predicate) {
 		log.info(() -> "Providing scopes for " + resource.toString());
@@ -60,6 +59,5 @@ public abstract class ClasspathGlobalScopeProvider extends ImportUriGlobalScopeP
 		
 		return scope;
 	}
-	*/
 }
 

@@ -9,4 +9,9 @@ public class ValueConverterService extends DefaultTerminalConverters {
     public IValueConverter<String> StringOrId() {
             return new StringStripperConverter();
     }
+
+    @ValueConverter(rule = "QualifiedName")
+    public IValueConverter<String> QualifiedName() {
+            return new QualifiedNameConverter();
+    }
 }

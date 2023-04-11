@@ -58,7 +58,7 @@ public class GeneratorFactoryImpl extends EFactoryImpl implements GeneratorFacto
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case GeneratorPackage.CONFIGURATION: return createConfiguration();
-			case GeneratorPackage.USE: return createUse();
+			case GeneratorPackage.IMPORT: return createImport();
 			case GeneratorPackage.PIPELINE_DEFINITION: return createPipelineDefinition();
 			case GeneratorPackage.STEP: return createStep();
 			case GeneratorPackage.STATEMENT: return createStatement();
@@ -92,9 +92,9 @@ public class GeneratorFactoryImpl extends EFactoryImpl implements GeneratorFacto
 	 * @generated
 	 */
 	@Override
-	public Use createUse() {
-		UseImpl use = new UseImpl();
-		return use;
+	public Import createImport() {
+		ImportImpl import_ = new ImportImpl();
+		return import_;
 	}
 
 	/**

@@ -3,6 +3,25 @@
  */
 package de.evoal.languages.model.dl.util;
 
+import de.evoal.languages.model.dl.ArrayType;
+import de.evoal.languages.model.dl.AttributeDefinition;
+import de.evoal.languages.model.dl.BooleanType;
+import de.evoal.languages.model.dl.DataType;
+import de.evoal.languages.model.dl.DefinedFunctionName;
+import de.evoal.languages.model.dl.DefinitionModel;
+import de.evoal.languages.model.dl.DlPackage;
+import de.evoal.languages.model.dl.ExpressionType;
+import de.evoal.languages.model.dl.FloatType;
+import de.evoal.languages.model.dl.FunctionDefinition;
+import de.evoal.languages.model.dl.InstanceType;
+import de.evoal.languages.model.dl.IntType;
+import de.evoal.languages.model.dl.LiteralType;
+import de.evoal.languages.model.dl.Parameter;
+import de.evoal.languages.model.dl.QualifiedName;
+import de.evoal.languages.model.dl.StringType;
+import de.evoal.languages.model.dl.Type;
+import de.evoal.languages.model.dl.TypeDefinition;
+import de.evoal.languages.model.dl.VoidType;
 import de.evoal.languages.model.dl.*;
 
 import de.evoal.languages.model.el.FunctionName;
@@ -183,6 +202,18 @@ public class DlSwitch<T> extends Switch<T> {
 				DefinedFunctionName definedFunctionName = (DefinedFunctionName)theEObject;
 				T result = caseDefinedFunctionName(definedFunctionName);
 				if (result == null) result = caseFunctionName(definedFunctionName);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case DlPackage.QUALIFIED_NAME: {
+				QualifiedName qualifiedName = (QualifiedName)theEObject;
+				T result = caseQualifiedName(qualifiedName);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case DlPackage.IMPORT: {
+				Import import_ = (Import)theEObject;
+				T result = caseImport(import_);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -442,6 +473,36 @@ public class DlSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseDefinedFunctionName(DefinedFunctionName object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Qualified Name</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Qualified Name</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseQualifiedName(QualifiedName object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Import</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Import</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseImport(Import object) {
 		return null;
 	}
 

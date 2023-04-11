@@ -16,7 +16,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link de.evoal.languages.model.generator.Configuration#getUses <em>Uses</em>}</li>
+ *   <li>{@link de.evoal.languages.model.generator.Configuration#getImports <em>Imports</em>}</li>
  *   <li>{@link de.evoal.languages.model.generator.Configuration#getPipelines <em>Pipelines</em>}</li>
  *   <li>{@link de.evoal.languages.model.generator.Configuration#getStatements <em>Statements</em>}</li>
  * </ul>
@@ -27,16 +27,16 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface Configuration extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Uses</b></em>' containment reference list.
-	 * The list contents are of type {@link de.evoal.languages.model.generator.Use}.
+	 * Returns the value of the '<em><b>Imports</b></em>' containment reference list.
+	 * The list contents are of type {@link de.evoal.languages.model.generator.Import}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Uses</em>' containment reference list.
-	 * @see de.evoal.languages.model.generator.GeneratorPackage#getConfiguration_Uses()
+	 * @return the value of the '<em>Imports</em>' containment reference list.
+	 * @see de.evoal.languages.model.generator.GeneratorPackage#getConfiguration_Imports()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<Use> getUses();
+	EList<Import> getImports();
 
 	/**
 	 * Returns the value of the '<em><b>Pipelines</b></em>' containment reference list.

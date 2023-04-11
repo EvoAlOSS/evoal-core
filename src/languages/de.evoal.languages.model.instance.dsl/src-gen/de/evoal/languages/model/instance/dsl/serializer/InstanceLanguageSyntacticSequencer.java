@@ -54,7 +54,7 @@ public class InstanceLanguageSyntacticSequencer extends AbstractSyntacticSequenc
 	 *     ('{' '}')?
 	 *
 	 * This ambiguous syntax occurs at:
-	 *     definition=[TypeDefinition|StringOrId] (ambiguity) (rule end)
+	 *     definition=[TypeDefinition|QualifiedNameRule] (ambiguity) (rule end)
 	 
 	 * </pre>
 	 */

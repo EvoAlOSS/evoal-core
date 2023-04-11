@@ -15,7 +15,8 @@ Require-Bundle: de.evoal.languages.model.ddl,
  org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
  de.evoal.languages.model.el;bundle-version="1.0.0",
  de.evoal.languages.model.el.dsl;bundle-version="1.0.0",
- de.evoal.languages.model.utils;bundle-version="1.0.0"
+ de.evoal.languages.model.utils;bundle-version="1.0.0",
+ org.eclipse.emf.mwe2.language;bundle-version="2.14.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-17
 Export-Package: de.evoal.languages.model.ddl.dsl.formatting2,
  de.evoal.languages.model.ddl.dsl.parser.antlr.internal,

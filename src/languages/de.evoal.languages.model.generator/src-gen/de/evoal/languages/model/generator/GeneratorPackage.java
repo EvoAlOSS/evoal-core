@@ -68,13 +68,13 @@ public interface GeneratorPackage extends EPackage {
 	int CONFIGURATION = 0;
 
 	/**
-	 * The feature id for the '<em><b>Uses</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Imports</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONFIGURATION__USES = 0;
+	int CONFIGURATION__IMPORTS = 0;
 
 	/**
 	 * The feature id for the '<em><b>Pipelines</b></em>' containment reference list.
@@ -104,32 +104,32 @@ public interface GeneratorPackage extends EPackage {
 	int CONFIGURATION_FEATURE_COUNT = 3;
 
 	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.generator.impl.UseImpl <em>Use</em>}' class.
+	 * The meta object id for the '{@link de.evoal.languages.model.generator.impl.ImportImpl <em>Import</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.generator.impl.UseImpl
-	 * @see de.evoal.languages.model.generator.impl.GeneratorPackageImpl#getUse()
+	 * @see de.evoal.languages.model.generator.impl.ImportImpl
+	 * @see de.evoal.languages.model.generator.impl.GeneratorPackageImpl#getImport()
 	 * @generated
 	 */
-	int USE = 1;
+	int IMPORT = 1;
 
 	/**
-	 * The feature id for the '<em><b>Import URI</b></em>' attribute.
+	 * The feature id for the '<em><b>Imported Namespace</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int USE__IMPORT_URI = 0;
+	int IMPORT__IMPORTED_NAMESPACE = 0;
 
 	/**
-	 * The number of structural features of the '<em>Use</em>' class.
+	 * The number of structural features of the '<em>Import</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int USE_FEATURE_COUNT = 1;
+	int IMPORT_FEATURE_COUNT = 1;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.generator.impl.PipelineDefinitionImpl <em>Pipeline Definition</em>}' class.
@@ -496,15 +496,15 @@ public interface GeneratorPackage extends EPackage {
 	EClass getConfiguration();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.generator.Configuration#getUses <em>Uses</em>}'.
+	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.generator.Configuration#getImports <em>Imports</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Uses</em>'.
-	 * @see de.evoal.languages.model.generator.Configuration#getUses()
+	 * @return the meta object for the containment reference list '<em>Imports</em>'.
+	 * @see de.evoal.languages.model.generator.Configuration#getImports()
 	 * @see #getConfiguration()
 	 * @generated
 	 */
-	EReference getConfiguration_Uses();
+	EReference getConfiguration_Imports();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.generator.Configuration#getPipelines <em>Pipelines</em>}'.
@@ -529,25 +529,25 @@ public interface GeneratorPackage extends EPackage {
 	EReference getConfiguration_Statements();
 
 	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.generator.Use <em>Use</em>}'.
+	 * Returns the meta object for class '{@link de.evoal.languages.model.generator.Import <em>Import</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Use</em>'.
-	 * @see de.evoal.languages.model.generator.Use
+	 * @return the meta object for class '<em>Import</em>'.
+	 * @see de.evoal.languages.model.generator.Import
 	 * @generated
 	 */
-	EClass getUse();
+	EClass getImport();
 
 	/**
-	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.generator.Use#getImportURI <em>Import URI</em>}'.
+	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.generator.Import#getImportedNamespace <em>Imported Namespace</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Import URI</em>'.
-	 * @see de.evoal.languages.model.generator.Use#getImportURI()
-	 * @see #getUse()
+	 * @return the meta object for the attribute '<em>Imported Namespace</em>'.
+	 * @see de.evoal.languages.model.generator.Import#getImportedNamespace()
+	 * @see #getImport()
 	 * @generated
 	 */
-	EAttribute getUse_ImportURI();
+	EAttribute getImport_ImportedNamespace();
 
 	/**
 	 * Returns the meta object for class '{@link de.evoal.languages.model.generator.PipelineDefinition <em>Pipeline Definition</em>}'.
@@ -868,12 +868,12 @@ public interface GeneratorPackage extends EPackage {
 		EClass CONFIGURATION = eINSTANCE.getConfiguration();
 
 		/**
-		 * The meta object literal for the '<em><b>Uses</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Imports</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CONFIGURATION__USES = eINSTANCE.getConfiguration_Uses();
+		EReference CONFIGURATION__IMPORTS = eINSTANCE.getConfiguration_Imports();
 
 		/**
 		 * The meta object literal for the '<em><b>Pipelines</b></em>' containment reference list feature.
@@ -892,22 +892,22 @@ public interface GeneratorPackage extends EPackage {
 		EReference CONFIGURATION__STATEMENTS = eINSTANCE.getConfiguration_Statements();
 
 		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.generator.impl.UseImpl <em>Use</em>}' class.
+		 * The meta object literal for the '{@link de.evoal.languages.model.generator.impl.ImportImpl <em>Import</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.generator.impl.UseImpl
-		 * @see de.evoal.languages.model.generator.impl.GeneratorPackageImpl#getUse()
+		 * @see de.evoal.languages.model.generator.impl.ImportImpl
+		 * @see de.evoal.languages.model.generator.impl.GeneratorPackageImpl#getImport()
 		 * @generated
 		 */
-		EClass USE = eINSTANCE.getUse();
+		EClass IMPORT = eINSTANCE.getImport();
 
 		/**
-		 * The meta object literal for the '<em><b>Import URI</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Imported Namespace</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute USE__IMPORT_URI = eINSTANCE.getUse_ImportURI();
+		EAttribute IMPORT__IMPORTED_NAMESPACE = eINSTANCE.getImport_ImportedNamespace();
 
 		/**
 		 * The meta object literal for the '{@link de.evoal.languages.model.generator.impl.PipelineDefinitionImpl <em>Pipeline Definition</em>}' class.

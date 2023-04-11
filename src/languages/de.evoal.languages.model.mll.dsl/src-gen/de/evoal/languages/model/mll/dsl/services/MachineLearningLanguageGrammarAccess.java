@@ -1019,7 +1019,7 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 	}
 	
 	//InstanceRule returns Instance:
-	//    definition = [dl::TypeDefinition|StringOrId] ('{'
+	//    definition = [dl::TypeDefinition|QualifiedNameRule] ('{'
 	//      attributes += AttributeRule*
 	//    '}')?
 	//;
@@ -1086,6 +1086,16 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 	
 	public ParserRule getDataReferenceRuleRule() {
 		return getDataReferenceRuleAccess().getRule();
+	}
+	
+	//QualifiedNameRule:
+	//    StringOrId ('.' StringOrId)*;
+	public InstanceLanguageGrammarAccess.QualifiedNameRuleElements getQualifiedNameRuleAccess() {
+		return gaInstanceLanguage.getQualifiedNameRuleAccess();
+	}
+	
+	public ParserRule getQualifiedNameRuleRule() {
+		return getQualifiedNameRuleAccess().getRule();
 	}
 	
 	//ExpressionRule returns Expression:

@@ -1,7 +1,5 @@
 package de.evoal.languages.model.utils.converter;
 
-import java.util.regex.Pattern;
-
 import org.eclipse.xtext.conversion.IValueConverter;
 import org.eclipse.xtext.nodemodel.INode;
 
@@ -18,17 +16,18 @@ import org.eclipse.xtext.nodemodel.INode;
  * @author Bernhard J. Berger
  */
 public class StringStripperConverter implements IValueConverter<String> {
-	private final static Pattern ID_PATTERN = Pattern.compile("[^a-zA-Z0-9]");
-	
+
 	@Override
 	public String toValue(final String string, final INode node) {
 		if (string == null) {
 			return null;
 		}
 
-		if (string.startsWith("\"") || string.startsWith("'")) {
+		if (string.startsWith("'")) {
+			System.err.println("SSC toValue " + string + " --> " + string.substring(1, string.length() - 1));
 			return string.substring(1, string.length() - 1);
 		} else {
+			System.err.println("SSC toValue " + string + " --> " + string);
 			return string;
 		}
 	}
@@ -39,14 +38,7 @@ public class StringStripperConverter implements IValueConverter<String> {
 			return null;
 		}
 
-		if (isID(value)) {
-			return value;
-		} else {
-			return "\'" + value + "\'";
-		}
-	}
-
-	private boolean isID(final String value) {
-		return !ID_PATTERN.matcher(value).find();
+		System.err.println("SSC toString " + value + " --> " + String.format("'%s'", value));
+		return String.format("'%s'", value);
 	}
 }

@@ -1,0 +1,18 @@
+import de.evoal.languages.model.generator.dsl.tests.regressions.AttributeLinking.*;
+
+pipeline 'p' [
+	step {
+		component A { 
+			A.xxx := 1.0;
+		}
+	}
+	/* 
+     step {
+     	component   'B' {
+     		
+     	}
+     	reads [data 'x:0'];
+     	writes [data 'x:1'];
+     }
+     */
+]

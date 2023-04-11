@@ -1,18 +1,19 @@
 grammar de.evoal.languages.model.generator.dsl.GeneratorDSL with de.evoal.languages.model.instance.dsl.InstanceLanguage
 
-import "https://www.evoal.de/languages/dl/1.0.0"
+//import "https://www.evoal.de/languages/dl/1.0.0" as dl
 import "https://www.evoal.de/languages/generator/1.0.0"
 
 ConfigurationRule returns Configuration:
-	(uses += UseRule)*
+	(imports += ImportRule)*
 	(pipelines += PipelineDefinitionRule)*
 
 	(statements	+= StatementRule)*
 ;
 
-UseRule returns Use:
-	'use' importURI = STRING ';'
+ImportRule returns Import:
+	'import' importedNamespace = QualifiedNameRule ';'
 ;
+
 
 PipelineDefinitionRule returns PipelineDefinition:
 	'pipeline' name = StringOrId '['

@@ -28,11 +28,11 @@ import de.evoal.languages.model.generator.Configuration;
 import de.evoal.languages.model.generator.CounterRange;
 import de.evoal.languages.model.generator.ForStatement;
 import de.evoal.languages.model.generator.GeneratorPackage;
+import de.evoal.languages.model.generator.Import;
 import de.evoal.languages.model.generator.PipelineArray;
 import de.evoal.languages.model.generator.PipelineDefinition;
 import de.evoal.languages.model.generator.PipelineDefinitionReference;
 import de.evoal.languages.model.generator.Step;
-import de.evoal.languages.model.generator.Use;
 import de.evoal.languages.model.generator.VariableReference;
 import de.evoal.languages.model.generator.dsl.services.GeneratorDSLGrammarAccess;
 import de.evoal.languages.model.instance.Array;
@@ -135,6 +135,9 @@ public class GeneratorDSLSemanticSequencer extends InstanceLanguageSemanticSeque
 			case GeneratorPackage.FOR_STATEMENT:
 				sequence_ForStatementRule(context, (ForStatement) semanticObject); 
 				return; 
+			case GeneratorPackage.IMPORT:
+				sequence_ImportRule(context, (Import) semanticObject); 
+				return; 
 			case GeneratorPackage.PIPELINE_ARRAY:
 				sequence_PipelineArrayRule(context, (PipelineArray) semanticObject); 
 				return; 
@@ -146,9 +149,6 @@ public class GeneratorDSLSemanticSequencer extends InstanceLanguageSemanticSeque
 				return; 
 			case GeneratorPackage.STEP:
 				sequence_StepRule(context, (Step) semanticObject); 
-				return; 
-			case GeneratorPackage.USE:
-				sequence_UseRule(context, (Use) semanticObject); 
 				return; 
 			case GeneratorPackage.VARIABLE_REFERENCE:
 				sequence_VariableReferenceRule(context, (VariableReference) semanticObject); 
@@ -198,8 +198,8 @@ public class GeneratorDSLSemanticSequencer extends InstanceLanguageSemanticSeque
 	 *
 	 * Constraint:
 	 *     (
-	 *         (uses+=UseRule* pipelines+=PipelineDefinitionRule+ statements+=StatementRule+) | 
-	 *         (uses+=UseRule* statements+=StatementRule+) | 
+	 *         (imports+=ImportRule* pipelines+=PipelineDefinitionRule+ statements+=StatementRule+) | 
+	 *         (imports+=ImportRule* statements+=StatementRule+) | 
 	 *         statements+=StatementRule+
 	 *     )?
 	 * </pre>
@@ -245,6 +245,26 @@ public class GeneratorDSLSemanticSequencer extends InstanceLanguageSemanticSeque
 	 */
 	protected void sequence_ForStatementRule(ISerializationContext context, ForStatement semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     ImportRule returns Import
+	 *
+	 * Constraint:
+	 *     importedNamespace=QualifiedNameRule
+	 * </pre>
+	 */
+	protected void sequence_ImportRule(ISerializationContext context, Import semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, GeneratorPackage.Literals.IMPORT__IMPORTED_NAMESPACE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, GeneratorPackage.Literals.IMPORT__IMPORTED_NAMESPACE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getImportRuleAccess().getImportedNamespaceQualifiedNameRuleParserRuleCall_1_0(), semanticObject.getImportedNamespace());
+		feeder.finish();
 	}
 	
 	
@@ -309,26 +329,6 @@ public class GeneratorDSLSemanticSequencer extends InstanceLanguageSemanticSeque
 	 */
 	protected void sequence_StepRule(ISerializationContext context, Step semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * <pre>
-	 * Contexts:
-	 *     UseRule returns Use
-	 *
-	 * Constraint:
-	 *     importURI=STRING
-	 * </pre>
-	 */
-	protected void sequence_UseRule(ISerializationContext context, Use semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, GeneratorPackage.Literals.USE__IMPORT_URI) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, GeneratorPackage.Literals.USE__IMPORT_URI));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getUseRuleAccess().getImportURISTRINGTerminalRuleCall_1_0(), semanticObject.getImportURI());
-		feeder.finish();
 	}
 	
 	
