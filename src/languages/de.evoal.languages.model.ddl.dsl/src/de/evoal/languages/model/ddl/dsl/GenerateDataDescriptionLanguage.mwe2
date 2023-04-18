@@ -27,7 +27,7 @@ Workflow {
 		language = StandardLanguage {
 			name = "de.evoal.languages.model.ddl.dsl.DataDescriptionLanguage"
 			fileExtensions = "ddl"
-			referencedResource = "platform:/resource/de.evoal.languages.model.el/model/model.genmodel"
+			referencedResource = "platform:/resource/de.evoal.languages.model.base/model/model.genmodel"
 			referencedResource = "platform:/resource/de.evoal.languages.model.dl/model/model.genmodel"
 			referencedResource = "platform:/resource/de.evoal.languages.model.ddl/model/model.genmodel"
 			

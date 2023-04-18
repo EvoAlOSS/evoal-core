@@ -3,7 +3,8 @@ package de.evoal.languages.model.dl.dsl.ui.hover;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.ui.editor.hover.html.DefaultEObjectHoverProvider;
 
-import de.evoal.languages.model.dl.AttributeDefinition;
+import de.evoal.languages.model.base.AttributeDefinition;
+
 
 public class DefinitionLanguageEObjectHoverProvider extends DefaultEObjectHoverProvider {
 

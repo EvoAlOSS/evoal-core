@@ -2,7 +2,7 @@
  */
 package de.evoal.languages.model.ddl.impl;
 
-import de.evoal.languages.model.el.Expression;
+import de.evoal.languages.model.base.Expression;
 import de.evoal.languages.model.ddl.DataDescription;
 import de.evoal.languages.model.ddl.DdlPackage;
 import de.evoal.languages.model.ddl.RepresentationType;

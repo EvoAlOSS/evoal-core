@@ -2,7 +2,7 @@ grammar de.evoal.languages.model.mll.dsl.MachineLearningLanguage with de.evoal.l
 
 import "https://www.evoal.de/languages/mll/1.0.0" 
 import "https://www.evoal.de/languages/ddl/1.0.0" as ddl
-import "https://www.evoal.de/languages/dl/1.0.0" as dl
+import "https://www.evoal.de/languages/base/1.0.0" as base
 
 MachineLearningConfigurationRule returns MachineLearningConfiguration:
 	(uses += UseRule)*
@@ -33,7 +33,7 @@ SurrogateLayerDefinitionRule returns SurrogateLayerDefinition:
 ;
 		
 PartialSurrogateFunctionDefinitionRule returns PartialSurrogateFunctionDefinition:
-	"function" name = [dl::TypeDefinition|StringOrId]
+	"function" name = [base::TypeDefinition|StringOrId]
 	"mapping"
 		inputs += [ddl::DataDescription|StringOrId] ("," inputs += [ddl::DataDescription|StringOrId])* 
 	"to"
@@ -84,7 +84,3 @@ CallStatementRule returns CallStatement:
 	call = CallRule ';'
 ;
 
-@Override
-FunctionNameRule returns DefinedFunctionName:
-	definition = [dl::FunctionDefinition|StringOrId]
-;

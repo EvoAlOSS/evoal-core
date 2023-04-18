@@ -20,7 +20,7 @@ import org.eclipse.emf.ecore.EReference;
  * <!-- end-user-doc -->
  * @see de.evoal.languages.model.instance.InstanceFactory
  * @model kind="package"
- *        annotation="http://www.eclipse.org/OCL/Import ddl='platform:/resource/de.evoal.languages.model.ddl/model/model.ecore#/' dl='platform:/resource/de.evoal.languages.model.dl/model/model.ecore#/' el='platform:/resource/de.evoal.languages.model.el/model/model.ecore#/'"
+ *        annotation="http://www.eclipse.org/OCL/Import ddl='platform:/resource/de.evoal.languages.model.ddl/model/model.ecore#/' dl='platform:/resource/de.evoal.languages.model.dl/model/model.ecore#/' el='platform:/resource/de.evoal.languages.model.base/model/model.ecore#/'"
  * @generated
  */
 public interface InstancePackage extends EPackage {

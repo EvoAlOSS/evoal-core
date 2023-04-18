@@ -3,7 +3,7 @@
  */
 package de.evoal.languages.model.instance.impl;
 
-import de.evoal.languages.model.dl.TypeDefinition;
+import de.evoal.languages.model.base.TypeDefinition;
 
 import de.evoal.languages.model.instance.Attribute;
 import de.evoal.languages.model.instance.Instance;

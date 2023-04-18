@@ -8,7 +8,6 @@ import de.evoal.languages.model.generator.GeneratorPackage;
 import de.evoal.languages.model.generator.Import;
 import de.evoal.languages.model.generator.PipelineDefinition;
 import de.evoal.languages.model.generator.Statement;
-import de.evoal.languages.model.generator.Use;
 
 import java.util.Collection;
 

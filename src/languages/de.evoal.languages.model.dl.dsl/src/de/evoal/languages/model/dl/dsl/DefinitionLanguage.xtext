@@ -1,4 +1,4 @@
-grammar de.evoal.languages.model.dl.dsl.DefinitionLanguage with de.evoal.languages.model.el.dsl.ExpressionLanguage
+grammar de.evoal.languages.model.dl.dsl.DefinitionLanguage with de.evoal.languages.model.base.dsl.BaseLanguage
 
 import "https://www.evoal.de/languages/dl/1.0.0"
 
@@ -12,86 +12,4 @@ DefinitionModelRule returns DefinitionModel:
 
 ImportRule returns Import:
 	'import' importedNamespace = QualifiedName ';'
-;
-
-TypeDefinitionRule returns TypeDefinition:
-	(abstract?='abstract')? 'type' name = StringOrId ('extends' superType = [TypeDefinition|QualifiedName])? '{'
-		attributes += AttributeDefinitionRule*
-	'}'
-;
-
-AttributeDefinitionRule returns AttributeDefinition:
-	name = StringOrId ':' type = TypeRule ';'
-;
-
-TypeRule returns Type:
-	StringTypeRule | IntTypeRule | FloatTypeRule | BooleanTypeRule | LiteralTypeRule | ArrayTypeRule | InstanceTypeRule | VoidTypeRule | ExpressionTypeRule | DataTypeRule
-;
-
-LiteralTypeRule returns LiteralType:
-	{LiteralType} 'literal'
-;
-
-InstanceTypeRule returns InstanceType:
-	{InstanceType}
-	'instance' definitions += [TypeDefinition|QualifiedName] ('|' definitions += [TypeDefinition|QualifiedName])*
-;
-
-StringTypeRule returns StringType:
-	{StringType}
-	'string'
-;
-
-ExpressionTypeRule returns ExpressionType:
-	{ExpressionType}
-	'expression'
-;
-
-IntTypeRule returns IntType:
-	{IntType}
-	'int'
-;
-
-FloatTypeRule returns FloatType:
-	{FloatType}
-	'float'
-;
-
-BooleanTypeRule returns BooleanType:
-	{BooleanType}
-	'boolean'
-;
-
-
-VoidTypeRule returns VoidType:
-	{VoidType}
-	'void'
-;
-
-DataTypeRule returns DataType:
-	{DataType}
-	'data'
-;
-
-ArrayTypeRule returns ArrayType:
-	'array'	 elements += TypeRule
-;
-
-
-FunctionDefinitionRule returns FunctionDefinition:
-	'def' type = TypeRule name = StringOrId '(' (parameters+=ParameterRule (',' parameters+=ParameterRule)*)? ')' ';'
-;
-
-ParameterRule returns Parameter:
-	type = TypeRule name = StringOrId
-;
-
-
-@Override
-FunctionNameRule returns DefinedFunctionName:
-	definition = [FunctionDefinition|QualifiedName]
-;
-
-QualifiedName:
-	StringOrId ('.' StringOrId)*
 ;

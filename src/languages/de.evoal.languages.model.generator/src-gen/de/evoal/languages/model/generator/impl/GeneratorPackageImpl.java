@@ -3,11 +3,11 @@
  */
 package de.evoal.languages.model.generator.impl;
 
+import de.evoal.languages.model.base.BasePackage;
+
 import de.evoal.languages.model.ddl.DdlPackage;
 
 import de.evoal.languages.model.dl.DlPackage;
-
-import de.evoal.languages.model.el.ELPackage;
 
 import de.evoal.languages.model.generator.ApplyStatement;
 import de.evoal.languages.model.generator.Configuration;
@@ -23,9 +23,8 @@ import de.evoal.languages.model.generator.PipelineReference;
 import de.evoal.languages.model.generator.Range;
 import de.evoal.languages.model.generator.Statement;
 import de.evoal.languages.model.generator.Step;
-import de.evoal.languages.model.generator.Use;
-
 import de.evoal.languages.model.generator.VariableReference;
+
 import de.evoal.languages.model.instance.InstancePackage;
 
 import org.eclipse.emf.ecore.EAttribute;
@@ -151,7 +150,6 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 	private GeneratorPackageImpl() {
 		super(eNS_URI, GeneratorFactory.eINSTANCE);
 	}
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -183,8 +181,8 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 		// Initialize simple dependencies
 		DdlPackage.eINSTANCE.eClass();
 		DlPackage.eINSTANCE.eClass();
-		ELPackage.eINSTANCE.eClass();
 		InstancePackage.eINSTANCE.eClass();
+		BasePackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
 		theGeneratorPackage.createPackageContents();

@@ -1,19 +1,18 @@
-grammar de.evoal.languages.model.instance.dsl.InstanceLanguage with de.evoal.languages.model.el.dsl.ExpressionLanguage
+grammar de.evoal.languages.model.instance.dsl.InstanceLanguage with de.evoal.languages.model.base.dsl.BaseLanguage
 
 import "https://www.evoal.de/languages/instance/1.0.0" 
 
-import "https://www.evoal.de/languages/dl/1.0.0" as dl
 import "https://www.evoal.de/languages/ddl/1.0.0" as ddl
-import "https://www.evoal.de/languages/el/1.0.0" as el
+import "https://www.evoal.de/languages/base/1.0.0" as base
 
 InstanceRule returns Instance:
-	definition = [dl::TypeDefinition|QualifiedNameRule] ('{'
+	definition = [base::TypeDefinition|QualifiedNameRule] ('{'
 	  attributes += AttributeRule*
 	'}')?
 ;
 
 AttributeRule returns Attribute:
-	definition = [dl::AttributeDefinition|StringOrId] ':=' value = ValueRule ';'
+	definition = [base::AttributeDefinition|StringOrId] ':=' value = ValueRule ';'
 ;
 
 ValueRule returns Value:

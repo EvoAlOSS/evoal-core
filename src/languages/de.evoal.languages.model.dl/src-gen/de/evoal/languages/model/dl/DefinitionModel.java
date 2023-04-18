@@ -3,6 +3,9 @@
  */
 package de.evoal.languages.model.dl;
 
+import de.evoal.languages.model.base.FunctionDefinition;
+import de.evoal.languages.model.base.TypeDefinition;
+
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EObject;
@@ -21,10 +24,10 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
+ *   <li>{@link de.evoal.languages.model.dl.DefinitionModel#getImports <em>Imports</em>}</li>
+ *   <li>{@link de.evoal.languages.model.dl.DefinitionModel#getName <em>Name</em>}</li>
  *   <li>{@link de.evoal.languages.model.dl.DefinitionModel#getTypes <em>Types</em>}</li>
  *   <li>{@link de.evoal.languages.model.dl.DefinitionModel#getFunctions <em>Functions</em>}</li>
- *   <li>{@link de.evoal.languages.model.dl.DefinitionModel#getName <em>Name</em>}</li>
- *   <li>{@link de.evoal.languages.model.dl.DefinitionModel#getImports <em>Imports</em>}</li>
  * </ul>
  *
  * @see de.evoal.languages.model.dl.DlPackage#getDefinitionModel()
@@ -33,35 +36,16 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface DefinitionModel extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Types</b></em>' containment reference list.
-	 * The list contents are of type {@link de.evoal.languages.model.dl.TypeDefinition}.
+	 * Returns the value of the '<em><b>Imports</b></em>' containment reference list.
+	 * The list contents are of type {@link de.evoal.languages.model.dl.Import}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * List of all available types.
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Types</em>' containment reference list.
-	 * @see de.evoal.languages.model.dl.DlPackage#getDefinitionModel_Types()
-	 * @model containment="true" ordered="false"
+	 * @return the value of the '<em>Imports</em>' containment reference list.
+	 * @see de.evoal.languages.model.dl.DlPackage#getDefinitionModel_Imports()
+	 * @model containment="true"
 	 * @generated
 	 */
-	EList<TypeDefinition> getTypes();
-
-	/**
-	 * Returns the value of the '<em><b>Functions</b></em>' containment reference list.
-	 * The list contents are of type {@link de.evoal.languages.model.dl.FunctionDefinition}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * List of all available functions in this definition model.
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Functions</em>' containment reference list.
-	 * @see de.evoal.languages.model.dl.DlPackage#getDefinitionModel_Functions()
-	 * @model containment="true" ordered="false"
-	 *        annotation="http://www.eclipse.org/OCL/Collection nullFree='false'"
-	 * @generated
-	 */
-	EList<FunctionDefinition> getFunctions();
+	EList<Import> getImports();
 
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
@@ -86,15 +70,34 @@ public interface DefinitionModel extends EObject {
 	void setName(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Imports</b></em>' containment reference list.
-	 * The list contents are of type {@link de.evoal.languages.model.dl.Import}.
+	 * Returns the value of the '<em><b>Types</b></em>' containment reference list.
+	 * The list contents are of type {@link de.evoal.languages.model.base.TypeDefinition}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Imports</em>' containment reference list.
-	 * @see de.evoal.languages.model.dl.DlPackage#getDefinitionModel_Imports()
-	 * @model containment="true"
+	 * <!-- begin-model-doc -->
+	 * List of all available types.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Types</em>' containment reference list.
+	 * @see de.evoal.languages.model.dl.DlPackage#getDefinitionModel_Types()
+	 * @model containment="true" ordered="false"
 	 * @generated
 	 */
-	EList<Import> getImports();
+	EList<TypeDefinition> getTypes();
+
+	/**
+	 * Returns the value of the '<em><b>Functions</b></em>' containment reference list.
+	 * The list contents are of type {@link de.evoal.languages.model.base.FunctionDefinition}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * List of all available functions in this definition model.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Functions</em>' containment reference list.
+	 * @see de.evoal.languages.model.dl.DlPackage#getDefinitionModel_Functions()
+	 * @model containment="true" ordered="false"
+	 *        annotation="http://www.eclipse.org/OCL/Collection nullFree='false'"
+	 * @generated
+	 */
+	EList<FunctionDefinition> getFunctions();
 
 } // DefinitionModel

@@ -3,7 +3,7 @@
  */
 package de.evoal.languages.model.instance.impl;
 
-import de.evoal.languages.model.el.Literal;
+import de.evoal.languages.model.base.Literal;
 
 import de.evoal.languages.model.instance.InstancePackage;
 import de.evoal.languages.model.instance.LiteralValue;

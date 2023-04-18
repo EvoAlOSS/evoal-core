@@ -3,7 +3,7 @@
  */
 package de.evoal.languages.model.instance;
 
-import de.evoal.languages.model.el.Literal;
+import de.evoal.languages.model.base.Literal;
 
 /**
  * <!-- begin-user-doc -->

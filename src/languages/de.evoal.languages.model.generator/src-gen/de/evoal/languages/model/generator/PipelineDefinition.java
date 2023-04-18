@@ -3,8 +3,6 @@
  */
 package de.evoal.languages.model.generator;
 
-import de.evoal.languages.model.instance.Instance;
-
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EObject;

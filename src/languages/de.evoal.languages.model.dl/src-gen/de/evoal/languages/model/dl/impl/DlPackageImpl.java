@@ -3,30 +3,13 @@
  */
 package de.evoal.languages.model.dl.impl;
 
-import de.evoal.languages.model.dl.ArrayType;
-import de.evoal.languages.model.dl.AttributeDefinition;
-import de.evoal.languages.model.dl.BooleanType;
-import de.evoal.languages.model.dl.DataType;
-import de.evoal.languages.model.dl.DefinedFunctionName;
+import de.evoal.languages.model.base.BasePackage;
+
 import de.evoal.languages.model.dl.DefinitionModel;
 import de.evoal.languages.model.dl.DlFactory;
 import de.evoal.languages.model.dl.DlPackage;
-import de.evoal.languages.model.dl.ExpressionType;
-import de.evoal.languages.model.dl.FloatType;
-import de.evoal.languages.model.dl.FunctionDefinition;
 import de.evoal.languages.model.dl.Import;
-import de.evoal.languages.model.dl.InstanceType;
-import de.evoal.languages.model.dl.IntType;
-import de.evoal.languages.model.dl.LiteralType;
-import de.evoal.languages.model.dl.Namespace;
-import de.evoal.languages.model.dl.Parameter;
 import de.evoal.languages.model.dl.QualifiedName;
-import de.evoal.languages.model.dl.StringType;
-import de.evoal.languages.model.dl.Type;
-import de.evoal.languages.model.dl.TypeDefinition;
-import de.evoal.languages.model.dl.VoidType;
-
-import de.evoal.languages.model.el.ELPackage;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -48,118 +31,6 @@ public class DlPackageImpl extends EPackageImpl implements DlPackage {
 	 * @generated
 	 */
 	private EClass definitionModelEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass typeDefinitionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass attributeDefinitionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass typeEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass instanceTypeEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass literalTypeEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass stringTypeEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass intTypeEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass floatTypeEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass booleanTypeEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass voidTypeEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass expressionTypeEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass dataTypeEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass arrayTypeEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass functionDefinitionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass parameterEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass definedFunctionNameEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -222,7 +93,7 @@ public class DlPackageImpl extends EPackageImpl implements DlPackage {
 		isInited = true;
 
 		// Initialize simple dependencies
-		ELPackage.eINSTANCE.eClass();
+		BasePackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
 		theDlPackage.createPackageContents();
@@ -254,7 +125,7 @@ public class DlPackageImpl extends EPackageImpl implements DlPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getDefinitionModel_Types() {
+	public EReference getDefinitionModel_Imports() {
 		return (EReference)definitionModelEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -264,18 +135,8 @@ public class DlPackageImpl extends EPackageImpl implements DlPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getDefinitionModel_Functions() {
-		return (EReference)definitionModelEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EAttribute getDefinitionModel_Name() {
-		return (EAttribute)definitionModelEClass.getEStructuralFeatures().get(2);
+		return (EAttribute)definitionModelEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -284,308 +145,18 @@ public class DlPackageImpl extends EPackageImpl implements DlPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getDefinitionModel_Imports() {
+	public EReference getDefinitionModel_Types() {
+		return (EReference)definitionModelEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getDefinitionModel_Functions() {
 		return (EReference)definitionModelEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getTypeDefinition() {
-		return typeDefinitionEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getTypeDefinition_Name() {
-		return (EAttribute)typeDefinitionEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getTypeDefinition_Attributes() {
-		return (EReference)typeDefinitionEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getTypeDefinition_SuperType() {
-		return (EReference)typeDefinitionEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getTypeDefinition_Abstract() {
-		return (EAttribute)typeDefinitionEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getAttributeDefinition() {
-		return attributeDefinitionEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getAttributeDefinition_Type() {
-		return (EReference)attributeDefinitionEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getAttributeDefinition_Name() {
-		return (EAttribute)attributeDefinitionEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getType() {
-		return typeEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getInstanceType() {
-		return instanceTypeEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getInstanceType_Definitions() {
-		return (EReference)instanceTypeEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getLiteralType() {
-		return literalTypeEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getStringType() {
-		return stringTypeEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getIntType() {
-		return intTypeEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getFloatType() {
-		return floatTypeEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getBooleanType() {
-		return booleanTypeEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getVoidType() {
-		return voidTypeEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getExpressionType() {
-		return expressionTypeEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getDataType() {
-		return dataTypeEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getArrayType() {
-		return arrayTypeEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getArrayType_Elements() {
-		return (EReference)arrayTypeEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getFunctionDefinition() {
-		return functionDefinitionEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getFunctionDefinition_Name() {
-		return (EAttribute)functionDefinitionEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getFunctionDefinition_Type() {
-		return (EReference)functionDefinitionEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getFunctionDefinition_Parameters() {
-		return (EReference)functionDefinitionEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getParameter() {
-		return parameterEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getParameter_Name() {
-		return (EAttribute)parameterEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getParameter_Type() {
-		return (EReference)parameterEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getDefinedFunctionName() {
-		return definedFunctionNameEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getDefinedFunctionName_Definition() {
-		return (EReference)definedFunctionNameEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -648,56 +219,10 @@ public class DlPackageImpl extends EPackageImpl implements DlPackage {
 
 		// Create classes and their features
 		definitionModelEClass = createEClass(DEFINITION_MODEL);
+		createEReference(definitionModelEClass, DEFINITION_MODEL__IMPORTS);
+		createEAttribute(definitionModelEClass, DEFINITION_MODEL__NAME);
 		createEReference(definitionModelEClass, DEFINITION_MODEL__TYPES);
 		createEReference(definitionModelEClass, DEFINITION_MODEL__FUNCTIONS);
-		createEAttribute(definitionModelEClass, DEFINITION_MODEL__NAME);
-		createEReference(definitionModelEClass, DEFINITION_MODEL__IMPORTS);
-
-		typeDefinitionEClass = createEClass(TYPE_DEFINITION);
-		createEAttribute(typeDefinitionEClass, TYPE_DEFINITION__NAME);
-		createEReference(typeDefinitionEClass, TYPE_DEFINITION__ATTRIBUTES);
-		createEReference(typeDefinitionEClass, TYPE_DEFINITION__SUPER_TYPE);
-		createEAttribute(typeDefinitionEClass, TYPE_DEFINITION__ABSTRACT);
-
-		attributeDefinitionEClass = createEClass(ATTRIBUTE_DEFINITION);
-		createEReference(attributeDefinitionEClass, ATTRIBUTE_DEFINITION__TYPE);
-		createEAttribute(attributeDefinitionEClass, ATTRIBUTE_DEFINITION__NAME);
-
-		typeEClass = createEClass(TYPE);
-
-		instanceTypeEClass = createEClass(INSTANCE_TYPE);
-		createEReference(instanceTypeEClass, INSTANCE_TYPE__DEFINITIONS);
-
-		literalTypeEClass = createEClass(LITERAL_TYPE);
-
-		stringTypeEClass = createEClass(STRING_TYPE);
-
-		intTypeEClass = createEClass(INT_TYPE);
-
-		floatTypeEClass = createEClass(FLOAT_TYPE);
-
-		booleanTypeEClass = createEClass(BOOLEAN_TYPE);
-
-		voidTypeEClass = createEClass(VOID_TYPE);
-
-		expressionTypeEClass = createEClass(EXPRESSION_TYPE);
-
-		dataTypeEClass = createEClass(DATA_TYPE);
-
-		arrayTypeEClass = createEClass(ARRAY_TYPE);
-		createEReference(arrayTypeEClass, ARRAY_TYPE__ELEMENTS);
-
-		functionDefinitionEClass = createEClass(FUNCTION_DEFINITION);
-		createEAttribute(functionDefinitionEClass, FUNCTION_DEFINITION__NAME);
-		createEReference(functionDefinitionEClass, FUNCTION_DEFINITION__TYPE);
-		createEReference(functionDefinitionEClass, FUNCTION_DEFINITION__PARAMETERS);
-
-		parameterEClass = createEClass(PARAMETER);
-		createEAttribute(parameterEClass, PARAMETER__NAME);
-		createEReference(parameterEClass, PARAMETER__TYPE);
-
-		definedFunctionNameEClass = createEClass(DEFINED_FUNCTION_NAME);
-		createEReference(definedFunctionNameEClass, DEFINED_FUNCTION_NAME__DEFINITION);
 
 		qualifiedNameEClass = createEClass(QUALIFIED_NAME);
 
@@ -729,77 +254,20 @@ public class DlPackageImpl extends EPackageImpl implements DlPackage {
 		setNsURI(eNS_URI);
 
 		// Obtain other dependent packages
-		ELPackage theELPackage = (ELPackage)EPackage.Registry.INSTANCE.getEPackage(ELPackage.eNS_URI);
+		BasePackage theBasePackage = (BasePackage)EPackage.Registry.INSTANCE.getEPackage(BasePackage.eNS_URI);
 
 		// Create type parameters
 
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
-		instanceTypeEClass.getESuperTypes().add(this.getType());
-		literalTypeEClass.getESuperTypes().add(this.getType());
-		stringTypeEClass.getESuperTypes().add(this.getLiteralType());
-		intTypeEClass.getESuperTypes().add(this.getLiteralType());
-		floatTypeEClass.getESuperTypes().add(this.getLiteralType());
-		booleanTypeEClass.getESuperTypes().add(this.getLiteralType());
-		voidTypeEClass.getESuperTypes().add(this.getType());
-		expressionTypeEClass.getESuperTypes().add(this.getType());
-		dataTypeEClass.getESuperTypes().add(this.getType());
-		arrayTypeEClass.getESuperTypes().add(this.getType());
-		definedFunctionNameEClass.getESuperTypes().add(theELPackage.getFunctionName());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(definitionModelEClass, DefinitionModel.class, "DefinitionModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getDefinitionModel_Types(), this.getTypeDefinition(), null, "types", null, 0, -1, DefinitionModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEReference(getDefinitionModel_Functions(), this.getFunctionDefinition(), null, "functions", null, 0, -1, DefinitionModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEAttribute(getDefinitionModel_Name(), ecorePackage.getEString(), "name", null, 1, 1, DefinitionModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDefinitionModel_Imports(), this.getImport(), null, "imports", null, 0, -1, DefinitionModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(typeDefinitionEClass, TypeDefinition.class, "TypeDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getTypeDefinition_Name(), ecorePackage.getEString(), "name", null, 0, 1, TypeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTypeDefinition_Attributes(), this.getAttributeDefinition(), null, "attributes", null, 0, -1, TypeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEReference(getTypeDefinition_SuperType(), this.getTypeDefinition(), null, "superType", null, 0, 1, TypeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getTypeDefinition_Abstract(), ecorePackage.getEBoolean(), "abstract", "false", 1, 1, TypeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(attributeDefinitionEClass, AttributeDefinition.class, "AttributeDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getAttributeDefinition_Type(), this.getType(), null, "type", null, 1, 1, AttributeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAttributeDefinition_Name(), ecorePackage.getEString(), "name", null, 1, 1, AttributeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(typeEClass, Type.class, "Type", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(instanceTypeEClass, InstanceType.class, "InstanceType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getInstanceType_Definitions(), this.getTypeDefinition(), null, "definitions", null, 0, -1, InstanceType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-
-		initEClass(literalTypeEClass, LiteralType.class, "LiteralType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(stringTypeEClass, StringType.class, "StringType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(intTypeEClass, IntType.class, "IntType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(floatTypeEClass, FloatType.class, "FloatType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(booleanTypeEClass, BooleanType.class, "BooleanType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(voidTypeEClass, VoidType.class, "VoidType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(expressionTypeEClass, ExpressionType.class, "ExpressionType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(dataTypeEClass, DataType.class, "DataType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(arrayTypeEClass, ArrayType.class, "ArrayType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getArrayType_Elements(), this.getType(), null, "elements", null, 1, -1, ArrayType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-
-		initEClass(functionDefinitionEClass, FunctionDefinition.class, "FunctionDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getFunctionDefinition_Name(), ecorePackage.getEString(), "name", null, 1, 1, FunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getFunctionDefinition_Type(), this.getType(), null, "type", null, 1, 1, FunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getFunctionDefinition_Parameters(), this.getParameter(), null, "parameters", null, 0, -1, FunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(parameterEClass, Parameter.class, "Parameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getParameter_Name(), ecorePackage.getEString(), "name", null, 1, 1, Parameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getParameter_Type(), this.getType(), null, "type", null, 1, 1, Parameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(definedFunctionNameEClass, DefinedFunctionName.class, "DefinedFunctionName", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getDefinedFunctionName_Definition(), this.getFunctionDefinition(), null, "definition", null, 1, 1, DefinedFunctionName.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDefinitionModel_Name(), ecorePackage.getEString(), "name", null, 1, 1, DefinitionModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDefinitionModel_Types(), theBasePackage.getTypeDefinition(), null, "types", null, 0, -1, DefinitionModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getDefinitionModel_Functions(), theBasePackage.getFunctionDefinition(), null, "functions", null, 0, -1, DefinitionModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		initEClass(qualifiedNameEClass, QualifiedName.class, "QualifiedName", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -828,7 +296,7 @@ public class DlPackageImpl extends EPackageImpl implements DlPackage {
 		  (this,
 		   source,
 		   new String[] {
-			   "el", "platform:/resource/de.evoal.languages.model.el/model/model.ecore#/"
+			   "el", "platform:/resource/de.evoal.languages.model.base/model/model.ecore#/"
 		   });
 	}
 
@@ -842,18 +310,6 @@ public class DlPackageImpl extends EPackageImpl implements DlPackage {
 		String source = "http://www.eclipse.org/OCL/Collection";
 		addAnnotation
 		  (getDefinitionModel_Functions(),
-		   source,
-		   new String[] {
-			   "nullFree", "false"
-		   });
-		addAnnotation
-		  (getArrayType_Elements(),
-		   source,
-		   new String[] {
-			   "nullFree", "false"
-		   });
-		addAnnotation
-		  (getFunctionDefinition_Parameters(),
 		   source,
 		   new String[] {
 			   "nullFree", "false"

@@ -32,12 +32,12 @@ public interface TypedDataDescription extends DataDescription {
 	 * The type associated to this data description.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Type</em>' reference.
-	 * @see #setType(DataType)
+	 * @see #setType(DataTypeDefinition)
 	 * @see de.evoal.languages.model.ddl.DdlPackage#getTypedDataDescription_Type()
 	 * @model required="true"
 	 * @generated
 	 */
-	DataType getType();
+	DataTypeDefinition getType();
 
 	/**
 	 * Sets the value of the '{@link de.evoal.languages.model.ddl.TypedDataDescription#getType <em>Type</em>}' reference.
@@ -47,7 +47,7 @@ public interface TypedDataDescription extends DataDescription {
 	 * @see #getType()
 	 * @generated
 	 */
-	void setType(DataType value);
+	void setType(DataTypeDefinition value);
 
 	/**
 	 * <!-- begin-user-doc -->

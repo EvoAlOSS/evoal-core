@@ -5,13 +5,13 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.scoping.IScope;
 
-import de.evoal.languages.model.dl.DlPackage;
-import de.evoal.languages.model.dl.TypeDefinition;
+import de.evoal.languages.model.base.BasePackage;
+import de.evoal.languages.model.base.TypeDefinition;
 import de.evoal.languages.model.utils.scoping.WildcardEnabledLocalScopeProvider;
 
 public class DefinitionLanguageLocalScopeProvider extends WildcardEnabledLocalScopeProvider {
-	private static EClass typeDefinition = DlPackage.eINSTANCE.getTypeDefinition();
-	private static EReference attributes = DlPackage.eINSTANCE.getTypeDefinition_Attributes();
+	private static EClass typeDefinition = BasePackage.eINSTANCE.getTypeDefinition();
+	private static EReference attributes = BasePackage.eINSTANCE.getTypeDefinition_Attributes();
 	
 	@Override
 	public IScope getScope(final EObject context, final EReference reference) {

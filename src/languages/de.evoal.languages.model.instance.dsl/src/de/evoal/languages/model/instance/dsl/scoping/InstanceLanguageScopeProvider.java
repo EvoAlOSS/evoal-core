@@ -6,24 +6,14 @@ package de.evoal.languages.model.instance.dsl.scoping;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.Collectors;
-
-import javax.inject.Inject;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.xtext.naming.IQualifiedNameProvider;
-import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.Scopes;
-import org.eclipse.xtext.scoping.impl.FilteringScope;
 
-import de.evoal.languages.model.ddl.dsl.scoping.DataDescriptionLanguageScopeProvider;
-import de.evoal.languages.model.dl.AttributeDefinition;
-import de.evoal.languages.model.dl.InstanceType;
-import de.evoal.languages.model.dl.TypeDefinition;
-import de.evoal.languages.model.instance.Attribute;
+import de.evoal.languages.model.base.TypeDefinition;
 import de.evoal.languages.model.instance.Instance;
 import de.evoal.languages.model.instance.InstancePackage;
 

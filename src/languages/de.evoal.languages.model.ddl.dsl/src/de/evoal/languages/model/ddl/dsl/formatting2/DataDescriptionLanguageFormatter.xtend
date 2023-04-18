@@ -4,8 +4,8 @@
  */
 package de.evoal.languages.model.ddl.dsl.formatting2
 
-import de.evoal.languages.model.el.dsl.formatting2.ExpressionLanguageFormatter
+import de.evoal.languages.model.base.dsl.formatting2.BaseLanguageFormatter
 
-class DataDescriptionLanguageFormatter extends ExpressionLanguageFormatter {
+class DataDescriptionLanguageFormatter extends BaseLanguageFormatter {
 
 }

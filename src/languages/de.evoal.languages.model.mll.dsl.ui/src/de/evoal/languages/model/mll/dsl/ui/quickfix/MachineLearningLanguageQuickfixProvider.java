@@ -4,14 +4,14 @@
  */
 package de.evoal.languages.model.mll.dsl.ui.quickfix;
 
-import de.evoal.languages.model.el.dsl.ui.quickfix.ExpressionLanguageQuickfixProvider;
+import de.evoal.languages.model.base.dsl.ui.quickfix.BaseLanguageQuickfixProvider;
 
 /**
  * Custom quickfixes.
  *
  * See https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#quick-fixes
  */
-public class MachineLearningLanguageQuickfixProvider extends ExpressionLanguageQuickfixProvider {
+public class MachineLearningLanguageQuickfixProvider extends BaseLanguageQuickfixProvider {
 
 //	@Fix(MachineLearningLanguageValidator.INVALID_NAME)
 //	public void capitalizeName(final Issue issue, IssueResolutionAcceptor acceptor) {

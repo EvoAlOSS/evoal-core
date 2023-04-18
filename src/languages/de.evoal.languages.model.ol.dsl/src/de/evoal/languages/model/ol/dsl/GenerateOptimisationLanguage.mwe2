@@ -29,9 +29,8 @@ Workflow {
                         fileExtensions = "ol"
                         referencedResource = "platform:/resource/de.evoal.languages.model.instance/model/model.genmodel"
                         referencedResource = "platform:/resource/de.evoal.languages.model.ol/model/model.genmodel"
-                        referencedResource = "platform:/resource/de.evoal.languages.model.dl/model/model.genmodel"
+                        referencedResource = "platform:/resource/de.evoal.languages.model.base/model/model.genmodel"
                         referencedResource = "platform:/resource/de.evoal.languages.model.ddl/model/model.genmodel"
-                        referencedResource = "platform:/resource/de.evoal.languages.model.el/model/model.genmodel"
 
                         serializer = {
                                 generateStub = false

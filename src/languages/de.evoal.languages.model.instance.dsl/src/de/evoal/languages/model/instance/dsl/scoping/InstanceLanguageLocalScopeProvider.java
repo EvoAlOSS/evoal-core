@@ -9,11 +9,8 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.Scopes;
 
-import com.google.inject.Inject;
-
-import de.evoal.languages.model.dl.AttributeDefinition;
-import de.evoal.languages.model.dl.TypeDefinition;
-import de.evoal.languages.model.dl.dsl.scoping.DefinitionLanguageLocalScopeProvider;
+import de.evoal.languages.model.base.AttributeDefinition;
+import de.evoal.languages.model.base.TypeDefinition;
 import de.evoal.languages.model.instance.Instance;
 import de.evoal.languages.model.instance.InstancePackage;
 import de.evoal.languages.model.utils.scoping.WildcardEnabledLocalScopeProvider;

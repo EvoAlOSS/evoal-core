@@ -2,8 +2,6 @@
  */
 package de.evoal.languages.model.mll;
 
-import de.evoal.languages.model.el.StringLiteral;
-
 import org.eclipse.emf.common.util.EList;
 
 /**
@@ -25,7 +23,7 @@ import org.eclipse.emf.common.util.EList;
 public interface StringLiteralRange extends Range {
 	/**
 	 * Returns the value of the '<em><b>Elements</b></em>' containment reference list.
-	 * The list contents are of type {@link de.evoal.languages.model.el.StringLiteral}.
+	 * The list contents are of type {@link de.evoal.languages.model.base.StringLiteral}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Elements</em>' containment reference list.
@@ -34,6 +32,6 @@ public interface StringLiteralRange extends Range {
 	 *        annotation="http://www.eclipse.org/OCL/Collection nullFree='false'"
 	 * @generated
 	 */
-	EList<StringLiteral> getElements();
+	EList<de.evoal.languages.model.base.StringLiteral> getElements();
 
 } // StringLiteralRange

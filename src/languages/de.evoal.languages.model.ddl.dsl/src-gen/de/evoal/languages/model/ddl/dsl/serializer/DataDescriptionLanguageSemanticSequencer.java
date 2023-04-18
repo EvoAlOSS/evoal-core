@@ -5,34 +5,47 @@
 package de.evoal.languages.model.ddl.dsl.serializer;
 
 import com.google.inject.Inject;
+import de.evoal.languages.model.base.AddOrSubtractExpression;
+import de.evoal.languages.model.base.AndExpression;
+import de.evoal.languages.model.base.ArrayType;
+import de.evoal.languages.model.base.AttributeDefinition;
+import de.evoal.languages.model.base.BasePackage;
+import de.evoal.languages.model.base.BooleanLiteral;
+import de.evoal.languages.model.base.BooleanType;
+import de.evoal.languages.model.base.Call;
+import de.evoal.languages.model.base.ComparisonExpression;
+import de.evoal.languages.model.base.DataType;
+import de.evoal.languages.model.base.DefinedFunctionName;
+import de.evoal.languages.model.base.DoubleLiteral;
+import de.evoal.languages.model.base.ExpressionType;
+import de.evoal.languages.model.base.FloatType;
+import de.evoal.languages.model.base.FunctionDefinition;
+import de.evoal.languages.model.base.InstanceType;
+import de.evoal.languages.model.base.IntType;
+import de.evoal.languages.model.base.IntegerLiteral;
+import de.evoal.languages.model.base.LiteralType;
+import de.evoal.languages.model.base.MultiplyDivideModuloExpression;
+import de.evoal.languages.model.base.NotExpression;
+import de.evoal.languages.model.base.OrExpression;
+import de.evoal.languages.model.base.Parantheses;
+import de.evoal.languages.model.base.PartialComparisonExpression;
+import de.evoal.languages.model.base.PowerOfExpression;
+import de.evoal.languages.model.base.StringLiteral;
+import de.evoal.languages.model.base.StringType;
+import de.evoal.languages.model.base.TypeDefinition;
+import de.evoal.languages.model.base.UnaryAddOrSubtractExpression;
+import de.evoal.languages.model.base.VoidType;
+import de.evoal.languages.model.base.XorExpression;
+import de.evoal.languages.model.base.dsl.serializer.BaseLanguageSemanticSequencer;
 import de.evoal.languages.model.ddl.DataDescriptionModel;
 import de.evoal.languages.model.ddl.DataReference;
-import de.evoal.languages.model.ddl.DataType;
+import de.evoal.languages.model.ddl.DataTypeDefinition;
 import de.evoal.languages.model.ddl.DdlPackage;
-import de.evoal.languages.model.ddl.FunctionName;
 import de.evoal.languages.model.ddl.SelfReference;
 import de.evoal.languages.model.ddl.TypedDataDescription;
 import de.evoal.languages.model.ddl.UntypedDataDescription;
 import de.evoal.languages.model.ddl.Use;
 import de.evoal.languages.model.ddl.dsl.services.DataDescriptionLanguageGrammarAccess;
-import de.evoal.languages.model.el.AddOrSubtractExpression;
-import de.evoal.languages.model.el.AndExpression;
-import de.evoal.languages.model.el.BooleanLiteral;
-import de.evoal.languages.model.el.Call;
-import de.evoal.languages.model.el.ComparisonExpression;
-import de.evoal.languages.model.el.DoubleLiteral;
-import de.evoal.languages.model.el.ELPackage;
-import de.evoal.languages.model.el.IntegerLiteral;
-import de.evoal.languages.model.el.MultiplyDivideModuloExpression;
-import de.evoal.languages.model.el.NotExpression;
-import de.evoal.languages.model.el.OrExpression;
-import de.evoal.languages.model.el.Parantheses;
-import de.evoal.languages.model.el.PartialComparisonExpression;
-import de.evoal.languages.model.el.PowerOfExpression;
-import de.evoal.languages.model.el.StringLiteral;
-import de.evoal.languages.model.el.UnaryAddOrSubtractExpression;
-import de.evoal.languages.model.el.XorExpression;
-import de.evoal.languages.model.el.dsl.serializer.ExpressionLanguageSemanticSequencer;
 import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -44,7 +57,7 @@ import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 
 @SuppressWarnings("all")
-public class DataDescriptionLanguageSemanticSequencer extends ExpressionLanguageSemanticSequencer {
+public class DataDescriptionLanguageSemanticSequencer extends BaseLanguageSemanticSequencer {
 
 	@Inject
 	private DataDescriptionLanguageGrammarAccess grammarAccess;
@@ -55,7 +68,103 @@ public class DataDescriptionLanguageSemanticSequencer extends ExpressionLanguage
 		ParserRule rule = context.getParserRule();
 		Action action = context.getAssignedAction();
 		Set<Parameter> parameters = context.getEnabledBooleanParameters();
-		if (epackage == DdlPackage.eINSTANCE)
+		if (epackage == BasePackage.eINSTANCE)
+			switch (semanticObject.eClass().getClassifierID()) {
+			case BasePackage.ADD_OR_SUBTRACT_EXPRESSION:
+				sequence_AddOrSubtractExpressionRule(context, (AddOrSubtractExpression) semanticObject); 
+				return; 
+			case BasePackage.AND_EXPRESSION:
+				sequence_AndExpressionRule(context, (AndExpression) semanticObject); 
+				return; 
+			case BasePackage.ARRAY_TYPE:
+				sequence_ArrayTypeRule(context, (ArrayType) semanticObject); 
+				return; 
+			case BasePackage.ATTRIBUTE_DEFINITION:
+				sequence_AttributeDefinitionRule(context, (AttributeDefinition) semanticObject); 
+				return; 
+			case BasePackage.BOOLEAN_LITERAL:
+				sequence_BooleanLiteralRule(context, (BooleanLiteral) semanticObject); 
+				return; 
+			case BasePackage.BOOLEAN_TYPE:
+				sequence_BooleanTypeRule(context, (BooleanType) semanticObject); 
+				return; 
+			case BasePackage.CALL:
+				sequence_CallRule(context, (Call) semanticObject); 
+				return; 
+			case BasePackage.COMPARISON_EXPRESSION:
+				sequence_ComparisonExpressionRule(context, (ComparisonExpression) semanticObject); 
+				return; 
+			case BasePackage.DATA_TYPE:
+				sequence_DataTypeRule(context, (DataType) semanticObject); 
+				return; 
+			case BasePackage.DEFINED_FUNCTION_NAME:
+				sequence_FunctionNameRule(context, (DefinedFunctionName) semanticObject); 
+				return; 
+			case BasePackage.DOUBLE_LITERAL:
+				sequence_DoubleLiteralRule(context, (DoubleLiteral) semanticObject); 
+				return; 
+			case BasePackage.EXPRESSION_TYPE:
+				sequence_ExpressionTypeRule(context, (ExpressionType) semanticObject); 
+				return; 
+			case BasePackage.FLOAT_TYPE:
+				sequence_FloatTypeRule(context, (FloatType) semanticObject); 
+				return; 
+			case BasePackage.FUNCTION_DEFINITION:
+				sequence_FunctionDefinitionRule(context, (FunctionDefinition) semanticObject); 
+				return; 
+			case BasePackage.INSTANCE_TYPE:
+				sequence_InstanceTypeRule(context, (InstanceType) semanticObject); 
+				return; 
+			case BasePackage.INT_TYPE:
+				sequence_IntTypeRule(context, (IntType) semanticObject); 
+				return; 
+			case BasePackage.INTEGER_LITERAL:
+				sequence_IntegerLiteralRule(context, (IntegerLiteral) semanticObject); 
+				return; 
+			case BasePackage.LITERAL_TYPE:
+				sequence_LiteralTypeRule(context, (LiteralType) semanticObject); 
+				return; 
+			case BasePackage.MULTIPLY_DIVIDE_MODULO_EXPRESSION:
+				sequence_MultiplyDivideModuloExpressionRule(context, (MultiplyDivideModuloExpression) semanticObject); 
+				return; 
+			case BasePackage.NOT_EXPRESSION:
+				sequence_NotExpressionRule(context, (NotExpression) semanticObject); 
+				return; 
+			case BasePackage.OR_EXPRESSION:
+				sequence_OrExpressionRule(context, (OrExpression) semanticObject); 
+				return; 
+			case BasePackage.PARAMETER:
+				sequence_ParameterRule(context, (de.evoal.languages.model.base.Parameter) semanticObject); 
+				return; 
+			case BasePackage.PARANTHESES:
+				sequence_ParanthesesRule(context, (Parantheses) semanticObject); 
+				return; 
+			case BasePackage.PARTIAL_COMPARISON_EXPRESSION:
+				sequence_PartialComparisonExpressionRule(context, (PartialComparisonExpression) semanticObject); 
+				return; 
+			case BasePackage.POWER_OF_EXPRESSION:
+				sequence_PowerOfExpressionRule(context, (PowerOfExpression) semanticObject); 
+				return; 
+			case BasePackage.STRING_LITERAL:
+				sequence_StringLiteralRule(context, (StringLiteral) semanticObject); 
+				return; 
+			case BasePackage.STRING_TYPE:
+				sequence_StringTypeRule(context, (StringType) semanticObject); 
+				return; 
+			case BasePackage.TYPE_DEFINITION:
+				sequence_TypeDefinitionRule(context, (TypeDefinition) semanticObject); 
+				return; 
+			case BasePackage.UNARY_ADD_OR_SUBTRACT_EXPRESSION:
+				sequence_UnaryAddOrSubtractExpressionRule(context, (UnaryAddOrSubtractExpression) semanticObject); 
+				return; 
+			case BasePackage.VOID_TYPE:
+				sequence_VoidTypeRule(context, (VoidType) semanticObject); 
+				return; 
+			case BasePackage.XOR_EXPRESSION:
+				sequence_XorExpressionRule(context, (XorExpression) semanticObject); 
+				return; 
+			}
+		else if (epackage == DdlPackage.eINSTANCE)
 			switch (semanticObject.eClass().getClassifierID()) {
 			case DdlPackage.DATA_DESCRIPTION_MODEL:
 				sequence_DataDescriptionModelRule(context, (DataDescriptionModel) semanticObject); 
@@ -63,11 +172,8 @@ public class DataDescriptionLanguageSemanticSequencer extends ExpressionLanguage
 			case DdlPackage.DATA_REFERENCE:
 				sequence_DataReferenceRule(context, (DataReference) semanticObject); 
 				return; 
-			case DdlPackage.DATA_TYPE:
-				sequence_DataTypeRule(context, (DataType) semanticObject); 
-				return; 
-			case DdlPackage.FUNCTION_NAME:
-				sequence_FunctionNameRule(context, (FunctionName) semanticObject); 
+			case DdlPackage.DATA_TYPE_DEFINITION:
+				sequence_DataTypeDefinitionRule(context, (DataTypeDefinition) semanticObject); 
 				return; 
 			case DdlPackage.SELF_REFERENCE:
 				sequence_SelfReferenceRule(context, (SelfReference) semanticObject); 
@@ -82,57 +188,6 @@ public class DataDescriptionLanguageSemanticSequencer extends ExpressionLanguage
 				sequence_UseRule(context, (Use) semanticObject); 
 				return; 
 			}
-		else if (epackage == ELPackage.eINSTANCE)
-			switch (semanticObject.eClass().getClassifierID()) {
-			case ELPackage.ADD_OR_SUBTRACT_EXPRESSION:
-				sequence_AddOrSubtractExpressionRule(context, (AddOrSubtractExpression) semanticObject); 
-				return; 
-			case ELPackage.AND_EXPRESSION:
-				sequence_AndExpressionRule(context, (AndExpression) semanticObject); 
-				return; 
-			case ELPackage.BOOLEAN_LITERAL:
-				sequence_BooleanLiteralRule(context, (BooleanLiteral) semanticObject); 
-				return; 
-			case ELPackage.CALL:
-				sequence_CallRule(context, (Call) semanticObject); 
-				return; 
-			case ELPackage.COMPARISON_EXPRESSION:
-				sequence_ComparisonExpressionRule(context, (ComparisonExpression) semanticObject); 
-				return; 
-			case ELPackage.DOUBLE_LITERAL:
-				sequence_DoubleLiteralRule(context, (DoubleLiteral) semanticObject); 
-				return; 
-			case ELPackage.INTEGER_LITERAL:
-				sequence_IntegerLiteralRule(context, (IntegerLiteral) semanticObject); 
-				return; 
-			case ELPackage.MULTIPLY_DIVIDE_MODULO_EXPRESSION:
-				sequence_MultiplyDivideModuloExpressionRule(context, (MultiplyDivideModuloExpression) semanticObject); 
-				return; 
-			case ELPackage.NOT_EXPRESSION:
-				sequence_NotExpressionRule(context, (NotExpression) semanticObject); 
-				return; 
-			case ELPackage.OR_EXPRESSION:
-				sequence_OrExpressionRule(context, (OrExpression) semanticObject); 
-				return; 
-			case ELPackage.PARANTHESES:
-				sequence_ParanthesesRule(context, (Parantheses) semanticObject); 
-				return; 
-			case ELPackage.PARTIAL_COMPARISON_EXPRESSION:
-				sequence_PartialComparisonExpressionRule(context, (PartialComparisonExpression) semanticObject); 
-				return; 
-			case ELPackage.POWER_OF_EXPRESSION:
-				sequence_PowerOfExpressionRule(context, (PowerOfExpression) semanticObject); 
-				return; 
-			case ELPackage.STRING_LITERAL:
-				sequence_StringLiteralRule(context, (StringLiteral) semanticObject); 
-				return; 
-			case ELPackage.UNARY_ADD_OR_SUBTRACT_EXPRESSION:
-				sequence_UnaryAddOrSubtractExpressionRule(context, (UnaryAddOrSubtractExpression) semanticObject); 
-				return; 
-			case ELPackage.XOR_EXPRESSION:
-				sequence_XorExpressionRule(context, (XorExpression) semanticObject); 
-				return; 
-			}
 		if (errorAcceptor != null)
 			errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
@@ -143,7 +198,7 @@ public class DataDescriptionLanguageSemanticSequencer extends ExpressionLanguage
 	 *     DataDescriptionModelRule returns DataDescriptionModel
 	 *
 	 * Constraint:
-	 *     (uses+=UseRule* types+=DataTypeRule* descriptions+=DataDescriptionRule* constraints+=StatementRule*)
+	 *     (uses+=UseRule* types+=DataTypeDefinitionRule* descriptions+=DataDescriptionRule* constraints+=StatementRule*)
 	 * </pre>
 	 */
 	protected void sequence_DataDescriptionModelRule(ISerializationContext context, DataDescriptionModel semanticObject) {
@@ -176,34 +231,14 @@ public class DataDescriptionLanguageSemanticSequencer extends ExpressionLanguage
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     DataTypeRule returns DataType
+	 *     DataTypeDefinitionRule returns DataTypeDefinition
 	 *
 	 * Constraint:
 	 *     (scale=ScaleType name=StringOrId description=STRING? constraints+=StatementRule*)
 	 * </pre>
 	 */
-	protected void sequence_DataTypeRule(ISerializationContext context, DataType semanticObject) {
+	protected void sequence_DataTypeDefinitionRule(ISerializationContext context, DataTypeDefinition semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * <pre>
-	 * Contexts:
-	 *     FunctionNameRule returns FunctionName
-	 *
-	 * Constraint:
-	 *     definition=[FunctionDefinition|ID]
-	 * </pre>
-	 */
-	protected void sequence_FunctionNameRule(ISerializationContext context, FunctionName semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, DdlPackage.Literals.FUNCTION_NAME__DEFINITION) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DdlPackage.Literals.FUNCTION_NAME__DEFINITION));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getFunctionNameRuleAccess().getDefinitionFunctionDefinitionIDTerminalRuleCall_0_1(), semanticObject.eGet(DdlPackage.Literals.FUNCTION_NAME__DEFINITION, false));
-		feeder.finish();
 	}
 	
 	
@@ -230,7 +265,7 @@ public class DataDescriptionLanguageSemanticSequencer extends ExpressionLanguage
 	 *     TypedDataDescriptionRule returns TypedDataDescription
 	 *
 	 * Constraint:
-	 *     (representation=RepresentationType name=StringOrId type=[DataType|StringOrId] constraints+=StatementRule*)
+	 *     (representation=RepresentationType name=StringOrId type=[DataTypeDefinition|StringOrId] constraints+=StatementRule*)
 	 * </pre>
 	 */
 	protected void sequence_TypedDataDescriptionRule(ISerializationContext context, TypedDataDescription semanticObject) {

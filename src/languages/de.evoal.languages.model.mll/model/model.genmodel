@@ -7,7 +7,7 @@
     rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" testsDirectory="/de.evoal.languages.model.mll.tests/src-gen"
     testSuiteClass="de.evoal.languages.model.mll.tests.MllAllTests" importerID="org.eclipse.emf.importer.ecore"
     complianceLevel="8.0" copyrightFields="false" editPluginID="de.evoal.languages.model.mll.edit"
-    editorPluginID="de.evoal.languages.model.mll.editor" usedGenPackages="../../de.evoal.languages.model.ddl/model/model.genmodel#//ddl ../../de.evoal.languages.model.dl/model/model.genmodel#//dl ../../de.evoal.languages.model.el/model/model.genmodel#//el ../../de.evoal.languages.model.instance/model/model.genmodel#//instance"
+    editorPluginID="de.evoal.languages.model.mll.editor" usedGenPackages="../../de.evoal.languages.model.ddl/model/model.genmodel#//ddl ../../de.evoal.languages.model.instance/model/model.genmodel#//instance ../../de.evoal.languages.model.base/model/model.genmodel#//base"
     importOrganizing="true">
   <foreignModel>model.ecore</foreignModel>
   <genPackages prefix="Mll" basePackage="de.evoal.languages.model" disposableProviderFactory="true"

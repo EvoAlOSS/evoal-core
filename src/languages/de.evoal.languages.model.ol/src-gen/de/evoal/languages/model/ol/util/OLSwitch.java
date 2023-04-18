@@ -3,9 +3,6 @@
  */
 package de.evoal.languages.model.ol.util;
 
-import de.evoal.languages.model.el.CallOrLiteralOrReferenceOrParantheses;
-import de.evoal.languages.model.el.ValueReference;
-
 import de.evoal.languages.model.ol.*;
 
 import org.eclipse.emf.ecore.EObject;

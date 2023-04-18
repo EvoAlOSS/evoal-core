@@ -2,10 +2,10 @@
  */
 package de.evoal.languages.model.ddl.impl;
 
-import de.evoal.languages.model.el.Expression;
+import de.evoal.languages.model.base.Expression;
 import de.evoal.languages.model.ddl.DataDescription;
 import de.evoal.languages.model.ddl.DataDescriptionModel;
-import de.evoal.languages.model.ddl.DataType;
+import de.evoal.languages.model.ddl.DataTypeDefinition;
 import de.evoal.languages.model.ddl.DdlPackage;
 
 import de.evoal.languages.model.ddl.Use;
@@ -58,7 +58,7 @@ public class DataDescriptionModelImpl extends MinimalEObjectImpl.Container imple
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<DataType> types;
+	protected EList<DataTypeDefinition> types;
 
 	/**
 	 * The cached value of the '{@link #getDescriptions() <em>Descriptions</em>}' containment reference list.
@@ -118,9 +118,9 @@ public class DataDescriptionModelImpl extends MinimalEObjectImpl.Container imple
 	 * @generated
 	 */
 	@Override
-	public EList<DataType> getTypes() {
+	public EList<DataTypeDefinition> getTypes() {
 		if (types == null) {
-			types = new EObjectContainmentEList<DataType>(DataType.class, this, DdlPackage.DATA_DESCRIPTION_MODEL__TYPES);
+			types = new EObjectContainmentEList<DataTypeDefinition>(DataTypeDefinition.class, this, DdlPackage.DATA_DESCRIPTION_MODEL__TYPES);
 		}
 		return types;
 	}
@@ -206,7 +206,7 @@ public class DataDescriptionModelImpl extends MinimalEObjectImpl.Container imple
 				return;
 			case DdlPackage.DATA_DESCRIPTION_MODEL__TYPES:
 				getTypes().clear();
-				getTypes().addAll((Collection<? extends DataType>)newValue);
+				getTypes().addAll((Collection<? extends DataTypeDefinition>)newValue);
 				return;
 			case DdlPackage.DATA_DESCRIPTION_MODEL__DESCRIPTIONS:
 				getDescriptions().clear();

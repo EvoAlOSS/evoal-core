@@ -3,8 +3,6 @@
 package de.evoal.languages.model.mll.impl;
 
 import de.evoal.languages.model.ddl.DataDescription;
-
-import de.evoal.languages.model.dl.TypeDefinition;
 import de.evoal.languages.model.instance.Attribute;
 import de.evoal.languages.model.mll.MllPackage;
 import de.evoal.languages.model.mll.PartialSurrogateFunctionDefinition;
@@ -51,7 +49,7 @@ public class PartialSurrogateFunctionDefinitionImpl extends MinimalEObjectImpl.C
 	 * @generated
 	 * @ordered
 	 */
-	protected TypeDefinition name;
+	protected de.evoal.languages.model.base.TypeDefinition name;
 
 	/**
 	 * The cached value of the '{@link #getInputs() <em>Inputs</em>}' reference list.
@@ -108,10 +106,10 @@ public class PartialSurrogateFunctionDefinitionImpl extends MinimalEObjectImpl.C
 	 * @generated
 	 */
 	@Override
-	public TypeDefinition getName() {
+	public de.evoal.languages.model.base.TypeDefinition getName() {
 		if (name != null && name.eIsProxy()) {
 			InternalEObject oldName = (InternalEObject)name;
-			name = (TypeDefinition)eResolveProxy(oldName);
+			name = (de.evoal.languages.model.base.TypeDefinition)eResolveProxy(oldName);
 			if (name != oldName) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, MllPackage.PARTIAL_SURROGATE_FUNCTION_DEFINITION__NAME, oldName, name));
@@ -125,7 +123,7 @@ public class PartialSurrogateFunctionDefinitionImpl extends MinimalEObjectImpl.C
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TypeDefinition basicGetName() {
+	public de.evoal.languages.model.base.TypeDefinition basicGetName() {
 		return name;
 	}
 
@@ -135,8 +133,8 @@ public class PartialSurrogateFunctionDefinitionImpl extends MinimalEObjectImpl.C
 	 * @generated
 	 */
 	@Override
-	public void setName(TypeDefinition newName) {
-		TypeDefinition oldName = name;
+	public void setName(de.evoal.languages.model.base.TypeDefinition newName) {
+		de.evoal.languages.model.base.TypeDefinition oldName = name;
 		name = newName;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, MllPackage.PARTIAL_SURROGATE_FUNCTION_DEFINITION__NAME, oldName, name));
@@ -226,7 +224,7 @@ public class PartialSurrogateFunctionDefinitionImpl extends MinimalEObjectImpl.C
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case MllPackage.PARTIAL_SURROGATE_FUNCTION_DEFINITION__NAME:
-				setName((TypeDefinition)newValue);
+				setName((de.evoal.languages.model.base.TypeDefinition)newValue);
 				return;
 			case MllPackage.PARTIAL_SURROGATE_FUNCTION_DEFINITION__INPUTS:
 				getInputs().clear();
@@ -253,7 +251,7 @@ public class PartialSurrogateFunctionDefinitionImpl extends MinimalEObjectImpl.C
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case MllPackage.PARTIAL_SURROGATE_FUNCTION_DEFINITION__NAME:
-				setName((TypeDefinition)null);
+				setName((de.evoal.languages.model.base.TypeDefinition)null);
 				return;
 			case MllPackage.PARTIAL_SURROGATE_FUNCTION_DEFINITION__INPUTS:
 				getInputs().clear();

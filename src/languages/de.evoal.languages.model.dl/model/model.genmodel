@@ -4,52 +4,15 @@
     modelPluginID="de.evoal.languages.model.dl" forceOverwrite="true" modelName="DefinitionLanguage"
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
-    runtimeVersion="2.20" usedGenPackages="../../de.evoal.languages.model.el/model/model.genmodel#//el">
+    runtimeVersion="2.20" usedGenPackages="../../de.evoal.languages.model.base/model/model.genmodel#//base">
   <foreignModel>model.ecore</foreignModel>
   <genPackages prefix="Dl" basePackage="de.evoal.languages.model" disposableProviderFactory="true"
       ecorePackage="model.ecore#/">
     <genClasses ecoreClass="model.ecore#//DefinitionModel">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//DefinitionModel/imports"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//DefinitionModel/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//DefinitionModel/types"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//DefinitionModel/functions"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//DefinitionModel/name"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//DefinitionModel/imports"/>
-    </genClasses>
-    <genClasses ecoreClass="model.ecore#//TypeDefinition">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//TypeDefinition/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//TypeDefinition/attributes"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//TypeDefinition/superType"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//TypeDefinition/abstract"/>
-    </genClasses>
-    <genClasses ecoreClass="model.ecore#//AttributeDefinition">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//AttributeDefinition/type"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//AttributeDefinition/name"/>
-    </genClasses>
-    <genClasses ecoreClass="model.ecore#//Type"/>
-    <genClasses ecoreClass="model.ecore#//InstanceType">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//InstanceType/definitions"/>
-    </genClasses>
-    <genClasses ecoreClass="model.ecore#//LiteralType"/>
-    <genClasses ecoreClass="model.ecore#//StringType"/>
-    <genClasses ecoreClass="model.ecore#//IntType"/>
-    <genClasses ecoreClass="model.ecore#//FloatType"/>
-    <genClasses ecoreClass="model.ecore#//BooleanType"/>
-    <genClasses ecoreClass="model.ecore#//VoidType"/>
-    <genClasses ecoreClass="model.ecore#//ExpressionType"/>
-    <genClasses ecoreClass="model.ecore#//DataType"/>
-    <genClasses ecoreClass="model.ecore#//ArrayType">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//ArrayType/elements"/>
-    </genClasses>
-    <genClasses ecoreClass="model.ecore#//FunctionDefinition">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//FunctionDefinition/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//FunctionDefinition/type"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//FunctionDefinition/parameters"/>
-    </genClasses>
-    <genClasses ecoreClass="model.ecore#//Parameter">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//Parameter/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//Parameter/type"/>
-    </genClasses>
-    <genClasses ecoreClass="model.ecore#//DefinedFunctionName">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//DefinedFunctionName/definition"/>
     </genClasses>
     <genClasses ecoreClass="model.ecore#//QualifiedName"/>
     <genClasses ecoreClass="model.ecore#//Import">

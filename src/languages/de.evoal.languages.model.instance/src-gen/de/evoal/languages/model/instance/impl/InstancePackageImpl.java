@@ -3,11 +3,9 @@
  */
 package de.evoal.languages.model.instance.impl;
 
+import de.evoal.languages.model.base.BasePackage;
+
 import de.evoal.languages.model.ddl.DdlPackage;
-
-import de.evoal.languages.model.dl.DlPackage;
-
-import de.evoal.languages.model.el.ELPackage;
 
 import de.evoal.languages.model.instance.Array;
 import de.evoal.languages.model.instance.Attribute;
@@ -121,9 +119,8 @@ public class InstancePackageImpl extends EPackageImpl implements InstancePackage
 		isInited = true;
 
 		// Initialize simple dependencies
-		ELPackage.eINSTANCE.eClass();
 		DdlPackage.eINSTANCE.eClass();
-		DlPackage.eINSTANCE.eClass();
+		BasePackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
 		theInstancePackage.createPackageContents();
@@ -342,8 +339,7 @@ public class InstancePackageImpl extends EPackageImpl implements InstancePackage
 		setNsURI(eNS_URI);
 
 		// Obtain other dependent packages
-		DlPackage theDlPackage = (DlPackage)EPackage.Registry.INSTANCE.getEPackage(DlPackage.eNS_URI);
-		ELPackage theELPackage = (ELPackage)EPackage.Registry.INSTANCE.getEPackage(ELPackage.eNS_URI);
+		BasePackage theBasePackage = (BasePackage)EPackage.Registry.INSTANCE.getEPackage(BasePackage.eNS_URI);
 		DdlPackage theDdlPackage = (DdlPackage)EPackage.Registry.INSTANCE.getEPackage(DdlPackage.eNS_URI);
 
 		// Create type parameters
@@ -358,14 +354,14 @@ public class InstancePackageImpl extends EPackageImpl implements InstancePackage
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(instanceEClass, Instance.class, "Instance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getInstance_Definition(), theDlPackage.getTypeDefinition(), null, "definition", null, 0, 1, Instance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getInstance_Definition(), theBasePackage.getTypeDefinition(), null, "definition", null, 0, 1, Instance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getInstance_Attributes(), this.getAttribute(), null, "attributes", null, 0, -1, Instance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		EOperation op = addEOperation(instanceEClass, this.getAttribute(), "findAttribute", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "name", 1, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(attributeEClass, Attribute.class, "Attribute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getAttribute_Definition(), theDlPackage.getAttributeDefinition(), null, "definition", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAttribute_Definition(), theBasePackage.getAttributeDefinition(), null, "definition", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAttribute_Value(), this.getValue(), null, "value", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(valueEClass, Value.class, "Value", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -374,7 +370,7 @@ public class InstancePackageImpl extends EPackageImpl implements InstancePackage
 		initEReference(getArray_Values(), this.getValue(), null, "values", null, 0, -1, Array.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(literalValueEClass, LiteralValue.class, "LiteralValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getLiteralValue_Literal(), theELPackage.getLiteral(), null, "literal", null, 0, 1, LiteralValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getLiteralValue_Literal(), theBasePackage.getLiteral(), null, "literal", null, 0, 1, LiteralValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(dataReferenceEClass, DataReference.class, "DataReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getDataReference_Definition(), theDdlPackage.getDataDescription(), null, "definition", null, 0, 1, DataReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -401,7 +397,7 @@ public class InstancePackageImpl extends EPackageImpl implements InstancePackage
 		   new String[] {
 			   "ddl", "platform:/resource/de.evoal.languages.model.ddl/model/model.ecore#/",
 			   "dl", "platform:/resource/de.evoal.languages.model.dl/model/model.ecore#/",
-			   "el", "platform:/resource/de.evoal.languages.model.el/model/model.ecore#/"
+			   "el", "platform:/resource/de.evoal.languages.model.base/model/model.ecore#/"
 		   });
 	}
 

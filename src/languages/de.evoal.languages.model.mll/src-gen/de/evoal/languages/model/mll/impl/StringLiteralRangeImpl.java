@@ -2,8 +2,6 @@
  */
 package de.evoal.languages.model.mll.impl;
 
-import de.evoal.languages.model.el.StringLiteral;
-
 import de.evoal.languages.model.mll.MllPackage;
 import de.evoal.languages.model.mll.StringLiteralRange;
 
@@ -41,7 +39,7 @@ public class StringLiteralRangeImpl extends RangeImpl implements StringLiteralRa
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<StringLiteral> elements;
+	protected EList<de.evoal.languages.model.base.StringLiteral> elements;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -68,9 +66,9 @@ public class StringLiteralRangeImpl extends RangeImpl implements StringLiteralRa
 	 * @generated
 	 */
 	@Override
-	public EList<StringLiteral> getElements() {
+	public EList<de.evoal.languages.model.base.StringLiteral> getElements() {
 		if (elements == null) {
-			elements = new EObjectContainmentEList<StringLiteral>(StringLiteral.class, this, MllPackage.STRING_LITERAL_RANGE__ELEMENTS);
+			elements = new EObjectContainmentEList<de.evoal.languages.model.base.StringLiteral>(de.evoal.languages.model.base.StringLiteral.class, this, MllPackage.STRING_LITERAL_RANGE__ELEMENTS);
 		}
 		return elements;
 	}
@@ -114,7 +112,7 @@ public class StringLiteralRangeImpl extends RangeImpl implements StringLiteralRa
 		switch (featureID) {
 			case MllPackage.STRING_LITERAL_RANGE__ELEMENTS:
 				getElements().clear();
-				getElements().addAll((Collection<? extends StringLiteral>)newValue);
+				getElements().addAll((Collection<? extends de.evoal.languages.model.base.StringLiteral>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

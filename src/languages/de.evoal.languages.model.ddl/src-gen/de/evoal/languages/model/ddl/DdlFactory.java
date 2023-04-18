@@ -40,13 +40,13 @@ public interface DdlFactory extends EFactory {
 	Use createUse();
 
 	/**
-	 * Returns a new object of class '<em>Data Type</em>'.
+	 * Returns a new object of class '<em>Data Type Definition</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Data Type</em>'.
+	 * @return a new object of class '<em>Data Type Definition</em>'.
 	 * @generated
 	 */
-	DataType createDataType();
+	DataTypeDefinition createDataTypeDefinition();
 
 	/**
 	 * Returns a new object of class '<em>Typed Data Description</em>'.
@@ -65,15 +65,6 @@ public interface DdlFactory extends EFactory {
 	 * @generated
 	 */
 	UntypedDataDescription createUntypedDataDescription();
-
-	/**
-	 * Returns a new object of class '<em>Function Name</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Function Name</em>'.
-	 * @generated
-	 */
-	FunctionName createFunctionName();
 
 	/**
 	 * Returns a new object of class '<em>Data Reference</em>'.

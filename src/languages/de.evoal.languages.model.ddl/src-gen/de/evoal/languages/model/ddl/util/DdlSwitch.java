@@ -2,8 +2,8 @@
  */
 package de.evoal.languages.model.ddl.util;
 
-import de.evoal.languages.model.el.CallOrLiteralOrReferenceOrParantheses;
-import de.evoal.languages.model.el.ValueReference;
+import de.evoal.languages.model.base.CallOrLiteralOrReferenceOrParantheses;
+import de.evoal.languages.model.base.ValueReference;
 import de.evoal.languages.model.ddl.*;
 
 import org.eclipse.emf.ecore.EObject;
@@ -80,9 +80,9 @@ public class DdlSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case DdlPackage.DATA_TYPE: {
-				DataType dataType = (DataType)theEObject;
-				T result = caseDataType(dataType);
+			case DdlPackage.DATA_TYPE_DEFINITION: {
+				DataTypeDefinition dataTypeDefinition = (DataTypeDefinition)theEObject;
+				T result = caseDataTypeDefinition(dataTypeDefinition);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -103,13 +103,6 @@ public class DdlSwitch<T> extends Switch<T> {
 				UntypedDataDescription untypedDataDescription = (UntypedDataDescription)theEObject;
 				T result = caseUntypedDataDescription(untypedDataDescription);
 				if (result == null) result = caseDataDescription(untypedDataDescription);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case DdlPackage.FUNCTION_NAME: {
-				FunctionName functionName = (FunctionName)theEObject;
-				T result = caseFunctionName(functionName);
-				if (result == null) result = caseEL_FunctionName(functionName);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -164,17 +157,17 @@ public class DdlSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Data Type</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Data Type Definition</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Data Type</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Data Type Definition</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseDataType(DataType object) {
+	public T caseDataTypeDefinition(DataTypeDefinition object) {
 		return null;
 	}
 
@@ -224,21 +217,6 @@ public class DdlSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Function Name</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Function Name</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseFunctionName(FunctionName object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Data Reference</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -265,21 +243,6 @@ public class DdlSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseSelfReference(SelfReference object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Function Name</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Function Name</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseEL_FunctionName(de.evoal.languages.model.el.FunctionName object) {
 		return null;
 	}
 

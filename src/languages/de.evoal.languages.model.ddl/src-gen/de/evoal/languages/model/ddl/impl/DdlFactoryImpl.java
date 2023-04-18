@@ -59,10 +59,9 @@ public class DdlFactoryImpl extends EFactoryImpl implements DdlFactory {
 		switch (eClass.getClassifierID()) {
 			case DdlPackage.DATA_DESCRIPTION_MODEL: return createDataDescriptionModel();
 			case DdlPackage.USE: return createUse();
-			case DdlPackage.DATA_TYPE: return createDataType();
+			case DdlPackage.DATA_TYPE_DEFINITION: return createDataTypeDefinition();
 			case DdlPackage.TYPED_DATA_DESCRIPTION: return createTypedDataDescription();
 			case DdlPackage.UNTYPED_DATA_DESCRIPTION: return createUntypedDataDescription();
-			case DdlPackage.FUNCTION_NAME: return createFunctionName();
 			case DdlPackage.DATA_REFERENCE: return createDataReference();
 			case DdlPackage.SELF_REFERENCE: return createSelfReference();
 			default:
@@ -132,9 +131,9 @@ public class DdlFactoryImpl extends EFactoryImpl implements DdlFactory {
 	 * @generated
 	 */
 	@Override
-	public DataType createDataType() {
-		DataTypeImpl dataType = new DataTypeImpl();
-		return dataType;
+	public DataTypeDefinition createDataTypeDefinition() {
+		DataTypeDefinitionImpl dataTypeDefinition = new DataTypeDefinitionImpl();
+		return dataTypeDefinition;
 	}
 
 	/**
@@ -157,17 +156,6 @@ public class DdlFactoryImpl extends EFactoryImpl implements DdlFactory {
 	public UntypedDataDescription createUntypedDataDescription() {
 		UntypedDataDescriptionImpl untypedDataDescription = new UntypedDataDescriptionImpl();
 		return untypedDataDescription;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public FunctionName createFunctionName() {
-		FunctionNameImpl functionName = new FunctionNameImpl();
-		return functionName;
 	}
 
 	/**

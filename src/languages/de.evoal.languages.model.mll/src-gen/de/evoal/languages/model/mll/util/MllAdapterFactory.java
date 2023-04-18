@@ -2,8 +2,6 @@
  */
 package de.evoal.languages.model.mll.util;
 
-import de.evoal.languages.model.el.FunctionName;
-
 import de.evoal.languages.model.mll.*;
 
 import org.eclipse.emf.common.notify.Adapter;
@@ -130,7 +128,7 @@ public class MllAdapterFactory extends AdapterFactoryImpl {
 				return createUseAdapter();
 			}
 			@Override
-			public Adapter caseFunctionName(FunctionName object) {
+			public Adapter caseFunctionName(de.evoal.languages.model.base.FunctionName object) {
 				return createFunctionNameAdapter();
 			}
 			@Override
@@ -364,13 +362,13 @@ public class MllAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.el.FunctionName <em>Function Name</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.FunctionName <em>Function Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.evoal.languages.model.el.FunctionName
+	 * @see de.evoal.languages.model.base.FunctionName
 	 * @generated
 	 */
 	public Adapter createFunctionNameAdapter() {

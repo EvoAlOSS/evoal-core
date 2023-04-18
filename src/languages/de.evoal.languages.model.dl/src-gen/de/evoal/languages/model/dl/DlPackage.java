@@ -3,8 +3,6 @@
  */
 package de.evoal.languages.model.dl;
 
-import de.evoal.languages.model.el.ELPackage;
-
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
@@ -27,7 +25,7 @@ import org.eclipse.emf.ecore.EReference;
  * <!-- end-model-doc -->
  * @see de.evoal.languages.model.dl.DlFactory
  * @model kind="package"
- *        annotation="http://www.eclipse.org/OCL/Import el='platform:/resource/de.evoal.languages.model.el/model/model.ecore#/'"
+ *        annotation="http://www.eclipse.org/OCL/Import el='platform:/resource/de.evoal.languages.model.base/model/model.ecore#/'"
  * @generated
  */
 public interface DlPackage extends EPackage {
@@ -74,22 +72,13 @@ public interface DlPackage extends EPackage {
 	int DEFINITION_MODEL = 0;
 
 	/**
-	 * The feature id for the '<em><b>Types</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Imports</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DEFINITION_MODEL__TYPES = 0;
-
-	/**
-	 * The feature id for the '<em><b>Functions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DEFINITION_MODEL__FUNCTIONS = 1;
+	int DEFINITION_MODEL__IMPORTS = 0;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -98,16 +87,25 @@ public interface DlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DEFINITION_MODEL__NAME = 2;
+	int DEFINITION_MODEL__NAME = 1;
 
 	/**
-	 * The feature id for the '<em><b>Imports</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Types</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DEFINITION_MODEL__IMPORTS = 3;
+	int DEFINITION_MODEL__TYPES = 2;
+
+	/**
+	 * The feature id for the '<em><b>Functions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEFINITION_MODEL__FUNCTIONS = 3;
 
 	/**
 	 * The number of structural features of the '<em>Definition Model</em>' class.
@@ -119,437 +117,6 @@ public interface DlPackage extends EPackage {
 	int DEFINITION_MODEL_FEATURE_COUNT = 4;
 
 	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.dl.impl.TypeDefinitionImpl <em>Type Definition</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.dl.impl.TypeDefinitionImpl
-	 * @see de.evoal.languages.model.dl.impl.DlPackageImpl#getTypeDefinition()
-	 * @generated
-	 */
-	int TYPE_DEFINITION = 1;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_DEFINITION__NAME = 0;
-
-	/**
-	 * The feature id for the '<em><b>Attributes</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_DEFINITION__ATTRIBUTES = 1;
-
-	/**
-	 * The feature id for the '<em><b>Super Type</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_DEFINITION__SUPER_TYPE = 2;
-
-	/**
-	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_DEFINITION__ABSTRACT = 3;
-
-	/**
-	 * The number of structural features of the '<em>Type Definition</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_DEFINITION_FEATURE_COUNT = 4;
-
-	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.dl.impl.AttributeDefinitionImpl <em>Attribute Definition</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.dl.impl.AttributeDefinitionImpl
-	 * @see de.evoal.languages.model.dl.impl.DlPackageImpl#getAttributeDefinition()
-	 * @generated
-	 */
-	int ATTRIBUTE_DEFINITION = 2;
-
-	/**
-	 * The feature id for the '<em><b>Type</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ATTRIBUTE_DEFINITION__TYPE = 0;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ATTRIBUTE_DEFINITION__NAME = 1;
-
-	/**
-	 * The number of structural features of the '<em>Attribute Definition</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ATTRIBUTE_DEFINITION_FEATURE_COUNT = 2;
-
-	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.dl.impl.TypeImpl <em>Type</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.dl.impl.TypeImpl
-	 * @see de.evoal.languages.model.dl.impl.DlPackageImpl#getType()
-	 * @generated
-	 */
-	int TYPE = 3;
-
-	/**
-	 * The number of structural features of the '<em>Type</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_FEATURE_COUNT = 0;
-
-	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.dl.impl.InstanceTypeImpl <em>Instance Type</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.dl.impl.InstanceTypeImpl
-	 * @see de.evoal.languages.model.dl.impl.DlPackageImpl#getInstanceType()
-	 * @generated
-	 */
-	int INSTANCE_TYPE = 4;
-
-	/**
-	 * The feature id for the '<em><b>Definitions</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INSTANCE_TYPE__DEFINITIONS = TYPE_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Instance Type</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INSTANCE_TYPE_FEATURE_COUNT = TYPE_FEATURE_COUNT + 1;
-
-	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.dl.impl.LiteralTypeImpl <em>Literal Type</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.dl.impl.LiteralTypeImpl
-	 * @see de.evoal.languages.model.dl.impl.DlPackageImpl#getLiteralType()
-	 * @generated
-	 */
-	int LITERAL_TYPE = 5;
-
-	/**
-	 * The number of structural features of the '<em>Literal Type</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LITERAL_TYPE_FEATURE_COUNT = TYPE_FEATURE_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.dl.impl.StringTypeImpl <em>String Type</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.dl.impl.StringTypeImpl
-	 * @see de.evoal.languages.model.dl.impl.DlPackageImpl#getStringType()
-	 * @generated
-	 */
-	int STRING_TYPE = 6;
-
-	/**
-	 * The number of structural features of the '<em>String Type</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRING_TYPE_FEATURE_COUNT = LITERAL_TYPE_FEATURE_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.dl.impl.IntTypeImpl <em>Int Type</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.dl.impl.IntTypeImpl
-	 * @see de.evoal.languages.model.dl.impl.DlPackageImpl#getIntType()
-	 * @generated
-	 */
-	int INT_TYPE = 7;
-
-	/**
-	 * The number of structural features of the '<em>Int Type</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INT_TYPE_FEATURE_COUNT = LITERAL_TYPE_FEATURE_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.dl.impl.FloatTypeImpl <em>Float Type</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.dl.impl.FloatTypeImpl
-	 * @see de.evoal.languages.model.dl.impl.DlPackageImpl#getFloatType()
-	 * @generated
-	 */
-	int FLOAT_TYPE = 8;
-
-	/**
-	 * The number of structural features of the '<em>Float Type</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FLOAT_TYPE_FEATURE_COUNT = LITERAL_TYPE_FEATURE_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.dl.impl.BooleanTypeImpl <em>Boolean Type</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.dl.impl.BooleanTypeImpl
-	 * @see de.evoal.languages.model.dl.impl.DlPackageImpl#getBooleanType()
-	 * @generated
-	 */
-	int BOOLEAN_TYPE = 9;
-
-	/**
-	 * The number of structural features of the '<em>Boolean Type</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BOOLEAN_TYPE_FEATURE_COUNT = LITERAL_TYPE_FEATURE_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.dl.impl.VoidTypeImpl <em>Void Type</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.dl.impl.VoidTypeImpl
-	 * @see de.evoal.languages.model.dl.impl.DlPackageImpl#getVoidType()
-	 * @generated
-	 */
-	int VOID_TYPE = 10;
-
-	/**
-	 * The number of structural features of the '<em>Void Type</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOID_TYPE_FEATURE_COUNT = TYPE_FEATURE_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.dl.impl.ExpressionTypeImpl <em>Expression Type</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.dl.impl.ExpressionTypeImpl
-	 * @see de.evoal.languages.model.dl.impl.DlPackageImpl#getExpressionType()
-	 * @generated
-	 */
-	int EXPRESSION_TYPE = 11;
-
-	/**
-	 * The number of structural features of the '<em>Expression Type</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXPRESSION_TYPE_FEATURE_COUNT = TYPE_FEATURE_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.dl.impl.DataTypeImpl <em>Data Type</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.dl.impl.DataTypeImpl
-	 * @see de.evoal.languages.model.dl.impl.DlPackageImpl#getDataType()
-	 * @generated
-	 */
-	int DATA_TYPE = 12;
-
-	/**
-	 * The number of structural features of the '<em>Data Type</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATA_TYPE_FEATURE_COUNT = TYPE_FEATURE_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.dl.impl.ArrayTypeImpl <em>Array Type</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.dl.impl.ArrayTypeImpl
-	 * @see de.evoal.languages.model.dl.impl.DlPackageImpl#getArrayType()
-	 * @generated
-	 */
-	int ARRAY_TYPE = 13;
-
-	/**
-	 * The feature id for the '<em><b>Elements</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ARRAY_TYPE__ELEMENTS = TYPE_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Array Type</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ARRAY_TYPE_FEATURE_COUNT = TYPE_FEATURE_COUNT + 1;
-
-	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.dl.impl.FunctionDefinitionImpl <em>Function Definition</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.dl.impl.FunctionDefinitionImpl
-	 * @see de.evoal.languages.model.dl.impl.DlPackageImpl#getFunctionDefinition()
-	 * @generated
-	 */
-	int FUNCTION_DEFINITION = 14;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FUNCTION_DEFINITION__NAME = 0;
-
-	/**
-	 * The feature id for the '<em><b>Type</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FUNCTION_DEFINITION__TYPE = 1;
-
-	/**
-	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FUNCTION_DEFINITION__PARAMETERS = 2;
-
-	/**
-	 * The number of structural features of the '<em>Function Definition</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FUNCTION_DEFINITION_FEATURE_COUNT = 3;
-
-	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.dl.impl.ParameterImpl <em>Parameter</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.dl.impl.ParameterImpl
-	 * @see de.evoal.languages.model.dl.impl.DlPackageImpl#getParameter()
-	 * @generated
-	 */
-	int PARAMETER = 15;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PARAMETER__NAME = 0;
-
-	/**
-	 * The feature id for the '<em><b>Type</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PARAMETER__TYPE = 1;
-
-	/**
-	 * The number of structural features of the '<em>Parameter</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PARAMETER_FEATURE_COUNT = 2;
-
-	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.dl.impl.DefinedFunctionNameImpl <em>Defined Function Name</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.dl.impl.DefinedFunctionNameImpl
-	 * @see de.evoal.languages.model.dl.impl.DlPackageImpl#getDefinedFunctionName()
-	 * @generated
-	 */
-	int DEFINED_FUNCTION_NAME = 16;
-
-	/**
-	 * The feature id for the '<em><b>Definition</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DEFINED_FUNCTION_NAME__DEFINITION = ELPackage.FUNCTION_NAME_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Defined Function Name</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DEFINED_FUNCTION_NAME_FEATURE_COUNT = ELPackage.FUNCTION_NAME_FEATURE_COUNT + 1;
-
-
-	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.dl.impl.QualifiedNameImpl <em>Qualified Name</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -557,7 +124,7 @@ public interface DlPackage extends EPackage {
 	 * @see de.evoal.languages.model.dl.impl.DlPackageImpl#getQualifiedName()
 	 * @generated
 	 */
-	int QUALIFIED_NAME = 17;
+	int QUALIFIED_NAME = 1;
 
 	/**
 	 * The number of structural features of the '<em>Qualified Name</em>' class.
@@ -568,7 +135,6 @@ public interface DlPackage extends EPackage {
 	 */
 	int QUALIFIED_NAME_FEATURE_COUNT = 0;
 
-
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.dl.impl.ImportImpl <em>Import</em>}' class.
 	 * <!-- begin-user-doc -->
@@ -577,7 +143,7 @@ public interface DlPackage extends EPackage {
 	 * @see de.evoal.languages.model.dl.impl.DlPackageImpl#getImport()
 	 * @generated
 	 */
-	int IMPORT = 18;
+	int IMPORT = 2;
 
 	/**
 	 * The feature id for the '<em><b>Imported Namespace</b></em>' attribute.
@@ -609,6 +175,28 @@ public interface DlPackage extends EPackage {
 	EClass getDefinitionModel();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.dl.DefinitionModel#getImports <em>Imports</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Imports</em>'.
+	 * @see de.evoal.languages.model.dl.DefinitionModel#getImports()
+	 * @see #getDefinitionModel()
+	 * @generated
+	 */
+	EReference getDefinitionModel_Imports();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.dl.DefinitionModel#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see de.evoal.languages.model.dl.DefinitionModel#getName()
+	 * @see #getDefinitionModel()
+	 * @generated
+	 */
+	EAttribute getDefinitionModel_Name();
+
+	/**
 	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.dl.DefinitionModel#getTypes <em>Types</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -629,342 +217,6 @@ public interface DlPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getDefinitionModel_Functions();
-
-	/**
-	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.dl.DefinitionModel#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see de.evoal.languages.model.dl.DefinitionModel#getName()
-	 * @see #getDefinitionModel()
-	 * @generated
-	 */
-	EAttribute getDefinitionModel_Name();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.dl.DefinitionModel#getImports <em>Imports</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Imports</em>'.
-	 * @see de.evoal.languages.model.dl.DefinitionModel#getImports()
-	 * @see #getDefinitionModel()
-	 * @generated
-	 */
-	EReference getDefinitionModel_Imports();
-
-	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.dl.TypeDefinition <em>Type Definition</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Type Definition</em>'.
-	 * @see de.evoal.languages.model.dl.TypeDefinition
-	 * @generated
-	 */
-	EClass getTypeDefinition();
-
-	/**
-	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.dl.TypeDefinition#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see de.evoal.languages.model.dl.TypeDefinition#getName()
-	 * @see #getTypeDefinition()
-	 * @generated
-	 */
-	EAttribute getTypeDefinition_Name();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.dl.TypeDefinition#getAttributes <em>Attributes</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Attributes</em>'.
-	 * @see de.evoal.languages.model.dl.TypeDefinition#getAttributes()
-	 * @see #getTypeDefinition()
-	 * @generated
-	 */
-	EReference getTypeDefinition_Attributes();
-
-	/**
-	 * Returns the meta object for the reference '{@link de.evoal.languages.model.dl.TypeDefinition#getSuperType <em>Super Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Super Type</em>'.
-	 * @see de.evoal.languages.model.dl.TypeDefinition#getSuperType()
-	 * @see #getTypeDefinition()
-	 * @generated
-	 */
-	EReference getTypeDefinition_SuperType();
-
-	/**
-	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.dl.TypeDefinition#isAbstract <em>Abstract</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Abstract</em>'.
-	 * @see de.evoal.languages.model.dl.TypeDefinition#isAbstract()
-	 * @see #getTypeDefinition()
-	 * @generated
-	 */
-	EAttribute getTypeDefinition_Abstract();
-
-	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.dl.AttributeDefinition <em>Attribute Definition</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Attribute Definition</em>'.
-	 * @see de.evoal.languages.model.dl.AttributeDefinition
-	 * @generated
-	 */
-	EClass getAttributeDefinition();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link de.evoal.languages.model.dl.AttributeDefinition#getType <em>Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Type</em>'.
-	 * @see de.evoal.languages.model.dl.AttributeDefinition#getType()
-	 * @see #getAttributeDefinition()
-	 * @generated
-	 */
-	EReference getAttributeDefinition_Type();
-
-	/**
-	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.dl.AttributeDefinition#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see de.evoal.languages.model.dl.AttributeDefinition#getName()
-	 * @see #getAttributeDefinition()
-	 * @generated
-	 */
-	EAttribute getAttributeDefinition_Name();
-
-	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.dl.Type <em>Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Type</em>'.
-	 * @see de.evoal.languages.model.dl.Type
-	 * @generated
-	 */
-	EClass getType();
-
-	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.dl.InstanceType <em>Instance Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Instance Type</em>'.
-	 * @see de.evoal.languages.model.dl.InstanceType
-	 * @generated
-	 */
-	EClass getInstanceType();
-
-	/**
-	 * Returns the meta object for the reference list '{@link de.evoal.languages.model.dl.InstanceType#getDefinitions <em>Definitions</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Definitions</em>'.
-	 * @see de.evoal.languages.model.dl.InstanceType#getDefinitions()
-	 * @see #getInstanceType()
-	 * @generated
-	 */
-	EReference getInstanceType_Definitions();
-
-	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.dl.LiteralType <em>Literal Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Literal Type</em>'.
-	 * @see de.evoal.languages.model.dl.LiteralType
-	 * @generated
-	 */
-	EClass getLiteralType();
-
-	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.dl.StringType <em>String Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>String Type</em>'.
-	 * @see de.evoal.languages.model.dl.StringType
-	 * @generated
-	 */
-	EClass getStringType();
-
-	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.dl.IntType <em>Int Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Int Type</em>'.
-	 * @see de.evoal.languages.model.dl.IntType
-	 * @generated
-	 */
-	EClass getIntType();
-
-	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.dl.FloatType <em>Float Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Float Type</em>'.
-	 * @see de.evoal.languages.model.dl.FloatType
-	 * @generated
-	 */
-	EClass getFloatType();
-
-	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.dl.BooleanType <em>Boolean Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Boolean Type</em>'.
-	 * @see de.evoal.languages.model.dl.BooleanType
-	 * @generated
-	 */
-	EClass getBooleanType();
-
-	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.dl.VoidType <em>Void Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Void Type</em>'.
-	 * @see de.evoal.languages.model.dl.VoidType
-	 * @generated
-	 */
-	EClass getVoidType();
-
-	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.dl.ExpressionType <em>Expression Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Expression Type</em>'.
-	 * @see de.evoal.languages.model.dl.ExpressionType
-	 * @generated
-	 */
-	EClass getExpressionType();
-
-	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.dl.DataType <em>Data Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Data Type</em>'.
-	 * @see de.evoal.languages.model.dl.DataType
-	 * @generated
-	 */
-	EClass getDataType();
-
-	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.dl.ArrayType <em>Array Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Array Type</em>'.
-	 * @see de.evoal.languages.model.dl.ArrayType
-	 * @generated
-	 */
-	EClass getArrayType();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.dl.ArrayType#getElements <em>Elements</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Elements</em>'.
-	 * @see de.evoal.languages.model.dl.ArrayType#getElements()
-	 * @see #getArrayType()
-	 * @generated
-	 */
-	EReference getArrayType_Elements();
-
-	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.dl.FunctionDefinition <em>Function Definition</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Function Definition</em>'.
-	 * @see de.evoal.languages.model.dl.FunctionDefinition
-	 * @generated
-	 */
-	EClass getFunctionDefinition();
-
-	/**
-	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.dl.FunctionDefinition#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see de.evoal.languages.model.dl.FunctionDefinition#getName()
-	 * @see #getFunctionDefinition()
-	 * @generated
-	 */
-	EAttribute getFunctionDefinition_Name();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link de.evoal.languages.model.dl.FunctionDefinition#getType <em>Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Type</em>'.
-	 * @see de.evoal.languages.model.dl.FunctionDefinition#getType()
-	 * @see #getFunctionDefinition()
-	 * @generated
-	 */
-	EReference getFunctionDefinition_Type();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.dl.FunctionDefinition#getParameters <em>Parameters</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Parameters</em>'.
-	 * @see de.evoal.languages.model.dl.FunctionDefinition#getParameters()
-	 * @see #getFunctionDefinition()
-	 * @generated
-	 */
-	EReference getFunctionDefinition_Parameters();
-
-	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.dl.Parameter <em>Parameter</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Parameter</em>'.
-	 * @see de.evoal.languages.model.dl.Parameter
-	 * @generated
-	 */
-	EClass getParameter();
-
-	/**
-	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.dl.Parameter#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see de.evoal.languages.model.dl.Parameter#getName()
-	 * @see #getParameter()
-	 * @generated
-	 */
-	EAttribute getParameter_Name();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link de.evoal.languages.model.dl.Parameter#getType <em>Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Type</em>'.
-	 * @see de.evoal.languages.model.dl.Parameter#getType()
-	 * @see #getParameter()
-	 * @generated
-	 */
-	EReference getParameter_Type();
-
-	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.dl.DefinedFunctionName <em>Defined Function Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Defined Function Name</em>'.
-	 * @see de.evoal.languages.model.dl.DefinedFunctionName
-	 * @generated
-	 */
-	EClass getDefinedFunctionName();
-
-	/**
-	 * Returns the meta object for the reference '{@link de.evoal.languages.model.dl.DefinedFunctionName#getDefinition <em>Definition</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Definition</em>'.
-	 * @see de.evoal.languages.model.dl.DefinedFunctionName#getDefinition()
-	 * @see #getDefinedFunctionName()
-	 * @generated
-	 */
-	EReference getDefinedFunctionName_Definition();
 
 	/**
 	 * Returns the meta object for class '{@link de.evoal.languages.model.dl.QualifiedName <em>Qualified Name</em>}'.
@@ -1030,6 +282,22 @@ public interface DlPackage extends EPackage {
 		EClass DEFINITION_MODEL = eINSTANCE.getDefinitionModel();
 
 		/**
+		 * The meta object literal for the '<em><b>Imports</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DEFINITION_MODEL__IMPORTS = eINSTANCE.getDefinitionModel_Imports();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DEFINITION_MODEL__NAME = eINSTANCE.getDefinitionModel_Name();
+
+		/**
 		 * The meta object literal for the '<em><b>Types</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1044,294 +312,6 @@ public interface DlPackage extends EPackage {
 		 * @generated
 		 */
 		EReference DEFINITION_MODEL__FUNCTIONS = eINSTANCE.getDefinitionModel_Functions();
-
-		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute DEFINITION_MODEL__NAME = eINSTANCE.getDefinitionModel_Name();
-
-		/**
-		 * The meta object literal for the '<em><b>Imports</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference DEFINITION_MODEL__IMPORTS = eINSTANCE.getDefinitionModel_Imports();
-
-		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.dl.impl.TypeDefinitionImpl <em>Type Definition</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.dl.impl.TypeDefinitionImpl
-		 * @see de.evoal.languages.model.dl.impl.DlPackageImpl#getTypeDefinition()
-		 * @generated
-		 */
-		EClass TYPE_DEFINITION = eINSTANCE.getTypeDefinition();
-
-		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute TYPE_DEFINITION__NAME = eINSTANCE.getTypeDefinition_Name();
-
-		/**
-		 * The meta object literal for the '<em><b>Attributes</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference TYPE_DEFINITION__ATTRIBUTES = eINSTANCE.getTypeDefinition_Attributes();
-
-		/**
-		 * The meta object literal for the '<em><b>Super Type</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference TYPE_DEFINITION__SUPER_TYPE = eINSTANCE.getTypeDefinition_SuperType();
-
-		/**
-		 * The meta object literal for the '<em><b>Abstract</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute TYPE_DEFINITION__ABSTRACT = eINSTANCE.getTypeDefinition_Abstract();
-
-		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.dl.impl.AttributeDefinitionImpl <em>Attribute Definition</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.dl.impl.AttributeDefinitionImpl
-		 * @see de.evoal.languages.model.dl.impl.DlPackageImpl#getAttributeDefinition()
-		 * @generated
-		 */
-		EClass ATTRIBUTE_DEFINITION = eINSTANCE.getAttributeDefinition();
-
-		/**
-		 * The meta object literal for the '<em><b>Type</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ATTRIBUTE_DEFINITION__TYPE = eINSTANCE.getAttributeDefinition_Type();
-
-		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ATTRIBUTE_DEFINITION__NAME = eINSTANCE.getAttributeDefinition_Name();
-
-		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.dl.impl.TypeImpl <em>Type</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.dl.impl.TypeImpl
-		 * @see de.evoal.languages.model.dl.impl.DlPackageImpl#getType()
-		 * @generated
-		 */
-		EClass TYPE = eINSTANCE.getType();
-
-		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.dl.impl.InstanceTypeImpl <em>Instance Type</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.dl.impl.InstanceTypeImpl
-		 * @see de.evoal.languages.model.dl.impl.DlPackageImpl#getInstanceType()
-		 * @generated
-		 */
-		EClass INSTANCE_TYPE = eINSTANCE.getInstanceType();
-
-		/**
-		 * The meta object literal for the '<em><b>Definitions</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference INSTANCE_TYPE__DEFINITIONS = eINSTANCE.getInstanceType_Definitions();
-
-		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.dl.impl.LiteralTypeImpl <em>Literal Type</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.dl.impl.LiteralTypeImpl
-		 * @see de.evoal.languages.model.dl.impl.DlPackageImpl#getLiteralType()
-		 * @generated
-		 */
-		EClass LITERAL_TYPE = eINSTANCE.getLiteralType();
-
-		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.dl.impl.StringTypeImpl <em>String Type</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.dl.impl.StringTypeImpl
-		 * @see de.evoal.languages.model.dl.impl.DlPackageImpl#getStringType()
-		 * @generated
-		 */
-		EClass STRING_TYPE = eINSTANCE.getStringType();
-
-		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.dl.impl.IntTypeImpl <em>Int Type</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.dl.impl.IntTypeImpl
-		 * @see de.evoal.languages.model.dl.impl.DlPackageImpl#getIntType()
-		 * @generated
-		 */
-		EClass INT_TYPE = eINSTANCE.getIntType();
-
-		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.dl.impl.FloatTypeImpl <em>Float Type</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.dl.impl.FloatTypeImpl
-		 * @see de.evoal.languages.model.dl.impl.DlPackageImpl#getFloatType()
-		 * @generated
-		 */
-		EClass FLOAT_TYPE = eINSTANCE.getFloatType();
-
-		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.dl.impl.BooleanTypeImpl <em>Boolean Type</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.dl.impl.BooleanTypeImpl
-		 * @see de.evoal.languages.model.dl.impl.DlPackageImpl#getBooleanType()
-		 * @generated
-		 */
-		EClass BOOLEAN_TYPE = eINSTANCE.getBooleanType();
-
-		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.dl.impl.VoidTypeImpl <em>Void Type</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.dl.impl.VoidTypeImpl
-		 * @see de.evoal.languages.model.dl.impl.DlPackageImpl#getVoidType()
-		 * @generated
-		 */
-		EClass VOID_TYPE = eINSTANCE.getVoidType();
-
-		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.dl.impl.ExpressionTypeImpl <em>Expression Type</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.dl.impl.ExpressionTypeImpl
-		 * @see de.evoal.languages.model.dl.impl.DlPackageImpl#getExpressionType()
-		 * @generated
-		 */
-		EClass EXPRESSION_TYPE = eINSTANCE.getExpressionType();
-
-		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.dl.impl.DataTypeImpl <em>Data Type</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.dl.impl.DataTypeImpl
-		 * @see de.evoal.languages.model.dl.impl.DlPackageImpl#getDataType()
-		 * @generated
-		 */
-		EClass DATA_TYPE = eINSTANCE.getDataType();
-
-		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.dl.impl.ArrayTypeImpl <em>Array Type</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.dl.impl.ArrayTypeImpl
-		 * @see de.evoal.languages.model.dl.impl.DlPackageImpl#getArrayType()
-		 * @generated
-		 */
-		EClass ARRAY_TYPE = eINSTANCE.getArrayType();
-
-		/**
-		 * The meta object literal for the '<em><b>Elements</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ARRAY_TYPE__ELEMENTS = eINSTANCE.getArrayType_Elements();
-
-		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.dl.impl.FunctionDefinitionImpl <em>Function Definition</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.dl.impl.FunctionDefinitionImpl
-		 * @see de.evoal.languages.model.dl.impl.DlPackageImpl#getFunctionDefinition()
-		 * @generated
-		 */
-		EClass FUNCTION_DEFINITION = eINSTANCE.getFunctionDefinition();
-
-		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute FUNCTION_DEFINITION__NAME = eINSTANCE.getFunctionDefinition_Name();
-
-		/**
-		 * The meta object literal for the '<em><b>Type</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference FUNCTION_DEFINITION__TYPE = eINSTANCE.getFunctionDefinition_Type();
-
-		/**
-		 * The meta object literal for the '<em><b>Parameters</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference FUNCTION_DEFINITION__PARAMETERS = eINSTANCE.getFunctionDefinition_Parameters();
-
-		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.dl.impl.ParameterImpl <em>Parameter</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.dl.impl.ParameterImpl
-		 * @see de.evoal.languages.model.dl.impl.DlPackageImpl#getParameter()
-		 * @generated
-		 */
-		EClass PARAMETER = eINSTANCE.getParameter();
-
-		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute PARAMETER__NAME = eINSTANCE.getParameter_Name();
-
-		/**
-		 * The meta object literal for the '<em><b>Type</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference PARAMETER__TYPE = eINSTANCE.getParameter_Type();
-
-		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.dl.impl.DefinedFunctionNameImpl <em>Defined Function Name</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.dl.impl.DefinedFunctionNameImpl
-		 * @see de.evoal.languages.model.dl.impl.DlPackageImpl#getDefinedFunctionName()
-		 * @generated
-		 */
-		EClass DEFINED_FUNCTION_NAME = eINSTANCE.getDefinedFunctionName();
-
-		/**
-		 * The meta object literal for the '<em><b>Definition</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference DEFINED_FUNCTION_NAME__DEFINITION = eINSTANCE.getDefinedFunctionName_Definition();
 
 		/**
 		 * The meta object literal for the '{@link de.evoal.languages.model.dl.impl.QualifiedNameImpl <em>Qualified Name</em>}' class.

@@ -3,7 +3,7 @@
  */
 package de.evoal.languages.model.instance;
 
-import de.evoal.languages.model.dl.AttributeDefinition;
+import de.evoal.languages.model.base.AttributeDefinition;
 
 import org.eclipse.emf.ecore.EObject;
 

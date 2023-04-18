@@ -4,7 +4,7 @@
  */
 package de.evoal.languages.model.instance.dsl.scoping;
 
-import de.evoal.languages.model.el.dsl.scoping.ExpressionLanguageScopeProvider;
+import de.evoal.languages.model.base.dsl.scoping.BaseLanguageScopeProvider;
 
-public abstract class AbstractInstanceLanguageScopeProvider extends ExpressionLanguageScopeProvider {
+public abstract class AbstractInstanceLanguageScopeProvider extends BaseLanguageScopeProvider {
 }

@@ -3,8 +3,6 @@
 package de.evoal.languages.model.mll;
 
 import de.evoal.languages.model.ddl.DataDescription;
-
-import de.evoal.languages.model.dl.TypeDefinition;
 import de.evoal.languages.model.instance.Attribute;
 import org.eclipse.emf.common.util.EList;
 
@@ -35,12 +33,12 @@ public interface PartialSurrogateFunctionDefinition extends EObject {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Name</em>' reference.
-	 * @see #setName(TypeDefinition)
+	 * @see #setName(de.evoal.languages.model.base.TypeDefinition)
 	 * @see de.evoal.languages.model.mll.MllPackage#getPartialSurrogateFunctionDefinition_Name()
 	 * @model required="true"
 	 * @generated
 	 */
-	TypeDefinition getName();
+	de.evoal.languages.model.base.TypeDefinition getName();
 
 	/**
 	 * Sets the value of the '{@link de.evoal.languages.model.mll.PartialSurrogateFunctionDefinition#getName <em>Name</em>}' reference.
@@ -50,7 +48,7 @@ public interface PartialSurrogateFunctionDefinition extends EObject {
 	 * @see #getName()
 	 * @generated
 	 */
-	void setName(TypeDefinition value);
+	void setName(de.evoal.languages.model.base.TypeDefinition value);
 
 	/**
 	 * Returns the value of the '<em><b>Inputs</b></em>' reference list.

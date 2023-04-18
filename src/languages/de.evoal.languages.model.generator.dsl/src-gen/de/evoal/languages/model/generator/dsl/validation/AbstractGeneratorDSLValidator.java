@@ -15,7 +15,7 @@ public abstract class AbstractGeneratorDSLValidator extends InstanceLanguageVali
 		List<EPackage> result = new ArrayList<EPackage>(super.getEPackages());
 		result.add(EPackage.Registry.INSTANCE.getEPackage("https://www.evoal.de/languages/generator/1.0.0"));
 		result.add(EPackage.Registry.INSTANCE.getEPackage("https://www.evoal.de/languages/instance/1.0.0"));
-		result.add(EPackage.Registry.INSTANCE.getEPackage("https://www.evoal.de/languages/el/1.0.0"));
+		result.add(EPackage.Registry.INSTANCE.getEPackage("https://www.evoal.de/languages/base/1.0.0"));
 		return result;
 	}
 }

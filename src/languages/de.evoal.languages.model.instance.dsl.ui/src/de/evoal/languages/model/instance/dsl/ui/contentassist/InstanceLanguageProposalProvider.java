@@ -19,8 +19,8 @@ import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 
 import com.google.common.base.Predicate;
 
-import de.evoal.languages.model.dl.AttributeDefinition;
-import de.evoal.languages.model.dl.TypeDefinition;
+import de.evoal.languages.model.base.AttributeDefinition;
+import de.evoal.languages.model.base.TypeDefinition;
 import de.evoal.languages.model.instance.Attribute;
 import de.evoal.languages.model.instance.Instance;
 

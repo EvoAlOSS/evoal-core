@@ -3,11 +3,9 @@
  */
 package de.evoal.languages.model.ol.impl;
 
+import de.evoal.languages.model.base.BasePackage;
+
 import de.evoal.languages.model.ddl.DdlPackage;
-
-import de.evoal.languages.model.dl.DlPackage;
-
-import de.evoal.languages.model.el.ELPackage;
 
 import de.evoal.languages.model.instance.InstancePackage;
 
@@ -107,9 +105,8 @@ public class OLPackageImpl extends EPackageImpl implements OLPackage {
 		isInited = true;
 
 		// Initialize simple dependencies
+		BasePackage.eINSTANCE.eClass();
 		DdlPackage.eINSTANCE.eClass();
-		DlPackage.eINSTANCE.eClass();
-		ELPackage.eINSTANCE.eClass();
 		InstancePackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
@@ -386,8 +383,7 @@ public class OLPackageImpl extends EPackageImpl implements OLPackage {
 		   source,
 		   new String[] {
 			   "ddl", "platform:/resource/de.evoal.languages.model.ddl/model/model.ecore#/",
-			   "dl", "platform:/resource/de.evoal.languages.model.dl/model/model.ecore#/",
-			   "el", "platform:/resource/de.evoal.languages.model.el/model/model.ecore#/",
+			   "el", "platform:/resource/de.evoal.languages.model.base/model/model.ecore#/",
 			   "instance", "platform:/resource/de.evoal.languages.model.instance/model/model.ecore#/"
 		   });
 	}

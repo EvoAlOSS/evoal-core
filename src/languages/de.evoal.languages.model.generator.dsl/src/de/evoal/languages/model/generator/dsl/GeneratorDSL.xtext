@@ -11,7 +11,7 @@ ConfigurationRule returns Configuration:
 ;
 
 ImportRule returns Import:
-	'import' importedNamespace = QualifiedNameRule ';'
+	'import' importedNamespace = QualifiedName ';'
 ;
 
 

@@ -6,7 +6,7 @@ package de.evoal.languages.model.ddl.dsl.services;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import de.evoal.languages.model.el.dsl.services.ExpressionLanguageGrammarAccess;
+import de.evoal.languages.model.base.dsl.services.BaseLanguageGrammarAccess;
 import java.util.List;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Alternatives;
@@ -38,7 +38,7 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 		private final Keyword cTypesKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
 		private final Keyword cColonKeyword_2_1 = (Keyword)cGroup_2.eContents().get(1);
 		private final Assignment cTypesAssignment_2_2 = (Assignment)cGroup_2.eContents().get(2);
-		private final RuleCall cTypesDataTypeRuleParserRuleCall_2_2_0 = (RuleCall)cTypesAssignment_2_2.eContents().get(0);
+		private final RuleCall cTypesDataTypeDefinitionRuleParserRuleCall_2_2_0 = (RuleCall)cTypesAssignment_2_2.eContents().get(0);
 		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
 		private final Keyword cDataKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
 		private final Keyword cColonKeyword_3_1 = (Keyword)cGroup_3.eContents().get(1);
@@ -53,7 +53,7 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 		//DataDescriptionModelRule returns DataDescriptionModel:
 		//    {DataDescriptionModel}
 		//    (uses += UseRule)*
-		//    ('types' ':' (types += DataTypeRule)* )?
+		//    ('types' ':' (types += DataTypeDefinitionRule)* )?
 		//    ('data' ':' (descriptions += DataDescriptionRule)* )?
 		//    ('constraints' ':' (constraints += StatementRule)*)?
 		//;
@@ -61,7 +61,7 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 		
 		//{DataDescriptionModel}
 		//(uses += UseRule)*
-		//('types' ':' (types += DataTypeRule)* )?
+		//('types' ':' (types += DataTypeDefinitionRule)* )?
 		//('data' ':' (descriptions += DataDescriptionRule)* )?
 		//('constraints' ':' (constraints += StatementRule)*)?
 		public Group getGroup() { return cGroup; }
@@ -75,7 +75,7 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 		//UseRule
 		public RuleCall getUsesUseRuleParserRuleCall_1_0() { return cUsesUseRuleParserRuleCall_1_0; }
 		
-		//('types' ':' (types += DataTypeRule)* )?
+		//('types' ':' (types += DataTypeDefinitionRule)* )?
 		public Group getGroup_2() { return cGroup_2; }
 		
 		//'types'
@@ -84,11 +84,11 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 		//':'
 		public Keyword getColonKeyword_2_1() { return cColonKeyword_2_1; }
 		
-		//(types += DataTypeRule)*
+		//(types += DataTypeDefinitionRule)*
 		public Assignment getTypesAssignment_2_2() { return cTypesAssignment_2_2; }
 		
-		//DataTypeRule
-		public RuleCall getTypesDataTypeRuleParserRuleCall_2_2_0() { return cTypesDataTypeRuleParserRuleCall_2_2_0; }
+		//DataTypeDefinitionRule
+		public RuleCall getTypesDataTypeDefinitionRuleParserRuleCall_2_2_0() { return cTypesDataTypeDefinitionRuleParserRuleCall_2_2_0; }
 		
 		//('data' ':' (descriptions += DataDescriptionRule)* )?
 		public Group getGroup_3() { return cGroup_3; }
@@ -148,8 +148,8 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 		//';'
 		public Keyword getSemicolonKeyword_2() { return cSemicolonKeyword_2; }
 	}
-	public class DataTypeRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.ddl.dsl.DataDescriptionLanguage.DataTypeRule");
+	public class DataTypeDefinitionRuleElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.ddl.dsl.DataDescriptionLanguage.DataTypeDefinitionRule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cScaleAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cScaleScaleTypeEnumRuleCall_0_0 = (RuleCall)cScaleAssignment_0.eContents().get(0);
@@ -169,7 +169,7 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 		private final RuleCall cConstraintsStatementRuleParserRuleCall_4_3_0 = (RuleCall)cConstraintsAssignment_4_3.eContents().get(0);
 		private final Keyword cSemicolonKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
-		//DataTypeRule returns DataType:
+		//DataTypeDefinitionRule returns DataTypeDefinition:
 		//    scale = ScaleType 'type' name = StringOrId ('description' ':' description = STRING)? ('with' 'constraints' ':' (constraints += StatementRule)*)?
 		//';'
 		//;
@@ -261,8 +261,8 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 		private final Keyword cOfKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		private final Keyword cTypeKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		private final Assignment cTypeAssignment_5 = (Assignment)cGroup.eContents().get(5);
-		private final CrossReference cTypeDataTypeCrossReference_5_0 = (CrossReference)cTypeAssignment_5.eContents().get(0);
-		private final RuleCall cTypeDataTypeStringOrIdParserRuleCall_5_0_1 = (RuleCall)cTypeDataTypeCrossReference_5_0.eContents().get(1);
+		private final CrossReference cTypeDataTypeDefinitionCrossReference_5_0 = (CrossReference)cTypeAssignment_5.eContents().get(0);
+		private final RuleCall cTypeDataTypeDefinitionStringOrIdParserRuleCall_5_0_1 = (RuleCall)cTypeDataTypeDefinitionCrossReference_5_0.eContents().get(1);
 		private final Group cGroup_6 = (Group)cGroup.eContents().get(6);
 		private final Keyword cWithKeyword_6_0 = (Keyword)cGroup_6.eContents().get(0);
 		private final Keyword cConstraintsKeyword_6_1 = (Keyword)cGroup_6.eContents().get(1);
@@ -272,12 +272,12 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 		private final Keyword cSemicolonKeyword_7 = (Keyword)cGroup.eContents().get(7);
 		
 		//TypedDataDescriptionRule returns TypedDataDescription:
-		//    representation=RepresentationType 'data' name = StringOrId 'of' 'type' type = [DataType|StringOrId] ('with' 'constraints' ':' (constraints += StatementRule)*)?
+		//    representation=RepresentationType 'data' name = StringOrId 'of' 'type' type = [DataTypeDefinition|StringOrId] ('with' 'constraints' ':' (constraints += StatementRule)*)?
 		//    ';'
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//representation=RepresentationType 'data' name = StringOrId 'of' 'type' type = [DataType|StringOrId] ('with' 'constraints' ':' (constraints += StatementRule)*)?
+		//representation=RepresentationType 'data' name = StringOrId 'of' 'type' type = [DataTypeDefinition|StringOrId] ('with' 'constraints' ':' (constraints += StatementRule)*)?
 		//';'
 		public Group getGroup() { return cGroup; }
 		
@@ -302,14 +302,14 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 		//'type'
 		public Keyword getTypeKeyword_4() { return cTypeKeyword_4; }
 		
-		//type = [DataType|StringOrId]
+		//type = [DataTypeDefinition|StringOrId]
 		public Assignment getTypeAssignment_5() { return cTypeAssignment_5; }
 		
-		//[DataType|StringOrId]
-		public CrossReference getTypeDataTypeCrossReference_5_0() { return cTypeDataTypeCrossReference_5_0; }
+		//[DataTypeDefinition|StringOrId]
+		public CrossReference getTypeDataTypeDefinitionCrossReference_5_0() { return cTypeDataTypeDefinitionCrossReference_5_0; }
 		
 		//StringOrId
-		public RuleCall getTypeDataTypeStringOrIdParserRuleCall_5_0_1() { return cTypeDataTypeStringOrIdParserRuleCall_5_0_1; }
+		public RuleCall getTypeDataTypeDefinitionStringOrIdParserRuleCall_5_0_1() { return cTypeDataTypeDefinitionStringOrIdParserRuleCall_5_0_1; }
 		
 		//('with' 'constraints' ':' (constraints += StatementRule)*)?
 		public Group getGroup_6() { return cGroup_6; }
@@ -408,40 +408,19 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 		private final RuleCall cExpressionRuleParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Keyword cSemicolonKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		
-		//StatementRule returns el::Expression:
-		//    ExpressionLanguage::ExpressionRule ';'
+		//StatementRule returns base::Expression:
+		//    BaseLanguage::ExpressionRule ';'
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//ExpressionLanguage::ExpressionRule ';'
+		//BaseLanguage::ExpressionRule ';'
 		public Group getGroup() { return cGroup; }
 		
-		//ExpressionLanguage::ExpressionRule
+		//BaseLanguage::ExpressionRule
 		public RuleCall getExpressionRuleParserRuleCall_0() { return cExpressionRuleParserRuleCall_0; }
 		
 		//';'
 		public Keyword getSemicolonKeyword_1() { return cSemicolonKeyword_1; }
-	}
-	public class FunctionNameRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.ddl.dsl.DataDescriptionLanguage.FunctionNameRule");
-		private final Assignment cDefinitionAssignment = (Assignment)rule.eContents().get(1);
-		private final CrossReference cDefinitionFunctionDefinitionCrossReference_0 = (CrossReference)cDefinitionAssignment.eContents().get(0);
-		private final RuleCall cDefinitionFunctionDefinitionIDTerminalRuleCall_0_1 = (RuleCall)cDefinitionFunctionDefinitionCrossReference_0.eContents().get(1);
-		
-		//@Override
-		//FunctionNameRule returns FunctionName:
-		//    definition = [dl::FunctionDefinition]
-		//;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//definition = [dl::FunctionDefinition]
-		public Assignment getDefinitionAssignment() { return cDefinitionAssignment; }
-		
-		//[dl::FunctionDefinition]
-		public CrossReference getDefinitionFunctionDefinitionCrossReference_0() { return cDefinitionFunctionDefinitionCrossReference_0; }
-		
-		//ID
-		public RuleCall getDefinitionFunctionDefinitionIDTerminalRuleCall_0_1() { return cDefinitionFunctionDefinitionIDTerminalRuleCall_0_1; }
 	}
 	public class ValueReferenceRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.ddl.dsl.DataDescriptionLanguage.ValueReferenceRule");
@@ -450,7 +429,7 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 		private final RuleCall cSelfReferenceRuleParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//@Override
-		//ValueReferenceRule returns el::ValueReference:
+		//ValueReferenceRule returns base::ValueReference:
 		//    DataReferenceRule | SelfReferenceRule
 		//;
 		@Override public ParserRule getRule() { return rule; }
@@ -611,39 +590,37 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 	private final UseRuleElements pUseRule;
 	private final ScaleTypeElements eScaleType;
 	private final RepresentationTypeElements eRepresentationType;
-	private final DataTypeRuleElements pDataTypeRule;
+	private final DataTypeDefinitionRuleElements pDataTypeDefinitionRule;
 	private final DataDescriptionRuleElements pDataDescriptionRule;
 	private final TypedDataDescriptionRuleElements pTypedDataDescriptionRule;
 	private final UntypedDataDescriptionRuleElements pUntypedDataDescriptionRule;
 	private final StatementRuleElements pStatementRule;
-	private final FunctionNameRuleElements pFunctionNameRule;
 	private final ValueReferenceRuleElements pValueReferenceRule;
 	private final DataReferenceRuleElements pDataReferenceRule;
 	private final SelfReferenceRuleElements pSelfReferenceRule;
 	
 	private final Grammar grammar;
 	
-	private final ExpressionLanguageGrammarAccess gaExpressionLanguage;
+	private final BaseLanguageGrammarAccess gaBaseLanguage;
 	
 	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public DataDescriptionLanguageGrammarAccess(GrammarProvider grammarProvider,
-			ExpressionLanguageGrammarAccess gaExpressionLanguage,
+			BaseLanguageGrammarAccess gaBaseLanguage,
 			TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
-		this.gaExpressionLanguage = gaExpressionLanguage;
+		this.gaBaseLanguage = gaBaseLanguage;
 		this.gaTerminals = gaTerminals;
 		this.pDataDescriptionModelRule = new DataDescriptionModelRuleElements();
 		this.pUseRule = new UseRuleElements();
 		this.eScaleType = new ScaleTypeElements();
 		this.eRepresentationType = new RepresentationTypeElements();
-		this.pDataTypeRule = new DataTypeRuleElements();
+		this.pDataTypeDefinitionRule = new DataTypeDefinitionRuleElements();
 		this.pDataDescriptionRule = new DataDescriptionRuleElements();
 		this.pTypedDataDescriptionRule = new TypedDataDescriptionRuleElements();
 		this.pUntypedDataDescriptionRule = new UntypedDataDescriptionRuleElements();
 		this.pStatementRule = new StatementRuleElements();
-		this.pFunctionNameRule = new FunctionNameRuleElements();
 		this.pValueReferenceRule = new ValueReferenceRuleElements();
 		this.pDataReferenceRule = new DataReferenceRuleElements();
 		this.pSelfReferenceRule = new SelfReferenceRuleElements();
@@ -671,8 +648,8 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 	}
 	
 	
-	public ExpressionLanguageGrammarAccess getExpressionLanguageGrammarAccess() {
-		return gaExpressionLanguage;
+	public BaseLanguageGrammarAccess getBaseLanguageGrammarAccess() {
+		return gaBaseLanguage;
 	}
 	
 	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
@@ -683,7 +660,7 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 	//DataDescriptionModelRule returns DataDescriptionModel:
 	//    {DataDescriptionModel}
 	//    (uses += UseRule)*
-	//    ('types' ':' (types += DataTypeRule)* )?
+	//    ('types' ':' (types += DataTypeDefinitionRule)* )?
 	//    ('data' ':' (descriptions += DataDescriptionRule)* )?
 	//    ('constraints' ':' (constraints += StatementRule)*)?
 	//;
@@ -733,16 +710,16 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 		return getRepresentationTypeAccess().getRule();
 	}
 	
-	//DataTypeRule returns DataType:
+	//DataTypeDefinitionRule returns DataTypeDefinition:
 	//    scale = ScaleType 'type' name = StringOrId ('description' ':' description = STRING)? ('with' 'constraints' ':' (constraints += StatementRule)*)?
 	//';'
 	//;
-	public DataTypeRuleElements getDataTypeRuleAccess() {
-		return pDataTypeRule;
+	public DataTypeDefinitionRuleElements getDataTypeDefinitionRuleAccess() {
+		return pDataTypeDefinitionRule;
 	}
 	
-	public ParserRule getDataTypeRuleRule() {
-		return getDataTypeRuleAccess().getRule();
+	public ParserRule getDataTypeDefinitionRuleRule() {
+		return getDataTypeDefinitionRuleAccess().getRule();
 	}
 	
 	//DataDescriptionRule returns DataDescription:
@@ -757,7 +734,7 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 	}
 	
 	//TypedDataDescriptionRule returns TypedDataDescription:
-	//    representation=RepresentationType 'data' name = StringOrId 'of' 'type' type = [DataType|StringOrId] ('with' 'constraints' ':' (constraints += StatementRule)*)?
+	//    representation=RepresentationType 'data' name = StringOrId 'of' 'type' type = [DataTypeDefinition|StringOrId] ('with' 'constraints' ':' (constraints += StatementRule)*)?
 	//    ';'
 	//;
 	public TypedDataDescriptionRuleElements getTypedDataDescriptionRuleAccess() {
@@ -780,8 +757,8 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 		return getUntypedDataDescriptionRuleAccess().getRule();
 	}
 	
-	//StatementRule returns el::Expression:
-	//    ExpressionLanguage::ExpressionRule ';'
+	//StatementRule returns base::Expression:
+	//    BaseLanguage::ExpressionRule ';'
 	//;
 	public StatementRuleElements getStatementRuleAccess() {
 		return pStatementRule;
@@ -792,19 +769,7 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 	}
 	
 	//@Override
-	//FunctionNameRule returns FunctionName:
-	//    definition = [dl::FunctionDefinition]
-	//;
-	public FunctionNameRuleElements getFunctionNameRuleAccess() {
-		return pFunctionNameRule;
-	}
-	
-	public ParserRule getFunctionNameRuleRule() {
-		return getFunctionNameRuleAccess().getRule();
-	}
-	
-	//@Override
-	//ValueReferenceRule returns el::ValueReference:
+	//ValueReferenceRule returns base::ValueReference:
 	//    DataReferenceRule | SelfReferenceRule
 	//;
 	public ValueReferenceRuleElements getValueReferenceRuleAccess() {
@@ -841,8 +806,8 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 	//ExpressionRule returns Expression:
 	//    OrExpressionRule
 	//;
-	public ExpressionLanguageGrammarAccess.ExpressionRuleElements getExpressionRuleAccess() {
-		return gaExpressionLanguage.getExpressionRuleAccess();
+	public BaseLanguageGrammarAccess.ExpressionRuleElements getExpressionRuleAccess() {
+		return gaBaseLanguage.getExpressionRuleAccess();
 	}
 	
 	public ParserRule getExpressionRuleRule() {
@@ -852,8 +817,8 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 	//OrExpressionRule returns OrExpression:
 	//    subExpressions += XorExpressionRule ( "OR" subExpressions += XorExpressionRule )*
 	//;
-	public ExpressionLanguageGrammarAccess.OrExpressionRuleElements getOrExpressionRuleAccess() {
-		return gaExpressionLanguage.getOrExpressionRuleAccess();
+	public BaseLanguageGrammarAccess.OrExpressionRuleElements getOrExpressionRuleAccess() {
+		return gaBaseLanguage.getOrExpressionRuleAccess();
 	}
 	
 	public ParserRule getOrExpressionRuleRule() {
@@ -863,8 +828,8 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 	//XorExpressionRule returns XorExpression:
 	//    subExpressions += AndExpressionRule ( "XOR" subExpressions += AndExpressionRule )*
 	//;
-	public ExpressionLanguageGrammarAccess.XorExpressionRuleElements getXorExpressionRuleAccess() {
-		return gaExpressionLanguage.getXorExpressionRuleAccess();
+	public BaseLanguageGrammarAccess.XorExpressionRuleElements getXorExpressionRuleAccess() {
+		return gaBaseLanguage.getXorExpressionRuleAccess();
 	}
 	
 	public ParserRule getXorExpressionRuleRule() {
@@ -874,8 +839,8 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 	//AndExpressionRule returns AndExpression:
 	//    subExpressions += NotExpressionRule ( "AND" subExpressions += NotExpressionRule )*
 	//;
-	public ExpressionLanguageGrammarAccess.AndExpressionRuleElements getAndExpressionRuleAccess() {
-		return gaExpressionLanguage.getAndExpressionRuleAccess();
+	public BaseLanguageGrammarAccess.AndExpressionRuleElements getAndExpressionRuleAccess() {
+		return gaBaseLanguage.getAndExpressionRuleAccess();
 	}
 	
 	public ParserRule getAndExpressionRuleRule() {
@@ -885,8 +850,8 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 	//NotExpressionRule returns NotExpression:
 	//    ( negated ?= "!")? operand = ComparisonExpressionRule
 	//;
-	public ExpressionLanguageGrammarAccess.NotExpressionRuleElements getNotExpressionRuleAccess() {
-		return gaExpressionLanguage.getNotExpressionRuleAccess();
+	public BaseLanguageGrammarAccess.NotExpressionRuleElements getNotExpressionRuleAccess() {
+		return gaBaseLanguage.getNotExpressionRuleAccess();
 	}
 	
 	public ParserRule getNotExpressionRuleRule() {
@@ -896,8 +861,8 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 	//ComparisonExpressionRule returns ComparisonExpression:
 	//    leftOperand = AddOrSubtractExpressionRule ( comparison += PartialComparisonExpressionRule )*
 	//;
-	public ExpressionLanguageGrammarAccess.ComparisonExpressionRuleElements getComparisonExpressionRuleAccess() {
-		return gaExpressionLanguage.getComparisonExpressionRuleAccess();
+	public BaseLanguageGrammarAccess.ComparisonExpressionRuleElements getComparisonExpressionRuleAccess() {
+		return gaBaseLanguage.getComparisonExpressionRuleAccess();
 	}
 	
 	public ParserRule getComparisonExpressionRuleRule() {
@@ -907,8 +872,8 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 	//PartialComparisonExpressionRule returns PartialComparisonExpression :
 	//    operator = ComparisonOperatorRule subExpression = AddOrSubtractExpressionRule
 	//;
-	public ExpressionLanguageGrammarAccess.PartialComparisonExpressionRuleElements getPartialComparisonExpressionRuleAccess() {
-		return gaExpressionLanguage.getPartialComparisonExpressionRuleAccess();
+	public BaseLanguageGrammarAccess.PartialComparisonExpressionRuleElements getPartialComparisonExpressionRuleAccess() {
+		return gaBaseLanguage.getPartialComparisonExpressionRuleAccess();
 	}
 	
 	public ParserRule getPartialComparisonExpressionRuleRule() {
@@ -923,8 +888,8 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 	//    LessEqual = "<" |
 	//    LessThan = "<="
 	//;
-	public ExpressionLanguageGrammarAccess.ComparisonOperatorRuleElements getComparisonOperatorRuleAccess() {
-		return gaExpressionLanguage.getComparisonOperatorRuleAccess();
+	public BaseLanguageGrammarAccess.ComparisonOperatorRuleElements getComparisonOperatorRuleAccess() {
+		return gaBaseLanguage.getComparisonOperatorRuleAccess();
 	}
 	
 	public EnumRule getComparisonOperatorRuleRule() {
@@ -934,8 +899,8 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 	//AddOrSubtractExpressionRule returns AddOrSubtractExpression:
 	//    leftOperand = MultiplyDivideModuloExpressionRule (operators+=AddOrSubtractOperatorRule operands += MultiplyDivideModuloExpressionRule)*
 	//;
-	public ExpressionLanguageGrammarAccess.AddOrSubtractExpressionRuleElements getAddOrSubtractExpressionRuleAccess() {
-		return gaExpressionLanguage.getAddOrSubtractExpressionRuleAccess();
+	public BaseLanguageGrammarAccess.AddOrSubtractExpressionRuleElements getAddOrSubtractExpressionRuleAccess() {
+		return gaBaseLanguage.getAddOrSubtractExpressionRuleAccess();
 	}
 	
 	public ParserRule getAddOrSubtractExpressionRuleRule() {
@@ -945,8 +910,8 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 	//enum AddOrSubtractOperatorRule returns AddOrSubtractOperator:
 	//    Add = '+' | Subtract = '-'
 	//;
-	public ExpressionLanguageGrammarAccess.AddOrSubtractOperatorRuleElements getAddOrSubtractOperatorRuleAccess() {
-		return gaExpressionLanguage.getAddOrSubtractOperatorRuleAccess();
+	public BaseLanguageGrammarAccess.AddOrSubtractOperatorRuleElements getAddOrSubtractOperatorRuleAccess() {
+		return gaBaseLanguage.getAddOrSubtractOperatorRuleAccess();
 	}
 	
 	public EnumRule getAddOrSubtractOperatorRuleRule() {
@@ -956,8 +921,8 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 	//MultiplyDivideModuloExpressionRule returns MultiplyDivideModuloExpression :
 	//    leftOperand = PowerOfExpressionRule (operators+= MultiplyDivideModuloOperatorRule operands += PowerOfExpressionRule)*
 	//;
-	public ExpressionLanguageGrammarAccess.MultiplyDivideModuloExpressionRuleElements getMultiplyDivideModuloExpressionRuleAccess() {
-		return gaExpressionLanguage.getMultiplyDivideModuloExpressionRuleAccess();
+	public BaseLanguageGrammarAccess.MultiplyDivideModuloExpressionRuleElements getMultiplyDivideModuloExpressionRuleAccess() {
+		return gaBaseLanguage.getMultiplyDivideModuloExpressionRuleAccess();
 	}
 	
 	public ParserRule getMultiplyDivideModuloExpressionRuleRule() {
@@ -967,8 +932,8 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 	//enum MultiplyDivideModuloOperatorRule returns MultiplyDivideModuloOperator:
 	//    Multiply = '*' | Divide = "/" | Modulo = '%'
 	//;
-	public ExpressionLanguageGrammarAccess.MultiplyDivideModuloOperatorRuleElements getMultiplyDivideModuloOperatorRuleAccess() {
-		return gaExpressionLanguage.getMultiplyDivideModuloOperatorRuleAccess();
+	public BaseLanguageGrammarAccess.MultiplyDivideModuloOperatorRuleElements getMultiplyDivideModuloOperatorRuleAccess() {
+		return gaBaseLanguage.getMultiplyDivideModuloOperatorRuleAccess();
 	}
 	
 	public EnumRule getMultiplyDivideModuloOperatorRuleRule() {
@@ -978,8 +943,8 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 	//PowerOfExpressionRule returns PowerOfExpression :
 	//    leftOperand = UnaryAddOrSubtractExpressionRule ('^' rightOperand = PowerOfExpressionRule)?
 	//;
-	public ExpressionLanguageGrammarAccess.PowerOfExpressionRuleElements getPowerOfExpressionRuleAccess() {
-		return gaExpressionLanguage.getPowerOfExpressionRuleAccess();
+	public BaseLanguageGrammarAccess.PowerOfExpressionRuleElements getPowerOfExpressionRuleAccess() {
+		return gaBaseLanguage.getPowerOfExpressionRuleAccess();
 	}
 	
 	public ParserRule getPowerOfExpressionRuleRule() {
@@ -989,8 +954,8 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 	//UnaryAddOrSubtractExpressionRule returns UnaryAddOrSubtractExpression :
 	//    ( operators+=AddOrSubtractOperatorRule )* subExpression = LiteralOrReferenceRule
 	//;
-	public ExpressionLanguageGrammarAccess.UnaryAddOrSubtractExpressionRuleElements getUnaryAddOrSubtractExpressionRuleAccess() {
-		return gaExpressionLanguage.getUnaryAddOrSubtractExpressionRuleAccess();
+	public BaseLanguageGrammarAccess.UnaryAddOrSubtractExpressionRuleElements getUnaryAddOrSubtractExpressionRuleAccess() {
+		return gaBaseLanguage.getUnaryAddOrSubtractExpressionRuleAccess();
 	}
 	
 	public ParserRule getUnaryAddOrSubtractExpressionRuleRule() {
@@ -999,8 +964,8 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 	
 	//LiteralOrReferenceRule returns CallOrLiteralOrReferenceOrParantheses:
 	//    CallRule | LiteralRule | ParanthesesRule | ValueReferenceRule;
-	public ExpressionLanguageGrammarAccess.LiteralOrReferenceRuleElements getLiteralOrReferenceRuleAccess() {
-		return gaExpressionLanguage.getLiteralOrReferenceRuleAccess();
+	public BaseLanguageGrammarAccess.LiteralOrReferenceRuleElements getLiteralOrReferenceRuleAccess() {
+		return gaBaseLanguage.getLiteralOrReferenceRuleAccess();
 	}
 	
 	public ParserRule getLiteralOrReferenceRuleRule() {
@@ -1010,8 +975,8 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 	//ParanthesesRule returns Parantheses:
 	//    '(' subExpression = ExpressionRule ')'
 	//;
-	public ExpressionLanguageGrammarAccess.ParanthesesRuleElements getParanthesesRuleAccess() {
-		return gaExpressionLanguage.getParanthesesRuleAccess();
+	public BaseLanguageGrammarAccess.ParanthesesRuleElements getParanthesesRuleAccess() {
+		return gaBaseLanguage.getParanthesesRuleAccess();
 	}
 	
 	public ParserRule getParanthesesRuleRule() {
@@ -1021,8 +986,8 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 	//CallRule returns Call:
 	//    function=FunctionNameRule '(' (parameters += ExpressionRule (',' parameters += ExpressionRule)* )? ')'
 	//;
-	public ExpressionLanguageGrammarAccess.CallRuleElements getCallRuleAccess() {
-		return gaExpressionLanguage.getCallRuleAccess();
+	public BaseLanguageGrammarAccess.CallRuleElements getCallRuleAccess() {
+		return gaBaseLanguage.getCallRuleAccess();
 	}
 	
 	public ParserRule getCallRuleRule() {
@@ -1034,8 +999,8 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 	//        | StringLiteralRule
 	//        | BooleanLiteralRule
 	//;
-	public ExpressionLanguageGrammarAccess.LiteralRuleElements getLiteralRuleAccess() {
-		return gaExpressionLanguage.getLiteralRuleAccess();
+	public BaseLanguageGrammarAccess.LiteralRuleElements getLiteralRuleAccess() {
+		return gaBaseLanguage.getLiteralRuleAccess();
 	}
 	
 	public ParserRule getLiteralRuleRule() {
@@ -1045,8 +1010,8 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 	//NumberLiteralRule returns NumberLiteral:
 	//    DoubleLiteralRule | IntegerLiteralRule
 	//;
-	public ExpressionLanguageGrammarAccess.NumberLiteralRuleElements getNumberLiteralRuleAccess() {
-		return gaExpressionLanguage.getNumberLiteralRuleAccess();
+	public BaseLanguageGrammarAccess.NumberLiteralRuleElements getNumberLiteralRuleAccess() {
+		return gaBaseLanguage.getNumberLiteralRuleAccess();
 	}
 	
 	public ParserRule getNumberLiteralRuleRule() {
@@ -1056,8 +1021,8 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 	//DoubleLiteralRule returns DoubleLiteral :
 	//    literal = DOUBLE (factor = FactorRule)?
 	//;
-	public ExpressionLanguageGrammarAccess.DoubleLiteralRuleElements getDoubleLiteralRuleAccess() {
-		return gaExpressionLanguage.getDoubleLiteralRuleAccess();
+	public BaseLanguageGrammarAccess.DoubleLiteralRuleElements getDoubleLiteralRuleAccess() {
+		return gaBaseLanguage.getDoubleLiteralRuleAccess();
 	}
 	
 	public ParserRule getDoubleLiteralRuleRule() {
@@ -1067,8 +1032,8 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 	//IntegerLiteralRule returns IntegerLiteral:
 	//    literal = INT (factor = FactorRule)?
 	//;
-	public ExpressionLanguageGrammarAccess.IntegerLiteralRuleElements getIntegerLiteralRuleAccess() {
-		return gaExpressionLanguage.getIntegerLiteralRuleAccess();
+	public BaseLanguageGrammarAccess.IntegerLiteralRuleElements getIntegerLiteralRuleAccess() {
+		return gaBaseLanguage.getIntegerLiteralRuleAccess();
 	}
 	
 	public ParserRule getIntegerLiteralRuleRule() {
@@ -1078,8 +1043,8 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 	//StringLiteralRule returns StringLiteral:
 	//    value = STRING
 	//;
-	public ExpressionLanguageGrammarAccess.StringLiteralRuleElements getStringLiteralRuleAccess() {
-		return gaExpressionLanguage.getStringLiteralRuleAccess();
+	public BaseLanguageGrammarAccess.StringLiteralRuleElements getStringLiteralRuleAccess() {
+		return gaBaseLanguage.getStringLiteralRuleAccess();
 	}
 	
 	public ParserRule getStringLiteralRuleRule() {
@@ -1108,8 +1073,8 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 	//    Zepto = 'z' |
 	//    Yocto = 'y'
 	//;
-	public ExpressionLanguageGrammarAccess.FactorRuleElements getFactorRuleAccess() {
-		return gaExpressionLanguage.getFactorRuleAccess();
+	public BaseLanguageGrammarAccess.FactorRuleElements getFactorRuleAccess() {
+		return gaBaseLanguage.getFactorRuleAccess();
 	}
 	
 	public EnumRule getFactorRuleRule() {
@@ -1119,18 +1084,215 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 	//BooleanLiteralRule returns BooleanLiteral:
 	//    {BooleanLiteral} (value ?= 'true' |  'false')
 	//;
-	public ExpressionLanguageGrammarAccess.BooleanLiteralRuleElements getBooleanLiteralRuleAccess() {
-		return gaExpressionLanguage.getBooleanLiteralRuleAccess();
+	public BaseLanguageGrammarAccess.BooleanLiteralRuleElements getBooleanLiteralRuleAccess() {
+		return gaBaseLanguage.getBooleanLiteralRuleAccess();
 	}
 	
 	public ParserRule getBooleanLiteralRuleRule() {
 		return getBooleanLiteralRuleAccess().getRule();
 	}
 	
+	//TypeDefinitionRule returns TypeDefinition:
+	//    (abstract?='abstract')? 'type' name = StringOrId ('extends' superType = [TypeDefinition|QualifiedName])? '{'
+	//        attributes += AttributeDefinitionRule*
+	//    '}'
+	//;
+	public BaseLanguageGrammarAccess.TypeDefinitionRuleElements getTypeDefinitionRuleAccess() {
+		return gaBaseLanguage.getTypeDefinitionRuleAccess();
+	}
+	
+	public ParserRule getTypeDefinitionRuleRule() {
+		return getTypeDefinitionRuleAccess().getRule();
+	}
+	
+	//AttributeDefinitionRule returns AttributeDefinition:
+	//    name = StringOrId ':' type = TypeRule ';'
+	//;
+	public BaseLanguageGrammarAccess.AttributeDefinitionRuleElements getAttributeDefinitionRuleAccess() {
+		return gaBaseLanguage.getAttributeDefinitionRuleAccess();
+	}
+	
+	public ParserRule getAttributeDefinitionRuleRule() {
+		return getAttributeDefinitionRuleAccess().getRule();
+	}
+	
+	//TypeRule returns Type:
+	//    StringTypeRule | IntTypeRule | FloatTypeRule | BooleanTypeRule | LiteralTypeRule | ArrayTypeRule | InstanceTypeRule | VoidTypeRule | ExpressionTypeRule | DataTypeRule
+	//;
+	public BaseLanguageGrammarAccess.TypeRuleElements getTypeRuleAccess() {
+		return gaBaseLanguage.getTypeRuleAccess();
+	}
+	
+	public ParserRule getTypeRuleRule() {
+		return getTypeRuleAccess().getRule();
+	}
+	
+	//LiteralTypeRule returns LiteralType:
+	//    {LiteralType} 'literal'
+	//;
+	public BaseLanguageGrammarAccess.LiteralTypeRuleElements getLiteralTypeRuleAccess() {
+		return gaBaseLanguage.getLiteralTypeRuleAccess();
+	}
+	
+	public ParserRule getLiteralTypeRuleRule() {
+		return getLiteralTypeRuleAccess().getRule();
+	}
+	
+	//InstanceTypeRule returns InstanceType:
+	//    {InstanceType}
+	//    'instance' definitions += [TypeDefinition|QualifiedName] ('|' definitions += [TypeDefinition|QualifiedName])*
+	//;
+	public BaseLanguageGrammarAccess.InstanceTypeRuleElements getInstanceTypeRuleAccess() {
+		return gaBaseLanguage.getInstanceTypeRuleAccess();
+	}
+	
+	public ParserRule getInstanceTypeRuleRule() {
+		return getInstanceTypeRuleAccess().getRule();
+	}
+	
+	//StringTypeRule returns StringType:
+	//    {StringType}
+	//    'string'
+	//;
+	public BaseLanguageGrammarAccess.StringTypeRuleElements getStringTypeRuleAccess() {
+		return gaBaseLanguage.getStringTypeRuleAccess();
+	}
+	
+	public ParserRule getStringTypeRuleRule() {
+		return getStringTypeRuleAccess().getRule();
+	}
+	
+	//ExpressionTypeRule returns ExpressionType:
+	//    {ExpressionType}
+	//    'expression'
+	//;
+	public BaseLanguageGrammarAccess.ExpressionTypeRuleElements getExpressionTypeRuleAccess() {
+		return gaBaseLanguage.getExpressionTypeRuleAccess();
+	}
+	
+	public ParserRule getExpressionTypeRuleRule() {
+		return getExpressionTypeRuleAccess().getRule();
+	}
+	
+	//IntTypeRule returns IntType:
+	//    {IntType}
+	//    'int'
+	//;
+	public BaseLanguageGrammarAccess.IntTypeRuleElements getIntTypeRuleAccess() {
+		return gaBaseLanguage.getIntTypeRuleAccess();
+	}
+	
+	public ParserRule getIntTypeRuleRule() {
+		return getIntTypeRuleAccess().getRule();
+	}
+	
+	//FloatTypeRule returns FloatType:
+	//    {FloatType}
+	//    'float'
+	//;
+	public BaseLanguageGrammarAccess.FloatTypeRuleElements getFloatTypeRuleAccess() {
+		return gaBaseLanguage.getFloatTypeRuleAccess();
+	}
+	
+	public ParserRule getFloatTypeRuleRule() {
+		return getFloatTypeRuleAccess().getRule();
+	}
+	
+	//BooleanTypeRule returns BooleanType:
+	//    {BooleanType}
+	//    'boolean'
+	//;
+	public BaseLanguageGrammarAccess.BooleanTypeRuleElements getBooleanTypeRuleAccess() {
+		return gaBaseLanguage.getBooleanTypeRuleAccess();
+	}
+	
+	public ParserRule getBooleanTypeRuleRule() {
+		return getBooleanTypeRuleAccess().getRule();
+	}
+	
+	//VoidTypeRule returns VoidType:
+	//    {VoidType}
+	//    'void'
+	//;
+	public BaseLanguageGrammarAccess.VoidTypeRuleElements getVoidTypeRuleAccess() {
+		return gaBaseLanguage.getVoidTypeRuleAccess();
+	}
+	
+	public ParserRule getVoidTypeRuleRule() {
+		return getVoidTypeRuleAccess().getRule();
+	}
+	
+	//DataTypeRule returns DataType:
+	//    {DataType}
+	//    'data'
+	//;
+	public BaseLanguageGrammarAccess.DataTypeRuleElements getDataTypeRuleAccess() {
+		return gaBaseLanguage.getDataTypeRuleAccess();
+	}
+	
+	public ParserRule getDataTypeRuleRule() {
+		return getDataTypeRuleAccess().getRule();
+	}
+	
+	//ArrayTypeRule returns ArrayType:
+	//    'array'     elements += TypeRule
+	//;
+	public BaseLanguageGrammarAccess.ArrayTypeRuleElements getArrayTypeRuleAccess() {
+		return gaBaseLanguage.getArrayTypeRuleAccess();
+	}
+	
+	public ParserRule getArrayTypeRuleRule() {
+		return getArrayTypeRuleAccess().getRule();
+	}
+	
+	//FunctionDefinitionRule returns FunctionDefinition:
+	//    'def' type = TypeRule name = StringOrId '(' (parameters+=ParameterRule (',' parameters+=ParameterRule)*)? ')' ';'
+	//;
+	public BaseLanguageGrammarAccess.FunctionDefinitionRuleElements getFunctionDefinitionRuleAccess() {
+		return gaBaseLanguage.getFunctionDefinitionRuleAccess();
+	}
+	
+	public ParserRule getFunctionDefinitionRuleRule() {
+		return getFunctionDefinitionRuleAccess().getRule();
+	}
+	
+	//ParameterRule returns Parameter:
+	//    type = TypeRule name = StringOrId
+	//;
+	public BaseLanguageGrammarAccess.ParameterRuleElements getParameterRuleAccess() {
+		return gaBaseLanguage.getParameterRuleAccess();
+	}
+	
+	public ParserRule getParameterRuleRule() {
+		return getParameterRuleAccess().getRule();
+	}
+	
+	//FunctionNameRule returns DefinedFunctionName:
+	//    definition = [FunctionDefinition|QualifiedName]
+	//;
+	public BaseLanguageGrammarAccess.FunctionNameRuleElements getFunctionNameRuleAccess() {
+		return gaBaseLanguage.getFunctionNameRuleAccess();
+	}
+	
+	public ParserRule getFunctionNameRuleRule() {
+		return getFunctionNameRuleAccess().getRule();
+	}
+	
+	//QualifiedName:
+	//    StringOrId ('.' StringOrId)*
+	//;
+	public BaseLanguageGrammarAccess.QualifiedNameElements getQualifiedNameAccess() {
+		return gaBaseLanguage.getQualifiedNameAccess();
+	}
+	
+	public ParserRule getQualifiedNameRule() {
+		return getQualifiedNameAccess().getRule();
+	}
+	
 	//StringOrId:
 	//    QUOTED_ID | ID;
-	public ExpressionLanguageGrammarAccess.StringOrIdElements getStringOrIdAccess() {
-		return gaExpressionLanguage.getStringOrIdAccess();
+	public BaseLanguageGrammarAccess.StringOrIdElements getStringOrIdAccess() {
+		return gaBaseLanguage.getStringOrIdAccess();
 	}
 	
 	public ParserRule getStringOrIdRule() {
@@ -1139,36 +1301,36 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 	
 	//terminal fragment DIGIT: '0'..'9';
 	public TerminalRule getDIGITRule() {
-		return gaExpressionLanguage.getDIGITRule();
+		return gaBaseLanguage.getDIGITRule();
 	}
 	
 	//terminal fragment EXPONENT: 'e' ('+'|'-')? DIGIT+;
 	public TerminalRule getEXPONENTRule() {
-		return gaExpressionLanguage.getEXPONENTRule();
+		return gaBaseLanguage.getEXPONENTRule();
 	}
 	
 	//@Override
 	//terminal INT returns ecore::EInt: '-'? DIGIT+;
 	public TerminalRule getINTRule() {
-		return gaExpressionLanguage.getINTRule();
+		return gaBaseLanguage.getINTRule();
 	}
 	
 	//terminal DOUBLE returns ecore::EDouble: INT EXPONENT | INT '.' DIGIT* EXPONENT?;
 	public TerminalRule getDOUBLERule() {
-		return gaExpressionLanguage.getDOUBLERule();
+		return gaBaseLanguage.getDOUBLERule();
 	}
 	
 	//@Override
 	//terminal STRING:
 	//    '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"';
 	public TerminalRule getSTRINGRule() {
-		return gaExpressionLanguage.getSTRINGRule();
+		return gaBaseLanguage.getSTRINGRule();
 	}
 	
 	//terminal QUOTED_ID:
 	//    "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'";
 	public TerminalRule getQUOTED_IDRule() {
-		return gaExpressionLanguage.getQUOTED_IDRule();
+		return gaBaseLanguage.getQUOTED_IDRule();
 	}
 	
 	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;

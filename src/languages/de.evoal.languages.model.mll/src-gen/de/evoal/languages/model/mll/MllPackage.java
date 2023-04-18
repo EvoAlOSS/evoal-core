@@ -2,8 +2,7 @@
  */
 package de.evoal.languages.model.mll;
 
-import de.evoal.languages.model.el.ELPackage;
-
+import de.evoal.languages.model.base.BasePackage;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
@@ -27,7 +26,7 @@ import org.eclipse.emf.ecore.EReference;
  * <!-- end-model-doc -->
  * @see de.evoal.languages.model.mll.MllFactory
  * @model kind="package"
- *        annotation="http://www.eclipse.org/OCL/Import ddl='platform:/resource/de.evoal.languages.model.ddl/model/model.ecore#/' dl='platform:/resource/de.evoal.languages.model.dl/model/model.ecore#/' ecore='http://www.eclipse.org/emf/2002/Ecore' el='platform:/resource/de.evoal.languages.model.el/model/model.ecore#/' instance='platform:/resource/de.evoal.languages.model.instance/model/model.ecore#/'"
+ *        annotation="http://www.eclipse.org/OCL/Import ddl='platform:/resource/de.evoal.languages.model.ddl/model/model.ecore#/' ecore='http://www.eclipse.org/emf/2002/Ecore' el='platform:/resource/de.evoal.languages.model.base/model/model.ecore#/' instance='platform:/resource/de.evoal.languages.model.instance/model/model.ecore#/'"
  * @generated
  */
 public interface MllPackage extends EPackage {
@@ -588,7 +587,7 @@ public interface MllPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DEFINED_FUNCTION_NAME__DEFINITION = ELPackage.FUNCTION_NAME_FEATURE_COUNT + 0;
+	int DEFINED_FUNCTION_NAME__DEFINITION = BasePackage.FUNCTION_NAME_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Defined Function Name</em>' class.
@@ -597,7 +596,7 @@ public interface MllPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DEFINED_FUNCTION_NAME_FEATURE_COUNT = ELPackage.FUNCTION_NAME_FEATURE_COUNT + 1;
+	int DEFINED_FUNCTION_NAME_FEATURE_COUNT = BasePackage.FUNCTION_NAME_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.mll.impl.UseImpl <em>Use</em>}' class.

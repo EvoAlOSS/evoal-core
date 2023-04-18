@@ -2,10 +2,9 @@ grammar de.evoal.languages.model.ol.dsl.OptimisationLanguage with de.evoal.langu
 
 import "https://www.evoal.de/languages/ol/1.0.0" 
 
-import "https://www.evoal.de/languages/dl/1.0.0" as dl
 import "https://www.evoal.de/languages/ddl/1.0.0" as ddl
 import "https://www.evoal.de/languages/instance/1.0.0" as instance
-import "https://www.evoal.de/languages/el/1.0.0" as el
+import "https://www.evoal.de/languages/base/1.0.0" as base
 
 OptimisationModelRule returns OptimisationModel:
 	(imports += ImportRule)*

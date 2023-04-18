@@ -2,10 +2,6 @@
  */
 package de.evoal.languages.model.mll.impl;
 
-import de.evoal.languages.model.dl.FunctionDefinition;
-
-import de.evoal.languages.model.el.impl.FunctionNameImpl;
-
 import de.evoal.languages.model.mll.DefinedFunctionName;
 import de.evoal.languages.model.mll.MllPackage;
 
@@ -29,7 +25,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *
  * @generated
  */
-public class DefinedFunctionNameImpl extends FunctionNameImpl implements DefinedFunctionName {
+public class DefinedFunctionNameImpl extends de.evoal.languages.model.base.impl.FunctionNameImpl implements DefinedFunctionName {
 	/**
 	 * The cached value of the '{@link #getDefinition() <em>Definition</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -38,7 +34,7 @@ public class DefinedFunctionNameImpl extends FunctionNameImpl implements Defined
 	 * @generated
 	 * @ordered
 	 */
-	protected FunctionDefinition definition;
+	protected de.evoal.languages.model.base.FunctionDefinition definition;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -65,10 +61,10 @@ public class DefinedFunctionNameImpl extends FunctionNameImpl implements Defined
 	 * @generated
 	 */
 	@Override
-	public FunctionDefinition getDefinition() {
+	public de.evoal.languages.model.base.FunctionDefinition getDefinition() {
 		if (definition != null && definition.eIsProxy()) {
 			InternalEObject oldDefinition = (InternalEObject)definition;
-			definition = (FunctionDefinition)eResolveProxy(oldDefinition);
+			definition = (de.evoal.languages.model.base.FunctionDefinition)eResolveProxy(oldDefinition);
 			if (definition != oldDefinition) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, MllPackage.DEFINED_FUNCTION_NAME__DEFINITION, oldDefinition, definition));
@@ -82,7 +78,7 @@ public class DefinedFunctionNameImpl extends FunctionNameImpl implements Defined
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public FunctionDefinition basicGetDefinition() {
+	public de.evoal.languages.model.base.FunctionDefinition basicGetDefinition() {
 		return definition;
 	}
 
@@ -92,8 +88,8 @@ public class DefinedFunctionNameImpl extends FunctionNameImpl implements Defined
 	 * @generated
 	 */
 	@Override
-	public void setDefinition(FunctionDefinition newDefinition) {
-		FunctionDefinition oldDefinition = definition;
+	public void setDefinition(de.evoal.languages.model.base.FunctionDefinition newDefinition) {
+		de.evoal.languages.model.base.FunctionDefinition oldDefinition = definition;
 		definition = newDefinition;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, MllPackage.DEFINED_FUNCTION_NAME__DEFINITION, oldDefinition, definition));
@@ -123,7 +119,7 @@ public class DefinedFunctionNameImpl extends FunctionNameImpl implements Defined
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case MllPackage.DEFINED_FUNCTION_NAME__DEFINITION:
-				setDefinition((FunctionDefinition)newValue);
+				setDefinition((de.evoal.languages.model.base.FunctionDefinition)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -138,7 +134,7 @@ public class DefinedFunctionNameImpl extends FunctionNameImpl implements Defined
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case MllPackage.DEFINED_FUNCTION_NAME__DEFINITION:
-				setDefinition((FunctionDefinition)null);
+				setDefinition((de.evoal.languages.model.base.FunctionDefinition)null);
 				return;
 		}
 		super.eUnset(featureID);

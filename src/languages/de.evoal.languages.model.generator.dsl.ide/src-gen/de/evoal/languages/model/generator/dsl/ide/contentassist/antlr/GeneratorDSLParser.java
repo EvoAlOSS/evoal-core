@@ -39,6 +39,7 @@ public class GeneratorDSLParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getLiteralRuleAccess().getAlternatives(), "rule__LiteralRule__Alternatives");
 			builder.put(grammarAccess.getNumberLiteralRuleAccess().getAlternatives(), "rule__NumberLiteralRule__Alternatives");
 			builder.put(grammarAccess.getBooleanLiteralRuleAccess().getAlternatives_1(), "rule__BooleanLiteralRule__Alternatives_1");
+			builder.put(grammarAccess.getTypeRuleAccess().getAlternatives(), "rule__TypeRule__Alternatives");
 			builder.put(grammarAccess.getStringOrIdAccess().getAlternatives(), "rule__StringOrId__Alternatives");
 			builder.put(grammarAccess.getComparisonOperatorRuleAccess().getAlternatives(), "rule__ComparisonOperatorRule__Alternatives");
 			builder.put(grammarAccess.getAddOrSubtractOperatorRuleAccess().getAlternatives(), "rule__AddOrSubtractOperatorRule__Alternatives");
@@ -91,11 +92,30 @@ public class GeneratorDSLParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getCallRuleAccess().getGroup(), "rule__CallRule__Group__0");
 			builder.put(grammarAccess.getCallRuleAccess().getGroup_2(), "rule__CallRule__Group_2__0");
 			builder.put(grammarAccess.getCallRuleAccess().getGroup_2_1(), "rule__CallRule__Group_2_1__0");
-			builder.put(grammarAccess.getFunctionNameRuleAccess().getGroup(), "rule__FunctionNameRule__Group__0");
 			builder.put(grammarAccess.getValueReferenceRuleAccess().getGroup(), "rule__ValueReferenceRule__Group__0");
 			builder.put(grammarAccess.getDoubleLiteralRuleAccess().getGroup(), "rule__DoubleLiteralRule__Group__0");
 			builder.put(grammarAccess.getIntegerLiteralRuleAccess().getGroup(), "rule__IntegerLiteralRule__Group__0");
 			builder.put(grammarAccess.getBooleanLiteralRuleAccess().getGroup(), "rule__BooleanLiteralRule__Group__0");
+			builder.put(grammarAccess.getTypeDefinitionRuleAccess().getGroup(), "rule__TypeDefinitionRule__Group__0");
+			builder.put(grammarAccess.getTypeDefinitionRuleAccess().getGroup_3(), "rule__TypeDefinitionRule__Group_3__0");
+			builder.put(grammarAccess.getAttributeDefinitionRuleAccess().getGroup(), "rule__AttributeDefinitionRule__Group__0");
+			builder.put(grammarAccess.getLiteralTypeRuleAccess().getGroup(), "rule__LiteralTypeRule__Group__0");
+			builder.put(grammarAccess.getInstanceTypeRuleAccess().getGroup(), "rule__InstanceTypeRule__Group__0");
+			builder.put(grammarAccess.getInstanceTypeRuleAccess().getGroup_3(), "rule__InstanceTypeRule__Group_3__0");
+			builder.put(grammarAccess.getStringTypeRuleAccess().getGroup(), "rule__StringTypeRule__Group__0");
+			builder.put(grammarAccess.getExpressionTypeRuleAccess().getGroup(), "rule__ExpressionTypeRule__Group__0");
+			builder.put(grammarAccess.getIntTypeRuleAccess().getGroup(), "rule__IntTypeRule__Group__0");
+			builder.put(grammarAccess.getFloatTypeRuleAccess().getGroup(), "rule__FloatTypeRule__Group__0");
+			builder.put(grammarAccess.getBooleanTypeRuleAccess().getGroup(), "rule__BooleanTypeRule__Group__0");
+			builder.put(grammarAccess.getVoidTypeRuleAccess().getGroup(), "rule__VoidTypeRule__Group__0");
+			builder.put(grammarAccess.getDataTypeRuleAccess().getGroup(), "rule__DataTypeRule__Group__0");
+			builder.put(grammarAccess.getArrayTypeRuleAccess().getGroup(), "rule__ArrayTypeRule__Group__0");
+			builder.put(grammarAccess.getFunctionDefinitionRuleAccess().getGroup(), "rule__FunctionDefinitionRule__Group__0");
+			builder.put(grammarAccess.getFunctionDefinitionRuleAccess().getGroup_4(), "rule__FunctionDefinitionRule__Group_4__0");
+			builder.put(grammarAccess.getFunctionDefinitionRuleAccess().getGroup_4_1(), "rule__FunctionDefinitionRule__Group_4_1__0");
+			builder.put(grammarAccess.getParameterRuleAccess().getGroup(), "rule__ParameterRule__Group__0");
+			builder.put(grammarAccess.getQualifiedNameAccess().getGroup(), "rule__QualifiedName__Group__0");
+			builder.put(grammarAccess.getQualifiedNameAccess().getGroup_1(), "rule__QualifiedName__Group_1__0");
 			builder.put(grammarAccess.getConfigurationRuleAccess().getImportsAssignment_0(), "rule__ConfigurationRule__ImportsAssignment_0");
 			builder.put(grammarAccess.getConfigurationRuleAccess().getPipelinesAssignment_1(), "rule__ConfigurationRule__PipelinesAssignment_1");
 			builder.put(grammarAccess.getConfigurationRuleAccess().getStatementsAssignment_2(), "rule__ConfigurationRule__StatementsAssignment_2");
@@ -160,6 +180,22 @@ public class GeneratorDSLParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getIntegerLiteralRuleAccess().getFactorAssignment_1(), "rule__IntegerLiteralRule__FactorAssignment_1");
 			builder.put(grammarAccess.getStringLiteralRuleAccess().getValueAssignment(), "rule__StringLiteralRule__ValueAssignment");
 			builder.put(grammarAccess.getBooleanLiteralRuleAccess().getValueAssignment_1_0(), "rule__BooleanLiteralRule__ValueAssignment_1_0");
+			builder.put(grammarAccess.getTypeDefinitionRuleAccess().getAbstractAssignment_0(), "rule__TypeDefinitionRule__AbstractAssignment_0");
+			builder.put(grammarAccess.getTypeDefinitionRuleAccess().getNameAssignment_2(), "rule__TypeDefinitionRule__NameAssignment_2");
+			builder.put(grammarAccess.getTypeDefinitionRuleAccess().getSuperTypeAssignment_3_1(), "rule__TypeDefinitionRule__SuperTypeAssignment_3_1");
+			builder.put(grammarAccess.getTypeDefinitionRuleAccess().getAttributesAssignment_5(), "rule__TypeDefinitionRule__AttributesAssignment_5");
+			builder.put(grammarAccess.getAttributeDefinitionRuleAccess().getNameAssignment_0(), "rule__AttributeDefinitionRule__NameAssignment_0");
+			builder.put(grammarAccess.getAttributeDefinitionRuleAccess().getTypeAssignment_2(), "rule__AttributeDefinitionRule__TypeAssignment_2");
+			builder.put(grammarAccess.getInstanceTypeRuleAccess().getDefinitionsAssignment_2(), "rule__InstanceTypeRule__DefinitionsAssignment_2");
+			builder.put(grammarAccess.getInstanceTypeRuleAccess().getDefinitionsAssignment_3_1(), "rule__InstanceTypeRule__DefinitionsAssignment_3_1");
+			builder.put(grammarAccess.getArrayTypeRuleAccess().getElementsAssignment_1(), "rule__ArrayTypeRule__ElementsAssignment_1");
+			builder.put(grammarAccess.getFunctionDefinitionRuleAccess().getTypeAssignment_1(), "rule__FunctionDefinitionRule__TypeAssignment_1");
+			builder.put(grammarAccess.getFunctionDefinitionRuleAccess().getNameAssignment_2(), "rule__FunctionDefinitionRule__NameAssignment_2");
+			builder.put(grammarAccess.getFunctionDefinitionRuleAccess().getParametersAssignment_4_0(), "rule__FunctionDefinitionRule__ParametersAssignment_4_0");
+			builder.put(grammarAccess.getFunctionDefinitionRuleAccess().getParametersAssignment_4_1_1(), "rule__FunctionDefinitionRule__ParametersAssignment_4_1_1");
+			builder.put(grammarAccess.getParameterRuleAccess().getTypeAssignment_0(), "rule__ParameterRule__TypeAssignment_0");
+			builder.put(grammarAccess.getParameterRuleAccess().getNameAssignment_1(), "rule__ParameterRule__NameAssignment_1");
+			builder.put(grammarAccess.getFunctionNameRuleAccess().getDefinitionAssignment(), "rule__FunctionNameRule__DefinitionAssignment");
 		}
 	}
 	

@@ -2,8 +2,6 @@
  */
 package de.evoal.languages.model.mll.util;
 
-import de.evoal.languages.model.el.FunctionName;
-
 import de.evoal.languages.model.mll.*;
 
 import org.eclipse.emf.ecore.EObject;
@@ -405,7 +403,7 @@ public class MllSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseFunctionName(FunctionName object) {
+	public T caseFunctionName(de.evoal.languages.model.base.FunctionName object) {
 		return null;
 	}
 

@@ -2,12 +2,8 @@
  */
 package de.evoal.languages.model.mll.impl;
 
+import de.evoal.languages.model.base.BasePackage;
 import de.evoal.languages.model.ddl.DdlPackage;
-
-import de.evoal.languages.model.dl.DlPackage;
-
-import de.evoal.languages.model.el.ELPackage;
-
 import de.evoal.languages.model.instance.InstancePackage;
 
 import de.evoal.languages.model.mll.BlockStatement;
@@ -196,9 +192,8 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 
 		// Initialize simple dependencies
 		DdlPackage.eINSTANCE.eClass();
-		DlPackage.eINSTANCE.eClass();
-		ELPackage.eINSTANCE.eClass();
 		InstancePackage.eINSTANCE.eClass();
+		BasePackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
 		theMllPackage.createPackageContents();
@@ -790,9 +785,8 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 
 		// Obtain other dependent packages
 		DdlPackage theDdlPackage = (DdlPackage)EPackage.Registry.INSTANCE.getEPackage(DdlPackage.eNS_URI);
-		DlPackage theDlPackage = (DlPackage)EPackage.Registry.INSTANCE.getEPackage(DlPackage.eNS_URI);
+		BasePackage theBasePackage = (BasePackage)EPackage.Registry.INSTANCE.getEPackage(BasePackage.eNS_URI);
 		InstancePackage theInstancePackage = (InstancePackage)EPackage.Registry.INSTANCE.getEPackage(InstancePackage.eNS_URI);
-		ELPackage theELPackage = (ELPackage)EPackage.Registry.INSTANCE.getEPackage(ELPackage.eNS_URI);
 
 		// Create type parameters
 
@@ -805,7 +799,7 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 		forStatementEClass.getESuperTypes().add(this.getStatement());
 		counterRangeEClass.getESuperTypes().add(this.getRange());
 		stringLiteralRangeEClass.getESuperTypes().add(this.getRange());
-		definedFunctionNameEClass.getESuperTypes().add(theELPackage.getFunctionName());
+		definedFunctionNameEClass.getESuperTypes().add(theBasePackage.getFunctionName());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(machineLearningConfigurationEClass, MachineLearningConfiguration.class, "MachineLearningConfiguration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -824,7 +818,7 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 		initEReference(getSurrogateLayerDefinition_Functions(), this.getPartialSurrogateFunctionDefinition(), null, "functions", null, 1, -1, SurrogateLayerDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(partialSurrogateFunctionDefinitionEClass, PartialSurrogateFunctionDefinition.class, "PartialSurrogateFunctionDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getPartialSurrogateFunctionDefinition_Name(), theDlPackage.getTypeDefinition(), null, "name", null, 1, 1, PartialSurrogateFunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPartialSurrogateFunctionDefinition_Name(), theBasePackage.getTypeDefinition(), null, "name", null, 1, 1, PartialSurrogateFunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPartialSurrogateFunctionDefinition_Inputs(), theDdlPackage.getDataDescription(), null, "inputs", null, 1, -1, PartialSurrogateFunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getPartialSurrogateFunctionDefinition_Outputs(), theDdlPackage.getDataDescription(), null, "outputs", null, 1, -1, PartialSurrogateFunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getPartialSurrogateFunctionDefinition_Parameters(), theInstancePackage.getAttribute(), null, "parameters", null, 0, -1, PartialSurrogateFunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
@@ -838,7 +832,7 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 		initEClass(statementEClass, Statement.class, "Statement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(callStatementEClass, CallStatement.class, "CallStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getCallStatement_Call(), theELPackage.getCall(), null, "call", null, 1, 1, CallStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCallStatement_Call(), theBasePackage.getCall(), null, "call", null, 1, 1, CallStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(blockStatementEClass, BlockStatement.class, "BlockStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getBlockStatement_Statements(), this.getStatement(), null, "statements", null, 0, -1, BlockStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
@@ -861,10 +855,10 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 		initEAttribute(getCounterRange_End(), ecorePackage.getEInt(), "end", null, 1, 1, CounterRange.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(stringLiteralRangeEClass, StringLiteralRange.class, "StringLiteralRange", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getStringLiteralRange_Elements(), theELPackage.getStringLiteral(), null, "elements", null, 0, -1, StringLiteralRange.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getStringLiteralRange_Elements(), theBasePackage.getStringLiteral(), null, "elements", null, 0, -1, StringLiteralRange.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		initEClass(definedFunctionNameEClass, DefinedFunctionName.class, "DefinedFunctionName", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getDefinedFunctionName_Definition(), theDlPackage.getFunctionDefinition(), null, "definition", null, 1, 1, DefinedFunctionName.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDefinedFunctionName_Definition(), theBasePackage.getFunctionDefinition(), null, "definition", null, 1, 1, DefinedFunctionName.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(useEClass, Use.class, "Use", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getUse_ImportURI(), ecorePackage.getEString(), "importURI", null, 1, 1, Use.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -892,9 +886,8 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 		   source,
 		   new String[] {
 			   "ddl", "platform:/resource/de.evoal.languages.model.ddl/model/model.ecore#/",
-			   "dl", "platform:/resource/de.evoal.languages.model.dl/model/model.ecore#/",
 			   "ecore", "http://www.eclipse.org/emf/2002/Ecore",
-			   "el", "platform:/resource/de.evoal.languages.model.el/model/model.ecore#/",
+			   "el", "platform:/resource/de.evoal.languages.model.base/model/model.ecore#/",
 			   "instance", "platform:/resource/de.evoal.languages.model.instance/model/model.ecore#/"
 		   });
 	}
