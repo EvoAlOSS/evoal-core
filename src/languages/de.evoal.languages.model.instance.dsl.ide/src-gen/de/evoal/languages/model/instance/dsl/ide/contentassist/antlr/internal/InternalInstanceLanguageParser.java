@@ -11945,7 +11945,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
             // InternalInstanceLanguage.g:3747:1: ( rule__AttributeDefinitionRule__Group__2__Impl rule__AttributeDefinitionRule__Group__3 )
             // InternalInstanceLanguage.g:3748:2: rule__AttributeDefinitionRule__Group__2__Impl rule__AttributeDefinitionRule__Group__3
             {
-            pushFollow(FOLLOW_8);
+            pushFollow(FOLLOW_37);
             rule__AttributeDefinitionRule__Group__2__Impl();
 
             state._fsp--;
@@ -12021,17 +12021,22 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__AttributeDefinitionRule__Group__3"
-    // InternalInstanceLanguage.g:3770:1: rule__AttributeDefinitionRule__Group__3 : rule__AttributeDefinitionRule__Group__3__Impl ;
+    // InternalInstanceLanguage.g:3770:1: rule__AttributeDefinitionRule__Group__3 : rule__AttributeDefinitionRule__Group__3__Impl rule__AttributeDefinitionRule__Group__4 ;
     public final void rule__AttributeDefinitionRule__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:3774:1: ( rule__AttributeDefinitionRule__Group__3__Impl )
-            // InternalInstanceLanguage.g:3775:2: rule__AttributeDefinitionRule__Group__3__Impl
+            // InternalInstanceLanguage.g:3774:1: ( rule__AttributeDefinitionRule__Group__3__Impl rule__AttributeDefinitionRule__Group__4 )
+            // InternalInstanceLanguage.g:3775:2: rule__AttributeDefinitionRule__Group__3__Impl rule__AttributeDefinitionRule__Group__4
             {
-            pushFollow(FOLLOW_2);
+            pushFollow(FOLLOW_37);
             rule__AttributeDefinitionRule__Group__3__Impl();
+
+            state._fsp--;
+
+            pushFollow(FOLLOW_2);
+            rule__AttributeDefinitionRule__Group__4();
 
             state._fsp--;
 
@@ -12054,21 +12059,42 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__AttributeDefinitionRule__Group__3__Impl"
-    // InternalInstanceLanguage.g:3781:1: rule__AttributeDefinitionRule__Group__3__Impl : ( ';' ) ;
+    // InternalInstanceLanguage.g:3782:1: rule__AttributeDefinitionRule__Group__3__Impl : ( ( rule__AttributeDefinitionRule__Group_3__0 )? ) ;
     public final void rule__AttributeDefinitionRule__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:3785:1: ( ( ';' ) )
-            // InternalInstanceLanguage.g:3786:1: ( ';' )
+            // InternalInstanceLanguage.g:3786:1: ( ( ( rule__AttributeDefinitionRule__Group_3__0 )? ) )
+            // InternalInstanceLanguage.g:3787:1: ( ( rule__AttributeDefinitionRule__Group_3__0 )? )
             {
-            // InternalInstanceLanguage.g:3786:1: ( ';' )
-            // InternalInstanceLanguage.g:3787:2: ';'
+            // InternalInstanceLanguage.g:3787:1: ( ( rule__AttributeDefinitionRule__Group_3__0 )? )
+            // InternalInstanceLanguage.g:3788:2: ( rule__AttributeDefinitionRule__Group_3__0 )?
             {
-             before(grammarAccess.getAttributeDefinitionRuleAccess().getSemicolonKeyword_3()); 
-            match(input,50,FOLLOW_2); 
-             after(grammarAccess.getAttributeDefinitionRuleAccess().getSemicolonKeyword_3()); 
+             before(grammarAccess.getAttributeDefinitionRuleAccess().getGroup_3()); 
+            // InternalInstanceLanguage.g:3789:2: ( rule__AttributeDefinitionRule__Group_3__0 )?
+            int alt30=2;
+            int LA30_0 = input.LA(1);
+
+            if ( (LA30_0==49) ) {
+                alt30=1;
+            }
+            switch (alt30) {
+                case 1 :
+                    // InternalInstanceLanguage.g:3789:3: rule__AttributeDefinitionRule__Group_3__0
+                    {
+                    pushFollow(FOLLOW_2);
+                    rule__AttributeDefinitionRule__Group_3__0();
+
+                    state._fsp--;
+
+
+                    }
+                    break;
+
+            }
+
+             after(grammarAccess.getAttributeDefinitionRuleAccess().getGroup_3()); 
 
             }
 
@@ -12090,17 +12116,242 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
     // $ANTLR end "rule__AttributeDefinitionRule__Group__3__Impl"
 
 
+    // $ANTLR start "rule__AttributeDefinitionRule__Group__4"
+    // InternalInstanceLanguage.g:3797:1: rule__AttributeDefinitionRule__Group__4 : rule__AttributeDefinitionRule__Group__4__Impl ;
+    public final void rule__AttributeDefinitionRule__Group__4() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalInstanceLanguage.g:3801:1: ( rule__AttributeDefinitionRule__Group__4__Impl )
+            // InternalInstanceLanguage.g:3802:2: rule__AttributeDefinitionRule__Group__4__Impl
+            {
+            pushFollow(FOLLOW_2);
+            rule__AttributeDefinitionRule__Group__4__Impl();
+
+            state._fsp--;
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__AttributeDefinitionRule__Group__4"
+
+
+    // $ANTLR start "rule__AttributeDefinitionRule__Group__4__Impl"
+    // InternalInstanceLanguage.g:3808:1: rule__AttributeDefinitionRule__Group__4__Impl : ( ';' ) ;
+    public final void rule__AttributeDefinitionRule__Group__4__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalInstanceLanguage.g:3812:1: ( ( ';' ) )
+            // InternalInstanceLanguage.g:3813:1: ( ';' )
+            {
+            // InternalInstanceLanguage.g:3813:1: ( ';' )
+            // InternalInstanceLanguage.g:3814:2: ';'
+            {
+             before(grammarAccess.getAttributeDefinitionRuleAccess().getSemicolonKeyword_4()); 
+            match(input,50,FOLLOW_2); 
+             after(grammarAccess.getAttributeDefinitionRuleAccess().getSemicolonKeyword_4()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__AttributeDefinitionRule__Group__4__Impl"
+
+
+    // $ANTLR start "rule__AttributeDefinitionRule__Group_3__0"
+    // InternalInstanceLanguage.g:3824:1: rule__AttributeDefinitionRule__Group_3__0 : rule__AttributeDefinitionRule__Group_3__0__Impl rule__AttributeDefinitionRule__Group_3__1 ;
+    public final void rule__AttributeDefinitionRule__Group_3__0() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalInstanceLanguage.g:3828:1: ( rule__AttributeDefinitionRule__Group_3__0__Impl rule__AttributeDefinitionRule__Group_3__1 )
+            // InternalInstanceLanguage.g:3829:2: rule__AttributeDefinitionRule__Group_3__0__Impl rule__AttributeDefinitionRule__Group_3__1
+            {
+            pushFollow(FOLLOW_19);
+            rule__AttributeDefinitionRule__Group_3__0__Impl();
+
+            state._fsp--;
+
+            pushFollow(FOLLOW_2);
+            rule__AttributeDefinitionRule__Group_3__1();
+
+            state._fsp--;
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__AttributeDefinitionRule__Group_3__0"
+
+
+    // $ANTLR start "rule__AttributeDefinitionRule__Group_3__0__Impl"
+    // InternalInstanceLanguage.g:3836:1: rule__AttributeDefinitionRule__Group_3__0__Impl : ( ':=' ) ;
+    public final void rule__AttributeDefinitionRule__Group_3__0__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalInstanceLanguage.g:3840:1: ( ( ':=' ) )
+            // InternalInstanceLanguage.g:3841:1: ( ':=' )
+            {
+            // InternalInstanceLanguage.g:3841:1: ( ':=' )
+            // InternalInstanceLanguage.g:3842:2: ':='
+            {
+             before(grammarAccess.getAttributeDefinitionRuleAccess().getColonEqualsSignKeyword_3_0()); 
+            match(input,49,FOLLOW_2); 
+             after(grammarAccess.getAttributeDefinitionRuleAccess().getColonEqualsSignKeyword_3_0()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__AttributeDefinitionRule__Group_3__0__Impl"
+
+
+    // $ANTLR start "rule__AttributeDefinitionRule__Group_3__1"
+    // InternalInstanceLanguage.g:3851:1: rule__AttributeDefinitionRule__Group_3__1 : rule__AttributeDefinitionRule__Group_3__1__Impl ;
+    public final void rule__AttributeDefinitionRule__Group_3__1() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalInstanceLanguage.g:3855:1: ( rule__AttributeDefinitionRule__Group_3__1__Impl )
+            // InternalInstanceLanguage.g:3856:2: rule__AttributeDefinitionRule__Group_3__1__Impl
+            {
+            pushFollow(FOLLOW_2);
+            rule__AttributeDefinitionRule__Group_3__1__Impl();
+
+            state._fsp--;
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__AttributeDefinitionRule__Group_3__1"
+
+
+    // $ANTLR start "rule__AttributeDefinitionRule__Group_3__1__Impl"
+    // InternalInstanceLanguage.g:3862:1: rule__AttributeDefinitionRule__Group_3__1__Impl : ( ( rule__AttributeDefinitionRule__InitialisationAssignment_3_1 ) ) ;
+    public final void rule__AttributeDefinitionRule__Group_3__1__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalInstanceLanguage.g:3866:1: ( ( ( rule__AttributeDefinitionRule__InitialisationAssignment_3_1 ) ) )
+            // InternalInstanceLanguage.g:3867:1: ( ( rule__AttributeDefinitionRule__InitialisationAssignment_3_1 ) )
+            {
+            // InternalInstanceLanguage.g:3867:1: ( ( rule__AttributeDefinitionRule__InitialisationAssignment_3_1 ) )
+            // InternalInstanceLanguage.g:3868:2: ( rule__AttributeDefinitionRule__InitialisationAssignment_3_1 )
+            {
+             before(grammarAccess.getAttributeDefinitionRuleAccess().getInitialisationAssignment_3_1()); 
+            // InternalInstanceLanguage.g:3869:2: ( rule__AttributeDefinitionRule__InitialisationAssignment_3_1 )
+            // InternalInstanceLanguage.g:3869:3: rule__AttributeDefinitionRule__InitialisationAssignment_3_1
+            {
+            pushFollow(FOLLOW_2);
+            rule__AttributeDefinitionRule__InitialisationAssignment_3_1();
+
+            state._fsp--;
+
+
+            }
+
+             after(grammarAccess.getAttributeDefinitionRuleAccess().getInitialisationAssignment_3_1()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__AttributeDefinitionRule__Group_3__1__Impl"
+
+
     // $ANTLR start "rule__LiteralTypeRule__Group__0"
-    // InternalInstanceLanguage.g:3797:1: rule__LiteralTypeRule__Group__0 : rule__LiteralTypeRule__Group__0__Impl rule__LiteralTypeRule__Group__1 ;
+    // InternalInstanceLanguage.g:3878:1: rule__LiteralTypeRule__Group__0 : rule__LiteralTypeRule__Group__0__Impl rule__LiteralTypeRule__Group__1 ;
     public final void rule__LiteralTypeRule__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:3801:1: ( rule__LiteralTypeRule__Group__0__Impl rule__LiteralTypeRule__Group__1 )
-            // InternalInstanceLanguage.g:3802:2: rule__LiteralTypeRule__Group__0__Impl rule__LiteralTypeRule__Group__1
+            // InternalInstanceLanguage.g:3882:1: ( rule__LiteralTypeRule__Group__0__Impl rule__LiteralTypeRule__Group__1 )
+            // InternalInstanceLanguage.g:3883:2: rule__LiteralTypeRule__Group__0__Impl rule__LiteralTypeRule__Group__1
             {
-            pushFollow(FOLLOW_37);
+            pushFollow(FOLLOW_38);
             rule__LiteralTypeRule__Group__0__Impl();
 
             state._fsp--;
@@ -12129,21 +12380,21 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__LiteralTypeRule__Group__0__Impl"
-    // InternalInstanceLanguage.g:3809:1: rule__LiteralTypeRule__Group__0__Impl : ( () ) ;
+    // InternalInstanceLanguage.g:3890:1: rule__LiteralTypeRule__Group__0__Impl : ( () ) ;
     public final void rule__LiteralTypeRule__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:3813:1: ( ( () ) )
-            // InternalInstanceLanguage.g:3814:1: ( () )
+            // InternalInstanceLanguage.g:3894:1: ( ( () ) )
+            // InternalInstanceLanguage.g:3895:1: ( () )
             {
-            // InternalInstanceLanguage.g:3814:1: ( () )
-            // InternalInstanceLanguage.g:3815:2: ()
+            // InternalInstanceLanguage.g:3895:1: ( () )
+            // InternalInstanceLanguage.g:3896:2: ()
             {
              before(grammarAccess.getLiteralTypeRuleAccess().getLiteralTypeAction_0()); 
-            // InternalInstanceLanguage.g:3816:2: ()
-            // InternalInstanceLanguage.g:3816:3: 
+            // InternalInstanceLanguage.g:3897:2: ()
+            // InternalInstanceLanguage.g:3897:3: 
             {
             }
 
@@ -12166,14 +12417,14 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__LiteralTypeRule__Group__1"
-    // InternalInstanceLanguage.g:3824:1: rule__LiteralTypeRule__Group__1 : rule__LiteralTypeRule__Group__1__Impl ;
+    // InternalInstanceLanguage.g:3905:1: rule__LiteralTypeRule__Group__1 : rule__LiteralTypeRule__Group__1__Impl ;
     public final void rule__LiteralTypeRule__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:3828:1: ( rule__LiteralTypeRule__Group__1__Impl )
-            // InternalInstanceLanguage.g:3829:2: rule__LiteralTypeRule__Group__1__Impl
+            // InternalInstanceLanguage.g:3909:1: ( rule__LiteralTypeRule__Group__1__Impl )
+            // InternalInstanceLanguage.g:3910:2: rule__LiteralTypeRule__Group__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__LiteralTypeRule__Group__1__Impl();
@@ -12199,17 +12450,17 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__LiteralTypeRule__Group__1__Impl"
-    // InternalInstanceLanguage.g:3835:1: rule__LiteralTypeRule__Group__1__Impl : ( 'literal' ) ;
+    // InternalInstanceLanguage.g:3916:1: rule__LiteralTypeRule__Group__1__Impl : ( 'literal' ) ;
     public final void rule__LiteralTypeRule__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:3839:1: ( ( 'literal' ) )
-            // InternalInstanceLanguage.g:3840:1: ( 'literal' )
+            // InternalInstanceLanguage.g:3920:1: ( ( 'literal' ) )
+            // InternalInstanceLanguage.g:3921:1: ( 'literal' )
             {
-            // InternalInstanceLanguage.g:3840:1: ( 'literal' )
-            // InternalInstanceLanguage.g:3841:2: 'literal'
+            // InternalInstanceLanguage.g:3921:1: ( 'literal' )
+            // InternalInstanceLanguage.g:3922:2: 'literal'
             {
              before(grammarAccess.getLiteralTypeRuleAccess().getLiteralKeyword_1()); 
             match(input,64,FOLLOW_2); 
@@ -12236,16 +12487,16 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__InstanceTypeRule__Group__0"
-    // InternalInstanceLanguage.g:3851:1: rule__InstanceTypeRule__Group__0 : rule__InstanceTypeRule__Group__0__Impl rule__InstanceTypeRule__Group__1 ;
+    // InternalInstanceLanguage.g:3932:1: rule__InstanceTypeRule__Group__0 : rule__InstanceTypeRule__Group__0__Impl rule__InstanceTypeRule__Group__1 ;
     public final void rule__InstanceTypeRule__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:3855:1: ( rule__InstanceTypeRule__Group__0__Impl rule__InstanceTypeRule__Group__1 )
-            // InternalInstanceLanguage.g:3856:2: rule__InstanceTypeRule__Group__0__Impl rule__InstanceTypeRule__Group__1
+            // InternalInstanceLanguage.g:3936:1: ( rule__InstanceTypeRule__Group__0__Impl rule__InstanceTypeRule__Group__1 )
+            // InternalInstanceLanguage.g:3937:2: rule__InstanceTypeRule__Group__0__Impl rule__InstanceTypeRule__Group__1
             {
-            pushFollow(FOLLOW_38);
+            pushFollow(FOLLOW_39);
             rule__InstanceTypeRule__Group__0__Impl();
 
             state._fsp--;
@@ -12274,21 +12525,21 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__InstanceTypeRule__Group__0__Impl"
-    // InternalInstanceLanguage.g:3863:1: rule__InstanceTypeRule__Group__0__Impl : ( () ) ;
+    // InternalInstanceLanguage.g:3944:1: rule__InstanceTypeRule__Group__0__Impl : ( () ) ;
     public final void rule__InstanceTypeRule__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:3867:1: ( ( () ) )
-            // InternalInstanceLanguage.g:3868:1: ( () )
+            // InternalInstanceLanguage.g:3948:1: ( ( () ) )
+            // InternalInstanceLanguage.g:3949:1: ( () )
             {
-            // InternalInstanceLanguage.g:3868:1: ( () )
-            // InternalInstanceLanguage.g:3869:2: ()
+            // InternalInstanceLanguage.g:3949:1: ( () )
+            // InternalInstanceLanguage.g:3950:2: ()
             {
              before(grammarAccess.getInstanceTypeRuleAccess().getInstanceTypeAction_0()); 
-            // InternalInstanceLanguage.g:3870:2: ()
-            // InternalInstanceLanguage.g:3870:3: 
+            // InternalInstanceLanguage.g:3951:2: ()
+            // InternalInstanceLanguage.g:3951:3: 
             {
             }
 
@@ -12311,14 +12562,14 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__InstanceTypeRule__Group__1"
-    // InternalInstanceLanguage.g:3878:1: rule__InstanceTypeRule__Group__1 : rule__InstanceTypeRule__Group__1__Impl rule__InstanceTypeRule__Group__2 ;
+    // InternalInstanceLanguage.g:3959:1: rule__InstanceTypeRule__Group__1 : rule__InstanceTypeRule__Group__1__Impl rule__InstanceTypeRule__Group__2 ;
     public final void rule__InstanceTypeRule__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:3882:1: ( rule__InstanceTypeRule__Group__1__Impl rule__InstanceTypeRule__Group__2 )
-            // InternalInstanceLanguage.g:3883:2: rule__InstanceTypeRule__Group__1__Impl rule__InstanceTypeRule__Group__2
+            // InternalInstanceLanguage.g:3963:1: ( rule__InstanceTypeRule__Group__1__Impl rule__InstanceTypeRule__Group__2 )
+            // InternalInstanceLanguage.g:3964:2: rule__InstanceTypeRule__Group__1__Impl rule__InstanceTypeRule__Group__2
             {
             pushFollow(FOLLOW_14);
             rule__InstanceTypeRule__Group__1__Impl();
@@ -12349,17 +12600,17 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__InstanceTypeRule__Group__1__Impl"
-    // InternalInstanceLanguage.g:3890:1: rule__InstanceTypeRule__Group__1__Impl : ( 'instance' ) ;
+    // InternalInstanceLanguage.g:3971:1: rule__InstanceTypeRule__Group__1__Impl : ( 'instance' ) ;
     public final void rule__InstanceTypeRule__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:3894:1: ( ( 'instance' ) )
-            // InternalInstanceLanguage.g:3895:1: ( 'instance' )
+            // InternalInstanceLanguage.g:3975:1: ( ( 'instance' ) )
+            // InternalInstanceLanguage.g:3976:1: ( 'instance' )
             {
-            // InternalInstanceLanguage.g:3895:1: ( 'instance' )
-            // InternalInstanceLanguage.g:3896:2: 'instance'
+            // InternalInstanceLanguage.g:3976:1: ( 'instance' )
+            // InternalInstanceLanguage.g:3977:2: 'instance'
             {
              before(grammarAccess.getInstanceTypeRuleAccess().getInstanceKeyword_1()); 
             match(input,65,FOLLOW_2); 
@@ -12386,16 +12637,16 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__InstanceTypeRule__Group__2"
-    // InternalInstanceLanguage.g:3905:1: rule__InstanceTypeRule__Group__2 : rule__InstanceTypeRule__Group__2__Impl rule__InstanceTypeRule__Group__3 ;
+    // InternalInstanceLanguage.g:3986:1: rule__InstanceTypeRule__Group__2 : rule__InstanceTypeRule__Group__2__Impl rule__InstanceTypeRule__Group__3 ;
     public final void rule__InstanceTypeRule__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:3909:1: ( rule__InstanceTypeRule__Group__2__Impl rule__InstanceTypeRule__Group__3 )
-            // InternalInstanceLanguage.g:3910:2: rule__InstanceTypeRule__Group__2__Impl rule__InstanceTypeRule__Group__3
+            // InternalInstanceLanguage.g:3990:1: ( rule__InstanceTypeRule__Group__2__Impl rule__InstanceTypeRule__Group__3 )
+            // InternalInstanceLanguage.g:3991:2: rule__InstanceTypeRule__Group__2__Impl rule__InstanceTypeRule__Group__3
             {
-            pushFollow(FOLLOW_39);
+            pushFollow(FOLLOW_40);
             rule__InstanceTypeRule__Group__2__Impl();
 
             state._fsp--;
@@ -12424,21 +12675,21 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__InstanceTypeRule__Group__2__Impl"
-    // InternalInstanceLanguage.g:3917:1: rule__InstanceTypeRule__Group__2__Impl : ( ( rule__InstanceTypeRule__DefinitionsAssignment_2 ) ) ;
+    // InternalInstanceLanguage.g:3998:1: rule__InstanceTypeRule__Group__2__Impl : ( ( rule__InstanceTypeRule__DefinitionsAssignment_2 ) ) ;
     public final void rule__InstanceTypeRule__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:3921:1: ( ( ( rule__InstanceTypeRule__DefinitionsAssignment_2 ) ) )
-            // InternalInstanceLanguage.g:3922:1: ( ( rule__InstanceTypeRule__DefinitionsAssignment_2 ) )
+            // InternalInstanceLanguage.g:4002:1: ( ( ( rule__InstanceTypeRule__DefinitionsAssignment_2 ) ) )
+            // InternalInstanceLanguage.g:4003:1: ( ( rule__InstanceTypeRule__DefinitionsAssignment_2 ) )
             {
-            // InternalInstanceLanguage.g:3922:1: ( ( rule__InstanceTypeRule__DefinitionsAssignment_2 ) )
-            // InternalInstanceLanguage.g:3923:2: ( rule__InstanceTypeRule__DefinitionsAssignment_2 )
+            // InternalInstanceLanguage.g:4003:1: ( ( rule__InstanceTypeRule__DefinitionsAssignment_2 ) )
+            // InternalInstanceLanguage.g:4004:2: ( rule__InstanceTypeRule__DefinitionsAssignment_2 )
             {
              before(grammarAccess.getInstanceTypeRuleAccess().getDefinitionsAssignment_2()); 
-            // InternalInstanceLanguage.g:3924:2: ( rule__InstanceTypeRule__DefinitionsAssignment_2 )
-            // InternalInstanceLanguage.g:3924:3: rule__InstanceTypeRule__DefinitionsAssignment_2
+            // InternalInstanceLanguage.g:4005:2: ( rule__InstanceTypeRule__DefinitionsAssignment_2 )
+            // InternalInstanceLanguage.g:4005:3: rule__InstanceTypeRule__DefinitionsAssignment_2
             {
             pushFollow(FOLLOW_2);
             rule__InstanceTypeRule__DefinitionsAssignment_2();
@@ -12471,14 +12722,14 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__InstanceTypeRule__Group__3"
-    // InternalInstanceLanguage.g:3932:1: rule__InstanceTypeRule__Group__3 : rule__InstanceTypeRule__Group__3__Impl ;
+    // InternalInstanceLanguage.g:4013:1: rule__InstanceTypeRule__Group__3 : rule__InstanceTypeRule__Group__3__Impl ;
     public final void rule__InstanceTypeRule__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:3936:1: ( rule__InstanceTypeRule__Group__3__Impl )
-            // InternalInstanceLanguage.g:3937:2: rule__InstanceTypeRule__Group__3__Impl
+            // InternalInstanceLanguage.g:4017:1: ( rule__InstanceTypeRule__Group__3__Impl )
+            // InternalInstanceLanguage.g:4018:2: rule__InstanceTypeRule__Group__3__Impl
             {
             pushFollow(FOLLOW_2);
             rule__InstanceTypeRule__Group__3__Impl();
@@ -12504,35 +12755,35 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__InstanceTypeRule__Group__3__Impl"
-    // InternalInstanceLanguage.g:3943:1: rule__InstanceTypeRule__Group__3__Impl : ( ( rule__InstanceTypeRule__Group_3__0 )* ) ;
+    // InternalInstanceLanguage.g:4024:1: rule__InstanceTypeRule__Group__3__Impl : ( ( rule__InstanceTypeRule__Group_3__0 )* ) ;
     public final void rule__InstanceTypeRule__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:3947:1: ( ( ( rule__InstanceTypeRule__Group_3__0 )* ) )
-            // InternalInstanceLanguage.g:3948:1: ( ( rule__InstanceTypeRule__Group_3__0 )* )
+            // InternalInstanceLanguage.g:4028:1: ( ( ( rule__InstanceTypeRule__Group_3__0 )* ) )
+            // InternalInstanceLanguage.g:4029:1: ( ( rule__InstanceTypeRule__Group_3__0 )* )
             {
-            // InternalInstanceLanguage.g:3948:1: ( ( rule__InstanceTypeRule__Group_3__0 )* )
-            // InternalInstanceLanguage.g:3949:2: ( rule__InstanceTypeRule__Group_3__0 )*
+            // InternalInstanceLanguage.g:4029:1: ( ( rule__InstanceTypeRule__Group_3__0 )* )
+            // InternalInstanceLanguage.g:4030:2: ( rule__InstanceTypeRule__Group_3__0 )*
             {
              before(grammarAccess.getInstanceTypeRuleAccess().getGroup_3()); 
-            // InternalInstanceLanguage.g:3950:2: ( rule__InstanceTypeRule__Group_3__0 )*
-            loop30:
+            // InternalInstanceLanguage.g:4031:2: ( rule__InstanceTypeRule__Group_3__0 )*
+            loop31:
             do {
-                int alt30=2;
-                int LA30_0 = input.LA(1);
+                int alt31=2;
+                int LA31_0 = input.LA(1);
 
-                if ( (LA30_0==66) ) {
-                    alt30=1;
+                if ( (LA31_0==66) ) {
+                    alt31=1;
                 }
 
 
-                switch (alt30) {
+                switch (alt31) {
             	case 1 :
-            	    // InternalInstanceLanguage.g:3950:3: rule__InstanceTypeRule__Group_3__0
+            	    // InternalInstanceLanguage.g:4031:3: rule__InstanceTypeRule__Group_3__0
             	    {
-            	    pushFollow(FOLLOW_40);
+            	    pushFollow(FOLLOW_41);
             	    rule__InstanceTypeRule__Group_3__0();
 
             	    state._fsp--;
@@ -12542,7 +12793,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
             	    break;
 
             	default :
-            	    break loop30;
+            	    break loop31;
                 }
             } while (true);
 
@@ -12569,14 +12820,14 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__InstanceTypeRule__Group_3__0"
-    // InternalInstanceLanguage.g:3959:1: rule__InstanceTypeRule__Group_3__0 : rule__InstanceTypeRule__Group_3__0__Impl rule__InstanceTypeRule__Group_3__1 ;
+    // InternalInstanceLanguage.g:4040:1: rule__InstanceTypeRule__Group_3__0 : rule__InstanceTypeRule__Group_3__0__Impl rule__InstanceTypeRule__Group_3__1 ;
     public final void rule__InstanceTypeRule__Group_3__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:3963:1: ( rule__InstanceTypeRule__Group_3__0__Impl rule__InstanceTypeRule__Group_3__1 )
-            // InternalInstanceLanguage.g:3964:2: rule__InstanceTypeRule__Group_3__0__Impl rule__InstanceTypeRule__Group_3__1
+            // InternalInstanceLanguage.g:4044:1: ( rule__InstanceTypeRule__Group_3__0__Impl rule__InstanceTypeRule__Group_3__1 )
+            // InternalInstanceLanguage.g:4045:2: rule__InstanceTypeRule__Group_3__0__Impl rule__InstanceTypeRule__Group_3__1
             {
             pushFollow(FOLLOW_14);
             rule__InstanceTypeRule__Group_3__0__Impl();
@@ -12607,17 +12858,17 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__InstanceTypeRule__Group_3__0__Impl"
-    // InternalInstanceLanguage.g:3971:1: rule__InstanceTypeRule__Group_3__0__Impl : ( '|' ) ;
+    // InternalInstanceLanguage.g:4052:1: rule__InstanceTypeRule__Group_3__0__Impl : ( '|' ) ;
     public final void rule__InstanceTypeRule__Group_3__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:3975:1: ( ( '|' ) )
-            // InternalInstanceLanguage.g:3976:1: ( '|' )
+            // InternalInstanceLanguage.g:4056:1: ( ( '|' ) )
+            // InternalInstanceLanguage.g:4057:1: ( '|' )
             {
-            // InternalInstanceLanguage.g:3976:1: ( '|' )
-            // InternalInstanceLanguage.g:3977:2: '|'
+            // InternalInstanceLanguage.g:4057:1: ( '|' )
+            // InternalInstanceLanguage.g:4058:2: '|'
             {
              before(grammarAccess.getInstanceTypeRuleAccess().getVerticalLineKeyword_3_0()); 
             match(input,66,FOLLOW_2); 
@@ -12644,14 +12895,14 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__InstanceTypeRule__Group_3__1"
-    // InternalInstanceLanguage.g:3986:1: rule__InstanceTypeRule__Group_3__1 : rule__InstanceTypeRule__Group_3__1__Impl ;
+    // InternalInstanceLanguage.g:4067:1: rule__InstanceTypeRule__Group_3__1 : rule__InstanceTypeRule__Group_3__1__Impl ;
     public final void rule__InstanceTypeRule__Group_3__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:3990:1: ( rule__InstanceTypeRule__Group_3__1__Impl )
-            // InternalInstanceLanguage.g:3991:2: rule__InstanceTypeRule__Group_3__1__Impl
+            // InternalInstanceLanguage.g:4071:1: ( rule__InstanceTypeRule__Group_3__1__Impl )
+            // InternalInstanceLanguage.g:4072:2: rule__InstanceTypeRule__Group_3__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__InstanceTypeRule__Group_3__1__Impl();
@@ -12677,21 +12928,21 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__InstanceTypeRule__Group_3__1__Impl"
-    // InternalInstanceLanguage.g:3997:1: rule__InstanceTypeRule__Group_3__1__Impl : ( ( rule__InstanceTypeRule__DefinitionsAssignment_3_1 ) ) ;
+    // InternalInstanceLanguage.g:4078:1: rule__InstanceTypeRule__Group_3__1__Impl : ( ( rule__InstanceTypeRule__DefinitionsAssignment_3_1 ) ) ;
     public final void rule__InstanceTypeRule__Group_3__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:4001:1: ( ( ( rule__InstanceTypeRule__DefinitionsAssignment_3_1 ) ) )
-            // InternalInstanceLanguage.g:4002:1: ( ( rule__InstanceTypeRule__DefinitionsAssignment_3_1 ) )
+            // InternalInstanceLanguage.g:4082:1: ( ( ( rule__InstanceTypeRule__DefinitionsAssignment_3_1 ) ) )
+            // InternalInstanceLanguage.g:4083:1: ( ( rule__InstanceTypeRule__DefinitionsAssignment_3_1 ) )
             {
-            // InternalInstanceLanguage.g:4002:1: ( ( rule__InstanceTypeRule__DefinitionsAssignment_3_1 ) )
-            // InternalInstanceLanguage.g:4003:2: ( rule__InstanceTypeRule__DefinitionsAssignment_3_1 )
+            // InternalInstanceLanguage.g:4083:1: ( ( rule__InstanceTypeRule__DefinitionsAssignment_3_1 ) )
+            // InternalInstanceLanguage.g:4084:2: ( rule__InstanceTypeRule__DefinitionsAssignment_3_1 )
             {
              before(grammarAccess.getInstanceTypeRuleAccess().getDefinitionsAssignment_3_1()); 
-            // InternalInstanceLanguage.g:4004:2: ( rule__InstanceTypeRule__DefinitionsAssignment_3_1 )
-            // InternalInstanceLanguage.g:4004:3: rule__InstanceTypeRule__DefinitionsAssignment_3_1
+            // InternalInstanceLanguage.g:4085:2: ( rule__InstanceTypeRule__DefinitionsAssignment_3_1 )
+            // InternalInstanceLanguage.g:4085:3: rule__InstanceTypeRule__DefinitionsAssignment_3_1
             {
             pushFollow(FOLLOW_2);
             rule__InstanceTypeRule__DefinitionsAssignment_3_1();
@@ -12724,16 +12975,16 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__StringTypeRule__Group__0"
-    // InternalInstanceLanguage.g:4013:1: rule__StringTypeRule__Group__0 : rule__StringTypeRule__Group__0__Impl rule__StringTypeRule__Group__1 ;
+    // InternalInstanceLanguage.g:4094:1: rule__StringTypeRule__Group__0 : rule__StringTypeRule__Group__0__Impl rule__StringTypeRule__Group__1 ;
     public final void rule__StringTypeRule__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:4017:1: ( rule__StringTypeRule__Group__0__Impl rule__StringTypeRule__Group__1 )
-            // InternalInstanceLanguage.g:4018:2: rule__StringTypeRule__Group__0__Impl rule__StringTypeRule__Group__1
+            // InternalInstanceLanguage.g:4098:1: ( rule__StringTypeRule__Group__0__Impl rule__StringTypeRule__Group__1 )
+            // InternalInstanceLanguage.g:4099:2: rule__StringTypeRule__Group__0__Impl rule__StringTypeRule__Group__1
             {
-            pushFollow(FOLLOW_41);
+            pushFollow(FOLLOW_42);
             rule__StringTypeRule__Group__0__Impl();
 
             state._fsp--;
@@ -12762,21 +13013,21 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__StringTypeRule__Group__0__Impl"
-    // InternalInstanceLanguage.g:4025:1: rule__StringTypeRule__Group__0__Impl : ( () ) ;
+    // InternalInstanceLanguage.g:4106:1: rule__StringTypeRule__Group__0__Impl : ( () ) ;
     public final void rule__StringTypeRule__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:4029:1: ( ( () ) )
-            // InternalInstanceLanguage.g:4030:1: ( () )
+            // InternalInstanceLanguage.g:4110:1: ( ( () ) )
+            // InternalInstanceLanguage.g:4111:1: ( () )
             {
-            // InternalInstanceLanguage.g:4030:1: ( () )
-            // InternalInstanceLanguage.g:4031:2: ()
+            // InternalInstanceLanguage.g:4111:1: ( () )
+            // InternalInstanceLanguage.g:4112:2: ()
             {
              before(grammarAccess.getStringTypeRuleAccess().getStringTypeAction_0()); 
-            // InternalInstanceLanguage.g:4032:2: ()
-            // InternalInstanceLanguage.g:4032:3: 
+            // InternalInstanceLanguage.g:4113:2: ()
+            // InternalInstanceLanguage.g:4113:3: 
             {
             }
 
@@ -12799,14 +13050,14 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__StringTypeRule__Group__1"
-    // InternalInstanceLanguage.g:4040:1: rule__StringTypeRule__Group__1 : rule__StringTypeRule__Group__1__Impl ;
+    // InternalInstanceLanguage.g:4121:1: rule__StringTypeRule__Group__1 : rule__StringTypeRule__Group__1__Impl ;
     public final void rule__StringTypeRule__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:4044:1: ( rule__StringTypeRule__Group__1__Impl )
-            // InternalInstanceLanguage.g:4045:2: rule__StringTypeRule__Group__1__Impl
+            // InternalInstanceLanguage.g:4125:1: ( rule__StringTypeRule__Group__1__Impl )
+            // InternalInstanceLanguage.g:4126:2: rule__StringTypeRule__Group__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__StringTypeRule__Group__1__Impl();
@@ -12832,17 +13083,17 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__StringTypeRule__Group__1__Impl"
-    // InternalInstanceLanguage.g:4051:1: rule__StringTypeRule__Group__1__Impl : ( 'string' ) ;
+    // InternalInstanceLanguage.g:4132:1: rule__StringTypeRule__Group__1__Impl : ( 'string' ) ;
     public final void rule__StringTypeRule__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:4055:1: ( ( 'string' ) )
-            // InternalInstanceLanguage.g:4056:1: ( 'string' )
+            // InternalInstanceLanguage.g:4136:1: ( ( 'string' ) )
+            // InternalInstanceLanguage.g:4137:1: ( 'string' )
             {
-            // InternalInstanceLanguage.g:4056:1: ( 'string' )
-            // InternalInstanceLanguage.g:4057:2: 'string'
+            // InternalInstanceLanguage.g:4137:1: ( 'string' )
+            // InternalInstanceLanguage.g:4138:2: 'string'
             {
              before(grammarAccess.getStringTypeRuleAccess().getStringKeyword_1()); 
             match(input,67,FOLLOW_2); 
@@ -12869,16 +13120,16 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__ExpressionTypeRule__Group__0"
-    // InternalInstanceLanguage.g:4067:1: rule__ExpressionTypeRule__Group__0 : rule__ExpressionTypeRule__Group__0__Impl rule__ExpressionTypeRule__Group__1 ;
+    // InternalInstanceLanguage.g:4148:1: rule__ExpressionTypeRule__Group__0 : rule__ExpressionTypeRule__Group__0__Impl rule__ExpressionTypeRule__Group__1 ;
     public final void rule__ExpressionTypeRule__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:4071:1: ( rule__ExpressionTypeRule__Group__0__Impl rule__ExpressionTypeRule__Group__1 )
-            // InternalInstanceLanguage.g:4072:2: rule__ExpressionTypeRule__Group__0__Impl rule__ExpressionTypeRule__Group__1
+            // InternalInstanceLanguage.g:4152:1: ( rule__ExpressionTypeRule__Group__0__Impl rule__ExpressionTypeRule__Group__1 )
+            // InternalInstanceLanguage.g:4153:2: rule__ExpressionTypeRule__Group__0__Impl rule__ExpressionTypeRule__Group__1
             {
-            pushFollow(FOLLOW_42);
+            pushFollow(FOLLOW_43);
             rule__ExpressionTypeRule__Group__0__Impl();
 
             state._fsp--;
@@ -12907,21 +13158,21 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__ExpressionTypeRule__Group__0__Impl"
-    // InternalInstanceLanguage.g:4079:1: rule__ExpressionTypeRule__Group__0__Impl : ( () ) ;
+    // InternalInstanceLanguage.g:4160:1: rule__ExpressionTypeRule__Group__0__Impl : ( () ) ;
     public final void rule__ExpressionTypeRule__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:4083:1: ( ( () ) )
-            // InternalInstanceLanguage.g:4084:1: ( () )
+            // InternalInstanceLanguage.g:4164:1: ( ( () ) )
+            // InternalInstanceLanguage.g:4165:1: ( () )
             {
-            // InternalInstanceLanguage.g:4084:1: ( () )
-            // InternalInstanceLanguage.g:4085:2: ()
+            // InternalInstanceLanguage.g:4165:1: ( () )
+            // InternalInstanceLanguage.g:4166:2: ()
             {
              before(grammarAccess.getExpressionTypeRuleAccess().getExpressionTypeAction_0()); 
-            // InternalInstanceLanguage.g:4086:2: ()
-            // InternalInstanceLanguage.g:4086:3: 
+            // InternalInstanceLanguage.g:4167:2: ()
+            // InternalInstanceLanguage.g:4167:3: 
             {
             }
 
@@ -12944,14 +13195,14 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__ExpressionTypeRule__Group__1"
-    // InternalInstanceLanguage.g:4094:1: rule__ExpressionTypeRule__Group__1 : rule__ExpressionTypeRule__Group__1__Impl ;
+    // InternalInstanceLanguage.g:4175:1: rule__ExpressionTypeRule__Group__1 : rule__ExpressionTypeRule__Group__1__Impl ;
     public final void rule__ExpressionTypeRule__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:4098:1: ( rule__ExpressionTypeRule__Group__1__Impl )
-            // InternalInstanceLanguage.g:4099:2: rule__ExpressionTypeRule__Group__1__Impl
+            // InternalInstanceLanguage.g:4179:1: ( rule__ExpressionTypeRule__Group__1__Impl )
+            // InternalInstanceLanguage.g:4180:2: rule__ExpressionTypeRule__Group__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__ExpressionTypeRule__Group__1__Impl();
@@ -12977,17 +13228,17 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__ExpressionTypeRule__Group__1__Impl"
-    // InternalInstanceLanguage.g:4105:1: rule__ExpressionTypeRule__Group__1__Impl : ( 'expression' ) ;
+    // InternalInstanceLanguage.g:4186:1: rule__ExpressionTypeRule__Group__1__Impl : ( 'expression' ) ;
     public final void rule__ExpressionTypeRule__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:4109:1: ( ( 'expression' ) )
-            // InternalInstanceLanguage.g:4110:1: ( 'expression' )
+            // InternalInstanceLanguage.g:4190:1: ( ( 'expression' ) )
+            // InternalInstanceLanguage.g:4191:1: ( 'expression' )
             {
-            // InternalInstanceLanguage.g:4110:1: ( 'expression' )
-            // InternalInstanceLanguage.g:4111:2: 'expression'
+            // InternalInstanceLanguage.g:4191:1: ( 'expression' )
+            // InternalInstanceLanguage.g:4192:2: 'expression'
             {
              before(grammarAccess.getExpressionTypeRuleAccess().getExpressionKeyword_1()); 
             match(input,68,FOLLOW_2); 
@@ -13014,16 +13265,16 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__IntTypeRule__Group__0"
-    // InternalInstanceLanguage.g:4121:1: rule__IntTypeRule__Group__0 : rule__IntTypeRule__Group__0__Impl rule__IntTypeRule__Group__1 ;
+    // InternalInstanceLanguage.g:4202:1: rule__IntTypeRule__Group__0 : rule__IntTypeRule__Group__0__Impl rule__IntTypeRule__Group__1 ;
     public final void rule__IntTypeRule__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:4125:1: ( rule__IntTypeRule__Group__0__Impl rule__IntTypeRule__Group__1 )
-            // InternalInstanceLanguage.g:4126:2: rule__IntTypeRule__Group__0__Impl rule__IntTypeRule__Group__1
+            // InternalInstanceLanguage.g:4206:1: ( rule__IntTypeRule__Group__0__Impl rule__IntTypeRule__Group__1 )
+            // InternalInstanceLanguage.g:4207:2: rule__IntTypeRule__Group__0__Impl rule__IntTypeRule__Group__1
             {
-            pushFollow(FOLLOW_43);
+            pushFollow(FOLLOW_44);
             rule__IntTypeRule__Group__0__Impl();
 
             state._fsp--;
@@ -13052,21 +13303,21 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__IntTypeRule__Group__0__Impl"
-    // InternalInstanceLanguage.g:4133:1: rule__IntTypeRule__Group__0__Impl : ( () ) ;
+    // InternalInstanceLanguage.g:4214:1: rule__IntTypeRule__Group__0__Impl : ( () ) ;
     public final void rule__IntTypeRule__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:4137:1: ( ( () ) )
-            // InternalInstanceLanguage.g:4138:1: ( () )
+            // InternalInstanceLanguage.g:4218:1: ( ( () ) )
+            // InternalInstanceLanguage.g:4219:1: ( () )
             {
-            // InternalInstanceLanguage.g:4138:1: ( () )
-            // InternalInstanceLanguage.g:4139:2: ()
+            // InternalInstanceLanguage.g:4219:1: ( () )
+            // InternalInstanceLanguage.g:4220:2: ()
             {
              before(grammarAccess.getIntTypeRuleAccess().getIntTypeAction_0()); 
-            // InternalInstanceLanguage.g:4140:2: ()
-            // InternalInstanceLanguage.g:4140:3: 
+            // InternalInstanceLanguage.g:4221:2: ()
+            // InternalInstanceLanguage.g:4221:3: 
             {
             }
 
@@ -13089,14 +13340,14 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__IntTypeRule__Group__1"
-    // InternalInstanceLanguage.g:4148:1: rule__IntTypeRule__Group__1 : rule__IntTypeRule__Group__1__Impl ;
+    // InternalInstanceLanguage.g:4229:1: rule__IntTypeRule__Group__1 : rule__IntTypeRule__Group__1__Impl ;
     public final void rule__IntTypeRule__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:4152:1: ( rule__IntTypeRule__Group__1__Impl )
-            // InternalInstanceLanguage.g:4153:2: rule__IntTypeRule__Group__1__Impl
+            // InternalInstanceLanguage.g:4233:1: ( rule__IntTypeRule__Group__1__Impl )
+            // InternalInstanceLanguage.g:4234:2: rule__IntTypeRule__Group__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__IntTypeRule__Group__1__Impl();
@@ -13122,17 +13373,17 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__IntTypeRule__Group__1__Impl"
-    // InternalInstanceLanguage.g:4159:1: rule__IntTypeRule__Group__1__Impl : ( 'int' ) ;
+    // InternalInstanceLanguage.g:4240:1: rule__IntTypeRule__Group__1__Impl : ( 'int' ) ;
     public final void rule__IntTypeRule__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:4163:1: ( ( 'int' ) )
-            // InternalInstanceLanguage.g:4164:1: ( 'int' )
+            // InternalInstanceLanguage.g:4244:1: ( ( 'int' ) )
+            // InternalInstanceLanguage.g:4245:1: ( 'int' )
             {
-            // InternalInstanceLanguage.g:4164:1: ( 'int' )
-            // InternalInstanceLanguage.g:4165:2: 'int'
+            // InternalInstanceLanguage.g:4245:1: ( 'int' )
+            // InternalInstanceLanguage.g:4246:2: 'int'
             {
              before(grammarAccess.getIntTypeRuleAccess().getIntKeyword_1()); 
             match(input,69,FOLLOW_2); 
@@ -13159,16 +13410,16 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__FloatTypeRule__Group__0"
-    // InternalInstanceLanguage.g:4175:1: rule__FloatTypeRule__Group__0 : rule__FloatTypeRule__Group__0__Impl rule__FloatTypeRule__Group__1 ;
+    // InternalInstanceLanguage.g:4256:1: rule__FloatTypeRule__Group__0 : rule__FloatTypeRule__Group__0__Impl rule__FloatTypeRule__Group__1 ;
     public final void rule__FloatTypeRule__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:4179:1: ( rule__FloatTypeRule__Group__0__Impl rule__FloatTypeRule__Group__1 )
-            // InternalInstanceLanguage.g:4180:2: rule__FloatTypeRule__Group__0__Impl rule__FloatTypeRule__Group__1
+            // InternalInstanceLanguage.g:4260:1: ( rule__FloatTypeRule__Group__0__Impl rule__FloatTypeRule__Group__1 )
+            // InternalInstanceLanguage.g:4261:2: rule__FloatTypeRule__Group__0__Impl rule__FloatTypeRule__Group__1
             {
-            pushFollow(FOLLOW_44);
+            pushFollow(FOLLOW_45);
             rule__FloatTypeRule__Group__0__Impl();
 
             state._fsp--;
@@ -13197,21 +13448,21 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__FloatTypeRule__Group__0__Impl"
-    // InternalInstanceLanguage.g:4187:1: rule__FloatTypeRule__Group__0__Impl : ( () ) ;
+    // InternalInstanceLanguage.g:4268:1: rule__FloatTypeRule__Group__0__Impl : ( () ) ;
     public final void rule__FloatTypeRule__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:4191:1: ( ( () ) )
-            // InternalInstanceLanguage.g:4192:1: ( () )
+            // InternalInstanceLanguage.g:4272:1: ( ( () ) )
+            // InternalInstanceLanguage.g:4273:1: ( () )
             {
-            // InternalInstanceLanguage.g:4192:1: ( () )
-            // InternalInstanceLanguage.g:4193:2: ()
+            // InternalInstanceLanguage.g:4273:1: ( () )
+            // InternalInstanceLanguage.g:4274:2: ()
             {
              before(grammarAccess.getFloatTypeRuleAccess().getFloatTypeAction_0()); 
-            // InternalInstanceLanguage.g:4194:2: ()
-            // InternalInstanceLanguage.g:4194:3: 
+            // InternalInstanceLanguage.g:4275:2: ()
+            // InternalInstanceLanguage.g:4275:3: 
             {
             }
 
@@ -13234,14 +13485,14 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__FloatTypeRule__Group__1"
-    // InternalInstanceLanguage.g:4202:1: rule__FloatTypeRule__Group__1 : rule__FloatTypeRule__Group__1__Impl ;
+    // InternalInstanceLanguage.g:4283:1: rule__FloatTypeRule__Group__1 : rule__FloatTypeRule__Group__1__Impl ;
     public final void rule__FloatTypeRule__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:4206:1: ( rule__FloatTypeRule__Group__1__Impl )
-            // InternalInstanceLanguage.g:4207:2: rule__FloatTypeRule__Group__1__Impl
+            // InternalInstanceLanguage.g:4287:1: ( rule__FloatTypeRule__Group__1__Impl )
+            // InternalInstanceLanguage.g:4288:2: rule__FloatTypeRule__Group__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__FloatTypeRule__Group__1__Impl();
@@ -13267,17 +13518,17 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__FloatTypeRule__Group__1__Impl"
-    // InternalInstanceLanguage.g:4213:1: rule__FloatTypeRule__Group__1__Impl : ( 'float' ) ;
+    // InternalInstanceLanguage.g:4294:1: rule__FloatTypeRule__Group__1__Impl : ( 'float' ) ;
     public final void rule__FloatTypeRule__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:4217:1: ( ( 'float' ) )
-            // InternalInstanceLanguage.g:4218:1: ( 'float' )
+            // InternalInstanceLanguage.g:4298:1: ( ( 'float' ) )
+            // InternalInstanceLanguage.g:4299:1: ( 'float' )
             {
-            // InternalInstanceLanguage.g:4218:1: ( 'float' )
-            // InternalInstanceLanguage.g:4219:2: 'float'
+            // InternalInstanceLanguage.g:4299:1: ( 'float' )
+            // InternalInstanceLanguage.g:4300:2: 'float'
             {
              before(grammarAccess.getFloatTypeRuleAccess().getFloatKeyword_1()); 
             match(input,70,FOLLOW_2); 
@@ -13304,16 +13555,16 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__BooleanTypeRule__Group__0"
-    // InternalInstanceLanguage.g:4229:1: rule__BooleanTypeRule__Group__0 : rule__BooleanTypeRule__Group__0__Impl rule__BooleanTypeRule__Group__1 ;
+    // InternalInstanceLanguage.g:4310:1: rule__BooleanTypeRule__Group__0 : rule__BooleanTypeRule__Group__0__Impl rule__BooleanTypeRule__Group__1 ;
     public final void rule__BooleanTypeRule__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:4233:1: ( rule__BooleanTypeRule__Group__0__Impl rule__BooleanTypeRule__Group__1 )
-            // InternalInstanceLanguage.g:4234:2: rule__BooleanTypeRule__Group__0__Impl rule__BooleanTypeRule__Group__1
+            // InternalInstanceLanguage.g:4314:1: ( rule__BooleanTypeRule__Group__0__Impl rule__BooleanTypeRule__Group__1 )
+            // InternalInstanceLanguage.g:4315:2: rule__BooleanTypeRule__Group__0__Impl rule__BooleanTypeRule__Group__1
             {
-            pushFollow(FOLLOW_45);
+            pushFollow(FOLLOW_46);
             rule__BooleanTypeRule__Group__0__Impl();
 
             state._fsp--;
@@ -13342,21 +13593,21 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__BooleanTypeRule__Group__0__Impl"
-    // InternalInstanceLanguage.g:4241:1: rule__BooleanTypeRule__Group__0__Impl : ( () ) ;
+    // InternalInstanceLanguage.g:4322:1: rule__BooleanTypeRule__Group__0__Impl : ( () ) ;
     public final void rule__BooleanTypeRule__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:4245:1: ( ( () ) )
-            // InternalInstanceLanguage.g:4246:1: ( () )
+            // InternalInstanceLanguage.g:4326:1: ( ( () ) )
+            // InternalInstanceLanguage.g:4327:1: ( () )
             {
-            // InternalInstanceLanguage.g:4246:1: ( () )
-            // InternalInstanceLanguage.g:4247:2: ()
+            // InternalInstanceLanguage.g:4327:1: ( () )
+            // InternalInstanceLanguage.g:4328:2: ()
             {
              before(grammarAccess.getBooleanTypeRuleAccess().getBooleanTypeAction_0()); 
-            // InternalInstanceLanguage.g:4248:2: ()
-            // InternalInstanceLanguage.g:4248:3: 
+            // InternalInstanceLanguage.g:4329:2: ()
+            // InternalInstanceLanguage.g:4329:3: 
             {
             }
 
@@ -13379,14 +13630,14 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__BooleanTypeRule__Group__1"
-    // InternalInstanceLanguage.g:4256:1: rule__BooleanTypeRule__Group__1 : rule__BooleanTypeRule__Group__1__Impl ;
+    // InternalInstanceLanguage.g:4337:1: rule__BooleanTypeRule__Group__1 : rule__BooleanTypeRule__Group__1__Impl ;
     public final void rule__BooleanTypeRule__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:4260:1: ( rule__BooleanTypeRule__Group__1__Impl )
-            // InternalInstanceLanguage.g:4261:2: rule__BooleanTypeRule__Group__1__Impl
+            // InternalInstanceLanguage.g:4341:1: ( rule__BooleanTypeRule__Group__1__Impl )
+            // InternalInstanceLanguage.g:4342:2: rule__BooleanTypeRule__Group__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__BooleanTypeRule__Group__1__Impl();
@@ -13412,17 +13663,17 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__BooleanTypeRule__Group__1__Impl"
-    // InternalInstanceLanguage.g:4267:1: rule__BooleanTypeRule__Group__1__Impl : ( 'boolean' ) ;
+    // InternalInstanceLanguage.g:4348:1: rule__BooleanTypeRule__Group__1__Impl : ( 'boolean' ) ;
     public final void rule__BooleanTypeRule__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:4271:1: ( ( 'boolean' ) )
-            // InternalInstanceLanguage.g:4272:1: ( 'boolean' )
+            // InternalInstanceLanguage.g:4352:1: ( ( 'boolean' ) )
+            // InternalInstanceLanguage.g:4353:1: ( 'boolean' )
             {
-            // InternalInstanceLanguage.g:4272:1: ( 'boolean' )
-            // InternalInstanceLanguage.g:4273:2: 'boolean'
+            // InternalInstanceLanguage.g:4353:1: ( 'boolean' )
+            // InternalInstanceLanguage.g:4354:2: 'boolean'
             {
              before(grammarAccess.getBooleanTypeRuleAccess().getBooleanKeyword_1()); 
             match(input,71,FOLLOW_2); 
@@ -13449,16 +13700,16 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__VoidTypeRule__Group__0"
-    // InternalInstanceLanguage.g:4283:1: rule__VoidTypeRule__Group__0 : rule__VoidTypeRule__Group__0__Impl rule__VoidTypeRule__Group__1 ;
+    // InternalInstanceLanguage.g:4364:1: rule__VoidTypeRule__Group__0 : rule__VoidTypeRule__Group__0__Impl rule__VoidTypeRule__Group__1 ;
     public final void rule__VoidTypeRule__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:4287:1: ( rule__VoidTypeRule__Group__0__Impl rule__VoidTypeRule__Group__1 )
-            // InternalInstanceLanguage.g:4288:2: rule__VoidTypeRule__Group__0__Impl rule__VoidTypeRule__Group__1
+            // InternalInstanceLanguage.g:4368:1: ( rule__VoidTypeRule__Group__0__Impl rule__VoidTypeRule__Group__1 )
+            // InternalInstanceLanguage.g:4369:2: rule__VoidTypeRule__Group__0__Impl rule__VoidTypeRule__Group__1
             {
-            pushFollow(FOLLOW_46);
+            pushFollow(FOLLOW_47);
             rule__VoidTypeRule__Group__0__Impl();
 
             state._fsp--;
@@ -13487,21 +13738,21 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__VoidTypeRule__Group__0__Impl"
-    // InternalInstanceLanguage.g:4295:1: rule__VoidTypeRule__Group__0__Impl : ( () ) ;
+    // InternalInstanceLanguage.g:4376:1: rule__VoidTypeRule__Group__0__Impl : ( () ) ;
     public final void rule__VoidTypeRule__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:4299:1: ( ( () ) )
-            // InternalInstanceLanguage.g:4300:1: ( () )
+            // InternalInstanceLanguage.g:4380:1: ( ( () ) )
+            // InternalInstanceLanguage.g:4381:1: ( () )
             {
-            // InternalInstanceLanguage.g:4300:1: ( () )
-            // InternalInstanceLanguage.g:4301:2: ()
+            // InternalInstanceLanguage.g:4381:1: ( () )
+            // InternalInstanceLanguage.g:4382:2: ()
             {
              before(grammarAccess.getVoidTypeRuleAccess().getVoidTypeAction_0()); 
-            // InternalInstanceLanguage.g:4302:2: ()
-            // InternalInstanceLanguage.g:4302:3: 
+            // InternalInstanceLanguage.g:4383:2: ()
+            // InternalInstanceLanguage.g:4383:3: 
             {
             }
 
@@ -13524,14 +13775,14 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__VoidTypeRule__Group__1"
-    // InternalInstanceLanguage.g:4310:1: rule__VoidTypeRule__Group__1 : rule__VoidTypeRule__Group__1__Impl ;
+    // InternalInstanceLanguage.g:4391:1: rule__VoidTypeRule__Group__1 : rule__VoidTypeRule__Group__1__Impl ;
     public final void rule__VoidTypeRule__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:4314:1: ( rule__VoidTypeRule__Group__1__Impl )
-            // InternalInstanceLanguage.g:4315:2: rule__VoidTypeRule__Group__1__Impl
+            // InternalInstanceLanguage.g:4395:1: ( rule__VoidTypeRule__Group__1__Impl )
+            // InternalInstanceLanguage.g:4396:2: rule__VoidTypeRule__Group__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__VoidTypeRule__Group__1__Impl();
@@ -13557,17 +13808,17 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__VoidTypeRule__Group__1__Impl"
-    // InternalInstanceLanguage.g:4321:1: rule__VoidTypeRule__Group__1__Impl : ( 'void' ) ;
+    // InternalInstanceLanguage.g:4402:1: rule__VoidTypeRule__Group__1__Impl : ( 'void' ) ;
     public final void rule__VoidTypeRule__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:4325:1: ( ( 'void' ) )
-            // InternalInstanceLanguage.g:4326:1: ( 'void' )
+            // InternalInstanceLanguage.g:4406:1: ( ( 'void' ) )
+            // InternalInstanceLanguage.g:4407:1: ( 'void' )
             {
-            // InternalInstanceLanguage.g:4326:1: ( 'void' )
-            // InternalInstanceLanguage.g:4327:2: 'void'
+            // InternalInstanceLanguage.g:4407:1: ( 'void' )
+            // InternalInstanceLanguage.g:4408:2: 'void'
             {
              before(grammarAccess.getVoidTypeRuleAccess().getVoidKeyword_1()); 
             match(input,72,FOLLOW_2); 
@@ -13594,14 +13845,14 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__DataTypeRule__Group__0"
-    // InternalInstanceLanguage.g:4337:1: rule__DataTypeRule__Group__0 : rule__DataTypeRule__Group__0__Impl rule__DataTypeRule__Group__1 ;
+    // InternalInstanceLanguage.g:4418:1: rule__DataTypeRule__Group__0 : rule__DataTypeRule__Group__0__Impl rule__DataTypeRule__Group__1 ;
     public final void rule__DataTypeRule__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:4341:1: ( rule__DataTypeRule__Group__0__Impl rule__DataTypeRule__Group__1 )
-            // InternalInstanceLanguage.g:4342:2: rule__DataTypeRule__Group__0__Impl rule__DataTypeRule__Group__1
+            // InternalInstanceLanguage.g:4422:1: ( rule__DataTypeRule__Group__0__Impl rule__DataTypeRule__Group__1 )
+            // InternalInstanceLanguage.g:4423:2: rule__DataTypeRule__Group__0__Impl rule__DataTypeRule__Group__1
             {
             pushFollow(FOLLOW_36);
             rule__DataTypeRule__Group__0__Impl();
@@ -13632,21 +13883,21 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__DataTypeRule__Group__0__Impl"
-    // InternalInstanceLanguage.g:4349:1: rule__DataTypeRule__Group__0__Impl : ( () ) ;
+    // InternalInstanceLanguage.g:4430:1: rule__DataTypeRule__Group__0__Impl : ( () ) ;
     public final void rule__DataTypeRule__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:4353:1: ( ( () ) )
-            // InternalInstanceLanguage.g:4354:1: ( () )
+            // InternalInstanceLanguage.g:4434:1: ( ( () ) )
+            // InternalInstanceLanguage.g:4435:1: ( () )
             {
-            // InternalInstanceLanguage.g:4354:1: ( () )
-            // InternalInstanceLanguage.g:4355:2: ()
+            // InternalInstanceLanguage.g:4435:1: ( () )
+            // InternalInstanceLanguage.g:4436:2: ()
             {
              before(grammarAccess.getDataTypeRuleAccess().getDataTypeAction_0()); 
-            // InternalInstanceLanguage.g:4356:2: ()
-            // InternalInstanceLanguage.g:4356:3: 
+            // InternalInstanceLanguage.g:4437:2: ()
+            // InternalInstanceLanguage.g:4437:3: 
             {
             }
 
@@ -13669,14 +13920,14 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__DataTypeRule__Group__1"
-    // InternalInstanceLanguage.g:4364:1: rule__DataTypeRule__Group__1 : rule__DataTypeRule__Group__1__Impl ;
+    // InternalInstanceLanguage.g:4445:1: rule__DataTypeRule__Group__1 : rule__DataTypeRule__Group__1__Impl ;
     public final void rule__DataTypeRule__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:4368:1: ( rule__DataTypeRule__Group__1__Impl )
-            // InternalInstanceLanguage.g:4369:2: rule__DataTypeRule__Group__1__Impl
+            // InternalInstanceLanguage.g:4449:1: ( rule__DataTypeRule__Group__1__Impl )
+            // InternalInstanceLanguage.g:4450:2: rule__DataTypeRule__Group__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__DataTypeRule__Group__1__Impl();
@@ -13702,17 +13953,17 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__DataTypeRule__Group__1__Impl"
-    // InternalInstanceLanguage.g:4375:1: rule__DataTypeRule__Group__1__Impl : ( 'data' ) ;
+    // InternalInstanceLanguage.g:4456:1: rule__DataTypeRule__Group__1__Impl : ( 'data' ) ;
     public final void rule__DataTypeRule__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:4379:1: ( ( 'data' ) )
-            // InternalInstanceLanguage.g:4380:1: ( 'data' )
+            // InternalInstanceLanguage.g:4460:1: ( ( 'data' ) )
+            // InternalInstanceLanguage.g:4461:1: ( 'data' )
             {
-            // InternalInstanceLanguage.g:4380:1: ( 'data' )
-            // InternalInstanceLanguage.g:4381:2: 'data'
+            // InternalInstanceLanguage.g:4461:1: ( 'data' )
+            // InternalInstanceLanguage.g:4462:2: 'data'
             {
              before(grammarAccess.getDataTypeRuleAccess().getDataKeyword_1()); 
             match(input,54,FOLLOW_2); 
@@ -13739,14 +13990,14 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__ArrayTypeRule__Group__0"
-    // InternalInstanceLanguage.g:4391:1: rule__ArrayTypeRule__Group__0 : rule__ArrayTypeRule__Group__0__Impl rule__ArrayTypeRule__Group__1 ;
+    // InternalInstanceLanguage.g:4472:1: rule__ArrayTypeRule__Group__0 : rule__ArrayTypeRule__Group__0__Impl rule__ArrayTypeRule__Group__1 ;
     public final void rule__ArrayTypeRule__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:4395:1: ( rule__ArrayTypeRule__Group__0__Impl rule__ArrayTypeRule__Group__1 )
-            // InternalInstanceLanguage.g:4396:2: rule__ArrayTypeRule__Group__0__Impl rule__ArrayTypeRule__Group__1
+            // InternalInstanceLanguage.g:4476:1: ( rule__ArrayTypeRule__Group__0__Impl rule__ArrayTypeRule__Group__1 )
+            // InternalInstanceLanguage.g:4477:2: rule__ArrayTypeRule__Group__0__Impl rule__ArrayTypeRule__Group__1
             {
             pushFollow(FOLLOW_36);
             rule__ArrayTypeRule__Group__0__Impl();
@@ -13777,17 +14028,17 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__ArrayTypeRule__Group__0__Impl"
-    // InternalInstanceLanguage.g:4403:1: rule__ArrayTypeRule__Group__0__Impl : ( 'array' ) ;
+    // InternalInstanceLanguage.g:4484:1: rule__ArrayTypeRule__Group__0__Impl : ( 'array' ) ;
     public final void rule__ArrayTypeRule__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:4407:1: ( ( 'array' ) )
-            // InternalInstanceLanguage.g:4408:1: ( 'array' )
+            // InternalInstanceLanguage.g:4488:1: ( ( 'array' ) )
+            // InternalInstanceLanguage.g:4489:1: ( 'array' )
             {
-            // InternalInstanceLanguage.g:4408:1: ( 'array' )
-            // InternalInstanceLanguage.g:4409:2: 'array'
+            // InternalInstanceLanguage.g:4489:1: ( 'array' )
+            // InternalInstanceLanguage.g:4490:2: 'array'
             {
              before(grammarAccess.getArrayTypeRuleAccess().getArrayKeyword_0()); 
             match(input,73,FOLLOW_2); 
@@ -13814,14 +14065,14 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__ArrayTypeRule__Group__1"
-    // InternalInstanceLanguage.g:4418:1: rule__ArrayTypeRule__Group__1 : rule__ArrayTypeRule__Group__1__Impl ;
+    // InternalInstanceLanguage.g:4499:1: rule__ArrayTypeRule__Group__1 : rule__ArrayTypeRule__Group__1__Impl ;
     public final void rule__ArrayTypeRule__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:4422:1: ( rule__ArrayTypeRule__Group__1__Impl )
-            // InternalInstanceLanguage.g:4423:2: rule__ArrayTypeRule__Group__1__Impl
+            // InternalInstanceLanguage.g:4503:1: ( rule__ArrayTypeRule__Group__1__Impl )
+            // InternalInstanceLanguage.g:4504:2: rule__ArrayTypeRule__Group__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__ArrayTypeRule__Group__1__Impl();
@@ -13847,21 +14098,21 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__ArrayTypeRule__Group__1__Impl"
-    // InternalInstanceLanguage.g:4429:1: rule__ArrayTypeRule__Group__1__Impl : ( ( rule__ArrayTypeRule__ElementsAssignment_1 ) ) ;
+    // InternalInstanceLanguage.g:4510:1: rule__ArrayTypeRule__Group__1__Impl : ( ( rule__ArrayTypeRule__ElementsAssignment_1 ) ) ;
     public final void rule__ArrayTypeRule__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:4433:1: ( ( ( rule__ArrayTypeRule__ElementsAssignment_1 ) ) )
-            // InternalInstanceLanguage.g:4434:1: ( ( rule__ArrayTypeRule__ElementsAssignment_1 ) )
+            // InternalInstanceLanguage.g:4514:1: ( ( ( rule__ArrayTypeRule__ElementsAssignment_1 ) ) )
+            // InternalInstanceLanguage.g:4515:1: ( ( rule__ArrayTypeRule__ElementsAssignment_1 ) )
             {
-            // InternalInstanceLanguage.g:4434:1: ( ( rule__ArrayTypeRule__ElementsAssignment_1 ) )
-            // InternalInstanceLanguage.g:4435:2: ( rule__ArrayTypeRule__ElementsAssignment_1 )
+            // InternalInstanceLanguage.g:4515:1: ( ( rule__ArrayTypeRule__ElementsAssignment_1 ) )
+            // InternalInstanceLanguage.g:4516:2: ( rule__ArrayTypeRule__ElementsAssignment_1 )
             {
              before(grammarAccess.getArrayTypeRuleAccess().getElementsAssignment_1()); 
-            // InternalInstanceLanguage.g:4436:2: ( rule__ArrayTypeRule__ElementsAssignment_1 )
-            // InternalInstanceLanguage.g:4436:3: rule__ArrayTypeRule__ElementsAssignment_1
+            // InternalInstanceLanguage.g:4517:2: ( rule__ArrayTypeRule__ElementsAssignment_1 )
+            // InternalInstanceLanguage.g:4517:3: rule__ArrayTypeRule__ElementsAssignment_1
             {
             pushFollow(FOLLOW_2);
             rule__ArrayTypeRule__ElementsAssignment_1();
@@ -13894,14 +14145,14 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__ParameterRule__Group__0"
-    // InternalInstanceLanguage.g:4445:1: rule__ParameterRule__Group__0 : rule__ParameterRule__Group__0__Impl rule__ParameterRule__Group__1 ;
+    // InternalInstanceLanguage.g:4526:1: rule__ParameterRule__Group__0 : rule__ParameterRule__Group__0__Impl rule__ParameterRule__Group__1 ;
     public final void rule__ParameterRule__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:4449:1: ( rule__ParameterRule__Group__0__Impl rule__ParameterRule__Group__1 )
-            // InternalInstanceLanguage.g:4450:2: rule__ParameterRule__Group__0__Impl rule__ParameterRule__Group__1
+            // InternalInstanceLanguage.g:4530:1: ( rule__ParameterRule__Group__0__Impl rule__ParameterRule__Group__1 )
+            // InternalInstanceLanguage.g:4531:2: rule__ParameterRule__Group__0__Impl rule__ParameterRule__Group__1
             {
             pushFollow(FOLLOW_14);
             rule__ParameterRule__Group__0__Impl();
@@ -13932,21 +14183,21 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__ParameterRule__Group__0__Impl"
-    // InternalInstanceLanguage.g:4457:1: rule__ParameterRule__Group__0__Impl : ( ( rule__ParameterRule__TypeAssignment_0 ) ) ;
+    // InternalInstanceLanguage.g:4538:1: rule__ParameterRule__Group__0__Impl : ( ( rule__ParameterRule__TypeAssignment_0 ) ) ;
     public final void rule__ParameterRule__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:4461:1: ( ( ( rule__ParameterRule__TypeAssignment_0 ) ) )
-            // InternalInstanceLanguage.g:4462:1: ( ( rule__ParameterRule__TypeAssignment_0 ) )
+            // InternalInstanceLanguage.g:4542:1: ( ( ( rule__ParameterRule__TypeAssignment_0 ) ) )
+            // InternalInstanceLanguage.g:4543:1: ( ( rule__ParameterRule__TypeAssignment_0 ) )
             {
-            // InternalInstanceLanguage.g:4462:1: ( ( rule__ParameterRule__TypeAssignment_0 ) )
-            // InternalInstanceLanguage.g:4463:2: ( rule__ParameterRule__TypeAssignment_0 )
+            // InternalInstanceLanguage.g:4543:1: ( ( rule__ParameterRule__TypeAssignment_0 ) )
+            // InternalInstanceLanguage.g:4544:2: ( rule__ParameterRule__TypeAssignment_0 )
             {
              before(grammarAccess.getParameterRuleAccess().getTypeAssignment_0()); 
-            // InternalInstanceLanguage.g:4464:2: ( rule__ParameterRule__TypeAssignment_0 )
-            // InternalInstanceLanguage.g:4464:3: rule__ParameterRule__TypeAssignment_0
+            // InternalInstanceLanguage.g:4545:2: ( rule__ParameterRule__TypeAssignment_0 )
+            // InternalInstanceLanguage.g:4545:3: rule__ParameterRule__TypeAssignment_0
             {
             pushFollow(FOLLOW_2);
             rule__ParameterRule__TypeAssignment_0();
@@ -13979,14 +14230,14 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__ParameterRule__Group__1"
-    // InternalInstanceLanguage.g:4472:1: rule__ParameterRule__Group__1 : rule__ParameterRule__Group__1__Impl ;
+    // InternalInstanceLanguage.g:4553:1: rule__ParameterRule__Group__1 : rule__ParameterRule__Group__1__Impl ;
     public final void rule__ParameterRule__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:4476:1: ( rule__ParameterRule__Group__1__Impl )
-            // InternalInstanceLanguage.g:4477:2: rule__ParameterRule__Group__1__Impl
+            // InternalInstanceLanguage.g:4557:1: ( rule__ParameterRule__Group__1__Impl )
+            // InternalInstanceLanguage.g:4558:2: rule__ParameterRule__Group__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__ParameterRule__Group__1__Impl();
@@ -14012,21 +14263,21 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__ParameterRule__Group__1__Impl"
-    // InternalInstanceLanguage.g:4483:1: rule__ParameterRule__Group__1__Impl : ( ( rule__ParameterRule__NameAssignment_1 ) ) ;
+    // InternalInstanceLanguage.g:4564:1: rule__ParameterRule__Group__1__Impl : ( ( rule__ParameterRule__NameAssignment_1 ) ) ;
     public final void rule__ParameterRule__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:4487:1: ( ( ( rule__ParameterRule__NameAssignment_1 ) ) )
-            // InternalInstanceLanguage.g:4488:1: ( ( rule__ParameterRule__NameAssignment_1 ) )
+            // InternalInstanceLanguage.g:4568:1: ( ( ( rule__ParameterRule__NameAssignment_1 ) ) )
+            // InternalInstanceLanguage.g:4569:1: ( ( rule__ParameterRule__NameAssignment_1 ) )
             {
-            // InternalInstanceLanguage.g:4488:1: ( ( rule__ParameterRule__NameAssignment_1 ) )
-            // InternalInstanceLanguage.g:4489:2: ( rule__ParameterRule__NameAssignment_1 )
+            // InternalInstanceLanguage.g:4569:1: ( ( rule__ParameterRule__NameAssignment_1 ) )
+            // InternalInstanceLanguage.g:4570:2: ( rule__ParameterRule__NameAssignment_1 )
             {
              before(grammarAccess.getParameterRuleAccess().getNameAssignment_1()); 
-            // InternalInstanceLanguage.g:4490:2: ( rule__ParameterRule__NameAssignment_1 )
-            // InternalInstanceLanguage.g:4490:3: rule__ParameterRule__NameAssignment_1
+            // InternalInstanceLanguage.g:4571:2: ( rule__ParameterRule__NameAssignment_1 )
+            // InternalInstanceLanguage.g:4571:3: rule__ParameterRule__NameAssignment_1
             {
             pushFollow(FOLLOW_2);
             rule__ParameterRule__NameAssignment_1();
@@ -14059,14 +14310,14 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__QualifiedName__Group__0"
-    // InternalInstanceLanguage.g:4499:1: rule__QualifiedName__Group__0 : rule__QualifiedName__Group__0__Impl rule__QualifiedName__Group__1 ;
+    // InternalInstanceLanguage.g:4580:1: rule__QualifiedName__Group__0 : rule__QualifiedName__Group__0__Impl rule__QualifiedName__Group__1 ;
     public final void rule__QualifiedName__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:4503:1: ( rule__QualifiedName__Group__0__Impl rule__QualifiedName__Group__1 )
-            // InternalInstanceLanguage.g:4504:2: rule__QualifiedName__Group__0__Impl rule__QualifiedName__Group__1
+            // InternalInstanceLanguage.g:4584:1: ( rule__QualifiedName__Group__0__Impl rule__QualifiedName__Group__1 )
+            // InternalInstanceLanguage.g:4585:2: rule__QualifiedName__Group__0__Impl rule__QualifiedName__Group__1
             {
             pushFollow(FOLLOW_15);
             rule__QualifiedName__Group__0__Impl();
@@ -14097,17 +14348,17 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__QualifiedName__Group__0__Impl"
-    // InternalInstanceLanguage.g:4511:1: rule__QualifiedName__Group__0__Impl : ( ruleStringOrId ) ;
+    // InternalInstanceLanguage.g:4592:1: rule__QualifiedName__Group__0__Impl : ( ruleStringOrId ) ;
     public final void rule__QualifiedName__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:4515:1: ( ( ruleStringOrId ) )
-            // InternalInstanceLanguage.g:4516:1: ( ruleStringOrId )
+            // InternalInstanceLanguage.g:4596:1: ( ( ruleStringOrId ) )
+            // InternalInstanceLanguage.g:4597:1: ( ruleStringOrId )
             {
-            // InternalInstanceLanguage.g:4516:1: ( ruleStringOrId )
-            // InternalInstanceLanguage.g:4517:2: ruleStringOrId
+            // InternalInstanceLanguage.g:4597:1: ( ruleStringOrId )
+            // InternalInstanceLanguage.g:4598:2: ruleStringOrId
             {
              before(grammarAccess.getQualifiedNameAccess().getStringOrIdParserRuleCall_0()); 
             pushFollow(FOLLOW_2);
@@ -14138,14 +14389,14 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__QualifiedName__Group__1"
-    // InternalInstanceLanguage.g:4526:1: rule__QualifiedName__Group__1 : rule__QualifiedName__Group__1__Impl ;
+    // InternalInstanceLanguage.g:4607:1: rule__QualifiedName__Group__1 : rule__QualifiedName__Group__1__Impl ;
     public final void rule__QualifiedName__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:4530:1: ( rule__QualifiedName__Group__1__Impl )
-            // InternalInstanceLanguage.g:4531:2: rule__QualifiedName__Group__1__Impl
+            // InternalInstanceLanguage.g:4611:1: ( rule__QualifiedName__Group__1__Impl )
+            // InternalInstanceLanguage.g:4612:2: rule__QualifiedName__Group__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__QualifiedName__Group__1__Impl();
@@ -14171,33 +14422,33 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__QualifiedName__Group__1__Impl"
-    // InternalInstanceLanguage.g:4537:1: rule__QualifiedName__Group__1__Impl : ( ( rule__QualifiedName__Group_1__0 )* ) ;
+    // InternalInstanceLanguage.g:4618:1: rule__QualifiedName__Group__1__Impl : ( ( rule__QualifiedName__Group_1__0 )* ) ;
     public final void rule__QualifiedName__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:4541:1: ( ( ( rule__QualifiedName__Group_1__0 )* ) )
-            // InternalInstanceLanguage.g:4542:1: ( ( rule__QualifiedName__Group_1__0 )* )
+            // InternalInstanceLanguage.g:4622:1: ( ( ( rule__QualifiedName__Group_1__0 )* ) )
+            // InternalInstanceLanguage.g:4623:1: ( ( rule__QualifiedName__Group_1__0 )* )
             {
-            // InternalInstanceLanguage.g:4542:1: ( ( rule__QualifiedName__Group_1__0 )* )
-            // InternalInstanceLanguage.g:4543:2: ( rule__QualifiedName__Group_1__0 )*
+            // InternalInstanceLanguage.g:4623:1: ( ( rule__QualifiedName__Group_1__0 )* )
+            // InternalInstanceLanguage.g:4624:2: ( rule__QualifiedName__Group_1__0 )*
             {
              before(grammarAccess.getQualifiedNameAccess().getGroup_1()); 
-            // InternalInstanceLanguage.g:4544:2: ( rule__QualifiedName__Group_1__0 )*
-            loop31:
+            // InternalInstanceLanguage.g:4625:2: ( rule__QualifiedName__Group_1__0 )*
+            loop32:
             do {
-                int alt31=2;
-                int LA31_0 = input.LA(1);
+                int alt32=2;
+                int LA32_0 = input.LA(1);
 
-                if ( (LA31_0==55) ) {
-                    alt31=1;
+                if ( (LA32_0==55) ) {
+                    alt32=1;
                 }
 
 
-                switch (alt31) {
+                switch (alt32) {
             	case 1 :
-            	    // InternalInstanceLanguage.g:4544:3: rule__QualifiedName__Group_1__0
+            	    // InternalInstanceLanguage.g:4625:3: rule__QualifiedName__Group_1__0
             	    {
             	    pushFollow(FOLLOW_16);
             	    rule__QualifiedName__Group_1__0();
@@ -14209,7 +14460,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
             	    break;
 
             	default :
-            	    break loop31;
+            	    break loop32;
                 }
             } while (true);
 
@@ -14236,14 +14487,14 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__QualifiedName__Group_1__0"
-    // InternalInstanceLanguage.g:4553:1: rule__QualifiedName__Group_1__0 : rule__QualifiedName__Group_1__0__Impl rule__QualifiedName__Group_1__1 ;
+    // InternalInstanceLanguage.g:4634:1: rule__QualifiedName__Group_1__0 : rule__QualifiedName__Group_1__0__Impl rule__QualifiedName__Group_1__1 ;
     public final void rule__QualifiedName__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:4557:1: ( rule__QualifiedName__Group_1__0__Impl rule__QualifiedName__Group_1__1 )
-            // InternalInstanceLanguage.g:4558:2: rule__QualifiedName__Group_1__0__Impl rule__QualifiedName__Group_1__1
+            // InternalInstanceLanguage.g:4638:1: ( rule__QualifiedName__Group_1__0__Impl rule__QualifiedName__Group_1__1 )
+            // InternalInstanceLanguage.g:4639:2: rule__QualifiedName__Group_1__0__Impl rule__QualifiedName__Group_1__1
             {
             pushFollow(FOLLOW_14);
             rule__QualifiedName__Group_1__0__Impl();
@@ -14274,17 +14525,17 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__QualifiedName__Group_1__0__Impl"
-    // InternalInstanceLanguage.g:4565:1: rule__QualifiedName__Group_1__0__Impl : ( '.' ) ;
+    // InternalInstanceLanguage.g:4646:1: rule__QualifiedName__Group_1__0__Impl : ( '.' ) ;
     public final void rule__QualifiedName__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:4569:1: ( ( '.' ) )
-            // InternalInstanceLanguage.g:4570:1: ( '.' )
+            // InternalInstanceLanguage.g:4650:1: ( ( '.' ) )
+            // InternalInstanceLanguage.g:4651:1: ( '.' )
             {
-            // InternalInstanceLanguage.g:4570:1: ( '.' )
-            // InternalInstanceLanguage.g:4571:2: '.'
+            // InternalInstanceLanguage.g:4651:1: ( '.' )
+            // InternalInstanceLanguage.g:4652:2: '.'
             {
              before(grammarAccess.getQualifiedNameAccess().getFullStopKeyword_1_0()); 
             match(input,55,FOLLOW_2); 
@@ -14311,14 +14562,14 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__QualifiedName__Group_1__1"
-    // InternalInstanceLanguage.g:4580:1: rule__QualifiedName__Group_1__1 : rule__QualifiedName__Group_1__1__Impl ;
+    // InternalInstanceLanguage.g:4661:1: rule__QualifiedName__Group_1__1 : rule__QualifiedName__Group_1__1__Impl ;
     public final void rule__QualifiedName__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:4584:1: ( rule__QualifiedName__Group_1__1__Impl )
-            // InternalInstanceLanguage.g:4585:2: rule__QualifiedName__Group_1__1__Impl
+            // InternalInstanceLanguage.g:4665:1: ( rule__QualifiedName__Group_1__1__Impl )
+            // InternalInstanceLanguage.g:4666:2: rule__QualifiedName__Group_1__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__QualifiedName__Group_1__1__Impl();
@@ -14344,17 +14595,17 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__QualifiedName__Group_1__1__Impl"
-    // InternalInstanceLanguage.g:4591:1: rule__QualifiedName__Group_1__1__Impl : ( ruleStringOrId ) ;
+    // InternalInstanceLanguage.g:4672:1: rule__QualifiedName__Group_1__1__Impl : ( ruleStringOrId ) ;
     public final void rule__QualifiedName__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:4595:1: ( ( ruleStringOrId ) )
-            // InternalInstanceLanguage.g:4596:1: ( ruleStringOrId )
+            // InternalInstanceLanguage.g:4676:1: ( ( ruleStringOrId ) )
+            // InternalInstanceLanguage.g:4677:1: ( ruleStringOrId )
             {
-            // InternalInstanceLanguage.g:4596:1: ( ruleStringOrId )
-            // InternalInstanceLanguage.g:4597:2: ruleStringOrId
+            // InternalInstanceLanguage.g:4677:1: ( ruleStringOrId )
+            // InternalInstanceLanguage.g:4678:2: ruleStringOrId
             {
              before(grammarAccess.getQualifiedNameAccess().getStringOrIdParserRuleCall_1_1()); 
             pushFollow(FOLLOW_2);
@@ -14385,21 +14636,21 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__InstanceRule__DefinitionAssignment_0"
-    // InternalInstanceLanguage.g:4607:1: rule__InstanceRule__DefinitionAssignment_0 : ( ( ruleQualifiedNameRule ) ) ;
+    // InternalInstanceLanguage.g:4688:1: rule__InstanceRule__DefinitionAssignment_0 : ( ( ruleQualifiedNameRule ) ) ;
     public final void rule__InstanceRule__DefinitionAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:4611:1: ( ( ( ruleQualifiedNameRule ) ) )
-            // InternalInstanceLanguage.g:4612:2: ( ( ruleQualifiedNameRule ) )
+            // InternalInstanceLanguage.g:4692:1: ( ( ( ruleQualifiedNameRule ) ) )
+            // InternalInstanceLanguage.g:4693:2: ( ( ruleQualifiedNameRule ) )
             {
-            // InternalInstanceLanguage.g:4612:2: ( ( ruleQualifiedNameRule ) )
-            // InternalInstanceLanguage.g:4613:3: ( ruleQualifiedNameRule )
+            // InternalInstanceLanguage.g:4693:2: ( ( ruleQualifiedNameRule ) )
+            // InternalInstanceLanguage.g:4694:3: ( ruleQualifiedNameRule )
             {
              before(grammarAccess.getInstanceRuleAccess().getDefinitionTypeDefinitionCrossReference_0_0()); 
-            // InternalInstanceLanguage.g:4614:3: ( ruleQualifiedNameRule )
-            // InternalInstanceLanguage.g:4615:4: ruleQualifiedNameRule
+            // InternalInstanceLanguage.g:4695:3: ( ruleQualifiedNameRule )
+            // InternalInstanceLanguage.g:4696:4: ruleQualifiedNameRule
             {
              before(grammarAccess.getInstanceRuleAccess().getDefinitionTypeDefinitionQualifiedNameRuleParserRuleCall_0_0_1()); 
             pushFollow(FOLLOW_2);
@@ -14434,17 +14685,17 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__InstanceRule__AttributesAssignment_1_1"
-    // InternalInstanceLanguage.g:4626:1: rule__InstanceRule__AttributesAssignment_1_1 : ( ruleAttributeRule ) ;
+    // InternalInstanceLanguage.g:4707:1: rule__InstanceRule__AttributesAssignment_1_1 : ( ruleAttributeRule ) ;
     public final void rule__InstanceRule__AttributesAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:4630:1: ( ( ruleAttributeRule ) )
-            // InternalInstanceLanguage.g:4631:2: ( ruleAttributeRule )
+            // InternalInstanceLanguage.g:4711:1: ( ( ruleAttributeRule ) )
+            // InternalInstanceLanguage.g:4712:2: ( ruleAttributeRule )
             {
-            // InternalInstanceLanguage.g:4631:2: ( ruleAttributeRule )
-            // InternalInstanceLanguage.g:4632:3: ruleAttributeRule
+            // InternalInstanceLanguage.g:4712:2: ( ruleAttributeRule )
+            // InternalInstanceLanguage.g:4713:3: ruleAttributeRule
             {
              before(grammarAccess.getInstanceRuleAccess().getAttributesAttributeRuleParserRuleCall_1_1_0()); 
             pushFollow(FOLLOW_2);
@@ -14475,21 +14726,21 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__AttributeRule__DefinitionAssignment_0"
-    // InternalInstanceLanguage.g:4641:1: rule__AttributeRule__DefinitionAssignment_0 : ( ( ruleStringOrId ) ) ;
+    // InternalInstanceLanguage.g:4722:1: rule__AttributeRule__DefinitionAssignment_0 : ( ( ruleStringOrId ) ) ;
     public final void rule__AttributeRule__DefinitionAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:4645:1: ( ( ( ruleStringOrId ) ) )
-            // InternalInstanceLanguage.g:4646:2: ( ( ruleStringOrId ) )
+            // InternalInstanceLanguage.g:4726:1: ( ( ( ruleStringOrId ) ) )
+            // InternalInstanceLanguage.g:4727:2: ( ( ruleStringOrId ) )
             {
-            // InternalInstanceLanguage.g:4646:2: ( ( ruleStringOrId ) )
-            // InternalInstanceLanguage.g:4647:3: ( ruleStringOrId )
+            // InternalInstanceLanguage.g:4727:2: ( ( ruleStringOrId ) )
+            // InternalInstanceLanguage.g:4728:3: ( ruleStringOrId )
             {
              before(grammarAccess.getAttributeRuleAccess().getDefinitionAttributeDefinitionCrossReference_0_0()); 
-            // InternalInstanceLanguage.g:4648:3: ( ruleStringOrId )
-            // InternalInstanceLanguage.g:4649:4: ruleStringOrId
+            // InternalInstanceLanguage.g:4729:3: ( ruleStringOrId )
+            // InternalInstanceLanguage.g:4730:4: ruleStringOrId
             {
              before(grammarAccess.getAttributeRuleAccess().getDefinitionAttributeDefinitionStringOrIdParserRuleCall_0_0_1()); 
             pushFollow(FOLLOW_2);
@@ -14524,17 +14775,17 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__AttributeRule__ValueAssignment_2"
-    // InternalInstanceLanguage.g:4660:1: rule__AttributeRule__ValueAssignment_2 : ( ruleValueRule ) ;
+    // InternalInstanceLanguage.g:4741:1: rule__AttributeRule__ValueAssignment_2 : ( ruleValueRule ) ;
     public final void rule__AttributeRule__ValueAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:4664:1: ( ( ruleValueRule ) )
-            // InternalInstanceLanguage.g:4665:2: ( ruleValueRule )
+            // InternalInstanceLanguage.g:4745:1: ( ( ruleValueRule ) )
+            // InternalInstanceLanguage.g:4746:2: ( ruleValueRule )
             {
-            // InternalInstanceLanguage.g:4665:2: ( ruleValueRule )
-            // InternalInstanceLanguage.g:4666:3: ruleValueRule
+            // InternalInstanceLanguage.g:4746:2: ( ruleValueRule )
+            // InternalInstanceLanguage.g:4747:3: ruleValueRule
             {
              before(grammarAccess.getAttributeRuleAccess().getValueValueRuleParserRuleCall_2_0()); 
             pushFollow(FOLLOW_2);
@@ -14565,17 +14816,17 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__ArrayRule__ValuesAssignment_2_0"
-    // InternalInstanceLanguage.g:4675:1: rule__ArrayRule__ValuesAssignment_2_0 : ( ruleValueRule ) ;
+    // InternalInstanceLanguage.g:4756:1: rule__ArrayRule__ValuesAssignment_2_0 : ( ruleValueRule ) ;
     public final void rule__ArrayRule__ValuesAssignment_2_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:4679:1: ( ( ruleValueRule ) )
-            // InternalInstanceLanguage.g:4680:2: ( ruleValueRule )
+            // InternalInstanceLanguage.g:4760:1: ( ( ruleValueRule ) )
+            // InternalInstanceLanguage.g:4761:2: ( ruleValueRule )
             {
-            // InternalInstanceLanguage.g:4680:2: ( ruleValueRule )
-            // InternalInstanceLanguage.g:4681:3: ruleValueRule
+            // InternalInstanceLanguage.g:4761:2: ( ruleValueRule )
+            // InternalInstanceLanguage.g:4762:3: ruleValueRule
             {
              before(grammarAccess.getArrayRuleAccess().getValuesValueRuleParserRuleCall_2_0_0()); 
             pushFollow(FOLLOW_2);
@@ -14606,17 +14857,17 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__ArrayRule__ValuesAssignment_2_1_1"
-    // InternalInstanceLanguage.g:4690:1: rule__ArrayRule__ValuesAssignment_2_1_1 : ( ruleValueRule ) ;
+    // InternalInstanceLanguage.g:4771:1: rule__ArrayRule__ValuesAssignment_2_1_1 : ( ruleValueRule ) ;
     public final void rule__ArrayRule__ValuesAssignment_2_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:4694:1: ( ( ruleValueRule ) )
-            // InternalInstanceLanguage.g:4695:2: ( ruleValueRule )
+            // InternalInstanceLanguage.g:4775:1: ( ( ruleValueRule ) )
+            // InternalInstanceLanguage.g:4776:2: ( ruleValueRule )
             {
-            // InternalInstanceLanguage.g:4695:2: ( ruleValueRule )
-            // InternalInstanceLanguage.g:4696:3: ruleValueRule
+            // InternalInstanceLanguage.g:4776:2: ( ruleValueRule )
+            // InternalInstanceLanguage.g:4777:3: ruleValueRule
             {
              before(grammarAccess.getArrayRuleAccess().getValuesValueRuleParserRuleCall_2_1_1_0()); 
             pushFollow(FOLLOW_2);
@@ -14647,17 +14898,17 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__LiteralValueRule__LiteralAssignment"
-    // InternalInstanceLanguage.g:4705:1: rule__LiteralValueRule__LiteralAssignment : ( ruleLiteralRule ) ;
+    // InternalInstanceLanguage.g:4786:1: rule__LiteralValueRule__LiteralAssignment : ( ruleLiteralRule ) ;
     public final void rule__LiteralValueRule__LiteralAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:4709:1: ( ( ruleLiteralRule ) )
-            // InternalInstanceLanguage.g:4710:2: ( ruleLiteralRule )
+            // InternalInstanceLanguage.g:4790:1: ( ( ruleLiteralRule ) )
+            // InternalInstanceLanguage.g:4791:2: ( ruleLiteralRule )
             {
-            // InternalInstanceLanguage.g:4710:2: ( ruleLiteralRule )
-            // InternalInstanceLanguage.g:4711:3: ruleLiteralRule
+            // InternalInstanceLanguage.g:4791:2: ( ruleLiteralRule )
+            // InternalInstanceLanguage.g:4792:3: ruleLiteralRule
             {
              before(grammarAccess.getLiteralValueRuleAccess().getLiteralLiteralRuleParserRuleCall_0()); 
             pushFollow(FOLLOW_2);
@@ -14688,21 +14939,21 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__DataReferenceRule__DefinitionAssignment_2"
-    // InternalInstanceLanguage.g:4720:1: rule__DataReferenceRule__DefinitionAssignment_2 : ( ( ruleStringOrId ) ) ;
+    // InternalInstanceLanguage.g:4801:1: rule__DataReferenceRule__DefinitionAssignment_2 : ( ( ruleStringOrId ) ) ;
     public final void rule__DataReferenceRule__DefinitionAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:4724:1: ( ( ( ruleStringOrId ) ) )
-            // InternalInstanceLanguage.g:4725:2: ( ( ruleStringOrId ) )
+            // InternalInstanceLanguage.g:4805:1: ( ( ( ruleStringOrId ) ) )
+            // InternalInstanceLanguage.g:4806:2: ( ( ruleStringOrId ) )
             {
-            // InternalInstanceLanguage.g:4725:2: ( ( ruleStringOrId ) )
-            // InternalInstanceLanguage.g:4726:3: ( ruleStringOrId )
+            // InternalInstanceLanguage.g:4806:2: ( ( ruleStringOrId ) )
+            // InternalInstanceLanguage.g:4807:3: ( ruleStringOrId )
             {
              before(grammarAccess.getDataReferenceRuleAccess().getDefinitionDataDescriptionCrossReference_2_0()); 
-            // InternalInstanceLanguage.g:4727:3: ( ruleStringOrId )
-            // InternalInstanceLanguage.g:4728:4: ruleStringOrId
+            // InternalInstanceLanguage.g:4808:3: ( ruleStringOrId )
+            // InternalInstanceLanguage.g:4809:4: ruleStringOrId
             {
              before(grammarAccess.getDataReferenceRuleAccess().getDefinitionDataDescriptionStringOrIdParserRuleCall_2_0_1()); 
             pushFollow(FOLLOW_2);
@@ -14737,17 +14988,17 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__OrExpressionRule__SubExpressionsAssignment_0"
-    // InternalInstanceLanguage.g:4739:1: rule__OrExpressionRule__SubExpressionsAssignment_0 : ( ruleXorExpressionRule ) ;
+    // InternalInstanceLanguage.g:4820:1: rule__OrExpressionRule__SubExpressionsAssignment_0 : ( ruleXorExpressionRule ) ;
     public final void rule__OrExpressionRule__SubExpressionsAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:4743:1: ( ( ruleXorExpressionRule ) )
-            // InternalInstanceLanguage.g:4744:2: ( ruleXorExpressionRule )
+            // InternalInstanceLanguage.g:4824:1: ( ( ruleXorExpressionRule ) )
+            // InternalInstanceLanguage.g:4825:2: ( ruleXorExpressionRule )
             {
-            // InternalInstanceLanguage.g:4744:2: ( ruleXorExpressionRule )
-            // InternalInstanceLanguage.g:4745:3: ruleXorExpressionRule
+            // InternalInstanceLanguage.g:4825:2: ( ruleXorExpressionRule )
+            // InternalInstanceLanguage.g:4826:3: ruleXorExpressionRule
             {
              before(grammarAccess.getOrExpressionRuleAccess().getSubExpressionsXorExpressionRuleParserRuleCall_0_0()); 
             pushFollow(FOLLOW_2);
@@ -14778,17 +15029,17 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__OrExpressionRule__SubExpressionsAssignment_1_1"
-    // InternalInstanceLanguage.g:4754:1: rule__OrExpressionRule__SubExpressionsAssignment_1_1 : ( ruleXorExpressionRule ) ;
+    // InternalInstanceLanguage.g:4835:1: rule__OrExpressionRule__SubExpressionsAssignment_1_1 : ( ruleXorExpressionRule ) ;
     public final void rule__OrExpressionRule__SubExpressionsAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:4758:1: ( ( ruleXorExpressionRule ) )
-            // InternalInstanceLanguage.g:4759:2: ( ruleXorExpressionRule )
+            // InternalInstanceLanguage.g:4839:1: ( ( ruleXorExpressionRule ) )
+            // InternalInstanceLanguage.g:4840:2: ( ruleXorExpressionRule )
             {
-            // InternalInstanceLanguage.g:4759:2: ( ruleXorExpressionRule )
-            // InternalInstanceLanguage.g:4760:3: ruleXorExpressionRule
+            // InternalInstanceLanguage.g:4840:2: ( ruleXorExpressionRule )
+            // InternalInstanceLanguage.g:4841:3: ruleXorExpressionRule
             {
              before(grammarAccess.getOrExpressionRuleAccess().getSubExpressionsXorExpressionRuleParserRuleCall_1_1_0()); 
             pushFollow(FOLLOW_2);
@@ -14819,17 +15070,17 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__XorExpressionRule__SubExpressionsAssignment_0"
-    // InternalInstanceLanguage.g:4769:1: rule__XorExpressionRule__SubExpressionsAssignment_0 : ( ruleAndExpressionRule ) ;
+    // InternalInstanceLanguage.g:4850:1: rule__XorExpressionRule__SubExpressionsAssignment_0 : ( ruleAndExpressionRule ) ;
     public final void rule__XorExpressionRule__SubExpressionsAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:4773:1: ( ( ruleAndExpressionRule ) )
-            // InternalInstanceLanguage.g:4774:2: ( ruleAndExpressionRule )
+            // InternalInstanceLanguage.g:4854:1: ( ( ruleAndExpressionRule ) )
+            // InternalInstanceLanguage.g:4855:2: ( ruleAndExpressionRule )
             {
-            // InternalInstanceLanguage.g:4774:2: ( ruleAndExpressionRule )
-            // InternalInstanceLanguage.g:4775:3: ruleAndExpressionRule
+            // InternalInstanceLanguage.g:4855:2: ( ruleAndExpressionRule )
+            // InternalInstanceLanguage.g:4856:3: ruleAndExpressionRule
             {
              before(grammarAccess.getXorExpressionRuleAccess().getSubExpressionsAndExpressionRuleParserRuleCall_0_0()); 
             pushFollow(FOLLOW_2);
@@ -14860,17 +15111,17 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__XorExpressionRule__SubExpressionsAssignment_1_1"
-    // InternalInstanceLanguage.g:4784:1: rule__XorExpressionRule__SubExpressionsAssignment_1_1 : ( ruleAndExpressionRule ) ;
+    // InternalInstanceLanguage.g:4865:1: rule__XorExpressionRule__SubExpressionsAssignment_1_1 : ( ruleAndExpressionRule ) ;
     public final void rule__XorExpressionRule__SubExpressionsAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:4788:1: ( ( ruleAndExpressionRule ) )
-            // InternalInstanceLanguage.g:4789:2: ( ruleAndExpressionRule )
+            // InternalInstanceLanguage.g:4869:1: ( ( ruleAndExpressionRule ) )
+            // InternalInstanceLanguage.g:4870:2: ( ruleAndExpressionRule )
             {
-            // InternalInstanceLanguage.g:4789:2: ( ruleAndExpressionRule )
-            // InternalInstanceLanguage.g:4790:3: ruleAndExpressionRule
+            // InternalInstanceLanguage.g:4870:2: ( ruleAndExpressionRule )
+            // InternalInstanceLanguage.g:4871:3: ruleAndExpressionRule
             {
              before(grammarAccess.getXorExpressionRuleAccess().getSubExpressionsAndExpressionRuleParserRuleCall_1_1_0()); 
             pushFollow(FOLLOW_2);
@@ -14901,17 +15152,17 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__AndExpressionRule__SubExpressionsAssignment_0"
-    // InternalInstanceLanguage.g:4799:1: rule__AndExpressionRule__SubExpressionsAssignment_0 : ( ruleNotExpressionRule ) ;
+    // InternalInstanceLanguage.g:4880:1: rule__AndExpressionRule__SubExpressionsAssignment_0 : ( ruleNotExpressionRule ) ;
     public final void rule__AndExpressionRule__SubExpressionsAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:4803:1: ( ( ruleNotExpressionRule ) )
-            // InternalInstanceLanguage.g:4804:2: ( ruleNotExpressionRule )
+            // InternalInstanceLanguage.g:4884:1: ( ( ruleNotExpressionRule ) )
+            // InternalInstanceLanguage.g:4885:2: ( ruleNotExpressionRule )
             {
-            // InternalInstanceLanguage.g:4804:2: ( ruleNotExpressionRule )
-            // InternalInstanceLanguage.g:4805:3: ruleNotExpressionRule
+            // InternalInstanceLanguage.g:4885:2: ( ruleNotExpressionRule )
+            // InternalInstanceLanguage.g:4886:3: ruleNotExpressionRule
             {
              before(grammarAccess.getAndExpressionRuleAccess().getSubExpressionsNotExpressionRuleParserRuleCall_0_0()); 
             pushFollow(FOLLOW_2);
@@ -14942,17 +15193,17 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__AndExpressionRule__SubExpressionsAssignment_1_1"
-    // InternalInstanceLanguage.g:4814:1: rule__AndExpressionRule__SubExpressionsAssignment_1_1 : ( ruleNotExpressionRule ) ;
+    // InternalInstanceLanguage.g:4895:1: rule__AndExpressionRule__SubExpressionsAssignment_1_1 : ( ruleNotExpressionRule ) ;
     public final void rule__AndExpressionRule__SubExpressionsAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:4818:1: ( ( ruleNotExpressionRule ) )
-            // InternalInstanceLanguage.g:4819:2: ( ruleNotExpressionRule )
+            // InternalInstanceLanguage.g:4899:1: ( ( ruleNotExpressionRule ) )
+            // InternalInstanceLanguage.g:4900:2: ( ruleNotExpressionRule )
             {
-            // InternalInstanceLanguage.g:4819:2: ( ruleNotExpressionRule )
-            // InternalInstanceLanguage.g:4820:3: ruleNotExpressionRule
+            // InternalInstanceLanguage.g:4900:2: ( ruleNotExpressionRule )
+            // InternalInstanceLanguage.g:4901:3: ruleNotExpressionRule
             {
              before(grammarAccess.getAndExpressionRuleAccess().getSubExpressionsNotExpressionRuleParserRuleCall_1_1_0()); 
             pushFollow(FOLLOW_2);
@@ -14983,21 +15234,21 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__NotExpressionRule__NegatedAssignment_0"
-    // InternalInstanceLanguage.g:4829:1: rule__NotExpressionRule__NegatedAssignment_0 : ( ( '!' ) ) ;
+    // InternalInstanceLanguage.g:4910:1: rule__NotExpressionRule__NegatedAssignment_0 : ( ( '!' ) ) ;
     public final void rule__NotExpressionRule__NegatedAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:4833:1: ( ( ( '!' ) ) )
-            // InternalInstanceLanguage.g:4834:2: ( ( '!' ) )
+            // InternalInstanceLanguage.g:4914:1: ( ( ( '!' ) ) )
+            // InternalInstanceLanguage.g:4915:2: ( ( '!' ) )
             {
-            // InternalInstanceLanguage.g:4834:2: ( ( '!' ) )
-            // InternalInstanceLanguage.g:4835:3: ( '!' )
+            // InternalInstanceLanguage.g:4915:2: ( ( '!' ) )
+            // InternalInstanceLanguage.g:4916:3: ( '!' )
             {
              before(grammarAccess.getNotExpressionRuleAccess().getNegatedExclamationMarkKeyword_0_0()); 
-            // InternalInstanceLanguage.g:4836:3: ( '!' )
-            // InternalInstanceLanguage.g:4837:4: '!'
+            // InternalInstanceLanguage.g:4917:3: ( '!' )
+            // InternalInstanceLanguage.g:4918:4: '!'
             {
              before(grammarAccess.getNotExpressionRuleAccess().getNegatedExclamationMarkKeyword_0_0()); 
             match(input,74,FOLLOW_2); 
@@ -15028,17 +15279,17 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__NotExpressionRule__OperandAssignment_1"
-    // InternalInstanceLanguage.g:4848:1: rule__NotExpressionRule__OperandAssignment_1 : ( ruleComparisonExpressionRule ) ;
+    // InternalInstanceLanguage.g:4929:1: rule__NotExpressionRule__OperandAssignment_1 : ( ruleComparisonExpressionRule ) ;
     public final void rule__NotExpressionRule__OperandAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:4852:1: ( ( ruleComparisonExpressionRule ) )
-            // InternalInstanceLanguage.g:4853:2: ( ruleComparisonExpressionRule )
+            // InternalInstanceLanguage.g:4933:1: ( ( ruleComparisonExpressionRule ) )
+            // InternalInstanceLanguage.g:4934:2: ( ruleComparisonExpressionRule )
             {
-            // InternalInstanceLanguage.g:4853:2: ( ruleComparisonExpressionRule )
-            // InternalInstanceLanguage.g:4854:3: ruleComparisonExpressionRule
+            // InternalInstanceLanguage.g:4934:2: ( ruleComparisonExpressionRule )
+            // InternalInstanceLanguage.g:4935:3: ruleComparisonExpressionRule
             {
              before(grammarAccess.getNotExpressionRuleAccess().getOperandComparisonExpressionRuleParserRuleCall_1_0()); 
             pushFollow(FOLLOW_2);
@@ -15069,17 +15320,17 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__ComparisonExpressionRule__LeftOperandAssignment_0"
-    // InternalInstanceLanguage.g:4863:1: rule__ComparisonExpressionRule__LeftOperandAssignment_0 : ( ruleAddOrSubtractExpressionRule ) ;
+    // InternalInstanceLanguage.g:4944:1: rule__ComparisonExpressionRule__LeftOperandAssignment_0 : ( ruleAddOrSubtractExpressionRule ) ;
     public final void rule__ComparisonExpressionRule__LeftOperandAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:4867:1: ( ( ruleAddOrSubtractExpressionRule ) )
-            // InternalInstanceLanguage.g:4868:2: ( ruleAddOrSubtractExpressionRule )
+            // InternalInstanceLanguage.g:4948:1: ( ( ruleAddOrSubtractExpressionRule ) )
+            // InternalInstanceLanguage.g:4949:2: ( ruleAddOrSubtractExpressionRule )
             {
-            // InternalInstanceLanguage.g:4868:2: ( ruleAddOrSubtractExpressionRule )
-            // InternalInstanceLanguage.g:4869:3: ruleAddOrSubtractExpressionRule
+            // InternalInstanceLanguage.g:4949:2: ( ruleAddOrSubtractExpressionRule )
+            // InternalInstanceLanguage.g:4950:3: ruleAddOrSubtractExpressionRule
             {
              before(grammarAccess.getComparisonExpressionRuleAccess().getLeftOperandAddOrSubtractExpressionRuleParserRuleCall_0_0()); 
             pushFollow(FOLLOW_2);
@@ -15110,17 +15361,17 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__ComparisonExpressionRule__ComparisonAssignment_1"
-    // InternalInstanceLanguage.g:4878:1: rule__ComparisonExpressionRule__ComparisonAssignment_1 : ( rulePartialComparisonExpressionRule ) ;
+    // InternalInstanceLanguage.g:4959:1: rule__ComparisonExpressionRule__ComparisonAssignment_1 : ( rulePartialComparisonExpressionRule ) ;
     public final void rule__ComparisonExpressionRule__ComparisonAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:4882:1: ( ( rulePartialComparisonExpressionRule ) )
-            // InternalInstanceLanguage.g:4883:2: ( rulePartialComparisonExpressionRule )
+            // InternalInstanceLanguage.g:4963:1: ( ( rulePartialComparisonExpressionRule ) )
+            // InternalInstanceLanguage.g:4964:2: ( rulePartialComparisonExpressionRule )
             {
-            // InternalInstanceLanguage.g:4883:2: ( rulePartialComparisonExpressionRule )
-            // InternalInstanceLanguage.g:4884:3: rulePartialComparisonExpressionRule
+            // InternalInstanceLanguage.g:4964:2: ( rulePartialComparisonExpressionRule )
+            // InternalInstanceLanguage.g:4965:3: rulePartialComparisonExpressionRule
             {
              before(grammarAccess.getComparisonExpressionRuleAccess().getComparisonPartialComparisonExpressionRuleParserRuleCall_1_0()); 
             pushFollow(FOLLOW_2);
@@ -15151,17 +15402,17 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__PartialComparisonExpressionRule__OperatorAssignment_0"
-    // InternalInstanceLanguage.g:4893:1: rule__PartialComparisonExpressionRule__OperatorAssignment_0 : ( ruleComparisonOperatorRule ) ;
+    // InternalInstanceLanguage.g:4974:1: rule__PartialComparisonExpressionRule__OperatorAssignment_0 : ( ruleComparisonOperatorRule ) ;
     public final void rule__PartialComparisonExpressionRule__OperatorAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:4897:1: ( ( ruleComparisonOperatorRule ) )
-            // InternalInstanceLanguage.g:4898:2: ( ruleComparisonOperatorRule )
+            // InternalInstanceLanguage.g:4978:1: ( ( ruleComparisonOperatorRule ) )
+            // InternalInstanceLanguage.g:4979:2: ( ruleComparisonOperatorRule )
             {
-            // InternalInstanceLanguage.g:4898:2: ( ruleComparisonOperatorRule )
-            // InternalInstanceLanguage.g:4899:3: ruleComparisonOperatorRule
+            // InternalInstanceLanguage.g:4979:2: ( ruleComparisonOperatorRule )
+            // InternalInstanceLanguage.g:4980:3: ruleComparisonOperatorRule
             {
              before(grammarAccess.getPartialComparisonExpressionRuleAccess().getOperatorComparisonOperatorRuleEnumRuleCall_0_0()); 
             pushFollow(FOLLOW_2);
@@ -15192,17 +15443,17 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__PartialComparisonExpressionRule__SubExpressionAssignment_1"
-    // InternalInstanceLanguage.g:4908:1: rule__PartialComparisonExpressionRule__SubExpressionAssignment_1 : ( ruleAddOrSubtractExpressionRule ) ;
+    // InternalInstanceLanguage.g:4989:1: rule__PartialComparisonExpressionRule__SubExpressionAssignment_1 : ( ruleAddOrSubtractExpressionRule ) ;
     public final void rule__PartialComparisonExpressionRule__SubExpressionAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:4912:1: ( ( ruleAddOrSubtractExpressionRule ) )
-            // InternalInstanceLanguage.g:4913:2: ( ruleAddOrSubtractExpressionRule )
+            // InternalInstanceLanguage.g:4993:1: ( ( ruleAddOrSubtractExpressionRule ) )
+            // InternalInstanceLanguage.g:4994:2: ( ruleAddOrSubtractExpressionRule )
             {
-            // InternalInstanceLanguage.g:4913:2: ( ruleAddOrSubtractExpressionRule )
-            // InternalInstanceLanguage.g:4914:3: ruleAddOrSubtractExpressionRule
+            // InternalInstanceLanguage.g:4994:2: ( ruleAddOrSubtractExpressionRule )
+            // InternalInstanceLanguage.g:4995:3: ruleAddOrSubtractExpressionRule
             {
              before(grammarAccess.getPartialComparisonExpressionRuleAccess().getSubExpressionAddOrSubtractExpressionRuleParserRuleCall_1_0()); 
             pushFollow(FOLLOW_2);
@@ -15233,17 +15484,17 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__AddOrSubtractExpressionRule__LeftOperandAssignment_0"
-    // InternalInstanceLanguage.g:4923:1: rule__AddOrSubtractExpressionRule__LeftOperandAssignment_0 : ( ruleMultiplyDivideModuloExpressionRule ) ;
+    // InternalInstanceLanguage.g:5004:1: rule__AddOrSubtractExpressionRule__LeftOperandAssignment_0 : ( ruleMultiplyDivideModuloExpressionRule ) ;
     public final void rule__AddOrSubtractExpressionRule__LeftOperandAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:4927:1: ( ( ruleMultiplyDivideModuloExpressionRule ) )
-            // InternalInstanceLanguage.g:4928:2: ( ruleMultiplyDivideModuloExpressionRule )
+            // InternalInstanceLanguage.g:5008:1: ( ( ruleMultiplyDivideModuloExpressionRule ) )
+            // InternalInstanceLanguage.g:5009:2: ( ruleMultiplyDivideModuloExpressionRule )
             {
-            // InternalInstanceLanguage.g:4928:2: ( ruleMultiplyDivideModuloExpressionRule )
-            // InternalInstanceLanguage.g:4929:3: ruleMultiplyDivideModuloExpressionRule
+            // InternalInstanceLanguage.g:5009:2: ( ruleMultiplyDivideModuloExpressionRule )
+            // InternalInstanceLanguage.g:5010:3: ruleMultiplyDivideModuloExpressionRule
             {
              before(grammarAccess.getAddOrSubtractExpressionRuleAccess().getLeftOperandMultiplyDivideModuloExpressionRuleParserRuleCall_0_0()); 
             pushFollow(FOLLOW_2);
@@ -15274,17 +15525,17 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__AddOrSubtractExpressionRule__OperatorsAssignment_1_0"
-    // InternalInstanceLanguage.g:4938:1: rule__AddOrSubtractExpressionRule__OperatorsAssignment_1_0 : ( ruleAddOrSubtractOperatorRule ) ;
+    // InternalInstanceLanguage.g:5019:1: rule__AddOrSubtractExpressionRule__OperatorsAssignment_1_0 : ( ruleAddOrSubtractOperatorRule ) ;
     public final void rule__AddOrSubtractExpressionRule__OperatorsAssignment_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:4942:1: ( ( ruleAddOrSubtractOperatorRule ) )
-            // InternalInstanceLanguage.g:4943:2: ( ruleAddOrSubtractOperatorRule )
+            // InternalInstanceLanguage.g:5023:1: ( ( ruleAddOrSubtractOperatorRule ) )
+            // InternalInstanceLanguage.g:5024:2: ( ruleAddOrSubtractOperatorRule )
             {
-            // InternalInstanceLanguage.g:4943:2: ( ruleAddOrSubtractOperatorRule )
-            // InternalInstanceLanguage.g:4944:3: ruleAddOrSubtractOperatorRule
+            // InternalInstanceLanguage.g:5024:2: ( ruleAddOrSubtractOperatorRule )
+            // InternalInstanceLanguage.g:5025:3: ruleAddOrSubtractOperatorRule
             {
              before(grammarAccess.getAddOrSubtractExpressionRuleAccess().getOperatorsAddOrSubtractOperatorRuleEnumRuleCall_1_0_0()); 
             pushFollow(FOLLOW_2);
@@ -15315,17 +15566,17 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__AddOrSubtractExpressionRule__OperandsAssignment_1_1"
-    // InternalInstanceLanguage.g:4953:1: rule__AddOrSubtractExpressionRule__OperandsAssignment_1_1 : ( ruleMultiplyDivideModuloExpressionRule ) ;
+    // InternalInstanceLanguage.g:5034:1: rule__AddOrSubtractExpressionRule__OperandsAssignment_1_1 : ( ruleMultiplyDivideModuloExpressionRule ) ;
     public final void rule__AddOrSubtractExpressionRule__OperandsAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:4957:1: ( ( ruleMultiplyDivideModuloExpressionRule ) )
-            // InternalInstanceLanguage.g:4958:2: ( ruleMultiplyDivideModuloExpressionRule )
+            // InternalInstanceLanguage.g:5038:1: ( ( ruleMultiplyDivideModuloExpressionRule ) )
+            // InternalInstanceLanguage.g:5039:2: ( ruleMultiplyDivideModuloExpressionRule )
             {
-            // InternalInstanceLanguage.g:4958:2: ( ruleMultiplyDivideModuloExpressionRule )
-            // InternalInstanceLanguage.g:4959:3: ruleMultiplyDivideModuloExpressionRule
+            // InternalInstanceLanguage.g:5039:2: ( ruleMultiplyDivideModuloExpressionRule )
+            // InternalInstanceLanguage.g:5040:3: ruleMultiplyDivideModuloExpressionRule
             {
              before(grammarAccess.getAddOrSubtractExpressionRuleAccess().getOperandsMultiplyDivideModuloExpressionRuleParserRuleCall_1_1_0()); 
             pushFollow(FOLLOW_2);
@@ -15356,17 +15607,17 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__MultiplyDivideModuloExpressionRule__LeftOperandAssignment_0"
-    // InternalInstanceLanguage.g:4968:1: rule__MultiplyDivideModuloExpressionRule__LeftOperandAssignment_0 : ( rulePowerOfExpressionRule ) ;
+    // InternalInstanceLanguage.g:5049:1: rule__MultiplyDivideModuloExpressionRule__LeftOperandAssignment_0 : ( rulePowerOfExpressionRule ) ;
     public final void rule__MultiplyDivideModuloExpressionRule__LeftOperandAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:4972:1: ( ( rulePowerOfExpressionRule ) )
-            // InternalInstanceLanguage.g:4973:2: ( rulePowerOfExpressionRule )
+            // InternalInstanceLanguage.g:5053:1: ( ( rulePowerOfExpressionRule ) )
+            // InternalInstanceLanguage.g:5054:2: ( rulePowerOfExpressionRule )
             {
-            // InternalInstanceLanguage.g:4973:2: ( rulePowerOfExpressionRule )
-            // InternalInstanceLanguage.g:4974:3: rulePowerOfExpressionRule
+            // InternalInstanceLanguage.g:5054:2: ( rulePowerOfExpressionRule )
+            // InternalInstanceLanguage.g:5055:3: rulePowerOfExpressionRule
             {
              before(grammarAccess.getMultiplyDivideModuloExpressionRuleAccess().getLeftOperandPowerOfExpressionRuleParserRuleCall_0_0()); 
             pushFollow(FOLLOW_2);
@@ -15397,17 +15648,17 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__MultiplyDivideModuloExpressionRule__OperatorsAssignment_1_0"
-    // InternalInstanceLanguage.g:4983:1: rule__MultiplyDivideModuloExpressionRule__OperatorsAssignment_1_0 : ( ruleMultiplyDivideModuloOperatorRule ) ;
+    // InternalInstanceLanguage.g:5064:1: rule__MultiplyDivideModuloExpressionRule__OperatorsAssignment_1_0 : ( ruleMultiplyDivideModuloOperatorRule ) ;
     public final void rule__MultiplyDivideModuloExpressionRule__OperatorsAssignment_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:4987:1: ( ( ruleMultiplyDivideModuloOperatorRule ) )
-            // InternalInstanceLanguage.g:4988:2: ( ruleMultiplyDivideModuloOperatorRule )
+            // InternalInstanceLanguage.g:5068:1: ( ( ruleMultiplyDivideModuloOperatorRule ) )
+            // InternalInstanceLanguage.g:5069:2: ( ruleMultiplyDivideModuloOperatorRule )
             {
-            // InternalInstanceLanguage.g:4988:2: ( ruleMultiplyDivideModuloOperatorRule )
-            // InternalInstanceLanguage.g:4989:3: ruleMultiplyDivideModuloOperatorRule
+            // InternalInstanceLanguage.g:5069:2: ( ruleMultiplyDivideModuloOperatorRule )
+            // InternalInstanceLanguage.g:5070:3: ruleMultiplyDivideModuloOperatorRule
             {
              before(grammarAccess.getMultiplyDivideModuloExpressionRuleAccess().getOperatorsMultiplyDivideModuloOperatorRuleEnumRuleCall_1_0_0()); 
             pushFollow(FOLLOW_2);
@@ -15438,17 +15689,17 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__MultiplyDivideModuloExpressionRule__OperandsAssignment_1_1"
-    // InternalInstanceLanguage.g:4998:1: rule__MultiplyDivideModuloExpressionRule__OperandsAssignment_1_1 : ( rulePowerOfExpressionRule ) ;
+    // InternalInstanceLanguage.g:5079:1: rule__MultiplyDivideModuloExpressionRule__OperandsAssignment_1_1 : ( rulePowerOfExpressionRule ) ;
     public final void rule__MultiplyDivideModuloExpressionRule__OperandsAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:5002:1: ( ( rulePowerOfExpressionRule ) )
-            // InternalInstanceLanguage.g:5003:2: ( rulePowerOfExpressionRule )
+            // InternalInstanceLanguage.g:5083:1: ( ( rulePowerOfExpressionRule ) )
+            // InternalInstanceLanguage.g:5084:2: ( rulePowerOfExpressionRule )
             {
-            // InternalInstanceLanguage.g:5003:2: ( rulePowerOfExpressionRule )
-            // InternalInstanceLanguage.g:5004:3: rulePowerOfExpressionRule
+            // InternalInstanceLanguage.g:5084:2: ( rulePowerOfExpressionRule )
+            // InternalInstanceLanguage.g:5085:3: rulePowerOfExpressionRule
             {
              before(grammarAccess.getMultiplyDivideModuloExpressionRuleAccess().getOperandsPowerOfExpressionRuleParserRuleCall_1_1_0()); 
             pushFollow(FOLLOW_2);
@@ -15479,17 +15730,17 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__PowerOfExpressionRule__LeftOperandAssignment_0"
-    // InternalInstanceLanguage.g:5013:1: rule__PowerOfExpressionRule__LeftOperandAssignment_0 : ( ruleUnaryAddOrSubtractExpressionRule ) ;
+    // InternalInstanceLanguage.g:5094:1: rule__PowerOfExpressionRule__LeftOperandAssignment_0 : ( ruleUnaryAddOrSubtractExpressionRule ) ;
     public final void rule__PowerOfExpressionRule__LeftOperandAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:5017:1: ( ( ruleUnaryAddOrSubtractExpressionRule ) )
-            // InternalInstanceLanguage.g:5018:2: ( ruleUnaryAddOrSubtractExpressionRule )
+            // InternalInstanceLanguage.g:5098:1: ( ( ruleUnaryAddOrSubtractExpressionRule ) )
+            // InternalInstanceLanguage.g:5099:2: ( ruleUnaryAddOrSubtractExpressionRule )
             {
-            // InternalInstanceLanguage.g:5018:2: ( ruleUnaryAddOrSubtractExpressionRule )
-            // InternalInstanceLanguage.g:5019:3: ruleUnaryAddOrSubtractExpressionRule
+            // InternalInstanceLanguage.g:5099:2: ( ruleUnaryAddOrSubtractExpressionRule )
+            // InternalInstanceLanguage.g:5100:3: ruleUnaryAddOrSubtractExpressionRule
             {
              before(grammarAccess.getPowerOfExpressionRuleAccess().getLeftOperandUnaryAddOrSubtractExpressionRuleParserRuleCall_0_0()); 
             pushFollow(FOLLOW_2);
@@ -15520,17 +15771,17 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__PowerOfExpressionRule__RightOperandAssignment_1_1"
-    // InternalInstanceLanguage.g:5028:1: rule__PowerOfExpressionRule__RightOperandAssignment_1_1 : ( rulePowerOfExpressionRule ) ;
+    // InternalInstanceLanguage.g:5109:1: rule__PowerOfExpressionRule__RightOperandAssignment_1_1 : ( rulePowerOfExpressionRule ) ;
     public final void rule__PowerOfExpressionRule__RightOperandAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:5032:1: ( ( rulePowerOfExpressionRule ) )
-            // InternalInstanceLanguage.g:5033:2: ( rulePowerOfExpressionRule )
+            // InternalInstanceLanguage.g:5113:1: ( ( rulePowerOfExpressionRule ) )
+            // InternalInstanceLanguage.g:5114:2: ( rulePowerOfExpressionRule )
             {
-            // InternalInstanceLanguage.g:5033:2: ( rulePowerOfExpressionRule )
-            // InternalInstanceLanguage.g:5034:3: rulePowerOfExpressionRule
+            // InternalInstanceLanguage.g:5114:2: ( rulePowerOfExpressionRule )
+            // InternalInstanceLanguage.g:5115:3: rulePowerOfExpressionRule
             {
              before(grammarAccess.getPowerOfExpressionRuleAccess().getRightOperandPowerOfExpressionRuleParserRuleCall_1_1_0()); 
             pushFollow(FOLLOW_2);
@@ -15561,17 +15812,17 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__UnaryAddOrSubtractExpressionRule__OperatorsAssignment_0"
-    // InternalInstanceLanguage.g:5043:1: rule__UnaryAddOrSubtractExpressionRule__OperatorsAssignment_0 : ( ruleAddOrSubtractOperatorRule ) ;
+    // InternalInstanceLanguage.g:5124:1: rule__UnaryAddOrSubtractExpressionRule__OperatorsAssignment_0 : ( ruleAddOrSubtractOperatorRule ) ;
     public final void rule__UnaryAddOrSubtractExpressionRule__OperatorsAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:5047:1: ( ( ruleAddOrSubtractOperatorRule ) )
-            // InternalInstanceLanguage.g:5048:2: ( ruleAddOrSubtractOperatorRule )
+            // InternalInstanceLanguage.g:5128:1: ( ( ruleAddOrSubtractOperatorRule ) )
+            // InternalInstanceLanguage.g:5129:2: ( ruleAddOrSubtractOperatorRule )
             {
-            // InternalInstanceLanguage.g:5048:2: ( ruleAddOrSubtractOperatorRule )
-            // InternalInstanceLanguage.g:5049:3: ruleAddOrSubtractOperatorRule
+            // InternalInstanceLanguage.g:5129:2: ( ruleAddOrSubtractOperatorRule )
+            // InternalInstanceLanguage.g:5130:3: ruleAddOrSubtractOperatorRule
             {
              before(grammarAccess.getUnaryAddOrSubtractExpressionRuleAccess().getOperatorsAddOrSubtractOperatorRuleEnumRuleCall_0_0()); 
             pushFollow(FOLLOW_2);
@@ -15602,17 +15853,17 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__UnaryAddOrSubtractExpressionRule__SubExpressionAssignment_1"
-    // InternalInstanceLanguage.g:5058:1: rule__UnaryAddOrSubtractExpressionRule__SubExpressionAssignment_1 : ( ruleLiteralOrReferenceRule ) ;
+    // InternalInstanceLanguage.g:5139:1: rule__UnaryAddOrSubtractExpressionRule__SubExpressionAssignment_1 : ( ruleLiteralOrReferenceRule ) ;
     public final void rule__UnaryAddOrSubtractExpressionRule__SubExpressionAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:5062:1: ( ( ruleLiteralOrReferenceRule ) )
-            // InternalInstanceLanguage.g:5063:2: ( ruleLiteralOrReferenceRule )
+            // InternalInstanceLanguage.g:5143:1: ( ( ruleLiteralOrReferenceRule ) )
+            // InternalInstanceLanguage.g:5144:2: ( ruleLiteralOrReferenceRule )
             {
-            // InternalInstanceLanguage.g:5063:2: ( ruleLiteralOrReferenceRule )
-            // InternalInstanceLanguage.g:5064:3: ruleLiteralOrReferenceRule
+            // InternalInstanceLanguage.g:5144:2: ( ruleLiteralOrReferenceRule )
+            // InternalInstanceLanguage.g:5145:3: ruleLiteralOrReferenceRule
             {
              before(grammarAccess.getUnaryAddOrSubtractExpressionRuleAccess().getSubExpressionLiteralOrReferenceRuleParserRuleCall_1_0()); 
             pushFollow(FOLLOW_2);
@@ -15643,17 +15894,17 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__ParanthesesRule__SubExpressionAssignment_1"
-    // InternalInstanceLanguage.g:5073:1: rule__ParanthesesRule__SubExpressionAssignment_1 : ( ruleExpressionRule ) ;
+    // InternalInstanceLanguage.g:5154:1: rule__ParanthesesRule__SubExpressionAssignment_1 : ( ruleExpressionRule ) ;
     public final void rule__ParanthesesRule__SubExpressionAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:5077:1: ( ( ruleExpressionRule ) )
-            // InternalInstanceLanguage.g:5078:2: ( ruleExpressionRule )
+            // InternalInstanceLanguage.g:5158:1: ( ( ruleExpressionRule ) )
+            // InternalInstanceLanguage.g:5159:2: ( ruleExpressionRule )
             {
-            // InternalInstanceLanguage.g:5078:2: ( ruleExpressionRule )
-            // InternalInstanceLanguage.g:5079:3: ruleExpressionRule
+            // InternalInstanceLanguage.g:5159:2: ( ruleExpressionRule )
+            // InternalInstanceLanguage.g:5160:3: ruleExpressionRule
             {
              before(grammarAccess.getParanthesesRuleAccess().getSubExpressionExpressionRuleParserRuleCall_1_0()); 
             pushFollow(FOLLOW_2);
@@ -15684,17 +15935,17 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__CallRule__FunctionAssignment_0"
-    // InternalInstanceLanguage.g:5088:1: rule__CallRule__FunctionAssignment_0 : ( ruleFunctionNameRule ) ;
+    // InternalInstanceLanguage.g:5169:1: rule__CallRule__FunctionAssignment_0 : ( ruleFunctionNameRule ) ;
     public final void rule__CallRule__FunctionAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:5092:1: ( ( ruleFunctionNameRule ) )
-            // InternalInstanceLanguage.g:5093:2: ( ruleFunctionNameRule )
+            // InternalInstanceLanguage.g:5173:1: ( ( ruleFunctionNameRule ) )
+            // InternalInstanceLanguage.g:5174:2: ( ruleFunctionNameRule )
             {
-            // InternalInstanceLanguage.g:5093:2: ( ruleFunctionNameRule )
-            // InternalInstanceLanguage.g:5094:3: ruleFunctionNameRule
+            // InternalInstanceLanguage.g:5174:2: ( ruleFunctionNameRule )
+            // InternalInstanceLanguage.g:5175:3: ruleFunctionNameRule
             {
              before(grammarAccess.getCallRuleAccess().getFunctionFunctionNameRuleParserRuleCall_0_0()); 
             pushFollow(FOLLOW_2);
@@ -15725,17 +15976,17 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__CallRule__ParametersAssignment_2_0"
-    // InternalInstanceLanguage.g:5103:1: rule__CallRule__ParametersAssignment_2_0 : ( ruleExpressionRule ) ;
+    // InternalInstanceLanguage.g:5184:1: rule__CallRule__ParametersAssignment_2_0 : ( ruleExpressionRule ) ;
     public final void rule__CallRule__ParametersAssignment_2_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:5107:1: ( ( ruleExpressionRule ) )
-            // InternalInstanceLanguage.g:5108:2: ( ruleExpressionRule )
+            // InternalInstanceLanguage.g:5188:1: ( ( ruleExpressionRule ) )
+            // InternalInstanceLanguage.g:5189:2: ( ruleExpressionRule )
             {
-            // InternalInstanceLanguage.g:5108:2: ( ruleExpressionRule )
-            // InternalInstanceLanguage.g:5109:3: ruleExpressionRule
+            // InternalInstanceLanguage.g:5189:2: ( ruleExpressionRule )
+            // InternalInstanceLanguage.g:5190:3: ruleExpressionRule
             {
              before(grammarAccess.getCallRuleAccess().getParametersExpressionRuleParserRuleCall_2_0_0()); 
             pushFollow(FOLLOW_2);
@@ -15766,17 +16017,17 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__CallRule__ParametersAssignment_2_1_1"
-    // InternalInstanceLanguage.g:5118:1: rule__CallRule__ParametersAssignment_2_1_1 : ( ruleExpressionRule ) ;
+    // InternalInstanceLanguage.g:5199:1: rule__CallRule__ParametersAssignment_2_1_1 : ( ruleExpressionRule ) ;
     public final void rule__CallRule__ParametersAssignment_2_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:5122:1: ( ( ruleExpressionRule ) )
-            // InternalInstanceLanguage.g:5123:2: ( ruleExpressionRule )
+            // InternalInstanceLanguage.g:5203:1: ( ( ruleExpressionRule ) )
+            // InternalInstanceLanguage.g:5204:2: ( ruleExpressionRule )
             {
-            // InternalInstanceLanguage.g:5123:2: ( ruleExpressionRule )
-            // InternalInstanceLanguage.g:5124:3: ruleExpressionRule
+            // InternalInstanceLanguage.g:5204:2: ( ruleExpressionRule )
+            // InternalInstanceLanguage.g:5205:3: ruleExpressionRule
             {
              before(grammarAccess.getCallRuleAccess().getParametersExpressionRuleParserRuleCall_2_1_1_0()); 
             pushFollow(FOLLOW_2);
@@ -15807,17 +16058,17 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__DoubleLiteralRule__LiteralAssignment_0"
-    // InternalInstanceLanguage.g:5133:1: rule__DoubleLiteralRule__LiteralAssignment_0 : ( RULE_DOUBLE ) ;
+    // InternalInstanceLanguage.g:5214:1: rule__DoubleLiteralRule__LiteralAssignment_0 : ( RULE_DOUBLE ) ;
     public final void rule__DoubleLiteralRule__LiteralAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:5137:1: ( ( RULE_DOUBLE ) )
-            // InternalInstanceLanguage.g:5138:2: ( RULE_DOUBLE )
+            // InternalInstanceLanguage.g:5218:1: ( ( RULE_DOUBLE ) )
+            // InternalInstanceLanguage.g:5219:2: ( RULE_DOUBLE )
             {
-            // InternalInstanceLanguage.g:5138:2: ( RULE_DOUBLE )
-            // InternalInstanceLanguage.g:5139:3: RULE_DOUBLE
+            // InternalInstanceLanguage.g:5219:2: ( RULE_DOUBLE )
+            // InternalInstanceLanguage.g:5220:3: RULE_DOUBLE
             {
              before(grammarAccess.getDoubleLiteralRuleAccess().getLiteralDOUBLETerminalRuleCall_0_0()); 
             match(input,RULE_DOUBLE,FOLLOW_2); 
@@ -15844,17 +16095,17 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__DoubleLiteralRule__FactorAssignment_1"
-    // InternalInstanceLanguage.g:5148:1: rule__DoubleLiteralRule__FactorAssignment_1 : ( ruleFactorRule ) ;
+    // InternalInstanceLanguage.g:5229:1: rule__DoubleLiteralRule__FactorAssignment_1 : ( ruleFactorRule ) ;
     public final void rule__DoubleLiteralRule__FactorAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:5152:1: ( ( ruleFactorRule ) )
-            // InternalInstanceLanguage.g:5153:2: ( ruleFactorRule )
+            // InternalInstanceLanguage.g:5233:1: ( ( ruleFactorRule ) )
+            // InternalInstanceLanguage.g:5234:2: ( ruleFactorRule )
             {
-            // InternalInstanceLanguage.g:5153:2: ( ruleFactorRule )
-            // InternalInstanceLanguage.g:5154:3: ruleFactorRule
+            // InternalInstanceLanguage.g:5234:2: ( ruleFactorRule )
+            // InternalInstanceLanguage.g:5235:3: ruleFactorRule
             {
              before(grammarAccess.getDoubleLiteralRuleAccess().getFactorFactorRuleEnumRuleCall_1_0()); 
             pushFollow(FOLLOW_2);
@@ -15885,17 +16136,17 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__IntegerLiteralRule__LiteralAssignment_0"
-    // InternalInstanceLanguage.g:5163:1: rule__IntegerLiteralRule__LiteralAssignment_0 : ( RULE_INT ) ;
+    // InternalInstanceLanguage.g:5244:1: rule__IntegerLiteralRule__LiteralAssignment_0 : ( RULE_INT ) ;
     public final void rule__IntegerLiteralRule__LiteralAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:5167:1: ( ( RULE_INT ) )
-            // InternalInstanceLanguage.g:5168:2: ( RULE_INT )
+            // InternalInstanceLanguage.g:5248:1: ( ( RULE_INT ) )
+            // InternalInstanceLanguage.g:5249:2: ( RULE_INT )
             {
-            // InternalInstanceLanguage.g:5168:2: ( RULE_INT )
-            // InternalInstanceLanguage.g:5169:3: RULE_INT
+            // InternalInstanceLanguage.g:5249:2: ( RULE_INT )
+            // InternalInstanceLanguage.g:5250:3: RULE_INT
             {
              before(grammarAccess.getIntegerLiteralRuleAccess().getLiteralINTTerminalRuleCall_0_0()); 
             match(input,RULE_INT,FOLLOW_2); 
@@ -15922,17 +16173,17 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__IntegerLiteralRule__FactorAssignment_1"
-    // InternalInstanceLanguage.g:5178:1: rule__IntegerLiteralRule__FactorAssignment_1 : ( ruleFactorRule ) ;
+    // InternalInstanceLanguage.g:5259:1: rule__IntegerLiteralRule__FactorAssignment_1 : ( ruleFactorRule ) ;
     public final void rule__IntegerLiteralRule__FactorAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:5182:1: ( ( ruleFactorRule ) )
-            // InternalInstanceLanguage.g:5183:2: ( ruleFactorRule )
+            // InternalInstanceLanguage.g:5263:1: ( ( ruleFactorRule ) )
+            // InternalInstanceLanguage.g:5264:2: ( ruleFactorRule )
             {
-            // InternalInstanceLanguage.g:5183:2: ( ruleFactorRule )
-            // InternalInstanceLanguage.g:5184:3: ruleFactorRule
+            // InternalInstanceLanguage.g:5264:2: ( ruleFactorRule )
+            // InternalInstanceLanguage.g:5265:3: ruleFactorRule
             {
              before(grammarAccess.getIntegerLiteralRuleAccess().getFactorFactorRuleEnumRuleCall_1_0()); 
             pushFollow(FOLLOW_2);
@@ -15963,17 +16214,17 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__StringLiteralRule__ValueAssignment"
-    // InternalInstanceLanguage.g:5193:1: rule__StringLiteralRule__ValueAssignment : ( RULE_STRING ) ;
+    // InternalInstanceLanguage.g:5274:1: rule__StringLiteralRule__ValueAssignment : ( RULE_STRING ) ;
     public final void rule__StringLiteralRule__ValueAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:5197:1: ( ( RULE_STRING ) )
-            // InternalInstanceLanguage.g:5198:2: ( RULE_STRING )
+            // InternalInstanceLanguage.g:5278:1: ( ( RULE_STRING ) )
+            // InternalInstanceLanguage.g:5279:2: ( RULE_STRING )
             {
-            // InternalInstanceLanguage.g:5198:2: ( RULE_STRING )
-            // InternalInstanceLanguage.g:5199:3: RULE_STRING
+            // InternalInstanceLanguage.g:5279:2: ( RULE_STRING )
+            // InternalInstanceLanguage.g:5280:3: RULE_STRING
             {
              before(grammarAccess.getStringLiteralRuleAccess().getValueSTRINGTerminalRuleCall_0()); 
             match(input,RULE_STRING,FOLLOW_2); 
@@ -16000,21 +16251,21 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__BooleanLiteralRule__ValueAssignment_1_0"
-    // InternalInstanceLanguage.g:5208:1: rule__BooleanLiteralRule__ValueAssignment_1_0 : ( ( 'true' ) ) ;
+    // InternalInstanceLanguage.g:5289:1: rule__BooleanLiteralRule__ValueAssignment_1_0 : ( ( 'true' ) ) ;
     public final void rule__BooleanLiteralRule__ValueAssignment_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:5212:1: ( ( ( 'true' ) ) )
-            // InternalInstanceLanguage.g:5213:2: ( ( 'true' ) )
+            // InternalInstanceLanguage.g:5293:1: ( ( ( 'true' ) ) )
+            // InternalInstanceLanguage.g:5294:2: ( ( 'true' ) )
             {
-            // InternalInstanceLanguage.g:5213:2: ( ( 'true' ) )
-            // InternalInstanceLanguage.g:5214:3: ( 'true' )
+            // InternalInstanceLanguage.g:5294:2: ( ( 'true' ) )
+            // InternalInstanceLanguage.g:5295:3: ( 'true' )
             {
              before(grammarAccess.getBooleanLiteralRuleAccess().getValueTrueKeyword_1_0_0()); 
-            // InternalInstanceLanguage.g:5215:3: ( 'true' )
-            // InternalInstanceLanguage.g:5216:4: 'true'
+            // InternalInstanceLanguage.g:5296:3: ( 'true' )
+            // InternalInstanceLanguage.g:5297:4: 'true'
             {
              before(grammarAccess.getBooleanLiteralRuleAccess().getValueTrueKeyword_1_0_0()); 
             match(input,75,FOLLOW_2); 
@@ -16045,17 +16296,17 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__AttributeDefinitionRule__NameAssignment_0"
-    // InternalInstanceLanguage.g:5227:1: rule__AttributeDefinitionRule__NameAssignment_0 : ( ruleStringOrId ) ;
+    // InternalInstanceLanguage.g:5308:1: rule__AttributeDefinitionRule__NameAssignment_0 : ( ruleStringOrId ) ;
     public final void rule__AttributeDefinitionRule__NameAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:5231:1: ( ( ruleStringOrId ) )
-            // InternalInstanceLanguage.g:5232:2: ( ruleStringOrId )
+            // InternalInstanceLanguage.g:5312:1: ( ( ruleStringOrId ) )
+            // InternalInstanceLanguage.g:5313:2: ( ruleStringOrId )
             {
-            // InternalInstanceLanguage.g:5232:2: ( ruleStringOrId )
-            // InternalInstanceLanguage.g:5233:3: ruleStringOrId
+            // InternalInstanceLanguage.g:5313:2: ( ruleStringOrId )
+            // InternalInstanceLanguage.g:5314:3: ruleStringOrId
             {
              before(grammarAccess.getAttributeDefinitionRuleAccess().getNameStringOrIdParserRuleCall_0_0()); 
             pushFollow(FOLLOW_2);
@@ -16086,17 +16337,17 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__AttributeDefinitionRule__TypeAssignment_2"
-    // InternalInstanceLanguage.g:5242:1: rule__AttributeDefinitionRule__TypeAssignment_2 : ( ruleTypeRule ) ;
+    // InternalInstanceLanguage.g:5323:1: rule__AttributeDefinitionRule__TypeAssignment_2 : ( ruleTypeRule ) ;
     public final void rule__AttributeDefinitionRule__TypeAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:5246:1: ( ( ruleTypeRule ) )
-            // InternalInstanceLanguage.g:5247:2: ( ruleTypeRule )
+            // InternalInstanceLanguage.g:5327:1: ( ( ruleTypeRule ) )
+            // InternalInstanceLanguage.g:5328:2: ( ruleTypeRule )
             {
-            // InternalInstanceLanguage.g:5247:2: ( ruleTypeRule )
-            // InternalInstanceLanguage.g:5248:3: ruleTypeRule
+            // InternalInstanceLanguage.g:5328:2: ( ruleTypeRule )
+            // InternalInstanceLanguage.g:5329:3: ruleTypeRule
             {
              before(grammarAccess.getAttributeDefinitionRuleAccess().getTypeTypeRuleParserRuleCall_2_0()); 
             pushFollow(FOLLOW_2);
@@ -16126,22 +16377,63 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
     // $ANTLR end "rule__AttributeDefinitionRule__TypeAssignment_2"
 
 
+    // $ANTLR start "rule__AttributeDefinitionRule__InitialisationAssignment_3_1"
+    // InternalInstanceLanguage.g:5338:1: rule__AttributeDefinitionRule__InitialisationAssignment_3_1 : ( ruleExpressionRule ) ;
+    public final void rule__AttributeDefinitionRule__InitialisationAssignment_3_1() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalInstanceLanguage.g:5342:1: ( ( ruleExpressionRule ) )
+            // InternalInstanceLanguage.g:5343:2: ( ruleExpressionRule )
+            {
+            // InternalInstanceLanguage.g:5343:2: ( ruleExpressionRule )
+            // InternalInstanceLanguage.g:5344:3: ruleExpressionRule
+            {
+             before(grammarAccess.getAttributeDefinitionRuleAccess().getInitialisationExpressionRuleParserRuleCall_3_1_0()); 
+            pushFollow(FOLLOW_2);
+            ruleExpressionRule();
+
+            state._fsp--;
+
+             after(grammarAccess.getAttributeDefinitionRuleAccess().getInitialisationExpressionRuleParserRuleCall_3_1_0()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__AttributeDefinitionRule__InitialisationAssignment_3_1"
+
+
     // $ANTLR start "rule__InstanceTypeRule__DefinitionsAssignment_2"
-    // InternalInstanceLanguage.g:5257:1: rule__InstanceTypeRule__DefinitionsAssignment_2 : ( ( ruleQualifiedName ) ) ;
+    // InternalInstanceLanguage.g:5353:1: rule__InstanceTypeRule__DefinitionsAssignment_2 : ( ( ruleQualifiedName ) ) ;
     public final void rule__InstanceTypeRule__DefinitionsAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:5261:1: ( ( ( ruleQualifiedName ) ) )
-            // InternalInstanceLanguage.g:5262:2: ( ( ruleQualifiedName ) )
+            // InternalInstanceLanguage.g:5357:1: ( ( ( ruleQualifiedName ) ) )
+            // InternalInstanceLanguage.g:5358:2: ( ( ruleQualifiedName ) )
             {
-            // InternalInstanceLanguage.g:5262:2: ( ( ruleQualifiedName ) )
-            // InternalInstanceLanguage.g:5263:3: ( ruleQualifiedName )
+            // InternalInstanceLanguage.g:5358:2: ( ( ruleQualifiedName ) )
+            // InternalInstanceLanguage.g:5359:3: ( ruleQualifiedName )
             {
              before(grammarAccess.getInstanceTypeRuleAccess().getDefinitionsTypeDefinitionCrossReference_2_0()); 
-            // InternalInstanceLanguage.g:5264:3: ( ruleQualifiedName )
-            // InternalInstanceLanguage.g:5265:4: ruleQualifiedName
+            // InternalInstanceLanguage.g:5360:3: ( ruleQualifiedName )
+            // InternalInstanceLanguage.g:5361:4: ruleQualifiedName
             {
              before(grammarAccess.getInstanceTypeRuleAccess().getDefinitionsTypeDefinitionQualifiedNameParserRuleCall_2_0_1()); 
             pushFollow(FOLLOW_2);
@@ -16176,21 +16468,21 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__InstanceTypeRule__DefinitionsAssignment_3_1"
-    // InternalInstanceLanguage.g:5276:1: rule__InstanceTypeRule__DefinitionsAssignment_3_1 : ( ( ruleQualifiedName ) ) ;
+    // InternalInstanceLanguage.g:5372:1: rule__InstanceTypeRule__DefinitionsAssignment_3_1 : ( ( ruleQualifiedName ) ) ;
     public final void rule__InstanceTypeRule__DefinitionsAssignment_3_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:5280:1: ( ( ( ruleQualifiedName ) ) )
-            // InternalInstanceLanguage.g:5281:2: ( ( ruleQualifiedName ) )
+            // InternalInstanceLanguage.g:5376:1: ( ( ( ruleQualifiedName ) ) )
+            // InternalInstanceLanguage.g:5377:2: ( ( ruleQualifiedName ) )
             {
-            // InternalInstanceLanguage.g:5281:2: ( ( ruleQualifiedName ) )
-            // InternalInstanceLanguage.g:5282:3: ( ruleQualifiedName )
+            // InternalInstanceLanguage.g:5377:2: ( ( ruleQualifiedName ) )
+            // InternalInstanceLanguage.g:5378:3: ( ruleQualifiedName )
             {
              before(grammarAccess.getInstanceTypeRuleAccess().getDefinitionsTypeDefinitionCrossReference_3_1_0()); 
-            // InternalInstanceLanguage.g:5283:3: ( ruleQualifiedName )
-            // InternalInstanceLanguage.g:5284:4: ruleQualifiedName
+            // InternalInstanceLanguage.g:5379:3: ( ruleQualifiedName )
+            // InternalInstanceLanguage.g:5380:4: ruleQualifiedName
             {
              before(grammarAccess.getInstanceTypeRuleAccess().getDefinitionsTypeDefinitionQualifiedNameParserRuleCall_3_1_0_1()); 
             pushFollow(FOLLOW_2);
@@ -16225,17 +16517,17 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__ArrayTypeRule__ElementsAssignment_1"
-    // InternalInstanceLanguage.g:5295:1: rule__ArrayTypeRule__ElementsAssignment_1 : ( ruleTypeRule ) ;
+    // InternalInstanceLanguage.g:5391:1: rule__ArrayTypeRule__ElementsAssignment_1 : ( ruleTypeRule ) ;
     public final void rule__ArrayTypeRule__ElementsAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:5299:1: ( ( ruleTypeRule ) )
-            // InternalInstanceLanguage.g:5300:2: ( ruleTypeRule )
+            // InternalInstanceLanguage.g:5395:1: ( ( ruleTypeRule ) )
+            // InternalInstanceLanguage.g:5396:2: ( ruleTypeRule )
             {
-            // InternalInstanceLanguage.g:5300:2: ( ruleTypeRule )
-            // InternalInstanceLanguage.g:5301:3: ruleTypeRule
+            // InternalInstanceLanguage.g:5396:2: ( ruleTypeRule )
+            // InternalInstanceLanguage.g:5397:3: ruleTypeRule
             {
              before(grammarAccess.getArrayTypeRuleAccess().getElementsTypeRuleParserRuleCall_1_0()); 
             pushFollow(FOLLOW_2);
@@ -16266,17 +16558,17 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__ParameterRule__TypeAssignment_0"
-    // InternalInstanceLanguage.g:5310:1: rule__ParameterRule__TypeAssignment_0 : ( ruleTypeRule ) ;
+    // InternalInstanceLanguage.g:5406:1: rule__ParameterRule__TypeAssignment_0 : ( ruleTypeRule ) ;
     public final void rule__ParameterRule__TypeAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:5314:1: ( ( ruleTypeRule ) )
-            // InternalInstanceLanguage.g:5315:2: ( ruleTypeRule )
+            // InternalInstanceLanguage.g:5410:1: ( ( ruleTypeRule ) )
+            // InternalInstanceLanguage.g:5411:2: ( ruleTypeRule )
             {
-            // InternalInstanceLanguage.g:5315:2: ( ruleTypeRule )
-            // InternalInstanceLanguage.g:5316:3: ruleTypeRule
+            // InternalInstanceLanguage.g:5411:2: ( ruleTypeRule )
+            // InternalInstanceLanguage.g:5412:3: ruleTypeRule
             {
              before(grammarAccess.getParameterRuleAccess().getTypeTypeRuleParserRuleCall_0_0()); 
             pushFollow(FOLLOW_2);
@@ -16307,17 +16599,17 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__ParameterRule__NameAssignment_1"
-    // InternalInstanceLanguage.g:5325:1: rule__ParameterRule__NameAssignment_1 : ( ruleStringOrId ) ;
+    // InternalInstanceLanguage.g:5421:1: rule__ParameterRule__NameAssignment_1 : ( ruleStringOrId ) ;
     public final void rule__ParameterRule__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:5329:1: ( ( ruleStringOrId ) )
-            // InternalInstanceLanguage.g:5330:2: ( ruleStringOrId )
+            // InternalInstanceLanguage.g:5425:1: ( ( ruleStringOrId ) )
+            // InternalInstanceLanguage.g:5426:2: ( ruleStringOrId )
             {
-            // InternalInstanceLanguage.g:5330:2: ( ruleStringOrId )
-            // InternalInstanceLanguage.g:5331:3: ruleStringOrId
+            // InternalInstanceLanguage.g:5426:2: ( ruleStringOrId )
+            // InternalInstanceLanguage.g:5427:3: ruleStringOrId
             {
              before(grammarAccess.getParameterRuleAccess().getNameStringOrIdParserRuleCall_1_0()); 
             pushFollow(FOLLOW_2);
@@ -16348,21 +16640,21 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__FunctionNameRule__DefinitionAssignment"
-    // InternalInstanceLanguage.g:5340:1: rule__FunctionNameRule__DefinitionAssignment : ( ( ruleQualifiedName ) ) ;
+    // InternalInstanceLanguage.g:5436:1: rule__FunctionNameRule__DefinitionAssignment : ( ( ruleQualifiedName ) ) ;
     public final void rule__FunctionNameRule__DefinitionAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:5344:1: ( ( ( ruleQualifiedName ) ) )
-            // InternalInstanceLanguage.g:5345:2: ( ( ruleQualifiedName ) )
+            // InternalInstanceLanguage.g:5440:1: ( ( ( ruleQualifiedName ) ) )
+            // InternalInstanceLanguage.g:5441:2: ( ( ruleQualifiedName ) )
             {
-            // InternalInstanceLanguage.g:5345:2: ( ( ruleQualifiedName ) )
-            // InternalInstanceLanguage.g:5346:3: ( ruleQualifiedName )
+            // InternalInstanceLanguage.g:5441:2: ( ( ruleQualifiedName ) )
+            // InternalInstanceLanguage.g:5442:3: ( ruleQualifiedName )
             {
              before(grammarAccess.getFunctionNameRuleAccess().getDefinitionFunctionDefinitionCrossReference_0()); 
-            // InternalInstanceLanguage.g:5347:3: ( ruleQualifiedName )
-            // InternalInstanceLanguage.g:5348:4: ruleQualifiedName
+            // InternalInstanceLanguage.g:5443:3: ( ruleQualifiedName )
+            // InternalInstanceLanguage.g:5444:4: ruleQualifiedName
             {
              before(grammarAccess.getFunctionNameRuleAccess().getDefinitionFunctionDefinitionQualifiedNameParserRuleCall_0_1()); 
             pushFollow(FOLLOW_2);
@@ -16436,15 +16728,16 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
     public static final BitSet FOLLOW_34 = new BitSet(new long[]{0x00007FFFF8000000L});
     public static final BitSet FOLLOW_35 = new BitSet(new long[]{0x8000000000000000L});
     public static final BitSet FOLLOW_36 = new BitSet(new long[]{0x0040000000000000L,0x00000000000003FBL});
-    public static final BitSet FOLLOW_37 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000001L});
-    public static final BitSet FOLLOW_38 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000002L});
-    public static final BitSet FOLLOW_39 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000004L});
-    public static final BitSet FOLLOW_40 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000004L});
-    public static final BitSet FOLLOW_41 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000008L});
-    public static final BitSet FOLLOW_42 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000010L});
-    public static final BitSet FOLLOW_43 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000020L});
-    public static final BitSet FOLLOW_44 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000040L});
-    public static final BitSet FOLLOW_45 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000080L});
-    public static final BitSet FOLLOW_46 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000100L});
+    public static final BitSet FOLLOW_37 = new BitSet(new long[]{0x0006000000000000L});
+    public static final BitSet FOLLOW_38 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000001L});
+    public static final BitSet FOLLOW_39 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000002L});
+    public static final BitSet FOLLOW_40 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000004L});
+    public static final BitSet FOLLOW_41 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000004L});
+    public static final BitSet FOLLOW_42 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000008L});
+    public static final BitSet FOLLOW_43 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000010L});
+    public static final BitSet FOLLOW_44 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000020L});
+    public static final BitSet FOLLOW_45 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000040L});
+    public static final BitSet FOLLOW_46 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000080L});
+    public static final BitSet FOLLOW_47 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000100L});
 
 }

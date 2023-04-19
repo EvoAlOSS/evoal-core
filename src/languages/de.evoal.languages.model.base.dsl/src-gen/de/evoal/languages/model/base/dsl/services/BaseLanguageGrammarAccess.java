@@ -738,14 +738,18 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		private final Keyword cColonKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Assignment cTypeAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cTypeTypeRuleParserRuleCall_2_0 = (RuleCall)cTypeAssignment_2.eContents().get(0);
-		private final Keyword cSemicolonKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
+		private final Keyword cColonEqualsSignKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
+		private final Assignment cInitialisationAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
+		private final RuleCall cInitialisationExpressionRuleParserRuleCall_3_1_0 = (RuleCall)cInitialisationAssignment_3_1.eContents().get(0);
+		private final Keyword cSemicolonKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//AttributeDefinitionRule returns AttributeDefinition:
-		//    name = StringOrId ':' type = TypeRule ';'
+		//    name = StringOrId ':' type = TypeRule (':=' initialisation = ExpressionRule)? ';'
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//name = StringOrId ':' type = TypeRule ';'
+		//name = StringOrId ':' type = TypeRule (':=' initialisation = ExpressionRule)? ';'
 		public Group getGroup() { return cGroup; }
 		
 		//name = StringOrId
@@ -763,8 +767,20 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		//TypeRule
 		public RuleCall getTypeTypeRuleParserRuleCall_2_0() { return cTypeTypeRuleParserRuleCall_2_0; }
 		
+		//(':=' initialisation = ExpressionRule)?
+		public Group getGroup_3() { return cGroup_3; }
+		
+		//':='
+		public Keyword getColonEqualsSignKeyword_3_0() { return cColonEqualsSignKeyword_3_0; }
+		
+		//initialisation = ExpressionRule
+		public Assignment getInitialisationAssignment_3_1() { return cInitialisationAssignment_3_1; }
+		
+		//ExpressionRule
+		public RuleCall getInitialisationExpressionRuleParserRuleCall_3_1_0() { return cInitialisationExpressionRuleParserRuleCall_3_1_0; }
+		
 		//';'
-		public Keyword getSemicolonKeyword_3() { return cSemicolonKeyword_3; }
+		public Keyword getSemicolonKeyword_4() { return cSemicolonKeyword_4; }
 	}
 	public class TypeRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.base.dsl.BaseLanguage.TypeRule");
@@ -2034,7 +2050,7 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 	}
 	
 	//AttributeDefinitionRule returns AttributeDefinition:
-	//    name = StringOrId ':' type = TypeRule ';'
+	//    name = StringOrId ':' type = TypeRule (':=' initialisation = ExpressionRule)? ';'
 	//;
 	public AttributeDefinitionRuleElements getAttributeDefinitionRuleAccess() {
 		return pAttributeDefinitionRule;

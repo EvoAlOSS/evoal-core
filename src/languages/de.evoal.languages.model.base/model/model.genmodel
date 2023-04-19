@@ -130,6 +130,7 @@
     <genClasses ecoreClass="model.ecore#//AttributeDefinition">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//AttributeDefinition/type"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//AttributeDefinition/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//AttributeDefinition/initialisation"/>
     </genClasses>
     <genClasses image="false" ecoreClass="model.ecore#//Type"/>
     <genClasses ecoreClass="model.ecore#//InstanceType">

@@ -4,6 +4,7 @@ package de.evoal.languages.model.base.impl;
 
 import de.evoal.languages.model.base.AttributeDefinition;
 import de.evoal.languages.model.base.BasePackage;
+import de.evoal.languages.model.base.Expression;
 import de.evoal.languages.model.base.Type;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -25,6 +26,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * <ul>
  *   <li>{@link de.evoal.languages.model.base.impl.AttributeDefinitionImpl#getType <em>Type</em>}</li>
  *   <li>{@link de.evoal.languages.model.base.impl.AttributeDefinitionImpl#getName <em>Name</em>}</li>
+ *   <li>{@link de.evoal.languages.model.base.impl.AttributeDefinitionImpl#getInitialisation <em>Initialisation</em>}</li>
  * </ul>
  *
  * @generated
@@ -59,6 +61,16 @@ public class AttributeDefinitionImpl extends MinimalEObjectImpl.Container implem
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getInitialisation() <em>Initialisation</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getInitialisation()
+	 * @generated
+	 * @ordered
+	 */
+	protected Expression initialisation;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -153,10 +165,57 @@ public class AttributeDefinitionImpl extends MinimalEObjectImpl.Container implem
 	 * @generated
 	 */
 	@Override
+	public Expression getInitialisation() {
+		return initialisation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetInitialisation(Expression newInitialisation, NotificationChain msgs) {
+		Expression oldInitialisation = initialisation;
+		initialisation = newInitialisation;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, BasePackage.ATTRIBUTE_DEFINITION__INITIALISATION, oldInitialisation, newInitialisation);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setInitialisation(Expression newInitialisation) {
+		if (newInitialisation != initialisation) {
+			NotificationChain msgs = null;
+			if (initialisation != null)
+				msgs = ((InternalEObject)initialisation).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - BasePackage.ATTRIBUTE_DEFINITION__INITIALISATION, null, msgs);
+			if (newInitialisation != null)
+				msgs = ((InternalEObject)newInitialisation).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - BasePackage.ATTRIBUTE_DEFINITION__INITIALISATION, null, msgs);
+			msgs = basicSetInitialisation(newInitialisation, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BasePackage.ATTRIBUTE_DEFINITION__INITIALISATION, newInitialisation, newInitialisation));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case BasePackage.ATTRIBUTE_DEFINITION__TYPE:
 				return basicSetType(null, msgs);
+			case BasePackage.ATTRIBUTE_DEFINITION__INITIALISATION:
+				return basicSetInitialisation(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -173,6 +232,8 @@ public class AttributeDefinitionImpl extends MinimalEObjectImpl.Container implem
 				return getType();
 			case BasePackage.ATTRIBUTE_DEFINITION__NAME:
 				return getName();
+			case BasePackage.ATTRIBUTE_DEFINITION__INITIALISATION:
+				return getInitialisation();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -190,6 +251,9 @@ public class AttributeDefinitionImpl extends MinimalEObjectImpl.Container implem
 				return;
 			case BasePackage.ATTRIBUTE_DEFINITION__NAME:
 				setName((String)newValue);
+				return;
+			case BasePackage.ATTRIBUTE_DEFINITION__INITIALISATION:
+				setInitialisation((Expression)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -209,6 +273,9 @@ public class AttributeDefinitionImpl extends MinimalEObjectImpl.Container implem
 			case BasePackage.ATTRIBUTE_DEFINITION__NAME:
 				setName(NAME_EDEFAULT);
 				return;
+			case BasePackage.ATTRIBUTE_DEFINITION__INITIALISATION:
+				setInitialisation((Expression)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -225,6 +292,8 @@ public class AttributeDefinitionImpl extends MinimalEObjectImpl.Container implem
 				return type != null;
 			case BasePackage.ATTRIBUTE_DEFINITION__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case BasePackage.ATTRIBUTE_DEFINITION__INITIALISATION:
+				return initialisation != null;
 		}
 		return super.eIsSet(featureID);
 	}

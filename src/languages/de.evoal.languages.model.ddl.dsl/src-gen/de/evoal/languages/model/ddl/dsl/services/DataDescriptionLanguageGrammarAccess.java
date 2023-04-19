@@ -1106,7 +1106,7 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 	}
 	
 	//AttributeDefinitionRule returns AttributeDefinition:
-	//    name = StringOrId ':' type = TypeRule ';'
+	//    name = StringOrId ':' type = TypeRule (':=' initialisation = ExpressionRule)? ';'
 	//;
 	public BaseLanguageGrammarAccess.AttributeDefinitionRuleElements getAttributeDefinitionRuleAccess() {
 		return gaBaseLanguage.getAttributeDefinitionRuleAccess();

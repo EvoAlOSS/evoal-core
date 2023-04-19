@@ -1043,6 +1043,16 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 	 * @generated
 	 */
 	@Override
+	public EReference getAttributeDefinition_Initialisation() {
+		return (EReference)attributeDefinitionEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getType() {
 		return typeEClass;
 	}
@@ -1411,6 +1421,7 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 		attributeDefinitionEClass = createEClass(ATTRIBUTE_DEFINITION);
 		createEReference(attributeDefinitionEClass, ATTRIBUTE_DEFINITION__TYPE);
 		createEAttribute(attributeDefinitionEClass, ATTRIBUTE_DEFINITION__NAME);
+		createEReference(attributeDefinitionEClass, ATTRIBUTE_DEFINITION__INITIALISATION);
 
 		typeEClass = createEClass(TYPE);
 
@@ -1596,6 +1607,7 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 		initEClass(attributeDefinitionEClass, AttributeDefinition.class, "AttributeDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAttributeDefinition_Type(), this.getType(), null, "type", null, 1, 1, AttributeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAttributeDefinition_Name(), ecorePackage.getEString(), "name", null, 1, 1, AttributeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAttributeDefinition_Initialisation(), this.getExpression(), null, "initialisation", null, 0, 1, AttributeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(typeEClass, Type.class, "Type", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

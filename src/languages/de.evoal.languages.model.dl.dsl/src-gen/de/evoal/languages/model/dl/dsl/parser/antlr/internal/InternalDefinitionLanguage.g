@@ -1534,9 +1534,34 @@ ruleAttributeDefinitionRule returns [EObject current=null]
 				}
 			)
 		)
-		otherlv_3=';'
+		(
+			otherlv_3=':='
+			{
+				newLeafNode(otherlv_3, grammarAccess.getAttributeDefinitionRuleAccess().getColonEqualsSignKeyword_3_0());
+			}
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getAttributeDefinitionRuleAccess().getInitialisationExpressionRuleParserRuleCall_3_1_0());
+					}
+					lv_initialisation_4_0=ruleExpressionRule
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getAttributeDefinitionRuleRule());
+						}
+						set(
+							$current,
+							"initialisation",
+							lv_initialisation_4_0,
+							"de.evoal.languages.model.base.dsl.BaseLanguage.ExpressionRule");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+		)?
+		otherlv_5=';'
 		{
-			newLeafNode(otherlv_3, grammarAccess.getAttributeDefinitionRuleAccess().getSemicolonKeyword_3());
+			newLeafNode(otherlv_5, grammarAccess.getAttributeDefinitionRuleAccess().getSemicolonKeyword_4());
 		}
 	)
 ;

@@ -1251,7 +1251,7 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 	}
 	
 	//AttributeDefinitionRule returns AttributeDefinition:
-	//    name = StringOrId ':' type = TypeRule ';'
+	//    name = StringOrId ':' type = TypeRule (':=' initialisation = ExpressionRule)? ';'
 	//;
 	public BaseLanguageGrammarAccess.AttributeDefinitionRuleElements getAttributeDefinitionRuleAccess() {
 		return gaBaseLanguage.getAttributeDefinitionRuleAccess();

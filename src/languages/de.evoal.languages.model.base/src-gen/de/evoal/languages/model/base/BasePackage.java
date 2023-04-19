@@ -1083,13 +1083,22 @@ public interface BasePackage extends EPackage {
 	int ATTRIBUTE_DEFINITION__NAME = 1;
 
 	/**
+	 * The feature id for the '<em><b>Initialisation</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE_DEFINITION__INITIALISATION = 2;
+
+	/**
 	 * The number of structural features of the '<em>Attribute Definition</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ATTRIBUTE_DEFINITION_FEATURE_COUNT = 2;
+	int ATTRIBUTE_DEFINITION_FEATURE_COUNT = 3;
 
 	/**
 	 * The number of operations of the '<em>Attribute Definition</em>' class.
@@ -2259,6 +2268,17 @@ public interface BasePackage extends EPackage {
 	EAttribute getAttributeDefinition_Name();
 
 	/**
+	 * Returns the meta object for the containment reference '{@link de.evoal.languages.model.base.AttributeDefinition#getInitialisation <em>Initialisation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Initialisation</em>'.
+	 * @see de.evoal.languages.model.base.AttributeDefinition#getInitialisation()
+	 * @see #getAttributeDefinition()
+	 * @generated
+	 */
+	EReference getAttributeDefinition_Initialisation();
+
+	/**
 	 * Returns the meta object for class '{@link de.evoal.languages.model.base.Type <em>Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3092,6 +3112,14 @@ public interface BasePackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute ATTRIBUTE_DEFINITION__NAME = eINSTANCE.getAttributeDefinition_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Initialisation</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ATTRIBUTE_DEFINITION__INITIALISATION = eINSTANCE.getAttributeDefinition_Initialisation();
 
 		/**
 		 * The meta object literal for the '{@link de.evoal.languages.model.base.impl.TypeImpl <em>Type</em>}' class.

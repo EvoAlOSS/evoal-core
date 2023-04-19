@@ -213,20 +213,11 @@ public class BaseLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 	 *     AttributeDefinitionRule returns AttributeDefinition
 	 *
 	 * Constraint:
-	 *     (name=StringOrId type=TypeRule)
+	 *     (name=StringOrId type=TypeRule initialisation=ExpressionRule?)
 	 * </pre>
 	 */
 	protected void sequence_AttributeDefinitionRule(ISerializationContext context, AttributeDefinition semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, BasePackage.Literals.ATTRIBUTE_DEFINITION__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BasePackage.Literals.ATTRIBUTE_DEFINITION__NAME));
-			if (transientValues.isValueTransient(semanticObject, BasePackage.Literals.ATTRIBUTE_DEFINITION__TYPE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BasePackage.Literals.ATTRIBUTE_DEFINITION__TYPE));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getAttributeDefinitionRuleAccess().getNameStringOrIdParserRuleCall_0_0(), semanticObject.getName());
-		feeder.accept(grammarAccess.getAttributeDefinitionRuleAccess().getTypeTypeRuleParserRuleCall_2_0(), semanticObject.getType());
-		feeder.finish();
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	

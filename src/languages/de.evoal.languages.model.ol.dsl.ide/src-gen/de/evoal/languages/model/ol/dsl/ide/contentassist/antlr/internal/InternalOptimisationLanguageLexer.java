@@ -1497,8 +1497,8 @@ public class InternalOptimisationLanguageLexer extends Lexer {
     // $ANTLR start "RULE_DIGIT"
     public final void mRULE_DIGIT() throws RecognitionException {
         try {
-            // InternalOptimisationLanguage.g:6315:21: ( '0' .. '9' )
-            // InternalOptimisationLanguage.g:6315:23: '0' .. '9'
+            // InternalOptimisationLanguage.g:6411:21: ( '0' .. '9' )
+            // InternalOptimisationLanguage.g:6411:23: '0' .. '9'
             {
             matchRange('0','9'); 
 
@@ -1513,11 +1513,11 @@ public class InternalOptimisationLanguageLexer extends Lexer {
     // $ANTLR start "RULE_EXPONENT"
     public final void mRULE_EXPONENT() throws RecognitionException {
         try {
-            // InternalOptimisationLanguage.g:6317:24: ( 'e' ( '+' | '-' )? ( RULE_DIGIT )+ )
-            // InternalOptimisationLanguage.g:6317:26: 'e' ( '+' | '-' )? ( RULE_DIGIT )+
+            // InternalOptimisationLanguage.g:6413:24: ( 'e' ( '+' | '-' )? ( RULE_DIGIT )+ )
+            // InternalOptimisationLanguage.g:6413:26: 'e' ( '+' | '-' )? ( RULE_DIGIT )+
             {
             match('e'); 
-            // InternalOptimisationLanguage.g:6317:30: ( '+' | '-' )?
+            // InternalOptimisationLanguage.g:6413:30: ( '+' | '-' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -1543,7 +1543,7 @@ public class InternalOptimisationLanguageLexer extends Lexer {
 
             }
 
-            // InternalOptimisationLanguage.g:6317:41: ( RULE_DIGIT )+
+            // InternalOptimisationLanguage.g:6413:41: ( RULE_DIGIT )+
             int cnt2=0;
             loop2:
             do {
@@ -1557,7 +1557,7 @@ public class InternalOptimisationLanguageLexer extends Lexer {
 
                 switch (alt2) {
             	case 1 :
-            	    // InternalOptimisationLanguage.g:6317:41: RULE_DIGIT
+            	    // InternalOptimisationLanguage.g:6413:41: RULE_DIGIT
             	    {
             	    mRULE_DIGIT(); 
 
@@ -1587,10 +1587,10 @@ public class InternalOptimisationLanguageLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalOptimisationLanguage.g:6319:10: ( ( '-' )? ( RULE_DIGIT )+ )
-            // InternalOptimisationLanguage.g:6319:12: ( '-' )? ( RULE_DIGIT )+
+            // InternalOptimisationLanguage.g:6415:10: ( ( '-' )? ( RULE_DIGIT )+ )
+            // InternalOptimisationLanguage.g:6415:12: ( '-' )? ( RULE_DIGIT )+
             {
-            // InternalOptimisationLanguage.g:6319:12: ( '-' )?
+            // InternalOptimisationLanguage.g:6415:12: ( '-' )?
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -1599,7 +1599,7 @@ public class InternalOptimisationLanguageLexer extends Lexer {
             }
             switch (alt3) {
                 case 1 :
-                    // InternalOptimisationLanguage.g:6319:12: '-'
+                    // InternalOptimisationLanguage.g:6415:12: '-'
                     {
                     match('-'); 
 
@@ -1608,7 +1608,7 @@ public class InternalOptimisationLanguageLexer extends Lexer {
 
             }
 
-            // InternalOptimisationLanguage.g:6319:17: ( RULE_DIGIT )+
+            // InternalOptimisationLanguage.g:6415:17: ( RULE_DIGIT )+
             int cnt4=0;
             loop4:
             do {
@@ -1622,7 +1622,7 @@ public class InternalOptimisationLanguageLexer extends Lexer {
 
                 switch (alt4) {
             	case 1 :
-            	    // InternalOptimisationLanguage.g:6319:17: RULE_DIGIT
+            	    // InternalOptimisationLanguage.g:6415:17: RULE_DIGIT
             	    {
             	    mRULE_DIGIT(); 
 
@@ -1654,15 +1654,15 @@ public class InternalOptimisationLanguageLexer extends Lexer {
         try {
             int _type = RULE_DOUBLE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalOptimisationLanguage.g:6321:13: ( ( RULE_INT RULE_EXPONENT | RULE_INT '.' ( RULE_DIGIT )* ( RULE_EXPONENT )? ) )
-            // InternalOptimisationLanguage.g:6321:15: ( RULE_INT RULE_EXPONENT | RULE_INT '.' ( RULE_DIGIT )* ( RULE_EXPONENT )? )
+            // InternalOptimisationLanguage.g:6417:13: ( ( RULE_INT RULE_EXPONENT | RULE_INT '.' ( RULE_DIGIT )* ( RULE_EXPONENT )? ) )
+            // InternalOptimisationLanguage.g:6417:15: ( RULE_INT RULE_EXPONENT | RULE_INT '.' ( RULE_DIGIT )* ( RULE_EXPONENT )? )
             {
-            // InternalOptimisationLanguage.g:6321:15: ( RULE_INT RULE_EXPONENT | RULE_INT '.' ( RULE_DIGIT )* ( RULE_EXPONENT )? )
+            // InternalOptimisationLanguage.g:6417:15: ( RULE_INT RULE_EXPONENT | RULE_INT '.' ( RULE_DIGIT )* ( RULE_EXPONENT )? )
             int alt7=2;
             alt7 = dfa7.predict(input);
             switch (alt7) {
                 case 1 :
-                    // InternalOptimisationLanguage.g:6321:16: RULE_INT RULE_EXPONENT
+                    // InternalOptimisationLanguage.g:6417:16: RULE_INT RULE_EXPONENT
                     {
                     mRULE_INT(); 
                     mRULE_EXPONENT(); 
@@ -1670,11 +1670,11 @@ public class InternalOptimisationLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalOptimisationLanguage.g:6321:39: RULE_INT '.' ( RULE_DIGIT )* ( RULE_EXPONENT )?
+                    // InternalOptimisationLanguage.g:6417:39: RULE_INT '.' ( RULE_DIGIT )* ( RULE_EXPONENT )?
                     {
                     mRULE_INT(); 
                     match('.'); 
-                    // InternalOptimisationLanguage.g:6321:52: ( RULE_DIGIT )*
+                    // InternalOptimisationLanguage.g:6417:52: ( RULE_DIGIT )*
                     loop5:
                     do {
                         int alt5=2;
@@ -1687,7 +1687,7 @@ public class InternalOptimisationLanguageLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // InternalOptimisationLanguage.g:6321:52: RULE_DIGIT
+                    	    // InternalOptimisationLanguage.g:6417:52: RULE_DIGIT
                     	    {
                     	    mRULE_DIGIT(); 
 
@@ -1699,7 +1699,7 @@ public class InternalOptimisationLanguageLexer extends Lexer {
                         }
                     } while (true);
 
-                    // InternalOptimisationLanguage.g:6321:64: ( RULE_EXPONENT )?
+                    // InternalOptimisationLanguage.g:6417:64: ( RULE_EXPONENT )?
                     int alt6=2;
                     int LA6_0 = input.LA(1);
 
@@ -1708,7 +1708,7 @@ public class InternalOptimisationLanguageLexer extends Lexer {
                     }
                     switch (alt6) {
                         case 1 :
-                            // InternalOptimisationLanguage.g:6321:64: RULE_EXPONENT
+                            // InternalOptimisationLanguage.g:6417:64: RULE_EXPONENT
                             {
                             mRULE_EXPONENT(); 
 
@@ -1739,11 +1739,11 @@ public class InternalOptimisationLanguageLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalOptimisationLanguage.g:6323:13: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' )
-            // InternalOptimisationLanguage.g:6323:15: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+            // InternalOptimisationLanguage.g:6419:13: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' )
+            // InternalOptimisationLanguage.g:6419:15: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
             {
             match('\"'); 
-            // InternalOptimisationLanguage.g:6323:19: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+            // InternalOptimisationLanguage.g:6419:19: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
             loop8:
             do {
                 int alt8=3;
@@ -1759,7 +1759,7 @@ public class InternalOptimisationLanguageLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // InternalOptimisationLanguage.g:6323:20: '\\\\' .
+            	    // InternalOptimisationLanguage.g:6419:20: '\\\\' .
             	    {
             	    match('\\'); 
             	    matchAny(); 
@@ -1767,7 +1767,7 @@ public class InternalOptimisationLanguageLexer extends Lexer {
             	    }
             	    break;
             	case 2 :
-            	    // InternalOptimisationLanguage.g:6323:27: ~ ( ( '\\\\' | '\"' ) )
+            	    // InternalOptimisationLanguage.g:6419:27: ~ ( ( '\\\\' | '\"' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -1804,11 +1804,11 @@ public class InternalOptimisationLanguageLexer extends Lexer {
         try {
             int _type = RULE_QUOTED_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalOptimisationLanguage.g:6325:16: ( '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
-            // InternalOptimisationLanguage.g:6325:18: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+            // InternalOptimisationLanguage.g:6421:16: ( '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalOptimisationLanguage.g:6421:18: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
             {
             match('\''); 
-            // InternalOptimisationLanguage.g:6325:23: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+            // InternalOptimisationLanguage.g:6421:23: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
             loop9:
             do {
                 int alt9=3;
@@ -1824,7 +1824,7 @@ public class InternalOptimisationLanguageLexer extends Lexer {
 
                 switch (alt9) {
             	case 1 :
-            	    // InternalOptimisationLanguage.g:6325:24: '\\\\' .
+            	    // InternalOptimisationLanguage.g:6421:24: '\\\\' .
             	    {
             	    match('\\'); 
             	    matchAny(); 
@@ -1832,7 +1832,7 @@ public class InternalOptimisationLanguageLexer extends Lexer {
             	    }
             	    break;
             	case 2 :
-            	    // InternalOptimisationLanguage.g:6325:31: ~ ( ( '\\\\' | '\\'' ) )
+            	    // InternalOptimisationLanguage.g:6421:31: ~ ( ( '\\\\' | '\\'' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -1869,10 +1869,10 @@ public class InternalOptimisationLanguageLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalOptimisationLanguage.g:6327:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // InternalOptimisationLanguage.g:6327:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalOptimisationLanguage.g:6423:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // InternalOptimisationLanguage.g:6423:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // InternalOptimisationLanguage.g:6327:11: ( '^' )?
+            // InternalOptimisationLanguage.g:6423:11: ( '^' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -1881,7 +1881,7 @@ public class InternalOptimisationLanguageLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // InternalOptimisationLanguage.g:6327:11: '^'
+                    // InternalOptimisationLanguage.g:6423:11: '^'
                     {
                     match('^'); 
 
@@ -1899,7 +1899,7 @@ public class InternalOptimisationLanguageLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // InternalOptimisationLanguage.g:6327:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalOptimisationLanguage.g:6423:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop11:
             do {
                 int alt11=2;
@@ -1948,12 +1948,12 @@ public class InternalOptimisationLanguageLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalOptimisationLanguage.g:6329:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // InternalOptimisationLanguage.g:6329:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // InternalOptimisationLanguage.g:6425:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // InternalOptimisationLanguage.g:6425:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // InternalOptimisationLanguage.g:6329:24: ( options {greedy=false; } : . )*
+            // InternalOptimisationLanguage.g:6425:24: ( options {greedy=false; } : . )*
             loop12:
             do {
                 int alt12=2;
@@ -1978,7 +1978,7 @@ public class InternalOptimisationLanguageLexer extends Lexer {
 
                 switch (alt12) {
             	case 1 :
-            	    // InternalOptimisationLanguage.g:6329:52: .
+            	    // InternalOptimisationLanguage.g:6425:52: .
             	    {
             	    matchAny(); 
 
@@ -2008,12 +2008,12 @@ public class InternalOptimisationLanguageLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalOptimisationLanguage.g:6331:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // InternalOptimisationLanguage.g:6331:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // InternalOptimisationLanguage.g:6427:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // InternalOptimisationLanguage.g:6427:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // InternalOptimisationLanguage.g:6331:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalOptimisationLanguage.g:6427:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop13:
             do {
                 int alt13=2;
@@ -2026,7 +2026,7 @@ public class InternalOptimisationLanguageLexer extends Lexer {
 
                 switch (alt13) {
             	case 1 :
-            	    // InternalOptimisationLanguage.g:6331:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalOptimisationLanguage.g:6427:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -2046,7 +2046,7 @@ public class InternalOptimisationLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // InternalOptimisationLanguage.g:6331:40: ( ( '\\r' )? '\\n' )?
+            // InternalOptimisationLanguage.g:6427:40: ( ( '\\r' )? '\\n' )?
             int alt15=2;
             int LA15_0 = input.LA(1);
 
@@ -2055,9 +2055,9 @@ public class InternalOptimisationLanguageLexer extends Lexer {
             }
             switch (alt15) {
                 case 1 :
-                    // InternalOptimisationLanguage.g:6331:41: ( '\\r' )? '\\n'
+                    // InternalOptimisationLanguage.g:6427:41: ( '\\r' )? '\\n'
                     {
-                    // InternalOptimisationLanguage.g:6331:41: ( '\\r' )?
+                    // InternalOptimisationLanguage.g:6427:41: ( '\\r' )?
                     int alt14=2;
                     int LA14_0 = input.LA(1);
 
@@ -2066,7 +2066,7 @@ public class InternalOptimisationLanguageLexer extends Lexer {
                     }
                     switch (alt14) {
                         case 1 :
-                            // InternalOptimisationLanguage.g:6331:41: '\\r'
+                            // InternalOptimisationLanguage.g:6427:41: '\\r'
                             {
                             match('\r'); 
 
@@ -2098,10 +2098,10 @@ public class InternalOptimisationLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalOptimisationLanguage.g:6333:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // InternalOptimisationLanguage.g:6333:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalOptimisationLanguage.g:6429:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalOptimisationLanguage.g:6429:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // InternalOptimisationLanguage.g:6333:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalOptimisationLanguage.g:6429:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt16=0;
             loop16:
             do {
@@ -2155,8 +2155,8 @@ public class InternalOptimisationLanguageLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalOptimisationLanguage.g:6335:16: ( . )
-            // InternalOptimisationLanguage.g:6335:18: .
+            // InternalOptimisationLanguage.g:6431:16: ( . )
+            // InternalOptimisationLanguage.g:6431:18: .
             {
             matchAny(); 
 
@@ -2772,7 +2772,7 @@ public class InternalOptimisationLanguageLexer extends Lexer {
             this.transition = DFA7_transition;
         }
         public String getDescription() {
-            return "6321:15: ( RULE_INT RULE_EXPONENT | RULE_INT '.' ( RULE_DIGIT )* ( RULE_EXPONENT )? )";
+            return "6417:15: ( RULE_INT RULE_EXPONENT | RULE_INT '.' ( RULE_DIGIT )* ( RULE_EXPONENT )? )";
         }
     }
     static final String DFA17_eotS =

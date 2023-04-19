@@ -99,6 +99,7 @@ public class MachineLearningLanguageParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getTypeDefinitionRuleAccess().getGroup(), "rule__TypeDefinitionRule__Group__0");
 			builder.put(grammarAccess.getTypeDefinitionRuleAccess().getGroup_3(), "rule__TypeDefinitionRule__Group_3__0");
 			builder.put(grammarAccess.getAttributeDefinitionRuleAccess().getGroup(), "rule__AttributeDefinitionRule__Group__0");
+			builder.put(grammarAccess.getAttributeDefinitionRuleAccess().getGroup_3(), "rule__AttributeDefinitionRule__Group_3__0");
 			builder.put(grammarAccess.getLiteralTypeRuleAccess().getGroup(), "rule__LiteralTypeRule__Group__0");
 			builder.put(grammarAccess.getInstanceTypeRuleAccess().getGroup(), "rule__InstanceTypeRule__Group__0");
 			builder.put(grammarAccess.getInstanceTypeRuleAccess().getGroup_3(), "rule__InstanceTypeRule__Group_3__0");
@@ -193,6 +194,7 @@ public class MachineLearningLanguageParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getTypeDefinitionRuleAccess().getAttributesAssignment_5(), "rule__TypeDefinitionRule__AttributesAssignment_5");
 			builder.put(grammarAccess.getAttributeDefinitionRuleAccess().getNameAssignment_0(), "rule__AttributeDefinitionRule__NameAssignment_0");
 			builder.put(grammarAccess.getAttributeDefinitionRuleAccess().getTypeAssignment_2(), "rule__AttributeDefinitionRule__TypeAssignment_2");
+			builder.put(grammarAccess.getAttributeDefinitionRuleAccess().getInitialisationAssignment_3_1(), "rule__AttributeDefinitionRule__InitialisationAssignment_3_1");
 			builder.put(grammarAccess.getInstanceTypeRuleAccess().getDefinitionsAssignment_2(), "rule__InstanceTypeRule__DefinitionsAssignment_2");
 			builder.put(grammarAccess.getInstanceTypeRuleAccess().getDefinitionsAssignment_3_1(), "rule__InstanceTypeRule__DefinitionsAssignment_3_1");
 			builder.put(grammarAccess.getArrayTypeRuleAccess().getElementsAssignment_1(), "rule__ArrayTypeRule__ElementsAssignment_1");
