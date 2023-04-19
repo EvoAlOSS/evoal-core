@@ -425,23 +425,27 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 	public class ValueReferenceRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.ddl.dsl.DataDescriptionLanguage.ValueReferenceRule");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cDataReferenceRuleParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cSelfReferenceRuleParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cConstantReferenceRuleParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cDataReferenceRuleParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cSelfReferenceRuleParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
 		//@Override
 		//ValueReferenceRule returns base::ValueReference:
-		//    DataReferenceRule | SelfReferenceRule
+		//    ConstantReferenceRule | DataReferenceRule | SelfReferenceRule
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//DataReferenceRule | SelfReferenceRule
+		//ConstantReferenceRule | DataReferenceRule | SelfReferenceRule
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
+		//ConstantReferenceRule
+		public RuleCall getConstantReferenceRuleParserRuleCall_0() { return cConstantReferenceRuleParserRuleCall_0; }
+		
 		//DataReferenceRule
-		public RuleCall getDataReferenceRuleParserRuleCall_0() { return cDataReferenceRuleParserRuleCall_0; }
+		public RuleCall getDataReferenceRuleParserRuleCall_1() { return cDataReferenceRuleParserRuleCall_1; }
 		
 		//SelfReferenceRule
-		public RuleCall getSelfReferenceRuleParserRuleCall_1() { return cSelfReferenceRuleParserRuleCall_1; }
+		public RuleCall getSelfReferenceRuleParserRuleCall_2() { return cSelfReferenceRuleParserRuleCall_2; }
 	}
 	public class DataReferenceRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.ddl.dsl.DataDescriptionLanguage.DataReferenceRule");
@@ -770,7 +774,7 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 	
 	//@Override
 	//ValueReferenceRule returns base::ValueReference:
-	//    DataReferenceRule | SelfReferenceRule
+	//    ConstantReferenceRule | DataReferenceRule | SelfReferenceRule
 	//;
 	public ValueReferenceRuleElements getValueReferenceRuleAccess() {
 		return pValueReferenceRule;
@@ -992,6 +996,17 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 	
 	public ParserRule getCallRuleRule() {
 		return getCallRuleAccess().getRule();
+	}
+	
+	//ConstantReferenceRule returns ConstantReference:
+	//    definition = [ConstantDefinition|QualifiedName]
+	//;
+	public BaseLanguageGrammarAccess.ConstantReferenceRuleElements getConstantReferenceRuleAccess() {
+		return gaBaseLanguage.getConstantReferenceRuleAccess();
+	}
+	
+	public ParserRule getConstantReferenceRuleRule() {
+		return getConstantReferenceRuleAccess().getRule();
 	}
 	
 	//LiteralRule returns Literal:
@@ -1254,6 +1269,17 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 	
 	public ParserRule getFunctionDefinitionRuleRule() {
 		return getFunctionDefinitionRuleAccess().getRule();
+	}
+	
+	//ConstantDefinitionRule returns ConstantDefinition:
+	//    'const' type = TypeDefinitionRule name = StringOrId ':=' value = ExpressionRule
+	//;
+	public BaseLanguageGrammarAccess.ConstantDefinitionRuleElements getConstantDefinitionRuleAccess() {
+		return gaBaseLanguage.getConstantDefinitionRuleAccess();
+	}
+	
+	public ParserRule getConstantDefinitionRuleRule() {
+		return getConstantDefinitionRuleAccess().getRule();
 	}
 	
 	//ParameterRule returns Parameter:

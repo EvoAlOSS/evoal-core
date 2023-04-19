@@ -3,6 +3,7 @@
  */
 package de.evoal.languages.model.dl;
 
+import de.evoal.languages.model.base.ConstantDefinition;
 import de.evoal.languages.model.base.FunctionDefinition;
 import de.evoal.languages.model.base.TypeDefinition;
 
@@ -28,6 +29,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link de.evoal.languages.model.dl.DefinitionModel#getName <em>Name</em>}</li>
  *   <li>{@link de.evoal.languages.model.dl.DefinitionModel#getTypes <em>Types</em>}</li>
  *   <li>{@link de.evoal.languages.model.dl.DefinitionModel#getFunctions <em>Functions</em>}</li>
+ *   <li>{@link de.evoal.languages.model.dl.DefinitionModel#getConstants <em>Constants</em>}</li>
  * </ul>
  *
  * @see de.evoal.languages.model.dl.DlPackage#getDefinitionModel()
@@ -99,5 +101,17 @@ public interface DefinitionModel extends EObject {
 	 * @generated
 	 */
 	EList<FunctionDefinition> getFunctions();
+
+	/**
+	 * Returns the value of the '<em><b>Constants</b></em>' containment reference list.
+	 * The list contents are of type {@link de.evoal.languages.model.base.ConstantDefinition}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Constants</em>' containment reference list.
+	 * @see de.evoal.languages.model.dl.DlPackage#getDefinitionModel_Constants()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<ConstantDefinition> getConstants();
 
 } // DefinitionModel

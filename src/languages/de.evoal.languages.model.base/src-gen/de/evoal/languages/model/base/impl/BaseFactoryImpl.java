@@ -90,6 +90,8 @@ public class BaseFactoryImpl extends EFactoryImpl implements BaseFactory {
 			case BasePackage.FUNCTION_DEFINITION: return createFunctionDefinition();
 			case BasePackage.PARAMETER: return createParameter();
 			case BasePackage.DEFINED_FUNCTION_NAME: return createDefinedFunctionName();
+			case BasePackage.CONSTANT_DEFINITION: return createConstantDefinition();
+			case BasePackage.CONSTANT_REFERENCE: return createConstantReference();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -498,6 +500,28 @@ public class BaseFactoryImpl extends EFactoryImpl implements BaseFactory {
 	public DefinedFunctionName createDefinedFunctionName() {
 		DefinedFunctionNameImpl definedFunctionName = new DefinedFunctionNameImpl();
 		return definedFunctionName;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ConstantDefinition createConstantDefinition() {
+		ConstantDefinitionImpl constantDefinition = new ConstantDefinitionImpl();
+		return constantDefinition;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ConstantReference createConstantReference() {
+		ConstantReferenceImpl constantReference = new ConstantReferenceImpl();
+		return constantReference;
 	}
 
 	/**

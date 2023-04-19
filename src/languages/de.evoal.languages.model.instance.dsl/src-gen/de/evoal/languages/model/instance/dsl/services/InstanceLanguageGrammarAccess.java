@@ -32,7 +32,7 @@ public class InstanceLanguageGrammarAccess extends AbstractElementFinder.Abstrac
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cDefinitionAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final CrossReference cDefinitionTypeDefinitionCrossReference_0_0 = (CrossReference)cDefinitionAssignment_0.eContents().get(0);
-		private final RuleCall cDefinitionTypeDefinitionQualifiedNameRuleParserRuleCall_0_0_1 = (RuleCall)cDefinitionTypeDefinitionCrossReference_0_0.eContents().get(1);
+		private final RuleCall cDefinitionTypeDefinitionQualifiedNameParserRuleCall_0_0_1 = (RuleCall)cDefinitionTypeDefinitionCrossReference_0_0.eContents().get(1);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
 		private final Keyword cLeftCurlyBracketKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
 		private final Assignment cAttributesAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
@@ -40,25 +40,25 @@ public class InstanceLanguageGrammarAccess extends AbstractElementFinder.Abstrac
 		private final Keyword cRightCurlyBracketKeyword_1_2 = (Keyword)cGroup_1.eContents().get(2);
 		
 		//InstanceRule returns Instance:
-		//    definition = [base::TypeDefinition|QualifiedNameRule] ('{'
+		//    definition = [base::TypeDefinition|QualifiedName] ('{'
 		//      attributes += AttributeRule*
 		//    '}')?
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//definition = [base::TypeDefinition|QualifiedNameRule] ('{'
+		//definition = [base::TypeDefinition|QualifiedName] ('{'
 		//  attributes += AttributeRule*
 		//'}')?
 		public Group getGroup() { return cGroup; }
 		
-		//definition = [base::TypeDefinition|QualifiedNameRule]
+		//definition = [base::TypeDefinition|QualifiedName]
 		public Assignment getDefinitionAssignment_0() { return cDefinitionAssignment_0; }
 		
-		//[base::TypeDefinition|QualifiedNameRule]
+		//[base::TypeDefinition|QualifiedName]
 		public CrossReference getDefinitionTypeDefinitionCrossReference_0_0() { return cDefinitionTypeDefinitionCrossReference_0_0; }
 		
-		//QualifiedNameRule
-		public RuleCall getDefinitionTypeDefinitionQualifiedNameRuleParserRuleCall_0_0_1() { return cDefinitionTypeDefinitionQualifiedNameRuleParserRuleCall_0_0_1; }
+		//QualifiedName
+		public RuleCall getDefinitionTypeDefinitionQualifiedNameParserRuleCall_0_0_1() { return cDefinitionTypeDefinitionQualifiedNameParserRuleCall_0_0_1; }
 		
 		//('{'
 		//     attributes += AttributeRule*
@@ -249,33 +249,6 @@ public class InstanceLanguageGrammarAccess extends AbstractElementFinder.Abstrac
 		//StringOrId
 		public RuleCall getDefinitionDataDescriptionStringOrIdParserRuleCall_2_0_1() { return cDefinitionDataDescriptionStringOrIdParserRuleCall_2_0_1; }
 	}
-	public class QualifiedNameRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.instance.dsl.InstanceLanguage.QualifiedNameRule");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final RuleCall cStringOrIdParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
-		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
-		private final Keyword cFullStopKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
-		private final RuleCall cStringOrIdParserRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
-		
-		//QualifiedNameRule:
-		//    StringOrId ('.' StringOrId)*;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//StringOrId ('.' StringOrId)*
-		public Group getGroup() { return cGroup; }
-		
-		//StringOrId
-		public RuleCall getStringOrIdParserRuleCall_0() { return cStringOrIdParserRuleCall_0; }
-		
-		//('.' StringOrId)*
-		public Group getGroup_1() { return cGroup_1; }
-		
-		//'.'
-		public Keyword getFullStopKeyword_1_0() { return cFullStopKeyword_1_0; }
-		
-		//StringOrId
-		public RuleCall getStringOrIdParserRuleCall_1_1() { return cStringOrIdParserRuleCall_1_1; }
-	}
 	
 	
 	private final InstanceRuleElements pInstanceRule;
@@ -284,7 +257,6 @@ public class InstanceLanguageGrammarAccess extends AbstractElementFinder.Abstrac
 	private final ArrayRuleElements pArrayRule;
 	private final LiteralValueRuleElements pLiteralValueRule;
 	private final DataReferenceRuleElements pDataReferenceRule;
-	private final QualifiedNameRuleElements pQualifiedNameRule;
 	
 	private final Grammar grammar;
 	
@@ -305,7 +277,6 @@ public class InstanceLanguageGrammarAccess extends AbstractElementFinder.Abstrac
 		this.pArrayRule = new ArrayRuleElements();
 		this.pLiteralValueRule = new LiteralValueRuleElements();
 		this.pDataReferenceRule = new DataReferenceRuleElements();
-		this.pQualifiedNameRule = new QualifiedNameRuleElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -340,7 +311,7 @@ public class InstanceLanguageGrammarAccess extends AbstractElementFinder.Abstrac
 
 	
 	//InstanceRule returns Instance:
-	//    definition = [base::TypeDefinition|QualifiedNameRule] ('{'
+	//    definition = [base::TypeDefinition|QualifiedName] ('{'
 	//      attributes += AttributeRule*
 	//    '}')?
 	//;
@@ -407,16 +378,6 @@ public class InstanceLanguageGrammarAccess extends AbstractElementFinder.Abstrac
 	
 	public ParserRule getDataReferenceRuleRule() {
 		return getDataReferenceRuleAccess().getRule();
-	}
-	
-	//QualifiedNameRule:
-	//    StringOrId ('.' StringOrId)*;
-	public QualifiedNameRuleElements getQualifiedNameRuleAccess() {
-		return pQualifiedNameRule;
-	}
-	
-	public ParserRule getQualifiedNameRuleRule() {
-		return getQualifiedNameRuleAccess().getRule();
 	}
 	
 	//ExpressionRule returns Expression:
@@ -611,7 +572,7 @@ public class InstanceLanguageGrammarAccess extends AbstractElementFinder.Abstrac
 	}
 	
 	//ValueReferenceRule returns ValueReference:
-	//    {ValueReference} 'value'
+	//    ConstantReferenceRule
 	//;
 	public BaseLanguageGrammarAccess.ValueReferenceRuleElements getValueReferenceRuleAccess() {
 		return gaBaseLanguage.getValueReferenceRuleAccess();
@@ -619,6 +580,17 @@ public class InstanceLanguageGrammarAccess extends AbstractElementFinder.Abstrac
 	
 	public ParserRule getValueReferenceRuleRule() {
 		return getValueReferenceRuleAccess().getRule();
+	}
+	
+	//ConstantReferenceRule returns ConstantReference:
+	//    definition = [ConstantDefinition|QualifiedName]
+	//;
+	public BaseLanguageGrammarAccess.ConstantReferenceRuleElements getConstantReferenceRuleAccess() {
+		return gaBaseLanguage.getConstantReferenceRuleAccess();
+	}
+	
+	public ParserRule getConstantReferenceRuleRule() {
+		return getConstantReferenceRuleAccess().getRule();
 	}
 	
 	//LiteralRule returns Literal:
@@ -881,6 +853,17 @@ public class InstanceLanguageGrammarAccess extends AbstractElementFinder.Abstrac
 	
 	public ParserRule getFunctionDefinitionRuleRule() {
 		return getFunctionDefinitionRuleAccess().getRule();
+	}
+	
+	//ConstantDefinitionRule returns ConstantDefinition:
+	//    'const' type = TypeDefinitionRule name = StringOrId ':=' value = ExpressionRule
+	//;
+	public BaseLanguageGrammarAccess.ConstantDefinitionRuleElements getConstantDefinitionRuleAccess() {
+		return gaBaseLanguage.getConstantDefinitionRuleAccess();
+	}
+	
+	public ParserRule getConstantDefinitionRuleRule() {
+		return getConstantDefinitionRuleAccess().getRule();
 	}
 	
 	//ParameterRule returns Parameter:

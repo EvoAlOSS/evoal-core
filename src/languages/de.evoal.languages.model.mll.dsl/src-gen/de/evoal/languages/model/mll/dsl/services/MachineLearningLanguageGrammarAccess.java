@@ -984,7 +984,7 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 	}
 	
 	//InstanceRule returns Instance:
-	//    definition = [base::TypeDefinition|QualifiedNameRule] ('{'
+	//    definition = [base::TypeDefinition|QualifiedName] ('{'
 	//      attributes += AttributeRule*
 	//    '}')?
 	//;
@@ -1051,16 +1051,6 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 	
 	public ParserRule getDataReferenceRuleRule() {
 		return getDataReferenceRuleAccess().getRule();
-	}
-	
-	//QualifiedNameRule:
-	//    StringOrId ('.' StringOrId)*;
-	public InstanceLanguageGrammarAccess.QualifiedNameRuleElements getQualifiedNameRuleAccess() {
-		return gaInstanceLanguage.getQualifiedNameRuleAccess();
-	}
-	
-	public ParserRule getQualifiedNameRuleRule() {
-		return getQualifiedNameRuleAccess().getRule();
 	}
 	
 	//ExpressionRule returns Expression:
@@ -1255,7 +1245,7 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 	}
 	
 	//ValueReferenceRule returns ValueReference:
-	//    {ValueReference} 'value'
+	//    ConstantReferenceRule
 	//;
 	public BaseLanguageGrammarAccess.ValueReferenceRuleElements getValueReferenceRuleAccess() {
 		return gaBaseLanguage.getValueReferenceRuleAccess();
@@ -1263,6 +1253,17 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 	
 	public ParserRule getValueReferenceRuleRule() {
 		return getValueReferenceRuleAccess().getRule();
+	}
+	
+	//ConstantReferenceRule returns ConstantReference:
+	//    definition = [ConstantDefinition|QualifiedName]
+	//;
+	public BaseLanguageGrammarAccess.ConstantReferenceRuleElements getConstantReferenceRuleAccess() {
+		return gaBaseLanguage.getConstantReferenceRuleAccess();
+	}
+	
+	public ParserRule getConstantReferenceRuleRule() {
+		return getConstantReferenceRuleAccess().getRule();
 	}
 	
 	//LiteralRule returns Literal:
@@ -1525,6 +1526,17 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 	
 	public ParserRule getFunctionDefinitionRuleRule() {
 		return getFunctionDefinitionRuleAccess().getRule();
+	}
+	
+	//ConstantDefinitionRule returns ConstantDefinition:
+	//    'const' type = TypeDefinitionRule name = StringOrId ':=' value = ExpressionRule
+	//;
+	public BaseLanguageGrammarAccess.ConstantDefinitionRuleElements getConstantDefinitionRuleAccess() {
+		return gaBaseLanguage.getConstantDefinitionRuleAccess();
+	}
+	
+	public ParserRule getConstantDefinitionRuleRule() {
+		return getConstantDefinitionRuleAccess().getRule();
 	}
 	
 	//ParameterRule returns Parameter:

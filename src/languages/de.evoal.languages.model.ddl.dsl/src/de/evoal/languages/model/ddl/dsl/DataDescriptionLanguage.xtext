@@ -59,7 +59,7 @@ StatementRule returns base::Expression:
 
 @Override
 ValueReferenceRule returns base::ValueReference:
-	DataReferenceRule | SelfReferenceRule
+	ConstantReferenceRule | DataReferenceRule | SelfReferenceRule
 ;
 
 DataReferenceRule returns DataReference:	

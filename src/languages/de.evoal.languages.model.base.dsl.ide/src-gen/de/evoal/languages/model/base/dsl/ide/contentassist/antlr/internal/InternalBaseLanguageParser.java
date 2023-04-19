@@ -22,7 +22,7 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalBaseLanguageParser extends AbstractInternalContentAssistParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_QUOTED_ID", "RULE_ID", "RULE_DOUBLE", "RULE_INT", "RULE_STRING", "RULE_DIGIT", "RULE_EXPONENT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'false'", "'>='", "'>'", "'='", "'!='", "'<'", "'<='", "'+'", "'-'", "'*'", "'/'", "'%'", "'Y'", "'Z'", "'E'", "'P'", "'T'", "'G'", "'M'", "'k'", "'h'", "'da'", "'d'", "'c'", "'m'", "'\\u00B5'", "'n'", "'p'", "'f'", "'a'", "'z'", "'y'", "'OR'", "'XOR'", "'AND'", "'^'", "'('", "')'", "','", "'value'", "':'", "';'", "':='", "'literal'", "'instance'", "'|'", "'string'", "'expression'", "'int'", "'float'", "'boolean'", "'void'", "'data'", "'array'", "'.'", "'!'", "'true'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_QUOTED_ID", "RULE_ID", "RULE_DOUBLE", "RULE_INT", "RULE_STRING", "RULE_DIGIT", "RULE_EXPONENT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'false'", "'>='", "'>'", "'='", "'!='", "'<'", "'<='", "'+'", "'-'", "'*'", "'/'", "'%'", "'Y'", "'Z'", "'E'", "'P'", "'T'", "'G'", "'M'", "'k'", "'h'", "'da'", "'d'", "'c'", "'m'", "'\\u00B5'", "'n'", "'p'", "'f'", "'a'", "'z'", "'y'", "'OR'", "'XOR'", "'AND'", "'^'", "'('", "')'", "','", "'type'", "'{'", "'}'", "'extends'", "':'", "';'", "':='", "'literal'", "'instance'", "'|'", "'string'", "'expression'", "'int'", "'float'", "'boolean'", "'void'", "'data'", "'array'", "'.'", "'!'", "'true'", "'abstract'"
     };
     public static final int T__50=50;
     public static final int T__19=19;
@@ -66,6 +66,7 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
     public static final int T__65=65;
     public static final int T__70=70;
     public static final int T__71=71;
+    public static final int T__72=72;
     public static final int RULE_STRING=8;
     public static final int RULE_SL_COMMENT=12;
     public static final int T__37=37;
@@ -76,9 +77,12 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
     public static final int T__34=34;
     public static final int T__35=35;
     public static final int T__36=36;
+    public static final int T__73=73;
     public static final int EOF=-1;
     public static final int T__30=30;
+    public static final int T__74=74;
     public static final int T__31=31;
+    public static final int T__75=75;
     public static final int T__32=32;
     public static final int RULE_WS=13;
     public static final int RULE_ANY_OTHER=14;
@@ -1232,31 +1236,25 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "ruleValueReferenceRule"
-    // InternalBaseLanguage.g:413:1: ruleValueReferenceRule : ( ( rule__ValueReferenceRule__Group__0 ) ) ;
+    // InternalBaseLanguage.g:413:1: ruleValueReferenceRule : ( ruleConstantReferenceRule ) ;
     public final void ruleValueReferenceRule() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:417:2: ( ( ( rule__ValueReferenceRule__Group__0 ) ) )
-            // InternalBaseLanguage.g:418:2: ( ( rule__ValueReferenceRule__Group__0 ) )
+            // InternalBaseLanguage.g:417:2: ( ( ruleConstantReferenceRule ) )
+            // InternalBaseLanguage.g:418:2: ( ruleConstantReferenceRule )
             {
-            // InternalBaseLanguage.g:418:2: ( ( rule__ValueReferenceRule__Group__0 ) )
-            // InternalBaseLanguage.g:419:3: ( rule__ValueReferenceRule__Group__0 )
+            // InternalBaseLanguage.g:418:2: ( ruleConstantReferenceRule )
+            // InternalBaseLanguage.g:419:3: ruleConstantReferenceRule
             {
-             before(grammarAccess.getValueReferenceRuleAccess().getGroup()); 
-            // InternalBaseLanguage.g:420:3: ( rule__ValueReferenceRule__Group__0 )
-            // InternalBaseLanguage.g:420:4: rule__ValueReferenceRule__Group__0
-            {
+             before(grammarAccess.getValueReferenceRuleAccess().getConstantReferenceRuleParserRuleCall()); 
             pushFollow(FOLLOW_2);
-            rule__ValueReferenceRule__Group__0();
+            ruleConstantReferenceRule();
 
             state._fsp--;
 
-
-            }
-
-             after(grammarAccess.getValueReferenceRuleAccess().getGroup()); 
+             after(grammarAccess.getValueReferenceRuleAccess().getConstantReferenceRuleParserRuleCall()); 
 
             }
 
@@ -1278,12 +1276,89 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
     // $ANTLR end "ruleValueReferenceRule"
 
 
+    // $ANTLR start "entryRuleConstantReferenceRule"
+    // InternalBaseLanguage.g:429:1: entryRuleConstantReferenceRule : ruleConstantReferenceRule EOF ;
+    public final void entryRuleConstantReferenceRule() throws RecognitionException {
+        try {
+            // InternalBaseLanguage.g:430:1: ( ruleConstantReferenceRule EOF )
+            // InternalBaseLanguage.g:431:1: ruleConstantReferenceRule EOF
+            {
+             before(grammarAccess.getConstantReferenceRuleRule()); 
+            pushFollow(FOLLOW_1);
+            ruleConstantReferenceRule();
+
+            state._fsp--;
+
+             after(grammarAccess.getConstantReferenceRuleRule()); 
+            match(input,EOF,FOLLOW_2); 
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+        }
+        return ;
+    }
+    // $ANTLR end "entryRuleConstantReferenceRule"
+
+
+    // $ANTLR start "ruleConstantReferenceRule"
+    // InternalBaseLanguage.g:438:1: ruleConstantReferenceRule : ( ( rule__ConstantReferenceRule__DefinitionAssignment ) ) ;
+    public final void ruleConstantReferenceRule() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalBaseLanguage.g:442:2: ( ( ( rule__ConstantReferenceRule__DefinitionAssignment ) ) )
+            // InternalBaseLanguage.g:443:2: ( ( rule__ConstantReferenceRule__DefinitionAssignment ) )
+            {
+            // InternalBaseLanguage.g:443:2: ( ( rule__ConstantReferenceRule__DefinitionAssignment ) )
+            // InternalBaseLanguage.g:444:3: ( rule__ConstantReferenceRule__DefinitionAssignment )
+            {
+             before(grammarAccess.getConstantReferenceRuleAccess().getDefinitionAssignment()); 
+            // InternalBaseLanguage.g:445:3: ( rule__ConstantReferenceRule__DefinitionAssignment )
+            // InternalBaseLanguage.g:445:4: rule__ConstantReferenceRule__DefinitionAssignment
+            {
+            pushFollow(FOLLOW_2);
+            rule__ConstantReferenceRule__DefinitionAssignment();
+
+            state._fsp--;
+
+
+            }
+
+             after(grammarAccess.getConstantReferenceRuleAccess().getDefinitionAssignment()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "ruleConstantReferenceRule"
+
+
     // $ANTLR start "entryRuleLiteralRule"
-    // InternalBaseLanguage.g:429:1: entryRuleLiteralRule : ruleLiteralRule EOF ;
+    // InternalBaseLanguage.g:454:1: entryRuleLiteralRule : ruleLiteralRule EOF ;
     public final void entryRuleLiteralRule() throws RecognitionException {
         try {
-            // InternalBaseLanguage.g:430:1: ( ruleLiteralRule EOF )
-            // InternalBaseLanguage.g:431:1: ruleLiteralRule EOF
+            // InternalBaseLanguage.g:455:1: ( ruleLiteralRule EOF )
+            // InternalBaseLanguage.g:456:1: ruleLiteralRule EOF
             {
              before(grammarAccess.getLiteralRuleRule()); 
             pushFollow(FOLLOW_1);
@@ -1309,21 +1384,21 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "ruleLiteralRule"
-    // InternalBaseLanguage.g:438:1: ruleLiteralRule : ( ( rule__LiteralRule__Alternatives ) ) ;
+    // InternalBaseLanguage.g:463:1: ruleLiteralRule : ( ( rule__LiteralRule__Alternatives ) ) ;
     public final void ruleLiteralRule() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:442:2: ( ( ( rule__LiteralRule__Alternatives ) ) )
-            // InternalBaseLanguage.g:443:2: ( ( rule__LiteralRule__Alternatives ) )
+            // InternalBaseLanguage.g:467:2: ( ( ( rule__LiteralRule__Alternatives ) ) )
+            // InternalBaseLanguage.g:468:2: ( ( rule__LiteralRule__Alternatives ) )
             {
-            // InternalBaseLanguage.g:443:2: ( ( rule__LiteralRule__Alternatives ) )
-            // InternalBaseLanguage.g:444:3: ( rule__LiteralRule__Alternatives )
+            // InternalBaseLanguage.g:468:2: ( ( rule__LiteralRule__Alternatives ) )
+            // InternalBaseLanguage.g:469:3: ( rule__LiteralRule__Alternatives )
             {
              before(grammarAccess.getLiteralRuleAccess().getAlternatives()); 
-            // InternalBaseLanguage.g:445:3: ( rule__LiteralRule__Alternatives )
-            // InternalBaseLanguage.g:445:4: rule__LiteralRule__Alternatives
+            // InternalBaseLanguage.g:470:3: ( rule__LiteralRule__Alternatives )
+            // InternalBaseLanguage.g:470:4: rule__LiteralRule__Alternatives
             {
             pushFollow(FOLLOW_2);
             rule__LiteralRule__Alternatives();
@@ -1356,11 +1431,11 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "entryRuleNumberLiteralRule"
-    // InternalBaseLanguage.g:454:1: entryRuleNumberLiteralRule : ruleNumberLiteralRule EOF ;
+    // InternalBaseLanguage.g:479:1: entryRuleNumberLiteralRule : ruleNumberLiteralRule EOF ;
     public final void entryRuleNumberLiteralRule() throws RecognitionException {
         try {
-            // InternalBaseLanguage.g:455:1: ( ruleNumberLiteralRule EOF )
-            // InternalBaseLanguage.g:456:1: ruleNumberLiteralRule EOF
+            // InternalBaseLanguage.g:480:1: ( ruleNumberLiteralRule EOF )
+            // InternalBaseLanguage.g:481:1: ruleNumberLiteralRule EOF
             {
              before(grammarAccess.getNumberLiteralRuleRule()); 
             pushFollow(FOLLOW_1);
@@ -1386,21 +1461,21 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "ruleNumberLiteralRule"
-    // InternalBaseLanguage.g:463:1: ruleNumberLiteralRule : ( ( rule__NumberLiteralRule__Alternatives ) ) ;
+    // InternalBaseLanguage.g:488:1: ruleNumberLiteralRule : ( ( rule__NumberLiteralRule__Alternatives ) ) ;
     public final void ruleNumberLiteralRule() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:467:2: ( ( ( rule__NumberLiteralRule__Alternatives ) ) )
-            // InternalBaseLanguage.g:468:2: ( ( rule__NumberLiteralRule__Alternatives ) )
+            // InternalBaseLanguage.g:492:2: ( ( ( rule__NumberLiteralRule__Alternatives ) ) )
+            // InternalBaseLanguage.g:493:2: ( ( rule__NumberLiteralRule__Alternatives ) )
             {
-            // InternalBaseLanguage.g:468:2: ( ( rule__NumberLiteralRule__Alternatives ) )
-            // InternalBaseLanguage.g:469:3: ( rule__NumberLiteralRule__Alternatives )
+            // InternalBaseLanguage.g:493:2: ( ( rule__NumberLiteralRule__Alternatives ) )
+            // InternalBaseLanguage.g:494:3: ( rule__NumberLiteralRule__Alternatives )
             {
              before(grammarAccess.getNumberLiteralRuleAccess().getAlternatives()); 
-            // InternalBaseLanguage.g:470:3: ( rule__NumberLiteralRule__Alternatives )
-            // InternalBaseLanguage.g:470:4: rule__NumberLiteralRule__Alternatives
+            // InternalBaseLanguage.g:495:3: ( rule__NumberLiteralRule__Alternatives )
+            // InternalBaseLanguage.g:495:4: rule__NumberLiteralRule__Alternatives
             {
             pushFollow(FOLLOW_2);
             rule__NumberLiteralRule__Alternatives();
@@ -1433,11 +1508,11 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "entryRuleDoubleLiteralRule"
-    // InternalBaseLanguage.g:479:1: entryRuleDoubleLiteralRule : ruleDoubleLiteralRule EOF ;
+    // InternalBaseLanguage.g:504:1: entryRuleDoubleLiteralRule : ruleDoubleLiteralRule EOF ;
     public final void entryRuleDoubleLiteralRule() throws RecognitionException {
         try {
-            // InternalBaseLanguage.g:480:1: ( ruleDoubleLiteralRule EOF )
-            // InternalBaseLanguage.g:481:1: ruleDoubleLiteralRule EOF
+            // InternalBaseLanguage.g:505:1: ( ruleDoubleLiteralRule EOF )
+            // InternalBaseLanguage.g:506:1: ruleDoubleLiteralRule EOF
             {
              before(grammarAccess.getDoubleLiteralRuleRule()); 
             pushFollow(FOLLOW_1);
@@ -1463,21 +1538,21 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "ruleDoubleLiteralRule"
-    // InternalBaseLanguage.g:488:1: ruleDoubleLiteralRule : ( ( rule__DoubleLiteralRule__Group__0 ) ) ;
+    // InternalBaseLanguage.g:513:1: ruleDoubleLiteralRule : ( ( rule__DoubleLiteralRule__Group__0 ) ) ;
     public final void ruleDoubleLiteralRule() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:492:2: ( ( ( rule__DoubleLiteralRule__Group__0 ) ) )
-            // InternalBaseLanguage.g:493:2: ( ( rule__DoubleLiteralRule__Group__0 ) )
+            // InternalBaseLanguage.g:517:2: ( ( ( rule__DoubleLiteralRule__Group__0 ) ) )
+            // InternalBaseLanguage.g:518:2: ( ( rule__DoubleLiteralRule__Group__0 ) )
             {
-            // InternalBaseLanguage.g:493:2: ( ( rule__DoubleLiteralRule__Group__0 ) )
-            // InternalBaseLanguage.g:494:3: ( rule__DoubleLiteralRule__Group__0 )
+            // InternalBaseLanguage.g:518:2: ( ( rule__DoubleLiteralRule__Group__0 ) )
+            // InternalBaseLanguage.g:519:3: ( rule__DoubleLiteralRule__Group__0 )
             {
              before(grammarAccess.getDoubleLiteralRuleAccess().getGroup()); 
-            // InternalBaseLanguage.g:495:3: ( rule__DoubleLiteralRule__Group__0 )
-            // InternalBaseLanguage.g:495:4: rule__DoubleLiteralRule__Group__0
+            // InternalBaseLanguage.g:520:3: ( rule__DoubleLiteralRule__Group__0 )
+            // InternalBaseLanguage.g:520:4: rule__DoubleLiteralRule__Group__0
             {
             pushFollow(FOLLOW_2);
             rule__DoubleLiteralRule__Group__0();
@@ -1510,11 +1585,11 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "entryRuleIntegerLiteralRule"
-    // InternalBaseLanguage.g:504:1: entryRuleIntegerLiteralRule : ruleIntegerLiteralRule EOF ;
+    // InternalBaseLanguage.g:529:1: entryRuleIntegerLiteralRule : ruleIntegerLiteralRule EOF ;
     public final void entryRuleIntegerLiteralRule() throws RecognitionException {
         try {
-            // InternalBaseLanguage.g:505:1: ( ruleIntegerLiteralRule EOF )
-            // InternalBaseLanguage.g:506:1: ruleIntegerLiteralRule EOF
+            // InternalBaseLanguage.g:530:1: ( ruleIntegerLiteralRule EOF )
+            // InternalBaseLanguage.g:531:1: ruleIntegerLiteralRule EOF
             {
              before(grammarAccess.getIntegerLiteralRuleRule()); 
             pushFollow(FOLLOW_1);
@@ -1540,21 +1615,21 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "ruleIntegerLiteralRule"
-    // InternalBaseLanguage.g:513:1: ruleIntegerLiteralRule : ( ( rule__IntegerLiteralRule__Group__0 ) ) ;
+    // InternalBaseLanguage.g:538:1: ruleIntegerLiteralRule : ( ( rule__IntegerLiteralRule__Group__0 ) ) ;
     public final void ruleIntegerLiteralRule() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:517:2: ( ( ( rule__IntegerLiteralRule__Group__0 ) ) )
-            // InternalBaseLanguage.g:518:2: ( ( rule__IntegerLiteralRule__Group__0 ) )
+            // InternalBaseLanguage.g:542:2: ( ( ( rule__IntegerLiteralRule__Group__0 ) ) )
+            // InternalBaseLanguage.g:543:2: ( ( rule__IntegerLiteralRule__Group__0 ) )
             {
-            // InternalBaseLanguage.g:518:2: ( ( rule__IntegerLiteralRule__Group__0 ) )
-            // InternalBaseLanguage.g:519:3: ( rule__IntegerLiteralRule__Group__0 )
+            // InternalBaseLanguage.g:543:2: ( ( rule__IntegerLiteralRule__Group__0 ) )
+            // InternalBaseLanguage.g:544:3: ( rule__IntegerLiteralRule__Group__0 )
             {
              before(grammarAccess.getIntegerLiteralRuleAccess().getGroup()); 
-            // InternalBaseLanguage.g:520:3: ( rule__IntegerLiteralRule__Group__0 )
-            // InternalBaseLanguage.g:520:4: rule__IntegerLiteralRule__Group__0
+            // InternalBaseLanguage.g:545:3: ( rule__IntegerLiteralRule__Group__0 )
+            // InternalBaseLanguage.g:545:4: rule__IntegerLiteralRule__Group__0
             {
             pushFollow(FOLLOW_2);
             rule__IntegerLiteralRule__Group__0();
@@ -1587,11 +1662,11 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "entryRuleStringLiteralRule"
-    // InternalBaseLanguage.g:529:1: entryRuleStringLiteralRule : ruleStringLiteralRule EOF ;
+    // InternalBaseLanguage.g:554:1: entryRuleStringLiteralRule : ruleStringLiteralRule EOF ;
     public final void entryRuleStringLiteralRule() throws RecognitionException {
         try {
-            // InternalBaseLanguage.g:530:1: ( ruleStringLiteralRule EOF )
-            // InternalBaseLanguage.g:531:1: ruleStringLiteralRule EOF
+            // InternalBaseLanguage.g:555:1: ( ruleStringLiteralRule EOF )
+            // InternalBaseLanguage.g:556:1: ruleStringLiteralRule EOF
             {
              before(grammarAccess.getStringLiteralRuleRule()); 
             pushFollow(FOLLOW_1);
@@ -1617,21 +1692,21 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "ruleStringLiteralRule"
-    // InternalBaseLanguage.g:538:1: ruleStringLiteralRule : ( ( rule__StringLiteralRule__ValueAssignment ) ) ;
+    // InternalBaseLanguage.g:563:1: ruleStringLiteralRule : ( ( rule__StringLiteralRule__ValueAssignment ) ) ;
     public final void ruleStringLiteralRule() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:542:2: ( ( ( rule__StringLiteralRule__ValueAssignment ) ) )
-            // InternalBaseLanguage.g:543:2: ( ( rule__StringLiteralRule__ValueAssignment ) )
+            // InternalBaseLanguage.g:567:2: ( ( ( rule__StringLiteralRule__ValueAssignment ) ) )
+            // InternalBaseLanguage.g:568:2: ( ( rule__StringLiteralRule__ValueAssignment ) )
             {
-            // InternalBaseLanguage.g:543:2: ( ( rule__StringLiteralRule__ValueAssignment ) )
-            // InternalBaseLanguage.g:544:3: ( rule__StringLiteralRule__ValueAssignment )
+            // InternalBaseLanguage.g:568:2: ( ( rule__StringLiteralRule__ValueAssignment ) )
+            // InternalBaseLanguage.g:569:3: ( rule__StringLiteralRule__ValueAssignment )
             {
              before(grammarAccess.getStringLiteralRuleAccess().getValueAssignment()); 
-            // InternalBaseLanguage.g:545:3: ( rule__StringLiteralRule__ValueAssignment )
-            // InternalBaseLanguage.g:545:4: rule__StringLiteralRule__ValueAssignment
+            // InternalBaseLanguage.g:570:3: ( rule__StringLiteralRule__ValueAssignment )
+            // InternalBaseLanguage.g:570:4: rule__StringLiteralRule__ValueAssignment
             {
             pushFollow(FOLLOW_2);
             rule__StringLiteralRule__ValueAssignment();
@@ -1664,11 +1739,11 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "entryRuleBooleanLiteralRule"
-    // InternalBaseLanguage.g:554:1: entryRuleBooleanLiteralRule : ruleBooleanLiteralRule EOF ;
+    // InternalBaseLanguage.g:579:1: entryRuleBooleanLiteralRule : ruleBooleanLiteralRule EOF ;
     public final void entryRuleBooleanLiteralRule() throws RecognitionException {
         try {
-            // InternalBaseLanguage.g:555:1: ( ruleBooleanLiteralRule EOF )
-            // InternalBaseLanguage.g:556:1: ruleBooleanLiteralRule EOF
+            // InternalBaseLanguage.g:580:1: ( ruleBooleanLiteralRule EOF )
+            // InternalBaseLanguage.g:581:1: ruleBooleanLiteralRule EOF
             {
              before(grammarAccess.getBooleanLiteralRuleRule()); 
             pushFollow(FOLLOW_1);
@@ -1694,21 +1769,21 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "ruleBooleanLiteralRule"
-    // InternalBaseLanguage.g:563:1: ruleBooleanLiteralRule : ( ( rule__BooleanLiteralRule__Group__0 ) ) ;
+    // InternalBaseLanguage.g:588:1: ruleBooleanLiteralRule : ( ( rule__BooleanLiteralRule__Group__0 ) ) ;
     public final void ruleBooleanLiteralRule() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:567:2: ( ( ( rule__BooleanLiteralRule__Group__0 ) ) )
-            // InternalBaseLanguage.g:568:2: ( ( rule__BooleanLiteralRule__Group__0 ) )
+            // InternalBaseLanguage.g:592:2: ( ( ( rule__BooleanLiteralRule__Group__0 ) ) )
+            // InternalBaseLanguage.g:593:2: ( ( rule__BooleanLiteralRule__Group__0 ) )
             {
-            // InternalBaseLanguage.g:568:2: ( ( rule__BooleanLiteralRule__Group__0 ) )
-            // InternalBaseLanguage.g:569:3: ( rule__BooleanLiteralRule__Group__0 )
+            // InternalBaseLanguage.g:593:2: ( ( rule__BooleanLiteralRule__Group__0 ) )
+            // InternalBaseLanguage.g:594:3: ( rule__BooleanLiteralRule__Group__0 )
             {
              before(grammarAccess.getBooleanLiteralRuleAccess().getGroup()); 
-            // InternalBaseLanguage.g:570:3: ( rule__BooleanLiteralRule__Group__0 )
-            // InternalBaseLanguage.g:570:4: rule__BooleanLiteralRule__Group__0
+            // InternalBaseLanguage.g:595:3: ( rule__BooleanLiteralRule__Group__0 )
+            // InternalBaseLanguage.g:595:4: rule__BooleanLiteralRule__Group__0
             {
             pushFollow(FOLLOW_2);
             rule__BooleanLiteralRule__Group__0();
@@ -1740,12 +1815,89 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
     // $ANTLR end "ruleBooleanLiteralRule"
 
 
+    // $ANTLR start "entryRuleTypeDefinitionRule"
+    // InternalBaseLanguage.g:604:1: entryRuleTypeDefinitionRule : ruleTypeDefinitionRule EOF ;
+    public final void entryRuleTypeDefinitionRule() throws RecognitionException {
+        try {
+            // InternalBaseLanguage.g:605:1: ( ruleTypeDefinitionRule EOF )
+            // InternalBaseLanguage.g:606:1: ruleTypeDefinitionRule EOF
+            {
+             before(grammarAccess.getTypeDefinitionRuleRule()); 
+            pushFollow(FOLLOW_1);
+            ruleTypeDefinitionRule();
+
+            state._fsp--;
+
+             after(grammarAccess.getTypeDefinitionRuleRule()); 
+            match(input,EOF,FOLLOW_2); 
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+        }
+        return ;
+    }
+    // $ANTLR end "entryRuleTypeDefinitionRule"
+
+
+    // $ANTLR start "ruleTypeDefinitionRule"
+    // InternalBaseLanguage.g:613:1: ruleTypeDefinitionRule : ( ( rule__TypeDefinitionRule__Group__0 ) ) ;
+    public final void ruleTypeDefinitionRule() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalBaseLanguage.g:617:2: ( ( ( rule__TypeDefinitionRule__Group__0 ) ) )
+            // InternalBaseLanguage.g:618:2: ( ( rule__TypeDefinitionRule__Group__0 ) )
+            {
+            // InternalBaseLanguage.g:618:2: ( ( rule__TypeDefinitionRule__Group__0 ) )
+            // InternalBaseLanguage.g:619:3: ( rule__TypeDefinitionRule__Group__0 )
+            {
+             before(grammarAccess.getTypeDefinitionRuleAccess().getGroup()); 
+            // InternalBaseLanguage.g:620:3: ( rule__TypeDefinitionRule__Group__0 )
+            // InternalBaseLanguage.g:620:4: rule__TypeDefinitionRule__Group__0
+            {
+            pushFollow(FOLLOW_2);
+            rule__TypeDefinitionRule__Group__0();
+
+            state._fsp--;
+
+
+            }
+
+             after(grammarAccess.getTypeDefinitionRuleAccess().getGroup()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "ruleTypeDefinitionRule"
+
+
     // $ANTLR start "entryRuleAttributeDefinitionRule"
-    // InternalBaseLanguage.g:579:1: entryRuleAttributeDefinitionRule : ruleAttributeDefinitionRule EOF ;
+    // InternalBaseLanguage.g:629:1: entryRuleAttributeDefinitionRule : ruleAttributeDefinitionRule EOF ;
     public final void entryRuleAttributeDefinitionRule() throws RecognitionException {
         try {
-            // InternalBaseLanguage.g:580:1: ( ruleAttributeDefinitionRule EOF )
-            // InternalBaseLanguage.g:581:1: ruleAttributeDefinitionRule EOF
+            // InternalBaseLanguage.g:630:1: ( ruleAttributeDefinitionRule EOF )
+            // InternalBaseLanguage.g:631:1: ruleAttributeDefinitionRule EOF
             {
              before(grammarAccess.getAttributeDefinitionRuleRule()); 
             pushFollow(FOLLOW_1);
@@ -1771,21 +1923,21 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "ruleAttributeDefinitionRule"
-    // InternalBaseLanguage.g:588:1: ruleAttributeDefinitionRule : ( ( rule__AttributeDefinitionRule__Group__0 ) ) ;
+    // InternalBaseLanguage.g:638:1: ruleAttributeDefinitionRule : ( ( rule__AttributeDefinitionRule__Group__0 ) ) ;
     public final void ruleAttributeDefinitionRule() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:592:2: ( ( ( rule__AttributeDefinitionRule__Group__0 ) ) )
-            // InternalBaseLanguage.g:593:2: ( ( rule__AttributeDefinitionRule__Group__0 ) )
+            // InternalBaseLanguage.g:642:2: ( ( ( rule__AttributeDefinitionRule__Group__0 ) ) )
+            // InternalBaseLanguage.g:643:2: ( ( rule__AttributeDefinitionRule__Group__0 ) )
             {
-            // InternalBaseLanguage.g:593:2: ( ( rule__AttributeDefinitionRule__Group__0 ) )
-            // InternalBaseLanguage.g:594:3: ( rule__AttributeDefinitionRule__Group__0 )
+            // InternalBaseLanguage.g:643:2: ( ( rule__AttributeDefinitionRule__Group__0 ) )
+            // InternalBaseLanguage.g:644:3: ( rule__AttributeDefinitionRule__Group__0 )
             {
              before(grammarAccess.getAttributeDefinitionRuleAccess().getGroup()); 
-            // InternalBaseLanguage.g:595:3: ( rule__AttributeDefinitionRule__Group__0 )
-            // InternalBaseLanguage.g:595:4: rule__AttributeDefinitionRule__Group__0
+            // InternalBaseLanguage.g:645:3: ( rule__AttributeDefinitionRule__Group__0 )
+            // InternalBaseLanguage.g:645:4: rule__AttributeDefinitionRule__Group__0
             {
             pushFollow(FOLLOW_2);
             rule__AttributeDefinitionRule__Group__0();
@@ -1818,11 +1970,11 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "entryRuleTypeRule"
-    // InternalBaseLanguage.g:604:1: entryRuleTypeRule : ruleTypeRule EOF ;
+    // InternalBaseLanguage.g:654:1: entryRuleTypeRule : ruleTypeRule EOF ;
     public final void entryRuleTypeRule() throws RecognitionException {
         try {
-            // InternalBaseLanguage.g:605:1: ( ruleTypeRule EOF )
-            // InternalBaseLanguage.g:606:1: ruleTypeRule EOF
+            // InternalBaseLanguage.g:655:1: ( ruleTypeRule EOF )
+            // InternalBaseLanguage.g:656:1: ruleTypeRule EOF
             {
              before(grammarAccess.getTypeRuleRule()); 
             pushFollow(FOLLOW_1);
@@ -1848,21 +2000,21 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "ruleTypeRule"
-    // InternalBaseLanguage.g:613:1: ruleTypeRule : ( ( rule__TypeRule__Alternatives ) ) ;
+    // InternalBaseLanguage.g:663:1: ruleTypeRule : ( ( rule__TypeRule__Alternatives ) ) ;
     public final void ruleTypeRule() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:617:2: ( ( ( rule__TypeRule__Alternatives ) ) )
-            // InternalBaseLanguage.g:618:2: ( ( rule__TypeRule__Alternatives ) )
+            // InternalBaseLanguage.g:667:2: ( ( ( rule__TypeRule__Alternatives ) ) )
+            // InternalBaseLanguage.g:668:2: ( ( rule__TypeRule__Alternatives ) )
             {
-            // InternalBaseLanguage.g:618:2: ( ( rule__TypeRule__Alternatives ) )
-            // InternalBaseLanguage.g:619:3: ( rule__TypeRule__Alternatives )
+            // InternalBaseLanguage.g:668:2: ( ( rule__TypeRule__Alternatives ) )
+            // InternalBaseLanguage.g:669:3: ( rule__TypeRule__Alternatives )
             {
              before(grammarAccess.getTypeRuleAccess().getAlternatives()); 
-            // InternalBaseLanguage.g:620:3: ( rule__TypeRule__Alternatives )
-            // InternalBaseLanguage.g:620:4: rule__TypeRule__Alternatives
+            // InternalBaseLanguage.g:670:3: ( rule__TypeRule__Alternatives )
+            // InternalBaseLanguage.g:670:4: rule__TypeRule__Alternatives
             {
             pushFollow(FOLLOW_2);
             rule__TypeRule__Alternatives();
@@ -1895,11 +2047,11 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "entryRuleLiteralTypeRule"
-    // InternalBaseLanguage.g:629:1: entryRuleLiteralTypeRule : ruleLiteralTypeRule EOF ;
+    // InternalBaseLanguage.g:679:1: entryRuleLiteralTypeRule : ruleLiteralTypeRule EOF ;
     public final void entryRuleLiteralTypeRule() throws RecognitionException {
         try {
-            // InternalBaseLanguage.g:630:1: ( ruleLiteralTypeRule EOF )
-            // InternalBaseLanguage.g:631:1: ruleLiteralTypeRule EOF
+            // InternalBaseLanguage.g:680:1: ( ruleLiteralTypeRule EOF )
+            // InternalBaseLanguage.g:681:1: ruleLiteralTypeRule EOF
             {
              before(grammarAccess.getLiteralTypeRuleRule()); 
             pushFollow(FOLLOW_1);
@@ -1925,21 +2077,21 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "ruleLiteralTypeRule"
-    // InternalBaseLanguage.g:638:1: ruleLiteralTypeRule : ( ( rule__LiteralTypeRule__Group__0 ) ) ;
+    // InternalBaseLanguage.g:688:1: ruleLiteralTypeRule : ( ( rule__LiteralTypeRule__Group__0 ) ) ;
     public final void ruleLiteralTypeRule() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:642:2: ( ( ( rule__LiteralTypeRule__Group__0 ) ) )
-            // InternalBaseLanguage.g:643:2: ( ( rule__LiteralTypeRule__Group__0 ) )
+            // InternalBaseLanguage.g:692:2: ( ( ( rule__LiteralTypeRule__Group__0 ) ) )
+            // InternalBaseLanguage.g:693:2: ( ( rule__LiteralTypeRule__Group__0 ) )
             {
-            // InternalBaseLanguage.g:643:2: ( ( rule__LiteralTypeRule__Group__0 ) )
-            // InternalBaseLanguage.g:644:3: ( rule__LiteralTypeRule__Group__0 )
+            // InternalBaseLanguage.g:693:2: ( ( rule__LiteralTypeRule__Group__0 ) )
+            // InternalBaseLanguage.g:694:3: ( rule__LiteralTypeRule__Group__0 )
             {
              before(grammarAccess.getLiteralTypeRuleAccess().getGroup()); 
-            // InternalBaseLanguage.g:645:3: ( rule__LiteralTypeRule__Group__0 )
-            // InternalBaseLanguage.g:645:4: rule__LiteralTypeRule__Group__0
+            // InternalBaseLanguage.g:695:3: ( rule__LiteralTypeRule__Group__0 )
+            // InternalBaseLanguage.g:695:4: rule__LiteralTypeRule__Group__0
             {
             pushFollow(FOLLOW_2);
             rule__LiteralTypeRule__Group__0();
@@ -1972,11 +2124,11 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "entryRuleInstanceTypeRule"
-    // InternalBaseLanguage.g:654:1: entryRuleInstanceTypeRule : ruleInstanceTypeRule EOF ;
+    // InternalBaseLanguage.g:704:1: entryRuleInstanceTypeRule : ruleInstanceTypeRule EOF ;
     public final void entryRuleInstanceTypeRule() throws RecognitionException {
         try {
-            // InternalBaseLanguage.g:655:1: ( ruleInstanceTypeRule EOF )
-            // InternalBaseLanguage.g:656:1: ruleInstanceTypeRule EOF
+            // InternalBaseLanguage.g:705:1: ( ruleInstanceTypeRule EOF )
+            // InternalBaseLanguage.g:706:1: ruleInstanceTypeRule EOF
             {
              before(grammarAccess.getInstanceTypeRuleRule()); 
             pushFollow(FOLLOW_1);
@@ -2002,21 +2154,21 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "ruleInstanceTypeRule"
-    // InternalBaseLanguage.g:663:1: ruleInstanceTypeRule : ( ( rule__InstanceTypeRule__Group__0 ) ) ;
+    // InternalBaseLanguage.g:713:1: ruleInstanceTypeRule : ( ( rule__InstanceTypeRule__Group__0 ) ) ;
     public final void ruleInstanceTypeRule() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:667:2: ( ( ( rule__InstanceTypeRule__Group__0 ) ) )
-            // InternalBaseLanguage.g:668:2: ( ( rule__InstanceTypeRule__Group__0 ) )
+            // InternalBaseLanguage.g:717:2: ( ( ( rule__InstanceTypeRule__Group__0 ) ) )
+            // InternalBaseLanguage.g:718:2: ( ( rule__InstanceTypeRule__Group__0 ) )
             {
-            // InternalBaseLanguage.g:668:2: ( ( rule__InstanceTypeRule__Group__0 ) )
-            // InternalBaseLanguage.g:669:3: ( rule__InstanceTypeRule__Group__0 )
+            // InternalBaseLanguage.g:718:2: ( ( rule__InstanceTypeRule__Group__0 ) )
+            // InternalBaseLanguage.g:719:3: ( rule__InstanceTypeRule__Group__0 )
             {
              before(grammarAccess.getInstanceTypeRuleAccess().getGroup()); 
-            // InternalBaseLanguage.g:670:3: ( rule__InstanceTypeRule__Group__0 )
-            // InternalBaseLanguage.g:670:4: rule__InstanceTypeRule__Group__0
+            // InternalBaseLanguage.g:720:3: ( rule__InstanceTypeRule__Group__0 )
+            // InternalBaseLanguage.g:720:4: rule__InstanceTypeRule__Group__0
             {
             pushFollow(FOLLOW_2);
             rule__InstanceTypeRule__Group__0();
@@ -2049,11 +2201,11 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "entryRuleStringTypeRule"
-    // InternalBaseLanguage.g:679:1: entryRuleStringTypeRule : ruleStringTypeRule EOF ;
+    // InternalBaseLanguage.g:729:1: entryRuleStringTypeRule : ruleStringTypeRule EOF ;
     public final void entryRuleStringTypeRule() throws RecognitionException {
         try {
-            // InternalBaseLanguage.g:680:1: ( ruleStringTypeRule EOF )
-            // InternalBaseLanguage.g:681:1: ruleStringTypeRule EOF
+            // InternalBaseLanguage.g:730:1: ( ruleStringTypeRule EOF )
+            // InternalBaseLanguage.g:731:1: ruleStringTypeRule EOF
             {
              before(grammarAccess.getStringTypeRuleRule()); 
             pushFollow(FOLLOW_1);
@@ -2079,21 +2231,21 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "ruleStringTypeRule"
-    // InternalBaseLanguage.g:688:1: ruleStringTypeRule : ( ( rule__StringTypeRule__Group__0 ) ) ;
+    // InternalBaseLanguage.g:738:1: ruleStringTypeRule : ( ( rule__StringTypeRule__Group__0 ) ) ;
     public final void ruleStringTypeRule() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:692:2: ( ( ( rule__StringTypeRule__Group__0 ) ) )
-            // InternalBaseLanguage.g:693:2: ( ( rule__StringTypeRule__Group__0 ) )
+            // InternalBaseLanguage.g:742:2: ( ( ( rule__StringTypeRule__Group__0 ) ) )
+            // InternalBaseLanguage.g:743:2: ( ( rule__StringTypeRule__Group__0 ) )
             {
-            // InternalBaseLanguage.g:693:2: ( ( rule__StringTypeRule__Group__0 ) )
-            // InternalBaseLanguage.g:694:3: ( rule__StringTypeRule__Group__0 )
+            // InternalBaseLanguage.g:743:2: ( ( rule__StringTypeRule__Group__0 ) )
+            // InternalBaseLanguage.g:744:3: ( rule__StringTypeRule__Group__0 )
             {
              before(grammarAccess.getStringTypeRuleAccess().getGroup()); 
-            // InternalBaseLanguage.g:695:3: ( rule__StringTypeRule__Group__0 )
-            // InternalBaseLanguage.g:695:4: rule__StringTypeRule__Group__0
+            // InternalBaseLanguage.g:745:3: ( rule__StringTypeRule__Group__0 )
+            // InternalBaseLanguage.g:745:4: rule__StringTypeRule__Group__0
             {
             pushFollow(FOLLOW_2);
             rule__StringTypeRule__Group__0();
@@ -2126,11 +2278,11 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "entryRuleExpressionTypeRule"
-    // InternalBaseLanguage.g:704:1: entryRuleExpressionTypeRule : ruleExpressionTypeRule EOF ;
+    // InternalBaseLanguage.g:754:1: entryRuleExpressionTypeRule : ruleExpressionTypeRule EOF ;
     public final void entryRuleExpressionTypeRule() throws RecognitionException {
         try {
-            // InternalBaseLanguage.g:705:1: ( ruleExpressionTypeRule EOF )
-            // InternalBaseLanguage.g:706:1: ruleExpressionTypeRule EOF
+            // InternalBaseLanguage.g:755:1: ( ruleExpressionTypeRule EOF )
+            // InternalBaseLanguage.g:756:1: ruleExpressionTypeRule EOF
             {
              before(grammarAccess.getExpressionTypeRuleRule()); 
             pushFollow(FOLLOW_1);
@@ -2156,21 +2308,21 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "ruleExpressionTypeRule"
-    // InternalBaseLanguage.g:713:1: ruleExpressionTypeRule : ( ( rule__ExpressionTypeRule__Group__0 ) ) ;
+    // InternalBaseLanguage.g:763:1: ruleExpressionTypeRule : ( ( rule__ExpressionTypeRule__Group__0 ) ) ;
     public final void ruleExpressionTypeRule() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:717:2: ( ( ( rule__ExpressionTypeRule__Group__0 ) ) )
-            // InternalBaseLanguage.g:718:2: ( ( rule__ExpressionTypeRule__Group__0 ) )
+            // InternalBaseLanguage.g:767:2: ( ( ( rule__ExpressionTypeRule__Group__0 ) ) )
+            // InternalBaseLanguage.g:768:2: ( ( rule__ExpressionTypeRule__Group__0 ) )
             {
-            // InternalBaseLanguage.g:718:2: ( ( rule__ExpressionTypeRule__Group__0 ) )
-            // InternalBaseLanguage.g:719:3: ( rule__ExpressionTypeRule__Group__0 )
+            // InternalBaseLanguage.g:768:2: ( ( rule__ExpressionTypeRule__Group__0 ) )
+            // InternalBaseLanguage.g:769:3: ( rule__ExpressionTypeRule__Group__0 )
             {
              before(grammarAccess.getExpressionTypeRuleAccess().getGroup()); 
-            // InternalBaseLanguage.g:720:3: ( rule__ExpressionTypeRule__Group__0 )
-            // InternalBaseLanguage.g:720:4: rule__ExpressionTypeRule__Group__0
+            // InternalBaseLanguage.g:770:3: ( rule__ExpressionTypeRule__Group__0 )
+            // InternalBaseLanguage.g:770:4: rule__ExpressionTypeRule__Group__0
             {
             pushFollow(FOLLOW_2);
             rule__ExpressionTypeRule__Group__0();
@@ -2203,11 +2355,11 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "entryRuleIntTypeRule"
-    // InternalBaseLanguage.g:729:1: entryRuleIntTypeRule : ruleIntTypeRule EOF ;
+    // InternalBaseLanguage.g:779:1: entryRuleIntTypeRule : ruleIntTypeRule EOF ;
     public final void entryRuleIntTypeRule() throws RecognitionException {
         try {
-            // InternalBaseLanguage.g:730:1: ( ruleIntTypeRule EOF )
-            // InternalBaseLanguage.g:731:1: ruleIntTypeRule EOF
+            // InternalBaseLanguage.g:780:1: ( ruleIntTypeRule EOF )
+            // InternalBaseLanguage.g:781:1: ruleIntTypeRule EOF
             {
              before(grammarAccess.getIntTypeRuleRule()); 
             pushFollow(FOLLOW_1);
@@ -2233,21 +2385,21 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "ruleIntTypeRule"
-    // InternalBaseLanguage.g:738:1: ruleIntTypeRule : ( ( rule__IntTypeRule__Group__0 ) ) ;
+    // InternalBaseLanguage.g:788:1: ruleIntTypeRule : ( ( rule__IntTypeRule__Group__0 ) ) ;
     public final void ruleIntTypeRule() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:742:2: ( ( ( rule__IntTypeRule__Group__0 ) ) )
-            // InternalBaseLanguage.g:743:2: ( ( rule__IntTypeRule__Group__0 ) )
+            // InternalBaseLanguage.g:792:2: ( ( ( rule__IntTypeRule__Group__0 ) ) )
+            // InternalBaseLanguage.g:793:2: ( ( rule__IntTypeRule__Group__0 ) )
             {
-            // InternalBaseLanguage.g:743:2: ( ( rule__IntTypeRule__Group__0 ) )
-            // InternalBaseLanguage.g:744:3: ( rule__IntTypeRule__Group__0 )
+            // InternalBaseLanguage.g:793:2: ( ( rule__IntTypeRule__Group__0 ) )
+            // InternalBaseLanguage.g:794:3: ( rule__IntTypeRule__Group__0 )
             {
              before(grammarAccess.getIntTypeRuleAccess().getGroup()); 
-            // InternalBaseLanguage.g:745:3: ( rule__IntTypeRule__Group__0 )
-            // InternalBaseLanguage.g:745:4: rule__IntTypeRule__Group__0
+            // InternalBaseLanguage.g:795:3: ( rule__IntTypeRule__Group__0 )
+            // InternalBaseLanguage.g:795:4: rule__IntTypeRule__Group__0
             {
             pushFollow(FOLLOW_2);
             rule__IntTypeRule__Group__0();
@@ -2280,11 +2432,11 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "entryRuleFloatTypeRule"
-    // InternalBaseLanguage.g:754:1: entryRuleFloatTypeRule : ruleFloatTypeRule EOF ;
+    // InternalBaseLanguage.g:804:1: entryRuleFloatTypeRule : ruleFloatTypeRule EOF ;
     public final void entryRuleFloatTypeRule() throws RecognitionException {
         try {
-            // InternalBaseLanguage.g:755:1: ( ruleFloatTypeRule EOF )
-            // InternalBaseLanguage.g:756:1: ruleFloatTypeRule EOF
+            // InternalBaseLanguage.g:805:1: ( ruleFloatTypeRule EOF )
+            // InternalBaseLanguage.g:806:1: ruleFloatTypeRule EOF
             {
              before(grammarAccess.getFloatTypeRuleRule()); 
             pushFollow(FOLLOW_1);
@@ -2310,21 +2462,21 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "ruleFloatTypeRule"
-    // InternalBaseLanguage.g:763:1: ruleFloatTypeRule : ( ( rule__FloatTypeRule__Group__0 ) ) ;
+    // InternalBaseLanguage.g:813:1: ruleFloatTypeRule : ( ( rule__FloatTypeRule__Group__0 ) ) ;
     public final void ruleFloatTypeRule() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:767:2: ( ( ( rule__FloatTypeRule__Group__0 ) ) )
-            // InternalBaseLanguage.g:768:2: ( ( rule__FloatTypeRule__Group__0 ) )
+            // InternalBaseLanguage.g:817:2: ( ( ( rule__FloatTypeRule__Group__0 ) ) )
+            // InternalBaseLanguage.g:818:2: ( ( rule__FloatTypeRule__Group__0 ) )
             {
-            // InternalBaseLanguage.g:768:2: ( ( rule__FloatTypeRule__Group__0 ) )
-            // InternalBaseLanguage.g:769:3: ( rule__FloatTypeRule__Group__0 )
+            // InternalBaseLanguage.g:818:2: ( ( rule__FloatTypeRule__Group__0 ) )
+            // InternalBaseLanguage.g:819:3: ( rule__FloatTypeRule__Group__0 )
             {
              before(grammarAccess.getFloatTypeRuleAccess().getGroup()); 
-            // InternalBaseLanguage.g:770:3: ( rule__FloatTypeRule__Group__0 )
-            // InternalBaseLanguage.g:770:4: rule__FloatTypeRule__Group__0
+            // InternalBaseLanguage.g:820:3: ( rule__FloatTypeRule__Group__0 )
+            // InternalBaseLanguage.g:820:4: rule__FloatTypeRule__Group__0
             {
             pushFollow(FOLLOW_2);
             rule__FloatTypeRule__Group__0();
@@ -2357,11 +2509,11 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "entryRuleBooleanTypeRule"
-    // InternalBaseLanguage.g:779:1: entryRuleBooleanTypeRule : ruleBooleanTypeRule EOF ;
+    // InternalBaseLanguage.g:829:1: entryRuleBooleanTypeRule : ruleBooleanTypeRule EOF ;
     public final void entryRuleBooleanTypeRule() throws RecognitionException {
         try {
-            // InternalBaseLanguage.g:780:1: ( ruleBooleanTypeRule EOF )
-            // InternalBaseLanguage.g:781:1: ruleBooleanTypeRule EOF
+            // InternalBaseLanguage.g:830:1: ( ruleBooleanTypeRule EOF )
+            // InternalBaseLanguage.g:831:1: ruleBooleanTypeRule EOF
             {
              before(grammarAccess.getBooleanTypeRuleRule()); 
             pushFollow(FOLLOW_1);
@@ -2387,21 +2539,21 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "ruleBooleanTypeRule"
-    // InternalBaseLanguage.g:788:1: ruleBooleanTypeRule : ( ( rule__BooleanTypeRule__Group__0 ) ) ;
+    // InternalBaseLanguage.g:838:1: ruleBooleanTypeRule : ( ( rule__BooleanTypeRule__Group__0 ) ) ;
     public final void ruleBooleanTypeRule() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:792:2: ( ( ( rule__BooleanTypeRule__Group__0 ) ) )
-            // InternalBaseLanguage.g:793:2: ( ( rule__BooleanTypeRule__Group__0 ) )
+            // InternalBaseLanguage.g:842:2: ( ( ( rule__BooleanTypeRule__Group__0 ) ) )
+            // InternalBaseLanguage.g:843:2: ( ( rule__BooleanTypeRule__Group__0 ) )
             {
-            // InternalBaseLanguage.g:793:2: ( ( rule__BooleanTypeRule__Group__0 ) )
-            // InternalBaseLanguage.g:794:3: ( rule__BooleanTypeRule__Group__0 )
+            // InternalBaseLanguage.g:843:2: ( ( rule__BooleanTypeRule__Group__0 ) )
+            // InternalBaseLanguage.g:844:3: ( rule__BooleanTypeRule__Group__0 )
             {
              before(grammarAccess.getBooleanTypeRuleAccess().getGroup()); 
-            // InternalBaseLanguage.g:795:3: ( rule__BooleanTypeRule__Group__0 )
-            // InternalBaseLanguage.g:795:4: rule__BooleanTypeRule__Group__0
+            // InternalBaseLanguage.g:845:3: ( rule__BooleanTypeRule__Group__0 )
+            // InternalBaseLanguage.g:845:4: rule__BooleanTypeRule__Group__0
             {
             pushFollow(FOLLOW_2);
             rule__BooleanTypeRule__Group__0();
@@ -2434,11 +2586,11 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "entryRuleVoidTypeRule"
-    // InternalBaseLanguage.g:804:1: entryRuleVoidTypeRule : ruleVoidTypeRule EOF ;
+    // InternalBaseLanguage.g:854:1: entryRuleVoidTypeRule : ruleVoidTypeRule EOF ;
     public final void entryRuleVoidTypeRule() throws RecognitionException {
         try {
-            // InternalBaseLanguage.g:805:1: ( ruleVoidTypeRule EOF )
-            // InternalBaseLanguage.g:806:1: ruleVoidTypeRule EOF
+            // InternalBaseLanguage.g:855:1: ( ruleVoidTypeRule EOF )
+            // InternalBaseLanguage.g:856:1: ruleVoidTypeRule EOF
             {
              before(grammarAccess.getVoidTypeRuleRule()); 
             pushFollow(FOLLOW_1);
@@ -2464,21 +2616,21 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "ruleVoidTypeRule"
-    // InternalBaseLanguage.g:813:1: ruleVoidTypeRule : ( ( rule__VoidTypeRule__Group__0 ) ) ;
+    // InternalBaseLanguage.g:863:1: ruleVoidTypeRule : ( ( rule__VoidTypeRule__Group__0 ) ) ;
     public final void ruleVoidTypeRule() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:817:2: ( ( ( rule__VoidTypeRule__Group__0 ) ) )
-            // InternalBaseLanguage.g:818:2: ( ( rule__VoidTypeRule__Group__0 ) )
+            // InternalBaseLanguage.g:867:2: ( ( ( rule__VoidTypeRule__Group__0 ) ) )
+            // InternalBaseLanguage.g:868:2: ( ( rule__VoidTypeRule__Group__0 ) )
             {
-            // InternalBaseLanguage.g:818:2: ( ( rule__VoidTypeRule__Group__0 ) )
-            // InternalBaseLanguage.g:819:3: ( rule__VoidTypeRule__Group__0 )
+            // InternalBaseLanguage.g:868:2: ( ( rule__VoidTypeRule__Group__0 ) )
+            // InternalBaseLanguage.g:869:3: ( rule__VoidTypeRule__Group__0 )
             {
              before(grammarAccess.getVoidTypeRuleAccess().getGroup()); 
-            // InternalBaseLanguage.g:820:3: ( rule__VoidTypeRule__Group__0 )
-            // InternalBaseLanguage.g:820:4: rule__VoidTypeRule__Group__0
+            // InternalBaseLanguage.g:870:3: ( rule__VoidTypeRule__Group__0 )
+            // InternalBaseLanguage.g:870:4: rule__VoidTypeRule__Group__0
             {
             pushFollow(FOLLOW_2);
             rule__VoidTypeRule__Group__0();
@@ -2511,11 +2663,11 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "entryRuleDataTypeRule"
-    // InternalBaseLanguage.g:829:1: entryRuleDataTypeRule : ruleDataTypeRule EOF ;
+    // InternalBaseLanguage.g:879:1: entryRuleDataTypeRule : ruleDataTypeRule EOF ;
     public final void entryRuleDataTypeRule() throws RecognitionException {
         try {
-            // InternalBaseLanguage.g:830:1: ( ruleDataTypeRule EOF )
-            // InternalBaseLanguage.g:831:1: ruleDataTypeRule EOF
+            // InternalBaseLanguage.g:880:1: ( ruleDataTypeRule EOF )
+            // InternalBaseLanguage.g:881:1: ruleDataTypeRule EOF
             {
              before(grammarAccess.getDataTypeRuleRule()); 
             pushFollow(FOLLOW_1);
@@ -2541,21 +2693,21 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "ruleDataTypeRule"
-    // InternalBaseLanguage.g:838:1: ruleDataTypeRule : ( ( rule__DataTypeRule__Group__0 ) ) ;
+    // InternalBaseLanguage.g:888:1: ruleDataTypeRule : ( ( rule__DataTypeRule__Group__0 ) ) ;
     public final void ruleDataTypeRule() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:842:2: ( ( ( rule__DataTypeRule__Group__0 ) ) )
-            // InternalBaseLanguage.g:843:2: ( ( rule__DataTypeRule__Group__0 ) )
+            // InternalBaseLanguage.g:892:2: ( ( ( rule__DataTypeRule__Group__0 ) ) )
+            // InternalBaseLanguage.g:893:2: ( ( rule__DataTypeRule__Group__0 ) )
             {
-            // InternalBaseLanguage.g:843:2: ( ( rule__DataTypeRule__Group__0 ) )
-            // InternalBaseLanguage.g:844:3: ( rule__DataTypeRule__Group__0 )
+            // InternalBaseLanguage.g:893:2: ( ( rule__DataTypeRule__Group__0 ) )
+            // InternalBaseLanguage.g:894:3: ( rule__DataTypeRule__Group__0 )
             {
              before(grammarAccess.getDataTypeRuleAccess().getGroup()); 
-            // InternalBaseLanguage.g:845:3: ( rule__DataTypeRule__Group__0 )
-            // InternalBaseLanguage.g:845:4: rule__DataTypeRule__Group__0
+            // InternalBaseLanguage.g:895:3: ( rule__DataTypeRule__Group__0 )
+            // InternalBaseLanguage.g:895:4: rule__DataTypeRule__Group__0
             {
             pushFollow(FOLLOW_2);
             rule__DataTypeRule__Group__0();
@@ -2588,11 +2740,11 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "entryRuleArrayTypeRule"
-    // InternalBaseLanguage.g:854:1: entryRuleArrayTypeRule : ruleArrayTypeRule EOF ;
+    // InternalBaseLanguage.g:904:1: entryRuleArrayTypeRule : ruleArrayTypeRule EOF ;
     public final void entryRuleArrayTypeRule() throws RecognitionException {
         try {
-            // InternalBaseLanguage.g:855:1: ( ruleArrayTypeRule EOF )
-            // InternalBaseLanguage.g:856:1: ruleArrayTypeRule EOF
+            // InternalBaseLanguage.g:905:1: ( ruleArrayTypeRule EOF )
+            // InternalBaseLanguage.g:906:1: ruleArrayTypeRule EOF
             {
              before(grammarAccess.getArrayTypeRuleRule()); 
             pushFollow(FOLLOW_1);
@@ -2618,21 +2770,21 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "ruleArrayTypeRule"
-    // InternalBaseLanguage.g:863:1: ruleArrayTypeRule : ( ( rule__ArrayTypeRule__Group__0 ) ) ;
+    // InternalBaseLanguage.g:913:1: ruleArrayTypeRule : ( ( rule__ArrayTypeRule__Group__0 ) ) ;
     public final void ruleArrayTypeRule() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:867:2: ( ( ( rule__ArrayTypeRule__Group__0 ) ) )
-            // InternalBaseLanguage.g:868:2: ( ( rule__ArrayTypeRule__Group__0 ) )
+            // InternalBaseLanguage.g:917:2: ( ( ( rule__ArrayTypeRule__Group__0 ) ) )
+            // InternalBaseLanguage.g:918:2: ( ( rule__ArrayTypeRule__Group__0 ) )
             {
-            // InternalBaseLanguage.g:868:2: ( ( rule__ArrayTypeRule__Group__0 ) )
-            // InternalBaseLanguage.g:869:3: ( rule__ArrayTypeRule__Group__0 )
+            // InternalBaseLanguage.g:918:2: ( ( rule__ArrayTypeRule__Group__0 ) )
+            // InternalBaseLanguage.g:919:3: ( rule__ArrayTypeRule__Group__0 )
             {
              before(grammarAccess.getArrayTypeRuleAccess().getGroup()); 
-            // InternalBaseLanguage.g:870:3: ( rule__ArrayTypeRule__Group__0 )
-            // InternalBaseLanguage.g:870:4: rule__ArrayTypeRule__Group__0
+            // InternalBaseLanguage.g:920:3: ( rule__ArrayTypeRule__Group__0 )
+            // InternalBaseLanguage.g:920:4: rule__ArrayTypeRule__Group__0
             {
             pushFollow(FOLLOW_2);
             rule__ArrayTypeRule__Group__0();
@@ -2665,11 +2817,11 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "entryRuleParameterRule"
-    // InternalBaseLanguage.g:879:1: entryRuleParameterRule : ruleParameterRule EOF ;
+    // InternalBaseLanguage.g:929:1: entryRuleParameterRule : ruleParameterRule EOF ;
     public final void entryRuleParameterRule() throws RecognitionException {
         try {
-            // InternalBaseLanguage.g:880:1: ( ruleParameterRule EOF )
-            // InternalBaseLanguage.g:881:1: ruleParameterRule EOF
+            // InternalBaseLanguage.g:930:1: ( ruleParameterRule EOF )
+            // InternalBaseLanguage.g:931:1: ruleParameterRule EOF
             {
              before(grammarAccess.getParameterRuleRule()); 
             pushFollow(FOLLOW_1);
@@ -2695,21 +2847,21 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "ruleParameterRule"
-    // InternalBaseLanguage.g:888:1: ruleParameterRule : ( ( rule__ParameterRule__Group__0 ) ) ;
+    // InternalBaseLanguage.g:938:1: ruleParameterRule : ( ( rule__ParameterRule__Group__0 ) ) ;
     public final void ruleParameterRule() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:892:2: ( ( ( rule__ParameterRule__Group__0 ) ) )
-            // InternalBaseLanguage.g:893:2: ( ( rule__ParameterRule__Group__0 ) )
+            // InternalBaseLanguage.g:942:2: ( ( ( rule__ParameterRule__Group__0 ) ) )
+            // InternalBaseLanguage.g:943:2: ( ( rule__ParameterRule__Group__0 ) )
             {
-            // InternalBaseLanguage.g:893:2: ( ( rule__ParameterRule__Group__0 ) )
-            // InternalBaseLanguage.g:894:3: ( rule__ParameterRule__Group__0 )
+            // InternalBaseLanguage.g:943:2: ( ( rule__ParameterRule__Group__0 ) )
+            // InternalBaseLanguage.g:944:3: ( rule__ParameterRule__Group__0 )
             {
              before(grammarAccess.getParameterRuleAccess().getGroup()); 
-            // InternalBaseLanguage.g:895:3: ( rule__ParameterRule__Group__0 )
-            // InternalBaseLanguage.g:895:4: rule__ParameterRule__Group__0
+            // InternalBaseLanguage.g:945:3: ( rule__ParameterRule__Group__0 )
+            // InternalBaseLanguage.g:945:4: rule__ParameterRule__Group__0
             {
             pushFollow(FOLLOW_2);
             rule__ParameterRule__Group__0();
@@ -2742,11 +2894,11 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "entryRuleFunctionNameRule"
-    // InternalBaseLanguage.g:904:1: entryRuleFunctionNameRule : ruleFunctionNameRule EOF ;
+    // InternalBaseLanguage.g:954:1: entryRuleFunctionNameRule : ruleFunctionNameRule EOF ;
     public final void entryRuleFunctionNameRule() throws RecognitionException {
         try {
-            // InternalBaseLanguage.g:905:1: ( ruleFunctionNameRule EOF )
-            // InternalBaseLanguage.g:906:1: ruleFunctionNameRule EOF
+            // InternalBaseLanguage.g:955:1: ( ruleFunctionNameRule EOF )
+            // InternalBaseLanguage.g:956:1: ruleFunctionNameRule EOF
             {
              before(grammarAccess.getFunctionNameRuleRule()); 
             pushFollow(FOLLOW_1);
@@ -2772,21 +2924,21 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "ruleFunctionNameRule"
-    // InternalBaseLanguage.g:913:1: ruleFunctionNameRule : ( ( rule__FunctionNameRule__DefinitionAssignment ) ) ;
+    // InternalBaseLanguage.g:963:1: ruleFunctionNameRule : ( ( rule__FunctionNameRule__DefinitionAssignment ) ) ;
     public final void ruleFunctionNameRule() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:917:2: ( ( ( rule__FunctionNameRule__DefinitionAssignment ) ) )
-            // InternalBaseLanguage.g:918:2: ( ( rule__FunctionNameRule__DefinitionAssignment ) )
+            // InternalBaseLanguage.g:967:2: ( ( ( rule__FunctionNameRule__DefinitionAssignment ) ) )
+            // InternalBaseLanguage.g:968:2: ( ( rule__FunctionNameRule__DefinitionAssignment ) )
             {
-            // InternalBaseLanguage.g:918:2: ( ( rule__FunctionNameRule__DefinitionAssignment ) )
-            // InternalBaseLanguage.g:919:3: ( rule__FunctionNameRule__DefinitionAssignment )
+            // InternalBaseLanguage.g:968:2: ( ( rule__FunctionNameRule__DefinitionAssignment ) )
+            // InternalBaseLanguage.g:969:3: ( rule__FunctionNameRule__DefinitionAssignment )
             {
              before(grammarAccess.getFunctionNameRuleAccess().getDefinitionAssignment()); 
-            // InternalBaseLanguage.g:920:3: ( rule__FunctionNameRule__DefinitionAssignment )
-            // InternalBaseLanguage.g:920:4: rule__FunctionNameRule__DefinitionAssignment
+            // InternalBaseLanguage.g:970:3: ( rule__FunctionNameRule__DefinitionAssignment )
+            // InternalBaseLanguage.g:970:4: rule__FunctionNameRule__DefinitionAssignment
             {
             pushFollow(FOLLOW_2);
             rule__FunctionNameRule__DefinitionAssignment();
@@ -2819,11 +2971,11 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "entryRuleQualifiedName"
-    // InternalBaseLanguage.g:929:1: entryRuleQualifiedName : ruleQualifiedName EOF ;
+    // InternalBaseLanguage.g:979:1: entryRuleQualifiedName : ruleQualifiedName EOF ;
     public final void entryRuleQualifiedName() throws RecognitionException {
         try {
-            // InternalBaseLanguage.g:930:1: ( ruleQualifiedName EOF )
-            // InternalBaseLanguage.g:931:1: ruleQualifiedName EOF
+            // InternalBaseLanguage.g:980:1: ( ruleQualifiedName EOF )
+            // InternalBaseLanguage.g:981:1: ruleQualifiedName EOF
             {
              before(grammarAccess.getQualifiedNameRule()); 
             pushFollow(FOLLOW_1);
@@ -2849,21 +3001,21 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "ruleQualifiedName"
-    // InternalBaseLanguage.g:938:1: ruleQualifiedName : ( ( rule__QualifiedName__Group__0 ) ) ;
+    // InternalBaseLanguage.g:988:1: ruleQualifiedName : ( ( rule__QualifiedName__Group__0 ) ) ;
     public final void ruleQualifiedName() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:942:2: ( ( ( rule__QualifiedName__Group__0 ) ) )
-            // InternalBaseLanguage.g:943:2: ( ( rule__QualifiedName__Group__0 ) )
+            // InternalBaseLanguage.g:992:2: ( ( ( rule__QualifiedName__Group__0 ) ) )
+            // InternalBaseLanguage.g:993:2: ( ( rule__QualifiedName__Group__0 ) )
             {
-            // InternalBaseLanguage.g:943:2: ( ( rule__QualifiedName__Group__0 ) )
-            // InternalBaseLanguage.g:944:3: ( rule__QualifiedName__Group__0 )
+            // InternalBaseLanguage.g:993:2: ( ( rule__QualifiedName__Group__0 ) )
+            // InternalBaseLanguage.g:994:3: ( rule__QualifiedName__Group__0 )
             {
              before(grammarAccess.getQualifiedNameAccess().getGroup()); 
-            // InternalBaseLanguage.g:945:3: ( rule__QualifiedName__Group__0 )
-            // InternalBaseLanguage.g:945:4: rule__QualifiedName__Group__0
+            // InternalBaseLanguage.g:995:3: ( rule__QualifiedName__Group__0 )
+            // InternalBaseLanguage.g:995:4: rule__QualifiedName__Group__0
             {
             pushFollow(FOLLOW_2);
             rule__QualifiedName__Group__0();
@@ -2896,11 +3048,11 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "entryRuleStringOrId"
-    // InternalBaseLanguage.g:954:1: entryRuleStringOrId : ruleStringOrId EOF ;
+    // InternalBaseLanguage.g:1004:1: entryRuleStringOrId : ruleStringOrId EOF ;
     public final void entryRuleStringOrId() throws RecognitionException {
         try {
-            // InternalBaseLanguage.g:955:1: ( ruleStringOrId EOF )
-            // InternalBaseLanguage.g:956:1: ruleStringOrId EOF
+            // InternalBaseLanguage.g:1005:1: ( ruleStringOrId EOF )
+            // InternalBaseLanguage.g:1006:1: ruleStringOrId EOF
             {
              before(grammarAccess.getStringOrIdRule()); 
             pushFollow(FOLLOW_1);
@@ -2926,21 +3078,21 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "ruleStringOrId"
-    // InternalBaseLanguage.g:963:1: ruleStringOrId : ( ( rule__StringOrId__Alternatives ) ) ;
+    // InternalBaseLanguage.g:1013:1: ruleStringOrId : ( ( rule__StringOrId__Alternatives ) ) ;
     public final void ruleStringOrId() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:967:2: ( ( ( rule__StringOrId__Alternatives ) ) )
-            // InternalBaseLanguage.g:968:2: ( ( rule__StringOrId__Alternatives ) )
+            // InternalBaseLanguage.g:1017:2: ( ( ( rule__StringOrId__Alternatives ) ) )
+            // InternalBaseLanguage.g:1018:2: ( ( rule__StringOrId__Alternatives ) )
             {
-            // InternalBaseLanguage.g:968:2: ( ( rule__StringOrId__Alternatives ) )
-            // InternalBaseLanguage.g:969:3: ( rule__StringOrId__Alternatives )
+            // InternalBaseLanguage.g:1018:2: ( ( rule__StringOrId__Alternatives ) )
+            // InternalBaseLanguage.g:1019:3: ( rule__StringOrId__Alternatives )
             {
              before(grammarAccess.getStringOrIdAccess().getAlternatives()); 
-            // InternalBaseLanguage.g:970:3: ( rule__StringOrId__Alternatives )
-            // InternalBaseLanguage.g:970:4: rule__StringOrId__Alternatives
+            // InternalBaseLanguage.g:1020:3: ( rule__StringOrId__Alternatives )
+            // InternalBaseLanguage.g:1020:4: rule__StringOrId__Alternatives
             {
             pushFollow(FOLLOW_2);
             rule__StringOrId__Alternatives();
@@ -2973,21 +3125,21 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "ruleComparisonOperatorRule"
-    // InternalBaseLanguage.g:979:1: ruleComparisonOperatorRule : ( ( rule__ComparisonOperatorRule__Alternatives ) ) ;
+    // InternalBaseLanguage.g:1029:1: ruleComparisonOperatorRule : ( ( rule__ComparisonOperatorRule__Alternatives ) ) ;
     public final void ruleComparisonOperatorRule() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:983:1: ( ( ( rule__ComparisonOperatorRule__Alternatives ) ) )
-            // InternalBaseLanguage.g:984:2: ( ( rule__ComparisonOperatorRule__Alternatives ) )
+            // InternalBaseLanguage.g:1033:1: ( ( ( rule__ComparisonOperatorRule__Alternatives ) ) )
+            // InternalBaseLanguage.g:1034:2: ( ( rule__ComparisonOperatorRule__Alternatives ) )
             {
-            // InternalBaseLanguage.g:984:2: ( ( rule__ComparisonOperatorRule__Alternatives ) )
-            // InternalBaseLanguage.g:985:3: ( rule__ComparisonOperatorRule__Alternatives )
+            // InternalBaseLanguage.g:1034:2: ( ( rule__ComparisonOperatorRule__Alternatives ) )
+            // InternalBaseLanguage.g:1035:3: ( rule__ComparisonOperatorRule__Alternatives )
             {
              before(grammarAccess.getComparisonOperatorRuleAccess().getAlternatives()); 
-            // InternalBaseLanguage.g:986:3: ( rule__ComparisonOperatorRule__Alternatives )
-            // InternalBaseLanguage.g:986:4: rule__ComparisonOperatorRule__Alternatives
+            // InternalBaseLanguage.g:1036:3: ( rule__ComparisonOperatorRule__Alternatives )
+            // InternalBaseLanguage.g:1036:4: rule__ComparisonOperatorRule__Alternatives
             {
             pushFollow(FOLLOW_2);
             rule__ComparisonOperatorRule__Alternatives();
@@ -3020,21 +3172,21 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "ruleAddOrSubtractOperatorRule"
-    // InternalBaseLanguage.g:995:1: ruleAddOrSubtractOperatorRule : ( ( rule__AddOrSubtractOperatorRule__Alternatives ) ) ;
+    // InternalBaseLanguage.g:1045:1: ruleAddOrSubtractOperatorRule : ( ( rule__AddOrSubtractOperatorRule__Alternatives ) ) ;
     public final void ruleAddOrSubtractOperatorRule() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:999:1: ( ( ( rule__AddOrSubtractOperatorRule__Alternatives ) ) )
-            // InternalBaseLanguage.g:1000:2: ( ( rule__AddOrSubtractOperatorRule__Alternatives ) )
+            // InternalBaseLanguage.g:1049:1: ( ( ( rule__AddOrSubtractOperatorRule__Alternatives ) ) )
+            // InternalBaseLanguage.g:1050:2: ( ( rule__AddOrSubtractOperatorRule__Alternatives ) )
             {
-            // InternalBaseLanguage.g:1000:2: ( ( rule__AddOrSubtractOperatorRule__Alternatives ) )
-            // InternalBaseLanguage.g:1001:3: ( rule__AddOrSubtractOperatorRule__Alternatives )
+            // InternalBaseLanguage.g:1050:2: ( ( rule__AddOrSubtractOperatorRule__Alternatives ) )
+            // InternalBaseLanguage.g:1051:3: ( rule__AddOrSubtractOperatorRule__Alternatives )
             {
              before(grammarAccess.getAddOrSubtractOperatorRuleAccess().getAlternatives()); 
-            // InternalBaseLanguage.g:1002:3: ( rule__AddOrSubtractOperatorRule__Alternatives )
-            // InternalBaseLanguage.g:1002:4: rule__AddOrSubtractOperatorRule__Alternatives
+            // InternalBaseLanguage.g:1052:3: ( rule__AddOrSubtractOperatorRule__Alternatives )
+            // InternalBaseLanguage.g:1052:4: rule__AddOrSubtractOperatorRule__Alternatives
             {
             pushFollow(FOLLOW_2);
             rule__AddOrSubtractOperatorRule__Alternatives();
@@ -3067,21 +3219,21 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "ruleMultiplyDivideModuloOperatorRule"
-    // InternalBaseLanguage.g:1011:1: ruleMultiplyDivideModuloOperatorRule : ( ( rule__MultiplyDivideModuloOperatorRule__Alternatives ) ) ;
+    // InternalBaseLanguage.g:1061:1: ruleMultiplyDivideModuloOperatorRule : ( ( rule__MultiplyDivideModuloOperatorRule__Alternatives ) ) ;
     public final void ruleMultiplyDivideModuloOperatorRule() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:1015:1: ( ( ( rule__MultiplyDivideModuloOperatorRule__Alternatives ) ) )
-            // InternalBaseLanguage.g:1016:2: ( ( rule__MultiplyDivideModuloOperatorRule__Alternatives ) )
+            // InternalBaseLanguage.g:1065:1: ( ( ( rule__MultiplyDivideModuloOperatorRule__Alternatives ) ) )
+            // InternalBaseLanguage.g:1066:2: ( ( rule__MultiplyDivideModuloOperatorRule__Alternatives ) )
             {
-            // InternalBaseLanguage.g:1016:2: ( ( rule__MultiplyDivideModuloOperatorRule__Alternatives ) )
-            // InternalBaseLanguage.g:1017:3: ( rule__MultiplyDivideModuloOperatorRule__Alternatives )
+            // InternalBaseLanguage.g:1066:2: ( ( rule__MultiplyDivideModuloOperatorRule__Alternatives ) )
+            // InternalBaseLanguage.g:1067:3: ( rule__MultiplyDivideModuloOperatorRule__Alternatives )
             {
              before(grammarAccess.getMultiplyDivideModuloOperatorRuleAccess().getAlternatives()); 
-            // InternalBaseLanguage.g:1018:3: ( rule__MultiplyDivideModuloOperatorRule__Alternatives )
-            // InternalBaseLanguage.g:1018:4: rule__MultiplyDivideModuloOperatorRule__Alternatives
+            // InternalBaseLanguage.g:1068:3: ( rule__MultiplyDivideModuloOperatorRule__Alternatives )
+            // InternalBaseLanguage.g:1068:4: rule__MultiplyDivideModuloOperatorRule__Alternatives
             {
             pushFollow(FOLLOW_2);
             rule__MultiplyDivideModuloOperatorRule__Alternatives();
@@ -3114,21 +3266,21 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "ruleFactorRule"
-    // InternalBaseLanguage.g:1027:1: ruleFactorRule : ( ( rule__FactorRule__Alternatives ) ) ;
+    // InternalBaseLanguage.g:1077:1: ruleFactorRule : ( ( rule__FactorRule__Alternatives ) ) ;
     public final void ruleFactorRule() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:1031:1: ( ( ( rule__FactorRule__Alternatives ) ) )
-            // InternalBaseLanguage.g:1032:2: ( ( rule__FactorRule__Alternatives ) )
+            // InternalBaseLanguage.g:1081:1: ( ( ( rule__FactorRule__Alternatives ) ) )
+            // InternalBaseLanguage.g:1082:2: ( ( rule__FactorRule__Alternatives ) )
             {
-            // InternalBaseLanguage.g:1032:2: ( ( rule__FactorRule__Alternatives ) )
-            // InternalBaseLanguage.g:1033:3: ( rule__FactorRule__Alternatives )
+            // InternalBaseLanguage.g:1082:2: ( ( rule__FactorRule__Alternatives ) )
+            // InternalBaseLanguage.g:1083:3: ( rule__FactorRule__Alternatives )
             {
              before(grammarAccess.getFactorRuleAccess().getAlternatives()); 
-            // InternalBaseLanguage.g:1034:3: ( rule__FactorRule__Alternatives )
-            // InternalBaseLanguage.g:1034:4: rule__FactorRule__Alternatives
+            // InternalBaseLanguage.g:1084:3: ( rule__FactorRule__Alternatives )
+            // InternalBaseLanguage.g:1084:4: rule__FactorRule__Alternatives
             {
             pushFollow(FOLLOW_2);
             rule__FactorRule__Alternatives();
@@ -3161,53 +3313,21 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__LiteralOrReferenceRule__Alternatives"
-    // InternalBaseLanguage.g:1042:1: rule__LiteralOrReferenceRule__Alternatives : ( ( ruleCallRule ) | ( ruleLiteralRule ) | ( ruleParanthesesRule ) | ( ruleValueReferenceRule ) );
+    // InternalBaseLanguage.g:1092:1: rule__LiteralOrReferenceRule__Alternatives : ( ( ruleCallRule ) | ( ruleLiteralRule ) | ( ruleParanthesesRule ) | ( ruleValueReferenceRule ) );
     public final void rule__LiteralOrReferenceRule__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:1046:1: ( ( ruleCallRule ) | ( ruleLiteralRule ) | ( ruleParanthesesRule ) | ( ruleValueReferenceRule ) )
+            // InternalBaseLanguage.g:1096:1: ( ( ruleCallRule ) | ( ruleLiteralRule ) | ( ruleParanthesesRule ) | ( ruleValueReferenceRule ) )
             int alt1=4;
-            switch ( input.LA(1) ) {
-            case RULE_QUOTED_ID:
-            case RULE_ID:
-                {
-                alt1=1;
-                }
-                break;
-            case RULE_DOUBLE:
-            case RULE_INT:
-            case RULE_STRING:
-            case 15:
-            case 71:
-                {
-                alt1=2;
-                }
-                break;
-            case 51:
-                {
-                alt1=3;
-                }
-                break;
-            case 54:
-                {
-                alt1=4;
-                }
-                break;
-            default:
-                NoViableAltException nvae =
-                    new NoViableAltException("", 1, 0, input);
-
-                throw nvae;
-            }
-
+            alt1 = dfa1.predict(input);
             switch (alt1) {
                 case 1 :
-                    // InternalBaseLanguage.g:1047:2: ( ruleCallRule )
+                    // InternalBaseLanguage.g:1097:2: ( ruleCallRule )
                     {
-                    // InternalBaseLanguage.g:1047:2: ( ruleCallRule )
-                    // InternalBaseLanguage.g:1048:3: ruleCallRule
+                    // InternalBaseLanguage.g:1097:2: ( ruleCallRule )
+                    // InternalBaseLanguage.g:1098:3: ruleCallRule
                     {
                      before(grammarAccess.getLiteralOrReferenceRuleAccess().getCallRuleParserRuleCall_0()); 
                     pushFollow(FOLLOW_2);
@@ -3223,10 +3343,10 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
                     }
                     break;
                 case 2 :
-                    // InternalBaseLanguage.g:1053:2: ( ruleLiteralRule )
+                    // InternalBaseLanguage.g:1103:2: ( ruleLiteralRule )
                     {
-                    // InternalBaseLanguage.g:1053:2: ( ruleLiteralRule )
-                    // InternalBaseLanguage.g:1054:3: ruleLiteralRule
+                    // InternalBaseLanguage.g:1103:2: ( ruleLiteralRule )
+                    // InternalBaseLanguage.g:1104:3: ruleLiteralRule
                     {
                      before(grammarAccess.getLiteralOrReferenceRuleAccess().getLiteralRuleParserRuleCall_1()); 
                     pushFollow(FOLLOW_2);
@@ -3242,10 +3362,10 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
                     }
                     break;
                 case 3 :
-                    // InternalBaseLanguage.g:1059:2: ( ruleParanthesesRule )
+                    // InternalBaseLanguage.g:1109:2: ( ruleParanthesesRule )
                     {
-                    // InternalBaseLanguage.g:1059:2: ( ruleParanthesesRule )
-                    // InternalBaseLanguage.g:1060:3: ruleParanthesesRule
+                    // InternalBaseLanguage.g:1109:2: ( ruleParanthesesRule )
+                    // InternalBaseLanguage.g:1110:3: ruleParanthesesRule
                     {
                      before(grammarAccess.getLiteralOrReferenceRuleAccess().getParanthesesRuleParserRuleCall_2()); 
                     pushFollow(FOLLOW_2);
@@ -3261,10 +3381,10 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
                     }
                     break;
                 case 4 :
-                    // InternalBaseLanguage.g:1065:2: ( ruleValueReferenceRule )
+                    // InternalBaseLanguage.g:1115:2: ( ruleValueReferenceRule )
                     {
-                    // InternalBaseLanguage.g:1065:2: ( ruleValueReferenceRule )
-                    // InternalBaseLanguage.g:1066:3: ruleValueReferenceRule
+                    // InternalBaseLanguage.g:1115:2: ( ruleValueReferenceRule )
+                    // InternalBaseLanguage.g:1116:3: ruleValueReferenceRule
                     {
                      before(grammarAccess.getLiteralOrReferenceRuleAccess().getValueReferenceRuleParserRuleCall_3()); 
                     pushFollow(FOLLOW_2);
@@ -3297,13 +3417,13 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__LiteralRule__Alternatives"
-    // InternalBaseLanguage.g:1075:1: rule__LiteralRule__Alternatives : ( ( ruleNumberLiteralRule ) | ( ruleStringLiteralRule ) | ( ruleBooleanLiteralRule ) );
+    // InternalBaseLanguage.g:1125:1: rule__LiteralRule__Alternatives : ( ( ruleNumberLiteralRule ) | ( ruleStringLiteralRule ) | ( ruleBooleanLiteralRule ) );
     public final void rule__LiteralRule__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:1079:1: ( ( ruleNumberLiteralRule ) | ( ruleStringLiteralRule ) | ( ruleBooleanLiteralRule ) )
+            // InternalBaseLanguage.g:1129:1: ( ( ruleNumberLiteralRule ) | ( ruleStringLiteralRule ) | ( ruleBooleanLiteralRule ) )
             int alt2=3;
             switch ( input.LA(1) ) {
             case RULE_DOUBLE:
@@ -3318,7 +3438,7 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
                 }
                 break;
             case 15:
-            case 71:
+            case 74:
                 {
                 alt2=3;
                 }
@@ -3332,10 +3452,10 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
             switch (alt2) {
                 case 1 :
-                    // InternalBaseLanguage.g:1080:2: ( ruleNumberLiteralRule )
+                    // InternalBaseLanguage.g:1130:2: ( ruleNumberLiteralRule )
                     {
-                    // InternalBaseLanguage.g:1080:2: ( ruleNumberLiteralRule )
-                    // InternalBaseLanguage.g:1081:3: ruleNumberLiteralRule
+                    // InternalBaseLanguage.g:1130:2: ( ruleNumberLiteralRule )
+                    // InternalBaseLanguage.g:1131:3: ruleNumberLiteralRule
                     {
                      before(grammarAccess.getLiteralRuleAccess().getNumberLiteralRuleParserRuleCall_0()); 
                     pushFollow(FOLLOW_2);
@@ -3351,10 +3471,10 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
                     }
                     break;
                 case 2 :
-                    // InternalBaseLanguage.g:1086:2: ( ruleStringLiteralRule )
+                    // InternalBaseLanguage.g:1136:2: ( ruleStringLiteralRule )
                     {
-                    // InternalBaseLanguage.g:1086:2: ( ruleStringLiteralRule )
-                    // InternalBaseLanguage.g:1087:3: ruleStringLiteralRule
+                    // InternalBaseLanguage.g:1136:2: ( ruleStringLiteralRule )
+                    // InternalBaseLanguage.g:1137:3: ruleStringLiteralRule
                     {
                      before(grammarAccess.getLiteralRuleAccess().getStringLiteralRuleParserRuleCall_1()); 
                     pushFollow(FOLLOW_2);
@@ -3370,10 +3490,10 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
                     }
                     break;
                 case 3 :
-                    // InternalBaseLanguage.g:1092:2: ( ruleBooleanLiteralRule )
+                    // InternalBaseLanguage.g:1142:2: ( ruleBooleanLiteralRule )
                     {
-                    // InternalBaseLanguage.g:1092:2: ( ruleBooleanLiteralRule )
-                    // InternalBaseLanguage.g:1093:3: ruleBooleanLiteralRule
+                    // InternalBaseLanguage.g:1142:2: ( ruleBooleanLiteralRule )
+                    // InternalBaseLanguage.g:1143:3: ruleBooleanLiteralRule
                     {
                      before(grammarAccess.getLiteralRuleAccess().getBooleanLiteralRuleParserRuleCall_2()); 
                     pushFollow(FOLLOW_2);
@@ -3406,13 +3526,13 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__NumberLiteralRule__Alternatives"
-    // InternalBaseLanguage.g:1102:1: rule__NumberLiteralRule__Alternatives : ( ( ruleDoubleLiteralRule ) | ( ruleIntegerLiteralRule ) );
+    // InternalBaseLanguage.g:1152:1: rule__NumberLiteralRule__Alternatives : ( ( ruleDoubleLiteralRule ) | ( ruleIntegerLiteralRule ) );
     public final void rule__NumberLiteralRule__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:1106:1: ( ( ruleDoubleLiteralRule ) | ( ruleIntegerLiteralRule ) )
+            // InternalBaseLanguage.g:1156:1: ( ( ruleDoubleLiteralRule ) | ( ruleIntegerLiteralRule ) )
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -3430,10 +3550,10 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
             }
             switch (alt3) {
                 case 1 :
-                    // InternalBaseLanguage.g:1107:2: ( ruleDoubleLiteralRule )
+                    // InternalBaseLanguage.g:1157:2: ( ruleDoubleLiteralRule )
                     {
-                    // InternalBaseLanguage.g:1107:2: ( ruleDoubleLiteralRule )
-                    // InternalBaseLanguage.g:1108:3: ruleDoubleLiteralRule
+                    // InternalBaseLanguage.g:1157:2: ( ruleDoubleLiteralRule )
+                    // InternalBaseLanguage.g:1158:3: ruleDoubleLiteralRule
                     {
                      before(grammarAccess.getNumberLiteralRuleAccess().getDoubleLiteralRuleParserRuleCall_0()); 
                     pushFollow(FOLLOW_2);
@@ -3449,10 +3569,10 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
                     }
                     break;
                 case 2 :
-                    // InternalBaseLanguage.g:1113:2: ( ruleIntegerLiteralRule )
+                    // InternalBaseLanguage.g:1163:2: ( ruleIntegerLiteralRule )
                     {
-                    // InternalBaseLanguage.g:1113:2: ( ruleIntegerLiteralRule )
-                    // InternalBaseLanguage.g:1114:3: ruleIntegerLiteralRule
+                    // InternalBaseLanguage.g:1163:2: ( ruleIntegerLiteralRule )
+                    // InternalBaseLanguage.g:1164:3: ruleIntegerLiteralRule
                     {
                      before(grammarAccess.getNumberLiteralRuleAccess().getIntegerLiteralRuleParserRuleCall_1()); 
                     pushFollow(FOLLOW_2);
@@ -3485,17 +3605,17 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__BooleanLiteralRule__Alternatives_1"
-    // InternalBaseLanguage.g:1123:1: rule__BooleanLiteralRule__Alternatives_1 : ( ( ( rule__BooleanLiteralRule__ValueAssignment_1_0 ) ) | ( 'false' ) );
+    // InternalBaseLanguage.g:1173:1: rule__BooleanLiteralRule__Alternatives_1 : ( ( ( rule__BooleanLiteralRule__ValueAssignment_1_0 ) ) | ( 'false' ) );
     public final void rule__BooleanLiteralRule__Alternatives_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:1127:1: ( ( ( rule__BooleanLiteralRule__ValueAssignment_1_0 ) ) | ( 'false' ) )
+            // InternalBaseLanguage.g:1177:1: ( ( ( rule__BooleanLiteralRule__ValueAssignment_1_0 ) ) | ( 'false' ) )
             int alt4=2;
             int LA4_0 = input.LA(1);
 
-            if ( (LA4_0==71) ) {
+            if ( (LA4_0==74) ) {
                 alt4=1;
             }
             else if ( (LA4_0==15) ) {
@@ -3509,14 +3629,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
             }
             switch (alt4) {
                 case 1 :
-                    // InternalBaseLanguage.g:1128:2: ( ( rule__BooleanLiteralRule__ValueAssignment_1_0 ) )
+                    // InternalBaseLanguage.g:1178:2: ( ( rule__BooleanLiteralRule__ValueAssignment_1_0 ) )
                     {
-                    // InternalBaseLanguage.g:1128:2: ( ( rule__BooleanLiteralRule__ValueAssignment_1_0 ) )
-                    // InternalBaseLanguage.g:1129:3: ( rule__BooleanLiteralRule__ValueAssignment_1_0 )
+                    // InternalBaseLanguage.g:1178:2: ( ( rule__BooleanLiteralRule__ValueAssignment_1_0 ) )
+                    // InternalBaseLanguage.g:1179:3: ( rule__BooleanLiteralRule__ValueAssignment_1_0 )
                     {
                      before(grammarAccess.getBooleanLiteralRuleAccess().getValueAssignment_1_0()); 
-                    // InternalBaseLanguage.g:1130:3: ( rule__BooleanLiteralRule__ValueAssignment_1_0 )
-                    // InternalBaseLanguage.g:1130:4: rule__BooleanLiteralRule__ValueAssignment_1_0
+                    // InternalBaseLanguage.g:1180:3: ( rule__BooleanLiteralRule__ValueAssignment_1_0 )
+                    // InternalBaseLanguage.g:1180:4: rule__BooleanLiteralRule__ValueAssignment_1_0
                     {
                     pushFollow(FOLLOW_2);
                     rule__BooleanLiteralRule__ValueAssignment_1_0();
@@ -3534,10 +3654,10 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
                     }
                     break;
                 case 2 :
-                    // InternalBaseLanguage.g:1134:2: ( 'false' )
+                    // InternalBaseLanguage.g:1184:2: ( 'false' )
                     {
-                    // InternalBaseLanguage.g:1134:2: ( 'false' )
-                    // InternalBaseLanguage.g:1135:3: 'false'
+                    // InternalBaseLanguage.g:1184:2: ( 'false' )
+                    // InternalBaseLanguage.g:1185:3: 'false'
                     {
                      before(grammarAccess.getBooleanLiteralRuleAccess().getFalseKeyword_1_1()); 
                     match(input,15,FOLLOW_2); 
@@ -3566,61 +3686,61 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__TypeRule__Alternatives"
-    // InternalBaseLanguage.g:1144:1: rule__TypeRule__Alternatives : ( ( ruleStringTypeRule ) | ( ruleIntTypeRule ) | ( ruleFloatTypeRule ) | ( ruleBooleanTypeRule ) | ( ruleLiteralTypeRule ) | ( ruleArrayTypeRule ) | ( ruleInstanceTypeRule ) | ( ruleVoidTypeRule ) | ( ruleExpressionTypeRule ) | ( ruleDataTypeRule ) );
+    // InternalBaseLanguage.g:1194:1: rule__TypeRule__Alternatives : ( ( ruleStringTypeRule ) | ( ruleIntTypeRule ) | ( ruleFloatTypeRule ) | ( ruleBooleanTypeRule ) | ( ruleLiteralTypeRule ) | ( ruleArrayTypeRule ) | ( ruleInstanceTypeRule ) | ( ruleVoidTypeRule ) | ( ruleExpressionTypeRule ) | ( ruleDataTypeRule ) );
     public final void rule__TypeRule__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:1148:1: ( ( ruleStringTypeRule ) | ( ruleIntTypeRule ) | ( ruleFloatTypeRule ) | ( ruleBooleanTypeRule ) | ( ruleLiteralTypeRule ) | ( ruleArrayTypeRule ) | ( ruleInstanceTypeRule ) | ( ruleVoidTypeRule ) | ( ruleExpressionTypeRule ) | ( ruleDataTypeRule ) )
+            // InternalBaseLanguage.g:1198:1: ( ( ruleStringTypeRule ) | ( ruleIntTypeRule ) | ( ruleFloatTypeRule ) | ( ruleBooleanTypeRule ) | ( ruleLiteralTypeRule ) | ( ruleArrayTypeRule ) | ( ruleInstanceTypeRule ) | ( ruleVoidTypeRule ) | ( ruleExpressionTypeRule ) | ( ruleDataTypeRule ) )
             int alt5=10;
             switch ( input.LA(1) ) {
-            case 61:
+            case 64:
                 {
                 alt5=1;
                 }
                 break;
-            case 63:
+            case 66:
                 {
                 alt5=2;
                 }
                 break;
-            case 64:
+            case 67:
                 {
                 alt5=3;
                 }
                 break;
-            case 65:
+            case 68:
                 {
                 alt5=4;
                 }
                 break;
-            case 58:
+            case 61:
                 {
                 alt5=5;
                 }
                 break;
-            case 68:
+            case 71:
                 {
                 alt5=6;
                 }
                 break;
-            case 59:
+            case 62:
                 {
                 alt5=7;
                 }
                 break;
-            case 66:
+            case 69:
                 {
                 alt5=8;
                 }
                 break;
-            case 62:
+            case 65:
                 {
                 alt5=9;
                 }
                 break;
-            case 67:
+            case 70:
                 {
                 alt5=10;
                 }
@@ -3634,10 +3754,10 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
             switch (alt5) {
                 case 1 :
-                    // InternalBaseLanguage.g:1149:2: ( ruleStringTypeRule )
+                    // InternalBaseLanguage.g:1199:2: ( ruleStringTypeRule )
                     {
-                    // InternalBaseLanguage.g:1149:2: ( ruleStringTypeRule )
-                    // InternalBaseLanguage.g:1150:3: ruleStringTypeRule
+                    // InternalBaseLanguage.g:1199:2: ( ruleStringTypeRule )
+                    // InternalBaseLanguage.g:1200:3: ruleStringTypeRule
                     {
                      before(grammarAccess.getTypeRuleAccess().getStringTypeRuleParserRuleCall_0()); 
                     pushFollow(FOLLOW_2);
@@ -3653,10 +3773,10 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
                     }
                     break;
                 case 2 :
-                    // InternalBaseLanguage.g:1155:2: ( ruleIntTypeRule )
+                    // InternalBaseLanguage.g:1205:2: ( ruleIntTypeRule )
                     {
-                    // InternalBaseLanguage.g:1155:2: ( ruleIntTypeRule )
-                    // InternalBaseLanguage.g:1156:3: ruleIntTypeRule
+                    // InternalBaseLanguage.g:1205:2: ( ruleIntTypeRule )
+                    // InternalBaseLanguage.g:1206:3: ruleIntTypeRule
                     {
                      before(grammarAccess.getTypeRuleAccess().getIntTypeRuleParserRuleCall_1()); 
                     pushFollow(FOLLOW_2);
@@ -3672,10 +3792,10 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
                     }
                     break;
                 case 3 :
-                    // InternalBaseLanguage.g:1161:2: ( ruleFloatTypeRule )
+                    // InternalBaseLanguage.g:1211:2: ( ruleFloatTypeRule )
                     {
-                    // InternalBaseLanguage.g:1161:2: ( ruleFloatTypeRule )
-                    // InternalBaseLanguage.g:1162:3: ruleFloatTypeRule
+                    // InternalBaseLanguage.g:1211:2: ( ruleFloatTypeRule )
+                    // InternalBaseLanguage.g:1212:3: ruleFloatTypeRule
                     {
                      before(grammarAccess.getTypeRuleAccess().getFloatTypeRuleParserRuleCall_2()); 
                     pushFollow(FOLLOW_2);
@@ -3691,10 +3811,10 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
                     }
                     break;
                 case 4 :
-                    // InternalBaseLanguage.g:1167:2: ( ruleBooleanTypeRule )
+                    // InternalBaseLanguage.g:1217:2: ( ruleBooleanTypeRule )
                     {
-                    // InternalBaseLanguage.g:1167:2: ( ruleBooleanTypeRule )
-                    // InternalBaseLanguage.g:1168:3: ruleBooleanTypeRule
+                    // InternalBaseLanguage.g:1217:2: ( ruleBooleanTypeRule )
+                    // InternalBaseLanguage.g:1218:3: ruleBooleanTypeRule
                     {
                      before(grammarAccess.getTypeRuleAccess().getBooleanTypeRuleParserRuleCall_3()); 
                     pushFollow(FOLLOW_2);
@@ -3710,10 +3830,10 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
                     }
                     break;
                 case 5 :
-                    // InternalBaseLanguage.g:1173:2: ( ruleLiteralTypeRule )
+                    // InternalBaseLanguage.g:1223:2: ( ruleLiteralTypeRule )
                     {
-                    // InternalBaseLanguage.g:1173:2: ( ruleLiteralTypeRule )
-                    // InternalBaseLanguage.g:1174:3: ruleLiteralTypeRule
+                    // InternalBaseLanguage.g:1223:2: ( ruleLiteralTypeRule )
+                    // InternalBaseLanguage.g:1224:3: ruleLiteralTypeRule
                     {
                      before(grammarAccess.getTypeRuleAccess().getLiteralTypeRuleParserRuleCall_4()); 
                     pushFollow(FOLLOW_2);
@@ -3729,10 +3849,10 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
                     }
                     break;
                 case 6 :
-                    // InternalBaseLanguage.g:1179:2: ( ruleArrayTypeRule )
+                    // InternalBaseLanguage.g:1229:2: ( ruleArrayTypeRule )
                     {
-                    // InternalBaseLanguage.g:1179:2: ( ruleArrayTypeRule )
-                    // InternalBaseLanguage.g:1180:3: ruleArrayTypeRule
+                    // InternalBaseLanguage.g:1229:2: ( ruleArrayTypeRule )
+                    // InternalBaseLanguage.g:1230:3: ruleArrayTypeRule
                     {
                      before(grammarAccess.getTypeRuleAccess().getArrayTypeRuleParserRuleCall_5()); 
                     pushFollow(FOLLOW_2);
@@ -3748,10 +3868,10 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
                     }
                     break;
                 case 7 :
-                    // InternalBaseLanguage.g:1185:2: ( ruleInstanceTypeRule )
+                    // InternalBaseLanguage.g:1235:2: ( ruleInstanceTypeRule )
                     {
-                    // InternalBaseLanguage.g:1185:2: ( ruleInstanceTypeRule )
-                    // InternalBaseLanguage.g:1186:3: ruleInstanceTypeRule
+                    // InternalBaseLanguage.g:1235:2: ( ruleInstanceTypeRule )
+                    // InternalBaseLanguage.g:1236:3: ruleInstanceTypeRule
                     {
                      before(grammarAccess.getTypeRuleAccess().getInstanceTypeRuleParserRuleCall_6()); 
                     pushFollow(FOLLOW_2);
@@ -3767,10 +3887,10 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
                     }
                     break;
                 case 8 :
-                    // InternalBaseLanguage.g:1191:2: ( ruleVoidTypeRule )
+                    // InternalBaseLanguage.g:1241:2: ( ruleVoidTypeRule )
                     {
-                    // InternalBaseLanguage.g:1191:2: ( ruleVoidTypeRule )
-                    // InternalBaseLanguage.g:1192:3: ruleVoidTypeRule
+                    // InternalBaseLanguage.g:1241:2: ( ruleVoidTypeRule )
+                    // InternalBaseLanguage.g:1242:3: ruleVoidTypeRule
                     {
                      before(grammarAccess.getTypeRuleAccess().getVoidTypeRuleParserRuleCall_7()); 
                     pushFollow(FOLLOW_2);
@@ -3786,10 +3906,10 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
                     }
                     break;
                 case 9 :
-                    // InternalBaseLanguage.g:1197:2: ( ruleExpressionTypeRule )
+                    // InternalBaseLanguage.g:1247:2: ( ruleExpressionTypeRule )
                     {
-                    // InternalBaseLanguage.g:1197:2: ( ruleExpressionTypeRule )
-                    // InternalBaseLanguage.g:1198:3: ruleExpressionTypeRule
+                    // InternalBaseLanguage.g:1247:2: ( ruleExpressionTypeRule )
+                    // InternalBaseLanguage.g:1248:3: ruleExpressionTypeRule
                     {
                      before(grammarAccess.getTypeRuleAccess().getExpressionTypeRuleParserRuleCall_8()); 
                     pushFollow(FOLLOW_2);
@@ -3805,10 +3925,10 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
                     }
                     break;
                 case 10 :
-                    // InternalBaseLanguage.g:1203:2: ( ruleDataTypeRule )
+                    // InternalBaseLanguage.g:1253:2: ( ruleDataTypeRule )
                     {
-                    // InternalBaseLanguage.g:1203:2: ( ruleDataTypeRule )
-                    // InternalBaseLanguage.g:1204:3: ruleDataTypeRule
+                    // InternalBaseLanguage.g:1253:2: ( ruleDataTypeRule )
+                    // InternalBaseLanguage.g:1254:3: ruleDataTypeRule
                     {
                      before(grammarAccess.getTypeRuleAccess().getDataTypeRuleParserRuleCall_9()); 
                     pushFollow(FOLLOW_2);
@@ -3841,13 +3961,13 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__StringOrId__Alternatives"
-    // InternalBaseLanguage.g:1213:1: rule__StringOrId__Alternatives : ( ( RULE_QUOTED_ID ) | ( RULE_ID ) );
+    // InternalBaseLanguage.g:1263:1: rule__StringOrId__Alternatives : ( ( RULE_QUOTED_ID ) | ( RULE_ID ) );
     public final void rule__StringOrId__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:1217:1: ( ( RULE_QUOTED_ID ) | ( RULE_ID ) )
+            // InternalBaseLanguage.g:1267:1: ( ( RULE_QUOTED_ID ) | ( RULE_ID ) )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -3865,10 +3985,10 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
             }
             switch (alt6) {
                 case 1 :
-                    // InternalBaseLanguage.g:1218:2: ( RULE_QUOTED_ID )
+                    // InternalBaseLanguage.g:1268:2: ( RULE_QUOTED_ID )
                     {
-                    // InternalBaseLanguage.g:1218:2: ( RULE_QUOTED_ID )
-                    // InternalBaseLanguage.g:1219:3: RULE_QUOTED_ID
+                    // InternalBaseLanguage.g:1268:2: ( RULE_QUOTED_ID )
+                    // InternalBaseLanguage.g:1269:3: RULE_QUOTED_ID
                     {
                      before(grammarAccess.getStringOrIdAccess().getQUOTED_IDTerminalRuleCall_0()); 
                     match(input,RULE_QUOTED_ID,FOLLOW_2); 
@@ -3880,10 +4000,10 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
                     }
                     break;
                 case 2 :
-                    // InternalBaseLanguage.g:1224:2: ( RULE_ID )
+                    // InternalBaseLanguage.g:1274:2: ( RULE_ID )
                     {
-                    // InternalBaseLanguage.g:1224:2: ( RULE_ID )
-                    // InternalBaseLanguage.g:1225:3: RULE_ID
+                    // InternalBaseLanguage.g:1274:2: ( RULE_ID )
+                    // InternalBaseLanguage.g:1275:3: RULE_ID
                     {
                      before(grammarAccess.getStringOrIdAccess().getIDTerminalRuleCall_1()); 
                     match(input,RULE_ID,FOLLOW_2); 
@@ -3912,13 +4032,13 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__ComparisonOperatorRule__Alternatives"
-    // InternalBaseLanguage.g:1234:1: rule__ComparisonOperatorRule__Alternatives : ( ( ( '>=' ) ) | ( ( '>' ) ) | ( ( '=' ) ) | ( ( '!=' ) ) | ( ( '<' ) ) | ( ( '<=' ) ) );
+    // InternalBaseLanguage.g:1284:1: rule__ComparisonOperatorRule__Alternatives : ( ( ( '>=' ) ) | ( ( '>' ) ) | ( ( '=' ) ) | ( ( '!=' ) ) | ( ( '<' ) ) | ( ( '<=' ) ) );
     public final void rule__ComparisonOperatorRule__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:1238:1: ( ( ( '>=' ) ) | ( ( '>' ) ) | ( ( '=' ) ) | ( ( '!=' ) ) | ( ( '<' ) ) | ( ( '<=' ) ) )
+            // InternalBaseLanguage.g:1288:1: ( ( ( '>=' ) ) | ( ( '>' ) ) | ( ( '=' ) ) | ( ( '!=' ) ) | ( ( '<' ) ) | ( ( '<=' ) ) )
             int alt7=6;
             switch ( input.LA(1) ) {
             case 16:
@@ -3960,14 +4080,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
             switch (alt7) {
                 case 1 :
-                    // InternalBaseLanguage.g:1239:2: ( ( '>=' ) )
+                    // InternalBaseLanguage.g:1289:2: ( ( '>=' ) )
                     {
-                    // InternalBaseLanguage.g:1239:2: ( ( '>=' ) )
-                    // InternalBaseLanguage.g:1240:3: ( '>=' )
+                    // InternalBaseLanguage.g:1289:2: ( ( '>=' ) )
+                    // InternalBaseLanguage.g:1290:3: ( '>=' )
                     {
                      before(grammarAccess.getComparisonOperatorRuleAccess().getGreaterThanEnumLiteralDeclaration_0()); 
-                    // InternalBaseLanguage.g:1241:3: ( '>=' )
-                    // InternalBaseLanguage.g:1241:4: '>='
+                    // InternalBaseLanguage.g:1291:3: ( '>=' )
+                    // InternalBaseLanguage.g:1291:4: '>='
                     {
                     match(input,16,FOLLOW_2); 
 
@@ -3981,14 +4101,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
                     }
                     break;
                 case 2 :
-                    // InternalBaseLanguage.g:1245:2: ( ( '>' ) )
+                    // InternalBaseLanguage.g:1295:2: ( ( '>' ) )
                     {
-                    // InternalBaseLanguage.g:1245:2: ( ( '>' ) )
-                    // InternalBaseLanguage.g:1246:3: ( '>' )
+                    // InternalBaseLanguage.g:1295:2: ( ( '>' ) )
+                    // InternalBaseLanguage.g:1296:3: ( '>' )
                     {
                      before(grammarAccess.getComparisonOperatorRuleAccess().getGreaterEqualEnumLiteralDeclaration_1()); 
-                    // InternalBaseLanguage.g:1247:3: ( '>' )
-                    // InternalBaseLanguage.g:1247:4: '>'
+                    // InternalBaseLanguage.g:1297:3: ( '>' )
+                    // InternalBaseLanguage.g:1297:4: '>'
                     {
                     match(input,17,FOLLOW_2); 
 
@@ -4002,14 +4122,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
                     }
                     break;
                 case 3 :
-                    // InternalBaseLanguage.g:1251:2: ( ( '=' ) )
+                    // InternalBaseLanguage.g:1301:2: ( ( '=' ) )
                     {
-                    // InternalBaseLanguage.g:1251:2: ( ( '=' ) )
-                    // InternalBaseLanguage.g:1252:3: ( '=' )
+                    // InternalBaseLanguage.g:1301:2: ( ( '=' ) )
+                    // InternalBaseLanguage.g:1302:3: ( '=' )
                     {
                      before(grammarAccess.getComparisonOperatorRuleAccess().getEqualEnumLiteralDeclaration_2()); 
-                    // InternalBaseLanguage.g:1253:3: ( '=' )
-                    // InternalBaseLanguage.g:1253:4: '='
+                    // InternalBaseLanguage.g:1303:3: ( '=' )
+                    // InternalBaseLanguage.g:1303:4: '='
                     {
                     match(input,18,FOLLOW_2); 
 
@@ -4023,14 +4143,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
                     }
                     break;
                 case 4 :
-                    // InternalBaseLanguage.g:1257:2: ( ( '!=' ) )
+                    // InternalBaseLanguage.g:1307:2: ( ( '!=' ) )
                     {
-                    // InternalBaseLanguage.g:1257:2: ( ( '!=' ) )
-                    // InternalBaseLanguage.g:1258:3: ( '!=' )
+                    // InternalBaseLanguage.g:1307:2: ( ( '!=' ) )
+                    // InternalBaseLanguage.g:1308:3: ( '!=' )
                     {
                      before(grammarAccess.getComparisonOperatorRuleAccess().getUnequalEnumLiteralDeclaration_3()); 
-                    // InternalBaseLanguage.g:1259:3: ( '!=' )
-                    // InternalBaseLanguage.g:1259:4: '!='
+                    // InternalBaseLanguage.g:1309:3: ( '!=' )
+                    // InternalBaseLanguage.g:1309:4: '!='
                     {
                     match(input,19,FOLLOW_2); 
 
@@ -4044,14 +4164,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
                     }
                     break;
                 case 5 :
-                    // InternalBaseLanguage.g:1263:2: ( ( '<' ) )
+                    // InternalBaseLanguage.g:1313:2: ( ( '<' ) )
                     {
-                    // InternalBaseLanguage.g:1263:2: ( ( '<' ) )
-                    // InternalBaseLanguage.g:1264:3: ( '<' )
+                    // InternalBaseLanguage.g:1313:2: ( ( '<' ) )
+                    // InternalBaseLanguage.g:1314:3: ( '<' )
                     {
                      before(grammarAccess.getComparisonOperatorRuleAccess().getLessEqualEnumLiteralDeclaration_4()); 
-                    // InternalBaseLanguage.g:1265:3: ( '<' )
-                    // InternalBaseLanguage.g:1265:4: '<'
+                    // InternalBaseLanguage.g:1315:3: ( '<' )
+                    // InternalBaseLanguage.g:1315:4: '<'
                     {
                     match(input,20,FOLLOW_2); 
 
@@ -4065,14 +4185,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
                     }
                     break;
                 case 6 :
-                    // InternalBaseLanguage.g:1269:2: ( ( '<=' ) )
+                    // InternalBaseLanguage.g:1319:2: ( ( '<=' ) )
                     {
-                    // InternalBaseLanguage.g:1269:2: ( ( '<=' ) )
-                    // InternalBaseLanguage.g:1270:3: ( '<=' )
+                    // InternalBaseLanguage.g:1319:2: ( ( '<=' ) )
+                    // InternalBaseLanguage.g:1320:3: ( '<=' )
                     {
                      before(grammarAccess.getComparisonOperatorRuleAccess().getLessThanEnumLiteralDeclaration_5()); 
-                    // InternalBaseLanguage.g:1271:3: ( '<=' )
-                    // InternalBaseLanguage.g:1271:4: '<='
+                    // InternalBaseLanguage.g:1321:3: ( '<=' )
+                    // InternalBaseLanguage.g:1321:4: '<='
                     {
                     match(input,21,FOLLOW_2); 
 
@@ -4103,13 +4223,13 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__AddOrSubtractOperatorRule__Alternatives"
-    // InternalBaseLanguage.g:1279:1: rule__AddOrSubtractOperatorRule__Alternatives : ( ( ( '+' ) ) | ( ( '-' ) ) );
+    // InternalBaseLanguage.g:1329:1: rule__AddOrSubtractOperatorRule__Alternatives : ( ( ( '+' ) ) | ( ( '-' ) ) );
     public final void rule__AddOrSubtractOperatorRule__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:1283:1: ( ( ( '+' ) ) | ( ( '-' ) ) )
+            // InternalBaseLanguage.g:1333:1: ( ( ( '+' ) ) | ( ( '-' ) ) )
             int alt8=2;
             int LA8_0 = input.LA(1);
 
@@ -4127,14 +4247,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
             }
             switch (alt8) {
                 case 1 :
-                    // InternalBaseLanguage.g:1284:2: ( ( '+' ) )
+                    // InternalBaseLanguage.g:1334:2: ( ( '+' ) )
                     {
-                    // InternalBaseLanguage.g:1284:2: ( ( '+' ) )
-                    // InternalBaseLanguage.g:1285:3: ( '+' )
+                    // InternalBaseLanguage.g:1334:2: ( ( '+' ) )
+                    // InternalBaseLanguage.g:1335:3: ( '+' )
                     {
                      before(grammarAccess.getAddOrSubtractOperatorRuleAccess().getAddEnumLiteralDeclaration_0()); 
-                    // InternalBaseLanguage.g:1286:3: ( '+' )
-                    // InternalBaseLanguage.g:1286:4: '+'
+                    // InternalBaseLanguage.g:1336:3: ( '+' )
+                    // InternalBaseLanguage.g:1336:4: '+'
                     {
                     match(input,22,FOLLOW_2); 
 
@@ -4148,14 +4268,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
                     }
                     break;
                 case 2 :
-                    // InternalBaseLanguage.g:1290:2: ( ( '-' ) )
+                    // InternalBaseLanguage.g:1340:2: ( ( '-' ) )
                     {
-                    // InternalBaseLanguage.g:1290:2: ( ( '-' ) )
-                    // InternalBaseLanguage.g:1291:3: ( '-' )
+                    // InternalBaseLanguage.g:1340:2: ( ( '-' ) )
+                    // InternalBaseLanguage.g:1341:3: ( '-' )
                     {
                      before(grammarAccess.getAddOrSubtractOperatorRuleAccess().getSubtractEnumLiteralDeclaration_1()); 
-                    // InternalBaseLanguage.g:1292:3: ( '-' )
-                    // InternalBaseLanguage.g:1292:4: '-'
+                    // InternalBaseLanguage.g:1342:3: ( '-' )
+                    // InternalBaseLanguage.g:1342:4: '-'
                     {
                     match(input,23,FOLLOW_2); 
 
@@ -4186,13 +4306,13 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__MultiplyDivideModuloOperatorRule__Alternatives"
-    // InternalBaseLanguage.g:1300:1: rule__MultiplyDivideModuloOperatorRule__Alternatives : ( ( ( '*' ) ) | ( ( '/' ) ) | ( ( '%' ) ) );
+    // InternalBaseLanguage.g:1350:1: rule__MultiplyDivideModuloOperatorRule__Alternatives : ( ( ( '*' ) ) | ( ( '/' ) ) | ( ( '%' ) ) );
     public final void rule__MultiplyDivideModuloOperatorRule__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:1304:1: ( ( ( '*' ) ) | ( ( '/' ) ) | ( ( '%' ) ) )
+            // InternalBaseLanguage.g:1354:1: ( ( ( '*' ) ) | ( ( '/' ) ) | ( ( '%' ) ) )
             int alt9=3;
             switch ( input.LA(1) ) {
             case 24:
@@ -4219,14 +4339,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
             switch (alt9) {
                 case 1 :
-                    // InternalBaseLanguage.g:1305:2: ( ( '*' ) )
+                    // InternalBaseLanguage.g:1355:2: ( ( '*' ) )
                     {
-                    // InternalBaseLanguage.g:1305:2: ( ( '*' ) )
-                    // InternalBaseLanguage.g:1306:3: ( '*' )
+                    // InternalBaseLanguage.g:1355:2: ( ( '*' ) )
+                    // InternalBaseLanguage.g:1356:3: ( '*' )
                     {
                      before(grammarAccess.getMultiplyDivideModuloOperatorRuleAccess().getMultiplyEnumLiteralDeclaration_0()); 
-                    // InternalBaseLanguage.g:1307:3: ( '*' )
-                    // InternalBaseLanguage.g:1307:4: '*'
+                    // InternalBaseLanguage.g:1357:3: ( '*' )
+                    // InternalBaseLanguage.g:1357:4: '*'
                     {
                     match(input,24,FOLLOW_2); 
 
@@ -4240,14 +4360,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
                     }
                     break;
                 case 2 :
-                    // InternalBaseLanguage.g:1311:2: ( ( '/' ) )
+                    // InternalBaseLanguage.g:1361:2: ( ( '/' ) )
                     {
-                    // InternalBaseLanguage.g:1311:2: ( ( '/' ) )
-                    // InternalBaseLanguage.g:1312:3: ( '/' )
+                    // InternalBaseLanguage.g:1361:2: ( ( '/' ) )
+                    // InternalBaseLanguage.g:1362:3: ( '/' )
                     {
                      before(grammarAccess.getMultiplyDivideModuloOperatorRuleAccess().getDivideEnumLiteralDeclaration_1()); 
-                    // InternalBaseLanguage.g:1313:3: ( '/' )
-                    // InternalBaseLanguage.g:1313:4: '/'
+                    // InternalBaseLanguage.g:1363:3: ( '/' )
+                    // InternalBaseLanguage.g:1363:4: '/'
                     {
                     match(input,25,FOLLOW_2); 
 
@@ -4261,14 +4381,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
                     }
                     break;
                 case 3 :
-                    // InternalBaseLanguage.g:1317:2: ( ( '%' ) )
+                    // InternalBaseLanguage.g:1367:2: ( ( '%' ) )
                     {
-                    // InternalBaseLanguage.g:1317:2: ( ( '%' ) )
-                    // InternalBaseLanguage.g:1318:3: ( '%' )
+                    // InternalBaseLanguage.g:1367:2: ( ( '%' ) )
+                    // InternalBaseLanguage.g:1368:3: ( '%' )
                     {
                      before(grammarAccess.getMultiplyDivideModuloOperatorRuleAccess().getModuloEnumLiteralDeclaration_2()); 
-                    // InternalBaseLanguage.g:1319:3: ( '%' )
-                    // InternalBaseLanguage.g:1319:4: '%'
+                    // InternalBaseLanguage.g:1369:3: ( '%' )
+                    // InternalBaseLanguage.g:1369:4: '%'
                     {
                     match(input,26,FOLLOW_2); 
 
@@ -4299,13 +4419,13 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__FactorRule__Alternatives"
-    // InternalBaseLanguage.g:1327:1: rule__FactorRule__Alternatives : ( ( ( 'Y' ) ) | ( ( 'Z' ) ) | ( ( 'E' ) ) | ( ( 'P' ) ) | ( ( 'T' ) ) | ( ( 'G' ) ) | ( ( 'M' ) ) | ( ( 'k' ) ) | ( ( 'h' ) ) | ( ( 'da' ) ) | ( ( 'd' ) ) | ( ( 'c' ) ) | ( ( 'm' ) ) | ( ( '\\u00B5' ) ) | ( ( 'n' ) ) | ( ( 'p' ) ) | ( ( 'f' ) ) | ( ( 'a' ) ) | ( ( 'z' ) ) | ( ( 'y' ) ) );
+    // InternalBaseLanguage.g:1377:1: rule__FactorRule__Alternatives : ( ( ( 'Y' ) ) | ( ( 'Z' ) ) | ( ( 'E' ) ) | ( ( 'P' ) ) | ( ( 'T' ) ) | ( ( 'G' ) ) | ( ( 'M' ) ) | ( ( 'k' ) ) | ( ( 'h' ) ) | ( ( 'da' ) ) | ( ( 'd' ) ) | ( ( 'c' ) ) | ( ( 'm' ) ) | ( ( '\\u00B5' ) ) | ( ( 'n' ) ) | ( ( 'p' ) ) | ( ( 'f' ) ) | ( ( 'a' ) ) | ( ( 'z' ) ) | ( ( 'y' ) ) );
     public final void rule__FactorRule__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:1331:1: ( ( ( 'Y' ) ) | ( ( 'Z' ) ) | ( ( 'E' ) ) | ( ( 'P' ) ) | ( ( 'T' ) ) | ( ( 'G' ) ) | ( ( 'M' ) ) | ( ( 'k' ) ) | ( ( 'h' ) ) | ( ( 'da' ) ) | ( ( 'd' ) ) | ( ( 'c' ) ) | ( ( 'm' ) ) | ( ( '\\u00B5' ) ) | ( ( 'n' ) ) | ( ( 'p' ) ) | ( ( 'f' ) ) | ( ( 'a' ) ) | ( ( 'z' ) ) | ( ( 'y' ) ) )
+            // InternalBaseLanguage.g:1381:1: ( ( ( 'Y' ) ) | ( ( 'Z' ) ) | ( ( 'E' ) ) | ( ( 'P' ) ) | ( ( 'T' ) ) | ( ( 'G' ) ) | ( ( 'M' ) ) | ( ( 'k' ) ) | ( ( 'h' ) ) | ( ( 'da' ) ) | ( ( 'd' ) ) | ( ( 'c' ) ) | ( ( 'm' ) ) | ( ( '\\u00B5' ) ) | ( ( 'n' ) ) | ( ( 'p' ) ) | ( ( 'f' ) ) | ( ( 'a' ) ) | ( ( 'z' ) ) | ( ( 'y' ) ) )
             int alt10=20;
             switch ( input.LA(1) ) {
             case 27:
@@ -4417,14 +4537,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
             switch (alt10) {
                 case 1 :
-                    // InternalBaseLanguage.g:1332:2: ( ( 'Y' ) )
+                    // InternalBaseLanguage.g:1382:2: ( ( 'Y' ) )
                     {
-                    // InternalBaseLanguage.g:1332:2: ( ( 'Y' ) )
-                    // InternalBaseLanguage.g:1333:3: ( 'Y' )
+                    // InternalBaseLanguage.g:1382:2: ( ( 'Y' ) )
+                    // InternalBaseLanguage.g:1383:3: ( 'Y' )
                     {
                      before(grammarAccess.getFactorRuleAccess().getYottaEnumLiteralDeclaration_0()); 
-                    // InternalBaseLanguage.g:1334:3: ( 'Y' )
-                    // InternalBaseLanguage.g:1334:4: 'Y'
+                    // InternalBaseLanguage.g:1384:3: ( 'Y' )
+                    // InternalBaseLanguage.g:1384:4: 'Y'
                     {
                     match(input,27,FOLLOW_2); 
 
@@ -4438,14 +4558,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
                     }
                     break;
                 case 2 :
-                    // InternalBaseLanguage.g:1338:2: ( ( 'Z' ) )
+                    // InternalBaseLanguage.g:1388:2: ( ( 'Z' ) )
                     {
-                    // InternalBaseLanguage.g:1338:2: ( ( 'Z' ) )
-                    // InternalBaseLanguage.g:1339:3: ( 'Z' )
+                    // InternalBaseLanguage.g:1388:2: ( ( 'Z' ) )
+                    // InternalBaseLanguage.g:1389:3: ( 'Z' )
                     {
                      before(grammarAccess.getFactorRuleAccess().getZettaEnumLiteralDeclaration_1()); 
-                    // InternalBaseLanguage.g:1340:3: ( 'Z' )
-                    // InternalBaseLanguage.g:1340:4: 'Z'
+                    // InternalBaseLanguage.g:1390:3: ( 'Z' )
+                    // InternalBaseLanguage.g:1390:4: 'Z'
                     {
                     match(input,28,FOLLOW_2); 
 
@@ -4459,14 +4579,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
                     }
                     break;
                 case 3 :
-                    // InternalBaseLanguage.g:1344:2: ( ( 'E' ) )
+                    // InternalBaseLanguage.g:1394:2: ( ( 'E' ) )
                     {
-                    // InternalBaseLanguage.g:1344:2: ( ( 'E' ) )
-                    // InternalBaseLanguage.g:1345:3: ( 'E' )
+                    // InternalBaseLanguage.g:1394:2: ( ( 'E' ) )
+                    // InternalBaseLanguage.g:1395:3: ( 'E' )
                     {
                      before(grammarAccess.getFactorRuleAccess().getExaEnumLiteralDeclaration_2()); 
-                    // InternalBaseLanguage.g:1346:3: ( 'E' )
-                    // InternalBaseLanguage.g:1346:4: 'E'
+                    // InternalBaseLanguage.g:1396:3: ( 'E' )
+                    // InternalBaseLanguage.g:1396:4: 'E'
                     {
                     match(input,29,FOLLOW_2); 
 
@@ -4480,14 +4600,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
                     }
                     break;
                 case 4 :
-                    // InternalBaseLanguage.g:1350:2: ( ( 'P' ) )
+                    // InternalBaseLanguage.g:1400:2: ( ( 'P' ) )
                     {
-                    // InternalBaseLanguage.g:1350:2: ( ( 'P' ) )
-                    // InternalBaseLanguage.g:1351:3: ( 'P' )
+                    // InternalBaseLanguage.g:1400:2: ( ( 'P' ) )
+                    // InternalBaseLanguage.g:1401:3: ( 'P' )
                     {
                      before(grammarAccess.getFactorRuleAccess().getPetaEnumLiteralDeclaration_3()); 
-                    // InternalBaseLanguage.g:1352:3: ( 'P' )
-                    // InternalBaseLanguage.g:1352:4: 'P'
+                    // InternalBaseLanguage.g:1402:3: ( 'P' )
+                    // InternalBaseLanguage.g:1402:4: 'P'
                     {
                     match(input,30,FOLLOW_2); 
 
@@ -4501,14 +4621,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
                     }
                     break;
                 case 5 :
-                    // InternalBaseLanguage.g:1356:2: ( ( 'T' ) )
+                    // InternalBaseLanguage.g:1406:2: ( ( 'T' ) )
                     {
-                    // InternalBaseLanguage.g:1356:2: ( ( 'T' ) )
-                    // InternalBaseLanguage.g:1357:3: ( 'T' )
+                    // InternalBaseLanguage.g:1406:2: ( ( 'T' ) )
+                    // InternalBaseLanguage.g:1407:3: ( 'T' )
                     {
                      before(grammarAccess.getFactorRuleAccess().getTeraEnumLiteralDeclaration_4()); 
-                    // InternalBaseLanguage.g:1358:3: ( 'T' )
-                    // InternalBaseLanguage.g:1358:4: 'T'
+                    // InternalBaseLanguage.g:1408:3: ( 'T' )
+                    // InternalBaseLanguage.g:1408:4: 'T'
                     {
                     match(input,31,FOLLOW_2); 
 
@@ -4522,14 +4642,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
                     }
                     break;
                 case 6 :
-                    // InternalBaseLanguage.g:1362:2: ( ( 'G' ) )
+                    // InternalBaseLanguage.g:1412:2: ( ( 'G' ) )
                     {
-                    // InternalBaseLanguage.g:1362:2: ( ( 'G' ) )
-                    // InternalBaseLanguage.g:1363:3: ( 'G' )
+                    // InternalBaseLanguage.g:1412:2: ( ( 'G' ) )
+                    // InternalBaseLanguage.g:1413:3: ( 'G' )
                     {
                      before(grammarAccess.getFactorRuleAccess().getGigaEnumLiteralDeclaration_5()); 
-                    // InternalBaseLanguage.g:1364:3: ( 'G' )
-                    // InternalBaseLanguage.g:1364:4: 'G'
+                    // InternalBaseLanguage.g:1414:3: ( 'G' )
+                    // InternalBaseLanguage.g:1414:4: 'G'
                     {
                     match(input,32,FOLLOW_2); 
 
@@ -4543,14 +4663,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
                     }
                     break;
                 case 7 :
-                    // InternalBaseLanguage.g:1368:2: ( ( 'M' ) )
+                    // InternalBaseLanguage.g:1418:2: ( ( 'M' ) )
                     {
-                    // InternalBaseLanguage.g:1368:2: ( ( 'M' ) )
-                    // InternalBaseLanguage.g:1369:3: ( 'M' )
+                    // InternalBaseLanguage.g:1418:2: ( ( 'M' ) )
+                    // InternalBaseLanguage.g:1419:3: ( 'M' )
                     {
                      before(grammarAccess.getFactorRuleAccess().getMegaEnumLiteralDeclaration_6()); 
-                    // InternalBaseLanguage.g:1370:3: ( 'M' )
-                    // InternalBaseLanguage.g:1370:4: 'M'
+                    // InternalBaseLanguage.g:1420:3: ( 'M' )
+                    // InternalBaseLanguage.g:1420:4: 'M'
                     {
                     match(input,33,FOLLOW_2); 
 
@@ -4564,14 +4684,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
                     }
                     break;
                 case 8 :
-                    // InternalBaseLanguage.g:1374:2: ( ( 'k' ) )
+                    // InternalBaseLanguage.g:1424:2: ( ( 'k' ) )
                     {
-                    // InternalBaseLanguage.g:1374:2: ( ( 'k' ) )
-                    // InternalBaseLanguage.g:1375:3: ( 'k' )
+                    // InternalBaseLanguage.g:1424:2: ( ( 'k' ) )
+                    // InternalBaseLanguage.g:1425:3: ( 'k' )
                     {
                      before(grammarAccess.getFactorRuleAccess().getKiloEnumLiteralDeclaration_7()); 
-                    // InternalBaseLanguage.g:1376:3: ( 'k' )
-                    // InternalBaseLanguage.g:1376:4: 'k'
+                    // InternalBaseLanguage.g:1426:3: ( 'k' )
+                    // InternalBaseLanguage.g:1426:4: 'k'
                     {
                     match(input,34,FOLLOW_2); 
 
@@ -4585,14 +4705,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
                     }
                     break;
                 case 9 :
-                    // InternalBaseLanguage.g:1380:2: ( ( 'h' ) )
+                    // InternalBaseLanguage.g:1430:2: ( ( 'h' ) )
                     {
-                    // InternalBaseLanguage.g:1380:2: ( ( 'h' ) )
-                    // InternalBaseLanguage.g:1381:3: ( 'h' )
+                    // InternalBaseLanguage.g:1430:2: ( ( 'h' ) )
+                    // InternalBaseLanguage.g:1431:3: ( 'h' )
                     {
                      before(grammarAccess.getFactorRuleAccess().getHectoEnumLiteralDeclaration_8()); 
-                    // InternalBaseLanguage.g:1382:3: ( 'h' )
-                    // InternalBaseLanguage.g:1382:4: 'h'
+                    // InternalBaseLanguage.g:1432:3: ( 'h' )
+                    // InternalBaseLanguage.g:1432:4: 'h'
                     {
                     match(input,35,FOLLOW_2); 
 
@@ -4606,14 +4726,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
                     }
                     break;
                 case 10 :
-                    // InternalBaseLanguage.g:1386:2: ( ( 'da' ) )
+                    // InternalBaseLanguage.g:1436:2: ( ( 'da' ) )
                     {
-                    // InternalBaseLanguage.g:1386:2: ( ( 'da' ) )
-                    // InternalBaseLanguage.g:1387:3: ( 'da' )
+                    // InternalBaseLanguage.g:1436:2: ( ( 'da' ) )
+                    // InternalBaseLanguage.g:1437:3: ( 'da' )
                     {
                      before(grammarAccess.getFactorRuleAccess().getDekaEnumLiteralDeclaration_9()); 
-                    // InternalBaseLanguage.g:1388:3: ( 'da' )
-                    // InternalBaseLanguage.g:1388:4: 'da'
+                    // InternalBaseLanguage.g:1438:3: ( 'da' )
+                    // InternalBaseLanguage.g:1438:4: 'da'
                     {
                     match(input,36,FOLLOW_2); 
 
@@ -4627,14 +4747,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
                     }
                     break;
                 case 11 :
-                    // InternalBaseLanguage.g:1392:2: ( ( 'd' ) )
+                    // InternalBaseLanguage.g:1442:2: ( ( 'd' ) )
                     {
-                    // InternalBaseLanguage.g:1392:2: ( ( 'd' ) )
-                    // InternalBaseLanguage.g:1393:3: ( 'd' )
+                    // InternalBaseLanguage.g:1442:2: ( ( 'd' ) )
+                    // InternalBaseLanguage.g:1443:3: ( 'd' )
                     {
                      before(grammarAccess.getFactorRuleAccess().getDeciEnumLiteralDeclaration_10()); 
-                    // InternalBaseLanguage.g:1394:3: ( 'd' )
-                    // InternalBaseLanguage.g:1394:4: 'd'
+                    // InternalBaseLanguage.g:1444:3: ( 'd' )
+                    // InternalBaseLanguage.g:1444:4: 'd'
                     {
                     match(input,37,FOLLOW_2); 
 
@@ -4648,14 +4768,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
                     }
                     break;
                 case 12 :
-                    // InternalBaseLanguage.g:1398:2: ( ( 'c' ) )
+                    // InternalBaseLanguage.g:1448:2: ( ( 'c' ) )
                     {
-                    // InternalBaseLanguage.g:1398:2: ( ( 'c' ) )
-                    // InternalBaseLanguage.g:1399:3: ( 'c' )
+                    // InternalBaseLanguage.g:1448:2: ( ( 'c' ) )
+                    // InternalBaseLanguage.g:1449:3: ( 'c' )
                     {
                      before(grammarAccess.getFactorRuleAccess().getCentiEnumLiteralDeclaration_11()); 
-                    // InternalBaseLanguage.g:1400:3: ( 'c' )
-                    // InternalBaseLanguage.g:1400:4: 'c'
+                    // InternalBaseLanguage.g:1450:3: ( 'c' )
+                    // InternalBaseLanguage.g:1450:4: 'c'
                     {
                     match(input,38,FOLLOW_2); 
 
@@ -4669,14 +4789,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
                     }
                     break;
                 case 13 :
-                    // InternalBaseLanguage.g:1404:2: ( ( 'm' ) )
+                    // InternalBaseLanguage.g:1454:2: ( ( 'm' ) )
                     {
-                    // InternalBaseLanguage.g:1404:2: ( ( 'm' ) )
-                    // InternalBaseLanguage.g:1405:3: ( 'm' )
+                    // InternalBaseLanguage.g:1454:2: ( ( 'm' ) )
+                    // InternalBaseLanguage.g:1455:3: ( 'm' )
                     {
                      before(grammarAccess.getFactorRuleAccess().getMilliEnumLiteralDeclaration_12()); 
-                    // InternalBaseLanguage.g:1406:3: ( 'm' )
-                    // InternalBaseLanguage.g:1406:4: 'm'
+                    // InternalBaseLanguage.g:1456:3: ( 'm' )
+                    // InternalBaseLanguage.g:1456:4: 'm'
                     {
                     match(input,39,FOLLOW_2); 
 
@@ -4690,14 +4810,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
                     }
                     break;
                 case 14 :
-                    // InternalBaseLanguage.g:1410:2: ( ( '\\u00B5' ) )
+                    // InternalBaseLanguage.g:1460:2: ( ( '\\u00B5' ) )
                     {
-                    // InternalBaseLanguage.g:1410:2: ( ( '\\u00B5' ) )
-                    // InternalBaseLanguage.g:1411:3: ( '\\u00B5' )
+                    // InternalBaseLanguage.g:1460:2: ( ( '\\u00B5' ) )
+                    // InternalBaseLanguage.g:1461:3: ( '\\u00B5' )
                     {
                      before(grammarAccess.getFactorRuleAccess().getMicroEnumLiteralDeclaration_13()); 
-                    // InternalBaseLanguage.g:1412:3: ( '\\u00B5' )
-                    // InternalBaseLanguage.g:1412:4: '\\u00B5'
+                    // InternalBaseLanguage.g:1462:3: ( '\\u00B5' )
+                    // InternalBaseLanguage.g:1462:4: '\\u00B5'
                     {
                     match(input,40,FOLLOW_2); 
 
@@ -4711,14 +4831,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
                     }
                     break;
                 case 15 :
-                    // InternalBaseLanguage.g:1416:2: ( ( 'n' ) )
+                    // InternalBaseLanguage.g:1466:2: ( ( 'n' ) )
                     {
-                    // InternalBaseLanguage.g:1416:2: ( ( 'n' ) )
-                    // InternalBaseLanguage.g:1417:3: ( 'n' )
+                    // InternalBaseLanguage.g:1466:2: ( ( 'n' ) )
+                    // InternalBaseLanguage.g:1467:3: ( 'n' )
                     {
                      before(grammarAccess.getFactorRuleAccess().getNanoEnumLiteralDeclaration_14()); 
-                    // InternalBaseLanguage.g:1418:3: ( 'n' )
-                    // InternalBaseLanguage.g:1418:4: 'n'
+                    // InternalBaseLanguage.g:1468:3: ( 'n' )
+                    // InternalBaseLanguage.g:1468:4: 'n'
                     {
                     match(input,41,FOLLOW_2); 
 
@@ -4732,14 +4852,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
                     }
                     break;
                 case 16 :
-                    // InternalBaseLanguage.g:1422:2: ( ( 'p' ) )
+                    // InternalBaseLanguage.g:1472:2: ( ( 'p' ) )
                     {
-                    // InternalBaseLanguage.g:1422:2: ( ( 'p' ) )
-                    // InternalBaseLanguage.g:1423:3: ( 'p' )
+                    // InternalBaseLanguage.g:1472:2: ( ( 'p' ) )
+                    // InternalBaseLanguage.g:1473:3: ( 'p' )
                     {
                      before(grammarAccess.getFactorRuleAccess().getPikoEnumLiteralDeclaration_15()); 
-                    // InternalBaseLanguage.g:1424:3: ( 'p' )
-                    // InternalBaseLanguage.g:1424:4: 'p'
+                    // InternalBaseLanguage.g:1474:3: ( 'p' )
+                    // InternalBaseLanguage.g:1474:4: 'p'
                     {
                     match(input,42,FOLLOW_2); 
 
@@ -4753,14 +4873,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
                     }
                     break;
                 case 17 :
-                    // InternalBaseLanguage.g:1428:2: ( ( 'f' ) )
+                    // InternalBaseLanguage.g:1478:2: ( ( 'f' ) )
                     {
-                    // InternalBaseLanguage.g:1428:2: ( ( 'f' ) )
-                    // InternalBaseLanguage.g:1429:3: ( 'f' )
+                    // InternalBaseLanguage.g:1478:2: ( ( 'f' ) )
+                    // InternalBaseLanguage.g:1479:3: ( 'f' )
                     {
                      before(grammarAccess.getFactorRuleAccess().getFemtoEnumLiteralDeclaration_16()); 
-                    // InternalBaseLanguage.g:1430:3: ( 'f' )
-                    // InternalBaseLanguage.g:1430:4: 'f'
+                    // InternalBaseLanguage.g:1480:3: ( 'f' )
+                    // InternalBaseLanguage.g:1480:4: 'f'
                     {
                     match(input,43,FOLLOW_2); 
 
@@ -4774,14 +4894,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
                     }
                     break;
                 case 18 :
-                    // InternalBaseLanguage.g:1434:2: ( ( 'a' ) )
+                    // InternalBaseLanguage.g:1484:2: ( ( 'a' ) )
                     {
-                    // InternalBaseLanguage.g:1434:2: ( ( 'a' ) )
-                    // InternalBaseLanguage.g:1435:3: ( 'a' )
+                    // InternalBaseLanguage.g:1484:2: ( ( 'a' ) )
+                    // InternalBaseLanguage.g:1485:3: ( 'a' )
                     {
                      before(grammarAccess.getFactorRuleAccess().getAttoEnumLiteralDeclaration_17()); 
-                    // InternalBaseLanguage.g:1436:3: ( 'a' )
-                    // InternalBaseLanguage.g:1436:4: 'a'
+                    // InternalBaseLanguage.g:1486:3: ( 'a' )
+                    // InternalBaseLanguage.g:1486:4: 'a'
                     {
                     match(input,44,FOLLOW_2); 
 
@@ -4795,14 +4915,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
                     }
                     break;
                 case 19 :
-                    // InternalBaseLanguage.g:1440:2: ( ( 'z' ) )
+                    // InternalBaseLanguage.g:1490:2: ( ( 'z' ) )
                     {
-                    // InternalBaseLanguage.g:1440:2: ( ( 'z' ) )
-                    // InternalBaseLanguage.g:1441:3: ( 'z' )
+                    // InternalBaseLanguage.g:1490:2: ( ( 'z' ) )
+                    // InternalBaseLanguage.g:1491:3: ( 'z' )
                     {
                      before(grammarAccess.getFactorRuleAccess().getZeptoEnumLiteralDeclaration_18()); 
-                    // InternalBaseLanguage.g:1442:3: ( 'z' )
-                    // InternalBaseLanguage.g:1442:4: 'z'
+                    // InternalBaseLanguage.g:1492:3: ( 'z' )
+                    // InternalBaseLanguage.g:1492:4: 'z'
                     {
                     match(input,45,FOLLOW_2); 
 
@@ -4816,14 +4936,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
                     }
                     break;
                 case 20 :
-                    // InternalBaseLanguage.g:1446:2: ( ( 'y' ) )
+                    // InternalBaseLanguage.g:1496:2: ( ( 'y' ) )
                     {
-                    // InternalBaseLanguage.g:1446:2: ( ( 'y' ) )
-                    // InternalBaseLanguage.g:1447:3: ( 'y' )
+                    // InternalBaseLanguage.g:1496:2: ( ( 'y' ) )
+                    // InternalBaseLanguage.g:1497:3: ( 'y' )
                     {
                      before(grammarAccess.getFactorRuleAccess().getYoctoEnumLiteralDeclaration_19()); 
-                    // InternalBaseLanguage.g:1448:3: ( 'y' )
-                    // InternalBaseLanguage.g:1448:4: 'y'
+                    // InternalBaseLanguage.g:1498:3: ( 'y' )
+                    // InternalBaseLanguage.g:1498:4: 'y'
                     {
                     match(input,46,FOLLOW_2); 
 
@@ -4854,14 +4974,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__OrExpressionRule__Group__0"
-    // InternalBaseLanguage.g:1456:1: rule__OrExpressionRule__Group__0 : rule__OrExpressionRule__Group__0__Impl rule__OrExpressionRule__Group__1 ;
+    // InternalBaseLanguage.g:1506:1: rule__OrExpressionRule__Group__0 : rule__OrExpressionRule__Group__0__Impl rule__OrExpressionRule__Group__1 ;
     public final void rule__OrExpressionRule__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:1460:1: ( rule__OrExpressionRule__Group__0__Impl rule__OrExpressionRule__Group__1 )
-            // InternalBaseLanguage.g:1461:2: rule__OrExpressionRule__Group__0__Impl rule__OrExpressionRule__Group__1
+            // InternalBaseLanguage.g:1510:1: ( rule__OrExpressionRule__Group__0__Impl rule__OrExpressionRule__Group__1 )
+            // InternalBaseLanguage.g:1511:2: rule__OrExpressionRule__Group__0__Impl rule__OrExpressionRule__Group__1
             {
             pushFollow(FOLLOW_3);
             rule__OrExpressionRule__Group__0__Impl();
@@ -4892,21 +5012,21 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__OrExpressionRule__Group__0__Impl"
-    // InternalBaseLanguage.g:1468:1: rule__OrExpressionRule__Group__0__Impl : ( ( rule__OrExpressionRule__SubExpressionsAssignment_0 ) ) ;
+    // InternalBaseLanguage.g:1518:1: rule__OrExpressionRule__Group__0__Impl : ( ( rule__OrExpressionRule__SubExpressionsAssignment_0 ) ) ;
     public final void rule__OrExpressionRule__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:1472:1: ( ( ( rule__OrExpressionRule__SubExpressionsAssignment_0 ) ) )
-            // InternalBaseLanguage.g:1473:1: ( ( rule__OrExpressionRule__SubExpressionsAssignment_0 ) )
+            // InternalBaseLanguage.g:1522:1: ( ( ( rule__OrExpressionRule__SubExpressionsAssignment_0 ) ) )
+            // InternalBaseLanguage.g:1523:1: ( ( rule__OrExpressionRule__SubExpressionsAssignment_0 ) )
             {
-            // InternalBaseLanguage.g:1473:1: ( ( rule__OrExpressionRule__SubExpressionsAssignment_0 ) )
-            // InternalBaseLanguage.g:1474:2: ( rule__OrExpressionRule__SubExpressionsAssignment_0 )
+            // InternalBaseLanguage.g:1523:1: ( ( rule__OrExpressionRule__SubExpressionsAssignment_0 ) )
+            // InternalBaseLanguage.g:1524:2: ( rule__OrExpressionRule__SubExpressionsAssignment_0 )
             {
              before(grammarAccess.getOrExpressionRuleAccess().getSubExpressionsAssignment_0()); 
-            // InternalBaseLanguage.g:1475:2: ( rule__OrExpressionRule__SubExpressionsAssignment_0 )
-            // InternalBaseLanguage.g:1475:3: rule__OrExpressionRule__SubExpressionsAssignment_0
+            // InternalBaseLanguage.g:1525:2: ( rule__OrExpressionRule__SubExpressionsAssignment_0 )
+            // InternalBaseLanguage.g:1525:3: rule__OrExpressionRule__SubExpressionsAssignment_0
             {
             pushFollow(FOLLOW_2);
             rule__OrExpressionRule__SubExpressionsAssignment_0();
@@ -4939,14 +5059,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__OrExpressionRule__Group__1"
-    // InternalBaseLanguage.g:1483:1: rule__OrExpressionRule__Group__1 : rule__OrExpressionRule__Group__1__Impl ;
+    // InternalBaseLanguage.g:1533:1: rule__OrExpressionRule__Group__1 : rule__OrExpressionRule__Group__1__Impl ;
     public final void rule__OrExpressionRule__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:1487:1: ( rule__OrExpressionRule__Group__1__Impl )
-            // InternalBaseLanguage.g:1488:2: rule__OrExpressionRule__Group__1__Impl
+            // InternalBaseLanguage.g:1537:1: ( rule__OrExpressionRule__Group__1__Impl )
+            // InternalBaseLanguage.g:1538:2: rule__OrExpressionRule__Group__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__OrExpressionRule__Group__1__Impl();
@@ -4972,20 +5092,20 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__OrExpressionRule__Group__1__Impl"
-    // InternalBaseLanguage.g:1494:1: rule__OrExpressionRule__Group__1__Impl : ( ( rule__OrExpressionRule__Group_1__0 )* ) ;
+    // InternalBaseLanguage.g:1544:1: rule__OrExpressionRule__Group__1__Impl : ( ( rule__OrExpressionRule__Group_1__0 )* ) ;
     public final void rule__OrExpressionRule__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:1498:1: ( ( ( rule__OrExpressionRule__Group_1__0 )* ) )
-            // InternalBaseLanguage.g:1499:1: ( ( rule__OrExpressionRule__Group_1__0 )* )
+            // InternalBaseLanguage.g:1548:1: ( ( ( rule__OrExpressionRule__Group_1__0 )* ) )
+            // InternalBaseLanguage.g:1549:1: ( ( rule__OrExpressionRule__Group_1__0 )* )
             {
-            // InternalBaseLanguage.g:1499:1: ( ( rule__OrExpressionRule__Group_1__0 )* )
-            // InternalBaseLanguage.g:1500:2: ( rule__OrExpressionRule__Group_1__0 )*
+            // InternalBaseLanguage.g:1549:1: ( ( rule__OrExpressionRule__Group_1__0 )* )
+            // InternalBaseLanguage.g:1550:2: ( rule__OrExpressionRule__Group_1__0 )*
             {
              before(grammarAccess.getOrExpressionRuleAccess().getGroup_1()); 
-            // InternalBaseLanguage.g:1501:2: ( rule__OrExpressionRule__Group_1__0 )*
+            // InternalBaseLanguage.g:1551:2: ( rule__OrExpressionRule__Group_1__0 )*
             loop11:
             do {
                 int alt11=2;
@@ -4998,7 +5118,7 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
                 switch (alt11) {
             	case 1 :
-            	    // InternalBaseLanguage.g:1501:3: rule__OrExpressionRule__Group_1__0
+            	    // InternalBaseLanguage.g:1551:3: rule__OrExpressionRule__Group_1__0
             	    {
             	    pushFollow(FOLLOW_4);
             	    rule__OrExpressionRule__Group_1__0();
@@ -5037,14 +5157,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__OrExpressionRule__Group_1__0"
-    // InternalBaseLanguage.g:1510:1: rule__OrExpressionRule__Group_1__0 : rule__OrExpressionRule__Group_1__0__Impl rule__OrExpressionRule__Group_1__1 ;
+    // InternalBaseLanguage.g:1560:1: rule__OrExpressionRule__Group_1__0 : rule__OrExpressionRule__Group_1__0__Impl rule__OrExpressionRule__Group_1__1 ;
     public final void rule__OrExpressionRule__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:1514:1: ( rule__OrExpressionRule__Group_1__0__Impl rule__OrExpressionRule__Group_1__1 )
-            // InternalBaseLanguage.g:1515:2: rule__OrExpressionRule__Group_1__0__Impl rule__OrExpressionRule__Group_1__1
+            // InternalBaseLanguage.g:1564:1: ( rule__OrExpressionRule__Group_1__0__Impl rule__OrExpressionRule__Group_1__1 )
+            // InternalBaseLanguage.g:1565:2: rule__OrExpressionRule__Group_1__0__Impl rule__OrExpressionRule__Group_1__1
             {
             pushFollow(FOLLOW_5);
             rule__OrExpressionRule__Group_1__0__Impl();
@@ -5075,17 +5195,17 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__OrExpressionRule__Group_1__0__Impl"
-    // InternalBaseLanguage.g:1522:1: rule__OrExpressionRule__Group_1__0__Impl : ( 'OR' ) ;
+    // InternalBaseLanguage.g:1572:1: rule__OrExpressionRule__Group_1__0__Impl : ( 'OR' ) ;
     public final void rule__OrExpressionRule__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:1526:1: ( ( 'OR' ) )
-            // InternalBaseLanguage.g:1527:1: ( 'OR' )
+            // InternalBaseLanguage.g:1576:1: ( ( 'OR' ) )
+            // InternalBaseLanguage.g:1577:1: ( 'OR' )
             {
-            // InternalBaseLanguage.g:1527:1: ( 'OR' )
-            // InternalBaseLanguage.g:1528:2: 'OR'
+            // InternalBaseLanguage.g:1577:1: ( 'OR' )
+            // InternalBaseLanguage.g:1578:2: 'OR'
             {
              before(grammarAccess.getOrExpressionRuleAccess().getORKeyword_1_0()); 
             match(input,47,FOLLOW_2); 
@@ -5112,14 +5232,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__OrExpressionRule__Group_1__1"
-    // InternalBaseLanguage.g:1537:1: rule__OrExpressionRule__Group_1__1 : rule__OrExpressionRule__Group_1__1__Impl ;
+    // InternalBaseLanguage.g:1587:1: rule__OrExpressionRule__Group_1__1 : rule__OrExpressionRule__Group_1__1__Impl ;
     public final void rule__OrExpressionRule__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:1541:1: ( rule__OrExpressionRule__Group_1__1__Impl )
-            // InternalBaseLanguage.g:1542:2: rule__OrExpressionRule__Group_1__1__Impl
+            // InternalBaseLanguage.g:1591:1: ( rule__OrExpressionRule__Group_1__1__Impl )
+            // InternalBaseLanguage.g:1592:2: rule__OrExpressionRule__Group_1__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__OrExpressionRule__Group_1__1__Impl();
@@ -5145,21 +5265,21 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__OrExpressionRule__Group_1__1__Impl"
-    // InternalBaseLanguage.g:1548:1: rule__OrExpressionRule__Group_1__1__Impl : ( ( rule__OrExpressionRule__SubExpressionsAssignment_1_1 ) ) ;
+    // InternalBaseLanguage.g:1598:1: rule__OrExpressionRule__Group_1__1__Impl : ( ( rule__OrExpressionRule__SubExpressionsAssignment_1_1 ) ) ;
     public final void rule__OrExpressionRule__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:1552:1: ( ( ( rule__OrExpressionRule__SubExpressionsAssignment_1_1 ) ) )
-            // InternalBaseLanguage.g:1553:1: ( ( rule__OrExpressionRule__SubExpressionsAssignment_1_1 ) )
+            // InternalBaseLanguage.g:1602:1: ( ( ( rule__OrExpressionRule__SubExpressionsAssignment_1_1 ) ) )
+            // InternalBaseLanguage.g:1603:1: ( ( rule__OrExpressionRule__SubExpressionsAssignment_1_1 ) )
             {
-            // InternalBaseLanguage.g:1553:1: ( ( rule__OrExpressionRule__SubExpressionsAssignment_1_1 ) )
-            // InternalBaseLanguage.g:1554:2: ( rule__OrExpressionRule__SubExpressionsAssignment_1_1 )
+            // InternalBaseLanguage.g:1603:1: ( ( rule__OrExpressionRule__SubExpressionsAssignment_1_1 ) )
+            // InternalBaseLanguage.g:1604:2: ( rule__OrExpressionRule__SubExpressionsAssignment_1_1 )
             {
              before(grammarAccess.getOrExpressionRuleAccess().getSubExpressionsAssignment_1_1()); 
-            // InternalBaseLanguage.g:1555:2: ( rule__OrExpressionRule__SubExpressionsAssignment_1_1 )
-            // InternalBaseLanguage.g:1555:3: rule__OrExpressionRule__SubExpressionsAssignment_1_1
+            // InternalBaseLanguage.g:1605:2: ( rule__OrExpressionRule__SubExpressionsAssignment_1_1 )
+            // InternalBaseLanguage.g:1605:3: rule__OrExpressionRule__SubExpressionsAssignment_1_1
             {
             pushFollow(FOLLOW_2);
             rule__OrExpressionRule__SubExpressionsAssignment_1_1();
@@ -5192,14 +5312,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__XorExpressionRule__Group__0"
-    // InternalBaseLanguage.g:1564:1: rule__XorExpressionRule__Group__0 : rule__XorExpressionRule__Group__0__Impl rule__XorExpressionRule__Group__1 ;
+    // InternalBaseLanguage.g:1614:1: rule__XorExpressionRule__Group__0 : rule__XorExpressionRule__Group__0__Impl rule__XorExpressionRule__Group__1 ;
     public final void rule__XorExpressionRule__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:1568:1: ( rule__XorExpressionRule__Group__0__Impl rule__XorExpressionRule__Group__1 )
-            // InternalBaseLanguage.g:1569:2: rule__XorExpressionRule__Group__0__Impl rule__XorExpressionRule__Group__1
+            // InternalBaseLanguage.g:1618:1: ( rule__XorExpressionRule__Group__0__Impl rule__XorExpressionRule__Group__1 )
+            // InternalBaseLanguage.g:1619:2: rule__XorExpressionRule__Group__0__Impl rule__XorExpressionRule__Group__1
             {
             pushFollow(FOLLOW_6);
             rule__XorExpressionRule__Group__0__Impl();
@@ -5230,21 +5350,21 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__XorExpressionRule__Group__0__Impl"
-    // InternalBaseLanguage.g:1576:1: rule__XorExpressionRule__Group__0__Impl : ( ( rule__XorExpressionRule__SubExpressionsAssignment_0 ) ) ;
+    // InternalBaseLanguage.g:1626:1: rule__XorExpressionRule__Group__0__Impl : ( ( rule__XorExpressionRule__SubExpressionsAssignment_0 ) ) ;
     public final void rule__XorExpressionRule__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:1580:1: ( ( ( rule__XorExpressionRule__SubExpressionsAssignment_0 ) ) )
-            // InternalBaseLanguage.g:1581:1: ( ( rule__XorExpressionRule__SubExpressionsAssignment_0 ) )
+            // InternalBaseLanguage.g:1630:1: ( ( ( rule__XorExpressionRule__SubExpressionsAssignment_0 ) ) )
+            // InternalBaseLanguage.g:1631:1: ( ( rule__XorExpressionRule__SubExpressionsAssignment_0 ) )
             {
-            // InternalBaseLanguage.g:1581:1: ( ( rule__XorExpressionRule__SubExpressionsAssignment_0 ) )
-            // InternalBaseLanguage.g:1582:2: ( rule__XorExpressionRule__SubExpressionsAssignment_0 )
+            // InternalBaseLanguage.g:1631:1: ( ( rule__XorExpressionRule__SubExpressionsAssignment_0 ) )
+            // InternalBaseLanguage.g:1632:2: ( rule__XorExpressionRule__SubExpressionsAssignment_0 )
             {
              before(grammarAccess.getXorExpressionRuleAccess().getSubExpressionsAssignment_0()); 
-            // InternalBaseLanguage.g:1583:2: ( rule__XorExpressionRule__SubExpressionsAssignment_0 )
-            // InternalBaseLanguage.g:1583:3: rule__XorExpressionRule__SubExpressionsAssignment_0
+            // InternalBaseLanguage.g:1633:2: ( rule__XorExpressionRule__SubExpressionsAssignment_0 )
+            // InternalBaseLanguage.g:1633:3: rule__XorExpressionRule__SubExpressionsAssignment_0
             {
             pushFollow(FOLLOW_2);
             rule__XorExpressionRule__SubExpressionsAssignment_0();
@@ -5277,14 +5397,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__XorExpressionRule__Group__1"
-    // InternalBaseLanguage.g:1591:1: rule__XorExpressionRule__Group__1 : rule__XorExpressionRule__Group__1__Impl ;
+    // InternalBaseLanguage.g:1641:1: rule__XorExpressionRule__Group__1 : rule__XorExpressionRule__Group__1__Impl ;
     public final void rule__XorExpressionRule__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:1595:1: ( rule__XorExpressionRule__Group__1__Impl )
-            // InternalBaseLanguage.g:1596:2: rule__XorExpressionRule__Group__1__Impl
+            // InternalBaseLanguage.g:1645:1: ( rule__XorExpressionRule__Group__1__Impl )
+            // InternalBaseLanguage.g:1646:2: rule__XorExpressionRule__Group__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__XorExpressionRule__Group__1__Impl();
@@ -5310,20 +5430,20 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__XorExpressionRule__Group__1__Impl"
-    // InternalBaseLanguage.g:1602:1: rule__XorExpressionRule__Group__1__Impl : ( ( rule__XorExpressionRule__Group_1__0 )* ) ;
+    // InternalBaseLanguage.g:1652:1: rule__XorExpressionRule__Group__1__Impl : ( ( rule__XorExpressionRule__Group_1__0 )* ) ;
     public final void rule__XorExpressionRule__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:1606:1: ( ( ( rule__XorExpressionRule__Group_1__0 )* ) )
-            // InternalBaseLanguage.g:1607:1: ( ( rule__XorExpressionRule__Group_1__0 )* )
+            // InternalBaseLanguage.g:1656:1: ( ( ( rule__XorExpressionRule__Group_1__0 )* ) )
+            // InternalBaseLanguage.g:1657:1: ( ( rule__XorExpressionRule__Group_1__0 )* )
             {
-            // InternalBaseLanguage.g:1607:1: ( ( rule__XorExpressionRule__Group_1__0 )* )
-            // InternalBaseLanguage.g:1608:2: ( rule__XorExpressionRule__Group_1__0 )*
+            // InternalBaseLanguage.g:1657:1: ( ( rule__XorExpressionRule__Group_1__0 )* )
+            // InternalBaseLanguage.g:1658:2: ( rule__XorExpressionRule__Group_1__0 )*
             {
              before(grammarAccess.getXorExpressionRuleAccess().getGroup_1()); 
-            // InternalBaseLanguage.g:1609:2: ( rule__XorExpressionRule__Group_1__0 )*
+            // InternalBaseLanguage.g:1659:2: ( rule__XorExpressionRule__Group_1__0 )*
             loop12:
             do {
                 int alt12=2;
@@ -5336,7 +5456,7 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
                 switch (alt12) {
             	case 1 :
-            	    // InternalBaseLanguage.g:1609:3: rule__XorExpressionRule__Group_1__0
+            	    // InternalBaseLanguage.g:1659:3: rule__XorExpressionRule__Group_1__0
             	    {
             	    pushFollow(FOLLOW_7);
             	    rule__XorExpressionRule__Group_1__0();
@@ -5375,14 +5495,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__XorExpressionRule__Group_1__0"
-    // InternalBaseLanguage.g:1618:1: rule__XorExpressionRule__Group_1__0 : rule__XorExpressionRule__Group_1__0__Impl rule__XorExpressionRule__Group_1__1 ;
+    // InternalBaseLanguage.g:1668:1: rule__XorExpressionRule__Group_1__0 : rule__XorExpressionRule__Group_1__0__Impl rule__XorExpressionRule__Group_1__1 ;
     public final void rule__XorExpressionRule__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:1622:1: ( rule__XorExpressionRule__Group_1__0__Impl rule__XorExpressionRule__Group_1__1 )
-            // InternalBaseLanguage.g:1623:2: rule__XorExpressionRule__Group_1__0__Impl rule__XorExpressionRule__Group_1__1
+            // InternalBaseLanguage.g:1672:1: ( rule__XorExpressionRule__Group_1__0__Impl rule__XorExpressionRule__Group_1__1 )
+            // InternalBaseLanguage.g:1673:2: rule__XorExpressionRule__Group_1__0__Impl rule__XorExpressionRule__Group_1__1
             {
             pushFollow(FOLLOW_5);
             rule__XorExpressionRule__Group_1__0__Impl();
@@ -5413,17 +5533,17 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__XorExpressionRule__Group_1__0__Impl"
-    // InternalBaseLanguage.g:1630:1: rule__XorExpressionRule__Group_1__0__Impl : ( 'XOR' ) ;
+    // InternalBaseLanguage.g:1680:1: rule__XorExpressionRule__Group_1__0__Impl : ( 'XOR' ) ;
     public final void rule__XorExpressionRule__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:1634:1: ( ( 'XOR' ) )
-            // InternalBaseLanguage.g:1635:1: ( 'XOR' )
+            // InternalBaseLanguage.g:1684:1: ( ( 'XOR' ) )
+            // InternalBaseLanguage.g:1685:1: ( 'XOR' )
             {
-            // InternalBaseLanguage.g:1635:1: ( 'XOR' )
-            // InternalBaseLanguage.g:1636:2: 'XOR'
+            // InternalBaseLanguage.g:1685:1: ( 'XOR' )
+            // InternalBaseLanguage.g:1686:2: 'XOR'
             {
              before(grammarAccess.getXorExpressionRuleAccess().getXORKeyword_1_0()); 
             match(input,48,FOLLOW_2); 
@@ -5450,14 +5570,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__XorExpressionRule__Group_1__1"
-    // InternalBaseLanguage.g:1645:1: rule__XorExpressionRule__Group_1__1 : rule__XorExpressionRule__Group_1__1__Impl ;
+    // InternalBaseLanguage.g:1695:1: rule__XorExpressionRule__Group_1__1 : rule__XorExpressionRule__Group_1__1__Impl ;
     public final void rule__XorExpressionRule__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:1649:1: ( rule__XorExpressionRule__Group_1__1__Impl )
-            // InternalBaseLanguage.g:1650:2: rule__XorExpressionRule__Group_1__1__Impl
+            // InternalBaseLanguage.g:1699:1: ( rule__XorExpressionRule__Group_1__1__Impl )
+            // InternalBaseLanguage.g:1700:2: rule__XorExpressionRule__Group_1__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__XorExpressionRule__Group_1__1__Impl();
@@ -5483,21 +5603,21 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__XorExpressionRule__Group_1__1__Impl"
-    // InternalBaseLanguage.g:1656:1: rule__XorExpressionRule__Group_1__1__Impl : ( ( rule__XorExpressionRule__SubExpressionsAssignment_1_1 ) ) ;
+    // InternalBaseLanguage.g:1706:1: rule__XorExpressionRule__Group_1__1__Impl : ( ( rule__XorExpressionRule__SubExpressionsAssignment_1_1 ) ) ;
     public final void rule__XorExpressionRule__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:1660:1: ( ( ( rule__XorExpressionRule__SubExpressionsAssignment_1_1 ) ) )
-            // InternalBaseLanguage.g:1661:1: ( ( rule__XorExpressionRule__SubExpressionsAssignment_1_1 ) )
+            // InternalBaseLanguage.g:1710:1: ( ( ( rule__XorExpressionRule__SubExpressionsAssignment_1_1 ) ) )
+            // InternalBaseLanguage.g:1711:1: ( ( rule__XorExpressionRule__SubExpressionsAssignment_1_1 ) )
             {
-            // InternalBaseLanguage.g:1661:1: ( ( rule__XorExpressionRule__SubExpressionsAssignment_1_1 ) )
-            // InternalBaseLanguage.g:1662:2: ( rule__XorExpressionRule__SubExpressionsAssignment_1_1 )
+            // InternalBaseLanguage.g:1711:1: ( ( rule__XorExpressionRule__SubExpressionsAssignment_1_1 ) )
+            // InternalBaseLanguage.g:1712:2: ( rule__XorExpressionRule__SubExpressionsAssignment_1_1 )
             {
              before(grammarAccess.getXorExpressionRuleAccess().getSubExpressionsAssignment_1_1()); 
-            // InternalBaseLanguage.g:1663:2: ( rule__XorExpressionRule__SubExpressionsAssignment_1_1 )
-            // InternalBaseLanguage.g:1663:3: rule__XorExpressionRule__SubExpressionsAssignment_1_1
+            // InternalBaseLanguage.g:1713:2: ( rule__XorExpressionRule__SubExpressionsAssignment_1_1 )
+            // InternalBaseLanguage.g:1713:3: rule__XorExpressionRule__SubExpressionsAssignment_1_1
             {
             pushFollow(FOLLOW_2);
             rule__XorExpressionRule__SubExpressionsAssignment_1_1();
@@ -5530,14 +5650,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__AndExpressionRule__Group__0"
-    // InternalBaseLanguage.g:1672:1: rule__AndExpressionRule__Group__0 : rule__AndExpressionRule__Group__0__Impl rule__AndExpressionRule__Group__1 ;
+    // InternalBaseLanguage.g:1722:1: rule__AndExpressionRule__Group__0 : rule__AndExpressionRule__Group__0__Impl rule__AndExpressionRule__Group__1 ;
     public final void rule__AndExpressionRule__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:1676:1: ( rule__AndExpressionRule__Group__0__Impl rule__AndExpressionRule__Group__1 )
-            // InternalBaseLanguage.g:1677:2: rule__AndExpressionRule__Group__0__Impl rule__AndExpressionRule__Group__1
+            // InternalBaseLanguage.g:1726:1: ( rule__AndExpressionRule__Group__0__Impl rule__AndExpressionRule__Group__1 )
+            // InternalBaseLanguage.g:1727:2: rule__AndExpressionRule__Group__0__Impl rule__AndExpressionRule__Group__1
             {
             pushFollow(FOLLOW_8);
             rule__AndExpressionRule__Group__0__Impl();
@@ -5568,21 +5688,21 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__AndExpressionRule__Group__0__Impl"
-    // InternalBaseLanguage.g:1684:1: rule__AndExpressionRule__Group__0__Impl : ( ( rule__AndExpressionRule__SubExpressionsAssignment_0 ) ) ;
+    // InternalBaseLanguage.g:1734:1: rule__AndExpressionRule__Group__0__Impl : ( ( rule__AndExpressionRule__SubExpressionsAssignment_0 ) ) ;
     public final void rule__AndExpressionRule__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:1688:1: ( ( ( rule__AndExpressionRule__SubExpressionsAssignment_0 ) ) )
-            // InternalBaseLanguage.g:1689:1: ( ( rule__AndExpressionRule__SubExpressionsAssignment_0 ) )
+            // InternalBaseLanguage.g:1738:1: ( ( ( rule__AndExpressionRule__SubExpressionsAssignment_0 ) ) )
+            // InternalBaseLanguage.g:1739:1: ( ( rule__AndExpressionRule__SubExpressionsAssignment_0 ) )
             {
-            // InternalBaseLanguage.g:1689:1: ( ( rule__AndExpressionRule__SubExpressionsAssignment_0 ) )
-            // InternalBaseLanguage.g:1690:2: ( rule__AndExpressionRule__SubExpressionsAssignment_0 )
+            // InternalBaseLanguage.g:1739:1: ( ( rule__AndExpressionRule__SubExpressionsAssignment_0 ) )
+            // InternalBaseLanguage.g:1740:2: ( rule__AndExpressionRule__SubExpressionsAssignment_0 )
             {
              before(grammarAccess.getAndExpressionRuleAccess().getSubExpressionsAssignment_0()); 
-            // InternalBaseLanguage.g:1691:2: ( rule__AndExpressionRule__SubExpressionsAssignment_0 )
-            // InternalBaseLanguage.g:1691:3: rule__AndExpressionRule__SubExpressionsAssignment_0
+            // InternalBaseLanguage.g:1741:2: ( rule__AndExpressionRule__SubExpressionsAssignment_0 )
+            // InternalBaseLanguage.g:1741:3: rule__AndExpressionRule__SubExpressionsAssignment_0
             {
             pushFollow(FOLLOW_2);
             rule__AndExpressionRule__SubExpressionsAssignment_0();
@@ -5615,14 +5735,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__AndExpressionRule__Group__1"
-    // InternalBaseLanguage.g:1699:1: rule__AndExpressionRule__Group__1 : rule__AndExpressionRule__Group__1__Impl ;
+    // InternalBaseLanguage.g:1749:1: rule__AndExpressionRule__Group__1 : rule__AndExpressionRule__Group__1__Impl ;
     public final void rule__AndExpressionRule__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:1703:1: ( rule__AndExpressionRule__Group__1__Impl )
-            // InternalBaseLanguage.g:1704:2: rule__AndExpressionRule__Group__1__Impl
+            // InternalBaseLanguage.g:1753:1: ( rule__AndExpressionRule__Group__1__Impl )
+            // InternalBaseLanguage.g:1754:2: rule__AndExpressionRule__Group__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__AndExpressionRule__Group__1__Impl();
@@ -5648,20 +5768,20 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__AndExpressionRule__Group__1__Impl"
-    // InternalBaseLanguage.g:1710:1: rule__AndExpressionRule__Group__1__Impl : ( ( rule__AndExpressionRule__Group_1__0 )* ) ;
+    // InternalBaseLanguage.g:1760:1: rule__AndExpressionRule__Group__1__Impl : ( ( rule__AndExpressionRule__Group_1__0 )* ) ;
     public final void rule__AndExpressionRule__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:1714:1: ( ( ( rule__AndExpressionRule__Group_1__0 )* ) )
-            // InternalBaseLanguage.g:1715:1: ( ( rule__AndExpressionRule__Group_1__0 )* )
+            // InternalBaseLanguage.g:1764:1: ( ( ( rule__AndExpressionRule__Group_1__0 )* ) )
+            // InternalBaseLanguage.g:1765:1: ( ( rule__AndExpressionRule__Group_1__0 )* )
             {
-            // InternalBaseLanguage.g:1715:1: ( ( rule__AndExpressionRule__Group_1__0 )* )
-            // InternalBaseLanguage.g:1716:2: ( rule__AndExpressionRule__Group_1__0 )*
+            // InternalBaseLanguage.g:1765:1: ( ( rule__AndExpressionRule__Group_1__0 )* )
+            // InternalBaseLanguage.g:1766:2: ( rule__AndExpressionRule__Group_1__0 )*
             {
              before(grammarAccess.getAndExpressionRuleAccess().getGroup_1()); 
-            // InternalBaseLanguage.g:1717:2: ( rule__AndExpressionRule__Group_1__0 )*
+            // InternalBaseLanguage.g:1767:2: ( rule__AndExpressionRule__Group_1__0 )*
             loop13:
             do {
                 int alt13=2;
@@ -5674,7 +5794,7 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
                 switch (alt13) {
             	case 1 :
-            	    // InternalBaseLanguage.g:1717:3: rule__AndExpressionRule__Group_1__0
+            	    // InternalBaseLanguage.g:1767:3: rule__AndExpressionRule__Group_1__0
             	    {
             	    pushFollow(FOLLOW_9);
             	    rule__AndExpressionRule__Group_1__0();
@@ -5713,14 +5833,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__AndExpressionRule__Group_1__0"
-    // InternalBaseLanguage.g:1726:1: rule__AndExpressionRule__Group_1__0 : rule__AndExpressionRule__Group_1__0__Impl rule__AndExpressionRule__Group_1__1 ;
+    // InternalBaseLanguage.g:1776:1: rule__AndExpressionRule__Group_1__0 : rule__AndExpressionRule__Group_1__0__Impl rule__AndExpressionRule__Group_1__1 ;
     public final void rule__AndExpressionRule__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:1730:1: ( rule__AndExpressionRule__Group_1__0__Impl rule__AndExpressionRule__Group_1__1 )
-            // InternalBaseLanguage.g:1731:2: rule__AndExpressionRule__Group_1__0__Impl rule__AndExpressionRule__Group_1__1
+            // InternalBaseLanguage.g:1780:1: ( rule__AndExpressionRule__Group_1__0__Impl rule__AndExpressionRule__Group_1__1 )
+            // InternalBaseLanguage.g:1781:2: rule__AndExpressionRule__Group_1__0__Impl rule__AndExpressionRule__Group_1__1
             {
             pushFollow(FOLLOW_5);
             rule__AndExpressionRule__Group_1__0__Impl();
@@ -5751,17 +5871,17 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__AndExpressionRule__Group_1__0__Impl"
-    // InternalBaseLanguage.g:1738:1: rule__AndExpressionRule__Group_1__0__Impl : ( 'AND' ) ;
+    // InternalBaseLanguage.g:1788:1: rule__AndExpressionRule__Group_1__0__Impl : ( 'AND' ) ;
     public final void rule__AndExpressionRule__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:1742:1: ( ( 'AND' ) )
-            // InternalBaseLanguage.g:1743:1: ( 'AND' )
+            // InternalBaseLanguage.g:1792:1: ( ( 'AND' ) )
+            // InternalBaseLanguage.g:1793:1: ( 'AND' )
             {
-            // InternalBaseLanguage.g:1743:1: ( 'AND' )
-            // InternalBaseLanguage.g:1744:2: 'AND'
+            // InternalBaseLanguage.g:1793:1: ( 'AND' )
+            // InternalBaseLanguage.g:1794:2: 'AND'
             {
              before(grammarAccess.getAndExpressionRuleAccess().getANDKeyword_1_0()); 
             match(input,49,FOLLOW_2); 
@@ -5788,14 +5908,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__AndExpressionRule__Group_1__1"
-    // InternalBaseLanguage.g:1753:1: rule__AndExpressionRule__Group_1__1 : rule__AndExpressionRule__Group_1__1__Impl ;
+    // InternalBaseLanguage.g:1803:1: rule__AndExpressionRule__Group_1__1 : rule__AndExpressionRule__Group_1__1__Impl ;
     public final void rule__AndExpressionRule__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:1757:1: ( rule__AndExpressionRule__Group_1__1__Impl )
-            // InternalBaseLanguage.g:1758:2: rule__AndExpressionRule__Group_1__1__Impl
+            // InternalBaseLanguage.g:1807:1: ( rule__AndExpressionRule__Group_1__1__Impl )
+            // InternalBaseLanguage.g:1808:2: rule__AndExpressionRule__Group_1__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__AndExpressionRule__Group_1__1__Impl();
@@ -5821,21 +5941,21 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__AndExpressionRule__Group_1__1__Impl"
-    // InternalBaseLanguage.g:1764:1: rule__AndExpressionRule__Group_1__1__Impl : ( ( rule__AndExpressionRule__SubExpressionsAssignment_1_1 ) ) ;
+    // InternalBaseLanguage.g:1814:1: rule__AndExpressionRule__Group_1__1__Impl : ( ( rule__AndExpressionRule__SubExpressionsAssignment_1_1 ) ) ;
     public final void rule__AndExpressionRule__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:1768:1: ( ( ( rule__AndExpressionRule__SubExpressionsAssignment_1_1 ) ) )
-            // InternalBaseLanguage.g:1769:1: ( ( rule__AndExpressionRule__SubExpressionsAssignment_1_1 ) )
+            // InternalBaseLanguage.g:1818:1: ( ( ( rule__AndExpressionRule__SubExpressionsAssignment_1_1 ) ) )
+            // InternalBaseLanguage.g:1819:1: ( ( rule__AndExpressionRule__SubExpressionsAssignment_1_1 ) )
             {
-            // InternalBaseLanguage.g:1769:1: ( ( rule__AndExpressionRule__SubExpressionsAssignment_1_1 ) )
-            // InternalBaseLanguage.g:1770:2: ( rule__AndExpressionRule__SubExpressionsAssignment_1_1 )
+            // InternalBaseLanguage.g:1819:1: ( ( rule__AndExpressionRule__SubExpressionsAssignment_1_1 ) )
+            // InternalBaseLanguage.g:1820:2: ( rule__AndExpressionRule__SubExpressionsAssignment_1_1 )
             {
              before(grammarAccess.getAndExpressionRuleAccess().getSubExpressionsAssignment_1_1()); 
-            // InternalBaseLanguage.g:1771:2: ( rule__AndExpressionRule__SubExpressionsAssignment_1_1 )
-            // InternalBaseLanguage.g:1771:3: rule__AndExpressionRule__SubExpressionsAssignment_1_1
+            // InternalBaseLanguage.g:1821:2: ( rule__AndExpressionRule__SubExpressionsAssignment_1_1 )
+            // InternalBaseLanguage.g:1821:3: rule__AndExpressionRule__SubExpressionsAssignment_1_1
             {
             pushFollow(FOLLOW_2);
             rule__AndExpressionRule__SubExpressionsAssignment_1_1();
@@ -5868,14 +5988,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__NotExpressionRule__Group__0"
-    // InternalBaseLanguage.g:1780:1: rule__NotExpressionRule__Group__0 : rule__NotExpressionRule__Group__0__Impl rule__NotExpressionRule__Group__1 ;
+    // InternalBaseLanguage.g:1830:1: rule__NotExpressionRule__Group__0 : rule__NotExpressionRule__Group__0__Impl rule__NotExpressionRule__Group__1 ;
     public final void rule__NotExpressionRule__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:1784:1: ( rule__NotExpressionRule__Group__0__Impl rule__NotExpressionRule__Group__1 )
-            // InternalBaseLanguage.g:1785:2: rule__NotExpressionRule__Group__0__Impl rule__NotExpressionRule__Group__1
+            // InternalBaseLanguage.g:1834:1: ( rule__NotExpressionRule__Group__0__Impl rule__NotExpressionRule__Group__1 )
+            // InternalBaseLanguage.g:1835:2: rule__NotExpressionRule__Group__0__Impl rule__NotExpressionRule__Group__1
             {
             pushFollow(FOLLOW_5);
             rule__NotExpressionRule__Group__0__Impl();
@@ -5906,29 +6026,29 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__NotExpressionRule__Group__0__Impl"
-    // InternalBaseLanguage.g:1792:1: rule__NotExpressionRule__Group__0__Impl : ( ( rule__NotExpressionRule__NegatedAssignment_0 )? ) ;
+    // InternalBaseLanguage.g:1842:1: rule__NotExpressionRule__Group__0__Impl : ( ( rule__NotExpressionRule__NegatedAssignment_0 )? ) ;
     public final void rule__NotExpressionRule__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:1796:1: ( ( ( rule__NotExpressionRule__NegatedAssignment_0 )? ) )
-            // InternalBaseLanguage.g:1797:1: ( ( rule__NotExpressionRule__NegatedAssignment_0 )? )
+            // InternalBaseLanguage.g:1846:1: ( ( ( rule__NotExpressionRule__NegatedAssignment_0 )? ) )
+            // InternalBaseLanguage.g:1847:1: ( ( rule__NotExpressionRule__NegatedAssignment_0 )? )
             {
-            // InternalBaseLanguage.g:1797:1: ( ( rule__NotExpressionRule__NegatedAssignment_0 )? )
-            // InternalBaseLanguage.g:1798:2: ( rule__NotExpressionRule__NegatedAssignment_0 )?
+            // InternalBaseLanguage.g:1847:1: ( ( rule__NotExpressionRule__NegatedAssignment_0 )? )
+            // InternalBaseLanguage.g:1848:2: ( rule__NotExpressionRule__NegatedAssignment_0 )?
             {
              before(grammarAccess.getNotExpressionRuleAccess().getNegatedAssignment_0()); 
-            // InternalBaseLanguage.g:1799:2: ( rule__NotExpressionRule__NegatedAssignment_0 )?
+            // InternalBaseLanguage.g:1849:2: ( rule__NotExpressionRule__NegatedAssignment_0 )?
             int alt14=2;
             int LA14_0 = input.LA(1);
 
-            if ( (LA14_0==70) ) {
+            if ( (LA14_0==73) ) {
                 alt14=1;
             }
             switch (alt14) {
                 case 1 :
-                    // InternalBaseLanguage.g:1799:3: rule__NotExpressionRule__NegatedAssignment_0
+                    // InternalBaseLanguage.g:1849:3: rule__NotExpressionRule__NegatedAssignment_0
                     {
                     pushFollow(FOLLOW_2);
                     rule__NotExpressionRule__NegatedAssignment_0();
@@ -5964,14 +6084,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__NotExpressionRule__Group__1"
-    // InternalBaseLanguage.g:1807:1: rule__NotExpressionRule__Group__1 : rule__NotExpressionRule__Group__1__Impl ;
+    // InternalBaseLanguage.g:1857:1: rule__NotExpressionRule__Group__1 : rule__NotExpressionRule__Group__1__Impl ;
     public final void rule__NotExpressionRule__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:1811:1: ( rule__NotExpressionRule__Group__1__Impl )
-            // InternalBaseLanguage.g:1812:2: rule__NotExpressionRule__Group__1__Impl
+            // InternalBaseLanguage.g:1861:1: ( rule__NotExpressionRule__Group__1__Impl )
+            // InternalBaseLanguage.g:1862:2: rule__NotExpressionRule__Group__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__NotExpressionRule__Group__1__Impl();
@@ -5997,21 +6117,21 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__NotExpressionRule__Group__1__Impl"
-    // InternalBaseLanguage.g:1818:1: rule__NotExpressionRule__Group__1__Impl : ( ( rule__NotExpressionRule__OperandAssignment_1 ) ) ;
+    // InternalBaseLanguage.g:1868:1: rule__NotExpressionRule__Group__1__Impl : ( ( rule__NotExpressionRule__OperandAssignment_1 ) ) ;
     public final void rule__NotExpressionRule__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:1822:1: ( ( ( rule__NotExpressionRule__OperandAssignment_1 ) ) )
-            // InternalBaseLanguage.g:1823:1: ( ( rule__NotExpressionRule__OperandAssignment_1 ) )
+            // InternalBaseLanguage.g:1872:1: ( ( ( rule__NotExpressionRule__OperandAssignment_1 ) ) )
+            // InternalBaseLanguage.g:1873:1: ( ( rule__NotExpressionRule__OperandAssignment_1 ) )
             {
-            // InternalBaseLanguage.g:1823:1: ( ( rule__NotExpressionRule__OperandAssignment_1 ) )
-            // InternalBaseLanguage.g:1824:2: ( rule__NotExpressionRule__OperandAssignment_1 )
+            // InternalBaseLanguage.g:1873:1: ( ( rule__NotExpressionRule__OperandAssignment_1 ) )
+            // InternalBaseLanguage.g:1874:2: ( rule__NotExpressionRule__OperandAssignment_1 )
             {
              before(grammarAccess.getNotExpressionRuleAccess().getOperandAssignment_1()); 
-            // InternalBaseLanguage.g:1825:2: ( rule__NotExpressionRule__OperandAssignment_1 )
-            // InternalBaseLanguage.g:1825:3: rule__NotExpressionRule__OperandAssignment_1
+            // InternalBaseLanguage.g:1875:2: ( rule__NotExpressionRule__OperandAssignment_1 )
+            // InternalBaseLanguage.g:1875:3: rule__NotExpressionRule__OperandAssignment_1
             {
             pushFollow(FOLLOW_2);
             rule__NotExpressionRule__OperandAssignment_1();
@@ -6044,14 +6164,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__ComparisonExpressionRule__Group__0"
-    // InternalBaseLanguage.g:1834:1: rule__ComparisonExpressionRule__Group__0 : rule__ComparisonExpressionRule__Group__0__Impl rule__ComparisonExpressionRule__Group__1 ;
+    // InternalBaseLanguage.g:1884:1: rule__ComparisonExpressionRule__Group__0 : rule__ComparisonExpressionRule__Group__0__Impl rule__ComparisonExpressionRule__Group__1 ;
     public final void rule__ComparisonExpressionRule__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:1838:1: ( rule__ComparisonExpressionRule__Group__0__Impl rule__ComparisonExpressionRule__Group__1 )
-            // InternalBaseLanguage.g:1839:2: rule__ComparisonExpressionRule__Group__0__Impl rule__ComparisonExpressionRule__Group__1
+            // InternalBaseLanguage.g:1888:1: ( rule__ComparisonExpressionRule__Group__0__Impl rule__ComparisonExpressionRule__Group__1 )
+            // InternalBaseLanguage.g:1889:2: rule__ComparisonExpressionRule__Group__0__Impl rule__ComparisonExpressionRule__Group__1
             {
             pushFollow(FOLLOW_10);
             rule__ComparisonExpressionRule__Group__0__Impl();
@@ -6082,21 +6202,21 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__ComparisonExpressionRule__Group__0__Impl"
-    // InternalBaseLanguage.g:1846:1: rule__ComparisonExpressionRule__Group__0__Impl : ( ( rule__ComparisonExpressionRule__LeftOperandAssignment_0 ) ) ;
+    // InternalBaseLanguage.g:1896:1: rule__ComparisonExpressionRule__Group__0__Impl : ( ( rule__ComparisonExpressionRule__LeftOperandAssignment_0 ) ) ;
     public final void rule__ComparisonExpressionRule__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:1850:1: ( ( ( rule__ComparisonExpressionRule__LeftOperandAssignment_0 ) ) )
-            // InternalBaseLanguage.g:1851:1: ( ( rule__ComparisonExpressionRule__LeftOperandAssignment_0 ) )
+            // InternalBaseLanguage.g:1900:1: ( ( ( rule__ComparisonExpressionRule__LeftOperandAssignment_0 ) ) )
+            // InternalBaseLanguage.g:1901:1: ( ( rule__ComparisonExpressionRule__LeftOperandAssignment_0 ) )
             {
-            // InternalBaseLanguage.g:1851:1: ( ( rule__ComparisonExpressionRule__LeftOperandAssignment_0 ) )
-            // InternalBaseLanguage.g:1852:2: ( rule__ComparisonExpressionRule__LeftOperandAssignment_0 )
+            // InternalBaseLanguage.g:1901:1: ( ( rule__ComparisonExpressionRule__LeftOperandAssignment_0 ) )
+            // InternalBaseLanguage.g:1902:2: ( rule__ComparisonExpressionRule__LeftOperandAssignment_0 )
             {
              before(grammarAccess.getComparisonExpressionRuleAccess().getLeftOperandAssignment_0()); 
-            // InternalBaseLanguage.g:1853:2: ( rule__ComparisonExpressionRule__LeftOperandAssignment_0 )
-            // InternalBaseLanguage.g:1853:3: rule__ComparisonExpressionRule__LeftOperandAssignment_0
+            // InternalBaseLanguage.g:1903:2: ( rule__ComparisonExpressionRule__LeftOperandAssignment_0 )
+            // InternalBaseLanguage.g:1903:3: rule__ComparisonExpressionRule__LeftOperandAssignment_0
             {
             pushFollow(FOLLOW_2);
             rule__ComparisonExpressionRule__LeftOperandAssignment_0();
@@ -6129,14 +6249,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__ComparisonExpressionRule__Group__1"
-    // InternalBaseLanguage.g:1861:1: rule__ComparisonExpressionRule__Group__1 : rule__ComparisonExpressionRule__Group__1__Impl ;
+    // InternalBaseLanguage.g:1911:1: rule__ComparisonExpressionRule__Group__1 : rule__ComparisonExpressionRule__Group__1__Impl ;
     public final void rule__ComparisonExpressionRule__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:1865:1: ( rule__ComparisonExpressionRule__Group__1__Impl )
-            // InternalBaseLanguage.g:1866:2: rule__ComparisonExpressionRule__Group__1__Impl
+            // InternalBaseLanguage.g:1915:1: ( rule__ComparisonExpressionRule__Group__1__Impl )
+            // InternalBaseLanguage.g:1916:2: rule__ComparisonExpressionRule__Group__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__ComparisonExpressionRule__Group__1__Impl();
@@ -6162,20 +6282,20 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__ComparisonExpressionRule__Group__1__Impl"
-    // InternalBaseLanguage.g:1872:1: rule__ComparisonExpressionRule__Group__1__Impl : ( ( rule__ComparisonExpressionRule__ComparisonAssignment_1 )* ) ;
+    // InternalBaseLanguage.g:1922:1: rule__ComparisonExpressionRule__Group__1__Impl : ( ( rule__ComparisonExpressionRule__ComparisonAssignment_1 )* ) ;
     public final void rule__ComparisonExpressionRule__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:1876:1: ( ( ( rule__ComparisonExpressionRule__ComparisonAssignment_1 )* ) )
-            // InternalBaseLanguage.g:1877:1: ( ( rule__ComparisonExpressionRule__ComparisonAssignment_1 )* )
+            // InternalBaseLanguage.g:1926:1: ( ( ( rule__ComparisonExpressionRule__ComparisonAssignment_1 )* ) )
+            // InternalBaseLanguage.g:1927:1: ( ( rule__ComparisonExpressionRule__ComparisonAssignment_1 )* )
             {
-            // InternalBaseLanguage.g:1877:1: ( ( rule__ComparisonExpressionRule__ComparisonAssignment_1 )* )
-            // InternalBaseLanguage.g:1878:2: ( rule__ComparisonExpressionRule__ComparisonAssignment_1 )*
+            // InternalBaseLanguage.g:1927:1: ( ( rule__ComparisonExpressionRule__ComparisonAssignment_1 )* )
+            // InternalBaseLanguage.g:1928:2: ( rule__ComparisonExpressionRule__ComparisonAssignment_1 )*
             {
              before(grammarAccess.getComparisonExpressionRuleAccess().getComparisonAssignment_1()); 
-            // InternalBaseLanguage.g:1879:2: ( rule__ComparisonExpressionRule__ComparisonAssignment_1 )*
+            // InternalBaseLanguage.g:1929:2: ( rule__ComparisonExpressionRule__ComparisonAssignment_1 )*
             loop15:
             do {
                 int alt15=2;
@@ -6188,7 +6308,7 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
                 switch (alt15) {
             	case 1 :
-            	    // InternalBaseLanguage.g:1879:3: rule__ComparisonExpressionRule__ComparisonAssignment_1
+            	    // InternalBaseLanguage.g:1929:3: rule__ComparisonExpressionRule__ComparisonAssignment_1
             	    {
             	    pushFollow(FOLLOW_11);
             	    rule__ComparisonExpressionRule__ComparisonAssignment_1();
@@ -6227,14 +6347,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__PartialComparisonExpressionRule__Group__0"
-    // InternalBaseLanguage.g:1888:1: rule__PartialComparisonExpressionRule__Group__0 : rule__PartialComparisonExpressionRule__Group__0__Impl rule__PartialComparisonExpressionRule__Group__1 ;
+    // InternalBaseLanguage.g:1938:1: rule__PartialComparisonExpressionRule__Group__0 : rule__PartialComparisonExpressionRule__Group__0__Impl rule__PartialComparisonExpressionRule__Group__1 ;
     public final void rule__PartialComparisonExpressionRule__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:1892:1: ( rule__PartialComparisonExpressionRule__Group__0__Impl rule__PartialComparisonExpressionRule__Group__1 )
-            // InternalBaseLanguage.g:1893:2: rule__PartialComparisonExpressionRule__Group__0__Impl rule__PartialComparisonExpressionRule__Group__1
+            // InternalBaseLanguage.g:1942:1: ( rule__PartialComparisonExpressionRule__Group__0__Impl rule__PartialComparisonExpressionRule__Group__1 )
+            // InternalBaseLanguage.g:1943:2: rule__PartialComparisonExpressionRule__Group__0__Impl rule__PartialComparisonExpressionRule__Group__1
             {
             pushFollow(FOLLOW_5);
             rule__PartialComparisonExpressionRule__Group__0__Impl();
@@ -6265,21 +6385,21 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__PartialComparisonExpressionRule__Group__0__Impl"
-    // InternalBaseLanguage.g:1900:1: rule__PartialComparisonExpressionRule__Group__0__Impl : ( ( rule__PartialComparisonExpressionRule__OperatorAssignment_0 ) ) ;
+    // InternalBaseLanguage.g:1950:1: rule__PartialComparisonExpressionRule__Group__0__Impl : ( ( rule__PartialComparisonExpressionRule__OperatorAssignment_0 ) ) ;
     public final void rule__PartialComparisonExpressionRule__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:1904:1: ( ( ( rule__PartialComparisonExpressionRule__OperatorAssignment_0 ) ) )
-            // InternalBaseLanguage.g:1905:1: ( ( rule__PartialComparisonExpressionRule__OperatorAssignment_0 ) )
+            // InternalBaseLanguage.g:1954:1: ( ( ( rule__PartialComparisonExpressionRule__OperatorAssignment_0 ) ) )
+            // InternalBaseLanguage.g:1955:1: ( ( rule__PartialComparisonExpressionRule__OperatorAssignment_0 ) )
             {
-            // InternalBaseLanguage.g:1905:1: ( ( rule__PartialComparisonExpressionRule__OperatorAssignment_0 ) )
-            // InternalBaseLanguage.g:1906:2: ( rule__PartialComparisonExpressionRule__OperatorAssignment_0 )
+            // InternalBaseLanguage.g:1955:1: ( ( rule__PartialComparisonExpressionRule__OperatorAssignment_0 ) )
+            // InternalBaseLanguage.g:1956:2: ( rule__PartialComparisonExpressionRule__OperatorAssignment_0 )
             {
              before(grammarAccess.getPartialComparisonExpressionRuleAccess().getOperatorAssignment_0()); 
-            // InternalBaseLanguage.g:1907:2: ( rule__PartialComparisonExpressionRule__OperatorAssignment_0 )
-            // InternalBaseLanguage.g:1907:3: rule__PartialComparisonExpressionRule__OperatorAssignment_0
+            // InternalBaseLanguage.g:1957:2: ( rule__PartialComparisonExpressionRule__OperatorAssignment_0 )
+            // InternalBaseLanguage.g:1957:3: rule__PartialComparisonExpressionRule__OperatorAssignment_0
             {
             pushFollow(FOLLOW_2);
             rule__PartialComparisonExpressionRule__OperatorAssignment_0();
@@ -6312,14 +6432,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__PartialComparisonExpressionRule__Group__1"
-    // InternalBaseLanguage.g:1915:1: rule__PartialComparisonExpressionRule__Group__1 : rule__PartialComparisonExpressionRule__Group__1__Impl ;
+    // InternalBaseLanguage.g:1965:1: rule__PartialComparisonExpressionRule__Group__1 : rule__PartialComparisonExpressionRule__Group__1__Impl ;
     public final void rule__PartialComparisonExpressionRule__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:1919:1: ( rule__PartialComparisonExpressionRule__Group__1__Impl )
-            // InternalBaseLanguage.g:1920:2: rule__PartialComparisonExpressionRule__Group__1__Impl
+            // InternalBaseLanguage.g:1969:1: ( rule__PartialComparisonExpressionRule__Group__1__Impl )
+            // InternalBaseLanguage.g:1970:2: rule__PartialComparisonExpressionRule__Group__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__PartialComparisonExpressionRule__Group__1__Impl();
@@ -6345,21 +6465,21 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__PartialComparisonExpressionRule__Group__1__Impl"
-    // InternalBaseLanguage.g:1926:1: rule__PartialComparisonExpressionRule__Group__1__Impl : ( ( rule__PartialComparisonExpressionRule__SubExpressionAssignment_1 ) ) ;
+    // InternalBaseLanguage.g:1976:1: rule__PartialComparisonExpressionRule__Group__1__Impl : ( ( rule__PartialComparisonExpressionRule__SubExpressionAssignment_1 ) ) ;
     public final void rule__PartialComparisonExpressionRule__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:1930:1: ( ( ( rule__PartialComparisonExpressionRule__SubExpressionAssignment_1 ) ) )
-            // InternalBaseLanguage.g:1931:1: ( ( rule__PartialComparisonExpressionRule__SubExpressionAssignment_1 ) )
+            // InternalBaseLanguage.g:1980:1: ( ( ( rule__PartialComparisonExpressionRule__SubExpressionAssignment_1 ) ) )
+            // InternalBaseLanguage.g:1981:1: ( ( rule__PartialComparisonExpressionRule__SubExpressionAssignment_1 ) )
             {
-            // InternalBaseLanguage.g:1931:1: ( ( rule__PartialComparisonExpressionRule__SubExpressionAssignment_1 ) )
-            // InternalBaseLanguage.g:1932:2: ( rule__PartialComparisonExpressionRule__SubExpressionAssignment_1 )
+            // InternalBaseLanguage.g:1981:1: ( ( rule__PartialComparisonExpressionRule__SubExpressionAssignment_1 ) )
+            // InternalBaseLanguage.g:1982:2: ( rule__PartialComparisonExpressionRule__SubExpressionAssignment_1 )
             {
              before(grammarAccess.getPartialComparisonExpressionRuleAccess().getSubExpressionAssignment_1()); 
-            // InternalBaseLanguage.g:1933:2: ( rule__PartialComparisonExpressionRule__SubExpressionAssignment_1 )
-            // InternalBaseLanguage.g:1933:3: rule__PartialComparisonExpressionRule__SubExpressionAssignment_1
+            // InternalBaseLanguage.g:1983:2: ( rule__PartialComparisonExpressionRule__SubExpressionAssignment_1 )
+            // InternalBaseLanguage.g:1983:3: rule__PartialComparisonExpressionRule__SubExpressionAssignment_1
             {
             pushFollow(FOLLOW_2);
             rule__PartialComparisonExpressionRule__SubExpressionAssignment_1();
@@ -6392,14 +6512,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__AddOrSubtractExpressionRule__Group__0"
-    // InternalBaseLanguage.g:1942:1: rule__AddOrSubtractExpressionRule__Group__0 : rule__AddOrSubtractExpressionRule__Group__0__Impl rule__AddOrSubtractExpressionRule__Group__1 ;
+    // InternalBaseLanguage.g:1992:1: rule__AddOrSubtractExpressionRule__Group__0 : rule__AddOrSubtractExpressionRule__Group__0__Impl rule__AddOrSubtractExpressionRule__Group__1 ;
     public final void rule__AddOrSubtractExpressionRule__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:1946:1: ( rule__AddOrSubtractExpressionRule__Group__0__Impl rule__AddOrSubtractExpressionRule__Group__1 )
-            // InternalBaseLanguage.g:1947:2: rule__AddOrSubtractExpressionRule__Group__0__Impl rule__AddOrSubtractExpressionRule__Group__1
+            // InternalBaseLanguage.g:1996:1: ( rule__AddOrSubtractExpressionRule__Group__0__Impl rule__AddOrSubtractExpressionRule__Group__1 )
+            // InternalBaseLanguage.g:1997:2: rule__AddOrSubtractExpressionRule__Group__0__Impl rule__AddOrSubtractExpressionRule__Group__1
             {
             pushFollow(FOLLOW_12);
             rule__AddOrSubtractExpressionRule__Group__0__Impl();
@@ -6430,21 +6550,21 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__AddOrSubtractExpressionRule__Group__0__Impl"
-    // InternalBaseLanguage.g:1954:1: rule__AddOrSubtractExpressionRule__Group__0__Impl : ( ( rule__AddOrSubtractExpressionRule__LeftOperandAssignment_0 ) ) ;
+    // InternalBaseLanguage.g:2004:1: rule__AddOrSubtractExpressionRule__Group__0__Impl : ( ( rule__AddOrSubtractExpressionRule__LeftOperandAssignment_0 ) ) ;
     public final void rule__AddOrSubtractExpressionRule__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:1958:1: ( ( ( rule__AddOrSubtractExpressionRule__LeftOperandAssignment_0 ) ) )
-            // InternalBaseLanguage.g:1959:1: ( ( rule__AddOrSubtractExpressionRule__LeftOperandAssignment_0 ) )
+            // InternalBaseLanguage.g:2008:1: ( ( ( rule__AddOrSubtractExpressionRule__LeftOperandAssignment_0 ) ) )
+            // InternalBaseLanguage.g:2009:1: ( ( rule__AddOrSubtractExpressionRule__LeftOperandAssignment_0 ) )
             {
-            // InternalBaseLanguage.g:1959:1: ( ( rule__AddOrSubtractExpressionRule__LeftOperandAssignment_0 ) )
-            // InternalBaseLanguage.g:1960:2: ( rule__AddOrSubtractExpressionRule__LeftOperandAssignment_0 )
+            // InternalBaseLanguage.g:2009:1: ( ( rule__AddOrSubtractExpressionRule__LeftOperandAssignment_0 ) )
+            // InternalBaseLanguage.g:2010:2: ( rule__AddOrSubtractExpressionRule__LeftOperandAssignment_0 )
             {
              before(grammarAccess.getAddOrSubtractExpressionRuleAccess().getLeftOperandAssignment_0()); 
-            // InternalBaseLanguage.g:1961:2: ( rule__AddOrSubtractExpressionRule__LeftOperandAssignment_0 )
-            // InternalBaseLanguage.g:1961:3: rule__AddOrSubtractExpressionRule__LeftOperandAssignment_0
+            // InternalBaseLanguage.g:2011:2: ( rule__AddOrSubtractExpressionRule__LeftOperandAssignment_0 )
+            // InternalBaseLanguage.g:2011:3: rule__AddOrSubtractExpressionRule__LeftOperandAssignment_0
             {
             pushFollow(FOLLOW_2);
             rule__AddOrSubtractExpressionRule__LeftOperandAssignment_0();
@@ -6477,14 +6597,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__AddOrSubtractExpressionRule__Group__1"
-    // InternalBaseLanguage.g:1969:1: rule__AddOrSubtractExpressionRule__Group__1 : rule__AddOrSubtractExpressionRule__Group__1__Impl ;
+    // InternalBaseLanguage.g:2019:1: rule__AddOrSubtractExpressionRule__Group__1 : rule__AddOrSubtractExpressionRule__Group__1__Impl ;
     public final void rule__AddOrSubtractExpressionRule__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:1973:1: ( rule__AddOrSubtractExpressionRule__Group__1__Impl )
-            // InternalBaseLanguage.g:1974:2: rule__AddOrSubtractExpressionRule__Group__1__Impl
+            // InternalBaseLanguage.g:2023:1: ( rule__AddOrSubtractExpressionRule__Group__1__Impl )
+            // InternalBaseLanguage.g:2024:2: rule__AddOrSubtractExpressionRule__Group__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__AddOrSubtractExpressionRule__Group__1__Impl();
@@ -6510,20 +6630,20 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__AddOrSubtractExpressionRule__Group__1__Impl"
-    // InternalBaseLanguage.g:1980:1: rule__AddOrSubtractExpressionRule__Group__1__Impl : ( ( rule__AddOrSubtractExpressionRule__Group_1__0 )* ) ;
+    // InternalBaseLanguage.g:2030:1: rule__AddOrSubtractExpressionRule__Group__1__Impl : ( ( rule__AddOrSubtractExpressionRule__Group_1__0 )* ) ;
     public final void rule__AddOrSubtractExpressionRule__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:1984:1: ( ( ( rule__AddOrSubtractExpressionRule__Group_1__0 )* ) )
-            // InternalBaseLanguage.g:1985:1: ( ( rule__AddOrSubtractExpressionRule__Group_1__0 )* )
+            // InternalBaseLanguage.g:2034:1: ( ( ( rule__AddOrSubtractExpressionRule__Group_1__0 )* ) )
+            // InternalBaseLanguage.g:2035:1: ( ( rule__AddOrSubtractExpressionRule__Group_1__0 )* )
             {
-            // InternalBaseLanguage.g:1985:1: ( ( rule__AddOrSubtractExpressionRule__Group_1__0 )* )
-            // InternalBaseLanguage.g:1986:2: ( rule__AddOrSubtractExpressionRule__Group_1__0 )*
+            // InternalBaseLanguage.g:2035:1: ( ( rule__AddOrSubtractExpressionRule__Group_1__0 )* )
+            // InternalBaseLanguage.g:2036:2: ( rule__AddOrSubtractExpressionRule__Group_1__0 )*
             {
              before(grammarAccess.getAddOrSubtractExpressionRuleAccess().getGroup_1()); 
-            // InternalBaseLanguage.g:1987:2: ( rule__AddOrSubtractExpressionRule__Group_1__0 )*
+            // InternalBaseLanguage.g:2037:2: ( rule__AddOrSubtractExpressionRule__Group_1__0 )*
             loop16:
             do {
                 int alt16=2;
@@ -6536,7 +6656,7 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
                 switch (alt16) {
             	case 1 :
-            	    // InternalBaseLanguage.g:1987:3: rule__AddOrSubtractExpressionRule__Group_1__0
+            	    // InternalBaseLanguage.g:2037:3: rule__AddOrSubtractExpressionRule__Group_1__0
             	    {
             	    pushFollow(FOLLOW_13);
             	    rule__AddOrSubtractExpressionRule__Group_1__0();
@@ -6575,14 +6695,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__AddOrSubtractExpressionRule__Group_1__0"
-    // InternalBaseLanguage.g:1996:1: rule__AddOrSubtractExpressionRule__Group_1__0 : rule__AddOrSubtractExpressionRule__Group_1__0__Impl rule__AddOrSubtractExpressionRule__Group_1__1 ;
+    // InternalBaseLanguage.g:2046:1: rule__AddOrSubtractExpressionRule__Group_1__0 : rule__AddOrSubtractExpressionRule__Group_1__0__Impl rule__AddOrSubtractExpressionRule__Group_1__1 ;
     public final void rule__AddOrSubtractExpressionRule__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:2000:1: ( rule__AddOrSubtractExpressionRule__Group_1__0__Impl rule__AddOrSubtractExpressionRule__Group_1__1 )
-            // InternalBaseLanguage.g:2001:2: rule__AddOrSubtractExpressionRule__Group_1__0__Impl rule__AddOrSubtractExpressionRule__Group_1__1
+            // InternalBaseLanguage.g:2050:1: ( rule__AddOrSubtractExpressionRule__Group_1__0__Impl rule__AddOrSubtractExpressionRule__Group_1__1 )
+            // InternalBaseLanguage.g:2051:2: rule__AddOrSubtractExpressionRule__Group_1__0__Impl rule__AddOrSubtractExpressionRule__Group_1__1
             {
             pushFollow(FOLLOW_5);
             rule__AddOrSubtractExpressionRule__Group_1__0__Impl();
@@ -6613,21 +6733,21 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__AddOrSubtractExpressionRule__Group_1__0__Impl"
-    // InternalBaseLanguage.g:2008:1: rule__AddOrSubtractExpressionRule__Group_1__0__Impl : ( ( rule__AddOrSubtractExpressionRule__OperatorsAssignment_1_0 ) ) ;
+    // InternalBaseLanguage.g:2058:1: rule__AddOrSubtractExpressionRule__Group_1__0__Impl : ( ( rule__AddOrSubtractExpressionRule__OperatorsAssignment_1_0 ) ) ;
     public final void rule__AddOrSubtractExpressionRule__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:2012:1: ( ( ( rule__AddOrSubtractExpressionRule__OperatorsAssignment_1_0 ) ) )
-            // InternalBaseLanguage.g:2013:1: ( ( rule__AddOrSubtractExpressionRule__OperatorsAssignment_1_0 ) )
+            // InternalBaseLanguage.g:2062:1: ( ( ( rule__AddOrSubtractExpressionRule__OperatorsAssignment_1_0 ) ) )
+            // InternalBaseLanguage.g:2063:1: ( ( rule__AddOrSubtractExpressionRule__OperatorsAssignment_1_0 ) )
             {
-            // InternalBaseLanguage.g:2013:1: ( ( rule__AddOrSubtractExpressionRule__OperatorsAssignment_1_0 ) )
-            // InternalBaseLanguage.g:2014:2: ( rule__AddOrSubtractExpressionRule__OperatorsAssignment_1_0 )
+            // InternalBaseLanguage.g:2063:1: ( ( rule__AddOrSubtractExpressionRule__OperatorsAssignment_1_0 ) )
+            // InternalBaseLanguage.g:2064:2: ( rule__AddOrSubtractExpressionRule__OperatorsAssignment_1_0 )
             {
              before(grammarAccess.getAddOrSubtractExpressionRuleAccess().getOperatorsAssignment_1_0()); 
-            // InternalBaseLanguage.g:2015:2: ( rule__AddOrSubtractExpressionRule__OperatorsAssignment_1_0 )
-            // InternalBaseLanguage.g:2015:3: rule__AddOrSubtractExpressionRule__OperatorsAssignment_1_0
+            // InternalBaseLanguage.g:2065:2: ( rule__AddOrSubtractExpressionRule__OperatorsAssignment_1_0 )
+            // InternalBaseLanguage.g:2065:3: rule__AddOrSubtractExpressionRule__OperatorsAssignment_1_0
             {
             pushFollow(FOLLOW_2);
             rule__AddOrSubtractExpressionRule__OperatorsAssignment_1_0();
@@ -6660,14 +6780,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__AddOrSubtractExpressionRule__Group_1__1"
-    // InternalBaseLanguage.g:2023:1: rule__AddOrSubtractExpressionRule__Group_1__1 : rule__AddOrSubtractExpressionRule__Group_1__1__Impl ;
+    // InternalBaseLanguage.g:2073:1: rule__AddOrSubtractExpressionRule__Group_1__1 : rule__AddOrSubtractExpressionRule__Group_1__1__Impl ;
     public final void rule__AddOrSubtractExpressionRule__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:2027:1: ( rule__AddOrSubtractExpressionRule__Group_1__1__Impl )
-            // InternalBaseLanguage.g:2028:2: rule__AddOrSubtractExpressionRule__Group_1__1__Impl
+            // InternalBaseLanguage.g:2077:1: ( rule__AddOrSubtractExpressionRule__Group_1__1__Impl )
+            // InternalBaseLanguage.g:2078:2: rule__AddOrSubtractExpressionRule__Group_1__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__AddOrSubtractExpressionRule__Group_1__1__Impl();
@@ -6693,21 +6813,21 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__AddOrSubtractExpressionRule__Group_1__1__Impl"
-    // InternalBaseLanguage.g:2034:1: rule__AddOrSubtractExpressionRule__Group_1__1__Impl : ( ( rule__AddOrSubtractExpressionRule__OperandsAssignment_1_1 ) ) ;
+    // InternalBaseLanguage.g:2084:1: rule__AddOrSubtractExpressionRule__Group_1__1__Impl : ( ( rule__AddOrSubtractExpressionRule__OperandsAssignment_1_1 ) ) ;
     public final void rule__AddOrSubtractExpressionRule__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:2038:1: ( ( ( rule__AddOrSubtractExpressionRule__OperandsAssignment_1_1 ) ) )
-            // InternalBaseLanguage.g:2039:1: ( ( rule__AddOrSubtractExpressionRule__OperandsAssignment_1_1 ) )
+            // InternalBaseLanguage.g:2088:1: ( ( ( rule__AddOrSubtractExpressionRule__OperandsAssignment_1_1 ) ) )
+            // InternalBaseLanguage.g:2089:1: ( ( rule__AddOrSubtractExpressionRule__OperandsAssignment_1_1 ) )
             {
-            // InternalBaseLanguage.g:2039:1: ( ( rule__AddOrSubtractExpressionRule__OperandsAssignment_1_1 ) )
-            // InternalBaseLanguage.g:2040:2: ( rule__AddOrSubtractExpressionRule__OperandsAssignment_1_1 )
+            // InternalBaseLanguage.g:2089:1: ( ( rule__AddOrSubtractExpressionRule__OperandsAssignment_1_1 ) )
+            // InternalBaseLanguage.g:2090:2: ( rule__AddOrSubtractExpressionRule__OperandsAssignment_1_1 )
             {
              before(grammarAccess.getAddOrSubtractExpressionRuleAccess().getOperandsAssignment_1_1()); 
-            // InternalBaseLanguage.g:2041:2: ( rule__AddOrSubtractExpressionRule__OperandsAssignment_1_1 )
-            // InternalBaseLanguage.g:2041:3: rule__AddOrSubtractExpressionRule__OperandsAssignment_1_1
+            // InternalBaseLanguage.g:2091:2: ( rule__AddOrSubtractExpressionRule__OperandsAssignment_1_1 )
+            // InternalBaseLanguage.g:2091:3: rule__AddOrSubtractExpressionRule__OperandsAssignment_1_1
             {
             pushFollow(FOLLOW_2);
             rule__AddOrSubtractExpressionRule__OperandsAssignment_1_1();
@@ -6740,14 +6860,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__MultiplyDivideModuloExpressionRule__Group__0"
-    // InternalBaseLanguage.g:2050:1: rule__MultiplyDivideModuloExpressionRule__Group__0 : rule__MultiplyDivideModuloExpressionRule__Group__0__Impl rule__MultiplyDivideModuloExpressionRule__Group__1 ;
+    // InternalBaseLanguage.g:2100:1: rule__MultiplyDivideModuloExpressionRule__Group__0 : rule__MultiplyDivideModuloExpressionRule__Group__0__Impl rule__MultiplyDivideModuloExpressionRule__Group__1 ;
     public final void rule__MultiplyDivideModuloExpressionRule__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:2054:1: ( rule__MultiplyDivideModuloExpressionRule__Group__0__Impl rule__MultiplyDivideModuloExpressionRule__Group__1 )
-            // InternalBaseLanguage.g:2055:2: rule__MultiplyDivideModuloExpressionRule__Group__0__Impl rule__MultiplyDivideModuloExpressionRule__Group__1
+            // InternalBaseLanguage.g:2104:1: ( rule__MultiplyDivideModuloExpressionRule__Group__0__Impl rule__MultiplyDivideModuloExpressionRule__Group__1 )
+            // InternalBaseLanguage.g:2105:2: rule__MultiplyDivideModuloExpressionRule__Group__0__Impl rule__MultiplyDivideModuloExpressionRule__Group__1
             {
             pushFollow(FOLLOW_14);
             rule__MultiplyDivideModuloExpressionRule__Group__0__Impl();
@@ -6778,21 +6898,21 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__MultiplyDivideModuloExpressionRule__Group__0__Impl"
-    // InternalBaseLanguage.g:2062:1: rule__MultiplyDivideModuloExpressionRule__Group__0__Impl : ( ( rule__MultiplyDivideModuloExpressionRule__LeftOperandAssignment_0 ) ) ;
+    // InternalBaseLanguage.g:2112:1: rule__MultiplyDivideModuloExpressionRule__Group__0__Impl : ( ( rule__MultiplyDivideModuloExpressionRule__LeftOperandAssignment_0 ) ) ;
     public final void rule__MultiplyDivideModuloExpressionRule__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:2066:1: ( ( ( rule__MultiplyDivideModuloExpressionRule__LeftOperandAssignment_0 ) ) )
-            // InternalBaseLanguage.g:2067:1: ( ( rule__MultiplyDivideModuloExpressionRule__LeftOperandAssignment_0 ) )
+            // InternalBaseLanguage.g:2116:1: ( ( ( rule__MultiplyDivideModuloExpressionRule__LeftOperandAssignment_0 ) ) )
+            // InternalBaseLanguage.g:2117:1: ( ( rule__MultiplyDivideModuloExpressionRule__LeftOperandAssignment_0 ) )
             {
-            // InternalBaseLanguage.g:2067:1: ( ( rule__MultiplyDivideModuloExpressionRule__LeftOperandAssignment_0 ) )
-            // InternalBaseLanguage.g:2068:2: ( rule__MultiplyDivideModuloExpressionRule__LeftOperandAssignment_0 )
+            // InternalBaseLanguage.g:2117:1: ( ( rule__MultiplyDivideModuloExpressionRule__LeftOperandAssignment_0 ) )
+            // InternalBaseLanguage.g:2118:2: ( rule__MultiplyDivideModuloExpressionRule__LeftOperandAssignment_0 )
             {
              before(grammarAccess.getMultiplyDivideModuloExpressionRuleAccess().getLeftOperandAssignment_0()); 
-            // InternalBaseLanguage.g:2069:2: ( rule__MultiplyDivideModuloExpressionRule__LeftOperandAssignment_0 )
-            // InternalBaseLanguage.g:2069:3: rule__MultiplyDivideModuloExpressionRule__LeftOperandAssignment_0
+            // InternalBaseLanguage.g:2119:2: ( rule__MultiplyDivideModuloExpressionRule__LeftOperandAssignment_0 )
+            // InternalBaseLanguage.g:2119:3: rule__MultiplyDivideModuloExpressionRule__LeftOperandAssignment_0
             {
             pushFollow(FOLLOW_2);
             rule__MultiplyDivideModuloExpressionRule__LeftOperandAssignment_0();
@@ -6825,14 +6945,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__MultiplyDivideModuloExpressionRule__Group__1"
-    // InternalBaseLanguage.g:2077:1: rule__MultiplyDivideModuloExpressionRule__Group__1 : rule__MultiplyDivideModuloExpressionRule__Group__1__Impl ;
+    // InternalBaseLanguage.g:2127:1: rule__MultiplyDivideModuloExpressionRule__Group__1 : rule__MultiplyDivideModuloExpressionRule__Group__1__Impl ;
     public final void rule__MultiplyDivideModuloExpressionRule__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:2081:1: ( rule__MultiplyDivideModuloExpressionRule__Group__1__Impl )
-            // InternalBaseLanguage.g:2082:2: rule__MultiplyDivideModuloExpressionRule__Group__1__Impl
+            // InternalBaseLanguage.g:2131:1: ( rule__MultiplyDivideModuloExpressionRule__Group__1__Impl )
+            // InternalBaseLanguage.g:2132:2: rule__MultiplyDivideModuloExpressionRule__Group__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__MultiplyDivideModuloExpressionRule__Group__1__Impl();
@@ -6858,20 +6978,20 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__MultiplyDivideModuloExpressionRule__Group__1__Impl"
-    // InternalBaseLanguage.g:2088:1: rule__MultiplyDivideModuloExpressionRule__Group__1__Impl : ( ( rule__MultiplyDivideModuloExpressionRule__Group_1__0 )* ) ;
+    // InternalBaseLanguage.g:2138:1: rule__MultiplyDivideModuloExpressionRule__Group__1__Impl : ( ( rule__MultiplyDivideModuloExpressionRule__Group_1__0 )* ) ;
     public final void rule__MultiplyDivideModuloExpressionRule__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:2092:1: ( ( ( rule__MultiplyDivideModuloExpressionRule__Group_1__0 )* ) )
-            // InternalBaseLanguage.g:2093:1: ( ( rule__MultiplyDivideModuloExpressionRule__Group_1__0 )* )
+            // InternalBaseLanguage.g:2142:1: ( ( ( rule__MultiplyDivideModuloExpressionRule__Group_1__0 )* ) )
+            // InternalBaseLanguage.g:2143:1: ( ( rule__MultiplyDivideModuloExpressionRule__Group_1__0 )* )
             {
-            // InternalBaseLanguage.g:2093:1: ( ( rule__MultiplyDivideModuloExpressionRule__Group_1__0 )* )
-            // InternalBaseLanguage.g:2094:2: ( rule__MultiplyDivideModuloExpressionRule__Group_1__0 )*
+            // InternalBaseLanguage.g:2143:1: ( ( rule__MultiplyDivideModuloExpressionRule__Group_1__0 )* )
+            // InternalBaseLanguage.g:2144:2: ( rule__MultiplyDivideModuloExpressionRule__Group_1__0 )*
             {
              before(grammarAccess.getMultiplyDivideModuloExpressionRuleAccess().getGroup_1()); 
-            // InternalBaseLanguage.g:2095:2: ( rule__MultiplyDivideModuloExpressionRule__Group_1__0 )*
+            // InternalBaseLanguage.g:2145:2: ( rule__MultiplyDivideModuloExpressionRule__Group_1__0 )*
             loop17:
             do {
                 int alt17=2;
@@ -6884,7 +7004,7 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
                 switch (alt17) {
             	case 1 :
-            	    // InternalBaseLanguage.g:2095:3: rule__MultiplyDivideModuloExpressionRule__Group_1__0
+            	    // InternalBaseLanguage.g:2145:3: rule__MultiplyDivideModuloExpressionRule__Group_1__0
             	    {
             	    pushFollow(FOLLOW_15);
             	    rule__MultiplyDivideModuloExpressionRule__Group_1__0();
@@ -6923,14 +7043,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__MultiplyDivideModuloExpressionRule__Group_1__0"
-    // InternalBaseLanguage.g:2104:1: rule__MultiplyDivideModuloExpressionRule__Group_1__0 : rule__MultiplyDivideModuloExpressionRule__Group_1__0__Impl rule__MultiplyDivideModuloExpressionRule__Group_1__1 ;
+    // InternalBaseLanguage.g:2154:1: rule__MultiplyDivideModuloExpressionRule__Group_1__0 : rule__MultiplyDivideModuloExpressionRule__Group_1__0__Impl rule__MultiplyDivideModuloExpressionRule__Group_1__1 ;
     public final void rule__MultiplyDivideModuloExpressionRule__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:2108:1: ( rule__MultiplyDivideModuloExpressionRule__Group_1__0__Impl rule__MultiplyDivideModuloExpressionRule__Group_1__1 )
-            // InternalBaseLanguage.g:2109:2: rule__MultiplyDivideModuloExpressionRule__Group_1__0__Impl rule__MultiplyDivideModuloExpressionRule__Group_1__1
+            // InternalBaseLanguage.g:2158:1: ( rule__MultiplyDivideModuloExpressionRule__Group_1__0__Impl rule__MultiplyDivideModuloExpressionRule__Group_1__1 )
+            // InternalBaseLanguage.g:2159:2: rule__MultiplyDivideModuloExpressionRule__Group_1__0__Impl rule__MultiplyDivideModuloExpressionRule__Group_1__1
             {
             pushFollow(FOLLOW_5);
             rule__MultiplyDivideModuloExpressionRule__Group_1__0__Impl();
@@ -6961,21 +7081,21 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__MultiplyDivideModuloExpressionRule__Group_1__0__Impl"
-    // InternalBaseLanguage.g:2116:1: rule__MultiplyDivideModuloExpressionRule__Group_1__0__Impl : ( ( rule__MultiplyDivideModuloExpressionRule__OperatorsAssignment_1_0 ) ) ;
+    // InternalBaseLanguage.g:2166:1: rule__MultiplyDivideModuloExpressionRule__Group_1__0__Impl : ( ( rule__MultiplyDivideModuloExpressionRule__OperatorsAssignment_1_0 ) ) ;
     public final void rule__MultiplyDivideModuloExpressionRule__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:2120:1: ( ( ( rule__MultiplyDivideModuloExpressionRule__OperatorsAssignment_1_0 ) ) )
-            // InternalBaseLanguage.g:2121:1: ( ( rule__MultiplyDivideModuloExpressionRule__OperatorsAssignment_1_0 ) )
+            // InternalBaseLanguage.g:2170:1: ( ( ( rule__MultiplyDivideModuloExpressionRule__OperatorsAssignment_1_0 ) ) )
+            // InternalBaseLanguage.g:2171:1: ( ( rule__MultiplyDivideModuloExpressionRule__OperatorsAssignment_1_0 ) )
             {
-            // InternalBaseLanguage.g:2121:1: ( ( rule__MultiplyDivideModuloExpressionRule__OperatorsAssignment_1_0 ) )
-            // InternalBaseLanguage.g:2122:2: ( rule__MultiplyDivideModuloExpressionRule__OperatorsAssignment_1_0 )
+            // InternalBaseLanguage.g:2171:1: ( ( rule__MultiplyDivideModuloExpressionRule__OperatorsAssignment_1_0 ) )
+            // InternalBaseLanguage.g:2172:2: ( rule__MultiplyDivideModuloExpressionRule__OperatorsAssignment_1_0 )
             {
              before(grammarAccess.getMultiplyDivideModuloExpressionRuleAccess().getOperatorsAssignment_1_0()); 
-            // InternalBaseLanguage.g:2123:2: ( rule__MultiplyDivideModuloExpressionRule__OperatorsAssignment_1_0 )
-            // InternalBaseLanguage.g:2123:3: rule__MultiplyDivideModuloExpressionRule__OperatorsAssignment_1_0
+            // InternalBaseLanguage.g:2173:2: ( rule__MultiplyDivideModuloExpressionRule__OperatorsAssignment_1_0 )
+            // InternalBaseLanguage.g:2173:3: rule__MultiplyDivideModuloExpressionRule__OperatorsAssignment_1_0
             {
             pushFollow(FOLLOW_2);
             rule__MultiplyDivideModuloExpressionRule__OperatorsAssignment_1_0();
@@ -7008,14 +7128,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__MultiplyDivideModuloExpressionRule__Group_1__1"
-    // InternalBaseLanguage.g:2131:1: rule__MultiplyDivideModuloExpressionRule__Group_1__1 : rule__MultiplyDivideModuloExpressionRule__Group_1__1__Impl ;
+    // InternalBaseLanguage.g:2181:1: rule__MultiplyDivideModuloExpressionRule__Group_1__1 : rule__MultiplyDivideModuloExpressionRule__Group_1__1__Impl ;
     public final void rule__MultiplyDivideModuloExpressionRule__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:2135:1: ( rule__MultiplyDivideModuloExpressionRule__Group_1__1__Impl )
-            // InternalBaseLanguage.g:2136:2: rule__MultiplyDivideModuloExpressionRule__Group_1__1__Impl
+            // InternalBaseLanguage.g:2185:1: ( rule__MultiplyDivideModuloExpressionRule__Group_1__1__Impl )
+            // InternalBaseLanguage.g:2186:2: rule__MultiplyDivideModuloExpressionRule__Group_1__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__MultiplyDivideModuloExpressionRule__Group_1__1__Impl();
@@ -7041,21 +7161,21 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__MultiplyDivideModuloExpressionRule__Group_1__1__Impl"
-    // InternalBaseLanguage.g:2142:1: rule__MultiplyDivideModuloExpressionRule__Group_1__1__Impl : ( ( rule__MultiplyDivideModuloExpressionRule__OperandsAssignment_1_1 ) ) ;
+    // InternalBaseLanguage.g:2192:1: rule__MultiplyDivideModuloExpressionRule__Group_1__1__Impl : ( ( rule__MultiplyDivideModuloExpressionRule__OperandsAssignment_1_1 ) ) ;
     public final void rule__MultiplyDivideModuloExpressionRule__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:2146:1: ( ( ( rule__MultiplyDivideModuloExpressionRule__OperandsAssignment_1_1 ) ) )
-            // InternalBaseLanguage.g:2147:1: ( ( rule__MultiplyDivideModuloExpressionRule__OperandsAssignment_1_1 ) )
+            // InternalBaseLanguage.g:2196:1: ( ( ( rule__MultiplyDivideModuloExpressionRule__OperandsAssignment_1_1 ) ) )
+            // InternalBaseLanguage.g:2197:1: ( ( rule__MultiplyDivideModuloExpressionRule__OperandsAssignment_1_1 ) )
             {
-            // InternalBaseLanguage.g:2147:1: ( ( rule__MultiplyDivideModuloExpressionRule__OperandsAssignment_1_1 ) )
-            // InternalBaseLanguage.g:2148:2: ( rule__MultiplyDivideModuloExpressionRule__OperandsAssignment_1_1 )
+            // InternalBaseLanguage.g:2197:1: ( ( rule__MultiplyDivideModuloExpressionRule__OperandsAssignment_1_1 ) )
+            // InternalBaseLanguage.g:2198:2: ( rule__MultiplyDivideModuloExpressionRule__OperandsAssignment_1_1 )
             {
              before(grammarAccess.getMultiplyDivideModuloExpressionRuleAccess().getOperandsAssignment_1_1()); 
-            // InternalBaseLanguage.g:2149:2: ( rule__MultiplyDivideModuloExpressionRule__OperandsAssignment_1_1 )
-            // InternalBaseLanguage.g:2149:3: rule__MultiplyDivideModuloExpressionRule__OperandsAssignment_1_1
+            // InternalBaseLanguage.g:2199:2: ( rule__MultiplyDivideModuloExpressionRule__OperandsAssignment_1_1 )
+            // InternalBaseLanguage.g:2199:3: rule__MultiplyDivideModuloExpressionRule__OperandsAssignment_1_1
             {
             pushFollow(FOLLOW_2);
             rule__MultiplyDivideModuloExpressionRule__OperandsAssignment_1_1();
@@ -7088,14 +7208,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__PowerOfExpressionRule__Group__0"
-    // InternalBaseLanguage.g:2158:1: rule__PowerOfExpressionRule__Group__0 : rule__PowerOfExpressionRule__Group__0__Impl rule__PowerOfExpressionRule__Group__1 ;
+    // InternalBaseLanguage.g:2208:1: rule__PowerOfExpressionRule__Group__0 : rule__PowerOfExpressionRule__Group__0__Impl rule__PowerOfExpressionRule__Group__1 ;
     public final void rule__PowerOfExpressionRule__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:2162:1: ( rule__PowerOfExpressionRule__Group__0__Impl rule__PowerOfExpressionRule__Group__1 )
-            // InternalBaseLanguage.g:2163:2: rule__PowerOfExpressionRule__Group__0__Impl rule__PowerOfExpressionRule__Group__1
+            // InternalBaseLanguage.g:2212:1: ( rule__PowerOfExpressionRule__Group__0__Impl rule__PowerOfExpressionRule__Group__1 )
+            // InternalBaseLanguage.g:2213:2: rule__PowerOfExpressionRule__Group__0__Impl rule__PowerOfExpressionRule__Group__1
             {
             pushFollow(FOLLOW_16);
             rule__PowerOfExpressionRule__Group__0__Impl();
@@ -7126,21 +7246,21 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__PowerOfExpressionRule__Group__0__Impl"
-    // InternalBaseLanguage.g:2170:1: rule__PowerOfExpressionRule__Group__0__Impl : ( ( rule__PowerOfExpressionRule__LeftOperandAssignment_0 ) ) ;
+    // InternalBaseLanguage.g:2220:1: rule__PowerOfExpressionRule__Group__0__Impl : ( ( rule__PowerOfExpressionRule__LeftOperandAssignment_0 ) ) ;
     public final void rule__PowerOfExpressionRule__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:2174:1: ( ( ( rule__PowerOfExpressionRule__LeftOperandAssignment_0 ) ) )
-            // InternalBaseLanguage.g:2175:1: ( ( rule__PowerOfExpressionRule__LeftOperandAssignment_0 ) )
+            // InternalBaseLanguage.g:2224:1: ( ( ( rule__PowerOfExpressionRule__LeftOperandAssignment_0 ) ) )
+            // InternalBaseLanguage.g:2225:1: ( ( rule__PowerOfExpressionRule__LeftOperandAssignment_0 ) )
             {
-            // InternalBaseLanguage.g:2175:1: ( ( rule__PowerOfExpressionRule__LeftOperandAssignment_0 ) )
-            // InternalBaseLanguage.g:2176:2: ( rule__PowerOfExpressionRule__LeftOperandAssignment_0 )
+            // InternalBaseLanguage.g:2225:1: ( ( rule__PowerOfExpressionRule__LeftOperandAssignment_0 ) )
+            // InternalBaseLanguage.g:2226:2: ( rule__PowerOfExpressionRule__LeftOperandAssignment_0 )
             {
              before(grammarAccess.getPowerOfExpressionRuleAccess().getLeftOperandAssignment_0()); 
-            // InternalBaseLanguage.g:2177:2: ( rule__PowerOfExpressionRule__LeftOperandAssignment_0 )
-            // InternalBaseLanguage.g:2177:3: rule__PowerOfExpressionRule__LeftOperandAssignment_0
+            // InternalBaseLanguage.g:2227:2: ( rule__PowerOfExpressionRule__LeftOperandAssignment_0 )
+            // InternalBaseLanguage.g:2227:3: rule__PowerOfExpressionRule__LeftOperandAssignment_0
             {
             pushFollow(FOLLOW_2);
             rule__PowerOfExpressionRule__LeftOperandAssignment_0();
@@ -7173,14 +7293,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__PowerOfExpressionRule__Group__1"
-    // InternalBaseLanguage.g:2185:1: rule__PowerOfExpressionRule__Group__1 : rule__PowerOfExpressionRule__Group__1__Impl ;
+    // InternalBaseLanguage.g:2235:1: rule__PowerOfExpressionRule__Group__1 : rule__PowerOfExpressionRule__Group__1__Impl ;
     public final void rule__PowerOfExpressionRule__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:2189:1: ( rule__PowerOfExpressionRule__Group__1__Impl )
-            // InternalBaseLanguage.g:2190:2: rule__PowerOfExpressionRule__Group__1__Impl
+            // InternalBaseLanguage.g:2239:1: ( rule__PowerOfExpressionRule__Group__1__Impl )
+            // InternalBaseLanguage.g:2240:2: rule__PowerOfExpressionRule__Group__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__PowerOfExpressionRule__Group__1__Impl();
@@ -7206,20 +7326,20 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__PowerOfExpressionRule__Group__1__Impl"
-    // InternalBaseLanguage.g:2196:1: rule__PowerOfExpressionRule__Group__1__Impl : ( ( rule__PowerOfExpressionRule__Group_1__0 )? ) ;
+    // InternalBaseLanguage.g:2246:1: rule__PowerOfExpressionRule__Group__1__Impl : ( ( rule__PowerOfExpressionRule__Group_1__0 )? ) ;
     public final void rule__PowerOfExpressionRule__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:2200:1: ( ( ( rule__PowerOfExpressionRule__Group_1__0 )? ) )
-            // InternalBaseLanguage.g:2201:1: ( ( rule__PowerOfExpressionRule__Group_1__0 )? )
+            // InternalBaseLanguage.g:2250:1: ( ( ( rule__PowerOfExpressionRule__Group_1__0 )? ) )
+            // InternalBaseLanguage.g:2251:1: ( ( rule__PowerOfExpressionRule__Group_1__0 )? )
             {
-            // InternalBaseLanguage.g:2201:1: ( ( rule__PowerOfExpressionRule__Group_1__0 )? )
-            // InternalBaseLanguage.g:2202:2: ( rule__PowerOfExpressionRule__Group_1__0 )?
+            // InternalBaseLanguage.g:2251:1: ( ( rule__PowerOfExpressionRule__Group_1__0 )? )
+            // InternalBaseLanguage.g:2252:2: ( rule__PowerOfExpressionRule__Group_1__0 )?
             {
              before(grammarAccess.getPowerOfExpressionRuleAccess().getGroup_1()); 
-            // InternalBaseLanguage.g:2203:2: ( rule__PowerOfExpressionRule__Group_1__0 )?
+            // InternalBaseLanguage.g:2253:2: ( rule__PowerOfExpressionRule__Group_1__0 )?
             int alt18=2;
             int LA18_0 = input.LA(1);
 
@@ -7228,7 +7348,7 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
             }
             switch (alt18) {
                 case 1 :
-                    // InternalBaseLanguage.g:2203:3: rule__PowerOfExpressionRule__Group_1__0
+                    // InternalBaseLanguage.g:2253:3: rule__PowerOfExpressionRule__Group_1__0
                     {
                     pushFollow(FOLLOW_2);
                     rule__PowerOfExpressionRule__Group_1__0();
@@ -7264,14 +7384,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__PowerOfExpressionRule__Group_1__0"
-    // InternalBaseLanguage.g:2212:1: rule__PowerOfExpressionRule__Group_1__0 : rule__PowerOfExpressionRule__Group_1__0__Impl rule__PowerOfExpressionRule__Group_1__1 ;
+    // InternalBaseLanguage.g:2262:1: rule__PowerOfExpressionRule__Group_1__0 : rule__PowerOfExpressionRule__Group_1__0__Impl rule__PowerOfExpressionRule__Group_1__1 ;
     public final void rule__PowerOfExpressionRule__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:2216:1: ( rule__PowerOfExpressionRule__Group_1__0__Impl rule__PowerOfExpressionRule__Group_1__1 )
-            // InternalBaseLanguage.g:2217:2: rule__PowerOfExpressionRule__Group_1__0__Impl rule__PowerOfExpressionRule__Group_1__1
+            // InternalBaseLanguage.g:2266:1: ( rule__PowerOfExpressionRule__Group_1__0__Impl rule__PowerOfExpressionRule__Group_1__1 )
+            // InternalBaseLanguage.g:2267:2: rule__PowerOfExpressionRule__Group_1__0__Impl rule__PowerOfExpressionRule__Group_1__1
             {
             pushFollow(FOLLOW_5);
             rule__PowerOfExpressionRule__Group_1__0__Impl();
@@ -7302,17 +7422,17 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__PowerOfExpressionRule__Group_1__0__Impl"
-    // InternalBaseLanguage.g:2224:1: rule__PowerOfExpressionRule__Group_1__0__Impl : ( '^' ) ;
+    // InternalBaseLanguage.g:2274:1: rule__PowerOfExpressionRule__Group_1__0__Impl : ( '^' ) ;
     public final void rule__PowerOfExpressionRule__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:2228:1: ( ( '^' ) )
-            // InternalBaseLanguage.g:2229:1: ( '^' )
+            // InternalBaseLanguage.g:2278:1: ( ( '^' ) )
+            // InternalBaseLanguage.g:2279:1: ( '^' )
             {
-            // InternalBaseLanguage.g:2229:1: ( '^' )
-            // InternalBaseLanguage.g:2230:2: '^'
+            // InternalBaseLanguage.g:2279:1: ( '^' )
+            // InternalBaseLanguage.g:2280:2: '^'
             {
              before(grammarAccess.getPowerOfExpressionRuleAccess().getCircumflexAccentKeyword_1_0()); 
             match(input,50,FOLLOW_2); 
@@ -7339,14 +7459,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__PowerOfExpressionRule__Group_1__1"
-    // InternalBaseLanguage.g:2239:1: rule__PowerOfExpressionRule__Group_1__1 : rule__PowerOfExpressionRule__Group_1__1__Impl ;
+    // InternalBaseLanguage.g:2289:1: rule__PowerOfExpressionRule__Group_1__1 : rule__PowerOfExpressionRule__Group_1__1__Impl ;
     public final void rule__PowerOfExpressionRule__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:2243:1: ( rule__PowerOfExpressionRule__Group_1__1__Impl )
-            // InternalBaseLanguage.g:2244:2: rule__PowerOfExpressionRule__Group_1__1__Impl
+            // InternalBaseLanguage.g:2293:1: ( rule__PowerOfExpressionRule__Group_1__1__Impl )
+            // InternalBaseLanguage.g:2294:2: rule__PowerOfExpressionRule__Group_1__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__PowerOfExpressionRule__Group_1__1__Impl();
@@ -7372,21 +7492,21 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__PowerOfExpressionRule__Group_1__1__Impl"
-    // InternalBaseLanguage.g:2250:1: rule__PowerOfExpressionRule__Group_1__1__Impl : ( ( rule__PowerOfExpressionRule__RightOperandAssignment_1_1 ) ) ;
+    // InternalBaseLanguage.g:2300:1: rule__PowerOfExpressionRule__Group_1__1__Impl : ( ( rule__PowerOfExpressionRule__RightOperandAssignment_1_1 ) ) ;
     public final void rule__PowerOfExpressionRule__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:2254:1: ( ( ( rule__PowerOfExpressionRule__RightOperandAssignment_1_1 ) ) )
-            // InternalBaseLanguage.g:2255:1: ( ( rule__PowerOfExpressionRule__RightOperandAssignment_1_1 ) )
+            // InternalBaseLanguage.g:2304:1: ( ( ( rule__PowerOfExpressionRule__RightOperandAssignment_1_1 ) ) )
+            // InternalBaseLanguage.g:2305:1: ( ( rule__PowerOfExpressionRule__RightOperandAssignment_1_1 ) )
             {
-            // InternalBaseLanguage.g:2255:1: ( ( rule__PowerOfExpressionRule__RightOperandAssignment_1_1 ) )
-            // InternalBaseLanguage.g:2256:2: ( rule__PowerOfExpressionRule__RightOperandAssignment_1_1 )
+            // InternalBaseLanguage.g:2305:1: ( ( rule__PowerOfExpressionRule__RightOperandAssignment_1_1 ) )
+            // InternalBaseLanguage.g:2306:2: ( rule__PowerOfExpressionRule__RightOperandAssignment_1_1 )
             {
              before(grammarAccess.getPowerOfExpressionRuleAccess().getRightOperandAssignment_1_1()); 
-            // InternalBaseLanguage.g:2257:2: ( rule__PowerOfExpressionRule__RightOperandAssignment_1_1 )
-            // InternalBaseLanguage.g:2257:3: rule__PowerOfExpressionRule__RightOperandAssignment_1_1
+            // InternalBaseLanguage.g:2307:2: ( rule__PowerOfExpressionRule__RightOperandAssignment_1_1 )
+            // InternalBaseLanguage.g:2307:3: rule__PowerOfExpressionRule__RightOperandAssignment_1_1
             {
             pushFollow(FOLLOW_2);
             rule__PowerOfExpressionRule__RightOperandAssignment_1_1();
@@ -7419,14 +7539,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__UnaryAddOrSubtractExpressionRule__Group__0"
-    // InternalBaseLanguage.g:2266:1: rule__UnaryAddOrSubtractExpressionRule__Group__0 : rule__UnaryAddOrSubtractExpressionRule__Group__0__Impl rule__UnaryAddOrSubtractExpressionRule__Group__1 ;
+    // InternalBaseLanguage.g:2316:1: rule__UnaryAddOrSubtractExpressionRule__Group__0 : rule__UnaryAddOrSubtractExpressionRule__Group__0__Impl rule__UnaryAddOrSubtractExpressionRule__Group__1 ;
     public final void rule__UnaryAddOrSubtractExpressionRule__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:2270:1: ( rule__UnaryAddOrSubtractExpressionRule__Group__0__Impl rule__UnaryAddOrSubtractExpressionRule__Group__1 )
-            // InternalBaseLanguage.g:2271:2: rule__UnaryAddOrSubtractExpressionRule__Group__0__Impl rule__UnaryAddOrSubtractExpressionRule__Group__1
+            // InternalBaseLanguage.g:2320:1: ( rule__UnaryAddOrSubtractExpressionRule__Group__0__Impl rule__UnaryAddOrSubtractExpressionRule__Group__1 )
+            // InternalBaseLanguage.g:2321:2: rule__UnaryAddOrSubtractExpressionRule__Group__0__Impl rule__UnaryAddOrSubtractExpressionRule__Group__1
             {
             pushFollow(FOLLOW_5);
             rule__UnaryAddOrSubtractExpressionRule__Group__0__Impl();
@@ -7457,20 +7577,20 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__UnaryAddOrSubtractExpressionRule__Group__0__Impl"
-    // InternalBaseLanguage.g:2278:1: rule__UnaryAddOrSubtractExpressionRule__Group__0__Impl : ( ( rule__UnaryAddOrSubtractExpressionRule__OperatorsAssignment_0 )* ) ;
+    // InternalBaseLanguage.g:2328:1: rule__UnaryAddOrSubtractExpressionRule__Group__0__Impl : ( ( rule__UnaryAddOrSubtractExpressionRule__OperatorsAssignment_0 )* ) ;
     public final void rule__UnaryAddOrSubtractExpressionRule__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:2282:1: ( ( ( rule__UnaryAddOrSubtractExpressionRule__OperatorsAssignment_0 )* ) )
-            // InternalBaseLanguage.g:2283:1: ( ( rule__UnaryAddOrSubtractExpressionRule__OperatorsAssignment_0 )* )
+            // InternalBaseLanguage.g:2332:1: ( ( ( rule__UnaryAddOrSubtractExpressionRule__OperatorsAssignment_0 )* ) )
+            // InternalBaseLanguage.g:2333:1: ( ( rule__UnaryAddOrSubtractExpressionRule__OperatorsAssignment_0 )* )
             {
-            // InternalBaseLanguage.g:2283:1: ( ( rule__UnaryAddOrSubtractExpressionRule__OperatorsAssignment_0 )* )
-            // InternalBaseLanguage.g:2284:2: ( rule__UnaryAddOrSubtractExpressionRule__OperatorsAssignment_0 )*
+            // InternalBaseLanguage.g:2333:1: ( ( rule__UnaryAddOrSubtractExpressionRule__OperatorsAssignment_0 )* )
+            // InternalBaseLanguage.g:2334:2: ( rule__UnaryAddOrSubtractExpressionRule__OperatorsAssignment_0 )*
             {
              before(grammarAccess.getUnaryAddOrSubtractExpressionRuleAccess().getOperatorsAssignment_0()); 
-            // InternalBaseLanguage.g:2285:2: ( rule__UnaryAddOrSubtractExpressionRule__OperatorsAssignment_0 )*
+            // InternalBaseLanguage.g:2335:2: ( rule__UnaryAddOrSubtractExpressionRule__OperatorsAssignment_0 )*
             loop19:
             do {
                 int alt19=2;
@@ -7483,7 +7603,7 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
                 switch (alt19) {
             	case 1 :
-            	    // InternalBaseLanguage.g:2285:3: rule__UnaryAddOrSubtractExpressionRule__OperatorsAssignment_0
+            	    // InternalBaseLanguage.g:2335:3: rule__UnaryAddOrSubtractExpressionRule__OperatorsAssignment_0
             	    {
             	    pushFollow(FOLLOW_13);
             	    rule__UnaryAddOrSubtractExpressionRule__OperatorsAssignment_0();
@@ -7522,14 +7642,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__UnaryAddOrSubtractExpressionRule__Group__1"
-    // InternalBaseLanguage.g:2293:1: rule__UnaryAddOrSubtractExpressionRule__Group__1 : rule__UnaryAddOrSubtractExpressionRule__Group__1__Impl ;
+    // InternalBaseLanguage.g:2343:1: rule__UnaryAddOrSubtractExpressionRule__Group__1 : rule__UnaryAddOrSubtractExpressionRule__Group__1__Impl ;
     public final void rule__UnaryAddOrSubtractExpressionRule__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:2297:1: ( rule__UnaryAddOrSubtractExpressionRule__Group__1__Impl )
-            // InternalBaseLanguage.g:2298:2: rule__UnaryAddOrSubtractExpressionRule__Group__1__Impl
+            // InternalBaseLanguage.g:2347:1: ( rule__UnaryAddOrSubtractExpressionRule__Group__1__Impl )
+            // InternalBaseLanguage.g:2348:2: rule__UnaryAddOrSubtractExpressionRule__Group__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__UnaryAddOrSubtractExpressionRule__Group__1__Impl();
@@ -7555,21 +7675,21 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__UnaryAddOrSubtractExpressionRule__Group__1__Impl"
-    // InternalBaseLanguage.g:2304:1: rule__UnaryAddOrSubtractExpressionRule__Group__1__Impl : ( ( rule__UnaryAddOrSubtractExpressionRule__SubExpressionAssignment_1 ) ) ;
+    // InternalBaseLanguage.g:2354:1: rule__UnaryAddOrSubtractExpressionRule__Group__1__Impl : ( ( rule__UnaryAddOrSubtractExpressionRule__SubExpressionAssignment_1 ) ) ;
     public final void rule__UnaryAddOrSubtractExpressionRule__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:2308:1: ( ( ( rule__UnaryAddOrSubtractExpressionRule__SubExpressionAssignment_1 ) ) )
-            // InternalBaseLanguage.g:2309:1: ( ( rule__UnaryAddOrSubtractExpressionRule__SubExpressionAssignment_1 ) )
+            // InternalBaseLanguage.g:2358:1: ( ( ( rule__UnaryAddOrSubtractExpressionRule__SubExpressionAssignment_1 ) ) )
+            // InternalBaseLanguage.g:2359:1: ( ( rule__UnaryAddOrSubtractExpressionRule__SubExpressionAssignment_1 ) )
             {
-            // InternalBaseLanguage.g:2309:1: ( ( rule__UnaryAddOrSubtractExpressionRule__SubExpressionAssignment_1 ) )
-            // InternalBaseLanguage.g:2310:2: ( rule__UnaryAddOrSubtractExpressionRule__SubExpressionAssignment_1 )
+            // InternalBaseLanguage.g:2359:1: ( ( rule__UnaryAddOrSubtractExpressionRule__SubExpressionAssignment_1 ) )
+            // InternalBaseLanguage.g:2360:2: ( rule__UnaryAddOrSubtractExpressionRule__SubExpressionAssignment_1 )
             {
              before(grammarAccess.getUnaryAddOrSubtractExpressionRuleAccess().getSubExpressionAssignment_1()); 
-            // InternalBaseLanguage.g:2311:2: ( rule__UnaryAddOrSubtractExpressionRule__SubExpressionAssignment_1 )
-            // InternalBaseLanguage.g:2311:3: rule__UnaryAddOrSubtractExpressionRule__SubExpressionAssignment_1
+            // InternalBaseLanguage.g:2361:2: ( rule__UnaryAddOrSubtractExpressionRule__SubExpressionAssignment_1 )
+            // InternalBaseLanguage.g:2361:3: rule__UnaryAddOrSubtractExpressionRule__SubExpressionAssignment_1
             {
             pushFollow(FOLLOW_2);
             rule__UnaryAddOrSubtractExpressionRule__SubExpressionAssignment_1();
@@ -7602,14 +7722,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__ParanthesesRule__Group__0"
-    // InternalBaseLanguage.g:2320:1: rule__ParanthesesRule__Group__0 : rule__ParanthesesRule__Group__0__Impl rule__ParanthesesRule__Group__1 ;
+    // InternalBaseLanguage.g:2370:1: rule__ParanthesesRule__Group__0 : rule__ParanthesesRule__Group__0__Impl rule__ParanthesesRule__Group__1 ;
     public final void rule__ParanthesesRule__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:2324:1: ( rule__ParanthesesRule__Group__0__Impl rule__ParanthesesRule__Group__1 )
-            // InternalBaseLanguage.g:2325:2: rule__ParanthesesRule__Group__0__Impl rule__ParanthesesRule__Group__1
+            // InternalBaseLanguage.g:2374:1: ( rule__ParanthesesRule__Group__0__Impl rule__ParanthesesRule__Group__1 )
+            // InternalBaseLanguage.g:2375:2: rule__ParanthesesRule__Group__0__Impl rule__ParanthesesRule__Group__1
             {
             pushFollow(FOLLOW_5);
             rule__ParanthesesRule__Group__0__Impl();
@@ -7640,17 +7760,17 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__ParanthesesRule__Group__0__Impl"
-    // InternalBaseLanguage.g:2332:1: rule__ParanthesesRule__Group__0__Impl : ( '(' ) ;
+    // InternalBaseLanguage.g:2382:1: rule__ParanthesesRule__Group__0__Impl : ( '(' ) ;
     public final void rule__ParanthesesRule__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:2336:1: ( ( '(' ) )
-            // InternalBaseLanguage.g:2337:1: ( '(' )
+            // InternalBaseLanguage.g:2386:1: ( ( '(' ) )
+            // InternalBaseLanguage.g:2387:1: ( '(' )
             {
-            // InternalBaseLanguage.g:2337:1: ( '(' )
-            // InternalBaseLanguage.g:2338:2: '('
+            // InternalBaseLanguage.g:2387:1: ( '(' )
+            // InternalBaseLanguage.g:2388:2: '('
             {
              before(grammarAccess.getParanthesesRuleAccess().getLeftParenthesisKeyword_0()); 
             match(input,51,FOLLOW_2); 
@@ -7677,14 +7797,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__ParanthesesRule__Group__1"
-    // InternalBaseLanguage.g:2347:1: rule__ParanthesesRule__Group__1 : rule__ParanthesesRule__Group__1__Impl rule__ParanthesesRule__Group__2 ;
+    // InternalBaseLanguage.g:2397:1: rule__ParanthesesRule__Group__1 : rule__ParanthesesRule__Group__1__Impl rule__ParanthesesRule__Group__2 ;
     public final void rule__ParanthesesRule__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:2351:1: ( rule__ParanthesesRule__Group__1__Impl rule__ParanthesesRule__Group__2 )
-            // InternalBaseLanguage.g:2352:2: rule__ParanthesesRule__Group__1__Impl rule__ParanthesesRule__Group__2
+            // InternalBaseLanguage.g:2401:1: ( rule__ParanthesesRule__Group__1__Impl rule__ParanthesesRule__Group__2 )
+            // InternalBaseLanguage.g:2402:2: rule__ParanthesesRule__Group__1__Impl rule__ParanthesesRule__Group__2
             {
             pushFollow(FOLLOW_17);
             rule__ParanthesesRule__Group__1__Impl();
@@ -7715,21 +7835,21 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__ParanthesesRule__Group__1__Impl"
-    // InternalBaseLanguage.g:2359:1: rule__ParanthesesRule__Group__1__Impl : ( ( rule__ParanthesesRule__SubExpressionAssignment_1 ) ) ;
+    // InternalBaseLanguage.g:2409:1: rule__ParanthesesRule__Group__1__Impl : ( ( rule__ParanthesesRule__SubExpressionAssignment_1 ) ) ;
     public final void rule__ParanthesesRule__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:2363:1: ( ( ( rule__ParanthesesRule__SubExpressionAssignment_1 ) ) )
-            // InternalBaseLanguage.g:2364:1: ( ( rule__ParanthesesRule__SubExpressionAssignment_1 ) )
+            // InternalBaseLanguage.g:2413:1: ( ( ( rule__ParanthesesRule__SubExpressionAssignment_1 ) ) )
+            // InternalBaseLanguage.g:2414:1: ( ( rule__ParanthesesRule__SubExpressionAssignment_1 ) )
             {
-            // InternalBaseLanguage.g:2364:1: ( ( rule__ParanthesesRule__SubExpressionAssignment_1 ) )
-            // InternalBaseLanguage.g:2365:2: ( rule__ParanthesesRule__SubExpressionAssignment_1 )
+            // InternalBaseLanguage.g:2414:1: ( ( rule__ParanthesesRule__SubExpressionAssignment_1 ) )
+            // InternalBaseLanguage.g:2415:2: ( rule__ParanthesesRule__SubExpressionAssignment_1 )
             {
              before(grammarAccess.getParanthesesRuleAccess().getSubExpressionAssignment_1()); 
-            // InternalBaseLanguage.g:2366:2: ( rule__ParanthesesRule__SubExpressionAssignment_1 )
-            // InternalBaseLanguage.g:2366:3: rule__ParanthesesRule__SubExpressionAssignment_1
+            // InternalBaseLanguage.g:2416:2: ( rule__ParanthesesRule__SubExpressionAssignment_1 )
+            // InternalBaseLanguage.g:2416:3: rule__ParanthesesRule__SubExpressionAssignment_1
             {
             pushFollow(FOLLOW_2);
             rule__ParanthesesRule__SubExpressionAssignment_1();
@@ -7762,14 +7882,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__ParanthesesRule__Group__2"
-    // InternalBaseLanguage.g:2374:1: rule__ParanthesesRule__Group__2 : rule__ParanthesesRule__Group__2__Impl ;
+    // InternalBaseLanguage.g:2424:1: rule__ParanthesesRule__Group__2 : rule__ParanthesesRule__Group__2__Impl ;
     public final void rule__ParanthesesRule__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:2378:1: ( rule__ParanthesesRule__Group__2__Impl )
-            // InternalBaseLanguage.g:2379:2: rule__ParanthesesRule__Group__2__Impl
+            // InternalBaseLanguage.g:2428:1: ( rule__ParanthesesRule__Group__2__Impl )
+            // InternalBaseLanguage.g:2429:2: rule__ParanthesesRule__Group__2__Impl
             {
             pushFollow(FOLLOW_2);
             rule__ParanthesesRule__Group__2__Impl();
@@ -7795,17 +7915,17 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__ParanthesesRule__Group__2__Impl"
-    // InternalBaseLanguage.g:2385:1: rule__ParanthesesRule__Group__2__Impl : ( ')' ) ;
+    // InternalBaseLanguage.g:2435:1: rule__ParanthesesRule__Group__2__Impl : ( ')' ) ;
     public final void rule__ParanthesesRule__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:2389:1: ( ( ')' ) )
-            // InternalBaseLanguage.g:2390:1: ( ')' )
+            // InternalBaseLanguage.g:2439:1: ( ( ')' ) )
+            // InternalBaseLanguage.g:2440:1: ( ')' )
             {
-            // InternalBaseLanguage.g:2390:1: ( ')' )
-            // InternalBaseLanguage.g:2391:2: ')'
+            // InternalBaseLanguage.g:2440:1: ( ')' )
+            // InternalBaseLanguage.g:2441:2: ')'
             {
              before(grammarAccess.getParanthesesRuleAccess().getRightParenthesisKeyword_2()); 
             match(input,52,FOLLOW_2); 
@@ -7832,14 +7952,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__CallRule__Group__0"
-    // InternalBaseLanguage.g:2401:1: rule__CallRule__Group__0 : rule__CallRule__Group__0__Impl rule__CallRule__Group__1 ;
+    // InternalBaseLanguage.g:2451:1: rule__CallRule__Group__0 : rule__CallRule__Group__0__Impl rule__CallRule__Group__1 ;
     public final void rule__CallRule__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:2405:1: ( rule__CallRule__Group__0__Impl rule__CallRule__Group__1 )
-            // InternalBaseLanguage.g:2406:2: rule__CallRule__Group__0__Impl rule__CallRule__Group__1
+            // InternalBaseLanguage.g:2455:1: ( rule__CallRule__Group__0__Impl rule__CallRule__Group__1 )
+            // InternalBaseLanguage.g:2456:2: rule__CallRule__Group__0__Impl rule__CallRule__Group__1
             {
             pushFollow(FOLLOW_18);
             rule__CallRule__Group__0__Impl();
@@ -7870,21 +7990,21 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__CallRule__Group__0__Impl"
-    // InternalBaseLanguage.g:2413:1: rule__CallRule__Group__0__Impl : ( ( rule__CallRule__FunctionAssignment_0 ) ) ;
+    // InternalBaseLanguage.g:2463:1: rule__CallRule__Group__0__Impl : ( ( rule__CallRule__FunctionAssignment_0 ) ) ;
     public final void rule__CallRule__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:2417:1: ( ( ( rule__CallRule__FunctionAssignment_0 ) ) )
-            // InternalBaseLanguage.g:2418:1: ( ( rule__CallRule__FunctionAssignment_0 ) )
+            // InternalBaseLanguage.g:2467:1: ( ( ( rule__CallRule__FunctionAssignment_0 ) ) )
+            // InternalBaseLanguage.g:2468:1: ( ( rule__CallRule__FunctionAssignment_0 ) )
             {
-            // InternalBaseLanguage.g:2418:1: ( ( rule__CallRule__FunctionAssignment_0 ) )
-            // InternalBaseLanguage.g:2419:2: ( rule__CallRule__FunctionAssignment_0 )
+            // InternalBaseLanguage.g:2468:1: ( ( rule__CallRule__FunctionAssignment_0 ) )
+            // InternalBaseLanguage.g:2469:2: ( rule__CallRule__FunctionAssignment_0 )
             {
              before(grammarAccess.getCallRuleAccess().getFunctionAssignment_0()); 
-            // InternalBaseLanguage.g:2420:2: ( rule__CallRule__FunctionAssignment_0 )
-            // InternalBaseLanguage.g:2420:3: rule__CallRule__FunctionAssignment_0
+            // InternalBaseLanguage.g:2470:2: ( rule__CallRule__FunctionAssignment_0 )
+            // InternalBaseLanguage.g:2470:3: rule__CallRule__FunctionAssignment_0
             {
             pushFollow(FOLLOW_2);
             rule__CallRule__FunctionAssignment_0();
@@ -7917,14 +8037,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__CallRule__Group__1"
-    // InternalBaseLanguage.g:2428:1: rule__CallRule__Group__1 : rule__CallRule__Group__1__Impl rule__CallRule__Group__2 ;
+    // InternalBaseLanguage.g:2478:1: rule__CallRule__Group__1 : rule__CallRule__Group__1__Impl rule__CallRule__Group__2 ;
     public final void rule__CallRule__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:2432:1: ( rule__CallRule__Group__1__Impl rule__CallRule__Group__2 )
-            // InternalBaseLanguage.g:2433:2: rule__CallRule__Group__1__Impl rule__CallRule__Group__2
+            // InternalBaseLanguage.g:2482:1: ( rule__CallRule__Group__1__Impl rule__CallRule__Group__2 )
+            // InternalBaseLanguage.g:2483:2: rule__CallRule__Group__1__Impl rule__CallRule__Group__2
             {
             pushFollow(FOLLOW_19);
             rule__CallRule__Group__1__Impl();
@@ -7955,17 +8075,17 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__CallRule__Group__1__Impl"
-    // InternalBaseLanguage.g:2440:1: rule__CallRule__Group__1__Impl : ( '(' ) ;
+    // InternalBaseLanguage.g:2490:1: rule__CallRule__Group__1__Impl : ( '(' ) ;
     public final void rule__CallRule__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:2444:1: ( ( '(' ) )
-            // InternalBaseLanguage.g:2445:1: ( '(' )
+            // InternalBaseLanguage.g:2494:1: ( ( '(' ) )
+            // InternalBaseLanguage.g:2495:1: ( '(' )
             {
-            // InternalBaseLanguage.g:2445:1: ( '(' )
-            // InternalBaseLanguage.g:2446:2: '('
+            // InternalBaseLanguage.g:2495:1: ( '(' )
+            // InternalBaseLanguage.g:2496:2: '('
             {
              before(grammarAccess.getCallRuleAccess().getLeftParenthesisKeyword_1()); 
             match(input,51,FOLLOW_2); 
@@ -7992,14 +8112,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__CallRule__Group__2"
-    // InternalBaseLanguage.g:2455:1: rule__CallRule__Group__2 : rule__CallRule__Group__2__Impl rule__CallRule__Group__3 ;
+    // InternalBaseLanguage.g:2505:1: rule__CallRule__Group__2 : rule__CallRule__Group__2__Impl rule__CallRule__Group__3 ;
     public final void rule__CallRule__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:2459:1: ( rule__CallRule__Group__2__Impl rule__CallRule__Group__3 )
-            // InternalBaseLanguage.g:2460:2: rule__CallRule__Group__2__Impl rule__CallRule__Group__3
+            // InternalBaseLanguage.g:2509:1: ( rule__CallRule__Group__2__Impl rule__CallRule__Group__3 )
+            // InternalBaseLanguage.g:2510:2: rule__CallRule__Group__2__Impl rule__CallRule__Group__3
             {
             pushFollow(FOLLOW_19);
             rule__CallRule__Group__2__Impl();
@@ -8030,29 +8150,29 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__CallRule__Group__2__Impl"
-    // InternalBaseLanguage.g:2467:1: rule__CallRule__Group__2__Impl : ( ( rule__CallRule__Group_2__0 )? ) ;
+    // InternalBaseLanguage.g:2517:1: rule__CallRule__Group__2__Impl : ( ( rule__CallRule__Group_2__0 )? ) ;
     public final void rule__CallRule__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:2471:1: ( ( ( rule__CallRule__Group_2__0 )? ) )
-            // InternalBaseLanguage.g:2472:1: ( ( rule__CallRule__Group_2__0 )? )
+            // InternalBaseLanguage.g:2521:1: ( ( ( rule__CallRule__Group_2__0 )? ) )
+            // InternalBaseLanguage.g:2522:1: ( ( rule__CallRule__Group_2__0 )? )
             {
-            // InternalBaseLanguage.g:2472:1: ( ( rule__CallRule__Group_2__0 )? )
-            // InternalBaseLanguage.g:2473:2: ( rule__CallRule__Group_2__0 )?
+            // InternalBaseLanguage.g:2522:1: ( ( rule__CallRule__Group_2__0 )? )
+            // InternalBaseLanguage.g:2523:2: ( rule__CallRule__Group_2__0 )?
             {
              before(grammarAccess.getCallRuleAccess().getGroup_2()); 
-            // InternalBaseLanguage.g:2474:2: ( rule__CallRule__Group_2__0 )?
+            // InternalBaseLanguage.g:2524:2: ( rule__CallRule__Group_2__0 )?
             int alt20=2;
             int LA20_0 = input.LA(1);
 
-            if ( ((LA20_0>=RULE_QUOTED_ID && LA20_0<=RULE_STRING)||LA20_0==15||(LA20_0>=22 && LA20_0<=23)||LA20_0==51||LA20_0==54||(LA20_0>=70 && LA20_0<=71)) ) {
+            if ( ((LA20_0>=RULE_QUOTED_ID && LA20_0<=RULE_STRING)||LA20_0==15||(LA20_0>=22 && LA20_0<=23)||LA20_0==51||(LA20_0>=73 && LA20_0<=74)) ) {
                 alt20=1;
             }
             switch (alt20) {
                 case 1 :
-                    // InternalBaseLanguage.g:2474:3: rule__CallRule__Group_2__0
+                    // InternalBaseLanguage.g:2524:3: rule__CallRule__Group_2__0
                     {
                     pushFollow(FOLLOW_2);
                     rule__CallRule__Group_2__0();
@@ -8088,14 +8208,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__CallRule__Group__3"
-    // InternalBaseLanguage.g:2482:1: rule__CallRule__Group__3 : rule__CallRule__Group__3__Impl ;
+    // InternalBaseLanguage.g:2532:1: rule__CallRule__Group__3 : rule__CallRule__Group__3__Impl ;
     public final void rule__CallRule__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:2486:1: ( rule__CallRule__Group__3__Impl )
-            // InternalBaseLanguage.g:2487:2: rule__CallRule__Group__3__Impl
+            // InternalBaseLanguage.g:2536:1: ( rule__CallRule__Group__3__Impl )
+            // InternalBaseLanguage.g:2537:2: rule__CallRule__Group__3__Impl
             {
             pushFollow(FOLLOW_2);
             rule__CallRule__Group__3__Impl();
@@ -8121,17 +8241,17 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__CallRule__Group__3__Impl"
-    // InternalBaseLanguage.g:2493:1: rule__CallRule__Group__3__Impl : ( ')' ) ;
+    // InternalBaseLanguage.g:2543:1: rule__CallRule__Group__3__Impl : ( ')' ) ;
     public final void rule__CallRule__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:2497:1: ( ( ')' ) )
-            // InternalBaseLanguage.g:2498:1: ( ')' )
+            // InternalBaseLanguage.g:2547:1: ( ( ')' ) )
+            // InternalBaseLanguage.g:2548:1: ( ')' )
             {
-            // InternalBaseLanguage.g:2498:1: ( ')' )
-            // InternalBaseLanguage.g:2499:2: ')'
+            // InternalBaseLanguage.g:2548:1: ( ')' )
+            // InternalBaseLanguage.g:2549:2: ')'
             {
              before(grammarAccess.getCallRuleAccess().getRightParenthesisKeyword_3()); 
             match(input,52,FOLLOW_2); 
@@ -8158,14 +8278,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__CallRule__Group_2__0"
-    // InternalBaseLanguage.g:2509:1: rule__CallRule__Group_2__0 : rule__CallRule__Group_2__0__Impl rule__CallRule__Group_2__1 ;
+    // InternalBaseLanguage.g:2559:1: rule__CallRule__Group_2__0 : rule__CallRule__Group_2__0__Impl rule__CallRule__Group_2__1 ;
     public final void rule__CallRule__Group_2__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:2513:1: ( rule__CallRule__Group_2__0__Impl rule__CallRule__Group_2__1 )
-            // InternalBaseLanguage.g:2514:2: rule__CallRule__Group_2__0__Impl rule__CallRule__Group_2__1
+            // InternalBaseLanguage.g:2563:1: ( rule__CallRule__Group_2__0__Impl rule__CallRule__Group_2__1 )
+            // InternalBaseLanguage.g:2564:2: rule__CallRule__Group_2__0__Impl rule__CallRule__Group_2__1
             {
             pushFollow(FOLLOW_20);
             rule__CallRule__Group_2__0__Impl();
@@ -8196,21 +8316,21 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__CallRule__Group_2__0__Impl"
-    // InternalBaseLanguage.g:2521:1: rule__CallRule__Group_2__0__Impl : ( ( rule__CallRule__ParametersAssignment_2_0 ) ) ;
+    // InternalBaseLanguage.g:2571:1: rule__CallRule__Group_2__0__Impl : ( ( rule__CallRule__ParametersAssignment_2_0 ) ) ;
     public final void rule__CallRule__Group_2__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:2525:1: ( ( ( rule__CallRule__ParametersAssignment_2_0 ) ) )
-            // InternalBaseLanguage.g:2526:1: ( ( rule__CallRule__ParametersAssignment_2_0 ) )
+            // InternalBaseLanguage.g:2575:1: ( ( ( rule__CallRule__ParametersAssignment_2_0 ) ) )
+            // InternalBaseLanguage.g:2576:1: ( ( rule__CallRule__ParametersAssignment_2_0 ) )
             {
-            // InternalBaseLanguage.g:2526:1: ( ( rule__CallRule__ParametersAssignment_2_0 ) )
-            // InternalBaseLanguage.g:2527:2: ( rule__CallRule__ParametersAssignment_2_0 )
+            // InternalBaseLanguage.g:2576:1: ( ( rule__CallRule__ParametersAssignment_2_0 ) )
+            // InternalBaseLanguage.g:2577:2: ( rule__CallRule__ParametersAssignment_2_0 )
             {
              before(grammarAccess.getCallRuleAccess().getParametersAssignment_2_0()); 
-            // InternalBaseLanguage.g:2528:2: ( rule__CallRule__ParametersAssignment_2_0 )
-            // InternalBaseLanguage.g:2528:3: rule__CallRule__ParametersAssignment_2_0
+            // InternalBaseLanguage.g:2578:2: ( rule__CallRule__ParametersAssignment_2_0 )
+            // InternalBaseLanguage.g:2578:3: rule__CallRule__ParametersAssignment_2_0
             {
             pushFollow(FOLLOW_2);
             rule__CallRule__ParametersAssignment_2_0();
@@ -8243,14 +8363,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__CallRule__Group_2__1"
-    // InternalBaseLanguage.g:2536:1: rule__CallRule__Group_2__1 : rule__CallRule__Group_2__1__Impl ;
+    // InternalBaseLanguage.g:2586:1: rule__CallRule__Group_2__1 : rule__CallRule__Group_2__1__Impl ;
     public final void rule__CallRule__Group_2__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:2540:1: ( rule__CallRule__Group_2__1__Impl )
-            // InternalBaseLanguage.g:2541:2: rule__CallRule__Group_2__1__Impl
+            // InternalBaseLanguage.g:2590:1: ( rule__CallRule__Group_2__1__Impl )
+            // InternalBaseLanguage.g:2591:2: rule__CallRule__Group_2__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__CallRule__Group_2__1__Impl();
@@ -8276,20 +8396,20 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__CallRule__Group_2__1__Impl"
-    // InternalBaseLanguage.g:2547:1: rule__CallRule__Group_2__1__Impl : ( ( rule__CallRule__Group_2_1__0 )* ) ;
+    // InternalBaseLanguage.g:2597:1: rule__CallRule__Group_2__1__Impl : ( ( rule__CallRule__Group_2_1__0 )* ) ;
     public final void rule__CallRule__Group_2__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:2551:1: ( ( ( rule__CallRule__Group_2_1__0 )* ) )
-            // InternalBaseLanguage.g:2552:1: ( ( rule__CallRule__Group_2_1__0 )* )
+            // InternalBaseLanguage.g:2601:1: ( ( ( rule__CallRule__Group_2_1__0 )* ) )
+            // InternalBaseLanguage.g:2602:1: ( ( rule__CallRule__Group_2_1__0 )* )
             {
-            // InternalBaseLanguage.g:2552:1: ( ( rule__CallRule__Group_2_1__0 )* )
-            // InternalBaseLanguage.g:2553:2: ( rule__CallRule__Group_2_1__0 )*
+            // InternalBaseLanguage.g:2602:1: ( ( rule__CallRule__Group_2_1__0 )* )
+            // InternalBaseLanguage.g:2603:2: ( rule__CallRule__Group_2_1__0 )*
             {
              before(grammarAccess.getCallRuleAccess().getGroup_2_1()); 
-            // InternalBaseLanguage.g:2554:2: ( rule__CallRule__Group_2_1__0 )*
+            // InternalBaseLanguage.g:2604:2: ( rule__CallRule__Group_2_1__0 )*
             loop21:
             do {
                 int alt21=2;
@@ -8302,7 +8422,7 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
                 switch (alt21) {
             	case 1 :
-            	    // InternalBaseLanguage.g:2554:3: rule__CallRule__Group_2_1__0
+            	    // InternalBaseLanguage.g:2604:3: rule__CallRule__Group_2_1__0
             	    {
             	    pushFollow(FOLLOW_21);
             	    rule__CallRule__Group_2_1__0();
@@ -8341,14 +8461,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__CallRule__Group_2_1__0"
-    // InternalBaseLanguage.g:2563:1: rule__CallRule__Group_2_1__0 : rule__CallRule__Group_2_1__0__Impl rule__CallRule__Group_2_1__1 ;
+    // InternalBaseLanguage.g:2613:1: rule__CallRule__Group_2_1__0 : rule__CallRule__Group_2_1__0__Impl rule__CallRule__Group_2_1__1 ;
     public final void rule__CallRule__Group_2_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:2567:1: ( rule__CallRule__Group_2_1__0__Impl rule__CallRule__Group_2_1__1 )
-            // InternalBaseLanguage.g:2568:2: rule__CallRule__Group_2_1__0__Impl rule__CallRule__Group_2_1__1
+            // InternalBaseLanguage.g:2617:1: ( rule__CallRule__Group_2_1__0__Impl rule__CallRule__Group_2_1__1 )
+            // InternalBaseLanguage.g:2618:2: rule__CallRule__Group_2_1__0__Impl rule__CallRule__Group_2_1__1
             {
             pushFollow(FOLLOW_5);
             rule__CallRule__Group_2_1__0__Impl();
@@ -8379,17 +8499,17 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__CallRule__Group_2_1__0__Impl"
-    // InternalBaseLanguage.g:2575:1: rule__CallRule__Group_2_1__0__Impl : ( ',' ) ;
+    // InternalBaseLanguage.g:2625:1: rule__CallRule__Group_2_1__0__Impl : ( ',' ) ;
     public final void rule__CallRule__Group_2_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:2579:1: ( ( ',' ) )
-            // InternalBaseLanguage.g:2580:1: ( ',' )
+            // InternalBaseLanguage.g:2629:1: ( ( ',' ) )
+            // InternalBaseLanguage.g:2630:1: ( ',' )
             {
-            // InternalBaseLanguage.g:2580:1: ( ',' )
-            // InternalBaseLanguage.g:2581:2: ','
+            // InternalBaseLanguage.g:2630:1: ( ',' )
+            // InternalBaseLanguage.g:2631:2: ','
             {
              before(grammarAccess.getCallRuleAccess().getCommaKeyword_2_1_0()); 
             match(input,53,FOLLOW_2); 
@@ -8416,14 +8536,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__CallRule__Group_2_1__1"
-    // InternalBaseLanguage.g:2590:1: rule__CallRule__Group_2_1__1 : rule__CallRule__Group_2_1__1__Impl ;
+    // InternalBaseLanguage.g:2640:1: rule__CallRule__Group_2_1__1 : rule__CallRule__Group_2_1__1__Impl ;
     public final void rule__CallRule__Group_2_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:2594:1: ( rule__CallRule__Group_2_1__1__Impl )
-            // InternalBaseLanguage.g:2595:2: rule__CallRule__Group_2_1__1__Impl
+            // InternalBaseLanguage.g:2644:1: ( rule__CallRule__Group_2_1__1__Impl )
+            // InternalBaseLanguage.g:2645:2: rule__CallRule__Group_2_1__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__CallRule__Group_2_1__1__Impl();
@@ -8449,21 +8569,21 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__CallRule__Group_2_1__1__Impl"
-    // InternalBaseLanguage.g:2601:1: rule__CallRule__Group_2_1__1__Impl : ( ( rule__CallRule__ParametersAssignment_2_1_1 ) ) ;
+    // InternalBaseLanguage.g:2651:1: rule__CallRule__Group_2_1__1__Impl : ( ( rule__CallRule__ParametersAssignment_2_1_1 ) ) ;
     public final void rule__CallRule__Group_2_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:2605:1: ( ( ( rule__CallRule__ParametersAssignment_2_1_1 ) ) )
-            // InternalBaseLanguage.g:2606:1: ( ( rule__CallRule__ParametersAssignment_2_1_1 ) )
+            // InternalBaseLanguage.g:2655:1: ( ( ( rule__CallRule__ParametersAssignment_2_1_1 ) ) )
+            // InternalBaseLanguage.g:2656:1: ( ( rule__CallRule__ParametersAssignment_2_1_1 ) )
             {
-            // InternalBaseLanguage.g:2606:1: ( ( rule__CallRule__ParametersAssignment_2_1_1 ) )
-            // InternalBaseLanguage.g:2607:2: ( rule__CallRule__ParametersAssignment_2_1_1 )
+            // InternalBaseLanguage.g:2656:1: ( ( rule__CallRule__ParametersAssignment_2_1_1 ) )
+            // InternalBaseLanguage.g:2657:2: ( rule__CallRule__ParametersAssignment_2_1_1 )
             {
              before(grammarAccess.getCallRuleAccess().getParametersAssignment_2_1_1()); 
-            // InternalBaseLanguage.g:2608:2: ( rule__CallRule__ParametersAssignment_2_1_1 )
-            // InternalBaseLanguage.g:2608:3: rule__CallRule__ParametersAssignment_2_1_1
+            // InternalBaseLanguage.g:2658:2: ( rule__CallRule__ParametersAssignment_2_1_1 )
+            // InternalBaseLanguage.g:2658:3: rule__CallRule__ParametersAssignment_2_1_1
             {
             pushFollow(FOLLOW_2);
             rule__CallRule__ParametersAssignment_2_1_1();
@@ -8495,160 +8615,15 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
     // $ANTLR end "rule__CallRule__Group_2_1__1__Impl"
 
 
-    // $ANTLR start "rule__ValueReferenceRule__Group__0"
-    // InternalBaseLanguage.g:2617:1: rule__ValueReferenceRule__Group__0 : rule__ValueReferenceRule__Group__0__Impl rule__ValueReferenceRule__Group__1 ;
-    public final void rule__ValueReferenceRule__Group__0() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-        	
-        try {
-            // InternalBaseLanguage.g:2621:1: ( rule__ValueReferenceRule__Group__0__Impl rule__ValueReferenceRule__Group__1 )
-            // InternalBaseLanguage.g:2622:2: rule__ValueReferenceRule__Group__0__Impl rule__ValueReferenceRule__Group__1
-            {
-            pushFollow(FOLLOW_5);
-            rule__ValueReferenceRule__Group__0__Impl();
-
-            state._fsp--;
-
-            pushFollow(FOLLOW_2);
-            rule__ValueReferenceRule__Group__1();
-
-            state._fsp--;
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__ValueReferenceRule__Group__0"
-
-
-    // $ANTLR start "rule__ValueReferenceRule__Group__0__Impl"
-    // InternalBaseLanguage.g:2629:1: rule__ValueReferenceRule__Group__0__Impl : ( () ) ;
-    public final void rule__ValueReferenceRule__Group__0__Impl() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-        	
-        try {
-            // InternalBaseLanguage.g:2633:1: ( ( () ) )
-            // InternalBaseLanguage.g:2634:1: ( () )
-            {
-            // InternalBaseLanguage.g:2634:1: ( () )
-            // InternalBaseLanguage.g:2635:2: ()
-            {
-             before(grammarAccess.getValueReferenceRuleAccess().getValueReferenceAction_0()); 
-            // InternalBaseLanguage.g:2636:2: ()
-            // InternalBaseLanguage.g:2636:3: 
-            {
-            }
-
-             after(grammarAccess.getValueReferenceRuleAccess().getValueReferenceAction_0()); 
-
-            }
-
-
-            }
-
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__ValueReferenceRule__Group__0__Impl"
-
-
-    // $ANTLR start "rule__ValueReferenceRule__Group__1"
-    // InternalBaseLanguage.g:2644:1: rule__ValueReferenceRule__Group__1 : rule__ValueReferenceRule__Group__1__Impl ;
-    public final void rule__ValueReferenceRule__Group__1() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-        	
-        try {
-            // InternalBaseLanguage.g:2648:1: ( rule__ValueReferenceRule__Group__1__Impl )
-            // InternalBaseLanguage.g:2649:2: rule__ValueReferenceRule__Group__1__Impl
-            {
-            pushFollow(FOLLOW_2);
-            rule__ValueReferenceRule__Group__1__Impl();
-
-            state._fsp--;
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__ValueReferenceRule__Group__1"
-
-
-    // $ANTLR start "rule__ValueReferenceRule__Group__1__Impl"
-    // InternalBaseLanguage.g:2655:1: rule__ValueReferenceRule__Group__1__Impl : ( 'value' ) ;
-    public final void rule__ValueReferenceRule__Group__1__Impl() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-        	
-        try {
-            // InternalBaseLanguage.g:2659:1: ( ( 'value' ) )
-            // InternalBaseLanguage.g:2660:1: ( 'value' )
-            {
-            // InternalBaseLanguage.g:2660:1: ( 'value' )
-            // InternalBaseLanguage.g:2661:2: 'value'
-            {
-             before(grammarAccess.getValueReferenceRuleAccess().getValueKeyword_1()); 
-            match(input,54,FOLLOW_2); 
-             after(grammarAccess.getValueReferenceRuleAccess().getValueKeyword_1()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__ValueReferenceRule__Group__1__Impl"
-
-
     // $ANTLR start "rule__DoubleLiteralRule__Group__0"
-    // InternalBaseLanguage.g:2671:1: rule__DoubleLiteralRule__Group__0 : rule__DoubleLiteralRule__Group__0__Impl rule__DoubleLiteralRule__Group__1 ;
+    // InternalBaseLanguage.g:2667:1: rule__DoubleLiteralRule__Group__0 : rule__DoubleLiteralRule__Group__0__Impl rule__DoubleLiteralRule__Group__1 ;
     public final void rule__DoubleLiteralRule__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:2675:1: ( rule__DoubleLiteralRule__Group__0__Impl rule__DoubleLiteralRule__Group__1 )
-            // InternalBaseLanguage.g:2676:2: rule__DoubleLiteralRule__Group__0__Impl rule__DoubleLiteralRule__Group__1
+            // InternalBaseLanguage.g:2671:1: ( rule__DoubleLiteralRule__Group__0__Impl rule__DoubleLiteralRule__Group__1 )
+            // InternalBaseLanguage.g:2672:2: rule__DoubleLiteralRule__Group__0__Impl rule__DoubleLiteralRule__Group__1
             {
             pushFollow(FOLLOW_22);
             rule__DoubleLiteralRule__Group__0__Impl();
@@ -8679,21 +8654,21 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__DoubleLiteralRule__Group__0__Impl"
-    // InternalBaseLanguage.g:2683:1: rule__DoubleLiteralRule__Group__0__Impl : ( ( rule__DoubleLiteralRule__LiteralAssignment_0 ) ) ;
+    // InternalBaseLanguage.g:2679:1: rule__DoubleLiteralRule__Group__0__Impl : ( ( rule__DoubleLiteralRule__LiteralAssignment_0 ) ) ;
     public final void rule__DoubleLiteralRule__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:2687:1: ( ( ( rule__DoubleLiteralRule__LiteralAssignment_0 ) ) )
-            // InternalBaseLanguage.g:2688:1: ( ( rule__DoubleLiteralRule__LiteralAssignment_0 ) )
+            // InternalBaseLanguage.g:2683:1: ( ( ( rule__DoubleLiteralRule__LiteralAssignment_0 ) ) )
+            // InternalBaseLanguage.g:2684:1: ( ( rule__DoubleLiteralRule__LiteralAssignment_0 ) )
             {
-            // InternalBaseLanguage.g:2688:1: ( ( rule__DoubleLiteralRule__LiteralAssignment_0 ) )
-            // InternalBaseLanguage.g:2689:2: ( rule__DoubleLiteralRule__LiteralAssignment_0 )
+            // InternalBaseLanguage.g:2684:1: ( ( rule__DoubleLiteralRule__LiteralAssignment_0 ) )
+            // InternalBaseLanguage.g:2685:2: ( rule__DoubleLiteralRule__LiteralAssignment_0 )
             {
              before(grammarAccess.getDoubleLiteralRuleAccess().getLiteralAssignment_0()); 
-            // InternalBaseLanguage.g:2690:2: ( rule__DoubleLiteralRule__LiteralAssignment_0 )
-            // InternalBaseLanguage.g:2690:3: rule__DoubleLiteralRule__LiteralAssignment_0
+            // InternalBaseLanguage.g:2686:2: ( rule__DoubleLiteralRule__LiteralAssignment_0 )
+            // InternalBaseLanguage.g:2686:3: rule__DoubleLiteralRule__LiteralAssignment_0
             {
             pushFollow(FOLLOW_2);
             rule__DoubleLiteralRule__LiteralAssignment_0();
@@ -8726,14 +8701,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__DoubleLiteralRule__Group__1"
-    // InternalBaseLanguage.g:2698:1: rule__DoubleLiteralRule__Group__1 : rule__DoubleLiteralRule__Group__1__Impl ;
+    // InternalBaseLanguage.g:2694:1: rule__DoubleLiteralRule__Group__1 : rule__DoubleLiteralRule__Group__1__Impl ;
     public final void rule__DoubleLiteralRule__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:2702:1: ( rule__DoubleLiteralRule__Group__1__Impl )
-            // InternalBaseLanguage.g:2703:2: rule__DoubleLiteralRule__Group__1__Impl
+            // InternalBaseLanguage.g:2698:1: ( rule__DoubleLiteralRule__Group__1__Impl )
+            // InternalBaseLanguage.g:2699:2: rule__DoubleLiteralRule__Group__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__DoubleLiteralRule__Group__1__Impl();
@@ -8759,20 +8734,20 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__DoubleLiteralRule__Group__1__Impl"
-    // InternalBaseLanguage.g:2709:1: rule__DoubleLiteralRule__Group__1__Impl : ( ( rule__DoubleLiteralRule__FactorAssignment_1 )? ) ;
+    // InternalBaseLanguage.g:2705:1: rule__DoubleLiteralRule__Group__1__Impl : ( ( rule__DoubleLiteralRule__FactorAssignment_1 )? ) ;
     public final void rule__DoubleLiteralRule__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:2713:1: ( ( ( rule__DoubleLiteralRule__FactorAssignment_1 )? ) )
-            // InternalBaseLanguage.g:2714:1: ( ( rule__DoubleLiteralRule__FactorAssignment_1 )? )
+            // InternalBaseLanguage.g:2709:1: ( ( ( rule__DoubleLiteralRule__FactorAssignment_1 )? ) )
+            // InternalBaseLanguage.g:2710:1: ( ( rule__DoubleLiteralRule__FactorAssignment_1 )? )
             {
-            // InternalBaseLanguage.g:2714:1: ( ( rule__DoubleLiteralRule__FactorAssignment_1 )? )
-            // InternalBaseLanguage.g:2715:2: ( rule__DoubleLiteralRule__FactorAssignment_1 )?
+            // InternalBaseLanguage.g:2710:1: ( ( rule__DoubleLiteralRule__FactorAssignment_1 )? )
+            // InternalBaseLanguage.g:2711:2: ( rule__DoubleLiteralRule__FactorAssignment_1 )?
             {
              before(grammarAccess.getDoubleLiteralRuleAccess().getFactorAssignment_1()); 
-            // InternalBaseLanguage.g:2716:2: ( rule__DoubleLiteralRule__FactorAssignment_1 )?
+            // InternalBaseLanguage.g:2712:2: ( rule__DoubleLiteralRule__FactorAssignment_1 )?
             int alt22=2;
             int LA22_0 = input.LA(1);
 
@@ -8781,7 +8756,7 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
             }
             switch (alt22) {
                 case 1 :
-                    // InternalBaseLanguage.g:2716:3: rule__DoubleLiteralRule__FactorAssignment_1
+                    // InternalBaseLanguage.g:2712:3: rule__DoubleLiteralRule__FactorAssignment_1
                     {
                     pushFollow(FOLLOW_2);
                     rule__DoubleLiteralRule__FactorAssignment_1();
@@ -8817,14 +8792,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__IntegerLiteralRule__Group__0"
-    // InternalBaseLanguage.g:2725:1: rule__IntegerLiteralRule__Group__0 : rule__IntegerLiteralRule__Group__0__Impl rule__IntegerLiteralRule__Group__1 ;
+    // InternalBaseLanguage.g:2721:1: rule__IntegerLiteralRule__Group__0 : rule__IntegerLiteralRule__Group__0__Impl rule__IntegerLiteralRule__Group__1 ;
     public final void rule__IntegerLiteralRule__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:2729:1: ( rule__IntegerLiteralRule__Group__0__Impl rule__IntegerLiteralRule__Group__1 )
-            // InternalBaseLanguage.g:2730:2: rule__IntegerLiteralRule__Group__0__Impl rule__IntegerLiteralRule__Group__1
+            // InternalBaseLanguage.g:2725:1: ( rule__IntegerLiteralRule__Group__0__Impl rule__IntegerLiteralRule__Group__1 )
+            // InternalBaseLanguage.g:2726:2: rule__IntegerLiteralRule__Group__0__Impl rule__IntegerLiteralRule__Group__1
             {
             pushFollow(FOLLOW_22);
             rule__IntegerLiteralRule__Group__0__Impl();
@@ -8855,21 +8830,21 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__IntegerLiteralRule__Group__0__Impl"
-    // InternalBaseLanguage.g:2737:1: rule__IntegerLiteralRule__Group__0__Impl : ( ( rule__IntegerLiteralRule__LiteralAssignment_0 ) ) ;
+    // InternalBaseLanguage.g:2733:1: rule__IntegerLiteralRule__Group__0__Impl : ( ( rule__IntegerLiteralRule__LiteralAssignment_0 ) ) ;
     public final void rule__IntegerLiteralRule__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:2741:1: ( ( ( rule__IntegerLiteralRule__LiteralAssignment_0 ) ) )
-            // InternalBaseLanguage.g:2742:1: ( ( rule__IntegerLiteralRule__LiteralAssignment_0 ) )
+            // InternalBaseLanguage.g:2737:1: ( ( ( rule__IntegerLiteralRule__LiteralAssignment_0 ) ) )
+            // InternalBaseLanguage.g:2738:1: ( ( rule__IntegerLiteralRule__LiteralAssignment_0 ) )
             {
-            // InternalBaseLanguage.g:2742:1: ( ( rule__IntegerLiteralRule__LiteralAssignment_0 ) )
-            // InternalBaseLanguage.g:2743:2: ( rule__IntegerLiteralRule__LiteralAssignment_0 )
+            // InternalBaseLanguage.g:2738:1: ( ( rule__IntegerLiteralRule__LiteralAssignment_0 ) )
+            // InternalBaseLanguage.g:2739:2: ( rule__IntegerLiteralRule__LiteralAssignment_0 )
             {
              before(grammarAccess.getIntegerLiteralRuleAccess().getLiteralAssignment_0()); 
-            // InternalBaseLanguage.g:2744:2: ( rule__IntegerLiteralRule__LiteralAssignment_0 )
-            // InternalBaseLanguage.g:2744:3: rule__IntegerLiteralRule__LiteralAssignment_0
+            // InternalBaseLanguage.g:2740:2: ( rule__IntegerLiteralRule__LiteralAssignment_0 )
+            // InternalBaseLanguage.g:2740:3: rule__IntegerLiteralRule__LiteralAssignment_0
             {
             pushFollow(FOLLOW_2);
             rule__IntegerLiteralRule__LiteralAssignment_0();
@@ -8902,14 +8877,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__IntegerLiteralRule__Group__1"
-    // InternalBaseLanguage.g:2752:1: rule__IntegerLiteralRule__Group__1 : rule__IntegerLiteralRule__Group__1__Impl ;
+    // InternalBaseLanguage.g:2748:1: rule__IntegerLiteralRule__Group__1 : rule__IntegerLiteralRule__Group__1__Impl ;
     public final void rule__IntegerLiteralRule__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:2756:1: ( rule__IntegerLiteralRule__Group__1__Impl )
-            // InternalBaseLanguage.g:2757:2: rule__IntegerLiteralRule__Group__1__Impl
+            // InternalBaseLanguage.g:2752:1: ( rule__IntegerLiteralRule__Group__1__Impl )
+            // InternalBaseLanguage.g:2753:2: rule__IntegerLiteralRule__Group__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__IntegerLiteralRule__Group__1__Impl();
@@ -8935,20 +8910,20 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__IntegerLiteralRule__Group__1__Impl"
-    // InternalBaseLanguage.g:2763:1: rule__IntegerLiteralRule__Group__1__Impl : ( ( rule__IntegerLiteralRule__FactorAssignment_1 )? ) ;
+    // InternalBaseLanguage.g:2759:1: rule__IntegerLiteralRule__Group__1__Impl : ( ( rule__IntegerLiteralRule__FactorAssignment_1 )? ) ;
     public final void rule__IntegerLiteralRule__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:2767:1: ( ( ( rule__IntegerLiteralRule__FactorAssignment_1 )? ) )
-            // InternalBaseLanguage.g:2768:1: ( ( rule__IntegerLiteralRule__FactorAssignment_1 )? )
+            // InternalBaseLanguage.g:2763:1: ( ( ( rule__IntegerLiteralRule__FactorAssignment_1 )? ) )
+            // InternalBaseLanguage.g:2764:1: ( ( rule__IntegerLiteralRule__FactorAssignment_1 )? )
             {
-            // InternalBaseLanguage.g:2768:1: ( ( rule__IntegerLiteralRule__FactorAssignment_1 )? )
-            // InternalBaseLanguage.g:2769:2: ( rule__IntegerLiteralRule__FactorAssignment_1 )?
+            // InternalBaseLanguage.g:2764:1: ( ( rule__IntegerLiteralRule__FactorAssignment_1 )? )
+            // InternalBaseLanguage.g:2765:2: ( rule__IntegerLiteralRule__FactorAssignment_1 )?
             {
              before(grammarAccess.getIntegerLiteralRuleAccess().getFactorAssignment_1()); 
-            // InternalBaseLanguage.g:2770:2: ( rule__IntegerLiteralRule__FactorAssignment_1 )?
+            // InternalBaseLanguage.g:2766:2: ( rule__IntegerLiteralRule__FactorAssignment_1 )?
             int alt23=2;
             int LA23_0 = input.LA(1);
 
@@ -8957,7 +8932,7 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
             }
             switch (alt23) {
                 case 1 :
-                    // InternalBaseLanguage.g:2770:3: rule__IntegerLiteralRule__FactorAssignment_1
+                    // InternalBaseLanguage.g:2766:3: rule__IntegerLiteralRule__FactorAssignment_1
                     {
                     pushFollow(FOLLOW_2);
                     rule__IntegerLiteralRule__FactorAssignment_1();
@@ -8993,14 +8968,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__BooleanLiteralRule__Group__0"
-    // InternalBaseLanguage.g:2779:1: rule__BooleanLiteralRule__Group__0 : rule__BooleanLiteralRule__Group__0__Impl rule__BooleanLiteralRule__Group__1 ;
+    // InternalBaseLanguage.g:2775:1: rule__BooleanLiteralRule__Group__0 : rule__BooleanLiteralRule__Group__0__Impl rule__BooleanLiteralRule__Group__1 ;
     public final void rule__BooleanLiteralRule__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:2783:1: ( rule__BooleanLiteralRule__Group__0__Impl rule__BooleanLiteralRule__Group__1 )
-            // InternalBaseLanguage.g:2784:2: rule__BooleanLiteralRule__Group__0__Impl rule__BooleanLiteralRule__Group__1
+            // InternalBaseLanguage.g:2779:1: ( rule__BooleanLiteralRule__Group__0__Impl rule__BooleanLiteralRule__Group__1 )
+            // InternalBaseLanguage.g:2780:2: rule__BooleanLiteralRule__Group__0__Impl rule__BooleanLiteralRule__Group__1
             {
             pushFollow(FOLLOW_23);
             rule__BooleanLiteralRule__Group__0__Impl();
@@ -9031,21 +9006,21 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__BooleanLiteralRule__Group__0__Impl"
-    // InternalBaseLanguage.g:2791:1: rule__BooleanLiteralRule__Group__0__Impl : ( () ) ;
+    // InternalBaseLanguage.g:2787:1: rule__BooleanLiteralRule__Group__0__Impl : ( () ) ;
     public final void rule__BooleanLiteralRule__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:2795:1: ( ( () ) )
-            // InternalBaseLanguage.g:2796:1: ( () )
+            // InternalBaseLanguage.g:2791:1: ( ( () ) )
+            // InternalBaseLanguage.g:2792:1: ( () )
             {
-            // InternalBaseLanguage.g:2796:1: ( () )
-            // InternalBaseLanguage.g:2797:2: ()
+            // InternalBaseLanguage.g:2792:1: ( () )
+            // InternalBaseLanguage.g:2793:2: ()
             {
              before(grammarAccess.getBooleanLiteralRuleAccess().getBooleanLiteralAction_0()); 
-            // InternalBaseLanguage.g:2798:2: ()
-            // InternalBaseLanguage.g:2798:3: 
+            // InternalBaseLanguage.g:2794:2: ()
+            // InternalBaseLanguage.g:2794:3: 
             {
             }
 
@@ -9068,14 +9043,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__BooleanLiteralRule__Group__1"
-    // InternalBaseLanguage.g:2806:1: rule__BooleanLiteralRule__Group__1 : rule__BooleanLiteralRule__Group__1__Impl ;
+    // InternalBaseLanguage.g:2802:1: rule__BooleanLiteralRule__Group__1 : rule__BooleanLiteralRule__Group__1__Impl ;
     public final void rule__BooleanLiteralRule__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:2810:1: ( rule__BooleanLiteralRule__Group__1__Impl )
-            // InternalBaseLanguage.g:2811:2: rule__BooleanLiteralRule__Group__1__Impl
+            // InternalBaseLanguage.g:2806:1: ( rule__BooleanLiteralRule__Group__1__Impl )
+            // InternalBaseLanguage.g:2807:2: rule__BooleanLiteralRule__Group__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__BooleanLiteralRule__Group__1__Impl();
@@ -9101,21 +9076,21 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__BooleanLiteralRule__Group__1__Impl"
-    // InternalBaseLanguage.g:2817:1: rule__BooleanLiteralRule__Group__1__Impl : ( ( rule__BooleanLiteralRule__Alternatives_1 ) ) ;
+    // InternalBaseLanguage.g:2813:1: rule__BooleanLiteralRule__Group__1__Impl : ( ( rule__BooleanLiteralRule__Alternatives_1 ) ) ;
     public final void rule__BooleanLiteralRule__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:2821:1: ( ( ( rule__BooleanLiteralRule__Alternatives_1 ) ) )
-            // InternalBaseLanguage.g:2822:1: ( ( rule__BooleanLiteralRule__Alternatives_1 ) )
+            // InternalBaseLanguage.g:2817:1: ( ( ( rule__BooleanLiteralRule__Alternatives_1 ) ) )
+            // InternalBaseLanguage.g:2818:1: ( ( rule__BooleanLiteralRule__Alternatives_1 ) )
             {
-            // InternalBaseLanguage.g:2822:1: ( ( rule__BooleanLiteralRule__Alternatives_1 ) )
-            // InternalBaseLanguage.g:2823:2: ( rule__BooleanLiteralRule__Alternatives_1 )
+            // InternalBaseLanguage.g:2818:1: ( ( rule__BooleanLiteralRule__Alternatives_1 ) )
+            // InternalBaseLanguage.g:2819:2: ( rule__BooleanLiteralRule__Alternatives_1 )
             {
              before(grammarAccess.getBooleanLiteralRuleAccess().getAlternatives_1()); 
-            // InternalBaseLanguage.g:2824:2: ( rule__BooleanLiteralRule__Alternatives_1 )
-            // InternalBaseLanguage.g:2824:3: rule__BooleanLiteralRule__Alternatives_1
+            // InternalBaseLanguage.g:2820:2: ( rule__BooleanLiteralRule__Alternatives_1 )
+            // InternalBaseLanguage.g:2820:3: rule__BooleanLiteralRule__Alternatives_1
             {
             pushFollow(FOLLOW_2);
             rule__BooleanLiteralRule__Alternatives_1();
@@ -9147,17 +9122,772 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
     // $ANTLR end "rule__BooleanLiteralRule__Group__1__Impl"
 
 
+    // $ANTLR start "rule__TypeDefinitionRule__Group__0"
+    // InternalBaseLanguage.g:2829:1: rule__TypeDefinitionRule__Group__0 : rule__TypeDefinitionRule__Group__0__Impl rule__TypeDefinitionRule__Group__1 ;
+    public final void rule__TypeDefinitionRule__Group__0() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalBaseLanguage.g:2833:1: ( rule__TypeDefinitionRule__Group__0__Impl rule__TypeDefinitionRule__Group__1 )
+            // InternalBaseLanguage.g:2834:2: rule__TypeDefinitionRule__Group__0__Impl rule__TypeDefinitionRule__Group__1
+            {
+            pushFollow(FOLLOW_24);
+            rule__TypeDefinitionRule__Group__0__Impl();
+
+            state._fsp--;
+
+            pushFollow(FOLLOW_2);
+            rule__TypeDefinitionRule__Group__1();
+
+            state._fsp--;
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__TypeDefinitionRule__Group__0"
+
+
+    // $ANTLR start "rule__TypeDefinitionRule__Group__0__Impl"
+    // InternalBaseLanguage.g:2841:1: rule__TypeDefinitionRule__Group__0__Impl : ( ( rule__TypeDefinitionRule__AbstractAssignment_0 )? ) ;
+    public final void rule__TypeDefinitionRule__Group__0__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalBaseLanguage.g:2845:1: ( ( ( rule__TypeDefinitionRule__AbstractAssignment_0 )? ) )
+            // InternalBaseLanguage.g:2846:1: ( ( rule__TypeDefinitionRule__AbstractAssignment_0 )? )
+            {
+            // InternalBaseLanguage.g:2846:1: ( ( rule__TypeDefinitionRule__AbstractAssignment_0 )? )
+            // InternalBaseLanguage.g:2847:2: ( rule__TypeDefinitionRule__AbstractAssignment_0 )?
+            {
+             before(grammarAccess.getTypeDefinitionRuleAccess().getAbstractAssignment_0()); 
+            // InternalBaseLanguage.g:2848:2: ( rule__TypeDefinitionRule__AbstractAssignment_0 )?
+            int alt24=2;
+            int LA24_0 = input.LA(1);
+
+            if ( (LA24_0==75) ) {
+                alt24=1;
+            }
+            switch (alt24) {
+                case 1 :
+                    // InternalBaseLanguage.g:2848:3: rule__TypeDefinitionRule__AbstractAssignment_0
+                    {
+                    pushFollow(FOLLOW_2);
+                    rule__TypeDefinitionRule__AbstractAssignment_0();
+
+                    state._fsp--;
+
+
+                    }
+                    break;
+
+            }
+
+             after(grammarAccess.getTypeDefinitionRuleAccess().getAbstractAssignment_0()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__TypeDefinitionRule__Group__0__Impl"
+
+
+    // $ANTLR start "rule__TypeDefinitionRule__Group__1"
+    // InternalBaseLanguage.g:2856:1: rule__TypeDefinitionRule__Group__1 : rule__TypeDefinitionRule__Group__1__Impl rule__TypeDefinitionRule__Group__2 ;
+    public final void rule__TypeDefinitionRule__Group__1() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalBaseLanguage.g:2860:1: ( rule__TypeDefinitionRule__Group__1__Impl rule__TypeDefinitionRule__Group__2 )
+            // InternalBaseLanguage.g:2861:2: rule__TypeDefinitionRule__Group__1__Impl rule__TypeDefinitionRule__Group__2
+            {
+            pushFollow(FOLLOW_25);
+            rule__TypeDefinitionRule__Group__1__Impl();
+
+            state._fsp--;
+
+            pushFollow(FOLLOW_2);
+            rule__TypeDefinitionRule__Group__2();
+
+            state._fsp--;
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__TypeDefinitionRule__Group__1"
+
+
+    // $ANTLR start "rule__TypeDefinitionRule__Group__1__Impl"
+    // InternalBaseLanguage.g:2868:1: rule__TypeDefinitionRule__Group__1__Impl : ( 'type' ) ;
+    public final void rule__TypeDefinitionRule__Group__1__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalBaseLanguage.g:2872:1: ( ( 'type' ) )
+            // InternalBaseLanguage.g:2873:1: ( 'type' )
+            {
+            // InternalBaseLanguage.g:2873:1: ( 'type' )
+            // InternalBaseLanguage.g:2874:2: 'type'
+            {
+             before(grammarAccess.getTypeDefinitionRuleAccess().getTypeKeyword_1()); 
+            match(input,54,FOLLOW_2); 
+             after(grammarAccess.getTypeDefinitionRuleAccess().getTypeKeyword_1()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__TypeDefinitionRule__Group__1__Impl"
+
+
+    // $ANTLR start "rule__TypeDefinitionRule__Group__2"
+    // InternalBaseLanguage.g:2883:1: rule__TypeDefinitionRule__Group__2 : rule__TypeDefinitionRule__Group__2__Impl rule__TypeDefinitionRule__Group__3 ;
+    public final void rule__TypeDefinitionRule__Group__2() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalBaseLanguage.g:2887:1: ( rule__TypeDefinitionRule__Group__2__Impl rule__TypeDefinitionRule__Group__3 )
+            // InternalBaseLanguage.g:2888:2: rule__TypeDefinitionRule__Group__2__Impl rule__TypeDefinitionRule__Group__3
+            {
+            pushFollow(FOLLOW_26);
+            rule__TypeDefinitionRule__Group__2__Impl();
+
+            state._fsp--;
+
+            pushFollow(FOLLOW_2);
+            rule__TypeDefinitionRule__Group__3();
+
+            state._fsp--;
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__TypeDefinitionRule__Group__2"
+
+
+    // $ANTLR start "rule__TypeDefinitionRule__Group__2__Impl"
+    // InternalBaseLanguage.g:2895:1: rule__TypeDefinitionRule__Group__2__Impl : ( ( rule__TypeDefinitionRule__NameAssignment_2 ) ) ;
+    public final void rule__TypeDefinitionRule__Group__2__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalBaseLanguage.g:2899:1: ( ( ( rule__TypeDefinitionRule__NameAssignment_2 ) ) )
+            // InternalBaseLanguage.g:2900:1: ( ( rule__TypeDefinitionRule__NameAssignment_2 ) )
+            {
+            // InternalBaseLanguage.g:2900:1: ( ( rule__TypeDefinitionRule__NameAssignment_2 ) )
+            // InternalBaseLanguage.g:2901:2: ( rule__TypeDefinitionRule__NameAssignment_2 )
+            {
+             before(grammarAccess.getTypeDefinitionRuleAccess().getNameAssignment_2()); 
+            // InternalBaseLanguage.g:2902:2: ( rule__TypeDefinitionRule__NameAssignment_2 )
+            // InternalBaseLanguage.g:2902:3: rule__TypeDefinitionRule__NameAssignment_2
+            {
+            pushFollow(FOLLOW_2);
+            rule__TypeDefinitionRule__NameAssignment_2();
+
+            state._fsp--;
+
+
+            }
+
+             after(grammarAccess.getTypeDefinitionRuleAccess().getNameAssignment_2()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__TypeDefinitionRule__Group__2__Impl"
+
+
+    // $ANTLR start "rule__TypeDefinitionRule__Group__3"
+    // InternalBaseLanguage.g:2910:1: rule__TypeDefinitionRule__Group__3 : rule__TypeDefinitionRule__Group__3__Impl rule__TypeDefinitionRule__Group__4 ;
+    public final void rule__TypeDefinitionRule__Group__3() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalBaseLanguage.g:2914:1: ( rule__TypeDefinitionRule__Group__3__Impl rule__TypeDefinitionRule__Group__4 )
+            // InternalBaseLanguage.g:2915:2: rule__TypeDefinitionRule__Group__3__Impl rule__TypeDefinitionRule__Group__4
+            {
+            pushFollow(FOLLOW_26);
+            rule__TypeDefinitionRule__Group__3__Impl();
+
+            state._fsp--;
+
+            pushFollow(FOLLOW_2);
+            rule__TypeDefinitionRule__Group__4();
+
+            state._fsp--;
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__TypeDefinitionRule__Group__3"
+
+
+    // $ANTLR start "rule__TypeDefinitionRule__Group__3__Impl"
+    // InternalBaseLanguage.g:2922:1: rule__TypeDefinitionRule__Group__3__Impl : ( ( rule__TypeDefinitionRule__Group_3__0 )? ) ;
+    public final void rule__TypeDefinitionRule__Group__3__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalBaseLanguage.g:2926:1: ( ( ( rule__TypeDefinitionRule__Group_3__0 )? ) )
+            // InternalBaseLanguage.g:2927:1: ( ( rule__TypeDefinitionRule__Group_3__0 )? )
+            {
+            // InternalBaseLanguage.g:2927:1: ( ( rule__TypeDefinitionRule__Group_3__0 )? )
+            // InternalBaseLanguage.g:2928:2: ( rule__TypeDefinitionRule__Group_3__0 )?
+            {
+             before(grammarAccess.getTypeDefinitionRuleAccess().getGroup_3()); 
+            // InternalBaseLanguage.g:2929:2: ( rule__TypeDefinitionRule__Group_3__0 )?
+            int alt25=2;
+            int LA25_0 = input.LA(1);
+
+            if ( (LA25_0==57) ) {
+                alt25=1;
+            }
+            switch (alt25) {
+                case 1 :
+                    // InternalBaseLanguage.g:2929:3: rule__TypeDefinitionRule__Group_3__0
+                    {
+                    pushFollow(FOLLOW_2);
+                    rule__TypeDefinitionRule__Group_3__0();
+
+                    state._fsp--;
+
+
+                    }
+                    break;
+
+            }
+
+             after(grammarAccess.getTypeDefinitionRuleAccess().getGroup_3()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__TypeDefinitionRule__Group__3__Impl"
+
+
+    // $ANTLR start "rule__TypeDefinitionRule__Group__4"
+    // InternalBaseLanguage.g:2937:1: rule__TypeDefinitionRule__Group__4 : rule__TypeDefinitionRule__Group__4__Impl rule__TypeDefinitionRule__Group__5 ;
+    public final void rule__TypeDefinitionRule__Group__4() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalBaseLanguage.g:2941:1: ( rule__TypeDefinitionRule__Group__4__Impl rule__TypeDefinitionRule__Group__5 )
+            // InternalBaseLanguage.g:2942:2: rule__TypeDefinitionRule__Group__4__Impl rule__TypeDefinitionRule__Group__5
+            {
+            pushFollow(FOLLOW_27);
+            rule__TypeDefinitionRule__Group__4__Impl();
+
+            state._fsp--;
+
+            pushFollow(FOLLOW_2);
+            rule__TypeDefinitionRule__Group__5();
+
+            state._fsp--;
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__TypeDefinitionRule__Group__4"
+
+
+    // $ANTLR start "rule__TypeDefinitionRule__Group__4__Impl"
+    // InternalBaseLanguage.g:2949:1: rule__TypeDefinitionRule__Group__4__Impl : ( '{' ) ;
+    public final void rule__TypeDefinitionRule__Group__4__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalBaseLanguage.g:2953:1: ( ( '{' ) )
+            // InternalBaseLanguage.g:2954:1: ( '{' )
+            {
+            // InternalBaseLanguage.g:2954:1: ( '{' )
+            // InternalBaseLanguage.g:2955:2: '{'
+            {
+             before(grammarAccess.getTypeDefinitionRuleAccess().getLeftCurlyBracketKeyword_4()); 
+            match(input,55,FOLLOW_2); 
+             after(grammarAccess.getTypeDefinitionRuleAccess().getLeftCurlyBracketKeyword_4()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__TypeDefinitionRule__Group__4__Impl"
+
+
+    // $ANTLR start "rule__TypeDefinitionRule__Group__5"
+    // InternalBaseLanguage.g:2964:1: rule__TypeDefinitionRule__Group__5 : rule__TypeDefinitionRule__Group__5__Impl rule__TypeDefinitionRule__Group__6 ;
+    public final void rule__TypeDefinitionRule__Group__5() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalBaseLanguage.g:2968:1: ( rule__TypeDefinitionRule__Group__5__Impl rule__TypeDefinitionRule__Group__6 )
+            // InternalBaseLanguage.g:2969:2: rule__TypeDefinitionRule__Group__5__Impl rule__TypeDefinitionRule__Group__6
+            {
+            pushFollow(FOLLOW_27);
+            rule__TypeDefinitionRule__Group__5__Impl();
+
+            state._fsp--;
+
+            pushFollow(FOLLOW_2);
+            rule__TypeDefinitionRule__Group__6();
+
+            state._fsp--;
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__TypeDefinitionRule__Group__5"
+
+
+    // $ANTLR start "rule__TypeDefinitionRule__Group__5__Impl"
+    // InternalBaseLanguage.g:2976:1: rule__TypeDefinitionRule__Group__5__Impl : ( ( rule__TypeDefinitionRule__AttributesAssignment_5 )* ) ;
+    public final void rule__TypeDefinitionRule__Group__5__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalBaseLanguage.g:2980:1: ( ( ( rule__TypeDefinitionRule__AttributesAssignment_5 )* ) )
+            // InternalBaseLanguage.g:2981:1: ( ( rule__TypeDefinitionRule__AttributesAssignment_5 )* )
+            {
+            // InternalBaseLanguage.g:2981:1: ( ( rule__TypeDefinitionRule__AttributesAssignment_5 )* )
+            // InternalBaseLanguage.g:2982:2: ( rule__TypeDefinitionRule__AttributesAssignment_5 )*
+            {
+             before(grammarAccess.getTypeDefinitionRuleAccess().getAttributesAssignment_5()); 
+            // InternalBaseLanguage.g:2983:2: ( rule__TypeDefinitionRule__AttributesAssignment_5 )*
+            loop26:
+            do {
+                int alt26=2;
+                int LA26_0 = input.LA(1);
+
+                if ( ((LA26_0>=RULE_QUOTED_ID && LA26_0<=RULE_ID)) ) {
+                    alt26=1;
+                }
+
+
+                switch (alt26) {
+            	case 1 :
+            	    // InternalBaseLanguage.g:2983:3: rule__TypeDefinitionRule__AttributesAssignment_5
+            	    {
+            	    pushFollow(FOLLOW_28);
+            	    rule__TypeDefinitionRule__AttributesAssignment_5();
+
+            	    state._fsp--;
+
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop26;
+                }
+            } while (true);
+
+             after(grammarAccess.getTypeDefinitionRuleAccess().getAttributesAssignment_5()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__TypeDefinitionRule__Group__5__Impl"
+
+
+    // $ANTLR start "rule__TypeDefinitionRule__Group__6"
+    // InternalBaseLanguage.g:2991:1: rule__TypeDefinitionRule__Group__6 : rule__TypeDefinitionRule__Group__6__Impl ;
+    public final void rule__TypeDefinitionRule__Group__6() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalBaseLanguage.g:2995:1: ( rule__TypeDefinitionRule__Group__6__Impl )
+            // InternalBaseLanguage.g:2996:2: rule__TypeDefinitionRule__Group__6__Impl
+            {
+            pushFollow(FOLLOW_2);
+            rule__TypeDefinitionRule__Group__6__Impl();
+
+            state._fsp--;
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__TypeDefinitionRule__Group__6"
+
+
+    // $ANTLR start "rule__TypeDefinitionRule__Group__6__Impl"
+    // InternalBaseLanguage.g:3002:1: rule__TypeDefinitionRule__Group__6__Impl : ( '}' ) ;
+    public final void rule__TypeDefinitionRule__Group__6__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalBaseLanguage.g:3006:1: ( ( '}' ) )
+            // InternalBaseLanguage.g:3007:1: ( '}' )
+            {
+            // InternalBaseLanguage.g:3007:1: ( '}' )
+            // InternalBaseLanguage.g:3008:2: '}'
+            {
+             before(grammarAccess.getTypeDefinitionRuleAccess().getRightCurlyBracketKeyword_6()); 
+            match(input,56,FOLLOW_2); 
+             after(grammarAccess.getTypeDefinitionRuleAccess().getRightCurlyBracketKeyword_6()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__TypeDefinitionRule__Group__6__Impl"
+
+
+    // $ANTLR start "rule__TypeDefinitionRule__Group_3__0"
+    // InternalBaseLanguage.g:3018:1: rule__TypeDefinitionRule__Group_3__0 : rule__TypeDefinitionRule__Group_3__0__Impl rule__TypeDefinitionRule__Group_3__1 ;
+    public final void rule__TypeDefinitionRule__Group_3__0() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalBaseLanguage.g:3022:1: ( rule__TypeDefinitionRule__Group_3__0__Impl rule__TypeDefinitionRule__Group_3__1 )
+            // InternalBaseLanguage.g:3023:2: rule__TypeDefinitionRule__Group_3__0__Impl rule__TypeDefinitionRule__Group_3__1
+            {
+            pushFollow(FOLLOW_25);
+            rule__TypeDefinitionRule__Group_3__0__Impl();
+
+            state._fsp--;
+
+            pushFollow(FOLLOW_2);
+            rule__TypeDefinitionRule__Group_3__1();
+
+            state._fsp--;
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__TypeDefinitionRule__Group_3__0"
+
+
+    // $ANTLR start "rule__TypeDefinitionRule__Group_3__0__Impl"
+    // InternalBaseLanguage.g:3030:1: rule__TypeDefinitionRule__Group_3__0__Impl : ( 'extends' ) ;
+    public final void rule__TypeDefinitionRule__Group_3__0__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalBaseLanguage.g:3034:1: ( ( 'extends' ) )
+            // InternalBaseLanguage.g:3035:1: ( 'extends' )
+            {
+            // InternalBaseLanguage.g:3035:1: ( 'extends' )
+            // InternalBaseLanguage.g:3036:2: 'extends'
+            {
+             before(grammarAccess.getTypeDefinitionRuleAccess().getExtendsKeyword_3_0()); 
+            match(input,57,FOLLOW_2); 
+             after(grammarAccess.getTypeDefinitionRuleAccess().getExtendsKeyword_3_0()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__TypeDefinitionRule__Group_3__0__Impl"
+
+
+    // $ANTLR start "rule__TypeDefinitionRule__Group_3__1"
+    // InternalBaseLanguage.g:3045:1: rule__TypeDefinitionRule__Group_3__1 : rule__TypeDefinitionRule__Group_3__1__Impl ;
+    public final void rule__TypeDefinitionRule__Group_3__1() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalBaseLanguage.g:3049:1: ( rule__TypeDefinitionRule__Group_3__1__Impl )
+            // InternalBaseLanguage.g:3050:2: rule__TypeDefinitionRule__Group_3__1__Impl
+            {
+            pushFollow(FOLLOW_2);
+            rule__TypeDefinitionRule__Group_3__1__Impl();
+
+            state._fsp--;
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__TypeDefinitionRule__Group_3__1"
+
+
+    // $ANTLR start "rule__TypeDefinitionRule__Group_3__1__Impl"
+    // InternalBaseLanguage.g:3056:1: rule__TypeDefinitionRule__Group_3__1__Impl : ( ( rule__TypeDefinitionRule__SuperTypeAssignment_3_1 ) ) ;
+    public final void rule__TypeDefinitionRule__Group_3__1__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalBaseLanguage.g:3060:1: ( ( ( rule__TypeDefinitionRule__SuperTypeAssignment_3_1 ) ) )
+            // InternalBaseLanguage.g:3061:1: ( ( rule__TypeDefinitionRule__SuperTypeAssignment_3_1 ) )
+            {
+            // InternalBaseLanguage.g:3061:1: ( ( rule__TypeDefinitionRule__SuperTypeAssignment_3_1 ) )
+            // InternalBaseLanguage.g:3062:2: ( rule__TypeDefinitionRule__SuperTypeAssignment_3_1 )
+            {
+             before(grammarAccess.getTypeDefinitionRuleAccess().getSuperTypeAssignment_3_1()); 
+            // InternalBaseLanguage.g:3063:2: ( rule__TypeDefinitionRule__SuperTypeAssignment_3_1 )
+            // InternalBaseLanguage.g:3063:3: rule__TypeDefinitionRule__SuperTypeAssignment_3_1
+            {
+            pushFollow(FOLLOW_2);
+            rule__TypeDefinitionRule__SuperTypeAssignment_3_1();
+
+            state._fsp--;
+
+
+            }
+
+             after(grammarAccess.getTypeDefinitionRuleAccess().getSuperTypeAssignment_3_1()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__TypeDefinitionRule__Group_3__1__Impl"
+
+
     // $ANTLR start "rule__AttributeDefinitionRule__Group__0"
-    // InternalBaseLanguage.g:2833:1: rule__AttributeDefinitionRule__Group__0 : rule__AttributeDefinitionRule__Group__0__Impl rule__AttributeDefinitionRule__Group__1 ;
+    // InternalBaseLanguage.g:3072:1: rule__AttributeDefinitionRule__Group__0 : rule__AttributeDefinitionRule__Group__0__Impl rule__AttributeDefinitionRule__Group__1 ;
     public final void rule__AttributeDefinitionRule__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:2837:1: ( rule__AttributeDefinitionRule__Group__0__Impl rule__AttributeDefinitionRule__Group__1 )
-            // InternalBaseLanguage.g:2838:2: rule__AttributeDefinitionRule__Group__0__Impl rule__AttributeDefinitionRule__Group__1
+            // InternalBaseLanguage.g:3076:1: ( rule__AttributeDefinitionRule__Group__0__Impl rule__AttributeDefinitionRule__Group__1 )
+            // InternalBaseLanguage.g:3077:2: rule__AttributeDefinitionRule__Group__0__Impl rule__AttributeDefinitionRule__Group__1
             {
-            pushFollow(FOLLOW_24);
+            pushFollow(FOLLOW_29);
             rule__AttributeDefinitionRule__Group__0__Impl();
 
             state._fsp--;
@@ -9186,21 +9916,21 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__AttributeDefinitionRule__Group__0__Impl"
-    // InternalBaseLanguage.g:2845:1: rule__AttributeDefinitionRule__Group__0__Impl : ( ( rule__AttributeDefinitionRule__NameAssignment_0 ) ) ;
+    // InternalBaseLanguage.g:3084:1: rule__AttributeDefinitionRule__Group__0__Impl : ( ( rule__AttributeDefinitionRule__NameAssignment_0 ) ) ;
     public final void rule__AttributeDefinitionRule__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:2849:1: ( ( ( rule__AttributeDefinitionRule__NameAssignment_0 ) ) )
-            // InternalBaseLanguage.g:2850:1: ( ( rule__AttributeDefinitionRule__NameAssignment_0 ) )
+            // InternalBaseLanguage.g:3088:1: ( ( ( rule__AttributeDefinitionRule__NameAssignment_0 ) ) )
+            // InternalBaseLanguage.g:3089:1: ( ( rule__AttributeDefinitionRule__NameAssignment_0 ) )
             {
-            // InternalBaseLanguage.g:2850:1: ( ( rule__AttributeDefinitionRule__NameAssignment_0 ) )
-            // InternalBaseLanguage.g:2851:2: ( rule__AttributeDefinitionRule__NameAssignment_0 )
+            // InternalBaseLanguage.g:3089:1: ( ( rule__AttributeDefinitionRule__NameAssignment_0 ) )
+            // InternalBaseLanguage.g:3090:2: ( rule__AttributeDefinitionRule__NameAssignment_0 )
             {
              before(grammarAccess.getAttributeDefinitionRuleAccess().getNameAssignment_0()); 
-            // InternalBaseLanguage.g:2852:2: ( rule__AttributeDefinitionRule__NameAssignment_0 )
-            // InternalBaseLanguage.g:2852:3: rule__AttributeDefinitionRule__NameAssignment_0
+            // InternalBaseLanguage.g:3091:2: ( rule__AttributeDefinitionRule__NameAssignment_0 )
+            // InternalBaseLanguage.g:3091:3: rule__AttributeDefinitionRule__NameAssignment_0
             {
             pushFollow(FOLLOW_2);
             rule__AttributeDefinitionRule__NameAssignment_0();
@@ -9233,16 +9963,16 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__AttributeDefinitionRule__Group__1"
-    // InternalBaseLanguage.g:2860:1: rule__AttributeDefinitionRule__Group__1 : rule__AttributeDefinitionRule__Group__1__Impl rule__AttributeDefinitionRule__Group__2 ;
+    // InternalBaseLanguage.g:3099:1: rule__AttributeDefinitionRule__Group__1 : rule__AttributeDefinitionRule__Group__1__Impl rule__AttributeDefinitionRule__Group__2 ;
     public final void rule__AttributeDefinitionRule__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:2864:1: ( rule__AttributeDefinitionRule__Group__1__Impl rule__AttributeDefinitionRule__Group__2 )
-            // InternalBaseLanguage.g:2865:2: rule__AttributeDefinitionRule__Group__1__Impl rule__AttributeDefinitionRule__Group__2
+            // InternalBaseLanguage.g:3103:1: ( rule__AttributeDefinitionRule__Group__1__Impl rule__AttributeDefinitionRule__Group__2 )
+            // InternalBaseLanguage.g:3104:2: rule__AttributeDefinitionRule__Group__1__Impl rule__AttributeDefinitionRule__Group__2
             {
-            pushFollow(FOLLOW_25);
+            pushFollow(FOLLOW_30);
             rule__AttributeDefinitionRule__Group__1__Impl();
 
             state._fsp--;
@@ -9271,20 +10001,20 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__AttributeDefinitionRule__Group__1__Impl"
-    // InternalBaseLanguage.g:2872:1: rule__AttributeDefinitionRule__Group__1__Impl : ( ':' ) ;
+    // InternalBaseLanguage.g:3111:1: rule__AttributeDefinitionRule__Group__1__Impl : ( ':' ) ;
     public final void rule__AttributeDefinitionRule__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:2876:1: ( ( ':' ) )
-            // InternalBaseLanguage.g:2877:1: ( ':' )
+            // InternalBaseLanguage.g:3115:1: ( ( ':' ) )
+            // InternalBaseLanguage.g:3116:1: ( ':' )
             {
-            // InternalBaseLanguage.g:2877:1: ( ':' )
-            // InternalBaseLanguage.g:2878:2: ':'
+            // InternalBaseLanguage.g:3116:1: ( ':' )
+            // InternalBaseLanguage.g:3117:2: ':'
             {
              before(grammarAccess.getAttributeDefinitionRuleAccess().getColonKeyword_1()); 
-            match(input,55,FOLLOW_2); 
+            match(input,58,FOLLOW_2); 
              after(grammarAccess.getAttributeDefinitionRuleAccess().getColonKeyword_1()); 
 
             }
@@ -9308,16 +10038,16 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__AttributeDefinitionRule__Group__2"
-    // InternalBaseLanguage.g:2887:1: rule__AttributeDefinitionRule__Group__2 : rule__AttributeDefinitionRule__Group__2__Impl rule__AttributeDefinitionRule__Group__3 ;
+    // InternalBaseLanguage.g:3126:1: rule__AttributeDefinitionRule__Group__2 : rule__AttributeDefinitionRule__Group__2__Impl rule__AttributeDefinitionRule__Group__3 ;
     public final void rule__AttributeDefinitionRule__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:2891:1: ( rule__AttributeDefinitionRule__Group__2__Impl rule__AttributeDefinitionRule__Group__3 )
-            // InternalBaseLanguage.g:2892:2: rule__AttributeDefinitionRule__Group__2__Impl rule__AttributeDefinitionRule__Group__3
+            // InternalBaseLanguage.g:3130:1: ( rule__AttributeDefinitionRule__Group__2__Impl rule__AttributeDefinitionRule__Group__3 )
+            // InternalBaseLanguage.g:3131:2: rule__AttributeDefinitionRule__Group__2__Impl rule__AttributeDefinitionRule__Group__3
             {
-            pushFollow(FOLLOW_26);
+            pushFollow(FOLLOW_31);
             rule__AttributeDefinitionRule__Group__2__Impl();
 
             state._fsp--;
@@ -9346,21 +10076,21 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__AttributeDefinitionRule__Group__2__Impl"
-    // InternalBaseLanguage.g:2899:1: rule__AttributeDefinitionRule__Group__2__Impl : ( ( rule__AttributeDefinitionRule__TypeAssignment_2 ) ) ;
+    // InternalBaseLanguage.g:3138:1: rule__AttributeDefinitionRule__Group__2__Impl : ( ( rule__AttributeDefinitionRule__TypeAssignment_2 ) ) ;
     public final void rule__AttributeDefinitionRule__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:2903:1: ( ( ( rule__AttributeDefinitionRule__TypeAssignment_2 ) ) )
-            // InternalBaseLanguage.g:2904:1: ( ( rule__AttributeDefinitionRule__TypeAssignment_2 ) )
+            // InternalBaseLanguage.g:3142:1: ( ( ( rule__AttributeDefinitionRule__TypeAssignment_2 ) ) )
+            // InternalBaseLanguage.g:3143:1: ( ( rule__AttributeDefinitionRule__TypeAssignment_2 ) )
             {
-            // InternalBaseLanguage.g:2904:1: ( ( rule__AttributeDefinitionRule__TypeAssignment_2 ) )
-            // InternalBaseLanguage.g:2905:2: ( rule__AttributeDefinitionRule__TypeAssignment_2 )
+            // InternalBaseLanguage.g:3143:1: ( ( rule__AttributeDefinitionRule__TypeAssignment_2 ) )
+            // InternalBaseLanguage.g:3144:2: ( rule__AttributeDefinitionRule__TypeAssignment_2 )
             {
              before(grammarAccess.getAttributeDefinitionRuleAccess().getTypeAssignment_2()); 
-            // InternalBaseLanguage.g:2906:2: ( rule__AttributeDefinitionRule__TypeAssignment_2 )
-            // InternalBaseLanguage.g:2906:3: rule__AttributeDefinitionRule__TypeAssignment_2
+            // InternalBaseLanguage.g:3145:2: ( rule__AttributeDefinitionRule__TypeAssignment_2 )
+            // InternalBaseLanguage.g:3145:3: rule__AttributeDefinitionRule__TypeAssignment_2
             {
             pushFollow(FOLLOW_2);
             rule__AttributeDefinitionRule__TypeAssignment_2();
@@ -9393,16 +10123,16 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__AttributeDefinitionRule__Group__3"
-    // InternalBaseLanguage.g:2914:1: rule__AttributeDefinitionRule__Group__3 : rule__AttributeDefinitionRule__Group__3__Impl rule__AttributeDefinitionRule__Group__4 ;
+    // InternalBaseLanguage.g:3153:1: rule__AttributeDefinitionRule__Group__3 : rule__AttributeDefinitionRule__Group__3__Impl rule__AttributeDefinitionRule__Group__4 ;
     public final void rule__AttributeDefinitionRule__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:2918:1: ( rule__AttributeDefinitionRule__Group__3__Impl rule__AttributeDefinitionRule__Group__4 )
-            // InternalBaseLanguage.g:2919:2: rule__AttributeDefinitionRule__Group__3__Impl rule__AttributeDefinitionRule__Group__4
+            // InternalBaseLanguage.g:3157:1: ( rule__AttributeDefinitionRule__Group__3__Impl rule__AttributeDefinitionRule__Group__4 )
+            // InternalBaseLanguage.g:3158:2: rule__AttributeDefinitionRule__Group__3__Impl rule__AttributeDefinitionRule__Group__4
             {
-            pushFollow(FOLLOW_26);
+            pushFollow(FOLLOW_31);
             rule__AttributeDefinitionRule__Group__3__Impl();
 
             state._fsp--;
@@ -9431,29 +10161,29 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__AttributeDefinitionRule__Group__3__Impl"
-    // InternalBaseLanguage.g:2926:1: rule__AttributeDefinitionRule__Group__3__Impl : ( ( rule__AttributeDefinitionRule__Group_3__0 )? ) ;
+    // InternalBaseLanguage.g:3165:1: rule__AttributeDefinitionRule__Group__3__Impl : ( ( rule__AttributeDefinitionRule__Group_3__0 )? ) ;
     public final void rule__AttributeDefinitionRule__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:2930:1: ( ( ( rule__AttributeDefinitionRule__Group_3__0 )? ) )
-            // InternalBaseLanguage.g:2931:1: ( ( rule__AttributeDefinitionRule__Group_3__0 )? )
+            // InternalBaseLanguage.g:3169:1: ( ( ( rule__AttributeDefinitionRule__Group_3__0 )? ) )
+            // InternalBaseLanguage.g:3170:1: ( ( rule__AttributeDefinitionRule__Group_3__0 )? )
             {
-            // InternalBaseLanguage.g:2931:1: ( ( rule__AttributeDefinitionRule__Group_3__0 )? )
-            // InternalBaseLanguage.g:2932:2: ( rule__AttributeDefinitionRule__Group_3__0 )?
+            // InternalBaseLanguage.g:3170:1: ( ( rule__AttributeDefinitionRule__Group_3__0 )? )
+            // InternalBaseLanguage.g:3171:2: ( rule__AttributeDefinitionRule__Group_3__0 )?
             {
              before(grammarAccess.getAttributeDefinitionRuleAccess().getGroup_3()); 
-            // InternalBaseLanguage.g:2933:2: ( rule__AttributeDefinitionRule__Group_3__0 )?
-            int alt24=2;
-            int LA24_0 = input.LA(1);
+            // InternalBaseLanguage.g:3172:2: ( rule__AttributeDefinitionRule__Group_3__0 )?
+            int alt27=2;
+            int LA27_0 = input.LA(1);
 
-            if ( (LA24_0==57) ) {
-                alt24=1;
+            if ( (LA27_0==60) ) {
+                alt27=1;
             }
-            switch (alt24) {
+            switch (alt27) {
                 case 1 :
-                    // InternalBaseLanguage.g:2933:3: rule__AttributeDefinitionRule__Group_3__0
+                    // InternalBaseLanguage.g:3172:3: rule__AttributeDefinitionRule__Group_3__0
                     {
                     pushFollow(FOLLOW_2);
                     rule__AttributeDefinitionRule__Group_3__0();
@@ -9489,14 +10219,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__AttributeDefinitionRule__Group__4"
-    // InternalBaseLanguage.g:2941:1: rule__AttributeDefinitionRule__Group__4 : rule__AttributeDefinitionRule__Group__4__Impl ;
+    // InternalBaseLanguage.g:3180:1: rule__AttributeDefinitionRule__Group__4 : rule__AttributeDefinitionRule__Group__4__Impl ;
     public final void rule__AttributeDefinitionRule__Group__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:2945:1: ( rule__AttributeDefinitionRule__Group__4__Impl )
-            // InternalBaseLanguage.g:2946:2: rule__AttributeDefinitionRule__Group__4__Impl
+            // InternalBaseLanguage.g:3184:1: ( rule__AttributeDefinitionRule__Group__4__Impl )
+            // InternalBaseLanguage.g:3185:2: rule__AttributeDefinitionRule__Group__4__Impl
             {
             pushFollow(FOLLOW_2);
             rule__AttributeDefinitionRule__Group__4__Impl();
@@ -9522,20 +10252,20 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__AttributeDefinitionRule__Group__4__Impl"
-    // InternalBaseLanguage.g:2952:1: rule__AttributeDefinitionRule__Group__4__Impl : ( ';' ) ;
+    // InternalBaseLanguage.g:3191:1: rule__AttributeDefinitionRule__Group__4__Impl : ( ';' ) ;
     public final void rule__AttributeDefinitionRule__Group__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:2956:1: ( ( ';' ) )
-            // InternalBaseLanguage.g:2957:1: ( ';' )
+            // InternalBaseLanguage.g:3195:1: ( ( ';' ) )
+            // InternalBaseLanguage.g:3196:1: ( ';' )
             {
-            // InternalBaseLanguage.g:2957:1: ( ';' )
-            // InternalBaseLanguage.g:2958:2: ';'
+            // InternalBaseLanguage.g:3196:1: ( ';' )
+            // InternalBaseLanguage.g:3197:2: ';'
             {
              before(grammarAccess.getAttributeDefinitionRuleAccess().getSemicolonKeyword_4()); 
-            match(input,56,FOLLOW_2); 
+            match(input,59,FOLLOW_2); 
              after(grammarAccess.getAttributeDefinitionRuleAccess().getSemicolonKeyword_4()); 
 
             }
@@ -9559,14 +10289,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__AttributeDefinitionRule__Group_3__0"
-    // InternalBaseLanguage.g:2968:1: rule__AttributeDefinitionRule__Group_3__0 : rule__AttributeDefinitionRule__Group_3__0__Impl rule__AttributeDefinitionRule__Group_3__1 ;
+    // InternalBaseLanguage.g:3207:1: rule__AttributeDefinitionRule__Group_3__0 : rule__AttributeDefinitionRule__Group_3__0__Impl rule__AttributeDefinitionRule__Group_3__1 ;
     public final void rule__AttributeDefinitionRule__Group_3__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:2972:1: ( rule__AttributeDefinitionRule__Group_3__0__Impl rule__AttributeDefinitionRule__Group_3__1 )
-            // InternalBaseLanguage.g:2973:2: rule__AttributeDefinitionRule__Group_3__0__Impl rule__AttributeDefinitionRule__Group_3__1
+            // InternalBaseLanguage.g:3211:1: ( rule__AttributeDefinitionRule__Group_3__0__Impl rule__AttributeDefinitionRule__Group_3__1 )
+            // InternalBaseLanguage.g:3212:2: rule__AttributeDefinitionRule__Group_3__0__Impl rule__AttributeDefinitionRule__Group_3__1
             {
             pushFollow(FOLLOW_5);
             rule__AttributeDefinitionRule__Group_3__0__Impl();
@@ -9597,20 +10327,20 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__AttributeDefinitionRule__Group_3__0__Impl"
-    // InternalBaseLanguage.g:2980:1: rule__AttributeDefinitionRule__Group_3__0__Impl : ( ':=' ) ;
+    // InternalBaseLanguage.g:3219:1: rule__AttributeDefinitionRule__Group_3__0__Impl : ( ':=' ) ;
     public final void rule__AttributeDefinitionRule__Group_3__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:2984:1: ( ( ':=' ) )
-            // InternalBaseLanguage.g:2985:1: ( ':=' )
+            // InternalBaseLanguage.g:3223:1: ( ( ':=' ) )
+            // InternalBaseLanguage.g:3224:1: ( ':=' )
             {
-            // InternalBaseLanguage.g:2985:1: ( ':=' )
-            // InternalBaseLanguage.g:2986:2: ':='
+            // InternalBaseLanguage.g:3224:1: ( ':=' )
+            // InternalBaseLanguage.g:3225:2: ':='
             {
              before(grammarAccess.getAttributeDefinitionRuleAccess().getColonEqualsSignKeyword_3_0()); 
-            match(input,57,FOLLOW_2); 
+            match(input,60,FOLLOW_2); 
              after(grammarAccess.getAttributeDefinitionRuleAccess().getColonEqualsSignKeyword_3_0()); 
 
             }
@@ -9634,14 +10364,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__AttributeDefinitionRule__Group_3__1"
-    // InternalBaseLanguage.g:2995:1: rule__AttributeDefinitionRule__Group_3__1 : rule__AttributeDefinitionRule__Group_3__1__Impl ;
+    // InternalBaseLanguage.g:3234:1: rule__AttributeDefinitionRule__Group_3__1 : rule__AttributeDefinitionRule__Group_3__1__Impl ;
     public final void rule__AttributeDefinitionRule__Group_3__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:2999:1: ( rule__AttributeDefinitionRule__Group_3__1__Impl )
-            // InternalBaseLanguage.g:3000:2: rule__AttributeDefinitionRule__Group_3__1__Impl
+            // InternalBaseLanguage.g:3238:1: ( rule__AttributeDefinitionRule__Group_3__1__Impl )
+            // InternalBaseLanguage.g:3239:2: rule__AttributeDefinitionRule__Group_3__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__AttributeDefinitionRule__Group_3__1__Impl();
@@ -9667,21 +10397,21 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__AttributeDefinitionRule__Group_3__1__Impl"
-    // InternalBaseLanguage.g:3006:1: rule__AttributeDefinitionRule__Group_3__1__Impl : ( ( rule__AttributeDefinitionRule__InitialisationAssignment_3_1 ) ) ;
+    // InternalBaseLanguage.g:3245:1: rule__AttributeDefinitionRule__Group_3__1__Impl : ( ( rule__AttributeDefinitionRule__InitialisationAssignment_3_1 ) ) ;
     public final void rule__AttributeDefinitionRule__Group_3__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:3010:1: ( ( ( rule__AttributeDefinitionRule__InitialisationAssignment_3_1 ) ) )
-            // InternalBaseLanguage.g:3011:1: ( ( rule__AttributeDefinitionRule__InitialisationAssignment_3_1 ) )
+            // InternalBaseLanguage.g:3249:1: ( ( ( rule__AttributeDefinitionRule__InitialisationAssignment_3_1 ) ) )
+            // InternalBaseLanguage.g:3250:1: ( ( rule__AttributeDefinitionRule__InitialisationAssignment_3_1 ) )
             {
-            // InternalBaseLanguage.g:3011:1: ( ( rule__AttributeDefinitionRule__InitialisationAssignment_3_1 ) )
-            // InternalBaseLanguage.g:3012:2: ( rule__AttributeDefinitionRule__InitialisationAssignment_3_1 )
+            // InternalBaseLanguage.g:3250:1: ( ( rule__AttributeDefinitionRule__InitialisationAssignment_3_1 ) )
+            // InternalBaseLanguage.g:3251:2: ( rule__AttributeDefinitionRule__InitialisationAssignment_3_1 )
             {
              before(grammarAccess.getAttributeDefinitionRuleAccess().getInitialisationAssignment_3_1()); 
-            // InternalBaseLanguage.g:3013:2: ( rule__AttributeDefinitionRule__InitialisationAssignment_3_1 )
-            // InternalBaseLanguage.g:3013:3: rule__AttributeDefinitionRule__InitialisationAssignment_3_1
+            // InternalBaseLanguage.g:3252:2: ( rule__AttributeDefinitionRule__InitialisationAssignment_3_1 )
+            // InternalBaseLanguage.g:3252:3: rule__AttributeDefinitionRule__InitialisationAssignment_3_1
             {
             pushFollow(FOLLOW_2);
             rule__AttributeDefinitionRule__InitialisationAssignment_3_1();
@@ -9714,16 +10444,16 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__LiteralTypeRule__Group__0"
-    // InternalBaseLanguage.g:3022:1: rule__LiteralTypeRule__Group__0 : rule__LiteralTypeRule__Group__0__Impl rule__LiteralTypeRule__Group__1 ;
+    // InternalBaseLanguage.g:3261:1: rule__LiteralTypeRule__Group__0 : rule__LiteralTypeRule__Group__0__Impl rule__LiteralTypeRule__Group__1 ;
     public final void rule__LiteralTypeRule__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:3026:1: ( rule__LiteralTypeRule__Group__0__Impl rule__LiteralTypeRule__Group__1 )
-            // InternalBaseLanguage.g:3027:2: rule__LiteralTypeRule__Group__0__Impl rule__LiteralTypeRule__Group__1
+            // InternalBaseLanguage.g:3265:1: ( rule__LiteralTypeRule__Group__0__Impl rule__LiteralTypeRule__Group__1 )
+            // InternalBaseLanguage.g:3266:2: rule__LiteralTypeRule__Group__0__Impl rule__LiteralTypeRule__Group__1
             {
-            pushFollow(FOLLOW_27);
+            pushFollow(FOLLOW_32);
             rule__LiteralTypeRule__Group__0__Impl();
 
             state._fsp--;
@@ -9752,21 +10482,21 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__LiteralTypeRule__Group__0__Impl"
-    // InternalBaseLanguage.g:3034:1: rule__LiteralTypeRule__Group__0__Impl : ( () ) ;
+    // InternalBaseLanguage.g:3273:1: rule__LiteralTypeRule__Group__0__Impl : ( () ) ;
     public final void rule__LiteralTypeRule__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:3038:1: ( ( () ) )
-            // InternalBaseLanguage.g:3039:1: ( () )
+            // InternalBaseLanguage.g:3277:1: ( ( () ) )
+            // InternalBaseLanguage.g:3278:1: ( () )
             {
-            // InternalBaseLanguage.g:3039:1: ( () )
-            // InternalBaseLanguage.g:3040:2: ()
+            // InternalBaseLanguage.g:3278:1: ( () )
+            // InternalBaseLanguage.g:3279:2: ()
             {
              before(grammarAccess.getLiteralTypeRuleAccess().getLiteralTypeAction_0()); 
-            // InternalBaseLanguage.g:3041:2: ()
-            // InternalBaseLanguage.g:3041:3: 
+            // InternalBaseLanguage.g:3280:2: ()
+            // InternalBaseLanguage.g:3280:3: 
             {
             }
 
@@ -9789,14 +10519,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__LiteralTypeRule__Group__1"
-    // InternalBaseLanguage.g:3049:1: rule__LiteralTypeRule__Group__1 : rule__LiteralTypeRule__Group__1__Impl ;
+    // InternalBaseLanguage.g:3288:1: rule__LiteralTypeRule__Group__1 : rule__LiteralTypeRule__Group__1__Impl ;
     public final void rule__LiteralTypeRule__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:3053:1: ( rule__LiteralTypeRule__Group__1__Impl )
-            // InternalBaseLanguage.g:3054:2: rule__LiteralTypeRule__Group__1__Impl
+            // InternalBaseLanguage.g:3292:1: ( rule__LiteralTypeRule__Group__1__Impl )
+            // InternalBaseLanguage.g:3293:2: rule__LiteralTypeRule__Group__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__LiteralTypeRule__Group__1__Impl();
@@ -9822,20 +10552,20 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__LiteralTypeRule__Group__1__Impl"
-    // InternalBaseLanguage.g:3060:1: rule__LiteralTypeRule__Group__1__Impl : ( 'literal' ) ;
+    // InternalBaseLanguage.g:3299:1: rule__LiteralTypeRule__Group__1__Impl : ( 'literal' ) ;
     public final void rule__LiteralTypeRule__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:3064:1: ( ( 'literal' ) )
-            // InternalBaseLanguage.g:3065:1: ( 'literal' )
+            // InternalBaseLanguage.g:3303:1: ( ( 'literal' ) )
+            // InternalBaseLanguage.g:3304:1: ( 'literal' )
             {
-            // InternalBaseLanguage.g:3065:1: ( 'literal' )
-            // InternalBaseLanguage.g:3066:2: 'literal'
+            // InternalBaseLanguage.g:3304:1: ( 'literal' )
+            // InternalBaseLanguage.g:3305:2: 'literal'
             {
              before(grammarAccess.getLiteralTypeRuleAccess().getLiteralKeyword_1()); 
-            match(input,58,FOLLOW_2); 
+            match(input,61,FOLLOW_2); 
              after(grammarAccess.getLiteralTypeRuleAccess().getLiteralKeyword_1()); 
 
             }
@@ -9859,16 +10589,16 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__InstanceTypeRule__Group__0"
-    // InternalBaseLanguage.g:3076:1: rule__InstanceTypeRule__Group__0 : rule__InstanceTypeRule__Group__0__Impl rule__InstanceTypeRule__Group__1 ;
+    // InternalBaseLanguage.g:3315:1: rule__InstanceTypeRule__Group__0 : rule__InstanceTypeRule__Group__0__Impl rule__InstanceTypeRule__Group__1 ;
     public final void rule__InstanceTypeRule__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:3080:1: ( rule__InstanceTypeRule__Group__0__Impl rule__InstanceTypeRule__Group__1 )
-            // InternalBaseLanguage.g:3081:2: rule__InstanceTypeRule__Group__0__Impl rule__InstanceTypeRule__Group__1
+            // InternalBaseLanguage.g:3319:1: ( rule__InstanceTypeRule__Group__0__Impl rule__InstanceTypeRule__Group__1 )
+            // InternalBaseLanguage.g:3320:2: rule__InstanceTypeRule__Group__0__Impl rule__InstanceTypeRule__Group__1
             {
-            pushFollow(FOLLOW_28);
+            pushFollow(FOLLOW_33);
             rule__InstanceTypeRule__Group__0__Impl();
 
             state._fsp--;
@@ -9897,21 +10627,21 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__InstanceTypeRule__Group__0__Impl"
-    // InternalBaseLanguage.g:3088:1: rule__InstanceTypeRule__Group__0__Impl : ( () ) ;
+    // InternalBaseLanguage.g:3327:1: rule__InstanceTypeRule__Group__0__Impl : ( () ) ;
     public final void rule__InstanceTypeRule__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:3092:1: ( ( () ) )
-            // InternalBaseLanguage.g:3093:1: ( () )
+            // InternalBaseLanguage.g:3331:1: ( ( () ) )
+            // InternalBaseLanguage.g:3332:1: ( () )
             {
-            // InternalBaseLanguage.g:3093:1: ( () )
-            // InternalBaseLanguage.g:3094:2: ()
+            // InternalBaseLanguage.g:3332:1: ( () )
+            // InternalBaseLanguage.g:3333:2: ()
             {
              before(grammarAccess.getInstanceTypeRuleAccess().getInstanceTypeAction_0()); 
-            // InternalBaseLanguage.g:3095:2: ()
-            // InternalBaseLanguage.g:3095:3: 
+            // InternalBaseLanguage.g:3334:2: ()
+            // InternalBaseLanguage.g:3334:3: 
             {
             }
 
@@ -9934,16 +10664,16 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__InstanceTypeRule__Group__1"
-    // InternalBaseLanguage.g:3103:1: rule__InstanceTypeRule__Group__1 : rule__InstanceTypeRule__Group__1__Impl rule__InstanceTypeRule__Group__2 ;
+    // InternalBaseLanguage.g:3342:1: rule__InstanceTypeRule__Group__1 : rule__InstanceTypeRule__Group__1__Impl rule__InstanceTypeRule__Group__2 ;
     public final void rule__InstanceTypeRule__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:3107:1: ( rule__InstanceTypeRule__Group__1__Impl rule__InstanceTypeRule__Group__2 )
-            // InternalBaseLanguage.g:3108:2: rule__InstanceTypeRule__Group__1__Impl rule__InstanceTypeRule__Group__2
+            // InternalBaseLanguage.g:3346:1: ( rule__InstanceTypeRule__Group__1__Impl rule__InstanceTypeRule__Group__2 )
+            // InternalBaseLanguage.g:3347:2: rule__InstanceTypeRule__Group__1__Impl rule__InstanceTypeRule__Group__2
             {
-            pushFollow(FOLLOW_29);
+            pushFollow(FOLLOW_25);
             rule__InstanceTypeRule__Group__1__Impl();
 
             state._fsp--;
@@ -9972,20 +10702,20 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__InstanceTypeRule__Group__1__Impl"
-    // InternalBaseLanguage.g:3115:1: rule__InstanceTypeRule__Group__1__Impl : ( 'instance' ) ;
+    // InternalBaseLanguage.g:3354:1: rule__InstanceTypeRule__Group__1__Impl : ( 'instance' ) ;
     public final void rule__InstanceTypeRule__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:3119:1: ( ( 'instance' ) )
-            // InternalBaseLanguage.g:3120:1: ( 'instance' )
+            // InternalBaseLanguage.g:3358:1: ( ( 'instance' ) )
+            // InternalBaseLanguage.g:3359:1: ( 'instance' )
             {
-            // InternalBaseLanguage.g:3120:1: ( 'instance' )
-            // InternalBaseLanguage.g:3121:2: 'instance'
+            // InternalBaseLanguage.g:3359:1: ( 'instance' )
+            // InternalBaseLanguage.g:3360:2: 'instance'
             {
              before(grammarAccess.getInstanceTypeRuleAccess().getInstanceKeyword_1()); 
-            match(input,59,FOLLOW_2); 
+            match(input,62,FOLLOW_2); 
              after(grammarAccess.getInstanceTypeRuleAccess().getInstanceKeyword_1()); 
 
             }
@@ -10009,16 +10739,16 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__InstanceTypeRule__Group__2"
-    // InternalBaseLanguage.g:3130:1: rule__InstanceTypeRule__Group__2 : rule__InstanceTypeRule__Group__2__Impl rule__InstanceTypeRule__Group__3 ;
+    // InternalBaseLanguage.g:3369:1: rule__InstanceTypeRule__Group__2 : rule__InstanceTypeRule__Group__2__Impl rule__InstanceTypeRule__Group__3 ;
     public final void rule__InstanceTypeRule__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:3134:1: ( rule__InstanceTypeRule__Group__2__Impl rule__InstanceTypeRule__Group__3 )
-            // InternalBaseLanguage.g:3135:2: rule__InstanceTypeRule__Group__2__Impl rule__InstanceTypeRule__Group__3
+            // InternalBaseLanguage.g:3373:1: ( rule__InstanceTypeRule__Group__2__Impl rule__InstanceTypeRule__Group__3 )
+            // InternalBaseLanguage.g:3374:2: rule__InstanceTypeRule__Group__2__Impl rule__InstanceTypeRule__Group__3
             {
-            pushFollow(FOLLOW_30);
+            pushFollow(FOLLOW_34);
             rule__InstanceTypeRule__Group__2__Impl();
 
             state._fsp--;
@@ -10047,21 +10777,21 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__InstanceTypeRule__Group__2__Impl"
-    // InternalBaseLanguage.g:3142:1: rule__InstanceTypeRule__Group__2__Impl : ( ( rule__InstanceTypeRule__DefinitionsAssignment_2 ) ) ;
+    // InternalBaseLanguage.g:3381:1: rule__InstanceTypeRule__Group__2__Impl : ( ( rule__InstanceTypeRule__DefinitionsAssignment_2 ) ) ;
     public final void rule__InstanceTypeRule__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:3146:1: ( ( ( rule__InstanceTypeRule__DefinitionsAssignment_2 ) ) )
-            // InternalBaseLanguage.g:3147:1: ( ( rule__InstanceTypeRule__DefinitionsAssignment_2 ) )
+            // InternalBaseLanguage.g:3385:1: ( ( ( rule__InstanceTypeRule__DefinitionsAssignment_2 ) ) )
+            // InternalBaseLanguage.g:3386:1: ( ( rule__InstanceTypeRule__DefinitionsAssignment_2 ) )
             {
-            // InternalBaseLanguage.g:3147:1: ( ( rule__InstanceTypeRule__DefinitionsAssignment_2 ) )
-            // InternalBaseLanguage.g:3148:2: ( rule__InstanceTypeRule__DefinitionsAssignment_2 )
+            // InternalBaseLanguage.g:3386:1: ( ( rule__InstanceTypeRule__DefinitionsAssignment_2 ) )
+            // InternalBaseLanguage.g:3387:2: ( rule__InstanceTypeRule__DefinitionsAssignment_2 )
             {
              before(grammarAccess.getInstanceTypeRuleAccess().getDefinitionsAssignment_2()); 
-            // InternalBaseLanguage.g:3149:2: ( rule__InstanceTypeRule__DefinitionsAssignment_2 )
-            // InternalBaseLanguage.g:3149:3: rule__InstanceTypeRule__DefinitionsAssignment_2
+            // InternalBaseLanguage.g:3388:2: ( rule__InstanceTypeRule__DefinitionsAssignment_2 )
+            // InternalBaseLanguage.g:3388:3: rule__InstanceTypeRule__DefinitionsAssignment_2
             {
             pushFollow(FOLLOW_2);
             rule__InstanceTypeRule__DefinitionsAssignment_2();
@@ -10094,14 +10824,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__InstanceTypeRule__Group__3"
-    // InternalBaseLanguage.g:3157:1: rule__InstanceTypeRule__Group__3 : rule__InstanceTypeRule__Group__3__Impl ;
+    // InternalBaseLanguage.g:3396:1: rule__InstanceTypeRule__Group__3 : rule__InstanceTypeRule__Group__3__Impl ;
     public final void rule__InstanceTypeRule__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:3161:1: ( rule__InstanceTypeRule__Group__3__Impl )
-            // InternalBaseLanguage.g:3162:2: rule__InstanceTypeRule__Group__3__Impl
+            // InternalBaseLanguage.g:3400:1: ( rule__InstanceTypeRule__Group__3__Impl )
+            // InternalBaseLanguage.g:3401:2: rule__InstanceTypeRule__Group__3__Impl
             {
             pushFollow(FOLLOW_2);
             rule__InstanceTypeRule__Group__3__Impl();
@@ -10127,35 +10857,35 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__InstanceTypeRule__Group__3__Impl"
-    // InternalBaseLanguage.g:3168:1: rule__InstanceTypeRule__Group__3__Impl : ( ( rule__InstanceTypeRule__Group_3__0 )* ) ;
+    // InternalBaseLanguage.g:3407:1: rule__InstanceTypeRule__Group__3__Impl : ( ( rule__InstanceTypeRule__Group_3__0 )* ) ;
     public final void rule__InstanceTypeRule__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:3172:1: ( ( ( rule__InstanceTypeRule__Group_3__0 )* ) )
-            // InternalBaseLanguage.g:3173:1: ( ( rule__InstanceTypeRule__Group_3__0 )* )
+            // InternalBaseLanguage.g:3411:1: ( ( ( rule__InstanceTypeRule__Group_3__0 )* ) )
+            // InternalBaseLanguage.g:3412:1: ( ( rule__InstanceTypeRule__Group_3__0 )* )
             {
-            // InternalBaseLanguage.g:3173:1: ( ( rule__InstanceTypeRule__Group_3__0 )* )
-            // InternalBaseLanguage.g:3174:2: ( rule__InstanceTypeRule__Group_3__0 )*
+            // InternalBaseLanguage.g:3412:1: ( ( rule__InstanceTypeRule__Group_3__0 )* )
+            // InternalBaseLanguage.g:3413:2: ( rule__InstanceTypeRule__Group_3__0 )*
             {
              before(grammarAccess.getInstanceTypeRuleAccess().getGroup_3()); 
-            // InternalBaseLanguage.g:3175:2: ( rule__InstanceTypeRule__Group_3__0 )*
-            loop25:
+            // InternalBaseLanguage.g:3414:2: ( rule__InstanceTypeRule__Group_3__0 )*
+            loop28:
             do {
-                int alt25=2;
-                int LA25_0 = input.LA(1);
+                int alt28=2;
+                int LA28_0 = input.LA(1);
 
-                if ( (LA25_0==60) ) {
-                    alt25=1;
+                if ( (LA28_0==63) ) {
+                    alt28=1;
                 }
 
 
-                switch (alt25) {
+                switch (alt28) {
             	case 1 :
-            	    // InternalBaseLanguage.g:3175:3: rule__InstanceTypeRule__Group_3__0
+            	    // InternalBaseLanguage.g:3414:3: rule__InstanceTypeRule__Group_3__0
             	    {
-            	    pushFollow(FOLLOW_31);
+            	    pushFollow(FOLLOW_35);
             	    rule__InstanceTypeRule__Group_3__0();
 
             	    state._fsp--;
@@ -10165,7 +10895,7 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
             	    break;
 
             	default :
-            	    break loop25;
+            	    break loop28;
                 }
             } while (true);
 
@@ -10192,16 +10922,16 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__InstanceTypeRule__Group_3__0"
-    // InternalBaseLanguage.g:3184:1: rule__InstanceTypeRule__Group_3__0 : rule__InstanceTypeRule__Group_3__0__Impl rule__InstanceTypeRule__Group_3__1 ;
+    // InternalBaseLanguage.g:3423:1: rule__InstanceTypeRule__Group_3__0 : rule__InstanceTypeRule__Group_3__0__Impl rule__InstanceTypeRule__Group_3__1 ;
     public final void rule__InstanceTypeRule__Group_3__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:3188:1: ( rule__InstanceTypeRule__Group_3__0__Impl rule__InstanceTypeRule__Group_3__1 )
-            // InternalBaseLanguage.g:3189:2: rule__InstanceTypeRule__Group_3__0__Impl rule__InstanceTypeRule__Group_3__1
+            // InternalBaseLanguage.g:3427:1: ( rule__InstanceTypeRule__Group_3__0__Impl rule__InstanceTypeRule__Group_3__1 )
+            // InternalBaseLanguage.g:3428:2: rule__InstanceTypeRule__Group_3__0__Impl rule__InstanceTypeRule__Group_3__1
             {
-            pushFollow(FOLLOW_29);
+            pushFollow(FOLLOW_25);
             rule__InstanceTypeRule__Group_3__0__Impl();
 
             state._fsp--;
@@ -10230,20 +10960,20 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__InstanceTypeRule__Group_3__0__Impl"
-    // InternalBaseLanguage.g:3196:1: rule__InstanceTypeRule__Group_3__0__Impl : ( '|' ) ;
+    // InternalBaseLanguage.g:3435:1: rule__InstanceTypeRule__Group_3__0__Impl : ( '|' ) ;
     public final void rule__InstanceTypeRule__Group_3__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:3200:1: ( ( '|' ) )
-            // InternalBaseLanguage.g:3201:1: ( '|' )
+            // InternalBaseLanguage.g:3439:1: ( ( '|' ) )
+            // InternalBaseLanguage.g:3440:1: ( '|' )
             {
-            // InternalBaseLanguage.g:3201:1: ( '|' )
-            // InternalBaseLanguage.g:3202:2: '|'
+            // InternalBaseLanguage.g:3440:1: ( '|' )
+            // InternalBaseLanguage.g:3441:2: '|'
             {
              before(grammarAccess.getInstanceTypeRuleAccess().getVerticalLineKeyword_3_0()); 
-            match(input,60,FOLLOW_2); 
+            match(input,63,FOLLOW_2); 
              after(grammarAccess.getInstanceTypeRuleAccess().getVerticalLineKeyword_3_0()); 
 
             }
@@ -10267,14 +10997,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__InstanceTypeRule__Group_3__1"
-    // InternalBaseLanguage.g:3211:1: rule__InstanceTypeRule__Group_3__1 : rule__InstanceTypeRule__Group_3__1__Impl ;
+    // InternalBaseLanguage.g:3450:1: rule__InstanceTypeRule__Group_3__1 : rule__InstanceTypeRule__Group_3__1__Impl ;
     public final void rule__InstanceTypeRule__Group_3__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:3215:1: ( rule__InstanceTypeRule__Group_3__1__Impl )
-            // InternalBaseLanguage.g:3216:2: rule__InstanceTypeRule__Group_3__1__Impl
+            // InternalBaseLanguage.g:3454:1: ( rule__InstanceTypeRule__Group_3__1__Impl )
+            // InternalBaseLanguage.g:3455:2: rule__InstanceTypeRule__Group_3__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__InstanceTypeRule__Group_3__1__Impl();
@@ -10300,21 +11030,21 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__InstanceTypeRule__Group_3__1__Impl"
-    // InternalBaseLanguage.g:3222:1: rule__InstanceTypeRule__Group_3__1__Impl : ( ( rule__InstanceTypeRule__DefinitionsAssignment_3_1 ) ) ;
+    // InternalBaseLanguage.g:3461:1: rule__InstanceTypeRule__Group_3__1__Impl : ( ( rule__InstanceTypeRule__DefinitionsAssignment_3_1 ) ) ;
     public final void rule__InstanceTypeRule__Group_3__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:3226:1: ( ( ( rule__InstanceTypeRule__DefinitionsAssignment_3_1 ) ) )
-            // InternalBaseLanguage.g:3227:1: ( ( rule__InstanceTypeRule__DefinitionsAssignment_3_1 ) )
+            // InternalBaseLanguage.g:3465:1: ( ( ( rule__InstanceTypeRule__DefinitionsAssignment_3_1 ) ) )
+            // InternalBaseLanguage.g:3466:1: ( ( rule__InstanceTypeRule__DefinitionsAssignment_3_1 ) )
             {
-            // InternalBaseLanguage.g:3227:1: ( ( rule__InstanceTypeRule__DefinitionsAssignment_3_1 ) )
-            // InternalBaseLanguage.g:3228:2: ( rule__InstanceTypeRule__DefinitionsAssignment_3_1 )
+            // InternalBaseLanguage.g:3466:1: ( ( rule__InstanceTypeRule__DefinitionsAssignment_3_1 ) )
+            // InternalBaseLanguage.g:3467:2: ( rule__InstanceTypeRule__DefinitionsAssignment_3_1 )
             {
              before(grammarAccess.getInstanceTypeRuleAccess().getDefinitionsAssignment_3_1()); 
-            // InternalBaseLanguage.g:3229:2: ( rule__InstanceTypeRule__DefinitionsAssignment_3_1 )
-            // InternalBaseLanguage.g:3229:3: rule__InstanceTypeRule__DefinitionsAssignment_3_1
+            // InternalBaseLanguage.g:3468:2: ( rule__InstanceTypeRule__DefinitionsAssignment_3_1 )
+            // InternalBaseLanguage.g:3468:3: rule__InstanceTypeRule__DefinitionsAssignment_3_1
             {
             pushFollow(FOLLOW_2);
             rule__InstanceTypeRule__DefinitionsAssignment_3_1();
@@ -10347,16 +11077,16 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__StringTypeRule__Group__0"
-    // InternalBaseLanguage.g:3238:1: rule__StringTypeRule__Group__0 : rule__StringTypeRule__Group__0__Impl rule__StringTypeRule__Group__1 ;
+    // InternalBaseLanguage.g:3477:1: rule__StringTypeRule__Group__0 : rule__StringTypeRule__Group__0__Impl rule__StringTypeRule__Group__1 ;
     public final void rule__StringTypeRule__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:3242:1: ( rule__StringTypeRule__Group__0__Impl rule__StringTypeRule__Group__1 )
-            // InternalBaseLanguage.g:3243:2: rule__StringTypeRule__Group__0__Impl rule__StringTypeRule__Group__1
+            // InternalBaseLanguage.g:3481:1: ( rule__StringTypeRule__Group__0__Impl rule__StringTypeRule__Group__1 )
+            // InternalBaseLanguage.g:3482:2: rule__StringTypeRule__Group__0__Impl rule__StringTypeRule__Group__1
             {
-            pushFollow(FOLLOW_32);
+            pushFollow(FOLLOW_36);
             rule__StringTypeRule__Group__0__Impl();
 
             state._fsp--;
@@ -10385,21 +11115,21 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__StringTypeRule__Group__0__Impl"
-    // InternalBaseLanguage.g:3250:1: rule__StringTypeRule__Group__0__Impl : ( () ) ;
+    // InternalBaseLanguage.g:3489:1: rule__StringTypeRule__Group__0__Impl : ( () ) ;
     public final void rule__StringTypeRule__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:3254:1: ( ( () ) )
-            // InternalBaseLanguage.g:3255:1: ( () )
+            // InternalBaseLanguage.g:3493:1: ( ( () ) )
+            // InternalBaseLanguage.g:3494:1: ( () )
             {
-            // InternalBaseLanguage.g:3255:1: ( () )
-            // InternalBaseLanguage.g:3256:2: ()
+            // InternalBaseLanguage.g:3494:1: ( () )
+            // InternalBaseLanguage.g:3495:2: ()
             {
              before(grammarAccess.getStringTypeRuleAccess().getStringTypeAction_0()); 
-            // InternalBaseLanguage.g:3257:2: ()
-            // InternalBaseLanguage.g:3257:3: 
+            // InternalBaseLanguage.g:3496:2: ()
+            // InternalBaseLanguage.g:3496:3: 
             {
             }
 
@@ -10422,14 +11152,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__StringTypeRule__Group__1"
-    // InternalBaseLanguage.g:3265:1: rule__StringTypeRule__Group__1 : rule__StringTypeRule__Group__1__Impl ;
+    // InternalBaseLanguage.g:3504:1: rule__StringTypeRule__Group__1 : rule__StringTypeRule__Group__1__Impl ;
     public final void rule__StringTypeRule__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:3269:1: ( rule__StringTypeRule__Group__1__Impl )
-            // InternalBaseLanguage.g:3270:2: rule__StringTypeRule__Group__1__Impl
+            // InternalBaseLanguage.g:3508:1: ( rule__StringTypeRule__Group__1__Impl )
+            // InternalBaseLanguage.g:3509:2: rule__StringTypeRule__Group__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__StringTypeRule__Group__1__Impl();
@@ -10455,20 +11185,20 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__StringTypeRule__Group__1__Impl"
-    // InternalBaseLanguage.g:3276:1: rule__StringTypeRule__Group__1__Impl : ( 'string' ) ;
+    // InternalBaseLanguage.g:3515:1: rule__StringTypeRule__Group__1__Impl : ( 'string' ) ;
     public final void rule__StringTypeRule__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:3280:1: ( ( 'string' ) )
-            // InternalBaseLanguage.g:3281:1: ( 'string' )
+            // InternalBaseLanguage.g:3519:1: ( ( 'string' ) )
+            // InternalBaseLanguage.g:3520:1: ( 'string' )
             {
-            // InternalBaseLanguage.g:3281:1: ( 'string' )
-            // InternalBaseLanguage.g:3282:2: 'string'
+            // InternalBaseLanguage.g:3520:1: ( 'string' )
+            // InternalBaseLanguage.g:3521:2: 'string'
             {
              before(grammarAccess.getStringTypeRuleAccess().getStringKeyword_1()); 
-            match(input,61,FOLLOW_2); 
+            match(input,64,FOLLOW_2); 
              after(grammarAccess.getStringTypeRuleAccess().getStringKeyword_1()); 
 
             }
@@ -10492,16 +11222,16 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__ExpressionTypeRule__Group__0"
-    // InternalBaseLanguage.g:3292:1: rule__ExpressionTypeRule__Group__0 : rule__ExpressionTypeRule__Group__0__Impl rule__ExpressionTypeRule__Group__1 ;
+    // InternalBaseLanguage.g:3531:1: rule__ExpressionTypeRule__Group__0 : rule__ExpressionTypeRule__Group__0__Impl rule__ExpressionTypeRule__Group__1 ;
     public final void rule__ExpressionTypeRule__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:3296:1: ( rule__ExpressionTypeRule__Group__0__Impl rule__ExpressionTypeRule__Group__1 )
-            // InternalBaseLanguage.g:3297:2: rule__ExpressionTypeRule__Group__0__Impl rule__ExpressionTypeRule__Group__1
+            // InternalBaseLanguage.g:3535:1: ( rule__ExpressionTypeRule__Group__0__Impl rule__ExpressionTypeRule__Group__1 )
+            // InternalBaseLanguage.g:3536:2: rule__ExpressionTypeRule__Group__0__Impl rule__ExpressionTypeRule__Group__1
             {
-            pushFollow(FOLLOW_33);
+            pushFollow(FOLLOW_37);
             rule__ExpressionTypeRule__Group__0__Impl();
 
             state._fsp--;
@@ -10530,21 +11260,21 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__ExpressionTypeRule__Group__0__Impl"
-    // InternalBaseLanguage.g:3304:1: rule__ExpressionTypeRule__Group__0__Impl : ( () ) ;
+    // InternalBaseLanguage.g:3543:1: rule__ExpressionTypeRule__Group__0__Impl : ( () ) ;
     public final void rule__ExpressionTypeRule__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:3308:1: ( ( () ) )
-            // InternalBaseLanguage.g:3309:1: ( () )
+            // InternalBaseLanguage.g:3547:1: ( ( () ) )
+            // InternalBaseLanguage.g:3548:1: ( () )
             {
-            // InternalBaseLanguage.g:3309:1: ( () )
-            // InternalBaseLanguage.g:3310:2: ()
+            // InternalBaseLanguage.g:3548:1: ( () )
+            // InternalBaseLanguage.g:3549:2: ()
             {
              before(grammarAccess.getExpressionTypeRuleAccess().getExpressionTypeAction_0()); 
-            // InternalBaseLanguage.g:3311:2: ()
-            // InternalBaseLanguage.g:3311:3: 
+            // InternalBaseLanguage.g:3550:2: ()
+            // InternalBaseLanguage.g:3550:3: 
             {
             }
 
@@ -10567,14 +11297,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__ExpressionTypeRule__Group__1"
-    // InternalBaseLanguage.g:3319:1: rule__ExpressionTypeRule__Group__1 : rule__ExpressionTypeRule__Group__1__Impl ;
+    // InternalBaseLanguage.g:3558:1: rule__ExpressionTypeRule__Group__1 : rule__ExpressionTypeRule__Group__1__Impl ;
     public final void rule__ExpressionTypeRule__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:3323:1: ( rule__ExpressionTypeRule__Group__1__Impl )
-            // InternalBaseLanguage.g:3324:2: rule__ExpressionTypeRule__Group__1__Impl
+            // InternalBaseLanguage.g:3562:1: ( rule__ExpressionTypeRule__Group__1__Impl )
+            // InternalBaseLanguage.g:3563:2: rule__ExpressionTypeRule__Group__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__ExpressionTypeRule__Group__1__Impl();
@@ -10600,20 +11330,20 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__ExpressionTypeRule__Group__1__Impl"
-    // InternalBaseLanguage.g:3330:1: rule__ExpressionTypeRule__Group__1__Impl : ( 'expression' ) ;
+    // InternalBaseLanguage.g:3569:1: rule__ExpressionTypeRule__Group__1__Impl : ( 'expression' ) ;
     public final void rule__ExpressionTypeRule__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:3334:1: ( ( 'expression' ) )
-            // InternalBaseLanguage.g:3335:1: ( 'expression' )
+            // InternalBaseLanguage.g:3573:1: ( ( 'expression' ) )
+            // InternalBaseLanguage.g:3574:1: ( 'expression' )
             {
-            // InternalBaseLanguage.g:3335:1: ( 'expression' )
-            // InternalBaseLanguage.g:3336:2: 'expression'
+            // InternalBaseLanguage.g:3574:1: ( 'expression' )
+            // InternalBaseLanguage.g:3575:2: 'expression'
             {
              before(grammarAccess.getExpressionTypeRuleAccess().getExpressionKeyword_1()); 
-            match(input,62,FOLLOW_2); 
+            match(input,65,FOLLOW_2); 
              after(grammarAccess.getExpressionTypeRuleAccess().getExpressionKeyword_1()); 
 
             }
@@ -10637,16 +11367,16 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__IntTypeRule__Group__0"
-    // InternalBaseLanguage.g:3346:1: rule__IntTypeRule__Group__0 : rule__IntTypeRule__Group__0__Impl rule__IntTypeRule__Group__1 ;
+    // InternalBaseLanguage.g:3585:1: rule__IntTypeRule__Group__0 : rule__IntTypeRule__Group__0__Impl rule__IntTypeRule__Group__1 ;
     public final void rule__IntTypeRule__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:3350:1: ( rule__IntTypeRule__Group__0__Impl rule__IntTypeRule__Group__1 )
-            // InternalBaseLanguage.g:3351:2: rule__IntTypeRule__Group__0__Impl rule__IntTypeRule__Group__1
+            // InternalBaseLanguage.g:3589:1: ( rule__IntTypeRule__Group__0__Impl rule__IntTypeRule__Group__1 )
+            // InternalBaseLanguage.g:3590:2: rule__IntTypeRule__Group__0__Impl rule__IntTypeRule__Group__1
             {
-            pushFollow(FOLLOW_34);
+            pushFollow(FOLLOW_38);
             rule__IntTypeRule__Group__0__Impl();
 
             state._fsp--;
@@ -10675,21 +11405,21 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__IntTypeRule__Group__0__Impl"
-    // InternalBaseLanguage.g:3358:1: rule__IntTypeRule__Group__0__Impl : ( () ) ;
+    // InternalBaseLanguage.g:3597:1: rule__IntTypeRule__Group__0__Impl : ( () ) ;
     public final void rule__IntTypeRule__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:3362:1: ( ( () ) )
-            // InternalBaseLanguage.g:3363:1: ( () )
+            // InternalBaseLanguage.g:3601:1: ( ( () ) )
+            // InternalBaseLanguage.g:3602:1: ( () )
             {
-            // InternalBaseLanguage.g:3363:1: ( () )
-            // InternalBaseLanguage.g:3364:2: ()
+            // InternalBaseLanguage.g:3602:1: ( () )
+            // InternalBaseLanguage.g:3603:2: ()
             {
              before(grammarAccess.getIntTypeRuleAccess().getIntTypeAction_0()); 
-            // InternalBaseLanguage.g:3365:2: ()
-            // InternalBaseLanguage.g:3365:3: 
+            // InternalBaseLanguage.g:3604:2: ()
+            // InternalBaseLanguage.g:3604:3: 
             {
             }
 
@@ -10712,14 +11442,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__IntTypeRule__Group__1"
-    // InternalBaseLanguage.g:3373:1: rule__IntTypeRule__Group__1 : rule__IntTypeRule__Group__1__Impl ;
+    // InternalBaseLanguage.g:3612:1: rule__IntTypeRule__Group__1 : rule__IntTypeRule__Group__1__Impl ;
     public final void rule__IntTypeRule__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:3377:1: ( rule__IntTypeRule__Group__1__Impl )
-            // InternalBaseLanguage.g:3378:2: rule__IntTypeRule__Group__1__Impl
+            // InternalBaseLanguage.g:3616:1: ( rule__IntTypeRule__Group__1__Impl )
+            // InternalBaseLanguage.g:3617:2: rule__IntTypeRule__Group__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__IntTypeRule__Group__1__Impl();
@@ -10745,20 +11475,20 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__IntTypeRule__Group__1__Impl"
-    // InternalBaseLanguage.g:3384:1: rule__IntTypeRule__Group__1__Impl : ( 'int' ) ;
+    // InternalBaseLanguage.g:3623:1: rule__IntTypeRule__Group__1__Impl : ( 'int' ) ;
     public final void rule__IntTypeRule__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:3388:1: ( ( 'int' ) )
-            // InternalBaseLanguage.g:3389:1: ( 'int' )
+            // InternalBaseLanguage.g:3627:1: ( ( 'int' ) )
+            // InternalBaseLanguage.g:3628:1: ( 'int' )
             {
-            // InternalBaseLanguage.g:3389:1: ( 'int' )
-            // InternalBaseLanguage.g:3390:2: 'int'
+            // InternalBaseLanguage.g:3628:1: ( 'int' )
+            // InternalBaseLanguage.g:3629:2: 'int'
             {
              before(grammarAccess.getIntTypeRuleAccess().getIntKeyword_1()); 
-            match(input,63,FOLLOW_2); 
+            match(input,66,FOLLOW_2); 
              after(grammarAccess.getIntTypeRuleAccess().getIntKeyword_1()); 
 
             }
@@ -10782,16 +11512,16 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__FloatTypeRule__Group__0"
-    // InternalBaseLanguage.g:3400:1: rule__FloatTypeRule__Group__0 : rule__FloatTypeRule__Group__0__Impl rule__FloatTypeRule__Group__1 ;
+    // InternalBaseLanguage.g:3639:1: rule__FloatTypeRule__Group__0 : rule__FloatTypeRule__Group__0__Impl rule__FloatTypeRule__Group__1 ;
     public final void rule__FloatTypeRule__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:3404:1: ( rule__FloatTypeRule__Group__0__Impl rule__FloatTypeRule__Group__1 )
-            // InternalBaseLanguage.g:3405:2: rule__FloatTypeRule__Group__0__Impl rule__FloatTypeRule__Group__1
+            // InternalBaseLanguage.g:3643:1: ( rule__FloatTypeRule__Group__0__Impl rule__FloatTypeRule__Group__1 )
+            // InternalBaseLanguage.g:3644:2: rule__FloatTypeRule__Group__0__Impl rule__FloatTypeRule__Group__1
             {
-            pushFollow(FOLLOW_35);
+            pushFollow(FOLLOW_39);
             rule__FloatTypeRule__Group__0__Impl();
 
             state._fsp--;
@@ -10820,21 +11550,21 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__FloatTypeRule__Group__0__Impl"
-    // InternalBaseLanguage.g:3412:1: rule__FloatTypeRule__Group__0__Impl : ( () ) ;
+    // InternalBaseLanguage.g:3651:1: rule__FloatTypeRule__Group__0__Impl : ( () ) ;
     public final void rule__FloatTypeRule__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:3416:1: ( ( () ) )
-            // InternalBaseLanguage.g:3417:1: ( () )
+            // InternalBaseLanguage.g:3655:1: ( ( () ) )
+            // InternalBaseLanguage.g:3656:1: ( () )
             {
-            // InternalBaseLanguage.g:3417:1: ( () )
-            // InternalBaseLanguage.g:3418:2: ()
+            // InternalBaseLanguage.g:3656:1: ( () )
+            // InternalBaseLanguage.g:3657:2: ()
             {
              before(grammarAccess.getFloatTypeRuleAccess().getFloatTypeAction_0()); 
-            // InternalBaseLanguage.g:3419:2: ()
-            // InternalBaseLanguage.g:3419:3: 
+            // InternalBaseLanguage.g:3658:2: ()
+            // InternalBaseLanguage.g:3658:3: 
             {
             }
 
@@ -10857,14 +11587,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__FloatTypeRule__Group__1"
-    // InternalBaseLanguage.g:3427:1: rule__FloatTypeRule__Group__1 : rule__FloatTypeRule__Group__1__Impl ;
+    // InternalBaseLanguage.g:3666:1: rule__FloatTypeRule__Group__1 : rule__FloatTypeRule__Group__1__Impl ;
     public final void rule__FloatTypeRule__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:3431:1: ( rule__FloatTypeRule__Group__1__Impl )
-            // InternalBaseLanguage.g:3432:2: rule__FloatTypeRule__Group__1__Impl
+            // InternalBaseLanguage.g:3670:1: ( rule__FloatTypeRule__Group__1__Impl )
+            // InternalBaseLanguage.g:3671:2: rule__FloatTypeRule__Group__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__FloatTypeRule__Group__1__Impl();
@@ -10890,20 +11620,20 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__FloatTypeRule__Group__1__Impl"
-    // InternalBaseLanguage.g:3438:1: rule__FloatTypeRule__Group__1__Impl : ( 'float' ) ;
+    // InternalBaseLanguage.g:3677:1: rule__FloatTypeRule__Group__1__Impl : ( 'float' ) ;
     public final void rule__FloatTypeRule__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:3442:1: ( ( 'float' ) )
-            // InternalBaseLanguage.g:3443:1: ( 'float' )
+            // InternalBaseLanguage.g:3681:1: ( ( 'float' ) )
+            // InternalBaseLanguage.g:3682:1: ( 'float' )
             {
-            // InternalBaseLanguage.g:3443:1: ( 'float' )
-            // InternalBaseLanguage.g:3444:2: 'float'
+            // InternalBaseLanguage.g:3682:1: ( 'float' )
+            // InternalBaseLanguage.g:3683:2: 'float'
             {
              before(grammarAccess.getFloatTypeRuleAccess().getFloatKeyword_1()); 
-            match(input,64,FOLLOW_2); 
+            match(input,67,FOLLOW_2); 
              after(grammarAccess.getFloatTypeRuleAccess().getFloatKeyword_1()); 
 
             }
@@ -10927,16 +11657,16 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__BooleanTypeRule__Group__0"
-    // InternalBaseLanguage.g:3454:1: rule__BooleanTypeRule__Group__0 : rule__BooleanTypeRule__Group__0__Impl rule__BooleanTypeRule__Group__1 ;
+    // InternalBaseLanguage.g:3693:1: rule__BooleanTypeRule__Group__0 : rule__BooleanTypeRule__Group__0__Impl rule__BooleanTypeRule__Group__1 ;
     public final void rule__BooleanTypeRule__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:3458:1: ( rule__BooleanTypeRule__Group__0__Impl rule__BooleanTypeRule__Group__1 )
-            // InternalBaseLanguage.g:3459:2: rule__BooleanTypeRule__Group__0__Impl rule__BooleanTypeRule__Group__1
+            // InternalBaseLanguage.g:3697:1: ( rule__BooleanTypeRule__Group__0__Impl rule__BooleanTypeRule__Group__1 )
+            // InternalBaseLanguage.g:3698:2: rule__BooleanTypeRule__Group__0__Impl rule__BooleanTypeRule__Group__1
             {
-            pushFollow(FOLLOW_36);
+            pushFollow(FOLLOW_40);
             rule__BooleanTypeRule__Group__0__Impl();
 
             state._fsp--;
@@ -10965,21 +11695,21 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__BooleanTypeRule__Group__0__Impl"
-    // InternalBaseLanguage.g:3466:1: rule__BooleanTypeRule__Group__0__Impl : ( () ) ;
+    // InternalBaseLanguage.g:3705:1: rule__BooleanTypeRule__Group__0__Impl : ( () ) ;
     public final void rule__BooleanTypeRule__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:3470:1: ( ( () ) )
-            // InternalBaseLanguage.g:3471:1: ( () )
+            // InternalBaseLanguage.g:3709:1: ( ( () ) )
+            // InternalBaseLanguage.g:3710:1: ( () )
             {
-            // InternalBaseLanguage.g:3471:1: ( () )
-            // InternalBaseLanguage.g:3472:2: ()
+            // InternalBaseLanguage.g:3710:1: ( () )
+            // InternalBaseLanguage.g:3711:2: ()
             {
              before(grammarAccess.getBooleanTypeRuleAccess().getBooleanTypeAction_0()); 
-            // InternalBaseLanguage.g:3473:2: ()
-            // InternalBaseLanguage.g:3473:3: 
+            // InternalBaseLanguage.g:3712:2: ()
+            // InternalBaseLanguage.g:3712:3: 
             {
             }
 
@@ -11002,14 +11732,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__BooleanTypeRule__Group__1"
-    // InternalBaseLanguage.g:3481:1: rule__BooleanTypeRule__Group__1 : rule__BooleanTypeRule__Group__1__Impl ;
+    // InternalBaseLanguage.g:3720:1: rule__BooleanTypeRule__Group__1 : rule__BooleanTypeRule__Group__1__Impl ;
     public final void rule__BooleanTypeRule__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:3485:1: ( rule__BooleanTypeRule__Group__1__Impl )
-            // InternalBaseLanguage.g:3486:2: rule__BooleanTypeRule__Group__1__Impl
+            // InternalBaseLanguage.g:3724:1: ( rule__BooleanTypeRule__Group__1__Impl )
+            // InternalBaseLanguage.g:3725:2: rule__BooleanTypeRule__Group__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__BooleanTypeRule__Group__1__Impl();
@@ -11035,20 +11765,20 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__BooleanTypeRule__Group__1__Impl"
-    // InternalBaseLanguage.g:3492:1: rule__BooleanTypeRule__Group__1__Impl : ( 'boolean' ) ;
+    // InternalBaseLanguage.g:3731:1: rule__BooleanTypeRule__Group__1__Impl : ( 'boolean' ) ;
     public final void rule__BooleanTypeRule__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:3496:1: ( ( 'boolean' ) )
-            // InternalBaseLanguage.g:3497:1: ( 'boolean' )
+            // InternalBaseLanguage.g:3735:1: ( ( 'boolean' ) )
+            // InternalBaseLanguage.g:3736:1: ( 'boolean' )
             {
-            // InternalBaseLanguage.g:3497:1: ( 'boolean' )
-            // InternalBaseLanguage.g:3498:2: 'boolean'
+            // InternalBaseLanguage.g:3736:1: ( 'boolean' )
+            // InternalBaseLanguage.g:3737:2: 'boolean'
             {
              before(grammarAccess.getBooleanTypeRuleAccess().getBooleanKeyword_1()); 
-            match(input,65,FOLLOW_2); 
+            match(input,68,FOLLOW_2); 
              after(grammarAccess.getBooleanTypeRuleAccess().getBooleanKeyword_1()); 
 
             }
@@ -11072,16 +11802,16 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__VoidTypeRule__Group__0"
-    // InternalBaseLanguage.g:3508:1: rule__VoidTypeRule__Group__0 : rule__VoidTypeRule__Group__0__Impl rule__VoidTypeRule__Group__1 ;
+    // InternalBaseLanguage.g:3747:1: rule__VoidTypeRule__Group__0 : rule__VoidTypeRule__Group__0__Impl rule__VoidTypeRule__Group__1 ;
     public final void rule__VoidTypeRule__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:3512:1: ( rule__VoidTypeRule__Group__0__Impl rule__VoidTypeRule__Group__1 )
-            // InternalBaseLanguage.g:3513:2: rule__VoidTypeRule__Group__0__Impl rule__VoidTypeRule__Group__1
+            // InternalBaseLanguage.g:3751:1: ( rule__VoidTypeRule__Group__0__Impl rule__VoidTypeRule__Group__1 )
+            // InternalBaseLanguage.g:3752:2: rule__VoidTypeRule__Group__0__Impl rule__VoidTypeRule__Group__1
             {
-            pushFollow(FOLLOW_37);
+            pushFollow(FOLLOW_41);
             rule__VoidTypeRule__Group__0__Impl();
 
             state._fsp--;
@@ -11110,21 +11840,21 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__VoidTypeRule__Group__0__Impl"
-    // InternalBaseLanguage.g:3520:1: rule__VoidTypeRule__Group__0__Impl : ( () ) ;
+    // InternalBaseLanguage.g:3759:1: rule__VoidTypeRule__Group__0__Impl : ( () ) ;
     public final void rule__VoidTypeRule__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:3524:1: ( ( () ) )
-            // InternalBaseLanguage.g:3525:1: ( () )
+            // InternalBaseLanguage.g:3763:1: ( ( () ) )
+            // InternalBaseLanguage.g:3764:1: ( () )
             {
-            // InternalBaseLanguage.g:3525:1: ( () )
-            // InternalBaseLanguage.g:3526:2: ()
+            // InternalBaseLanguage.g:3764:1: ( () )
+            // InternalBaseLanguage.g:3765:2: ()
             {
              before(grammarAccess.getVoidTypeRuleAccess().getVoidTypeAction_0()); 
-            // InternalBaseLanguage.g:3527:2: ()
-            // InternalBaseLanguage.g:3527:3: 
+            // InternalBaseLanguage.g:3766:2: ()
+            // InternalBaseLanguage.g:3766:3: 
             {
             }
 
@@ -11147,14 +11877,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__VoidTypeRule__Group__1"
-    // InternalBaseLanguage.g:3535:1: rule__VoidTypeRule__Group__1 : rule__VoidTypeRule__Group__1__Impl ;
+    // InternalBaseLanguage.g:3774:1: rule__VoidTypeRule__Group__1 : rule__VoidTypeRule__Group__1__Impl ;
     public final void rule__VoidTypeRule__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:3539:1: ( rule__VoidTypeRule__Group__1__Impl )
-            // InternalBaseLanguage.g:3540:2: rule__VoidTypeRule__Group__1__Impl
+            // InternalBaseLanguage.g:3778:1: ( rule__VoidTypeRule__Group__1__Impl )
+            // InternalBaseLanguage.g:3779:2: rule__VoidTypeRule__Group__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__VoidTypeRule__Group__1__Impl();
@@ -11180,20 +11910,20 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__VoidTypeRule__Group__1__Impl"
-    // InternalBaseLanguage.g:3546:1: rule__VoidTypeRule__Group__1__Impl : ( 'void' ) ;
+    // InternalBaseLanguage.g:3785:1: rule__VoidTypeRule__Group__1__Impl : ( 'void' ) ;
     public final void rule__VoidTypeRule__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:3550:1: ( ( 'void' ) )
-            // InternalBaseLanguage.g:3551:1: ( 'void' )
+            // InternalBaseLanguage.g:3789:1: ( ( 'void' ) )
+            // InternalBaseLanguage.g:3790:1: ( 'void' )
             {
-            // InternalBaseLanguage.g:3551:1: ( 'void' )
-            // InternalBaseLanguage.g:3552:2: 'void'
+            // InternalBaseLanguage.g:3790:1: ( 'void' )
+            // InternalBaseLanguage.g:3791:2: 'void'
             {
              before(grammarAccess.getVoidTypeRuleAccess().getVoidKeyword_1()); 
-            match(input,66,FOLLOW_2); 
+            match(input,69,FOLLOW_2); 
              after(grammarAccess.getVoidTypeRuleAccess().getVoidKeyword_1()); 
 
             }
@@ -11217,16 +11947,16 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__DataTypeRule__Group__0"
-    // InternalBaseLanguage.g:3562:1: rule__DataTypeRule__Group__0 : rule__DataTypeRule__Group__0__Impl rule__DataTypeRule__Group__1 ;
+    // InternalBaseLanguage.g:3801:1: rule__DataTypeRule__Group__0 : rule__DataTypeRule__Group__0__Impl rule__DataTypeRule__Group__1 ;
     public final void rule__DataTypeRule__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:3566:1: ( rule__DataTypeRule__Group__0__Impl rule__DataTypeRule__Group__1 )
-            // InternalBaseLanguage.g:3567:2: rule__DataTypeRule__Group__0__Impl rule__DataTypeRule__Group__1
+            // InternalBaseLanguage.g:3805:1: ( rule__DataTypeRule__Group__0__Impl rule__DataTypeRule__Group__1 )
+            // InternalBaseLanguage.g:3806:2: rule__DataTypeRule__Group__0__Impl rule__DataTypeRule__Group__1
             {
-            pushFollow(FOLLOW_25);
+            pushFollow(FOLLOW_30);
             rule__DataTypeRule__Group__0__Impl();
 
             state._fsp--;
@@ -11255,21 +11985,21 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__DataTypeRule__Group__0__Impl"
-    // InternalBaseLanguage.g:3574:1: rule__DataTypeRule__Group__0__Impl : ( () ) ;
+    // InternalBaseLanguage.g:3813:1: rule__DataTypeRule__Group__0__Impl : ( () ) ;
     public final void rule__DataTypeRule__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:3578:1: ( ( () ) )
-            // InternalBaseLanguage.g:3579:1: ( () )
+            // InternalBaseLanguage.g:3817:1: ( ( () ) )
+            // InternalBaseLanguage.g:3818:1: ( () )
             {
-            // InternalBaseLanguage.g:3579:1: ( () )
-            // InternalBaseLanguage.g:3580:2: ()
+            // InternalBaseLanguage.g:3818:1: ( () )
+            // InternalBaseLanguage.g:3819:2: ()
             {
              before(grammarAccess.getDataTypeRuleAccess().getDataTypeAction_0()); 
-            // InternalBaseLanguage.g:3581:2: ()
-            // InternalBaseLanguage.g:3581:3: 
+            // InternalBaseLanguage.g:3820:2: ()
+            // InternalBaseLanguage.g:3820:3: 
             {
             }
 
@@ -11292,14 +12022,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__DataTypeRule__Group__1"
-    // InternalBaseLanguage.g:3589:1: rule__DataTypeRule__Group__1 : rule__DataTypeRule__Group__1__Impl ;
+    // InternalBaseLanguage.g:3828:1: rule__DataTypeRule__Group__1 : rule__DataTypeRule__Group__1__Impl ;
     public final void rule__DataTypeRule__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:3593:1: ( rule__DataTypeRule__Group__1__Impl )
-            // InternalBaseLanguage.g:3594:2: rule__DataTypeRule__Group__1__Impl
+            // InternalBaseLanguage.g:3832:1: ( rule__DataTypeRule__Group__1__Impl )
+            // InternalBaseLanguage.g:3833:2: rule__DataTypeRule__Group__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__DataTypeRule__Group__1__Impl();
@@ -11325,20 +12055,20 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__DataTypeRule__Group__1__Impl"
-    // InternalBaseLanguage.g:3600:1: rule__DataTypeRule__Group__1__Impl : ( 'data' ) ;
+    // InternalBaseLanguage.g:3839:1: rule__DataTypeRule__Group__1__Impl : ( 'data' ) ;
     public final void rule__DataTypeRule__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:3604:1: ( ( 'data' ) )
-            // InternalBaseLanguage.g:3605:1: ( 'data' )
+            // InternalBaseLanguage.g:3843:1: ( ( 'data' ) )
+            // InternalBaseLanguage.g:3844:1: ( 'data' )
             {
-            // InternalBaseLanguage.g:3605:1: ( 'data' )
-            // InternalBaseLanguage.g:3606:2: 'data'
+            // InternalBaseLanguage.g:3844:1: ( 'data' )
+            // InternalBaseLanguage.g:3845:2: 'data'
             {
              before(grammarAccess.getDataTypeRuleAccess().getDataKeyword_1()); 
-            match(input,67,FOLLOW_2); 
+            match(input,70,FOLLOW_2); 
              after(grammarAccess.getDataTypeRuleAccess().getDataKeyword_1()); 
 
             }
@@ -11362,16 +12092,16 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__ArrayTypeRule__Group__0"
-    // InternalBaseLanguage.g:3616:1: rule__ArrayTypeRule__Group__0 : rule__ArrayTypeRule__Group__0__Impl rule__ArrayTypeRule__Group__1 ;
+    // InternalBaseLanguage.g:3855:1: rule__ArrayTypeRule__Group__0 : rule__ArrayTypeRule__Group__0__Impl rule__ArrayTypeRule__Group__1 ;
     public final void rule__ArrayTypeRule__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:3620:1: ( rule__ArrayTypeRule__Group__0__Impl rule__ArrayTypeRule__Group__1 )
-            // InternalBaseLanguage.g:3621:2: rule__ArrayTypeRule__Group__0__Impl rule__ArrayTypeRule__Group__1
+            // InternalBaseLanguage.g:3859:1: ( rule__ArrayTypeRule__Group__0__Impl rule__ArrayTypeRule__Group__1 )
+            // InternalBaseLanguage.g:3860:2: rule__ArrayTypeRule__Group__0__Impl rule__ArrayTypeRule__Group__1
             {
-            pushFollow(FOLLOW_25);
+            pushFollow(FOLLOW_30);
             rule__ArrayTypeRule__Group__0__Impl();
 
             state._fsp--;
@@ -11400,20 +12130,20 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__ArrayTypeRule__Group__0__Impl"
-    // InternalBaseLanguage.g:3628:1: rule__ArrayTypeRule__Group__0__Impl : ( 'array' ) ;
+    // InternalBaseLanguage.g:3867:1: rule__ArrayTypeRule__Group__0__Impl : ( 'array' ) ;
     public final void rule__ArrayTypeRule__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:3632:1: ( ( 'array' ) )
-            // InternalBaseLanguage.g:3633:1: ( 'array' )
+            // InternalBaseLanguage.g:3871:1: ( ( 'array' ) )
+            // InternalBaseLanguage.g:3872:1: ( 'array' )
             {
-            // InternalBaseLanguage.g:3633:1: ( 'array' )
-            // InternalBaseLanguage.g:3634:2: 'array'
+            // InternalBaseLanguage.g:3872:1: ( 'array' )
+            // InternalBaseLanguage.g:3873:2: 'array'
             {
              before(grammarAccess.getArrayTypeRuleAccess().getArrayKeyword_0()); 
-            match(input,68,FOLLOW_2); 
+            match(input,71,FOLLOW_2); 
              after(grammarAccess.getArrayTypeRuleAccess().getArrayKeyword_0()); 
 
             }
@@ -11437,14 +12167,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__ArrayTypeRule__Group__1"
-    // InternalBaseLanguage.g:3643:1: rule__ArrayTypeRule__Group__1 : rule__ArrayTypeRule__Group__1__Impl ;
+    // InternalBaseLanguage.g:3882:1: rule__ArrayTypeRule__Group__1 : rule__ArrayTypeRule__Group__1__Impl ;
     public final void rule__ArrayTypeRule__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:3647:1: ( rule__ArrayTypeRule__Group__1__Impl )
-            // InternalBaseLanguage.g:3648:2: rule__ArrayTypeRule__Group__1__Impl
+            // InternalBaseLanguage.g:3886:1: ( rule__ArrayTypeRule__Group__1__Impl )
+            // InternalBaseLanguage.g:3887:2: rule__ArrayTypeRule__Group__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__ArrayTypeRule__Group__1__Impl();
@@ -11470,21 +12200,21 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__ArrayTypeRule__Group__1__Impl"
-    // InternalBaseLanguage.g:3654:1: rule__ArrayTypeRule__Group__1__Impl : ( ( rule__ArrayTypeRule__ElementsAssignment_1 ) ) ;
+    // InternalBaseLanguage.g:3893:1: rule__ArrayTypeRule__Group__1__Impl : ( ( rule__ArrayTypeRule__ElementsAssignment_1 ) ) ;
     public final void rule__ArrayTypeRule__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:3658:1: ( ( ( rule__ArrayTypeRule__ElementsAssignment_1 ) ) )
-            // InternalBaseLanguage.g:3659:1: ( ( rule__ArrayTypeRule__ElementsAssignment_1 ) )
+            // InternalBaseLanguage.g:3897:1: ( ( ( rule__ArrayTypeRule__ElementsAssignment_1 ) ) )
+            // InternalBaseLanguage.g:3898:1: ( ( rule__ArrayTypeRule__ElementsAssignment_1 ) )
             {
-            // InternalBaseLanguage.g:3659:1: ( ( rule__ArrayTypeRule__ElementsAssignment_1 ) )
-            // InternalBaseLanguage.g:3660:2: ( rule__ArrayTypeRule__ElementsAssignment_1 )
+            // InternalBaseLanguage.g:3898:1: ( ( rule__ArrayTypeRule__ElementsAssignment_1 ) )
+            // InternalBaseLanguage.g:3899:2: ( rule__ArrayTypeRule__ElementsAssignment_1 )
             {
              before(grammarAccess.getArrayTypeRuleAccess().getElementsAssignment_1()); 
-            // InternalBaseLanguage.g:3661:2: ( rule__ArrayTypeRule__ElementsAssignment_1 )
-            // InternalBaseLanguage.g:3661:3: rule__ArrayTypeRule__ElementsAssignment_1
+            // InternalBaseLanguage.g:3900:2: ( rule__ArrayTypeRule__ElementsAssignment_1 )
+            // InternalBaseLanguage.g:3900:3: rule__ArrayTypeRule__ElementsAssignment_1
             {
             pushFollow(FOLLOW_2);
             rule__ArrayTypeRule__ElementsAssignment_1();
@@ -11517,16 +12247,16 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__ParameterRule__Group__0"
-    // InternalBaseLanguage.g:3670:1: rule__ParameterRule__Group__0 : rule__ParameterRule__Group__0__Impl rule__ParameterRule__Group__1 ;
+    // InternalBaseLanguage.g:3909:1: rule__ParameterRule__Group__0 : rule__ParameterRule__Group__0__Impl rule__ParameterRule__Group__1 ;
     public final void rule__ParameterRule__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:3674:1: ( rule__ParameterRule__Group__0__Impl rule__ParameterRule__Group__1 )
-            // InternalBaseLanguage.g:3675:2: rule__ParameterRule__Group__0__Impl rule__ParameterRule__Group__1
+            // InternalBaseLanguage.g:3913:1: ( rule__ParameterRule__Group__0__Impl rule__ParameterRule__Group__1 )
+            // InternalBaseLanguage.g:3914:2: rule__ParameterRule__Group__0__Impl rule__ParameterRule__Group__1
             {
-            pushFollow(FOLLOW_29);
+            pushFollow(FOLLOW_25);
             rule__ParameterRule__Group__0__Impl();
 
             state._fsp--;
@@ -11555,21 +12285,21 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__ParameterRule__Group__0__Impl"
-    // InternalBaseLanguage.g:3682:1: rule__ParameterRule__Group__0__Impl : ( ( rule__ParameterRule__TypeAssignment_0 ) ) ;
+    // InternalBaseLanguage.g:3921:1: rule__ParameterRule__Group__0__Impl : ( ( rule__ParameterRule__TypeAssignment_0 ) ) ;
     public final void rule__ParameterRule__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:3686:1: ( ( ( rule__ParameterRule__TypeAssignment_0 ) ) )
-            // InternalBaseLanguage.g:3687:1: ( ( rule__ParameterRule__TypeAssignment_0 ) )
+            // InternalBaseLanguage.g:3925:1: ( ( ( rule__ParameterRule__TypeAssignment_0 ) ) )
+            // InternalBaseLanguage.g:3926:1: ( ( rule__ParameterRule__TypeAssignment_0 ) )
             {
-            // InternalBaseLanguage.g:3687:1: ( ( rule__ParameterRule__TypeAssignment_0 ) )
-            // InternalBaseLanguage.g:3688:2: ( rule__ParameterRule__TypeAssignment_0 )
+            // InternalBaseLanguage.g:3926:1: ( ( rule__ParameterRule__TypeAssignment_0 ) )
+            // InternalBaseLanguage.g:3927:2: ( rule__ParameterRule__TypeAssignment_0 )
             {
              before(grammarAccess.getParameterRuleAccess().getTypeAssignment_0()); 
-            // InternalBaseLanguage.g:3689:2: ( rule__ParameterRule__TypeAssignment_0 )
-            // InternalBaseLanguage.g:3689:3: rule__ParameterRule__TypeAssignment_0
+            // InternalBaseLanguage.g:3928:2: ( rule__ParameterRule__TypeAssignment_0 )
+            // InternalBaseLanguage.g:3928:3: rule__ParameterRule__TypeAssignment_0
             {
             pushFollow(FOLLOW_2);
             rule__ParameterRule__TypeAssignment_0();
@@ -11602,14 +12332,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__ParameterRule__Group__1"
-    // InternalBaseLanguage.g:3697:1: rule__ParameterRule__Group__1 : rule__ParameterRule__Group__1__Impl ;
+    // InternalBaseLanguage.g:3936:1: rule__ParameterRule__Group__1 : rule__ParameterRule__Group__1__Impl ;
     public final void rule__ParameterRule__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:3701:1: ( rule__ParameterRule__Group__1__Impl )
-            // InternalBaseLanguage.g:3702:2: rule__ParameterRule__Group__1__Impl
+            // InternalBaseLanguage.g:3940:1: ( rule__ParameterRule__Group__1__Impl )
+            // InternalBaseLanguage.g:3941:2: rule__ParameterRule__Group__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__ParameterRule__Group__1__Impl();
@@ -11635,21 +12365,21 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__ParameterRule__Group__1__Impl"
-    // InternalBaseLanguage.g:3708:1: rule__ParameterRule__Group__1__Impl : ( ( rule__ParameterRule__NameAssignment_1 ) ) ;
+    // InternalBaseLanguage.g:3947:1: rule__ParameterRule__Group__1__Impl : ( ( rule__ParameterRule__NameAssignment_1 ) ) ;
     public final void rule__ParameterRule__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:3712:1: ( ( ( rule__ParameterRule__NameAssignment_1 ) ) )
-            // InternalBaseLanguage.g:3713:1: ( ( rule__ParameterRule__NameAssignment_1 ) )
+            // InternalBaseLanguage.g:3951:1: ( ( ( rule__ParameterRule__NameAssignment_1 ) ) )
+            // InternalBaseLanguage.g:3952:1: ( ( rule__ParameterRule__NameAssignment_1 ) )
             {
-            // InternalBaseLanguage.g:3713:1: ( ( rule__ParameterRule__NameAssignment_1 ) )
-            // InternalBaseLanguage.g:3714:2: ( rule__ParameterRule__NameAssignment_1 )
+            // InternalBaseLanguage.g:3952:1: ( ( rule__ParameterRule__NameAssignment_1 ) )
+            // InternalBaseLanguage.g:3953:2: ( rule__ParameterRule__NameAssignment_1 )
             {
              before(grammarAccess.getParameterRuleAccess().getNameAssignment_1()); 
-            // InternalBaseLanguage.g:3715:2: ( rule__ParameterRule__NameAssignment_1 )
-            // InternalBaseLanguage.g:3715:3: rule__ParameterRule__NameAssignment_1
+            // InternalBaseLanguage.g:3954:2: ( rule__ParameterRule__NameAssignment_1 )
+            // InternalBaseLanguage.g:3954:3: rule__ParameterRule__NameAssignment_1
             {
             pushFollow(FOLLOW_2);
             rule__ParameterRule__NameAssignment_1();
@@ -11682,16 +12412,16 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__QualifiedName__Group__0"
-    // InternalBaseLanguage.g:3724:1: rule__QualifiedName__Group__0 : rule__QualifiedName__Group__0__Impl rule__QualifiedName__Group__1 ;
+    // InternalBaseLanguage.g:3963:1: rule__QualifiedName__Group__0 : rule__QualifiedName__Group__0__Impl rule__QualifiedName__Group__1 ;
     public final void rule__QualifiedName__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:3728:1: ( rule__QualifiedName__Group__0__Impl rule__QualifiedName__Group__1 )
-            // InternalBaseLanguage.g:3729:2: rule__QualifiedName__Group__0__Impl rule__QualifiedName__Group__1
+            // InternalBaseLanguage.g:3967:1: ( rule__QualifiedName__Group__0__Impl rule__QualifiedName__Group__1 )
+            // InternalBaseLanguage.g:3968:2: rule__QualifiedName__Group__0__Impl rule__QualifiedName__Group__1
             {
-            pushFollow(FOLLOW_38);
+            pushFollow(FOLLOW_42);
             rule__QualifiedName__Group__0__Impl();
 
             state._fsp--;
@@ -11720,17 +12450,17 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__QualifiedName__Group__0__Impl"
-    // InternalBaseLanguage.g:3736:1: rule__QualifiedName__Group__0__Impl : ( ruleStringOrId ) ;
+    // InternalBaseLanguage.g:3975:1: rule__QualifiedName__Group__0__Impl : ( ruleStringOrId ) ;
     public final void rule__QualifiedName__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:3740:1: ( ( ruleStringOrId ) )
-            // InternalBaseLanguage.g:3741:1: ( ruleStringOrId )
+            // InternalBaseLanguage.g:3979:1: ( ( ruleStringOrId ) )
+            // InternalBaseLanguage.g:3980:1: ( ruleStringOrId )
             {
-            // InternalBaseLanguage.g:3741:1: ( ruleStringOrId )
-            // InternalBaseLanguage.g:3742:2: ruleStringOrId
+            // InternalBaseLanguage.g:3980:1: ( ruleStringOrId )
+            // InternalBaseLanguage.g:3981:2: ruleStringOrId
             {
              before(grammarAccess.getQualifiedNameAccess().getStringOrIdParserRuleCall_0()); 
             pushFollow(FOLLOW_2);
@@ -11761,14 +12491,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__QualifiedName__Group__1"
-    // InternalBaseLanguage.g:3751:1: rule__QualifiedName__Group__1 : rule__QualifiedName__Group__1__Impl ;
+    // InternalBaseLanguage.g:3990:1: rule__QualifiedName__Group__1 : rule__QualifiedName__Group__1__Impl ;
     public final void rule__QualifiedName__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:3755:1: ( rule__QualifiedName__Group__1__Impl )
-            // InternalBaseLanguage.g:3756:2: rule__QualifiedName__Group__1__Impl
+            // InternalBaseLanguage.g:3994:1: ( rule__QualifiedName__Group__1__Impl )
+            // InternalBaseLanguage.g:3995:2: rule__QualifiedName__Group__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__QualifiedName__Group__1__Impl();
@@ -11794,35 +12524,35 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__QualifiedName__Group__1__Impl"
-    // InternalBaseLanguage.g:3762:1: rule__QualifiedName__Group__1__Impl : ( ( rule__QualifiedName__Group_1__0 )* ) ;
+    // InternalBaseLanguage.g:4001:1: rule__QualifiedName__Group__1__Impl : ( ( rule__QualifiedName__Group_1__0 )* ) ;
     public final void rule__QualifiedName__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:3766:1: ( ( ( rule__QualifiedName__Group_1__0 )* ) )
-            // InternalBaseLanguage.g:3767:1: ( ( rule__QualifiedName__Group_1__0 )* )
+            // InternalBaseLanguage.g:4005:1: ( ( ( rule__QualifiedName__Group_1__0 )* ) )
+            // InternalBaseLanguage.g:4006:1: ( ( rule__QualifiedName__Group_1__0 )* )
             {
-            // InternalBaseLanguage.g:3767:1: ( ( rule__QualifiedName__Group_1__0 )* )
-            // InternalBaseLanguage.g:3768:2: ( rule__QualifiedName__Group_1__0 )*
+            // InternalBaseLanguage.g:4006:1: ( ( rule__QualifiedName__Group_1__0 )* )
+            // InternalBaseLanguage.g:4007:2: ( rule__QualifiedName__Group_1__0 )*
             {
              before(grammarAccess.getQualifiedNameAccess().getGroup_1()); 
-            // InternalBaseLanguage.g:3769:2: ( rule__QualifiedName__Group_1__0 )*
-            loop26:
+            // InternalBaseLanguage.g:4008:2: ( rule__QualifiedName__Group_1__0 )*
+            loop29:
             do {
-                int alt26=2;
-                int LA26_0 = input.LA(1);
+                int alt29=2;
+                int LA29_0 = input.LA(1);
 
-                if ( (LA26_0==69) ) {
-                    alt26=1;
+                if ( (LA29_0==72) ) {
+                    alt29=1;
                 }
 
 
-                switch (alt26) {
+                switch (alt29) {
             	case 1 :
-            	    // InternalBaseLanguage.g:3769:3: rule__QualifiedName__Group_1__0
+            	    // InternalBaseLanguage.g:4008:3: rule__QualifiedName__Group_1__0
             	    {
-            	    pushFollow(FOLLOW_39);
+            	    pushFollow(FOLLOW_43);
             	    rule__QualifiedName__Group_1__0();
 
             	    state._fsp--;
@@ -11832,7 +12562,7 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
             	    break;
 
             	default :
-            	    break loop26;
+            	    break loop29;
                 }
             } while (true);
 
@@ -11859,16 +12589,16 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__QualifiedName__Group_1__0"
-    // InternalBaseLanguage.g:3778:1: rule__QualifiedName__Group_1__0 : rule__QualifiedName__Group_1__0__Impl rule__QualifiedName__Group_1__1 ;
+    // InternalBaseLanguage.g:4017:1: rule__QualifiedName__Group_1__0 : rule__QualifiedName__Group_1__0__Impl rule__QualifiedName__Group_1__1 ;
     public final void rule__QualifiedName__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:3782:1: ( rule__QualifiedName__Group_1__0__Impl rule__QualifiedName__Group_1__1 )
-            // InternalBaseLanguage.g:3783:2: rule__QualifiedName__Group_1__0__Impl rule__QualifiedName__Group_1__1
+            // InternalBaseLanguage.g:4021:1: ( rule__QualifiedName__Group_1__0__Impl rule__QualifiedName__Group_1__1 )
+            // InternalBaseLanguage.g:4022:2: rule__QualifiedName__Group_1__0__Impl rule__QualifiedName__Group_1__1
             {
-            pushFollow(FOLLOW_29);
+            pushFollow(FOLLOW_25);
             rule__QualifiedName__Group_1__0__Impl();
 
             state._fsp--;
@@ -11897,20 +12627,20 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__QualifiedName__Group_1__0__Impl"
-    // InternalBaseLanguage.g:3790:1: rule__QualifiedName__Group_1__0__Impl : ( '.' ) ;
+    // InternalBaseLanguage.g:4029:1: rule__QualifiedName__Group_1__0__Impl : ( '.' ) ;
     public final void rule__QualifiedName__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:3794:1: ( ( '.' ) )
-            // InternalBaseLanguage.g:3795:1: ( '.' )
+            // InternalBaseLanguage.g:4033:1: ( ( '.' ) )
+            // InternalBaseLanguage.g:4034:1: ( '.' )
             {
-            // InternalBaseLanguage.g:3795:1: ( '.' )
-            // InternalBaseLanguage.g:3796:2: '.'
+            // InternalBaseLanguage.g:4034:1: ( '.' )
+            // InternalBaseLanguage.g:4035:2: '.'
             {
              before(grammarAccess.getQualifiedNameAccess().getFullStopKeyword_1_0()); 
-            match(input,69,FOLLOW_2); 
+            match(input,72,FOLLOW_2); 
              after(grammarAccess.getQualifiedNameAccess().getFullStopKeyword_1_0()); 
 
             }
@@ -11934,14 +12664,14 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__QualifiedName__Group_1__1"
-    // InternalBaseLanguage.g:3805:1: rule__QualifiedName__Group_1__1 : rule__QualifiedName__Group_1__1__Impl ;
+    // InternalBaseLanguage.g:4044:1: rule__QualifiedName__Group_1__1 : rule__QualifiedName__Group_1__1__Impl ;
     public final void rule__QualifiedName__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:3809:1: ( rule__QualifiedName__Group_1__1__Impl )
-            // InternalBaseLanguage.g:3810:2: rule__QualifiedName__Group_1__1__Impl
+            // InternalBaseLanguage.g:4048:1: ( rule__QualifiedName__Group_1__1__Impl )
+            // InternalBaseLanguage.g:4049:2: rule__QualifiedName__Group_1__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__QualifiedName__Group_1__1__Impl();
@@ -11967,17 +12697,17 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__QualifiedName__Group_1__1__Impl"
-    // InternalBaseLanguage.g:3816:1: rule__QualifiedName__Group_1__1__Impl : ( ruleStringOrId ) ;
+    // InternalBaseLanguage.g:4055:1: rule__QualifiedName__Group_1__1__Impl : ( ruleStringOrId ) ;
     public final void rule__QualifiedName__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:3820:1: ( ( ruleStringOrId ) )
-            // InternalBaseLanguage.g:3821:1: ( ruleStringOrId )
+            // InternalBaseLanguage.g:4059:1: ( ( ruleStringOrId ) )
+            // InternalBaseLanguage.g:4060:1: ( ruleStringOrId )
             {
-            // InternalBaseLanguage.g:3821:1: ( ruleStringOrId )
-            // InternalBaseLanguage.g:3822:2: ruleStringOrId
+            // InternalBaseLanguage.g:4060:1: ( ruleStringOrId )
+            // InternalBaseLanguage.g:4061:2: ruleStringOrId
             {
              before(grammarAccess.getQualifiedNameAccess().getStringOrIdParserRuleCall_1_1()); 
             pushFollow(FOLLOW_2);
@@ -12008,17 +12738,17 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__OrExpressionRule__SubExpressionsAssignment_0"
-    // InternalBaseLanguage.g:3832:1: rule__OrExpressionRule__SubExpressionsAssignment_0 : ( ruleXorExpressionRule ) ;
+    // InternalBaseLanguage.g:4071:1: rule__OrExpressionRule__SubExpressionsAssignment_0 : ( ruleXorExpressionRule ) ;
     public final void rule__OrExpressionRule__SubExpressionsAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:3836:1: ( ( ruleXorExpressionRule ) )
-            // InternalBaseLanguage.g:3837:2: ( ruleXorExpressionRule )
+            // InternalBaseLanguage.g:4075:1: ( ( ruleXorExpressionRule ) )
+            // InternalBaseLanguage.g:4076:2: ( ruleXorExpressionRule )
             {
-            // InternalBaseLanguage.g:3837:2: ( ruleXorExpressionRule )
-            // InternalBaseLanguage.g:3838:3: ruleXorExpressionRule
+            // InternalBaseLanguage.g:4076:2: ( ruleXorExpressionRule )
+            // InternalBaseLanguage.g:4077:3: ruleXorExpressionRule
             {
              before(grammarAccess.getOrExpressionRuleAccess().getSubExpressionsXorExpressionRuleParserRuleCall_0_0()); 
             pushFollow(FOLLOW_2);
@@ -12049,17 +12779,17 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__OrExpressionRule__SubExpressionsAssignment_1_1"
-    // InternalBaseLanguage.g:3847:1: rule__OrExpressionRule__SubExpressionsAssignment_1_1 : ( ruleXorExpressionRule ) ;
+    // InternalBaseLanguage.g:4086:1: rule__OrExpressionRule__SubExpressionsAssignment_1_1 : ( ruleXorExpressionRule ) ;
     public final void rule__OrExpressionRule__SubExpressionsAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:3851:1: ( ( ruleXorExpressionRule ) )
-            // InternalBaseLanguage.g:3852:2: ( ruleXorExpressionRule )
+            // InternalBaseLanguage.g:4090:1: ( ( ruleXorExpressionRule ) )
+            // InternalBaseLanguage.g:4091:2: ( ruleXorExpressionRule )
             {
-            // InternalBaseLanguage.g:3852:2: ( ruleXorExpressionRule )
-            // InternalBaseLanguage.g:3853:3: ruleXorExpressionRule
+            // InternalBaseLanguage.g:4091:2: ( ruleXorExpressionRule )
+            // InternalBaseLanguage.g:4092:3: ruleXorExpressionRule
             {
              before(grammarAccess.getOrExpressionRuleAccess().getSubExpressionsXorExpressionRuleParserRuleCall_1_1_0()); 
             pushFollow(FOLLOW_2);
@@ -12090,17 +12820,17 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__XorExpressionRule__SubExpressionsAssignment_0"
-    // InternalBaseLanguage.g:3862:1: rule__XorExpressionRule__SubExpressionsAssignment_0 : ( ruleAndExpressionRule ) ;
+    // InternalBaseLanguage.g:4101:1: rule__XorExpressionRule__SubExpressionsAssignment_0 : ( ruleAndExpressionRule ) ;
     public final void rule__XorExpressionRule__SubExpressionsAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:3866:1: ( ( ruleAndExpressionRule ) )
-            // InternalBaseLanguage.g:3867:2: ( ruleAndExpressionRule )
+            // InternalBaseLanguage.g:4105:1: ( ( ruleAndExpressionRule ) )
+            // InternalBaseLanguage.g:4106:2: ( ruleAndExpressionRule )
             {
-            // InternalBaseLanguage.g:3867:2: ( ruleAndExpressionRule )
-            // InternalBaseLanguage.g:3868:3: ruleAndExpressionRule
+            // InternalBaseLanguage.g:4106:2: ( ruleAndExpressionRule )
+            // InternalBaseLanguage.g:4107:3: ruleAndExpressionRule
             {
              before(grammarAccess.getXorExpressionRuleAccess().getSubExpressionsAndExpressionRuleParserRuleCall_0_0()); 
             pushFollow(FOLLOW_2);
@@ -12131,17 +12861,17 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__XorExpressionRule__SubExpressionsAssignment_1_1"
-    // InternalBaseLanguage.g:3877:1: rule__XorExpressionRule__SubExpressionsAssignment_1_1 : ( ruleAndExpressionRule ) ;
+    // InternalBaseLanguage.g:4116:1: rule__XorExpressionRule__SubExpressionsAssignment_1_1 : ( ruleAndExpressionRule ) ;
     public final void rule__XorExpressionRule__SubExpressionsAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:3881:1: ( ( ruleAndExpressionRule ) )
-            // InternalBaseLanguage.g:3882:2: ( ruleAndExpressionRule )
+            // InternalBaseLanguage.g:4120:1: ( ( ruleAndExpressionRule ) )
+            // InternalBaseLanguage.g:4121:2: ( ruleAndExpressionRule )
             {
-            // InternalBaseLanguage.g:3882:2: ( ruleAndExpressionRule )
-            // InternalBaseLanguage.g:3883:3: ruleAndExpressionRule
+            // InternalBaseLanguage.g:4121:2: ( ruleAndExpressionRule )
+            // InternalBaseLanguage.g:4122:3: ruleAndExpressionRule
             {
              before(grammarAccess.getXorExpressionRuleAccess().getSubExpressionsAndExpressionRuleParserRuleCall_1_1_0()); 
             pushFollow(FOLLOW_2);
@@ -12172,17 +12902,17 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__AndExpressionRule__SubExpressionsAssignment_0"
-    // InternalBaseLanguage.g:3892:1: rule__AndExpressionRule__SubExpressionsAssignment_0 : ( ruleNotExpressionRule ) ;
+    // InternalBaseLanguage.g:4131:1: rule__AndExpressionRule__SubExpressionsAssignment_0 : ( ruleNotExpressionRule ) ;
     public final void rule__AndExpressionRule__SubExpressionsAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:3896:1: ( ( ruleNotExpressionRule ) )
-            // InternalBaseLanguage.g:3897:2: ( ruleNotExpressionRule )
+            // InternalBaseLanguage.g:4135:1: ( ( ruleNotExpressionRule ) )
+            // InternalBaseLanguage.g:4136:2: ( ruleNotExpressionRule )
             {
-            // InternalBaseLanguage.g:3897:2: ( ruleNotExpressionRule )
-            // InternalBaseLanguage.g:3898:3: ruleNotExpressionRule
+            // InternalBaseLanguage.g:4136:2: ( ruleNotExpressionRule )
+            // InternalBaseLanguage.g:4137:3: ruleNotExpressionRule
             {
              before(grammarAccess.getAndExpressionRuleAccess().getSubExpressionsNotExpressionRuleParserRuleCall_0_0()); 
             pushFollow(FOLLOW_2);
@@ -12213,17 +12943,17 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__AndExpressionRule__SubExpressionsAssignment_1_1"
-    // InternalBaseLanguage.g:3907:1: rule__AndExpressionRule__SubExpressionsAssignment_1_1 : ( ruleNotExpressionRule ) ;
+    // InternalBaseLanguage.g:4146:1: rule__AndExpressionRule__SubExpressionsAssignment_1_1 : ( ruleNotExpressionRule ) ;
     public final void rule__AndExpressionRule__SubExpressionsAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:3911:1: ( ( ruleNotExpressionRule ) )
-            // InternalBaseLanguage.g:3912:2: ( ruleNotExpressionRule )
+            // InternalBaseLanguage.g:4150:1: ( ( ruleNotExpressionRule ) )
+            // InternalBaseLanguage.g:4151:2: ( ruleNotExpressionRule )
             {
-            // InternalBaseLanguage.g:3912:2: ( ruleNotExpressionRule )
-            // InternalBaseLanguage.g:3913:3: ruleNotExpressionRule
+            // InternalBaseLanguage.g:4151:2: ( ruleNotExpressionRule )
+            // InternalBaseLanguage.g:4152:3: ruleNotExpressionRule
             {
              before(grammarAccess.getAndExpressionRuleAccess().getSubExpressionsNotExpressionRuleParserRuleCall_1_1_0()); 
             pushFollow(FOLLOW_2);
@@ -12254,24 +12984,24 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__NotExpressionRule__NegatedAssignment_0"
-    // InternalBaseLanguage.g:3922:1: rule__NotExpressionRule__NegatedAssignment_0 : ( ( '!' ) ) ;
+    // InternalBaseLanguage.g:4161:1: rule__NotExpressionRule__NegatedAssignment_0 : ( ( '!' ) ) ;
     public final void rule__NotExpressionRule__NegatedAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:3926:1: ( ( ( '!' ) ) )
-            // InternalBaseLanguage.g:3927:2: ( ( '!' ) )
+            // InternalBaseLanguage.g:4165:1: ( ( ( '!' ) ) )
+            // InternalBaseLanguage.g:4166:2: ( ( '!' ) )
             {
-            // InternalBaseLanguage.g:3927:2: ( ( '!' ) )
-            // InternalBaseLanguage.g:3928:3: ( '!' )
-            {
-             before(grammarAccess.getNotExpressionRuleAccess().getNegatedExclamationMarkKeyword_0_0()); 
-            // InternalBaseLanguage.g:3929:3: ( '!' )
-            // InternalBaseLanguage.g:3930:4: '!'
+            // InternalBaseLanguage.g:4166:2: ( ( '!' ) )
+            // InternalBaseLanguage.g:4167:3: ( '!' )
             {
              before(grammarAccess.getNotExpressionRuleAccess().getNegatedExclamationMarkKeyword_0_0()); 
-            match(input,70,FOLLOW_2); 
+            // InternalBaseLanguage.g:4168:3: ( '!' )
+            // InternalBaseLanguage.g:4169:4: '!'
+            {
+             before(grammarAccess.getNotExpressionRuleAccess().getNegatedExclamationMarkKeyword_0_0()); 
+            match(input,73,FOLLOW_2); 
              after(grammarAccess.getNotExpressionRuleAccess().getNegatedExclamationMarkKeyword_0_0()); 
 
             }
@@ -12299,17 +13029,17 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__NotExpressionRule__OperandAssignment_1"
-    // InternalBaseLanguage.g:3941:1: rule__NotExpressionRule__OperandAssignment_1 : ( ruleComparisonExpressionRule ) ;
+    // InternalBaseLanguage.g:4180:1: rule__NotExpressionRule__OperandAssignment_1 : ( ruleComparisonExpressionRule ) ;
     public final void rule__NotExpressionRule__OperandAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:3945:1: ( ( ruleComparisonExpressionRule ) )
-            // InternalBaseLanguage.g:3946:2: ( ruleComparisonExpressionRule )
+            // InternalBaseLanguage.g:4184:1: ( ( ruleComparisonExpressionRule ) )
+            // InternalBaseLanguage.g:4185:2: ( ruleComparisonExpressionRule )
             {
-            // InternalBaseLanguage.g:3946:2: ( ruleComparisonExpressionRule )
-            // InternalBaseLanguage.g:3947:3: ruleComparisonExpressionRule
+            // InternalBaseLanguage.g:4185:2: ( ruleComparisonExpressionRule )
+            // InternalBaseLanguage.g:4186:3: ruleComparisonExpressionRule
             {
              before(grammarAccess.getNotExpressionRuleAccess().getOperandComparisonExpressionRuleParserRuleCall_1_0()); 
             pushFollow(FOLLOW_2);
@@ -12340,17 +13070,17 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__ComparisonExpressionRule__LeftOperandAssignment_0"
-    // InternalBaseLanguage.g:3956:1: rule__ComparisonExpressionRule__LeftOperandAssignment_0 : ( ruleAddOrSubtractExpressionRule ) ;
+    // InternalBaseLanguage.g:4195:1: rule__ComparisonExpressionRule__LeftOperandAssignment_0 : ( ruleAddOrSubtractExpressionRule ) ;
     public final void rule__ComparisonExpressionRule__LeftOperandAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:3960:1: ( ( ruleAddOrSubtractExpressionRule ) )
-            // InternalBaseLanguage.g:3961:2: ( ruleAddOrSubtractExpressionRule )
+            // InternalBaseLanguage.g:4199:1: ( ( ruleAddOrSubtractExpressionRule ) )
+            // InternalBaseLanguage.g:4200:2: ( ruleAddOrSubtractExpressionRule )
             {
-            // InternalBaseLanguage.g:3961:2: ( ruleAddOrSubtractExpressionRule )
-            // InternalBaseLanguage.g:3962:3: ruleAddOrSubtractExpressionRule
+            // InternalBaseLanguage.g:4200:2: ( ruleAddOrSubtractExpressionRule )
+            // InternalBaseLanguage.g:4201:3: ruleAddOrSubtractExpressionRule
             {
              before(grammarAccess.getComparisonExpressionRuleAccess().getLeftOperandAddOrSubtractExpressionRuleParserRuleCall_0_0()); 
             pushFollow(FOLLOW_2);
@@ -12381,17 +13111,17 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__ComparisonExpressionRule__ComparisonAssignment_1"
-    // InternalBaseLanguage.g:3971:1: rule__ComparisonExpressionRule__ComparisonAssignment_1 : ( rulePartialComparisonExpressionRule ) ;
+    // InternalBaseLanguage.g:4210:1: rule__ComparisonExpressionRule__ComparisonAssignment_1 : ( rulePartialComparisonExpressionRule ) ;
     public final void rule__ComparisonExpressionRule__ComparisonAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:3975:1: ( ( rulePartialComparisonExpressionRule ) )
-            // InternalBaseLanguage.g:3976:2: ( rulePartialComparisonExpressionRule )
+            // InternalBaseLanguage.g:4214:1: ( ( rulePartialComparisonExpressionRule ) )
+            // InternalBaseLanguage.g:4215:2: ( rulePartialComparisonExpressionRule )
             {
-            // InternalBaseLanguage.g:3976:2: ( rulePartialComparisonExpressionRule )
-            // InternalBaseLanguage.g:3977:3: rulePartialComparisonExpressionRule
+            // InternalBaseLanguage.g:4215:2: ( rulePartialComparisonExpressionRule )
+            // InternalBaseLanguage.g:4216:3: rulePartialComparisonExpressionRule
             {
              before(grammarAccess.getComparisonExpressionRuleAccess().getComparisonPartialComparisonExpressionRuleParserRuleCall_1_0()); 
             pushFollow(FOLLOW_2);
@@ -12422,17 +13152,17 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__PartialComparisonExpressionRule__OperatorAssignment_0"
-    // InternalBaseLanguage.g:3986:1: rule__PartialComparisonExpressionRule__OperatorAssignment_0 : ( ruleComparisonOperatorRule ) ;
+    // InternalBaseLanguage.g:4225:1: rule__PartialComparisonExpressionRule__OperatorAssignment_0 : ( ruleComparisonOperatorRule ) ;
     public final void rule__PartialComparisonExpressionRule__OperatorAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:3990:1: ( ( ruleComparisonOperatorRule ) )
-            // InternalBaseLanguage.g:3991:2: ( ruleComparisonOperatorRule )
+            // InternalBaseLanguage.g:4229:1: ( ( ruleComparisonOperatorRule ) )
+            // InternalBaseLanguage.g:4230:2: ( ruleComparisonOperatorRule )
             {
-            // InternalBaseLanguage.g:3991:2: ( ruleComparisonOperatorRule )
-            // InternalBaseLanguage.g:3992:3: ruleComparisonOperatorRule
+            // InternalBaseLanguage.g:4230:2: ( ruleComparisonOperatorRule )
+            // InternalBaseLanguage.g:4231:3: ruleComparisonOperatorRule
             {
              before(grammarAccess.getPartialComparisonExpressionRuleAccess().getOperatorComparisonOperatorRuleEnumRuleCall_0_0()); 
             pushFollow(FOLLOW_2);
@@ -12463,17 +13193,17 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__PartialComparisonExpressionRule__SubExpressionAssignment_1"
-    // InternalBaseLanguage.g:4001:1: rule__PartialComparisonExpressionRule__SubExpressionAssignment_1 : ( ruleAddOrSubtractExpressionRule ) ;
+    // InternalBaseLanguage.g:4240:1: rule__PartialComparisonExpressionRule__SubExpressionAssignment_1 : ( ruleAddOrSubtractExpressionRule ) ;
     public final void rule__PartialComparisonExpressionRule__SubExpressionAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:4005:1: ( ( ruleAddOrSubtractExpressionRule ) )
-            // InternalBaseLanguage.g:4006:2: ( ruleAddOrSubtractExpressionRule )
+            // InternalBaseLanguage.g:4244:1: ( ( ruleAddOrSubtractExpressionRule ) )
+            // InternalBaseLanguage.g:4245:2: ( ruleAddOrSubtractExpressionRule )
             {
-            // InternalBaseLanguage.g:4006:2: ( ruleAddOrSubtractExpressionRule )
-            // InternalBaseLanguage.g:4007:3: ruleAddOrSubtractExpressionRule
+            // InternalBaseLanguage.g:4245:2: ( ruleAddOrSubtractExpressionRule )
+            // InternalBaseLanguage.g:4246:3: ruleAddOrSubtractExpressionRule
             {
              before(grammarAccess.getPartialComparisonExpressionRuleAccess().getSubExpressionAddOrSubtractExpressionRuleParserRuleCall_1_0()); 
             pushFollow(FOLLOW_2);
@@ -12504,17 +13234,17 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__AddOrSubtractExpressionRule__LeftOperandAssignment_0"
-    // InternalBaseLanguage.g:4016:1: rule__AddOrSubtractExpressionRule__LeftOperandAssignment_0 : ( ruleMultiplyDivideModuloExpressionRule ) ;
+    // InternalBaseLanguage.g:4255:1: rule__AddOrSubtractExpressionRule__LeftOperandAssignment_0 : ( ruleMultiplyDivideModuloExpressionRule ) ;
     public final void rule__AddOrSubtractExpressionRule__LeftOperandAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:4020:1: ( ( ruleMultiplyDivideModuloExpressionRule ) )
-            // InternalBaseLanguage.g:4021:2: ( ruleMultiplyDivideModuloExpressionRule )
+            // InternalBaseLanguage.g:4259:1: ( ( ruleMultiplyDivideModuloExpressionRule ) )
+            // InternalBaseLanguage.g:4260:2: ( ruleMultiplyDivideModuloExpressionRule )
             {
-            // InternalBaseLanguage.g:4021:2: ( ruleMultiplyDivideModuloExpressionRule )
-            // InternalBaseLanguage.g:4022:3: ruleMultiplyDivideModuloExpressionRule
+            // InternalBaseLanguage.g:4260:2: ( ruleMultiplyDivideModuloExpressionRule )
+            // InternalBaseLanguage.g:4261:3: ruleMultiplyDivideModuloExpressionRule
             {
              before(grammarAccess.getAddOrSubtractExpressionRuleAccess().getLeftOperandMultiplyDivideModuloExpressionRuleParserRuleCall_0_0()); 
             pushFollow(FOLLOW_2);
@@ -12545,17 +13275,17 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__AddOrSubtractExpressionRule__OperatorsAssignment_1_0"
-    // InternalBaseLanguage.g:4031:1: rule__AddOrSubtractExpressionRule__OperatorsAssignment_1_0 : ( ruleAddOrSubtractOperatorRule ) ;
+    // InternalBaseLanguage.g:4270:1: rule__AddOrSubtractExpressionRule__OperatorsAssignment_1_0 : ( ruleAddOrSubtractOperatorRule ) ;
     public final void rule__AddOrSubtractExpressionRule__OperatorsAssignment_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:4035:1: ( ( ruleAddOrSubtractOperatorRule ) )
-            // InternalBaseLanguage.g:4036:2: ( ruleAddOrSubtractOperatorRule )
+            // InternalBaseLanguage.g:4274:1: ( ( ruleAddOrSubtractOperatorRule ) )
+            // InternalBaseLanguage.g:4275:2: ( ruleAddOrSubtractOperatorRule )
             {
-            // InternalBaseLanguage.g:4036:2: ( ruleAddOrSubtractOperatorRule )
-            // InternalBaseLanguage.g:4037:3: ruleAddOrSubtractOperatorRule
+            // InternalBaseLanguage.g:4275:2: ( ruleAddOrSubtractOperatorRule )
+            // InternalBaseLanguage.g:4276:3: ruleAddOrSubtractOperatorRule
             {
              before(grammarAccess.getAddOrSubtractExpressionRuleAccess().getOperatorsAddOrSubtractOperatorRuleEnumRuleCall_1_0_0()); 
             pushFollow(FOLLOW_2);
@@ -12586,17 +13316,17 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__AddOrSubtractExpressionRule__OperandsAssignment_1_1"
-    // InternalBaseLanguage.g:4046:1: rule__AddOrSubtractExpressionRule__OperandsAssignment_1_1 : ( ruleMultiplyDivideModuloExpressionRule ) ;
+    // InternalBaseLanguage.g:4285:1: rule__AddOrSubtractExpressionRule__OperandsAssignment_1_1 : ( ruleMultiplyDivideModuloExpressionRule ) ;
     public final void rule__AddOrSubtractExpressionRule__OperandsAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:4050:1: ( ( ruleMultiplyDivideModuloExpressionRule ) )
-            // InternalBaseLanguage.g:4051:2: ( ruleMultiplyDivideModuloExpressionRule )
+            // InternalBaseLanguage.g:4289:1: ( ( ruleMultiplyDivideModuloExpressionRule ) )
+            // InternalBaseLanguage.g:4290:2: ( ruleMultiplyDivideModuloExpressionRule )
             {
-            // InternalBaseLanguage.g:4051:2: ( ruleMultiplyDivideModuloExpressionRule )
-            // InternalBaseLanguage.g:4052:3: ruleMultiplyDivideModuloExpressionRule
+            // InternalBaseLanguage.g:4290:2: ( ruleMultiplyDivideModuloExpressionRule )
+            // InternalBaseLanguage.g:4291:3: ruleMultiplyDivideModuloExpressionRule
             {
              before(grammarAccess.getAddOrSubtractExpressionRuleAccess().getOperandsMultiplyDivideModuloExpressionRuleParserRuleCall_1_1_0()); 
             pushFollow(FOLLOW_2);
@@ -12627,17 +13357,17 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__MultiplyDivideModuloExpressionRule__LeftOperandAssignment_0"
-    // InternalBaseLanguage.g:4061:1: rule__MultiplyDivideModuloExpressionRule__LeftOperandAssignment_0 : ( rulePowerOfExpressionRule ) ;
+    // InternalBaseLanguage.g:4300:1: rule__MultiplyDivideModuloExpressionRule__LeftOperandAssignment_0 : ( rulePowerOfExpressionRule ) ;
     public final void rule__MultiplyDivideModuloExpressionRule__LeftOperandAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:4065:1: ( ( rulePowerOfExpressionRule ) )
-            // InternalBaseLanguage.g:4066:2: ( rulePowerOfExpressionRule )
+            // InternalBaseLanguage.g:4304:1: ( ( rulePowerOfExpressionRule ) )
+            // InternalBaseLanguage.g:4305:2: ( rulePowerOfExpressionRule )
             {
-            // InternalBaseLanguage.g:4066:2: ( rulePowerOfExpressionRule )
-            // InternalBaseLanguage.g:4067:3: rulePowerOfExpressionRule
+            // InternalBaseLanguage.g:4305:2: ( rulePowerOfExpressionRule )
+            // InternalBaseLanguage.g:4306:3: rulePowerOfExpressionRule
             {
              before(grammarAccess.getMultiplyDivideModuloExpressionRuleAccess().getLeftOperandPowerOfExpressionRuleParserRuleCall_0_0()); 
             pushFollow(FOLLOW_2);
@@ -12668,17 +13398,17 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__MultiplyDivideModuloExpressionRule__OperatorsAssignment_1_0"
-    // InternalBaseLanguage.g:4076:1: rule__MultiplyDivideModuloExpressionRule__OperatorsAssignment_1_0 : ( ruleMultiplyDivideModuloOperatorRule ) ;
+    // InternalBaseLanguage.g:4315:1: rule__MultiplyDivideModuloExpressionRule__OperatorsAssignment_1_0 : ( ruleMultiplyDivideModuloOperatorRule ) ;
     public final void rule__MultiplyDivideModuloExpressionRule__OperatorsAssignment_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:4080:1: ( ( ruleMultiplyDivideModuloOperatorRule ) )
-            // InternalBaseLanguage.g:4081:2: ( ruleMultiplyDivideModuloOperatorRule )
+            // InternalBaseLanguage.g:4319:1: ( ( ruleMultiplyDivideModuloOperatorRule ) )
+            // InternalBaseLanguage.g:4320:2: ( ruleMultiplyDivideModuloOperatorRule )
             {
-            // InternalBaseLanguage.g:4081:2: ( ruleMultiplyDivideModuloOperatorRule )
-            // InternalBaseLanguage.g:4082:3: ruleMultiplyDivideModuloOperatorRule
+            // InternalBaseLanguage.g:4320:2: ( ruleMultiplyDivideModuloOperatorRule )
+            // InternalBaseLanguage.g:4321:3: ruleMultiplyDivideModuloOperatorRule
             {
              before(grammarAccess.getMultiplyDivideModuloExpressionRuleAccess().getOperatorsMultiplyDivideModuloOperatorRuleEnumRuleCall_1_0_0()); 
             pushFollow(FOLLOW_2);
@@ -12709,17 +13439,17 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__MultiplyDivideModuloExpressionRule__OperandsAssignment_1_1"
-    // InternalBaseLanguage.g:4091:1: rule__MultiplyDivideModuloExpressionRule__OperandsAssignment_1_1 : ( rulePowerOfExpressionRule ) ;
+    // InternalBaseLanguage.g:4330:1: rule__MultiplyDivideModuloExpressionRule__OperandsAssignment_1_1 : ( rulePowerOfExpressionRule ) ;
     public final void rule__MultiplyDivideModuloExpressionRule__OperandsAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:4095:1: ( ( rulePowerOfExpressionRule ) )
-            // InternalBaseLanguage.g:4096:2: ( rulePowerOfExpressionRule )
+            // InternalBaseLanguage.g:4334:1: ( ( rulePowerOfExpressionRule ) )
+            // InternalBaseLanguage.g:4335:2: ( rulePowerOfExpressionRule )
             {
-            // InternalBaseLanguage.g:4096:2: ( rulePowerOfExpressionRule )
-            // InternalBaseLanguage.g:4097:3: rulePowerOfExpressionRule
+            // InternalBaseLanguage.g:4335:2: ( rulePowerOfExpressionRule )
+            // InternalBaseLanguage.g:4336:3: rulePowerOfExpressionRule
             {
              before(grammarAccess.getMultiplyDivideModuloExpressionRuleAccess().getOperandsPowerOfExpressionRuleParserRuleCall_1_1_0()); 
             pushFollow(FOLLOW_2);
@@ -12750,17 +13480,17 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__PowerOfExpressionRule__LeftOperandAssignment_0"
-    // InternalBaseLanguage.g:4106:1: rule__PowerOfExpressionRule__LeftOperandAssignment_0 : ( ruleUnaryAddOrSubtractExpressionRule ) ;
+    // InternalBaseLanguage.g:4345:1: rule__PowerOfExpressionRule__LeftOperandAssignment_0 : ( ruleUnaryAddOrSubtractExpressionRule ) ;
     public final void rule__PowerOfExpressionRule__LeftOperandAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:4110:1: ( ( ruleUnaryAddOrSubtractExpressionRule ) )
-            // InternalBaseLanguage.g:4111:2: ( ruleUnaryAddOrSubtractExpressionRule )
+            // InternalBaseLanguage.g:4349:1: ( ( ruleUnaryAddOrSubtractExpressionRule ) )
+            // InternalBaseLanguage.g:4350:2: ( ruleUnaryAddOrSubtractExpressionRule )
             {
-            // InternalBaseLanguage.g:4111:2: ( ruleUnaryAddOrSubtractExpressionRule )
-            // InternalBaseLanguage.g:4112:3: ruleUnaryAddOrSubtractExpressionRule
+            // InternalBaseLanguage.g:4350:2: ( ruleUnaryAddOrSubtractExpressionRule )
+            // InternalBaseLanguage.g:4351:3: ruleUnaryAddOrSubtractExpressionRule
             {
              before(grammarAccess.getPowerOfExpressionRuleAccess().getLeftOperandUnaryAddOrSubtractExpressionRuleParserRuleCall_0_0()); 
             pushFollow(FOLLOW_2);
@@ -12791,17 +13521,17 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__PowerOfExpressionRule__RightOperandAssignment_1_1"
-    // InternalBaseLanguage.g:4121:1: rule__PowerOfExpressionRule__RightOperandAssignment_1_1 : ( rulePowerOfExpressionRule ) ;
+    // InternalBaseLanguage.g:4360:1: rule__PowerOfExpressionRule__RightOperandAssignment_1_1 : ( rulePowerOfExpressionRule ) ;
     public final void rule__PowerOfExpressionRule__RightOperandAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:4125:1: ( ( rulePowerOfExpressionRule ) )
-            // InternalBaseLanguage.g:4126:2: ( rulePowerOfExpressionRule )
+            // InternalBaseLanguage.g:4364:1: ( ( rulePowerOfExpressionRule ) )
+            // InternalBaseLanguage.g:4365:2: ( rulePowerOfExpressionRule )
             {
-            // InternalBaseLanguage.g:4126:2: ( rulePowerOfExpressionRule )
-            // InternalBaseLanguage.g:4127:3: rulePowerOfExpressionRule
+            // InternalBaseLanguage.g:4365:2: ( rulePowerOfExpressionRule )
+            // InternalBaseLanguage.g:4366:3: rulePowerOfExpressionRule
             {
              before(grammarAccess.getPowerOfExpressionRuleAccess().getRightOperandPowerOfExpressionRuleParserRuleCall_1_1_0()); 
             pushFollow(FOLLOW_2);
@@ -12832,17 +13562,17 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__UnaryAddOrSubtractExpressionRule__OperatorsAssignment_0"
-    // InternalBaseLanguage.g:4136:1: rule__UnaryAddOrSubtractExpressionRule__OperatorsAssignment_0 : ( ruleAddOrSubtractOperatorRule ) ;
+    // InternalBaseLanguage.g:4375:1: rule__UnaryAddOrSubtractExpressionRule__OperatorsAssignment_0 : ( ruleAddOrSubtractOperatorRule ) ;
     public final void rule__UnaryAddOrSubtractExpressionRule__OperatorsAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:4140:1: ( ( ruleAddOrSubtractOperatorRule ) )
-            // InternalBaseLanguage.g:4141:2: ( ruleAddOrSubtractOperatorRule )
+            // InternalBaseLanguage.g:4379:1: ( ( ruleAddOrSubtractOperatorRule ) )
+            // InternalBaseLanguage.g:4380:2: ( ruleAddOrSubtractOperatorRule )
             {
-            // InternalBaseLanguage.g:4141:2: ( ruleAddOrSubtractOperatorRule )
-            // InternalBaseLanguage.g:4142:3: ruleAddOrSubtractOperatorRule
+            // InternalBaseLanguage.g:4380:2: ( ruleAddOrSubtractOperatorRule )
+            // InternalBaseLanguage.g:4381:3: ruleAddOrSubtractOperatorRule
             {
              before(grammarAccess.getUnaryAddOrSubtractExpressionRuleAccess().getOperatorsAddOrSubtractOperatorRuleEnumRuleCall_0_0()); 
             pushFollow(FOLLOW_2);
@@ -12873,17 +13603,17 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__UnaryAddOrSubtractExpressionRule__SubExpressionAssignment_1"
-    // InternalBaseLanguage.g:4151:1: rule__UnaryAddOrSubtractExpressionRule__SubExpressionAssignment_1 : ( ruleLiteralOrReferenceRule ) ;
+    // InternalBaseLanguage.g:4390:1: rule__UnaryAddOrSubtractExpressionRule__SubExpressionAssignment_1 : ( ruleLiteralOrReferenceRule ) ;
     public final void rule__UnaryAddOrSubtractExpressionRule__SubExpressionAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:4155:1: ( ( ruleLiteralOrReferenceRule ) )
-            // InternalBaseLanguage.g:4156:2: ( ruleLiteralOrReferenceRule )
+            // InternalBaseLanguage.g:4394:1: ( ( ruleLiteralOrReferenceRule ) )
+            // InternalBaseLanguage.g:4395:2: ( ruleLiteralOrReferenceRule )
             {
-            // InternalBaseLanguage.g:4156:2: ( ruleLiteralOrReferenceRule )
-            // InternalBaseLanguage.g:4157:3: ruleLiteralOrReferenceRule
+            // InternalBaseLanguage.g:4395:2: ( ruleLiteralOrReferenceRule )
+            // InternalBaseLanguage.g:4396:3: ruleLiteralOrReferenceRule
             {
              before(grammarAccess.getUnaryAddOrSubtractExpressionRuleAccess().getSubExpressionLiteralOrReferenceRuleParserRuleCall_1_0()); 
             pushFollow(FOLLOW_2);
@@ -12914,17 +13644,17 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__ParanthesesRule__SubExpressionAssignment_1"
-    // InternalBaseLanguage.g:4166:1: rule__ParanthesesRule__SubExpressionAssignment_1 : ( ruleExpressionRule ) ;
+    // InternalBaseLanguage.g:4405:1: rule__ParanthesesRule__SubExpressionAssignment_1 : ( ruleExpressionRule ) ;
     public final void rule__ParanthesesRule__SubExpressionAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:4170:1: ( ( ruleExpressionRule ) )
-            // InternalBaseLanguage.g:4171:2: ( ruleExpressionRule )
+            // InternalBaseLanguage.g:4409:1: ( ( ruleExpressionRule ) )
+            // InternalBaseLanguage.g:4410:2: ( ruleExpressionRule )
             {
-            // InternalBaseLanguage.g:4171:2: ( ruleExpressionRule )
-            // InternalBaseLanguage.g:4172:3: ruleExpressionRule
+            // InternalBaseLanguage.g:4410:2: ( ruleExpressionRule )
+            // InternalBaseLanguage.g:4411:3: ruleExpressionRule
             {
              before(grammarAccess.getParanthesesRuleAccess().getSubExpressionExpressionRuleParserRuleCall_1_0()); 
             pushFollow(FOLLOW_2);
@@ -12955,17 +13685,17 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__CallRule__FunctionAssignment_0"
-    // InternalBaseLanguage.g:4181:1: rule__CallRule__FunctionAssignment_0 : ( ruleFunctionNameRule ) ;
+    // InternalBaseLanguage.g:4420:1: rule__CallRule__FunctionAssignment_0 : ( ruleFunctionNameRule ) ;
     public final void rule__CallRule__FunctionAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:4185:1: ( ( ruleFunctionNameRule ) )
-            // InternalBaseLanguage.g:4186:2: ( ruleFunctionNameRule )
+            // InternalBaseLanguage.g:4424:1: ( ( ruleFunctionNameRule ) )
+            // InternalBaseLanguage.g:4425:2: ( ruleFunctionNameRule )
             {
-            // InternalBaseLanguage.g:4186:2: ( ruleFunctionNameRule )
-            // InternalBaseLanguage.g:4187:3: ruleFunctionNameRule
+            // InternalBaseLanguage.g:4425:2: ( ruleFunctionNameRule )
+            // InternalBaseLanguage.g:4426:3: ruleFunctionNameRule
             {
              before(grammarAccess.getCallRuleAccess().getFunctionFunctionNameRuleParserRuleCall_0_0()); 
             pushFollow(FOLLOW_2);
@@ -12996,17 +13726,17 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__CallRule__ParametersAssignment_2_0"
-    // InternalBaseLanguage.g:4196:1: rule__CallRule__ParametersAssignment_2_0 : ( ruleExpressionRule ) ;
+    // InternalBaseLanguage.g:4435:1: rule__CallRule__ParametersAssignment_2_0 : ( ruleExpressionRule ) ;
     public final void rule__CallRule__ParametersAssignment_2_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:4200:1: ( ( ruleExpressionRule ) )
-            // InternalBaseLanguage.g:4201:2: ( ruleExpressionRule )
+            // InternalBaseLanguage.g:4439:1: ( ( ruleExpressionRule ) )
+            // InternalBaseLanguage.g:4440:2: ( ruleExpressionRule )
             {
-            // InternalBaseLanguage.g:4201:2: ( ruleExpressionRule )
-            // InternalBaseLanguage.g:4202:3: ruleExpressionRule
+            // InternalBaseLanguage.g:4440:2: ( ruleExpressionRule )
+            // InternalBaseLanguage.g:4441:3: ruleExpressionRule
             {
              before(grammarAccess.getCallRuleAccess().getParametersExpressionRuleParserRuleCall_2_0_0()); 
             pushFollow(FOLLOW_2);
@@ -13037,17 +13767,17 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__CallRule__ParametersAssignment_2_1_1"
-    // InternalBaseLanguage.g:4211:1: rule__CallRule__ParametersAssignment_2_1_1 : ( ruleExpressionRule ) ;
+    // InternalBaseLanguage.g:4450:1: rule__CallRule__ParametersAssignment_2_1_1 : ( ruleExpressionRule ) ;
     public final void rule__CallRule__ParametersAssignment_2_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:4215:1: ( ( ruleExpressionRule ) )
-            // InternalBaseLanguage.g:4216:2: ( ruleExpressionRule )
+            // InternalBaseLanguage.g:4454:1: ( ( ruleExpressionRule ) )
+            // InternalBaseLanguage.g:4455:2: ( ruleExpressionRule )
             {
-            // InternalBaseLanguage.g:4216:2: ( ruleExpressionRule )
-            // InternalBaseLanguage.g:4217:3: ruleExpressionRule
+            // InternalBaseLanguage.g:4455:2: ( ruleExpressionRule )
+            // InternalBaseLanguage.g:4456:3: ruleExpressionRule
             {
              before(grammarAccess.getCallRuleAccess().getParametersExpressionRuleParserRuleCall_2_1_1_0()); 
             pushFollow(FOLLOW_2);
@@ -13077,18 +13807,67 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
     // $ANTLR end "rule__CallRule__ParametersAssignment_2_1_1"
 
 
+    // $ANTLR start "rule__ConstantReferenceRule__DefinitionAssignment"
+    // InternalBaseLanguage.g:4465:1: rule__ConstantReferenceRule__DefinitionAssignment : ( ( ruleQualifiedName ) ) ;
+    public final void rule__ConstantReferenceRule__DefinitionAssignment() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalBaseLanguage.g:4469:1: ( ( ( ruleQualifiedName ) ) )
+            // InternalBaseLanguage.g:4470:2: ( ( ruleQualifiedName ) )
+            {
+            // InternalBaseLanguage.g:4470:2: ( ( ruleQualifiedName ) )
+            // InternalBaseLanguage.g:4471:3: ( ruleQualifiedName )
+            {
+             before(grammarAccess.getConstantReferenceRuleAccess().getDefinitionConstantDefinitionCrossReference_0()); 
+            // InternalBaseLanguage.g:4472:3: ( ruleQualifiedName )
+            // InternalBaseLanguage.g:4473:4: ruleQualifiedName
+            {
+             before(grammarAccess.getConstantReferenceRuleAccess().getDefinitionConstantDefinitionQualifiedNameParserRuleCall_0_1()); 
+            pushFollow(FOLLOW_2);
+            ruleQualifiedName();
+
+            state._fsp--;
+
+             after(grammarAccess.getConstantReferenceRuleAccess().getDefinitionConstantDefinitionQualifiedNameParserRuleCall_0_1()); 
+
+            }
+
+             after(grammarAccess.getConstantReferenceRuleAccess().getDefinitionConstantDefinitionCrossReference_0()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__ConstantReferenceRule__DefinitionAssignment"
+
+
     // $ANTLR start "rule__DoubleLiteralRule__LiteralAssignment_0"
-    // InternalBaseLanguage.g:4226:1: rule__DoubleLiteralRule__LiteralAssignment_0 : ( RULE_DOUBLE ) ;
+    // InternalBaseLanguage.g:4484:1: rule__DoubleLiteralRule__LiteralAssignment_0 : ( RULE_DOUBLE ) ;
     public final void rule__DoubleLiteralRule__LiteralAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:4230:1: ( ( RULE_DOUBLE ) )
-            // InternalBaseLanguage.g:4231:2: ( RULE_DOUBLE )
+            // InternalBaseLanguage.g:4488:1: ( ( RULE_DOUBLE ) )
+            // InternalBaseLanguage.g:4489:2: ( RULE_DOUBLE )
             {
-            // InternalBaseLanguage.g:4231:2: ( RULE_DOUBLE )
-            // InternalBaseLanguage.g:4232:3: RULE_DOUBLE
+            // InternalBaseLanguage.g:4489:2: ( RULE_DOUBLE )
+            // InternalBaseLanguage.g:4490:3: RULE_DOUBLE
             {
              before(grammarAccess.getDoubleLiteralRuleAccess().getLiteralDOUBLETerminalRuleCall_0_0()); 
             match(input,RULE_DOUBLE,FOLLOW_2); 
@@ -13115,17 +13894,17 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__DoubleLiteralRule__FactorAssignment_1"
-    // InternalBaseLanguage.g:4241:1: rule__DoubleLiteralRule__FactorAssignment_1 : ( ruleFactorRule ) ;
+    // InternalBaseLanguage.g:4499:1: rule__DoubleLiteralRule__FactorAssignment_1 : ( ruleFactorRule ) ;
     public final void rule__DoubleLiteralRule__FactorAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:4245:1: ( ( ruleFactorRule ) )
-            // InternalBaseLanguage.g:4246:2: ( ruleFactorRule )
+            // InternalBaseLanguage.g:4503:1: ( ( ruleFactorRule ) )
+            // InternalBaseLanguage.g:4504:2: ( ruleFactorRule )
             {
-            // InternalBaseLanguage.g:4246:2: ( ruleFactorRule )
-            // InternalBaseLanguage.g:4247:3: ruleFactorRule
+            // InternalBaseLanguage.g:4504:2: ( ruleFactorRule )
+            // InternalBaseLanguage.g:4505:3: ruleFactorRule
             {
              before(grammarAccess.getDoubleLiteralRuleAccess().getFactorFactorRuleEnumRuleCall_1_0()); 
             pushFollow(FOLLOW_2);
@@ -13156,17 +13935,17 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__IntegerLiteralRule__LiteralAssignment_0"
-    // InternalBaseLanguage.g:4256:1: rule__IntegerLiteralRule__LiteralAssignment_0 : ( RULE_INT ) ;
+    // InternalBaseLanguage.g:4514:1: rule__IntegerLiteralRule__LiteralAssignment_0 : ( RULE_INT ) ;
     public final void rule__IntegerLiteralRule__LiteralAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:4260:1: ( ( RULE_INT ) )
-            // InternalBaseLanguage.g:4261:2: ( RULE_INT )
+            // InternalBaseLanguage.g:4518:1: ( ( RULE_INT ) )
+            // InternalBaseLanguage.g:4519:2: ( RULE_INT )
             {
-            // InternalBaseLanguage.g:4261:2: ( RULE_INT )
-            // InternalBaseLanguage.g:4262:3: RULE_INT
+            // InternalBaseLanguage.g:4519:2: ( RULE_INT )
+            // InternalBaseLanguage.g:4520:3: RULE_INT
             {
              before(grammarAccess.getIntegerLiteralRuleAccess().getLiteralINTTerminalRuleCall_0_0()); 
             match(input,RULE_INT,FOLLOW_2); 
@@ -13193,17 +13972,17 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__IntegerLiteralRule__FactorAssignment_1"
-    // InternalBaseLanguage.g:4271:1: rule__IntegerLiteralRule__FactorAssignment_1 : ( ruleFactorRule ) ;
+    // InternalBaseLanguage.g:4529:1: rule__IntegerLiteralRule__FactorAssignment_1 : ( ruleFactorRule ) ;
     public final void rule__IntegerLiteralRule__FactorAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:4275:1: ( ( ruleFactorRule ) )
-            // InternalBaseLanguage.g:4276:2: ( ruleFactorRule )
+            // InternalBaseLanguage.g:4533:1: ( ( ruleFactorRule ) )
+            // InternalBaseLanguage.g:4534:2: ( ruleFactorRule )
             {
-            // InternalBaseLanguage.g:4276:2: ( ruleFactorRule )
-            // InternalBaseLanguage.g:4277:3: ruleFactorRule
+            // InternalBaseLanguage.g:4534:2: ( ruleFactorRule )
+            // InternalBaseLanguage.g:4535:3: ruleFactorRule
             {
              before(grammarAccess.getIntegerLiteralRuleAccess().getFactorFactorRuleEnumRuleCall_1_0()); 
             pushFollow(FOLLOW_2);
@@ -13234,17 +14013,17 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__StringLiteralRule__ValueAssignment"
-    // InternalBaseLanguage.g:4286:1: rule__StringLiteralRule__ValueAssignment : ( RULE_STRING ) ;
+    // InternalBaseLanguage.g:4544:1: rule__StringLiteralRule__ValueAssignment : ( RULE_STRING ) ;
     public final void rule__StringLiteralRule__ValueAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:4290:1: ( ( RULE_STRING ) )
-            // InternalBaseLanguage.g:4291:2: ( RULE_STRING )
+            // InternalBaseLanguage.g:4548:1: ( ( RULE_STRING ) )
+            // InternalBaseLanguage.g:4549:2: ( RULE_STRING )
             {
-            // InternalBaseLanguage.g:4291:2: ( RULE_STRING )
-            // InternalBaseLanguage.g:4292:3: RULE_STRING
+            // InternalBaseLanguage.g:4549:2: ( RULE_STRING )
+            // InternalBaseLanguage.g:4550:3: RULE_STRING
             {
              before(grammarAccess.getStringLiteralRuleAccess().getValueSTRINGTerminalRuleCall_0()); 
             match(input,RULE_STRING,FOLLOW_2); 
@@ -13271,24 +14050,24 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__BooleanLiteralRule__ValueAssignment_1_0"
-    // InternalBaseLanguage.g:4301:1: rule__BooleanLiteralRule__ValueAssignment_1_0 : ( ( 'true' ) ) ;
+    // InternalBaseLanguage.g:4559:1: rule__BooleanLiteralRule__ValueAssignment_1_0 : ( ( 'true' ) ) ;
     public final void rule__BooleanLiteralRule__ValueAssignment_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:4305:1: ( ( ( 'true' ) ) )
-            // InternalBaseLanguage.g:4306:2: ( ( 'true' ) )
+            // InternalBaseLanguage.g:4563:1: ( ( ( 'true' ) ) )
+            // InternalBaseLanguage.g:4564:2: ( ( 'true' ) )
             {
-            // InternalBaseLanguage.g:4306:2: ( ( 'true' ) )
-            // InternalBaseLanguage.g:4307:3: ( 'true' )
-            {
-             before(grammarAccess.getBooleanLiteralRuleAccess().getValueTrueKeyword_1_0_0()); 
-            // InternalBaseLanguage.g:4308:3: ( 'true' )
-            // InternalBaseLanguage.g:4309:4: 'true'
+            // InternalBaseLanguage.g:4564:2: ( ( 'true' ) )
+            // InternalBaseLanguage.g:4565:3: ( 'true' )
             {
              before(grammarAccess.getBooleanLiteralRuleAccess().getValueTrueKeyword_1_0_0()); 
-            match(input,71,FOLLOW_2); 
+            // InternalBaseLanguage.g:4566:3: ( 'true' )
+            // InternalBaseLanguage.g:4567:4: 'true'
+            {
+             before(grammarAccess.getBooleanLiteralRuleAccess().getValueTrueKeyword_1_0_0()); 
+            match(input,74,FOLLOW_2); 
              after(grammarAccess.getBooleanLiteralRuleAccess().getValueTrueKeyword_1_0_0()); 
 
             }
@@ -13315,18 +14094,194 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
     // $ANTLR end "rule__BooleanLiteralRule__ValueAssignment_1_0"
 
 
+    // $ANTLR start "rule__TypeDefinitionRule__AbstractAssignment_0"
+    // InternalBaseLanguage.g:4578:1: rule__TypeDefinitionRule__AbstractAssignment_0 : ( ( 'abstract' ) ) ;
+    public final void rule__TypeDefinitionRule__AbstractAssignment_0() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalBaseLanguage.g:4582:1: ( ( ( 'abstract' ) ) )
+            // InternalBaseLanguage.g:4583:2: ( ( 'abstract' ) )
+            {
+            // InternalBaseLanguage.g:4583:2: ( ( 'abstract' ) )
+            // InternalBaseLanguage.g:4584:3: ( 'abstract' )
+            {
+             before(grammarAccess.getTypeDefinitionRuleAccess().getAbstractAbstractKeyword_0_0()); 
+            // InternalBaseLanguage.g:4585:3: ( 'abstract' )
+            // InternalBaseLanguage.g:4586:4: 'abstract'
+            {
+             before(grammarAccess.getTypeDefinitionRuleAccess().getAbstractAbstractKeyword_0_0()); 
+            match(input,75,FOLLOW_2); 
+             after(grammarAccess.getTypeDefinitionRuleAccess().getAbstractAbstractKeyword_0_0()); 
+
+            }
+
+             after(grammarAccess.getTypeDefinitionRuleAccess().getAbstractAbstractKeyword_0_0()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__TypeDefinitionRule__AbstractAssignment_0"
+
+
+    // $ANTLR start "rule__TypeDefinitionRule__NameAssignment_2"
+    // InternalBaseLanguage.g:4597:1: rule__TypeDefinitionRule__NameAssignment_2 : ( ruleStringOrId ) ;
+    public final void rule__TypeDefinitionRule__NameAssignment_2() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalBaseLanguage.g:4601:1: ( ( ruleStringOrId ) )
+            // InternalBaseLanguage.g:4602:2: ( ruleStringOrId )
+            {
+            // InternalBaseLanguage.g:4602:2: ( ruleStringOrId )
+            // InternalBaseLanguage.g:4603:3: ruleStringOrId
+            {
+             before(grammarAccess.getTypeDefinitionRuleAccess().getNameStringOrIdParserRuleCall_2_0()); 
+            pushFollow(FOLLOW_2);
+            ruleStringOrId();
+
+            state._fsp--;
+
+             after(grammarAccess.getTypeDefinitionRuleAccess().getNameStringOrIdParserRuleCall_2_0()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__TypeDefinitionRule__NameAssignment_2"
+
+
+    // $ANTLR start "rule__TypeDefinitionRule__SuperTypeAssignment_3_1"
+    // InternalBaseLanguage.g:4612:1: rule__TypeDefinitionRule__SuperTypeAssignment_3_1 : ( ( ruleQualifiedName ) ) ;
+    public final void rule__TypeDefinitionRule__SuperTypeAssignment_3_1() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalBaseLanguage.g:4616:1: ( ( ( ruleQualifiedName ) ) )
+            // InternalBaseLanguage.g:4617:2: ( ( ruleQualifiedName ) )
+            {
+            // InternalBaseLanguage.g:4617:2: ( ( ruleQualifiedName ) )
+            // InternalBaseLanguage.g:4618:3: ( ruleQualifiedName )
+            {
+             before(grammarAccess.getTypeDefinitionRuleAccess().getSuperTypeTypeDefinitionCrossReference_3_1_0()); 
+            // InternalBaseLanguage.g:4619:3: ( ruleQualifiedName )
+            // InternalBaseLanguage.g:4620:4: ruleQualifiedName
+            {
+             before(grammarAccess.getTypeDefinitionRuleAccess().getSuperTypeTypeDefinitionQualifiedNameParserRuleCall_3_1_0_1()); 
+            pushFollow(FOLLOW_2);
+            ruleQualifiedName();
+
+            state._fsp--;
+
+             after(grammarAccess.getTypeDefinitionRuleAccess().getSuperTypeTypeDefinitionQualifiedNameParserRuleCall_3_1_0_1()); 
+
+            }
+
+             after(grammarAccess.getTypeDefinitionRuleAccess().getSuperTypeTypeDefinitionCrossReference_3_1_0()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__TypeDefinitionRule__SuperTypeAssignment_3_1"
+
+
+    // $ANTLR start "rule__TypeDefinitionRule__AttributesAssignment_5"
+    // InternalBaseLanguage.g:4631:1: rule__TypeDefinitionRule__AttributesAssignment_5 : ( ruleAttributeDefinitionRule ) ;
+    public final void rule__TypeDefinitionRule__AttributesAssignment_5() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalBaseLanguage.g:4635:1: ( ( ruleAttributeDefinitionRule ) )
+            // InternalBaseLanguage.g:4636:2: ( ruleAttributeDefinitionRule )
+            {
+            // InternalBaseLanguage.g:4636:2: ( ruleAttributeDefinitionRule )
+            // InternalBaseLanguage.g:4637:3: ruleAttributeDefinitionRule
+            {
+             before(grammarAccess.getTypeDefinitionRuleAccess().getAttributesAttributeDefinitionRuleParserRuleCall_5_0()); 
+            pushFollow(FOLLOW_2);
+            ruleAttributeDefinitionRule();
+
+            state._fsp--;
+
+             after(grammarAccess.getTypeDefinitionRuleAccess().getAttributesAttributeDefinitionRuleParserRuleCall_5_0()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__TypeDefinitionRule__AttributesAssignment_5"
+
+
     // $ANTLR start "rule__AttributeDefinitionRule__NameAssignment_0"
-    // InternalBaseLanguage.g:4320:1: rule__AttributeDefinitionRule__NameAssignment_0 : ( ruleStringOrId ) ;
+    // InternalBaseLanguage.g:4646:1: rule__AttributeDefinitionRule__NameAssignment_0 : ( ruleStringOrId ) ;
     public final void rule__AttributeDefinitionRule__NameAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:4324:1: ( ( ruleStringOrId ) )
-            // InternalBaseLanguage.g:4325:2: ( ruleStringOrId )
+            // InternalBaseLanguage.g:4650:1: ( ( ruleStringOrId ) )
+            // InternalBaseLanguage.g:4651:2: ( ruleStringOrId )
             {
-            // InternalBaseLanguage.g:4325:2: ( ruleStringOrId )
-            // InternalBaseLanguage.g:4326:3: ruleStringOrId
+            // InternalBaseLanguage.g:4651:2: ( ruleStringOrId )
+            // InternalBaseLanguage.g:4652:3: ruleStringOrId
             {
              before(grammarAccess.getAttributeDefinitionRuleAccess().getNameStringOrIdParserRuleCall_0_0()); 
             pushFollow(FOLLOW_2);
@@ -13357,17 +14312,17 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__AttributeDefinitionRule__TypeAssignment_2"
-    // InternalBaseLanguage.g:4335:1: rule__AttributeDefinitionRule__TypeAssignment_2 : ( ruleTypeRule ) ;
+    // InternalBaseLanguage.g:4661:1: rule__AttributeDefinitionRule__TypeAssignment_2 : ( ruleTypeRule ) ;
     public final void rule__AttributeDefinitionRule__TypeAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:4339:1: ( ( ruleTypeRule ) )
-            // InternalBaseLanguage.g:4340:2: ( ruleTypeRule )
+            // InternalBaseLanguage.g:4665:1: ( ( ruleTypeRule ) )
+            // InternalBaseLanguage.g:4666:2: ( ruleTypeRule )
             {
-            // InternalBaseLanguage.g:4340:2: ( ruleTypeRule )
-            // InternalBaseLanguage.g:4341:3: ruleTypeRule
+            // InternalBaseLanguage.g:4666:2: ( ruleTypeRule )
+            // InternalBaseLanguage.g:4667:3: ruleTypeRule
             {
              before(grammarAccess.getAttributeDefinitionRuleAccess().getTypeTypeRuleParserRuleCall_2_0()); 
             pushFollow(FOLLOW_2);
@@ -13398,17 +14353,17 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__AttributeDefinitionRule__InitialisationAssignment_3_1"
-    // InternalBaseLanguage.g:4350:1: rule__AttributeDefinitionRule__InitialisationAssignment_3_1 : ( ruleExpressionRule ) ;
+    // InternalBaseLanguage.g:4676:1: rule__AttributeDefinitionRule__InitialisationAssignment_3_1 : ( ruleExpressionRule ) ;
     public final void rule__AttributeDefinitionRule__InitialisationAssignment_3_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:4354:1: ( ( ruleExpressionRule ) )
-            // InternalBaseLanguage.g:4355:2: ( ruleExpressionRule )
+            // InternalBaseLanguage.g:4680:1: ( ( ruleExpressionRule ) )
+            // InternalBaseLanguage.g:4681:2: ( ruleExpressionRule )
             {
-            // InternalBaseLanguage.g:4355:2: ( ruleExpressionRule )
-            // InternalBaseLanguage.g:4356:3: ruleExpressionRule
+            // InternalBaseLanguage.g:4681:2: ( ruleExpressionRule )
+            // InternalBaseLanguage.g:4682:3: ruleExpressionRule
             {
              before(grammarAccess.getAttributeDefinitionRuleAccess().getInitialisationExpressionRuleParserRuleCall_3_1_0()); 
             pushFollow(FOLLOW_2);
@@ -13439,21 +14394,21 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__InstanceTypeRule__DefinitionsAssignment_2"
-    // InternalBaseLanguage.g:4365:1: rule__InstanceTypeRule__DefinitionsAssignment_2 : ( ( ruleQualifiedName ) ) ;
+    // InternalBaseLanguage.g:4691:1: rule__InstanceTypeRule__DefinitionsAssignment_2 : ( ( ruleQualifiedName ) ) ;
     public final void rule__InstanceTypeRule__DefinitionsAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:4369:1: ( ( ( ruleQualifiedName ) ) )
-            // InternalBaseLanguage.g:4370:2: ( ( ruleQualifiedName ) )
+            // InternalBaseLanguage.g:4695:1: ( ( ( ruleQualifiedName ) ) )
+            // InternalBaseLanguage.g:4696:2: ( ( ruleQualifiedName ) )
             {
-            // InternalBaseLanguage.g:4370:2: ( ( ruleQualifiedName ) )
-            // InternalBaseLanguage.g:4371:3: ( ruleQualifiedName )
+            // InternalBaseLanguage.g:4696:2: ( ( ruleQualifiedName ) )
+            // InternalBaseLanguage.g:4697:3: ( ruleQualifiedName )
             {
              before(grammarAccess.getInstanceTypeRuleAccess().getDefinitionsTypeDefinitionCrossReference_2_0()); 
-            // InternalBaseLanguage.g:4372:3: ( ruleQualifiedName )
-            // InternalBaseLanguage.g:4373:4: ruleQualifiedName
+            // InternalBaseLanguage.g:4698:3: ( ruleQualifiedName )
+            // InternalBaseLanguage.g:4699:4: ruleQualifiedName
             {
              before(grammarAccess.getInstanceTypeRuleAccess().getDefinitionsTypeDefinitionQualifiedNameParserRuleCall_2_0_1()); 
             pushFollow(FOLLOW_2);
@@ -13488,21 +14443,21 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__InstanceTypeRule__DefinitionsAssignment_3_1"
-    // InternalBaseLanguage.g:4384:1: rule__InstanceTypeRule__DefinitionsAssignment_3_1 : ( ( ruleQualifiedName ) ) ;
+    // InternalBaseLanguage.g:4710:1: rule__InstanceTypeRule__DefinitionsAssignment_3_1 : ( ( ruleQualifiedName ) ) ;
     public final void rule__InstanceTypeRule__DefinitionsAssignment_3_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:4388:1: ( ( ( ruleQualifiedName ) ) )
-            // InternalBaseLanguage.g:4389:2: ( ( ruleQualifiedName ) )
+            // InternalBaseLanguage.g:4714:1: ( ( ( ruleQualifiedName ) ) )
+            // InternalBaseLanguage.g:4715:2: ( ( ruleQualifiedName ) )
             {
-            // InternalBaseLanguage.g:4389:2: ( ( ruleQualifiedName ) )
-            // InternalBaseLanguage.g:4390:3: ( ruleQualifiedName )
+            // InternalBaseLanguage.g:4715:2: ( ( ruleQualifiedName ) )
+            // InternalBaseLanguage.g:4716:3: ( ruleQualifiedName )
             {
              before(grammarAccess.getInstanceTypeRuleAccess().getDefinitionsTypeDefinitionCrossReference_3_1_0()); 
-            // InternalBaseLanguage.g:4391:3: ( ruleQualifiedName )
-            // InternalBaseLanguage.g:4392:4: ruleQualifiedName
+            // InternalBaseLanguage.g:4717:3: ( ruleQualifiedName )
+            // InternalBaseLanguage.g:4718:4: ruleQualifiedName
             {
              before(grammarAccess.getInstanceTypeRuleAccess().getDefinitionsTypeDefinitionQualifiedNameParserRuleCall_3_1_0_1()); 
             pushFollow(FOLLOW_2);
@@ -13537,17 +14492,17 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__ArrayTypeRule__ElementsAssignment_1"
-    // InternalBaseLanguage.g:4403:1: rule__ArrayTypeRule__ElementsAssignment_1 : ( ruleTypeRule ) ;
+    // InternalBaseLanguage.g:4729:1: rule__ArrayTypeRule__ElementsAssignment_1 : ( ruleTypeRule ) ;
     public final void rule__ArrayTypeRule__ElementsAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:4407:1: ( ( ruleTypeRule ) )
-            // InternalBaseLanguage.g:4408:2: ( ruleTypeRule )
+            // InternalBaseLanguage.g:4733:1: ( ( ruleTypeRule ) )
+            // InternalBaseLanguage.g:4734:2: ( ruleTypeRule )
             {
-            // InternalBaseLanguage.g:4408:2: ( ruleTypeRule )
-            // InternalBaseLanguage.g:4409:3: ruleTypeRule
+            // InternalBaseLanguage.g:4734:2: ( ruleTypeRule )
+            // InternalBaseLanguage.g:4735:3: ruleTypeRule
             {
              before(grammarAccess.getArrayTypeRuleAccess().getElementsTypeRuleParserRuleCall_1_0()); 
             pushFollow(FOLLOW_2);
@@ -13578,17 +14533,17 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__ParameterRule__TypeAssignment_0"
-    // InternalBaseLanguage.g:4418:1: rule__ParameterRule__TypeAssignment_0 : ( ruleTypeRule ) ;
+    // InternalBaseLanguage.g:4744:1: rule__ParameterRule__TypeAssignment_0 : ( ruleTypeRule ) ;
     public final void rule__ParameterRule__TypeAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:4422:1: ( ( ruleTypeRule ) )
-            // InternalBaseLanguage.g:4423:2: ( ruleTypeRule )
+            // InternalBaseLanguage.g:4748:1: ( ( ruleTypeRule ) )
+            // InternalBaseLanguage.g:4749:2: ( ruleTypeRule )
             {
-            // InternalBaseLanguage.g:4423:2: ( ruleTypeRule )
-            // InternalBaseLanguage.g:4424:3: ruleTypeRule
+            // InternalBaseLanguage.g:4749:2: ( ruleTypeRule )
+            // InternalBaseLanguage.g:4750:3: ruleTypeRule
             {
              before(grammarAccess.getParameterRuleAccess().getTypeTypeRuleParserRuleCall_0_0()); 
             pushFollow(FOLLOW_2);
@@ -13619,17 +14574,17 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__ParameterRule__NameAssignment_1"
-    // InternalBaseLanguage.g:4433:1: rule__ParameterRule__NameAssignment_1 : ( ruleStringOrId ) ;
+    // InternalBaseLanguage.g:4759:1: rule__ParameterRule__NameAssignment_1 : ( ruleStringOrId ) ;
     public final void rule__ParameterRule__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:4437:1: ( ( ruleStringOrId ) )
-            // InternalBaseLanguage.g:4438:2: ( ruleStringOrId )
+            // InternalBaseLanguage.g:4763:1: ( ( ruleStringOrId ) )
+            // InternalBaseLanguage.g:4764:2: ( ruleStringOrId )
             {
-            // InternalBaseLanguage.g:4438:2: ( ruleStringOrId )
-            // InternalBaseLanguage.g:4439:3: ruleStringOrId
+            // InternalBaseLanguage.g:4764:2: ( ruleStringOrId )
+            // InternalBaseLanguage.g:4765:3: ruleStringOrId
             {
              before(grammarAccess.getParameterRuleAccess().getNameStringOrIdParserRuleCall_1_0()); 
             pushFollow(FOLLOW_2);
@@ -13660,21 +14615,21 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__FunctionNameRule__DefinitionAssignment"
-    // InternalBaseLanguage.g:4448:1: rule__FunctionNameRule__DefinitionAssignment : ( ( ruleQualifiedName ) ) ;
+    // InternalBaseLanguage.g:4774:1: rule__FunctionNameRule__DefinitionAssignment : ( ( ruleQualifiedName ) ) ;
     public final void rule__FunctionNameRule__DefinitionAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:4452:1: ( ( ( ruleQualifiedName ) ) )
-            // InternalBaseLanguage.g:4453:2: ( ( ruleQualifiedName ) )
+            // InternalBaseLanguage.g:4778:1: ( ( ( ruleQualifiedName ) ) )
+            // InternalBaseLanguage.g:4779:2: ( ( ruleQualifiedName ) )
             {
-            // InternalBaseLanguage.g:4453:2: ( ( ruleQualifiedName ) )
-            // InternalBaseLanguage.g:4454:3: ( ruleQualifiedName )
+            // InternalBaseLanguage.g:4779:2: ( ( ruleQualifiedName ) )
+            // InternalBaseLanguage.g:4780:3: ( ruleQualifiedName )
             {
              before(grammarAccess.getFunctionNameRuleAccess().getDefinitionFunctionDefinitionCrossReference_0()); 
-            // InternalBaseLanguage.g:4455:3: ( ruleQualifiedName )
-            // InternalBaseLanguage.g:4456:4: ruleQualifiedName
+            // InternalBaseLanguage.g:4781:3: ( ruleQualifiedName )
+            // InternalBaseLanguage.g:4782:4: ruleQualifiedName
             {
              before(grammarAccess.getFunctionNameRuleAccess().getDefinitionFunctionDefinitionQualifiedNameParserRuleCall_0_1()); 
             pushFollow(FOLLOW_2);
@@ -13710,13 +14665,58 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
     // Delegated rules
 
 
+    protected DFA1 dfa1 = new DFA1(this);
+    static final String dfa_1s = "\12\uffff";
+    static final String dfa_2s = "\1\uffff\2\7\5\uffff\2\7";
+    static final String dfa_3s = "\1\4\2\20\2\uffff\1\4\2\uffff\2\20";
+    static final String dfa_4s = "\1\112\2\110\2\uffff\1\5\2\uffff\2\110";
+    static final String dfa_5s = "\3\uffff\1\2\1\3\1\uffff\1\1\1\4\2\uffff";
+    static final String dfa_6s = "\12\uffff}>";
+    static final String[] dfa_7s = {
+            "\1\1\1\2\3\3\6\uffff\1\3\43\uffff\1\4\26\uffff\1\3",
+            "\13\7\24\uffff\4\7\1\6\2\7\5\uffff\1\7\14\uffff\1\5",
+            "\13\7\24\uffff\4\7\1\6\2\7\5\uffff\1\7\14\uffff\1\5",
+            "",
+            "",
+            "\1\10\1\11",
+            "",
+            "",
+            "\13\7\24\uffff\4\7\1\6\2\7\5\uffff\1\7\14\uffff\1\5",
+            "\13\7\24\uffff\4\7\1\6\2\7\5\uffff\1\7\14\uffff\1\5"
+    };
+
+    static final short[] dfa_1 = DFA.unpackEncodedString(dfa_1s);
+    static final short[] dfa_2 = DFA.unpackEncodedString(dfa_2s);
+    static final char[] dfa_3 = DFA.unpackEncodedStringToUnsignedChars(dfa_3s);
+    static final char[] dfa_4 = DFA.unpackEncodedStringToUnsignedChars(dfa_4s);
+    static final short[] dfa_5 = DFA.unpackEncodedString(dfa_5s);
+    static final short[] dfa_6 = DFA.unpackEncodedString(dfa_6s);
+    static final short[][] dfa_7 = unpackEncodedStringArray(dfa_7s);
+
+    class DFA1 extends DFA {
+
+        public DFA1(BaseRecognizer recognizer) {
+            this.recognizer = recognizer;
+            this.decisionNumber = 1;
+            this.eot = dfa_1;
+            this.eof = dfa_2;
+            this.min = dfa_3;
+            this.max = dfa_4;
+            this.accept = dfa_5;
+            this.special = dfa_6;
+            this.transition = dfa_7;
+        }
+        public String getDescription() {
+            return "1092:1: rule__LiteralOrReferenceRule__Alternatives : ( ( ruleCallRule ) | ( ruleLiteralRule ) | ( ruleParanthesesRule ) | ( ruleValueReferenceRule ) );";
+        }
+    }
  
 
     public static final BitSet FOLLOW_1 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_2 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000800000000000L});
     public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000800000000002L});
-    public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0048000000C081F0L,0x00000000000000C0L});
+    public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0008000000C081F0L,0x0000000000000600L});
     public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0001000000000000L});
     public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x0001000000000002L});
     public static final BitSet FOLLOW_8 = new BitSet(new long[]{0x0002000000000000L});
@@ -13730,26 +14730,30 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
     public static final BitSet FOLLOW_16 = new BitSet(new long[]{0x0004000000000000L});
     public static final BitSet FOLLOW_17 = new BitSet(new long[]{0x0010000000000000L});
     public static final BitSet FOLLOW_18 = new BitSet(new long[]{0x0008000000000000L});
-    public static final BitSet FOLLOW_19 = new BitSet(new long[]{0x0058000000C081F0L,0x00000000000000C0L});
+    public static final BitSet FOLLOW_19 = new BitSet(new long[]{0x0018000000C081F0L,0x0000000000000600L});
     public static final BitSet FOLLOW_20 = new BitSet(new long[]{0x0020000000000000L});
     public static final BitSet FOLLOW_21 = new BitSet(new long[]{0x0020000000000002L});
     public static final BitSet FOLLOW_22 = new BitSet(new long[]{0x00007FFFF8000000L});
-    public static final BitSet FOLLOW_23 = new BitSet(new long[]{0x00000000000081C0L,0x0000000000000080L});
-    public static final BitSet FOLLOW_24 = new BitSet(new long[]{0x0080000000000000L});
-    public static final BitSet FOLLOW_25 = new BitSet(new long[]{0xEC00000000000000L,0x000000000000001FL});
-    public static final BitSet FOLLOW_26 = new BitSet(new long[]{0x0300000000000000L});
-    public static final BitSet FOLLOW_27 = new BitSet(new long[]{0x0400000000000000L});
-    public static final BitSet FOLLOW_28 = new BitSet(new long[]{0x0800000000000000L});
-    public static final BitSet FOLLOW_29 = new BitSet(new long[]{0x0000000000000030L});
-    public static final BitSet FOLLOW_30 = new BitSet(new long[]{0x1000000000000000L});
-    public static final BitSet FOLLOW_31 = new BitSet(new long[]{0x1000000000000002L});
+    public static final BitSet FOLLOW_23 = new BitSet(new long[]{0x00000000000081C0L,0x0000000000000400L});
+    public static final BitSet FOLLOW_24 = new BitSet(new long[]{0x0040000000000000L});
+    public static final BitSet FOLLOW_25 = new BitSet(new long[]{0x0000000000000030L});
+    public static final BitSet FOLLOW_26 = new BitSet(new long[]{0x0280000000000000L});
+    public static final BitSet FOLLOW_27 = new BitSet(new long[]{0x0100000000000030L});
+    public static final BitSet FOLLOW_28 = new BitSet(new long[]{0x0000000000000032L});
+    public static final BitSet FOLLOW_29 = new BitSet(new long[]{0x0400000000000000L});
+    public static final BitSet FOLLOW_30 = new BitSet(new long[]{0x6000000000000000L,0x00000000000000FFL});
+    public static final BitSet FOLLOW_31 = new BitSet(new long[]{0x1800000000000000L});
     public static final BitSet FOLLOW_32 = new BitSet(new long[]{0x2000000000000000L});
     public static final BitSet FOLLOW_33 = new BitSet(new long[]{0x4000000000000000L});
     public static final BitSet FOLLOW_34 = new BitSet(new long[]{0x8000000000000000L});
-    public static final BitSet FOLLOW_35 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000001L});
-    public static final BitSet FOLLOW_36 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000002L});
-    public static final BitSet FOLLOW_37 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000004L});
-    public static final BitSet FOLLOW_38 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000020L});
-    public static final BitSet FOLLOW_39 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000020L});
+    public static final BitSet FOLLOW_35 = new BitSet(new long[]{0x8000000000000002L});
+    public static final BitSet FOLLOW_36 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000001L});
+    public static final BitSet FOLLOW_37 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000002L});
+    public static final BitSet FOLLOW_38 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000004L});
+    public static final BitSet FOLLOW_39 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000008L});
+    public static final BitSet FOLLOW_40 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000010L});
+    public static final BitSet FOLLOW_41 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000020L});
+    public static final BitSet FOLLOW_42 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000100L});
+    public static final BitSet FOLLOW_43 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000100L});
 
 }

@@ -14,6 +14,8 @@ import de.evoal.languages.model.base.BooleanLiteral;
 import de.evoal.languages.model.base.BooleanType;
 import de.evoal.languages.model.base.Call;
 import de.evoal.languages.model.base.ComparisonExpression;
+import de.evoal.languages.model.base.ConstantDefinition;
+import de.evoal.languages.model.base.ConstantReference;
 import de.evoal.languages.model.base.DataType;
 import de.evoal.languages.model.base.DefinedFunctionName;
 import de.evoal.languages.model.base.DoubleLiteral;
@@ -34,7 +36,6 @@ import de.evoal.languages.model.base.StringLiteral;
 import de.evoal.languages.model.base.StringType;
 import de.evoal.languages.model.base.TypeDefinition;
 import de.evoal.languages.model.base.UnaryAddOrSubtractExpression;
-import de.evoal.languages.model.base.ValueReference;
 import de.evoal.languages.model.base.VoidType;
 import de.evoal.languages.model.base.XorExpression;
 import de.evoal.languages.model.instance.Array;
@@ -97,6 +98,12 @@ public class OptimisationLanguageSemanticSequencer extends InstanceLanguageSeman
 				return; 
 			case BasePackage.COMPARISON_EXPRESSION:
 				sequence_ComparisonExpressionRule(context, (ComparisonExpression) semanticObject); 
+				return; 
+			case BasePackage.CONSTANT_DEFINITION:
+				sequence_ConstantDefinitionRule(context, (ConstantDefinition) semanticObject); 
+				return; 
+			case BasePackage.CONSTANT_REFERENCE:
+				sequence_ConstantReferenceRule(context, (ConstantReference) semanticObject); 
 				return; 
 			case BasePackage.DATA_TYPE:
 				sequence_DataTypeRule(context, (DataType) semanticObject); 
@@ -161,9 +168,6 @@ public class OptimisationLanguageSemanticSequencer extends InstanceLanguageSeman
 			case BasePackage.UNARY_ADD_OR_SUBTRACT_EXPRESSION:
 				sequence_UnaryAddOrSubtractExpressionRule(context, (UnaryAddOrSubtractExpression) semanticObject); 
 				return; 
-			case BasePackage.VALUE_REFERENCE:
-				sequence_ValueReferenceRule(context, (ValueReference) semanticObject); 
-				return; 
 			case BasePackage.VOID_TYPE:
 				sequence_VoidTypeRule(context, (VoidType) semanticObject); 
 				return; 
@@ -214,7 +218,7 @@ public class OptimisationLanguageSemanticSequencer extends InstanceLanguageSeman
 	 *     AlgorithmInstanceRule returns AlgorithmInstance
 	 *
 	 * Constraint:
-	 *     (problem=[Problem|QualifiedNameRule] algorithm=InstanceRule documentation=ArrayRule?)
+	 *     (problem=[Problem|QualifiedName] algorithm=InstanceRule documentation=ArrayRule?)
 	 * </pre>
 	 */
 	protected void sequence_AlgorithmInstanceRule(ISerializationContext context, AlgorithmInstance semanticObject) {
@@ -228,7 +232,7 @@ public class OptimisationLanguageSemanticSequencer extends InstanceLanguageSeman
 	 *     ImportRule returns Import
 	 *
 	 * Constraint:
-	 *     importedNamespace=QualifiedNameRule
+	 *     importedNamespace=QualifiedName
 	 * </pre>
 	 */
 	protected void sequence_ImportRule(ISerializationContext context, Import semanticObject) {
@@ -237,7 +241,7 @@ public class OptimisationLanguageSemanticSequencer extends InstanceLanguageSeman
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, OLPackage.Literals.IMPORT__IMPORTED_NAMESPACE));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getImportRuleAccess().getImportedNamespaceQualifiedNameRuleParserRuleCall_1_0(), semanticObject.getImportedNamespace());
+		feeder.accept(grammarAccess.getImportRuleAccess().getImportedNamespaceQualifiedNameParserRuleCall_1_0(), semanticObject.getImportedNamespace());
 		feeder.finish();
 	}
 	

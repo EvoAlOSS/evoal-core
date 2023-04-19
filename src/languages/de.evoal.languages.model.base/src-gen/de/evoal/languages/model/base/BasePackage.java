@@ -1574,6 +1574,98 @@ public interface BasePackage extends EPackage {
 	int DEFINED_FUNCTION_NAME_OPERATION_COUNT = FUNCTION_NAME_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link de.evoal.languages.model.base.impl.ConstantDefinitionImpl <em>Constant Definition</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.evoal.languages.model.base.impl.ConstantDefinitionImpl
+	 * @see de.evoal.languages.model.base.impl.BasePackageImpl#getConstantDefinition()
+	 * @generated
+	 */
+	int CONSTANT_DEFINITION = 38;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTANT_DEFINITION__TYPE = 0;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTANT_DEFINITION__NAME = 1;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTANT_DEFINITION__VALUE = 2;
+
+	/**
+	 * The number of structural features of the '<em>Constant Definition</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTANT_DEFINITION_FEATURE_COUNT = 3;
+
+	/**
+	 * The number of operations of the '<em>Constant Definition</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTANT_DEFINITION_OPERATION_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link de.evoal.languages.model.base.impl.ConstantReferenceImpl <em>Constant Reference</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.evoal.languages.model.base.impl.ConstantReferenceImpl
+	 * @see de.evoal.languages.model.base.impl.BasePackageImpl#getConstantReference()
+	 * @generated
+	 */
+	int CONSTANT_REFERENCE = 39;
+
+	/**
+	 * The feature id for the '<em><b>Definition</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTANT_REFERENCE__DEFINITION = VALUE_REFERENCE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Constant Reference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTANT_REFERENCE_FEATURE_COUNT = VALUE_REFERENCE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Constant Reference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTANT_REFERENCE_OPERATION_COUNT = VALUE_REFERENCE_OPERATION_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.ComparisonOperator <em>Comparison Operator</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1581,7 +1673,7 @@ public interface BasePackage extends EPackage {
 	 * @see de.evoal.languages.model.base.impl.BasePackageImpl#getComparisonOperator()
 	 * @generated
 	 */
-	int COMPARISON_OPERATOR = 38;
+	int COMPARISON_OPERATOR = 40;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.AddOrSubtractOperator <em>Add Or Subtract Operator</em>}' enum.
@@ -1591,7 +1683,7 @@ public interface BasePackage extends EPackage {
 	 * @see de.evoal.languages.model.base.impl.BasePackageImpl#getAddOrSubtractOperator()
 	 * @generated
 	 */
-	int ADD_OR_SUBTRACT_OPERATOR = 39;
+	int ADD_OR_SUBTRACT_OPERATOR = 41;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.MultiplyDivideModuloOperator <em>Multiply Divide Modulo Operator</em>}' enum.
@@ -1601,7 +1693,7 @@ public interface BasePackage extends EPackage {
 	 * @see de.evoal.languages.model.base.impl.BasePackageImpl#getMultiplyDivideModuloOperator()
 	 * @generated
 	 */
-	int MULTIPLY_DIVIDE_MODULO_OPERATOR = 40;
+	int MULTIPLY_DIVIDE_MODULO_OPERATOR = 42;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.Factor <em>Factor</em>}' enum.
@@ -1611,7 +1703,7 @@ public interface BasePackage extends EPackage {
 	 * @see de.evoal.languages.model.base.impl.BasePackageImpl#getFactor()
 	 * @generated
 	 */
-	int FACTOR = 41;
+	int FACTOR = 43;
 
 
 	/**
@@ -2507,6 +2599,70 @@ public interface BasePackage extends EPackage {
 	EReference getDefinedFunctionName_Definition();
 
 	/**
+	 * Returns the meta object for class '{@link de.evoal.languages.model.base.ConstantDefinition <em>Constant Definition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Constant Definition</em>'.
+	 * @see de.evoal.languages.model.base.ConstantDefinition
+	 * @generated
+	 */
+	EClass getConstantDefinition();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link de.evoal.languages.model.base.ConstantDefinition#getType <em>Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Type</em>'.
+	 * @see de.evoal.languages.model.base.ConstantDefinition#getType()
+	 * @see #getConstantDefinition()
+	 * @generated
+	 */
+	EReference getConstantDefinition_Type();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.base.ConstantDefinition#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see de.evoal.languages.model.base.ConstantDefinition#getName()
+	 * @see #getConstantDefinition()
+	 * @generated
+	 */
+	EAttribute getConstantDefinition_Name();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link de.evoal.languages.model.base.ConstantDefinition#getValue <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Value</em>'.
+	 * @see de.evoal.languages.model.base.ConstantDefinition#getValue()
+	 * @see #getConstantDefinition()
+	 * @generated
+	 */
+	EReference getConstantDefinition_Value();
+
+	/**
+	 * Returns the meta object for class '{@link de.evoal.languages.model.base.ConstantReference <em>Constant Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Constant Reference</em>'.
+	 * @see de.evoal.languages.model.base.ConstantReference
+	 * @generated
+	 */
+	EClass getConstantReference();
+
+	/**
+	 * Returns the meta object for the reference '{@link de.evoal.languages.model.base.ConstantReference#getDefinition <em>Definition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Definition</em>'.
+	 * @see de.evoal.languages.model.base.ConstantReference#getDefinition()
+	 * @see #getConstantReference()
+	 * @generated
+	 */
+	EReference getConstantReference_Definition();
+
+	/**
 	 * Returns the meta object for enum '{@link de.evoal.languages.model.base.ComparisonOperator <em>Comparison Operator</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3324,6 +3480,58 @@ public interface BasePackage extends EPackage {
 		 * @generated
 		 */
 		EReference DEFINED_FUNCTION_NAME__DEFINITION = eINSTANCE.getDefinedFunctionName_Definition();
+
+		/**
+		 * The meta object literal for the '{@link de.evoal.languages.model.base.impl.ConstantDefinitionImpl <em>Constant Definition</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.evoal.languages.model.base.impl.ConstantDefinitionImpl
+		 * @see de.evoal.languages.model.base.impl.BasePackageImpl#getConstantDefinition()
+		 * @generated
+		 */
+		EClass CONSTANT_DEFINITION = eINSTANCE.getConstantDefinition();
+
+		/**
+		 * The meta object literal for the '<em><b>Type</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CONSTANT_DEFINITION__TYPE = eINSTANCE.getConstantDefinition_Type();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CONSTANT_DEFINITION__NAME = eINSTANCE.getConstantDefinition_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CONSTANT_DEFINITION__VALUE = eINSTANCE.getConstantDefinition_Value();
+
+		/**
+		 * The meta object literal for the '{@link de.evoal.languages.model.base.impl.ConstantReferenceImpl <em>Constant Reference</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.evoal.languages.model.base.impl.ConstantReferenceImpl
+		 * @see de.evoal.languages.model.base.impl.BasePackageImpl#getConstantReference()
+		 * @generated
+		 */
+		EClass CONSTANT_REFERENCE = eINSTANCE.getConstantReference();
+
+		/**
+		 * The meta object literal for the '<em><b>Definition</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CONSTANT_REFERENCE__DEFINITION = eINSTANCE.getConstantReference_Definition();
 
 		/**
 		 * The meta object literal for the '{@link de.evoal.languages.model.base.ComparisonOperator <em>Comparison Operator</em>}' enum.

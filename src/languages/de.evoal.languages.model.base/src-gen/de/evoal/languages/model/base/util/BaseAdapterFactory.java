@@ -220,6 +220,14 @@ public class BaseAdapterFactory extends AdapterFactoryImpl {
 				return createDefinedFunctionNameAdapter();
 			}
 			@Override
+			public Adapter caseConstantDefinition(ConstantDefinition object) {
+				return createConstantDefinitionAdapter();
+			}
+			@Override
+			public Adapter caseConstantReference(ConstantReference object) {
+				return createConstantReferenceAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -768,6 +776,34 @@ public class BaseAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createDefinedFunctionNameAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.ConstantDefinition <em>Constant Definition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.evoal.languages.model.base.ConstantDefinition
+	 * @generated
+	 */
+	public Adapter createConstantDefinitionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.ConstantReference <em>Constant Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.evoal.languages.model.base.ConstantReference
+	 * @generated
+	 */
+	public Adapter createConstantReferenceAdapter() {
 		return null;
 	}
 

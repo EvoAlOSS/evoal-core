@@ -319,6 +319,24 @@ public interface BaseFactory extends EFactory {
 	DefinedFunctionName createDefinedFunctionName();
 
 	/**
+	 * Returns a new object of class '<em>Constant Definition</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Constant Definition</em>'.
+	 * @generated
+	 */
+	ConstantDefinition createConstantDefinition();
+
+	/**
+	 * Returns a new object of class '<em>Constant Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Constant Reference</em>'.
+	 * @generated
+	 */
+	ConstantReference createConstantReference();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

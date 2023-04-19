@@ -31,6 +31,9 @@
         <details key="nullFree" value="false"/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="constants" upperBound="-1"
+        eType="ecore:EClass ../../de.evoal.languages.model.base/model/model.ecore#//ConstantDefinition"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="QualifiedName"/>
   <eClassifiers xsi:type="ecore:EClass" name="Import">

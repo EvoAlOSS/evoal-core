@@ -159,5 +159,13 @@
     <genClasses ecoreClass="model.ecore#//DefinedFunctionName">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//DefinedFunctionName/definition"/>
     </genClasses>
+    <genClasses ecoreClass="model.ecore#//ConstantDefinition">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//ConstantDefinition/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//ConstantDefinition/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//ConstantDefinition/value"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//ConstantReference">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//ConstantReference/definition"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>

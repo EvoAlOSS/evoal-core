@@ -14,6 +14,8 @@ import de.evoal.languages.model.base.BooleanLiteral;
 import de.evoal.languages.model.base.BooleanType;
 import de.evoal.languages.model.base.Call;
 import de.evoal.languages.model.base.ComparisonExpression;
+import de.evoal.languages.model.base.ConstantDefinition;
+import de.evoal.languages.model.base.ConstantReference;
 import de.evoal.languages.model.base.DataType;
 import de.evoal.languages.model.base.DefinedFunctionName;
 import de.evoal.languages.model.base.DoubleLiteral;
@@ -34,7 +36,6 @@ import de.evoal.languages.model.base.StringLiteral;
 import de.evoal.languages.model.base.StringType;
 import de.evoal.languages.model.base.TypeDefinition;
 import de.evoal.languages.model.base.UnaryAddOrSubtractExpression;
-import de.evoal.languages.model.base.ValueReference;
 import de.evoal.languages.model.base.VoidType;
 import de.evoal.languages.model.base.XorExpression;
 import de.evoal.languages.model.base.dsl.services.BaseLanguageGrammarAccess;
@@ -86,6 +87,12 @@ public class BaseLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 				return; 
 			case BasePackage.COMPARISON_EXPRESSION:
 				sequence_ComparisonExpressionRule(context, (ComparisonExpression) semanticObject); 
+				return; 
+			case BasePackage.CONSTANT_DEFINITION:
+				sequence_ConstantDefinitionRule(context, (ConstantDefinition) semanticObject); 
+				return; 
+			case BasePackage.CONSTANT_REFERENCE:
+				sequence_ConstantReferenceRule(context, (ConstantReference) semanticObject); 
 				return; 
 			case BasePackage.DATA_TYPE:
 				sequence_DataTypeRule(context, (DataType) semanticObject); 
@@ -149,9 +156,6 @@ public class BaseLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 				return; 
 			case BasePackage.UNARY_ADD_OR_SUBTRACT_EXPRESSION:
 				sequence_UnaryAddOrSubtractExpressionRule(context, (UnaryAddOrSubtractExpression) semanticObject); 
-				return; 
-			case BasePackage.VALUE_REFERENCE:
-				sequence_ValueReferenceRule(context, (ValueReference) semanticObject); 
 				return; 
 			case BasePackage.VOID_TYPE:
 				sequence_VoidTypeRule(context, (VoidType) semanticObject); 
@@ -278,6 +282,54 @@ public class BaseLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 	 */
 	protected void sequence_ComparisonExpressionRule(ISerializationContext context, ComparisonExpression semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     ConstantDefinitionRule returns ConstantDefinition
+	 *
+	 * Constraint:
+	 *     (type=TypeDefinitionRule name=StringOrId value=ExpressionRule)
+	 * </pre>
+	 */
+	protected void sequence_ConstantDefinitionRule(ISerializationContext context, ConstantDefinition semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, BasePackage.Literals.CONSTANT_DEFINITION__TYPE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BasePackage.Literals.CONSTANT_DEFINITION__TYPE));
+			if (transientValues.isValueTransient(semanticObject, BasePackage.Literals.CONSTANT_DEFINITION__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BasePackage.Literals.CONSTANT_DEFINITION__NAME));
+			if (transientValues.isValueTransient(semanticObject, BasePackage.Literals.CONSTANT_DEFINITION__VALUE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BasePackage.Literals.CONSTANT_DEFINITION__VALUE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getConstantDefinitionRuleAccess().getTypeTypeDefinitionRuleParserRuleCall_1_0(), semanticObject.getType());
+		feeder.accept(grammarAccess.getConstantDefinitionRuleAccess().getNameStringOrIdParserRuleCall_2_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getConstantDefinitionRuleAccess().getValueExpressionRuleParserRuleCall_4_0(), semanticObject.getValue());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     LiteralOrReferenceRule returns ConstantReference
+	 *     ValueReferenceRule returns ConstantReference
+	 *     ConstantReferenceRule returns ConstantReference
+	 *
+	 * Constraint:
+	 *     definition=[ConstantDefinition|QualifiedName]
+	 * </pre>
+	 */
+	protected void sequence_ConstantReferenceRule(ISerializationContext context, ConstantReference semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, BasePackage.Literals.CONSTANT_REFERENCE__DEFINITION) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BasePackage.Literals.CONSTANT_REFERENCE__DEFINITION));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getConstantReferenceRuleAccess().getDefinitionConstantDefinitionQualifiedNameParserRuleCall_0_1(), semanticObject.eGet(BasePackage.Literals.CONSTANT_REFERENCE__DEFINITION, false));
+		feeder.finish();
 	}
 	
 	
@@ -624,21 +676,6 @@ public class BaseLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 	 * </pre>
 	 */
 	protected void sequence_UnaryAddOrSubtractExpressionRule(ISerializationContext context, UnaryAddOrSubtractExpression semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * <pre>
-	 * Contexts:
-	 *     LiteralOrReferenceRule returns ValueReference
-	 *     ValueReferenceRule returns ValueReference
-	 *
-	 * Constraint:
-	 *     {ValueReference}
-	 * </pre>
-	 */
-	protected void sequence_ValueReferenceRule(ISerializationContext context, ValueReference semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

@@ -78,7 +78,11 @@ CallRule returns Call:
 
 
 ValueReferenceRule returns ValueReference:
-	{ValueReference} 'value'
+	ConstantReferenceRule
+;
+
+ConstantReferenceRule returns ConstantReference:
+	definition = [ConstantDefinition|QualifiedName]
 ;
 
 LiteralRule returns Literal:
@@ -197,6 +201,10 @@ ArrayTypeRule returns ArrayType:
 
 FunctionDefinitionRule returns FunctionDefinition:
 	'def' type = TypeRule name = StringOrId '(' (parameters+=ParameterRule (',' parameters+=ParameterRule)*)? ')' ';'
+;
+
+ConstantDefinitionRule returns ConstantDefinition:
+	'const' type = TypeDefinitionRule name = StringOrId ':=' value = ExpressionRule
 ;
 
 ParameterRule returns Parameter:

@@ -3,6 +3,7 @@
  */
 package de.evoal.languages.model.dl.impl;
 
+import de.evoal.languages.model.base.ConstantDefinition;
 import de.evoal.languages.model.base.FunctionDefinition;
 import de.evoal.languages.model.base.TypeDefinition;
 
@@ -38,6 +39,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link de.evoal.languages.model.dl.impl.DefinitionModelImpl#getName <em>Name</em>}</li>
  *   <li>{@link de.evoal.languages.model.dl.impl.DefinitionModelImpl#getTypes <em>Types</em>}</li>
  *   <li>{@link de.evoal.languages.model.dl.impl.DefinitionModelImpl#getFunctions <em>Functions</em>}</li>
+ *   <li>{@link de.evoal.languages.model.dl.impl.DefinitionModelImpl#getConstants <em>Constants</em>}</li>
  * </ul>
  *
  * @generated
@@ -92,6 +94,16 @@ public class DefinitionModelImpl extends MinimalEObjectImpl.Container implements
 	 * @ordered
 	 */
 	protected EList<FunctionDefinition> functions;
+
+	/**
+	 * The cached value of the '{@link #getConstants() <em>Constants</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getConstants()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ConstantDefinition> constants;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -180,6 +192,19 @@ public class DefinitionModelImpl extends MinimalEObjectImpl.Container implements
 	 * @generated
 	 */
 	@Override
+	public EList<ConstantDefinition> getConstants() {
+		if (constants == null) {
+			constants = new EObjectContainmentEList<ConstantDefinition>(ConstantDefinition.class, this, DlPackage.DEFINITION_MODEL__CONSTANTS);
+		}
+		return constants;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case DlPackage.DEFINITION_MODEL__IMPORTS:
@@ -188,6 +213,8 @@ public class DefinitionModelImpl extends MinimalEObjectImpl.Container implements
 				return ((InternalEList<?>)getTypes()).basicRemove(otherEnd, msgs);
 			case DlPackage.DEFINITION_MODEL__FUNCTIONS:
 				return ((InternalEList<?>)getFunctions()).basicRemove(otherEnd, msgs);
+			case DlPackage.DEFINITION_MODEL__CONSTANTS:
+				return ((InternalEList<?>)getConstants()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -208,6 +235,8 @@ public class DefinitionModelImpl extends MinimalEObjectImpl.Container implements
 				return getTypes();
 			case DlPackage.DEFINITION_MODEL__FUNCTIONS:
 				return getFunctions();
+			case DlPackage.DEFINITION_MODEL__CONSTANTS:
+				return getConstants();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -236,6 +265,10 @@ public class DefinitionModelImpl extends MinimalEObjectImpl.Container implements
 				getFunctions().clear();
 				getFunctions().addAll((Collection<? extends FunctionDefinition>)newValue);
 				return;
+			case DlPackage.DEFINITION_MODEL__CONSTANTS:
+				getConstants().clear();
+				getConstants().addAll((Collection<? extends ConstantDefinition>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -260,6 +293,9 @@ public class DefinitionModelImpl extends MinimalEObjectImpl.Container implements
 			case DlPackage.DEFINITION_MODEL__FUNCTIONS:
 				getFunctions().clear();
 				return;
+			case DlPackage.DEFINITION_MODEL__CONSTANTS:
+				getConstants().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -280,6 +316,8 @@ public class DefinitionModelImpl extends MinimalEObjectImpl.Container implements
 				return types != null && !types.isEmpty();
 			case DlPackage.DEFINITION_MODEL__FUNCTIONS:
 				return functions != null && !functions.isEmpty();
+			case DlPackage.DEFINITION_MODEL__CONSTANTS:
+				return constants != null && !constants.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

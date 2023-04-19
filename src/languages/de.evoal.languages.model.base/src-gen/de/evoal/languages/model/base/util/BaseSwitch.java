@@ -326,6 +326,20 @@ public class BaseSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case BasePackage.CONSTANT_DEFINITION: {
+				ConstantDefinition constantDefinition = (ConstantDefinition)theEObject;
+				T result = caseConstantDefinition(constantDefinition);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case BasePackage.CONSTANT_REFERENCE: {
+				ConstantReference constantReference = (ConstantReference)theEObject;
+				T result = caseConstantReference(constantReference);
+				if (result == null) result = caseValueReference(constantReference);
+				if (result == null) result = caseCallOrLiteralOrReferenceOrParantheses(constantReference);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -897,6 +911,36 @@ public class BaseSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseDefinedFunctionName(DefinedFunctionName object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Constant Definition</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Constant Definition</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseConstantDefinition(ConstantDefinition object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Constant Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Constant Reference</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseConstantReference(ConstantReference object) {
 		return null;
 	}
 

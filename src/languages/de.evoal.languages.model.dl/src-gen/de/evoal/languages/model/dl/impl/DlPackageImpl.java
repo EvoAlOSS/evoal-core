@@ -165,6 +165,16 @@ public class DlPackageImpl extends EPackageImpl implements DlPackage {
 	 * @generated
 	 */
 	@Override
+	public EReference getDefinitionModel_Constants() {
+		return (EReference)definitionModelEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getQualifiedName() {
 		return qualifiedNameEClass;
 	}
@@ -223,6 +233,7 @@ public class DlPackageImpl extends EPackageImpl implements DlPackage {
 		createEAttribute(definitionModelEClass, DEFINITION_MODEL__NAME);
 		createEReference(definitionModelEClass, DEFINITION_MODEL__TYPES);
 		createEReference(definitionModelEClass, DEFINITION_MODEL__FUNCTIONS);
+		createEReference(definitionModelEClass, DEFINITION_MODEL__CONSTANTS);
 
 		qualifiedNameEClass = createEClass(QUALIFIED_NAME);
 
@@ -268,6 +279,7 @@ public class DlPackageImpl extends EPackageImpl implements DlPackage {
 		initEAttribute(getDefinitionModel_Name(), ecorePackage.getEString(), "name", null, 1, 1, DefinitionModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDefinitionModel_Types(), theBasePackage.getTypeDefinition(), null, "types", null, 0, -1, DefinitionModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getDefinitionModel_Functions(), theBasePackage.getFunctionDefinition(), null, "functions", null, 0, -1, DefinitionModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getDefinitionModel_Constants(), theBasePackage.getConstantDefinition(), null, "constants", null, 0, -1, DefinitionModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(qualifiedNameEClass, QualifiedName.class, "QualifiedName", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

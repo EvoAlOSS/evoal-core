@@ -108,13 +108,22 @@ public interface DlPackage extends EPackage {
 	int DEFINITION_MODEL__FUNCTIONS = 3;
 
 	/**
+	 * The feature id for the '<em><b>Constants</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEFINITION_MODEL__CONSTANTS = 4;
+
+	/**
 	 * The number of structural features of the '<em>Definition Model</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DEFINITION_MODEL_FEATURE_COUNT = 4;
+	int DEFINITION_MODEL_FEATURE_COUNT = 5;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.dl.impl.QualifiedNameImpl <em>Qualified Name</em>}' class.
@@ -219,6 +228,17 @@ public interface DlPackage extends EPackage {
 	EReference getDefinitionModel_Functions();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.dl.DefinitionModel#getConstants <em>Constants</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Constants</em>'.
+	 * @see de.evoal.languages.model.dl.DefinitionModel#getConstants()
+	 * @see #getDefinitionModel()
+	 * @generated
+	 */
+	EReference getDefinitionModel_Constants();
+
+	/**
 	 * Returns the meta object for class '{@link de.evoal.languages.model.dl.QualifiedName <em>Qualified Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -312,6 +332,14 @@ public interface DlPackage extends EPackage {
 		 * @generated
 		 */
 		EReference DEFINITION_MODEL__FUNCTIONS = eINSTANCE.getDefinitionModel_Functions();
+
+		/**
+		 * The meta object literal for the '<em><b>Constants</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DEFINITION_MODEL__CONSTANTS = eINSTANCE.getDefinitionModel_Constants();
 
 		/**
 		 * The meta object literal for the '{@link de.evoal.languages.model.dl.impl.QualifiedNameImpl <em>Qualified Name</em>}' class.

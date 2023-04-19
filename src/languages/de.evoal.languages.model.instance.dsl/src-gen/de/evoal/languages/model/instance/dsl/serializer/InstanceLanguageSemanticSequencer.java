@@ -14,6 +14,8 @@ import de.evoal.languages.model.base.BooleanLiteral;
 import de.evoal.languages.model.base.BooleanType;
 import de.evoal.languages.model.base.Call;
 import de.evoal.languages.model.base.ComparisonExpression;
+import de.evoal.languages.model.base.ConstantDefinition;
+import de.evoal.languages.model.base.ConstantReference;
 import de.evoal.languages.model.base.DataType;
 import de.evoal.languages.model.base.DefinedFunctionName;
 import de.evoal.languages.model.base.DoubleLiteral;
@@ -34,7 +36,6 @@ import de.evoal.languages.model.base.StringLiteral;
 import de.evoal.languages.model.base.StringType;
 import de.evoal.languages.model.base.TypeDefinition;
 import de.evoal.languages.model.base.UnaryAddOrSubtractExpression;
-import de.evoal.languages.model.base.ValueReference;
 import de.evoal.languages.model.base.VoidType;
 import de.evoal.languages.model.base.XorExpression;
 import de.evoal.languages.model.base.dsl.serializer.BaseLanguageSemanticSequencer;
@@ -92,6 +93,12 @@ public class InstanceLanguageSemanticSequencer extends BaseLanguageSemanticSeque
 				return; 
 			case BasePackage.COMPARISON_EXPRESSION:
 				sequence_ComparisonExpressionRule(context, (ComparisonExpression) semanticObject); 
+				return; 
+			case BasePackage.CONSTANT_DEFINITION:
+				sequence_ConstantDefinitionRule(context, (ConstantDefinition) semanticObject); 
+				return; 
+			case BasePackage.CONSTANT_REFERENCE:
+				sequence_ConstantReferenceRule(context, (ConstantReference) semanticObject); 
 				return; 
 			case BasePackage.DATA_TYPE:
 				sequence_DataTypeRule(context, (DataType) semanticObject); 
@@ -155,9 +162,6 @@ public class InstanceLanguageSemanticSequencer extends BaseLanguageSemanticSeque
 				return; 
 			case BasePackage.UNARY_ADD_OR_SUBTRACT_EXPRESSION:
 				sequence_UnaryAddOrSubtractExpressionRule(context, (UnaryAddOrSubtractExpression) semanticObject); 
-				return; 
-			case BasePackage.VALUE_REFERENCE:
-				sequence_ValueReferenceRule(context, (ValueReference) semanticObject); 
 				return; 
 			case BasePackage.VOID_TYPE:
 				sequence_VoidTypeRule(context, (VoidType) semanticObject); 
@@ -254,7 +258,7 @@ public class InstanceLanguageSemanticSequencer extends BaseLanguageSemanticSeque
 	 *     ValueRule returns Instance
 	 *
 	 * Constraint:
-	 *     (definition=[TypeDefinition|QualifiedNameRule] attributes+=AttributeRule*)
+	 *     (definition=[TypeDefinition|QualifiedName] attributes+=AttributeRule*)
 	 * </pre>
 	 */
 	protected void sequence_InstanceRule(ISerializationContext context, Instance semanticObject) {

@@ -13,6 +13,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//DefinitionModel/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//DefinitionModel/types"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//DefinitionModel/functions"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//DefinitionModel/constants"/>
     </genClasses>
     <genClasses ecoreClass="model.ecore#//QualifiedName"/>
     <genClasses ecoreClass="model.ecore#//Import">

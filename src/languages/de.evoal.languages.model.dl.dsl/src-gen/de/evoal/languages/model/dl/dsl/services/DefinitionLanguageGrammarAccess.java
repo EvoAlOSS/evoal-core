@@ -39,19 +39,21 @@ public class DefinitionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 		private final RuleCall cTypesTypeDefinitionRuleParserRuleCall_4_0_0 = (RuleCall)cTypesAssignment_4_0.eContents().get(0);
 		private final Assignment cFunctionsAssignment_4_1 = (Assignment)cAlternatives_4.eContents().get(1);
 		private final RuleCall cFunctionsFunctionDefinitionRuleParserRuleCall_4_1_0 = (RuleCall)cFunctionsAssignment_4_1.eContents().get(0);
+		private final Assignment cConstantsAssignment_4_2 = (Assignment)cAlternatives_4.eContents().get(2);
+		private final RuleCall cConstantsConstantDefinitionRuleParserRuleCall_4_2_0 = (RuleCall)cConstantsAssignment_4_2.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//DefinitionModelRule returns DefinitionModel:
 		//    (imports += ImportRule)*
 		//    'module' name = QualifiedName '{'
-		//        ((types += TypeDefinitionRule ) | (functions += FunctionDefinitionRule ))*
+		//        ((types += TypeDefinitionRule ) | (functions += FunctionDefinitionRule ) | constants += ConstantDefinitionRule)*
 		//    '}'
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//(imports += ImportRule)*
 		//'module' name = QualifiedName '{'
-		//    ((types += TypeDefinitionRule ) | (functions += FunctionDefinitionRule ))*
+		//    ((types += TypeDefinitionRule ) | (functions += FunctionDefinitionRule ) | constants += ConstantDefinitionRule)*
 		//'}'
 		public Group getGroup() { return cGroup; }
 		
@@ -73,7 +75,7 @@ public class DefinitionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
 		
-		//((types += TypeDefinitionRule ) | (functions += FunctionDefinitionRule ))*
+		//((types += TypeDefinitionRule ) | (functions += FunctionDefinitionRule ) | constants += ConstantDefinitionRule)*
 		public Alternatives getAlternatives_4() { return cAlternatives_4; }
 		
 		//(types += TypeDefinitionRule )
@@ -87,6 +89,12 @@ public class DefinitionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 		
 		//FunctionDefinitionRule
 		public RuleCall getFunctionsFunctionDefinitionRuleParserRuleCall_4_1_0() { return cFunctionsFunctionDefinitionRuleParserRuleCall_4_1_0; }
+		
+		//constants += ConstantDefinitionRule
+		public Assignment getConstantsAssignment_4_2() { return cConstantsAssignment_4_2; }
+		
+		//ConstantDefinitionRule
+		public RuleCall getConstantsConstantDefinitionRuleParserRuleCall_4_2_0() { return cConstantsConstantDefinitionRuleParserRuleCall_4_2_0; }
 		
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_5() { return cRightCurlyBracketKeyword_5; }
@@ -175,7 +183,7 @@ public class DefinitionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 	//DefinitionModelRule returns DefinitionModel:
 	//    (imports += ImportRule)*
 	//    'module' name = QualifiedName '{'
-	//        ((types += TypeDefinitionRule ) | (functions += FunctionDefinitionRule ))*
+	//        ((types += TypeDefinitionRule ) | (functions += FunctionDefinitionRule ) | constants += ConstantDefinitionRule)*
 	//    '}'
 	//;
 	public DefinitionModelRuleElements getDefinitionModelRuleAccess() {
@@ -389,7 +397,7 @@ public class DefinitionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 	}
 	
 	//ValueReferenceRule returns ValueReference:
-	//    {ValueReference} 'value'
+	//    ConstantReferenceRule
 	//;
 	public BaseLanguageGrammarAccess.ValueReferenceRuleElements getValueReferenceRuleAccess() {
 		return gaBaseLanguage.getValueReferenceRuleAccess();
@@ -397,6 +405,17 @@ public class DefinitionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 	
 	public ParserRule getValueReferenceRuleRule() {
 		return getValueReferenceRuleAccess().getRule();
+	}
+	
+	//ConstantReferenceRule returns ConstantReference:
+	//    definition = [ConstantDefinition|QualifiedName]
+	//;
+	public BaseLanguageGrammarAccess.ConstantReferenceRuleElements getConstantReferenceRuleAccess() {
+		return gaBaseLanguage.getConstantReferenceRuleAccess();
+	}
+	
+	public ParserRule getConstantReferenceRuleRule() {
+		return getConstantReferenceRuleAccess().getRule();
 	}
 	
 	//LiteralRule returns Literal:
@@ -659,6 +678,17 @@ public class DefinitionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 	
 	public ParserRule getFunctionDefinitionRuleRule() {
 		return getFunctionDefinitionRuleAccess().getRule();
+	}
+	
+	//ConstantDefinitionRule returns ConstantDefinition:
+	//    'const' type = TypeDefinitionRule name = StringOrId ':=' value = ExpressionRule
+	//;
+	public BaseLanguageGrammarAccess.ConstantDefinitionRuleElements getConstantDefinitionRuleAccess() {
+		return gaBaseLanguage.getConstantDefinitionRuleAccess();
+	}
+	
+	public ParserRule getConstantDefinitionRuleRule() {
+		return getConstantDefinitionRuleAccess().getRule();
 	}
 	
 	//ParameterRule returns Parameter:

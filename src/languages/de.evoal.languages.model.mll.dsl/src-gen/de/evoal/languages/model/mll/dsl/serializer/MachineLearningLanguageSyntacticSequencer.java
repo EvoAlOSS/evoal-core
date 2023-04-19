@@ -58,7 +58,7 @@ public class MachineLearningLanguageSyntacticSequencer extends AbstractSyntactic
 	 *     ('{' '}')?
 	 *
 	 * This ambiguous syntax occurs at:
-	 *     definition=[TypeDefinition|QualifiedNameRule] (ambiguity) (rule end)
+	 *     definition=[TypeDefinition|QualifiedName] (ambiguity) (rule end)
 	 
 	 * </pre>
 	 */

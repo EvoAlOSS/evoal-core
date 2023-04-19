@@ -61,7 +61,7 @@ public class GeneratorDSLSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     ('{' '}')?
 	 *
 	 * This ambiguous syntax occurs at:
-	 *     definition=[TypeDefinition|QualifiedNameRule] (ambiguity) (rule end)
+	 *     definition=[TypeDefinition|QualifiedName] (ambiguity) (rule end)
 	 
 	 * </pre>
 	 */

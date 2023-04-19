@@ -54,7 +54,7 @@ public class OptimisationLanguageSyntacticSequencer extends AbstractSyntacticSeq
 	 *     ('{' '}')?
 	 *
 	 * This ambiguous syntax occurs at:
-	 *     definition=[TypeDefinition|QualifiedNameRule] (ambiguity) (rule end)
+	 *     definition=[TypeDefinition|QualifiedName] (ambiguity) (rule end)
 	 
 	 * </pre>
 	 */

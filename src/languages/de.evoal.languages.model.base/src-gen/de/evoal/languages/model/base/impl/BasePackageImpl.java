@@ -15,6 +15,8 @@ import de.evoal.languages.model.base.Call;
 import de.evoal.languages.model.base.CallOrLiteralOrReferenceOrParantheses;
 import de.evoal.languages.model.base.ComparisonExpression;
 import de.evoal.languages.model.base.ComparisonOperator;
+import de.evoal.languages.model.base.ConstantDefinition;
+import de.evoal.languages.model.base.ConstantReference;
 import de.evoal.languages.model.base.DataType;
 import de.evoal.languages.model.base.DefinedFunctionName;
 import de.evoal.languages.model.base.DoubleLiteral;
@@ -328,6 +330,20 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 	 * @generated
 	 */
 	private EClass definedFunctionNameEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass constantDefinitionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass constantReferenceEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1273,6 +1289,66 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 	 * @generated
 	 */
 	@Override
+	public EClass getConstantDefinition() {
+		return constantDefinitionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getConstantDefinition_Type() {
+		return (EReference)constantDefinitionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getConstantDefinition_Name() {
+		return (EAttribute)constantDefinitionEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getConstantDefinition_Value() {
+		return (EReference)constantDefinitionEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getConstantReference() {
+		return constantReferenceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getConstantReference_Definition() {
+		return (EReference)constantReferenceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EEnum getComparisonOperator() {
 		return comparisonOperatorEEnum;
 	}
@@ -1459,6 +1535,14 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 		definedFunctionNameEClass = createEClass(DEFINED_FUNCTION_NAME);
 		createEReference(definedFunctionNameEClass, DEFINED_FUNCTION_NAME__DEFINITION);
 
+		constantDefinitionEClass = createEClass(CONSTANT_DEFINITION);
+		createEReference(constantDefinitionEClass, CONSTANT_DEFINITION__TYPE);
+		createEAttribute(constantDefinitionEClass, CONSTANT_DEFINITION__NAME);
+		createEReference(constantDefinitionEClass, CONSTANT_DEFINITION__VALUE);
+
+		constantReferenceEClass = createEClass(CONSTANT_REFERENCE);
+		createEReference(constantReferenceEClass, CONSTANT_REFERENCE__DEFINITION);
+
 		// Create enums
 		comparisonOperatorEEnum = createEEnum(COMPARISON_OPERATOR);
 		addOrSubtractOperatorEEnum = createEEnum(ADD_OR_SUBTRACT_OPERATOR);
@@ -1515,6 +1599,7 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 		dataTypeEClass.getESuperTypes().add(this.getType());
 		arrayTypeEClass.getESuperTypes().add(this.getType());
 		definedFunctionNameEClass.getESuperTypes().add(this.getFunctionName());
+		constantReferenceEClass.getESuperTypes().add(this.getValueReference());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(expressionEClass, Expression.class, "Expression", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1644,6 +1729,14 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 
 		initEClass(definedFunctionNameEClass, DefinedFunctionName.class, "DefinedFunctionName", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getDefinedFunctionName_Definition(), this.getFunctionDefinition(), null, "definition", null, 1, 1, DefinedFunctionName.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(constantDefinitionEClass, ConstantDefinition.class, "ConstantDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getConstantDefinition_Type(), this.getTypeDefinition(), null, "type", null, 1, 1, ConstantDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getConstantDefinition_Name(), ecorePackage.getEString(), "name", null, 1, 1, ConstantDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getConstantDefinition_Value(), this.getExpression(), null, "value", null, 1, 1, ConstantDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(constantReferenceEClass, ConstantReference.class, "ConstantReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getConstantReference_Definition(), this.getConstantDefinition(), null, "definition", null, 1, 1, ConstantReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(comparisonOperatorEEnum, ComparisonOperator.class, "ComparisonOperator");

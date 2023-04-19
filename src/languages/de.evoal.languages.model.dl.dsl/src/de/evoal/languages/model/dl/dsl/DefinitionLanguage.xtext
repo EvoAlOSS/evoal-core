@@ -6,7 +6,7 @@ import "https://www.evoal.de/languages/dl/1.0.0"
 DefinitionModelRule returns DefinitionModel:
 	(imports += ImportRule)*
 	'module' name = QualifiedName '{'
-		((types += TypeDefinitionRule ) | (functions += FunctionDefinitionRule ))*
+		((types += TypeDefinitionRule ) | (functions += FunctionDefinitionRule ) | constants += ConstantDefinitionRule)*
 	'}'
 ;
 
