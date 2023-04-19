@@ -3,8 +3,8 @@
  */
 package de.evoal.languages.model.ol;
 
-import de.evoal.languages.model.instance.Array;
-import de.evoal.languages.model.instance.Instance;
+import de.evoal.languages.model.base.Array;
+import de.evoal.languages.model.base.Instance;
 
 import org.eclipse.emf.ecore.EObject;
 
@@ -54,12 +54,12 @@ public interface AlgorithmInstance extends EObject {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Algorithm</em>' containment reference.
-	 * @see #setAlgorithm(de.evoal.languages.model.base.Instance)
+	 * @see #setAlgorithm(Instance)
 	 * @see de.evoal.languages.model.ol.OLPackage#getAlgorithmInstance_Algorithm()
 	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	de.evoal.languages.model.base.Instance getAlgorithm();
+	Instance getAlgorithm();
 
 	/**
 	 * Sets the value of the '{@link de.evoal.languages.model.ol.AlgorithmInstance#getAlgorithm <em>Algorithm</em>}' containment reference.
@@ -69,19 +69,19 @@ public interface AlgorithmInstance extends EObject {
 	 * @see #getAlgorithm()
 	 * @generated
 	 */
-	void setAlgorithm(de.evoal.languages.model.base.Instance value);
+	void setAlgorithm(Instance value);
 
 	/**
 	 * Returns the value of the '<em><b>Documentation</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Documentation</em>' containment reference.
-	 * @see #setDocumentation(de.evoal.languages.model.base.Array)
+	 * @see #setDocumentation(Array)
 	 * @see de.evoal.languages.model.ol.OLPackage#getAlgorithmInstance_Documentation()
 	 * @model containment="true"
 	 * @generated
 	 */
-	de.evoal.languages.model.base.Array getDocumentation();
+	Array getDocumentation();
 
 	/**
 	 * Sets the value of the '{@link de.evoal.languages.model.ol.AlgorithmInstance#getDocumentation <em>Documentation</em>}' containment reference.
@@ -91,6 +91,6 @@ public interface AlgorithmInstance extends EObject {
 	 * @see #getDocumentation()
 	 * @generated
 	 */
-	void setDocumentation(de.evoal.languages.model.base.Array value);
+	void setDocumentation(Array value);
 
 } // AlgorithmInstance

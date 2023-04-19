@@ -3,6 +3,8 @@
  */
 package de.evoal.languages.model.instance;
 
+import de.evoal.languages.model.base.BasePackage;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -57,155 +59,6 @@ public interface InstancePackage extends EPackage {
 	InstancePackage eINSTANCE = de.evoal.languages.model.instance.impl.InstancePackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.instance.impl.ValueImpl <em>Value</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.instance.impl.ValueImpl
-	 * @see de.evoal.languages.model.instance.impl.InstancePackageImpl#getValue()
-	 * @generated
-	 */
-	int VALUE = 2;
-
-	/**
-	 * The number of structural features of the '<em>Value</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VALUE_FEATURE_COUNT = 0;
-
-	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.instance.impl.InstanceImpl <em>Instance</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.instance.impl.InstanceImpl
-	 * @see de.evoal.languages.model.instance.impl.InstancePackageImpl#getInstance()
-	 * @generated
-	 */
-	int INSTANCE = 0;
-
-	/**
-	 * The feature id for the '<em><b>Definition</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INSTANCE__DEFINITION = VALUE_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Attributes</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INSTANCE__ATTRIBUTES = VALUE_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of structural features of the '<em>Instance</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INSTANCE_FEATURE_COUNT = VALUE_FEATURE_COUNT + 2;
-
-	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.instance.impl.AttributeImpl <em>Attribute</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.instance.impl.AttributeImpl
-	 * @see de.evoal.languages.model.instance.impl.InstancePackageImpl#getAttribute()
-	 * @generated
-	 */
-	int ATTRIBUTE = 1;
-
-	/**
-	 * The feature id for the '<em><b>Definition</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ATTRIBUTE__DEFINITION = 0;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ATTRIBUTE__VALUE = 1;
-
-	/**
-	 * The number of structural features of the '<em>Attribute</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ATTRIBUTE_FEATURE_COUNT = 2;
-
-	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.instance.impl.ArrayImpl <em>Array</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.instance.impl.ArrayImpl
-	 * @see de.evoal.languages.model.instance.impl.InstancePackageImpl#getArray()
-	 * @generated
-	 */
-	int ARRAY = 3;
-
-	/**
-	 * The feature id for the '<em><b>Values</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ARRAY__VALUES = VALUE_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Array</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ARRAY_FEATURE_COUNT = VALUE_FEATURE_COUNT + 1;
-
-	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.instance.impl.LiteralValueImpl <em>Literal Value</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.instance.impl.LiteralValueImpl
-	 * @see de.evoal.languages.model.instance.impl.InstancePackageImpl#getLiteralValue()
-	 * @generated
-	 */
-	int LITERAL_VALUE = 4;
-
-	/**
-	 * The feature id for the '<em><b>Literal</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LITERAL_VALUE__LITERAL = VALUE_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Literal Value</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LITERAL_VALUE_FEATURE_COUNT = VALUE_FEATURE_COUNT + 1;
-
-	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.instance.impl.DataReferenceImpl <em>Data Reference</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -213,7 +66,7 @@ public interface InstancePackage extends EPackage {
 	 * @see de.evoal.languages.model.instance.impl.InstancePackageImpl#getDataReference()
 	 * @generated
 	 */
-	int DATA_REFERENCE = 5;
+	int DATA_REFERENCE = 0;
 
 	/**
 	 * The feature id for the '<em><b>Definition</b></em>' reference.
@@ -222,7 +75,7 @@ public interface InstancePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DATA_REFERENCE__DEFINITION = VALUE_FEATURE_COUNT + 0;
+	int DATA_REFERENCE__DEFINITION = BasePackage.VALUE_REFERENCE_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Data Reference</em>' class.
@@ -231,124 +84,8 @@ public interface InstancePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DATA_REFERENCE_FEATURE_COUNT = VALUE_FEATURE_COUNT + 1;
+	int DATA_REFERENCE_FEATURE_COUNT = BasePackage.VALUE_REFERENCE_FEATURE_COUNT + 1;
 
-
-	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.instance.Instance <em>Instance</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Instance</em>'.
-	 * @see de.evoal.languages.model.instance.Instance
-	 * @generated
-	 */
-	EClass getInstance();
-
-	/**
-	 * Returns the meta object for the reference '{@link de.evoal.languages.model.instance.Instance#getDefinition <em>Definition</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Definition</em>'.
-	 * @see de.evoal.languages.model.instance.Instance#getDefinition()
-	 * @see #getInstance()
-	 * @generated
-	 */
-	EReference getInstance_Definition();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.instance.Instance#getAttributes <em>Attributes</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Attributes</em>'.
-	 * @see de.evoal.languages.model.instance.Instance#getAttributes()
-	 * @see #getInstance()
-	 * @generated
-	 */
-	EReference getInstance_Attributes();
-
-	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.instance.Attribute <em>Attribute</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Attribute</em>'.
-	 * @see de.evoal.languages.model.instance.Attribute
-	 * @generated
-	 */
-	EClass getAttribute();
-
-	/**
-	 * Returns the meta object for the reference '{@link de.evoal.languages.model.instance.Attribute#getDefinition <em>Definition</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Definition</em>'.
-	 * @see de.evoal.languages.model.instance.Attribute#getDefinition()
-	 * @see #getAttribute()
-	 * @generated
-	 */
-	EReference getAttribute_Definition();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link de.evoal.languages.model.instance.Attribute#getValue <em>Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Value</em>'.
-	 * @see de.evoal.languages.model.instance.Attribute#getValue()
-	 * @see #getAttribute()
-	 * @generated
-	 */
-	EReference getAttribute_Value();
-
-	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.instance.Value <em>Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Value</em>'.
-	 * @see de.evoal.languages.model.instance.Value
-	 * @generated
-	 */
-	EClass getValue();
-
-	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.instance.Array <em>Array</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Array</em>'.
-	 * @see de.evoal.languages.model.instance.Array
-	 * @generated
-	 */
-	EClass getArray();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.instance.Array#getValues <em>Values</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Values</em>'.
-	 * @see de.evoal.languages.model.instance.Array#getValues()
-	 * @see #getArray()
-	 * @generated
-	 */
-	EReference getArray_Values();
-
-	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.instance.LiteralValue <em>Literal Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Literal Value</em>'.
-	 * @see de.evoal.languages.model.instance.LiteralValue
-	 * @generated
-	 */
-	EClass getLiteralValue();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link de.evoal.languages.model.instance.LiteralValue#getLiteral <em>Literal</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Literal</em>'.
-	 * @see de.evoal.languages.model.instance.LiteralValue#getLiteral()
-	 * @see #getLiteralValue()
-	 * @generated
-	 */
-	EReference getLiteralValue_Literal();
 
 	/**
 	 * Returns the meta object for class '{@link de.evoal.languages.model.instance.DataReference <em>Data Reference</em>}'.
@@ -393,104 +130,6 @@ public interface InstancePackage extends EPackage {
 	 * @generated
 	 */
 	interface Literals {
-		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.instance.impl.InstanceImpl <em>Instance</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.instance.impl.InstanceImpl
-		 * @see de.evoal.languages.model.instance.impl.InstancePackageImpl#getInstance()
-		 * @generated
-		 */
-		EClass INSTANCE = eINSTANCE.getInstance();
-
-		/**
-		 * The meta object literal for the '<em><b>Definition</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference INSTANCE__DEFINITION = eINSTANCE.getInstance_Definition();
-
-		/**
-		 * The meta object literal for the '<em><b>Attributes</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference INSTANCE__ATTRIBUTES = eINSTANCE.getInstance_Attributes();
-
-		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.instance.impl.AttributeImpl <em>Attribute</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.instance.impl.AttributeImpl
-		 * @see de.evoal.languages.model.instance.impl.InstancePackageImpl#getAttribute()
-		 * @generated
-		 */
-		EClass ATTRIBUTE = eINSTANCE.getAttribute();
-
-		/**
-		 * The meta object literal for the '<em><b>Definition</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ATTRIBUTE__DEFINITION = eINSTANCE.getAttribute_Definition();
-
-		/**
-		 * The meta object literal for the '<em><b>Value</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ATTRIBUTE__VALUE = eINSTANCE.getAttribute_Value();
-
-		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.instance.impl.ValueImpl <em>Value</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.instance.impl.ValueImpl
-		 * @see de.evoal.languages.model.instance.impl.InstancePackageImpl#getValue()
-		 * @generated
-		 */
-		EClass VALUE = eINSTANCE.getValue();
-
-		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.instance.impl.ArrayImpl <em>Array</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.instance.impl.ArrayImpl
-		 * @see de.evoal.languages.model.instance.impl.InstancePackageImpl#getArray()
-		 * @generated
-		 */
-		EClass ARRAY = eINSTANCE.getArray();
-
-		/**
-		 * The meta object literal for the '<em><b>Values</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ARRAY__VALUES = eINSTANCE.getArray_Values();
-
-		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.instance.impl.LiteralValueImpl <em>Literal Value</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.instance.impl.LiteralValueImpl
-		 * @see de.evoal.languages.model.instance.impl.InstancePackageImpl#getLiteralValue()
-		 * @generated
-		 */
-		EClass LITERAL_VALUE = eINSTANCE.getLiteralValue();
-
-		/**
-		 * The meta object literal for the '<em><b>Literal</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference LITERAL_VALUE__LITERAL = eINSTANCE.getLiteralValue_Literal();
-
 		/**
 		 * The meta object literal for the '{@link de.evoal.languages.model.instance.impl.DataReferenceImpl <em>Data Reference</em>}' class.
 		 * <!-- begin-user-doc -->

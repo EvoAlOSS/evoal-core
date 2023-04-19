@@ -2,8 +2,6 @@
  */
 package de.evoal.languages.model.base;
 
-import org.eclipse.emf.common.util.EList;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Instance Type</b></em>'.
@@ -18,7 +16,7 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link de.evoal.languages.model.base.InstanceType#getDefinitions <em>Definitions</em>}</li>
+ *   <li>{@link de.evoal.languages.model.base.InstanceType#getDefinition <em>Definition</em>}</li>
  * </ul>
  *
  * @see de.evoal.languages.model.base.BasePackage#getInstanceType()
@@ -27,18 +25,28 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface InstanceType extends Type {
 	/**
-	 * Returns the value of the '<em><b>Definitions</b></em>' reference list.
-	 * The list contents are of type {@link de.evoal.languages.model.base.TypeDefinition}.
+	 * Returns the value of the '<em><b>Definition</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * List of allowed types (including inheritance rules).
 	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Definitions</em>' reference list.
-	 * @see de.evoal.languages.model.base.BasePackage#getInstanceType_Definitions()
-	 * @model ordered="false"
+	 * @return the value of the '<em>Definition</em>' reference.
+	 * @see #setDefinition(TypeDefinition)
+	 * @see de.evoal.languages.model.base.BasePackage#getInstanceType_Definition()
+	 * @model required="true" ordered="false"
 	 * @generated
 	 */
-	EList<TypeDefinition> getDefinitions();
+	TypeDefinition getDefinition();
+
+	/**
+	 * Sets the value of the '{@link de.evoal.languages.model.base.InstanceType#getDefinition <em>Definition</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Definition</em>' reference.
+	 * @see #getDefinition()
+	 * @generated
+	 */
+	void setDefinition(TypeDefinition value);
 
 } // InstanceType

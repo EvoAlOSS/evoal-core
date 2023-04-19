@@ -57,70 +57,10 @@ public class InstanceFactoryImpl extends EFactoryImpl implements InstanceFactory
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case InstancePackage.INSTANCE: return createInstance();
-			case InstancePackage.ATTRIBUTE: return createAttribute();
-			case InstancePackage.VALUE: return createValue();
-			case InstancePackage.ARRAY: return createArray();
-			case InstancePackage.LITERAL_VALUE: return createLiteralValue();
 			case InstancePackage.DATA_REFERENCE: return createDataReference();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Instance createInstance() {
-		InstanceImpl instance = new InstanceImpl();
-		return instance;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Attribute createAttribute() {
-		AttributeImpl attribute = new AttributeImpl();
-		return attribute;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Value createValue() {
-		ValueImpl value = new ValueImpl();
-		return value;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Array createArray() {
-		ArrayImpl array = new ArrayImpl();
-		return array;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public LiteralValue createLiteralValue() {
-		LiteralValueImpl literalValue = new LiteralValueImpl();
-		return literalValue;
 	}
 
 	/**

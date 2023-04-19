@@ -98,9 +98,9 @@ LiteralRule returns Literal:
 ;
 
 InstanceLiteralRule returns Instance:
-	definition = [TypeDefinition|QualifiedName] ('{'
+	definition = [TypeDefinition|QualifiedName] '{'
 	  attributes += AttributeRule*
-	'}')?
+	'}'
 ;
 
 AttributeRule returns Attribute:
@@ -171,7 +171,7 @@ LiteralTypeRule returns LiteralType:
 
 InstanceTypeRule returns InstanceType:
 	{InstanceType}
-	'instance' definitions += [TypeDefinition|QualifiedName] ('|' definitions += [TypeDefinition|QualifiedName])*
+	'instance' definition = [TypeDefinition|QualifiedName]
 ;
 
 StringTypeRule returns StringType:

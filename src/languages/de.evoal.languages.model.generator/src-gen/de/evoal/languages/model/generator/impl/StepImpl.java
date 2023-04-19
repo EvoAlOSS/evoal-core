@@ -3,11 +3,12 @@
  */
 package de.evoal.languages.model.generator.impl;
 
+import de.evoal.languages.model.base.Instance;
+
 import de.evoal.languages.model.generator.GeneratorPackage;
 import de.evoal.languages.model.generator.Step;
 
 import de.evoal.languages.model.instance.DataReference;
-import de.evoal.languages.model.instance.Instance;
 
 import java.util.Collection;
 
@@ -49,7 +50,7 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step {
 	 * @generated
 	 * @ordered
 	 */
-	protected de.evoal.languages.model.base.Instance instance;
+	protected Instance instance;
 
 	/**
 	 * The cached value of the '{@link #getReads() <em>Reads</em>}' containment reference list.
@@ -96,7 +97,7 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step {
 	 * @generated
 	 */
 	@Override
-	public de.evoal.languages.model.base.Instance getInstance() {
+	public Instance getInstance() {
 		return instance;
 	}
 
@@ -105,8 +106,8 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetInstance(de.evoal.languages.model.base.Instance newInstance, NotificationChain msgs) {
-		de.evoal.languages.model.base.Instance oldInstance = instance;
+	public NotificationChain basicSetInstance(Instance newInstance, NotificationChain msgs) {
+		Instance oldInstance = instance;
 		instance = newInstance;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, GeneratorPackage.STEP__INSTANCE, oldInstance, newInstance);
@@ -121,7 +122,7 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step {
 	 * @generated
 	 */
 	@Override
-	public void setInstance(de.evoal.languages.model.base.Instance newInstance) {
+	public void setInstance(Instance newInstance) {
 		if (newInstance != instance) {
 			NotificationChain msgs = null;
 			if (instance != null)
@@ -207,7 +208,7 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case GeneratorPackage.STEP__INSTANCE:
-				setInstance((de.evoal.languages.model.base.Instance)newValue);
+				setInstance((Instance)newValue);
 				return;
 			case GeneratorPackage.STEP__READS:
 				getReads().clear();
@@ -230,7 +231,7 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step {
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case GeneratorPackage.STEP__INSTANCE:
-				setInstance((de.evoal.languages.model.base.Instance)null);
+				setInstance((Instance)null);
 				return;
 			case GeneratorPackage.STEP__READS:
 				getReads().clear();

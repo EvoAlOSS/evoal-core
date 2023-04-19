@@ -142,22 +142,13 @@ public interface OLPackage extends EPackage {
 	int PROBLEM = 2;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROBLEM__NAME = 0;
-
-	/**
 	 * The feature id for the '<em><b>Problem</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROBLEM__PROBLEM = 1;
+	int PROBLEM__PROBLEM = 0;
 
 	/**
 	 * The feature id for the '<em><b>Documentation</b></em>' containment reference.
@@ -166,7 +157,7 @@ public interface OLPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROBLEM__DOCUMENTATION = 2;
+	int PROBLEM__DOCUMENTATION = 1;
 
 	/**
 	 * The number of structural features of the '<em>Problem</em>' class.
@@ -175,7 +166,7 @@ public interface OLPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROBLEM_FEATURE_COUNT = 3;
+	int PROBLEM_FEATURE_COUNT = 2;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.ol.impl.AlgorithmInstanceImpl <em>Algorithm Instance</em>}' class.
@@ -297,17 +288,6 @@ public interface OLPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getProblem();
-
-	/**
-	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.ol.Problem#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see de.evoal.languages.model.ol.Problem#getName()
-	 * @see #getProblem()
-	 * @generated
-	 */
-	EAttribute getProblem_Name();
 
 	/**
 	 * Returns the meta object for the containment reference '{@link de.evoal.languages.model.ol.Problem#getProblem <em>Problem</em>}'.
@@ -457,14 +437,6 @@ public interface OLPackage extends EPackage {
 		 * @generated
 		 */
 		EClass PROBLEM = eINSTANCE.getProblem();
-
-		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute PROBLEM__NAME = eINSTANCE.getProblem_Name();
 
 		/**
 		 * The meta object literal for the '<em><b>Problem</b></em>' containment reference feature.

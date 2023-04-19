@@ -32,11 +32,16 @@ Workflow {
                         referencedResource = "platform:/resource/de.evoal.languages.model.base/model/model.genmodel"
                         referencedResource = "platform:/resource/de.evoal.languages.model.ddl/model/model.genmodel"
 
-            parserGenerator = {
-                    options = {
-                            backtrack = true
-                    }
-            }
+						fragment = ecore2xtext.Ecore2XtextValueConverterServiceFragment2 auto-inject {}
+						fragment = scoping.ImportNamespacesScopingFragment2 auto-inject {}
+						fragment = exporting.QualifiedNamesFragment2 auto-inject {}
+						fragment = builder.BuilderIntegrationFragment2 auto-inject {}
+
+			            parserGenerator = {
+			                    options = {
+			                            backtrack = true
+			                    }
+			            }
 
                         serializer = {
                                 generateStub = false
@@ -53,10 +58,6 @@ Workflow {
                         junitSupport = {
                                 junitVersion = "5"
                         }
-                        
-    					fragment = scoping.ImportNamespacesScopingFragment2 auto-inject {}
-			    		fragment = exporting.QualifiedNamesFragment2 auto-inject {}
-			    		fragment = builder.BuilderIntegrationFragment2 auto-inject {}
                 }
         }
 }

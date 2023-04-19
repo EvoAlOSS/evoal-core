@@ -199,18 +199,8 @@ public class OLPackageImpl extends EPackageImpl implements OLPackage {
 	 * @generated
 	 */
 	@Override
-	public EAttribute getProblem_Name() {
-		return (EAttribute)problemEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EReference getProblem_Problem() {
-		return (EReference)problemEClass.getEStructuralFeatures().get(1);
+		return (EReference)problemEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -220,7 +210,7 @@ public class OLPackageImpl extends EPackageImpl implements OLPackage {
 	 */
 	@Override
 	public EReference getProblem_Documentation() {
-		return (EReference)problemEClass.getEStructuralFeatures().get(2);
+		return (EReference)problemEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -301,7 +291,6 @@ public class OLPackageImpl extends EPackageImpl implements OLPackage {
 		createEAttribute(importEClass, IMPORT__IMPORTED_NAMESPACE);
 
 		problemEClass = createEClass(PROBLEM);
-		createEAttribute(problemEClass, PROBLEM__NAME);
 		createEReference(problemEClass, PROBLEM__PROBLEM);
 		createEReference(problemEClass, PROBLEM__DOCUMENTATION);
 
@@ -353,8 +342,7 @@ public class OLPackageImpl extends EPackageImpl implements OLPackage {
 		initEAttribute(getImport_ImportedNamespace(), ecorePackage.getEString(), "importedNamespace", null, 0, 1, Import.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(problemEClass, Problem.class, "Problem", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getProblem_Name(), ecorePackage.getEString(), "name", null, 1, 1, Problem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getProblem_Problem(), theBasePackage.getInstance(), null, "problem", null, 0, 1, Problem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getProblem_Problem(), theBasePackage.getInstance(), null, "problem", null, 1, 1, Problem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getProblem_Documentation(), theBasePackage.getArray(), null, "documentation", null, 0, 1, Problem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(algorithmInstanceEClass, AlgorithmInstance.class, "AlgorithmInstance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

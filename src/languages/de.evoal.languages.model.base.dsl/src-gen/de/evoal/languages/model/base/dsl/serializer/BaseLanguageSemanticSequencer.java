@@ -502,11 +502,17 @@ public class BaseLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 	 *     InstanceTypeRule returns InstanceType
 	 *
 	 * Constraint:
-	 *     (definitions+=[TypeDefinition|QualifiedName] definitions+=[TypeDefinition|QualifiedName]*)
+	 *     definition=[TypeDefinition|QualifiedName]
 	 * </pre>
 	 */
 	protected void sequence_InstanceTypeRule(ISerializationContext context, InstanceType semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, BasePackage.Literals.INSTANCE_TYPE__DEFINITION) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BasePackage.Literals.INSTANCE_TYPE__DEFINITION));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getInstanceTypeRuleAccess().getDefinitionTypeDefinitionQualifiedNameParserRuleCall_2_0_1(), semanticObject.eGet(BasePackage.Literals.INSTANCE_TYPE__DEFINITION, false));
+		feeder.finish();
 	}
 	
 	

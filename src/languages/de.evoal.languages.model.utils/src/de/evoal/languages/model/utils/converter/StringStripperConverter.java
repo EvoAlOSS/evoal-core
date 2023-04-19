@@ -24,10 +24,8 @@ public class StringStripperConverter implements IValueConverter<String> {
 		}
 
 		if (string.startsWith("'")) {
-			System.err.println("SSC toValue " + string + " --> " + string.substring(1, string.length() - 1));
 			return string.substring(1, string.length() - 1);
 		} else {
-			System.err.println("SSC toValue " + string + " --> " + string);
 			return string;
 		}
 	}
@@ -38,7 +36,6 @@ public class StringStripperConverter implements IValueConverter<String> {
 			return null;
 		}
 
-		System.err.println("SSC toString " + value + " --> " + String.format("'%s'", value));
 		return String.format("'%s'", value);
 	}
 }

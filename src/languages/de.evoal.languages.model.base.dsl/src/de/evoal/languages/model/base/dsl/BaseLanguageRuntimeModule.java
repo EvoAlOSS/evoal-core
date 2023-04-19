@@ -4,9 +4,27 @@
  */
 package de.evoal.languages.model.base.dsl;
 
+import org.eclipse.xtext.conversion.IValueConverterService;
+import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
+
+import de.evoal.languages.model.base.dsl.scoping.BaseLanguageLocalScopeProvider;
+import de.evoal.languages.model.utils.converter.ValueConverterService;
 
 /**
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
  */
 public class BaseLanguageRuntimeModule extends AbstractBaseLanguageRuntimeModule {
+	@Override
+	public void configureIScopeProviderDelegate(com.google.inject.Binder binder) {
+		binder.bind(org.eclipse.xtext.scoping.IScopeProvider.class)
+				.annotatedWith(
+						com.google.inject.name.Names
+								.named(AbstractDeclarativeScopeProvider.NAMED_DELEGATE))
+				.to(BaseLanguageLocalScopeProvider.class);
+	}
+	
+    @Override
+    public Class<? extends IValueConverterService> bindIValueConverterService() {
+            return ValueConverterService.class;
+    }
 }

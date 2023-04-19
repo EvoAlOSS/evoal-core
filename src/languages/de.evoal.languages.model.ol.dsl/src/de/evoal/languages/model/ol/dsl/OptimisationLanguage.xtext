@@ -19,7 +19,7 @@ ImportRule returns Import:
 ;
 
 ProblemRule returns Problem:
-	"declare" name = StringOrId "as"
+	"declare" //name = StringOrId "as"
 		problem = InstanceLiteralRule
 	("documenting" ":=" documentation = ArrayRule ';')?
 ;

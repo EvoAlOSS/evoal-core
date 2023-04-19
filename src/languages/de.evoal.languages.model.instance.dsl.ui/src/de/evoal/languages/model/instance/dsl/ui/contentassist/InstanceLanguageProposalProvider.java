@@ -19,10 +19,10 @@ import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 
 import com.google.common.base.Predicate;
 
+import de.evoal.languages.model.base.Attribute;
 import de.evoal.languages.model.base.AttributeDefinition;
+import de.evoal.languages.model.base.Instance;
 import de.evoal.languages.model.base.TypeDefinition;
-import de.evoal.languages.model.instance.Attribute;
-import de.evoal.languages.model.instance.Instance;
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#content-assist
@@ -61,7 +61,7 @@ public class InstanceLanguageProposalProvider extends AbstractInstanceLanguagePr
 	public void completeAttributeRule_Definition(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		final CrossReference crossReference = ((CrossReference)assignment.getTerminal());
 		
-		if(model instanceof Instance && "definition".equals(assignment.getFeature())) {
+		if(model instanceof Instance && "definition".equals(assignment.getFeature())) { // TODO Fix
 			final Instance instance = (Instance)model;
 			
 			lookupCrossReference(crossReference, context, acceptor, new Predicate<IEObjectDescription>() {

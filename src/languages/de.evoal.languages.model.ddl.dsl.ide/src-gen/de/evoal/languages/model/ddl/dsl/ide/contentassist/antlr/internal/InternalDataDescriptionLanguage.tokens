@@ -1,4 +1,4 @@
-'!'=88
+'!'=87
 '!='=27
 '%'=34
 '('=76
@@ -7,7 +7,7 @@
 '+'=30
 ','=75
 '-'=31
-'.'=87
+'.'=86
 '/'=33
 ':'=59
 ':='=78
@@ -32,7 +32,7 @@
 ']'=74
 '^'=72
 'a'=52
-'array'=86
+'array'=85
 'boolean'=22
 'c'=46
 'cardinal'=18
@@ -41,14 +41,14 @@
 'da'=44
 'data'=60
 'description'=65
-'expression'=82
+'expression'=81
 'f'=51
 'false'=15
-'float'=84
+'float'=83
 'h'=43
 'import'=62
 'instance'=80
-'int'=83
+'int'=82
 'integer'=21
 'k'=42
 'literal'=79
@@ -62,16 +62,15 @@
 'quotient'=19
 'real'=20
 'string'=23
-'true'=89
+'true'=88
 'type'=64
 'types'=58
 'value'=68
-'void'=85
+'void'=84
 'with'=66
 'y'=54
 'z'=53
 '{'=56
-'|'=81
 '}'=57
 RULE_ANY_OTHER=14
 RULE_DIGIT=9
@@ -158,4 +157,3 @@ T__85=85
 T__86=86
 T__87=87
 T__88=88
-T__89=89

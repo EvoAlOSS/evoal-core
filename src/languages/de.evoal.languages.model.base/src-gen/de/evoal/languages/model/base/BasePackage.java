@@ -1148,13 +1148,13 @@ public interface BasePackage extends EPackage {
 	int INSTANCE_TYPE = 25;
 
 	/**
-	 * The feature id for the '<em><b>Definitions</b></em>' reference list.
+	 * The feature id for the '<em><b>Definition</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INSTANCE_TYPE__DEFINITIONS = TYPE_FEATURE_COUNT + 0;
+	int INSTANCE_TYPE__DEFINITION = TYPE_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Instance Type</em>' class.
@@ -2529,15 +2529,15 @@ public interface BasePackage extends EPackage {
 	EClass getInstanceType();
 
 	/**
-	 * Returns the meta object for the reference list '{@link de.evoal.languages.model.base.InstanceType#getDefinitions <em>Definitions</em>}'.
+	 * Returns the meta object for the reference '{@link de.evoal.languages.model.base.InstanceType#getDefinition <em>Definition</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Definitions</em>'.
-	 * @see de.evoal.languages.model.base.InstanceType#getDefinitions()
+	 * @return the meta object for the reference '<em>Definition</em>'.
+	 * @see de.evoal.languages.model.base.InstanceType#getDefinition()
 	 * @see #getInstanceType()
 	 * @generated
 	 */
-	EReference getInstanceType_Definitions();
+	EReference getInstanceType_Definition();
 
 	/**
 	 * Returns the meta object for class '{@link de.evoal.languages.model.base.LiteralType <em>Literal Type</em>}'.
@@ -3521,12 +3521,12 @@ public interface BasePackage extends EPackage {
 		EClass INSTANCE_TYPE = eINSTANCE.getInstanceType();
 
 		/**
-		 * The meta object literal for the '<em><b>Definitions</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Definition</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference INSTANCE_TYPE__DEFINITIONS = eINSTANCE.getInstanceType_Definitions();
+		EReference INSTANCE_TYPE__DEFINITION = eINSTANCE.getInstanceType_Definition();
 
 		/**
 		 * The meta object literal for the '{@link de.evoal.languages.model.base.impl.LiteralTypeImpl <em>Literal Type</em>}' class.

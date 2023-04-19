@@ -11,6 +11,7 @@ public class DefinitionLanguageResourceDescriptionStrategy extends FilteringReso
 	public DefinitionLanguageResourceDescriptionStrategy() {
 		super(
 				DlPackage.eINSTANCE.getDefinitionModel(),
+				BasePackage.eINSTANCE.getConstantDefinition(),
 				BasePackage.eINSTANCE.getTypeDefinition(),
 				BasePackage.eINSTANCE.getAttributeDefinition(),
 				BasePackage.eINSTANCE.getFunctionDefinition()

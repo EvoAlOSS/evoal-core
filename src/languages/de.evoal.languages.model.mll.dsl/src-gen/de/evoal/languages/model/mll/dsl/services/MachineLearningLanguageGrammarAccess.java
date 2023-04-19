@@ -1236,9 +1236,9 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 	}
 	
 	//InstanceLiteralRule returns Instance:
-	//    definition = [TypeDefinition|QualifiedName] ('{'
+	//    definition = [TypeDefinition|QualifiedName] '{'
 	//      attributes += AttributeRule*
-	//    '}')?
+	//    '}'
 	//;
 	public BaseLanguageGrammarAccess.InstanceLiteralRuleElements getInstanceLiteralRuleAccess() {
 		return gaBaseLanguage.getInstanceLiteralRuleAccess();
@@ -1392,7 +1392,7 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 	
 	//InstanceTypeRule returns InstanceType:
 	//    {InstanceType}
-	//    'instance' definitions += [TypeDefinition|QualifiedName] ('|' definitions += [TypeDefinition|QualifiedName])*
+	//    'instance' definition = [TypeDefinition|QualifiedName]
 	//;
 	public BaseLanguageGrammarAccess.InstanceTypeRuleElements getInstanceTypeRuleAccess() {
 		return gaBaseLanguage.getInstanceTypeRuleAccess();

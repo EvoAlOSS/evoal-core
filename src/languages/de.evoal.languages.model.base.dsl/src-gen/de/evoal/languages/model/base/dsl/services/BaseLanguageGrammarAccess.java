@@ -616,22 +616,21 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		private final Assignment cDefinitionAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final CrossReference cDefinitionTypeDefinitionCrossReference_0_0 = (CrossReference)cDefinitionAssignment_0.eContents().get(0);
 		private final RuleCall cDefinitionTypeDefinitionQualifiedNameParserRuleCall_0_0_1 = (RuleCall)cDefinitionTypeDefinitionCrossReference_0_0.eContents().get(1);
-		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
-		private final Keyword cLeftCurlyBracketKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
-		private final Assignment cAttributesAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
-		private final RuleCall cAttributesAttributeRuleParserRuleCall_1_1_0 = (RuleCall)cAttributesAssignment_1_1.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_1_2 = (Keyword)cGroup_1.eContents().get(2);
+		private final Keyword cLeftCurlyBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cAttributesAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cAttributesAttributeRuleParserRuleCall_2_0 = (RuleCall)cAttributesAssignment_2.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//InstanceLiteralRule returns Instance:
-		//    definition = [TypeDefinition|QualifiedName] ('{'
+		//    definition = [TypeDefinition|QualifiedName] '{'
 		//      attributes += AttributeRule*
-		//    '}')?
+		//    '}'
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//definition = [TypeDefinition|QualifiedName] ('{'
+		//definition = [TypeDefinition|QualifiedName] '{'
 		//  attributes += AttributeRule*
-		//'}')?
+		//'}'
 		public Group getGroup() { return cGroup; }
 		
 		//definition = [TypeDefinition|QualifiedName]
@@ -643,22 +642,17 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		//QualifiedName
 		public RuleCall getDefinitionTypeDefinitionQualifiedNameParserRuleCall_0_0_1() { return cDefinitionTypeDefinitionQualifiedNameParserRuleCall_0_0_1; }
 		
-		//('{'
-		//     attributes += AttributeRule*
-		//   '}')?
-		public Group getGroup_1() { return cGroup_1; }
-		
 		//'{'
-		public Keyword getLeftCurlyBracketKeyword_1_0() { return cLeftCurlyBracketKeyword_1_0; }
+		public Keyword getLeftCurlyBracketKeyword_1() { return cLeftCurlyBracketKeyword_1; }
 		
 		//attributes += AttributeRule*
-		public Assignment getAttributesAssignment_1_1() { return cAttributesAssignment_1_1; }
+		public Assignment getAttributesAssignment_2() { return cAttributesAssignment_2; }
 		
 		//AttributeRule
-		public RuleCall getAttributesAttributeRuleParserRuleCall_1_1_0() { return cAttributesAttributeRuleParserRuleCall_1_1_0; }
+		public RuleCall getAttributesAttributeRuleParserRuleCall_2_0() { return cAttributesAttributeRuleParserRuleCall_2_0; }
 		
 		//'}'
-		public Keyword getRightCurlyBracketKeyword_1_2() { return cRightCurlyBracketKeyword_1_2; }
+		public Keyword getRightCurlyBracketKeyword_3() { return cRightCurlyBracketKeyword_3; }
 	}
 	public class AttributeRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.base.dsl.BaseLanguage.AttributeRule");
@@ -1025,23 +1019,18 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cInstanceTypeAction_0 = (Action)cGroup.eContents().get(0);
 		private final Keyword cInstanceKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Assignment cDefinitionsAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final CrossReference cDefinitionsTypeDefinitionCrossReference_2_0 = (CrossReference)cDefinitionsAssignment_2.eContents().get(0);
-		private final RuleCall cDefinitionsTypeDefinitionQualifiedNameParserRuleCall_2_0_1 = (RuleCall)cDefinitionsTypeDefinitionCrossReference_2_0.eContents().get(1);
-		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
-		private final Keyword cVerticalLineKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
-		private final Assignment cDefinitionsAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
-		private final CrossReference cDefinitionsTypeDefinitionCrossReference_3_1_0 = (CrossReference)cDefinitionsAssignment_3_1.eContents().get(0);
-		private final RuleCall cDefinitionsTypeDefinitionQualifiedNameParserRuleCall_3_1_0_1 = (RuleCall)cDefinitionsTypeDefinitionCrossReference_3_1_0.eContents().get(1);
+		private final Assignment cDefinitionAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final CrossReference cDefinitionTypeDefinitionCrossReference_2_0 = (CrossReference)cDefinitionAssignment_2.eContents().get(0);
+		private final RuleCall cDefinitionTypeDefinitionQualifiedNameParserRuleCall_2_0_1 = (RuleCall)cDefinitionTypeDefinitionCrossReference_2_0.eContents().get(1);
 		
 		//InstanceTypeRule returns InstanceType:
 		//    {InstanceType}
-		//    'instance' definitions += [TypeDefinition|QualifiedName] ('|' definitions += [TypeDefinition|QualifiedName])*
+		//    'instance' definition = [TypeDefinition|QualifiedName]
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{InstanceType}
-		//'instance' definitions += [TypeDefinition|QualifiedName] ('|' definitions += [TypeDefinition|QualifiedName])*
+		//'instance' definition = [TypeDefinition|QualifiedName]
 		public Group getGroup() { return cGroup; }
 		
 		//{InstanceType}
@@ -1050,29 +1039,14 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		//'instance'
 		public Keyword getInstanceKeyword_1() { return cInstanceKeyword_1; }
 		
-		//definitions += [TypeDefinition|QualifiedName]
-		public Assignment getDefinitionsAssignment_2() { return cDefinitionsAssignment_2; }
+		//definition = [TypeDefinition|QualifiedName]
+		public Assignment getDefinitionAssignment_2() { return cDefinitionAssignment_2; }
 		
 		//[TypeDefinition|QualifiedName]
-		public CrossReference getDefinitionsTypeDefinitionCrossReference_2_0() { return cDefinitionsTypeDefinitionCrossReference_2_0; }
+		public CrossReference getDefinitionTypeDefinitionCrossReference_2_0() { return cDefinitionTypeDefinitionCrossReference_2_0; }
 		
 		//QualifiedName
-		public RuleCall getDefinitionsTypeDefinitionQualifiedNameParserRuleCall_2_0_1() { return cDefinitionsTypeDefinitionQualifiedNameParserRuleCall_2_0_1; }
-		
-		//('|' definitions += [TypeDefinition|QualifiedName])*
-		public Group getGroup_3() { return cGroup_3; }
-		
-		//'|'
-		public Keyword getVerticalLineKeyword_3_0() { return cVerticalLineKeyword_3_0; }
-		
-		//definitions += [TypeDefinition|QualifiedName]
-		public Assignment getDefinitionsAssignment_3_1() { return cDefinitionsAssignment_3_1; }
-		
-		//[TypeDefinition|QualifiedName]
-		public CrossReference getDefinitionsTypeDefinitionCrossReference_3_1_0() { return cDefinitionsTypeDefinitionCrossReference_3_1_0; }
-		
-		//QualifiedName
-		public RuleCall getDefinitionsTypeDefinitionQualifiedNameParserRuleCall_3_1_0_1() { return cDefinitionsTypeDefinitionQualifiedNameParserRuleCall_3_1_0_1; }
+		public RuleCall getDefinitionTypeDefinitionQualifiedNameParserRuleCall_2_0_1() { return cDefinitionTypeDefinitionQualifiedNameParserRuleCall_2_0_1; }
 	}
 	public class StringTypeRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.base.dsl.BaseLanguage.StringTypeRule");
@@ -2200,9 +2174,9 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 	}
 	
 	//InstanceLiteralRule returns Instance:
-	//    definition = [TypeDefinition|QualifiedName] ('{'
+	//    definition = [TypeDefinition|QualifiedName] '{'
 	//      attributes += AttributeRule*
-	//    '}')?
+	//    '}'
 	//;
 	public InstanceLiteralRuleElements getInstanceLiteralRuleAccess() {
 		return pInstanceLiteralRule;
@@ -2356,7 +2330,7 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 	
 	//InstanceTypeRule returns InstanceType:
 	//    {InstanceType}
-	//    'instance' definitions += [TypeDefinition|QualifiedName] ('|' definitions += [TypeDefinition|QualifiedName])*
+	//    'instance' definition = [TypeDefinition|QualifiedName]
 	//;
 	public InstanceTypeRuleElements getInstanceTypeRuleAccess() {
 		return pInstanceTypeRule;

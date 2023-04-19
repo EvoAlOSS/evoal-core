@@ -20,6 +20,8 @@ import de.evoal.languages.model.ol.dsl.validation.OptimisationLanguageValidator;
 import java.util.Properties;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.IGrammarAccess;
+import org.eclipse.xtext.common.services.Ecore2XtextTerminalConverters;
+import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.generator.IGenerator2;
 import org.eclipse.xtext.naming.DefaultDeclarativeQualifiedNameProvider;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
@@ -152,6 +154,11 @@ public abstract class AbstractOptimisationLanguageRuntimeModule extends DefaultR
 	// contributed by org.eclipse.xtext.xtext.generator.generator.GeneratorFragment2
 	public Class<? extends IGenerator2> bindIGenerator2() {
 		return OptimisationLanguageGenerator.class;
+	}
+	
+	// contributed by org.eclipse.xtext.xtext.generator.ecore2xtext.Ecore2XtextValueConverterServiceFragment2
+	public Class<? extends IValueConverterService> bindIValueConverterService() {
+		return Ecore2XtextTerminalConverters.class;
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.scoping.ImportNamespacesScopingFragment2

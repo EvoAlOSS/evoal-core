@@ -23,51 +23,6 @@ public interface InstanceFactory extends EFactory {
 	InstanceFactory eINSTANCE = de.evoal.languages.model.instance.impl.InstanceFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>Instance</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Instance</em>'.
-	 * @generated
-	 */
-	Instance createInstance();
-
-	/**
-	 * Returns a new object of class '<em>Attribute</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Attribute</em>'.
-	 * @generated
-	 */
-	Attribute createAttribute();
-
-	/**
-	 * Returns a new object of class '<em>Value</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Value</em>'.
-	 * @generated
-	 */
-	Value createValue();
-
-	/**
-	 * Returns a new object of class '<em>Array</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Array</em>'.
-	 * @generated
-	 */
-	Array createArray();
-
-	/**
-	 * Returns a new object of class '<em>Literal Value</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Literal Value</em>'.
-	 * @generated
-	 */
-	LiteralValue createLiteralValue();
-
-	/**
 	 * Returns a new object of class '<em>Data Reference</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

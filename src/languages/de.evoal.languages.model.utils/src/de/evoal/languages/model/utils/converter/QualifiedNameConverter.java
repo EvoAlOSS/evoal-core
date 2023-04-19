@@ -23,7 +23,6 @@ public class QualifiedNameConverter implements IValueConverter<String> {
 			return null;
 		}
 
-		System.err.println("QNC toValue " + string);
 		return string.replace("'", "");
 	}
 
@@ -33,8 +32,6 @@ public class QualifiedNameConverter implements IValueConverter<String> {
 			return null;
 		}
 
-
-		System.err.println("QNC toString " + value);
 		return "\'" + value + "\'";
 	}
 }

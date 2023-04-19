@@ -2263,35 +2263,33 @@ ruleInstanceLiteralRule returns [EObject current=null]
 				}
 			)
 		)
+		otherlv_1='{'
+		{
+			newLeafNode(otherlv_1, grammarAccess.getInstanceLiteralRuleAccess().getLeftCurlyBracketKeyword_1());
+		}
 		(
-			otherlv_1='{'
-			{
-				newLeafNode(otherlv_1, grammarAccess.getInstanceLiteralRuleAccess().getLeftCurlyBracketKeyword_1_0());
-			}
 			(
-				(
-					{
-						newCompositeNode(grammarAccess.getInstanceLiteralRuleAccess().getAttributesAttributeRuleParserRuleCall_1_1_0());
+				{
+					newCompositeNode(grammarAccess.getInstanceLiteralRuleAccess().getAttributesAttributeRuleParserRuleCall_2_0());
+				}
+				lv_attributes_2_0=ruleAttributeRule
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getInstanceLiteralRuleRule());
 					}
-					lv_attributes_2_0=ruleAttributeRule
-					{
-						if ($current==null) {
-							$current = createModelElementForParent(grammarAccess.getInstanceLiteralRuleRule());
-						}
-						add(
-							$current,
-							"attributes",
-							lv_attributes_2_0,
-							"de.evoal.languages.model.base.dsl.BaseLanguage.AttributeRule");
-						afterParserOrEnumRuleCall();
-					}
-				)
-			)*
-			otherlv_3='}'
-			{
-				newLeafNode(otherlv_3, grammarAccess.getInstanceLiteralRuleAccess().getRightCurlyBracketKeyword_1_2());
-			}
-		)?
+					add(
+						$current,
+						"attributes",
+						lv_attributes_2_0,
+						"de.evoal.languages.model.base.dsl.BaseLanguage.AttributeRule");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)*
+		otherlv_3='}'
+		{
+			newLeafNode(otherlv_3, grammarAccess.getInstanceLiteralRuleAccess().getRightCurlyBracketKeyword_3());
+		}
 	)
 ;
 
@@ -2901,7 +2899,7 @@ ruleInstanceTypeRule returns [EObject current=null]
 					}
 				}
 				{
-					newCompositeNode(grammarAccess.getInstanceTypeRuleAccess().getDefinitionsTypeDefinitionCrossReference_2_0());
+					newCompositeNode(grammarAccess.getInstanceTypeRuleAccess().getDefinitionTypeDefinitionCrossReference_2_0());
 				}
 				ruleQualifiedName
 				{
@@ -2909,31 +2907,6 @@ ruleInstanceTypeRule returns [EObject current=null]
 				}
 			)
 		)
-		(
-			otherlv_3='|'
-			{
-				newLeafNode(otherlv_3, grammarAccess.getInstanceTypeRuleAccess().getVerticalLineKeyword_3_0());
-			}
-			(
-				(
-					{
-						/* */
-					}
-					{
-						if ($current==null) {
-							$current = createModelElement(grammarAccess.getInstanceTypeRuleRule());
-						}
-					}
-					{
-						newCompositeNode(grammarAccess.getInstanceTypeRuleAccess().getDefinitionsTypeDefinitionCrossReference_3_1_0());
-					}
-					ruleQualifiedName
-					{
-						afterParserOrEnumRuleCall();
-					}
-				)
-			)
-		)*
 	)
 ;
 

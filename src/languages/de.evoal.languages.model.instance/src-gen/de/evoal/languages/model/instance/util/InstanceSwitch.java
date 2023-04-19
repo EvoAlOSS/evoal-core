@@ -3,6 +3,9 @@
  */
 package de.evoal.languages.model.instance.util;
 
+import de.evoal.languages.model.base.Value;
+import de.evoal.languages.model.base.ValueReference;
+
 import de.evoal.languages.model.instance.*;
 
 import org.eclipse.emf.ecore.EObject;
@@ -67,42 +70,10 @@ public class InstanceSwitch<T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case InstancePackage.INSTANCE: {
-				Instance instance = (Instance)theEObject;
-				T result = caseInstance(instance);
-				if (result == null) result = caseValue(instance);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case InstancePackage.ATTRIBUTE: {
-				Attribute attribute = (Attribute)theEObject;
-				T result = caseAttribute(attribute);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case InstancePackage.VALUE: {
-				Value value = (Value)theEObject;
-				T result = caseValue(value);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case InstancePackage.ARRAY: {
-				Array array = (Array)theEObject;
-				T result = caseArray(array);
-				if (result == null) result = caseValue(array);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case InstancePackage.LITERAL_VALUE: {
-				LiteralValue literalValue = (LiteralValue)theEObject;
-				T result = caseLiteralValue(literalValue);
-				if (result == null) result = caseValue(literalValue);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case InstancePackage.DATA_REFERENCE: {
 				DataReference dataReference = (DataReference)theEObject;
 				T result = caseDataReference(dataReference);
+				if (result == null) result = caseValueReference(dataReference);
 				if (result == null) result = caseValue(dataReference);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -112,32 +83,17 @@ public class InstanceSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Instance</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Data Reference</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Instance</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Data Reference</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseInstance(Instance object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Attribute</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Attribute</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseAttribute(Attribute object) {
+	public T caseDataReference(DataReference object) {
 		return null;
 	}
 
@@ -157,47 +113,17 @@ public class InstanceSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Array</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Value Reference</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Array</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Value Reference</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseArray(Array object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Literal Value</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Literal Value</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseLiteralValue(LiteralValue object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Data Reference</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Data Reference</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseDataReference(DataReference object) {
+	public T caseValueReference(ValueReference object) {
 		return null;
 	}
 

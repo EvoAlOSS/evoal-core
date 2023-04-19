@@ -4,6 +4,10 @@
  */
 package de.evoal.languages.model.ol.dsl.scoping;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.xtext.scoping.IScope;
+
 /**
  * This class contains custom scoping description.
  * 
@@ -11,5 +15,13 @@ package de.evoal.languages.model.ol.dsl.scoping;
  * on how and when to use it.
  */
 public class OptimisationLanguageScopeProvider extends AbstractOptimisationLanguageScopeProvider {
-
+	@Override
+	public IScope getScope(final EObject context, final EReference reference) {
+		//System.err.println("[Opti Global] --> " + context.eClass().getName() + " --> " + reference.getEContainingClass().getName() + "." + reference.getName());
+		try {
+			return super.getScope(context, reference);
+		} finally {
+			//System.err.println("[Opti Global] --< " + context.eClass().getName() + " --> " + reference.getEContainingClass().getName() + "." + reference.getName());
+		}
+	}
 }

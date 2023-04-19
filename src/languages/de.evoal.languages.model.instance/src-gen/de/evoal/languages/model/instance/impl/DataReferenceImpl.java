@@ -3,6 +3,8 @@
  */
 package de.evoal.languages.model.instance.impl;
 
+import de.evoal.languages.model.base.impl.ValueReferenceImpl;
+
 import de.evoal.languages.model.ddl.DataDescription;
 
 import de.evoal.languages.model.instance.DataReference;
@@ -28,7 +30,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *
  * @generated
  */
-public class DataReferenceImpl extends ValueImpl implements DataReference {
+public class DataReferenceImpl extends ValueReferenceImpl implements DataReference {
 	/**
 	 * The cached value of the '{@link #getDefinition() <em>Definition</em>}' reference.
 	 * <!-- begin-user-doc -->

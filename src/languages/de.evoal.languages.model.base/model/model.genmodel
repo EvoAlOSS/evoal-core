@@ -134,7 +134,7 @@
     </genClasses>
     <genClasses image="false" ecoreClass="model.ecore#//Type"/>
     <genClasses ecoreClass="model.ecore#//InstanceType">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//InstanceType/definitions"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//InstanceType/definition"/>
     </genClasses>
     <genClasses ecoreClass="model.ecore#//LiteralType"/>
     <genClasses ecoreClass="model.ecore#//StringType"/>

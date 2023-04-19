@@ -13,9 +13,9 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.Scopes;
 
+import de.evoal.languages.model.base.BasePackage;
+import de.evoal.languages.model.base.Instance;
 import de.evoal.languages.model.base.TypeDefinition;
-import de.evoal.languages.model.instance.Instance;
-import de.evoal.languages.model.instance.InstancePackage;
 
 /**
  * This class contains custom scoping description.
@@ -24,18 +24,14 @@ import de.evoal.languages.model.instance.InstancePackage;
  * on how and when to use it.
  */
 public class InstanceLanguageScopeProvider extends AbstractInstanceLanguageScopeProvider {
-	
-	private static EClass instance = InstancePackage.eINSTANCE.getInstance();
-	private static EReference instanceDefinition = InstancePackage.eINSTANCE.getInstance_Definition();
-
-//	@Inject
-//	IQualifiedNameProvider provider;
+	private static EClass instance = BasePackage.eINSTANCE.getInstance();
+	private static EReference instanceDefinition = BasePackage.eINSTANCE.getInstance_Definition();
 
 	
 	@Override
-	public IScope getScope(final EObject context, final EReference reference) {
-		System.err.println("[INS] Asking for " + context.eClass().getName() + " --> " + reference.getEContainingClass().getName() + "." + reference.getName());
-		
+	public IScope getScope(EObject context, EReference reference) {
+		System.err.println("[Inst Local ] --> " + context.eClass().getName() + " --> " + reference.getEContainingClass().getName() + "." + reference.getName());
+/*
 		if(instance.equals(context.eClass()) && instanceDefinition.equals(reference)) {
 			final List<TypeDefinition> definitions = new LinkedList<>();
 			TypeDefinition current = ((Instance)context).getDefinition();
@@ -47,6 +43,25 @@ public class InstanceLanguageScopeProvider extends AbstractInstanceLanguageScope
 			
 			return Scopes.scopeFor(definitions, IScope.NULLSCOPE);
 		}
+*/
+		try {
+		return super.getScope(context, reference);
+		} finally {
+			System.err.println("[Inst Local ] --< " + context.eClass().getName() + " --> " + reference.getEContainingClass().getName() + "." + reference.getName());
+
+		}
+	}
+
+	
+//	@Inject
+//	IQualifiedNameProvider provider;
+
+	
+//	@Override
+//	public IScope getScope(final EObject context, final EReference reference) {
+//		System.err.println("[INS] Asking for " + context.eClass().getName() + " --> " + reference.getEContainingClass().getName() + "." + reference.getName());
+		
+
 ///*
 //		if(context instanceof Instance) {
 //			System.err.println("[Ins]     instance of " + ((Instance)context).getDefinition().getName());
@@ -120,8 +135,8 @@ public class InstanceLanguageScopeProvider extends AbstractInstanceLanguageScope
 //		* /
 //*/
 //		//return Scopes.scopeFor(Collections.emptyList()); //super.getScope(context, reference);
-		return super.getScope(context, reference);
-	}
+//		return super.getScope(context, reference);
+//	}
 //
 //	private boolean inheritsFrom(final TypeDefinition current, final InstanceType parent) {
 //		for(final TypeDefinition parentDef : parent.getDefinitions()) {

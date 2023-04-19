@@ -3,8 +3,9 @@
  */
 package de.evoal.languages.model.generator;
 
+import de.evoal.languages.model.base.Instance;
+
 import de.evoal.languages.model.instance.DataReference;
-import de.evoal.languages.model.instance.Instance;
 
 import org.eclipse.emf.common.util.EList;
 
@@ -34,12 +35,12 @@ public interface Step extends EObject {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Instance</em>' containment reference.
-	 * @see #setInstance(de.evoal.languages.model.base.Instance)
+	 * @see #setInstance(Instance)
 	 * @see de.evoal.languages.model.generator.GeneratorPackage#getStep_Instance()
 	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	de.evoal.languages.model.base.Instance getInstance();
+	Instance getInstance();
 
 	/**
 	 * Sets the value of the '{@link de.evoal.languages.model.generator.Step#getInstance <em>Instance</em>}' containment reference.
@@ -49,7 +50,7 @@ public interface Step extends EObject {
 	 * @see #getInstance()
 	 * @generated
 	 */
-	void setInstance(de.evoal.languages.model.base.Instance value);
+	void setInstance(Instance value);
 
 	/**
 	 * Returns the value of the '<em><b>Reads</b></em>' containment reference list.

@@ -8,24 +8,6 @@
   <foreignModel>model.ecore</foreignModel>
   <genPackages prefix="Instance" basePackage="de.evoal.languages.model" disposableProviderFactory="true"
       fileExtensions="instance" ecorePackage="model.ecore#/">
-    <genClasses ecoreClass="model.ecore#//Instance">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//Instance/definition"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//Instance/attributes"/>
-      <genOperations ecoreOperation="model.ecore#//Instance/findAttribute" body="return this.getAttributes()&#xA;                 .stream()&#xA;                 .filter(n -> name.equals(n.getDefinition().getName()))&#xA;                 .findFirst()&#xA;                 .orElse(null);">
-        <genParameters ecoreParameter="model.ecore#//Instance/findAttribute/name"/>
-      </genOperations>
-    </genClasses>
-    <genClasses ecoreClass="model.ecore#//Attribute">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//Attribute/definition"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//Attribute/value"/>
-    </genClasses>
-    <genClasses ecoreClass="model.ecore#//Value"/>
-    <genClasses ecoreClass="model.ecore#//Array">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//Array/values"/>
-    </genClasses>
-    <genClasses ecoreClass="model.ecore#//LiteralValue">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//LiteralValue/literal"/>
-    </genClasses>
     <genClasses ecoreClass="model.ecore#//DataReference">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//DataReference/definition"/>
     </genClasses>

@@ -9,50 +9,40 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.Scopes;
 
+import com.google.inject.Inject;
+
 import de.evoal.languages.model.base.AttributeDefinition;
+import de.evoal.languages.model.base.BasePackage;
+import de.evoal.languages.model.base.Instance;
 import de.evoal.languages.model.base.TypeDefinition;
-import de.evoal.languages.model.instance.Instance;
+import de.evoal.languages.model.base.dsl.scoping.BaseLanguageLocalScopeProvider;
 import de.evoal.languages.model.instance.InstancePackage;
 import de.evoal.languages.model.utils.scoping.WildcardEnabledLocalScopeProvider;
 
 public class InstanceLanguageLocalScopeProvider extends WildcardEnabledLocalScopeProvider {
 	
-	private static EClass instance = InstancePackage.eINSTANCE.getInstance();
-	private static EReference instanceDefinition = InstancePackage.eINSTANCE.getInstance_Definition();
- 	
+	private final static EClass instance = BasePackage.eINSTANCE.getInstance();
+	private final static EReference attributeDefinition = BasePackage.eINSTANCE.getAttribute_Definition();
+
+	@Inject
+	private BaseLanguageLocalScopeProvider provider;
+
 	@Override
-	public IScope getScope(final EObject context, final EReference reference) {
-		System.err.println("[Ins] Asking for " + context.eClass().getName() + " --> " + reference.getEContainingClass().getName() + "." + reference.getName());
-		
-		if(instance.equals(context.eClass()) && instanceDefinition.equals(reference)) {
-			// inject fields of types
-			final Instance instance = (Instance)context;
-			IScope typeScope = IScope.NULLSCOPE;
-			if(instance.getDefinition() != null) {
-				typeScope = this.getScope(instance.getDefinition(), reference);
-			}
+	public IScope getScope(EObject context, EReference reference) {
+
+
+		try {
+			//System.err.println("[Inst Global] --> " + context.eClass().getName() + " --> " + reference.getEContainingClass().getName() + "." + reference.getName());
 			
-			System.err.println("[Ins]  --> dispatching");
+			if(instance.equals(context.eClass()) && attributeDefinition.equals(reference)) {
+				return provider.getScope(context, reference);
+			}
+	
+			return super.getScope(context, reference);
+		} finally {
+			//System.err.println("[Inst Global] --< " + context.eClass().getName() + " --> " + reference.getEContainingClass().getName() + "." + reference.getName());
 
-			return getLocalElementsScope(typeScope, context, reference);
-		}  else if(instance.equals(context.eClass()) && InstancePackage.eINSTANCE.getAttribute_Definition().equals(reference)) {
-			return scopeOf(((Instance)context).getDefinition());
 		}
-
-		return super.getScope(context, reference);
 	}
-
-	private IScope scopeOf(final TypeDefinition definition) {
-		List<AttributeDefinition> attributes = new LinkedList<>();
-		TypeDefinition current = definition;
-		
-		while(current != null) {
-			attributes.addAll(current.getAttributes());
-			current = current.getSuperType();
-		}
-				
-		System.err.println("[Ins]  --> " + attributes);
-		return Scopes.scopeFor(attributes);
-	}	
 
 }

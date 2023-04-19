@@ -6,8 +6,6 @@ package de.evoal.languages.model.instance.dsl.ui.labeling;
 
 import org.eclipse.xtext.ui.label.DefaultDescriptionLabelProvider;
 
-import de.evoal.languages.model.instance.Attribute;
-
 /**
  * Provides labels for IEObjectDescriptions and IResourceDescriptions.
  * 

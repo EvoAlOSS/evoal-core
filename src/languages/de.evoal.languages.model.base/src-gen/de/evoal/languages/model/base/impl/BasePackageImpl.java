@@ -1113,7 +1113,7 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getInstanceType_Definitions() {
+	public EReference getInstanceType_Definition() {
 		return (EReference)instanceTypeEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -1606,7 +1606,7 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 		typeEClass = createEClass(TYPE);
 
 		instanceTypeEClass = createEClass(INSTANCE_TYPE);
-		createEReference(instanceTypeEClass, INSTANCE_TYPE__DEFINITIONS);
+		createEReference(instanceTypeEClass, INSTANCE_TYPE__DEFINITION);
 
 		literalTypeEClass = createEClass(LITERAL_TYPE);
 
@@ -1814,7 +1814,7 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 		initEClass(typeEClass, Type.class, "Type", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(instanceTypeEClass, InstanceType.class, "InstanceType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getInstanceType_Definitions(), this.getTypeDefinition(), null, "definitions", null, 0, -1, InstanceType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getInstanceType_Definition(), this.getTypeDefinition(), null, "definition", null, 1, 1, InstanceType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		initEClass(literalTypeEClass, LiteralType.class, "LiteralType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

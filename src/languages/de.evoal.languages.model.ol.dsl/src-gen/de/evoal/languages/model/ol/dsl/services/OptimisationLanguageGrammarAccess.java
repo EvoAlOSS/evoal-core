@@ -98,26 +98,23 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.ol.dsl.OptimisationLanguage.ProblemRule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cDeclareKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cNameStringOrIdParserRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
-		private final Keyword cAsKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cProblemAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cProblemInstanceLiteralRuleParserRuleCall_3_0 = (RuleCall)cProblemAssignment_3.eContents().get(0);
-		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
-		private final Keyword cDocumentingKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
-		private final Keyword cColonEqualsSignKeyword_4_1 = (Keyword)cGroup_4.eContents().get(1);
-		private final Assignment cDocumentationAssignment_4_2 = (Assignment)cGroup_4.eContents().get(2);
-		private final RuleCall cDocumentationArrayRuleParserRuleCall_4_2_0 = (RuleCall)cDocumentationAssignment_4_2.eContents().get(0);
-		private final Keyword cSemicolonKeyword_4_3 = (Keyword)cGroup_4.eContents().get(3);
+		private final Assignment cProblemAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cProblemInstanceLiteralRuleParserRuleCall_1_0 = (RuleCall)cProblemAssignment_1.eContents().get(0);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final Keyword cDocumentingKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
+		private final Keyword cColonEqualsSignKeyword_2_1 = (Keyword)cGroup_2.eContents().get(1);
+		private final Assignment cDocumentationAssignment_2_2 = (Assignment)cGroup_2.eContents().get(2);
+		private final RuleCall cDocumentationArrayRuleParserRuleCall_2_2_0 = (RuleCall)cDocumentationAssignment_2_2.eContents().get(0);
+		private final Keyword cSemicolonKeyword_2_3 = (Keyword)cGroup_2.eContents().get(3);
 		
 		//ProblemRule returns Problem:
-		//    "declare" name = StringOrId "as"
+		//    "declare" //name = StringOrId "as"
 		//        problem = InstanceLiteralRule
 		//    ("documenting" ":=" documentation = ArrayRule ';')?
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//"declare" name = StringOrId "as"
+		//"declare" //name = StringOrId "as"
 		//    problem = InstanceLiteralRule
 		//("documenting" ":=" documentation = ArrayRule ';')?
 		public Group getGroup() { return cGroup; }
@@ -125,38 +122,30 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 		//"declare"
 		public Keyword getDeclareKeyword_0() { return cDeclareKeyword_0; }
 		
-		//name = StringOrId
-		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
-		
-		//StringOrId
-		public RuleCall getNameStringOrIdParserRuleCall_1_0() { return cNameStringOrIdParserRuleCall_1_0; }
-		
-		//"as"
-		public Keyword getAsKeyword_2() { return cAsKeyword_2; }
-		
-		//problem = InstanceLiteralRule
-		public Assignment getProblemAssignment_3() { return cProblemAssignment_3; }
+		////name = StringOrId "as"
+		//       problem = InstanceLiteralRule
+		public Assignment getProblemAssignment_1() { return cProblemAssignment_1; }
 		
 		//InstanceLiteralRule
-		public RuleCall getProblemInstanceLiteralRuleParserRuleCall_3_0() { return cProblemInstanceLiteralRuleParserRuleCall_3_0; }
+		public RuleCall getProblemInstanceLiteralRuleParserRuleCall_1_0() { return cProblemInstanceLiteralRuleParserRuleCall_1_0; }
 		
 		//("documenting" ":=" documentation = ArrayRule ';')?
-		public Group getGroup_4() { return cGroup_4; }
+		public Group getGroup_2() { return cGroup_2; }
 		
 		//"documenting"
-		public Keyword getDocumentingKeyword_4_0() { return cDocumentingKeyword_4_0; }
+		public Keyword getDocumentingKeyword_2_0() { return cDocumentingKeyword_2_0; }
 		
 		//":="
-		public Keyword getColonEqualsSignKeyword_4_1() { return cColonEqualsSignKeyword_4_1; }
+		public Keyword getColonEqualsSignKeyword_2_1() { return cColonEqualsSignKeyword_2_1; }
 		
 		//documentation = ArrayRule
-		public Assignment getDocumentationAssignment_4_2() { return cDocumentationAssignment_4_2; }
+		public Assignment getDocumentationAssignment_2_2() { return cDocumentationAssignment_2_2; }
 		
 		//ArrayRule
-		public RuleCall getDocumentationArrayRuleParserRuleCall_4_2_0() { return cDocumentationArrayRuleParserRuleCall_4_2_0; }
+		public RuleCall getDocumentationArrayRuleParserRuleCall_2_2_0() { return cDocumentationArrayRuleParserRuleCall_2_2_0; }
 		
 		//';'
-		public Keyword getSemicolonKeyword_4_3() { return cSemicolonKeyword_4_3; }
+		public Keyword getSemicolonKeyword_2_3() { return cSemicolonKeyword_2_3; }
 	}
 	public class AlgorithmInstanceRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.ol.dsl.OptimisationLanguage.AlgorithmInstanceRule");
@@ -324,7 +313,7 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 	}
 	
 	//ProblemRule returns Problem:
-	//    "declare" name = StringOrId "as"
+	//    "declare" //name = StringOrId "as"
 	//        problem = InstanceLiteralRule
 	//    ("documenting" ":=" documentation = ArrayRule ';')?
 	//;
@@ -602,9 +591,9 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 	}
 	
 	//InstanceLiteralRule returns Instance:
-	//    definition = [TypeDefinition|QualifiedName] ('{'
+	//    definition = [TypeDefinition|QualifiedName] '{'
 	//      attributes += AttributeRule*
-	//    '}')?
+	//    '}'
 	//;
 	public BaseLanguageGrammarAccess.InstanceLiteralRuleElements getInstanceLiteralRuleAccess() {
 		return gaBaseLanguage.getInstanceLiteralRuleAccess();
@@ -758,7 +747,7 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 	
 	//InstanceTypeRule returns InstanceType:
 	//    {InstanceType}
-	//    'instance' definitions += [TypeDefinition|QualifiedName] ('|' definitions += [TypeDefinition|QualifiedName])*
+	//    'instance' definition = [TypeDefinition|QualifiedName]
 	//;
 	public BaseLanguageGrammarAccess.InstanceTypeRuleElements getInstanceTypeRuleAccess() {
 		return gaBaseLanguage.getInstanceTypeRuleAccess();

@@ -266,7 +266,7 @@ public class OptimisationLanguageSemanticSequencer extends InstanceLanguageSeman
 	 *     ProblemRule returns Problem
 	 *
 	 * Constraint:
-	 *     (name=StringOrId problem=InstanceLiteralRule documentation=ArrayRule?)
+	 *     (problem=InstanceLiteralRule documentation=ArrayRule?)
 	 * </pre>
 	 */
 	protected void sequence_ProblemRule(ISerializationContext context, Problem semanticObject) {

@@ -6,10 +6,10 @@ package de.evoal.languages.model.ol.dsl.ui.labeling;
 
 import com.google.inject.Inject;
 
-import de.evoal.languages.model.instance.Array;
-import de.evoal.languages.model.instance.Attribute;
-import de.evoal.languages.model.instance.Instance;
-import de.evoal.languages.model.instance.LiteralValue;
+import de.evoal.languages.model.base.Array;
+import de.evoal.languages.model.base.Attribute;
+import de.evoal.languages.model.base.Instance;
+import de.evoal.languages.model.base.Literal;
 import de.evoal.languages.model.ol.OptimisationModel;
 
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
@@ -40,7 +40,7 @@ public class OptimisationLanguageLabelProvider extends DefaultEObjectLabelProvid
 	public String text(final Attribute attr) {
 		if(attr.getValue() == null) {
 			return attr.getDefinition().getName();
-		} else if(attr.getValue() instanceof LiteralValue) {
+		} else if(attr.getValue() instanceof Literal) {
 			return attr.getDefinition().getName() + " := " + super.doGetText(attr.getValue());
 		} else if(attr.getValue() instanceof Array) {
 			return attr.getDefinition().getName() + " := [...]";
@@ -51,7 +51,7 @@ public class OptimisationLanguageLabelProvider extends DefaultEObjectLabelProvid
 		}
 	}
 	
-	public String text(final LiteralValue literal) {
-		return literal.getLiteral().getValue().toString();
+	public String text(final Literal literal) {
+		return literal.getValue().toString();
 	}
 }
