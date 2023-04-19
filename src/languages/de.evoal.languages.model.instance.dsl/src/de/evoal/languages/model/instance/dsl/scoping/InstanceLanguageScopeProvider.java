@@ -16,6 +16,7 @@ import org.eclipse.xtext.scoping.Scopes;
 import de.evoal.languages.model.base.BasePackage;
 import de.evoal.languages.model.base.Instance;
 import de.evoal.languages.model.base.TypeDefinition;
+import de.evoal.languages.model.instance.InstancePackage;
 
 /**
  * This class contains custom scoping description.
@@ -45,7 +46,8 @@ public class InstanceLanguageScopeProvider extends AbstractInstanceLanguageScope
 		}
 */
 		try {
-		return super.getScope(context, reference);
+			
+			return super.getScope(context, reference);
 		} finally {
 			System.err.println("[Inst Local ] --< " + context.eClass().getName() + " --> " + reference.getEContainingClass().getName() + "." + reference.getName());
 

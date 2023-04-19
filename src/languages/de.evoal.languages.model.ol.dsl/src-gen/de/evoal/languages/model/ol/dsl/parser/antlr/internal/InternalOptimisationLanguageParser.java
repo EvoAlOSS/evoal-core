@@ -1161,7 +1161,7 @@ public class InternalOptimisationLanguageParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleDataReferenceRule"
-    // InternalOptimisationLanguage.g:424:1: ruleDataReferenceRule returns [EObject current=null] : ( () otherlv_1= 'data' ( ( ruleStringOrId ) ) ) ;
+    // InternalOptimisationLanguage.g:424:1: ruleDataReferenceRule returns [EObject current=null] : ( () otherlv_1= 'data' ( ( ruleQualifiedName ) ) ) ;
     public final EObject ruleDataReferenceRule() throws RecognitionException {
         EObject current = null;
 
@@ -1171,11 +1171,11 @@ public class InternalOptimisationLanguageParser extends AbstractInternalAntlrPar
         	enterRule();
 
         try {
-            // InternalOptimisationLanguage.g:430:2: ( ( () otherlv_1= 'data' ( ( ruleStringOrId ) ) ) )
-            // InternalOptimisationLanguage.g:431:2: ( () otherlv_1= 'data' ( ( ruleStringOrId ) ) )
+            // InternalOptimisationLanguage.g:430:2: ( ( () otherlv_1= 'data' ( ( ruleQualifiedName ) ) ) )
+            // InternalOptimisationLanguage.g:431:2: ( () otherlv_1= 'data' ( ( ruleQualifiedName ) ) )
             {
-            // InternalOptimisationLanguage.g:431:2: ( () otherlv_1= 'data' ( ( ruleStringOrId ) ) )
-            // InternalOptimisationLanguage.g:432:3: () otherlv_1= 'data' ( ( ruleStringOrId ) )
+            // InternalOptimisationLanguage.g:431:2: ( () otherlv_1= 'data' ( ( ruleQualifiedName ) ) )
+            // InternalOptimisationLanguage.g:432:3: () otherlv_1= 'data' ( ( ruleQualifiedName ) )
             {
             // InternalOptimisationLanguage.g:432:3: ()
             // InternalOptimisationLanguage.g:433:4: 
@@ -1201,11 +1201,11 @@ public class InternalOptimisationLanguageParser extends AbstractInternalAntlrPar
               			newLeafNode(otherlv_1, grammarAccess.getDataReferenceRuleAccess().getDataKeyword_1());
               		
             }
-            // InternalOptimisationLanguage.g:446:3: ( ( ruleStringOrId ) )
-            // InternalOptimisationLanguage.g:447:4: ( ruleStringOrId )
+            // InternalOptimisationLanguage.g:446:3: ( ( ruleQualifiedName ) )
+            // InternalOptimisationLanguage.g:447:4: ( ruleQualifiedName )
             {
-            // InternalOptimisationLanguage.g:447:4: ( ruleStringOrId )
-            // InternalOptimisationLanguage.g:448:5: ruleStringOrId
+            // InternalOptimisationLanguage.g:447:4: ( ruleQualifiedName )
+            // InternalOptimisationLanguage.g:448:5: ruleQualifiedName
             {
             if ( state.backtracking==0 ) {
 
@@ -1225,7 +1225,7 @@ public class InternalOptimisationLanguageParser extends AbstractInternalAntlrPar
               				
             }
             pushFollow(FOLLOW_2);
-            ruleStringOrId();
+            ruleQualifiedName();
 
             state._fsp--;
             if (state.failed) return current;

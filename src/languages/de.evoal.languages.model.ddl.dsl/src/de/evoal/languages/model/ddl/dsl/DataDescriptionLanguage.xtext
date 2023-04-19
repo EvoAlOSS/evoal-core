@@ -15,7 +15,6 @@ DataDescriptionModelRule returns DataDescriptionModel:
 		('data' ':' (descriptions += DataDescriptionRule)* )?
 		('constraints' ':' (constraints += StatementRule)*)?
 	'}'
-	
 ;
 
 ImportRule returns Import:
@@ -66,7 +65,7 @@ ReferenceRule returns base::ValueReference:
 ;
 
 DataReferenceRule returns DataReference:	
-	definition = [DataDescription|StringOrId]
+	definition = [DataDescription|QualifiedName]
 ;
 
 SelfReferenceRule returns SelfReference:

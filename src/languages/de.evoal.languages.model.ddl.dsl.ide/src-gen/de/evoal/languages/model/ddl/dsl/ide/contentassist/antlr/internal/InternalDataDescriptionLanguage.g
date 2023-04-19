@@ -6512,9 +6512,9 @@ rule__DataReferenceRule__DefinitionAssignment
 	(
 		{ before(grammarAccess.getDataReferenceRuleAccess().getDefinitionDataDescriptionCrossReference_0()); }
 		(
-			{ before(grammarAccess.getDataReferenceRuleAccess().getDefinitionDataDescriptionStringOrIdParserRuleCall_0_1()); }
-			ruleStringOrId
-			{ after(grammarAccess.getDataReferenceRuleAccess().getDefinitionDataDescriptionStringOrIdParserRuleCall_0_1()); }
+			{ before(grammarAccess.getDataReferenceRuleAccess().getDefinitionDataDescriptionQualifiedNameParserRuleCall_0_1()); }
+			ruleQualifiedName
+			{ after(grammarAccess.getDataReferenceRuleAccess().getDefinitionDataDescriptionQualifiedNameParserRuleCall_0_1()); }
 		)
 		{ after(grammarAccess.getDataReferenceRuleAccess().getDefinitionDataDescriptionCrossReference_0()); }
 	)

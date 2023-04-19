@@ -23,24 +23,26 @@ public class InstanceLanguageLocalScopeProvider extends WildcardEnabledLocalScop
 	
 	private final static EClass instance = BasePackage.eINSTANCE.getInstance();
 	private final static EReference attributeDefinition = BasePackage.eINSTANCE.getAttribute_Definition();
+	private static EReference dataDefinition = InstancePackage.eINSTANCE.getDataReference_Definition();
+	private static EClass dataReference = InstancePackage.eINSTANCE.getDataReference();
 
 	@Inject
 	private BaseLanguageLocalScopeProvider provider;
 
 	@Override
 	public IScope getScope(EObject context, EReference reference) {
-
-
 		try {
-			//System.err.println("[Inst Global] --> " + context.eClass().getName() + " --> " + reference.getEContainingClass().getName() + "." + reference.getName());
+			System.err.println("[Inst Local] --> " + context.eClass().getName() + " --> " + reference.getEContainingClass().getName() + "." + reference.getName());
 			
 			if(instance.equals(context.eClass()) && attributeDefinition.equals(reference)) {
 				return provider.getScope(context, reference);
+			} else if(dataReference.equals(context.eClass()) && dataDefinition.equals(reference)) {
+				return getResourceScope(IScope.NULLSCOPE, context, reference);
 			}
-	
+
 			return super.getScope(context, reference);
 		} finally {
-			//System.err.println("[Inst Global] --< " + context.eClass().getName() + " --> " + reference.getEContainingClass().getName() + "." + reference.getName());
+			System.err.println("[Inst Local] --< " + context.eClass().getName() + " --> " + reference.getEContainingClass().getName() + "." + reference.getName());
 
 		}
 	}

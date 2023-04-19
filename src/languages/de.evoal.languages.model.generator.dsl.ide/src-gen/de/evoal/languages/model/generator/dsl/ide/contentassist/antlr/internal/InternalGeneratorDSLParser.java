@@ -23298,34 +23298,34 @@ public class InternalGeneratorDSLParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__DataReferenceRule__DefinitionAssignment_2"
-    // InternalGeneratorDSL.g:7095:1: rule__DataReferenceRule__DefinitionAssignment_2 : ( ( ruleStringOrId ) ) ;
+    // InternalGeneratorDSL.g:7095:1: rule__DataReferenceRule__DefinitionAssignment_2 : ( ( ruleQualifiedName ) ) ;
     public final void rule__DataReferenceRule__DefinitionAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalGeneratorDSL.g:7099:1: ( ( ( ruleStringOrId ) ) )
-            // InternalGeneratorDSL.g:7100:2: ( ( ruleStringOrId ) )
+            // InternalGeneratorDSL.g:7099:1: ( ( ( ruleQualifiedName ) ) )
+            // InternalGeneratorDSL.g:7100:2: ( ( ruleQualifiedName ) )
             {
-            // InternalGeneratorDSL.g:7100:2: ( ( ruleStringOrId ) )
-            // InternalGeneratorDSL.g:7101:3: ( ruleStringOrId )
+            // InternalGeneratorDSL.g:7100:2: ( ( ruleQualifiedName ) )
+            // InternalGeneratorDSL.g:7101:3: ( ruleQualifiedName )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getDataReferenceRuleAccess().getDefinitionDataDescriptionCrossReference_2_0()); 
             }
-            // InternalGeneratorDSL.g:7102:3: ( ruleStringOrId )
-            // InternalGeneratorDSL.g:7103:4: ruleStringOrId
+            // InternalGeneratorDSL.g:7102:3: ( ruleQualifiedName )
+            // InternalGeneratorDSL.g:7103:4: ruleQualifiedName
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getDataReferenceRuleAccess().getDefinitionDataDescriptionStringOrIdParserRuleCall_2_0_1()); 
+               before(grammarAccess.getDataReferenceRuleAccess().getDefinitionDataDescriptionQualifiedNameParserRuleCall_2_0_1()); 
             }
             pushFollow(FOLLOW_2);
-            ruleStringOrId();
+            ruleQualifiedName();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getDataReferenceRuleAccess().getDefinitionDataDescriptionStringOrIdParserRuleCall_2_0_1()); 
+               after(grammarAccess.getDataReferenceRuleAccess().getDefinitionDataDescriptionQualifiedNameParserRuleCall_2_0_1()); 
             }
 
             }

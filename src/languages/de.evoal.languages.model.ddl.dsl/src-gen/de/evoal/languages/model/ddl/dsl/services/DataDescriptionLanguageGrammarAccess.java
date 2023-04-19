@@ -475,21 +475,21 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.ddl.dsl.DataDescriptionLanguage.DataReferenceRule");
 		private final Assignment cDefinitionAssignment = (Assignment)rule.eContents().get(1);
 		private final CrossReference cDefinitionDataDescriptionCrossReference_0 = (CrossReference)cDefinitionAssignment.eContents().get(0);
-		private final RuleCall cDefinitionDataDescriptionStringOrIdParserRuleCall_0_1 = (RuleCall)cDefinitionDataDescriptionCrossReference_0.eContents().get(1);
+		private final RuleCall cDefinitionDataDescriptionQualifiedNameParserRuleCall_0_1 = (RuleCall)cDefinitionDataDescriptionCrossReference_0.eContents().get(1);
 		
 		//DataReferenceRule returns DataReference:
-		//    definition = [DataDescription|StringOrId]
+		//    definition = [DataDescription|QualifiedName]
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//definition = [DataDescription|StringOrId]
+		//definition = [DataDescription|QualifiedName]
 		public Assignment getDefinitionAssignment() { return cDefinitionAssignment; }
 		
-		//[DataDescription|StringOrId]
+		//[DataDescription|QualifiedName]
 		public CrossReference getDefinitionDataDescriptionCrossReference_0() { return cDefinitionDataDescriptionCrossReference_0; }
 		
-		//StringOrId
-		public RuleCall getDefinitionDataDescriptionStringOrIdParserRuleCall_0_1() { return cDefinitionDataDescriptionStringOrIdParserRuleCall_0_1; }
+		//QualifiedName
+		public RuleCall getDefinitionDataDescriptionQualifiedNameParserRuleCall_0_1() { return cDefinitionDataDescriptionQualifiedNameParserRuleCall_0_1; }
 	}
 	public class SelfReferenceRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.ddl.dsl.DataDescriptionLanguage.SelfReferenceRule");
@@ -811,7 +811,7 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 	}
 	
 	//DataReferenceRule returns DataReference:
-	//    definition = [DataDescription|StringOrId]
+	//    definition = [DataDescription|QualifiedName]
 	//;
 	public DataReferenceRuleElements getDataReferenceRuleAccess() {
 		return pDataReferenceRule;

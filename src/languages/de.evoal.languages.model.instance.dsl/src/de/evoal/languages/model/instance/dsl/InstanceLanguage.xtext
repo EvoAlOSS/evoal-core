@@ -14,5 +14,5 @@ ReferenceRule returns base::ValueReference:
 
 DataReferenceRule returns DataReference:
 	{DataReference}
-	'data' definition = [ddl::DataDescription|StringOrId]
+	'data' definition = [ddl::DataDescription|QualifiedName]
 ;

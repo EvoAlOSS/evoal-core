@@ -3179,7 +3179,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start "ruleDataReferenceRule"
-    // InternalMachineLearningLanguage.g:1127:1: ruleDataReferenceRule returns [EObject current=null] : ( () otherlv_1= 'data' ( ( ruleStringOrId ) ) ) ;
+    // InternalMachineLearningLanguage.g:1127:1: ruleDataReferenceRule returns [EObject current=null] : ( () otherlv_1= 'data' ( ( ruleQualifiedName ) ) ) ;
     public final EObject ruleDataReferenceRule() throws RecognitionException {
         EObject current = null;
 
@@ -3189,11 +3189,11 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
         	enterRule();
 
         try {
-            // InternalMachineLearningLanguage.g:1133:2: ( ( () otherlv_1= 'data' ( ( ruleStringOrId ) ) ) )
-            // InternalMachineLearningLanguage.g:1134:2: ( () otherlv_1= 'data' ( ( ruleStringOrId ) ) )
+            // InternalMachineLearningLanguage.g:1133:2: ( ( () otherlv_1= 'data' ( ( ruleQualifiedName ) ) ) )
+            // InternalMachineLearningLanguage.g:1134:2: ( () otherlv_1= 'data' ( ( ruleQualifiedName ) ) )
             {
-            // InternalMachineLearningLanguage.g:1134:2: ( () otherlv_1= 'data' ( ( ruleStringOrId ) ) )
-            // InternalMachineLearningLanguage.g:1135:3: () otherlv_1= 'data' ( ( ruleStringOrId ) )
+            // InternalMachineLearningLanguage.g:1134:2: ( () otherlv_1= 'data' ( ( ruleQualifiedName ) ) )
+            // InternalMachineLearningLanguage.g:1135:3: () otherlv_1= 'data' ( ( ruleQualifiedName ) )
             {
             // InternalMachineLearningLanguage.g:1135:3: ()
             // InternalMachineLearningLanguage.g:1136:4: 
@@ -3219,11 +3219,11 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
               			newLeafNode(otherlv_1, grammarAccess.getDataReferenceRuleAccess().getDataKeyword_1());
               		
             }
-            // InternalMachineLearningLanguage.g:1149:3: ( ( ruleStringOrId ) )
-            // InternalMachineLearningLanguage.g:1150:4: ( ruleStringOrId )
+            // InternalMachineLearningLanguage.g:1149:3: ( ( ruleQualifiedName ) )
+            // InternalMachineLearningLanguage.g:1150:4: ( ruleQualifiedName )
             {
-            // InternalMachineLearningLanguage.g:1150:4: ( ruleStringOrId )
-            // InternalMachineLearningLanguage.g:1151:5: ruleStringOrId
+            // InternalMachineLearningLanguage.g:1150:4: ( ruleQualifiedName )
+            // InternalMachineLearningLanguage.g:1151:5: ruleQualifiedName
             {
             if ( state.backtracking==0 ) {
 
@@ -3243,7 +3243,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
               				
             }
             pushFollow(FOLLOW_2);
-            ruleStringOrId();
+            ruleQualifiedName();
 
             state._fsp--;
             if (state.failed) return current;

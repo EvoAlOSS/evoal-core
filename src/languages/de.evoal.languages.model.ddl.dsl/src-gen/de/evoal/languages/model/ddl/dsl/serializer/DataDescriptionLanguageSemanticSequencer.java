@@ -234,7 +234,7 @@ public class DataDescriptionLanguageSemanticSequencer extends BaseLanguageSemant
 	 *     ValueRule returns DataReference
 	 *
 	 * Constraint:
-	 *     definition=[DataDescription|StringOrId]
+	 *     definition=[DataDescription|QualifiedName]
 	 * </pre>
 	 */
 	protected void sequence_DataReferenceRule(ISerializationContext context, DataReference semanticObject) {
@@ -243,7 +243,7 @@ public class DataDescriptionLanguageSemanticSequencer extends BaseLanguageSemant
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DdlPackage.Literals.DATA_REFERENCE__DEFINITION));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getDataReferenceRuleAccess().getDefinitionDataDescriptionStringOrIdParserRuleCall_0_1(), semanticObject.eGet(DdlPackage.Literals.DATA_REFERENCE__DEFINITION, false));
+		feeder.accept(grammarAccess.getDataReferenceRuleAccess().getDefinitionDataDescriptionQualifiedNameParserRuleCall_0_1(), semanticObject.eGet(DdlPackage.Literals.DATA_REFERENCE__DEFINITION, false));
 		feeder.finish();
 	}
 	

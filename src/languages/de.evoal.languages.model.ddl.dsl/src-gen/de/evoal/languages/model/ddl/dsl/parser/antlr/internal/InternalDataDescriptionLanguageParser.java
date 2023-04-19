@@ -2211,7 +2211,7 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start "ruleDataReferenceRule"
-    // InternalDataDescriptionLanguage.g:789:1: ruleDataReferenceRule returns [EObject current=null] : ( ( ruleStringOrId ) ) ;
+    // InternalDataDescriptionLanguage.g:789:1: ruleDataReferenceRule returns [EObject current=null] : ( ( ruleQualifiedName ) ) ;
     public final EObject ruleDataReferenceRule() throws RecognitionException {
         EObject current = null;
 
@@ -2219,14 +2219,14 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalAntlr
         	enterRule();
 
         try {
-            // InternalDataDescriptionLanguage.g:795:2: ( ( ( ruleStringOrId ) ) )
-            // InternalDataDescriptionLanguage.g:796:2: ( ( ruleStringOrId ) )
+            // InternalDataDescriptionLanguage.g:795:2: ( ( ( ruleQualifiedName ) ) )
+            // InternalDataDescriptionLanguage.g:796:2: ( ( ruleQualifiedName ) )
             {
-            // InternalDataDescriptionLanguage.g:796:2: ( ( ruleStringOrId ) )
-            // InternalDataDescriptionLanguage.g:797:3: ( ruleStringOrId )
+            // InternalDataDescriptionLanguage.g:796:2: ( ( ruleQualifiedName ) )
+            // InternalDataDescriptionLanguage.g:797:3: ( ruleQualifiedName )
             {
-            // InternalDataDescriptionLanguage.g:797:3: ( ruleStringOrId )
-            // InternalDataDescriptionLanguage.g:798:4: ruleStringOrId
+            // InternalDataDescriptionLanguage.g:797:3: ( ruleQualifiedName )
+            // InternalDataDescriptionLanguage.g:798:4: ruleQualifiedName
             {
             if ( state.backtracking==0 ) {
 
@@ -2246,7 +2246,7 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalAntlr
               			
             }
             pushFollow(FOLLOW_2);
-            ruleStringOrId();
+            ruleQualifiedName();
 
             state._fsp--;
             if (state.failed) return current;

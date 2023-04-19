@@ -3028,7 +3028,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleDataReferenceRule"
-    // InternalGeneratorDSL.g:1070:1: ruleDataReferenceRule returns [EObject current=null] : ( () otherlv_1= 'data' ( ( ruleStringOrId ) ) ) ;
+    // InternalGeneratorDSL.g:1070:1: ruleDataReferenceRule returns [EObject current=null] : ( () otherlv_1= 'data' ( ( ruleQualifiedName ) ) ) ;
     public final EObject ruleDataReferenceRule() throws RecognitionException {
         EObject current = null;
 
@@ -3038,11 +3038,11 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalGeneratorDSL.g:1076:2: ( ( () otherlv_1= 'data' ( ( ruleStringOrId ) ) ) )
-            // InternalGeneratorDSL.g:1077:2: ( () otherlv_1= 'data' ( ( ruleStringOrId ) ) )
+            // InternalGeneratorDSL.g:1076:2: ( ( () otherlv_1= 'data' ( ( ruleQualifiedName ) ) ) )
+            // InternalGeneratorDSL.g:1077:2: ( () otherlv_1= 'data' ( ( ruleQualifiedName ) ) )
             {
-            // InternalGeneratorDSL.g:1077:2: ( () otherlv_1= 'data' ( ( ruleStringOrId ) ) )
-            // InternalGeneratorDSL.g:1078:3: () otherlv_1= 'data' ( ( ruleStringOrId ) )
+            // InternalGeneratorDSL.g:1077:2: ( () otherlv_1= 'data' ( ( ruleQualifiedName ) ) )
+            // InternalGeneratorDSL.g:1078:3: () otherlv_1= 'data' ( ( ruleQualifiedName ) )
             {
             // InternalGeneratorDSL.g:1078:3: ()
             // InternalGeneratorDSL.g:1079:4: 
@@ -3068,11 +3068,11 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
               			newLeafNode(otherlv_1, grammarAccess.getDataReferenceRuleAccess().getDataKeyword_1());
               		
             }
-            // InternalGeneratorDSL.g:1092:3: ( ( ruleStringOrId ) )
-            // InternalGeneratorDSL.g:1093:4: ( ruleStringOrId )
+            // InternalGeneratorDSL.g:1092:3: ( ( ruleQualifiedName ) )
+            // InternalGeneratorDSL.g:1093:4: ( ruleQualifiedName )
             {
-            // InternalGeneratorDSL.g:1093:4: ( ruleStringOrId )
-            // InternalGeneratorDSL.g:1094:5: ruleStringOrId
+            // InternalGeneratorDSL.g:1093:4: ( ruleQualifiedName )
+            // InternalGeneratorDSL.g:1094:5: ruleQualifiedName
             {
             if ( state.backtracking==0 ) {
 
@@ -3092,7 +3092,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
               				
             }
             pushFollow(FOLLOW_2);
-            ruleStringOrId();
+            ruleQualifiedName();
 
             state._fsp--;
             if (state.failed) return current;

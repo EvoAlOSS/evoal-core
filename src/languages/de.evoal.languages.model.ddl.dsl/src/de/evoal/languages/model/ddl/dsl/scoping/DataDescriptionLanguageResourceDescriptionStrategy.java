@@ -11,7 +11,9 @@ public class DataDescriptionLanguageResourceDescriptionStrategy extends Filterin
 		super(
 				DdlPackage.eINSTANCE.getDataDescriptionModel(),
 				DdlPackage.eINSTANCE.getDataTypeDefinition(),
-				DdlPackage.eINSTANCE.getDataDescription()
+				DdlPackage.eINSTANCE.getDataDescription(),
+				DdlPackage.eINSTANCE.getTypedDataDescription(),
+				DdlPackage.eINSTANCE.getUntypedDataDescription()
 			 );
 	}
 }

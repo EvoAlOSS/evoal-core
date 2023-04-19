@@ -806,7 +806,7 @@ ruleDataReferenceRule returns [EObject current=null]
 			{
 				newCompositeNode(grammarAccess.getDataReferenceRuleAccess().getDefinitionDataDescriptionCrossReference_0());
 			}
-			ruleStringOrId
+			ruleQualifiedName
 			{
 				afterParserOrEnumRuleCall();
 			}

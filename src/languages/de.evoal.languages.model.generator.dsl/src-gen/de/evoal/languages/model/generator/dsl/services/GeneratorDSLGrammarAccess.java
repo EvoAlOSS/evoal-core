@@ -871,7 +871,7 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 	
 	//DataReferenceRule returns DataReference:
 	//    {DataReference}
-	//    'data' definition = [ddl::DataDescription|StringOrId]
+	//    'data' definition = [ddl::DataDescription|QualifiedName]
 	//;
 	public InstanceLanguageGrammarAccess.DataReferenceRuleElements getDataReferenceRuleAccess() {
 		return gaInstanceLanguage.getDataReferenceRuleAccess();

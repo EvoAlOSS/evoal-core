@@ -7,6 +7,7 @@ import de.evoal.languages.model.base.BasePackage;
 import de.evoal.languages.model.base.Instance;
 import de.evoal.languages.model.base.TypeDefinition;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -135,6 +136,20 @@ public class InstanceImpl extends LiteralImpl implements Instance {
 	 * @generated
 	 */
 	@Override
+	public Attribute findAttribute(final String name) {
+		return this.getAttributes()
+		                 .stream()
+		                 .filter(n -> name.equals(n.getDefinition().getName()))
+		                 .findFirst()
+		                 .orElse(null);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case BasePackage.INSTANCE__ATTRIBUTES:
@@ -212,6 +227,20 @@ public class InstanceImpl extends LiteralImpl implements Instance {
 				return attributes != null && !attributes.isEmpty();
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		switch (operationID) {
+			case BasePackage.INSTANCE___FIND_ATTRIBUTE__STRING:
+				return findAttribute((String)arguments.get(0));
+		}
+		return super.eInvoke(operationID, arguments);
 	}
 
 } //InstanceImpl

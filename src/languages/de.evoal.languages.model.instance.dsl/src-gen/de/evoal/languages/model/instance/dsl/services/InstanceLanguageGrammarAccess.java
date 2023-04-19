@@ -55,16 +55,16 @@ public class InstanceLanguageGrammarAccess extends AbstractElementFinder.Abstrac
 		private final Keyword cDataKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Assignment cDefinitionAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final CrossReference cDefinitionDataDescriptionCrossReference_2_0 = (CrossReference)cDefinitionAssignment_2.eContents().get(0);
-		private final RuleCall cDefinitionDataDescriptionStringOrIdParserRuleCall_2_0_1 = (RuleCall)cDefinitionDataDescriptionCrossReference_2_0.eContents().get(1);
+		private final RuleCall cDefinitionDataDescriptionQualifiedNameParserRuleCall_2_0_1 = (RuleCall)cDefinitionDataDescriptionCrossReference_2_0.eContents().get(1);
 		
 		//DataReferenceRule returns DataReference:
 		//    {DataReference}
-		//    'data' definition = [ddl::DataDescription|StringOrId]
+		//    'data' definition = [ddl::DataDescription|QualifiedName]
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{DataReference}
-		//'data' definition = [ddl::DataDescription|StringOrId]
+		//'data' definition = [ddl::DataDescription|QualifiedName]
 		public Group getGroup() { return cGroup; }
 		
 		//{DataReference}
@@ -73,14 +73,14 @@ public class InstanceLanguageGrammarAccess extends AbstractElementFinder.Abstrac
 		//'data'
 		public Keyword getDataKeyword_1() { return cDataKeyword_1; }
 		
-		//definition = [ddl::DataDescription|StringOrId]
+		//definition = [ddl::DataDescription|QualifiedName]
 		public Assignment getDefinitionAssignment_2() { return cDefinitionAssignment_2; }
 		
-		//[ddl::DataDescription|StringOrId]
+		//[ddl::DataDescription|QualifiedName]
 		public CrossReference getDefinitionDataDescriptionCrossReference_2_0() { return cDefinitionDataDescriptionCrossReference_2_0; }
 		
-		//StringOrId
-		public RuleCall getDefinitionDataDescriptionStringOrIdParserRuleCall_2_0_1() { return cDefinitionDataDescriptionStringOrIdParserRuleCall_2_0_1; }
+		//QualifiedName
+		public RuleCall getDefinitionDataDescriptionQualifiedNameParserRuleCall_2_0_1() { return cDefinitionDataDescriptionQualifiedNameParserRuleCall_2_0_1; }
 	}
 	
 	
@@ -149,7 +149,7 @@ public class InstanceLanguageGrammarAccess extends AbstractElementFinder.Abstrac
 	
 	//DataReferenceRule returns DataReference:
 	//    {DataReference}
-	//    'data' definition = [ddl::DataDescription|StringOrId]
+	//    'data' definition = [ddl::DataDescription|QualifiedName]
 	//;
 	public DataReferenceRuleElements getDataReferenceRuleAccess() {
 		return pDataReferenceRule;

@@ -1749,13 +1749,22 @@ public interface BasePackage extends EPackage {
 	int INSTANCE___GET_VALUE = LITERAL___GET_VALUE;
 
 	/**
+	 * The operation id for the '<em>Find Attribute</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INSTANCE___FIND_ATTRIBUTE__STRING = LITERAL_OPERATION_COUNT + 0;
+
+	/**
 	 * The number of operations of the '<em>Instance</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INSTANCE_OPERATION_COUNT = LITERAL_OPERATION_COUNT + 0;
+	int INSTANCE_OPERATION_COUNT = LITERAL_OPERATION_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.impl.AttributeImpl <em>Attribute</em>}' class.
@@ -2854,6 +2863,16 @@ public interface BasePackage extends EPackage {
 	EReference getInstance_Attributes();
 
 	/**
+	 * Returns the meta object for the '{@link de.evoal.languages.model.base.Instance#findAttribute(java.lang.String) <em>Find Attribute</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Find Attribute</em>' operation.
+	 * @see de.evoal.languages.model.base.Instance#findAttribute(java.lang.String)
+	 * @generated
+	 */
+	EOperation getInstance__FindAttribute__String();
+
+	/**
 	 * Returns the meta object for class '{@link de.evoal.languages.model.base.Attribute <em>Attribute</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3799,6 +3818,14 @@ public interface BasePackage extends EPackage {
 		 * @generated
 		 */
 		EReference INSTANCE__ATTRIBUTES = eINSTANCE.getInstance_Attributes();
+
+		/**
+		 * The meta object literal for the '<em><b>Find Attribute</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation INSTANCE___FIND_ATTRIBUTE__STRING = eINSTANCE.getInstance__FindAttribute__String();
 
 		/**
 		 * The meta object literal for the '{@link de.evoal.languages.model.base.impl.AttributeImpl <em>Attribute</em>}' class.

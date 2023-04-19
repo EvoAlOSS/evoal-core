@@ -335,7 +335,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "ruleDataReferenceRule"
-    // InternalInstanceLanguage.g:121:1: ruleDataReferenceRule returns [EObject current=null] : ( () otherlv_1= 'data' ( ( ruleStringOrId ) ) ) ;
+    // InternalInstanceLanguage.g:121:1: ruleDataReferenceRule returns [EObject current=null] : ( () otherlv_1= 'data' ( ( ruleQualifiedName ) ) ) ;
     public final EObject ruleDataReferenceRule() throws RecognitionException {
         EObject current = null;
 
@@ -345,11 +345,11 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
         	enterRule();
 
         try {
-            // InternalInstanceLanguage.g:127:2: ( ( () otherlv_1= 'data' ( ( ruleStringOrId ) ) ) )
-            // InternalInstanceLanguage.g:128:2: ( () otherlv_1= 'data' ( ( ruleStringOrId ) ) )
+            // InternalInstanceLanguage.g:127:2: ( ( () otherlv_1= 'data' ( ( ruleQualifiedName ) ) ) )
+            // InternalInstanceLanguage.g:128:2: ( () otherlv_1= 'data' ( ( ruleQualifiedName ) ) )
             {
-            // InternalInstanceLanguage.g:128:2: ( () otherlv_1= 'data' ( ( ruleStringOrId ) ) )
-            // InternalInstanceLanguage.g:129:3: () otherlv_1= 'data' ( ( ruleStringOrId ) )
+            // InternalInstanceLanguage.g:128:2: ( () otherlv_1= 'data' ( ( ruleQualifiedName ) ) )
+            // InternalInstanceLanguage.g:129:3: () otherlv_1= 'data' ( ( ruleQualifiedName ) )
             {
             // InternalInstanceLanguage.g:129:3: ()
             // InternalInstanceLanguage.g:130:4: 
@@ -375,11 +375,11 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
               			newLeafNode(otherlv_1, grammarAccess.getDataReferenceRuleAccess().getDataKeyword_1());
               		
             }
-            // InternalInstanceLanguage.g:143:3: ( ( ruleStringOrId ) )
-            // InternalInstanceLanguage.g:144:4: ( ruleStringOrId )
+            // InternalInstanceLanguage.g:143:3: ( ( ruleQualifiedName ) )
+            // InternalInstanceLanguage.g:144:4: ( ruleQualifiedName )
             {
-            // InternalInstanceLanguage.g:144:4: ( ruleStringOrId )
-            // InternalInstanceLanguage.g:145:5: ruleStringOrId
+            // InternalInstanceLanguage.g:144:4: ( ruleQualifiedName )
+            // InternalInstanceLanguage.g:145:5: ruleQualifiedName
             {
             if ( state.backtracking==0 ) {
 
@@ -399,7 +399,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
               				
             }
             pushFollow(FOLLOW_2);
-            ruleStringOrId();
+            ruleQualifiedName();
 
             state._fsp--;
             if (state.failed) return current;

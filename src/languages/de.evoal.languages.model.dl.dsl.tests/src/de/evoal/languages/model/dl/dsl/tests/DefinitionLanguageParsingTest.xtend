@@ -31,7 +31,7 @@ class DefinitionLanguageParsingTest {
 			}
 		''')
 		
-		assertExportedEObjectDescriptions(model, "foobar.wombat.tele")
+		assertExportedEObjectDescriptions(model, "foobar.wombat, foobar.wombat.tele")
 
 	}
 	

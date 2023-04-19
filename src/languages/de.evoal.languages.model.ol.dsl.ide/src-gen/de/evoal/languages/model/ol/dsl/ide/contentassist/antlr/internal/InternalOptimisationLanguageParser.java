@@ -17419,34 +17419,34 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__DataReferenceRule__DefinitionAssignment_2"
-    // InternalOptimisationLanguage.g:5256:1: rule__DataReferenceRule__DefinitionAssignment_2 : ( ( ruleStringOrId ) ) ;
+    // InternalOptimisationLanguage.g:5256:1: rule__DataReferenceRule__DefinitionAssignment_2 : ( ( ruleQualifiedName ) ) ;
     public final void rule__DataReferenceRule__DefinitionAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:5260:1: ( ( ( ruleStringOrId ) ) )
-            // InternalOptimisationLanguage.g:5261:2: ( ( ruleStringOrId ) )
+            // InternalOptimisationLanguage.g:5260:1: ( ( ( ruleQualifiedName ) ) )
+            // InternalOptimisationLanguage.g:5261:2: ( ( ruleQualifiedName ) )
             {
-            // InternalOptimisationLanguage.g:5261:2: ( ( ruleStringOrId ) )
-            // InternalOptimisationLanguage.g:5262:3: ( ruleStringOrId )
+            // InternalOptimisationLanguage.g:5261:2: ( ( ruleQualifiedName ) )
+            // InternalOptimisationLanguage.g:5262:3: ( ruleQualifiedName )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getDataReferenceRuleAccess().getDefinitionDataDescriptionCrossReference_2_0()); 
             }
-            // InternalOptimisationLanguage.g:5263:3: ( ruleStringOrId )
-            // InternalOptimisationLanguage.g:5264:4: ruleStringOrId
+            // InternalOptimisationLanguage.g:5263:3: ( ruleQualifiedName )
+            // InternalOptimisationLanguage.g:5264:4: ruleQualifiedName
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getDataReferenceRuleAccess().getDefinitionDataDescriptionStringOrIdParserRuleCall_2_0_1()); 
+               before(grammarAccess.getDataReferenceRuleAccess().getDefinitionDataDescriptionQualifiedNameParserRuleCall_2_0_1()); 
             }
             pushFollow(FOLLOW_2);
-            ruleStringOrId();
+            ruleQualifiedName();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getDataReferenceRuleAccess().getDefinitionDataDescriptionStringOrIdParserRuleCall_2_0_1()); 
+               after(grammarAccess.getDataReferenceRuleAccess().getDefinitionDataDescriptionQualifiedNameParserRuleCall_2_0_1()); 
             }
 
             }
