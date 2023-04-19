@@ -3,14 +3,16 @@
 package de.evoal.languages.model.ddl.impl;
 
 import de.evoal.languages.model.base.Expression;
+
 import de.evoal.languages.model.ddl.DataDescription;
 import de.evoal.languages.model.ddl.DataDescriptionModel;
 import de.evoal.languages.model.ddl.DataTypeDefinition;
 import de.evoal.languages.model.ddl.DdlPackage;
+import de.evoal.languages.model.ddl.Import;
 
-import de.evoal.languages.model.ddl.Use;
 import java.util.Collection;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
@@ -18,6 +20,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
@@ -31,7 +34,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link de.evoal.languages.model.ddl.impl.DataDescriptionModelImpl#getUses <em>Uses</em>}</li>
+ *   <li>{@link de.evoal.languages.model.ddl.impl.DataDescriptionModelImpl#getName <em>Name</em>}</li>
+ *   <li>{@link de.evoal.languages.model.ddl.impl.DataDescriptionModelImpl#getImports <em>Imports</em>}</li>
  *   <li>{@link de.evoal.languages.model.ddl.impl.DataDescriptionModelImpl#getTypes <em>Types</em>}</li>
  *   <li>{@link de.evoal.languages.model.ddl.impl.DataDescriptionModelImpl#getDescriptions <em>Descriptions</em>}</li>
  *   <li>{@link de.evoal.languages.model.ddl.impl.DataDescriptionModelImpl#getConstraints <em>Constraints</em>}</li>
@@ -41,14 +45,34 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class DataDescriptionModelImpl extends MinimalEObjectImpl.Container implements DataDescriptionModel {
 	/**
-	 * The cached value of the '{@link #getUses() <em>Uses</em>}' containment reference list.
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getUses()
+	 * @see #getName()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Use> uses;
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getImports() <em>Imports</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getImports()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Import> imports;
 
 	/**
 	 * The cached value of the '{@link #getTypes() <em>Types</em>}' containment reference list.
@@ -105,11 +129,34 @@ public class DataDescriptionModelImpl extends MinimalEObjectImpl.Container imple
 	 * @generated
 	 */
 	@Override
-	public EList<Use> getUses() {
-		if (uses == null) {
-			uses = new EObjectContainmentEList<Use>(Use.class, this, DdlPackage.DATA_DESCRIPTION_MODEL__USES);
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DdlPackage.DATA_DESCRIPTION_MODEL__NAME, oldName, name));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EList<Import> getImports() {
+		if (imports == null) {
+			imports = new EObjectContainmentEList<Import>(Import.class, this, DdlPackage.DATA_DESCRIPTION_MODEL__IMPORTS);
 		}
-		return uses;
+		return imports;
 	}
 
 	/**
@@ -159,8 +206,8 @@ public class DataDescriptionModelImpl extends MinimalEObjectImpl.Container imple
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case DdlPackage.DATA_DESCRIPTION_MODEL__USES:
-				return ((InternalEList<?>)getUses()).basicRemove(otherEnd, msgs);
+			case DdlPackage.DATA_DESCRIPTION_MODEL__IMPORTS:
+				return ((InternalEList<?>)getImports()).basicRemove(otherEnd, msgs);
 			case DdlPackage.DATA_DESCRIPTION_MODEL__TYPES:
 				return ((InternalEList<?>)getTypes()).basicRemove(otherEnd, msgs);
 			case DdlPackage.DATA_DESCRIPTION_MODEL__DESCRIPTIONS:
@@ -179,8 +226,10 @@ public class DataDescriptionModelImpl extends MinimalEObjectImpl.Container imple
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case DdlPackage.DATA_DESCRIPTION_MODEL__USES:
-				return getUses();
+			case DdlPackage.DATA_DESCRIPTION_MODEL__NAME:
+				return getName();
+			case DdlPackage.DATA_DESCRIPTION_MODEL__IMPORTS:
+				return getImports();
 			case DdlPackage.DATA_DESCRIPTION_MODEL__TYPES:
 				return getTypes();
 			case DdlPackage.DATA_DESCRIPTION_MODEL__DESCRIPTIONS:
@@ -200,9 +249,12 @@ public class DataDescriptionModelImpl extends MinimalEObjectImpl.Container imple
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case DdlPackage.DATA_DESCRIPTION_MODEL__USES:
-				getUses().clear();
-				getUses().addAll((Collection<? extends Use>)newValue);
+			case DdlPackage.DATA_DESCRIPTION_MODEL__NAME:
+				setName((String)newValue);
+				return;
+			case DdlPackage.DATA_DESCRIPTION_MODEL__IMPORTS:
+				getImports().clear();
+				getImports().addAll((Collection<? extends Import>)newValue);
 				return;
 			case DdlPackage.DATA_DESCRIPTION_MODEL__TYPES:
 				getTypes().clear();
@@ -228,8 +280,11 @@ public class DataDescriptionModelImpl extends MinimalEObjectImpl.Container imple
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case DdlPackage.DATA_DESCRIPTION_MODEL__USES:
-				getUses().clear();
+			case DdlPackage.DATA_DESCRIPTION_MODEL__NAME:
+				setName(NAME_EDEFAULT);
+				return;
+			case DdlPackage.DATA_DESCRIPTION_MODEL__IMPORTS:
+				getImports().clear();
 				return;
 			case DdlPackage.DATA_DESCRIPTION_MODEL__TYPES:
 				getTypes().clear();
@@ -252,8 +307,10 @@ public class DataDescriptionModelImpl extends MinimalEObjectImpl.Container imple
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case DdlPackage.DATA_DESCRIPTION_MODEL__USES:
-				return uses != null && !uses.isEmpty();
+			case DdlPackage.DATA_DESCRIPTION_MODEL__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case DdlPackage.DATA_DESCRIPTION_MODEL__IMPORTS:
+				return imports != null && !imports.isEmpty();
 			case DdlPackage.DATA_DESCRIPTION_MODEL__TYPES:
 				return types != null && !types.isEmpty();
 			case DdlPackage.DATA_DESCRIPTION_MODEL__DESCRIPTIONS:
@@ -262,6 +319,22 @@ public class DataDescriptionModelImpl extends MinimalEObjectImpl.Container imple
 				return constraints != null && !constraints.isEmpty();
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuilder result = new StringBuilder(super.toString());
+		result.append(" (name: ");
+		result.append(name);
+		result.append(')');
+		return result.toString();
 	}
 
 } //DataDescriptionModelImpl

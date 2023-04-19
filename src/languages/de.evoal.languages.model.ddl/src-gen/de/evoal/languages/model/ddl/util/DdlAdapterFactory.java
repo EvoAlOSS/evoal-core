@@ -4,6 +4,7 @@ package de.evoal.languages.model.ddl.util;
 
 import de.evoal.languages.model.base.CallOrLiteralOrReferenceOrParantheses;
 import de.evoal.languages.model.base.ValueReference;
+
 import de.evoal.languages.model.ddl.*;
 
 import org.eclipse.emf.common.notify.Adapter;
@@ -74,8 +75,8 @@ public class DdlAdapterFactory extends AdapterFactoryImpl {
 				return createDataDescriptionModelAdapter();
 			}
 			@Override
-			public Adapter caseUse(Use object) {
-				return createUseAdapter();
+			public Adapter caseImport(Import object) {
+				return createImportAdapter();
 			}
 			@Override
 			public Adapter caseDataTypeDefinition(DataTypeDefinition object) {
@@ -144,16 +145,16 @@ public class DdlAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.ddl.Use <em>Use</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.ddl.Import <em>Import</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.evoal.languages.model.ddl.Use
+	 * @see de.evoal.languages.model.ddl.Import
 	 * @generated
 	 */
-	public Adapter createUseAdapter() {
+	public Adapter createImportAdapter() {
 		return null;
 	}
 

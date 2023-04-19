@@ -25,13 +25,14 @@
       <genEnumLiterals ecoreEnumLiteral="model.ecore#//RepresentationType/String"/>
     </genEnums>
     <genClasses ecoreClass="model.ecore#//DataDescriptionModel">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//DataDescriptionModel/uses"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//DataDescriptionModel/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//DataDescriptionModel/imports"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//DataDescriptionModel/types"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//DataDescriptionModel/descriptions"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//DataDescriptionModel/constraints"/>
     </genClasses>
-    <genClasses ecoreClass="model.ecore#//Use">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//Use/importURI"/>
+    <genClasses ecoreClass="model.ecore#//Import">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//Import/importedNamespace"/>
     </genClasses>
     <genClasses ecoreClass="model.ecore#//DataTypeDefinition">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//DataTypeDefinition/scale"/>

@@ -3,21 +3,25 @@
 package de.evoal.languages.model.ddl.impl;
 
 import de.evoal.languages.model.base.Expression;
+
 import de.evoal.languages.model.ddl.DataDescription;
 import de.evoal.languages.model.ddl.DdlPackage;
 import de.evoal.languages.model.ddl.RepresentationType;
 import de.evoal.languages.model.ddl.ScaleType;
 
 import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.common.notify.NotificationChain;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.emf.common.util.EList;
+
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 

@@ -43,10 +43,10 @@ import de.evoal.languages.model.ddl.DataDescriptionModel;
 import de.evoal.languages.model.ddl.DataReference;
 import de.evoal.languages.model.ddl.DataTypeDefinition;
 import de.evoal.languages.model.ddl.DdlPackage;
+import de.evoal.languages.model.ddl.Import;
 import de.evoal.languages.model.ddl.SelfReference;
 import de.evoal.languages.model.ddl.TypedDataDescription;
 import de.evoal.languages.model.ddl.UntypedDataDescription;
-import de.evoal.languages.model.ddl.Use;
 import de.evoal.languages.model.ddl.dsl.services.DataDescriptionLanguageGrammarAccess;
 import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
@@ -183,6 +183,9 @@ public class DataDescriptionLanguageSemanticSequencer extends BaseLanguageSemant
 			case DdlPackage.DATA_TYPE_DEFINITION:
 				sequence_DataTypeDefinitionRule(context, (DataTypeDefinition) semanticObject); 
 				return; 
+			case DdlPackage.IMPORT:
+				sequence_ImportRule(context, (Import) semanticObject); 
+				return; 
 			case DdlPackage.SELF_REFERENCE:
 				sequence_SelfReferenceRule(context, (SelfReference) semanticObject); 
 				return; 
@@ -191,9 +194,6 @@ public class DataDescriptionLanguageSemanticSequencer extends BaseLanguageSemant
 				return; 
 			case DdlPackage.UNTYPED_DATA_DESCRIPTION:
 				sequence_UntypedDataDescriptionRule(context, (UntypedDataDescription) semanticObject); 
-				return; 
-			case DdlPackage.USE:
-				sequence_UseRule(context, (Use) semanticObject); 
 				return; 
 			}
 		if (errorAcceptor != null)
@@ -206,7 +206,7 @@ public class DataDescriptionLanguageSemanticSequencer extends BaseLanguageSemant
 	 *     DataDescriptionModelRule returns DataDescriptionModel
 	 *
 	 * Constraint:
-	 *     (uses+=UseRule* types+=DataTypeDefinitionRule* descriptions+=DataDescriptionRule* constraints+=StatementRule*)
+	 *     (imports+=ImportRule* name=QualifiedName types+=DataTypeDefinitionRule* descriptions+=DataDescriptionRule* constraints+=StatementRule*)
 	 * </pre>
 	 */
 	protected void sequence_DataDescriptionModelRule(ISerializationContext context, DataDescriptionModel semanticObject) {
@@ -253,6 +253,26 @@ public class DataDescriptionLanguageSemanticSequencer extends BaseLanguageSemant
 	/**
 	 * <pre>
 	 * Contexts:
+	 *     ImportRule returns Import
+	 *
+	 * Constraint:
+	 *     importedNamespace=QualifiedName
+	 * </pre>
+	 */
+	protected void sequence_ImportRule(ISerializationContext context, Import semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, DdlPackage.Literals.IMPORT__IMPORTED_NAMESPACE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DdlPackage.Literals.IMPORT__IMPORTED_NAMESPACE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getImportRuleAccess().getImportedNamespaceQualifiedNameParserRuleCall_1_0(), semanticObject.getImportedNamespace());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
 	 *     ValueReferenceRule returns SelfReference
 	 *     SelfReferenceRule returns SelfReference
 	 *     LiteralOrReferenceRule returns SelfReference
@@ -273,7 +293,7 @@ public class DataDescriptionLanguageSemanticSequencer extends BaseLanguageSemant
 	 *     TypedDataDescriptionRule returns TypedDataDescription
 	 *
 	 * Constraint:
-	 *     (representation=RepresentationType name=StringOrId type=[DataTypeDefinition|StringOrId] constraints+=StatementRule*)
+	 *     (representation=RepresentationType name=StringOrId type=[DataTypeDefinition|QualifiedName] constraints+=StatementRule*)
 	 * </pre>
 	 */
 	protected void sequence_TypedDataDescriptionRule(ISerializationContext context, TypedDataDescription semanticObject) {
@@ -293,26 +313,6 @@ public class DataDescriptionLanguageSemanticSequencer extends BaseLanguageSemant
 	 */
 	protected void sequence_UntypedDataDescriptionRule(ISerializationContext context, UntypedDataDescription semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * <pre>
-	 * Contexts:
-	 *     UseRule returns Use
-	 *
-	 * Constraint:
-	 *     importURI=STRING
-	 * </pre>
-	 */
-	protected void sequence_UseRule(ISerializationContext context, Use semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, DdlPackage.Literals.USE__IMPORT_URI) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DdlPackage.Literals.USE__IMPORT_URI));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getUseRuleAccess().getImportURISTRINGTerminalRuleCall_1_0(), semanticObject.getImportURI());
-		feeder.finish();
 	}
 	
 	

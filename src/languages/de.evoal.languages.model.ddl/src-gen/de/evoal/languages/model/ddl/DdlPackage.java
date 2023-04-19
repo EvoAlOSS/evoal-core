@@ -3,6 +3,7 @@
 package de.evoal.languages.model.ddl;
 
 import de.evoal.languages.model.base.BasePackage;
+
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
@@ -69,13 +70,22 @@ public interface DdlPackage extends EPackage {
 	int DATA_DESCRIPTION_MODEL = 0;
 
 	/**
-	 * The feature id for the '<em><b>Uses</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DATA_DESCRIPTION_MODEL__USES = 0;
+	int DATA_DESCRIPTION_MODEL__NAME = 0;
+
+	/**
+	 * The feature id for the '<em><b>Imports</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_DESCRIPTION_MODEL__IMPORTS = 1;
 
 	/**
 	 * The feature id for the '<em><b>Types</b></em>' containment reference list.
@@ -84,7 +94,7 @@ public interface DdlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DATA_DESCRIPTION_MODEL__TYPES = 1;
+	int DATA_DESCRIPTION_MODEL__TYPES = 2;
 
 	/**
 	 * The feature id for the '<em><b>Descriptions</b></em>' containment reference list.
@@ -93,7 +103,7 @@ public interface DdlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DATA_DESCRIPTION_MODEL__DESCRIPTIONS = 2;
+	int DATA_DESCRIPTION_MODEL__DESCRIPTIONS = 3;
 
 	/**
 	 * The feature id for the '<em><b>Constraints</b></em>' containment reference list.
@@ -102,7 +112,7 @@ public interface DdlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DATA_DESCRIPTION_MODEL__CONSTRAINTS = 3;
+	int DATA_DESCRIPTION_MODEL__CONSTRAINTS = 4;
 
 	/**
 	 * The number of structural features of the '<em>Data Description Model</em>' class.
@@ -111,35 +121,35 @@ public interface DdlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DATA_DESCRIPTION_MODEL_FEATURE_COUNT = 4;
+	int DATA_DESCRIPTION_MODEL_FEATURE_COUNT = 5;
 
 	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.ddl.impl.UseImpl <em>Use</em>}' class.
+	 * The meta object id for the '{@link de.evoal.languages.model.ddl.impl.ImportImpl <em>Import</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.ddl.impl.UseImpl
-	 * @see de.evoal.languages.model.ddl.impl.DdlPackageImpl#getUse()
+	 * @see de.evoal.languages.model.ddl.impl.ImportImpl
+	 * @see de.evoal.languages.model.ddl.impl.DdlPackageImpl#getImport()
 	 * @generated
 	 */
-	int USE = 1;
+	int IMPORT = 1;
 
 	/**
-	 * The feature id for the '<em><b>Import URI</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int USE__IMPORT_URI = 0;
-
-	/**
-	 * The number of structural features of the '<em>Use</em>' class.
+	 * The feature id for the '<em><b>Imported Namespace</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int USE_FEATURE_COUNT = 1;
+	int IMPORT__IMPORTED_NAMESPACE = 0;
+
+	/**
+	 * The number of structural features of the '<em>Import</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPORT_FEATURE_COUNT = 1;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.ddl.impl.DataTypeDefinitionImpl <em>Data Type Definition</em>}' class.
@@ -409,7 +419,6 @@ public interface DdlPackage extends EPackage {
 	 */
 	int SCALE_TYPE = 8;
 
-
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.ddl.RepresentationType <em>Representation Type</em>}' enum.
 	 * <!-- begin-user-doc -->
@@ -432,15 +441,26 @@ public interface DdlPackage extends EPackage {
 	EClass getDataDescriptionModel();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.ddl.DataDescriptionModel#getUses <em>Uses</em>}'.
+	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.ddl.DataDescriptionModel#getName <em>Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Uses</em>'.
-	 * @see de.evoal.languages.model.ddl.DataDescriptionModel#getUses()
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see de.evoal.languages.model.ddl.DataDescriptionModel#getName()
 	 * @see #getDataDescriptionModel()
 	 * @generated
 	 */
-	EReference getDataDescriptionModel_Uses();
+	EAttribute getDataDescriptionModel_Name();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.ddl.DataDescriptionModel#getImports <em>Imports</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Imports</em>'.
+	 * @see de.evoal.languages.model.ddl.DataDescriptionModel#getImports()
+	 * @see #getDataDescriptionModel()
+	 * @generated
+	 */
+	EReference getDataDescriptionModel_Imports();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.ddl.DataDescriptionModel#getTypes <em>Types</em>}'.
@@ -476,25 +496,25 @@ public interface DdlPackage extends EPackage {
 	EReference getDataDescriptionModel_Constraints();
 
 	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.ddl.Use <em>Use</em>}'.
+	 * Returns the meta object for class '{@link de.evoal.languages.model.ddl.Import <em>Import</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Use</em>'.
-	 * @see de.evoal.languages.model.ddl.Use
+	 * @return the meta object for class '<em>Import</em>'.
+	 * @see de.evoal.languages.model.ddl.Import
 	 * @generated
 	 */
-	EClass getUse();
+	EClass getImport();
 
 	/**
-	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.ddl.Use#getImportURI <em>Import URI</em>}'.
+	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.ddl.Import#getImportedNamespace <em>Imported Namespace</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Import URI</em>'.
-	 * @see de.evoal.languages.model.ddl.Use#getImportURI()
-	 * @see #getUse()
+	 * @return the meta object for the attribute '<em>Imported Namespace</em>'.
+	 * @see de.evoal.languages.model.ddl.Import#getImportedNamespace()
+	 * @see #getImport()
 	 * @generated
 	 */
-	EAttribute getUse_ImportURI();
+	EAttribute getImport_ImportedNamespace();
 
 	/**
 	 * Returns the meta object for class '{@link de.evoal.languages.model.ddl.DataTypeDefinition <em>Data Type Definition</em>}'.
@@ -719,12 +739,20 @@ public interface DdlPackage extends EPackage {
 		EClass DATA_DESCRIPTION_MODEL = eINSTANCE.getDataDescriptionModel();
 
 		/**
-		 * The meta object literal for the '<em><b>Uses</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference DATA_DESCRIPTION_MODEL__USES = eINSTANCE.getDataDescriptionModel_Uses();
+		EAttribute DATA_DESCRIPTION_MODEL__NAME = eINSTANCE.getDataDescriptionModel_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Imports</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DATA_DESCRIPTION_MODEL__IMPORTS = eINSTANCE.getDataDescriptionModel_Imports();
 
 		/**
 		 * The meta object literal for the '<em><b>Types</b></em>' containment reference list feature.
@@ -751,22 +779,22 @@ public interface DdlPackage extends EPackage {
 		EReference DATA_DESCRIPTION_MODEL__CONSTRAINTS = eINSTANCE.getDataDescriptionModel_Constraints();
 
 		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.ddl.impl.UseImpl <em>Use</em>}' class.
+		 * The meta object literal for the '{@link de.evoal.languages.model.ddl.impl.ImportImpl <em>Import</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.ddl.impl.UseImpl
-		 * @see de.evoal.languages.model.ddl.impl.DdlPackageImpl#getUse()
+		 * @see de.evoal.languages.model.ddl.impl.ImportImpl
+		 * @see de.evoal.languages.model.ddl.impl.DdlPackageImpl#getImport()
 		 * @generated
 		 */
-		EClass USE = eINSTANCE.getUse();
+		EClass IMPORT = eINSTANCE.getImport();
 
 		/**
-		 * The meta object literal for the '<em><b>Import URI</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Imported Namespace</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute USE__IMPORT_URI = eINSTANCE.getUse_ImportURI();
+		EAttribute IMPORT__IMPORTED_NAMESPACE = eINSTANCE.getImport_ImportedNamespace();
 
 		/**
 		 * The meta object literal for the '{@link de.evoal.languages.model.ddl.impl.DataTypeDefinitionImpl <em>Data Type Definition</em>}' class.

@@ -7,8 +7,9 @@
     <details key="el" value="platform:/resource/de.evoal.languages.model.base/model/model.ecore#/"/>
   </eAnnotations>
   <eClassifiers xsi:type="ecore:EClass" name="DataDescriptionModel">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="uses" ordered="false" upperBound="-1"
-        eType="#//Use" containment="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="imports" ordered="false"
+        upperBound="-1" eType="#//Import" containment="true">
       <eAnnotations source="http://www.eclipse.org/OCL/Collection">
         <details key="nullFree" value="false"/>
       </eAnnotations>
@@ -36,8 +37,8 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Use">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="importURI" lowerBound="1"
+  <eClassifiers xsi:type="ecore:EClass" name="Import">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="importedNamespace" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="ScaleType">

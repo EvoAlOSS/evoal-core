@@ -31,13 +31,13 @@ public interface DdlFactory extends EFactory {
 	DataDescriptionModel createDataDescriptionModel();
 
 	/**
-	 * Returns a new object of class '<em>Use</em>'.
+	 * Returns a new object of class '<em>Import</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Use</em>'.
+	 * @return a new object of class '<em>Import</em>'.
 	 * @generated
 	 */
-	Use createUse();
+	Import createImport();
 
 	/**
 	 * Returns a new object of class '<em>Data Type Definition</em>'.

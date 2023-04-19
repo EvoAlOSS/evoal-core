@@ -9,14 +9,17 @@ import "https://www.evoal.de/languages/base/1.0.0" as base
 
 DataDescriptionModelRule returns DataDescriptionModel: 
 	{DataDescriptionModel}
-	(uses += UseRule)*
-	('types' ':' (types += DataTypeDefinitionRule)* )?
-	('data' ':' (descriptions += DataDescriptionRule)* )?
-	('constraints' ':' (constraints += StatementRule)*)?
+	(imports += ImportRule)*
+	'module' name = QualifiedName '{'
+		('types' ':' (types += DataTypeDefinitionRule)* )?
+		('data' ':' (descriptions += DataDescriptionRule)* )?
+		('constraints' ':' (constraints += StatementRule)*)?
+	'}'
+	
 ;
 
-UseRule returns Use:
-	'use' importURI = STRING ';'
+ImportRule returns Import:
+	'import' importedNamespace = QualifiedName ';'
 ;
 
 enum ScaleType returns ScaleType:
@@ -43,7 +46,7 @@ DataDescriptionRule returns DataDescription:
 ;
 
 TypedDataDescriptionRule returns TypedDataDescription:
-	representation=RepresentationType 'data' name = StringOrId 'of' 'type' type = [DataTypeDefinition|StringOrId] ('with' 'constraints' ':' (constraints += StatementRule)*)?
+	representation=RepresentationType 'data' name = StringOrId 'of' 'type' type = [DataTypeDefinition|QualifiedName] ('with' 'constraints' ':' (constraints += StatementRule)*)?
 	';'
 ;
 

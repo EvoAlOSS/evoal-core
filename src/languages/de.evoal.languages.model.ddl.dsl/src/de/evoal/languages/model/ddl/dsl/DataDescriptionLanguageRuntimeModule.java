@@ -7,24 +7,36 @@ package de.evoal.languages.model.ddl.dsl;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.SimpleNameProvider;
+import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
+import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 
 import de.evoal.languages.model.ddl.dsl.scoping.DataDescriptionLanguageClasspathGlobalScopeProvider;
+import de.evoal.languages.model.ddl.dsl.scoping.DataDescriptionLanguageLocalScopeProvider;
+import de.evoal.languages.model.ddl.dsl.scoping.DataDescriptionLanguageResourceDescriptionStrategy;
 import de.evoal.languages.model.utils.converter.ValueConverterService;
 
 /**
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
  */
 public class DataDescriptionLanguageRuntimeModule extends AbstractDataDescriptionLanguageRuntimeModule {
+    /*
+     * If you enable this strategy, the NamesAreUniqueValidator will not
+     * work as expected.
+     */
+    public Class<? extends IDefaultResourceDescriptionStrategy> bindIDefaultResourceDescriptionStrategy() {
+            return  DataDescriptionLanguageResourceDescriptionStrategy.class;
+    }
+    
 	@Override
-	public Class<? extends IGlobalScopeProvider> bindIGlobalScopeProvider() {
-		return DataDescriptionLanguageClasspathGlobalScopeProvider.class;
+	public void configureIScopeProviderDelegate(com.google.inject.Binder binder) {
+		binder.bind(org.eclipse.xtext.scoping.IScopeProvider.class)
+				.annotatedWith(
+						com.google.inject.name.Names
+								.named(AbstractDeclarativeScopeProvider.NAMED_DELEGATE))
+				.to(DataDescriptionLanguageLocalScopeProvider.class);
 	}
 
-	public Class<? extends IQualifiedNameProvider> bindIQualifiedNameProvider() {
-		return SimpleNameProvider.class;
-	}
-	
 	@Override
     public Class<? extends IValueConverterService> bindIValueConverterService() {
             return ValueConverterService.class;

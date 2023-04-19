@@ -3,7 +3,7 @@
 package de.evoal.languages.model.ddl.impl;
 
 import de.evoal.languages.model.ddl.DdlPackage;
-import de.evoal.languages.model.ddl.Use;
+import de.evoal.languages.model.ddl.Import;
 
 import org.eclipse.emf.common.notify.Notification;
 
@@ -14,44 +14,44 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Use</b></em>'.
+ * An implementation of the model object '<em><b>Import</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link de.evoal.languages.model.ddl.impl.UseImpl#getImportURI <em>Import URI</em>}</li>
+ *   <li>{@link de.evoal.languages.model.ddl.impl.ImportImpl#getImportedNamespace <em>Imported Namespace</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class UseImpl extends MinimalEObjectImpl.Container implements Use {
+public class ImportImpl extends MinimalEObjectImpl.Container implements Import {
 	/**
-	 * The default value of the '{@link #getImportURI() <em>Import URI</em>}' attribute.
+	 * The default value of the '{@link #getImportedNamespace() <em>Imported Namespace</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getImportURI()
+	 * @see #getImportedNamespace()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String IMPORT_URI_EDEFAULT = null;
+	protected static final String IMPORTED_NAMESPACE_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getImportURI() <em>Import URI</em>}' attribute.
+	 * The cached value of the '{@link #getImportedNamespace() <em>Imported Namespace</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getImportURI()
+	 * @see #getImportedNamespace()
 	 * @generated
 	 * @ordered
 	 */
-	protected String importURI = IMPORT_URI_EDEFAULT;
+	protected String importedNamespace = IMPORTED_NAMESPACE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected UseImpl() {
+	protected ImportImpl() {
 		super();
 	}
 
@@ -62,7 +62,7 @@ public class UseImpl extends MinimalEObjectImpl.Container implements Use {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return DdlPackage.Literals.USE;
+		return DdlPackage.Literals.IMPORT;
 	}
 
 	/**
@@ -71,8 +71,8 @@ public class UseImpl extends MinimalEObjectImpl.Container implements Use {
 	 * @generated
 	 */
 	@Override
-	public String getImportURI() {
-		return importURI;
+	public String getImportedNamespace() {
+		return importedNamespace;
 	}
 
 	/**
@@ -81,11 +81,11 @@ public class UseImpl extends MinimalEObjectImpl.Container implements Use {
 	 * @generated
 	 */
 	@Override
-	public void setImportURI(String newImportURI) {
-		String oldImportURI = importURI;
-		importURI = newImportURI;
+	public void setImportedNamespace(String newImportedNamespace) {
+		String oldImportedNamespace = importedNamespace;
+		importedNamespace = newImportedNamespace;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DdlPackage.USE__IMPORT_URI, oldImportURI, importURI));
+			eNotify(new ENotificationImpl(this, Notification.SET, DdlPackage.IMPORT__IMPORTED_NAMESPACE, oldImportedNamespace, importedNamespace));
 	}
 
 	/**
@@ -96,8 +96,8 @@ public class UseImpl extends MinimalEObjectImpl.Container implements Use {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case DdlPackage.USE__IMPORT_URI:
-				return getImportURI();
+			case DdlPackage.IMPORT__IMPORTED_NAMESPACE:
+				return getImportedNamespace();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -110,8 +110,8 @@ public class UseImpl extends MinimalEObjectImpl.Container implements Use {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case DdlPackage.USE__IMPORT_URI:
-				setImportURI((String)newValue);
+			case DdlPackage.IMPORT__IMPORTED_NAMESPACE:
+				setImportedNamespace((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -125,8 +125,8 @@ public class UseImpl extends MinimalEObjectImpl.Container implements Use {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case DdlPackage.USE__IMPORT_URI:
-				setImportURI(IMPORT_URI_EDEFAULT);
+			case DdlPackage.IMPORT__IMPORTED_NAMESPACE:
+				setImportedNamespace(IMPORTED_NAMESPACE_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -140,8 +140,8 @@ public class UseImpl extends MinimalEObjectImpl.Container implements Use {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case DdlPackage.USE__IMPORT_URI:
-				return IMPORT_URI_EDEFAULT == null ? importURI != null : !IMPORT_URI_EDEFAULT.equals(importURI);
+			case DdlPackage.IMPORT__IMPORTED_NAMESPACE:
+				return IMPORTED_NAMESPACE_EDEFAULT == null ? importedNamespace != null : !IMPORTED_NAMESPACE_EDEFAULT.equals(importedNamespace);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -156,10 +156,10 @@ public class UseImpl extends MinimalEObjectImpl.Container implements Use {
 		if (eIsProxy()) return super.toString();
 
 		StringBuilder result = new StringBuilder(super.toString());
-		result.append(" (importURI: ");
-		result.append(importURI);
+		result.append(" (importedNamespace: ");
+		result.append(importedNamespace);
 		result.append(')');
 		return result.toString();
 	}
 
-} //UseImpl
+} //ImportImpl
