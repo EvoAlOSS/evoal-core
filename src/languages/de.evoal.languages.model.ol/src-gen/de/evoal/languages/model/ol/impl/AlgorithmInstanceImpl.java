@@ -53,7 +53,7 @@ public class AlgorithmInstanceImpl extends MinimalEObjectImpl.Container implemen
 	 * @generated
 	 * @ordered
 	 */
-	protected Instance algorithm;
+	protected de.evoal.languages.model.base.Instance algorithm;
 
 	/**
 	 * The cached value of the '{@link #getDocumentation() <em>Documentation</em>}' containment reference.
@@ -63,7 +63,7 @@ public class AlgorithmInstanceImpl extends MinimalEObjectImpl.Container implemen
 	 * @generated
 	 * @ordered
 	 */
-	protected Array documentation;
+	protected de.evoal.languages.model.base.Array documentation;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -130,7 +130,7 @@ public class AlgorithmInstanceImpl extends MinimalEObjectImpl.Container implemen
 	 * @generated
 	 */
 	@Override
-	public Instance getAlgorithm() {
+	public de.evoal.languages.model.base.Instance getAlgorithm() {
 		return algorithm;
 	}
 
@@ -139,8 +139,8 @@ public class AlgorithmInstanceImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetAlgorithm(Instance newAlgorithm, NotificationChain msgs) {
-		Instance oldAlgorithm = algorithm;
+	public NotificationChain basicSetAlgorithm(de.evoal.languages.model.base.Instance newAlgorithm, NotificationChain msgs) {
+		de.evoal.languages.model.base.Instance oldAlgorithm = algorithm;
 		algorithm = newAlgorithm;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OLPackage.ALGORITHM_INSTANCE__ALGORITHM, oldAlgorithm, newAlgorithm);
@@ -155,7 +155,7 @@ public class AlgorithmInstanceImpl extends MinimalEObjectImpl.Container implemen
 	 * @generated
 	 */
 	@Override
-	public void setAlgorithm(Instance newAlgorithm) {
+	public void setAlgorithm(de.evoal.languages.model.base.Instance newAlgorithm) {
 		if (newAlgorithm != algorithm) {
 			NotificationChain msgs = null;
 			if (algorithm != null)
@@ -175,7 +175,7 @@ public class AlgorithmInstanceImpl extends MinimalEObjectImpl.Container implemen
 	 * @generated
 	 */
 	@Override
-	public Array getDocumentation() {
+	public de.evoal.languages.model.base.Array getDocumentation() {
 		return documentation;
 	}
 
@@ -184,8 +184,8 @@ public class AlgorithmInstanceImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetDocumentation(Array newDocumentation, NotificationChain msgs) {
-		Array oldDocumentation = documentation;
+	public NotificationChain basicSetDocumentation(de.evoal.languages.model.base.Array newDocumentation, NotificationChain msgs) {
+		de.evoal.languages.model.base.Array oldDocumentation = documentation;
 		documentation = newDocumentation;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OLPackage.ALGORITHM_INSTANCE__DOCUMENTATION, oldDocumentation, newDocumentation);
@@ -200,7 +200,7 @@ public class AlgorithmInstanceImpl extends MinimalEObjectImpl.Container implemen
 	 * @generated
 	 */
 	@Override
-	public void setDocumentation(Array newDocumentation) {
+	public void setDocumentation(de.evoal.languages.model.base.Array newDocumentation) {
 		if (newDocumentation != documentation) {
 			NotificationChain msgs = null;
 			if (documentation != null)
@@ -261,10 +261,10 @@ public class AlgorithmInstanceImpl extends MinimalEObjectImpl.Container implemen
 				setProblem((Problem)newValue);
 				return;
 			case OLPackage.ALGORITHM_INSTANCE__ALGORITHM:
-				setAlgorithm((Instance)newValue);
+				setAlgorithm((de.evoal.languages.model.base.Instance)newValue);
 				return;
 			case OLPackage.ALGORITHM_INSTANCE__DOCUMENTATION:
-				setDocumentation((Array)newValue);
+				setDocumentation((de.evoal.languages.model.base.Array)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -282,10 +282,10 @@ public class AlgorithmInstanceImpl extends MinimalEObjectImpl.Container implemen
 				setProblem((Problem)null);
 				return;
 			case OLPackage.ALGORITHM_INSTANCE__ALGORITHM:
-				setAlgorithm((Instance)null);
+				setAlgorithm((de.evoal.languages.model.base.Instance)null);
 				return;
 			case OLPackage.ALGORITHM_INSTANCE__DOCUMENTATION:
-				setDocumentation((Array)null);
+				setDocumentation((de.evoal.languages.model.base.Array)null);
 				return;
 		}
 		super.eUnset(featureID);

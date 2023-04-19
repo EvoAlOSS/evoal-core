@@ -62,7 +62,7 @@ public class ProblemImpl extends MinimalEObjectImpl.Container implements Problem
 	 * @generated
 	 * @ordered
 	 */
-	protected Instance problem;
+	protected de.evoal.languages.model.base.Instance problem;
 
 	/**
 	 * The cached value of the '{@link #getDocumentation() <em>Documentation</em>}' containment reference.
@@ -72,7 +72,7 @@ public class ProblemImpl extends MinimalEObjectImpl.Container implements Problem
 	 * @generated
 	 * @ordered
 	 */
-	protected Array documentation;
+	protected de.evoal.languages.model.base.Array documentation;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -122,7 +122,7 @@ public class ProblemImpl extends MinimalEObjectImpl.Container implements Problem
 	 * @generated
 	 */
 	@Override
-	public Instance getProblem() {
+	public de.evoal.languages.model.base.Instance getProblem() {
 		return problem;
 	}
 
@@ -131,8 +131,8 @@ public class ProblemImpl extends MinimalEObjectImpl.Container implements Problem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetProblem(Instance newProblem, NotificationChain msgs) {
-		Instance oldProblem = problem;
+	public NotificationChain basicSetProblem(de.evoal.languages.model.base.Instance newProblem, NotificationChain msgs) {
+		de.evoal.languages.model.base.Instance oldProblem = problem;
 		problem = newProblem;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OLPackage.PROBLEM__PROBLEM, oldProblem, newProblem);
@@ -147,7 +147,7 @@ public class ProblemImpl extends MinimalEObjectImpl.Container implements Problem
 	 * @generated
 	 */
 	@Override
-	public void setProblem(Instance newProblem) {
+	public void setProblem(de.evoal.languages.model.base.Instance newProblem) {
 		if (newProblem != problem) {
 			NotificationChain msgs = null;
 			if (problem != null)
@@ -167,7 +167,7 @@ public class ProblemImpl extends MinimalEObjectImpl.Container implements Problem
 	 * @generated
 	 */
 	@Override
-	public Array getDocumentation() {
+	public de.evoal.languages.model.base.Array getDocumentation() {
 		return documentation;
 	}
 
@@ -176,8 +176,8 @@ public class ProblemImpl extends MinimalEObjectImpl.Container implements Problem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetDocumentation(Array newDocumentation, NotificationChain msgs) {
-		Array oldDocumentation = documentation;
+	public NotificationChain basicSetDocumentation(de.evoal.languages.model.base.Array newDocumentation, NotificationChain msgs) {
+		de.evoal.languages.model.base.Array oldDocumentation = documentation;
 		documentation = newDocumentation;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OLPackage.PROBLEM__DOCUMENTATION, oldDocumentation, newDocumentation);
@@ -192,7 +192,7 @@ public class ProblemImpl extends MinimalEObjectImpl.Container implements Problem
 	 * @generated
 	 */
 	@Override
-	public void setDocumentation(Array newDocumentation) {
+	public void setDocumentation(de.evoal.languages.model.base.Array newDocumentation) {
 		if (newDocumentation != documentation) {
 			NotificationChain msgs = null;
 			if (documentation != null)
@@ -252,10 +252,10 @@ public class ProblemImpl extends MinimalEObjectImpl.Container implements Problem
 				setName((String)newValue);
 				return;
 			case OLPackage.PROBLEM__PROBLEM:
-				setProblem((Instance)newValue);
+				setProblem((de.evoal.languages.model.base.Instance)newValue);
 				return;
 			case OLPackage.PROBLEM__DOCUMENTATION:
-				setDocumentation((Array)newValue);
+				setDocumentation((de.evoal.languages.model.base.Array)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -273,10 +273,10 @@ public class ProblemImpl extends MinimalEObjectImpl.Container implements Problem
 				setName(NAME_EDEFAULT);
 				return;
 			case OLPackage.PROBLEM__PROBLEM:
-				setProblem((Instance)null);
+				setProblem((de.evoal.languages.model.base.Instance)null);
 				return;
 			case OLPackage.PROBLEM__DOCUMENTATION:
-				setDocumentation((Array)null);
+				setDocumentation((de.evoal.languages.model.base.Array)null);
 				return;
 		}
 		super.eUnset(featureID);

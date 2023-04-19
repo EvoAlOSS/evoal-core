@@ -5,14 +5,15 @@ package de.evoal.languages.model.base.impl;
 import de.evoal.languages.model.base.AddOrSubtractExpression;
 import de.evoal.languages.model.base.AddOrSubtractOperator;
 import de.evoal.languages.model.base.AndExpression;
+import de.evoal.languages.model.base.Array;
 import de.evoal.languages.model.base.ArrayType;
+import de.evoal.languages.model.base.Attribute;
 import de.evoal.languages.model.base.AttributeDefinition;
 import de.evoal.languages.model.base.BaseFactory;
 import de.evoal.languages.model.base.BasePackage;
 import de.evoal.languages.model.base.BooleanLiteral;
 import de.evoal.languages.model.base.BooleanType;
 import de.evoal.languages.model.base.Call;
-import de.evoal.languages.model.base.CallOrLiteralOrReferenceOrParantheses;
 import de.evoal.languages.model.base.ComparisonExpression;
 import de.evoal.languages.model.base.ComparisonOperator;
 import de.evoal.languages.model.base.ConstantDefinition;
@@ -26,6 +27,7 @@ import de.evoal.languages.model.base.Factor;
 import de.evoal.languages.model.base.FloatType;
 import de.evoal.languages.model.base.FunctionDefinition;
 import de.evoal.languages.model.base.FunctionName;
+import de.evoal.languages.model.base.Instance;
 import de.evoal.languages.model.base.InstanceType;
 import de.evoal.languages.model.base.IntType;
 import de.evoal.languages.model.base.IntegerLiteral;
@@ -45,6 +47,7 @@ import de.evoal.languages.model.base.StringType;
 import de.evoal.languages.model.base.Type;
 import de.evoal.languages.model.base.TypeDefinition;
 import de.evoal.languages.model.base.UnaryAddOrSubtractExpression;
+import de.evoal.languages.model.base.Value;
 import de.evoal.languages.model.base.ValueReference;
 import de.evoal.languages.model.base.VoidType;
 import de.evoal.languages.model.base.XorExpression;
@@ -147,7 +150,7 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass callOrLiteralOrReferenceOrParanthesesEClass = null;
+	private EClass valueEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -344,6 +347,27 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 	 * @generated
 	 */
 	private EClass constantReferenceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass arrayEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass instanceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass attributeEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -739,8 +763,8 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 	 * @generated
 	 */
 	@Override
-	public EClass getCallOrLiteralOrReferenceOrParantheses() {
-		return callOrLiteralOrReferenceOrParanthesesEClass;
+	public EClass getValue() {
+		return valueEClass;
 	}
 
 	/**
@@ -1349,6 +1373,86 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 	 * @generated
 	 */
 	@Override
+	public EClass getArray() {
+		return arrayEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getArray_Values() {
+		return (EReference)arrayEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getInstance() {
+		return instanceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getInstance_Definition() {
+		return (EReference)instanceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getInstance_Attributes() {
+		return (EReference)instanceEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getAttribute() {
+		return attributeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getAttribute_Definition() {
+		return (EReference)attributeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getAttribute_Value() {
+		return (EReference)attributeEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EEnum getComparisonOperator() {
 		return comparisonOperatorEEnum;
 	}
@@ -1453,7 +1557,7 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 		createEAttribute(unaryAddOrSubtractExpressionEClass, UNARY_ADD_OR_SUBTRACT_EXPRESSION__OPERATORS);
 		createEReference(unaryAddOrSubtractExpressionEClass, UNARY_ADD_OR_SUBTRACT_EXPRESSION__SUB_EXPRESSION);
 
-		callOrLiteralOrReferenceOrParanthesesEClass = createEClass(CALL_OR_LITERAL_OR_REFERENCE_OR_PARANTHESES);
+		valueEClass = createEClass(VALUE);
 
 		literalEClass = createEClass(LITERAL);
 		createEOperation(literalEClass, LITERAL___GET_VALUE);
@@ -1543,6 +1647,17 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 		constantReferenceEClass = createEClass(CONSTANT_REFERENCE);
 		createEReference(constantReferenceEClass, CONSTANT_REFERENCE__DEFINITION);
 
+		arrayEClass = createEClass(ARRAY);
+		createEReference(arrayEClass, ARRAY__VALUES);
+
+		instanceEClass = createEClass(INSTANCE);
+		createEReference(instanceEClass, INSTANCE__DEFINITION);
+		createEReference(instanceEClass, INSTANCE__ATTRIBUTES);
+
+		attributeEClass = createEClass(ATTRIBUTE);
+		createEReference(attributeEClass, ATTRIBUTE__DEFINITION);
+		createEReference(attributeEClass, ATTRIBUTE__VALUE);
+
 		// Create enums
 		comparisonOperatorEEnum = createEEnum(COMPARISON_OPERATOR);
 		addOrSubtractOperatorEEnum = createEEnum(ADD_OR_SUBTRACT_OPERATOR);
@@ -1579,15 +1694,15 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 
 		// Add supertypes to classes
 		orExpressionEClass.getESuperTypes().add(this.getExpression());
-		literalEClass.getESuperTypes().add(this.getCallOrLiteralOrReferenceOrParantheses());
+		literalEClass.getESuperTypes().add(this.getValue());
 		numberLiteralEClass.getESuperTypes().add(this.getLiteral());
 		integerLiteralEClass.getESuperTypes().add(this.getNumberLiteral());
 		doubleLiteralEClass.getESuperTypes().add(this.getNumberLiteral());
 		stringLiteralEClass.getESuperTypes().add(this.getLiteral());
 		booleanLiteralEClass.getESuperTypes().add(this.getLiteral());
-		callEClass.getESuperTypes().add(this.getCallOrLiteralOrReferenceOrParantheses());
-		paranthesesEClass.getESuperTypes().add(this.getCallOrLiteralOrReferenceOrParantheses());
-		valueReferenceEClass.getESuperTypes().add(this.getCallOrLiteralOrReferenceOrParantheses());
+		callEClass.getESuperTypes().add(this.getValue());
+		paranthesesEClass.getESuperTypes().add(this.getValue());
+		valueReferenceEClass.getESuperTypes().add(this.getValue());
 		instanceTypeEClass.getESuperTypes().add(this.getType());
 		literalTypeEClass.getESuperTypes().add(this.getType());
 		stringTypeEClass.getESuperTypes().add(this.getLiteralType());
@@ -1600,6 +1715,8 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 		arrayTypeEClass.getESuperTypes().add(this.getType());
 		definedFunctionNameEClass.getESuperTypes().add(this.getFunctionName());
 		constantReferenceEClass.getESuperTypes().add(this.getValueReference());
+		arrayEClass.getESuperTypes().add(this.getValue());
+		instanceEClass.getESuperTypes().add(this.getLiteral());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(expressionEClass, Expression.class, "Expression", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1641,9 +1758,9 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 
 		initEClass(unaryAddOrSubtractExpressionEClass, UnaryAddOrSubtractExpression.class, "UnaryAddOrSubtractExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getUnaryAddOrSubtractExpression_Operators(), this.getAddOrSubtractOperator(), "operators", null, 0, -1, UnaryAddOrSubtractExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getUnaryAddOrSubtractExpression_SubExpression(), this.getCallOrLiteralOrReferenceOrParantheses(), null, "subExpression", null, 1, 1, UnaryAddOrSubtractExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getUnaryAddOrSubtractExpression_SubExpression(), this.getValue(), null, "subExpression", null, 1, 1, UnaryAddOrSubtractExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(callOrLiteralOrReferenceOrParanthesesEClass, CallOrLiteralOrReferenceOrParantheses.class, "CallOrLiteralOrReferenceOrParantheses", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(valueEClass, Value.class, "Value", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(literalEClass, Literal.class, "Literal", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1737,6 +1854,17 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 
 		initEClass(constantReferenceEClass, ConstantReference.class, "ConstantReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getConstantReference_Definition(), this.getConstantDefinition(), null, "definition", null, 1, 1, ConstantReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(arrayEClass, Array.class, "Array", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getArray_Values(), this.getValue(), null, "values", null, 0, -1, Array.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(instanceEClass, Instance.class, "Instance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getInstance_Definition(), this.getTypeDefinition(), null, "definition", null, 1, 1, Instance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getInstance_Attributes(), this.getAttribute(), null, "attributes", null, 0, -1, Instance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(attributeEClass, Attribute.class, "Attribute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getAttribute_Definition(), this.getAttributeDefinition(), null, "definition", null, 1, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAttribute_Value(), this.getValue(), null, "value", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(comparisonOperatorEEnum, ComparisonOperator.class, "ComparisonOperator");

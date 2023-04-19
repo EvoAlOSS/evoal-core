@@ -36,7 +36,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *
  * @generated
  */
-public class CallImpl extends CallOrLiteralOrReferenceOrParanthesesImpl implements Call {
+public class CallImpl extends ValueImpl implements Call {
 	/**
 	 * The cached value of the '{@link #getFunction() <em>Function</em>}' containment reference.
 	 * <!-- begin-user-doc -->

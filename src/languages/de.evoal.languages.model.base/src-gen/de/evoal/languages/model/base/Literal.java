@@ -13,7 +13,7 @@ package de.evoal.languages.model.base;
  * @model abstract="true"
  * @generated
  */
-public interface Literal extends CallOrLiteralOrReferenceOrParantheses {
+public interface Literal extends Value {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

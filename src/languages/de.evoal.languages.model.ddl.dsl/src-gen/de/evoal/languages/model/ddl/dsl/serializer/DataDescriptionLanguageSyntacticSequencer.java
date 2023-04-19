@@ -26,6 +26,7 @@ public class DataDescriptionLanguageSyntacticSequencer extends AbstractSyntactic
 	protected AbstractElementAlias match_DataDescriptionModelRule___DataKeyword_6_0_ColonKeyword_6_1__q;
 	protected AbstractElementAlias match_DataDescriptionModelRule___TypesKeyword_5_0_ColonKeyword_5_1__q;
 	protected AbstractElementAlias match_DataTypeDefinitionRule___WithKeyword_4_0_ConstraintsKeyword_4_1_ColonKeyword_4_2__q;
+	protected AbstractElementAlias match_InstanceLiteralRule___LeftCurlyBracketKeyword_1_0_RightCurlyBracketKeyword_1_2__q;
 	protected AbstractElementAlias match_TypedDataDescriptionRule___WithKeyword_6_0_ConstraintsKeyword_6_1_ColonKeyword_6_2__q;
 	protected AbstractElementAlias match_UntypedDataDescriptionRule___WithKeyword_4_0_ConstraintsKeyword_4_1_ColonKeyword_4_2__q;
 	
@@ -36,6 +37,7 @@ public class DataDescriptionLanguageSyntacticSequencer extends AbstractSyntactic
 		match_DataDescriptionModelRule___DataKeyword_6_0_ColonKeyword_6_1__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getDataDescriptionModelRuleAccess().getDataKeyword_6_0()), new TokenAlias(false, false, grammarAccess.getDataDescriptionModelRuleAccess().getColonKeyword_6_1()));
 		match_DataDescriptionModelRule___TypesKeyword_5_0_ColonKeyword_5_1__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getDataDescriptionModelRuleAccess().getTypesKeyword_5_0()), new TokenAlias(false, false, grammarAccess.getDataDescriptionModelRuleAccess().getColonKeyword_5_1()));
 		match_DataTypeDefinitionRule___WithKeyword_4_0_ConstraintsKeyword_4_1_ColonKeyword_4_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getDataTypeDefinitionRuleAccess().getWithKeyword_4_0()), new TokenAlias(false, false, grammarAccess.getDataTypeDefinitionRuleAccess().getConstraintsKeyword_4_1()), new TokenAlias(false, false, grammarAccess.getDataTypeDefinitionRuleAccess().getColonKeyword_4_2()));
+		match_InstanceLiteralRule___LeftCurlyBracketKeyword_1_0_RightCurlyBracketKeyword_1_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getInstanceLiteralRuleAccess().getLeftCurlyBracketKeyword_1_0()), new TokenAlias(false, false, grammarAccess.getInstanceLiteralRuleAccess().getRightCurlyBracketKeyword_1_2()));
 		match_TypedDataDescriptionRule___WithKeyword_6_0_ConstraintsKeyword_6_1_ColonKeyword_6_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getTypedDataDescriptionRuleAccess().getWithKeyword_6_0()), new TokenAlias(false, false, grammarAccess.getTypedDataDescriptionRuleAccess().getConstraintsKeyword_6_1()), new TokenAlias(false, false, grammarAccess.getTypedDataDescriptionRuleAccess().getColonKeyword_6_2()));
 		match_UntypedDataDescriptionRule___WithKeyword_4_0_ConstraintsKeyword_4_1_ColonKeyword_4_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getUntypedDataDescriptionRuleAccess().getWithKeyword_4_0()), new TokenAlias(false, false, grammarAccess.getUntypedDataDescriptionRuleAccess().getConstraintsKeyword_4_1()), new TokenAlias(false, false, grammarAccess.getUntypedDataDescriptionRuleAccess().getColonKeyword_4_2()));
 	}
@@ -60,6 +62,8 @@ public class DataDescriptionLanguageSyntacticSequencer extends AbstractSyntactic
 				emit_DataDescriptionModelRule___TypesKeyword_5_0_ColonKeyword_5_1__q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_DataTypeDefinitionRule___WithKeyword_4_0_ConstraintsKeyword_4_1_ColonKeyword_4_2__q.equals(syntax))
 				emit_DataTypeDefinitionRule___WithKeyword_4_0_ConstraintsKeyword_4_1_ColonKeyword_4_2__q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_InstanceLiteralRule___LeftCurlyBracketKeyword_1_0_RightCurlyBracketKeyword_1_2__q.equals(syntax))
+				emit_InstanceLiteralRule___LeftCurlyBracketKeyword_1_0_RightCurlyBracketKeyword_1_2__q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_TypedDataDescriptionRule___WithKeyword_6_0_ConstraintsKeyword_6_1_ColonKeyword_6_2__q.equals(syntax))
 				emit_TypedDataDescriptionRule___WithKeyword_6_0_ConstraintsKeyword_6_1_ColonKeyword_6_2__q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_UntypedDataDescriptionRule___WithKeyword_4_0_ConstraintsKeyword_4_1_ColonKeyword_4_2__q.equals(syntax))
@@ -129,6 +133,20 @@ public class DataDescriptionLanguageSyntacticSequencer extends AbstractSyntactic
 	 * </pre>
 	 */
 	protected void emit_DataTypeDefinitionRule___WithKeyword_4_0_ConstraintsKeyword_4_1_ColonKeyword_4_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * <pre>
+	 * Ambiguous syntax:
+	 *     ('{' '}')?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     definition=[TypeDefinition|QualifiedName] (ambiguity) (rule end)
+	 
+	 * </pre>
+	 */
+	protected void emit_InstanceLiteralRule___LeftCurlyBracketKeyword_1_0_RightCurlyBracketKeyword_1_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	

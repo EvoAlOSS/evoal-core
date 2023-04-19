@@ -5,27 +5,11 @@ import "https://www.evoal.de/languages/instance/1.0.0"
 import "https://www.evoal.de/languages/ddl/1.0.0" as ddl
 import "https://www.evoal.de/languages/base/1.0.0" as base
 
-InstanceRule returns Instance:
-	definition = [base::TypeDefinition|QualifiedName] ('{'
-	  attributes += AttributeRule*
-	'}')?
-;
 
-AttributeRule returns Attribute:
-	definition = [base::AttributeDefinition|StringOrId] ':=' value = ValueRule ';'
-;
 
-ValueRule returns Value:
-	ArrayRule | DataReferenceRule | InstanceRule | LiteralValueRule
-;
-
-ArrayRule returns Array:
-	{Array}
-	'[' (values += ValueRule (',' values += ValueRule)* )? ']' 
-;
-
-LiteralValueRule returns LiteralValue:
-	literal = LiteralRule
+@Override
+ReferenceRule returns base::ValueReference:
+	ConstantReferenceRule | DataReferenceRule
 ;
 
 DataReferenceRule returns DataReference:

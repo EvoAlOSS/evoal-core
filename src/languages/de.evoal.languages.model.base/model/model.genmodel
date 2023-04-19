@@ -89,7 +89,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//UnaryAddOrSubtractExpression/operators"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//UnaryAddOrSubtractExpression/subExpression"/>
     </genClasses>
-    <genClasses image="false" ecoreClass="model.ecore#//CallOrLiteralOrReferenceOrParantheses"/>
+    <genClasses image="false" ecoreClass="model.ecore#//Value"/>
     <genClasses image="false" ecoreClass="model.ecore#//Literal">
       <genOperations ecoreOperation="model.ecore#//Literal/getValue"/>
     </genClasses>
@@ -166,6 +166,17 @@
     </genClasses>
     <genClasses ecoreClass="model.ecore#//ConstantReference">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//ConstantReference/definition"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//Array">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//Array/values"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//Instance">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//Instance/definition"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//Instance/attributes"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//Attribute">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//Attribute/definition"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//Attribute/value"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

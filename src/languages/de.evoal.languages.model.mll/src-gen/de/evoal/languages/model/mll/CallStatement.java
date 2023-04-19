@@ -2,6 +2,8 @@
  */
 package de.evoal.languages.model.mll;
 
+import de.evoal.languages.model.base.Call;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Call Statement</b></em>'.
@@ -24,12 +26,12 @@ public interface CallStatement extends Statement {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Call</em>' containment reference.
-	 * @see #setCall(de.evoal.languages.model.base.Call)
+	 * @see #setCall(Call)
 	 * @see de.evoal.languages.model.mll.MllPackage#getCallStatement_Call()
 	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	de.evoal.languages.model.base.Call getCall();
+	Call getCall();
 
 	/**
 	 * Sets the value of the '{@link de.evoal.languages.model.mll.CallStatement#getCall <em>Call</em>}' containment reference.
@@ -39,6 +41,6 @@ public interface CallStatement extends Statement {
 	 * @see #getCall()
 	 * @generated
 	 */
-	void setCall(de.evoal.languages.model.base.Call value);
+	void setCall(Call value);
 
 } // CallStatement

@@ -7,7 +7,9 @@ package de.evoal.languages.model.mll.dsl.serializer;
 import com.google.inject.Inject;
 import de.evoal.languages.model.base.AddOrSubtractExpression;
 import de.evoal.languages.model.base.AndExpression;
+import de.evoal.languages.model.base.Array;
 import de.evoal.languages.model.base.ArrayType;
+import de.evoal.languages.model.base.Attribute;
 import de.evoal.languages.model.base.AttributeDefinition;
 import de.evoal.languages.model.base.BasePackage;
 import de.evoal.languages.model.base.BooleanLiteral;
@@ -22,6 +24,7 @@ import de.evoal.languages.model.base.DoubleLiteral;
 import de.evoal.languages.model.base.ExpressionType;
 import de.evoal.languages.model.base.FloatType;
 import de.evoal.languages.model.base.FunctionDefinition;
+import de.evoal.languages.model.base.Instance;
 import de.evoal.languages.model.base.InstanceType;
 import de.evoal.languages.model.base.IntType;
 import de.evoal.languages.model.base.IntegerLiteral;
@@ -38,12 +41,8 @@ import de.evoal.languages.model.base.TypeDefinition;
 import de.evoal.languages.model.base.UnaryAddOrSubtractExpression;
 import de.evoal.languages.model.base.VoidType;
 import de.evoal.languages.model.base.XorExpression;
-import de.evoal.languages.model.instance.Array;
-import de.evoal.languages.model.instance.Attribute;
 import de.evoal.languages.model.instance.DataReference;
-import de.evoal.languages.model.instance.Instance;
 import de.evoal.languages.model.instance.InstancePackage;
-import de.evoal.languages.model.instance.LiteralValue;
 import de.evoal.languages.model.instance.dsl.serializer.InstanceLanguageSemanticSequencer;
 import de.evoal.languages.model.mll.BlockStatement;
 import de.evoal.languages.model.mll.CallStatement;
@@ -88,8 +87,14 @@ public class MachineLearningLanguageSemanticSequencer extends InstanceLanguageSe
 			case BasePackage.AND_EXPRESSION:
 				sequence_AndExpressionRule(context, (AndExpression) semanticObject); 
 				return; 
+			case BasePackage.ARRAY:
+				sequence_ArrayRule(context, (Array) semanticObject); 
+				return; 
 			case BasePackage.ARRAY_TYPE:
 				sequence_ArrayTypeRule(context, (ArrayType) semanticObject); 
+				return; 
+			case BasePackage.ATTRIBUTE:
+				sequence_AttributeRule(context, (Attribute) semanticObject); 
 				return; 
 			case BasePackage.ATTRIBUTE_DEFINITION:
 				sequence_AttributeDefinitionRule(context, (AttributeDefinition) semanticObject); 
@@ -129,6 +134,9 @@ public class MachineLearningLanguageSemanticSequencer extends InstanceLanguageSe
 				return; 
 			case BasePackage.FUNCTION_DEFINITION:
 				sequence_FunctionDefinitionRule(context, (FunctionDefinition) semanticObject); 
+				return; 
+			case BasePackage.INSTANCE:
+				sequence_InstanceLiteralRule(context, (Instance) semanticObject); 
 				return; 
 			case BasePackage.INSTANCE_TYPE:
 				sequence_InstanceTypeRule(context, (InstanceType) semanticObject); 
@@ -184,20 +192,8 @@ public class MachineLearningLanguageSemanticSequencer extends InstanceLanguageSe
 			}
 		else if (epackage == InstancePackage.eINSTANCE)
 			switch (semanticObject.eClass().getClassifierID()) {
-			case InstancePackage.ARRAY:
-				sequence_ArrayRule(context, (Array) semanticObject); 
-				return; 
-			case InstancePackage.ATTRIBUTE:
-				sequence_AttributeRule(context, (Attribute) semanticObject); 
-				return; 
 			case InstancePackage.DATA_REFERENCE:
 				sequence_DataReferenceRule(context, (DataReference) semanticObject); 
-				return; 
-			case InstancePackage.INSTANCE:
-				sequence_InstanceRule(context, (Instance) semanticObject); 
-				return; 
-			case InstancePackage.LITERAL_VALUE:
-				sequence_LiteralValueRule(context, (LiteralValue) semanticObject); 
 				return; 
 			}
 		else if (epackage == MllPackage.eINSTANCE)

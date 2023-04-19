@@ -102,7 +102,7 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 		private final RuleCall cNameStringOrIdParserRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		private final Keyword cAsKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		private final Assignment cProblemAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cProblemInstanceRuleParserRuleCall_3_0 = (RuleCall)cProblemAssignment_3.eContents().get(0);
+		private final RuleCall cProblemInstanceLiteralRuleParserRuleCall_3_0 = (RuleCall)cProblemAssignment_3.eContents().get(0);
 		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
 		private final Keyword cDocumentingKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
 		private final Keyword cColonEqualsSignKeyword_4_1 = (Keyword)cGroup_4.eContents().get(1);
@@ -112,13 +112,13 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 		
 		//ProblemRule returns Problem:
 		//    "declare" name = StringOrId "as"
-		//        problem = InstanceRule
+		//        problem = InstanceLiteralRule
 		//    ("documenting" ":=" documentation = ArrayRule ';')?
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"declare" name = StringOrId "as"
-		//    problem = InstanceRule
+		//    problem = InstanceLiteralRule
 		//("documenting" ":=" documentation = ArrayRule ';')?
 		public Group getGroup() { return cGroup; }
 		
@@ -134,11 +134,11 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 		//"as"
 		public Keyword getAsKeyword_2() { return cAsKeyword_2; }
 		
-		//problem = InstanceRule
+		//problem = InstanceLiteralRule
 		public Assignment getProblemAssignment_3() { return cProblemAssignment_3; }
 		
-		//InstanceRule
-		public RuleCall getProblemInstanceRuleParserRuleCall_3_0() { return cProblemInstanceRuleParserRuleCall_3_0; }
+		//InstanceLiteralRule
+		public RuleCall getProblemInstanceLiteralRuleParserRuleCall_3_0() { return cProblemInstanceLiteralRuleParserRuleCall_3_0; }
 		
 		//("documenting" ":=" documentation = ArrayRule ';')?
 		public Group getGroup_4() { return cGroup_4; }
@@ -169,7 +169,7 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 		private final Keyword cWithKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		private final Keyword cAlgorithmKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		private final Assignment cAlgorithmAssignment_5 = (Assignment)cGroup.eContents().get(5);
-		private final RuleCall cAlgorithmInstanceRuleParserRuleCall_5_0 = (RuleCall)cAlgorithmAssignment_5.eContents().get(0);
+		private final RuleCall cAlgorithmInstanceLiteralRuleParserRuleCall_5_0 = (RuleCall)cAlgorithmAssignment_5.eContents().get(0);
 		private final Group cGroup_6 = (Group)cGroup.eContents().get(6);
 		private final Keyword cDocumentingKeyword_6_0 = (Keyword)cGroup_6.eContents().get(0);
 		private final Keyword cColonEqualsSignKeyword_6_1 = (Keyword)cGroup_6.eContents().get(1);
@@ -179,13 +179,13 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 		
 		//AlgorithmInstanceRule returns AlgorithmInstance:
 		//    "instance" "for" problem = [Problem|QualifiedName] "with" "algorithm"
-		//        algorithm = InstanceRule
+		//        algorithm = InstanceLiteralRule
 		//    ("documenting" ":=" documentation = ArrayRule ';')?
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"instance" "for" problem = [Problem|QualifiedName] "with" "algorithm"
-		//    algorithm = InstanceRule
+		//    algorithm = InstanceLiteralRule
 		//("documenting" ":=" documentation = ArrayRule ';')?
 		public Group getGroup() { return cGroup; }
 		
@@ -210,11 +210,11 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 		//"algorithm"
 		public Keyword getAlgorithmKeyword_4() { return cAlgorithmKeyword_4; }
 		
-		//algorithm = InstanceRule
+		//algorithm = InstanceLiteralRule
 		public Assignment getAlgorithmAssignment_5() { return cAlgorithmAssignment_5; }
 		
-		//InstanceRule
-		public RuleCall getAlgorithmInstanceRuleParserRuleCall_5_0() { return cAlgorithmInstanceRuleParserRuleCall_5_0; }
+		//InstanceLiteralRule
+		public RuleCall getAlgorithmInstanceLiteralRuleParserRuleCall_5_0() { return cAlgorithmInstanceLiteralRuleParserRuleCall_5_0; }
 		
 		//("documenting" ":=" documentation = ArrayRule ';')?
 		public Group getGroup_6() { return cGroup_6; }
@@ -325,7 +325,7 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 	
 	//ProblemRule returns Problem:
 	//    "declare" name = StringOrId "as"
-	//        problem = InstanceRule
+	//        problem = InstanceLiteralRule
 	//    ("documenting" ":=" documentation = ArrayRule ';')?
 	//;
 	public ProblemRuleElements getProblemRuleAccess() {
@@ -338,7 +338,7 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 	
 	//AlgorithmInstanceRule returns AlgorithmInstance:
 	//    "instance" "for" problem = [Problem|QualifiedName] "with" "algorithm"
-	//        algorithm = InstanceRule
+	//        algorithm = InstanceLiteralRule
 	//    ("documenting" ":=" documentation = ArrayRule ';')?
 	//;
 	public AlgorithmInstanceRuleElements getAlgorithmInstanceRuleAccess() {
@@ -349,62 +349,16 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 		return getAlgorithmInstanceRuleAccess().getRule();
 	}
 	
-	//InstanceRule returns Instance:
-	//    definition = [base::TypeDefinition|QualifiedName] ('{'
-	//      attributes += AttributeRule*
-	//    '}')?
+	//@Override
+	//ReferenceRule returns base::ValueReference:
+	//    ConstantReferenceRule | DataReferenceRule
 	//;
-	public InstanceLanguageGrammarAccess.InstanceRuleElements getInstanceRuleAccess() {
-		return gaInstanceLanguage.getInstanceRuleAccess();
+	public InstanceLanguageGrammarAccess.ReferenceRuleElements getReferenceRuleAccess() {
+		return gaInstanceLanguage.getReferenceRuleAccess();
 	}
 	
-	public ParserRule getInstanceRuleRule() {
-		return getInstanceRuleAccess().getRule();
-	}
-	
-	//AttributeRule returns Attribute:
-	//    definition = [base::AttributeDefinition|StringOrId] ':=' value = ValueRule ';'
-	//;
-	public InstanceLanguageGrammarAccess.AttributeRuleElements getAttributeRuleAccess() {
-		return gaInstanceLanguage.getAttributeRuleAccess();
-	}
-	
-	public ParserRule getAttributeRuleRule() {
-		return getAttributeRuleAccess().getRule();
-	}
-	
-	//ValueRule returns Value:
-	//    ArrayRule | DataReferenceRule | InstanceRule | LiteralValueRule
-	//;
-	public InstanceLanguageGrammarAccess.ValueRuleElements getValueRuleAccess() {
-		return gaInstanceLanguage.getValueRuleAccess();
-	}
-	
-	public ParserRule getValueRuleRule() {
-		return getValueRuleAccess().getRule();
-	}
-	
-	//ArrayRule returns Array:
-	//    {Array}
-	//    '[' (values += ValueRule (',' values += ValueRule)* )? ']'
-	//;
-	public InstanceLanguageGrammarAccess.ArrayRuleElements getArrayRuleAccess() {
-		return gaInstanceLanguage.getArrayRuleAccess();
-	}
-	
-	public ParserRule getArrayRuleRule() {
-		return getArrayRuleAccess().getRule();
-	}
-	
-	//LiteralValueRule returns LiteralValue:
-	//    literal = LiteralRule
-	//;
-	public InstanceLanguageGrammarAccess.LiteralValueRuleElements getLiteralValueRuleAccess() {
-		return gaInstanceLanguage.getLiteralValueRuleAccess();
-	}
-	
-	public ParserRule getLiteralValueRuleRule() {
-		return getLiteralValueRuleAccess().getRule();
+	public ParserRule getReferenceRuleRule() {
+		return getReferenceRuleAccess().getRule();
 	}
 	
 	//DataReferenceRule returns DataReference:
@@ -568,7 +522,7 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 	}
 	
 	//UnaryAddOrSubtractExpressionRule returns UnaryAddOrSubtractExpression :
-	//    ( operators+=AddOrSubtractOperatorRule )* subExpression = LiteralOrReferenceRule
+	//    ( operators+=AddOrSubtractOperatorRule )* subExpression = ValueRule
 	//;
 	public BaseLanguageGrammarAccess.UnaryAddOrSubtractExpressionRuleElements getUnaryAddOrSubtractExpressionRuleAccess() {
 		return gaBaseLanguage.getUnaryAddOrSubtractExpressionRuleAccess();
@@ -578,14 +532,26 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 		return getUnaryAddOrSubtractExpressionRuleAccess().getRule();
 	}
 	
-	//LiteralOrReferenceRule returns CallOrLiteralOrReferenceOrParantheses:
-	//    CallRule | LiteralRule | ParanthesesRule | ValueReferenceRule;
-	public BaseLanguageGrammarAccess.LiteralOrReferenceRuleElements getLiteralOrReferenceRuleAccess() {
-		return gaBaseLanguage.getLiteralOrReferenceRuleAccess();
+	//ValueRule returns Value:
+	//    ArrayRule | CallRule | LiteralRule | ParanthesesRule | ReferenceRule;
+	public BaseLanguageGrammarAccess.ValueRuleElements getValueRuleAccess() {
+		return gaBaseLanguage.getValueRuleAccess();
 	}
 	
-	public ParserRule getLiteralOrReferenceRuleRule() {
-		return getLiteralOrReferenceRuleAccess().getRule();
+	public ParserRule getValueRuleRule() {
+		return getValueRuleAccess().getRule();
+	}
+	
+	//ArrayRule returns Array:
+	//    {Array}
+	//    '[' (values += ValueRule (',' values += ValueRule)* )? ']'
+	//;
+	public BaseLanguageGrammarAccess.ArrayRuleElements getArrayRuleAccess() {
+		return gaBaseLanguage.getArrayRuleAccess();
+	}
+	
+	public ParserRule getArrayRuleRule() {
+		return getArrayRuleAccess().getRule();
 	}
 	
 	//ParanthesesRule returns Parantheses:
@@ -610,17 +576,6 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 		return getCallRuleAccess().getRule();
 	}
 	
-	//ValueReferenceRule returns ValueReference:
-	//    ConstantReferenceRule
-	//;
-	public BaseLanguageGrammarAccess.ValueReferenceRuleElements getValueReferenceRuleAccess() {
-		return gaBaseLanguage.getValueReferenceRuleAccess();
-	}
-	
-	public ParserRule getValueReferenceRuleRule() {
-		return getValueReferenceRuleAccess().getRule();
-	}
-	
 	//ConstantReferenceRule returns ConstantReference:
 	//    definition = [ConstantDefinition|QualifiedName]
 	//;
@@ -636,6 +591,7 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 	//    NumberLiteralRule
 	//        | StringLiteralRule
 	//        | BooleanLiteralRule
+	//        | InstanceLiteralRule
 	//;
 	public BaseLanguageGrammarAccess.LiteralRuleElements getLiteralRuleAccess() {
 		return gaBaseLanguage.getLiteralRuleAccess();
@@ -643,6 +599,30 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 	
 	public ParserRule getLiteralRuleRule() {
 		return getLiteralRuleAccess().getRule();
+	}
+	
+	//InstanceLiteralRule returns Instance:
+	//    definition = [TypeDefinition|QualifiedName] ('{'
+	//      attributes += AttributeRule*
+	//    '}')?
+	//;
+	public BaseLanguageGrammarAccess.InstanceLiteralRuleElements getInstanceLiteralRuleAccess() {
+		return gaBaseLanguage.getInstanceLiteralRuleAccess();
+	}
+	
+	public ParserRule getInstanceLiteralRuleRule() {
+		return getInstanceLiteralRuleAccess().getRule();
+	}
+	
+	//AttributeRule returns Attribute:
+	//    definition = [AttributeDefinition|StringOrId] ':=' value = ValueRule ';'
+	//;
+	public BaseLanguageGrammarAccess.AttributeRuleElements getAttributeRuleAccess() {
+		return gaBaseLanguage.getAttributeRuleAccess();
+	}
+	
+	public ParserRule getAttributeRuleRule() {
+		return getAttributeRuleAccess().getRule();
 	}
 	
 	//NumberLiteralRule returns NumberLiteral:

@@ -2,7 +2,7 @@
  */
 package de.evoal.languages.model.ddl.util;
 
-import de.evoal.languages.model.base.CallOrLiteralOrReferenceOrParantheses;
+import de.evoal.languages.model.base.Value;
 import de.evoal.languages.model.base.ValueReference;
 
 import de.evoal.languages.model.ddl.*;
@@ -111,7 +111,7 @@ public class DdlSwitch<T> extends Switch<T> {
 				DataReference dataReference = (DataReference)theEObject;
 				T result = caseDataReference(dataReference);
 				if (result == null) result = caseValueReference(dataReference);
-				if (result == null) result = caseCallOrLiteralOrReferenceOrParantheses(dataReference);
+				if (result == null) result = caseValue(dataReference);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -119,7 +119,7 @@ public class DdlSwitch<T> extends Switch<T> {
 				SelfReference selfReference = (SelfReference)theEObject;
 				T result = caseSelfReference(selfReference);
 				if (result == null) result = caseValueReference(selfReference);
-				if (result == null) result = caseCallOrLiteralOrReferenceOrParantheses(selfReference);
+				if (result == null) result = caseValue(selfReference);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -248,17 +248,17 @@ public class DdlSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Call Or Literal Or Reference Or Parantheses</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Value</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Call Or Literal Or Reference Or Parantheses</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Value</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseCallOrLiteralOrReferenceOrParantheses(CallOrLiteralOrReferenceOrParantheses object) {
+	public T caseValue(Value object) {
 		return null;
 	}
 

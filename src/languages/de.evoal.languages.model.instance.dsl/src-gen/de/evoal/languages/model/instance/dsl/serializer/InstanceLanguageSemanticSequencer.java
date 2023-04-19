@@ -7,7 +7,9 @@ package de.evoal.languages.model.instance.dsl.serializer;
 import com.google.inject.Inject;
 import de.evoal.languages.model.base.AddOrSubtractExpression;
 import de.evoal.languages.model.base.AndExpression;
+import de.evoal.languages.model.base.Array;
 import de.evoal.languages.model.base.ArrayType;
+import de.evoal.languages.model.base.Attribute;
 import de.evoal.languages.model.base.AttributeDefinition;
 import de.evoal.languages.model.base.BasePackage;
 import de.evoal.languages.model.base.BooleanLiteral;
@@ -22,6 +24,7 @@ import de.evoal.languages.model.base.DoubleLiteral;
 import de.evoal.languages.model.base.ExpressionType;
 import de.evoal.languages.model.base.FloatType;
 import de.evoal.languages.model.base.FunctionDefinition;
+import de.evoal.languages.model.base.Instance;
 import de.evoal.languages.model.base.InstanceType;
 import de.evoal.languages.model.base.IntType;
 import de.evoal.languages.model.base.IntegerLiteral;
@@ -39,12 +42,8 @@ import de.evoal.languages.model.base.UnaryAddOrSubtractExpression;
 import de.evoal.languages.model.base.VoidType;
 import de.evoal.languages.model.base.XorExpression;
 import de.evoal.languages.model.base.dsl.serializer.BaseLanguageSemanticSequencer;
-import de.evoal.languages.model.instance.Array;
-import de.evoal.languages.model.instance.Attribute;
 import de.evoal.languages.model.instance.DataReference;
-import de.evoal.languages.model.instance.Instance;
 import de.evoal.languages.model.instance.InstancePackage;
-import de.evoal.languages.model.instance.LiteralValue;
 import de.evoal.languages.model.instance.dsl.services.InstanceLanguageGrammarAccess;
 import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
@@ -76,8 +75,14 @@ public class InstanceLanguageSemanticSequencer extends BaseLanguageSemanticSeque
 			case BasePackage.AND_EXPRESSION:
 				sequence_AndExpressionRule(context, (AndExpression) semanticObject); 
 				return; 
+			case BasePackage.ARRAY:
+				sequence_ArrayRule(context, (Array) semanticObject); 
+				return; 
 			case BasePackage.ARRAY_TYPE:
 				sequence_ArrayTypeRule(context, (ArrayType) semanticObject); 
+				return; 
+			case BasePackage.ATTRIBUTE:
+				sequence_AttributeRule(context, (Attribute) semanticObject); 
 				return; 
 			case BasePackage.ATTRIBUTE_DEFINITION:
 				sequence_AttributeDefinitionRule(context, (AttributeDefinition) semanticObject); 
@@ -117,6 +122,9 @@ public class InstanceLanguageSemanticSequencer extends BaseLanguageSemanticSeque
 				return; 
 			case BasePackage.FUNCTION_DEFINITION:
 				sequence_FunctionDefinitionRule(context, (FunctionDefinition) semanticObject); 
+				return; 
+			case BasePackage.INSTANCE:
+				sequence_InstanceLiteralRule(context, (Instance) semanticObject); 
 				return; 
 			case BasePackage.INSTANCE_TYPE:
 				sequence_InstanceTypeRule(context, (InstanceType) semanticObject); 
@@ -172,20 +180,8 @@ public class InstanceLanguageSemanticSequencer extends BaseLanguageSemanticSeque
 			}
 		else if (epackage == InstancePackage.eINSTANCE)
 			switch (semanticObject.eClass().getClassifierID()) {
-			case InstancePackage.ARRAY:
-				sequence_ArrayRule(context, (Array) semanticObject); 
-				return; 
-			case InstancePackage.ATTRIBUTE:
-				sequence_AttributeRule(context, (Attribute) semanticObject); 
-				return; 
 			case InstancePackage.DATA_REFERENCE:
 				sequence_DataReferenceRule(context, (DataReference) semanticObject); 
-				return; 
-			case InstancePackage.INSTANCE:
-				sequence_InstanceRule(context, (Instance) semanticObject); 
-				return; 
-			case InstancePackage.LITERAL_VALUE:
-				sequence_LiteralValueRule(context, (LiteralValue) semanticObject); 
 				return; 
 			}
 		if (errorAcceptor != null)
@@ -195,46 +191,9 @@ public class InstanceLanguageSemanticSequencer extends BaseLanguageSemanticSeque
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     ValueRule returns Array
-	 *     ArrayRule returns Array
-	 *
-	 * Constraint:
-	 *     (values+=ValueRule values+=ValueRule*)?
-	 * </pre>
-	 */
-	protected void sequence_ArrayRule(ISerializationContext context, Array semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * <pre>
-	 * Contexts:
-	 *     AttributeRule returns Attribute
-	 *
-	 * Constraint:
-	 *     (definition=[AttributeDefinition|StringOrId] value=ValueRule)
-	 * </pre>
-	 */
-	protected void sequence_AttributeRule(ISerializationContext context, Attribute semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, InstancePackage.Literals.ATTRIBUTE__DEFINITION) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, InstancePackage.Literals.ATTRIBUTE__DEFINITION));
-			if (transientValues.isValueTransient(semanticObject, InstancePackage.Literals.ATTRIBUTE__VALUE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, InstancePackage.Literals.ATTRIBUTE__VALUE));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getAttributeRuleAccess().getDefinitionAttributeDefinitionStringOrIdParserRuleCall_0_0_1(), semanticObject.eGet(InstancePackage.Literals.ATTRIBUTE__DEFINITION, false));
-		feeder.accept(grammarAccess.getAttributeRuleAccess().getValueValueRuleParserRuleCall_2_0(), semanticObject.getValue());
-		feeder.finish();
-	}
-	
-	
-	/**
-	 * <pre>
-	 * Contexts:
-	 *     ValueRule returns DataReference
+	 *     ReferenceRule returns DataReference
 	 *     DataReferenceRule returns DataReference
+	 *     ValueRule returns DataReference
 	 *
 	 * Constraint:
 	 *     definition=[DataDescription|StringOrId]
@@ -247,42 +206,6 @@ public class InstanceLanguageSemanticSequencer extends BaseLanguageSemanticSeque
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getDataReferenceRuleAccess().getDefinitionDataDescriptionStringOrIdParserRuleCall_2_0_1(), semanticObject.eGet(InstancePackage.Literals.DATA_REFERENCE__DEFINITION, false));
-		feeder.finish();
-	}
-	
-	
-	/**
-	 * <pre>
-	 * Contexts:
-	 *     InstanceRule returns Instance
-	 *     ValueRule returns Instance
-	 *
-	 * Constraint:
-	 *     (definition=[TypeDefinition|QualifiedName] attributes+=AttributeRule*)
-	 * </pre>
-	 */
-	protected void sequence_InstanceRule(ISerializationContext context, Instance semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * <pre>
-	 * Contexts:
-	 *     ValueRule returns LiteralValue
-	 *     LiteralValueRule returns LiteralValue
-	 *
-	 * Constraint:
-	 *     literal=LiteralRule
-	 * </pre>
-	 */
-	protected void sequence_LiteralValueRule(ISerializationContext context, LiteralValue semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, InstancePackage.Literals.LITERAL_VALUE__LITERAL) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, InstancePackage.Literals.LITERAL_VALUE__LITERAL));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getLiteralValueRuleAccess().getLiteralLiteralRuleParserRuleCall_0(), semanticObject.getLiteral());
 		feeder.finish();
 	}
 	

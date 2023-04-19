@@ -337,6 +337,33 @@ public interface BaseFactory extends EFactory {
 	ConstantReference createConstantReference();
 
 	/**
+	 * Returns a new object of class '<em>Array</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Array</em>'.
+	 * @generated
+	 */
+	Array createArray();
+
+	/**
+	 * Returns a new object of class '<em>Instance</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Instance</em>'.
+	 * @generated
+	 */
+	Instance createInstance();
+
+	/**
+	 * Returns a new object of class '<em>Attribute</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Attribute</em>'.
+	 * @generated
+	 */
+	Attribute createAttribute();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

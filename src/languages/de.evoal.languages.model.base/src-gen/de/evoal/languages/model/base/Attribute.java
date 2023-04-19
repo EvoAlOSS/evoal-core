@@ -1,0 +1,69 @@
+/**
+ */
+package de.evoal.languages.model.base;
+
+import org.eclipse.emf.ecore.EObject;
+
+/**
+ * <!-- begin-user-doc -->
+ * A representation of the model object '<em><b>Attribute</b></em>'.
+ * <!-- end-user-doc -->
+ *
+ * <p>
+ * The following features are supported:
+ * </p>
+ * <ul>
+ *   <li>{@link de.evoal.languages.model.base.Attribute#getDefinition <em>Definition</em>}</li>
+ *   <li>{@link de.evoal.languages.model.base.Attribute#getValue <em>Value</em>}</li>
+ * </ul>
+ *
+ * @see de.evoal.languages.model.base.BasePackage#getAttribute()
+ * @model
+ * @generated
+ */
+public interface Attribute extends EObject {
+	/**
+	 * Returns the value of the '<em><b>Definition</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Definition</em>' reference.
+	 * @see #setDefinition(AttributeDefinition)
+	 * @see de.evoal.languages.model.base.BasePackage#getAttribute_Definition()
+	 * @model required="true"
+	 * @generated
+	 */
+	AttributeDefinition getDefinition();
+
+	/**
+	 * Sets the value of the '{@link de.evoal.languages.model.base.Attribute#getDefinition <em>Definition</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Definition</em>' reference.
+	 * @see #getDefinition()
+	 * @generated
+	 */
+	void setDefinition(AttributeDefinition value);
+
+	/**
+	 * Returns the value of the '<em><b>Value</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Value</em>' containment reference.
+	 * @see #setValue(Value)
+	 * @see de.evoal.languages.model.base.BasePackage#getAttribute_Value()
+	 * @model containment="true"
+	 * @generated
+	 */
+	Value getValue();
+
+	/**
+	 * Sets the value of the '{@link de.evoal.languages.model.base.Attribute#getValue <em>Value</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Value</em>' containment reference.
+	 * @see #getValue()
+	 * @generated
+	 */
+	void setValue(Value value);
+
+} // Attribute

@@ -112,8 +112,8 @@ public class BaseAdapterFactory extends AdapterFactoryImpl {
 				return createUnaryAddOrSubtractExpressionAdapter();
 			}
 			@Override
-			public Adapter caseCallOrLiteralOrReferenceOrParantheses(CallOrLiteralOrReferenceOrParantheses object) {
-				return createCallOrLiteralOrReferenceOrParanthesesAdapter();
+			public Adapter caseValue(Value object) {
+				return createValueAdapter();
 			}
 			@Override
 			public Adapter caseLiteral(Literal object) {
@@ -226,6 +226,18 @@ public class BaseAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseConstantReference(ConstantReference object) {
 				return createConstantReferenceAdapter();
+			}
+			@Override
+			public Adapter caseArray(Array object) {
+				return createArrayAdapter();
+			}
+			@Override
+			public Adapter caseInstance(Instance object) {
+				return createInstanceAdapter();
+			}
+			@Override
+			public Adapter caseAttribute(Attribute object) {
+				return createAttributeAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -402,16 +414,16 @@ public class BaseAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.CallOrLiteralOrReferenceOrParantheses <em>Call Or Literal Or Reference Or Parantheses</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.Value <em>Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.evoal.languages.model.base.CallOrLiteralOrReferenceOrParantheses
+	 * @see de.evoal.languages.model.base.Value
 	 * @generated
 	 */
-	public Adapter createCallOrLiteralOrReferenceOrParanthesesAdapter() {
+	public Adapter createValueAdapter() {
 		return null;
 	}
 
@@ -804,6 +816,48 @@ public class BaseAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createConstantReferenceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.Array <em>Array</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.evoal.languages.model.base.Array
+	 * @generated
+	 */
+	public Adapter createArrayAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.Instance <em>Instance</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.evoal.languages.model.base.Instance
+	 * @generated
+	 */
+	public Adapter createInstanceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.Attribute <em>Attribute</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.evoal.languages.model.base.Attribute
+	 * @generated
+	 */
+	public Adapter createAttributeAdapter() {
 		return null;
 	}
 

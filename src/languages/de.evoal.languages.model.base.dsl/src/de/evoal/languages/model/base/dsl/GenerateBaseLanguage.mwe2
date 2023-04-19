@@ -40,7 +40,13 @@ Workflow {
     		fragment = exporting.QualifiedNamesFragment2 auto-inject {}
     		fragment = builder.BuilderIntegrationFragment2 auto-inject {}
 
-			formatter = {
+            parserGenerator = {
+                    options = {
+                            backtrack = true
+                    }
+            }
+            
+            formatter = {
 				generateStub = true
 				generateXtendStub = true
 			}

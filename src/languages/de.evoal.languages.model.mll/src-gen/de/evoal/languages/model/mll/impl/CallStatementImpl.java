@@ -2,6 +2,7 @@
  */
 package de.evoal.languages.model.mll.impl;
 
+import de.evoal.languages.model.base.Call;
 import de.evoal.languages.model.mll.CallStatement;
 import de.evoal.languages.model.mll.MllPackage;
 
@@ -35,7 +36,7 @@ public class CallStatementImpl extends StatementImpl implements CallStatement {
 	 * @generated
 	 * @ordered
 	 */
-	protected de.evoal.languages.model.base.Call call;
+	protected Call call;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -62,7 +63,7 @@ public class CallStatementImpl extends StatementImpl implements CallStatement {
 	 * @generated
 	 */
 	@Override
-	public de.evoal.languages.model.base.Call getCall() {
+	public Call getCall() {
 		return call;
 	}
 
@@ -71,8 +72,8 @@ public class CallStatementImpl extends StatementImpl implements CallStatement {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetCall(de.evoal.languages.model.base.Call newCall, NotificationChain msgs) {
-		de.evoal.languages.model.base.Call oldCall = call;
+	public NotificationChain basicSetCall(Call newCall, NotificationChain msgs) {
+		Call oldCall = call;
 		call = newCall;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MllPackage.CALL_STATEMENT__CALL, oldCall, newCall);
@@ -87,7 +88,7 @@ public class CallStatementImpl extends StatementImpl implements CallStatement {
 	 * @generated
 	 */
 	@Override
-	public void setCall(de.evoal.languages.model.base.Call newCall) {
+	public void setCall(Call newCall) {
 		if (newCall != call) {
 			NotificationChain msgs = null;
 			if (call != null)
@@ -138,7 +139,7 @@ public class CallStatementImpl extends StatementImpl implements CallStatement {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case MllPackage.CALL_STATEMENT__CALL:
-				setCall((de.evoal.languages.model.base.Call)newValue);
+				setCall((Call)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -153,7 +154,7 @@ public class CallStatementImpl extends StatementImpl implements CallStatement {
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case MllPackage.CALL_STATEMENT__CALL:
-				setCall((de.evoal.languages.model.base.Call)null);
+				setCall((Call)null);
 				return;
 		}
 		super.eUnset(featureID);

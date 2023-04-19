@@ -17,8 +17,8 @@ public abstract class AbstractInstanceLanguageValidator extends BaseLanguageVali
 	@Override
 	protected List<EPackage> getEPackages() {
 		List<EPackage> result = new ArrayList<EPackage>(super.getEPackages());
-		result.add(EPackage.Registry.INSTANCE.getEPackage("https://www.evoal.de/languages/instance/1.0.0"));
 		result.add(EPackage.Registry.INSTANCE.getEPackage("https://www.evoal.de/languages/base/1.0.0"));
+		result.add(EPackage.Registry.INSTANCE.getEPackage("https://www.evoal.de/languages/instance/1.0.0"));
 		return result;
 	}
 }

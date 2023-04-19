@@ -38,6 +38,12 @@ Workflow {
     		fragment = exporting.QualifiedNamesFragment2 auto-inject {}
     		fragment = builder.BuilderIntegrationFragment2 auto-inject {}
     		
+            parserGenerator = {
+                    options = {
+                            backtrack = true
+                    }
+            }
+            
 			serializer = {
 				generateStub = false
 			}

@@ -2,8 +2,8 @@
  */
 package de.evoal.languages.model.mll;
 
+import de.evoal.languages.model.base.TypeDefinition;
 import de.evoal.languages.model.ddl.DataDescription;
-import de.evoal.languages.model.instance.Attribute;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EObject;
@@ -33,12 +33,12 @@ public interface PartialSurrogateFunctionDefinition extends EObject {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Name</em>' reference.
-	 * @see #setName(de.evoal.languages.model.base.TypeDefinition)
+	 * @see #setName(TypeDefinition)
 	 * @see de.evoal.languages.model.mll.MllPackage#getPartialSurrogateFunctionDefinition_Name()
 	 * @model required="true"
 	 * @generated
 	 */
-	de.evoal.languages.model.base.TypeDefinition getName();
+	TypeDefinition getName();
 
 	/**
 	 * Sets the value of the '{@link de.evoal.languages.model.mll.PartialSurrogateFunctionDefinition#getName <em>Name</em>}' reference.
@@ -48,7 +48,7 @@ public interface PartialSurrogateFunctionDefinition extends EObject {
 	 * @see #getName()
 	 * @generated
 	 */
-	void setName(de.evoal.languages.model.base.TypeDefinition value);
+	void setName(TypeDefinition value);
 
 	/**
 	 * Returns the value of the '<em><b>Inputs</b></em>' reference list.
@@ -78,7 +78,7 @@ public interface PartialSurrogateFunctionDefinition extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Parameters</b></em>' containment reference list.
-	 * The list contents are of type {@link de.evoal.languages.model.instance.Attribute}.
+	 * The list contents are of type {@link de.evoal.languages.model.base.Attribute}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Parameters</em>' containment reference list.
@@ -87,6 +87,6 @@ public interface PartialSurrogateFunctionDefinition extends EObject {
 	 *        annotation="http://www.eclipse.org/OCL/Collection nullFree='false'"
 	 * @generated
 	 */
-	EList<Attribute> getParameters();
+	EList<de.evoal.languages.model.base.Attribute> getParameters();
 
 } // PartialSurrogateFunctionDefinition

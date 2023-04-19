@@ -2,6 +2,7 @@
  */
 package de.evoal.languages.model.mll.util;
 
+import de.evoal.languages.model.base.FunctionName;
 import de.evoal.languages.model.mll.*;
 
 import org.eclipse.emf.common.notify.Adapter;
@@ -128,7 +129,7 @@ public class MllAdapterFactory extends AdapterFactoryImpl {
 				return createUseAdapter();
 			}
 			@Override
-			public Adapter caseFunctionName(de.evoal.languages.model.base.FunctionName object) {
+			public Adapter caseFunctionName(FunctionName object) {
 				return createFunctionNameAdapter();
 			}
 			@Override

@@ -54,12 +54,12 @@ public interface AlgorithmInstance extends EObject {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Algorithm</em>' containment reference.
-	 * @see #setAlgorithm(Instance)
+	 * @see #setAlgorithm(de.evoal.languages.model.base.Instance)
 	 * @see de.evoal.languages.model.ol.OLPackage#getAlgorithmInstance_Algorithm()
 	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	Instance getAlgorithm();
+	de.evoal.languages.model.base.Instance getAlgorithm();
 
 	/**
 	 * Sets the value of the '{@link de.evoal.languages.model.ol.AlgorithmInstance#getAlgorithm <em>Algorithm</em>}' containment reference.
@@ -69,19 +69,19 @@ public interface AlgorithmInstance extends EObject {
 	 * @see #getAlgorithm()
 	 * @generated
 	 */
-	void setAlgorithm(Instance value);
+	void setAlgorithm(de.evoal.languages.model.base.Instance value);
 
 	/**
 	 * Returns the value of the '<em><b>Documentation</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Documentation</em>' containment reference.
-	 * @see #setDocumentation(Array)
+	 * @see #setDocumentation(de.evoal.languages.model.base.Array)
 	 * @see de.evoal.languages.model.ol.OLPackage#getAlgorithmInstance_Documentation()
 	 * @model containment="true"
 	 * @generated
 	 */
-	Array getDocumentation();
+	de.evoal.languages.model.base.Array getDocumentation();
 
 	/**
 	 * Sets the value of the '{@link de.evoal.languages.model.ol.AlgorithmInstance#getDocumentation <em>Documentation</em>}' containment reference.
@@ -91,6 +91,6 @@ public interface AlgorithmInstance extends EObject {
 	 * @see #getDocumentation()
 	 * @generated
 	 */
-	void setDocumentation(Array value);
+	void setDocumentation(de.evoal.languages.model.base.Array value);
 
 } // AlgorithmInstance

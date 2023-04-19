@@ -4,9 +4,9 @@ package de.evoal.languages.model.base.impl;
 
 import de.evoal.languages.model.base.AddOrSubtractOperator;
 import de.evoal.languages.model.base.BasePackage;
-import de.evoal.languages.model.base.CallOrLiteralOrReferenceOrParantheses;
 import de.evoal.languages.model.base.UnaryAddOrSubtractExpression;
 
+import de.evoal.languages.model.base.Value;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -55,7 +55,7 @@ public class UnaryAddOrSubtractExpressionImpl extends MinimalEObjectImpl.Contain
 	 * @generated
 	 * @ordered
 	 */
-	protected CallOrLiteralOrReferenceOrParantheses subExpression;
+	protected Value subExpression;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -95,7 +95,7 @@ public class UnaryAddOrSubtractExpressionImpl extends MinimalEObjectImpl.Contain
 	 * @generated
 	 */
 	@Override
-	public CallOrLiteralOrReferenceOrParantheses getSubExpression() {
+	public Value getSubExpression() {
 		return subExpression;
 	}
 
@@ -104,8 +104,8 @@ public class UnaryAddOrSubtractExpressionImpl extends MinimalEObjectImpl.Contain
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetSubExpression(CallOrLiteralOrReferenceOrParantheses newSubExpression, NotificationChain msgs) {
-		CallOrLiteralOrReferenceOrParantheses oldSubExpression = subExpression;
+	public NotificationChain basicSetSubExpression(Value newSubExpression, NotificationChain msgs) {
+		Value oldSubExpression = subExpression;
 		subExpression = newSubExpression;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, BasePackage.UNARY_ADD_OR_SUBTRACT_EXPRESSION__SUB_EXPRESSION, oldSubExpression, newSubExpression);
@@ -120,7 +120,7 @@ public class UnaryAddOrSubtractExpressionImpl extends MinimalEObjectImpl.Contain
 	 * @generated
 	 */
 	@Override
-	public void setSubExpression(CallOrLiteralOrReferenceOrParantheses newSubExpression) {
+	public void setSubExpression(Value newSubExpression) {
 		if (newSubExpression != subExpression) {
 			NotificationChain msgs = null;
 			if (subExpression != null)
@@ -178,7 +178,7 @@ public class UnaryAddOrSubtractExpressionImpl extends MinimalEObjectImpl.Contain
 				getOperators().addAll((Collection<? extends AddOrSubtractOperator>)newValue);
 				return;
 			case BasePackage.UNARY_ADD_OR_SUBTRACT_EXPRESSION__SUB_EXPRESSION:
-				setSubExpression((CallOrLiteralOrReferenceOrParantheses)newValue);
+				setSubExpression((Value)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -196,7 +196,7 @@ public class UnaryAddOrSubtractExpressionImpl extends MinimalEObjectImpl.Contain
 				getOperators().clear();
 				return;
 			case BasePackage.UNARY_ADD_OR_SUBTRACT_EXPRESSION__SUB_EXPRESSION:
-				setSubExpression((CallOrLiteralOrReferenceOrParantheses)null);
+				setSubExpression((Value)null);
 				return;
 		}
 		super.eUnset(featureID);

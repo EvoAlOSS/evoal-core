@@ -39,7 +39,7 @@ PartialSurrogateFunctionDefinitionRule returns PartialSurrogateFunctionDefinitio
 	"to"
 		outputs += [ddl::DataDescription|StringOrId] ("," outputs += [ddl::DataDescription|StringOrId])* 
 	("with" "parameters"
-		((parameters += InstanceLanguage::AttributeRule)+ ))?
+		((parameters += BaseLanguage::AttributeRule)+ ))?
 ;
 
 PredictStatementRule returns PredictStatement:

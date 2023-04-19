@@ -354,7 +354,7 @@ public class DefinitionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 	}
 	
 	//UnaryAddOrSubtractExpressionRule returns UnaryAddOrSubtractExpression :
-	//    ( operators+=AddOrSubtractOperatorRule )* subExpression = LiteralOrReferenceRule
+	//    ( operators+=AddOrSubtractOperatorRule )* subExpression = ValueRule
 	//;
 	public BaseLanguageGrammarAccess.UnaryAddOrSubtractExpressionRuleElements getUnaryAddOrSubtractExpressionRuleAccess() {
 		return gaBaseLanguage.getUnaryAddOrSubtractExpressionRuleAccess();
@@ -364,14 +364,26 @@ public class DefinitionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 		return getUnaryAddOrSubtractExpressionRuleAccess().getRule();
 	}
 	
-	//LiteralOrReferenceRule returns CallOrLiteralOrReferenceOrParantheses:
-	//    CallRule | LiteralRule | ParanthesesRule | ValueReferenceRule;
-	public BaseLanguageGrammarAccess.LiteralOrReferenceRuleElements getLiteralOrReferenceRuleAccess() {
-		return gaBaseLanguage.getLiteralOrReferenceRuleAccess();
+	//ValueRule returns Value:
+	//    ArrayRule | CallRule | LiteralRule | ParanthesesRule | ReferenceRule;
+	public BaseLanguageGrammarAccess.ValueRuleElements getValueRuleAccess() {
+		return gaBaseLanguage.getValueRuleAccess();
 	}
 	
-	public ParserRule getLiteralOrReferenceRuleRule() {
-		return getLiteralOrReferenceRuleAccess().getRule();
+	public ParserRule getValueRuleRule() {
+		return getValueRuleAccess().getRule();
+	}
+	
+	//ArrayRule returns Array:
+	//    {Array}
+	//    '[' (values += ValueRule (',' values += ValueRule)* )? ']'
+	//;
+	public BaseLanguageGrammarAccess.ArrayRuleElements getArrayRuleAccess() {
+		return gaBaseLanguage.getArrayRuleAccess();
+	}
+	
+	public ParserRule getArrayRuleRule() {
+		return getArrayRuleAccess().getRule();
 	}
 	
 	//ParanthesesRule returns Parantheses:
@@ -396,15 +408,15 @@ public class DefinitionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 		return getCallRuleAccess().getRule();
 	}
 	
-	//ValueReferenceRule returns ValueReference:
+	//ReferenceRule returns ValueReference:
 	//    ConstantReferenceRule
 	//;
-	public BaseLanguageGrammarAccess.ValueReferenceRuleElements getValueReferenceRuleAccess() {
-		return gaBaseLanguage.getValueReferenceRuleAccess();
+	public BaseLanguageGrammarAccess.ReferenceRuleElements getReferenceRuleAccess() {
+		return gaBaseLanguage.getReferenceRuleAccess();
 	}
 	
-	public ParserRule getValueReferenceRuleRule() {
-		return getValueReferenceRuleAccess().getRule();
+	public ParserRule getReferenceRuleRule() {
+		return getReferenceRuleAccess().getRule();
 	}
 	
 	//ConstantReferenceRule returns ConstantReference:
@@ -422,6 +434,7 @@ public class DefinitionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 	//    NumberLiteralRule
 	//        | StringLiteralRule
 	//        | BooleanLiteralRule
+	//        | InstanceLiteralRule
 	//;
 	public BaseLanguageGrammarAccess.LiteralRuleElements getLiteralRuleAccess() {
 		return gaBaseLanguage.getLiteralRuleAccess();
@@ -429,6 +442,30 @@ public class DefinitionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 	
 	public ParserRule getLiteralRuleRule() {
 		return getLiteralRuleAccess().getRule();
+	}
+	
+	//InstanceLiteralRule returns Instance:
+	//    definition = [TypeDefinition|QualifiedName] ('{'
+	//      attributes += AttributeRule*
+	//    '}')?
+	//;
+	public BaseLanguageGrammarAccess.InstanceLiteralRuleElements getInstanceLiteralRuleAccess() {
+		return gaBaseLanguage.getInstanceLiteralRuleAccess();
+	}
+	
+	public ParserRule getInstanceLiteralRuleRule() {
+		return getInstanceLiteralRuleAccess().getRule();
+	}
+	
+	//AttributeRule returns Attribute:
+	//    definition = [AttributeDefinition|StringOrId] ':=' value = ValueRule ';'
+	//;
+	public BaseLanguageGrammarAccess.AttributeRuleElements getAttributeRuleAccess() {
+		return gaBaseLanguage.getAttributeRuleAccess();
+	}
+	
+	public ParserRule getAttributeRuleRule() {
+		return getAttributeRuleAccess().getRule();
 	}
 	
 	//NumberLiteralRule returns NumberLiteral:

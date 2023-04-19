@@ -18,7 +18,7 @@ import org.eclipse.emf.ecore.EClass;
  *
  * @generated
  */
-public abstract class LiteralImpl extends CallOrLiteralOrReferenceOrParanthesesImpl implements Literal {
+public abstract class LiteralImpl extends ValueImpl implements Literal {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

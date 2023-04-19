@@ -13,5 +13,5 @@ package de.evoal.languages.model.base;
  * @model
  * @generated
  */
-public interface ValueReference extends CallOrLiteralOrReferenceOrParantheses {
+public interface ValueReference extends Value {
 } // ValueReference

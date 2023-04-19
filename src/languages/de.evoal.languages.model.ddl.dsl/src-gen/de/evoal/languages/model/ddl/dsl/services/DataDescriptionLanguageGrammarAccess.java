@@ -446,15 +446,15 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 		//';'
 		public Keyword getSemicolonKeyword_1() { return cSemicolonKeyword_1; }
 	}
-	public class ValueReferenceRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.ddl.dsl.DataDescriptionLanguage.ValueReferenceRule");
+	public class ReferenceRuleElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.ddl.dsl.DataDescriptionLanguage.ReferenceRule");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cConstantReferenceRuleParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cDataReferenceRuleParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cSelfReferenceRuleParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
 		//@Override
-		//ValueReferenceRule returns base::ValueReference:
+		//ReferenceRule returns base::ValueReference:
 		//    ConstantReferenceRule | DataReferenceRule | SelfReferenceRule
 		//;
 		@Override public ParserRule getRule() { return rule; }
@@ -623,7 +623,7 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 	private final TypedDataDescriptionRuleElements pTypedDataDescriptionRule;
 	private final UntypedDataDescriptionRuleElements pUntypedDataDescriptionRule;
 	private final StatementRuleElements pStatementRule;
-	private final ValueReferenceRuleElements pValueReferenceRule;
+	private final ReferenceRuleElements pReferenceRule;
 	private final DataReferenceRuleElements pDataReferenceRule;
 	private final SelfReferenceRuleElements pSelfReferenceRule;
 	
@@ -649,7 +649,7 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 		this.pTypedDataDescriptionRule = new TypedDataDescriptionRuleElements();
 		this.pUntypedDataDescriptionRule = new UntypedDataDescriptionRuleElements();
 		this.pStatementRule = new StatementRuleElements();
-		this.pValueReferenceRule = new ValueReferenceRuleElements();
+		this.pReferenceRule = new ReferenceRuleElements();
 		this.pDataReferenceRule = new DataReferenceRuleElements();
 		this.pSelfReferenceRule = new SelfReferenceRuleElements();
 	}
@@ -799,15 +799,15 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 	}
 	
 	//@Override
-	//ValueReferenceRule returns base::ValueReference:
+	//ReferenceRule returns base::ValueReference:
 	//    ConstantReferenceRule | DataReferenceRule | SelfReferenceRule
 	//;
-	public ValueReferenceRuleElements getValueReferenceRuleAccess() {
-		return pValueReferenceRule;
+	public ReferenceRuleElements getReferenceRuleAccess() {
+		return pReferenceRule;
 	}
 	
-	public ParserRule getValueReferenceRuleRule() {
-		return getValueReferenceRuleAccess().getRule();
+	public ParserRule getReferenceRuleRule() {
+		return getReferenceRuleAccess().getRule();
 	}
 	
 	//DataReferenceRule returns DataReference:
@@ -982,7 +982,7 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 	}
 	
 	//UnaryAddOrSubtractExpressionRule returns UnaryAddOrSubtractExpression :
-	//    ( operators+=AddOrSubtractOperatorRule )* subExpression = LiteralOrReferenceRule
+	//    ( operators+=AddOrSubtractOperatorRule )* subExpression = ValueRule
 	//;
 	public BaseLanguageGrammarAccess.UnaryAddOrSubtractExpressionRuleElements getUnaryAddOrSubtractExpressionRuleAccess() {
 		return gaBaseLanguage.getUnaryAddOrSubtractExpressionRuleAccess();
@@ -992,14 +992,26 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 		return getUnaryAddOrSubtractExpressionRuleAccess().getRule();
 	}
 	
-	//LiteralOrReferenceRule returns CallOrLiteralOrReferenceOrParantheses:
-	//    CallRule | LiteralRule | ParanthesesRule | ValueReferenceRule;
-	public BaseLanguageGrammarAccess.LiteralOrReferenceRuleElements getLiteralOrReferenceRuleAccess() {
-		return gaBaseLanguage.getLiteralOrReferenceRuleAccess();
+	//ValueRule returns Value:
+	//    ArrayRule | CallRule | LiteralRule | ParanthesesRule | ReferenceRule;
+	public BaseLanguageGrammarAccess.ValueRuleElements getValueRuleAccess() {
+		return gaBaseLanguage.getValueRuleAccess();
 	}
 	
-	public ParserRule getLiteralOrReferenceRuleRule() {
-		return getLiteralOrReferenceRuleAccess().getRule();
+	public ParserRule getValueRuleRule() {
+		return getValueRuleAccess().getRule();
+	}
+	
+	//ArrayRule returns Array:
+	//    {Array}
+	//    '[' (values += ValueRule (',' values += ValueRule)* )? ']'
+	//;
+	public BaseLanguageGrammarAccess.ArrayRuleElements getArrayRuleAccess() {
+		return gaBaseLanguage.getArrayRuleAccess();
+	}
+	
+	public ParserRule getArrayRuleRule() {
+		return getArrayRuleAccess().getRule();
 	}
 	
 	//ParanthesesRule returns Parantheses:
@@ -1039,6 +1051,7 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 	//    NumberLiteralRule
 	//        | StringLiteralRule
 	//        | BooleanLiteralRule
+	//        | InstanceLiteralRule
 	//;
 	public BaseLanguageGrammarAccess.LiteralRuleElements getLiteralRuleAccess() {
 		return gaBaseLanguage.getLiteralRuleAccess();
@@ -1046,6 +1059,30 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 	
 	public ParserRule getLiteralRuleRule() {
 		return getLiteralRuleAccess().getRule();
+	}
+	
+	//InstanceLiteralRule returns Instance:
+	//    definition = [TypeDefinition|QualifiedName] ('{'
+	//      attributes += AttributeRule*
+	//    '}')?
+	//;
+	public BaseLanguageGrammarAccess.InstanceLiteralRuleElements getInstanceLiteralRuleAccess() {
+		return gaBaseLanguage.getInstanceLiteralRuleAccess();
+	}
+	
+	public ParserRule getInstanceLiteralRuleRule() {
+		return getInstanceLiteralRuleAccess().getRule();
+	}
+	
+	//AttributeRule returns Attribute:
+	//    definition = [AttributeDefinition|StringOrId] ':=' value = ValueRule ';'
+	//;
+	public BaseLanguageGrammarAccess.AttributeRuleElements getAttributeRuleAccess() {
+		return gaBaseLanguage.getAttributeRuleAccess();
+	}
+	
+	public ParserRule getAttributeRuleRule() {
+		return getAttributeRuleAccess().getRule();
 	}
 	
 	//NumberLiteralRule returns NumberLiteral:

@@ -7,7 +7,9 @@ package de.evoal.languages.model.ddl.dsl.serializer;
 import com.google.inject.Inject;
 import de.evoal.languages.model.base.AddOrSubtractExpression;
 import de.evoal.languages.model.base.AndExpression;
+import de.evoal.languages.model.base.Array;
 import de.evoal.languages.model.base.ArrayType;
+import de.evoal.languages.model.base.Attribute;
 import de.evoal.languages.model.base.AttributeDefinition;
 import de.evoal.languages.model.base.BasePackage;
 import de.evoal.languages.model.base.BooleanLiteral;
@@ -22,6 +24,7 @@ import de.evoal.languages.model.base.DoubleLiteral;
 import de.evoal.languages.model.base.ExpressionType;
 import de.evoal.languages.model.base.FloatType;
 import de.evoal.languages.model.base.FunctionDefinition;
+import de.evoal.languages.model.base.Instance;
 import de.evoal.languages.model.base.InstanceType;
 import de.evoal.languages.model.base.IntType;
 import de.evoal.languages.model.base.IntegerLiteral;
@@ -78,8 +81,14 @@ public class DataDescriptionLanguageSemanticSequencer extends BaseLanguageSemant
 			case BasePackage.AND_EXPRESSION:
 				sequence_AndExpressionRule(context, (AndExpression) semanticObject); 
 				return; 
+			case BasePackage.ARRAY:
+				sequence_ArrayRule(context, (Array) semanticObject); 
+				return; 
 			case BasePackage.ARRAY_TYPE:
 				sequence_ArrayTypeRule(context, (ArrayType) semanticObject); 
+				return; 
+			case BasePackage.ATTRIBUTE:
+				sequence_AttributeRule(context, (Attribute) semanticObject); 
 				return; 
 			case BasePackage.ATTRIBUTE_DEFINITION:
 				sequence_AttributeDefinitionRule(context, (AttributeDefinition) semanticObject); 
@@ -119,6 +128,9 @@ public class DataDescriptionLanguageSemanticSequencer extends BaseLanguageSemant
 				return; 
 			case BasePackage.FUNCTION_DEFINITION:
 				sequence_FunctionDefinitionRule(context, (FunctionDefinition) semanticObject); 
+				return; 
+			case BasePackage.INSTANCE:
+				sequence_InstanceLiteralRule(context, (Instance) semanticObject); 
 				return; 
 			case BasePackage.INSTANCE_TYPE:
 				sequence_InstanceTypeRule(context, (InstanceType) semanticObject); 
@@ -217,9 +229,9 @@ public class DataDescriptionLanguageSemanticSequencer extends BaseLanguageSemant
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     ValueReferenceRule returns DataReference
+	 *     ReferenceRule returns DataReference
 	 *     DataReferenceRule returns DataReference
-	 *     LiteralOrReferenceRule returns DataReference
+	 *     ValueRule returns DataReference
 	 *
 	 * Constraint:
 	 *     definition=[DataDescription|StringOrId]
@@ -273,9 +285,9 @@ public class DataDescriptionLanguageSemanticSequencer extends BaseLanguageSemant
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     ValueReferenceRule returns SelfReference
+	 *     ReferenceRule returns SelfReference
 	 *     SelfReferenceRule returns SelfReference
-	 *     LiteralOrReferenceRule returns SelfReference
+	 *     ValueRule returns SelfReference
 	 *
 	 * Constraint:
 	 *     {SelfReference}

@@ -30,7 +30,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Step">
     <eStructuralFeatures xsi:type="ecore:EReference" name="instance" lowerBound="1"
-        eType="ecore:EClass ../../de.evoal.languages.model.instance/model/model.ecore#//Instance"
+        eType="ecore:EClass ../../de.evoal.languages.model.base/model/model.ecore#//Instance"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="reads" ordered="false"
         upperBound="-1" eType="ecore:EClass ../../de.evoal.languages.model.instance/model/model.ecore#//DataReference"

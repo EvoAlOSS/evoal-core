@@ -539,32 +539,32 @@ public interface BasePackage extends EPackage {
 	int UNARY_ADD_OR_SUBTRACT_EXPRESSION_OPERATION_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.base.impl.CallOrLiteralOrReferenceOrParanthesesImpl <em>Call Or Literal Or Reference Or Parantheses</em>}' class.
+	 * The meta object id for the '{@link de.evoal.languages.model.base.impl.ValueImpl <em>Value</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.base.impl.CallOrLiteralOrReferenceOrParanthesesImpl
-	 * @see de.evoal.languages.model.base.impl.BasePackageImpl#getCallOrLiteralOrReferenceOrParantheses()
+	 * @see de.evoal.languages.model.base.impl.ValueImpl
+	 * @see de.evoal.languages.model.base.impl.BasePackageImpl#getValue()
 	 * @generated
 	 */
-	int CALL_OR_LITERAL_OR_REFERENCE_OR_PARANTHESES = 11;
+	int VALUE = 11;
 
 	/**
-	 * The number of structural features of the '<em>Call Or Literal Or Reference Or Parantheses</em>' class.
+	 * The number of structural features of the '<em>Value</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CALL_OR_LITERAL_OR_REFERENCE_OR_PARANTHESES_FEATURE_COUNT = 0;
+	int VALUE_FEATURE_COUNT = 0;
 
 	/**
-	 * The number of operations of the '<em>Call Or Literal Or Reference Or Parantheses</em>' class.
+	 * The number of operations of the '<em>Value</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CALL_OR_LITERAL_OR_REFERENCE_OR_PARANTHESES_OPERATION_COUNT = 0;
+	int VALUE_OPERATION_COUNT = 0;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.impl.LiteralImpl <em>Literal</em>}' class.
@@ -583,7 +583,7 @@ public interface BasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LITERAL_FEATURE_COUNT = CALL_OR_LITERAL_OR_REFERENCE_OR_PARANTHESES_FEATURE_COUNT + 0;
+	int LITERAL_FEATURE_COUNT = VALUE_FEATURE_COUNT + 0;
 
 	/**
 	 * The operation id for the '<em>Get Value</em>' operation.
@@ -592,7 +592,7 @@ public interface BasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LITERAL___GET_VALUE = CALL_OR_LITERAL_OR_REFERENCE_OR_PARANTHESES_OPERATION_COUNT + 0;
+	int LITERAL___GET_VALUE = VALUE_OPERATION_COUNT + 0;
 
 	/**
 	 * The number of operations of the '<em>Literal</em>' class.
@@ -601,7 +601,7 @@ public interface BasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LITERAL_OPERATION_COUNT = CALL_OR_LITERAL_OR_REFERENCE_OR_PARANTHESES_OPERATION_COUNT + 1;
+	int LITERAL_OPERATION_COUNT = VALUE_OPERATION_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.impl.NumberLiteralImpl <em>Number Literal</em>}' class.
@@ -868,7 +868,7 @@ public interface BasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CALL__FUNCTION = CALL_OR_LITERAL_OR_REFERENCE_OR_PARANTHESES_FEATURE_COUNT + 0;
+	int CALL__FUNCTION = VALUE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -877,7 +877,7 @@ public interface BasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CALL__PARAMETERS = CALL_OR_LITERAL_OR_REFERENCE_OR_PARANTHESES_FEATURE_COUNT + 1;
+	int CALL__PARAMETERS = VALUE_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Call</em>' class.
@@ -886,7 +886,7 @@ public interface BasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CALL_FEATURE_COUNT = CALL_OR_LITERAL_OR_REFERENCE_OR_PARANTHESES_FEATURE_COUNT + 2;
+	int CALL_FEATURE_COUNT = VALUE_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of operations of the '<em>Call</em>' class.
@@ -895,7 +895,7 @@ public interface BasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CALL_OPERATION_COUNT = CALL_OR_LITERAL_OR_REFERENCE_OR_PARANTHESES_OPERATION_COUNT + 0;
+	int CALL_OPERATION_COUNT = VALUE_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.impl.ParanthesesImpl <em>Parantheses</em>}' class.
@@ -914,7 +914,7 @@ public interface BasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PARANTHESES__SUB_EXPRESSION = CALL_OR_LITERAL_OR_REFERENCE_OR_PARANTHESES_FEATURE_COUNT + 0;
+	int PARANTHESES__SUB_EXPRESSION = VALUE_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Parantheses</em>' class.
@@ -923,7 +923,7 @@ public interface BasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PARANTHESES_FEATURE_COUNT = CALL_OR_LITERAL_OR_REFERENCE_OR_PARANTHESES_FEATURE_COUNT + 1;
+	int PARANTHESES_FEATURE_COUNT = VALUE_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>Parantheses</em>' class.
@@ -932,7 +932,7 @@ public interface BasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PARANTHESES_OPERATION_COUNT = CALL_OR_LITERAL_OR_REFERENCE_OR_PARANTHESES_OPERATION_COUNT + 0;
+	int PARANTHESES_OPERATION_COUNT = VALUE_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.impl.FunctionNameImpl <em>Function Name</em>}' class.
@@ -979,7 +979,7 @@ public interface BasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VALUE_REFERENCE_FEATURE_COUNT = CALL_OR_LITERAL_OR_REFERENCE_OR_PARANTHESES_FEATURE_COUNT + 0;
+	int VALUE_REFERENCE_FEATURE_COUNT = VALUE_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of operations of the '<em>Value Reference</em>' class.
@@ -988,7 +988,7 @@ public interface BasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VALUE_REFERENCE_OPERATION_COUNT = CALL_OR_LITERAL_OR_REFERENCE_OR_PARANTHESES_OPERATION_COUNT + 0;
+	int VALUE_REFERENCE_OPERATION_COUNT = VALUE_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.impl.TypeDefinitionImpl <em>Type Definition</em>}' class.
@@ -1666,6 +1666,144 @@ public interface BasePackage extends EPackage {
 	int CONSTANT_REFERENCE_OPERATION_COUNT = VALUE_REFERENCE_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link de.evoal.languages.model.base.impl.ArrayImpl <em>Array</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.evoal.languages.model.base.impl.ArrayImpl
+	 * @see de.evoal.languages.model.base.impl.BasePackageImpl#getArray()
+	 * @generated
+	 */
+	int ARRAY = 40;
+
+	/**
+	 * The feature id for the '<em><b>Values</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARRAY__VALUES = VALUE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Array</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARRAY_FEATURE_COUNT = VALUE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Array</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARRAY_OPERATION_COUNT = VALUE_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link de.evoal.languages.model.base.impl.InstanceImpl <em>Instance</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.evoal.languages.model.base.impl.InstanceImpl
+	 * @see de.evoal.languages.model.base.impl.BasePackageImpl#getInstance()
+	 * @generated
+	 */
+	int INSTANCE = 41;
+
+	/**
+	 * The feature id for the '<em><b>Definition</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INSTANCE__DEFINITION = LITERAL_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Attributes</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INSTANCE__ATTRIBUTES = LITERAL_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Instance</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INSTANCE_FEATURE_COUNT = LITERAL_FEATURE_COUNT + 2;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INSTANCE___GET_VALUE = LITERAL___GET_VALUE;
+
+	/**
+	 * The number of operations of the '<em>Instance</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INSTANCE_OPERATION_COUNT = LITERAL_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link de.evoal.languages.model.base.impl.AttributeImpl <em>Attribute</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.evoal.languages.model.base.impl.AttributeImpl
+	 * @see de.evoal.languages.model.base.impl.BasePackageImpl#getAttribute()
+	 * @generated
+	 */
+	int ATTRIBUTE = 42;
+
+	/**
+	 * The feature id for the '<em><b>Definition</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE__DEFINITION = 0;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE__VALUE = 1;
+
+	/**
+	 * The number of structural features of the '<em>Attribute</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE_FEATURE_COUNT = 2;
+
+	/**
+	 * The number of operations of the '<em>Attribute</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE_OPERATION_COUNT = 0;
+
+	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.ComparisonOperator <em>Comparison Operator</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1673,7 +1811,7 @@ public interface BasePackage extends EPackage {
 	 * @see de.evoal.languages.model.base.impl.BasePackageImpl#getComparisonOperator()
 	 * @generated
 	 */
-	int COMPARISON_OPERATOR = 40;
+	int COMPARISON_OPERATOR = 43;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.AddOrSubtractOperator <em>Add Or Subtract Operator</em>}' enum.
@@ -1683,7 +1821,7 @@ public interface BasePackage extends EPackage {
 	 * @see de.evoal.languages.model.base.impl.BasePackageImpl#getAddOrSubtractOperator()
 	 * @generated
 	 */
-	int ADD_OR_SUBTRACT_OPERATOR = 41;
+	int ADD_OR_SUBTRACT_OPERATOR = 44;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.MultiplyDivideModuloOperator <em>Multiply Divide Modulo Operator</em>}' enum.
@@ -1693,7 +1831,7 @@ public interface BasePackage extends EPackage {
 	 * @see de.evoal.languages.model.base.impl.BasePackageImpl#getMultiplyDivideModuloOperator()
 	 * @generated
 	 */
-	int MULTIPLY_DIVIDE_MODULO_OPERATOR = 42;
+	int MULTIPLY_DIVIDE_MODULO_OPERATOR = 45;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.Factor <em>Factor</em>}' enum.
@@ -1703,7 +1841,7 @@ public interface BasePackage extends EPackage {
 	 * @see de.evoal.languages.model.base.impl.BasePackageImpl#getFactor()
 	 * @generated
 	 */
-	int FACTOR = 43;
+	int FACTOR = 46;
 
 
 	/**
@@ -2026,14 +2164,14 @@ public interface BasePackage extends EPackage {
 	EReference getUnaryAddOrSubtractExpression_SubExpression();
 
 	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.base.CallOrLiteralOrReferenceOrParantheses <em>Call Or Literal Or Reference Or Parantheses</em>}'.
+	 * Returns the meta object for class '{@link de.evoal.languages.model.base.Value <em>Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Call Or Literal Or Reference Or Parantheses</em>'.
-	 * @see de.evoal.languages.model.base.CallOrLiteralOrReferenceOrParantheses
+	 * @return the meta object for class '<em>Value</em>'.
+	 * @see de.evoal.languages.model.base.Value
 	 * @generated
 	 */
-	EClass getCallOrLiteralOrReferenceOrParantheses();
+	EClass getValue();
 
 	/**
 	 * Returns the meta object for class '{@link de.evoal.languages.model.base.Literal <em>Literal</em>}'.
@@ -2663,6 +2801,91 @@ public interface BasePackage extends EPackage {
 	EReference getConstantReference_Definition();
 
 	/**
+	 * Returns the meta object for class '{@link de.evoal.languages.model.base.Array <em>Array</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Array</em>'.
+	 * @see de.evoal.languages.model.base.Array
+	 * @generated
+	 */
+	EClass getArray();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.base.Array#getValues <em>Values</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Values</em>'.
+	 * @see de.evoal.languages.model.base.Array#getValues()
+	 * @see #getArray()
+	 * @generated
+	 */
+	EReference getArray_Values();
+
+	/**
+	 * Returns the meta object for class '{@link de.evoal.languages.model.base.Instance <em>Instance</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Instance</em>'.
+	 * @see de.evoal.languages.model.base.Instance
+	 * @generated
+	 */
+	EClass getInstance();
+
+	/**
+	 * Returns the meta object for the reference '{@link de.evoal.languages.model.base.Instance#getDefinition <em>Definition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Definition</em>'.
+	 * @see de.evoal.languages.model.base.Instance#getDefinition()
+	 * @see #getInstance()
+	 * @generated
+	 */
+	EReference getInstance_Definition();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.base.Instance#getAttributes <em>Attributes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Attributes</em>'.
+	 * @see de.evoal.languages.model.base.Instance#getAttributes()
+	 * @see #getInstance()
+	 * @generated
+	 */
+	EReference getInstance_Attributes();
+
+	/**
+	 * Returns the meta object for class '{@link de.evoal.languages.model.base.Attribute <em>Attribute</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Attribute</em>'.
+	 * @see de.evoal.languages.model.base.Attribute
+	 * @generated
+	 */
+	EClass getAttribute();
+
+	/**
+	 * Returns the meta object for the reference '{@link de.evoal.languages.model.base.Attribute#getDefinition <em>Definition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Definition</em>'.
+	 * @see de.evoal.languages.model.base.Attribute#getDefinition()
+	 * @see #getAttribute()
+	 * @generated
+	 */
+	EReference getAttribute_Definition();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link de.evoal.languages.model.base.Attribute#getValue <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Value</em>'.
+	 * @see de.evoal.languages.model.base.Attribute#getValue()
+	 * @see #getAttribute()
+	 * @generated
+	 */
+	EReference getAttribute_Value();
+
+	/**
 	 * Returns the meta object for enum '{@link de.evoal.languages.model.base.ComparisonOperator <em>Comparison Operator</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2988,14 +3211,14 @@ public interface BasePackage extends EPackage {
 		EReference UNARY_ADD_OR_SUBTRACT_EXPRESSION__SUB_EXPRESSION = eINSTANCE.getUnaryAddOrSubtractExpression_SubExpression();
 
 		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.base.impl.CallOrLiteralOrReferenceOrParanthesesImpl <em>Call Or Literal Or Reference Or Parantheses</em>}' class.
+		 * The meta object literal for the '{@link de.evoal.languages.model.base.impl.ValueImpl <em>Value</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.base.impl.CallOrLiteralOrReferenceOrParanthesesImpl
-		 * @see de.evoal.languages.model.base.impl.BasePackageImpl#getCallOrLiteralOrReferenceOrParantheses()
+		 * @see de.evoal.languages.model.base.impl.ValueImpl
+		 * @see de.evoal.languages.model.base.impl.BasePackageImpl#getValue()
 		 * @generated
 		 */
-		EClass CALL_OR_LITERAL_OR_REFERENCE_OR_PARANTHESES = eINSTANCE.getCallOrLiteralOrReferenceOrParantheses();
+		EClass VALUE = eINSTANCE.getValue();
 
 		/**
 		 * The meta object literal for the '{@link de.evoal.languages.model.base.impl.LiteralImpl <em>Literal</em>}' class.
@@ -3532,6 +3755,76 @@ public interface BasePackage extends EPackage {
 		 * @generated
 		 */
 		EReference CONSTANT_REFERENCE__DEFINITION = eINSTANCE.getConstantReference_Definition();
+
+		/**
+		 * The meta object literal for the '{@link de.evoal.languages.model.base.impl.ArrayImpl <em>Array</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.evoal.languages.model.base.impl.ArrayImpl
+		 * @see de.evoal.languages.model.base.impl.BasePackageImpl#getArray()
+		 * @generated
+		 */
+		EClass ARRAY = eINSTANCE.getArray();
+
+		/**
+		 * The meta object literal for the '<em><b>Values</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ARRAY__VALUES = eINSTANCE.getArray_Values();
+
+		/**
+		 * The meta object literal for the '{@link de.evoal.languages.model.base.impl.InstanceImpl <em>Instance</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.evoal.languages.model.base.impl.InstanceImpl
+		 * @see de.evoal.languages.model.base.impl.BasePackageImpl#getInstance()
+		 * @generated
+		 */
+		EClass INSTANCE = eINSTANCE.getInstance();
+
+		/**
+		 * The meta object literal for the '<em><b>Definition</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference INSTANCE__DEFINITION = eINSTANCE.getInstance_Definition();
+
+		/**
+		 * The meta object literal for the '<em><b>Attributes</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference INSTANCE__ATTRIBUTES = eINSTANCE.getInstance_Attributes();
+
+		/**
+		 * The meta object literal for the '{@link de.evoal.languages.model.base.impl.AttributeImpl <em>Attribute</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.evoal.languages.model.base.impl.AttributeImpl
+		 * @see de.evoal.languages.model.base.impl.BasePackageImpl#getAttribute()
+		 * @generated
+		 */
+		EClass ATTRIBUTE = eINSTANCE.getAttribute();
+
+		/**
+		 * The meta object literal for the '<em><b>Definition</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ATTRIBUTE__DEFINITION = eINSTANCE.getAttribute_Definition();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ATTRIBUTE__VALUE = eINSTANCE.getAttribute_Value();
 
 		/**
 		 * The meta object literal for the '{@link de.evoal.languages.model.base.ComparisonOperator <em>Comparison Operator</em>}' enum.

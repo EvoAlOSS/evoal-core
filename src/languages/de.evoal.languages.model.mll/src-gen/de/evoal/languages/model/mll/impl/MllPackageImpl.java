@@ -786,7 +786,6 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 		// Obtain other dependent packages
 		DdlPackage theDdlPackage = (DdlPackage)EPackage.Registry.INSTANCE.getEPackage(DdlPackage.eNS_URI);
 		BasePackage theBasePackage = (BasePackage)EPackage.Registry.INSTANCE.getEPackage(BasePackage.eNS_URI);
-		InstancePackage theInstancePackage = (InstancePackage)EPackage.Registry.INSTANCE.getEPackage(InstancePackage.eNS_URI);
 
 		// Create type parameters
 
@@ -821,7 +820,7 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 		initEReference(getPartialSurrogateFunctionDefinition_Name(), theBasePackage.getTypeDefinition(), null, "name", null, 1, 1, PartialSurrogateFunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPartialSurrogateFunctionDefinition_Inputs(), theDdlPackage.getDataDescription(), null, "inputs", null, 1, -1, PartialSurrogateFunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getPartialSurrogateFunctionDefinition_Outputs(), theDdlPackage.getDataDescription(), null, "outputs", null, 1, -1, PartialSurrogateFunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEReference(getPartialSurrogateFunctionDefinition_Parameters(), theInstancePackage.getAttribute(), null, "parameters", null, 0, -1, PartialSurrogateFunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getPartialSurrogateFunctionDefinition_Parameters(), theBasePackage.getAttribute(), null, "parameters", null, 0, -1, PartialSurrogateFunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		initEClass(predictionEClass, Prediction.class, "Prediction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getPrediction_Definition(), this.getSurrogateDefinition(), null, "definition", null, 1, 1, Prediction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

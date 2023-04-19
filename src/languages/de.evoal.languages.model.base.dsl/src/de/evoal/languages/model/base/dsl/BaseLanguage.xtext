@@ -62,11 +62,16 @@ PowerOfExpressionRule returns PowerOfExpression :
 ;
 
 UnaryAddOrSubtractExpressionRule returns UnaryAddOrSubtractExpression :
-	( operators+=AddOrSubtractOperatorRule )* subExpression = LiteralOrReferenceRule
+	( operators+=AddOrSubtractOperatorRule )* subExpression = ValueRule
 ;
 
-LiteralOrReferenceRule returns CallOrLiteralOrReferenceOrParantheses:
-	CallRule | LiteralRule | ParanthesesRule | ValueReferenceRule;
+ValueRule returns Value:
+	ArrayRule | CallRule | LiteralRule | ParanthesesRule | ReferenceRule;
+
+ArrayRule returns Array:
+	{Array}
+	'[' (values += ValueRule (',' values += ValueRule)* )? ']' 
+;
 
 ParanthesesRule returns Parantheses:
 	'(' subExpression = ExpressionRule ')'
@@ -77,7 +82,7 @@ CallRule returns Call:
 ;
 
 
-ValueReferenceRule returns ValueReference:
+ReferenceRule returns ValueReference:
 	ConstantReferenceRule
 ;
 
@@ -89,6 +94,17 @@ LiteralRule returns Literal:
 	NumberLiteralRule
 		| StringLiteralRule
 		| BooleanLiteralRule
+		| InstanceLiteralRule
+;
+
+InstanceLiteralRule returns Instance:
+	definition = [TypeDefinition|QualifiedName] ('{'
+	  attributes += AttributeRule*
+	'}')?
+;
+
+AttributeRule returns Attribute:
+	definition = [AttributeDefinition|StringOrId] ':=' value = ValueRule ';'
 ;
 
 NumberLiteralRule returns NumberLiteral:
@@ -198,7 +214,6 @@ ArrayTypeRule returns ArrayType:
 	'array'	 elements += TypeRule
 ;
 
-
 FunctionDefinitionRule returns FunctionDefinition:
 	'def' type = TypeRule name = StringOrId '(' (parameters+=ParameterRule (',' parameters+=ParameterRule)*)? ')' ';'
 ;
@@ -225,6 +240,7 @@ StringOrId:
 
 terminal fragment DIGIT: '0'..'9';
 terminal fragment EXPONENT: 'e' ('+'|'-')? DIGIT+;
+
 @Override
 terminal INT returns ecore::EInt: '-'? DIGIT+;
 terminal DOUBLE returns ecore::EDouble: INT EXPONENT | INT '.' DIGIT* EXPONENT?;

@@ -20,12 +20,12 @@ ImportRule returns Import:
 
 ProblemRule returns Problem:
 	"declare" name = StringOrId "as"
-		problem = InstanceRule
+		problem = InstanceLiteralRule
 	("documenting" ":=" documentation = ArrayRule ';')?
 ;
 
 AlgorithmInstanceRule returns AlgorithmInstance:
 	"instance" "for" problem = [Problem|QualifiedName] "with" "algorithm"
-		algorithm = InstanceRule
+		algorithm = InstanceLiteralRule
 	("documenting" ":=" documentation = ArrayRule ';')?
 ;

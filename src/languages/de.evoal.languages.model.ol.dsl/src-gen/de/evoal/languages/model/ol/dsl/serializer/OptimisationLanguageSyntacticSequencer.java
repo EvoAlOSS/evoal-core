@@ -22,12 +22,12 @@ import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
 public class OptimisationLanguageSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected OptimisationLanguageGrammarAccess grammarAccess;
-	protected AbstractElementAlias match_InstanceRule___LeftCurlyBracketKeyword_1_0_RightCurlyBracketKeyword_1_2__q;
+	protected AbstractElementAlias match_InstanceLiteralRule___LeftCurlyBracketKeyword_1_0_RightCurlyBracketKeyword_1_2__q;
 	
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (OptimisationLanguageGrammarAccess) access;
-		match_InstanceRule___LeftCurlyBracketKeyword_1_0_RightCurlyBracketKeyword_1_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getInstanceRuleAccess().getLeftCurlyBracketKeyword_1_0()), new TokenAlias(false, false, grammarAccess.getInstanceRuleAccess().getRightCurlyBracketKeyword_1_2()));
+		match_InstanceLiteralRule___LeftCurlyBracketKeyword_1_0_RightCurlyBracketKeyword_1_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getInstanceLiteralRuleAccess().getLeftCurlyBracketKeyword_1_0()), new TokenAlias(false, false, grammarAccess.getInstanceLiteralRuleAccess().getRightCurlyBracketKeyword_1_2()));
 	}
 	
 	@Override
@@ -42,8 +42,8 @@ public class OptimisationLanguageSyntacticSequencer extends AbstractSyntacticSeq
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			if (match_InstanceRule___LeftCurlyBracketKeyword_1_0_RightCurlyBracketKeyword_1_2__q.equals(syntax))
-				emit_InstanceRule___LeftCurlyBracketKeyword_1_0_RightCurlyBracketKeyword_1_2__q(semanticObject, getLastNavigableState(), syntaxNodes);
+			if (match_InstanceLiteralRule___LeftCurlyBracketKeyword_1_0_RightCurlyBracketKeyword_1_2__q.equals(syntax))
+				emit_InstanceLiteralRule___LeftCurlyBracketKeyword_1_0_RightCurlyBracketKeyword_1_2__q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else acceptNodes(getLastNavigableState(), syntaxNodes);
 		}
 	}
@@ -58,7 +58,7 @@ public class OptimisationLanguageSyntacticSequencer extends AbstractSyntacticSeq
 	 
 	 * </pre>
 	 */
-	protected void emit_InstanceRule___LeftCurlyBracketKeyword_1_0_RightCurlyBracketKeyword_1_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_InstanceLiteralRule___LeftCurlyBracketKeyword_1_0_RightCurlyBracketKeyword_1_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	

@@ -133,16 +133,16 @@ public class BaseSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case BasePackage.CALL_OR_LITERAL_OR_REFERENCE_OR_PARANTHESES: {
-				CallOrLiteralOrReferenceOrParantheses callOrLiteralOrReferenceOrParantheses = (CallOrLiteralOrReferenceOrParantheses)theEObject;
-				T result = caseCallOrLiteralOrReferenceOrParantheses(callOrLiteralOrReferenceOrParantheses);
+			case BasePackage.VALUE: {
+				Value value = (Value)theEObject;
+				T result = caseValue(value);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case BasePackage.LITERAL: {
 				Literal literal = (Literal)theEObject;
 				T result = caseLiteral(literal);
-				if (result == null) result = caseCallOrLiteralOrReferenceOrParantheses(literal);
+				if (result == null) result = caseValue(literal);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -150,7 +150,7 @@ public class BaseSwitch<T> extends Switch<T> {
 				NumberLiteral numberLiteral = (NumberLiteral)theEObject;
 				T result = caseNumberLiteral(numberLiteral);
 				if (result == null) result = caseLiteral(numberLiteral);
-				if (result == null) result = caseCallOrLiteralOrReferenceOrParantheses(numberLiteral);
+				if (result == null) result = caseValue(numberLiteral);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -159,7 +159,7 @@ public class BaseSwitch<T> extends Switch<T> {
 				T result = caseIntegerLiteral(integerLiteral);
 				if (result == null) result = caseNumberLiteral(integerLiteral);
 				if (result == null) result = caseLiteral(integerLiteral);
-				if (result == null) result = caseCallOrLiteralOrReferenceOrParantheses(integerLiteral);
+				if (result == null) result = caseValue(integerLiteral);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -168,7 +168,7 @@ public class BaseSwitch<T> extends Switch<T> {
 				T result = caseDoubleLiteral(doubleLiteral);
 				if (result == null) result = caseNumberLiteral(doubleLiteral);
 				if (result == null) result = caseLiteral(doubleLiteral);
-				if (result == null) result = caseCallOrLiteralOrReferenceOrParantheses(doubleLiteral);
+				if (result == null) result = caseValue(doubleLiteral);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -176,7 +176,7 @@ public class BaseSwitch<T> extends Switch<T> {
 				StringLiteral stringLiteral = (StringLiteral)theEObject;
 				T result = caseStringLiteral(stringLiteral);
 				if (result == null) result = caseLiteral(stringLiteral);
-				if (result == null) result = caseCallOrLiteralOrReferenceOrParantheses(stringLiteral);
+				if (result == null) result = caseValue(stringLiteral);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -184,21 +184,21 @@ public class BaseSwitch<T> extends Switch<T> {
 				BooleanLiteral booleanLiteral = (BooleanLiteral)theEObject;
 				T result = caseBooleanLiteral(booleanLiteral);
 				if (result == null) result = caseLiteral(booleanLiteral);
-				if (result == null) result = caseCallOrLiteralOrReferenceOrParantheses(booleanLiteral);
+				if (result == null) result = caseValue(booleanLiteral);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case BasePackage.CALL: {
 				Call call = (Call)theEObject;
 				T result = caseCall(call);
-				if (result == null) result = caseCallOrLiteralOrReferenceOrParantheses(call);
+				if (result == null) result = caseValue(call);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case BasePackage.PARANTHESES: {
 				Parantheses parantheses = (Parantheses)theEObject;
 				T result = caseParantheses(parantheses);
-				if (result == null) result = caseCallOrLiteralOrReferenceOrParantheses(parantheses);
+				if (result == null) result = caseValue(parantheses);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -211,7 +211,7 @@ public class BaseSwitch<T> extends Switch<T> {
 			case BasePackage.VALUE_REFERENCE: {
 				ValueReference valueReference = (ValueReference)theEObject;
 				T result = caseValueReference(valueReference);
-				if (result == null) result = caseCallOrLiteralOrReferenceOrParantheses(valueReference);
+				if (result == null) result = caseValue(valueReference);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -336,7 +336,28 @@ public class BaseSwitch<T> extends Switch<T> {
 				ConstantReference constantReference = (ConstantReference)theEObject;
 				T result = caseConstantReference(constantReference);
 				if (result == null) result = caseValueReference(constantReference);
-				if (result == null) result = caseCallOrLiteralOrReferenceOrParantheses(constantReference);
+				if (result == null) result = caseValue(constantReference);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case BasePackage.ARRAY: {
+				Array array = (Array)theEObject;
+				T result = caseArray(array);
+				if (result == null) result = caseValue(array);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case BasePackage.INSTANCE: {
+				Instance instance = (Instance)theEObject;
+				T result = caseInstance(instance);
+				if (result == null) result = caseLiteral(instance);
+				if (result == null) result = caseValue(instance);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case BasePackage.ATTRIBUTE: {
+				Attribute attribute = (Attribute)theEObject;
+				T result = caseAttribute(attribute);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -510,17 +531,17 @@ public class BaseSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Call Or Literal Or Reference Or Parantheses</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Value</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Call Or Literal Or Reference Or Parantheses</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Value</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseCallOrLiteralOrReferenceOrParantheses(CallOrLiteralOrReferenceOrParantheses object) {
+	public T caseValue(Value object) {
 		return null;
 	}
 
@@ -941,6 +962,51 @@ public class BaseSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseConstantReference(ConstantReference object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Array</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Array</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseArray(Array object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Instance</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Instance</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseInstance(Instance object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Attribute</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Attribute</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAttribute(Attribute object) {
 		return null;
 	}
 

@@ -114,11 +114,10 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="subExpression" lowerBound="1"
-        eType="#//CallOrLiteralOrReferenceOrParantheses" containment="true"/>
+        eType="#//Value" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="CallOrLiteralOrReferenceOrParantheses"
-      abstract="true"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Literal" abstract="true" eSuperTypes="#//CallOrLiteralOrReferenceOrParantheses">
+  <eClassifiers xsi:type="ecore:EClass" name="Value" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Literal" abstract="true" eSuperTypes="#//Value">
     <eOperations name="getValue" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NumberLiteral" abstract="true" eSuperTypes="#//Literal">
@@ -155,7 +154,7 @@
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Call" eSuperTypes="#//CallOrLiteralOrReferenceOrParantheses">
+  <eClassifiers xsi:type="ecore:EClass" name="Call" eSuperTypes="#//Value">
     <eStructuralFeatures xsi:type="ecore:EReference" name="function" lowerBound="1"
         eType="#//FunctionName" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
@@ -165,12 +164,12 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Parantheses" eSuperTypes="#//CallOrLiteralOrReferenceOrParantheses">
+  <eClassifiers xsi:type="ecore:EClass" name="Parantheses" eSuperTypes="#//Value">
     <eStructuralFeatures xsi:type="ecore:EReference" name="subExpression" lowerBound="1"
         eType="#//Expression" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FunctionName"/>
-  <eClassifiers xsi:type="ecore:EClass" name="ValueReference" eSuperTypes="#//CallOrLiteralOrReferenceOrParantheses"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ValueReference" eSuperTypes="#//Value"/>
   <eClassifiers xsi:type="ecore:EEnum" name="Factor">
     <eLiterals name="Yotta" value="24"/>
     <eLiterals name="Zetta" value="21"/>
@@ -374,5 +373,21 @@
   <eClassifiers xsi:type="ecore:EClass" name="ConstantReference" eSuperTypes="#//ValueReference">
     <eStructuralFeatures xsi:type="ecore:EReference" name="definition" lowerBound="1"
         eType="#//ConstantDefinition"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Array" eSuperTypes="#//Value">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="values" upperBound="-1"
+        eType="#//Value" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Instance" eSuperTypes="#//Literal">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="definition" lowerBound="1"
+        eType="#//TypeDefinition"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
+        eType="#//Attribute" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Attribute">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="definition" lowerBound="1"
+        eType="#//AttributeDefinition"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//Value"
+        containment="true"/>
   </eClassifiers>
 </ecore:EPackage>

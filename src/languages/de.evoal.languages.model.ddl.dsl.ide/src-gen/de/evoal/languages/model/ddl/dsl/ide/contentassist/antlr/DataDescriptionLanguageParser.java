@@ -33,8 +33,8 @@ public class DataDescriptionLanguageParser extends AbstractContentAssistParser {
 		
 		private static void init(ImmutableMap.Builder<AbstractElement, String> builder, DataDescriptionLanguageGrammarAccess grammarAccess) {
 			builder.put(grammarAccess.getDataDescriptionRuleAccess().getAlternatives(), "rule__DataDescriptionRule__Alternatives");
-			builder.put(grammarAccess.getValueReferenceRuleAccess().getAlternatives(), "rule__ValueReferenceRule__Alternatives");
-			builder.put(grammarAccess.getLiteralOrReferenceRuleAccess().getAlternatives(), "rule__LiteralOrReferenceRule__Alternatives");
+			builder.put(grammarAccess.getReferenceRuleAccess().getAlternatives(), "rule__ReferenceRule__Alternatives");
+			builder.put(grammarAccess.getValueRuleAccess().getAlternatives(), "rule__ValueRule__Alternatives");
 			builder.put(grammarAccess.getLiteralRuleAccess().getAlternatives(), "rule__LiteralRule__Alternatives");
 			builder.put(grammarAccess.getNumberLiteralRuleAccess().getAlternatives(), "rule__NumberLiteralRule__Alternatives");
 			builder.put(grammarAccess.getBooleanLiteralRuleAccess().getAlternatives_1(), "rule__BooleanLiteralRule__Alternatives_1");
@@ -76,10 +76,16 @@ public class DataDescriptionLanguageParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getPowerOfExpressionRuleAccess().getGroup(), "rule__PowerOfExpressionRule__Group__0");
 			builder.put(grammarAccess.getPowerOfExpressionRuleAccess().getGroup_1(), "rule__PowerOfExpressionRule__Group_1__0");
 			builder.put(grammarAccess.getUnaryAddOrSubtractExpressionRuleAccess().getGroup(), "rule__UnaryAddOrSubtractExpressionRule__Group__0");
+			builder.put(grammarAccess.getArrayRuleAccess().getGroup(), "rule__ArrayRule__Group__0");
+			builder.put(grammarAccess.getArrayRuleAccess().getGroup_2(), "rule__ArrayRule__Group_2__0");
+			builder.put(grammarAccess.getArrayRuleAccess().getGroup_2_1(), "rule__ArrayRule__Group_2_1__0");
 			builder.put(grammarAccess.getParanthesesRuleAccess().getGroup(), "rule__ParanthesesRule__Group__0");
 			builder.put(grammarAccess.getCallRuleAccess().getGroup(), "rule__CallRule__Group__0");
 			builder.put(grammarAccess.getCallRuleAccess().getGroup_2(), "rule__CallRule__Group_2__0");
 			builder.put(grammarAccess.getCallRuleAccess().getGroup_2_1(), "rule__CallRule__Group_2_1__0");
+			builder.put(grammarAccess.getInstanceLiteralRuleAccess().getGroup(), "rule__InstanceLiteralRule__Group__0");
+			builder.put(grammarAccess.getInstanceLiteralRuleAccess().getGroup_1(), "rule__InstanceLiteralRule__Group_1__0");
+			builder.put(grammarAccess.getAttributeRuleAccess().getGroup(), "rule__AttributeRule__Group__0");
 			builder.put(grammarAccess.getDoubleLiteralRuleAccess().getGroup(), "rule__DoubleLiteralRule__Group__0");
 			builder.put(grammarAccess.getIntegerLiteralRuleAccess().getGroup(), "rule__IntegerLiteralRule__Group__0");
 			builder.put(grammarAccess.getBooleanLiteralRuleAccess().getGroup(), "rule__BooleanLiteralRule__Group__0");
@@ -146,11 +152,17 @@ public class DataDescriptionLanguageParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getPowerOfExpressionRuleAccess().getRightOperandAssignment_1_1(), "rule__PowerOfExpressionRule__RightOperandAssignment_1_1");
 			builder.put(grammarAccess.getUnaryAddOrSubtractExpressionRuleAccess().getOperatorsAssignment_0(), "rule__UnaryAddOrSubtractExpressionRule__OperatorsAssignment_0");
 			builder.put(grammarAccess.getUnaryAddOrSubtractExpressionRuleAccess().getSubExpressionAssignment_1(), "rule__UnaryAddOrSubtractExpressionRule__SubExpressionAssignment_1");
+			builder.put(grammarAccess.getArrayRuleAccess().getValuesAssignment_2_0(), "rule__ArrayRule__ValuesAssignment_2_0");
+			builder.put(grammarAccess.getArrayRuleAccess().getValuesAssignment_2_1_1(), "rule__ArrayRule__ValuesAssignment_2_1_1");
 			builder.put(grammarAccess.getParanthesesRuleAccess().getSubExpressionAssignment_1(), "rule__ParanthesesRule__SubExpressionAssignment_1");
 			builder.put(grammarAccess.getCallRuleAccess().getFunctionAssignment_0(), "rule__CallRule__FunctionAssignment_0");
 			builder.put(grammarAccess.getCallRuleAccess().getParametersAssignment_2_0(), "rule__CallRule__ParametersAssignment_2_0");
 			builder.put(grammarAccess.getCallRuleAccess().getParametersAssignment_2_1_1(), "rule__CallRule__ParametersAssignment_2_1_1");
 			builder.put(grammarAccess.getConstantReferenceRuleAccess().getDefinitionAssignment(), "rule__ConstantReferenceRule__DefinitionAssignment");
+			builder.put(grammarAccess.getInstanceLiteralRuleAccess().getDefinitionAssignment_0(), "rule__InstanceLiteralRule__DefinitionAssignment_0");
+			builder.put(grammarAccess.getInstanceLiteralRuleAccess().getAttributesAssignment_1_1(), "rule__InstanceLiteralRule__AttributesAssignment_1_1");
+			builder.put(grammarAccess.getAttributeRuleAccess().getDefinitionAssignment_0(), "rule__AttributeRule__DefinitionAssignment_0");
+			builder.put(grammarAccess.getAttributeRuleAccess().getValueAssignment_2(), "rule__AttributeRule__ValueAssignment_2");
 			builder.put(grammarAccess.getDoubleLiteralRuleAccess().getLiteralAssignment_0(), "rule__DoubleLiteralRule__LiteralAssignment_0");
 			builder.put(grammarAccess.getDoubleLiteralRuleAccess().getFactorAssignment_1(), "rule__DoubleLiteralRule__FactorAssignment_1");
 			builder.put(grammarAccess.getIntegerLiteralRuleAccess().getLiteralAssignment_0(), "rule__IntegerLiteralRule__LiteralAssignment_0");

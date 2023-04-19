@@ -1,6 +1,7 @@
 grammar de.evoal.languages.model.generator.dsl.GeneratorDSL with de.evoal.languages.model.instance.dsl.InstanceLanguage
 
 import "https://www.evoal.de/languages/generator/1.0.0"
+import "https://www.evoal.de/languages/base/1.0.0" as base
 
 ConfigurationRule returns Configuration:
 	(imports += ImportRule)*
@@ -22,7 +23,7 @@ PipelineDefinitionRule returns PipelineDefinition:
 
 StepRule returns Step:
 	'step' '{'
- 	    'component' instance = InstanceRule
+ 	    'component' instance = InstanceLiteralRule
  	    ('reads' '[' (reads += DataReferenceRule (',' reads += DataReferenceRule)*)? ']' ';')?
  	    ('writes' '[' (writes += DataReferenceRule (',' writes += DataReferenceRule)*)? ']' ';')?
 	'}'

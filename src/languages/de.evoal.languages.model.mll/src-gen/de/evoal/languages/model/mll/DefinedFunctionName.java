@@ -2,6 +2,9 @@
  */
 package de.evoal.languages.model.mll;
 
+import de.evoal.languages.model.base.FunctionDefinition;
+import de.evoal.languages.model.base.FunctionName;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Defined Function Name</b></em>'.
@@ -22,7 +25,7 @@ package de.evoal.languages.model.mll;
  * @model
  * @generated
  */
-public interface DefinedFunctionName extends de.evoal.languages.model.base.FunctionName {
+public interface DefinedFunctionName extends FunctionName {
 	/**
 	 * Returns the value of the '<em><b>Definition</b></em>' reference.
 	 * <!-- begin-user-doc -->
@@ -31,12 +34,12 @@ public interface DefinedFunctionName extends de.evoal.languages.model.base.Funct
 	 * Reference to the actual function.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Definition</em>' reference.
-	 * @see #setDefinition(de.evoal.languages.model.base.FunctionDefinition)
+	 * @see #setDefinition(FunctionDefinition)
 	 * @see de.evoal.languages.model.mll.MllPackage#getDefinedFunctionName_Definition()
 	 * @model required="true"
 	 * @generated
 	 */
-	de.evoal.languages.model.base.FunctionDefinition getDefinition();
+	FunctionDefinition getDefinition();
 
 	/**
 	 * Sets the value of the '{@link de.evoal.languages.model.mll.DefinedFunctionName#getDefinition <em>Definition</em>}' reference.
@@ -46,6 +49,6 @@ public interface DefinedFunctionName extends de.evoal.languages.model.base.Funct
 	 * @see #getDefinition()
 	 * @generated
 	 */
-	void setDefinition(de.evoal.languages.model.base.FunctionDefinition value);
+	void setDefinition(FunctionDefinition value);
 
 } // DefinedFunctionName

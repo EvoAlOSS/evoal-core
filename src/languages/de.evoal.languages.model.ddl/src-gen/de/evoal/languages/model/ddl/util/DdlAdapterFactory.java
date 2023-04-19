@@ -2,7 +2,7 @@
  */
 package de.evoal.languages.model.ddl.util;
 
-import de.evoal.languages.model.base.CallOrLiteralOrReferenceOrParantheses;
+import de.evoal.languages.model.base.Value;
 import de.evoal.languages.model.base.ValueReference;
 
 import de.evoal.languages.model.ddl.*;
@@ -103,8 +103,8 @@ public class DdlAdapterFactory extends AdapterFactoryImpl {
 				return createSelfReferenceAdapter();
 			}
 			@Override
-			public Adapter caseCallOrLiteralOrReferenceOrParantheses(CallOrLiteralOrReferenceOrParantheses object) {
-				return createCallOrLiteralOrReferenceOrParanthesesAdapter();
+			public Adapter caseValue(Value object) {
+				return createValueAdapter();
 			}
 			@Override
 			public Adapter caseValueReference(ValueReference object) {
@@ -243,16 +243,16 @@ public class DdlAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.CallOrLiteralOrReferenceOrParantheses <em>Call Or Literal Or Reference Or Parantheses</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.Value <em>Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.evoal.languages.model.base.CallOrLiteralOrReferenceOrParantheses
+	 * @see de.evoal.languages.model.base.Value
 	 * @generated
 	 */
-	public Adapter createCallOrLiteralOrReferenceOrParanthesesAdapter() {
+	public Adapter createValueAdapter() {
 		return null;
 	}
 

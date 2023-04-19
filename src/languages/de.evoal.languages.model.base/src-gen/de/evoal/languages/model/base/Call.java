@@ -21,7 +21,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface Call extends CallOrLiteralOrReferenceOrParantheses {
+public interface Call extends Value {
 	/**
 	 * Returns the value of the '<em><b>Function</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

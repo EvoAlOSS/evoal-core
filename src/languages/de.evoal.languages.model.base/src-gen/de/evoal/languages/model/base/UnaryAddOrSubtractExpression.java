@@ -43,12 +43,12 @@ public interface UnaryAddOrSubtractExpression extends EObject {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Sub Expression</em>' containment reference.
-	 * @see #setSubExpression(CallOrLiteralOrReferenceOrParantheses)
+	 * @see #setSubExpression(Value)
 	 * @see de.evoal.languages.model.base.BasePackage#getUnaryAddOrSubtractExpression_SubExpression()
 	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	CallOrLiteralOrReferenceOrParantheses getSubExpression();
+	Value getSubExpression();
 
 	/**
 	 * Sets the value of the '{@link de.evoal.languages.model.base.UnaryAddOrSubtractExpression#getSubExpression <em>Sub Expression</em>}' containment reference.
@@ -58,6 +58,6 @@ public interface UnaryAddOrSubtractExpression extends EObject {
 	 * @see #getSubExpression()
 	 * @generated
 	 */
-	void setSubExpression(CallOrLiteralOrReferenceOrParantheses value);
+	void setSubExpression(Value value);
 
 } // UnaryAddOrSubtractExpression

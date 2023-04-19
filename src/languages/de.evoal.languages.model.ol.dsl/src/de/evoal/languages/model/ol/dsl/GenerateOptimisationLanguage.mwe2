@@ -32,6 +32,12 @@ Workflow {
                         referencedResource = "platform:/resource/de.evoal.languages.model.base/model/model.genmodel"
                         referencedResource = "platform:/resource/de.evoal.languages.model.ddl/model/model.genmodel"
 
+            parserGenerator = {
+                    options = {
+                            backtrack = true
+                    }
+            }
+
                         serializer = {
                                 generateStub = false
                         }

@@ -87,7 +87,7 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" ordered="false"
-        upperBound="-1" eType="ecore:EClass ../../de.evoal.languages.model.instance/model/model.ecore#//Attribute"
+        upperBound="-1" eType="ecore:EClass ../../de.evoal.languages.model.base/model/model.ecore#//Attribute"
         containment="true">
       <eAnnotations source="http://www.eclipse.org/OCL/Collection">
         <details key="nullFree" value="false"/>

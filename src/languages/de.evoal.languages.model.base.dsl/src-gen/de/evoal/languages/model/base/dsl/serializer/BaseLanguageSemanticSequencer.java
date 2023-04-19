@@ -7,7 +7,9 @@ package de.evoal.languages.model.base.dsl.serializer;
 import com.google.inject.Inject;
 import de.evoal.languages.model.base.AddOrSubtractExpression;
 import de.evoal.languages.model.base.AndExpression;
+import de.evoal.languages.model.base.Array;
 import de.evoal.languages.model.base.ArrayType;
+import de.evoal.languages.model.base.Attribute;
 import de.evoal.languages.model.base.AttributeDefinition;
 import de.evoal.languages.model.base.BasePackage;
 import de.evoal.languages.model.base.BooleanLiteral;
@@ -22,6 +24,7 @@ import de.evoal.languages.model.base.DoubleLiteral;
 import de.evoal.languages.model.base.ExpressionType;
 import de.evoal.languages.model.base.FloatType;
 import de.evoal.languages.model.base.FunctionDefinition;
+import de.evoal.languages.model.base.Instance;
 import de.evoal.languages.model.base.InstanceType;
 import de.evoal.languages.model.base.IntType;
 import de.evoal.languages.model.base.IntegerLiteral;
@@ -70,8 +73,14 @@ public class BaseLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 			case BasePackage.AND_EXPRESSION:
 				sequence_AndExpressionRule(context, (AndExpression) semanticObject); 
 				return; 
+			case BasePackage.ARRAY:
+				sequence_ArrayRule(context, (Array) semanticObject); 
+				return; 
 			case BasePackage.ARRAY_TYPE:
 				sequence_ArrayTypeRule(context, (ArrayType) semanticObject); 
+				return; 
+			case BasePackage.ATTRIBUTE:
+				sequence_AttributeRule(context, (Attribute) semanticObject); 
 				return; 
 			case BasePackage.ATTRIBUTE_DEFINITION:
 				sequence_AttributeDefinitionRule(context, (AttributeDefinition) semanticObject); 
@@ -111,6 +120,9 @@ public class BaseLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 				return; 
 			case BasePackage.FUNCTION_DEFINITION:
 				sequence_FunctionDefinitionRule(context, (FunctionDefinition) semanticObject); 
+				return; 
+			case BasePackage.INSTANCE:
+				sequence_InstanceLiteralRule(context, (Instance) semanticObject); 
 				return; 
 			case BasePackage.INSTANCE_TYPE:
 				sequence_InstanceTypeRule(context, (InstanceType) semanticObject); 
@@ -199,6 +211,21 @@ public class BaseLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 	/**
 	 * <pre>
 	 * Contexts:
+	 *     ValueRule returns Array
+	 *     ArrayRule returns Array
+	 *
+	 * Constraint:
+	 *     (values+=ValueRule values+=ValueRule*)?
+	 * </pre>
+	 */
+	protected void sequence_ArrayRule(ISerializationContext context, Array semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
 	 *     TypeRule returns ArrayType
 	 *     ArrayTypeRule returns ArrayType
 	 *
@@ -228,7 +255,30 @@ public class BaseLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     LiteralOrReferenceRule returns BooleanLiteral
+	 *     AttributeRule returns Attribute
+	 *
+	 * Constraint:
+	 *     (definition=[AttributeDefinition|StringOrId] value=ValueRule)
+	 * </pre>
+	 */
+	protected void sequence_AttributeRule(ISerializationContext context, Attribute semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, BasePackage.Literals.ATTRIBUTE__DEFINITION) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BasePackage.Literals.ATTRIBUTE__DEFINITION));
+			if (transientValues.isValueTransient(semanticObject, BasePackage.Literals.ATTRIBUTE__VALUE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BasePackage.Literals.ATTRIBUTE__VALUE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getAttributeRuleAccess().getDefinitionAttributeDefinitionStringOrIdParserRuleCall_0_0_1(), semanticObject.eGet(BasePackage.Literals.ATTRIBUTE__DEFINITION, false));
+		feeder.accept(grammarAccess.getAttributeRuleAccess().getValueValueRuleParserRuleCall_2_0(), semanticObject.getValue());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     ValueRule returns BooleanLiteral
 	 *     LiteralRule returns BooleanLiteral
 	 *     BooleanLiteralRule returns BooleanLiteral
 	 *
@@ -259,7 +309,7 @@ public class BaseLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     LiteralOrReferenceRule returns Call
+	 *     ValueRule returns Call
 	 *     CallRule returns Call
 	 *
 	 * Constraint:
@@ -314,8 +364,8 @@ public class BaseLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     LiteralOrReferenceRule returns ConstantReference
-	 *     ValueReferenceRule returns ConstantReference
+	 *     ValueRule returns ConstantReference
+	 *     ReferenceRule returns ConstantReference
 	 *     ConstantReferenceRule returns ConstantReference
 	 *
 	 * Constraint:
@@ -351,7 +401,7 @@ public class BaseLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     LiteralOrReferenceRule returns DoubleLiteral
+	 *     ValueRule returns DoubleLiteral
 	 *     LiteralRule returns DoubleLiteral
 	 *     NumberLiteralRule returns DoubleLiteral
 	 *     DoubleLiteralRule returns DoubleLiteral
@@ -432,6 +482,22 @@ public class BaseLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 	/**
 	 * <pre>
 	 * Contexts:
+	 *     ValueRule returns Instance
+	 *     LiteralRule returns Instance
+	 *     InstanceLiteralRule returns Instance
+	 *
+	 * Constraint:
+	 *     (definition=[TypeDefinition|QualifiedName] attributes+=AttributeRule*)
+	 * </pre>
+	 */
+	protected void sequence_InstanceLiteralRule(ISerializationContext context, Instance semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
 	 *     TypeRule returns InstanceType
 	 *     InstanceTypeRule returns InstanceType
 	 *
@@ -462,7 +528,7 @@ public class BaseLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     LiteralOrReferenceRule returns IntegerLiteral
+	 *     ValueRule returns IntegerLiteral
 	 *     LiteralRule returns IntegerLiteral
 	 *     NumberLiteralRule returns IntegerLiteral
 	 *     IntegerLiteralRule returns IntegerLiteral
@@ -560,7 +626,7 @@ public class BaseLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     LiteralOrReferenceRule returns Parantheses
+	 *     ValueRule returns Parantheses
 	 *     ParanthesesRule returns Parantheses
 	 *
 	 * Constraint:
@@ -618,7 +684,7 @@ public class BaseLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     LiteralOrReferenceRule returns StringLiteral
+	 *     ValueRule returns StringLiteral
 	 *     LiteralRule returns StringLiteral
 	 *     StringLiteralRule returns StringLiteral
 	 *
@@ -672,7 +738,7 @@ public class BaseLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 	 *     UnaryAddOrSubtractExpressionRule returns UnaryAddOrSubtractExpression
 	 *
 	 * Constraint:
-	 *     (operators+=AddOrSubtractOperatorRule* subExpression=LiteralOrReferenceRule)
+	 *     (operators+=AddOrSubtractOperatorRule* subExpression=ValueRule)
 	 * </pre>
 	 */
 	protected void sequence_UnaryAddOrSubtractExpressionRule(ISerializationContext context, UnaryAddOrSubtractExpression semanticObject) {

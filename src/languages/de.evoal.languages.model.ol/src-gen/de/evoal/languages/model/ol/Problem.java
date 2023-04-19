@@ -54,12 +54,12 @@ public interface Problem extends EObject {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Problem</em>' containment reference.
-	 * @see #setProblem(Instance)
+	 * @see #setProblem(de.evoal.languages.model.base.Instance)
 	 * @see de.evoal.languages.model.ol.OLPackage#getProblem_Problem()
 	 * @model containment="true"
 	 * @generated
 	 */
-	Instance getProblem();
+	de.evoal.languages.model.base.Instance getProblem();
 
 	/**
 	 * Sets the value of the '{@link de.evoal.languages.model.ol.Problem#getProblem <em>Problem</em>}' containment reference.
@@ -69,19 +69,19 @@ public interface Problem extends EObject {
 	 * @see #getProblem()
 	 * @generated
 	 */
-	void setProblem(Instance value);
+	void setProblem(de.evoal.languages.model.base.Instance value);
 
 	/**
 	 * Returns the value of the '<em><b>Documentation</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Documentation</em>' containment reference.
-	 * @see #setDocumentation(Array)
+	 * @see #setDocumentation(de.evoal.languages.model.base.Array)
 	 * @see de.evoal.languages.model.ol.OLPackage#getProblem_Documentation()
 	 * @model containment="true"
 	 * @generated
 	 */
-	Array getDocumentation();
+	de.evoal.languages.model.base.Array getDocumentation();
 
 	/**
 	 * Sets the value of the '{@link de.evoal.languages.model.ol.Problem#getDocumentation <em>Documentation</em>}' containment reference.
@@ -91,6 +91,6 @@ public interface Problem extends EObject {
 	 * @see #getDocumentation()
 	 * @generated
 	 */
-	void setDocumentation(Array value);
+	void setDocumentation(de.evoal.languages.model.base.Array value);
 
 } // Problem

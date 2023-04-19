@@ -27,7 +27,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *
  * @generated
  */
-public class ParanthesesImpl extends CallOrLiteralOrReferenceOrParanthesesImpl implements Parantheses {
+public class ParanthesesImpl extends ValueImpl implements Parantheses {
 	/**
 	 * The cached value of the '{@link #getSubExpression() <em>Sub Expression</em>}' containment reference.
 	 * <!-- begin-user-doc -->

@@ -2,6 +2,7 @@
  */
 package de.evoal.languages.model.mll;
 
+import de.evoal.languages.model.base.StringLiteral;
 import org.eclipse.emf.common.util.EList;
 
 /**
@@ -32,6 +33,6 @@ public interface StringLiteralRange extends Range {
 	 *        annotation="http://www.eclipse.org/OCL/Collection nullFree='false'"
 	 * @generated
 	 */
-	EList<de.evoal.languages.model.base.StringLiteral> getElements();
+	EList<StringLiteral> getElements();
 
 } // StringLiteralRange
