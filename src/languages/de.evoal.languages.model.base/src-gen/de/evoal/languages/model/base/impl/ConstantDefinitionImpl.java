@@ -5,8 +5,7 @@ package de.evoal.languages.model.base.impl;
 import de.evoal.languages.model.base.BasePackage;
 import de.evoal.languages.model.base.ConstantDefinition;
 import de.evoal.languages.model.base.Expression;
-import de.evoal.languages.model.base.TypeDefinition;
-
+import de.evoal.languages.model.base.Type;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
@@ -40,7 +39,7 @@ public class ConstantDefinitionImpl extends MinimalEObjectImpl.Container impleme
 	 * @generated
 	 * @ordered
 	 */
-	protected TypeDefinition type;
+	protected Type type;
 
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -97,7 +96,7 @@ public class ConstantDefinitionImpl extends MinimalEObjectImpl.Container impleme
 	 * @generated
 	 */
 	@Override
-	public TypeDefinition getType() {
+	public Type getType() {
 		return type;
 	}
 
@@ -106,8 +105,8 @@ public class ConstantDefinitionImpl extends MinimalEObjectImpl.Container impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetType(TypeDefinition newType, NotificationChain msgs) {
-		TypeDefinition oldType = type;
+	public NotificationChain basicSetType(Type newType, NotificationChain msgs) {
+		Type oldType = type;
 		type = newType;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, BasePackage.CONSTANT_DEFINITION__TYPE, oldType, newType);
@@ -122,7 +121,7 @@ public class ConstantDefinitionImpl extends MinimalEObjectImpl.Container impleme
 	 * @generated
 	 */
 	@Override
-	public void setType(TypeDefinition newType) {
+	public void setType(Type newType) {
 		if (newType != type) {
 			NotificationChain msgs = null;
 			if (type != null)
@@ -247,7 +246,7 @@ public class ConstantDefinitionImpl extends MinimalEObjectImpl.Container impleme
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case BasePackage.CONSTANT_DEFINITION__TYPE:
-				setType((TypeDefinition)newValue);
+				setType((Type)newValue);
 				return;
 			case BasePackage.CONSTANT_DEFINITION__NAME:
 				setName((String)newValue);
@@ -268,7 +267,7 @@ public class ConstantDefinitionImpl extends MinimalEObjectImpl.Container impleme
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case BasePackage.CONSTANT_DEFINITION__TYPE:
-				setType((TypeDefinition)null);
+				setType((Type)null);
 				return;
 			case BasePackage.CONSTANT_DEFINITION__NAME:
 				setName(NAME_EDEFAULT);

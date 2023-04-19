@@ -2214,9 +2214,9 @@ ruleConstantDefinitionRule returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getConstantDefinitionRuleAccess().getTypeTypeDefinitionRuleParserRuleCall_1_0());
+					newCompositeNode(grammarAccess.getConstantDefinitionRuleAccess().getTypeTypeRuleParserRuleCall_1_0());
 				}
-				lv_type_1_0=ruleTypeDefinitionRule
+				lv_type_1_0=ruleTypeRule
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getConstantDefinitionRuleRule());
@@ -2225,7 +2225,7 @@ ruleConstantDefinitionRule returns [EObject current=null]
 						$current,
 						"type",
 						lv_type_1_0,
-						"de.evoal.languages.model.base.dsl.BaseLanguage.TypeDefinitionRule");
+						"de.evoal.languages.model.base.dsl.BaseLanguage.TypeRule");
 					afterParserOrEnumRuleCall();
 				}
 			)
@@ -2272,6 +2272,10 @@ ruleConstantDefinitionRule returns [EObject current=null]
 				}
 			)
 		)
+		otherlv_5=';'
+		{
+			newLeafNode(otherlv_5, grammarAccess.getConstantDefinitionRuleAccess().getSemicolonKeyword_5());
+		}
 	)
 ;
 

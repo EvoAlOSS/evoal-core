@@ -291,7 +291,7 @@ public class BaseLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 	 *     ConstantDefinitionRule returns ConstantDefinition
 	 *
 	 * Constraint:
-	 *     (type=TypeDefinitionRule name=StringOrId value=ExpressionRule)
+	 *     (type=TypeRule name=StringOrId value=ExpressionRule)
 	 * </pre>
 	 */
 	protected void sequence_ConstantDefinitionRule(ISerializationContext context, ConstantDefinition semanticObject) {
@@ -304,7 +304,7 @@ public class BaseLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BasePackage.Literals.CONSTANT_DEFINITION__VALUE));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getConstantDefinitionRuleAccess().getTypeTypeDefinitionRuleParserRuleCall_1_0(), semanticObject.getType());
+		feeder.accept(grammarAccess.getConstantDefinitionRuleAccess().getTypeTypeRuleParserRuleCall_1_0(), semanticObject.getType());
 		feeder.accept(grammarAccess.getConstantDefinitionRuleAccess().getNameStringOrIdParserRuleCall_2_0(), semanticObject.getName());
 		feeder.accept(grammarAccess.getConstantDefinitionRuleAccess().getValueExpressionRuleParserRuleCall_4_0(), semanticObject.getValue());
 		feeder.finish();

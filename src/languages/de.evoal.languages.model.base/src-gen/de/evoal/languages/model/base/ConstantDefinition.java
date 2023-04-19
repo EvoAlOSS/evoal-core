@@ -28,12 +28,12 @@ public interface ConstantDefinition extends EObject {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Type</em>' containment reference.
-	 * @see #setType(TypeDefinition)
+	 * @see #setType(Type)
 	 * @see de.evoal.languages.model.base.BasePackage#getConstantDefinition_Type()
 	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	TypeDefinition getType();
+	Type getType();
 
 	/**
 	 * Sets the value of the '{@link de.evoal.languages.model.base.ConstantDefinition#getType <em>Type</em>}' containment reference.
@@ -43,7 +43,7 @@ public interface ConstantDefinition extends EObject {
 	 * @see #getType()
 	 * @generated
 	 */
-	void setType(TypeDefinition value);
+	void setType(Type value);
 
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.

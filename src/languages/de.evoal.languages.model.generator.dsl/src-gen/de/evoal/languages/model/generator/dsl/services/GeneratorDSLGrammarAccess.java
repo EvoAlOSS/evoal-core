@@ -1403,7 +1403,7 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 	}
 	
 	//ConstantDefinitionRule returns ConstantDefinition:
-	//    'const' type = TypeDefinitionRule name = StringOrId ':=' value = ExpressionRule
+	//    'const' type = TypeRule name = StringOrId ':=' value = ExpressionRule ';'
 	//;
 	public BaseLanguageGrammarAccess.ConstantDefinitionRuleElements getConstantDefinitionRuleAccess() {
 		return gaBaseLanguage.getConstantDefinitionRuleAccess();

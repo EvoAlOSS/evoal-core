@@ -1175,29 +1175,30 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cConstKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cTypeAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cTypeTypeDefinitionRuleParserRuleCall_1_0 = (RuleCall)cTypeAssignment_1.eContents().get(0);
+		private final RuleCall cTypeTypeRuleParserRuleCall_1_0 = (RuleCall)cTypeAssignment_1.eContents().get(0);
 		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cNameStringOrIdParserRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
 		private final Keyword cColonEqualsSignKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		private final Assignment cValueAssignment_4 = (Assignment)cGroup.eContents().get(4);
 		private final RuleCall cValueExpressionRuleParserRuleCall_4_0 = (RuleCall)cValueAssignment_4.eContents().get(0);
+		private final Keyword cSemicolonKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//ConstantDefinitionRule returns ConstantDefinition:
-		//    'const' type = TypeDefinitionRule name = StringOrId ':=' value = ExpressionRule
+		//    'const' type = TypeRule name = StringOrId ':=' value = ExpressionRule ';'
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'const' type = TypeDefinitionRule name = StringOrId ':=' value = ExpressionRule
+		//'const' type = TypeRule name = StringOrId ':=' value = ExpressionRule ';'
 		public Group getGroup() { return cGroup; }
 		
 		//'const'
 		public Keyword getConstKeyword_0() { return cConstKeyword_0; }
 		
-		//type = TypeDefinitionRule
+		//type = TypeRule
 		public Assignment getTypeAssignment_1() { return cTypeAssignment_1; }
 		
-		//TypeDefinitionRule
-		public RuleCall getTypeTypeDefinitionRuleParserRuleCall_1_0() { return cTypeTypeDefinitionRuleParserRuleCall_1_0; }
+		//TypeRule
+		public RuleCall getTypeTypeRuleParserRuleCall_1_0() { return cTypeTypeRuleParserRuleCall_1_0; }
 		
 		//name = StringOrId
 		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
@@ -1213,6 +1214,9 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		
 		//ExpressionRule
 		public RuleCall getValueExpressionRuleParserRuleCall_4_0() { return cValueExpressionRuleParserRuleCall_4_0; }
+		
+		//';'
+		public Keyword getSemicolonKeyword_5() { return cSemicolonKeyword_5; }
 	}
 	public class ParameterRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.base.dsl.BaseLanguage.ParameterRule");
@@ -2272,7 +2276,7 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 	}
 	
 	//ConstantDefinitionRule returns ConstantDefinition:
-	//    'const' type = TypeDefinitionRule name = StringOrId ':=' value = ExpressionRule
+	//    'const' type = TypeRule name = StringOrId ':=' value = ExpressionRule ';'
 	//;
 	public ConstantDefinitionRuleElements getConstantDefinitionRuleAccess() {
 		return pConstantDefinitionRule;
