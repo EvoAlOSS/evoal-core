@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link de.evoal.languages.model.ol.impl.ProblemImpl#getName <em>Name</em>}</li>
  *   <li>{@link de.evoal.languages.model.ol.impl.ProblemImpl#getProblem <em>Problem</em>}</li>
  *   <li>{@link de.evoal.languages.model.ol.impl.ProblemImpl#getDocumentation <em>Documentation</em>}</li>
  * </ul>
@@ -33,6 +34,26 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * @generated
  */
 public class ProblemImpl extends MinimalEObjectImpl.Container implements Problem {
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
+
 	/**
 	 * The cached value of the '{@link #getProblem() <em>Problem</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -70,6 +91,29 @@ public class ProblemImpl extends MinimalEObjectImpl.Container implements Problem
 	@Override
 	protected EClass eStaticClass() {
 		return OLPackage.Literals.PROBLEM;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, OLPackage.PROBLEM__NAME, oldName, name));
 	}
 
 	/**
@@ -186,6 +230,8 @@ public class ProblemImpl extends MinimalEObjectImpl.Container implements Problem
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case OLPackage.PROBLEM__NAME:
+				return getName();
 			case OLPackage.PROBLEM__PROBLEM:
 				return getProblem();
 			case OLPackage.PROBLEM__DOCUMENTATION:
@@ -202,6 +248,9 @@ public class ProblemImpl extends MinimalEObjectImpl.Container implements Problem
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case OLPackage.PROBLEM__NAME:
+				setName((String)newValue);
+				return;
 			case OLPackage.PROBLEM__PROBLEM:
 				setProblem((Instance)newValue);
 				return;
@@ -220,6 +269,9 @@ public class ProblemImpl extends MinimalEObjectImpl.Container implements Problem
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case OLPackage.PROBLEM__NAME:
+				setName(NAME_EDEFAULT);
+				return;
 			case OLPackage.PROBLEM__PROBLEM:
 				setProblem((Instance)null);
 				return;
@@ -238,12 +290,30 @@ public class ProblemImpl extends MinimalEObjectImpl.Container implements Problem
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case OLPackage.PROBLEM__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case OLPackage.PROBLEM__PROBLEM:
 				return problem != null;
 			case OLPackage.PROBLEM__DOCUMENTATION:
 				return documentation != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuilder result = new StringBuilder(super.toString());
+		result.append(" (name: ");
+		result.append(name);
+		result.append(')');
+		return result.toString();
 	}
 
 } //ProblemImpl

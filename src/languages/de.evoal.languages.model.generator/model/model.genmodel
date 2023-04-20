@@ -13,9 +13,6 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//Configuration/pipelines"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//Configuration/statements"/>
     </genClasses>
-    <genClasses ecoreClass="model.ecore#//Import">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//Import/importedNamespace"/>
-    </genClasses>
     <genClasses ecoreClass="model.ecore#//PipelineDefinition">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//PipelineDefinition/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//PipelineDefinition/steps"/>

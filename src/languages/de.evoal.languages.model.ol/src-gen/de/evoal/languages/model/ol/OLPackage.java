@@ -104,34 +104,6 @@ public interface OLPackage extends EPackage {
 	int OPTIMISATION_MODEL_FEATURE_COUNT = 3;
 
 	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.ol.impl.ImportImpl <em>Import</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.ol.impl.ImportImpl
-	 * @see de.evoal.languages.model.ol.impl.OLPackageImpl#getImport()
-	 * @generated
-	 */
-	int IMPORT = 1;
-
-	/**
-	 * The feature id for the '<em><b>Imported Namespace</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IMPORT__IMPORTED_NAMESPACE = 0;
-
-	/**
-	 * The number of structural features of the '<em>Import</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IMPORT_FEATURE_COUNT = 1;
-
-	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.ol.impl.ProblemImpl <em>Problem</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -139,7 +111,16 @@ public interface OLPackage extends EPackage {
 	 * @see de.evoal.languages.model.ol.impl.OLPackageImpl#getProblem()
 	 * @generated
 	 */
-	int PROBLEM = 2;
+	int PROBLEM = 1;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROBLEM__NAME = 0;
 
 	/**
 	 * The feature id for the '<em><b>Problem</b></em>' containment reference.
@@ -148,7 +129,7 @@ public interface OLPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROBLEM__PROBLEM = 0;
+	int PROBLEM__PROBLEM = 1;
 
 	/**
 	 * The feature id for the '<em><b>Documentation</b></em>' containment reference.
@@ -157,7 +138,7 @@ public interface OLPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROBLEM__DOCUMENTATION = 1;
+	int PROBLEM__DOCUMENTATION = 2;
 
 	/**
 	 * The number of structural features of the '<em>Problem</em>' class.
@@ -166,7 +147,7 @@ public interface OLPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROBLEM_FEATURE_COUNT = 2;
+	int PROBLEM_FEATURE_COUNT = 3;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.ol.impl.AlgorithmInstanceImpl <em>Algorithm Instance</em>}' class.
@@ -176,7 +157,7 @@ public interface OLPackage extends EPackage {
 	 * @see de.evoal.languages.model.ol.impl.OLPackageImpl#getAlgorithmInstance()
 	 * @generated
 	 */
-	int ALGORITHM_INSTANCE = 3;
+	int ALGORITHM_INSTANCE = 2;
 
 	/**
 	 * The feature id for the '<em><b>Problem</b></em>' reference.
@@ -259,27 +240,6 @@ public interface OLPackage extends EPackage {
 	EReference getOptimisationModel_Algorithm();
 
 	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.ol.Import <em>Import</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Import</em>'.
-	 * @see de.evoal.languages.model.ol.Import
-	 * @generated
-	 */
-	EClass getImport();
-
-	/**
-	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.ol.Import#getImportedNamespace <em>Imported Namespace</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Imported Namespace</em>'.
-	 * @see de.evoal.languages.model.ol.Import#getImportedNamespace()
-	 * @see #getImport()
-	 * @generated
-	 */
-	EAttribute getImport_ImportedNamespace();
-
-	/**
 	 * Returns the meta object for class '{@link de.evoal.languages.model.ol.Problem <em>Problem</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -288,6 +248,17 @@ public interface OLPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getProblem();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.ol.Problem#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see de.evoal.languages.model.ol.Problem#getName()
+	 * @see #getProblem()
+	 * @generated
+	 */
+	EAttribute getProblem_Name();
 
 	/**
 	 * Returns the meta object for the containment reference '{@link de.evoal.languages.model.ol.Problem#getProblem <em>Problem</em>}'.
@@ -411,24 +382,6 @@ public interface OLPackage extends EPackage {
 		EReference OPTIMISATION_MODEL__ALGORITHM = eINSTANCE.getOptimisationModel_Algorithm();
 
 		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.ol.impl.ImportImpl <em>Import</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.ol.impl.ImportImpl
-		 * @see de.evoal.languages.model.ol.impl.OLPackageImpl#getImport()
-		 * @generated
-		 */
-		EClass IMPORT = eINSTANCE.getImport();
-
-		/**
-		 * The meta object literal for the '<em><b>Imported Namespace</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute IMPORT__IMPORTED_NAMESPACE = eINSTANCE.getImport_ImportedNamespace();
-
-		/**
 		 * The meta object literal for the '{@link de.evoal.languages.model.ol.impl.ProblemImpl <em>Problem</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -437,6 +390,14 @@ public interface OLPackage extends EPackage {
 		 * @generated
 		 */
 		EClass PROBLEM = eINSTANCE.getProblem();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PROBLEM__NAME = eINSTANCE.getProblem_Name();
 
 		/**
 		 * The meta object literal for the '<em><b>Problem</b></em>' containment reference feature.

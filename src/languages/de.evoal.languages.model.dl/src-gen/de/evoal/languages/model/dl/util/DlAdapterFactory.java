@@ -73,14 +73,6 @@ public class DlAdapterFactory extends AdapterFactoryImpl {
 				return createDefinitionModelAdapter();
 			}
 			@Override
-			public Adapter caseQualifiedName(QualifiedName object) {
-				return createQualifiedNameAdapter();
-			}
-			@Override
-			public Adapter caseImport(Import object) {
-				return createImportAdapter();
-			}
-			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -111,34 +103,6 @@ public class DlAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createDefinitionModelAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.dl.QualifiedName <em>Qualified Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.evoal.languages.model.dl.QualifiedName
-	 * @generated
-	 */
-	public Adapter createQualifiedNameAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.dl.Import <em>Import</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.evoal.languages.model.dl.Import
-	 * @generated
-	 */
-	public Adapter createImportAdapter() {
 		return null;
 	}
 

@@ -31,9 +31,6 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//DataDescriptionModel/descriptions"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//DataDescriptionModel/constraints"/>
     </genClasses>
-    <genClasses ecoreClass="model.ecore#//Import">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//Import/importedNamespace"/>
-    </genClasses>
     <genClasses ecoreClass="model.ecore#//DataTypeDefinition">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//DataTypeDefinition/scale"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//DataTypeDefinition/name"/>

@@ -99,38 +99,9 @@ public class DefinitionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_5() { return cRightCurlyBracketKeyword_5; }
 	}
-	public class ImportRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.dl.dsl.DefinitionLanguage.ImportRule");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cImportKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cImportedNamespaceAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cImportedNamespaceQualifiedNameParserRuleCall_1_0 = (RuleCall)cImportedNamespaceAssignment_1.eContents().get(0);
-		private final Keyword cSemicolonKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		
-		//ImportRule returns Import:
-		//    'import' importedNamespace = QualifiedName ';'
-		//;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//'import' importedNamespace = QualifiedName ';'
-		public Group getGroup() { return cGroup; }
-		
-		//'import'
-		public Keyword getImportKeyword_0() { return cImportKeyword_0; }
-		
-		//importedNamespace = QualifiedName
-		public Assignment getImportedNamespaceAssignment_1() { return cImportedNamespaceAssignment_1; }
-		
-		//QualifiedName
-		public RuleCall getImportedNamespaceQualifiedNameParserRuleCall_1_0() { return cImportedNamespaceQualifiedNameParserRuleCall_1_0; }
-		
-		//';'
-		public Keyword getSemicolonKeyword_2() { return cSemicolonKeyword_2; }
-	}
 	
 	
 	private final DefinitionModelRuleElements pDefinitionModelRule;
-	private final ImportRuleElements pImportRule;
 	
 	private final Grammar grammar;
 	
@@ -146,7 +117,6 @@ public class DefinitionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 		this.gaBaseLanguage = gaBaseLanguage;
 		this.gaTerminals = gaTerminals;
 		this.pDefinitionModelRule = new DefinitionModelRuleElements();
-		this.pImportRule = new ImportRuleElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -192,17 +162,6 @@ public class DefinitionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 	
 	public ParserRule getDefinitionModelRuleRule() {
 		return getDefinitionModelRuleAccess().getRule();
-	}
-	
-	//ImportRule returns Import:
-	//    'import' importedNamespace = QualifiedName ';'
-	//;
-	public ImportRuleElements getImportRuleAccess() {
-		return pImportRule;
-	}
-	
-	public ParserRule getImportRuleRule() {
-		return getImportRuleAccess().getRule();
 	}
 	
 	//ExpressionRule returns Expression:
@@ -737,6 +696,17 @@ public class DefinitionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 	
 	public ParserRule getParameterRuleRule() {
 		return getParameterRuleAccess().getRule();
+	}
+	
+	//ImportRule returns Import:
+	//    'import' language=STRING 'from' importedNamespace=QualifiedName ";"
+	//;
+	public BaseLanguageGrammarAccess.ImportRuleElements getImportRuleAccess() {
+		return gaBaseLanguage.getImportRuleAccess();
+	}
+	
+	public ParserRule getImportRuleRule() {
+		return getImportRuleAccess().getRule();
 	}
 	
 	//FunctionNameRule returns DefinedFunctionName:

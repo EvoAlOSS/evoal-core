@@ -73,13 +73,13 @@ public interface MllPackage extends EPackage {
 	int MACHINE_LEARNING_CONFIGURATION = 0;
 
 	/**
-	 * The feature id for the '<em><b>Uses</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Imports</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MACHINE_LEARNING_CONFIGURATION__USES = 0;
+	int MACHINE_LEARNING_CONFIGURATION__IMPORTS = 0;
 
 	/**
 	 * The feature id for the '<em><b>Definitions</b></em>' containment reference list.
@@ -599,35 +599,6 @@ public interface MllPackage extends EPackage {
 	int DEFINED_FUNCTION_NAME_FEATURE_COUNT = BasePackage.FUNCTION_NAME_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.mll.impl.UseImpl <em>Use</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.mll.impl.UseImpl
-	 * @see de.evoal.languages.model.mll.impl.MllPackageImpl#getUse()
-	 * @generated
-	 */
-	int USE = 14;
-
-	/**
-	 * The feature id for the '<em><b>Import URI</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int USE__IMPORT_URI = 0;
-
-	/**
-	 * The number of structural features of the '<em>Use</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int USE_FEATURE_COUNT = 1;
-
-
-	/**
 	 * Returns the meta object for class '{@link de.evoal.languages.model.mll.MachineLearningConfiguration <em>Machine Learning Configuration</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -638,15 +609,15 @@ public interface MllPackage extends EPackage {
 	EClass getMachineLearningConfiguration();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.mll.MachineLearningConfiguration#getUses <em>Uses</em>}'.
+	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.mll.MachineLearningConfiguration#getImports <em>Imports</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Uses</em>'.
-	 * @see de.evoal.languages.model.mll.MachineLearningConfiguration#getUses()
+	 * @return the meta object for the containment reference list '<em>Imports</em>'.
+	 * @see de.evoal.languages.model.mll.MachineLearningConfiguration#getImports()
 	 * @see #getMachineLearningConfiguration()
 	 * @generated
 	 */
-	EReference getMachineLearningConfiguration_Uses();
+	EReference getMachineLearningConfiguration_Imports();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.mll.MachineLearningConfiguration#getDefinitions <em>Definitions</em>}'.
@@ -1098,27 +1069,6 @@ public interface MllPackage extends EPackage {
 	EReference getDefinedFunctionName_Definition();
 
 	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.mll.Use <em>Use</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Use</em>'.
-	 * @see de.evoal.languages.model.mll.Use
-	 * @generated
-	 */
-	EClass getUse();
-
-	/**
-	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.mll.Use#getImportURI <em>Import URI</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Import URI</em>'.
-	 * @see de.evoal.languages.model.mll.Use#getImportURI()
-	 * @see #getUse()
-	 * @generated
-	 */
-	EAttribute getUse_ImportURI();
-
-	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1151,12 +1101,12 @@ public interface MllPackage extends EPackage {
 		EClass MACHINE_LEARNING_CONFIGURATION = eINSTANCE.getMachineLearningConfiguration();
 
 		/**
-		 * The meta object literal for the '<em><b>Uses</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Imports</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference MACHINE_LEARNING_CONFIGURATION__USES = eINSTANCE.getMachineLearningConfiguration_Uses();
+		EReference MACHINE_LEARNING_CONFIGURATION__IMPORTS = eINSTANCE.getMachineLearningConfiguration_Imports();
 
 		/**
 		 * The meta object literal for the '<em><b>Definitions</b></em>' containment reference list feature.
@@ -1519,24 +1469,6 @@ public interface MllPackage extends EPackage {
 		 * @generated
 		 */
 		EReference DEFINED_FUNCTION_NAME__DEFINITION = eINSTANCE.getDefinedFunctionName_Definition();
-
-		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.mll.impl.UseImpl <em>Use</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.mll.impl.UseImpl
-		 * @see de.evoal.languages.model.mll.impl.MllPackageImpl#getUse()
-		 * @generated
-		 */
-		EClass USE = eINSTANCE.getUse();
-
-		/**
-		 * The meta object literal for the '<em><b>Import URI</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute USE__IMPORT_URI = eINSTANCE.getUse_ImportURI();
 
 	}
 

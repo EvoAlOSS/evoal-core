@@ -226,6 +226,10 @@ ParameterRule returns Parameter:
 	type = TypeRule name = StringOrId
 ;
 
+ImportRule returns Import:
+	'import' language=STRING 'from' importedNamespace=QualifiedName ";"
+;
+
 
 FunctionNameRule returns DefinedFunctionName:
 	definition = [FunctionDefinition|QualifiedName]

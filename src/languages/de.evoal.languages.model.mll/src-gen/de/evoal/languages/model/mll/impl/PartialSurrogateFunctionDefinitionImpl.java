@@ -2,6 +2,7 @@
  */
 package de.evoal.languages.model.mll.impl;
 
+import de.evoal.languages.model.base.Attribute;
 import de.evoal.languages.model.base.TypeDefinition;
 import de.evoal.languages.model.ddl.DataDescription;
 import de.evoal.languages.model.mll.MllPackage;
@@ -79,7 +80,7 @@ public class PartialSurrogateFunctionDefinitionImpl extends MinimalEObjectImpl.C
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<de.evoal.languages.model.base.Attribute> parameters;
+	protected EList<Attribute> parameters;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -172,9 +173,9 @@ public class PartialSurrogateFunctionDefinitionImpl extends MinimalEObjectImpl.C
 	 * @generated
 	 */
 	@Override
-	public EList<de.evoal.languages.model.base.Attribute> getParameters() {
+	public EList<Attribute> getParameters() {
 		if (parameters == null) {
-			parameters = new EObjectContainmentEList<de.evoal.languages.model.base.Attribute>(de.evoal.languages.model.base.Attribute.class, this, MllPackage.PARTIAL_SURROGATE_FUNCTION_DEFINITION__PARAMETERS);
+			parameters = new EObjectContainmentEList<Attribute>(Attribute.class, this, MllPackage.PARTIAL_SURROGATE_FUNCTION_DEFINITION__PARAMETERS);
 		}
 		return parameters;
 	}
@@ -236,7 +237,7 @@ public class PartialSurrogateFunctionDefinitionImpl extends MinimalEObjectImpl.C
 				return;
 			case MllPackage.PARTIAL_SURROGATE_FUNCTION_DEFINITION__PARAMETERS:
 				getParameters().clear();
-				getParameters().addAll((Collection<? extends de.evoal.languages.model.base.Attribute>)newValue);
+				getParameters().addAll((Collection<? extends Attribute>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

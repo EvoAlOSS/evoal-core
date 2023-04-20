@@ -5,14 +5,10 @@ import "https://www.evoal.de/languages/ddl/1.0.0" as ddl
 import "https://www.evoal.de/languages/base/1.0.0" as base
 
 MachineLearningConfigurationRule returns MachineLearningConfiguration:
-	(uses += UseRule)*
+	(imports += ImportRule)*
 
 	(definitions+=SurrogateDefinitionRule)*
 	(statements += StatementRule)*
-;
-
-UseRule returns Use:
-	'use' importURI = STRING ';'
 ;
 
 SurrogateDefinitionRule returns SurrogateDefinition: 

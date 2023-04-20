@@ -73,12 +73,6 @@ public class OLSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case OLPackage.IMPORT: {
-				Import import_ = (Import)theEObject;
-				T result = caseImport(import_);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case OLPackage.PROBLEM: {
 				Problem problem = (Problem)theEObject;
 				T result = caseProblem(problem);
@@ -107,21 +101,6 @@ public class OLSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseOptimisationModel(OptimisationModel object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Import</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Import</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseImport(Import object) {
 		return null;
 	}
 

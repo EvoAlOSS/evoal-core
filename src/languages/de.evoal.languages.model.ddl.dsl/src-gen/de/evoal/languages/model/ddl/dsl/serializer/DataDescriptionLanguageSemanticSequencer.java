@@ -24,6 +24,7 @@ import de.evoal.languages.model.base.DoubleLiteral;
 import de.evoal.languages.model.base.ExpressionType;
 import de.evoal.languages.model.base.FloatType;
 import de.evoal.languages.model.base.FunctionDefinition;
+import de.evoal.languages.model.base.Import;
 import de.evoal.languages.model.base.Instance;
 import de.evoal.languages.model.base.InstanceType;
 import de.evoal.languages.model.base.IntType;
@@ -46,7 +47,6 @@ import de.evoal.languages.model.ddl.DataDescriptionModel;
 import de.evoal.languages.model.ddl.DataReference;
 import de.evoal.languages.model.ddl.DataTypeDefinition;
 import de.evoal.languages.model.ddl.DdlPackage;
-import de.evoal.languages.model.ddl.Import;
 import de.evoal.languages.model.ddl.SelfReference;
 import de.evoal.languages.model.ddl.TypedDataDescription;
 import de.evoal.languages.model.ddl.UntypedDataDescription;
@@ -129,6 +129,9 @@ public class DataDescriptionLanguageSemanticSequencer extends BaseLanguageSemant
 			case BasePackage.FUNCTION_DEFINITION:
 				sequence_FunctionDefinitionRule(context, (FunctionDefinition) semanticObject); 
 				return; 
+			case BasePackage.IMPORT:
+				sequence_ImportRule(context, (Import) semanticObject); 
+				return; 
 			case BasePackage.INSTANCE:
 				sequence_InstanceLiteralRule(context, (Instance) semanticObject); 
 				return; 
@@ -195,9 +198,6 @@ public class DataDescriptionLanguageSemanticSequencer extends BaseLanguageSemant
 			case DdlPackage.DATA_TYPE_DEFINITION:
 				sequence_DataTypeDefinitionRule(context, (DataTypeDefinition) semanticObject); 
 				return; 
-			case DdlPackage.IMPORT:
-				sequence_ImportRule(context, (Import) semanticObject); 
-				return; 
 			case DdlPackage.SELF_REFERENCE:
 				sequence_SelfReferenceRule(context, (SelfReference) semanticObject); 
 				return; 
@@ -259,26 +259,6 @@ public class DataDescriptionLanguageSemanticSequencer extends BaseLanguageSemant
 	 */
 	protected void sequence_DataTypeDefinitionRule(ISerializationContext context, DataTypeDefinition semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * <pre>
-	 * Contexts:
-	 *     ImportRule returns Import
-	 *
-	 * Constraint:
-	 *     importedNamespace=QualifiedName
-	 * </pre>
-	 */
-	protected void sequence_ImportRule(ISerializationContext context, Import semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, DdlPackage.Literals.IMPORT__IMPORTED_NAMESPACE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DdlPackage.Literals.IMPORT__IMPORTED_NAMESPACE));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getImportRuleAccess().getImportedNamespaceQualifiedNameParserRuleCall_1_0(), semanticObject.getImportedNamespace());
-		feeder.finish();
 	}
 	
 	

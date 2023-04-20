@@ -126,54 +126,6 @@ public interface DlPackage extends EPackage {
 	int DEFINITION_MODEL_FEATURE_COUNT = 5;
 
 	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.dl.impl.QualifiedNameImpl <em>Qualified Name</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.dl.impl.QualifiedNameImpl
-	 * @see de.evoal.languages.model.dl.impl.DlPackageImpl#getQualifiedName()
-	 * @generated
-	 */
-	int QUALIFIED_NAME = 1;
-
-	/**
-	 * The number of structural features of the '<em>Qualified Name</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int QUALIFIED_NAME_FEATURE_COUNT = 0;
-
-	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.dl.impl.ImportImpl <em>Import</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.dl.impl.ImportImpl
-	 * @see de.evoal.languages.model.dl.impl.DlPackageImpl#getImport()
-	 * @generated
-	 */
-	int IMPORT = 2;
-
-	/**
-	 * The feature id for the '<em><b>Imported Namespace</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IMPORT__IMPORTED_NAMESPACE = 0;
-
-	/**
-	 * The number of structural features of the '<em>Import</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IMPORT_FEATURE_COUNT = 1;
-
-
-	/**
 	 * Returns the meta object for class '{@link de.evoal.languages.model.dl.DefinitionModel <em>Definition Model</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -237,37 +189,6 @@ public interface DlPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getDefinitionModel_Constants();
-
-	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.dl.QualifiedName <em>Qualified Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Qualified Name</em>'.
-	 * @see de.evoal.languages.model.dl.QualifiedName
-	 * @generated
-	 */
-	EClass getQualifiedName();
-
-	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.dl.Import <em>Import</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Import</em>'.
-	 * @see de.evoal.languages.model.dl.Import
-	 * @generated
-	 */
-	EClass getImport();
-
-	/**
-	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.dl.Import#getImportedNamespace <em>Imported Namespace</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Imported Namespace</em>'.
-	 * @see de.evoal.languages.model.dl.Import#getImportedNamespace()
-	 * @see #getImport()
-	 * @generated
-	 */
-	EAttribute getImport_ImportedNamespace();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -340,34 +261,6 @@ public interface DlPackage extends EPackage {
 		 * @generated
 		 */
 		EReference DEFINITION_MODEL__CONSTANTS = eINSTANCE.getDefinitionModel_Constants();
-
-		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.dl.impl.QualifiedNameImpl <em>Qualified Name</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.dl.impl.QualifiedNameImpl
-		 * @see de.evoal.languages.model.dl.impl.DlPackageImpl#getQualifiedName()
-		 * @generated
-		 */
-		EClass QUALIFIED_NAME = eINSTANCE.getQualifiedName();
-
-		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.dl.impl.ImportImpl <em>Import</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.dl.impl.ImportImpl
-		 * @see de.evoal.languages.model.dl.impl.DlPackageImpl#getImport()
-		 * @generated
-		 */
-		EClass IMPORT = eINSTANCE.getImport();
-
-		/**
-		 * The meta object literal for the '<em><b>Imported Namespace</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute IMPORT__IMPORTED_NAMESPACE = eINSTANCE.getImport_ImportedNamespace();
 
 	}
 

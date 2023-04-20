@@ -47,7 +47,7 @@ public class ConfigurationImpl extends MinimalEObjectImpl.Container implements C
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Import> imports;
+	protected EList<de.evoal.languages.model.base.Import> imports;
 
 	/**
 	 * The cached value of the '{@link #getPipelines() <em>Pipelines</em>}' containment reference list.
@@ -94,9 +94,9 @@ public class ConfigurationImpl extends MinimalEObjectImpl.Container implements C
 	 * @generated
 	 */
 	@Override
-	public EList<Import> getImports() {
+	public EList<de.evoal.languages.model.base.Import> getImports() {
 		if (imports == null) {
-			imports = new EObjectContainmentEList<Import>(Import.class, this, GeneratorPackage.CONFIGURATION__IMPORTS);
+			imports = new EObjectContainmentEList<de.evoal.languages.model.base.Import>(de.evoal.languages.model.base.Import.class, this, GeneratorPackage.CONFIGURATION__IMPORTS);
 		}
 		return imports;
 	}
@@ -174,7 +174,7 @@ public class ConfigurationImpl extends MinimalEObjectImpl.Container implements C
 		switch (featureID) {
 			case GeneratorPackage.CONFIGURATION__IMPORTS:
 				getImports().clear();
-				getImports().addAll((Collection<? extends Import>)newValue);
+				getImports().addAll((Collection<? extends de.evoal.languages.model.base.Import>)newValue);
 				return;
 			case GeneratorPackage.CONFIGURATION__PIPELINES:
 				getPipelines().clear();

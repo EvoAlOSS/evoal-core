@@ -104,34 +104,6 @@ public interface GeneratorPackage extends EPackage {
 	int CONFIGURATION_FEATURE_COUNT = 3;
 
 	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.generator.impl.ImportImpl <em>Import</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.generator.impl.ImportImpl
-	 * @see de.evoal.languages.model.generator.impl.GeneratorPackageImpl#getImport()
-	 * @generated
-	 */
-	int IMPORT = 1;
-
-	/**
-	 * The feature id for the '<em><b>Imported Namespace</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IMPORT__IMPORTED_NAMESPACE = 0;
-
-	/**
-	 * The number of structural features of the '<em>Import</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IMPORT_FEATURE_COUNT = 1;
-
-	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.generator.impl.PipelineDefinitionImpl <em>Pipeline Definition</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -139,7 +111,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see de.evoal.languages.model.generator.impl.GeneratorPackageImpl#getPipelineDefinition()
 	 * @generated
 	 */
-	int PIPELINE_DEFINITION = 2;
+	int PIPELINE_DEFINITION = 1;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -176,7 +148,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see de.evoal.languages.model.generator.impl.GeneratorPackageImpl#getStep()
 	 * @generated
 	 */
-	int STEP = 3;
+	int STEP = 2;
 
 	/**
 	 * The feature id for the '<em><b>Instance</b></em>' containment reference.
@@ -222,7 +194,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see de.evoal.languages.model.generator.impl.GeneratorPackageImpl#getStatement()
 	 * @generated
 	 */
-	int STATEMENT = 4;
+	int STATEMENT = 3;
 
 	/**
 	 * The number of structural features of the '<em>Statement</em>' class.
@@ -241,7 +213,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see de.evoal.languages.model.generator.impl.GeneratorPackageImpl#getForStatement()
 	 * @generated
 	 */
-	int FOR_STATEMENT = 5;
+	int FOR_STATEMENT = 4;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -287,7 +259,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see de.evoal.languages.model.generator.impl.GeneratorPackageImpl#getRange()
 	 * @generated
 	 */
-	int RANGE = 6;
+	int RANGE = 5;
 
 	/**
 	 * The number of structural features of the '<em>Range</em>' class.
@@ -306,7 +278,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see de.evoal.languages.model.generator.impl.GeneratorPackageImpl#getCounterRange()
 	 * @generated
 	 */
-	int COUNTER_RANGE = 7;
+	int COUNTER_RANGE = 6;
 
 	/**
 	 * The feature id for the '<em><b>Start</b></em>' attribute.
@@ -343,7 +315,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see de.evoal.languages.model.generator.impl.GeneratorPackageImpl#getPipelineArray()
 	 * @generated
 	 */
-	int PIPELINE_ARRAY = 8;
+	int PIPELINE_ARRAY = 7;
 
 	/**
 	 * The feature id for the '<em><b>References</b></em>' containment reference list.
@@ -371,7 +343,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see de.evoal.languages.model.generator.impl.GeneratorPackageImpl#getPipelineReference()
 	 * @generated
 	 */
-	int PIPELINE_REFERENCE = 9;
+	int PIPELINE_REFERENCE = 8;
 
 	/**
 	 * The number of structural features of the '<em>Pipeline Reference</em>' class.
@@ -390,7 +362,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see de.evoal.languages.model.generator.impl.GeneratorPackageImpl#getPipelineDefinitionReference()
 	 * @generated
 	 */
-	int PIPELINE_DEFINITION_REFERENCE = 10;
+	int PIPELINE_DEFINITION_REFERENCE = 9;
 
 	/**
 	 * The feature id for the '<em><b>Pipeline</b></em>' reference.
@@ -418,7 +390,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see de.evoal.languages.model.generator.impl.GeneratorPackageImpl#getVariableReference()
 	 * @generated
 	 */
-	int VARIABLE_REFERENCE = 11;
+	int VARIABLE_REFERENCE = 10;
 
 	/**
 	 * The feature id for the '<em><b>Loop</b></em>' reference.
@@ -446,7 +418,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see de.evoal.languages.model.generator.impl.GeneratorPackageImpl#getApplyStatement()
 	 * @generated
 	 */
-	int APPLY_STATEMENT = 12;
+	int APPLY_STATEMENT = 11;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' attribute.
@@ -527,27 +499,6 @@ public interface GeneratorPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getConfiguration_Statements();
-
-	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.generator.Import <em>Import</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Import</em>'.
-	 * @see de.evoal.languages.model.generator.Import
-	 * @generated
-	 */
-	EClass getImport();
-
-	/**
-	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.generator.Import#getImportedNamespace <em>Imported Namespace</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Imported Namespace</em>'.
-	 * @see de.evoal.languages.model.generator.Import#getImportedNamespace()
-	 * @see #getImport()
-	 * @generated
-	 */
-	EAttribute getImport_ImportedNamespace();
 
 	/**
 	 * Returns the meta object for class '{@link de.evoal.languages.model.generator.PipelineDefinition <em>Pipeline Definition</em>}'.
@@ -890,24 +841,6 @@ public interface GeneratorPackage extends EPackage {
 		 * @generated
 		 */
 		EReference CONFIGURATION__STATEMENTS = eINSTANCE.getConfiguration_Statements();
-
-		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.generator.impl.ImportImpl <em>Import</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.generator.impl.ImportImpl
-		 * @see de.evoal.languages.model.generator.impl.GeneratorPackageImpl#getImport()
-		 * @generated
-		 */
-		EClass IMPORT = eINSTANCE.getImport();
-
-		/**
-		 * The meta object literal for the '<em><b>Imported Namespace</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute IMPORT__IMPORTED_NAMESPACE = eINSTANCE.getImport_ImportedNamespace();
 
 		/**
 		 * The meta object literal for the '{@link de.evoal.languages.model.generator.impl.PipelineDefinitionImpl <em>Pipeline Definition</em>}' class.

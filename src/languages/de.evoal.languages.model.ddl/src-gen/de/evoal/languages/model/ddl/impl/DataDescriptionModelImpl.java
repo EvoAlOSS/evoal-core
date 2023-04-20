@@ -4,12 +4,11 @@ package de.evoal.languages.model.ddl.impl;
 
 import de.evoal.languages.model.base.Expression;
 
+import de.evoal.languages.model.base.Import;
 import de.evoal.languages.model.ddl.DataDescription;
 import de.evoal.languages.model.ddl.DataDescriptionModel;
 import de.evoal.languages.model.ddl.DataTypeDefinition;
 import de.evoal.languages.model.ddl.DdlPackage;
-import de.evoal.languages.model.ddl.Import;
-
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;

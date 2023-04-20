@@ -58,7 +58,6 @@ public class OLFactoryImpl extends EFactoryImpl implements OLFactory {
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case OLPackage.OPTIMISATION_MODEL: return createOptimisationModel();
-			case OLPackage.IMPORT: return createImport();
 			case OLPackage.PROBLEM: return createProblem();
 			case OLPackage.ALGORITHM_INSTANCE: return createAlgorithmInstance();
 			default:
@@ -75,17 +74,6 @@ public class OLFactoryImpl extends EFactoryImpl implements OLFactory {
 	public OptimisationModel createOptimisationModel() {
 		OptimisationModelImpl optimisationModel = new OptimisationModelImpl();
 		return optimisationModel;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Import createImport() {
-		ImportImpl import_ = new ImportImpl();
-		return import_;
 	}
 
 	/**

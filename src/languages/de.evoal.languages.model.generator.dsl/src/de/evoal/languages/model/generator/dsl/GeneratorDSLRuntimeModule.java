@@ -3,9 +3,22 @@
  */
 package de.evoal.languages.model.generator.dsl;
 
-import org.eclipse.xtext.conversion.IValueConverterService;
-import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
+import java.util.Map;
 
+import org.eclipse.xtext.Constants;
+import org.eclipse.xtext.conversion.IValueConverterService;
+import org.eclipse.xtext.scoping.IGlobalScopeProvider;
+import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
+import org.eclipse.xtext.scoping.impl.DefaultGlobalScopeProvider;
+import org.eclipse.xtext.scoping.impl.ImportUriResolver;
+import org.eclipse.xtext.workspace.WorkspaceConfig;
+
+import com.google.inject.Binder;
+import com.google.inject.Inject;
+import com.google.inject.name.Named;
+import com.google.inject.name.Names;
+
+import de.evoal.languages.model.generator.dsl.scoping.GeneratorClasspathGlobalScopeProvider;
 import de.evoal.languages.model.generator.dsl.scoping.GeneratorDSLLocalScopeProvider;
 import de.evoal.languages.model.utils.converter.ValueConverterService;
 
@@ -21,9 +34,19 @@ public class GeneratorDSLRuntimeModule extends AbstractGeneratorDSLRuntimeModule
 								.named(AbstractDeclarativeScopeProvider.NAMED_DELEGATE))
 				.to(GeneratorDSLLocalScopeProvider.class);
 	}
+
 	
     @Override
     public Class<? extends IValueConverterService> bindIValueConverterService() {
             return ValueConverterService.class;
     }
+    
+	public Class<? extends IGlobalScopeProvider> bindIGlobalScopeProvider() {
+		if(System.getProperty("osgi.os") != null) {
+			return DefaultGlobalScopeProvider.class;
+		} else {
+			return GeneratorClasspathGlobalScopeProvider.class;
+		}
+	}
+    
 }

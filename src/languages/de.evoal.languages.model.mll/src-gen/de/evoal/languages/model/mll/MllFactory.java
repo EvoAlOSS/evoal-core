@@ -130,15 +130,6 @@ public interface MllFactory extends EFactory {
 	DefinedFunctionName createDefinedFunctionName();
 
 	/**
-	 * Returns a new object of class '<em>Use</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Use</em>'.
-	 * @generated
-	 */
-	Use createUse();
-
-	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

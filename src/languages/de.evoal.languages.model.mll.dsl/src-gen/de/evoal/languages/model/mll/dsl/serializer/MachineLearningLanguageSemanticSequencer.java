@@ -24,6 +24,7 @@ import de.evoal.languages.model.base.DoubleLiteral;
 import de.evoal.languages.model.base.ExpressionType;
 import de.evoal.languages.model.base.FloatType;
 import de.evoal.languages.model.base.FunctionDefinition;
+import de.evoal.languages.model.base.Import;
 import de.evoal.languages.model.base.Instance;
 import de.evoal.languages.model.base.InstanceType;
 import de.evoal.languages.model.base.IntType;
@@ -55,7 +56,6 @@ import de.evoal.languages.model.mll.PredictStatement;
 import de.evoal.languages.model.mll.StringLiteralRange;
 import de.evoal.languages.model.mll.SurrogateDefinition;
 import de.evoal.languages.model.mll.SurrogateLayerDefinition;
-import de.evoal.languages.model.mll.Use;
 import de.evoal.languages.model.mll.dsl.services.MachineLearningLanguageGrammarAccess;
 import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
@@ -134,6 +134,9 @@ public class MachineLearningLanguageSemanticSequencer extends InstanceLanguageSe
 				return; 
 			case BasePackage.FUNCTION_DEFINITION:
 				sequence_FunctionDefinitionRule(context, (FunctionDefinition) semanticObject); 
+				return; 
+			case BasePackage.IMPORT:
+				sequence_ImportRule(context, (Import) semanticObject); 
 				return; 
 			case BasePackage.INSTANCE:
 				sequence_InstanceLiteralRule(context, (Instance) semanticObject); 
@@ -228,9 +231,6 @@ public class MachineLearningLanguageSemanticSequencer extends InstanceLanguageSe
 			case MllPackage.SURROGATE_LAYER_DEFINITION:
 				sequence_SurrogateLayerDefinitionRule(context, (SurrogateLayerDefinition) semanticObject); 
 				return; 
-			case MllPackage.USE:
-				sequence_UseRule(context, (Use) semanticObject); 
-				return; 
 			}
 		if (errorAcceptor != null)
 			errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
@@ -317,8 +317,8 @@ public class MachineLearningLanguageSemanticSequencer extends InstanceLanguageSe
 	 *
 	 * Constraint:
 	 *     (
-	 *         (uses+=UseRule* definitions+=SurrogateDefinitionRule+ statements+=StatementRule+) | 
-	 *         (uses+=UseRule* statements+=StatementRule+) | 
+	 *         (imports+=ImportRule* definitions+=SurrogateDefinitionRule+ statements+=StatementRule+) | 
+	 *         (imports+=ImportRule* statements+=StatementRule+) | 
 	 *         statements+=StatementRule+
 	 *     )?
 	 * </pre>
@@ -411,26 +411,6 @@ public class MachineLearningLanguageSemanticSequencer extends InstanceLanguageSe
 	 */
 	protected void sequence_SurrogateLayerDefinitionRule(ISerializationContext context, SurrogateLayerDefinition semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * <pre>
-	 * Contexts:
-	 *     UseRule returns Use
-	 *
-	 * Constraint:
-	 *     importURI=STRING
-	 * </pre>
-	 */
-	protected void sequence_UseRule(ISerializationContext context, Use semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, MllPackage.Literals.USE__IMPORT_URI) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MllPackage.Literals.USE__IMPORT_URI));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getUseRuleAccess().getImportURISTRINGTerminalRuleCall_1_0(), semanticObject.getImportURI());
-		feeder.finish();
 	}
 	
 	

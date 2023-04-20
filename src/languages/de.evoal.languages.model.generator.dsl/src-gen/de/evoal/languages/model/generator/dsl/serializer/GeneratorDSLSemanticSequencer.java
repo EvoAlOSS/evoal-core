@@ -23,6 +23,7 @@ import de.evoal.languages.model.base.DoubleLiteral;
 import de.evoal.languages.model.base.ExpressionType;
 import de.evoal.languages.model.base.FloatType;
 import de.evoal.languages.model.base.FunctionDefinition;
+import de.evoal.languages.model.base.Import;
 import de.evoal.languages.model.base.Instance;
 import de.evoal.languages.model.base.InstanceType;
 import de.evoal.languages.model.base.IntType;
@@ -45,7 +46,6 @@ import de.evoal.languages.model.generator.Configuration;
 import de.evoal.languages.model.generator.CounterRange;
 import de.evoal.languages.model.generator.ForStatement;
 import de.evoal.languages.model.generator.GeneratorPackage;
-import de.evoal.languages.model.generator.Import;
 import de.evoal.languages.model.generator.PipelineArray;
 import de.evoal.languages.model.generator.PipelineDefinition;
 import de.evoal.languages.model.generator.PipelineDefinitionReference;
@@ -133,6 +133,9 @@ public class GeneratorDSLSemanticSequencer extends InstanceLanguageSemanticSeque
 			case BasePackage.FUNCTION_DEFINITION:
 				sequence_FunctionDefinitionRule(context, (FunctionDefinition) semanticObject); 
 				return; 
+			case BasePackage.IMPORT:
+				sequence_ImportRule(context, (Import) semanticObject); 
+				return; 
 			case BasePackage.INSTANCE:
 				sequence_InstanceLiteralRule(context, (Instance) semanticObject); 
 				return; 
@@ -201,9 +204,6 @@ public class GeneratorDSLSemanticSequencer extends InstanceLanguageSemanticSeque
 				return; 
 			case GeneratorPackage.FOR_STATEMENT:
 				sequence_ForStatementRule(context, (ForStatement) semanticObject); 
-				return; 
-			case GeneratorPackage.IMPORT:
-				sequence_ImportRule(context, (Import) semanticObject); 
 				return; 
 			case GeneratorPackage.PIPELINE_ARRAY:
 				sequence_PipelineArrayRule(context, (PipelineArray) semanticObject); 
@@ -300,26 +300,6 @@ public class GeneratorDSLSemanticSequencer extends InstanceLanguageSemanticSeque
 	 */
 	protected void sequence_ForStatementRule(ISerializationContext context, ForStatement semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * <pre>
-	 * Contexts:
-	 *     ImportRule returns Import
-	 *
-	 * Constraint:
-	 *     importedNamespace=QualifiedName
-	 * </pre>
-	 */
-	protected void sequence_ImportRule(ISerializationContext context, Import semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, GeneratorPackage.Literals.IMPORT__IMPORTED_NAMESPACE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, GeneratorPackage.Literals.IMPORT__IMPORTED_NAMESPACE));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getImportRuleAccess().getImportedNamespaceQualifiedNameParserRuleCall_1_0(), semanticObject.getImportedNamespace());
-		feeder.finish();
 	}
 	
 	

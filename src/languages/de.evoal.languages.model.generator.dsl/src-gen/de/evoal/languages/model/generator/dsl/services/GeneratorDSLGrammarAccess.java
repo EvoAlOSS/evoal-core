@@ -67,34 +67,6 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 		//StatementRule
 		public RuleCall getStatementsStatementRuleParserRuleCall_2_0() { return cStatementsStatementRuleParserRuleCall_2_0; }
 	}
-	public class ImportRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.generator.dsl.GeneratorDSL.ImportRule");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cImportKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cImportedNamespaceAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cImportedNamespaceQualifiedNameParserRuleCall_1_0 = (RuleCall)cImportedNamespaceAssignment_1.eContents().get(0);
-		private final Keyword cSemicolonKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		
-		//ImportRule returns Import:
-		//    'import' importedNamespace = QualifiedName ';'
-		//;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//'import' importedNamespace = QualifiedName ';'
-		public Group getGroup() { return cGroup; }
-		
-		//'import'
-		public Keyword getImportKeyword_0() { return cImportKeyword_0; }
-		
-		//importedNamespace = QualifiedName
-		public Assignment getImportedNamespaceAssignment_1() { return cImportedNamespaceAssignment_1; }
-		
-		//QualifiedName
-		public RuleCall getImportedNamespaceQualifiedNameParserRuleCall_1_0() { return cImportedNamespaceQualifiedNameParserRuleCall_1_0; }
-		
-		//';'
-		public Keyword getSemicolonKeyword_2() { return cSemicolonKeyword_2; }
-	}
 	public class PipelineDefinitionRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.generator.dsl.GeneratorDSL.PipelineDefinitionRule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -625,7 +597,6 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 	
 	
 	private final ConfigurationRuleElements pConfigurationRule;
-	private final ImportRuleElements pImportRule;
 	private final PipelineDefinitionRuleElements pPipelineDefinitionRule;
 	private final StepRuleElements pStepRule;
 	private final StatementRuleElements pStatementRule;
@@ -656,7 +627,6 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 		this.gaBaseLanguage = gaBaseLanguage;
 		this.gaTerminals = gaTerminals;
 		this.pConfigurationRule = new ConfigurationRuleElements();
-		this.pImportRule = new ImportRuleElements();
 		this.pPipelineDefinitionRule = new PipelineDefinitionRuleElements();
 		this.pStepRule = new StepRuleElements();
 		this.pStatementRule = new StatementRuleElements();
@@ -716,17 +686,6 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 	
 	public ParserRule getConfigurationRuleRule() {
 		return getConfigurationRuleAccess().getRule();
-	}
-	
-	//ImportRule returns Import:
-	//    'import' importedNamespace = QualifiedName ';'
-	//;
-	public ImportRuleElements getImportRuleAccess() {
-		return pImportRule;
-	}
-	
-	public ParserRule getImportRuleRule() {
-		return getImportRuleAccess().getRule();
 	}
 	
 	//PipelineDefinitionRule returns PipelineDefinition:
@@ -1402,6 +1361,17 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 	
 	public ParserRule getParameterRuleRule() {
 		return getParameterRuleAccess().getRule();
+	}
+	
+	//ImportRule returns Import:
+	//    'import' language=STRING 'from' importedNamespace=QualifiedName ";"
+	//;
+	public BaseLanguageGrammarAccess.ImportRuleElements getImportRuleAccess() {
+		return gaBaseLanguage.getImportRuleAccess();
+	}
+	
+	public ParserRule getImportRuleRule() {
+		return getImportRuleAccess().getRule();
 	}
 	
 	//FunctionNameRule returns DefinedFunctionName:

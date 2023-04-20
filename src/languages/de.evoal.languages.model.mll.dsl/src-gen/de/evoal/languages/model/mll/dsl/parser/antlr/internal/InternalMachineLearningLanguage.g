@@ -87,18 +87,18 @@ ruleMachineLearningConfigurationRule returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getMachineLearningConfigurationRuleAccess().getUsesUseRuleParserRuleCall_0_0());
+					newCompositeNode(grammarAccess.getMachineLearningConfigurationRuleAccess().getImportsImportRuleParserRuleCall_0_0());
 				}
-				lv_uses_0_0=ruleUseRule
+				lv_imports_0_0=ruleImportRule
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getMachineLearningConfigurationRuleRule());
 					}
 					add(
 						$current,
-						"uses",
-						lv_uses_0_0,
-						"de.evoal.languages.model.mll.dsl.MachineLearningLanguage.UseRule");
+						"imports",
+						lv_imports_0_0,
+						"de.evoal.languages.model.base.dsl.BaseLanguage.ImportRule");
 					afterParserOrEnumRuleCall();
 				}
 			)
@@ -141,51 +141,6 @@ ruleMachineLearningConfigurationRule returns [EObject current=null]
 				}
 			)
 		)*
-	)
-;
-
-// Entry rule entryRuleUseRule
-entryRuleUseRule returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getUseRuleRule()); }
-	iv_ruleUseRule=ruleUseRule
-	{ $current=$iv_ruleUseRule.current; }
-	EOF;
-
-// Rule UseRule
-ruleUseRule returns [EObject current=null]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
-	(
-		otherlv_0='use'
-		{
-			newLeafNode(otherlv_0, grammarAccess.getUseRuleAccess().getUseKeyword_0());
-		}
-		(
-			(
-				lv_importURI_1_0=RULE_STRING
-				{
-					newLeafNode(lv_importURI_1_0, grammarAccess.getUseRuleAccess().getImportURISTRINGTerminalRuleCall_1_0());
-				}
-				{
-					if ($current==null) {
-						$current = createModelElement(grammarAccess.getUseRuleRule());
-					}
-					setWithLastConsumed(
-						$current,
-						"importURI",
-						lv_importURI_1_0,
-						"de.evoal.languages.model.base.dsl.BaseLanguage.STRING");
-				}
-			)
-		)
-		otherlv_2=';'
-		{
-			newLeafNode(otherlv_2, grammarAccess.getUseRuleAccess().getSemicolonKeyword_2());
-		}
 	)
 ;
 
@@ -3237,6 +3192,74 @@ ruleParameterRule returns [EObject current=null]
 				}
 			)
 		)
+	)
+;
+
+// Entry rule entryRuleImportRule
+entryRuleImportRule returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getImportRuleRule()); }
+	iv_ruleImportRule=ruleImportRule
+	{ $current=$iv_ruleImportRule.current; }
+	EOF;
+
+// Rule ImportRule
+ruleImportRule returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0='import'
+		{
+			newLeafNode(otherlv_0, grammarAccess.getImportRuleAccess().getImportKeyword_0());
+		}
+		(
+			(
+				lv_language_1_0=RULE_STRING
+				{
+					newLeafNode(lv_language_1_0, grammarAccess.getImportRuleAccess().getLanguageSTRINGTerminalRuleCall_1_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getImportRuleRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"language",
+						lv_language_1_0,
+						"de.evoal.languages.model.base.dsl.BaseLanguage.STRING");
+				}
+			)
+		)
+		otherlv_2='from'
+		{
+			newLeafNode(otherlv_2, grammarAccess.getImportRuleAccess().getFromKeyword_2());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getImportRuleAccess().getImportedNamespaceQualifiedNameParserRuleCall_3_0());
+				}
+				lv_importedNamespace_3_0=ruleQualifiedName
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getImportRuleRule());
+					}
+					set(
+						$current,
+						"importedNamespace",
+						lv_importedNamespace_3_0,
+						"de.evoal.languages.model.base.dsl.BaseLanguage.QualifiedName");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		otherlv_4=';'
+		{
+			newLeafNode(otherlv_4, grammarAccess.getImportRuleAccess().getSemicolonKeyword_4());
+		}
 	)
 ;
 

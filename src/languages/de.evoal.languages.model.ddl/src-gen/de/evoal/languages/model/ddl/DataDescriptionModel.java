@@ -4,6 +4,7 @@ package de.evoal.languages.model.ddl;
 
 import de.evoal.languages.model.base.Expression;
 
+import de.evoal.languages.model.base.Import;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EObject;
@@ -53,7 +54,7 @@ public interface DataDescriptionModel extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Imports</b></em>' containment reference list.
-	 * The list contents are of type {@link de.evoal.languages.model.ddl.Import}.
+	 * The list contents are of type {@link de.evoal.languages.model.base.Import}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Imports</em>' containment reference list.

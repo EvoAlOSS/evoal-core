@@ -1374,6 +1374,46 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		//StringOrId
 		public RuleCall getNameStringOrIdParserRuleCall_1_0() { return cNameStringOrIdParserRuleCall_1_0; }
 	}
+	public class ImportRuleElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.base.dsl.BaseLanguage.ImportRule");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cImportKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cLanguageAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cLanguageSTRINGTerminalRuleCall_1_0 = (RuleCall)cLanguageAssignment_1.eContents().get(0);
+		private final Keyword cFromKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cImportedNamespaceAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cImportedNamespaceQualifiedNameParserRuleCall_3_0 = (RuleCall)cImportedNamespaceAssignment_3.eContents().get(0);
+		private final Keyword cSemicolonKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		
+		//ImportRule returns Import:
+		//    'import' language=STRING 'from' importedNamespace=QualifiedName ";"
+		//;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'import' language=STRING 'from' importedNamespace=QualifiedName ";"
+		public Group getGroup() { return cGroup; }
+		
+		//'import'
+		public Keyword getImportKeyword_0() { return cImportKeyword_0; }
+		
+		//language=STRING
+		public Assignment getLanguageAssignment_1() { return cLanguageAssignment_1; }
+		
+		//STRING
+		public RuleCall getLanguageSTRINGTerminalRuleCall_1_0() { return cLanguageSTRINGTerminalRuleCall_1_0; }
+		
+		//'from'
+		public Keyword getFromKeyword_2() { return cFromKeyword_2; }
+		
+		//importedNamespace=QualifiedName
+		public Assignment getImportedNamespaceAssignment_3() { return cImportedNamespaceAssignment_3; }
+		
+		//QualifiedName
+		public RuleCall getImportedNamespaceQualifiedNameParserRuleCall_3_0() { return cImportedNamespaceQualifiedNameParserRuleCall_3_0; }
+		
+		//";"
+		public Keyword getSemicolonKeyword_4() { return cSemicolonKeyword_4; }
+	}
 	public class FunctionNameRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.base.dsl.BaseLanguage.FunctionNameRule");
 		private final Assignment cDefinitionAssignment = (Assignment)rule.eContents().get(1);
@@ -1832,6 +1872,7 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 	private final FunctionDefinitionRuleElements pFunctionDefinitionRule;
 	private final ConstantDefinitionRuleElements pConstantDefinitionRule;
 	private final ParameterRuleElements pParameterRule;
+	private final ImportRuleElements pImportRule;
 	private final FunctionNameRuleElements pFunctionNameRule;
 	private final QualifiedNameElements pQualifiedName;
 	private final StringOrIdElements pStringOrId;
@@ -1896,6 +1937,7 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		this.pFunctionDefinitionRule = new FunctionDefinitionRuleElements();
 		this.pConstantDefinitionRule = new ConstantDefinitionRuleElements();
 		this.pParameterRule = new ParameterRuleElements();
+		this.pImportRule = new ImportRuleElements();
 		this.pFunctionNameRule = new FunctionNameRuleElements();
 		this.pQualifiedName = new QualifiedNameElements();
 		this.pStringOrId = new StringOrIdElements();
@@ -2466,6 +2508,17 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 	
 	public ParserRule getParameterRuleRule() {
 		return getParameterRuleAccess().getRule();
+	}
+	
+	//ImportRule returns Import:
+	//    'import' language=STRING 'from' importedNamespace=QualifiedName ";"
+	//;
+	public ImportRuleElements getImportRuleAccess() {
+		return pImportRule;
+	}
+	
+	public ParserRule getImportRuleRule() {
+		return getImportRuleAccess().getRule();
 	}
 	
 	//FunctionNameRule returns DefinedFunctionName:

@@ -95,6 +95,7 @@ public class BaseFactoryImpl extends EFactoryImpl implements BaseFactory {
 			case BasePackage.ARRAY: return createArray();
 			case BasePackage.INSTANCE: return createInstance();
 			case BasePackage.ATTRIBUTE: return createAttribute();
+			case BasePackage.IMPORT: return createImport();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -558,6 +559,17 @@ public class BaseFactoryImpl extends EFactoryImpl implements BaseFactory {
 	public Attribute createAttribute() {
 		AttributeImpl attribute = new AttributeImpl();
 		return attribute;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Import createImport() {
+		ImportImpl import_ = new ImportImpl();
+		return import_;
 	}
 
 	/**

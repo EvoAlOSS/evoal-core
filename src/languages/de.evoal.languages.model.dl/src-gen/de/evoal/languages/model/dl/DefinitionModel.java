@@ -5,6 +5,7 @@ package de.evoal.languages.model.dl;
 
 import de.evoal.languages.model.base.ConstantDefinition;
 import de.evoal.languages.model.base.FunctionDefinition;
+import de.evoal.languages.model.base.Import;
 import de.evoal.languages.model.base.TypeDefinition;
 
 import org.eclipse.emf.common.util.EList;
@@ -39,7 +40,7 @@ import org.eclipse.emf.ecore.EObject;
 public interface DefinitionModel extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Imports</b></em>' containment reference list.
-	 * The list contents are of type {@link de.evoal.languages.model.dl.Import}.
+	 * The list contents are of type {@link de.evoal.languages.model.base.Import}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Imports</em>' containment reference list.

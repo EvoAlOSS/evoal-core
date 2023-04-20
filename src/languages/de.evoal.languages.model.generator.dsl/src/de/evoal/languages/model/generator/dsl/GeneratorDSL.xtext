@@ -10,11 +10,6 @@ ConfigurationRule returns Configuration:
 	(statements	+= StatementRule)*
 ;
 
-ImportRule returns Import:
-	'import' importedNamespace = QualifiedName ';'
-;
-
-
 PipelineDefinitionRule returns PipelineDefinition:
 	'pipeline' name = StringOrId '['
 		steps += StepRule*

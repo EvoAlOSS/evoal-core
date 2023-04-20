@@ -32,24 +32,6 @@ public interface DlFactory extends EFactory {
 	DefinitionModel createDefinitionModel();
 
 	/**
-	 * Returns a new object of class '<em>Qualified Name</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Qualified Name</em>'.
-	 * @generated
-	 */
-	QualifiedName createQualifiedName();
-
-	/**
-	 * Returns a new object of class '<em>Import</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Import</em>'.
-	 * @generated
-	 */
-	Import createImport();
-
-	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

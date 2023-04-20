@@ -24,6 +24,7 @@ import de.evoal.languages.model.base.DoubleLiteral;
 import de.evoal.languages.model.base.ExpressionType;
 import de.evoal.languages.model.base.FloatType;
 import de.evoal.languages.model.base.FunctionDefinition;
+import de.evoal.languages.model.base.Import;
 import de.evoal.languages.model.base.Instance;
 import de.evoal.languages.model.base.InstanceType;
 import de.evoal.languages.model.base.IntType;
@@ -44,7 +45,6 @@ import de.evoal.languages.model.base.XorExpression;
 import de.evoal.languages.model.base.dsl.serializer.BaseLanguageSemanticSequencer;
 import de.evoal.languages.model.dl.DefinitionModel;
 import de.evoal.languages.model.dl.DlPackage;
-import de.evoal.languages.model.dl.Import;
 import de.evoal.languages.model.dl.dsl.services.DefinitionLanguageGrammarAccess;
 import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
@@ -53,8 +53,6 @@ import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Parameter;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.serializer.ISerializationContext;
-import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
-import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 
 @SuppressWarnings("all")
 public class DefinitionLanguageSemanticSequencer extends BaseLanguageSemanticSequencer {
@@ -124,6 +122,9 @@ public class DefinitionLanguageSemanticSequencer extends BaseLanguageSemanticSeq
 			case BasePackage.FUNCTION_DEFINITION:
 				sequence_FunctionDefinitionRule(context, (FunctionDefinition) semanticObject); 
 				return; 
+			case BasePackage.IMPORT:
+				sequence_ImportRule(context, (Import) semanticObject); 
+				return; 
 			case BasePackage.INSTANCE:
 				sequence_InstanceLiteralRule(context, (Instance) semanticObject); 
 				return; 
@@ -184,9 +185,6 @@ public class DefinitionLanguageSemanticSequencer extends BaseLanguageSemanticSeq
 			case DlPackage.DEFINITION_MODEL:
 				sequence_DefinitionModelRule(context, (DefinitionModel) semanticObject); 
 				return; 
-			case DlPackage.IMPORT:
-				sequence_ImportRule(context, (Import) semanticObject); 
-				return; 
 			}
 		if (errorAcceptor != null)
 			errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
@@ -203,26 +201,6 @@ public class DefinitionLanguageSemanticSequencer extends BaseLanguageSemanticSeq
 	 */
 	protected void sequence_DefinitionModelRule(ISerializationContext context, DefinitionModel semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * <pre>
-	 * Contexts:
-	 *     ImportRule returns Import
-	 *
-	 * Constraint:
-	 *     importedNamespace=QualifiedName
-	 * </pre>
-	 */
-	protected void sequence_ImportRule(ISerializationContext context, Import semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, DlPackage.Literals.IMPORT__IMPORTED_NAMESPACE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DlPackage.Literals.IMPORT__IMPORTED_NAMESPACE));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getImportRuleAccess().getImportedNamespaceQualifiedNameParserRuleCall_1_0(), semanticObject.getImportedNamespace());
-		feeder.finish();
 	}
 	
 	

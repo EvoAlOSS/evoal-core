@@ -73,10 +73,6 @@ public class OLAdapterFactory extends AdapterFactoryImpl {
 				return createOptimisationModelAdapter();
 			}
 			@Override
-			public Adapter caseImport(Import object) {
-				return createImportAdapter();
-			}
-			@Override
 			public Adapter caseProblem(Problem object) {
 				return createProblemAdapter();
 			}
@@ -115,20 +111,6 @@ public class OLAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createOptimisationModelAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.ol.Import <em>Import</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.evoal.languages.model.ol.Import
-	 * @generated
-	 */
-	public Adapter createImportAdapter() {
 		return null;
 	}
 

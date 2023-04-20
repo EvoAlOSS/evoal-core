@@ -53,7 +53,7 @@ public class DefinitionModelImpl extends MinimalEObjectImpl.Container implements
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Import> imports;
+	protected EList<de.evoal.languages.model.base.Import> imports;
 
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -130,9 +130,9 @@ public class DefinitionModelImpl extends MinimalEObjectImpl.Container implements
 	 * @generated
 	 */
 	@Override
-	public EList<Import> getImports() {
+	public EList<de.evoal.languages.model.base.Import> getImports() {
 		if (imports == null) {
-			imports = new EObjectContainmentEList<Import>(Import.class, this, DlPackage.DEFINITION_MODEL__IMPORTS);
+			imports = new EObjectContainmentEList<de.evoal.languages.model.base.Import>(de.evoal.languages.model.base.Import.class, this, DlPackage.DEFINITION_MODEL__IMPORTS);
 		}
 		return imports;
 	}
@@ -252,7 +252,7 @@ public class DefinitionModelImpl extends MinimalEObjectImpl.Container implements
 		switch (featureID) {
 			case DlPackage.DEFINITION_MODEL__IMPORTS:
 				getImports().clear();
-				getImports().addAll((Collection<? extends Import>)newValue);
+				getImports().addAll((Collection<? extends de.evoal.languages.model.base.Import>)newValue);
 				return;
 			case DlPackage.DEFINITION_MODEL__NAME:
 				setName((String)newValue);

@@ -44,9 +44,8 @@ public class OptimisationLanguageParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getMultiplyDivideModuloOperatorRuleAccess().getAlternatives(), "rule__MultiplyDivideModuloOperatorRule__Alternatives");
 			builder.put(grammarAccess.getFactorRuleAccess().getAlternatives(), "rule__FactorRule__Alternatives");
 			builder.put(grammarAccess.getOptimisationModelRuleAccess().getGroup(), "rule__OptimisationModelRule__Group__0");
-			builder.put(grammarAccess.getImportRuleAccess().getGroup(), "rule__ImportRule__Group__0");
 			builder.put(grammarAccess.getProblemRuleAccess().getGroup(), "rule__ProblemRule__Group__0");
-			builder.put(grammarAccess.getProblemRuleAccess().getGroup_2(), "rule__ProblemRule__Group_2__0");
+			builder.put(grammarAccess.getProblemRuleAccess().getGroup_4(), "rule__ProblemRule__Group_4__0");
 			builder.put(grammarAccess.getAlgorithmInstanceRuleAccess().getGroup(), "rule__AlgorithmInstanceRule__Group__0");
 			builder.put(grammarAccess.getAlgorithmInstanceRuleAccess().getGroup_6(), "rule__AlgorithmInstanceRule__Group_6__0");
 			builder.put(grammarAccess.getDataReferenceRuleAccess().getGroup(), "rule__DataReferenceRule__Group__0");
@@ -97,14 +96,15 @@ public class OptimisationLanguageParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getFunctionDefinitionRuleAccess().getGroup_4_1(), "rule__FunctionDefinitionRule__Group_4_1__0");
 			builder.put(grammarAccess.getConstantDefinitionRuleAccess().getGroup(), "rule__ConstantDefinitionRule__Group__0");
 			builder.put(grammarAccess.getParameterRuleAccess().getGroup(), "rule__ParameterRule__Group__0");
+			builder.put(grammarAccess.getImportRuleAccess().getGroup(), "rule__ImportRule__Group__0");
 			builder.put(grammarAccess.getQualifiedNameAccess().getGroup(), "rule__QualifiedName__Group__0");
 			builder.put(grammarAccess.getQualifiedNameAccess().getGroup_1(), "rule__QualifiedName__Group_1__0");
 			builder.put(grammarAccess.getOptimisationModelRuleAccess().getImportsAssignment_0(), "rule__OptimisationModelRule__ImportsAssignment_0");
 			builder.put(grammarAccess.getOptimisationModelRuleAccess().getProblemAssignment_1(), "rule__OptimisationModelRule__ProblemAssignment_1");
 			builder.put(grammarAccess.getOptimisationModelRuleAccess().getAlgorithmAssignment_2(), "rule__OptimisationModelRule__AlgorithmAssignment_2");
-			builder.put(grammarAccess.getImportRuleAccess().getImportedNamespaceAssignment_1(), "rule__ImportRule__ImportedNamespaceAssignment_1");
-			builder.put(grammarAccess.getProblemRuleAccess().getProblemAssignment_1(), "rule__ProblemRule__ProblemAssignment_1");
-			builder.put(grammarAccess.getProblemRuleAccess().getDocumentationAssignment_2_2(), "rule__ProblemRule__DocumentationAssignment_2_2");
+			builder.put(grammarAccess.getProblemRuleAccess().getNameAssignment_1(), "rule__ProblemRule__NameAssignment_1");
+			builder.put(grammarAccess.getProblemRuleAccess().getProblemAssignment_3(), "rule__ProblemRule__ProblemAssignment_3");
+			builder.put(grammarAccess.getProblemRuleAccess().getDocumentationAssignment_4_2(), "rule__ProblemRule__DocumentationAssignment_4_2");
 			builder.put(grammarAccess.getAlgorithmInstanceRuleAccess().getProblemAssignment_2(), "rule__AlgorithmInstanceRule__ProblemAssignment_2");
 			builder.put(grammarAccess.getAlgorithmInstanceRuleAccess().getAlgorithmAssignment_5(), "rule__AlgorithmInstanceRule__AlgorithmAssignment_5");
 			builder.put(grammarAccess.getAlgorithmInstanceRuleAccess().getDocumentationAssignment_6_2(), "rule__AlgorithmInstanceRule__DocumentationAssignment_6_2");
@@ -166,6 +166,8 @@ public class OptimisationLanguageParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getConstantDefinitionRuleAccess().getValueAssignment_4(), "rule__ConstantDefinitionRule__ValueAssignment_4");
 			builder.put(grammarAccess.getParameterRuleAccess().getTypeAssignment_0(), "rule__ParameterRule__TypeAssignment_0");
 			builder.put(grammarAccess.getParameterRuleAccess().getNameAssignment_1(), "rule__ParameterRule__NameAssignment_1");
+			builder.put(grammarAccess.getImportRuleAccess().getLanguageAssignment_1(), "rule__ImportRule__LanguageAssignment_1");
+			builder.put(grammarAccess.getImportRuleAccess().getImportedNamespaceAssignment_3(), "rule__ImportRule__ImportedNamespaceAssignment_3");
 			builder.put(grammarAccess.getFunctionNameRuleAccess().getDefinitionAssignment(), "rule__FunctionNameRule__DefinitionAssignment");
 		}
 	}

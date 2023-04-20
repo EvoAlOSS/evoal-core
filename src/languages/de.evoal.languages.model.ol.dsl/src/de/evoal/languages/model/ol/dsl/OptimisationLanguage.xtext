@@ -14,12 +14,8 @@ OptimisationModelRule returns OptimisationModel:
 	(algorithm = AlgorithmInstanceRule)?
 ;
 
-ImportRule returns Import:
-	'import' importedNamespace = QualifiedName ';'
-;
-
 ProblemRule returns Problem:
-	"declare" //name = StringOrId "as"
+	"declare" name = StringOrId "as"
 		problem = InstanceLiteralRule
 	("documenting" ":=" documentation = ArrayRule ';')?
 ;

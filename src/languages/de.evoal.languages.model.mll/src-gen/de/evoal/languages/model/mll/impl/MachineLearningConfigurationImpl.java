@@ -2,12 +2,11 @@
  */
 package de.evoal.languages.model.mll.impl;
 
+import de.evoal.languages.model.base.Import;
 import de.evoal.languages.model.mll.MachineLearningConfiguration;
 import de.evoal.languages.model.mll.MllPackage;
 import de.evoal.languages.model.mll.Statement;
 import de.evoal.languages.model.mll.SurrogateDefinition;
-import de.evoal.languages.model.mll.Use;
-
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -30,7 +29,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link de.evoal.languages.model.mll.impl.MachineLearningConfigurationImpl#getUses <em>Uses</em>}</li>
+ *   <li>{@link de.evoal.languages.model.mll.impl.MachineLearningConfigurationImpl#getImports <em>Imports</em>}</li>
  *   <li>{@link de.evoal.languages.model.mll.impl.MachineLearningConfigurationImpl#getDefinitions <em>Definitions</em>}</li>
  *   <li>{@link de.evoal.languages.model.mll.impl.MachineLearningConfigurationImpl#getStatements <em>Statements</em>}</li>
  * </ul>
@@ -39,14 +38,14 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class MachineLearningConfigurationImpl extends MinimalEObjectImpl.Container implements MachineLearningConfiguration {
 	/**
-	 * The cached value of the '{@link #getUses() <em>Uses</em>}' containment reference list.
+	 * The cached value of the '{@link #getImports() <em>Imports</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getUses()
+	 * @see #getImports()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Use> uses;
+	protected EList<Import> imports;
 
 	/**
 	 * The cached value of the '{@link #getDefinitions() <em>Definitions</em>}' containment reference list.
@@ -93,11 +92,11 @@ public class MachineLearningConfigurationImpl extends MinimalEObjectImpl.Contain
 	 * @generated
 	 */
 	@Override
-	public EList<Use> getUses() {
-		if (uses == null) {
-			uses = new EObjectContainmentEList<Use>(Use.class, this, MllPackage.MACHINE_LEARNING_CONFIGURATION__USES);
+	public EList<Import> getImports() {
+		if (imports == null) {
+			imports = new EObjectContainmentEList<Import>(Import.class, this, MllPackage.MACHINE_LEARNING_CONFIGURATION__IMPORTS);
 		}
-		return uses;
+		return imports;
 	}
 
 	/**
@@ -134,8 +133,8 @@ public class MachineLearningConfigurationImpl extends MinimalEObjectImpl.Contain
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case MllPackage.MACHINE_LEARNING_CONFIGURATION__USES:
-				return ((InternalEList<?>)getUses()).basicRemove(otherEnd, msgs);
+			case MllPackage.MACHINE_LEARNING_CONFIGURATION__IMPORTS:
+				return ((InternalEList<?>)getImports()).basicRemove(otherEnd, msgs);
 			case MllPackage.MACHINE_LEARNING_CONFIGURATION__DEFINITIONS:
 				return ((InternalEList<?>)getDefinitions()).basicRemove(otherEnd, msgs);
 			case MllPackage.MACHINE_LEARNING_CONFIGURATION__STATEMENTS:
@@ -152,8 +151,8 @@ public class MachineLearningConfigurationImpl extends MinimalEObjectImpl.Contain
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case MllPackage.MACHINE_LEARNING_CONFIGURATION__USES:
-				return getUses();
+			case MllPackage.MACHINE_LEARNING_CONFIGURATION__IMPORTS:
+				return getImports();
 			case MllPackage.MACHINE_LEARNING_CONFIGURATION__DEFINITIONS:
 				return getDefinitions();
 			case MllPackage.MACHINE_LEARNING_CONFIGURATION__STATEMENTS:
@@ -171,9 +170,9 @@ public class MachineLearningConfigurationImpl extends MinimalEObjectImpl.Contain
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case MllPackage.MACHINE_LEARNING_CONFIGURATION__USES:
-				getUses().clear();
-				getUses().addAll((Collection<? extends Use>)newValue);
+			case MllPackage.MACHINE_LEARNING_CONFIGURATION__IMPORTS:
+				getImports().clear();
+				getImports().addAll((Collection<? extends Import>)newValue);
 				return;
 			case MllPackage.MACHINE_LEARNING_CONFIGURATION__DEFINITIONS:
 				getDefinitions().clear();
@@ -195,8 +194,8 @@ public class MachineLearningConfigurationImpl extends MinimalEObjectImpl.Contain
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case MllPackage.MACHINE_LEARNING_CONFIGURATION__USES:
-				getUses().clear();
+			case MllPackage.MACHINE_LEARNING_CONFIGURATION__IMPORTS:
+				getImports().clear();
 				return;
 			case MllPackage.MACHINE_LEARNING_CONFIGURATION__DEFINITIONS:
 				getDefinitions().clear();
@@ -216,8 +215,8 @@ public class MachineLearningConfigurationImpl extends MinimalEObjectImpl.Contain
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case MllPackage.MACHINE_LEARNING_CONFIGURATION__USES:
-				return uses != null && !uses.isEmpty();
+			case MllPackage.MACHINE_LEARNING_CONFIGURATION__IMPORTS:
+				return imports != null && !imports.isEmpty();
 			case MllPackage.MACHINE_LEARNING_CONFIGURATION__DEFINITIONS:
 				return definitions != null && !definitions.isEmpty();
 			case MllPackage.MACHINE_LEARNING_CONFIGURATION__STATEMENTS:

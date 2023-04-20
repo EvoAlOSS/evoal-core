@@ -181,5 +181,9 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//Attribute/definition"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//Attribute/value"/>
     </genClasses>
+    <genClasses ecoreClass="model.ecore#//Import">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//Import/language"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//Import/importedNamespace"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>

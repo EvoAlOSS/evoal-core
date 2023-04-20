@@ -124,34 +124,6 @@ public interface DdlPackage extends EPackage {
 	int DATA_DESCRIPTION_MODEL_FEATURE_COUNT = 5;
 
 	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.ddl.impl.ImportImpl <em>Import</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.ddl.impl.ImportImpl
-	 * @see de.evoal.languages.model.ddl.impl.DdlPackageImpl#getImport()
-	 * @generated
-	 */
-	int IMPORT = 1;
-
-	/**
-	 * The feature id for the '<em><b>Imported Namespace</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IMPORT__IMPORTED_NAMESPACE = 0;
-
-	/**
-	 * The number of structural features of the '<em>Import</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IMPORT_FEATURE_COUNT = 1;
-
-	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.ddl.impl.DataTypeDefinitionImpl <em>Data Type Definition</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -159,7 +131,7 @@ public interface DdlPackage extends EPackage {
 	 * @see de.evoal.languages.model.ddl.impl.DdlPackageImpl#getDataTypeDefinition()
 	 * @generated
 	 */
-	int DATA_TYPE_DEFINITION = 2;
+	int DATA_TYPE_DEFINITION = 1;
 
 	/**
 	 * The feature id for the '<em><b>Scale</b></em>' attribute.
@@ -214,7 +186,7 @@ public interface DdlPackage extends EPackage {
 	 * @see de.evoal.languages.model.ddl.impl.DdlPackageImpl#getDataDescription()
 	 * @generated
 	 */
-	int DATA_DESCRIPTION = 3;
+	int DATA_DESCRIPTION = 2;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -260,7 +232,7 @@ public interface DdlPackage extends EPackage {
 	 * @see de.evoal.languages.model.ddl.impl.DdlPackageImpl#getTypedDataDescription()
 	 * @generated
 	 */
-	int TYPED_DATA_DESCRIPTION = 4;
+	int TYPED_DATA_DESCRIPTION = 3;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -315,7 +287,7 @@ public interface DdlPackage extends EPackage {
 	 * @see de.evoal.languages.model.ddl.impl.DdlPackageImpl#getUntypedDataDescription()
 	 * @generated
 	 */
-	int UNTYPED_DATA_DESCRIPTION = 5;
+	int UNTYPED_DATA_DESCRIPTION = 4;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -370,7 +342,7 @@ public interface DdlPackage extends EPackage {
 	 * @see de.evoal.languages.model.ddl.impl.DdlPackageImpl#getDataReference()
 	 * @generated
 	 */
-	int DATA_REFERENCE = 6;
+	int DATA_REFERENCE = 5;
 
 	/**
 	 * The feature id for the '<em><b>Definition</b></em>' reference.
@@ -398,7 +370,7 @@ public interface DdlPackage extends EPackage {
 	 * @see de.evoal.languages.model.ddl.impl.DdlPackageImpl#getSelfReference()
 	 * @generated
 	 */
-	int SELF_REFERENCE = 7;
+	int SELF_REFERENCE = 6;
 
 	/**
 	 * The number of structural features of the '<em>Self Reference</em>' class.
@@ -417,7 +389,7 @@ public interface DdlPackage extends EPackage {
 	 * @see de.evoal.languages.model.ddl.impl.DdlPackageImpl#getScaleType()
 	 * @generated
 	 */
-	int SCALE_TYPE = 8;
+	int SCALE_TYPE = 7;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.ddl.RepresentationType <em>Representation Type</em>}' enum.
@@ -427,7 +399,7 @@ public interface DdlPackage extends EPackage {
 	 * @see de.evoal.languages.model.ddl.impl.DdlPackageImpl#getRepresentationType()
 	 * @generated
 	 */
-	int REPRESENTATION_TYPE = 9;
+	int REPRESENTATION_TYPE = 8;
 
 
 	/**
@@ -494,27 +466,6 @@ public interface DdlPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getDataDescriptionModel_Constraints();
-
-	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.ddl.Import <em>Import</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Import</em>'.
-	 * @see de.evoal.languages.model.ddl.Import
-	 * @generated
-	 */
-	EClass getImport();
-
-	/**
-	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.ddl.Import#getImportedNamespace <em>Imported Namespace</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Imported Namespace</em>'.
-	 * @see de.evoal.languages.model.ddl.Import#getImportedNamespace()
-	 * @see #getImport()
-	 * @generated
-	 */
-	EAttribute getImport_ImportedNamespace();
 
 	/**
 	 * Returns the meta object for class '{@link de.evoal.languages.model.ddl.DataTypeDefinition <em>Data Type Definition</em>}'.
@@ -777,24 +728,6 @@ public interface DdlPackage extends EPackage {
 		 * @generated
 		 */
 		EReference DATA_DESCRIPTION_MODEL__CONSTRAINTS = eINSTANCE.getDataDescriptionModel_Constraints();
-
-		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.ddl.impl.ImportImpl <em>Import</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.ddl.impl.ImportImpl
-		 * @see de.evoal.languages.model.ddl.impl.DdlPackageImpl#getImport()
-		 * @generated
-		 */
-		EClass IMPORT = eINSTANCE.getImport();
-
-		/**
-		 * The meta object literal for the '<em><b>Imported Namespace</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute IMPORT__IMPORTED_NAMESPACE = eINSTANCE.getImport_ImportedNamespace();
 
 		/**
 		 * The meta object literal for the '{@link de.evoal.languages.model.ddl.impl.DataTypeDefinitionImpl <em>Data Type Definition</em>}' class.

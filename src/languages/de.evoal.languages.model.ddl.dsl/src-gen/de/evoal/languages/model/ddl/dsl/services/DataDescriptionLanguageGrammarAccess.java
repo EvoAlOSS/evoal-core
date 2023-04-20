@@ -57,7 +57,7 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 		
 		//DataDescriptionModelRule returns DataDescriptionModel:
 		//    {DataDescriptionModel}
-		//    (imports += ImportRule)*
+		//    (imports += BaseLanguage::ImportRule)*
 		//    'module' name = QualifiedName '{'
 		//        ('types' ':' (types += DataTypeDefinitionRule)* )?
 		//        ('data' ':' (descriptions += DataDescriptionRule)* )?
@@ -67,7 +67,7 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{DataDescriptionModel}
-		//(imports += ImportRule)*
+		//(imports += BaseLanguage::ImportRule)*
 		//'module' name = QualifiedName '{'
 		//    ('types' ':' (types += DataTypeDefinitionRule)* )?
 		//    ('data' ':' (descriptions += DataDescriptionRule)* )?
@@ -78,10 +78,10 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 		//{DataDescriptionModel}
 		public Action getDataDescriptionModelAction_0() { return cDataDescriptionModelAction_0; }
 		
-		//(imports += ImportRule)*
+		//(imports += BaseLanguage::ImportRule)*
 		public Assignment getImportsAssignment_1() { return cImportsAssignment_1; }
 		
-		//ImportRule
+		//BaseLanguage::ImportRule
 		public RuleCall getImportsImportRuleParserRuleCall_1_0() { return cImportsImportRuleParserRuleCall_1_0; }
 		
 		//'module'
@@ -143,34 +143,6 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 		
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_8() { return cRightCurlyBracketKeyword_8; }
-	}
-	public class ImportRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.ddl.dsl.DataDescriptionLanguage.ImportRule");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cImportKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cImportedNamespaceAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cImportedNamespaceQualifiedNameParserRuleCall_1_0 = (RuleCall)cImportedNamespaceAssignment_1.eContents().get(0);
-		private final Keyword cSemicolonKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		
-		//ImportRule returns Import:
-		//    'import' importedNamespace = QualifiedName ';'
-		//;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//'import' importedNamespace = QualifiedName ';'
-		public Group getGroup() { return cGroup; }
-		
-		//'import'
-		public Keyword getImportKeyword_0() { return cImportKeyword_0; }
-		
-		//importedNamespace = QualifiedName
-		public Assignment getImportedNamespaceAssignment_1() { return cImportedNamespaceAssignment_1; }
-		
-		//QualifiedName
-		public RuleCall getImportedNamespaceQualifiedNameParserRuleCall_1_0() { return cImportedNamespaceQualifiedNameParserRuleCall_1_0; }
-		
-		//';'
-		public Keyword getSemicolonKeyword_2() { return cSemicolonKeyword_2; }
 	}
 	public class DataTypeDefinitionRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.ddl.dsl.DataDescriptionLanguage.DataTypeDefinitionRule");
@@ -615,7 +587,6 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 	}
 	
 	private final DataDescriptionModelRuleElements pDataDescriptionModelRule;
-	private final ImportRuleElements pImportRule;
 	private final ScaleTypeElements eScaleType;
 	private final RepresentationTypeElements eRepresentationType;
 	private final DataTypeDefinitionRuleElements pDataTypeDefinitionRule;
@@ -641,7 +612,6 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 		this.gaBaseLanguage = gaBaseLanguage;
 		this.gaTerminals = gaTerminals;
 		this.pDataDescriptionModelRule = new DataDescriptionModelRuleElements();
-		this.pImportRule = new ImportRuleElements();
 		this.eScaleType = new ScaleTypeElements();
 		this.eRepresentationType = new RepresentationTypeElements();
 		this.pDataTypeDefinitionRule = new DataTypeDefinitionRuleElements();
@@ -687,7 +657,7 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 	
 	//DataDescriptionModelRule returns DataDescriptionModel:
 	//    {DataDescriptionModel}
-	//    (imports += ImportRule)*
+	//    (imports += BaseLanguage::ImportRule)*
 	//    'module' name = QualifiedName '{'
 	//        ('types' ':' (types += DataTypeDefinitionRule)* )?
 	//        ('data' ':' (descriptions += DataDescriptionRule)* )?
@@ -700,17 +670,6 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 	
 	public ParserRule getDataDescriptionModelRuleRule() {
 		return getDataDescriptionModelRuleAccess().getRule();
-	}
-	
-	//ImportRule returns Import:
-	//    'import' importedNamespace = QualifiedName ';'
-	//;
-	public ImportRuleElements getImportRuleAccess() {
-		return pImportRule;
-	}
-	
-	public ParserRule getImportRuleRule() {
-		return getImportRuleAccess().getRule();
 	}
 	
 	//enum ScaleType returns ScaleType:
@@ -1354,6 +1313,17 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 	
 	public ParserRule getParameterRuleRule() {
 		return getParameterRuleAccess().getRule();
+	}
+	
+	//ImportRule returns Import:
+	//    'import' language=STRING 'from' importedNamespace=QualifiedName ";"
+	//;
+	public BaseLanguageGrammarAccess.ImportRuleElements getImportRuleAccess() {
+		return gaBaseLanguage.getImportRuleAccess();
+	}
+	
+	public ParserRule getImportRuleRule() {
+		return getImportRuleAccess().getRule();
 	}
 	
 	//FunctionNameRule returns DefinedFunctionName:

@@ -31,30 +31,30 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 	public class MachineLearningConfigurationRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.mll.dsl.MachineLearningLanguage.MachineLearningConfigurationRule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cUsesAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cUsesUseRuleParserRuleCall_0_0 = (RuleCall)cUsesAssignment_0.eContents().get(0);
+		private final Assignment cImportsAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cImportsImportRuleParserRuleCall_0_0 = (RuleCall)cImportsAssignment_0.eContents().get(0);
 		private final Assignment cDefinitionsAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cDefinitionsSurrogateDefinitionRuleParserRuleCall_1_0 = (RuleCall)cDefinitionsAssignment_1.eContents().get(0);
 		private final Assignment cStatementsAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cStatementsStatementRuleParserRuleCall_2_0 = (RuleCall)cStatementsAssignment_2.eContents().get(0);
 		
 		//MachineLearningConfigurationRule returns MachineLearningConfiguration:
-		//    (uses += UseRule)*
+		//    (imports += ImportRule)*
 		//    (definitions+=SurrogateDefinitionRule)*
 		//    (statements += StatementRule)*
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//(uses += UseRule)*
+		//(imports += ImportRule)*
 		//(definitions+=SurrogateDefinitionRule)*
 		//(statements += StatementRule)*
 		public Group getGroup() { return cGroup; }
 		
-		//(uses += UseRule)*
-		public Assignment getUsesAssignment_0() { return cUsesAssignment_0; }
+		//(imports += ImportRule)*
+		public Assignment getImportsAssignment_0() { return cImportsAssignment_0; }
 		
-		//UseRule
-		public RuleCall getUsesUseRuleParserRuleCall_0_0() { return cUsesUseRuleParserRuleCall_0_0; }
+		//ImportRule
+		public RuleCall getImportsImportRuleParserRuleCall_0_0() { return cImportsImportRuleParserRuleCall_0_0; }
 		
 		//(definitions+=SurrogateDefinitionRule)*
 		public Assignment getDefinitionsAssignment_1() { return cDefinitionsAssignment_1; }
@@ -67,34 +67,6 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 		
 		//StatementRule
 		public RuleCall getStatementsStatementRuleParserRuleCall_2_0() { return cStatementsStatementRuleParserRuleCall_2_0; }
-	}
-	public class UseRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.mll.dsl.MachineLearningLanguage.UseRule");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cUseKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cImportURIAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cImportURISTRINGTerminalRuleCall_1_0 = (RuleCall)cImportURIAssignment_1.eContents().get(0);
-		private final Keyword cSemicolonKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		
-		//UseRule returns Use:
-		//    'use' importURI = STRING ';'
-		//;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//'use' importURI = STRING ';'
-		public Group getGroup() { return cGroup; }
-		
-		//'use'
-		public Keyword getUseKeyword_0() { return cUseKeyword_0; }
-		
-		//importURI = STRING
-		public Assignment getImportURIAssignment_1() { return cImportURIAssignment_1; }
-		
-		//STRING
-		public RuleCall getImportURISTRINGTerminalRuleCall_1_0() { return cImportURISTRINGTerminalRuleCall_1_0; }
-		
-		//';'
-		public Keyword getSemicolonKeyword_2() { return cSemicolonKeyword_2; }
 	}
 	public class SurrogateDefinitionRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.mll.dsl.MachineLearningLanguage.SurrogateDefinitionRule");
@@ -735,7 +707,6 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 	
 	
 	private final MachineLearningConfigurationRuleElements pMachineLearningConfigurationRule;
-	private final UseRuleElements pUseRule;
 	private final SurrogateDefinitionRuleElements pSurrogateDefinitionRule;
 	private final SurrogateLayerDefinitionRuleElements pSurrogateLayerDefinitionRule;
 	private final PartialSurrogateFunctionDefinitionRuleElements pPartialSurrogateFunctionDefinitionRule;
@@ -766,7 +737,6 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 		this.gaBaseLanguage = gaBaseLanguage;
 		this.gaTerminals = gaTerminals;
 		this.pMachineLearningConfigurationRule = new MachineLearningConfigurationRuleElements();
-		this.pUseRule = new UseRuleElements();
 		this.pSurrogateDefinitionRule = new SurrogateDefinitionRuleElements();
 		this.pSurrogateLayerDefinitionRule = new SurrogateLayerDefinitionRuleElements();
 		this.pPartialSurrogateFunctionDefinitionRule = new PartialSurrogateFunctionDefinitionRuleElements();
@@ -816,7 +786,7 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 
 	
 	//MachineLearningConfigurationRule returns MachineLearningConfiguration:
-	//    (uses += UseRule)*
+	//    (imports += ImportRule)*
 	//    (definitions+=SurrogateDefinitionRule)*
 	//    (statements += StatementRule)*
 	//;
@@ -826,17 +796,6 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 	
 	public ParserRule getMachineLearningConfigurationRuleRule() {
 		return getMachineLearningConfigurationRuleAccess().getRule();
-	}
-	
-	//UseRule returns Use:
-	//    'use' importURI = STRING ';'
-	//;
-	public UseRuleElements getUseRuleAccess() {
-		return pUseRule;
-	}
-	
-	public ParserRule getUseRuleRule() {
-		return getUseRuleAccess().getRule();
 	}
 	
 	//SurrogateDefinitionRule returns SurrogateDefinition:
@@ -1528,6 +1487,17 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 	
 	public ParserRule getParameterRuleRule() {
 		return getParameterRuleAccess().getRule();
+	}
+	
+	//ImportRule returns Import:
+	//    'import' language=STRING 'from' importedNamespace=QualifiedName ";"
+	//;
+	public BaseLanguageGrammarAccess.ImportRuleElements getImportRuleAccess() {
+		return gaBaseLanguage.getImportRuleAccess();
+	}
+	
+	public ParserRule getImportRuleRule() {
+		return getImportRuleAccess().getRule();
 	}
 	
 	//FunctionNameRule returns DefinedFunctionName:

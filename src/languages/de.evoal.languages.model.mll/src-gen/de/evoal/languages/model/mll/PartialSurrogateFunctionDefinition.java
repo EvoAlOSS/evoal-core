@@ -2,6 +2,7 @@
  */
 package de.evoal.languages.model.mll;
 
+import de.evoal.languages.model.base.Attribute;
 import de.evoal.languages.model.base.TypeDefinition;
 import de.evoal.languages.model.ddl.DataDescription;
 import org.eclipse.emf.common.util.EList;
@@ -87,6 +88,6 @@ public interface PartialSurrogateFunctionDefinition extends EObject {
 	 *        annotation="http://www.eclipse.org/OCL/Collection nullFree='false'"
 	 * @generated
 	 */
-	EList<de.evoal.languages.model.base.Attribute> getParameters();
+	EList<Attribute> getParameters();
 
 } // PartialSurrogateFunctionDefinition

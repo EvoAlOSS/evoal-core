@@ -9,7 +9,3 @@ DefinitionModelRule returns DefinitionModel:
 		((types += TypeDefinitionRule ) | (functions += FunctionDefinitionRule ) | constants += ConstantDefinitionRule)*
 	'}'
 ;
-
-ImportRule returns Import:
-	'import' importedNamespace = QualifiedName ';'
-;

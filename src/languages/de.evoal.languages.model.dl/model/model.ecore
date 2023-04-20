@@ -12,7 +12,8 @@
       <details key="documentation" value="Root element of the model allowing to define instances, functions&#xA;and data."/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="imports" upperBound="-1"
-        eType="#//Import" containment="true"/>
+        eType="ecore:EClass ../../de.evoal.languages.model.base/model/model.ecore#//Import"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="types" ordered="false"
         upperBound="-1" eType="ecore:EClass ../../de.evoal.languages.model.base/model/model.ecore#//TypeDefinition"
@@ -34,10 +35,5 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="constants" upperBound="-1"
         eType="ecore:EClass ../../de.evoal.languages.model.base/model/model.ecore#//ConstantDefinition"
         containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="QualifiedName"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Import">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="importedNamespace" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
 </ecore:EPackage>

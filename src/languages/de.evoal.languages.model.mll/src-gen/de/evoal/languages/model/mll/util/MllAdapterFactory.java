@@ -125,10 +125,6 @@ public class MllAdapterFactory extends AdapterFactoryImpl {
 				return createDefinedFunctionNameAdapter();
 			}
 			@Override
-			public Adapter caseUse(Use object) {
-				return createUseAdapter();
-			}
-			@Override
 			public Adapter caseFunctionName(FunctionName object) {
 				return createFunctionNameAdapter();
 			}
@@ -345,20 +341,6 @@ public class MllAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createDefinedFunctionNameAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.mll.Use <em>Use</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.evoal.languages.model.mll.Use
-	 * @generated
-	 */
-	public Adapter createUseAdapter() {
 		return null;
 	}
 

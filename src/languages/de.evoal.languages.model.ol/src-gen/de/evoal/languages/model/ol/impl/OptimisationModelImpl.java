@@ -49,7 +49,7 @@ public class OptimisationModelImpl extends MinimalEObjectImpl.Container implemen
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Import> imports;
+	protected EList<de.evoal.languages.model.base.Import> imports;
 
 	/**
 	 * The cached value of the '{@link #getProblem() <em>Problem</em>}' containment reference.
@@ -96,9 +96,9 @@ public class OptimisationModelImpl extends MinimalEObjectImpl.Container implemen
 	 * @generated
 	 */
 	@Override
-	public EList<Import> getImports() {
+	public EList<de.evoal.languages.model.base.Import> getImports() {
 		if (imports == null) {
-			imports = new EObjectContainmentEList<Import>(Import.class, this, OLPackage.OPTIMISATION_MODEL__IMPORTS);
+			imports = new EObjectContainmentEList<de.evoal.languages.model.base.Import>(de.evoal.languages.model.base.Import.class, this, OLPackage.OPTIMISATION_MODEL__IMPORTS);
 		}
 		return imports;
 	}
@@ -240,7 +240,7 @@ public class OptimisationModelImpl extends MinimalEObjectImpl.Container implemen
 		switch (featureID) {
 			case OLPackage.OPTIMISATION_MODEL__IMPORTS:
 				getImports().clear();
-				getImports().addAll((Collection<? extends Import>)newValue);
+				getImports().addAll((Collection<? extends de.evoal.languages.model.base.Import>)newValue);
 				return;
 			case OLPackage.OPTIMISATION_MODEL__PROBLEM:
 				setProblem((Problem)newValue);

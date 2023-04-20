@@ -50,7 +50,6 @@ public class DataDescriptionLanguageParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getDataDescriptionModelRuleAccess().getGroup_5(), "rule__DataDescriptionModelRule__Group_5__0");
 			builder.put(grammarAccess.getDataDescriptionModelRuleAccess().getGroup_6(), "rule__DataDescriptionModelRule__Group_6__0");
 			builder.put(grammarAccess.getDataDescriptionModelRuleAccess().getGroup_7(), "rule__DataDescriptionModelRule__Group_7__0");
-			builder.put(grammarAccess.getImportRuleAccess().getGroup(), "rule__ImportRule__Group__0");
 			builder.put(grammarAccess.getDataTypeDefinitionRuleAccess().getGroup(), "rule__DataTypeDefinitionRule__Group__0");
 			builder.put(grammarAccess.getDataTypeDefinitionRuleAccess().getGroup_3(), "rule__DataTypeDefinitionRule__Group_3__0");
 			builder.put(grammarAccess.getDataTypeDefinitionRuleAccess().getGroup_4(), "rule__DataTypeDefinitionRule__Group_4__0");
@@ -107,6 +106,7 @@ public class DataDescriptionLanguageParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getFunctionDefinitionRuleAccess().getGroup_4_1(), "rule__FunctionDefinitionRule__Group_4_1__0");
 			builder.put(grammarAccess.getConstantDefinitionRuleAccess().getGroup(), "rule__ConstantDefinitionRule__Group__0");
 			builder.put(grammarAccess.getParameterRuleAccess().getGroup(), "rule__ParameterRule__Group__0");
+			builder.put(grammarAccess.getImportRuleAccess().getGroup(), "rule__ImportRule__Group__0");
 			builder.put(grammarAccess.getQualifiedNameAccess().getGroup(), "rule__QualifiedName__Group__0");
 			builder.put(grammarAccess.getQualifiedNameAccess().getGroup_1(), "rule__QualifiedName__Group_1__0");
 			builder.put(grammarAccess.getDataDescriptionModelRuleAccess().getImportsAssignment_1(), "rule__DataDescriptionModelRule__ImportsAssignment_1");
@@ -114,7 +114,6 @@ public class DataDescriptionLanguageParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getDataDescriptionModelRuleAccess().getTypesAssignment_5_2(), "rule__DataDescriptionModelRule__TypesAssignment_5_2");
 			builder.put(grammarAccess.getDataDescriptionModelRuleAccess().getDescriptionsAssignment_6_2(), "rule__DataDescriptionModelRule__DescriptionsAssignment_6_2");
 			builder.put(grammarAccess.getDataDescriptionModelRuleAccess().getConstraintsAssignment_7_2(), "rule__DataDescriptionModelRule__ConstraintsAssignment_7_2");
-			builder.put(grammarAccess.getImportRuleAccess().getImportedNamespaceAssignment_1(), "rule__ImportRule__ImportedNamespaceAssignment_1");
 			builder.put(grammarAccess.getDataTypeDefinitionRuleAccess().getScaleAssignment_0(), "rule__DataTypeDefinitionRule__ScaleAssignment_0");
 			builder.put(grammarAccess.getDataTypeDefinitionRuleAccess().getNameAssignment_2(), "rule__DataTypeDefinitionRule__NameAssignment_2");
 			builder.put(grammarAccess.getDataTypeDefinitionRuleAccess().getDescriptionAssignment_3_2(), "rule__DataTypeDefinitionRule__DescriptionAssignment_3_2");
@@ -185,6 +184,8 @@ public class DataDescriptionLanguageParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getConstantDefinitionRuleAccess().getValueAssignment_4(), "rule__ConstantDefinitionRule__ValueAssignment_4");
 			builder.put(grammarAccess.getParameterRuleAccess().getTypeAssignment_0(), "rule__ParameterRule__TypeAssignment_0");
 			builder.put(grammarAccess.getParameterRuleAccess().getNameAssignment_1(), "rule__ParameterRule__NameAssignment_1");
+			builder.put(grammarAccess.getImportRuleAccess().getLanguageAssignment_1(), "rule__ImportRule__LanguageAssignment_1");
+			builder.put(grammarAccess.getImportRuleAccess().getImportedNamespaceAssignment_3(), "rule__ImportRule__ImportedNamespaceAssignment_3");
 			builder.put(grammarAccess.getFunctionNameRuleAccess().getDefinitionAssignment(), "rule__FunctionNameRule__DefinitionAssignment");
 		}
 	}

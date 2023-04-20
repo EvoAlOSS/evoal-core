@@ -22,8 +22,6 @@ import de.evoal.languages.model.mll.Statement;
 import de.evoal.languages.model.mll.StringLiteralRange;
 import de.evoal.languages.model.mll.SurrogateDefinition;
 import de.evoal.languages.model.mll.SurrogateLayerDefinition;
-import de.evoal.languages.model.mll.Use;
-
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
@@ -137,13 +135,6 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 	private EClass definedFunctionNameEClass = null;
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass useEClass = null;
-
-	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
 	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
 	 * package URI value.
@@ -225,7 +216,7 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getMachineLearningConfiguration_Uses() {
+	public EReference getMachineLearningConfiguration_Imports() {
 		return (EReference)machineLearningConfigurationEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -655,26 +646,6 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 	 * @generated
 	 */
 	@Override
-	public EClass getUse() {
-		return useEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getUse_ImportURI() {
-		return (EAttribute)useEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public MllFactory getMllFactory() {
 		return (MllFactory)getEFactoryInstance();
 	}
@@ -699,7 +670,7 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 
 		// Create classes and their features
 		machineLearningConfigurationEClass = createEClass(MACHINE_LEARNING_CONFIGURATION);
-		createEReference(machineLearningConfigurationEClass, MACHINE_LEARNING_CONFIGURATION__USES);
+		createEReference(machineLearningConfigurationEClass, MACHINE_LEARNING_CONFIGURATION__IMPORTS);
 		createEReference(machineLearningConfigurationEClass, MACHINE_LEARNING_CONFIGURATION__DEFINITIONS);
 		createEReference(machineLearningConfigurationEClass, MACHINE_LEARNING_CONFIGURATION__STATEMENTS);
 
@@ -755,9 +726,6 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 
 		definedFunctionNameEClass = createEClass(DEFINED_FUNCTION_NAME);
 		createEReference(definedFunctionNameEClass, DEFINED_FUNCTION_NAME__DEFINITION);
-
-		useEClass = createEClass(USE);
-		createEAttribute(useEClass, USE__IMPORT_URI);
 	}
 
 	/**
@@ -784,8 +752,8 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 		setNsURI(eNS_URI);
 
 		// Obtain other dependent packages
-		DdlPackage theDdlPackage = (DdlPackage)EPackage.Registry.INSTANCE.getEPackage(DdlPackage.eNS_URI);
 		BasePackage theBasePackage = (BasePackage)EPackage.Registry.INSTANCE.getEPackage(BasePackage.eNS_URI);
+		DdlPackage theDdlPackage = (DdlPackage)EPackage.Registry.INSTANCE.getEPackage(DdlPackage.eNS_URI);
 
 		// Create type parameters
 
@@ -802,7 +770,7 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(machineLearningConfigurationEClass, MachineLearningConfiguration.class, "MachineLearningConfiguration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getMachineLearningConfiguration_Uses(), this.getUse(), null, "uses", null, 0, -1, MachineLearningConfiguration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getMachineLearningConfiguration_Imports(), theBasePackage.getImport(), null, "imports", null, 0, -1, MachineLearningConfiguration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getMachineLearningConfiguration_Definitions(), this.getSurrogateDefinition(), null, "definitions", null, 0, -1, MachineLearningConfiguration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getMachineLearningConfiguration_Statements(), this.getStatement(), null, "statements", null, 0, -1, MachineLearningConfiguration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
@@ -859,9 +827,6 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 		initEClass(definedFunctionNameEClass, DefinedFunctionName.class, "DefinedFunctionName", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getDefinedFunctionName_Definition(), theBasePackage.getFunctionDefinition(), null, "definition", null, 1, 1, DefinedFunctionName.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(useEClass, Use.class, "Use", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getUse_ImportURI(), ecorePackage.getEString(), "importURI", null, 1, 1, Use.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
 		// Create resource
 		createResource(eNS_URI);
 
@@ -900,7 +865,7 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 	protected void createCollectionAnnotations() {
 		String source = "http://www.eclipse.org/OCL/Collection";
 		addAnnotation
-		  (getMachineLearningConfiguration_Uses(),
+		  (getMachineLearningConfiguration_Imports(),
 		   source,
 		   new String[] {
 			   "nullFree", "false"
