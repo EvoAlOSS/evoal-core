@@ -3,7 +3,7 @@ package de.evoal.core.ea.main.producer;
 import de.evoal.core.api.board.CoreBlackboardEntries;
 import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.core.api.utils.LanguageHelper;
-import de.evoal.languages.model.instance.Instance;
+import de.evoal.languages.model.base.Instance;
 import io.jenetics.*;
 
 import javax.enterprise.context.ApplicationScoped;

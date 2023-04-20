@@ -4,12 +4,12 @@ import de.evoal.core.api.utils.Requirements;
 import de.evoal.languages.model.ddl.DataDescription;
 import de.evoal.languages.model.ddl.DataReference;
 import de.evoal.languages.model.ddl.SelfReference;
-import de.evoal.languages.model.el.*;
-import de.evoal.languages.model.el.util.ELSwitch;
+import de.evoal.languages.model.base.*;
+import de.evoal.languages.model.base.util.BaseSwitch;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class UnaryBoundaryIdentifier extends ELSwitch<Object> {
+public class UnaryBoundaryIdentifier extends BaseSwitch<Object> {
 
     private final DataDescription context;
 

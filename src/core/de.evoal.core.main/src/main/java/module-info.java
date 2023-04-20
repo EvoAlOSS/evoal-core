@@ -24,14 +24,14 @@ module de.evoal.core.main {
     requires org.eclipse.emf.ecore;
     requires org.eclipse.xtext;
 
+    requires de.evoal.languages.model.base;
+    requires de.evoal.languages.model.base.dsl;
     requires de.evoal.languages.model.ddl;
     requires de.evoal.languages.model.ddl.dsl;
     requires de.evoal.languages.model.dl;
     requires de.evoal.languages.model.dl.dsl;
     requires de.evoal.languages.model.ol;
     requires de.evoal.languages.model.ol.dsl;
-    requires de.evoal.languages.model.el;
-    requires de.evoal.languages.model.el.dsl;
     requires de.evoal.languages.model.instance;
     requires de.evoal.languages.model.utils;
     requires com.google.guice;

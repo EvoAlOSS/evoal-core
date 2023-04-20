@@ -8,8 +8,8 @@ import de.evoal.languages.model.ddl.dsl.DataDescriptionLanguageStandaloneSetup;
 import de.evoal.languages.model.ddl.impl.DdlPackageImpl;
 import de.evoal.languages.model.dl.dsl.DefinitionLanguageStandaloneSetup;
 import de.evoal.languages.model.dl.impl.DlPackageImpl;
-import de.evoal.languages.model.el.dsl.ExpressionLanguageStandaloneSetup;
-import de.evoal.languages.model.el.impl.ELPackageImpl;
+import de.evoal.languages.model.base.dsl.BaseLanguageStandaloneSetup;
+import de.evoal.languages.model.base.impl.BasePackageImpl;
 import de.evoal.languages.model.mll.dsl.MachineLearningLanguageStandaloneSetup;
 import de.evoal.languages.model.mll.MachineLearningConfiguration;
 import de.evoal.languages.model.mll.impl.MllPackageImpl;
@@ -63,12 +63,12 @@ public class MLLConfigurationProducer {
      */
     private void initializeEMF() {
         DdlPackageImpl.init();
-        ELPackageImpl.init();
+        BasePackageImpl.init();
         DlPackageImpl.init();
         MllPackageImpl.init();
 
         DataDescriptionLanguageStandaloneSetup.doSetup();
-        ExpressionLanguageStandaloneSetup.doSetup();
+        BaseLanguageStandaloneSetup.doSetup();
         DefinitionLanguageStandaloneSetup.doSetup();
         MachineLearningLanguageStandaloneSetup.doSetup();
     }

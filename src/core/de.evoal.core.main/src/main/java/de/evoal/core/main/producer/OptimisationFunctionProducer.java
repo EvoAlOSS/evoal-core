@@ -5,10 +5,10 @@ import de.evoal.core.api.cdi.BeanFactory;
 import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.core.api.optimisation.OptimisationFunction;
 import de.evoal.core.api.properties.PropertiesSpecification;
-import de.evoal.languages.model.instance.Array;
-import de.evoal.languages.model.instance.Attribute;
+import de.evoal.languages.model.base.Array;
+import de.evoal.languages.model.base.Attribute;
 import de.evoal.languages.model.instance.DataReference;
-import de.evoal.languages.model.instance.Instance;
+import de.evoal.languages.model.base.Instance;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.enterprise.context.ApplicationScoped;

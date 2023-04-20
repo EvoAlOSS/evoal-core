@@ -13,7 +13,7 @@ import de.evoal.core.api.statistics.writer.StatisticsWriter;
 import de.evoal.core.api.correlations.Correlation;
 import de.evoal.core.api.correlations.Correlations;
 import de.evoal.core.api.correlations.RangedCorrelation;
-import de.evoal.languages.model.instance.Instance;
+import de.evoal.languages.model.base.Instance;
 
 import java.util.*;
 import javax.annotation.PostConstruct;

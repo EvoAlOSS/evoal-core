@@ -1,8 +1,7 @@
 package de.evoal.core.api.optimisation;
 
 import de.evoal.core.api.cdi.BeanFactory;
-import de.evoal.core.api.optimisation.OptimisationFunction;
-import de.evoal.languages.model.instance.Instance;
+import de.evoal.languages.model.base.Instance;
 
 public abstract class OptimisationFunctionDecorator implements OptimisationFunction {
     protected OptimisationFunction decoratedFunction;

@@ -6,7 +6,7 @@ import de.evoal.core.api.constraints.calculation.CalculationStrategy;
 import de.evoal.core.api.properties.Properties;
 import javax.enterprise.context.Dependent;
 
-import de.evoal.languages.model.instance.Instance;
+import de.evoal.languages.model.base.Instance;
 import lombok.NonNull;
 
 import javax.inject.Named;

@@ -3,7 +3,7 @@ package de.evoal.core.ea.main.codec.chromosome;
 import de.evoal.core.api.properties.PropertySpecification;
 import de.evoal.core.api.properties.info.PropertiesBoundaries;
 import de.evoal.languages.model.ddl.DataDescription;
-import de.evoal.languages.model.instance.Instance;
+import de.evoal.languages.model.base.Instance;
 import io.jenetics.util.DoubleRange;
 
 import javax.inject.Inject;

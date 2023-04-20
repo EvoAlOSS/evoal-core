@@ -13,10 +13,11 @@ import javax.inject.Named;
 import de.evoal.core.main.constraints.constraint.ast.ConditionConverter;
 import de.evoal.core.main.constraints.el.ElHelper;
 import de.evoal.core.main.constraints.el.LogHelper;
+import de.evoal.languages.model.base.DefinedFunctionName;
 import de.evoal.languages.model.ddl.DataDescription;
-import de.evoal.languages.model.ddl.FunctionName;
-import de.evoal.languages.model.el.Call;
-import de.evoal.languages.model.instance.Instance;
+import de.evoal.languages.model.base.FunctionName;
+import de.evoal.languages.model.base.Call;
+import de.evoal.languages.model.base.Instance;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Objects;
@@ -48,7 +49,7 @@ public class ConstraintProducer {
                         .map(ElHelper::findCall)
                         .filter(Objects::nonNull)
                         .map(Call.class::cast)
-                        .filter(c -> "constraint".equals(((FunctionName)c.getFunction()).getDefinition().getName()))
+                        .filter(c -> "constraint".equals(((DefinedFunctionName)c.getFunction()).getDefinition().getName()))
                         .map(c -> convert(c, context))
                         .filter(Optional::isPresent)
                         .map(Optional::get)

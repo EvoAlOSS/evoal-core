@@ -2,9 +2,8 @@ package de.evoal.generator.main.generators;
 
 import de.evoal.core.api.utils.InitializationException;
 import de.evoal.generator.api.GeneratorFunction;
-import de.evoal.languages.model.el.DoubleLiteral;
+import de.evoal.languages.model.base.DoubleLiteral;
 import de.evoal.languages.model.generator.Step;
-import de.evoal.languages.model.instance.LiteralValue;
 import org.apache.commons.math3.distribution.UniformRealDistribution;
 
 import javax.enterprise.context.Dependent;
@@ -17,7 +16,7 @@ public class UniformDistribution extends RealDistributionBase {
 	public GeneratorFunction init(final Step configuration) throws InitializationException {
 		super.init(configuration);
 
-		Object ranges = ((DoubleLiteral)((LiteralValue)configuration.getInstance().findAttribute("μ").getValue()).getLiteral()).getValue();
+		Object ranges = ((DoubleLiteral)configuration.getInstance().findAttribute("μ").getValue()).getLiteral();
 		if(true) throw new IllegalStateException("Not yet implemented.");
 
 		for(int i = 0; i < writeSpecification.getProperties().size(); ++i) {

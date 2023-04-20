@@ -14,17 +14,18 @@ module de.evoal.generator.main {
 
     requires de.evoal.languages.model.ddl;
     requires de.evoal.languages.model.dl;
-    requires de.evoal.languages.model.el;
+    requires de.evoal.languages.model.base;
     requires de.evoal.languages.model.generator;
     requires de.evoal.languages.model.instance;
 
     requires de.evoal.languages.model.ddl.dsl;
     requires de.evoal.languages.model.dl.dsl;
-    requires de.evoal.languages.model.el.dsl;
+    requires de.evoal.languages.model.base.dsl;
     requires de.evoal.languages.model.generator.dsl;
 
     requires de.evoal.core.main;
     requires commons.math3;
+    requires com.google.guice;
 
     opens de.evoal.generator.main;
     opens de.evoal.generator.main.benchmarks;

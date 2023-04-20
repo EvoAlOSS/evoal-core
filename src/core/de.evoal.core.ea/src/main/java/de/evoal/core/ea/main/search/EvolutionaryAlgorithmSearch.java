@@ -24,9 +24,9 @@ import de.evoal.core.ea.main.jenetics.ConstraintList;
 import de.evoal.core.ea.main.alterer.AltererFactory;
 import de.evoal.core.ea.main.codec.DynamicCodec;
 import de.evoal.core.ea.main.statistics.JeneticsStatisticsWriter;
-import de.evoal.languages.model.instance.Array;
-import de.evoal.languages.model.instance.Attribute;
-import de.evoal.languages.model.instance.Value;
+import de.evoal.languages.model.base.Array;
+import de.evoal.languages.model.base.Attribute;
+import de.evoal.languages.model.base.Value;
 import de.evoal.languages.model.ol.OptimisationModel;
 import io.jenetics.*;
 import io.jenetics.engine.*;
@@ -106,7 +106,7 @@ public class EvolutionaryAlgorithmSearch implements OptimisationAlgorithm {
 	private InitialCandidatesProvider provider;
 
 	@Override
-	public OptimisationAlgorithm init(de.evoal.languages.model.instance.Instance instance) {
+	public OptimisationAlgorithm init(de.evoal.languages.model.base.Instance instance) {
 		return this;
 	}
 
@@ -147,7 +147,7 @@ public class EvolutionaryAlgorithmSearch implements OptimisationAlgorithm {
 	private void setup() {
 		final OptimisationModel configuration = board.get(CoreBlackboardEntries.OPTIMISATION_CONFIGURATION);
 
-		final de.evoal.languages.model.instance.Instance alterers = LanguageHelper.lookup(configuration.getInstance(), "algorithm.alterers");
+		final de.evoal.languages.model.base.Instance alterers = LanguageHelper.lookup(configuration.getAlgorithm().getAlgorithm(), "alterers");
 
 		for(final Attribute category: alterers.getAttributes()) {
 			final String name = category.getDefinition().getName();
@@ -158,7 +158,7 @@ public class EvolutionaryAlgorithmSearch implements OptimisationAlgorithm {
 			for(final Value alterer : array.getValues()) {
 				this.alterers
 					.computeIfAbsent(name, k -> new ArrayList<>())
-					.add(factory.create((de.evoal.languages.model.instance.Instance)alterer));
+					.add(factory.create((de.evoal.languages.model.base.Instance)alterer));
 			}
 		}
 	}

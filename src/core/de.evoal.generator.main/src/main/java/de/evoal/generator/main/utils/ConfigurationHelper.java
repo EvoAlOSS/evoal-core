@@ -1,8 +1,8 @@
 package de.evoal.generator.main.utils;
 
 import de.evoal.core.api.utils.LanguageHelper;
-import de.evoal.languages.model.instance.Array;
-import de.evoal.languages.model.instance.Instance;
+import de.evoal.languages.model.base.Array;
+import de.evoal.languages.model.base.Instance;
 
 import java.util.List;
 import java.util.stream.Collectors;

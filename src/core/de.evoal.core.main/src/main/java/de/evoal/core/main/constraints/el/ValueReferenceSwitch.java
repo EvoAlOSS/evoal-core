@@ -4,12 +4,12 @@ import de.evoal.core.api.utils.Requirements;
 import de.evoal.languages.model.ddl.DataDescription;
 import de.evoal.languages.model.ddl.DataReference;
 import de.evoal.languages.model.ddl.SelfReference;
-import de.evoal.languages.model.el.*;
-import de.evoal.languages.model.el.util.ELSwitch;
+import de.evoal.languages.model.base.*;
+import de.evoal.languages.model.base.util.BaseSwitch;
 
 import java.util.Objects;
 
-public class ValueReferenceSwitch extends ELSwitch<String> {
+public class ValueReferenceSwitch extends BaseSwitch<String> {
     private final DataDescription context;
 
     public ValueReferenceSwitch(final DataDescription context) {

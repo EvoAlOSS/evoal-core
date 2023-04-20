@@ -1,7 +1,7 @@
 package de.evoal.core.ea.main.codec.chromosome;
 
 import de.evoal.core.api.cdi.BeanFactory;
-import de.evoal.languages.model.instance.Instance;
+import de.evoal.languages.model.base.Instance;
 
 import javax.enterprise.context.ApplicationScoped;
 

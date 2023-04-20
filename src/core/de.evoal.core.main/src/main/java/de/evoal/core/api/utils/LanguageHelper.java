@@ -1,8 +1,8 @@
 package de.evoal.core.api.utils;
 
 import de.evoal.languages.model.dl.*;
-import de.evoal.languages.model.el.BooleanLiteral;
-import de.evoal.languages.model.instance.*;
+import de.evoal.languages.model.base.BooleanLiteral;
+import de.evoal.languages.model.base.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -83,7 +83,7 @@ public final class LanguageHelper {
     }
 
     private static Object convertToJava(final Object current, final Type type) {
-        if(current instanceof LiteralValue) {
+        if(current instanceof Literal) {
             return readLiteral(current, type);
         } else if(current instanceof Array) {
             return readArray(current, type);
@@ -103,14 +103,14 @@ public final class LanguageHelper {
 
     private static Object readLiteral(final Object current, final Type type) {
         if(type instanceof FloatType) {
-            return ((Number)((LiteralValue)current).getLiteral().getValue()).doubleValue();
+            return ((Number)((Literal)current).getValue()).doubleValue();
         } else if(type instanceof IntType) {
-            return ((Number)((LiteralValue)current).getLiteral().getValue()).intValue();
+            return ((Number)((Literal)current).getValue()).intValue();
         } else if(type instanceof StringType) {
-            return Objects.toString(((LiteralValue)current).getLiteral().getValue());
+            return Objects.toString(((Literal)current).getValue());
         } else if(type instanceof BooleanType) {
             // TODO Fix hard call to is value
-            return Boolean.TRUE.equals(((BooleanLiteral)((LiteralValue)current).getLiteral()).isValue());
+            return Boolean.TRUE.equals(((Literal)((Literal)current)).getValue());
         }
 
         throw new UnsupportedOperationException("Type " + type.toString() + " is not supported.");

@@ -2,10 +2,10 @@ package de.evoal.core.api.utils;
 
 import de.evoal.core.junit.dsl.LanguageHelper;
 import de.evoal.languages.model.dl.*;
-import de.evoal.languages.model.el.DoubleLiteral;
+import de.evoal.languages.model.base.DoubleLiteral;
 import de.evoal.languages.model.generator.Configuration;
 import de.evoal.languages.model.generator.Step;
-import de.evoal.languages.model.instance.*;
+import de.evoal.languages.model.base.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -82,10 +82,10 @@ public class LanguageHelperRegressionTest {
             Assertions.assertTrue(attributeA.getValue() instanceof Array);
             final Array array = (Array)attributeA.getValue();
             Assertions.assertEquals(10, array.getValues().size());
-            Assertions.assertTrue(array.getValues().get(0) instanceof LiteralValue);
-            final LiteralValue literal = (LiteralValue) array.getValues().get(0);
-            Assertions.assertTrue(literal.getLiteral() instanceof DoubleLiteral);
-            Assertions.assertEquals(1.0, literal.getLiteral().getValue());
+            Assertions.assertTrue(array.getValues().get(0) instanceof Literal);
+            final Literal literal = (Literal) array.getValues().get(0);
+            Assertions.assertTrue(literal instanceof DoubleLiteral);
+            Assertions.assertEquals(1.0, literal.getValue());
         }
 
         {

@@ -1,9 +1,8 @@
 package de.evoal.surrogate.ws;
 
-import de.evoal.core.api.ea.fitness.FitnessFunction;
+import de.evoal.core.api.optimisation.OptimisationFunction;
 import de.evoal.core.api.properties.Properties;
-import de.evoal.core.api.utils.LanguageHelper;
-import de.evoal.languages.model.instance.Instance;
+import de.evoal.languages.model.base.Instance;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Named;
@@ -13,7 +12,7 @@ import javax.inject.Named;
  */
 @Dependent
 @Named("webservice")
-public class WebServiceFitness implements FitnessFunction {
+public class WebServiceFitness implements OptimisationFunction {
     @Override
     public double[] evaluate(final Properties properties) {
 
@@ -21,7 +20,7 @@ public class WebServiceFitness implements FitnessFunction {
     }
 
     @Override
-    public FitnessFunction init(final Instance config) {
+    public OptimisationFunction init(final Instance config) {
 //        LanguageHelper.lookup();
 
         return this;

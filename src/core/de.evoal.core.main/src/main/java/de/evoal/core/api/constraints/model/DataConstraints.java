@@ -3,7 +3,7 @@ package de.evoal.core.api.constraints.model;
 import de.evoal.languages.model.ddl.DataDescription;
 import de.evoal.languages.model.ddl.DataDescriptionModel;
 import de.evoal.languages.model.ddl.TypedDataDescription;
-import de.evoal.languages.model.el.Expression;
+import de.evoal.languages.model.base.Expression;
 import org.apache.commons.math3.util.Pair;
 
 import java.util.*;

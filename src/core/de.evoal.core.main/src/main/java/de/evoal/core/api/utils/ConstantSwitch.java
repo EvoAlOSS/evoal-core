@@ -1,12 +1,12 @@
 package de.evoal.core.api.utils;
 
-import de.evoal.languages.model.el.*;
-import de.evoal.languages.model.el.util.ELSwitch;
+import de.evoal.languages.model.base.*;
+import de.evoal.languages.model.base.util.BaseSwitch;
 
 
 import java.util.Objects;
 
-public class ConstantSwitch extends ELSwitch<Object> {
+public class ConstantSwitch extends BaseSwitch<Object> {
     private ConstantSwitch() {
     }
 

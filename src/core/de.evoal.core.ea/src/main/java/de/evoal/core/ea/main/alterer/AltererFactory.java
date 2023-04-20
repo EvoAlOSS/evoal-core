@@ -10,7 +10,7 @@ import de.evoal.core.ea.main.alterer.crossover.*;
 import de.evoal.core.ea.main.alterer.mutator.SingleBitFlipCorrelationMutator;
 import de.evoal.core.ea.main.alterer.mutator.SwapCorrelationMutator;
 import de.evoal.core.api.correlations.Correlations;
-import de.evoal.languages.model.instance.Instance;
+import de.evoal.languages.model.base.Instance;
 import de.evoal.core.api.utils.LanguageHelper;
 import io.jenetics.*;
 import io.jenetics.util.Mean;

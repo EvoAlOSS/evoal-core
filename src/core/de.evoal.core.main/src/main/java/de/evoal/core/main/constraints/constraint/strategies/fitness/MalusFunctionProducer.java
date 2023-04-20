@@ -17,7 +17,7 @@ import javax.enterprise.inject.Produces;
 
 import de.evoal.core.main.constraints.constraint.strategies.fitness.internal.MalusForFitnessFunction;
 import de.evoal.core.main.constraints.constraint.utils.ConfigurationUtils;
-import de.evoal.languages.model.instance.*;
+import de.evoal.languages.model.base.*;
 import org.apache.commons.math3.util.Pair;
 
 import javax.inject.Named;
@@ -38,7 +38,7 @@ public class MalusFunctionProducer {
         final List<Instance> relevantHandlers = ConfigurationUtils.findConstraintHandlerByHandlingStrategy(handlers, "malus-for-fitness");
 
         // collect group names of relevant handlers
-        final Set<String> allGroups = relevantHandlers.stream().map(i -> (String)((LiteralValue)i.findAttribute("category").getValue()).getLiteral().getValue()).collect(Collectors.toSet());
+        final Set<String> allGroups = relevantHandlers.stream().map(i -> (String)((Literal)i.findAttribute("category").getValue()).getValue()).collect(Collectors.toSet());
 
         // resulting strategies
         final MalusForFitnessStrategy resultingFunction = new MalusForFitnessStrategy(target.size());

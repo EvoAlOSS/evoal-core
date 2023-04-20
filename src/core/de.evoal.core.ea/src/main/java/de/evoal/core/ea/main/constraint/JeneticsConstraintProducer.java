@@ -13,7 +13,7 @@ import de.evoal.core.ea.api.codec.CustomCodec;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.utils.LanguageHelper;
 import de.evoal.core.main.constraints.constraint.utils.ConfigurationUtils;
-import de.evoal.languages.model.instance.*;
+import de.evoal.languages.model.base.*;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
@@ -36,7 +36,7 @@ public class JeneticsConstraintProducer {
 
         // collect group information to handle
         final List<Instance> groups = ConfigurationUtils.findConstraintHandlerByHandlingStrategy(handlerConfigurations, "kill-at-birth");
-        final Map<String, Instance> configurationMap = groups.stream().collect(Collectors.toMap(i -> (String)((LiteralValue)i.findAttribute("category").getValue()).getLiteral().getValue(), Function.identity()));
+        final Map<String, Instance> configurationMap = groups.stream().collect(Collectors.toMap(i -> (String)((Literal)i.findAttribute("category").getValue()).getValue(), Function.identity()));
         final List<Constraint> listOfConstraints = constraints.getConstraints();
 
         return listOfConstraints

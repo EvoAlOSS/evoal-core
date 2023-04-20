@@ -6,8 +6,8 @@ import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.core.api.statistics.writer.StatisticsWriter;
 import de.evoal.core.api.utils.Requirements;
 import de.evoal.core.main.statistics.internal.MultipleStatisticsWriter;
-import de.evoal.languages.model.instance.Array;
-import de.evoal.languages.model.instance.Instance;
+import de.evoal.languages.model.base.Array;
+import de.evoal.languages.model.base.Instance;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.Dependent;

@@ -1,6 +1,6 @@
 package de.evoal.core.api.optimisation;
 
-import de.evoal.languages.model.instance.Instance;
+import de.evoal.languages.model.base.Instance;
 
 /**
  * Interface for all optimisation algorithms.

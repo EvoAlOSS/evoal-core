@@ -10,8 +10,8 @@ import de.evoal.languages.model.ddl.dsl.DataDescriptionLanguageStandaloneSetup;
 import de.evoal.languages.model.ddl.impl.DdlPackageImpl;
 import de.evoal.languages.model.dl.dsl.DefinitionLanguageStandaloneSetup;
 import de.evoal.languages.model.dl.impl.DlPackageImpl;
-import de.evoal.languages.model.el.dsl.ExpressionLanguageStandaloneSetup;
-import de.evoal.languages.model.el.impl.ELPackageImpl;
+import de.evoal.languages.model.base.dsl.BaseLanguageStandaloneSetup;
+import de.evoal.languages.model.base.impl.BasePackageImpl;
 import de.evoal.languages.model.generator.dsl.GeneratorDSLStandaloneSetup;
 import de.evoal.languages.model.generator.Configuration;
 import de.evoal.languages.model.generator.impl.GeneratorPackageImpl;
@@ -64,12 +64,12 @@ public class GeneratorConfigurationProducer {
      */
     private void initializeEMF() {
         DdlPackageImpl.init();
-        ELPackageImpl.init();
+        BasePackageImpl.init();
         DlPackageImpl.init();
         GeneratorPackageImpl.init();
 
         DataDescriptionLanguageStandaloneSetup.doSetup();
-        ExpressionLanguageStandaloneSetup.doSetup();
+        BaseLanguageStandaloneSetup.doSetup();
         DefinitionLanguageStandaloneSetup.doSetup();
         GeneratorDSLStandaloneSetup.doSetup();
     }

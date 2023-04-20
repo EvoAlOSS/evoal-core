@@ -120,7 +120,7 @@
 
 		<dependency>
 			<groupId>de.evoal.languages</groupId>
-			<artifactId>de.evoal.languages.model.el</artifactId>
+			<artifactId>de.evoal.languages.model.base</artifactId>
 			<version>${evoal.languages.version}</version>
 			<scope>provided</scope>
 		</dependency>
@@ -155,7 +155,7 @@
 
 		<dependency>
 			<groupId>de.evoal.languages</groupId>
-			<artifactId>de.evoal.languages.model.el.dsl</artifactId>
+			<artifactId>de.evoal.languages.model.base.dsl</artifactId>
 			<version>${evoal.languages.version}</version>
 			<scope>provided</scope>
 		</dependency>

@@ -2,12 +2,12 @@ package de.evoal.core.main.constraints.correlation.el;
 
 import de.evoal.core.main.constraints.el.ElHelper;
 import de.evoal.core.api.correlations.Range;
-import de.evoal.languages.model.el.*;
-import de.evoal.languages.model.el.util.ELSwitch;
+import de.evoal.languages.model.base.*;
+import de.evoal.languages.model.base.util.BaseSwitch;
 
 import java.util.Objects;
 
-public class RangeSwitch extends ELSwitch<Range> {
+public class RangeSwitch extends BaseSwitch<Range> {
     @Override
     public Range caseOrExpression(final OrExpression object) {
         Objects.equals(object.getSubExpressions().size(), 1);
@@ -97,7 +97,7 @@ public class RangeSwitch extends ELSwitch<Range> {
 
     @Override
     public Range caseCall(final Call object) {
-        final de.evoal.languages.model.ol.FunctionName calledFunction = (de.evoal.languages.model.ol.FunctionName)object.getFunction();
+        final de.evoal.languages.model.base.DefinedFunctionName calledFunction = (de.evoal.languages.model.base.DefinedFunctionName)object.getFunction();
         if(!"range".equals(calledFunction.getDefinition().getName())) {
             throw new IllegalStateException("Searching for range but found: " + calledFunction.getDefinition().getName());
         }

@@ -4,10 +4,10 @@ import de.evoal.core.api.board.CoreBlackboardEntries;
 import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.languages.model.ddl.DataDescription;
-import de.evoal.languages.model.instance.Array;
-import de.evoal.languages.model.instance.Attribute;
+import de.evoal.languages.model.base.Array;
+import de.evoal.languages.model.base.Attribute;
 import de.evoal.languages.model.instance.DataReference;
-import de.evoal.languages.model.instance.Instance;
+import de.evoal.languages.model.base.Instance;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.Dependent;

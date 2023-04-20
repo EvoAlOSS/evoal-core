@@ -7,7 +7,7 @@ import de.evoal.core.api.cdi.ConfigurationValue;
 import javax.enterprise.context.ApplicationScoped;
 
 import de.evoal.core.api.utils.LanguageHelper;
-import de.evoal.languages.model.instance.Instance;
+import de.evoal.languages.model.base.Instance;
 
 import javax.inject.Inject;
 import java.util.Arrays;

@@ -14,7 +14,7 @@ module de.evoal.core.ea {
     requires org.eclipse.emf.common;
 
     requires de.evoal.languages.model.ddl;
-    requires de.evoal.languages.model.el;
+    requires de.evoal.languages.model.base;
     requires de.evoal.languages.model.instance;
 
     requires de.evoal.core.main;

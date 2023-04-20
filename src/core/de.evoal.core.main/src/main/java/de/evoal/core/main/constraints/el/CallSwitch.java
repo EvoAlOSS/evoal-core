@@ -1,11 +1,11 @@
 package de.evoal.core.main.constraints.el;
 
-import de.evoal.languages.model.el.*;
-import de.evoal.languages.model.el.util.ELSwitch;
+import de.evoal.languages.model.base.*;
+import de.evoal.languages.model.base.util.BaseSwitch;
 
 import java.util.Objects;
 
-public class CallSwitch extends ELSwitch<Call> {
+public class CallSwitch extends BaseSwitch<Call> {
     @Override
     public Call caseOrExpression(final OrExpression object) {
         Objects.equals(object.getSubExpressions().size(), 1);

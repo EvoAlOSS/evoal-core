@@ -1,25 +1,27 @@
-/**
- * Shekel's foxholes.
- *
- * https://www.sfu.ca/~ssurjano/shekel.html
- */
-type 'shekel' {
-    /**
-	 * The recommended value for the vector a is (1/m)*{1,2,2,4,4,6,3,7,5,5}.
+module de.evoal.core.api.utils.regressions.generator {
+	/**
+	 * Shekel's foxholes.
+	 *
+	 * https://www.sfu.ca/~ssurjano/shekel.html
 	 */
-	'a' : array float;
-
-    /**
-	 * The recommended value for the constant c is {
-     * {4.0, 1.0, 8.0, 6.0, 3.0, 2.0, 5.0, 8.0, 6.0, 7.0},
-     * {4.0, 1.0, 8.0, 6.0, 7.0, 9.0, 3.0, 1.0, 2.0, 3.6},
-     * {4.0, 1.0, 8.0, 6.0, 3.0, 2.0, 5.0, 8.0, 6.0, 7.0},
-     * {4.0, 1.0, 8.0, 6.0, 7.0, 9.0, 3.0, 1.0, 2.0, 3.6}}.
-	 */
-	'c' : array array float;
-
-    /**
-	 * The recommended value for the constant m is 10.
-	 */
-	'm' : float;
+	type 'shekel' {
+	    /**
+		 * The recommended value for the vector a is (1/m)*{1,2,2,4,4,6,3,7,5,5}.
+		 */
+		'a' : array float;
+	
+	    /**
+		 * The recommended value for the constant c is {
+	     * {4.0, 1.0, 8.0, 6.0, 3.0, 2.0, 5.0, 8.0, 6.0, 7.0},
+	     * {4.0, 1.0, 8.0, 6.0, 7.0, 9.0, 3.0, 1.0, 2.0, 3.6},
+	     * {4.0, 1.0, 8.0, 6.0, 3.0, 2.0, 5.0, 8.0, 6.0, 7.0},
+	     * {4.0, 1.0, 8.0, 6.0, 7.0, 9.0, 3.0, 1.0, 2.0, 3.6}}.
+		 */
+		'c' : array array float;
+	
+	    /**
+		 * The recommended value for the constant m is 10.
+		 */
+		'm' : float;
+	}
 }
