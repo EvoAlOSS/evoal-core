@@ -1,0 +1,201 @@
+import "definitions" from de.evoal.core;
+
+module de.evoal.core.ea {
+	type 'evolutionary-algorithm' extends 'algorithm' {
+		'number-of-generations' : int;
+		'size-of-population' : int;
+		'maximum-age' : int;
+	
+		genotype : array instance chromosome;
+	
+		handlers : array instance 'handler';
+		selectors : instance selectors;
+		alterers : instance alterers;
+	
+		fitness : instance 'optimisation-function';
+	}
+	
+	abstract type chromosome {
+		genes : array instance gene;
+	}
+	
+	type 'bit-chromosome' extends chromosome {
+	    scale : int;
+	}
+	
+	type 'gray-chromosome' extends 'bit-chromosome' {
+	    scale : int;
+	}
+	
+	type 'double-chromosome' extends chromosome {
+	}
+	
+	type 'integer-chromosome' extends chromosome {
+	}
+	
+	type gene { content : data; }
+	
+		type pareto extends comparator {
+	}
+	
+	abstract type handler {}
+	
+	type 'constraint-handler' extends handler {
+		category : string;
+		calculation : instance 'constraint-calculation';
+		'constraint-handling' : instance 'constraint-handling';
+	}
+	
+	abstract type 'constraint-calculation' {
+	}
+	
+	type 'standard-deviation' extends 'constraint-calculation' {
+		factor : float;
+	}
+	
+	abstract type 'constraint-handling' {}
+	
+	type 'kill-at-birth' extends 'constraint-handling'{
+		'repair-strategy' : instance 'repair-strategy';
+	}
+	
+	abstract type 'repair-strategy' {}
+	
+	type 'repair-with-random' extends 'repair-strategy' {}
+	
+	type 'malus-for-fitness' extends 'constraint-handling' {
+		smoothing : float;
+	}
+	
+	type selectors {
+		survivor : instance selector;
+		offspring : instance selector;
+	}
+	
+	abstract type selector {
+	}
+	
+	type 'elite-selector' extends selector {
+		'size-factor' : float;
+		'non-elite-selector' : instance selector;
+	}
+	
+	type 'boltzmann-selector' extends selector {
+		beta : float;
+	}
+	
+	type 'exponential-rank-selector' extends selector {
+	}
+	
+	type 'linear-rank-selector' extends selector {
+		nminus : int;
+	}
+	
+	type 'monte-carlo-selector' extends selector {
+	}
+	
+	type 'probability-selector' extends selector {
+	}
+	
+	type 'stochastic-universal-selector' extends selector {
+	}
+	
+	type 'tournament-selector' extends selector {
+		'size-factor' : float;
+	}
+	
+	type 'truncation-selector' extends selector {
+		'worst-rank' : int;
+	}
+	
+	type alterers {
+		crossover : array instance crossover;
+		mutator : array instance mutator ;
+	}
+	
+	abstract type crossover {}
+	
+	type 'mean-alterer' extends crossover {
+		probability : float;
+	}
+	
+	type 'correlation-mean-alterer' extends crossover {
+		probability : float;
+	}
+	
+	type 'partial-matched-alterer' extends crossover {
+		probability : float;
+	}
+	
+	type 'correlation-partial-matched-alterer' extends crossover {
+		probability : float;
+	}
+	
+	type 'line-crossover' extends crossover {
+		probability : float;
+		position : float;
+	}
+	
+	type 'correlation-line-crossover' extends crossover {
+		probability : float;
+		position : float;
+	}
+	
+	type 'multi-point-crossover' extends crossover {
+		probability : float;
+		count : int;
+	}
+	
+	type 'correlation-multi-point-crossover' extends crossover {
+		probability : float;
+		count : int;
+	}
+	
+	type 'single-point-crossover' extends crossover {
+		probability : float;
+	}
+	
+	type 'correlation-single-point-crossover' extends crossover {
+		probability : float;
+	}
+	
+	type 'uniform-crossover' extends crossover {
+		'crossover-probability' : float;
+		'swap-probability' : float;
+	}
+	
+	type 'correlation-uniform-crossover' extends crossover {
+		'crossover-probability' : float;
+		'swap-probability' : float;
+	}
+	
+	abstract type mutator {
+	}
+	
+	type 'gaussian-mutator' extends mutator {
+		probability : float;
+	}
+	
+	type 'correlation-gaussian-mutator' extends mutator {
+		probability : float;
+		threshold : float;
+	}
+	
+	type 'swap-mutator' extends mutator {
+		probability : float;
+	}
+	
+	type 'correlation-swap-mutator' extends mutator {
+		probability : float;
+		threshold : float;
+	}
+	
+	type 'bit-flip-mutator' extends mutator  {
+		probability : float;
+	}
+	
+	type 'correlation-bit-flip-mutator' extends mutator {
+		probability : float;
+		threshold : float;
+	}
+}

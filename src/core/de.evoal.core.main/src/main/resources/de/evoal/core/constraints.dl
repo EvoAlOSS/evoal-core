@@ -1,0 +1,15 @@
+module de.evoal.core.constrainst {
+	/**
+	 * Sets the variance of some data.
+	 *
+	 * <b>Parameters:</b>
+	 * <ol>
+	 *   <li>Reference to the data ...</li>
+	 * </ol>
+	 */
+	def void variance(data reference, float variance);
+	
+	def void connection(data ref1, data ref2, float connection);
+	
+	def void constraint(expression exp, string category);
+}

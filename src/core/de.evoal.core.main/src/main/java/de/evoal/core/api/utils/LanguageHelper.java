@@ -83,9 +83,11 @@ public final class LanguageHelper {
     }
 
     private static Object convertToJava(final Object current, final Type type) {
-        if(current instanceof Literal) {
+        if(type instanceof InstanceType) {
+            return (Instance)current;
+        } else if(type instanceof LiteralType) {
             return readLiteral(current, type);
-        } else if(current instanceof Array) {
+        } else if(type instanceof ArrayType) {
             return readArray(current, type);
         }
 

@@ -1,4 +1,4 @@
-module de.evoal.core.api.utils.regressions.definitions {
+module de.evoal.core.api.utils.definitions {
 	type 'parent' {
 		child : instance A;
 	}

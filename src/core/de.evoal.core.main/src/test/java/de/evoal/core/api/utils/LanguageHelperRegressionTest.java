@@ -96,7 +96,5 @@ public class LanguageHelperRegressionTest {
             final Array array2 = (Array) array.getValues().get(0);
             Assertions.assertEquals(10, array2.getValues().size());
         }
-
     }
-
 }

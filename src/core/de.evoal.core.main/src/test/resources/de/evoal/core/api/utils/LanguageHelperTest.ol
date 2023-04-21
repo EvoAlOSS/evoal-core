@@ -1,7 +1,7 @@
-import de.evoal.core.api.utils.regressions.definitions;
+import "definitions" from de.evoal.core.api.utils.definitions;
 
-declare 
-parent {
+
+declare 'p' as parent {
 	child := A {
 		'boolean-field' := true;	
 		'float-field' := 1.3;
@@ -9,10 +9,9 @@ parent {
 		'string-field' := "FOOBAR";
 		'array-1D-float' := [4.2, 3.1, 1.0];
 		'array-2D-int' := [
-			
 			[ 1, 2, 3, 4, 5],
 			[ 3, 2, 1],
 			[42]
 		];
 	};
-}
+} documenting := [];

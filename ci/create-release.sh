@@ -1,9 +1,13 @@
 #!/bin/bash
 
-set -e -x
+
+
+
 
 RELEASE_PLUGINS="generator.main surrogate.api surrogate.simple surrogate.svr approximative.density core.arff core.ea"
 
+
+rm -rf evoal
 mkdir -p evoal/plugins
 
 cp src/languages/de.evoal.languages.releng.site/target/de.evoal.languages.releng.site-*.zip "evoal/eclipse-update-site.zip"
@@ -18,6 +22,7 @@ done
 rm evoal/modules/javax.inject*
 rm evoal/modules/javax.annotation-api-*
 rm evoal/modules/jsr305-*
+
 # remove multiple definitions of CDI stuff
 rm evoal/modules/jboss-annotations-api*
 rm evoal/modules/jboss-interceptors-api*
