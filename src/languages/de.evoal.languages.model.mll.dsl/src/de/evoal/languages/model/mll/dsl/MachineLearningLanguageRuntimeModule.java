@@ -6,17 +6,24 @@ package de.evoal.languages.model.mll.dsl;
 
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
+import org.eclipse.xtext.scoping.impl.DefaultGlobalScopeProvider;
 
-import de.evoal.languages.model.mll.dsl.scoping.MachineLearningClasspathGlobalScopeProvider;
 import de.evoal.languages.model.utils.converter.ValueConverterService;
+import de.evoal.languages.model.utils.scoping.ClasspathGlobalScopeProvider;
 
 /**
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
  */
 public class MachineLearningLanguageRuntimeModule extends AbstractMachineLearningLanguageRuntimeModule {
-	@Override
 	public Class<? extends IGlobalScopeProvider> bindIGlobalScopeProvider() {
-		return MachineLearningClasspathGlobalScopeProvider.class;
+		if(System.getProperty("osgi.os") != null // this means that we are running in OSGI (eclipse or tycho)
+				&& (System.getProperty("eclipse.application") == null // sanity check for the next line
+				|| !System.getProperty("eclipse.application").contains("tycho"))) // use classpath provider in Tycho-base unit test environment
+		{
+			return DefaultGlobalScopeProvider.class;
+		} else {
+			return ClasspathGlobalScopeProvider.class;
+		}
 	}
 	
     @Override

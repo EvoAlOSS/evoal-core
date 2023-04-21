@@ -103,10 +103,10 @@ public class OptimisationLanguageParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getOptimisationModelRuleAccess().getProblemAssignment_1(), "rule__OptimisationModelRule__ProblemAssignment_1");
 			builder.put(grammarAccess.getOptimisationModelRuleAccess().getAlgorithmAssignment_2(), "rule__OptimisationModelRule__AlgorithmAssignment_2");
 			builder.put(grammarAccess.getProblemRuleAccess().getNameAssignment_1(), "rule__ProblemRule__NameAssignment_1");
-			builder.put(grammarAccess.getProblemRuleAccess().getProblemAssignment_3(), "rule__ProblemRule__ProblemAssignment_3");
+			builder.put(grammarAccess.getProblemRuleAccess().getInstanceAssignment_3(), "rule__ProblemRule__InstanceAssignment_3");
 			builder.put(grammarAccess.getProblemRuleAccess().getDocumentationAssignment_4_2(), "rule__ProblemRule__DocumentationAssignment_4_2");
 			builder.put(grammarAccess.getAlgorithmInstanceRuleAccess().getProblemAssignment_2(), "rule__AlgorithmInstanceRule__ProblemAssignment_2");
-			builder.put(grammarAccess.getAlgorithmInstanceRuleAccess().getAlgorithmAssignment_5(), "rule__AlgorithmInstanceRule__AlgorithmAssignment_5");
+			builder.put(grammarAccess.getAlgorithmInstanceRuleAccess().getInstanceAssignment_5(), "rule__AlgorithmInstanceRule__InstanceAssignment_5");
 			builder.put(grammarAccess.getAlgorithmInstanceRuleAccess().getDocumentationAssignment_6_2(), "rule__AlgorithmInstanceRule__DocumentationAssignment_6_2");
 			builder.put(grammarAccess.getDataReferenceRuleAccess().getDefinitionAssignment_2(), "rule__DataReferenceRule__DefinitionAssignment_2");
 			builder.put(grammarAccess.getOrExpressionRuleAccess().getSubExpressionsAssignment_0(), "rule__OrExpressionRule__SubExpressionsAssignment_0");

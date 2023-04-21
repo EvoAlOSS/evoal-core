@@ -73,8 +73,8 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameStringOrIdParserRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		private final Keyword cAsKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cProblemAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cProblemInstanceLiteralRuleParserRuleCall_3_0 = (RuleCall)cProblemAssignment_3.eContents().get(0);
+		private final Assignment cInstanceAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cInstanceInstanceLiteralRuleParserRuleCall_3_0 = (RuleCall)cInstanceAssignment_3.eContents().get(0);
 		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
 		private final Keyword cDocumentingKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
 		private final Keyword cColonEqualsSignKeyword_4_1 = (Keyword)cGroup_4.eContents().get(1);
@@ -84,13 +84,13 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 		
 		//ProblemRule returns Problem:
 		//    "declare" name = StringOrId "as"
-		//        problem = InstanceLiteralRule
+		//        instance = InstanceLiteralRule
 		//    ("documenting" ":=" documentation = ArrayRule ';')?
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"declare" name = StringOrId "as"
-		//    problem = InstanceLiteralRule
+		//    instance = InstanceLiteralRule
 		//("documenting" ":=" documentation = ArrayRule ';')?
 		public Group getGroup() { return cGroup; }
 		
@@ -106,11 +106,11 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 		//"as"
 		public Keyword getAsKeyword_2() { return cAsKeyword_2; }
 		
-		//problem = InstanceLiteralRule
-		public Assignment getProblemAssignment_3() { return cProblemAssignment_3; }
+		//instance = InstanceLiteralRule
+		public Assignment getInstanceAssignment_3() { return cInstanceAssignment_3; }
 		
 		//InstanceLiteralRule
-		public RuleCall getProblemInstanceLiteralRuleParserRuleCall_3_0() { return cProblemInstanceLiteralRuleParserRuleCall_3_0; }
+		public RuleCall getInstanceInstanceLiteralRuleParserRuleCall_3_0() { return cInstanceInstanceLiteralRuleParserRuleCall_3_0; }
 		
 		//("documenting" ":=" documentation = ArrayRule ';')?
 		public Group getGroup_4() { return cGroup_4; }
@@ -140,8 +140,8 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 		private final RuleCall cProblemProblemQualifiedNameParserRuleCall_2_0_1 = (RuleCall)cProblemProblemCrossReference_2_0.eContents().get(1);
 		private final Keyword cWithKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		private final Keyword cAlgorithmKeyword_4 = (Keyword)cGroup.eContents().get(4);
-		private final Assignment cAlgorithmAssignment_5 = (Assignment)cGroup.eContents().get(5);
-		private final RuleCall cAlgorithmInstanceLiteralRuleParserRuleCall_5_0 = (RuleCall)cAlgorithmAssignment_5.eContents().get(0);
+		private final Assignment cInstanceAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final RuleCall cInstanceInstanceLiteralRuleParserRuleCall_5_0 = (RuleCall)cInstanceAssignment_5.eContents().get(0);
 		private final Group cGroup_6 = (Group)cGroup.eContents().get(6);
 		private final Keyword cDocumentingKeyword_6_0 = (Keyword)cGroup_6.eContents().get(0);
 		private final Keyword cColonEqualsSignKeyword_6_1 = (Keyword)cGroup_6.eContents().get(1);
@@ -151,13 +151,13 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 		
 		//AlgorithmInstanceRule returns AlgorithmInstance:
 		//    "instance" "for" problem = [Problem|QualifiedName] "with" "algorithm"
-		//        algorithm = InstanceLiteralRule
+		//        instance = InstanceLiteralRule
 		//    ("documenting" ":=" documentation = ArrayRule ';')?
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"instance" "for" problem = [Problem|QualifiedName] "with" "algorithm"
-		//    algorithm = InstanceLiteralRule
+		//    instance = InstanceLiteralRule
 		//("documenting" ":=" documentation = ArrayRule ';')?
 		public Group getGroup() { return cGroup; }
 		
@@ -182,11 +182,11 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 		//"algorithm"
 		public Keyword getAlgorithmKeyword_4() { return cAlgorithmKeyword_4; }
 		
-		//algorithm = InstanceLiteralRule
-		public Assignment getAlgorithmAssignment_5() { return cAlgorithmAssignment_5; }
+		//instance = InstanceLiteralRule
+		public Assignment getInstanceAssignment_5() { return cInstanceAssignment_5; }
 		
 		//InstanceLiteralRule
-		public RuleCall getAlgorithmInstanceLiteralRuleParserRuleCall_5_0() { return cAlgorithmInstanceLiteralRuleParserRuleCall_5_0; }
+		public RuleCall getInstanceInstanceLiteralRuleParserRuleCall_5_0() { return cInstanceInstanceLiteralRuleParserRuleCall_5_0; }
 		
 		//("documenting" ":=" documentation = ArrayRule ';')?
 		public Group getGroup_6() { return cGroup_6; }
@@ -284,7 +284,7 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 	
 	//ProblemRule returns Problem:
 	//    "declare" name = StringOrId "as"
-	//        problem = InstanceLiteralRule
+	//        instance = InstanceLiteralRule
 	//    ("documenting" ":=" documentation = ArrayRule ';')?
 	//;
 	public ProblemRuleElements getProblemRuleAccess() {
@@ -297,7 +297,7 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 	
 	//AlgorithmInstanceRule returns AlgorithmInstance:
 	//    "instance" "for" problem = [Problem|QualifiedName] "with" "algorithm"
-	//        algorithm = InstanceLiteralRule
+	//        instance = InstanceLiteralRule
 	//    ("documenting" ":=" documentation = ArrayRule ';')?
 	//;
 	public AlgorithmInstanceRuleElements getAlgorithmInstanceRuleAccess() {

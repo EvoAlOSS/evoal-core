@@ -16,12 +16,12 @@ OptimisationModelRule returns OptimisationModel:
 
 ProblemRule returns Problem:
 	"declare" name = StringOrId "as"
-		problem = InstanceLiteralRule
+		instance = InstanceLiteralRule
 	("documenting" ":=" documentation = ArrayRule ';')?
 ;
 
 AlgorithmInstanceRule returns AlgorithmInstance:
 	"instance" "for" problem = [Problem|QualifiedName] "with" "algorithm"
-		algorithm = InstanceLiteralRule
+		instance = InstanceLiteralRule
 	("documenting" ":=" documentation = ArrayRule ';')?
 ;

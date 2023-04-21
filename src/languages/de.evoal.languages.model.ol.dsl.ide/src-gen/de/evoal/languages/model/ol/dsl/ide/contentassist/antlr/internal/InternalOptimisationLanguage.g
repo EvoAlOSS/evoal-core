@@ -1892,9 +1892,9 @@ rule__ProblemRule__Group__3__Impl
 	}
 :
 (
-	{ before(grammarAccess.getProblemRuleAccess().getProblemAssignment_3()); }
-	(rule__ProblemRule__ProblemAssignment_3)
-	{ after(grammarAccess.getProblemRuleAccess().getProblemAssignment_3()); }
+	{ before(grammarAccess.getProblemRuleAccess().getInstanceAssignment_3()); }
+	(rule__ProblemRule__InstanceAssignment_3)
+	{ after(grammarAccess.getProblemRuleAccess().getInstanceAssignment_3()); }
 )
 ;
 finally {
@@ -2189,9 +2189,9 @@ rule__AlgorithmInstanceRule__Group__5__Impl
 	}
 :
 (
-	{ before(grammarAccess.getAlgorithmInstanceRuleAccess().getAlgorithmAssignment_5()); }
-	(rule__AlgorithmInstanceRule__AlgorithmAssignment_5)
-	{ after(grammarAccess.getAlgorithmInstanceRuleAccess().getAlgorithmAssignment_5()); }
+	{ before(grammarAccess.getAlgorithmInstanceRuleAccess().getInstanceAssignment_5()); }
+	(rule__AlgorithmInstanceRule__InstanceAssignment_5)
+	{ after(grammarAccess.getAlgorithmInstanceRuleAccess().getInstanceAssignment_5()); }
 )
 ;
 finally {
@@ -5282,15 +5282,15 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__ProblemRule__ProblemAssignment_3
+rule__ProblemRule__InstanceAssignment_3
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 	(
-		{ before(grammarAccess.getProblemRuleAccess().getProblemInstanceLiteralRuleParserRuleCall_3_0()); }
+		{ before(grammarAccess.getProblemRuleAccess().getInstanceInstanceLiteralRuleParserRuleCall_3_0()); }
 		ruleInstanceLiteralRule
-		{ after(grammarAccess.getProblemRuleAccess().getProblemInstanceLiteralRuleParserRuleCall_3_0()); }
+		{ after(grammarAccess.getProblemRuleAccess().getInstanceInstanceLiteralRuleParserRuleCall_3_0()); }
 	)
 ;
 finally {
@@ -5331,15 +5331,15 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__AlgorithmInstanceRule__AlgorithmAssignment_5
+rule__AlgorithmInstanceRule__InstanceAssignment_5
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 	(
-		{ before(grammarAccess.getAlgorithmInstanceRuleAccess().getAlgorithmInstanceLiteralRuleParserRuleCall_5_0()); }
+		{ before(grammarAccess.getAlgorithmInstanceRuleAccess().getInstanceInstanceLiteralRuleParserRuleCall_5_0()); }
 		ruleInstanceLiteralRule
-		{ after(grammarAccess.getAlgorithmInstanceRuleAccess().getAlgorithmInstanceLiteralRuleParserRuleCall_5_0()); }
+		{ after(grammarAccess.getAlgorithmInstanceRuleAccess().getInstanceInstanceLiteralRuleParserRuleCall_5_0()); }
 	)
 ;
 finally {

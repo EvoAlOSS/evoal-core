@@ -3,24 +3,16 @@
  */
 package de.evoal.languages.model.generator.dsl;
 
-import java.util.Map;
-
-import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 import org.eclipse.xtext.scoping.impl.DefaultGlobalScopeProvider;
 import org.eclipse.xtext.scoping.impl.ImportUriResolver;
-import org.eclipse.xtext.workspace.WorkspaceConfig;
 
-import com.google.inject.Binder;
-import com.google.inject.Inject;
-import com.google.inject.name.Named;
-import com.google.inject.name.Names;
-
-import de.evoal.languages.model.generator.dsl.scoping.GeneratorClasspathGlobalScopeProvider;
 import de.evoal.languages.model.generator.dsl.scoping.GeneratorDSLLocalScopeProvider;
 import de.evoal.languages.model.utils.converter.ValueConverterService;
+import de.evoal.languages.model.utils.scoping.ClasspathGlobalScopeProvider;
+import de.evoal.languages.model.utils.scoping.ClasspathGlobalScopeProvider.CustomUriResolver;
 
 /**
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
@@ -42,11 +34,17 @@ public class GeneratorDSLRuntimeModule extends AbstractGeneratorDSLRuntimeModule
     }
     
 	public Class<? extends IGlobalScopeProvider> bindIGlobalScopeProvider() {
-		if(System.getProperty("osgi.os") != null) {
+		if(System.getProperty("osgi.os") != null // this means that we are running in OSGI (eclipse or tycho)
+				&& (System.getProperty("eclipse.application") == null // sanity check for the next line
+				|| !System.getProperty("eclipse.application").contains("tycho"))) // use classpath provider in Tycho-base unit test environment
+		{
 			return DefaultGlobalScopeProvider.class;
 		} else {
-			return GeneratorClasspathGlobalScopeProvider.class;
+			return ClasspathGlobalScopeProvider.class;
 		}
 	}
-    
+	
+	public Class<? extends ImportUriResolver> bindImportUriResolver() {
+		return CustomUriResolver.class;
+	}
 }

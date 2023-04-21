@@ -28,7 +28,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * </p>
  * <ul>
  *   <li>{@link de.evoal.languages.model.ol.impl.AlgorithmInstanceImpl#getProblem <em>Problem</em>}</li>
- *   <li>{@link de.evoal.languages.model.ol.impl.AlgorithmInstanceImpl#getAlgorithm <em>Algorithm</em>}</li>
+ *   <li>{@link de.evoal.languages.model.ol.impl.AlgorithmInstanceImpl#getInstance <em>Instance</em>}</li>
  *   <li>{@link de.evoal.languages.model.ol.impl.AlgorithmInstanceImpl#getDocumentation <em>Documentation</em>}</li>
  * </ul>
  *
@@ -46,14 +46,14 @@ public class AlgorithmInstanceImpl extends MinimalEObjectImpl.Container implemen
 	protected Problem problem;
 
 	/**
-	 * The cached value of the '{@link #getAlgorithm() <em>Algorithm</em>}' containment reference.
+	 * The cached value of the '{@link #getInstance() <em>Instance</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getAlgorithm()
+	 * @see #getInstance()
 	 * @generated
 	 * @ordered
 	 */
-	protected Instance algorithm;
+	protected Instance instance;
 
 	/**
 	 * The cached value of the '{@link #getDocumentation() <em>Documentation</em>}' containment reference.
@@ -130,8 +130,8 @@ public class AlgorithmInstanceImpl extends MinimalEObjectImpl.Container implemen
 	 * @generated
 	 */
 	@Override
-	public Instance getAlgorithm() {
-		return algorithm;
+	public Instance getInstance() {
+		return instance;
 	}
 
 	/**
@@ -139,11 +139,11 @@ public class AlgorithmInstanceImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetAlgorithm(Instance newAlgorithm, NotificationChain msgs) {
-		Instance oldAlgorithm = algorithm;
-		algorithm = newAlgorithm;
+	public NotificationChain basicSetInstance(Instance newInstance, NotificationChain msgs) {
+		Instance oldInstance = instance;
+		instance = newInstance;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OLPackage.ALGORITHM_INSTANCE__ALGORITHM, oldAlgorithm, newAlgorithm);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OLPackage.ALGORITHM_INSTANCE__INSTANCE, oldInstance, newInstance);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -155,18 +155,18 @@ public class AlgorithmInstanceImpl extends MinimalEObjectImpl.Container implemen
 	 * @generated
 	 */
 	@Override
-	public void setAlgorithm(Instance newAlgorithm) {
-		if (newAlgorithm != algorithm) {
+	public void setInstance(Instance newInstance) {
+		if (newInstance != instance) {
 			NotificationChain msgs = null;
-			if (algorithm != null)
-				msgs = ((InternalEObject)algorithm).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OLPackage.ALGORITHM_INSTANCE__ALGORITHM, null, msgs);
-			if (newAlgorithm != null)
-				msgs = ((InternalEObject)newAlgorithm).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - OLPackage.ALGORITHM_INSTANCE__ALGORITHM, null, msgs);
-			msgs = basicSetAlgorithm(newAlgorithm, msgs);
+			if (instance != null)
+				msgs = ((InternalEObject)instance).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OLPackage.ALGORITHM_INSTANCE__INSTANCE, null, msgs);
+			if (newInstance != null)
+				msgs = ((InternalEObject)newInstance).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - OLPackage.ALGORITHM_INSTANCE__INSTANCE, null, msgs);
+			msgs = basicSetInstance(newInstance, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OLPackage.ALGORITHM_INSTANCE__ALGORITHM, newAlgorithm, newAlgorithm));
+			eNotify(new ENotificationImpl(this, Notification.SET, OLPackage.ALGORITHM_INSTANCE__INSTANCE, newInstance, newInstance));
 	}
 
 	/**
@@ -222,8 +222,8 @@ public class AlgorithmInstanceImpl extends MinimalEObjectImpl.Container implemen
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case OLPackage.ALGORITHM_INSTANCE__ALGORITHM:
-				return basicSetAlgorithm(null, msgs);
+			case OLPackage.ALGORITHM_INSTANCE__INSTANCE:
+				return basicSetInstance(null, msgs);
 			case OLPackage.ALGORITHM_INSTANCE__DOCUMENTATION:
 				return basicSetDocumentation(null, msgs);
 		}
@@ -241,8 +241,8 @@ public class AlgorithmInstanceImpl extends MinimalEObjectImpl.Container implemen
 			case OLPackage.ALGORITHM_INSTANCE__PROBLEM:
 				if (resolve) return getProblem();
 				return basicGetProblem();
-			case OLPackage.ALGORITHM_INSTANCE__ALGORITHM:
-				return getAlgorithm();
+			case OLPackage.ALGORITHM_INSTANCE__INSTANCE:
+				return getInstance();
 			case OLPackage.ALGORITHM_INSTANCE__DOCUMENTATION:
 				return getDocumentation();
 		}
@@ -260,8 +260,8 @@ public class AlgorithmInstanceImpl extends MinimalEObjectImpl.Container implemen
 			case OLPackage.ALGORITHM_INSTANCE__PROBLEM:
 				setProblem((Problem)newValue);
 				return;
-			case OLPackage.ALGORITHM_INSTANCE__ALGORITHM:
-				setAlgorithm((Instance)newValue);
+			case OLPackage.ALGORITHM_INSTANCE__INSTANCE:
+				setInstance((Instance)newValue);
 				return;
 			case OLPackage.ALGORITHM_INSTANCE__DOCUMENTATION:
 				setDocumentation((Array)newValue);
@@ -281,8 +281,8 @@ public class AlgorithmInstanceImpl extends MinimalEObjectImpl.Container implemen
 			case OLPackage.ALGORITHM_INSTANCE__PROBLEM:
 				setProblem((Problem)null);
 				return;
-			case OLPackage.ALGORITHM_INSTANCE__ALGORITHM:
-				setAlgorithm((Instance)null);
+			case OLPackage.ALGORITHM_INSTANCE__INSTANCE:
+				setInstance((Instance)null);
 				return;
 			case OLPackage.ALGORITHM_INSTANCE__DOCUMENTATION:
 				setDocumentation((Array)null);
@@ -301,8 +301,8 @@ public class AlgorithmInstanceImpl extends MinimalEObjectImpl.Container implemen
 		switch (featureID) {
 			case OLPackage.ALGORITHM_INSTANCE__PROBLEM:
 				return problem != null;
-			case OLPackage.ALGORITHM_INSTANCE__ALGORITHM:
-				return algorithm != null;
+			case OLPackage.ALGORITHM_INSTANCE__INSTANCE:
+				return instance != null;
 			case OLPackage.ALGORITHM_INSTANCE__DOCUMENTATION:
 				return documentation != null;
 		}

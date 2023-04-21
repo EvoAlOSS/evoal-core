@@ -8,14 +8,11 @@ import org.eclipse.xtext.scoping.IScope;
 import com.google.inject.Inject;
 
 import de.evoal.languages.model.base.BasePackage;
-import de.evoal.languages.model.base.Instance;
 import de.evoal.languages.model.instance.dsl.scoping.InstanceLanguageLocalScopeProvider;
-import de.evoal.languages.model.ol.Problem;
 import de.evoal.languages.model.utils.scoping.WildcardEnabledLocalScopeProvider;
 
 public class OptimisationLanguageLocalScopeProvider extends WildcardEnabledLocalScopeProvider {
 	private static EClass instance = BasePackage.eINSTANCE.getInstance();
-	private static EReference instanceDefinition = BasePackage.eINSTANCE.getInstance_Definition();
 	private static EReference attributeDefinition = BasePackage.eINSTANCE.getAttribute_Definition();
 	
 	@Inject
@@ -23,8 +20,6 @@ public class OptimisationLanguageLocalScopeProvider extends WildcardEnabledLocal
 	
 	@Override
 	public IScope getScope(final EObject context, final EReference reference) {
-//		System.err.println("[Opti Local ] --> " + context.eClass().getName() + " --> " + reference.getEContainingClass().getName() + "." + reference.getName());
-
 		if(instance.equals(context.eClass()) && (attributeDefinition.equals(reference))) {
 			// inject fields of types
 			IScope typeScope = IScope.NULLSCOPE;
@@ -36,17 +31,7 @@ public class OptimisationLanguageLocalScopeProvider extends WildcardEnabledLocal
 			
 			return getLocalElementsScope(typeScope, context, reference);
 		}
-		/*else if(context instanceof Problem && instanceDefinition.equals(reference)) {
-			IScope result = super.getScope(context, reference);;
-			 
-			System.err.println(result);
-		}
-*/
-		try {
-			return super.getScope(context, reference);
-		} finally {
-		//	System.err.println("[Opti Local ] --< " + context.eClass().getName() + " --> " + reference.getEContainingClass().getName() + "." + reference.getName());			
-		}
-	}	
 
+		return super.getScope(context, reference);
+	}	
 }

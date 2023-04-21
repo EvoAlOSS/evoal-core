@@ -212,7 +212,7 @@ public class OptimisationLanguageSemanticSequencer extends InstanceLanguageSeman
 	 *     AlgorithmInstanceRule returns AlgorithmInstance
 	 *
 	 * Constraint:
-	 *     (problem=[Problem|QualifiedName] algorithm=InstanceLiteralRule documentation=ArrayRule?)
+	 *     (problem=[Problem|QualifiedName] instance=InstanceLiteralRule documentation=ArrayRule?)
 	 * </pre>
 	 */
 	protected void sequence_AlgorithmInstanceRule(ISerializationContext context, AlgorithmInstance semanticObject) {
@@ -244,7 +244,7 @@ public class OptimisationLanguageSemanticSequencer extends InstanceLanguageSeman
 	 *     ProblemRule returns Problem
 	 *
 	 * Constraint:
-	 *     (name=StringOrId problem=InstanceLiteralRule documentation=ArrayRule?)
+	 *     (name=StringOrId instance=InstanceLiteralRule documentation=ArrayRule?)
 	 * </pre>
 	 */
 	protected void sequence_ProblemRule(ISerializationContext context, Problem semanticObject) {

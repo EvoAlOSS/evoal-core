@@ -15,12 +15,12 @@
     </genClasses>
     <genClasses ecoreClass="model.ecore#//Problem">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//Problem/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//Problem/problem"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//Problem/instance"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//Problem/documentation"/>
     </genClasses>
     <genClasses ecoreClass="model.ecore#//AlgorithmInstance">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//AlgorithmInstance/problem"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//AlgorithmInstance/algorithm"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//AlgorithmInstance/instance"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//AlgorithmInstance/documentation"/>
     </genClasses>
   </genPackages>

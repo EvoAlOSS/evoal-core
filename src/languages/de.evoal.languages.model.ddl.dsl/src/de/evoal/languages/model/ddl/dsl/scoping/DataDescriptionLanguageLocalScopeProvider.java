@@ -15,8 +15,6 @@ public class DataDescriptionLanguageLocalScopeProvider extends WildcardEnabledLo
 	
 	@Override
 	public IScope getScope(final EObject context, final EReference reference) {
-		System.err.println("[DL] Asking for " + context.eClass().getName() + " --> " + reference.getEContainingClass().getName() + "." + reference.getName());
-		
 		if(typeDefinition.equals(context.eClass()) && (attributes.equals(reference))) {
 			// inject fields of types
 			final TypeDefinition definition = (TypeDefinition)context;

@@ -18,7 +18,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link de.evoal.languages.model.ol.Problem#getName <em>Name</em>}</li>
- *   <li>{@link de.evoal.languages.model.ol.Problem#getProblem <em>Problem</em>}</li>
+ *   <li>{@link de.evoal.languages.model.ol.Problem#getInstance <em>Instance</em>}</li>
  *   <li>{@link de.evoal.languages.model.ol.Problem#getDocumentation <em>Documentation</em>}</li>
  * </ul>
  *
@@ -50,26 +50,26 @@ public interface Problem extends EObject {
 	void setName(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Problem</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Instance</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Problem</em>' containment reference.
-	 * @see #setProblem(Instance)
-	 * @see de.evoal.languages.model.ol.OLPackage#getProblem_Problem()
+	 * @return the value of the '<em>Instance</em>' containment reference.
+	 * @see #setInstance(Instance)
+	 * @see de.evoal.languages.model.ol.OLPackage#getProblem_Instance()
 	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	Instance getProblem();
+	Instance getInstance();
 
 	/**
-	 * Sets the value of the '{@link de.evoal.languages.model.ol.Problem#getProblem <em>Problem</em>}' containment reference.
+	 * Sets the value of the '{@link de.evoal.languages.model.ol.Problem#getInstance <em>Instance</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Problem</em>' containment reference.
-	 * @see #getProblem()
+	 * @param value the new value of the '<em>Instance</em>' containment reference.
+	 * @see #getInstance()
 	 * @generated
 	 */
-	void setProblem(Instance value);
+	void setInstance(Instance value);
 
 	/**
 	 * Returns the value of the '<em><b>Documentation</b></em>' containment reference.

@@ -17,7 +17,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Problem">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="problem" lowerBound="1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="instance" lowerBound="1"
         eType="ecore:EClass ../../de.evoal.languages.model.base/model/model.ecore#//Instance"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="documentation" eType="ecore:EClass ../../de.evoal.languages.model.base/model/model.ecore#//Array"
@@ -26,7 +26,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="AlgorithmInstance">
     <eStructuralFeatures xsi:type="ecore:EReference" name="problem" lowerBound="1"
         eType="#//Problem"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="algorithm" lowerBound="1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="instance" lowerBound="1"
         eType="ecore:EClass ../../de.evoal.languages.model.base/model/model.ecore#//Instance"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="documentation" eType="ecore:EClass ../../de.evoal.languages.model.base/model/model.ecore#//Array"

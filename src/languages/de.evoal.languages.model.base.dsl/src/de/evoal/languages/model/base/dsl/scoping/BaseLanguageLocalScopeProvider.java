@@ -22,9 +22,6 @@ public class BaseLanguageLocalScopeProvider extends WildcardEnabledLocalScopePro
  	
 	@Override
 	public IScope getScope(final EObject context, final EReference reference) {
-		System.err.println("[Base Local ] --> " + context.eClass().getName() + " --> " + reference.getEContainingClass().getName() + "." + reference.getName());
-
-		try {
 		if(instance.equals(context.eClass()) && instanceDefinition.equals(reference)) {
 			// inject fields of types
 			final Instance instance = (Instance)context;
@@ -41,10 +38,6 @@ public class BaseLanguageLocalScopeProvider extends WildcardEnabledLocalScopePro
 		}
 
 		return super.getScope(context, reference);
-		} finally {
-			System.err.println("[Base Local ] --< " + context.eClass().getName() + " --> " + reference.getEContainingClass().getName() + "." + reference.getName());
-
-		}
 	}
 
 	private IScope scopeOf(final TypeDefinition definition) {
@@ -55,8 +48,7 @@ public class BaseLanguageLocalScopeProvider extends WildcardEnabledLocalScopePro
 			attributes.addAll(current.getAttributes());
 			current = current.getSuperType();
 		}
-				
-		System.err.println("[Base]  --> " + attributes);
+
 		return Scopes.scopeFor(attributes);
 	}	
 

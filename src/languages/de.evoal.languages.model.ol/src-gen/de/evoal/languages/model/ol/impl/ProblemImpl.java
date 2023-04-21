@@ -27,7 +27,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * </p>
  * <ul>
  *   <li>{@link de.evoal.languages.model.ol.impl.ProblemImpl#getName <em>Name</em>}</li>
- *   <li>{@link de.evoal.languages.model.ol.impl.ProblemImpl#getProblem <em>Problem</em>}</li>
+ *   <li>{@link de.evoal.languages.model.ol.impl.ProblemImpl#getInstance <em>Instance</em>}</li>
  *   <li>{@link de.evoal.languages.model.ol.impl.ProblemImpl#getDocumentation <em>Documentation</em>}</li>
  * </ul>
  *
@@ -55,14 +55,14 @@ public class ProblemImpl extends MinimalEObjectImpl.Container implements Problem
 	protected String name = NAME_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getProblem() <em>Problem</em>}' containment reference.
+	 * The cached value of the '{@link #getInstance() <em>Instance</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getProblem()
+	 * @see #getInstance()
 	 * @generated
 	 * @ordered
 	 */
-	protected Instance problem;
+	protected Instance instance;
 
 	/**
 	 * The cached value of the '{@link #getDocumentation() <em>Documentation</em>}' containment reference.
@@ -122,8 +122,8 @@ public class ProblemImpl extends MinimalEObjectImpl.Container implements Problem
 	 * @generated
 	 */
 	@Override
-	public Instance getProblem() {
-		return problem;
+	public Instance getInstance() {
+		return instance;
 	}
 
 	/**
@@ -131,11 +131,11 @@ public class ProblemImpl extends MinimalEObjectImpl.Container implements Problem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetProblem(Instance newProblem, NotificationChain msgs) {
-		Instance oldProblem = problem;
-		problem = newProblem;
+	public NotificationChain basicSetInstance(Instance newInstance, NotificationChain msgs) {
+		Instance oldInstance = instance;
+		instance = newInstance;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OLPackage.PROBLEM__PROBLEM, oldProblem, newProblem);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OLPackage.PROBLEM__INSTANCE, oldInstance, newInstance);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -147,18 +147,18 @@ public class ProblemImpl extends MinimalEObjectImpl.Container implements Problem
 	 * @generated
 	 */
 	@Override
-	public void setProblem(Instance newProblem) {
-		if (newProblem != problem) {
+	public void setInstance(Instance newInstance) {
+		if (newInstance != instance) {
 			NotificationChain msgs = null;
-			if (problem != null)
-				msgs = ((InternalEObject)problem).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OLPackage.PROBLEM__PROBLEM, null, msgs);
-			if (newProblem != null)
-				msgs = ((InternalEObject)newProblem).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - OLPackage.PROBLEM__PROBLEM, null, msgs);
-			msgs = basicSetProblem(newProblem, msgs);
+			if (instance != null)
+				msgs = ((InternalEObject)instance).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OLPackage.PROBLEM__INSTANCE, null, msgs);
+			if (newInstance != null)
+				msgs = ((InternalEObject)newInstance).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - OLPackage.PROBLEM__INSTANCE, null, msgs);
+			msgs = basicSetInstance(newInstance, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OLPackage.PROBLEM__PROBLEM, newProblem, newProblem));
+			eNotify(new ENotificationImpl(this, Notification.SET, OLPackage.PROBLEM__INSTANCE, newInstance, newInstance));
 	}
 
 	/**
@@ -214,8 +214,8 @@ public class ProblemImpl extends MinimalEObjectImpl.Container implements Problem
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case OLPackage.PROBLEM__PROBLEM:
-				return basicSetProblem(null, msgs);
+			case OLPackage.PROBLEM__INSTANCE:
+				return basicSetInstance(null, msgs);
 			case OLPackage.PROBLEM__DOCUMENTATION:
 				return basicSetDocumentation(null, msgs);
 		}
@@ -232,8 +232,8 @@ public class ProblemImpl extends MinimalEObjectImpl.Container implements Problem
 		switch (featureID) {
 			case OLPackage.PROBLEM__NAME:
 				return getName();
-			case OLPackage.PROBLEM__PROBLEM:
-				return getProblem();
+			case OLPackage.PROBLEM__INSTANCE:
+				return getInstance();
 			case OLPackage.PROBLEM__DOCUMENTATION:
 				return getDocumentation();
 		}
@@ -251,8 +251,8 @@ public class ProblemImpl extends MinimalEObjectImpl.Container implements Problem
 			case OLPackage.PROBLEM__NAME:
 				setName((String)newValue);
 				return;
-			case OLPackage.PROBLEM__PROBLEM:
-				setProblem((Instance)newValue);
+			case OLPackage.PROBLEM__INSTANCE:
+				setInstance((Instance)newValue);
 				return;
 			case OLPackage.PROBLEM__DOCUMENTATION:
 				setDocumentation((Array)newValue);
@@ -272,8 +272,8 @@ public class ProblemImpl extends MinimalEObjectImpl.Container implements Problem
 			case OLPackage.PROBLEM__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case OLPackage.PROBLEM__PROBLEM:
-				setProblem((Instance)null);
+			case OLPackage.PROBLEM__INSTANCE:
+				setInstance((Instance)null);
 				return;
 			case OLPackage.PROBLEM__DOCUMENTATION:
 				setDocumentation((Array)null);
@@ -292,8 +292,8 @@ public class ProblemImpl extends MinimalEObjectImpl.Container implements Problem
 		switch (featureID) {
 			case OLPackage.PROBLEM__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case OLPackage.PROBLEM__PROBLEM:
-				return problem != null;
+			case OLPackage.PROBLEM__INSTANCE:
+				return instance != null;
 			case OLPackage.PROBLEM__DOCUMENTATION:
 				return documentation != null;
 		}

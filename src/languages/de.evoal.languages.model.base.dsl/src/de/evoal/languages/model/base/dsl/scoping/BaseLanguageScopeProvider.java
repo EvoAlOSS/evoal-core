@@ -4,10 +4,6 @@
  */
 package de.evoal.languages.model.base.dsl.scoping;
 
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
-import org.eclipse.xtext.scoping.IScope;
-
 /**
  * This class contains custom scoping description.
  * 
@@ -15,17 +11,4 @@ import org.eclipse.xtext.scoping.IScope;
  * on how and when to use it.
  */
 public class BaseLanguageScopeProvider extends AbstractBaseLanguageScopeProvider {
-	//private static EClass instance = BasePackage.eINSTANCE.getInstance();
-	//private static EReference instanceDefinition = BasePackage.eINSTANCE.getInstance_Definition();
-
-	
-	@Override
-	public IScope getScope(EObject context, EReference reference) {
-		try {
-			//System.err.println("[Base Global] --> " + context.eClass().getName() + " --> " + reference.getEContainingClass().getName() + "." + reference.getName());
-			return super.getScope(context, reference);
-		} finally {
-			//System.err.println("[Base Global] --< " + context.eClass().getName() + " --> " + reference.getEContainingClass().getName() + "." + reference.getName());
-		}
-	}
 }

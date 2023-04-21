@@ -190,17 +190,17 @@ ruleProblemRule returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getProblemRuleAccess().getProblemInstanceLiteralRuleParserRuleCall_3_0());
+					newCompositeNode(grammarAccess.getProblemRuleAccess().getInstanceInstanceLiteralRuleParserRuleCall_3_0());
 				}
-				lv_problem_3_0=ruleInstanceLiteralRule
+				lv_instance_3_0=ruleInstanceLiteralRule
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getProblemRuleRule());
 					}
 					set(
 						$current,
-						"problem",
-						lv_problem_3_0,
+						"instance",
+						lv_instance_3_0,
 						"de.evoal.languages.model.base.dsl.BaseLanguage.InstanceLiteralRule");
 					afterParserOrEnumRuleCall();
 				}
@@ -296,17 +296,17 @@ ruleAlgorithmInstanceRule returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getAlgorithmInstanceRuleAccess().getAlgorithmInstanceLiteralRuleParserRuleCall_5_0());
+					newCompositeNode(grammarAccess.getAlgorithmInstanceRuleAccess().getInstanceInstanceLiteralRuleParserRuleCall_5_0());
 				}
-				lv_algorithm_5_0=ruleInstanceLiteralRule
+				lv_instance_5_0=ruleInstanceLiteralRule
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getAlgorithmInstanceRuleRule());
 					}
 					set(
 						$current,
-						"algorithm",
-						lv_algorithm_5_0,
+						"instance",
+						lv_instance_5_0,
 						"de.evoal.languages.model.base.dsl.BaseLanguage.InstanceLiteralRule");
 					afterParserOrEnumRuleCall();
 				}

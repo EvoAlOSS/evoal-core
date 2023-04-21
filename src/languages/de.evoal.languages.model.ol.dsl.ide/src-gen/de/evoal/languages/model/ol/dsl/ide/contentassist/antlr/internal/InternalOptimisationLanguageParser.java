@@ -6862,26 +6862,26 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__ProblemRule__Group__3__Impl"
-    // InternalOptimisationLanguage.g:1889:1: rule__ProblemRule__Group__3__Impl : ( ( rule__ProblemRule__ProblemAssignment_3 ) ) ;
+    // InternalOptimisationLanguage.g:1889:1: rule__ProblemRule__Group__3__Impl : ( ( rule__ProblemRule__InstanceAssignment_3 ) ) ;
     public final void rule__ProblemRule__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:1893:1: ( ( ( rule__ProblemRule__ProblemAssignment_3 ) ) )
-            // InternalOptimisationLanguage.g:1894:1: ( ( rule__ProblemRule__ProblemAssignment_3 ) )
+            // InternalOptimisationLanguage.g:1893:1: ( ( ( rule__ProblemRule__InstanceAssignment_3 ) ) )
+            // InternalOptimisationLanguage.g:1894:1: ( ( rule__ProblemRule__InstanceAssignment_3 ) )
             {
-            // InternalOptimisationLanguage.g:1894:1: ( ( rule__ProblemRule__ProblemAssignment_3 ) )
-            // InternalOptimisationLanguage.g:1895:2: ( rule__ProblemRule__ProblemAssignment_3 )
+            // InternalOptimisationLanguage.g:1894:1: ( ( rule__ProblemRule__InstanceAssignment_3 ) )
+            // InternalOptimisationLanguage.g:1895:2: ( rule__ProblemRule__InstanceAssignment_3 )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getProblemRuleAccess().getProblemAssignment_3()); 
+               before(grammarAccess.getProblemRuleAccess().getInstanceAssignment_3()); 
             }
-            // InternalOptimisationLanguage.g:1896:2: ( rule__ProblemRule__ProblemAssignment_3 )
-            // InternalOptimisationLanguage.g:1896:3: rule__ProblemRule__ProblemAssignment_3
+            // InternalOptimisationLanguage.g:1896:2: ( rule__ProblemRule__InstanceAssignment_3 )
+            // InternalOptimisationLanguage.g:1896:3: rule__ProblemRule__InstanceAssignment_3
             {
             pushFollow(FOLLOW_2);
-            rule__ProblemRule__ProblemAssignment_3();
+            rule__ProblemRule__InstanceAssignment_3();
 
             state._fsp--;
             if (state.failed) return ;
@@ -6889,7 +6889,7 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getProblemRuleAccess().getProblemAssignment_3()); 
+               after(grammarAccess.getProblemRuleAccess().getInstanceAssignment_3()); 
             }
 
             }
@@ -7772,26 +7772,26 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__AlgorithmInstanceRule__Group__5__Impl"
-    // InternalOptimisationLanguage.g:2186:1: rule__AlgorithmInstanceRule__Group__5__Impl : ( ( rule__AlgorithmInstanceRule__AlgorithmAssignment_5 ) ) ;
+    // InternalOptimisationLanguage.g:2186:1: rule__AlgorithmInstanceRule__Group__5__Impl : ( ( rule__AlgorithmInstanceRule__InstanceAssignment_5 ) ) ;
     public final void rule__AlgorithmInstanceRule__Group__5__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:2190:1: ( ( ( rule__AlgorithmInstanceRule__AlgorithmAssignment_5 ) ) )
-            // InternalOptimisationLanguage.g:2191:1: ( ( rule__AlgorithmInstanceRule__AlgorithmAssignment_5 ) )
+            // InternalOptimisationLanguage.g:2190:1: ( ( ( rule__AlgorithmInstanceRule__InstanceAssignment_5 ) ) )
+            // InternalOptimisationLanguage.g:2191:1: ( ( rule__AlgorithmInstanceRule__InstanceAssignment_5 ) )
             {
-            // InternalOptimisationLanguage.g:2191:1: ( ( rule__AlgorithmInstanceRule__AlgorithmAssignment_5 ) )
-            // InternalOptimisationLanguage.g:2192:2: ( rule__AlgorithmInstanceRule__AlgorithmAssignment_5 )
+            // InternalOptimisationLanguage.g:2191:1: ( ( rule__AlgorithmInstanceRule__InstanceAssignment_5 ) )
+            // InternalOptimisationLanguage.g:2192:2: ( rule__AlgorithmInstanceRule__InstanceAssignment_5 )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getAlgorithmInstanceRuleAccess().getAlgorithmAssignment_5()); 
+               before(grammarAccess.getAlgorithmInstanceRuleAccess().getInstanceAssignment_5()); 
             }
-            // InternalOptimisationLanguage.g:2193:2: ( rule__AlgorithmInstanceRule__AlgorithmAssignment_5 )
-            // InternalOptimisationLanguage.g:2193:3: rule__AlgorithmInstanceRule__AlgorithmAssignment_5
+            // InternalOptimisationLanguage.g:2193:2: ( rule__AlgorithmInstanceRule__InstanceAssignment_5 )
+            // InternalOptimisationLanguage.g:2193:3: rule__AlgorithmInstanceRule__InstanceAssignment_5
             {
             pushFollow(FOLLOW_2);
-            rule__AlgorithmInstanceRule__AlgorithmAssignment_5();
+            rule__AlgorithmInstanceRule__InstanceAssignment_5();
 
             state._fsp--;
             if (state.failed) return ;
@@ -7799,7 +7799,7 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getAlgorithmInstanceRuleAccess().getAlgorithmAssignment_5()); 
+               after(grammarAccess.getAlgorithmInstanceRuleAccess().getInstanceAssignment_5()); 
             }
 
             }
@@ -17519,9 +17519,9 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
     // $ANTLR end "rule__ProblemRule__NameAssignment_1"
 
 
-    // $ANTLR start "rule__ProblemRule__ProblemAssignment_3"
-    // InternalOptimisationLanguage.g:5285:1: rule__ProblemRule__ProblemAssignment_3 : ( ruleInstanceLiteralRule ) ;
-    public final void rule__ProblemRule__ProblemAssignment_3() throws RecognitionException {
+    // $ANTLR start "rule__ProblemRule__InstanceAssignment_3"
+    // InternalOptimisationLanguage.g:5285:1: rule__ProblemRule__InstanceAssignment_3 : ( ruleInstanceLiteralRule ) ;
+    public final void rule__ProblemRule__InstanceAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
@@ -17533,7 +17533,7 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
             // InternalOptimisationLanguage.g:5291:3: ruleInstanceLiteralRule
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getProblemRuleAccess().getProblemInstanceLiteralRuleParserRuleCall_3_0()); 
+               before(grammarAccess.getProblemRuleAccess().getInstanceInstanceLiteralRuleParserRuleCall_3_0()); 
             }
             pushFollow(FOLLOW_2);
             ruleInstanceLiteralRule();
@@ -17541,7 +17541,7 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getProblemRuleAccess().getProblemInstanceLiteralRuleParserRuleCall_3_0()); 
+               after(grammarAccess.getProblemRuleAccess().getInstanceInstanceLiteralRuleParserRuleCall_3_0()); 
             }
 
             }
@@ -17561,7 +17561,7 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
         }
         return ;
     }
-    // $ANTLR end "rule__ProblemRule__ProblemAssignment_3"
+    // $ANTLR end "rule__ProblemRule__InstanceAssignment_3"
 
 
     // $ANTLR start "rule__ProblemRule__DocumentationAssignment_4_2"
@@ -17666,9 +17666,9 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
     // $ANTLR end "rule__AlgorithmInstanceRule__ProblemAssignment_2"
 
 
-    // $ANTLR start "rule__AlgorithmInstanceRule__AlgorithmAssignment_5"
-    // InternalOptimisationLanguage.g:5334:1: rule__AlgorithmInstanceRule__AlgorithmAssignment_5 : ( ruleInstanceLiteralRule ) ;
-    public final void rule__AlgorithmInstanceRule__AlgorithmAssignment_5() throws RecognitionException {
+    // $ANTLR start "rule__AlgorithmInstanceRule__InstanceAssignment_5"
+    // InternalOptimisationLanguage.g:5334:1: rule__AlgorithmInstanceRule__InstanceAssignment_5 : ( ruleInstanceLiteralRule ) ;
+    public final void rule__AlgorithmInstanceRule__InstanceAssignment_5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
@@ -17680,7 +17680,7 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
             // InternalOptimisationLanguage.g:5340:3: ruleInstanceLiteralRule
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getAlgorithmInstanceRuleAccess().getAlgorithmInstanceLiteralRuleParserRuleCall_5_0()); 
+               before(grammarAccess.getAlgorithmInstanceRuleAccess().getInstanceInstanceLiteralRuleParserRuleCall_5_0()); 
             }
             pushFollow(FOLLOW_2);
             ruleInstanceLiteralRule();
@@ -17688,7 +17688,7 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getAlgorithmInstanceRuleAccess().getAlgorithmInstanceLiteralRuleParserRuleCall_5_0()); 
+               after(grammarAccess.getAlgorithmInstanceRuleAccess().getInstanceInstanceLiteralRuleParserRuleCall_5_0()); 
             }
 
             }
@@ -17708,7 +17708,7 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
         }
         return ;
     }
-    // $ANTLR end "rule__AlgorithmInstanceRule__AlgorithmAssignment_5"
+    // $ANTLR end "rule__AlgorithmInstanceRule__InstanceAssignment_5"
 
 
     // $ANTLR start "rule__AlgorithmInstanceRule__DocumentationAssignment_6_2"

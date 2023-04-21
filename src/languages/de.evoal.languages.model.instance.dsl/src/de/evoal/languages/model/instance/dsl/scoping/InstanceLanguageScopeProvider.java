@@ -4,20 +4,6 @@
  */
 package de.evoal.languages.model.instance.dsl.scoping;
 
-import java.util.LinkedList;
-import java.util.List;
-
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
-import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.Scopes;
-
-import de.evoal.languages.model.base.BasePackage;
-import de.evoal.languages.model.base.Instance;
-import de.evoal.languages.model.base.TypeDefinition;
-import de.evoal.languages.model.instance.InstancePackage;
-
 /**
  * This class contains custom scoping description.
  * 
@@ -25,35 +11,6 @@ import de.evoal.languages.model.instance.InstancePackage;
  * on how and when to use it.
  */
 public class InstanceLanguageScopeProvider extends AbstractInstanceLanguageScopeProvider {
-	private static EClass instance = BasePackage.eINSTANCE.getInstance();
-	private static EReference instanceDefinition = BasePackage.eINSTANCE.getInstance_Definition();
-
-	
-	@Override
-	public IScope getScope(EObject context, EReference reference) {
-		System.err.println("[Inst Local ] --> " + context.eClass().getName() + " --> " + reference.getEContainingClass().getName() + "." + reference.getName());
-/*
-		if(instance.equals(context.eClass()) && instanceDefinition.equals(reference)) {
-			final List<TypeDefinition> definitions = new LinkedList<>();
-			TypeDefinition current = ((Instance)context).getDefinition();
-			
-			while(current != null) {
-				definitions.add(current);
-				current = current.getSuperType();
-			}
-			
-			return Scopes.scopeFor(definitions, IScope.NULLSCOPE);
-		}
-*/
-		try {
-			
-			return super.getScope(context, reference);
-		} finally {
-			System.err.println("[Inst Local ] --< " + context.eClass().getName() + " --> " + reference.getEContainingClass().getName() + "." + reference.getName());
-
-		}
-	}
-
 	
 //	@Inject
 //	IQualifiedNameProvider provider;

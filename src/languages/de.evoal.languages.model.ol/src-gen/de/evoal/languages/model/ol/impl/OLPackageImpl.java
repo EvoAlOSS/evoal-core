@@ -182,7 +182,7 @@ public class OLPackageImpl extends EPackageImpl implements OLPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getProblem_Problem() {
+	public EReference getProblem_Instance() {
 		return (EReference)problemEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -222,7 +222,7 @@ public class OLPackageImpl extends EPackageImpl implements OLPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getAlgorithmInstance_Algorithm() {
+	public EReference getAlgorithmInstance_Instance() {
 		return (EReference)algorithmInstanceEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -272,12 +272,12 @@ public class OLPackageImpl extends EPackageImpl implements OLPackage {
 
 		problemEClass = createEClass(PROBLEM);
 		createEAttribute(problemEClass, PROBLEM__NAME);
-		createEReference(problemEClass, PROBLEM__PROBLEM);
+		createEReference(problemEClass, PROBLEM__INSTANCE);
 		createEReference(problemEClass, PROBLEM__DOCUMENTATION);
 
 		algorithmInstanceEClass = createEClass(ALGORITHM_INSTANCE);
 		createEReference(algorithmInstanceEClass, ALGORITHM_INSTANCE__PROBLEM);
-		createEReference(algorithmInstanceEClass, ALGORITHM_INSTANCE__ALGORITHM);
+		createEReference(algorithmInstanceEClass, ALGORITHM_INSTANCE__INSTANCE);
 		createEReference(algorithmInstanceEClass, ALGORITHM_INSTANCE__DOCUMENTATION);
 	}
 
@@ -321,12 +321,12 @@ public class OLPackageImpl extends EPackageImpl implements OLPackage {
 
 		initEClass(problemEClass, Problem.class, "Problem", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getProblem_Name(), ecorePackage.getEString(), "name", null, 1, 1, Problem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getProblem_Problem(), theBasePackage.getInstance(), null, "problem", null, 1, 1, Problem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getProblem_Instance(), theBasePackage.getInstance(), null, "instance", null, 1, 1, Problem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getProblem_Documentation(), theBasePackage.getArray(), null, "documentation", null, 0, 1, Problem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(algorithmInstanceEClass, AlgorithmInstance.class, "AlgorithmInstance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAlgorithmInstance_Problem(), this.getProblem(), null, "problem", null, 1, 1, AlgorithmInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAlgorithmInstance_Algorithm(), theBasePackage.getInstance(), null, "algorithm", null, 1, 1, AlgorithmInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAlgorithmInstance_Instance(), theBasePackage.getInstance(), null, "instance", null, 1, 1, AlgorithmInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAlgorithmInstance_Documentation(), theBasePackage.getArray(), null, "documentation", null, 0, 1, AlgorithmInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource

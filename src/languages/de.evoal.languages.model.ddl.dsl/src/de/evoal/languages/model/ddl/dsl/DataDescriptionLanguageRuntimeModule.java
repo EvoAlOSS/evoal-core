@@ -5,16 +5,15 @@
 package de.evoal.languages.model.ddl.dsl;
 
 import org.eclipse.xtext.conversion.IValueConverterService;
-import org.eclipse.xtext.naming.IQualifiedNameProvider;
-import org.eclipse.xtext.naming.SimpleNameProvider;
 import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
+import org.eclipse.xtext.scoping.impl.DefaultGlobalScopeProvider;
 
-import de.evoal.languages.model.ddl.dsl.scoping.DataDescriptionLanguageClasspathGlobalScopeProvider;
 import de.evoal.languages.model.ddl.dsl.scoping.DataDescriptionLanguageLocalScopeProvider;
 import de.evoal.languages.model.ddl.dsl.scoping.DataDescriptionLanguageResourceDescriptionStrategy;
 import de.evoal.languages.model.utils.converter.ValueConverterService;
+import de.evoal.languages.model.utils.scoping.ClasspathGlobalScopeProvider;
 
 /**
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
@@ -41,4 +40,16 @@ public class DataDescriptionLanguageRuntimeModule extends AbstractDataDescriptio
     public Class<? extends IValueConverterService> bindIValueConverterService() {
             return ValueConverterService.class;
     }
+	
+	public Class<? extends IGlobalScopeProvider> bindIGlobalScopeProvider() {
+		if(System.getProperty("osgi.os") != null // this means that we are running in OSGI (eclipse or tycho)
+				&& (System.getProperty("eclipse.application") == null // sanity check for the next line
+				|| !System.getProperty("eclipse.application").contains("tycho"))) // use classpath provider in Tycho-base unit test environment
+		{
+			return DefaultGlobalScopeProvider.class;
+		} else {
+			return ClasspathGlobalScopeProvider.class;
+		}
+	}
+
 }

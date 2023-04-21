@@ -123,13 +123,13 @@ public interface OLPackage extends EPackage {
 	int PROBLEM__NAME = 0;
 
 	/**
-	 * The feature id for the '<em><b>Problem</b></em>' containment reference.
+	 * The feature id for the '<em><b>Instance</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROBLEM__PROBLEM = 1;
+	int PROBLEM__INSTANCE = 1;
 
 	/**
 	 * The feature id for the '<em><b>Documentation</b></em>' containment reference.
@@ -169,13 +169,13 @@ public interface OLPackage extends EPackage {
 	int ALGORITHM_INSTANCE__PROBLEM = 0;
 
 	/**
-	 * The feature id for the '<em><b>Algorithm</b></em>' containment reference.
+	 * The feature id for the '<em><b>Instance</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ALGORITHM_INSTANCE__ALGORITHM = 1;
+	int ALGORITHM_INSTANCE__INSTANCE = 1;
 
 	/**
 	 * The feature id for the '<em><b>Documentation</b></em>' containment reference.
@@ -261,15 +261,15 @@ public interface OLPackage extends EPackage {
 	EAttribute getProblem_Name();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link de.evoal.languages.model.ol.Problem#getProblem <em>Problem</em>}'.
+	 * Returns the meta object for the containment reference '{@link de.evoal.languages.model.ol.Problem#getInstance <em>Instance</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Problem</em>'.
-	 * @see de.evoal.languages.model.ol.Problem#getProblem()
+	 * @return the meta object for the containment reference '<em>Instance</em>'.
+	 * @see de.evoal.languages.model.ol.Problem#getInstance()
 	 * @see #getProblem()
 	 * @generated
 	 */
-	EReference getProblem_Problem();
+	EReference getProblem_Instance();
 
 	/**
 	 * Returns the meta object for the containment reference '{@link de.evoal.languages.model.ol.Problem#getDocumentation <em>Documentation</em>}'.
@@ -304,15 +304,15 @@ public interface OLPackage extends EPackage {
 	EReference getAlgorithmInstance_Problem();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link de.evoal.languages.model.ol.AlgorithmInstance#getAlgorithm <em>Algorithm</em>}'.
+	 * Returns the meta object for the containment reference '{@link de.evoal.languages.model.ol.AlgorithmInstance#getInstance <em>Instance</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Algorithm</em>'.
-	 * @see de.evoal.languages.model.ol.AlgorithmInstance#getAlgorithm()
+	 * @return the meta object for the containment reference '<em>Instance</em>'.
+	 * @see de.evoal.languages.model.ol.AlgorithmInstance#getInstance()
 	 * @see #getAlgorithmInstance()
 	 * @generated
 	 */
-	EReference getAlgorithmInstance_Algorithm();
+	EReference getAlgorithmInstance_Instance();
 
 	/**
 	 * Returns the meta object for the containment reference '{@link de.evoal.languages.model.ol.AlgorithmInstance#getDocumentation <em>Documentation</em>}'.
@@ -400,12 +400,12 @@ public interface OLPackage extends EPackage {
 		EAttribute PROBLEM__NAME = eINSTANCE.getProblem_Name();
 
 		/**
-		 * The meta object literal for the '<em><b>Problem</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Instance</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference PROBLEM__PROBLEM = eINSTANCE.getProblem_Problem();
+		EReference PROBLEM__INSTANCE = eINSTANCE.getProblem_Instance();
 
 		/**
 		 * The meta object literal for the '<em><b>Documentation</b></em>' containment reference feature.
@@ -434,12 +434,12 @@ public interface OLPackage extends EPackage {
 		EReference ALGORITHM_INSTANCE__PROBLEM = eINSTANCE.getAlgorithmInstance_Problem();
 
 		/**
-		 * The meta object literal for the '<em><b>Algorithm</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Instance</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ALGORITHM_INSTANCE__ALGORITHM = eINSTANCE.getAlgorithmInstance_Algorithm();
+		EReference ALGORITHM_INSTANCE__INSTANCE = eINSTANCE.getAlgorithmInstance_Instance();
 
 		/**
 		 * The meta object literal for the '<em><b>Documentation</b></em>' containment reference feature.
