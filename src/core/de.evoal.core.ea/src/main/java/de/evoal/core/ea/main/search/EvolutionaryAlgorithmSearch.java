@@ -12,7 +12,6 @@ import de.evoal.core.api.cdi.BeanFactory;
 import de.evoal.core.api.cdi.BlackboardValue;
 import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.core.api.optimisation.InitialCandidatesProvider;
-import de.evoal.core.ea.api.initial.InitialPopulation;
 import de.evoal.core.api.optimisation.OptimisationAlgorithm;
 import de.evoal.core.api.utils.LanguageHelper;
 import de.evoal.core.api.optimisation.OptimisationValue;

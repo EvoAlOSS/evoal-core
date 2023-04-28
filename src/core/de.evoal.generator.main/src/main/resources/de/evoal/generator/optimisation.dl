@@ -1,7 +1,7 @@
-import "definitions" from de.evoal.core;
-import "definitions" from de.evoal.generator;
+import "definitions" from de.evoal.core.optimisation;
+import "definitions" from de.evoal.generator.generator;
 
-module de.evoal.benchmark {
+module de.evoal.generator.optimisation {
 	/**
 	 * Known optimisation functions for benchmarking purposes.
 	 */

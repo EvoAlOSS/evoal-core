@@ -211,13 +211,13 @@ public interface MllPackage extends EPackage {
 	int PARTIAL_SURROGATE_FUNCTION_DEFINITION = 3;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' reference.
+	 * The feature id for the '<em><b>Definition</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PARTIAL_SURROGATE_FUNCTION_DEFINITION__NAME = 0;
+	int PARTIAL_SURROGATE_FUNCTION_DEFINITION__DEFINITION = 0;
 
 	/**
 	 * The feature id for the '<em><b>Inputs</b></em>' reference list.
@@ -738,15 +738,15 @@ public interface MllPackage extends EPackage {
 	EClass getPartialSurrogateFunctionDefinition();
 
 	/**
-	 * Returns the meta object for the reference '{@link de.evoal.languages.model.mll.PartialSurrogateFunctionDefinition#getName <em>Name</em>}'.
+	 * Returns the meta object for the reference '{@link de.evoal.languages.model.mll.PartialSurrogateFunctionDefinition#getDefinition <em>Definition</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Name</em>'.
-	 * @see de.evoal.languages.model.mll.PartialSurrogateFunctionDefinition#getName()
+	 * @return the meta object for the reference '<em>Definition</em>'.
+	 * @see de.evoal.languages.model.mll.PartialSurrogateFunctionDefinition#getDefinition()
 	 * @see #getPartialSurrogateFunctionDefinition()
 	 * @generated
 	 */
-	EReference getPartialSurrogateFunctionDefinition_Name();
+	EReference getPartialSurrogateFunctionDefinition_Definition();
 
 	/**
 	 * Returns the meta object for the reference list '{@link de.evoal.languages.model.mll.PartialSurrogateFunctionDefinition#getInputs <em>Inputs</em>}'.
@@ -1203,12 +1203,12 @@ public interface MllPackage extends EPackage {
 		EClass PARTIAL_SURROGATE_FUNCTION_DEFINITION = eINSTANCE.getPartialSurrogateFunctionDefinition();
 
 		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Definition</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference PARTIAL_SURROGATE_FUNCTION_DEFINITION__NAME = eINSTANCE.getPartialSurrogateFunctionDefinition_Name();
+		EReference PARTIAL_SURROGATE_FUNCTION_DEFINITION__DEFINITION = eINSTANCE.getPartialSurrogateFunctionDefinition_Definition();
 
 		/**
 		 * The meta object literal for the '<em><b>Inputs</b></em>' reference list feature.

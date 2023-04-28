@@ -5,15 +5,19 @@
 package de.evoal.languages.model.ddl.dsl;
 
 import org.eclipse.xtext.conversion.IValueConverterService;
+import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 import org.eclipse.xtext.scoping.impl.DefaultGlobalScopeProvider;
+import org.eclipse.xtext.scoping.impl.ImportUriResolver;
 
 import de.evoal.languages.model.ddl.dsl.scoping.DataDescriptionLanguageLocalScopeProvider;
 import de.evoal.languages.model.ddl.dsl.scoping.DataDescriptionLanguageResourceDescriptionStrategy;
+import de.evoal.languages.model.ddl.dsl.scoping.EvoAlReleaseStateBasedContainerManager;
 import de.evoal.languages.model.utils.converter.ValueConverterService;
 import de.evoal.languages.model.utils.scoping.ClasspathGlobalScopeProvider;
+import de.evoal.languages.model.utils.scoping.ClasspathGlobalScopeProvider.CustomUriResolver;
 
 /**
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
@@ -52,4 +56,16 @@ public class DataDescriptionLanguageRuntimeModule extends AbstractDataDescriptio
 		}
 	}
 
+	public Class<? extends ImportUriResolver> bindImportUriResolver() {
+		return CustomUriResolver.class;
+	}
+	// contributed by org.eclipse.xtext.xtext.generator.builder.BuilderIntegrationFragment2
+	public Class<? extends IContainer.Manager> bindIContainer$Manager() {
+		return EvoAlReleaseStateBasedContainerManager.class;
+	}
+	
+	// contributed by org.eclipse.xtext.xtext.generator.builder.BuilderIntegrationFragment2
+	//public Class<? extends IAllContainersState.Provider> bindIAllContainersState$Provider() {
+	//	return MllResourceSetBasedAllContainersStateProvider.class;
+	//}
 }

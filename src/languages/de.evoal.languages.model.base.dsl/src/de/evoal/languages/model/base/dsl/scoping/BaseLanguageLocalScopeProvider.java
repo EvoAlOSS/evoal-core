@@ -30,13 +30,12 @@ public class BaseLanguageLocalScopeProvider extends WildcardEnabledLocalScopePro
 				typeScope = this.getScope(instance.getDefinition(), reference);
 			}
 			
-			System.err.println("[Base]  --> dispatching");
-
 			return getLocalElementsScope(typeScope, context, reference);
 		}  else if(instance.equals(context.eClass()) && BasePackage.eINSTANCE.getAttribute_Definition().equals(reference)) {
 			return scopeOf(((Instance)context).getDefinition());
 		}
 
+		System.err.println("[Base]  --> " + context + "." + reference);
 		return super.getScope(context, reference);
 	}
 

@@ -6,8 +6,13 @@ import java.util.Set;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.xtext.resource.ClasspathUriResolutionException;
+import org.eclipse.xtext.resource.IClasspathUriResolver;
+import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.scoping.impl.ImportUriGlobalScopeProvider;
 import org.eclipse.xtext.scoping.impl.ImportUriResolver;
+import org.eclipse.xtext.scoping.impl.ImportUriGlobalScopeProvider.URICollector;
 import org.eclipse.xtext.util.IAcceptor;
 
 import de.evoal.languages.model.base.Import;
@@ -50,21 +55,47 @@ public class ClasspathGlobalScopeProvider extends ImportUriGlobalScopeProvider {
 			System.err.println("ImportUriResolver.apply(" + from + ") --> " + result);
 			System.err.println("  File exists:" + new File(result).exists());
 			if(new File(result).exists()) {
-				return "file:/" + result;
+				System.err.println("File URI: " + URI.createFileURI(result).scheme()); 
+				return result;
 			} else {
 				return "classpath:/" + result;
 			}			
 		}
 	}
 	
-	/*
+	public static class LoggingURICollector extends URICollector {
+		
+		public LoggingURICollector(ResourceSet resourceSet, Set<URI> result) {
+			super(resourceSet, result);
+			
+			System.err.println("LoggingUriCollector.LoggingURICollector(" + resourceSet + ", " + result + ")");
+		}
+
+		public URI resolve(String uriAsString) throws IllegalArgumentException {
+			System.err.println("LoggingURICollector.resolve(" + uriAsString + ")");
+			URI uri = super.resolve(uriAsString);
+			System.err.println("LoggingURICollector.resolve           -> " + uri);
+			System.err.println("                             is.File  -> " + uri.isFile());
+			System.err.println("                             is.Arch  -> " + uri.isArchive());
+			System.err.println("                             is.Rela  -> " + uri.isRelative());
+			return uri;
+		}
+
+		@Override
+		public void accept(String uriAsString) {
+			System.err.println("LoggingURICollector.accept(" + uriAsString + ")");
+			super.accept(uriAsString);
+		}
+	}
+	
 	@Override
 	protected IAcceptor<String> createURICollector(Resource resource, Set<URI> collectInto) {
 		System.err.println("Create URI collector: " + resource);
 		setImportResolver(new CustomUriResolver());
 
-		return super.createURICollector(resource, collectInto);
-	}*/
+		ResourceSet resourceSet = resource.getResourceSet();
+		return new LoggingURICollector(resourceSet, collectInto);
+	}
 
 	@Override
 	public ImportUriResolver getImportUriResolver() {

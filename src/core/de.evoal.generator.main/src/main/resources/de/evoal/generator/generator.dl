@@ -1,4 +1,4 @@
-module de.evoal.generator {
+module de.evoal.generator.generator {
 	abstract type benchmark{}
 	
 	/**

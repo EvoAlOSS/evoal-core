@@ -15,6 +15,8 @@ public class WildcardEnabledLocalScopeProvider extends ImportedNamespaceAwareLoc
 		if (importedNamespace == null || importedNamespace.isEmpty()) {
 			return null;
 		}
+		
+		System.err.println("WildcardEnabledLocalScopeProvider.createImportedNamespaceResolver(" + namespace + ")");
 
 		// enable wildcard imports by default
 		return doCreateImportNormalizer(importedNamespace, true, ignoreCase);

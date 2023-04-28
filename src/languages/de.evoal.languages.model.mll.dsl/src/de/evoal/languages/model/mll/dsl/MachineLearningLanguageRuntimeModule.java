@@ -6,10 +6,14 @@ package de.evoal.languages.model.mll.dsl;
 
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
+import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 import org.eclipse.xtext.scoping.impl.DefaultGlobalScopeProvider;
+import org.eclipse.xtext.scoping.impl.ImportUriResolver;
 
+import de.evoal.languages.model.mll.dsl.scoping.MachineLearningLanguageLocalScopeProvider;
 import de.evoal.languages.model.utils.converter.ValueConverterService;
 import de.evoal.languages.model.utils.scoping.ClasspathGlobalScopeProvider;
+import de.evoal.languages.model.utils.scoping.ClasspathGlobalScopeProvider.CustomUriResolver;
 
 /**
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
@@ -24,6 +28,19 @@ public class MachineLearningLanguageRuntimeModule extends AbstractMachineLearnin
 		} else {
 			return ClasspathGlobalScopeProvider.class;
 		}
+	}
+    
+	@Override
+	public void configureIScopeProviderDelegate(com.google.inject.Binder binder) {
+		binder.bind(org.eclipse.xtext.scoping.IScopeProvider.class)
+				.annotatedWith(
+						com.google.inject.name.Names
+								.named(AbstractDeclarativeScopeProvider.NAMED_DELEGATE))
+				.to(MachineLearningLanguageLocalScopeProvider.class);
+	}
+	
+	public Class<? extends ImportUriResolver> bindImportUriResolver() {
+		return CustomUriResolver.class;
 	}
 	
     @Override

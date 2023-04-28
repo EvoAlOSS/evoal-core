@@ -28,7 +28,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//SurrogateLayerDefinition/functions"/>
     </genClasses>
     <genClasses ecoreClass="model.ecore#//PartialSurrogateFunctionDefinition">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//PartialSurrogateFunctionDefinition/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//PartialSurrogateFunctionDefinition/definition"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//PartialSurrogateFunctionDefinition/inputs"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//PartialSurrogateFunctionDefinition/outputs"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//PartialSurrogateFunctionDefinition/parameters"/>

@@ -62,15 +62,11 @@ public class MLLConfigurationProducer {
      * Initialize the model packages and perform the parser setup.
      */
     private void initializeEMF() {
-        DdlPackageImpl.init();
-        BasePackageImpl.init();
-        DlPackageImpl.init();
         MllPackageImpl.init();
+        DdlPackageImpl.init();
 
-        DataDescriptionLanguageStandaloneSetup.doSetup();
-        BaseLanguageStandaloneSetup.doSetup();
-        DefinitionLanguageStandaloneSetup.doSetup();
         MachineLearningLanguageStandaloneSetup.doSetup();
+        DataDescriptionLanguageStandaloneSetup.doSetup();
     }
 
     /**
@@ -83,6 +79,9 @@ public class MLLConfigurationProducer {
         log.info("Reading model file {}.", modelFile);
 
         final Injector injector = new MachineLearningLanguageStandaloneSetup().createInjectorAndDoEMFRegistration();
+        new DataDescriptionLanguageStandaloneSetup().createInjectorAndDoEMFRegistration();
+        new DefinitionLanguageStandaloneSetup().createInjectorAndDoEMFRegistration();
+
         final XtextResourceSet resourceSet = injector.getInstance(XtextResourceSet.class);
         resourceSet.addLoadOption(XtextResource.OPTION_RESOLVE_ALL, Boolean.TRUE);
         resourceSet.addLoadOption(XtextResource.OPTION_ENCODING, "UTF-8");
@@ -106,7 +105,7 @@ public class MLLConfigurationProducer {
 
             return Optional.of((MachineLearningConfiguration) resource.getContents().get(0));
         } catch (final Exception e) {
-            log.error("Unable to to generator file '{}'.", modelFile, e);
+            log.error("Unable to load MLL file '{}'.", modelFile, e);
             return Optional.empty();
         }
     }

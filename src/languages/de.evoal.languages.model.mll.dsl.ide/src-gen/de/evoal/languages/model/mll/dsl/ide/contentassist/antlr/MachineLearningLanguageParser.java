@@ -113,9 +113,9 @@ public class MachineLearningLanguageParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getImportRuleAccess().getGroup(), "rule__ImportRule__Group__0");
 			builder.put(grammarAccess.getQualifiedNameAccess().getGroup(), "rule__QualifiedName__Group__0");
 			builder.put(grammarAccess.getQualifiedNameAccess().getGroup_1(), "rule__QualifiedName__Group_1__0");
-			builder.put(grammarAccess.getMachineLearningConfigurationRuleAccess().getImportsAssignment_0(), "rule__MachineLearningConfigurationRule__ImportsAssignment_0");
-			builder.put(grammarAccess.getMachineLearningConfigurationRuleAccess().getDefinitionsAssignment_1(), "rule__MachineLearningConfigurationRule__DefinitionsAssignment_1");
-			builder.put(grammarAccess.getMachineLearningConfigurationRuleAccess().getStatementsAssignment_2(), "rule__MachineLearningConfigurationRule__StatementsAssignment_2");
+			builder.put(grammarAccess.getMachineLearningConfigurationRuleAccess().getImportsAssignment_1(), "rule__MachineLearningConfigurationRule__ImportsAssignment_1");
+			builder.put(grammarAccess.getMachineLearningConfigurationRuleAccess().getDefinitionsAssignment_2(), "rule__MachineLearningConfigurationRule__DefinitionsAssignment_2");
+			builder.put(grammarAccess.getMachineLearningConfigurationRuleAccess().getStatementsAssignment_3(), "rule__MachineLearningConfigurationRule__StatementsAssignment_3");
 			builder.put(grammarAccess.getSurrogateDefinitionRuleAccess().getNameAssignment_1(), "rule__SurrogateDefinitionRule__NameAssignment_1");
 			builder.put(grammarAccess.getSurrogateDefinitionRuleAccess().getInputsAssignment_3(), "rule__SurrogateDefinitionRule__InputsAssignment_3");
 			builder.put(grammarAccess.getSurrogateDefinitionRuleAccess().getInputsAssignment_4_1(), "rule__SurrogateDefinitionRule__InputsAssignment_4_1");
@@ -124,7 +124,7 @@ public class MachineLearningLanguageParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getSurrogateDefinitionRuleAccess().getLayersAssignment_9(), "rule__SurrogateDefinitionRule__LayersAssignment_9");
 			builder.put(grammarAccess.getSurrogateLayerDefinitionRuleAccess().getNameAssignment_1(), "rule__SurrogateLayerDefinitionRule__NameAssignment_1");
 			builder.put(grammarAccess.getSurrogateLayerDefinitionRuleAccess().getFunctionsAssignment_3(), "rule__SurrogateLayerDefinitionRule__FunctionsAssignment_3");
-			builder.put(grammarAccess.getPartialSurrogateFunctionDefinitionRuleAccess().getNameAssignment_1(), "rule__PartialSurrogateFunctionDefinitionRule__NameAssignment_1");
+			builder.put(grammarAccess.getPartialSurrogateFunctionDefinitionRuleAccess().getDefinitionAssignment_1(), "rule__PartialSurrogateFunctionDefinitionRule__DefinitionAssignment_1");
 			builder.put(grammarAccess.getPartialSurrogateFunctionDefinitionRuleAccess().getInputsAssignment_3(), "rule__PartialSurrogateFunctionDefinitionRule__InputsAssignment_3");
 			builder.put(grammarAccess.getPartialSurrogateFunctionDefinitionRuleAccess().getInputsAssignment_4_1(), "rule__PartialSurrogateFunctionDefinitionRule__InputsAssignment_4_1");
 			builder.put(grammarAccess.getPartialSurrogateFunctionDefinitionRuleAccess().getOutputsAssignment_6(), "rule__PartialSurrogateFunctionDefinitionRule__OutputsAssignment_6");

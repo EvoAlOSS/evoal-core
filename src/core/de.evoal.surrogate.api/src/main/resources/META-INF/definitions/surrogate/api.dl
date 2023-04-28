@@ -1,7 +1,0 @@
-abstract type surrogate {}
-
-def void 'cross-validation'(int times);
-def void 'R²'();
-def void rmse();
-def void rrse();
-

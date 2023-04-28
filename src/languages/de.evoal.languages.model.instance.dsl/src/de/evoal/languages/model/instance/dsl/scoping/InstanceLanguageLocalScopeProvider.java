@@ -16,6 +16,7 @@ public class InstanceLanguageLocalScopeProvider extends WildcardEnabledLocalScop
 	
 	private final static EClass instance = BasePackage.eINSTANCE.getInstance();
 	private final static EReference attributeDefinition = BasePackage.eINSTANCE.getAttribute_Definition();
+	private final static EReference instanceDefinition = BasePackage.eINSTANCE.getInstance_Definition();
 	private static EReference dataDefinition = InstancePackage.eINSTANCE.getDataReference_Definition();
 	private static EClass dataReference = InstancePackage.eINSTANCE.getDataReference();
 
@@ -24,10 +25,13 @@ public class InstanceLanguageLocalScopeProvider extends WildcardEnabledLocalScop
 
 	@Override
 	public IScope getScope(EObject context, EReference reference) {
+		System.err.println(context.eClass().getName() + "." + reference.getName());
 		if(instance.equals(context.eClass()) && attributeDefinition.equals(reference)) {
 			return provider.getScope(context, reference);
 		} else if(dataReference.equals(context.eClass()) && dataDefinition.equals(reference)) {
 			return getResourceScope(IScope.NULLSCOPE, context, reference);
+		} else if(instanceDefinition.equals(reference)) {
+			return provider.getScope(context, reference);
 		}
 
 		return super.getScope(context, reference);

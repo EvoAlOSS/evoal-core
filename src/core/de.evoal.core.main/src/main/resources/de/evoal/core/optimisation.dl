@@ -1,4 +1,4 @@
-module de.evoal.core {
+module de.evoal.core.optimisation {
 
 	/**
 	 * The algorithm-independent problem description.

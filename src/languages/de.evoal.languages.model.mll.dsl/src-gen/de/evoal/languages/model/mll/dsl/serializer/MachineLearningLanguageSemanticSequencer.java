@@ -316,11 +316,7 @@ public class MachineLearningLanguageSemanticSequencer extends InstanceLanguageSe
 	 *     MachineLearningConfigurationRule returns MachineLearningConfiguration
 	 *
 	 * Constraint:
-	 *     (
-	 *         (imports+=ImportRule* definitions+=SurrogateDefinitionRule+ statements+=StatementRule+) | 
-	 *         (imports+=ImportRule* statements+=StatementRule+) | 
-	 *         statements+=StatementRule+
-	 *     )?
+	 *     (imports+=ImportRule* definitions+=SurrogateDefinitionRule* statements+=StatementRule*)
 	 * </pre>
 	 */
 	protected void sequence_MachineLearningConfigurationRule(ISerializationContext context, MachineLearningConfiguration semanticObject) {
@@ -335,11 +331,11 @@ public class MachineLearningLanguageSemanticSequencer extends InstanceLanguageSe
 	 *
 	 * Constraint:
 	 *     (
-	 *         name=[TypeDefinition|StringOrId] 
-	 *         inputs+=[DataDescription|StringOrId] 
-	 *         inputs+=[DataDescription|StringOrId]* 
-	 *         outputs+=[DataDescription|StringOrId] 
-	 *         outputs+=[DataDescription|StringOrId]* 
+	 *         definition=[TypeDefinition|QualifiedName] 
+	 *         inputs+=[DataDescription|QualifiedName] 
+	 *         inputs+=[DataDescription|QualifiedName]* 
+	 *         outputs+=[DataDescription|QualifiedName] 
+	 *         outputs+=[DataDescription|QualifiedName]* 
 	 *         parameters+=AttributeRule*
 	 *     )
 	 * </pre>
@@ -356,7 +352,7 @@ public class MachineLearningLanguageSemanticSequencer extends InstanceLanguageSe
 	 *     StatementRule returns PredictStatement
 	 *
 	 * Constraint:
-	 *     (surrogate=[SurrogateDefinition|StringOrId] trainingData=STRING statements+=CallStatementRule* modelFilename=STRING)
+	 *     (surrogate=[SurrogateDefinition|QualifiedName] trainingData=STRING statements+=CallStatementRule* modelFilename=STRING)
 	 * </pre>
 	 */
 	protected void sequence_PredictStatementRule(ISerializationContext context, PredictStatement semanticObject) {
@@ -386,11 +382,11 @@ public class MachineLearningLanguageSemanticSequencer extends InstanceLanguageSe
 	 *
 	 * Constraint:
 	 *     (
-	 *         name=STRING 
-	 *         inputs+=[DataDescription|StringOrId] 
-	 *         inputs+=[DataDescription|StringOrId]* 
-	 *         outputs+=[DataDescription|StringOrId] 
-	 *         outputs+=[DataDescription|StringOrId]* 
+	 *         name=StringOrId 
+	 *         inputs+=[DataDescription|QualifiedName] 
+	 *         inputs+=[DataDescription|QualifiedName]* 
+	 *         outputs+=[DataDescription|QualifiedName] 
+	 *         outputs+=[DataDescription|QualifiedName]* 
 	 *         layers+=SurrogateLayerDefinitionRule+
 	 *     )
 	 * </pre>
@@ -406,7 +402,7 @@ public class MachineLearningLanguageSemanticSequencer extends InstanceLanguageSe
 	 *     SurrogateLayerDefinitionRule returns SurrogateLayerDefinition
 	 *
 	 * Constraint:
-	 *     (name=STRING functions+=PartialSurrogateFunctionDefinitionRule+)
+	 *     (name=StringOrId functions+=PartialSurrogateFunctionDefinitionRule+)
 	 * </pre>
 	 */
 	protected void sequence_SurrogateLayerDefinitionRule(ISerializationContext context, SurrogateLayerDefinition semanticObject) {

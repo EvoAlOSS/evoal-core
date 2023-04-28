@@ -1,6 +1,6 @@
-import "definitions" from de.evoal.core;
+import "definitions" from de.evoal.core.optimisation;
 
-module de.evoal.core.ea {
+module de.evoal.core.ea.optimisation {
 	type 'evolutionary-algorithm' extends 'algorithm' {
 		'number-of-generations' : int;
 		'size-of-population' : int;

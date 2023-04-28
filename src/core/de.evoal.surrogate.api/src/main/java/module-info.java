@@ -34,6 +34,9 @@ module de.evoal.surrogate.api {
     exports de.evoal.surrogate.api.function;
     exports de.evoal.surrogate.api.configuration;
 
+    // export resources
+    opens de.evoal.surrogate;
+
     // open packages for CDI
     opens de.evoal.surrogate.api to weld.core.impl;
     opens de.evoal.surrogate.api.configuration to com.fasterxml.jackson.databind;

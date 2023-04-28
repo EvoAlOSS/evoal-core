@@ -5,6 +5,7 @@ import "https://www.evoal.de/languages/ddl/1.0.0" as ddl
 import "https://www.evoal.de/languages/base/1.0.0" as base
 
 MachineLearningConfigurationRule returns MachineLearningConfiguration:
+	{MachineLearningConfiguration}
 	(imports += ImportRule)*
 
 	(definitions+=SurrogateDefinitionRule)*
@@ -12,34 +13,34 @@ MachineLearningConfigurationRule returns MachineLearningConfiguration:
 ;
 
 SurrogateDefinitionRule returns SurrogateDefinition: 
-	"prediction" name = STRING
+	"prediction" name = StringOrId
 	"maps"
-		inputs += [ddl::DataDescription|StringOrId] ("," inputs += [ddl::DataDescription|StringOrId])* 
+		inputs += [ddl::DataDescription|QualifiedName] ("," inputs += [ddl::DataDescription|QualifiedName])* 
 	"to"
-		outputs += [ddl::DataDescription|StringOrId] ("," outputs += [ddl::DataDescription|StringOrId])* 
+		outputs += [ddl::DataDescription|QualifiedName] ("," outputs += [ddl::DataDescription|QualifiedName])* 
 
 	"using"
 		(layers += SurrogateLayerDefinitionRule)+
 ;
 
 SurrogateLayerDefinitionRule returns SurrogateLayerDefinition:
-	"layer" name = STRING
+	"layer" name = StringOrId
 	"with"
 		(functions += PartialSurrogateFunctionDefinitionRule)+
 ;
 		
 PartialSurrogateFunctionDefinitionRule returns PartialSurrogateFunctionDefinition:
-	"function" name = [base::TypeDefinition|StringOrId]
+	"function" definition = [base::TypeDefinition|QualifiedName]
 	"mapping"
-		inputs += [ddl::DataDescription|StringOrId] ("," inputs += [ddl::DataDescription|StringOrId])* 
+		inputs += [ddl::DataDescription|QualifiedName] ("," inputs += [ddl::DataDescription|QualifiedName])* 
 	"to"
-		outputs += [ddl::DataDescription|StringOrId] ("," outputs += [ddl::DataDescription|StringOrId])* 
+		outputs += [ddl::DataDescription|QualifiedName] ("," outputs += [ddl::DataDescription|QualifiedName])* 
 	("with" "parameters"
 		((parameters += BaseLanguage::AttributeRule)+ ))?
 ;
 
 PredictStatementRule returns PredictStatement:
-	"predict" surrogate = [SurrogateDefinition|StringOrId]
+	"predict" surrogate = [SurrogateDefinition|QualifiedName]
 		'from' trainingData = STRING
 		('and' 'measure'
 			(statements += CallStatementRule)*

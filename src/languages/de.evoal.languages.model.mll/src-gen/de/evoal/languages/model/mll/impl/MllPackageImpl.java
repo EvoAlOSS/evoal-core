@@ -336,7 +336,7 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getPartialSurrogateFunctionDefinition_Name() {
+	public EReference getPartialSurrogateFunctionDefinition_Definition() {
 		return (EReference)partialSurrogateFunctionDefinitionEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -685,7 +685,7 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 		createEReference(surrogateLayerDefinitionEClass, SURROGATE_LAYER_DEFINITION__FUNCTIONS);
 
 		partialSurrogateFunctionDefinitionEClass = createEClass(PARTIAL_SURROGATE_FUNCTION_DEFINITION);
-		createEReference(partialSurrogateFunctionDefinitionEClass, PARTIAL_SURROGATE_FUNCTION_DEFINITION__NAME);
+		createEReference(partialSurrogateFunctionDefinitionEClass, PARTIAL_SURROGATE_FUNCTION_DEFINITION__DEFINITION);
 		createEReference(partialSurrogateFunctionDefinitionEClass, PARTIAL_SURROGATE_FUNCTION_DEFINITION__INPUTS);
 		createEReference(partialSurrogateFunctionDefinitionEClass, PARTIAL_SURROGATE_FUNCTION_DEFINITION__OUTPUTS);
 		createEReference(partialSurrogateFunctionDefinitionEClass, PARTIAL_SURROGATE_FUNCTION_DEFINITION__PARAMETERS);
@@ -785,7 +785,7 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 		initEReference(getSurrogateLayerDefinition_Functions(), this.getPartialSurrogateFunctionDefinition(), null, "functions", null, 1, -1, SurrogateLayerDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(partialSurrogateFunctionDefinitionEClass, PartialSurrogateFunctionDefinition.class, "PartialSurrogateFunctionDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getPartialSurrogateFunctionDefinition_Name(), theBasePackage.getTypeDefinition(), null, "name", null, 1, 1, PartialSurrogateFunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPartialSurrogateFunctionDefinition_Definition(), theBasePackage.getTypeDefinition(), null, "definition", null, 1, 1, PartialSurrogateFunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPartialSurrogateFunctionDefinition_Inputs(), theDdlPackage.getDataDescription(), null, "inputs", null, 1, -1, PartialSurrogateFunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getPartialSurrogateFunctionDefinition_Outputs(), theDdlPackage.getDataDescription(), null, "outputs", null, 1, -1, PartialSurrogateFunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getPartialSurrogateFunctionDefinition_Parameters(), theBasePackage.getAttribute(), null, "parameters", null, 0, -1, PartialSurrogateFunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);

@@ -1,11 +1,11 @@
-module de.evoal.core.constrainst {
+module de.evoal.core.constraint {
 	/**
 	 * Sets the variance of some data.
 	 *
 	 * <b>Parameters:</b>
 	 * <ol>
 	 *   <li>Reference to the data ...</li>
-	 * </ol>
+	 * </ol> 
 	 */
 	def void variance(data reference, float variance);
 	

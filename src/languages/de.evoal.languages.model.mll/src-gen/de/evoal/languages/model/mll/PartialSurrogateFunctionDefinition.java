@@ -18,7 +18,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link de.evoal.languages.model.mll.PartialSurrogateFunctionDefinition#getName <em>Name</em>}</li>
+ *   <li>{@link de.evoal.languages.model.mll.PartialSurrogateFunctionDefinition#getDefinition <em>Definition</em>}</li>
  *   <li>{@link de.evoal.languages.model.mll.PartialSurrogateFunctionDefinition#getInputs <em>Inputs</em>}</li>
  *   <li>{@link de.evoal.languages.model.mll.PartialSurrogateFunctionDefinition#getOutputs <em>Outputs</em>}</li>
  *   <li>{@link de.evoal.languages.model.mll.PartialSurrogateFunctionDefinition#getParameters <em>Parameters</em>}</li>
@@ -30,26 +30,26 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface PartialSurrogateFunctionDefinition extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Name</b></em>' reference.
+	 * Returns the value of the '<em><b>Definition</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Name</em>' reference.
-	 * @see #setName(TypeDefinition)
-	 * @see de.evoal.languages.model.mll.MllPackage#getPartialSurrogateFunctionDefinition_Name()
+	 * @return the value of the '<em>Definition</em>' reference.
+	 * @see #setDefinition(TypeDefinition)
+	 * @see de.evoal.languages.model.mll.MllPackage#getPartialSurrogateFunctionDefinition_Definition()
 	 * @model required="true"
 	 * @generated
 	 */
-	TypeDefinition getName();
+	TypeDefinition getDefinition();
 
 	/**
-	 * Sets the value of the '{@link de.evoal.languages.model.mll.PartialSurrogateFunctionDefinition#getName <em>Name</em>}' reference.
+	 * Sets the value of the '{@link de.evoal.languages.model.mll.PartialSurrogateFunctionDefinition#getDefinition <em>Definition</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Name</em>' reference.
-	 * @see #getName()
+	 * @param value the new value of the '<em>Definition</em>' reference.
+	 * @see #getDefinition()
 	 * @generated
 	 */
-	void setName(TypeDefinition value);
+	void setDefinition(TypeDefinition value);
 
 	/**
 	 * Returns the value of the '<em><b>Inputs</b></em>' reference list.
