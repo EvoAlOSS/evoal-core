@@ -50,6 +50,7 @@ public final class Evoal {
         } else {
             log.info("Setting up black board");
             final Blackboard board = BeanProvider.getContextualReference(Blackboard.class);
+            board.bind(CoreBlackboardEntries.LOGGING_LEVEL, "ERROR"); // bind logging level to default value
             board.readArguments(args);
 
             log.info("Fetching main class and handing over control");
