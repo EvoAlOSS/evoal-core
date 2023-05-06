@@ -3925,7 +3925,7 @@ public class InternalDefinitionLanguageParser extends AbstractInternalAntlrParse
 
 
     // $ANTLR start "ruleAttributeRule"
-    // InternalDefinitionLanguage.g:1362:1: ruleAttributeRule returns [EObject current=null] : ( ( ( ruleStringOrId ) ) otherlv_1= ':=' ( (lv_value_2_0= ruleValueRule ) ) otherlv_3= ';' ) ;
+    // InternalDefinitionLanguage.g:1362:1: ruleAttributeRule returns [EObject current=null] : ( ( ( ruleStringOrId ) ) otherlv_1= ':=' ( (lv_value_2_0= ruleExpressionRule ) ) otherlv_3= ';' ) ;
     public final EObject ruleAttributeRule() throws RecognitionException {
         EObject current = null;
 
@@ -3938,11 +3938,11 @@ public class InternalDefinitionLanguageParser extends AbstractInternalAntlrParse
         	enterRule();
 
         try {
-            // InternalDefinitionLanguage.g:1368:2: ( ( ( ( ruleStringOrId ) ) otherlv_1= ':=' ( (lv_value_2_0= ruleValueRule ) ) otherlv_3= ';' ) )
-            // InternalDefinitionLanguage.g:1369:2: ( ( ( ruleStringOrId ) ) otherlv_1= ':=' ( (lv_value_2_0= ruleValueRule ) ) otherlv_3= ';' )
+            // InternalDefinitionLanguage.g:1368:2: ( ( ( ( ruleStringOrId ) ) otherlv_1= ':=' ( (lv_value_2_0= ruleExpressionRule ) ) otherlv_3= ';' ) )
+            // InternalDefinitionLanguage.g:1369:2: ( ( ( ruleStringOrId ) ) otherlv_1= ':=' ( (lv_value_2_0= ruleExpressionRule ) ) otherlv_3= ';' )
             {
-            // InternalDefinitionLanguage.g:1369:2: ( ( ( ruleStringOrId ) ) otherlv_1= ':=' ( (lv_value_2_0= ruleValueRule ) ) otherlv_3= ';' )
-            // InternalDefinitionLanguage.g:1370:3: ( ( ruleStringOrId ) ) otherlv_1= ':=' ( (lv_value_2_0= ruleValueRule ) ) otherlv_3= ';'
+            // InternalDefinitionLanguage.g:1369:2: ( ( ( ruleStringOrId ) ) otherlv_1= ':=' ( (lv_value_2_0= ruleExpressionRule ) ) otherlv_3= ';' )
+            // InternalDefinitionLanguage.g:1370:3: ( ( ruleStringOrId ) ) otherlv_1= ':=' ( (lv_value_2_0= ruleExpressionRule ) ) otherlv_3= ';'
             {
             // InternalDefinitionLanguage.g:1370:3: ( ( ruleStringOrId ) )
             // InternalDefinitionLanguage.g:1371:4: ( ruleStringOrId )
@@ -3989,19 +3989,19 @@ public class InternalDefinitionLanguageParser extends AbstractInternalAntlrParse
               			newLeafNode(otherlv_1, grammarAccess.getAttributeRuleAccess().getColonEqualsSignKeyword_1());
               		
             }
-            // InternalDefinitionLanguage.g:1393:3: ( (lv_value_2_0= ruleValueRule ) )
-            // InternalDefinitionLanguage.g:1394:4: (lv_value_2_0= ruleValueRule )
+            // InternalDefinitionLanguage.g:1393:3: ( (lv_value_2_0= ruleExpressionRule ) )
+            // InternalDefinitionLanguage.g:1394:4: (lv_value_2_0= ruleExpressionRule )
             {
-            // InternalDefinitionLanguage.g:1394:4: (lv_value_2_0= ruleValueRule )
-            // InternalDefinitionLanguage.g:1395:5: lv_value_2_0= ruleValueRule
+            // InternalDefinitionLanguage.g:1394:4: (lv_value_2_0= ruleExpressionRule )
+            // InternalDefinitionLanguage.g:1395:5: lv_value_2_0= ruleExpressionRule
             {
             if ( state.backtracking==0 ) {
 
-              					newCompositeNode(grammarAccess.getAttributeRuleAccess().getValueValueRuleParserRuleCall_2_0());
+              					newCompositeNode(grammarAccess.getAttributeRuleAccess().getValueExpressionRuleParserRuleCall_2_0());
               				
             }
             pushFollow(FOLLOW_23);
-            lv_value_2_0=ruleValueRule();
+            lv_value_2_0=ruleExpressionRule();
 
             state._fsp--;
             if (state.failed) return current;
@@ -4014,7 +4014,7 @@ public class InternalDefinitionLanguageParser extends AbstractInternalAntlrParse
               						current,
               						"value",
               						lv_value_2_0,
-              						"de.evoal.languages.model.base.dsl.BaseLanguage.ValueRule");
+              						"de.evoal.languages.model.base.dsl.BaseLanguage.ExpressionRule");
               					afterParserOrEnumRuleCall();
               				
             }

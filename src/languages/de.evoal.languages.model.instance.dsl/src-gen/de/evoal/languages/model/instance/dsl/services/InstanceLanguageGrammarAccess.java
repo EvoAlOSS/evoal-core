@@ -401,7 +401,7 @@ public class InstanceLanguageGrammarAccess extends AbstractElementFinder.Abstrac
 	}
 	
 	//AttributeRule returns Attribute:
-	//    definition = [AttributeDefinition|StringOrId] ':=' value = ValueRule ';'
+	//    definition = [AttributeDefinition|StringOrId] ':=' value = ExpressionRule ';'
 	//;
 	public BaseLanguageGrammarAccess.AttributeRuleElements getAttributeRuleAccess() {
 		return gaBaseLanguage.getAttributeRuleAccess();
@@ -680,6 +680,17 @@ public class InstanceLanguageGrammarAccess extends AbstractElementFinder.Abstrac
 	
 	public ParserRule getParameterRuleRule() {
 		return getParameterRuleAccess().getRule();
+	}
+	
+	//ImportRule returns Import:
+	//    'import' language=STRING 'from' importedNamespace=QualifiedName ";"
+	//;
+	public BaseLanguageGrammarAccess.ImportRuleElements getImportRuleAccess() {
+		return gaBaseLanguage.getImportRuleAccess();
+	}
+	
+	public ParserRule getImportRuleRule() {
+		return getImportRuleAccess().getRule();
 	}
 	
 	//FunctionNameRule returns DefinedFunctionName:

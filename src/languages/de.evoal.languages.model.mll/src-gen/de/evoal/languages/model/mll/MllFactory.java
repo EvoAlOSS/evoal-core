@@ -121,15 +121,6 @@ public interface MllFactory extends EFactory {
 	StringLiteralRange createStringLiteralRange();
 
 	/**
-	 * Returns a new object of class '<em>Defined Function Name</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Defined Function Name</em>'.
-	 * @generated
-	 */
-	DefinedFunctionName createDefinedFunctionName();
-
-	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

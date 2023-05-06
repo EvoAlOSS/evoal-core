@@ -5,8 +5,7 @@ package de.evoal.languages.model.base.impl;
 import de.evoal.languages.model.base.Attribute;
 import de.evoal.languages.model.base.AttributeDefinition;
 import de.evoal.languages.model.base.BasePackage;
-import de.evoal.languages.model.base.Value;
-
+import de.evoal.languages.model.base.Expression;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
@@ -49,7 +48,7 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
 	 * @generated
 	 * @ordered
 	 */
-	protected Value value;
+	protected Expression value;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -116,7 +115,7 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
 	 * @generated
 	 */
 	@Override
-	public Value getValue() {
+	public Expression getValue() {
 		return value;
 	}
 
@@ -125,8 +124,8 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetValue(Value newValue, NotificationChain msgs) {
-		Value oldValue = value;
+	public NotificationChain basicSetValue(Expression newValue, NotificationChain msgs) {
+		Expression oldValue = value;
 		value = newValue;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, BasePackage.ATTRIBUTE__VALUE, oldValue, newValue);
@@ -141,7 +140,7 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
 	 * @generated
 	 */
 	@Override
-	public void setValue(Value newValue) {
+	public void setValue(Expression newValue) {
 		if (newValue != value) {
 			NotificationChain msgs = null;
 			if (value != null)
@@ -198,7 +197,7 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
 				setDefinition((AttributeDefinition)newValue);
 				return;
 			case BasePackage.ATTRIBUTE__VALUE:
-				setValue((Value)newValue);
+				setValue((Expression)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -216,7 +215,7 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
 				setDefinition((AttributeDefinition)null);
 				return;
 			case BasePackage.ATTRIBUTE__VALUE:
-				setValue((Value)null);
+				setValue((Expression)null);
 				return;
 		}
 		super.eUnset(featureID);

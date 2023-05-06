@@ -527,17 +527,17 @@ rulePartialSurrogateFunctionDefinitionRule returns [EObject current=null]
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getPartialSurrogateFunctionDefinitionRuleAccess().getParametersAttributeRuleParserRuleCall_8_2_0());
+						newCompositeNode(grammarAccess.getPartialSurrogateFunctionDefinitionRuleAccess().getAttributesAttributeRuleParserRuleCall_8_2_0());
 					}
-					lv_parameters_12_0=ruleAttributeRule
+					lv_attributes_12_0=ruleAttributeRule
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getPartialSurrogateFunctionDefinitionRuleRule());
 						}
 						add(
 							$current,
-							"parameters",
-							lv_parameters_12_0,
+							"attributes",
+							lv_attributes_12_0,
 							"de.evoal.languages.model.base.dsl.BaseLanguage.AttributeRule");
 						afterParserOrEnumRuleCall();
 					}
@@ -2302,9 +2302,9 @@ ruleAttributeRule returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getAttributeRuleAccess().getValueValueRuleParserRuleCall_2_0());
+					newCompositeNode(grammarAccess.getAttributeRuleAccess().getValueExpressionRuleParserRuleCall_2_0());
 				}
-				lv_value_2_0=ruleValueRule
+				lv_value_2_0=ruleExpressionRule
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getAttributeRuleRule());
@@ -2313,7 +2313,7 @@ ruleAttributeRule returns [EObject current=null]
 						$current,
 						"value",
 						lv_value_2_0,
-						"de.evoal.languages.model.base.dsl.BaseLanguage.ValueRule");
+						"de.evoal.languages.model.base.dsl.BaseLanguage.ExpressionRule");
 					afterParserOrEnumRuleCall();
 				}
 			)

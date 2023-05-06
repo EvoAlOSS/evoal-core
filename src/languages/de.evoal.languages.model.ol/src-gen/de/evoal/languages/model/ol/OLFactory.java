@@ -32,13 +32,13 @@ public interface OLFactory extends EFactory {
 	OptimisationModel createOptimisationModel();
 
 	/**
-	 * Returns a new object of class '<em>Problem</em>'.
+	 * Returns a new object of class '<em>Problem Instance</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Problem</em>'.
+	 * @return a new object of class '<em>Problem Instance</em>'.
 	 * @generated
 	 */
-	Problem createProblem();
+	ProblemInstance createProblemInstance();
 
 	/**
 	 * Returns a new object of class '<em>Algorithm Instance</em>'.

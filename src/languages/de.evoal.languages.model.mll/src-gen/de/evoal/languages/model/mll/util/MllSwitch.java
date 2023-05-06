@@ -2,7 +2,9 @@
  */
 package de.evoal.languages.model.mll.util;
 
-import de.evoal.languages.model.base.FunctionName;
+import de.evoal.languages.model.base.Instance;
+import de.evoal.languages.model.base.Literal;
+import de.evoal.languages.model.base.Value;
 import de.evoal.languages.model.mll.*;
 
 import org.eclipse.emf.ecore.EObject;
@@ -88,6 +90,9 @@ public class MllSwitch<T> extends Switch<T> {
 			case MllPackage.PARTIAL_SURROGATE_FUNCTION_DEFINITION: {
 				PartialSurrogateFunctionDefinition partialSurrogateFunctionDefinition = (PartialSurrogateFunctionDefinition)theEObject;
 				T result = casePartialSurrogateFunctionDefinition(partialSurrogateFunctionDefinition);
+				if (result == null) result = caseInstance(partialSurrogateFunctionDefinition);
+				if (result == null) result = caseLiteral(partialSurrogateFunctionDefinition);
+				if (result == null) result = caseValue(partialSurrogateFunctionDefinition);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -148,13 +153,6 @@ public class MllSwitch<T> extends Switch<T> {
 				StringLiteralRange stringLiteralRange = (StringLiteralRange)theEObject;
 				T result = caseStringLiteralRange(stringLiteralRange);
 				if (result == null) result = caseRange(stringLiteralRange);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case MllPackage.DEFINED_FUNCTION_NAME: {
-				DefinedFunctionName definedFunctionName = (DefinedFunctionName)theEObject;
-				T result = caseDefinedFunctionName(definedFunctionName);
-				if (result == null) result = caseFunctionName(definedFunctionName);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -358,32 +356,47 @@ public class MllSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Defined Function Name</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Value</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Defined Function Name</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Value</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseDefinedFunctionName(DefinedFunctionName object) {
+	public T caseValue(Value object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Function Name</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Literal</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Function Name</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Literal</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseFunctionName(FunctionName object) {
+	public T caseLiteral(Literal object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Instance</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Instance</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseInstance(Instance object) {
 		return null;
 	}
 

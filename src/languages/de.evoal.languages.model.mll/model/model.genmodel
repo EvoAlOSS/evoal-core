@@ -28,10 +28,8 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//SurrogateLayerDefinition/functions"/>
     </genClasses>
     <genClasses ecoreClass="model.ecore#//PartialSurrogateFunctionDefinition">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//PartialSurrogateFunctionDefinition/definition"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//PartialSurrogateFunctionDefinition/inputs"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//PartialSurrogateFunctionDefinition/outputs"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//PartialSurrogateFunctionDefinition/parameters"/>
     </genClasses>
     <genClasses ecoreClass="model.ecore#//Prediction">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//Prediction/definition"/>
@@ -64,9 +62,6 @@
     </genClasses>
     <genClasses ecoreClass="model.ecore#//StringLiteralRange">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//StringLiteralRange/elements"/>
-    </genClasses>
-    <genClasses ecoreClass="model.ecore#//DefinedFunctionName">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//DefinedFunctionName/definition"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

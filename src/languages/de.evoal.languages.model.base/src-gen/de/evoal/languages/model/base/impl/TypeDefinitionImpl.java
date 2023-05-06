@@ -6,6 +6,7 @@ import de.evoal.languages.model.base.AttributeDefinition;
 import de.evoal.languages.model.base.BasePackage;
 import de.evoal.languages.model.base.TypeDefinition;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -223,6 +224,20 @@ public class TypeDefinitionImpl extends MinimalEObjectImpl.Container implements 
 	 * @generated
 	 */
 	@Override
+	public AttributeDefinition findAttribute(final String name) {
+		return getAttributes().stream()
+						.filter(a -> a.getName().equals(name))
+						.findFirst()
+						.orElse(null);
+		
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case BasePackage.TYPE_DEFINITION__ATTRIBUTES:
@@ -320,6 +335,20 @@ public class TypeDefinitionImpl extends MinimalEObjectImpl.Container implements 
 				return abstract_ != ABSTRACT_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		switch (operationID) {
+			case BasePackage.TYPE_DEFINITION___FIND_ATTRIBUTE__STRING:
+				return findAttribute((String)arguments.get(0));
+		}
+		return super.eInvoke(operationID, arguments);
 	}
 
 	/**

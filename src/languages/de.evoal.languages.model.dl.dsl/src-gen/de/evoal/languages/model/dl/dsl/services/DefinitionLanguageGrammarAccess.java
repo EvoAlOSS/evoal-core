@@ -417,7 +417,7 @@ public class DefinitionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 	}
 	
 	//AttributeRule returns Attribute:
-	//    definition = [AttributeDefinition|StringOrId] ':=' value = ValueRule ';'
+	//    definition = [AttributeDefinition|StringOrId] ':=' value = ExpressionRule ';'
 	//;
 	public BaseLanguageGrammarAccess.AttributeRuleElements getAttributeRuleAccess() {
 		return gaBaseLanguage.getAttributeRuleAccess();

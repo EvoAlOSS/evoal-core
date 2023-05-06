@@ -36,7 +36,7 @@ PartialSurrogateFunctionDefinitionRule returns PartialSurrogateFunctionDefinitio
 	"to"
 		outputs += [ddl::DataDescription|QualifiedName] ("," outputs += [ddl::DataDescription|QualifiedName])* 
 	("with" "parameters"
-		((parameters += BaseLanguage::AttributeRule)+ ))?
+		((attributes+= BaseLanguage::AttributeRule)+ ))?
 ;
 
 PredictStatementRule returns PredictStatement:

@@ -3,6 +3,9 @@
  */
 package de.evoal.languages.model.ol.util;
 
+import de.evoal.languages.model.base.Instance;
+import de.evoal.languages.model.base.Literal;
+import de.evoal.languages.model.base.Value;
 import de.evoal.languages.model.ol.*;
 
 import org.eclipse.emf.ecore.EObject;
@@ -73,15 +76,21 @@ public class OLSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case OLPackage.PROBLEM: {
-				Problem problem = (Problem)theEObject;
-				T result = caseProblem(problem);
+			case OLPackage.PROBLEM_INSTANCE: {
+				ProblemInstance problemInstance = (ProblemInstance)theEObject;
+				T result = caseProblemInstance(problemInstance);
+				if (result == null) result = caseInstance(problemInstance);
+				if (result == null) result = caseLiteral(problemInstance);
+				if (result == null) result = caseValue(problemInstance);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case OLPackage.ALGORITHM_INSTANCE: {
 				AlgorithmInstance algorithmInstance = (AlgorithmInstance)theEObject;
 				T result = caseAlgorithmInstance(algorithmInstance);
+				if (result == null) result = caseInstance(algorithmInstance);
+				if (result == null) result = caseLiteral(algorithmInstance);
+				if (result == null) result = caseValue(algorithmInstance);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -105,17 +114,17 @@ public class OLSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Problem</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Problem Instance</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Problem</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Problem Instance</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseProblem(Problem object) {
+	public T caseProblemInstance(ProblemInstance object) {
 		return null;
 	}
 
@@ -131,6 +140,51 @@ public class OLSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseAlgorithmInstance(AlgorithmInstance object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Value</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Value</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseValue(Value object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Literal</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Literal</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseLiteral(Literal object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Instance</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Instance</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseInstance(Instance object) {
 		return null;
 	}
 

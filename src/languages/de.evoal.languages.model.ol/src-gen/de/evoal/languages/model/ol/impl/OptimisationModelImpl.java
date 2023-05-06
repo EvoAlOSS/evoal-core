@@ -7,8 +7,8 @@ import de.evoal.languages.model.ol.AlgorithmInstance;
 import de.evoal.languages.model.ol.Import;
 import de.evoal.languages.model.ol.OLPackage;
 import de.evoal.languages.model.ol.OptimisationModel;
-import de.evoal.languages.model.ol.Problem;
 
+import de.evoal.languages.model.ol.ProblemInstance;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -59,7 +59,7 @@ public class OptimisationModelImpl extends MinimalEObjectImpl.Container implemen
 	 * @generated
 	 * @ordered
 	 */
-	protected Problem problem;
+	protected ProblemInstance problem;
 
 	/**
 	 * The cached value of the '{@link #getAlgorithm() <em>Algorithm</em>}' containment reference.
@@ -109,7 +109,7 @@ public class OptimisationModelImpl extends MinimalEObjectImpl.Container implemen
 	 * @generated
 	 */
 	@Override
-	public Problem getProblem() {
+	public ProblemInstance getProblem() {
 		return problem;
 	}
 
@@ -118,8 +118,8 @@ public class OptimisationModelImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetProblem(Problem newProblem, NotificationChain msgs) {
-		Problem oldProblem = problem;
+	public NotificationChain basicSetProblem(ProblemInstance newProblem, NotificationChain msgs) {
+		ProblemInstance oldProblem = problem;
 		problem = newProblem;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OLPackage.OPTIMISATION_MODEL__PROBLEM, oldProblem, newProblem);
@@ -134,7 +134,7 @@ public class OptimisationModelImpl extends MinimalEObjectImpl.Container implemen
 	 * @generated
 	 */
 	@Override
-	public void setProblem(Problem newProblem) {
+	public void setProblem(ProblemInstance newProblem) {
 		if (newProblem != problem) {
 			NotificationChain msgs = null;
 			if (problem != null)
@@ -243,7 +243,7 @@ public class OptimisationModelImpl extends MinimalEObjectImpl.Container implemen
 				getImports().addAll((Collection<? extends de.evoal.languages.model.base.Import>)newValue);
 				return;
 			case OLPackage.OPTIMISATION_MODEL__PROBLEM:
-				setProblem((Problem)newValue);
+				setProblem((ProblemInstance)newValue);
 				return;
 			case OLPackage.OPTIMISATION_MODEL__ALGORITHM:
 				setAlgorithm((AlgorithmInstance)newValue);
@@ -264,7 +264,7 @@ public class OptimisationModelImpl extends MinimalEObjectImpl.Container implemen
 				getImports().clear();
 				return;
 			case OLPackage.OPTIMISATION_MODEL__PROBLEM:
-				setProblem((Problem)null);
+				setProblem((ProblemInstance)null);
 				return;
 			case OLPackage.OPTIMISATION_MODEL__ALGORITHM:
 				setAlgorithm((AlgorithmInstance)null);

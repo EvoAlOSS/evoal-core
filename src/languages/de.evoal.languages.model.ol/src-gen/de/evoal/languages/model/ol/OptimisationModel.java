@@ -44,12 +44,12 @@ public interface OptimisationModel extends EObject {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Problem</em>' containment reference.
-	 * @see #setProblem(Problem)
+	 * @see #setProblem(ProblemInstance)
 	 * @see de.evoal.languages.model.ol.OLPackage#getOptimisationModel_Problem()
 	 * @model containment="true"
 	 * @generated
 	 */
-	Problem getProblem();
+	ProblemInstance getProblem();
 
 	/**
 	 * Sets the value of the '{@link de.evoal.languages.model.ol.OptimisationModel#getProblem <em>Problem</em>}' containment reference.
@@ -59,7 +59,7 @@ public interface OptimisationModel extends EObject {
 	 * @see #getProblem()
 	 * @generated
 	 */
-	void setProblem(Problem value);
+	void setProblem(ProblemInstance value);
 
 	/**
 	 * Returns the value of the '<em><b>Algorithm</b></em>' containment reference.

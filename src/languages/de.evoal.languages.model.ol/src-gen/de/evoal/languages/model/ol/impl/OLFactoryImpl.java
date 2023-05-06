@@ -58,7 +58,7 @@ public class OLFactoryImpl extends EFactoryImpl implements OLFactory {
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case OLPackage.OPTIMISATION_MODEL: return createOptimisationModel();
-			case OLPackage.PROBLEM: return createProblem();
+			case OLPackage.PROBLEM_INSTANCE: return createProblemInstance();
 			case OLPackage.ALGORITHM_INSTANCE: return createAlgorithmInstance();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -82,9 +82,9 @@ public class OLFactoryImpl extends EFactoryImpl implements OLFactory {
 	 * @generated
 	 */
 	@Override
-	public Problem createProblem() {
-		ProblemImpl problem = new ProblemImpl();
-		return problem;
+	public ProblemInstance createProblemInstance() {
+		ProblemInstanceImpl problemInstance = new ProblemInstanceImpl();
+		return problemInstance;
 	}
 
 	/**

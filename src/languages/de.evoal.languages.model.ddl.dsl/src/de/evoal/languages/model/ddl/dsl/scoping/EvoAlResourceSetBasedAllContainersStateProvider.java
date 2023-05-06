@@ -14,9 +14,7 @@ public class EvoAlResourceSetBasedAllContainersStateProvider extends ResourceSet
 
 	@Override
 	public IAllContainersState get(final IResourceDescriptions context) {
-		System.err.println("EvoAlResourceSetBasedAllContainersStateProvider.get(" + context + ")");
 		IAllContainersState result = delegate.get(context);
-		System.err.println("EvoAlResourceSetBasedAllContainersStateProvider.get() --> " + result);
 		return result;
 	}
 

@@ -3,6 +3,9 @@
  */
 package de.evoal.languages.model.ol.util;
 
+import de.evoal.languages.model.base.Instance;
+import de.evoal.languages.model.base.Literal;
+import de.evoal.languages.model.base.Value;
 import de.evoal.languages.model.ol.*;
 
 import org.eclipse.emf.common.notify.Adapter;
@@ -73,12 +76,24 @@ public class OLAdapterFactory extends AdapterFactoryImpl {
 				return createOptimisationModelAdapter();
 			}
 			@Override
-			public Adapter caseProblem(Problem object) {
-				return createProblemAdapter();
+			public Adapter caseProblemInstance(ProblemInstance object) {
+				return createProblemInstanceAdapter();
 			}
 			@Override
 			public Adapter caseAlgorithmInstance(AlgorithmInstance object) {
 				return createAlgorithmInstanceAdapter();
+			}
+			@Override
+			public Adapter caseValue(Value object) {
+				return createValueAdapter();
+			}
+			@Override
+			public Adapter caseLiteral(Literal object) {
+				return createLiteralAdapter();
+			}
+			@Override
+			public Adapter caseInstance(Instance object) {
+				return createInstanceAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -115,16 +130,16 @@ public class OLAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.ol.Problem <em>Problem</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.ol.ProblemInstance <em>Problem Instance</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.evoal.languages.model.ol.Problem
+	 * @see de.evoal.languages.model.ol.ProblemInstance
 	 * @generated
 	 */
-	public Adapter createProblemAdapter() {
+	public Adapter createProblemInstanceAdapter() {
 		return null;
 	}
 
@@ -139,6 +154,48 @@ public class OLAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createAlgorithmInstanceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.Value <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.evoal.languages.model.base.Value
+	 * @generated
+	 */
+	public Adapter createValueAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.Literal <em>Literal</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.evoal.languages.model.base.Literal
+	 * @generated
+	 */
+	public Adapter createLiteralAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.Instance <em>Instance</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.evoal.languages.model.base.Instance
+	 * @generated
+	 */
+	public Adapter createInstanceAdapter() {
 		return null;
 	}
 

@@ -25,8 +25,7 @@ public class InstanceLanguageLocalScopeProvider extends WildcardEnabledLocalScop
 
 	@Override
 	public IScope getScope(EObject context, EReference reference) {
-		System.err.println(context.eClass().getName() + "." + reference.getName());
-		if(instance.equals(context.eClass()) && attributeDefinition.equals(reference)) {
+		if(instance.isSuperTypeOf(context.eClass()) && attributeDefinition.equals(reference)) {
 			return provider.getScope(context, reference);
 		} else if(dataReference.equals(context.eClass()) && dataDefinition.equals(reference)) {
 			return getResourceScope(IScope.NULLSCOPE, context, reference);

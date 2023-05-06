@@ -262,7 +262,7 @@ public class BaseLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 	 *     AttributeRule returns Attribute
 	 *
 	 * Constraint:
-	 *     (definition=[AttributeDefinition|StringOrId] value=ValueRule)
+	 *     (definition=[AttributeDefinition|StringOrId] value=ExpressionRule)
 	 * </pre>
 	 */
 	protected void sequence_AttributeRule(ISerializationContext context, Attribute semanticObject) {
@@ -274,7 +274,7 @@ public class BaseLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getAttributeRuleAccess().getDefinitionAttributeDefinitionStringOrIdParserRuleCall_0_0_1(), semanticObject.eGet(BasePackage.Literals.ATTRIBUTE__DEFINITION, false));
-		feeder.accept(grammarAccess.getAttributeRuleAccess().getValueValueRuleParserRuleCall_2_0(), semanticObject.getValue());
+		feeder.accept(grammarAccess.getAttributeRuleAccess().getValueExpressionRuleParserRuleCall_2_0(), semanticObject.getValue());
 		feeder.finish();
 	}
 	

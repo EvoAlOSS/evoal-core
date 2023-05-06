@@ -13,9 +13,6 @@ import org.eclipse.xtext.resource.containers.ResourceSetBasedAllContainersStateP
 import org.eclipse.xtext.resource.containers.StateBasedContainerManager;
 
 public class EvoAlReleaseStateBasedContainerManager extends StateBasedContainerManager {
-	public EvoAlReleaseStateBasedContainerManager() {
-		System.err.println("xxx");
-	}
 	/*
 	@Override
 	public IContainer getContainer(IResourceDescription desc, IResourceDescriptions resourceDescriptions) {

@@ -5583,7 +5583,7 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start "ruleAttributeRule"
-    // InternalDataDescriptionLanguage.g:1937:1: ruleAttributeRule returns [EObject current=null] : ( ( ( ruleStringOrId ) ) otherlv_1= ':=' ( (lv_value_2_0= ruleValueRule ) ) otherlv_3= ';' ) ;
+    // InternalDataDescriptionLanguage.g:1937:1: ruleAttributeRule returns [EObject current=null] : ( ( ( ruleStringOrId ) ) otherlv_1= ':=' ( (lv_value_2_0= ruleExpressionRule ) ) otherlv_3= ';' ) ;
     public final EObject ruleAttributeRule() throws RecognitionException {
         EObject current = null;
 
@@ -5596,11 +5596,11 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalAntlr
         	enterRule();
 
         try {
-            // InternalDataDescriptionLanguage.g:1943:2: ( ( ( ( ruleStringOrId ) ) otherlv_1= ':=' ( (lv_value_2_0= ruleValueRule ) ) otherlv_3= ';' ) )
-            // InternalDataDescriptionLanguage.g:1944:2: ( ( ( ruleStringOrId ) ) otherlv_1= ':=' ( (lv_value_2_0= ruleValueRule ) ) otherlv_3= ';' )
+            // InternalDataDescriptionLanguage.g:1943:2: ( ( ( ( ruleStringOrId ) ) otherlv_1= ':=' ( (lv_value_2_0= ruleExpressionRule ) ) otherlv_3= ';' ) )
+            // InternalDataDescriptionLanguage.g:1944:2: ( ( ( ruleStringOrId ) ) otherlv_1= ':=' ( (lv_value_2_0= ruleExpressionRule ) ) otherlv_3= ';' )
             {
-            // InternalDataDescriptionLanguage.g:1944:2: ( ( ( ruleStringOrId ) ) otherlv_1= ':=' ( (lv_value_2_0= ruleValueRule ) ) otherlv_3= ';' )
-            // InternalDataDescriptionLanguage.g:1945:3: ( ( ruleStringOrId ) ) otherlv_1= ':=' ( (lv_value_2_0= ruleValueRule ) ) otherlv_3= ';'
+            // InternalDataDescriptionLanguage.g:1944:2: ( ( ( ruleStringOrId ) ) otherlv_1= ':=' ( (lv_value_2_0= ruleExpressionRule ) ) otherlv_3= ';' )
+            // InternalDataDescriptionLanguage.g:1945:3: ( ( ruleStringOrId ) ) otherlv_1= ':=' ( (lv_value_2_0= ruleExpressionRule ) ) otherlv_3= ';'
             {
             // InternalDataDescriptionLanguage.g:1945:3: ( ( ruleStringOrId ) )
             // InternalDataDescriptionLanguage.g:1946:4: ( ruleStringOrId )
@@ -5647,19 +5647,19 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalAntlr
               			newLeafNode(otherlv_1, grammarAccess.getAttributeRuleAccess().getColonEqualsSignKeyword_1());
               		
             }
-            // InternalDataDescriptionLanguage.g:1968:3: ( (lv_value_2_0= ruleValueRule ) )
-            // InternalDataDescriptionLanguage.g:1969:4: (lv_value_2_0= ruleValueRule )
+            // InternalDataDescriptionLanguage.g:1968:3: ( (lv_value_2_0= ruleExpressionRule ) )
+            // InternalDataDescriptionLanguage.g:1969:4: (lv_value_2_0= ruleExpressionRule )
             {
-            // InternalDataDescriptionLanguage.g:1969:4: (lv_value_2_0= ruleValueRule )
-            // InternalDataDescriptionLanguage.g:1970:5: lv_value_2_0= ruleValueRule
+            // InternalDataDescriptionLanguage.g:1969:4: (lv_value_2_0= ruleExpressionRule )
+            // InternalDataDescriptionLanguage.g:1970:5: lv_value_2_0= ruleExpressionRule
             {
             if ( state.backtracking==0 ) {
 
-              					newCompositeNode(grammarAccess.getAttributeRuleAccess().getValueValueRuleParserRuleCall_2_0());
+              					newCompositeNode(grammarAccess.getAttributeRuleAccess().getValueExpressionRuleParserRuleCall_2_0());
               				
             }
             pushFollow(FOLLOW_20);
-            lv_value_2_0=ruleValueRule();
+            lv_value_2_0=ruleExpressionRule();
 
             state._fsp--;
             if (state.failed) return current;
@@ -5672,7 +5672,7 @@ public class InternalDataDescriptionLanguageParser extends AbstractInternalAntlr
               						current,
               						"value",
               						lv_value_2_0,
-              						"de.evoal.languages.model.base.dsl.BaseLanguage.ValueRule");
+              						"de.evoal.languages.model.base.dsl.BaseLanguage.ExpressionRule");
               					afterParserOrEnumRuleCall();
               				
             }

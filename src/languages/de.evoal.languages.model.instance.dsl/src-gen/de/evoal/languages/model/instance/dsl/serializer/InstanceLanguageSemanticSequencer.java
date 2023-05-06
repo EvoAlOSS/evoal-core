@@ -24,6 +24,7 @@ import de.evoal.languages.model.base.DoubleLiteral;
 import de.evoal.languages.model.base.ExpressionType;
 import de.evoal.languages.model.base.FloatType;
 import de.evoal.languages.model.base.FunctionDefinition;
+import de.evoal.languages.model.base.Import;
 import de.evoal.languages.model.base.Instance;
 import de.evoal.languages.model.base.InstanceType;
 import de.evoal.languages.model.base.IntType;
@@ -122,6 +123,9 @@ public class InstanceLanguageSemanticSequencer extends BaseLanguageSemanticSeque
 				return; 
 			case BasePackage.FUNCTION_DEFINITION:
 				sequence_FunctionDefinitionRule(context, (FunctionDefinition) semanticObject); 
+				return; 
+			case BasePackage.IMPORT:
+				sequence_ImportRule(context, (Import) semanticObject); 
 				return; 
 			case BasePackage.INSTANCE:
 				sequence_InstanceLiteralRule(context, (Instance) semanticObject); 

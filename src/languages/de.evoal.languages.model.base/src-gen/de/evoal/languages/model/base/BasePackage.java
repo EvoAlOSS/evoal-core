@@ -1046,13 +1046,22 @@ public interface BasePackage extends EPackage {
 	int TYPE_DEFINITION_FEATURE_COUNT = 4;
 
 	/**
+	 * The operation id for the '<em>Find Attribute</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_DEFINITION___FIND_ATTRIBUTE__STRING = 0;
+
+	/**
 	 * The number of operations of the '<em>Type Definition</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_DEFINITION_OPERATION_COUNT = 0;
+	int TYPE_DEFINITION_OPERATION_COUNT = 1;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.impl.AttributeDefinitionImpl <em>Attribute Definition</em>}' class.
@@ -2521,6 +2530,16 @@ public interface BasePackage extends EPackage {
 	EAttribute getTypeDefinition_Abstract();
 
 	/**
+	 * Returns the meta object for the '{@link de.evoal.languages.model.base.TypeDefinition#findAttribute(java.lang.String) <em>Find Attribute</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Find Attribute</em>' operation.
+	 * @see de.evoal.languages.model.base.TypeDefinition#findAttribute(java.lang.String)
+	 * @generated
+	 */
+	EOperation getTypeDefinition__FindAttribute__String();
+
+	/**
 	 * Returns the meta object for class '{@link de.evoal.languages.model.base.AttributeDefinition <em>Attribute Definition</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3562,6 +3581,14 @@ public interface BasePackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute TYPE_DEFINITION__ABSTRACT = eINSTANCE.getTypeDefinition_Abstract();
+
+		/**
+		 * The meta object literal for the '<em><b>Find Attribute</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation TYPE_DEFINITION___FIND_ATTRIBUTE__STRING = eINSTANCE.getTypeDefinition__FindAttribute__String();
 
 		/**
 		 * The meta object literal for the '{@link de.evoal.languages.model.base.impl.AttributeDefinitionImpl <em>Attribute Definition</em>}' class.

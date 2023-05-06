@@ -662,15 +662,15 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		private final RuleCall cDefinitionAttributeDefinitionStringOrIdParserRuleCall_0_0_1 = (RuleCall)cDefinitionAttributeDefinitionCrossReference_0_0.eContents().get(1);
 		private final Keyword cColonEqualsSignKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Assignment cValueAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cValueValueRuleParserRuleCall_2_0 = (RuleCall)cValueAssignment_2.eContents().get(0);
+		private final RuleCall cValueExpressionRuleParserRuleCall_2_0 = (RuleCall)cValueAssignment_2.eContents().get(0);
 		private final Keyword cSemicolonKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//AttributeRule returns Attribute:
-		//    definition = [AttributeDefinition|StringOrId] ':=' value = ValueRule ';'
+		//    definition = [AttributeDefinition|StringOrId] ':=' value = ExpressionRule ';'
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//definition = [AttributeDefinition|StringOrId] ':=' value = ValueRule ';'
+		//definition = [AttributeDefinition|StringOrId] ':=' value = ExpressionRule ';'
 		public Group getGroup() { return cGroup; }
 		
 		//definition = [AttributeDefinition|StringOrId]
@@ -685,11 +685,11 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		//':='
 		public Keyword getColonEqualsSignKeyword_1() { return cColonEqualsSignKeyword_1; }
 		
-		//value = ValueRule
+		//value = ExpressionRule
 		public Assignment getValueAssignment_2() { return cValueAssignment_2; }
 		
-		//ValueRule
-		public RuleCall getValueValueRuleParserRuleCall_2_0() { return cValueValueRuleParserRuleCall_2_0; }
+		//ExpressionRule
+		public RuleCall getValueExpressionRuleParserRuleCall_2_0() { return cValueExpressionRuleParserRuleCall_2_0; }
 		
 		//';'
 		public Keyword getSemicolonKeyword_3() { return cSemicolonKeyword_3; }
@@ -2229,7 +2229,7 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 	}
 	
 	//AttributeRule returns Attribute:
-	//    definition = [AttributeDefinition|StringOrId] ':=' value = ValueRule ';'
+	//    definition = [AttributeDefinition|StringOrId] ':=' value = ExpressionRule ';'
 	//;
 	public AttributeRuleElements getAttributeRuleAccess() {
 		return pAttributeRule;

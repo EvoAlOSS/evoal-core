@@ -262,8 +262,8 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 		private final Group cGroup_8 = (Group)cGroup.eContents().get(8);
 		private final Keyword cWithKeyword_8_0 = (Keyword)cGroup_8.eContents().get(0);
 		private final Keyword cParametersKeyword_8_1 = (Keyword)cGroup_8.eContents().get(1);
-		private final Assignment cParametersAssignment_8_2 = (Assignment)cGroup_8.eContents().get(2);
-		private final RuleCall cParametersAttributeRuleParserRuleCall_8_2_0 = (RuleCall)cParametersAssignment_8_2.eContents().get(0);
+		private final Assignment cAttributesAssignment_8_2 = (Assignment)cGroup_8.eContents().get(2);
+		private final RuleCall cAttributesAttributeRuleParserRuleCall_8_2_0 = (RuleCall)cAttributesAssignment_8_2.eContents().get(0);
 		
 		//PartialSurrogateFunctionDefinitionRule returns PartialSurrogateFunctionDefinition:
 		//    "function" definition = [base::TypeDefinition|QualifiedName]
@@ -272,7 +272,7 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 		//    "to"
 		//        outputs += [ddl::DataDescription|QualifiedName] ("," outputs += [ddl::DataDescription|QualifiedName])*
 		//    ("with" "parameters"
-		//        ((parameters += BaseLanguage::AttributeRule)+ ))?
+		//        ((attributes+= BaseLanguage::AttributeRule)+ ))?
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
@@ -282,7 +282,7 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 		//"to"
 		//    outputs += [ddl::DataDescription|QualifiedName] ("," outputs += [ddl::DataDescription|QualifiedName])*
 		//("with" "parameters"
-		//    ((parameters += BaseLanguage::AttributeRule)+ ))?
+		//    ((attributes+= BaseLanguage::AttributeRule)+ ))?
 		public Group getGroup() { return cGroup; }
 		
 		//"function"
@@ -352,7 +352,7 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 		public RuleCall getOutputsDataDescriptionQualifiedNameParserRuleCall_7_1_0_1() { return cOutputsDataDescriptionQualifiedNameParserRuleCall_7_1_0_1; }
 		
 		//("with" "parameters"
-		//    ((parameters += BaseLanguage::AttributeRule)+ ))?
+		//    ((attributes+= BaseLanguage::AttributeRule)+ ))?
 		public Group getGroup_8() { return cGroup_8; }
 		
 		//"with"
@@ -361,11 +361,11 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 		//"parameters"
 		public Keyword getParametersKeyword_8_1() { return cParametersKeyword_8_1; }
 		
-		//((parameters += BaseLanguage::AttributeRule)+ )
-		public Assignment getParametersAssignment_8_2() { return cParametersAssignment_8_2; }
+		//((attributes+= BaseLanguage::AttributeRule)+ )
+		public Assignment getAttributesAssignment_8_2() { return cAttributesAssignment_8_2; }
 		
 		//BaseLanguage::AttributeRule
-		public RuleCall getParametersAttributeRuleParserRuleCall_8_2_0() { return cParametersAttributeRuleParserRuleCall_8_2_0; }
+		public RuleCall getAttributesAttributeRuleParserRuleCall_8_2_0() { return cAttributesAttributeRuleParserRuleCall_8_2_0; }
 	}
 	public class PredictStatementRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.mll.dsl.MachineLearningLanguage.PredictStatementRule");
@@ -842,7 +842,7 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 	//    "to"
 	//        outputs += [ddl::DataDescription|QualifiedName] ("," outputs += [ddl::DataDescription|QualifiedName])*
 	//    ("with" "parameters"
-	//        ((parameters += BaseLanguage::AttributeRule)+ ))?
+	//        ((attributes+= BaseLanguage::AttributeRule)+ ))?
 	//;
 	public PartialSurrogateFunctionDefinitionRuleElements getPartialSurrogateFunctionDefinitionRuleAccess() {
 		return pPartialSurrogateFunctionDefinitionRule;
@@ -1215,7 +1215,7 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 	}
 	
 	//AttributeRule returns Attribute:
-	//    definition = [AttributeDefinition|StringOrId] ':=' value = ValueRule ';'
+	//    definition = [AttributeDefinition|StringOrId] ':=' value = ExpressionRule ';'
 	//;
 	public BaseLanguageGrammarAccess.AttributeRuleElements getAttributeRuleAccess() {
 		return gaBaseLanguage.getAttributeRuleAccess();

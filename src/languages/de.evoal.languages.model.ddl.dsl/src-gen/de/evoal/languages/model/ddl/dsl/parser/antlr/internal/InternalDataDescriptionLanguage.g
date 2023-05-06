@@ -1968,9 +1968,9 @@ ruleAttributeRule returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getAttributeRuleAccess().getValueValueRuleParserRuleCall_2_0());
+					newCompositeNode(grammarAccess.getAttributeRuleAccess().getValueExpressionRuleParserRuleCall_2_0());
 				}
-				lv_value_2_0=ruleValueRule
+				lv_value_2_0=ruleExpressionRule
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getAttributeRuleRule());
@@ -1979,7 +1979,7 @@ ruleAttributeRule returns [EObject current=null]
 						$current,
 						"value",
 						lv_value_2_0,
-						"de.evoal.languages.model.base.dsl.BaseLanguage.ValueRule");
+						"de.evoal.languages.model.base.dsl.BaseLanguage.ExpressionRule");
 					afterParserOrEnumRuleCall();
 				}
 			)

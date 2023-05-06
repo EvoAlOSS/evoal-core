@@ -6,10 +6,11 @@ package de.evoal.languages.model.ol.impl;
 import de.evoal.languages.model.base.Array;
 import de.evoal.languages.model.base.Instance;
 
+import de.evoal.languages.model.base.impl.InstanceImpl;
 import de.evoal.languages.model.ol.AlgorithmInstance;
 import de.evoal.languages.model.ol.OLPackage;
-import de.evoal.languages.model.ol.Problem;
 
+import de.evoal.languages.model.ol.ProblemInstance;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
@@ -28,13 +29,12 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * </p>
  * <ul>
  *   <li>{@link de.evoal.languages.model.ol.impl.AlgorithmInstanceImpl#getProblem <em>Problem</em>}</li>
- *   <li>{@link de.evoal.languages.model.ol.impl.AlgorithmInstanceImpl#getInstance <em>Instance</em>}</li>
  *   <li>{@link de.evoal.languages.model.ol.impl.AlgorithmInstanceImpl#getDocumentation <em>Documentation</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class AlgorithmInstanceImpl extends MinimalEObjectImpl.Container implements AlgorithmInstance {
+public class AlgorithmInstanceImpl extends InstanceImpl implements AlgorithmInstance {
 	/**
 	 * The cached value of the '{@link #getProblem() <em>Problem</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -43,17 +43,7 @@ public class AlgorithmInstanceImpl extends MinimalEObjectImpl.Container implemen
 	 * @generated
 	 * @ordered
 	 */
-	protected Problem problem;
-
-	/**
-	 * The cached value of the '{@link #getInstance() <em>Instance</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getInstance()
-	 * @generated
-	 * @ordered
-	 */
-	protected Instance instance;
+	protected ProblemInstance problem;
 
 	/**
 	 * The cached value of the '{@link #getDocumentation() <em>Documentation</em>}' containment reference.
@@ -90,10 +80,10 @@ public class AlgorithmInstanceImpl extends MinimalEObjectImpl.Container implemen
 	 * @generated
 	 */
 	@Override
-	public Problem getProblem() {
+	public ProblemInstance getProblem() {
 		if (problem != null && problem.eIsProxy()) {
 			InternalEObject oldProblem = (InternalEObject)problem;
-			problem = (Problem)eResolveProxy(oldProblem);
+			problem = (ProblemInstance)eResolveProxy(oldProblem);
 			if (problem != oldProblem) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, OLPackage.ALGORITHM_INSTANCE__PROBLEM, oldProblem, problem));
@@ -107,7 +97,7 @@ public class AlgorithmInstanceImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Problem basicGetProblem() {
+	public ProblemInstance basicGetProblem() {
 		return problem;
 	}
 
@@ -117,56 +107,11 @@ public class AlgorithmInstanceImpl extends MinimalEObjectImpl.Container implemen
 	 * @generated
 	 */
 	@Override
-	public void setProblem(Problem newProblem) {
-		Problem oldProblem = problem;
+	public void setProblem(ProblemInstance newProblem) {
+		ProblemInstance oldProblem = problem;
 		problem = newProblem;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, OLPackage.ALGORITHM_INSTANCE__PROBLEM, oldProblem, problem));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Instance getInstance() {
-		return instance;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetInstance(Instance newInstance, NotificationChain msgs) {
-		Instance oldInstance = instance;
-		instance = newInstance;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OLPackage.ALGORITHM_INSTANCE__INSTANCE, oldInstance, newInstance);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setInstance(Instance newInstance) {
-		if (newInstance != instance) {
-			NotificationChain msgs = null;
-			if (instance != null)
-				msgs = ((InternalEObject)instance).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OLPackage.ALGORITHM_INSTANCE__INSTANCE, null, msgs);
-			if (newInstance != null)
-				msgs = ((InternalEObject)newInstance).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - OLPackage.ALGORITHM_INSTANCE__INSTANCE, null, msgs);
-			msgs = basicSetInstance(newInstance, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OLPackage.ALGORITHM_INSTANCE__INSTANCE, newInstance, newInstance));
 	}
 
 	/**
@@ -222,8 +167,6 @@ public class AlgorithmInstanceImpl extends MinimalEObjectImpl.Container implemen
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case OLPackage.ALGORITHM_INSTANCE__INSTANCE:
-				return basicSetInstance(null, msgs);
 			case OLPackage.ALGORITHM_INSTANCE__DOCUMENTATION:
 				return basicSetDocumentation(null, msgs);
 		}
@@ -241,8 +184,6 @@ public class AlgorithmInstanceImpl extends MinimalEObjectImpl.Container implemen
 			case OLPackage.ALGORITHM_INSTANCE__PROBLEM:
 				if (resolve) return getProblem();
 				return basicGetProblem();
-			case OLPackage.ALGORITHM_INSTANCE__INSTANCE:
-				return getInstance();
 			case OLPackage.ALGORITHM_INSTANCE__DOCUMENTATION:
 				return getDocumentation();
 		}
@@ -258,10 +199,7 @@ public class AlgorithmInstanceImpl extends MinimalEObjectImpl.Container implemen
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case OLPackage.ALGORITHM_INSTANCE__PROBLEM:
-				setProblem((Problem)newValue);
-				return;
-			case OLPackage.ALGORITHM_INSTANCE__INSTANCE:
-				setInstance((Instance)newValue);
+				setProblem((ProblemInstance)newValue);
 				return;
 			case OLPackage.ALGORITHM_INSTANCE__DOCUMENTATION:
 				setDocumentation((Array)newValue);
@@ -279,10 +217,7 @@ public class AlgorithmInstanceImpl extends MinimalEObjectImpl.Container implemen
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case OLPackage.ALGORITHM_INSTANCE__PROBLEM:
-				setProblem((Problem)null);
-				return;
-			case OLPackage.ALGORITHM_INSTANCE__INSTANCE:
-				setInstance((Instance)null);
+				setProblem((ProblemInstance)null);
 				return;
 			case OLPackage.ALGORITHM_INSTANCE__DOCUMENTATION:
 				setDocumentation((Array)null);
@@ -301,8 +236,6 @@ public class AlgorithmInstanceImpl extends MinimalEObjectImpl.Container implemen
 		switch (featureID) {
 			case OLPackage.ALGORITHM_INSTANCE__PROBLEM:
 				return problem != null;
-			case OLPackage.ALGORITHM_INSTANCE__INSTANCE:
-				return instance != null;
 			case OLPackage.ALGORITHM_INSTANCE__DOCUMENTATION:
 				return documentation != null;
 		}

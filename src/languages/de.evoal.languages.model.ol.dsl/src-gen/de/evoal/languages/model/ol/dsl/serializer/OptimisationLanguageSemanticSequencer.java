@@ -48,7 +48,7 @@ import de.evoal.languages.model.instance.dsl.serializer.InstanceLanguageSemantic
 import de.evoal.languages.model.ol.AlgorithmInstance;
 import de.evoal.languages.model.ol.OLPackage;
 import de.evoal.languages.model.ol.OptimisationModel;
-import de.evoal.languages.model.ol.Problem;
+import de.evoal.languages.model.ol.ProblemInstance;
 import de.evoal.languages.model.ol.dsl.services.OptimisationLanguageGrammarAccess;
 import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
@@ -198,8 +198,8 @@ public class OptimisationLanguageSemanticSequencer extends InstanceLanguageSeman
 			case OLPackage.OPTIMISATION_MODEL:
 				sequence_OptimisationModelRule(context, (OptimisationModel) semanticObject); 
 				return; 
-			case OLPackage.PROBLEM:
-				sequence_ProblemRule(context, (Problem) semanticObject); 
+			case OLPackage.PROBLEM_INSTANCE:
+				sequence_ProblemRule(context, (ProblemInstance) semanticObject); 
 				return; 
 			}
 		if (errorAcceptor != null)
@@ -212,7 +212,7 @@ public class OptimisationLanguageSemanticSequencer extends InstanceLanguageSeman
 	 *     AlgorithmInstanceRule returns AlgorithmInstance
 	 *
 	 * Constraint:
-	 *     (problem=[Problem|QualifiedName] instance=InstanceLiteralRule documentation=ArrayRule?)
+	 *     (definition=[TypeDefinition|QualifiedName] problem=[ProblemInstance|QualifiedName] attributes+=AttributeRule* documentation=ArrayRule?)
 	 * </pre>
 	 */
 	protected void sequence_AlgorithmInstanceRule(ISerializationContext context, AlgorithmInstance semanticObject) {
@@ -241,13 +241,13 @@ public class OptimisationLanguageSemanticSequencer extends InstanceLanguageSeman
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     ProblemRule returns Problem
+	 *     ProblemRule returns ProblemInstance
 	 *
 	 * Constraint:
-	 *     (name=StringOrId instance=InstanceLiteralRule documentation=ArrayRule?)
+	 *     (definition=[TypeDefinition|QualifiedName] name=StringOrId attributes+=AttributeRule* documentation=ArrayRule?)
 	 * </pre>
 	 */
-	protected void sequence_ProblemRule(ISerializationContext context, Problem semanticObject) {
+	protected void sequence_ProblemRule(ISerializationContext context, ProblemInstance semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

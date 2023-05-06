@@ -7652,9 +7652,9 @@ rule__AttributeRule__ValueAssignment_2
 	}
 :
 	(
-		{ before(grammarAccess.getAttributeRuleAccess().getValueValueRuleParserRuleCall_2_0()); }
-		ruleValueRule
-		{ after(grammarAccess.getAttributeRuleAccess().getValueValueRuleParserRuleCall_2_0()); }
+		{ before(grammarAccess.getAttributeRuleAccess().getValueExpressionRuleParserRuleCall_2_0()); }
+		ruleExpressionRule
+		{ after(grammarAccess.getAttributeRuleAccess().getValueExpressionRuleParserRuleCall_2_0()); }
 	)
 ;
 finally {

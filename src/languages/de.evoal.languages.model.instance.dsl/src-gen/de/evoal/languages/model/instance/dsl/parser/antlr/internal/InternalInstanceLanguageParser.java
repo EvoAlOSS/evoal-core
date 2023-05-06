@@ -3764,7 +3764,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "ruleAttributeRule"
-    // InternalInstanceLanguage.g:1298:1: ruleAttributeRule returns [EObject current=null] : ( ( ( ruleStringOrId ) ) otherlv_1= ':=' ( (lv_value_2_0= ruleValueRule ) ) otherlv_3= ';' ) ;
+    // InternalInstanceLanguage.g:1298:1: ruleAttributeRule returns [EObject current=null] : ( ( ( ruleStringOrId ) ) otherlv_1= ':=' ( (lv_value_2_0= ruleExpressionRule ) ) otherlv_3= ';' ) ;
     public final EObject ruleAttributeRule() throws RecognitionException {
         EObject current = null;
 
@@ -3777,11 +3777,11 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
         	enterRule();
 
         try {
-            // InternalInstanceLanguage.g:1304:2: ( ( ( ( ruleStringOrId ) ) otherlv_1= ':=' ( (lv_value_2_0= ruleValueRule ) ) otherlv_3= ';' ) )
-            // InternalInstanceLanguage.g:1305:2: ( ( ( ruleStringOrId ) ) otherlv_1= ':=' ( (lv_value_2_0= ruleValueRule ) ) otherlv_3= ';' )
+            // InternalInstanceLanguage.g:1304:2: ( ( ( ( ruleStringOrId ) ) otherlv_1= ':=' ( (lv_value_2_0= ruleExpressionRule ) ) otherlv_3= ';' ) )
+            // InternalInstanceLanguage.g:1305:2: ( ( ( ruleStringOrId ) ) otherlv_1= ':=' ( (lv_value_2_0= ruleExpressionRule ) ) otherlv_3= ';' )
             {
-            // InternalInstanceLanguage.g:1305:2: ( ( ( ruleStringOrId ) ) otherlv_1= ':=' ( (lv_value_2_0= ruleValueRule ) ) otherlv_3= ';' )
-            // InternalInstanceLanguage.g:1306:3: ( ( ruleStringOrId ) ) otherlv_1= ':=' ( (lv_value_2_0= ruleValueRule ) ) otherlv_3= ';'
+            // InternalInstanceLanguage.g:1305:2: ( ( ( ruleStringOrId ) ) otherlv_1= ':=' ( (lv_value_2_0= ruleExpressionRule ) ) otherlv_3= ';' )
+            // InternalInstanceLanguage.g:1306:3: ( ( ruleStringOrId ) ) otherlv_1= ':=' ( (lv_value_2_0= ruleExpressionRule ) ) otherlv_3= ';'
             {
             // InternalInstanceLanguage.g:1306:3: ( ( ruleStringOrId ) )
             // InternalInstanceLanguage.g:1307:4: ( ruleStringOrId )
@@ -3828,19 +3828,19 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
               			newLeafNode(otherlv_1, grammarAccess.getAttributeRuleAccess().getColonEqualsSignKeyword_1());
               		
             }
-            // InternalInstanceLanguage.g:1329:3: ( (lv_value_2_0= ruleValueRule ) )
-            // InternalInstanceLanguage.g:1330:4: (lv_value_2_0= ruleValueRule )
+            // InternalInstanceLanguage.g:1329:3: ( (lv_value_2_0= ruleExpressionRule ) )
+            // InternalInstanceLanguage.g:1330:4: (lv_value_2_0= ruleExpressionRule )
             {
-            // InternalInstanceLanguage.g:1330:4: (lv_value_2_0= ruleValueRule )
-            // InternalInstanceLanguage.g:1331:5: lv_value_2_0= ruleValueRule
+            // InternalInstanceLanguage.g:1330:4: (lv_value_2_0= ruleExpressionRule )
+            // InternalInstanceLanguage.g:1331:5: lv_value_2_0= ruleExpressionRule
             {
             if ( state.backtracking==0 ) {
 
-              					newCompositeNode(grammarAccess.getAttributeRuleAccess().getValueValueRuleParserRuleCall_2_0());
+              					newCompositeNode(grammarAccess.getAttributeRuleAccess().getValueExpressionRuleParserRuleCall_2_0());
               				
             }
             pushFollow(FOLLOW_21);
-            lv_value_2_0=ruleValueRule();
+            lv_value_2_0=ruleExpressionRule();
 
             state._fsp--;
             if (state.failed) return current;
@@ -3853,7 +3853,7 @@ public class InternalInstanceLanguageParser extends AbstractInternalAntlrParser 
               						current,
               						"value",
               						lv_value_2_0,
-              						"de.evoal.languages.model.base.dsl.BaseLanguage.ValueRule");
+              						"de.evoal.languages.model.base.dsl.BaseLanguage.ExpressionRule");
               					afterParserOrEnumRuleCall();
               				
             }

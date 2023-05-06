@@ -121,4 +121,12 @@ public interface TypeDefinition extends EObject {
 	 */
 	void setAbstract(boolean value);
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model nameRequired="true"
+	 * @generated
+	 */
+	AttributeDefinition findAttribute(String name);
+
 } // TypeDefinition

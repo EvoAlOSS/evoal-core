@@ -49,12 +49,12 @@ public interface Attribute extends EObject {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Value</em>' containment reference.
-	 * @see #setValue(Value)
+	 * @see #setValue(Expression)
 	 * @see de.evoal.languages.model.base.BasePackage#getAttribute_Value()
 	 * @model containment="true"
 	 * @generated
 	 */
-	Value getValue();
+	Expression getValue();
 
 	/**
 	 * Sets the value of the '{@link de.evoal.languages.model.base.Attribute#getValue <em>Value</em>}' containment reference.
@@ -64,6 +64,6 @@ public interface Attribute extends EObject {
 	 * @see #getValue()
 	 * @generated
 	 */
-	void setValue(Value value);
+	void setValue(Expression value);
 
 } // Attribute

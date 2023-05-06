@@ -104,7 +104,7 @@ InstanceLiteralRule returns Instance:
 ;
 
 AttributeRule returns Attribute:
-	definition = [AttributeDefinition|StringOrId] ':=' value = ValueRule ';'
+	definition = [AttributeDefinition|StringOrId] ':=' value = ExpressionRule ';'
 ;
 
 NumberLiteralRule returns NumberLiteral:

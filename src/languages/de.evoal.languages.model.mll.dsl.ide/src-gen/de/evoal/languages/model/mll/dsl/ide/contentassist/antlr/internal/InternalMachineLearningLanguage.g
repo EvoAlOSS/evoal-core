@@ -2991,14 +2991,14 @@ rule__PartialSurrogateFunctionDefinitionRule__Group_8__2__Impl
 :
 (
 	(
-		{ before(grammarAccess.getPartialSurrogateFunctionDefinitionRuleAccess().getParametersAssignment_8_2()); }
-		(rule__PartialSurrogateFunctionDefinitionRule__ParametersAssignment_8_2)
-		{ after(grammarAccess.getPartialSurrogateFunctionDefinitionRuleAccess().getParametersAssignment_8_2()); }
+		{ before(grammarAccess.getPartialSurrogateFunctionDefinitionRuleAccess().getAttributesAssignment_8_2()); }
+		(rule__PartialSurrogateFunctionDefinitionRule__AttributesAssignment_8_2)
+		{ after(grammarAccess.getPartialSurrogateFunctionDefinitionRuleAccess().getAttributesAssignment_8_2()); }
 	)
 	(
-		{ before(grammarAccess.getPartialSurrogateFunctionDefinitionRuleAccess().getParametersAssignment_8_2()); }
-		(rule__PartialSurrogateFunctionDefinitionRule__ParametersAssignment_8_2)*
-		{ after(grammarAccess.getPartialSurrogateFunctionDefinitionRuleAccess().getParametersAssignment_8_2()); }
+		{ before(grammarAccess.getPartialSurrogateFunctionDefinitionRuleAccess().getAttributesAssignment_8_2()); }
+		(rule__PartialSurrogateFunctionDefinitionRule__AttributesAssignment_8_2)*
+		{ after(grammarAccess.getPartialSurrogateFunctionDefinitionRuleAccess().getAttributesAssignment_8_2()); }
 	)
 )
 ;
@@ -7063,15 +7063,15 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__PartialSurrogateFunctionDefinitionRule__ParametersAssignment_8_2
+rule__PartialSurrogateFunctionDefinitionRule__AttributesAssignment_8_2
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 	(
-		{ before(grammarAccess.getPartialSurrogateFunctionDefinitionRuleAccess().getParametersAttributeRuleParserRuleCall_8_2_0()); }
+		{ before(grammarAccess.getPartialSurrogateFunctionDefinitionRuleAccess().getAttributesAttributeRuleParserRuleCall_8_2_0()); }
 		ruleAttributeRule
-		{ after(grammarAccess.getPartialSurrogateFunctionDefinitionRuleAccess().getParametersAttributeRuleParserRuleCall_8_2_0()); }
+		{ after(grammarAccess.getPartialSurrogateFunctionDefinitionRuleAccess().getAttributesAttributeRuleParserRuleCall_8_2_0()); }
 	)
 ;
 finally {
@@ -7783,9 +7783,9 @@ rule__AttributeRule__ValueAssignment_2
 	}
 :
 	(
-		{ before(grammarAccess.getAttributeRuleAccess().getValueValueRuleParserRuleCall_2_0()); }
-		ruleValueRule
-		{ after(grammarAccess.getAttributeRuleAccess().getValueValueRuleParserRuleCall_2_0()); }
+		{ before(grammarAccess.getAttributeRuleAccess().getValueExpressionRuleParserRuleCall_2_0()); }
+		ruleExpressionRule
+		{ after(grammarAccess.getAttributeRuleAccess().getValueExpressionRuleParserRuleCall_2_0()); }
 	)
 ;
 finally {

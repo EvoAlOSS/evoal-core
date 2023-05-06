@@ -336,7 +336,7 @@ public class MachineLearningLanguageSemanticSequencer extends InstanceLanguageSe
 	 *         inputs+=[DataDescription|QualifiedName]* 
 	 *         outputs+=[DataDescription|QualifiedName] 
 	 *         outputs+=[DataDescription|QualifiedName]* 
-	 *         parameters+=AttributeRule*
+	 *         attributes+=AttributeRule*
 	 *     )
 	 * </pre>
 	 */

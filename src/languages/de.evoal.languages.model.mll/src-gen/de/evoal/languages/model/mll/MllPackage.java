@@ -217,7 +217,16 @@ public interface MllPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PARTIAL_SURROGATE_FUNCTION_DEFINITION__DEFINITION = 0;
+	int PARTIAL_SURROGATE_FUNCTION_DEFINITION__DEFINITION = BasePackage.INSTANCE__DEFINITION;
+
+	/**
+	 * The feature id for the '<em><b>Attributes</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARTIAL_SURROGATE_FUNCTION_DEFINITION__ATTRIBUTES = BasePackage.INSTANCE__ATTRIBUTES;
 
 	/**
 	 * The feature id for the '<em><b>Inputs</b></em>' reference list.
@@ -226,7 +235,7 @@ public interface MllPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PARTIAL_SURROGATE_FUNCTION_DEFINITION__INPUTS = 1;
+	int PARTIAL_SURROGATE_FUNCTION_DEFINITION__INPUTS = BasePackage.INSTANCE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Outputs</b></em>' reference list.
@@ -235,16 +244,7 @@ public interface MllPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PARTIAL_SURROGATE_FUNCTION_DEFINITION__OUTPUTS = 2;
-
-	/**
-	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PARTIAL_SURROGATE_FUNCTION_DEFINITION__PARAMETERS = 3;
+	int PARTIAL_SURROGATE_FUNCTION_DEFINITION__OUTPUTS = BasePackage.INSTANCE_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Partial Surrogate Function Definition</em>' class.
@@ -253,7 +253,7 @@ public interface MllPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PARTIAL_SURROGATE_FUNCTION_DEFINITION_FEATURE_COUNT = 4;
+	int PARTIAL_SURROGATE_FUNCTION_DEFINITION_FEATURE_COUNT = BasePackage.INSTANCE_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.mll.impl.PredictionImpl <em>Prediction</em>}' class.
@@ -571,34 +571,6 @@ public interface MllPackage extends EPackage {
 	int STRING_LITERAL_RANGE_FEATURE_COUNT = RANGE_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.mll.impl.DefinedFunctionNameImpl <em>Defined Function Name</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.mll.impl.DefinedFunctionNameImpl
-	 * @see de.evoal.languages.model.mll.impl.MllPackageImpl#getDefinedFunctionName()
-	 * @generated
-	 */
-	int DEFINED_FUNCTION_NAME = 13;
-
-	/**
-	 * The feature id for the '<em><b>Definition</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DEFINED_FUNCTION_NAME__DEFINITION = BasePackage.FUNCTION_NAME_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Defined Function Name</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DEFINED_FUNCTION_NAME_FEATURE_COUNT = BasePackage.FUNCTION_NAME_FEATURE_COUNT + 1;
-
-	/**
 	 * Returns the meta object for class '{@link de.evoal.languages.model.mll.MachineLearningConfiguration <em>Machine Learning Configuration</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -738,17 +710,6 @@ public interface MllPackage extends EPackage {
 	EClass getPartialSurrogateFunctionDefinition();
 
 	/**
-	 * Returns the meta object for the reference '{@link de.evoal.languages.model.mll.PartialSurrogateFunctionDefinition#getDefinition <em>Definition</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Definition</em>'.
-	 * @see de.evoal.languages.model.mll.PartialSurrogateFunctionDefinition#getDefinition()
-	 * @see #getPartialSurrogateFunctionDefinition()
-	 * @generated
-	 */
-	EReference getPartialSurrogateFunctionDefinition_Definition();
-
-	/**
 	 * Returns the meta object for the reference list '{@link de.evoal.languages.model.mll.PartialSurrogateFunctionDefinition#getInputs <em>Inputs</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -769,17 +730,6 @@ public interface MllPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getPartialSurrogateFunctionDefinition_Outputs();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.mll.PartialSurrogateFunctionDefinition#getParameters <em>Parameters</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Parameters</em>'.
-	 * @see de.evoal.languages.model.mll.PartialSurrogateFunctionDefinition#getParameters()
-	 * @see #getPartialSurrogateFunctionDefinition()
-	 * @generated
-	 */
-	EReference getPartialSurrogateFunctionDefinition_Parameters();
 
 	/**
 	 * Returns the meta object for class '{@link de.evoal.languages.model.mll.Prediction <em>Prediction</em>}'.
@@ -1048,27 +998,6 @@ public interface MllPackage extends EPackage {
 	EReference getStringLiteralRange_Elements();
 
 	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.mll.DefinedFunctionName <em>Defined Function Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Defined Function Name</em>'.
-	 * @see de.evoal.languages.model.mll.DefinedFunctionName
-	 * @generated
-	 */
-	EClass getDefinedFunctionName();
-
-	/**
-	 * Returns the meta object for the reference '{@link de.evoal.languages.model.mll.DefinedFunctionName#getDefinition <em>Definition</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Definition</em>'.
-	 * @see de.evoal.languages.model.mll.DefinedFunctionName#getDefinition()
-	 * @see #getDefinedFunctionName()
-	 * @generated
-	 */
-	EReference getDefinedFunctionName_Definition();
-
-	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1203,14 +1132,6 @@ public interface MllPackage extends EPackage {
 		EClass PARTIAL_SURROGATE_FUNCTION_DEFINITION = eINSTANCE.getPartialSurrogateFunctionDefinition();
 
 		/**
-		 * The meta object literal for the '<em><b>Definition</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference PARTIAL_SURROGATE_FUNCTION_DEFINITION__DEFINITION = eINSTANCE.getPartialSurrogateFunctionDefinition_Definition();
-
-		/**
 		 * The meta object literal for the '<em><b>Inputs</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1225,14 +1146,6 @@ public interface MllPackage extends EPackage {
 		 * @generated
 		 */
 		EReference PARTIAL_SURROGATE_FUNCTION_DEFINITION__OUTPUTS = eINSTANCE.getPartialSurrogateFunctionDefinition_Outputs();
-
-		/**
-		 * The meta object literal for the '<em><b>Parameters</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference PARTIAL_SURROGATE_FUNCTION_DEFINITION__PARAMETERS = eINSTANCE.getPartialSurrogateFunctionDefinition_Parameters();
 
 		/**
 		 * The meta object literal for the '{@link de.evoal.languages.model.mll.impl.PredictionImpl <em>Prediction</em>}' class.
@@ -1451,24 +1364,6 @@ public interface MllPackage extends EPackage {
 		 * @generated
 		 */
 		EReference STRING_LITERAL_RANGE__ELEMENTS = eINSTANCE.getStringLiteralRange_Elements();
-
-		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.mll.impl.DefinedFunctionNameImpl <em>Defined Function Name</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.mll.impl.DefinedFunctionNameImpl
-		 * @see de.evoal.languages.model.mll.impl.MllPackageImpl#getDefinedFunctionName()
-		 * @generated
-		 */
-		EClass DEFINED_FUNCTION_NAME = eINSTANCE.getDefinedFunctionName();
-
-		/**
-		 * The meta object literal for the '<em><b>Definition</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference DEFINED_FUNCTION_NAME__DEFINITION = eINSTANCE.getDefinedFunctionName_Definition();
 
 	}
 

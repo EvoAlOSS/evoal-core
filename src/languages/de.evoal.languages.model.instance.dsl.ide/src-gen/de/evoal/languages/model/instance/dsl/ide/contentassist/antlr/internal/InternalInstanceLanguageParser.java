@@ -16159,28 +16159,28 @@ public class InternalInstanceLanguageParser extends AbstractInternalContentAssis
 
 
     // $ANTLR start "rule__AttributeRule__ValueAssignment_2"
-    // InternalInstanceLanguage.g:4884:1: rule__AttributeRule__ValueAssignment_2 : ( ruleValueRule ) ;
+    // InternalInstanceLanguage.g:4884:1: rule__AttributeRule__ValueAssignment_2 : ( ruleExpressionRule ) ;
     public final void rule__AttributeRule__ValueAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalInstanceLanguage.g:4888:1: ( ( ruleValueRule ) )
-            // InternalInstanceLanguage.g:4889:2: ( ruleValueRule )
+            // InternalInstanceLanguage.g:4888:1: ( ( ruleExpressionRule ) )
+            // InternalInstanceLanguage.g:4889:2: ( ruleExpressionRule )
             {
-            // InternalInstanceLanguage.g:4889:2: ( ruleValueRule )
-            // InternalInstanceLanguage.g:4890:3: ruleValueRule
+            // InternalInstanceLanguage.g:4889:2: ( ruleExpressionRule )
+            // InternalInstanceLanguage.g:4890:3: ruleExpressionRule
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getAttributeRuleAccess().getValueValueRuleParserRuleCall_2_0()); 
+               before(grammarAccess.getAttributeRuleAccess().getValueExpressionRuleParserRuleCall_2_0()); 
             }
             pushFollow(FOLLOW_2);
-            ruleValueRule();
+            ruleExpressionRule();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getAttributeRuleAccess().getValueValueRuleParserRuleCall_2_0()); 
+               after(grammarAccess.getAttributeRuleAccess().getValueExpressionRuleParserRuleCall_2_0()); 
             }
 
             }

@@ -10,25 +10,19 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="imports" upperBound="-1"
         eType="ecore:EClass ../../de.evoal.languages.model.base/model/model.ecore#//Import"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="problem" eType="#//Problem"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="problem" eType="#//ProblemInstance"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="algorithm" eType="#//AlgorithmInstance"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Problem">
+  <eClassifiers xsi:type="ecore:EClass" name="ProblemInstance" eSuperTypes="../../de.evoal.languages.model.base/model/model.ecore#//Instance">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="instance" lowerBound="1"
-        eType="ecore:EClass ../../de.evoal.languages.model.base/model/model.ecore#//Instance"
-        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="documentation" eType="ecore:EClass ../../de.evoal.languages.model.base/model/model.ecore#//Array"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AlgorithmInstance">
+  <eClassifiers xsi:type="ecore:EClass" name="AlgorithmInstance" eSuperTypes="../../de.evoal.languages.model.base/model/model.ecore#//Instance">
     <eStructuralFeatures xsi:type="ecore:EReference" name="problem" lowerBound="1"
-        eType="#//Problem"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="instance" lowerBound="1"
-        eType="ecore:EClass ../../de.evoal.languages.model.base/model/model.ecore#//Instance"
-        containment="true"/>
+        eType="#//ProblemInstance"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="documentation" eType="ecore:EClass ../../de.evoal.languages.model.base/model/model.ecore#//Array"
         containment="true"/>
   </eClassifiers>

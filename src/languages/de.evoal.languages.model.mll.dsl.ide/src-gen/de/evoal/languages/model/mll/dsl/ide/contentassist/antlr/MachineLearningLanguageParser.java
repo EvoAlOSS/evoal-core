@@ -129,7 +129,7 @@ public class MachineLearningLanguageParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getPartialSurrogateFunctionDefinitionRuleAccess().getInputsAssignment_4_1(), "rule__PartialSurrogateFunctionDefinitionRule__InputsAssignment_4_1");
 			builder.put(grammarAccess.getPartialSurrogateFunctionDefinitionRuleAccess().getOutputsAssignment_6(), "rule__PartialSurrogateFunctionDefinitionRule__OutputsAssignment_6");
 			builder.put(grammarAccess.getPartialSurrogateFunctionDefinitionRuleAccess().getOutputsAssignment_7_1(), "rule__PartialSurrogateFunctionDefinitionRule__OutputsAssignment_7_1");
-			builder.put(grammarAccess.getPartialSurrogateFunctionDefinitionRuleAccess().getParametersAssignment_8_2(), "rule__PartialSurrogateFunctionDefinitionRule__ParametersAssignment_8_2");
+			builder.put(grammarAccess.getPartialSurrogateFunctionDefinitionRuleAccess().getAttributesAssignment_8_2(), "rule__PartialSurrogateFunctionDefinitionRule__AttributesAssignment_8_2");
 			builder.put(grammarAccess.getPredictStatementRuleAccess().getSurrogateAssignment_1(), "rule__PredictStatementRule__SurrogateAssignment_1");
 			builder.put(grammarAccess.getPredictStatementRuleAccess().getTrainingDataAssignment_3(), "rule__PredictStatementRule__TrainingDataAssignment_3");
 			builder.put(grammarAccess.getPredictStatementRuleAccess().getStatementsAssignment_4_2(), "rule__PredictStatementRule__StatementsAssignment_4_2");

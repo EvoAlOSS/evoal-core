@@ -13,18 +13,20 @@ import de.evoal.languages.model.utils.scoping.WildcardEnabledLocalScopeProvider;
 
 public class OptimisationLanguageLocalScopeProvider extends WildcardEnabledLocalScopeProvider {
 	private static EClass instance = BasePackage.eINSTANCE.getInstance();
+	
 	private static EReference attributeDefinition = BasePackage.eINSTANCE.getAttribute_Definition();
+		
 	
 	@Inject
-	private InstanceLanguageLocalScopeProvider scopeProvider;
+	private InstanceLanguageLocalScopeProvider instanceScopes;
 	
 	@Override
 	public IScope getScope(final EObject context, final EReference reference) {
-		if(instance.equals(context.eClass()) && (attributeDefinition.equals(reference))) {
+		if(instance.isSuperTypeOf(context.eClass()) && (attributeDefinition.equals(reference))) {
 			// inject fields of types
 			IScope typeScope = IScope.NULLSCOPE;
 				try {
-					typeScope = scopeProvider.getScope(context, reference);
+					typeScope = instanceScopes.getScope(context, reference);
 				} catch(final NullPointerException e) {
 					System.err.println(e);
 				}

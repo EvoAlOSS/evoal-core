@@ -73,9 +73,8 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="PartialSurrogateFunctionDefinition">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="definition" lowerBound="1"
-        eType="ecore:EClass ../../de.evoal.languages.model.base/model/model.ecore#//TypeDefinition"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PartialSurrogateFunctionDefinition"
+      eSuperTypes="../../de.evoal.languages.model.base/model/model.ecore#//Instance">
     <eStructuralFeatures xsi:type="ecore:EReference" name="inputs" ordered="false"
         lowerBound="1" upperBound="-1" eType="ecore:EClass ../../de.evoal.languages.model.ddl/model/model.ecore#//DataDescription">
       <eAnnotations source="http://www.eclipse.org/OCL/Collection">
@@ -84,13 +83,6 @@
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="outputs" ordered="false"
         lowerBound="1" upperBound="-1" eType="ecore:EClass ../../de.evoal.languages.model.ddl/model/model.ecore#//DataDescription">
-      <eAnnotations source="http://www.eclipse.org/OCL/Collection">
-        <details key="nullFree" value="false"/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" ordered="false"
-        upperBound="-1" eType="ecore:EClass ../../de.evoal.languages.model.base/model/model.ecore#//Attribute"
-        containment="true">
       <eAnnotations source="http://www.eclipse.org/OCL/Collection">
         <details key="nullFree" value="false"/>
       </eAnnotations>
@@ -167,17 +159,6 @@
         containment="true">
       <eAnnotations source="http://www.eclipse.org/OCL/Collection">
         <details key="nullFree" value="false"/>
-      </eAnnotations>
-    </eStructuralFeatures>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="DefinedFunctionName" eSuperTypes="../../de.evoal.languages.model.base/model/model.ecore#//FunctionName">
-    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="EL integration to allow calls to defined functions."/>
-    </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="definition" lowerBound="1"
-        eType="ecore:EClass ../../de.evoal.languages.model.base/model/model.ecore#//FunctionDefinition">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Reference to the actual function."/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>

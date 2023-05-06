@@ -10543,29 +10543,29 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__PartialSurrogateFunctionDefinitionRule__Group_8__2__Impl"
-    // InternalMachineLearningLanguage.g:2987:1: rule__PartialSurrogateFunctionDefinitionRule__Group_8__2__Impl : ( ( ( rule__PartialSurrogateFunctionDefinitionRule__ParametersAssignment_8_2 ) ) ( ( rule__PartialSurrogateFunctionDefinitionRule__ParametersAssignment_8_2 )* ) ) ;
+    // InternalMachineLearningLanguage.g:2987:1: rule__PartialSurrogateFunctionDefinitionRule__Group_8__2__Impl : ( ( ( rule__PartialSurrogateFunctionDefinitionRule__AttributesAssignment_8_2 ) ) ( ( rule__PartialSurrogateFunctionDefinitionRule__AttributesAssignment_8_2 )* ) ) ;
     public final void rule__PartialSurrogateFunctionDefinitionRule__Group_8__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalMachineLearningLanguage.g:2991:1: ( ( ( ( rule__PartialSurrogateFunctionDefinitionRule__ParametersAssignment_8_2 ) ) ( ( rule__PartialSurrogateFunctionDefinitionRule__ParametersAssignment_8_2 )* ) ) )
-            // InternalMachineLearningLanguage.g:2992:1: ( ( ( rule__PartialSurrogateFunctionDefinitionRule__ParametersAssignment_8_2 ) ) ( ( rule__PartialSurrogateFunctionDefinitionRule__ParametersAssignment_8_2 )* ) )
+            // InternalMachineLearningLanguage.g:2991:1: ( ( ( ( rule__PartialSurrogateFunctionDefinitionRule__AttributesAssignment_8_2 ) ) ( ( rule__PartialSurrogateFunctionDefinitionRule__AttributesAssignment_8_2 )* ) ) )
+            // InternalMachineLearningLanguage.g:2992:1: ( ( ( rule__PartialSurrogateFunctionDefinitionRule__AttributesAssignment_8_2 ) ) ( ( rule__PartialSurrogateFunctionDefinitionRule__AttributesAssignment_8_2 )* ) )
             {
-            // InternalMachineLearningLanguage.g:2992:1: ( ( ( rule__PartialSurrogateFunctionDefinitionRule__ParametersAssignment_8_2 ) ) ( ( rule__PartialSurrogateFunctionDefinitionRule__ParametersAssignment_8_2 )* ) )
-            // InternalMachineLearningLanguage.g:2993:2: ( ( rule__PartialSurrogateFunctionDefinitionRule__ParametersAssignment_8_2 ) ) ( ( rule__PartialSurrogateFunctionDefinitionRule__ParametersAssignment_8_2 )* )
+            // InternalMachineLearningLanguage.g:2992:1: ( ( ( rule__PartialSurrogateFunctionDefinitionRule__AttributesAssignment_8_2 ) ) ( ( rule__PartialSurrogateFunctionDefinitionRule__AttributesAssignment_8_2 )* ) )
+            // InternalMachineLearningLanguage.g:2993:2: ( ( rule__PartialSurrogateFunctionDefinitionRule__AttributesAssignment_8_2 ) ) ( ( rule__PartialSurrogateFunctionDefinitionRule__AttributesAssignment_8_2 )* )
             {
-            // InternalMachineLearningLanguage.g:2993:2: ( ( rule__PartialSurrogateFunctionDefinitionRule__ParametersAssignment_8_2 ) )
-            // InternalMachineLearningLanguage.g:2994:3: ( rule__PartialSurrogateFunctionDefinitionRule__ParametersAssignment_8_2 )
+            // InternalMachineLearningLanguage.g:2993:2: ( ( rule__PartialSurrogateFunctionDefinitionRule__AttributesAssignment_8_2 ) )
+            // InternalMachineLearningLanguage.g:2994:3: ( rule__PartialSurrogateFunctionDefinitionRule__AttributesAssignment_8_2 )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getPartialSurrogateFunctionDefinitionRuleAccess().getParametersAssignment_8_2()); 
+               before(grammarAccess.getPartialSurrogateFunctionDefinitionRuleAccess().getAttributesAssignment_8_2()); 
             }
-            // InternalMachineLearningLanguage.g:2995:3: ( rule__PartialSurrogateFunctionDefinitionRule__ParametersAssignment_8_2 )
-            // InternalMachineLearningLanguage.g:2995:4: rule__PartialSurrogateFunctionDefinitionRule__ParametersAssignment_8_2
+            // InternalMachineLearningLanguage.g:2995:3: ( rule__PartialSurrogateFunctionDefinitionRule__AttributesAssignment_8_2 )
+            // InternalMachineLearningLanguage.g:2995:4: rule__PartialSurrogateFunctionDefinitionRule__AttributesAssignment_8_2
             {
             pushFollow(FOLLOW_20);
-            rule__PartialSurrogateFunctionDefinitionRule__ParametersAssignment_8_2();
+            rule__PartialSurrogateFunctionDefinitionRule__AttributesAssignment_8_2();
 
             state._fsp--;
             if (state.failed) return ;
@@ -10573,18 +10573,18 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getPartialSurrogateFunctionDefinitionRuleAccess().getParametersAssignment_8_2()); 
+               after(grammarAccess.getPartialSurrogateFunctionDefinitionRuleAccess().getAttributesAssignment_8_2()); 
             }
 
             }
 
-            // InternalMachineLearningLanguage.g:2998:2: ( ( rule__PartialSurrogateFunctionDefinitionRule__ParametersAssignment_8_2 )* )
-            // InternalMachineLearningLanguage.g:2999:3: ( rule__PartialSurrogateFunctionDefinitionRule__ParametersAssignment_8_2 )*
+            // InternalMachineLearningLanguage.g:2998:2: ( ( rule__PartialSurrogateFunctionDefinitionRule__AttributesAssignment_8_2 )* )
+            // InternalMachineLearningLanguage.g:2999:3: ( rule__PartialSurrogateFunctionDefinitionRule__AttributesAssignment_8_2 )*
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getPartialSurrogateFunctionDefinitionRuleAccess().getParametersAssignment_8_2()); 
+               before(grammarAccess.getPartialSurrogateFunctionDefinitionRuleAccess().getAttributesAssignment_8_2()); 
             }
-            // InternalMachineLearningLanguage.g:3000:3: ( rule__PartialSurrogateFunctionDefinitionRule__ParametersAssignment_8_2 )*
+            // InternalMachineLearningLanguage.g:3000:3: ( rule__PartialSurrogateFunctionDefinitionRule__AttributesAssignment_8_2 )*
             loop24:
             do {
                 int alt24=2;
@@ -10612,10 +10612,10 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
 
                 switch (alt24) {
             	case 1 :
-            	    // InternalMachineLearningLanguage.g:3000:4: rule__PartialSurrogateFunctionDefinitionRule__ParametersAssignment_8_2
+            	    // InternalMachineLearningLanguage.g:3000:4: rule__PartialSurrogateFunctionDefinitionRule__AttributesAssignment_8_2
             	    {
             	    pushFollow(FOLLOW_20);
-            	    rule__PartialSurrogateFunctionDefinitionRule__ParametersAssignment_8_2();
+            	    rule__PartialSurrogateFunctionDefinitionRule__AttributesAssignment_8_2();
 
             	    state._fsp--;
             	    if (state.failed) return ;
@@ -10629,7 +10629,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
             } while (true);
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getPartialSurrogateFunctionDefinitionRuleAccess().getParametersAssignment_8_2()); 
+               after(grammarAccess.getPartialSurrogateFunctionDefinitionRuleAccess().getAttributesAssignment_8_2()); 
             }
 
             }
@@ -23365,9 +23365,9 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
     // $ANTLR end "rule__PartialSurrogateFunctionDefinitionRule__OutputsAssignment_7_1"
 
 
-    // $ANTLR start "rule__PartialSurrogateFunctionDefinitionRule__ParametersAssignment_8_2"
-    // InternalMachineLearningLanguage.g:7066:1: rule__PartialSurrogateFunctionDefinitionRule__ParametersAssignment_8_2 : ( ruleAttributeRule ) ;
-    public final void rule__PartialSurrogateFunctionDefinitionRule__ParametersAssignment_8_2() throws RecognitionException {
+    // $ANTLR start "rule__PartialSurrogateFunctionDefinitionRule__AttributesAssignment_8_2"
+    // InternalMachineLearningLanguage.g:7066:1: rule__PartialSurrogateFunctionDefinitionRule__AttributesAssignment_8_2 : ( ruleAttributeRule ) ;
+    public final void rule__PartialSurrogateFunctionDefinitionRule__AttributesAssignment_8_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
@@ -23379,7 +23379,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
             // InternalMachineLearningLanguage.g:7072:3: ruleAttributeRule
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getPartialSurrogateFunctionDefinitionRuleAccess().getParametersAttributeRuleParserRuleCall_8_2_0()); 
+               before(grammarAccess.getPartialSurrogateFunctionDefinitionRuleAccess().getAttributesAttributeRuleParserRuleCall_8_2_0()); 
             }
             pushFollow(FOLLOW_2);
             ruleAttributeRule();
@@ -23387,7 +23387,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getPartialSurrogateFunctionDefinitionRuleAccess().getParametersAttributeRuleParserRuleCall_8_2_0()); 
+               after(grammarAccess.getPartialSurrogateFunctionDefinitionRuleAccess().getAttributesAttributeRuleParserRuleCall_8_2_0()); 
             }
 
             }
@@ -23407,7 +23407,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
         }
         return ;
     }
-    // $ANTLR end "rule__PartialSurrogateFunctionDefinitionRule__ParametersAssignment_8_2"
+    // $ANTLR end "rule__PartialSurrogateFunctionDefinitionRule__AttributesAssignment_8_2"
 
 
     // $ANTLR start "rule__PredictStatementRule__SurrogateAssignment_1"
@@ -25484,28 +25484,28 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__AttributeRule__ValueAssignment_2"
-    // InternalMachineLearningLanguage.g:7780:1: rule__AttributeRule__ValueAssignment_2 : ( ruleValueRule ) ;
+    // InternalMachineLearningLanguage.g:7780:1: rule__AttributeRule__ValueAssignment_2 : ( ruleExpressionRule ) ;
     public final void rule__AttributeRule__ValueAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalMachineLearningLanguage.g:7784:1: ( ( ruleValueRule ) )
-            // InternalMachineLearningLanguage.g:7785:2: ( ruleValueRule )
+            // InternalMachineLearningLanguage.g:7784:1: ( ( ruleExpressionRule ) )
+            // InternalMachineLearningLanguage.g:7785:2: ( ruleExpressionRule )
             {
-            // InternalMachineLearningLanguage.g:7785:2: ( ruleValueRule )
-            // InternalMachineLearningLanguage.g:7786:3: ruleValueRule
+            // InternalMachineLearningLanguage.g:7785:2: ( ruleExpressionRule )
+            // InternalMachineLearningLanguage.g:7786:3: ruleExpressionRule
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getAttributeRuleAccess().getValueValueRuleParserRuleCall_2_0()); 
+               before(grammarAccess.getAttributeRuleAccess().getValueExpressionRuleParserRuleCall_2_0()); 
             }
             pushFollow(FOLLOW_2);
-            ruleValueRule();
+            ruleExpressionRule();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getAttributeRuleAccess().getValueValueRuleParserRuleCall_2_0()); 
+               after(grammarAccess.getAttributeRuleAccess().getValueExpressionRuleParserRuleCall_2_0()); 
             }
 
             }

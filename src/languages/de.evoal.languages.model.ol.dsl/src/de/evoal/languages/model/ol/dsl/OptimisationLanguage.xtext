@@ -14,14 +14,18 @@ OptimisationModelRule returns OptimisationModel:
 	(algorithm = AlgorithmInstanceRule)?
 ;
 
-ProblemRule returns Problem:
-	"declare" name = StringOrId "as"
-		instance = InstanceLiteralRule
-	("documenting" ":=" documentation = ArrayRule ';')?
+ProblemRule returns ProblemInstance:
+	"specify" definition=[base::TypeDefinition|QualifiedName] name = StringOrId "{"
+		attributes+=AttributeRule*
+	
+		("documenting" ":=" documentation = ArrayRule ';')?
+	"}"
 ;
 
 AlgorithmInstanceRule returns AlgorithmInstance:
-	"instance" "for" problem = [Problem|QualifiedName] "with" "algorithm"
-		instance = InstanceLiteralRule
-	("documenting" ":=" documentation = ArrayRule ';')?
+	"configure" definition=[base::TypeDefinition|QualifiedName] "for" problem = [ProblemInstance|QualifiedName] "{"
+		attributes+=AttributeRule*
+		
+		("documenting" ":=" documentation = ArrayRule ';')?
+	"}"
 ;

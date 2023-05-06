@@ -69,124 +69,153 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 	public class ProblemRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.ol.dsl.OptimisationLanguage.ProblemRule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cDeclareKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cNameStringOrIdParserRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
-		private final Keyword cAsKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cInstanceAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cInstanceInstanceLiteralRuleParserRuleCall_3_0 = (RuleCall)cInstanceAssignment_3.eContents().get(0);
-		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
-		private final Keyword cDocumentingKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
-		private final Keyword cColonEqualsSignKeyword_4_1 = (Keyword)cGroup_4.eContents().get(1);
-		private final Assignment cDocumentationAssignment_4_2 = (Assignment)cGroup_4.eContents().get(2);
-		private final RuleCall cDocumentationArrayRuleParserRuleCall_4_2_0 = (RuleCall)cDocumentationAssignment_4_2.eContents().get(0);
-		private final Keyword cSemicolonKeyword_4_3 = (Keyword)cGroup_4.eContents().get(3);
+		private final Keyword cSpecifyKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cDefinitionAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final CrossReference cDefinitionTypeDefinitionCrossReference_1_0 = (CrossReference)cDefinitionAssignment_1.eContents().get(0);
+		private final RuleCall cDefinitionTypeDefinitionQualifiedNameParserRuleCall_1_0_1 = (RuleCall)cDefinitionTypeDefinitionCrossReference_1_0.eContents().get(1);
+		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cNameStringOrIdParserRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
+		private final Keyword cLeftCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cAttributesAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cAttributesAttributeRuleParserRuleCall_4_0 = (RuleCall)cAttributesAssignment_4.eContents().get(0);
+		private final Group cGroup_5 = (Group)cGroup.eContents().get(5);
+		private final Keyword cDocumentingKeyword_5_0 = (Keyword)cGroup_5.eContents().get(0);
+		private final Keyword cColonEqualsSignKeyword_5_1 = (Keyword)cGroup_5.eContents().get(1);
+		private final Assignment cDocumentationAssignment_5_2 = (Assignment)cGroup_5.eContents().get(2);
+		private final RuleCall cDocumentationArrayRuleParserRuleCall_5_2_0 = (RuleCall)cDocumentationAssignment_5_2.eContents().get(0);
+		private final Keyword cSemicolonKeyword_5_3 = (Keyword)cGroup_5.eContents().get(3);
+		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
-		//ProblemRule returns Problem:
-		//    "declare" name = StringOrId "as"
-		//        instance = InstanceLiteralRule
-		//    ("documenting" ":=" documentation = ArrayRule ';')?
+		//ProblemRule returns ProblemInstance:
+		//    "specify" definition=[base::TypeDefinition|QualifiedName] name = StringOrId "{"
+		//        attributes+=AttributeRule*
+		//        ("documenting" ":=" documentation = ArrayRule ';')?
+		//    "}"
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//"declare" name = StringOrId "as"
-		//    instance = InstanceLiteralRule
-		//("documenting" ":=" documentation = ArrayRule ';')?
+		//"specify" definition=[base::TypeDefinition|QualifiedName] name = StringOrId "{"
+		//    attributes+=AttributeRule*
+		//    ("documenting" ":=" documentation = ArrayRule ';')?
+		//"}"
 		public Group getGroup() { return cGroup; }
 		
-		//"declare"
-		public Keyword getDeclareKeyword_0() { return cDeclareKeyword_0; }
+		//"specify"
+		public Keyword getSpecifyKeyword_0() { return cSpecifyKeyword_0; }
+		
+		//definition=[base::TypeDefinition|QualifiedName]
+		public Assignment getDefinitionAssignment_1() { return cDefinitionAssignment_1; }
+		
+		//[base::TypeDefinition|QualifiedName]
+		public CrossReference getDefinitionTypeDefinitionCrossReference_1_0() { return cDefinitionTypeDefinitionCrossReference_1_0; }
+		
+		//QualifiedName
+		public RuleCall getDefinitionTypeDefinitionQualifiedNameParserRuleCall_1_0_1() { return cDefinitionTypeDefinitionQualifiedNameParserRuleCall_1_0_1; }
 		
 		//name = StringOrId
-		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
 		
 		//StringOrId
-		public RuleCall getNameStringOrIdParserRuleCall_1_0() { return cNameStringOrIdParserRuleCall_1_0; }
+		public RuleCall getNameStringOrIdParserRuleCall_2_0() { return cNameStringOrIdParserRuleCall_2_0; }
 		
-		//"as"
-		public Keyword getAsKeyword_2() { return cAsKeyword_2; }
+		//"{"
+		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
 		
-		//instance = InstanceLiteralRule
-		public Assignment getInstanceAssignment_3() { return cInstanceAssignment_3; }
+		//attributes+=AttributeRule*
+		public Assignment getAttributesAssignment_4() { return cAttributesAssignment_4; }
 		
-		//InstanceLiteralRule
-		public RuleCall getInstanceInstanceLiteralRuleParserRuleCall_3_0() { return cInstanceInstanceLiteralRuleParserRuleCall_3_0; }
+		//AttributeRule
+		public RuleCall getAttributesAttributeRuleParserRuleCall_4_0() { return cAttributesAttributeRuleParserRuleCall_4_0; }
 		
 		//("documenting" ":=" documentation = ArrayRule ';')?
-		public Group getGroup_4() { return cGroup_4; }
+		public Group getGroup_5() { return cGroup_5; }
 		
 		//"documenting"
-		public Keyword getDocumentingKeyword_4_0() { return cDocumentingKeyword_4_0; }
+		public Keyword getDocumentingKeyword_5_0() { return cDocumentingKeyword_5_0; }
 		
 		//":="
-		public Keyword getColonEqualsSignKeyword_4_1() { return cColonEqualsSignKeyword_4_1; }
+		public Keyword getColonEqualsSignKeyword_5_1() { return cColonEqualsSignKeyword_5_1; }
 		
 		//documentation = ArrayRule
-		public Assignment getDocumentationAssignment_4_2() { return cDocumentationAssignment_4_2; }
+		public Assignment getDocumentationAssignment_5_2() { return cDocumentationAssignment_5_2; }
 		
 		//ArrayRule
-		public RuleCall getDocumentationArrayRuleParserRuleCall_4_2_0() { return cDocumentationArrayRuleParserRuleCall_4_2_0; }
+		public RuleCall getDocumentationArrayRuleParserRuleCall_5_2_0() { return cDocumentationArrayRuleParserRuleCall_5_2_0; }
 		
 		//';'
-		public Keyword getSemicolonKeyword_4_3() { return cSemicolonKeyword_4_3; }
+		public Keyword getSemicolonKeyword_5_3() { return cSemicolonKeyword_5_3; }
+		
+		//"}"
+		public Keyword getRightCurlyBracketKeyword_6() { return cRightCurlyBracketKeyword_6; }
 	}
 	public class AlgorithmInstanceRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.ol.dsl.OptimisationLanguage.AlgorithmInstanceRule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cInstanceKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Keyword cForKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Assignment cProblemAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final CrossReference cProblemProblemCrossReference_2_0 = (CrossReference)cProblemAssignment_2.eContents().get(0);
-		private final RuleCall cProblemProblemQualifiedNameParserRuleCall_2_0_1 = (RuleCall)cProblemProblemCrossReference_2_0.eContents().get(1);
-		private final Keyword cWithKeyword_3 = (Keyword)cGroup.eContents().get(3);
-		private final Keyword cAlgorithmKeyword_4 = (Keyword)cGroup.eContents().get(4);
-		private final Assignment cInstanceAssignment_5 = (Assignment)cGroup.eContents().get(5);
-		private final RuleCall cInstanceInstanceLiteralRuleParserRuleCall_5_0 = (RuleCall)cInstanceAssignment_5.eContents().get(0);
+		private final Keyword cConfigureKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cDefinitionAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final CrossReference cDefinitionTypeDefinitionCrossReference_1_0 = (CrossReference)cDefinitionAssignment_1.eContents().get(0);
+		private final RuleCall cDefinitionTypeDefinitionQualifiedNameParserRuleCall_1_0_1 = (RuleCall)cDefinitionTypeDefinitionCrossReference_1_0.eContents().get(1);
+		private final Keyword cForKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cProblemAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final CrossReference cProblemProblemInstanceCrossReference_3_0 = (CrossReference)cProblemAssignment_3.eContents().get(0);
+		private final RuleCall cProblemProblemInstanceQualifiedNameParserRuleCall_3_0_1 = (RuleCall)cProblemProblemInstanceCrossReference_3_0.eContents().get(1);
+		private final Keyword cLeftCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Assignment cAttributesAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final RuleCall cAttributesAttributeRuleParserRuleCall_5_0 = (RuleCall)cAttributesAssignment_5.eContents().get(0);
 		private final Group cGroup_6 = (Group)cGroup.eContents().get(6);
 		private final Keyword cDocumentingKeyword_6_0 = (Keyword)cGroup_6.eContents().get(0);
 		private final Keyword cColonEqualsSignKeyword_6_1 = (Keyword)cGroup_6.eContents().get(1);
 		private final Assignment cDocumentationAssignment_6_2 = (Assignment)cGroup_6.eContents().get(2);
 		private final RuleCall cDocumentationArrayRuleParserRuleCall_6_2_0 = (RuleCall)cDocumentationAssignment_6_2.eContents().get(0);
 		private final Keyword cSemicolonKeyword_6_3 = (Keyword)cGroup_6.eContents().get(3);
+		private final Keyword cRightCurlyBracketKeyword_7 = (Keyword)cGroup.eContents().get(7);
 		
 		//AlgorithmInstanceRule returns AlgorithmInstance:
-		//    "instance" "for" problem = [Problem|QualifiedName] "with" "algorithm"
-		//        instance = InstanceLiteralRule
-		//    ("documenting" ":=" documentation = ArrayRule ';')?
+		//    "configure" definition=[base::TypeDefinition|QualifiedName] "for" problem = [ProblemInstance|QualifiedName] "{"
+		//        attributes+=AttributeRule*
+		//        ("documenting" ":=" documentation = ArrayRule ';')?
+		//    "}"
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//"instance" "for" problem = [Problem|QualifiedName] "with" "algorithm"
-		//    instance = InstanceLiteralRule
-		//("documenting" ":=" documentation = ArrayRule ';')?
+		//"configure" definition=[base::TypeDefinition|QualifiedName] "for" problem = [ProblemInstance|QualifiedName] "{"
+		//    attributes+=AttributeRule*
+		//    ("documenting" ":=" documentation = ArrayRule ';')?
+		//"}"
 		public Group getGroup() { return cGroup; }
 		
-		//"instance"
-		public Keyword getInstanceKeyword_0() { return cInstanceKeyword_0; }
+		//"configure"
+		public Keyword getConfigureKeyword_0() { return cConfigureKeyword_0; }
 		
-		//"for"
-		public Keyword getForKeyword_1() { return cForKeyword_1; }
+		//definition=[base::TypeDefinition|QualifiedName]
+		public Assignment getDefinitionAssignment_1() { return cDefinitionAssignment_1; }
 		
-		//problem = [Problem|QualifiedName]
-		public Assignment getProblemAssignment_2() { return cProblemAssignment_2; }
-		
-		//[Problem|QualifiedName]
-		public CrossReference getProblemProblemCrossReference_2_0() { return cProblemProblemCrossReference_2_0; }
+		//[base::TypeDefinition|QualifiedName]
+		public CrossReference getDefinitionTypeDefinitionCrossReference_1_0() { return cDefinitionTypeDefinitionCrossReference_1_0; }
 		
 		//QualifiedName
-		public RuleCall getProblemProblemQualifiedNameParserRuleCall_2_0_1() { return cProblemProblemQualifiedNameParserRuleCall_2_0_1; }
+		public RuleCall getDefinitionTypeDefinitionQualifiedNameParserRuleCall_1_0_1() { return cDefinitionTypeDefinitionQualifiedNameParserRuleCall_1_0_1; }
 		
-		//"with"
-		public Keyword getWithKeyword_3() { return cWithKeyword_3; }
+		//"for"
+		public Keyword getForKeyword_2() { return cForKeyword_2; }
 		
-		//"algorithm"
-		public Keyword getAlgorithmKeyword_4() { return cAlgorithmKeyword_4; }
+		//problem = [ProblemInstance|QualifiedName]
+		public Assignment getProblemAssignment_3() { return cProblemAssignment_3; }
 		
-		//instance = InstanceLiteralRule
-		public Assignment getInstanceAssignment_5() { return cInstanceAssignment_5; }
+		//[ProblemInstance|QualifiedName]
+		public CrossReference getProblemProblemInstanceCrossReference_3_0() { return cProblemProblemInstanceCrossReference_3_0; }
 		
-		//InstanceLiteralRule
-		public RuleCall getInstanceInstanceLiteralRuleParserRuleCall_5_0() { return cInstanceInstanceLiteralRuleParserRuleCall_5_0; }
+		//QualifiedName
+		public RuleCall getProblemProblemInstanceQualifiedNameParserRuleCall_3_0_1() { return cProblemProblemInstanceQualifiedNameParserRuleCall_3_0_1; }
+		
+		//"{"
+		public Keyword getLeftCurlyBracketKeyword_4() { return cLeftCurlyBracketKeyword_4; }
+		
+		//attributes+=AttributeRule*
+		public Assignment getAttributesAssignment_5() { return cAttributesAssignment_5; }
+		
+		//AttributeRule
+		public RuleCall getAttributesAttributeRuleParserRuleCall_5_0() { return cAttributesAttributeRuleParserRuleCall_5_0; }
 		
 		//("documenting" ":=" documentation = ArrayRule ';')?
 		public Group getGroup_6() { return cGroup_6; }
@@ -205,6 +234,9 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 		
 		//';'
 		public Keyword getSemicolonKeyword_6_3() { return cSemicolonKeyword_6_3; }
+		
+		//"}"
+		public Keyword getRightCurlyBracketKeyword_7() { return cRightCurlyBracketKeyword_7; }
 	}
 	
 	
@@ -282,10 +314,11 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 		return getOptimisationModelRuleAccess().getRule();
 	}
 	
-	//ProblemRule returns Problem:
-	//    "declare" name = StringOrId "as"
-	//        instance = InstanceLiteralRule
-	//    ("documenting" ":=" documentation = ArrayRule ';')?
+	//ProblemRule returns ProblemInstance:
+	//    "specify" definition=[base::TypeDefinition|QualifiedName] name = StringOrId "{"
+	//        attributes+=AttributeRule*
+	//        ("documenting" ":=" documentation = ArrayRule ';')?
+	//    "}"
 	//;
 	public ProblemRuleElements getProblemRuleAccess() {
 		return pProblemRule;
@@ -296,9 +329,10 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 	}
 	
 	//AlgorithmInstanceRule returns AlgorithmInstance:
-	//    "instance" "for" problem = [Problem|QualifiedName] "with" "algorithm"
-	//        instance = InstanceLiteralRule
-	//    ("documenting" ":=" documentation = ArrayRule ';')?
+	//    "configure" definition=[base::TypeDefinition|QualifiedName] "for" problem = [ProblemInstance|QualifiedName] "{"
+	//        attributes+=AttributeRule*
+	//        ("documenting" ":=" documentation = ArrayRule ';')?
+	//    "}"
 	//;
 	public AlgorithmInstanceRuleElements getAlgorithmInstanceRuleAccess() {
 		return pAlgorithmInstanceRule;
@@ -574,7 +608,7 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 	}
 	
 	//AttributeRule returns Attribute:
-	//    definition = [AttributeDefinition|StringOrId] ':=' value = ValueRule ';'
+	//    definition = [AttributeDefinition|StringOrId] ':=' value = ExpressionRule ';'
 	//;
 	public BaseLanguageGrammarAccess.AttributeRuleElements getAttributeRuleAccess() {
 		return gaBaseLanguage.getAttributeRuleAccess();

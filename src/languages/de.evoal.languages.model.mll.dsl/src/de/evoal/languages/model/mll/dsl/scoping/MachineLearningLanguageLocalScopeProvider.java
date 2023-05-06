@@ -13,24 +13,20 @@ import de.evoal.languages.model.mll.MllPackage;
 import de.evoal.languages.model.utils.scoping.WildcardEnabledLocalScopeProvider;
 
 public class MachineLearningLanguageLocalScopeProvider extends WildcardEnabledLocalScopeProvider {
-	private static EClass instance = BasePackage.eINSTANCE.getInstance();
 	private static EClass psfd = MllPackage.eINSTANCE.getPartialSurrogateFunctionDefinition();
 
 	private static EReference attributeDefinition = BasePackage.eINSTANCE.getAttribute_Definition();
-	private static EReference psfdDefinition = MllPackage.eINSTANCE.getPartialSurrogateFunctionDefinition_Definition();
-
 	
 	@Inject
-	private InstanceLanguageLocalScopeProvider scopeProvider;
+	private InstanceLanguageLocalScopeProvider instanceScopes;
 	
 	@Override
 	public IScope getScope(final EObject context, final EReference reference) {
-		System.err.println("[MLL] getScope(" + context.eClass().getName() + ": " + reference.getName()  +")" );
-		if(instance.equals(context.eClass()) && (attributeDefinition.equals(reference))) {
+		if(psfd.equals(context.eClass()) && (attributeDefinition.equals(reference))) {
 			// inject fields of types
 			IScope typeScope = IScope.NULLSCOPE;
 			try {
-				typeScope = scopeProvider.getScope(context, reference);
+				typeScope = instanceScopes.getScope(context, reference);
 			} catch(final NullPointerException e) {
 				System.err.println(e);
 			}
@@ -40,7 +36,23 @@ public class MachineLearningLanguageLocalScopeProvider extends WildcardEnabledLo
 		//	return scopeProvider.getScope(context, BasePackage.eINSTANCE.getInstance_Definition());
 		//}
 
- 
+ /*
+		if(instance.equals(context.eClass()) && (attributeDefinition.equals(reference))) {
+			// inject fields of types
+			IScope typeScope = IScope.NULLSCOPE;
+			try {
+				typeScope = instanceScopes.getScope(context, reference);
+			} catch(final NullPointerException e) {
+				System.err.println(e);
+			}
+			
+			return getLocalElementsScope(typeScope, context, reference);
+		} 
+		
+		return super.getScope(context, reference);
+  */
+		
+		
 		return super.getScope(context, reference);
 	}
 }
