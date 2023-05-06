@@ -5,9 +5,9 @@ module de.evoal.core.optimisation {
 	 */
 	type problem {
 		/**
-		 * Name of the problem (used for referencing from the algorithm).
+		 * A description of the problem.
 		 */
-		name : string;
+		description : string;
 
         /**
          * Description of the optimisation space.

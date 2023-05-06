@@ -23,6 +23,7 @@ module de.evoal.core.ea {
     requires de.evoal.languages.model.ol;
     requires org.eclipse.emf.ecore;
 
+    opens de.evoal.core.ea;
 
     opens de.evoal.core.ea.main.alterer to weld.core.impl;
     opens de.evoal.core.ea.main.alterer.mutator to weld.core.impl;

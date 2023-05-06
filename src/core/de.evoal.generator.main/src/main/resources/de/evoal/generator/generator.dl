@@ -1,3 +1,5 @@
+import "definitions" from de.evoal.core.math;
+
 module de.evoal.generator.generator {
 	abstract type benchmark{}
 	
@@ -110,17 +112,17 @@ module de.evoal.generator.generator {
 		/**
 		 * The constant a is set to 20 in the original Ackley function.
 		 */
-		'a' : float;
+		'a' : float := 20.0;
 		
 		/**
 		 * The constant b is set to 0.2 in the original Ackley function.
 		 */
-		b : float;
+		b : float := 0.2;
 	
 		/**
 		 * The constant c is set to 2π in the original Ackley function.
 		 */
-		'c' : float;
+		'c' : float := 2 * PI;
 	}
 	
 	/**
@@ -189,7 +191,7 @@ module de.evoal.generator.generator {
 		/**
 		 * Constant a, which is typically 10.
 		 */
-		'a' : float;
+		'a' : float := 10.0;
 	}
 	
 	/**
@@ -215,7 +217,9 @@ module de.evoal.generator.generator {
 	}
 	
 	
-	type 'multivariate-normal-distribution' {
+	type distribution {}
+
+	type 'multivariate-normal-distribution' extends distribution {
 		means : array float;
 		covariance : array array float;
 	}
@@ -232,10 +236,11 @@ module de.evoal.generator.generator {
 		distributions : array instance distribution;
 	}
 	
+	
 	/**
 	 * A distribution specification.
 	 */
-	type distribution {
+	type 'normal-distribution' extends distribution {
 		/**
 		 * The distribution's expected value.
 		 */

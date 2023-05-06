@@ -1,40 +1,47 @@
 package de.evoal.core.api.utils;
 
+import org.junit.jupiter.api.*;
+import org.jboss.weld.junit5.EnableWeld;
+
 import de.evoal.languages.model.base.Instance;
 import de.evoal.languages.model.ol.OptimisationModel;
-import org.junit.jupiter.api.*;
 
-import static de.evoal.core.api.utils.LanguageHelper.*;
+import javax.inject.Inject;
 
+
+@EnableWeld
 public class LanguageHelperUnitTest {
+    @Inject
+    private LanguageHelper helper;
+
     @Order(1)
     @Test
     public void testLoading() {
         final OptimisationModel model = de.evoal.core.junit.dsl.LanguageHelper.loadFromClasspath("de/evoal/core/api/utils/LanguageHelperTest.ol");
-        final Instance instance = model.getProblem().getInstance();
+        final Instance instance = model.getProblem();
 
         Assertions.assertNotNull(instance);
     }
 
     @Test
     public void testLookupForNullInstance() {
-        Assertions.assertThrows(IllegalStateException.class, () -> lookup(null, "child"));
+        Assertions.assertThrows(IllegalStateException.class, () -> helper.lookup((Instance)null, "child"));
     }
 
     @Test
     public void testLookupForNullPath() {
         final OptimisationModel model = de.evoal.core.junit.dsl.LanguageHelper.loadFromClasspath("de/evoal/core/api/utils/LanguageHelperTest.ol");
-        final Instance instance = model.getProblem().getInstance();
+        final Instance instance = model.getProblem();
 
-        Assertions.assertThrows(IllegalArgumentException.class, () -> lookup(instance, null));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> helper.lookup(instance, null));
     }
 
     @Test
     public void testLookupForEmptyPath() {
         final OptimisationModel model = de.evoal.core.junit.dsl.LanguageHelper.loadFromClasspath("de/evoal/core/api/utils/LanguageHelperTest.ol");
-        final Instance instance = model.getProblem().getInstance();
+        final Instance instance = model.getProblem();
 
-        final Object result = lookup(instance, "");
+        final Object result = helper.lookup(instance, "");
 
         Assertions.assertNotNull(result);
         Assertions.assertSame(instance, result);
@@ -43,9 +50,9 @@ public class LanguageHelperUnitTest {
     @Test
     public void testLookupForExistingChild() {
         final OptimisationModel model = de.evoal.core.junit.dsl.LanguageHelper.loadFromClasspath("de/evoal/core/api/utils/LanguageHelperTest.ol");
-        final Instance instance = model.getProblem().getInstance();
+        final Instance instance = model.getProblem();
 
-        final Object result = lookup(instance, "child");
+        final Object result = helper.lookup(instance, "child");
 
         Assertions.assertNotNull(result);
         Assertions.assertTrue(result instanceof Instance);
@@ -57,9 +64,9 @@ public class LanguageHelperUnitTest {
     @Test
     public void testLookupName() {
         final OptimisationModel model = de.evoal.core.junit.dsl.LanguageHelper.loadFromClasspath("de/evoal/core/api/utils/LanguageHelperTest.ol");
-        final Instance instance = model.getProblem().getInstance();
+        final Instance instance = model.getProblem();
 
-        final Object result = lookup(instance, "name");
+        final Object result = helper.lookup(instance, "name");
 
         Assertions.assertNotNull(result);
         Assertions.assertEquals("parent", result);
@@ -68,25 +75,25 @@ public class LanguageHelperUnitTest {
     @Test
     public void testLookupChildOfLiteral() {
         final OptimisationModel model = de.evoal.core.junit.dsl.LanguageHelper.loadFromClasspath("de/evoal/core/api/utils/LanguageHelperTest.ol");
-        final Instance instance = model.getProblem().getInstance();
+        final Instance instance = model.getProblem();
 
-        Assertions.assertThrows(IllegalStateException.class, () -> lookup(instance, "child.string-field.non-existing"));
+        Assertions.assertThrows(IllegalStateException.class, () -> helper.lookup(instance, "child.string-field.non-existing"));
     }
 
     @Test
     public void testLookupNonExistingChild() {
         final OptimisationModel model = de.evoal.core.junit.dsl.LanguageHelper.loadFromClasspath("de/evoal/core/api/utils/LanguageHelperTest.ol");
-        final Instance instance = model.getProblem().getInstance();
+        final Instance instance = model.getProblem();
 
-        Assertions.assertThrows(IllegalStateException.class, () -> lookup(instance, "child.non-existing"));
+        Assertions.assertThrows(IllegalStateException.class, () -> helper.lookup(instance, "child.non-existing"));
     }
 
     @Test
     public void testLookupBooleanField() {
         final OptimisationModel model = de.evoal.core.junit.dsl.LanguageHelper.loadFromClasspath("de/evoal/core/api/utils/LanguageHelperTest.ol");
-        final Instance instance = model.getProblem().getInstance();
+        final Instance instance = model.getProblem();
 
-        final Object result = lookup(instance, "child.boolean-field");
+        final Object result = helper.lookup(instance, "child.boolean-field");
 
         Assertions.assertNotNull(result);
         Assertions.assertTrue(result instanceof Boolean);
@@ -96,9 +103,9 @@ public class LanguageHelperUnitTest {
     @Test
     public void testLookupFlotField() {
         final OptimisationModel model = de.evoal.core.junit.dsl.LanguageHelper.loadFromClasspath("de/evoal/core/api/utils/LanguageHelperTest.ol");
-        final Instance instance = model.getProblem().getInstance();
+        final Instance instance = model.getProblem();
 
-        final Object result = lookup(instance, "child.float-field");
+        final Object result = helper.lookup(instance, "child.float-field");
 
         Assertions.assertNotNull(result);
         Assertions.assertTrue(result instanceof Double);
@@ -108,9 +115,9 @@ public class LanguageHelperUnitTest {
     @Test
     public void testLookupIntegerField() {
         final OptimisationModel model = de.evoal.core.junit.dsl.LanguageHelper.loadFromClasspath("de/evoal/core/api/utils/LanguageHelperTest.ol");
-        final Instance instance = model.getProblem().getInstance();
+        final Instance instance = model.getProblem();
 
-        final Object result = lookup(instance, "child.integer-field");
+        final Object result = helper.lookup(instance, "child.integer-field");
 
         Assertions.assertNotNull(result);
         Assertions.assertTrue(result instanceof Integer);
@@ -120,9 +127,9 @@ public class LanguageHelperUnitTest {
     @Test
     public void testLookupStringField() {
         final OptimisationModel model = de.evoal.core.junit.dsl.LanguageHelper.loadFromClasspath("de/evoal/core/api/utils/LanguageHelperTest.ol");
-        final Instance instance = model.getProblem().getInstance();
+        final Instance instance = model.getProblem();
 
-        final Object result = lookup(instance, "child.string-field");
+        final Object result = helper.lookup(instance, "child.string-field");
 
         Assertions.assertNotNull(result);
         Assertions.assertTrue(result instanceof String);
@@ -132,9 +139,9 @@ public class LanguageHelperUnitTest {
     @Test
     public void testLookup1DArrayField() {
         final OptimisationModel model = de.evoal.core.junit.dsl.LanguageHelper.loadFromClasspath("de/evoal/core/api/utils/LanguageHelperTest.ol");
-        final Instance instance = model.getProblem().getInstance();
+        final Instance instance = model.getProblem();
 
-        final Object result = lookup(instance, "child.array-1D-float");
+        final Object result = helper.lookup(instance, "child.array-1D-float");
 
         Assertions.assertNotNull(result);
         Assertions.assertTrue(result instanceof Object []);
@@ -149,9 +156,9 @@ public class LanguageHelperUnitTest {
     @Test
     public void testLookup2DArrayField() {
         final OptimisationModel model = de.evoal.core.junit.dsl.LanguageHelper.loadFromClasspath("de/evoal/core/api/utils/LanguageHelperTest.ol");
-        final Instance instance = model.getProblem().getInstance();
+        final Instance instance = model.getProblem();
 
-        final Object result = lookup(instance, "child.array-2D-int");
+        final Object result = helper.lookup(instance, "child.array-2D-int");
 
         Assertions.assertNotNull(result);
         Assertions.assertTrue(result instanceof Object []);

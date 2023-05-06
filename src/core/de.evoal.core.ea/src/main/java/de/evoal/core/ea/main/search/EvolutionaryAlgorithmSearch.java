@@ -45,6 +45,9 @@ public class EvolutionaryAlgorithmSearch implements OptimisationAlgorithm {
 	@Inject
 	private Blackboard board;
 
+	@Inject
+	private LanguageHelper helper;
+
 	/**
 	 * Location for storing the output.
 	 */
@@ -146,7 +149,7 @@ public class EvolutionaryAlgorithmSearch implements OptimisationAlgorithm {
 	private void setup() {
 		final OptimisationModel configuration = board.get(CoreBlackboardEntries.OPTIMISATION_CONFIGURATION);
 
-		final de.evoal.languages.model.base.Instance alterers = LanguageHelper.lookup(configuration.getAlgorithm().getInstance(), "alterers");
+		final de.evoal.languages.model.base.Instance alterers = helper.lookup(configuration, "algorithm.alterers");
 
 		for(final Attribute category: alterers.getAttributes()) {
 			final String name = category.getDefinition().getName();

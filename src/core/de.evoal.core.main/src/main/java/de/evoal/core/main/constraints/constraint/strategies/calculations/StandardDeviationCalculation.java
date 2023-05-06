@@ -25,6 +25,9 @@ import java.util.stream.Collectors;
 @Named("standard-deviation")
 public class StandardDeviationCalculation implements CalculationStrategy {
     @Inject
+    private LanguageHelper helper;
+
+    @Inject
     private Deviations deviations;
 
     @Inject @Named("genotype-specification")
@@ -98,7 +101,7 @@ public class StandardDeviationCalculation implements CalculationStrategy {
     public void init(final Constraint constraint, final Instance configuration) {
         this.configuration = configuration;
         this.constraint = constraint;
-        this.factor = LanguageHelper.lookup(configuration, "factor");
+        this.factor = helper.lookup(configuration, "factor");
 
         final List<PropertySpecification> sourceProperties = constraint.getUsedProperties();
 

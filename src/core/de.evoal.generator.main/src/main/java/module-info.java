@@ -27,6 +27,8 @@ module de.evoal.generator.main {
     requires commons.math3;
     requires com.google.guice;
 
+    opens de.evoal.generator;
+
     opens de.evoal.generator.main;
     opens de.evoal.generator.main.benchmarks;
     opens de.evoal.generator.main.cdi;

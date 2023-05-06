@@ -37,13 +37,17 @@ module de.evoal.core.main {
     requires com.google.guice;
     requires commons.math3;
 
+    opens de.evoal.core; // export dl files.
+
     exports de.evoal.core.api.board;
     exports de.evoal.core.api.cdi;
     exports de.evoal.core.api.constraints.calculation;
     exports de.evoal.core.main.constraints.constraint.utils;
     exports de.evoal.core.api.constraints.model;
     exports de.evoal.core.api.constraints.strategies;
+    exports de.evoal.core.api.constraints.strategies.fitness;
     exports de.evoal.core.api.correlations;
+    exports de.evoal.core.api.languages;
     exports de.evoal.core.api.properties;
     exports de.evoal.core.api.properties.info;
     exports de.evoal.core.api.properties.io;
@@ -59,6 +63,7 @@ module de.evoal.core.main {
     opens de.evoal.core.api.constraints.calculation to weld.core.impl;
     opens de.evoal.core.api.constraints.model to weld.core.impl;
     opens de.evoal.core.api.correlations to weld.core.impl;
+    opens de.evoal.core.api.languages to weld.core.impl;
     opens de.evoal.core.api.optimisation to weld.core.impl;
     opens de.evoal.core.api.properties to weld.core.impl;
     opens de.evoal.core.api.properties.info to weld.core.impl;
@@ -85,7 +90,6 @@ module de.evoal.core.main {
     opens de.evoal.core.main.statistics.io.csv to weld.core.impl;
     opens de.evoal.core.api.statistics.io to weld.core.impl;
     opens de.evoal.core.api.statistics.writer to weld.core.impl;
-    exports de.evoal.core.api.constraints.strategies.fitness;
 
 
     //provides de.evoal.languages.model.utils.builtin.BuiltinProvider with ModuleBuiltinProvider;

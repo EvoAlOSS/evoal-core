@@ -1,30 +1,134 @@
 package de.evoal.core.api.utils;
 
-import de.evoal.languages.model.dl.*;
-import de.evoal.languages.model.base.BooleanLiteral;
+import de.evoal.core.api.languages.ExpressionEvaluator;
 import de.evoal.languages.model.base.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import de.evoal.languages.model.ol.AlgorithmInstance;
+import de.evoal.languages.model.ol.OptimisationModel;
+import de.evoal.languages.model.ol.ProblemInstance;
+import lombok.extern.slf4j.Slf4j;
 
-import java.util.Objects;
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.function.Predicate;
 
 /**
- * Helper class for processing instances.
+ * Helper component for processing instances.
  */
-public final class LanguageHelper {
-    /**
-     * Logger instance
-     */
-    private static final Logger log = LoggerFactory.getLogger(LanguageHelper.class);
+@ApplicationScoped
+@Slf4j
+public class LanguageHelper {
+    @Inject
+    private ExpressionEvaluator evaluator;
 
-    /**
-     * Private constructor for avoiding instances of this class.
-     */
-    private LanguageHelper() {
+    public <T> T lookup(final OptimisationModel model, final String path) {
+        log.debug("Locking up '{}':", path);
+
+        if(path == null) {
+            log.warn("Asking for a null-path.");
+            throw new IllegalArgumentException("Path is not allowed to be null");
+        } else if(path.isEmpty()) {
+            return (T)model;
+        }
+
+        final List<String> splittedPath = new LinkedList<>(Arrays.asList(path.split("\\.")));
+
+        if("problem".equals(splittedPath.get(0))) {
+            splittedPath.remove(0);
+            return lookup(model.getProblem(), splittedPath);
+        } else if("algorithm".equals(splittedPath.get(0))) {
+            splittedPath.remove(0);
+            return lookup(model.getAlgorithm(), splittedPath);
+        }
+
+        log.error("Cannot lookup path '{}'.", path);
+        throw new IllegalArgumentException("Invalid path '" + path + "' for optimisation model.");
     }
 
-    public static <T> T lookup(final Instance instance, final String path) {
+    private <T> T lookup(final ProblemInstance problem, final List<String> path) {
+        log.debug("Locking up '{}':", path);
+
+        if(path.size() == 0) {
+            return (T)problem;
+        }
+
+        Object value = null;
+        switch (path.get(0)) {
+                case "name":
+                    value = problem.getName();
+                    path.remove(0);
+                    break;
+                case "documentation":
+                    value = problem.getDocumentation();
+                    path.remove(0);
+                    break;
+                case "instance":
+                    path.remove(0);
+                default:
+                    value = problem;
+        }
+
+        if(path.size() == 0) {
+            return (T)value;
+        }
+
+        if(!(value instanceof Instance)) {
+            log.error("Lookup did not result in an instance: {}", value);
+            throw new IllegalStateException("Lookup resulted in a non-instance: " + value);
+        }
+
+        return lookup((Instance)value, path);
+    }
+
+    private <T> T lookup(final AlgorithmInstance algorithm, final List<String> path) {
+        log.debug("Locking up '{}':", path);
+
+        if(path.size() == 0) {
+            return (T)algorithm;
+        }
+
+        Object value = null;
+        switch (path.get(0)) {
+            case "problem":
+                value = algorithm.getProblem();
+                path.remove(0);
+                break;
+            case "documentation":
+                value = algorithm.getDocumentation();
+                path.remove(0);
+                break;
+            case "instance":
+                path.remove(0);
+            default:
+                value = algorithm;
+        }
+
+        if(path.size() == 0) {
+            return (T)value;
+        }
+
+        if(!(value instanceof Instance)) {
+            log.error("Lookup did not result in an instance: {}", value);
+            throw new IllegalStateException("Lookup resulted in a non-instance: " + value);
+        }
+
+        return lookup((Instance)value, path);
+    }
+
+    public <T> T lookup(final Instance instance, final String path) {
+        if(path == null) {
+            log.warn("Asking for a null-path.");
+            throw new IllegalArgumentException("Path is not allowed to be null");
+        } else if(path.isEmpty()) {
+            return (T)instance;
+        }
+
+        return lookup(instance, Arrays.asList(path.split("\\.")));
+    }
+
+    private <T> T lookup(final Instance instance, final List<String> path) {
         log.debug("Locking up '{}':", path);
 
         if(path == null) {
@@ -34,11 +138,9 @@ public final class LanguageHelper {
             return (T)instance;
         }
 
-        final String [] parts = path.split("\\.");
-
         Object current = instance;
 
-        for(final String part : parts) {
+        for(final String part : path) {
             try {
                 if(current == null) {
                     log.error("Unable to select child on null value.");
@@ -82,11 +184,11 @@ public final class LanguageHelper {
         return (T) current;
     }
 
-    private static Object convertToJava(final Object current, final Type type) {
+    private Object convertToJava(final Object current, final Type type) {
         if(type instanceof InstanceType) {
             return (Instance)current;
         } else if(type instanceof LiteralType) {
-            return readLiteral(current, type);
+            return readExpression(current, type);
         } else if(type instanceof ArrayType) {
             return readArray(current, type);
         }
@@ -94,7 +196,7 @@ public final class LanguageHelper {
         return current;
     }
 
-    private static Object readArray(final Object current, final Type type) {
+    private Object readArray(final Object current, final Type type) {
         final Array array = (Array)current;
 
         return array.getValues()
@@ -103,19 +205,8 @@ public final class LanguageHelper {
                     .toArray();
     }
 
-    private static Object readLiteral(final Object current, final Type type) {
-        if(type instanceof FloatType) {
-            return ((Number)((Literal)current).getValue()).doubleValue();
-        } else if(type instanceof IntType) {
-            return ((Number)((Literal)current).getValue()).intValue();
-        } else if(type instanceof StringType) {
-            return Objects.toString(((Literal)current).getValue());
-        } else if(type instanceof BooleanType) {
-            // TODO Fix hard call to is value
-            return Boolean.TRUE.equals(((Literal)((Literal)current)).getValue());
-        }
-
-        throw new UnsupportedOperationException("Type " + type.toString() + " is not supported.");
+    private Object readExpression(final Object current, final Type type) {
+        return evaluator.evaluate(current);
     }
 
     public static Predicate<? super Value> filterInstanceByType(final String instanceTypeName) {

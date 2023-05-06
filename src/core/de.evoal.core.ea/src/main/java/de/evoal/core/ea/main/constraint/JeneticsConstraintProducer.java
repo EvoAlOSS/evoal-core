@@ -17,6 +17,7 @@ import de.evoal.languages.model.base.*;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import java.util.*;
@@ -25,6 +26,9 @@ import java.util.stream.Collectors;
 
 @ApplicationScoped
 public class JeneticsConstraintProducer {
+    @Inject
+    private LanguageHelper helper;
+
     @Produces
     public List<io.jenetics.engine.Constraint> create(
             final @ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.handlers") Instance [] handlerConfigurations,
@@ -44,7 +48,7 @@ public class JeneticsConstraintProducer {
                     .filter(c -> configurationMap.containsKey(c.getGroup()))
                     .map(s -> {
                         final Instance handlerConfiguration = configurationMap.get(s.getGroup());
-                        final Instance repairConfiguration = LanguageHelper.lookup(handlerConfiguration, "constraint-handling.repair-strategy");
+                        final Instance repairConfiguration = helper.lookup(handlerConfiguration, "constraint-handling.repair-strategy");
 
                         final CalculationStrategy cStrategy = factory.create(s);
                         final RepairStrategy rStrategy = BeanFactory.create(repairConfiguration.getDefinition().getName(), RepairStrategy.class)

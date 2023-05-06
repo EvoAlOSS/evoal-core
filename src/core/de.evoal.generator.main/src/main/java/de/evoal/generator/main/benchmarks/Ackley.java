@@ -3,14 +3,15 @@ package de.evoal.generator.main.benchmarks;
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertySpecification;
 import de.evoal.core.api.utils.InitializationException;
-import de.evoal.core.api.utils.LanguageHelper;
 import de.evoal.generator.api.AbstractGeneratorFunction;
 import de.evoal.generator.api.GeneratorFunction;
-import de.evoal.generator.main.utils.ConfigurationHelper;
+import de.evoal.core.api.languages.ExpressionEvaluator;
+import de.evoal.languages.model.base.Instance;
 import de.evoal.languages.model.generator.Step;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.enterprise.context.Dependent;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 @Dependent
@@ -22,6 +23,9 @@ public class Ackley extends AbstractGeneratorFunction {
     private double b = 0.2;
 
     private double c = 6.283185307179586;
+
+    @Inject
+    private ExpressionEvaluator evaluator;
 
     @Override
     public Properties apply(final Properties in) {
@@ -50,9 +54,12 @@ public class Ackley extends AbstractGeneratorFunction {
     public GeneratorFunction init(final Step configuration) throws InitializationException {
         super.init(configuration);
 
-        a = LanguageHelper.lookup(configuration.getInstance(), "a");
-        b = LanguageHelper.lookup(configuration.getInstance(), "b");
-        c = LanguageHelper.lookup(configuration.getInstance(), "c");
+        final Instance instance = configuration.getInstance();
+        a = evaluator.attributeToDouble(instance, "a");
+        b = evaluator.attributeToDouble(instance, "b");
+        c = evaluator.attributeToDouble(instance, "c");
+
+        log.info("Creating Ackley function with parameter a={}, b={} and c={}.", a, b, c);
 
         return this;
     }

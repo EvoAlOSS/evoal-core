@@ -19,13 +19,16 @@ public class CalculationFactory {
     private final Map<String, Instance> calculationConfigurationByCategory = new HashMap<>();
 
     @Inject
+    private LanguageHelper helper;
+
+    @Inject
     public CalculationFactory(final @ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.handlers") Instance [] handlerConfigurations) {
         Arrays.stream(handlerConfigurations)
                              .map(Instance.class::cast)
                              .filter(LanguageHelper.filterInstanceByType("constraint-handler"))
                              .forEach(i -> {
-                                 final String category = LanguageHelper.lookup(i, "category");
-                                 final Instance config = LanguageHelper.lookup(i, "calculation");
+                                 final String category = helper.lookup(i, "category");
+                                 final Instance config = helper.lookup(i, "calculation");
 
                                  calculationConfigurationByCategory.put(category, config);
                              });
@@ -33,7 +36,7 @@ public class CalculationFactory {
 
     public CalculationStrategy create(final Constraint constraint) {
         final Instance config = calculationConfigurationByCategory.get(constraint.getGroup());
-        final String calculationName = LanguageHelper.lookup(config, "name");
+        final String calculationName = helper.lookup(config, "name");
 
         final CalculationStrategy strategy = BeanFactory.create(calculationName, CalculationStrategy.class);
         strategy.init(constraint, config);

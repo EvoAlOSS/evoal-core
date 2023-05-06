@@ -15,10 +15,14 @@ import lombok.extern.slf4j.Slf4j;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.InjectionPoint;
+import javax.inject.Inject;
 
 @ApplicationScoped
 @Slf4j
 public class ConfigurationValueProducer {
+    @Inject
+    private LanguageHelper helper;
+
     @Produces
     @ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "")
     public Integer injectIntegerValue(final InjectionPoint ip, final Blackboard board) {
@@ -98,18 +102,16 @@ public class ConfigurationValueProducer {
     public double [] injectDoubleArrayValue(final InjectionPoint ip, final Blackboard board) {
         final ConfigurationValue value = ip.getAnnotated().getAnnotation(ConfigurationValue.class);
 
-        return (ConfigurationValueProducer.<Array>lookup(board.get(value.entry()), value.access()))
+        return (this.<Array>lookup(board.get(value.entry()), value.access()))
                 .getValues()
                 .stream()
                 .mapToDouble(x -> ((DoubleLiteral)((Literal)x)).getValue())
                 .toArray();
     }
 
-    private static <T> T lookup(final OptimisationModel model, final String access) {
+    private <T> T lookup(final OptimisationModel model, final String access) {
         log.info("Looking up configuration value {}", access);
 
-        throw new RuntimeException("Implement lookup");
-
-        //return LanguageHelper.lookup(model.getInstance(), access);
+        return helper.lookup(model, access);
     }
 }

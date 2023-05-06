@@ -20,12 +20,16 @@ import de.evoal.core.main.constraints.constraint.utils.ConfigurationUtils;
 import de.evoal.languages.model.base.*;
 import org.apache.commons.math3.util.Pair;
 
+import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.*;
 import java.util.stream.Collectors;
 
 @ApplicationScoped
 public class MalusFunctionProducer {
+    @Inject
+    private LanguageHelper helper;
+
     @ApplicationScoped @Produces
     public MalusForFitnessStrategy create(
             final @ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.handlers") Instance [] handlers,
@@ -96,9 +100,9 @@ public class MalusFunctionProducer {
 
                     final CalculationStrategy calculation = factory.create(constraint);
 
-                    final String handlerName = LanguageHelper.lookup(configuration, "name");
+                    final String handlerName = helper.lookup(configuration, "name");
 
-                    final MalusFunction strategy = new MalusForFitnessFunction(constraint, LanguageHelper.lookup(configuration, "constraint-handling"), index) ;
+                    final MalusFunction strategy = new MalusForFitnessFunction(helper, constraint, helper.lookup(configuration, "constraint-handling"), index) ;
                     resultingFunction.add(index, strategy);
                }
             }
@@ -116,9 +120,9 @@ public class MalusFunctionProducer {
 
                 final CalculationStrategy calculation = factory.create(constraint);
 
-                final String handlerName = LanguageHelper.lookup(configuration, "name");
+                final String handlerName = helper.lookup(configuration, "name");
 
-                final MalusFunction strategy = new MalusForFitnessFunction(constraint, LanguageHelper.lookup(configuration, "constraint-handling"), index) ;
+                final MalusFunction strategy = new MalusForFitnessFunction(helper, constraint, helper.lookup(configuration, "constraint-handling"), index) ;
                 resultingFunction.add(index, strategy);
             }
         }

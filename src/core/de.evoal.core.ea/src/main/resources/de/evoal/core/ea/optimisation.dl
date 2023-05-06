@@ -75,6 +75,9 @@ module de.evoal.core.ea.optimisation {
 	abstract type selector {
 	}
 	
+	type 'roulette-wheel-selector' extends selector {
+	}
+
 	type 'elite-selector' extends selector {
 		'size-factor' : float;
 		'non-elite-selector' : instance selector;

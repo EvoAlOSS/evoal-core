@@ -1,5 +1,6 @@
 package de.evoal.generator.main.benchmarks;
 
+import de.evoal.core.api.languages.ExpressionEvaluator;
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertySpecification;
 import de.evoal.core.api.utils.InitializationException;
@@ -10,11 +11,15 @@ import de.evoal.languages.model.generator.Step;
 import de.evoal.languages.model.base.Literal;
 
 import javax.enterprise.context.Dependent;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 @Dependent
 @Named("rastrigin")
 public class Rastrigin extends AbstractGeneratorFunction {
+    @Inject
+    private ExpressionEvaluator evaluator;
+
     private double a;
 
     @Override
@@ -39,7 +44,7 @@ public class Rastrigin extends AbstractGeneratorFunction {
     public GeneratorFunction init(final Step configuration) throws InitializationException {
         super.init(configuration);
 
-        a = ((DoubleLiteral)configuration.getInstance().findAttribute("a").getValue()).getLiteral();
+        a = evaluator.attributeToDouble(configuration.getInstance(), "a");
 
         return this;
     }

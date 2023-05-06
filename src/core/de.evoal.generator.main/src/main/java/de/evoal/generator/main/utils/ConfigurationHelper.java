@@ -1,5 +1,6 @@
 package de.evoal.generator.main.utils;
 
+import de.evoal.core.api.cdi.BeanFactory;
 import de.evoal.core.api.utils.LanguageHelper;
 import de.evoal.languages.model.base.Array;
 import de.evoal.languages.model.base.Instance;
@@ -23,8 +24,10 @@ public final class ConfigurationHelper {
     }
 
     private static Distribution readDistribution(final Instance instance) {
-        final double μ = LanguageHelper.lookup(instance, "μ");
-        final double σ = LanguageHelper.lookup(instance, "σ");
+        final LanguageHelper helper = BeanFactory.create(LanguageHelper.class);
+
+        final double μ = helper.lookup(instance, "μ");
+        final double σ = helper.lookup(instance, "σ");
 
         return new Distribution(μ, σ);
     }

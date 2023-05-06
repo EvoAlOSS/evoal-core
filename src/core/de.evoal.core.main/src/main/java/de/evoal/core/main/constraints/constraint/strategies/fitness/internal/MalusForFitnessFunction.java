@@ -7,13 +7,16 @@ import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.utils.LanguageHelper;
 import de.evoal.languages.model.base.Instance;
 
+import javax.inject.Inject;
+
 public class MalusForFitnessFunction implements MalusFunction {
+
     private final Constraint constraint;
     private final double smoothing;
 
-    public MalusForFitnessFunction(final Constraint constraint, final Instance configuration, final int index) {
+    public MalusForFitnessFunction(final LanguageHelper helper, final Constraint constraint, final Instance configuration, final int index) {
         this.constraint = constraint;
-        smoothing = LanguageHelper.lookup(configuration, "smoothing");
+        smoothing = helper.lookup(configuration, "smoothing");
     }
 
     @Override
