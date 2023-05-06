@@ -14,4 +14,4 @@ test-bin
 xtend-gen
 .idea
 *.iml
-evoal/
+/evoal/

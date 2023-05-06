@@ -5,7 +5,6 @@ import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.core.api.utils.LanguageHelper;
 import de.evoal.languages.model.base.Instance;
 import io.jenetics.*;
-import io.jenetics.ext.moea.NSGA2Selector;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
@@ -100,7 +99,5 @@ public class SelectorFactory {
 			Selector<G,C> nonEliteSelector = create(helper.lookup(nonEliteSelectorConfig, "name"), nonEliteSelectorConfig);
 			return new EliteSelector<>(count, nonEliteSelector);
 		}
-
-		NSGA2Selector
 	}
 }
