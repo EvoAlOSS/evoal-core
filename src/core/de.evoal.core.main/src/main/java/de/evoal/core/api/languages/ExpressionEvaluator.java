@@ -63,4 +63,30 @@ public class ExpressionEvaluator {
     public Object evaluate(final Object current) {
         return evaluator.doSwitch((EObject) current);
     }
+
+    public int attributeToInteger(final Instance instance, final String attributeName) {
+        final Attribute attribute = instance.findAttribute(attributeName);
+
+        Object result = null;
+
+        if(attribute == null) {
+            log.info("Attribute binding not found. Using default value.");
+            final AttributeDefinition definition = instance.getDefinition().findAttribute(attributeName);
+
+            if(defaultValueCache.containsKey(definition)) {
+                result = defaultValueCache.get(definition);
+            } else {
+                result = evaluator.doSwitch(definition.getInitialisation());
+            }
+        } else {
+            result = evaluator.doSwitch(attribute.getValue());
+        }
+
+        if(!(result instanceof Number)) {
+            log.error("Expression did not evaluate to a number value for attribute {} which was expected.", attributeName);
+            throw new IllegalStateException("Expression evaluation error. Please check your configuration.");
+        }
+
+        return ((Number)result).intValue();
+    }
 }

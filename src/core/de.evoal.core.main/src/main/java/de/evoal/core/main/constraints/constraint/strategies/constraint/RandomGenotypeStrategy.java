@@ -14,7 +14,7 @@ import javax.inject.Named;
 @Named("repair-with-random")
 public class RandomGenotypeStrategy implements RepairStrategy {
 
-    @Inject @Named("random")
+    @Inject @Named("random-population")
     private InitialCandidatesProvider generator;
 
     @Override

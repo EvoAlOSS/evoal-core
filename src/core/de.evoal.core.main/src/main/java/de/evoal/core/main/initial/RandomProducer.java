@@ -19,7 +19,7 @@ public class RandomProducer {
 
     @Produces
     @Dependent
-    @Named("random")
+    @Named("random-population")
     public InitialCandidatesProvider create(@ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.initialisation") Instance initialization) {
         final InitialCandidatesProvider population = new RandomInitialCandidates();
         BeanFactory.injectFields(population);

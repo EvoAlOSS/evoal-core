@@ -24,7 +24,7 @@ public class OptimisationFunctionProducer {
     @Produces
     @Dependent
     @Named("optimisation-function")
-    public OptimisationFunction createOptimisationFunction(final @ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.optimisation-function.function") Instance configuration) {
+    public OptimisationFunction createOptimisationFunction(final @ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.optimisation-function") Instance configuration) {
         return BeanFactory.create(configuration.getDefinition().getName(), OptimisationFunction.class)
                 .init(configuration);
     }

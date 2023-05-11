@@ -5,6 +5,7 @@ import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.core.api.utils.LanguageHelper;
 import de.evoal.languages.model.base.Instance;
 import io.jenetics.*;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
@@ -12,10 +13,11 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 @ApplicationScoped
+@Slf4j
 public class SelectorFactory {
 	@Inject
 	private LanguageHelper helper;
-	
+
 	@Inject
 	@ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.size-of-population")
 	private int sizeOfPopulation;
@@ -39,19 +41,35 @@ public class SelectorFactory {
 		switch(name) {
 			case "elite-selector": return createEliteSelector(config);
 			case "monte-carlo-selector": return createMonteCarloSelector(config);
-			case "exponential-rank-selector": return createExponentialRankSelector(config);
-			case "linear-rank-selector": return createLinearRankSelector(config);
-			case "boltzmann-selector": return createBoltzmannSelector(config);
 			case "stochastic-universal-selector": return createStochasticUniversalSelector(config);
 			case "tournament-selector": return createTournamentSelector(config);
 			case "truncation-selector": return createTruncationSelector(config);
-			
+
+			/* probability-based selectors */
+			case "boltzmann-selector": return createBoltzmannSelector(config);
+			case "exponential-rank-selector": return createExponentialRankSelector(config);
+			case "linear-rank-selector": return createLinearRankSelector(config);
+			case "roulette-wheel-selector": return createRouletteWheelSelector(config);
 		}
+		log.error("Configured selector with name '{}' is not supported. Available selectors are:\n" +
+				"  elite-selector,\n" +
+				"  monte-carlo-selector,\n" +
+				"  stochastic-universal-selector,\n" +
+				"  tournament-selector,\n" +
+				"  truncation-selector,\n" +
+				"  boltzmann-selector,\n" +
+				"  exponential-rank-selector,\n" +
+				"  linear-rank-selector,\n" +
+				"  roulette-wheel-selector", name);
 		throw new IllegalStateException("Selector '" + name + "' is unknown.");
 	}
-	
+
+	private <G extends Gene<?, G>, C extends Comparable<? super C>> Selector<G,C> createRouletteWheelSelector(final Instance config) {
+		return (Selector<G,C>) new RouletteWheelSelector<>();
+	}
+
 	private <G extends Gene<?,G>, C extends Comparable<? super C>> Selector<G, C> createBoltzmannSelector(final Instance config) {
-		double beta = helper.lookup(config, "beta");
+		final Double beta = helper.lookup(config, "beta");
 
 		return (Selector<G,C>) new BoltzmannSelector<>(beta);
 	}
@@ -91,7 +109,7 @@ public class SelectorFactory {
 	private <G extends Gene<?,G>, C extends Comparable<? super C>> EliteSelector<G,C> createEliteSelector(final Instance config) {
 		int count = (int)(helper.<Double>lookup(config, "size-factor") * sizeOfPopulation);
 		final Instance nonEliteSelectorConfig = helper.lookup(config, "non-elite-selector");
-		
+
 		if(nonEliteSelectorConfig == null) {
 			return new EliteSelector<>(count);
 		}

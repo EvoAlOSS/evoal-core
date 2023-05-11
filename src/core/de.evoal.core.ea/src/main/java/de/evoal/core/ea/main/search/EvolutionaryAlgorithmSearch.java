@@ -11,6 +11,7 @@ import de.evoal.core.api.board.Blackboard;
 import de.evoal.core.api.cdi.BeanFactory;
 import de.evoal.core.api.cdi.BlackboardValue;
 import de.evoal.core.api.cdi.ConfigurationValue;
+import de.evoal.core.api.languages.ExpressionEvaluator;
 import de.evoal.core.api.optimisation.InitialCandidatesProvider;
 import de.evoal.core.api.optimisation.OptimisationAlgorithm;
 import de.evoal.core.api.utils.LanguageHelper;
@@ -46,6 +47,9 @@ public class EvolutionaryAlgorithmSearch implements OptimisationAlgorithm {
 	private Blackboard board;
 
 	@Inject
+	private ExpressionEvaluator evaluator;
+
+	@Inject
 	private LanguageHelper helper;
 
 	/**
@@ -71,7 +75,7 @@ public class EvolutionaryAlgorithmSearch implements OptimisationAlgorithm {
 	private int sizeOfPopulation;
 
 	@Inject
-	@ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.maximise")
+	@ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "problem.maximise")
 	private Boolean maximize;
 
 	@Inject
@@ -155,12 +159,12 @@ public class EvolutionaryAlgorithmSearch implements OptimisationAlgorithm {
 			final String name = category.getDefinition().getName();
 			log.info("Processing alterer category '{}'.", name);
 
-			final Array array = (Array) category.getValue();
+			final List<de.evoal.languages.model.base.Instance> listOfAltererConfigurations = (List<de.evoal.languages.model.base.Instance>)evaluator.evaluate(category.getValue());
 
-			for(final Value alterer : array.getValues()) {
+			for(final de.evoal.languages.model.base.Instance alterer : listOfAltererConfigurations) {
 				this.alterers
 					.computeIfAbsent(name, k -> new ArrayList<>())
-					.add(factory.create((de.evoal.languages.model.base.Instance)alterer));
+					.add(factory.create(alterer));
 			}
 		}
 	}

@@ -61,7 +61,7 @@ public class GenerationStatisticsWriter implements StatisticsWriter {
     @Inject
     private Provider<Function<Properties, Properties>> fitnessFactory;
 
-    @Inject @ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.optimisation-function.function")
+    @Inject @ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.optimisation-function")
     private Instance config;
 
     @Inject
