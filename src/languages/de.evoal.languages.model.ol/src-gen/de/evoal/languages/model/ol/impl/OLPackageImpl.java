@@ -10,7 +10,6 @@ import de.evoal.languages.model.ddl.DdlPackage;
 import de.evoal.languages.model.instance.InstancePackage;
 
 import de.evoal.languages.model.ol.AlgorithmInstance;
-import de.evoal.languages.model.ol.Import;
 import de.evoal.languages.model.ol.OLFactory;
 import de.evoal.languages.model.ol.OLPackage;
 import de.evoal.languages.model.ol.OptimisationModel;

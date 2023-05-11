@@ -23,6 +23,8 @@ import java.util.function.BiFunction;
 @Slf4j
 @Vetoed
 public abstract class DensityBasedFitness extends OptimisationFunctionDecorator {
+    @Inject
+    private LanguageHelper helper;
 
     private final BiFunction<PartialFunctionConfiguration, String, DensityData> modelCreator;
 
@@ -59,9 +61,9 @@ public abstract class DensityBasedFitness extends OptimisationFunctionDecorator 
         log.info("Setting up density-based fitness calculation.");
         super.init(config);
 
-        kind = LanguageHelper.lookup(config, "kind");
-        exponent = LanguageHelper.lookup(config, "exponent");
-        rootExponent = LanguageHelper.lookup(config, "root-exponent");
+        kind = helper.lookup(config, "kind");
+        exponent = helper.lookup(config, "exponent");
+        rootExponent = helper.lookup(config, "root-exponent");
 
         // TODO Check this section if it is really correct in all cases.
         final List<FunctionCombiner> mappings = surrogate.getMappings();

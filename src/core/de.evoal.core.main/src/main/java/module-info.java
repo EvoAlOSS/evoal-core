@@ -33,6 +33,7 @@ module de.evoal.core.main {
     requires de.evoal.languages.model.ol;
     requires de.evoal.languages.model.ol.dsl;
     requires de.evoal.languages.model.instance;
+    requires de.evoal.languages.model.interpreter;
     requires de.evoal.languages.model.utils;
     requires com.google.guice;
     requires commons.math3;
@@ -80,6 +81,7 @@ module de.evoal.core.main {
     opens de.evoal.core.main.constraints.correlation to weld.core.impl;
     opens de.evoal.core.main.constraints.deviation to weld.core.impl;
     opens de.evoal.core.main.initial to weld.core.impl;
+    opens de.evoal.core.main.optimisation to weld.core.impl;
     opens de.evoal.core.main.producer to weld.core.impl;
     opens de.evoal.core.main.properties to weld.core.impl;
     opens de.evoal.core.main.search to weld.core.impl;

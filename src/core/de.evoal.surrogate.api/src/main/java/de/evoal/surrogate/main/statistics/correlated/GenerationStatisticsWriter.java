@@ -43,6 +43,9 @@ public class GenerationStatisticsWriter implements StatisticsWriter {
      */
     private List<Function<Properties, Properties>> functions;
 
+    @Inject
+    private LanguageHelper helper;
+
     /**
      * List of all function names
      */
@@ -80,7 +83,7 @@ public class GenerationStatisticsWriter implements StatisticsWriter {
 
     @PostConstruct
     public void init() {
-        final String selectedFunctionName = LanguageHelper.lookup(config, "name");
+        final String selectedFunctionName = helper.lookup(config, "name");
 
         startTime = System.currentTimeMillis();
         // create fitness functions for comparison

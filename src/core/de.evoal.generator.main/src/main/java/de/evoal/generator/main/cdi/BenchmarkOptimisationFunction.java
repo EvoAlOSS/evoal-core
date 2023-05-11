@@ -1,9 +1,11 @@
 package de.evoal.generator.main.cdi;
 
+import de.evoal.core.api.languages.ExpressionEvaluator;
 import de.evoal.core.api.optimisation.OptimisationFunction;
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.properties.PropertySpecification;
+import de.evoal.core.api.utils.LanguageHelper;
 import de.evoal.generator.api.GeneratorFunction;
 import de.evoal.languages.model.base.AttributeDefinition;
 import de.evoal.languages.model.generator.GeneratorFactory;
@@ -22,6 +24,9 @@ import javax.inject.Named;
 @Dependent
 @Named("benchmark-function")
 public class BenchmarkOptimisationFunction implements OptimisationFunction {
+
+    @Inject
+    private ExpressionEvaluator evaluator;
 
     @Inject @Named("search-space-specification")
     private PropertiesSpecification searchSpaceSpecification;
@@ -51,7 +56,7 @@ public class BenchmarkOptimisationFunction implements OptimisationFunction {
     @SneakyThrows
     @Override
     public OptimisationFunction init(final Instance config) {
-        final Instance benchmarkConfiguration = (Instance)config.findAttribute("benchmark").getValue();
+        final Instance benchmarkConfiguration = (Instance)evaluator.attributeToObject(config, "benchmark");
 
         final Step stepConfiguration = GeneratorFactory.eINSTANCE.createStep();
         stepConfiguration.setInstance(EcoreUtil.copy(benchmarkConfiguration));

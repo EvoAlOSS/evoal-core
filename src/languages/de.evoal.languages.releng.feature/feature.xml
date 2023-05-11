@@ -24,14 +24,19 @@
    <requires>
       <import plugin="org.eclipse.core.runtime"/>
       <import plugin="org.eclipse.emf.ecore"/>
+      <import plugin="de.evoal.languages.model.base" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.xtext" version="2.29.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.xtext.xbase"/>
       <import plugin="org.eclipse.equinox.common" version="3.5.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.xtext.xbase.lib" version="2.14.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.xtext.util"/>
+      <import plugin="de.evoal.languages.model.base.dsl" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="de.evoal.languages.model.utils" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.mwe2.language" version="2.14.0" match="greaterOrEqual"/>
       <import plugin="org.apache.log4j"/>
       <import plugin="org.eclipse.xtext.ide"/>
       <import plugin="org.eclipse.xtext.xbase.ide"/>
+      <import plugin="de.evoal.languages.model.base.dsl.ui" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.xtext.ui"/>
       <import plugin="org.eclipse.xtext.ui.shared"/>
       <import plugin="org.eclipse.xtext.ui.codetemplates.ui"/>
@@ -49,15 +54,11 @@
       <import plugin="de.evoal.languages.model.instance.dsl.ui" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="de.evoal.languages.model.dl.dsl" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="de.evoal.languages.model.ddl.dsl" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="de.evoal.languages.model.base.dsl.ide" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="de.evoal.languages.model.dl.dsl.ui" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="de.evoal.languages.model.generator" version="1.0.0" match="greaterOrEqual"/>
-      <import plugin="de.evoal.languages.model.base" version="1.0.0" match="greaterOrEqual"/>
-      <import plugin="org.antlr.runtime" version="3.2.0" match="equivalent"/>
-      <import plugin="de.evoal.languages.model.base.dsl" version="1.0.0" match="greaterOrEqual"/>
-      <import plugin="de.evoal.languages.model.utils" version="1.0.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.emf.mwe2.language" version="2.14.0" match="greaterOrEqual"/>
-      <import plugin="de.evoal.languages.model.base.dsl.ui" version="1.0.0" match="greaterOrEqual"/>
-      <import plugin="de.evoal.languages.model.base.dsl.ide" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.antlr.runtime" version="3.2.0" match="compatible"/>
+      <import plugin="slf4j.api"/>
    </requires>
 
    <plugin
@@ -265,6 +266,13 @@
 
    <plugin
          id="de.evoal.languages.model.base.dsl.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="de.evoal.languages.model.interpreter"
          download-size="0"
          install-size="0"
          version="0.0.0"

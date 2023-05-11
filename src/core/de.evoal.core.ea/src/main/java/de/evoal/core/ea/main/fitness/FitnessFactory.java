@@ -31,7 +31,7 @@ public class FitnessFactory {
 	 * </ul>
 	 */
 	@Produces @Dependent
-	public JeneticsFitnessFunction create(final @ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.optimisation-function.function") Instance fitnessConfig,
+	public JeneticsFitnessFunction create(final @ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.optimisation-function") Instance fitnessConfig,
 										  final @ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.comparator") Instance comparatorConfig) {
 		final String fitnessName = fitnessConfig.getDefinition().getName();
 		final String comparatorName = comparatorConfig.getDefinition().getName();

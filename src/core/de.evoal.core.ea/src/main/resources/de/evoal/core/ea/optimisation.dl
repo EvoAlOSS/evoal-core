@@ -11,8 +11,6 @@ module de.evoal.core.ea.optimisation {
 		handlers : array instance 'handler';
 		selectors : instance selectors;
 		alterers : instance alterers;
-	
-		fitness : instance 'optimisation-function';
 	}
 	
 	abstract type chromosome {

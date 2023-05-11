@@ -220,6 +220,12 @@
 
 		<dependency>
 			<groupId>de.evoal.languages</groupId>
+			<artifactId>de.evoal.languages.model.interpreter</artifactId>
+			<version>${evoal.languages.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>de.evoal.languages</groupId>
 			<artifactId>de.evoal.languages.model.utils</artifactId>
 			<version>${evoal.languages.version}</version>
 		</dependency>

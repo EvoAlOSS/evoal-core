@@ -1,9 +1,8 @@
 package de.evoal.core.api.languages;
 
 import de.evoal.languages.model.base.*;
-import de.evoal.languages.model.base.eval.ConstantExpressionEvaluator;
+import de.evoal.languages.model.interpreter.ConstantExpressionEvaluator;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.math3.util.OpenIntToDoubleHashMap;
 import org.eclipse.emf.ecore.EObject;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -51,6 +50,10 @@ public class ExpressionEvaluator {
 
     public double[] attributeToDoubleArray(final Instance instance, final String attributeName) {
         throw new IllegalStateException("Not yet implemented.");
+    }
+
+    public Object attributeToObject(final Instance instance, final String attributeName) {
+        return attributeToObject(instance.findAttribute(attributeName));
     }
 
     public Object attributeToObject(final Attribute attribute) {

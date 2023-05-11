@@ -1,4 +1,4 @@
-package de.evoal.languages.model.base.eval;
+package de.evoal.languages.model.interpreter;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -80,8 +80,11 @@ public class ConstantExpressionEvaluator extends BaseSwitch<Object> {
 	}
 
 	@Override
-	public Object caseArray(Array object) {
-		throw new IllegalStateException("Not yet implemented");			
+	public Object caseArray(final Array object) {
+		return object.getValues()
+					 .stream()
+					 .map(this::doSwitch)
+					 .toList();
 	}
 
 	@Override
@@ -106,9 +109,18 @@ public class ConstantExpressionEvaluator extends BaseSwitch<Object> {
 	}
 
 	@Override
-	public Object caseConstantReference(ConstantReference object) {
+	public Object caseConstantReference(final ConstantReference object) {
 		final ConstantDefinition definition = object.getDefinition();
+
+		if(definition == null) {
+			log.warn("Definition of constant is null.");
+			return null;
+		}
 		
+		System.out.println("Definition is: " + definition);
+		System.out.println("  is a proxy:  " + definition.eIsProxy());
+		System.out.println("  its value:   " + definition.getValue());
+
 		if(constantCache.containsKey(definition)) {
 			return constantCache.get(definition);
 		}
@@ -120,8 +132,8 @@ public class ConstantExpressionEvaluator extends BaseSwitch<Object> {
 	}
 
 	@Override
-	public Object caseInstance(Instance object) {
-		throw new IllegalStateException("Not yet implemented");			
+	public Object caseInstance(final Instance object) {
+		return object;
 	}
 
 	@Override
@@ -224,9 +236,15 @@ public class ConstantExpressionEvaluator extends BaseSwitch<Object> {
 
 	@Override
 	public Object caseValueReference(final ValueReference object) {
-		throw new IllegalStateException("Not yet implemented");			
+		if(object instanceof de.evoal.languages.model.ddl.DataReference) {
+			return ((de.evoal.languages.model.ddl.DataReference)object).getDefinition();
+		} else if(object instanceof de.evoal.languages.model.instance.DataReference) {
+			return ((de.evoal.languages.model.instance.DataReference)object).getDefinition();
+		}
+		throw new IllegalStateException("Not yet implemented: " + object.eClass() + " -- " + object);			
 	}
 
+	
 	@Override
 	public Object caseXorExpression(XorExpression object) {
 		if(object.getSubExpressions().size() == 1) {

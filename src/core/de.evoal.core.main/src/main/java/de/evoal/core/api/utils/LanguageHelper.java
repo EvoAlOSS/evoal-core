@@ -186,7 +186,7 @@ public class LanguageHelper {
 
     private Object convertToJava(final Object current, final Type type) {
         if(type instanceof InstanceType) {
-            return (Instance)current;
+            return evaluator.evaluate(current);
         } else if(type instanceof LiteralType) {
             return readExpression(current, type);
         } else if(type instanceof ArrayType) {
@@ -197,10 +197,9 @@ public class LanguageHelper {
     }
 
     private Object readArray(final Object current, final Type type) {
-        final Array array = (Array)current;
+        final List<Object> array = (List<Object>)evaluator.evaluate(current);
 
-        return array.getValues()
-                    .stream()
+        return array.stream()
                     .map(current1 -> convertToJava(current1, ((ArrayType)type).getElements().get(0)))
                     .toArray();
     }

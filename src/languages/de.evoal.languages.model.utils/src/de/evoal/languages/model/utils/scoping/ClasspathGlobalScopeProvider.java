@@ -7,12 +7,8 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.xtext.resource.ClasspathUriResolutionException;
-import org.eclipse.xtext.resource.IClasspathUriResolver;
-import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.scoping.impl.ImportUriGlobalScopeProvider;
 import org.eclipse.xtext.scoping.impl.ImportUriResolver;
-import org.eclipse.xtext.scoping.impl.ImportUriGlobalScopeProvider.URICollector;
 import org.eclipse.xtext.util.IAcceptor;
 
 import de.evoal.languages.model.base.Import;
@@ -21,7 +17,6 @@ public class ClasspathGlobalScopeProvider extends ImportUriGlobalScopeProvider {
 	public static class CustomUriResolver extends ImportUriResolver  {
 		
 		public CustomUriResolver() {
-			System.err.println("Created custom URI resolver.");
 			setAttributeName("importedNamespace");
 		}
 		
@@ -44,11 +39,15 @@ public class ClasspathGlobalScopeProvider extends ImportUriGlobalScopeProvider {
 			
 			// append file ending
 			switch(imp.getLanguage()) {
+			case "data":
+				result += ".ddl";
+				break;
 			case "definitions":
 				result += ".dl";
 				break;
-			case "data":
-				result += ".ddl";
+			case "optimisation":
+			case "optimization":
+				result += ".ol";
 				break;
 			}
 			
@@ -74,16 +73,14 @@ public class ClasspathGlobalScopeProvider extends ImportUriGlobalScopeProvider {
 		public URI resolve(String uriAsString) throws IllegalArgumentException {
 			System.err.println("LoggingURICollector.resolve(" + uriAsString + ")");
 			URI uri = super.resolve(uriAsString);
-			System.err.println("LoggingURICollector.resolve           -> " + uri);
-			System.err.println("                             is.File  -> " + uri.isFile());
-			System.err.println("                             is.Arch  -> " + uri.isArchive());
-			System.err.println("                             is.Rela  -> " + uri.isRelative());
 			return uri;
 		}
 
 		@Override
 		public void accept(String uriAsString) {
-			System.err.println("LoggingURICollector.accept(" + uriAsString + ")");
+			if(uriAsString != null) {
+				System.err.println("LoggingURICollector.accept(" + uriAsString + ")");
+			}
 			super.accept(uriAsString);
 		}
 	}

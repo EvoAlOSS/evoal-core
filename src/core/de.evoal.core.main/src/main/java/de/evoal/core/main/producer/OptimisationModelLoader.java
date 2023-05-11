@@ -9,8 +9,11 @@ import javax.enterprise.context.Dependent;
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.Produces;
 
+import de.evoal.core.api.utils.ResourceSetUtil;
 import de.evoal.languages.model.ddl.dsl.DataDescriptionLanguageStandaloneSetup;
+import de.evoal.languages.model.ddl.impl.DdlPackageImpl;
 import de.evoal.languages.model.dl.dsl.DefinitionLanguageStandaloneSetup;
+import de.evoal.languages.model.dl.impl.DlPackageImpl;
 import de.evoal.languages.model.ol.OptimisationModel;
 import de.evoal.languages.model.ol.dsl.OptimisationLanguageStandaloneSetup;
 import de.evoal.languages.model.ol.impl.OLPackageImpl;
@@ -29,7 +32,11 @@ import java.io.File;
 public class OptimisationModelLoader {
     @Inject
     private Blackboard board;
+
     private OptimisationModel model;
+
+    @Inject
+    private ResourceSetUtil setValidation;
 
     public void load(final @Observes BlackboardEntry entry) {
         if(!entry.isSame(CoreBlackboardEntries.OPTIMISATION_CONFIGURATION_FILE)) {
@@ -48,7 +55,7 @@ public class OptimisationModelLoader {
         initializeEMF();
 
         final Injector ealInjector = new OptimisationLanguageStandaloneSetup().createInjectorAndDoEMFRegistration();
-        // do not remove the following line even if the injector is not used. Otherwise, parsing eal files breaks.
+        // do not remove the following line even if the injector is not used. Otherwise, parsing ol files breaks.
         final Injector idlInjector = new DefinitionLanguageStandaloneSetup().createInjectorAndDoEMFRegistration();
 
         final XtextResourceSet resourceSet = ealInjector.getInstance(XtextResourceSet.class);
@@ -64,22 +71,7 @@ public class OptimisationModelLoader {
             final Resource resource = resourceSet.getResource(modelURI, true);
             resource.load(resourceSet.getLoadOptions());
 
-            resourceSet.getResources()
-                       .forEach(EcoreUtil::resolveAll);
-            if(!resource.getErrors().isEmpty()) {
-                for(Resource.Diagnostic diagnostic : resource.getErrors()) {
-                    log.error("Error while processing rule '{}': {}", configurationFile, diagnostic);
-                }
-            }
-            if(!resource.getWarnings().isEmpty()) {
-                for(Resource.Diagnostic diagnostic : resource.getWarnings()) {
-                    log.error("Warning while processing rule '{}': {}", configurationFile, diagnostic);
-                }
-            }
-
-            if(!resource.getErrors().isEmpty()) {
-                throw new IllegalArgumentException("EAL file contains errors. Please fix the file.");
-            }
+            setValidation.checkResourceErrors(resourceSet);
 
             model = (OptimisationModel) resource.getContents().get(0);
             board.bind(CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, model);
@@ -93,8 +85,11 @@ public class OptimisationModelLoader {
      */
     private void initializeEMF() {
         OLPackageImpl.init();
+        DlPackageImpl.init();
+        DdlPackageImpl.init();
 
         OptimisationLanguageStandaloneSetup.doSetup();
+        DefinitionLanguageStandaloneSetup.doSetup();
         DataDescriptionLanguageStandaloneSetup.doSetup();
     }
 

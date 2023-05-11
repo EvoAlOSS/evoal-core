@@ -20,10 +20,10 @@ module de.evoal.core.optimisation {
     	'search-space' : array data;
 
 		/**
-		 * An optional optimisation function if known that maps between the
-		 *   search and the optimisation space.
+		 * The optimisation function (if known) that maps between search and
+		 *   optimisation space.
 		 */
-        'function' : instance 'optimisation-function';
+        'optimisation-function' : instance 'optimisation-function';
 
 		/**
 		 * Do we have to search for a maximum or a minimum?
@@ -131,9 +131,9 @@ module de.evoal.core.optimisation {
         'initialisation' : instance 'initial-population';
 
         /**
-         * The optimisation function to use.
+         * Extension to the optimisation function defined in corresponding problem.
          */
-        'function' : instance 'fitness-function';
+        'optimisation-function' : instance 'fitness-function';
 
         /**
          * Comparator to use for comparing results of the optimisation function.
@@ -265,6 +265,9 @@ module de.evoal.core.optimisation {
 	 * </mathml>
 	 */
 	type surrogate extends 'fitness-function' {
+	}
+
+	type 'problem-function' extends 'fitness-function' {
 	}
 	
 	/**
