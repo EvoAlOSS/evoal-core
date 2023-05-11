@@ -50,8 +50,7 @@ public class InstanceLanguageProposalProvider extends AbstractInstanceLanguagePr
 			ConfigurableCompletionProposal cp = (ConfigurableCompletionProposal)proposal;
 			final Object b = cp.getAdditionalProposalInfo(new NullProgressMonitor());
 			final String a = proposal.getAdditionalProposalInfo();
-			System.err.println(a);
-			// TODO Auto-generated method stub
+
 			super.accept(proposal);
 		}
 

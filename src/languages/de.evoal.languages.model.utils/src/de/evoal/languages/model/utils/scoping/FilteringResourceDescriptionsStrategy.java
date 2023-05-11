@@ -33,7 +33,6 @@ public class FilteringResourceDescriptionsStrategy extends DefaultResourceDescri
 					return false;
 				}
 				
-				System.err.println("  exporting " + fqnType);
 				acceptor.accept(EObjectDescription.create(fqnType, eObject));
 				return true;
 			}

@@ -51,10 +51,7 @@ public class ClasspathGlobalScopeProvider extends ImportUriGlobalScopeProvider {
 				break;
 			}
 			
-			System.err.println("ImportUriResolver.apply(" + from + ") --> " + result);
-			System.err.println("  File exists:" + new File(result).exists());
 			if(new File(result).exists()) {
-				System.err.println("File URI: " + URI.createFileURI(result).scheme()); 
 				return result;
 			} else {
 				return "classpath:/" + result;
@@ -66,28 +63,20 @@ public class ClasspathGlobalScopeProvider extends ImportUriGlobalScopeProvider {
 		
 		public LoggingURICollector(ResourceSet resourceSet, Set<URI> result) {
 			super(resourceSet, result);
-			
-			System.err.println("LoggingUriCollector.LoggingURICollector(" + resourceSet + ", " + result + ")");
 		}
 
 		public URI resolve(String uriAsString) throws IllegalArgumentException {
-			System.err.println("LoggingURICollector.resolve(" + uriAsString + ")");
-			URI uri = super.resolve(uriAsString);
-			return uri;
+			return super.resolve(uriAsString);
 		}
 
 		@Override
 		public void accept(String uriAsString) {
-			if(uriAsString != null) {
-				System.err.println("LoggingURICollector.accept(" + uriAsString + ")");
-			}
 			super.accept(uriAsString);
 		}
 	}
 	
 	@Override
 	protected IAcceptor<String> createURICollector(Resource resource, Set<URI> collectInto) {
-		System.err.println("Create URI collector: " + resource);
 		setImportResolver(new CustomUriResolver());
 
 		ResourceSet resourceSet = resource.getResourceSet();
@@ -97,7 +86,6 @@ public class ClasspathGlobalScopeProvider extends ImportUriGlobalScopeProvider {
 	@Override
 	public ImportUriResolver getImportUriResolver() {
 		final ImportUriResolver resolver = super.getImportUriResolver();
-		System.err.println("Resolver is " + resolver.getClass());
 		if(resolver != null) {
 			resolver.setAttributeName("importedNamespace");
 		}
