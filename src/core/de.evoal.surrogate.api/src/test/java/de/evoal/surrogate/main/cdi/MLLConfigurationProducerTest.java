@@ -64,7 +64,7 @@ public class MLLConfigurationProducerTest {
 
         Assertions.assertNotNull(mlc);
         Assertions.assertEquals(2, mlc.getImports().size());
-        Assertions.assertTrue(mlc.getDefinitions().isEmpty());
+        Assertions.assertEquals(1, mlc.getDefinitions().size());
         Assertions.assertTrue(mlc.getStatements().isEmpty());
     }
 }

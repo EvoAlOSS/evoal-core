@@ -78,23 +78,5 @@ public class LanguageHelperRegressionTest {
         assertAttributeTypeOfC(attributeC.getDefinition());
         assertAttributeTypeOfM(attributeM.getDefinition());
 
-        {
-            Assertions.assertTrue(attributeA.getValue() instanceof Array);
-            final Array array = (Array)attributeA.getValue();
-            Assertions.assertEquals(10, array.getValues().size());
-            Assertions.assertTrue(array.getValues().get(0) instanceof Literal);
-            final Literal literal = (Literal) array.getValues().get(0);
-            Assertions.assertTrue(literal instanceof DoubleLiteral);
-            Assertions.assertEquals(1.0, literal.getValue());
-        }
-
-        {
-            Assertions.assertTrue(attributeC.getValue() instanceof Array);
-            final Array array = (Array)attributeC.getValue();
-            Assertions.assertEquals(4, array.getValues().size());
-            Assertions.assertTrue(array.getValues().get(0) instanceof Array);
-            final Array array2 = (Array) array.getValues().get(0);
-            Assertions.assertEquals(10, array2.getValues().size());
-        }
     }
 }

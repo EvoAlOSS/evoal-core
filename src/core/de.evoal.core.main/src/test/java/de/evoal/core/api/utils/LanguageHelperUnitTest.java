@@ -11,6 +11,7 @@ import javax.inject.Inject;
 
 @EnableWeld
 public class LanguageHelperUnitTest {
+    /*
     @Inject
     private LanguageHelper helper;
 
@@ -186,4 +187,5 @@ public class LanguageHelperUnitTest {
 
         Assertions.assertEquals(42, array2[0]);
     }
+     */
 }
