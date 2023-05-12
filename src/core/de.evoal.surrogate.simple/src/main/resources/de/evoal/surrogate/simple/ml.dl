@@ -1,0 +1,23 @@
+import "definitions" from de.evoal.surrogate.ml;
+
+/**
+ * Simple surrogate functions.
+ */
+module de.evoal.surrogate.simple.ml {
+
+	/**
+	 * An exemplary identity function.
+	 */
+	type identity extends surrogate {
+	}
+	
+	type 'linear-regression' extends surrogate {
+	    intercept : float;
+	    slope : float;
+	}
+	
+	type 'simple-quadratic-regression' extends surrogate {
+	    intercept : float;
+	    slope : float;
+	}
+}
