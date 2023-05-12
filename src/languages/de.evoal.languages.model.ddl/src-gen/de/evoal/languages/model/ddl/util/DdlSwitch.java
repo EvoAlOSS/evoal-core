@@ -69,9 +69,9 @@ public class DdlSwitch<T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case DdlPackage.DATA_DESCRIPTION_MODEL: {
-				DataDescriptionModel dataDescriptionModel = (DataDescriptionModel)theEObject;
-				T result = caseDataDescriptionModel(dataDescriptionModel);
+			case DdlPackage.DATA_DESCRIPTION_MODULE: {
+				DataDescriptionModule dataDescriptionModule = (DataDescriptionModule)theEObject;
+				T result = caseDataDescriptionModule(dataDescriptionModule);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -122,17 +122,17 @@ public class DdlSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Data Description Model</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Data Description Module</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Data Description Model</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Data Description Module</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseDataDescriptionModel(DataDescriptionModel object) {
+	public T caseDataDescriptionModule(DataDescriptionModule object) {
 		return null;
 	}
 

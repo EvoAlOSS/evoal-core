@@ -3,6 +3,7 @@
 package de.evoal.languages.model.mll;
 
 import de.evoal.languages.model.base.StringLiteral;
+
 import org.eclipse.emf.common.util.EList;
 
 /**

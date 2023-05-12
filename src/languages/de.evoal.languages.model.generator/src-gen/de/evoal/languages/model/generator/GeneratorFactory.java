@@ -23,13 +23,13 @@ public interface GeneratorFactory extends EFactory {
 	GeneratorFactory eINSTANCE = de.evoal.languages.model.generator.impl.GeneratorFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>Configuration</em>'.
+	 * Returns a new object of class '<em>Module</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Configuration</em>'.
+	 * @return a new object of class '<em>Module</em>'.
 	 * @generated
 	 */
-	Configuration createConfiguration();
+	GeneratorModule createGeneratorModule();
 
 	/**
 	 * Returns a new object of class '<em>Pipeline Definition</em>'.

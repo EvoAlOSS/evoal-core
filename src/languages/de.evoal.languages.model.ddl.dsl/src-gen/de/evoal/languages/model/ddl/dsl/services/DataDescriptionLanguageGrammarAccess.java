@@ -31,32 +31,30 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 	public class DataDescriptionModelRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.ddl.dsl.DataDescriptionLanguage.DataDescriptionModelRule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cDataDescriptionModelAction_0 = (Action)cGroup.eContents().get(0);
-		private final Assignment cImportsAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cImportsImportRuleParserRuleCall_1_0 = (RuleCall)cImportsAssignment_1.eContents().get(0);
-		private final Keyword cModuleKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cNameAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cNameQualifiedNameParserRuleCall_3_0 = (RuleCall)cNameAssignment_3.eContents().get(0);
-		private final Keyword cLeftCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Assignment cImportsAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cImportsImportRuleParserRuleCall_0_0 = (RuleCall)cImportsAssignment_0.eContents().get(0);
+		private final Keyword cModuleKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cNameQualifiedNameParserRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
+		private final Keyword cLeftCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
+		private final Keyword cTypesKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
+		private final Keyword cColonKeyword_4_1 = (Keyword)cGroup_4.eContents().get(1);
+		private final Assignment cTypesAssignment_4_2 = (Assignment)cGroup_4.eContents().get(2);
+		private final RuleCall cTypesDataTypeDefinitionRuleParserRuleCall_4_2_0 = (RuleCall)cTypesAssignment_4_2.eContents().get(0);
 		private final Group cGroup_5 = (Group)cGroup.eContents().get(5);
-		private final Keyword cTypesKeyword_5_0 = (Keyword)cGroup_5.eContents().get(0);
+		private final Keyword cDataKeyword_5_0 = (Keyword)cGroup_5.eContents().get(0);
 		private final Keyword cColonKeyword_5_1 = (Keyword)cGroup_5.eContents().get(1);
-		private final Assignment cTypesAssignment_5_2 = (Assignment)cGroup_5.eContents().get(2);
-		private final RuleCall cTypesDataTypeDefinitionRuleParserRuleCall_5_2_0 = (RuleCall)cTypesAssignment_5_2.eContents().get(0);
+		private final Assignment cDescriptionsAssignment_5_2 = (Assignment)cGroup_5.eContents().get(2);
+		private final RuleCall cDescriptionsDataDescriptionRuleParserRuleCall_5_2_0 = (RuleCall)cDescriptionsAssignment_5_2.eContents().get(0);
 		private final Group cGroup_6 = (Group)cGroup.eContents().get(6);
-		private final Keyword cDataKeyword_6_0 = (Keyword)cGroup_6.eContents().get(0);
+		private final Keyword cConstraintsKeyword_6_0 = (Keyword)cGroup_6.eContents().get(0);
 		private final Keyword cColonKeyword_6_1 = (Keyword)cGroup_6.eContents().get(1);
-		private final Assignment cDescriptionsAssignment_6_2 = (Assignment)cGroup_6.eContents().get(2);
-		private final RuleCall cDescriptionsDataDescriptionRuleParserRuleCall_6_2_0 = (RuleCall)cDescriptionsAssignment_6_2.eContents().get(0);
-		private final Group cGroup_7 = (Group)cGroup.eContents().get(7);
-		private final Keyword cConstraintsKeyword_7_0 = (Keyword)cGroup_7.eContents().get(0);
-		private final Keyword cColonKeyword_7_1 = (Keyword)cGroup_7.eContents().get(1);
-		private final Assignment cConstraintsAssignment_7_2 = (Assignment)cGroup_7.eContents().get(2);
-		private final RuleCall cConstraintsStatementRuleParserRuleCall_7_2_0 = (RuleCall)cConstraintsAssignment_7_2.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_8 = (Keyword)cGroup.eContents().get(8);
+		private final Assignment cConstraintsAssignment_6_2 = (Assignment)cGroup_6.eContents().get(2);
+		private final RuleCall cConstraintsStatementRuleParserRuleCall_6_2_0 = (RuleCall)cConstraintsAssignment_6_2.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_7 = (Keyword)cGroup.eContents().get(7);
 		
-		//DataDescriptionModelRule returns DataDescriptionModel:
-		//    {DataDescriptionModel}
+		//DataDescriptionModelRule returns DataDescriptionModule:
 		//    (imports += BaseLanguage::ImportRule)*
 		//    'module' name = QualifiedName '{'
 		//        ('types' ':' (types += DataTypeDefinitionRule)* )?
@@ -66,7 +64,6 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{DataDescriptionModel}
 		//(imports += BaseLanguage::ImportRule)*
 		//'module' name = QualifiedName '{'
 		//    ('types' ':' (types += DataTypeDefinitionRule)* )?
@@ -75,74 +72,71 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 		//'}'
 		public Group getGroup() { return cGroup; }
 		
-		//{DataDescriptionModel}
-		public Action getDataDescriptionModelAction_0() { return cDataDescriptionModelAction_0; }
-		
 		//(imports += BaseLanguage::ImportRule)*
-		public Assignment getImportsAssignment_1() { return cImportsAssignment_1; }
+		public Assignment getImportsAssignment_0() { return cImportsAssignment_0; }
 		
 		//BaseLanguage::ImportRule
-		public RuleCall getImportsImportRuleParserRuleCall_1_0() { return cImportsImportRuleParserRuleCall_1_0; }
+		public RuleCall getImportsImportRuleParserRuleCall_0_0() { return cImportsImportRuleParserRuleCall_0_0; }
 		
 		//'module'
-		public Keyword getModuleKeyword_2() { return cModuleKeyword_2; }
+		public Keyword getModuleKeyword_1() { return cModuleKeyword_1; }
 		
 		//name = QualifiedName
-		public Assignment getNameAssignment_3() { return cNameAssignment_3; }
+		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
 		
 		//QualifiedName
-		public RuleCall getNameQualifiedNameParserRuleCall_3_0() { return cNameQualifiedNameParserRuleCall_3_0; }
+		public RuleCall getNameQualifiedNameParserRuleCall_2_0() { return cNameQualifiedNameParserRuleCall_2_0; }
 		
 		//'{'
-		public Keyword getLeftCurlyBracketKeyword_4() { return cLeftCurlyBracketKeyword_4; }
+		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
 		
 		//('types' ':' (types += DataTypeDefinitionRule)* )?
-		public Group getGroup_5() { return cGroup_5; }
+		public Group getGroup_4() { return cGroup_4; }
 		
 		//'types'
-		public Keyword getTypesKeyword_5_0() { return cTypesKeyword_5_0; }
+		public Keyword getTypesKeyword_4_0() { return cTypesKeyword_4_0; }
+		
+		//':'
+		public Keyword getColonKeyword_4_1() { return cColonKeyword_4_1; }
+		
+		//(types += DataTypeDefinitionRule)*
+		public Assignment getTypesAssignment_4_2() { return cTypesAssignment_4_2; }
+		
+		//DataTypeDefinitionRule
+		public RuleCall getTypesDataTypeDefinitionRuleParserRuleCall_4_2_0() { return cTypesDataTypeDefinitionRuleParserRuleCall_4_2_0; }
+		
+		//('data' ':' (descriptions += DataDescriptionRule)* )?
+		public Group getGroup_5() { return cGroup_5; }
+		
+		//'data'
+		public Keyword getDataKeyword_5_0() { return cDataKeyword_5_0; }
 		
 		//':'
 		public Keyword getColonKeyword_5_1() { return cColonKeyword_5_1; }
 		
-		//(types += DataTypeDefinitionRule)*
-		public Assignment getTypesAssignment_5_2() { return cTypesAssignment_5_2; }
+		//(descriptions += DataDescriptionRule)*
+		public Assignment getDescriptionsAssignment_5_2() { return cDescriptionsAssignment_5_2; }
 		
-		//DataTypeDefinitionRule
-		public RuleCall getTypesDataTypeDefinitionRuleParserRuleCall_5_2_0() { return cTypesDataTypeDefinitionRuleParserRuleCall_5_2_0; }
+		//DataDescriptionRule
+		public RuleCall getDescriptionsDataDescriptionRuleParserRuleCall_5_2_0() { return cDescriptionsDataDescriptionRuleParserRuleCall_5_2_0; }
 		
-		//('data' ':' (descriptions += DataDescriptionRule)* )?
+		//('constraints' ':' (constraints += StatementRule)*)?
 		public Group getGroup_6() { return cGroup_6; }
 		
-		//'data'
-		public Keyword getDataKeyword_6_0() { return cDataKeyword_6_0; }
+		//'constraints'
+		public Keyword getConstraintsKeyword_6_0() { return cConstraintsKeyword_6_0; }
 		
 		//':'
 		public Keyword getColonKeyword_6_1() { return cColonKeyword_6_1; }
 		
-		//(descriptions += DataDescriptionRule)*
-		public Assignment getDescriptionsAssignment_6_2() { return cDescriptionsAssignment_6_2; }
-		
-		//DataDescriptionRule
-		public RuleCall getDescriptionsDataDescriptionRuleParserRuleCall_6_2_0() { return cDescriptionsDataDescriptionRuleParserRuleCall_6_2_0; }
-		
-		//('constraints' ':' (constraints += StatementRule)*)?
-		public Group getGroup_7() { return cGroup_7; }
-		
-		//'constraints'
-		public Keyword getConstraintsKeyword_7_0() { return cConstraintsKeyword_7_0; }
-		
-		//':'
-		public Keyword getColonKeyword_7_1() { return cColonKeyword_7_1; }
-		
 		//(constraints += StatementRule)*
-		public Assignment getConstraintsAssignment_7_2() { return cConstraintsAssignment_7_2; }
+		public Assignment getConstraintsAssignment_6_2() { return cConstraintsAssignment_6_2; }
 		
 		//StatementRule
-		public RuleCall getConstraintsStatementRuleParserRuleCall_7_2_0() { return cConstraintsStatementRuleParserRuleCall_7_2_0; }
+		public RuleCall getConstraintsStatementRuleParserRuleCall_6_2_0() { return cConstraintsStatementRuleParserRuleCall_6_2_0; }
 		
 		//'}'
-		public Keyword getRightCurlyBracketKeyword_8() { return cRightCurlyBracketKeyword_8; }
+		public Keyword getRightCurlyBracketKeyword_7() { return cRightCurlyBracketKeyword_7; }
 	}
 	public class DataTypeDefinitionRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.ddl.dsl.DataDescriptionLanguage.DataTypeDefinitionRule");
@@ -655,8 +649,7 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 	}
 
 	
-	//DataDescriptionModelRule returns DataDescriptionModel:
-	//    {DataDescriptionModel}
+	//DataDescriptionModelRule returns DataDescriptionModule:
 	//    (imports += BaseLanguage::ImportRule)*
 	//    'module' name = QualifiedName '{'
 	//        ('types' ':' (types += DataTypeDefinitionRule)* )?

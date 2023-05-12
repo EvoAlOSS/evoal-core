@@ -12,10 +12,11 @@
   <foreignModel>model.ecore</foreignModel>
   <genPackages prefix="Mll" basePackage="de.evoal.languages.model" disposableProviderFactory="true"
       fileExtensions="mlm" ecorePackage="model.ecore#/">
-    <genClasses ecoreClass="model.ecore#//MachineLearningConfiguration">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//MachineLearningConfiguration/imports"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//MachineLearningConfiguration/definitions"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//MachineLearningConfiguration/statements"/>
+    <genClasses ecoreClass="model.ecore#//MachineLearningModule">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//MachineLearningModule/imports"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//MachineLearningModule/definitions"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//MachineLearningModule/statements"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//MachineLearningModule/name"/>
     </genClasses>
     <genClasses ecoreClass="model.ecore#//SurrogateDefinition">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//SurrogateDefinition/name"/>

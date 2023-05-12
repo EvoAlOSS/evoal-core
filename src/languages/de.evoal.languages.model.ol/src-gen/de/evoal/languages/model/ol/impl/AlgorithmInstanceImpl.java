@@ -4,13 +4,13 @@
 package de.evoal.languages.model.ol.impl;
 
 import de.evoal.languages.model.base.Array;
-import de.evoal.languages.model.base.Instance;
 
 import de.evoal.languages.model.base.impl.InstanceImpl;
+
 import de.evoal.languages.model.ol.AlgorithmInstance;
 import de.evoal.languages.model.ol.OLPackage;
-
 import de.evoal.languages.model.ol.ProblemInstance;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
@@ -18,7 +18,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 /**
  * <!-- begin-user-doc -->

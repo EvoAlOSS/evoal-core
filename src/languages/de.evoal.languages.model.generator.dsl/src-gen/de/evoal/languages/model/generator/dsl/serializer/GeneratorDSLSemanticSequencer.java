@@ -42,9 +42,9 @@ import de.evoal.languages.model.base.UnaryAddOrSubtractExpression;
 import de.evoal.languages.model.base.VoidType;
 import de.evoal.languages.model.base.XorExpression;
 import de.evoal.languages.model.generator.ApplyStatement;
-import de.evoal.languages.model.generator.Configuration;
 import de.evoal.languages.model.generator.CounterRange;
 import de.evoal.languages.model.generator.ForStatement;
+import de.evoal.languages.model.generator.GeneratorModule;
 import de.evoal.languages.model.generator.GeneratorPackage;
 import de.evoal.languages.model.generator.PipelineArray;
 import de.evoal.languages.model.generator.PipelineDefinition;
@@ -196,14 +196,14 @@ public class GeneratorDSLSemanticSequencer extends InstanceLanguageSemanticSeque
 			case GeneratorPackage.APPLY_STATEMENT:
 				sequence_ApplyStatementRule(context, (ApplyStatement) semanticObject); 
 				return; 
-			case GeneratorPackage.CONFIGURATION:
-				sequence_ConfigurationRule(context, (Configuration) semanticObject); 
-				return; 
 			case GeneratorPackage.COUNTER_RANGE:
 				sequence_CounterRangeRule(context, (CounterRange) semanticObject); 
 				return; 
 			case GeneratorPackage.FOR_STATEMENT:
 				sequence_ForStatementRule(context, (ForStatement) semanticObject); 
+				return; 
+			case GeneratorPackage.GENERATOR_MODULE:
+				sequence_GeneratorModuleRule(context, (GeneratorModule) semanticObject); 
 				return; 
 			case GeneratorPackage.PIPELINE_ARRAY:
 				sequence_PipelineArrayRule(context, (PipelineArray) semanticObject); 
@@ -242,24 +242,6 @@ public class GeneratorDSLSemanticSequencer extends InstanceLanguageSemanticSeque
 	 * </pre>
 	 */
 	protected void sequence_ApplyStatementRule(ISerializationContext context, ApplyStatement semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * <pre>
-	 * Contexts:
-	 *     ConfigurationRule returns Configuration
-	 *
-	 * Constraint:
-	 *     (
-	 *         (imports+=ImportRule* pipelines+=PipelineDefinitionRule+ statements+=StatementRule+) | 
-	 *         (imports+=ImportRule* statements+=StatementRule+) | 
-	 *         statements+=StatementRule+
-	 *     )?
-	 * </pre>
-	 */
-	protected void sequence_ConfigurationRule(ISerializationContext context, Configuration semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -306,6 +288,20 @@ public class GeneratorDSLSemanticSequencer extends InstanceLanguageSemanticSeque
 	/**
 	 * <pre>
 	 * Contexts:
+	 *     GeneratorModuleRule returns GeneratorModule
+	 *
+	 * Constraint:
+	 *     (imports+=ImportRule* name=QualifiedName pipelines+=PipelineDefinitionRule* statements+=StatementRule*)
+	 * </pre>
+	 */
+	protected void sequence_GeneratorModuleRule(ISerializationContext context, GeneratorModule semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
 	 *     RangeRule returns PipelineArray
 	 *     PipelineArrayRule returns PipelineArray
 	 *
@@ -325,7 +321,7 @@ public class GeneratorDSLSemanticSequencer extends InstanceLanguageSemanticSeque
 	 *     PipelineDefinitionReferenceRule returns PipelineDefinitionReference
 	 *
 	 * Constraint:
-	 *     pipeline=[PipelineDefinition|StringOrId]
+	 *     pipeline=[PipelineDefinition|QualifiedName]
 	 * </pre>
 	 */
 	protected void sequence_PipelineDefinitionReferenceRule(ISerializationContext context, PipelineDefinitionReference semanticObject) {
@@ -334,7 +330,7 @@ public class GeneratorDSLSemanticSequencer extends InstanceLanguageSemanticSeque
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, GeneratorPackage.Literals.PIPELINE_DEFINITION_REFERENCE__PIPELINE));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getPipelineDefinitionReferenceRuleAccess().getPipelinePipelineDefinitionStringOrIdParserRuleCall_1_0_1(), semanticObject.eGet(GeneratorPackage.Literals.PIPELINE_DEFINITION_REFERENCE__PIPELINE, false));
+		feeder.accept(grammarAccess.getPipelineDefinitionReferenceRuleAccess().getPipelinePipelineDefinitionQualifiedNameParserRuleCall_1_0_1(), semanticObject.eGet(GeneratorPackage.Literals.PIPELINE_DEFINITION_REFERENCE__PIPELINE, false));
 		feeder.finish();
 	}
 	

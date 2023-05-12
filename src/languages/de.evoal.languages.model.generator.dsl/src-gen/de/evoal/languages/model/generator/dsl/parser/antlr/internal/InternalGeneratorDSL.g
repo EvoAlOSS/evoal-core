@@ -50,7 +50,7 @@ import de.evoal.languages.model.generator.dsl.services.GeneratorDSLGrammarAccess
 
     @Override
     protected String getFirstRuleName() {
-    	return "ConfigurationRule";
+    	return "GeneratorModuleRule";
    	}
 
    	@Override
@@ -67,15 +67,15 @@ import de.evoal.languages.model.generator.dsl.services.GeneratorDSLGrammarAccess
     }
 }
 
-// Entry rule entryRuleConfigurationRule
-entryRuleConfigurationRule returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getConfigurationRuleRule()); }
-	iv_ruleConfigurationRule=ruleConfigurationRule
-	{ $current=$iv_ruleConfigurationRule.current; }
+// Entry rule entryRuleGeneratorModuleRule
+entryRuleGeneratorModuleRule returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getGeneratorModuleRuleRule()); }
+	iv_ruleGeneratorModuleRule=ruleGeneratorModuleRule
+	{ $current=$iv_ruleGeneratorModuleRule.current; }
 	EOF;
 
-// Rule ConfigurationRule
-ruleConfigurationRule returns [EObject current=null]
+// Rule GeneratorModuleRule
+ruleGeneratorModuleRule returns [EObject current=null]
 @init {
 	enterRule();
 }
@@ -86,12 +86,12 @@ ruleConfigurationRule returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getConfigurationRuleAccess().getImportsImportRuleParserRuleCall_0_0());
+					newCompositeNode(grammarAccess.getGeneratorModuleRuleAccess().getImportsImportRuleParserRuleCall_0_0());
 				}
 				lv_imports_0_0=ruleImportRule
 				{
 					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getConfigurationRuleRule());
+						$current = createModelElementForParent(grammarAccess.getGeneratorModuleRuleRule());
 					}
 					add(
 						$current,
@@ -102,20 +102,47 @@ ruleConfigurationRule returns [EObject current=null]
 				}
 			)
 		)*
+		otherlv_1='module'
+		{
+			newLeafNode(otherlv_1, grammarAccess.getGeneratorModuleRuleAccess().getModuleKeyword_1());
+		}
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getConfigurationRuleAccess().getPipelinesPipelineDefinitionRuleParserRuleCall_1_0());
+					newCompositeNode(grammarAccess.getGeneratorModuleRuleAccess().getNameQualifiedNameParserRuleCall_2_0());
 				}
-				lv_pipelines_1_0=rulePipelineDefinitionRule
+				lv_name_2_0=ruleQualifiedName
 				{
 					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getConfigurationRuleRule());
+						$current = createModelElementForParent(grammarAccess.getGeneratorModuleRuleRule());
+					}
+					set(
+						$current,
+						"name",
+						lv_name_2_0,
+						"de.evoal.languages.model.base.dsl.BaseLanguage.QualifiedName");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		otherlv_3='{'
+		{
+			newLeafNode(otherlv_3, grammarAccess.getGeneratorModuleRuleAccess().getLeftCurlyBracketKeyword_3());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getGeneratorModuleRuleAccess().getPipelinesPipelineDefinitionRuleParserRuleCall_4_0());
+				}
+				lv_pipelines_4_0=rulePipelineDefinitionRule
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getGeneratorModuleRuleRule());
 					}
 					add(
 						$current,
 						"pipelines",
-						lv_pipelines_1_0,
+						lv_pipelines_4_0,
 						"de.evoal.languages.model.generator.dsl.GeneratorDSL.PipelineDefinitionRule");
 					afterParserOrEnumRuleCall();
 				}
@@ -124,22 +151,26 @@ ruleConfigurationRule returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getConfigurationRuleAccess().getStatementsStatementRuleParserRuleCall_2_0());
+					newCompositeNode(grammarAccess.getGeneratorModuleRuleAccess().getStatementsStatementRuleParserRuleCall_5_0());
 				}
-				lv_statements_2_0=ruleStatementRule
+				lv_statements_5_0=ruleStatementRule
 				{
 					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getConfigurationRuleRule());
+						$current = createModelElementForParent(grammarAccess.getGeneratorModuleRuleRule());
 					}
 					add(
 						$current,
 						"statements",
-						lv_statements_2_0,
+						lv_statements_5_0,
 						"de.evoal.languages.model.generator.dsl.GeneratorDSL.StatementRule");
 					afterParserOrEnumRuleCall();
 				}
 			)
 		)*
+		otherlv_6='}'
+		{
+			newLeafNode(otherlv_6, grammarAccess.getGeneratorModuleRuleAccess().getRightCurlyBracketKeyword_6());
+		}
 	)
 ;
 
@@ -798,7 +829,7 @@ rulePipelineDefinitionReferenceRule returns [EObject current=null]
 				{
 					newCompositeNode(grammarAccess.getPipelineDefinitionReferenceRuleAccess().getPipelinePipelineDefinitionCrossReference_1_0());
 				}
-				ruleStringOrId
+				ruleQualifiedName
 				{
 					afterParserOrEnumRuleCall();
 				}

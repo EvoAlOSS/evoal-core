@@ -3,12 +3,13 @@
  */
 package de.evoal.languages.model.ol.impl;
 
-import de.evoal.languages.model.ol.AlgorithmInstance;
-import de.evoal.languages.model.ol.Import;
-import de.evoal.languages.model.ol.OLPackage;
-import de.evoal.languages.model.ol.OptimisationModel;
+import de.evoal.languages.model.base.Import;
 
+import de.evoal.languages.model.ol.AlgorithmInstance;
+import de.evoal.languages.model.ol.OLPackage;
+import de.evoal.languages.model.ol.OptimisationModule;
 import de.evoal.languages.model.ol.ProblemInstance;
+
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -27,20 +28,21 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Optimisation Model</b></em>'.
+ * An implementation of the model object '<em><b>Optimisation Module</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link de.evoal.languages.model.ol.impl.OptimisationModelImpl#getImports <em>Imports</em>}</li>
- *   <li>{@link de.evoal.languages.model.ol.impl.OptimisationModelImpl#getProblem <em>Problem</em>}</li>
- *   <li>{@link de.evoal.languages.model.ol.impl.OptimisationModelImpl#getAlgorithm <em>Algorithm</em>}</li>
+ *   <li>{@link de.evoal.languages.model.ol.impl.OptimisationModuleImpl#getImports <em>Imports</em>}</li>
+ *   <li>{@link de.evoal.languages.model.ol.impl.OptimisationModuleImpl#getProblem <em>Problem</em>}</li>
+ *   <li>{@link de.evoal.languages.model.ol.impl.OptimisationModuleImpl#getAlgorithm <em>Algorithm</em>}</li>
+ *   <li>{@link de.evoal.languages.model.ol.impl.OptimisationModuleImpl#getName <em>Name</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class OptimisationModelImpl extends MinimalEObjectImpl.Container implements OptimisationModel {
+public class OptimisationModuleImpl extends MinimalEObjectImpl.Container implements OptimisationModule {
 	/**
 	 * The cached value of the '{@link #getImports() <em>Imports</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -49,7 +51,7 @@ public class OptimisationModelImpl extends MinimalEObjectImpl.Container implemen
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<de.evoal.languages.model.base.Import> imports;
+	protected EList<Import> imports;
 
 	/**
 	 * The cached value of the '{@link #getProblem() <em>Problem</em>}' containment reference.
@@ -72,11 +74,31 @@ public class OptimisationModelImpl extends MinimalEObjectImpl.Container implemen
 	protected AlgorithmInstance algorithm;
 
 	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected OptimisationModelImpl() {
+	protected OptimisationModuleImpl() {
 		super();
 	}
 
@@ -87,7 +109,7 @@ public class OptimisationModelImpl extends MinimalEObjectImpl.Container implemen
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return OLPackage.Literals.OPTIMISATION_MODEL;
+		return OLPackage.Literals.OPTIMISATION_MODULE;
 	}
 
 	/**
@@ -96,9 +118,9 @@ public class OptimisationModelImpl extends MinimalEObjectImpl.Container implemen
 	 * @generated
 	 */
 	@Override
-	public EList<de.evoal.languages.model.base.Import> getImports() {
+	public EList<Import> getImports() {
 		if (imports == null) {
-			imports = new EObjectContainmentEList<de.evoal.languages.model.base.Import>(de.evoal.languages.model.base.Import.class, this, OLPackage.OPTIMISATION_MODEL__IMPORTS);
+			imports = new EObjectContainmentEList<Import>(Import.class, this, OLPackage.OPTIMISATION_MODULE__IMPORTS);
 		}
 		return imports;
 	}
@@ -122,7 +144,7 @@ public class OptimisationModelImpl extends MinimalEObjectImpl.Container implemen
 		ProblemInstance oldProblem = problem;
 		problem = newProblem;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OLPackage.OPTIMISATION_MODEL__PROBLEM, oldProblem, newProblem);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OLPackage.OPTIMISATION_MODULE__PROBLEM, oldProblem, newProblem);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -138,14 +160,14 @@ public class OptimisationModelImpl extends MinimalEObjectImpl.Container implemen
 		if (newProblem != problem) {
 			NotificationChain msgs = null;
 			if (problem != null)
-				msgs = ((InternalEObject)problem).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OLPackage.OPTIMISATION_MODEL__PROBLEM, null, msgs);
+				msgs = ((InternalEObject)problem).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OLPackage.OPTIMISATION_MODULE__PROBLEM, null, msgs);
 			if (newProblem != null)
-				msgs = ((InternalEObject)newProblem).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - OLPackage.OPTIMISATION_MODEL__PROBLEM, null, msgs);
+				msgs = ((InternalEObject)newProblem).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - OLPackage.OPTIMISATION_MODULE__PROBLEM, null, msgs);
 			msgs = basicSetProblem(newProblem, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OLPackage.OPTIMISATION_MODEL__PROBLEM, newProblem, newProblem));
+			eNotify(new ENotificationImpl(this, Notification.SET, OLPackage.OPTIMISATION_MODULE__PROBLEM, newProblem, newProblem));
 	}
 
 	/**
@@ -167,7 +189,7 @@ public class OptimisationModelImpl extends MinimalEObjectImpl.Container implemen
 		AlgorithmInstance oldAlgorithm = algorithm;
 		algorithm = newAlgorithm;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OLPackage.OPTIMISATION_MODEL__ALGORITHM, oldAlgorithm, newAlgorithm);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OLPackage.OPTIMISATION_MODULE__ALGORITHM, oldAlgorithm, newAlgorithm);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -183,14 +205,37 @@ public class OptimisationModelImpl extends MinimalEObjectImpl.Container implemen
 		if (newAlgorithm != algorithm) {
 			NotificationChain msgs = null;
 			if (algorithm != null)
-				msgs = ((InternalEObject)algorithm).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OLPackage.OPTIMISATION_MODEL__ALGORITHM, null, msgs);
+				msgs = ((InternalEObject)algorithm).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OLPackage.OPTIMISATION_MODULE__ALGORITHM, null, msgs);
 			if (newAlgorithm != null)
-				msgs = ((InternalEObject)newAlgorithm).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - OLPackage.OPTIMISATION_MODEL__ALGORITHM, null, msgs);
+				msgs = ((InternalEObject)newAlgorithm).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - OLPackage.OPTIMISATION_MODULE__ALGORITHM, null, msgs);
 			msgs = basicSetAlgorithm(newAlgorithm, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OLPackage.OPTIMISATION_MODEL__ALGORITHM, newAlgorithm, newAlgorithm));
+			eNotify(new ENotificationImpl(this, Notification.SET, OLPackage.OPTIMISATION_MODULE__ALGORITHM, newAlgorithm, newAlgorithm));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, OLPackage.OPTIMISATION_MODULE__NAME, oldName, name));
 	}
 
 	/**
@@ -201,11 +246,11 @@ public class OptimisationModelImpl extends MinimalEObjectImpl.Container implemen
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case OLPackage.OPTIMISATION_MODEL__IMPORTS:
+			case OLPackage.OPTIMISATION_MODULE__IMPORTS:
 				return ((InternalEList<?>)getImports()).basicRemove(otherEnd, msgs);
-			case OLPackage.OPTIMISATION_MODEL__PROBLEM:
+			case OLPackage.OPTIMISATION_MODULE__PROBLEM:
 				return basicSetProblem(null, msgs);
-			case OLPackage.OPTIMISATION_MODEL__ALGORITHM:
+			case OLPackage.OPTIMISATION_MODULE__ALGORITHM:
 				return basicSetAlgorithm(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -219,12 +264,14 @@ public class OptimisationModelImpl extends MinimalEObjectImpl.Container implemen
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case OLPackage.OPTIMISATION_MODEL__IMPORTS:
+			case OLPackage.OPTIMISATION_MODULE__IMPORTS:
 				return getImports();
-			case OLPackage.OPTIMISATION_MODEL__PROBLEM:
+			case OLPackage.OPTIMISATION_MODULE__PROBLEM:
 				return getProblem();
-			case OLPackage.OPTIMISATION_MODEL__ALGORITHM:
+			case OLPackage.OPTIMISATION_MODULE__ALGORITHM:
 				return getAlgorithm();
+			case OLPackage.OPTIMISATION_MODULE__NAME:
+				return getName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -238,15 +285,18 @@ public class OptimisationModelImpl extends MinimalEObjectImpl.Container implemen
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case OLPackage.OPTIMISATION_MODEL__IMPORTS:
+			case OLPackage.OPTIMISATION_MODULE__IMPORTS:
 				getImports().clear();
-				getImports().addAll((Collection<? extends de.evoal.languages.model.base.Import>)newValue);
+				getImports().addAll((Collection<? extends Import>)newValue);
 				return;
-			case OLPackage.OPTIMISATION_MODEL__PROBLEM:
+			case OLPackage.OPTIMISATION_MODULE__PROBLEM:
 				setProblem((ProblemInstance)newValue);
 				return;
-			case OLPackage.OPTIMISATION_MODEL__ALGORITHM:
+			case OLPackage.OPTIMISATION_MODULE__ALGORITHM:
 				setAlgorithm((AlgorithmInstance)newValue);
+				return;
+			case OLPackage.OPTIMISATION_MODULE__NAME:
+				setName((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -260,14 +310,17 @@ public class OptimisationModelImpl extends MinimalEObjectImpl.Container implemen
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case OLPackage.OPTIMISATION_MODEL__IMPORTS:
+			case OLPackage.OPTIMISATION_MODULE__IMPORTS:
 				getImports().clear();
 				return;
-			case OLPackage.OPTIMISATION_MODEL__PROBLEM:
+			case OLPackage.OPTIMISATION_MODULE__PROBLEM:
 				setProblem((ProblemInstance)null);
 				return;
-			case OLPackage.OPTIMISATION_MODEL__ALGORITHM:
+			case OLPackage.OPTIMISATION_MODULE__ALGORITHM:
 				setAlgorithm((AlgorithmInstance)null);
+				return;
+			case OLPackage.OPTIMISATION_MODULE__NAME:
+				setName(NAME_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -281,14 +334,32 @@ public class OptimisationModelImpl extends MinimalEObjectImpl.Container implemen
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case OLPackage.OPTIMISATION_MODEL__IMPORTS:
+			case OLPackage.OPTIMISATION_MODULE__IMPORTS:
 				return imports != null && !imports.isEmpty();
-			case OLPackage.OPTIMISATION_MODEL__PROBLEM:
+			case OLPackage.OPTIMISATION_MODULE__PROBLEM:
 				return problem != null;
-			case OLPackage.OPTIMISATION_MODEL__ALGORITHM:
+			case OLPackage.OPTIMISATION_MODULE__ALGORITHM:
 				return algorithm != null;
+			case OLPackage.OPTIMISATION_MODULE__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		}
 		return super.eIsSet(featureID);
 	}
 
-} //OptimisationModelImpl
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuilder result = new StringBuilder(super.toString());
+		result.append(" (name: ");
+		result.append(name);
+		result.append(')');
+		return result.toString();
+	}
+
+} //OptimisationModuleImpl

@@ -3,7 +3,7 @@ grammar de.evoal.languages.model.dl.dsl.DefinitionLanguage with de.evoal.languag
 import "https://www.evoal.de/languages/dl/1.0.0"
 
 
-DefinitionModelRule returns DefinitionModel:
+DefinitionModelRule returns DefinitionModule:
 	(imports += ImportRule)*
 	'module' name = QualifiedName '{'
 		((types += TypeDefinitionRule ) | (functions += FunctionDefinitionRule ) | constants += ConstantDefinitionRule)*

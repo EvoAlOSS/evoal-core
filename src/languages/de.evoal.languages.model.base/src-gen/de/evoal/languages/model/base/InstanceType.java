@@ -2,6 +2,7 @@
  */
 package de.evoal.languages.model.base;
 
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Instance Type</b></em>'.

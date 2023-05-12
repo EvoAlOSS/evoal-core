@@ -3,7 +3,9 @@
 package de.evoal.languages.model.mll;
 
 import de.evoal.languages.model.base.Instance;
+
 import de.evoal.languages.model.ddl.DataDescription;
+
 import org.eclipse.emf.common.util.EList;
 
 /**

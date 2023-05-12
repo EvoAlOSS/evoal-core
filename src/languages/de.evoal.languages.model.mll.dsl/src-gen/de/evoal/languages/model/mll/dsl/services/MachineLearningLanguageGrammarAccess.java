@@ -31,48 +31,66 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 	public class MachineLearningConfigurationRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.mll.dsl.MachineLearningLanguage.MachineLearningConfigurationRule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cMachineLearningConfigurationAction_0 = (Action)cGroup.eContents().get(0);
-		private final Assignment cImportsAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cImportsImportRuleParserRuleCall_1_0 = (RuleCall)cImportsAssignment_1.eContents().get(0);
-		private final Assignment cDefinitionsAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cDefinitionsSurrogateDefinitionRuleParserRuleCall_2_0 = (RuleCall)cDefinitionsAssignment_2.eContents().get(0);
-		private final Assignment cStatementsAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cStatementsStatementRuleParserRuleCall_3_0 = (RuleCall)cStatementsAssignment_3.eContents().get(0);
+		private final Assignment cImportsAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cImportsImportRuleParserRuleCall_0_0 = (RuleCall)cImportsAssignment_0.eContents().get(0);
+		private final Keyword cModuleKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cNameQualifiedNameParserRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
+		private final Keyword cLeftCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cDefinitionsAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cDefinitionsSurrogateDefinitionRuleParserRuleCall_4_0 = (RuleCall)cDefinitionsAssignment_4.eContents().get(0);
+		private final Assignment cStatementsAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final RuleCall cStatementsStatementRuleParserRuleCall_5_0 = (RuleCall)cStatementsAssignment_5.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
-		//MachineLearningConfigurationRule returns MachineLearningConfiguration:
-		//    {MachineLearningConfiguration}
+		//MachineLearningConfigurationRule returns MachineLearningModule:
 		//    (imports += ImportRule)*
-		//    (definitions+=SurrogateDefinitionRule)*
-		//    (statements += StatementRule)*
+		//    "module" name = QualifiedName "{"
+		//        (definitions+=SurrogateDefinitionRule)*
+		//        (statements += StatementRule)*
+		//    "}"
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{MachineLearningConfiguration}
 		//(imports += ImportRule)*
-		//(definitions+=SurrogateDefinitionRule)*
-		//(statements += StatementRule)*
+		//"module" name = QualifiedName "{"
+		//    (definitions+=SurrogateDefinitionRule)*
+		//    (statements += StatementRule)*
+		//"}"
 		public Group getGroup() { return cGroup; }
 		
-		//{MachineLearningConfiguration}
-		public Action getMachineLearningConfigurationAction_0() { return cMachineLearningConfigurationAction_0; }
-		
 		//(imports += ImportRule)*
-		public Assignment getImportsAssignment_1() { return cImportsAssignment_1; }
+		public Assignment getImportsAssignment_0() { return cImportsAssignment_0; }
 		
 		//ImportRule
-		public RuleCall getImportsImportRuleParserRuleCall_1_0() { return cImportsImportRuleParserRuleCall_1_0; }
+		public RuleCall getImportsImportRuleParserRuleCall_0_0() { return cImportsImportRuleParserRuleCall_0_0; }
+		
+		//"module"
+		public Keyword getModuleKeyword_1() { return cModuleKeyword_1; }
+		
+		//name = QualifiedName
+		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
+		
+		//QualifiedName
+		public RuleCall getNameQualifiedNameParserRuleCall_2_0() { return cNameQualifiedNameParserRuleCall_2_0; }
+		
+		//"{"
+		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
 		
 		//(definitions+=SurrogateDefinitionRule)*
-		public Assignment getDefinitionsAssignment_2() { return cDefinitionsAssignment_2; }
+		public Assignment getDefinitionsAssignment_4() { return cDefinitionsAssignment_4; }
 		
 		//SurrogateDefinitionRule
-		public RuleCall getDefinitionsSurrogateDefinitionRuleParserRuleCall_2_0() { return cDefinitionsSurrogateDefinitionRuleParserRuleCall_2_0; }
+		public RuleCall getDefinitionsSurrogateDefinitionRuleParserRuleCall_4_0() { return cDefinitionsSurrogateDefinitionRuleParserRuleCall_4_0; }
 		
 		//(statements += StatementRule)*
-		public Assignment getStatementsAssignment_3() { return cStatementsAssignment_3; }
+		public Assignment getStatementsAssignment_5() { return cStatementsAssignment_5; }
 		
 		//StatementRule
-		public RuleCall getStatementsStatementRuleParserRuleCall_3_0() { return cStatementsStatementRuleParserRuleCall_3_0; }
+		public RuleCall getStatementsStatementRuleParserRuleCall_5_0() { return cStatementsStatementRuleParserRuleCall_5_0; }
+		
+		//"}"
+		public Keyword getRightCurlyBracketKeyword_6() { return cRightCurlyBracketKeyword_6; }
 	}
 	public class SurrogateDefinitionRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.mll.dsl.MachineLearningLanguage.SurrogateDefinitionRule");
@@ -791,11 +809,12 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 	}
 
 	
-	//MachineLearningConfigurationRule returns MachineLearningConfiguration:
-	//    {MachineLearningConfiguration}
+	//MachineLearningConfigurationRule returns MachineLearningModule:
 	//    (imports += ImportRule)*
-	//    (definitions+=SurrogateDefinitionRule)*
-	//    (statements += StatementRule)*
+	//    "module" name = QualifiedName "{"
+	//        (definitions+=SurrogateDefinitionRule)*
+	//        (statements += StatementRule)*
+	//    "}"
 	//;
 	public MachineLearningConfigurationRuleElements getMachineLearningConfigurationRuleAccess() {
 		return pMachineLearningConfigurationRule;

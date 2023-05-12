@@ -47,7 +47,7 @@ import de.evoal.languages.model.instance.InstancePackage;
 import de.evoal.languages.model.instance.dsl.serializer.InstanceLanguageSemanticSequencer;
 import de.evoal.languages.model.ol.AlgorithmInstance;
 import de.evoal.languages.model.ol.OLPackage;
-import de.evoal.languages.model.ol.OptimisationModel;
+import de.evoal.languages.model.ol.OptimisationModule;
 import de.evoal.languages.model.ol.ProblemInstance;
 import de.evoal.languages.model.ol.dsl.services.OptimisationLanguageGrammarAccess;
 import java.util.Set;
@@ -195,8 +195,8 @@ public class OptimisationLanguageSemanticSequencer extends InstanceLanguageSeman
 			case OLPackage.ALGORITHM_INSTANCE:
 				sequence_AlgorithmInstanceRule(context, (AlgorithmInstance) semanticObject); 
 				return; 
-			case OLPackage.OPTIMISATION_MODEL:
-				sequence_OptimisationModelRule(context, (OptimisationModel) semanticObject); 
+			case OLPackage.OPTIMISATION_MODULE:
+				sequence_OptimisationModelRule(context, (OptimisationModule) semanticObject); 
 				return; 
 			case OLPackage.PROBLEM_INSTANCE:
 				sequence_ProblemRule(context, (ProblemInstance) semanticObject); 
@@ -223,17 +223,13 @@ public class OptimisationLanguageSemanticSequencer extends InstanceLanguageSeman
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     OptimisationModelRule returns OptimisationModel
+	 *     OptimisationModelRule returns OptimisationModule
 	 *
 	 * Constraint:
-	 *     (
-	 *         (imports+=ImportRule* problem=ProblemRule algorithm=AlgorithmInstanceRule) | 
-	 *         (imports+=ImportRule* algorithm=AlgorithmInstanceRule) | 
-	 *         algorithm=AlgorithmInstanceRule
-	 *     )?
+	 *     (imports+=ImportRule* name=QualifiedName problem=ProblemRule? algorithm=AlgorithmInstanceRule?)
 	 * </pre>
 	 */
-	protected void sequence_OptimisationModelRule(ISerializationContext context, OptimisationModel semanticObject) {
+	protected void sequence_OptimisationModelRule(ISerializationContext context, OptimisationModule semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

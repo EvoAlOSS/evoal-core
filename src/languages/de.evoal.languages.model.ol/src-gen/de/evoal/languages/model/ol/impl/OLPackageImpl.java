@@ -12,9 +12,9 @@ import de.evoal.languages.model.instance.InstancePackage;
 import de.evoal.languages.model.ol.AlgorithmInstance;
 import de.evoal.languages.model.ol.OLFactory;
 import de.evoal.languages.model.ol.OLPackage;
-import de.evoal.languages.model.ol.OptimisationModel;
-
+import de.evoal.languages.model.ol.OptimisationModule;
 import de.evoal.languages.model.ol.ProblemInstance;
+
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
@@ -34,7 +34,7 @@ public class OLPackageImpl extends EPackageImpl implements OLPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass optimisationModelEClass = null;
+	private EClass optimisationModuleEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -121,8 +121,8 @@ public class OLPackageImpl extends EPackageImpl implements OLPackage {
 	 * @generated
 	 */
 	@Override
-	public EClass getOptimisationModel() {
-		return optimisationModelEClass;
+	public EClass getOptimisationModule() {
+		return optimisationModuleEClass;
 	}
 
 	/**
@@ -131,8 +131,8 @@ public class OLPackageImpl extends EPackageImpl implements OLPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getOptimisationModel_Imports() {
-		return (EReference)optimisationModelEClass.getEStructuralFeatures().get(0);
+	public EReference getOptimisationModule_Imports() {
+		return (EReference)optimisationModuleEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -141,8 +141,8 @@ public class OLPackageImpl extends EPackageImpl implements OLPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getOptimisationModel_Problem() {
-		return (EReference)optimisationModelEClass.getEStructuralFeatures().get(1);
+	public EReference getOptimisationModule_Problem() {
+		return (EReference)optimisationModuleEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -151,8 +151,18 @@ public class OLPackageImpl extends EPackageImpl implements OLPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getOptimisationModel_Algorithm() {
-		return (EReference)optimisationModelEClass.getEStructuralFeatures().get(2);
+	public EReference getOptimisationModule_Algorithm() {
+		return (EReference)optimisationModuleEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getOptimisationModule_Name() {
+		return (EAttribute)optimisationModuleEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -244,10 +254,11 @@ public class OLPackageImpl extends EPackageImpl implements OLPackage {
 		isCreated = true;
 
 		// Create classes and their features
-		optimisationModelEClass = createEClass(OPTIMISATION_MODEL);
-		createEReference(optimisationModelEClass, OPTIMISATION_MODEL__IMPORTS);
-		createEReference(optimisationModelEClass, OPTIMISATION_MODEL__PROBLEM);
-		createEReference(optimisationModelEClass, OPTIMISATION_MODEL__ALGORITHM);
+		optimisationModuleEClass = createEClass(OPTIMISATION_MODULE);
+		createEReference(optimisationModuleEClass, OPTIMISATION_MODULE__IMPORTS);
+		createEReference(optimisationModuleEClass, OPTIMISATION_MODULE__PROBLEM);
+		createEReference(optimisationModuleEClass, OPTIMISATION_MODULE__ALGORITHM);
+		createEAttribute(optimisationModuleEClass, OPTIMISATION_MODULE__NAME);
 
 		problemInstanceEClass = createEClass(PROBLEM_INSTANCE);
 		createEAttribute(problemInstanceEClass, PROBLEM_INSTANCE__NAME);
@@ -293,10 +304,11 @@ public class OLPackageImpl extends EPackageImpl implements OLPackage {
 		algorithmInstanceEClass.getESuperTypes().add(theBasePackage.getInstance());
 
 		// Initialize classes and features; add operations and parameters
-		initEClass(optimisationModelEClass, OptimisationModel.class, "OptimisationModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getOptimisationModel_Imports(), theBasePackage.getImport(), null, "imports", null, 0, -1, OptimisationModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getOptimisationModel_Problem(), this.getProblemInstance(), null, "problem", null, 0, 1, OptimisationModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getOptimisationModel_Algorithm(), this.getAlgorithmInstance(), null, "algorithm", null, 0, 1, OptimisationModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(optimisationModuleEClass, OptimisationModule.class, "OptimisationModule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getOptimisationModule_Imports(), theBasePackage.getImport(), null, "imports", null, 0, -1, OptimisationModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getOptimisationModule_Problem(), this.getProblemInstance(), null, "problem", null, 0, 1, OptimisationModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getOptimisationModule_Algorithm(), this.getAlgorithmInstance(), null, "algorithm", null, 0, 1, OptimisationModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getOptimisationModule_Name(), ecorePackage.getEString(), "name", null, 1, 1, OptimisationModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(problemInstanceEClass, ProblemInstance.class, "ProblemInstance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getProblemInstance_Name(), ecorePackage.getEString(), "name", null, 1, 1, ProblemInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

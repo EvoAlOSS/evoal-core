@@ -67,9 +67,9 @@ public class DlSwitch<T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case DlPackage.DEFINITION_MODEL: {
-				DefinitionModel definitionModel = (DefinitionModel)theEObject;
-				T result = caseDefinitionModel(definitionModel);
+			case DlPackage.DEFINITION_MODULE: {
+				DefinitionModule definitionModule = (DefinitionModule)theEObject;
+				T result = caseDefinitionModule(definitionModule);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -78,17 +78,17 @@ public class DlSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Definition Model</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Definition Module</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Definition Model</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Definition Module</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseDefinitionModel(DefinitionModel object) {
+	public T caseDefinitionModule(DefinitionModule object) {
 		return null;
 	}
 

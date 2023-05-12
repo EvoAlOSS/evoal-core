@@ -57,7 +57,7 @@ public class DdlFactoryImpl extends EFactoryImpl implements DdlFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case DdlPackage.DATA_DESCRIPTION_MODEL: return createDataDescriptionModel();
+			case DdlPackage.DATA_DESCRIPTION_MODULE: return createDataDescriptionModule();
 			case DdlPackage.DATA_TYPE_DEFINITION: return createDataTypeDefinition();
 			case DdlPackage.TYPED_DATA_DESCRIPTION: return createTypedDataDescription();
 			case DdlPackage.UNTYPED_DATA_DESCRIPTION: return createUntypedDataDescription();
@@ -108,9 +108,9 @@ public class DdlFactoryImpl extends EFactoryImpl implements DdlFactory {
 	 * @generated
 	 */
 	@Override
-	public DataDescriptionModel createDataDescriptionModel() {
-		DataDescriptionModelImpl dataDescriptionModel = new DataDescriptionModelImpl();
-		return dataDescriptionModel;
+	public DataDescriptionModule createDataDescriptionModule() {
+		DataDescriptionModuleImpl dataDescriptionModule = new DataDescriptionModuleImpl();
+		return dataDescriptionModule;
 	}
 
 	/**

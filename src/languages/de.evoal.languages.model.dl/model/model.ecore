@@ -7,7 +7,7 @@
   <eAnnotations source="http://www.eclipse.org/OCL/Import">
     <details key="el" value="platform:/resource/de.evoal.languages.model.base/model/model.ecore#/"/>
   </eAnnotations>
-  <eClassifiers xsi:type="ecore:EClass" name="DefinitionModel">
+  <eClassifiers xsi:type="ecore:EClass" name="DefinitionModule">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Root element of the model allowing to define instances, functions&#xA;and data."/>
     </eAnnotations>

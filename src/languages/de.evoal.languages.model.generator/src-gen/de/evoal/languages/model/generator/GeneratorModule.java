@@ -4,36 +4,38 @@
 package de.evoal.languages.model.generator;
 
 import de.evoal.languages.model.base.Import;
+
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Configuration</b></em>'.
+ * A representation of the model object '<em><b>Module</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link de.evoal.languages.model.generator.Configuration#getImports <em>Imports</em>}</li>
- *   <li>{@link de.evoal.languages.model.generator.Configuration#getPipelines <em>Pipelines</em>}</li>
- *   <li>{@link de.evoal.languages.model.generator.Configuration#getStatements <em>Statements</em>}</li>
+ *   <li>{@link de.evoal.languages.model.generator.GeneratorModule#getImports <em>Imports</em>}</li>
+ *   <li>{@link de.evoal.languages.model.generator.GeneratorModule#getPipelines <em>Pipelines</em>}</li>
+ *   <li>{@link de.evoal.languages.model.generator.GeneratorModule#getStatements <em>Statements</em>}</li>
+ *   <li>{@link de.evoal.languages.model.generator.GeneratorModule#getName <em>Name</em>}</li>
  * </ul>
  *
- * @see de.evoal.languages.model.generator.GeneratorPackage#getConfiguration()
+ * @see de.evoal.languages.model.generator.GeneratorPackage#getGeneratorModule()
  * @model
  * @generated
  */
-public interface Configuration extends EObject {
+public interface GeneratorModule extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Imports</b></em>' containment reference list.
 	 * The list contents are of type {@link de.evoal.languages.model.base.Import}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Imports</em>' containment reference list.
-	 * @see de.evoal.languages.model.generator.GeneratorPackage#getConfiguration_Imports()
+	 * @see de.evoal.languages.model.generator.GeneratorPackage#getGeneratorModule_Imports()
 	 * @model containment="true"
 	 * @generated
 	 */
@@ -45,7 +47,7 @@ public interface Configuration extends EObject {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Pipelines</em>' containment reference list.
-	 * @see de.evoal.languages.model.generator.GeneratorPackage#getConfiguration_Pipelines()
+	 * @see de.evoal.languages.model.generator.GeneratorPackage#getGeneratorModule_Pipelines()
 	 * @model containment="true"
 	 * @generated
 	 */
@@ -57,10 +59,32 @@ public interface Configuration extends EObject {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Statements</em>' containment reference list.
-	 * @see de.evoal.languages.model.generator.GeneratorPackage#getConfiguration_Statements()
+	 * @see de.evoal.languages.model.generator.GeneratorPackage#getGeneratorModule_Statements()
 	 * @model containment="true"
 	 * @generated
 	 */
 	EList<Statement> getStatements();
 
-} // Configuration
+	/**
+	 * Returns the value of the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Name</em>' attribute.
+	 * @see #setName(String)
+	 * @see de.evoal.languages.model.generator.GeneratorPackage#getGeneratorModule_Name()
+	 * @model
+	 * @generated
+	 */
+	String getName();
+
+	/**
+	 * Sets the value of the '{@link de.evoal.languages.model.generator.GeneratorModule#getName <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Name</em>' attribute.
+	 * @see #getName()
+	 * @generated
+	 */
+	void setName(String value);
+
+} // GeneratorModule

@@ -71,8 +71,8 @@ public class DdlAdapterFactory extends AdapterFactoryImpl {
 	protected DdlSwitch<Adapter> modelSwitch =
 		new DdlSwitch<Adapter>() {
 			@Override
-			public Adapter caseDataDescriptionModel(DataDescriptionModel object) {
-				return createDataDescriptionModelAdapter();
+			public Adapter caseDataDescriptionModule(DataDescriptionModule object) {
+				return createDataDescriptionModuleAdapter();
 			}
 			@Override
 			public Adapter caseDataTypeDefinition(DataTypeDefinition object) {
@@ -127,16 +127,16 @@ public class DdlAdapterFactory extends AdapterFactoryImpl {
 
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.ddl.DataDescriptionModel <em>Data Description Model</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.ddl.DataDescriptionModule <em>Data Description Module</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.evoal.languages.model.ddl.DataDescriptionModel
+	 * @see de.evoal.languages.model.ddl.DataDescriptionModule
 	 * @generated
 	 */
-	public Adapter createDataDescriptionModelAdapter() {
+	public Adapter createDataDescriptionModuleAdapter() {
 		return null;
 	}
 

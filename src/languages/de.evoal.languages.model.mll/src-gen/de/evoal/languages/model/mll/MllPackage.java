@@ -3,6 +3,7 @@
 package de.evoal.languages.model.mll;
 
 import de.evoal.languages.model.base.BasePackage;
+
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
@@ -63,14 +64,14 @@ public interface MllPackage extends EPackage {
 	MllPackage eINSTANCE = de.evoal.languages.model.mll.impl.MllPackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.mll.impl.MachineLearningConfigurationImpl <em>Machine Learning Configuration</em>}' class.
+	 * The meta object id for the '{@link de.evoal.languages.model.mll.impl.MachineLearningModuleImpl <em>Machine Learning Module</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.mll.impl.MachineLearningConfigurationImpl
-	 * @see de.evoal.languages.model.mll.impl.MllPackageImpl#getMachineLearningConfiguration()
+	 * @see de.evoal.languages.model.mll.impl.MachineLearningModuleImpl
+	 * @see de.evoal.languages.model.mll.impl.MllPackageImpl#getMachineLearningModule()
 	 * @generated
 	 */
-	int MACHINE_LEARNING_CONFIGURATION = 0;
+	int MACHINE_LEARNING_MODULE = 0;
 
 	/**
 	 * The feature id for the '<em><b>Imports</b></em>' containment reference list.
@@ -79,7 +80,7 @@ public interface MllPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MACHINE_LEARNING_CONFIGURATION__IMPORTS = 0;
+	int MACHINE_LEARNING_MODULE__IMPORTS = 0;
 
 	/**
 	 * The feature id for the '<em><b>Definitions</b></em>' containment reference list.
@@ -88,7 +89,7 @@ public interface MllPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MACHINE_LEARNING_CONFIGURATION__DEFINITIONS = 1;
+	int MACHINE_LEARNING_MODULE__DEFINITIONS = 1;
 
 	/**
 	 * The feature id for the '<em><b>Statements</b></em>' containment reference list.
@@ -97,16 +98,25 @@ public interface MllPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MACHINE_LEARNING_CONFIGURATION__STATEMENTS = 2;
+	int MACHINE_LEARNING_MODULE__STATEMENTS = 2;
 
 	/**
-	 * The number of structural features of the '<em>Machine Learning Configuration</em>' class.
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MACHINE_LEARNING_CONFIGURATION_FEATURE_COUNT = 3;
+	int MACHINE_LEARNING_MODULE__NAME = 3;
+
+	/**
+	 * The number of structural features of the '<em>Machine Learning Module</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MACHINE_LEARNING_MODULE_FEATURE_COUNT = 4;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.mll.impl.SurrogateDefinitionImpl <em>Surrogate Definition</em>}' class.
@@ -570,48 +580,60 @@ public interface MllPackage extends EPackage {
 	 */
 	int STRING_LITERAL_RANGE_FEATURE_COUNT = RANGE_FEATURE_COUNT + 1;
 
-	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.mll.MachineLearningConfiguration <em>Machine Learning Configuration</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Machine Learning Configuration</em>'.
-	 * @see de.evoal.languages.model.mll.MachineLearningConfiguration
-	 * @generated
-	 */
-	EClass getMachineLearningConfiguration();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.mll.MachineLearningConfiguration#getImports <em>Imports</em>}'.
+	 * Returns the meta object for class '{@link de.evoal.languages.model.mll.MachineLearningModule <em>Machine Learning Module</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Machine Learning Module</em>'.
+	 * @see de.evoal.languages.model.mll.MachineLearningModule
+	 * @generated
+	 */
+	EClass getMachineLearningModule();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.mll.MachineLearningModule#getImports <em>Imports</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Imports</em>'.
-	 * @see de.evoal.languages.model.mll.MachineLearningConfiguration#getImports()
-	 * @see #getMachineLearningConfiguration()
+	 * @see de.evoal.languages.model.mll.MachineLearningModule#getImports()
+	 * @see #getMachineLearningModule()
 	 * @generated
 	 */
-	EReference getMachineLearningConfiguration_Imports();
+	EReference getMachineLearningModule_Imports();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.mll.MachineLearningConfiguration#getDefinitions <em>Definitions</em>}'.
+	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.mll.MachineLearningModule#getDefinitions <em>Definitions</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Definitions</em>'.
-	 * @see de.evoal.languages.model.mll.MachineLearningConfiguration#getDefinitions()
-	 * @see #getMachineLearningConfiguration()
+	 * @see de.evoal.languages.model.mll.MachineLearningModule#getDefinitions()
+	 * @see #getMachineLearningModule()
 	 * @generated
 	 */
-	EReference getMachineLearningConfiguration_Definitions();
+	EReference getMachineLearningModule_Definitions();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.mll.MachineLearningConfiguration#getStatements <em>Statements</em>}'.
+	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.mll.MachineLearningModule#getStatements <em>Statements</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Statements</em>'.
-	 * @see de.evoal.languages.model.mll.MachineLearningConfiguration#getStatements()
-	 * @see #getMachineLearningConfiguration()
+	 * @see de.evoal.languages.model.mll.MachineLearningModule#getStatements()
+	 * @see #getMachineLearningModule()
 	 * @generated
 	 */
-	EReference getMachineLearningConfiguration_Statements();
+	EReference getMachineLearningModule_Statements();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.mll.MachineLearningModule#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see de.evoal.languages.model.mll.MachineLearningModule#getName()
+	 * @see #getMachineLearningModule()
+	 * @generated
+	 */
+	EAttribute getMachineLearningModule_Name();
 
 	/**
 	 * Returns the meta object for class '{@link de.evoal.languages.model.mll.SurrogateDefinition <em>Surrogate Definition</em>}'.
@@ -1020,14 +1042,14 @@ public interface MllPackage extends EPackage {
 	 */
 	interface Literals {
 		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.mll.impl.MachineLearningConfigurationImpl <em>Machine Learning Configuration</em>}' class.
+		 * The meta object literal for the '{@link de.evoal.languages.model.mll.impl.MachineLearningModuleImpl <em>Machine Learning Module</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.mll.impl.MachineLearningConfigurationImpl
-		 * @see de.evoal.languages.model.mll.impl.MllPackageImpl#getMachineLearningConfiguration()
+		 * @see de.evoal.languages.model.mll.impl.MachineLearningModuleImpl
+		 * @see de.evoal.languages.model.mll.impl.MllPackageImpl#getMachineLearningModule()
 		 * @generated
 		 */
-		EClass MACHINE_LEARNING_CONFIGURATION = eINSTANCE.getMachineLearningConfiguration();
+		EClass MACHINE_LEARNING_MODULE = eINSTANCE.getMachineLearningModule();
 
 		/**
 		 * The meta object literal for the '<em><b>Imports</b></em>' containment reference list feature.
@@ -1035,7 +1057,7 @@ public interface MllPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference MACHINE_LEARNING_CONFIGURATION__IMPORTS = eINSTANCE.getMachineLearningConfiguration_Imports();
+		EReference MACHINE_LEARNING_MODULE__IMPORTS = eINSTANCE.getMachineLearningModule_Imports();
 
 		/**
 		 * The meta object literal for the '<em><b>Definitions</b></em>' containment reference list feature.
@@ -1043,7 +1065,7 @@ public interface MllPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference MACHINE_LEARNING_CONFIGURATION__DEFINITIONS = eINSTANCE.getMachineLearningConfiguration_Definitions();
+		EReference MACHINE_LEARNING_MODULE__DEFINITIONS = eINSTANCE.getMachineLearningModule_Definitions();
 
 		/**
 		 * The meta object literal for the '<em><b>Statements</b></em>' containment reference list feature.
@@ -1051,7 +1073,15 @@ public interface MllPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference MACHINE_LEARNING_CONFIGURATION__STATEMENTS = eINSTANCE.getMachineLearningConfiguration_Statements();
+		EReference MACHINE_LEARNING_MODULE__STATEMENTS = eINSTANCE.getMachineLearningModule_Statements();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MACHINE_LEARNING_MODULE__NAME = eINSTANCE.getMachineLearningModule_Name();
 
 		/**
 		 * The meta object literal for the '{@link de.evoal.languages.model.mll.impl.SurrogateDefinitionImpl <em>Surrogate Definition</em>}' class.

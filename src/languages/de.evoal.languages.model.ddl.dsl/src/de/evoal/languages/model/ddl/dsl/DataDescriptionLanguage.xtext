@@ -7,8 +7,7 @@ import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 import "https://www.evoal.de/languages/base/1.0.0" as base
 
 
-DataDescriptionModelRule returns DataDescriptionModel: 
-	{DataDescriptionModel}
+DataDescriptionModelRule returns DataDescriptionModule: 
 	(imports += BaseLanguage::ImportRule)*
 	'module' name = QualifiedName '{'
 		('types' ':' (types += DataTypeDefinitionRule)* )?

@@ -15,10 +15,10 @@ import de.evoal.languages.model.generator.dsl.tests.GeneratorDSLInjectorProvider
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.resource.Resource
-import de.evoal.languages.model.generator.Configuration
 import de.evoal.languages.model.ddl.dsl.DataDescriptionLanguageStandaloneSetup
 import de.evoal.languages.model.dl.dsl.DefinitionLanguageStandaloneSetup
 import com.google.inject.Injector
+import de.evoal.languages.model.generator.GeneratorModule
 
 @ExtendWith(InjectionExtension)
 @InjectWith(GeneratorDSLInjectorProvider)
@@ -85,7 +85,7 @@ class AttributeLinkingTest {
                 }
             }
 
-            return resource.getContents().get(0) as Configuration;
+            return resource.getContents().get(0) as GeneratorModule;
         } catch (Exception e) {
             throw new IllegalStateException("Unable to to generator file:" + name, e);
         }

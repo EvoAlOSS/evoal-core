@@ -69,8 +69,8 @@ public class DlAdapterFactory extends AdapterFactoryImpl {
 	protected DlSwitch<Adapter> modelSwitch =
 		new DlSwitch<Adapter>() {
 			@Override
-			public Adapter caseDefinitionModel(DefinitionModel object) {
-				return createDefinitionModelAdapter();
+			public Adapter caseDefinitionModule(DefinitionModule object) {
+				return createDefinitionModuleAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -93,16 +93,16 @@ public class DlAdapterFactory extends AdapterFactoryImpl {
 
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.dl.DefinitionModel <em>Definition Model</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.dl.DefinitionModule <em>Definition Module</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.evoal.languages.model.dl.DefinitionModel
+	 * @see de.evoal.languages.model.dl.DefinitionModule
 	 * @generated
 	 */
-	public Adapter createDefinitionModelAdapter() {
+	public Adapter createDefinitionModuleAdapter() {
 		return null;
 	}
 

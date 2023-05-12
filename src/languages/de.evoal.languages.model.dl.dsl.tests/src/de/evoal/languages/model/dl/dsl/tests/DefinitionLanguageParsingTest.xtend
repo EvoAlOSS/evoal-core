@@ -5,7 +5,7 @@
 package de.evoal.languages.model.dl.dsl.tests
 
 import com.google.inject.Inject
-import de.evoal.languages.model.dl.DefinitionModel
+import de.evoal.languages.model.dl.DefinitionModule
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.extensions.InjectionExtension
 import org.eclipse.xtext.testing.util.ParseHelper
@@ -19,7 +19,7 @@ import org.junit.jupiter.api.Assertions
 @InjectWith(DefinitionLanguageInjectorProvider)
 class DefinitionLanguageParsingTest {
 	@Inject
-	ParseHelper<DefinitionModel> parser
+	ParseHelper<DefinitionModule> parser
 	
 	@Inject ResourceDescriptionsProvider rdp
 	

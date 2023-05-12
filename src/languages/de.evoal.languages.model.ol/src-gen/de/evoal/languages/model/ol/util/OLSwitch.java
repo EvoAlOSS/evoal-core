@@ -6,6 +6,7 @@ package de.evoal.languages.model.ol.util;
 import de.evoal.languages.model.base.Instance;
 import de.evoal.languages.model.base.Literal;
 import de.evoal.languages.model.base.Value;
+
 import de.evoal.languages.model.ol.*;
 
 import org.eclipse.emf.ecore.EObject;
@@ -70,9 +71,9 @@ public class OLSwitch<T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case OLPackage.OPTIMISATION_MODEL: {
-				OptimisationModel optimisationModel = (OptimisationModel)theEObject;
-				T result = caseOptimisationModel(optimisationModel);
+			case OLPackage.OPTIMISATION_MODULE: {
+				OptimisationModule optimisationModule = (OptimisationModule)theEObject;
+				T result = caseOptimisationModule(optimisationModule);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -99,17 +100,17 @@ public class OLSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Optimisation Model</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Optimisation Module</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Optimisation Model</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Optimisation Module</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseOptimisationModel(OptimisationModel object) {
+	public T caseOptimisationModule(OptimisationModule object) {
 		return null;
 	}
 

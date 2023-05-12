@@ -3,14 +3,16 @@
 package de.evoal.languages.model.mll.impl;
 
 import de.evoal.languages.model.base.BasePackage;
+
 import de.evoal.languages.model.ddl.DdlPackage;
+
 import de.evoal.languages.model.instance.InstancePackage;
 
 import de.evoal.languages.model.mll.BlockStatement;
 import de.evoal.languages.model.mll.CallStatement;
 import de.evoal.languages.model.mll.CounterRange;
 import de.evoal.languages.model.mll.ForStatement;
-import de.evoal.languages.model.mll.MachineLearningConfiguration;
+import de.evoal.languages.model.mll.MachineLearningModule;
 import de.evoal.languages.model.mll.MllFactory;
 import de.evoal.languages.model.mll.MllPackage;
 import de.evoal.languages.model.mll.PartialSurrogateFunctionDefinition;
@@ -21,6 +23,7 @@ import de.evoal.languages.model.mll.Statement;
 import de.evoal.languages.model.mll.StringLiteralRange;
 import de.evoal.languages.model.mll.SurrogateDefinition;
 import de.evoal.languages.model.mll.SurrogateLayerDefinition;
+
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
@@ -40,7 +43,7 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass machineLearningConfigurationEClass = null;
+	private EClass machineLearningModuleEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -144,7 +147,6 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 	private MllPackageImpl() {
 		super(eNS_URI, MllFactory.eINSTANCE);
 	}
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -198,8 +200,8 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 	 * @generated
 	 */
 	@Override
-	public EClass getMachineLearningConfiguration() {
-		return machineLearningConfigurationEClass;
+	public EClass getMachineLearningModule() {
+		return machineLearningModuleEClass;
 	}
 
 	/**
@@ -208,8 +210,8 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getMachineLearningConfiguration_Imports() {
-		return (EReference)machineLearningConfigurationEClass.getEStructuralFeatures().get(0);
+	public EReference getMachineLearningModule_Imports() {
+		return (EReference)machineLearningModuleEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -218,8 +220,8 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getMachineLearningConfiguration_Definitions() {
-		return (EReference)machineLearningConfigurationEClass.getEStructuralFeatures().get(1);
+	public EReference getMachineLearningModule_Definitions() {
+		return (EReference)machineLearningModuleEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -228,8 +230,18 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getMachineLearningConfiguration_Statements() {
-		return (EReference)machineLearningConfigurationEClass.getEStructuralFeatures().get(2);
+	public EReference getMachineLearningModule_Statements() {
+		return (EReference)machineLearningModuleEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getMachineLearningModule_Name() {
+		return (EAttribute)machineLearningModuleEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -621,10 +633,11 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 		isCreated = true;
 
 		// Create classes and their features
-		machineLearningConfigurationEClass = createEClass(MACHINE_LEARNING_CONFIGURATION);
-		createEReference(machineLearningConfigurationEClass, MACHINE_LEARNING_CONFIGURATION__IMPORTS);
-		createEReference(machineLearningConfigurationEClass, MACHINE_LEARNING_CONFIGURATION__DEFINITIONS);
-		createEReference(machineLearningConfigurationEClass, MACHINE_LEARNING_CONFIGURATION__STATEMENTS);
+		machineLearningModuleEClass = createEClass(MACHINE_LEARNING_MODULE);
+		createEReference(machineLearningModuleEClass, MACHINE_LEARNING_MODULE__IMPORTS);
+		createEReference(machineLearningModuleEClass, MACHINE_LEARNING_MODULE__DEFINITIONS);
+		createEReference(machineLearningModuleEClass, MACHINE_LEARNING_MODULE__STATEMENTS);
+		createEAttribute(machineLearningModuleEClass, MACHINE_LEARNING_MODULE__NAME);
 
 		surrogateDefinitionEClass = createEClass(SURROGATE_DEFINITION);
 		createEAttribute(surrogateDefinitionEClass, SURROGATE_DEFINITION__NAME);
@@ -716,10 +729,11 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 		stringLiteralRangeEClass.getESuperTypes().add(this.getRange());
 
 		// Initialize classes and features; add operations and parameters
-		initEClass(machineLearningConfigurationEClass, MachineLearningConfiguration.class, "MachineLearningConfiguration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getMachineLearningConfiguration_Imports(), theBasePackage.getImport(), null, "imports", null, 0, -1, MachineLearningConfiguration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEReference(getMachineLearningConfiguration_Definitions(), this.getSurrogateDefinition(), null, "definitions", null, 0, -1, MachineLearningConfiguration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEReference(getMachineLearningConfiguration_Statements(), this.getStatement(), null, "statements", null, 0, -1, MachineLearningConfiguration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEClass(machineLearningModuleEClass, MachineLearningModule.class, "MachineLearningModule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getMachineLearningModule_Imports(), theBasePackage.getImport(), null, "imports", null, 0, -1, MachineLearningModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getMachineLearningModule_Definitions(), this.getSurrogateDefinition(), null, "definitions", null, 0, -1, MachineLearningModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getMachineLearningModule_Statements(), this.getStatement(), null, "statements", null, 0, -1, MachineLearningModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEAttribute(getMachineLearningModule_Name(), ecorePackage.getEString(), "name", null, 1, 1, MachineLearningModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(surrogateDefinitionEClass, SurrogateDefinition.class, "SurrogateDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getSurrogateDefinition_Name(), ecorePackage.getEString(), "name", null, 1, 1, SurrogateDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -807,19 +821,19 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 	protected void createCollectionAnnotations() {
 		String source = "http://www.eclipse.org/OCL/Collection";
 		addAnnotation
-		  (getMachineLearningConfiguration_Imports(),
+		  (getMachineLearningModule_Imports(),
 		   source,
 		   new String[] {
 			   "nullFree", "false"
 		   });
 		addAnnotation
-		  (getMachineLearningConfiguration_Definitions(),
+		  (getMachineLearningModule_Definitions(),
 		   source,
 		   new String[] {
 			   "nullFree", "false"
 		   });
 		addAnnotation
-		  (getMachineLearningConfiguration_Statements(),
+		  (getMachineLearningModule_Statements(),
 		   source,
 		   new String[] {
 			   "nullFree", "false"

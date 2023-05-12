@@ -57,7 +57,7 @@ public class DlFactoryImpl extends EFactoryImpl implements DlFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case DlPackage.DEFINITION_MODEL: return createDefinitionModel();
+			case DlPackage.DEFINITION_MODULE: return createDefinitionModule();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -69,9 +69,9 @@ public class DlFactoryImpl extends EFactoryImpl implements DlFactory {
 	 * @generated
 	 */
 	@Override
-	public DefinitionModel createDefinitionModel() {
-		DefinitionModelImpl definitionModel = new DefinitionModelImpl();
-		return definitionModel;
+	public DefinitionModule createDefinitionModule() {
+		DefinitionModuleImpl definitionModule = new DefinitionModuleImpl();
+		return definitionModule;
 	}
 
 	/**

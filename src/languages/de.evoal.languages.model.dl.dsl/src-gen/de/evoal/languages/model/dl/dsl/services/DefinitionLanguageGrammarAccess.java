@@ -43,7 +43,7 @@ public class DefinitionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 		private final RuleCall cConstantsConstantDefinitionRuleParserRuleCall_4_2_0 = (RuleCall)cConstantsAssignment_4_2.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
-		//DefinitionModelRule returns DefinitionModel:
+		//DefinitionModelRule returns DefinitionModule:
 		//    (imports += ImportRule)*
 		//    'module' name = QualifiedName '{'
 		//        ((types += TypeDefinitionRule ) | (functions += FunctionDefinitionRule ) | constants += ConstantDefinitionRule)*
@@ -150,7 +150,7 @@ public class DefinitionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 	}
 
 	
-	//DefinitionModelRule returns DefinitionModel:
+	//DefinitionModelRule returns DefinitionModule:
 	//    (imports += ImportRule)*
 	//    'module' name = QualifiedName '{'
 	//        ((types += TypeDefinitionRule ) | (functions += FunctionDefinitionRule ) | constants += ConstantDefinitionRule)*

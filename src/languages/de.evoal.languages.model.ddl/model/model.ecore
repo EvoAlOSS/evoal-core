@@ -6,7 +6,7 @@
     <details key="ecore" value="http://www.eclipse.org/emf/2002/Ecore"/>
     <details key="el" value="platform:/resource/de.evoal.languages.model.base/model/model.ecore#/"/>
   </eAnnotations>
-  <eClassifiers xsi:type="ecore:EClass" name="DataDescriptionModel">
+  <eClassifiers xsi:type="ecore:EClass" name="DataDescriptionModule">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="imports" ordered="false"
         upperBound="-1" eType="ecore:EClass ../../de.evoal.languages.model.base/model/model.ecore#//Import"

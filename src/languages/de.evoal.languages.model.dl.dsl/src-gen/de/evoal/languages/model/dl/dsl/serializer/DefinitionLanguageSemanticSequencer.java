@@ -43,7 +43,7 @@ import de.evoal.languages.model.base.UnaryAddOrSubtractExpression;
 import de.evoal.languages.model.base.VoidType;
 import de.evoal.languages.model.base.XorExpression;
 import de.evoal.languages.model.base.dsl.serializer.BaseLanguageSemanticSequencer;
-import de.evoal.languages.model.dl.DefinitionModel;
+import de.evoal.languages.model.dl.DefinitionModule;
 import de.evoal.languages.model.dl.DlPackage;
 import de.evoal.languages.model.dl.dsl.services.DefinitionLanguageGrammarAccess;
 import java.util.Set;
@@ -182,8 +182,8 @@ public class DefinitionLanguageSemanticSequencer extends BaseLanguageSemanticSeq
 			}
 		else if (epackage == DlPackage.eINSTANCE)
 			switch (semanticObject.eClass().getClassifierID()) {
-			case DlPackage.DEFINITION_MODEL:
-				sequence_DefinitionModelRule(context, (DefinitionModel) semanticObject); 
+			case DlPackage.DEFINITION_MODULE:
+				sequence_DefinitionModelRule(context, (DefinitionModule) semanticObject); 
 				return; 
 			}
 		if (errorAcceptor != null)
@@ -193,13 +193,13 @@ public class DefinitionLanguageSemanticSequencer extends BaseLanguageSemanticSeq
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     DefinitionModelRule returns DefinitionModel
+	 *     DefinitionModelRule returns DefinitionModule
 	 *
 	 * Constraint:
 	 *     (imports+=ImportRule* name=QualifiedName (types+=TypeDefinitionRule | functions+=FunctionDefinitionRule | constants+=ConstantDefinitionRule)*)
 	 * </pre>
 	 */
-	protected void sequence_DefinitionModelRule(ISerializationContext context, DefinitionModel semanticObject) {
+	protected void sequence_DefinitionModelRule(ISerializationContext context, DefinitionModule semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

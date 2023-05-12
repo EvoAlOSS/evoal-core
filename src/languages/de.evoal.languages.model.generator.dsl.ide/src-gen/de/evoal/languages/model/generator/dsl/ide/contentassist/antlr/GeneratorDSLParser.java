@@ -45,7 +45,7 @@ public class GeneratorDSLParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getAddOrSubtractOperatorRuleAccess().getAlternatives(), "rule__AddOrSubtractOperatorRule__Alternatives");
 			builder.put(grammarAccess.getMultiplyDivideModuloOperatorRuleAccess().getAlternatives(), "rule__MultiplyDivideModuloOperatorRule__Alternatives");
 			builder.put(grammarAccess.getFactorRuleAccess().getAlternatives(), "rule__FactorRule__Alternatives");
-			builder.put(grammarAccess.getConfigurationRuleAccess().getGroup(), "rule__ConfigurationRule__Group__0");
+			builder.put(grammarAccess.getGeneratorModuleRuleAccess().getGroup(), "rule__GeneratorModuleRule__Group__0");
 			builder.put(grammarAccess.getPipelineDefinitionRuleAccess().getGroup(), "rule__PipelineDefinitionRule__Group__0");
 			builder.put(grammarAccess.getStepRuleAccess().getGroup(), "rule__StepRule__Group__0");
 			builder.put(grammarAccess.getStepRuleAccess().getGroup_4(), "rule__StepRule__Group_4__0");
@@ -113,9 +113,10 @@ public class GeneratorDSLParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getImportRuleAccess().getGroup(), "rule__ImportRule__Group__0");
 			builder.put(grammarAccess.getQualifiedNameAccess().getGroup(), "rule__QualifiedName__Group__0");
 			builder.put(grammarAccess.getQualifiedNameAccess().getGroup_1(), "rule__QualifiedName__Group_1__0");
-			builder.put(grammarAccess.getConfigurationRuleAccess().getImportsAssignment_0(), "rule__ConfigurationRule__ImportsAssignment_0");
-			builder.put(grammarAccess.getConfigurationRuleAccess().getPipelinesAssignment_1(), "rule__ConfigurationRule__PipelinesAssignment_1");
-			builder.put(grammarAccess.getConfigurationRuleAccess().getStatementsAssignment_2(), "rule__ConfigurationRule__StatementsAssignment_2");
+			builder.put(grammarAccess.getGeneratorModuleRuleAccess().getImportsAssignment_0(), "rule__GeneratorModuleRule__ImportsAssignment_0");
+			builder.put(grammarAccess.getGeneratorModuleRuleAccess().getNameAssignment_2(), "rule__GeneratorModuleRule__NameAssignment_2");
+			builder.put(grammarAccess.getGeneratorModuleRuleAccess().getPipelinesAssignment_4(), "rule__GeneratorModuleRule__PipelinesAssignment_4");
+			builder.put(grammarAccess.getGeneratorModuleRuleAccess().getStatementsAssignment_5(), "rule__GeneratorModuleRule__StatementsAssignment_5");
 			builder.put(grammarAccess.getPipelineDefinitionRuleAccess().getNameAssignment_1(), "rule__PipelineDefinitionRule__NameAssignment_1");
 			builder.put(grammarAccess.getPipelineDefinitionRuleAccess().getStepsAssignment_3(), "rule__PipelineDefinitionRule__StepsAssignment_3");
 			builder.put(grammarAccess.getStepRuleAccess().getInstanceAssignment_3(), "rule__StepRule__InstanceAssignment_3");

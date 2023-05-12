@@ -8,10 +8,11 @@
   <foreignModel>model.ecore</foreignModel>
   <genPackages prefix="OL" basePackage="de.evoal.languages.model" disposableProviderFactory="true"
       fileExtensions="ol" ecorePackage="model.ecore#/">
-    <genClasses ecoreClass="model.ecore#//OptimisationModel">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//OptimisationModel/imports"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//OptimisationModel/problem"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//OptimisationModel/algorithm"/>
+    <genClasses ecoreClass="model.ecore#//OptimisationModule">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//OptimisationModule/imports"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//OptimisationModule/problem"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//OptimisationModule/algorithm"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//OptimisationModule/name"/>
     </genClasses>
     <genClasses ecoreClass="model.ecore#//ProblemInstance">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//ProblemInstance/name"/>

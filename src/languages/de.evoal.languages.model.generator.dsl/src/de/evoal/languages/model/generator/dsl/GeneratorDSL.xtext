@@ -3,11 +3,14 @@ grammar de.evoal.languages.model.generator.dsl.GeneratorDSL with de.evoal.langua
 import "https://www.evoal.de/languages/generator/1.0.0"
 import "https://www.evoal.de/languages/base/1.0.0" as base
 
-ConfigurationRule returns Configuration:
+GeneratorModuleRule returns GeneratorModule:
 	(imports += ImportRule)*
-	(pipelines += PipelineDefinitionRule)*
-
-	(statements	+= StatementRule)*
+	
+	"module" name = QualifiedName "{"
+		(pipelines += PipelineDefinitionRule)*
+	
+		(statements	+= StatementRule)*
+	"}"
 ;
 
 PipelineDefinitionRule returns PipelineDefinition:
@@ -50,7 +53,7 @@ PipelineReferenceRule returns PipelineReference:
 	PipelineDefinitionReferenceRule | VariableReferenceRule;
 	
 PipelineDefinitionReferenceRule returns PipelineDefinitionReference:
-	'pipeline' pipeline = [PipelineDefinition|StringOrId]
+	'pipeline' pipeline = [PipelineDefinition|QualifiedName]
 ;
 
 VariableReferenceRule returns VariableReference:

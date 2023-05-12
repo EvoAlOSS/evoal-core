@@ -6,7 +6,7 @@
     <details key="el" value="platform:/resource/de.evoal.languages.model.base/model/model.ecore#/"/>
     <details key="instance" value="platform:/resource/de.evoal.languages.model.instance/model/model.ecore#/"/>
   </eAnnotations>
-  <eClassifiers xsi:type="ecore:EClass" name="OptimisationModel">
+  <eClassifiers xsi:type="ecore:EClass" name="OptimisationModule">
     <eStructuralFeatures xsi:type="ecore:EReference" name="imports" upperBound="-1"
         eType="ecore:EClass ../../de.evoal.languages.model.base/model/model.ecore#//Import"
         containment="true"/>
@@ -14,6 +14,7 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="algorithm" eType="#//AlgorithmInstance"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ProblemInstance" eSuperTypes="../../de.evoal.languages.model.base/model/model.ecore#//Instance">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

@@ -1757,9 +1757,9 @@ rule__OptimisationModelRule__Group__1__Impl
 	}
 :
 (
-	{ before(grammarAccess.getOptimisationModelRuleAccess().getProblemAssignment_1()); }
-	(rule__OptimisationModelRule__ProblemAssignment_1)?
-	{ after(grammarAccess.getOptimisationModelRuleAccess().getProblemAssignment_1()); }
+	{ before(grammarAccess.getOptimisationModelRuleAccess().getModuleKeyword_1()); }
+	'module'
+	{ after(grammarAccess.getOptimisationModelRuleAccess().getModuleKeyword_1()); }
 )
 ;
 finally {
@@ -1772,6 +1772,7 @@ rule__OptimisationModelRule__Group__2
 	}
 :
 	rule__OptimisationModelRule__Group__2__Impl
+	rule__OptimisationModelRule__Group__3
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -1783,9 +1784,116 @@ rule__OptimisationModelRule__Group__2__Impl
 	}
 :
 (
-	{ before(grammarAccess.getOptimisationModelRuleAccess().getAlgorithmAssignment_2()); }
-	(rule__OptimisationModelRule__AlgorithmAssignment_2)?
-	{ after(grammarAccess.getOptimisationModelRuleAccess().getAlgorithmAssignment_2()); }
+	{ before(grammarAccess.getOptimisationModelRuleAccess().getNameAssignment_2()); }
+	(rule__OptimisationModelRule__NameAssignment_2)
+	{ after(grammarAccess.getOptimisationModelRuleAccess().getNameAssignment_2()); }
+)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__OptimisationModelRule__Group__3
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	rule__OptimisationModelRule__Group__3__Impl
+	rule__OptimisationModelRule__Group__4
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__OptimisationModelRule__Group__3__Impl
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+(
+	{ before(grammarAccess.getOptimisationModelRuleAccess().getLeftCurlyBracketKeyword_3()); }
+	'{'
+	{ after(grammarAccess.getOptimisationModelRuleAccess().getLeftCurlyBracketKeyword_3()); }
+)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__OptimisationModelRule__Group__4
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	rule__OptimisationModelRule__Group__4__Impl
+	rule__OptimisationModelRule__Group__5
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__OptimisationModelRule__Group__4__Impl
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+(
+	{ before(grammarAccess.getOptimisationModelRuleAccess().getProblemAssignment_4()); }
+	(rule__OptimisationModelRule__ProblemAssignment_4)?
+	{ after(grammarAccess.getOptimisationModelRuleAccess().getProblemAssignment_4()); }
+)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__OptimisationModelRule__Group__5
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	rule__OptimisationModelRule__Group__5__Impl
+	rule__OptimisationModelRule__Group__6
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__OptimisationModelRule__Group__5__Impl
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+(
+	{ before(grammarAccess.getOptimisationModelRuleAccess().getAlgorithmAssignment_5()); }
+	(rule__OptimisationModelRule__AlgorithmAssignment_5)?
+	{ after(grammarAccess.getOptimisationModelRuleAccess().getAlgorithmAssignment_5()); }
+)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__OptimisationModelRule__Group__6
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	rule__OptimisationModelRule__Group__6__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__OptimisationModelRule__Group__6__Impl
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+(
+	{ before(grammarAccess.getOptimisationModelRuleAccess().getRightCurlyBracketKeyword_6()); }
+	'}'
+	{ after(grammarAccess.getOptimisationModelRuleAccess().getRightCurlyBracketKeyword_6()); }
 )
 ;
 finally {
@@ -5318,30 +5426,45 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__OptimisationModelRule__ProblemAssignment_1
+rule__OptimisationModelRule__NameAssignment_2
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 	(
-		{ before(grammarAccess.getOptimisationModelRuleAccess().getProblemProblemRuleParserRuleCall_1_0()); }
-		ruleProblemRule
-		{ after(grammarAccess.getOptimisationModelRuleAccess().getProblemProblemRuleParserRuleCall_1_0()); }
+		{ before(grammarAccess.getOptimisationModelRuleAccess().getNameQualifiedNameParserRuleCall_2_0()); }
+		ruleQualifiedName
+		{ after(grammarAccess.getOptimisationModelRuleAccess().getNameQualifiedNameParserRuleCall_2_0()); }
 	)
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__OptimisationModelRule__AlgorithmAssignment_2
+rule__OptimisationModelRule__ProblemAssignment_4
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 	(
-		{ before(grammarAccess.getOptimisationModelRuleAccess().getAlgorithmAlgorithmInstanceRuleParserRuleCall_2_0()); }
+		{ before(grammarAccess.getOptimisationModelRuleAccess().getProblemProblemRuleParserRuleCall_4_0()); }
+		ruleProblemRule
+		{ after(grammarAccess.getOptimisationModelRuleAccess().getProblemProblemRuleParserRuleCall_4_0()); }
+	)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__OptimisationModelRule__AlgorithmAssignment_5
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	(
+		{ before(grammarAccess.getOptimisationModelRuleAccess().getAlgorithmAlgorithmInstanceRuleParserRuleCall_5_0()); }
 		ruleAlgorithmInstanceRule
-		{ after(grammarAccess.getOptimisationModelRuleAccess().getAlgorithmAlgorithmInstanceRuleParserRuleCall_2_0()); }
+		{ after(grammarAccess.getOptimisationModelRuleAccess().getAlgorithmAlgorithmInstanceRuleParserRuleCall_5_0()); }
 	)
 ;
 finally {

@@ -6,12 +6,14 @@ import "https://www.evoal.de/languages/ddl/1.0.0" as ddl
 import "https://www.evoal.de/languages/instance/1.0.0" as instance
 import "https://www.evoal.de/languages/base/1.0.0" as base
 
-OptimisationModelRule returns OptimisationModel:
+OptimisationModelRule returns OptimisationModule:
 	(imports += ImportRule)*
-
-	(problem = ProblemRule)?
-
-	(algorithm = AlgorithmInstanceRule)?
+	
+	"module" name = QualifiedName "{"
+		(problem = ProblemRule)?
+	
+		(algorithm = AlgorithmInstanceRule)?
+	"}"
 ;
 
 ProblemRule returns ProblemInstance:

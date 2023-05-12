@@ -10,7 +10,7 @@ import de.evoal.languages.model.base.Array;
 import de.evoal.languages.model.base.Attribute;
 import de.evoal.languages.model.base.Instance;
 import de.evoal.languages.model.base.Literal;
-import de.evoal.languages.model.ol.OptimisationModel;
+import de.evoal.languages.model.ol.OptimisationModule;
 
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
@@ -29,7 +29,7 @@ public class OptimisationLanguageLabelProvider extends DefaultEObjectLabelProvid
 
 	// Labels and icons can be computed like this:
 	
-	public String text(final OptimisationModel model) {
+	public String text(final OptimisationModule model) {
 		return "Optimisation";
 	}
 	

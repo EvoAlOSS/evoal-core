@@ -3,14 +3,18 @@
 package de.evoal.languages.model.mll.impl;
 
 import de.evoal.languages.model.base.impl.InstanceImpl;
+
 import de.evoal.languages.model.ddl.DataDescription;
+
 import de.evoal.languages.model.mll.MllPackage;
 import de.evoal.languages.model.mll.PartialSurrogateFunctionDefinition;
 
 import java.util.Collection;
+
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
+
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
 /**

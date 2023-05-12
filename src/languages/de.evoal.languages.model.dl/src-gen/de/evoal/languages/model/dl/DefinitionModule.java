@@ -14,7 +14,7 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Definition Model</b></em>'.
+ * A representation of the model object '<em><b>Definition Module</b></em>'.
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
@@ -26,25 +26,25 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link de.evoal.languages.model.dl.DefinitionModel#getImports <em>Imports</em>}</li>
- *   <li>{@link de.evoal.languages.model.dl.DefinitionModel#getName <em>Name</em>}</li>
- *   <li>{@link de.evoal.languages.model.dl.DefinitionModel#getTypes <em>Types</em>}</li>
- *   <li>{@link de.evoal.languages.model.dl.DefinitionModel#getFunctions <em>Functions</em>}</li>
- *   <li>{@link de.evoal.languages.model.dl.DefinitionModel#getConstants <em>Constants</em>}</li>
+ *   <li>{@link de.evoal.languages.model.dl.DefinitionModule#getImports <em>Imports</em>}</li>
+ *   <li>{@link de.evoal.languages.model.dl.DefinitionModule#getName <em>Name</em>}</li>
+ *   <li>{@link de.evoal.languages.model.dl.DefinitionModule#getTypes <em>Types</em>}</li>
+ *   <li>{@link de.evoal.languages.model.dl.DefinitionModule#getFunctions <em>Functions</em>}</li>
+ *   <li>{@link de.evoal.languages.model.dl.DefinitionModule#getConstants <em>Constants</em>}</li>
  * </ul>
  *
- * @see de.evoal.languages.model.dl.DlPackage#getDefinitionModel()
+ * @see de.evoal.languages.model.dl.DlPackage#getDefinitionModule()
  * @model
  * @generated
  */
-public interface DefinitionModel extends EObject {
+public interface DefinitionModule extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Imports</b></em>' containment reference list.
 	 * The list contents are of type {@link de.evoal.languages.model.base.Import}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Imports</em>' containment reference list.
-	 * @see de.evoal.languages.model.dl.DlPackage#getDefinitionModel_Imports()
+	 * @see de.evoal.languages.model.dl.DlPackage#getDefinitionModule_Imports()
 	 * @model containment="true"
 	 * @generated
 	 */
@@ -56,14 +56,14 @@ public interface DefinitionModel extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
-	 * @see de.evoal.languages.model.dl.DlPackage#getDefinitionModel_Name()
+	 * @see de.evoal.languages.model.dl.DlPackage#getDefinitionModule_Name()
 	 * @model required="true"
 	 * @generated
 	 */
 	String getName();
 
 	/**
-	 * Sets the value of the '{@link de.evoal.languages.model.dl.DefinitionModel#getName <em>Name</em>}' attribute.
+	 * Sets the value of the '{@link de.evoal.languages.model.dl.DefinitionModule#getName <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Name</em>' attribute.
@@ -81,7 +81,7 @@ public interface DefinitionModel extends EObject {
 	 * List of all available types.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Types</em>' containment reference list.
-	 * @see de.evoal.languages.model.dl.DlPackage#getDefinitionModel_Types()
+	 * @see de.evoal.languages.model.dl.DlPackage#getDefinitionModule_Types()
 	 * @model containment="true" ordered="false"
 	 * @generated
 	 */
@@ -96,7 +96,7 @@ public interface DefinitionModel extends EObject {
 	 * List of all available functions in this definition model.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Functions</em>' containment reference list.
-	 * @see de.evoal.languages.model.dl.DlPackage#getDefinitionModel_Functions()
+	 * @see de.evoal.languages.model.dl.DlPackage#getDefinitionModule_Functions()
 	 * @model containment="true" ordered="false"
 	 *        annotation="http://www.eclipse.org/OCL/Collection nullFree='false'"
 	 * @generated
@@ -109,10 +109,10 @@ public interface DefinitionModel extends EObject {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Constants</em>' containment reference list.
-	 * @see de.evoal.languages.model.dl.DlPackage#getDefinitionModel_Constants()
+	 * @see de.evoal.languages.model.dl.DlPackage#getDefinitionModule_Constants()
 	 * @model containment="true"
 	 * @generated
 	 */
 	EList<ConstantDefinition> getConstants();
 
-} // DefinitionModel
+} // DefinitionModule

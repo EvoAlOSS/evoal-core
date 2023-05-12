@@ -62,14 +62,14 @@ public interface DlPackage extends EPackage {
 	DlPackage eINSTANCE = de.evoal.languages.model.dl.impl.DlPackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.dl.impl.DefinitionModelImpl <em>Definition Model</em>}' class.
+	 * The meta object id for the '{@link de.evoal.languages.model.dl.impl.DefinitionModuleImpl <em>Definition Module</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.dl.impl.DefinitionModelImpl
-	 * @see de.evoal.languages.model.dl.impl.DlPackageImpl#getDefinitionModel()
+	 * @see de.evoal.languages.model.dl.impl.DefinitionModuleImpl
+	 * @see de.evoal.languages.model.dl.impl.DlPackageImpl#getDefinitionModule()
 	 * @generated
 	 */
-	int DEFINITION_MODEL = 0;
+	int DEFINITION_MODULE = 0;
 
 	/**
 	 * The feature id for the '<em><b>Imports</b></em>' containment reference list.
@@ -78,7 +78,7 @@ public interface DlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DEFINITION_MODEL__IMPORTS = 0;
+	int DEFINITION_MODULE__IMPORTS = 0;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -87,7 +87,7 @@ public interface DlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DEFINITION_MODEL__NAME = 1;
+	int DEFINITION_MODULE__NAME = 1;
 
 	/**
 	 * The feature id for the '<em><b>Types</b></em>' containment reference list.
@@ -96,7 +96,7 @@ public interface DlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DEFINITION_MODEL__TYPES = 2;
+	int DEFINITION_MODULE__TYPES = 2;
 
 	/**
 	 * The feature id for the '<em><b>Functions</b></em>' containment reference list.
@@ -105,7 +105,7 @@ public interface DlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DEFINITION_MODEL__FUNCTIONS = 3;
+	int DEFINITION_MODULE__FUNCTIONS = 3;
 
 	/**
 	 * The feature id for the '<em><b>Constants</b></em>' containment reference list.
@@ -114,81 +114,82 @@ public interface DlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DEFINITION_MODEL__CONSTANTS = 4;
+	int DEFINITION_MODULE__CONSTANTS = 4;
 
 	/**
-	 * The number of structural features of the '<em>Definition Model</em>' class.
+	 * The number of structural features of the '<em>Definition Module</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DEFINITION_MODEL_FEATURE_COUNT = 5;
+	int DEFINITION_MODULE_FEATURE_COUNT = 5;
+
 
 	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.dl.DefinitionModel <em>Definition Model</em>}'.
+	 * Returns the meta object for class '{@link de.evoal.languages.model.dl.DefinitionModule <em>Definition Module</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Definition Model</em>'.
-	 * @see de.evoal.languages.model.dl.DefinitionModel
+	 * @return the meta object for class '<em>Definition Module</em>'.
+	 * @see de.evoal.languages.model.dl.DefinitionModule
 	 * @generated
 	 */
-	EClass getDefinitionModel();
+	EClass getDefinitionModule();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.dl.DefinitionModel#getImports <em>Imports</em>}'.
+	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.dl.DefinitionModule#getImports <em>Imports</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Imports</em>'.
-	 * @see de.evoal.languages.model.dl.DefinitionModel#getImports()
-	 * @see #getDefinitionModel()
+	 * @see de.evoal.languages.model.dl.DefinitionModule#getImports()
+	 * @see #getDefinitionModule()
 	 * @generated
 	 */
-	EReference getDefinitionModel_Imports();
+	EReference getDefinitionModule_Imports();
 
 	/**
-	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.dl.DefinitionModel#getName <em>Name</em>}'.
+	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.dl.DefinitionModule#getName <em>Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see de.evoal.languages.model.dl.DefinitionModel#getName()
-	 * @see #getDefinitionModel()
+	 * @see de.evoal.languages.model.dl.DefinitionModule#getName()
+	 * @see #getDefinitionModule()
 	 * @generated
 	 */
-	EAttribute getDefinitionModel_Name();
+	EAttribute getDefinitionModule_Name();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.dl.DefinitionModel#getTypes <em>Types</em>}'.
+	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.dl.DefinitionModule#getTypes <em>Types</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Types</em>'.
-	 * @see de.evoal.languages.model.dl.DefinitionModel#getTypes()
-	 * @see #getDefinitionModel()
+	 * @see de.evoal.languages.model.dl.DefinitionModule#getTypes()
+	 * @see #getDefinitionModule()
 	 * @generated
 	 */
-	EReference getDefinitionModel_Types();
+	EReference getDefinitionModule_Types();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.dl.DefinitionModel#getFunctions <em>Functions</em>}'.
+	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.dl.DefinitionModule#getFunctions <em>Functions</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Functions</em>'.
-	 * @see de.evoal.languages.model.dl.DefinitionModel#getFunctions()
-	 * @see #getDefinitionModel()
+	 * @see de.evoal.languages.model.dl.DefinitionModule#getFunctions()
+	 * @see #getDefinitionModule()
 	 * @generated
 	 */
-	EReference getDefinitionModel_Functions();
+	EReference getDefinitionModule_Functions();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.dl.DefinitionModel#getConstants <em>Constants</em>}'.
+	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.dl.DefinitionModule#getConstants <em>Constants</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Constants</em>'.
-	 * @see de.evoal.languages.model.dl.DefinitionModel#getConstants()
-	 * @see #getDefinitionModel()
+	 * @see de.evoal.languages.model.dl.DefinitionModule#getConstants()
+	 * @see #getDefinitionModule()
 	 * @generated
 	 */
-	EReference getDefinitionModel_Constants();
+	EReference getDefinitionModule_Constants();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -213,14 +214,14 @@ public interface DlPackage extends EPackage {
 	 */
 	interface Literals {
 		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.dl.impl.DefinitionModelImpl <em>Definition Model</em>}' class.
+		 * The meta object literal for the '{@link de.evoal.languages.model.dl.impl.DefinitionModuleImpl <em>Definition Module</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.dl.impl.DefinitionModelImpl
-		 * @see de.evoal.languages.model.dl.impl.DlPackageImpl#getDefinitionModel()
+		 * @see de.evoal.languages.model.dl.impl.DefinitionModuleImpl
+		 * @see de.evoal.languages.model.dl.impl.DlPackageImpl#getDefinitionModule()
 		 * @generated
 		 */
-		EClass DEFINITION_MODEL = eINSTANCE.getDefinitionModel();
+		EClass DEFINITION_MODULE = eINSTANCE.getDefinitionModule();
 
 		/**
 		 * The meta object literal for the '<em><b>Imports</b></em>' containment reference list feature.
@@ -228,7 +229,7 @@ public interface DlPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference DEFINITION_MODEL__IMPORTS = eINSTANCE.getDefinitionModel_Imports();
+		EReference DEFINITION_MODULE__IMPORTS = eINSTANCE.getDefinitionModule_Imports();
 
 		/**
 		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
@@ -236,7 +237,7 @@ public interface DlPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute DEFINITION_MODEL__NAME = eINSTANCE.getDefinitionModel_Name();
+		EAttribute DEFINITION_MODULE__NAME = eINSTANCE.getDefinitionModule_Name();
 
 		/**
 		 * The meta object literal for the '<em><b>Types</b></em>' containment reference list feature.
@@ -244,7 +245,7 @@ public interface DlPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference DEFINITION_MODEL__TYPES = eINSTANCE.getDefinitionModel_Types();
+		EReference DEFINITION_MODULE__TYPES = eINSTANCE.getDefinitionModule_Types();
 
 		/**
 		 * The meta object literal for the '<em><b>Functions</b></em>' containment reference list feature.
@@ -252,7 +253,7 @@ public interface DlPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference DEFINITION_MODEL__FUNCTIONS = eINSTANCE.getDefinitionModel_Functions();
+		EReference DEFINITION_MODULE__FUNCTIONS = eINSTANCE.getDefinitionModule_Functions();
 
 		/**
 		 * The meta object literal for the '<em><b>Constants</b></em>' containment reference list feature.
@@ -260,7 +261,7 @@ public interface DlPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference DEFINITION_MODEL__CONSTANTS = eINSTANCE.getDefinitionModel_Constants();
+		EReference DEFINITION_MODULE__CONSTANTS = eINSTANCE.getDefinitionModule_Constants();
 
 	}
 

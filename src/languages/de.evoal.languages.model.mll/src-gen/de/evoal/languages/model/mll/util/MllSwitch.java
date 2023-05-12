@@ -5,6 +5,7 @@ package de.evoal.languages.model.mll.util;
 import de.evoal.languages.model.base.Instance;
 import de.evoal.languages.model.base.Literal;
 import de.evoal.languages.model.base.Value;
+
 import de.evoal.languages.model.mll.*;
 
 import org.eclipse.emf.ecore.EObject;
@@ -69,9 +70,9 @@ public class MllSwitch<T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case MllPackage.MACHINE_LEARNING_CONFIGURATION: {
-				MachineLearningConfiguration machineLearningConfiguration = (MachineLearningConfiguration)theEObject;
-				T result = caseMachineLearningConfiguration(machineLearningConfiguration);
+			case MllPackage.MACHINE_LEARNING_MODULE: {
+				MachineLearningModule machineLearningModule = (MachineLearningModule)theEObject;
+				T result = caseMachineLearningModule(machineLearningModule);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -161,17 +162,17 @@ public class MllSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Machine Learning Configuration</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Machine Learning Module</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Machine Learning Configuration</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Machine Learning Module</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseMachineLearningConfiguration(MachineLearningConfiguration object) {
+	public T caseMachineLearningModule(MachineLearningModule object) {
 		return null;
 	}
 

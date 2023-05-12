@@ -5,11 +5,9 @@ package de.evoal.languages.model.dl.impl;
 
 import de.evoal.languages.model.base.BasePackage;
 
-import de.evoal.languages.model.dl.DefinitionModel;
+import de.evoal.languages.model.dl.DefinitionModule;
 import de.evoal.languages.model.dl.DlFactory;
 import de.evoal.languages.model.dl.DlPackage;
-import de.evoal.languages.model.dl.Import;
-import de.evoal.languages.model.dl.QualifiedName;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -30,7 +28,7 @@ public class DlPackageImpl extends EPackageImpl implements DlPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass definitionModelEClass = null;
+	private EClass definitionModuleEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -101,8 +99,8 @@ public class DlPackageImpl extends EPackageImpl implements DlPackage {
 	 * @generated
 	 */
 	@Override
-	public EClass getDefinitionModel() {
-		return definitionModelEClass;
+	public EClass getDefinitionModule() {
+		return definitionModuleEClass;
 	}
 
 	/**
@@ -111,8 +109,8 @@ public class DlPackageImpl extends EPackageImpl implements DlPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getDefinitionModel_Imports() {
-		return (EReference)definitionModelEClass.getEStructuralFeatures().get(0);
+	public EReference getDefinitionModule_Imports() {
+		return (EReference)definitionModuleEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -121,8 +119,8 @@ public class DlPackageImpl extends EPackageImpl implements DlPackage {
 	 * @generated
 	 */
 	@Override
-	public EAttribute getDefinitionModel_Name() {
-		return (EAttribute)definitionModelEClass.getEStructuralFeatures().get(1);
+	public EAttribute getDefinitionModule_Name() {
+		return (EAttribute)definitionModuleEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -131,8 +129,8 @@ public class DlPackageImpl extends EPackageImpl implements DlPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getDefinitionModel_Types() {
-		return (EReference)definitionModelEClass.getEStructuralFeatures().get(2);
+	public EReference getDefinitionModule_Types() {
+		return (EReference)definitionModuleEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -141,8 +139,8 @@ public class DlPackageImpl extends EPackageImpl implements DlPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getDefinitionModel_Functions() {
-		return (EReference)definitionModelEClass.getEStructuralFeatures().get(3);
+	public EReference getDefinitionModule_Functions() {
+		return (EReference)definitionModuleEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -151,8 +149,8 @@ public class DlPackageImpl extends EPackageImpl implements DlPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getDefinitionModel_Constants() {
-		return (EReference)definitionModelEClass.getEStructuralFeatures().get(4);
+	public EReference getDefinitionModule_Constants() {
+		return (EReference)definitionModuleEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -184,12 +182,12 @@ public class DlPackageImpl extends EPackageImpl implements DlPackage {
 		isCreated = true;
 
 		// Create classes and their features
-		definitionModelEClass = createEClass(DEFINITION_MODEL);
-		createEReference(definitionModelEClass, DEFINITION_MODEL__IMPORTS);
-		createEAttribute(definitionModelEClass, DEFINITION_MODEL__NAME);
-		createEReference(definitionModelEClass, DEFINITION_MODEL__TYPES);
-		createEReference(definitionModelEClass, DEFINITION_MODEL__FUNCTIONS);
-		createEReference(definitionModelEClass, DEFINITION_MODEL__CONSTANTS);
+		definitionModuleEClass = createEClass(DEFINITION_MODULE);
+		createEReference(definitionModuleEClass, DEFINITION_MODULE__IMPORTS);
+		createEAttribute(definitionModuleEClass, DEFINITION_MODULE__NAME);
+		createEReference(definitionModuleEClass, DEFINITION_MODULE__TYPES);
+		createEReference(definitionModuleEClass, DEFINITION_MODULE__FUNCTIONS);
+		createEReference(definitionModuleEClass, DEFINITION_MODULE__CONSTANTS);
 	}
 
 	/**
@@ -225,12 +223,12 @@ public class DlPackageImpl extends EPackageImpl implements DlPackage {
 		// Add supertypes to classes
 
 		// Initialize classes and features; add operations and parameters
-		initEClass(definitionModelEClass, DefinitionModel.class, "DefinitionModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getDefinitionModel_Imports(), theBasePackage.getImport(), null, "imports", null, 0, -1, DefinitionModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getDefinitionModel_Name(), ecorePackage.getEString(), "name", null, 1, 1, DefinitionModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getDefinitionModel_Types(), theBasePackage.getTypeDefinition(), null, "types", null, 0, -1, DefinitionModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEReference(getDefinitionModel_Functions(), theBasePackage.getFunctionDefinition(), null, "functions", null, 0, -1, DefinitionModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEReference(getDefinitionModel_Constants(), theBasePackage.getConstantDefinition(), null, "constants", null, 0, -1, DefinitionModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(definitionModuleEClass, DefinitionModule.class, "DefinitionModule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getDefinitionModule_Imports(), theBasePackage.getImport(), null, "imports", null, 0, -1, DefinitionModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDefinitionModule_Name(), ecorePackage.getEString(), "name", null, 1, 1, DefinitionModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDefinitionModule_Types(), theBasePackage.getTypeDefinition(), null, "types", null, 0, -1, DefinitionModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getDefinitionModule_Functions(), theBasePackage.getFunctionDefinition(), null, "functions", null, 0, -1, DefinitionModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getDefinitionModule_Constants(), theBasePackage.getConstantDefinition(), null, "constants", null, 0, -1, DefinitionModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);
@@ -267,7 +265,7 @@ public class DlPackageImpl extends EPackageImpl implements DlPackage {
 	protected void createCollectionAnnotations() {
 		String source = "http://www.eclipse.org/OCL/Collection";
 		addAnnotation
-		  (getDefinitionModel_Functions(),
+		  (getDefinitionModule_Functions(),
 		   source,
 		   new String[] {
 			   "nullFree", "false"

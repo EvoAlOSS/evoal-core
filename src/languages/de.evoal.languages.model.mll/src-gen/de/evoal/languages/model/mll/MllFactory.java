@@ -22,13 +22,13 @@ public interface MllFactory extends EFactory {
 	MllFactory eINSTANCE = de.evoal.languages.model.mll.impl.MllFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>Machine Learning Configuration</em>'.
+	 * Returns a new object of class '<em>Machine Learning Module</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Machine Learning Configuration</em>'.
+	 * @return a new object of class '<em>Machine Learning Module</em>'.
 	 * @generated
 	 */
-	MachineLearningConfiguration createMachineLearningConfiguration();
+	MachineLearningModule createMachineLearningModule();
 
 	/**
 	 * Returns a new object of class '<em>Surrogate Definition</em>'.

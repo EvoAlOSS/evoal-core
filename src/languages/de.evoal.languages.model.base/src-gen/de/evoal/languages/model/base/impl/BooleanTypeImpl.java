@@ -4,6 +4,7 @@ package de.evoal.languages.model.base.impl;
 
 import de.evoal.languages.model.base.BasePackage;
 import de.evoal.languages.model.base.BooleanType;
+
 import org.eclipse.emf.ecore.EClass;
 
 /**

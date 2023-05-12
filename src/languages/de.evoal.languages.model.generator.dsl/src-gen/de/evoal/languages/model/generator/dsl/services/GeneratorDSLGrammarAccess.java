@@ -27,26 +27,35 @@ import org.eclipse.xtext.service.GrammarProvider;
 @Singleton
 public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGrammarElementFinder {
 	
-	public class ConfigurationRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.generator.dsl.GeneratorDSL.ConfigurationRule");
+	public class GeneratorModuleRuleElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.generator.dsl.GeneratorDSL.GeneratorModuleRule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cImportsAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cImportsImportRuleParserRuleCall_0_0 = (RuleCall)cImportsAssignment_0.eContents().get(0);
-		private final Assignment cPipelinesAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cPipelinesPipelineDefinitionRuleParserRuleCall_1_0 = (RuleCall)cPipelinesAssignment_1.eContents().get(0);
-		private final Assignment cStatementsAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cStatementsStatementRuleParserRuleCall_2_0 = (RuleCall)cStatementsAssignment_2.eContents().get(0);
+		private final Keyword cModuleKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cNameQualifiedNameParserRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
+		private final Keyword cLeftCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cPipelinesAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cPipelinesPipelineDefinitionRuleParserRuleCall_4_0 = (RuleCall)cPipelinesAssignment_4.eContents().get(0);
+		private final Assignment cStatementsAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final RuleCall cStatementsStatementRuleParserRuleCall_5_0 = (RuleCall)cStatementsAssignment_5.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
-		//ConfigurationRule returns Configuration:
+		//GeneratorModuleRule returns GeneratorModule:
 		//    (imports += ImportRule)*
-		//    (pipelines += PipelineDefinitionRule)*
-		//    (statements    += StatementRule)*
+		//    "module" name = QualifiedName "{"
+		//        (pipelines += PipelineDefinitionRule)*
+		//        (statements    += StatementRule)*
+		//    "}"
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//(imports += ImportRule)*
-		//(pipelines += PipelineDefinitionRule)*
-		//(statements    += StatementRule)*
+		//"module" name = QualifiedName "{"
+		//    (pipelines += PipelineDefinitionRule)*
+		//    (statements    += StatementRule)*
+		//"}"
 		public Group getGroup() { return cGroup; }
 		
 		//(imports += ImportRule)*
@@ -55,17 +64,32 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 		//ImportRule
 		public RuleCall getImportsImportRuleParserRuleCall_0_0() { return cImportsImportRuleParserRuleCall_0_0; }
 		
+		//"module"
+		public Keyword getModuleKeyword_1() { return cModuleKeyword_1; }
+		
+		//name = QualifiedName
+		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
+		
+		//QualifiedName
+		public RuleCall getNameQualifiedNameParserRuleCall_2_0() { return cNameQualifiedNameParserRuleCall_2_0; }
+		
+		//"{"
+		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
+		
 		//(pipelines += PipelineDefinitionRule)*
-		public Assignment getPipelinesAssignment_1() { return cPipelinesAssignment_1; }
+		public Assignment getPipelinesAssignment_4() { return cPipelinesAssignment_4; }
 		
 		//PipelineDefinitionRule
-		public RuleCall getPipelinesPipelineDefinitionRuleParserRuleCall_1_0() { return cPipelinesPipelineDefinitionRuleParserRuleCall_1_0; }
+		public RuleCall getPipelinesPipelineDefinitionRuleParserRuleCall_4_0() { return cPipelinesPipelineDefinitionRuleParserRuleCall_4_0; }
 		
 		//(statements	+= StatementRule)*
-		public Assignment getStatementsAssignment_2() { return cStatementsAssignment_2; }
+		public Assignment getStatementsAssignment_5() { return cStatementsAssignment_5; }
 		
 		//StatementRule
-		public RuleCall getStatementsStatementRuleParserRuleCall_2_0() { return cStatementsStatementRuleParserRuleCall_2_0; }
+		public RuleCall getStatementsStatementRuleParserRuleCall_5_0() { return cStatementsStatementRuleParserRuleCall_5_0; }
+		
+		//"}"
+		public Keyword getRightCurlyBracketKeyword_6() { return cRightCurlyBracketKeyword_6; }
 	}
 	public class PipelineDefinitionRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.generator.dsl.GeneratorDSL.PipelineDefinitionRule");
@@ -468,27 +492,27 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 		private final Keyword cPipelineKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cPipelineAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final CrossReference cPipelinePipelineDefinitionCrossReference_1_0 = (CrossReference)cPipelineAssignment_1.eContents().get(0);
-		private final RuleCall cPipelinePipelineDefinitionStringOrIdParserRuleCall_1_0_1 = (RuleCall)cPipelinePipelineDefinitionCrossReference_1_0.eContents().get(1);
+		private final RuleCall cPipelinePipelineDefinitionQualifiedNameParserRuleCall_1_0_1 = (RuleCall)cPipelinePipelineDefinitionCrossReference_1_0.eContents().get(1);
 		
 		//PipelineDefinitionReferenceRule returns PipelineDefinitionReference:
-		//    'pipeline' pipeline = [PipelineDefinition|StringOrId]
+		//    'pipeline' pipeline = [PipelineDefinition|QualifiedName]
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'pipeline' pipeline = [PipelineDefinition|StringOrId]
+		//'pipeline' pipeline = [PipelineDefinition|QualifiedName]
 		public Group getGroup() { return cGroup; }
 		
 		//'pipeline'
 		public Keyword getPipelineKeyword_0() { return cPipelineKeyword_0; }
 		
-		//pipeline = [PipelineDefinition|StringOrId]
+		//pipeline = [PipelineDefinition|QualifiedName]
 		public Assignment getPipelineAssignment_1() { return cPipelineAssignment_1; }
 		
-		//[PipelineDefinition|StringOrId]
+		//[PipelineDefinition|QualifiedName]
 		public CrossReference getPipelinePipelineDefinitionCrossReference_1_0() { return cPipelinePipelineDefinitionCrossReference_1_0; }
 		
-		//StringOrId
-		public RuleCall getPipelinePipelineDefinitionStringOrIdParserRuleCall_1_0_1() { return cPipelinePipelineDefinitionStringOrIdParserRuleCall_1_0_1; }
+		//QualifiedName
+		public RuleCall getPipelinePipelineDefinitionQualifiedNameParserRuleCall_1_0_1() { return cPipelinePipelineDefinitionQualifiedNameParserRuleCall_1_0_1; }
 	}
 	public class VariableReferenceRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.generator.dsl.GeneratorDSL.VariableReferenceRule");
@@ -596,7 +620,7 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 	}
 	
 	
-	private final ConfigurationRuleElements pConfigurationRule;
+	private final GeneratorModuleRuleElements pGeneratorModuleRule;
 	private final PipelineDefinitionRuleElements pPipelineDefinitionRule;
 	private final StepRuleElements pStepRule;
 	private final StatementRuleElements pStatementRule;
@@ -626,7 +650,7 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 		this.gaInstanceLanguage = gaInstanceLanguage;
 		this.gaBaseLanguage = gaBaseLanguage;
 		this.gaTerminals = gaTerminals;
-		this.pConfigurationRule = new ConfigurationRuleElements();
+		this.pGeneratorModuleRule = new GeneratorModuleRuleElements();
 		this.pPipelineDefinitionRule = new PipelineDefinitionRuleElements();
 		this.pStepRule = new StepRuleElements();
 		this.pStatementRule = new StatementRuleElements();
@@ -675,17 +699,19 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 	}
 
 	
-	//ConfigurationRule returns Configuration:
+	//GeneratorModuleRule returns GeneratorModule:
 	//    (imports += ImportRule)*
-	//    (pipelines += PipelineDefinitionRule)*
-	//    (statements    += StatementRule)*
+	//    "module" name = QualifiedName "{"
+	//        (pipelines += PipelineDefinitionRule)*
+	//        (statements    += StatementRule)*
+	//    "}"
 	//;
-	public ConfigurationRuleElements getConfigurationRuleAccess() {
-		return pConfigurationRule;
+	public GeneratorModuleRuleElements getGeneratorModuleRuleAccess() {
+		return pGeneratorModuleRule;
 	}
 	
-	public ParserRule getConfigurationRuleRule() {
-		return getConfigurationRuleAccess().getRule();
+	public ParserRule getGeneratorModuleRuleRule() {
+		return getGeneratorModuleRuleAccess().getRule();
 	}
 	
 	//PipelineDefinitionRule returns PipelineDefinition:
@@ -784,7 +810,7 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 	}
 	
 	//PipelineDefinitionReferenceRule returns PipelineDefinitionReference:
-	//    'pipeline' pipeline = [PipelineDefinition|StringOrId]
+	//    'pipeline' pipeline = [PipelineDefinition|QualifiedName]
 	//;
 	public PipelineDefinitionReferenceRuleElements getPipelineDefinitionReferenceRuleAccess() {
 		return pPipelineDefinitionReferenceRule;

@@ -49,7 +49,7 @@ import de.evoal.languages.model.mll.BlockStatement;
 import de.evoal.languages.model.mll.CallStatement;
 import de.evoal.languages.model.mll.CounterRange;
 import de.evoal.languages.model.mll.ForStatement;
-import de.evoal.languages.model.mll.MachineLearningConfiguration;
+import de.evoal.languages.model.mll.MachineLearningModule;
 import de.evoal.languages.model.mll.MllPackage;
 import de.evoal.languages.model.mll.PartialSurrogateFunctionDefinition;
 import de.evoal.languages.model.mll.PredictStatement;
@@ -213,8 +213,8 @@ public class MachineLearningLanguageSemanticSequencer extends InstanceLanguageSe
 			case MllPackage.FOR_STATEMENT:
 				sequence_ForStatementRule(context, (ForStatement) semanticObject); 
 				return; 
-			case MllPackage.MACHINE_LEARNING_CONFIGURATION:
-				sequence_MachineLearningConfigurationRule(context, (MachineLearningConfiguration) semanticObject); 
+			case MllPackage.MACHINE_LEARNING_MODULE:
+				sequence_MachineLearningConfigurationRule(context, (MachineLearningModule) semanticObject); 
 				return; 
 			case MllPackage.PARTIAL_SURROGATE_FUNCTION_DEFINITION:
 				sequence_PartialSurrogateFunctionDefinitionRule(context, (PartialSurrogateFunctionDefinition) semanticObject); 
@@ -313,13 +313,13 @@ public class MachineLearningLanguageSemanticSequencer extends InstanceLanguageSe
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     MachineLearningConfigurationRule returns MachineLearningConfiguration
+	 *     MachineLearningConfigurationRule returns MachineLearningModule
 	 *
 	 * Constraint:
-	 *     (imports+=ImportRule* definitions+=SurrogateDefinitionRule* statements+=StatementRule*)
+	 *     (imports+=ImportRule* name=QualifiedName definitions+=SurrogateDefinitionRule* statements+=StatementRule*)
 	 * </pre>
 	 */
-	protected void sequence_MachineLearningConfigurationRule(ISerializationContext context, MachineLearningConfiguration semanticObject) {
+	protected void sequence_MachineLearningConfigurationRule(ISerializationContext context, MachineLearningModule semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

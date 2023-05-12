@@ -1978,9 +1978,9 @@ rule__MachineLearningConfigurationRule__Group__0__Impl
 	}
 :
 (
-	{ before(grammarAccess.getMachineLearningConfigurationRuleAccess().getMachineLearningConfigurationAction_0()); }
-	()
-	{ after(grammarAccess.getMachineLearningConfigurationRuleAccess().getMachineLearningConfigurationAction_0()); }
+	{ before(grammarAccess.getMachineLearningConfigurationRuleAccess().getImportsAssignment_0()); }
+	(rule__MachineLearningConfigurationRule__ImportsAssignment_0)*
+	{ after(grammarAccess.getMachineLearningConfigurationRuleAccess().getImportsAssignment_0()); }
 )
 ;
 finally {
@@ -2005,9 +2005,9 @@ rule__MachineLearningConfigurationRule__Group__1__Impl
 	}
 :
 (
-	{ before(grammarAccess.getMachineLearningConfigurationRuleAccess().getImportsAssignment_1()); }
-	(rule__MachineLearningConfigurationRule__ImportsAssignment_1)*
-	{ after(grammarAccess.getMachineLearningConfigurationRuleAccess().getImportsAssignment_1()); }
+	{ before(grammarAccess.getMachineLearningConfigurationRuleAccess().getModuleKeyword_1()); }
+	'module'
+	{ after(grammarAccess.getMachineLearningConfigurationRuleAccess().getModuleKeyword_1()); }
 )
 ;
 finally {
@@ -2032,9 +2032,9 @@ rule__MachineLearningConfigurationRule__Group__2__Impl
 	}
 :
 (
-	{ before(grammarAccess.getMachineLearningConfigurationRuleAccess().getDefinitionsAssignment_2()); }
-	(rule__MachineLearningConfigurationRule__DefinitionsAssignment_2)*
-	{ after(grammarAccess.getMachineLearningConfigurationRuleAccess().getDefinitionsAssignment_2()); }
+	{ before(grammarAccess.getMachineLearningConfigurationRuleAccess().getNameAssignment_2()); }
+	(rule__MachineLearningConfigurationRule__NameAssignment_2)
+	{ after(grammarAccess.getMachineLearningConfigurationRuleAccess().getNameAssignment_2()); }
 )
 ;
 finally {
@@ -2047,6 +2047,7 @@ rule__MachineLearningConfigurationRule__Group__3
 	}
 :
 	rule__MachineLearningConfigurationRule__Group__3__Impl
+	rule__MachineLearningConfigurationRule__Group__4
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -2058,9 +2059,89 @@ rule__MachineLearningConfigurationRule__Group__3__Impl
 	}
 :
 (
-	{ before(grammarAccess.getMachineLearningConfigurationRuleAccess().getStatementsAssignment_3()); }
-	(rule__MachineLearningConfigurationRule__StatementsAssignment_3)*
-	{ after(grammarAccess.getMachineLearningConfigurationRuleAccess().getStatementsAssignment_3()); }
+	{ before(grammarAccess.getMachineLearningConfigurationRuleAccess().getLeftCurlyBracketKeyword_3()); }
+	'{'
+	{ after(grammarAccess.getMachineLearningConfigurationRuleAccess().getLeftCurlyBracketKeyword_3()); }
+)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__MachineLearningConfigurationRule__Group__4
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	rule__MachineLearningConfigurationRule__Group__4__Impl
+	rule__MachineLearningConfigurationRule__Group__5
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__MachineLearningConfigurationRule__Group__4__Impl
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+(
+	{ before(grammarAccess.getMachineLearningConfigurationRuleAccess().getDefinitionsAssignment_4()); }
+	(rule__MachineLearningConfigurationRule__DefinitionsAssignment_4)*
+	{ after(grammarAccess.getMachineLearningConfigurationRuleAccess().getDefinitionsAssignment_4()); }
+)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__MachineLearningConfigurationRule__Group__5
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	rule__MachineLearningConfigurationRule__Group__5__Impl
+	rule__MachineLearningConfigurationRule__Group__6
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__MachineLearningConfigurationRule__Group__5__Impl
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+(
+	{ before(grammarAccess.getMachineLearningConfigurationRuleAccess().getStatementsAssignment_5()); }
+	(rule__MachineLearningConfigurationRule__StatementsAssignment_5)*
+	{ after(grammarAccess.getMachineLearningConfigurationRuleAccess().getStatementsAssignment_5()); }
+)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__MachineLearningConfigurationRule__Group__6
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	rule__MachineLearningConfigurationRule__Group__6__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__MachineLearningConfigurationRule__Group__6__Impl
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+(
+	{ before(grammarAccess.getMachineLearningConfigurationRuleAccess().getRightCurlyBracketKeyword_6()); }
+	'}'
+	{ after(grammarAccess.getMachineLearningConfigurationRuleAccess().getRightCurlyBracketKeyword_6()); }
 )
 ;
 finally {
@@ -6787,45 +6868,60 @@ finally {
 }
 
 
-rule__MachineLearningConfigurationRule__ImportsAssignment_1
+rule__MachineLearningConfigurationRule__ImportsAssignment_0
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 	(
-		{ before(grammarAccess.getMachineLearningConfigurationRuleAccess().getImportsImportRuleParserRuleCall_1_0()); }
+		{ before(grammarAccess.getMachineLearningConfigurationRuleAccess().getImportsImportRuleParserRuleCall_0_0()); }
 		ruleImportRule
-		{ after(grammarAccess.getMachineLearningConfigurationRuleAccess().getImportsImportRuleParserRuleCall_1_0()); }
+		{ after(grammarAccess.getMachineLearningConfigurationRuleAccess().getImportsImportRuleParserRuleCall_0_0()); }
 	)
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__MachineLearningConfigurationRule__DefinitionsAssignment_2
+rule__MachineLearningConfigurationRule__NameAssignment_2
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 	(
-		{ before(grammarAccess.getMachineLearningConfigurationRuleAccess().getDefinitionsSurrogateDefinitionRuleParserRuleCall_2_0()); }
+		{ before(grammarAccess.getMachineLearningConfigurationRuleAccess().getNameQualifiedNameParserRuleCall_2_0()); }
+		ruleQualifiedName
+		{ after(grammarAccess.getMachineLearningConfigurationRuleAccess().getNameQualifiedNameParserRuleCall_2_0()); }
+	)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__MachineLearningConfigurationRule__DefinitionsAssignment_4
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	(
+		{ before(grammarAccess.getMachineLearningConfigurationRuleAccess().getDefinitionsSurrogateDefinitionRuleParserRuleCall_4_0()); }
 		ruleSurrogateDefinitionRule
-		{ after(grammarAccess.getMachineLearningConfigurationRuleAccess().getDefinitionsSurrogateDefinitionRuleParserRuleCall_2_0()); }
+		{ after(grammarAccess.getMachineLearningConfigurationRuleAccess().getDefinitionsSurrogateDefinitionRuleParserRuleCall_4_0()); }
 	)
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__MachineLearningConfigurationRule__StatementsAssignment_3
+rule__MachineLearningConfigurationRule__StatementsAssignment_5
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 	(
-		{ before(grammarAccess.getMachineLearningConfigurationRuleAccess().getStatementsStatementRuleParserRuleCall_3_0()); }
+		{ before(grammarAccess.getMachineLearningConfigurationRuleAccess().getStatementsStatementRuleParserRuleCall_5_0()); }
 		ruleStatementRule
-		{ after(grammarAccess.getMachineLearningConfigurationRuleAccess().getStatementsStatementRuleParserRuleCall_3_0()); }
+		{ after(grammarAccess.getMachineLearningConfigurationRuleAccess().getStatementsStatementRuleParserRuleCall_5_0()); }
 	)
 ;
 finally {

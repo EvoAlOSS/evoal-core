@@ -23,13 +23,13 @@ public interface OLFactory extends EFactory {
 	OLFactory eINSTANCE = de.evoal.languages.model.ol.impl.OLFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>Optimisation Model</em>'.
+	 * Returns a new object of class '<em>Optimisation Module</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Optimisation Model</em>'.
+	 * @return a new object of class '<em>Optimisation Module</em>'.
 	 * @generated
 	 */
-	OptimisationModel createOptimisationModel();
+	OptimisationModule createOptimisationModule();
 
 	/**
 	 * Returns a new object of class '<em>Problem Instance</em>'.

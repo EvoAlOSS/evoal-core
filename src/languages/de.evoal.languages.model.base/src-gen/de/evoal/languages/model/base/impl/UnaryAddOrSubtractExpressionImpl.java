@@ -5,8 +5,8 @@ package de.evoal.languages.model.base.impl;
 import de.evoal.languages.model.base.AddOrSubtractOperator;
 import de.evoal.languages.model.base.BasePackage;
 import de.evoal.languages.model.base.UnaryAddOrSubtractExpression;
-
 import de.evoal.languages.model.base.Value;
+
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;

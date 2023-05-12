@@ -6,6 +6,7 @@ import de.evoal.languages.model.base.BasePackage;
 import de.evoal.languages.model.base.ConstantDefinition;
 import de.evoal.languages.model.base.Expression;
 import de.evoal.languages.model.base.Type;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 

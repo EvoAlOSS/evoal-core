@@ -5,6 +5,7 @@ package de.evoal.languages.model.mll.util;
 import de.evoal.languages.model.base.Instance;
 import de.evoal.languages.model.base.Literal;
 import de.evoal.languages.model.base.Value;
+
 import de.evoal.languages.model.mll.*;
 
 import org.eclipse.emf.common.notify.Adapter;
@@ -71,8 +72,8 @@ public class MllAdapterFactory extends AdapterFactoryImpl {
 	protected MllSwitch<Adapter> modelSwitch =
 		new MllSwitch<Adapter>() {
 			@Override
-			public Adapter caseMachineLearningConfiguration(MachineLearningConfiguration object) {
-				return createMachineLearningConfigurationAdapter();
+			public Adapter caseMachineLearningModule(MachineLearningModule object) {
+				return createMachineLearningModuleAdapter();
 			}
 			@Override
 			public Adapter caseSurrogateDefinition(SurrogateDefinition object) {
@@ -155,16 +156,16 @@ public class MllAdapterFactory extends AdapterFactoryImpl {
 
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.mll.MachineLearningConfiguration <em>Machine Learning Configuration</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.mll.MachineLearningModule <em>Machine Learning Module</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.evoal.languages.model.mll.MachineLearningConfiguration
+	 * @see de.evoal.languages.model.mll.MachineLearningModule
 	 * @generated
 	 */
-	public Adapter createMachineLearningConfigurationAdapter() {
+	public Adapter createMachineLearningModuleAdapter() {
 		return null;
 	}
 

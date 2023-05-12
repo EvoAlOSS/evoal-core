@@ -6,8 +6,6 @@ package de.evoal.languages.model.ol;
 import de.evoal.languages.model.base.Array;
 import de.evoal.languages.model.base.Instance;
 
-import org.eclipse.emf.ecore.EObject;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Algorithm Instance</b></em>'.

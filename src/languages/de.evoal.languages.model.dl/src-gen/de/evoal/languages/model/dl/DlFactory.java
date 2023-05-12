@@ -23,13 +23,13 @@ public interface DlFactory extends EFactory {
 	DlFactory eINSTANCE = de.evoal.languages.model.dl.impl.DlFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>Definition Model</em>'.
+	 * Returns a new object of class '<em>Definition Module</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Definition Model</em>'.
+	 * @return a new object of class '<em>Definition Module</em>'.
 	 * @generated
 	 */
-	DefinitionModel createDefinitionModel();
+	DefinitionModule createDefinitionModule();
 
 	/**
 	 * Returns the package supported by this factory.

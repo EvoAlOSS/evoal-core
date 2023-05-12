@@ -47,9 +47,9 @@ public class DataDescriptionLanguageParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getMultiplyDivideModuloOperatorRuleAccess().getAlternatives(), "rule__MultiplyDivideModuloOperatorRule__Alternatives");
 			builder.put(grammarAccess.getFactorRuleAccess().getAlternatives(), "rule__FactorRule__Alternatives");
 			builder.put(grammarAccess.getDataDescriptionModelRuleAccess().getGroup(), "rule__DataDescriptionModelRule__Group__0");
+			builder.put(grammarAccess.getDataDescriptionModelRuleAccess().getGroup_4(), "rule__DataDescriptionModelRule__Group_4__0");
 			builder.put(grammarAccess.getDataDescriptionModelRuleAccess().getGroup_5(), "rule__DataDescriptionModelRule__Group_5__0");
 			builder.put(grammarAccess.getDataDescriptionModelRuleAccess().getGroup_6(), "rule__DataDescriptionModelRule__Group_6__0");
-			builder.put(grammarAccess.getDataDescriptionModelRuleAccess().getGroup_7(), "rule__DataDescriptionModelRule__Group_7__0");
 			builder.put(grammarAccess.getDataTypeDefinitionRuleAccess().getGroup(), "rule__DataTypeDefinitionRule__Group__0");
 			builder.put(grammarAccess.getDataTypeDefinitionRuleAccess().getGroup_3(), "rule__DataTypeDefinitionRule__Group_3__0");
 			builder.put(grammarAccess.getDataTypeDefinitionRuleAccess().getGroup_4(), "rule__DataTypeDefinitionRule__Group_4__0");
@@ -109,11 +109,11 @@ public class DataDescriptionLanguageParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getImportRuleAccess().getGroup(), "rule__ImportRule__Group__0");
 			builder.put(grammarAccess.getQualifiedNameAccess().getGroup(), "rule__QualifiedName__Group__0");
 			builder.put(grammarAccess.getQualifiedNameAccess().getGroup_1(), "rule__QualifiedName__Group_1__0");
-			builder.put(grammarAccess.getDataDescriptionModelRuleAccess().getImportsAssignment_1(), "rule__DataDescriptionModelRule__ImportsAssignment_1");
-			builder.put(grammarAccess.getDataDescriptionModelRuleAccess().getNameAssignment_3(), "rule__DataDescriptionModelRule__NameAssignment_3");
-			builder.put(grammarAccess.getDataDescriptionModelRuleAccess().getTypesAssignment_5_2(), "rule__DataDescriptionModelRule__TypesAssignment_5_2");
-			builder.put(grammarAccess.getDataDescriptionModelRuleAccess().getDescriptionsAssignment_6_2(), "rule__DataDescriptionModelRule__DescriptionsAssignment_6_2");
-			builder.put(grammarAccess.getDataDescriptionModelRuleAccess().getConstraintsAssignment_7_2(), "rule__DataDescriptionModelRule__ConstraintsAssignment_7_2");
+			builder.put(grammarAccess.getDataDescriptionModelRuleAccess().getImportsAssignment_0(), "rule__DataDescriptionModelRule__ImportsAssignment_0");
+			builder.put(grammarAccess.getDataDescriptionModelRuleAccess().getNameAssignment_2(), "rule__DataDescriptionModelRule__NameAssignment_2");
+			builder.put(grammarAccess.getDataDescriptionModelRuleAccess().getTypesAssignment_4_2(), "rule__DataDescriptionModelRule__TypesAssignment_4_2");
+			builder.put(grammarAccess.getDataDescriptionModelRuleAccess().getDescriptionsAssignment_5_2(), "rule__DataDescriptionModelRule__DescriptionsAssignment_5_2");
+			builder.put(grammarAccess.getDataDescriptionModelRuleAccess().getConstraintsAssignment_6_2(), "rule__DataDescriptionModelRule__ConstraintsAssignment_6_2");
 			builder.put(grammarAccess.getDataTypeDefinitionRuleAccess().getScaleAssignment_0(), "rule__DataTypeDefinitionRule__ScaleAssignment_0");
 			builder.put(grammarAccess.getDataTypeDefinitionRuleAccess().getNameAssignment_2(), "rule__DataTypeDefinitionRule__NameAssignment_2");
 			builder.put(grammarAccess.getDataTypeDefinitionRuleAccess().getDescriptionAssignment_3_2(), "rule__DataTypeDefinitionRule__DescriptionAssignment_3_2");

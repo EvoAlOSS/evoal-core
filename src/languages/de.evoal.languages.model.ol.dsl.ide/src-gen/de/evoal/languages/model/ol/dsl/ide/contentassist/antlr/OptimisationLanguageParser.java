@@ -100,8 +100,9 @@ public class OptimisationLanguageParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getQualifiedNameAccess().getGroup(), "rule__QualifiedName__Group__0");
 			builder.put(grammarAccess.getQualifiedNameAccess().getGroup_1(), "rule__QualifiedName__Group_1__0");
 			builder.put(grammarAccess.getOptimisationModelRuleAccess().getImportsAssignment_0(), "rule__OptimisationModelRule__ImportsAssignment_0");
-			builder.put(grammarAccess.getOptimisationModelRuleAccess().getProblemAssignment_1(), "rule__OptimisationModelRule__ProblemAssignment_1");
-			builder.put(grammarAccess.getOptimisationModelRuleAccess().getAlgorithmAssignment_2(), "rule__OptimisationModelRule__AlgorithmAssignment_2");
+			builder.put(grammarAccess.getOptimisationModelRuleAccess().getNameAssignment_2(), "rule__OptimisationModelRule__NameAssignment_2");
+			builder.put(grammarAccess.getOptimisationModelRuleAccess().getProblemAssignment_4(), "rule__OptimisationModelRule__ProblemAssignment_4");
+			builder.put(grammarAccess.getOptimisationModelRuleAccess().getAlgorithmAssignment_5(), "rule__OptimisationModelRule__AlgorithmAssignment_5");
 			builder.put(grammarAccess.getProblemRuleAccess().getDefinitionAssignment_1(), "rule__ProblemRule__DefinitionAssignment_1");
 			builder.put(grammarAccess.getProblemRuleAccess().getNameAssignment_2(), "rule__ProblemRule__NameAssignment_2");
 			builder.put(grammarAccess.getProblemRuleAccess().getAttributesAssignment_4(), "rule__ProblemRule__AttributesAssignment_4");

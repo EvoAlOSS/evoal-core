@@ -85,21 +85,11 @@ ruleDataDescriptionModelRule returns [EObject current=null]
 }:
 	(
 		(
-			{
-				/* */
-			}
-			{
-				$current = forceCreateModelElement(
-					grammarAccess.getDataDescriptionModelRuleAccess().getDataDescriptionModelAction_0(),
-					$current);
-			}
-		)
-		(
 			(
 				{
-					newCompositeNode(grammarAccess.getDataDescriptionModelRuleAccess().getImportsImportRuleParserRuleCall_1_0());
+					newCompositeNode(grammarAccess.getDataDescriptionModelRuleAccess().getImportsImportRuleParserRuleCall_0_0());
 				}
-				lv_imports_1_0=ruleImportRule
+				lv_imports_0_0=ruleImportRule
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getDataDescriptionModelRuleRule());
@@ -107,22 +97,22 @@ ruleDataDescriptionModelRule returns [EObject current=null]
 					add(
 						$current,
 						"imports",
-						lv_imports_1_0,
+						lv_imports_0_0,
 						"de.evoal.languages.model.base.dsl.BaseLanguage.ImportRule");
 					afterParserOrEnumRuleCall();
 				}
 			)
 		)*
-		otherlv_2='module'
+		otherlv_1='module'
 		{
-			newLeafNode(otherlv_2, grammarAccess.getDataDescriptionModelRuleAccess().getModuleKeyword_2());
+			newLeafNode(otherlv_1, grammarAccess.getDataDescriptionModelRuleAccess().getModuleKeyword_1());
 		}
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getDataDescriptionModelRuleAccess().getNameQualifiedNameParserRuleCall_3_0());
+					newCompositeNode(grammarAccess.getDataDescriptionModelRuleAccess().getNameQualifiedNameParserRuleCall_2_0());
 				}
-				lv_name_3_0=ruleQualifiedName
+				lv_name_2_0=ruleQualifiedName
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getDataDescriptionModelRuleRule());
@@ -130,31 +120,31 @@ ruleDataDescriptionModelRule returns [EObject current=null]
 					set(
 						$current,
 						"name",
-						lv_name_3_0,
+						lv_name_2_0,
 						"de.evoal.languages.model.base.dsl.BaseLanguage.QualifiedName");
 					afterParserOrEnumRuleCall();
 				}
 			)
 		)
-		otherlv_4='{'
+		otherlv_3='{'
 		{
-			newLeafNode(otherlv_4, grammarAccess.getDataDescriptionModelRuleAccess().getLeftCurlyBracketKeyword_4());
+			newLeafNode(otherlv_3, grammarAccess.getDataDescriptionModelRuleAccess().getLeftCurlyBracketKeyword_3());
 		}
 		(
-			otherlv_5='types'
+			otherlv_4='types'
 			{
-				newLeafNode(otherlv_5, grammarAccess.getDataDescriptionModelRuleAccess().getTypesKeyword_5_0());
+				newLeafNode(otherlv_4, grammarAccess.getDataDescriptionModelRuleAccess().getTypesKeyword_4_0());
 			}
-			otherlv_6=':'
+			otherlv_5=':'
 			{
-				newLeafNode(otherlv_6, grammarAccess.getDataDescriptionModelRuleAccess().getColonKeyword_5_1());
+				newLeafNode(otherlv_5, grammarAccess.getDataDescriptionModelRuleAccess().getColonKeyword_4_1());
 			}
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getDataDescriptionModelRuleAccess().getTypesDataTypeDefinitionRuleParserRuleCall_5_2_0());
+						newCompositeNode(grammarAccess.getDataDescriptionModelRuleAccess().getTypesDataTypeDefinitionRuleParserRuleCall_4_2_0());
 					}
-					lv_types_7_0=ruleDataTypeDefinitionRule
+					lv_types_6_0=ruleDataTypeDefinitionRule
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getDataDescriptionModelRuleRule());
@@ -162,7 +152,7 @@ ruleDataDescriptionModelRule returns [EObject current=null]
 						add(
 							$current,
 							"types",
-							lv_types_7_0,
+							lv_types_6_0,
 							"de.evoal.languages.model.ddl.dsl.DataDescriptionLanguage.DataTypeDefinitionRule");
 						afterParserOrEnumRuleCall();
 					}
@@ -170,20 +160,20 @@ ruleDataDescriptionModelRule returns [EObject current=null]
 			)*
 		)?
 		(
-			otherlv_8='data'
+			otherlv_7='data'
 			{
-				newLeafNode(otherlv_8, grammarAccess.getDataDescriptionModelRuleAccess().getDataKeyword_6_0());
+				newLeafNode(otherlv_7, grammarAccess.getDataDescriptionModelRuleAccess().getDataKeyword_5_0());
 			}
-			otherlv_9=':'
+			otherlv_8=':'
 			{
-				newLeafNode(otherlv_9, grammarAccess.getDataDescriptionModelRuleAccess().getColonKeyword_6_1());
+				newLeafNode(otherlv_8, grammarAccess.getDataDescriptionModelRuleAccess().getColonKeyword_5_1());
 			}
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getDataDescriptionModelRuleAccess().getDescriptionsDataDescriptionRuleParserRuleCall_6_2_0());
+						newCompositeNode(grammarAccess.getDataDescriptionModelRuleAccess().getDescriptionsDataDescriptionRuleParserRuleCall_5_2_0());
 					}
-					lv_descriptions_10_0=ruleDataDescriptionRule
+					lv_descriptions_9_0=ruleDataDescriptionRule
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getDataDescriptionModelRuleRule());
@@ -191,7 +181,7 @@ ruleDataDescriptionModelRule returns [EObject current=null]
 						add(
 							$current,
 							"descriptions",
-							lv_descriptions_10_0,
+							lv_descriptions_9_0,
 							"de.evoal.languages.model.ddl.dsl.DataDescriptionLanguage.DataDescriptionRule");
 						afterParserOrEnumRuleCall();
 					}
@@ -199,20 +189,20 @@ ruleDataDescriptionModelRule returns [EObject current=null]
 			)*
 		)?
 		(
-			otherlv_11='constraints'
+			otherlv_10='constraints'
 			{
-				newLeafNode(otherlv_11, grammarAccess.getDataDescriptionModelRuleAccess().getConstraintsKeyword_7_0());
+				newLeafNode(otherlv_10, grammarAccess.getDataDescriptionModelRuleAccess().getConstraintsKeyword_6_0());
 			}
-			otherlv_12=':'
+			otherlv_11=':'
 			{
-				newLeafNode(otherlv_12, grammarAccess.getDataDescriptionModelRuleAccess().getColonKeyword_7_1());
+				newLeafNode(otherlv_11, grammarAccess.getDataDescriptionModelRuleAccess().getColonKeyword_6_1());
 			}
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getDataDescriptionModelRuleAccess().getConstraintsStatementRuleParserRuleCall_7_2_0());
+						newCompositeNode(grammarAccess.getDataDescriptionModelRuleAccess().getConstraintsStatementRuleParserRuleCall_6_2_0());
 					}
-					lv_constraints_13_0=ruleStatementRule
+					lv_constraints_12_0=ruleStatementRule
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getDataDescriptionModelRuleRule());
@@ -220,16 +210,16 @@ ruleDataDescriptionModelRule returns [EObject current=null]
 						add(
 							$current,
 							"constraints",
-							lv_constraints_13_0,
+							lv_constraints_12_0,
 							"de.evoal.languages.model.ddl.dsl.DataDescriptionLanguage.StatementRule");
 						afterParserOrEnumRuleCall();
 					}
 				)
 			)*
 		)?
-		otherlv_14='}'
+		otherlv_13='}'
 		{
-			newLeafNode(otherlv_14, grammarAccess.getDataDescriptionModelRuleAccess().getRightCurlyBracketKeyword_8());
+			newLeafNode(otherlv_13, grammarAccess.getDataDescriptionModelRuleAccess().getRightCurlyBracketKeyword_7());
 		}
 	)
 ;

@@ -22,13 +22,13 @@ public interface DdlFactory extends EFactory {
 	DdlFactory eINSTANCE = de.evoal.languages.model.ddl.impl.DdlFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>Data Description Model</em>'.
+	 * Returns a new object of class '<em>Data Description Module</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Data Description Model</em>'.
+	 * @return a new object of class '<em>Data Description Module</em>'.
 	 * @generated
 	 */
-	DataDescriptionModel createDataDescriptionModel();
+	DataDescriptionModule createDataDescriptionModule();
 
 	/**
 	 * Returns a new object of class '<em>Data Type Definition</em>'.

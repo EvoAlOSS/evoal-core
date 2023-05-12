@@ -6,6 +6,7 @@ package de.evoal.languages.model.ol.util;
 import de.evoal.languages.model.base.Instance;
 import de.evoal.languages.model.base.Literal;
 import de.evoal.languages.model.base.Value;
+
 import de.evoal.languages.model.ol.*;
 
 import org.eclipse.emf.common.notify.Adapter;
@@ -72,8 +73,8 @@ public class OLAdapterFactory extends AdapterFactoryImpl {
 	protected OLSwitch<Adapter> modelSwitch =
 		new OLSwitch<Adapter>() {
 			@Override
-			public Adapter caseOptimisationModel(OptimisationModel object) {
-				return createOptimisationModelAdapter();
+			public Adapter caseOptimisationModule(OptimisationModule object) {
+				return createOptimisationModuleAdapter();
 			}
 			@Override
 			public Adapter caseProblemInstance(ProblemInstance object) {
@@ -116,16 +117,16 @@ public class OLAdapterFactory extends AdapterFactoryImpl {
 
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.ol.OptimisationModel <em>Optimisation Model</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.ol.OptimisationModule <em>Optimisation Module</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.evoal.languages.model.ol.OptimisationModel
+	 * @see de.evoal.languages.model.ol.OptimisationModule
 	 * @generated
 	 */
-	public Adapter createOptimisationModelAdapter() {
+	public Adapter createOptimisationModuleAdapter() {
 		return null;
 	}
 

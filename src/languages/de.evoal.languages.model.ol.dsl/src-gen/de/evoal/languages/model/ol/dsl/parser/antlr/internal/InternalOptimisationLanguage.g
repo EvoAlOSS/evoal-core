@@ -103,12 +103,39 @@ ruleOptimisationModelRule returns [EObject current=null]
 				}
 			)
 		)*
+		otherlv_1='module'
+		{
+			newLeafNode(otherlv_1, grammarAccess.getOptimisationModelRuleAccess().getModuleKeyword_1());
+		}
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getOptimisationModelRuleAccess().getProblemProblemRuleParserRuleCall_1_0());
+					newCompositeNode(grammarAccess.getOptimisationModelRuleAccess().getNameQualifiedNameParserRuleCall_2_0());
 				}
-				lv_problem_1_0=ruleProblemRule
+				lv_name_2_0=ruleQualifiedName
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getOptimisationModelRuleRule());
+					}
+					set(
+						$current,
+						"name",
+						lv_name_2_0,
+						"de.evoal.languages.model.base.dsl.BaseLanguage.QualifiedName");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		otherlv_3='{'
+		{
+			newLeafNode(otherlv_3, grammarAccess.getOptimisationModelRuleAccess().getLeftCurlyBracketKeyword_3());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getOptimisationModelRuleAccess().getProblemProblemRuleParserRuleCall_4_0());
+				}
+				lv_problem_4_0=ruleProblemRule
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getOptimisationModelRuleRule());
@@ -116,7 +143,7 @@ ruleOptimisationModelRule returns [EObject current=null]
 					set(
 						$current,
 						"problem",
-						lv_problem_1_0,
+						lv_problem_4_0,
 						"de.evoal.languages.model.ol.dsl.OptimisationLanguage.ProblemRule");
 					afterParserOrEnumRuleCall();
 				}
@@ -125,9 +152,9 @@ ruleOptimisationModelRule returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getOptimisationModelRuleAccess().getAlgorithmAlgorithmInstanceRuleParserRuleCall_2_0());
+					newCompositeNode(grammarAccess.getOptimisationModelRuleAccess().getAlgorithmAlgorithmInstanceRuleParserRuleCall_5_0());
 				}
-				lv_algorithm_2_0=ruleAlgorithmInstanceRule
+				lv_algorithm_5_0=ruleAlgorithmInstanceRule
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getOptimisationModelRuleRule());
@@ -135,12 +162,16 @@ ruleOptimisationModelRule returns [EObject current=null]
 					set(
 						$current,
 						"algorithm",
-						lv_algorithm_2_0,
+						lv_algorithm_5_0,
 						"de.evoal.languages.model.ol.dsl.OptimisationLanguage.AlgorithmInstanceRule");
 					afterParserOrEnumRuleCall();
 				}
 			)
 		)?
+		otherlv_6='}'
+		{
+			newLeafNode(otherlv_6, grammarAccess.getOptimisationModelRuleAccess().getRightCurlyBracketKeyword_6());
+		}
 	)
 ;
 

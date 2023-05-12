@@ -43,7 +43,7 @@ import de.evoal.languages.model.base.UnaryAddOrSubtractExpression;
 import de.evoal.languages.model.base.VoidType;
 import de.evoal.languages.model.base.XorExpression;
 import de.evoal.languages.model.base.dsl.serializer.BaseLanguageSemanticSequencer;
-import de.evoal.languages.model.ddl.DataDescriptionModel;
+import de.evoal.languages.model.ddl.DataDescriptionModule;
 import de.evoal.languages.model.ddl.DataReference;
 import de.evoal.languages.model.ddl.DataTypeDefinition;
 import de.evoal.languages.model.ddl.DdlPackage;
@@ -189,8 +189,8 @@ public class DataDescriptionLanguageSemanticSequencer extends BaseLanguageSemant
 			}
 		else if (epackage == DdlPackage.eINSTANCE)
 			switch (semanticObject.eClass().getClassifierID()) {
-			case DdlPackage.DATA_DESCRIPTION_MODEL:
-				sequence_DataDescriptionModelRule(context, (DataDescriptionModel) semanticObject); 
+			case DdlPackage.DATA_DESCRIPTION_MODULE:
+				sequence_DataDescriptionModelRule(context, (DataDescriptionModule) semanticObject); 
 				return; 
 			case DdlPackage.DATA_REFERENCE:
 				sequence_DataReferenceRule(context, (DataReference) semanticObject); 
@@ -215,13 +215,13 @@ public class DataDescriptionLanguageSemanticSequencer extends BaseLanguageSemant
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     DataDescriptionModelRule returns DataDescriptionModel
+	 *     DataDescriptionModelRule returns DataDescriptionModule
 	 *
 	 * Constraint:
 	 *     (imports+=ImportRule* name=QualifiedName types+=DataTypeDefinitionRule* descriptions+=DataDescriptionRule* constraints+=StatementRule*)
 	 * </pre>
 	 */
-	protected void sequence_DataDescriptionModelRule(ISerializationContext context, DataDescriptionModel semanticObject) {
+	protected void sequence_DataDescriptionModelRule(ISerializationContext context, DataDescriptionModule semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

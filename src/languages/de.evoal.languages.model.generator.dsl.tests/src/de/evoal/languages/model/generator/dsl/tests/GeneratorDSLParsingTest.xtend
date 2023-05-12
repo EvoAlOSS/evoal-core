@@ -4,19 +4,19 @@
 package de.evoal.languages.model.generator.dsl.tests
 
 import com.google.inject.Inject
-import de.evoal.languages.model.generator.Configuration
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.extensions.InjectionExtension
 import org.eclipse.xtext.testing.util.ParseHelper
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.^extension.ExtendWith
+import de.evoal.languages.model.generator.GeneratorModule
 
 @ExtendWith(InjectionExtension)
 @InjectWith(GeneratorDSLInjectorProvider)
 class GeneratorDSLParsingTest {
 	@Inject
-	ParseHelper<Configuration> parseHelper
+	ParseHelper<GeneratorModule> parseHelper
 	
 	@Test
 	def void loadModel() {

@@ -56,7 +56,7 @@ public class MllFactoryImpl extends EFactoryImpl implements MllFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case MllPackage.MACHINE_LEARNING_CONFIGURATION: return createMachineLearningConfiguration();
+			case MllPackage.MACHINE_LEARNING_MODULE: return createMachineLearningModule();
 			case MllPackage.SURROGATE_DEFINITION: return createSurrogateDefinition();
 			case MllPackage.SURROGATE_LAYER_DEFINITION: return createSurrogateLayerDefinition();
 			case MllPackage.PARTIAL_SURROGATE_FUNCTION_DEFINITION: return createPartialSurrogateFunctionDefinition();
@@ -78,9 +78,9 @@ public class MllFactoryImpl extends EFactoryImpl implements MllFactory {
 	 * @generated
 	 */
 	@Override
-	public MachineLearningConfiguration createMachineLearningConfiguration() {
-		MachineLearningConfigurationImpl machineLearningConfiguration = new MachineLearningConfigurationImpl();
-		return machineLearningConfiguration;
+	public MachineLearningModule createMachineLearningModule() {
+		MachineLearningModuleImpl machineLearningModule = new MachineLearningModuleImpl();
+		return machineLearningModule;
 	}
 
 	/**

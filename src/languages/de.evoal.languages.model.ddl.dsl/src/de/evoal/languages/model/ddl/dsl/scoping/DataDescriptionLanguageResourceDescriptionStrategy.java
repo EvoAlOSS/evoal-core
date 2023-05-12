@@ -9,7 +9,7 @@ import de.evoal.languages.model.utils.scoping.FilteringResourceDescriptionsStrat
 public class DataDescriptionLanguageResourceDescriptionStrategy extends FilteringResourceDescriptionsStrategy {
 	public DataDescriptionLanguageResourceDescriptionStrategy() {
 		super(
-				DdlPackage.eINSTANCE.getDataDescriptionModel(),
+				DdlPackage.eINSTANCE.getDataDescriptionModule(),
 				DdlPackage.eINSTANCE.getDataTypeDefinition(),
 				DdlPackage.eINSTANCE.getDataDescription(),
 				DdlPackage.eINSTANCE.getTypedDataDescription(),

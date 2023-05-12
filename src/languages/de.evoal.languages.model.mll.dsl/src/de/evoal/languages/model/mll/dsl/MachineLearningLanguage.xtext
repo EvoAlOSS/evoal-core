@@ -4,12 +4,13 @@ import "https://www.evoal.de/languages/mll/1.0.0"
 import "https://www.evoal.de/languages/ddl/1.0.0" as ddl
 import "https://www.evoal.de/languages/base/1.0.0" as base
 
-MachineLearningConfigurationRule returns MachineLearningConfiguration:
-	{MachineLearningConfiguration}
+MachineLearningConfigurationRule returns MachineLearningModule:
 	(imports += ImportRule)*
 
-	(definitions+=SurrogateDefinitionRule)*
-	(statements += StatementRule)*
+	"module" name = QualifiedName "{"
+		(definitions+=SurrogateDefinitionRule)*
+		(statements += StatementRule)*
+	"}"
 ;
 
 SurrogateDefinitionRule returns SurrogateDefinition: 

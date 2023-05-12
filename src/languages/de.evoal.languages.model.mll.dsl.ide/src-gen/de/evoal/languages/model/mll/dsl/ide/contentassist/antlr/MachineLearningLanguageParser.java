@@ -113,9 +113,10 @@ public class MachineLearningLanguageParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getImportRuleAccess().getGroup(), "rule__ImportRule__Group__0");
 			builder.put(grammarAccess.getQualifiedNameAccess().getGroup(), "rule__QualifiedName__Group__0");
 			builder.put(grammarAccess.getQualifiedNameAccess().getGroup_1(), "rule__QualifiedName__Group_1__0");
-			builder.put(grammarAccess.getMachineLearningConfigurationRuleAccess().getImportsAssignment_1(), "rule__MachineLearningConfigurationRule__ImportsAssignment_1");
-			builder.put(grammarAccess.getMachineLearningConfigurationRuleAccess().getDefinitionsAssignment_2(), "rule__MachineLearningConfigurationRule__DefinitionsAssignment_2");
-			builder.put(grammarAccess.getMachineLearningConfigurationRuleAccess().getStatementsAssignment_3(), "rule__MachineLearningConfigurationRule__StatementsAssignment_3");
+			builder.put(grammarAccess.getMachineLearningConfigurationRuleAccess().getImportsAssignment_0(), "rule__MachineLearningConfigurationRule__ImportsAssignment_0");
+			builder.put(grammarAccess.getMachineLearningConfigurationRuleAccess().getNameAssignment_2(), "rule__MachineLearningConfigurationRule__NameAssignment_2");
+			builder.put(grammarAccess.getMachineLearningConfigurationRuleAccess().getDefinitionsAssignment_4(), "rule__MachineLearningConfigurationRule__DefinitionsAssignment_4");
+			builder.put(grammarAccess.getMachineLearningConfigurationRuleAccess().getStatementsAssignment_5(), "rule__MachineLearningConfigurationRule__StatementsAssignment_5");
 			builder.put(grammarAccess.getSurrogateDefinitionRuleAccess().getNameAssignment_1(), "rule__SurrogateDefinitionRule__NameAssignment_1");
 			builder.put(grammarAccess.getSurrogateDefinitionRuleAccess().getInputsAssignment_3(), "rule__SurrogateDefinitionRule__InputsAssignment_3");
 			builder.put(grammarAccess.getSurrogateDefinitionRuleAccess().getInputsAssignment_4_1(), "rule__SurrogateDefinitionRule__InputsAssignment_4_1");

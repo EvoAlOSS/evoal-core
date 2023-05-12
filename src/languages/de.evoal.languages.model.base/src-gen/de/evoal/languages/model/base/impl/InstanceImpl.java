@@ -8,6 +8,7 @@ import de.evoal.languages.model.base.Instance;
 import de.evoal.languages.model.base.TypeDefinition;
 
 import java.lang.reflect.InvocationTargetException;
+
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;

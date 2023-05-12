@@ -8,12 +8,12 @@
   <foreignModel>model.ecore</foreignModel>
   <genPackages prefix="Dl" basePackage="de.evoal.languages.model" disposableProviderFactory="true"
       ecorePackage="model.ecore#/">
-    <genClasses ecoreClass="model.ecore#//DefinitionModel">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//DefinitionModel/imports"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//DefinitionModel/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//DefinitionModel/types"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//DefinitionModel/functions"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//DefinitionModel/constants"/>
+    <genClasses ecoreClass="model.ecore#//DefinitionModule">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//DefinitionModule/imports"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//DefinitionModule/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//DefinitionModule/types"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//DefinitionModule/functions"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//DefinitionModule/constants"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

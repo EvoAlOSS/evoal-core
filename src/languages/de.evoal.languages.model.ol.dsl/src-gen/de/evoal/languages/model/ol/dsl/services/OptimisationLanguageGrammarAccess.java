@@ -31,21 +31,30 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cImportsAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cImportsImportRuleParserRuleCall_0_0 = (RuleCall)cImportsAssignment_0.eContents().get(0);
-		private final Assignment cProblemAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cProblemProblemRuleParserRuleCall_1_0 = (RuleCall)cProblemAssignment_1.eContents().get(0);
-		private final Assignment cAlgorithmAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cAlgorithmAlgorithmInstanceRuleParserRuleCall_2_0 = (RuleCall)cAlgorithmAssignment_2.eContents().get(0);
+		private final Keyword cModuleKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cNameQualifiedNameParserRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
+		private final Keyword cLeftCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cProblemAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cProblemProblemRuleParserRuleCall_4_0 = (RuleCall)cProblemAssignment_4.eContents().get(0);
+		private final Assignment cAlgorithmAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final RuleCall cAlgorithmAlgorithmInstanceRuleParserRuleCall_5_0 = (RuleCall)cAlgorithmAssignment_5.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
-		//OptimisationModelRule returns OptimisationModel:
+		//OptimisationModelRule returns OptimisationModule:
 		//    (imports += ImportRule)*
-		//    (problem = ProblemRule)?
-		//    (algorithm = AlgorithmInstanceRule)?
+		//    "module" name = QualifiedName "{"
+		//        (problem = ProblemRule)?
+		//        (algorithm = AlgorithmInstanceRule)?
+		//    "}"
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//(imports += ImportRule)*
-		//(problem = ProblemRule)?
-		//(algorithm = AlgorithmInstanceRule)?
+		//"module" name = QualifiedName "{"
+		//    (problem = ProblemRule)?
+		//    (algorithm = AlgorithmInstanceRule)?
+		//"}"
 		public Group getGroup() { return cGroup; }
 		
 		//(imports += ImportRule)*
@@ -54,17 +63,32 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 		//ImportRule
 		public RuleCall getImportsImportRuleParserRuleCall_0_0() { return cImportsImportRuleParserRuleCall_0_0; }
 		
+		//"module"
+		public Keyword getModuleKeyword_1() { return cModuleKeyword_1; }
+		
+		//name = QualifiedName
+		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
+		
+		//QualifiedName
+		public RuleCall getNameQualifiedNameParserRuleCall_2_0() { return cNameQualifiedNameParserRuleCall_2_0; }
+		
+		//"{"
+		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
+		
 		//(problem = ProblemRule)?
-		public Assignment getProblemAssignment_1() { return cProblemAssignment_1; }
+		public Assignment getProblemAssignment_4() { return cProblemAssignment_4; }
 		
 		//ProblemRule
-		public RuleCall getProblemProblemRuleParserRuleCall_1_0() { return cProblemProblemRuleParserRuleCall_1_0; }
+		public RuleCall getProblemProblemRuleParserRuleCall_4_0() { return cProblemProblemRuleParserRuleCall_4_0; }
 		
 		//(algorithm = AlgorithmInstanceRule)?
-		public Assignment getAlgorithmAssignment_2() { return cAlgorithmAssignment_2; }
+		public Assignment getAlgorithmAssignment_5() { return cAlgorithmAssignment_5; }
 		
 		//AlgorithmInstanceRule
-		public RuleCall getAlgorithmAlgorithmInstanceRuleParserRuleCall_2_0() { return cAlgorithmAlgorithmInstanceRuleParserRuleCall_2_0; }
+		public RuleCall getAlgorithmAlgorithmInstanceRuleParserRuleCall_5_0() { return cAlgorithmAlgorithmInstanceRuleParserRuleCall_5_0; }
+		
+		//"}"
+		public Keyword getRightCurlyBracketKeyword_6() { return cRightCurlyBracketKeyword_6; }
 	}
 	public class ProblemRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.ol.dsl.OptimisationLanguage.ProblemRule");
@@ -301,10 +325,12 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 	}
 
 	
-	//OptimisationModelRule returns OptimisationModel:
+	//OptimisationModelRule returns OptimisationModule:
 	//    (imports += ImportRule)*
-	//    (problem = ProblemRule)?
-	//    (algorithm = AlgorithmInstanceRule)?
+	//    "module" name = QualifiedName "{"
+	//        (problem = ProblemRule)?
+	//        (algorithm = AlgorithmInstanceRule)?
+	//    "}"
 	//;
 	public OptimisationModelRuleElements getOptimisationModelRuleAccess() {
 		return pOptimisationModelRule;

@@ -4,36 +4,38 @@
 package de.evoal.languages.model.ol;
 
 import de.evoal.languages.model.base.Import;
+
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Optimisation Model</b></em>'.
+ * A representation of the model object '<em><b>Optimisation Module</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link de.evoal.languages.model.ol.OptimisationModel#getImports <em>Imports</em>}</li>
- *   <li>{@link de.evoal.languages.model.ol.OptimisationModel#getProblem <em>Problem</em>}</li>
- *   <li>{@link de.evoal.languages.model.ol.OptimisationModel#getAlgorithm <em>Algorithm</em>}</li>
+ *   <li>{@link de.evoal.languages.model.ol.OptimisationModule#getImports <em>Imports</em>}</li>
+ *   <li>{@link de.evoal.languages.model.ol.OptimisationModule#getProblem <em>Problem</em>}</li>
+ *   <li>{@link de.evoal.languages.model.ol.OptimisationModule#getAlgorithm <em>Algorithm</em>}</li>
+ *   <li>{@link de.evoal.languages.model.ol.OptimisationModule#getName <em>Name</em>}</li>
  * </ul>
  *
- * @see de.evoal.languages.model.ol.OLPackage#getOptimisationModel()
+ * @see de.evoal.languages.model.ol.OLPackage#getOptimisationModule()
  * @model
  * @generated
  */
-public interface OptimisationModel extends EObject {
+public interface OptimisationModule extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Imports</b></em>' containment reference list.
 	 * The list contents are of type {@link de.evoal.languages.model.base.Import}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Imports</em>' containment reference list.
-	 * @see de.evoal.languages.model.ol.OLPackage#getOptimisationModel_Imports()
+	 * @see de.evoal.languages.model.ol.OLPackage#getOptimisationModule_Imports()
 	 * @model containment="true"
 	 * @generated
 	 */
@@ -45,14 +47,14 @@ public interface OptimisationModel extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Problem</em>' containment reference.
 	 * @see #setProblem(ProblemInstance)
-	 * @see de.evoal.languages.model.ol.OLPackage#getOptimisationModel_Problem()
+	 * @see de.evoal.languages.model.ol.OLPackage#getOptimisationModule_Problem()
 	 * @model containment="true"
 	 * @generated
 	 */
 	ProblemInstance getProblem();
 
 	/**
-	 * Sets the value of the '{@link de.evoal.languages.model.ol.OptimisationModel#getProblem <em>Problem</em>}' containment reference.
+	 * Sets the value of the '{@link de.evoal.languages.model.ol.OptimisationModule#getProblem <em>Problem</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Problem</em>' containment reference.
@@ -67,14 +69,14 @@ public interface OptimisationModel extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Algorithm</em>' containment reference.
 	 * @see #setAlgorithm(AlgorithmInstance)
-	 * @see de.evoal.languages.model.ol.OLPackage#getOptimisationModel_Algorithm()
+	 * @see de.evoal.languages.model.ol.OLPackage#getOptimisationModule_Algorithm()
 	 * @model containment="true"
 	 * @generated
 	 */
 	AlgorithmInstance getAlgorithm();
 
 	/**
-	 * Sets the value of the '{@link de.evoal.languages.model.ol.OptimisationModel#getAlgorithm <em>Algorithm</em>}' containment reference.
+	 * Sets the value of the '{@link de.evoal.languages.model.ol.OptimisationModule#getAlgorithm <em>Algorithm</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Algorithm</em>' containment reference.
@@ -83,4 +85,26 @@ public interface OptimisationModel extends EObject {
 	 */
 	void setAlgorithm(AlgorithmInstance value);
 
-} // OptimisationModel
+	/**
+	 * Returns the value of the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Name</em>' attribute.
+	 * @see #setName(String)
+	 * @see de.evoal.languages.model.ol.OLPackage#getOptimisationModule_Name()
+	 * @model required="true"
+	 * @generated
+	 */
+	String getName();
+
+	/**
+	 * Sets the value of the '{@link de.evoal.languages.model.ol.OptimisationModule#getName <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Name</em>' attribute.
+	 * @see #getName()
+	 * @generated
+	 */
+	void setName(String value);
+
+} // OptimisationModule
