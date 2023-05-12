@@ -8,10 +8,7 @@ import de.evoal.languages.model.instance.dsl.validation.InstanceLanguageValidato
 import java.util.ArrayList;
 import java.util.List;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.xtext.validation.ComposedChecks;
-import org.eclipse.xtext.validation.ImportUriValidator;
 
-@ComposedChecks(validators = {ImportUriValidator.class})
 public abstract class AbstractOptimisationLanguageValidator extends InstanceLanguageValidator {
 	
 	@Override
