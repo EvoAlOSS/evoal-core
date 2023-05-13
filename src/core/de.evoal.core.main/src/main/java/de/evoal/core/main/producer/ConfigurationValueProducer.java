@@ -6,9 +6,8 @@ import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.core.api.utils.LanguageHelper;
 import de.evoal.languages.model.base.Literal;
 import de.evoal.languages.model.ddl.DataDescription;
-import de.evoal.languages.model.instance.DataReference;
 import de.evoal.languages.model.ol.OptimisationModule;
-import de.evoal.languages.model.base.DoubleLiteral;
+import de.evoal.languages.model.base.RealLiteral;
 import de.evoal.languages.model.base.Array;
 import de.evoal.languages.model.base.Instance;
 import lombok.extern.slf4j.Slf4j;
@@ -17,7 +16,6 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.InjectionPoint;
 import javax.inject.Inject;
-import java.util.Arrays;
 
 @ApplicationScoped
 @Slf4j
@@ -107,7 +105,7 @@ public class ConfigurationValueProducer {
         return (this.<Array>lookup(board.get(value.entry()), value.access()))
                 .getValues()
                 .stream()
-                .mapToDouble(x -> ((DoubleLiteral)((Literal)x)).getValue())
+                .mapToDouble(x -> ((RealLiteral)((Literal)x)).getValue())
                 .toArray();
     }
 

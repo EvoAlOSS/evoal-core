@@ -2,7 +2,6 @@ package de.evoal.generator.main.generators;
 
 import de.evoal.core.api.utils.InitializationException;
 import de.evoal.generator.api.GeneratorFunction;
-import de.evoal.languages.model.base.DoubleLiteral;
 import de.evoal.languages.model.generator.Step;
 import de.evoal.languages.model.base.*;
 import lombok.NonNull;
@@ -45,7 +44,7 @@ public class MultivariateNormalDistribution extends MultivariateRealDistribution
     }
 
     private double readDouble(final Value value) {
-        return ((DoubleLiteral)value).getLiteral();
+        return ((RealLiteral)value).getLiteral();
     }
 
     private double[] readMeans(final @NonNull Instance instance) {

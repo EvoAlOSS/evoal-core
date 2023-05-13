@@ -99,7 +99,7 @@ public class ConstantSwitch extends BaseSwitch<Object> {
     }
 
     @Override
-    public Object caseDoubleLiteral(final DoubleLiteral object) {
+    public Object caseRealLiteral(final RealLiteral object) {
         return object.getValue();
     }
 

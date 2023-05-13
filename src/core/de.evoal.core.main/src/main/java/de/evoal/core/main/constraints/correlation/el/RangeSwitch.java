@@ -81,7 +81,7 @@ public class RangeSwitch extends BaseSwitch<Range> {
     }
 
     @Override
-    public Range caseDoubleLiteral(final DoubleLiteral object) {
+    public Range caseRealLiteral(final RealLiteral object) {
         throw new IllegalStateException("Searching for range but found a double literal.");
     }
 

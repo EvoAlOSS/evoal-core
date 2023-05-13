@@ -82,7 +82,7 @@ public class DataReferenceSwitch extends BaseSwitch<DataDescription> {
     }
 
     @Override
-    public DataDescription caseDoubleLiteral(final DoubleLiteral object) {
+    public DataDescription caseRealLiteral(final RealLiteral object) {
         throw new IllegalStateException("Searching for Data but found a double literal.");
     }
 

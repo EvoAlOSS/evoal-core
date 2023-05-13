@@ -209,7 +209,7 @@ public class ConditionConverter extends BaseSwitch<Object> {
     }
 
     @Override
-    public Object caseDoubleLiteral(final DoubleLiteral object) {
+    public Object caseRealLiteral(final RealLiteral object) {
         return (BiFunction<Properties, Properties, Object>) (gen, fit) -> object.getValue();
     }
 

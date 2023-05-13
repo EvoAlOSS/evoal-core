@@ -2,11 +2,10 @@ package de.evoal.generator.main.generators;
 
 import de.evoal.core.api.utils.InitializationException;
 import de.evoal.generator.api.GeneratorFunction;
-import de.evoal.languages.model.base.DoubleLiteral;
+import de.evoal.languages.model.base.RealLiteral;
 import de.evoal.languages.model.generator.Step;
 import de.evoal.languages.model.base.Array;
 import de.evoal.languages.model.base.Instance;
-import de.evoal.languages.model.base.Literal;
 
 import javax.inject.Named;
 import java.util.List;
@@ -45,7 +44,7 @@ public class MultivariateUniformDistribution extends MultivariateRealDistributio
     }
 
     private double readDouble(final Instance value, final String name) {
-        return ((DoubleLiteral)value.findAttribute(name)).getLiteral();
+        return ((RealLiteral)value.findAttribute(name)).getLiteral();
     }
 
 }

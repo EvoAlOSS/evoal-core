@@ -79,7 +79,7 @@ public class StringSwitch extends BaseSwitch<String> {
     }
 
     @Override
-    public String caseDoubleLiteral(final DoubleLiteral object) {
+    public String caseRealLiteral(final RealLiteral object) {
         throw new IllegalStateException("Searching for String but found a double literal.");
     }
 

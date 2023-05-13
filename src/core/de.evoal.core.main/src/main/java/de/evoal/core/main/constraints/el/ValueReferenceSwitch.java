@@ -89,7 +89,7 @@ public class ValueReferenceSwitch extends BaseSwitch<String> {
     }
 
     @Override
-    public String caseDoubleLiteral(final DoubleLiteral object) {
+    public String caseRealLiteral(final RealLiteral object) {
         throw new IllegalStateException("Searching for a value reference but found a double literal.");
     }
 

@@ -93,7 +93,7 @@ public class NumberSwitch extends BaseSwitch<Number> {
     }
 
     @Override
-    public Number caseDoubleLiteral(final DoubleLiteral object) {
+    public Number caseRealLiteral(final RealLiteral object) {
         return object.getValue();
     }
 

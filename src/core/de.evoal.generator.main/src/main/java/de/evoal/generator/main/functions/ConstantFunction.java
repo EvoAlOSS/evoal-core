@@ -5,9 +5,7 @@ import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.utils.InitializationException;
 import de.evoal.generator.api.AbstractGeneratorFunction;
 import de.evoal.generator.api.GeneratorFunction;
-import de.evoal.languages.model.base.DoubleLiteral;
 import de.evoal.languages.model.generator.Step;
-import de.evoal.languages.model.base.Array;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
