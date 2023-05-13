@@ -163,12 +163,12 @@ public class BaseSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case BasePackage.DOUBLE_LITERAL: {
-				DoubleLiteral doubleLiteral = (DoubleLiteral)theEObject;
-				T result = caseDoubleLiteral(doubleLiteral);
-				if (result == null) result = caseNumberLiteral(doubleLiteral);
-				if (result == null) result = caseLiteral(doubleLiteral);
-				if (result == null) result = caseValue(doubleLiteral);
+			case BasePackage.REAL_LITERAL: {
+				RealLiteral realLiteral = (RealLiteral)theEObject;
+				T result = caseRealLiteral(realLiteral);
+				if (result == null) result = caseNumberLiteral(realLiteral);
+				if (result == null) result = caseLiteral(realLiteral);
+				if (result == null) result = caseValue(realLiteral);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -263,11 +263,11 @@ public class BaseSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case BasePackage.FLOAT_TYPE: {
-				FloatType floatType = (FloatType)theEObject;
-				T result = caseFloatType(floatType);
-				if (result == null) result = caseLiteralType(floatType);
-				if (result == null) result = caseType(floatType);
+			case BasePackage.REAL_TYPE: {
+				RealType realType = (RealType)theEObject;
+				T result = caseRealType(realType);
+				if (result == null) result = caseLiteralType(realType);
+				if (result == null) result = caseType(realType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -597,17 +597,17 @@ public class BaseSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Double Literal</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Real Literal</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Double Literal</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Real Literal</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseDoubleLiteral(DoubleLiteral object) {
+	public T caseRealLiteral(RealLiteral object) {
 		return null;
 	}
 
@@ -807,17 +807,17 @@ public class BaseSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Float Type</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Real Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Float Type</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Real Type</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseFloatType(FloatType object) {
+	public T caseRealType(RealType object) {
 		return null;
 	}
 

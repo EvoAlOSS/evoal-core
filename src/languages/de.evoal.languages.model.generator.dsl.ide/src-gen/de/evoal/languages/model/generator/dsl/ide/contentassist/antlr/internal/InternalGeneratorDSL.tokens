@@ -44,7 +44,6 @@
 'expression'=82
 'f'=43
 'false'=15
-'float'=84
 'for'=59
 'from'=68
 'h'=35
@@ -62,6 +61,7 @@
 'pipeline'=50
 'pipelines'=64
 'reads'=55
+'real'=84
 'samples'=67
 'step'=53
 'string'=81

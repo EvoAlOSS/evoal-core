@@ -20,11 +20,9 @@ import de.evoal.languages.model.base.ConstantDefinition;
 import de.evoal.languages.model.base.ConstantReference;
 import de.evoal.languages.model.base.DataType;
 import de.evoal.languages.model.base.DefinedFunctionName;
-import de.evoal.languages.model.base.DoubleLiteral;
 import de.evoal.languages.model.base.Expression;
 import de.evoal.languages.model.base.ExpressionType;
 import de.evoal.languages.model.base.Factor;
-import de.evoal.languages.model.base.FloatType;
 import de.evoal.languages.model.base.FunctionDefinition;
 import de.evoal.languages.model.base.FunctionName;
 import de.evoal.languages.model.base.Import;
@@ -43,6 +41,8 @@ import de.evoal.languages.model.base.Parameter;
 import de.evoal.languages.model.base.Parantheses;
 import de.evoal.languages.model.base.PartialComparisonExpression;
 import de.evoal.languages.model.base.PowerOfExpression;
+import de.evoal.languages.model.base.RealLiteral;
+import de.evoal.languages.model.base.RealType;
 import de.evoal.languages.model.base.StringLiteral;
 import de.evoal.languages.model.base.StringType;
 import de.evoal.languages.model.base.Type;
@@ -179,7 +179,7 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass doubleLiteralEClass = null;
+	private EClass realLiteralEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -277,7 +277,7 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass floatTypeEClass = null;
+	private EClass realTypeEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -861,8 +861,8 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 	 * @generated
 	 */
 	@Override
-	public EClass getDoubleLiteral() {
-		return doubleLiteralEClass;
+	public EClass getRealLiteral() {
+		return realLiteralEClass;
 	}
 
 	/**
@@ -871,8 +871,8 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 	 * @generated
 	 */
 	@Override
-	public EAttribute getDoubleLiteral_Literal() {
-		return (EAttribute)doubleLiteralEClass.getEStructuralFeatures().get(0);
+	public EAttribute getRealLiteral_Literal() {
+		return (EAttribute)realLiteralEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -881,8 +881,8 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 	 * @generated
 	 */
 	@Override
-	public EOperation getDoubleLiteral__GetValue() {
-		return doubleLiteralEClass.getEOperations().get(0);
+	public EOperation getRealLiteral__GetValue() {
+		return realLiteralEClass.getEOperations().get(0);
 	}
 
 	/**
@@ -1171,8 +1171,8 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 	 * @generated
 	 */
 	@Override
-	public EClass getFloatType() {
-		return floatTypeEClass;
+	public EClass getRealType() {
+		return realTypeEClass;
 	}
 
 	/**
@@ -1628,9 +1628,9 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 		createEAttribute(integerLiteralEClass, INTEGER_LITERAL__LITERAL);
 		createEOperation(integerLiteralEClass, INTEGER_LITERAL___GET_VALUE);
 
-		doubleLiteralEClass = createEClass(DOUBLE_LITERAL);
-		createEAttribute(doubleLiteralEClass, DOUBLE_LITERAL__LITERAL);
-		createEOperation(doubleLiteralEClass, DOUBLE_LITERAL___GET_VALUE);
+		realLiteralEClass = createEClass(REAL_LITERAL);
+		createEAttribute(realLiteralEClass, REAL_LITERAL__LITERAL);
+		createEOperation(realLiteralEClass, REAL_LITERAL___GET_VALUE);
 
 		stringLiteralEClass = createEClass(STRING_LITERAL);
 		createEAttribute(stringLiteralEClass, STRING_LITERAL__VALUE);
@@ -1673,7 +1673,7 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 
 		intTypeEClass = createEClass(INT_TYPE);
 
-		floatTypeEClass = createEClass(FLOAT_TYPE);
+		realTypeEClass = createEClass(REAL_TYPE);
 
 		booleanTypeEClass = createEClass(BOOLEAN_TYPE);
 
@@ -1761,7 +1761,7 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 		literalEClass.getESuperTypes().add(this.getValue());
 		numberLiteralEClass.getESuperTypes().add(this.getLiteral());
 		integerLiteralEClass.getESuperTypes().add(this.getNumberLiteral());
-		doubleLiteralEClass.getESuperTypes().add(this.getNumberLiteral());
+		realLiteralEClass.getESuperTypes().add(this.getNumberLiteral());
 		stringLiteralEClass.getESuperTypes().add(this.getLiteral());
 		booleanLiteralEClass.getESuperTypes().add(this.getLiteral());
 		callEClass.getESuperTypes().add(this.getValue());
@@ -1771,7 +1771,7 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 		literalTypeEClass.getESuperTypes().add(this.getType());
 		stringTypeEClass.getESuperTypes().add(this.getLiteralType());
 		intTypeEClass.getESuperTypes().add(this.getLiteralType());
-		floatTypeEClass.getESuperTypes().add(this.getLiteralType());
+		realTypeEClass.getESuperTypes().add(this.getLiteralType());
 		booleanTypeEClass.getESuperTypes().add(this.getLiteralType());
 		voidTypeEClass.getESuperTypes().add(this.getType());
 		expressionTypeEClass.getESuperTypes().add(this.getType());
@@ -1840,10 +1840,10 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 
 		initEOperation(getIntegerLiteral__GetValue(), ecorePackage.getEIntegerObject(), "getValue", 1, 1, IS_UNIQUE, IS_ORDERED);
 
-		initEClass(doubleLiteralEClass, DoubleLiteral.class, "DoubleLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getDoubleLiteral_Literal(), ecorePackage.getEDouble(), "literal", null, 1, 1, DoubleLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(realLiteralEClass, RealLiteral.class, "RealLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getRealLiteral_Literal(), ecorePackage.getEDouble(), "literal", null, 1, 1, RealLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEOperation(getDoubleLiteral__GetValue(), ecorePackage.getEDoubleObject(), "getValue", 1, 1, IS_UNIQUE, IS_ORDERED);
+		initEOperation(getRealLiteral__GetValue(), ecorePackage.getEDoubleObject(), "getValue", 1, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(stringLiteralEClass, StringLiteral.class, "StringLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getStringLiteral_Value(), ecorePackage.getEString(), "value", null, 1, 1, StringLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1889,7 +1889,7 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 
 		initEClass(intTypeEClass, IntType.class, "IntType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(floatTypeEClass, FloatType.class, "FloatType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(realTypeEClass, RealType.class, "RealType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(booleanTypeEClass, BooleanType.class, "BooleanType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

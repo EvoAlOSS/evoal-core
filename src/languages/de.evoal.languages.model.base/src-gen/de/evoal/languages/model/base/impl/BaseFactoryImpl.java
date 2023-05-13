@@ -68,7 +68,7 @@ public class BaseFactoryImpl extends EFactoryImpl implements BaseFactory {
 			case BasePackage.POWER_OF_EXPRESSION: return createPowerOfExpression();
 			case BasePackage.UNARY_ADD_OR_SUBTRACT_EXPRESSION: return createUnaryAddOrSubtractExpression();
 			case BasePackage.INTEGER_LITERAL: return createIntegerLiteral();
-			case BasePackage.DOUBLE_LITERAL: return createDoubleLiteral();
+			case BasePackage.REAL_LITERAL: return createRealLiteral();
 			case BasePackage.STRING_LITERAL: return createStringLiteral();
 			case BasePackage.BOOLEAN_LITERAL: return createBooleanLiteral();
 			case BasePackage.CALL: return createCall();
@@ -81,7 +81,7 @@ public class BaseFactoryImpl extends EFactoryImpl implements BaseFactory {
 			case BasePackage.LITERAL_TYPE: return createLiteralType();
 			case BasePackage.STRING_TYPE: return createStringType();
 			case BasePackage.INT_TYPE: return createIntType();
-			case BasePackage.FLOAT_TYPE: return createFloatType();
+			case BasePackage.REAL_TYPE: return createRealType();
 			case BasePackage.BOOLEAN_TYPE: return createBooleanType();
 			case BasePackage.VOID_TYPE: return createVoidType();
 			case BasePackage.EXPRESSION_TYPE: return createExpressionType();
@@ -270,9 +270,9 @@ public class BaseFactoryImpl extends EFactoryImpl implements BaseFactory {
 	 * @generated
 	 */
 	@Override
-	public DoubleLiteral createDoubleLiteral() {
-		DoubleLiteralImpl doubleLiteral = new DoubleLiteralImpl();
-		return doubleLiteral;
+	public RealLiteral createRealLiteral() {
+		RealLiteralImpl realLiteral = new RealLiteralImpl();
+		return realLiteral;
 	}
 
 	/**
@@ -413,9 +413,9 @@ public class BaseFactoryImpl extends EFactoryImpl implements BaseFactory {
 	 * @generated
 	 */
 	@Override
-	public FloatType createFloatType() {
-		FloatTypeImpl floatType = new FloatTypeImpl();
-		return floatType;
+	public RealType createRealType() {
+		RealTypeImpl realType = new RealTypeImpl();
+		return realType;
 	}
 
 	/**

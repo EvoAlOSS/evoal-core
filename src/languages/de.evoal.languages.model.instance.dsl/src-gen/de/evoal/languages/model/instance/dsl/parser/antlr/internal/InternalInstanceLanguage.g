@@ -1372,11 +1372,11 @@ ruleNumberLiteralRule returns [EObject current=null]
 			/* */
 		}
 		{
-			newCompositeNode(grammarAccess.getNumberLiteralRuleAccess().getDoubleLiteralRuleParserRuleCall_0());
+			newCompositeNode(grammarAccess.getNumberLiteralRuleAccess().getRealLiteralRuleParserRuleCall_0());
 		}
-		this_DoubleLiteralRule_0=ruleDoubleLiteralRule
+		this_RealLiteralRule_0=ruleRealLiteralRule
 		{
-			$current = $this_DoubleLiteralRule_0.current;
+			$current = $this_RealLiteralRule_0.current;
 			afterParserOrEnumRuleCall();
 		}
 		    |
@@ -1394,15 +1394,15 @@ ruleNumberLiteralRule returns [EObject current=null]
 	)
 ;
 
-// Entry rule entryRuleDoubleLiteralRule
-entryRuleDoubleLiteralRule returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getDoubleLiteralRuleRule()); }
-	iv_ruleDoubleLiteralRule=ruleDoubleLiteralRule
-	{ $current=$iv_ruleDoubleLiteralRule.current; }
+// Entry rule entryRuleRealLiteralRule
+entryRuleRealLiteralRule returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getRealLiteralRuleRule()); }
+	iv_ruleRealLiteralRule=ruleRealLiteralRule
+	{ $current=$iv_ruleRealLiteralRule.current; }
 	EOF;
 
-// Rule DoubleLiteralRule
-ruleDoubleLiteralRule returns [EObject current=null]
+// Rule RealLiteralRule
+ruleRealLiteralRule returns [EObject current=null]
 @init {
 	enterRule();
 }
@@ -1414,11 +1414,11 @@ ruleDoubleLiteralRule returns [EObject current=null]
 			(
 				lv_literal_0_0=RULE_DOUBLE
 				{
-					newLeafNode(lv_literal_0_0, grammarAccess.getDoubleLiteralRuleAccess().getLiteralDOUBLETerminalRuleCall_0_0());
+					newLeafNode(lv_literal_0_0, grammarAccess.getRealLiteralRuleAccess().getLiteralDOUBLETerminalRuleCall_0_0());
 				}
 				{
 					if ($current==null) {
-						$current = createModelElement(grammarAccess.getDoubleLiteralRuleRule());
+						$current = createModelElement(grammarAccess.getRealLiteralRuleRule());
 					}
 					setWithLastConsumed(
 						$current,
@@ -1431,12 +1431,12 @@ ruleDoubleLiteralRule returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getDoubleLiteralRuleAccess().getFactorFactorRuleEnumRuleCall_1_0());
+					newCompositeNode(grammarAccess.getRealLiteralRuleAccess().getFactorFactorRuleEnumRuleCall_1_0());
 				}
 				lv_factor_1_0=ruleFactorRule
 				{
 					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getDoubleLiteralRuleRule());
+						$current = createModelElementForParent(grammarAccess.getRealLiteralRuleRule());
 					}
 					set(
 						$current,
@@ -1725,11 +1725,11 @@ ruleTypeRule returns [EObject current=null]
 			/* */
 		}
 		{
-			newCompositeNode(grammarAccess.getTypeRuleAccess().getFloatTypeRuleParserRuleCall_2());
+			newCompositeNode(grammarAccess.getTypeRuleAccess().getRealTypeRuleParserRuleCall_2());
 		}
-		this_FloatTypeRule_2=ruleFloatTypeRule
+		this_RealTypeRule_2=ruleRealTypeRule
 		{
-			$current = $this_FloatTypeRule_2.current;
+			$current = $this_RealTypeRule_2.current;
 			afterParserOrEnumRuleCall();
 		}
 		    |
@@ -2003,15 +2003,15 @@ ruleIntTypeRule returns [EObject current=null]
 	)
 ;
 
-// Entry rule entryRuleFloatTypeRule
-entryRuleFloatTypeRule returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getFloatTypeRuleRule()); }
-	iv_ruleFloatTypeRule=ruleFloatTypeRule
-	{ $current=$iv_ruleFloatTypeRule.current; }
+// Entry rule entryRuleRealTypeRule
+entryRuleRealTypeRule returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getRealTypeRuleRule()); }
+	iv_ruleRealTypeRule=ruleRealTypeRule
+	{ $current=$iv_ruleRealTypeRule.current; }
 	EOF;
 
-// Rule FloatTypeRule
-ruleFloatTypeRule returns [EObject current=null]
+// Rule RealTypeRule
+ruleRealTypeRule returns [EObject current=null]
 @init {
 	enterRule();
 }
@@ -2025,13 +2025,13 @@ ruleFloatTypeRule returns [EObject current=null]
 			}
 			{
 				$current = forceCreateModelElement(
-					grammarAccess.getFloatTypeRuleAccess().getFloatTypeAction_0(),
+					grammarAccess.getRealTypeRuleAccess().getRealTypeAction_0(),
 					$current);
 			}
 		)
-		otherlv_1='float'
+		otherlv_1='real'
 		{
-			newLeafNode(otherlv_1, grammarAccess.getFloatTypeRuleAccess().getFloatKeyword_1());
+			newLeafNode(otherlv_1, grammarAccess.getRealTypeRuleAccess().getRealKeyword_1());
 		}
 	)
 ;

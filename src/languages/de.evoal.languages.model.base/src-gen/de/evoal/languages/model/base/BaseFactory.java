@@ -121,13 +121,13 @@ public interface BaseFactory extends EFactory {
 	IntegerLiteral createIntegerLiteral();
 
 	/**
-	 * Returns a new object of class '<em>Double Literal</em>'.
+	 * Returns a new object of class '<em>Real Literal</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Double Literal</em>'.
+	 * @return a new object of class '<em>Real Literal</em>'.
 	 * @generated
 	 */
-	DoubleLiteral createDoubleLiteral();
+	RealLiteral createRealLiteral();
 
 	/**
 	 * Returns a new object of class '<em>String Literal</em>'.
@@ -238,13 +238,13 @@ public interface BaseFactory extends EFactory {
 	IntType createIntType();
 
 	/**
-	 * Returns a new object of class '<em>Float Type</em>'.
+	 * Returns a new object of class '<em>Real Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Float Type</em>'.
+	 * @return a new object of class '<em>Real Type</em>'.
 	 * @generated
 	 */
-	FloatType createFloatType();
+	RealType createRealType();
 
 	/**
 	 * Returns a new object of class '<em>Boolean Type</em>'.

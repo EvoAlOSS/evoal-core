@@ -101,9 +101,9 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//IntegerLiteral/literal"/>
       <genOperations ecoreOperation="model.ecore#//IntegerLiteral/getValue" body="return (int)(literal * Math.pow(10, super.getFactor().getValue()));&#xA;"/>
     </genClasses>
-    <genClasses ecoreClass="model.ecore#//DoubleLiteral">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//DoubleLiteral/literal"/>
-      <genOperations ecoreOperation="model.ecore#//DoubleLiteral/getValue" body="return literal * Math.pow(10, super.getFactor().getValue());&#xA;"/>
+    <genClasses ecoreClass="model.ecore#//RealLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//RealLiteral/literal"/>
+      <genOperations ecoreOperation="model.ecore#//RealLiteral/getValue" body="return literal * Math.pow(10, super.getFactor().getValue());&#xA;"/>
     </genClasses>
     <genClasses ecoreClass="model.ecore#//StringLiteral">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//StringLiteral/value"/>
@@ -142,7 +142,7 @@
     <genClasses ecoreClass="model.ecore#//LiteralType"/>
     <genClasses ecoreClass="model.ecore#//StringType"/>
     <genClasses ecoreClass="model.ecore#//IntType"/>
-    <genClasses ecoreClass="model.ecore#//FloatType"/>
+    <genClasses ecoreClass="model.ecore#//RealType"/>
     <genClasses ecoreClass="model.ecore#//BooleanType"/>
     <genClasses ecoreClass="model.ecore#//VoidType"/>
     <genClasses ecoreClass="model.ecore#//ExpressionType"/>

@@ -705,14 +705,14 @@ public interface BasePackage extends EPackage {
 	int INTEGER_LITERAL_OPERATION_COUNT = NUMBER_LITERAL_OPERATION_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.base.impl.DoubleLiteralImpl <em>Double Literal</em>}' class.
+	 * The meta object id for the '{@link de.evoal.languages.model.base.impl.RealLiteralImpl <em>Real Literal</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.base.impl.DoubleLiteralImpl
-	 * @see de.evoal.languages.model.base.impl.BasePackageImpl#getDoubleLiteral()
+	 * @see de.evoal.languages.model.base.impl.RealLiteralImpl
+	 * @see de.evoal.languages.model.base.impl.BasePackageImpl#getRealLiteral()
 	 * @generated
 	 */
-	int DOUBLE_LITERAL = 15;
+	int REAL_LITERAL = 15;
 
 	/**
 	 * The feature id for the '<em><b>Factor</b></em>' attribute.
@@ -721,7 +721,7 @@ public interface BasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DOUBLE_LITERAL__FACTOR = NUMBER_LITERAL__FACTOR;
+	int REAL_LITERAL__FACTOR = NUMBER_LITERAL__FACTOR;
 
 	/**
 	 * The feature id for the '<em><b>Literal</b></em>' attribute.
@@ -730,16 +730,16 @@ public interface BasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DOUBLE_LITERAL__LITERAL = NUMBER_LITERAL_FEATURE_COUNT + 0;
+	int REAL_LITERAL__LITERAL = NUMBER_LITERAL_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the '<em>Double Literal</em>' class.
+	 * The number of structural features of the '<em>Real Literal</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DOUBLE_LITERAL_FEATURE_COUNT = NUMBER_LITERAL_FEATURE_COUNT + 1;
+	int REAL_LITERAL_FEATURE_COUNT = NUMBER_LITERAL_FEATURE_COUNT + 1;
 
 	/**
 	 * The operation id for the '<em>Get Value</em>' operation.
@@ -748,16 +748,16 @@ public interface BasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DOUBLE_LITERAL___GET_VALUE = NUMBER_LITERAL_OPERATION_COUNT + 0;
+	int REAL_LITERAL___GET_VALUE = NUMBER_LITERAL_OPERATION_COUNT + 0;
 
 	/**
-	 * The number of operations of the '<em>Double Literal</em>' class.
+	 * The number of operations of the '<em>Real Literal</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DOUBLE_LITERAL_OPERATION_COUNT = NUMBER_LITERAL_OPERATION_COUNT + 1;
+	int REAL_LITERAL_OPERATION_COUNT = NUMBER_LITERAL_OPERATION_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.impl.StringLiteralImpl <em>String Literal</em>}' class.
@@ -1268,32 +1268,32 @@ public interface BasePackage extends EPackage {
 	int INT_TYPE_OPERATION_COUNT = LITERAL_TYPE_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.base.impl.FloatTypeImpl <em>Float Type</em>}' class.
+	 * The meta object id for the '{@link de.evoal.languages.model.base.impl.RealTypeImpl <em>Real Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.base.impl.FloatTypeImpl
-	 * @see de.evoal.languages.model.base.impl.BasePackageImpl#getFloatType()
+	 * @see de.evoal.languages.model.base.impl.RealTypeImpl
+	 * @see de.evoal.languages.model.base.impl.BasePackageImpl#getRealType()
 	 * @generated
 	 */
-	int FLOAT_TYPE = 29;
+	int REAL_TYPE = 29;
 
 	/**
-	 * The number of structural features of the '<em>Float Type</em>' class.
+	 * The number of structural features of the '<em>Real Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FLOAT_TYPE_FEATURE_COUNT = LITERAL_TYPE_FEATURE_COUNT + 0;
+	int REAL_TYPE_FEATURE_COUNT = LITERAL_TYPE_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of operations of the '<em>Float Type</em>' class.
+	 * The number of operations of the '<em>Real Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FLOAT_TYPE_OPERATION_COUNT = LITERAL_TYPE_OPERATION_COUNT + 0;
+	int REAL_TYPE_OPERATION_COUNT = LITERAL_TYPE_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.impl.BooleanTypeImpl <em>Boolean Type</em>}' class.
@@ -2320,35 +2320,35 @@ public interface BasePackage extends EPackage {
 	EOperation getIntegerLiteral__GetValue();
 
 	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.base.DoubleLiteral <em>Double Literal</em>}'.
+	 * Returns the meta object for class '{@link de.evoal.languages.model.base.RealLiteral <em>Real Literal</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Double Literal</em>'.
-	 * @see de.evoal.languages.model.base.DoubleLiteral
+	 * @return the meta object for class '<em>Real Literal</em>'.
+	 * @see de.evoal.languages.model.base.RealLiteral
 	 * @generated
 	 */
-	EClass getDoubleLiteral();
+	EClass getRealLiteral();
 
 	/**
-	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.base.DoubleLiteral#getLiteral <em>Literal</em>}'.
+	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.base.RealLiteral#getLiteral <em>Literal</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Literal</em>'.
-	 * @see de.evoal.languages.model.base.DoubleLiteral#getLiteral()
-	 * @see #getDoubleLiteral()
+	 * @see de.evoal.languages.model.base.RealLiteral#getLiteral()
+	 * @see #getRealLiteral()
 	 * @generated
 	 */
-	EAttribute getDoubleLiteral_Literal();
+	EAttribute getRealLiteral_Literal();
 
 	/**
-	 * Returns the meta object for the '{@link de.evoal.languages.model.base.DoubleLiteral#getValue() <em>Get Value</em>}' operation.
+	 * Returns the meta object for the '{@link de.evoal.languages.model.base.RealLiteral#getValue() <em>Get Value</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the '<em>Get Value</em>' operation.
-	 * @see de.evoal.languages.model.base.DoubleLiteral#getValue()
+	 * @see de.evoal.languages.model.base.RealLiteral#getValue()
 	 * @generated
 	 */
-	EOperation getDoubleLiteral__GetValue();
+	EOperation getRealLiteral__GetValue();
 
 	/**
 	 * Returns the meta object for class '{@link de.evoal.languages.model.base.StringLiteral <em>String Literal</em>}'.
@@ -2644,14 +2644,14 @@ public interface BasePackage extends EPackage {
 	EClass getIntType();
 
 	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.base.FloatType <em>Float Type</em>}'.
+	 * Returns the meta object for class '{@link de.evoal.languages.model.base.RealType <em>Real Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Float Type</em>'.
-	 * @see de.evoal.languages.model.base.FloatType
+	 * @return the meta object for class '<em>Real Type</em>'.
+	 * @see de.evoal.languages.model.base.RealType
 	 * @generated
 	 */
-	EClass getFloatType();
+	EClass getRealType();
 
 	/**
 	 * Returns the meta object for class '{@link de.evoal.languages.model.base.BooleanType <em>Boolean Type</em>}'.
@@ -3407,14 +3407,14 @@ public interface BasePackage extends EPackage {
 		EOperation INTEGER_LITERAL___GET_VALUE = eINSTANCE.getIntegerLiteral__GetValue();
 
 		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.base.impl.DoubleLiteralImpl <em>Double Literal</em>}' class.
+		 * The meta object literal for the '{@link de.evoal.languages.model.base.impl.RealLiteralImpl <em>Real Literal</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.base.impl.DoubleLiteralImpl
-		 * @see de.evoal.languages.model.base.impl.BasePackageImpl#getDoubleLiteral()
+		 * @see de.evoal.languages.model.base.impl.RealLiteralImpl
+		 * @see de.evoal.languages.model.base.impl.BasePackageImpl#getRealLiteral()
 		 * @generated
 		 */
-		EClass DOUBLE_LITERAL = eINSTANCE.getDoubleLiteral();
+		EClass REAL_LITERAL = eINSTANCE.getRealLiteral();
 
 		/**
 		 * The meta object literal for the '<em><b>Literal</b></em>' attribute feature.
@@ -3422,7 +3422,7 @@ public interface BasePackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute DOUBLE_LITERAL__LITERAL = eINSTANCE.getDoubleLiteral_Literal();
+		EAttribute REAL_LITERAL__LITERAL = eINSTANCE.getRealLiteral_Literal();
 
 		/**
 		 * The meta object literal for the '<em><b>Get Value</b></em>' operation.
@@ -3430,7 +3430,7 @@ public interface BasePackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EOperation DOUBLE_LITERAL___GET_VALUE = eINSTANCE.getDoubleLiteral__GetValue();
+		EOperation REAL_LITERAL___GET_VALUE = eINSTANCE.getRealLiteral__GetValue();
 
 		/**
 		 * The meta object literal for the '{@link de.evoal.languages.model.base.impl.StringLiteralImpl <em>String Literal</em>}' class.
@@ -3683,14 +3683,14 @@ public interface BasePackage extends EPackage {
 		EClass INT_TYPE = eINSTANCE.getIntType();
 
 		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.base.impl.FloatTypeImpl <em>Float Type</em>}' class.
+		 * The meta object literal for the '{@link de.evoal.languages.model.base.impl.RealTypeImpl <em>Real Type</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.base.impl.FloatTypeImpl
-		 * @see de.evoal.languages.model.base.impl.BasePackageImpl#getFloatType()
+		 * @see de.evoal.languages.model.base.impl.RealTypeImpl
+		 * @see de.evoal.languages.model.base.impl.BasePackageImpl#getRealType()
 		 * @generated
 		 */
-		EClass FLOAT_TYPE = eINSTANCE.getFloatType();
+		EClass REAL_TYPE = eINSTANCE.getRealType();
 
 		/**
 		 * The meta object literal for the '{@link de.evoal.languages.model.base.impl.BooleanTypeImpl <em>Boolean Type</em>}' class.

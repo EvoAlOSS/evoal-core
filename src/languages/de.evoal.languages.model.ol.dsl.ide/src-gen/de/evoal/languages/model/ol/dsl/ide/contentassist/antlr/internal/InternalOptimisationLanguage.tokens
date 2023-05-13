@@ -43,7 +43,6 @@
 'expression'=70
 'f'=43
 'false'=15
-'float'=72
 'for'=55
 'from'=77
 'h'=35
@@ -56,6 +55,7 @@
 'module'=47
 'n'=41
 'p'=42
+'real'=72
 'specify'=50
 'string'=69
 'true'=80

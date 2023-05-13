@@ -3,24 +3,24 @@
 package de.evoal.languages.model.base.impl;
 
 import de.evoal.languages.model.base.BasePackage;
-import de.evoal.languages.model.base.FloatType;
+import de.evoal.languages.model.base.RealType;
 
 import org.eclipse.emf.ecore.EClass;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Float Type</b></em>'.
+ * An implementation of the model object '<em><b>Real Type</b></em>'.
  * <!-- end-user-doc -->
  *
  * @generated
  */
-public class FloatTypeImpl extends LiteralTypeImpl implements FloatType {
+public class RealTypeImpl extends LiteralTypeImpl implements RealType {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected FloatTypeImpl() {
+	protected RealTypeImpl() {
 		super();
 	}
 
@@ -31,7 +31,7 @@ public class FloatTypeImpl extends LiteralTypeImpl implements FloatType {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return BasePackage.Literals.FLOAT_TYPE;
+		return BasePackage.Literals.REAL_TYPE;
 	}
 
-} //FloatTypeImpl
+} //RealTypeImpl

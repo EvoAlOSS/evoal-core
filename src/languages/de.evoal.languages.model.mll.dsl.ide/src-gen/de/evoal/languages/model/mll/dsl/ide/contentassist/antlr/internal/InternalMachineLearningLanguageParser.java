@@ -23,7 +23,7 @@ import java.util.HashMap;
 @SuppressWarnings("all")
 public class InternalMachineLearningLanguageParser extends AbstractInternalContentAssistParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_QUOTED_ID", "RULE_ID", "RULE_STRING", "RULE_INT", "RULE_DOUBLE", "RULE_DIGIT", "RULE_EXPONENT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'false'", "'>='", "'>'", "'='", "'!='", "'<'", "'<='", "'+'", "'-'", "'*'", "'/'", "'%'", "'Y'", "'Z'", "'E'", "'P'", "'T'", "'G'", "'M'", "'k'", "'h'", "'da'", "'d'", "'c'", "'m'", "'\\u00B5'", "'n'", "'p'", "'f'", "'a'", "'z'", "'y'", "'module'", "'{'", "'}'", "'prediction'", "'maps'", "'to'", "'using'", "','", "'layer'", "'with'", "'function'", "'mapping'", "'parameters'", "'predict'", "'from'", "'and'", "'store'", "'measure'", "'end'", "'for'", "'in'", "'loop'", "'['", "']'", "';'", "'data'", "'OR'", "'XOR'", "'AND'", "'^'", "'('", "')'", "':='", "':'", "'literal'", "'instance'", "'string'", "'expression'", "'int'", "'float'", "'boolean'", "'void'", "'array'", "'import'", "'.'", "'!'", "'true'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_QUOTED_ID", "RULE_ID", "RULE_STRING", "RULE_INT", "RULE_DOUBLE", "RULE_DIGIT", "RULE_EXPONENT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'false'", "'>='", "'>'", "'='", "'!='", "'<'", "'<='", "'+'", "'-'", "'*'", "'/'", "'%'", "'Y'", "'Z'", "'E'", "'P'", "'T'", "'G'", "'M'", "'k'", "'h'", "'da'", "'d'", "'c'", "'m'", "'\\u00B5'", "'n'", "'p'", "'f'", "'a'", "'z'", "'y'", "'module'", "'{'", "'}'", "'prediction'", "'maps'", "'to'", "'using'", "','", "'layer'", "'with'", "'function'", "'mapping'", "'parameters'", "'predict'", "'from'", "'and'", "'store'", "'measure'", "'end'", "'for'", "'in'", "'loop'", "'['", "']'", "';'", "'data'", "'OR'", "'XOR'", "'AND'", "'^'", "'('", "')'", "':='", "':'", "'literal'", "'instance'", "'string'", "'expression'", "'int'", "'real'", "'boolean'", "'void'", "'array'", "'import'", "'.'", "'!'", "'true'"
     };
     public static final int T__50=50;
     public static final int T__59=59;
@@ -2951,23 +2951,23 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
     // $ANTLR end "ruleNumberLiteralRule"
 
 
-    // $ANTLR start "entryRuleDoubleLiteralRule"
-    // InternalMachineLearningLanguage.g:880:1: entryRuleDoubleLiteralRule : ruleDoubleLiteralRule EOF ;
-    public final void entryRuleDoubleLiteralRule() throws RecognitionException {
+    // $ANTLR start "entryRuleRealLiteralRule"
+    // InternalMachineLearningLanguage.g:880:1: entryRuleRealLiteralRule : ruleRealLiteralRule EOF ;
+    public final void entryRuleRealLiteralRule() throws RecognitionException {
         try {
-            // InternalMachineLearningLanguage.g:881:1: ( ruleDoubleLiteralRule EOF )
-            // InternalMachineLearningLanguage.g:882:1: ruleDoubleLiteralRule EOF
+            // InternalMachineLearningLanguage.g:881:1: ( ruleRealLiteralRule EOF )
+            // InternalMachineLearningLanguage.g:882:1: ruleRealLiteralRule EOF
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getDoubleLiteralRuleRule()); 
+               before(grammarAccess.getRealLiteralRuleRule()); 
             }
             pushFollow(FOLLOW_1);
-            ruleDoubleLiteralRule();
+            ruleRealLiteralRule();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getDoubleLiteralRuleRule()); 
+               after(grammarAccess.getRealLiteralRuleRule()); 
             }
             match(input,EOF,FOLLOW_2); if (state.failed) return ;
 
@@ -2982,30 +2982,30 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
         }
         return ;
     }
-    // $ANTLR end "entryRuleDoubleLiteralRule"
+    // $ANTLR end "entryRuleRealLiteralRule"
 
 
-    // $ANTLR start "ruleDoubleLiteralRule"
-    // InternalMachineLearningLanguage.g:889:1: ruleDoubleLiteralRule : ( ( rule__DoubleLiteralRule__Group__0 ) ) ;
-    public final void ruleDoubleLiteralRule() throws RecognitionException {
+    // $ANTLR start "ruleRealLiteralRule"
+    // InternalMachineLearningLanguage.g:889:1: ruleRealLiteralRule : ( ( rule__RealLiteralRule__Group__0 ) ) ;
+    public final void ruleRealLiteralRule() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalMachineLearningLanguage.g:893:2: ( ( ( rule__DoubleLiteralRule__Group__0 ) ) )
-            // InternalMachineLearningLanguage.g:894:2: ( ( rule__DoubleLiteralRule__Group__0 ) )
+            // InternalMachineLearningLanguage.g:893:2: ( ( ( rule__RealLiteralRule__Group__0 ) ) )
+            // InternalMachineLearningLanguage.g:894:2: ( ( rule__RealLiteralRule__Group__0 ) )
             {
-            // InternalMachineLearningLanguage.g:894:2: ( ( rule__DoubleLiteralRule__Group__0 ) )
-            // InternalMachineLearningLanguage.g:895:3: ( rule__DoubleLiteralRule__Group__0 )
+            // InternalMachineLearningLanguage.g:894:2: ( ( rule__RealLiteralRule__Group__0 ) )
+            // InternalMachineLearningLanguage.g:895:3: ( rule__RealLiteralRule__Group__0 )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getDoubleLiteralRuleAccess().getGroup()); 
+               before(grammarAccess.getRealLiteralRuleAccess().getGroup()); 
             }
-            // InternalMachineLearningLanguage.g:896:3: ( rule__DoubleLiteralRule__Group__0 )
-            // InternalMachineLearningLanguage.g:896:4: rule__DoubleLiteralRule__Group__0
+            // InternalMachineLearningLanguage.g:896:3: ( rule__RealLiteralRule__Group__0 )
+            // InternalMachineLearningLanguage.g:896:4: rule__RealLiteralRule__Group__0
             {
             pushFollow(FOLLOW_2);
-            rule__DoubleLiteralRule__Group__0();
+            rule__RealLiteralRule__Group__0();
 
             state._fsp--;
             if (state.failed) return ;
@@ -3013,7 +3013,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getDoubleLiteralRuleAccess().getGroup()); 
+               after(grammarAccess.getRealLiteralRuleAccess().getGroup()); 
             }
 
             }
@@ -3033,7 +3033,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
         }
         return ;
     }
-    // $ANTLR end "ruleDoubleLiteralRule"
+    // $ANTLR end "ruleRealLiteralRule"
 
 
     // $ANTLR start "entryRuleIntegerLiteralRule"
@@ -3886,23 +3886,23 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
     // $ANTLR end "ruleIntTypeRule"
 
 
-    // $ANTLR start "entryRuleFloatTypeRule"
-    // InternalMachineLearningLanguage.g:1155:1: entryRuleFloatTypeRule : ruleFloatTypeRule EOF ;
-    public final void entryRuleFloatTypeRule() throws RecognitionException {
+    // $ANTLR start "entryRuleRealTypeRule"
+    // InternalMachineLearningLanguage.g:1155:1: entryRuleRealTypeRule : ruleRealTypeRule EOF ;
+    public final void entryRuleRealTypeRule() throws RecognitionException {
         try {
-            // InternalMachineLearningLanguage.g:1156:1: ( ruleFloatTypeRule EOF )
-            // InternalMachineLearningLanguage.g:1157:1: ruleFloatTypeRule EOF
+            // InternalMachineLearningLanguage.g:1156:1: ( ruleRealTypeRule EOF )
+            // InternalMachineLearningLanguage.g:1157:1: ruleRealTypeRule EOF
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getFloatTypeRuleRule()); 
+               before(grammarAccess.getRealTypeRuleRule()); 
             }
             pushFollow(FOLLOW_1);
-            ruleFloatTypeRule();
+            ruleRealTypeRule();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getFloatTypeRuleRule()); 
+               after(grammarAccess.getRealTypeRuleRule()); 
             }
             match(input,EOF,FOLLOW_2); if (state.failed) return ;
 
@@ -3917,30 +3917,30 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
         }
         return ;
     }
-    // $ANTLR end "entryRuleFloatTypeRule"
+    // $ANTLR end "entryRuleRealTypeRule"
 
 
-    // $ANTLR start "ruleFloatTypeRule"
-    // InternalMachineLearningLanguage.g:1164:1: ruleFloatTypeRule : ( ( rule__FloatTypeRule__Group__0 ) ) ;
-    public final void ruleFloatTypeRule() throws RecognitionException {
+    // $ANTLR start "ruleRealTypeRule"
+    // InternalMachineLearningLanguage.g:1164:1: ruleRealTypeRule : ( ( rule__RealTypeRule__Group__0 ) ) ;
+    public final void ruleRealTypeRule() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalMachineLearningLanguage.g:1168:2: ( ( ( rule__FloatTypeRule__Group__0 ) ) )
-            // InternalMachineLearningLanguage.g:1169:2: ( ( rule__FloatTypeRule__Group__0 ) )
+            // InternalMachineLearningLanguage.g:1168:2: ( ( ( rule__RealTypeRule__Group__0 ) ) )
+            // InternalMachineLearningLanguage.g:1169:2: ( ( rule__RealTypeRule__Group__0 ) )
             {
-            // InternalMachineLearningLanguage.g:1169:2: ( ( rule__FloatTypeRule__Group__0 ) )
-            // InternalMachineLearningLanguage.g:1170:3: ( rule__FloatTypeRule__Group__0 )
+            // InternalMachineLearningLanguage.g:1169:2: ( ( rule__RealTypeRule__Group__0 ) )
+            // InternalMachineLearningLanguage.g:1170:3: ( rule__RealTypeRule__Group__0 )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getFloatTypeRuleAccess().getGroup()); 
+               before(grammarAccess.getRealTypeRuleAccess().getGroup()); 
             }
-            // InternalMachineLearningLanguage.g:1171:3: ( rule__FloatTypeRule__Group__0 )
-            // InternalMachineLearningLanguage.g:1171:4: rule__FloatTypeRule__Group__0
+            // InternalMachineLearningLanguage.g:1171:3: ( rule__RealTypeRule__Group__0 )
+            // InternalMachineLearningLanguage.g:1171:4: rule__RealTypeRule__Group__0
             {
             pushFollow(FOLLOW_2);
-            rule__FloatTypeRule__Group__0();
+            rule__RealTypeRule__Group__0();
 
             state._fsp--;
             if (state.failed) return ;
@@ -3948,7 +3948,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getFloatTypeRuleAccess().getGroup()); 
+               after(grammarAccess.getRealTypeRuleAccess().getGroup()); 
             }
 
             }
@@ -3968,7 +3968,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
         }
         return ;
     }
-    // $ANTLR end "ruleFloatTypeRule"
+    // $ANTLR end "ruleRealTypeRule"
 
 
     // $ANTLR start "entryRuleBooleanTypeRule"
@@ -5543,13 +5543,13 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__NumberLiteralRule__Alternatives"
-    // InternalMachineLearningLanguage.g:1609:1: rule__NumberLiteralRule__Alternatives : ( ( ruleDoubleLiteralRule ) | ( ruleIntegerLiteralRule ) );
+    // InternalMachineLearningLanguage.g:1609:1: rule__NumberLiteralRule__Alternatives : ( ( ruleRealLiteralRule ) | ( ruleIntegerLiteralRule ) );
     public final void rule__NumberLiteralRule__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalMachineLearningLanguage.g:1613:1: ( ( ruleDoubleLiteralRule ) | ( ruleIntegerLiteralRule ) )
+            // InternalMachineLearningLanguage.g:1613:1: ( ( ruleRealLiteralRule ) | ( ruleIntegerLiteralRule ) )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -5568,21 +5568,21 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
             }
             switch (alt6) {
                 case 1 :
-                    // InternalMachineLearningLanguage.g:1614:2: ( ruleDoubleLiteralRule )
+                    // InternalMachineLearningLanguage.g:1614:2: ( ruleRealLiteralRule )
                     {
-                    // InternalMachineLearningLanguage.g:1614:2: ( ruleDoubleLiteralRule )
-                    // InternalMachineLearningLanguage.g:1615:3: ruleDoubleLiteralRule
+                    // InternalMachineLearningLanguage.g:1614:2: ( ruleRealLiteralRule )
+                    // InternalMachineLearningLanguage.g:1615:3: ruleRealLiteralRule
                     {
                     if ( state.backtracking==0 ) {
-                       before(grammarAccess.getNumberLiteralRuleAccess().getDoubleLiteralRuleParserRuleCall_0()); 
+                       before(grammarAccess.getNumberLiteralRuleAccess().getRealLiteralRuleParserRuleCall_0()); 
                     }
                     pushFollow(FOLLOW_2);
-                    ruleDoubleLiteralRule();
+                    ruleRealLiteralRule();
 
                     state._fsp--;
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
-                       after(grammarAccess.getNumberLiteralRuleAccess().getDoubleLiteralRuleParserRuleCall_0()); 
+                       after(grammarAccess.getNumberLiteralRuleAccess().getRealLiteralRuleParserRuleCall_0()); 
                     }
 
                     }
@@ -5721,13 +5721,13 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__TypeRule__Alternatives"
-    // InternalMachineLearningLanguage.g:1651:1: rule__TypeRule__Alternatives : ( ( ruleStringTypeRule ) | ( ruleIntTypeRule ) | ( ruleFloatTypeRule ) | ( ruleBooleanTypeRule ) | ( ruleLiteralTypeRule ) | ( ruleArrayTypeRule ) | ( ruleInstanceTypeRule ) | ( ruleVoidTypeRule ) | ( ruleExpressionTypeRule ) | ( ruleDataTypeRule ) );
+    // InternalMachineLearningLanguage.g:1651:1: rule__TypeRule__Alternatives : ( ( ruleStringTypeRule ) | ( ruleIntTypeRule ) | ( ruleRealTypeRule ) | ( ruleBooleanTypeRule ) | ( ruleLiteralTypeRule ) | ( ruleArrayTypeRule ) | ( ruleInstanceTypeRule ) | ( ruleVoidTypeRule ) | ( ruleExpressionTypeRule ) | ( ruleDataTypeRule ) );
     public final void rule__TypeRule__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalMachineLearningLanguage.g:1655:1: ( ( ruleStringTypeRule ) | ( ruleIntTypeRule ) | ( ruleFloatTypeRule ) | ( ruleBooleanTypeRule ) | ( ruleLiteralTypeRule ) | ( ruleArrayTypeRule ) | ( ruleInstanceTypeRule ) | ( ruleVoidTypeRule ) | ( ruleExpressionTypeRule ) | ( ruleDataTypeRule ) )
+            // InternalMachineLearningLanguage.g:1655:1: ( ( ruleStringTypeRule ) | ( ruleIntTypeRule ) | ( ruleRealTypeRule ) | ( ruleBooleanTypeRule ) | ( ruleLiteralTypeRule ) | ( ruleArrayTypeRule ) | ( ruleInstanceTypeRule ) | ( ruleVoidTypeRule ) | ( ruleExpressionTypeRule ) | ( ruleDataTypeRule ) )
             int alt8=10;
             switch ( input.LA(1) ) {
             case 83:
@@ -5836,21 +5836,21 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
                     }
                     break;
                 case 3 :
-                    // InternalMachineLearningLanguage.g:1668:2: ( ruleFloatTypeRule )
+                    // InternalMachineLearningLanguage.g:1668:2: ( ruleRealTypeRule )
                     {
-                    // InternalMachineLearningLanguage.g:1668:2: ( ruleFloatTypeRule )
-                    // InternalMachineLearningLanguage.g:1669:3: ruleFloatTypeRule
+                    // InternalMachineLearningLanguage.g:1668:2: ( ruleRealTypeRule )
+                    // InternalMachineLearningLanguage.g:1669:3: ruleRealTypeRule
                     {
                     if ( state.backtracking==0 ) {
-                       before(grammarAccess.getTypeRuleAccess().getFloatTypeRuleParserRuleCall_2()); 
+                       before(grammarAccess.getTypeRuleAccess().getRealTypeRuleParserRuleCall_2()); 
                     }
                     pushFollow(FOLLOW_2);
-                    ruleFloatTypeRule();
+                    ruleRealTypeRule();
 
                     state._fsp--;
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
-                       after(grammarAccess.getTypeRuleAccess().getFloatTypeRuleParserRuleCall_2()); 
+                       after(grammarAccess.getTypeRuleAccess().getRealTypeRuleParserRuleCall_2()); 
                     }
 
                     }
@@ -19106,23 +19106,23 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
     // $ANTLR end "rule__AttributeRule__Group__3__Impl"
 
 
-    // $ANTLR start "rule__DoubleLiteralRule__Group__0"
-    // InternalMachineLearningLanguage.g:5656:1: rule__DoubleLiteralRule__Group__0 : rule__DoubleLiteralRule__Group__0__Impl rule__DoubleLiteralRule__Group__1 ;
-    public final void rule__DoubleLiteralRule__Group__0() throws RecognitionException {
+    // $ANTLR start "rule__RealLiteralRule__Group__0"
+    // InternalMachineLearningLanguage.g:5656:1: rule__RealLiteralRule__Group__0 : rule__RealLiteralRule__Group__0__Impl rule__RealLiteralRule__Group__1 ;
+    public final void rule__RealLiteralRule__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalMachineLearningLanguage.g:5660:1: ( rule__DoubleLiteralRule__Group__0__Impl rule__DoubleLiteralRule__Group__1 )
-            // InternalMachineLearningLanguage.g:5661:2: rule__DoubleLiteralRule__Group__0__Impl rule__DoubleLiteralRule__Group__1
+            // InternalMachineLearningLanguage.g:5660:1: ( rule__RealLiteralRule__Group__0__Impl rule__RealLiteralRule__Group__1 )
+            // InternalMachineLearningLanguage.g:5661:2: rule__RealLiteralRule__Group__0__Impl rule__RealLiteralRule__Group__1
             {
             pushFollow(FOLLOW_61);
-            rule__DoubleLiteralRule__Group__0__Impl();
+            rule__RealLiteralRule__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
             pushFollow(FOLLOW_2);
-            rule__DoubleLiteralRule__Group__1();
+            rule__RealLiteralRule__Group__1();
 
             state._fsp--;
             if (state.failed) return ;
@@ -19141,30 +19141,30 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
         }
         return ;
     }
-    // $ANTLR end "rule__DoubleLiteralRule__Group__0"
+    // $ANTLR end "rule__RealLiteralRule__Group__0"
 
 
-    // $ANTLR start "rule__DoubleLiteralRule__Group__0__Impl"
-    // InternalMachineLearningLanguage.g:5668:1: rule__DoubleLiteralRule__Group__0__Impl : ( ( rule__DoubleLiteralRule__LiteralAssignment_0 ) ) ;
-    public final void rule__DoubleLiteralRule__Group__0__Impl() throws RecognitionException {
+    // $ANTLR start "rule__RealLiteralRule__Group__0__Impl"
+    // InternalMachineLearningLanguage.g:5668:1: rule__RealLiteralRule__Group__0__Impl : ( ( rule__RealLiteralRule__LiteralAssignment_0 ) ) ;
+    public final void rule__RealLiteralRule__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalMachineLearningLanguage.g:5672:1: ( ( ( rule__DoubleLiteralRule__LiteralAssignment_0 ) ) )
-            // InternalMachineLearningLanguage.g:5673:1: ( ( rule__DoubleLiteralRule__LiteralAssignment_0 ) )
+            // InternalMachineLearningLanguage.g:5672:1: ( ( ( rule__RealLiteralRule__LiteralAssignment_0 ) ) )
+            // InternalMachineLearningLanguage.g:5673:1: ( ( rule__RealLiteralRule__LiteralAssignment_0 ) )
             {
-            // InternalMachineLearningLanguage.g:5673:1: ( ( rule__DoubleLiteralRule__LiteralAssignment_0 ) )
-            // InternalMachineLearningLanguage.g:5674:2: ( rule__DoubleLiteralRule__LiteralAssignment_0 )
+            // InternalMachineLearningLanguage.g:5673:1: ( ( rule__RealLiteralRule__LiteralAssignment_0 ) )
+            // InternalMachineLearningLanguage.g:5674:2: ( rule__RealLiteralRule__LiteralAssignment_0 )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getDoubleLiteralRuleAccess().getLiteralAssignment_0()); 
+               before(grammarAccess.getRealLiteralRuleAccess().getLiteralAssignment_0()); 
             }
-            // InternalMachineLearningLanguage.g:5675:2: ( rule__DoubleLiteralRule__LiteralAssignment_0 )
-            // InternalMachineLearningLanguage.g:5675:3: rule__DoubleLiteralRule__LiteralAssignment_0
+            // InternalMachineLearningLanguage.g:5675:2: ( rule__RealLiteralRule__LiteralAssignment_0 )
+            // InternalMachineLearningLanguage.g:5675:3: rule__RealLiteralRule__LiteralAssignment_0
             {
             pushFollow(FOLLOW_2);
-            rule__DoubleLiteralRule__LiteralAssignment_0();
+            rule__RealLiteralRule__LiteralAssignment_0();
 
             state._fsp--;
             if (state.failed) return ;
@@ -19172,7 +19172,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getDoubleLiteralRuleAccess().getLiteralAssignment_0()); 
+               after(grammarAccess.getRealLiteralRuleAccess().getLiteralAssignment_0()); 
             }
 
             }
@@ -19192,21 +19192,21 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
         }
         return ;
     }
-    // $ANTLR end "rule__DoubleLiteralRule__Group__0__Impl"
+    // $ANTLR end "rule__RealLiteralRule__Group__0__Impl"
 
 
-    // $ANTLR start "rule__DoubleLiteralRule__Group__1"
-    // InternalMachineLearningLanguage.g:5683:1: rule__DoubleLiteralRule__Group__1 : rule__DoubleLiteralRule__Group__1__Impl ;
-    public final void rule__DoubleLiteralRule__Group__1() throws RecognitionException {
+    // $ANTLR start "rule__RealLiteralRule__Group__1"
+    // InternalMachineLearningLanguage.g:5683:1: rule__RealLiteralRule__Group__1 : rule__RealLiteralRule__Group__1__Impl ;
+    public final void rule__RealLiteralRule__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalMachineLearningLanguage.g:5687:1: ( rule__DoubleLiteralRule__Group__1__Impl )
-            // InternalMachineLearningLanguage.g:5688:2: rule__DoubleLiteralRule__Group__1__Impl
+            // InternalMachineLearningLanguage.g:5687:1: ( rule__RealLiteralRule__Group__1__Impl )
+            // InternalMachineLearningLanguage.g:5688:2: rule__RealLiteralRule__Group__1__Impl
             {
             pushFollow(FOLLOW_2);
-            rule__DoubleLiteralRule__Group__1__Impl();
+            rule__RealLiteralRule__Group__1__Impl();
 
             state._fsp--;
             if (state.failed) return ;
@@ -19225,26 +19225,26 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
         }
         return ;
     }
-    // $ANTLR end "rule__DoubleLiteralRule__Group__1"
+    // $ANTLR end "rule__RealLiteralRule__Group__1"
 
 
-    // $ANTLR start "rule__DoubleLiteralRule__Group__1__Impl"
-    // InternalMachineLearningLanguage.g:5694:1: rule__DoubleLiteralRule__Group__1__Impl : ( ( rule__DoubleLiteralRule__FactorAssignment_1 )? ) ;
-    public final void rule__DoubleLiteralRule__Group__1__Impl() throws RecognitionException {
+    // $ANTLR start "rule__RealLiteralRule__Group__1__Impl"
+    // InternalMachineLearningLanguage.g:5694:1: rule__RealLiteralRule__Group__1__Impl : ( ( rule__RealLiteralRule__FactorAssignment_1 )? ) ;
+    public final void rule__RealLiteralRule__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalMachineLearningLanguage.g:5698:1: ( ( ( rule__DoubleLiteralRule__FactorAssignment_1 )? ) )
-            // InternalMachineLearningLanguage.g:5699:1: ( ( rule__DoubleLiteralRule__FactorAssignment_1 )? )
+            // InternalMachineLearningLanguage.g:5698:1: ( ( ( rule__RealLiteralRule__FactorAssignment_1 )? ) )
+            // InternalMachineLearningLanguage.g:5699:1: ( ( rule__RealLiteralRule__FactorAssignment_1 )? )
             {
-            // InternalMachineLearningLanguage.g:5699:1: ( ( rule__DoubleLiteralRule__FactorAssignment_1 )? )
-            // InternalMachineLearningLanguage.g:5700:2: ( rule__DoubleLiteralRule__FactorAssignment_1 )?
+            // InternalMachineLearningLanguage.g:5699:1: ( ( rule__RealLiteralRule__FactorAssignment_1 )? )
+            // InternalMachineLearningLanguage.g:5700:2: ( rule__RealLiteralRule__FactorAssignment_1 )?
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getDoubleLiteralRuleAccess().getFactorAssignment_1()); 
+               before(grammarAccess.getRealLiteralRuleAccess().getFactorAssignment_1()); 
             }
-            // InternalMachineLearningLanguage.g:5701:2: ( rule__DoubleLiteralRule__FactorAssignment_1 )?
+            // InternalMachineLearningLanguage.g:5701:2: ( rule__RealLiteralRule__FactorAssignment_1 )?
             int alt43=2;
             int LA43_0 = input.LA(1);
 
@@ -19253,10 +19253,10 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
             }
             switch (alt43) {
                 case 1 :
-                    // InternalMachineLearningLanguage.g:5701:3: rule__DoubleLiteralRule__FactorAssignment_1
+                    // InternalMachineLearningLanguage.g:5701:3: rule__RealLiteralRule__FactorAssignment_1
                     {
                     pushFollow(FOLLOW_2);
-                    rule__DoubleLiteralRule__FactorAssignment_1();
+                    rule__RealLiteralRule__FactorAssignment_1();
 
                     state._fsp--;
                     if (state.failed) return ;
@@ -19267,7 +19267,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getDoubleLiteralRuleAccess().getFactorAssignment_1()); 
+               after(grammarAccess.getRealLiteralRuleAccess().getFactorAssignment_1()); 
             }
 
             }
@@ -19287,7 +19287,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
         }
         return ;
     }
-    // $ANTLR end "rule__DoubleLiteralRule__Group__1__Impl"
+    // $ANTLR end "rule__RealLiteralRule__Group__1__Impl"
 
 
     // $ANTLR start "rule__IntegerLiteralRule__Group__0"
@@ -21085,23 +21085,23 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
     // $ANTLR end "rule__IntTypeRule__Group__1__Impl"
 
 
-    // $ANTLR start "rule__FloatTypeRule__Group__0"
-    // InternalMachineLearningLanguage.g:6304:1: rule__FloatTypeRule__Group__0 : rule__FloatTypeRule__Group__0__Impl rule__FloatTypeRule__Group__1 ;
-    public final void rule__FloatTypeRule__Group__0() throws RecognitionException {
+    // $ANTLR start "rule__RealTypeRule__Group__0"
+    // InternalMachineLearningLanguage.g:6304:1: rule__RealTypeRule__Group__0 : rule__RealTypeRule__Group__0__Impl rule__RealTypeRule__Group__1 ;
+    public final void rule__RealTypeRule__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalMachineLearningLanguage.g:6308:1: ( rule__FloatTypeRule__Group__0__Impl rule__FloatTypeRule__Group__1 )
-            // InternalMachineLearningLanguage.g:6309:2: rule__FloatTypeRule__Group__0__Impl rule__FloatTypeRule__Group__1
+            // InternalMachineLearningLanguage.g:6308:1: ( rule__RealTypeRule__Group__0__Impl rule__RealTypeRule__Group__1 )
+            // InternalMachineLearningLanguage.g:6309:2: rule__RealTypeRule__Group__0__Impl rule__RealTypeRule__Group__1
             {
             pushFollow(FOLLOW_71);
-            rule__FloatTypeRule__Group__0__Impl();
+            rule__RealTypeRule__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
             pushFollow(FOLLOW_2);
-            rule__FloatTypeRule__Group__1();
+            rule__RealTypeRule__Group__1();
 
             state._fsp--;
             if (state.failed) return ;
@@ -21120,12 +21120,12 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
         }
         return ;
     }
-    // $ANTLR end "rule__FloatTypeRule__Group__0"
+    // $ANTLR end "rule__RealTypeRule__Group__0"
 
 
-    // $ANTLR start "rule__FloatTypeRule__Group__0__Impl"
-    // InternalMachineLearningLanguage.g:6316:1: rule__FloatTypeRule__Group__0__Impl : ( () ) ;
-    public final void rule__FloatTypeRule__Group__0__Impl() throws RecognitionException {
+    // $ANTLR start "rule__RealTypeRule__Group__0__Impl"
+    // InternalMachineLearningLanguage.g:6316:1: rule__RealTypeRule__Group__0__Impl : ( () ) ;
+    public final void rule__RealTypeRule__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
@@ -21137,7 +21137,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
             // InternalMachineLearningLanguage.g:6322:2: ()
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getFloatTypeRuleAccess().getFloatTypeAction_0()); 
+               before(grammarAccess.getRealTypeRuleAccess().getRealTypeAction_0()); 
             }
             // InternalMachineLearningLanguage.g:6323:2: ()
             // InternalMachineLearningLanguage.g:6323:3: 
@@ -21145,7 +21145,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getFloatTypeRuleAccess().getFloatTypeAction_0()); 
+               after(grammarAccess.getRealTypeRuleAccess().getRealTypeAction_0()); 
             }
 
             }
@@ -21161,21 +21161,21 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
         }
         return ;
     }
-    // $ANTLR end "rule__FloatTypeRule__Group__0__Impl"
+    // $ANTLR end "rule__RealTypeRule__Group__0__Impl"
 
 
-    // $ANTLR start "rule__FloatTypeRule__Group__1"
-    // InternalMachineLearningLanguage.g:6331:1: rule__FloatTypeRule__Group__1 : rule__FloatTypeRule__Group__1__Impl ;
-    public final void rule__FloatTypeRule__Group__1() throws RecognitionException {
+    // $ANTLR start "rule__RealTypeRule__Group__1"
+    // InternalMachineLearningLanguage.g:6331:1: rule__RealTypeRule__Group__1 : rule__RealTypeRule__Group__1__Impl ;
+    public final void rule__RealTypeRule__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalMachineLearningLanguage.g:6335:1: ( rule__FloatTypeRule__Group__1__Impl )
-            // InternalMachineLearningLanguage.g:6336:2: rule__FloatTypeRule__Group__1__Impl
+            // InternalMachineLearningLanguage.g:6335:1: ( rule__RealTypeRule__Group__1__Impl )
+            // InternalMachineLearningLanguage.g:6336:2: rule__RealTypeRule__Group__1__Impl
             {
             pushFollow(FOLLOW_2);
-            rule__FloatTypeRule__Group__1__Impl();
+            rule__RealTypeRule__Group__1__Impl();
 
             state._fsp--;
             if (state.failed) return ;
@@ -21194,28 +21194,28 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
         }
         return ;
     }
-    // $ANTLR end "rule__FloatTypeRule__Group__1"
+    // $ANTLR end "rule__RealTypeRule__Group__1"
 
 
-    // $ANTLR start "rule__FloatTypeRule__Group__1__Impl"
-    // InternalMachineLearningLanguage.g:6342:1: rule__FloatTypeRule__Group__1__Impl : ( 'float' ) ;
-    public final void rule__FloatTypeRule__Group__1__Impl() throws RecognitionException {
+    // $ANTLR start "rule__RealTypeRule__Group__1__Impl"
+    // InternalMachineLearningLanguage.g:6342:1: rule__RealTypeRule__Group__1__Impl : ( 'real' ) ;
+    public final void rule__RealTypeRule__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalMachineLearningLanguage.g:6346:1: ( ( 'float' ) )
-            // InternalMachineLearningLanguage.g:6347:1: ( 'float' )
+            // InternalMachineLearningLanguage.g:6346:1: ( ( 'real' ) )
+            // InternalMachineLearningLanguage.g:6347:1: ( 'real' )
             {
-            // InternalMachineLearningLanguage.g:6347:1: ( 'float' )
-            // InternalMachineLearningLanguage.g:6348:2: 'float'
+            // InternalMachineLearningLanguage.g:6347:1: ( 'real' )
+            // InternalMachineLearningLanguage.g:6348:2: 'real'
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getFloatTypeRuleAccess().getFloatKeyword_1()); 
+               before(grammarAccess.getRealTypeRuleAccess().getRealKeyword_1()); 
             }
             match(input,86,FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getFloatTypeRuleAccess().getFloatKeyword_1()); 
+               after(grammarAccess.getRealTypeRuleAccess().getRealKeyword_1()); 
             }
 
             }
@@ -21235,7 +21235,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
         }
         return ;
     }
-    // $ANTLR end "rule__FloatTypeRule__Group__1__Impl"
+    // $ANTLR end "rule__RealTypeRule__Group__1__Impl"
 
 
     // $ANTLR start "rule__BooleanTypeRule__Group__0"
@@ -25821,9 +25821,9 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
     // $ANTLR end "rule__AttributeRule__ValueAssignment_2"
 
 
-    // $ANTLR start "rule__DoubleLiteralRule__LiteralAssignment_0"
-    // InternalMachineLearningLanguage.g:7891:1: rule__DoubleLiteralRule__LiteralAssignment_0 : ( RULE_DOUBLE ) ;
-    public final void rule__DoubleLiteralRule__LiteralAssignment_0() throws RecognitionException {
+    // $ANTLR start "rule__RealLiteralRule__LiteralAssignment_0"
+    // InternalMachineLearningLanguage.g:7891:1: rule__RealLiteralRule__LiteralAssignment_0 : ( RULE_DOUBLE ) ;
+    public final void rule__RealLiteralRule__LiteralAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
@@ -25835,11 +25835,11 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
             // InternalMachineLearningLanguage.g:7897:3: RULE_DOUBLE
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getDoubleLiteralRuleAccess().getLiteralDOUBLETerminalRuleCall_0_0()); 
+               before(grammarAccess.getRealLiteralRuleAccess().getLiteralDOUBLETerminalRuleCall_0_0()); 
             }
             match(input,RULE_DOUBLE,FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getDoubleLiteralRuleAccess().getLiteralDOUBLETerminalRuleCall_0_0()); 
+               after(grammarAccess.getRealLiteralRuleAccess().getLiteralDOUBLETerminalRuleCall_0_0()); 
             }
 
             }
@@ -25859,12 +25859,12 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
         }
         return ;
     }
-    // $ANTLR end "rule__DoubleLiteralRule__LiteralAssignment_0"
+    // $ANTLR end "rule__RealLiteralRule__LiteralAssignment_0"
 
 
-    // $ANTLR start "rule__DoubleLiteralRule__FactorAssignment_1"
-    // InternalMachineLearningLanguage.g:7906:1: rule__DoubleLiteralRule__FactorAssignment_1 : ( ruleFactorRule ) ;
-    public final void rule__DoubleLiteralRule__FactorAssignment_1() throws RecognitionException {
+    // $ANTLR start "rule__RealLiteralRule__FactorAssignment_1"
+    // InternalMachineLearningLanguage.g:7906:1: rule__RealLiteralRule__FactorAssignment_1 : ( ruleFactorRule ) ;
+    public final void rule__RealLiteralRule__FactorAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
@@ -25876,7 +25876,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
             // InternalMachineLearningLanguage.g:7912:3: ruleFactorRule
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getDoubleLiteralRuleAccess().getFactorFactorRuleEnumRuleCall_1_0()); 
+               before(grammarAccess.getRealLiteralRuleAccess().getFactorFactorRuleEnumRuleCall_1_0()); 
             }
             pushFollow(FOLLOW_2);
             ruleFactorRule();
@@ -25884,7 +25884,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getDoubleLiteralRuleAccess().getFactorFactorRuleEnumRuleCall_1_0()); 
+               after(grammarAccess.getRealLiteralRuleAccess().getFactorFactorRuleEnumRuleCall_1_0()); 
             }
 
             }
@@ -25904,7 +25904,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
         }
         return ;
     }
-    // $ANTLR end "rule__DoubleLiteralRule__FactorAssignment_1"
+    // $ANTLR end "rule__RealLiteralRule__FactorAssignment_1"
 
 
     // $ANTLR start "rule__IntegerLiteralRule__LiteralAssignment_0"

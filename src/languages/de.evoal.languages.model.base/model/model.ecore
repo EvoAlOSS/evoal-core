@@ -134,7 +134,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="literal" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="DoubleLiteral" eSuperTypes="#//NumberLiteral">
+  <eClassifiers xsi:type="ecore:EClass" name="RealLiteral" eSuperTypes="#//NumberLiteral">
     <eOperations name="getValue" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDoubleObject">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="body" value="return literal * Math.pow(10, super.getFactor().getValue());&#xA;"/>
@@ -276,7 +276,7 @@
       <details key="documentation" value="An integer."/>
     </eAnnotations>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="FloatType" eSuperTypes="#//LiteralType">
+  <eClassifiers xsi:type="ecore:EClass" name="RealType" eSuperTypes="#//LiteralType">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A floating point type."/>
     </eAnnotations>

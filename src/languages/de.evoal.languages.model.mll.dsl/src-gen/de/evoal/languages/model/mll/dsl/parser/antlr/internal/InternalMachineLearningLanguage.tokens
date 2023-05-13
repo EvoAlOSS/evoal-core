@@ -43,7 +43,6 @@
 'expression'=55
 'f'=90
 'false'=50
-'float'=57
 'for'=34
 'from'=29
 'function'=25
@@ -66,6 +65,7 @@
 'parameters'=27
 'predict'=28
 'prediction'=18
+'real'=57
 'store'=33
 'string'=54
 'to'=21

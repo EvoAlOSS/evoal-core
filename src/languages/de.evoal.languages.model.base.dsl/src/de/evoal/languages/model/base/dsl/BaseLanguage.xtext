@@ -108,10 +108,10 @@ AttributeRule returns Attribute:
 ;
 
 NumberLiteralRule returns NumberLiteral:
-	DoubleLiteralRule | IntegerLiteralRule
+	RealLiteralRule | IntegerLiteralRule
 ;
 
-DoubleLiteralRule returns DoubleLiteral :
+RealLiteralRule returns RealLiteral :
 	literal = DOUBLE (factor = FactorRule)?
 ;
 
@@ -162,7 +162,7 @@ AttributeDefinitionRule returns AttributeDefinition:
 ;
 
 TypeRule returns Type:
-	StringTypeRule | IntTypeRule | FloatTypeRule | BooleanTypeRule | LiteralTypeRule | ArrayTypeRule | InstanceTypeRule | VoidTypeRule | ExpressionTypeRule | DataTypeRule
+	StringTypeRule | IntTypeRule | RealTypeRule | BooleanTypeRule | LiteralTypeRule | ArrayTypeRule | InstanceTypeRule | VoidTypeRule | ExpressionTypeRule | DataTypeRule
 ;
 
 LiteralTypeRule returns LiteralType:
@@ -189,9 +189,9 @@ IntTypeRule returns IntType:
 	'int'
 ;
 
-FloatTypeRule returns FloatType:
-	{FloatType}
-	'float'
+RealTypeRule returns RealType:
+	{RealType}
+	'real'
 ;
 
 BooleanTypeRule returns BooleanType:

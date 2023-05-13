@@ -41,7 +41,6 @@
 'expression'=65
 'f'=43
 'false'=15
-'float'=67
 'h'=35
 'instance'=63
 'int'=66
@@ -50,6 +49,7 @@
 'm'=39
 'n'=41
 'p'=42
+'real'=67
 'string'=64
 'true'=73
 'void'=69

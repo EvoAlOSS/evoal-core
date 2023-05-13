@@ -128,8 +128,8 @@ public class BaseAdapterFactory extends AdapterFactoryImpl {
 				return createIntegerLiteralAdapter();
 			}
 			@Override
-			public Adapter caseDoubleLiteral(DoubleLiteral object) {
-				return createDoubleLiteralAdapter();
+			public Adapter caseRealLiteral(RealLiteral object) {
+				return createRealLiteralAdapter();
 			}
 			@Override
 			public Adapter caseStringLiteral(StringLiteral object) {
@@ -184,8 +184,8 @@ public class BaseAdapterFactory extends AdapterFactoryImpl {
 				return createIntTypeAdapter();
 			}
 			@Override
-			public Adapter caseFloatType(FloatType object) {
-				return createFloatTypeAdapter();
+			public Adapter caseRealType(RealType object) {
+				return createRealTypeAdapter();
 			}
 			@Override
 			public Adapter caseBooleanType(BooleanType object) {
@@ -474,16 +474,16 @@ public class BaseAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.DoubleLiteral <em>Double Literal</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.RealLiteral <em>Real Literal</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.evoal.languages.model.base.DoubleLiteral
+	 * @see de.evoal.languages.model.base.RealLiteral
 	 * @generated
 	 */
-	public Adapter createDoubleLiteralAdapter() {
+	public Adapter createRealLiteralAdapter() {
 		return null;
 	}
 
@@ -670,16 +670,16 @@ public class BaseAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.FloatType <em>Float Type</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.RealType <em>Real Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.evoal.languages.model.base.FloatType
+	 * @see de.evoal.languages.model.base.RealType
 	 * @generated
 	 */
-	public Adapter createFloatTypeAdapter() {
+	public Adapter createRealTypeAdapter() {
 		return null;
 	}
 

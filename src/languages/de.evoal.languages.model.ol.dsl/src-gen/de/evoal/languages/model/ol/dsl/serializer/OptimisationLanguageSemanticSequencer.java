@@ -20,9 +20,7 @@ import de.evoal.languages.model.base.ConstantDefinition;
 import de.evoal.languages.model.base.ConstantReference;
 import de.evoal.languages.model.base.DataType;
 import de.evoal.languages.model.base.DefinedFunctionName;
-import de.evoal.languages.model.base.DoubleLiteral;
 import de.evoal.languages.model.base.ExpressionType;
-import de.evoal.languages.model.base.FloatType;
 import de.evoal.languages.model.base.FunctionDefinition;
 import de.evoal.languages.model.base.Import;
 import de.evoal.languages.model.base.Instance;
@@ -36,6 +34,8 @@ import de.evoal.languages.model.base.OrExpression;
 import de.evoal.languages.model.base.Parantheses;
 import de.evoal.languages.model.base.PartialComparisonExpression;
 import de.evoal.languages.model.base.PowerOfExpression;
+import de.evoal.languages.model.base.RealLiteral;
+import de.evoal.languages.model.base.RealType;
 import de.evoal.languages.model.base.StringLiteral;
 import de.evoal.languages.model.base.StringType;
 import de.evoal.languages.model.base.TypeDefinition;
@@ -114,14 +114,8 @@ public class OptimisationLanguageSemanticSequencer extends InstanceLanguageSeman
 			case BasePackage.DEFINED_FUNCTION_NAME:
 				sequence_FunctionNameRule(context, (DefinedFunctionName) semanticObject); 
 				return; 
-			case BasePackage.DOUBLE_LITERAL:
-				sequence_DoubleLiteralRule(context, (DoubleLiteral) semanticObject); 
-				return; 
 			case BasePackage.EXPRESSION_TYPE:
 				sequence_ExpressionTypeRule(context, (ExpressionType) semanticObject); 
-				return; 
-			case BasePackage.FLOAT_TYPE:
-				sequence_FloatTypeRule(context, (FloatType) semanticObject); 
 				return; 
 			case BasePackage.FUNCTION_DEFINITION:
 				sequence_FunctionDefinitionRule(context, (FunctionDefinition) semanticObject); 
@@ -164,6 +158,12 @@ public class OptimisationLanguageSemanticSequencer extends InstanceLanguageSeman
 				return; 
 			case BasePackage.POWER_OF_EXPRESSION:
 				sequence_PowerOfExpressionRule(context, (PowerOfExpression) semanticObject); 
+				return; 
+			case BasePackage.REAL_LITERAL:
+				sequence_RealLiteralRule(context, (RealLiteral) semanticObject); 
+				return; 
+			case BasePackage.REAL_TYPE:
+				sequence_RealTypeRule(context, (RealType) semanticObject); 
 				return; 
 			case BasePackage.STRING_LITERAL:
 				sequence_StringLiteralRule(context, (StringLiteral) semanticObject); 

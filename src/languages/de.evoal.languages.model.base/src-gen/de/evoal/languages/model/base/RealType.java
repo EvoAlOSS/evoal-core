@@ -5,7 +5,7 @@ package de.evoal.languages.model.base;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Float Type</b></em>'.
+ * A representation of the model object '<em><b>Real Type</b></em>'.
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
@@ -13,9 +13,9 @@ package de.evoal.languages.model.base;
  * <!-- end-model-doc -->
  *
  *
- * @see de.evoal.languages.model.base.BasePackage#getFloatType()
+ * @see de.evoal.languages.model.base.BasePackage#getRealType()
  * @model
  * @generated
  */
-public interface FloatType extends LiteralType {
-} // FloatType
+public interface RealType extends LiteralType {
+} // RealType

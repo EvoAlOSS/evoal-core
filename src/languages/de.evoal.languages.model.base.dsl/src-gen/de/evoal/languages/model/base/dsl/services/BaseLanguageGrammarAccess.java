@@ -697,32 +697,32 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 	public class NumberLiteralRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.base.dsl.BaseLanguage.NumberLiteralRule");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cDoubleLiteralRuleParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cRealLiteralRuleParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cIntegerLiteralRuleParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//NumberLiteralRule returns NumberLiteral:
-		//    DoubleLiteralRule | IntegerLiteralRule
+		//    RealLiteralRule | IntegerLiteralRule
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//DoubleLiteralRule | IntegerLiteralRule
+		//RealLiteralRule | IntegerLiteralRule
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
-		//DoubleLiteralRule
-		public RuleCall getDoubleLiteralRuleParserRuleCall_0() { return cDoubleLiteralRuleParserRuleCall_0; }
+		//RealLiteralRule
+		public RuleCall getRealLiteralRuleParserRuleCall_0() { return cRealLiteralRuleParserRuleCall_0; }
 		
 		//IntegerLiteralRule
 		public RuleCall getIntegerLiteralRuleParserRuleCall_1() { return cIntegerLiteralRuleParserRuleCall_1; }
 	}
-	public class DoubleLiteralRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.base.dsl.BaseLanguage.DoubleLiteralRule");
+	public class RealLiteralRuleElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.base.dsl.BaseLanguage.RealLiteralRule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cLiteralAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cLiteralDOUBLETerminalRuleCall_0_0 = (RuleCall)cLiteralAssignment_0.eContents().get(0);
 		private final Assignment cFactorAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cFactorFactorRuleEnumRuleCall_1_0 = (RuleCall)cFactorAssignment_1.eContents().get(0);
 		
-		//DoubleLiteralRule returns DoubleLiteral :
+		//RealLiteralRule returns RealLiteral :
 		//    literal = DOUBLE (factor = FactorRule)?
 		//;
 		@Override public ParserRule getRule() { return rule; }
@@ -947,7 +947,7 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cStringTypeRuleParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cIntTypeRuleParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		private final RuleCall cFloatTypeRuleParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		private final RuleCall cRealTypeRuleParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		private final RuleCall cBooleanTypeRuleParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
 		private final RuleCall cLiteralTypeRuleParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
 		private final RuleCall cArrayTypeRuleParserRuleCall_5 = (RuleCall)cAlternatives.eContents().get(5);
@@ -957,11 +957,11 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		private final RuleCall cDataTypeRuleParserRuleCall_9 = (RuleCall)cAlternatives.eContents().get(9);
 		
 		//TypeRule returns Type:
-		//    StringTypeRule | IntTypeRule | FloatTypeRule | BooleanTypeRule | LiteralTypeRule | ArrayTypeRule | InstanceTypeRule | VoidTypeRule | ExpressionTypeRule | DataTypeRule
+		//    StringTypeRule | IntTypeRule | RealTypeRule | BooleanTypeRule | LiteralTypeRule | ArrayTypeRule | InstanceTypeRule | VoidTypeRule | ExpressionTypeRule | DataTypeRule
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//StringTypeRule | IntTypeRule | FloatTypeRule | BooleanTypeRule | LiteralTypeRule | ArrayTypeRule | InstanceTypeRule | VoidTypeRule | ExpressionTypeRule | DataTypeRule
+		//StringTypeRule | IntTypeRule | RealTypeRule | BooleanTypeRule | LiteralTypeRule | ArrayTypeRule | InstanceTypeRule | VoidTypeRule | ExpressionTypeRule | DataTypeRule
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//StringTypeRule
@@ -970,8 +970,8 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		//IntTypeRule
 		public RuleCall getIntTypeRuleParserRuleCall_1() { return cIntTypeRuleParserRuleCall_1; }
 		
-		//FloatTypeRule
-		public RuleCall getFloatTypeRuleParserRuleCall_2() { return cFloatTypeRuleParserRuleCall_2; }
+		//RealTypeRule
+		public RuleCall getRealTypeRuleParserRuleCall_2() { return cRealTypeRuleParserRuleCall_2; }
 		
 		//BooleanTypeRule
 		public RuleCall getBooleanTypeRuleParserRuleCall_3() { return cBooleanTypeRuleParserRuleCall_3; }
@@ -1114,27 +1114,27 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		//'int'
 		public Keyword getIntKeyword_1() { return cIntKeyword_1; }
 	}
-	public class FloatTypeRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.base.dsl.BaseLanguage.FloatTypeRule");
+	public class RealTypeRuleElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.base.dsl.BaseLanguage.RealTypeRule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cFloatTypeAction_0 = (Action)cGroup.eContents().get(0);
-		private final Keyword cFloatKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Action cRealTypeAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cRealKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		
-		//FloatTypeRule returns FloatType:
-		//    {FloatType}
-		//    'float'
+		//RealTypeRule returns RealType:
+		//    {RealType}
+		//    'real'
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{FloatType}
-		//'float'
+		//{RealType}
+		//'real'
 		public Group getGroup() { return cGroup; }
 		
-		//{FloatType}
-		public Action getFloatTypeAction_0() { return cFloatTypeAction_0; }
+		//{RealType}
+		public Action getRealTypeAction_0() { return cRealTypeAction_0; }
 		
-		//'float'
-		public Keyword getFloatKeyword_1() { return cFloatKeyword_1; }
+		//'real'
+		public Keyword getRealKeyword_1() { return cRealKeyword_1; }
 	}
 	public class BooleanTypeRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.base.dsl.BaseLanguage.BooleanTypeRule");
@@ -1851,7 +1851,7 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 	private final InstanceLiteralRuleElements pInstanceLiteralRule;
 	private final AttributeRuleElements pAttributeRule;
 	private final NumberLiteralRuleElements pNumberLiteralRule;
-	private final DoubleLiteralRuleElements pDoubleLiteralRule;
+	private final RealLiteralRuleElements pRealLiteralRule;
 	private final IntegerLiteralRuleElements pIntegerLiteralRule;
 	private final StringLiteralRuleElements pStringLiteralRule;
 	private final FactorRuleElements eFactorRule;
@@ -1864,7 +1864,7 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 	private final StringTypeRuleElements pStringTypeRule;
 	private final ExpressionTypeRuleElements pExpressionTypeRule;
 	private final IntTypeRuleElements pIntTypeRule;
-	private final FloatTypeRuleElements pFloatTypeRule;
+	private final RealTypeRuleElements pRealTypeRule;
 	private final BooleanTypeRuleElements pBooleanTypeRule;
 	private final VoidTypeRuleElements pVoidTypeRule;
 	private final DataTypeRuleElements pDataTypeRule;
@@ -1916,7 +1916,7 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		this.pInstanceLiteralRule = new InstanceLiteralRuleElements();
 		this.pAttributeRule = new AttributeRuleElements();
 		this.pNumberLiteralRule = new NumberLiteralRuleElements();
-		this.pDoubleLiteralRule = new DoubleLiteralRuleElements();
+		this.pRealLiteralRule = new RealLiteralRuleElements();
 		this.pIntegerLiteralRule = new IntegerLiteralRuleElements();
 		this.pStringLiteralRule = new StringLiteralRuleElements();
 		this.eFactorRule = new FactorRuleElements();
@@ -1929,7 +1929,7 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		this.pStringTypeRule = new StringTypeRuleElements();
 		this.pExpressionTypeRule = new ExpressionTypeRuleElements();
 		this.pIntTypeRule = new IntTypeRuleElements();
-		this.pFloatTypeRule = new FloatTypeRuleElements();
+		this.pRealTypeRule = new RealTypeRuleElements();
 		this.pBooleanTypeRule = new BooleanTypeRuleElements();
 		this.pVoidTypeRule = new VoidTypeRuleElements();
 		this.pDataTypeRule = new DataTypeRuleElements();
@@ -2240,7 +2240,7 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 	}
 	
 	//NumberLiteralRule returns NumberLiteral:
-	//    DoubleLiteralRule | IntegerLiteralRule
+	//    RealLiteralRule | IntegerLiteralRule
 	//;
 	public NumberLiteralRuleElements getNumberLiteralRuleAccess() {
 		return pNumberLiteralRule;
@@ -2250,15 +2250,15 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		return getNumberLiteralRuleAccess().getRule();
 	}
 	
-	//DoubleLiteralRule returns DoubleLiteral :
+	//RealLiteralRule returns RealLiteral :
 	//    literal = DOUBLE (factor = FactorRule)?
 	//;
-	public DoubleLiteralRuleElements getDoubleLiteralRuleAccess() {
-		return pDoubleLiteralRule;
+	public RealLiteralRuleElements getRealLiteralRuleAccess() {
+		return pRealLiteralRule;
 	}
 	
-	public ParserRule getDoubleLiteralRuleRule() {
-		return getDoubleLiteralRuleAccess().getRule();
+	public ParserRule getRealLiteralRuleRule() {
+		return getRealLiteralRuleAccess().getRule();
 	}
 	
 	//IntegerLiteralRule returns IntegerLiteral:
@@ -2349,7 +2349,7 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 	}
 	
 	//TypeRule returns Type:
-	//    StringTypeRule | IntTypeRule | FloatTypeRule | BooleanTypeRule | LiteralTypeRule | ArrayTypeRule | InstanceTypeRule | VoidTypeRule | ExpressionTypeRule | DataTypeRule
+	//    StringTypeRule | IntTypeRule | RealTypeRule | BooleanTypeRule | LiteralTypeRule | ArrayTypeRule | InstanceTypeRule | VoidTypeRule | ExpressionTypeRule | DataTypeRule
 	//;
 	public TypeRuleElements getTypeRuleAccess() {
 		return pTypeRule;
@@ -2418,16 +2418,16 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		return getIntTypeRuleAccess().getRule();
 	}
 	
-	//FloatTypeRule returns FloatType:
-	//    {FloatType}
-	//    'float'
+	//RealTypeRule returns RealType:
+	//    {RealType}
+	//    'real'
 	//;
-	public FloatTypeRuleElements getFloatTypeRuleAccess() {
-		return pFloatTypeRule;
+	public RealTypeRuleElements getRealTypeRuleAccess() {
+		return pRealTypeRule;
 	}
 	
-	public ParserRule getFloatTypeRuleRule() {
-		return getFloatTypeRuleAccess().getRule();
+	public ParserRule getRealTypeRuleRule() {
+		return getRealTypeRuleAccess().getRule();
 	}
 	
 	//BooleanTypeRule returns BooleanType:

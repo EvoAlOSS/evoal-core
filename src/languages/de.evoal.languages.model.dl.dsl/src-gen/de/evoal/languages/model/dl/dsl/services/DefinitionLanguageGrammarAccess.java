@@ -428,7 +428,7 @@ public class DefinitionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 	}
 	
 	//NumberLiteralRule returns NumberLiteral:
-	//    DoubleLiteralRule | IntegerLiteralRule
+	//    RealLiteralRule | IntegerLiteralRule
 	//;
 	public BaseLanguageGrammarAccess.NumberLiteralRuleElements getNumberLiteralRuleAccess() {
 		return gaBaseLanguage.getNumberLiteralRuleAccess();
@@ -438,15 +438,15 @@ public class DefinitionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 		return getNumberLiteralRuleAccess().getRule();
 	}
 	
-	//DoubleLiteralRule returns DoubleLiteral :
+	//RealLiteralRule returns RealLiteral :
 	//    literal = DOUBLE (factor = FactorRule)?
 	//;
-	public BaseLanguageGrammarAccess.DoubleLiteralRuleElements getDoubleLiteralRuleAccess() {
-		return gaBaseLanguage.getDoubleLiteralRuleAccess();
+	public BaseLanguageGrammarAccess.RealLiteralRuleElements getRealLiteralRuleAccess() {
+		return gaBaseLanguage.getRealLiteralRuleAccess();
 	}
 	
-	public ParserRule getDoubleLiteralRuleRule() {
-		return getDoubleLiteralRuleAccess().getRule();
+	public ParserRule getRealLiteralRuleRule() {
+		return getRealLiteralRuleAccess().getRule();
 	}
 	
 	//IntegerLiteralRule returns IntegerLiteral:
@@ -537,7 +537,7 @@ public class DefinitionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 	}
 	
 	//TypeRule returns Type:
-	//    StringTypeRule | IntTypeRule | FloatTypeRule | BooleanTypeRule | LiteralTypeRule | ArrayTypeRule | InstanceTypeRule | VoidTypeRule | ExpressionTypeRule | DataTypeRule
+	//    StringTypeRule | IntTypeRule | RealTypeRule | BooleanTypeRule | LiteralTypeRule | ArrayTypeRule | InstanceTypeRule | VoidTypeRule | ExpressionTypeRule | DataTypeRule
 	//;
 	public BaseLanguageGrammarAccess.TypeRuleElements getTypeRuleAccess() {
 		return gaBaseLanguage.getTypeRuleAccess();
@@ -606,16 +606,16 @@ public class DefinitionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 		return getIntTypeRuleAccess().getRule();
 	}
 	
-	//FloatTypeRule returns FloatType:
-	//    {FloatType}
-	//    'float'
+	//RealTypeRule returns RealType:
+	//    {RealType}
+	//    'real'
 	//;
-	public BaseLanguageGrammarAccess.FloatTypeRuleElements getFloatTypeRuleAccess() {
-		return gaBaseLanguage.getFloatTypeRuleAccess();
+	public BaseLanguageGrammarAccess.RealTypeRuleElements getRealTypeRuleAccess() {
+		return gaBaseLanguage.getRealTypeRuleAccess();
 	}
 	
-	public ParserRule getFloatTypeRuleRule() {
-		return getFloatTypeRuleAccess().getRule();
+	public ParserRule getRealTypeRuleRule() {
+		return getRealTypeRuleAccess().getRule();
 	}
 	
 	//BooleanTypeRule returns BooleanType:
