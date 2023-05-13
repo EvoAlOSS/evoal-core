@@ -1,9 +1,8 @@
 package de.evoal.core.api.utils;
 
 import de.evoal.core.junit.dsl.LanguageHelper;
-import de.evoal.languages.model.dl.*;
-import de.evoal.languages.model.base.DoubleLiteral;
-import de.evoal.languages.model.generator.Configuration;
+import de.evoal.languages.model.dl.DefinitionModule;
+import de.evoal.languages.model.generator.GeneratorModule;
 import de.evoal.languages.model.generator.Step;
 import de.evoal.languages.model.base.*;
 import org.junit.jupiter.api.Assertions;
@@ -39,7 +38,7 @@ public class LanguageHelperRegressionTest {
 
     @Test
     public void testDefinitionLanguageParser() {
-        final DefinitionModel model = LanguageHelper.loadFromClasspath("de/evoal/core/api/utils/regressions/generator.dl");
+        final DefinitionModule model = LanguageHelper.loadFromClasspath("de/evoal/core/api/utils/regressions/generator.dl");
 
         Assertions.assertNotNull(model);
         Assertions.assertNotNull(model.getTypes());
@@ -61,7 +60,7 @@ public class LanguageHelperRegressionTest {
 
     @Test
     public void testLoading() {
-        final Configuration configuration = LanguageHelper.loadFromClasspath("de/evoal/core/api/utils/regressions/shekel.generator");
+        final GeneratorModule configuration = LanguageHelper.loadFromClasspath("de/evoal/core/api/utils/regressions/shekel.generator");
 
         // fetch step configuration for testee
         final Step step = configuration.getPipelines().get(0).getSteps().get(0);

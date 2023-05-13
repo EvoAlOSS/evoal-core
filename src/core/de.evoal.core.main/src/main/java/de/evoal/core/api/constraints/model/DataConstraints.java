@@ -1,7 +1,7 @@
 package de.evoal.core.api.constraints.model;
 
 import de.evoal.languages.model.ddl.DataDescription;
-import de.evoal.languages.model.ddl.DataDescriptionModel;
+import de.evoal.languages.model.ddl.DataDescriptionModule;
 import de.evoal.languages.model.ddl.TypedDataDescription;
 import de.evoal.languages.model.base.Expression;
 import org.apache.commons.math3.util.Pair;
@@ -13,10 +13,10 @@ public class DataConstraints {
     private final List<Expression> globalConstraints = new LinkedList<>();
     private final Map<DataDescription, List<Expression>> dataConstraints = new HashMap<>();
 
-    public DataConstraints(final Collection<DataDescriptionModel> models) {
+    public DataConstraints(final Collection<DataDescriptionModule> models) {
         // collect global constraints
         models.stream()
-              .map(DataDescriptionModel::getConstraints)
+              .map(DataDescriptionModule::getConstraints)
               .forEach(globalConstraints::addAll);
 
         models.stream()

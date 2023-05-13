@@ -1,7 +1,6 @@
 package de.evoal.surrogate.api;
 
 import de.evoal.core.api.properties.stream.PropertiesStreamSupplier;
-import de.evoal.languages.model.mll.DefinedFunctionName;
 import de.evoal.surrogate.api.function.SurrogateFunction;
 import de.evoal.surrogate.api.configuration.SurrogateConfiguration;
 

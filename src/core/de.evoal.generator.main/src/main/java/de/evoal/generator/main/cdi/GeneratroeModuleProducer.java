@@ -31,7 +31,7 @@ import org.eclipse.xtext.resource.XtextResourceSet;
 
 @ApplicationScoped
 @Slf4j
-public class GeneratorConfigurationProducer {
+public class GeneratroeModuleProducer {
     public void loadModel(final @Observes BlackboardEntry value, final Blackboard board) {
         if(!value.isSame(GeneratorBlackboardEntries.GENERATOR_CONFIGURATION_FILE)) {
             return;

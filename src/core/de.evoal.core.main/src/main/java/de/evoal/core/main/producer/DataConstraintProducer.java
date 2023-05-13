@@ -2,9 +2,9 @@ package de.evoal.core.main.producer;
 
 import de.evoal.core.api.constraints.model.DataConstraints;
 import de.evoal.languages.model.ddl.DataDescription;
-import de.evoal.languages.model.ddl.DataDescriptionModel;
+import de.evoal.languages.model.ddl.DataDescriptionModule;
 import de.evoal.languages.model.ddl.TypedDataDescription;
-import de.evoal.languages.model.ol.OptimisationModel;
+import de.evoal.languages.model.ol.OptimisationModule;
 import de.evoal.languages.model.instance.DataReference;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
@@ -21,11 +21,11 @@ import java.util.stream.StreamSupport;
 @ApplicationScoped
 public class DataConstraintProducer {
     @Produces @Dependent
-    public DataConstraints produceDataInformation(final OptimisationModel model) {
+    public DataConstraints produceDataInformation(final OptimisationModule model) {
         final TreeIterator<EObject> iterator = model.eAllContents();
         Iterable<EObject> iterable = () -> iterator;
 
-        final Set<DataDescriptionModel> models = new HashSet<>();
+        final Set<DataDescriptionModule> models = new HashSet<>();
 
         // collect all referenced data descriptions
         final Set<DataDescription> descriptions = StreamSupport.stream(iterable.spliterator(), false)
@@ -52,13 +52,13 @@ public class DataConstraintProducer {
         return new DataConstraints(models);
     }
 
-    private static DataDescriptionModel findModel(final EObject reference) {
+    private static DataDescriptionModule findModel(final EObject reference) {
         EObject current = reference;
 
-        while(current != null && !(current instanceof DataDescriptionModel)) {
+        while(current != null && !(current instanceof DataDescriptionModule)) {
             current = current.eContainer();
         }
 
-        return (DataDescriptionModel)current;
+        return (DataDescriptionModule)current;
     }
 }

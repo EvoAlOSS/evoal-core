@@ -9,7 +9,7 @@ import de.evoal.core.api.properties.io.PropertiesIOFactory;
 import de.evoal.core.api.properties.io.PropertiesReader;
 import de.evoal.core.api.properties.io.PropertiesWriter;
 import de.evoal.core.arff.cdi.ArffBlackboardEntries;
-import de.evoal.languages.model.ddl.DataDescriptionModel;
+import de.evoal.languages.model.ddl.DataDescriptionModule;
 import de.evoal.languages.model.ddl.dsl.DataDescriptionLanguageStandaloneSetup;
 import de.evoal.languages.model.ddl.impl.DdlPackageImpl;
 import lombok.extern.slf4j.Slf4j;
@@ -64,7 +64,7 @@ public class ConvertArff implements MainClass {
     }
 
     private PropertiesSpecification readSpecification() {
-        final DataDescriptionModel model = loadSpecificationFile();
+        final DataDescriptionModule model = loadSpecificationFile();
 
         return PropertiesSpecification
                     .builder()
@@ -72,7 +72,7 @@ public class ConvertArff implements MainClass {
                     .build();
     }
 
-    private DataDescriptionModel loadSpecificationFile() {
+    private DataDescriptionModule loadSpecificationFile() {
         log.info("Loading data description configuration from {}.",  ddlFile);
 
         if(!ddlFile.exists() || ! ddlFile.canRead()) {
@@ -113,7 +113,7 @@ public class ConvertArff implements MainClass {
                 throw new IllegalArgumentException("DL file contains errors. Please fix the file.");
             }
 
-            return (DataDescriptionModel) resource.getContents().get(0);
+            return (DataDescriptionModule) resource.getContents().get(0);
         } catch (final Exception e) {
             log.error("Unable to load data description configuration file '{}'.", ddlFile, e);
             throw new RuntimeException("Unable to load data description configuration file: " + ddlFile, e);

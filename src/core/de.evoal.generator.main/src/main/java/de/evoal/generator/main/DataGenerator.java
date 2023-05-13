@@ -16,7 +16,7 @@ import de.evoal.generator.api.*;
 import de.evoal.generator.main.generators.GeneratorFactory;
 import de.evoal.generator.main.internal.Pipeline;
 import de.evoal.generator.main.internal.StatementExecutor;
-import de.evoal.languages.model.generator.Configuration;
+import de.evoal.languages.model.generator.GeneratorModule;
 import de.evoal.languages.model.generator.PipelineDefinition;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,7 +41,7 @@ public class DataGenerator implements MainClass {
 
 	@Inject
 	@BlackboardValue(GeneratorBlackboardEntries.GENERATOR_CONFIGURATION)
-	private Configuration configuration;
+	private GeneratorModule configuration;
 
 	@Inject
 	private GeneratorFactory factory;

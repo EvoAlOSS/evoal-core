@@ -20,7 +20,6 @@ import de.evoal.languages.model.ol.impl.OLPackageImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 
@@ -29,7 +28,7 @@ import java.io.File;
 
 @ApplicationScoped
 @Slf4j
-public class OptimisationModelLoader {
+public class OptimisationModuleLoader {
     @Inject
     private Blackboard board;
 

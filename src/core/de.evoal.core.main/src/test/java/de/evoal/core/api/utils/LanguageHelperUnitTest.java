@@ -4,7 +4,7 @@ import org.junit.jupiter.api.*;
 import org.jboss.weld.junit5.EnableWeld;
 
 import de.evoal.languages.model.base.Instance;
-import de.evoal.languages.model.ol.OptimisationModel;
+import de.evoal.languages.model.ol.OptimisationModule;
 
 import javax.inject.Inject;
 

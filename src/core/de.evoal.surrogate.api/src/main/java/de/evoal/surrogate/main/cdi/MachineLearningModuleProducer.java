@@ -7,11 +7,8 @@ import de.evoal.core.api.cdi.BlackboardValue;
 import de.evoal.languages.model.ddl.dsl.DataDescriptionLanguageStandaloneSetup;
 import de.evoal.languages.model.ddl.impl.DdlPackageImpl;
 import de.evoal.languages.model.dl.dsl.DefinitionLanguageStandaloneSetup;
-import de.evoal.languages.model.dl.impl.DlPackageImpl;
-import de.evoal.languages.model.base.dsl.BaseLanguageStandaloneSetup;
-import de.evoal.languages.model.base.impl.BasePackageImpl;
 import de.evoal.languages.model.mll.dsl.MachineLearningLanguageStandaloneSetup;
-import de.evoal.languages.model.mll.MachineLearningConfiguration;
+import de.evoal.languages.model.mll.MachineLearningModule;
 import de.evoal.languages.model.mll.impl.MllPackageImpl;
 import de.evoal.surrogate.api.SurrogateBlackboardEntries;
 import lombok.extern.slf4j.Slf4j;
@@ -30,7 +27,7 @@ import java.util.Optional;
 
 @ApplicationScoped
 @Slf4j
-public class MLLConfigurationProducer {
+public class MachineLearningModuleProducer {
     public void loadModel(final @Observes BlackboardEntry value, final Blackboard board) {
         if(!value.isSame(SurrogateBlackboardEntries.SURROGATE_CONFIGURATION_FILE)) {
             return;
@@ -54,7 +51,7 @@ public class MLLConfigurationProducer {
             throw  new IllegalArgumentException("Please specify a readable surrogate file.");
         }
 
-        final MachineLearningConfiguration configuration = read(file).get();
+        final MachineLearningModule configuration = read(file).get();
         board.bind(SurrogateBlackboardEntries.SURROGATE_CONFIGURATION, configuration);
     }
 
@@ -75,7 +72,7 @@ public class MLLConfigurationProducer {
      * @param modelFile The model file to read.
      * @return The data validation model or an empty optional.
      */
-    private Optional<MachineLearningConfiguration> read(final File modelFile) {
+    private Optional<MachineLearningModule> read(final File modelFile) {
         log.info("Reading model file {}.", modelFile);
 
         final Injector injector = new MachineLearningLanguageStandaloneSetup().createInjectorAndDoEMFRegistration();
@@ -103,7 +100,7 @@ public class MLLConfigurationProducer {
                 }
             }
 
-            return Optional.of((MachineLearningConfiguration) resource.getContents().get(0));
+            return Optional.of((MachineLearningModule) resource.getContents().get(0));
         } catch (final Exception e) {
             log.error("Unable to load MLL file '{}'.", modelFile, e);
             return Optional.empty();
@@ -112,12 +109,12 @@ public class MLLConfigurationProducer {
 
     @Produces @Dependent
     @BlackboardValue(SurrogateBlackboardEntries.SURROGATE_CONFIGURATION)
-    public MachineLearningConfiguration injectMachineLearningConfiguration(final InjectionPoint ip, final Blackboard board) {
+    public MachineLearningModule injectMachineLearningConfiguration(final InjectionPoint ip, final Blackboard board) {
         final BlackboardValue value = ip.getAnnotated().getAnnotation(BlackboardValue.class);
         final Object result = board.get(value.value());
 
-        if(result instanceof MachineLearningConfiguration) {
-            return (MachineLearningConfiguration)result;
+        if(result instanceof MachineLearningModule) {
+            return (MachineLearningModule)result;
         }
 
         throw new IllegalArgumentException("Unable to handle type " + result.getClass());

@@ -3,7 +3,7 @@ package de.evoal.core.api.utils;
 import de.evoal.core.api.languages.ExpressionEvaluator;
 import de.evoal.languages.model.base.*;
 import de.evoal.languages.model.ol.AlgorithmInstance;
-import de.evoal.languages.model.ol.OptimisationModel;
+import de.evoal.languages.model.ol.OptimisationModule;
 import de.evoal.languages.model.ol.ProblemInstance;
 import lombok.extern.slf4j.Slf4j;
 
@@ -23,7 +23,7 @@ public class LanguageHelper {
     @Inject
     private ExpressionEvaluator evaluator;
 
-    public <T> T lookup(final OptimisationModel model, final String path) {
+    public <T> T lookup(final OptimisationModule model, final String path) {
         log.debug("Locking up '{}':", path);
 
         if(path == null) {

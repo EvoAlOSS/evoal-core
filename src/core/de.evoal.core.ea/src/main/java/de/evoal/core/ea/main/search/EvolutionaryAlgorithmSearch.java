@@ -24,10 +24,8 @@ import de.evoal.core.ea.main.jenetics.ConstraintList;
 import de.evoal.core.ea.main.alterer.AltererFactory;
 import de.evoal.core.ea.main.codec.DynamicCodec;
 import de.evoal.core.ea.main.statistics.JeneticsStatisticsWriter;
-import de.evoal.languages.model.base.Array;
 import de.evoal.languages.model.base.Attribute;
-import de.evoal.languages.model.base.Value;
-import de.evoal.languages.model.ol.OptimisationModel;
+import de.evoal.languages.model.ol.OptimisationModule;
 import io.jenetics.*;
 import io.jenetics.engine.*;
 import io.jenetics.stat.MinMax;
@@ -151,7 +149,7 @@ public class EvolutionaryAlgorithmSearch implements OptimisationAlgorithm {
 	}
 
 	private void setup() {
-		final OptimisationModel configuration = board.get(CoreBlackboardEntries.OPTIMISATION_CONFIGURATION);
+		final OptimisationModule configuration = board.get(CoreBlackboardEntries.OPTIMISATION_CONFIGURATION);
 
 		final de.evoal.languages.model.base.Instance alterers = helper.lookup(configuration, "algorithm.alterers");
 

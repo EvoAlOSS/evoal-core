@@ -7,7 +7,7 @@ import de.evoal.core.api.utils.LanguageHelper;
 import de.evoal.languages.model.base.Literal;
 import de.evoal.languages.model.ddl.DataDescription;
 import de.evoal.languages.model.instance.DataReference;
-import de.evoal.languages.model.ol.OptimisationModel;
+import de.evoal.languages.model.ol.OptimisationModule;
 import de.evoal.languages.model.base.DoubleLiteral;
 import de.evoal.languages.model.base.Array;
 import de.evoal.languages.model.base.Instance;
@@ -111,7 +111,7 @@ public class ConfigurationValueProducer {
                 .toArray();
     }
 
-    private <T> T lookup(final OptimisationModel model, final String access) {
+    private <T> T lookup(final OptimisationModule model, final String access) {
         log.info("Looking up configuration value {}", access);
 
         return helper.lookup(model, access);
