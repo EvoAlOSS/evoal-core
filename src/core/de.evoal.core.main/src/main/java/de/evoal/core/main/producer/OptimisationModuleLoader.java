@@ -14,7 +14,7 @@ import de.evoal.languages.model.ddl.dsl.DataDescriptionLanguageStandaloneSetup;
 import de.evoal.languages.model.ddl.impl.DdlPackageImpl;
 import de.evoal.languages.model.dl.dsl.DefinitionLanguageStandaloneSetup;
 import de.evoal.languages.model.dl.impl.DlPackageImpl;
-import de.evoal.languages.model.ol.OptimisationModel;
+import de.evoal.languages.model.ol.OptimisationModule;
 import de.evoal.languages.model.ol.dsl.OptimisationLanguageStandaloneSetup;
 import de.evoal.languages.model.ol.impl.OLPackageImpl;
 import lombok.extern.slf4j.Slf4j;
@@ -33,7 +33,7 @@ public class OptimisationModelLoader {
     @Inject
     private Blackboard board;
 
-    private OptimisationModel model;
+    private OptimisationModule model;
 
     @Inject
     private ResourceSetUtil setValidation;
@@ -73,7 +73,7 @@ public class OptimisationModelLoader {
 
             setValidation.checkResourceErrors(resourceSet);
 
-            model = (OptimisationModel) resource.getContents().get(0);
+            model = (OptimisationModule) resource.getContents().get(0);
             board.bind(CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, model);
         } catch (final Exception e) {
             log.error("Unable to load optimisation configuration file '{}'.", configurationFile, e);
@@ -95,7 +95,7 @@ public class OptimisationModelLoader {
 
     @Produces
     @Dependent
-    public OptimisationModel getConfiguration() {
+    public OptimisationModule getConfiguration() {
         return model;
     }
 }

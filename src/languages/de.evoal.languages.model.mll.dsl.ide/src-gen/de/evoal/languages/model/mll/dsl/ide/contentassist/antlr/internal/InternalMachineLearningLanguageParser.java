@@ -152,23 +152,23 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
 
 
 
-    // $ANTLR start "entryRuleMachineLearningConfigurationRule"
-    // InternalMachineLearningLanguage.g:55:1: entryRuleMachineLearningConfigurationRule : ruleMachineLearningConfigurationRule EOF ;
-    public final void entryRuleMachineLearningConfigurationRule() throws RecognitionException {
+    // $ANTLR start "entryRuleMachineLearningModuleRule"
+    // InternalMachineLearningLanguage.g:55:1: entryRuleMachineLearningModuleRule : ruleMachineLearningModuleRule EOF ;
+    public final void entryRuleMachineLearningModuleRule() throws RecognitionException {
         try {
-            // InternalMachineLearningLanguage.g:56:1: ( ruleMachineLearningConfigurationRule EOF )
-            // InternalMachineLearningLanguage.g:57:1: ruleMachineLearningConfigurationRule EOF
+            // InternalMachineLearningLanguage.g:56:1: ( ruleMachineLearningModuleRule EOF )
+            // InternalMachineLearningLanguage.g:57:1: ruleMachineLearningModuleRule EOF
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getMachineLearningConfigurationRuleRule()); 
+               before(grammarAccess.getMachineLearningModuleRuleRule()); 
             }
             pushFollow(FOLLOW_1);
-            ruleMachineLearningConfigurationRule();
+            ruleMachineLearningModuleRule();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getMachineLearningConfigurationRuleRule()); 
+               after(grammarAccess.getMachineLearningModuleRuleRule()); 
             }
             match(input,EOF,FOLLOW_2); if (state.failed) return ;
 
@@ -183,30 +183,30 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
         }
         return ;
     }
-    // $ANTLR end "entryRuleMachineLearningConfigurationRule"
+    // $ANTLR end "entryRuleMachineLearningModuleRule"
 
 
-    // $ANTLR start "ruleMachineLearningConfigurationRule"
-    // InternalMachineLearningLanguage.g:64:1: ruleMachineLearningConfigurationRule : ( ( rule__MachineLearningConfigurationRule__Group__0 ) ) ;
-    public final void ruleMachineLearningConfigurationRule() throws RecognitionException {
+    // $ANTLR start "ruleMachineLearningModuleRule"
+    // InternalMachineLearningLanguage.g:64:1: ruleMachineLearningModuleRule : ( ( rule__MachineLearningModuleRule__Group__0 ) ) ;
+    public final void ruleMachineLearningModuleRule() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalMachineLearningLanguage.g:68:2: ( ( ( rule__MachineLearningConfigurationRule__Group__0 ) ) )
-            // InternalMachineLearningLanguage.g:69:2: ( ( rule__MachineLearningConfigurationRule__Group__0 ) )
+            // InternalMachineLearningLanguage.g:68:2: ( ( ( rule__MachineLearningModuleRule__Group__0 ) ) )
+            // InternalMachineLearningLanguage.g:69:2: ( ( rule__MachineLearningModuleRule__Group__0 ) )
             {
-            // InternalMachineLearningLanguage.g:69:2: ( ( rule__MachineLearningConfigurationRule__Group__0 ) )
-            // InternalMachineLearningLanguage.g:70:3: ( rule__MachineLearningConfigurationRule__Group__0 )
+            // InternalMachineLearningLanguage.g:69:2: ( ( rule__MachineLearningModuleRule__Group__0 ) )
+            // InternalMachineLearningLanguage.g:70:3: ( rule__MachineLearningModuleRule__Group__0 )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getMachineLearningConfigurationRuleAccess().getGroup()); 
+               before(grammarAccess.getMachineLearningModuleRuleAccess().getGroup()); 
             }
-            // InternalMachineLearningLanguage.g:71:3: ( rule__MachineLearningConfigurationRule__Group__0 )
-            // InternalMachineLearningLanguage.g:71:4: rule__MachineLearningConfigurationRule__Group__0
+            // InternalMachineLearningLanguage.g:71:3: ( rule__MachineLearningModuleRule__Group__0 )
+            // InternalMachineLearningLanguage.g:71:4: rule__MachineLearningModuleRule__Group__0
             {
             pushFollow(FOLLOW_2);
-            rule__MachineLearningConfigurationRule__Group__0();
+            rule__MachineLearningModuleRule__Group__0();
 
             state._fsp--;
             if (state.failed) return ;
@@ -214,7 +214,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getMachineLearningConfigurationRuleAccess().getGroup()); 
+               after(grammarAccess.getMachineLearningModuleRuleAccess().getGroup()); 
             }
 
             }
@@ -234,7 +234,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
         }
         return ;
     }
-    // $ANTLR end "ruleMachineLearningConfigurationRule"
+    // $ANTLR end "ruleMachineLearningModuleRule"
 
 
     // $ANTLR start "entryRuleSurrogateDefinitionRule"
@@ -7186,23 +7186,23 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
     // $ANTLR end "rule__FactorRule__Alternatives"
 
 
-    // $ANTLR start "rule__MachineLearningConfigurationRule__Group__0"
-    // InternalMachineLearningLanguage.g:1963:1: rule__MachineLearningConfigurationRule__Group__0 : rule__MachineLearningConfigurationRule__Group__0__Impl rule__MachineLearningConfigurationRule__Group__1 ;
-    public final void rule__MachineLearningConfigurationRule__Group__0() throws RecognitionException {
+    // $ANTLR start "rule__MachineLearningModuleRule__Group__0"
+    // InternalMachineLearningLanguage.g:1963:1: rule__MachineLearningModuleRule__Group__0 : rule__MachineLearningModuleRule__Group__0__Impl rule__MachineLearningModuleRule__Group__1 ;
+    public final void rule__MachineLearningModuleRule__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalMachineLearningLanguage.g:1967:1: ( rule__MachineLearningConfigurationRule__Group__0__Impl rule__MachineLearningConfigurationRule__Group__1 )
-            // InternalMachineLearningLanguage.g:1968:2: rule__MachineLearningConfigurationRule__Group__0__Impl rule__MachineLearningConfigurationRule__Group__1
+            // InternalMachineLearningLanguage.g:1967:1: ( rule__MachineLearningModuleRule__Group__0__Impl rule__MachineLearningModuleRule__Group__1 )
+            // InternalMachineLearningLanguage.g:1968:2: rule__MachineLearningModuleRule__Group__0__Impl rule__MachineLearningModuleRule__Group__1
             {
             pushFollow(FOLLOW_3);
-            rule__MachineLearningConfigurationRule__Group__0__Impl();
+            rule__MachineLearningModuleRule__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
             pushFollow(FOLLOW_2);
-            rule__MachineLearningConfigurationRule__Group__1();
+            rule__MachineLearningModuleRule__Group__1();
 
             state._fsp--;
             if (state.failed) return ;
@@ -7221,26 +7221,26 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
         }
         return ;
     }
-    // $ANTLR end "rule__MachineLearningConfigurationRule__Group__0"
+    // $ANTLR end "rule__MachineLearningModuleRule__Group__0"
 
 
-    // $ANTLR start "rule__MachineLearningConfigurationRule__Group__0__Impl"
-    // InternalMachineLearningLanguage.g:1975:1: rule__MachineLearningConfigurationRule__Group__0__Impl : ( ( rule__MachineLearningConfigurationRule__ImportsAssignment_0 )* ) ;
-    public final void rule__MachineLearningConfigurationRule__Group__0__Impl() throws RecognitionException {
+    // $ANTLR start "rule__MachineLearningModuleRule__Group__0__Impl"
+    // InternalMachineLearningLanguage.g:1975:1: rule__MachineLearningModuleRule__Group__0__Impl : ( ( rule__MachineLearningModuleRule__ImportsAssignment_0 )* ) ;
+    public final void rule__MachineLearningModuleRule__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalMachineLearningLanguage.g:1979:1: ( ( ( rule__MachineLearningConfigurationRule__ImportsAssignment_0 )* ) )
-            // InternalMachineLearningLanguage.g:1980:1: ( ( rule__MachineLearningConfigurationRule__ImportsAssignment_0 )* )
+            // InternalMachineLearningLanguage.g:1979:1: ( ( ( rule__MachineLearningModuleRule__ImportsAssignment_0 )* ) )
+            // InternalMachineLearningLanguage.g:1980:1: ( ( rule__MachineLearningModuleRule__ImportsAssignment_0 )* )
             {
-            // InternalMachineLearningLanguage.g:1980:1: ( ( rule__MachineLearningConfigurationRule__ImportsAssignment_0 )* )
-            // InternalMachineLearningLanguage.g:1981:2: ( rule__MachineLearningConfigurationRule__ImportsAssignment_0 )*
+            // InternalMachineLearningLanguage.g:1980:1: ( ( rule__MachineLearningModuleRule__ImportsAssignment_0 )* )
+            // InternalMachineLearningLanguage.g:1981:2: ( rule__MachineLearningModuleRule__ImportsAssignment_0 )*
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getMachineLearningConfigurationRuleAccess().getImportsAssignment_0()); 
+               before(grammarAccess.getMachineLearningModuleRuleAccess().getImportsAssignment_0()); 
             }
-            // InternalMachineLearningLanguage.g:1982:2: ( rule__MachineLearningConfigurationRule__ImportsAssignment_0 )*
+            // InternalMachineLearningLanguage.g:1982:2: ( rule__MachineLearningModuleRule__ImportsAssignment_0 )*
             loop14:
             do {
                 int alt14=2;
@@ -7253,10 +7253,10 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
 
                 switch (alt14) {
             	case 1 :
-            	    // InternalMachineLearningLanguage.g:1982:3: rule__MachineLearningConfigurationRule__ImportsAssignment_0
+            	    // InternalMachineLearningLanguage.g:1982:3: rule__MachineLearningModuleRule__ImportsAssignment_0
             	    {
             	    pushFollow(FOLLOW_4);
-            	    rule__MachineLearningConfigurationRule__ImportsAssignment_0();
+            	    rule__MachineLearningModuleRule__ImportsAssignment_0();
 
             	    state._fsp--;
             	    if (state.failed) return ;
@@ -7270,7 +7270,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
             } while (true);
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getMachineLearningConfigurationRuleAccess().getImportsAssignment_0()); 
+               after(grammarAccess.getMachineLearningModuleRuleAccess().getImportsAssignment_0()); 
             }
 
             }
@@ -7290,26 +7290,26 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
         }
         return ;
     }
-    // $ANTLR end "rule__MachineLearningConfigurationRule__Group__0__Impl"
+    // $ANTLR end "rule__MachineLearningModuleRule__Group__0__Impl"
 
 
-    // $ANTLR start "rule__MachineLearningConfigurationRule__Group__1"
-    // InternalMachineLearningLanguage.g:1990:1: rule__MachineLearningConfigurationRule__Group__1 : rule__MachineLearningConfigurationRule__Group__1__Impl rule__MachineLearningConfigurationRule__Group__2 ;
-    public final void rule__MachineLearningConfigurationRule__Group__1() throws RecognitionException {
+    // $ANTLR start "rule__MachineLearningModuleRule__Group__1"
+    // InternalMachineLearningLanguage.g:1990:1: rule__MachineLearningModuleRule__Group__1 : rule__MachineLearningModuleRule__Group__1__Impl rule__MachineLearningModuleRule__Group__2 ;
+    public final void rule__MachineLearningModuleRule__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalMachineLearningLanguage.g:1994:1: ( rule__MachineLearningConfigurationRule__Group__1__Impl rule__MachineLearningConfigurationRule__Group__2 )
-            // InternalMachineLearningLanguage.g:1995:2: rule__MachineLearningConfigurationRule__Group__1__Impl rule__MachineLearningConfigurationRule__Group__2
+            // InternalMachineLearningLanguage.g:1994:1: ( rule__MachineLearningModuleRule__Group__1__Impl rule__MachineLearningModuleRule__Group__2 )
+            // InternalMachineLearningLanguage.g:1995:2: rule__MachineLearningModuleRule__Group__1__Impl rule__MachineLearningModuleRule__Group__2
             {
             pushFollow(FOLLOW_5);
-            rule__MachineLearningConfigurationRule__Group__1__Impl();
+            rule__MachineLearningModuleRule__Group__1__Impl();
 
             state._fsp--;
             if (state.failed) return ;
             pushFollow(FOLLOW_2);
-            rule__MachineLearningConfigurationRule__Group__2();
+            rule__MachineLearningModuleRule__Group__2();
 
             state._fsp--;
             if (state.failed) return ;
@@ -7328,12 +7328,12 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
         }
         return ;
     }
-    // $ANTLR end "rule__MachineLearningConfigurationRule__Group__1"
+    // $ANTLR end "rule__MachineLearningModuleRule__Group__1"
 
 
-    // $ANTLR start "rule__MachineLearningConfigurationRule__Group__1__Impl"
-    // InternalMachineLearningLanguage.g:2002:1: rule__MachineLearningConfigurationRule__Group__1__Impl : ( 'module' ) ;
-    public final void rule__MachineLearningConfigurationRule__Group__1__Impl() throws RecognitionException {
+    // $ANTLR start "rule__MachineLearningModuleRule__Group__1__Impl"
+    // InternalMachineLearningLanguage.g:2002:1: rule__MachineLearningModuleRule__Group__1__Impl : ( 'module' ) ;
+    public final void rule__MachineLearningModuleRule__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
@@ -7345,11 +7345,11 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
             // InternalMachineLearningLanguage.g:2008:2: 'module'
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getMachineLearningConfigurationRuleAccess().getModuleKeyword_1()); 
+               before(grammarAccess.getMachineLearningModuleRuleAccess().getModuleKeyword_1()); 
             }
             match(input,47,FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getMachineLearningConfigurationRuleAccess().getModuleKeyword_1()); 
+               after(grammarAccess.getMachineLearningModuleRuleAccess().getModuleKeyword_1()); 
             }
 
             }
@@ -7369,26 +7369,26 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
         }
         return ;
     }
-    // $ANTLR end "rule__MachineLearningConfigurationRule__Group__1__Impl"
+    // $ANTLR end "rule__MachineLearningModuleRule__Group__1__Impl"
 
 
-    // $ANTLR start "rule__MachineLearningConfigurationRule__Group__2"
-    // InternalMachineLearningLanguage.g:2017:1: rule__MachineLearningConfigurationRule__Group__2 : rule__MachineLearningConfigurationRule__Group__2__Impl rule__MachineLearningConfigurationRule__Group__3 ;
-    public final void rule__MachineLearningConfigurationRule__Group__2() throws RecognitionException {
+    // $ANTLR start "rule__MachineLearningModuleRule__Group__2"
+    // InternalMachineLearningLanguage.g:2017:1: rule__MachineLearningModuleRule__Group__2 : rule__MachineLearningModuleRule__Group__2__Impl rule__MachineLearningModuleRule__Group__3 ;
+    public final void rule__MachineLearningModuleRule__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalMachineLearningLanguage.g:2021:1: ( rule__MachineLearningConfigurationRule__Group__2__Impl rule__MachineLearningConfigurationRule__Group__3 )
-            // InternalMachineLearningLanguage.g:2022:2: rule__MachineLearningConfigurationRule__Group__2__Impl rule__MachineLearningConfigurationRule__Group__3
+            // InternalMachineLearningLanguage.g:2021:1: ( rule__MachineLearningModuleRule__Group__2__Impl rule__MachineLearningModuleRule__Group__3 )
+            // InternalMachineLearningLanguage.g:2022:2: rule__MachineLearningModuleRule__Group__2__Impl rule__MachineLearningModuleRule__Group__3
             {
             pushFollow(FOLLOW_6);
-            rule__MachineLearningConfigurationRule__Group__2__Impl();
+            rule__MachineLearningModuleRule__Group__2__Impl();
 
             state._fsp--;
             if (state.failed) return ;
             pushFollow(FOLLOW_2);
-            rule__MachineLearningConfigurationRule__Group__3();
+            rule__MachineLearningModuleRule__Group__3();
 
             state._fsp--;
             if (state.failed) return ;
@@ -7407,30 +7407,30 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
         }
         return ;
     }
-    // $ANTLR end "rule__MachineLearningConfigurationRule__Group__2"
+    // $ANTLR end "rule__MachineLearningModuleRule__Group__2"
 
 
-    // $ANTLR start "rule__MachineLearningConfigurationRule__Group__2__Impl"
-    // InternalMachineLearningLanguage.g:2029:1: rule__MachineLearningConfigurationRule__Group__2__Impl : ( ( rule__MachineLearningConfigurationRule__NameAssignment_2 ) ) ;
-    public final void rule__MachineLearningConfigurationRule__Group__2__Impl() throws RecognitionException {
+    // $ANTLR start "rule__MachineLearningModuleRule__Group__2__Impl"
+    // InternalMachineLearningLanguage.g:2029:1: rule__MachineLearningModuleRule__Group__2__Impl : ( ( rule__MachineLearningModuleRule__NameAssignment_2 ) ) ;
+    public final void rule__MachineLearningModuleRule__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalMachineLearningLanguage.g:2033:1: ( ( ( rule__MachineLearningConfigurationRule__NameAssignment_2 ) ) )
-            // InternalMachineLearningLanguage.g:2034:1: ( ( rule__MachineLearningConfigurationRule__NameAssignment_2 ) )
+            // InternalMachineLearningLanguage.g:2033:1: ( ( ( rule__MachineLearningModuleRule__NameAssignment_2 ) ) )
+            // InternalMachineLearningLanguage.g:2034:1: ( ( rule__MachineLearningModuleRule__NameAssignment_2 ) )
             {
-            // InternalMachineLearningLanguage.g:2034:1: ( ( rule__MachineLearningConfigurationRule__NameAssignment_2 ) )
-            // InternalMachineLearningLanguage.g:2035:2: ( rule__MachineLearningConfigurationRule__NameAssignment_2 )
+            // InternalMachineLearningLanguage.g:2034:1: ( ( rule__MachineLearningModuleRule__NameAssignment_2 ) )
+            // InternalMachineLearningLanguage.g:2035:2: ( rule__MachineLearningModuleRule__NameAssignment_2 )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getMachineLearningConfigurationRuleAccess().getNameAssignment_2()); 
+               before(grammarAccess.getMachineLearningModuleRuleAccess().getNameAssignment_2()); 
             }
-            // InternalMachineLearningLanguage.g:2036:2: ( rule__MachineLearningConfigurationRule__NameAssignment_2 )
-            // InternalMachineLearningLanguage.g:2036:3: rule__MachineLearningConfigurationRule__NameAssignment_2
+            // InternalMachineLearningLanguage.g:2036:2: ( rule__MachineLearningModuleRule__NameAssignment_2 )
+            // InternalMachineLearningLanguage.g:2036:3: rule__MachineLearningModuleRule__NameAssignment_2
             {
             pushFollow(FOLLOW_2);
-            rule__MachineLearningConfigurationRule__NameAssignment_2();
+            rule__MachineLearningModuleRule__NameAssignment_2();
 
             state._fsp--;
             if (state.failed) return ;
@@ -7438,7 +7438,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getMachineLearningConfigurationRuleAccess().getNameAssignment_2()); 
+               after(grammarAccess.getMachineLearningModuleRuleAccess().getNameAssignment_2()); 
             }
 
             }
@@ -7458,26 +7458,26 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
         }
         return ;
     }
-    // $ANTLR end "rule__MachineLearningConfigurationRule__Group__2__Impl"
+    // $ANTLR end "rule__MachineLearningModuleRule__Group__2__Impl"
 
 
-    // $ANTLR start "rule__MachineLearningConfigurationRule__Group__3"
-    // InternalMachineLearningLanguage.g:2044:1: rule__MachineLearningConfigurationRule__Group__3 : rule__MachineLearningConfigurationRule__Group__3__Impl rule__MachineLearningConfigurationRule__Group__4 ;
-    public final void rule__MachineLearningConfigurationRule__Group__3() throws RecognitionException {
+    // $ANTLR start "rule__MachineLearningModuleRule__Group__3"
+    // InternalMachineLearningLanguage.g:2044:1: rule__MachineLearningModuleRule__Group__3 : rule__MachineLearningModuleRule__Group__3__Impl rule__MachineLearningModuleRule__Group__4 ;
+    public final void rule__MachineLearningModuleRule__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalMachineLearningLanguage.g:2048:1: ( rule__MachineLearningConfigurationRule__Group__3__Impl rule__MachineLearningConfigurationRule__Group__4 )
-            // InternalMachineLearningLanguage.g:2049:2: rule__MachineLearningConfigurationRule__Group__3__Impl rule__MachineLearningConfigurationRule__Group__4
+            // InternalMachineLearningLanguage.g:2048:1: ( rule__MachineLearningModuleRule__Group__3__Impl rule__MachineLearningModuleRule__Group__4 )
+            // InternalMachineLearningLanguage.g:2049:2: rule__MachineLearningModuleRule__Group__3__Impl rule__MachineLearningModuleRule__Group__4
             {
             pushFollow(FOLLOW_7);
-            rule__MachineLearningConfigurationRule__Group__3__Impl();
+            rule__MachineLearningModuleRule__Group__3__Impl();
 
             state._fsp--;
             if (state.failed) return ;
             pushFollow(FOLLOW_2);
-            rule__MachineLearningConfigurationRule__Group__4();
+            rule__MachineLearningModuleRule__Group__4();
 
             state._fsp--;
             if (state.failed) return ;
@@ -7496,12 +7496,12 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
         }
         return ;
     }
-    // $ANTLR end "rule__MachineLearningConfigurationRule__Group__3"
+    // $ANTLR end "rule__MachineLearningModuleRule__Group__3"
 
 
-    // $ANTLR start "rule__MachineLearningConfigurationRule__Group__3__Impl"
-    // InternalMachineLearningLanguage.g:2056:1: rule__MachineLearningConfigurationRule__Group__3__Impl : ( '{' ) ;
-    public final void rule__MachineLearningConfigurationRule__Group__3__Impl() throws RecognitionException {
+    // $ANTLR start "rule__MachineLearningModuleRule__Group__3__Impl"
+    // InternalMachineLearningLanguage.g:2056:1: rule__MachineLearningModuleRule__Group__3__Impl : ( '{' ) ;
+    public final void rule__MachineLearningModuleRule__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
@@ -7513,11 +7513,11 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
             // InternalMachineLearningLanguage.g:2062:2: '{'
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getMachineLearningConfigurationRuleAccess().getLeftCurlyBracketKeyword_3()); 
+               before(grammarAccess.getMachineLearningModuleRuleAccess().getLeftCurlyBracketKeyword_3()); 
             }
             match(input,48,FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getMachineLearningConfigurationRuleAccess().getLeftCurlyBracketKeyword_3()); 
+               after(grammarAccess.getMachineLearningModuleRuleAccess().getLeftCurlyBracketKeyword_3()); 
             }
 
             }
@@ -7537,26 +7537,26 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
         }
         return ;
     }
-    // $ANTLR end "rule__MachineLearningConfigurationRule__Group__3__Impl"
+    // $ANTLR end "rule__MachineLearningModuleRule__Group__3__Impl"
 
 
-    // $ANTLR start "rule__MachineLearningConfigurationRule__Group__4"
-    // InternalMachineLearningLanguage.g:2071:1: rule__MachineLearningConfigurationRule__Group__4 : rule__MachineLearningConfigurationRule__Group__4__Impl rule__MachineLearningConfigurationRule__Group__5 ;
-    public final void rule__MachineLearningConfigurationRule__Group__4() throws RecognitionException {
+    // $ANTLR start "rule__MachineLearningModuleRule__Group__4"
+    // InternalMachineLearningLanguage.g:2071:1: rule__MachineLearningModuleRule__Group__4 : rule__MachineLearningModuleRule__Group__4__Impl rule__MachineLearningModuleRule__Group__5 ;
+    public final void rule__MachineLearningModuleRule__Group__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalMachineLearningLanguage.g:2075:1: ( rule__MachineLearningConfigurationRule__Group__4__Impl rule__MachineLearningConfigurationRule__Group__5 )
-            // InternalMachineLearningLanguage.g:2076:2: rule__MachineLearningConfigurationRule__Group__4__Impl rule__MachineLearningConfigurationRule__Group__5
+            // InternalMachineLearningLanguage.g:2075:1: ( rule__MachineLearningModuleRule__Group__4__Impl rule__MachineLearningModuleRule__Group__5 )
+            // InternalMachineLearningLanguage.g:2076:2: rule__MachineLearningModuleRule__Group__4__Impl rule__MachineLearningModuleRule__Group__5
             {
             pushFollow(FOLLOW_7);
-            rule__MachineLearningConfigurationRule__Group__4__Impl();
+            rule__MachineLearningModuleRule__Group__4__Impl();
 
             state._fsp--;
             if (state.failed) return ;
             pushFollow(FOLLOW_2);
-            rule__MachineLearningConfigurationRule__Group__5();
+            rule__MachineLearningModuleRule__Group__5();
 
             state._fsp--;
             if (state.failed) return ;
@@ -7575,26 +7575,26 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
         }
         return ;
     }
-    // $ANTLR end "rule__MachineLearningConfigurationRule__Group__4"
+    // $ANTLR end "rule__MachineLearningModuleRule__Group__4"
 
 
-    // $ANTLR start "rule__MachineLearningConfigurationRule__Group__4__Impl"
-    // InternalMachineLearningLanguage.g:2083:1: rule__MachineLearningConfigurationRule__Group__4__Impl : ( ( rule__MachineLearningConfigurationRule__DefinitionsAssignment_4 )* ) ;
-    public final void rule__MachineLearningConfigurationRule__Group__4__Impl() throws RecognitionException {
+    // $ANTLR start "rule__MachineLearningModuleRule__Group__4__Impl"
+    // InternalMachineLearningLanguage.g:2083:1: rule__MachineLearningModuleRule__Group__4__Impl : ( ( rule__MachineLearningModuleRule__DefinitionsAssignment_4 )* ) ;
+    public final void rule__MachineLearningModuleRule__Group__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalMachineLearningLanguage.g:2087:1: ( ( ( rule__MachineLearningConfigurationRule__DefinitionsAssignment_4 )* ) )
-            // InternalMachineLearningLanguage.g:2088:1: ( ( rule__MachineLearningConfigurationRule__DefinitionsAssignment_4 )* )
+            // InternalMachineLearningLanguage.g:2087:1: ( ( ( rule__MachineLearningModuleRule__DefinitionsAssignment_4 )* ) )
+            // InternalMachineLearningLanguage.g:2088:1: ( ( rule__MachineLearningModuleRule__DefinitionsAssignment_4 )* )
             {
-            // InternalMachineLearningLanguage.g:2088:1: ( ( rule__MachineLearningConfigurationRule__DefinitionsAssignment_4 )* )
-            // InternalMachineLearningLanguage.g:2089:2: ( rule__MachineLearningConfigurationRule__DefinitionsAssignment_4 )*
+            // InternalMachineLearningLanguage.g:2088:1: ( ( rule__MachineLearningModuleRule__DefinitionsAssignment_4 )* )
+            // InternalMachineLearningLanguage.g:2089:2: ( rule__MachineLearningModuleRule__DefinitionsAssignment_4 )*
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getMachineLearningConfigurationRuleAccess().getDefinitionsAssignment_4()); 
+               before(grammarAccess.getMachineLearningModuleRuleAccess().getDefinitionsAssignment_4()); 
             }
-            // InternalMachineLearningLanguage.g:2090:2: ( rule__MachineLearningConfigurationRule__DefinitionsAssignment_4 )*
+            // InternalMachineLearningLanguage.g:2090:2: ( rule__MachineLearningModuleRule__DefinitionsAssignment_4 )*
             loop15:
             do {
                 int alt15=2;
@@ -7607,10 +7607,10 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
 
                 switch (alt15) {
             	case 1 :
-            	    // InternalMachineLearningLanguage.g:2090:3: rule__MachineLearningConfigurationRule__DefinitionsAssignment_4
+            	    // InternalMachineLearningLanguage.g:2090:3: rule__MachineLearningModuleRule__DefinitionsAssignment_4
             	    {
             	    pushFollow(FOLLOW_8);
-            	    rule__MachineLearningConfigurationRule__DefinitionsAssignment_4();
+            	    rule__MachineLearningModuleRule__DefinitionsAssignment_4();
 
             	    state._fsp--;
             	    if (state.failed) return ;
@@ -7624,7 +7624,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
             } while (true);
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getMachineLearningConfigurationRuleAccess().getDefinitionsAssignment_4()); 
+               after(grammarAccess.getMachineLearningModuleRuleAccess().getDefinitionsAssignment_4()); 
             }
 
             }
@@ -7644,26 +7644,26 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
         }
         return ;
     }
-    // $ANTLR end "rule__MachineLearningConfigurationRule__Group__4__Impl"
+    // $ANTLR end "rule__MachineLearningModuleRule__Group__4__Impl"
 
 
-    // $ANTLR start "rule__MachineLearningConfigurationRule__Group__5"
-    // InternalMachineLearningLanguage.g:2098:1: rule__MachineLearningConfigurationRule__Group__5 : rule__MachineLearningConfigurationRule__Group__5__Impl rule__MachineLearningConfigurationRule__Group__6 ;
-    public final void rule__MachineLearningConfigurationRule__Group__5() throws RecognitionException {
+    // $ANTLR start "rule__MachineLearningModuleRule__Group__5"
+    // InternalMachineLearningLanguage.g:2098:1: rule__MachineLearningModuleRule__Group__5 : rule__MachineLearningModuleRule__Group__5__Impl rule__MachineLearningModuleRule__Group__6 ;
+    public final void rule__MachineLearningModuleRule__Group__5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalMachineLearningLanguage.g:2102:1: ( rule__MachineLearningConfigurationRule__Group__5__Impl rule__MachineLearningConfigurationRule__Group__6 )
-            // InternalMachineLearningLanguage.g:2103:2: rule__MachineLearningConfigurationRule__Group__5__Impl rule__MachineLearningConfigurationRule__Group__6
+            // InternalMachineLearningLanguage.g:2102:1: ( rule__MachineLearningModuleRule__Group__5__Impl rule__MachineLearningModuleRule__Group__6 )
+            // InternalMachineLearningLanguage.g:2103:2: rule__MachineLearningModuleRule__Group__5__Impl rule__MachineLearningModuleRule__Group__6
             {
             pushFollow(FOLLOW_7);
-            rule__MachineLearningConfigurationRule__Group__5__Impl();
+            rule__MachineLearningModuleRule__Group__5__Impl();
 
             state._fsp--;
             if (state.failed) return ;
             pushFollow(FOLLOW_2);
-            rule__MachineLearningConfigurationRule__Group__6();
+            rule__MachineLearningModuleRule__Group__6();
 
             state._fsp--;
             if (state.failed) return ;
@@ -7682,26 +7682,26 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
         }
         return ;
     }
-    // $ANTLR end "rule__MachineLearningConfigurationRule__Group__5"
+    // $ANTLR end "rule__MachineLearningModuleRule__Group__5"
 
 
-    // $ANTLR start "rule__MachineLearningConfigurationRule__Group__5__Impl"
-    // InternalMachineLearningLanguage.g:2110:1: rule__MachineLearningConfigurationRule__Group__5__Impl : ( ( rule__MachineLearningConfigurationRule__StatementsAssignment_5 )* ) ;
-    public final void rule__MachineLearningConfigurationRule__Group__5__Impl() throws RecognitionException {
+    // $ANTLR start "rule__MachineLearningModuleRule__Group__5__Impl"
+    // InternalMachineLearningLanguage.g:2110:1: rule__MachineLearningModuleRule__Group__5__Impl : ( ( rule__MachineLearningModuleRule__StatementsAssignment_5 )* ) ;
+    public final void rule__MachineLearningModuleRule__Group__5__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalMachineLearningLanguage.g:2114:1: ( ( ( rule__MachineLearningConfigurationRule__StatementsAssignment_5 )* ) )
-            // InternalMachineLearningLanguage.g:2115:1: ( ( rule__MachineLearningConfigurationRule__StatementsAssignment_5 )* )
+            // InternalMachineLearningLanguage.g:2114:1: ( ( ( rule__MachineLearningModuleRule__StatementsAssignment_5 )* ) )
+            // InternalMachineLearningLanguage.g:2115:1: ( ( rule__MachineLearningModuleRule__StatementsAssignment_5 )* )
             {
-            // InternalMachineLearningLanguage.g:2115:1: ( ( rule__MachineLearningConfigurationRule__StatementsAssignment_5 )* )
-            // InternalMachineLearningLanguage.g:2116:2: ( rule__MachineLearningConfigurationRule__StatementsAssignment_5 )*
+            // InternalMachineLearningLanguage.g:2115:1: ( ( rule__MachineLearningModuleRule__StatementsAssignment_5 )* )
+            // InternalMachineLearningLanguage.g:2116:2: ( rule__MachineLearningModuleRule__StatementsAssignment_5 )*
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getMachineLearningConfigurationRuleAccess().getStatementsAssignment_5()); 
+               before(grammarAccess.getMachineLearningModuleRuleAccess().getStatementsAssignment_5()); 
             }
-            // InternalMachineLearningLanguage.g:2117:2: ( rule__MachineLearningConfigurationRule__StatementsAssignment_5 )*
+            // InternalMachineLearningLanguage.g:2117:2: ( rule__MachineLearningModuleRule__StatementsAssignment_5 )*
             loop16:
             do {
                 int alt16=2;
@@ -7714,10 +7714,10 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
 
                 switch (alt16) {
             	case 1 :
-            	    // InternalMachineLearningLanguage.g:2117:3: rule__MachineLearningConfigurationRule__StatementsAssignment_5
+            	    // InternalMachineLearningLanguage.g:2117:3: rule__MachineLearningModuleRule__StatementsAssignment_5
             	    {
             	    pushFollow(FOLLOW_9);
-            	    rule__MachineLearningConfigurationRule__StatementsAssignment_5();
+            	    rule__MachineLearningModuleRule__StatementsAssignment_5();
 
             	    state._fsp--;
             	    if (state.failed) return ;
@@ -7731,7 +7731,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
             } while (true);
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getMachineLearningConfigurationRuleAccess().getStatementsAssignment_5()); 
+               after(grammarAccess.getMachineLearningModuleRuleAccess().getStatementsAssignment_5()); 
             }
 
             }
@@ -7751,21 +7751,21 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
         }
         return ;
     }
-    // $ANTLR end "rule__MachineLearningConfigurationRule__Group__5__Impl"
+    // $ANTLR end "rule__MachineLearningModuleRule__Group__5__Impl"
 
 
-    // $ANTLR start "rule__MachineLearningConfigurationRule__Group__6"
-    // InternalMachineLearningLanguage.g:2125:1: rule__MachineLearningConfigurationRule__Group__6 : rule__MachineLearningConfigurationRule__Group__6__Impl ;
-    public final void rule__MachineLearningConfigurationRule__Group__6() throws RecognitionException {
+    // $ANTLR start "rule__MachineLearningModuleRule__Group__6"
+    // InternalMachineLearningLanguage.g:2125:1: rule__MachineLearningModuleRule__Group__6 : rule__MachineLearningModuleRule__Group__6__Impl ;
+    public final void rule__MachineLearningModuleRule__Group__6() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalMachineLearningLanguage.g:2129:1: ( rule__MachineLearningConfigurationRule__Group__6__Impl )
-            // InternalMachineLearningLanguage.g:2130:2: rule__MachineLearningConfigurationRule__Group__6__Impl
+            // InternalMachineLearningLanguage.g:2129:1: ( rule__MachineLearningModuleRule__Group__6__Impl )
+            // InternalMachineLearningLanguage.g:2130:2: rule__MachineLearningModuleRule__Group__6__Impl
             {
             pushFollow(FOLLOW_2);
-            rule__MachineLearningConfigurationRule__Group__6__Impl();
+            rule__MachineLearningModuleRule__Group__6__Impl();
 
             state._fsp--;
             if (state.failed) return ;
@@ -7784,12 +7784,12 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
         }
         return ;
     }
-    // $ANTLR end "rule__MachineLearningConfigurationRule__Group__6"
+    // $ANTLR end "rule__MachineLearningModuleRule__Group__6"
 
 
-    // $ANTLR start "rule__MachineLearningConfigurationRule__Group__6__Impl"
-    // InternalMachineLearningLanguage.g:2136:1: rule__MachineLearningConfigurationRule__Group__6__Impl : ( '}' ) ;
-    public final void rule__MachineLearningConfigurationRule__Group__6__Impl() throws RecognitionException {
+    // $ANTLR start "rule__MachineLearningModuleRule__Group__6__Impl"
+    // InternalMachineLearningLanguage.g:2136:1: rule__MachineLearningModuleRule__Group__6__Impl : ( '}' ) ;
+    public final void rule__MachineLearningModuleRule__Group__6__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
@@ -7801,11 +7801,11 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
             // InternalMachineLearningLanguage.g:2142:2: '}'
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getMachineLearningConfigurationRuleAccess().getRightCurlyBracketKeyword_6()); 
+               before(grammarAccess.getMachineLearningModuleRuleAccess().getRightCurlyBracketKeyword_6()); 
             }
             match(input,49,FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getMachineLearningConfigurationRuleAccess().getRightCurlyBracketKeyword_6()); 
+               after(grammarAccess.getMachineLearningModuleRuleAccess().getRightCurlyBracketKeyword_6()); 
             }
 
             }
@@ -7825,7 +7825,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
         }
         return ;
     }
-    // $ANTLR end "rule__MachineLearningConfigurationRule__Group__6__Impl"
+    // $ANTLR end "rule__MachineLearningModuleRule__Group__6__Impl"
 
 
     // $ANTLR start "rule__SurrogateDefinitionRule__Group__0"
@@ -22785,9 +22785,9 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
     // $ANTLR end "rule__QualifiedName__Group_1__1__Impl"
 
 
-    // $ANTLR start "rule__MachineLearningConfigurationRule__ImportsAssignment_0"
-    // InternalMachineLearningLanguage.g:6871:1: rule__MachineLearningConfigurationRule__ImportsAssignment_0 : ( ruleImportRule ) ;
-    public final void rule__MachineLearningConfigurationRule__ImportsAssignment_0() throws RecognitionException {
+    // $ANTLR start "rule__MachineLearningModuleRule__ImportsAssignment_0"
+    // InternalMachineLearningLanguage.g:6871:1: rule__MachineLearningModuleRule__ImportsAssignment_0 : ( ruleImportRule ) ;
+    public final void rule__MachineLearningModuleRule__ImportsAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
@@ -22799,7 +22799,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
             // InternalMachineLearningLanguage.g:6877:3: ruleImportRule
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getMachineLearningConfigurationRuleAccess().getImportsImportRuleParserRuleCall_0_0()); 
+               before(grammarAccess.getMachineLearningModuleRuleAccess().getImportsImportRuleParserRuleCall_0_0()); 
             }
             pushFollow(FOLLOW_2);
             ruleImportRule();
@@ -22807,7 +22807,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getMachineLearningConfigurationRuleAccess().getImportsImportRuleParserRuleCall_0_0()); 
+               after(grammarAccess.getMachineLearningModuleRuleAccess().getImportsImportRuleParserRuleCall_0_0()); 
             }
 
             }
@@ -22827,12 +22827,12 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
         }
         return ;
     }
-    // $ANTLR end "rule__MachineLearningConfigurationRule__ImportsAssignment_0"
+    // $ANTLR end "rule__MachineLearningModuleRule__ImportsAssignment_0"
 
 
-    // $ANTLR start "rule__MachineLearningConfigurationRule__NameAssignment_2"
-    // InternalMachineLearningLanguage.g:6886:1: rule__MachineLearningConfigurationRule__NameAssignment_2 : ( ruleQualifiedName ) ;
-    public final void rule__MachineLearningConfigurationRule__NameAssignment_2() throws RecognitionException {
+    // $ANTLR start "rule__MachineLearningModuleRule__NameAssignment_2"
+    // InternalMachineLearningLanguage.g:6886:1: rule__MachineLearningModuleRule__NameAssignment_2 : ( ruleQualifiedName ) ;
+    public final void rule__MachineLearningModuleRule__NameAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
@@ -22844,7 +22844,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
             // InternalMachineLearningLanguage.g:6892:3: ruleQualifiedName
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getMachineLearningConfigurationRuleAccess().getNameQualifiedNameParserRuleCall_2_0()); 
+               before(grammarAccess.getMachineLearningModuleRuleAccess().getNameQualifiedNameParserRuleCall_2_0()); 
             }
             pushFollow(FOLLOW_2);
             ruleQualifiedName();
@@ -22852,7 +22852,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getMachineLearningConfigurationRuleAccess().getNameQualifiedNameParserRuleCall_2_0()); 
+               after(grammarAccess.getMachineLearningModuleRuleAccess().getNameQualifiedNameParserRuleCall_2_0()); 
             }
 
             }
@@ -22872,12 +22872,12 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
         }
         return ;
     }
-    // $ANTLR end "rule__MachineLearningConfigurationRule__NameAssignment_2"
+    // $ANTLR end "rule__MachineLearningModuleRule__NameAssignment_2"
 
 
-    // $ANTLR start "rule__MachineLearningConfigurationRule__DefinitionsAssignment_4"
-    // InternalMachineLearningLanguage.g:6901:1: rule__MachineLearningConfigurationRule__DefinitionsAssignment_4 : ( ruleSurrogateDefinitionRule ) ;
-    public final void rule__MachineLearningConfigurationRule__DefinitionsAssignment_4() throws RecognitionException {
+    // $ANTLR start "rule__MachineLearningModuleRule__DefinitionsAssignment_4"
+    // InternalMachineLearningLanguage.g:6901:1: rule__MachineLearningModuleRule__DefinitionsAssignment_4 : ( ruleSurrogateDefinitionRule ) ;
+    public final void rule__MachineLearningModuleRule__DefinitionsAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
@@ -22889,7 +22889,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
             // InternalMachineLearningLanguage.g:6907:3: ruleSurrogateDefinitionRule
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getMachineLearningConfigurationRuleAccess().getDefinitionsSurrogateDefinitionRuleParserRuleCall_4_0()); 
+               before(grammarAccess.getMachineLearningModuleRuleAccess().getDefinitionsSurrogateDefinitionRuleParserRuleCall_4_0()); 
             }
             pushFollow(FOLLOW_2);
             ruleSurrogateDefinitionRule();
@@ -22897,7 +22897,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getMachineLearningConfigurationRuleAccess().getDefinitionsSurrogateDefinitionRuleParserRuleCall_4_0()); 
+               after(grammarAccess.getMachineLearningModuleRuleAccess().getDefinitionsSurrogateDefinitionRuleParserRuleCall_4_0()); 
             }
 
             }
@@ -22917,12 +22917,12 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
         }
         return ;
     }
-    // $ANTLR end "rule__MachineLearningConfigurationRule__DefinitionsAssignment_4"
+    // $ANTLR end "rule__MachineLearningModuleRule__DefinitionsAssignment_4"
 
 
-    // $ANTLR start "rule__MachineLearningConfigurationRule__StatementsAssignment_5"
-    // InternalMachineLearningLanguage.g:6916:1: rule__MachineLearningConfigurationRule__StatementsAssignment_5 : ( ruleStatementRule ) ;
-    public final void rule__MachineLearningConfigurationRule__StatementsAssignment_5() throws RecognitionException {
+    // $ANTLR start "rule__MachineLearningModuleRule__StatementsAssignment_5"
+    // InternalMachineLearningLanguage.g:6916:1: rule__MachineLearningModuleRule__StatementsAssignment_5 : ( ruleStatementRule ) ;
+    public final void rule__MachineLearningModuleRule__StatementsAssignment_5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
@@ -22934,7 +22934,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
             // InternalMachineLearningLanguage.g:6922:3: ruleStatementRule
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getMachineLearningConfigurationRuleAccess().getStatementsStatementRuleParserRuleCall_5_0()); 
+               before(grammarAccess.getMachineLearningModuleRuleAccess().getStatementsStatementRuleParserRuleCall_5_0()); 
             }
             pushFollow(FOLLOW_2);
             ruleStatementRule();
@@ -22942,7 +22942,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getMachineLearningConfigurationRuleAccess().getStatementsStatementRuleParserRuleCall_5_0()); 
+               after(grammarAccess.getMachineLearningModuleRuleAccess().getStatementsStatementRuleParserRuleCall_5_0()); 
             }
 
             }
@@ -22962,7 +22962,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
         }
         return ;
     }
-    // $ANTLR end "rule__MachineLearningConfigurationRule__StatementsAssignment_5"
+    // $ANTLR end "rule__MachineLearningModuleRule__StatementsAssignment_5"
 
 
     // $ANTLR start "rule__SurrogateDefinitionRule__NameAssignment_1"

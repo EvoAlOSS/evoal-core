@@ -51,7 +51,7 @@ import de.evoal.languages.model.mll.dsl.services.MachineLearningLanguageGrammarA
 
     @Override
     protected String getFirstRuleName() {
-    	return "MachineLearningConfigurationRule";
+    	return "MachineLearningModuleRule";
    	}
 
    	@Override
@@ -68,15 +68,15 @@ import de.evoal.languages.model.mll.dsl.services.MachineLearningLanguageGrammarA
     }
 }
 
-// Entry rule entryRuleMachineLearningConfigurationRule
-entryRuleMachineLearningConfigurationRule returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getMachineLearningConfigurationRuleRule()); }
-	iv_ruleMachineLearningConfigurationRule=ruleMachineLearningConfigurationRule
-	{ $current=$iv_ruleMachineLearningConfigurationRule.current; }
+// Entry rule entryRuleMachineLearningModuleRule
+entryRuleMachineLearningModuleRule returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getMachineLearningModuleRuleRule()); }
+	iv_ruleMachineLearningModuleRule=ruleMachineLearningModuleRule
+	{ $current=$iv_ruleMachineLearningModuleRule.current; }
 	EOF;
 
-// Rule MachineLearningConfigurationRule
-ruleMachineLearningConfigurationRule returns [EObject current=null]
+// Rule MachineLearningModuleRule
+ruleMachineLearningModuleRule returns [EObject current=null]
 @init {
 	enterRule();
 }
@@ -87,12 +87,12 @@ ruleMachineLearningConfigurationRule returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getMachineLearningConfigurationRuleAccess().getImportsImportRuleParserRuleCall_0_0());
+					newCompositeNode(grammarAccess.getMachineLearningModuleRuleAccess().getImportsImportRuleParserRuleCall_0_0());
 				}
 				lv_imports_0_0=ruleImportRule
 				{
 					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getMachineLearningConfigurationRuleRule());
+						$current = createModelElementForParent(grammarAccess.getMachineLearningModuleRuleRule());
 					}
 					add(
 						$current,
@@ -105,17 +105,17 @@ ruleMachineLearningConfigurationRule returns [EObject current=null]
 		)*
 		otherlv_1='module'
 		{
-			newLeafNode(otherlv_1, grammarAccess.getMachineLearningConfigurationRuleAccess().getModuleKeyword_1());
+			newLeafNode(otherlv_1, grammarAccess.getMachineLearningModuleRuleAccess().getModuleKeyword_1());
 		}
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getMachineLearningConfigurationRuleAccess().getNameQualifiedNameParserRuleCall_2_0());
+					newCompositeNode(grammarAccess.getMachineLearningModuleRuleAccess().getNameQualifiedNameParserRuleCall_2_0());
 				}
 				lv_name_2_0=ruleQualifiedName
 				{
 					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getMachineLearningConfigurationRuleRule());
+						$current = createModelElementForParent(grammarAccess.getMachineLearningModuleRuleRule());
 					}
 					set(
 						$current,
@@ -128,17 +128,17 @@ ruleMachineLearningConfigurationRule returns [EObject current=null]
 		)
 		otherlv_3='{'
 		{
-			newLeafNode(otherlv_3, grammarAccess.getMachineLearningConfigurationRuleAccess().getLeftCurlyBracketKeyword_3());
+			newLeafNode(otherlv_3, grammarAccess.getMachineLearningModuleRuleAccess().getLeftCurlyBracketKeyword_3());
 		}
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getMachineLearningConfigurationRuleAccess().getDefinitionsSurrogateDefinitionRuleParserRuleCall_4_0());
+					newCompositeNode(grammarAccess.getMachineLearningModuleRuleAccess().getDefinitionsSurrogateDefinitionRuleParserRuleCall_4_0());
 				}
 				lv_definitions_4_0=ruleSurrogateDefinitionRule
 				{
 					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getMachineLearningConfigurationRuleRule());
+						$current = createModelElementForParent(grammarAccess.getMachineLearningModuleRuleRule());
 					}
 					add(
 						$current,
@@ -152,12 +152,12 @@ ruleMachineLearningConfigurationRule returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getMachineLearningConfigurationRuleAccess().getStatementsStatementRuleParserRuleCall_5_0());
+					newCompositeNode(grammarAccess.getMachineLearningModuleRuleAccess().getStatementsStatementRuleParserRuleCall_5_0());
 				}
 				lv_statements_5_0=ruleStatementRule
 				{
 					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getMachineLearningConfigurationRuleRule());
+						$current = createModelElementForParent(grammarAccess.getMachineLearningModuleRuleRule());
 					}
 					add(
 						$current,
@@ -170,7 +170,7 @@ ruleMachineLearningConfigurationRule returns [EObject current=null]
 		)*
 		otherlv_6='}'
 		{
-			newLeafNode(otherlv_6, grammarAccess.getMachineLearningConfigurationRuleAccess().getRightCurlyBracketKeyword_6());
+			newLeafNode(otherlv_6, grammarAccess.getMachineLearningModuleRuleAccess().getRightCurlyBracketKeyword_6());
 		}
 	)
 ;

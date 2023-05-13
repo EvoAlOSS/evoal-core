@@ -11,9 +11,9 @@ import org.eclipse.xtext.formatting2.IFormattableDocument
 class MachineLearningLanguageFormatter extends BaseLanguageFormatter {
 	
 /*
-	def dispatch void format(MachineLearningConfiguration machineLearningConfiguration, extension IFormattableDocument document) {
+	def dispatch void format(MachineLearningModule machineLearningModule, extension IFormattableDocument document) {
 		// TODO: format HiddenRegions around keywords, attributes, cross references, etc. 
-		machineLearningConfiguration.qualityEstimation.format
+		machineLearningModule.qualityEstimation.format
 	}
 */
 

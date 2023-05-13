@@ -4,7 +4,7 @@ import "https://www.evoal.de/languages/mll/1.0.0"
 import "https://www.evoal.de/languages/ddl/1.0.0" as ddl
 import "https://www.evoal.de/languages/base/1.0.0" as base
 
-MachineLearningConfigurationRule returns MachineLearningModule:
+MachineLearningModuleRule returns MachineLearningModule:
 	(imports += ImportRule)*
 
 	"module" name = QualifiedName "{"

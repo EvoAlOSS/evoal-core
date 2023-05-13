@@ -28,7 +28,7 @@ public class MachineLearningLanguageParser extends AbstractAntlrParser {
 
 	@Override 
 	protected String getDefaultRuleName() {
-		return "MachineLearningConfigurationRule";
+		return "MachineLearningModuleRule";
 	}
 
 	public MachineLearningLanguageGrammarAccess getGrammarAccess() {

@@ -28,8 +28,8 @@ import org.eclipse.xtext.service.GrammarProvider;
 @Singleton
 public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.AbstractGrammarElementFinder {
 	
-	public class MachineLearningConfigurationRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.mll.dsl.MachineLearningLanguage.MachineLearningConfigurationRule");
+	public class MachineLearningModuleRuleElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.mll.dsl.MachineLearningLanguage.MachineLearningModuleRule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cImportsAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cImportsImportRuleParserRuleCall_0_0 = (RuleCall)cImportsAssignment_0.eContents().get(0);
@@ -43,7 +43,7 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 		private final RuleCall cStatementsStatementRuleParserRuleCall_5_0 = (RuleCall)cStatementsAssignment_5.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
-		//MachineLearningConfigurationRule returns MachineLearningModule:
+		//MachineLearningModuleRule returns MachineLearningModule:
 		//    (imports += ImportRule)*
 		//    "module" name = QualifiedName "{"
 		//        (definitions+=SurrogateDefinitionRule)*
@@ -730,7 +730,7 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 	}
 	
 	
-	private final MachineLearningConfigurationRuleElements pMachineLearningConfigurationRule;
+	private final MachineLearningModuleRuleElements pMachineLearningModuleRule;
 	private final SurrogateDefinitionRuleElements pSurrogateDefinitionRule;
 	private final SurrogateLayerDefinitionRuleElements pSurrogateLayerDefinitionRule;
 	private final PartialSurrogateFunctionDefinitionRuleElements pPartialSurrogateFunctionDefinitionRule;
@@ -760,7 +760,7 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 		this.gaInstanceLanguage = gaInstanceLanguage;
 		this.gaBaseLanguage = gaBaseLanguage;
 		this.gaTerminals = gaTerminals;
-		this.pMachineLearningConfigurationRule = new MachineLearningConfigurationRuleElements();
+		this.pMachineLearningModuleRule = new MachineLearningModuleRuleElements();
 		this.pSurrogateDefinitionRule = new SurrogateDefinitionRuleElements();
 		this.pSurrogateLayerDefinitionRule = new SurrogateLayerDefinitionRuleElements();
 		this.pPartialSurrogateFunctionDefinitionRule = new PartialSurrogateFunctionDefinitionRuleElements();
@@ -809,19 +809,19 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 	}
 
 	
-	//MachineLearningConfigurationRule returns MachineLearningModule:
+	//MachineLearningModuleRule returns MachineLearningModule:
 	//    (imports += ImportRule)*
 	//    "module" name = QualifiedName "{"
 	//        (definitions+=SurrogateDefinitionRule)*
 	//        (statements += StatementRule)*
 	//    "}"
 	//;
-	public MachineLearningConfigurationRuleElements getMachineLearningConfigurationRuleAccess() {
-		return pMachineLearningConfigurationRule;
+	public MachineLearningModuleRuleElements getMachineLearningModuleRuleAccess() {
+		return pMachineLearningModuleRule;
 	}
 	
-	public ParserRule getMachineLearningConfigurationRuleRule() {
-		return getMachineLearningConfigurationRuleAccess().getRule();
+	public ParserRule getMachineLearningModuleRuleRule() {
+		return getMachineLearningModuleRuleAccess().getRule();
 	}
 	
 	//SurrogateDefinitionRule returns SurrogateDefinition:

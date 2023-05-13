@@ -150,7 +150,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
 
         @Override
         protected String getFirstRuleName() {
-        	return "MachineLearningConfigurationRule";
+        	return "MachineLearningModuleRule";
        	}
 
        	@Override
@@ -161,28 +161,28 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
 
 
 
-    // $ANTLR start "entryRuleMachineLearningConfigurationRule"
-    // InternalMachineLearningLanguage.g:72:1: entryRuleMachineLearningConfigurationRule returns [EObject current=null] : iv_ruleMachineLearningConfigurationRule= ruleMachineLearningConfigurationRule EOF ;
-    public final EObject entryRuleMachineLearningConfigurationRule() throws RecognitionException {
+    // $ANTLR start "entryRuleMachineLearningModuleRule"
+    // InternalMachineLearningLanguage.g:72:1: entryRuleMachineLearningModuleRule returns [EObject current=null] : iv_ruleMachineLearningModuleRule= ruleMachineLearningModuleRule EOF ;
+    public final EObject entryRuleMachineLearningModuleRule() throws RecognitionException {
         EObject current = null;
 
-        EObject iv_ruleMachineLearningConfigurationRule = null;
+        EObject iv_ruleMachineLearningModuleRule = null;
 
 
         try {
-            // InternalMachineLearningLanguage.g:72:73: (iv_ruleMachineLearningConfigurationRule= ruleMachineLearningConfigurationRule EOF )
-            // InternalMachineLearningLanguage.g:73:2: iv_ruleMachineLearningConfigurationRule= ruleMachineLearningConfigurationRule EOF
+            // InternalMachineLearningLanguage.g:72:66: (iv_ruleMachineLearningModuleRule= ruleMachineLearningModuleRule EOF )
+            // InternalMachineLearningLanguage.g:73:2: iv_ruleMachineLearningModuleRule= ruleMachineLearningModuleRule EOF
             {
             if ( state.backtracking==0 ) {
-               newCompositeNode(grammarAccess.getMachineLearningConfigurationRuleRule()); 
+               newCompositeNode(grammarAccess.getMachineLearningModuleRuleRule()); 
             }
             pushFollow(FOLLOW_1);
-            iv_ruleMachineLearningConfigurationRule=ruleMachineLearningConfigurationRule();
+            iv_ruleMachineLearningModuleRule=ruleMachineLearningModuleRule();
 
             state._fsp--;
             if (state.failed) return current;
             if ( state.backtracking==0 ) {
-               current =iv_ruleMachineLearningConfigurationRule; 
+               current =iv_ruleMachineLearningModuleRule; 
             }
             match(input,EOF,FOLLOW_2); if (state.failed) return current;
 
@@ -198,12 +198,12 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
         }
         return current;
     }
-    // $ANTLR end "entryRuleMachineLearningConfigurationRule"
+    // $ANTLR end "entryRuleMachineLearningModuleRule"
 
 
-    // $ANTLR start "ruleMachineLearningConfigurationRule"
-    // InternalMachineLearningLanguage.g:79:1: ruleMachineLearningConfigurationRule returns [EObject current=null] : ( ( (lv_imports_0_0= ruleImportRule ) )* otherlv_1= 'module' ( (lv_name_2_0= ruleQualifiedName ) ) otherlv_3= '{' ( (lv_definitions_4_0= ruleSurrogateDefinitionRule ) )* ( (lv_statements_5_0= ruleStatementRule ) )* otherlv_6= '}' ) ;
-    public final EObject ruleMachineLearningConfigurationRule() throws RecognitionException {
+    // $ANTLR start "ruleMachineLearningModuleRule"
+    // InternalMachineLearningLanguage.g:79:1: ruleMachineLearningModuleRule returns [EObject current=null] : ( ( (lv_imports_0_0= ruleImportRule ) )* otherlv_1= 'module' ( (lv_name_2_0= ruleQualifiedName ) ) otherlv_3= '{' ( (lv_definitions_4_0= ruleSurrogateDefinitionRule ) )* ( (lv_statements_5_0= ruleStatementRule ) )* otherlv_6= '}' ) ;
+    public final EObject ruleMachineLearningModuleRule() throws RecognitionException {
         EObject current = null;
 
         Token otherlv_1=null;
@@ -248,7 +248,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
             	    {
             	    if ( state.backtracking==0 ) {
 
-            	      					newCompositeNode(grammarAccess.getMachineLearningConfigurationRuleAccess().getImportsImportRuleParserRuleCall_0_0());
+            	      					newCompositeNode(grammarAccess.getMachineLearningModuleRuleAccess().getImportsImportRuleParserRuleCall_0_0());
             	      				
             	    }
             	    pushFollow(FOLLOW_3);
@@ -259,7 +259,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
             	    if ( state.backtracking==0 ) {
 
             	      					if (current==null) {
-            	      						current = createModelElementForParent(grammarAccess.getMachineLearningConfigurationRuleRule());
+            	      						current = createModelElementForParent(grammarAccess.getMachineLearningModuleRuleRule());
             	      					}
             	      					add(
             	      						current,
@@ -284,7 +284,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
             otherlv_1=(Token)match(input,15,FOLLOW_4); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
-              			newLeafNode(otherlv_1, grammarAccess.getMachineLearningConfigurationRuleAccess().getModuleKeyword_1());
+              			newLeafNode(otherlv_1, grammarAccess.getMachineLearningModuleRuleAccess().getModuleKeyword_1());
               		
             }
             // InternalMachineLearningLanguage.g:110:3: ( (lv_name_2_0= ruleQualifiedName ) )
@@ -295,7 +295,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
             {
             if ( state.backtracking==0 ) {
 
-              					newCompositeNode(grammarAccess.getMachineLearningConfigurationRuleAccess().getNameQualifiedNameParserRuleCall_2_0());
+              					newCompositeNode(grammarAccess.getMachineLearningModuleRuleAccess().getNameQualifiedNameParserRuleCall_2_0());
               				
             }
             pushFollow(FOLLOW_5);
@@ -306,7 +306,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
             if ( state.backtracking==0 ) {
 
               					if (current==null) {
-              						current = createModelElementForParent(grammarAccess.getMachineLearningConfigurationRuleRule());
+              						current = createModelElementForParent(grammarAccess.getMachineLearningModuleRuleRule());
               					}
               					set(
               						current,
@@ -325,7 +325,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
             otherlv_3=(Token)match(input,16,FOLLOW_6); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
-              			newLeafNode(otherlv_3, grammarAccess.getMachineLearningConfigurationRuleAccess().getLeftCurlyBracketKeyword_3());
+              			newLeafNode(otherlv_3, grammarAccess.getMachineLearningModuleRuleAccess().getLeftCurlyBracketKeyword_3());
               		
             }
             // InternalMachineLearningLanguage.g:133:3: ( (lv_definitions_4_0= ruleSurrogateDefinitionRule ) )*
@@ -348,7 +348,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
             	    {
             	    if ( state.backtracking==0 ) {
 
-            	      					newCompositeNode(grammarAccess.getMachineLearningConfigurationRuleAccess().getDefinitionsSurrogateDefinitionRuleParserRuleCall_4_0());
+            	      					newCompositeNode(grammarAccess.getMachineLearningModuleRuleAccess().getDefinitionsSurrogateDefinitionRuleParserRuleCall_4_0());
             	      				
             	    }
             	    pushFollow(FOLLOW_6);
@@ -359,7 +359,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
             	    if ( state.backtracking==0 ) {
 
             	      					if (current==null) {
-            	      						current = createModelElementForParent(grammarAccess.getMachineLearningConfigurationRuleRule());
+            	      						current = createModelElementForParent(grammarAccess.getMachineLearningModuleRuleRule());
             	      					}
             	      					add(
             	      						current,
@@ -401,7 +401,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
             	    {
             	    if ( state.backtracking==0 ) {
 
-            	      					newCompositeNode(grammarAccess.getMachineLearningConfigurationRuleAccess().getStatementsStatementRuleParserRuleCall_5_0());
+            	      					newCompositeNode(grammarAccess.getMachineLearningModuleRuleAccess().getStatementsStatementRuleParserRuleCall_5_0());
             	      				
             	    }
             	    pushFollow(FOLLOW_7);
@@ -412,7 +412,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
             	    if ( state.backtracking==0 ) {
 
             	      					if (current==null) {
-            	      						current = createModelElementForParent(grammarAccess.getMachineLearningConfigurationRuleRule());
+            	      						current = createModelElementForParent(grammarAccess.getMachineLearningModuleRuleRule());
             	      					}
             	      					add(
             	      						current,
@@ -437,7 +437,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
             otherlv_6=(Token)match(input,17,FOLLOW_2); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
-              			newLeafNode(otherlv_6, grammarAccess.getMachineLearningConfigurationRuleAccess().getRightCurlyBracketKeyword_6());
+              			newLeafNode(otherlv_6, grammarAccess.getMachineLearningModuleRuleAccess().getRightCurlyBracketKeyword_6());
               		
             }
 
@@ -461,7 +461,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalAntlr
         }
         return current;
     }
-    // $ANTLR end "ruleMachineLearningConfigurationRule"
+    // $ANTLR end "ruleMachineLearningModuleRule"
 
 
     // $ANTLR start "entryRuleSurrogateDefinitionRule"

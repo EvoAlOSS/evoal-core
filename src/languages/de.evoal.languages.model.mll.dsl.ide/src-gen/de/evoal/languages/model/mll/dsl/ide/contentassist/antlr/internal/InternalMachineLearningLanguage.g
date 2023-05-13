@@ -51,25 +51,25 @@ import de.evoal.languages.model.mll.dsl.services.MachineLearningLanguageGrammarA
 	}
 }
 
-// Entry rule entryRuleMachineLearningConfigurationRule
-entryRuleMachineLearningConfigurationRule
+// Entry rule entryRuleMachineLearningModuleRule
+entryRuleMachineLearningModuleRule
 :
-{ before(grammarAccess.getMachineLearningConfigurationRuleRule()); }
-	 ruleMachineLearningConfigurationRule
-{ after(grammarAccess.getMachineLearningConfigurationRuleRule()); } 
+{ before(grammarAccess.getMachineLearningModuleRuleRule()); }
+	 ruleMachineLearningModuleRule
+{ after(grammarAccess.getMachineLearningModuleRuleRule()); } 
 	 EOF 
 ;
 
-// Rule MachineLearningConfigurationRule
-ruleMachineLearningConfigurationRule 
+// Rule MachineLearningModuleRule
+ruleMachineLearningModuleRule 
 	@init {
 		int stackSize = keepStackSize();
 	}
 	:
 	(
-		{ before(grammarAccess.getMachineLearningConfigurationRuleAccess().getGroup()); }
-		(rule__MachineLearningConfigurationRule__Group__0)
-		{ after(grammarAccess.getMachineLearningConfigurationRuleAccess().getGroup()); }
+		{ before(grammarAccess.getMachineLearningModuleRuleAccess().getGroup()); }
+		(rule__MachineLearningModuleRule__Group__0)
+		{ after(grammarAccess.getMachineLearningModuleRuleAccess().getGroup()); }
 	)
 ;
 finally {
@@ -1960,188 +1960,188 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__MachineLearningConfigurationRule__Group__0
+rule__MachineLearningModuleRule__Group__0
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
-	rule__MachineLearningConfigurationRule__Group__0__Impl
-	rule__MachineLearningConfigurationRule__Group__1
+	rule__MachineLearningModuleRule__Group__0__Impl
+	rule__MachineLearningModuleRule__Group__1
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__MachineLearningConfigurationRule__Group__0__Impl
+rule__MachineLearningModuleRule__Group__0__Impl
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 (
-	{ before(grammarAccess.getMachineLearningConfigurationRuleAccess().getImportsAssignment_0()); }
-	(rule__MachineLearningConfigurationRule__ImportsAssignment_0)*
-	{ after(grammarAccess.getMachineLearningConfigurationRuleAccess().getImportsAssignment_0()); }
+	{ before(grammarAccess.getMachineLearningModuleRuleAccess().getImportsAssignment_0()); }
+	(rule__MachineLearningModuleRule__ImportsAssignment_0)*
+	{ after(grammarAccess.getMachineLearningModuleRuleAccess().getImportsAssignment_0()); }
 )
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__MachineLearningConfigurationRule__Group__1
+rule__MachineLearningModuleRule__Group__1
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
-	rule__MachineLearningConfigurationRule__Group__1__Impl
-	rule__MachineLearningConfigurationRule__Group__2
+	rule__MachineLearningModuleRule__Group__1__Impl
+	rule__MachineLearningModuleRule__Group__2
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__MachineLearningConfigurationRule__Group__1__Impl
+rule__MachineLearningModuleRule__Group__1__Impl
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 (
-	{ before(grammarAccess.getMachineLearningConfigurationRuleAccess().getModuleKeyword_1()); }
+	{ before(grammarAccess.getMachineLearningModuleRuleAccess().getModuleKeyword_1()); }
 	'module'
-	{ after(grammarAccess.getMachineLearningConfigurationRuleAccess().getModuleKeyword_1()); }
+	{ after(grammarAccess.getMachineLearningModuleRuleAccess().getModuleKeyword_1()); }
 )
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__MachineLearningConfigurationRule__Group__2
+rule__MachineLearningModuleRule__Group__2
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
-	rule__MachineLearningConfigurationRule__Group__2__Impl
-	rule__MachineLearningConfigurationRule__Group__3
+	rule__MachineLearningModuleRule__Group__2__Impl
+	rule__MachineLearningModuleRule__Group__3
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__MachineLearningConfigurationRule__Group__2__Impl
+rule__MachineLearningModuleRule__Group__2__Impl
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 (
-	{ before(grammarAccess.getMachineLearningConfigurationRuleAccess().getNameAssignment_2()); }
-	(rule__MachineLearningConfigurationRule__NameAssignment_2)
-	{ after(grammarAccess.getMachineLearningConfigurationRuleAccess().getNameAssignment_2()); }
+	{ before(grammarAccess.getMachineLearningModuleRuleAccess().getNameAssignment_2()); }
+	(rule__MachineLearningModuleRule__NameAssignment_2)
+	{ after(grammarAccess.getMachineLearningModuleRuleAccess().getNameAssignment_2()); }
 )
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__MachineLearningConfigurationRule__Group__3
+rule__MachineLearningModuleRule__Group__3
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
-	rule__MachineLearningConfigurationRule__Group__3__Impl
-	rule__MachineLearningConfigurationRule__Group__4
+	rule__MachineLearningModuleRule__Group__3__Impl
+	rule__MachineLearningModuleRule__Group__4
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__MachineLearningConfigurationRule__Group__3__Impl
+rule__MachineLearningModuleRule__Group__3__Impl
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 (
-	{ before(grammarAccess.getMachineLearningConfigurationRuleAccess().getLeftCurlyBracketKeyword_3()); }
+	{ before(grammarAccess.getMachineLearningModuleRuleAccess().getLeftCurlyBracketKeyword_3()); }
 	'{'
-	{ after(grammarAccess.getMachineLearningConfigurationRuleAccess().getLeftCurlyBracketKeyword_3()); }
+	{ after(grammarAccess.getMachineLearningModuleRuleAccess().getLeftCurlyBracketKeyword_3()); }
 )
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__MachineLearningConfigurationRule__Group__4
+rule__MachineLearningModuleRule__Group__4
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
-	rule__MachineLearningConfigurationRule__Group__4__Impl
-	rule__MachineLearningConfigurationRule__Group__5
+	rule__MachineLearningModuleRule__Group__4__Impl
+	rule__MachineLearningModuleRule__Group__5
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__MachineLearningConfigurationRule__Group__4__Impl
+rule__MachineLearningModuleRule__Group__4__Impl
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 (
-	{ before(grammarAccess.getMachineLearningConfigurationRuleAccess().getDefinitionsAssignment_4()); }
-	(rule__MachineLearningConfigurationRule__DefinitionsAssignment_4)*
-	{ after(grammarAccess.getMachineLearningConfigurationRuleAccess().getDefinitionsAssignment_4()); }
+	{ before(grammarAccess.getMachineLearningModuleRuleAccess().getDefinitionsAssignment_4()); }
+	(rule__MachineLearningModuleRule__DefinitionsAssignment_4)*
+	{ after(grammarAccess.getMachineLearningModuleRuleAccess().getDefinitionsAssignment_4()); }
 )
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__MachineLearningConfigurationRule__Group__5
+rule__MachineLearningModuleRule__Group__5
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
-	rule__MachineLearningConfigurationRule__Group__5__Impl
-	rule__MachineLearningConfigurationRule__Group__6
+	rule__MachineLearningModuleRule__Group__5__Impl
+	rule__MachineLearningModuleRule__Group__6
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__MachineLearningConfigurationRule__Group__5__Impl
+rule__MachineLearningModuleRule__Group__5__Impl
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 (
-	{ before(grammarAccess.getMachineLearningConfigurationRuleAccess().getStatementsAssignment_5()); }
-	(rule__MachineLearningConfigurationRule__StatementsAssignment_5)*
-	{ after(grammarAccess.getMachineLearningConfigurationRuleAccess().getStatementsAssignment_5()); }
+	{ before(grammarAccess.getMachineLearningModuleRuleAccess().getStatementsAssignment_5()); }
+	(rule__MachineLearningModuleRule__StatementsAssignment_5)*
+	{ after(grammarAccess.getMachineLearningModuleRuleAccess().getStatementsAssignment_5()); }
 )
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__MachineLearningConfigurationRule__Group__6
+rule__MachineLearningModuleRule__Group__6
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
-	rule__MachineLearningConfigurationRule__Group__6__Impl
+	rule__MachineLearningModuleRule__Group__6__Impl
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__MachineLearningConfigurationRule__Group__6__Impl
+rule__MachineLearningModuleRule__Group__6__Impl
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 (
-	{ before(grammarAccess.getMachineLearningConfigurationRuleAccess().getRightCurlyBracketKeyword_6()); }
+	{ before(grammarAccess.getMachineLearningModuleRuleAccess().getRightCurlyBracketKeyword_6()); }
 	'}'
-	{ after(grammarAccess.getMachineLearningConfigurationRuleAccess().getRightCurlyBracketKeyword_6()); }
+	{ after(grammarAccess.getMachineLearningModuleRuleAccess().getRightCurlyBracketKeyword_6()); }
 )
 ;
 finally {
@@ -6868,60 +6868,60 @@ finally {
 }
 
 
-rule__MachineLearningConfigurationRule__ImportsAssignment_0
+rule__MachineLearningModuleRule__ImportsAssignment_0
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 	(
-		{ before(grammarAccess.getMachineLearningConfigurationRuleAccess().getImportsImportRuleParserRuleCall_0_0()); }
+		{ before(grammarAccess.getMachineLearningModuleRuleAccess().getImportsImportRuleParserRuleCall_0_0()); }
 		ruleImportRule
-		{ after(grammarAccess.getMachineLearningConfigurationRuleAccess().getImportsImportRuleParserRuleCall_0_0()); }
+		{ after(grammarAccess.getMachineLearningModuleRuleAccess().getImportsImportRuleParserRuleCall_0_0()); }
 	)
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__MachineLearningConfigurationRule__NameAssignment_2
+rule__MachineLearningModuleRule__NameAssignment_2
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 	(
-		{ before(grammarAccess.getMachineLearningConfigurationRuleAccess().getNameQualifiedNameParserRuleCall_2_0()); }
+		{ before(grammarAccess.getMachineLearningModuleRuleAccess().getNameQualifiedNameParserRuleCall_2_0()); }
 		ruleQualifiedName
-		{ after(grammarAccess.getMachineLearningConfigurationRuleAccess().getNameQualifiedNameParserRuleCall_2_0()); }
+		{ after(grammarAccess.getMachineLearningModuleRuleAccess().getNameQualifiedNameParserRuleCall_2_0()); }
 	)
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__MachineLearningConfigurationRule__DefinitionsAssignment_4
+rule__MachineLearningModuleRule__DefinitionsAssignment_4
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 	(
-		{ before(grammarAccess.getMachineLearningConfigurationRuleAccess().getDefinitionsSurrogateDefinitionRuleParserRuleCall_4_0()); }
+		{ before(grammarAccess.getMachineLearningModuleRuleAccess().getDefinitionsSurrogateDefinitionRuleParserRuleCall_4_0()); }
 		ruleSurrogateDefinitionRule
-		{ after(grammarAccess.getMachineLearningConfigurationRuleAccess().getDefinitionsSurrogateDefinitionRuleParserRuleCall_4_0()); }
+		{ after(grammarAccess.getMachineLearningModuleRuleAccess().getDefinitionsSurrogateDefinitionRuleParserRuleCall_4_0()); }
 	)
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__MachineLearningConfigurationRule__StatementsAssignment_5
+rule__MachineLearningModuleRule__StatementsAssignment_5
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 	(
-		{ before(grammarAccess.getMachineLearningConfigurationRuleAccess().getStatementsStatementRuleParserRuleCall_5_0()); }
+		{ before(grammarAccess.getMachineLearningModuleRuleAccess().getStatementsStatementRuleParserRuleCall_5_0()); }
 		ruleStatementRule
-		{ after(grammarAccess.getMachineLearningConfigurationRuleAccess().getStatementsStatementRuleParserRuleCall_5_0()); }
+		{ after(grammarAccess.getMachineLearningModuleRuleAccess().getStatementsStatementRuleParserRuleCall_5_0()); }
 	)
 ;
 finally {

@@ -13,7 +13,7 @@ import de.evoal.languages.model.dl.impl.DlPackageImpl;
 import de.evoal.languages.model.base.dsl.BaseLanguageStandaloneSetup;
 import de.evoal.languages.model.base.impl.BasePackageImpl;
 import de.evoal.languages.model.generator.dsl.GeneratorDSLStandaloneSetup;
-import de.evoal.languages.model.generator.Configuration;
+import de.evoal.languages.model.generator.GeneratorModule;
 import de.evoal.languages.model.generator.impl.GeneratorPackageImpl;
 import lombok.extern.slf4j.Slf4j;
 
@@ -55,7 +55,7 @@ public class GeneratorConfigurationProducer {
             throw  new IllegalArgumentException("Please specify a readable genrator file.");
         }
 
-        final Configuration configuration = read(file).get();
+        final GeneratorModule configuration = read(file).get();
         board.bind(GeneratorBlackboardEntries.GENERATOR_CONFIGURATION, configuration);
     }
 
@@ -80,7 +80,7 @@ public class GeneratorConfigurationProducer {
      * @param modelFile The model file to read.
      * @return The data validation model or an empty optional.
      */
-    private Optional<Configuration> read(final File modelFile) {
+    private Optional<GeneratorModule> read(final File modelFile) {
         log.info("Reading model file {}.", modelFile);
 
         final Injector injector = new GeneratorDSLStandaloneSetup().createInjectorAndDoEMFRegistration();
@@ -105,7 +105,7 @@ public class GeneratorConfigurationProducer {
                 }
             }
 
-            return Optional.of((Configuration) resource.getContents().get(0));
+            return Optional.of((GeneratorModule) resource.getContents().get(0));
         } catch (final Exception e) {
             log.error("Unable to to generator file '{}'.", modelFile, e);
             return Optional.empty();
@@ -114,12 +114,12 @@ public class GeneratorConfigurationProducer {
 
     @Produces
     @BlackboardValue(GeneratorBlackboardEntries.GENERATOR_CONFIGURATION)
-    public Configuration injectIntegerValue(final InjectionPoint ip, final Blackboard board) {
+    public GeneratorModule injectIntegerValue(final InjectionPoint ip, final Blackboard board) {
         final BlackboardValue value = ip.getAnnotated().getAnnotation(BlackboardValue.class);
         final Object result = board.get(value.value());
 
-        if(result instanceof Configuration) {
-            return (Configuration)result;
+        if(result instanceof GeneratorModule) {
+            return (GeneratorModule)result;
         }
 
         throw new IllegalArgumentException("Unable to handle type " + result.getClass());

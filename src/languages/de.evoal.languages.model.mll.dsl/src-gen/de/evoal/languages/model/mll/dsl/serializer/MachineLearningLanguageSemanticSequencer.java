@@ -214,7 +214,7 @@ public class MachineLearningLanguageSemanticSequencer extends InstanceLanguageSe
 				sequence_ForStatementRule(context, (ForStatement) semanticObject); 
 				return; 
 			case MllPackage.MACHINE_LEARNING_MODULE:
-				sequence_MachineLearningConfigurationRule(context, (MachineLearningModule) semanticObject); 
+				sequence_MachineLearningModuleRule(context, (MachineLearningModule) semanticObject); 
 				return; 
 			case MllPackage.PARTIAL_SURROGATE_FUNCTION_DEFINITION:
 				sequence_PartialSurrogateFunctionDefinitionRule(context, (PartialSurrogateFunctionDefinition) semanticObject); 
@@ -313,13 +313,13 @@ public class MachineLearningLanguageSemanticSequencer extends InstanceLanguageSe
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     MachineLearningConfigurationRule returns MachineLearningModule
+	 *     MachineLearningModuleRule returns MachineLearningModule
 	 *
 	 * Constraint:
 	 *     (imports+=ImportRule* name=QualifiedName definitions+=SurrogateDefinitionRule* statements+=StatementRule*)
 	 * </pre>
 	 */
-	protected void sequence_MachineLearningConfigurationRule(ISerializationContext context, MachineLearningModule semanticObject) {
+	protected void sequence_MachineLearningModuleRule(ISerializationContext context, MachineLearningModule semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
