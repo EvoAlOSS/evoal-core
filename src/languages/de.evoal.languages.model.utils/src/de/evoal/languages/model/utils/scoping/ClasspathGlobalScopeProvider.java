@@ -1,6 +1,9 @@
 package de.evoal.languages.model.utils.scoping;
 
 import java.io.File;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.URI;
@@ -14,6 +17,8 @@ import org.eclipse.xtext.util.IAcceptor;
 import de.evoal.languages.model.base.Import;
 
 public class ClasspathGlobalScopeProvider extends ImportUriGlobalScopeProvider {
+	public static List<String> SEARCH_PATH = new LinkedList<>(Collections.singleton("./"));
+	
 	public static class CustomUriResolver extends ImportUriResolver  {
 		
 		public CustomUriResolver() {
@@ -51,11 +56,13 @@ public class ClasspathGlobalScopeProvider extends ImportUriGlobalScopeProvider {
 				break;
 			}
 			
-			if(new File(result).exists()) {
-				return result;
-			} else {
-				return "classpath:/" + result;
-			}			
+			for(final String path : SEARCH_PATH) {
+				if(new File(path, result).exists()) {
+					return new File(path, result).toString();
+				} 				
+			}
+			
+			return "classpath:/" + result;
 		}
 	}
 	
