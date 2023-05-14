@@ -1,19 +1,18 @@
 package de.evoal.surrogate.api.configuration;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import de.evoal.core.api.languages.ExpressionEvaluator;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.properties.PropertySpecification;
 import de.evoal.languages.model.ddl.DataDescription;
 import de.evoal.languages.model.mll.PartialSurrogateFunctionDefinition;
 import de.evoal.surrogate.api.function.PartialSurrogateFunction;
 import lombok.Data;
-import org.eclipse.emf.common.util.EList;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * Configuration of a {@link PartialSurrogateFunction}.
@@ -69,9 +68,9 @@ public class PartialFunctionConfiguration {
 		}
 	}
 
-	public static PartialFunctionConfiguration from(final PartialSurrogateFunctionDefinition definition) {
+	public static PartialFunctionConfiguration from(final PartialSurrogateFunctionDefinition definition, ExpressionEvaluator evaluator) {
 		final PartialFunctionConfiguration configuration = new PartialFunctionConfiguration();
-		configuration.setName(definition.getName().getName());
+		configuration.setName(definition.getDefinition().getName());
 
 		final List<DataDescription> inputs = definition.getInputs();
 		final List<DataDescription> outputs = definition.getOutputs();
@@ -79,9 +78,9 @@ public class PartialFunctionConfiguration {
 		configuration.setInputData(PropertiesSpecification.builder().add(inputs.stream()).build());
 		configuration.setOutputData(PropertiesSpecification.builder().add(outputs.stream()).build());
 
-		definition.getParameters()
+		definition.getAttributes()
 				  .stream()
-				  .map(Parameter::from)
+				  .map(a -> Parameter.from(a, evaluator))
 				  .forEach(p -> configuration.getParameters().add(p));
 
 		return configuration;

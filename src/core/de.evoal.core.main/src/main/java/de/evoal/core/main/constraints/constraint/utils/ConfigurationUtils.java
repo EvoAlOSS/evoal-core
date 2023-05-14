@@ -1,8 +1,9 @@
 package de.evoal.core.main.constraints.constraint.utils;
 
+import de.evoal.core.api.cdi.BeanFactory;
 import de.evoal.core.api.utils.LanguageHelper;
-import de.evoal.languages.model.instance.Array;
-import de.evoal.languages.model.instance.Instance;
+import de.evoal.languages.model.base.Array;
+import de.evoal.languages.model.base.Instance;
 
 import java.util.Arrays;
 import java.util.List;
@@ -25,7 +26,7 @@ public final class ConfigurationUtils {
                 .map(Instance.class::cast)
                 .filter(LanguageHelper.filterInstanceByType("constraint-handler"))
                 .filter(LanguageHelper.filterByAttributesInstanceType("constraint-handling", name))
-                .filter(i -> category.equals(LanguageHelper.lookup(i, "category")))
+                .filter(i -> category.equals(BeanFactory.create(LanguageHelper.class).lookup(i, "category")))
                 .findFirst()
                 .get();
     }

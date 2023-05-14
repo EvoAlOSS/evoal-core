@@ -12,7 +12,7 @@ import javax.enterprise.context.Dependent;
 
 import de.evoal.core.main.constraints.constraint.utils.ArithmeticNumberOperations;
 import de.evoal.core.main.constraints.deviation.model.Deviations;
-import de.evoal.languages.model.instance.Instance;
+import de.evoal.languages.model.base.Instance;
 import lombok.NonNull;
 import org.apache.commons.math3.util.Pair;
 
@@ -24,6 +24,9 @@ import java.util.stream.Collectors;
 @Dependent
 @Named("standard-deviation")
 public class StandardDeviationCalculation implements CalculationStrategy {
+    @Inject
+    private LanguageHelper helper;
+
     @Inject
     private Deviations deviations;
 
@@ -98,7 +101,7 @@ public class StandardDeviationCalculation implements CalculationStrategy {
     public void init(final Constraint constraint, final Instance configuration) {
         this.configuration = configuration;
         this.constraint = constraint;
-        this.factor = LanguageHelper.lookup(configuration, "factor");
+        this.factor = helper.lookup(configuration, "factor");
 
         final List<PropertySpecification> sourceProperties = constraint.getUsedProperties();
 

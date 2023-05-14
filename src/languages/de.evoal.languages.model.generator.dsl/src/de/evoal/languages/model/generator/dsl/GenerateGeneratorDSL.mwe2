@@ -12,11 +12,16 @@ Workflow {
 			project = StandardProjectConfig {
 				baseName = "de.evoal.languages.model.generator.dsl"
 				rootPath = rootPath
+				createEclipseMetaData = true
+				runtimeTest = {
+					enabled = true
+				}
 				eclipsePlugin = {
 					enabled = true
 				}
-				createEclipseMetaData = true
-			}
+				eclipsePluginTest = {
+					enabled = false
+				}			}
 			code = {
 				encoding = "UTF-8"
 				lineDelimiter = "\n"
@@ -31,6 +36,13 @@ Workflow {
 			referencedResource = "platform:/resource/de.evoal.languages.model.instance/model/model.genmodel"
 			referencedResource = "platform:/resource/de.evoal.languages.model.generator/model/model.genmodel"
 
+            parserGenerator = {
+                    options = {
+                            backtrack = true
+                    }
+            }
+            
+
 			serializer = {
 				generateStub = false
 			}
@@ -44,6 +56,9 @@ Workflow {
 			}
 			junitSupport = {
 				junitVersion = "5"
+			}
+			scopeProvider = scoping.ImportNamespacesScopingFragment2 {
+				generateXtendStub = false
 			}
 		}
 	}

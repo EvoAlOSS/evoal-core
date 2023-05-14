@@ -23,58 +23,31 @@ public interface OLFactory extends EFactory {
 	OLFactory eINSTANCE = de.evoal.languages.model.ol.impl.OLFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>Optimisation Model</em>'.
+	 * Returns a new object of class '<em>Optimisation Module</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Optimisation Model</em>'.
+	 * @return a new object of class '<em>Optimisation Module</em>'.
 	 * @generated
 	 */
-	OptimisationModel createOptimisationModel();
+	OptimisationModule createOptimisationModule();
 
 	/**
-	 * Returns a new object of class '<em>Use</em>'.
+	 * Returns a new object of class '<em>Problem Instance</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Use</em>'.
+	 * @return a new object of class '<em>Problem Instance</em>'.
 	 * @generated
 	 */
-	Use createUse();
+	ProblemInstance createProblemInstance();
 
 	/**
-	 * Returns a new object of class '<em>Constraint</em>'.
+	 * Returns a new object of class '<em>Algorithm Instance</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Constraint</em>'.
+	 * @return a new object of class '<em>Algorithm Instance</em>'.
 	 * @generated
 	 */
-	Constraint createConstraint();
-
-	/**
-	 * Returns a new object of class '<em>Constraint Statement</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Constraint Statement</em>'.
-	 * @generated
-	 */
-	ConstraintStatement createConstraintStatement();
-
-	/**
-	 * Returns a new object of class '<em>Function Name</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Function Name</em>'.
-	 * @generated
-	 */
-	FunctionName createFunctionName();
-
-	/**
-	 * Returns a new object of class '<em>Data Reference</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Data Reference</em>'.
-	 * @generated
-	 */
-	DataReference createDataReference();
+	AlgorithmInstance createAlgorithmInstance();
 
 	/**
 	 * Returns the package supported by this factory.

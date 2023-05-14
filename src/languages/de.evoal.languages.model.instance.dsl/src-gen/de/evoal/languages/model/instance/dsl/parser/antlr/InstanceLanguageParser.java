@@ -28,7 +28,7 @@ public class InstanceLanguageParser extends AbstractAntlrParser {
 
 	@Override 
 	protected String getDefaultRuleName() {
-		return "InstanceRule";
+		return "ReferenceRule";
 	}
 
 	public InstanceLanguageGrammarAccess getGrammarAccess() {

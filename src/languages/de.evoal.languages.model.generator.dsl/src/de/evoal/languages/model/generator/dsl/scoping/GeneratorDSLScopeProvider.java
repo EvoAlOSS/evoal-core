@@ -11,5 +11,4 @@ package de.evoal.languages.model.generator.dsl.scoping;
  * on how and when to use it.
  */
 public class GeneratorDSLScopeProvider extends AbstractGeneratorDSLScopeProvider {
-
 }

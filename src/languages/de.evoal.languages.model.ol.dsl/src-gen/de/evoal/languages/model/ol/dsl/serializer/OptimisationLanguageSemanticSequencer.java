@@ -5,37 +5,50 @@
 package de.evoal.languages.model.ol.dsl.serializer;
 
 import com.google.inject.Inject;
-import de.evoal.languages.model.el.AddOrSubtractExpression;
-import de.evoal.languages.model.el.AndExpression;
-import de.evoal.languages.model.el.BooleanLiteral;
-import de.evoal.languages.model.el.Call;
-import de.evoal.languages.model.el.ComparisonExpression;
-import de.evoal.languages.model.el.DoubleLiteral;
-import de.evoal.languages.model.el.ELPackage;
-import de.evoal.languages.model.el.IntegerLiteral;
-import de.evoal.languages.model.el.MultiplyDivideModuloExpression;
-import de.evoal.languages.model.el.NotExpression;
-import de.evoal.languages.model.el.OrExpression;
-import de.evoal.languages.model.el.Parantheses;
-import de.evoal.languages.model.el.PartialComparisonExpression;
-import de.evoal.languages.model.el.PowerOfExpression;
-import de.evoal.languages.model.el.StringLiteral;
-import de.evoal.languages.model.el.UnaryAddOrSubtractExpression;
-import de.evoal.languages.model.el.ValueReference;
-import de.evoal.languages.model.el.XorExpression;
-import de.evoal.languages.model.instance.Array;
-import de.evoal.languages.model.instance.Attribute;
+import de.evoal.languages.model.base.AddOrSubtractExpression;
+import de.evoal.languages.model.base.AndExpression;
+import de.evoal.languages.model.base.Array;
+import de.evoal.languages.model.base.ArrayType;
+import de.evoal.languages.model.base.Attribute;
+import de.evoal.languages.model.base.AttributeDefinition;
+import de.evoal.languages.model.base.BasePackage;
+import de.evoal.languages.model.base.BooleanLiteral;
+import de.evoal.languages.model.base.BooleanType;
+import de.evoal.languages.model.base.Call;
+import de.evoal.languages.model.base.ComparisonExpression;
+import de.evoal.languages.model.base.ConstantDefinition;
+import de.evoal.languages.model.base.ConstantReference;
+import de.evoal.languages.model.base.DataType;
+import de.evoal.languages.model.base.DefinedFunctionName;
+import de.evoal.languages.model.base.ExpressionType;
+import de.evoal.languages.model.base.FunctionDefinition;
+import de.evoal.languages.model.base.Import;
+import de.evoal.languages.model.base.Instance;
+import de.evoal.languages.model.base.InstanceType;
+import de.evoal.languages.model.base.IntType;
+import de.evoal.languages.model.base.IntegerLiteral;
+import de.evoal.languages.model.base.LiteralType;
+import de.evoal.languages.model.base.MultiplyDivideModuloExpression;
+import de.evoal.languages.model.base.NotExpression;
+import de.evoal.languages.model.base.OrExpression;
+import de.evoal.languages.model.base.Parantheses;
+import de.evoal.languages.model.base.PartialComparisonExpression;
+import de.evoal.languages.model.base.PowerOfExpression;
+import de.evoal.languages.model.base.RealLiteral;
+import de.evoal.languages.model.base.RealType;
+import de.evoal.languages.model.base.StringLiteral;
+import de.evoal.languages.model.base.StringType;
+import de.evoal.languages.model.base.TypeDefinition;
+import de.evoal.languages.model.base.UnaryAddOrSubtractExpression;
+import de.evoal.languages.model.base.VoidType;
+import de.evoal.languages.model.base.XorExpression;
 import de.evoal.languages.model.instance.DataReference;
-import de.evoal.languages.model.instance.Instance;
 import de.evoal.languages.model.instance.InstancePackage;
-import de.evoal.languages.model.instance.LiteralValue;
 import de.evoal.languages.model.instance.dsl.serializer.InstanceLanguageSemanticSequencer;
-import de.evoal.languages.model.ol.Constraint;
-import de.evoal.languages.model.ol.ConstraintStatement;
-import de.evoal.languages.model.ol.FunctionName;
+import de.evoal.languages.model.ol.AlgorithmInstance;
 import de.evoal.languages.model.ol.OLPackage;
-import de.evoal.languages.model.ol.OptimisationModel;
-import de.evoal.languages.model.ol.Use;
+import de.evoal.languages.model.ol.OptimisationModule;
+import de.evoal.languages.model.ol.ProblemInstance;
 import de.evoal.languages.model.ol.dsl.services.OptimisationLanguageGrammarAccess;
 import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
@@ -44,8 +57,6 @@ import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Parameter;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.serializer.ISerializationContext;
-import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
-import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 
 @SuppressWarnings("all")
 public class OptimisationLanguageSemanticSequencer extends InstanceLanguageSemanticSequencer {
@@ -59,94 +70,136 @@ public class OptimisationLanguageSemanticSequencer extends InstanceLanguageSeman
 		ParserRule rule = context.getParserRule();
 		Action action = context.getAssignedAction();
 		Set<Parameter> parameters = context.getEnabledBooleanParameters();
-		if (epackage == ELPackage.eINSTANCE)
+		if (epackage == BasePackage.eINSTANCE)
 			switch (semanticObject.eClass().getClassifierID()) {
-			case ELPackage.ADD_OR_SUBTRACT_EXPRESSION:
+			case BasePackage.ADD_OR_SUBTRACT_EXPRESSION:
 				sequence_AddOrSubtractExpressionRule(context, (AddOrSubtractExpression) semanticObject); 
 				return; 
-			case ELPackage.AND_EXPRESSION:
+			case BasePackage.AND_EXPRESSION:
 				sequence_AndExpressionRule(context, (AndExpression) semanticObject); 
 				return; 
-			case ELPackage.BOOLEAN_LITERAL:
+			case BasePackage.ARRAY:
+				sequence_ArrayRule(context, (Array) semanticObject); 
+				return; 
+			case BasePackage.ARRAY_TYPE:
+				sequence_ArrayTypeRule(context, (ArrayType) semanticObject); 
+				return; 
+			case BasePackage.ATTRIBUTE:
+				sequence_AttributeRule(context, (Attribute) semanticObject); 
+				return; 
+			case BasePackage.ATTRIBUTE_DEFINITION:
+				sequence_AttributeDefinitionRule(context, (AttributeDefinition) semanticObject); 
+				return; 
+			case BasePackage.BOOLEAN_LITERAL:
 				sequence_BooleanLiteralRule(context, (BooleanLiteral) semanticObject); 
 				return; 
-			case ELPackage.CALL:
+			case BasePackage.BOOLEAN_TYPE:
+				sequence_BooleanTypeRule(context, (BooleanType) semanticObject); 
+				return; 
+			case BasePackage.CALL:
 				sequence_CallRule(context, (Call) semanticObject); 
 				return; 
-			case ELPackage.COMPARISON_EXPRESSION:
+			case BasePackage.COMPARISON_EXPRESSION:
 				sequence_ComparisonExpressionRule(context, (ComparisonExpression) semanticObject); 
 				return; 
-			case ELPackage.DOUBLE_LITERAL:
-				sequence_DoubleLiteralRule(context, (DoubleLiteral) semanticObject); 
+			case BasePackage.CONSTANT_DEFINITION:
+				sequence_ConstantDefinitionRule(context, (ConstantDefinition) semanticObject); 
 				return; 
-			case ELPackage.INTEGER_LITERAL:
+			case BasePackage.CONSTANT_REFERENCE:
+				sequence_ConstantReferenceRule(context, (ConstantReference) semanticObject); 
+				return; 
+			case BasePackage.DATA_TYPE:
+				sequence_DataTypeRule(context, (DataType) semanticObject); 
+				return; 
+			case BasePackage.DEFINED_FUNCTION_NAME:
+				sequence_FunctionNameRule(context, (DefinedFunctionName) semanticObject); 
+				return; 
+			case BasePackage.EXPRESSION_TYPE:
+				sequence_ExpressionTypeRule(context, (ExpressionType) semanticObject); 
+				return; 
+			case BasePackage.FUNCTION_DEFINITION:
+				sequence_FunctionDefinitionRule(context, (FunctionDefinition) semanticObject); 
+				return; 
+			case BasePackage.IMPORT:
+				sequence_ImportRule(context, (Import) semanticObject); 
+				return; 
+			case BasePackage.INSTANCE:
+				sequence_InstanceLiteralRule(context, (Instance) semanticObject); 
+				return; 
+			case BasePackage.INSTANCE_TYPE:
+				sequence_InstanceTypeRule(context, (InstanceType) semanticObject); 
+				return; 
+			case BasePackage.INT_TYPE:
+				sequence_IntTypeRule(context, (IntType) semanticObject); 
+				return; 
+			case BasePackage.INTEGER_LITERAL:
 				sequence_IntegerLiteralRule(context, (IntegerLiteral) semanticObject); 
 				return; 
-			case ELPackage.MULTIPLY_DIVIDE_MODULO_EXPRESSION:
+			case BasePackage.LITERAL_TYPE:
+				sequence_LiteralTypeRule(context, (LiteralType) semanticObject); 
+				return; 
+			case BasePackage.MULTIPLY_DIVIDE_MODULO_EXPRESSION:
 				sequence_MultiplyDivideModuloExpressionRule(context, (MultiplyDivideModuloExpression) semanticObject); 
 				return; 
-			case ELPackage.NOT_EXPRESSION:
+			case BasePackage.NOT_EXPRESSION:
 				sequence_NotExpressionRule(context, (NotExpression) semanticObject); 
 				return; 
-			case ELPackage.OR_EXPRESSION:
+			case BasePackage.OR_EXPRESSION:
 				sequence_OrExpressionRule(context, (OrExpression) semanticObject); 
 				return; 
-			case ELPackage.PARANTHESES:
+			case BasePackage.PARAMETER:
+				sequence_ParameterRule(context, (de.evoal.languages.model.base.Parameter) semanticObject); 
+				return; 
+			case BasePackage.PARANTHESES:
 				sequence_ParanthesesRule(context, (Parantheses) semanticObject); 
 				return; 
-			case ELPackage.PARTIAL_COMPARISON_EXPRESSION:
+			case BasePackage.PARTIAL_COMPARISON_EXPRESSION:
 				sequence_PartialComparisonExpressionRule(context, (PartialComparisonExpression) semanticObject); 
 				return; 
-			case ELPackage.POWER_OF_EXPRESSION:
+			case BasePackage.POWER_OF_EXPRESSION:
 				sequence_PowerOfExpressionRule(context, (PowerOfExpression) semanticObject); 
 				return; 
-			case ELPackage.STRING_LITERAL:
+			case BasePackage.REAL_LITERAL:
+				sequence_RealLiteralRule(context, (RealLiteral) semanticObject); 
+				return; 
+			case BasePackage.REAL_TYPE:
+				sequence_RealTypeRule(context, (RealType) semanticObject); 
+				return; 
+			case BasePackage.STRING_LITERAL:
 				sequence_StringLiteralRule(context, (StringLiteral) semanticObject); 
 				return; 
-			case ELPackage.UNARY_ADD_OR_SUBTRACT_EXPRESSION:
+			case BasePackage.STRING_TYPE:
+				sequence_StringTypeRule(context, (StringType) semanticObject); 
+				return; 
+			case BasePackage.TYPE_DEFINITION:
+				sequence_TypeDefinitionRule(context, (TypeDefinition) semanticObject); 
+				return; 
+			case BasePackage.UNARY_ADD_OR_SUBTRACT_EXPRESSION:
 				sequence_UnaryAddOrSubtractExpressionRule(context, (UnaryAddOrSubtractExpression) semanticObject); 
 				return; 
-			case ELPackage.VALUE_REFERENCE:
-				sequence_ValueReferenceRule(context, (ValueReference) semanticObject); 
+			case BasePackage.VOID_TYPE:
+				sequence_VoidTypeRule(context, (VoidType) semanticObject); 
 				return; 
-			case ELPackage.XOR_EXPRESSION:
+			case BasePackage.XOR_EXPRESSION:
 				sequence_XorExpressionRule(context, (XorExpression) semanticObject); 
 				return; 
 			}
 		else if (epackage == InstancePackage.eINSTANCE)
 			switch (semanticObject.eClass().getClassifierID()) {
-			case InstancePackage.ARRAY:
-				sequence_ArrayRule(context, (Array) semanticObject); 
-				return; 
-			case InstancePackage.ATTRIBUTE:
-				sequence_AttributeRule(context, (Attribute) semanticObject); 
-				return; 
 			case InstancePackage.DATA_REFERENCE:
 				sequence_DataReferenceRule(context, (DataReference) semanticObject); 
-				return; 
-			case InstancePackage.INSTANCE:
-				sequence_InstanceRule(context, (Instance) semanticObject); 
-				return; 
-			case InstancePackage.LITERAL_VALUE:
-				sequence_LiteralValueRule(context, (LiteralValue) semanticObject); 
 				return; 
 			}
 		else if (epackage == OLPackage.eINSTANCE)
 			switch (semanticObject.eClass().getClassifierID()) {
-			case OLPackage.CONSTRAINT:
-				sequence_ConstraintRule(context, (Constraint) semanticObject); 
+			case OLPackage.ALGORITHM_INSTANCE:
+				sequence_AlgorithmInstanceRule(context, (AlgorithmInstance) semanticObject); 
 				return; 
-			case OLPackage.CONSTRAINT_STATEMENT:
-				sequence_ConstraintStatementRule(context, (ConstraintStatement) semanticObject); 
+			case OLPackage.OPTIMISATION_MODULE:
+				sequence_OptimisationModelRule(context, (OptimisationModule) semanticObject); 
 				return; 
-			case OLPackage.FUNCTION_NAME:
-				sequence_FunctionNameRule(context, (FunctionName) semanticObject); 
-				return; 
-			case OLPackage.OPTIMISATION_MODEL:
-				sequence_OptimisationModelRule(context, (OptimisationModel) semanticObject); 
-				return; 
-			case OLPackage.USE:
-				sequence_UseRule(context, (Use) semanticObject); 
+			case OLPackage.PROBLEM_INSTANCE:
+				sequence_ProblemRule(context, (ProblemInstance) semanticObject); 
 				return; 
 			}
 		if (errorAcceptor != null)
@@ -156,13 +209,13 @@ public class OptimisationLanguageSemanticSequencer extends InstanceLanguageSeman
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     ConstraintRule returns Constraint
+	 *     AlgorithmInstanceRule returns AlgorithmInstance
 	 *
 	 * Constraint:
-	 *     statements+=ConstraintStatementRule*
+	 *     (definition=[TypeDefinition|QualifiedName] problem=[ProblemInstance|QualifiedName] attributes+=AttributeRule* documentation=ArrayRule?)
 	 * </pre>
 	 */
-	protected void sequence_ConstraintRule(ISerializationContext context, Constraint semanticObject) {
+	protected void sequence_AlgorithmInstanceRule(ISerializationContext context, AlgorithmInstance semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -170,53 +223,13 @@ public class OptimisationLanguageSemanticSequencer extends InstanceLanguageSeman
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     ConstraintStatementRule returns ConstraintStatement
+	 *     OptimisationModelRule returns OptimisationModule
 	 *
 	 * Constraint:
-	 *     constraintExpression=CallRule
+	 *     (imports+=ImportRule* name=QualifiedName problem=ProblemRule? algorithm=AlgorithmInstanceRule?)
 	 * </pre>
 	 */
-	protected void sequence_ConstraintStatementRule(ISerializationContext context, ConstraintStatement semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, OLPackage.Literals.CONSTRAINT_STATEMENT__CONSTRAINT_EXPRESSION) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, OLPackage.Literals.CONSTRAINT_STATEMENT__CONSTRAINT_EXPRESSION));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getConstraintStatementRuleAccess().getConstraintExpressionCallRuleParserRuleCall_0_0(), semanticObject.getConstraintExpression());
-		feeder.finish();
-	}
-	
-	
-	/**
-	 * <pre>
-	 * Contexts:
-	 *     FunctionNameRule returns FunctionName
-	 *
-	 * Constraint:
-	 *     definition=[FunctionDefinition|ID]
-	 * </pre>
-	 */
-	protected void sequence_FunctionNameRule(ISerializationContext context, FunctionName semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, OLPackage.Literals.FUNCTION_NAME__DEFINITION) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, OLPackage.Literals.FUNCTION_NAME__DEFINITION));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getFunctionNameRuleAccess().getDefinitionFunctionDefinitionIDTerminalRuleCall_0_1(), semanticObject.eGet(OLPackage.Literals.FUNCTION_NAME__DEFINITION, false));
-		feeder.finish();
-	}
-	
-	
-	/**
-	 * <pre>
-	 * Contexts:
-	 *     OptimisationModelRule returns OptimisationModel
-	 *
-	 * Constraint:
-	 *     (uses+=UseRule* instance=InstanceRule constraints=ConstraintRule?)
-	 * </pre>
-	 */
-	protected void sequence_OptimisationModelRule(ISerializationContext context, OptimisationModel semanticObject) {
+	protected void sequence_OptimisationModelRule(ISerializationContext context, OptimisationModule semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -224,20 +237,14 @@ public class OptimisationLanguageSemanticSequencer extends InstanceLanguageSeman
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     UseRule returns Use
+	 *     ProblemRule returns ProblemInstance
 	 *
 	 * Constraint:
-	 *     importURI=STRING
+	 *     (definition=[TypeDefinition|QualifiedName] name=StringOrId attributes+=AttributeRule* documentation=ArrayRule?)
 	 * </pre>
 	 */
-	protected void sequence_UseRule(ISerializationContext context, Use semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, OLPackage.Literals.USE__IMPORT_URI) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, OLPackage.Literals.USE__IMPORT_URI));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getUseRuleAccess().getImportURISTRINGTerminalRuleCall_1_0(), semanticObject.getImportURI());
-		feeder.finish();
+	protected void sequence_ProblemRule(ISerializationContext context, ProblemInstance semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	

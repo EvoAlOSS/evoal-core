@@ -24,18 +24,21 @@ module de.evoal.core.main {
     requires org.eclipse.emf.ecore;
     requires org.eclipse.xtext;
 
+    requires de.evoal.languages.model.base;
+    requires de.evoal.languages.model.base.dsl;
     requires de.evoal.languages.model.ddl;
     requires de.evoal.languages.model.ddl.dsl;
     requires de.evoal.languages.model.dl;
     requires de.evoal.languages.model.dl.dsl;
     requires de.evoal.languages.model.ol;
     requires de.evoal.languages.model.ol.dsl;
-    requires de.evoal.languages.model.el;
-    requires de.evoal.languages.model.el.dsl;
     requires de.evoal.languages.model.instance;
+    requires de.evoal.languages.model.interpreter;
     requires de.evoal.languages.model.utils;
     requires com.google.guice;
     requires commons.math3;
+
+    opens de.evoal.core; // export dl files.
 
     exports de.evoal.core.api.board;
     exports de.evoal.core.api.cdi;
@@ -43,7 +46,9 @@ module de.evoal.core.main {
     exports de.evoal.core.main.constraints.constraint.utils;
     exports de.evoal.core.api.constraints.model;
     exports de.evoal.core.api.constraints.strategies;
+    exports de.evoal.core.api.constraints.strategies.fitness;
     exports de.evoal.core.api.correlations;
+    exports de.evoal.core.api.languages;
     exports de.evoal.core.api.properties;
     exports de.evoal.core.api.properties.info;
     exports de.evoal.core.api.properties.io;
@@ -59,6 +64,7 @@ module de.evoal.core.main {
     opens de.evoal.core.api.constraints.calculation to weld.core.impl;
     opens de.evoal.core.api.constraints.model to weld.core.impl;
     opens de.evoal.core.api.correlations to weld.core.impl;
+    opens de.evoal.core.api.languages to weld.core.impl;
     opens de.evoal.core.api.optimisation to weld.core.impl;
     opens de.evoal.core.api.properties to weld.core.impl;
     opens de.evoal.core.api.properties.info to weld.core.impl;
@@ -75,6 +81,7 @@ module de.evoal.core.main {
     opens de.evoal.core.main.constraints.correlation to weld.core.impl;
     opens de.evoal.core.main.constraints.deviation to weld.core.impl;
     opens de.evoal.core.main.initial to weld.core.impl;
+    opens de.evoal.core.main.optimisation to weld.core.impl;
     opens de.evoal.core.main.producer to weld.core.impl;
     opens de.evoal.core.main.properties to weld.core.impl;
     opens de.evoal.core.main.search to weld.core.impl;
@@ -85,7 +92,6 @@ module de.evoal.core.main {
     opens de.evoal.core.main.statistics.io.csv to weld.core.impl;
     opens de.evoal.core.api.statistics.io to weld.core.impl;
     opens de.evoal.core.api.statistics.writer to weld.core.impl;
-    exports de.evoal.core.api.constraints.strategies.fitness;
 
 
     //provides de.evoal.languages.model.utils.builtin.BuiltinProvider with ModuleBuiltinProvider;

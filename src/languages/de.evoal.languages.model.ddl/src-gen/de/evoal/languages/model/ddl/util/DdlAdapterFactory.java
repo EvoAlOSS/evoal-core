@@ -2,8 +2,9 @@
  */
 package de.evoal.languages.model.ddl.util;
 
-import de.evoal.languages.model.el.CallOrLiteralOrReferenceOrParantheses;
-import de.evoal.languages.model.el.ValueReference;
+import de.evoal.languages.model.base.Value;
+import de.evoal.languages.model.base.ValueReference;
+
 import de.evoal.languages.model.ddl.*;
 
 import org.eclipse.emf.common.notify.Adapter;
@@ -70,16 +71,12 @@ public class DdlAdapterFactory extends AdapterFactoryImpl {
 	protected DdlSwitch<Adapter> modelSwitch =
 		new DdlSwitch<Adapter>() {
 			@Override
-			public Adapter caseDataDescriptionModel(DataDescriptionModel object) {
-				return createDataDescriptionModelAdapter();
+			public Adapter caseDataDescriptionModule(DataDescriptionModule object) {
+				return createDataDescriptionModuleAdapter();
 			}
 			@Override
-			public Adapter caseUse(Use object) {
-				return createUseAdapter();
-			}
-			@Override
-			public Adapter caseDataType(DataType object) {
-				return createDataTypeAdapter();
+			public Adapter caseDataTypeDefinition(DataTypeDefinition object) {
+				return createDataTypeDefinitionAdapter();
 			}
 			@Override
 			public Adapter caseDataDescription(DataDescription object) {
@@ -94,10 +91,6 @@ public class DdlAdapterFactory extends AdapterFactoryImpl {
 				return createUntypedDataDescriptionAdapter();
 			}
 			@Override
-			public Adapter caseFunctionName(FunctionName object) {
-				return createFunctionNameAdapter();
-			}
-			@Override
 			public Adapter caseDataReference(DataReference object) {
 				return createDataReferenceAdapter();
 			}
@@ -106,12 +99,8 @@ public class DdlAdapterFactory extends AdapterFactoryImpl {
 				return createSelfReferenceAdapter();
 			}
 			@Override
-			public Adapter caseEL_FunctionName(de.evoal.languages.model.el.FunctionName object) {
-				return createEL_FunctionNameAdapter();
-			}
-			@Override
-			public Adapter caseCallOrLiteralOrReferenceOrParantheses(CallOrLiteralOrReferenceOrParantheses object) {
-				return createCallOrLiteralOrReferenceOrParanthesesAdapter();
+			public Adapter caseValue(Value object) {
+				return createValueAdapter();
 			}
 			@Override
 			public Adapter caseValueReference(ValueReference object) {
@@ -138,44 +127,30 @@ public class DdlAdapterFactory extends AdapterFactoryImpl {
 
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.ddl.DataDescriptionModel <em>Data Description Model</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.ddl.DataDescriptionModule <em>Data Description Module</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.evoal.languages.model.ddl.DataDescriptionModel
+	 * @see de.evoal.languages.model.ddl.DataDescriptionModule
 	 * @generated
 	 */
-	public Adapter createDataDescriptionModelAdapter() {
+	public Adapter createDataDescriptionModuleAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.ddl.Use <em>Use</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.ddl.DataTypeDefinition <em>Data Type Definition</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.evoal.languages.model.ddl.Use
+	 * @see de.evoal.languages.model.ddl.DataTypeDefinition
 	 * @generated
 	 */
-	public Adapter createUseAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.ddl.DataType <em>Data Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.evoal.languages.model.ddl.DataType
-	 * @generated
-	 */
-	public Adapter createDataTypeAdapter() {
+	public Adapter createDataTypeDefinitionAdapter() {
 		return null;
 	}
 
@@ -222,20 +197,6 @@ public class DdlAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.ddl.FunctionName <em>Function Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.evoal.languages.model.ddl.FunctionName
-	 * @generated
-	 */
-	public Adapter createFunctionNameAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.ddl.DataReference <em>Data Reference</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -264,41 +225,27 @@ public class DdlAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.el.FunctionName <em>Function Name</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.Value <em>Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.evoal.languages.model.el.FunctionName
+	 * @see de.evoal.languages.model.base.Value
 	 * @generated
 	 */
-	public Adapter createEL_FunctionNameAdapter() {
+	public Adapter createValueAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.el.CallOrLiteralOrReferenceOrParantheses <em>Call Or Literal Or Reference Or Parantheses</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.ValueReference <em>Value Reference</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.evoal.languages.model.el.CallOrLiteralOrReferenceOrParantheses
-	 * @generated
-	 */
-	public Adapter createCallOrLiteralOrReferenceOrParanthesesAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.el.ValueReference <em>Value Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.evoal.languages.model.el.ValueReference
+	 * @see de.evoal.languages.model.base.ValueReference
 	 * @generated
 	 */
 	public Adapter createValueReferenceAdapter() {

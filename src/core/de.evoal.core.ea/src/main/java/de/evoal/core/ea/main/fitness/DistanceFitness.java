@@ -7,7 +7,8 @@ import de.evoal.core.api.optimisation.OptimisationFunctionDecorator;
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.utils.Requirements;
-import de.evoal.languages.model.instance.*;
+import de.evoal.languages.model.base.*;
+import de.evoal.languages.model.instance.DataReference;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.enterprise.context.Dependent;
@@ -81,7 +82,7 @@ public class DistanceFitness extends OptimisationFunctionDecorator {
                 .map(Instance.class::cast)
                 .forEach(i -> {
                     final String name = ((DataReference)i.findAttribute("name").getValue()).getDefinition().getName();
-                    final Object value = ((LiteralValue)i.findAttribute("val").getValue()).getLiteral().getValue();
+                    final Object value = ((Literal)i.findAttribute("val").getValue()).getValue();
 
                     properties.put(specification.indexOf(name), value);
                 });

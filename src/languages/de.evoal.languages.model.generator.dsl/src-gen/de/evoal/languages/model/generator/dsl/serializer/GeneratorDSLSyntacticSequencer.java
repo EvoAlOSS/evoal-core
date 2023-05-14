@@ -21,14 +21,12 @@ import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
 public class GeneratorDSLSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected GeneratorDSLGrammarAccess grammarAccess;
-	protected AbstractElementAlias match_InstanceRule___LeftCurlyBracketKeyword_1_0_RightCurlyBracketKeyword_1_2__q;
 	protected AbstractElementAlias match_StepRule___ReadsKeyword_4_0_LeftSquareBracketKeyword_4_1_RightSquareBracketKeyword_4_3_SemicolonKeyword_4_4__q;
 	protected AbstractElementAlias match_StepRule___WritesKeyword_5_0_LeftSquareBracketKeyword_5_1_RightSquareBracketKeyword_5_3_SemicolonKeyword_5_4__q;
 	
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (GeneratorDSLGrammarAccess) access;
-		match_InstanceRule___LeftCurlyBracketKeyword_1_0_RightCurlyBracketKeyword_1_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getInstanceRuleAccess().getLeftCurlyBracketKeyword_1_0()), new TokenAlias(false, false, grammarAccess.getInstanceRuleAccess().getRightCurlyBracketKeyword_1_2()));
 		match_StepRule___ReadsKeyword_4_0_LeftSquareBracketKeyword_4_1_RightSquareBracketKeyword_4_3_SemicolonKeyword_4_4__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getStepRuleAccess().getReadsKeyword_4_0()), new TokenAlias(false, false, grammarAccess.getStepRuleAccess().getLeftSquareBracketKeyword_4_1()), new TokenAlias(false, false, grammarAccess.getStepRuleAccess().getRightSquareBracketKeyword_4_3()), new TokenAlias(false, false, grammarAccess.getStepRuleAccess().getSemicolonKeyword_4_4()));
 		match_StepRule___WritesKeyword_5_0_LeftSquareBracketKeyword_5_1_RightSquareBracketKeyword_5_3_SemicolonKeyword_5_4__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getStepRuleAccess().getWritesKeyword_5_0()), new TokenAlias(false, false, grammarAccess.getStepRuleAccess().getLeftSquareBracketKeyword_5_1()), new TokenAlias(false, false, grammarAccess.getStepRuleAccess().getRightSquareBracketKeyword_5_3()), new TokenAlias(false, false, grammarAccess.getStepRuleAccess().getSemicolonKeyword_5_4()));
 	}
@@ -45,9 +43,7 @@ public class GeneratorDSLSyntacticSequencer extends AbstractSyntacticSequencer {
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			if (match_InstanceRule___LeftCurlyBracketKeyword_1_0_RightCurlyBracketKeyword_1_2__q.equals(syntax))
-				emit_InstanceRule___LeftCurlyBracketKeyword_1_0_RightCurlyBracketKeyword_1_2__q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if (match_StepRule___ReadsKeyword_4_0_LeftSquareBracketKeyword_4_1_RightSquareBracketKeyword_4_3_SemicolonKeyword_4_4__q.equals(syntax))
+			if (match_StepRule___ReadsKeyword_4_0_LeftSquareBracketKeyword_4_1_RightSquareBracketKeyword_4_3_SemicolonKeyword_4_4__q.equals(syntax))
 				emit_StepRule___ReadsKeyword_4_0_LeftSquareBracketKeyword_4_1_RightSquareBracketKeyword_4_3_SemicolonKeyword_4_4__q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_StepRule___WritesKeyword_5_0_LeftSquareBracketKeyword_5_1_RightSquareBracketKeyword_5_3_SemicolonKeyword_5_4__q.equals(syntax))
 				emit_StepRule___WritesKeyword_5_0_LeftSquareBracketKeyword_5_1_RightSquareBracketKeyword_5_3_SemicolonKeyword_5_4__q(semanticObject, getLastNavigableState(), syntaxNodes);
@@ -58,25 +54,11 @@ public class GeneratorDSLSyntacticSequencer extends AbstractSyntacticSequencer {
 	/**
 	 * <pre>
 	 * Ambiguous syntax:
-	 *     ('{' '}')?
-	 *
-	 * This ambiguous syntax occurs at:
-	 *     definition=[TypeDefinition|StringOrId] (ambiguity) (rule end)
-	 
-	 * </pre>
-	 */
-	protected void emit_InstanceRule___LeftCurlyBracketKeyword_1_0_RightCurlyBracketKeyword_1_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
-		acceptNodes(transition, nodes);
-	}
-	
-	/**
-	 * <pre>
-	 * Ambiguous syntax:
 	 *     ('reads' '[' ']' ';')?
 	 *
 	 * This ambiguous syntax occurs at:
-	 *     instance=InstanceRule (ambiguity) 'writes' '[' writes+=DataReferenceRule
-	 *     instance=InstanceRule (ambiguity) ('writes' '[' ']' ';')? '}' (rule end)
+	 *     instance=InstanceLiteralRule (ambiguity) 'writes' '[' writes+=DataReferenceRule
+	 *     instance=InstanceLiteralRule (ambiguity) ('writes' '[' ']' ';')? '}' (rule end)
 	 
 	 * </pre>
 	 */
@@ -90,7 +72,7 @@ public class GeneratorDSLSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     ('writes' '[' ']' ';')?
 	 *
 	 * This ambiguous syntax occurs at:
-	 *     instance=InstanceRule ('reads' '[' ']' ';')? (ambiguity) '}' (rule end)
+	 *     instance=InstanceLiteralRule ('reads' '[' ']' ';')? (ambiguity) '}' (rule end)
 	 *     reads+=DataReferenceRule ']' ';' (ambiguity) '}' (rule end)
 	 
 	 * </pre>

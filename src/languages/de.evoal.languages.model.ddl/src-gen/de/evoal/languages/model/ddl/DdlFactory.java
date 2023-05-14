@@ -22,31 +22,22 @@ public interface DdlFactory extends EFactory {
 	DdlFactory eINSTANCE = de.evoal.languages.model.ddl.impl.DdlFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>Data Description Model</em>'.
+	 * Returns a new object of class '<em>Data Description Module</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Data Description Model</em>'.
+	 * @return a new object of class '<em>Data Description Module</em>'.
 	 * @generated
 	 */
-	DataDescriptionModel createDataDescriptionModel();
+	DataDescriptionModule createDataDescriptionModule();
 
 	/**
-	 * Returns a new object of class '<em>Use</em>'.
+	 * Returns a new object of class '<em>Data Type Definition</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Use</em>'.
+	 * @return a new object of class '<em>Data Type Definition</em>'.
 	 * @generated
 	 */
-	Use createUse();
-
-	/**
-	 * Returns a new object of class '<em>Data Type</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Data Type</em>'.
-	 * @generated
-	 */
-	DataType createDataType();
+	DataTypeDefinition createDataTypeDefinition();
 
 	/**
 	 * Returns a new object of class '<em>Typed Data Description</em>'.
@@ -65,15 +56,6 @@ public interface DdlFactory extends EFactory {
 	 * @generated
 	 */
 	UntypedDataDescription createUntypedDataDescription();
-
-	/**
-	 * Returns a new object of class '<em>Function Name</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Function Name</em>'.
-	 * @generated
-	 */
-	FunctionName createFunctionName();
 
 	/**
 	 * Returns a new object of class '<em>Data Reference</em>'.

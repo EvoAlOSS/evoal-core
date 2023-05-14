@@ -4,21 +4,25 @@ import de.evoal.core.api.board.Blackboard;
 import de.evoal.core.api.board.CoreBlackboardEntries;
 import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.core.api.utils.LanguageHelper;
-import de.evoal.languages.model.instance.DataReference;
-import de.evoal.languages.model.ol.OptimisationModel;
-import de.evoal.languages.model.el.DoubleLiteral;
-import de.evoal.languages.model.instance.Array;
-import de.evoal.languages.model.instance.Instance;
-import de.evoal.languages.model.instance.LiteralValue;
+import de.evoal.languages.model.base.Literal;
+import de.evoal.languages.model.ddl.DataDescription;
+import de.evoal.languages.model.ol.OptimisationModule;
+import de.evoal.languages.model.base.RealLiteral;
+import de.evoal.languages.model.base.Array;
+import de.evoal.languages.model.base.Instance;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.InjectionPoint;
+import javax.inject.Inject;
 
 @ApplicationScoped
 @Slf4j
 public class ConfigurationValueProducer {
+    @Inject
+    private LanguageHelper helper;
+
     @Produces
     @ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "")
     public Integer injectIntegerValue(final InjectionPoint ip, final Blackboard board) {
@@ -66,11 +70,11 @@ public class ConfigurationValueProducer {
 
     @Produces
     @ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "")
-    public final DataReference[] injectDataReferenceArrayValue(final InjectionPoint ip, final Blackboard board) {
+    public final DataDescription[] injectDataDescriptionArrayValue(final InjectionPoint ip, final Blackboard board) {
         final ConfigurationValue value = ip.getAnnotated().getAnnotation(ConfigurationValue.class);
 
         final Object [] array = lookup(board.get(value.entry()), value.access());
-        final DataReference[] copy = new DataReference[array.length];
+        final DataDescription[] copy = new DataDescription[array.length];
 
         System.arraycopy(array, 0, copy, 0, copy.length);
 
@@ -98,15 +102,16 @@ public class ConfigurationValueProducer {
     public double [] injectDoubleArrayValue(final InjectionPoint ip, final Blackboard board) {
         final ConfigurationValue value = ip.getAnnotated().getAnnotation(ConfigurationValue.class);
 
-        return (ConfigurationValueProducer.<Array>lookup(board.get(value.entry()), value.access()))
+        return (this.<Array>lookup(board.get(value.entry()), value.access()))
                 .getValues()
                 .stream()
-                .mapToDouble(x -> ((DoubleLiteral)(((LiteralValue)x).getLiteral())).getValue())
+                .mapToDouble(x -> ((RealLiteral)((Literal)x)).getValue())
                 .toArray();
     }
 
-    private static <T> T lookup(final OptimisationModel model, final String access) {
+    private <T> T lookup(final OptimisationModule model, final String access) {
         log.info("Looking up configuration value {}", access);
-        return LanguageHelper.lookup(model.getInstance(), access);
+
+        return helper.lookup(model, access);
     }
 }

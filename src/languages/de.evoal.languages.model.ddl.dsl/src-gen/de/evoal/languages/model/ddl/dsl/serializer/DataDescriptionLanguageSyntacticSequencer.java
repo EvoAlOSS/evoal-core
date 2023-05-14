@@ -22,20 +22,20 @@ import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
 public class DataDescriptionLanguageSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected DataDescriptionLanguageGrammarAccess grammarAccess;
-	protected AbstractElementAlias match_DataDescriptionModelRule___ConstraintsKeyword_4_0_ColonKeyword_4_1__q;
-	protected AbstractElementAlias match_DataDescriptionModelRule___DataKeyword_3_0_ColonKeyword_3_1__q;
-	protected AbstractElementAlias match_DataDescriptionModelRule___TypesKeyword_2_0_ColonKeyword_2_1__q;
-	protected AbstractElementAlias match_DataTypeRule___WithKeyword_4_0_ConstraintsKeyword_4_1_ColonKeyword_4_2__q;
+	protected AbstractElementAlias match_DataDescriptionModelRule___ConstraintsKeyword_6_0_ColonKeyword_6_1__q;
+	protected AbstractElementAlias match_DataDescriptionModelRule___DataKeyword_5_0_ColonKeyword_5_1__q;
+	protected AbstractElementAlias match_DataDescriptionModelRule___TypesKeyword_4_0_ColonKeyword_4_1__q;
+	protected AbstractElementAlias match_DataTypeDefinitionRule___WithKeyword_4_0_ConstraintsKeyword_4_1_ColonKeyword_4_2__q;
 	protected AbstractElementAlias match_TypedDataDescriptionRule___WithKeyword_6_0_ConstraintsKeyword_6_1_ColonKeyword_6_2__q;
 	protected AbstractElementAlias match_UntypedDataDescriptionRule___WithKeyword_4_0_ConstraintsKeyword_4_1_ColonKeyword_4_2__q;
 	
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (DataDescriptionLanguageGrammarAccess) access;
-		match_DataDescriptionModelRule___ConstraintsKeyword_4_0_ColonKeyword_4_1__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getDataDescriptionModelRuleAccess().getConstraintsKeyword_4_0()), new TokenAlias(false, false, grammarAccess.getDataDescriptionModelRuleAccess().getColonKeyword_4_1()));
-		match_DataDescriptionModelRule___DataKeyword_3_0_ColonKeyword_3_1__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getDataDescriptionModelRuleAccess().getDataKeyword_3_0()), new TokenAlias(false, false, grammarAccess.getDataDescriptionModelRuleAccess().getColonKeyword_3_1()));
-		match_DataDescriptionModelRule___TypesKeyword_2_0_ColonKeyword_2_1__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getDataDescriptionModelRuleAccess().getTypesKeyword_2_0()), new TokenAlias(false, false, grammarAccess.getDataDescriptionModelRuleAccess().getColonKeyword_2_1()));
-		match_DataTypeRule___WithKeyword_4_0_ConstraintsKeyword_4_1_ColonKeyword_4_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getDataTypeRuleAccess().getWithKeyword_4_0()), new TokenAlias(false, false, grammarAccess.getDataTypeRuleAccess().getConstraintsKeyword_4_1()), new TokenAlias(false, false, grammarAccess.getDataTypeRuleAccess().getColonKeyword_4_2()));
+		match_DataDescriptionModelRule___ConstraintsKeyword_6_0_ColonKeyword_6_1__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getDataDescriptionModelRuleAccess().getConstraintsKeyword_6_0()), new TokenAlias(false, false, grammarAccess.getDataDescriptionModelRuleAccess().getColonKeyword_6_1()));
+		match_DataDescriptionModelRule___DataKeyword_5_0_ColonKeyword_5_1__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getDataDescriptionModelRuleAccess().getDataKeyword_5_0()), new TokenAlias(false, false, grammarAccess.getDataDescriptionModelRuleAccess().getColonKeyword_5_1()));
+		match_DataDescriptionModelRule___TypesKeyword_4_0_ColonKeyword_4_1__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getDataDescriptionModelRuleAccess().getTypesKeyword_4_0()), new TokenAlias(false, false, grammarAccess.getDataDescriptionModelRuleAccess().getColonKeyword_4_1()));
+		match_DataTypeDefinitionRule___WithKeyword_4_0_ConstraintsKeyword_4_1_ColonKeyword_4_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getDataTypeDefinitionRuleAccess().getWithKeyword_4_0()), new TokenAlias(false, false, grammarAccess.getDataTypeDefinitionRuleAccess().getConstraintsKeyword_4_1()), new TokenAlias(false, false, grammarAccess.getDataTypeDefinitionRuleAccess().getColonKeyword_4_2()));
 		match_TypedDataDescriptionRule___WithKeyword_6_0_ConstraintsKeyword_6_1_ColonKeyword_6_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getTypedDataDescriptionRuleAccess().getWithKeyword_6_0()), new TokenAlias(false, false, grammarAccess.getTypedDataDescriptionRuleAccess().getConstraintsKeyword_6_1()), new TokenAlias(false, false, grammarAccess.getTypedDataDescriptionRuleAccess().getColonKeyword_6_2()));
 		match_UntypedDataDescriptionRule___WithKeyword_4_0_ConstraintsKeyword_4_1_ColonKeyword_4_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getUntypedDataDescriptionRuleAccess().getWithKeyword_4_0()), new TokenAlias(false, false, grammarAccess.getUntypedDataDescriptionRuleAccess().getConstraintsKeyword_4_1()), new TokenAlias(false, false, grammarAccess.getUntypedDataDescriptionRuleAccess().getColonKeyword_4_2()));
 	}
@@ -52,14 +52,14 @@ public class DataDescriptionLanguageSyntacticSequencer extends AbstractSyntactic
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			if (match_DataDescriptionModelRule___ConstraintsKeyword_4_0_ColonKeyword_4_1__q.equals(syntax))
-				emit_DataDescriptionModelRule___ConstraintsKeyword_4_0_ColonKeyword_4_1__q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if (match_DataDescriptionModelRule___DataKeyword_3_0_ColonKeyword_3_1__q.equals(syntax))
-				emit_DataDescriptionModelRule___DataKeyword_3_0_ColonKeyword_3_1__q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if (match_DataDescriptionModelRule___TypesKeyword_2_0_ColonKeyword_2_1__q.equals(syntax))
-				emit_DataDescriptionModelRule___TypesKeyword_2_0_ColonKeyword_2_1__q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if (match_DataTypeRule___WithKeyword_4_0_ConstraintsKeyword_4_1_ColonKeyword_4_2__q.equals(syntax))
-				emit_DataTypeRule___WithKeyword_4_0_ConstraintsKeyword_4_1_ColonKeyword_4_2__q(semanticObject, getLastNavigableState(), syntaxNodes);
+			if (match_DataDescriptionModelRule___ConstraintsKeyword_6_0_ColonKeyword_6_1__q.equals(syntax))
+				emit_DataDescriptionModelRule___ConstraintsKeyword_6_0_ColonKeyword_6_1__q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_DataDescriptionModelRule___DataKeyword_5_0_ColonKeyword_5_1__q.equals(syntax))
+				emit_DataDescriptionModelRule___DataKeyword_5_0_ColonKeyword_5_1__q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_DataDescriptionModelRule___TypesKeyword_4_0_ColonKeyword_4_1__q.equals(syntax))
+				emit_DataDescriptionModelRule___TypesKeyword_4_0_ColonKeyword_4_1__q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_DataTypeDefinitionRule___WithKeyword_4_0_ConstraintsKeyword_4_1_ColonKeyword_4_2__q.equals(syntax))
+				emit_DataTypeDefinitionRule___WithKeyword_4_0_ConstraintsKeyword_4_1_ColonKeyword_4_2__q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_TypedDataDescriptionRule___WithKeyword_6_0_ConstraintsKeyword_6_1_ColonKeyword_6_2__q.equals(syntax))
 				emit_TypedDataDescriptionRule___WithKeyword_6_0_ConstraintsKeyword_6_1_ColonKeyword_6_2__q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_UntypedDataDescriptionRule___WithKeyword_4_0_ConstraintsKeyword_4_1_ColonKeyword_4_2__q.equals(syntax))
@@ -74,14 +74,13 @@ public class DataDescriptionLanguageSyntacticSequencer extends AbstractSyntactic
 	 *     ('constraints' ':')?
 	 *
 	 * This ambiguous syntax occurs at:
-	 *     (rule start) ('types' ':')? ('data' ':')? (ambiguity) (rule start)
-	 *     descriptions+=DataDescriptionRule (ambiguity) (rule end)
-	 *     types+=DataTypeRule ('data' ':')? (ambiguity) (rule end)
-	 *     uses+=UseRule ('types' ':')? ('data' ':')? (ambiguity) (rule end)
+	 *     descriptions+=DataDescriptionRule (ambiguity) '}' (rule end)
+	 *     name=QualifiedName '{' ('types' ':')? ('data' ':')? (ambiguity) '}' (rule end)
+	 *     types+=DataTypeDefinitionRule ('data' ':')? (ambiguity) '}' (rule end)
 	 
 	 * </pre>
 	 */
-	protected void emit_DataDescriptionModelRule___ConstraintsKeyword_4_0_ColonKeyword_4_1__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_DataDescriptionModelRule___ConstraintsKeyword_6_0_ColonKeyword_6_1__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
@@ -91,16 +90,14 @@ public class DataDescriptionLanguageSyntacticSequencer extends AbstractSyntactic
 	 *     ('data' ':')?
 	 *
 	 * This ambiguous syntax occurs at:
-	 *     (rule start) ('types' ':')? (ambiguity) 'constraints' ':' constraints+=StatementRule
-	 *     (rule start) ('types' ':')? (ambiguity) ('constraints' ':')? (rule start)
-	 *     types+=DataTypeRule (ambiguity) 'constraints' ':' constraints+=StatementRule
-	 *     types+=DataTypeRule (ambiguity) ('constraints' ':')? (rule end)
-	 *     uses+=UseRule ('types' ':')? (ambiguity) 'constraints' ':' constraints+=StatementRule
-	 *     uses+=UseRule ('types' ':')? (ambiguity) ('constraints' ':')? (rule end)
+	 *     name=QualifiedName '{' ('types' ':')? (ambiguity) 'constraints' ':' constraints+=StatementRule
+	 *     name=QualifiedName '{' ('types' ':')? (ambiguity) ('constraints' ':')? '}' (rule end)
+	 *     types+=DataTypeDefinitionRule (ambiguity) 'constraints' ':' constraints+=StatementRule
+	 *     types+=DataTypeDefinitionRule (ambiguity) ('constraints' ':')? '}' (rule end)
 	 
 	 * </pre>
 	 */
-	protected void emit_DataDescriptionModelRule___DataKeyword_3_0_ColonKeyword_3_1__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_DataDescriptionModelRule___DataKeyword_5_0_ColonKeyword_5_1__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
@@ -110,16 +107,13 @@ public class DataDescriptionLanguageSyntacticSequencer extends AbstractSyntactic
 	 *     ('types' ':')?
 	 *
 	 * This ambiguous syntax occurs at:
-	 *     (rule start) (ambiguity) 'data' ':' descriptions+=DataDescriptionRule
-	 *     (rule start) (ambiguity) ('data' ':')? 'constraints' ':' constraints+=StatementRule
-	 *     (rule start) (ambiguity) ('data' ':')? ('constraints' ':')? (rule start)
-	 *     uses+=UseRule (ambiguity) 'data' ':' descriptions+=DataDescriptionRule
-	 *     uses+=UseRule (ambiguity) ('data' ':')? 'constraints' ':' constraints+=StatementRule
-	 *     uses+=UseRule (ambiguity) ('data' ':')? ('constraints' ':')? (rule end)
+	 *     name=QualifiedName '{' (ambiguity) 'data' ':' descriptions+=DataDescriptionRule
+	 *     name=QualifiedName '{' (ambiguity) ('data' ':')? 'constraints' ':' constraints+=StatementRule
+	 *     name=QualifiedName '{' (ambiguity) ('data' ':')? ('constraints' ':')? '}' (rule end)
 	 
 	 * </pre>
 	 */
-	protected void emit_DataDescriptionModelRule___TypesKeyword_2_0_ColonKeyword_2_1__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_DataDescriptionModelRule___TypesKeyword_4_0_ColonKeyword_4_1__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
@@ -134,7 +128,7 @@ public class DataDescriptionLanguageSyntacticSequencer extends AbstractSyntactic
 	 
 	 * </pre>
 	 */
-	protected void emit_DataTypeRule___WithKeyword_4_0_ConstraintsKeyword_4_1_ColonKeyword_4_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_DataTypeDefinitionRule___WithKeyword_4_0_ConstraintsKeyword_4_1_ColonKeyword_4_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
@@ -144,7 +138,7 @@ public class DataDescriptionLanguageSyntacticSequencer extends AbstractSyntactic
 	 *     ('with' 'constraints' ':')?
 	 *
 	 * This ambiguous syntax occurs at:
-	 *     type=[DataType|StringOrId] (ambiguity) ';' (rule end)
+	 *     type=[DataTypeDefinition|QualifiedName] (ambiguity) ';' (rule end)
 	 
 	 * </pre>
 	 */

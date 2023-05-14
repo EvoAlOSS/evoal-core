@@ -7,7 +7,7 @@ type 'shekel' {
     /**
 	 * The recommended value for the vector a is (1/m)*{1,2,2,4,4,6,3,7,5,5}.
 	 */
-	'a' : array float;
+	'a' : array real;
 
     /**
 	 * The recommended value for the constant c is {
@@ -16,10 +16,10 @@ type 'shekel' {
      * {4.0, 1.0, 8.0, 6.0, 3.0, 2.0, 5.0, 8.0, 6.0, 7.0},
      * {4.0, 1.0, 8.0, 6.0, 7.0, 9.0, 3.0, 1.0, 2.0, 3.6}}.
 	 */
-	'c' : array array float;
+	'c' : array array real;
 
     /**
 	 * The recommended value for the constant m is 10.
 	 */
-	'm' : float;
+	'm' : real;
 }

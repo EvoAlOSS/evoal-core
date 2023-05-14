@@ -12,8 +12,14 @@ Workflow {
 			project = StandardProjectConfig {
 				baseName = "de.evoal.languages.model.instance.dsl"
 				rootPath = rootPath
+				runtimeTest = {
+					enabled = false
+				}
 				eclipsePlugin = {
 					enabled = true
+				}
+				eclipsePluginTest = {
+					enabled = false
 				}
 				createEclipseMetaData = true
 			}
@@ -28,11 +34,16 @@ Workflow {
 			name = "de.evoal.languages.model.instance.dsl.InstanceLanguage"
 			fileExtensions = "ins"
 			referencedResource = "platform:/resource/de.evoal.languages.model.instance/model/model.genmodel"
-			referencedResource = "platform:/resource/de.evoal.languages.model.dl/model/model.genmodel"
 			referencedResource = "platform:/resource/de.evoal.languages.model.ddl/model/model.genmodel"
-			referencedResource = "platform:/resource/de.evoal.languages.model.el/model/model.genmodel"
+			referencedResource = "platform:/resource/de.evoal.languages.model.base/model/model.genmodel"
 
 
+            parserGenerator = {
+                    options = {
+                            backtrack = true
+                    }
+            }
+            
 			serializer = {
 				generateStub = false
 			}
@@ -40,10 +51,12 @@ Workflow {
 				// composedCheck = "org.eclipse.xtext.validation.NamesAreUniqueValidator"
 				// Generates checks for @Deprecated grammar annotations, an IssueProvider and a corresponding PropertyPage
 				generateDeprecationValidation = true
-				composedCheck = "org.eclipse.xtext.validation.ImportUriValidator"
 			}
 			generator = {
 				generateXtendStub = true
+			}
+			scopeProvider = scoping.ImportNamespacesScopingFragment2 {
+				generateXtendStub = false
 			}
 			junitSupport = {
 				junitVersion = "5"

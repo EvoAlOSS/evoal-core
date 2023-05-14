@@ -2,7 +2,9 @@
  */
 package de.evoal.languages.model.mll.util;
 
-import de.evoal.languages.model.el.FunctionName;
+import de.evoal.languages.model.base.Instance;
+import de.evoal.languages.model.base.Literal;
+import de.evoal.languages.model.base.Value;
 
 import de.evoal.languages.model.mll.*;
 
@@ -70,8 +72,8 @@ public class MllAdapterFactory extends AdapterFactoryImpl {
 	protected MllSwitch<Adapter> modelSwitch =
 		new MllSwitch<Adapter>() {
 			@Override
-			public Adapter caseMachineLearningConfiguration(MachineLearningConfiguration object) {
-				return createMachineLearningConfigurationAdapter();
+			public Adapter caseMachineLearningModule(MachineLearningModule object) {
+				return createMachineLearningModuleAdapter();
 			}
 			@Override
 			public Adapter caseSurrogateDefinition(SurrogateDefinition object) {
@@ -122,16 +124,16 @@ public class MllAdapterFactory extends AdapterFactoryImpl {
 				return createStringLiteralRangeAdapter();
 			}
 			@Override
-			public Adapter caseDefinedFunctionName(DefinedFunctionName object) {
-				return createDefinedFunctionNameAdapter();
+			public Adapter caseValue(Value object) {
+				return createValueAdapter();
 			}
 			@Override
-			public Adapter caseUse(Use object) {
-				return createUseAdapter();
+			public Adapter caseLiteral(Literal object) {
+				return createLiteralAdapter();
 			}
 			@Override
-			public Adapter caseFunctionName(FunctionName object) {
-				return createFunctionNameAdapter();
+			public Adapter caseInstance(Instance object) {
+				return createInstanceAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -154,16 +156,16 @@ public class MllAdapterFactory extends AdapterFactoryImpl {
 
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.mll.MachineLearningConfiguration <em>Machine Learning Configuration</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.mll.MachineLearningModule <em>Machine Learning Module</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.evoal.languages.model.mll.MachineLearningConfiguration
+	 * @see de.evoal.languages.model.mll.MachineLearningModule
 	 * @generated
 	 */
-	public Adapter createMachineLearningConfigurationAdapter() {
+	public Adapter createMachineLearningModuleAdapter() {
 		return null;
 	}
 
@@ -336,44 +338,44 @@ public class MllAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.mll.DefinedFunctionName <em>Defined Function Name</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.Value <em>Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.evoal.languages.model.mll.DefinedFunctionName
+	 * @see de.evoal.languages.model.base.Value
 	 * @generated
 	 */
-	public Adapter createDefinedFunctionNameAdapter() {
+	public Adapter createValueAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.mll.Use <em>Use</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.Literal <em>Literal</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.evoal.languages.model.mll.Use
+	 * @see de.evoal.languages.model.base.Literal
 	 * @generated
 	 */
-	public Adapter createUseAdapter() {
+	public Adapter createLiteralAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.el.FunctionName <em>Function Name</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.Instance <em>Instance</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.evoal.languages.model.el.FunctionName
+	 * @see de.evoal.languages.model.base.Instance
 	 * @generated
 	 */
-	public Adapter createFunctionNameAdapter() {
+	public Adapter createInstanceAdapter() {
 		return null;
 	}
 

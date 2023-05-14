@@ -1,65 +1,103 @@
 package de.evoal.languages.model.utils.scoping;
 
-import java.io.IOException;
-import java.util.Collection;
+import java.io.File;
 import java.util.Collections;
-import java.util.logging.Logger;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.resource.IResourceDescription;
-import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.scoping.impl.ImportUriGlobalScopeProvider;
-import org.eclipse.xtext.scoping.impl.SelectableBasedScope;
+import org.eclipse.xtext.scoping.impl.ImportUriResolver;
+import org.eclipse.xtext.util.IAcceptor;
 
-import com.google.common.base.Predicate;
-import com.google.inject.Inject;
+import de.evoal.languages.model.base.Import;
 
-import de.evoal.languages.model.utils.builtin.BuiltinProvider;
-import de.evoal.languages.model.utils.builtin.BuiltinProviderFactory;
-
-public abstract class ClasspathGlobalScopeProvider extends ImportUriGlobalScopeProvider {
-	private static Logger log = Logger.getLogger("de.evoal.languages.model.utils.scoping.ClasspathGlobalScopeProvider");
-	@Inject
-	IResourceDescription.Manager mgr;
+public class ClasspathGlobalScopeProvider extends ImportUriGlobalScopeProvider {
+	public static List<String> SEARCH_PATH = new LinkedList<>(Collections.singleton("./"));
 	
-	private final String name;
-	
-	public ClasspathGlobalScopeProvider(final String name) {
-		this.name = name;
-	}
-
-	/*
-	@Override
-	protected IScope getScope(Resource resource, boolean ignoreCase, EClass type, Predicate<IEObjectDescription> predicate) {
-		log.info(() -> "Providing scopes for " + resource.toString());
-		final BuiltinProvider provider = BuiltinProviderFactory.create();
-		final Collection<java.net.URI> files = provider.findBuiltins(name);
-
-		IScope scope = super.getScope(resource, ignoreCase, type, predicate);
-		for(final java.net.URI file : files) {
-			final URI libearyResourceURI = URI.createURI(file.toString());
-			Resource libraryResource = resource.getResourceSet().getResource(libearyResourceURI, false);
-			if (libraryResource == null) {
-				try {
-					libraryResource = resource.getResourceSet().createResource(libearyResourceURI);
-					libraryResource.load(Collections.emptyMap());
-					libraryResource.getWarnings().stream().forEach(System.err::println);
-					libraryResource.getErrors().stream().forEach(System.err::println);
-				} catch (final IOException e) {
-					log.warning(() -> "Failed to load library resource: " + file);
-					e.printStackTrace();
-				}
-			}
-			
-			final IResourceDescription libraryDescription = mgr.getResourceDescription(libraryResource);
-			scope = SelectableBasedScope.createScope(scope, libraryDescription, predicate, type, ignoreCase);
+	public static class CustomUriResolver extends ImportUriResolver  {
+		
+		public CustomUriResolver() {
+			setAttributeName("importedNamespace");
 		}
 		
-		return scope;
+		public void setAttributeName(String attributeName) {
+			super.setAttributeName("importedNamespace");
+		}
+		
+		@Override
+		public String apply(final EObject from) {
+			if(!(from instanceof Import)) {
+				return null;
+			}
+			
+			// get imported module name
+			final Import imp = (Import) from;
+			String result = imp.getImportedNamespace();
+			
+			// turn into path
+			result = result.replace('.', '/');
+			
+			// append file ending
+			switch(imp.getLanguage()) {
+			case "data":
+				result += ".ddl";
+				break;
+			case "definitions":
+				result += ".dl";
+				break;
+			case "optimisation":
+			case "optimization":
+				result += ".ol";
+				break;
+			}
+			
+			for(final String path : SEARCH_PATH) {
+				if(new File(path, result).exists()) {
+					return new File(path, result).toString();
+				} 				
+			}
+			
+			return "classpath:/" + result;
+		}
 	}
-	*/
+	
+	public static class LoggingURICollector extends URICollector {
+		
+		public LoggingURICollector(ResourceSet resourceSet, Set<URI> result) {
+			super(resourceSet, result);
+		}
+
+		public URI resolve(String uriAsString) throws IllegalArgumentException {
+			return super.resolve(uriAsString);
+		}
+
+		@Override
+		public void accept(String uriAsString) {
+			super.accept(uriAsString);
+		}
+	}
+	
+	@Override
+	protected IAcceptor<String> createURICollector(Resource resource, Set<URI> collectInto) {
+		setImportResolver(new CustomUriResolver());
+
+		ResourceSet resourceSet = resource.getResourceSet();
+		return new LoggingURICollector(resourceSet, collectInto);
+	}
+
+	@Override
+	public ImportUriResolver getImportUriResolver() {
+		final ImportUriResolver resolver = super.getImportUriResolver();
+		if(resolver != null) {
+			resolver.setAttributeName("importedNamespace");
+		}
+		
+		return resolver;
+	}
 }
 

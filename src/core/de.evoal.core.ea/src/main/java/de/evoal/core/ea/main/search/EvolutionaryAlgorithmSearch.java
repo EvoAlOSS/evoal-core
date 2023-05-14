@@ -11,8 +11,8 @@ import de.evoal.core.api.board.Blackboard;
 import de.evoal.core.api.cdi.BeanFactory;
 import de.evoal.core.api.cdi.BlackboardValue;
 import de.evoal.core.api.cdi.ConfigurationValue;
+import de.evoal.core.api.languages.ExpressionEvaluator;
 import de.evoal.core.api.optimisation.InitialCandidatesProvider;
-import de.evoal.core.ea.api.initial.InitialPopulation;
 import de.evoal.core.api.optimisation.OptimisationAlgorithm;
 import de.evoal.core.api.utils.LanguageHelper;
 import de.evoal.core.api.optimisation.OptimisationValue;
@@ -24,10 +24,8 @@ import de.evoal.core.ea.main.jenetics.ConstraintList;
 import de.evoal.core.ea.main.alterer.AltererFactory;
 import de.evoal.core.ea.main.codec.DynamicCodec;
 import de.evoal.core.ea.main.statistics.JeneticsStatisticsWriter;
-import de.evoal.languages.model.instance.Array;
-import de.evoal.languages.model.instance.Attribute;
-import de.evoal.languages.model.instance.Value;
-import de.evoal.languages.model.ol.OptimisationModel;
+import de.evoal.languages.model.base.Attribute;
+import de.evoal.languages.model.ol.OptimisationModule;
 import io.jenetics.*;
 import io.jenetics.engine.*;
 import io.jenetics.stat.MinMax;
@@ -45,6 +43,12 @@ import javax.inject.Named;
 public class EvolutionaryAlgorithmSearch implements OptimisationAlgorithm {
 	@Inject
 	private Blackboard board;
+
+	@Inject
+	private ExpressionEvaluator evaluator;
+
+	@Inject
+	private LanguageHelper helper;
 
 	/**
 	 * Location for storing the output.
@@ -69,7 +73,7 @@ public class EvolutionaryAlgorithmSearch implements OptimisationAlgorithm {
 	private int sizeOfPopulation;
 
 	@Inject
-	@ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.maximise")
+	@ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "problem.maximise")
 	private Boolean maximize;
 
 	@Inject
@@ -106,7 +110,7 @@ public class EvolutionaryAlgorithmSearch implements OptimisationAlgorithm {
 	private InitialCandidatesProvider provider;
 
 	@Override
-	public OptimisationAlgorithm init(de.evoal.languages.model.instance.Instance instance) {
+	public OptimisationAlgorithm init(de.evoal.languages.model.base.Instance instance) {
 		return this;
 	}
 
@@ -145,20 +149,20 @@ public class EvolutionaryAlgorithmSearch implements OptimisationAlgorithm {
 	}
 
 	private void setup() {
-		final OptimisationModel configuration = board.get(CoreBlackboardEntries.OPTIMISATION_CONFIGURATION);
+		final OptimisationModule configuration = board.get(CoreBlackboardEntries.OPTIMISATION_CONFIGURATION);
 
-		final de.evoal.languages.model.instance.Instance alterers = LanguageHelper.lookup(configuration.getInstance(), "algorithm.alterers");
+		final de.evoal.languages.model.base.Instance alterers = helper.lookup(configuration, "algorithm.alterers");
 
 		for(final Attribute category: alterers.getAttributes()) {
 			final String name = category.getDefinition().getName();
 			log.info("Processing alterer category '{}'.", name);
 
-			final Array array = (Array) category.getValue();
+			final List<de.evoal.languages.model.base.Instance> listOfAltererConfigurations = (List<de.evoal.languages.model.base.Instance>)evaluator.evaluate(category.getValue());
 
-			for(final Value alterer : array.getValues()) {
+			for(final de.evoal.languages.model.base.Instance alterer : listOfAltererConfigurations) {
 				this.alterers
 					.computeIfAbsent(name, k -> new ArrayList<>())
-					.add(factory.create((de.evoal.languages.model.instance.Instance)alterer));
+					.add(factory.create(alterer));
 			}
 		}
 	}

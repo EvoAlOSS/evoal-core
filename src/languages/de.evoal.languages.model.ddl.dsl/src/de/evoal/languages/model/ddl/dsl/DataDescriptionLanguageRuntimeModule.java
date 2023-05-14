@@ -5,28 +5,67 @@
 package de.evoal.languages.model.ddl.dsl;
 
 import org.eclipse.xtext.conversion.IValueConverterService;
-import org.eclipse.xtext.naming.IQualifiedNameProvider;
-import org.eclipse.xtext.naming.SimpleNameProvider;
+import org.eclipse.xtext.resource.IContainer;
+import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
+import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
+import org.eclipse.xtext.scoping.impl.DefaultGlobalScopeProvider;
+import org.eclipse.xtext.scoping.impl.ImportUriResolver;
 
-import de.evoal.languages.model.ddl.dsl.scoping.DataDescriptionLanguageClasspathGlobalScopeProvider;
+import de.evoal.languages.model.ddl.dsl.scoping.DataDescriptionLanguageLocalScopeProvider;
+import de.evoal.languages.model.ddl.dsl.scoping.DataDescriptionLanguageResourceDescriptionStrategy;
+import de.evoal.languages.model.ddl.dsl.scoping.EvoAlReleaseStateBasedContainerManager;
 import de.evoal.languages.model.utils.converter.ValueConverterService;
+import de.evoal.languages.model.utils.scoping.ClasspathGlobalScopeProvider;
+import de.evoal.languages.model.utils.scoping.ClasspathGlobalScopeProvider.CustomUriResolver;
 
 /**
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
  */
 public class DataDescriptionLanguageRuntimeModule extends AbstractDataDescriptionLanguageRuntimeModule {
+    /*
+     * If you enable this strategy, the NamesAreUniqueValidator will not
+     * work as expected.
+     */
+    public Class<? extends IDefaultResourceDescriptionStrategy> bindIDefaultResourceDescriptionStrategy() {
+            return  DataDescriptionLanguageResourceDescriptionStrategy.class;
+    }
+    
 	@Override
-	public Class<? extends IGlobalScopeProvider> bindIGlobalScopeProvider() {
-		return DataDescriptionLanguageClasspathGlobalScopeProvider.class;
+	public void configureIScopeProviderDelegate(com.google.inject.Binder binder) {
+		binder.bind(org.eclipse.xtext.scoping.IScopeProvider.class)
+				.annotatedWith(
+						com.google.inject.name.Names
+								.named(AbstractDeclarativeScopeProvider.NAMED_DELEGATE))
+				.to(DataDescriptionLanguageLocalScopeProvider.class);
 	}
 
-	public Class<? extends IQualifiedNameProvider> bindIQualifiedNameProvider() {
-		return SimpleNameProvider.class;
-	}
-	
 	@Override
     public Class<? extends IValueConverterService> bindIValueConverterService() {
             return ValueConverterService.class;
     }
+	
+	public Class<? extends IGlobalScopeProvider> bindIGlobalScopeProvider() {
+		if(System.getProperty("osgi.os") != null // this means that we are running in OSGI (eclipse or tycho)
+				&& (System.getProperty("eclipse.application") == null // sanity check for the next line
+				|| !System.getProperty("eclipse.application").contains("tycho"))) // use classpath provider in Tycho-base unit test environment
+		{
+			return DefaultGlobalScopeProvider.class;
+		} else {
+			return ClasspathGlobalScopeProvider.class;
+		}
+	}
+
+	public Class<? extends ImportUriResolver> bindImportUriResolver() {
+		return CustomUriResolver.class;
+	}
+	// contributed by org.eclipse.xtext.xtext.generator.builder.BuilderIntegrationFragment2
+	public Class<? extends IContainer.Manager> bindIContainer$Manager() {
+		return EvoAlReleaseStateBasedContainerManager.class;
+	}
+	
+	// contributed by org.eclipse.xtext.xtext.generator.builder.BuilderIntegrationFragment2
+	//public Class<? extends IAllContainersState.Provider> bindIAllContainersState$Provider() {
+	//	return MllResourceSetBasedAllContainersStateProvider.class;
+	//}
 }

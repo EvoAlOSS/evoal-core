@@ -1,21 +1,25 @@
 package de.evoal.generator.main.functions;
 
+import de.evoal.core.api.languages.ExpressionEvaluator;
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.utils.InitializationException;
 import de.evoal.generator.api.AbstractGeneratorFunction;
 import de.evoal.generator.api.GeneratorFunction;
-import de.evoal.languages.model.el.DoubleLiteral;
 import de.evoal.languages.model.generator.Step;
-import de.evoal.languages.model.instance.Array;
-import de.evoal.languages.model.instance.LiteralValue;
 
 import javax.enterprise.context.Dependent;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 @Dependent
 @Named("constants")
 public class ConstantFunction extends AbstractGeneratorFunction {
+
 	private double [] constants = {};
+
+	@Inject
+	private ExpressionEvaluator evaluator;
+
 
 	public Properties apply(final Properties in) {
 		final Properties result = mergeAndCopy(in);
@@ -31,15 +35,7 @@ public class ConstantFunction extends AbstractGeneratorFunction {
 	public GeneratorFunction init(final Step configuration) throws InitializationException {
 		super.init(configuration);
 
-		final Array constantsArray = (Array)configuration.getInstance().findAttribute("constants").getValue();
-
-		constants = constantsArray.getValues()
-								  .stream()
-								  .map(LiteralValue.class::cast)
-								  .map(LiteralValue::getLiteral)
-								  .map(DoubleLiteral.class::cast)
-								  .mapToDouble(DoubleLiteral::getValue)
-								  .toArray();
+		constants = evaluator.attributeToDoubleArray(configuration.getInstance(), "constants");
 
 		return this;
 	}

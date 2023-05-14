@@ -3,11 +3,12 @@
  */
 package de.evoal.languages.model.generator.impl;
 
+import de.evoal.languages.model.base.Instance;
+
 import de.evoal.languages.model.generator.GeneratorPackage;
 import de.evoal.languages.model.generator.Step;
 
 import de.evoal.languages.model.instance.DataReference;
-import de.evoal.languages.model.instance.Instance;
 
 import java.util.Collection;
 

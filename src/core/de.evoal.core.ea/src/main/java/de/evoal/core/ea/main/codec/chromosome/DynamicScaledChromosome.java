@@ -1,13 +1,19 @@
 package de.evoal.core.ea.main.codec.chromosome;
 
+import de.evoal.core.api.languages.ExpressionEvaluator;
 import de.evoal.core.api.utils.Requirements;
 import de.evoal.languages.model.ddl.DataDescription;
-import de.evoal.languages.model.el.IntegerLiteral;
-import de.evoal.languages.model.instance.Instance;
-import de.evoal.languages.model.instance.LiteralValue;
+import de.evoal.languages.model.base.IntegerLiteral;
+import de.evoal.languages.model.base.Instance;
+import de.evoal.languages.model.base.Literal;
 import io.jenetics.util.DoubleRange;
 
+import javax.inject.Inject;
+
 public abstract class DynamicScaledChromosome extends DynamicBoundedDoubleChromosome {
+    @Inject
+    private ExpressionEvaluator evaluator;
+
     protected int scale;
 
     @Override
@@ -16,7 +22,7 @@ public abstract class DynamicScaledChromosome extends DynamicBoundedDoubleChromo
         Requirements.requireSize(dataRepresented, 1);
         Requirements.requireSize(ranges, 1);
 
-        scale = ((IntegerLiteral)((LiteralValue)specification.findAttribute("scale").getValue()).getLiteral()).getValue();
+        scale = evaluator.attributeToInteger(specification, "scale");
     }
 
     protected DoubleRange toRange(final DataDescription dataDescription) {

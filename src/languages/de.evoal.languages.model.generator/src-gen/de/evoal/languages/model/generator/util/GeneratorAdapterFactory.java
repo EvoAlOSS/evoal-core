@@ -69,12 +69,8 @@ public class GeneratorAdapterFactory extends AdapterFactoryImpl {
 	protected GeneratorSwitch<Adapter> modelSwitch =
 		new GeneratorSwitch<Adapter>() {
 			@Override
-			public Adapter caseConfiguration(Configuration object) {
-				return createConfigurationAdapter();
-			}
-			@Override
-			public Adapter caseUse(Use object) {
-				return createUseAdapter();
+			public Adapter caseGeneratorModule(GeneratorModule object) {
+				return createGeneratorModuleAdapter();
 			}
 			@Override
 			public Adapter casePipelineDefinition(PipelineDefinition object) {
@@ -141,30 +137,16 @@ public class GeneratorAdapterFactory extends AdapterFactoryImpl {
 
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.generator.Configuration <em>Configuration</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.generator.GeneratorModule <em>Module</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.evoal.languages.model.generator.Configuration
+	 * @see de.evoal.languages.model.generator.GeneratorModule
 	 * @generated
 	 */
-	public Adapter createConfigurationAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.generator.Use <em>Use</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.evoal.languages.model.generator.Use
-	 * @generated
-	 */
-	public Adapter createUseAdapter() {
+	public Adapter createGeneratorModuleAdapter() {
 		return null;
 	}
 

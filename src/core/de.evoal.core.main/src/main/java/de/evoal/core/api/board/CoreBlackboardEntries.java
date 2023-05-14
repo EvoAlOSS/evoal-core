@@ -10,14 +10,21 @@ import javax.inject.Named;
 public class CoreBlackboardEntries implements BlackboardEntries {
 
     /**
-     * The target properties to search for.
+     * Number of evaluation runs.
      */
-    public static final String TARGET_PROPERTIES = "core:target-properties";
+    @Commandline(main = "heuristic-search", name = "core:evaluation-iterations", doc = "Number of iterations to run the search.")
+    public static final String EVALUATION_ITERATIONS = "core:evaluation-iterations";
 
     /**
-     * Folder containing the constraint files.
+     * The actual output folder for the evaluation.
      */
-    public static final String CONSTRAINT_FOLDER = "core:constraint-folder";
+    @Commandline(main = "heuristic-search", name = "core:evaluation-output-folder", doc = "Folder to write the results to.")
+    public static final String EVALUATION_OUTPUT_FOLDER = "core:evaluation-output-folder";
+
+    /**
+     * The evaluation run number.
+     */
+    public static final String EVALUATION_RUN = "core:evaluation-run";
 
     /**
      * Parameter to specify for logging leven.
@@ -26,21 +33,9 @@ public class CoreBlackboardEntries implements BlackboardEntries {
     public static final String LOGGING_LEVEL = "core:logging";
 
     /**
-     * Number of evaluation runs.
+     * Name of the main to run.
      */
-    @Commandline(main = "heuristic-search", name = "core:evaluation-iterations", doc = "Number of iterations to run the search.")
-    public static final String EVALUATION_ITERATIONS = "core:evaluation-iterations";
-
-    /**
-     * The evaluation run number.
-     */
-    public static final String EVALUATION_RUN = "core:evaluation-run";
-
-    /**
-     * The actual output folder for the evaluation.
-     */
-    @Commandline(main = "heuristic-search", name = "core:evaluation-output-folder", doc = "Folder to write the results to.")
-    public static final String EVALUATION_OUTPUT_FOLDER = "core:evaluation-output-folder";
+    public static final String MAIN = "core:main";
 
     /**
      * The heuristic configuration.
@@ -53,14 +48,19 @@ public class CoreBlackboardEntries implements BlackboardEntries {
     @Commandline(main = "heuristic-search", name = "core:optimisation-configuration", doc = "Optimisation configuration to use.")
     public static final String OPTIMISATION_CONFIGURATION_FILE = "core:optimisation-configuration-file";
 
-    /**
-     * Name of the main to run.
-     */
-    public static final String MAIN = "core:main";
+
+    @Commandline(main="", name="core:search-path", doc="Additional search path entries for DSL lookup.")
+    public static final String SEARCH_PATH = "core:search-path";
 
     /**
      * File containing targets for evaluation.
      */
     @Commandline(main="heuristic-search-evaluation", name = "core:target-points-file", doc = "A file containing the targets to use for evaluation.")
     public static final String TARGET_POINTS_FILE = "core:target-points-file";
+
+
+    /**
+     * The target properties to search for.
+     */
+    public static final String TARGET_PROPERTIES = "core:target-properties";
 }

@@ -1,35 +1,18 @@
-grammar de.evoal.languages.model.instance.dsl.InstanceLanguage with de.evoal.languages.model.el.dsl.ExpressionLanguage
+grammar de.evoal.languages.model.instance.dsl.InstanceLanguage with de.evoal.languages.model.base.dsl.BaseLanguage
 
 import "https://www.evoal.de/languages/instance/1.0.0" 
 
-import "https://www.evoal.de/languages/dl/1.0.0" as dl
 import "https://www.evoal.de/languages/ddl/1.0.0" as ddl
-import "https://www.evoal.de/languages/el/1.0.0" as el
+import "https://www.evoal.de/languages/base/1.0.0" as base
 
-InstanceRule returns Instance:
-	definition = [dl::TypeDefinition|StringOrId] ('{'
-	  attributes += AttributeRule*
-	'}')?
-;
 
-AttributeRule returns Attribute:
-	definition = [dl::AttributeDefinition|StringOrId] ':=' value = ValueRule ';'
-;
 
-ValueRule returns Value:
-	ArrayRule | DataReferenceRule | InstanceRule | LiteralValueRule
-;
-
-ArrayRule returns Array:
-	{Array}
-	'[' (values += ValueRule (',' values += ValueRule)* )? ']' 
-;
-
-LiteralValueRule returns LiteralValue:
-	literal = LiteralRule
+@Override
+ReferenceRule returns base::ValueReference:
+	ConstantReferenceRule | DataReferenceRule
 ;
 
 DataReferenceRule returns DataReference:
 	{DataReference}
-	'data' definition = [ddl::DataDescription|StringOrId]
+	'data' definition = [ddl::DataDescription|QualifiedName]
 ;

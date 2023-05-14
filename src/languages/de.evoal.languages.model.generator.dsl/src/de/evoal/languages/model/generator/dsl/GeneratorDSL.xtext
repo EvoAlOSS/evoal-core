@@ -1,17 +1,16 @@
 grammar de.evoal.languages.model.generator.dsl.GeneratorDSL with de.evoal.languages.model.instance.dsl.InstanceLanguage
 
-import "https://www.evoal.de/languages/dl/1.0.0"
 import "https://www.evoal.de/languages/generator/1.0.0"
+import "https://www.evoal.de/languages/base/1.0.0" as base
 
-ConfigurationRule returns Configuration:
-	(uses += UseRule)*
-	(pipelines += PipelineDefinitionRule)*
-
-	(statements	+= StatementRule)*
-;
-
-UseRule returns Use:
-	'use' importURI = STRING ';'
+GeneratorModuleRule returns GeneratorModule:
+	(imports += ImportRule)*
+	
+	"module" name = QualifiedName "{"
+		(pipelines += PipelineDefinitionRule)*
+	
+		(statements	+= StatementRule)*
+	"}"
 ;
 
 PipelineDefinitionRule returns PipelineDefinition:
@@ -22,7 +21,7 @@ PipelineDefinitionRule returns PipelineDefinition:
 
 StepRule returns Step:
 	'step' '{'
- 	    'component' instance = InstanceRule
+ 	    'component' instance = InstanceLiteralRule
  	    ('reads' '[' (reads += DataReferenceRule (',' reads += DataReferenceRule)*)? ']' ';')?
  	    ('writes' '[' (writes += DataReferenceRule (',' writes += DataReferenceRule)*)? ']' ';')?
 	'}'
@@ -54,7 +53,7 @@ PipelineReferenceRule returns PipelineReference:
 	PipelineDefinitionReferenceRule | VariableReferenceRule;
 	
 PipelineDefinitionReferenceRule returns PipelineDefinitionReference:
-	'pipeline' pipeline = [PipelineDefinition|StringOrId]
+	'pipeline' pipeline = [PipelineDefinition|QualifiedName]
 ;
 
 VariableReferenceRule returns VariableReference:

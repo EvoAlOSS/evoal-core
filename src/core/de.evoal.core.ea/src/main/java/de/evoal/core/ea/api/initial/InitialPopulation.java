@@ -1,6 +1,6 @@
 package de.evoal.core.ea.api.initial;
 
-import de.evoal.languages.model.instance.Instance;
+import de.evoal.languages.model.base.Instance;
 import io.jenetics.Gene;
 import io.jenetics.engine.Engine;
 import io.jenetics.engine.EvolutionStream;

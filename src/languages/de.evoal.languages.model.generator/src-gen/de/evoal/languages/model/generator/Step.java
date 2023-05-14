@@ -3,8 +3,9 @@
  */
 package de.evoal.languages.model.generator;
 
+import de.evoal.languages.model.base.Instance;
+
 import de.evoal.languages.model.instance.DataReference;
-import de.evoal.languages.model.instance.Instance;
 
 import org.eclipse.emf.common.util.EList;
 

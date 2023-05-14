@@ -8,7 +8,7 @@ import de.evoal.core.api.utils.EvoalIOException;
 import de.evoal.core.arff.io.ArffPropertiesReader;
 import de.evoal.core.junit.dsl.LanguageHelper;
 import de.evoal.core.junit.resources.ResourceUtils;
-import de.evoal.languages.model.ddl.DataDescriptionModel;
+import de.evoal.languages.model.ddl.DataDescriptionModule;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -25,7 +25,7 @@ public class ArffPropertiesReaderTest {
         final File temporaryFolder = temporary.toFile();
         ResourceUtils.unpack(getClass().getClassLoader(), temporaryFolder, "simple/input.arff");
 
-        final DataDescriptionModel model = LanguageHelper.loadFromClasspath("simple/specification.ddl");
+        final DataDescriptionModule model = LanguageHelper.loadFromClasspath("simple/specification.ddl");
         final PropertiesSpecification specification = toSpecification(model);
 
         final PropertiesReader testee = new ArffPropertiesReader()
@@ -71,7 +71,7 @@ public class ArffPropertiesReaderTest {
         Assertions.assertFalse(testee.hasNext());
     }
 
-    private PropertiesSpecification toSpecification(final DataDescriptionModel model) {
+    private PropertiesSpecification toSpecification(final DataDescriptionModule model) {
         return PropertiesSpecification
                 .builder()
                 .add(model.getDescriptions().stream())

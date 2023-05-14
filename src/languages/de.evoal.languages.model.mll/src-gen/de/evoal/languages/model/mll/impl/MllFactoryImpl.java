@@ -56,7 +56,7 @@ public class MllFactoryImpl extends EFactoryImpl implements MllFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case MllPackage.MACHINE_LEARNING_CONFIGURATION: return createMachineLearningConfiguration();
+			case MllPackage.MACHINE_LEARNING_MODULE: return createMachineLearningModule();
 			case MllPackage.SURROGATE_DEFINITION: return createSurrogateDefinition();
 			case MllPackage.SURROGATE_LAYER_DEFINITION: return createSurrogateLayerDefinition();
 			case MllPackage.PARTIAL_SURROGATE_FUNCTION_DEFINITION: return createPartialSurrogateFunctionDefinition();
@@ -67,8 +67,6 @@ public class MllFactoryImpl extends EFactoryImpl implements MllFactory {
 			case MllPackage.FOR_STATEMENT: return createForStatement();
 			case MllPackage.COUNTER_RANGE: return createCounterRange();
 			case MllPackage.STRING_LITERAL_RANGE: return createStringLiteralRange();
-			case MllPackage.DEFINED_FUNCTION_NAME: return createDefinedFunctionName();
-			case MllPackage.USE: return createUse();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -80,9 +78,9 @@ public class MllFactoryImpl extends EFactoryImpl implements MllFactory {
 	 * @generated
 	 */
 	@Override
-	public MachineLearningConfiguration createMachineLearningConfiguration() {
-		MachineLearningConfigurationImpl machineLearningConfiguration = new MachineLearningConfigurationImpl();
-		return machineLearningConfiguration;
+	public MachineLearningModule createMachineLearningModule() {
+		MachineLearningModuleImpl machineLearningModule = new MachineLearningModuleImpl();
+		return machineLearningModule;
 	}
 
 	/**
@@ -193,28 +191,6 @@ public class MllFactoryImpl extends EFactoryImpl implements MllFactory {
 	public StringLiteralRange createStringLiteralRange() {
 		StringLiteralRangeImpl stringLiteralRange = new StringLiteralRangeImpl();
 		return stringLiteralRange;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public DefinedFunctionName createDefinedFunctionName() {
-		DefinedFunctionNameImpl definedFunctionName = new DefinedFunctionNameImpl();
-		return definedFunctionName;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Use createUse() {
-		UseImpl use = new UseImpl();
-		return use;
 	}
 
 	/**

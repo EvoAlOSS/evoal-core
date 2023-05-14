@@ -1,7 +1,7 @@
 package de.evoal.core.api.optimisation;
 
 import de.evoal.core.api.properties.Properties;
-import de.evoal.languages.model.instance.Instance;
+import de.evoal.languages.model.base.Instance;
 
 import java.util.function.Function;
 

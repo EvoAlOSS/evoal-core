@@ -4,21 +4,18 @@
  */
 package de.evoal.languages.model.instance.dsl.validation;
 
-import de.evoal.languages.model.el.dsl.validation.ExpressionLanguageValidator;
+import de.evoal.languages.model.base.dsl.validation.BaseLanguageValidator;
 import java.util.ArrayList;
 import java.util.List;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.xtext.validation.ComposedChecks;
-import org.eclipse.xtext.validation.ImportUriValidator;
 
-@ComposedChecks(validators = {ImportUriValidator.class})
-public abstract class AbstractInstanceLanguageValidator extends ExpressionLanguageValidator {
+public abstract class AbstractInstanceLanguageValidator extends BaseLanguageValidator {
 	
 	@Override
 	protected List<EPackage> getEPackages() {
 		List<EPackage> result = new ArrayList<EPackage>(super.getEPackages());
+		result.add(EPackage.Registry.INSTANCE.getEPackage("https://www.evoal.de/languages/base/1.0.0"));
 		result.add(EPackage.Registry.INSTANCE.getEPackage("https://www.evoal.de/languages/instance/1.0.0"));
-		result.add(EPackage.Registry.INSTANCE.getEPackage("https://www.evoal.de/languages/el/1.0.0"));
 		return result;
 	}
 }

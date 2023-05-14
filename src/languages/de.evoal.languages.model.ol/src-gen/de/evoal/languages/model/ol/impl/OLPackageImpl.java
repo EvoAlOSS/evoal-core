@@ -3,22 +3,17 @@
  */
 package de.evoal.languages.model.ol.impl;
 
+import de.evoal.languages.model.base.BasePackage;
+
 import de.evoal.languages.model.ddl.DdlPackage;
-
-import de.evoal.languages.model.dl.DlPackage;
-
-import de.evoal.languages.model.el.ELPackage;
 
 import de.evoal.languages.model.instance.InstancePackage;
 
-import de.evoal.languages.model.ol.Constraint;
-import de.evoal.languages.model.ol.ConstraintStatement;
-import de.evoal.languages.model.ol.DataReference;
-import de.evoal.languages.model.ol.FunctionName;
+import de.evoal.languages.model.ol.AlgorithmInstance;
 import de.evoal.languages.model.ol.OLFactory;
 import de.evoal.languages.model.ol.OLPackage;
-import de.evoal.languages.model.ol.OptimisationModel;
-import de.evoal.languages.model.ol.Use;
+import de.evoal.languages.model.ol.OptimisationModule;
+import de.evoal.languages.model.ol.ProblemInstance;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -39,42 +34,21 @@ public class OLPackageImpl extends EPackageImpl implements OLPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass optimisationModelEClass = null;
+	private EClass optimisationModuleEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass useEClass = null;
+	private EClass problemInstanceEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass constraintEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass constraintStatementEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass functionNameEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass dataReferenceEClass = null;
+	private EClass algorithmInstanceEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -123,9 +97,8 @@ public class OLPackageImpl extends EPackageImpl implements OLPackage {
 		isInited = true;
 
 		// Initialize simple dependencies
+		BasePackage.eINSTANCE.eClass();
 		DdlPackage.eINSTANCE.eClass();
-		DlPackage.eINSTANCE.eClass();
-		ELPackage.eINSTANCE.eClass();
 		InstancePackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
@@ -148,8 +121,8 @@ public class OLPackageImpl extends EPackageImpl implements OLPackage {
 	 * @generated
 	 */
 	@Override
-	public EClass getOptimisationModel() {
-		return optimisationModelEClass;
+	public EClass getOptimisationModule() {
+		return optimisationModuleEClass;
 	}
 
 	/**
@@ -158,8 +131,8 @@ public class OLPackageImpl extends EPackageImpl implements OLPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getOptimisationModel_Uses() {
-		return (EReference)optimisationModelEClass.getEStructuralFeatures().get(0);
+	public EReference getOptimisationModule_Imports() {
+		return (EReference)optimisationModuleEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -168,8 +141,8 @@ public class OLPackageImpl extends EPackageImpl implements OLPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getOptimisationModel_Instance() {
-		return (EReference)optimisationModelEClass.getEStructuralFeatures().get(1);
+	public EReference getOptimisationModule_Problem() {
+		return (EReference)optimisationModuleEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -178,8 +151,8 @@ public class OLPackageImpl extends EPackageImpl implements OLPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getOptimisationModel_Constraints() {
-		return (EReference)optimisationModelEClass.getEStructuralFeatures().get(2);
+	public EReference getOptimisationModule_Algorithm() {
+		return (EReference)optimisationModuleEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -188,8 +161,8 @@ public class OLPackageImpl extends EPackageImpl implements OLPackage {
 	 * @generated
 	 */
 	@Override
-	public EClass getUse() {
-		return useEClass;
+	public EAttribute getOptimisationModule_Name() {
+		return (EAttribute)optimisationModuleEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -198,8 +171,8 @@ public class OLPackageImpl extends EPackageImpl implements OLPackage {
 	 * @generated
 	 */
 	@Override
-	public EAttribute getUse_ImportURI() {
-		return (EAttribute)useEClass.getEStructuralFeatures().get(0);
+	public EClass getProblemInstance() {
+		return problemInstanceEClass;
 	}
 
 	/**
@@ -208,8 +181,8 @@ public class OLPackageImpl extends EPackageImpl implements OLPackage {
 	 * @generated
 	 */
 	@Override
-	public EClass getConstraint() {
-		return constraintEClass;
+	public EAttribute getProblemInstance_Name() {
+		return (EAttribute)problemInstanceEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -218,8 +191,8 @@ public class OLPackageImpl extends EPackageImpl implements OLPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getConstraint_Statements() {
-		return (EReference)constraintEClass.getEStructuralFeatures().get(0);
+	public EReference getProblemInstance_Documentation() {
+		return (EReference)problemInstanceEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -228,8 +201,8 @@ public class OLPackageImpl extends EPackageImpl implements OLPackage {
 	 * @generated
 	 */
 	@Override
-	public EClass getConstraintStatement() {
-		return constraintStatementEClass;
+	public EClass getAlgorithmInstance() {
+		return algorithmInstanceEClass;
 	}
 
 	/**
@@ -238,8 +211,8 @@ public class OLPackageImpl extends EPackageImpl implements OLPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getConstraintStatement_ConstraintExpression() {
-		return (EReference)constraintStatementEClass.getEStructuralFeatures().get(0);
+	public EReference getAlgorithmInstance_Problem() {
+		return (EReference)algorithmInstanceEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -248,38 +221,8 @@ public class OLPackageImpl extends EPackageImpl implements OLPackage {
 	 * @generated
 	 */
 	@Override
-	public EClass getFunctionName() {
-		return functionNameEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getFunctionName_Definition() {
-		return (EReference)functionNameEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getDataReference() {
-		return dataReferenceEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getDataReference_Definition() {
-		return (EReference)dataReferenceEClass.getEStructuralFeatures().get(0);
+	public EReference getAlgorithmInstance_Documentation() {
+		return (EReference)algorithmInstanceEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -311,25 +254,19 @@ public class OLPackageImpl extends EPackageImpl implements OLPackage {
 		isCreated = true;
 
 		// Create classes and their features
-		optimisationModelEClass = createEClass(OPTIMISATION_MODEL);
-		createEReference(optimisationModelEClass, OPTIMISATION_MODEL__USES);
-		createEReference(optimisationModelEClass, OPTIMISATION_MODEL__INSTANCE);
-		createEReference(optimisationModelEClass, OPTIMISATION_MODEL__CONSTRAINTS);
+		optimisationModuleEClass = createEClass(OPTIMISATION_MODULE);
+		createEReference(optimisationModuleEClass, OPTIMISATION_MODULE__IMPORTS);
+		createEReference(optimisationModuleEClass, OPTIMISATION_MODULE__PROBLEM);
+		createEReference(optimisationModuleEClass, OPTIMISATION_MODULE__ALGORITHM);
+		createEAttribute(optimisationModuleEClass, OPTIMISATION_MODULE__NAME);
 
-		useEClass = createEClass(USE);
-		createEAttribute(useEClass, USE__IMPORT_URI);
+		problemInstanceEClass = createEClass(PROBLEM_INSTANCE);
+		createEAttribute(problemInstanceEClass, PROBLEM_INSTANCE__NAME);
+		createEReference(problemInstanceEClass, PROBLEM_INSTANCE__DOCUMENTATION);
 
-		constraintEClass = createEClass(CONSTRAINT);
-		createEReference(constraintEClass, CONSTRAINT__STATEMENTS);
-
-		constraintStatementEClass = createEClass(CONSTRAINT_STATEMENT);
-		createEReference(constraintStatementEClass, CONSTRAINT_STATEMENT__CONSTRAINT_EXPRESSION);
-
-		functionNameEClass = createEClass(FUNCTION_NAME);
-		createEReference(functionNameEClass, FUNCTION_NAME__DEFINITION);
-
-		dataReferenceEClass = createEClass(DATA_REFERENCE);
-		createEReference(dataReferenceEClass, DATA_REFERENCE__DEFINITION);
+		algorithmInstanceEClass = createEClass(ALGORITHM_INSTANCE);
+		createEReference(algorithmInstanceEClass, ALGORITHM_INSTANCE__PROBLEM);
+		createEReference(algorithmInstanceEClass, ALGORITHM_INSTANCE__DOCUMENTATION);
 	}
 
 	/**
@@ -356,39 +293,30 @@ public class OLPackageImpl extends EPackageImpl implements OLPackage {
 		setNsURI(eNS_URI);
 
 		// Obtain other dependent packages
-		InstancePackage theInstancePackage = (InstancePackage)EPackage.Registry.INSTANCE.getEPackage(InstancePackage.eNS_URI);
-		ELPackage theELPackage = (ELPackage)EPackage.Registry.INSTANCE.getEPackage(ELPackage.eNS_URI);
-		DlPackage theDlPackage = (DlPackage)EPackage.Registry.INSTANCE.getEPackage(DlPackage.eNS_URI);
-		DdlPackage theDdlPackage = (DdlPackage)EPackage.Registry.INSTANCE.getEPackage(DdlPackage.eNS_URI);
+		BasePackage theBasePackage = (BasePackage)EPackage.Registry.INSTANCE.getEPackage(BasePackage.eNS_URI);
 
 		// Create type parameters
 
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
-		functionNameEClass.getESuperTypes().add(theELPackage.getFunctionName());
-		dataReferenceEClass.getESuperTypes().add(theELPackage.getValueReference());
+		problemInstanceEClass.getESuperTypes().add(theBasePackage.getInstance());
+		algorithmInstanceEClass.getESuperTypes().add(theBasePackage.getInstance());
 
 		// Initialize classes and features; add operations and parameters
-		initEClass(optimisationModelEClass, OptimisationModel.class, "OptimisationModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getOptimisationModel_Uses(), this.getUse(), null, "uses", null, 0, -1, OptimisationModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getOptimisationModel_Instance(), theInstancePackage.getInstance(), null, "instance", null, 0, 1, OptimisationModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getOptimisationModel_Constraints(), this.getConstraint(), null, "constraints", null, 0, 1, OptimisationModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(optimisationModuleEClass, OptimisationModule.class, "OptimisationModule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getOptimisationModule_Imports(), theBasePackage.getImport(), null, "imports", null, 0, -1, OptimisationModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getOptimisationModule_Problem(), this.getProblemInstance(), null, "problem", null, 0, 1, OptimisationModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getOptimisationModule_Algorithm(), this.getAlgorithmInstance(), null, "algorithm", null, 0, 1, OptimisationModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getOptimisationModule_Name(), ecorePackage.getEString(), "name", null, 1, 1, OptimisationModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(useEClass, Use.class, "Use", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getUse_ImportURI(), ecorePackage.getEString(), "importURI", null, 0, 1, Use.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(problemInstanceEClass, ProblemInstance.class, "ProblemInstance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getProblemInstance_Name(), ecorePackage.getEString(), "name", null, 1, 1, ProblemInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getProblemInstance_Documentation(), theBasePackage.getArray(), null, "documentation", null, 0, 1, ProblemInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(constraintEClass, Constraint.class, "Constraint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getConstraint_Statements(), this.getConstraintStatement(), null, "statements", null, 0, -1, Constraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(constraintStatementEClass, ConstraintStatement.class, "ConstraintStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getConstraintStatement_ConstraintExpression(), theELPackage.getCall(), null, "constraintExpression", null, 0, 1, ConstraintStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(functionNameEClass, FunctionName.class, "FunctionName", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getFunctionName_Definition(), theDlPackage.getFunctionDefinition(), null, "definition", null, 0, 1, FunctionName.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(dataReferenceEClass, DataReference.class, "DataReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getDataReference_Definition(), theDdlPackage.getDataDescription(), null, "definition", null, 0, 1, DataReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(algorithmInstanceEClass, AlgorithmInstance.class, "AlgorithmInstance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getAlgorithmInstance_Problem(), this.getProblemInstance(), null, "problem", null, 1, 1, AlgorithmInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAlgorithmInstance_Documentation(), theBasePackage.getArray(), null, "documentation", null, 0, 1, AlgorithmInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);
@@ -411,8 +339,7 @@ public class OLPackageImpl extends EPackageImpl implements OLPackage {
 		   source,
 		   new String[] {
 			   "ddl", "platform:/resource/de.evoal.languages.model.ddl/model/model.ecore#/",
-			   "dl", "platform:/resource/de.evoal.languages.model.dl/model/model.ecore#/",
-			   "el", "platform:/resource/de.evoal.languages.model.el/model/model.ecore#/",
+			   "el", "platform:/resource/de.evoal.languages.model.base/model/model.ecore#/",
 			   "instance", "platform:/resource/de.evoal.languages.model.instance/model/model.ecore#/"
 		   });
 	}

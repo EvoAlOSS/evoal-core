@@ -2,10 +2,11 @@ package de.evoal.surrogate.api.configuration;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import de.evoal.languages.model.instance.LiteralValue;
+import de.evoal.core.api.languages.ExpressionEvaluator;
+import de.evoal.languages.model.base.Literal;
 import de.evoal.surrogate.main.jackson.ReflectiveDeserializer;
 import de.evoal.surrogate.main.jackson.ReflectiveSerializer;
-import de.evoal.languages.model.instance.Attribute;
+import de.evoal.languages.model.base.Attribute;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,10 +23,10 @@ public class Parameter {
 	@JsonSerialize(using = ReflectiveSerializer.class)
 	private Object value;
 
-	public static Parameter from(final Attribute attribute) {
+	public static Parameter from(final Attribute attribute, final ExpressionEvaluator evaluator) {
 		final Parameter parameter = new Parameter();
 		parameter.setName(attribute.getDefinition().getName());
-		parameter.setValue(((LiteralValue)attribute.getValue()).getLiteral().getValue());
+		parameter.setValue(evaluator.attributeToObject(attribute));
 
 		return parameter;
 	}

@@ -3,6 +3,8 @@
  */
 package de.evoal.languages.model.instance;
 
+import de.evoal.languages.model.base.ValueReference;
+
 import de.evoal.languages.model.ddl.DataDescription;
 
 /**
@@ -21,7 +23,7 @@ import de.evoal.languages.model.ddl.DataDescription;
  * @model
  * @generated
  */
-public interface DataReference extends Value {
+public interface DataReference extends ValueReference {
 	/**
 	 * Returns the value of the '<em><b>Definition</b></em>' reference.
 	 * <!-- begin-user-doc -->

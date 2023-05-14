@@ -13,7 +13,7 @@ import de.evoal.core.api.statistics.writer.AbstractCandidateStatisticsWriter;
 import de.evoal.core.api.statistics.writer.Column;
 import de.evoal.core.api.statistics.writer.ColumnType;
 import de.evoal.core.api.statistics.writer.StatisticsWriter;
-import de.evoal.languages.model.instance.Instance;
+import de.evoal.languages.model.base.Instance;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 

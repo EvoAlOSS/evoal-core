@@ -12,7 +12,7 @@ import de.evoal.core.api.constraints.calculation.CalculationStrategy;
 import de.evoal.core.api.constraints.model.ConstraintResult;
 import de.evoal.core.api.constraints.model.Constraints;
 import de.evoal.core.api.constraints.strategies.CalculationResult;
-import de.evoal.languages.model.instance.Instance;
+import de.evoal.languages.model.base.Instance;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.Dependent;
 import lombok.SneakyThrows;

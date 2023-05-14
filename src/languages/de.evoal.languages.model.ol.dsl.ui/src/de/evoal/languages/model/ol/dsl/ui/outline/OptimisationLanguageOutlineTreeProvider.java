@@ -4,12 +4,10 @@
  */
 package de.evoal.languages.model.ol.dsl.ui.outline;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider;
 
-import de.evoal.languages.model.instance.Attribute;
-import de.evoal.languages.model.instance.LiteralValue;
+import de.evoal.languages.model.base.Literal;
 
 /**
  * Customization of the default outline structure.
@@ -17,6 +15,6 @@ import de.evoal.languages.model.instance.LiteralValue;
  * See https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#outline
  */
 public class OptimisationLanguageOutlineTreeProvider extends DefaultOutlineTreeProvider {
-	protected void _createChildren(IOutlineNode parentNode, LiteralValue modelElement) {
+	protected void _createChildren(IOutlineNode parentNode, Literal literal) {
 	}
 }

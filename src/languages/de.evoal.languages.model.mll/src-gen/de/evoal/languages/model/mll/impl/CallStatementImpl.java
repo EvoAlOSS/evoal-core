@@ -2,7 +2,7 @@
  */
 package de.evoal.languages.model.mll.impl;
 
-import de.evoal.languages.model.el.Call;
+import de.evoal.languages.model.base.Call;
 
 import de.evoal.languages.model.mll.CallStatement;
 import de.evoal.languages.model.mll.MllPackage;

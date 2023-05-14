@@ -1,13 +1,12 @@
 package de.evoal.surrogate.api.configuration;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import de.evoal.core.api.properties.PropertiesSpecification;
+import de.evoal.core.api.languages.ExpressionEvaluator;
 import de.evoal.languages.model.ddl.DataDescription;
 import de.evoal.languages.model.mll.PartialSurrogateFunctionDefinition;
 import de.evoal.languages.model.mll.SurrogateLayerDefinition;
 import de.evoal.surrogate.api.function.FunctionCombiner;
 import lombok.Data;
-import lombok.Setter;
 import org.eclipse.emf.common.util.EList;
 
 import java.util.ArrayList;
@@ -65,7 +64,7 @@ public class FunctionCombinerConfiguration {
                 .forEach(outputDimensions::add);
     }
 
-    public static FunctionCombinerConfiguration from(final SurrogateLayerDefinition definition) {
+    public static FunctionCombinerConfiguration from(final SurrogateLayerDefinition definition, ExpressionEvaluator evaluator) {
         final FunctionCombinerConfiguration configuration = new FunctionCombinerConfiguration();
         configuration.setName(definition.getName());
 
@@ -90,7 +89,7 @@ public class FunctionCombinerConfiguration {
 
         definition.getFunctions()
                 .stream()
-                .map(PartialFunctionConfiguration::from)
+                .map(d -> PartialFunctionConfiguration.from(d, evaluator))
                 .forEach(configuration.functions::add);
 
         return configuration;

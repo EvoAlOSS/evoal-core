@@ -11,7 +11,7 @@ import de.evoal.core.api.statistics.writer.Column;
 import de.evoal.core.api.statistics.writer.ColumnType;
 import de.evoal.core.api.statistics.writer.StatisticsWriter;
 import de.evoal.core.api.utils.LanguageHelper;
-import de.evoal.languages.model.instance.Instance;
+import de.evoal.languages.model.base.Instance;
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.surrogate.api.training.TrainingDataManager;
@@ -43,6 +43,9 @@ public class GenerationStatisticsWriter implements StatisticsWriter {
      */
     private List<Function<Properties, Properties>> functions;
 
+    @Inject
+    private LanguageHelper helper;
+
     /**
      * List of all function names
      */
@@ -58,7 +61,7 @@ public class GenerationStatisticsWriter implements StatisticsWriter {
     @Inject
     private Provider<Function<Properties, Properties>> fitnessFactory;
 
-    @Inject @ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.optimisation-function.function")
+    @Inject @ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.optimisation-function")
     private Instance config;
 
     @Inject
@@ -80,7 +83,7 @@ public class GenerationStatisticsWriter implements StatisticsWriter {
 
     @PostConstruct
     public void init() {
-        final String selectedFunctionName = LanguageHelper.lookup(config, "name");
+        final String selectedFunctionName = helper.lookup(config, "name");
 
         startTime = System.currentTimeMillis();
         // create fitness functions for comparison

@@ -4,16 +4,16 @@
  */
 package de.evoal.languages.model.mll.dsl.formatting2
 
-import de.evoal.languages.model.el.dsl.formatting2.ExpressionLanguageFormatter
+import de.evoal.languages.model.base.dsl.formatting2.BaseLanguageFormatter
 import de.evoal.languages.model.mll.BlockStatement
 import org.eclipse.xtext.formatting2.IFormattableDocument
 
-class MachineLearningLanguageFormatter extends ExpressionLanguageFormatter {
+class MachineLearningLanguageFormatter extends BaseLanguageFormatter {
 	
 /*
-	def dispatch void format(MachineLearningConfiguration machineLearningConfiguration, extension IFormattableDocument document) {
+	def dispatch void format(MachineLearningModule machineLearningModule, extension IFormattableDocument document) {
 		// TODO: format HiddenRegions around keywords, attributes, cross references, etc. 
-		machineLearningConfiguration.qualityEstimation.format
+		machineLearningModule.qualityEstimation.format
 	}
 */
 

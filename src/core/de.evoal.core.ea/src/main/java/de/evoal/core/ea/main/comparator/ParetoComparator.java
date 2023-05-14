@@ -2,7 +2,7 @@ package de.evoal.core.ea.main.comparator;
 
 import de.evoal.core.api.optimisation.OptimisationValueComparator;
 import de.evoal.core.api.optimisation.OptimisationValue;
-import de.evoal.languages.model.instance.Instance;
+import de.evoal.languages.model.base.Instance;
 
 import javax.enterprise.context.ApplicationScoped;
 

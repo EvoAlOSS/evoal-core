@@ -19,7 +19,8 @@ Require-Bundle: org.eclipse.xtext,
  de.evoal.languages.model.ddl;bundle-version="1.0.0",
  de.evoal.languages.model.generator;bundle-version="1.0.0",
  de.evoal.languages.model.utils;bundle-version="1.0.0",
- org.eclipse.core.runtime;bundle-version="3.26.100"
+ org.eclipse.core.runtime;bundle-version="3.26.100",
+ de.evoal.languages.model.ddl.dsl;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-17
 Export-Package: de.evoal.languages.model.generator.dsl,
  de.evoal.languages.model.generator.dsl.services,

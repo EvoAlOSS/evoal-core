@@ -3,8 +3,9 @@
  */
 package de.evoal.languages.model.ol.util;
 
-import de.evoal.languages.model.el.CallOrLiteralOrReferenceOrParantheses;
-import de.evoal.languages.model.el.ValueReference;
+import de.evoal.languages.model.base.Instance;
+import de.evoal.languages.model.base.Literal;
+import de.evoal.languages.model.base.Value;
 
 import de.evoal.languages.model.ol.*;
 
@@ -70,42 +71,27 @@ public class OLSwitch<T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case OLPackage.OPTIMISATION_MODEL: {
-				OptimisationModel optimisationModel = (OptimisationModel)theEObject;
-				T result = caseOptimisationModel(optimisationModel);
+			case OLPackage.OPTIMISATION_MODULE: {
+				OptimisationModule optimisationModule = (OptimisationModule)theEObject;
+				T result = caseOptimisationModule(optimisationModule);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case OLPackage.USE: {
-				Use use = (Use)theEObject;
-				T result = caseUse(use);
+			case OLPackage.PROBLEM_INSTANCE: {
+				ProblemInstance problemInstance = (ProblemInstance)theEObject;
+				T result = caseProblemInstance(problemInstance);
+				if (result == null) result = caseInstance(problemInstance);
+				if (result == null) result = caseLiteral(problemInstance);
+				if (result == null) result = caseValue(problemInstance);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case OLPackage.CONSTRAINT: {
-				Constraint constraint = (Constraint)theEObject;
-				T result = caseConstraint(constraint);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OLPackage.CONSTRAINT_STATEMENT: {
-				ConstraintStatement constraintStatement = (ConstraintStatement)theEObject;
-				T result = caseConstraintStatement(constraintStatement);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OLPackage.FUNCTION_NAME: {
-				FunctionName functionName = (FunctionName)theEObject;
-				T result = caseFunctionName(functionName);
-				if (result == null) result = caseEL_FunctionName(functionName);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OLPackage.DATA_REFERENCE: {
-				DataReference dataReference = (DataReference)theEObject;
-				T result = caseDataReference(dataReference);
-				if (result == null) result = caseValueReference(dataReference);
-				if (result == null) result = caseCallOrLiteralOrReferenceOrParantheses(dataReference);
+			case OLPackage.ALGORITHM_INSTANCE: {
+				AlgorithmInstance algorithmInstance = (AlgorithmInstance)theEObject;
+				T result = caseAlgorithmInstance(algorithmInstance);
+				if (result == null) result = caseInstance(algorithmInstance);
+				if (result == null) result = caseLiteral(algorithmInstance);
+				if (result == null) result = caseValue(algorithmInstance);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -114,137 +100,92 @@ public class OLSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Optimisation Model</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Optimisation Module</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Optimisation Model</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Optimisation Module</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseOptimisationModel(OptimisationModel object) {
+	public T caseOptimisationModule(OptimisationModule object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Use</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Problem Instance</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Use</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Problem Instance</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseUse(Use object) {
+	public T caseProblemInstance(ProblemInstance object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Constraint</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Algorithm Instance</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Constraint</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Algorithm Instance</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseConstraint(Constraint object) {
+	public T caseAlgorithmInstance(AlgorithmInstance object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Constraint Statement</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Value</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Constraint Statement</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Value</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseConstraintStatement(ConstraintStatement object) {
+	public T caseValue(Value object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Function Name</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Literal</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Function Name</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Literal</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseFunctionName(FunctionName object) {
+	public T caseLiteral(Literal object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Data Reference</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Instance</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Data Reference</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Instance</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseDataReference(DataReference object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Function Name</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Function Name</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseEL_FunctionName(de.evoal.languages.model.el.FunctionName object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Call Or Literal Or Reference Or Parantheses</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Call Or Literal Or Reference Or Parantheses</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseCallOrLiteralOrReferenceOrParantheses(CallOrLiteralOrReferenceOrParantheses object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Value Reference</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Value Reference</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseValueReference(ValueReference object) {
+	public T caseInstance(Instance object) {
 		return null;
 	}
 

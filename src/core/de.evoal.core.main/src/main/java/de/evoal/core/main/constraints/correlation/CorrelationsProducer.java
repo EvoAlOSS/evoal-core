@@ -12,7 +12,7 @@ import de.evoal.core.main.constraints.correlation.el.AstHelper;
 import de.evoal.core.main.constraints.el.ElHelper;
 import de.evoal.core.main.constraints.el.LogHelper;
 import de.evoal.languages.model.ddl.DataDescription;
-import de.evoal.languages.model.el.Call;
+import de.evoal.languages.model.base.Call;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.inject.Named;
@@ -45,7 +45,7 @@ public class CorrelationsProducer {
                              .map(ElHelper::findCall)
                              .filter(Objects::nonNull)
                              .map(Call.class::cast)
-                             .filter(c -> "connection".equals(((de.evoal.languages.model.ddl.FunctionName)c.getFunction()).getDefinition().getName()))
+                             .filter(c -> "connection".equals(((de.evoal.languages.model.base.DefinedFunctionName)c.getFunction()).getDefinition().getName()))
                              .map(c -> convert(c, context))
                              .filter(Optional::isPresent)
                              .map(Optional::get)

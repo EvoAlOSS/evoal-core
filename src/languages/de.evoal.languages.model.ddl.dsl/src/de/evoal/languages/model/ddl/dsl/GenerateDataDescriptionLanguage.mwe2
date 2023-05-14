@@ -27,12 +27,15 @@ Workflow {
 		language = StandardLanguage {
 			name = "de.evoal.languages.model.ddl.dsl.DataDescriptionLanguage"
 			fileExtensions = "ddl"
-			referencedResource = "platform:/resource/de.evoal.languages.model.el/model/model.genmodel"
+			referencedResource = "platform:/resource/de.evoal.languages.model.base/model/model.genmodel"
 			referencedResource = "platform:/resource/de.evoal.languages.model.dl/model/model.genmodel"
 			referencedResource = "platform:/resource/de.evoal.languages.model.ddl/model/model.genmodel"
 			
 			fragment = ecore2xtext.Ecore2XtextValueConverterServiceFragment2 auto-inject {}
-
+			fragment = scoping.ImportNamespacesScopingFragment2 auto-inject {}
+    		fragment = exporting.QualifiedNamesFragment2 auto-inject {}
+    		fragment = builder.BuilderIntegrationFragment2 auto-inject {}
+    		
 			parserGenerator = {
 				options = {
 					backtrack = true

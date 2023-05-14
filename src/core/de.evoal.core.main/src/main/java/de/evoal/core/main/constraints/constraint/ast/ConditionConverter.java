@@ -10,15 +10,15 @@ import de.evoal.core.main.constraints.constraint.utils.ArithmeticNumberOperation
 import de.evoal.languages.model.ddl.DataDescription;
 import de.evoal.languages.model.ddl.DataReference;
 import de.evoal.languages.model.ddl.SelfReference;
-import de.evoal.languages.model.el.*;
-import de.evoal.languages.model.el.util.ELSwitch;
+import de.evoal.languages.model.base.*;
+import de.evoal.languages.model.base.util.BaseSwitch;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.BiFunction;
 
-public class ConditionConverter extends ELSwitch<Object> {
+public class ConditionConverter extends BaseSwitch<Object> {
     private BiFunction<Properties, Properties, Object> function;
     private final List<PropertySpecification> usedProperties = new ArrayList<>();
     private final PropertiesSpecification genoSpec;
@@ -209,7 +209,7 @@ public class ConditionConverter extends ELSwitch<Object> {
     }
 
     @Override
-    public Object caseDoubleLiteral(final DoubleLiteral object) {
+    public Object caseRealLiteral(final RealLiteral object) {
         return (BiFunction<Properties, Properties, Object>) (gen, fit) -> object.getValue();
     }
 

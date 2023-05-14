@@ -2,7 +2,7 @@
  */
 package de.evoal.languages.model.ddl.impl;
 
-import de.evoal.languages.model.ddl.DataType;
+import de.evoal.languages.model.ddl.DataTypeDefinition;
 import de.evoal.languages.model.ddl.DdlPackage;
 import de.evoal.languages.model.ddl.ScaleType;
 import de.evoal.languages.model.ddl.TypedDataDescription;
@@ -36,7 +36,7 @@ public class TypedDataDescriptionImpl extends DataDescriptionImpl implements Typ
 	 * @generated
 	 * @ordered
 	 */
-	protected DataType type;
+	protected DataTypeDefinition type;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -63,10 +63,10 @@ public class TypedDataDescriptionImpl extends DataDescriptionImpl implements Typ
 	 * @generated
 	 */
 	@Override
-	public DataType getType() {
+	public DataTypeDefinition getType() {
 		if (type != null && type.eIsProxy()) {
 			InternalEObject oldType = (InternalEObject)type;
-			type = (DataType)eResolveProxy(oldType);
+			type = (DataTypeDefinition)eResolveProxy(oldType);
 			if (type != oldType) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DdlPackage.TYPED_DATA_DESCRIPTION__TYPE, oldType, type));
@@ -80,7 +80,7 @@ public class TypedDataDescriptionImpl extends DataDescriptionImpl implements Typ
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public DataType basicGetType() {
+	public DataTypeDefinition basicGetType() {
 		return type;
 	}
 
@@ -90,8 +90,8 @@ public class TypedDataDescriptionImpl extends DataDescriptionImpl implements Typ
 	 * @generated
 	 */
 	@Override
-	public void setType(DataType newType) {
-		DataType oldType = type;
+	public void setType(DataTypeDefinition newType) {
+		DataTypeDefinition oldType = type;
 		type = newType;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DdlPackage.TYPED_DATA_DESCRIPTION__TYPE, oldType, type));
@@ -131,7 +131,7 @@ public class TypedDataDescriptionImpl extends DataDescriptionImpl implements Typ
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case DdlPackage.TYPED_DATA_DESCRIPTION__TYPE:
-				setType((DataType)newValue);
+				setType((DataTypeDefinition)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -146,7 +146,7 @@ public class TypedDataDescriptionImpl extends DataDescriptionImpl implements Typ
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case DdlPackage.TYPED_DATA_DESCRIPTION__TYPE:
-				setType((DataType)null);
+				setType((DataTypeDefinition)null);
 				return;
 		}
 		super.eUnset(featureID);

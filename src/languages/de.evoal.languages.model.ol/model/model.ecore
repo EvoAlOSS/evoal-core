@@ -3,33 +3,28 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="ol" nsURI="https://www.evoal.de/languages/ol/1.0.0" nsPrefix="ol">
   <eAnnotations source="http://www.eclipse.org/OCL/Import">
     <details key="ddl" value="platform:/resource/de.evoal.languages.model.ddl/model/model.ecore#/"/>
-    <details key="dl" value="platform:/resource/de.evoal.languages.model.dl/model/model.ecore#/"/>
-    <details key="el" value="platform:/resource/de.evoal.languages.model.el/model/model.ecore#/"/>
+    <details key="el" value="platform:/resource/de.evoal.languages.model.base/model/model.ecore#/"/>
     <details key="instance" value="platform:/resource/de.evoal.languages.model.instance/model/model.ecore#/"/>
   </eAnnotations>
-  <eClassifiers xsi:type="ecore:EClass" name="OptimisationModel">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="uses" upperBound="-1" eType="#//Use"
+  <eClassifiers xsi:type="ecore:EClass" name="OptimisationModule">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="imports" upperBound="-1"
+        eType="ecore:EClass ../../de.evoal.languages.model.base/model/model.ecore#//Import"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="instance" eType="ecore:EClass ../../de.evoal.languages.model.instance/model/model.ecore#//Instance"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="problem" eType="#//ProblemInstance"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="constraints" eType="#//Constraint"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="algorithm" eType="#//AlgorithmInstance"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Use">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="importURI" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Constraint">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="statements" upperBound="-1"
-        eType="#//ConstraintStatement" containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ConstraintStatement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="constraintExpression" eType="ecore:EClass ../../de.evoal.languages.model.el/model/model.ecore#//Call"
+  <eClassifiers xsi:type="ecore:EClass" name="ProblemInstance" eSuperTypes="../../de.evoal.languages.model.base/model/model.ecore#//Instance">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="documentation" eType="ecore:EClass ../../de.evoal.languages.model.base/model/model.ecore#//Array"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="FunctionName" eSuperTypes="../../de.evoal.languages.model.el/model/model.ecore#//FunctionName">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="definition" eType="ecore:EClass ../../de.evoal.languages.model.dl/model/model.ecore#//FunctionDefinition"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="DataReference" eSuperTypes="../../de.evoal.languages.model.el/model/model.ecore#//ValueReference">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="definition" eType="ecore:EClass ../../de.evoal.languages.model.ddl/model/model.ecore#//DataDescription"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AlgorithmInstance" eSuperTypes="../../de.evoal.languages.model.base/model/model.ecore#//Instance">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="problem" lowerBound="1"
+        eType="#//ProblemInstance"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="documentation" eType="ecore:EClass ../../de.evoal.languages.model.base/model/model.ecore#//Array"
+        containment="true"/>
   </eClassifiers>
 </ecore:EPackage>

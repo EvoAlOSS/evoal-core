@@ -12,7 +12,7 @@ import de.evoal.core.api.optimisation.OptimisationFunction;
 import de.evoal.core.api.optimisation.OptimisationValueComparator;
 import de.evoal.core.api.optimisation.OptimisationValue;
 import de.evoal.core.api.properties.Properties;
-import de.evoal.languages.model.instance.Instance;
+import de.evoal.languages.model.base.Instance;
 import lombok.extern.slf4j.Slf4j;
 
 @ApplicationScoped
@@ -31,7 +31,7 @@ public class FitnessFactory {
 	 * </ul>
 	 */
 	@Produces @Dependent
-	public JeneticsFitnessFunction create(final @ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.optimisation-function.function") Instance fitnessConfig,
+	public JeneticsFitnessFunction create(final @ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.optimisation-function") Instance fitnessConfig,
 										  final @ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.comparator") Instance comparatorConfig) {
 		final String fitnessName = fitnessConfig.getDefinition().getName();
 		final String comparatorName = comparatorConfig.getDefinition().getName();

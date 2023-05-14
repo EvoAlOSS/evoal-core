@@ -1,0 +1,11 @@
+import "definitions" from de.evoal.core.optimisation;
+import "definitions" from de.evoal.generator.generator;
+
+module de.evoal.generator.optimisation {
+	/**
+	 * Known optimisation functions for benchmarking purposes.
+	 */
+	type 'benchmark-function' extends 'optimisation-function' {
+	        benchmark : instance benchmark;	
+	}
+}

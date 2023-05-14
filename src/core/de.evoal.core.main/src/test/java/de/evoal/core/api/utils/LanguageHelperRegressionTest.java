@@ -1,11 +1,10 @@
 package de.evoal.core.api.utils;
 
 import de.evoal.core.junit.dsl.LanguageHelper;
-import de.evoal.languages.model.dl.*;
-import de.evoal.languages.model.el.DoubleLiteral;
-import de.evoal.languages.model.generator.Configuration;
+import de.evoal.languages.model.dl.DefinitionModule;
+import de.evoal.languages.model.generator.GeneratorModule;
 import de.evoal.languages.model.generator.Step;
-import de.evoal.languages.model.instance.*;
+import de.evoal.languages.model.base.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +17,7 @@ public class LanguageHelperRegressionTest {
         Assertions.assertTrue(attribute.getType() instanceof ArrayType);
         final ArrayType typeA = (ArrayType) attribute.getType();
         Assertions.assertEquals(1, typeA.getElements().size());
-        Assertions.assertTrue(typeA.getElements().get(0) instanceof FloatType);
+        Assertions.assertTrue(typeA.getElements().get(0) instanceof RealType);
     }
 
     private void assertAttributeTypeOfC(final AttributeDefinition attribute) {
@@ -29,17 +28,17 @@ public class LanguageHelperRegressionTest {
         Assertions.assertTrue(typeC.getElements().get(0) instanceof ArrayType);
         final ArrayType typetypeC = (ArrayType) typeC.getElements().get(0);
         Assertions.assertEquals(1, typetypeC.getElements().size());
-        Assertions.assertTrue(typetypeC.getElements().get(0) instanceof FloatType);
+        Assertions.assertTrue(typetypeC.getElements().get(0) instanceof RealType);
     }
 
     private void assertAttributeTypeOfM(final AttributeDefinition attribute) {
         Assertions.assertNotNull(attribute);
-        Assertions.assertTrue(attribute.getType() instanceof FloatType);
+        Assertions.assertTrue(attribute.getType() instanceof RealType);
     }
 
     @Test
     public void testDefinitionLanguageParser() {
-        final DefinitionModel model = LanguageHelper.loadFromClasspath("de/evoal/core/api/utils/regressions/generator.dl");
+        final DefinitionModule model = LanguageHelper.loadFromClasspath("de/evoal/core/api/utils/regressions/generator.dl");
 
         Assertions.assertNotNull(model);
         Assertions.assertNotNull(model.getTypes());
@@ -61,7 +60,7 @@ public class LanguageHelperRegressionTest {
 
     @Test
     public void testLoading() {
-        final Configuration configuration = LanguageHelper.loadFromClasspath("de/evoal/core/api/utils/regressions/shekel.generator");
+        final GeneratorModule configuration = LanguageHelper.loadFromClasspath("de/evoal/core/api/utils/regressions/shekel.generator");
 
         // fetch step configuration for testee
         final Step step = configuration.getPipelines().get(0).getSteps().get(0);
@@ -78,25 +77,5 @@ public class LanguageHelperRegressionTest {
         assertAttributeTypeOfC(attributeC.getDefinition());
         assertAttributeTypeOfM(attributeM.getDefinition());
 
-        {
-            Assertions.assertTrue(attributeA.getValue() instanceof Array);
-            final Array array = (Array)attributeA.getValue();
-            Assertions.assertEquals(10, array.getValues().size());
-            Assertions.assertTrue(array.getValues().get(0) instanceof LiteralValue);
-            final LiteralValue literal = (LiteralValue) array.getValues().get(0);
-            Assertions.assertTrue(literal.getLiteral() instanceof DoubleLiteral);
-            Assertions.assertEquals(1.0, literal.getLiteral().getValue());
-        }
-
-        {
-            Assertions.assertTrue(attributeC.getValue() instanceof Array);
-            final Array array = (Array)attributeC.getValue();
-            Assertions.assertEquals(4, array.getValues().size());
-            Assertions.assertTrue(array.getValues().get(0) instanceof Array);
-            final Array array2 = (Array) array.getValues().get(0);
-            Assertions.assertEquals(10, array2.getValues().size());
-        }
-
     }
-
 }

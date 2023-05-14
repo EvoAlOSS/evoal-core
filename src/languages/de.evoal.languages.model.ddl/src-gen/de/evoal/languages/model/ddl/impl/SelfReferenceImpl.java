@@ -2,7 +2,7 @@
  */
 package de.evoal.languages.model.ddl.impl;
 
-import de.evoal.languages.model.el.impl.ValueReferenceImpl;
+import de.evoal.languages.model.base.impl.ValueReferenceImpl;
 
 import de.evoal.languages.model.ddl.DdlPackage;
 import de.evoal.languages.model.ddl.SelfReference;

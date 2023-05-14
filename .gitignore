@@ -14,3 +14,5 @@ test-bin
 xtend-gen
 .idea
 *.iml
+/evoal/
+*.java._trace

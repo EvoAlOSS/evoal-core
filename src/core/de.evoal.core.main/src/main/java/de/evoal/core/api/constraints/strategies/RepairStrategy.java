@@ -1,7 +1,7 @@
 package de.evoal.core.api.constraints.strategies;
 
 import de.evoal.core.api.properties.Properties;
-import de.evoal.languages.model.instance.Instance;
+import de.evoal.languages.model.base.Instance;
 
 /**
  * Repair strategy used by kill-at-birth.

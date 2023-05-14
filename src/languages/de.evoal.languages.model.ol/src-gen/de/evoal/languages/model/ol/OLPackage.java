@@ -3,7 +3,7 @@
  */
 package de.evoal.languages.model.ol;
 
-import de.evoal.languages.model.el.ELPackage;
+import de.evoal.languages.model.base.BasePackage;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -23,7 +23,7 @@ import org.eclipse.emf.ecore.EReference;
  * <!-- end-user-doc -->
  * @see de.evoal.languages.model.ol.OLFactory
  * @model kind="package"
- *        annotation="http://www.eclipse.org/OCL/Import ddl='platform:/resource/de.evoal.languages.model.ddl/model/model.ecore#/' dl='platform:/resource/de.evoal.languages.model.dl/model/model.ecore#/' el='platform:/resource/de.evoal.languages.model.el/model/model.ecore#/' instance='platform:/resource/de.evoal.languages.model.instance/model/model.ecore#/'"
+ *        annotation="http://www.eclipse.org/OCL/Import ddl='platform:/resource/de.evoal.languages.model.ddl/model/model.ecore#/' el='platform:/resource/de.evoal.languages.model.base/model/model.ecore#/' instance='platform:/resource/de.evoal.languages.model.instance/model/model.ecore#/'"
  * @generated
  */
 public interface OLPackage extends EPackage {
@@ -60,144 +60,69 @@ public interface OLPackage extends EPackage {
 	OLPackage eINSTANCE = de.evoal.languages.model.ol.impl.OLPackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.ol.impl.OptimisationModelImpl <em>Optimisation Model</em>}' class.
+	 * The meta object id for the '{@link de.evoal.languages.model.ol.impl.OptimisationModuleImpl <em>Optimisation Module</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.ol.impl.OptimisationModelImpl
-	 * @see de.evoal.languages.model.ol.impl.OLPackageImpl#getOptimisationModel()
+	 * @see de.evoal.languages.model.ol.impl.OptimisationModuleImpl
+	 * @see de.evoal.languages.model.ol.impl.OLPackageImpl#getOptimisationModule()
 	 * @generated
 	 */
-	int OPTIMISATION_MODEL = 0;
+	int OPTIMISATION_MODULE = 0;
 
 	/**
-	 * The feature id for the '<em><b>Uses</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Imports</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPTIMISATION_MODEL__USES = 0;
+	int OPTIMISATION_MODULE__IMPORTS = 0;
 
 	/**
-	 * The feature id for the '<em><b>Instance</b></em>' containment reference.
+	 * The feature id for the '<em><b>Problem</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPTIMISATION_MODEL__INSTANCE = 1;
+	int OPTIMISATION_MODULE__PROBLEM = 1;
 
 	/**
-	 * The feature id for the '<em><b>Constraints</b></em>' containment reference.
+	 * The feature id for the '<em><b>Algorithm</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPTIMISATION_MODEL__CONSTRAINTS = 2;
+	int OPTIMISATION_MODULE__ALGORITHM = 2;
 
 	/**
-	 * The number of structural features of the '<em>Optimisation Model</em>' class.
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPTIMISATION_MODEL_FEATURE_COUNT = 3;
+	int OPTIMISATION_MODULE__NAME = 3;
 
 	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.ol.impl.UseImpl <em>Use</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.ol.impl.UseImpl
-	 * @see de.evoal.languages.model.ol.impl.OLPackageImpl#getUse()
-	 * @generated
-	 */
-	int USE = 1;
-
-	/**
-	 * The feature id for the '<em><b>Import URI</b></em>' attribute.
+	 * The number of structural features of the '<em>Optimisation Module</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int USE__IMPORT_URI = 0;
+	int OPTIMISATION_MODULE_FEATURE_COUNT = 4;
 
 	/**
-	 * The number of structural features of the '<em>Use</em>' class.
+	 * The meta object id for the '{@link de.evoal.languages.model.ol.impl.ProblemInstanceImpl <em>Problem Instance</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int USE_FEATURE_COUNT = 1;
-
-	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.ol.impl.ConstraintImpl <em>Constraint</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.ol.impl.ConstraintImpl
-	 * @see de.evoal.languages.model.ol.impl.OLPackageImpl#getConstraint()
+	 * @see de.evoal.languages.model.ol.impl.ProblemInstanceImpl
+	 * @see de.evoal.languages.model.ol.impl.OLPackageImpl#getProblemInstance()
 	 * @generated
 	 */
-	int CONSTRAINT = 2;
-
-	/**
-	 * The feature id for the '<em><b>Statements</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONSTRAINT__STATEMENTS = 0;
-
-	/**
-	 * The number of structural features of the '<em>Constraint</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONSTRAINT_FEATURE_COUNT = 1;
-
-	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.ol.impl.ConstraintStatementImpl <em>Constraint Statement</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.ol.impl.ConstraintStatementImpl
-	 * @see de.evoal.languages.model.ol.impl.OLPackageImpl#getConstraintStatement()
-	 * @generated
-	 */
-	int CONSTRAINT_STATEMENT = 3;
-
-	/**
-	 * The feature id for the '<em><b>Constraint Expression</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONSTRAINT_STATEMENT__CONSTRAINT_EXPRESSION = 0;
-
-	/**
-	 * The number of structural features of the '<em>Constraint Statement</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONSTRAINT_STATEMENT_FEATURE_COUNT = 1;
-
-	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.ol.impl.FunctionNameImpl <em>Function Name</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.ol.impl.FunctionNameImpl
-	 * @see de.evoal.languages.model.ol.impl.OLPackageImpl#getFunctionName()
-	 * @generated
-	 */
-	int FUNCTION_NAME = 4;
+	int PROBLEM_INSTANCE = 1;
 
 	/**
 	 * The feature id for the '<em><b>Definition</b></em>' reference.
@@ -206,26 +131,53 @@ public interface OLPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FUNCTION_NAME__DEFINITION = ELPackage.FUNCTION_NAME_FEATURE_COUNT + 0;
+	int PROBLEM_INSTANCE__DEFINITION = BasePackage.INSTANCE__DEFINITION;
 
 	/**
-	 * The number of structural features of the '<em>Function Name</em>' class.
+	 * The feature id for the '<em><b>Attributes</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FUNCTION_NAME_FEATURE_COUNT = ELPackage.FUNCTION_NAME_FEATURE_COUNT + 1;
+	int PROBLEM_INSTANCE__ATTRIBUTES = BasePackage.INSTANCE__ATTRIBUTES;
 
 	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.ol.impl.DataReferenceImpl <em>Data Reference</em>}' class.
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.ol.impl.DataReferenceImpl
-	 * @see de.evoal.languages.model.ol.impl.OLPackageImpl#getDataReference()
+	 * @generated
+	 * @ordered
+	 */
+	int PROBLEM_INSTANCE__NAME = BasePackage.INSTANCE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROBLEM_INSTANCE__DOCUMENTATION = BasePackage.INSTANCE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Problem Instance</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROBLEM_INSTANCE_FEATURE_COUNT = BasePackage.INSTANCE_FEATURE_COUNT + 2;
+
+	/**
+	 * The meta object id for the '{@link de.evoal.languages.model.ol.impl.AlgorithmInstanceImpl <em>Algorithm Instance</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.evoal.languages.model.ol.impl.AlgorithmInstanceImpl
+	 * @see de.evoal.languages.model.ol.impl.OLPackageImpl#getAlgorithmInstance()
 	 * @generated
 	 */
-	int DATA_REFERENCE = 5;
+	int ALGORITHM_INSTANCE = 2;
 
 	/**
 	 * The feature id for the '<em><b>Definition</b></em>' reference.
@@ -234,165 +186,162 @@ public interface OLPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DATA_REFERENCE__DEFINITION = ELPackage.VALUE_REFERENCE_FEATURE_COUNT + 0;
+	int ALGORITHM_INSTANCE__DEFINITION = BasePackage.INSTANCE__DEFINITION;
 
 	/**
-	 * The number of structural features of the '<em>Data Reference</em>' class.
+	 * The feature id for the '<em><b>Attributes</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DATA_REFERENCE_FEATURE_COUNT = ELPackage.VALUE_REFERENCE_FEATURE_COUNT + 1;
+	int ALGORITHM_INSTANCE__ATTRIBUTES = BasePackage.INSTANCE__ATTRIBUTES;
+
+	/**
+	 * The feature id for the '<em><b>Problem</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ALGORITHM_INSTANCE__PROBLEM = BasePackage.INSTANCE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ALGORITHM_INSTANCE__DOCUMENTATION = BasePackage.INSTANCE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Algorithm Instance</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ALGORITHM_INSTANCE_FEATURE_COUNT = BasePackage.INSTANCE_FEATURE_COUNT + 2;
 
 
 	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.ol.OptimisationModel <em>Optimisation Model</em>}'.
+	 * Returns the meta object for class '{@link de.evoal.languages.model.ol.OptimisationModule <em>Optimisation Module</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Optimisation Model</em>'.
-	 * @see de.evoal.languages.model.ol.OptimisationModel
+	 * @return the meta object for class '<em>Optimisation Module</em>'.
+	 * @see de.evoal.languages.model.ol.OptimisationModule
 	 * @generated
 	 */
-	EClass getOptimisationModel();
+	EClass getOptimisationModule();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.ol.OptimisationModel#getUses <em>Uses</em>}'.
+	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.ol.OptimisationModule#getImports <em>Imports</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Uses</em>'.
-	 * @see de.evoal.languages.model.ol.OptimisationModel#getUses()
-	 * @see #getOptimisationModel()
+	 * @return the meta object for the containment reference list '<em>Imports</em>'.
+	 * @see de.evoal.languages.model.ol.OptimisationModule#getImports()
+	 * @see #getOptimisationModule()
 	 * @generated
 	 */
-	EReference getOptimisationModel_Uses();
+	EReference getOptimisationModule_Imports();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link de.evoal.languages.model.ol.OptimisationModel#getInstance <em>Instance</em>}'.
+	 * Returns the meta object for the containment reference '{@link de.evoal.languages.model.ol.OptimisationModule#getProblem <em>Problem</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Instance</em>'.
-	 * @see de.evoal.languages.model.ol.OptimisationModel#getInstance()
-	 * @see #getOptimisationModel()
+	 * @return the meta object for the containment reference '<em>Problem</em>'.
+	 * @see de.evoal.languages.model.ol.OptimisationModule#getProblem()
+	 * @see #getOptimisationModule()
 	 * @generated
 	 */
-	EReference getOptimisationModel_Instance();
+	EReference getOptimisationModule_Problem();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link de.evoal.languages.model.ol.OptimisationModel#getConstraints <em>Constraints</em>}'.
+	 * Returns the meta object for the containment reference '{@link de.evoal.languages.model.ol.OptimisationModule#getAlgorithm <em>Algorithm</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Constraints</em>'.
-	 * @see de.evoal.languages.model.ol.OptimisationModel#getConstraints()
-	 * @see #getOptimisationModel()
+	 * @return the meta object for the containment reference '<em>Algorithm</em>'.
+	 * @see de.evoal.languages.model.ol.OptimisationModule#getAlgorithm()
+	 * @see #getOptimisationModule()
 	 * @generated
 	 */
-	EReference getOptimisationModel_Constraints();
+	EReference getOptimisationModule_Algorithm();
 
 	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.ol.Use <em>Use</em>}'.
+	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.ol.OptimisationModule#getName <em>Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Use</em>'.
-	 * @see de.evoal.languages.model.ol.Use
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see de.evoal.languages.model.ol.OptimisationModule#getName()
+	 * @see #getOptimisationModule()
 	 * @generated
 	 */
-	EClass getUse();
+	EAttribute getOptimisationModule_Name();
 
 	/**
-	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.ol.Use#getImportURI <em>Import URI</em>}'.
+	 * Returns the meta object for class '{@link de.evoal.languages.model.ol.ProblemInstance <em>Problem Instance</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Import URI</em>'.
-	 * @see de.evoal.languages.model.ol.Use#getImportURI()
-	 * @see #getUse()
+	 * @return the meta object for class '<em>Problem Instance</em>'.
+	 * @see de.evoal.languages.model.ol.ProblemInstance
 	 * @generated
 	 */
-	EAttribute getUse_ImportURI();
+	EClass getProblemInstance();
 
 	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.ol.Constraint <em>Constraint</em>}'.
+	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.ol.ProblemInstance#getName <em>Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Constraint</em>'.
-	 * @see de.evoal.languages.model.ol.Constraint
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see de.evoal.languages.model.ol.ProblemInstance#getName()
+	 * @see #getProblemInstance()
 	 * @generated
 	 */
-	EClass getConstraint();
+	EAttribute getProblemInstance_Name();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.ol.Constraint#getStatements <em>Statements</em>}'.
+	 * Returns the meta object for the containment reference '{@link de.evoal.languages.model.ol.ProblemInstance#getDocumentation <em>Documentation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Statements</em>'.
-	 * @see de.evoal.languages.model.ol.Constraint#getStatements()
-	 * @see #getConstraint()
+	 * @return the meta object for the containment reference '<em>Documentation</em>'.
+	 * @see de.evoal.languages.model.ol.ProblemInstance#getDocumentation()
+	 * @see #getProblemInstance()
 	 * @generated
 	 */
-	EReference getConstraint_Statements();
+	EReference getProblemInstance_Documentation();
 
 	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.ol.ConstraintStatement <em>Constraint Statement</em>}'.
+	 * Returns the meta object for class '{@link de.evoal.languages.model.ol.AlgorithmInstance <em>Algorithm Instance</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Constraint Statement</em>'.
-	 * @see de.evoal.languages.model.ol.ConstraintStatement
+	 * @return the meta object for class '<em>Algorithm Instance</em>'.
+	 * @see de.evoal.languages.model.ol.AlgorithmInstance
 	 * @generated
 	 */
-	EClass getConstraintStatement();
+	EClass getAlgorithmInstance();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link de.evoal.languages.model.ol.ConstraintStatement#getConstraintExpression <em>Constraint Expression</em>}'.
+	 * Returns the meta object for the reference '{@link de.evoal.languages.model.ol.AlgorithmInstance#getProblem <em>Problem</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Constraint Expression</em>'.
-	 * @see de.evoal.languages.model.ol.ConstraintStatement#getConstraintExpression()
-	 * @see #getConstraintStatement()
+	 * @return the meta object for the reference '<em>Problem</em>'.
+	 * @see de.evoal.languages.model.ol.AlgorithmInstance#getProblem()
+	 * @see #getAlgorithmInstance()
 	 * @generated
 	 */
-	EReference getConstraintStatement_ConstraintExpression();
+	EReference getAlgorithmInstance_Problem();
 
 	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.ol.FunctionName <em>Function Name</em>}'.
+	 * Returns the meta object for the containment reference '{@link de.evoal.languages.model.ol.AlgorithmInstance#getDocumentation <em>Documentation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Function Name</em>'.
-	 * @see de.evoal.languages.model.ol.FunctionName
+	 * @return the meta object for the containment reference '<em>Documentation</em>'.
+	 * @see de.evoal.languages.model.ol.AlgorithmInstance#getDocumentation()
+	 * @see #getAlgorithmInstance()
 	 * @generated
 	 */
-	EClass getFunctionName();
-
-	/**
-	 * Returns the meta object for the reference '{@link de.evoal.languages.model.ol.FunctionName#getDefinition <em>Definition</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Definition</em>'.
-	 * @see de.evoal.languages.model.ol.FunctionName#getDefinition()
-	 * @see #getFunctionName()
-	 * @generated
-	 */
-	EReference getFunctionName_Definition();
-
-	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.ol.DataReference <em>Data Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Data Reference</em>'.
-	 * @see de.evoal.languages.model.ol.DataReference
-	 * @generated
-	 */
-	EClass getDataReference();
-
-	/**
-	 * Returns the meta object for the reference '{@link de.evoal.languages.model.ol.DataReference#getDefinition <em>Definition</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Definition</em>'.
-	 * @see de.evoal.languages.model.ol.DataReference#getDefinition()
-	 * @see #getDataReference()
-	 * @generated
-	 */
-	EReference getDataReference_Definition();
+	EReference getAlgorithmInstance_Documentation();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -417,128 +366,98 @@ public interface OLPackage extends EPackage {
 	 */
 	interface Literals {
 		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.ol.impl.OptimisationModelImpl <em>Optimisation Model</em>}' class.
+		 * The meta object literal for the '{@link de.evoal.languages.model.ol.impl.OptimisationModuleImpl <em>Optimisation Module</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.ol.impl.OptimisationModelImpl
-		 * @see de.evoal.languages.model.ol.impl.OLPackageImpl#getOptimisationModel()
+		 * @see de.evoal.languages.model.ol.impl.OptimisationModuleImpl
+		 * @see de.evoal.languages.model.ol.impl.OLPackageImpl#getOptimisationModule()
 		 * @generated
 		 */
-		EClass OPTIMISATION_MODEL = eINSTANCE.getOptimisationModel();
+		EClass OPTIMISATION_MODULE = eINSTANCE.getOptimisationModule();
 
 		/**
-		 * The meta object literal for the '<em><b>Uses</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Imports</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference OPTIMISATION_MODEL__USES = eINSTANCE.getOptimisationModel_Uses();
+		EReference OPTIMISATION_MODULE__IMPORTS = eINSTANCE.getOptimisationModule_Imports();
 
 		/**
-		 * The meta object literal for the '<em><b>Instance</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Problem</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference OPTIMISATION_MODEL__INSTANCE = eINSTANCE.getOptimisationModel_Instance();
+		EReference OPTIMISATION_MODULE__PROBLEM = eINSTANCE.getOptimisationModule_Problem();
 
 		/**
-		 * The meta object literal for the '<em><b>Constraints</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Algorithm</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference OPTIMISATION_MODEL__CONSTRAINTS = eINSTANCE.getOptimisationModel_Constraints();
+		EReference OPTIMISATION_MODULE__ALGORITHM = eINSTANCE.getOptimisationModule_Algorithm();
 
 		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.ol.impl.UseImpl <em>Use</em>}' class.
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.ol.impl.UseImpl
-		 * @see de.evoal.languages.model.ol.impl.OLPackageImpl#getUse()
 		 * @generated
 		 */
-		EClass USE = eINSTANCE.getUse();
+		EAttribute OPTIMISATION_MODULE__NAME = eINSTANCE.getOptimisationModule_Name();
 
 		/**
-		 * The meta object literal for the '<em><b>Import URI</b></em>' attribute feature.
+		 * The meta object literal for the '{@link de.evoal.languages.model.ol.impl.ProblemInstanceImpl <em>Problem Instance</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
+		 * @see de.evoal.languages.model.ol.impl.ProblemInstanceImpl
+		 * @see de.evoal.languages.model.ol.impl.OLPackageImpl#getProblemInstance()
 		 * @generated
 		 */
-		EAttribute USE__IMPORT_URI = eINSTANCE.getUse_ImportURI();
+		EClass PROBLEM_INSTANCE = eINSTANCE.getProblemInstance();
 
 		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.ol.impl.ConstraintImpl <em>Constraint</em>}' class.
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.ol.impl.ConstraintImpl
-		 * @see de.evoal.languages.model.ol.impl.OLPackageImpl#getConstraint()
 		 * @generated
 		 */
-		EClass CONSTRAINT = eINSTANCE.getConstraint();
+		EAttribute PROBLEM_INSTANCE__NAME = eINSTANCE.getProblemInstance_Name();
 
 		/**
-		 * The meta object literal for the '<em><b>Statements</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Documentation</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CONSTRAINT__STATEMENTS = eINSTANCE.getConstraint_Statements();
+		EReference PROBLEM_INSTANCE__DOCUMENTATION = eINSTANCE.getProblemInstance_Documentation();
 
 		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.ol.impl.ConstraintStatementImpl <em>Constraint Statement</em>}' class.
+		 * The meta object literal for the '{@link de.evoal.languages.model.ol.impl.AlgorithmInstanceImpl <em>Algorithm Instance</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.ol.impl.ConstraintStatementImpl
-		 * @see de.evoal.languages.model.ol.impl.OLPackageImpl#getConstraintStatement()
+		 * @see de.evoal.languages.model.ol.impl.AlgorithmInstanceImpl
+		 * @see de.evoal.languages.model.ol.impl.OLPackageImpl#getAlgorithmInstance()
 		 * @generated
 		 */
-		EClass CONSTRAINT_STATEMENT = eINSTANCE.getConstraintStatement();
+		EClass ALGORITHM_INSTANCE = eINSTANCE.getAlgorithmInstance();
 
 		/**
-		 * The meta object literal for the '<em><b>Constraint Expression</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Problem</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CONSTRAINT_STATEMENT__CONSTRAINT_EXPRESSION = eINSTANCE.getConstraintStatement_ConstraintExpression();
+		EReference ALGORITHM_INSTANCE__PROBLEM = eINSTANCE.getAlgorithmInstance_Problem();
 
 		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.ol.impl.FunctionNameImpl <em>Function Name</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.ol.impl.FunctionNameImpl
-		 * @see de.evoal.languages.model.ol.impl.OLPackageImpl#getFunctionName()
-		 * @generated
-		 */
-		EClass FUNCTION_NAME = eINSTANCE.getFunctionName();
-
-		/**
-		 * The meta object literal for the '<em><b>Definition</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Documentation</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference FUNCTION_NAME__DEFINITION = eINSTANCE.getFunctionName_Definition();
-
-		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.ol.impl.DataReferenceImpl <em>Data Reference</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.ol.impl.DataReferenceImpl
-		 * @see de.evoal.languages.model.ol.impl.OLPackageImpl#getDataReference()
-		 * @generated
-		 */
-		EClass DATA_REFERENCE = eINSTANCE.getDataReference();
-
-		/**
-		 * The meta object literal for the '<em><b>Definition</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference DATA_REFERENCE__DEFINITION = eINSTANCE.getDataReference_Definition();
+		EReference ALGORITHM_INSTANCE__DOCUMENTATION = eINSTANCE.getAlgorithmInstance_Documentation();
 
 	}
 

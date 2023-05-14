@@ -41,7 +41,7 @@ public class SingleBitFlipMutator<
     ) {
         final MSeq<BitGene> genes = MSeq.of(chromosome);
 
-        final int index = random.nextInt();
+        final int index = random.nextInt(0, genes.size());
 
         final BitGene gene = genes.get(index);
         genes.set(index, BitGene.of(!gene.bit()));

@@ -2,35 +2,32 @@ grammar de.evoal.languages.model.ol.dsl.OptimisationLanguage with de.evoal.langu
 
 import "https://www.evoal.de/languages/ol/1.0.0" 
 
-import "https://www.evoal.de/languages/dl/1.0.0" as dl
 import "https://www.evoal.de/languages/ddl/1.0.0" as ddl
 import "https://www.evoal.de/languages/instance/1.0.0" as instance
-import "https://www.evoal.de/languages/el/1.0.0" as el
+import "https://www.evoal.de/languages/base/1.0.0" as base
 
-OptimisationModelRule returns OptimisationModel:
-        (uses += UseRule)*
-
-        instance = InstanceRule
-
-        (constraints = ConstraintRule)?
+OptimisationModelRule returns OptimisationModule:
+	(imports += ImportRule)*
+	
+	"module" name = QualifiedName "{"
+		(problem = ProblemRule)?
+	
+		(algorithm = AlgorithmInstanceRule)?
+	"}"
 ;
 
-UseRule returns Use:
-        'use' importURI = STRING ';'
+ProblemRule returns ProblemInstance:
+	"specify" definition=[base::TypeDefinition|QualifiedName] name = StringOrId "{"
+		attributes+=AttributeRule*
+	
+		("documenting" ":=" documentation = ArrayRule ';')?
+	"}"
 ;
 
-ConstraintRule returns Constraint:
-        {Constraint}
-        "constraints" "{"
-                (statements += ConstraintStatementRule)*
-        "}";
-
-
-ConstraintStatementRule returns ConstraintStatement:
-        constraintExpression = CallRule ';'
-;
-
-@Override
-FunctionNameRule returns FunctionName:
-        definition = [dl::FunctionDefinition]
+AlgorithmInstanceRule returns AlgorithmInstance:
+	"configure" definition=[base::TypeDefinition|QualifiedName] "for" problem = [ProblemInstance|QualifiedName] "{"
+		attributes+=AttributeRule*
+		
+		("documenting" ":=" documentation = ArrayRule ';')?
+	"}"
 ;

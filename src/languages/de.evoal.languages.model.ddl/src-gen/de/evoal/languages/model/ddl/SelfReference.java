@@ -2,7 +2,7 @@
  */
 package de.evoal.languages.model.ddl;
 
-import de.evoal.languages.model.el.ValueReference;
+import de.evoal.languages.model.base.ValueReference;
 
 /**
  * <!-- begin-user-doc -->

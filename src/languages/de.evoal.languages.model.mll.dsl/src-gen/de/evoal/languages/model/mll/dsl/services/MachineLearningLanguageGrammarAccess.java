@@ -6,7 +6,7 @@ package de.evoal.languages.model.mll.dsl.services;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import de.evoal.languages.model.el.dsl.services.ExpressionLanguageGrammarAccess;
+import de.evoal.languages.model.base.dsl.services.BaseLanguageGrammarAccess;
 import de.evoal.languages.model.instance.dsl.services.InstanceLanguageGrammarAccess;
 import java.util.List;
 import org.eclipse.xtext.Action;
@@ -28,118 +28,114 @@ import org.eclipse.xtext.service.GrammarProvider;
 @Singleton
 public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.AbstractGrammarElementFinder {
 	
-	public class MachineLearningConfigurationRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.mll.dsl.MachineLearningLanguage.MachineLearningConfigurationRule");
+	public class MachineLearningModuleRuleElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.mll.dsl.MachineLearningLanguage.MachineLearningModuleRule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cUsesAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cUsesUseRuleParserRuleCall_0_0 = (RuleCall)cUsesAssignment_0.eContents().get(0);
-		private final Assignment cDefinitionsAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cDefinitionsSurrogateDefinitionRuleParserRuleCall_1_0 = (RuleCall)cDefinitionsAssignment_1.eContents().get(0);
-		private final Assignment cStatementsAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cStatementsStatementRuleParserRuleCall_2_0 = (RuleCall)cStatementsAssignment_2.eContents().get(0);
+		private final Assignment cImportsAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cImportsImportRuleParserRuleCall_0_0 = (RuleCall)cImportsAssignment_0.eContents().get(0);
+		private final Keyword cModuleKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cNameQualifiedNameParserRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
+		private final Keyword cLeftCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cDefinitionsAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cDefinitionsSurrogateDefinitionRuleParserRuleCall_4_0 = (RuleCall)cDefinitionsAssignment_4.eContents().get(0);
+		private final Assignment cStatementsAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final RuleCall cStatementsStatementRuleParserRuleCall_5_0 = (RuleCall)cStatementsAssignment_5.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
-		//MachineLearningConfigurationRule returns MachineLearningConfiguration:
-		//    (uses += UseRule)*
+		//MachineLearningModuleRule returns MachineLearningModule:
+		//    (imports += ImportRule)*
+		//    "module" name = QualifiedName "{"
+		//        (definitions+=SurrogateDefinitionRule)*
+		//        (statements += StatementRule)*
+		//    "}"
+		//;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//(imports += ImportRule)*
+		//"module" name = QualifiedName "{"
 		//    (definitions+=SurrogateDefinitionRule)*
 		//    (statements += StatementRule)*
-		//;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//(uses += UseRule)*
-		//(definitions+=SurrogateDefinitionRule)*
-		//(statements += StatementRule)*
+		//"}"
 		public Group getGroup() { return cGroup; }
 		
-		//(uses += UseRule)*
-		public Assignment getUsesAssignment_0() { return cUsesAssignment_0; }
+		//(imports += ImportRule)*
+		public Assignment getImportsAssignment_0() { return cImportsAssignment_0; }
 		
-		//UseRule
-		public RuleCall getUsesUseRuleParserRuleCall_0_0() { return cUsesUseRuleParserRuleCall_0_0; }
+		//ImportRule
+		public RuleCall getImportsImportRuleParserRuleCall_0_0() { return cImportsImportRuleParserRuleCall_0_0; }
+		
+		//"module"
+		public Keyword getModuleKeyword_1() { return cModuleKeyword_1; }
+		
+		//name = QualifiedName
+		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
+		
+		//QualifiedName
+		public RuleCall getNameQualifiedNameParserRuleCall_2_0() { return cNameQualifiedNameParserRuleCall_2_0; }
+		
+		//"{"
+		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
 		
 		//(definitions+=SurrogateDefinitionRule)*
-		public Assignment getDefinitionsAssignment_1() { return cDefinitionsAssignment_1; }
+		public Assignment getDefinitionsAssignment_4() { return cDefinitionsAssignment_4; }
 		
 		//SurrogateDefinitionRule
-		public RuleCall getDefinitionsSurrogateDefinitionRuleParserRuleCall_1_0() { return cDefinitionsSurrogateDefinitionRuleParserRuleCall_1_0; }
+		public RuleCall getDefinitionsSurrogateDefinitionRuleParserRuleCall_4_0() { return cDefinitionsSurrogateDefinitionRuleParserRuleCall_4_0; }
 		
 		//(statements += StatementRule)*
-		public Assignment getStatementsAssignment_2() { return cStatementsAssignment_2; }
+		public Assignment getStatementsAssignment_5() { return cStatementsAssignment_5; }
 		
 		//StatementRule
-		public RuleCall getStatementsStatementRuleParserRuleCall_2_0() { return cStatementsStatementRuleParserRuleCall_2_0; }
-	}
-	public class UseRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.mll.dsl.MachineLearningLanguage.UseRule");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cUseKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cImportURIAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cImportURISTRINGTerminalRuleCall_1_0 = (RuleCall)cImportURIAssignment_1.eContents().get(0);
-		private final Keyword cSemicolonKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		public RuleCall getStatementsStatementRuleParserRuleCall_5_0() { return cStatementsStatementRuleParserRuleCall_5_0; }
 		
-		//UseRule returns Use:
-		//    'use' importURI = STRING ';'
-		//;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//'use' importURI = STRING ';'
-		public Group getGroup() { return cGroup; }
-		
-		//'use'
-		public Keyword getUseKeyword_0() { return cUseKeyword_0; }
-		
-		//importURI = STRING
-		public Assignment getImportURIAssignment_1() { return cImportURIAssignment_1; }
-		
-		//STRING
-		public RuleCall getImportURISTRINGTerminalRuleCall_1_0() { return cImportURISTRINGTerminalRuleCall_1_0; }
-		
-		//';'
-		public Keyword getSemicolonKeyword_2() { return cSemicolonKeyword_2; }
+		//"}"
+		public Keyword getRightCurlyBracketKeyword_6() { return cRightCurlyBracketKeyword_6; }
 	}
 	public class SurrogateDefinitionRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.mll.dsl.MachineLearningLanguage.SurrogateDefinitionRule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cPredictionKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cNameSTRINGTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final RuleCall cNameStringOrIdParserRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		private final Keyword cMapsKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		private final Assignment cInputsAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final CrossReference cInputsDataDescriptionCrossReference_3_0 = (CrossReference)cInputsAssignment_3.eContents().get(0);
-		private final RuleCall cInputsDataDescriptionStringOrIdParserRuleCall_3_0_1 = (RuleCall)cInputsDataDescriptionCrossReference_3_0.eContents().get(1);
+		private final RuleCall cInputsDataDescriptionQualifiedNameParserRuleCall_3_0_1 = (RuleCall)cInputsDataDescriptionCrossReference_3_0.eContents().get(1);
 		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
 		private final Keyword cCommaKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
 		private final Assignment cInputsAssignment_4_1 = (Assignment)cGroup_4.eContents().get(1);
 		private final CrossReference cInputsDataDescriptionCrossReference_4_1_0 = (CrossReference)cInputsAssignment_4_1.eContents().get(0);
-		private final RuleCall cInputsDataDescriptionStringOrIdParserRuleCall_4_1_0_1 = (RuleCall)cInputsDataDescriptionCrossReference_4_1_0.eContents().get(1);
+		private final RuleCall cInputsDataDescriptionQualifiedNameParserRuleCall_4_1_0_1 = (RuleCall)cInputsDataDescriptionCrossReference_4_1_0.eContents().get(1);
 		private final Keyword cToKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		private final Assignment cOutputsAssignment_6 = (Assignment)cGroup.eContents().get(6);
 		private final CrossReference cOutputsDataDescriptionCrossReference_6_0 = (CrossReference)cOutputsAssignment_6.eContents().get(0);
-		private final RuleCall cOutputsDataDescriptionStringOrIdParserRuleCall_6_0_1 = (RuleCall)cOutputsDataDescriptionCrossReference_6_0.eContents().get(1);
+		private final RuleCall cOutputsDataDescriptionQualifiedNameParserRuleCall_6_0_1 = (RuleCall)cOutputsDataDescriptionCrossReference_6_0.eContents().get(1);
 		private final Group cGroup_7 = (Group)cGroup.eContents().get(7);
 		private final Keyword cCommaKeyword_7_0 = (Keyword)cGroup_7.eContents().get(0);
 		private final Assignment cOutputsAssignment_7_1 = (Assignment)cGroup_7.eContents().get(1);
 		private final CrossReference cOutputsDataDescriptionCrossReference_7_1_0 = (CrossReference)cOutputsAssignment_7_1.eContents().get(0);
-		private final RuleCall cOutputsDataDescriptionStringOrIdParserRuleCall_7_1_0_1 = (RuleCall)cOutputsDataDescriptionCrossReference_7_1_0.eContents().get(1);
+		private final RuleCall cOutputsDataDescriptionQualifiedNameParserRuleCall_7_1_0_1 = (RuleCall)cOutputsDataDescriptionCrossReference_7_1_0.eContents().get(1);
 		private final Keyword cUsingKeyword_8 = (Keyword)cGroup.eContents().get(8);
 		private final Assignment cLayersAssignment_9 = (Assignment)cGroup.eContents().get(9);
 		private final RuleCall cLayersSurrogateLayerDefinitionRuleParserRuleCall_9_0 = (RuleCall)cLayersAssignment_9.eContents().get(0);
 		
 		//SurrogateDefinitionRule returns SurrogateDefinition:
-		//    "prediction" name = STRING
+		//    "prediction" name = StringOrId
 		//    "maps"
-		//        inputs += [ddl::DataDescription|StringOrId] ("," inputs += [ddl::DataDescription|StringOrId])*
+		//        inputs += [ddl::DataDescription|QualifiedName] ("," inputs += [ddl::DataDescription|QualifiedName])*
 		//    "to"
-		//        outputs += [ddl::DataDescription|StringOrId] ("," outputs += [ddl::DataDescription|StringOrId])*
+		//        outputs += [ddl::DataDescription|QualifiedName] ("," outputs += [ddl::DataDescription|QualifiedName])*
 		//    "using"
 		//        (layers += SurrogateLayerDefinitionRule)+
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//"prediction" name = STRING
+		//"prediction" name = StringOrId
 		//"maps"
-		//    inputs += [ddl::DataDescription|StringOrId] ("," inputs += [ddl::DataDescription|StringOrId])*
+		//    inputs += [ddl::DataDescription|QualifiedName] ("," inputs += [ddl::DataDescription|QualifiedName])*
 		//"to"
-		//    outputs += [ddl::DataDescription|StringOrId] ("," outputs += [ddl::DataDescription|StringOrId])*
+		//    outputs += [ddl::DataDescription|QualifiedName] ("," outputs += [ddl::DataDescription|QualifiedName])*
 		//"using"
 		//    (layers += SurrogateLayerDefinitionRule)+
 		public Group getGroup() { return cGroup; }
@@ -147,65 +143,65 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 		//"prediction"
 		public Keyword getPredictionKeyword_0() { return cPredictionKeyword_0; }
 		
-		//name = STRING
+		//name = StringOrId
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
 		
-		//STRING
-		public RuleCall getNameSTRINGTerminalRuleCall_1_0() { return cNameSTRINGTerminalRuleCall_1_0; }
+		//StringOrId
+		public RuleCall getNameStringOrIdParserRuleCall_1_0() { return cNameStringOrIdParserRuleCall_1_0; }
 		
 		//"maps"
 		public Keyword getMapsKeyword_2() { return cMapsKeyword_2; }
 		
-		//inputs += [ddl::DataDescription|StringOrId]
+		//inputs += [ddl::DataDescription|QualifiedName]
 		public Assignment getInputsAssignment_3() { return cInputsAssignment_3; }
 		
-		//[ddl::DataDescription|StringOrId]
+		//[ddl::DataDescription|QualifiedName]
 		public CrossReference getInputsDataDescriptionCrossReference_3_0() { return cInputsDataDescriptionCrossReference_3_0; }
 		
-		//StringOrId
-		public RuleCall getInputsDataDescriptionStringOrIdParserRuleCall_3_0_1() { return cInputsDataDescriptionStringOrIdParserRuleCall_3_0_1; }
+		//QualifiedName
+		public RuleCall getInputsDataDescriptionQualifiedNameParserRuleCall_3_0_1() { return cInputsDataDescriptionQualifiedNameParserRuleCall_3_0_1; }
 		
-		//("," inputs += [ddl::DataDescription|StringOrId])*
+		//("," inputs += [ddl::DataDescription|QualifiedName])*
 		public Group getGroup_4() { return cGroup_4; }
 		
 		//","
 		public Keyword getCommaKeyword_4_0() { return cCommaKeyword_4_0; }
 		
-		//inputs += [ddl::DataDescription|StringOrId]
+		//inputs += [ddl::DataDescription|QualifiedName]
 		public Assignment getInputsAssignment_4_1() { return cInputsAssignment_4_1; }
 		
-		//[ddl::DataDescription|StringOrId]
+		//[ddl::DataDescription|QualifiedName]
 		public CrossReference getInputsDataDescriptionCrossReference_4_1_0() { return cInputsDataDescriptionCrossReference_4_1_0; }
 		
-		//StringOrId
-		public RuleCall getInputsDataDescriptionStringOrIdParserRuleCall_4_1_0_1() { return cInputsDataDescriptionStringOrIdParserRuleCall_4_1_0_1; }
+		//QualifiedName
+		public RuleCall getInputsDataDescriptionQualifiedNameParserRuleCall_4_1_0_1() { return cInputsDataDescriptionQualifiedNameParserRuleCall_4_1_0_1; }
 		
 		//"to"
 		public Keyword getToKeyword_5() { return cToKeyword_5; }
 		
-		//outputs += [ddl::DataDescription|StringOrId]
+		//outputs += [ddl::DataDescription|QualifiedName]
 		public Assignment getOutputsAssignment_6() { return cOutputsAssignment_6; }
 		
-		//[ddl::DataDescription|StringOrId]
+		//[ddl::DataDescription|QualifiedName]
 		public CrossReference getOutputsDataDescriptionCrossReference_6_0() { return cOutputsDataDescriptionCrossReference_6_0; }
 		
-		//StringOrId
-		public RuleCall getOutputsDataDescriptionStringOrIdParserRuleCall_6_0_1() { return cOutputsDataDescriptionStringOrIdParserRuleCall_6_0_1; }
+		//QualifiedName
+		public RuleCall getOutputsDataDescriptionQualifiedNameParserRuleCall_6_0_1() { return cOutputsDataDescriptionQualifiedNameParserRuleCall_6_0_1; }
 		
-		//("," outputs += [ddl::DataDescription|StringOrId])*
+		//("," outputs += [ddl::DataDescription|QualifiedName])*
 		public Group getGroup_7() { return cGroup_7; }
 		
 		//","
 		public Keyword getCommaKeyword_7_0() { return cCommaKeyword_7_0; }
 		
-		//outputs += [ddl::DataDescription|StringOrId]
+		//outputs += [ddl::DataDescription|QualifiedName]
 		public Assignment getOutputsAssignment_7_1() { return cOutputsAssignment_7_1; }
 		
-		//[ddl::DataDescription|StringOrId]
+		//[ddl::DataDescription|QualifiedName]
 		public CrossReference getOutputsDataDescriptionCrossReference_7_1_0() { return cOutputsDataDescriptionCrossReference_7_1_0; }
 		
-		//StringOrId
-		public RuleCall getOutputsDataDescriptionStringOrIdParserRuleCall_7_1_0_1() { return cOutputsDataDescriptionStringOrIdParserRuleCall_7_1_0_1; }
+		//QualifiedName
+		public RuleCall getOutputsDataDescriptionQualifiedNameParserRuleCall_7_1_0_1() { return cOutputsDataDescriptionQualifiedNameParserRuleCall_7_1_0_1; }
 		
 		//"using"
 		public Keyword getUsingKeyword_8() { return cUsingKeyword_8; }
@@ -221,19 +217,19 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cLayerKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cNameSTRINGTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final RuleCall cNameStringOrIdParserRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		private final Keyword cWithKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		private final Assignment cFunctionsAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final RuleCall cFunctionsPartialSurrogateFunctionDefinitionRuleParserRuleCall_3_0 = (RuleCall)cFunctionsAssignment_3.eContents().get(0);
 		
 		//SurrogateLayerDefinitionRule returns SurrogateLayerDefinition:
-		//    "layer" name = STRING
+		//    "layer" name = StringOrId
 		//    "with"
 		//        (functions += PartialSurrogateFunctionDefinitionRule)+
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//"layer" name = STRING
+		//"layer" name = StringOrId
 		//"with"
 		//    (functions += PartialSurrogateFunctionDefinitionRule)+
 		public Group getGroup() { return cGroup; }
@@ -241,11 +237,11 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 		//"layer"
 		public Keyword getLayerKeyword_0() { return cLayerKeyword_0; }
 		
-		//name = STRING
+		//name = StringOrId
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
 		
-		//STRING
-		public RuleCall getNameSTRINGTerminalRuleCall_1_0() { return cNameSTRINGTerminalRuleCall_1_0; }
+		//StringOrId
+		public RuleCall getNameStringOrIdParserRuleCall_1_0() { return cNameStringOrIdParserRuleCall_1_0; }
 		
 		//"with"
 		public Keyword getWithKeyword_2() { return cWithKeyword_2; }
@@ -260,121 +256,121 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.mll.dsl.MachineLearningLanguage.PartialSurrogateFunctionDefinitionRule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cFunctionKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final CrossReference cNameTypeDefinitionCrossReference_1_0 = (CrossReference)cNameAssignment_1.eContents().get(0);
-		private final RuleCall cNameTypeDefinitionStringOrIdParserRuleCall_1_0_1 = (RuleCall)cNameTypeDefinitionCrossReference_1_0.eContents().get(1);
+		private final Assignment cDefinitionAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final CrossReference cDefinitionTypeDefinitionCrossReference_1_0 = (CrossReference)cDefinitionAssignment_1.eContents().get(0);
+		private final RuleCall cDefinitionTypeDefinitionQualifiedNameParserRuleCall_1_0_1 = (RuleCall)cDefinitionTypeDefinitionCrossReference_1_0.eContents().get(1);
 		private final Keyword cMappingKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		private final Assignment cInputsAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final CrossReference cInputsDataDescriptionCrossReference_3_0 = (CrossReference)cInputsAssignment_3.eContents().get(0);
-		private final RuleCall cInputsDataDescriptionStringOrIdParserRuleCall_3_0_1 = (RuleCall)cInputsDataDescriptionCrossReference_3_0.eContents().get(1);
+		private final RuleCall cInputsDataDescriptionQualifiedNameParserRuleCall_3_0_1 = (RuleCall)cInputsDataDescriptionCrossReference_3_0.eContents().get(1);
 		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
 		private final Keyword cCommaKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
 		private final Assignment cInputsAssignment_4_1 = (Assignment)cGroup_4.eContents().get(1);
 		private final CrossReference cInputsDataDescriptionCrossReference_4_1_0 = (CrossReference)cInputsAssignment_4_1.eContents().get(0);
-		private final RuleCall cInputsDataDescriptionStringOrIdParserRuleCall_4_1_0_1 = (RuleCall)cInputsDataDescriptionCrossReference_4_1_0.eContents().get(1);
+		private final RuleCall cInputsDataDescriptionQualifiedNameParserRuleCall_4_1_0_1 = (RuleCall)cInputsDataDescriptionCrossReference_4_1_0.eContents().get(1);
 		private final Keyword cToKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		private final Assignment cOutputsAssignment_6 = (Assignment)cGroup.eContents().get(6);
 		private final CrossReference cOutputsDataDescriptionCrossReference_6_0 = (CrossReference)cOutputsAssignment_6.eContents().get(0);
-		private final RuleCall cOutputsDataDescriptionStringOrIdParserRuleCall_6_0_1 = (RuleCall)cOutputsDataDescriptionCrossReference_6_0.eContents().get(1);
+		private final RuleCall cOutputsDataDescriptionQualifiedNameParserRuleCall_6_0_1 = (RuleCall)cOutputsDataDescriptionCrossReference_6_0.eContents().get(1);
 		private final Group cGroup_7 = (Group)cGroup.eContents().get(7);
 		private final Keyword cCommaKeyword_7_0 = (Keyword)cGroup_7.eContents().get(0);
 		private final Assignment cOutputsAssignment_7_1 = (Assignment)cGroup_7.eContents().get(1);
 		private final CrossReference cOutputsDataDescriptionCrossReference_7_1_0 = (CrossReference)cOutputsAssignment_7_1.eContents().get(0);
-		private final RuleCall cOutputsDataDescriptionStringOrIdParserRuleCall_7_1_0_1 = (RuleCall)cOutputsDataDescriptionCrossReference_7_1_0.eContents().get(1);
+		private final RuleCall cOutputsDataDescriptionQualifiedNameParserRuleCall_7_1_0_1 = (RuleCall)cOutputsDataDescriptionCrossReference_7_1_0.eContents().get(1);
 		private final Group cGroup_8 = (Group)cGroup.eContents().get(8);
 		private final Keyword cWithKeyword_8_0 = (Keyword)cGroup_8.eContents().get(0);
 		private final Keyword cParametersKeyword_8_1 = (Keyword)cGroup_8.eContents().get(1);
-		private final Assignment cParametersAssignment_8_2 = (Assignment)cGroup_8.eContents().get(2);
-		private final RuleCall cParametersAttributeRuleParserRuleCall_8_2_0 = (RuleCall)cParametersAssignment_8_2.eContents().get(0);
+		private final Assignment cAttributesAssignment_8_2 = (Assignment)cGroup_8.eContents().get(2);
+		private final RuleCall cAttributesAttributeRuleParserRuleCall_8_2_0 = (RuleCall)cAttributesAssignment_8_2.eContents().get(0);
 		
 		//PartialSurrogateFunctionDefinitionRule returns PartialSurrogateFunctionDefinition:
-		//    "function" name = [dl::TypeDefinition|StringOrId]
+		//    "function" definition = [base::TypeDefinition|QualifiedName]
 		//    "mapping"
-		//        inputs += [ddl::DataDescription|StringOrId] ("," inputs += [ddl::DataDescription|StringOrId])*
+		//        inputs += [ddl::DataDescription|QualifiedName] ("," inputs += [ddl::DataDescription|QualifiedName])*
 		//    "to"
-		//        outputs += [ddl::DataDescription|StringOrId] ("," outputs += [ddl::DataDescription|StringOrId])*
+		//        outputs += [ddl::DataDescription|QualifiedName] ("," outputs += [ddl::DataDescription|QualifiedName])*
 		//    ("with" "parameters"
-		//        ((parameters += InstanceLanguage::AttributeRule)+ ))?
+		//        ((attributes+= BaseLanguage::AttributeRule)+ ))?
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//"function" name = [dl::TypeDefinition|StringOrId]
+		//"function" definition = [base::TypeDefinition|QualifiedName]
 		//"mapping"
-		//    inputs += [ddl::DataDescription|StringOrId] ("," inputs += [ddl::DataDescription|StringOrId])*
+		//    inputs += [ddl::DataDescription|QualifiedName] ("," inputs += [ddl::DataDescription|QualifiedName])*
 		//"to"
-		//    outputs += [ddl::DataDescription|StringOrId] ("," outputs += [ddl::DataDescription|StringOrId])*
+		//    outputs += [ddl::DataDescription|QualifiedName] ("," outputs += [ddl::DataDescription|QualifiedName])*
 		//("with" "parameters"
-		//    ((parameters += InstanceLanguage::AttributeRule)+ ))?
+		//    ((attributes+= BaseLanguage::AttributeRule)+ ))?
 		public Group getGroup() { return cGroup; }
 		
 		//"function"
 		public Keyword getFunctionKeyword_0() { return cFunctionKeyword_0; }
 		
-		//name = [dl::TypeDefinition|StringOrId]
-		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+		//definition = [base::TypeDefinition|QualifiedName]
+		public Assignment getDefinitionAssignment_1() { return cDefinitionAssignment_1; }
 		
-		//[dl::TypeDefinition|StringOrId]
-		public CrossReference getNameTypeDefinitionCrossReference_1_0() { return cNameTypeDefinitionCrossReference_1_0; }
+		//[base::TypeDefinition|QualifiedName]
+		public CrossReference getDefinitionTypeDefinitionCrossReference_1_0() { return cDefinitionTypeDefinitionCrossReference_1_0; }
 		
-		//StringOrId
-		public RuleCall getNameTypeDefinitionStringOrIdParserRuleCall_1_0_1() { return cNameTypeDefinitionStringOrIdParserRuleCall_1_0_1; }
+		//QualifiedName
+		public RuleCall getDefinitionTypeDefinitionQualifiedNameParserRuleCall_1_0_1() { return cDefinitionTypeDefinitionQualifiedNameParserRuleCall_1_0_1; }
 		
 		//"mapping"
 		public Keyword getMappingKeyword_2() { return cMappingKeyword_2; }
 		
-		//inputs += [ddl::DataDescription|StringOrId]
+		//inputs += [ddl::DataDescription|QualifiedName]
 		public Assignment getInputsAssignment_3() { return cInputsAssignment_3; }
 		
-		//[ddl::DataDescription|StringOrId]
+		//[ddl::DataDescription|QualifiedName]
 		public CrossReference getInputsDataDescriptionCrossReference_3_0() { return cInputsDataDescriptionCrossReference_3_0; }
 		
-		//StringOrId
-		public RuleCall getInputsDataDescriptionStringOrIdParserRuleCall_3_0_1() { return cInputsDataDescriptionStringOrIdParserRuleCall_3_0_1; }
+		//QualifiedName
+		public RuleCall getInputsDataDescriptionQualifiedNameParserRuleCall_3_0_1() { return cInputsDataDescriptionQualifiedNameParserRuleCall_3_0_1; }
 		
-		//("," inputs += [ddl::DataDescription|StringOrId])*
+		//("," inputs += [ddl::DataDescription|QualifiedName])*
 		public Group getGroup_4() { return cGroup_4; }
 		
 		//","
 		public Keyword getCommaKeyword_4_0() { return cCommaKeyword_4_0; }
 		
-		//inputs += [ddl::DataDescription|StringOrId]
+		//inputs += [ddl::DataDescription|QualifiedName]
 		public Assignment getInputsAssignment_4_1() { return cInputsAssignment_4_1; }
 		
-		//[ddl::DataDescription|StringOrId]
+		//[ddl::DataDescription|QualifiedName]
 		public CrossReference getInputsDataDescriptionCrossReference_4_1_0() { return cInputsDataDescriptionCrossReference_4_1_0; }
 		
-		//StringOrId
-		public RuleCall getInputsDataDescriptionStringOrIdParserRuleCall_4_1_0_1() { return cInputsDataDescriptionStringOrIdParserRuleCall_4_1_0_1; }
+		//QualifiedName
+		public RuleCall getInputsDataDescriptionQualifiedNameParserRuleCall_4_1_0_1() { return cInputsDataDescriptionQualifiedNameParserRuleCall_4_1_0_1; }
 		
 		//"to"
 		public Keyword getToKeyword_5() { return cToKeyword_5; }
 		
-		//outputs += [ddl::DataDescription|StringOrId]
+		//outputs += [ddl::DataDescription|QualifiedName]
 		public Assignment getOutputsAssignment_6() { return cOutputsAssignment_6; }
 		
-		//[ddl::DataDescription|StringOrId]
+		//[ddl::DataDescription|QualifiedName]
 		public CrossReference getOutputsDataDescriptionCrossReference_6_0() { return cOutputsDataDescriptionCrossReference_6_0; }
 		
-		//StringOrId
-		public RuleCall getOutputsDataDescriptionStringOrIdParserRuleCall_6_0_1() { return cOutputsDataDescriptionStringOrIdParserRuleCall_6_0_1; }
+		//QualifiedName
+		public RuleCall getOutputsDataDescriptionQualifiedNameParserRuleCall_6_0_1() { return cOutputsDataDescriptionQualifiedNameParserRuleCall_6_0_1; }
 		
-		//("," outputs += [ddl::DataDescription|StringOrId])*
+		//("," outputs += [ddl::DataDescription|QualifiedName])*
 		public Group getGroup_7() { return cGroup_7; }
 		
 		//","
 		public Keyword getCommaKeyword_7_0() { return cCommaKeyword_7_0; }
 		
-		//outputs += [ddl::DataDescription|StringOrId]
+		//outputs += [ddl::DataDescription|QualifiedName]
 		public Assignment getOutputsAssignment_7_1() { return cOutputsAssignment_7_1; }
 		
-		//[ddl::DataDescription|StringOrId]
+		//[ddl::DataDescription|QualifiedName]
 		public CrossReference getOutputsDataDescriptionCrossReference_7_1_0() { return cOutputsDataDescriptionCrossReference_7_1_0; }
 		
-		//StringOrId
-		public RuleCall getOutputsDataDescriptionStringOrIdParserRuleCall_7_1_0_1() { return cOutputsDataDescriptionStringOrIdParserRuleCall_7_1_0_1; }
+		//QualifiedName
+		public RuleCall getOutputsDataDescriptionQualifiedNameParserRuleCall_7_1_0_1() { return cOutputsDataDescriptionQualifiedNameParserRuleCall_7_1_0_1; }
 		
 		//("with" "parameters"
-		//    ((parameters += InstanceLanguage::AttributeRule)+ ))?
+		//    ((attributes+= BaseLanguage::AttributeRule)+ ))?
 		public Group getGroup_8() { return cGroup_8; }
 		
 		//"with"
@@ -383,11 +379,11 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 		//"parameters"
 		public Keyword getParametersKeyword_8_1() { return cParametersKeyword_8_1; }
 		
-		//((parameters += InstanceLanguage::AttributeRule)+ )
-		public Assignment getParametersAssignment_8_2() { return cParametersAssignment_8_2; }
+		//((attributes+= BaseLanguage::AttributeRule)+ )
+		public Assignment getAttributesAssignment_8_2() { return cAttributesAssignment_8_2; }
 		
-		//InstanceLanguage::AttributeRule
-		public RuleCall getParametersAttributeRuleParserRuleCall_8_2_0() { return cParametersAttributeRuleParserRuleCall_8_2_0; }
+		//BaseLanguage::AttributeRule
+		public RuleCall getAttributesAttributeRuleParserRuleCall_8_2_0() { return cAttributesAttributeRuleParserRuleCall_8_2_0; }
 	}
 	public class PredictStatementRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.mll.dsl.MachineLearningLanguage.PredictStatementRule");
@@ -395,7 +391,7 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 		private final Keyword cPredictKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cSurrogateAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final CrossReference cSurrogateSurrogateDefinitionCrossReference_1_0 = (CrossReference)cSurrogateAssignment_1.eContents().get(0);
-		private final RuleCall cSurrogateSurrogateDefinitionStringOrIdParserRuleCall_1_0_1 = (RuleCall)cSurrogateSurrogateDefinitionCrossReference_1_0.eContents().get(1);
+		private final RuleCall cSurrogateSurrogateDefinitionQualifiedNameParserRuleCall_1_0_1 = (RuleCall)cSurrogateSurrogateDefinitionCrossReference_1_0.eContents().get(1);
 		private final Keyword cFromKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		private final Assignment cTrainingDataAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final RuleCall cTrainingDataSTRINGTerminalRuleCall_3_0 = (RuleCall)cTrainingDataAssignment_3.eContents().get(0);
@@ -412,7 +408,7 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 		private final RuleCall cModelFilenameSTRINGTerminalRuleCall_8_0 = (RuleCall)cModelFilenameAssignment_8.eContents().get(0);
 		
 		//PredictStatementRule returns PredictStatement:
-		//    "predict" surrogate = [SurrogateDefinition|StringOrId]
+		//    "predict" surrogate = [SurrogateDefinition|QualifiedName]
 		//        'from' trainingData = STRING
 		//        ('and' 'measure'
 		//            (statements += CallStatementRule)*
@@ -421,7 +417,7 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 		//        'and' 'store' 'to' modelFilename = STRING;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//"predict" surrogate = [SurrogateDefinition|StringOrId]
+		//"predict" surrogate = [SurrogateDefinition|QualifiedName]
 		//    'from' trainingData = STRING
 		//    ('and' 'measure'
 		//        (statements += CallStatementRule)*
@@ -433,14 +429,14 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 		//"predict"
 		public Keyword getPredictKeyword_0() { return cPredictKeyword_0; }
 		
-		//surrogate = [SurrogateDefinition|StringOrId]
+		//surrogate = [SurrogateDefinition|QualifiedName]
 		public Assignment getSurrogateAssignment_1() { return cSurrogateAssignment_1; }
 		
-		//[SurrogateDefinition|StringOrId]
+		//[SurrogateDefinition|QualifiedName]
 		public CrossReference getSurrogateSurrogateDefinitionCrossReference_1_0() { return cSurrogateSurrogateDefinitionCrossReference_1_0; }
 		
-		//StringOrId
-		public RuleCall getSurrogateSurrogateDefinitionStringOrIdParserRuleCall_1_0_1() { return cSurrogateSurrogateDefinitionStringOrIdParserRuleCall_1_0_1; }
+		//QualifiedName
+		public RuleCall getSurrogateSurrogateDefinitionQualifiedNameParserRuleCall_1_0_1() { return cSurrogateSurrogateDefinitionQualifiedNameParserRuleCall_1_0_1; }
 		
 		//'from'
 		public Keyword getFromKeyword_2() { return cFromKeyword_2; }
@@ -732,31 +728,9 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 		//';'
 		public Keyword getSemicolonKeyword_1() { return cSemicolonKeyword_1; }
 	}
-	public class FunctionNameRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.mll.dsl.MachineLearningLanguage.FunctionNameRule");
-		private final Assignment cDefinitionAssignment = (Assignment)rule.eContents().get(1);
-		private final CrossReference cDefinitionFunctionDefinitionCrossReference_0 = (CrossReference)cDefinitionAssignment.eContents().get(0);
-		private final RuleCall cDefinitionFunctionDefinitionStringOrIdParserRuleCall_0_1 = (RuleCall)cDefinitionFunctionDefinitionCrossReference_0.eContents().get(1);
-		
-		//@Override
-		//FunctionNameRule returns DefinedFunctionName:
-		//    definition = [dl::FunctionDefinition|StringOrId]
-		//;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//definition = [dl::FunctionDefinition|StringOrId]
-		public Assignment getDefinitionAssignment() { return cDefinitionAssignment; }
-		
-		//[dl::FunctionDefinition|StringOrId]
-		public CrossReference getDefinitionFunctionDefinitionCrossReference_0() { return cDefinitionFunctionDefinitionCrossReference_0; }
-		
-		//StringOrId
-		public RuleCall getDefinitionFunctionDefinitionStringOrIdParserRuleCall_0_1() { return cDefinitionFunctionDefinitionStringOrIdParserRuleCall_0_1; }
-	}
 	
 	
-	private final MachineLearningConfigurationRuleElements pMachineLearningConfigurationRule;
-	private final UseRuleElements pUseRule;
+	private final MachineLearningModuleRuleElements pMachineLearningModuleRule;
 	private final SurrogateDefinitionRuleElements pSurrogateDefinitionRule;
 	private final SurrogateLayerDefinitionRuleElements pSurrogateLayerDefinitionRule;
 	private final PartialSurrogateFunctionDefinitionRuleElements pPartialSurrogateFunctionDefinitionRule;
@@ -768,27 +742,25 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 	private final StringLiterRangeRuleElements pStringLiterRangeRule;
 	private final BlockStatementRuleElements pBlockStatementRule;
 	private final CallStatementRuleElements pCallStatementRule;
-	private final FunctionNameRuleElements pFunctionNameRule;
 	
 	private final Grammar grammar;
 	
 	private final InstanceLanguageGrammarAccess gaInstanceLanguage;
 	
-	private final ExpressionLanguageGrammarAccess gaExpressionLanguage;
+	private final BaseLanguageGrammarAccess gaBaseLanguage;
 	
 	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public MachineLearningLanguageGrammarAccess(GrammarProvider grammarProvider,
 			InstanceLanguageGrammarAccess gaInstanceLanguage,
-			ExpressionLanguageGrammarAccess gaExpressionLanguage,
+			BaseLanguageGrammarAccess gaBaseLanguage,
 			TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaInstanceLanguage = gaInstanceLanguage;
-		this.gaExpressionLanguage = gaExpressionLanguage;
+		this.gaBaseLanguage = gaBaseLanguage;
 		this.gaTerminals = gaTerminals;
-		this.pMachineLearningConfigurationRule = new MachineLearningConfigurationRuleElements();
-		this.pUseRule = new UseRuleElements();
+		this.pMachineLearningModuleRule = new MachineLearningModuleRuleElements();
 		this.pSurrogateDefinitionRule = new SurrogateDefinitionRuleElements();
 		this.pSurrogateLayerDefinitionRule = new SurrogateLayerDefinitionRuleElements();
 		this.pPartialSurrogateFunctionDefinitionRule = new PartialSurrogateFunctionDefinitionRuleElements();
@@ -800,7 +772,6 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 		this.pStringLiterRangeRule = new StringLiterRangeRuleElements();
 		this.pBlockStatementRule = new BlockStatementRuleElements();
 		this.pCallStatementRule = new CallStatementRuleElements();
-		this.pFunctionNameRule = new FunctionNameRuleElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -829,8 +800,8 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 		return gaInstanceLanguage;
 	}
 	
-	public ExpressionLanguageGrammarAccess getExpressionLanguageGrammarAccess() {
-		return gaExpressionLanguage;
+	public BaseLanguageGrammarAccess getBaseLanguageGrammarAccess() {
+		return gaBaseLanguage;
 	}
 	
 	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
@@ -838,36 +809,27 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 	}
 
 	
-	//MachineLearningConfigurationRule returns MachineLearningConfiguration:
-	//    (uses += UseRule)*
-	//    (definitions+=SurrogateDefinitionRule)*
-	//    (statements += StatementRule)*
+	//MachineLearningModuleRule returns MachineLearningModule:
+	//    (imports += ImportRule)*
+	//    "module" name = QualifiedName "{"
+	//        (definitions+=SurrogateDefinitionRule)*
+	//        (statements += StatementRule)*
+	//    "}"
 	//;
-	public MachineLearningConfigurationRuleElements getMachineLearningConfigurationRuleAccess() {
-		return pMachineLearningConfigurationRule;
+	public MachineLearningModuleRuleElements getMachineLearningModuleRuleAccess() {
+		return pMachineLearningModuleRule;
 	}
 	
-	public ParserRule getMachineLearningConfigurationRuleRule() {
-		return getMachineLearningConfigurationRuleAccess().getRule();
-	}
-	
-	//UseRule returns Use:
-	//    'use' importURI = STRING ';'
-	//;
-	public UseRuleElements getUseRuleAccess() {
-		return pUseRule;
-	}
-	
-	public ParserRule getUseRuleRule() {
-		return getUseRuleAccess().getRule();
+	public ParserRule getMachineLearningModuleRuleRule() {
+		return getMachineLearningModuleRuleAccess().getRule();
 	}
 	
 	//SurrogateDefinitionRule returns SurrogateDefinition:
-	//    "prediction" name = STRING
+	//    "prediction" name = StringOrId
 	//    "maps"
-	//        inputs += [ddl::DataDescription|StringOrId] ("," inputs += [ddl::DataDescription|StringOrId])*
+	//        inputs += [ddl::DataDescription|QualifiedName] ("," inputs += [ddl::DataDescription|QualifiedName])*
 	//    "to"
-	//        outputs += [ddl::DataDescription|StringOrId] ("," outputs += [ddl::DataDescription|StringOrId])*
+	//        outputs += [ddl::DataDescription|QualifiedName] ("," outputs += [ddl::DataDescription|QualifiedName])*
 	//    "using"
 	//        (layers += SurrogateLayerDefinitionRule)+
 	//;
@@ -880,7 +842,7 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 	}
 	
 	//SurrogateLayerDefinitionRule returns SurrogateLayerDefinition:
-	//    "layer" name = STRING
+	//    "layer" name = StringOrId
 	//    "with"
 	//        (functions += PartialSurrogateFunctionDefinitionRule)+
 	//;
@@ -893,13 +855,13 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 	}
 	
 	//PartialSurrogateFunctionDefinitionRule returns PartialSurrogateFunctionDefinition:
-	//    "function" name = [dl::TypeDefinition|StringOrId]
+	//    "function" definition = [base::TypeDefinition|QualifiedName]
 	//    "mapping"
-	//        inputs += [ddl::DataDescription|StringOrId] ("," inputs += [ddl::DataDescription|StringOrId])*
+	//        inputs += [ddl::DataDescription|QualifiedName] ("," inputs += [ddl::DataDescription|QualifiedName])*
 	//    "to"
-	//        outputs += [ddl::DataDescription|StringOrId] ("," outputs += [ddl::DataDescription|StringOrId])*
+	//        outputs += [ddl::DataDescription|QualifiedName] ("," outputs += [ddl::DataDescription|QualifiedName])*
 	//    ("with" "parameters"
-	//        ((parameters += InstanceLanguage::AttributeRule)+ ))?
+	//        ((attributes+= BaseLanguage::AttributeRule)+ ))?
 	//;
 	public PartialSurrogateFunctionDefinitionRuleElements getPartialSurrogateFunctionDefinitionRuleAccess() {
 		return pPartialSurrogateFunctionDefinitionRule;
@@ -910,7 +872,7 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 	}
 	
 	//PredictStatementRule returns PredictStatement:
-	//    "predict" surrogate = [SurrogateDefinition|StringOrId]
+	//    "predict" surrogate = [SurrogateDefinition|QualifiedName]
 	//        'from' trainingData = STRING
 	//        ('and' 'measure'
 	//            (statements += CallStatementRule)*
@@ -1007,78 +969,20 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 	}
 	
 	//@Override
-	//FunctionNameRule returns DefinedFunctionName:
-	//    definition = [dl::FunctionDefinition|StringOrId]
+	//ReferenceRule returns base::ValueReference:
+	//    ConstantReferenceRule | DataReferenceRule
 	//;
-	public FunctionNameRuleElements getFunctionNameRuleAccess() {
-		return pFunctionNameRule;
+	public InstanceLanguageGrammarAccess.ReferenceRuleElements getReferenceRuleAccess() {
+		return gaInstanceLanguage.getReferenceRuleAccess();
 	}
 	
-	public ParserRule getFunctionNameRuleRule() {
-		return getFunctionNameRuleAccess().getRule();
-	}
-	
-	//InstanceRule returns Instance:
-	//    definition = [dl::TypeDefinition|StringOrId] ('{'
-	//      attributes += AttributeRule*
-	//    '}')?
-	//;
-	public InstanceLanguageGrammarAccess.InstanceRuleElements getInstanceRuleAccess() {
-		return gaInstanceLanguage.getInstanceRuleAccess();
-	}
-	
-	public ParserRule getInstanceRuleRule() {
-		return getInstanceRuleAccess().getRule();
-	}
-	
-	//AttributeRule returns Attribute:
-	//    definition = [dl::AttributeDefinition|StringOrId] ':=' value = ValueRule ';'
-	//;
-	public InstanceLanguageGrammarAccess.AttributeRuleElements getAttributeRuleAccess() {
-		return gaInstanceLanguage.getAttributeRuleAccess();
-	}
-	
-	public ParserRule getAttributeRuleRule() {
-		return getAttributeRuleAccess().getRule();
-	}
-	
-	//ValueRule returns Value:
-	//    ArrayRule | DataReferenceRule | InstanceRule | LiteralValueRule
-	//;
-	public InstanceLanguageGrammarAccess.ValueRuleElements getValueRuleAccess() {
-		return gaInstanceLanguage.getValueRuleAccess();
-	}
-	
-	public ParserRule getValueRuleRule() {
-		return getValueRuleAccess().getRule();
-	}
-	
-	//ArrayRule returns Array:
-	//    {Array}
-	//    '[' (values += ValueRule (',' values += ValueRule)* )? ']'
-	//;
-	public InstanceLanguageGrammarAccess.ArrayRuleElements getArrayRuleAccess() {
-		return gaInstanceLanguage.getArrayRuleAccess();
-	}
-	
-	public ParserRule getArrayRuleRule() {
-		return getArrayRuleAccess().getRule();
-	}
-	
-	//LiteralValueRule returns LiteralValue:
-	//    literal = LiteralRule
-	//;
-	public InstanceLanguageGrammarAccess.LiteralValueRuleElements getLiteralValueRuleAccess() {
-		return gaInstanceLanguage.getLiteralValueRuleAccess();
-	}
-	
-	public ParserRule getLiteralValueRuleRule() {
-		return getLiteralValueRuleAccess().getRule();
+	public ParserRule getReferenceRuleRule() {
+		return getReferenceRuleAccess().getRule();
 	}
 	
 	//DataReferenceRule returns DataReference:
 	//    {DataReference}
-	//    'data' definition = [ddl::DataDescription|StringOrId]
+	//    'data' definition = [ddl::DataDescription|QualifiedName]
 	//;
 	public InstanceLanguageGrammarAccess.DataReferenceRuleElements getDataReferenceRuleAccess() {
 		return gaInstanceLanguage.getDataReferenceRuleAccess();
@@ -1091,8 +995,8 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 	//ExpressionRule returns Expression:
 	//    OrExpressionRule
 	//;
-	public ExpressionLanguageGrammarAccess.ExpressionRuleElements getExpressionRuleAccess() {
-		return gaExpressionLanguage.getExpressionRuleAccess();
+	public BaseLanguageGrammarAccess.ExpressionRuleElements getExpressionRuleAccess() {
+		return gaBaseLanguage.getExpressionRuleAccess();
 	}
 	
 	public ParserRule getExpressionRuleRule() {
@@ -1102,8 +1006,8 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 	//OrExpressionRule returns OrExpression:
 	//    subExpressions += XorExpressionRule ( "OR" subExpressions += XorExpressionRule )*
 	//;
-	public ExpressionLanguageGrammarAccess.OrExpressionRuleElements getOrExpressionRuleAccess() {
-		return gaExpressionLanguage.getOrExpressionRuleAccess();
+	public BaseLanguageGrammarAccess.OrExpressionRuleElements getOrExpressionRuleAccess() {
+		return gaBaseLanguage.getOrExpressionRuleAccess();
 	}
 	
 	public ParserRule getOrExpressionRuleRule() {
@@ -1113,8 +1017,8 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 	//XorExpressionRule returns XorExpression:
 	//    subExpressions += AndExpressionRule ( "XOR" subExpressions += AndExpressionRule )*
 	//;
-	public ExpressionLanguageGrammarAccess.XorExpressionRuleElements getXorExpressionRuleAccess() {
-		return gaExpressionLanguage.getXorExpressionRuleAccess();
+	public BaseLanguageGrammarAccess.XorExpressionRuleElements getXorExpressionRuleAccess() {
+		return gaBaseLanguage.getXorExpressionRuleAccess();
 	}
 	
 	public ParserRule getXorExpressionRuleRule() {
@@ -1124,8 +1028,8 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 	//AndExpressionRule returns AndExpression:
 	//    subExpressions += NotExpressionRule ( "AND" subExpressions += NotExpressionRule )*
 	//;
-	public ExpressionLanguageGrammarAccess.AndExpressionRuleElements getAndExpressionRuleAccess() {
-		return gaExpressionLanguage.getAndExpressionRuleAccess();
+	public BaseLanguageGrammarAccess.AndExpressionRuleElements getAndExpressionRuleAccess() {
+		return gaBaseLanguage.getAndExpressionRuleAccess();
 	}
 	
 	public ParserRule getAndExpressionRuleRule() {
@@ -1135,8 +1039,8 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 	//NotExpressionRule returns NotExpression:
 	//    ( negated ?= "!")? operand = ComparisonExpressionRule
 	//;
-	public ExpressionLanguageGrammarAccess.NotExpressionRuleElements getNotExpressionRuleAccess() {
-		return gaExpressionLanguage.getNotExpressionRuleAccess();
+	public BaseLanguageGrammarAccess.NotExpressionRuleElements getNotExpressionRuleAccess() {
+		return gaBaseLanguage.getNotExpressionRuleAccess();
 	}
 	
 	public ParserRule getNotExpressionRuleRule() {
@@ -1146,8 +1050,8 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 	//ComparisonExpressionRule returns ComparisonExpression:
 	//    leftOperand = AddOrSubtractExpressionRule ( comparison += PartialComparisonExpressionRule )*
 	//;
-	public ExpressionLanguageGrammarAccess.ComparisonExpressionRuleElements getComparisonExpressionRuleAccess() {
-		return gaExpressionLanguage.getComparisonExpressionRuleAccess();
+	public BaseLanguageGrammarAccess.ComparisonExpressionRuleElements getComparisonExpressionRuleAccess() {
+		return gaBaseLanguage.getComparisonExpressionRuleAccess();
 	}
 	
 	public ParserRule getComparisonExpressionRuleRule() {
@@ -1157,8 +1061,8 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 	//PartialComparisonExpressionRule returns PartialComparisonExpression :
 	//    operator = ComparisonOperatorRule subExpression = AddOrSubtractExpressionRule
 	//;
-	public ExpressionLanguageGrammarAccess.PartialComparisonExpressionRuleElements getPartialComparisonExpressionRuleAccess() {
-		return gaExpressionLanguage.getPartialComparisonExpressionRuleAccess();
+	public BaseLanguageGrammarAccess.PartialComparisonExpressionRuleElements getPartialComparisonExpressionRuleAccess() {
+		return gaBaseLanguage.getPartialComparisonExpressionRuleAccess();
 	}
 	
 	public ParserRule getPartialComparisonExpressionRuleRule() {
@@ -1173,8 +1077,8 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 	//    LessEqual = "<" |
 	//    LessThan = "<="
 	//;
-	public ExpressionLanguageGrammarAccess.ComparisonOperatorRuleElements getComparisonOperatorRuleAccess() {
-		return gaExpressionLanguage.getComparisonOperatorRuleAccess();
+	public BaseLanguageGrammarAccess.ComparisonOperatorRuleElements getComparisonOperatorRuleAccess() {
+		return gaBaseLanguage.getComparisonOperatorRuleAccess();
 	}
 	
 	public EnumRule getComparisonOperatorRuleRule() {
@@ -1184,8 +1088,8 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 	//AddOrSubtractExpressionRule returns AddOrSubtractExpression:
 	//    leftOperand = MultiplyDivideModuloExpressionRule (operators+=AddOrSubtractOperatorRule operands += MultiplyDivideModuloExpressionRule)*
 	//;
-	public ExpressionLanguageGrammarAccess.AddOrSubtractExpressionRuleElements getAddOrSubtractExpressionRuleAccess() {
-		return gaExpressionLanguage.getAddOrSubtractExpressionRuleAccess();
+	public BaseLanguageGrammarAccess.AddOrSubtractExpressionRuleElements getAddOrSubtractExpressionRuleAccess() {
+		return gaBaseLanguage.getAddOrSubtractExpressionRuleAccess();
 	}
 	
 	public ParserRule getAddOrSubtractExpressionRuleRule() {
@@ -1195,8 +1099,8 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 	//enum AddOrSubtractOperatorRule returns AddOrSubtractOperator:
 	//    Add = '+' | Subtract = '-'
 	//;
-	public ExpressionLanguageGrammarAccess.AddOrSubtractOperatorRuleElements getAddOrSubtractOperatorRuleAccess() {
-		return gaExpressionLanguage.getAddOrSubtractOperatorRuleAccess();
+	public BaseLanguageGrammarAccess.AddOrSubtractOperatorRuleElements getAddOrSubtractOperatorRuleAccess() {
+		return gaBaseLanguage.getAddOrSubtractOperatorRuleAccess();
 	}
 	
 	public EnumRule getAddOrSubtractOperatorRuleRule() {
@@ -1206,8 +1110,8 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 	//MultiplyDivideModuloExpressionRule returns MultiplyDivideModuloExpression :
 	//    leftOperand = PowerOfExpressionRule (operators+= MultiplyDivideModuloOperatorRule operands += PowerOfExpressionRule)*
 	//;
-	public ExpressionLanguageGrammarAccess.MultiplyDivideModuloExpressionRuleElements getMultiplyDivideModuloExpressionRuleAccess() {
-		return gaExpressionLanguage.getMultiplyDivideModuloExpressionRuleAccess();
+	public BaseLanguageGrammarAccess.MultiplyDivideModuloExpressionRuleElements getMultiplyDivideModuloExpressionRuleAccess() {
+		return gaBaseLanguage.getMultiplyDivideModuloExpressionRuleAccess();
 	}
 	
 	public ParserRule getMultiplyDivideModuloExpressionRuleRule() {
@@ -1217,8 +1121,8 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 	//enum MultiplyDivideModuloOperatorRule returns MultiplyDivideModuloOperator:
 	//    Multiply = '*' | Divide = "/" | Modulo = '%'
 	//;
-	public ExpressionLanguageGrammarAccess.MultiplyDivideModuloOperatorRuleElements getMultiplyDivideModuloOperatorRuleAccess() {
-		return gaExpressionLanguage.getMultiplyDivideModuloOperatorRuleAccess();
+	public BaseLanguageGrammarAccess.MultiplyDivideModuloOperatorRuleElements getMultiplyDivideModuloOperatorRuleAccess() {
+		return gaBaseLanguage.getMultiplyDivideModuloOperatorRuleAccess();
 	}
 	
 	public EnumRule getMultiplyDivideModuloOperatorRuleRule() {
@@ -1228,8 +1132,8 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 	//PowerOfExpressionRule returns PowerOfExpression :
 	//    leftOperand = UnaryAddOrSubtractExpressionRule ('^' rightOperand = PowerOfExpressionRule)?
 	//;
-	public ExpressionLanguageGrammarAccess.PowerOfExpressionRuleElements getPowerOfExpressionRuleAccess() {
-		return gaExpressionLanguage.getPowerOfExpressionRuleAccess();
+	public BaseLanguageGrammarAccess.PowerOfExpressionRuleElements getPowerOfExpressionRuleAccess() {
+		return gaBaseLanguage.getPowerOfExpressionRuleAccess();
 	}
 	
 	public ParserRule getPowerOfExpressionRuleRule() {
@@ -1237,31 +1141,43 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 	}
 	
 	//UnaryAddOrSubtractExpressionRule returns UnaryAddOrSubtractExpression :
-	//    ( operators+=AddOrSubtractOperatorRule )* subExpression = LiteralOrReferenceRule
+	//    ( operators+=AddOrSubtractOperatorRule )* subExpression = ValueRule
 	//;
-	public ExpressionLanguageGrammarAccess.UnaryAddOrSubtractExpressionRuleElements getUnaryAddOrSubtractExpressionRuleAccess() {
-		return gaExpressionLanguage.getUnaryAddOrSubtractExpressionRuleAccess();
+	public BaseLanguageGrammarAccess.UnaryAddOrSubtractExpressionRuleElements getUnaryAddOrSubtractExpressionRuleAccess() {
+		return gaBaseLanguage.getUnaryAddOrSubtractExpressionRuleAccess();
 	}
 	
 	public ParserRule getUnaryAddOrSubtractExpressionRuleRule() {
 		return getUnaryAddOrSubtractExpressionRuleAccess().getRule();
 	}
 	
-	//LiteralOrReferenceRule returns CallOrLiteralOrReferenceOrParantheses:
-	//    CallRule | LiteralRule | ParanthesesRule | ValueReferenceRule;
-	public ExpressionLanguageGrammarAccess.LiteralOrReferenceRuleElements getLiteralOrReferenceRuleAccess() {
-		return gaExpressionLanguage.getLiteralOrReferenceRuleAccess();
+	//ValueRule returns Value:
+	//    ArrayRule | CallRule | LiteralRule | ParanthesesRule | ReferenceRule;
+	public BaseLanguageGrammarAccess.ValueRuleElements getValueRuleAccess() {
+		return gaBaseLanguage.getValueRuleAccess();
 	}
 	
-	public ParserRule getLiteralOrReferenceRuleRule() {
-		return getLiteralOrReferenceRuleAccess().getRule();
+	public ParserRule getValueRuleRule() {
+		return getValueRuleAccess().getRule();
+	}
+	
+	//ArrayRule returns Array:
+	//    {Array}
+	//    '[' (values += ValueRule (',' values += ValueRule)* )? ']'
+	//;
+	public BaseLanguageGrammarAccess.ArrayRuleElements getArrayRuleAccess() {
+		return gaBaseLanguage.getArrayRuleAccess();
+	}
+	
+	public ParserRule getArrayRuleRule() {
+		return getArrayRuleAccess().getRule();
 	}
 	
 	//ParanthesesRule returns Parantheses:
 	//    '(' subExpression = ExpressionRule ')'
 	//;
-	public ExpressionLanguageGrammarAccess.ParanthesesRuleElements getParanthesesRuleAccess() {
-		return gaExpressionLanguage.getParanthesesRuleAccess();
+	public BaseLanguageGrammarAccess.ParanthesesRuleElements getParanthesesRuleAccess() {
+		return gaBaseLanguage.getParanthesesRuleAccess();
 	}
 	
 	public ParserRule getParanthesesRuleRule() {
@@ -1271,65 +1187,90 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 	//CallRule returns Call:
 	//    function=FunctionNameRule '(' (parameters += ExpressionRule (',' parameters += ExpressionRule)* )? ')'
 	//;
-	public ExpressionLanguageGrammarAccess.CallRuleElements getCallRuleAccess() {
-		return gaExpressionLanguage.getCallRuleAccess();
+	public BaseLanguageGrammarAccess.CallRuleElements getCallRuleAccess() {
+		return gaBaseLanguage.getCallRuleAccess();
 	}
 	
 	public ParserRule getCallRuleRule() {
 		return getCallRuleAccess().getRule();
 	}
 	
-	//ValueReferenceRule returns ValueReference:
-	//    {ValueReference} 'value'
+	//ConstantReferenceRule returns ConstantReference:
+	//    definition = [ConstantDefinition|QualifiedName]
 	//;
-	public ExpressionLanguageGrammarAccess.ValueReferenceRuleElements getValueReferenceRuleAccess() {
-		return gaExpressionLanguage.getValueReferenceRuleAccess();
+	public BaseLanguageGrammarAccess.ConstantReferenceRuleElements getConstantReferenceRuleAccess() {
+		return gaBaseLanguage.getConstantReferenceRuleAccess();
 	}
 	
-	public ParserRule getValueReferenceRuleRule() {
-		return getValueReferenceRuleAccess().getRule();
+	public ParserRule getConstantReferenceRuleRule() {
+		return getConstantReferenceRuleAccess().getRule();
 	}
 	
 	//LiteralRule returns Literal:
 	//    NumberLiteralRule
 	//        | StringLiteralRule
 	//        | BooleanLiteralRule
+	//        | InstanceLiteralRule
 	//;
-	public ExpressionLanguageGrammarAccess.LiteralRuleElements getLiteralRuleAccess() {
-		return gaExpressionLanguage.getLiteralRuleAccess();
+	public BaseLanguageGrammarAccess.LiteralRuleElements getLiteralRuleAccess() {
+		return gaBaseLanguage.getLiteralRuleAccess();
 	}
 	
 	public ParserRule getLiteralRuleRule() {
 		return getLiteralRuleAccess().getRule();
 	}
 	
-	//NumberLiteralRule returns NumberLiteral:
-	//    DoubleLiteralRule | IntegerLiteralRule
+	//InstanceLiteralRule returns Instance:
+	//    definition = [TypeDefinition|QualifiedName] '{'
+	//      attributes += AttributeRule*
+	//    '}'
 	//;
-	public ExpressionLanguageGrammarAccess.NumberLiteralRuleElements getNumberLiteralRuleAccess() {
-		return gaExpressionLanguage.getNumberLiteralRuleAccess();
+	public BaseLanguageGrammarAccess.InstanceLiteralRuleElements getInstanceLiteralRuleAccess() {
+		return gaBaseLanguage.getInstanceLiteralRuleAccess();
+	}
+	
+	public ParserRule getInstanceLiteralRuleRule() {
+		return getInstanceLiteralRuleAccess().getRule();
+	}
+	
+	//AttributeRule returns Attribute:
+	//    definition = [AttributeDefinition|StringOrId] ':=' value = ExpressionRule ';'
+	//;
+	public BaseLanguageGrammarAccess.AttributeRuleElements getAttributeRuleAccess() {
+		return gaBaseLanguage.getAttributeRuleAccess();
+	}
+	
+	public ParserRule getAttributeRuleRule() {
+		return getAttributeRuleAccess().getRule();
+	}
+	
+	//NumberLiteralRule returns NumberLiteral:
+	//    RealLiteralRule | IntegerLiteralRule
+	//;
+	public BaseLanguageGrammarAccess.NumberLiteralRuleElements getNumberLiteralRuleAccess() {
+		return gaBaseLanguage.getNumberLiteralRuleAccess();
 	}
 	
 	public ParserRule getNumberLiteralRuleRule() {
 		return getNumberLiteralRuleAccess().getRule();
 	}
 	
-	//DoubleLiteralRule returns DoubleLiteral :
+	//RealLiteralRule returns RealLiteral :
 	//    literal = DOUBLE (factor = FactorRule)?
 	//;
-	public ExpressionLanguageGrammarAccess.DoubleLiteralRuleElements getDoubleLiteralRuleAccess() {
-		return gaExpressionLanguage.getDoubleLiteralRuleAccess();
+	public BaseLanguageGrammarAccess.RealLiteralRuleElements getRealLiteralRuleAccess() {
+		return gaBaseLanguage.getRealLiteralRuleAccess();
 	}
 	
-	public ParserRule getDoubleLiteralRuleRule() {
-		return getDoubleLiteralRuleAccess().getRule();
+	public ParserRule getRealLiteralRuleRule() {
+		return getRealLiteralRuleAccess().getRule();
 	}
 	
 	//IntegerLiteralRule returns IntegerLiteral:
 	//    literal = INT (factor = FactorRule)?
 	//;
-	public ExpressionLanguageGrammarAccess.IntegerLiteralRuleElements getIntegerLiteralRuleAccess() {
-		return gaExpressionLanguage.getIntegerLiteralRuleAccess();
+	public BaseLanguageGrammarAccess.IntegerLiteralRuleElements getIntegerLiteralRuleAccess() {
+		return gaBaseLanguage.getIntegerLiteralRuleAccess();
 	}
 	
 	public ParserRule getIntegerLiteralRuleRule() {
@@ -1339,8 +1280,8 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 	//StringLiteralRule returns StringLiteral:
 	//    value = STRING
 	//;
-	public ExpressionLanguageGrammarAccess.StringLiteralRuleElements getStringLiteralRuleAccess() {
-		return gaExpressionLanguage.getStringLiteralRuleAccess();
+	public BaseLanguageGrammarAccess.StringLiteralRuleElements getStringLiteralRuleAccess() {
+		return gaBaseLanguage.getStringLiteralRuleAccess();
 	}
 	
 	public ParserRule getStringLiteralRuleRule() {
@@ -1369,8 +1310,8 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 	//    Zepto = 'z' |
 	//    Yocto = 'y'
 	//;
-	public ExpressionLanguageGrammarAccess.FactorRuleElements getFactorRuleAccess() {
-		return gaExpressionLanguage.getFactorRuleAccess();
+	public BaseLanguageGrammarAccess.FactorRuleElements getFactorRuleAccess() {
+		return gaBaseLanguage.getFactorRuleAccess();
 	}
 	
 	public EnumRule getFactorRuleRule() {
@@ -1380,18 +1321,237 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 	//BooleanLiteralRule returns BooleanLiteral:
 	//    {BooleanLiteral} (value ?= 'true' |  'false')
 	//;
-	public ExpressionLanguageGrammarAccess.BooleanLiteralRuleElements getBooleanLiteralRuleAccess() {
-		return gaExpressionLanguage.getBooleanLiteralRuleAccess();
+	public BaseLanguageGrammarAccess.BooleanLiteralRuleElements getBooleanLiteralRuleAccess() {
+		return gaBaseLanguage.getBooleanLiteralRuleAccess();
 	}
 	
 	public ParserRule getBooleanLiteralRuleRule() {
 		return getBooleanLiteralRuleAccess().getRule();
 	}
 	
+	//TypeDefinitionRule returns TypeDefinition:
+	//    (abstract?='abstract')? 'type' name = StringOrId ('extends' superType = [TypeDefinition|QualifiedName])? '{'
+	//        attributes += AttributeDefinitionRule*
+	//    '}'
+	//;
+	public BaseLanguageGrammarAccess.TypeDefinitionRuleElements getTypeDefinitionRuleAccess() {
+		return gaBaseLanguage.getTypeDefinitionRuleAccess();
+	}
+	
+	public ParserRule getTypeDefinitionRuleRule() {
+		return getTypeDefinitionRuleAccess().getRule();
+	}
+	
+	//AttributeDefinitionRule returns AttributeDefinition:
+	//    name = StringOrId ':' type = TypeRule (':=' initialisation = ExpressionRule)? ';'
+	//;
+	public BaseLanguageGrammarAccess.AttributeDefinitionRuleElements getAttributeDefinitionRuleAccess() {
+		return gaBaseLanguage.getAttributeDefinitionRuleAccess();
+	}
+	
+	public ParserRule getAttributeDefinitionRuleRule() {
+		return getAttributeDefinitionRuleAccess().getRule();
+	}
+	
+	//TypeRule returns Type:
+	//    StringTypeRule | IntTypeRule | RealTypeRule | BooleanTypeRule | LiteralTypeRule | ArrayTypeRule | InstanceTypeRule | VoidTypeRule | ExpressionTypeRule | DataTypeRule
+	//;
+	public BaseLanguageGrammarAccess.TypeRuleElements getTypeRuleAccess() {
+		return gaBaseLanguage.getTypeRuleAccess();
+	}
+	
+	public ParserRule getTypeRuleRule() {
+		return getTypeRuleAccess().getRule();
+	}
+	
+	//LiteralTypeRule returns LiteralType:
+	//    {LiteralType} 'literal'
+	//;
+	public BaseLanguageGrammarAccess.LiteralTypeRuleElements getLiteralTypeRuleAccess() {
+		return gaBaseLanguage.getLiteralTypeRuleAccess();
+	}
+	
+	public ParserRule getLiteralTypeRuleRule() {
+		return getLiteralTypeRuleAccess().getRule();
+	}
+	
+	//InstanceTypeRule returns InstanceType:
+	//    {InstanceType}
+	//    'instance' definition = [TypeDefinition|QualifiedName]
+	//;
+	public BaseLanguageGrammarAccess.InstanceTypeRuleElements getInstanceTypeRuleAccess() {
+		return gaBaseLanguage.getInstanceTypeRuleAccess();
+	}
+	
+	public ParserRule getInstanceTypeRuleRule() {
+		return getInstanceTypeRuleAccess().getRule();
+	}
+	
+	//StringTypeRule returns StringType:
+	//    {StringType}
+	//    'string'
+	//;
+	public BaseLanguageGrammarAccess.StringTypeRuleElements getStringTypeRuleAccess() {
+		return gaBaseLanguage.getStringTypeRuleAccess();
+	}
+	
+	public ParserRule getStringTypeRuleRule() {
+		return getStringTypeRuleAccess().getRule();
+	}
+	
+	//ExpressionTypeRule returns ExpressionType:
+	//    {ExpressionType}
+	//    'expression'
+	//;
+	public BaseLanguageGrammarAccess.ExpressionTypeRuleElements getExpressionTypeRuleAccess() {
+		return gaBaseLanguage.getExpressionTypeRuleAccess();
+	}
+	
+	public ParserRule getExpressionTypeRuleRule() {
+		return getExpressionTypeRuleAccess().getRule();
+	}
+	
+	//IntTypeRule returns IntType:
+	//    {IntType}
+	//    'int'
+	//;
+	public BaseLanguageGrammarAccess.IntTypeRuleElements getIntTypeRuleAccess() {
+		return gaBaseLanguage.getIntTypeRuleAccess();
+	}
+	
+	public ParserRule getIntTypeRuleRule() {
+		return getIntTypeRuleAccess().getRule();
+	}
+	
+	//RealTypeRule returns RealType:
+	//    {RealType}
+	//    'real'
+	//;
+	public BaseLanguageGrammarAccess.RealTypeRuleElements getRealTypeRuleAccess() {
+		return gaBaseLanguage.getRealTypeRuleAccess();
+	}
+	
+	public ParserRule getRealTypeRuleRule() {
+		return getRealTypeRuleAccess().getRule();
+	}
+	
+	//BooleanTypeRule returns BooleanType:
+	//    {BooleanType}
+	//    'boolean'
+	//;
+	public BaseLanguageGrammarAccess.BooleanTypeRuleElements getBooleanTypeRuleAccess() {
+		return gaBaseLanguage.getBooleanTypeRuleAccess();
+	}
+	
+	public ParserRule getBooleanTypeRuleRule() {
+		return getBooleanTypeRuleAccess().getRule();
+	}
+	
+	//VoidTypeRule returns VoidType:
+	//    {VoidType}
+	//    'void'
+	//;
+	public BaseLanguageGrammarAccess.VoidTypeRuleElements getVoidTypeRuleAccess() {
+		return gaBaseLanguage.getVoidTypeRuleAccess();
+	}
+	
+	public ParserRule getVoidTypeRuleRule() {
+		return getVoidTypeRuleAccess().getRule();
+	}
+	
+	//DataTypeRule returns DataType:
+	//    {DataType}
+	//    'data'
+	//;
+	public BaseLanguageGrammarAccess.DataTypeRuleElements getDataTypeRuleAccess() {
+		return gaBaseLanguage.getDataTypeRuleAccess();
+	}
+	
+	public ParserRule getDataTypeRuleRule() {
+		return getDataTypeRuleAccess().getRule();
+	}
+	
+	//ArrayTypeRule returns ArrayType:
+	//    'array'     elements += TypeRule
+	//;
+	public BaseLanguageGrammarAccess.ArrayTypeRuleElements getArrayTypeRuleAccess() {
+		return gaBaseLanguage.getArrayTypeRuleAccess();
+	}
+	
+	public ParserRule getArrayTypeRuleRule() {
+		return getArrayTypeRuleAccess().getRule();
+	}
+	
+	//FunctionDefinitionRule returns FunctionDefinition:
+	//    'def' type = TypeRule name = StringOrId '(' (parameters+=ParameterRule (',' parameters+=ParameterRule)*)? ')' ';'
+	//;
+	public BaseLanguageGrammarAccess.FunctionDefinitionRuleElements getFunctionDefinitionRuleAccess() {
+		return gaBaseLanguage.getFunctionDefinitionRuleAccess();
+	}
+	
+	public ParserRule getFunctionDefinitionRuleRule() {
+		return getFunctionDefinitionRuleAccess().getRule();
+	}
+	
+	//ConstantDefinitionRule returns ConstantDefinition:
+	//    'const' type = TypeRule name = StringOrId ':=' value = ExpressionRule ';'
+	//;
+	public BaseLanguageGrammarAccess.ConstantDefinitionRuleElements getConstantDefinitionRuleAccess() {
+		return gaBaseLanguage.getConstantDefinitionRuleAccess();
+	}
+	
+	public ParserRule getConstantDefinitionRuleRule() {
+		return getConstantDefinitionRuleAccess().getRule();
+	}
+	
+	//ParameterRule returns Parameter:
+	//    type = TypeRule name = StringOrId
+	//;
+	public BaseLanguageGrammarAccess.ParameterRuleElements getParameterRuleAccess() {
+		return gaBaseLanguage.getParameterRuleAccess();
+	}
+	
+	public ParserRule getParameterRuleRule() {
+		return getParameterRuleAccess().getRule();
+	}
+	
+	//ImportRule returns Import:
+	//    'import' language=STRING 'from' importedNamespace=QualifiedName ";"
+	//;
+	public BaseLanguageGrammarAccess.ImportRuleElements getImportRuleAccess() {
+		return gaBaseLanguage.getImportRuleAccess();
+	}
+	
+	public ParserRule getImportRuleRule() {
+		return getImportRuleAccess().getRule();
+	}
+	
+	//FunctionNameRule returns DefinedFunctionName:
+	//    definition = [FunctionDefinition|QualifiedName]
+	//;
+	public BaseLanguageGrammarAccess.FunctionNameRuleElements getFunctionNameRuleAccess() {
+		return gaBaseLanguage.getFunctionNameRuleAccess();
+	}
+	
+	public ParserRule getFunctionNameRuleRule() {
+		return getFunctionNameRuleAccess().getRule();
+	}
+	
+	//QualifiedName:
+	//    StringOrId ('.' StringOrId)*
+	//;
+	public BaseLanguageGrammarAccess.QualifiedNameElements getQualifiedNameAccess() {
+		return gaBaseLanguage.getQualifiedNameAccess();
+	}
+	
+	public ParserRule getQualifiedNameRule() {
+		return getQualifiedNameAccess().getRule();
+	}
+	
 	//StringOrId:
 	//    QUOTED_ID | ID;
-	public ExpressionLanguageGrammarAccess.StringOrIdElements getStringOrIdAccess() {
-		return gaExpressionLanguage.getStringOrIdAccess();
+	public BaseLanguageGrammarAccess.StringOrIdElements getStringOrIdAccess() {
+		return gaBaseLanguage.getStringOrIdAccess();
 	}
 	
 	public ParserRule getStringOrIdRule() {
@@ -1400,36 +1560,36 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 	
 	//terminal fragment DIGIT: '0'..'9';
 	public TerminalRule getDIGITRule() {
-		return gaExpressionLanguage.getDIGITRule();
+		return gaBaseLanguage.getDIGITRule();
 	}
 	
 	//terminal fragment EXPONENT: 'e' ('+'|'-')? DIGIT+;
 	public TerminalRule getEXPONENTRule() {
-		return gaExpressionLanguage.getEXPONENTRule();
+		return gaBaseLanguage.getEXPONENTRule();
 	}
 	
 	//@Override
 	//terminal INT returns ecore::EInt: '-'? DIGIT+;
 	public TerminalRule getINTRule() {
-		return gaExpressionLanguage.getINTRule();
+		return gaBaseLanguage.getINTRule();
 	}
 	
 	//terminal DOUBLE returns ecore::EDouble: INT EXPONENT | INT '.' DIGIT* EXPONENT?;
 	public TerminalRule getDOUBLERule() {
-		return gaExpressionLanguage.getDOUBLERule();
+		return gaBaseLanguage.getDOUBLERule();
 	}
 	
 	//@Override
 	//terminal STRING:
 	//    '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"';
 	public TerminalRule getSTRINGRule() {
-		return gaExpressionLanguage.getSTRINGRule();
+		return gaBaseLanguage.getSTRINGRule();
 	}
 	
 	//terminal QUOTED_ID:
 	//    "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'";
 	public TerminalRule getQUOTED_IDRule() {
-		return gaExpressionLanguage.getQUOTED_IDRule();
+		return gaBaseLanguage.getQUOTED_IDRule();
 	}
 	
 	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;

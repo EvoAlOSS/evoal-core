@@ -3,7 +3,7 @@ package de.evoal.core.ea.main.producer;
 import de.evoal.core.api.board.CoreBlackboardEntries;
 import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.core.api.utils.LanguageHelper;
-import de.evoal.languages.model.instance.Instance;
+import de.evoal.languages.model.base.Instance;
 import io.jenetics.*;
 import lombok.extern.slf4j.Slf4j;
 
@@ -15,6 +15,9 @@ import javax.inject.Named;
 @ApplicationScoped
 @Slf4j
 public class SelectorFactory {
+	@Inject
+	private LanguageHelper helper;
+
 	@Inject
 	@ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.size-of-population")
 	private int sizeOfPopulation;
@@ -49,15 +52,15 @@ public class SelectorFactory {
 			case "roulette-wheel-selector": return createRouletteWheelSelector(config);
 		}
 		log.error("Configured selector with name '{}' is not supported. Available selectors are:\n" +
-				  "  elite-selector,\n" +
-				  "  monte-carlo-selector,\n" +
-				  "  stochastic-universal-selector,\n" +
-				  "  tournament-selector,\n" +
-				  "  truncation-selector,\n" +
-				  "  boltzmann-selector,\n" +
-				  "  exponential-rank-selector,\n" +
-				  "  linear-rank-selector,\n" +
-				  "  roulette-wheel-selector", name);
+				"  elite-selector,\n" +
+				"  monte-carlo-selector,\n" +
+				"  stochastic-universal-selector,\n" +
+				"  tournament-selector,\n" +
+				"  truncation-selector,\n" +
+				"  boltzmann-selector,\n" +
+				"  exponential-rank-selector,\n" +
+				"  linear-rank-selector,\n" +
+				"  roulette-wheel-selector", name);
 		throw new IllegalStateException("Selector '" + name + "' is unknown.");
 	}
 
@@ -65,25 +68,25 @@ public class SelectorFactory {
 		return (Selector<G,C>) new RouletteWheelSelector<>();
 	}
 
-	private static <G extends Gene<?,G>, C extends Comparable<? super C>> Selector<G, C> createBoltzmannSelector(final Instance config) {
-		final Double beta = LanguageHelper.lookup(config, "beta");
+	private <G extends Gene<?,G>, C extends Comparable<? super C>> Selector<G, C> createBoltzmannSelector(final Instance config) {
+		final Double beta = helper.lookup(config, "beta");
 
 		return (Selector<G,C>) new BoltzmannSelector<>(beta);
 	}
 
-	private static <G extends Gene<?,G>, C extends Comparable<? super C>> Selector<G, C> createExponentialRankSelector(final Instance config) {
-		final Double c = LanguageHelper.lookup(config, "c");
+	private <G extends Gene<?,G>, C extends Comparable<? super C>> Selector<G, C> createExponentialRankSelector(final Instance config) {
+		final Double c = helper.lookup(config, "c");
 
 		return new ExponentialRankSelector<>(c);
 	}
 
-	private static <G extends Gene<?,G>, C extends Comparable<? super C>> Selector<G, C> createTruncationSelector(final Instance config) {
-		int worstRank = LanguageHelper.lookup(config, "worstRank");
+	private <G extends Gene<?,G>, C extends Comparable<? super C>> Selector<G, C> createTruncationSelector(final Instance config) {
+		int worstRank = helper.lookup(config, "worstRank");
 		return new TruncationSelector<>(worstRank);
 	}
 
 	private <G extends Gene<?,G>, C extends Comparable<? super C>> Selector<G, C> createTournamentSelector(final Instance config) {
-		int count = (int)(LanguageHelper.<Double>lookup(config, "size-factor") * sizeOfPopulation);
+		int count = (int)(helper.<Double>lookup(config, "size-factor") * sizeOfPopulation);
 		return new TournamentSelector<>(count);
 	}
 
@@ -91,8 +94,8 @@ public class SelectorFactory {
 		return (Selector<G,C>) new StochasticUniversalSelector<>();
 	}
 
-	private static <G extends Gene<?,G>, C extends Comparable<? super C>> Selector<G, C> createLinearRankSelector(final Instance config) {
-		Integer nminus = LanguageHelper.lookup(config, "nminus");
+	private <G extends Gene<?,G>, C extends Comparable<? super C>> Selector<G, C> createLinearRankSelector(final Instance config) {
+		Integer nminus = helper.lookup(config, "nminus");
 		if(nminus == null) {
 			throw new IllegalStateException("'" + nminus + "' is not defined.");
 		}
@@ -104,14 +107,14 @@ public class SelectorFactory {
 	}
 
 	private <G extends Gene<?,G>, C extends Comparable<? super C>> EliteSelector<G,C> createEliteSelector(final Instance config) {
-		int count = (int)(LanguageHelper.<Double>lookup(config, "size-factor") * sizeOfPopulation);
-		final Instance nonEliteSelectorConfig = LanguageHelper.lookup(config, "non-elite-selector");
-		
+		int count = (int)(helper.<Double>lookup(config, "size-factor") * sizeOfPopulation);
+		final Instance nonEliteSelectorConfig = helper.lookup(config, "non-elite-selector");
+
 		if(nonEliteSelectorConfig == null) {
 			return new EliteSelector<>(count);
 		}
 		else {
-			Selector<G,C> nonEliteSelector = create(LanguageHelper.lookup(nonEliteSelectorConfig, "name"), nonEliteSelectorConfig);
+			Selector<G,C> nonEliteSelector = create(helper.lookup(nonEliteSelectorConfig, "name"), nonEliteSelectorConfig);
 			return new EliteSelector<>(count, nonEliteSelector);
 		}
 	}

@@ -14,8 +14,8 @@ Require-Bundle: org.eclipse.xtext,
  org.eclipse.xtext.util,
  org.eclipse.emf.common,
  org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
- de.evoal.languages.model.el;bundle-version="1.0.0",
- de.evoal.languages.model.el.dsl;bundle-version="1.0.0",
+ de.evoal.languages.model.base;bundle-version="1.0.0",
+ de.evoal.languages.model.base.dsl;bundle-version="1.0.0",
  de.evoal.languages.model.dl;bundle-version="1.0.0";visibility:=reexport,
  de.evoal.languages.model.utils;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-17

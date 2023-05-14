@@ -4,17 +4,15 @@
     modelPluginID="de.evoal.languages.model.generator" forceOverwrite="true" modelName="generator"
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
-    runtimeVersion="2.20" usedGenPackages="../../de.evoal.languages.model.ddl/model/model.genmodel#//ddl ../../de.evoal.languages.model.dl/model/model.genmodel#//dl ../../de.evoal.languages.model.el/model/model.genmodel#//el ../../de.evoal.languages.model.instance/model/model.genmodel#//instance">
+    runtimeVersion="2.20" usedGenPackages="../../de.evoal.languages.model.ddl/model/model.genmodel#//ddl ../../de.evoal.languages.model.dl/model/model.genmodel#//dl ../../de.evoal.languages.model.instance/model/model.genmodel#//instance ../../de.evoal.languages.model.base/model/model.genmodel#//base">
   <foreignModel>model.ecore</foreignModel>
   <genPackages prefix="Generator" basePackage="de.evoal.languages.model" disposableProviderFactory="true"
       fileExtensions="generator" ecorePackage="model.ecore#/">
-    <genClasses ecoreClass="model.ecore#//Configuration">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//Configuration/uses"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//Configuration/pipelines"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//Configuration/statements"/>
-    </genClasses>
-    <genClasses ecoreClass="model.ecore#//Use">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//Use/importURI"/>
+    <genClasses ecoreClass="model.ecore#//GeneratorModule">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//GeneratorModule/imports"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//GeneratorModule/pipelines"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//GeneratorModule/statements"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//GeneratorModule/name"/>
     </genClasses>
     <genClasses ecoreClass="model.ecore#//PipelineDefinition">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//PipelineDefinition/name"/>

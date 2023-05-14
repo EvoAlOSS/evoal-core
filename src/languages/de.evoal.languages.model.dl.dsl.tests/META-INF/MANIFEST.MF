@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Automatic-Module-Name: de.evoal.languages.model.dl.dsl.tests
+Bundle-ManifestVersion: 2
+Bundle-Name: de.evoal.languages.model.dl.dsl.tests
+Bundle-Vendor: EvoAl project
+Bundle-Version: 1.0.0.qualifier
+Bundle-SymbolicName: de.evoal.languages.model.dl.dsl.tests; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: de.evoal.languages.model.dl.dsl,
+ org.eclipse.xtext.testing,
+ org.eclipse.xtext.xbase.testing,
+ org.eclipse.xtext.xbase.lib;bundle-version="2.14.0"
+Import-Package: org.junit.jupiter.api;version="[5.1.0,6.0.0)",
+ org.junit.jupiter.api.extension;version="[5.1.0,6.0.0)"
+Bundle-RequiredExecutionEnvironment: JavaSE-17
+Export-Package: de.evoal.languages.model.dl.dsl.tests;x-internal=true

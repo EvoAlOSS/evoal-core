@@ -2,8 +2,10 @@
  */
 package de.evoal.languages.model.ddl;
 
-import de.evoal.languages.model.el.Expression;
+import de.evoal.languages.model.base.Expression;
+
 import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -52,7 +54,7 @@ public interface DataDescription extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Constraints</b></em>' containment reference list.
-	 * The list contents are of type {@link de.evoal.languages.model.el.Expression}.
+	 * The list contents are of type {@link de.evoal.languages.model.base.Expression}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->

@@ -4,14 +4,14 @@
  */
 package de.evoal.languages.model.ddl.dsl.ui.quickfix;
 
-import de.evoal.languages.model.el.dsl.ui.quickfix.ExpressionLanguageQuickfixProvider;
+import de.evoal.languages.model.base.dsl.ui.quickfix.BaseLanguageQuickfixProvider;
 
 /**
  * Custom quickfixes.
  *
  * See https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#quick-fixes
  */
-public class DataDescriptionLanguageQuickfixProvider extends ExpressionLanguageQuickfixProvider {
+public class DataDescriptionLanguageQuickfixProvider extends BaseLanguageQuickfixProvider {
 
 //	@Fix(DataDescriptionLanguageValidator.INVALID_NAME)
 //	public void capitalizeName(final Issue issue, IssueResolutionAcceptor acceptor) {

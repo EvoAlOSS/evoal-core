@@ -2,7 +2,7 @@
  */
 package de.evoal.languages.model.mll.impl;
 
-import de.evoal.languages.model.el.StringLiteral;
+import de.evoal.languages.model.base.StringLiteral;
 
 import de.evoal.languages.model.mll.MllPackage;
 import de.evoal.languages.model.mll.StringLiteralRange;

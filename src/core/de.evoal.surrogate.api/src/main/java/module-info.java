@@ -20,18 +20,23 @@ module de.evoal.surrogate.api {
     requires de.evoal.core.main;
     requires de.evoal.languages.model.ddl;
     requires de.evoal.languages.model.dl;
-    requires de.evoal.languages.model.el;
+    requires de.evoal.languages.model.base;
     requires de.evoal.languages.model.mll;
     requires de.evoal.languages.model.ddl.dsl;
     requires de.evoal.languages.model.dl.dsl;
-    requires de.evoal.languages.model.el.dsl;
+    requires de.evoal.languages.model.base.dsl;
     requires de.evoal.languages.model.mll.dsl;
     requires de.evoal.languages.model.instance;
     requires de.evoal.core.ea;
+    requires com.google.guice;
+    requires de.evoal.languages.model.utils;
 
     exports de.evoal.surrogate.api;
     exports de.evoal.surrogate.api.function;
     exports de.evoal.surrogate.api.configuration;
+
+    // export resources
+    opens de.evoal.surrogate;
 
     // open packages for CDI
     opens de.evoal.surrogate.api to weld.core.impl;

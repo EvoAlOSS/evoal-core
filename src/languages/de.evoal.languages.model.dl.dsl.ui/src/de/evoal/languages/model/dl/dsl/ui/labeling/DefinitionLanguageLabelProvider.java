@@ -4,6 +4,7 @@
 package de.evoal.languages.model.dl.dsl.ui.labeling;
 
 import com.google.inject.Inject;
+
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
 

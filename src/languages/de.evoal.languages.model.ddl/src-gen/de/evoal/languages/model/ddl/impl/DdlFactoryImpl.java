@@ -57,12 +57,10 @@ public class DdlFactoryImpl extends EFactoryImpl implements DdlFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case DdlPackage.DATA_DESCRIPTION_MODEL: return createDataDescriptionModel();
-			case DdlPackage.USE: return createUse();
-			case DdlPackage.DATA_TYPE: return createDataType();
+			case DdlPackage.DATA_DESCRIPTION_MODULE: return createDataDescriptionModule();
+			case DdlPackage.DATA_TYPE_DEFINITION: return createDataTypeDefinition();
 			case DdlPackage.TYPED_DATA_DESCRIPTION: return createTypedDataDescription();
 			case DdlPackage.UNTYPED_DATA_DESCRIPTION: return createUntypedDataDescription();
-			case DdlPackage.FUNCTION_NAME: return createFunctionName();
 			case DdlPackage.DATA_REFERENCE: return createDataReference();
 			case DdlPackage.SELF_REFERENCE: return createSelfReference();
 			default:
@@ -110,9 +108,9 @@ public class DdlFactoryImpl extends EFactoryImpl implements DdlFactory {
 	 * @generated
 	 */
 	@Override
-	public DataDescriptionModel createDataDescriptionModel() {
-		DataDescriptionModelImpl dataDescriptionModel = new DataDescriptionModelImpl();
-		return dataDescriptionModel;
+	public DataDescriptionModule createDataDescriptionModule() {
+		DataDescriptionModuleImpl dataDescriptionModule = new DataDescriptionModuleImpl();
+		return dataDescriptionModule;
 	}
 
 	/**
@@ -121,20 +119,9 @@ public class DdlFactoryImpl extends EFactoryImpl implements DdlFactory {
 	 * @generated
 	 */
 	@Override
-	public Use createUse() {
-		UseImpl use = new UseImpl();
-		return use;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public DataType createDataType() {
-		DataTypeImpl dataType = new DataTypeImpl();
-		return dataType;
+	public DataTypeDefinition createDataTypeDefinition() {
+		DataTypeDefinitionImpl dataTypeDefinition = new DataTypeDefinitionImpl();
+		return dataTypeDefinition;
 	}
 
 	/**
@@ -157,17 +144,6 @@ public class DdlFactoryImpl extends EFactoryImpl implements DdlFactory {
 	public UntypedDataDescription createUntypedDataDescription() {
 		UntypedDataDescriptionImpl untypedDataDescription = new UntypedDataDescriptionImpl();
 		return untypedDataDescription;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public FunctionName createFunctionName() {
-		FunctionNameImpl functionName = new FunctionNameImpl();
-		return functionName;
 	}
 
 	/**

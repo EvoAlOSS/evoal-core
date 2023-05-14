@@ -1,7 +1,7 @@
 package de.evoal.core.api.statistics.writer;
 
 import de.evoal.core.api.statistics.IterationResult;
-import de.evoal.languages.model.instance.Instance;
+import de.evoal.languages.model.base.Instance;
 
 /**
  * Evaluation-specific data writer for evaluation results. The information

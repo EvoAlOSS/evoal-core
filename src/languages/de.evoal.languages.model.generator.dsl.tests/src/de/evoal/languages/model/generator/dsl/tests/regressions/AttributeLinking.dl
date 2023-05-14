@@ -1,0 +1,14 @@
+module  de.evoal.languages.model.generator.dsl.tests.regressions.AttributeLinking {
+	type 'A' {
+		'abc' : float;
+	} 
+ 
+	type 'B' {
+		'abc' : float;
+		'xxx' : float;
+	}
+	
+	type 'C' {
+		'xxx' : float;
+	}
+} 

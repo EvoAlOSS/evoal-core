@@ -1,11 +1,13 @@
 package de.evoal.surrogate.main.internal;
 
 import de.evoal.core.api.cdi.BeanFactory;
+import de.evoal.core.api.languages.ExpressionEvaluator;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.utils.ConstantSwitch;
+import de.evoal.languages.model.base.DefinedFunctionName;
 import de.evoal.languages.model.ddl.DataDescription;
-import de.evoal.languages.model.el.Call;
-import de.evoal.languages.model.el.StringLiteral;
+import de.evoal.languages.model.base.Call;
+import de.evoal.languages.model.base.StringLiteral;
 import de.evoal.languages.model.mll.*;
 import de.evoal.languages.model.mll.util.MllSwitch;
 import de.evoal.surrogate.api.SurrogateInformationCalculator;
@@ -35,6 +37,9 @@ import java.util.stream.Stream;
 @Dependent
 @Slf4j
 public class StatementExecutor extends MllSwitch<Object> {
+
+    @Inject
+    private ExpressionEvaluator evaluator;
 
     private SurrogateConfiguration config;
 
@@ -104,7 +109,7 @@ public class StatementExecutor extends MllSwitch<Object> {
         manager.setTrainingStream(new FileBasedPropertiesStreamSupplier(input, trainingSpec));
 
         this.definition = definition;
-        this.config = SurrogateConfiguration.from(definition);
+        this.config = SurrogateConfiguration.from(definition, evaluator);
 
         log.info("Training surrogate function.");
         this.function = new SurrogateFactory(config, manager.getTrainingStream()).create();
@@ -222,7 +227,7 @@ public class StatementExecutor extends MllSwitch<Object> {
 
     private void saveTrainedSurrogateFunctionFunction(final File outputFilename) {
         log.info("Storing pre-calculated predictive functions to '{}' ...", outputFilename);
-        outputFilename.getParentFile().mkdirs();
+        outputFilename.getAbsoluteFile().getParentFile().mkdirs();
         surrogateWriter.accept(config, outputFilename);
         log.info("Storing file was successful.");
     }

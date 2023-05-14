@@ -1,20 +1,23 @@
 package de.evoal.generator.main.benchmarks;
 
+import de.evoal.core.api.languages.ExpressionEvaluator;
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertySpecification;
 import de.evoal.core.api.utils.InitializationException;
 import de.evoal.generator.api.AbstractGeneratorFunction;
 import de.evoal.generator.api.GeneratorFunction;
-import de.evoal.languages.model.el.DoubleLiteral;
 import de.evoal.languages.model.generator.Step;
-import de.evoal.languages.model.instance.LiteralValue;
 
 import javax.enterprise.context.Dependent;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 @Dependent
 @Named("rastrigin")
 public class Rastrigin extends AbstractGeneratorFunction {
+    @Inject
+    private ExpressionEvaluator evaluator;
+
     private double a;
 
     @Override
@@ -39,7 +42,7 @@ public class Rastrigin extends AbstractGeneratorFunction {
     public GeneratorFunction init(final Step configuration) throws InitializationException {
         super.init(configuration);
 
-        a = ((DoubleLiteral)((LiteralValue)configuration.getInstance().findAttribute("a").getValue()).getLiteral()).getValue();
+        a = evaluator.attributeToDouble(configuration.getInstance(), "a");
 
         return this;
     }

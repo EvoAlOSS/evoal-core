@@ -2,10 +2,10 @@ package de.evoal.core.main.comparator;
 
 import de.evoal.core.api.optimisation.OptimisationValueComparator;
 import de.evoal.core.api.optimisation.OptimisationValue;
-import de.evoal.languages.model.el.DoubleLiteral;
-import de.evoal.languages.model.instance.Array;
-import de.evoal.languages.model.instance.Instance;
-import de.evoal.languages.model.instance.LiteralValue;
+import de.evoal.languages.model.base.RealLiteral;
+import de.evoal.languages.model.base.Array;
+import de.evoal.languages.model.base.Instance;
+import de.evoal.languages.model.base.Literal;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Named;
@@ -27,10 +27,9 @@ public class WeightedSumComparator implements OptimisationValueComparator {
 
         this.weights = weights.getValues()
                               .stream()
-                              .map(LiteralValue.class::cast)
-                              .map(LiteralValue::getLiteral)
-                              .map(DoubleLiteral.class::cast)
-                              .mapToDouble(DoubleLiteral::getValue)
+                              .map(Literal.class::cast)
+                              .map(RealLiteral.class::cast)
+                              .mapToDouble(RealLiteral::getValue)
                               .toArray();
 
         return this;

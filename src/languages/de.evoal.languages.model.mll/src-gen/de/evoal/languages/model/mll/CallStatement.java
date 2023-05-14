@@ -2,7 +2,7 @@
  */
 package de.evoal.languages.model.mll;
 
-import de.evoal.languages.model.el.Call;
+import de.evoal.languages.model.base.Call;
 
 /**
  * <!-- begin-user-doc -->

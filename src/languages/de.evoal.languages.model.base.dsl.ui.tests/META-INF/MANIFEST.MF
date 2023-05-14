@@ -1,0 +1,20 @@
+Manifest-Version: 1.0
+Automatic-Module-Name: de.evoal.languages.model.base.dsl.ui.tests
+Bundle-ManifestVersion: 2
+Bundle-Name: de.evoal.languages.model.base.dsl.ui.tests
+Bundle-Vendor: My Company
+Bundle-Version: 1.0.0.qualifier
+Bundle-SymbolicName: de.evoal.languages.model.base.dsl.ui.tests; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: de.evoal.languages.model.base.dsl.ui,
+ de.evoal.languages.model.base,
+ org.eclipse.xtext.testing,
+ org.eclipse.xtext.xbase.testing,
+ org.eclipse.xtext.xbase.junit,
+ org.eclipse.core.runtime,
+ org.eclipse.xtext.ui.testing,
+ org.eclipse.ui.workbench;resolution:=optional
+Import-Package: org.junit.jupiter.api;version="[5.1.0,6.0.0)",
+ org.junit.jupiter.api.extension;version="[5.1.0,6.0.0)"
+Bundle-RequiredExecutionEnvironment: JavaSE-17
+Export-Package: de.evoal.languages.model.base.dsl.ui.tests;x-internal=true

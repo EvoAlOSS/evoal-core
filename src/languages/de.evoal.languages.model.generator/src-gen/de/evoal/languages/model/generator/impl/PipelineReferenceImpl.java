@@ -4,15 +4,10 @@
 package de.evoal.languages.model.generator.impl;
 
 import de.evoal.languages.model.generator.GeneratorPackage;
-import de.evoal.languages.model.generator.PipelineDefinition;
 import de.evoal.languages.model.generator.PipelineReference;
 
-import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
 
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 /**

@@ -1,11 +1,11 @@
 package de.evoal.core.main.constraints.el;
 
-import de.evoal.languages.model.el.*;
-import de.evoal.languages.model.el.util.ELSwitch;
+import de.evoal.languages.model.base.*;
+import de.evoal.languages.model.base.util.BaseSwitch;
 
 import java.util.Objects;
 
-public class NumberSwitch extends ELSwitch<Number> {
+public class NumberSwitch extends BaseSwitch<Number> {
     @Override
     public Number caseOrExpression(final OrExpression object) {
         Objects.equals(object.getSubExpressions().size(), 1);
@@ -93,7 +93,7 @@ public class NumberSwitch extends ELSwitch<Number> {
     }
 
     @Override
-    public Number caseDoubleLiteral(final DoubleLiteral object) {
+    public Number caseRealLiteral(final RealLiteral object) {
         return object.getValue();
     }
 

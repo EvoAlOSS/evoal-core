@@ -1,0 +1,10 @@
+import "definitions" from de.evoal.languages.model.generator.dsl.tests.regressions.AttributeLinking;
+
+pipeline 'p' [
+	step {
+		component B { 
+			abc := 1.0;
+			xxx := 2.0;
+		}
+	}
+]

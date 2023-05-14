@@ -27,7 +27,7 @@ public class GeneratorDSLParser extends AbstractAntlrParser {
 
 	@Override 
 	protected String getDefaultRuleName() {
-		return "ConfigurationRule";
+		return "GeneratorModuleRule";
 	}
 
 	public GeneratorDSLGrammarAccess getGrammarAccess() {

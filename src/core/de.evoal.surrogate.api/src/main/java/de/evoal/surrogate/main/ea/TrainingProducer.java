@@ -5,7 +5,7 @@ import de.evoal.core.api.cdi.BeanFactory;
 import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.core.api.optimisation.InitialCandidatesProvider;
 import de.evoal.core.api.constraints.strategies.RepairStrategy;
-import de.evoal.languages.model.instance.Instance;
+import de.evoal.languages.model.base.Instance;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.Dependent;

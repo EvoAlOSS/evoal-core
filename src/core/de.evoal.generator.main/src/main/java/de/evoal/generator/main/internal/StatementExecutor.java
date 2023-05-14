@@ -143,7 +143,8 @@ public class StatementExecutor extends GeneratorSwitch<Object> {
             filename = filename.replace("${" + var + "}", replacement);
         }
 
-        log.info("Writing {}", filename);
+        log.info("Writing {} with {} data points.", filename, count);
+        new File(filename).getAbsoluteFile().getParentFile().mkdirs();
 
         final PropertiesSpecification specification = PropertiesSpecification.builder().build();
         final Properties emptyProperties = new Properties(specification);
@@ -156,10 +157,8 @@ public class StatementExecutor extends GeneratorSwitch<Object> {
             }
         }
 
-        new File(filename).getParentFile().mkdirs();
-
         PropertiesSpecification.Builder resultSpec = PropertiesSpecification.builder();
-        stream.peek(p -> resultSpec.add(p.getSpecification()));
+        stream = stream.peek(p -> resultSpec.add(p.getSpecification()));
 
         try(final PropertiesWriter writer = PropertiesIOFactory.writer(new File(filename), resultSpec.build())) {
             stream.limit(count)
@@ -171,7 +170,7 @@ public class StatementExecutor extends GeneratorSwitch<Object> {
                       }
                   });
         } catch (final Exception e) {
-            log.error("Failed to write properties to file '{}'.", filename);
+            log.error("Failed to write properties to file '{}'.", filename, e);
         }
 
         return null;

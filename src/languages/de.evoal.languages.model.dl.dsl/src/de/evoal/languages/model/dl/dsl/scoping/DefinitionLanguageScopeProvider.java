@@ -7,15 +7,14 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.scoping.IScope;
 
+import de.evoal.languages.model.base.BasePackage;
+import de.evoal.languages.model.base.Instance;
+
 /**
  * This class contains custom scoping description.
  * 
  * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#scoping
  * on how and when to use it.
  */
-public class DefinitionLanguageScopeProvider extends AbstractDefinitionLanguageScopeProvider {
-	@Override
-	public IScope getScope(final EObject context, final EReference reference) {
-		return super.getScope(context, reference);
-	}
+public class DefinitionLanguageScopeProvider extends AbstractDefinitionLanguageScopeProvider {	
 }

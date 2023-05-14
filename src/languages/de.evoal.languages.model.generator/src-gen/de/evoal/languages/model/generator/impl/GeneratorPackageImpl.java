@@ -3,17 +3,17 @@
  */
 package de.evoal.languages.model.generator.impl;
 
+import de.evoal.languages.model.base.BasePackage;
+
 import de.evoal.languages.model.ddl.DdlPackage;
 
 import de.evoal.languages.model.dl.DlPackage;
 
-import de.evoal.languages.model.el.ELPackage;
-
 import de.evoal.languages.model.generator.ApplyStatement;
-import de.evoal.languages.model.generator.Configuration;
 import de.evoal.languages.model.generator.CounterRange;
 import de.evoal.languages.model.generator.ForStatement;
 import de.evoal.languages.model.generator.GeneratorFactory;
+import de.evoal.languages.model.generator.GeneratorModule;
 import de.evoal.languages.model.generator.GeneratorPackage;
 import de.evoal.languages.model.generator.PipelineArray;
 import de.evoal.languages.model.generator.PipelineDefinition;
@@ -22,9 +22,8 @@ import de.evoal.languages.model.generator.PipelineReference;
 import de.evoal.languages.model.generator.Range;
 import de.evoal.languages.model.generator.Statement;
 import de.evoal.languages.model.generator.Step;
-import de.evoal.languages.model.generator.Use;
-
 import de.evoal.languages.model.generator.VariableReference;
+
 import de.evoal.languages.model.instance.InstancePackage;
 
 import org.eclipse.emf.ecore.EAttribute;
@@ -46,14 +45,7 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass configurationEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass useEClass = null;
+	private EClass generatorModuleEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -150,7 +142,6 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 	private GeneratorPackageImpl() {
 		super(eNS_URI, GeneratorFactory.eINSTANCE);
 	}
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -182,8 +173,8 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 		// Initialize simple dependencies
 		DdlPackage.eINSTANCE.eClass();
 		DlPackage.eINSTANCE.eClass();
-		ELPackage.eINSTANCE.eClass();
 		InstancePackage.eINSTANCE.eClass();
+		BasePackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
 		theGeneratorPackage.createPackageContents();
@@ -205,8 +196,8 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 	 * @generated
 	 */
 	@Override
-	public EClass getConfiguration() {
-		return configurationEClass;
+	public EClass getGeneratorModule() {
+		return generatorModuleEClass;
 	}
 
 	/**
@@ -215,8 +206,8 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 	 * @generated
 	 */
 	@Override
-	public EReference getConfiguration_Uses() {
-		return (EReference)configurationEClass.getEStructuralFeatures().get(0);
+	public EReference getGeneratorModule_Imports() {
+		return (EReference)generatorModuleEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -225,8 +216,8 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 	 * @generated
 	 */
 	@Override
-	public EReference getConfiguration_Pipelines() {
-		return (EReference)configurationEClass.getEStructuralFeatures().get(1);
+	public EReference getGeneratorModule_Pipelines() {
+		return (EReference)generatorModuleEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -235,8 +226,8 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 	 * @generated
 	 */
 	@Override
-	public EReference getConfiguration_Statements() {
-		return (EReference)configurationEClass.getEStructuralFeatures().get(2);
+	public EReference getGeneratorModule_Statements() {
+		return (EReference)generatorModuleEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -245,18 +236,8 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 	 * @generated
 	 */
 	@Override
-	public EClass getUse() {
-		return useEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getUse_ImportURI() {
-		return (EAttribute)useEClass.getEStructuralFeatures().get(0);
+	public EAttribute getGeneratorModule_Name() {
+		return (EAttribute)generatorModuleEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -558,13 +539,11 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 		isCreated = true;
 
 		// Create classes and their features
-		configurationEClass = createEClass(CONFIGURATION);
-		createEReference(configurationEClass, CONFIGURATION__USES);
-		createEReference(configurationEClass, CONFIGURATION__PIPELINES);
-		createEReference(configurationEClass, CONFIGURATION__STATEMENTS);
-
-		useEClass = createEClass(USE);
-		createEAttribute(useEClass, USE__IMPORT_URI);
+		generatorModuleEClass = createEClass(GENERATOR_MODULE);
+		createEReference(generatorModuleEClass, GENERATOR_MODULE__IMPORTS);
+		createEReference(generatorModuleEClass, GENERATOR_MODULE__PIPELINES);
+		createEReference(generatorModuleEClass, GENERATOR_MODULE__STATEMENTS);
+		createEAttribute(generatorModuleEClass, GENERATOR_MODULE__NAME);
 
 		pipelineDefinitionEClass = createEClass(PIPELINE_DEFINITION);
 		createEAttribute(pipelineDefinitionEClass, PIPELINE_DEFINITION__NAME);
@@ -629,6 +608,7 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 		setNsURI(eNS_URI);
 
 		// Obtain other dependent packages
+		BasePackage theBasePackage = (BasePackage)EPackage.Registry.INSTANCE.getEPackage(BasePackage.eNS_URI);
 		InstancePackage theInstancePackage = (InstancePackage)EPackage.Registry.INSTANCE.getEPackage(InstancePackage.eNS_URI);
 
 		// Create type parameters
@@ -644,20 +624,18 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 		applyStatementEClass.getESuperTypes().add(this.getStatement());
 
 		// Initialize classes and features; add operations and parameters
-		initEClass(configurationEClass, Configuration.class, "Configuration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getConfiguration_Uses(), this.getUse(), null, "uses", null, 0, -1, Configuration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getConfiguration_Pipelines(), this.getPipelineDefinition(), null, "pipelines", null, 0, -1, Configuration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getConfiguration_Statements(), this.getStatement(), null, "statements", null, 0, -1, Configuration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(useEClass, Use.class, "Use", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getUse_ImportURI(), ecorePackage.getEString(), "importURI", null, 0, 1, Use.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(generatorModuleEClass, GeneratorModule.class, "GeneratorModule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getGeneratorModule_Imports(), theBasePackage.getImport(), null, "imports", null, 0, -1, GeneratorModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getGeneratorModule_Pipelines(), this.getPipelineDefinition(), null, "pipelines", null, 0, -1, GeneratorModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getGeneratorModule_Statements(), this.getStatement(), null, "statements", null, 0, -1, GeneratorModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getGeneratorModule_Name(), ecorePackage.getEString(), "name", null, 0, 1, GeneratorModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(pipelineDefinitionEClass, PipelineDefinition.class, "PipelineDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getPipelineDefinition_Name(), ecorePackage.getEString(), "name", null, 0, 1, PipelineDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPipelineDefinition_Steps(), this.getStep(), null, "steps", null, 0, -1, PipelineDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		initEClass(stepEClass, Step.class, "Step", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getStep_Instance(), theInstancePackage.getInstance(), null, "instance", null, 1, 1, Step.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getStep_Instance(), theBasePackage.getInstance(), null, "instance", null, 1, 1, Step.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getStep_Reads(), theInstancePackage.getDataReference(), null, "reads", null, 0, -1, Step.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getStep_Writes(), theInstancePackage.getDataReference(), null, "writes", null, 0, -1, Step.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 

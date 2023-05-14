@@ -1,11 +1,11 @@
 package de.evoal.core.main.constraints.el;
 
-import de.evoal.languages.model.el.*;
-import de.evoal.languages.model.el.util.ELSwitch;
+import de.evoal.languages.model.base.*;
+import de.evoal.languages.model.base.util.BaseSwitch;
 
 import java.util.Objects;
 
-public class StringSwitch extends ELSwitch<String> {
+public class StringSwitch extends BaseSwitch<String> {
     @Override
     public String caseOrExpression(final OrExpression object) {
         Objects.equals(object.getSubExpressions().size(), 1);
@@ -79,7 +79,7 @@ public class StringSwitch extends ELSwitch<String> {
     }
 
     @Override
-    public String caseDoubleLiteral(final DoubleLiteral object) {
+    public String caseRealLiteral(final RealLiteral object) {
         throw new IllegalStateException("Searching for String but found a double literal.");
     }
 

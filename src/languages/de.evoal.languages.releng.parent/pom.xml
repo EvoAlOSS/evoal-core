@@ -268,14 +268,15 @@
 
 		<module>../de.evoal.languages.model.utils</module>
 		<module>../de.evoal.ui.core</module>
-		
-		<module>../de.evoal.languages.model.el</module>
-		<module>../de.evoal.languages.model.el.dsl</module>
-		<module>../de.evoal.languages.model.el.dsl.ide</module>
-		<module>../de.evoal.languages.model.el.dsl.ui</module>
+
+		<module>../de.evoal.languages.model.base</module>
+		<module>../de.evoal.languages.model.base.dsl</module>
+		<module>../de.evoal.languages.model.base.dsl.ide</module>
+		<module>../de.evoal.languages.model.base.dsl.ui</module>
 
 		<module>../de.evoal.languages.model.dl</module>
 		<module>../de.evoal.languages.model.dl.dsl</module>
+		<module>../de.evoal.languages.model.dl.dsl.tests</module>
 		<module>../de.evoal.languages.model.dl.dsl.ide</module>
 		<module>../de.evoal.languages.model.dl.dsl.ui</module>
 
@@ -284,7 +285,7 @@
 		<module>../de.evoal.languages.model.ddl.dsl.ide</module>
 		<module>../de.evoal.languages.model.ddl.dsl.ui</module>
 
-		<module>../de.evoal.languages.model.instance</module>
+		<module>../de.evoal.languages.model.instance</module>		
 		<module>../de.evoal.languages.model.instance.dsl</module>
 		<module>../de.evoal.languages.model.instance.dsl.ide</module>
 		<module>../de.evoal.languages.model.instance.dsl.ui</module>
@@ -301,8 +302,11 @@
 
 		<module>../de.evoal.languages.model.generator</module>
 		<module>../de.evoal.languages.model.generator.dsl</module>
+		<module>../de.evoal.languages.model.generator.dsl.tests</module>
 		<module>../de.evoal.languages.model.generator.dsl.ide</module>
 		<module>../de.evoal.languages.model.generator.dsl.ui</module>
+
+		<module>../de.evoal.languages.model.interpreter</module>
 
 		<module>../de.evoal.languages.releng.feature</module>
 		<module>../de.evoal.languages.releng.site</module>

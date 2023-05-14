@@ -7,15 +7,16 @@
     rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" testsDirectory="/de.evoal.languages.model.mll.tests/src-gen"
     testSuiteClass="de.evoal.languages.model.mll.tests.MllAllTests" importerID="org.eclipse.emf.importer.ecore"
     complianceLevel="8.0" copyrightFields="false" editPluginID="de.evoal.languages.model.mll.edit"
-    editorPluginID="de.evoal.languages.model.mll.editor" usedGenPackages="../../de.evoal.languages.model.ddl/model/model.genmodel#//ddl ../../de.evoal.languages.model.dl/model/model.genmodel#//dl ../../de.evoal.languages.model.el/model/model.genmodel#//el ../../de.evoal.languages.model.instance/model/model.genmodel#//instance"
+    editorPluginID="de.evoal.languages.model.mll.editor" usedGenPackages="../../de.evoal.languages.model.ddl/model/model.genmodel#//ddl ../../de.evoal.languages.model.instance/model/model.genmodel#//instance ../../de.evoal.languages.model.base/model/model.genmodel#//base"
     importOrganizing="true">
   <foreignModel>model.ecore</foreignModel>
   <genPackages prefix="Mll" basePackage="de.evoal.languages.model" disposableProviderFactory="true"
       fileExtensions="mlm" ecorePackage="model.ecore#/">
-    <genClasses ecoreClass="model.ecore#//MachineLearningConfiguration">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//MachineLearningConfiguration/uses"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//MachineLearningConfiguration/definitions"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//MachineLearningConfiguration/statements"/>
+    <genClasses ecoreClass="model.ecore#//MachineLearningModule">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//MachineLearningModule/imports"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//MachineLearningModule/definitions"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//MachineLearningModule/statements"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//MachineLearningModule/name"/>
     </genClasses>
     <genClasses ecoreClass="model.ecore#//SurrogateDefinition">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//SurrogateDefinition/name"/>
@@ -28,10 +29,8 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//SurrogateLayerDefinition/functions"/>
     </genClasses>
     <genClasses ecoreClass="model.ecore#//PartialSurrogateFunctionDefinition">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//PartialSurrogateFunctionDefinition/name"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//PartialSurrogateFunctionDefinition/inputs"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//PartialSurrogateFunctionDefinition/outputs"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//PartialSurrogateFunctionDefinition/parameters"/>
     </genClasses>
     <genClasses ecoreClass="model.ecore#//Prediction">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//Prediction/definition"/>
@@ -64,12 +63,6 @@
     </genClasses>
     <genClasses ecoreClass="model.ecore#//StringLiteralRange">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//StringLiteralRange/elements"/>
-    </genClasses>
-    <genClasses ecoreClass="model.ecore#//DefinedFunctionName">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//DefinedFunctionName/definition"/>
-    </genClasses>
-    <genClasses ecoreClass="model.ecore#//Use">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//Use/importURI"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

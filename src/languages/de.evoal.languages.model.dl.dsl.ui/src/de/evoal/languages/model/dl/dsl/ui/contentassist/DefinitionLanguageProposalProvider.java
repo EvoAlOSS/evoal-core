@@ -8,4 +8,5 @@ package de.evoal.languages.model.dl.dsl.ui.contentassist;
  * on how to customize the content assistant.
  */
 public class DefinitionLanguageProposalProvider extends AbstractDefinitionLanguageProposalProvider {
+
 }

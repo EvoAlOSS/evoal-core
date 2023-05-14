@@ -4,6 +4,9 @@
 package de.evoal.languages.model.generator.dsl.ui;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.xtext.ui.editor.hover.IEObjectHoverProvider;
+
+import de.evoal.languages.model.generator.dsl.ui.hover.GeneratorEObjectHoverProvider;
 
 /**
  * Use this class to register components to be used within the Eclipse IDE.
@@ -13,4 +16,8 @@ public class GeneratorDSLUiModule extends AbstractGeneratorDSLUiModule {
 	public GeneratorDSLUiModule(AbstractUIPlugin plugin) {
 		super(plugin);
 	}
+	
+    public Class<? extends IEObjectHoverProvider> bindIEObjectHoverProvider() {
+        return GeneratorEObjectHoverProvider.class;
+    }
 }
