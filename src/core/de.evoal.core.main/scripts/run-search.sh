@@ -11,7 +11,6 @@ cd $1
 
 set -x
 java $CLASSPATH \
-    "-Bcore:logging=debug" \
      "-Bcore:main=heuristic-search" \
      "-Bcore:optimisation-configuration-file=$2" \
      "-Bcore:evaluation-output-folder=$3"

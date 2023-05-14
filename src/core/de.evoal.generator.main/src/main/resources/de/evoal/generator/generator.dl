@@ -112,17 +112,17 @@ module de.evoal.generator.generator {
 		/**
 		 * The constant a is set to 20 in the original Ackley function.
 		 */
-		'a' : float := 20.0;
+		'a' : real := 20.0;
 		
 		/**
 		 * The constant b is set to 0.2 in the original Ackley function.
 		 */
-		b : float := 0.2;
+		b : real := 0.2;
 	
 		/**
 		 * The constant c is set to 2π in the original Ackley function.
 		 */
-		'c' : float := 2 * PI;
+		'c' : real := 2 * PI;
 	}
 	
 	/**
@@ -191,7 +191,7 @@ module de.evoal.generator.generator {
 		/**
 		 * Constant a, which is typically 10.
 		 */
-		'a' : float := 10.0;
+		'a' : real := 10.0;
 	}
 	
 	/**
@@ -213,15 +213,15 @@ module de.evoal.generator.generator {
 		/**
 		 * The constant values to append.
 		 */
-		constants : array float;	
+		constants : array real;	
 	}
 	
 	
 	type distribution {}
 
 	type 'multivariate-normal-distribution' extends distribution {
-		means : array float;
-		covariance : array array float;
+		means : array real;
+		covariance : array array real;
 	}
 	
 	/**
@@ -244,12 +244,12 @@ module de.evoal.generator.generator {
 		/**
 		 * The distribution's expected value.
 		 */
-		'μ' : float;
+		'μ' : real;
 		
 		/**
 		 * The distribution's standard deviation.
 		 */
-		'σ' : float;	
+		'σ' : real;	
 	}
 	
 	

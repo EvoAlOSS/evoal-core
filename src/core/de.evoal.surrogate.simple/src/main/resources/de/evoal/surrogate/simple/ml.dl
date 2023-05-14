@@ -12,12 +12,12 @@ module de.evoal.surrogate.simple.ml {
 	}
 	
 	type 'linear-regression' extends surrogate {
-	    intercept : float;
-	    slope : float;
+	    intercept : real;
+	    slope : real;
 	}
 	
 	type 'simple-quadratic-regression' extends surrogate {
-	    intercept : float;
-	    slope : float;
+	    intercept : real;
+	    slope : real;
 	}
 }

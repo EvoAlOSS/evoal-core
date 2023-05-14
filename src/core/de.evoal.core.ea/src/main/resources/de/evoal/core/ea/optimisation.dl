@@ -48,7 +48,7 @@ module de.evoal.core.ea.optimisation {
 	}
 	
 	type 'standard-deviation' extends 'constraint-calculation' {
-		factor : float;
+		factor : real;
 	}
 	
 	abstract type 'constraint-handling' {}
@@ -62,7 +62,7 @@ module de.evoal.core.ea.optimisation {
 	type 'repair-with-random' extends 'repair-strategy' {}
 	
 	type 'malus-for-fitness' extends 'constraint-handling' {
-		smoothing : float;
+		smoothing : real;
 	}
 	
 	type selectors {
@@ -77,12 +77,12 @@ module de.evoal.core.ea.optimisation {
 	}
 
 	type 'elite-selector' extends selector {
-		'size-factor' : float;
+		'size-factor' : real;
 		'non-elite-selector' : instance selector;
 	}
 	
 	type 'boltzmann-selector' extends selector {
-		beta : float;
+		beta : real;
 	}
 	
 	type 'exponential-rank-selector' extends selector {
@@ -102,7 +102,7 @@ module de.evoal.core.ea.optimisation {
 	}
 	
 	type 'tournament-selector' extends selector {
-		'size-factor' : float;
+		'size-factor' : real;
 	}
 	
 	type 'truncation-selector' extends selector {
@@ -117,86 +117,86 @@ module de.evoal.core.ea.optimisation {
 	abstract type crossover {}
 	
 	type 'mean-alterer' extends crossover {
-		probability : float;
+		probability : real;
 	}
 	
 	type 'correlation-mean-alterer' extends crossover {
-		probability : float;
+		probability : real;
 	}
 	
 	type 'partial-matched-alterer' extends crossover {
-		probability : float;
+		probability : real;
 	}
 	
 	type 'correlation-partial-matched-alterer' extends crossover {
-		probability : float;
+		probability : real;
 	}
 	
 	type 'line-crossover' extends crossover {
-		probability : float;
-		position : float;
+		probability : real;
+		position : real;
 	}
 	
 	type 'correlation-line-crossover' extends crossover {
-		probability : float;
-		position : float;
+		probability : real;
+		position : real;
 	}
 	
 	type 'multi-point-crossover' extends crossover {
-		probability : float;
+		probability : real;
 		count : int;
 	}
 	
 	type 'correlation-multi-point-crossover' extends crossover {
-		probability : float;
+		probability : real;
 		count : int;
 	}
 	
 	type 'single-point-crossover' extends crossover {
-		probability : float;
+		probability : real;
 	}
 	
 	type 'correlation-single-point-crossover' extends crossover {
-		probability : float;
+		probability : real;
 	}
 	
 	type 'uniform-crossover' extends crossover {
-		'crossover-probability' : float;
-		'swap-probability' : float;
+		'crossover-probability' : real;
+		'swap-probability' : real;
 	}
 	
 	type 'correlation-uniform-crossover' extends crossover {
-		'crossover-probability' : float;
-		'swap-probability' : float;
+		'crossover-probability' : real;
+		'swap-probability' : real;
 	}
 	
 	abstract type mutator {
 	}
 	
 	type 'gaussian-mutator' extends mutator {
-		probability : float;
+		probability : real;
 	}
 	
 	type 'correlation-gaussian-mutator' extends mutator {
-		probability : float;
-		threshold : float;
+		probability : real;
+		threshold : real;
 	}
 	
 	type 'swap-mutator' extends mutator {
-		probability : float;
+		probability : real;
 	}
 	
 	type 'correlation-swap-mutator' extends mutator {
-		probability : float;
-		threshold : float;
+		probability : real;
+		threshold : real;
 	}
 	
 	type 'bit-flip-mutator' extends mutator  {
-		probability : float;
+		probability : real;
 	}
 	
 	type 'correlation-bit-flip-mutator' extends mutator {
-		probability : float;
-		threshold : float;
+		probability : real;
+		threshold : real;
 	}
 }

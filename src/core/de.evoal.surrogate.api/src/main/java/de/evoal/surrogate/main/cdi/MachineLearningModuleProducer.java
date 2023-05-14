@@ -10,6 +10,7 @@ import de.evoal.languages.model.dl.dsl.DefinitionLanguageStandaloneSetup;
 import de.evoal.languages.model.mll.dsl.MachineLearningLanguageStandaloneSetup;
 import de.evoal.languages.model.mll.MachineLearningModule;
 import de.evoal.languages.model.mll.impl.MllPackageImpl;
+import de.evoal.languages.model.utils.scoping.ClasspathGlobalScopeProvider;
 import de.evoal.surrogate.api.SurrogateBlackboardEntries;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.emf.common.util.URI;
@@ -74,6 +75,10 @@ public class MachineLearningModuleProducer {
      */
     private Optional<MachineLearningModule> read(final File modelFile) {
         log.info("Reading model file {}.", modelFile);
+
+        final File folder = modelFile.getAbsoluteFile().getParentFile();
+        ClasspathGlobalScopeProvider.SEARCH_PATH.add(folder.toString());
+        log.info("Adding {} to search path.", folder);
 
         final Injector injector = new MachineLearningLanguageStandaloneSetup().createInjectorAndDoEMFRegistration();
         new DataDescriptionLanguageStandaloneSetup().createInjectorAndDoEMFRegistration();

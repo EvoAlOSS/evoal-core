@@ -13,12 +13,12 @@ module de.evoal.approximative.density.optimisation {
 		/**
 		 * Exponent for the formula.
 		 */
-		exponent : float;
+		exponent : real;
 	
 		/**
 		 * Exponent for the formula.
 		 */
-		'root-exponent' : float;
+		'root-exponent' : real;
 	}
 	
 	type 'kernel-density' extends density {}

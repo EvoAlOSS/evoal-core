@@ -15,6 +15,7 @@ import de.evoal.languages.model.base.impl.BasePackageImpl;
 import de.evoal.languages.model.generator.dsl.GeneratorDSLStandaloneSetup;
 import de.evoal.languages.model.generator.GeneratorModule;
 import de.evoal.languages.model.generator.impl.GeneratorPackageImpl;
+import de.evoal.languages.model.utils.scoping.ClasspathGlobalScopeProvider;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -31,7 +32,7 @@ import org.eclipse.xtext.resource.XtextResourceSet;
 
 @ApplicationScoped
 @Slf4j
-public class GeneratroeModuleProducer {
+public class GeneratorModuleProducer {
     public void loadModel(final @Observes BlackboardEntry value, final Blackboard board) {
         if(!value.isSame(GeneratorBlackboardEntries.GENERATOR_CONFIGURATION_FILE)) {
             return;
@@ -54,6 +55,10 @@ public class GeneratroeModuleProducer {
             log.info("Configured generator configuration cannot be read.");
             throw  new IllegalArgumentException("Please specify a readable genrator file.");
         }
+
+        final File folder = file.getAbsoluteFile().getParentFile();
+        ClasspathGlobalScopeProvider.SEARCH_PATH.add(folder.toString());
+        log.info("Adding {} to search path.", folder);
 
         final GeneratorModule configuration = read(file).get();
         board.bind(GeneratorBlackboardEntries.GENERATOR_CONFIGURATION, configuration);

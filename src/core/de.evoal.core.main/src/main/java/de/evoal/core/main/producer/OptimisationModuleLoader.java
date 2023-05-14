@@ -17,6 +17,7 @@ import de.evoal.languages.model.dl.impl.DlPackageImpl;
 import de.evoal.languages.model.ol.OptimisationModule;
 import de.evoal.languages.model.ol.dsl.OptimisationLanguageStandaloneSetup;
 import de.evoal.languages.model.ol.impl.OLPackageImpl;
+import de.evoal.languages.model.utils.scoping.ClasspathGlobalScopeProvider;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -50,6 +51,10 @@ public class OptimisationModuleLoader {
             log.error("Unable to read optimisation configuration file '{}'", configurationFileName);
             throw new IllegalArgumentException("Unable to read optimisation configuration file: " + configurationFileName);
         }
+
+        final File folder = configurationFile.getAbsoluteFile().getParentFile();
+        ClasspathGlobalScopeProvider.SEARCH_PATH.add(folder.toString());
+        log.info("Adding {} to search path.", folder);
 
         initializeEMF();
 

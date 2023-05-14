@@ -4,12 +4,12 @@ module de.evoal.approximative.density.ml {
 	 * 
 	 * @param bandwith Width for density calculation.
 	 */
-	def void 'kernel-density-estimation'(float bandwidth);
+	def void 'kernel-density-estimation'(real bandwidth);
 	
 	/**
 	 * Measures density information using a gaussian kernel.
 	 * 
 	 * @param bandwith Width for density calculation.
 	 */
-	def void 'gaussian-density-estimation'(float bandwidth);	
+	def void 'gaussian-density-estimation'(real bandwidth);
 }

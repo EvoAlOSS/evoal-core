@@ -2,5 +2,10 @@ module de.evoal.core.math {
 	/**
 	 * The one and only PI.
 	 */
-	const float PI := 3.1415926535;
+	const real PI := 3.1415926535;
+
+	/**
+	 * The one and only PI.
+	 */
+	const real 'π' := 3.1415926535;
 }

@@ -154,7 +154,7 @@ module de.evoal.core.optimisation {
 		/**
 		 * Weights for summing the dimensions.
 		 */
-		weights : array float;
+		weights : array real;
 	}
 	
 	/**

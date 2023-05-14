@@ -3,10 +3,10 @@ type 'parent' {
 }
 
 type A {
-    'float-field'    : float;
+    'float-field'    : real;
     'string-field'   : string;
     'integer-field'  : int;
     'boolean-field'  : boolean;
-    'array-1D-float' : array float;
+    'array-1D-float' : array real;
     'array-2D-int'   : array  array int;
 }
