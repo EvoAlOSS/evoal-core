@@ -72,6 +72,19 @@ module de.evoal.core.ea.optimisation {
 	
 	abstract type selector {
 	}
+
+    /**
+     * This NSGA2 selector chooses <i>count</i> elements of the population. Therefore, the population is sorted using
+     *   the Crowded-Comparison Operator first. For details, please read the original publication:
+     *
+     * K. Deb, A. Pratap, S. Agarwal, and T. Meyarivan. <i>A fast and elitist multiobjective genetic algorithm:
+     * NSGA-II</i>. Transactions on Evolutionary Computation, 6, 2, 182-197, April 2002. DOI: 10.1109/4235.996017.
+     *
+     * When using this selector, you have to ensure that you are using the ParetoComparator. Otherwise, the selector
+     *  breaks.
+     */
+	type 'nsga2-selector' extends selector {
+	}
 	
 	type 'roulette-wheel-selector' extends selector {
 	}

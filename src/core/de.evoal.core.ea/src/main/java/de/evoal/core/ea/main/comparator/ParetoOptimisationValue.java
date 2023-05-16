@@ -1,8 +1,12 @@
 package de.evoal.core.ea.main.comparator;
 
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.function.ToIntFunction;
 
 import de.evoal.core.api.optimisation.OptimisationValue;
+import io.jenetics.ext.moea.ElementComparator;
+import io.jenetics.ext.moea.ElementDistance;
 import io.jenetics.ext.moea.Vec;
 import lombok.NonNull;
 
@@ -49,5 +53,21 @@ public class ParetoOptimisationValue implements OptimisationValue {
         }
 
         return result;
+    }
+
+    public static ElementComparator<ParetoOptimisationValue> compare() {
+        return (u, v, i) -> u.fitnessValues.compare(v.fitnessValues, i);
+    }
+
+    public static Comparator<ParetoOptimisationValue> dominance() {
+        return (u, v) -> Vec.dominance(u.fitnessValues.data(), v.fitnessValues.data());
+    }
+
+    public static ElementDistance<ParetoOptimisationValue> distance() {
+        return (u, v, i) -> u.fitnessValues.distance(v.fitnessValues, i);
+    }
+
+    public static ToIntFunction<ParetoOptimisationValue> dimension() {
+        return u -> u.fitnessValues.length();
     }
 }

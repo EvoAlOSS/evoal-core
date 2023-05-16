@@ -3,8 +3,10 @@ package de.evoal.core.ea.main.producer;
 import de.evoal.core.api.board.CoreBlackboardEntries;
 import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.core.api.utils.LanguageHelper;
+import de.evoal.core.ea.main.comparator.ParetoOptimisationValue;
 import de.evoal.languages.model.base.Instance;
 import io.jenetics.*;
+import io.jenetics.ext.moea.NSGA2Selector;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -45,6 +47,8 @@ public class SelectorFactory {
 			case "tournament-selector": return createTournamentSelector(config);
 			case "truncation-selector": return createTruncationSelector(config);
 
+			case "nsga2-selector": return createNSGA2Selector(config);
+
 			/* probability-based selectors */
 			case "boltzmann-selector": return createBoltzmannSelector(config);
 			case "exponential-rank-selector": return createExponentialRankSelector(config);
@@ -62,6 +66,14 @@ public class SelectorFactory {
 				"  linear-rank-selector,\n" +
 				"  roulette-wheel-selector", name);
 		throw new IllegalStateException("Selector '" + name + "' is unknown.");
+	}
+
+	private <G extends Gene<?, G>, C extends Comparable<? super C>> Selector<G, C> createNSGA2Selector(final Instance config) {
+		return (Selector<G, C>) new NSGA2Selector<>(ParetoOptimisationValue.dominance(),
+				ParetoOptimisationValue.compare(),
+				ParetoOptimisationValue.distance(),
+				ParetoOptimisationValue.dimension()
+				);
 	}
 
 	private <G extends Gene<?, G>, C extends Comparable<? super C>> Selector<G,C> createRouletteWheelSelector(final Instance config) {
