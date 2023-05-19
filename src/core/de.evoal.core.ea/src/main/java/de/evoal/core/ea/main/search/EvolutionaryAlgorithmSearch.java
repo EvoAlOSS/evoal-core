@@ -50,20 +50,6 @@ public class EvolutionaryAlgorithmSearch implements OptimisationAlgorithm {
 	@Inject
 	private LanguageHelper helper;
 
-	/**
-	 * Location for storing the output.
-	 */
-	@Inject
-	@BlackboardValue(CoreBlackboardEntries.EVALUATION_OUTPUT_FOLDER)
-	private File outputDirectory;
-
-	/**
-	 * The actual run
-	 */
-	@Inject
-	@BlackboardValue(CoreBlackboardEntries.EVALUATION_RUN)
-	private String run;
-
 	@Inject
 	@ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.number-of-generations")
 	private int numberOfGenerations;
