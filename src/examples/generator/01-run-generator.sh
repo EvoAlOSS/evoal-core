@@ -1,5 +1,6 @@
-#!/bin/sh
+#!/bin/bash
 
-EVOAL_HOME=$( cd -- "$(dirname $0)/../../" >/dev/null 2>&1 ; pwd -P )
+export EVOAL_HOME=$( cd -- "$(dirname $0)/../../" >/dev/null 2>&1 ; pwd -P )
 
-sh $EVOAL_HOME/bin/run-generator.sh . ackley.generator
+$SHELL $EVOAL_HOME/bin/run-generator.sh . ackley.generator
+
