@@ -33,7 +33,7 @@ module de.evoal.core.ea {
     opens de.evoal.core.ea.main.constraint to weld.core.impl;
     opens de.evoal.core.ea.main.fitness to weld.core.impl;
     opens de.evoal.core.ea.main.initial to weld.core.impl;
-    opens de.evoal.core.ea.main.producer to weld.core.impl;
+    opens de.evoal.core.ea.main.selector to weld.core.impl;
     opens de.evoal.core.ea.main.search to weld.core.impl;
     opens de.evoal.core.ea.main.statistics to weld.core.impl;
 }

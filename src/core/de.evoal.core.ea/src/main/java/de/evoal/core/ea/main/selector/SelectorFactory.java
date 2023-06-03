@@ -1,6 +1,7 @@
-package de.evoal.core.ea.main.producer;
+package de.evoal.core.ea.main.selector;
 
 import de.evoal.core.api.board.CoreBlackboardEntries;
+import de.evoal.core.api.cdi.BeanFactory;
 import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.core.api.utils.LanguageHelper;
 import de.evoal.core.ea.main.comparator.ParetoOptimisationValue;
@@ -55,17 +56,8 @@ public class SelectorFactory {
 			case "linear-rank-selector": return createLinearRankSelector(config);
 			case "roulette-wheel-selector": return createRouletteWheelSelector(config);
 		}
-		log.error("Configured selector with name '{}' is not supported. Available selectors are:\n" +
-				"  elite-selector,\n" +
-				"  monte-carlo-selector,\n" +
-				"  stochastic-universal-selector,\n" +
-				"  tournament-selector,\n" +
-				"  truncation-selector,\n" +
-				"  boltzmann-selector,\n" +
-				"  exponential-rank-selector,\n" +
-				"  linear-rank-selector,\n" +
-				"  roulette-wheel-selector", name);
-		throw new IllegalStateException("Selector '" + name + "' is unknown.");
+
+		return BeanFactory.create(name, SelectorComponent.class).init(config);
 	}
 
 	private <G extends Gene<?, G>, C extends Comparable<? super C>> Selector<G, C> createNSGA2Selector(final Instance config) {

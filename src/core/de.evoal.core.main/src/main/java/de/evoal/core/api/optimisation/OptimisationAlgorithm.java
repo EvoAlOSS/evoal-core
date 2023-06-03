@@ -1,20 +1,12 @@
 package de.evoal.core.api.optimisation;
 
+import de.evoal.core.api.cdi.EvoalComponent;
 import de.evoal.languages.model.base.Instance;
 
 /**
  * Interface for all optimisation algorithms.
  */
-public interface OptimisationAlgorithm {
-    /**
-     * Initialises the algorithm based on the given configuration.
-     *
-     * @param instance The configuration to use.
-     *
-     * @return The algorithm itself.
-     */
-    OptimisationAlgorithm init(final Instance instance);
-
+public interface OptimisationAlgorithm extends EvoalComponent<OptimisationAlgorithm> {
     /**
      * Does the actual optimisation.
      */
