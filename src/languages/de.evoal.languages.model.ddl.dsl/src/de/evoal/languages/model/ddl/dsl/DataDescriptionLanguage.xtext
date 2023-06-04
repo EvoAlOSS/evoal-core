@@ -60,7 +60,7 @@ ReferenceRule returns base::ValueReference:
 ;
 
 DataReferenceRule returns DataReference:	
-	definition = [DataDescription|QualifiedName]
+	'data' definition = [DataDescription|QualifiedName]
 ;
 
 SelfReferenceRule returns SelfReference:

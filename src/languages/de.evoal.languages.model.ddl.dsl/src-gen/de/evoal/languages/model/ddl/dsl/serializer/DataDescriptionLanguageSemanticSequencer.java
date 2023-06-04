@@ -243,7 +243,7 @@ public class DataDescriptionLanguageSemanticSequencer extends BaseLanguageSemant
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DdlPackage.Literals.DATA_REFERENCE__DEFINITION));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getDataReferenceRuleAccess().getDefinitionDataDescriptionQualifiedNameParserRuleCall_0_1(), semanticObject.eGet(DdlPackage.Literals.DATA_REFERENCE__DEFINITION, false));
+		feeder.accept(grammarAccess.getDataReferenceRuleAccess().getDefinitionDataDescriptionQualifiedNameParserRuleCall_1_0_1(), semanticObject.eGet(DdlPackage.Literals.DATA_REFERENCE__DEFINITION, false));
 		feeder.finish();
 	}
 	

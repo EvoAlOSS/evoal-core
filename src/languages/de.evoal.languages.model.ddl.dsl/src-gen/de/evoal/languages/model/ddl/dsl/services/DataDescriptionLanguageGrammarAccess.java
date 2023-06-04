@@ -439,23 +439,31 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 	}
 	public class DataReferenceRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.ddl.dsl.DataDescriptionLanguage.DataReferenceRule");
-		private final Assignment cDefinitionAssignment = (Assignment)rule.eContents().get(1);
-		private final CrossReference cDefinitionDataDescriptionCrossReference_0 = (CrossReference)cDefinitionAssignment.eContents().get(0);
-		private final RuleCall cDefinitionDataDescriptionQualifiedNameParserRuleCall_0_1 = (RuleCall)cDefinitionDataDescriptionCrossReference_0.eContents().get(1);
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cDataKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cDefinitionAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final CrossReference cDefinitionDataDescriptionCrossReference_1_0 = (CrossReference)cDefinitionAssignment_1.eContents().get(0);
+		private final RuleCall cDefinitionDataDescriptionQualifiedNameParserRuleCall_1_0_1 = (RuleCall)cDefinitionDataDescriptionCrossReference_1_0.eContents().get(1);
 		
 		//DataReferenceRule returns DataReference:
-		//    definition = [DataDescription|QualifiedName]
+		//    'data' definition = [DataDescription|QualifiedName]
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
+		//'data' definition = [DataDescription|QualifiedName]
+		public Group getGroup() { return cGroup; }
+		
+		//'data'
+		public Keyword getDataKeyword_0() { return cDataKeyword_0; }
+		
 		//definition = [DataDescription|QualifiedName]
-		public Assignment getDefinitionAssignment() { return cDefinitionAssignment; }
+		public Assignment getDefinitionAssignment_1() { return cDefinitionAssignment_1; }
 		
 		//[DataDescription|QualifiedName]
-		public CrossReference getDefinitionDataDescriptionCrossReference_0() { return cDefinitionDataDescriptionCrossReference_0; }
+		public CrossReference getDefinitionDataDescriptionCrossReference_1_0() { return cDefinitionDataDescriptionCrossReference_1_0; }
 		
 		//QualifiedName
-		public RuleCall getDefinitionDataDescriptionQualifiedNameParserRuleCall_0_1() { return cDefinitionDataDescriptionQualifiedNameParserRuleCall_0_1; }
+		public RuleCall getDefinitionDataDescriptionQualifiedNameParserRuleCall_1_0_1() { return cDefinitionDataDescriptionQualifiedNameParserRuleCall_1_0_1; }
 	}
 	public class SelfReferenceRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.ddl.dsl.DataDescriptionLanguage.SelfReferenceRule");
@@ -763,7 +771,7 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 	}
 	
 	//DataReferenceRule returns DataReference:
-	//    definition = [DataDescription|QualifiedName]
+	//    'data' definition = [DataDescription|QualifiedName]
 	//;
 	public DataReferenceRuleElements getDataReferenceRuleAccess() {
 		return pDataReferenceRule;

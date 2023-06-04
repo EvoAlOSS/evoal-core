@@ -58,6 +58,7 @@ public class DataDescriptionLanguageParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getUntypedDataDescriptionRuleAccess().getGroup(), "rule__UntypedDataDescriptionRule__Group__0");
 			builder.put(grammarAccess.getUntypedDataDescriptionRuleAccess().getGroup_4(), "rule__UntypedDataDescriptionRule__Group_4__0");
 			builder.put(grammarAccess.getStatementRuleAccess().getGroup(), "rule__StatementRule__Group__0");
+			builder.put(grammarAccess.getDataReferenceRuleAccess().getGroup(), "rule__DataReferenceRule__Group__0");
 			builder.put(grammarAccess.getSelfReferenceRuleAccess().getGroup(), "rule__SelfReferenceRule__Group__0");
 			builder.put(grammarAccess.getOrExpressionRuleAccess().getGroup(), "rule__OrExpressionRule__Group__0");
 			builder.put(grammarAccess.getOrExpressionRuleAccess().getGroup_1(), "rule__OrExpressionRule__Group_1__0");
@@ -126,7 +127,7 @@ public class DataDescriptionLanguageParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getUntypedDataDescriptionRuleAccess().getRepresentationAssignment_1(), "rule__UntypedDataDescriptionRule__RepresentationAssignment_1");
 			builder.put(grammarAccess.getUntypedDataDescriptionRuleAccess().getNameAssignment_3(), "rule__UntypedDataDescriptionRule__NameAssignment_3");
 			builder.put(grammarAccess.getUntypedDataDescriptionRuleAccess().getConstraintsAssignment_4_3(), "rule__UntypedDataDescriptionRule__ConstraintsAssignment_4_3");
-			builder.put(grammarAccess.getDataReferenceRuleAccess().getDefinitionAssignment(), "rule__DataReferenceRule__DefinitionAssignment");
+			builder.put(grammarAccess.getDataReferenceRuleAccess().getDefinitionAssignment_1(), "rule__DataReferenceRule__DefinitionAssignment_1");
 			builder.put(grammarAccess.getOrExpressionRuleAccess().getSubExpressionsAssignment_0(), "rule__OrExpressionRule__SubExpressionsAssignment_0");
 			builder.put(grammarAccess.getOrExpressionRuleAccess().getSubExpressionsAssignment_1_1(), "rule__OrExpressionRule__SubExpressionsAssignment_1_1");
 			builder.put(grammarAccess.getXorExpressionRuleAccess().getSubExpressionsAssignment_0(), "rule__XorExpressionRule__SubExpressionsAssignment_0");
