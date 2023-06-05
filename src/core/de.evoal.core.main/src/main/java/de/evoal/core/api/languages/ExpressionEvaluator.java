@@ -7,7 +7,9 @@ import org.eclipse.emf.ecore.EObject;
 
 import javax.enterprise.context.ApplicationScoped;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 
 @ApplicationScoped
 @Slf4j
@@ -20,51 +22,101 @@ public class ExpressionEvaluator {
     /**
      * For evaluating expressions
      */
-    private ConstantExpressionEvaluator evaluator = new ConstantExpressionEvaluator();
+    private final ConstantExpressionEvaluator evaluator = new ConstantExpressionEvaluator();
 
     public double attributeToDouble(final Instance instance, final String attributeName) {
-        final Attribute attribute = instance.findAttribute(attributeName);
+        return attributeToNumber(instance, attributeName).doubleValue();
+    }
 
-        Object result = null;
+    public double[] attributeToDoubleArray(final Instance instance, final String attributeName) {
+        final Object result = attributeToObject(instance, attributeName);
 
-        if(attribute == null) {
-            log.info("Attribute binding not found. Using default value.");
-            final AttributeDefinition definition = instance.getDefinition().findAttribute(attributeName);
-
-            if(defaultValueCache.containsKey(definition)) {
-                result = defaultValueCache.get(definition);
-            } else {
-                result = evaluator.doSwitch(definition.getInitialisation());
-            }
-        } else {
-            result = evaluator.doSwitch(attribute.getValue());
+        if(!(result instanceof List<?> resultList)) {
+            log.error("Expression did not evaluate to a list for attribute {} which was expected.", attributeName);
+            throw new IllegalStateException("Expression evaluation error. Please check your configuration.");
         }
 
-        if(!(result instanceof Number)) {
+        final boolean allNumbers = resultList.stream()
+                .allMatch(Number.class::isInstance);
+
+        if(!allNumbers) {
+            log.error("Expression did not evaluate to a list of numbers for attribute {} which was expected.", attributeName);
+            throw new IllegalStateException("Expression evaluation error. Please check your configuration.");
+        }
+
+        return resultList.stream()
+                .map(Number.class::cast)
+                .mapToDouble(Number::doubleValue)
+                .toArray();
+    }
+
+    public double[][] attributeToDoubleArrayArray(final Instance instance, final String attributeName) {
+        final Object result = attributeToObject(instance, attributeName);
+
+        if(!(result instanceof List<?> resultList)) {
+            log.error("Expression did not evaluate to a list for attribute {} which was expected.", attributeName);
+            throw new IllegalStateException("Expression evaluation error. Please check your configuration.");
+        }
+
+        final boolean allLists = resultList.stream()
+                .allMatch(List.class::isInstance);
+
+        if(!allLists) {
+            log.error("Expression did not evaluate to a list of lists for attribute {} which was expected.", attributeName);
+            throw new IllegalStateException("Expression evaluation error. Please check your configuration.");
+        }
+
+        final boolean allListList = resultList.stream()
+                .map(l -> (List<?>)l)
+                .allMatch(l -> l.stream().allMatch(Number.class::isInstance));
+
+        if(!allListList) {
+            log.error("Expression did not evaluate to a list of numbers for attribute {} which was expected.", attributeName);
+            throw new IllegalStateException("Expression evaluation error. Please check your configuration.");
+        }
+
+        final Function<List<?>, double []> conversion = l -> l.stream()
+                .map(Number.class::cast)
+                .mapToDouble(Number::doubleValue)
+                .toArray();
+
+        return resultList.stream()
+                .map(l -> (List<?>)l)
+                .map(conversion)
+                .toArray(double[][]::new);
+    }
+
+    public Instance attributeToInstance(final Instance instance, final String attributeName) {
+        final Object result = attributeToObject(instance, attributeName);
+
+        if(!(result instanceof Instance)) {
+            log.error("Expression did not evaluate to an Instance for attribute {} which was expected.", attributeName);
+            throw new IllegalStateException("Expression evaluation error. Please check your configuration.");
+        }
+
+        return (Instance)result;
+    }
+
+    public int attributeToInteger(final Instance instance, final String attributeName) {
+        return attributeToNumber(instance, attributeName).intValue();
+    }
+
+    private Number attributeToNumber(final Instance instance, final String attributeName) {
+        final Object result = attributeToObject(instance, attributeName);
+
+        if(!(result instanceof Number number)) {
             log.error("Expression did not evaluate to a number value for attribute {} which was expected.", attributeName);
             throw new IllegalStateException("Expression evaluation error. Please check your configuration.");
         }
 
-        return ((Number)result).doubleValue();
-    }
-
-    public double[] attributeToDoubleArray(final Instance instance, final String attributeName) {
-        throw new IllegalStateException("Not yet implemented.");
-    }
-
-    public Object attributeToObject(final Instance instance, final String attributeName) {
-        return attributeToObject(instance.findAttribute(attributeName));
+        return number;
     }
 
     public Object attributeToObject(final Attribute attribute) {
         return evaluator.doSwitch(attribute.getValue());
     }
 
-    public Object evaluate(final Object current) {
-        return evaluator.doSwitch((EObject) current);
-    }
-
-    public int attributeToInteger(final Instance instance, final String attributeName) {
+    public Object attributeToObject(final Instance instance, final String attributeName) {
         final Attribute attribute = instance.findAttribute(attributeName);
 
         Object result = null;
@@ -77,16 +129,16 @@ public class ExpressionEvaluator {
                 result = defaultValueCache.get(definition);
             } else {
                 result = evaluator.doSwitch(definition.getInitialisation());
+                defaultValueCache.put(definition, result);
             }
         } else {
-            result = evaluator.doSwitch(attribute.getValue());
+            result = attributeToObject(attribute);
         }
 
-        if(!(result instanceof Number)) {
-            log.error("Expression did not evaluate to a number value for attribute {} which was expected.", attributeName);
-            throw new IllegalStateException("Expression evaluation error. Please check your configuration.");
-        }
+        return result;
+    }
 
-        return ((Number)result).intValue();
+    public Object evaluate(final Object current) {
+        return evaluator.doSwitch((EObject) current);
     }
 }
