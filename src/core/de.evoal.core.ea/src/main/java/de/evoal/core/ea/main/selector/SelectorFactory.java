@@ -4,6 +4,7 @@ import de.evoal.core.api.board.CoreBlackboardEntries;
 import de.evoal.core.api.cdi.BeanFactory;
 import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.core.api.utils.LanguageHelper;
+import de.evoal.core.ea.api.selector.SelectorComponent;
 import de.evoal.core.ea.main.comparator.ParetoOptimisationValue;
 import de.evoal.languages.model.base.Instance;
 import io.jenetics.*;

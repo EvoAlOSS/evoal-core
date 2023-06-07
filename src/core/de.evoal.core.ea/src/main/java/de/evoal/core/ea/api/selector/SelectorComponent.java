@@ -1,4 +1,4 @@
-package de.evoal.core.ea.main.selector;
+package de.evoal.core.ea.api.selector;
 
 import de.evoal.core.api.cdi.EvoalComponent;
 import io.jenetics.Selector;

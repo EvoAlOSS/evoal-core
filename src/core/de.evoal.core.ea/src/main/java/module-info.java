@@ -1,6 +1,4 @@
 module de.evoal.core.ea {
-    exports de.evoal.core.ea.api.codec;
-    exports de.evoal.core.ea.api.initial;
     requires jakarta.enterprise.cdi.api;
     requires jakarta.inject.api;
 
@@ -23,6 +21,11 @@ module de.evoal.core.ea {
     requires de.evoal.languages.model.ol;
     requires org.eclipse.emf.ecore;
 
+    exports de.evoal.core.ea.api.cdi;
+    exports de.evoal.core.ea.api.codec;
+    exports de.evoal.core.ea.api.initial;
+    exports de.evoal.core.ea.api.selector;
+
     opens de.evoal.core.ea;
 
     opens de.evoal.core.ea.main.alterer to weld.core.impl;
@@ -36,4 +39,5 @@ module de.evoal.core.ea {
     opens de.evoal.core.ea.main.selector to weld.core.impl;
     opens de.evoal.core.ea.main.search to weld.core.impl;
     opens de.evoal.core.ea.main.statistics to weld.core.impl;
+    opens de.evoal.core.ea.api.selector to weld.core.impl;
 }
