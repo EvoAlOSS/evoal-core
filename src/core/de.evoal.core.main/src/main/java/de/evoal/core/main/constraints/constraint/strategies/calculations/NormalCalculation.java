@@ -12,7 +12,7 @@ import lombok.NonNull;
 import javax.inject.Named;
 
 @Dependent
-@Named("normal")
+@Named("normal-calculation")
 public class NormalCalculation implements CalculationStrategy {
     private Instance configuration;
     private Constraint constraint;

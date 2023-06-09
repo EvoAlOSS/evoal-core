@@ -22,7 +22,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Dependent
-@Named("standard-deviation")
+@Named("standard-deviation-calculation")
 public class StandardDeviationCalculation implements CalculationStrategy {
     @Inject
     private LanguageHelper helper;

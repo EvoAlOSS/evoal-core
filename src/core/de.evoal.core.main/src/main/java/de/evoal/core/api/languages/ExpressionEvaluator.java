@@ -86,7 +86,7 @@ public class ExpressionEvaluator {
                 .toArray(double[][]::new);
     }
 
-    public Instance attributeToInstance(final Instance instance, final String attributeName) {
+    public Instance     attributeToInstance(final Instance instance, final String attributeName) {
         final Object result = attributeToObject(instance, attributeName);
 
         if(!(result instanceof Instance)) {

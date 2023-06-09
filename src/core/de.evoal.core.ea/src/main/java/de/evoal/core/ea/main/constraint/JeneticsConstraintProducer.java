@@ -29,6 +29,9 @@ public class JeneticsConstraintProducer {
     @Inject
     private LanguageHelper helper;
 
+    @Inject
+    private ConfigurationUtils configUtil;
+
     @Produces
     public List<io.jenetics.engine.Constraint> create(
             final @ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.handlers") Instance [] handlerConfigurations,
@@ -39,8 +42,9 @@ public class JeneticsConstraintProducer {
             final CalculationFactory factory) {
 
         // collect group information to handle
-        final List<Instance> groups = ConfigurationUtils.findConstraintHandlerByHandlingStrategy(handlerConfigurations, "kill-at-birth");
-        final Map<String, Instance> configurationMap = groups.stream().collect(Collectors.toMap(i -> (String)((Literal)i.findAttribute("category").getValue()).getValue(), Function.identity()));
+        final List<Instance> groups = configUtil.findConstraintHandlerByHandlingStrategy(handlerConfigurations, "kill-at-birth");
+        final Map<String, Instance> configurationMap = groups.stream()
+                                                             .collect(Collectors.toMap(i -> (String)(helper.lookup(i, "category")), Function.identity()));
         final List<Constraint> listOfConstraints = constraints.getConstraints();
 
         return listOfConstraints

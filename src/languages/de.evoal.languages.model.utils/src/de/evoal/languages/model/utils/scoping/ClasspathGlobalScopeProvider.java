@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Logger;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -17,6 +18,8 @@ import org.eclipse.xtext.util.IAcceptor;
 import de.evoal.languages.model.base.Import;
 
 public class ClasspathGlobalScopeProvider extends ImportUriGlobalScopeProvider {
+	private final static Logger log = Logger.getLogger(ClasspathGlobalScopeProvider.class.getCanonicalName());
+	
 	public static List<String> SEARCH_PATH = new LinkedList<>(Collections.singleton("./"));
 	
 	public static class CustomUriResolver extends ImportUriResolver  {
@@ -58,10 +61,13 @@ public class ClasspathGlobalScopeProvider extends ImportUriGlobalScopeProvider {
 			
 			for(final String path : SEARCH_PATH) {
 				if(new File(path, result).exists()) {
-					return new File(path, result).toString();
+					final String resolvedFile = new File(path, result).toString();
+					log.info("Resolved file to " + resolvedFile);
+					return resolvedFile;
 				} 				
 			}
 			
+			log.info("Resolved file to classpath:/" + result);
 			return "classpath:/" + result;
 		}
 	}

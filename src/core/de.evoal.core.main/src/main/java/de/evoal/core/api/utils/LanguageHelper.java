@@ -37,7 +37,14 @@ public class LanguageHelper {
 
         if("problem".equals(splittedPath.get(0))) {
             splittedPath.remove(0);
-            return lookup(model.getProblem(), splittedPath);
+
+            ProblemInstance problem = model.getProblem();
+
+            if(problem == null) {
+                problem = model.getAlgorithm().getProblem();
+            }
+
+            return lookup(problem, splittedPath);
         } else if("algorithm".equals(splittedPath.get(0))) {
             splittedPath.remove(0);
             return lookup(model.getAlgorithm(), splittedPath);
@@ -212,7 +219,7 @@ public class LanguageHelper {
         return i -> instanceTypeName.equals(((Instance)i).getDefinition().getName());
     }
 
-    public static Predicate<? super Instance> filterByAttributesInstanceType(final String attributeName, final String attributeTypeName) {
-        return i -> attributeTypeName.equals(((Instance) i.findAttribute(attributeName).getValue()).getDefinition().getName());
+    public Predicate<? super Instance> filterByAttributesInstanceType(final String attributeName, final String attributeTypeName) {
+        return i -> attributeTypeName.equals(evaluator.attributeToInstance(i, attributeName).getDefinition().getName());
     }
 }

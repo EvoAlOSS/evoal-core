@@ -4,6 +4,8 @@ import de.evoal.core.api.cdi.BeanFactory;
 import de.evoal.core.api.constraints.model.Constraint;
 import de.evoal.core.api.board.CoreBlackboardEntries;
 import de.evoal.core.api.cdi.ConfigurationValue;
+
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
 
 import de.evoal.core.api.utils.LanguageHelper;
@@ -22,7 +24,11 @@ public class CalculationFactory {
     private LanguageHelper helper;
 
     @Inject
-    public CalculationFactory(final @ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.handlers") Instance [] handlerConfigurations) {
+    @ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.handlers")
+    private Instance [] handlerConfigurations;
+
+    @PostConstruct
+    public void init() {
         Arrays.stream(handlerConfigurations)
                              .map(Instance.class::cast)
                              .filter(LanguageHelper.filterInstanceByType("constraint-handler"))

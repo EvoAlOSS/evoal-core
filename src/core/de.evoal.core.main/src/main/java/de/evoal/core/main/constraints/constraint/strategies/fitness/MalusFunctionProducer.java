@@ -22,13 +22,17 @@ import org.apache.commons.math3.util.Pair;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.inject.Provider;
 import java.util.*;
 import java.util.stream.Collectors;
 
 @ApplicationScoped
 public class MalusFunctionProducer {
     @Inject
-    private LanguageHelper helper;
+    private Provider<LanguageHelper> helper;
+
+    @Inject
+    private ConfigurationUtils configUtil;
 
     @ApplicationScoped @Produces
     public MalusForFitnessStrategy create(
@@ -39,7 +43,7 @@ public class MalusFunctionProducer {
             final Constraints constraints,
             final CalculationFactory factory) {
         // select constraint handlers that use malus-for-fitness
-        final List<Instance> relevantHandlers = ConfigurationUtils.findConstraintHandlerByHandlingStrategy(handlers, "malus-for-fitness");
+        final List<Instance> relevantHandlers = configUtil.findConstraintHandlerByHandlingStrategy(handlers, "malus-for-fitness");
 
         // collect group names of relevant handlers
         final Set<String> allGroups = relevantHandlers.stream().map(i -> (String)((Literal)i.findAttribute("category").getValue()).getValue()).collect(Collectors.toSet());
@@ -66,13 +70,13 @@ public class MalusFunctionProducer {
                         if(source.equals(ps)) {
                             // handle source specification
                             final int index = source.indexOf(ps);
-                            final Instance configuration = ConfigurationUtils.findConstraintHandlerByHandlingStrategyAndCategory(handlers, "malus-for-fitness", constraint.getGroup());
+                            final Instance configuration = configUtil.findConstraintHandlerByHandlingStrategyAndCategory(handlers, "malus-for-fitness", constraint.getGroup());
                             constraintsBySourceIndex.get(index)
                                     .add(new Pair<>(constraint, configuration));
                         } else {
                             // handle target specification
                             final int index = target.indexOf(ps);
-                            final Instance configuration = ConfigurationUtils.findConstraintHandlerByHandlingStrategyAndCategory(handlers, "malus-for-fitness", constraint.getGroup());
+                            final Instance configuration = configUtil.findConstraintHandlerByHandlingStrategyAndCategory(handlers, "malus-for-fitness", constraint.getGroup());
                             constraintsByTargetIndex.get(index)
                                     .add(new Pair<>(constraint, configuration));
                         }
@@ -100,9 +104,9 @@ public class MalusFunctionProducer {
 
                     final CalculationStrategy calculation = factory.create(constraint);
 
-                    final String handlerName = helper.lookup(configuration, "name");
+                    final String handlerName = helper.get().lookup(configuration, "name");
 
-                    final MalusFunction strategy = new MalusForFitnessFunction(helper, constraint, helper.lookup(configuration, "constraint-handling"), index) ;
+                    final MalusFunction strategy = new MalusForFitnessFunction(helper.get(), constraint, helper.get().lookup(configuration, "constraint-handling"), index) ;
                     resultingFunction.add(index, strategy);
                }
             }
@@ -120,9 +124,9 @@ public class MalusFunctionProducer {
 
                 final CalculationStrategy calculation = factory.create(constraint);
 
-                final String handlerName = helper.lookup(configuration, "name");
+                final String handlerName = helper.get().lookup(configuration, "name");
 
-                final MalusFunction strategy = new MalusForFitnessFunction(helper, constraint, helper.lookup(configuration, "constraint-handling"), index) ;
+                final MalusFunction strategy = new MalusForFitnessFunction(helper.get(), constraint, helper.get().lookup(configuration, "constraint-handling"), index) ;
                 resultingFunction.add(index, strategy);
             }
         }

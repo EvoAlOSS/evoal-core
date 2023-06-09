@@ -47,10 +47,13 @@ module de.evoal.core.ea.optimisation {
 	abstract type 'constraint-calculation' {
 	}
 	
-	type 'standard-deviation' extends 'constraint-calculation' {
+	type 'standard-deviation-calculation' extends 'constraint-calculation' {
 		factor : real;
 	}
 	
+	type 'normal-calculation' extends 'constraint-calculation' {
+	}
+
 	abstract type 'constraint-handling' {}
 	
 	type 'kill-at-birth' extends 'constraint-handling'{
