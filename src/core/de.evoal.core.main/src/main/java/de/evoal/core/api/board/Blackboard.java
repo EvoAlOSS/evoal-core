@@ -88,6 +88,18 @@ public class Blackboard {
         entryEvent.fire(BlackboardEntry.of(entry));
     }
 
+    private static void logLoadedPlugins() {
+        log.info("Logging all loaded modules for:");
+
+        ModuleLayer.boot()
+                .configuration()
+                .modules()
+                .stream()
+                .forEach(m -> {
+                    log.info("Loaded module " + m.name());
+                });
+    }
+
     /**
      * Parses all arguments from the passed command line arguments.
      *
@@ -111,6 +123,8 @@ public class Blackboard {
                 root.setLevel(level);
             }
         }
+
+        logLoadedPlugins();
 
         for(String arg : args) {
             if(!arg.startsWith("-B")) {
