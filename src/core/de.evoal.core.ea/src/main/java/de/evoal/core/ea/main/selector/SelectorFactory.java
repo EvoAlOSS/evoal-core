@@ -86,7 +86,7 @@ public class SelectorFactory {
 	}
 
 	private <G extends Gene<?,G>, C extends Comparable<? super C>> Selector<G, C> createTruncationSelector(final Instance config) {
-		int worstRank = helper.lookup(config, "worstRank");
+		int worstRank = helper.lookup(config, "worst-rank");
 		return new TruncationSelector<>(worstRank);
 	}
 
