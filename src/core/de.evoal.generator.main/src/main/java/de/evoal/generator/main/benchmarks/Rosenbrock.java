@@ -24,7 +24,7 @@ public class Rosenbrock extends AbstractGeneratorFunction {
             double read_i = in.getAsDouble(ps_i);
             double read_n = in.getAsDouble(ps_n);
 
-            value += 100 * Math.pow((Math.pow(read_i,  2.0) - read_n), 2.0) + Math.pow(1 - read_i, 2.0);
+            value += 100 * Math.pow(read_n - (Math.pow(read_i,  2.0)), 2.0) + Math.pow(1 - read_i, 2.0);
         }
 
         result.put(writeSpecification.getProperties().get(0), value);

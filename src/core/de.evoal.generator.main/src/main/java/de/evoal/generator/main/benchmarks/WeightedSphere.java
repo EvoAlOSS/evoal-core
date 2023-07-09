@@ -16,12 +16,12 @@ public class WeightedSphere extends AbstractGeneratorFunction {
 
         final double n = readSpecification.size();
         double value = 0.0;
-        int counter = 0;
+        int counter = 1;
 
         for(final PropertySpecification ps : readSpecification.getProperties()) {
             double read_i = in.getAsDouble(ps);
 
-            value += Math.pow(read_i, 2.0)  * Math.pow(counter++, 2.0);
+            value += Math.pow(read_i, 2.0)  * counter++;
         }
 
         result.put(writeSpecification.getProperties().get(0), value);
