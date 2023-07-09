@@ -1,12 +1,18 @@
 package de.evoal.core.api.properties;
 
 import de.evoal.languages.model.ddl.DataDescription;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class PropertiesSpecification {
+	/**
+	 * Logger instance.
+	 */
+	private static final Logger log = LoggerFactory.getLogger(PropertiesSpecification.class);
 
     public static class Builder {
 
@@ -118,7 +124,14 @@ public class PropertiesSpecification {
 	}
 
 	public int indexOf(final PropertySpecification spec) {
-		return indices.get(spec);
+		final int index = indices.get(spec);
+
+		if(index == -1) {
+			log.error("Cannot find {} in {}.", spec, this);
+			throw new RuntimeException("Cannot find " + spec + " in " + this);
+		}
+
+		return index;
 	}
 
 	public int indexOf(final String name) {
