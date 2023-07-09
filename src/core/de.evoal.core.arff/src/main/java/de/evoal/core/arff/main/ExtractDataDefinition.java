@@ -10,9 +10,7 @@ import weka.core.Instances;
 import weka.core.converters.ConverterUtils;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
-import javax.inject.Named;
 import java.io.*;
 import java.util.Enumeration;
 
@@ -71,33 +69,34 @@ public class ExtractDataDefinition implements MainClass {
 
     private static String toStorage(int type) {
         switch (type) {
-            case Attribute.NOMINAL:
-            case Attribute.STRING:
+            case Attribute.NOMINAL, Attribute.STRING -> {
                 return "string";
+            }
 
-            case Attribute.NUMERIC:
+            case Attribute.NUMERIC -> {
                 return "real";
+            }
 
-            default:
+            default -> {
                 log.error("Unsupported storage type: {}", type);
+                return "???";
+            }
         }
 
-        return "???";
     }
 
     private static String toType(int type) {
         switch (type) {
-            case Attribute.NOMINAL:
-            case Attribute.STRING:
+            case Attribute.NOMINAL, Attribute.STRING -> {
                 return "nominal";
-
-            case Attribute.NUMERIC:
+            }
+            case Attribute.NUMERIC -> {
                 return "cardinal";
-
-            default:
+            }
+            default -> {
                 log.error("Unsupported type: {}", type);
+                return "???";
+            }
         }
-
-        return "???";
     }
 }

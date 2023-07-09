@@ -1,6 +1,5 @@
 package de.evoal.core.ea.api.cdi;
 
-import javax.enterprise.util.Nonbinding;
 import javax.inject.Qualifier;
 import java.lang.annotation.*;
 
