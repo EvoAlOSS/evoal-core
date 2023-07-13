@@ -1,7 +1,5 @@
 package de.evoal.core.main.initial;
 
-import de.evoal.core.api.board.CoreBlackboardEntries;
-import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.core.api.optimisation.InitialCandidatesProvider;
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;
@@ -12,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.random.RandomGenerator;
 import java.util.stream.Stream;
 
@@ -24,7 +23,7 @@ public class RandomInitialCandidates implements InitialCandidatesProvider {
     @Inject @Named("search-space-specification")
     private PropertiesSpecification searchSpaceSpecification;
 
-    private RandomGenerator randomness = RandomGenerator.getDefault();
+    private final RandomGenerator randomness = RandomGenerator.getDefault();
 
     @Override
     public InitialCandidatesProvider init(final Instance configuration) {
@@ -34,8 +33,9 @@ public class RandomInitialCandidates implements InitialCandidatesProvider {
 
     @Override
     public Stream<Properties> create() {
+        final AtomicInteger counter = new AtomicInteger();
         return Stream.generate(() -> {
-//            log.info("Creating a random initial candidate for {}.", searchSpaceSpecification);
+            log.info("Creating random initial candidate #{}.", counter.getAndIncrement());
             final Properties p =  new Properties(searchSpaceSpecification);
 
             for(final PropertySpecification spec : searchSpaceSpecification.getProperties()) {

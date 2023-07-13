@@ -1,5 +1,7 @@
 package de.evoal.core.ea.main.initial;
 
+import de.evoal.core.api.board.CoreBlackboardEntries;
+import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.core.api.optimisation.InitialCandidatesProvider;
 import de.evoal.core.api.optimisation.OptimisationValue;
 import de.evoal.core.api.properties.Properties;
@@ -7,7 +9,9 @@ import de.evoal.core.ea.api.codec.CustomCodec;
 import io.jenetics.Gene;
 import io.jenetics.Genotype;
 import io.jenetics.engine.Engine;
+import io.jenetics.engine.EvolutionInit;
 import io.jenetics.engine.EvolutionStream;
+import io.jenetics.util.ISeq;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
@@ -15,7 +19,13 @@ import java.util.stream.Stream;
 
 @Dependent
 public class InitialStream {
+
+    @Inject
+    @ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.size-of-population")
+    private int populationSize;
+
     private InitialCandidatesProvider provider;
+
     private Engine engine;
 
     @Inject
@@ -29,8 +39,9 @@ public class InitialStream {
     }
 
     public EvolutionStream create() {
-        final Stream<Properties> individuals = provider.create().limit(1000);
-        final Stream<Genotype> encoded = individuals.map(codec::encode);
+        final Stream<Genotype> encoded = provider.create()
+                                                 .limit(populationSize)
+                                                 .map(codec::encode);
 
         final Iterable<Genotype> iter = () -> encoded.iterator();
 

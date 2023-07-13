@@ -10,13 +10,14 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class UnaryBoundaryIdentifier extends BaseSwitch<Object> {
+    public record Boundary(boolean isLowerBoundary, DataDescription data, Number boundary) {
+    }
 
     private final DataDescription context;
 
     public UnaryBoundaryIdentifier(final DataDescription context) {
         this.context = context;
     }
-
 
     @Override
     public Object caseOrExpression(OrExpression object) {
@@ -67,22 +68,19 @@ public class UnaryBoundaryIdentifier extends BaseSwitch<Object> {
             case GREATER_EQUAL:
             case GREATER_THAN: {
                 if(leftValue instanceof DataDescription) {
-                    // lower
-                    return new Object[] {rightValue, leftValue};
+                    return new Boundary(true, (DataDescription) leftValue, (Number)rightValue);
                 } else {
                     // upper
-                    return new Object[] {leftValue, rightValue};
+                    return new Boundary(false, (DataDescription) rightValue, (Number)leftValue);
                 }
             }
             case LESS_EQUAL:
             case LESS_THAN:
             {
                 if(leftValue instanceof DataDescription) {
-                    // upper
-                    return new Object[] {leftValue, rightValue};
+                    return new Boundary(false, (DataDescription) leftValue, (Number)rightValue);
                 } else {
-                    // lower
-                    return new Object[] {rightValue, leftValue};
+                    return new Boundary(true, (DataDescription) rightValue, (Number)leftValue);
                 }
             }
             case EQUAL:
