@@ -15,7 +15,9 @@ module search {
 		'optimisation-space' := [data 'y:0'];
 		'maximise' := true;
 		'optimisation-function' := 'benchmark-function' {
-			'benchmark' := ackley {};
+			'benchmarks' := [
+				'benchmark-configuration' { function := ackley {};    reads := [data 'x:0']; writes := [data 'y:0']; },
+			];
 		};
 	}
 		

@@ -8,6 +8,7 @@ import de.evoal.core.api.properties.PropertySpecification;
 import de.evoal.core.api.utils.LanguageHelper;
 import de.evoal.generator.api.GeneratorFunction;
 import de.evoal.languages.model.base.AttributeDefinition;
+import de.evoal.languages.model.ddl.DataDescription;
 import de.evoal.languages.model.generator.GeneratorFactory;
 import de.evoal.languages.model.generator.Step;
 import de.evoal.languages.model.base.Attribute;
@@ -20,6 +21,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.util.List;
 
 @Dependent
 @Named("benchmark-function")
@@ -39,45 +41,62 @@ public class BenchmarkOptimisationFunction implements OptimisationFunction {
     @Inject
     private de.evoal.generator.main.generators.GeneratorFactory factory;
 
-    private GeneratorFunction function;
+    private GeneratorFunction [] functions;
+
+    private PropertiesSpecification [] functionProperties;
 
     @Override
     public double[] evaluate(final Properties candidate) {
-        final Properties result = function.apply(candidate);
-        double [] copy = new double[optimisationSpaceSpecification.getProperties().size()];
+        final Properties result = new Properties(optimisationSpaceSpecification);
 
-        int i = 0;
-        for(final PropertySpecification spec : optimisationSpaceSpecification.getProperties()) {
-            copy[i++] = result.getAsDouble(spec);
+        for(int i = 0; i < functions.length; ++i) {
+            final GeneratorFunction function = functions[i];
+            final PropertiesSpecification specification = functionProperties[i];
+
+            final Properties calculated = function.apply(candidate);
+
+            for(PropertySpecification spec : specification.getProperties()) {
+                result.put(spec, calculated.get(spec));
+            }
         }
-        return copy;
+
+        return result.getValuesAsDouble();
     }
 
     @SneakyThrows
     @Override
     public OptimisationFunction init(final Instance config) {
-        final Instance benchmarkConfiguration = (Instance)evaluator.attributeToObject(config, "benchmark");
+        final List<Instance> benchmarkConfigurations = (List<Instance>) evaluator.attributeToObject(config, "benchmarks");
 
-        final Step stepConfiguration = GeneratorFactory.eINSTANCE.createStep();
-        stepConfiguration.setInstance(EcoreUtil.copy(benchmarkConfiguration));
+        functions = new GeneratorFunction[benchmarkConfigurations.size()];
+        functionProperties = new PropertiesSpecification[benchmarkConfigurations.size()];
+        for(int index = 0; index < functions.length; ++index) {
+            final Instance benchmarkConfiguration = benchmarkConfigurations.get(index);
+            final Instance function = evaluator.attributeToInstance(benchmarkConfiguration, "function");
 
-        searchSpaceSpecification.getProperties()
-                        .forEach(p -> {
-                            final DataReference reference = InstanceFactory.eINSTANCE.createDataReference();
-                            reference.setDefinition(p.type());
-                            stepConfiguration.getReads().add(reference);
-                        });
-        ;
+            final Step stepConfiguration = GeneratorFactory.eINSTANCE.createStep();
+            stepConfiguration.setInstance(EcoreUtil.copy(function));
 
-        optimisationSpaceSpecification.getProperties()
-                .forEach(p -> {
-                    final DataReference reference = InstanceFactory.eINSTANCE.createDataReference();
-                    reference.setDefinition(p.type());
-                    stepConfiguration.getWrites().add(reference);
-                });
-        ;
+            final List<DataDescription> readReferences = (List<DataDescription>) evaluator.attributeToObject(benchmarkConfiguration, "reads");
+            readReferences.forEach(dr -> {
+                final DataReference reference = InstanceFactory.eINSTANCE.createDataReference();
+                reference.setDefinition(dr);
+                stepConfiguration.getReads().add(reference);
+            });
 
-        function = factory.create(stepConfiguration);
+            final List<DataDescription> writeReferences = (List<DataDescription>) evaluator.attributeToObject(benchmarkConfiguration, "writes");
+            writeReferences
+                    .forEach(dr -> {
+                        final DataReference reference = InstanceFactory.eINSTANCE.createDataReference();
+                        reference.setDefinition(dr);
+                        stepConfiguration.getWrites().add(reference);
+                    });
+
+            functions[index] = factory.create(stepConfiguration);
+            functionProperties[index] = PropertiesSpecification.builder()
+                                .add(writeReferences.stream())
+                                .build();
+        }
 
         mergedSpaceSpecification = PropertiesSpecification.builder()
                 .add(searchSpaceSpecification)
