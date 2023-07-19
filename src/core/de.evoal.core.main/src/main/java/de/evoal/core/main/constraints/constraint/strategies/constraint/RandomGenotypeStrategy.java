@@ -3,7 +3,6 @@ package de.evoal.core.main.constraints.constraint.strategies.constraint;
 import de.evoal.core.api.constraints.strategies.RepairStrategy;
 import de.evoal.core.api.optimisation.InitialCandidatesProvider;
 import de.evoal.core.api.properties.Properties;
-import de.evoal.core.main.initial.RandomInitialCandidates;
 import de.evoal.languages.model.base.Instance;
 
 import javax.enterprise.context.Dependent;

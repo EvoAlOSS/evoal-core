@@ -7,8 +7,6 @@ import lombok.NonNull;
 
 import java.util.Arrays;
 
-import static de.evoal.core.api.utils.Requirements.requireSameSize;
-
 public class WeightedSumOptimisationValue implements OptimisationValue {
     @Getter
     private final @NonNull double[] fitnessValues;

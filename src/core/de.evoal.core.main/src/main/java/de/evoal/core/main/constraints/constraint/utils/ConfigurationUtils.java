@@ -1,9 +1,7 @@
 package de.evoal.core.main.constraints.constraint.utils;
 
 import de.evoal.core.api.cdi.BeanFactory;
-import de.evoal.core.api.languages.ExpressionEvaluator;
 import de.evoal.core.api.utils.LanguageHelper;
-import de.evoal.languages.model.base.Array;
 import de.evoal.languages.model.base.Instance;
 
 import javax.enterprise.context.ApplicationScoped;

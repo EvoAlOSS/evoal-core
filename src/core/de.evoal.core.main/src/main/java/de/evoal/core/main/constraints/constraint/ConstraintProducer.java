@@ -1,7 +1,5 @@
 package de.evoal.core.main.constraints.constraint;
 
-import de.evoal.core.api.board.CoreBlackboardEntries;
-import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.core.api.constraints.model.Constraint;
 import de.evoal.core.api.constraints.model.Constraints;
 import de.evoal.core.api.constraints.model.DataConstraints;
@@ -15,9 +13,7 @@ import de.evoal.core.main.constraints.el.ElHelper;
 import de.evoal.core.main.constraints.el.LogHelper;
 import de.evoal.languages.model.base.DefinedFunctionName;
 import de.evoal.languages.model.ddl.DataDescription;
-import de.evoal.languages.model.base.FunctionName;
 import de.evoal.languages.model.base.Call;
-import de.evoal.languages.model.base.Instance;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Objects;

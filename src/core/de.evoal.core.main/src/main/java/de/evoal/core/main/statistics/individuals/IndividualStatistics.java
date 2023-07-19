@@ -1,28 +1,21 @@
 package de.evoal.core.main.statistics.individuals;
 
-import de.evoal.core.api.statistics.IterationResult;
 import de.evoal.core.api.statistics.*;
 import de.evoal.core.api.statistics.io.Writer;
 import de.evoal.core.api.statistics.io.WriterException;
-import de.evoal.core.api.statistics.io.WriterStrategy;
 import de.evoal.core.api.statistics.writer.AbstractCandidateStatisticsWriter;
 import de.evoal.core.api.statistics.writer.Column;
 import de.evoal.core.api.statistics.writer.ColumnType;
-import de.evoal.core.api.statistics.writer.StatisticsWriter;
-import de.evoal.languages.model.base.Instance;
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;
-import javax.annotation.PostConstruct;
 import javax.enterprise.context.Dependent;
 
-import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Small helper class for collecting and writing the generation-based statistics.

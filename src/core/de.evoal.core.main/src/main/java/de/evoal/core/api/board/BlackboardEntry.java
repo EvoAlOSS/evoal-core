@@ -1,7 +1,5 @@
 package de.evoal.core.api.board;
 
-import de.evoal.core.api.cdi.Commandline;
-
 public final class BlackboardEntry {
     private final String label;
 

@@ -7,8 +7,6 @@ import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.utils.LanguageHelper;
 import de.evoal.languages.model.base.Instance;
 
-import javax.inject.Inject;
-
 public class MalusForFitnessFunction implements MalusFunction {
 
     private final Constraint constraint;

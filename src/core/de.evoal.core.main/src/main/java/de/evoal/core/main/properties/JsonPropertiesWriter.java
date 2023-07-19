@@ -7,7 +7,6 @@ import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.properties.PropertySpecification;
 import de.evoal.core.api.properties.io.PropertiesWriter;
 import de.evoal.core.api.utils.EvoalIOException;
-import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.enterprise.context.Dependent;

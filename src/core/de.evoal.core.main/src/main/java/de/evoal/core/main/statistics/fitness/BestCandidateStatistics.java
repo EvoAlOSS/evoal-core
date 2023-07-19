@@ -1,15 +1,12 @@
 package de.evoal.core.main.statistics.fitness;
 
-import de.evoal.core.api.optimisation.OptimisationFunction;
 import de.evoal.core.api.optimisation.OptimisationValue;
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;
-import de.evoal.core.api.statistics.Candidate;
 import de.evoal.core.api.statistics.IterationResult;
 import de.evoal.core.api.statistics.io.Writer;
 import de.evoal.core.api.statistics.io.WriterException;
 import de.evoal.core.api.statistics.io.WriterStrategy;
-import de.evoal.core.api.statistics.writer.AbstractCandidateStatisticsWriter;
 import de.evoal.core.api.statistics.writer.Column;
 import de.evoal.core.api.statistics.writer.ColumnType;
 import de.evoal.core.api.statistics.writer.StatisticsWriter;
@@ -69,6 +66,7 @@ public class BestCandidateStatistics implements StatisticsWriter {
     public void add(final IterationResult result) {
         final Properties candidate = result.bestCandidate().searchSpaceRepresentation();
         final OptimisationValue value = result.bestCandidate().value();
+
 
         final int searchSpaceSize = searchSpaceSpecification.get().size();
         final int optimisationSpaceSize = optimisationSpaceSpecification.get().size();

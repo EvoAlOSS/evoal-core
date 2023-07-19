@@ -5,8 +5,6 @@ import de.evoal.core.api.cdi.BeanFactory;
 import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.core.api.languages.ExpressionEvaluator;
 import de.evoal.core.api.statistics.writer.StatisticsWriter;
-import de.evoal.core.api.utils.LanguageHelper;
-import de.evoal.core.api.utils.Requirements;
 import de.evoal.core.main.statistics.internal.MultipleStatisticsWriter;
 import de.evoal.languages.model.base.Array;
 import de.evoal.languages.model.base.Instance;
@@ -16,14 +14,11 @@ import javax.enterprise.context.Dependent;
 import javax.enterprise.inject.Produces;
 
 import de.evoal.languages.model.base.Value;
-import de.evoal.languages.model.interpreter.ConstantExpressionEvaluator;
 import org.apache.commons.math3.util.Pair;
-import org.apache.deltaspike.core.api.provider.BeanProvider;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.stream.Stream;
-import java.util.stream.StreamSupport;
 
 @ApplicationScoped
 public class StatisticsFactory {

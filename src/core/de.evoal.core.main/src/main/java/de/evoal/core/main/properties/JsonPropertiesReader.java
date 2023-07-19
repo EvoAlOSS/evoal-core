@@ -16,7 +16,6 @@ import javax.enterprise.context.Dependent;
 import javax.inject.Named;
 import java.io.File;
 import java.io.IOException;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
