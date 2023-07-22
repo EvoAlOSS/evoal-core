@@ -108,17 +108,31 @@ evoal:unit:
   script:
     - mvn $MAVEN_CLI_OPTS -f $MAIN_POM -DskipTests=true install
     - mvn $MAVEN_CLI_OPTS -f $PLUGIN_POM -DskipTests=true install
-    - mvn $MAVEN_CLI_OPTS -f $EVOAL_POM clean org.jacoco:jacoco-maven-plugin:prepare-agent verify org.jacoco:jacoco-maven-plugin:report
+    - mvn $MAVEN_CLI_OPTS -f $EVOAL_POM -Pjacoco verify
   artifacts:
     when: always
     reports:
       junit: src/core/*/target/surefire-reports/TEST-*.xml
+    paths:
+      - src/core/de.evoal.releng.jacoco/target/site/jacoco-aggregate/jacoco.xml
+      - src/core/*/target/surefire-reports/*
+
+evoal:coverage:
+  stage: EvoAl
+  tags:
+    - docker
+  image: haynes/jacoco2cobertura:1.0.7
+  script:
+    - jacoco_paths=`find src/core/ -path "**/src/main/java" -type d | sed -e 's@^@'"$CI_PROJECT_DIR"'/@'`
+    - python /opt/cover2cover.py src/core/de.evoal.releng.jacoco/target/site/jacoco-aggregate/jacoco.xml $jacoco_paths > src/core/de.evoal.releng.jacoco/target/site/coverage.xml
+  needs: ["evoal:unit"]
+  dependencies:
+    - evoal:unit
+  artifacts:
+    reports:
       coverage_report:
         coverage_format: cobertura
-        path: src/core/*/target/site/jacoco/jacoco.xml
-    paths:
-      - src/core/*/target/surefire-reports/*
-      - src/core/*/target/site/jacoco/jacoco.xml
+        path: src/core/de.evoal.releng.jacoco/target/site/jacoco-aggregate/coverage.xml
 
 
 #############################################################

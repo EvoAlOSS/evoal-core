@@ -23,6 +23,7 @@
         <lombok.version>1.18.24</lombok.version>
         <slf4j.api.version>2.0.0</slf4j.api.version>
         <smile.version>2.6.0</smile.version>
+        <jacoco.version>0.8.10</jacoco.version>
     </properties>
 
     <modules>
@@ -42,6 +43,8 @@
         <module>../de.evoal.approximative.density</module>
 <!--        <module>../de.evoal.approximative.interval</module> -->
 <!--        <module>../de.evoal.surrogate.neural</module> -->
+
+        <module>../de.evoal.releng.jacoco</module>
     </modules>
 
     <dependencies>
@@ -249,12 +252,6 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.10</version>
-            </plugin>
-
-            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>3.2.2</version>
@@ -337,6 +334,29 @@
             </plugins>
         </pluginManagement>
     </build>
+
+    <profiles>
+        <profile>
+            <id>jacoco</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <!-- Configure code coverage measurement for gitlab -->
+                        <groupId>org.jacoco</groupId>
+                        <artifactId>jacoco-maven-plugin</artifactId>
+                        <version>${jacoco.version}</version>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>prepare-agent</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
     <distributionManagement>
         <repository>
