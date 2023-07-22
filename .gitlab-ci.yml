@@ -124,7 +124,7 @@ evoal:coverage:
   image: haynes/jacoco2cobertura:1.0.7
   script:
     - jacoco_paths=`find src/core/ -path "**/src/main/java" -type d | sed -e 's@^@'"$CI_PROJECT_DIR"'/@'`
-    - python /opt/cover2cover.py src/core/de.evoal.releng.jacoco/target/site/jacoco-aggregate/jacoco.xml $jacoco_paths > src/core/de.evoal.releng.jacoco/target/site/coverage.xml
+    - python /opt/cover2cover.py src/core/de.evoal.releng.jacoco/target/site/jacoco.xml $jacoco_paths > src/core/de.evoal.releng.jacoco/target/site/coverage.xml
   needs: ["evoal:unit"]
   dependencies:
     - evoal:unit
