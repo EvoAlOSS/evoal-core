@@ -115,7 +115,7 @@ evoal:unit:
       junit: src/core/*/target/surefire-reports/TEST-*.xml
       coverage_report:
         coverage_format: cobertura
-        path: ssrc/core/*/target/site/jacoco/jacoco.xml
+        path: src/core/*/target/site/jacoco/jacoco.xml
     paths:
       - src/core/*/target/surefire-reports/*
       - src/core/*/target/site/jacoco/jacoco.xml
