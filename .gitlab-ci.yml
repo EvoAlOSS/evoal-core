@@ -132,7 +132,7 @@ evoal:coverage:
     reports:
       coverage_report:
         coverage_format: cobertura
-        path: src/core/de.evoal.releng.jacoco/target/site/jacoco-aggregate/coverage.xml
+        path: src/core/de.evoal.releng.jacoco/target/site/coverage.xml
 
 
 #############################################################
