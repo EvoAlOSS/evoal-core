@@ -109,13 +109,15 @@ evoal:unit:
     - mvn $MAVEN_CLI_OPTS -f $MAIN_POM -DskipTests=true install
     - mvn $MAVEN_CLI_OPTS -f $PLUGIN_POM -DskipTests=true install
     - mvn $MAVEN_CLI_OPTS -f $EVOAL_POM -Pjacoco verify
+    - cat src/core/de.evoal.releng.jacoco/target/site/jacoco-aggregate/index.html | grep -o '<tfoot>.*</tfoot>'
+  coverage: /Total.*?([0-9]{1,3})%/
   artifacts:
     when: always
     reports:
       junit: src/core/*/target/surefire-reports/TEST-*.xml
     paths:
       - src/core/de.evoal.releng.jacoco/target/site/jacoco-aggregate/jacoco.xml
-      - src/core/*/target/surefire-reports/*
+      - src/core/*/target/surefire-reports/TEST-*.xml
 
 evoal:coverage:
   stage: EvoAl
@@ -132,7 +134,7 @@ evoal:coverage:
     reports:
       coverage_report:
         coverage_format: cobertura
-        path: src/core/de.evoal.releng.jacoco/target/site/coverage.xml
+        path: src/core/de.evoal.releng.jacoco/target/site/coverage.xmlx 
 
 
 #############################################################
