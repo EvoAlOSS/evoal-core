@@ -11,6 +11,7 @@ import de.evoal.core.junit.resources.ResourceUtils;
 import de.evoal.languages.model.ddl.DataDescriptionModule;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import java.io.File;
 import java.io.IOException;
@@ -69,6 +70,25 @@ public class ArffPropertiesReaderTest {
         }
 
         Assertions.assertFalse(testee.hasNext());
+    }
+
+    @Test
+    public void testExceptionDuringInit() throws EvoalIOException {
+        final File file = Mockito.mock(File.class);
+        final PropertiesSpecification specification = Mockito.mock(PropertiesSpecification.class);
+
+        Mockito.when(file.toString())
+               .thenThrow(new RuntimeException())
+               .thenReturn("<mock file>");
+
+        final PropertiesReader testee = new ArffPropertiesReader();
+        Assertions.assertThrows(EvoalIOException.class, () ->testee.init(file, specification));
+    }
+
+    @Test
+    public void testClose() throws Exception {
+        final PropertiesReader testee = new ArffPropertiesReader();
+        testee.close();
     }
 
     private PropertiesSpecification toSpecification(final DataDescriptionModule model) {

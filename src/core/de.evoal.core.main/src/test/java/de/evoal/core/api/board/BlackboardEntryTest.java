@@ -17,4 +17,10 @@ public class BlackboardEntryTest {
 
         Assertions.assertFalse(e1.isSame("example2"));
     }
+
+    public void testLabel() {
+        final BlackboardEntry e1 = BlackboardEntry.of("example");
+
+        Assertions.assertEquals("example", e1.getLabel());
+    }
 }
