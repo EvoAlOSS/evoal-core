@@ -1,5 +1,5 @@
-#!/bin/bash
-#set -e -x
+#!/bin/sh
+
 if [ -z ${EVOAL_HOME+x} ]; then
   EVOAL_HOME=$( cd -- "$(dirname $0)/../" >/dev/null 2>&1 ; pwd -P )
 fi
@@ -14,7 +14,7 @@ fi
 cd "$1" || exit 1
 
 set -x
-java $CLASSPATH \
+java ${CLASSPATH[@]} \
      -Bcore:main=heuristic-search \
      "-Bcore:optimisation-configuration-file=$2" \
      "-Bcore:evaluation-output-folder=$3"

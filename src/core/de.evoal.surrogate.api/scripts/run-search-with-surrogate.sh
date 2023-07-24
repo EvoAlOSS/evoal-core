@@ -11,10 +11,10 @@ if [ "$#" -ne 7 ]; then
     exit 1
 fi
 
-cd $1
+cd "$1" || exit 1
 
 set -x
-java $CLASSPATH \
+java ${CLASSPATH[@]} \
      -Bcore:main=heuristic-search \
      "-Bcore:optimisation-configuration-file=$2" \
      "-Bsurrogate:configuration-file=$3" \

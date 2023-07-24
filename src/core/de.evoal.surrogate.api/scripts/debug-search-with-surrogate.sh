@@ -11,11 +11,11 @@ if [ "$#" -ne 7 ]; then
     exit 1
 fi
 
-cd $1
+cd "$1" || exit 1
 
 set -x
 java -agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=1044\
-     $CLASSPATH \
+     ${CLASSPATH[@]} \
      -Bcore:main=heuristic-search \
      "-Bcore:optimisation-configuration-file=$2" \
      "-Bsurrogate:configuration-file=$3" \

@@ -11,10 +11,10 @@ if [ "$#" -ne 2 ]; then
     exit 1
 fi
 
-cd $1
+cd "$1" || exit 1
 
 set -x
-java -agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=1044\
-     $CLASSPATH \
+java -agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=1044 \
+     ${CLASSPATH[@]} \
      -Bcore:main=surrogate-training \
      "-Bsurrogate:configuration-file=$2"

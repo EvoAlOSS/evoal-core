@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 if [ -z ${EVOAL_HOME+x} ]; then
   EVOAL_HOME=$( cd -- "$(dirname $0)/../" >/dev/null 2>&1 ; pwd -P )
@@ -11,10 +11,10 @@ if [ "$#" -ne 3 ]; then
     exit 1
 fi
 
-cd $1
+cd "$1" || exit 1
 
 set -x
-java $CLASSPATH \
+java ${CLASSPATH[@]} \
      -Bcore:main=extract-data-definition-from-arff \
      -Barff:input=$2 \
      -Barff:output=$3
