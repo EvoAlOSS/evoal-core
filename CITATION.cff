@@ -1,0 +1,23 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: EvoAl
+message: Usable Optimisation
+type: software
+authors:
+  - given-names: Bernhard J.
+    family-names: Berger
+    email: bernhard.berger@tuhh.de
+    affiliation: Hamburg University of Technology
+    orcid: 'https://orcid.org/0000-0001-6093-9229'
+  - given-names: Christina
+    family-names: Plump
+    email: christina.plump@dfki.de
+    affiliation: DFKI GmbH - CPS
+    orcid: 'https://orcid.org/0000-0003-0392-6397'
+url: 'https://www.evoal.de'
+keywords:
+  - optimisation
+  - evolutionary algorithms
+license: Apache-2.0
