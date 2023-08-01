@@ -141,7 +141,7 @@ evoal:coverage:
         path: src/core/de.evoal.releng.jacoco/target/site/coverage.xmlx 
 
 gemnasium-dependency_scanning:
-  stage: Evoal
+  stage: EvoAl
   tags: [docker]
   image: registry.gitlab.com/security-products/gemnasium-maven:4
   variables:
