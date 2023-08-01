@@ -249,6 +249,7 @@
         </dependencies>
     </dependencyManagement>
 
+
     <build>
         <plugins>
             <plugin>
@@ -311,6 +312,15 @@
             <plugin>
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <version>2.22.2</version>
+            </plugin>
+
+            <plugin>
+                <groupId>com.gemnasium</groupId>
+                <artifactId>gemnasium-maven-plugin</artifactId>
+                <version>0.5.1</version>
+                <configuration>
+                    <ignoredScopes>test</ignoredScopes>
+                </configuration>
             </plugin>
         </plugins>
 

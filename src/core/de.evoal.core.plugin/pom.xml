@@ -261,6 +261,16 @@
 						</annotationProcessorPaths>
 					</configuration>
 				</plugin>
+
+				<plugin>
+					<groupId>com.gemnasium</groupId>
+					<artifactId>gemnasium-maven-plugin</artifactId>
+					<version>0.5.1</version>
+					<configuration>
+						<ignoredScopes>test</ignoredScopes>
+					</configuration>
+				</plugin>
+
 			</plugins>
 		</pluginManagement>
 	</build>
