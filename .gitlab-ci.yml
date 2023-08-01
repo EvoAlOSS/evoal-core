@@ -152,9 +152,9 @@ dependency_scanning:
     DS_EXCLUDED_PATHS: src/mirror,src/languages,src/core/de.evoal.[a-qs-z]*,de.evoal.releng.jacoco
   after_script:
     - >
-      cd src/core/
+      cd src/core/;
       for FILE in `find . -name "gemnasium-maven-plugin.json"`; do
-        mv $FILE `echo "./de.evoal.releng.parent/$FILE" | sed -e "s;/gemnasium-maven-plugin.json;-gemnasium-maven-plugin.json;g"`
+        mv $FILE `echo "./de.evoal.releng.parent/$FILE" | sed -e "s;/gemnasium-maven-plugin.json;-gemnasium-maven-plugin.json;g"`;
       done
 
 #############################################################
