@@ -140,7 +140,7 @@ evoal:coverage:
         coverage_format: cobertura
         path: src/core/de.evoal.releng.jacoco/target/site/coverage.xmlx 
 
-gemnasium-dependency_scanning:
+dependency_scanning:
   stage: EvoAl
   tags: [docker]
   image: registry.gitlab.com/security-products/gemnasium-maven:4
