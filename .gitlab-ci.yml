@@ -10,6 +10,7 @@ variables:
   # custom docker image for building our Java stuff
   ECLIPSE_IMAGE: gitlab.informatik.uni-bremen.de:5005/evoal/source/evoal-core/evoal/eclipse-mirror:2022-12
   EVOAL_IMAGE: library/maven:3.8.6-eclipse-temurin-17-alpine
+  SECURE_LOG_LEVEL: "debug"
 
   ######################
   # pom.xml to build
@@ -144,6 +145,7 @@ dependency_scanning:
   stage: EvoAl
   tags: [docker]
   image: registry.gitlab.com/security-products/gemnasium-maven:4
+  needs: ["evoal:compile"]
   variables:
     DS_JAVA_VERSION: 17
     DS_MAX_DEPTH: 3
