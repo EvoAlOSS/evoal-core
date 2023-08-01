@@ -19,6 +19,10 @@ variables:
   MAIN_POM: "src/core/de.evoal.core.main/pom.xml"
   MIRROR_POM: "src/mirror/pom.xml"
 
+# include pre-defined templates for scanning
+include:
+  - template: Security/Dependency-Scanning.gitlab-ci.yml
+
 #before_script:
 #  # docker login asks for the password to be passed through stdin for security
 #  # we use $CI_REGISTRY_PASSWORD here which is a special variable provided by GitLab
@@ -136,6 +140,12 @@ evoal:coverage:
         coverage_format: cobertura
         path: src/core/de.evoal.releng.jacoco/target/site/coverage.xmlx 
 
+gemnasium-dependency_scanning:
+  stage: Evoal
+  tags: [docker]
+  image: registry.gitlab.com/security-products/gemnasium-maven:4
+  variables:
+    DS_JAVA_VERSION: 17
 
 #############################################################
 ## Remaining integration tests
