@@ -149,7 +149,7 @@ dependency_scanning:
   variables:
     DS_JAVA_VERSION: 17
     DS_MAX_DEPTH: 3
-    DS_EXCLUDED_PATHS: src/mirror,src/languages,src/core/de.evoal.[a-qs-z]*
+    DS_EXCLUDED_PATHS: src/mirror,src/languages,src/core/de.evoal.[a-qs-z]*,de.evoal.releng.jacoco
 
 #############################################################
 ## Remaining integration tests
