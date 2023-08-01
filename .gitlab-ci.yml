@@ -146,7 +146,7 @@ dependency_scanning:
   image: registry.gitlab.com/security-products/gemnasium-maven:4
   variables:
     DS_JAVA_VERSION: 17
-    DS_MAX_DEPTH: 3
+    DS_MAX_DEPTH: 4
     DS_EXCLUDED_PATHS: src/mirror,src/languages,src/core/de.evoal.[!r]*
 
 #############################################################
