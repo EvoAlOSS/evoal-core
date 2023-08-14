@@ -6,14 +6,19 @@ fi
 
 source $EVOAL_HOME/bin/paths.env
 
-if [ "$#" -ne 2 ]; then
-    echo "Usage: $0 <execution-folder> <mll-file>"
+if [ "$#" -lt 2 ]; then
+    echo "Usage: $0 <execution-folder> <mll-file>  [EvoAl parameters]"
     exit 1
 fi
 
 cd "$1" || exit 1
 
+POSITIONAL_ARGUMENTS=( "$@" )
+POSITIONAL_ARGUMENTS=("${POSITIONAL_ARGUMENTS[@]:2}")
+
+
 set -x
-java ${CLASSPATH[@]} \
+java ${CLASSPATH[@]}  \
+     ${POSITIONAL_ARGUMENTS[@]} \
      -Bcore:main=surrogate-training \
      "-Bsurrogate:configuration-file=$2"
