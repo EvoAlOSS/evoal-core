@@ -4,6 +4,11 @@
  */
 package de.evoal.languages.model.ol.dsl.validation;
 
+import org.eclipse.xtext.validation.Check;
+
+import de.evoal.languages.model.ol.OLPackage;
+import de.evoal.languages.model.ol.OptimisationModule;
+import de.evoal.languages.model.utils.validator.ModuleValidator;
 
 /**
  * This class contains custom validation rules. 
@@ -23,4 +28,8 @@ public class OptimisationLanguageValidator extends AbstractOptimisationLanguageV
 //		}
 //	}
 	
+	@Check
+	public void checkModule(final OptimisationModule module) {
+		ModuleValidator.check(module, module.getName(), "ol", msg -> error(msg, module, OLPackage.Literals.OPTIMISATION_MODULE__NAME));
+	}
 }

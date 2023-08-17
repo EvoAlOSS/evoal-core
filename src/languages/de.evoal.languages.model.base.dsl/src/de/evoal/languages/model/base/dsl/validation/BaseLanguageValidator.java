@@ -4,7 +4,6 @@
  */
 package de.evoal.languages.model.base.dsl.validation;
 
-
 /**
  * This class contains custom validation rules. 
  *
@@ -22,5 +21,31 @@ public class BaseLanguageValidator extends AbstractBaseLanguageValidator {
 //					INVALID_NAME);
 //		}
 //	}
-	
+	/*
+	@Check
+	public void checkImportStatement(final Import importStatement) {
+		System.err.println("IMPORTING " + importStatement.getFilename());
+		
+		final String filename = importStatement.getFilename();
+		
+		final ResourceSet rs = importStatement.eResource().getResourceSet();
+		
+		for(final Resource resource : rs.getResources()) {
+			final URI uri = resource.getURI();
+			final String resourceName = uri.toString();
+			
+			System.err.println("  " + resourceName);
+			
+			if(resourceName.contains("constraint")) {
+				System.out.println("BREAK");
+			}
+			
+			if(resourceName.endsWith(filename)) {
+				return;
+			}
+		}
+		
+		warning("Cannot find file '" + filename + "'.", BasePackage.Literals.IMPORT__IMPORTED_NAMESPACE);
+	}
+	*/
 }

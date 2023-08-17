@@ -4,6 +4,11 @@
  */
 package de.evoal.languages.model.mll.dsl.validation;
 
+import org.eclipse.xtext.validation.Check;
+
+import de.evoal.languages.model.mll.MachineLearningModule;
+import de.evoal.languages.model.mll.MllPackage;
+import de.evoal.languages.model.utils.validator.ModuleValidator;
 
 /**
  * This class contains custom validation rules. 
@@ -23,4 +28,10 @@ public class MachineLearningLanguageValidator extends AbstractMachineLearningLan
 //		}
 //	}
 	
+	
+	@Check
+	public void checkModule(final MachineLearningModule module) {
+		ModuleValidator.check(module, module.getName(), "mll", msg -> error(msg, module, MllPackage.Literals.MACHINE_LEARNING_MODULE__NAME));
+	}
+
 }

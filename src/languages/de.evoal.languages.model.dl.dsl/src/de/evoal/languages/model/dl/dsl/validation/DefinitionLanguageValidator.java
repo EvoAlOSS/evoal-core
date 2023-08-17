@@ -3,6 +3,12 @@
  */
 package de.evoal.languages.model.dl.dsl.validation;
 
+import org.eclipse.xtext.validation.Check;
+
+import de.evoal.languages.model.dl.DefinitionModule;
+import de.evoal.languages.model.dl.DlPackage;
+import de.evoal.languages.model.utils.validator.ModuleValidator;
+
 /**
  * This class contains custom validation rules. 
  *
@@ -21,4 +27,10 @@ public class DefinitionLanguageValidator extends AbstractDefinitionLanguageValid
 //		}
 //	}
 	
+	
+	@Check
+	public void checkModule(final DefinitionModule module) {
+		ModuleValidator.check(module, module.getName(), "dl", msg -> error(msg, module, DlPackage.Literals.DEFINITION_MODULE__NAME));
+	}
+
 }

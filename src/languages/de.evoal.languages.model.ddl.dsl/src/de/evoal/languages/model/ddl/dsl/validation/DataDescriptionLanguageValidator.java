@@ -4,6 +4,11 @@
  */
 package de.evoal.languages.model.ddl.dsl.validation;
 
+import org.eclipse.xtext.validation.Check;
+
+import de.evoal.languages.model.ddl.DataDescriptionModule;
+import de.evoal.languages.model.ddl.DdlPackage;
+import de.evoal.languages.model.utils.validator.ModuleValidator;
 
 /**
  * This class contains custom validation rules. 
@@ -23,4 +28,10 @@ public class DataDescriptionLanguageValidator extends AbstractDataDescriptionLan
 //		}
 //	}
 	
+	
+	@Check
+	public void checkModule(final DataDescriptionModule module) {
+		ModuleValidator.check(module, module.getName(), "ddl", msg -> error(msg, module, DdlPackage.Literals.DATA_DESCRIPTION_MODULE__NAME));
+	}
+
 }
