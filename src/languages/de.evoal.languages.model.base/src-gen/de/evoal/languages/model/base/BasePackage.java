@@ -1859,13 +1859,22 @@ public interface BasePackage extends EPackage {
 	int IMPORT_FEATURE_COUNT = 2;
 
 	/**
+	 * The operation id for the '<em>Get Filename</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPORT___GET_FILENAME = 0;
+
+	/**
 	 * The number of operations of the '<em>Import</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IMPORT_OPERATION_COUNT = 0;
+	int IMPORT_OPERATION_COUNT = 1;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.ComparisonOperator <em>Comparison Operator</em>}' enum.
@@ -3002,6 +3011,16 @@ public interface BasePackage extends EPackage {
 	EAttribute getImport_ImportedNamespace();
 
 	/**
+	 * Returns the meta object for the '{@link de.evoal.languages.model.base.Import#getFilename() <em>Get Filename</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Filename</em>' operation.
+	 * @see de.evoal.languages.model.base.Import#getFilename()
+	 * @generated
+	 */
+	EOperation getImport__GetFilename();
+
+	/**
 	 * Returns the meta object for enum '{@link de.evoal.languages.model.base.ComparisonOperator <em>Comparison Operator</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3983,6 +4002,14 @@ public interface BasePackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute IMPORT__IMPORTED_NAMESPACE = eINSTANCE.getImport_ImportedNamespace();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Filename</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation IMPORT___GET_FILENAME = eINSTANCE.getImport__GetFilename();
 
 		/**
 		 * The meta object literal for the '{@link de.evoal.languages.model.base.ComparisonOperator <em>Comparison Operator</em>}' enum.

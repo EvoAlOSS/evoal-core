@@ -403,6 +403,11 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Import">
+    <eOperations name="getFilename" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="String result = getImportedNamespace();&#xA;&#xA;// turn into path&#xA;result = result.replace('.', '/');&#xA;&#xA;// append file ending&#xA;switch(getLanguage()) {&#xA;    case &quot;data&quot;:&#xA;        result += &quot;.ddl&quot;;&#xA;        break;&#xA;&#xA;    case &quot;definitions&quot;:&#xA;        result += &quot;.dl&quot;;&#xA;        break;&#xA;    case &quot;optimisation&quot;:&#xA;    case &quot;optimization&quot;:&#xA;        result += &quot;.ol&quot;;&#xA;        break;&#xA;}&#xA;&#xA;return result;"/>
+      </eAnnotations>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="language" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="importedNamespace" lowerBound="1"

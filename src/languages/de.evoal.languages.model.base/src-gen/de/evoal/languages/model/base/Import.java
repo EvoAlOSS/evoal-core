@@ -66,4 +66,12 @@ public interface Import extends EObject {
 	 */
 	void setImportedNamespace(String value);
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" required="true"
+	 * @generated
+	 */
+	String getFilename();
+
 } // Import

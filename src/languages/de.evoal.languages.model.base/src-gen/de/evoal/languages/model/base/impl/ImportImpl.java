@@ -5,8 +5,10 @@ package de.evoal.languages.model.base.impl;
 import de.evoal.languages.model.base.BasePackage;
 import de.evoal.languages.model.base.Import;
 
+import java.lang.reflect.InvocationTargetException;
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -138,6 +140,36 @@ public class ImportImpl extends MinimalEObjectImpl.Container implements Import {
 	 * @generated
 	 */
 	@Override
+	public String getFilename() {
+		String result = getImportedNamespace();
+		
+		// turn into path
+		result = result.replace('.', '/');
+		
+		// append file ending
+		switch(getLanguage()) {
+		    case "data":
+		        result += ".ddl";
+		        break;
+		
+		    case "definitions":
+		        result += ".dl";
+		        break;
+		    case "optimisation":
+		    case "optimization":
+		        result += ".ol";
+		        break;
+		}
+		
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case BasePackage.IMPORT__LANGUAGE:
@@ -198,6 +230,20 @@ public class ImportImpl extends MinimalEObjectImpl.Container implements Import {
 				return IMPORTED_NAMESPACE_EDEFAULT == null ? importedNamespace != null : !IMPORTED_NAMESPACE_EDEFAULT.equals(importedNamespace);
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		switch (operationID) {
+			case BasePackage.IMPORT___GET_FILENAME:
+				return getFilename();
+		}
+		return super.eInvoke(operationID, arguments);
 	}
 
 	/**

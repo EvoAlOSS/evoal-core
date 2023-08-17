@@ -11,4 +11,5 @@ Bundle-RequiredExecutionEnvironment: JavaSE-17
 Automatic-Module-Name: de.evoal.languages.model.utils
 Export-Package: de.evoal.languages.model.utils.builtin,
  de.evoal.languages.model.utils.converter,
- de.evoal.languages.model.utils.scoping
+ de.evoal.languages.model.utils.scoping,
+ de.evoal.languages.model.utils.validator

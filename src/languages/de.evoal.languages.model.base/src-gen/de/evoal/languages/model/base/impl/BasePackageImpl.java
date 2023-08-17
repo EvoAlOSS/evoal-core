@@ -1511,6 +1511,16 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 	 * @generated
 	 */
 	@Override
+	public EOperation getImport__GetFilename() {
+		return importEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EEnum getComparisonOperator() {
 		return comparisonOperatorEEnum;
 	}
@@ -1721,6 +1731,7 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 		importEClass = createEClass(IMPORT);
 		createEAttribute(importEClass, IMPORT__LANGUAGE);
 		createEAttribute(importEClass, IMPORT__IMPORTED_NAMESPACE);
+		createEOperation(importEClass, IMPORT___GET_FILENAME);
 
 		// Create enums
 		comparisonOperatorEEnum = createEEnum(COMPARISON_OPERATOR);
@@ -1939,6 +1950,8 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 		initEClass(importEClass, Import.class, "Import", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getImport_Language(), ecorePackage.getEString(), "language", null, 1, 1, Import.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getImport_ImportedNamespace(), ecorePackage.getEString(), "importedNamespace", null, 1, 1, Import.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEOperation(getImport__GetFilename(), ecorePackage.getEString(), "getFilename", 1, 1, IS_UNIQUE, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(comparisonOperatorEEnum, ComparisonOperator.class, "ComparisonOperator");

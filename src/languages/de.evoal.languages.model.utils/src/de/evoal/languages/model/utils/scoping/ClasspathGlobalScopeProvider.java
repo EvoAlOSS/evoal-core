@@ -40,24 +40,7 @@ public class ClasspathGlobalScopeProvider extends ImportUriGlobalScopeProvider {
 			
 			// get imported module name
 			final Import imp = (Import) from;
-			String result = imp.getImportedNamespace();
-			
-			// turn into path
-			result = result.replace('.', '/');
-			
-			// append file ending
-			switch(imp.getLanguage()) {
-			case "data":
-				result += ".ddl";
-				break;
-			case "definitions":
-				result += ".dl";
-				break;
-			case "optimisation":
-			case "optimization":
-				result += ".ol";
-				break;
-			}
+			final String result = imp.getFilename();
 			
 			for(final String path : SEARCH_PATH) {
 				if(new File(path, result).exists()) {

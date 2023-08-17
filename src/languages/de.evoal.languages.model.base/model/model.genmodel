@@ -187,6 +187,7 @@
     <genClasses ecoreClass="model.ecore#//Import">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//Import/language"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//Import/importedNamespace"/>
+      <genOperations ecoreOperation="model.ecore#//Import/getFilename" body="String result = getImportedNamespace();&#xA;&#xA;// turn into path&#xA;result = result.replace('.', '/');&#xA;&#xA;// append file ending&#xA;switch(getLanguage()) {&#xA;    case &quot;data&quot;:&#xA;        result += &quot;.ddl&quot;;&#xA;        break;&#xA;&#xA;    case &quot;definitions&quot;:&#xA;        result += &quot;.dl&quot;;&#xA;        break;&#xA;    case &quot;optimisation&quot;:&#xA;    case &quot;optimization&quot;:&#xA;        result += &quot;.ol&quot;;&#xA;        break;&#xA;}&#xA;&#xA;return result;"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>
