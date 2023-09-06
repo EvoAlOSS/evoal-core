@@ -6,15 +6,19 @@ fi
 
 source $EVOAL_HOME/bin/paths.env
 
-if [ "$#" -ne 3 ]; then
+if [ "$#" -lt 3 ]; then
     echo "Usage: $0 <execution-folder> <eal-file> <output-folder>"
     exit 1
 fi
 
 cd "$1" || exit 1
 
+POSITIONAL_ARGUMENTS=( "$@" )
+POSITIONAL_ARGUMENTS=("${POSITIONAL_ARGUMENTS[@]:3}")
+
 set -x
 java ${CLASSPATH[@]} \
+     ${POSITIONAL_ARGUMENTS[@]} \
      -Bcore:main=heuristic-search \
      "-Bcore:optimisation-configuration-file=$2" \
      "-Bcore:evaluation-output-folder=$3"
