@@ -1,6 +1,4 @@
-#!/bin/bash
-
-set -e -x
+#!/bin/sh
 
 if [ -z ${EVOAL_HOME+x} ]; then
   EVOAL_HOME=$( cd -- "$(dirname $0)/../" >/dev/null 2>&1 ; pwd -P )
@@ -18,8 +16,24 @@ cd "$1" || exit 1
 POSITIONAL_ARGUMENTS=( "$@" )
 POSITIONAL_ARGUMENTS=("${POSITIONAL_ARGUMENTS[@]:7}")
 
+declare -a JVM_ARGUMENTS=()
+
+if [ ${EVOAL_VM+x} ]; then
+  JVM_ARGUMENTS+=( "${EVOAL_VM[@]}" )
+fi
+
+if [ ${EVOAL_DEBUG+x} ]; then
+  JVM_ARGUMENTS+=( "-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=1044" )
+fi
+
+if [ ${EVOAL_LOGGING+x} ]; then
+  POSITIONAL_ARGUMENTS+=( "-Bcore:logging=$EVOAL_LOGGING" )
+fi
+
+
 set -x
-java ${CLASSPATH[@]} \
+java ${JVM_ARGUMENTS[@]} \
+     ${CLASSPATH[@]} \
      ${POSITIONAL_ARGUMENTS[@]} \
      -Bcore:main=heuristic-search \
      "-Bcore:optimisation-configuration-file=$2" \
