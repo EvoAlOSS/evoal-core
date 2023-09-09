@@ -20,7 +20,18 @@ import de.evoal.languages.model.base.Import;
 public class ClasspathGlobalScopeProvider extends ImportUriGlobalScopeProvider {
 	private final static Logger log = Logger.getLogger(ClasspathGlobalScopeProvider.class.getCanonicalName());
 	
-	public static List<String> SEARCH_PATH = new LinkedList<>(Collections.singleton("./"));
+	private static List<String> SEARCH_PATH = new LinkedList<>(Collections.singleton("./"));
+	
+	public static void addSearchPath(final String path) {
+		File file = new File(path);
+		if(!file.isAbsolute()) {
+			file = file.getAbsoluteFile();
+		}
+		
+		log.info("Adding " + file.toString() + " to EvoAl's search path.");
+		
+		SEARCH_PATH.add(file.toString());
+	}
 	
 	public static class CustomUriResolver extends ImportUriResolver  {
 		
@@ -43,8 +54,9 @@ public class ClasspathGlobalScopeProvider extends ImportUriGlobalScopeProvider {
 			final String result = imp.getFilename();
 			
 			for(final String path : SEARCH_PATH) {
-				if(new File(path, result).exists()) {
-					final String resolvedFile = new File(path, result).toString();
+				final File candidate = new File(path, result);
+				if(candidate.exists()) {
+					final String resolvedFile = candidate.toString();
 					log.info("Resolved file to " + resolvedFile);
 					return resolvedFile;
 				} 				

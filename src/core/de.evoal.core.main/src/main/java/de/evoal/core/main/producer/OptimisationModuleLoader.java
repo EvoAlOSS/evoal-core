@@ -53,8 +53,6 @@ public class OptimisationModuleLoader {
         }
 
         final File folder = configurationFile.getAbsoluteFile().getParentFile();
-        ClasspathGlobalScopeProvider.SEARCH_PATH.add(folder.toString());
-        log.info("Adding {} to search path.", folder);
 
         initializeEMF();
 

@@ -56,10 +56,6 @@ public class GeneratorModuleProducer {
             throw  new IllegalArgumentException("Please specify a readable genrator file.");
         }
 
-        final File folder = file.getAbsoluteFile().getParentFile();
-        ClasspathGlobalScopeProvider.SEARCH_PATH.add(folder.toString());
-        log.info("Adding {} to search path.", folder);
-
         final GeneratorModule configuration = read(file).get();
         board.bind(GeneratorBlackboardEntries.GENERATOR_CONFIGURATION, configuration);
     }

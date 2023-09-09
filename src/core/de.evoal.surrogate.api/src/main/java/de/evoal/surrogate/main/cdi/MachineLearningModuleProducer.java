@@ -76,10 +76,6 @@ public class MachineLearningModuleProducer {
     private Optional<MachineLearningModule> read(final File modelFile) {
         log.info("Reading model file {}.", modelFile);
 
-        final File folder = modelFile.getAbsoluteFile().getParentFile();
-        ClasspathGlobalScopeProvider.SEARCH_PATH.add(folder.toString());
-        log.info("Adding {} to search path.", folder);
-
         final Injector injector = new MachineLearningLanguageStandaloneSetup().createInjectorAndDoEMFRegistration();
         new DataDescriptionLanguageStandaloneSetup().createInjectorAndDoEMFRegistration();
         new DefinitionLanguageStandaloneSetup().createInjectorAndDoEMFRegistration();

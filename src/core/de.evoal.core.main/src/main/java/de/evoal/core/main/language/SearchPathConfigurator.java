@@ -24,6 +24,8 @@ public class SearchPathConfigurator {
         final String searchPath = board.get(CoreBlackboardEntries.SEARCH_PATH);
         final String [] searchPathEntries = searchPath.split(File.pathSeparator);
 
-        ClasspathGlobalScopeProvider.SEARCH_PATH.addAll(Arrays.asList(searchPathEntries));
+        for(final String path : searchPathEntries) {
+            ClasspathGlobalScopeProvider.addSearchPath(path);
+        }
     }
 }

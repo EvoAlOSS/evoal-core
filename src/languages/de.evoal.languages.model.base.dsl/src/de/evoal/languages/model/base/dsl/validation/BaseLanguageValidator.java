@@ -4,12 +4,25 @@
  */
 package de.evoal.languages.model.base.dsl.validation;
 
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.xtext.resource.IReferenceDescription;
+import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.resource.IResourceDescriptions;
+import org.eclipse.xtext.resource.IResourceDescriptionsProvider;
+import org.eclipse.xtext.validation.Check;
+
+import com.google.inject.Inject;
+
+import de.evoal.languages.model.base.Import;
+
 /**
  * This class contains custom validation rules. 
  *
  * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#validation
  */
 public class BaseLanguageValidator extends AbstractBaseLanguageValidator {
+	@Inject
+	private IResourceDescriptionsProvider provider;
 	
 //	public static final String INVALID_NAME = "invalidName";
 //
@@ -21,14 +34,23 @@ public class BaseLanguageValidator extends AbstractBaseLanguageValidator {
 //					INVALID_NAME);
 //		}
 //	}
-	/*
+/*
 	@Check
 	public void checkImportStatement(final Import importStatement) {
 		System.err.println("IMPORTING " + importStatement.getFilename());
 		
+		final ResourceSet rs = importStatement.eResource().getResourceSet();
+		final IResourceDescriptions descriptions = provider.getResourceDescriptions(rs);
+		
+		final IResourceDescription desciption = descriptions.getResourceDescription(importStatement.eResource().getURI());
+
+		for(final IReferenceDescription reference : desciption.getReferenceDescriptions()) {
+			System.err.println(reference);
+		}
+		
+		/ *
 		final String filename = importStatement.getFilename();
 		
-		final ResourceSet rs = importStatement.eResource().getResourceSet();
 		
 		for(final Resource resource : rs.getResources()) {
 			final URI uri = resource.getURI();
@@ -46,6 +68,7 @@ public class BaseLanguageValidator extends AbstractBaseLanguageValidator {
 		}
 		
 		warning("Cannot find file '" + filename + "'.", BasePackage.Literals.IMPORT__IMPORTED_NAMESPACE);
+
 	}
-	*/
+		*/
 }
