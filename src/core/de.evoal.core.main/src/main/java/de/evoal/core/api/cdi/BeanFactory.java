@@ -23,7 +23,8 @@ public final class BeanFactory {
         try {
             return BeanProvider.getContextualReference(type);
         } catch(final IllegalStateException | IllegalArgumentException e) {
-            log.error("Failed to create contextual reference of type '{}'.", type);
+            log.error("Failed to create contextual reference of type '{}'.", type, e);
+
             logInstantiationError(type, e);
             throw e;
         }
