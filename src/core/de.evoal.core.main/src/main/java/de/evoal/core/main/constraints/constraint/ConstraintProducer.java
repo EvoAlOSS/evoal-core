@@ -58,7 +58,7 @@ public class ConstraintProducer {
 
     private Optional<Constraint> convert(final Call constraint, final DataDescription context) {
         if(constraint.getParameters().size() != 2) {
-            LogHelper.parameterMismatch(log,"constraint", constraint, 2);
+            LogHelper.parameterMismatch(log, "constraint", constraint, 2);
             return Optional.empty();
         }
 
