@@ -1,12 +1,13 @@
-package de.evoal.ui.core;
+package de.evoal.ui.core.preferences;
 
-import org.eclipse.core.runtime.preferences.InstanceScope;
+import org.eclipse.jface.preference.ComboFieldEditor;
 import org.eclipse.jface.preference.DirectoryFieldEditor;
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
-import org.eclipse.ui.preferences.ScopedPreferenceStore;
+
+import de.evoal.ui.core.Activator;
 
 public class MainWorkbenchPreferencePage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage {
 
@@ -27,12 +28,13 @@ public class MainWorkbenchPreferencePage extends FieldEditorPreferencePage imple
 
 	@Override
 	public void init(final IWorkbench workbench) {
-		setPreferenceStore(new ScopedPreferenceStore(InstanceScope.INSTANCE, "de.evoal.ui.core.main"));
+		setPreferenceStore(Activator.getDefault().getPreferenceStore());
         setDescription("EvoAl related settings.");
     }
 
 	@Override
 	protected void createFieldEditors() {
-		addField(new DirectoryFieldEditor("release", "&EvoAl directory:", getFieldEditorParent()));
+		addField(new DirectoryFieldEditor(Preferences.EVOAL_HOME, "EvoAl &Home Directory:", getFieldEditorParent()));
+		addField(new ComboFieldEditor(Preferences.LOG_LEVEL, "EvoAl &Log Level", new String[][] {{"Errors", "ERROR"}, {"Warnings", "WARN"}, {"Informations", "INFO"},  {"Debugging", "DEBUG"}}, getFieldEditorParent()));
 	}
 }

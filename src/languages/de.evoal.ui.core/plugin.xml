@@ -4,7 +4,7 @@
    <extension
          point="org.eclipse.ui.preferencePages">
       <page
-            class="de.evoal.ui.core.MainWorkbenchPreferencePage"
+            class="de.evoal.ui.core.preferences.MainWorkbenchPreferencePage"
             id="de.evoal.ui.core.main"
             name="EvoAl">
       </page>

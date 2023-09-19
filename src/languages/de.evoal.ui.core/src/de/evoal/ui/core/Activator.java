@@ -1,6 +1,9 @@
 package de.evoal.ui.core;
 
+import org.eclipse.core.runtime.preferences.InstanceScope;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.ui.preferences.ScopedPreferenceStore;
 import org.osgi.framework.BundleContext;
 
 /**
@@ -10,6 +13,8 @@ public class Activator extends AbstractUIPlugin {
 
 	// The plug-in ID
 	public static final String PLUGIN_ID = "de.evoal.ui.core"; //$NON-NLS-1$
+	
+	private static final String PREFERENCE_ID = "de.evoal.ui.core.main"; //$NON-NLS-1$
 
 	// The shared instance
 	private static Activator plugin;
@@ -39,6 +44,10 @@ public class Activator extends AbstractUIPlugin {
 	 */
 	public static Activator getDefault() {
 		return plugin;
+	}
+	
+	public IPreferenceStore openPreferenceStore() {
+		return new ScopedPreferenceStore(InstanceScope.INSTANCE, PREFERENCE_ID);
 	}
 
 }
