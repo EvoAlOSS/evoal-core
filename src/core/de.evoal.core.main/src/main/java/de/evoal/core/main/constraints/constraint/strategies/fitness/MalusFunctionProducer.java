@@ -46,7 +46,9 @@ public class MalusFunctionProducer {
         final List<Instance> relevantHandlers = configUtil.findConstraintHandlerByHandlingStrategy(handlers, "malus-for-fitness");
 
         // collect group names of relevant handlers
-        final Set<String> allGroups = relevantHandlers.stream().map(i -> (String)((Literal)i.findAttribute("category").getValue()).getValue()).collect(Collectors.toSet());
+        final Set<String> allGroups = relevantHandlers.stream()
+                .map(i -> helper.get().<String>lookup(i, "category"))
+                .collect(Collectors.toSet());
 
         // resulting strategies
         final MalusForFitnessStrategy resultingFunction = new MalusForFitnessStrategy(target.size());
