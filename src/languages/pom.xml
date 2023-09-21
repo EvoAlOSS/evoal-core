@@ -7,8 +7,8 @@
 
 	<groupId>de.evoal.languages</groupId>
 	<artifactId>de.evoal.languages.releng.parent</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
 	<name>Evoal - Parent</name>
+	<version>${revision}</version>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -106,7 +106,7 @@
 							<artifact>
 								<artifactId>de.evoal.languages.releng.target</artifactId>
 								<groupId>de.evoal.languages</groupId>
-								<version>1.0.0-SNAPSHOT</version>
+								<version>${project.version}</version>
 							</artifact>
 						</target>
 
@@ -223,16 +223,6 @@
 				</plugin>
 
 
-				<plugin>
-					<!-- Can be removed after first generator execution https://bugs.eclipse.org/bugs/show_bug.cgi?id=480097 -->
-					<groupId>org.eclipse.tycho</groupId>
-					<artifactId>tycho-compiler-plugin</artifactId>
-					<version>${tycho.version}</version>
-					<configuration>
-						<compilerArgument>-err:-forbidden</compilerArgument>
-						<useProjectSettings>false</useProjectSettings>
-					</configuration>
-				</plugin>
 				<!--This plugin's configuration is used to store Eclipse m2e settings 
 					only. It has no influence on the Maven build itself. -->
 				<plugin>
@@ -264,52 +254,52 @@
 	</build>
 
 	<modules>
-		<module>../de.evoal.languages.releng.target</module>
+		<module>de.evoal.languages.releng.target</module>
 
-		<module>../de.evoal.languages.model.utils</module>
-		<module>../de.evoal.ui.core</module>
+		<module>de.evoal.languages.model.utils</module>
+		<module>de.evoal.ui.core</module>
 
-		<module>../de.evoal.languages.model.base</module>
-		<module>../de.evoal.languages.model.base.dsl</module>
-		<module>../de.evoal.languages.model.base.dsl.ide</module>
-		<module>../de.evoal.languages.model.base.dsl.ui</module>
+		<module>de.evoal.languages.model.base</module>
+		<module>de.evoal.languages.model.base.dsl</module>
+		<module>de.evoal.languages.model.base.dsl.ide</module>
+		<module>de.evoal.languages.model.base.dsl.ui</module>
 
-		<module>../de.evoal.languages.model.dl</module>
-		<module>../de.evoal.languages.model.dl.dsl</module>
-		<module>../de.evoal.languages.model.dl.dsl.tests</module>
-		<module>../de.evoal.languages.model.dl.dsl.ide</module>
-		<module>../de.evoal.languages.model.dl.dsl.ui</module>
+		<module>de.evoal.languages.model.dl</module>
+		<module>de.evoal.languages.model.dl.dsl</module>
+		<module>de.evoal.languages.model.dl.dsl.tests</module>
+		<module>de.evoal.languages.model.dl.dsl.ide</module>
+		<module>de.evoal.languages.model.dl.dsl.ui</module>
 
-		<module>../de.evoal.languages.model.ddl</module>
-		<module>../de.evoal.languages.model.ddl.dsl</module>
-		<module>../de.evoal.languages.model.ddl.dsl.ide</module>
-		<module>../de.evoal.languages.model.ddl.dsl.ui</module>
+		<module>de.evoal.languages.model.ddl</module>
+		<module>de.evoal.languages.model.ddl.dsl</module>
+		<module>de.evoal.languages.model.ddl.dsl.ide</module>
+		<module>de.evoal.languages.model.ddl.dsl.ui</module>
 
-		<module>../de.evoal.languages.model.instance</module>		
-		<module>../de.evoal.languages.model.instance.dsl</module>
-		<module>../de.evoal.languages.model.instance.dsl.ide</module>
-		<module>../de.evoal.languages.model.instance.dsl.ui</module>
+		<module>de.evoal.languages.model.instance</module>		
+		<module>de.evoal.languages.model.instance.dsl</module>
+		<module>de.evoal.languages.model.instance.dsl.ide</module>
+		<module>de.evoal.languages.model.instance.dsl.ui</module>
 
-		<module>../de.evoal.languages.model.mll</module>
-		<module>../de.evoal.languages.model.mll.dsl</module>
-		<module>../de.evoal.languages.model.mll.dsl.ide</module>
-		<module>../de.evoal.languages.model.mll.dsl.ui</module>
+		<module>de.evoal.languages.model.mll</module>
+		<module>de.evoal.languages.model.mll.dsl</module>
+		<module>de.evoal.languages.model.mll.dsl.ide</module>
+		<module>de.evoal.languages.model.mll.dsl.ui</module>
 
-		<module>../de.evoal.languages.model.ol</module>
-		<module>../de.evoal.languages.model.ol.dsl</module>
-		<module>../de.evoal.languages.model.ol.dsl.ide</module>
-		<module>../de.evoal.languages.model.ol.dsl.ui</module>
+		<module>de.evoal.languages.model.ol</module>
+		<module>de.evoal.languages.model.ol.dsl</module>
+		<module>de.evoal.languages.model.ol.dsl.ide</module>
+		<module>de.evoal.languages.model.ol.dsl.ui</module>
 
-		<module>../de.evoal.languages.model.generator</module>
-		<module>../de.evoal.languages.model.generator.dsl</module>
-		<module>../de.evoal.languages.model.generator.dsl.tests</module>
-		<module>../de.evoal.languages.model.generator.dsl.ide</module>
-		<module>../de.evoal.languages.model.generator.dsl.ui</module>
+		<module>de.evoal.languages.model.generator</module>
+		<module>de.evoal.languages.model.generator.dsl</module>
+		<module>de.evoal.languages.model.generator.dsl.tests</module>
+		<module>de.evoal.languages.model.generator.dsl.ide</module>
+		<module>de.evoal.languages.model.generator.dsl.ui</module>
 
-		<module>../de.evoal.languages.model.interpreter</module>
+		<module>de.evoal.languages.model.interpreter</module>
 
-		<module>../de.evoal.languages.releng.feature</module>
-		<module>../de.evoal.languages.releng.site</module>
+		<module>de.evoal.languages.releng.feature</module>
+		<module>de.evoal.languages.releng.site</module>
 	</modules>
 
 
@@ -317,13 +307,13 @@
 		<repository>
 			<id>gitlab-maven</id>
 			<name>Stable Releases</name>
-			<url>${env.CI_API_V4_URL}/projects/${env.CI_PROJECT_ID}/packages/maven</url>
+			<url>${env.CI_API_V4_URL}/projects/${env.CI_PROJECT_ID}/packages/maven/${branch}</url>
 		</repository>
 
 		<snapshotRepository>
 			<id>gitlab-maven</id>
 			<name>Internal Snapshots</name>
-			<url>${env.CI_API_V4_URL}/projects/${env.CI_PROJECT_ID}/packages/maven</url>
+			<url>${env.CI_API_V4_URL}/projects/${env.CI_PROJECT_ID}/packages/maven/${branch}</url>
 		</snapshotRepository>
 	</distributionManagement>
 
