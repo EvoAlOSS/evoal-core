@@ -89,7 +89,8 @@
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>flatten-maven-plugin</artifactId>
 				<version>1.5.0</version>
-			</plugins>
+			</plugin>
+		</plugins>
 
 		<pluginManagement>
 			<plugins>
