@@ -1,0 +1,1 @@
+mvn deploy:deploy-file -DgroupId=org.eclipse.xtext -DartifactId=org.eclipse.xtext -Dversion=2.29.1 -Dpackaging=jar -Dfile=org.eclipse.xtext-2.29.1.jar -DrepositoryId=evoal-artifacts -Durl=https://gitlab.informatik.uni-bremen.de/api/v4/projects/30380/packages/maven/develop -DgeneratePom=false -DpomFile=org.eclipse.xtext-2.29.1.pom

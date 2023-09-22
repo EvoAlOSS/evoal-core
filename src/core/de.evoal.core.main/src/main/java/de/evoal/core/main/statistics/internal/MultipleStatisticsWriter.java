@@ -6,6 +6,9 @@ import de.evoal.core.api.statistics.writer.StatisticsWriter;
 
 import java.util.Arrays;
 
+/**
+ * A statistics writer that dispatches its calls to a list of children.
+ */
 public class MultipleStatisticsWriter implements StatisticsWriter {
     private final StatisticsWriter[] writers;
 

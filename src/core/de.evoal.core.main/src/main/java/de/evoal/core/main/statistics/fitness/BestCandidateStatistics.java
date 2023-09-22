@@ -67,7 +67,6 @@ public class BestCandidateStatistics implements StatisticsWriter {
         final Properties candidate = result.bestCandidate().searchSpaceRepresentation();
         final OptimisationValue value = result.bestCandidate().value();
 
-
         final int searchSpaceSize = searchSpaceSpecification.get().size();
         final int optimisationSpaceSize = optimisationSpaceSpecification.get().size();
 

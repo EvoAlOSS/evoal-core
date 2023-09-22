@@ -1,0 +1,52 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>de.evoal</groupId>
+		<artifactId>core.plugin</artifactId>
+		<version>0.9.0-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>surrogate.neural</artifactId>
+	<name>EvoAl - Surrogate - Neural Network</name>
+
+	<properties>
+		<deeplearning4j.version>1.0.0-M2.1</deeplearning4j.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>core.plugin</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<!-- neural networks -->
+		<dependency>
+			<groupId>org.deeplearning4j</groupId>
+			<artifactId>deeplearning4j-nn</artifactId>
+			<version>${deeplearning4j.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.nd4j</groupId>
+			<artifactId>nd4j-native</artifactId>
+			<version>${deeplearning4j.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.nd4j</groupId>
+			<artifactId>nd4j-common</artifactId>
+			<version>${deeplearning4j.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>de.evoal</groupId>
+			<artifactId>surrogate.api</artifactId>
+			<version>0.9.0-SNAPSHOT</version>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
+</project>

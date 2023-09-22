@@ -1,0 +1,364 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>de.evoal</groupId>
+	<artifactId>core.plugin</artifactId>
+	<version>${revision}</version>
+	<packaging>pom</packaging>
+
+	<name>EvoAl - Core - Plugin</name>
+
+	<properties>
+		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.target>17</maven.compiler.target>
+
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+		<deltaspike.version>1.9.6</deltaspike.version>
+		<evoal.languages.version>1.0.0-SNAPSHOT</evoal.languages.version>
+		<evoal.version>0.9.0-SNAPSHOT</evoal.version>
+		<jackson.version>2.13.4</jackson.version>
+		<jenetics.version>7.1.0</jenetics.version>
+		<lombok.version>1.18.24</lombok.version>
+		<slf4j.api.version>2.0.0</slf4j.api.version>
+		<smile.version>2.6.0</smile.version>
+	</properties>
+
+	<modules>
+		<module>de.evoal.core.arff</module>
+
+		<module>de.evoal.core.ea</module>
+
+		<module>de.evoal.generator.main</module>
+
+		<module>de.evoal.surrogate.api</module>
+		<module>de.evoal.surrogate.simple</module>
+		<module>de.evoal.surrogate.svr</module>
+
+		<module>de.evoal.approximative.density</module>
+	</modules>
+
+	<dependencies>
+		<!-- Logging API -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j.api.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- Prevent me from typing -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>${lombok.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- CDI APIs -->
+		<dependency>
+			<groupId>jakarta.inject</groupId>
+			<artifactId>jakarta.inject-api</artifactId>
+			<version>1.0</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>jakarta.enterprise</groupId>
+			<artifactId>jakarta.enterprise.cdi-api</artifactId>
+			<version>2.0.2</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.annotation</groupId>
+			<artifactId>javax.annotation-api</artifactId>
+			<version>1.3.2</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- Math libraries -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-math3</artifactId>
+			<version>3.6.1</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- Xtext -->
+		<dependency>
+			<groupId>org.eclipse.emf</groupId>
+			<artifactId>org.eclipse.emf.ecore</artifactId>
+			<version>2.29.0</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.eclipse.emf</groupId>
+			<artifactId>org.eclipse.emf.common</artifactId>
+			<version>2.27.0</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext</artifactId>
+			<version>2.29.1</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.antlr</groupId>
+			<artifactId>antlr-runtime</artifactId>
+			<version>3.2</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- DSL dependencies -->
+		<dependency>
+			<groupId>de.evoal.languages</groupId>
+			<artifactId>de.evoal.languages.model.ddl</artifactId>
+			<version>${evoal.languages.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>de.evoal.languages</groupId>
+			<artifactId>de.evoal.languages.model.dl</artifactId>
+			<version>${evoal.languages.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>de.evoal.languages</groupId>
+			<artifactId>de.evoal.languages.model.base</artifactId>
+			<version>${evoal.languages.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>de.evoal.languages</groupId>
+			<artifactId>de.evoal.languages.model.generator</artifactId>
+			<version>${evoal.languages.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>de.evoal.languages</groupId>
+			<artifactId>de.evoal.languages.model.instance</artifactId>
+			<version>${evoal.languages.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>de.evoal.languages</groupId>
+			<artifactId>de.evoal.languages.model.ddl.dsl</artifactId>
+			<version>${evoal.languages.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>de.evoal.languages</groupId>
+			<artifactId>de.evoal.languages.model.dl.dsl</artifactId>
+			<version>${evoal.languages.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>de.evoal.languages</groupId>
+			<artifactId>de.evoal.languages.model.base.dsl</artifactId>
+			<version>${evoal.languages.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>de.evoal.languages</groupId>
+			<artifactId>de.evoal.languages.model.generator.dsl</artifactId>
+			<version>${evoal.languages.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>de.evoal.languages</groupId>
+			<artifactId>de.evoal.languages.model.utils</artifactId>
+			<version>${evoal.languages.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- Dependency to EvoAl core -->
+		<dependency>
+			<groupId>de.evoal</groupId>
+			<artifactId>core.main</artifactId>
+			<version>${evoal.version}</version>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}/${project.artifactId}</outputDirectory>
+							<includeScope>runtime</includeScope>
+							<excludeScope>provided</excludeScope>
+							<excludeTransitive>true</excludeTransitive>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>3.2.2</version>
+				<configuration>
+					<outputDirectory>${project.build.directory}/${project.artifactId}</outputDirectory>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.22.2</version>
+				<dependencies>
+					<dependency>
+						<groupId>org.ow2.asm</groupId>
+						<artifactId>asm</artifactId>
+						<version>9.4</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-failsafe-plugin</artifactId>
+				<version>2.22.2</version>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>3.2.1</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>flatten-maven-plugin</artifactId>
+            </plugin>
+		</plugins>
+
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.10.1</version>
+					<configuration>
+						<forceJavacCompilerUse>true</forceJavacCompilerUse>
+						<annotationProcessorPaths>
+							<path>
+								<groupId>org.projectlombok</groupId>
+								<artifactId>lombok</artifactId>
+								<version>${lombok.version}</version>
+							</path>
+						</annotationProcessorPaths>
+					</configuration>
+				</plugin>
+
+				<plugin>
+					<groupId>com.gemnasium</groupId>
+					<artifactId>gemnasium-maven-plugin</artifactId>
+					<version>0.5.1</version>
+					<configuration>
+						<ignoredScopes>test</ignoredScopes>
+					</configuration>
+				</plugin>
+
+                <plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>flatten-maven-plugin</artifactId>
+					<version>1.5.0</version>
+		        </plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+
+	<profiles>
+		<profile>
+			<id>jacoco</id>
+			<build>
+				<plugins>
+					<plugin>
+						<!-- Configure code coverage measurement for gitlab -->
+						<groupId>org.jacoco</groupId>
+						<artifactId>jacoco-maven-plugin</artifactId>
+						<version>0.8.10</version>
+						<executions>
+							<execution>
+								<goals>
+									<goal>prepare-agent</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.junit.jupiter</groupId>
+				<artifactId>junit-jupiter</artifactId>
+				<version>5.9.1</version>
+				<scope>test</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+
+	<distributionManagement>
+		<repository>
+			<id>gitlab-maven</id>
+			<name>Stable Releases</name>
+			<url>${env.CI_API_V4_URL}/projects/${env.CI_PROJECT_ID}/packages/maven/${branch}</url>
+		</repository>
+
+		<snapshotRepository>
+			<id>gitlab-maven</id>
+			<name>Internal Snapshots</name>
+			<url>${env.CI_API_V4_URL}/projects/${env.CI_PROJECT_ID}/packages/maven/${branch}</url>
+		</snapshotRepository>
+	</distributionManagement>
+
+	<repositories>
+		<repository>
+			<id>evoal-artifacts</id>
+			<name>EvoAl - Artifacts</name>
+			<url>https://gitlab.informatik.uni-bremen.de/api/v4/projects/30380/packages/maven/${branch}</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+</project>
