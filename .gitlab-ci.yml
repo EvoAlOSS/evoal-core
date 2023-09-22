@@ -17,7 +17,7 @@ variables:
   LANGUAGES_POM: "src/languages/pom.xml"
   EVOAL_POM: "src/core/pom.xml"
   #JUNIT_POM: "src/core/de.evoal.core.junit/pom.xml"
-  PLUGINS_POM: "src/core/plugins/pom.xml"
+  PLUGINS_POM: "src/plugins/pom.xml"
   #MAIN_POM: "src/core/de.evoal.core.main/pom.xml"
   MIRROR_POM: "src/mirror/pom.xml"
 
