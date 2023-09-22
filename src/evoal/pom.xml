@@ -310,11 +310,10 @@
 
                     <configuration>
                         <flattenMode>bom</flattenMode>
-<!--                        <pomElements>
+                        <pomElements>
                             <properties>keep</properties>
-                            <parent>keep</parent>
+                            <parent>expand</parent>
                             <version>expand</version>
-                            <parent.version>expand</parent.version>
                         </pomElements>-->
                     </configuration>
 		        </plugin>
