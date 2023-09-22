@@ -307,6 +307,16 @@
 					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>flatten-maven-plugin</artifactId>
 					<version>1.5.0</version>
+
+                    <configuration>
+                        <flattenMode>bom</flattenMode>
+<!--                        <pomElements>
+                            <properties>keep</properties>
+                            <parent>keep</parent>
+                            <version>expand</version>
+                            <parent.version>expand</parent.version>
+                        </pomElements>-->
+                    </configuration>
 		        </plugin>
             </plugins>
         </pluginManagement>

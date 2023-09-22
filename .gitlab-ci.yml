@@ -174,7 +174,7 @@ evoal:deploy:
     when: on_success
     expire_in: "30 days"
     paths:
-      - src/core/*/target/*
+      - src/evoal/*/*/target/*
 
 #############################################################
 ## Remaining release steps
