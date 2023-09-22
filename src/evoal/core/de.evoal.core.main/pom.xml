@@ -5,7 +5,7 @@
 
 	<parent>
 		<groupId>de.evoal</groupId>
-		<artifactId>releng.parent</artifactId>
+		<artifactId>releng.core</artifactId>
 		<version>${revision}</version>
 	</parent>
 

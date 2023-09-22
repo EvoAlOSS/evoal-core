@@ -15,8 +15,7 @@ variables:
   ######################
   # pom.xml to build
   LANGUAGES_POM: "src/languages/pom.xml"
-  EVOAL_POM: "src/core/pom.xml"
-  PLUGINS_POM: "src/plugins/pom.xml"
+  EVOAL_POM: "src/core/eoal/pom.xml"
   MIRROR_POM: "src/mirror/pom.xml"
 
 # include pre-defined templates for scanning
@@ -90,8 +89,7 @@ evoal:compile:
     - docker
   image: $EVOAL_IMAGE
   script:
-    - mvn $MAVEN_CLI_OPTS -f $EVOAL_POM -Dbranch=$CI_COMMIT_REF_NAME -DskipTests=true flatten:flatten install
-    - mvn $MAVEN_CLI_OPTS -f $PLUGINS_POM -Dbranch=$CI_COMMIT_REF_NAME -DskipTests=true flatten:flatten install
+    - mvn $MAVEN_CLI_OPTS -f $EVOAL_POM -Dbranch=$CI_COMMIT_REF_NAME -DskipTests=true flatten:flatten compile
   artifacts:
     untracked: false
     when: on_success
@@ -109,8 +107,6 @@ evoal:unit:
     - docker
   image: $EVOAL_IMAGE
   script:
-    - mvn $MAVEN_CLI_OPTS -f $EVOAL_POM -Dbranch=$CI_COMMIT_REF_NAME -DskipTests=true flatten:flatten install
-    - mvn $MAVEN_CLI_OPTS -f $PLUGINS_POM -Dbranch=$CI_COMMIT_REF_NAME -DskipTests=true flatten:flatten install
     - mvn $MAVEN_CLI_OPTS -f $EVOAL_POM -Dbranch=$CI_COMMIT_REF_NAME -Pjacoco verify
     - cat src/core/de.evoal.releng.jacoco/target/site/jacoco-aggregate/index.html | grep -o '<tfoot>.*</tfoot>'
   coverage: /Total.*?([0-9]{1,3})%/
@@ -173,7 +169,6 @@ evoal:deploy:
   image: $EVOAL_IMAGE
   script:
     - mvn $MAVEN_CLI_OPTS -f $EVOAL_POM -Dbranch=$CI_COMMIT_REF_NAME -DskipTests=true flatten:flatten deploy
-    - mvn $MAVEN_CLI_OPTS -f $PLUGINS_POM -Dbranch=$CI_COMMIT_REF_NAME -DskipTests=true flatten:flatten deploy
   artifacts:
     untracked: false
     when: on_success
