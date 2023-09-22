@@ -16,3 +16,4 @@ xtend-gen
 *.iml
 /evoal/
 *.java._trace
+.flattened-pom.xml

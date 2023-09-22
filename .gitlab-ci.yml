@@ -124,7 +124,7 @@ evoal:coverage:
     - docker
   image: haynes/jacoco2cobertura:1.0.7
   script:
-    - jacoco_paths=`find src/core/ -path "**/src/main/java" -type d | sed -e 's@^@'"$CI_PROJECT_DIR"'/@'`
+    - jacoco_paths=`find src -path "**/src/main/java" -type d | sed -e 's@^@'"$CI_PROJECT_DIR"'/@'`
     - python /opt/cover2cover.py src/evoal/core/de.evoal.releng.jacoco/target/site/jacoco-aggregate/jacoco.xml $jacoco_paths > src/evoal/core/de.evoal.releng.jacoco/target/site/coverage.xml
   needs: ["evoal:unit"]
   dependencies:
@@ -133,7 +133,7 @@ evoal:coverage:
     reports:
       coverage_report:
         coverage_format: cobertura
-        path: src/eoal/core/de.evoal.releng.jacoco/target/site/coverage.xml
+        path: src/evoal/core/de.evoal.releng.jacoco/target/site/coverage.xml
 
 dependency_scanning:
   stage: EvoAl
@@ -143,12 +143,12 @@ dependency_scanning:
   variables:
     DS_JAVA_VERSION: 17
     DS_MAX_DEPTH: 3
-    DS_EXCLUDED_PATHS: src/mirror,src/languages,src/core/de.evoal.[a-qs-z]*,de.evoal.releng.jacoco
+    DS_EXCLUDED_PATHS: src/mirror,src/languages,src/core/*,src/plugins/*
   after_script:
     - >
-      cd src/core/;
+      cd src;
       for FILE in `find . -name "gemnasium-maven-plugin.json"`; do
-        mv $FILE `echo "./de.evoal.releng.parent/$FILE" | sed -e "s;/gemnasium-maven-plugin.json;-gemnasium-maven-plugin.json;g"`;
+        mv $FILE `echo "./$FILE" | sed -e "s;/gemnasium-maven-plugin.json;-gemnasium-maven-plugin.json;g"`;
       done
 
 #############################################################
