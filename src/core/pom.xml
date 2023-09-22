@@ -4,7 +4,7 @@
 
     <groupId>de.evoal</groupId>
     <artifactId>releng.parent</artifactId>
-    <version>0.9.0-SNAPSHOT</version>
+    <version>${revision}</version>
     <packaging>pom</packaging>
 
     <name>EvoAl - Parent</name>
@@ -16,8 +16,11 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-        <deltaspike.version>1.9.6</deltaspike.version>
+		<revision>0.9.0-SNAPSHOT</revision>
         <evoal.languages.version>1.0.0-SNAPSHOT</evoal.languages.version>
+
+		<tycho.version>3.0.1</tycho.version>
+        <deltaspike.version>1.9.6</deltaspike.version>
         <jackson.version>2.13.4</jackson.version>
         <jenetics.version>7.1.0</jenetics.version>
         <lombok.version>1.18.24</lombok.version>
@@ -27,24 +30,24 @@
     </properties>
 
     <modules>
-        <module>../de.evoal.core.main</module>
-        <module>../de.evoal.core.plugin</module>
+        <module>de.evoal.core.main</module>
+        <module>de.evoal.core.plugin</module>
 
-        <module>../de.evoal.core.ea</module>
-        <module>../de.evoal.core.arff</module>
-        <module>../de.evoal.core.junit</module>
+        <module>de.evoal.core.ea</module>
+        <module>de.evoal.core.arff</module>
+        <module>de.evoal.core.junit</module>
 
-        <module>../de.evoal.generator.main</module>
+        <module>de.evoal.generator.main</module>
 
-        <module>../de.evoal.surrogate.api</module>
-        <module>../de.evoal.surrogate.simple</module>
-        <module>../de.evoal.surrogate.svr</module>
+        <module>de.evoal.surrogate.api</module>
+        <module>de.evoal.surrogate.simple</module>
+        <module>de.evoal.surrogate.svr</module>
 
-        <module>../de.evoal.approximative.density</module>
-<!--        <module>../de.evoal.approximative.interval</module> -->
-<!--        <module>../de.evoal.surrogate.neural</module> -->
+        <module>de.evoal.approximative.density</module>
+        <!--<module>de.evoal.approximative.interval</module> -->
+        <!--<module>de.evoal.surrogate.neural</module> -->
 
-        <module>../de.evoal.releng.jacoco</module>
+        <module>de.evoal.releng.jacoco</module>
     </modules>
 
     <dependencies>
@@ -141,18 +144,6 @@
                 <artifactId>antlr-runtime</artifactId>
                 <version>3.2</version>
             </dependency>
-
-
-            <!--
-
-                        <!- - Unit Testing - ->
-                        <dependency>
-                            <groupId>org.junit.jupiter</groupId>
-                            <artifactId>junit-jupiter-api</artifactId>
-                            <version>5.8.2</version>
-                            <scope>test</scope>
-                        </dependency>
-                    -->
 
             <dependency>
                 <groupId>de.evoal</groupId>
@@ -322,6 +313,22 @@
                     <ignoredScopes>test</ignoredScopes>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <!-- Can be removed after first generator execution https://bugs.eclipse.org/bugs/show_bug.cgi?id=480097 -->
+                <groupId>org.eclipse.tycho</groupId>
+                <artifactId>tycho-compiler-plugin</artifactId>
+                <version>${tycho.version}</version>
+                <configuration>
+                    <compilerArgument>-err:-forbidden</compilerArgument>
+                    <useProjectSettings>false</useProjectSettings>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>flatten-maven-plugin</artifactId>
+            </plugin>
         </plugins>
 
         <pluginManagement>
@@ -341,6 +348,12 @@
                         </annotationProcessorPaths>
                     </configuration>
                 </plugin>
+
+                <plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>flatten-maven-plugin</artifactId>
+					<version>1.5.0</version>
+		        </plugin>
             </plugins>
         </pluginManagement>
     </build>
@@ -372,13 +385,13 @@
         <repository>
             <id>gitlab-maven</id>
             <name>Stable Releases</name>
-            <url>${env.CI_API_V4_URL}/projects/${env.CI_PROJECT_ID}/packages/maven</url>
+            <url>${env.CI_API_V4_URL}/projects/${env.CI_PROJECT_ID}/packages/maven/${branch}</url>
         </repository>
 
         <snapshotRepository>
             <id>gitlab-maven</id>
             <name>Internal Snapshots</name>
-            <url>${env.CI_API_V4_URL}/projects/${env.CI_PROJECT_ID}/packages/maven</url>
+            <url>${env.CI_API_V4_URL}/projects/${env.CI_PROJECT_ID}/packages/maven/${branch}</url>
         </snapshotRepository>
     </distributionManagement>
 
@@ -386,7 +399,7 @@
         <repository>
             <id>evoal-artifacts</id>
             <name>EvoAl - Artifacts</name>
-            <url>https://gitlab.informatik.uni-bremen.de/api/v4/projects/30380/packages/maven</url>
+            <url>https://gitlab.informatik.uni-bremen.de/api/v4/projects/30380/packages/maven/${branch}/</url>
             <releases>
                 <enabled>true</enabled>
             </releases>

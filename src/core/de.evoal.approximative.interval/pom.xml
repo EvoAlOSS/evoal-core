@@ -6,12 +6,12 @@
 	<parent>
 		<groupId>de.evoal</groupId>
 		<artifactId>core.plugin</artifactId>
-		<version>${revision}</version>
+		<version>0.9.0-SNAPSHOT</version>
 		<relativePath>../de.evoal.core.plugin</relativePath>
 	</parent>
 
-	<artifactId>surrogate.simple</artifactId>
-	<name>EvoAl - Surrogate - Simple</name>
+	<artifactId>approximative.interval</artifactId>
+	<name>EvoAl - Approximative - Prediction Interval</name>
 
 	<dependencies>
 		<dependency>
@@ -22,9 +22,28 @@
 		</dependency>
 
 		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>surrogate.svr</artifactId>
+			<version>${project.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.6</version>
+		</dependency>
+
+		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-math3</artifactId>
-			<version>3.6.1</version>
+			<version>3.6.1	</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.github.haifengl</groupId>
+			<artifactId>smile-math</artifactId>
+			<version>${smile.version}</version>
 		</dependency>
 	</dependencies>
 </project>

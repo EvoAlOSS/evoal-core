@@ -5,7 +5,7 @@
 
 	<groupId>de.evoal</groupId>
 	<artifactId>core.plugin</artifactId>
-	<version>0.9.0-SNAPSHOT</version>
+	<version>${revision}</version>
 	<packaging>pom</packaging>
 
 	<name>EvoAl - Core - Plugin</name>
@@ -242,6 +242,11 @@
 					</execution>
 				</executions>
 			</plugin>
+			
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>flatten-maven-plugin</artifactId>
+            </plugin>
 		</plugins>
 
 		<pluginManagement>
@@ -271,6 +276,11 @@
 					</configuration>
 				</plugin>
 
+                <plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>flatten-maven-plugin</artifactId>
+					<version>1.5.0</version>
+		        </plugin>
 			</plugins>
 		</pluginManagement>
 	</build>
@@ -314,13 +324,13 @@
 		<repository>
 			<id>gitlab-maven</id>
 			<name>Stable Releases</name>
-			<url>${env.CI_API_V4_URL}/projects/${env.CI_PROJECT_ID}/packages/maven</url>
+			<url>${env.CI_API_V4_URL}/projects/${env.CI_PROJECT_ID}/packages/maven/${branch}</url>
 		</repository>
 
 		<snapshotRepository>
 			<id>gitlab-maven</id>
 			<name>Internal Snapshots</name>
-			<url>${env.CI_API_V4_URL}/projects/${env.CI_PROJECT_ID}/packages/maven</url>
+			<url>${env.CI_API_V4_URL}/projects/${env.CI_PROJECT_ID}/packages/maven/${branch}</url>
 		</snapshotRepository>
 	</distributionManagement>
 
@@ -328,7 +338,7 @@
 		<repository>
 			<id>evoal-artifacts</id>
 			<name>EvoAl - Artifacts</name>
-			<url>https://gitlab.informatik.uni-bremen.de/api/v4/projects/30380/packages/maven</url>
+			<url>https://gitlab.informatik.uni-bremen.de/api/v4/projects/30380/packages/maven/${branch}</url>
 			<releases>
 				<enabled>true</enabled>
 			</releases>
