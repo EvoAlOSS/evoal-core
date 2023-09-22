@@ -15,7 +15,7 @@ variables:
   ######################
   # pom.xml to build
   LANGUAGES_POM: "src/languages/pom.xml"
-  EVOAL_POM: "src/core/eoal/pom.xml"
+  EVOAL_POM: "src/core/evoal/pom.xml"
   MIRROR_POM: "src/mirror/pom.xml"
 
 # include pre-defined templates for scanning
