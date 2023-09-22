@@ -16,9 +16,7 @@ variables:
   # pom.xml to build
   LANGUAGES_POM: "src/languages/pom.xml"
   EVOAL_POM: "src/core/pom.xml"
-  #JUNIT_POM: "src/core/de.evoal.core.junit/pom.xml"
   PLUGINS_POM: "src/plugins/pom.xml"
-  #MAIN_POM: "src/core/de.evoal.core.main/pom.xml"
   MIRROR_POM: "src/mirror/pom.xml"
 
 # include pre-defined templates for scanning
@@ -111,7 +109,6 @@ evoal:unit:
     - docker
   image: $EVOAL_IMAGE
   script:
-    - mvn $MAVEN_CLI_OPTS -f $JUNIT_POM -Dbranch=$CI_COMMIT_REF_NAME -DskipTests=true flatten:flatten install
     - mvn $MAVEN_CLI_OPTS -f $EVOAL_POM -Dbranch=$CI_COMMIT_REF_NAME -DskipTests=true flatten:flatten install
     - mvn $MAVEN_CLI_OPTS -f $PLUGINS_POM -Dbranch=$CI_COMMIT_REF_NAME -DskipTests=true flatten:flatten install
     - mvn $MAVEN_CLI_OPTS -f $EVOAL_POM -Dbranch=$CI_COMMIT_REF_NAME -Pjacoco verify
@@ -175,10 +172,8 @@ evoal:deploy:
     - docker
   image: $EVOAL_IMAGE
   script:
-    - mvn $MAVEN_CLI_OPTS -f $JUNIT_POM -Dbranch=$CI_COMMIT_REF_NAME -DskipTests=true flatten:flatten install
-    - mvn $MAVEN_CLI_OPTS -f $EVOAL_POM -Dbranch=$CI_COMMIT_REF_NAME -DskipTests=true flatten:flatten install
-    - mvn $MAVEN_CLI_OPTS -f $PLUGINS_POM -Dbranch=$CI_COMMIT_REF_NAME -DskipTests=true flatten:flatten install
     - mvn $MAVEN_CLI_OPTS -f $EVOAL_POM -Dbranch=$CI_COMMIT_REF_NAME -DskipTests=true flatten:flatten deploy
+    - mvn $MAVEN_CLI_OPTS -f $PLUGINS_POM -Dbranch=$CI_COMMIT_REF_NAME -DskipTests=true flatten:flatten deploy
   artifacts:
     untracked: false
     when: on_success
