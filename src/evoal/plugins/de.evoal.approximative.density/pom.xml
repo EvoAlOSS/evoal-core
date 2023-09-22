@@ -10,7 +10,7 @@
 	</parent>
 	
 	<artifactId>approximative.density</artifactId>
-	<name>EvoAl - Approximative - Density</name>
+	<name>EvoAl - Plugins - Approximative - Density</name>
 
 	<dependencies>
 		<dependency>

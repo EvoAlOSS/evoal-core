@@ -10,7 +10,7 @@
 	</parent>
 
 	<artifactId>surrogate.ws</artifactId>
-	<name>EvoAl - Surrogate - WebService</name>
+	<name>EvoAl - Plugins - Surrogate - WebService</name>
 
 	<dependencies>
 		<dependency>

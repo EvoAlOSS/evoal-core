@@ -10,7 +10,7 @@
 	</parent>
 
 	<artifactId>approximative.interval</artifactId>
-	<name>EvoAl - Approximative - Prediction Interval</name>
+	<name>EvoAl - Plugins - Approximative - Prediction Interval</name>
 
 	<dependencies>
 		<dependency>

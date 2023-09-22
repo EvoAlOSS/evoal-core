@@ -11,7 +11,7 @@
     <artifactId>releng.jacoco</artifactId>
     <packaging>pom</packaging>
 
-    <name>EvoAl - JaCoCo</name>
+    <name>EvoAl - Core - JaCoCo</name>
 
     <dependencies>
         <dependency>

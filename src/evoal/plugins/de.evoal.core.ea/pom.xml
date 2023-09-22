@@ -10,7 +10,7 @@
 	</parent>
 
 	<artifactId>core.ea</artifactId>
-	<name>EvoAl - Core - Evolutionary Algorithm</name>
+	<name>EvoAl - Plugins - Evolutionary Algorithm</name>
 
 	<dependencies>
 		<dependency>

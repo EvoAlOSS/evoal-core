@@ -10,7 +10,7 @@
 	</parent>
 
 	<artifactId>generator.main</artifactId>
-	<name>EvoAl - Generator - Main</name>
+	<name>EvoAl - Plugins - Generator - Main</name>
 
 	<dependencies>
 		<dependency>

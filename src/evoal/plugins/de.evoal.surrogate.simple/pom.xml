@@ -10,7 +10,7 @@
 	</parent>
 
 	<artifactId>surrogate.simple</artifactId>
-	<name>EvoAl - Surrogate - Simple</name>
+	<name>EvoAl - Plugins - Surrogate - Simple</name>
 
 	<dependencies>
 		<dependency>

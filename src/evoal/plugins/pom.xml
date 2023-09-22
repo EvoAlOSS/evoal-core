@@ -12,7 +12,7 @@
 	<artifactId>core.plugin</artifactId>
 	<packaging>pom</packaging>
 
-	<name>EvoAl - Core - Plugin</name>
+	<name>EvoAl - Plugins</name>
 
 	<modules>
 		<module>de.evoal.core.arff</module>

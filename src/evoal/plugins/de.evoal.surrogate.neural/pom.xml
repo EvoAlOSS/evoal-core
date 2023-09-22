@@ -10,7 +10,7 @@
 	</parent>
 
 	<artifactId>surrogate.neural</artifactId>
-	<name>EvoAl - Surrogate - Neural Network</name>
+	<name>EvoAl - Plugins - Surrogate - Neural Network</name>
 
 	<properties>
 		<deeplearning4j.version>1.0.0-M2.1</deeplearning4j.version>

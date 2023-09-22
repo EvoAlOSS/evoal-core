@@ -10,7 +10,7 @@
 	</parent>
 
 	<artifactId>core.arff</artifactId>
-	<name>EvoAl - Core - ARFF support</name>
+	<name>EvoAl - Plugins - ARFF support</name>
 
 	<dependencies>
 		<dependency>

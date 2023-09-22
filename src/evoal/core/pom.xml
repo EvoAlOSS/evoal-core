@@ -16,6 +16,7 @@
     <modules>
         <module>de.evoal.core.junit</module>
         <module>de.evoal.core.main</module>
+        <module>de.evoal.releng.jacoco</module>
     </modules>
 
     <dependencies>

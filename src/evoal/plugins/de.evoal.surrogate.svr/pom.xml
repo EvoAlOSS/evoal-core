@@ -10,7 +10,7 @@
 	</parent>
 
 	<artifactId>surrogate.svr</artifactId>
-	<name>EvoAl - Surrogate - SVR</name>
+	<name>EvoAl - Plugins - Surrogate - SVR</name>
 
 	<dependencies>
 		<dependency>
