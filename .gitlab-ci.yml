@@ -74,7 +74,7 @@ dsl:deploy:
     - docker
   image: $ECLIPSE_IMAGE
   script:
-    - mvn $MAVEN_CLI_OPTS -f $LANGUAGES_POM -Dbranch=$CI_COMMIT_REF_NAME -DskipTests=true deploy
+    - mvn $MAVEN_CLI_OPTS -f $LANGUAGES_POM -Dbranch=$CI_COMMIT_REF_NAME -DskipTests=true flatten:flatten deploy
   artifacts:
     untracked: false
     when: on_success
