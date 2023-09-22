@@ -19,7 +19,7 @@ public class ResourceSetUtil {
 
         // first we try to resolve all proxies if it wasn't done so far
         rs.getResources()
-          .forEach(EcoreUtil::resolveAll);
+                .forEach(EcoreUtil::resolveAll);
 
         boolean errorInResource = false;
 
