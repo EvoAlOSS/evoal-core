@@ -44,6 +44,10 @@ for release in releases:
     if not os.path.exists(path):
         os.makedirs(path)
 
+    f = open(path + "/index.html", "w")
+    f.write("""<html><head><title>Update Site of %s</title></head><body><h1>Remark</h1><p>This is an Eclipse Update Site and there is nothing so see here. Please add this URL to Eclipse as an Update Site.</p></body>""" % (release,))
+    f.close
+
     try:
         meta_url="https://gitlab.informatik.uni-bremen.de/api/v4/projects/30380/packages/maven/%s/de/evoal/languages/de.evoal.languages.releng.site/" % (release,)
 
