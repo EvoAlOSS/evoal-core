@@ -29,14 +29,14 @@ branches = []
 connection.request("GET", BASE_URL + "branches", headers = headers)
 response = connection.getresponse()
 for branch in json.loads(response.read()):
-    branches += branch['name']
+    branches.append(branch['name'])
 
 tags = []
 # print tags
 connection.request("GET", BASE_URL + "tags", headers = headers)
 response = connection.getresponse()
 for tag in json.loads(response.read()):
-    tags += branch['name']
+    tags.append(branch['name'])
 
 releases = branches + tags
 for release in releases:
@@ -82,10 +82,10 @@ f = open("public/index.html", "w")
 f.write("<html><head><title>EvoAl Update Sites</title></head><body><h1>Available Update Sites</h1>")
 f.write("<h2>Official Releases</h2><ul>")
 for release in tags:
-    f.write("""<li><a href="">%s</a></li>""" % (release, ))
+    f.write("""<li><a href="https://evoal.glpages.informatik.uni-bremen.de/source/evoal-core/%s">%s</a></li>""" % (release, release))
 
 f.write("</ul><h2>Development Versions</h2><ul>")
 for release in branches:
-    f.write("""<li><a href="">%s</a></li>""" % (release, ))
+    f.write("""<li><a href="https://evoal.glpages.informatik.uni-bremen.de/source/evoal-core/%s">%s</a></li>""" % (release, release))
 f.write("</ul></body></html>")
 f.close()
