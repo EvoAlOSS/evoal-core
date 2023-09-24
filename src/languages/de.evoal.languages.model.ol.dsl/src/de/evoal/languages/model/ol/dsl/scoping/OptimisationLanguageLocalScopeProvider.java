@@ -13,7 +13,6 @@ import de.evoal.languages.model.utils.scoping.WildcardEnabledLocalScopeProvider;
 
 public class OptimisationLanguageLocalScopeProvider extends WildcardEnabledLocalScopeProvider {
 	private static EClass instance = BasePackage.eINSTANCE.getInstance();
-	
 	private static EReference attributeDefinition = BasePackage.eINSTANCE.getAttribute_Definition();
 		
 	

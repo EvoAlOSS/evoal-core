@@ -5,14 +5,22 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.scoping.IScope;
 
+import com.google.inject.Inject;
+
 import de.evoal.languages.model.base.BasePackage;
 import de.evoal.languages.model.base.TypeDefinition;
+import de.evoal.languages.model.base.dsl.scoping.BaseLanguageLocalScopeProvider;
 import de.evoal.languages.model.utils.scoping.WildcardEnabledLocalScopeProvider;
 
 public class DataDescriptionLanguageLocalScopeProvider extends WildcardEnabledLocalScopeProvider {
-	private static EClass typeDefinition = BasePackage.eINSTANCE.getTypeDefinition();
+	private static EReference attributeDefinition = BasePackage.eINSTANCE.getAttribute_Definition();
 	private static EReference attributes = BasePackage.eINSTANCE.getTypeDefinition_Attributes();
-	
+	private static EClass instance = BasePackage.eINSTANCE.getInstance();
+	private static EClass typeDefinition = BasePackage.eINSTANCE.getTypeDefinition();
+
+	@Inject
+	private BaseLanguageLocalScopeProvider baseScopes;
+
 	@Override
 	public IScope getScope(final EObject context, final EReference reference) {
 		if(typeDefinition.equals(context.eClass()) && (attributes.equals(reference))) {
@@ -23,6 +31,16 @@ public class DataDescriptionLanguageLocalScopeProvider extends WildcardEnabledLo
 				typeScope = super.getScope(definition.getSuperType(), reference);
 			}
 			
+			return getLocalElementsScope(typeScope, context, reference);
+		} else 	if(instance.isSuperTypeOf(context.eClass()) && (attributeDefinition.equals(reference))) {
+			// inject fields of types
+			IScope typeScope = IScope.NULLSCOPE;
+				try {
+					typeScope = baseScopes.getScope(context, reference);
+				} catch(final NullPointerException e) {
+					System.err.println(e);
+				}
+
 			return getLocalElementsScope(typeScope, context, reference);
 		}
 
