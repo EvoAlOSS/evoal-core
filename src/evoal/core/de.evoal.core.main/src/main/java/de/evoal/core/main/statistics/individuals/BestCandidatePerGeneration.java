@@ -12,7 +12,6 @@ import de.evoal.core.api.statistics.io.WriterStrategy;
 import de.evoal.core.api.statistics.writer.Column;
 import de.evoal.core.api.statistics.writer.ColumnType;
 import de.evoal.core.api.statistics.writer.StatisticsWriter;
-import de.evoal.core.api.utils.LanguageHelper;
 import de.evoal.languages.model.base.Instance;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +19,6 @@ import lombok.extern.slf4j.Slf4j;
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.inject.Provider;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -40,11 +38,11 @@ public class BestCandidatePerGeneration implements StatisticsWriter {
 
     @Inject
     @Named("search-space-specification")
-    private Provider<PropertiesSpecification> searchSpaceSpecification;
+    private PropertiesSpecification searchSpaceSpecification;
 
     @Inject
     @Named("optimisation-space-specification")
-    private Provider<PropertiesSpecification> optimisationSpaceSpecification;
+    private PropertiesSpecification optimisationSpaceSpecification;
 
     private Writer writer;
 
@@ -65,11 +63,11 @@ public class BestCandidatePerGeneration implements StatisticsWriter {
         columns.add(new Column("generation", ColumnType.Integer));
 
         if(storeSearchSpace) {
-            addVariableSpace(searchSpaceSpecification.get(), prefixColumns, "search-space-value-", columns);
+            addVariableSpace(searchSpaceSpecification, prefixColumns, "search-space-value-", columns);
         }
 
         if(storeOptimisationSpace) {
-            addVariableSpace(optimisationSpaceSpecification.get(), prefixColumns, "search-space-value-", columns);
+            addVariableSpace(optimisationSpaceSpecification, prefixColumns, "search-space-value-", columns);
         }
 
         this.writer = strategy.create("best-candidate-statistics", columns);
@@ -106,7 +104,7 @@ public class BestCandidatePerGeneration implements StatisticsWriter {
         final Properties searchSpace = result.bestCandidate().searchSpaceRepresentation();
         final OptimisationValue optimisationSpace = result.bestCandidate().value();
 
-        final int searchSpaceSize = searchSpaceSpecification.get().size();
+        final int searchSpaceSize = searchSpaceSpecification.size();
 
         final Object [] data = new Object[rowSize];
 
@@ -119,7 +117,7 @@ public class BestCandidatePerGeneration implements StatisticsWriter {
 
         if(storeOptimisationSpace) {
             int searchSpaceOffset = storeSearchSpace ? searchSpaceSize : 0;
-            for (int i = 0; i < optimisationSpaceSpecification.get().size(); ++i) {
+            for (int i = 0; i < optimisationSpaceSpecification.size(); ++i) {
                 data[1 + searchSpaceOffset + i] = optimisationSpace.toStatistics()[i];
             }
         }
