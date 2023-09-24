@@ -8,6 +8,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.eclipse.core.runtime.ILog;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.preference.IPreferenceStore;
 
 import de.evoal.ui.core.Activator;
@@ -48,7 +49,7 @@ public class EvoAlRunner {
 	 */
 	private String[] parameters;
 
-	public boolean run() {
+	public boolean run(final IProgressMonitor monitor) {
 		logger.info("Running '" + command + "' in '" + executionFolder + "'");
 
 		final ProcessBuilder builder = new ProcessBuilder();
