@@ -1,7 +1,6 @@
 package de.evoal.core.main.statistics.individuals;
 
 import de.evoal.core.api.languages.ExpressionEvaluator;
-import de.evoal.core.api.optimisation.OptimisationFunction;
 import de.evoal.core.api.optimisation.OptimisationValue;
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;
@@ -9,20 +8,15 @@ import de.evoal.core.api.properties.PropertySpecification;
 import de.evoal.core.api.statistics.*;
 import de.evoal.core.api.statistics.io.Writer;
 import de.evoal.core.api.statistics.io.WriterException;
-import de.evoal.core.api.statistics.io.WriterStrategy;
 import de.evoal.core.api.statistics.writer.AbstractCandidateStatisticsWriter;
 import de.evoal.core.api.statistics.writer.Column;
 import de.evoal.core.api.statistics.writer.ColumnType;
-import de.evoal.core.api.statistics.writer.StatisticsWriter;
-import de.evoal.core.api.utils.LanguageHelper;
 import de.evoal.languages.model.base.Instance;
-import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.inject.Provider;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -66,7 +60,7 @@ public class CandidatesPerGeneration extends AbstractCandidateStatisticsWriter {
         }
 
         if(storeOptimisationSpace) {
-            addVariableSpace(optimisationSpaceSpecification, prefixColumns, "search-space-value-", columns);
+            addVariableSpace(optimisationSpaceSpecification, prefixColumns, "optimisation-space-value-", columns);
         }
 
         this.rowSize = columns.size();
@@ -80,7 +74,7 @@ public class CandidatesPerGeneration extends AbstractCandidateStatisticsWriter {
             String columnName = spec.name();
 
             if (prefixColumns) {
-                columnName = "search-space-value-" + columnName;
+                columnName = prefix + columnName;
             }
 
             columns.add(new Column(columnName, toColumnType(spec)));

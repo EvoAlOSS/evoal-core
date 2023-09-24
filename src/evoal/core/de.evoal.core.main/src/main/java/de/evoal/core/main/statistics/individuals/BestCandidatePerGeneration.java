@@ -67,7 +67,7 @@ public class BestCandidatePerGeneration implements StatisticsWriter {
         }
 
         if(storeOptimisationSpace) {
-            addVariableSpace(optimisationSpaceSpecification, prefixColumns, "search-space-value-", columns);
+            addVariableSpace(optimisationSpaceSpecification, prefixColumns, "optimisation-space-value-", columns);
         }
 
         this.writer = strategy.create("best-candidate-statistics", columns);
@@ -82,7 +82,7 @@ public class BestCandidatePerGeneration implements StatisticsWriter {
             String columnName = spec.name();
 
             if (prefixColumns) {
-                columnName = "search-space-value-" + columnName;
+                columnName = prefix + columnName;
             }
 
             columns.add(new Column(columnName, toColumnType(spec)));
