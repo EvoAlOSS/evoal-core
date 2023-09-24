@@ -314,7 +314,8 @@
                             <properties>keep</properties>
                             <parent>expand</parent>
                             <version>expand</version>
-                        </pomElements>-->
+                            <build>expand</build>
+                        </pomElements>
                     </configuration>
 		        </plugin>
             </plugins>
