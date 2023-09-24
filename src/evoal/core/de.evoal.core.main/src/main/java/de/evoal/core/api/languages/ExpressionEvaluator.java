@@ -24,6 +24,10 @@ public class ExpressionEvaluator {
      */
     private final ConstantExpressionEvaluator evaluator = new ConstantExpressionEvaluator();
 
+    public boolean attributeToBoolean(final Instance instance, final String attributeName) {
+        return (Boolean) attributeToObject(instance, attributeName);
+    }
+
     public double attributeToDouble(final Instance instance, final String attributeName) {
         return attributeToNumber(instance, attributeName).doubleValue();
     }
@@ -86,7 +90,7 @@ public class ExpressionEvaluator {
                 .toArray(double[][]::new);
     }
 
-    public Instance     attributeToInstance(final Instance instance, final String attributeName) {
+    public Instance attributeToInstance(final Instance instance, final String attributeName) {
         final Object result = attributeToObject(instance, attributeName);
 
         if(!(result instanceof Instance)) {

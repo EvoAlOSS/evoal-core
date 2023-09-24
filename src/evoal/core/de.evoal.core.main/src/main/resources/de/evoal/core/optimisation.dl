@@ -249,66 +249,82 @@ module de.evoal.core.optimisation {
 	
 	abstract type 'statistics-writer' {
 	}
-	
-	/**
-	 * Creates a file named '<tt>constraint-statistics.csv</tt>' containing
-	 *   information on each generation and constraint violations:
+
+    /**
+     * Writes the best candidate for every generation:
 	 *
 	 * <ul>
 	 *   <li>generation</li>
-	 *   <li>for each constraint:
-	 *      <ul>
-	 *        <li>number of violating individuals</li>
-	 *        <li>sum of differences</li>
-	 *        <li>min of differences</li>
-	 *        <li>avg of differences</li>
-	 *        <li>max of differences</li>
-	 *      </ul>
-	 *   </li>
+	 *   <li>search-space-variable-1</li>
+	 *   <li>search-space-variable-2</li>
+	 *   ...
+	 *   <li>search-space-variable-n</li>
+	 *   <li>optimisation-space-variable-1</li>
+	 *   <li>optimisation-space-variable-2</li>
+	 *   ...
+	 *   <li>optimisation-space-variable-n</li>
 	 * </ul>
-	 */
-	type 'constraint-statistics' extends 'statistics-writer' {}
-	
-	/**
-	 * Creates a file named '<tt>fitness-by-individual.csv</tt>' containing for each individual
-	 *   of each generation the following information:
-	 *
-	 *  <ul>
-	 *    <li>generation</li>
-	 *    <li>index of individual</li>
-	 *    <li>fitness value of each predicted value of the individual</li>
-	 *  </ul>
-	 */
-	type 'fitness-per-individual' extends 'statistics-writer' {}
-	
-	/**
-	 * Creates a file named '<tt>individuals.csv</tt>' containing for each individual
-	 *   the following information:
-	 *
-	 *  <ul>
-	 *    <li>generation</li>
-	 *    <li>index of individual</li>
-	 *    <li>text representation of individual</li>
-	 *    <li>age</li>
-	 *    <li>each property value of the individual</li>
-	 *  </ul>
-	 */
-	type individuals extends 'statistics-writer' {}
-	
+     */
+	type 'best-candidate-per-generation' extends 'statistics-writer' {
+	    /**
+	     * If set to <tt>true</tt>, every search space variable is prefixed with
+	     *   "<tt>search-space-value-</tt>" and every optimisation space variable
+	     *   is prefixed with "<tt>optimisation-space-value-</tt>". This can be
+	     *   useful if search and optimisation space share variables.
+	     */
+	    'prefix-data' : boolean := false;
+
+	    /**
+	     * If search space variables should be stored.
+	     */
+	    'store-search-space' : boolean := true;
+
+
+	    /**
+	     * If optimisation space variables should be stored.
+	     */
+	    'store-optimisation-space' : boolean := true;
+	}
+
+    /**
+     * Writes all candidates for every generation:
+     *
+     * <ul>
+     *   <li>generation</li>
+     *   <li>index</li>
+     *   <li>search-space-variable-1</li>
+     *   <li>search-space-variable-2</li>
+     *   ...
+     *   <li>search-space-variable-n</li>
+     *   <li>optimisation-space-variable-1</li>
+     *   <li>optimisation-space-variable-2</li>
+     *   ...
+     *   <li>optimisation-space-variable-n</li>
+     * </ul>
+     */
+    type 'candidates-per-generation' extends 'statistics-writer' {
+        /**
+         * If set to <tt>true</tt>, every search space variable is prefixed with
+         *   "<tt>search-space-value-</tt>" and every optimisation space variable
+         *   is prefixed with "<tt>optimisation-space-value-</tt>". This can be
+         *   useful if search and optimisation space share variables.
+         */
+        'prefix-data' : boolean := false;
+
+        /**
+         * If search space variables should be stored.
+         */
+        'store-search-space' : boolean := true;
+
+
+        /**
+         * If optimisation space variables should be stored.
+         */
+        'store-optimisation-space' : boolean := true;
+    }
+
 	/**
 	 * Does not write any statistics. Can be used to disable statistics output.
 	 */
 	type none extends 'statistics-writer' {}
-	
-	/**
-	 * Creates a file named '<tt>prediction-by-individual.csv</tt>' containing the
-	 *   predicted value(s) of each individual for each generation of the EA run:
-	 *
-	 * <ul>
-	 *   <li>generation</li>
-	 *   <li>index of individual</li>
-	 *   <li>each predicted value of the individual</li>
-	 * </ul>
-	 */
-	type 'prediction-per-individual' extends 'statistics-writer' {}
 }

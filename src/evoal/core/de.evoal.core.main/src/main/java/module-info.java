@@ -88,13 +88,10 @@ module de.evoal.core.main {
     opens de.evoal.core.main.properties to weld.core.impl;
     opens de.evoal.core.main.search to weld.core.impl;
     opens de.evoal.core.main.statistics to weld.core.impl;
-    opens de.evoal.core.main.statistics.fitness to weld.core.impl;
     opens de.evoal.core.main.statistics.individuals to weld.core.impl;
     opens de.evoal.core.main.statistics.nop to weld.core.impl;
     opens de.evoal.core.main.statistics.io.csv to weld.core.impl;
     opens de.evoal.core.api.statistics.io to weld.core.impl;
     opens de.evoal.core.api.statistics.writer to weld.core.impl;
     opens de.evoal.core.main.constraints.constraint.utils to weld.core.impl;
-
-    //provides de.evoal.languages.model.utils.builtin.BuiltinProvider with ModuleBuiltinProvider;
 }

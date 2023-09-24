@@ -15,6 +15,7 @@ import de.evoal.core.api.statistics.io.WriterException;
 import de.evoal.core.api.statistics.writer.AbstractCandidateStatisticsWriter;
 import de.evoal.core.api.statistics.writer.Column;
 import de.evoal.core.api.statistics.writer.ColumnType;
+import de.evoal.languages.model.base.Instance;
 import de.evoal.surrogate.api.function.SurrogateFunction;
 import lombok.extern.slf4j.Slf4j;
 
@@ -36,7 +37,7 @@ public class SurrogateStatistics extends AbstractCandidateStatisticsWriter {
     private PropertiesSpecification targetSpecification;
 
     @Override
-    protected Writer createWriter() throws WriterException {
+    protected Writer createWriter(final Instance configuration) throws WriterException {
         final List<Column> columns = new LinkedList<>();
 
         columns.add(new Column("generation", ColumnType.Integer));

@@ -38,12 +38,12 @@ public abstract class AbstractCandidateStatisticsWriter implements StatisticsWri
     @Override
     @SneakyThrows(WriterException.class)
     public StatisticsWriter init(final Instance configuration) {
-        writer = createWriter();
+        writer = createWriter(configuration);
 
         return this;
     }
 
-    protected abstract Writer createWriter() throws WriterException ;
+    protected abstract Writer createWriter(final Instance configuration) throws WriterException ;
 
     protected abstract Object [] toData(final int index, final int iteration, final Candidate candidate);
 
