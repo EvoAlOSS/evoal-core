@@ -1,6 +1,7 @@
 package de.evoal.core.api.cdi;
 
 import de.evoal.core.api.utils.Requirements;
+import de.evoal.languages.model.base.Instance;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.deltaspike.core.api.provider.BeanProvider;
 
@@ -54,6 +55,23 @@ public final class BeanFactory {
 
         try {
             return BeanProvider.getContextualReference(name, false, type);
+        } catch(final IllegalStateException | IllegalArgumentException e) {
+            log.error("Failed to create contextual reference of type '{}' with name '{}'.", type, name);
+            logInstantiationError(type, e);
+            throw e;
+        }
+    }
+
+    public static <T extends EvoalComponent<T>> T createComponent(final Class<T> type, final Instance configuration) {
+        Requirements.requireNotNull(type);
+        Requirements.requireNotNull(configuration);
+
+        final String name = configuration.getDefinition().getName();
+
+        log.info("Creating bean for instance of type {}.", name);
+        try {
+            return BeanProvider.getContextualReference(name, false, type)
+                               .init(configuration);
         } catch(final IllegalStateException | IllegalArgumentException e) {
             log.error("Failed to create contextual reference of type '{}' with name '{}'.", type, name);
             logInstantiationError(type, e);
