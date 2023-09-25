@@ -9,8 +9,8 @@ import javax.enterprise.inject.Produces;
 import javax.inject.Named;
 
 import de.evoal.core.main.constraints.constraint.ast.ConditionConverter;
-import de.evoal.core.main.constraints.el.ElHelper;
-import de.evoal.core.main.constraints.el.LogHelper;
+import de.evoal.core.api.languages.base.BaseLanguageHelper;
+import de.evoal.core.api.languages.base.LogHelper;
 import de.evoal.languages.model.base.DefinedFunctionName;
 import de.evoal.languages.model.ddl.DataDescription;
 import de.evoal.languages.model.base.Call;
@@ -42,7 +42,7 @@ public class ConstraintProducer {
 
                        p.getSecond()
                         .stream()
-                        .map(ElHelper::findCall)
+                        .map(BaseLanguageHelper::findCall)
                         .filter(Objects::nonNull)
                         .map(Call.class::cast)
                         .filter(c -> "constraint".equals(((DefinedFunctionName)c.getFunction()).getDefinition().getName()))
@@ -63,7 +63,7 @@ public class ConstraintProducer {
         }
 
         final Constraint result = new Constraint();
-        result.setGroup(ElHelper.findString(constraint.getParameters().get(1)));
+        result.setGroup(BaseLanguageHelper.findString(constraint.getParameters().get(1)));
 
         final ConditionConverter converter = new ConditionConverter(searchSpaceSecification, optisationSpaceSpecification, context);
         converter.doSwitch(constraint.getParameters().get(0));

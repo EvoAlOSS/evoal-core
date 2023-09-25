@@ -1,7 +1,7 @@
 package de.evoal.core.main.constraints.correlation.el;
 
 import de.evoal.core.api.properties.PropertiesSpecification;
-import de.evoal.core.main.constraints.el.DataReferenceSwitch;
+import de.evoal.core.api.languages.base.DataReferenceSwitch;
 import de.evoal.core.api.correlations.Range;
 import de.evoal.languages.model.ddl.DataDescription;
 import de.evoal.languages.model.base.Expression;

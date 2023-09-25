@@ -1,6 +1,6 @@
 package de.evoal.core.main.constraints.correlation.el;
 
-import de.evoal.core.main.constraints.el.ElHelper;
+import de.evoal.core.api.languages.base.BaseLanguageHelper;
 import de.evoal.core.api.correlations.Range;
 import de.evoal.languages.model.base.*;
 import de.evoal.languages.model.base.util.BaseSwitch;
@@ -104,8 +104,8 @@ public class RangeSwitch extends BaseSwitch<Range> {
 
         Objects.equals(object.getParameters().size(), 2);
 
-        final Number lowerBound = ElHelper.findNumber(object.getParameters().get(0));
-        final Number upperBound = ElHelper.findNumber(object.getParameters().get(1));
+        final Number lowerBound = BaseLanguageHelper.findNumber(object.getParameters().get(0));
+        final Number upperBound = BaseLanguageHelper.findNumber(object.getParameters().get(1));
 
         final Range result = new Range();
         result.setLower(lowerBound.doubleValue());

@@ -1,21 +1,11 @@
-package de.evoal.core.main.constraints.el;
+package de.evoal.core.api.languages.base;
 
-import de.evoal.core.api.utils.Requirements;
-import de.evoal.languages.model.ddl.DataDescription;
-import de.evoal.languages.model.ddl.DataReference;
-import de.evoal.languages.model.ddl.SelfReference;
 import de.evoal.languages.model.base.*;
 import de.evoal.languages.model.base.util.BaseSwitch;
 
 import java.util.Objects;
 
-public class ValueReferenceSwitch extends BaseSwitch<String> {
-    private final DataDescription context;
-
-    public ValueReferenceSwitch(final DataDescription context) {
-        this.context = context;
-    }
-
+public class StringSwitch extends BaseSwitch<String> {
     @Override
     public String caseOrExpression(final OrExpression object) {
         Objects.equals(object.getSubExpressions().size(), 1);
@@ -24,26 +14,26 @@ public class ValueReferenceSwitch extends BaseSwitch<String> {
     }
 
     @Override
-    public String caseXorExpression(XorExpression object) {
+    public String caseXorExpression(final XorExpression object) {
         Objects.equals(object.getSubExpressions().size(), 1);
 
         return this.doSwitch(object.getSubExpressions().get(0));
     }
 
     @Override
-    public String caseAndExpression(AndExpression object) {
+    public String caseAndExpression(final AndExpression object) {
         Objects.equals(object.getSubExpressions().size(), 1);
 
         return this.doSwitch(object.getSubExpressions().get(0));
     }
 
     @Override
-    public String caseNotExpression(NotExpression object) {
+    public String caseNotExpression(final NotExpression object) {
         return this.doSwitch(object.getOperand());
     }
 
     @Override
-    public String caseComparisonExpression(ComparisonExpression object) {
+    public String caseComparisonExpression(final ComparisonExpression object) {
         Objects.equals(object.getComparison().size(), 0);
 
         return this.doSwitch(object.getLeftOperand());
@@ -85,45 +75,31 @@ public class ValueReferenceSwitch extends BaseSwitch<String> {
 
     @Override
     public String caseIntegerLiteral(final IntegerLiteral object) {
-        throw new IllegalStateException("Searching for a value reference but found a integer literal.");
+        throw new IllegalStateException("Searching for String but found a integer literal.");
     }
 
     @Override
     public String caseRealLiteral(final RealLiteral object) {
-        throw new IllegalStateException("Searching for a value reference but found a double literal.");
+        throw new IllegalStateException("Searching for String but found a double literal.");
     }
 
     @Override
     public String caseStringLiteral(StringLiteral object) {
-        throw new IllegalStateException("Searching for a value reference but found a string literal.");
+        return object.getValue();
     }
 
     @Override
     public String caseBooleanLiteral(BooleanLiteral object) {
-        throw new IllegalStateException("Searching for a value reference but found a boolean literal.");
+        throw new IllegalStateException("Searching for String but found a boolean literal.");
     }
 
     @Override
     public String caseCall(final Call object) {
-        throw new IllegalStateException("Searching for a value reference but found a call.");
+        throw new IllegalStateException("Searching for String but found a call.");
     }
 
     @Override
     public String caseParantheses(Parantheses object) {
         return this.doSwitch(object.getSubExpression());
-    }
-
-    @Override
-    public String caseValueReference(final ValueReference object) {
-        if(object instanceof SelfReference) {
-            Requirements.requireNotNull(context);
-            return context.getName();
-        }
-
-        if(!(object instanceof final DataReference reference)) {
-            throw new IllegalStateException("Value reference is not a data reference.");
-        }
-
-        return reference.getDefinition().getName();
     }
 }

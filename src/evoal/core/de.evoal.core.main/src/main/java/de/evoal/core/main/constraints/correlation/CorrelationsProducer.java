@@ -9,8 +9,8 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
 
 import de.evoal.core.main.constraints.correlation.el.AstHelper;
-import de.evoal.core.main.constraints.el.ElHelper;
-import de.evoal.core.main.constraints.el.LogHelper;
+import de.evoal.core.api.languages.base.BaseLanguageHelper;
+import de.evoal.core.api.languages.base.LogHelper;
 import de.evoal.languages.model.ddl.DataDescription;
 import de.evoal.languages.model.base.Call;
 import lombok.extern.slf4j.Slf4j;
@@ -42,7 +42,7 @@ public class CorrelationsProducer {
 
                             p.getSecond()
                              .stream()
-                             .map(ElHelper::findCall)
+                             .map(BaseLanguageHelper::findCall)
                              .filter(Objects::nonNull)
                              .map(Call.class::cast)
                              .filter(c -> "connection".equals(((de.evoal.languages.model.base.DefinedFunctionName)c.getFunction()).getDefinition().getName()))
@@ -62,14 +62,14 @@ public class CorrelationsProducer {
             final Correlation result = new Correlation();
             result.setChromosomeOne(AstHelper.findChromosomeIndex(specification, constraint.getParameters().get(0)));
             result.setChromosomeTwo(AstHelper.findChromosomeIndex(specification, constraint.getParameters().get(1)));
-            result.setCorrelationFactor(ElHelper.findNumber(constraint.getParameters().get(2)).doubleValue());
+            result.setCorrelationFactor(BaseLanguageHelper.findNumber(constraint.getParameters().get(2)).doubleValue());
 
             return Optional.of(result);
         } else if(constraint.getParameters().size() == 5) {
             final RangedCorrelation result = new RangedCorrelation();
             result.setChromosomeOne(AstHelper.findChromosomeIndex(specification, constraint.getParameters().get(0)));
             result.setChromosomeTwo(AstHelper.findChromosomeIndex(specification, constraint.getParameters().get(2)));
-            result.setCorrelationFactor(ElHelper.findNumber(constraint.getParameters().get(4)).doubleValue());
+            result.setCorrelationFactor(BaseLanguageHelper.findNumber(constraint.getParameters().get(4)).doubleValue());
 
             result.setChromosomeOneRange(AstHelper.findRange(constraint.getParameters().get(1)));
             result.setChromosomeTwoRange(AstHelper.findRange(constraint.getParameters().get(3)));

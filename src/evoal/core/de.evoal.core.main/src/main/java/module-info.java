@@ -49,6 +49,7 @@ module de.evoal.core.main {
     exports de.evoal.core.api.constraints.strategies.fitness;
     exports de.evoal.core.api.correlations;
     exports de.evoal.core.api.languages;
+    exports de.evoal.core.api.languages.base;
     exports de.evoal.core.api.properties;
     exports de.evoal.core.api.properties.info;
     exports de.evoal.core.api.properties.io;

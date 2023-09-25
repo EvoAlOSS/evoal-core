@@ -1,11 +1,11 @@
-package de.evoal.core.main.constraints.el;
+package de.evoal.core.api.languages.base;
 
 import de.evoal.languages.model.ddl.DataDescription;
 import de.evoal.languages.model.base.Call;
 import de.evoal.languages.model.base.Expression;
 
-public final class ElHelper {
-    private ElHelper() {
+public final class BaseLanguageHelper {
+    private BaseLanguageHelper() {
     }
 
     public static Number findNumber(final Expression expression) {
