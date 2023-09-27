@@ -76,7 +76,7 @@ public class EvoAlRunner {
 			String shell = System.getenv("SHELL");
 			if(shell == null) {
 				shell = "bash";
-				logger.warn("Could not find shell in environment. Falling back to bash.")
+				logger.warn("Could not find shell in environment. Falling back to bash.");
 			}
 
 			logger.info("Using shell '" + shell + "' for executing EvoAl.");
