@@ -72,8 +72,15 @@ public class EvoAlRunner {
 		
 		if (isWindows()) {
 		    builder.command("cmd.exe", "/c", String.join(" ", parameters));
-		} else {		
-		    builder.command("sh", "-c", String.join(" ", parameters));
+		} else {
+			String shell = System.getenv("SHELL");
+			if(shell == null) {
+				shell = "bash";
+				logger.warn("Could not find shell in environment. Falling back to bash.")
+			}
+
+			logger.info("Using shell '" + shell + "' for executing EvoAl.");
+		    builder.command(shell, "-c", String.join(" ", parameters));
 		}
 		
 		try {
