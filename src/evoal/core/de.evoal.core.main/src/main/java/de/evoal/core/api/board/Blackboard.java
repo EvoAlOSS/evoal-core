@@ -74,6 +74,17 @@ public class Blackboard {
     }
 
     /**
+     * Fetches a value from the board or returns null.
+     *
+     * @param entry The element to fetch.
+     * @param <T> The element's type.
+     * @return The stored object.
+     */
+    public <T> T getOrNull(final String entry) {
+        return (T) board.get(entry);
+    }
+
+    /**
      * Binds an entry to a new value. A call to this function will trigger an
      * CDI event with the passed {@code entry} to inform consumers of that
      * entry.

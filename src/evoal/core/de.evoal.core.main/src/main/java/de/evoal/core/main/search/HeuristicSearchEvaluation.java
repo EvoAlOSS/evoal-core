@@ -16,7 +16,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.math3.util.Pair;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 import java.io.File;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,7 +25,9 @@ import java.util.stream.Stream;
 @Application(
         name = "heuristic-search-evaluation",
 documentation = """
-Evaluates a heuristic search using multiple targets.
+Prepares evaluation of a heuristic search by running it multiple times.
+Furthermore, it is possible to use a target file to run it for multiple
+times for different targets.
 
 Each target is searched for 'core:evaluation-iterations' times to allow a
 proper empirical evaluation.
@@ -42,26 +43,21 @@ public class HeuristicSearchEvaluation implements MainClass {
 
     @Inject
     @BlackboardValue(CoreBlackboardEntries.OPTIMISATION_CONFIGURATION_FILE)
-    private String heuristicFile;
+    private String olFile;
 
     @Inject
     @BlackboardValue(CoreBlackboardEntries.EVALUATION_ITERATIONS)
     private int iterations;
 
+    @Inject
+    @BlackboardValue(CoreBlackboardEntries.EVALUATION_OUTPUT_FOLDER)
     private File outputBaseDir;
 
     private List<Pair<Properties, Properties>> targets;
 
-    @Inject
-    @BlackboardValue(CoreBlackboardEntries.TARGET_POINTS_FILE)
-    private String targetFile;
-
-    @Inject
-    @Named("target-stream")
-    private Stream<PropertiesPair> targetStream;
-
     private Column targetColumn;
     private Column runColumn;
+
 
     @Inject
     @ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm")
@@ -69,15 +65,17 @@ public class HeuristicSearchEvaluation implements MainClass {
 
     @Override
     public void run() {
+        final String targetFile = board.getOrNull(CoreBlackboardEntries.TARGET_POINTS_FILE);
+
         log.info("Running heuristic search evaluation with the following configuration:");
-        log.info("  target points loaded from ({})", targetFile);
-        log.info("  heuristic configuration loaded from ({})", heuristicFile);
+        log.info("  target points loaded from ({})", targetFile == null ? "no target points given" : targetFile);
+        log.info("  heuristic configuration loaded from ({})", olFile);
         log.info("  running {} iterations.", iterations);
 
-        /* prepare output directory */
-        this.outputBaseDir = new File(board.<String>get(CoreBlackboardEntries.EVALUATION_OUTPUT_FOLDER));
-
-        targets = targetStream.collect(Collectors.toList());
+        if(targetFile != null) {
+            Stream<PropertiesPair> targetStream = BeanFactory.create("target-stream", Stream.class);
+            targets = targetStream.collect(Collectors.toList());
+        }
 
         log.info("Processing {} targets during evaluation.", targets.size());
 
@@ -89,25 +87,36 @@ public class HeuristicSearchEvaluation implements MainClass {
     }
 
     private void process() {
-        targetColumn = HeuristicSearchUtils.addColumn(context,"target", ColumnType.Integer, 0);
         runColumn = HeuristicSearchUtils.addColumn(context,"run", ColumnType.Integer, 0);
 
-        targets.forEach(this::processTarget);
+        board.bind(CoreBlackboardEntries.EVALUATION_OUTPUT_FOLDER, outputBaseDir);
+
+        if(targets != null) {
+            targetColumn = HeuristicSearchUtils.addColumn(context, "target", ColumnType.Integer, 0);
+
+            targets.forEach(this::processTarget);
+        } else {
+            processOptimisation();
+        }
     }
 
     private int targetIndex = 0;
     private void processTarget(final Pair<Properties, Properties> target) {
         final int targetIndex = this.targetIndex++;
-        final int targetLength = calculateFigures(targets.size());
-        final int runLength = calculateFigures(iterations);
 
         context.bindColumn(targetColumn, targetIndex);
 
-//        board.bind(BlackboardEntry.TARGET_PROPERTIES_SOURCE, target.getFirst());
         board.bind(CoreBlackboardEntries.TARGET_PROPERTIES, target.getSecond());
-        board.bind(CoreBlackboardEntries.EVALUATION_OUTPUT_FOLDER, outputBaseDir);
 
         log.info("Evaluating with target {} -> {}.", targetIndex, target);
+
+        processOptimisation();
+    }
+
+    private void processOptimisation() {
+        final int runLength = calculateFigures(iterations);
+
+        board.bind(CoreBlackboardEntries.EVALUATION_OUTPUT_FOLDER, outputBaseDir);
 
         for (int i = 0; i < iterations; ++i) {
             log.info("Running {}/{}", i, iterations);
