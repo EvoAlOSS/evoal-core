@@ -93,7 +93,7 @@ public class ConvertArff implements MainClass {
             log.info("Continue by loading the DL file.");
             final URI modelURI = URI.createFileURI(ddlFile.getAbsolutePath());
 
-            log.info("Loading ea model from URI {}.", modelURI);
+            log.info("Loading data description model from URI {}.", modelURI);
 
             final Resource resource = resourceSet.getResource(modelURI, true);
             resource.load(resourceSet.getLoadOptions());
