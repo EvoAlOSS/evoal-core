@@ -117,9 +117,9 @@ public class ConstantExpressionEvaluator extends BaseSwitch<Object> {
 			return null;
 		}
 		
-		System.out.println("Definition is: " + definition);
-		System.out.println("  is a proxy:  " + definition.eIsProxy());
-		System.out.println("  its value:   " + definition.getValue());
+		//System.out.println("Definition is: " + definition);
+		//System.out.println("  is a proxy:  " + definition.eIsProxy());
+		//System.out.println("  its value:   " + definition.getValue());
 
 		if(constantCache.containsKey(definition)) {
 			return constantCache.get(definition);
