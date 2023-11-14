@@ -11,4 +11,9 @@ location "https://download.eclipse.org/releases/2022-12/202212071000" {
   // IDE for starting a debug eclipse
   org.eclipse.platform.feature.group lazy
   org.antlr.runtime [3.2.0,4.0.0)
+  org.slf4j.api lazy
+}
+
+location "https://download.eclipse.org/tools/orbit/downloads/drops/R20221123021534/repository" {
+	org.junit.jupiter.api lazy
 }

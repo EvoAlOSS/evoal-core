@@ -6,10 +6,13 @@ Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: EvoAl Project
 Require-Bundle: org.eclipse.xtext;bundle-version="2.29.0",
  org.eclipse.core.runtime;bundle-version="3.26.100";resolution:=optional,
- de.evoal.languages.model.base;bundle-version="1.0.0"
+ de.evoal.languages.model.base;bundle-version="1.0.0",
+ de.evoal.languages.model.ddl;bundle-version="1.0.0",
+ de.evoal.languages.model.instance;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-17
 Automatic-Module-Name: de.evoal.languages.model.utils
 Export-Package: de.evoal.languages.model.utils.builtin,
  de.evoal.languages.model.utils.converter,
  de.evoal.languages.model.utils.scoping,
  de.evoal.languages.model.utils.validator
+Import-Package: org.slf4j;version="1.7.30"
