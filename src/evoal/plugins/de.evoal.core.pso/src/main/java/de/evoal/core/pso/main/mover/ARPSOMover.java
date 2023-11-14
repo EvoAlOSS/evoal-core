@@ -26,6 +26,8 @@ import de.evoal.core.pso.api.optimiser.Mover;
 import de.evoal.core.pso.api.swarm.Particle;
 import de.evoal.core.pso.api.swarm.State;
 import de.evoal.languages.model.base.Instance;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
@@ -33,18 +35,24 @@ import javax.inject.Named;
 import java.util.random.RandomGenerator;
 
 /**
- *  Constriction Factor Mover, CFMover
- *
- * @author Jeff Ridder
+ *  Attractive-Repulsive PSO Mover, ARPSOMover.
+ *  Based on paper of Riget and Vesterstrom.
  */
-@Dependent
-@Named("constriction-factor-mover")
-public class CFMover implements Mover {
+@Dependent @Named("attractive-repulsive-mover")
+public class ARPSOMover implements Mover  {
     @Inject
     private PropertiesBoundaries boundaries;
 
     @Inject
     private BoundaryType boundaryType;
+
+    @Inject
+    @ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.mover.inertia-start")
+    private double wstart;
+
+    @Inject
+    @ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.mover.inertia-end")
+    private double wend;
 
     @Inject
     @ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.mover.c1")
@@ -54,12 +62,15 @@ public class CFMover implements Mover {
     @ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.mover.c2")
     private double c2;
 
+    @Getter @Setter
+    private int direction = 1;
+
     @Inject
     @ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "problem.maximise")
     private boolean maximise;
 
     @Override
-    public CFMover init(final Instance configuration) {
+    public ARPSOMover init(final Instance configuration) {
         return this;
     }
 
@@ -71,28 +82,24 @@ public class CFMover implements Mover {
      * @param currentIteration Current iteration.
      * @param maxIterations Max number of iterations.
      */
-    @Override
     public void moveParticle(final State current,
                              final State personalBest,
                              final Particle[] neighbors,
                              final int currentIteration,
-                             int maxIterations) {
+                             final int maxIterations)
+    {
         final Properties neighborhoodBestPosition = Particle.getNeighborhoodBestPosition(neighbors, maximise);
 
         final Properties currentPosition = current.getPosition();
-        final Double[] currentVelocity = current.getVelocity();
+        final Double[] current_velocity = current.getVelocity();
         final Properties personalBestPosition = personalBest.getPosition();
 
         final Properties nextPosition = new Properties(currentPosition);
-        Double[] next_velocity = new Double[currentVelocity.length];
-
-        double phi = c1 + c2;
-
-        double k = 2 / Math.abs(2. - phi - Math.sqrt(phi * phi - 4. * phi));
+        final Double[] next_velocity = new Double[current_velocity.length];
 
         for (int i = 0; i < currentPosition.size(); i++) {
             double x = currentPosition.getAsDouble(i);
-            double v = currentVelocity[i];
+            double v = current_velocity[i];
 
             final PropertiesBoundaries.Boundaries bounds = boundaries.get(currentPosition.getSpecification().get(i));
             final double maximum = bounds.upper().doubleValue();
@@ -100,20 +107,25 @@ public class CFMover implements Mover {
 
             double max_v = maximum - minimum;
 
-            double next_v = Math.max(-max_v, Math.min(max_v, k * (v + c1 * RandomGenerator.getDefault().
+            double w = wstart + ((double) (currentIteration + 1.) /
+                (double) maxIterations) * (wend - wstart);
+            double next_v = Math.max(-max_v, Math.min(max_v, w * v + direction * (c1 * RandomGenerator.getDefault().
                 nextDouble() * (personalBestPosition.getAsDouble(i) - x) +
                 c2 * RandomGenerator.getDefault().nextDouble() *
                 (neighborhoodBestPosition.getAsDouble(i) - x))));
 
             double next_x = x + next_v;
 
-            if (next_x > maximum) {
+            if (next_x > maximum)
+            {
                 next_x = switch (boundaryType) {
                     case BOUNCE -> 2. * maximum - next_x;
                     case STICK  -> maximum;
                     case WRAP   ->  -max_v + next_x;
                 };
-            } else if (next_x < minimum) {
+            }
+            else if (next_x < minimum)
+            {
                 next_x = switch (boundaryType) {
                     case BOUNCE -> 2. * minimum - next_x;
                     case STICK  -> minimum;

@@ -1,5 +1,6 @@
 package de.evoal.core.api.statistics.writer;
 
+import de.evoal.core.api.cdi.EvoalComponent;
 import de.evoal.core.api.statistics.IterationResult;
 import de.evoal.languages.model.base.Instance;
 
@@ -14,16 +15,11 @@ import de.evoal.languages.model.base.Instance;
  * for each generation step. When the algorithm terminates, the framework calls
  * {@link #write()} once to force data serialization.
  */
-public interface StatisticsWriter {
+public interface StatisticsWriter extends EvoalComponent<StatisticsWriter> {
     /**
      * Adds an optimisation result to the statistics.
      */
     void add(final IterationResult result);
-
-    /**
-     * Passes the writer configuration.
-     */
-    StatisticsWriter init(final Instance configuration);
 
     /**
      * Write the statistics since the run is completed.

@@ -1,6 +1,5 @@
 package de.evoal.core.ea.main.search;
 
-import java.io.File;
 import java.time.Duration;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
@@ -9,7 +8,7 @@ import java.util.concurrent.Executors;
 import de.evoal.core.api.board.CoreBlackboardEntries;
 import de.evoal.core.api.board.Blackboard;
 import de.evoal.core.api.cdi.BeanFactory;
-import de.evoal.core.api.cdi.BlackboardValue;
+import de.evoal.core.api.cdi.Component;
 import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.core.api.languages.ExpressionEvaluator;
 import de.evoal.core.api.optimisation.InitialCandidatesProvider;
@@ -40,7 +39,7 @@ import javax.inject.Named;
 @Slf4j
 @Dependent
 @Named("evolutionary-algorithm")
-public class EvolutionaryAlgorithmSearch implements OptimisationAlgorithm {
+public class EvolutionaryAlgorithmOptimisation implements OptimisationAlgorithm {
 	@Inject
 	private Blackboard board;
 
@@ -79,7 +78,7 @@ public class EvolutionaryAlgorithmSearch implements OptimisationAlgorithm {
 	@Inject @Named("offspring")
 	private Selector offspringSelector;
 
-	@Inject @Named("statistics")
+	@Inject @Component
 	private StatisticsWriter statistics;
 
 	@Inject @Named("survivor")

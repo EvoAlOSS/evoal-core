@@ -33,18 +33,26 @@ import javax.inject.Named;
 import java.util.random.RandomGenerator;
 
 /**
- *  Constriction Factor Mover, CFMover
+ *  Basic PSO Mover, BasicMover
  *
  * @author Jeff Ridder
  */
+@Named("basic-mover")
 @Dependent
-@Named("constriction-factor-mover")
-public class CFMover implements Mover {
+public class BasicMover implements Mover {
     @Inject
     private PropertiesBoundaries boundaries;
 
     @Inject
     private BoundaryType boundaryType;
+
+    @Inject
+    @ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.mover.inertia-start")
+    private double wstart;
+
+    @Inject
+    @ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.mover.inertia-end")
+    private double wend;
 
     @Inject
     @ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.mover.c1")
@@ -59,7 +67,7 @@ public class CFMover implements Mover {
     private boolean maximise;
 
     @Override
-    public CFMover init(final Instance configuration) {
+    public BasicMover init(final Instance configuration) {
         return this;
     }
 
@@ -81,16 +89,13 @@ public class CFMover implements Mover {
 
         final Properties currentPosition = current.getPosition();
         final Double[] currentVelocity = current.getVelocity();
+
         final Properties personalBestPosition = personalBest.getPosition();
 
         final Properties nextPosition = new Properties(currentPosition);
-        Double[] next_velocity = new Double[currentVelocity.length];
+        final Double[] nextVelocity = new Double[currentVelocity.length];
 
-        double phi = c1 + c2;
-
-        double k = 2 / Math.abs(2. - phi - Math.sqrt(phi * phi - 4. * phi));
-
-        for (int i = 0; i < currentPosition.size(); i++) {
+        for (int i = 0; i < currentVelocity.length; i++) {
             double x = currentPosition.getAsDouble(i);
             double v = currentVelocity[i];
 
@@ -100,10 +105,12 @@ public class CFMover implements Mover {
 
             double max_v = maximum - minimum;
 
-            double next_v = Math.max(-max_v, Math.min(max_v, k * (v + c1 * RandomGenerator.getDefault().
-                nextDouble() * (personalBestPosition.getAsDouble(i) - x) +
-                c2 * RandomGenerator.getDefault().nextDouble() *
-                (neighborhoodBestPosition.getAsDouble(i) - x))));
+            double rand1 = RandomGenerator.getDefault().nextDouble();
+            double rand2 = RandomGenerator.getDefault().nextDouble();
+
+            double w = wstart + ((currentIteration + 1.) / (double) maxIterations) * (wend - wstart);
+            double next_v = Math.max(-max_v, Math.min(max_v, w * v + c1 * rand1 * (personalBestPosition.getAsDouble(i) - x) +
+                c2 * rand2 * (neighborhoodBestPosition.getAsDouble(i) - x)));
 
             double next_x = x + next_v;
 
@@ -121,10 +128,10 @@ public class CFMover implements Mover {
                 };
             }
 
-            nextPosition.set(i, next_x);
-            next_velocity[i] = next_v;
+            nextPosition.set(i ,next_x); // TODO Cast to data type
+            nextVelocity[i] = next_v;
         }
-        current.setVelocity(next_velocity);
+        current.setVelocity(nextVelocity);
         current.setPosition(nextPosition);
     }
 }

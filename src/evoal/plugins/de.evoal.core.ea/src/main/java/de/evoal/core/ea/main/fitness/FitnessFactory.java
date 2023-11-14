@@ -18,7 +18,6 @@ import lombok.extern.slf4j.Slf4j;
 @ApplicationScoped
 @Slf4j
 public class FitnessFactory {
-	private final String NAME_SUFFIX = "-fitness";
 
 	private FitnessFactory() {
 	}

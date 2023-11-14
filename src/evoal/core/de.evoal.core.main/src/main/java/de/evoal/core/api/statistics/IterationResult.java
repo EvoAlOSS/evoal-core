@@ -26,5 +26,4 @@ public interface IterationResult {
      * @return The best candidate of the iteration.
      */
     Candidate bestCandidate();
-
 }

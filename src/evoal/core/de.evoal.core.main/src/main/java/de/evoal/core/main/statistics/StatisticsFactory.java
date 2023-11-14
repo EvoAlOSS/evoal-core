@@ -2,6 +2,8 @@ package de.evoal.core.main.statistics;
 
 import de.evoal.core.api.board.CoreBlackboardEntries;
 import de.evoal.core.api.cdi.BeanFactory;
+import de.evoal.core.api.cdi.Component;
+import de.evoal.core.api.cdi.ComponentProducer;
 import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.core.api.languages.ExpressionEvaluator;
 import de.evoal.core.api.statistics.writer.StatisticsWriter;
@@ -25,9 +27,12 @@ public class StatisticsFactory {
     @Inject
     private ExpressionEvaluator evaluator;
 
+    @Inject
+    private ComponentProducer producer;
+
     @Produces
     @Dependent
-    @Named("statistics")
+    @Component
     public StatisticsWriter create(
             final @ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "problem.documentation") Array problemWriter,
             final @ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.documentation") Array algorithmWriter) {
@@ -46,8 +51,7 @@ public class StatisticsFactory {
         final StatisticsWriter [] writers = Stream.concat(problemStream, algorithmStream)
                                                   .map(evaluator::evaluate)
                                                   .map(Instance.class::cast)
-                                                  .map(i -> new Pair<>(BeanFactory.create(i.getDefinition().getName(), StatisticsWriter.class), i))
-                                                  .map(p -> p.getFirst().init(p.getSecond()))
+                                                  .map(i -> producer.create(StatisticsWriter.class, i))
                                                   .toArray(i -> new StatisticsWriter[i]);
 
         return new MultipleStatisticsWriter(writers);

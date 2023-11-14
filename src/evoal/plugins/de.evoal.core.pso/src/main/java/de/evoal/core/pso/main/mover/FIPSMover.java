@@ -26,6 +26,7 @@ import de.evoal.core.pso.api.optimiser.Mover;
 import de.evoal.core.pso.api.swarm.Particle;
 import de.evoal.core.pso.api.swarm.State;
 import de.evoal.languages.model.base.Instance;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
@@ -33,13 +34,13 @@ import javax.inject.Named;
 import java.util.random.RandomGenerator;
 
 /**
- *  Constriction Factor Mover, CFMover
+ *  Fully informed particle swarm (FIPS) mover of Rui Mendes.
  *
  * @author Jeff Ridder
  */
-@Dependent
-@Named("constriction-factor-mover")
-public class CFMover implements Mover {
+@Slf4j
+@Dependent  @Named("fips-mover")
+public class FIPSMover implements Mover {
     @Inject
     private PropertiesBoundaries boundaries;
 
@@ -47,19 +48,11 @@ public class CFMover implements Mover {
     private BoundaryType boundaryType;
 
     @Inject
-    @ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.mover.c1")
-    private double c1;
-
-    @Inject
-    @ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.mover.c2")
-    private double c2;
-
-    @Inject
-    @ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "problem.maximise")
-    private boolean maximise;
+    @ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.mover.phi")
+    private double phi;
 
     @Override
-    public CFMover init(final Instance configuration) {
+    public FIPSMover init(final Instance configuration) {
         return this;
     }
 
@@ -71,22 +64,18 @@ public class CFMover implements Mover {
      * @param currentIteration Current iteration.
      * @param maxIterations Max number of iterations.
      */
-    @Override
     public void moveParticle(final State current,
                              final State personalBest,
                              final Particle[] neighbors,
                              final int currentIteration,
-                             int maxIterations) {
-        final Properties neighborhoodBestPosition = Particle.getNeighborhoodBestPosition(neighbors, maximise);
-
+                             final int maxIterations)
+    {
         final Properties currentPosition = current.getPosition();
         final Double[] currentVelocity = current.getVelocity();
         final Properties personalBestPosition = personalBest.getPosition();
 
         final Properties nextPosition = new Properties(currentPosition);
-        Double[] next_velocity = new Double[currentVelocity.length];
-
-        double phi = c1 + c2;
+        final Double[] next_velocity = new Double[currentVelocity.length];
 
         double k = 2 / Math.abs(2. - phi - Math.sqrt(phi * phi - 4. * phi));
 
@@ -100,10 +89,16 @@ public class CFMover implements Mover {
 
             double max_v = maximum - minimum;
 
-            double next_v = Math.max(-max_v, Math.min(max_v, k * (v + c1 * RandomGenerator.getDefault().
-                nextDouble() * (personalBestPosition.getAsDouble(i) - x) +
-                c2 * RandomGenerator.getDefault().nextDouble() *
-                (neighborhoodBestPosition.getAsDouble(i) - x))));
+            double sum = 0.;
+            for (Particle n : neighbors)
+            {
+                sum += RandomGenerator.getDefault().nextDouble() *
+                    (n.getBestPosition().getAsDouble(i) - x);
+            }
+
+            sum *= phi / neighbors.length;
+
+            double next_v = Math.max(-max_v, Math.min(max_v, k * (v + sum)));
 
             double next_x = x + next_v;
 
@@ -121,6 +116,11 @@ public class CFMover implements Mover {
                 };
             }
 
+
+            if (next_x < minimum || next_x > maximum)
+            {
+                log.error("Position {} value of {} is out of bounds [min,max]: [{}, {}].", i, next_x, minimum, maximum);
+            }
             nextPosition.set(i, next_x);
             next_velocity[i] = next_v;
         }

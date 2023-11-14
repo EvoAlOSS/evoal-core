@@ -6,8 +6,10 @@ fi
 
 source $EVOAL_HOME/bin/paths.env
 
-if [ "$#" -lt 3 ]; then
-    echo "Usage: $0 <execution-folder> <eal-file> <output-folder>"
+if [ "$#" -lt 4 ]; then
+    echo "Usage: $0 <execution-folder> <eal-file> <output-folder> <number-of-runs>"
+    echo "         you can specify a target file by passing the parameter"
+    echo "         -Bcore:target-points-file=<file>"
     exit 1
 fi
 

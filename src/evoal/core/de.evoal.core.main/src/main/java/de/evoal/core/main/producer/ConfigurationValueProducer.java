@@ -49,7 +49,7 @@ public class ConfigurationValueProducer {
 
     @Produces
     @ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "")
-    public final Array injectArrayValue(final InjectionPoint ip, final Blackboard board) {
+    public Array injectArrayValue(final InjectionPoint ip, final Blackboard board) {
         final ConfigurationValue value = ip.getAnnotated().getAnnotation(ConfigurationValue.class);
 
         return lookup(board.get(value.entry()), value.access());
@@ -57,7 +57,7 @@ public class ConfigurationValueProducer {
 
     @Produces
     @ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "")
-    public final Instance [] injectInstanceArrayValue(final InjectionPoint ip, final Blackboard board) {
+    public Instance [] injectInstanceArrayValue(final InjectionPoint ip, final Blackboard board) {
         final ConfigurationValue value = ip.getAnnotated().getAnnotation(ConfigurationValue.class);
 
         final Object [] array = lookup(board.get(value.entry()), value.access());
@@ -70,7 +70,7 @@ public class ConfigurationValueProducer {
 
     @Produces
     @ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "")
-    public final DataDescription[] injectDataDescriptionArrayValue(final InjectionPoint ip, final Blackboard board) {
+    public DataDescription[] injectDataDescriptionArrayValue(final InjectionPoint ip, final Blackboard board) {
         final ConfigurationValue value = ip.getAnnotated().getAnnotation(ConfigurationValue.class);
 
         final Object [] array = lookup(board.get(value.entry()), value.access());
@@ -83,7 +83,7 @@ public class ConfigurationValueProducer {
 
     @Produces
     @ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "")
-    public final Instance injectInstanceValue(final InjectionPoint ip, final Blackboard board) {
+    public Instance injectInstanceValue(final InjectionPoint ip, final Blackboard board) {
         final ConfigurationValue value = ip.getAnnotated().getAnnotation(ConfigurationValue.class);
 
         return lookup(board.get(value.entry()), value.access());
@@ -109,7 +109,7 @@ public class ConfigurationValueProducer {
                 .toArray();
     }
 
-    private <T> T lookup(final OptimisationModule model, final String access) {
+    public <T> T lookup(final OptimisationModule model, final String access) {
         log.info("Looking up configuration value {}", access);
 
         return helper.lookup(model, access);

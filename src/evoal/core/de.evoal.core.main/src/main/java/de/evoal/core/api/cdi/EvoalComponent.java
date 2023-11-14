@@ -13,5 +13,7 @@ public interface EvoalComponent<T extends EvoalComponent<T>> {
      *
      * @return The component itself.
      */
-    public T init(final Instance configuration);
+    public default T init(final Instance configuration)  {
+        return (T)this;
+    };
 }

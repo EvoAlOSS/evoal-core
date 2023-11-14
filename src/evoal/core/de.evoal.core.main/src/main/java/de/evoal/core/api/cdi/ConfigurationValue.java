@@ -19,7 +19,7 @@ import java.lang.annotation.RetentionPolicy;
  *     private int iterations;
  *   </pre>
  *
- *   This example will load the ea configuration from the blackboard and search
+ *   This example will load the pso configuration from the blackboard and search
  *   for the attribute {@code algorithm}. Afterwards, it looks up the attribute
  *   {@code number-of-generations}.
  */

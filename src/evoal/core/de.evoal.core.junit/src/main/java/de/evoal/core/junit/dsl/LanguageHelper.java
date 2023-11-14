@@ -66,15 +66,17 @@ public final class LanguageHelper {
             final Resource resource = resourceSet.getResource(modelURI, true);
             resource.load(resourceSet.getLoadOptions());
 
-            if(!resource.getErrors().isEmpty()) {
-                for(Resource.Diagnostic diagnostic : resource.getErrors()) {
-                    System.err.println("Error while processing rule '" + name + "': " + diagnostic);
+            for(final Resource r : resourceSet.getResources()) {
+                if (!r.getErrors().isEmpty()) {
+                    for (Resource.Diagnostic diagnostic : r.getErrors()) {
+                        System.err.println("Error while processing '" + r.getURI() + "': " + diagnostic);
+                    }
                 }
-            }
 
-            if(!resource.getWarnings().isEmpty()) {
-                for(Resource.Diagnostic diagnostic : resource.getWarnings()) {
-                    System.err.println("Warning while processing rule '" + name + "': " + diagnostic);
+                if (!r.getWarnings().isEmpty()) {
+                    for (Resource.Diagnostic diagnostic : r.getWarnings()) {
+                        System.err.println("Warning while processing '" + r.getWarnings() + "': " + diagnostic);
+                    }
                 }
             }
 

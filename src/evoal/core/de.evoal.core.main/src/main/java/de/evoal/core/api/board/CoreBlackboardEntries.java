@@ -43,7 +43,7 @@ public class CoreBlackboardEntries implements BlackboardEntries {
     public static final String OPTIMISATION_CONFIGURATION = "core:optimisation-configuration";
 
     /**
-     * The file containing the ea configuration.
+     * The file containing the pso configuration.
      */
     @Commandline(main = "heuristic-search", name = "core:optimisation-configuration", doc = "Optimisation configuration to use.")
     public static final String OPTIMISATION_CONFIGURATION_FILE = "core:optimisation-configuration-file";
