@@ -67,6 +67,7 @@ public final class LanguageHelper {
             resource.load(resourceSet.getLoadOptions());
 
             for(final Resource r : resourceSet.getResources()) {
+                System.err.println("Checking resource " + r.getURI() + " for errors:");
                 if (!r.getErrors().isEmpty()) {
                     for (Resource.Diagnostic diagnostic : r.getErrors()) {
                         System.err.println("Error while processing '" + r.getURI() + "': " + diagnostic);
