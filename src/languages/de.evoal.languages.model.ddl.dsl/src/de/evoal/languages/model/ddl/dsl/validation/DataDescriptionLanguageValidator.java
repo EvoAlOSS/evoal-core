@@ -14,6 +14,7 @@ import de.evoal.languages.model.base.Expression;
 import de.evoal.languages.model.ddl.DataDescription;
 import de.evoal.languages.model.ddl.DataDescriptionModule;
 import de.evoal.languages.model.ddl.DdlPackage;
+import de.evoal.languages.model.ddl.ScaleType;
 import de.evoal.languages.model.utils.validator.ModuleValidator;
 import de.evoal.languages.model.utils.validator.ScaleValidator;
 
@@ -39,19 +40,20 @@ public class DataDescriptionLanguageValidator extends AbstractDataDescriptionLan
 	@Check
 	public void checkModule(final DataDescriptionModule module) {
 		ModuleValidator.check(module, module.getName(), "ddl", msg -> error(msg, module, DdlPackage.Literals.DATA_DESCRIPTION_MODULE__NAME));
+
+		for(final Expression expression : module.getConstraints()) {
+			ScaleValidator.check(expression, ScaleType.UNKNOWN, this);
+		}
 	}
 	
 	private void errorConsumer(final Triple<String, EObject, EStructuralFeature> data) {
 		error(data.getFirst(), data.getSecond(), data.getThird());
 	}
 	
-	@Check
-	public void checkExpression(final Expression expression) {
-		ScaleValidator.check(expression, this);
-	}
-
 	@Check(CheckType.FAST)
 	public void checkDataDescription(final DataDescription descr) {
-		descr.getConstraints().forEach(this::checkExpression);
+		for(final Expression expression : descr.getConstraints()) {
+			ScaleValidator.check(expression, descr.getScale(), this);
+		}
 	}
 }

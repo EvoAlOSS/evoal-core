@@ -1,13 +1,6 @@
 package de.evoal.languages.model.utils.validator;
 
 
-import java.util.function.Consumer;
-
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.xtext.util.Triple;
-import org.eclipse.xtext.util.Tuples;
-import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,7 +9,6 @@ import de.evoal.languages.model.base.AddOrSubtractExpression;
 import de.evoal.languages.model.base.AndExpression;
 import de.evoal.languages.model.base.Array;
 import de.evoal.languages.model.base.Attribute;
-import de.evoal.languages.model.base.BasePackage;
 import de.evoal.languages.model.base.BooleanLiteral;
 import de.evoal.languages.model.base.Call;
 import de.evoal.languages.model.base.ComparisonExpression;
@@ -37,18 +29,22 @@ import de.evoal.languages.model.base.UnaryAddOrSubtractExpression;
 import de.evoal.languages.model.base.ValueReference;
 import de.evoal.languages.model.base.XorExpression;
 import de.evoal.languages.model.base.util.BaseSwitch;
+import de.evoal.languages.model.ddl.DataDescription;
 import de.evoal.languages.model.ddl.ScaleType;
+import de.evoal.languages.model.ddl.SelfReference;
 
 public class ScaleValidator extends BaseSwitch<ScaleType> {
 	private static final Logger log = LoggerFactory.getLogger(ScaleValidator.class);
 	private final ValidationMessageAcceptor acceptor;
+	private final ScaleType scaleTypeOfValue;
 	
-	public ScaleValidator(final ValidationMessageAcceptor acceptor) {
+	public ScaleValidator(final ValidationMessageAcceptor acceptor, final ScaleType scaleTypeOfValue) {
 		this.acceptor = acceptor;
+		this.scaleTypeOfValue = scaleTypeOfValue;
 	}
 
-	public static void check(final Expression expression, final ValidationMessageAcceptor acceptor) {
-		new ScaleValidator(acceptor).doSwitch(expression);
+	public static void check(final Expression expression, final ScaleType scaleTypeOfValue, final ValidationMessageAcceptor acceptor) {
+		new ScaleValidator(acceptor, scaleTypeOfValue).doSwitch(expression);
 	}
 
 	@Override
@@ -275,6 +271,8 @@ public class ScaleValidator extends BaseSwitch<ScaleType> {
 			
 			return reference.getDefinition().getScale();
 			
+		} else if(object instanceof SelfReference) {
+			return scaleTypeOfValue;
 		}
 	
 		return doSwitch(object);
