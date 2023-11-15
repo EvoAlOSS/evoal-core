@@ -7,6 +7,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.util.Tuples;
+import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
+import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -39,35 +41,35 @@ import de.evoal.languages.model.ddl.ScaleType;
 
 public class ScaleValidator extends BaseSwitch<ScaleType> {
 	private static final Logger log = LoggerFactory.getLogger(ScaleValidator.class);
-	private final Consumer<Triple<String, EObject, EStructuralFeature>> error;
+	private final ValidationMessageAcceptor acceptor;
 	
-	public ScaleValidator(final Consumer<Triple<String, EObject, EStructuralFeature>> error) {
-		this.error = error;
+	public ScaleValidator(final ValidationMessageAcceptor acceptor) {
+		this.acceptor = acceptor;
 	}
 
-	public static void check(final Expression expression, Consumer<Triple<String, EObject, EStructuralFeature>> error) {
-		new ScaleValidator(error).doSwitch(expression);
+	public static void check(final Expression expression, final ValidationMessageAcceptor acceptor) {
+		new ScaleValidator(acceptor).doSwitch(expression);
 	}
 
 	@Override
 	public ScaleType caseOrExpression(final OrExpression object) {
 		object.getSubExpressions().forEach(this::caseXorExpression);
 
-		return null;
+		return ScaleType.NOMINAL;
 	}
 
 	@Override
 	public ScaleType caseXorExpression(final XorExpression object) {
 		object.getSubExpressions().forEach(this::caseAndExpression);
 
-		return null;
+		return ScaleType.NOMINAL;
 	}
 
 	@Override
 	public ScaleType caseAndExpression(final AndExpression object) {
 		object.getSubExpressions().forEach(this::caseNotExpression);
 
-		return null;
+		return ScaleType.NOMINAL;
 	}
 
 	@Override
@@ -86,6 +88,7 @@ public class ScaleValidator extends BaseSwitch<ScaleType> {
 		
 		for(final PartialComparisonExpression expr : object.getComparison()) {
 			switch(expr.getOperator()) {
+			/*
 			case EQUAL:
 			case UNEQUAL:
 			{
@@ -94,7 +97,7 @@ public class ScaleValidator extends BaseSwitch<ScaleType> {
 						&& !ScaleType.ORDINAL.equals(lastScale)
 						&& !ScaleType.QUOTIENT.equals(lastScale)
 						) {
-					error.accept(Tuples.create("No scale exist for left-hand operand.", lastExpr, BasePackage.Literals.PARTIAL_COMPARISON_EXPRESSION__OPERATOR));
+					//validator.a(Tuples.create("No scale exist for left-hand operand.", lastExpr, BasePackage.Literals.PARTIAL_COMPARISON_EXPRESSION__OPERATOR));
 					// error for last expression
 					
 				}
@@ -107,7 +110,7 @@ public class ScaleValidator extends BaseSwitch<ScaleType> {
 						&& !ScaleType.QUOTIENT.equals(currentScale)
 						) {
 					// error for current expression
-					error.accept(Tuples.create("No scale exist for right-hand operand.", expr, BasePackage.Literals.PARTIAL_COMPARISON_EXPRESSION__OPERATOR));
+					//error.accept(Tuples.create("No scale exist for right-hand operand.", expr, BasePackage.Literals.ADD_OR_SUBTRACT_EXPRESSION));
 					
 				}
 
@@ -115,30 +118,21 @@ public class ScaleValidator extends BaseSwitch<ScaleType> {
 				lastScale = ScaleType.NOMINAL;
 				break;
 			}	
+			*/
 				
 			case GREATER_EQUAL:
 			case GREATER_THAN:
 			case LESS_EQUAL:
 			case LESS_THAN:
 			{
-				if(!ScaleType.NOMINAL.equals(lastScale)
-						&& !ScaleType.ORDINAL.equals(lastScale)
-						&& !ScaleType.QUOTIENT.equals(lastScale)
-						) {
-					error.accept(Tuples.create("Cardinal scale for left-hand operand isn't allowed in order comparison.", lastExpr, BasePackage.Literals.PARTIAL_COMPARISON_EXPRESSION__OPERATOR));
-					// error for last expression
-					
+				if(ScaleType.NOMINAL.equals(lastScale)) {
+					acceptor.acceptError("Cardinal scale for comparison is not allowed.", lastExpr, null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, null);
 				}
 				
 				final AddOrSubtractExpression currentExpression = expr.getSubExpression();
 				final ScaleType currentScale = this.caseAddOrSubtractExpression(currentExpression);
-				if(!ScaleType.NOMINAL.equals(currentScale)
-						&& !ScaleType.ORDINAL.equals(currentScale)
-						&& !ScaleType.QUOTIENT.equals(currentScale)
-						) {
-					error.accept(Tuples.create("Cardinal scale for right-hand operand isn't allowed in order comparison.", expr, BasePackage.Literals.PARTIAL_COMPARISON_EXPRESSION__OPERATOR));
-					// error for current expression
-					
+				if(ScaleType.NOMINAL.equals(currentScale)) {
+					acceptor.acceptError("Cardinal scale for comparison is not allowed.", currentExpression, null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, null);
 				}
 
 				lastExpr = null;
@@ -147,7 +141,7 @@ public class ScaleValidator extends BaseSwitch<ScaleType> {
 			}
 				
 			default:
-				log.warn("Unknown comparison operator: {}", expr.getOperator());
+				log.info("Unknown comparison operator: {}", expr.getOperator());
 				break;
 			}
 		}
@@ -157,26 +151,27 @@ public class ScaleValidator extends BaseSwitch<ScaleType> {
 
 	@Override
 	public ScaleType caseAddOrSubtractExpression(final AddOrSubtractExpression object) {
-		ScaleType scale = caseMultiplyDivideModuloExpression(object.getLeftOperand());
+		ScaleType lastScale = caseMultiplyDivideModuloExpression(object.getLeftOperand());
 		
 		if(object.getOperands().isEmpty()) {
-			return scale;
+			return lastScale;
 		}
 		
-		if(!ScaleType.ORDINAL.equals(scale) && !ScaleType.QUOTIENT.equals(scale)) {
-			// error for last expression
-			
+		if(ScaleType.ORDINAL.equals(lastScale) || ScaleType.NOMINAL.equals(lastScale)) {
+			acceptor.acceptError("Ordinal and nominal scales are not allowed in add or substract.", object.getLeftOperand(), null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, null);			
 		}
 
 		for(int i = 0; i < object.getOperands().size(); ++i) {
-			scale = caseMultiplyDivideModuloExpression(object.getOperands().get(i));
+			final ScaleType scale = caseMultiplyDivideModuloExpression(object.getOperands().get(i));
 			
-			if(!ScaleType.ORDINAL.equals(scale) && !ScaleType.QUOTIENT.equals(scale)) {
-				// error for expression
+			if(ScaleType.ORDINAL.equals(scale) || ScaleType.NOMINAL.equals(scale)) {
+				acceptor.acceptError("Ordinal and nominal scales are not allowed in add or substract.", object.getOperands().get(i), null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, null);			
 			}
+			
+			lastScale = scale.equals(ScaleType.QUOTIENT) && lastScale.equals(ScaleType.QUOTIENT)? ScaleType.QUOTIENT : scale;
 		}
 		
-		return scale; // TODO Perhaps we have to use the "min" value of scales?
+		return lastScale;
 	}
 
 	@Override
@@ -187,17 +182,15 @@ public class ScaleValidator extends BaseSwitch<ScaleType> {
 			return scale;
 		}
 		
-		if(!ScaleType.QUOTIENT.equals(scale)) {
-			// error for last expression
-			
+		if(ScaleType.CARDINAL.equals(scale) || ScaleType.NOMINAL.equals(scale) || ScaleType.ORDINAL.equals(scale)) {
+			acceptor.acceptError("Cardinal, ordinal and nominal scales are not allowed in multiplication or division.", object.getLeftOperand(), null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, null);			
 		}
 
 		for(int i = 0; i < object.getOperands().size(); ++i) {
 			scale = casePowerOfExpression(object.getOperands().get(i));
 			
-			if(!ScaleType.QUOTIENT.equals(scale)) {
-				// error for expression
-				
+			if(ScaleType.CARDINAL.equals(scale) || ScaleType.NOMINAL.equals(scale) || ScaleType.ORDINAL.equals(scale)) {
+				acceptor.acceptError("Cardinal, ordinal and nominal scales are not allowed in multiplication or division.", object.getOperands().get(i), null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, null);			
 			}
 		}
 		
@@ -213,51 +206,63 @@ public class ScaleValidator extends BaseSwitch<ScaleType> {
 		}
 
 		if(!ScaleType.QUOTIENT.equals(scale)) {
-			// error for last expression
-			
+			if(ScaleType.CARDINAL.equals(scale) || ScaleType.NOMINAL.equals(scale) || ScaleType.ORDINAL.equals(scale)) {
+				acceptor.acceptError("Cardinal, ordinal and nominal scales are not allowed in power of operation.", object.getLeftOperand(), null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, null);			
+			}
 		}
-		
-		return scale;
+
+		scale = casePowerOfExpression(object.getRightOperand());
+		if(ScaleType.NOMINAL.equals(scale) || ScaleType.ORDINAL.equals(scale)) {
+			acceptor.acceptError("Ordinal and nominal scales are not allowed in power of operation.", object.getLeftOperand(), null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, null);			
+		}
+
+		return ScaleType.QUOTIENT;
 	}
 
 	@Override
 	public ScaleType caseUnaryAddOrSubtractExpression(final UnaryAddOrSubtractExpression object) {
-		// TODO What scale do we need here?
-		return doSwitch(object.getSubExpression());
+		final ScaleType scale = doSwitch(object.getSubExpression());
+		
+		if(!object.getOperators().isEmpty()) {
+			if(ScaleType.NOMINAL.equals(scale) || ScaleType.ORDINAL.equals(scale)) {
+				acceptor.acceptError("Ordinal and nominal scales are not allowed in unary add or subtract expression.", object.getSubExpression(), null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, null);			
+			}
+		}
+
+		return scale;
 	}
 
 	@Override
-	public ScaleType caseIntegerLiteral(IntegerLiteral object) {
-		return ScaleType.ORDINAL;
+	public ScaleType caseIntegerLiteral(final IntegerLiteral object) {
+		return ScaleType.UNKNOWN;
 	}
 
 	@Override
-	public ScaleType caseRealLiteral(RealLiteral object) {
-		return ScaleType.ORDINAL;
+	public ScaleType caseRealLiteral(final RealLiteral object) {
+		return ScaleType.UNKNOWN;
 	}
 
 	@Override
-	public ScaleType caseStringLiteral(StringLiteral object) {
-		return ScaleType.CARDINAL;
+	public ScaleType caseStringLiteral(final StringLiteral object) {
+		return ScaleType.NOMINAL;
 	}
 
 	@Override
 	public ScaleType caseBooleanLiteral(final BooleanLiteral object) {
-		return ScaleType.CARDINAL;
+		return ScaleType.NOMINAL;
 	}
 
 	@Override
-	public ScaleType caseCall(Call object) {
+	public ScaleType caseCall(final Call object) {
 		log.info("Scale of function is unknown");
 
-		return null;
+		return ScaleType.UNKNOWN;
 	}
 
 	@Override
 	public ScaleType caseParantheses(final Parantheses object) {
 		return doSwitch(object.getSubExpression());
 	}
-
 
 	@Override
 	public ScaleType caseValueReference(final ValueReference object) {
@@ -270,20 +275,16 @@ public class ScaleValidator extends BaseSwitch<ScaleType> {
 			
 			return reference.getDefinition().getScale();
 			
-		} else if(object instanceof ConstantReference) {
-			log.info("Scale of constant is unknown");
-
-			return null;
 		}
 	
-		return null;
+		return doSwitch(object);
 	}
 
 	@Override
 	public ScaleType caseParameter(final Parameter object) {
 		log.info("Scale of parameter is unknown");
 
-		return null;
+		return ScaleType.UNKNOWN;
 	}
 
 	@Override
@@ -295,20 +296,20 @@ public class ScaleValidator extends BaseSwitch<ScaleType> {
 	public ScaleType caseArray(Array object) {
 		log.info("Scale of array is unknown");
 
-		return null;
+		return ScaleType.UNKNOWN;
 	}
 
 	@Override
 	public ScaleType caseInstance(Instance object) {
 		log.info("Scale of instance is unknown");
 
-		return null;
+		return ScaleType.UNKNOWN;
 	}
 
 	@Override
 	public ScaleType caseAttribute(final Attribute object) {
 		log.info("Scale of attribute is unknown");
 
-		return null;
+		return ScaleType.UNKNOWN;
 	}
 }

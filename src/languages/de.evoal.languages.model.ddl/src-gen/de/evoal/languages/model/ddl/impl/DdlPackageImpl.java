@@ -536,6 +536,7 @@ public class DdlPackageImpl extends EPackageImpl implements DdlPackage {
 		addEEnumLiteral(scaleTypeEEnum, ScaleType.ORDINAL);
 		addEEnumLiteral(scaleTypeEEnum, ScaleType.CARDINAL);
 		addEEnumLiteral(scaleTypeEEnum, ScaleType.QUOTIENT);
+		addEEnumLiteral(scaleTypeEEnum, ScaleType.UNKNOWN);
 
 		initEEnum(representationTypeEEnum, RepresentationType.class, "RepresentationType");
 		addEEnumLiteral(representationTypeEEnum, RepresentationType.REAL);

@@ -8,8 +8,10 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.validation.Check;
+import org.eclipse.xtext.validation.CheckType;
 
 import de.evoal.languages.model.base.Expression;
+import de.evoal.languages.model.ddl.DataDescription;
 import de.evoal.languages.model.ddl.DataDescriptionModule;
 import de.evoal.languages.model.ddl.DdlPackage;
 import de.evoal.languages.model.utils.validator.ModuleValidator;
@@ -43,8 +45,13 @@ public class DataDescriptionLanguageValidator extends AbstractDataDescriptionLan
 		error(data.getFirst(), data.getSecond(), data.getThird());
 	}
 	
-	public void checkConstraint(final Expression expression) {
-		ScaleValidator.check(expression, this::errorConsumer);
+	@Check
+	public void checkExpression(final Expression expression) {
+		ScaleValidator.check(expression, this);
 	}
 
+	@Check(CheckType.FAST)
+	public void checkDataDescription(final DataDescription descr) {
+		descr.getConstraints().forEach(this::checkExpression);
+	}
 }

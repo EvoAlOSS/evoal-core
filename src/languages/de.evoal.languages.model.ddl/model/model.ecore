@@ -43,9 +43,10 @@
       <details key="documentation" value="The scale of a variable or a data type."/>
     </eAnnotations>
     <eLiterals name="Nominal" literal="nominal"/>
-    <eLiterals name="Ordinal" literal="ordinal"/>
-    <eLiterals name="Cardinal" literal="cardinal"/>
-    <eLiterals name="Quotient" literal="quotient"/>
+    <eLiterals name="Ordinal" value="1" literal="ordinal"/>
+    <eLiterals name="Cardinal" value="2" literal="cardinal"/>
+    <eLiterals name="Quotient" value="3" literal="quotient"/>
+    <eLiterals name="Unknown" value="4" literal="unknown"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="RepresentationType">
     <eLiterals name="Real" literal="real"/>

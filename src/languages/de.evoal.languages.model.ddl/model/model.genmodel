@@ -17,6 +17,7 @@
       <genEnumLiterals ecoreEnumLiteral="model.ecore#//ScaleType/Ordinal"/>
       <genEnumLiterals ecoreEnumLiteral="model.ecore#//ScaleType/Cardinal"/>
       <genEnumLiterals ecoreEnumLiteral="model.ecore#//ScaleType/Quotient"/>
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//ScaleType/Unknown"/>
     </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="model.ecore#//RepresentationType">
       <genEnumLiterals ecoreEnumLiteral="model.ecore#//RepresentationType/Real"/>

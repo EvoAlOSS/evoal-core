@@ -39,7 +39,7 @@ public enum ScaleType implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	ORDINAL(0, "Ordinal", "ordinal"),
+	ORDINAL(1, "Ordinal", "ordinal"),
 
 	/**
 	 * The '<em><b>Cardinal</b></em>' literal object.
@@ -49,7 +49,7 @@ public enum ScaleType implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	CARDINAL(0, "Cardinal", "cardinal"),
+	CARDINAL(2, "Cardinal", "cardinal"),
 
 	/**
 	 * The '<em><b>Quotient</b></em>' literal object.
@@ -59,7 +59,15 @@ public enum ScaleType implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	QUOTIENT(0, "Quotient", "quotient");
+	QUOTIENT(3, "Quotient", "quotient"), /**
+	 * The '<em><b>Unknown</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #UNKNOWN_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	UNKNOWN(4, "Unknown", "unknown");
 
 	/**
 	 * The '<em><b>Nominal</b></em>' literal value.
@@ -81,7 +89,7 @@ public enum ScaleType implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int ORDINAL_VALUE = 0;
+	public static final int ORDINAL_VALUE = 1;
 
 	/**
 	 * The '<em><b>Cardinal</b></em>' literal value.
@@ -92,7 +100,7 @@ public enum ScaleType implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int CARDINAL_VALUE = 0;
+	public static final int CARDINAL_VALUE = 2;
 
 	/**
 	 * The '<em><b>Quotient</b></em>' literal value.
@@ -103,7 +111,18 @@ public enum ScaleType implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int QUOTIENT_VALUE = 0;
+	public static final int QUOTIENT_VALUE = 3;
+
+	/**
+	 * The '<em><b>Unknown</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #UNKNOWN
+	 * @model name="Unknown" literal="unknown"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int UNKNOWN_VALUE = 4;
 
 	/**
 	 * An array of all the '<em><b>Scale Type</b></em>' enumerators.
@@ -117,6 +136,7 @@ public enum ScaleType implements Enumerator {
 			ORDINAL,
 			CARDINAL,
 			QUOTIENT,
+			UNKNOWN,
 		};
 
 	/**
@@ -174,6 +194,10 @@ public enum ScaleType implements Enumerator {
 	public static ScaleType get(int value) {
 		switch (value) {
 			case NOMINAL_VALUE: return NOMINAL;
+			case ORDINAL_VALUE: return ORDINAL;
+			case CARDINAL_VALUE: return CARDINAL;
+			case QUOTIENT_VALUE: return QUOTIENT;
+			case UNKNOWN_VALUE: return UNKNOWN;
 		}
 		return null;
 	}
