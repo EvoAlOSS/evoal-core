@@ -67,16 +67,16 @@ public final class LanguageHelper {
             resource.load(resourceSet.getLoadOptions());
 
             for(final Resource r : resourceSet.getResources()) {
-                System.err.println("Checking resource " + r.getURI() + " for errors:");
+                log.info("Checking resource {} for errors:", r.getURI());
                 if (!r.getErrors().isEmpty()) {
                     for (Resource.Diagnostic diagnostic : r.getErrors()) {
-                        System.err.println("Error while processing '" + r.getURI() + "': " + diagnostic);
+                        log.error("Error while processing '{}}': {}", r.getURI(), diagnostic);
                     }
                 }
 
                 if (!r.getWarnings().isEmpty()) {
                     for (Resource.Diagnostic diagnostic : r.getWarnings()) {
-                        System.err.println("Warning while processing '" + r.getWarnings() + "': " + diagnostic);
+                        log.warn("Warning while processing '{}': {}", r.getURI(), diagnostic);
                     }
                 }
             }
