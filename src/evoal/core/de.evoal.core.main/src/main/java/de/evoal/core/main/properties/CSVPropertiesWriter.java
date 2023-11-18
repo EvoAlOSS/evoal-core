@@ -57,7 +57,7 @@ public class CSVPropertiesWriter implements PropertiesWriter {
             final String[] fileHeader = new String[specification.size()];
 
             for(int i = 0; i < fileHeader.length; ++i) {
-                fileHeader[i] = specification.getProperties().get(0).name();
+                fileHeader[i] = specification.getProperties().get(i).name();
             }
 
             csvWriter = new FileWriter(outputFile);
