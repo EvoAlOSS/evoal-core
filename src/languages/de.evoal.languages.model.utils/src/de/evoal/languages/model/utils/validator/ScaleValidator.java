@@ -122,13 +122,13 @@ public class ScaleValidator extends BaseSwitch<ScaleType> {
 			case LESS_THAN:
 			{
 				if(ScaleType.NOMINAL.equals(lastScale)) {
-					acceptor.acceptError("Cardinal scale for comparison is not allowed.", lastExpr, null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, null);
+					acceptor.acceptError("Nominal scale for comparison is not allowed.", lastExpr, null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, null);
 				}
 				
 				final AddOrSubtractExpression currentExpression = expr.getSubExpression();
 				final ScaleType currentScale = this.caseAddOrSubtractExpression(currentExpression);
 				if(ScaleType.NOMINAL.equals(currentScale)) {
-					acceptor.acceptError("Cardinal scale for comparison is not allowed.", currentExpression, null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, null);
+					acceptor.acceptError("Nominal scale for comparison is not allowed.", currentExpression, null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, null);
 				}
 
 				lastExpr = null;
