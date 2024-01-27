@@ -2,28 +2,19 @@ package de.evoal.core.main.properties;
 
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;
-import de.evoal.core.api.properties.PropertySpecification;
-import de.evoal.core.api.properties.io.PropertiesReader;
 import de.evoal.core.api.properties.io.PropertiesWriter;
-import de.evoal.core.api.statistics.writer.Column;
 import de.evoal.core.api.utils.EvoalIOException;
 import lombok.NonNull;
-import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.csv.CSVFormat;
-import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVPrinter;
-import org.apache.commons.csv.CSVRecord;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Named;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.charset.Charset;
 import java.text.NumberFormat;
-import java.text.ParseException;
-import java.util.Iterator;
 import java.util.Locale;
 
 @Slf4j
@@ -34,7 +25,7 @@ public class CSVPropertiesWriter implements PropertiesWriter {
 
     private FileWriter csvWriter;
 
-    private NumberFormat nf = NumberFormat.getInstance(Locale.US);
+    private final NumberFormat nf = NumberFormat.getInstance(Locale.US);
 
     private PropertiesSpecification specification;
 

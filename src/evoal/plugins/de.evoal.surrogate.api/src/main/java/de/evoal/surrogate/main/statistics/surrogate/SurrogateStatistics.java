@@ -29,7 +29,7 @@ public class SurrogateStatistics extends AbstractCandidateStatisticsWriter {
     /**
      * The predictive function used.
      */
-    //@Inject
+    @Inject
     protected SurrogateFunction predictive;
 
     @Inject
