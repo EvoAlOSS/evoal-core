@@ -40,21 +40,23 @@ module de.evoal.core.main {
 
     opens de.evoal.core; // export dl files.
 
+    exports de.evoal.core.main.constraints.constraint.utils;
+
     exports de.evoal.core.api.board;
     exports de.evoal.core.api.cdi;
     exports de.evoal.core.api.constraints.calculation;
-    exports de.evoal.core.main.constraints.constraint.utils;
     exports de.evoal.core.api.constraints.model;
     exports de.evoal.core.api.constraints.strategies;
     exports de.evoal.core.api.constraints.strategies.fitness;
+    exports de.evoal.core.api.constraints.strategies.fitness.internal;
     exports de.evoal.core.api.correlations;
     exports de.evoal.core.api.languages;
     exports de.evoal.core.api.languages.base;
+    exports de.evoal.core.api.optimisation;
     exports de.evoal.core.api.properties;
     exports de.evoal.core.api.properties.info;
     exports de.evoal.core.api.properties.io;
     exports de.evoal.core.api.properties.stream;
-    exports de.evoal.core.api.optimisation;
     exports de.evoal.core.api.statistics;
     exports de.evoal.core.api.statistics.io;
     exports de.evoal.core.api.statistics.writer;

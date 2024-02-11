@@ -2,8 +2,10 @@ package de.evoal.core.ea.main.alterer;
 
 import java.util.function.BiFunction;
 
+import de.evoal.core.api.cdi.BeanFactory;
 import de.evoal.core.api.optimisation.OptimisationValue;
 import de.evoal.core.ea.api.codec.CustomCodec;
+import de.evoal.core.ea.api.operators.AltererComponent;
 import de.evoal.core.ea.main.alterer.internal.MeanCorrelationAlterer;
 import de.evoal.core.ea.main.alterer.mutator.SingleBitFlipMutator;
 import de.evoal.core.ea.main.alterer.crossover.*;
@@ -72,7 +74,9 @@ public class AltererFactory {
 			case "uniform-crossover": return createUniformCrossover(config);
 			case "correlation-uniform-crossover": return createCorrelationUniformCrossover(config);
 		}
-		throw new IllegalStateException("Selector '" + name + "' is unknown.");
+
+
+		return BeanFactory.createComponent(AltererComponent.class, config);
 	}
 
 	private <G extends Gene<?, G>> Alterer<G, OptimisationValue> createUniformCrossover(final Instance config) {

@@ -4,7 +4,7 @@ import de.evoal.core.api.board.CoreBlackboardEntries;
 import de.evoal.core.api.cdi.BeanFactory;
 import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.core.api.utils.LanguageHelper;
-import de.evoal.core.ea.api.selector.SelectorComponent;
+import de.evoal.core.ea.api.operators.SelectorComponent;
 import de.evoal.core.ea.main.comparator.ParetoOptimisationValue;
 import de.evoal.languages.model.base.Instance;
 import io.jenetics.*;
@@ -41,7 +41,7 @@ public class SelectorFactory {
 		return create(name, config);
 	}
 
-	private <G extends Gene<?, G>, C extends Comparable<? super C>> Selector<G, C> create(final String name, final Instance config) {
+	public <G extends Gene<?, G>, C extends Comparable<? super C>> Selector<G, C> create(final String name, final Instance config) {
 		switch(name) {
 			case "elite-selector": return createEliteSelector(config);
 			case "monte-carlo-selector": return createMonteCarloSelector(config);
@@ -58,7 +58,7 @@ public class SelectorFactory {
 			case "roulette-wheel-selector": return createRouletteWheelSelector(config);
 		}
 
-		return BeanFactory.create(name, SelectorComponent.class).init(config);
+		return BeanFactory.createComponent(SelectorComponent.class, config);
 	}
 
 	private <G extends Gene<?, G>, C extends Comparable<? super C>> Selector<G, C> createNSGA2Selector(final Instance config) {
@@ -117,8 +117,7 @@ public class SelectorFactory {
 
 		if(nonEliteSelectorConfig == null) {
 			return new EliteSelector<>(count);
-		}
-		else {
+		} else {
 			Selector<G,C> nonEliteSelector = create(helper.lookup(nonEliteSelectorConfig, "name"), nonEliteSelectorConfig);
 			return new EliteSelector<>(count, nonEliteSelector);
 		}

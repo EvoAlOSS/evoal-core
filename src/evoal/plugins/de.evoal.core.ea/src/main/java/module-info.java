@@ -24,7 +24,7 @@ module de.evoal.core.ea {
     exports de.evoal.core.ea.api.cdi;
     exports de.evoal.core.ea.api.codec;
     exports de.evoal.core.ea.api.initial;
-    exports de.evoal.core.ea.api.selector;
+    exports de.evoal.core.ea.api.operators;
 
     opens de.evoal.core.ea;
 
@@ -39,5 +39,5 @@ module de.evoal.core.ea {
     opens de.evoal.core.ea.main.selector to weld.core.impl;
     opens de.evoal.core.ea.main.search to weld.core.impl;
     opens de.evoal.core.ea.main.statistics to weld.core.impl;
-    opens de.evoal.core.ea.api.selector to weld.core.impl;
+    opens de.evoal.core.ea.api.operators to weld.core.impl;
 }
