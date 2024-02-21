@@ -12,7 +12,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 @Dependent
-@Named("normal-distribution")
+@Named("de.evoal.generator.generator.normal-distribution")
 @Slf4j
 public class NormalDistribution extends RealDistributionBase {
 

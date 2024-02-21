@@ -27,8 +27,7 @@ public class ComponentProducer {
     private ConfigurationValueProducer producer;
 
     public <T extends EvoalComponent<T>> T create(final Class<T> clazz, final Instance configuration) {
-        return BeanFactory.createComponent(clazz, configuration)
-                .init(configuration);
+        return BeanFactory.createComponent(clazz, configuration);
     }
 
 

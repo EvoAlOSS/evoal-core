@@ -14,7 +14,7 @@ import javax.inject.Named;
 
 
 @Dependent
-@Named("problem-function")
+@Named("de.evoal.core.optimisation.problem-function")
 @Slf4j
 public class ProblemOptimisationFunction implements OptimisationFunction {
     @Inject
@@ -34,12 +34,7 @@ public class ProblemOptimisationFunction implements OptimisationFunction {
 
     @Override
     public OptimisationFunction init(final Instance config) {
-        final String fitnessName = problemConfiguration.getDefinition().getName();
-
-        log.info("Creating problem function {}.", fitnessName);
-
-        delegate = BeanFactory.create(fitnessName, OptimisationFunction.class)
-                              .init(problemConfiguration);
+        delegate = BeanFactory.createComponent(OptimisationFunction.class, problemConfiguration);
 
         return this;
     }

@@ -37,7 +37,7 @@ import java.util.random.RandomGenerator;
  *
  * @author Jeff Ridder
  */
-@Named("basic-mover")
+@Named("de.evoal.core.pso.optimisation.basic-mover")
 @Dependent
 public class BasicMover implements Mover {
     @Inject

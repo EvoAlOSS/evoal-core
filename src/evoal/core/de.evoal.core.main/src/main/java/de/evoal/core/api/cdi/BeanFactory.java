@@ -1,7 +1,10 @@
 package de.evoal.core.api.cdi;
 
+import de.evoal.core.api.utils.InitializationException;
 import de.evoal.core.api.utils.Requirements;
 import de.evoal.languages.model.base.Instance;
+import de.evoal.languages.model.dl.util.FQNProvider;
+import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.deltaspike.core.api.provider.BeanProvider;
 
@@ -17,7 +20,15 @@ public final class BeanFactory {
     private BeanFactory() {
     }
 
-    public static <T> T create(final Class<T> type) {
+    /**
+     * Creates bean of the given {@code type}.
+     *
+     * @param type Class of the bean type.
+     * @return A valid bean instance.
+     *
+     * @param <T> Type literal of the bean.
+     */
+    public static <T> @NonNull T create(final Class<T> type) {
         Requirements.requireNotNull(type);
 
         log.info("Creating bean of type {}.", type);
@@ -31,7 +42,7 @@ public final class BeanFactory {
         }
     }
 
-    private static <T> void logInstantiationError(Class<T> type, RuntimeException e) {
+    private static <T> void logInstantiationError(Class<T> type, Exception e) {
         final Set<Bean<T>> beans = BeanProvider.getBeanDefinitions(type, true, true);
 
         final String existingBeans = beans.stream().map(Bean::getName).collect(Collectors.joining(", "));
@@ -66,16 +77,17 @@ public final class BeanFactory {
         Requirements.requireNotNull(type);
         Requirements.requireNotNull(configuration);
 
-        final String name = configuration.getDefinition().getName();
+        final String name = new FQNProvider().get(configuration);
 
         log.info("Creating bean for instance of type {}.", name);
         try {
             return BeanProvider.getContextualReference(name, false, type)
                                .init(configuration);
-        } catch(final IllegalStateException | IllegalArgumentException e) {
+        } catch(final IllegalStateException | IllegalArgumentException | InitializationException e) {
             log.error("Failed to create contextual reference of type '{}' with name '{}'.", type, name);
             logInstantiationError(type, e);
-            throw e;
+
+            throw new RuntimeException("Failed to instanciate component due to an error.", e);
         }
     }
 

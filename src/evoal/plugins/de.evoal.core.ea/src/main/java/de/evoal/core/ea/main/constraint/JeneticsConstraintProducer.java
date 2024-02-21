@@ -55,8 +55,7 @@ public class JeneticsConstraintProducer {
                         final Instance repairConfiguration = helper.lookup(handlerConfiguration, "constraint-handling.repair-strategy");
 
                         final CalculationStrategy cStrategy = factory.create(s);
-                        final RepairStrategy rStrategy = BeanFactory.create(repairConfiguration.getDefinition().getName(), RepairStrategy.class)
-                                                                    .init(repairConfiguration);
+                        final RepairStrategy rStrategy = BeanFactory.createComponent(RepairStrategy.class, repairConfiguration);
 
                         return new JeneticsConstraintStrategy(cStrategy, codec, function, optimisationSpec, rStrategy);
                     })

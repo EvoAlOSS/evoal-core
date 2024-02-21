@@ -4,6 +4,7 @@ import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.properties.PropertySpecification;
 import de.evoal.core.api.utils.InitializationException;
+import de.evoal.languages.model.base.Instance;
 import de.evoal.languages.model.ddl.DataDescription;
 import de.evoal.languages.model.generator.Step;
 import de.evoal.languages.model.instance.DataReference;

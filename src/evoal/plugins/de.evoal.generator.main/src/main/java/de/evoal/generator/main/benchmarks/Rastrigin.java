@@ -13,7 +13,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 @Dependent
-@Named("rastrigin")
+@Named("de.evoal.generator.generator.rastrigin")
 public class Rastrigin extends AbstractGeneratorFunction {
     @Inject
     private ExpressionEvaluator evaluator;

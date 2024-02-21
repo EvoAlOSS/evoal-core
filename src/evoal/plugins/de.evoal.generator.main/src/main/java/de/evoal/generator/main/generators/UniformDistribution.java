@@ -10,7 +10,7 @@ import javax.enterprise.context.Dependent;
 import javax.inject.Named;
 
 @Dependent
-@Named("uniform-distribution")
+@Named("de.evoal.generator.generator.uniform-distribution")
 public class UniformDistribution extends RealDistributionBase {
 	public GeneratorFunction init(final Step configuration) throws InitializationException {
 		super.init(configuration);

@@ -15,7 +15,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 @Dependent
-@Named("ackley")
+@Named("de.evoal.generator.generator.ackley")
 @Slf4j
 public class Ackley extends AbstractGeneratorFunction {
     private double a = 20;

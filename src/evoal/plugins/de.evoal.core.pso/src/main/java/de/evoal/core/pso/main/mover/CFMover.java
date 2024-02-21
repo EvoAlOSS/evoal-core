@@ -38,7 +38,7 @@ import java.util.random.RandomGenerator;
  * @author Jeff Ridder
  */
 @Dependent
-@Named("constriction-factor-mover")
+@Named("de.evoal.core.pso.optimisation.constriction-factor-mover")
 public class CFMover implements Mover {
     @Inject
     private PropertiesBoundaries boundaries;

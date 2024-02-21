@@ -9,7 +9,7 @@ import lombok.NonNull;
 import javax.enterprise.context.Dependent;
 import javax.inject.Named;
 
-@Named("multivariate-normal-distribution")
+@Named("de.evoal.generator.generator.multivariate-normal-distribution")
 @Dependent
 public class MultivariateNormalDistribution extends MultivariateRealDistributionBase {
 

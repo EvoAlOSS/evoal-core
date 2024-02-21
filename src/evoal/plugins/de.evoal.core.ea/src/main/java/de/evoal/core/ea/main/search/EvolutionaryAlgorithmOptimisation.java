@@ -38,7 +38,7 @@ import javax.inject.Named;
 
 @Slf4j
 @Dependent
-@Named("evolutionary-algorithm")
+@Named("de.evoal.core.ea.optimisation.evolutionary-algorithm")
 public class EvolutionaryAlgorithmOptimisation implements OptimisationAlgorithm {
 	@Inject
 	private Blackboard board;

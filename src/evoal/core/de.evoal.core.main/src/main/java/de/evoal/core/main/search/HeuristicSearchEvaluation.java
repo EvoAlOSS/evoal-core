@@ -124,9 +124,8 @@ public class HeuristicSearchEvaluation implements MainClass {
             board.bind(CoreBlackboardEntries.EVALUATION_RUN, run);
             context.bindColumn(runColumn, i);
 
-            BeanFactory.create(OptimisationAlgorithm.class)
-                    .init(algorithmConfiguration)
-                    .run();
+            BeanFactory.createComponent(OptimisationAlgorithm.class, algorithmConfiguration)
+                       .run();
         }
     }
 

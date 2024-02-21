@@ -10,7 +10,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 @Dependent
-@Named("weighted-sum")
+@Named("de.evoal.core.optimisation.weighted-sum")
 public class WeightedSumComparator implements OptimisationValueComparator {
     private double [] weights;
 

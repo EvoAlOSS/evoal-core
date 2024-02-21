@@ -28,7 +28,6 @@ public class InitialCandidatesFactory {
 	 */
 	@Produces @Dependent @Named("initial")
 	public InitialCandidatesProvider create() {
-		return BeanFactory.create(initialisation.getDefinition().getName(), InitialCandidatesProvider.class)
-						  .init(initialisation);
+		return BeanFactory.createComponent(InitialCandidatesProvider.class, initialisation);
 	}
 }

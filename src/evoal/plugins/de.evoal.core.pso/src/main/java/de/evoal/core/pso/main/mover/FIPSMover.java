@@ -39,7 +39,7 @@ import java.util.random.RandomGenerator;
  * @author Jeff Ridder
  */
 @Slf4j
-@Dependent  @Named("fips-mover")
+@Dependent  @Named("de.evoal.core.pso.optimisation.fips-mover")
 public class FIPSMover implements Mover {
     @Inject
     private PropertiesBoundaries boundaries;

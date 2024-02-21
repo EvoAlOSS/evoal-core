@@ -8,7 +8,7 @@ import javax.enterprise.context.Dependent;
 import javax.inject.Named;
 
 @Dependent
-@Named("numeric-comparator")
+@Named("de.evoal.core.optimisation.numeric-comparator")
 public class NumericOptimisationComparator implements OptimisationValueComparator {
     @Override
     public OptimisationValue toValue(final double[] fitnessValues) {

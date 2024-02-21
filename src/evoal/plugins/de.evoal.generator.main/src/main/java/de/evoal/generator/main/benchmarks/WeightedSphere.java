@@ -8,7 +8,7 @@ import javax.enterprise.context.Dependent;
 import javax.inject.Named;
 
 @Dependent
-@Named("weighted-sphere")
+@Named("de.evoal.generator.generator.weighted-sphere")
 public class WeightedSphere extends AbstractGeneratorFunction {
     @Override
     public Properties apply(final Properties in) {

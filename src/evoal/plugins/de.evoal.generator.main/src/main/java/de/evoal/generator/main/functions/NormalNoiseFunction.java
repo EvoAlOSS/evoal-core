@@ -17,7 +17,7 @@ import javax.enterprise.context.Dependent;
 import javax.inject.Named;
 
 @Dependent
-@Named("normally-distributed-noise")
+@Named("de.evoal.generator.generator.normally-distributed-noise")
 public class NormalNoiseFunction extends AbstractGeneratorFunction {
 
 	/**

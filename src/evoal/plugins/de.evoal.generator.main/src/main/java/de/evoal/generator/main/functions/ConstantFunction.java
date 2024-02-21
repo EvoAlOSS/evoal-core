@@ -12,7 +12,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 @Dependent
-@Named("constants")
+@Named("de.evoal.generator.generator.constants")
 public class ConstantFunction extends AbstractGeneratorFunction {
 
 	private double [] constants = {};

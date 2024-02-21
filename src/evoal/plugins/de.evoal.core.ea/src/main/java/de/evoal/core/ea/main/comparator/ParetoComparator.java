@@ -9,7 +9,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
 
 @ApplicationScoped
-@Named("pareto")
+@Named("de.evoal.core.ea.optimisation.pareto")
 public class ParetoComparator implements OptimisationValueComparator {
     @Override
     public OptimisationValue toValue(final double[] optimisationValues) {

@@ -8,6 +8,7 @@ import de.evoal.core.api.properties.info.PropertiesBoundaries;
 import de.evoal.languages.model.base.Instance;
 import lombok.extern.slf4j.Slf4j;
 
+import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -15,6 +16,8 @@ import java.util.random.RandomGenerator;
 import java.util.stream.Stream;
 
 @Slf4j
+@Dependent
+@Named("de.evoal.core.optimisation.random-population")
 public class RandomInitialCandidates implements InitialCandidatesProvider {
 
     @Inject
@@ -24,12 +27,6 @@ public class RandomInitialCandidates implements InitialCandidatesProvider {
     private PropertiesSpecification searchSpaceSpecification;
 
     private final RandomGenerator randomness = RandomGenerator.getDefault();
-
-    @Override
-    public InitialCandidatesProvider init(final Instance configuration) {
-        // this is not the function you are looking for.
-        return this;
-    }
 
     @Override
     public Stream<Properties> create() {

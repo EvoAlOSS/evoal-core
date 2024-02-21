@@ -50,9 +50,8 @@ public class HeuristicSearchMain implements MainClass {
 		board.bind(CoreBlackboardEntries.EVALUATION_OUTPUT_FOLDER, outputBaseDir);
 		board.bind(CoreBlackboardEntries.EVALUATION_RUN, "0");
 
-		BeanFactory.create(algorithmConfiguration.getDefinition().getName(), OptimisationAlgorithm.class)
-				   .init(algorithmConfiguration)
-				   .run();
+		BeanFactory.createComponent(OptimisationAlgorithm.class, algorithmConfiguration)
+				.run();
 	}
 
 	private static void setTarget(final Stream<Pair<Properties, Properties>> targets, final Blackboard board) {

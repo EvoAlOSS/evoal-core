@@ -37,10 +37,8 @@ public class FitnessFactory {
 
 		log.info("Creating fitness function {} and using comparator {}.", fitnessName, comparatorName);
 
-		final OptimisationFunction ff = BeanFactory.create(fitnessName, OptimisationFunction.class)
-				                               .init(fitnessConfig);
-		final OptimisationValueComparator cmp = BeanFactory.create(comparatorName, OptimisationValueComparator.class)
-				                                  .init(comparatorConfig);
+		final OptimisationFunction ff = BeanFactory.createComponent(OptimisationFunction.class, fitnessConfig);
+		final OptimisationValueComparator cmp = BeanFactory.createComponent(OptimisationValueComparator.class, comparatorConfig);
 
 		return new JeneticsFitnessFunction() {
 			@Override

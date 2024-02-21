@@ -8,7 +8,7 @@ import javax.enterprise.context.Dependent;
 import javax.inject.Named;
 
 @Dependent
-@Named("rosenbrock")
+@Named("de.evoal.generator.generator.rosenbrock")
 public class Rosenbrock extends AbstractGeneratorFunction {
     @Override
     public Properties apply(final Properties in) {

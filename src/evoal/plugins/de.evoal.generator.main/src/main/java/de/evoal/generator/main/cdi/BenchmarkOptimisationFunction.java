@@ -24,7 +24,7 @@ import javax.inject.Named;
 import java.util.List;
 
 @Dependent
-@Named("benchmark-function")
+@Named("de.evoal.generator.optimisation.benchmark-function")
 public class BenchmarkOptimisationFunction implements OptimisationFunction {
 
     @Inject

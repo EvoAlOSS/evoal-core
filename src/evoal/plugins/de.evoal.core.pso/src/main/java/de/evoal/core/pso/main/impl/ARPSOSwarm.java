@@ -35,7 +35,7 @@ import javax.inject.Named;
  * @author Jeff Ridder
  */
 @Dependent
-@Named("arpso-swarm")
+@Named("de.evoal.core.pso.optimisation.arpso-swarm")
 @Slf4j
 public class ARPSOSwarm extends DefaultSwarm {
     @Inject

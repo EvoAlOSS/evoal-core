@@ -16,8 +16,7 @@ public abstract class OptimisationFunctionDecorator implements OptimisationFunct
     public OptimisationFunction init(final Instance config) {
         final Instance decoratedConfig = helper.lookup(config, "function");
 
-        decoratedFunction = BeanFactory.create(decoratedConfig.getDefinition().getName(), OptimisationFunction.class);
-        decoratedFunction.init(decoratedConfig);
+        decoratedFunction = BeanFactory.createComponent(OptimisationFunction.class, decoratedConfig);
 
         return this;
     }

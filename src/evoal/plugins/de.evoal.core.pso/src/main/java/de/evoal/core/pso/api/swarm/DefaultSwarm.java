@@ -38,12 +38,13 @@ import javax.inject.Named;
 import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 /**
  *  A collection of particles.
  */
 @Dependent
-@Named("default-swarm")
+@Named("de.evoal.core.pso.optimisation.default-swarm")
 @Slf4j
 public class DefaultSwarm implements Swarm {
 
@@ -91,7 +92,7 @@ public class DefaultSwarm implements Swarm {
         log.info("Initializing swarm with {} members.", sizeOfPopulation);
         final AtomicInteger counter = new AtomicInteger();
 
-        particles = provider.create()
+        particles = ((Stream<Properties>)provider.create())
             .limit(sizeOfPopulation)
             .map(candidate -> {
                 final OptimisationValue ov = comparator.toValue(optimisationFunction.apply(candidate));
