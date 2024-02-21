@@ -1,4 +1,4 @@
-module de.evoal.surrogate.svr {
+module de.evoal.surrogate.smile {
     requires lombok;
 
     requires org.slf4j;
@@ -15,7 +15,9 @@ module de.evoal.surrogate.svr {
     requires de.evoal.core.main;
     requires de.evoal.surrogate.api;
 
-    opens de.evoal.surrogate.svr;
+    opens de.evoal.surrogate.smile;
 
-    exports de.evoal.surrogate.svr to de.evoal.approximative.interval;
+    exports de.evoal.surrogate.smile.svr to de.evoal.approximative.interval;
+
+    opens de.evoal.surrogate.smile.svr;
 }

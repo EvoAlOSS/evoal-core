@@ -1,4 +1,4 @@
-package de.evoal.surrogate.svr;
+package de.evoal.surrogate.smile.svr;
 
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;

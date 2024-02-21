@@ -1,9 +1,12 @@
-package de.evoal.surrogate.svr;
+package de.evoal.surrogate.smile.svr;
 
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.surrogate.api.configuration.Parameter;
 import de.evoal.surrogate.api.configuration.PartialFunctionConfiguration;
 import de.evoal.surrogate.api.function.PartialSurrogateFunction;
+import de.evoal.surrogate.smile.svr.KernelBasedSVRFunction;
+import de.evoal.surrogate.smile.svr.KernelBasedSVRFunctionFactory;
+import de.evoal.surrogate.smile.svr.KernelHelper;
 import lombok.extern.slf4j.Slf4j;
 import smile.regression.KernelMachine;
 
@@ -11,11 +14,11 @@ import javax.enterprise.context.Dependent;
 import javax.inject.Named;
 
 @Dependent
-@Named("polynomial-svr")
+@Named("thin-plate-spine-svr")
 @Slf4j
-public class PolynomialKernelSVRFunctionFactory extends KernelBasedSVRFunctionFactory {
-	public PolynomialKernelSVRFunctionFactory() {
-		super(KernelHelper::toPolynomialKernel, "polynomial");
+public class ThinPlateSplineKernelSVRFunctionFactory extends KernelBasedSVRFunctionFactory {
+	public ThinPlateSplineKernelSVRFunctionFactory() {
+		super(KernelHelper::toThinPlateSplineKernel, "thin-plate-spine-smile");
 	}
 
 	@Override
@@ -29,6 +32,7 @@ public class PolynomialKernelSVRFunctionFactory extends KernelBasedSVRFunctionFa
 										   .map(Double.class::cast)
 										   .findFirst()
 										   .orElse(0.1);
+
 		final double[] sourceMeans = (double [])configuration.getState()
 				.stream()
 				.filter(p -> "kernel-source-means".equals(p.getName()))
@@ -54,7 +58,6 @@ public class PolynomialKernelSVRFunctionFactory extends KernelBasedSVRFunctionFa
 				.findFirst()
 				.get();
 
-
-		return new KernelBasedSVRFunction(configuration, regression, "polynomial", requiredInput, actualInput, producedOutput, margin, sourceMeans, sourceSDs, targetMeans, targetSDs);
+		return new KernelBasedSVRFunction(configuration, regression, "thin-plate-spine-smile", requiredInput, actualInput, producedOutput, margin, sourceMeans, sourceSDs, targetMeans, targetSDs);
 	}
 }

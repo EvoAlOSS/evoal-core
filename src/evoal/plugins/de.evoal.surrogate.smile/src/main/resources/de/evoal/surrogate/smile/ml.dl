@@ -1,6 +1,6 @@
 import "definitions" from de.evoal.surrogate.ml;
 
-module de.evoal.surrogate.svr.ml {
+module de.evoal.surrogate.smile.ml {
 	abstract type 'epsilon-svr' extends surrogate {
 		/**
 	     * Some totally <b>accurate</b> description of a very soft margin.

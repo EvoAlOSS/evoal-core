@@ -1,4 +1,4 @@
-package de.evoal.surrogate.svr;
+package de.evoal.surrogate.smile.svr;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;

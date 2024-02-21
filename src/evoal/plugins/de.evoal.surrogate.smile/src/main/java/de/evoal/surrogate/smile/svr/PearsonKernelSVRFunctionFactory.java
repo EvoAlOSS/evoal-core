@@ -1,9 +1,12 @@
-package de.evoal.surrogate.svr;
+package de.evoal.surrogate.smile.svr;
 
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.surrogate.api.configuration.Parameter;
 import de.evoal.surrogate.api.configuration.PartialFunctionConfiguration;
 import de.evoal.surrogate.api.function.PartialSurrogateFunction;
+import de.evoal.surrogate.smile.svr.KernelBasedSVRFunction;
+import de.evoal.surrogate.smile.svr.KernelBasedSVRFunctionFactory;
+import de.evoal.surrogate.smile.svr.KernelHelper;
 import lombok.extern.slf4j.Slf4j;
 import smile.regression.KernelMachine;
 
@@ -11,11 +14,11 @@ import javax.enterprise.context.Dependent;
 import javax.inject.Named;
 
 @Dependent
-@Named("thin-plate-spine-svr")
+@Named("pearson-svr")
 @Slf4j
-public class ThinPlateSplineKernelSVRFunctionFactory extends KernelBasedSVRFunctionFactory {
-	public ThinPlateSplineKernelSVRFunctionFactory() {
-		super(KernelHelper::toThinPlateSplineKernel, "thin-plate-spine-svr");
+public class PearsonKernelSVRFunctionFactory extends KernelBasedSVRFunctionFactory {
+	public PearsonKernelSVRFunctionFactory() {
+		super(KernelHelper::toPearsonKernel, "pearson");
 	}
 
 	@Override
@@ -55,6 +58,6 @@ public class ThinPlateSplineKernelSVRFunctionFactory extends KernelBasedSVRFunct
 				.findFirst()
 				.get();
 
-		return new KernelBasedSVRFunction(configuration, regression, "thin-plate-spine-svr", requiredInput, actualInput, producedOutput, margin, sourceMeans, sourceSDs, targetMeans, targetSDs);
+		return new KernelBasedSVRFunction(configuration, regression, "pearson", requiredInput, actualInput, producedOutput, margin, sourceMeans, sourceSDs, targetMeans, targetSDs);
 	}
 }

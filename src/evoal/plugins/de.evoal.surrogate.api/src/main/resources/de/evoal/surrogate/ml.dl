@@ -1,5 +1,9 @@
 module de.evoal.surrogate.ml {
-	abstract type surrogate {}
+    /**
+     * Base type for all surrogate functions.
+     */
+	abstract type surrogate {
+	}
 	
 	def void 'cross-validation'(int times);
 	def void 'R²'();

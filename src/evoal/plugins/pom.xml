@@ -24,7 +24,7 @@
 
 		<module>de.evoal.surrogate.api</module>
 		<module>de.evoal.surrogate.simple</module>
-		<module>de.evoal.surrogate.svr</module>
+		<module>de.evoal.surrogate.smile</module>
 
 		<module>de.evoal.approximative.density</module>
 	</modules>

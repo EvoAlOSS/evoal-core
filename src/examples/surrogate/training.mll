@@ -1,5 +1,5 @@
 import "definitions" from de.evoal.surrogate.ml;
-import "definitions" from de.evoal.surrogate.svr.ml;
+import "definitions" from de.evoal.surrogate.smile.ml;
 
 import "data" from surrogate;
 

@@ -1,4 +1,4 @@
-package de.evoal.surrogate.svr;
+package de.evoal.surrogate.smile.svr;
 
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.surrogate.api.configuration.Parameter;
@@ -11,11 +11,11 @@ import javax.enterprise.context.Dependent;
 import javax.inject.Named;
 
 @Dependent
-@Named("hyperbolic-tangent-svr")
+@Named("hellinger-svr")
 @Slf4j
-public class HyperbolicTangentKernelSVRFunctionFactory extends KernelBasedSVRFunctionFactory {
-	public HyperbolicTangentKernelSVRFunctionFactory() {
-		super(KernelHelper::toHyperbolicTangentKernel, "hyperbolic-tangent");
+public class HellingerKernelSVRFunctionFactory extends KernelBasedSVRFunctionFactory {
+	public HellingerKernelSVRFunctionFactory() {
+		super(KernelHelper::toHellingerKernel, "hellinger");
 	}
 
 	@Override
@@ -23,12 +23,13 @@ public class HyperbolicTangentKernelSVRFunctionFactory extends KernelBasedSVRFun
 		final KernelMachine<double []> regression = KernelHelper.fromParameters(configuration.getParameters(), configuration.getState());
 
 		final double margin = configuration.getParameters()
-										   .stream()
-										   .filter(p -> KernelHelper.SOFT_MARGIN_PARAMETER.equals(p.getName()))
-										   .map(Parameter::getValue)
-										   .map(Double.class::cast)
-										   .findFirst()
-										   .orElse(0.1);
+				.stream()
+				.filter(p -> KernelHelper.SOFT_MARGIN_PARAMETER.equals(p.getName()))
+				.map(Parameter::getValue)
+				.map(Double.class::cast)
+				.findFirst()
+				.orElse(0.1);
+
 		final double[] sourceMeans = (double [])configuration.getState()
 				.stream()
 				.filter(p -> "kernel-source-means".equals(p.getName()))
@@ -54,7 +55,6 @@ public class HyperbolicTangentKernelSVRFunctionFactory extends KernelBasedSVRFun
 				.findFirst()
 				.get();
 
-
-		return new KernelBasedSVRFunction(configuration, regression, "hyperbolic-tangent", requiredInput, actualInput, producedOutput, margin, sourceMeans, sourceSDs, targetMeans, targetSDs);
+		return new KernelBasedSVRFunction(configuration, regression, "hellinger", requiredInput, actualInput, producedOutput, margin, sourceMeans, sourceSDs, targetMeans, targetSDs);
 	}
 }

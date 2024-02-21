@@ -9,8 +9,8 @@
 		<version>${revision}</version>
 	</parent>
 
-	<artifactId>surrogate.svr</artifactId>
-	<name>EvoAl - Plugins - Surrogate - SVR</name>
+	<artifactId>surrogate.smile</artifactId>
+	<name>EvoAl - Plugins - Surrogate - SMILE</name>
 
 	<dependencies>
 		<dependency>

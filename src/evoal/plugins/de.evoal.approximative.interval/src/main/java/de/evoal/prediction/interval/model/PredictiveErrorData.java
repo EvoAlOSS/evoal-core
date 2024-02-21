@@ -6,7 +6,7 @@ import de.evoal.surrogate.api.configuration.Parameter;
 import de.evoal.surrogate.api.configuration.PartialFunctionConfiguration;
 import de.evoal.surrogate.api.function.FunctionCombiner;
 import de.evoal.surrogate.api.function.SurrogateFunction;
-import de.evoal.surrogate.svr.KernelBasedSVRFunction;
+import de.evoal.surrogate.smile.KernelBasedSVRFunction;
 
 import java.util.List;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package de.evoal.surrogate.svr;
+package de.evoal.surrogate.smile.svr;
 
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.surrogate.api.configuration.Parameter;
@@ -11,11 +11,11 @@ import javax.enterprise.context.Dependent;
 import javax.inject.Named;
 
 @Dependent
-@Named("linear-svr")
+@Named("laplacian-svr")
 @Slf4j
-public class LinearKernelSVRFunctionFactory extends KernelBasedSVRFunctionFactory {
-	public LinearKernelSVRFunctionFactory() {
-		super(KernelHelper::toLinearKernel, "linear");
+public class LaplacianKernelSVRFunctionFactory extends KernelBasedSVRFunctionFactory {
+	public LaplacianKernelSVRFunctionFactory() {
+		super(KernelHelper::toLaplacianKernel, "laplacian");
 	}
 
 	@Override
@@ -23,13 +23,12 @@ public class LinearKernelSVRFunctionFactory extends KernelBasedSVRFunctionFactor
 		final KernelMachine<double []> regression = KernelHelper.fromParameters(configuration.getParameters(), configuration.getState());
 
 		final double margin = configuration.getParameters()
-				.stream()
-				.filter(p -> KernelHelper.SOFT_MARGIN_PARAMETER.equals(p.getName()))
-				.map(Parameter::getValue)
-				.map(Double.class::cast)
-				.findFirst()
-				.orElse(0.1);
-
+										   .stream()
+										   .filter(p -> KernelHelper.SOFT_MARGIN_PARAMETER.equals(p.getName()))
+										   .map(Parameter::getValue)
+										   .map(Double.class::cast)
+										   .findFirst()
+										   .orElse(0.1);
 		final double[] sourceMeans = (double [])configuration.getState()
 				.stream()
 				.filter(p -> "kernel-source-means".equals(p.getName()))
@@ -55,6 +54,7 @@ public class LinearKernelSVRFunctionFactory extends KernelBasedSVRFunctionFactor
 				.findFirst()
 				.get();
 
-		return new KernelBasedSVRFunction(configuration, regression, "linear", requiredInput, actualInput, producedOutput, margin, sourceMeans, sourceSDs, targetMeans, targetSDs);
+
+		return new KernelBasedSVRFunction(configuration, regression, "laplacian", requiredInput, actualInput, producedOutput, margin, sourceMeans, sourceSDs, targetMeans, targetSDs);
 	}
 }

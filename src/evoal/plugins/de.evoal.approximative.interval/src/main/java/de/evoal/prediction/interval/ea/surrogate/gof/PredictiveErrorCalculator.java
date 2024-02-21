@@ -15,7 +15,7 @@ import de.evoal.surrogate.api.configuration.SurrogateConfiguration;
 import de.evoal.surrogate.api.function.FunctionCombiner;
 import de.evoal.surrogate.api.function.PartialSurrogateFunction;
 import de.evoal.surrogate.api.function.SurrogateFunction;
-import de.evoal.surrogate.svr.KernelBasedSVRFunction;
+import de.evoal.surrogate.smile.KernelBasedSVRFunction;
 import org.apache.commons.math3.util.Pair;
 import smile.math.matrix.Matrix;
 
