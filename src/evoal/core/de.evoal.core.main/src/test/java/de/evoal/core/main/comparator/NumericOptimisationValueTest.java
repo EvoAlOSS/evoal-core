@@ -22,6 +22,21 @@ public class NumericOptimisationValueTest {
     }
 
     @Test
+    public void testCompareToNull() {
+        WeightedSumOptimisationValue testee = WeightedSumOptimisationValue.of(new double [] {2.0, 3.0}, new double [] {42.0, 12.0});
+
+        Assertions.assertThrows(NullPointerException.class, () -> testee.compareTo(null));
+    }
+
+    @Test
+    public void testCompareToSelf() {
+        WeightedSumOptimisationValue testee = WeightedSumOptimisationValue.of(new double [] {2.0, 3.0}, new double [] {42.0, 12.0});
+
+        int result = testee.compareTo(testee);
+        Assertions.assertEquals(0, result);
+    }
+
+    @Test
     public void testCompareToOptimisationValueSameContent() {
         double [] fitness = {42.0};
 

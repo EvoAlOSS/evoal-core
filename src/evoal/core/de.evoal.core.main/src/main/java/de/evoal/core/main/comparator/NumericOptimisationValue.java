@@ -24,7 +24,7 @@ public class NumericOptimisationValue extends Number implements OptimisationValu
     }
 
     @Override
-    public int compareTo(final OptimisationValue other) {
+    public int compareTo(final @NonNull OptimisationValue other) {
         if(!(other instanceof NumericOptimisationValue)) {
             throw new IllegalArgumentException("Only allowed to compare NumericOptimisationValue");
         }

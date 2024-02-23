@@ -18,12 +18,12 @@ public class WeightedSumComparator implements OptimisationValueComparator {
     private ExpressionEvaluator evaluator;
 
     @Override
-    public OptimisationValue toValue(final double[] fitnessValues) {
+    public WeightedSumOptimisationValue toValue(final double[] fitnessValues) {
         return WeightedSumOptimisationValue.of(weights, fitnessValues);
     }
 
     @Override
-    public OptimisationValueComparator init(final Instance config) {
+    public WeightedSumComparator init(final Instance config) {
         weights = evaluator.attributeToDoubleArray(config, "weights");
 
         return this;

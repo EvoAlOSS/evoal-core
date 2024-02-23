@@ -30,7 +30,7 @@ public class WeightedSumOptimisationValue implements OptimisationValue {
     }
 
     @Override
-    public int compareTo(final OptimisationValue other) {
+    public int compareTo(final @NonNull OptimisationValue other) {
         if(!(other instanceof WeightedSumOptimisationValue)) {
             throw new IllegalArgumentException("Only allowed to compare WeightedSumFitnessValue");
         }
@@ -48,7 +48,7 @@ public class WeightedSumOptimisationValue implements OptimisationValue {
 
     @Override
     public String toString() {
-    	return "WeightedSum [fit=" + Arrays.toString(fitnessValues) + ", w" + Arrays.toString(normalizedWeights) + "]";
+    	return "WeightedSum [fit=" + Arrays.toString(fitnessValues) + ", w=" + Arrays.toString(normalizedWeights) + "]";
     }
 
     @Override
