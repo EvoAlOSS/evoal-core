@@ -107,6 +107,7 @@ evoal:unit:
     - docker
   image: $EVOAL_IMAGE
   script:
+    - mvn $MAVEN_CLI_OPTS -f $EVOAL_POM -Dbranch=$CI_COMMIT_REF_NAME -DskipTests package
     - ci/create-release.sh
     - ci/regression-coverage.sh
     - mvn $MAVEN_CLI_OPTS -f $EVOAL_POM -Dbranch=$CI_COMMIT_REF_NAME -Pjacoco verify
