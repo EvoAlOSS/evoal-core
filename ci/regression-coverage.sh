@@ -1,3 +1,6 @@
+#!/bin/bash
+echo "Shell is $SH"
+
 JACOCO_PATH=/Users/berber/bin/jacoco
 
 echo "Downloading Jacoco-Agent"
