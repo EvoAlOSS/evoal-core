@@ -9,7 +9,7 @@ variables:
 
   # custom docker image for building our Java stuff
   ECLIPSE_IMAGE: gitlab.informatik.uni-bremen.de:5005/evoal/source/evoal-core/evoal/eclipse-mirror:2022-12
-  EVOAL_IMAGE: library/maven:3.8.6-eclipse-temurin-17-alpine
+  EVOAL_IMAGE: gitlab.informatik.uni-bremen.de:5005/evoal/source/evoal-core/evoal/maven-with-bash:3.8.6
   SECURE_LOG_LEVEL: "debug"
 
   ######################

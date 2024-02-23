@@ -1,0 +1,2 @@
+docker build --platform linux/amd64 -t gitlab.informatik.uni-bremen.de:5005/evoal/source/evoal-core/evoal/maven-with-bash:3.8.6 .
+docker push gitlab.informatik.uni-bremen.de:5005/evoal/source/evoal-core/evoal/maven-with-bash:3.8.6
