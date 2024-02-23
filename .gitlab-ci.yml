@@ -105,8 +105,8 @@ evoal:compile:
     when: on_success
     expire_in: "30 days"
     paths:
-      - src/evoal/core/*/target
-      - src/evoal/plugins/*/target
+      - src/evoal/core/*/target/
+      - src/evoal/plugins/*/target/
       - src/languages/de.evoal.languages.releng.site/target/de.evoal.languages.releng.site-*.zip
 
 
