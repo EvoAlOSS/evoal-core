@@ -16,7 +16,7 @@ for EXAMPLE in *; do
     pushd $EXAMPLE
     for SCRIPT in *sh; do
         echo "Executing example: $SCRIPT"
-        ./$SCRIPT
+        bash ./$SCRIPT
     done
     popd
 
