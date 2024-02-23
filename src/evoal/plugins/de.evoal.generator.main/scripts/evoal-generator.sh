@@ -13,6 +13,9 @@ fi
 
 cd "$1" || exit 1
 
+POSITIONAL_ARGUMENTS=( "$@" )
+POSITIONAL_ARGUMENTS=("${POSITIONAL_ARGUMENTS[@]:2}")
+
 declare -a JVM_ARGUMENTS=()
 
 if [ ${EVOAL_VM+x} ]; then
@@ -27,8 +30,10 @@ if [ ${EVOAL_LOGGING+x} ]; then
   POSITIONAL_ARGUMENTS+=( "-Bcore:logging=$EVOAL_LOGGING" )
 fi
 
+
 set -x
-java ${CLASSPATH[@]} \
+java ${JVM_ARGUMENTS[@]} \
+     ${CLASSPATH[@]} \
      ${POSITIONAL_ARGUMENTS[@]} \
      -Bcore:main=data-generator \
      "-Bgenerator:configuration-file=$2"

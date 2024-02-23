@@ -6,15 +6,34 @@ fi
 
 source $EVOAL_HOME/bin/paths.env
 
-if [ "$#" -ne 3 ]; then
+if [ "$#" -lt 3 ]; then
     echo "Usage: $0 <execution-folder> <input.arff> <output.ddl>"
     exit 1
 fi
 
 cd "$1" || exit 1
 
+POSITIONAL_ARGUMENTS=( "$@" )
+POSITIONAL_ARGUMENTS=("${POSITIONAL_ARGUMENTS[@]:3}")
+
+declare -a JVM_ARGUMENTS=()
+
+if [ ${EVOAL_VM+x} ]; then
+  JVM_ARGUMENTS+=( "${EVOAL_VM[@]}" )
+fi
+
+if [ ${EVOAL_DEBUG+x} ]; then
+  JVM_ARGUMENTS+=( "-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=1044" )
+fi
+
+if [ ${EVOAL_LOGGING+x} ]; then
+  POSITIONAL_ARGUMENTS+=( "-Bcore:logging=$EVOAL_LOGGING" )
+fi
+
 set -x
-java ${CLASSPATH[@]} \
+java ${JVM_ARGUMENTS[@]} \
+     ${CLASSPATH[@]} \
+     ${POSITIONAL_ARGUMENTS[@]} \
      -Bcore:main=extract-data-definition-from-arff \
      -Barff:input=$2 \
      -Barff:output=$3
