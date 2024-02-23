@@ -1,6 +1,4 @@
 #!/bin/bash
-echo "Shell is $SH"
-
 JACOCO_PATH=/Users/berber/bin/jacoco
 
 echo "Downloading Jacoco-Agent"
@@ -19,7 +17,7 @@ for EXAMPLE in *; do
     pushd $EXAMPLE
     for SCRIPT in *sh; do
         echo "Executing example: $SCRIPT"
-        $SH ./$SCRIPT
+        ./$SCRIPT
     done
     popd
 
