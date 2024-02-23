@@ -116,6 +116,8 @@ evoal:unit:
   dependencies: 
     - "evoal:compile"
     - "dsl:deploy"
+  needs:
+    - "evoal:compile"
   tags:
     - docker
   image: $EVOAL_IMAGE
@@ -137,6 +139,8 @@ evoal:coverage:
   stage: EvoAl
   dependencies:
     - evoal:unit
+  needs:
+    - "evoal:unit"
   tags:
     - docker
   image: haynes/jacoco2cobertura:1.0.7
