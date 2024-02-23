@@ -100,19 +100,13 @@
                                 <configuration>
                                 <fileSets>
                                     <fileSet>
-                                        <directory>.</directory>
-                                        <includes>
-                                            <include>**/target/jacoco.exec</include>
-                                        </includes>
-                                    </fileSet>
-                                    <fileSet>
                                         <directory>../../evoal/examples</directory>
                                         <includes>
                                             <include>**/jacoco.exec</include>
                                         </includes>
                                     </fileSet>
                                 </fileSets>
-                                <destFile>target/aggregate.exec</destFile>
+                                <destFile>target/regression.exec</destFile>
                                 </configuration>
                             </execution>
                         </executions>
