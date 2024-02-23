@@ -19,8 +19,7 @@ for EXAMPLE in *; do
         ./$SCRIPT
     done
     popd
-
-echo -e "Regression profiles: "
-find . -name "*.exec"
 done
 popd
+
+echo "Current DIR: `pwd`"
