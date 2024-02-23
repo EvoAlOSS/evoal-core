@@ -52,9 +52,17 @@ dsl:compile:
   image: $ECLIPSE_IMAGE
   script:
     - mvn $MAVEN_CLI_OPTS -f $LANGUAGES_POM -Dbranch=$CI_COMMIT_REF_NAME -pl "!de.evoal.languages:de.evoal.languages.releng.site" compile
+  artifacts:
+    untracked: false
+    when: on_success
+    expire_in: "30 days"
+    paths:
+      - src/languages/*/target
 
 dsl:unit:
   stage: Domain Specific Languages
+  dependencies: 
+    - "dsl:compile"
   tags:
     - docker
   image: $ECLIPSE_IMAGE
@@ -67,7 +75,6 @@ dsl:deploy:
     - "dsl:compile"
   needs:
     - "dsl:unit"
-    - "dsl:compile"
   tags:
     - docker
   image: $ECLIPSE_IMAGE
@@ -85,17 +92,19 @@ dsl:deploy:
 ## Remaining compile steps
 evoal:compile:
   stage: EvoAl
+  needs: 
+    - "dsl:deploy"
   tags:
     - docker
   image: $EVOAL_IMAGE
   script:
-    - mvn $MAVEN_CLI_OPTS -f $EVOAL_POM -Dbranch=$CI_COMMIT_REF_NAME -DskipTests=true flatten:flatten compile
+    - mvn $MAVEN_CLI_OPTS -f $EVOAL_POM -Dbranch=$CI_COMMIT_REF_NAME -DskipTests=true flatten:flatten package
   artifacts:
     untracked: false
     when: on_success
     expire_in: "30 days"
     paths:
-      - src/core/*/target/*
+      - src/core/**/target
       - src/languages/de.evoal.languages.releng.site/target/de.evoal.languages.releng.site-*.zip
 
 
@@ -103,18 +112,17 @@ evoal:compile:
 ## Remaining unit tests
 evoal:unit:
   stage: EvoAl
+  dependencies: 
+    - "evoal:compile"
+    - "dsl:deploy"
   tags:
     - docker
   image: $EVOAL_IMAGE
   script:
-    - mvn $MAVEN_CLI_OPTS -f $EVOAL_POM -Dbranch=$CI_COMMIT_REF_NAME -DskipTests package
     - ci/create-release.sh
     - ci/regression-coverage.sh
     - mvn $MAVEN_CLI_OPTS -f $EVOAL_POM -Dbranch=$CI_COMMIT_REF_NAME -Pjacoco verify
     - cat src/evoal/core/de.evoal.releng.jacoco/target/site/jacoco-aggregate/index.html | grep -o '<tfoot>.*</tfoot>'
-  needs: ["evoal:compile", "dsl:deploy"]
-  dependencies:
-    - evoal:compile
   coverage: /Total.*?([0-9]{1,3})%/
   artifacts:
     when: always
@@ -126,15 +134,14 @@ evoal:unit:
 
 evoal:coverage:
   stage: EvoAl
+  dependencies:
+    - evoal:unit
   tags:
     - docker
   image: haynes/jacoco2cobertura:1.0.7
   script:
     - jacoco_paths=`find src -path "**/src/main/java" -type d | sed -e 's@^@'"$CI_PROJECT_DIR"'/@'`
     - python /opt/cover2cover.py src/evoal/core/de.evoal.releng.jacoco/target/site/jacoco-aggregate/jacoco.xml $jacoco_paths > src/evoal/core/de.evoal.releng.jacoco/target/site/coverage.xml
-  needs: ["evoal:unit"]
-  dependencies:
-    - evoal:unit
   artifacts:
     reports:
       coverage_report:
@@ -168,7 +175,6 @@ evoal:deploy:
   dependencies:
     - "evoal:compile"
   needs:
-    - "evoal:compile"
     - "evoal:unit"
   tags:
     - docker
