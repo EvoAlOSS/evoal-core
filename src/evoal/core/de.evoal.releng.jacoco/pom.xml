@@ -36,6 +36,16 @@
         </dependency>
         <dependency>
             <groupId>${project.parent.groupId}</groupId>
+            <artifactId>surrogate.smile</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.parent.groupId}</groupId>
+            <artifactId>core.pso</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.parent.groupId}</groupId>
             <artifactId>generator.main</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
@@ -79,6 +89,31 @@
                                 <goals>
                                     <goal>report-aggregate</goal>
                                 </goals>
+                            </execution>
+
+                            <execution>
+                                <id>merge-results</id>
+                                <phase>post-integration-test</phase>
+                                <goals>
+                                <goal>merge</goal>
+                                </goals>
+                                <configuration>
+                                <fileSets>
+                                    <fileSet>
+                                        <directory>.</directory>
+                                        <includes>
+                                            <include>**/target/jacoco.exec</include>
+                                        </includes>
+                                    </fileSet>
+                                    <fileSet>
+                                        <directory>../../evoal/examples</directory>
+                                        <includes>
+                                            <include>**/jacoco.exec</include>
+                                        </includes>
+                                    </fileSet>
+                                </fileSets>
+                                <destFile>target/aggregate.exec</destFile>
+                                </configuration>
                             </execution>
                         </executions>
                     </plugin>

@@ -107,6 +107,8 @@ evoal:unit:
     - docker
   image: $EVOAL_IMAGE
   script:
+    - ci/create-release.sh
+    - ci/regression-coverage.sh
     - mvn $MAVEN_CLI_OPTS -f $EVOAL_POM -Dbranch=$CI_COMMIT_REF_NAME -Pjacoco verify
     - cat src/evoal/core/de.evoal.releng.jacoco/target/site/jacoco-aggregate/index.html | grep -o '<tfoot>.*</tfoot>'
   coverage: /Total.*?([0-9]{1,3})%/
@@ -125,7 +127,7 @@ evoal:coverage:
   image: haynes/jacoco2cobertura:1.0.7
   script:
     - jacoco_paths=`find src -path "**/src/main/java" -type d | sed -e 's@^@'"$CI_PROJECT_DIR"'/@'`
-    - python /opt/cover2cover.py src/evoal/core/de.evoal.releng.jacoco/target/site/jacoco-aggregate/jacoco.xml $jacoco_paths > src/evoal/core/de.evoal.releng.jacoco/target/site/coverage.xml
+    - python /opt/cover2cover.py src/evoal/core/de.evoal.releng.jacoco/target/aggregate.xml $jacoco_paths > src/evoal/core/de.evoal.releng.jacoco/target/site/coverage.xml
   needs: ["evoal:unit"]
   dependencies:
     - evoal:unit
