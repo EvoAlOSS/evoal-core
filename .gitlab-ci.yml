@@ -111,9 +111,10 @@ evoal:unit:
     - ci/regression-coverage.sh
     - mvn $MAVEN_CLI_OPTS -f $EVOAL_POM -Dbranch=$CI_COMMIT_REF_NAME -Pjacoco verify
     - cat src/evoal/core/de.evoal.releng.jacoco/target/site/jacoco-aggregate/index.html | grep -o '<tfoot>.*</tfoot>'
-  needs: ["evoal:compile"]
+  needs: ["evoal:compile", "dsl:deploy"]
   dependencies:
     - evoal:compile
+    - dsl:deploy
   coverage: /Total.*?([0-9]{1,3})%/
   artifacts:
     when: always
