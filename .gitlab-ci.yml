@@ -74,6 +74,7 @@ dsl:deploy:
   dependencies: 
     - "dsl:compile"
   needs:
+    - "dsl:compile"
     - "dsl:unit"
   tags:
     - docker
@@ -175,6 +176,7 @@ evoal:deploy:
   dependencies:
     - "evoal:compile"
   needs:
+    - "evoal:compile"
     - "evoal:unit"
   tags:
     - docker
