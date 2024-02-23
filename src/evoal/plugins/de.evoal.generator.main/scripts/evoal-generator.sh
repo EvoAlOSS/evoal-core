@@ -1,9 +1,8 @@
 #!/bin/bash
 
 echo "0-Parameter: $0"
-echo "$SHELL"
-VAR=(a b c)
-echo "$VAR"
+echo "Shell is $SHELL"
+echo "Afterwards"
 
 if [ -z ${EVOAL_HOME+x} ]; then
   EVOAL_HOME=$( cd -- "$(dirname $0)/../" >/dev/null 2>&1 ; pwd -P )
