@@ -1,4 +1,3 @@
-#!/bin/bash
 JACOCO_PATH=/Users/berber/bin/jacoco
 
 echo "Downloading Jacoco-Agent"
