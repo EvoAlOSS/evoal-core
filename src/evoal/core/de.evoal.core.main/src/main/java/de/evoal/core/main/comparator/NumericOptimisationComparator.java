@@ -11,7 +11,7 @@ import javax.inject.Named;
 @Named("de.evoal.core.optimisation.numeric-comparator")
 public class NumericOptimisationComparator implements OptimisationValueComparator {
     @Override
-    public OptimisationValue toValue(final double[] fitnessValues) {
+    public NumericOptimisationValue toValue(final double[] fitnessValues) {
         return NumericOptimisationValue.of(fitnessValues);
     }
 

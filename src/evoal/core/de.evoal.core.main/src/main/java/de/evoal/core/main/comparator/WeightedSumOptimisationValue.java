@@ -25,7 +25,7 @@ public class WeightedSumOptimisationValue implements OptimisationValue {
         }
     }
 
-    public static OptimisationValue of(final double [] weights, final double [] fitnessValues) {
+    public static WeightedSumOptimisationValue of(final double [] weights, final double [] fitnessValues) {
         return new WeightedSumOptimisationValue(weights, fitnessValues);
     }
 

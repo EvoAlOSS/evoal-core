@@ -16,7 +16,7 @@ public class NumericOptimisationValue extends Number implements OptimisationValu
         this.fitnessValue = fitnessValues[0];
     }
 
-    public static OptimisationValue of(final double [] fitnessValues) {
+    public static NumericOptimisationValue of(final double [] fitnessValues) {
         return new NumericOptimisationValue(
                 Arrays.stream(fitnessValues)
                       .mapToObj(Double::valueOf)
@@ -54,7 +54,7 @@ public class NumericOptimisationValue extends Number implements OptimisationValu
 
     @Override
     public float floatValue() {
-        return floatValue();
+        return fitnessValue.floatValue();
     }
 
     @Override

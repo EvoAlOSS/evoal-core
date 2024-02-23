@@ -21,5 +21,3 @@ for EXAMPLE in *; do
     popd
 done
 popd
-
-echo "Current DIR: `pwd`"
