@@ -100,7 +100,6 @@ evoal:compile:
 
 #############################################################
 ## Remaining unit tests
-
 evoal:unit:
   stage: EvoAl
   tags:
