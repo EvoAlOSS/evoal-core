@@ -100,7 +100,7 @@
                                 <configuration>
                                 <fileSets>
                                     <fileSet>
-                                        <directory>evoal/examples</directory>
+                                        <directory>${project.basedir}/../../../../evoal/examples</directory>
                                         <includes>
                                             <include>**/jacoco.exec</include>
                                         </includes>
