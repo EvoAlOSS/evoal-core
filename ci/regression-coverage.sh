@@ -16,9 +16,11 @@ for EXAMPLE in *; do
     pushd $EXAMPLE
     for SCRIPT in *sh; do
         echo "Executing example: $SCRIPT"
-        bash ./$SCRIPT
+        ./$SCRIPT
     done
     popd
 
+echo -e "Regression profiles: "
+find . -name "*.exec"
 done
 popd
