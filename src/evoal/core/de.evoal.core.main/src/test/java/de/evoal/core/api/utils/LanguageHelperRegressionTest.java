@@ -16,7 +16,7 @@ public class LanguageHelperRegressionTest {
         Assertions.assertEquals("a", attribute.getName());
         Assertions.assertTrue(attribute.getType() instanceof ArrayType);
         final ArrayType typeA = (ArrayType) attribute.getType();
-        Assertions.assertTrue(typeA.getElements().get(0) instanceof RealType);
+        Assertions.assertTrue(typeA.getElements() instanceof RealType);
     }
 
     private void assertAttributeTypeOfC(final AttributeDefinition attribute) {
