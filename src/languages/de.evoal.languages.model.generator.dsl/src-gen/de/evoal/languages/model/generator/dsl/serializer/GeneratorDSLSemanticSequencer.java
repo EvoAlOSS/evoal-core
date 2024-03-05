@@ -17,6 +17,7 @@ import de.evoal.languages.model.base.Call;
 import de.evoal.languages.model.base.ComparisonExpression;
 import de.evoal.languages.model.base.ConstantDefinition;
 import de.evoal.languages.model.base.ConstantReference;
+import de.evoal.languages.model.base.DataOrInstanceType;
 import de.evoal.languages.model.base.DataType;
 import de.evoal.languages.model.base.DefinedFunctionName;
 import de.evoal.languages.model.base.ExpressionType;
@@ -114,6 +115,9 @@ public class GeneratorDSLSemanticSequencer extends InstanceLanguageSemanticSeque
 				return; 
 			case BasePackage.CONSTANT_REFERENCE:
 				sequence_ConstantReferenceRule(context, (ConstantReference) semanticObject); 
+				return; 
+			case BasePackage.DATA_OR_INSTANCE_TYPE:
+				sequence_DataOrInstanceTypeRule(context, (DataOrInstanceType) semanticObject); 
 				return; 
 			case BasePackage.DATA_TYPE:
 				sequence_DataTypeRule(context, (DataType) semanticObject); 
