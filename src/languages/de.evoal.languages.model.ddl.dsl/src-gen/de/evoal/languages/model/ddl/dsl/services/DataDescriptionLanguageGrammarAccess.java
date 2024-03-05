@@ -1155,7 +1155,7 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 	}
 	
 	//TypeRule returns Type:
-	//    StringTypeRule | IntTypeRule | RealTypeRule | BooleanTypeRule | LiteralTypeRule | ArrayTypeRule | InstanceTypeRule | VoidTypeRule | ExpressionTypeRule | DataTypeRule
+	//    StringTypeRule | IntTypeRule | RealTypeRule | BooleanTypeRule | LiteralTypeRule | ArrayTypeRule | InstanceTypeRule | VoidTypeRule | ExpressionTypeRule | DataTypeRule | DataOrInstanceTypeRule
 	//;
 	public BaseLanguageGrammarAccess.TypeRuleElements getTypeRuleAccess() {
 		return gaBaseLanguage.getTypeRuleAccess();
@@ -1260,6 +1260,18 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 		return getVoidTypeRuleAccess().getRule();
 	}
 	
+	//DataOrInstanceTypeRule returns DataOrInstanceType:
+	//    {DataOrInstanceType}
+	//    'data' 'or' 'type' ('of' instance=InstanceTypeRule)?
+	//;
+	public BaseLanguageGrammarAccess.DataOrInstanceTypeRuleElements getDataOrInstanceTypeRuleAccess() {
+		return gaBaseLanguage.getDataOrInstanceTypeRuleAccess();
+	}
+	
+	public ParserRule getDataOrInstanceTypeRuleRule() {
+		return getDataOrInstanceTypeRuleAccess().getRule();
+	}
+	
 	//DataTypeRule returns DataType:
 	//    {DataType}
 	//    'data'
@@ -1273,7 +1285,7 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 	}
 	
 	//ArrayTypeRule returns ArrayType:
-	//    'array'     elements += TypeRule
+	//    'array'     elements = TypeRule
 	//;
 	public BaseLanguageGrammarAccess.ArrayTypeRuleElements getArrayTypeRuleAccess() {
 		return gaBaseLanguage.getArrayTypeRuleAccess();

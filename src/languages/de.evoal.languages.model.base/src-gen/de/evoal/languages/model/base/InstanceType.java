@@ -35,7 +35,7 @@ public interface InstanceType extends Type {
 	 * @return the value of the '<em>Definition</em>' reference.
 	 * @see #setDefinition(TypeDefinition)
 	 * @see de.evoal.languages.model.base.BasePackage#getInstanceType_Definition()
-	 * @model required="true" ordered="false"
+	 * @model required="true"
 	 * @generated
 	 */
 	TypeDefinition getDefinition();

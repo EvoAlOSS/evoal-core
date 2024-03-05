@@ -107,7 +107,11 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="representation" lowerBound="1"
-        eType="#//RepresentationType" defaultValueLiteral="real"/>
+        eType="#//RepresentationType" defaultValueLiteral="real">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&#xA;The in-memory representation of the data.&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TypedDataDescription" eSuperTypes="#//DataDescription">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">

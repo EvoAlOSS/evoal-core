@@ -162,7 +162,7 @@ AttributeDefinitionRule returns AttributeDefinition:
 ;
 
 TypeRule returns Type:
-	StringTypeRule | IntTypeRule | RealTypeRule | BooleanTypeRule | LiteralTypeRule | ArrayTypeRule | InstanceTypeRule | VoidTypeRule | ExpressionTypeRule | DataTypeRule
+	StringTypeRule | IntTypeRule | RealTypeRule | BooleanTypeRule | LiteralTypeRule | ArrayTypeRule | InstanceTypeRule | VoidTypeRule | ExpressionTypeRule | DataTypeRule | DataOrInstanceTypeRule
 ;
 
 LiteralTypeRule returns LiteralType:
@@ -205,13 +205,18 @@ VoidTypeRule returns VoidType:
 	'void'
 ;
 
+DataOrInstanceTypeRule returns DataOrInstanceType:
+	{DataOrInstanceType}
+	'data' 'or' 'type' ('of' instance=InstanceTypeRule)?
+;
+
 DataTypeRule returns DataType:
 	{DataType}
 	'data'
 ;
 
 ArrayTypeRule returns ArrayType:
-	'array'	 elements += TypeRule
+	'array'	 elements = TypeRule
 ;
 
 FunctionDefinitionRule returns FunctionDefinition:

@@ -86,6 +86,7 @@ public class BaseFactoryImpl extends EFactoryImpl implements BaseFactory {
 			case BasePackage.VOID_TYPE: return createVoidType();
 			case BasePackage.EXPRESSION_TYPE: return createExpressionType();
 			case BasePackage.DATA_TYPE: return createDataType();
+			case BasePackage.DATA_OR_INSTANCE_TYPE: return createDataOrInstanceType();
 			case BasePackage.ARRAY_TYPE: return createArrayType();
 			case BasePackage.FUNCTION_DEFINITION: return createFunctionDefinition();
 			case BasePackage.PARAMETER: return createParameter();
@@ -460,6 +461,17 @@ public class BaseFactoryImpl extends EFactoryImpl implements BaseFactory {
 	public DataType createDataType() {
 		DataTypeImpl dataType = new DataTypeImpl();
 		return dataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public DataOrInstanceType createDataOrInstanceType() {
+		DataOrInstanceTypeImpl dataOrInstanceType = new DataOrInstanceTypeImpl();
+		return dataOrInstanceType;
 	}
 
 	/**

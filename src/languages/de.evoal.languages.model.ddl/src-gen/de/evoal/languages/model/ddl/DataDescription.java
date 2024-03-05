@@ -74,6 +74,11 @@ public interface DataDescription extends EObject {
 	 * The literals are from the enumeration {@link de.evoal.languages.model.ddl.RepresentationType}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * 
+	 * The in-memory representation of the data.
+	 * 
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Representation</em>' attribute.
 	 * @see de.evoal.languages.model.ddl.RepresentationType
 	 * @see #setRepresentation(RepresentationType)

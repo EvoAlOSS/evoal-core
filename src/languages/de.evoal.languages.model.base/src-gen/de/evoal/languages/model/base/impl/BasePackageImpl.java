@@ -18,6 +18,7 @@ import de.evoal.languages.model.base.ComparisonExpression;
 import de.evoal.languages.model.base.ComparisonOperator;
 import de.evoal.languages.model.base.ConstantDefinition;
 import de.evoal.languages.model.base.ConstantReference;
+import de.evoal.languages.model.base.DataOrInstanceType;
 import de.evoal.languages.model.base.DataType;
 import de.evoal.languages.model.base.DefinedFunctionName;
 import de.evoal.languages.model.base.Expression;
@@ -306,6 +307,13 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 	 * @generated
 	 */
 	private EClass dataTypeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass dataOrInstanceTypeEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1221,6 +1229,26 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 	 * @generated
 	 */
 	@Override
+	public EClass getDataOrInstanceType() {
+		return dataOrInstanceTypeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getDataOrInstanceType_Instance() {
+		return (EReference)dataOrInstanceTypeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getArrayType() {
 		return arrayTypeEClass;
 	}
@@ -1693,6 +1721,9 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 
 		dataTypeEClass = createEClass(DATA_TYPE);
 
+		dataOrInstanceTypeEClass = createEClass(DATA_OR_INSTANCE_TYPE);
+		createEReference(dataOrInstanceTypeEClass, DATA_OR_INSTANCE_TYPE__INSTANCE);
+
 		arrayTypeEClass = createEClass(ARRAY_TYPE);
 		createEReference(arrayTypeEClass, ARRAY_TYPE__ELEMENTS);
 
@@ -1787,6 +1818,7 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 		voidTypeEClass.getESuperTypes().add(this.getType());
 		expressionTypeEClass.getESuperTypes().add(this.getType());
 		dataTypeEClass.getESuperTypes().add(this.getType());
+		dataOrInstanceTypeEClass.getESuperTypes().add(this.getType());
 		arrayTypeEClass.getESuperTypes().add(this.getType());
 		definedFunctionNameEClass.getESuperTypes().add(this.getFunctionName());
 		constantReferenceEClass.getESuperTypes().add(this.getValueReference());
@@ -1862,7 +1894,7 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 		initEClass(booleanLiteralEClass, BooleanLiteral.class, "BooleanLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getBooleanLiteral_Value(), ecorePackage.getEBoolean(), "value", null, 1, 1, BooleanLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEOperation(getBooleanLiteral__GetValue(), ecorePackage.getEBooleanObject(), "getValue", 1, 1, IS_UNIQUE, IS_ORDERED);
+		initEOperation(getBooleanLiteral__GetValue(), ecorePackage.getEBoolean(), "getValue", 1, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(callEClass, Call.class, "Call", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCall_Function(), this.getFunctionName(), null, "function", null, 1, 1, Call.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1892,7 +1924,7 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 		initEClass(typeEClass, Type.class, "Type", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(instanceTypeEClass, InstanceType.class, "InstanceType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getInstanceType_Definition(), this.getTypeDefinition(), null, "definition", null, 1, 1, InstanceType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getInstanceType_Definition(), this.getTypeDefinition(), null, "definition", null, 1, 1, InstanceType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(literalTypeEClass, LiteralType.class, "LiteralType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1910,8 +1942,11 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 
 		initEClass(dataTypeEClass, DataType.class, "DataType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
+		initEClass(dataOrInstanceTypeEClass, DataOrInstanceType.class, "DataOrInstanceType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getDataOrInstanceType_Instance(), this.getInstanceType(), null, "instance", null, 0, 1, DataOrInstanceType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		initEClass(arrayTypeEClass, ArrayType.class, "ArrayType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getArrayType_Elements(), this.getType(), null, "elements", null, 1, -1, ArrayType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getArrayType_Elements(), this.getType(), null, "elements", null, 1, 1, ArrayType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(functionDefinitionEClass, FunctionDefinition.class, "FunctionDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getFunctionDefinition_Name(), ecorePackage.getEString(), "name", null, 1, 1, FunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2084,12 +2119,6 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 		   });
 		addAnnotation
 		  (getCall_Parameters(),
-		   source,
-		   new String[] {
-			   "nullFree", "false"
-		   });
-		addAnnotation
-		  (getArrayType_Elements(),
 		   source,
 		   new String[] {
 			   "nullFree", "false"

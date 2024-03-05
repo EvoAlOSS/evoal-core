@@ -204,6 +204,10 @@ public class BaseAdapterFactory extends AdapterFactoryImpl {
 				return createDataTypeAdapter();
 			}
 			@Override
+			public Adapter caseDataOrInstanceType(DataOrInstanceType object) {
+				return createDataOrInstanceTypeAdapter();
+			}
+			@Override
 			public Adapter caseArrayType(ArrayType object) {
 				return createArrayTypeAdapter();
 			}
@@ -736,6 +740,20 @@ public class BaseAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createDataTypeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.DataOrInstanceType <em>Data Or Instance Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.evoal.languages.model.base.DataOrInstanceType
+	 * @generated
+	 */
+	public Adapter createDataOrInstanceTypeAdapter() {
 		return null;
 	}
 

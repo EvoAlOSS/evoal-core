@@ -18,6 +18,7 @@ import de.evoal.languages.model.base.Call;
 import de.evoal.languages.model.base.ComparisonExpression;
 import de.evoal.languages.model.base.ConstantDefinition;
 import de.evoal.languages.model.base.ConstantReference;
+import de.evoal.languages.model.base.DataOrInstanceType;
 import de.evoal.languages.model.base.DataType;
 import de.evoal.languages.model.base.DefinedFunctionName;
 import de.evoal.languages.model.base.ExpressionType;
@@ -103,6 +104,9 @@ public class BaseLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 				return; 
 			case BasePackage.CONSTANT_REFERENCE:
 				sequence_ConstantReferenceRule(context, (ConstantReference) semanticObject); 
+				return; 
+			case BasePackage.DATA_OR_INSTANCE_TYPE:
+				sequence_DataOrInstanceTypeRule(context, (DataOrInstanceType) semanticObject); 
 				return; 
 			case BasePackage.DATA_TYPE:
 				sequence_DataTypeRule(context, (DataType) semanticObject); 
@@ -234,11 +238,17 @@ public class BaseLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 	 *     ArrayTypeRule returns ArrayType
 	 *
 	 * Constraint:
-	 *     elements+=TypeRule
+	 *     elements=TypeRule
 	 * </pre>
 	 */
 	protected void sequence_ArrayTypeRule(ISerializationContext context, ArrayType semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, BasePackage.Literals.ARRAY_TYPE__ELEMENTS) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BasePackage.Literals.ARRAY_TYPE__ELEMENTS));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getArrayTypeRuleAccess().getElementsTypeRuleParserRuleCall_1_0(), semanticObject.getElements());
+		feeder.finish();
 	}
 	
 	
@@ -384,6 +394,21 @@ public class BaseLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getConstantReferenceRuleAccess().getDefinitionConstantDefinitionQualifiedNameParserRuleCall_0_1(), semanticObject.eGet(BasePackage.Literals.CONSTANT_REFERENCE__DEFINITION, false));
 		feeder.finish();
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     TypeRule returns DataOrInstanceType
+	 *     DataOrInstanceTypeRule returns DataOrInstanceType
+	 *
+	 * Constraint:
+	 *     instance=InstanceTypeRule?
+	 * </pre>
+	 */
+	protected void sequence_DataOrInstanceTypeRule(ISerializationContext context, DataOrInstanceType semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	

@@ -2,8 +2,6 @@
  */
 package de.evoal.languages.model.base;
 
-import org.eclipse.emf.common.util.EList;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Array Type</b></em>'.
@@ -26,19 +24,28 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface ArrayType extends Type {
 	/**
-	 * Returns the value of the '<em><b>Elements</b></em>' containment reference list.
-	 * The list contents are of type {@link de.evoal.languages.model.base.Type}.
+	 * Returns the value of the '<em><b>Elements</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * The allowed types of the elements.
 	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Elements</em>' containment reference list.
+	 * @return the value of the '<em>Elements</em>' containment reference.
+	 * @see #setElements(Type)
 	 * @see de.evoal.languages.model.base.BasePackage#getArrayType_Elements()
-	 * @model containment="true" required="true" ordered="false"
-	 *        annotation="http://www.eclipse.org/OCL/Collection nullFree='false'"
+	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	EList<Type> getElements();
+	Type getElements();
+
+	/**
+	 * Sets the value of the '{@link de.evoal.languages.model.base.ArrayType#getElements <em>Elements</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Elements</em>' containment reference.
+	 * @see #getElements()
+	 * @generated
+	 */
+	void setElements(Type value);
 
 } // ArrayType

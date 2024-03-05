@@ -300,6 +300,13 @@ public class BaseSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case BasePackage.DATA_OR_INSTANCE_TYPE: {
+				DataOrInstanceType dataOrInstanceType = (DataOrInstanceType)theEObject;
+				T result = caseDataOrInstanceType(dataOrInstanceType);
+				if (result == null) result = caseType(dataOrInstanceType);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case BasePackage.ARRAY_TYPE: {
 				ArrayType arrayType = (ArrayType)theEObject;
 				T result = caseArrayType(arrayType);
@@ -878,6 +885,21 @@ public class BaseSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseDataType(DataType object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Data Or Instance Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Data Or Instance Type</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDataOrInstanceType(DataOrInstanceType object) {
 		return null;
 	}
 

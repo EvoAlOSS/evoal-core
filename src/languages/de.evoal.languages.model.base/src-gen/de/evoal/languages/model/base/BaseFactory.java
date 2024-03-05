@@ -283,6 +283,15 @@ public interface BaseFactory extends EFactory {
 	DataType createDataType();
 
 	/**
+	 * Returns a new object of class '<em>Data Or Instance Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Data Or Instance Type</em>'.
+	 * @generated
+	 */
+	DataOrInstanceType createDataOrInstanceType();
+
+	/**
 	 * Returns a new object of class '<em>Array Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

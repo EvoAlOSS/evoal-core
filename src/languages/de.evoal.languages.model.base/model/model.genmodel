@@ -147,6 +147,9 @@
     <genClasses ecoreClass="model.ecore#//VoidType"/>
     <genClasses ecoreClass="model.ecore#//ExpressionType"/>
     <genClasses ecoreClass="model.ecore#//DataType"/>
+    <genClasses ecoreClass="model.ecore#//DataOrInstanceType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//DataOrInstanceType/instance"/>
+    </genClasses>
     <genClasses ecoreClass="model.ecore#//ArrayType">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//ArrayType/elements"/>
     </genClasses>

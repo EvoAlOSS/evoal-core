@@ -100,6 +100,8 @@ public class DataDescriptionLanguageParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getRealTypeRuleAccess().getGroup(), "rule__RealTypeRule__Group__0");
 			builder.put(grammarAccess.getBooleanTypeRuleAccess().getGroup(), "rule__BooleanTypeRule__Group__0");
 			builder.put(grammarAccess.getVoidTypeRuleAccess().getGroup(), "rule__VoidTypeRule__Group__0");
+			builder.put(grammarAccess.getDataOrInstanceTypeRuleAccess().getGroup(), "rule__DataOrInstanceTypeRule__Group__0");
+			builder.put(grammarAccess.getDataOrInstanceTypeRuleAccess().getGroup_4(), "rule__DataOrInstanceTypeRule__Group_4__0");
 			builder.put(grammarAccess.getDataTypeRuleAccess().getGroup(), "rule__DataTypeRule__Group__0");
 			builder.put(grammarAccess.getArrayTypeRuleAccess().getGroup(), "rule__ArrayTypeRule__Group__0");
 			builder.put(grammarAccess.getFunctionDefinitionRuleAccess().getGroup(), "rule__FunctionDefinitionRule__Group__0");
@@ -175,6 +177,7 @@ public class DataDescriptionLanguageParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getAttributeDefinitionRuleAccess().getTypeAssignment_2(), "rule__AttributeDefinitionRule__TypeAssignment_2");
 			builder.put(grammarAccess.getAttributeDefinitionRuleAccess().getInitialisationAssignment_3_1(), "rule__AttributeDefinitionRule__InitialisationAssignment_3_1");
 			builder.put(grammarAccess.getInstanceTypeRuleAccess().getDefinitionAssignment_2(), "rule__InstanceTypeRule__DefinitionAssignment_2");
+			builder.put(grammarAccess.getDataOrInstanceTypeRuleAccess().getInstanceAssignment_4_1(), "rule__DataOrInstanceTypeRule__InstanceAssignment_4_1");
 			builder.put(grammarAccess.getArrayTypeRuleAccess().getElementsAssignment_1(), "rule__ArrayTypeRule__ElementsAssignment_1");
 			builder.put(grammarAccess.getFunctionDefinitionRuleAccess().getTypeAssignment_1(), "rule__FunctionDefinitionRule__TypeAssignment_1");
 			builder.put(grammarAccess.getFunctionDefinitionRuleAccess().getNameAssignment_2(), "rule__FunctionDefinitionRule__NameAssignment_2");
