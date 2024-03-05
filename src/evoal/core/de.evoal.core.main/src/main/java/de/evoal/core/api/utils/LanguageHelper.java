@@ -207,7 +207,7 @@ public class LanguageHelper {
         final List<Object> array = (List<Object>)evaluator.evaluate(current);
 
         return array.stream()
-                    .map(current1 -> convertToJava(current1, ((ArrayType)type).getElements().get(0)))
+                    .map(current1 -> convertToJava(current1, ((ArrayType)type).getElements()))
                     .toArray();
     }
 
