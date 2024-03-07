@@ -94,7 +94,7 @@ public class BenchmarkOptimisationFunction implements OptimisationFunction {
 
             functions[index] = factory.create(stepConfiguration);
             functionProperties[index] = PropertiesSpecification.builder()
-                                .add(writeReferences.stream())
+                                .addDescriptions(writeReferences.stream())
                                 .build();
         }
 
