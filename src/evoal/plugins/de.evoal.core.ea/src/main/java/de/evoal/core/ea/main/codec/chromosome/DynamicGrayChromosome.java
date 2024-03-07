@@ -11,7 +11,7 @@ import javax.enterprise.context.Dependent;
 import javax.inject.Named;
 
 @Dependent
-@Named("gray-chromosome")
+@Named("de.evoal.core.ea.optimisation.gray-chromosome")
 public class DynamicGrayChromosome extends DynamicScaledChromosome {
     @Override
     public Chromosome toJenetics() {

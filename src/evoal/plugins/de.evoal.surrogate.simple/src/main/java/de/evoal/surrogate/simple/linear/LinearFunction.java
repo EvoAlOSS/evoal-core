@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.function.Function;
 
 import de.evoal.core.api.properties.Properties;
+import de.evoal.core.api.utils.Requirements;
+import de.evoal.languages.model.ddl.DataDescription;
 import de.evoal.surrogate.api.configuration.Parameter;
 import de.evoal.surrogate.api.configuration.PartialFunctionConfiguration;
 import de.evoal.surrogate.api.function.AbstractPartialSurrogateFunction;
@@ -61,8 +63,11 @@ public class LinearFunction extends AbstractPartialSurrogateFunction {
 		final PropertySpecification inputProperty = input.getProperties().get(0);
 		final int propertyIndex = actualInput.indexOf(inputProperty);
 
-		final Function<Properties, Double> inputConverter = ConverterFunctions.convertToDouble(inputProperty.type().getRepresentation(), propertyIndex);
-		final Function<Double, Object> outputConverter = ConverterFunctions.convertDoubleTo(output.get(0).type().getRepresentation());
+		Requirements.requireInstanceOf(inputProperty.type(), DataDescription.class);
+		Requirements.requireInstanceOf(output.getProperties().get(0).type(), DataDescription.class);
+
+		final Function<Properties, Double> inputConverter = ConverterFunctions.convertToDouble(((DataDescription)inputProperty.type()).getRepresentation(), propertyIndex);
+		final Function<Double, Object> outputConverter = ConverterFunctions.convertDoubleTo(((DataDescription)output.get(0).type()).getRepresentation());
 		
 		this.regression = vector -> outputConverter.apply(intercept + slope * inputConverter.apply(vector));
 	}

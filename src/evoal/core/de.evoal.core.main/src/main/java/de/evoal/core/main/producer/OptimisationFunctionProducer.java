@@ -6,6 +6,7 @@ import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.core.api.optimisation.OptimisationFunction;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.languages.model.base.Attribute;
+import de.evoal.languages.model.base.Definition;
 import de.evoal.languages.model.ddl.DataDescription;
 import de.evoal.languages.model.base.Instance;
 import lombok.extern.slf4j.Slf4j;
@@ -31,7 +32,7 @@ public class OptimisationFunctionProducer {
     @Named("search-space-specification")
     public PropertiesSpecification createSearchSpaceSpecification(final @ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "problem.search-space") DataDescription[] references) {
         return PropertiesSpecification.builder()
-                .add(Arrays.stream(references))
+                .addDescriptions(Arrays.stream(references))
                 .build();
     }
 

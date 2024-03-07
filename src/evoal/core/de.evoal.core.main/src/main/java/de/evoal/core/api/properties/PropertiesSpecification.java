@@ -1,5 +1,6 @@
 package de.evoal.core.api.properties;
 
+import de.evoal.languages.model.base.Definition;
 import de.evoal.languages.model.ddl.DataDescription;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,11 +25,21 @@ public class PropertiesSpecification {
 		public Builder() {
 		}
 
-		public Builder add(final Stream<DataDescription> data) {
+		public Builder add(final Stream<Definition> data) {
 			data.map(d -> new PropertySpecification(d.getName(), d))
 				.filter(s -> !properties.contains(s))
 				.peek(properties::add)
 				.forEach(orderedProperties::add);
+
+
+			return this;
+		}
+
+		public Builder addDescriptions(final Stream<DataDescription> data) {
+			data.map(d -> new PropertySpecification(d.getName(), d))
+					.filter(s -> !properties.contains(s))
+					.peek(properties::add)
+					.forEach(orderedProperties::add);
 
 
 			return this;

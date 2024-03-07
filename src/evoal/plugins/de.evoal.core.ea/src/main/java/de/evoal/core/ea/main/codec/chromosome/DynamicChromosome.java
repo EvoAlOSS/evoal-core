@@ -5,13 +5,10 @@ import de.evoal.core.api.languages.ExpressionEvaluator;
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.properties.PropertySpecification;
+import de.evoal.languages.model.base.Definition;
 import de.evoal.languages.model.ddl.DataDescription;
-import de.evoal.languages.model.base.Array;
-import de.evoal.languages.model.base.Attribute;
-import de.evoal.languages.model.instance.DataReference;
 import de.evoal.languages.model.base.Instance;
 import io.jenetics.Chromosome;
-import org.apache.commons.math3.util.Pair;
 
 import javax.inject.Inject;
 import java.util.Collections;
@@ -36,7 +33,7 @@ public abstract class DynamicChromosome implements EvoalComponent<DynamicChromos
 
         this.dataRepresented = Collections.unmodifiableList(dataRepresented);
         this.specification = PropertiesSpecification.builder()
-                                                    .add(dataRepresented.stream())
+                                                    .addDescriptions(dataRepresented.stream())
                                                     .build();
 
         return this;

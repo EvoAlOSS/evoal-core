@@ -75,8 +75,8 @@ public class PartialFunctionConfiguration {
 		final List<DataDescription> inputs = definition.getInputs();
 		final List<DataDescription> outputs = definition.getOutputs();
 
-		configuration.setInputData(PropertiesSpecification.builder().add(inputs.stream()).build());
-		configuration.setOutputData(PropertiesSpecification.builder().add(outputs.stream()).build());
+		configuration.setInputData(PropertiesSpecification.builder().addDescriptions(inputs.stream()).build());
+		configuration.setOutputData(PropertiesSpecification.builder().addDescriptions(outputs.stream()).build());
 
 		definition.getAttributes()
 				  .stream()

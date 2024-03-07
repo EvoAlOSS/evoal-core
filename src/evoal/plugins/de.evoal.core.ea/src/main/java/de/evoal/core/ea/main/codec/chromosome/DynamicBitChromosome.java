@@ -11,7 +11,7 @@ import javax.enterprise.context.Dependent;
 import javax.inject.Named;
 
 @Dependent
-@Named("bit-chromosome")
+@Named("de.evoal.core.ea.optimisation.bit-chromosome")
 public class DynamicBitChromosome extends DynamicScaledChromosome {
 
 

@@ -124,7 +124,7 @@ public class StatementExecutor extends MllSwitch<Object> {
 
     private PropertiesSpecification collectSpecification(final List<DataDescription> descriptions) {
         return PropertiesSpecification.builder()
-                .add(descriptions.stream())
+                .addDescriptions(descriptions.stream())
                 .build();
     }
 

@@ -12,6 +12,7 @@ module de.evoal.core.arff {
     requires weka.stable;
 
     requires de.evoal.core.main;
+    requires de.evoal.languages.model.base;
     requires de.evoal.languages.model.ddl;
     requires de.evoal.languages.model.ddl.dsl;
 

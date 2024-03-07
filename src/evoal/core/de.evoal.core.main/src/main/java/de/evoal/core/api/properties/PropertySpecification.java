@@ -1,6 +1,6 @@
 package de.evoal.core.api.properties;
 
-import de.evoal.languages.model.ddl.DataDescription;
+import de.evoal.languages.model.base.Definition;
 import lombok.NonNull;
 
 import java.util.Objects;
@@ -8,7 +8,7 @@ import java.util.Objects;
 /**
  * A property of the input or output domain is a simple label.
  */
-public record PropertySpecification(@NonNull String name, DataDescription type) implements Comparable {
+public record PropertySpecification(@NonNull String name, Definition type) implements Comparable {
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

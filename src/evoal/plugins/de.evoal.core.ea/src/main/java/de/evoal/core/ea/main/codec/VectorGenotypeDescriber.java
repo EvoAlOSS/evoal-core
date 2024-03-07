@@ -43,18 +43,14 @@ public class VectorGenotypeDescriber implements CustomCodecDescriber {
         log.info("Describing Genotype.");
         final Object [] genes = helper.lookup(configuration, "chromosomes");
 
-        final List<DataDescription> descriptors = Arrays.stream(genes)
+        return Arrays.stream(genes)
                 .map(Instance.class::cast)
                 .map(i -> i.findAttribute("genes"))
                 .map(Attribute::getValue)
                 .map(evaluator::evaluate)
                 .flatMap(l -> ((List<Instance>)(List)l).stream())
                 .map(i -> evaluator.attributeToObject(i, "content"))
-                .map(DataDescription.class::cast)
+                .map(Definition.class::cast)
                 .collect(Collectors.toList());
-
-        log.info("{}", descriptors);
-
-        throw new IllegalArgumentException("HERE WE ARE");
     }
 }

@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Dependent
-@Named("double-chromosome")
+@Named("de.evoal.core.ea.optimisation.double-chromosome")
 public class DynamicDoubleChromosome extends DynamicBoundedDoubleChromosome {
     @Override
     public Chromosome toJenetics() {

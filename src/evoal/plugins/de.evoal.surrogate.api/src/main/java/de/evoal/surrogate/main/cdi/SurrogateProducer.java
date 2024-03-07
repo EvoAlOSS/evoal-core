@@ -7,6 +7,7 @@ import de.evoal.core.api.properties.info.PropertiesDependencies;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.properties.PropertySpecification;
 import de.evoal.core.api.utils.Requirements;
+import de.evoal.languages.model.ddl.DataDescription;
 import de.evoal.languages.model.instance.DataReference;
 import de.evoal.languages.model.mll.PartialSurrogateFunctionDefinition;
 import de.evoal.languages.model.mll.SurrogateDefinition;
@@ -100,6 +101,7 @@ public class SurrogateProducer {
                         .stream()
                         .map(specifications::get)
                         .map(PropertySpecification::type)
+                        .map(DataDescription.class::cast)
                         .collect(Collectors.toList())
 
             );
@@ -109,6 +111,7 @@ public class SurrogateProducer {
                         .stream()
                         .map(specifications::get)
                         .map(PropertySpecification::type)
+                        .map(DataDescription.class::cast)
                         .collect(Collectors.toList())
             );
         }
@@ -173,7 +176,7 @@ public class SurrogateProducer {
     @Named("surrogate-source-properties-specification")
     public PropertiesSpecification createSourceProperties(final SurrogateConfiguration config) {
         return PropertiesSpecification.builder()
-                .add(config.getMappings()
+                .addDescriptions(config.getMappings()
                            .get(0)
                            .getInputData()
                            .stream())
@@ -185,7 +188,7 @@ public class SurrogateProducer {
     @Named("surrogate-target-properties-specification")
     public PropertiesSpecification createTargetProperties(final SurrogateConfiguration config) {
         return PropertiesSpecification.builder()
-                .add(config.getMappings()
+                .addDescriptions(config.getMappings()
                         .get(0)
                         .getOutputData()
                         .stream())

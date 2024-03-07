@@ -5,6 +5,8 @@ import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.properties.PropertySpecification;
 import de.evoal.core.api.properties.io.PropertiesReader;
 import de.evoal.core.api.utils.EvoalIOException;
+import de.evoal.core.api.utils.Requirements;
+import de.evoal.languages.model.ddl.DataDescription;
 import de.evoal.languages.model.ddl.RepresentationType;
 import lombok.extern.slf4j.Slf4j;
 import weka.core.Attribute;
@@ -72,7 +74,8 @@ public class ArffPropertiesReader implements PropertiesReader {
             }
 
             final PropertySpecification pSpec = specification.find(attr.name());
-            final RepresentationType rType = pSpec.type().getRepresentation();
+            Requirements.requireInstanceOf(pSpec, DataDescription.class);
+            final RepresentationType rType = ((DataDescription)pSpec.type()).getRepresentation();
             final TriFunction<Instance, PropertiesSpecification, PropertiesSpecification.Builder, Properties> decoratee = toProperties;
             final int index = i;
 

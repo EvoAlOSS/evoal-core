@@ -82,10 +82,10 @@ public class CrossValidationCalculator implements SurrogateInformationCalculator
 		double [][] data = new double[rowLength - 1][k];
 
 		final PropertiesSpecification mappingInput = PropertiesSpecification.builder()
-																			.add(originalMapping.getInputData().stream())
+																			.addDescriptions(originalMapping.getInputData().stream())
 																			.build();
 		final PropertiesSpecification mappingOutput = PropertiesSpecification.builder()
-																			 .add(originalMapping.getOutputData().stream())
+																			 .addDescriptions(originalMapping.getOutputData().stream())
 																			 .build();
 
 		final PropertiesSpecification [] fInputs = new PropertiesSpecification [originalMapping.getFunctions().size()];

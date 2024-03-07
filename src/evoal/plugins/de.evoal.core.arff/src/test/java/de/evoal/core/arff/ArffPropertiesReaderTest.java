@@ -94,7 +94,7 @@ public class ArffPropertiesReaderTest {
     private PropertiesSpecification toSpecification(final DataDescriptionModule model) {
         return PropertiesSpecification
                 .builder()
-                .add(model.getDescriptions().stream())
+                .addDescriptions(model.getDescriptions().stream())
                 .build();
     }
 }

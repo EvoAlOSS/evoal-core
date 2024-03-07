@@ -17,6 +17,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -35,11 +36,12 @@ public class VectorGenotypeCodec<G extends Gene<?, G>> implements CustomCodec<G>
     @Override
     public VectorGenotypeCodec<G> init(final Instance config) {
         log.info("LanguageHelper is {}", helper);
-        final List<Instance> chromosomeConfigurations = helper.lookup(config, "chromosomes");
+        final Object [] chromosomeConfigurations = helper.lookup(config, "chromosomes");
 
-        dynamicTemplates = chromosomeConfigurations.stream()
-                .map(i -> BeanFactory.createComponent(DynamicChromosome.class, i))
-                .collect(Collectors.toList());
+        dynamicTemplates = Arrays.stream(chromosomeConfigurations)
+                                 .map(Instance.class::cast)
+                                 .map(i -> BeanFactory.createComponent(DynamicChromosome.class, i))
+                                 .collect(Collectors.toList());
 
         return this;
     }

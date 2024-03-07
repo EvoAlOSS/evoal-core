@@ -5,6 +5,8 @@ import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.properties.PropertySpecification;
 import de.evoal.core.api.properties.io.PropertiesReader;
 import de.evoal.core.api.utils.EvoalIOException;
+import de.evoal.core.api.utils.Requirements;
+import de.evoal.languages.model.ddl.DataDescription;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.csv.CSVFormat;
@@ -68,7 +70,9 @@ public class CSVPropertiesReader implements PropertiesReader {
 
         for(final PropertySpecification s : specification.getProperties()) {
             final String strValue = record.get(s.name());
-            final Object value = switch (s.type().getRepresentation()) {
+            Requirements.requireInstanceOf(s.type(), DataDescription.class);
+
+            final Object value = switch (((DataDescription)s.type()).getRepresentation()) {
                 case BOOLEAN -> Boolean.parseBoolean(strValue);
                 case INTEGER -> "Infinity".equals(strValue) ? Integer.MAX_VALUE : nf.parse(strValue);
                 case REAL -> "Infinity".equals(strValue) ? Double.POSITIVE_INFINITY : nf.parse(strValue);

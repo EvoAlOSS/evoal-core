@@ -9,6 +9,7 @@ import de.evoal.core.api.properties.io.PropertiesIOFactory;
 import de.evoal.core.api.properties.io.PropertiesReader;
 import de.evoal.core.api.properties.io.PropertiesWriter;
 import de.evoal.core.arff.cdi.ArffBlackboardEntries;
+import de.evoal.languages.model.base.Definition;
 import de.evoal.languages.model.ddl.DataDescriptionModule;
 import de.evoal.languages.model.ddl.dsl.DataDescriptionLanguageStandaloneSetup;
 import de.evoal.languages.model.ddl.impl.DdlPackageImpl;
@@ -19,9 +20,7 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
-import javax.inject.Named;
 import java.io.File;
 
 @Slf4j
@@ -68,7 +67,7 @@ public class ConvertArff implements MainClass {
 
         return PropertiesSpecification
                     .builder()
-                    .add(model.getDescriptions().stream())
+                    .addDescriptions(model.getDescriptions().stream())
                     .build();
     }
 
