@@ -97,7 +97,7 @@ public class BooleanLiteralImpl extends LiteralImpl implements BooleanLiteral {
 	 * @generated
 	 */
 	@Override
-	public boolean getValue() {
+	public Boolean getValue() {
 		return isValue();
 	}
 

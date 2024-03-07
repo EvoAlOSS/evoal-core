@@ -48,6 +48,6 @@ public interface BooleanLiteral extends Literal {
 	 * @model kind="operation" required="true"
 	 * @generated
 	 */
-	boolean getValue();
+	Boolean getValue();
 
 } // BooleanLiteral
