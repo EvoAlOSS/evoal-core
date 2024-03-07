@@ -12,6 +12,7 @@ import io.jenetics.engine.EvolutionStream;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
+import javax.inject.Named;
 import java.util.stream.Stream;
 
 @Dependent
@@ -25,7 +26,7 @@ public class InitialStream {
 
     private Engine engine;
 
-    @Inject
+    @Inject @Named("codec")
     private CustomCodec codec;
 
     public InitialStream init(final InitialCandidatesProvider provider, final Engine<?, OptimisationValue> engine) {

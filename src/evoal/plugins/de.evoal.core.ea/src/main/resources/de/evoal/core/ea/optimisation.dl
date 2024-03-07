@@ -6,14 +6,36 @@ module de.evoal.core.ea.optimisation {
 		'size-of-population' : int;
 		'maximum-age' : int;
 	
-		genotype : array instance chromosome;
+		genotype : instance genotype;
 	
 		handlers : array instance 'handler';
 		selectors : instance selectors;
 		alterers : instance alterers;
 	}
-	
+
+    /**
+     * Base class for genotypes.
+     */
+	abstract type genotype {
+	}
+
+    /**
+     * A vector-based genotype that automatically maps 'data' to genes.
+     */
+	type 'vector-genotype' extends genotype {
+	    /**
+	     * List of chromosomes for mapping data on different ways.
+	     */
+        chromosomes : array instance chromosome;
+	}
+
+	/**
+	 * Abstract base type for different chromosome types.
+	 */
 	abstract type chromosome {
+	    /**
+	     * A chromosome consists of one to multiple genes.
+	     */
 		genes : array instance gene;
 	}
 	
@@ -30,10 +52,15 @@ module de.evoal.core.ea.optimisation {
 	
 	type 'integer-chromosome' extends chromosome {
 	}
+
+	/**
+	 * A gene maps some data.
+	 */
+	type gene {
+	    content : data;
+	}
 	
-	type gene { content : data; }
-	
-		type pareto extends comparator {
+    type pareto extends comparator {
 	}
 	
 	abstract type handler {}

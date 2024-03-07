@@ -3,11 +3,13 @@ package de.evoal.core.ea.main.statistics;
 import de.evoal.core.api.optimisation.OptimisationValue;
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.statistics.Candidate;
-import de.evoal.core.ea.main.codec.DynamicCodec;
+import de.evoal.core.ea.api.codec.CustomCodec;
+import de.evoal.core.ea.main.codec.VectorGenotypeCodec;
 import io.jenetics.Phenotype;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 /**
  * An adapter, c.f. GOF: adapter pattern, for adapting Jenetic's {@link Phenotype} to
@@ -27,8 +29,8 @@ public class CandidateAdapter implements Candidate {
      */
     private Phenotype<?, OptimisationValue> phenotype;
 
-    @Inject
-    private DynamicCodec codec;
+    @Inject @Named("codec")
+    private CustomCodec codec;
 
     public CandidateAdapter init(final Phenotype<?, OptimisationValue> phenotype, final int generation) {
         this.phenotype = phenotype;

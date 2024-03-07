@@ -22,12 +22,14 @@ public abstract class DynamicScaledChromosome extends DynamicBoundedDoubleChromo
     protected int scale;
 
     @Override
-    public void init(final Instance specification) {
+    public DynamicChromosome init(final Instance specification) {
         scale = evaluator.attributeToInteger(specification, "scale");
 
         super.init(specification);
         Requirements.requireSize(dataRepresented, 1);
         Requirements.requireSize(ranges, 1);
+
+        return this;
     }
 
     protected DoubleRange toRange(final DataDescription dataDescription) {

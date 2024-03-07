@@ -1,12 +1,11 @@
 package de.evoal.core.ea.main.codec;
 
 import de.evoal.core.api.cdi.BeanFactory;
+import de.evoal.core.api.utils.LanguageHelper;
 import de.evoal.core.ea.api.codec.CustomCodec;
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.ea.main.codec.chromosome.DynamicChromosome;
-import de.evoal.core.ea.main.codec.chromosome.DynamicChromosomeFactory;
-import de.evoal.languages.model.base.Array;
 import de.evoal.languages.model.base.Instance;
 import io.jenetics.Chromosome;
 import io.jenetics.Gene;
@@ -14,39 +13,35 @@ import io.jenetics.Genotype;
 import io.jenetics.util.Factory;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.Arrays;
+import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.inject.Produces;
+import javax.inject.Inject;
+import javax.inject.Named;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Slf4j
-public class DynamicCodec<G extends Gene<?, G>> implements CustomCodec<G> {
+public class VectorGenotypeCodec<G extends Gene<?, G>> implements CustomCodec<G> {
 
-    private final List<DynamicChromosome> dynamicTemplates;
+    @Inject
+    private @Named("genotype-specification") PropertiesSpecification specification;
 
-    private final PropertiesSpecification specification;
+    @Inject
+    private LanguageHelper helper;
 
-    public DynamicCodec(final PropertiesSpecification specification, final List<DynamicChromosome> dynamicTemplates, final List<Chromosome<G>> jeneticsTemplates) {
-        this.specification = specification;
-        this.dynamicTemplates = dynamicTemplates;
-    }
+    private List<DynamicChromosome> dynamicTemplates;
 
-    static DynamicCodec from(final Instance [] config, final PropertiesSpecification specification) {
-        final DynamicChromosomeFactory factory = BeanFactory.create(DynamicChromosomeFactory.class);
-        final List<DynamicChromosome> chromosomes = Arrays.stream(config)
-                                                          .map(Instance.class::cast)
-                                                          .map(factory::create)
-                                                          .collect(Collectors.toList());
+    @Override
+    public VectorGenotypeCodec<G> init(final Instance config) {
+        log.info("LanguageHelper is {}", helper);
+        final List<Instance> chromosomeConfigurations = helper.lookup(config, "chromosomes");
 
-        final List<Chromosome> templates = chromosomes.stream()
-                                                      .map(DynamicChromosome::toJenetics)
-                                                      .collect(Collectors.toList());
+        dynamicTemplates = chromosomeConfigurations.stream()
+                .map(i -> BeanFactory.createComponent(DynamicChromosome.class, i))
+                .collect(Collectors.toList());
 
-
-
-        log.info("Created dynamic codec for properties specification {}.", specification);
-
-        return new DynamicCodec(specification, chromosomes, templates);
+        return this;
     }
 
     @Override
@@ -83,5 +78,13 @@ public class DynamicCodec<G extends Gene<?, G>> implements CustomCodec<G> {
                                                                 .collect(Collectors.toList());
 
         return Genotype.of(chromosomes);
+    }
+
+    @Produces
+    @Named("de.evoal.core.ea.optimisation.vector-genotype")
+    @ApplicationScoped
+    public static CustomCodec create() {
+        log.info("Creating vector-based codec for optimisation problem.");
+        return BeanFactory.injectFields(new VectorGenotypeCodec());
     }
 }

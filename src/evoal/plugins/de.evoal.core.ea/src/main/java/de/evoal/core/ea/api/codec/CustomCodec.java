@@ -1,5 +1,6 @@
 package de.evoal.core.ea.api.codec;
 
+import de.evoal.core.api.cdi.EvoalComponent;
 import de.evoal.core.api.properties.Properties;
 import io.jenetics.Gene;
 import io.jenetics.Genotype;
@@ -10,7 +11,7 @@ import io.jenetics.engine.Codec;
  *
  * @param <G> The gene type.
  */
-public interface CustomCodec<G extends Gene<?, G>> extends Codec<Properties, G> {
+public interface CustomCodec<G extends Gene<?, G>> extends Codec<Properties, G>, EvoalComponent<CustomCodec<G>> {
 
     /**
      * Encodes an individual according to the codes into a genotype.

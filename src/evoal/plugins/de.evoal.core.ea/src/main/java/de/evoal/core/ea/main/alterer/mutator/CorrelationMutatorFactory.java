@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 import java.util.function.BiFunction;
 
 @ApplicationScoped
@@ -19,7 +20,7 @@ public final class CorrelationMutatorFactory {
     @Inject
     private Blackboard board;
 
-    @Inject
+    @Inject @Named("codec")
     private CustomCodec codec;
 
     @Produces

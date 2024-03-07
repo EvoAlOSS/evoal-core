@@ -44,7 +44,7 @@ public class GenerationStatisticsWriter implements StatisticsWriter {
     /**
      * Encoding for converting between ea and domain.
      */
-    @Inject
+    @Inject @Named("codec")
     private CustomCodec encoding;
 
     private EvolutionResult<?, FitnessValue> bestIndividual;

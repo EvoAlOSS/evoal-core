@@ -17,12 +17,14 @@ public abstract class DynamicBoundedIntegerChromosome extends DynamicChromosome 
     protected List<IntRange> ranges;
 
     @Override
-    public void init(final Instance specification) {
+    public DynamicChromosome init(final Instance specification) {
         super.init(specification);
 
         ranges = dataRepresented.stream()
                 .map(this::toRange)
                 .collect(Collectors.toList());
+
+        return this;
     }
 
     protected IntRange toRange(final DataDescription dataDescription) {

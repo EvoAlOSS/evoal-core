@@ -17,11 +17,12 @@ import de.evoal.core.api.utils.LanguageHelper;
 import de.evoal.core.api.optimisation.OptimisationValue;
 
 import de.evoal.core.api.statistics.writer.StatisticsWriter;
+import de.evoal.core.ea.api.codec.CustomCodec;
 import de.evoal.core.ea.main.fitness.JeneticsFitnessFunction;
 import de.evoal.core.ea.main.initial.InitialStream;
 import de.evoal.core.ea.main.jenetics.ConstraintList;
 import de.evoal.core.ea.main.alterer.AltererFactory;
-import de.evoal.core.ea.main.codec.DynamicCodec;
+import de.evoal.core.ea.main.codec.VectorGenotypeCodec;
 import de.evoal.core.ea.main.statistics.JeneticsStatisticsWriter;
 import de.evoal.languages.model.base.Attribute;
 import de.evoal.languages.model.ol.OptimisationModule;
@@ -33,6 +34,7 @@ import lombok.extern.slf4j.Slf4j;
 import javax.enterprise.context.Dependent;
 import javax.enterprise.inject.Instance;
 
+import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -67,8 +69,8 @@ public class EvolutionaryAlgorithmOptimisation implements OptimisationAlgorithm 
 
 	private final Map<String, List<Alterer<?, OptimisationValue>>> alterers = new HashMap<>();
 
-	@Inject
-	private DynamicCodec encoding;
+	@Inject @Named("codec")
+	private CustomCodec encoding;
 
 	private final ExecutorService executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
 
@@ -90,14 +92,8 @@ public class EvolutionaryAlgorithmOptimisation implements OptimisationAlgorithm 
 	@Inject
 	private Instance<List<Constraint>> constraints;
 
-
 	@Inject @Named("initial")
 	private InitialCandidatesProvider provider;
-
-	@Override
-	public OptimisationAlgorithm init(de.evoal.languages.model.base.Instance instance) {
-		return this;
-	}
 
 	public void run() {
 		setup();

@@ -31,14 +31,16 @@ module search {
 		
 		'comparator' := 'numeric-comparator' {};
 	
-	    genotype := [
-	            'bit-chromosome' {
+	    genotype := 'vector-genotype' {
+	        chromosomes := [
+				'bit-chromosome' {
 	                    scale := 12;
 	                    genes:= [
 	                            gene {content:= data 'x:0';}
 	                    ];
 	            }
-	    ];
+			];
+	    };
 	
 	    handlers := [];
 	

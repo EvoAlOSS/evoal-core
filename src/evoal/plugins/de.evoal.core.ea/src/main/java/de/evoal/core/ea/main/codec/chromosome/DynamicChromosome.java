@@ -1,5 +1,6 @@
 package de.evoal.core.ea.main.codec.chromosome;
 
+import de.evoal.core.api.cdi.EvoalComponent;
 import de.evoal.core.api.languages.ExpressionEvaluator;
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;
@@ -17,14 +18,15 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public abstract class DynamicChromosome {
+public abstract class DynamicChromosome implements EvoalComponent<DynamicChromosome> {
    @Inject
    private ExpressionEvaluator evaluator;
 
     protected List<DataDescription> dataRepresented;
     protected PropertiesSpecification specification;
 
-    public void init(final Instance specification) {
+    @Override
+    public DynamicChromosome init(final Instance specification) {
         final List<Instance> genes = (List<Instance>) evaluator.attributeToObject(specification, "genes");
 
         this.dataRepresented = genes.stream()
@@ -36,6 +38,8 @@ public abstract class DynamicChromosome {
         this.specification = PropertiesSpecification.builder()
                                                     .add(dataRepresented.stream())
                                                     .build();
+
+        return this;
     }
 
     public abstract Chromosome toJenetics();

@@ -1,7 +1,9 @@
 package de.evoal.core.api.cdi;
 
 import de.evoal.core.api.utils.InitializationException;
+import de.evoal.core.api.utils.LanguageHelper;
 import de.evoal.core.api.utils.Requirements;
+import de.evoal.languages.model.base.Attribute;
 import de.evoal.languages.model.base.Instance;
 import de.evoal.languages.model.dl.util.FQNProvider;
 import lombok.NonNull;
@@ -73,17 +75,16 @@ public final class BeanFactory {
         }
     }
 
-    public static <T extends EvoalComponent<T>> T createComponent(final Class<T> type, final Instance configuration) {
+    public static <T extends EvoalComponent<T>> T createComponent(final Class<T> type, final String name, final Instance configuration) {
         Requirements.requireNotNull(type);
         Requirements.requireNotNull(configuration);
-
-        final String name = new FQNProvider().get(configuration);
+        Requirements.requireNotNull(name);
 
         log.info("Creating bean for instance of type {}.", name);
         try {
             return BeanProvider.getContextualReference(name, false, type)
-                               .init(configuration);
-        } catch(final IllegalStateException | IllegalArgumentException | InitializationException e) {
+                    .init(configuration);
+        } catch (final IllegalStateException | IllegalArgumentException | InitializationException e) {
             log.error("Failed to create contextual reference of type '{}' with name '{}'.", type, name);
             logInstantiationError(type, e);
 
@@ -91,7 +92,22 @@ public final class BeanFactory {
         }
     }
 
-    public static void injectFields(final Object instance) {
-        BeanProvider.injectFields(instance);
+    public static <T extends EvoalComponent<T>> T createComponent(final Class<T> type, final Instance configuration) {
+        Requirements.requireNotNull(configuration);
+
+        final String name = new FQNProvider().get(configuration);
+
+        return createComponent(type, name, configuration);
+    }
+
+    public static <T extends EvoalComponent<T>> T createComponentForAttribute(final Class<T> type, final Instance configuration, final String attributeName) {
+        final LanguageHelper helper = BeanFactory.create(LanguageHelper.class);
+        final Instance child = helper.lookup(configuration, attributeName);
+
+        return createComponent(type, child);
+    }
+
+    public static <T> T injectFields(final T instance) {
+        return BeanProvider.injectFields(instance);
     }
 }

@@ -37,7 +37,7 @@ public class JeneticsConstraintProducer {
             final @ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.handlers") Instance [] handlerConfigurations,
             final @Named("optimisation-space-specification") PropertiesSpecification optimisationSpec,
             final @Named("optimisation-function") OptimisationFunction function,
-            final CustomCodec codec,
+            final @Named("codec") CustomCodec codec,
             final Constraints constraints,
             final CalculationFactory factory) {
 

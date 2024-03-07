@@ -11,6 +11,7 @@ module de.evoal.core.ea {
 
     requires org.eclipse.emf.common;
 
+    requires de.evoal.languages.model.dl;
     requires de.evoal.languages.model.ddl;
     requires de.evoal.languages.model.base;
     requires de.evoal.languages.model.instance;
@@ -28,6 +29,7 @@ module de.evoal.core.ea {
 
     opens de.evoal.core.ea;
 
+    opens de.evoal.core.ea.api.codec to weld.core.impl;
     opens de.evoal.core.ea.main.alterer to weld.core.impl;
     opens de.evoal.core.ea.main.alterer.mutator to weld.core.impl;
     opens de.evoal.core.ea.main.codec to weld.core.impl;
@@ -36,6 +38,7 @@ module de.evoal.core.ea {
     opens de.evoal.core.ea.main.constraint to weld.core.impl;
     opens de.evoal.core.ea.main.fitness to weld.core.impl;
     opens de.evoal.core.ea.main.initial to weld.core.impl;
+    opens de.evoal.core.ea.main.producer to weld.core.impl;
     opens de.evoal.core.ea.main.selector to weld.core.impl;
     opens de.evoal.core.ea.main.search to weld.core.impl;
     opens de.evoal.core.ea.main.statistics to weld.core.impl;
