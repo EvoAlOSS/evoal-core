@@ -4,6 +4,7 @@ package de.evoal.languages.model.ddl.impl;
 
 import de.evoal.languages.model.base.Expression;
 
+import de.evoal.languages.model.base.impl.DefinitionImpl;
 import de.evoal.languages.model.ddl.DataDescription;
 import de.evoal.languages.model.ddl.DdlPackage;
 import de.evoal.languages.model.ddl.RepresentationType;
@@ -20,8 +21,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -33,34 +32,13 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link de.evoal.languages.model.ddl.impl.DataDescriptionImpl#getName <em>Name</em>}</li>
  *   <li>{@link de.evoal.languages.model.ddl.impl.DataDescriptionImpl#getConstraints <em>Constraints</em>}</li>
  *   <li>{@link de.evoal.languages.model.ddl.impl.DataDescriptionImpl#getRepresentation <em>Representation</em>}</li>
  * </ul>
  *
  * @generated
  */
-public abstract class DataDescriptionImpl extends MinimalEObjectImpl.Container implements DataDescription {
-	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String NAME_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String name = NAME_EDEFAULT;
-
+public abstract class DataDescriptionImpl extends DefinitionImpl implements DataDescription {
 	/**
 	 * The cached value of the '{@link #getConstraints() <em>Constraints</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -108,29 +86,6 @@ public abstract class DataDescriptionImpl extends MinimalEObjectImpl.Container i
 	@Override
 	protected EClass eStaticClass() {
 		return DdlPackage.Literals.DATA_DESCRIPTION;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setName(String newName) {
-		String oldName = name;
-		name = newName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DdlPackage.DATA_DESCRIPTION__NAME, oldName, name));
 	}
 
 	/**
@@ -203,8 +158,6 @@ public abstract class DataDescriptionImpl extends MinimalEObjectImpl.Container i
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case DdlPackage.DATA_DESCRIPTION__NAME:
-				return getName();
 			case DdlPackage.DATA_DESCRIPTION__CONSTRAINTS:
 				return getConstraints();
 			case DdlPackage.DATA_DESCRIPTION__REPRESENTATION:
@@ -222,9 +175,6 @@ public abstract class DataDescriptionImpl extends MinimalEObjectImpl.Container i
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case DdlPackage.DATA_DESCRIPTION__NAME:
-				setName((String)newValue);
-				return;
 			case DdlPackage.DATA_DESCRIPTION__CONSTRAINTS:
 				getConstraints().clear();
 				getConstraints().addAll((Collection<? extends Expression>)newValue);
@@ -244,9 +194,6 @@ public abstract class DataDescriptionImpl extends MinimalEObjectImpl.Container i
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case DdlPackage.DATA_DESCRIPTION__NAME:
-				setName(NAME_EDEFAULT);
-				return;
 			case DdlPackage.DATA_DESCRIPTION__CONSTRAINTS:
 				getConstraints().clear();
 				return;
@@ -265,8 +212,6 @@ public abstract class DataDescriptionImpl extends MinimalEObjectImpl.Container i
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case DdlPackage.DATA_DESCRIPTION__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case DdlPackage.DATA_DESCRIPTION__CONSTRAINTS:
 				return constraints != null && !constraints.isEmpty();
 			case DdlPackage.DATA_DESCRIPTION__REPRESENTATION:
@@ -285,9 +230,7 @@ public abstract class DataDescriptionImpl extends MinimalEObjectImpl.Container i
 		if (eIsProxy()) return super.toString();
 
 		StringBuilder result = new StringBuilder(super.toString());
-		result.append(" (name: ");
-		result.append(name);
-		result.append(", representation: ");
+		result.append(" (representation: ");
 		result.append(representation);
 		result.append(')');
 		return result.toString();

@@ -195,7 +195,7 @@ public interface DdlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DATA_DESCRIPTION__NAME = 0;
+	int DATA_DESCRIPTION__NAME = BasePackage.DEFINITION__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Constraints</b></em>' containment reference list.
@@ -204,7 +204,7 @@ public interface DdlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DATA_DESCRIPTION__CONSTRAINTS = 1;
+	int DATA_DESCRIPTION__CONSTRAINTS = BasePackage.DEFINITION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Representation</b></em>' attribute.
@@ -213,7 +213,7 @@ public interface DdlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DATA_DESCRIPTION__REPRESENTATION = 2;
+	int DATA_DESCRIPTION__REPRESENTATION = BasePackage.DEFINITION_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Data Description</em>' class.
@@ -222,7 +222,7 @@ public interface DdlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DATA_DESCRIPTION_FEATURE_COUNT = 3;
+	int DATA_DESCRIPTION_FEATURE_COUNT = BasePackage.DEFINITION_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.ddl.impl.TypedDataDescriptionImpl <em>Typed Data Description</em>}' class.
@@ -532,17 +532,6 @@ public interface DdlPackage extends EPackage {
 	EClass getDataDescription();
 
 	/**
-	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.ddl.DataDescription#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see de.evoal.languages.model.ddl.DataDescription#getName()
-	 * @see #getDataDescription()
-	 * @generated
-	 */
-	EAttribute getDataDescription_Name();
-
-	/**
 	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.ddl.DataDescription#getConstraints <em>Constraints</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -780,14 +769,6 @@ public interface DdlPackage extends EPackage {
 		 * @generated
 		 */
 		EClass DATA_DESCRIPTION = eINSTANCE.getDataDescription();
-
-		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute DATA_DESCRIPTION__NAME = eINSTANCE.getDataDescription_Name();
 
 		/**
 		 * The meta object literal for the '<em><b>Constraints</b></em>' containment reference list feature.
