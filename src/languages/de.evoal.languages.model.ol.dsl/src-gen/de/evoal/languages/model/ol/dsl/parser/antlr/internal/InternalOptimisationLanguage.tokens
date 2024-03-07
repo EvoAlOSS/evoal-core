@@ -9,7 +9,7 @@
 '-'=60
 '.'=52
 '/'=62
-':'=37
+':'=38
 ':='=20
 ';'=21
 '<'=57
@@ -42,15 +42,15 @@
 'documenting'=19
 'expression'=41
 'f'=80
-'false'=36
+'false'=37
 'for'=23
 'from'=51
 'h'=72
 'import'=50
-'instance'=39
+'instance'=35
 'int'=42
 'k'=71
-'literal'=38
+'literal'=39
 'm'=76
 'module'=15
 'n'=78
@@ -60,7 +60,7 @@
 'real'=43
 'specify'=18
 'string'=40
-'true'=35
+'true'=36
 'type'=47
 'void'=45
 'y'=83

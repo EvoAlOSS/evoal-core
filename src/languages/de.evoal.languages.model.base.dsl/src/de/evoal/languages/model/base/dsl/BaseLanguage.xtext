@@ -83,7 +83,12 @@ CallRule returns Call:
 
 
 ReferenceRule returns ValueReference:
-	ConstantReferenceRule
+	ConstantReferenceRule | InstanceDefinitionReferenceRule
+;
+
+InstanceDefinitionReferenceRule returns InstanceDefinitionReference:
+	{InstanceDefinitionReference}
+	'instance' definition = [TypeDefinition|QualifiedName]
 ;
 
 ConstantReferenceRule returns ConstantReference:

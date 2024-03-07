@@ -970,7 +970,7 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 	
 	//@Override
 	//ReferenceRule returns base::ValueReference:
-	//    ConstantReferenceRule | DataReferenceRule
+	//    ConstantReferenceRule | DataReferenceRule | InstanceDefinitionReferenceRule
 	//;
 	public InstanceLanguageGrammarAccess.ReferenceRuleElements getReferenceRuleAccess() {
 		return gaInstanceLanguage.getReferenceRuleAccess();
@@ -1193,6 +1193,18 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 	
 	public ParserRule getCallRuleRule() {
 		return getCallRuleAccess().getRule();
+	}
+	
+	//InstanceDefinitionReferenceRule returns InstanceDefinitionReference:
+	//    {InstanceDefinitionReference}
+	//    'instance' definition = [TypeDefinition|QualifiedName]
+	//;
+	public BaseLanguageGrammarAccess.InstanceDefinitionReferenceRuleElements getInstanceDefinitionReferenceRuleAccess() {
+		return gaBaseLanguage.getInstanceDefinitionReferenceRuleAccess();
+	}
+	
+	public ParserRule getInstanceDefinitionReferenceRuleRule() {
+		return getInstanceDefinitionReferenceRuleAccess().getRule();
 	}
 	
 	//ConstantReferenceRule returns ConstantReference:

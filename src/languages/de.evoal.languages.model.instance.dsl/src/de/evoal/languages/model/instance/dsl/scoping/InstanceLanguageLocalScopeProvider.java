@@ -14,11 +14,11 @@ import de.evoal.languages.model.utils.scoping.WildcardEnabledLocalScopeProvider;
 
 public class InstanceLanguageLocalScopeProvider extends WildcardEnabledLocalScopeProvider {
 	
-	private final static EClass instance = BasePackage.eINSTANCE.getInstance();
-	private final static EReference attributeDefinition = BasePackage.eINSTANCE.getAttribute_Definition();
+	private final static EClass dataReference = InstancePackage.eINSTANCE.getDataReference();
+	private final static EReference dataDefinition = InstancePackage.eINSTANCE.getDataReference_Definition();
+private final static EClass instance = BasePackage.eINSTANCE.getInstance();
 	private final static EReference instanceDefinition = BasePackage.eINSTANCE.getInstance_Definition();
-	private static EReference dataDefinition = InstancePackage.eINSTANCE.getDataReference_Definition();
-	private static EClass dataReference = InstancePackage.eINSTANCE.getDataReference();
+	private final static EReference attributeDefinition = BasePackage.eINSTANCE.getAttribute_Definition();
 
 	@Inject
 	private BaseLanguageLocalScopeProvider provider;

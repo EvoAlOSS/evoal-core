@@ -184,6 +184,15 @@ public interface BaseFactory extends EFactory {
 	ValueReference createValueReference();
 
 	/**
+	 * Returns a new object of class '<em>Instance Definition Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Instance Definition Reference</em>'.
+	 * @generated
+	 */
+	InstanceDefinitionReference createInstanceDefinitionReference();
+
+	/**
 	 * Returns a new object of class '<em>Type Definition</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

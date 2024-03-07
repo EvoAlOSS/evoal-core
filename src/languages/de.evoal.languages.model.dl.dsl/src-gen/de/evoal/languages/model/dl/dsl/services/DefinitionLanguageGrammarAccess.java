@@ -368,7 +368,7 @@ public class DefinitionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 	}
 	
 	//ReferenceRule returns ValueReference:
-	//    ConstantReferenceRule
+	//    ConstantReferenceRule | InstanceDefinitionReferenceRule
 	//;
 	public BaseLanguageGrammarAccess.ReferenceRuleElements getReferenceRuleAccess() {
 		return gaBaseLanguage.getReferenceRuleAccess();
@@ -376,6 +376,18 @@ public class DefinitionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 	
 	public ParserRule getReferenceRuleRule() {
 		return getReferenceRuleAccess().getRule();
+	}
+	
+	//InstanceDefinitionReferenceRule returns InstanceDefinitionReference:
+	//    {InstanceDefinitionReference}
+	//    'instance' definition = [TypeDefinition|QualifiedName]
+	//;
+	public BaseLanguageGrammarAccess.InstanceDefinitionReferenceRuleElements getInstanceDefinitionReferenceRuleAccess() {
+		return gaBaseLanguage.getInstanceDefinitionReferenceRuleAccess();
+	}
+	
+	public ParserRule getInstanceDefinitionReferenceRuleRule() {
+		return getInstanceDefinitionReferenceRuleAccess().getRule();
 	}
 	
 	//ConstantReferenceRule returns ConstantReference:

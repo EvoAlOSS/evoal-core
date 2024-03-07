@@ -170,6 +170,10 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FunctionName"/>
   <eClassifiers xsi:type="ecore:EClass" name="ValueReference" eSuperTypes="#//Value"/>
+  <eClassifiers xsi:type="ecore:EClass" name="InstanceDefinitionReference" eSuperTypes="#//ValueReference">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="definition" lowerBound="1"
+        eType="#//TypeDefinition"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="Factor">
     <eLiterals name="Yotta" value="24"/>
     <eLiterals name="Zetta" value="21"/>

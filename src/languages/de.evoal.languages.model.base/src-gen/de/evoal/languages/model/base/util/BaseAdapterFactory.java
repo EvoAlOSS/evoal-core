@@ -156,6 +156,10 @@ public class BaseAdapterFactory extends AdapterFactoryImpl {
 				return createValueReferenceAdapter();
 			}
 			@Override
+			public Adapter caseInstanceDefinitionReference(InstanceDefinitionReference object) {
+				return createInstanceDefinitionReferenceAdapter();
+			}
+			@Override
 			public Adapter caseTypeDefinition(TypeDefinition object) {
 				return createTypeDefinitionAdapter();
 			}
@@ -572,6 +576,20 @@ public class BaseAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createValueReferenceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.InstanceDefinitionReference <em>Instance Definition Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.evoal.languages.model.base.InstanceDefinitionReference
+	 * @generated
+	 */
+	public Adapter createInstanceDefinitionReferenceAdapter() {
 		return null;
 	}
 

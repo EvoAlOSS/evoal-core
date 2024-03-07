@@ -1171,17 +1171,83 @@ ruleReferenceRule returns [EObject current=null]
 @after {
 	leaveRule();
 }:
-	{
-		/* */
-	}
-	{
-		newCompositeNode(grammarAccess.getReferenceRuleAccess().getConstantReferenceRuleParserRuleCall());
-	}
-	this_ConstantReferenceRule_0=ruleConstantReferenceRule
-	{
-		$current = $this_ConstantReferenceRule_0.current;
-		afterParserOrEnumRuleCall();
-	}
+	(
+		{
+			/* */
+		}
+		{
+			newCompositeNode(grammarAccess.getReferenceRuleAccess().getConstantReferenceRuleParserRuleCall_0());
+		}
+		this_ConstantReferenceRule_0=ruleConstantReferenceRule
+		{
+			$current = $this_ConstantReferenceRule_0.current;
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		{
+			/* */
+		}
+		{
+			newCompositeNode(grammarAccess.getReferenceRuleAccess().getInstanceDefinitionReferenceRuleParserRuleCall_1());
+		}
+		this_InstanceDefinitionReferenceRule_1=ruleInstanceDefinitionReferenceRule
+		{
+			$current = $this_InstanceDefinitionReferenceRule_1.current;
+			afterParserOrEnumRuleCall();
+		}
+	)
+;
+
+// Entry rule entryRuleInstanceDefinitionReferenceRule
+entryRuleInstanceDefinitionReferenceRule returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getInstanceDefinitionReferenceRuleRule()); }
+	iv_ruleInstanceDefinitionReferenceRule=ruleInstanceDefinitionReferenceRule
+	{ $current=$iv_ruleInstanceDefinitionReferenceRule.current; }
+	EOF;
+
+// Rule InstanceDefinitionReferenceRule
+ruleInstanceDefinitionReferenceRule returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			{
+				/* */
+			}
+			{
+				$current = forceCreateModelElement(
+					grammarAccess.getInstanceDefinitionReferenceRuleAccess().getInstanceDefinitionReferenceAction_0(),
+					$current);
+			}
+		)
+		otherlv_1='instance'
+		{
+			newLeafNode(otherlv_1, grammarAccess.getInstanceDefinitionReferenceRuleAccess().getInstanceKeyword_1());
+		}
+		(
+			(
+				{
+					/* */
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getInstanceDefinitionReferenceRuleRule());
+					}
+				}
+				{
+					newCompositeNode(grammarAccess.getInstanceDefinitionReferenceRuleAccess().getDefinitionTypeDefinitionCrossReference_2_0());
+				}
+				ruleQualifiedName
+				{
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+	)
 ;
 
 // Entry rule entryRuleConstantReferenceRule

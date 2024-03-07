@@ -5,11 +5,9 @@ import "https://www.evoal.de/languages/instance/1.0.0"
 import "https://www.evoal.de/languages/ddl/1.0.0" as ddl
 import "https://www.evoal.de/languages/base/1.0.0" as base
 
-
-
 @Override
 ReferenceRule returns base::ValueReference:
-	ConstantReferenceRule | DataReferenceRule
+	ConstantReferenceRule | DataReferenceRule | InstanceDefinitionReferenceRule
 ;
 
 DataReferenceRule returns DataReference:

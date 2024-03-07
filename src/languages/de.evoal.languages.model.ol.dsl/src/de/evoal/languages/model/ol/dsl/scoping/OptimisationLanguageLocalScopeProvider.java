@@ -14,11 +14,11 @@ import de.evoal.languages.model.utils.scoping.WildcardEnabledLocalScopeProvider;
 public class OptimisationLanguageLocalScopeProvider extends WildcardEnabledLocalScopeProvider {
 	private static EClass instance = BasePackage.eINSTANCE.getInstance();
 	private static EReference attributeDefinition = BasePackage.eINSTANCE.getAttribute_Definition();
-		
-	
+
 	@Inject
 	private InstanceLanguageLocalScopeProvider instanceScopes;
-	
+
+
 	@Override
 	public IScope getScope(final EObject context, final EReference reference) {
 		if(instance.isSuperTypeOf(context.eClass()) && (attributeDefinition.equals(reference))) {
@@ -34,5 +34,5 @@ public class OptimisationLanguageLocalScopeProvider extends WildcardEnabledLocal
 		}
 
 		return super.getScope(context, reference);
-	}	
+	}
 }

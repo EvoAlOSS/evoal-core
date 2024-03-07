@@ -522,10 +522,10 @@ public class InternalOptimisationLanguageLexer extends Lexer {
         try {
             int _type = T__35;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalOptimisationLanguage.g:31:7: ( 'true' )
-            // InternalOptimisationLanguage.g:31:9: 'true'
+            // InternalOptimisationLanguage.g:31:7: ( 'instance' )
+            // InternalOptimisationLanguage.g:31:9: 'instance'
             {
-            match("true"); 
+            match("instance"); 
 
 
             }
@@ -543,10 +543,10 @@ public class InternalOptimisationLanguageLexer extends Lexer {
         try {
             int _type = T__36;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalOptimisationLanguage.g:32:7: ( 'false' )
-            // InternalOptimisationLanguage.g:32:9: 'false'
+            // InternalOptimisationLanguage.g:32:7: ( 'true' )
+            // InternalOptimisationLanguage.g:32:9: 'true'
             {
-            match("false"); 
+            match("true"); 
 
 
             }
@@ -564,10 +564,11 @@ public class InternalOptimisationLanguageLexer extends Lexer {
         try {
             int _type = T__37;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalOptimisationLanguage.g:33:7: ( ':' )
-            // InternalOptimisationLanguage.g:33:9: ':'
+            // InternalOptimisationLanguage.g:33:7: ( 'false' )
+            // InternalOptimisationLanguage.g:33:9: 'false'
             {
-            match(':'); 
+            match("false"); 
+
 
             }
 
@@ -584,11 +585,10 @@ public class InternalOptimisationLanguageLexer extends Lexer {
         try {
             int _type = T__38;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalOptimisationLanguage.g:34:7: ( 'literal' )
-            // InternalOptimisationLanguage.g:34:9: 'literal'
+            // InternalOptimisationLanguage.g:34:7: ( ':' )
+            // InternalOptimisationLanguage.g:34:9: ':'
             {
-            match("literal"); 
-
+            match(':'); 
 
             }
 
@@ -605,10 +605,10 @@ public class InternalOptimisationLanguageLexer extends Lexer {
         try {
             int _type = T__39;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalOptimisationLanguage.g:35:7: ( 'instance' )
-            // InternalOptimisationLanguage.g:35:9: 'instance'
+            // InternalOptimisationLanguage.g:35:7: ( 'literal' )
+            // InternalOptimisationLanguage.g:35:9: 'literal'
             {
-            match("instance"); 
+            match("literal"); 
 
 
             }
@@ -1520,8 +1520,8 @@ public class InternalOptimisationLanguageLexer extends Lexer {
     // $ANTLR start "RULE_DIGIT"
     public final void mRULE_DIGIT() throws RecognitionException {
         try {
-            // InternalOptimisationLanguage.g:3144:21: ( '0' .. '9' )
-            // InternalOptimisationLanguage.g:3144:23: '0' .. '9'
+            // InternalOptimisationLanguage.g:3208:21: ( '0' .. '9' )
+            // InternalOptimisationLanguage.g:3208:23: '0' .. '9'
             {
             matchRange('0','9'); 
 
@@ -1536,11 +1536,11 @@ public class InternalOptimisationLanguageLexer extends Lexer {
     // $ANTLR start "RULE_EXPONENT"
     public final void mRULE_EXPONENT() throws RecognitionException {
         try {
-            // InternalOptimisationLanguage.g:3146:24: ( 'e' ( '+' | '-' )? ( RULE_DIGIT )+ )
-            // InternalOptimisationLanguage.g:3146:26: 'e' ( '+' | '-' )? ( RULE_DIGIT )+
+            // InternalOptimisationLanguage.g:3210:24: ( 'e' ( '+' | '-' )? ( RULE_DIGIT )+ )
+            // InternalOptimisationLanguage.g:3210:26: 'e' ( '+' | '-' )? ( RULE_DIGIT )+
             {
             match('e'); 
-            // InternalOptimisationLanguage.g:3146:30: ( '+' | '-' )?
+            // InternalOptimisationLanguage.g:3210:30: ( '+' | '-' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -1566,7 +1566,7 @@ public class InternalOptimisationLanguageLexer extends Lexer {
 
             }
 
-            // InternalOptimisationLanguage.g:3146:41: ( RULE_DIGIT )+
+            // InternalOptimisationLanguage.g:3210:41: ( RULE_DIGIT )+
             int cnt2=0;
             loop2:
             do {
@@ -1580,7 +1580,7 @@ public class InternalOptimisationLanguageLexer extends Lexer {
 
                 switch (alt2) {
             	case 1 :
-            	    // InternalOptimisationLanguage.g:3146:41: RULE_DIGIT
+            	    // InternalOptimisationLanguage.g:3210:41: RULE_DIGIT
             	    {
             	    mRULE_DIGIT(); 
 
@@ -1610,10 +1610,10 @@ public class InternalOptimisationLanguageLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalOptimisationLanguage.g:3148:10: ( ( '-' )? ( RULE_DIGIT )+ )
-            // InternalOptimisationLanguage.g:3148:12: ( '-' )? ( RULE_DIGIT )+
+            // InternalOptimisationLanguage.g:3212:10: ( ( '-' )? ( RULE_DIGIT )+ )
+            // InternalOptimisationLanguage.g:3212:12: ( '-' )? ( RULE_DIGIT )+
             {
-            // InternalOptimisationLanguage.g:3148:12: ( '-' )?
+            // InternalOptimisationLanguage.g:3212:12: ( '-' )?
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -1622,7 +1622,7 @@ public class InternalOptimisationLanguageLexer extends Lexer {
             }
             switch (alt3) {
                 case 1 :
-                    // InternalOptimisationLanguage.g:3148:12: '-'
+                    // InternalOptimisationLanguage.g:3212:12: '-'
                     {
                     match('-'); 
 
@@ -1631,7 +1631,7 @@ public class InternalOptimisationLanguageLexer extends Lexer {
 
             }
 
-            // InternalOptimisationLanguage.g:3148:17: ( RULE_DIGIT )+
+            // InternalOptimisationLanguage.g:3212:17: ( RULE_DIGIT )+
             int cnt4=0;
             loop4:
             do {
@@ -1645,7 +1645,7 @@ public class InternalOptimisationLanguageLexer extends Lexer {
 
                 switch (alt4) {
             	case 1 :
-            	    // InternalOptimisationLanguage.g:3148:17: RULE_DIGIT
+            	    // InternalOptimisationLanguage.g:3212:17: RULE_DIGIT
             	    {
             	    mRULE_DIGIT(); 
 
@@ -1677,15 +1677,15 @@ public class InternalOptimisationLanguageLexer extends Lexer {
         try {
             int _type = RULE_DOUBLE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalOptimisationLanguage.g:3150:13: ( ( RULE_INT RULE_EXPONENT | RULE_INT '.' ( RULE_DIGIT )* ( RULE_EXPONENT )? ) )
-            // InternalOptimisationLanguage.g:3150:15: ( RULE_INT RULE_EXPONENT | RULE_INT '.' ( RULE_DIGIT )* ( RULE_EXPONENT )? )
+            // InternalOptimisationLanguage.g:3214:13: ( ( RULE_INT RULE_EXPONENT | RULE_INT '.' ( RULE_DIGIT )* ( RULE_EXPONENT )? ) )
+            // InternalOptimisationLanguage.g:3214:15: ( RULE_INT RULE_EXPONENT | RULE_INT '.' ( RULE_DIGIT )* ( RULE_EXPONENT )? )
             {
-            // InternalOptimisationLanguage.g:3150:15: ( RULE_INT RULE_EXPONENT | RULE_INT '.' ( RULE_DIGIT )* ( RULE_EXPONENT )? )
+            // InternalOptimisationLanguage.g:3214:15: ( RULE_INT RULE_EXPONENT | RULE_INT '.' ( RULE_DIGIT )* ( RULE_EXPONENT )? )
             int alt7=2;
             alt7 = dfa7.predict(input);
             switch (alt7) {
                 case 1 :
-                    // InternalOptimisationLanguage.g:3150:16: RULE_INT RULE_EXPONENT
+                    // InternalOptimisationLanguage.g:3214:16: RULE_INT RULE_EXPONENT
                     {
                     mRULE_INT(); 
                     mRULE_EXPONENT(); 
@@ -1693,11 +1693,11 @@ public class InternalOptimisationLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalOptimisationLanguage.g:3150:39: RULE_INT '.' ( RULE_DIGIT )* ( RULE_EXPONENT )?
+                    // InternalOptimisationLanguage.g:3214:39: RULE_INT '.' ( RULE_DIGIT )* ( RULE_EXPONENT )?
                     {
                     mRULE_INT(); 
                     match('.'); 
-                    // InternalOptimisationLanguage.g:3150:52: ( RULE_DIGIT )*
+                    // InternalOptimisationLanguage.g:3214:52: ( RULE_DIGIT )*
                     loop5:
                     do {
                         int alt5=2;
@@ -1710,7 +1710,7 @@ public class InternalOptimisationLanguageLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // InternalOptimisationLanguage.g:3150:52: RULE_DIGIT
+                    	    // InternalOptimisationLanguage.g:3214:52: RULE_DIGIT
                     	    {
                     	    mRULE_DIGIT(); 
 
@@ -1722,7 +1722,7 @@ public class InternalOptimisationLanguageLexer extends Lexer {
                         }
                     } while (true);
 
-                    // InternalOptimisationLanguage.g:3150:64: ( RULE_EXPONENT )?
+                    // InternalOptimisationLanguage.g:3214:64: ( RULE_EXPONENT )?
                     int alt6=2;
                     int LA6_0 = input.LA(1);
 
@@ -1731,7 +1731,7 @@ public class InternalOptimisationLanguageLexer extends Lexer {
                     }
                     switch (alt6) {
                         case 1 :
-                            // InternalOptimisationLanguage.g:3150:64: RULE_EXPONENT
+                            // InternalOptimisationLanguage.g:3214:64: RULE_EXPONENT
                             {
                             mRULE_EXPONENT(); 
 
@@ -1762,11 +1762,11 @@ public class InternalOptimisationLanguageLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalOptimisationLanguage.g:3152:13: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' )
-            // InternalOptimisationLanguage.g:3152:15: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+            // InternalOptimisationLanguage.g:3216:13: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' )
+            // InternalOptimisationLanguage.g:3216:15: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
             {
             match('\"'); 
-            // InternalOptimisationLanguage.g:3152:19: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+            // InternalOptimisationLanguage.g:3216:19: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
             loop8:
             do {
                 int alt8=3;
@@ -1782,7 +1782,7 @@ public class InternalOptimisationLanguageLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // InternalOptimisationLanguage.g:3152:20: '\\\\' .
+            	    // InternalOptimisationLanguage.g:3216:20: '\\\\' .
             	    {
             	    match('\\'); 
             	    matchAny(); 
@@ -1790,7 +1790,7 @@ public class InternalOptimisationLanguageLexer extends Lexer {
             	    }
             	    break;
             	case 2 :
-            	    // InternalOptimisationLanguage.g:3152:27: ~ ( ( '\\\\' | '\"' ) )
+            	    // InternalOptimisationLanguage.g:3216:27: ~ ( ( '\\\\' | '\"' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -1827,11 +1827,11 @@ public class InternalOptimisationLanguageLexer extends Lexer {
         try {
             int _type = RULE_QUOTED_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalOptimisationLanguage.g:3154:16: ( '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
-            // InternalOptimisationLanguage.g:3154:18: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+            // InternalOptimisationLanguage.g:3218:16: ( '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalOptimisationLanguage.g:3218:18: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
             {
             match('\''); 
-            // InternalOptimisationLanguage.g:3154:23: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+            // InternalOptimisationLanguage.g:3218:23: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
             loop9:
             do {
                 int alt9=3;
@@ -1847,7 +1847,7 @@ public class InternalOptimisationLanguageLexer extends Lexer {
 
                 switch (alt9) {
             	case 1 :
-            	    // InternalOptimisationLanguage.g:3154:24: '\\\\' .
+            	    // InternalOptimisationLanguage.g:3218:24: '\\\\' .
             	    {
             	    match('\\'); 
             	    matchAny(); 
@@ -1855,7 +1855,7 @@ public class InternalOptimisationLanguageLexer extends Lexer {
             	    }
             	    break;
             	case 2 :
-            	    // InternalOptimisationLanguage.g:3154:31: ~ ( ( '\\\\' | '\\'' ) )
+            	    // InternalOptimisationLanguage.g:3218:31: ~ ( ( '\\\\' | '\\'' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -1892,10 +1892,10 @@ public class InternalOptimisationLanguageLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalOptimisationLanguage.g:3156:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // InternalOptimisationLanguage.g:3156:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalOptimisationLanguage.g:3220:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // InternalOptimisationLanguage.g:3220:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // InternalOptimisationLanguage.g:3156:11: ( '^' )?
+            // InternalOptimisationLanguage.g:3220:11: ( '^' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -1904,7 +1904,7 @@ public class InternalOptimisationLanguageLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // InternalOptimisationLanguage.g:3156:11: '^'
+                    // InternalOptimisationLanguage.g:3220:11: '^'
                     {
                     match('^'); 
 
@@ -1922,7 +1922,7 @@ public class InternalOptimisationLanguageLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // InternalOptimisationLanguage.g:3156:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalOptimisationLanguage.g:3220:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop11:
             do {
                 int alt11=2;
@@ -1971,12 +1971,12 @@ public class InternalOptimisationLanguageLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalOptimisationLanguage.g:3158:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // InternalOptimisationLanguage.g:3158:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // InternalOptimisationLanguage.g:3222:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // InternalOptimisationLanguage.g:3222:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // InternalOptimisationLanguage.g:3158:24: ( options {greedy=false; } : . )*
+            // InternalOptimisationLanguage.g:3222:24: ( options {greedy=false; } : . )*
             loop12:
             do {
                 int alt12=2;
@@ -2001,7 +2001,7 @@ public class InternalOptimisationLanguageLexer extends Lexer {
 
                 switch (alt12) {
             	case 1 :
-            	    // InternalOptimisationLanguage.g:3158:52: .
+            	    // InternalOptimisationLanguage.g:3222:52: .
             	    {
             	    matchAny(); 
 
@@ -2031,12 +2031,12 @@ public class InternalOptimisationLanguageLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalOptimisationLanguage.g:3160:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // InternalOptimisationLanguage.g:3160:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // InternalOptimisationLanguage.g:3224:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // InternalOptimisationLanguage.g:3224:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // InternalOptimisationLanguage.g:3160:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalOptimisationLanguage.g:3224:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop13:
             do {
                 int alt13=2;
@@ -2049,7 +2049,7 @@ public class InternalOptimisationLanguageLexer extends Lexer {
 
                 switch (alt13) {
             	case 1 :
-            	    // InternalOptimisationLanguage.g:3160:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalOptimisationLanguage.g:3224:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -2069,7 +2069,7 @@ public class InternalOptimisationLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // InternalOptimisationLanguage.g:3160:40: ( ( '\\r' )? '\\n' )?
+            // InternalOptimisationLanguage.g:3224:40: ( ( '\\r' )? '\\n' )?
             int alt15=2;
             int LA15_0 = input.LA(1);
 
@@ -2078,9 +2078,9 @@ public class InternalOptimisationLanguageLexer extends Lexer {
             }
             switch (alt15) {
                 case 1 :
-                    // InternalOptimisationLanguage.g:3160:41: ( '\\r' )? '\\n'
+                    // InternalOptimisationLanguage.g:3224:41: ( '\\r' )? '\\n'
                     {
-                    // InternalOptimisationLanguage.g:3160:41: ( '\\r' )?
+                    // InternalOptimisationLanguage.g:3224:41: ( '\\r' )?
                     int alt14=2;
                     int LA14_0 = input.LA(1);
 
@@ -2089,7 +2089,7 @@ public class InternalOptimisationLanguageLexer extends Lexer {
                     }
                     switch (alt14) {
                         case 1 :
-                            // InternalOptimisationLanguage.g:3160:41: '\\r'
+                            // InternalOptimisationLanguage.g:3224:41: '\\r'
                             {
                             match('\r'); 
 
@@ -2121,10 +2121,10 @@ public class InternalOptimisationLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalOptimisationLanguage.g:3162:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // InternalOptimisationLanguage.g:3162:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalOptimisationLanguage.g:3226:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalOptimisationLanguage.g:3226:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // InternalOptimisationLanguage.g:3162:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalOptimisationLanguage.g:3226:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt16=0;
             loop16:
             do {
@@ -2178,8 +2178,8 @@ public class InternalOptimisationLanguageLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalOptimisationLanguage.g:3164:16: ( . )
-            // InternalOptimisationLanguage.g:3164:18: .
+            // InternalOptimisationLanguage.g:3228:16: ( . )
+            // InternalOptimisationLanguage.g:3228:18: .
             {
             matchAny(); 
 
@@ -2802,23 +2802,23 @@ public class InternalOptimisationLanguageLexer extends Lexer {
             this.transition = DFA7_transition;
         }
         public String getDescription() {
-            return "3150:15: ( RULE_INT RULE_EXPONENT | RULE_INT '.' ( RULE_DIGIT )* ( RULE_EXPONENT )? )";
+            return "3214:15: ( RULE_INT RULE_EXPONENT | RULE_INT '.' ( RULE_DIGIT )* ( RULE_EXPONENT )? )";
         }
     }
     static final String DFA17_eotS =
-        "\1\uffff\1\74\2\uffff\1\73\1\103\1\105\1\uffff\1\110\1\114\3\73\1\121\1\122\5\uffff\10\73\1\144\1\uffff\1\147\1\uffff\1\152\1\uffff\1\155\1\uffff\1\161\1\uffff\1\163\1\164\1\165\1\166\1\167\1\170\1\171\1\172\1\173\1\uffff\1\175\1\176\1\177\1\u0080\1\u0081\2\71\3\uffff\1\73\4\uffff\3\73\1\u008b\4\uffff\1\73\1\uffff\3\73\1\uffff\1\u0090\2\73\10\uffff\11\73\1\u009d\1\u009e\1\73\10\uffff\1\u0081\31\uffff\5\73\1\uffff\1\73\1\u00a6\2\73\1\uffff\1\u00a9\1\u00aa\4\73\1\u00af\5\73\2\uffff\5\73\1\u00ba\1\73\1\uffff\1\73\1\u00bd\2\uffff\1\u00be\1\u00bf\2\73\1\uffff\2\73\1\u00c4\1\73\1\u00c6\5\73\1\uffff\1\73\1\u00cd\3\uffff\4\73\1\uffff\1\73\1\uffff\1\u00d3\1\u00d4\1\73\1\u00d6\2\73\1\uffff\2\73\1\u00db\2\73\2\uffff\1\u00de\1\uffff\2\73\1\u00e1\1\73\1\uffff\1\73\1\u00e4\1\uffff\2\73\1\uffff\1\u00e7\1\73\1\uffff\1\73\1\u00ea\1\uffff\2\73\1\uffff\1\u00ed\1\u00ee\2\uffff";
+        "\1\uffff\1\74\2\uffff\1\73\1\103\1\105\1\uffff\1\110\1\114\3\73\1\121\1\122\5\uffff\10\73\1\144\1\uffff\1\147\1\uffff\1\152\1\uffff\1\155\1\uffff\1\161\1\uffff\1\163\1\164\1\165\1\166\1\167\1\170\1\171\1\172\1\173\1\uffff\1\175\1\176\1\177\1\u0080\1\u0081\2\71\3\uffff\1\73\4\uffff\3\73\1\u008b\4\uffff\1\73\1\uffff\3\73\1\uffff\1\u0090\2\73\10\uffff\11\73\1\u009d\1\u009e\1\73\10\uffff\1\u0081\31\uffff\5\73\1\uffff\1\73\1\u00a6\2\73\1\uffff\1\u00a9\1\u00aa\1\73\1\u00ac\10\73\2\uffff\5\73\1\u00ba\1\73\1\uffff\1\73\1\u00bd\2\uffff\1\73\1\uffff\1\73\1\u00c0\1\u00c1\2\73\1\u00c4\1\73\1\u00c6\5\73\1\uffff\1\73\1\u00cd\1\uffff\2\73\2\uffff\2\73\1\uffff\1\73\1\uffff\1\u00d3\1\u00d4\1\73\1\u00d6\2\73\1\uffff\1\73\1\u00da\3\73\2\uffff\1\u00de\1\uffff\3\73\1\uffff\1\u00e2\1\73\1\u00e4\1\uffff\2\73\1\u00e7\1\uffff\1\73\1\uffff\1\73\1\u00ea\1\uffff\2\73\1\uffff\1\u00ed\1\u00ee\2\uffff";
     static final String DFA17_eofS =
         "\u00ef\uffff";
     static final String DFA17_minS =
-        "\1\0\1\60\2\uffff\1\160\1\60\1\75\1\uffff\2\60\1\122\1\117\1\116\1\75\1\101\5\uffff\1\162\1\151\1\155\1\170\1\145\2\157\1\146\1\60\1\uffff\1\75\1\uffff\1\75\1\uffff\1\60\1\uffff\1\52\1\uffff\11\60\1\uffff\4\60\1\56\2\0\3\uffff\1\144\4\uffff\1\145\1\162\1\143\1\60\4\uffff\1\156\1\uffff\1\162\1\154\1\157\1\uffff\1\60\1\122\1\104\10\uffff\1\165\1\160\1\164\1\163\2\160\1\141\1\157\1\151\2\60\1\162\10\uffff\1\56\31\uffff\1\165\1\143\1\151\1\165\1\141\1\uffff\1\146\1\60\1\163\1\155\1\uffff\2\60\3\145\1\164\1\60\1\157\1\162\2\154\1\144\2\uffff\1\141\1\154\1\151\1\156\1\155\1\60\1\151\1\uffff\1\145\1\60\2\uffff\2\60\1\162\1\141\1\uffff\1\162\1\145\1\60\1\145\1\60\1\171\1\145\1\146\1\147\1\145\1\uffff\1\147\1\60\3\uffff\1\141\1\156\1\164\1\163\1\uffff\1\141\1\uffff\2\60\1\171\1\60\1\156\1\165\1\uffff\1\154\1\143\1\60\1\163\1\156\2\uffff\1\60\1\uffff\1\164\1\162\1\60\1\145\1\uffff\1\151\1\60\1\uffff\1\151\1\145\1\uffff\1\60\1\157\1\uffff\1\156\1\60\1\uffff\1\156\1\147\1\uffff\2\60\2\uffff";
+        "\1\0\1\60\2\uffff\1\160\1\60\1\75\1\uffff\2\60\1\122\1\117\1\116\1\75\1\101\5\uffff\1\155\1\162\1\151\1\170\1\145\2\157\1\146\1\60\1\uffff\1\75\1\uffff\1\75\1\uffff\1\60\1\uffff\1\52\1\uffff\11\60\1\uffff\4\60\1\56\2\0\3\uffff\1\144\4\uffff\1\145\1\162\1\143\1\60\4\uffff\1\156\1\uffff\1\162\1\154\1\157\1\uffff\1\60\1\122\1\104\10\uffff\1\163\1\160\1\165\1\160\1\164\1\160\1\141\1\157\1\151\2\60\1\162\10\uffff\1\56\31\uffff\1\165\1\143\1\151\1\165\1\141\1\uffff\1\146\1\60\1\163\1\155\1\uffff\2\60\1\164\1\60\1\157\3\145\1\162\2\154\1\144\2\uffff\1\141\1\154\1\151\1\156\1\155\1\60\1\151\1\uffff\1\145\1\60\2\uffff\1\141\1\uffff\1\162\2\60\1\162\1\145\1\60\1\145\1\60\1\171\1\145\1\146\1\147\1\145\1\uffff\1\147\1\60\1\uffff\1\156\1\164\2\uffff\1\141\1\163\1\uffff\1\141\1\uffff\2\60\1\171\1\60\1\156\1\165\1\uffff\1\143\1\60\1\154\1\163\1\156\2\uffff\1\60\1\uffff\1\164\1\162\1\145\1\uffff\1\60\1\151\1\60\1\uffff\1\151\1\145\1\60\1\uffff\1\157\1\uffff\1\156\1\60\1\uffff\1\156\1\147\1\uffff\2\60\2\uffff";
     static final String DFA17_maxS =
-        "\1\uffff\1\172\2\uffff\1\164\1\172\1\75\1\uffff\2\172\1\122\1\117\1\116\1\75\1\172\5\uffff\1\171\1\151\1\156\1\170\1\145\2\157\1\162\1\172\1\uffff\1\75\1\uffff\1\75\1\uffff\1\71\1\uffff\1\57\1\uffff\11\172\1\uffff\4\172\1\145\2\uffff\3\uffff\1\144\4\uffff\1\145\1\162\1\143\1\172\4\uffff\1\156\1\uffff\1\162\1\154\1\157\1\uffff\1\172\1\122\1\104\10\uffff\1\165\1\160\2\164\2\160\1\141\1\157\1\151\2\172\1\162\10\uffff\1\145\31\uffff\1\165\1\143\1\151\1\165\1\141\1\uffff\1\146\1\172\1\163\1\155\1\uffff\2\172\3\145\1\164\1\172\1\157\1\162\2\154\1\144\2\uffff\1\141\1\154\1\151\1\156\1\155\1\172\1\151\1\uffff\1\145\1\172\2\uffff\2\172\1\162\1\141\1\uffff\1\162\1\145\1\172\1\145\1\172\1\171\1\145\1\146\1\147\1\145\1\uffff\1\147\1\172\3\uffff\1\141\1\156\1\164\1\163\1\uffff\1\141\1\uffff\2\172\1\171\1\172\1\156\1\165\1\uffff\1\154\1\143\1\172\1\163\1\156\2\uffff\1\172\1\uffff\1\164\1\162\1\172\1\145\1\uffff\1\151\1\172\1\uffff\1\151\1\145\1\uffff\1\172\1\157\1\uffff\1\156\1\172\1\uffff\1\156\1\147\1\uffff\2\172\2\uffff";
+        "\1\uffff\1\172\2\uffff\1\164\1\172\1\75\1\uffff\2\172\1\122\1\117\1\116\1\75\1\172\5\uffff\1\156\1\171\1\151\1\170\1\145\2\157\1\162\1\172\1\uffff\1\75\1\uffff\1\75\1\uffff\1\71\1\uffff\1\57\1\uffff\11\172\1\uffff\4\172\1\145\2\uffff\3\uffff\1\144\4\uffff\1\145\1\162\1\143\1\172\4\uffff\1\156\1\uffff\1\162\1\154\1\157\1\uffff\1\172\1\122\1\104\10\uffff\1\164\1\160\1\165\1\160\1\164\1\160\1\141\1\157\1\151\2\172\1\162\10\uffff\1\145\31\uffff\1\165\1\143\1\151\1\165\1\141\1\uffff\1\146\1\172\1\163\1\155\1\uffff\2\172\1\164\1\172\1\157\3\145\1\162\2\154\1\144\2\uffff\1\141\1\154\1\151\1\156\1\155\1\172\1\151\1\uffff\1\145\1\172\2\uffff\1\141\1\uffff\1\162\2\172\1\162\1\145\1\172\1\145\1\172\1\171\1\145\1\146\1\147\1\145\1\uffff\1\147\1\172\1\uffff\1\156\1\164\2\uffff\1\141\1\163\1\uffff\1\141\1\uffff\2\172\1\171\1\172\1\156\1\165\1\uffff\1\143\1\172\1\154\1\163\1\156\2\uffff\1\172\1\uffff\1\164\1\162\1\145\1\uffff\1\172\1\151\1\172\1\uffff\1\151\1\145\1\172\1\uffff\1\157\1\uffff\1\156\1\172\1\uffff\1\156\1\147\1\uffff\2\172\2\uffff";
     static final String DFA17_acceptS =
-        "\2\uffff\1\2\1\3\3\uffff\1\7\7\uffff\1\20\1\21\1\22\1\23\1\24\11\uffff\1\46\1\uffff\1\51\1\uffff\1\55\1\uffff\1\57\1\uffff\1\61\11\uffff\1\77\7\uffff\1\112\1\115\1\116\1\uffff\1\112\1\76\1\2\1\3\4\uffff\1\74\1\6\1\27\1\7\1\uffff\1\75\3\uffff\1\102\3\uffff\1\52\1\16\1\17\1\20\1\21\1\22\1\23\1\24\14\uffff\1\103\1\46\1\47\1\50\1\51\1\54\1\53\1\55\1\uffff\1\56\1\57\1\113\1\114\1\60\1\61\1\62\1\63\1\64\1\65\1\66\1\67\1\70\1\71\1\72\1\77\1\100\1\101\1\104\1\105\1\106\1\107\1\110\1\111\1\115\5\uffff\1\73\4\uffff\1\13\14\uffff\1\40\1\42\7\uffff\1\11\2\uffff\1\14\1\15\4\uffff\1\34\12\uffff\1\12\2\uffff\1\45\1\25\1\41\4\uffff\1\35\1\uffff\1\37\6\uffff\1\26\5\uffff\1\43\1\1\1\uffff\1\32\4\uffff\1\44\2\uffff\1\4\2\uffff\1\30\2\uffff\1\36\2\uffff\1\31\2\uffff\1\10\2\uffff\1\33\1\5";
+        "\2\uffff\1\2\1\3\3\uffff\1\7\7\uffff\1\20\1\21\1\22\1\23\1\24\11\uffff\1\46\1\uffff\1\51\1\uffff\1\55\1\uffff\1\57\1\uffff\1\61\11\uffff\1\77\7\uffff\1\112\1\115\1\116\1\uffff\1\112\1\76\1\2\1\3\4\uffff\1\74\1\6\1\30\1\7\1\uffff\1\75\3\uffff\1\102\3\uffff\1\52\1\16\1\17\1\20\1\21\1\22\1\23\1\24\14\uffff\1\103\1\46\1\47\1\50\1\51\1\54\1\53\1\55\1\uffff\1\56\1\57\1\113\1\114\1\60\1\61\1\62\1\63\1\64\1\65\1\66\1\67\1\70\1\71\1\72\1\77\1\100\1\101\1\104\1\105\1\106\1\107\1\110\1\111\1\115\5\uffff\1\73\4\uffff\1\13\14\uffff\1\40\1\42\7\uffff\1\11\2\uffff\1\14\1\15\1\uffff\1\34\15\uffff\1\12\2\uffff\1\45\2\uffff\1\26\1\41\2\uffff\1\35\1\uffff\1\37\6\uffff\1\27\5\uffff\1\43\1\1\1\uffff\1\32\3\uffff\1\44\3\uffff\1\4\3\uffff\1\31\1\uffff\1\36\2\uffff\1\25\2\uffff\1\10\2\uffff\1\33\1\5";
     static final String DFA17_specialS =
         "\1\1\64\uffff\1\0\1\2\u00b8\uffff}>";
     static final String[] DFA17_transitionS = {
-            "\11\71\2\70\2\71\1\70\22\71\1\70\1\15\1\65\2\71\1\45\1\71\1\66\1\22\1\23\1\43\1\41\1\20\1\42\1\35\1\44\12\64\1\6\1\7\1\40\1\37\1\36\2\71\1\14\3\67\1\50\1\67\1\53\5\67\1\54\1\67\1\12\1\51\3\67\1\52\3\67\1\13\1\46\1\47\1\17\1\71\1\21\1\16\1\67\1\71\1\34\1\31\1\10\1\5\1\27\1\11\1\67\1\56\1\26\1\67\1\55\1\25\1\1\1\60\1\33\1\61\1\67\1\30\1\4\1\24\1\67\1\32\2\67\1\63\1\62\1\2\1\71\1\3\67\71\1\57\uff4a\71",
+            "\11\71\2\70\2\71\1\70\22\71\1\70\1\15\1\65\2\71\1\45\1\71\1\66\1\22\1\23\1\43\1\41\1\20\1\42\1\35\1\44\12\64\1\6\1\7\1\40\1\37\1\36\2\71\1\14\3\67\1\50\1\67\1\53\5\67\1\54\1\67\1\12\1\51\3\67\1\52\3\67\1\13\1\46\1\47\1\17\1\71\1\21\1\16\1\67\1\71\1\34\1\31\1\10\1\5\1\27\1\11\1\67\1\56\1\24\1\67\1\55\1\26\1\1\1\60\1\33\1\61\1\67\1\30\1\4\1\25\1\67\1\32\2\67\1\63\1\62\1\2\1\71\1\3\67\71\1\57\uff4a\71",
             "\12\73\7\uffff\32\73\4\uffff\1\73\1\uffff\16\73\1\72\13\73",
             "",
             "",
@@ -2838,9 +2838,9 @@ public class InternalOptimisationLanguageLexer extends Lexer {
             "",
             "",
             "",
-            "\1\130\6\uffff\1\131",
-            "\1\132",
-            "\1\134\1\133",
+            "\1\131\1\130",
+            "\1\132\6\uffff\1\133",
+            "\1\134",
             "\1\135",
             "\1\136",
             "\1\137",
@@ -2906,10 +2906,10 @@ public class InternalOptimisationLanguageLexer extends Lexer {
             "",
             "",
             "",
-            "\1\u0093",
-            "\1\u0094",
+            "\1\u0093\1\u0094",
             "\1\u0095",
-            "\1\u0096\1\u0097",
+            "\1\u0096",
+            "\1\u0097",
             "\1\u0098",
             "\1\u0099",
             "\1\u009a",
@@ -2966,10 +2966,10 @@ public class InternalOptimisationLanguageLexer extends Lexer {
             "\12\73\7\uffff\32\73\4\uffff\1\73\1\uffff\32\73",
             "\12\73\7\uffff\32\73\4\uffff\1\73\1\uffff\32\73",
             "\1\u00ab",
-            "\1\u00ac",
+            "\12\73\7\uffff\32\73\4\uffff\1\73\1\uffff\32\73",
             "\1\u00ad",
             "\1\u00ae",
-            "\12\73\7\uffff\32\73\4\uffff\1\73\1\uffff\32\73",
+            "\1\u00af",
             "\1\u00b0",
             "\1\u00b1",
             "\1\u00b2",
@@ -2989,11 +2989,11 @@ public class InternalOptimisationLanguageLexer extends Lexer {
             "\12\73\7\uffff\32\73\4\uffff\1\73\1\uffff\32\73",
             "",
             "",
-            "\12\73\7\uffff\32\73\4\uffff\1\73\1\uffff\32\73",
-            "\12\73\7\uffff\32\73\4\uffff\1\73\1\uffff\32\73",
-            "\1\u00c0",
-            "\1\u00c1",
+            "\1\u00be",
             "",
+            "\1\u00bf",
+            "\12\73\7\uffff\32\73\4\uffff\1\73\1\uffff\32\73",
+            "\12\73\7\uffff\32\73\4\uffff\1\73\1\uffff\32\73",
             "\1\u00c2",
             "\1\u00c3",
             "\12\73\7\uffff\32\73\4\uffff\1\73\1\uffff\32\73",
@@ -3008,10 +3008,10 @@ public class InternalOptimisationLanguageLexer extends Lexer {
             "\1\u00cc",
             "\12\73\7\uffff\32\73\4\uffff\1\73\1\uffff\32\73",
             "",
-            "",
-            "",
             "\1\u00ce",
             "\1\u00cf",
+            "",
+            "",
             "\1\u00d0",
             "\1\u00d1",
             "",
@@ -3025,8 +3025,8 @@ public class InternalOptimisationLanguageLexer extends Lexer {
             "\1\u00d8",
             "",
             "\1\u00d9",
-            "\1\u00da",
             "\12\73\7\uffff\32\73\4\uffff\1\73\1\uffff\32\73",
+            "\1\u00db",
             "\1\u00dc",
             "\1\u00dd",
             "",
@@ -3035,16 +3035,16 @@ public class InternalOptimisationLanguageLexer extends Lexer {
             "",
             "\1\u00df",
             "\1\u00e0",
-            "\12\73\7\uffff\32\73\4\uffff\1\73\1\uffff\32\73",
-            "\1\u00e2",
+            "\1\u00e1",
             "",
+            "\12\73\7\uffff\32\73\4\uffff\1\73\1\uffff\32\73",
             "\1\u00e3",
             "\12\73\7\uffff\32\73\4\uffff\1\73\1\uffff\32\73",
             "",
             "\1\u00e5",
             "\1\u00e6",
-            "",
             "\12\73\7\uffff\32\73\4\uffff\1\73\1\uffff\32\73",
+            "",
             "\1\u00e8",
             "",
             "\1\u00e9",
@@ -3147,11 +3147,11 @@ public class InternalOptimisationLanguageLexer extends Lexer {
 
                         else if ( (LA17_0==')') ) {s = 19;}
 
-                        else if ( (LA17_0=='t') ) {s = 20;}
+                        else if ( (LA17_0=='i') ) {s = 20;}
 
-                        else if ( (LA17_0=='l') ) {s = 21;}
+                        else if ( (LA17_0=='t') ) {s = 21;}
 
-                        else if ( (LA17_0=='i') ) {s = 22;}
+                        else if ( (LA17_0=='l') ) {s = 22;}
 
                         else if ( (LA17_0=='e') ) {s = 23;}
 

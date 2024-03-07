@@ -75,6 +75,7 @@ public class BaseFactoryImpl extends EFactoryImpl implements BaseFactory {
 			case BasePackage.PARANTHESES: return createParantheses();
 			case BasePackage.FUNCTION_NAME: return createFunctionName();
 			case BasePackage.VALUE_REFERENCE: return createValueReference();
+			case BasePackage.INSTANCE_DEFINITION_REFERENCE: return createInstanceDefinitionReference();
 			case BasePackage.TYPE_DEFINITION: return createTypeDefinition();
 			case BasePackage.ATTRIBUTE_DEFINITION: return createAttributeDefinition();
 			case BasePackage.INSTANCE_TYPE: return createInstanceType();
@@ -340,6 +341,17 @@ public class BaseFactoryImpl extends EFactoryImpl implements BaseFactory {
 	public ValueReference createValueReference() {
 		ValueReferenceImpl valueReference = new ValueReferenceImpl();
 		return valueReference;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public InstanceDefinitionReference createInstanceDefinitionReference() {
+		InstanceDefinitionReferenceImpl instanceDefinitionReference = new InstanceDefinitionReferenceImpl();
+		return instanceDefinitionReference;
 	}
 
 	/**

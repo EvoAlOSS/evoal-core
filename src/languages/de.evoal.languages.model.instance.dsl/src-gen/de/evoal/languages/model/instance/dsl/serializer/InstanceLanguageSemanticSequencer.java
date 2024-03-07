@@ -18,12 +18,14 @@ import de.evoal.languages.model.base.Call;
 import de.evoal.languages.model.base.ComparisonExpression;
 import de.evoal.languages.model.base.ConstantDefinition;
 import de.evoal.languages.model.base.ConstantReference;
+import de.evoal.languages.model.base.DataOrInstanceType;
 import de.evoal.languages.model.base.DataType;
 import de.evoal.languages.model.base.DefinedFunctionName;
 import de.evoal.languages.model.base.ExpressionType;
 import de.evoal.languages.model.base.FunctionDefinition;
 import de.evoal.languages.model.base.Import;
 import de.evoal.languages.model.base.Instance;
+import de.evoal.languages.model.base.InstanceDefinitionReference;
 import de.evoal.languages.model.base.InstanceType;
 import de.evoal.languages.model.base.IntType;
 import de.evoal.languages.model.base.IntegerLiteral;
@@ -106,6 +108,9 @@ public class InstanceLanguageSemanticSequencer extends BaseLanguageSemanticSeque
 			case BasePackage.CONSTANT_REFERENCE:
 				sequence_ConstantReferenceRule(context, (ConstantReference) semanticObject); 
 				return; 
+			case BasePackage.DATA_OR_INSTANCE_TYPE:
+				sequence_DataOrInstanceTypeRule(context, (DataOrInstanceType) semanticObject); 
+				return; 
 			case BasePackage.DATA_TYPE:
 				sequence_DataTypeRule(context, (DataType) semanticObject); 
 				return; 
@@ -123,6 +128,9 @@ public class InstanceLanguageSemanticSequencer extends BaseLanguageSemanticSeque
 				return; 
 			case BasePackage.INSTANCE:
 				sequence_InstanceLiteralRule(context, (Instance) semanticObject); 
+				return; 
+			case BasePackage.INSTANCE_DEFINITION_REFERENCE:
+				sequence_InstanceDefinitionReferenceRule(context, (InstanceDefinitionReference) semanticObject); 
 				return; 
 			case BasePackage.INSTANCE_TYPE:
 				sequence_InstanceTypeRule(context, (InstanceType) semanticObject); 

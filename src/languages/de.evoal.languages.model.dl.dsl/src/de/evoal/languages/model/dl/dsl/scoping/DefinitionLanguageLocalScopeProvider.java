@@ -12,9 +12,6 @@ import de.evoal.languages.model.base.dsl.scoping.BaseLanguageLocalScopeProvider;
 import de.evoal.languages.model.utils.scoping.WildcardEnabledLocalScopeProvider;
 
 public class DefinitionLanguageLocalScopeProvider extends WildcardEnabledLocalScopeProvider {
-	//private static EClass typeDefinition = BasePackage.eINSTANCE.getTypeDefinition();
-	//private static EReference attributes = BasePackage.eINSTANCE.getTypeDefinition_Attributes();
-
 	private final static EReference attributeDefinition = BasePackage.eINSTANCE.getAttribute_Definition();
 	private final static EClass instance = BasePackage.eINSTANCE.getInstance();
 	
@@ -23,20 +20,6 @@ public class DefinitionLanguageLocalScopeProvider extends WildcardEnabledLocalSc
 	
 	@Override
 	public IScope getScope(final EObject context, final EReference reference) {
-		//System.err.println("[DL] Asking for " + context.eClass().getName() + " --> " + reference.getEContainingClass().getName() + "." + reference.getName());
-		
-		/*
-		if(typeDefinition.equals(context.eClass()) && (attributes.equals(reference))) {
-			// inject fields of types
-			final TypeDefinition definition = (TypeDefinition)context;
-			IScope typeScope = IScope.NULLSCOPE;
-			if(definition.getSuperType() != null) {
-				typeScope = super.getScope(definition.getSuperType(), reference);
-			}
-			
-			return getLocalElementsScope(typeScope, context, reference);
-		}
-*/
 		if(instance.equals(context.eClass()) && attributeDefinition.equals(reference)) {
 			return provider.getScope(context, reference);
 		}
