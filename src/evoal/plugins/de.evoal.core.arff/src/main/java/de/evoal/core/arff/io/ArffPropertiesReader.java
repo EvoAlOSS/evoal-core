@@ -74,7 +74,7 @@ public class ArffPropertiesReader implements PropertiesReader {
             }
 
             final PropertySpecification pSpec = specification.find(attr.name());
-            Requirements.requireInstanceOf(pSpec, DataDescription.class);
+            Requirements.requireInstanceOf(pSpec.type(), DataDescription.class);
             final RepresentationType rType = ((DataDescription)pSpec.type()).getRepresentation();
             final TriFunction<Instance, PropertiesSpecification, PropertiesSpecification.Builder, Properties> decoratee = toProperties;
             final int index = i;
