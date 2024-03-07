@@ -1065,6 +1065,16 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 	 * @generated
 	 */
 	@Override
+	public EAttribute getDefinition_Name() {
+		return (EAttribute)definitionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getTypeDefinition() {
 		return typeDefinitionEClass;
 	}
@@ -1075,18 +1085,8 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 	 * @generated
 	 */
 	@Override
-	public EAttribute getTypeDefinition_Name() {
-		return (EAttribute)typeDefinitionEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EReference getTypeDefinition_Attributes() {
-		return (EReference)typeDefinitionEClass.getEStructuralFeatures().get(1);
+		return (EReference)typeDefinitionEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1096,7 +1096,7 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 	 */
 	@Override
 	public EReference getTypeDefinition_SuperType() {
-		return (EReference)typeDefinitionEClass.getEStructuralFeatures().get(2);
+		return (EReference)typeDefinitionEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1106,7 +1106,7 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 	 */
 	@Override
 	public EAttribute getTypeDefinition_Abstract() {
-		return (EAttribute)typeDefinitionEClass.getEStructuralFeatures().get(3);
+		return (EAttribute)typeDefinitionEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -1738,9 +1738,9 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 		createEReference(instanceDefinitionReferenceEClass, INSTANCE_DEFINITION_REFERENCE__DEFINITION);
 
 		definitionEClass = createEClass(DEFINITION);
+		createEAttribute(definitionEClass, DEFINITION__NAME);
 
 		typeDefinitionEClass = createEClass(TYPE_DEFINITION);
-		createEAttribute(typeDefinitionEClass, TYPE_DEFINITION__NAME);
 		createEReference(typeDefinitionEClass, TYPE_DEFINITION__ATTRIBUTES);
 		createEReference(typeDefinitionEClass, TYPE_DEFINITION__SUPER_TYPE);
 		createEAttribute(typeDefinitionEClass, TYPE_DEFINITION__ABSTRACT);
@@ -1964,9 +1964,9 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 		initEReference(getInstanceDefinitionReference_Definition(), this.getTypeDefinition(), null, "definition", null, 1, 1, InstanceDefinitionReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(definitionEClass, Definition.class, "Definition", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getDefinition_Name(), ecorePackage.getEString(), "name", null, 0, 1, Definition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(typeDefinitionEClass, TypeDefinition.class, "TypeDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getTypeDefinition_Name(), ecorePackage.getEString(), "name", null, 0, 1, TypeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTypeDefinition_Attributes(), this.getAttributeDefinition(), null, "attributes", null, 0, -1, TypeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getTypeDefinition_SuperType(), this.getTypeDefinition(), null, "superType", null, 0, 1, TypeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTypeDefinition_Abstract(), ecorePackage.getEBoolean(), "abstract", "false", 1, 1, TypeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

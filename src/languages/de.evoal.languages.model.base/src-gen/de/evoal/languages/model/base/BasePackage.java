@@ -1038,13 +1038,22 @@ public interface BasePackage extends EPackage {
 	int DEFINITION = 23;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEFINITION__NAME = 0;
+
+	/**
 	 * The number of structural features of the '<em>Definition</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DEFINITION_FEATURE_COUNT = 0;
+	int DEFINITION_FEATURE_COUNT = 1;
 
 	/**
 	 * The number of operations of the '<em>Definition</em>' class.
@@ -1072,7 +1081,7 @@ public interface BasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_DEFINITION__NAME = DEFINITION_FEATURE_COUNT + 0;
+	int TYPE_DEFINITION__NAME = DEFINITION__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Attributes</b></em>' containment reference list.
@@ -1081,7 +1090,7 @@ public interface BasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_DEFINITION__ATTRIBUTES = DEFINITION_FEATURE_COUNT + 1;
+	int TYPE_DEFINITION__ATTRIBUTES = DEFINITION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Super Type</b></em>' reference.
@@ -1090,7 +1099,7 @@ public interface BasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_DEFINITION__SUPER_TYPE = DEFINITION_FEATURE_COUNT + 2;
+	int TYPE_DEFINITION__SUPER_TYPE = DEFINITION_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
@@ -1099,7 +1108,7 @@ public interface BasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_DEFINITION__ABSTRACT = DEFINITION_FEATURE_COUNT + 3;
+	int TYPE_DEFINITION__ABSTRACT = DEFINITION_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Type Definition</em>' class.
@@ -1108,7 +1117,7 @@ public interface BasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_DEFINITION_FEATURE_COUNT = DEFINITION_FEATURE_COUNT + 4;
+	int TYPE_DEFINITION_FEATURE_COUNT = DEFINITION_FEATURE_COUNT + 3;
 
 	/**
 	 * The operation id for the '<em>Find Attribute</em>' operation.
@@ -2618,6 +2627,17 @@ public interface BasePackage extends EPackage {
 	EClass getDefinition();
 
 	/**
+	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.base.Definition#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see de.evoal.languages.model.base.Definition#getName()
+	 * @see #getDefinition()
+	 * @generated
+	 */
+	EAttribute getDefinition_Name();
+
+	/**
 	 * Returns the meta object for class '{@link de.evoal.languages.model.base.TypeDefinition <em>Type Definition</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2626,17 +2646,6 @@ public interface BasePackage extends EPackage {
 	 * @generated
 	 */
 	EClass getTypeDefinition();
-
-	/**
-	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.base.TypeDefinition#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see de.evoal.languages.model.base.TypeDefinition#getName()
-	 * @see #getTypeDefinition()
-	 * @generated
-	 */
-	EAttribute getTypeDefinition_Name();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.base.TypeDefinition#getAttributes <em>Attributes</em>}'.
@@ -3742,6 +3751,14 @@ public interface BasePackage extends EPackage {
 		EClass DEFINITION = eINSTANCE.getDefinition();
 
 		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DEFINITION__NAME = eINSTANCE.getDefinition_Name();
+
+		/**
 		 * The meta object literal for the '{@link de.evoal.languages.model.base.impl.TypeDefinitionImpl <em>Type Definition</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3750,14 +3767,6 @@ public interface BasePackage extends EPackage {
 		 * @generated
 		 */
 		EClass TYPE_DEFINITION = eINSTANCE.getTypeDefinition();
-
-		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute TYPE_DEFINITION__NAME = eINSTANCE.getTypeDefinition_Name();
 
 		/**
 		 * The meta object literal for the '<em><b>Attributes</b></em>' containment reference list feature.

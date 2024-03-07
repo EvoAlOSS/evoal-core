@@ -2,7 +2,6 @@
  */
 package de.evoal.languages.model.ddl.util;
 
-import de.evoal.languages.model.base.Definition;
 import de.evoal.languages.model.base.Value;
 import de.evoal.languages.model.base.ValueReference;
 
@@ -79,7 +78,6 @@ public class DdlSwitch<T> extends Switch<T> {
 			case DdlPackage.DATA_TYPE_DEFINITION: {
 				DataTypeDefinition dataTypeDefinition = (DataTypeDefinition)theEObject;
 				T result = caseDataTypeDefinition(dataTypeDefinition);
-				if (result == null) result = caseDefinition(dataTypeDefinition);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -225,21 +223,6 @@ public class DdlSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseSelfReference(SelfReference object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Definition</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Definition</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseDefinition(Definition object) {
 		return null;
 	}
 

@@ -17,7 +17,6 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link de.evoal.languages.model.base.TypeDefinition#getName <em>Name</em>}</li>
  *   <li>{@link de.evoal.languages.model.base.TypeDefinition#getAttributes <em>Attributes</em>}</li>
  *   <li>{@link de.evoal.languages.model.base.TypeDefinition#getSuperType <em>Super Type</em>}</li>
  *   <li>{@link de.evoal.languages.model.base.TypeDefinition#isAbstract <em>Abstract</em>}</li>
@@ -28,31 +27,6 @@ import org.eclipse.emf.common.util.EList;
  * @generated
  */
 public interface TypeDefinition extends Definition {
-	/**
-	 * Returns the value of the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * The name of the type.
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Name</em>' attribute.
-	 * @see #setName(String)
-	 * @see de.evoal.languages.model.base.BasePackage#getTypeDefinition_Name()
-	 * @model id="true"
-	 * @generated
-	 */
-	String getName();
-
-	/**
-	 * Sets the value of the '{@link de.evoal.languages.model.base.TypeDefinition#getName <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Name</em>' attribute.
-	 * @see #getName()
-	 * @generated
-	 */
-	void setName(String value);
-
 	/**
 	 * Returns the value of the '<em><b>Attributes</b></em>' containment reference list.
 	 * The list contents are of type {@link de.evoal.languages.model.base.AttributeDefinition}.

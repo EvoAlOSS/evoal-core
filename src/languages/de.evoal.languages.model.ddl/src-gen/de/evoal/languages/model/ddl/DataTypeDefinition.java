@@ -2,10 +2,10 @@
  */
 package de.evoal.languages.model.ddl;
 
-import de.evoal.languages.model.base.Definition;
 import de.evoal.languages.model.base.Expression;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -30,7 +30,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface DataTypeDefinition extends Definition {
+public interface DataTypeDefinition extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Scale</b></em>' attribute.
 	 * The literals are from the enumeration {@link de.evoal.languages.model.ddl.ScaleType}.

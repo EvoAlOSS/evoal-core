@@ -491,7 +491,6 @@ public class DdlPackageImpl extends EPackageImpl implements DdlPackage {
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
-		dataTypeDefinitionEClass.getESuperTypes().add(theBasePackage.getDefinition());
 		typedDataDescriptionEClass.getESuperTypes().add(this.getDataDescription());
 		untypedDataDescriptionEClass.getESuperTypes().add(this.getDataDescription());
 		dataReferenceEClass.getESuperTypes().add(theBasePackage.getValueReference());
