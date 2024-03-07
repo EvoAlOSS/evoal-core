@@ -5,6 +5,7 @@ import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.properties.PropertySpecification;
 import de.evoal.core.api.properties.stream.PropertiesPairStreamSupplier;
 import de.evoal.core.api.utils.Requirements;
+import de.evoal.languages.model.ddl.DataDescription;
 import de.evoal.languages.model.ddl.RepresentationType;
 import de.evoal.surrogate.api.configuration.Parameter;
 import de.evoal.surrogate.api.configuration.PartialFunctionConfiguration;
@@ -112,7 +113,8 @@ public abstract class KernelBasedSVRFunctionFactory extends AbstractPartialSurro
 
 		for(int i = 0; i < converters.length; ++i) {
 			final PropertySpecification spec = specification.getProperties().get(i);
-			final RepresentationType type = spec.type().getRepresentation();
+			Requirements.requireInstanceOf(spec.type(), DataDescription.class);
+			final RepresentationType type = ((DataDescription)spec.type()).getRepresentation();
 
 			final int index = i;
 			if(RepresentationType.REAL.equals(type)) {
