@@ -2,6 +2,7 @@
  */
 package de.evoal.languages.model.ddl.util;
 
+import de.evoal.languages.model.base.Definition;
 import de.evoal.languages.model.base.Value;
 import de.evoal.languages.model.base.ValueReference;
 
@@ -97,6 +98,10 @@ public class DdlAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseSelfReference(SelfReference object) {
 				return createSelfReferenceAdapter();
+			}
+			@Override
+			public Adapter caseDefinition(Definition object) {
+				return createDefinitionAdapter();
 			}
 			@Override
 			public Adapter caseValue(Value object) {
@@ -221,6 +226,20 @@ public class DdlAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createSelfReferenceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.Definition <em>Definition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.evoal.languages.model.base.Definition
+	 * @generated
+	 */
+	public Adapter createDefinitionAdapter() {
 		return null;
 	}
 

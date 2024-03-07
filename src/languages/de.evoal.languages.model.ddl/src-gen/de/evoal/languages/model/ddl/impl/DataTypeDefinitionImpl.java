@@ -4,6 +4,7 @@ package de.evoal.languages.model.ddl.impl;
 
 import de.evoal.languages.model.base.Expression;
 
+import de.evoal.languages.model.base.impl.DefinitionImpl;
 import de.evoal.languages.model.ddl.DataTypeDefinition;
 import de.evoal.languages.model.ddl.DdlPackage;
 import de.evoal.languages.model.ddl.ScaleType;
@@ -19,8 +20,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -40,7 +39,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *
  * @generated
  */
-public class DataTypeDefinitionImpl extends MinimalEObjectImpl.Container implements DataTypeDefinition {
+public class DataTypeDefinitionImpl extends DefinitionImpl implements DataTypeDefinition {
 	/**
 	 * The default value of the '{@link #getScale() <em>Scale</em>}' attribute.
 	 * <!-- begin-user-doc -->

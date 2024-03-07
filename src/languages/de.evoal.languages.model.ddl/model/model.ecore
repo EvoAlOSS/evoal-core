@@ -2,9 +2,9 @@
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="ddl" nsURI="https://www.evoal.de/languages/ddl/1.0.0" nsPrefix="ddl">
   <eAnnotations source="http://www.eclipse.org/OCL/Import">
+    <details key="base" value="platform:/resource/de.evoal.languages.model.base/model/model.ecore#/"/>
     <details key="dl" value="platform:/resource/de.evoal.languages.model.dl/model/model.ecore#/"/>
     <details key="ecore" value="http://www.eclipse.org/emf/2002/Ecore"/>
-    <details key="el" value="platform:/resource/de.evoal.languages.model.base/model/model.ecore#/"/>
   </eAnnotations>
   <eClassifiers xsi:type="ecore:EClass" name="DataDescriptionModule">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -54,7 +54,7 @@
     <eLiterals name="Boolean" value="2" literal="boolean"/>
     <eLiterals name="String" value="3" literal="string"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="DataTypeDefinition">
+  <eClassifiers xsi:type="ecore:EClass" name="DataTypeDefinition" eSuperTypes="../../de.evoal.languages.model.base/model/model.ecore#//Definition">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A data type that allows reuse of information."/>
     </eAnnotations>

@@ -124,6 +124,7 @@
     <genClasses ecoreClass="model.ecore#//InstanceDefinitionReference">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//InstanceDefinitionReference/definition"/>
     </genClasses>
+    <genClasses image="false" ecoreClass="model.ecore#//Definition"/>
     <genClasses ecoreClass="model.ecore#//TypeDefinition">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//TypeDefinition/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//TypeDefinition/attributes"/>

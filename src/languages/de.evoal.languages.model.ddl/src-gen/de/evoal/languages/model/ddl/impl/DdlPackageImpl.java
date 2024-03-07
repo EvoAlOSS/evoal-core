@@ -491,6 +491,7 @@ public class DdlPackageImpl extends EPackageImpl implements DdlPackage {
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
+		dataTypeDefinitionEClass.getESuperTypes().add(theBasePackage.getDefinition());
 		typedDataDescriptionEClass.getESuperTypes().add(this.getDataDescription());
 		untypedDataDescriptionEClass.getESuperTypes().add(this.getDataDescription());
 		dataReferenceEClass.getESuperTypes().add(theBasePackage.getValueReference());
@@ -566,9 +567,9 @@ public class DdlPackageImpl extends EPackageImpl implements DdlPackage {
 		  (this,
 		   source,
 		   new String[] {
+			   "base", "platform:/resource/de.evoal.languages.model.base/model/model.ecore#/",
 			   "dl", "platform:/resource/de.evoal.languages.model.dl/model/model.ecore#/",
-			   "ecore", "http://www.eclipse.org/emf/2002/Ecore",
-			   "el", "platform:/resource/de.evoal.languages.model.base/model/model.ecore#/"
+			   "ecore", "http://www.eclipse.org/emf/2002/Ecore"
 		   });
 	}
 

@@ -1,6 +1,7 @@
 package de.evoal.core.main.producer;
 
 import de.evoal.core.api.board.CoreBlackboardEntries;
+import de.evoal.core.api.cdi.BeanFactory;
 import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.core.api.languages.ExpressionEvaluator;
 import de.evoal.core.api.properties.PropertiesSpecification;
@@ -26,18 +27,9 @@ public class SpecificationProducer {
     @Produces
     @Dependent
     @Named("genotype-description")
-    public List<DataDescription> createSourceSpecification(final @ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.genotype") Instance [] genotype) {
-        final List<DataDescription> descriptors = Arrays.stream(genotype)
-                .map(Instance.class::cast)
-                .map(i -> i.findAttribute("genes"))
-                .map(Attribute::getValue)
-                .map(evaluator::evaluate)
-                .flatMap(l -> ((List<Instance>)(List)l).stream())
-                .map(i -> evaluator.attributeToObject(i, "content"))
-                .map(DataDescription.class::cast)
-                .collect(Collectors.toList());
-
-        return descriptors;
+    public List<DataDescription> createSourceSpecification(final @ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.genotype") Instance genotype) {
+        BeanFactory.createComponent(Codec)
+        throw new RuntimeException("safd");
     }
 
     @Produces

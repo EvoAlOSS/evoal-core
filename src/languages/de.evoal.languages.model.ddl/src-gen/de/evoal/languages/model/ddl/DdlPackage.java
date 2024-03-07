@@ -23,7 +23,7 @@ import org.eclipse.emf.ecore.EReference;
  * <!-- end-user-doc -->
  * @see de.evoal.languages.model.ddl.DdlFactory
  * @model kind="package"
- *        annotation="http://www.eclipse.org/OCL/Import dl='platform:/resource/de.evoal.languages.model.dl/model/model.ecore#/' ecore='http://www.eclipse.org/emf/2002/Ecore' el='platform:/resource/de.evoal.languages.model.base/model/model.ecore#/'"
+ *        annotation="http://www.eclipse.org/OCL/Import base='platform:/resource/de.evoal.languages.model.base/model/model.ecore#/' dl='platform:/resource/de.evoal.languages.model.dl/model/model.ecore#/' ecore='http://www.eclipse.org/emf/2002/Ecore'"
  * @generated
  */
 public interface DdlPackage extends EPackage {
@@ -140,7 +140,7 @@ public interface DdlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DATA_TYPE_DEFINITION__SCALE = 0;
+	int DATA_TYPE_DEFINITION__SCALE = BasePackage.DEFINITION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -149,7 +149,7 @@ public interface DdlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DATA_TYPE_DEFINITION__NAME = 1;
+	int DATA_TYPE_DEFINITION__NAME = BasePackage.DEFINITION_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Description</b></em>' attribute.
@@ -158,7 +158,7 @@ public interface DdlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DATA_TYPE_DEFINITION__DESCRIPTION = 2;
+	int DATA_TYPE_DEFINITION__DESCRIPTION = BasePackage.DEFINITION_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Constraints</b></em>' containment reference list.
@@ -167,7 +167,7 @@ public interface DdlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DATA_TYPE_DEFINITION__CONSTRAINTS = 3;
+	int DATA_TYPE_DEFINITION__CONSTRAINTS = BasePackage.DEFINITION_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Data Type Definition</em>' class.
@@ -176,7 +176,7 @@ public interface DdlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DATA_TYPE_DEFINITION_FEATURE_COUNT = 4;
+	int DATA_TYPE_DEFINITION_FEATURE_COUNT = BasePackage.DEFINITION_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.ddl.impl.DataDescriptionImpl <em>Data Description</em>}' class.

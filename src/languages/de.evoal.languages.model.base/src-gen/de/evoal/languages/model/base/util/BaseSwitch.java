@@ -223,9 +223,16 @@ public class BaseSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case BasePackage.DEFINITION: {
+				Definition definition = (Definition)theEObject;
+				T result = caseDefinition(definition);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case BasePackage.TYPE_DEFINITION: {
 				TypeDefinition typeDefinition = (TypeDefinition)theEObject;
 				T result = caseTypeDefinition(typeDefinition);
+				if (result == null) result = caseDefinition(typeDefinition);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -728,6 +735,21 @@ public class BaseSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseInstanceDefinitionReference(InstanceDefinitionReference object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Definition</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Definition</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDefinition(Definition object) {
 		return null;
 	}
 

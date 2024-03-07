@@ -21,6 +21,7 @@ import de.evoal.languages.model.base.ConstantReference;
 import de.evoal.languages.model.base.DataOrInstanceType;
 import de.evoal.languages.model.base.DataType;
 import de.evoal.languages.model.base.DefinedFunctionName;
+import de.evoal.languages.model.base.Definition;
 import de.evoal.languages.model.base.Expression;
 import de.evoal.languages.model.base.ExpressionType;
 import de.evoal.languages.model.base.Factor;
@@ -231,6 +232,13 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 	 * @generated
 	 */
 	private EClass instanceDefinitionReferenceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass definitionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1047,6 +1055,16 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 	 * @generated
 	 */
 	@Override
+	public EClass getDefinition() {
+		return definitionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getTypeDefinition() {
 		return typeDefinitionEClass;
 	}
@@ -1719,6 +1737,8 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 		instanceDefinitionReferenceEClass = createEClass(INSTANCE_DEFINITION_REFERENCE);
 		createEReference(instanceDefinitionReferenceEClass, INSTANCE_DEFINITION_REFERENCE__DEFINITION);
 
+		definitionEClass = createEClass(DEFINITION);
+
 		typeDefinitionEClass = createEClass(TYPE_DEFINITION);
 		createEAttribute(typeDefinitionEClass, TYPE_DEFINITION__NAME);
 		createEReference(typeDefinitionEClass, TYPE_DEFINITION__ATTRIBUTES);
@@ -1841,6 +1861,7 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 		paranthesesEClass.getESuperTypes().add(this.getValue());
 		valueReferenceEClass.getESuperTypes().add(this.getValue());
 		instanceDefinitionReferenceEClass.getESuperTypes().add(this.getValueReference());
+		typeDefinitionEClass.getESuperTypes().add(this.getDefinition());
 		instanceTypeEClass.getESuperTypes().add(this.getType());
 		literalTypeEClass.getESuperTypes().add(this.getType());
 		stringTypeEClass.getESuperTypes().add(this.getLiteralType());
@@ -1941,6 +1962,8 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 
 		initEClass(instanceDefinitionReferenceEClass, InstanceDefinitionReference.class, "InstanceDefinitionReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getInstanceDefinitionReference_Definition(), this.getTypeDefinition(), null, "definition", null, 1, 1, InstanceDefinitionReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(definitionEClass, Definition.class, "Definition", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(typeDefinitionEClass, TypeDefinition.class, "TypeDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getTypeDefinition_Name(), ecorePackage.getEString(), "name", null, 0, 1, TypeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
