@@ -240,6 +240,8 @@ public class ConstantExpressionEvaluator extends BaseSwitch<Object> {
 			return ((de.evoal.languages.model.ddl.DataReference)object).getDefinition();
 		} else if(object instanceof de.evoal.languages.model.instance.DataReference) {
 			return ((de.evoal.languages.model.instance.DataReference)object).getDefinition();
+		} else if(object instanceof de.evoal.languages.model.base.InstanceDefinitionReference) {
+			return ((de.evoal.languages.model.base.InstanceDefinitionReference)object).getDefinition();
 		}
 		throw new IllegalStateException("Not yet implemented: " + object.eClass() + " -- " + object);			
 	}
