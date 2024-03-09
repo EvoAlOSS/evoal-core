@@ -3486,6 +3486,7 @@ rule__StructuredDataDescriptionRule__Group__4
 	}
 :
 	rule__StructuredDataDescriptionRule__Group__4__Impl
+	rule__StructuredDataDescriptionRule__Group__5
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -3500,6 +3501,32 @@ rule__StructuredDataDescriptionRule__Group__4__Impl
 	{ before(grammarAccess.getStructuredDataDescriptionRuleAccess().getTypeAssignment_4()); }
 	(rule__StructuredDataDescriptionRule__TypeAssignment_4)
 	{ after(grammarAccess.getStructuredDataDescriptionRuleAccess().getTypeAssignment_4()); }
+)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__StructuredDataDescriptionRule__Group__5
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	rule__StructuredDataDescriptionRule__Group__5__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__StructuredDataDescriptionRule__Group__5__Impl
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+(
+	{ before(grammarAccess.getStructuredDataDescriptionRuleAccess().getSemicolonKeyword_5()); }
+	';'
+	{ after(grammarAccess.getStructuredDataDescriptionRuleAccess().getSemicolonKeyword_5()); }
 )
 ;
 finally {

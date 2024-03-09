@@ -407,13 +407,14 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 		private final Assignment cTypeAssignment_4 = (Assignment)cGroup.eContents().get(4);
 		private final CrossReference cTypeTypeDefinitionCrossReference_4_0 = (CrossReference)cTypeAssignment_4.eContents().get(0);
 		private final RuleCall cTypeTypeDefinitionQualifiedNameParserRuleCall_4_0_1 = (RuleCall)cTypeTypeDefinitionCrossReference_4_0.eContents().get(1);
+		private final Keyword cSemicolonKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//StructuredDataDescriptionRule returns StructuredDataDescription:
-		//    'data' name = StringOrId 'of' 'instance'  type = [base::TypeDefinition|QualifiedName]
+		//    'data' name = StringOrId 'of' 'instance'  type = [base::TypeDefinition|QualifiedName] ';'
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'data' name = StringOrId 'of' 'instance'  type = [base::TypeDefinition|QualifiedName]
+		//'data' name = StringOrId 'of' 'instance'  type = [base::TypeDefinition|QualifiedName] ';'
 		public Group getGroup() { return cGroup; }
 		
 		//'data'
@@ -439,6 +440,9 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 		
 		//QualifiedName
 		public RuleCall getTypeTypeDefinitionQualifiedNameParserRuleCall_4_0_1() { return cTypeTypeDefinitionQualifiedNameParserRuleCall_4_0_1; }
+		
+		//';'
+		public Keyword getSemicolonKeyword_5() { return cSemicolonKeyword_5; }
 	}
 	public class StatementRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.ddl.dsl.DataDescriptionLanguage.StatementRule");
@@ -798,7 +802,7 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 	}
 	
 	//StructuredDataDescriptionRule returns StructuredDataDescription:
-	//    'data' name = StringOrId 'of' 'instance'  type = [base::TypeDefinition|QualifiedName]
+	//    'data' name = StringOrId 'of' 'instance'  type = [base::TypeDefinition|QualifiedName] ';'
 	//;
 	public StructuredDataDescriptionRuleElements getStructuredDataDescriptionRuleAccess() {
 		return pStructuredDataDescriptionRule;

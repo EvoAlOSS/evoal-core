@@ -50,7 +50,7 @@ UntypedBaseDataDescriptionRule returns UntypedBaseDataDescription:
 ;
 
 StructuredDataDescriptionRule returns StructuredDataDescription:
-	'data' name = StringOrId 'of' 'instance'  type = [base::TypeDefinition|QualifiedName]
+	'data' name = StringOrId 'of' 'instance'  type = [base::TypeDefinition|QualifiedName] ';'
 ;
 
 StatementRule returns base::Expression:

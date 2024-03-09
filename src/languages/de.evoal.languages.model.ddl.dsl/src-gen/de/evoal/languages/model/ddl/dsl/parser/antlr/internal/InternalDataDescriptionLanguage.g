@@ -712,6 +712,10 @@ ruleStructuredDataDescriptionRule returns [EObject current=null]
 				}
 			)
 		)
+		otherlv_5=';'
+		{
+			newLeafNode(otherlv_5, grammarAccess.getStructuredDataDescriptionRuleAccess().getSemicolonKeyword_5());
+		}
 	)
 ;
 
