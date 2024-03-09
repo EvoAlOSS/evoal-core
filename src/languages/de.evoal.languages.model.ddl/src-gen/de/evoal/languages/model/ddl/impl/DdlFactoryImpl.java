@@ -59,8 +59,9 @@ public class DdlFactoryImpl extends EFactoryImpl implements DdlFactory {
 		switch (eClass.getClassifierID()) {
 			case DdlPackage.DATA_DESCRIPTION_MODULE: return createDataDescriptionModule();
 			case DdlPackage.DATA_TYPE_DEFINITION: return createDataTypeDefinition();
-			case DdlPackage.TYPED_DATA_DESCRIPTION: return createTypedDataDescription();
-			case DdlPackage.UNTYPED_DATA_DESCRIPTION: return createUntypedDataDescription();
+			case DdlPackage.TYPED_BASE_DATA_DESCRIPTION: return createTypedBaseDataDescription();
+			case DdlPackage.UNTYPED_BASE_DATA_DESCRIPTION: return createUntypedBaseDataDescription();
+			case DdlPackage.STRUCTURED_DATA_DESCRIPTION: return createStructuredDataDescription();
 			case DdlPackage.DATA_REFERENCE: return createDataReference();
 			case DdlPackage.SELF_REFERENCE: return createSelfReference();
 			default:
@@ -130,9 +131,9 @@ public class DdlFactoryImpl extends EFactoryImpl implements DdlFactory {
 	 * @generated
 	 */
 	@Override
-	public TypedDataDescription createTypedDataDescription() {
-		TypedDataDescriptionImpl typedDataDescription = new TypedDataDescriptionImpl();
-		return typedDataDescription;
+	public TypedBaseDataDescription createTypedBaseDataDescription() {
+		TypedBaseDataDescriptionImpl typedBaseDataDescription = new TypedBaseDataDescriptionImpl();
+		return typedBaseDataDescription;
 	}
 
 	/**
@@ -141,9 +142,20 @@ public class DdlFactoryImpl extends EFactoryImpl implements DdlFactory {
 	 * @generated
 	 */
 	@Override
-	public UntypedDataDescription createUntypedDataDescription() {
-		UntypedDataDescriptionImpl untypedDataDescription = new UntypedDataDescriptionImpl();
-		return untypedDataDescription;
+	public StructuredDataDescription createStructuredDataDescription() {
+		StructuredDataDescriptionImpl structuredDataDescription = new StructuredDataDescriptionImpl();
+		return structuredDataDescription;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public UntypedBaseDataDescription createUntypedBaseDataDescription() {
+		UntypedBaseDataDescriptionImpl untypedBaseDataDescription = new UntypedBaseDataDescriptionImpl();
+		return untypedBaseDataDescription;
 	}
 
 	/**

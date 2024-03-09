@@ -2,9 +2,10 @@
  */
 package de.evoal.languages.model.ddl.impl;
 
+import de.evoal.languages.model.ddl.BaseDataDescription;
 import de.evoal.languages.model.ddl.DdlPackage;
+import de.evoal.languages.model.ddl.RepresentationType;
 import de.evoal.languages.model.ddl.ScaleType;
-import de.evoal.languages.model.ddl.UntypedDataDescription;
 
 import org.eclipse.emf.common.notify.Notification;
 
@@ -14,44 +15,44 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Untyped Data Description</b></em>'.
+ * An implementation of the model object '<em><b>Base Data Description</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link de.evoal.languages.model.ddl.impl.UntypedDataDescriptionImpl#getScale <em>Scale</em>}</li>
+ *   <li>{@link de.evoal.languages.model.ddl.impl.BaseDataDescriptionImpl#getRepresentation <em>Representation</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class UntypedDataDescriptionImpl extends DataDescriptionImpl implements UntypedDataDescription {
+public abstract class BaseDataDescriptionImpl extends DataDescriptionImpl implements BaseDataDescription {
 	/**
-	 * The default value of the '{@link #getScale() <em>Scale</em>}' attribute.
+	 * The default value of the '{@link #getRepresentation() <em>Representation</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getScale()
+	 * @see #getRepresentation()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final ScaleType SCALE_EDEFAULT = ScaleType.NOMINAL;
+	protected static final RepresentationType REPRESENTATION_EDEFAULT = RepresentationType.REAL;
 
 	/**
-	 * The cached value of the '{@link #getScale() <em>Scale</em>}' attribute.
+	 * The cached value of the '{@link #getRepresentation() <em>Representation</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getScale()
+	 * @see #getRepresentation()
 	 * @generated
 	 * @ordered
 	 */
-	protected ScaleType scale = SCALE_EDEFAULT;
+	protected RepresentationType representation = REPRESENTATION_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected UntypedDataDescriptionImpl() {
+	protected BaseDataDescriptionImpl() {
 		super();
 	}
 
@@ -62,7 +63,30 @@ public class UntypedDataDescriptionImpl extends DataDescriptionImpl implements U
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return DdlPackage.Literals.UNTYPED_DATA_DESCRIPTION;
+		return DdlPackage.Literals.BASE_DATA_DESCRIPTION;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public RepresentationType getRepresentation() {
+		return representation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setRepresentation(RepresentationType newRepresentation) {
+		RepresentationType oldRepresentation = representation;
+		representation = newRepresentation == null ? REPRESENTATION_EDEFAULT : newRepresentation;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DdlPackage.BASE_DATA_DESCRIPTION__REPRESENTATION, oldRepresentation, representation));
 	}
 
 	/**
@@ -72,20 +96,9 @@ public class UntypedDataDescriptionImpl extends DataDescriptionImpl implements U
 	 */
 	@Override
 	public ScaleType getScale() {
-		return scale;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setScale(ScaleType newScale) {
-		ScaleType oldScale = scale;
-		scale = newScale == null ? SCALE_EDEFAULT : newScale;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DdlPackage.UNTYPED_DATA_DESCRIPTION__SCALE, oldScale, scale));
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -96,8 +109,8 @@ public class UntypedDataDescriptionImpl extends DataDescriptionImpl implements U
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case DdlPackage.UNTYPED_DATA_DESCRIPTION__SCALE:
-				return getScale();
+			case DdlPackage.BASE_DATA_DESCRIPTION__REPRESENTATION:
+				return getRepresentation();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -110,8 +123,8 @@ public class UntypedDataDescriptionImpl extends DataDescriptionImpl implements U
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case DdlPackage.UNTYPED_DATA_DESCRIPTION__SCALE:
-				setScale((ScaleType)newValue);
+			case DdlPackage.BASE_DATA_DESCRIPTION__REPRESENTATION:
+				setRepresentation((RepresentationType)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -125,8 +138,8 @@ public class UntypedDataDescriptionImpl extends DataDescriptionImpl implements U
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case DdlPackage.UNTYPED_DATA_DESCRIPTION__SCALE:
-				setScale(SCALE_EDEFAULT);
+			case DdlPackage.BASE_DATA_DESCRIPTION__REPRESENTATION:
+				setRepresentation(REPRESENTATION_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -140,8 +153,8 @@ public class UntypedDataDescriptionImpl extends DataDescriptionImpl implements U
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case DdlPackage.UNTYPED_DATA_DESCRIPTION__SCALE:
-				return scale != SCALE_EDEFAULT;
+			case DdlPackage.BASE_DATA_DESCRIPTION__REPRESENTATION:
+				return representation != REPRESENTATION_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -156,10 +169,10 @@ public class UntypedDataDescriptionImpl extends DataDescriptionImpl implements U
 		if (eIsProxy()) return super.toString();
 
 		StringBuilder result = new StringBuilder(super.toString());
-		result.append(" (scale: ");
-		result.append(scale);
+		result.append(" (representation: ");
+		result.append(representation);
 		result.append(')');
 		return result.toString();
 	}
 
-} //UntypedDataDescriptionImpl
+} //BaseDataDescriptionImpl

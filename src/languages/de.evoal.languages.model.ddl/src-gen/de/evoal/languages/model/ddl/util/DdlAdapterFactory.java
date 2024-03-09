@@ -84,12 +84,20 @@ public class DdlAdapterFactory extends AdapterFactoryImpl {
 				return createDataDescriptionAdapter();
 			}
 			@Override
-			public Adapter caseTypedDataDescription(TypedDataDescription object) {
-				return createTypedDataDescriptionAdapter();
+			public Adapter caseBaseDataDescription(BaseDataDescription object) {
+				return createBaseDataDescriptionAdapter();
 			}
 			@Override
-			public Adapter caseUntypedDataDescription(UntypedDataDescription object) {
-				return createUntypedDataDescriptionAdapter();
+			public Adapter caseTypedBaseDataDescription(TypedBaseDataDescription object) {
+				return createTypedBaseDataDescriptionAdapter();
+			}
+			@Override
+			public Adapter caseUntypedBaseDataDescription(UntypedBaseDataDescription object) {
+				return createUntypedBaseDataDescriptionAdapter();
+			}
+			@Override
+			public Adapter caseStructuredDataDescription(StructuredDataDescription object) {
+				return createStructuredDataDescriptionAdapter();
 			}
 			@Override
 			public Adapter caseDataReference(DataReference object) {
@@ -174,30 +182,58 @@ public class DdlAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.ddl.TypedDataDescription <em>Typed Data Description</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.ddl.BaseDataDescription <em>Base Data Description</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.evoal.languages.model.ddl.TypedDataDescription
+	 * @see de.evoal.languages.model.ddl.BaseDataDescription
 	 * @generated
 	 */
-	public Adapter createTypedDataDescriptionAdapter() {
+	public Adapter createBaseDataDescriptionAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.ddl.UntypedDataDescription <em>Untyped Data Description</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.ddl.TypedBaseDataDescription <em>Typed Base Data Description</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.evoal.languages.model.ddl.UntypedDataDescription
+	 * @see de.evoal.languages.model.ddl.TypedBaseDataDescription
 	 * @generated
 	 */
-	public Adapter createUntypedDataDescriptionAdapter() {
+	public Adapter createTypedBaseDataDescriptionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.ddl.StructuredDataDescription <em>Structured Data Description</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.evoal.languages.model.ddl.StructuredDataDescription
+	 * @generated
+	 */
+	public Adapter createStructuredDataDescriptionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.ddl.UntypedBaseDataDescription <em>Untyped Base Data Description</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.evoal.languages.model.ddl.UntypedBaseDataDescription
+	 * @generated
+	 */
+	public Adapter createUntypedBaseDataDescriptionAdapter() {
 		return null;
 	}
 

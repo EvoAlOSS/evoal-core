@@ -1,15 +1,5 @@
 package de.evoal.languages.model.ddl.dsl.scoping;
 
-import java.util.List;
-
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.xtext.resource.IContainer;
-import org.eclipse.xtext.resource.IResourceDescription;
-import org.eclipse.xtext.resource.IResourceDescriptions;
-import org.eclipse.xtext.resource.containers.DescriptionAddingContainer;
-import org.eclipse.xtext.resource.containers.FilterUriContainer;
-import org.eclipse.xtext.resource.containers.IAllContainersState.Provider;
-import org.eclipse.xtext.resource.containers.ResourceSetBasedAllContainersStateProvider;
 import org.eclipse.xtext.resource.containers.StateBasedContainerManager;
 
 public class EvoAlReleaseStateBasedContainerManager extends StateBasedContainerManager {

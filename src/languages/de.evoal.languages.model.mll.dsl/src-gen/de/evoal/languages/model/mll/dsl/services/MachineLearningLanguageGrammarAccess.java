@@ -970,7 +970,7 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 	
 	//@Override
 	//ReferenceRule returns base::ValueReference:
-	//    ConstantReferenceRule | DataReferenceRule | InstanceDefinitionReferenceRule
+	//    ConstantReferenceRule | DataReferenceRule
 	//;
 	public InstanceLanguageGrammarAccess.ReferenceRuleElements getReferenceRuleAccess() {
 		return gaInstanceLanguage.getReferenceRuleAccess();
@@ -1195,18 +1195,6 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 		return getCallRuleAccess().getRule();
 	}
 	
-	//InstanceDefinitionReferenceRule returns InstanceDefinitionReference:
-	//    {InstanceDefinitionReference}
-	//    'instance' definition = [TypeDefinition|QualifiedName]
-	//;
-	public BaseLanguageGrammarAccess.InstanceDefinitionReferenceRuleElements getInstanceDefinitionReferenceRuleAccess() {
-		return gaBaseLanguage.getInstanceDefinitionReferenceRuleAccess();
-	}
-	
-	public ParserRule getInstanceDefinitionReferenceRuleRule() {
-		return getInstanceDefinitionReferenceRuleAccess().getRule();
-	}
-	
 	//ConstantReferenceRule returns ConstantReference:
 	//    definition = [ConstantDefinition|QualifiedName]
 	//;
@@ -1366,7 +1354,7 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 	}
 	
 	//TypeRule returns Type:
-	//    StringTypeRule | IntTypeRule | RealTypeRule | BooleanTypeRule | LiteralTypeRule | ArrayTypeRule | InstanceTypeRule | VoidTypeRule | ExpressionTypeRule | DataTypeRule | DataOrInstanceTypeRule
+	//    StringTypeRule | IntTypeRule | RealTypeRule | BooleanTypeRule | LiteralTypeRule | ArrayTypeRule | InstanceTypeRule | VoidTypeRule | ExpressionTypeRule | DataTypeRule
 	//;
 	public BaseLanguageGrammarAccess.TypeRuleElements getTypeRuleAccess() {
 		return gaBaseLanguage.getTypeRuleAccess();
@@ -1469,18 +1457,6 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 	
 	public ParserRule getVoidTypeRuleRule() {
 		return getVoidTypeRuleAccess().getRule();
-	}
-	
-	//DataOrInstanceTypeRule returns DataOrInstanceType:
-	//    {DataOrInstanceType}
-	//    'data' 'or' 'type' ('of' instance=InstanceTypeRule)?
-	//;
-	public BaseLanguageGrammarAccess.DataOrInstanceTypeRuleElements getDataOrInstanceTypeRuleAccess() {
-		return gaBaseLanguage.getDataOrInstanceTypeRuleAccess();
-	}
-	
-	public ParserRule getDataOrInstanceTypeRuleRule() {
-		return getDataOrInstanceTypeRuleAccess().getRule();
 	}
 	
 	//DataTypeRule returns DataType:

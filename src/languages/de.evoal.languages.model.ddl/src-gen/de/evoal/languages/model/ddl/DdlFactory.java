@@ -40,22 +40,31 @@ public interface DdlFactory extends EFactory {
 	DataTypeDefinition createDataTypeDefinition();
 
 	/**
-	 * Returns a new object of class '<em>Typed Data Description</em>'.
+	 * Returns a new object of class '<em>Typed Base Data Description</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Typed Data Description</em>'.
+	 * @return a new object of class '<em>Typed Base Data Description</em>'.
 	 * @generated
 	 */
-	TypedDataDescription createTypedDataDescription();
+	TypedBaseDataDescription createTypedBaseDataDescription();
 
 	/**
-	 * Returns a new object of class '<em>Untyped Data Description</em>'.
+	 * Returns a new object of class '<em>Structured Data Description</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Untyped Data Description</em>'.
+	 * @return a new object of class '<em>Structured Data Description</em>'.
 	 * @generated
 	 */
-	UntypedDataDescription createUntypedDataDescription();
+	StructuredDataDescription createStructuredDataDescription();
+
+	/**
+	 * Returns a new object of class '<em>Untyped Base Data Description</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Untyped Base Data Description</em>'.
+	 * @generated
+	 */
+	UntypedBaseDataDescription createUntypedBaseDataDescription();
 
 	/**
 	 * Returns a new object of class '<em>Data Reference</em>'.

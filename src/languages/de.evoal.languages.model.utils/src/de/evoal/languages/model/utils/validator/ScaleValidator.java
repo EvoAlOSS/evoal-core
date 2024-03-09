@@ -29,6 +29,7 @@ import de.evoal.languages.model.base.UnaryAddOrSubtractExpression;
 import de.evoal.languages.model.base.ValueReference;
 import de.evoal.languages.model.base.XorExpression;
 import de.evoal.languages.model.base.util.BaseSwitch;
+import de.evoal.languages.model.ddl.BaseDataDescription;
 import de.evoal.languages.model.ddl.DataDescription;
 import de.evoal.languages.model.ddl.ScaleType;
 import de.evoal.languages.model.ddl.SelfReference;
@@ -262,17 +263,22 @@ public class ScaleValidator extends BaseSwitch<ScaleType> {
 
 	@Override
 	public ScaleType caseValueReference(final ValueReference object) {
-		if(object instanceof de.evoal.languages.model.ddl.DataReference) {
+		DataDescription description = null;
+
+		if(object instanceof SelfReference) {
+			return scaleTypeOfValue;
+		} else if(object instanceof de.evoal.languages.model.ddl.DataReference) {
 			de.evoal.languages.model.ddl.DataReference reference = (de.evoal.languages.model.ddl.DataReference)object;
 			
-			return reference.getDefinition().getScale();
+			description = reference.getDefinition();
 		} else if(object instanceof de.evoal.languages.model.instance.DataReference) {
 			de.evoal.languages.model.instance.DataReference reference = (de.evoal.languages.model.instance.DataReference)object;
 			
-			return reference.getDefinition().getScale();
-			
-		} else if(object instanceof SelfReference) {
-			return scaleTypeOfValue;
+			description = reference.getDefinition();
+		}
+		
+		if(description != null && description instanceof BaseDataDescription) {
+			return ((BaseDataDescription)description).getScale();
 		}
 	
 		return doSwitch(object);

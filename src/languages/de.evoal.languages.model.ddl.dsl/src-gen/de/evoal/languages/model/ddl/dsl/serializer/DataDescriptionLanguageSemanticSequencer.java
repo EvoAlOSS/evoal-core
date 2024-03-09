@@ -18,14 +18,12 @@ import de.evoal.languages.model.base.Call;
 import de.evoal.languages.model.base.ComparisonExpression;
 import de.evoal.languages.model.base.ConstantDefinition;
 import de.evoal.languages.model.base.ConstantReference;
-import de.evoal.languages.model.base.DataOrInstanceType;
 import de.evoal.languages.model.base.DataType;
 import de.evoal.languages.model.base.DefinedFunctionName;
 import de.evoal.languages.model.base.ExpressionType;
 import de.evoal.languages.model.base.FunctionDefinition;
 import de.evoal.languages.model.base.Import;
 import de.evoal.languages.model.base.Instance;
-import de.evoal.languages.model.base.InstanceDefinitionReference;
 import de.evoal.languages.model.base.InstanceType;
 import de.evoal.languages.model.base.IntType;
 import de.evoal.languages.model.base.IntegerLiteral;
@@ -50,8 +48,9 @@ import de.evoal.languages.model.ddl.DataReference;
 import de.evoal.languages.model.ddl.DataTypeDefinition;
 import de.evoal.languages.model.ddl.DdlPackage;
 import de.evoal.languages.model.ddl.SelfReference;
-import de.evoal.languages.model.ddl.TypedDataDescription;
-import de.evoal.languages.model.ddl.UntypedDataDescription;
+import de.evoal.languages.model.ddl.StructuredDataDescription;
+import de.evoal.languages.model.ddl.TypedBaseDataDescription;
+import de.evoal.languages.model.ddl.UntypedBaseDataDescription;
 import de.evoal.languages.model.ddl.dsl.services.DataDescriptionLanguageGrammarAccess;
 import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
@@ -113,9 +112,6 @@ public class DataDescriptionLanguageSemanticSequencer extends BaseLanguageSemant
 			case BasePackage.CONSTANT_REFERENCE:
 				sequence_ConstantReferenceRule(context, (ConstantReference) semanticObject); 
 				return; 
-			case BasePackage.DATA_OR_INSTANCE_TYPE:
-				sequence_DataOrInstanceTypeRule(context, (DataOrInstanceType) semanticObject); 
-				return; 
 			case BasePackage.DATA_TYPE:
 				sequence_DataTypeRule(context, (DataType) semanticObject); 
 				return; 
@@ -133,9 +129,6 @@ public class DataDescriptionLanguageSemanticSequencer extends BaseLanguageSemant
 				return; 
 			case BasePackage.INSTANCE:
 				sequence_InstanceLiteralRule(context, (Instance) semanticObject); 
-				return; 
-			case BasePackage.INSTANCE_DEFINITION_REFERENCE:
-				sequence_InstanceDefinitionReferenceRule(context, (InstanceDefinitionReference) semanticObject); 
 				return; 
 			case BasePackage.INSTANCE_TYPE:
 				sequence_InstanceTypeRule(context, (InstanceType) semanticObject); 
@@ -209,11 +202,14 @@ public class DataDescriptionLanguageSemanticSequencer extends BaseLanguageSemant
 			case DdlPackage.SELF_REFERENCE:
 				sequence_SelfReferenceRule(context, (SelfReference) semanticObject); 
 				return; 
-			case DdlPackage.TYPED_DATA_DESCRIPTION:
-				sequence_TypedDataDescriptionRule(context, (TypedDataDescription) semanticObject); 
+			case DdlPackage.STRUCTURED_DATA_DESCRIPTION:
+				sequence_StructuredDataDescriptionRule(context, (StructuredDataDescription) semanticObject); 
 				return; 
-			case DdlPackage.UNTYPED_DATA_DESCRIPTION:
-				sequence_UntypedDataDescriptionRule(context, (UntypedDataDescription) semanticObject); 
+			case DdlPackage.TYPED_BASE_DATA_DESCRIPTION:
+				sequence_TypedBaseDataDescriptionRule(context, (TypedBaseDataDescription) semanticObject); 
+				return; 
+			case DdlPackage.UNTYPED_BASE_DATA_DESCRIPTION:
+				sequence_UntypedBaseDataDescriptionRule(context, (UntypedBaseDataDescription) semanticObject); 
 				return; 
 			}
 		if (errorAcceptor != null)
@@ -289,14 +285,38 @@ public class DataDescriptionLanguageSemanticSequencer extends BaseLanguageSemant
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     DataDescriptionRule returns TypedDataDescription
-	 *     TypedDataDescriptionRule returns TypedDataDescription
+	 *     DataDescriptionRule returns StructuredDataDescription
+	 *     StructuredDataDescriptionRule returns StructuredDataDescription
+	 *
+	 * Constraint:
+	 *     (name=StringOrId type=[TypeDefinition|QualifiedName])
+	 * </pre>
+	 */
+	protected void sequence_StructuredDataDescriptionRule(ISerializationContext context, StructuredDataDescription semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, BasePackage.Literals.DEFINITION__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BasePackage.Literals.DEFINITION__NAME));
+			if (transientValues.isValueTransient(semanticObject, DdlPackage.Literals.STRUCTURED_DATA_DESCRIPTION__TYPE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DdlPackage.Literals.STRUCTURED_DATA_DESCRIPTION__TYPE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getStructuredDataDescriptionRuleAccess().getNameStringOrIdParserRuleCall_1_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getStructuredDataDescriptionRuleAccess().getTypeTypeDefinitionQualifiedNameParserRuleCall_4_0_1(), semanticObject.eGet(DdlPackage.Literals.STRUCTURED_DATA_DESCRIPTION__TYPE, false));
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     DataDescriptionRule returns TypedBaseDataDescription
+	 *     TypedBaseDataDescriptionRule returns TypedBaseDataDescription
 	 *
 	 * Constraint:
 	 *     (representation=RepresentationType name=StringOrId type=[DataTypeDefinition|QualifiedName] constraints+=StatementRule*)
 	 * </pre>
 	 */
-	protected void sequence_TypedDataDescriptionRule(ISerializationContext context, TypedDataDescription semanticObject) {
+	protected void sequence_TypedBaseDataDescriptionRule(ISerializationContext context, TypedBaseDataDescription semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -304,14 +324,14 @@ public class DataDescriptionLanguageSemanticSequencer extends BaseLanguageSemant
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     DataDescriptionRule returns UntypedDataDescription
-	 *     UntypedDataDescriptionRule returns UntypedDataDescription
+	 *     DataDescriptionRule returns UntypedBaseDataDescription
+	 *     UntypedBaseDataDescriptionRule returns UntypedBaseDataDescription
 	 *
 	 * Constraint:
 	 *     (scale=ScaleType? representation=RepresentationType name=StringOrId constraints+=StatementRule*)
 	 * </pre>
 	 */
-	protected void sequence_UntypedDataDescriptionRule(ISerializationContext context, UntypedDataDescription semanticObject) {
+	protected void sequence_UntypedBaseDataDescriptionRule(ISerializationContext context, UntypedBaseDataDescription semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

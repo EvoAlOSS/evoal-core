@@ -7,7 +7,7 @@ import "https://www.evoal.de/languages/base/1.0.0" as base
 
 @Override
 ReferenceRule returns base::ValueReference:
-	ConstantReferenceRule | DataReferenceRule | InstanceDefinitionReferenceRule
+	ConstantReferenceRule | DataReferenceRule
 ;
 
 DataReferenceRule returns DataReference:

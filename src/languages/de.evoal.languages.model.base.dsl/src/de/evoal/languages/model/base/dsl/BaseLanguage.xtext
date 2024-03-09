@@ -83,12 +83,7 @@ CallRule returns Call:
 
 
 ReferenceRule returns ValueReference:
-	ConstantReferenceRule | InstanceDefinitionReferenceRule
-;
-
-InstanceDefinitionReferenceRule returns InstanceDefinitionReference:
-	{InstanceDefinitionReference}
-	'instance' definition = [TypeDefinition|QualifiedName]
+	ConstantReferenceRule
 ;
 
 ConstantReferenceRule returns ConstantReference:
@@ -167,7 +162,7 @@ AttributeDefinitionRule returns AttributeDefinition:
 ;
 
 TypeRule returns Type:
-	StringTypeRule | IntTypeRule | RealTypeRule | BooleanTypeRule | LiteralTypeRule | ArrayTypeRule | InstanceTypeRule | VoidTypeRule | ExpressionTypeRule | DataTypeRule | DataOrInstanceTypeRule
+	StringTypeRule | IntTypeRule | RealTypeRule | BooleanTypeRule | LiteralTypeRule | ArrayTypeRule | InstanceTypeRule | VoidTypeRule | ExpressionTypeRule | DataTypeRule
 ;
 
 LiteralTypeRule returns LiteralType:
@@ -208,11 +203,6 @@ BooleanTypeRule returns BooleanType:
 VoidTypeRule returns VoidType:
 	{VoidType}
 	'void'
-;
-
-DataOrInstanceTypeRule returns DataOrInstanceType:
-	{DataOrInstanceType}
-	'data' 'or' 'type' ('of' instance=InstanceTypeRule)?
 ;
 
 DataTypeRule returns DataType:

@@ -11,7 +11,7 @@ import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
 
 import de.evoal.languages.model.base.Expression;
-import de.evoal.languages.model.ddl.DataDescription;
+import de.evoal.languages.model.ddl.BaseDataDescription;
 import de.evoal.languages.model.ddl.DataDescriptionModule;
 import de.evoal.languages.model.ddl.DdlPackage;
 import de.evoal.languages.model.ddl.ScaleType;
@@ -51,7 +51,7 @@ public class DataDescriptionLanguageValidator extends AbstractDataDescriptionLan
 	}
 	
 	@Check(CheckType.FAST)
-	public void checkDataDescription(final DataDescription descr) {
+	public void checkDataDescription(final BaseDataDescription descr) {
 		for(final Expression expression : descr.getConstraints()) {
 			ScaleValidator.check(expression, descr.getScale(), this);
 		}

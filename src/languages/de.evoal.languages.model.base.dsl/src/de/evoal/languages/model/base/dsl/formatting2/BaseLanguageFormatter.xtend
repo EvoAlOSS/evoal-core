@@ -4,16 +4,14 @@
  */
 package de.evoal.languages.model.base.dsl.formatting2
 
-import com.google.inject.Inject
 import de.evoal.languages.model.base.OrExpression
 import de.evoal.languages.model.base.XorExpression
-import de.evoal.languages.model.base.dsl.services.BaseLanguageGrammarAccess
 import org.eclipse.xtext.formatting2.AbstractFormatter2
 import org.eclipse.xtext.formatting2.IFormattableDocument
 
 class BaseLanguageFormatter extends AbstractFormatter2 {
 	
-	@Inject extension BaseLanguageGrammarAccess
+	//@Inject extension BaseLanguageGrammarAccess
 
 	def dispatch void format(OrExpression orExpression, extension IFormattableDocument document) {
 		// TODO: format HiddenRegions around keywords, attributes, cross references, etc. 

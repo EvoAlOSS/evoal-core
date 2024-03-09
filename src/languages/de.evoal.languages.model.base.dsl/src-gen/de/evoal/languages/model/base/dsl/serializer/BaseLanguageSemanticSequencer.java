@@ -18,14 +18,12 @@ import de.evoal.languages.model.base.Call;
 import de.evoal.languages.model.base.ComparisonExpression;
 import de.evoal.languages.model.base.ConstantDefinition;
 import de.evoal.languages.model.base.ConstantReference;
-import de.evoal.languages.model.base.DataOrInstanceType;
 import de.evoal.languages.model.base.DataType;
 import de.evoal.languages.model.base.DefinedFunctionName;
 import de.evoal.languages.model.base.ExpressionType;
 import de.evoal.languages.model.base.FunctionDefinition;
 import de.evoal.languages.model.base.Import;
 import de.evoal.languages.model.base.Instance;
-import de.evoal.languages.model.base.InstanceDefinitionReference;
 import de.evoal.languages.model.base.InstanceType;
 import de.evoal.languages.model.base.IntType;
 import de.evoal.languages.model.base.IntegerLiteral;
@@ -106,9 +104,6 @@ public class BaseLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 			case BasePackage.CONSTANT_REFERENCE:
 				sequence_ConstantReferenceRule(context, (ConstantReference) semanticObject); 
 				return; 
-			case BasePackage.DATA_OR_INSTANCE_TYPE:
-				sequence_DataOrInstanceTypeRule(context, (DataOrInstanceType) semanticObject); 
-				return; 
 			case BasePackage.DATA_TYPE:
 				sequence_DataTypeRule(context, (DataType) semanticObject); 
 				return; 
@@ -126,9 +121,6 @@ public class BaseLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 				return; 
 			case BasePackage.INSTANCE:
 				sequence_InstanceLiteralRule(context, (Instance) semanticObject); 
-				return; 
-			case BasePackage.INSTANCE_DEFINITION_REFERENCE:
-				sequence_InstanceDefinitionReferenceRule(context, (InstanceDefinitionReference) semanticObject); 
 				return; 
 			case BasePackage.INSTANCE_TYPE:
 				sequence_InstanceTypeRule(context, (InstanceType) semanticObject); 
@@ -404,21 +396,6 @@ public class BaseLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     TypeRule returns DataOrInstanceType
-	 *     DataOrInstanceTypeRule returns DataOrInstanceType
-	 *
-	 * Constraint:
-	 *     instance=InstanceTypeRule?
-	 * </pre>
-	 */
-	protected void sequence_DataOrInstanceTypeRule(ISerializationContext context, DataOrInstanceType semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * <pre>
-	 * Contexts:
 	 *     TypeRule returns DataType
 	 *     DataTypeRule returns DataType
 	 *
@@ -499,28 +476,6 @@ public class BaseLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getImportRuleAccess().getLanguageSTRINGTerminalRuleCall_1_0(), semanticObject.getLanguage());
 		feeder.accept(grammarAccess.getImportRuleAccess().getImportedNamespaceQualifiedNameParserRuleCall_3_0(), semanticObject.getImportedNamespace());
-		feeder.finish();
-	}
-	
-	
-	/**
-	 * <pre>
-	 * Contexts:
-	 *     ValueRule returns InstanceDefinitionReference
-	 *     ReferenceRule returns InstanceDefinitionReference
-	 *     InstanceDefinitionReferenceRule returns InstanceDefinitionReference
-	 *
-	 * Constraint:
-	 *     definition=[TypeDefinition|QualifiedName]
-	 * </pre>
-	 */
-	protected void sequence_InstanceDefinitionReferenceRule(ISerializationContext context, InstanceDefinitionReference semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, BasePackage.Literals.INSTANCE_DEFINITION_REFERENCE__DEFINITION) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BasePackage.Literals.INSTANCE_DEFINITION_REFERENCE__DEFINITION));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getInstanceDefinitionReferenceRuleAccess().getDefinitionTypeDefinitionQualifiedNameParserRuleCall_2_0_1(), semanticObject.eGet(BasePackage.Literals.INSTANCE_DEFINITION_REFERENCE__DEFINITION, false));
 		feeder.finish();
 	}
 	

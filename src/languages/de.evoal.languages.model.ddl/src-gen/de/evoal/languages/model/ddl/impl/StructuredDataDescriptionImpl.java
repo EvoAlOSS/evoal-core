@@ -2,10 +2,10 @@
  */
 package de.evoal.languages.model.ddl.impl;
 
-import de.evoal.languages.model.ddl.DataTypeDefinition;
+import de.evoal.languages.model.base.TypeDefinition;
+
 import de.evoal.languages.model.ddl.DdlPackage;
-import de.evoal.languages.model.ddl.ScaleType;
-import de.evoal.languages.model.ddl.TypedDataDescription;
+import de.evoal.languages.model.ddl.StructuredDataDescription;
 
 import org.eclipse.emf.common.notify.Notification;
 
@@ -16,18 +16,18 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Typed Data Description</b></em>'.
+ * An implementation of the model object '<em><b>Structured Data Description</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link de.evoal.languages.model.ddl.impl.TypedDataDescriptionImpl#getType <em>Type</em>}</li>
+ *   <li>{@link de.evoal.languages.model.ddl.impl.StructuredDataDescriptionImpl#getType <em>Type</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class TypedDataDescriptionImpl extends DataDescriptionImpl implements TypedDataDescription {
+public class StructuredDataDescriptionImpl extends DataDescriptionImpl implements StructuredDataDescription {
 	/**
 	 * The cached value of the '{@link #getType() <em>Type</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -36,14 +36,14 @@ public class TypedDataDescriptionImpl extends DataDescriptionImpl implements Typ
 	 * @generated
 	 * @ordered
 	 */
-	protected DataTypeDefinition type;
+	protected TypeDefinition type;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected TypedDataDescriptionImpl() {
+	protected StructuredDataDescriptionImpl() {
 		super();
 	}
 
@@ -54,7 +54,7 @@ public class TypedDataDescriptionImpl extends DataDescriptionImpl implements Typ
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return DdlPackage.Literals.TYPED_DATA_DESCRIPTION;
+		return DdlPackage.Literals.STRUCTURED_DATA_DESCRIPTION;
 	}
 
 	/**
@@ -63,13 +63,13 @@ public class TypedDataDescriptionImpl extends DataDescriptionImpl implements Typ
 	 * @generated
 	 */
 	@Override
-	public DataTypeDefinition getType() {
+	public TypeDefinition getType() {
 		if (type != null && type.eIsProxy()) {
 			InternalEObject oldType = (InternalEObject)type;
-			type = (DataTypeDefinition)eResolveProxy(oldType);
+			type = (TypeDefinition)eResolveProxy(oldType);
 			if (type != oldType) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DdlPackage.TYPED_DATA_DESCRIPTION__TYPE, oldType, type));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DdlPackage.STRUCTURED_DATA_DESCRIPTION__TYPE, oldType, type));
 			}
 		}
 		return type;
@@ -80,7 +80,7 @@ public class TypedDataDescriptionImpl extends DataDescriptionImpl implements Typ
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public DataTypeDefinition basicGetType() {
+	public TypeDefinition basicGetType() {
 		return type;
 	}
 
@@ -90,21 +90,11 @@ public class TypedDataDescriptionImpl extends DataDescriptionImpl implements Typ
 	 * @generated
 	 */
 	@Override
-	public void setType(DataTypeDefinition newType) {
-		DataTypeDefinition oldType = type;
+	public void setType(TypeDefinition newType) {
+		TypeDefinition oldType = type;
 		type = newType;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DdlPackage.TYPED_DATA_DESCRIPTION__TYPE, oldType, type));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ScaleType getScale() {
-		return getType() == null ? null : getType().getScale();
+			eNotify(new ENotificationImpl(this, Notification.SET, DdlPackage.STRUCTURED_DATA_DESCRIPTION__TYPE, oldType, type));
 	}
 
 	/**
@@ -115,7 +105,7 @@ public class TypedDataDescriptionImpl extends DataDescriptionImpl implements Typ
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case DdlPackage.TYPED_DATA_DESCRIPTION__TYPE:
+			case DdlPackage.STRUCTURED_DATA_DESCRIPTION__TYPE:
 				if (resolve) return getType();
 				return basicGetType();
 		}
@@ -130,8 +120,8 @@ public class TypedDataDescriptionImpl extends DataDescriptionImpl implements Typ
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case DdlPackage.TYPED_DATA_DESCRIPTION__TYPE:
-				setType((DataTypeDefinition)newValue);
+			case DdlPackage.STRUCTURED_DATA_DESCRIPTION__TYPE:
+				setType((TypeDefinition)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -145,8 +135,8 @@ public class TypedDataDescriptionImpl extends DataDescriptionImpl implements Typ
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case DdlPackage.TYPED_DATA_DESCRIPTION__TYPE:
-				setType((DataTypeDefinition)null);
+			case DdlPackage.STRUCTURED_DATA_DESCRIPTION__TYPE:
+				setType((TypeDefinition)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -160,10 +150,10 @@ public class TypedDataDescriptionImpl extends DataDescriptionImpl implements Typ
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case DdlPackage.TYPED_DATA_DESCRIPTION__TYPE:
+			case DdlPackage.STRUCTURED_DATA_DESCRIPTION__TYPE:
 				return type != null;
 		}
 		return super.eIsSet(featureID);
 	}
 
-} //TypedDataDescriptionImpl
+} //StructuredDataDescriptionImpl

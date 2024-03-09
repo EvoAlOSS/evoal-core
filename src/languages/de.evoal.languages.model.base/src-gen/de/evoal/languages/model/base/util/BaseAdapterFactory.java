@@ -156,10 +156,6 @@ public class BaseAdapterFactory extends AdapterFactoryImpl {
 				return createValueReferenceAdapter();
 			}
 			@Override
-			public Adapter caseInstanceDefinitionReference(InstanceDefinitionReference object) {
-				return createInstanceDefinitionReferenceAdapter();
-			}
-			@Override
 			public Adapter caseDefinition(Definition object) {
 				return createDefinitionAdapter();
 			}
@@ -210,10 +206,6 @@ public class BaseAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseDataType(DataType object) {
 				return createDataTypeAdapter();
-			}
-			@Override
-			public Adapter caseDataOrInstanceType(DataOrInstanceType object) {
-				return createDataOrInstanceTypeAdapter();
 			}
 			@Override
 			public Adapter caseArrayType(ArrayType object) {
@@ -584,20 +576,6 @@ public class BaseAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.InstanceDefinitionReference <em>Instance Definition Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.evoal.languages.model.base.InstanceDefinitionReference
-	 * @generated
-	 */
-	public Adapter createInstanceDefinitionReferenceAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.Definition <em>Definition</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -776,20 +754,6 @@ public class BaseAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createDataTypeAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.DataOrInstanceType <em>Data Or Instance Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.evoal.languages.model.base.DataOrInstanceType
-	 * @generated
-	 */
-	public Adapter createDataOrInstanceTypeAdapter() {
 		return null;
 	}
 

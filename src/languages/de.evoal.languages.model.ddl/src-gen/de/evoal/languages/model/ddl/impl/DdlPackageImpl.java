@@ -3,7 +3,7 @@
 package de.evoal.languages.model.ddl.impl;
 
 import de.evoal.languages.model.base.BasePackage;
-
+import de.evoal.languages.model.ddl.BaseDataDescription;
 import de.evoal.languages.model.ddl.DataDescription;
 import de.evoal.languages.model.ddl.DataDescriptionModule;
 import de.evoal.languages.model.ddl.DataReference;
@@ -13,9 +13,9 @@ import de.evoal.languages.model.ddl.DdlPackage;
 import de.evoal.languages.model.ddl.RepresentationType;
 import de.evoal.languages.model.ddl.ScaleType;
 import de.evoal.languages.model.ddl.SelfReference;
-import de.evoal.languages.model.ddl.TypedDataDescription;
-import de.evoal.languages.model.ddl.UntypedDataDescription;
-
+import de.evoal.languages.model.ddl.StructuredDataDescription;
+import de.evoal.languages.model.ddl.TypedBaseDataDescription;
+import de.evoal.languages.model.ddl.UntypedBaseDataDescription;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
@@ -57,14 +57,28 @@ public class DdlPackageImpl extends EPackageImpl implements DdlPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass typedDataDescriptionEClass = null;
+	private EClass baseDataDescriptionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass untypedDataDescriptionEClass = null;
+	private EClass typedBaseDataDescriptionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass structuredDataDescriptionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass untypedBaseDataDescriptionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -174,7 +188,7 @@ public class DdlPackageImpl extends EPackageImpl implements DdlPackage {
 	 */
 	@Override
 	public EAttribute getDataDescriptionModule_Name() {
-		return (EAttribute)dataDescriptionModuleEClass.getEStructuralFeatures().get(0);
+		return (EAttribute)dataDescriptionModuleEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -184,7 +198,7 @@ public class DdlPackageImpl extends EPackageImpl implements DdlPackage {
 	 */
 	@Override
 	public EReference getDataDescriptionModule_Imports() {
-		return (EReference)dataDescriptionModuleEClass.getEStructuralFeatures().get(1);
+		return (EReference)dataDescriptionModuleEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -293,8 +307,8 @@ public class DdlPackageImpl extends EPackageImpl implements DdlPackage {
 	 * @generated
 	 */
 	@Override
-	public EAttribute getDataDescription_Representation() {
-		return (EAttribute)dataDescriptionEClass.getEStructuralFeatures().get(1);
+	public EClass getBaseDataDescription() {
+		return baseDataDescriptionEClass;
 	}
 
 	/**
@@ -303,8 +317,8 @@ public class DdlPackageImpl extends EPackageImpl implements DdlPackage {
 	 * @generated
 	 */
 	@Override
-	public EClass getTypedDataDescription() {
-		return typedDataDescriptionEClass;
+	public EAttribute getBaseDataDescription_Representation() {
+		return (EAttribute)baseDataDescriptionEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -313,8 +327,8 @@ public class DdlPackageImpl extends EPackageImpl implements DdlPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getTypedDataDescription_Type() {
-		return (EReference)typedDataDescriptionEClass.getEStructuralFeatures().get(0);
+	public EClass getTypedBaseDataDescription() {
+		return typedBaseDataDescriptionEClass;
 	}
 
 	/**
@@ -323,8 +337,8 @@ public class DdlPackageImpl extends EPackageImpl implements DdlPackage {
 	 * @generated
 	 */
 	@Override
-	public EClass getUntypedDataDescription() {
-		return untypedDataDescriptionEClass;
+	public EReference getTypedBaseDataDescription_Type() {
+		return (EReference)typedBaseDataDescriptionEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -333,8 +347,38 @@ public class DdlPackageImpl extends EPackageImpl implements DdlPackage {
 	 * @generated
 	 */
 	@Override
-	public EAttribute getUntypedDataDescription_Scale() {
-		return (EAttribute)untypedDataDescriptionEClass.getEStructuralFeatures().get(0);
+	public EClass getStructuredDataDescription() {
+		return structuredDataDescriptionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getStructuredDataDescription_Type() {
+		return (EReference)structuredDataDescriptionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getUntypedBaseDataDescription() {
+		return untypedBaseDataDescriptionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getUntypedBaseDataDescription_Scale() {
+		return (EAttribute)untypedBaseDataDescriptionEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -417,8 +461,8 @@ public class DdlPackageImpl extends EPackageImpl implements DdlPackage {
 
 		// Create classes and their features
 		dataDescriptionModuleEClass = createEClass(DATA_DESCRIPTION_MODULE);
-		createEAttribute(dataDescriptionModuleEClass, DATA_DESCRIPTION_MODULE__NAME);
 		createEReference(dataDescriptionModuleEClass, DATA_DESCRIPTION_MODULE__IMPORTS);
+		createEAttribute(dataDescriptionModuleEClass, DATA_DESCRIPTION_MODULE__NAME);
 		createEReference(dataDescriptionModuleEClass, DATA_DESCRIPTION_MODULE__TYPES);
 		createEReference(dataDescriptionModuleEClass, DATA_DESCRIPTION_MODULE__DESCRIPTIONS);
 		createEReference(dataDescriptionModuleEClass, DATA_DESCRIPTION_MODULE__CONSTRAINTS);
@@ -431,13 +475,18 @@ public class DdlPackageImpl extends EPackageImpl implements DdlPackage {
 
 		dataDescriptionEClass = createEClass(DATA_DESCRIPTION);
 		createEReference(dataDescriptionEClass, DATA_DESCRIPTION__CONSTRAINTS);
-		createEAttribute(dataDescriptionEClass, DATA_DESCRIPTION__REPRESENTATION);
 
-		typedDataDescriptionEClass = createEClass(TYPED_DATA_DESCRIPTION);
-		createEReference(typedDataDescriptionEClass, TYPED_DATA_DESCRIPTION__TYPE);
+		baseDataDescriptionEClass = createEClass(BASE_DATA_DESCRIPTION);
+		createEAttribute(baseDataDescriptionEClass, BASE_DATA_DESCRIPTION__REPRESENTATION);
 
-		untypedDataDescriptionEClass = createEClass(UNTYPED_DATA_DESCRIPTION);
-		createEAttribute(untypedDataDescriptionEClass, UNTYPED_DATA_DESCRIPTION__SCALE);
+		typedBaseDataDescriptionEClass = createEClass(TYPED_BASE_DATA_DESCRIPTION);
+		createEReference(typedBaseDataDescriptionEClass, TYPED_BASE_DATA_DESCRIPTION__TYPE);
+
+		untypedBaseDataDescriptionEClass = createEClass(UNTYPED_BASE_DATA_DESCRIPTION);
+		createEAttribute(untypedBaseDataDescriptionEClass, UNTYPED_BASE_DATA_DESCRIPTION__SCALE);
+
+		structuredDataDescriptionEClass = createEClass(STRUCTURED_DATA_DESCRIPTION);
+		createEReference(structuredDataDescriptionEClass, STRUCTURED_DATA_DESCRIPTION__TYPE);
 
 		dataReferenceEClass = createEClass(DATA_REFERENCE);
 		createEReference(dataReferenceEClass, DATA_REFERENCE__DEFINITION);
@@ -481,15 +530,17 @@ public class DdlPackageImpl extends EPackageImpl implements DdlPackage {
 
 		// Add supertypes to classes
 		dataDescriptionEClass.getESuperTypes().add(theBasePackage.getDefinition());
-		typedDataDescriptionEClass.getESuperTypes().add(this.getDataDescription());
-		untypedDataDescriptionEClass.getESuperTypes().add(this.getDataDescription());
+		baseDataDescriptionEClass.getESuperTypes().add(this.getDataDescription());
+		typedBaseDataDescriptionEClass.getESuperTypes().add(this.getBaseDataDescription());
+		untypedBaseDataDescriptionEClass.getESuperTypes().add(this.getBaseDataDescription());
+		structuredDataDescriptionEClass.getESuperTypes().add(this.getDataDescription());
 		dataReferenceEClass.getESuperTypes().add(theBasePackage.getValueReference());
 		selfReferenceEClass.getESuperTypes().add(theBasePackage.getValueReference());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(dataDescriptionModuleEClass, DataDescriptionModule.class, "DataDescriptionModule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getDataDescriptionModule_Name(), ecorePackage.getEString(), "name", null, 1, 1, DataDescriptionModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDataDescriptionModule_Imports(), theBasePackage.getImport(), null, "imports", null, 0, -1, DataDescriptionModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEAttribute(getDataDescriptionModule_Name(), ecorePackage.getEString(), "name", null, 1, 1, DataDescriptionModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDataDescriptionModule_Types(), this.getDataTypeDefinition(), null, "types", null, 0, -1, DataDescriptionModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getDataDescriptionModule_Descriptions(), this.getDataDescription(), null, "descriptions", null, 0, -1, DataDescriptionModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getDataDescriptionModule_Constraints(), theBasePackage.getExpression(), null, "constraints", null, 0, -1, DataDescriptionModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
@@ -502,17 +553,22 @@ public class DdlPackageImpl extends EPackageImpl implements DdlPackage {
 
 		initEClass(dataDescriptionEClass, DataDescription.class, "DataDescription", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getDataDescription_Constraints(), theBasePackage.getExpression(), null, "constraints", null, 0, -1, DataDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEAttribute(getDataDescription_Representation(), this.getRepresentationType(), "representation", "real", 1, 1, DataDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		addEOperation(dataDescriptionEClass, this.getScaleType(), "getScale", 0, 1, IS_UNIQUE, IS_ORDERED);
+		initEClass(baseDataDescriptionEClass, BaseDataDescription.class, "BaseDataDescription", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getBaseDataDescription_Representation(), this.getRepresentationType(), "representation", "real", 1, 1, BaseDataDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(typedDataDescriptionEClass, TypedDataDescription.class, "TypedDataDescription", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getTypedDataDescription_Type(), this.getDataTypeDefinition(), null, "type", null, 1, 1, TypedDataDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		addEOperation(baseDataDescriptionEClass, this.getScaleType(), "getScale", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		addEOperation(typedDataDescriptionEClass, this.getScaleType(), "getScale", 0, 1, IS_UNIQUE, IS_ORDERED);
+		initEClass(typedBaseDataDescriptionEClass, TypedBaseDataDescription.class, "TypedBaseDataDescription", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getTypedBaseDataDescription_Type(), this.getDataTypeDefinition(), null, "type", null, 1, 1, TypedBaseDataDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(untypedDataDescriptionEClass, UntypedDataDescription.class, "UntypedDataDescription", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getUntypedDataDescription_Scale(), this.getScaleType(), "scale", null, 0, 1, UntypedDataDescription.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		addEOperation(typedBaseDataDescriptionEClass, this.getScaleType(), "getScale", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(untypedBaseDataDescriptionEClass, UntypedBaseDataDescription.class, "UntypedBaseDataDescription", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getUntypedBaseDataDescription_Scale(), this.getScaleType(), "scale", null, 0, 1, UntypedBaseDataDescription.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(structuredDataDescriptionEClass, StructuredDataDescription.class, "StructuredDataDescription", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getStructuredDataDescription_Type(), theBasePackage.getTypeDefinition(), null, "type", null, 1, 1, StructuredDataDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(dataReferenceEClass, DataReference.class, "DataReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getDataReference_Definition(), this.getDataDescription(), null, "definition", null, 1, 1, DataReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

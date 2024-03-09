@@ -36,17 +36,21 @@ DataTypeDefinitionRule returns DataTypeDefinition:
 ;
 
 DataDescriptionRule returns DataDescription:
-	TypedDataDescriptionRule | UntypedDataDescriptionRule
+	TypedBaseDataDescriptionRule | UntypedBaseDataDescriptionRule | StructuredDataDescriptionRule
 ;
 
-TypedDataDescriptionRule returns TypedDataDescription:
+TypedBaseDataDescriptionRule returns TypedBaseDataDescription:
 	representation=RepresentationType 'data' name = StringOrId 'of' 'type' type = [DataTypeDefinition|QualifiedName] ('with' 'constraints' ':' (constraints += StatementRule)*)?
 	';'
 ;
 
-UntypedDataDescriptionRule returns UntypedDataDescription:
+UntypedBaseDataDescriptionRule returns UntypedBaseDataDescription:
  (scale = ScaleType)? representation=RepresentationType 'data' name = StringOrId 	('with' 'constraints' ':' (constraints += StatementRule)*)?
  ';'
+;
+
+StructuredDataDescriptionRule returns StructuredDataDescription:
+	'data' name = StringOrId 'of' 'instance'  type = [base::TypeDefinition|QualifiedName]
 ;
 
 StatementRule returns base::Expression:

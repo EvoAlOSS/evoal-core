@@ -32,15 +32,14 @@ public class InstanceLanguageGrammarAccess extends AbstractElementFinder.Abstrac
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cConstantReferenceRuleParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cDataReferenceRuleParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		private final RuleCall cInstanceDefinitionReferenceRuleParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
 		//@Override
 		//ReferenceRule returns base::ValueReference:
-		//    ConstantReferenceRule | DataReferenceRule | InstanceDefinitionReferenceRule
+		//    ConstantReferenceRule | DataReferenceRule
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//ConstantReferenceRule | DataReferenceRule | InstanceDefinitionReferenceRule
+		//ConstantReferenceRule | DataReferenceRule
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//ConstantReferenceRule
@@ -48,9 +47,6 @@ public class InstanceLanguageGrammarAccess extends AbstractElementFinder.Abstrac
 		
 		//DataReferenceRule
 		public RuleCall getDataReferenceRuleParserRuleCall_1() { return cDataReferenceRuleParserRuleCall_1; }
-		
-		//InstanceDefinitionReferenceRule
-		public RuleCall getInstanceDefinitionReferenceRuleParserRuleCall_2() { return cInstanceDefinitionReferenceRuleParserRuleCall_2; }
 	}
 	public class DataReferenceRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.instance.dsl.InstanceLanguage.DataReferenceRule");
@@ -141,7 +137,7 @@ public class InstanceLanguageGrammarAccess extends AbstractElementFinder.Abstrac
 	
 	//@Override
 	//ReferenceRule returns base::ValueReference:
-	//    ConstantReferenceRule | DataReferenceRule | InstanceDefinitionReferenceRule
+	//    ConstantReferenceRule | DataReferenceRule
 	//;
 	public ReferenceRuleElements getReferenceRuleAccess() {
 		return pReferenceRule;
@@ -366,18 +362,6 @@ public class InstanceLanguageGrammarAccess extends AbstractElementFinder.Abstrac
 		return getCallRuleAccess().getRule();
 	}
 	
-	//InstanceDefinitionReferenceRule returns InstanceDefinitionReference:
-	//    {InstanceDefinitionReference}
-	//    'instance' definition = [TypeDefinition|QualifiedName]
-	//;
-	public BaseLanguageGrammarAccess.InstanceDefinitionReferenceRuleElements getInstanceDefinitionReferenceRuleAccess() {
-		return gaBaseLanguage.getInstanceDefinitionReferenceRuleAccess();
-	}
-	
-	public ParserRule getInstanceDefinitionReferenceRuleRule() {
-		return getInstanceDefinitionReferenceRuleAccess().getRule();
-	}
-	
 	//ConstantReferenceRule returns ConstantReference:
 	//    definition = [ConstantDefinition|QualifiedName]
 	//;
@@ -537,7 +521,7 @@ public class InstanceLanguageGrammarAccess extends AbstractElementFinder.Abstrac
 	}
 	
 	//TypeRule returns Type:
-	//    StringTypeRule | IntTypeRule | RealTypeRule | BooleanTypeRule | LiteralTypeRule | ArrayTypeRule | InstanceTypeRule | VoidTypeRule | ExpressionTypeRule | DataTypeRule | DataOrInstanceTypeRule
+	//    StringTypeRule | IntTypeRule | RealTypeRule | BooleanTypeRule | LiteralTypeRule | ArrayTypeRule | InstanceTypeRule | VoidTypeRule | ExpressionTypeRule | DataTypeRule
 	//;
 	public BaseLanguageGrammarAccess.TypeRuleElements getTypeRuleAccess() {
 		return gaBaseLanguage.getTypeRuleAccess();
@@ -640,18 +624,6 @@ public class InstanceLanguageGrammarAccess extends AbstractElementFinder.Abstrac
 	
 	public ParserRule getVoidTypeRuleRule() {
 		return getVoidTypeRuleAccess().getRule();
-	}
-	
-	//DataOrInstanceTypeRule returns DataOrInstanceType:
-	//    {DataOrInstanceType}
-	//    'data' 'or' 'type' ('of' instance=InstanceTypeRule)?
-	//;
-	public BaseLanguageGrammarAccess.DataOrInstanceTypeRuleElements getDataOrInstanceTypeRuleAccess() {
-		return gaBaseLanguage.getDataOrInstanceTypeRuleAccess();
-	}
-	
-	public ParserRule getDataOrInstanceTypeRuleRule() {
-		return getDataOrInstanceTypeRuleAccess().getRule();
 	}
 	
 	//DataTypeRule returns DataType:

@@ -991,43 +991,6 @@ public interface BasePackage extends EPackage {
 	int VALUE_REFERENCE_OPERATION_COUNT = VALUE_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.base.impl.InstanceDefinitionReferenceImpl <em>Instance Definition Reference</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.base.impl.InstanceDefinitionReferenceImpl
-	 * @see de.evoal.languages.model.base.impl.BasePackageImpl#getInstanceDefinitionReference()
-	 * @generated
-	 */
-	int INSTANCE_DEFINITION_REFERENCE = 22;
-
-	/**
-	 * The feature id for the '<em><b>Definition</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INSTANCE_DEFINITION_REFERENCE__DEFINITION = VALUE_REFERENCE_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Instance Definition Reference</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INSTANCE_DEFINITION_REFERENCE_FEATURE_COUNT = VALUE_REFERENCE_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of operations of the '<em>Instance Definition Reference</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INSTANCE_DEFINITION_REFERENCE_OPERATION_COUNT = VALUE_REFERENCE_OPERATION_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.impl.DefinitionImpl <em>Definition</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1035,7 +998,7 @@ public interface BasePackage extends EPackage {
 	 * @see de.evoal.languages.model.base.impl.BasePackageImpl#getDefinition()
 	 * @generated
 	 */
-	int DEFINITION = 23;
+	int DEFINITION = 22;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1072,7 +1035,7 @@ public interface BasePackage extends EPackage {
 	 * @see de.evoal.languages.model.base.impl.BasePackageImpl#getTypeDefinition()
 	 * @generated
 	 */
-	int TYPE_DEFINITION = 24;
+	int TYPE_DEFINITION = 23;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1145,7 +1108,7 @@ public interface BasePackage extends EPackage {
 	 * @see de.evoal.languages.model.base.impl.BasePackageImpl#getAttributeDefinition()
 	 * @generated
 	 */
-	int ATTRIBUTE_DEFINITION = 25;
+	int ATTRIBUTE_DEFINITION = 24;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' containment reference.
@@ -1200,7 +1163,7 @@ public interface BasePackage extends EPackage {
 	 * @see de.evoal.languages.model.base.impl.BasePackageImpl#getType()
 	 * @generated
 	 */
-	int TYPE = 26;
+	int TYPE = 25;
 
 	/**
 	 * The number of structural features of the '<em>Type</em>' class.
@@ -1228,7 +1191,7 @@ public interface BasePackage extends EPackage {
 	 * @see de.evoal.languages.model.base.impl.BasePackageImpl#getInstanceType()
 	 * @generated
 	 */
-	int INSTANCE_TYPE = 27;
+	int INSTANCE_TYPE = 26;
 
 	/**
 	 * The feature id for the '<em><b>Definition</b></em>' reference.
@@ -1265,7 +1228,7 @@ public interface BasePackage extends EPackage {
 	 * @see de.evoal.languages.model.base.impl.BasePackageImpl#getLiteralType()
 	 * @generated
 	 */
-	int LITERAL_TYPE = 28;
+	int LITERAL_TYPE = 27;
 
 	/**
 	 * The number of structural features of the '<em>Literal Type</em>' class.
@@ -1293,7 +1256,7 @@ public interface BasePackage extends EPackage {
 	 * @see de.evoal.languages.model.base.impl.BasePackageImpl#getStringType()
 	 * @generated
 	 */
-	int STRING_TYPE = 29;
+	int STRING_TYPE = 28;
 
 	/**
 	 * The number of structural features of the '<em>String Type</em>' class.
@@ -1321,7 +1284,7 @@ public interface BasePackage extends EPackage {
 	 * @see de.evoal.languages.model.base.impl.BasePackageImpl#getIntType()
 	 * @generated
 	 */
-	int INT_TYPE = 30;
+	int INT_TYPE = 29;
 
 	/**
 	 * The number of structural features of the '<em>Int Type</em>' class.
@@ -1349,7 +1312,7 @@ public interface BasePackage extends EPackage {
 	 * @see de.evoal.languages.model.base.impl.BasePackageImpl#getRealType()
 	 * @generated
 	 */
-	int REAL_TYPE = 31;
+	int REAL_TYPE = 30;
 
 	/**
 	 * The number of structural features of the '<em>Real Type</em>' class.
@@ -1377,7 +1340,7 @@ public interface BasePackage extends EPackage {
 	 * @see de.evoal.languages.model.base.impl.BasePackageImpl#getBooleanType()
 	 * @generated
 	 */
-	int BOOLEAN_TYPE = 32;
+	int BOOLEAN_TYPE = 31;
 
 	/**
 	 * The number of structural features of the '<em>Boolean Type</em>' class.
@@ -1405,7 +1368,7 @@ public interface BasePackage extends EPackage {
 	 * @see de.evoal.languages.model.base.impl.BasePackageImpl#getVoidType()
 	 * @generated
 	 */
-	int VOID_TYPE = 33;
+	int VOID_TYPE = 32;
 
 	/**
 	 * The number of structural features of the '<em>Void Type</em>' class.
@@ -1433,7 +1396,7 @@ public interface BasePackage extends EPackage {
 	 * @see de.evoal.languages.model.base.impl.BasePackageImpl#getExpressionType()
 	 * @generated
 	 */
-	int EXPRESSION_TYPE = 34;
+	int EXPRESSION_TYPE = 33;
 
 	/**
 	 * The number of structural features of the '<em>Expression Type</em>' class.
@@ -1461,7 +1424,7 @@ public interface BasePackage extends EPackage {
 	 * @see de.evoal.languages.model.base.impl.BasePackageImpl#getDataType()
 	 * @generated
 	 */
-	int DATA_TYPE = 35;
+	int DATA_TYPE = 34;
 
 	/**
 	 * The number of structural features of the '<em>Data Type</em>' class.
@@ -1482,43 +1445,6 @@ public interface BasePackage extends EPackage {
 	int DATA_TYPE_OPERATION_COUNT = TYPE_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.base.impl.DataOrInstanceTypeImpl <em>Data Or Instance Type</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.base.impl.DataOrInstanceTypeImpl
-	 * @see de.evoal.languages.model.base.impl.BasePackageImpl#getDataOrInstanceType()
-	 * @generated
-	 */
-	int DATA_OR_INSTANCE_TYPE = 36;
-
-	/**
-	 * The feature id for the '<em><b>Instance</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATA_OR_INSTANCE_TYPE__INSTANCE = TYPE_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Data Or Instance Type</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATA_OR_INSTANCE_TYPE_FEATURE_COUNT = TYPE_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of operations of the '<em>Data Or Instance Type</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATA_OR_INSTANCE_TYPE_OPERATION_COUNT = TYPE_OPERATION_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.impl.ArrayTypeImpl <em>Array Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1526,7 +1452,7 @@ public interface BasePackage extends EPackage {
 	 * @see de.evoal.languages.model.base.impl.BasePackageImpl#getArrayType()
 	 * @generated
 	 */
-	int ARRAY_TYPE = 37;
+	int ARRAY_TYPE = 35;
 
 	/**
 	 * The feature id for the '<em><b>Elements</b></em>' containment reference.
@@ -1563,7 +1489,7 @@ public interface BasePackage extends EPackage {
 	 * @see de.evoal.languages.model.base.impl.BasePackageImpl#getFunctionDefinition()
 	 * @generated
 	 */
-	int FUNCTION_DEFINITION = 38;
+	int FUNCTION_DEFINITION = 36;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1618,7 +1544,7 @@ public interface BasePackage extends EPackage {
 	 * @see de.evoal.languages.model.base.impl.BasePackageImpl#getParameter()
 	 * @generated
 	 */
-	int PARAMETER = 39;
+	int PARAMETER = 37;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1664,7 +1590,7 @@ public interface BasePackage extends EPackage {
 	 * @see de.evoal.languages.model.base.impl.BasePackageImpl#getDefinedFunctionName()
 	 * @generated
 	 */
-	int DEFINED_FUNCTION_NAME = 40;
+	int DEFINED_FUNCTION_NAME = 38;
 
 	/**
 	 * The feature id for the '<em><b>Definition</b></em>' reference.
@@ -1701,7 +1627,7 @@ public interface BasePackage extends EPackage {
 	 * @see de.evoal.languages.model.base.impl.BasePackageImpl#getConstantDefinition()
 	 * @generated
 	 */
-	int CONSTANT_DEFINITION = 41;
+	int CONSTANT_DEFINITION = 39;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' containment reference.
@@ -1756,7 +1682,7 @@ public interface BasePackage extends EPackage {
 	 * @see de.evoal.languages.model.base.impl.BasePackageImpl#getConstantReference()
 	 * @generated
 	 */
-	int CONSTANT_REFERENCE = 42;
+	int CONSTANT_REFERENCE = 40;
 
 	/**
 	 * The feature id for the '<em><b>Definition</b></em>' reference.
@@ -1793,7 +1719,7 @@ public interface BasePackage extends EPackage {
 	 * @see de.evoal.languages.model.base.impl.BasePackageImpl#getArray()
 	 * @generated
 	 */
-	int ARRAY = 43;
+	int ARRAY = 41;
 
 	/**
 	 * The feature id for the '<em><b>Values</b></em>' containment reference list.
@@ -1830,7 +1756,7 @@ public interface BasePackage extends EPackage {
 	 * @see de.evoal.languages.model.base.impl.BasePackageImpl#getInstance()
 	 * @generated
 	 */
-	int INSTANCE = 44;
+	int INSTANCE = 42;
 
 	/**
 	 * The feature id for the '<em><b>Definition</b></em>' reference.
@@ -1894,7 +1820,7 @@ public interface BasePackage extends EPackage {
 	 * @see de.evoal.languages.model.base.impl.BasePackageImpl#getAttribute()
 	 * @generated
 	 */
-	int ATTRIBUTE = 45;
+	int ATTRIBUTE = 43;
 
 	/**
 	 * The feature id for the '<em><b>Definition</b></em>' reference.
@@ -1940,7 +1866,7 @@ public interface BasePackage extends EPackage {
 	 * @see de.evoal.languages.model.base.impl.BasePackageImpl#getImport()
 	 * @generated
 	 */
-	int IMPORT = 46;
+	int IMPORT = 44;
 
 	/**
 	 * The feature id for the '<em><b>Language</b></em>' attribute.
@@ -1995,7 +1921,7 @@ public interface BasePackage extends EPackage {
 	 * @see de.evoal.languages.model.base.impl.BasePackageImpl#getComparisonOperator()
 	 * @generated
 	 */
-	int COMPARISON_OPERATOR = 47;
+	int COMPARISON_OPERATOR = 45;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.AddOrSubtractOperator <em>Add Or Subtract Operator</em>}' enum.
@@ -2005,7 +1931,7 @@ public interface BasePackage extends EPackage {
 	 * @see de.evoal.languages.model.base.impl.BasePackageImpl#getAddOrSubtractOperator()
 	 * @generated
 	 */
-	int ADD_OR_SUBTRACT_OPERATOR = 48;
+	int ADD_OR_SUBTRACT_OPERATOR = 46;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.MultiplyDivideModuloOperator <em>Multiply Divide Modulo Operator</em>}' enum.
@@ -2015,7 +1941,7 @@ public interface BasePackage extends EPackage {
 	 * @see de.evoal.languages.model.base.impl.BasePackageImpl#getMultiplyDivideModuloOperator()
 	 * @generated
 	 */
-	int MULTIPLY_DIVIDE_MODULO_OPERATOR = 49;
+	int MULTIPLY_DIVIDE_MODULO_OPERATOR = 47;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.Factor <em>Factor</em>}' enum.
@@ -2025,7 +1951,7 @@ public interface BasePackage extends EPackage {
 	 * @see de.evoal.languages.model.base.impl.BasePackageImpl#getFactor()
 	 * @generated
 	 */
-	int FACTOR = 50;
+	int FACTOR = 48;
 
 
 	/**
@@ -2596,27 +2522,6 @@ public interface BasePackage extends EPackage {
 	EClass getValueReference();
 
 	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.base.InstanceDefinitionReference <em>Instance Definition Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Instance Definition Reference</em>'.
-	 * @see de.evoal.languages.model.base.InstanceDefinitionReference
-	 * @generated
-	 */
-	EClass getInstanceDefinitionReference();
-
-	/**
-	 * Returns the meta object for the reference '{@link de.evoal.languages.model.base.InstanceDefinitionReference#getDefinition <em>Definition</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Definition</em>'.
-	 * @see de.evoal.languages.model.base.InstanceDefinitionReference#getDefinition()
-	 * @see #getInstanceDefinitionReference()
-	 * @generated
-	 */
-	EReference getInstanceDefinitionReference_Definition();
-
-	/**
 	 * Returns the meta object for class '{@link de.evoal.languages.model.base.Definition <em>Definition</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2843,27 +2748,6 @@ public interface BasePackage extends EPackage {
 	 * @generated
 	 */
 	EClass getDataType();
-
-	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.base.DataOrInstanceType <em>Data Or Instance Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Data Or Instance Type</em>'.
-	 * @see de.evoal.languages.model.base.DataOrInstanceType
-	 * @generated
-	 */
-	EClass getDataOrInstanceType();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link de.evoal.languages.model.base.DataOrInstanceType#getInstance <em>Instance</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Instance</em>'.
-	 * @see de.evoal.languages.model.base.DataOrInstanceType#getInstance()
-	 * @see #getDataOrInstanceType()
-	 * @generated
-	 */
-	EReference getDataOrInstanceType_Instance();
 
 	/**
 	 * Returns the meta object for class '{@link de.evoal.languages.model.base.ArrayType <em>Array Type</em>}'.
@@ -3723,24 +3607,6 @@ public interface BasePackage extends EPackage {
 		EClass VALUE_REFERENCE = eINSTANCE.getValueReference();
 
 		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.base.impl.InstanceDefinitionReferenceImpl <em>Instance Definition Reference</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.base.impl.InstanceDefinitionReferenceImpl
-		 * @see de.evoal.languages.model.base.impl.BasePackageImpl#getInstanceDefinitionReference()
-		 * @generated
-		 */
-		EClass INSTANCE_DEFINITION_REFERENCE = eINSTANCE.getInstanceDefinitionReference();
-
-		/**
-		 * The meta object literal for the '<em><b>Definition</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference INSTANCE_DEFINITION_REFERENCE__DEFINITION = eINSTANCE.getInstanceDefinitionReference_Definition();
-
-		/**
 		 * The meta object literal for the '{@link de.evoal.languages.model.base.impl.DefinitionImpl <em>Definition</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3941,24 +3807,6 @@ public interface BasePackage extends EPackage {
 		 * @generated
 		 */
 		EClass DATA_TYPE = eINSTANCE.getDataType();
-
-		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.base.impl.DataOrInstanceTypeImpl <em>Data Or Instance Type</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.base.impl.DataOrInstanceTypeImpl
-		 * @see de.evoal.languages.model.base.impl.BasePackageImpl#getDataOrInstanceType()
-		 * @generated
-		 */
-		EClass DATA_OR_INSTANCE_TYPE = eINSTANCE.getDataOrInstanceType();
-
-		/**
-		 * The meta object literal for the '<em><b>Instance</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference DATA_OR_INSTANCE_TYPE__INSTANCE = eINSTANCE.getDataOrInstanceType_Instance();
 
 		/**
 		 * The meta object literal for the '{@link de.evoal.languages.model.base.impl.ArrayTypeImpl <em>Array Type</em>}' class.

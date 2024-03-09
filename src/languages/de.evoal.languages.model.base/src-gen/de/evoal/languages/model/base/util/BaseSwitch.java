@@ -215,14 +215,6 @@ public class BaseSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case BasePackage.INSTANCE_DEFINITION_REFERENCE: {
-				InstanceDefinitionReference instanceDefinitionReference = (InstanceDefinitionReference)theEObject;
-				T result = caseInstanceDefinitionReference(instanceDefinitionReference);
-				if (result == null) result = caseValueReference(instanceDefinitionReference);
-				if (result == null) result = caseValue(instanceDefinitionReference);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case BasePackage.DEFINITION: {
 				Definition definition = (Definition)theEObject;
 				T result = caseDefinition(definition);
@@ -312,13 +304,6 @@ public class BaseSwitch<T> extends Switch<T> {
 				DataType dataType = (DataType)theEObject;
 				T result = caseDataType(dataType);
 				if (result == null) result = caseType(dataType);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case BasePackage.DATA_OR_INSTANCE_TYPE: {
-				DataOrInstanceType dataOrInstanceType = (DataOrInstanceType)theEObject;
-				T result = caseDataOrInstanceType(dataOrInstanceType);
-				if (result == null) result = caseType(dataOrInstanceType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -724,21 +709,6 @@ public class BaseSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Instance Definition Reference</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Instance Definition Reference</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseInstanceDefinitionReference(InstanceDefinitionReference object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Definition</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -930,21 +900,6 @@ public class BaseSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseDataType(DataType object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Data Or Instance Type</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Data Or Instance Type</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseDataOrInstanceType(DataOrInstanceType object) {
 		return null;
 	}
 

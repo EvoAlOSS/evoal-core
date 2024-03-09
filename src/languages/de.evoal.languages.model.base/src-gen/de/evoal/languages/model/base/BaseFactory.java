@@ -184,15 +184,6 @@ public interface BaseFactory extends EFactory {
 	ValueReference createValueReference();
 
 	/**
-	 * Returns a new object of class '<em>Instance Definition Reference</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Instance Definition Reference</em>'.
-	 * @generated
-	 */
-	InstanceDefinitionReference createInstanceDefinitionReference();
-
-	/**
 	 * Returns a new object of class '<em>Type Definition</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -290,15 +281,6 @@ public interface BaseFactory extends EFactory {
 	 * @generated
 	 */
 	DataType createDataType();
-
-	/**
-	 * Returns a new object of class '<em>Data Or Instance Type</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Data Or Instance Type</em>'.
-	 * @generated
-	 */
-	DataOrInstanceType createDataOrInstanceType();
 
 	/**
 	 * Returns a new object of class '<em>Array Type</em>'.

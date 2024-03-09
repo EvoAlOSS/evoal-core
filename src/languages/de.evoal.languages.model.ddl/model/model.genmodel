@@ -6,7 +6,7 @@
     editorPluginClass="de.evoal.languages.model.ddl.presentation.DdlEditorPlugin"
     rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" testsDirectory="/de.evoal.languages.model.ddl.tests/src-gen"
     testSuiteClass="de.evoal.languages.model.ddl.tests.DvmAllTests" importerID="org.eclipse.emf.importer.ecore"
-    complianceLevel="8.0" copyrightFields="false" editPluginID="de.evoal.languages.model.ddl.edit"
+    complianceLevel="17.0" copyrightFields="false" editPluginID="de.evoal.languages.model.ddl.edit"
     editorPluginID="de.evoal.languages.model.ddl.editor" usedGenPackages="../../de.evoal.languages.model.base/model/model.genmodel#//base"
     importOrganizing="true">
   <foreignModel>model.ecore</foreignModel>
@@ -26,8 +26,8 @@
       <genEnumLiterals ecoreEnumLiteral="model.ecore#//RepresentationType/String"/>
     </genEnums>
     <genClasses ecoreClass="model.ecore#//DataDescriptionModule">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//DataDescriptionModule/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//DataDescriptionModule/imports"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//DataDescriptionModule/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//DataDescriptionModule/types"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//DataDescriptionModule/descriptions"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//DataDescriptionModule/constraints"/>
@@ -40,16 +40,21 @@
     </genClasses>
     <genClasses ecoreClass="model.ecore#//DataDescription">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//DataDescription/constraints"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//DataDescription/representation"/>
-      <genOperations ecoreOperation="model.ecore#//DataDescription/getScale"/>
     </genClasses>
-    <genClasses ecoreClass="model.ecore#//TypedDataDescription">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//TypedDataDescription/type"/>
-      <genOperations ecoreOperation="model.ecore#//TypedDataDescription/getScale"
+    <genClasses image="false" ecoreClass="model.ecore#//BaseDataDescription">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//BaseDataDescription/representation"/>
+      <genOperations ecoreOperation="model.ecore#//BaseDataDescription/getScale"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//TypedBaseDataDescription">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//TypedBaseDataDescription/type"/>
+      <genOperations ecoreOperation="model.ecore#//TypedBaseDataDescription/getScale"
           body="return getType() == null ? null : getType().getScale();"/>
     </genClasses>
-    <genClasses ecoreClass="model.ecore#//UntypedDataDescription">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//UntypedDataDescription/scale"/>
+    <genClasses ecoreClass="model.ecore#//UntypedBaseDataDescription">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//UntypedBaseDataDescription/scale"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//StructuredDataDescription">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//StructuredDataDescription/type"/>
     </genClasses>
     <genClasses ecoreClass="model.ecore#//DataReference">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//DataReference/definition"/>

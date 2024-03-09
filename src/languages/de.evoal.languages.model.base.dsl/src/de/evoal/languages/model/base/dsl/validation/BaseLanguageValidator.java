@@ -4,16 +4,6 @@
  */
 package de.evoal.languages.model.base.dsl.validation;
 
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.xtext.resource.IReferenceDescription;
-import org.eclipse.xtext.resource.IResourceDescription;
-import org.eclipse.xtext.resource.IResourceDescriptions;
-import org.eclipse.xtext.resource.IResourceDescriptionsProvider;
-import org.eclipse.xtext.validation.Check;
-
-import com.google.inject.Inject;
-
-import de.evoal.languages.model.base.Import;
 
 /**
  * This class contains custom validation rules. 
@@ -21,8 +11,7 @@ import de.evoal.languages.model.base.Import;
  * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#validation
  */
 public class BaseLanguageValidator extends AbstractBaseLanguageValidator {
-	@Inject
-	private IResourceDescriptionsProvider provider;
+	//@Inject private IResourceDescriptionsProvider provider;
 	
 //	public static final String INVALID_NAME = "invalidName";
 //

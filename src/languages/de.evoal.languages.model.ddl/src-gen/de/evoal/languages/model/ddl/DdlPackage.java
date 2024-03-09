@@ -70,22 +70,22 @@ public interface DdlPackage extends EPackage {
 	int DATA_DESCRIPTION_MODULE = 0;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATA_DESCRIPTION_MODULE__NAME = 0;
-
-	/**
 	 * The feature id for the '<em><b>Imports</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DATA_DESCRIPTION_MODULE__IMPORTS = 1;
+	int DATA_DESCRIPTION_MODULE__IMPORTS = 0;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_DESCRIPTION_MODULE__NAME = 1;
 
 	/**
 	 * The feature id for the '<em><b>Types</b></em>' containment reference list.
@@ -207,32 +207,23 @@ public interface DdlPackage extends EPackage {
 	int DATA_DESCRIPTION__CONSTRAINTS = BasePackage.DEFINITION_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Representation</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATA_DESCRIPTION__REPRESENTATION = BasePackage.DEFINITION_FEATURE_COUNT + 1;
-
-	/**
 	 * The number of structural features of the '<em>Data Description</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DATA_DESCRIPTION_FEATURE_COUNT = BasePackage.DEFINITION_FEATURE_COUNT + 2;
+	int DATA_DESCRIPTION_FEATURE_COUNT = BasePackage.DEFINITION_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.ddl.impl.TypedDataDescriptionImpl <em>Typed Data Description</em>}' class.
+	 * The meta object id for the '{@link de.evoal.languages.model.ddl.impl.BaseDataDescriptionImpl <em>Base Data Description</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.ddl.impl.TypedDataDescriptionImpl
-	 * @see de.evoal.languages.model.ddl.impl.DdlPackageImpl#getTypedDataDescription()
+	 * @see de.evoal.languages.model.ddl.impl.BaseDataDescriptionImpl
+	 * @see de.evoal.languages.model.ddl.impl.DdlPackageImpl#getBaseDataDescription()
 	 * @generated
 	 */
-	int TYPED_DATA_DESCRIPTION = 3;
+	int BASE_DATA_DESCRIPTION = 3;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -241,7 +232,7 @@ public interface DdlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPED_DATA_DESCRIPTION__NAME = DATA_DESCRIPTION__NAME;
+	int BASE_DATA_DESCRIPTION__NAME = DATA_DESCRIPTION__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Constraints</b></em>' containment reference list.
@@ -250,7 +241,7 @@ public interface DdlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPED_DATA_DESCRIPTION__CONSTRAINTS = DATA_DESCRIPTION__CONSTRAINTS;
+	int BASE_DATA_DESCRIPTION__CONSTRAINTS = DATA_DESCRIPTION__CONSTRAINTS;
 
 	/**
 	 * The feature id for the '<em><b>Representation</b></em>' attribute.
@@ -259,7 +250,53 @@ public interface DdlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPED_DATA_DESCRIPTION__REPRESENTATION = DATA_DESCRIPTION__REPRESENTATION;
+	int BASE_DATA_DESCRIPTION__REPRESENTATION = DATA_DESCRIPTION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Base Data Description</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BASE_DATA_DESCRIPTION_FEATURE_COUNT = DATA_DESCRIPTION_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link de.evoal.languages.model.ddl.impl.TypedBaseDataDescriptionImpl <em>Typed Base Data Description</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.evoal.languages.model.ddl.impl.TypedBaseDataDescriptionImpl
+	 * @see de.evoal.languages.model.ddl.impl.DdlPackageImpl#getTypedBaseDataDescription()
+	 * @generated
+	 */
+	int TYPED_BASE_DATA_DESCRIPTION = 4;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPED_BASE_DATA_DESCRIPTION__NAME = BASE_DATA_DESCRIPTION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPED_BASE_DATA_DESCRIPTION__CONSTRAINTS = BASE_DATA_DESCRIPTION__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Representation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPED_BASE_DATA_DESCRIPTION__REPRESENTATION = BASE_DATA_DESCRIPTION__REPRESENTATION;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -268,26 +305,36 @@ public interface DdlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPED_DATA_DESCRIPTION__TYPE = DATA_DESCRIPTION_FEATURE_COUNT + 0;
+	int TYPED_BASE_DATA_DESCRIPTION__TYPE = BASE_DATA_DESCRIPTION_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the '<em>Typed Data Description</em>' class.
+	 * The number of structural features of the '<em>Typed Base Data Description</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPED_DATA_DESCRIPTION_FEATURE_COUNT = DATA_DESCRIPTION_FEATURE_COUNT + 1;
+	int TYPED_BASE_DATA_DESCRIPTION_FEATURE_COUNT = BASE_DATA_DESCRIPTION_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.ddl.impl.UntypedDataDescriptionImpl <em>Untyped Data Description</em>}' class.
+	 * The meta object id for the '{@link de.evoal.languages.model.ddl.impl.StructuredDataDescriptionImpl <em>Structured Data Description</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.ddl.impl.UntypedDataDescriptionImpl
-	 * @see de.evoal.languages.model.ddl.impl.DdlPackageImpl#getUntypedDataDescription()
+	 * @see de.evoal.languages.model.ddl.impl.StructuredDataDescriptionImpl
+	 * @see de.evoal.languages.model.ddl.impl.DdlPackageImpl#getStructuredDataDescription()
 	 * @generated
 	 */
-	int UNTYPED_DATA_DESCRIPTION = 4;
+	int STRUCTURED_DATA_DESCRIPTION = 6;
+
+	/**
+	 * The meta object id for the '{@link de.evoal.languages.model.ddl.impl.UntypedBaseDataDescriptionImpl <em>Untyped Base Data Description</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.evoal.languages.model.ddl.impl.UntypedBaseDataDescriptionImpl
+	 * @see de.evoal.languages.model.ddl.impl.DdlPackageImpl#getUntypedBaseDataDescription()
+	 * @generated
+	 */
+	int UNTYPED_BASE_DATA_DESCRIPTION = 5;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -296,7 +343,7 @@ public interface DdlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UNTYPED_DATA_DESCRIPTION__NAME = DATA_DESCRIPTION__NAME;
+	int UNTYPED_BASE_DATA_DESCRIPTION__NAME = BASE_DATA_DESCRIPTION__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Constraints</b></em>' containment reference list.
@@ -305,7 +352,7 @@ public interface DdlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UNTYPED_DATA_DESCRIPTION__CONSTRAINTS = DATA_DESCRIPTION__CONSTRAINTS;
+	int UNTYPED_BASE_DATA_DESCRIPTION__CONSTRAINTS = BASE_DATA_DESCRIPTION__CONSTRAINTS;
 
 	/**
 	 * The feature id for the '<em><b>Representation</b></em>' attribute.
@@ -314,7 +361,7 @@ public interface DdlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UNTYPED_DATA_DESCRIPTION__REPRESENTATION = DATA_DESCRIPTION__REPRESENTATION;
+	int UNTYPED_BASE_DATA_DESCRIPTION__REPRESENTATION = BASE_DATA_DESCRIPTION__REPRESENTATION;
 
 	/**
 	 * The feature id for the '<em><b>Scale</b></em>' attribute.
@@ -323,16 +370,52 @@ public interface DdlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UNTYPED_DATA_DESCRIPTION__SCALE = DATA_DESCRIPTION_FEATURE_COUNT + 0;
+	int UNTYPED_BASE_DATA_DESCRIPTION__SCALE = BASE_DATA_DESCRIPTION_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the '<em>Untyped Data Description</em>' class.
+	 * The number of structural features of the '<em>Untyped Base Data Description</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int UNTYPED_DATA_DESCRIPTION_FEATURE_COUNT = DATA_DESCRIPTION_FEATURE_COUNT + 1;
+	int UNTYPED_BASE_DATA_DESCRIPTION_FEATURE_COUNT = BASE_DATA_DESCRIPTION_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURED_DATA_DESCRIPTION__NAME = DATA_DESCRIPTION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURED_DATA_DESCRIPTION__CONSTRAINTS = DATA_DESCRIPTION__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURED_DATA_DESCRIPTION__TYPE = DATA_DESCRIPTION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Structured Data Description</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURED_DATA_DESCRIPTION_FEATURE_COUNT = DATA_DESCRIPTION_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.ddl.impl.DataReferenceImpl <em>Data Reference</em>}' class.
@@ -342,7 +425,7 @@ public interface DdlPackage extends EPackage {
 	 * @see de.evoal.languages.model.ddl.impl.DdlPackageImpl#getDataReference()
 	 * @generated
 	 */
-	int DATA_REFERENCE = 5;
+	int DATA_REFERENCE = 7;
 
 	/**
 	 * The feature id for the '<em><b>Definition</b></em>' reference.
@@ -370,7 +453,7 @@ public interface DdlPackage extends EPackage {
 	 * @see de.evoal.languages.model.ddl.impl.DdlPackageImpl#getSelfReference()
 	 * @generated
 	 */
-	int SELF_REFERENCE = 6;
+	int SELF_REFERENCE = 8;
 
 	/**
 	 * The number of structural features of the '<em>Self Reference</em>' class.
@@ -389,7 +472,7 @@ public interface DdlPackage extends EPackage {
 	 * @see de.evoal.languages.model.ddl.impl.DdlPackageImpl#getScaleType()
 	 * @generated
 	 */
-	int SCALE_TYPE = 7;
+	int SCALE_TYPE = 9;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.ddl.RepresentationType <em>Representation Type</em>}' enum.
@@ -399,7 +482,7 @@ public interface DdlPackage extends EPackage {
 	 * @see de.evoal.languages.model.ddl.impl.DdlPackageImpl#getRepresentationType()
 	 * @generated
 	 */
-	int REPRESENTATION_TYPE = 8;
+	int REPRESENTATION_TYPE = 10;
 
 
 	/**
@@ -543,57 +626,88 @@ public interface DdlPackage extends EPackage {
 	EReference getDataDescription_Constraints();
 
 	/**
-	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.ddl.DataDescription#getRepresentation <em>Representation</em>}'.
+	 * Returns the meta object for class '{@link de.evoal.languages.model.ddl.BaseDataDescription <em>Base Data Description</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Base Data Description</em>'.
+	 * @see de.evoal.languages.model.ddl.BaseDataDescription
+	 * @generated
+	 */
+	EClass getBaseDataDescription();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.ddl.BaseDataDescription#getRepresentation <em>Representation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Representation</em>'.
-	 * @see de.evoal.languages.model.ddl.DataDescription#getRepresentation()
-	 * @see #getDataDescription()
+	 * @see de.evoal.languages.model.ddl.BaseDataDescription#getRepresentation()
+	 * @see #getBaseDataDescription()
 	 * @generated
 	 */
-	EAttribute getDataDescription_Representation();
+	EAttribute getBaseDataDescription_Representation();
 
 	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.ddl.TypedDataDescription <em>Typed Data Description</em>}'.
+	 * Returns the meta object for class '{@link de.evoal.languages.model.ddl.TypedBaseDataDescription <em>Typed Base Data Description</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Typed Data Description</em>'.
-	 * @see de.evoal.languages.model.ddl.TypedDataDescription
+	 * @return the meta object for class '<em>Typed Base Data Description</em>'.
+	 * @see de.evoal.languages.model.ddl.TypedBaseDataDescription
 	 * @generated
 	 */
-	EClass getTypedDataDescription();
+	EClass getTypedBaseDataDescription();
 
 	/**
-	 * Returns the meta object for the reference '{@link de.evoal.languages.model.ddl.TypedDataDescription#getType <em>Type</em>}'.
+	 * Returns the meta object for the reference '{@link de.evoal.languages.model.ddl.TypedBaseDataDescription#getType <em>Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Type</em>'.
-	 * @see de.evoal.languages.model.ddl.TypedDataDescription#getType()
-	 * @see #getTypedDataDescription()
+	 * @see de.evoal.languages.model.ddl.TypedBaseDataDescription#getType()
+	 * @see #getTypedBaseDataDescription()
 	 * @generated
 	 */
-	EReference getTypedDataDescription_Type();
+	EReference getTypedBaseDataDescription_Type();
 
 	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.ddl.UntypedDataDescription <em>Untyped Data Description</em>}'.
+	 * Returns the meta object for class '{@link de.evoal.languages.model.ddl.StructuredDataDescription <em>Structured Data Description</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Untyped Data Description</em>'.
-	 * @see de.evoal.languages.model.ddl.UntypedDataDescription
+	 * @return the meta object for class '<em>Structured Data Description</em>'.
+	 * @see de.evoal.languages.model.ddl.StructuredDataDescription
 	 * @generated
 	 */
-	EClass getUntypedDataDescription();
+	EClass getStructuredDataDescription();
 
 	/**
-	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.ddl.UntypedDataDescription#getScale <em>Scale</em>}'.
+	 * Returns the meta object for the reference '{@link de.evoal.languages.model.ddl.StructuredDataDescription#getType <em>Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Type</em>'.
+	 * @see de.evoal.languages.model.ddl.StructuredDataDescription#getType()
+	 * @see #getStructuredDataDescription()
+	 * @generated
+	 */
+	EReference getStructuredDataDescription_Type();
+
+	/**
+	 * Returns the meta object for class '{@link de.evoal.languages.model.ddl.UntypedBaseDataDescription <em>Untyped Base Data Description</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Untyped Base Data Description</em>'.
+	 * @see de.evoal.languages.model.ddl.UntypedBaseDataDescription
+	 * @generated
+	 */
+	EClass getUntypedBaseDataDescription();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.ddl.UntypedBaseDataDescription#getScale <em>Scale</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Scale</em>'.
-	 * @see de.evoal.languages.model.ddl.UntypedDataDescription#getScale()
-	 * @see #getUntypedDataDescription()
+	 * @see de.evoal.languages.model.ddl.UntypedBaseDataDescription#getScale()
+	 * @see #getUntypedBaseDataDescription()
 	 * @generated
 	 */
-	EAttribute getUntypedDataDescription_Scale();
+	EAttribute getUntypedBaseDataDescription_Scale();
 
 	/**
 	 * Returns the meta object for class '{@link de.evoal.languages.model.ddl.DataReference <em>Data Reference</em>}'.
@@ -779,22 +893,32 @@ public interface DdlPackage extends EPackage {
 		EReference DATA_DESCRIPTION__CONSTRAINTS = eINSTANCE.getDataDescription_Constraints();
 
 		/**
+		 * The meta object literal for the '{@link de.evoal.languages.model.ddl.impl.BaseDataDescriptionImpl <em>Base Data Description</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.evoal.languages.model.ddl.impl.BaseDataDescriptionImpl
+		 * @see de.evoal.languages.model.ddl.impl.DdlPackageImpl#getBaseDataDescription()
+		 * @generated
+		 */
+		EClass BASE_DATA_DESCRIPTION = eINSTANCE.getBaseDataDescription();
+
+		/**
 		 * The meta object literal for the '<em><b>Representation</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute DATA_DESCRIPTION__REPRESENTATION = eINSTANCE.getDataDescription_Representation();
+		EAttribute BASE_DATA_DESCRIPTION__REPRESENTATION = eINSTANCE.getBaseDataDescription_Representation();
 
 		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.ddl.impl.TypedDataDescriptionImpl <em>Typed Data Description</em>}' class.
+		 * The meta object literal for the '{@link de.evoal.languages.model.ddl.impl.TypedBaseDataDescriptionImpl <em>Typed Base Data Description</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.ddl.impl.TypedDataDescriptionImpl
-		 * @see de.evoal.languages.model.ddl.impl.DdlPackageImpl#getTypedDataDescription()
+		 * @see de.evoal.languages.model.ddl.impl.TypedBaseDataDescriptionImpl
+		 * @see de.evoal.languages.model.ddl.impl.DdlPackageImpl#getTypedBaseDataDescription()
 		 * @generated
 		 */
-		EClass TYPED_DATA_DESCRIPTION = eINSTANCE.getTypedDataDescription();
+		EClass TYPED_BASE_DATA_DESCRIPTION = eINSTANCE.getTypedBaseDataDescription();
 
 		/**
 		 * The meta object literal for the '<em><b>Type</b></em>' reference feature.
@@ -802,17 +926,35 @@ public interface DdlPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference TYPED_DATA_DESCRIPTION__TYPE = eINSTANCE.getTypedDataDescription_Type();
+		EReference TYPED_BASE_DATA_DESCRIPTION__TYPE = eINSTANCE.getTypedBaseDataDescription_Type();
 
 		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.ddl.impl.UntypedDataDescriptionImpl <em>Untyped Data Description</em>}' class.
+		 * The meta object literal for the '{@link de.evoal.languages.model.ddl.impl.StructuredDataDescriptionImpl <em>Structured Data Description</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.ddl.impl.UntypedDataDescriptionImpl
-		 * @see de.evoal.languages.model.ddl.impl.DdlPackageImpl#getUntypedDataDescription()
+		 * @see de.evoal.languages.model.ddl.impl.StructuredDataDescriptionImpl
+		 * @see de.evoal.languages.model.ddl.impl.DdlPackageImpl#getStructuredDataDescription()
 		 * @generated
 		 */
-		EClass UNTYPED_DATA_DESCRIPTION = eINSTANCE.getUntypedDataDescription();
+		EClass STRUCTURED_DATA_DESCRIPTION = eINSTANCE.getStructuredDataDescription();
+
+		/**
+		 * The meta object literal for the '<em><b>Type</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference STRUCTURED_DATA_DESCRIPTION__TYPE = eINSTANCE.getStructuredDataDescription_Type();
+
+		/**
+		 * The meta object literal for the '{@link de.evoal.languages.model.ddl.impl.UntypedBaseDataDescriptionImpl <em>Untyped Base Data Description</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.evoal.languages.model.ddl.impl.UntypedBaseDataDescriptionImpl
+		 * @see de.evoal.languages.model.ddl.impl.DdlPackageImpl#getUntypedBaseDataDescription()
+		 * @generated
+		 */
+		EClass UNTYPED_BASE_DATA_DESCRIPTION = eINSTANCE.getUntypedBaseDataDescription();
 
 		/**
 		 * The meta object literal for the '<em><b>Scale</b></em>' attribute feature.
@@ -820,7 +962,7 @@ public interface DdlPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute UNTYPED_DATA_DESCRIPTION__SCALE = eINSTANCE.getUntypedDataDescription_Scale();
+		EAttribute UNTYPED_BASE_DATA_DESCRIPTION__SCALE = eINSTANCE.getUntypedBaseDataDescription_Scale();
 
 		/**
 		 * The meta object literal for the '{@link de.evoal.languages.model.ddl.impl.DataReferenceImpl <em>Data Reference</em>}' class.

@@ -7,20 +7,13 @@ import de.evoal.languages.model.base.Expression;
 import de.evoal.languages.model.base.impl.DefinitionImpl;
 import de.evoal.languages.model.ddl.DataDescription;
 import de.evoal.languages.model.ddl.DdlPackage;
-import de.evoal.languages.model.ddl.RepresentationType;
-import de.evoal.languages.model.ddl.ScaleType;
-
 import java.util.Collection;
-
-import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -33,7 +26,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * </p>
  * <ul>
  *   <li>{@link de.evoal.languages.model.ddl.impl.DataDescriptionImpl#getConstraints <em>Constraints</em>}</li>
- *   <li>{@link de.evoal.languages.model.ddl.impl.DataDescriptionImpl#getRepresentation <em>Representation</em>}</li>
  * </ul>
  *
  * @generated
@@ -48,26 +40,6 @@ public abstract class DataDescriptionImpl extends DefinitionImpl implements Data
 	 * @ordered
 	 */
 	protected EList<Expression> constraints;
-
-	/**
-	 * The default value of the '{@link #getRepresentation() <em>Representation</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getRepresentation()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final RepresentationType REPRESENTATION_EDEFAULT = RepresentationType.REAL;
-
-	/**
-	 * The cached value of the '{@link #getRepresentation() <em>Representation</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getRepresentation()
-	 * @generated
-	 * @ordered
-	 */
-	protected RepresentationType representation = REPRESENTATION_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -107,41 +79,6 @@ public abstract class DataDescriptionImpl extends DefinitionImpl implements Data
 	 * @generated
 	 */
 	@Override
-	public RepresentationType getRepresentation() {
-		return representation;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setRepresentation(RepresentationType newRepresentation) {
-		RepresentationType oldRepresentation = representation;
-		representation = newRepresentation == null ? REPRESENTATION_EDEFAULT : newRepresentation;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DdlPackage.DATA_DESCRIPTION__REPRESENTATION, oldRepresentation, representation));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ScaleType getScale() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case DdlPackage.DATA_DESCRIPTION__CONSTRAINTS:
@@ -160,8 +97,6 @@ public abstract class DataDescriptionImpl extends DefinitionImpl implements Data
 		switch (featureID) {
 			case DdlPackage.DATA_DESCRIPTION__CONSTRAINTS:
 				return getConstraints();
-			case DdlPackage.DATA_DESCRIPTION__REPRESENTATION:
-				return getRepresentation();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -179,9 +114,6 @@ public abstract class DataDescriptionImpl extends DefinitionImpl implements Data
 				getConstraints().clear();
 				getConstraints().addAll((Collection<? extends Expression>)newValue);
 				return;
-			case DdlPackage.DATA_DESCRIPTION__REPRESENTATION:
-				setRepresentation((RepresentationType)newValue);
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -197,9 +129,6 @@ public abstract class DataDescriptionImpl extends DefinitionImpl implements Data
 			case DdlPackage.DATA_DESCRIPTION__CONSTRAINTS:
 				getConstraints().clear();
 				return;
-			case DdlPackage.DATA_DESCRIPTION__REPRESENTATION:
-				setRepresentation(REPRESENTATION_EDEFAULT);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -214,26 +143,8 @@ public abstract class DataDescriptionImpl extends DefinitionImpl implements Data
 		switch (featureID) {
 			case DdlPackage.DATA_DESCRIPTION__CONSTRAINTS:
 				return constraints != null && !constraints.isEmpty();
-			case DdlPackage.DATA_DESCRIPTION__REPRESENTATION:
-				return representation != REPRESENTATION_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuilder result = new StringBuilder(super.toString());
-		result.append(" (representation: ");
-		result.append(representation);
-		result.append(')');
-		return result.toString();
 	}
 
 } //DataDescriptionImpl

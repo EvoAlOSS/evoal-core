@@ -89,19 +89,37 @@ public class DdlSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case DdlPackage.TYPED_DATA_DESCRIPTION: {
-				TypedDataDescription typedDataDescription = (TypedDataDescription)theEObject;
-				T result = caseTypedDataDescription(typedDataDescription);
-				if (result == null) result = caseDataDescription(typedDataDescription);
-				if (result == null) result = caseDefinition(typedDataDescription);
+			case DdlPackage.BASE_DATA_DESCRIPTION: {
+				BaseDataDescription baseDataDescription = (BaseDataDescription)theEObject;
+				T result = caseBaseDataDescription(baseDataDescription);
+				if (result == null) result = caseDataDescription(baseDataDescription);
+				if (result == null) result = caseDefinition(baseDataDescription);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case DdlPackage.UNTYPED_DATA_DESCRIPTION: {
-				UntypedDataDescription untypedDataDescription = (UntypedDataDescription)theEObject;
-				T result = caseUntypedDataDescription(untypedDataDescription);
-				if (result == null) result = caseDataDescription(untypedDataDescription);
-				if (result == null) result = caseDefinition(untypedDataDescription);
+			case DdlPackage.TYPED_BASE_DATA_DESCRIPTION: {
+				TypedBaseDataDescription typedBaseDataDescription = (TypedBaseDataDescription)theEObject;
+				T result = caseTypedBaseDataDescription(typedBaseDataDescription);
+				if (result == null) result = caseBaseDataDescription(typedBaseDataDescription);
+				if (result == null) result = caseDataDescription(typedBaseDataDescription);
+				if (result == null) result = caseDefinition(typedBaseDataDescription);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case DdlPackage.UNTYPED_BASE_DATA_DESCRIPTION: {
+				UntypedBaseDataDescription untypedBaseDataDescription = (UntypedBaseDataDescription)theEObject;
+				T result = caseUntypedBaseDataDescription(untypedBaseDataDescription);
+				if (result == null) result = caseBaseDataDescription(untypedBaseDataDescription);
+				if (result == null) result = caseDataDescription(untypedBaseDataDescription);
+				if (result == null) result = caseDefinition(untypedBaseDataDescription);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case DdlPackage.STRUCTURED_DATA_DESCRIPTION: {
+				StructuredDataDescription structuredDataDescription = (StructuredDataDescription)theEObject;
+				T result = caseStructuredDataDescription(structuredDataDescription);
+				if (result == null) result = caseDataDescription(structuredDataDescription);
+				if (result == null) result = caseDefinition(structuredDataDescription);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -171,32 +189,62 @@ public class DdlSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Typed Data Description</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Base Data Description</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Typed Data Description</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Base Data Description</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseTypedDataDescription(TypedDataDescription object) {
+	public T caseBaseDataDescription(BaseDataDescription object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Untyped Data Description</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Typed Base Data Description</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Untyped Data Description</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Typed Base Data Description</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseUntypedDataDescription(UntypedDataDescription object) {
+	public T caseTypedBaseDataDescription(TypedBaseDataDescription object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Structured Data Description</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Structured Data Description</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseStructuredDataDescription(StructuredDataDescription object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Untyped Base Data Description</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Untyped Base Data Description</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseUntypedBaseDataDescription(UntypedBaseDataDescription object) {
 		return null;
 	}
 

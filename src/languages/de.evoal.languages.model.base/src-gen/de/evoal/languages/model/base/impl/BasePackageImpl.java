@@ -18,7 +18,6 @@ import de.evoal.languages.model.base.ComparisonExpression;
 import de.evoal.languages.model.base.ComparisonOperator;
 import de.evoal.languages.model.base.ConstantDefinition;
 import de.evoal.languages.model.base.ConstantReference;
-import de.evoal.languages.model.base.DataOrInstanceType;
 import de.evoal.languages.model.base.DataType;
 import de.evoal.languages.model.base.DefinedFunctionName;
 import de.evoal.languages.model.base.Definition;
@@ -29,7 +28,6 @@ import de.evoal.languages.model.base.FunctionDefinition;
 import de.evoal.languages.model.base.FunctionName;
 import de.evoal.languages.model.base.Import;
 import de.evoal.languages.model.base.Instance;
-import de.evoal.languages.model.base.InstanceDefinitionReference;
 import de.evoal.languages.model.base.InstanceType;
 import de.evoal.languages.model.base.IntType;
 import de.evoal.languages.model.base.IntegerLiteral;
@@ -231,13 +229,6 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass instanceDefinitionReferenceEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass definitionEClass = null;
 
 	/**
@@ -323,13 +314,6 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 	 * @generated
 	 */
 	private EClass dataTypeEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass dataOrInstanceTypeEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1035,26 +1019,6 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 	 * @generated
 	 */
 	@Override
-	public EClass getInstanceDefinitionReference() {
-		return instanceDefinitionReferenceEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getInstanceDefinitionReference_Definition() {
-		return (EReference)instanceDefinitionReferenceEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EClass getDefinition() {
 		return definitionEClass;
 	}
@@ -1267,26 +1231,6 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 	@Override
 	public EClass getDataType() {
 		return dataTypeEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getDataOrInstanceType() {
-		return dataOrInstanceTypeEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getDataOrInstanceType_Instance() {
-		return (EReference)dataOrInstanceTypeEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1734,9 +1678,6 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 
 		valueReferenceEClass = createEClass(VALUE_REFERENCE);
 
-		instanceDefinitionReferenceEClass = createEClass(INSTANCE_DEFINITION_REFERENCE);
-		createEReference(instanceDefinitionReferenceEClass, INSTANCE_DEFINITION_REFERENCE__DEFINITION);
-
 		definitionEClass = createEClass(DEFINITION);
 		createEAttribute(definitionEClass, DEFINITION__NAME);
 
@@ -1771,9 +1712,6 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 		expressionTypeEClass = createEClass(EXPRESSION_TYPE);
 
 		dataTypeEClass = createEClass(DATA_TYPE);
-
-		dataOrInstanceTypeEClass = createEClass(DATA_OR_INSTANCE_TYPE);
-		createEReference(dataOrInstanceTypeEClass, DATA_OR_INSTANCE_TYPE__INSTANCE);
 
 		arrayTypeEClass = createEClass(ARRAY_TYPE);
 		createEReference(arrayTypeEClass, ARRAY_TYPE__ELEMENTS);
@@ -1860,7 +1798,6 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 		callEClass.getESuperTypes().add(this.getValue());
 		paranthesesEClass.getESuperTypes().add(this.getValue());
 		valueReferenceEClass.getESuperTypes().add(this.getValue());
-		instanceDefinitionReferenceEClass.getESuperTypes().add(this.getValueReference());
 		typeDefinitionEClass.getESuperTypes().add(this.getDefinition());
 		instanceTypeEClass.getESuperTypes().add(this.getType());
 		literalTypeEClass.getESuperTypes().add(this.getType());
@@ -1871,7 +1808,6 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 		voidTypeEClass.getESuperTypes().add(this.getType());
 		expressionTypeEClass.getESuperTypes().add(this.getType());
 		dataTypeEClass.getESuperTypes().add(this.getType());
-		dataOrInstanceTypeEClass.getESuperTypes().add(this.getType());
 		arrayTypeEClass.getESuperTypes().add(this.getType());
 		definedFunctionNameEClass.getESuperTypes().add(this.getFunctionName());
 		constantReferenceEClass.getESuperTypes().add(this.getValueReference());
@@ -1960,9 +1896,6 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 
 		initEClass(valueReferenceEClass, ValueReference.class, "ValueReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(instanceDefinitionReferenceEClass, InstanceDefinitionReference.class, "InstanceDefinitionReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getInstanceDefinitionReference_Definition(), this.getTypeDefinition(), null, "definition", null, 1, 1, InstanceDefinitionReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
 		initEClass(definitionEClass, Definition.class, "Definition", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getDefinition_Name(), ecorePackage.getEString(), "name", null, 0, 1, Definition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -1999,9 +1932,6 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 		initEClass(expressionTypeEClass, ExpressionType.class, "ExpressionType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(dataTypeEClass, DataType.class, "DataType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(dataOrInstanceTypeEClass, DataOrInstanceType.class, "DataOrInstanceType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getDataOrInstanceType_Instance(), this.getInstanceType(), null, "instance", null, 0, 1, DataOrInstanceType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(arrayTypeEClass, ArrayType.class, "ArrayType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getArrayType_Elements(), this.getType(), null, "elements", null, 1, 1, ArrayType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

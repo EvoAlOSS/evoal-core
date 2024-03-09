@@ -5,7 +5,7 @@
     editorPluginClass="de.evoal.languages.base.presentation.BaseLanguageEditorPlugin"
     rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" testsDirectory="/de.evoal.languages.base.model.tests/src-gen"
     testSuiteClass="de.evoal.languages.base.tests.BaseLanguageAllTests" importerID="org.eclipse.emf.importer.ecore"
-    complianceLevel="8.0" copyrightFields="false" operationReflection="true" importOrganizing="true">
+    complianceLevel="17.0" copyrightFields="false" operationReflection="true" importOrganizing="true">
   <foreignModel>model.ecore</foreignModel>
   <genPackages prefix="Base" basePackage="de.evoal.languages.model" disposableProviderFactory="true"
       generateModelWizard="false" ecorePackage="model.ecore#/">
@@ -121,9 +121,6 @@
     </genClasses>
     <genClasses image="false" ecoreClass="model.ecore#//FunctionName"/>
     <genClasses ecoreClass="model.ecore#//ValueReference"/>
-    <genClasses ecoreClass="model.ecore#//InstanceDefinitionReference">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//InstanceDefinitionReference/definition"/>
-    </genClasses>
     <genClasses image="false" ecoreClass="model.ecore#//Definition">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//Definition/name"/>
     </genClasses>
@@ -152,9 +149,6 @@
     <genClasses ecoreClass="model.ecore#//VoidType"/>
     <genClasses ecoreClass="model.ecore#//ExpressionType"/>
     <genClasses ecoreClass="model.ecore#//DataType"/>
-    <genClasses ecoreClass="model.ecore#//DataOrInstanceType">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//DataOrInstanceType/instance"/>
-    </genClasses>
     <genClasses ecoreClass="model.ecore#//ArrayType">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//ArrayType/elements"/>
     </genClasses>

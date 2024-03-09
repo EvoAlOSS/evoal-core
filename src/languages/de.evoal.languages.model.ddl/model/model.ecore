@@ -7,22 +7,38 @@
     <details key="ecore" value="http://www.eclipse.org/emf/2002/Ecore"/>
   </eAnnotations>
   <eClassifiers xsi:type="ecore:EClass" name="DataDescriptionModule">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&#xA;A data description module corresponds to a 'ddl' file.&#xA;"/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="imports" ordered="false"
         upperBound="-1" eType="ecore:EClass ../../de.evoal.languages.model.base/model/model.ecore#//Import"
         containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&#xA;List of imports for Xtext dependency resolution.&#xA;"/>
+      </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/OCL/Collection">
         <details key="nullFree" value="false"/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&#xA;Module name.&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="types" ordered="false"
         upperBound="-1" eType="#//DataTypeDefinition" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&#xA;Defined types that can be used or creating multiple&#xA;  data descriptions with same constraints.&#xA;"/>
+      </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/OCL/Collection">
         <details key="nullFree" value="false"/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="descriptions" ordered="false"
         upperBound="-1" eType="#//DataDescription" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&#xA;All data descriptions of the module.&#xA;"/>
+      </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/OCL/Collection">
         <details key="nullFree" value="false"/>
       </eAnnotations>
@@ -86,11 +102,9 @@
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DataDescription" abstract="true" eSuperTypes="../../de.evoal.languages.model.base/model/model.ecore#//Definition">
-    <eOperations name="getScale" eType="#//ScaleType">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Returns the associated scale if existing."/>
-      </eAnnotations>
-    </eOperations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&#xA;Base class for all data descriptions.&#xA;"/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="constraints" ordered="false"
         upperBound="-1" eType="ecore:EClass ../../de.evoal.languages.model.base/model/model.ecore#//Expression"
         containment="true">
@@ -101,6 +115,17 @@
         <details key="nullFree" value="false"/>
       </eAnnotations>
     </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BaseDataDescription" abstract="true"
+      eSuperTypes="#//DataDescription">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&#xA;Base class for all data description using base types.&#xA;"/>
+    </eAnnotations>
+    <eOperations name="getScale" eType="#//ScaleType">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Returns the associated scale if existing."/>
+      </eAnnotations>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="representation" lowerBound="1"
         eType="#//RepresentationType" defaultValueLiteral="real">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -108,7 +133,7 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="TypedDataDescription" eSuperTypes="#//DataDescription">
+  <eClassifiers xsi:type="ecore:EClass" name="TypedBaseDataDescription" eSuperTypes="#//BaseDataDescription">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A typed data description."/>
     </eAnnotations>
@@ -124,7 +149,7 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="UntypedDataDescription" eSuperTypes="#//DataDescription">
+  <eClassifiers xsi:type="ecore:EClass" name="UntypedBaseDataDescription" eSuperTypes="#//BaseDataDescription">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="An untyped data description."/>
     </eAnnotations>
@@ -134,6 +159,12 @@
         <details key="documentation" value="Scale of the data description."/>
       </eAnnotations>
     </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StructuredDataDescription" eSuperTypes="#//DataDescription">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&#xA;Representation for structured data descriptions.&#xA;"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="ecore:EClass ../../de.evoal.languages.model.base/model/model.ecore#//TypeDefinition"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DataReference" eSuperTypes="../../de.evoal.languages.model.base/model/model.ecore#//ValueReference">
     <eStructuralFeatures xsi:type="ecore:EReference" name="definition" lowerBound="1"

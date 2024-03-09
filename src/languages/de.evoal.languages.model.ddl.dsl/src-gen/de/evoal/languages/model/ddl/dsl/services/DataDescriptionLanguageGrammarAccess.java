@@ -223,25 +223,29 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 	public class DataDescriptionRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.ddl.dsl.DataDescriptionLanguage.DataDescriptionRule");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cTypedDataDescriptionRuleParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cUntypedDataDescriptionRuleParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cTypedBaseDataDescriptionRuleParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cUntypedBaseDataDescriptionRuleParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cStructuredDataDescriptionRuleParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
 		//DataDescriptionRule returns DataDescription:
-		//    TypedDataDescriptionRule | UntypedDataDescriptionRule
+		//    TypedBaseDataDescriptionRule | UntypedBaseDataDescriptionRule | StructuredDataDescriptionRule
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//TypedDataDescriptionRule | UntypedDataDescriptionRule
+		//TypedBaseDataDescriptionRule | UntypedBaseDataDescriptionRule | StructuredDataDescriptionRule
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
-		//TypedDataDescriptionRule
-		public RuleCall getTypedDataDescriptionRuleParserRuleCall_0() { return cTypedDataDescriptionRuleParserRuleCall_0; }
+		//TypedBaseDataDescriptionRule
+		public RuleCall getTypedBaseDataDescriptionRuleParserRuleCall_0() { return cTypedBaseDataDescriptionRuleParserRuleCall_0; }
 		
-		//UntypedDataDescriptionRule
-		public RuleCall getUntypedDataDescriptionRuleParserRuleCall_1() { return cUntypedDataDescriptionRuleParserRuleCall_1; }
+		//UntypedBaseDataDescriptionRule
+		public RuleCall getUntypedBaseDataDescriptionRuleParserRuleCall_1() { return cUntypedBaseDataDescriptionRuleParserRuleCall_1; }
+		
+		//StructuredDataDescriptionRule
+		public RuleCall getStructuredDataDescriptionRuleParserRuleCall_2() { return cStructuredDataDescriptionRuleParserRuleCall_2; }
 	}
-	public class TypedDataDescriptionRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.ddl.dsl.DataDescriptionLanguage.TypedDataDescriptionRule");
+	public class TypedBaseDataDescriptionRuleElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.ddl.dsl.DataDescriptionLanguage.TypedBaseDataDescriptionRule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cRepresentationAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cRepresentationRepresentationTypeEnumRuleCall_0_0 = (RuleCall)cRepresentationAssignment_0.eContents().get(0);
@@ -261,7 +265,7 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 		private final RuleCall cConstraintsStatementRuleParserRuleCall_6_3_0 = (RuleCall)cConstraintsAssignment_6_3.eContents().get(0);
 		private final Keyword cSemicolonKeyword_7 = (Keyword)cGroup.eContents().get(7);
 		
-		//TypedDataDescriptionRule returns TypedDataDescription:
+		//TypedBaseDataDescriptionRule returns TypedBaseDataDescription:
 		//    representation=RepresentationType 'data' name = StringOrId 'of' 'type' type = [DataTypeDefinition|QualifiedName] ('with' 'constraints' ':' (constraints += StatementRule)*)?
 		//    ';'
 		//;
@@ -322,8 +326,8 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 		//';'
 		public Keyword getSemicolonKeyword_7() { return cSemicolonKeyword_7; }
 	}
-	public class UntypedDataDescriptionRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.ddl.dsl.DataDescriptionLanguage.UntypedDataDescriptionRule");
+	public class UntypedBaseDataDescriptionRuleElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.ddl.dsl.DataDescriptionLanguage.UntypedBaseDataDescriptionRule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cScaleAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cScaleScaleTypeEnumRuleCall_0_0 = (RuleCall)cScaleAssignment_0.eContents().get(0);
@@ -340,7 +344,7 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 		private final RuleCall cConstraintsStatementRuleParserRuleCall_4_3_0 = (RuleCall)cConstraintsAssignment_4_3.eContents().get(0);
 		private final Keyword cSemicolonKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
-		//UntypedDataDescriptionRule returns UntypedDataDescription:
+		//UntypedBaseDataDescriptionRule returns UntypedBaseDataDescription:
 		// (scale = ScaleType)? representation=RepresentationType 'data' name = StringOrId     ('with' 'constraints' ':' (constraints += StatementRule)*)?
 		// ';'
 		//;
@@ -391,6 +395,50 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 		
 		//';'
 		public Keyword getSemicolonKeyword_5() { return cSemicolonKeyword_5; }
+	}
+	public class StructuredDataDescriptionRuleElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.ddl.dsl.DataDescriptionLanguage.StructuredDataDescriptionRule");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cDataKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameStringOrIdParserRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final Keyword cOfKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Keyword cInstanceKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cTypeAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final CrossReference cTypeTypeDefinitionCrossReference_4_0 = (CrossReference)cTypeAssignment_4.eContents().get(0);
+		private final RuleCall cTypeTypeDefinitionQualifiedNameParserRuleCall_4_0_1 = (RuleCall)cTypeTypeDefinitionCrossReference_4_0.eContents().get(1);
+		
+		//StructuredDataDescriptionRule returns StructuredDataDescription:
+		//    'data' name = StringOrId 'of' 'instance'  type = [base::TypeDefinition|QualifiedName]
+		//;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'data' name = StringOrId 'of' 'instance'  type = [base::TypeDefinition|QualifiedName]
+		public Group getGroup() { return cGroup; }
+		
+		//'data'
+		public Keyword getDataKeyword_0() { return cDataKeyword_0; }
+		
+		//name = StringOrId
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+		
+		//StringOrId
+		public RuleCall getNameStringOrIdParserRuleCall_1_0() { return cNameStringOrIdParserRuleCall_1_0; }
+		
+		//'of'
+		public Keyword getOfKeyword_2() { return cOfKeyword_2; }
+		
+		//'instance'
+		public Keyword getInstanceKeyword_3() { return cInstanceKeyword_3; }
+		
+		//type = [base::TypeDefinition|QualifiedName]
+		public Assignment getTypeAssignment_4() { return cTypeAssignment_4; }
+		
+		//[base::TypeDefinition|QualifiedName]
+		public CrossReference getTypeTypeDefinitionCrossReference_4_0() { return cTypeTypeDefinitionCrossReference_4_0; }
+		
+		//QualifiedName
+		public RuleCall getTypeTypeDefinitionQualifiedNameParserRuleCall_4_0_1() { return cTypeTypeDefinitionQualifiedNameParserRuleCall_4_0_1; }
 	}
 	public class StatementRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.ddl.dsl.DataDescriptionLanguage.StatementRule");
@@ -593,8 +641,9 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 	private final RepresentationTypeElements eRepresentationType;
 	private final DataTypeDefinitionRuleElements pDataTypeDefinitionRule;
 	private final DataDescriptionRuleElements pDataDescriptionRule;
-	private final TypedDataDescriptionRuleElements pTypedDataDescriptionRule;
-	private final UntypedDataDescriptionRuleElements pUntypedDataDescriptionRule;
+	private final TypedBaseDataDescriptionRuleElements pTypedBaseDataDescriptionRule;
+	private final UntypedBaseDataDescriptionRuleElements pUntypedBaseDataDescriptionRule;
+	private final StructuredDataDescriptionRuleElements pStructuredDataDescriptionRule;
 	private final StatementRuleElements pStatementRule;
 	private final ReferenceRuleElements pReferenceRule;
 	private final DataReferenceRuleElements pDataReferenceRule;
@@ -618,8 +667,9 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 		this.eRepresentationType = new RepresentationTypeElements();
 		this.pDataTypeDefinitionRule = new DataTypeDefinitionRuleElements();
 		this.pDataDescriptionRule = new DataDescriptionRuleElements();
-		this.pTypedDataDescriptionRule = new TypedDataDescriptionRuleElements();
-		this.pUntypedDataDescriptionRule = new UntypedDataDescriptionRuleElements();
+		this.pTypedBaseDataDescriptionRule = new TypedBaseDataDescriptionRuleElements();
+		this.pUntypedBaseDataDescriptionRule = new UntypedBaseDataDescriptionRuleElements();
+		this.pStructuredDataDescriptionRule = new StructuredDataDescriptionRuleElements();
 		this.pStatementRule = new StatementRuleElements();
 		this.pReferenceRule = new ReferenceRuleElements();
 		this.pDataReferenceRule = new DataReferenceRuleElements();
@@ -713,7 +763,7 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 	}
 	
 	//DataDescriptionRule returns DataDescription:
-	//    TypedDataDescriptionRule | UntypedDataDescriptionRule
+	//    TypedBaseDataDescriptionRule | UntypedBaseDataDescriptionRule | StructuredDataDescriptionRule
 	//;
 	public DataDescriptionRuleElements getDataDescriptionRuleAccess() {
 		return pDataDescriptionRule;
@@ -723,28 +773,39 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 		return getDataDescriptionRuleAccess().getRule();
 	}
 	
-	//TypedDataDescriptionRule returns TypedDataDescription:
+	//TypedBaseDataDescriptionRule returns TypedBaseDataDescription:
 	//    representation=RepresentationType 'data' name = StringOrId 'of' 'type' type = [DataTypeDefinition|QualifiedName] ('with' 'constraints' ':' (constraints += StatementRule)*)?
 	//    ';'
 	//;
-	public TypedDataDescriptionRuleElements getTypedDataDescriptionRuleAccess() {
-		return pTypedDataDescriptionRule;
+	public TypedBaseDataDescriptionRuleElements getTypedBaseDataDescriptionRuleAccess() {
+		return pTypedBaseDataDescriptionRule;
 	}
 	
-	public ParserRule getTypedDataDescriptionRuleRule() {
-		return getTypedDataDescriptionRuleAccess().getRule();
+	public ParserRule getTypedBaseDataDescriptionRuleRule() {
+		return getTypedBaseDataDescriptionRuleAccess().getRule();
 	}
 	
-	//UntypedDataDescriptionRule returns UntypedDataDescription:
+	//UntypedBaseDataDescriptionRule returns UntypedBaseDataDescription:
 	// (scale = ScaleType)? representation=RepresentationType 'data' name = StringOrId     ('with' 'constraints' ':' (constraints += StatementRule)*)?
 	// ';'
 	//;
-	public UntypedDataDescriptionRuleElements getUntypedDataDescriptionRuleAccess() {
-		return pUntypedDataDescriptionRule;
+	public UntypedBaseDataDescriptionRuleElements getUntypedBaseDataDescriptionRuleAccess() {
+		return pUntypedBaseDataDescriptionRule;
 	}
 	
-	public ParserRule getUntypedDataDescriptionRuleRule() {
-		return getUntypedDataDescriptionRuleAccess().getRule();
+	public ParserRule getUntypedBaseDataDescriptionRuleRule() {
+		return getUntypedBaseDataDescriptionRuleAccess().getRule();
+	}
+	
+	//StructuredDataDescriptionRule returns StructuredDataDescription:
+	//    'data' name = StringOrId 'of' 'instance'  type = [base::TypeDefinition|QualifiedName]
+	//;
+	public StructuredDataDescriptionRuleElements getStructuredDataDescriptionRuleAccess() {
+		return pStructuredDataDescriptionRule;
+	}
+	
+	public ParserRule getStructuredDataDescriptionRuleRule() {
+		return getStructuredDataDescriptionRuleAccess().getRule();
 	}
 	
 	//StatementRule returns base::Expression:
@@ -996,18 +1057,6 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 		return getCallRuleAccess().getRule();
 	}
 	
-	//InstanceDefinitionReferenceRule returns InstanceDefinitionReference:
-	//    {InstanceDefinitionReference}
-	//    'instance' definition = [TypeDefinition|QualifiedName]
-	//;
-	public BaseLanguageGrammarAccess.InstanceDefinitionReferenceRuleElements getInstanceDefinitionReferenceRuleAccess() {
-		return gaBaseLanguage.getInstanceDefinitionReferenceRuleAccess();
-	}
-	
-	public ParserRule getInstanceDefinitionReferenceRuleRule() {
-		return getInstanceDefinitionReferenceRuleAccess().getRule();
-	}
-	
 	//ConstantReferenceRule returns ConstantReference:
 	//    definition = [ConstantDefinition|QualifiedName]
 	//;
@@ -1167,7 +1216,7 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 	}
 	
 	//TypeRule returns Type:
-	//    StringTypeRule | IntTypeRule | RealTypeRule | BooleanTypeRule | LiteralTypeRule | ArrayTypeRule | InstanceTypeRule | VoidTypeRule | ExpressionTypeRule | DataTypeRule | DataOrInstanceTypeRule
+	//    StringTypeRule | IntTypeRule | RealTypeRule | BooleanTypeRule | LiteralTypeRule | ArrayTypeRule | InstanceTypeRule | VoidTypeRule | ExpressionTypeRule | DataTypeRule
 	//;
 	public BaseLanguageGrammarAccess.TypeRuleElements getTypeRuleAccess() {
 		return gaBaseLanguage.getTypeRuleAccess();
@@ -1270,18 +1319,6 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 	
 	public ParserRule getVoidTypeRuleRule() {
 		return getVoidTypeRuleAccess().getRule();
-	}
-	
-	//DataOrInstanceTypeRule returns DataOrInstanceType:
-	//    {DataOrInstanceType}
-	//    'data' 'or' 'type' ('of' instance=InstanceTypeRule)?
-	//;
-	public BaseLanguageGrammarAccess.DataOrInstanceTypeRuleElements getDataOrInstanceTypeRuleAccess() {
-		return gaBaseLanguage.getDataOrInstanceTypeRuleAccess();
-	}
-	
-	public ParserRule getDataOrInstanceTypeRuleRule() {
-		return getDataOrInstanceTypeRuleAccess().getRule();
 	}
 	
 	//DataTypeRule returns DataType:

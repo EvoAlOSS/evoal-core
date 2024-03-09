@@ -34,8 +34,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link de.evoal.languages.model.ddl.impl.DataDescriptionModuleImpl#getName <em>Name</em>}</li>
  *   <li>{@link de.evoal.languages.model.ddl.impl.DataDescriptionModuleImpl#getImports <em>Imports</em>}</li>
+ *   <li>{@link de.evoal.languages.model.ddl.impl.DataDescriptionModuleImpl#getName <em>Name</em>}</li>
  *   <li>{@link de.evoal.languages.model.ddl.impl.DataDescriptionModuleImpl#getTypes <em>Types</em>}</li>
  *   <li>{@link de.evoal.languages.model.ddl.impl.DataDescriptionModuleImpl#getDescriptions <em>Descriptions</em>}</li>
  *   <li>{@link de.evoal.languages.model.ddl.impl.DataDescriptionModuleImpl#getConstraints <em>Constraints</em>}</li>
@@ -44,6 +44,16 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * @generated
  */
 public class DataDescriptionModuleImpl extends MinimalEObjectImpl.Container implements DataDescriptionModule {
+	/**
+	 * The cached value of the '{@link #getImports() <em>Imports</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getImports()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Import> imports;
+
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -63,16 +73,6 @@ public class DataDescriptionModuleImpl extends MinimalEObjectImpl.Container impl
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getImports() <em>Imports</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getImports()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Import> imports;
 
 	/**
 	 * The cached value of the '{@link #getTypes() <em>Types</em>}' containment reference list.
@@ -226,10 +226,10 @@ public class DataDescriptionModuleImpl extends MinimalEObjectImpl.Container impl
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case DdlPackage.DATA_DESCRIPTION_MODULE__NAME:
-				return getName();
 			case DdlPackage.DATA_DESCRIPTION_MODULE__IMPORTS:
 				return getImports();
+			case DdlPackage.DATA_DESCRIPTION_MODULE__NAME:
+				return getName();
 			case DdlPackage.DATA_DESCRIPTION_MODULE__TYPES:
 				return getTypes();
 			case DdlPackage.DATA_DESCRIPTION_MODULE__DESCRIPTIONS:
@@ -249,12 +249,12 @@ public class DataDescriptionModuleImpl extends MinimalEObjectImpl.Container impl
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case DdlPackage.DATA_DESCRIPTION_MODULE__NAME:
-				setName((String)newValue);
-				return;
 			case DdlPackage.DATA_DESCRIPTION_MODULE__IMPORTS:
 				getImports().clear();
 				getImports().addAll((Collection<? extends Import>)newValue);
+				return;
+			case DdlPackage.DATA_DESCRIPTION_MODULE__NAME:
+				setName((String)newValue);
 				return;
 			case DdlPackage.DATA_DESCRIPTION_MODULE__TYPES:
 				getTypes().clear();
@@ -280,11 +280,11 @@ public class DataDescriptionModuleImpl extends MinimalEObjectImpl.Container impl
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case DdlPackage.DATA_DESCRIPTION_MODULE__NAME:
-				setName(NAME_EDEFAULT);
-				return;
 			case DdlPackage.DATA_DESCRIPTION_MODULE__IMPORTS:
 				getImports().clear();
+				return;
+			case DdlPackage.DATA_DESCRIPTION_MODULE__NAME:
+				setName(NAME_EDEFAULT);
 				return;
 			case DdlPackage.DATA_DESCRIPTION_MODULE__TYPES:
 				getTypes().clear();
@@ -307,10 +307,10 @@ public class DataDescriptionModuleImpl extends MinimalEObjectImpl.Container impl
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case DdlPackage.DATA_DESCRIPTION_MODULE__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case DdlPackage.DATA_DESCRIPTION_MODULE__IMPORTS:
 				return imports != null && !imports.isEmpty();
+			case DdlPackage.DATA_DESCRIPTION_MODULE__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case DdlPackage.DATA_DESCRIPTION_MODULE__TYPES:
 				return types != null && !types.isEmpty();
 			case DdlPackage.DATA_DESCRIPTION_MODULE__DESCRIPTIONS:
