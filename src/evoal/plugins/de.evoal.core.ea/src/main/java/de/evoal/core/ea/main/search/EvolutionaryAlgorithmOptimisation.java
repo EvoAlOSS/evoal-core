@@ -22,7 +22,6 @@ import de.evoal.core.ea.main.fitness.JeneticsFitnessFunction;
 import de.evoal.core.ea.main.initial.InitialStream;
 import de.evoal.core.ea.main.jenetics.ConstraintList;
 import de.evoal.core.ea.main.alterer.AltererFactory;
-import de.evoal.core.ea.main.codec.VectorGenotypeCodec;
 import de.evoal.core.ea.main.statistics.JeneticsStatisticsWriter;
 import de.evoal.languages.model.base.Attribute;
 import de.evoal.languages.model.ol.OptimisationModule;
@@ -34,7 +33,6 @@ import lombok.extern.slf4j.Slf4j;
 import javax.enterprise.context.Dependent;
 import javax.enterprise.inject.Instance;
 
-import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 import javax.inject.Named;
 

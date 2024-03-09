@@ -1,11 +1,9 @@
-package de.evoal.core.ea.main.codec.chromosome;
+package de.evoal.core.ea.main.codec.vector.chromosome;
 
 import de.evoal.core.api.cdi.EvoalComponent;
 import de.evoal.core.api.languages.ExpressionEvaluator;
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;
-import de.evoal.core.api.properties.PropertySpecification;
-import de.evoal.languages.model.base.Definition;
 import de.evoal.languages.model.ddl.DataDescription;
 import de.evoal.languages.model.base.Instance;
 import io.jenetics.Chromosome;

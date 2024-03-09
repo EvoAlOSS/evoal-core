@@ -1,4 +1,4 @@
-package de.evoal.core.ea.main.codec;
+package de.evoal.core.ea.main.codec.vector;
 
 import de.evoal.core.api.languages.ExpressionEvaluator;
 import de.evoal.core.api.utils.InitializationException;

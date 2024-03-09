@@ -4,12 +4,9 @@ import de.evoal.core.api.board.Blackboard;
 import de.evoal.core.api.board.CoreBlackboardEntries;
 import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.core.api.utils.LanguageHelper;
-import de.evoal.languages.model.base.Literal;
+import de.evoal.languages.model.base.*;
 import de.evoal.languages.model.ddl.DataDescription;
 import de.evoal.languages.model.ol.OptimisationModule;
-import de.evoal.languages.model.base.RealLiteral;
-import de.evoal.languages.model.base.Array;
-import de.evoal.languages.model.base.Instance;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -75,6 +72,19 @@ public class ConfigurationValueProducer {
 
         final Object [] array = lookup(board.get(value.entry()), value.access());
         final DataDescription[] copy = new DataDescription[array.length];
+
+        System.arraycopy(array, 0, copy, 0, copy.length);
+
+        return copy;
+    }
+
+    @Produces
+    @ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "")
+    public Definition[] injectDefinitionArrayValue(final InjectionPoint ip, final Blackboard board) {
+        final ConfigurationValue value = ip.getAnnotated().getAnnotation(ConfigurationValue.class);
+
+        final Object [] array = lookup(board.get(value.entry()), value.access());
+        final Definition[] copy = new Definition[array.length];
 
         System.arraycopy(array, 0, copy, 0, copy.length);
 

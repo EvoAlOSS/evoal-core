@@ -1,4 +1,4 @@
-package de.evoal.core.ea.main.codec.chromosome;
+package de.evoal.core.ea.main.codec.vector.chromosome;
 
 import de.evoal.core.api.languages.ExpressionEvaluator;
 import de.evoal.core.api.properties.PropertySpecification;

@@ -7,7 +7,6 @@ import de.evoal.core.api.optimisation.OptimisationFunction;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.languages.model.base.Attribute;
 import de.evoal.languages.model.base.Definition;
-import de.evoal.languages.model.ddl.DataDescription;
 import de.evoal.languages.model.base.Instance;
 import lombok.extern.slf4j.Slf4j;
 
@@ -30,9 +29,9 @@ public class OptimisationFunctionProducer {
     @Produces
     @Dependent
     @Named("search-space-specification")
-    public PropertiesSpecification createSearchSpaceSpecification(final @ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "problem.search-space") DataDescription[] references) {
+    public PropertiesSpecification createSearchSpaceSpecification(final @ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "problem.search-space") Definition[] references) {
         return PropertiesSpecification.builder()
-                .addDescriptions(Arrays.stream(references))
+                .add(Arrays.stream(references))
                 .build();
     }
 
@@ -40,7 +39,7 @@ public class OptimisationFunctionProducer {
     @Produces
     @Dependent
     @Named("optimisation-space-specification")
-    public PropertiesSpecification createOptimisationSpaceSpecification(final @ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "problem.optimisation-space") DataDescription[] references) {
+    public PropertiesSpecification createOptimisationSpaceSpecification(final @ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "problem.optimisation-space") Definition[] references) {
         return PropertiesSpecification.builder()
                 .add(Arrays.stream(references))
                 .build();

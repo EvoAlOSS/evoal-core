@@ -3,6 +3,7 @@ package de.evoal.core.main.constraints.constraint.ast;
 import de.evoal.core.api.constraints.model.DataConstraints;
 import de.evoal.core.api.properties.PropertySpecification;
 import de.evoal.core.api.properties.info.PropertiesBoundaries;
+import de.evoal.languages.model.ddl.BaseDataDescription;
 import de.evoal.languages.model.ddl.DataDescription;
 import de.evoal.languages.model.ddl.RepresentationType;
 import de.evoal.languages.model.base.*;
@@ -35,6 +36,11 @@ public class BoundaryIdentifier {
 
     private static void processConstraint(final Expression constraint, final DataDescription context, final Map<DataDescription, Number> lowerBounds, final Map<DataDescription, Number> upperBounds) {
         log.info("Processing constraint for {}", context);
+        if(!(context instanceof BaseDataDescription)) {
+            log.info("Context is not a BaseDataDescription. Skipping.");
+            return;
+        }
+
         final UnaryBoundaryIdentifier identifier = new UnaryBoundaryIdentifier(context);
 
         UnaryBoundaryIdentifier.Boundary result = (UnaryBoundaryIdentifier.Boundary)identifier.doSwitch(constraint);
@@ -45,14 +51,14 @@ public class BoundaryIdentifier {
         final DataDescription description = result.data();
 
         if(result.isLowerBoundary()) {
-            addDefaultConstraints(description, lowerBounds, upperBounds);
+            addDefaultConstraints((BaseDataDescription)description, lowerBounds, upperBounds);
 
             final Number oldLower = lowerBounds.get(description);
             if(result.boundary().doubleValue() > oldLower.doubleValue()) {
                 lowerBounds.put(description, result.boundary());
             }
         } else {
-            addDefaultConstraints(description, lowerBounds, upperBounds);
+            addDefaultConstraints((BaseDataDescription)description, lowerBounds, upperBounds);
 
             final Number oldUpper = upperBounds.get(description);
             if(result.boundary().doubleValue() < oldUpper.doubleValue()) {
@@ -61,7 +67,7 @@ public class BoundaryIdentifier {
         }
     }
 
-    private static void addDefaultConstraints(DataDescription description, Map<DataDescription, Number> lowerBounds, Map<DataDescription, Number> upperBounds) {
+    private static void addDefaultConstraints(BaseDataDescription description, Map<DataDescription, Number> lowerBounds, Map<DataDescription, Number> upperBounds) {
         if(!lowerBounds.containsKey(description)) {
             if(RepresentationType.REAL.equals(description.getRepresentation())) {
                 lowerBounds.put(description, -Double.MAX_VALUE);

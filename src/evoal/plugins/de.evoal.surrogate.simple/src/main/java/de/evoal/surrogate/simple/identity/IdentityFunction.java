@@ -7,7 +7,7 @@ import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.properties.PropertySpecification;
 import de.evoal.core.api.utils.Requirements;
-import de.evoal.languages.model.ddl.DataDescription;
+import de.evoal.languages.model.ddl.BaseDataDescription;
 import de.evoal.surrogate.api.configuration.PartialFunctionConfiguration;
 import de.evoal.surrogate.api.function.AbstractPartialSurrogateFunction;
 import de.evoal.core.api.utils.ConverterFunctions;
@@ -25,10 +25,10 @@ public class IdentityFunction extends AbstractPartialSurrogateFunction {
 		final PropertySpecification inputProperty = input.getProperties().get(0);
 		final int propertyIndex = actualInput.indexOf(inputProperty);
 
-		Requirements.requireInstanceOf(inputProperty.type(), DataDescription.class);
-		Requirements.requireInstanceOf(output.getProperties().get(0).type(), DataDescription.class);
-		this.converter = ConverterFunctions.convert(((DataDescription)inputProperty.type()).getRepresentation(),
-													((DataDescription)output.getProperties().get(0).type()).getRepresentation(),
+		Requirements.requireInstanceOf(inputProperty.type(), BaseDataDescription.class);
+		Requirements.requireInstanceOf(output.getProperties().get(0).type(), BaseDataDescription.class);
+		this.converter = ConverterFunctions.convert(((BaseDataDescription)inputProperty.type()).getRepresentation(),
+													((BaseDataDescription)output.getProperties().get(0).type()).getRepresentation(),
 													propertyIndex);
 	}
 

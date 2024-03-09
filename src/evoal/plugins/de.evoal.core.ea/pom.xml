@@ -35,6 +35,13 @@
 		</dependency>
 
 		<dependency>
+			<groupId>io.jenetics</groupId>
+			<artifactId>jenetics.prog</artifactId>
+			<version>${jenetics.version}</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
 			<groupId>com.github.haifengl</groupId>
 			<artifactId>smile-math</artifactId>
 			<version>${smile.version}</version>

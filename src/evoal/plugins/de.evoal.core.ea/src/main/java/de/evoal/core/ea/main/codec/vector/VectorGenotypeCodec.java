@@ -1,11 +1,11 @@
-package de.evoal.core.ea.main.codec;
+package de.evoal.core.ea.main.codec.vector;
 
 import de.evoal.core.api.cdi.BeanFactory;
 import de.evoal.core.api.utils.LanguageHelper;
 import de.evoal.core.ea.api.codec.CustomCodec;
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;
-import de.evoal.core.ea.main.codec.chromosome.DynamicChromosome;
+import de.evoal.core.ea.main.codec.vector.chromosome.DynamicChromosome;
 import de.evoal.languages.model.base.Instance;
 import io.jenetics.Chromosome;
 import io.jenetics.Gene;

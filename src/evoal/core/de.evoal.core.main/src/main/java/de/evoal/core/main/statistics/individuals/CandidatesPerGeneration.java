@@ -13,6 +13,7 @@ import de.evoal.core.api.statistics.writer.Column;
 import de.evoal.core.api.statistics.writer.ColumnType;
 import de.evoal.core.api.utils.Requirements;
 import de.evoal.languages.model.base.Instance;
+import de.evoal.languages.model.ddl.BaseDataDescription;
 import de.evoal.languages.model.ddl.DataDescription;
 import lombok.extern.slf4j.Slf4j;
 
@@ -84,9 +85,9 @@ public class CandidatesPerGeneration extends AbstractCandidateStatisticsWriter {
     }
 
     private ColumnType toColumnType(final PropertySpecification spec) {
-        Requirements.requireInstanceOf(spec.type(), DataDescription.class);
+        Requirements.requireInstanceOf(spec.type(), BaseDataDescription.class);
 
-        return switch (((DataDescription)spec.type()).getRepresentation()) {
+        return switch (((BaseDataDescription)spec.type()).getRepresentation()) {
             case REAL -> ColumnType.Double;
             case INTEGER -> ColumnType.Integer;
             case STRING -> ColumnType.String;

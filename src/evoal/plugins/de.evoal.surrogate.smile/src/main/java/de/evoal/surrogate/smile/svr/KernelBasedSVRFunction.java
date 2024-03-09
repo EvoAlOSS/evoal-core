@@ -3,6 +3,7 @@ package de.evoal.surrogate.smile.svr;
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.utils.Requirements;
+import de.evoal.languages.model.ddl.BaseDataDescription;
 import de.evoal.languages.model.ddl.DataDescription;
 import de.evoal.languages.model.ddl.RepresentationType;
 import de.evoal.surrogate.api.configuration.Parameter;
@@ -54,9 +55,9 @@ public class KernelBasedSVRFunction extends AbstractPartialSurrogateFunction {
 							.stream()
 						    .mapToInt(s -> {
 								final int index = actualInput.indexOf(s);
-								Requirements.requireInstanceOf(s.type(), DataDescription.class);
+								Requirements.requireInstanceOf(s.type(), BaseDataDescription.class);
 
-								inputConverts.add(ConverterFunctions.convertToDouble(((DataDescription)s.type()).getRepresentation(), index));
+								inputConverts.add(ConverterFunctions.convertToDouble(((BaseDataDescription)s.type()).getRepresentation(), index));
 
 								return  index;
 							})
@@ -65,7 +66,7 @@ public class KernelBasedSVRFunction extends AbstractPartialSurrogateFunction {
 		this.inputConverters = inputConverts.toArray(new Function[0]);
 
 		// Calculate output converter
-		final RepresentationType outputType = ((DataDescription)output.getProperties().get(0).type()).getRepresentation();
+		final RepresentationType outputType = ((BaseDataDescription)output.getProperties().get(0).type()).getRepresentation();
 		outputConverter = ConverterFunctions.convertDoubleTo(outputType);
 
 		this.regression = regression;

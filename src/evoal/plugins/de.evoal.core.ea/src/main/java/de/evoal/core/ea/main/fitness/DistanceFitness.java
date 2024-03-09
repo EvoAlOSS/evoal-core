@@ -10,8 +10,6 @@ import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.utils.Requirements;
 import de.evoal.languages.model.base.*;
 import de.evoal.languages.model.ddl.DataDescription;
-import de.evoal.languages.model.ddl.impl.UntypedDataDescriptionImpl;
-import de.evoal.languages.model.instance.DataReference;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.enterprise.context.Dependent;

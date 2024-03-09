@@ -8,6 +8,7 @@ module de.evoal.core.ea {
 
     requires commons.math3;
     requires io.jenetics.ext;
+    requires io.jenetics.prog;
 
     requires org.eclipse.emf.common;
 
@@ -33,7 +34,8 @@ module de.evoal.core.ea {
     opens de.evoal.core.ea.main.alterer to weld.core.impl;
     opens de.evoal.core.ea.main.alterer.mutator to weld.core.impl;
     opens de.evoal.core.ea.main.codec to weld.core.impl;
-    opens de.evoal.core.ea.main.codec.chromosome to weld.core.impl;
+    opens de.evoal.core.ea.main.codec.vector to weld.core.impl;
+    opens de.evoal.core.ea.main.codec.vector.chromosome to weld.core.impl;
     opens de.evoal.core.ea.main.comparator to weld.core.impl;
     opens de.evoal.core.ea.main.constraint to weld.core.impl;
     opens de.evoal.core.ea.main.fitness to weld.core.impl;
@@ -43,4 +45,5 @@ module de.evoal.core.ea {
     opens de.evoal.core.ea.main.search to weld.core.impl;
     opens de.evoal.core.ea.main.statistics to weld.core.impl;
     opens de.evoal.core.ea.api.operators to weld.core.impl;
+    opens de.evoal.core.ea.main.codec.program to weld.core.impl;
 }

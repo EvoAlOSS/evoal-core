@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.function.Function;
 
 import de.evoal.core.api.utils.Requirements;
-import de.evoal.languages.model.ddl.DataDescription;
+import de.evoal.languages.model.ddl.BaseDataDescription;
 import de.evoal.surrogate.api.configuration.Parameter;
 import de.evoal.surrogate.api.configuration.PartialFunctionConfiguration;
 import de.evoal.surrogate.api.function.AbstractPartialSurrogateFunction;
@@ -63,11 +63,11 @@ public class SimpleQuadraticFunction extends AbstractPartialSurrogateFunction {
 		final PropertySpecification inputProperty = input.getProperties().get(0);
 		final int propertyIndex = actualInput.indexOf(inputProperty);
 
-		Requirements.requireInstanceOf(inputProperty.type(), DataDescription.class);
-		Requirements.requireInstanceOf(output.getProperties().get(0).type(), DataDescription.class);
+		Requirements.requireInstanceOf(inputProperty.type(), BaseDataDescription.class);
+		Requirements.requireInstanceOf(output.getProperties().get(0).type(), BaseDataDescription.class);
 
-		final Function<Properties, Double> inputConverter = ConverterFunctions.convertToDouble(((DataDescription)inputProperty.type()).getRepresentation(), propertyIndex);
-		final Function<Double, Object> outputConverter = ConverterFunctions.convertDoubleTo(((DataDescription)output.get(0).type()).getRepresentation());
+		final Function<Properties, Double> inputConverter = ConverterFunctions.convertToDouble(((BaseDataDescription)inputProperty.type()).getRepresentation(), propertyIndex);
+		final Function<Double, Object> outputConverter = ConverterFunctions.convertDoubleTo(((BaseDataDescription)output.get(0).type()).getRepresentation());
 
 		this.regression = vector -> outputConverter.apply(intercept + slope * Math.pow(inputConverter.apply(vector), 2.0));
 	}

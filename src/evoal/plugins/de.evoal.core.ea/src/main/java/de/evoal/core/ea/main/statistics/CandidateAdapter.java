@@ -4,7 +4,6 @@ import de.evoal.core.api.optimisation.OptimisationValue;
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.statistics.Candidate;
 import de.evoal.core.ea.api.codec.CustomCodec;
-import de.evoal.core.ea.main.codec.VectorGenotypeCodec;
 import io.jenetics.Phenotype;
 
 import javax.enterprise.context.Dependent;
