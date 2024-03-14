@@ -36,7 +36,7 @@ public class CSVPropertiesReader implements PropertiesReader {
 
     @Override
     public PropertiesReader init(final File inputFile, final PropertiesSpecification specification) throws EvoalIOException {
-        log.info("Creating JSON properties reader for {}.", specification);
+        log.info("Creating CSV properties reader for {}.", specification);
         this.specification = specification;
 
         try {
@@ -76,7 +76,7 @@ public class CSVPropertiesReader implements PropertiesReader {
             final Object value = switch (((BaseDataDescription)s.type()).getRepresentation()) {
                 case BOOLEAN -> Boolean.parseBoolean(strValue);
                 case INTEGER -> "Infinity".equals(strValue) ? Integer.MAX_VALUE : nf.parse(strValue);
-                case REAL -> "Infinity".equals(strValue) ? Double.POSITIVE_INFINITY : nf.parse(strValue);
+                case REAL -> "Infinity".equals(strValue) ? Double.POSITIVE_INFINITY : nf.parse(strValue).doubleValue();
                 case STRING -> strValue;
             };
 
