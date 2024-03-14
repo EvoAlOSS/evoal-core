@@ -29,7 +29,7 @@ import java.util.List;
  * Small helper class for collecting and writing the generation-based statistics.
  */
 @Slf4j
-@Named("best-candidate-per-generation")
+@Named("de.evoal.core.optimisation.best-candidate-per-generation")
 @Dependent
 public class BestCandidatePerGeneration implements StatisticsWriter {
 
@@ -93,13 +93,16 @@ public class BestCandidatePerGeneration implements StatisticsWriter {
     }
 
     private ColumnType toColumnType(final PropertySpecification spec) {
-        Requirements.requireInstanceOf(spec.type(), BaseDataDescription.class);
-        return switch (((BaseDataDescription)spec.type()).getRepresentation()) {
-            case REAL -> ColumnType.Double;
-            case INTEGER -> ColumnType.Integer;
-            case STRING -> ColumnType.String;
-            case BOOLEAN -> ColumnType.Boolean;
-        };
+        if(spec.type() instanceof BaseDataDescription) {
+            return switch (((BaseDataDescription)spec.type()).getRepresentation()) {
+                case REAL -> ColumnType.Double;
+                case INTEGER -> ColumnType.Integer;
+                case STRING -> ColumnType.String;
+                case BOOLEAN -> ColumnType.Boolean;
+            };
+        } else {
+            return ColumnType.String;
+        }
     }
 
     @SneakyThrows

@@ -27,7 +27,7 @@ import java.util.List;
  * Small helper class for collecting and writing the generation-based statistics.
  */
 @Slf4j
-@Named("candidates-per-generation")
+@Named("de.evoal.core.optimisation.candidates-per-generation")
 @Dependent
 public class CandidatesPerGeneration extends AbstractCandidateStatisticsWriter {
 
