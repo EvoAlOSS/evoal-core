@@ -25,6 +25,7 @@ module de.evoal.core.ea {
 
     exports de.evoal.core.ea.api.cdi;
     exports de.evoal.core.ea.api.codec;
+    exports de.evoal.core.ea.api.codec.program;
     exports de.evoal.core.ea.api.initial;
     exports de.evoal.core.ea.api.operators;
 
@@ -36,6 +37,9 @@ module de.evoal.core.ea {
     opens de.evoal.core.ea.main.codec to weld.core.impl;
     opens de.evoal.core.ea.main.codec.vector to weld.core.impl;
     opens de.evoal.core.ea.main.codec.vector.chromosome to weld.core.impl;
+    opens de.evoal.core.ea.main.codec.program to weld.core.impl;
+    opens de.evoal.core.ea.main.codec.program.operations to weld.core.impl;
+    opens de.evoal.core.ea.main.codec.program.validators to weld.core.impl;
     opens de.evoal.core.ea.main.comparator to weld.core.impl;
     opens de.evoal.core.ea.main.constraint to weld.core.impl;
     opens de.evoal.core.ea.main.fitness to weld.core.impl;
@@ -45,5 +49,6 @@ module de.evoal.core.ea {
     opens de.evoal.core.ea.main.search to weld.core.impl;
     opens de.evoal.core.ea.main.statistics to weld.core.impl;
     opens de.evoal.core.ea.api.operators to weld.core.impl;
-    opens de.evoal.core.ea.main.codec.program to weld.core.impl;
+    opens de.evoal.core.ea.main.fitness.gof to weld.core.impl;
+
 }

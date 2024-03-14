@@ -29,16 +29,6 @@ module de.evoal.core.ea.optimisation {
         chromosomes : array instance chromosome;
 	}
 
-	type 'program' {
-	}
-
-	type 'program-genotype' extends genotype {
-        chromosomes : array instance 'program-chromosome';
-	}
-
-	type 'program-chromosome' {
-	}
-
 	/**
 	 * Abstract base type for different chromosome types.
 	 */
@@ -225,6 +215,11 @@ module de.evoal.core.ea.optimisation {
 	
 	abstract type mutator {
 	}
+
+	type 'probability-mutator' extends mutator {
+        probability : real;
+    }
+
 	
 	type 'gaussian-mutator' extends mutator {
 		probability : real;

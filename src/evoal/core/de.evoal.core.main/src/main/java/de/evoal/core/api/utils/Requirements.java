@@ -26,6 +26,44 @@ public final class Requirements {
     }
 
     /**
+     * Requires the value to be {@code false}.
+     *
+     * @param value Value to check.
+     * @param message Error message.
+     * @throws IllegalArgumentException iff the passed {@code value} is {@code true}.
+     */
+    public static void requireFalse(final boolean value, final String message) {
+        if(value) {
+            throw new IllegalArgumentException(message);
+        }
+    }
+
+    /**
+     * Requires the value to be {@code true}.
+     *
+     * @param value Value to check.
+     * @throws IllegalArgumentException iff the passed {@code value} is {@code false}.
+     */
+    public static void requireTrue(final boolean value) {
+        if(!value) {
+            throw new IllegalArgumentException("Value expected to be false.");
+        }
+    }
+
+    /**
+     * Requires the value to be {@code true}.
+     *
+     * @param value Value to check.
+     * @param message Message to throw.
+     * @throws IllegalArgumentException iff the passed {@code value} is {@code false}.
+     */
+    public static void requireTrue(final boolean value, final String message) {
+        if(!value) {
+            throw new IllegalArgumentException(message);
+        }
+    }
+
+    /**
      * Requires the arrays to be present and of same size.
      *
      * @param a The first array.

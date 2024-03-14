@@ -192,7 +192,9 @@ public class LanguageHelper {
     }
 
     private Object convertToJava(final Object current, final Type type) {
-        if(type instanceof InstanceType) {
+        log.info("Converting " + current +  " to " + type);
+
+        if((type instanceof InstanceType || type instanceof DataType) && current instanceof OrExpression) {
             return evaluator.evaluate(current);
         } else if(type instanceof LiteralType) {
             return readExpression(current, type);

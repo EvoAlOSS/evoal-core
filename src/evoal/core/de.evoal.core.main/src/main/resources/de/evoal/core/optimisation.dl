@@ -231,6 +231,9 @@ module de.evoal.core.optimisation {
 		 */
 		target : array instance variable;
 	}
+
+	type 'random-fitness' extends 'fitness-function' {
+	}
 	
 	type 'problem-function' extends 'fitness-function' {
 	}

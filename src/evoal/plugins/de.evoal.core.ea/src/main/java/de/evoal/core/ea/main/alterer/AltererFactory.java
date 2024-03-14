@@ -15,6 +15,8 @@ import de.evoal.core.api.correlations.Correlations;
 import de.evoal.languages.model.base.Instance;
 import de.evoal.core.api.utils.LanguageHelper;
 import io.jenetics.*;
+import io.jenetics.ext.SingleNodeCrossover;
+import io.jenetics.ext.TreeGene;
 import io.jenetics.util.Mean;
 import javax.enterprise.context.ApplicationScoped;
 import lombok.extern.slf4j.Slf4j;
@@ -58,6 +60,7 @@ public class AltererFactory {
 			case "partial-matched-alterer": return createPartiallyMatchedAlterer(config);
 			case "correlation-partial-matched-alterer": return createCorrelationPartiallyMatchedAlterer(config);
 
+			case "probability-mutator": return createMutator(config);
 			case "gaussian-mutator": return createGaussianMutator(config);
 			case "correlation-gaussian-mutator": return createGaussianCorrelationMutator(config);
 			case "swap-mutator": return createSwapMutator(config);
@@ -74,10 +77,23 @@ public class AltererFactory {
 			case "correlation-single-point-crossover": return createCorrelationSinglePointCrossover(config);
 			case "uniform-crossover": return createUniformCrossover(config);
 			case "correlation-uniform-crossover": return createCorrelationUniformCrossover(config);
+			case "single-node-crossover": return (Alterer<G, OptimisationValue>) createSingleNodeCrossover(config);
 		}
 
 
 		return BeanFactory.createComponent(AltererComponent.class, config);
+	}
+
+	private <G extends TreeGene<?, G>> Alterer<G, OptimisationValue> createSingleNodeCrossover(Instance config) {
+		final Double probability = helper.lookup(config, "probability");
+
+		return new SingleNodeCrossover<>(probability);
+	}
+
+	private <G extends Gene<?, G>> Alterer<G, OptimisationValue> createMutator(final Instance config) {
+		final Double probability = helper.lookup(config, "probability");
+
+		return new Mutator<>(probability);
 	}
 
 	private <G extends Gene<?, G>> Alterer<G, OptimisationValue> createUniformCrossover(final Instance config) {
