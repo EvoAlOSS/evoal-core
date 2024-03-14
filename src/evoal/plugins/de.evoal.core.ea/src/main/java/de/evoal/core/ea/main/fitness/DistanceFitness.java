@@ -18,7 +18,7 @@ import javax.inject.Named;
 import java.util.Arrays;
 
 @Dependent
-@Named("optimisation-distance")
+@Named("de.evoal.core.optimisation.optimisation-distance")
 @Slf4j
 public class DistanceFitness extends OptimisationFunctionDecorator {
 
