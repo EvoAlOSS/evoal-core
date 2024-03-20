@@ -1,21 +1,19 @@
-package de.evoal.core.main.constraints.constraint.utils;
-
-import de.evoal.core.api.utils.Requirements;
+package de.evoal.core.api.utils;
 
 import java.util.function.BiFunction;
 
 /**
  * Helper class for mathematical operations on numbers.
  */
-public final class ArithmeticNumberOperations {
-    private ArithmeticNumberOperations() {}
+public final class ArithmeticOperations {
+    private ArithmeticOperations() {}
 
     public static Number add(final Object op1, final Object op2) {
         return dispatch(op1,
                         op2,
-                        ArithmeticNumberOperations::addAsDouble,
-                        ArithmeticNumberOperations::addAsLong,
-                        ArithmeticNumberOperations::addAsInteger);
+                        ArithmeticOperations::addAsDouble,
+                        ArithmeticOperations::addAsLong,
+                        ArithmeticOperations::addAsInteger);
     }
 
     private static Number addAsDouble(final Number op1, final Number op2) {
@@ -28,7 +26,7 @@ public final class ArithmeticNumberOperations {
         return op1.intValue() + op2.intValue();
     }
 
-    public static Number dispatch(final Object op1, final Object op2, final BiFunction<Number, Number, Number> doubleHandler, final BiFunction<Number, Number, Number> longHandler, final BiFunction<Number, Number, Number> integerHandler) {
+    private static Number dispatch(final Object op1, final Object op2, final BiFunction<Number, Number, Number> doubleHandler, final BiFunction<Number, Number, Number> longHandler, final BiFunction<Number, Number, Number> integerHandler) {
         Requirements.requireInstanceOf(op1, Number.class);
         Requirements.requireInstanceOf(op2, Number.class);
 
@@ -50,9 +48,9 @@ public final class ArithmeticNumberOperations {
     public static Number divide(final Object op1, final Object op2) {
         return dispatch(op1,
                         op2,
-                        ArithmeticNumberOperations::divideAsDouble,
-                        ArithmeticNumberOperations::divideAsLong,
-                        ArithmeticNumberOperations::divideAsInteger);
+                        ArithmeticOperations::divideAsDouble,
+                        ArithmeticOperations::divideAsLong,
+                        ArithmeticOperations::divideAsInteger);
     }
 
     private static Number divideAsDouble(final Number op1, final Number op2) {
@@ -70,9 +68,9 @@ public final class ArithmeticNumberOperations {
     public static Number minus(final Object op1, final Object op2) {
         return dispatch(op1,
                         op2,
-                        ArithmeticNumberOperations::minusAsDouble,
-                        ArithmeticNumberOperations::minusAsLong,
-                        ArithmeticNumberOperations::minusAsInteger);
+                        ArithmeticOperations::minusAsDouble,
+                        ArithmeticOperations::minusAsLong,
+                        ArithmeticOperations::minusAsInteger);
     }
 
     private static Number minusAsDouble(final Number op1, final Number op2) {
@@ -89,9 +87,9 @@ public final class ArithmeticNumberOperations {
     public static Number modulo(final Object op1, final Object op2) {
         return dispatch(op1,
                 op2,
-                ArithmeticNumberOperations::moduloAsLong,
-                ArithmeticNumberOperations::moduloAsLong,
-                ArithmeticNumberOperations::moduloAsInteger);
+                ArithmeticOperations::moduloAsLong,
+                ArithmeticOperations::moduloAsLong,
+                ArithmeticOperations::moduloAsInteger);
     }
 
     private static Number moduloAsLong(final Number op1, final Number op2) {
@@ -105,9 +103,9 @@ public final class ArithmeticNumberOperations {
     public static Number multiply(final Object op1, final Object op2) {
         return dispatch(op1,
                 op2,
-                ArithmeticNumberOperations::multiplyAsDouble,
-                ArithmeticNumberOperations::multiplyAsLong,
-                ArithmeticNumberOperations::multiplyAsInteger);
+                ArithmeticOperations::multiplyAsDouble,
+                ArithmeticOperations::multiplyAsLong,
+                ArithmeticOperations::multiplyAsInteger);
     }
 
     private static Number multiplyAsDouble(final Number op1, final Number op2) {
@@ -125,9 +123,9 @@ public final class ArithmeticNumberOperations {
     public static Number pow(final Object op1, final Object op2) {
         return dispatch(op1,
                 op2,
-                ArithmeticNumberOperations::powAsDouble,
-                ArithmeticNumberOperations::powAsLong,
-                ArithmeticNumberOperations::powAsInteger);
+                ArithmeticOperations::powAsDouble,
+                ArithmeticOperations::powAsLong,
+                ArithmeticOperations::powAsInteger);
     }
 
     private static Number powAsDouble(final Number op1, final Number op2) {

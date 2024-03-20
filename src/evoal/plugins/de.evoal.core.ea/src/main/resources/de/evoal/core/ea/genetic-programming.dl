@@ -103,7 +103,11 @@ module de.evoal.core.ea.'genetic-programming' {
 	    count : int := 1;
 	}
 
-    type 'single-node-crossover' extends crossover {
+	type 'program-size' extends validator {
+	    'max-size' : int := 10;
+	}
+
+	type 'single-node-crossover' extends crossover {
         'probability' : real;
     }
 
@@ -128,4 +132,12 @@ module de.evoal.core.ea.'genetic-programming' {
         upper : int := 25;
         count : int  := 10;
     }
+
+    /**
+     * A mutator for Genetic Programming that rewrites mathematical expressions.
+     */
+    type 'mathematical-expression-rewriter' extends mutator {
+        probability : real;
+    }
+
 }

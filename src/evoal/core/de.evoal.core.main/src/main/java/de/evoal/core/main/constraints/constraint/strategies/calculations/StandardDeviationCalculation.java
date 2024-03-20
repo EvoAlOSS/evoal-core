@@ -10,7 +10,7 @@ import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.properties.PropertySpecification;
 import javax.enterprise.context.Dependent;
 
-import de.evoal.core.main.constraints.constraint.utils.ArithmeticNumberOperations;
+import de.evoal.core.api.utils.ArithmeticOperations;
 import de.evoal.core.main.constraints.deviation.model.Deviations;
 import de.evoal.languages.model.base.Instance;
 import lombok.NonNull;
@@ -53,7 +53,7 @@ public class StandardDeviationCalculation implements CalculationStrategy {
 
             for(final Map.Entry<Integer, Double> entry : differences.entrySet()) {
                 final Integer propIndex = entry.getKey();
-                final double value = ArithmeticNumberOperations.add(adaptedProperties.get(propIndex), entry.getValue()).doubleValue();
+                final double value = ArithmeticOperations.add(adaptedProperties.get(propIndex), entry.getValue()).doubleValue();
                 adaptedProperties.put(propIndex, value);
             }
 

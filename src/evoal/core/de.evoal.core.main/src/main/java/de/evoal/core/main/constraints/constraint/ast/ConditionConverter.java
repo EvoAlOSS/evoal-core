@@ -6,7 +6,7 @@ import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.properties.PropertySpecification;
 
-import de.evoal.core.main.constraints.constraint.utils.ArithmeticNumberOperations;
+import de.evoal.core.api.utils.ArithmeticOperations;
 import de.evoal.languages.model.ddl.DataDescription;
 import de.evoal.languages.model.ddl.DataReference;
 import de.evoal.languages.model.ddl.SelfReference;
@@ -79,13 +79,13 @@ public class ConditionConverter extends BaseSwitch<Object> {
             case EQUAL:
             case GREATER_EQUAL:
             case GREATER_THAN: {
-                function = (gen, fit) -> ArithmeticNumberOperations.minus(leftValue.apply(gen, fit), rightValue.apply(gen, fit));
+                function = (gen, fit) -> ArithmeticOperations.minus(leftValue.apply(gen, fit), rightValue.apply(gen, fit));
                 break;
             }
             case LESS_EQUAL:
             case LESS_THAN:
             {
-                function = (gen, fit) -> ArithmeticNumberOperations.minus(rightValue.apply(gen, fit), leftValue.apply(gen, fit));
+                function = (gen, fit) -> ArithmeticOperations.minus(rightValue.apply(gen, fit), leftValue.apply(gen, fit));
                 break;
             }
             case UNEQUAL: {
@@ -125,13 +125,13 @@ public class ConditionConverter extends BaseSwitch<Object> {
             switch (operator) {
                 case ADD: {
                     final BiFunction<Properties, Properties, Object> lOp = value;
-                    value = (gen, fit) -> ArithmeticNumberOperations.add(lOp.apply(gen, fit), rOp.apply(gen, fit));
+                    value = (gen, fit) -> ArithmeticOperations.add(lOp.apply(gen, fit), rOp.apply(gen, fit));
                     break;
                 }
 
                 case SUBTRACT: {
                     final BiFunction<Properties, Properties, Object> lOp = value;
-                    value = (gen, fit) -> ArithmeticNumberOperations.minus(lOp.apply(gen, fit), rOp.apply(gen, fit));
+                    value = (gen, fit) -> ArithmeticOperations.minus(lOp.apply(gen, fit), rOp.apply(gen, fit));
                     break;
                 }
             }
@@ -150,19 +150,19 @@ public class ConditionConverter extends BaseSwitch<Object> {
             switch (operator) {
                 case DIVIDE: {
                     final BiFunction<Properties, Properties, Object> lOp = value;
-                    value = (gen, fit) -> ArithmeticNumberOperations.divide(lOp.apply(gen, fit), rOp.apply(gen, fit));
+                    value = (gen, fit) -> ArithmeticOperations.divide(lOp.apply(gen, fit), rOp.apply(gen, fit));
                     break;
                 }
 
                 case MODULO: {
                     final BiFunction<Properties, Properties, Object> lOp = value;
-                    value = (gen, fit) -> ArithmeticNumberOperations.modulo(lOp.apply(gen, fit), rOp.apply(gen, fit));
+                    value = (gen, fit) -> ArithmeticOperations.modulo(lOp.apply(gen, fit), rOp.apply(gen, fit));
                     break;
                 }
 
                 case MULTIPLY: {
                     final BiFunction<Properties, Properties, Object> lOp = value;
-                    value = (gen, fit) -> ArithmeticNumberOperations.multiply(lOp.apply(gen, fit), rOp.apply(gen, fit));
+                    value = (gen, fit) -> ArithmeticOperations.multiply(lOp.apply(gen, fit), rOp.apply(gen, fit));
                     break;
                 }
             }
@@ -178,7 +178,7 @@ public class ConditionConverter extends BaseSwitch<Object> {
             final BiFunction<Properties, Properties, Object> lOp = value;
             final BiFunction<Properties, Properties, Object> rOp = (BiFunction<Properties, Properties, Object>) doSwitch(object.getRightOperand());
 
-            value = (gen, fit) -> ArithmeticNumberOperations.pow(lOp.apply(gen, fit), rOp.apply(gen, fit));
+            value = (gen, fit) -> ArithmeticOperations.pow(lOp.apply(gen, fit), rOp.apply(gen, fit));
         }
         return value;
     }
@@ -196,7 +196,7 @@ public class ConditionConverter extends BaseSwitch<Object> {
 
                 case SUBTRACT: {
                     final BiFunction<Properties, Properties, Object> lOp = value;
-                    value = (gen, fit) -> ArithmeticNumberOperations.minus(0, lOp.apply(gen, fit));
+                    value = (gen, fit) -> ArithmeticOperations.minus(0, lOp.apply(gen, fit));
                     break;
                 }
             }

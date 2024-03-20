@@ -1,10 +1,12 @@
 package de.evoal.core.ea.main.alterer;
 
+import java.util.List;
 import java.util.function.BiFunction;
 
 import de.evoal.core.api.cdi.BeanFactory;
 import de.evoal.core.api.optimisation.OptimisationValue;
 import de.evoal.core.ea.api.codec.CustomCodec;
+import de.evoal.core.ea.api.codec.program.Operation;
 import de.evoal.core.ea.api.operators.AltererComponent;
 import de.evoal.core.ea.main.alterer.internal.MeanCorrelationAlterer;
 import de.evoal.core.ea.main.alterer.mutator.SingleBitFlipMutator;
@@ -12,11 +14,16 @@ import de.evoal.core.ea.main.alterer.crossover.*;
 import de.evoal.core.ea.main.alterer.mutator.SingleBitFlipCorrelationMutator;
 import de.evoal.core.ea.main.alterer.mutator.SwapCorrelationMutator;
 import de.evoal.core.api.correlations.Correlations;
+import de.evoal.core.ea.main.codec.program.rewriters.*;
 import de.evoal.languages.model.base.Instance;
 import de.evoal.core.api.utils.LanguageHelper;
 import io.jenetics.*;
 import io.jenetics.ext.SingleNodeCrossover;
 import io.jenetics.ext.TreeGene;
+import io.jenetics.ext.rewriting.TreeRewriter;
+import io.jenetics.prog.MathRewriteAlterer;
+import io.jenetics.prog.op.MathExpr;
+import io.jenetics.prog.op.Op;
 import io.jenetics.util.Mean;
 import javax.enterprise.context.ApplicationScoped;
 import lombok.extern.slf4j.Slf4j;
@@ -67,6 +74,7 @@ public class AltererFactory {
 			case "correlation-swap-mutator": return createCorrelationSwapMutator(config);
 			case "bit-flip-mutator": return createBitFlipMutator(config);
 			case "correlation-bit-flip-mutator": return createCorrelationBitFlipMutator(config);
+			case "mathematical-expression-rewriter": return (Alterer<G, OptimisationValue>)createRewriteMutator(config);
 
 //			case "IntermediateCrossover": return createIntermediateCrossover(config);
 			case "line-crossover": return createLineCrossover(config);
@@ -90,11 +98,29 @@ public class AltererFactory {
 		return new SingleNodeCrossover<>(probability);
 	}
 
+	private <G extends TreeGene<Op<Double>, G>> Alterer<G, OptimisationValue> createRewriteMutator(final Instance config) {
+		final Double probability = helper.lookup(config, "probability");
+
+		// TODO This should be configurable
+		final TreeRewriter<Op<Double>> rewriter = TreeRewriter.concat(
+				new ConstantPlusRewriter(),
+				new ConstantMinusRewriter(),
+				new ConstantMutiplyRewriter(),
+				new ConstantDivideRewriter(),
+				new ConstantPowRewriter(),
+				new ConstantSqrtRewriter(),
+				new PowerRewriter()
+		);
+
+		return new MathRewriteAlterer<>(rewriter, probability);
+	}
 	private <G extends Gene<?, G>> Alterer<G, OptimisationValue> createMutator(final Instance config) {
 		final Double probability = helper.lookup(config, "probability");
 
 		return new Mutator<>(probability);
 	}
+
+
 
 	private <G extends Gene<?, G>> Alterer<G, OptimisationValue> createUniformCrossover(final Instance config) {
 		final Double crossoverProbability = helper.lookup(config, "crossover-probability");
