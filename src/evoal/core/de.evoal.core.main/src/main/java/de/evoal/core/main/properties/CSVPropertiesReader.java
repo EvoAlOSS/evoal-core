@@ -46,6 +46,15 @@ public class CSVPropertiesReader implements PropertiesReader {
             throw new EvoalIOException("Failed to parse CSV file " + inputFile, e);
         }
 
+        // sanity check
+        final List<String> names = parser.getHeaderNames();
+        log.info("Found the properties {} in the input file", names);
+        Requirements.requireTrue(specification.getProperties()
+                                              .stream()
+                                              .map(PropertySpecification::name)
+                                              .allMatch(name -> names.contains(name)),
+                        "Not all properties are specified in the input file.");
+
         return this;
     }
 

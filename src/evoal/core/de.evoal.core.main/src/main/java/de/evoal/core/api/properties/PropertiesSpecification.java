@@ -158,7 +158,7 @@ public class PropertiesSpecification {
 				+ properties
 					.stream()
 					.map(PropertySpecification::name)
-					.collect(Collectors.joining(","))
+					.collect(Collectors.joining(", "))
 				+ "]";
 	}
 
