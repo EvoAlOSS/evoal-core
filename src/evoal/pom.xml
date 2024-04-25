@@ -371,5 +371,16 @@
                 <enabled>true</enabled>
             </snapshots>
         </repository>
+        <repository>
+            <id>evoal-common-artifacts</id>
+            <name>EvoAl - Common - Artifacts</name>
+            <url>https://gitlab.informatik.uni-bremen.de/api/v4/projects/30380/packages/maven/custom-xtext/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
     </repositories>
 </project>
