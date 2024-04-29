@@ -61,7 +61,7 @@
         </dependency>
         <dependency>
             <groupId>${project.parent.groupId}</groupId>
-            <artifactId>surrogate.svr</artifactId>
+            <artifactId>surrogate.smile</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
         <dependency>
