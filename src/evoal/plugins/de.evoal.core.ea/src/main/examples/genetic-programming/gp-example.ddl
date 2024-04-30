@@ -6,11 +6,11 @@ module 'gp-example' {
      * Quality measure of the generated function.
      */
     quotient real data 'ℝ';
-
-	/**
+    
+    /**
 	 * The metric function to search.
 	 */
-    data 'regression-function' of instance 'program';
+	data 'regression-function' of instance 'program';
 
 
     //////////////////////////////////////////////////////////////////////////

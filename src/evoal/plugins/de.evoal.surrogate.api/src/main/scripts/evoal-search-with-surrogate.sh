@@ -16,14 +16,14 @@ cd "$1" || exit 1
 POSITIONAL_ARGUMENTS=( "$@" )
 POSITIONAL_ARGUMENTS=("${POSITIONAL_ARGUMENTS[@]:7}")
 
-declare -a JVM_ARGUMENTS=()
+declare -a LOCAL_JVM_ARGUMENTS=()
 
 if [ ${EVOAL_VM+x} ]; then
-  JVM_ARGUMENTS+=( "${EVOAL_VM[@]}" )
+  LOCAL_JVM_ARGUMENTS+=( "${EVOAL_VM[@]}" )
 fi
 
 if [ ${EVOAL_DEBUG+x} ]; then
-  JVM_ARGUMENTS+=( "-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=1044" )
+  LOCAL_JVM_ARGUMENTS+=( "-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=1044" )
 fi
 
 if [ ${EVOAL_LOGGING+x} ]; then
@@ -31,9 +31,10 @@ if [ ${EVOAL_LOGGING+x} ]; then
 fi
 
 
+
 set -x
-java ${JVM_ARGUMENTS[@]} \
-     ${CLASSPATH[@]} \
+java ${LOCAL_JVM_ARGUMENTS[@]} \
+     ${EVOAL_JVM_ARGUMENTS[@]} \
      ${POSITIONAL_ARGUMENTS[@]} \
      -Bcore:main=heuristic-search \
      "-Bcore:optimisation-configuration-file=$2" \
