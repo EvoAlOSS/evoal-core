@@ -5,6 +5,7 @@ module de.evoal.core.ea.optimisation {
 		'number-of-generations' : int;
 		'size-of-population' : int;
 		'maximum-age' : int;
+		'offspring-fraction' : real := 0.6;
 	
 		genotype : instance genotype;
 	

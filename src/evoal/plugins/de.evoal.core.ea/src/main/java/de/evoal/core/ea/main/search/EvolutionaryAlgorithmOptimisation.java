@@ -65,6 +65,10 @@ public class EvolutionaryAlgorithmOptimisation implements OptimisationAlgorithm 
 	@ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.maximum-age")
 	private int maximumAge;
 
+	@Inject
+	@ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.offspring-fraction")
+	private double offspringFraction;
+
 	private final Map<String, List<Alterer<?, OptimisationValue>>> alterers = new HashMap<>();
 
 	@Inject @Named("codec")
@@ -101,6 +105,7 @@ public class EvolutionaryAlgorithmOptimisation implements OptimisationAlgorithm 
         final Engine<?, OptimisationValue> engine= Engine.builder(this.fitnessFunction, encoding)
 											.alterers(flattenAltererMap())
 											.offspringSelector(this.offspringSelector)
+											.offspringFraction(offspringFraction)
 											.survivorsSelector(this.survivorSelector)
 											.optimize(maximize ? Optimize.MAXIMUM : Optimize.MINIMUM)
 											.populationSize(sizeOfPopulation)
@@ -115,7 +120,7 @@ public class EvolutionaryAlgorithmOptimisation implements OptimisationAlgorithm 
 
         final EvolutionResult<?, OptimisationValue> result
         		=  initialStream.limit(Limits.byFixedGeneration(numberOfGenerations))
-        						.limit(Limits.byExecutionTime(Duration.ofMinutes(5)))
+//        						.limit(Limits.byExecutionTime(Duration.ofMinutes(5)))
 //		        				.parallel()
 		        				.peek(writer::add)
 		                		.peek(statistics)
