@@ -24,4 +24,21 @@ public class PropertiesBoundaries {
     public Collection<PropertySpecification> getSpecifications() {
         return boundariesMap.keySet();
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append("PropertiesBoundaries [");
+        for(final Map.Entry<PropertySpecification, Boundaries> entry : boundariesMap.entrySet()) {
+            builder.append(entry.getValue().lower);
+            builder.append(" < ");
+            builder.append(entry.getKey().name());
+            builder.append(" < ");
+            builder.append(entry.getValue().upper);
+        }
+
+        builder.append("]");
+
+        return builder.toString();
+    }
 }

@@ -4,13 +4,14 @@ import de.evoal.core.api.constraints.model.DataConstraints;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.properties.info.PropertiesBoundaries;
 import de.evoal.core.main.constraints.constraint.ast.BoundaryIdentifier;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
 import javax.inject.Named;
 import java.util.stream.Stream;
 
-@ApplicationScoped
+@ApplicationScoped @Slf4j
 public class PropertiesBoundariesProducer {
     @Produces @ApplicationScoped
     public PropertiesBoundaries create(final DataConstraints constraints,
@@ -25,6 +26,8 @@ public class PropertiesBoundariesProducer {
                 .forEach(s -> {
                     boundaries.add(s, new PropertiesBoundaries.Boundaries(-Double.MAX_VALUE/2, Double.MAX_VALUE/2));
                 });
+
+        log.info("{}", boundaries);
 
         return boundaries;
     }

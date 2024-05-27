@@ -30,6 +30,6 @@ public abstract class DynamicBoundedIntegerChromosome extends DynamicChromosome 
     protected IntRange toRange(final DataDescription dataDescription) {
         PropertiesBoundaries.Boundaries bounds = boundaries.get(new PropertySpecification(dataDescription.getName(), dataDescription));
 
-        return IntRange.of(bounds.lower().intValue(), bounds.upper().intValue());
+        return IntRange.of(bounds.lower().intValue() + 1, bounds.upper().intValue() - 1);
     }
 }

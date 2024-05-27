@@ -33,6 +33,8 @@ public abstract class AbstractCandidateStatisticsWriter implements StatisticsWri
                         log.warn("Failed to writer statistics record.");
                     }
                 });
+
+        writer.flush();
     }
 
     @Override

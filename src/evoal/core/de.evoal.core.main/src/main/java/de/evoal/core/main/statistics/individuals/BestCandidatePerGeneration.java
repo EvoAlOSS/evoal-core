@@ -130,6 +130,7 @@ public class BestCandidatePerGeneration implements StatisticsWriter {
         }
 
         writer.addRecord(data);
+        writer.flush();
     }
 
     @Override
