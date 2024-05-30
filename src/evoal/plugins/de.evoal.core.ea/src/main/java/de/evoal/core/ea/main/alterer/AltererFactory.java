@@ -92,7 +92,7 @@ public class AltererFactory {
 
 		try {
 			return BeanFactory.createComponent(AltererComponent.class, config);
-		} catch(final IllegalStateException e) {
+		} catch(final RuntimeException e) {
 			return BeanFactory.createComponentUsingProvider(AltererComponentProvider.class, config);
 		}
 	}

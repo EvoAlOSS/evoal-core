@@ -64,7 +64,7 @@ public class SelectorFactory {
 
 		try {
 			return BeanFactory.createComponent(SelectorComponent.class, config);
-		} catch(final IllegalStateException e) {
+		} catch(final RuntimeException e) {
 			return BeanFactory.createComponentUsingProvider(SelectorComponentProvider.class, config);
 		}
 	}
