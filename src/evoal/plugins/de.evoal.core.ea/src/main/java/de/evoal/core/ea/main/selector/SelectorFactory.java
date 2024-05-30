@@ -4,9 +4,13 @@ import de.evoal.core.api.board.CoreBlackboardEntries;
 import de.evoal.core.api.cdi.BeanFactory;
 import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.core.api.utils.LanguageHelper;
+import de.evoal.core.ea.api.operators.AltererComponent;
+import de.evoal.core.ea.api.operators.AltererComponentProvider;
 import de.evoal.core.ea.api.operators.SelectorComponent;
+import de.evoal.core.ea.api.operators.SelectorComponentProvider;
 import de.evoal.core.ea.main.comparator.ParetoOptimisationValue;
 import de.evoal.languages.model.base.Instance;
+import de.evoal.languages.model.dl.util.FQNProvider;
 import io.jenetics.*;
 import io.jenetics.ext.moea.NSGA2Selector;
 import lombok.extern.slf4j.Slf4j;
@@ -58,7 +62,11 @@ public class SelectorFactory {
 			case "roulette-wheel-selector": return createRouletteWheelSelector(config);
 		}
 
-		return BeanFactory.createComponent(SelectorComponent.class, config);
+		try {
+			return BeanFactory.createComponent(SelectorComponent.class, config);
+		} catch(final IllegalStateException e) {
+			return BeanFactory.createComponentUsingProvider(SelectorComponentProvider.class, config);
+		}
 	}
 
 	private <G extends Gene<?, G>, C extends Comparable<? super C>> Selector<G, C> createNSGA2Selector(final Instance config) {

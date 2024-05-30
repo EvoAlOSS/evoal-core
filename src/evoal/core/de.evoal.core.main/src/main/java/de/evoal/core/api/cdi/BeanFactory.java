@@ -100,6 +100,26 @@ public final class BeanFactory {
         return createComponent(type, name, configuration);
     }
 
+    public static <S extends EvoalComponent<S>, T extends EvoalComponentProvider<S>> S createComponentUsingProvider(final Class<T> type, final Instance configuration) {
+        Requirements.requireNotNull(type);
+        Requirements.requireNotNull(configuration);
+
+        final String name = new FQNProvider().get(configuration);
+        Requirements.requireNotNull(name);
+
+        log.info("Creating bean for instance of type {} using component provider.", name);
+        try {
+            return BeanProvider.getContextualReference(name, false, type)
+                    .create(configuration)
+                    .init(configuration);
+        } catch (final IllegalStateException | IllegalArgumentException | InitializationException e) {
+            log.error("Failed to create contextual reference of type '{}' with name '{}'.", type, name);
+            logInstantiationError(type, e);
+
+            throw new RuntimeException("Failed to instanciate component due to an error.", e);
+        }
+    }
+
     public static <T extends EvoalComponent<T>> T createComponentForAttribute(final Class<T> type, final Instance configuration, final String attributeName) {
         final LanguageHelper helper = BeanFactory.create(LanguageHelper.class);
         final Instance child = helper.lookup(configuration, attributeName);

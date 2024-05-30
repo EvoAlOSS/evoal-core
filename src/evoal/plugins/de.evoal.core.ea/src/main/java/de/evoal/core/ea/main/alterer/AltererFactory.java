@@ -8,6 +8,8 @@ import de.evoal.core.api.optimisation.OptimisationValue;
 import de.evoal.core.ea.api.codec.CustomCodec;
 import de.evoal.core.ea.api.codec.program.Operation;
 import de.evoal.core.ea.api.operators.AltererComponent;
+import de.evoal.core.ea.api.operators.AltererComponentProvider;
+import de.evoal.core.ea.api.operators.SelectorComponent;
 import de.evoal.core.ea.main.alterer.internal.MeanCorrelationAlterer;
 import de.evoal.core.ea.main.alterer.mutator.SingleBitFlipMutator;
 import de.evoal.core.ea.main.alterer.crossover.*;
@@ -88,8 +90,11 @@ public class AltererFactory {
 			case "single-node-crossover": return (Alterer<G, OptimisationValue>) createSingleNodeCrossover(config);
 		}
 
-
-		return BeanFactory.createComponent(AltererComponent.class, config);
+		try {
+			return BeanFactory.createComponent(AltererComponent.class, config);
+		} catch(final IllegalStateException e) {
+			return BeanFactory.createComponentUsingProvider(AltererComponentProvider.class, config);
+		}
 	}
 
 	private <G extends TreeGene<?, G>> Alterer<G, OptimisationValue> createSingleNodeCrossover(Instance config) {
