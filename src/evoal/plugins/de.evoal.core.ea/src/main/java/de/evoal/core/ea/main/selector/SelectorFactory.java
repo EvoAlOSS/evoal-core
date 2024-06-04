@@ -62,11 +62,7 @@ public class SelectorFactory {
 			case "roulette-wheel-selector": return createRouletteWheelSelector(config);
 		}
 
-		try {
-			return BeanFactory.createComponent(SelectorComponent.class, config);
-		} catch(final RuntimeException e) {
-			return BeanFactory.createComponentUsingProvider(SelectorComponentProvider.class, config);
-		}
+		return BeanFactory.createComponent(SelectorComponent.class, SelectorComponentProvider.class, config);
 	}
 
 	private <G extends Gene<?, G>, C extends Comparable<? super C>> Selector<G, C> createNSGA2Selector(final Instance config) {

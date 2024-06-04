@@ -1,15 +1,12 @@
 package de.evoal.core.ea.main.alterer;
 
-import java.util.List;
 import java.util.function.BiFunction;
 
 import de.evoal.core.api.cdi.BeanFactory;
 import de.evoal.core.api.optimisation.OptimisationValue;
 import de.evoal.core.ea.api.codec.CustomCodec;
-import de.evoal.core.ea.api.codec.program.Operation;
 import de.evoal.core.ea.api.operators.AltererComponent;
 import de.evoal.core.ea.api.operators.AltererComponentProvider;
-import de.evoal.core.ea.api.operators.SelectorComponent;
 import de.evoal.core.ea.main.alterer.internal.MeanCorrelationAlterer;
 import de.evoal.core.ea.main.alterer.mutator.SingleBitFlipMutator;
 import de.evoal.core.ea.main.alterer.crossover.*;
@@ -24,7 +21,6 @@ import io.jenetics.ext.SingleNodeCrossover;
 import io.jenetics.ext.TreeGene;
 import io.jenetics.ext.rewriting.TreeRewriter;
 import io.jenetics.prog.MathRewriteAlterer;
-import io.jenetics.prog.op.MathExpr;
 import io.jenetics.prog.op.Op;
 import io.jenetics.util.Mean;
 import javax.enterprise.context.ApplicationScoped;
@@ -90,11 +86,7 @@ public class AltererFactory {
 			case "single-node-crossover": return (Alterer<G, OptimisationValue>) createSingleNodeCrossover(config);
 		}
 
-		try {
-			return BeanFactory.createComponent(AltererComponent.class, config);
-		} catch(final RuntimeException e) {
-			return BeanFactory.createComponentUsingProvider(AltererComponentProvider.class, config);
-		}
+		return BeanFactory.createComponent(AltererComponent.class, AltererComponentProvider.class, config);
 	}
 
 	private <G extends TreeGene<?, G>> Alterer<G, OptimisationValue> createSingleNodeCrossover(Instance config) {
@@ -124,8 +116,6 @@ public class AltererFactory {
 
 		return new Mutator<>(probability);
 	}
-
-
 
 	private <G extends Gene<?, G>> Alterer<G, OptimisationValue> createUniformCrossover(final Instance config) {
 		final Double crossoverProbability = helper.lookup(config, "crossover-probability");
