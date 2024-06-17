@@ -156,6 +156,18 @@ module de.evoal.core.optimisation {
 		 */
 		weights : array real;
 	}
+
+	/**
+	 * Compares the data in the specified order. First, the first data entry is compared.
+	 *   If the values differ, the comparison result is returned. If the values are equal,
+	 *   the next entry is taken into account.
+	 */
+	type 'hierarchical-comparator' extends comparator {
+	    /**
+	     * Comparison order of the fitness data.
+	     */
+	    order : array data;
+	}
 	
 	/**
 	 * Comparator for a single number-based fitness value (such as a double).

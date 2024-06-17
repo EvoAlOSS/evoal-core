@@ -1,6 +1,7 @@
 package de.evoal.core.api.languages;
 
 import de.evoal.languages.model.base.*;
+import de.evoal.languages.model.ddl.DataDescription;
 import de.evoal.languages.model.interpreter.ConstantExpressionEvaluator;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.emf.ecore.EObject;
@@ -54,6 +55,26 @@ public class ExpressionEvaluator {
                 .toArray();
     }
 
+    public DataDescription[] attributeToDataDescriptionArray(final Instance instance, final String attributeName) {
+        final Object result = attributeToObject(instance, attributeName);
+
+        if(!(result instanceof List<?> resultList)) {
+            log.error("Expression did not evaluate to a list for attribute {} which was expected.", attributeName);
+            throw new IllegalStateException("Expression evaluation error. Please check your configuration.");
+        }
+
+        final boolean allDataDescriptions = resultList.stream()
+                .allMatch(DataDescription.class::isInstance);
+
+        if(!allDataDescriptions) {
+            log.error("Expression did not evaluate to a list of numbers for attribute {} which was expected.", attributeName);
+            throw new IllegalStateException("Expression evaluation error. Please check your configuration.");
+        }
+
+        return resultList.stream()
+                .map(DataDescription.class::cast)
+                .toArray(DataDescription[]::new);
+    }
     public double[][] attributeToDoubleArrayArray(final Instance instance, final String attributeName) {
         final Object result = attributeToObject(instance, attributeName);
 

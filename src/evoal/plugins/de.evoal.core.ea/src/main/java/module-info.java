@@ -23,8 +23,10 @@ module de.evoal.core.ea {
     requires de.evoal.languages.model.ol;
     requires org.eclipse.emf.ecore;
 
+    exports de.evoal.core.ea.api.alterer;
     exports de.evoal.core.ea.api.cdi;
     exports de.evoal.core.ea.api.codec;
+    exports de.evoal.core.ea.api.codec.model;
     exports de.evoal.core.ea.api.codec.program;
     exports de.evoal.core.ea.api.initial;
     exports de.evoal.core.ea.api.operators;
@@ -33,8 +35,12 @@ module de.evoal.core.ea {
 
     opens de.evoal.core.ea.api.codec to weld.core.impl;
     opens de.evoal.core.ea.main.alterer to weld.core.impl;
+    opens de.evoal.core.ea.main.alterer.model to weld.core.impl;
+    opens de.evoal.core.ea.main.alterer.model.crossover to weld.core.impl;
+    opens de.evoal.core.ea.main.alterer.model.mutator to weld.core.impl;
     opens de.evoal.core.ea.main.alterer.mutator to weld.core.impl;
     opens de.evoal.core.ea.main.codec to weld.core.impl;
+    opens de.evoal.core.ea.main.codec.model to weld.core.impl;
     opens de.evoal.core.ea.main.codec.vector to weld.core.impl;
     opens de.evoal.core.ea.main.codec.vector.chromosome to weld.core.impl;
     opens de.evoal.core.ea.main.codec.program to weld.core.impl;
@@ -50,5 +56,6 @@ module de.evoal.core.ea {
     opens de.evoal.core.ea.main.statistics to weld.core.impl;
     opens de.evoal.core.ea.api.operators to weld.core.impl;
     opens de.evoal.core.ea.main.fitness.gof to weld.core.impl;
+    opens de.evoal.core.ea.api.alterer to weld.core.impl;
 
 }

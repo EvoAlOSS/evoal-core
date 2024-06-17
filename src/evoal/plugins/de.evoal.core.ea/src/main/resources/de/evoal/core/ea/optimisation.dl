@@ -361,4 +361,18 @@ module de.evoal.core.ea.optimisation {
 		probability : real;
 		threshold : real;
 	}
+
+    /**
+     * This mutator is a wrapper to its child mutators. For each mutation it selects one
+     *   of its children randomly and passes the mutation request to this child.
+     *
+     * This approach allows one to have different mutation strategies but to make sure
+     *   that an individual is not changed by all of them once. The normal way to avoid
+     *   an application of many mutators in a single step would normally be to set the
+     *   probabilities to very small values but this makes it very likely the individual
+     *   is not changed at all.
+     */
+    type 'single-choice-mutator' extends mutator {
+        'alterers' : array instance 'mutator';
+    }
 }

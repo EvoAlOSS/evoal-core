@@ -1,5 +1,6 @@
 package de.evoal.core.ea.main.alterer;
 
+import java.util.Arrays;
 import java.util.function.BiFunction;
 
 import de.evoal.core.api.cdi.BeanFactory;
@@ -11,6 +12,7 @@ import de.evoal.core.ea.main.alterer.internal.MeanCorrelationAlterer;
 import de.evoal.core.ea.main.alterer.mutator.SingleBitFlipMutator;
 import de.evoal.core.ea.main.alterer.crossover.*;
 import de.evoal.core.ea.main.alterer.mutator.SingleBitFlipCorrelationMutator;
+import de.evoal.core.ea.main.alterer.mutator.SingleChoiceMutator;
 import de.evoal.core.ea.main.alterer.mutator.SwapCorrelationMutator;
 import de.evoal.core.api.correlations.Correlations;
 import de.evoal.core.ea.main.codec.program.rewriters.*;
@@ -22,10 +24,13 @@ import io.jenetics.ext.TreeGene;
 import io.jenetics.ext.rewriting.TreeRewriter;
 import io.jenetics.prog.MathRewriteAlterer;
 import io.jenetics.prog.op.Op;
+import io.jenetics.util.ISeq;
 import io.jenetics.util.Mean;
 import javax.enterprise.context.ApplicationScoped;
 import lombok.extern.slf4j.Slf4j;
 
+import javax.enterprise.context.Dependent;
+import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -58,8 +63,7 @@ public class AltererFactory {
 
 		log.info("Creating alterer with name '{}'.", name);
 
-		switch(name) {
-			//case "CompositeAlterer": return createCompositeAlterer(config);
+		switch (name) {
 			case "mean-alterer": return createMeanAlterer(config);
 			case "correlation-mean-alterer": return (Alterer<G, OptimisationValue>) createCorrelationMeanAlterer(config);
 			case "partial-matched-alterer": return createPartiallyMatchedAlterer(config);
@@ -72,9 +76,8 @@ public class AltererFactory {
 			case "correlation-swap-mutator": return createCorrelationSwapMutator(config);
 			case "bit-flip-mutator": return createBitFlipMutator(config);
 			case "correlation-bit-flip-mutator": return createCorrelationBitFlipMutator(config);
-			case "mathematical-expression-rewriter": return (Alterer<G, OptimisationValue>)createRewriteMutator(config);
+			case "mathematical-expression-rewriter": return (Alterer<G, OptimisationValue>) createRewriteMutator(config);
 
-//			case "IntermediateCrossover": return createIntermediateCrossover(config);
 			case "line-crossover": return createLineCrossover(config);
 			case "correlation-line-crossover": return createCorrelationLineCrossover(config);
 			case "multi-point-crossover": return createMultiPointCrossover(config);
@@ -84,9 +87,22 @@ public class AltererFactory {
 			case "uniform-crossover": return createUniformCrossover(config);
 			case "correlation-uniform-crossover": return createCorrelationUniformCrossover(config);
 			case "single-node-crossover": return (Alterer<G, OptimisationValue>) createSingleNodeCrossover(config);
+
+			case "single-choice-mutator": return createSingleChoiceMutator(config);
 		}
 
 		return BeanFactory.createComponent(AltererComponent.class, AltererComponentProvider.class, config);
+	}
+
+	private <G extends Gene<?, G>> Alterer<G, OptimisationValue> createSingleChoiceMutator(final Instance config) {
+		final Object[] alterers = helper.lookup(config, "alterers");
+		final ISeq<Alterer> components =
+				Arrays.stream(alterers)
+						.map(Instance.class::cast)
+						.map(a -> create(a))
+						.collect(ISeq.toISeq());
+
+		return new SingleChoiceMutator(components);
 	}
 
 	private <G extends TreeGene<?, G>> Alterer<G, OptimisationValue> createSingleNodeCrossover(Instance config) {

@@ -6,6 +6,7 @@ import de.evoal.languages.model.ol.AlgorithmInstance;
 import de.evoal.languages.model.ol.OptimisationModule;
 import de.evoal.languages.model.ol.ProblemInstance;
 import lombok.extern.slf4j.Slf4j;
+import org.eclipse.emf.ecore.EObject;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -197,6 +198,11 @@ public class LanguageHelper {
         if((type instanceof InstanceType || type instanceof DataType) && current instanceof OrExpression) {
             return evaluator.evaluate(current);
         } else if(type instanceof LiteralType) {
+            if(!(current instanceof EObject)) {
+                log.info("Current is not an EObject, returning value.");
+                return current;
+            }
+
             return readExpression(current, type);
         } else if(type instanceof ArrayType) {
             return readArray(current, type);
