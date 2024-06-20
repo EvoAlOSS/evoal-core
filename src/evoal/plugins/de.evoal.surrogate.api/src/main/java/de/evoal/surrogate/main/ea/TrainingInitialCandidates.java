@@ -34,7 +34,6 @@ public class TrainingInitialCandidates implements InitialCandidatesProvider {
 
     private PropertiesSpecification totalSpecification;
 
-
     private Stream<Properties> createInitialPopulation() {
         final String filename = board.get(SurrogateBlackboardEntries.SURROGATE_TRAINING_DATA_FILE);
         final File trainingFile = new File(filename);

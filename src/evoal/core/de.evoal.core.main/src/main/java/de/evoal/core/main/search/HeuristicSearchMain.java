@@ -53,12 +53,4 @@ public class HeuristicSearchMain implements MainClass {
 		BeanFactory.createComponent(OptimisationAlgorithm.class, algorithmConfiguration)
 				.run();
 	}
-
-	private static void setTarget(final Stream<Pair<Properties, Properties>> targets, final Blackboard board) {
-		final Pair<Properties, Properties> targetProperties =
-					targets.findFirst()
-						   .orElseThrow(() -> {throw new IllegalStateException("No target point found");});
-
-		board.bind(CoreBlackboardEntries.TARGET_PROPERTIES, targetProperties.getSecond());
-	}
 }

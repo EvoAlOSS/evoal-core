@@ -9,10 +9,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.Produces;
 
-import de.evoal.core.api.properties.stream.FileBasedPropertiesStreamSupplier;
-import de.evoal.core.api.properties.stream.PropertiesBasedPropertiesPairStreamSupplier;
-import de.evoal.core.api.properties.stream.PropertiesBasedPropertiesStreamSupplier;
-import de.evoal.core.api.properties.stream.PropertiesStreamSupplier;
+import de.evoal.core.api.properties.stream.*;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
@@ -34,11 +31,11 @@ public class TargetPointLoader {
      */
     private PropertiesBasedPropertiesStreamSupplier loadedProperties;
 
-    private PropertiesStreamSupplier targetPoints;
+    private File inputFile;
 
     @SneakyThrows
     public void load(final @Observes BlackboardEntry entry) {
-        if (!CoreBlackboardEntries.TARGET_POINTS_FILE.equals(entry)) {
+        if (!CoreBlackboardEntries.TARGET_POINTS_FILE.equals(entry.getLabel())) {
             return;
         }
 
@@ -52,17 +49,34 @@ public class TargetPointLoader {
             throw new IllegalArgumentException("Unable to read target points file: " + inputFile);
         }
 
-        loadedProperties = new PropertiesBasedPropertiesStreamSupplier(new FileBasedPropertiesStreamSupplier(inputFile, PropertiesSpecification.builder().build()).get().collect(Collectors.toList()));
-        log.info("Loaded {} target points from '{}'", loadedProperties.size(), inputFile);
-        throw new IllegalStateException("Not yet implemented");        // TODO FIXME PROPERTIES
+        this.inputFile = inputFile;
     }
 
     @Produces @Named("target-stream")
-    public Stream<PropertiesPair> getTargetStream(
-            @Named("surrogate-source-properties-specification") final PropertiesSpecification sourceSpecification,
-            @Named("surrogate-target-properties-specification") final PropertiesSpecification targetSpecification) {
+    public PropertiesPairStreamSupplier getTargetStream(
+            @Named("search-space-specification") final PropertiesSpecification sourceSpecification,
+            @Named("optimisation-space-specification") final PropertiesSpecification targetSpecification
+       //     @Named("surrogate-source-properties-specification") final PropertiesSpecification sourceSpecification,
+       //     @Named("surrogate-target-properties-specification") final PropertiesSpecification targetSpecification
+        ) {
         log.info("Creating target stream using {} and {}.", sourceSpecification, targetSpecification);
+        loadedProperties(sourceSpecification, targetSpecification);
 
-        return new PropertiesBasedPropertiesPairStreamSupplier(targetPoints, /*sourceSpecification*/ PropertiesSpecification.builder().build(), targetSpecification).get();
+        return new PropertiesBasedPropertiesPairStreamSupplier(loadedProperties, sourceSpecification, targetSpecification);
+    }
+
+    private void loadedProperties(final PropertiesSpecification sourceSpecification, final PropertiesSpecification targetSpecification) {
+        final PropertiesSpecification spec = PropertiesSpecification.builder()
+                .add(sourceSpecification)
+                .add(targetSpecification)
+                .build();
+
+        if(loadedProperties == null) {
+            loadedProperties = new PropertiesBasedPropertiesStreamSupplier(
+                    new FileBasedPropertiesStreamSupplier(inputFile, spec)
+                            .get()
+                            .collect(Collectors.toList()));
+            log.info("Loaded {} target points from '{}'", loadedProperties.size(), inputFile);
+        }
     }
 }

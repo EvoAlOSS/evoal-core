@@ -8,6 +8,7 @@ import de.evoal.core.api.properties.PropertiesPair;
 import de.evoal.core.api.board.Blackboard;
 import javax.enterprise.context.ApplicationScoped;
 
+import de.evoal.core.api.properties.stream.PropertiesPairStreamSupplier;
 import de.evoal.core.api.statistics.writer.Column;
 import de.evoal.core.api.statistics.writer.ColumnType;
 import de.evoal.core.api.statistics.writer.WriterContext;
@@ -53,7 +54,7 @@ public class HeuristicSearchEvaluation implements MainClass {
     @BlackboardValue(CoreBlackboardEntries.EVALUATION_OUTPUT_FOLDER)
     private File outputBaseDir;
 
-    private List<Pair<Properties, Properties>> targets;
+    private List<PropertiesPair> targets;
 
     private Column targetColumn;
     private Column runColumn;
@@ -73,8 +74,8 @@ public class HeuristicSearchEvaluation implements MainClass {
         log.info("  running {} iterations.", iterations);
 
         if(targetFile != null) {
-            Stream<PropertiesPair> targetStream = BeanFactory.create("target-stream", Stream.class);
-            targets = targetStream.collect(Collectors.toList());
+            PropertiesPairStreamSupplier targetStream = BeanFactory.create("target-stream", PropertiesPairStreamSupplier.class);
+            targets = targetStream.get().toList();
         }
 
         log.info("Processing {} targets during evaluation.", targets.size());
@@ -101,7 +102,7 @@ public class HeuristicSearchEvaluation implements MainClass {
     }
 
     private int targetIndex = 0;
-    private void processTarget(final Pair<Properties, Properties> target) {
+    private void processTarget(final PropertiesPair target) {
         final int targetIndex = this.targetIndex++;
 
         context.bindColumn(targetColumn, targetIndex);
