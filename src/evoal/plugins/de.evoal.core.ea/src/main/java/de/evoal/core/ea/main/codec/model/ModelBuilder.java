@@ -6,10 +6,7 @@ import io.jenetics.util.RandomRegistry;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Stream;
 
 @Slf4j
@@ -82,11 +79,22 @@ public record ModelBuilder(TypeDefinition root, Map<TypeDefinition, Set<TypeDefi
         final Instance instance = FACTORY.createInstance();
         instance.setDefinition(definition);
 
-        for(AttributeDefinition attributeDef : definition.getAttributes()) {
+        for(AttributeDefinition attributeDef : allAttributes(definition)) {
             instance.getAttributes().add(random(attributeDef));
         }
 
         return instance;
+    }
+
+    private Collection<AttributeDefinition> allAttributes(final TypeDefinition definition) {
+        if(definition == null) {
+            return new ArrayList<>();
+        }
+
+        final Collection<AttributeDefinition> attributes = allAttributes(definition.getSuperType());
+        attributes.addAll(definition.getAttributes());
+
+        return attributes;
     }
 
     /**
