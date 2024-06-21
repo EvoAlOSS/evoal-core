@@ -23,6 +23,7 @@ module example {
     'number-of-generations' := 1000;
     'size-of-population' := 100;
     'maximum-age' := 1000;
+    'offspring-fraction' := 0.6;
 
     'initialisation' := 'random-tree-population' {};
 

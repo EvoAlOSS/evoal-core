@@ -26,7 +26,8 @@ module search {
 		'number-of-generations' := 100;
 		'size-of-population' := 50;
 		'maximum-age' := 100;
-	
+	    'offspring-fraction' := 0.6;
+
 		'initialisation' := 'random-population' {};
 		
 		'comparator' := 'numeric-comparator' {};
