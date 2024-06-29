@@ -66,5 +66,4 @@ public class ComponentProducer {
     public InitialCandidatesProvider createInitialCandidatesProvider(final InjectionPoint ip) {
         return create(InitialCandidatesProvider.class, CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, "algorithm.initialisation");
     }
-
 }

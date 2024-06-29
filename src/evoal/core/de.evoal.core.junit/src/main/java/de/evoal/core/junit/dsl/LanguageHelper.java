@@ -83,7 +83,7 @@ public final class LanguageHelper {
 
             return (T) resource.getContents().get(0);
         } catch (final Exception e) {
-            log.error("Unable to to generator file '{}'.", name, e);
+            log.error("Unable to load model file '{}'.", name, e);
             throw new IllegalStateException();
         }
     }

@@ -318,7 +318,6 @@ public final class Requirements {
      *
      * @param value The value to check.
      * @param clazz The class for checking
-     * @return {@code true} iff {@code value instanceof clazz}.
      */
     public static void requireInstanceOf(final Object value, final Class<?> clazz) {
         requireNotNull(value);

@@ -35,6 +35,7 @@ public class PropertiesBoundaries {
             builder.append(entry.getKey().name());
             builder.append(" < ");
             builder.append(entry.getValue().upper);
+            builder.append(", ");
         }
 
         builder.append("]");
