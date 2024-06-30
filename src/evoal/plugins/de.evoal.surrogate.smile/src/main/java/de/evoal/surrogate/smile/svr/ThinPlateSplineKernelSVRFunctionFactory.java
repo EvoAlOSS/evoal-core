@@ -11,11 +11,11 @@ import javax.enterprise.context.Dependent;
 import javax.inject.Named;
 
 @Dependent
-@Named("thin-plate-spine-svr")
+@Named("thin-plate-spline-svr")
 @Slf4j
 public class ThinPlateSplineKernelSVRFunctionFactory extends KernelBasedSVRFunctionFactory {
 	public ThinPlateSplineKernelSVRFunctionFactory() {
-		super(KernelHelper::toThinPlateSplineKernel, "thin-plate-spine-smile");
+		super(KernelHelper::toThinPlateSplineKernel, "thin-plate-spline");
 	}
 
 	@Override

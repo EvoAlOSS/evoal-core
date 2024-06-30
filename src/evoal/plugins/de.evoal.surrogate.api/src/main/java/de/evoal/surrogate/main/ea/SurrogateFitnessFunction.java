@@ -10,7 +10,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 @Dependent
-@Named("surrogate")
+@Named("de.evoal.surrogate.optimisation.surrogate")
 public class SurrogateFitnessFunction implements OptimisationFunction {
 
     @Inject

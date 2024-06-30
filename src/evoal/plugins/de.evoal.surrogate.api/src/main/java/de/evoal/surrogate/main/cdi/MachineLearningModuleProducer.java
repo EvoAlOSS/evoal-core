@@ -42,6 +42,11 @@ public class MachineLearningModuleProducer {
 
         final File file = new File(configurationFile);
 
+        if(!file.exists()) {
+            log.info("Specified configuration file '{}' does not exist.", file);
+            throw  new IllegalArgumentException("Please specify an existing mll file.");
+        }
+
         if(!file.isFile()) {
             log.info("Configured surrogate configuration is a folder.");
             throw  new IllegalArgumentException("Please specify a surrogate file.");

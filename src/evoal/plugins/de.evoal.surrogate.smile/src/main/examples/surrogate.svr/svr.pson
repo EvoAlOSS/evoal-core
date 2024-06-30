@@ -1,0 +1,790 @@
+{
+  "mappings" : [ {
+    "functions" : [ {
+      "inputDimensions" : [ "x:0" ],
+      "name" : "gaussian-svr",
+      "outputDimensions" : [ "y:0" ],
+      "parameters" : [ {
+        "name" : "ε",
+        "value" : {
+          "type" : "double",
+          "value" : 1.4
+        }
+      }, {
+        "name" : "σ",
+        "value" : {
+          "type" : "double",
+          "value" : 3.0
+        }
+      }, {
+        "name" : "soft-margin",
+        "value" : {
+          "type" : "double",
+          "value" : 0.15
+        }
+      }, {
+        "name" : "tolerance",
+        "value" : {
+          "type" : "double",
+          "value" : 0.1
+        }
+      } ],
+      "state" : [ {
+        "name" : "weights",
+        "value" : {
+          "type" : "array(double)",
+          "size" : 12,
+          "value" : [ -0.15, -0.15, 0.15, -0.15, -0.15, -0.15, -0.15, 0.15, 0.15, 0.15, 0.15, 0.15 ]
+        }
+      }, {
+        "name" : "intercept",
+        "value" : {
+          "type" : "double",
+          "value" : 0.0417146280206614
+        }
+      }, {
+        "name" : "instances",
+        "value" : {
+          "type" : "array(array(double))",
+          "size-1" : 12,
+          "size-2" : 1,
+          "value" : [ 0.17459330006558169, 0.09533590213401227, -2.604200889454755, 0.16643981079824513, 0.08381737799939828, 0.10759983834987694, 0.1013896078724885, -2.500344372261837, 1.8345969321754696, -2.0008917893289686, -1.6236595713864053, 2.0796236464073345 ]
+        }
+      }, {
+        "name" : "kernel",
+        "value" : {
+          "type" : "string",
+          "value" : "gaussian"
+        }
+      }, {
+        "name" : "kernel-source-means",
+        "value" : {
+          "type" : "array(double)",
+          "size" : 1,
+          "value" : [ -0.6103196010752969 ]
+        }
+      }, {
+        "name" : "kernel-source-sds",
+        "value" : {
+          "type" : "array(double)",
+          "size" : 1,
+          "value" : [ 5.470498144987709 ]
+        }
+      }, {
+        "name" : "kernel-target-means",
+        "value" : {
+          "type" : "array(double)",
+          "size" : 1,
+          "value" : [ 11.806350514646457 ]
+        }
+      }, {
+        "name" : "kernel-target-sds",
+        "value" : {
+          "type" : "array(double)",
+          "size" : 1,
+          "value" : [ 5.222154183635049 ]
+        }
+      } ],
+      "outputParameters" : { }
+    }, {
+      "inputDimensions" : [ "x:0" ],
+      "name" : "hellinger-svr",
+      "outputDimensions" : [ "y:1" ],
+      "parameters" : [ {
+        "name" : "ε",
+        "value" : {
+          "type" : "double",
+          "value" : 1.4
+        }
+      }, {
+        "name" : "σ",
+        "value" : {
+          "type" : "double",
+          "value" : 3.0
+        }
+      }, {
+        "name" : "soft-margin",
+        "value" : {
+          "type" : "double",
+          "value" : 0.15
+        }
+      }, {
+        "name" : "tolerance",
+        "value" : {
+          "type" : "double",
+          "value" : 0.1
+        }
+      } ],
+      "state" : [ {
+        "name" : "weights",
+        "value" : {
+          "type" : "array(double)",
+          "size" : 6,
+          "value" : [ -0.15, 0.15, -0.15, -0.15, 0.15, 0.15 ]
+        }
+      }, {
+        "name" : "intercept",
+        "value" : {
+          "type" : "double",
+          "value" : -0.8230772829439774
+        }
+      }, {
+        "name" : "instances",
+        "value" : {
+          "type" : "array(array(double))",
+          "size-1" : 6,
+          "size-2" : 1,
+          "value" : [ 0.09533590213401227, 1.6277402280982993, 0.10759983834987694, 0.1013896078724885, 1.8345969321754696, 2.0796236464073345 ]
+        }
+      }, {
+        "name" : "kernel",
+        "value" : {
+          "type" : "string",
+          "value" : "hellinger"
+        }
+      }, {
+        "name" : "kernel-source-means",
+        "value" : {
+          "type" : "array(double)",
+          "size" : 1,
+          "value" : [ -0.6103196010752969 ]
+        }
+      }, {
+        "name" : "kernel-source-sds",
+        "value" : {
+          "type" : "array(double)",
+          "size" : 1,
+          "value" : [ 5.470498144987709 ]
+        }
+      }, {
+        "name" : "kernel-target-means",
+        "value" : {
+          "type" : "array(double)",
+          "size" : 1,
+          "value" : [ 11.806350514646457 ]
+        }
+      }, {
+        "name" : "kernel-target-sds",
+        "value" : {
+          "type" : "array(double)",
+          "size" : 1,
+          "value" : [ 5.222154183635049 ]
+        }
+      } ],
+      "outputParameters" : { }
+    }, {
+      "inputDimensions" : [ "x:0" ],
+      "name" : "hyperbolic-tangent-svr",
+      "outputDimensions" : [ "y:2" ],
+      "parameters" : [ {
+        "name" : "ε",
+        "value" : {
+          "type" : "double",
+          "value" : 1.4
+        }
+      }, {
+        "name" : "σ",
+        "value" : {
+          "type" : "double",
+          "value" : 3.0
+        }
+      }, {
+        "name" : "soft-margin",
+        "value" : {
+          "type" : "double",
+          "value" : 0.15
+        }
+      }, {
+        "name" : "tolerance",
+        "value" : {
+          "type" : "double",
+          "value" : 0.1
+        }
+      }, {
+        "name" : "scale",
+        "value" : {
+          "type" : "double",
+          "value" : 1.0
+        }
+      }, {
+        "name" : "offset",
+        "value" : {
+          "type" : "double",
+          "value" : 1.0
+        }
+      } ],
+      "state" : [ {
+        "name" : "weights",
+        "value" : {
+          "type" : "array(double)",
+          "size" : 60,
+          "value" : [ -0.15, -0.15, -0.15, -0.15, -0.15, -0.15, -0.15, 0.15, -0.15, 0.15, 0.15, 0.15, -0.15, 0.15, 0.15, 0.15, -0.15, -0.15, 0.15, -0.15, -0.15, 0.15, 0.15, 0.15, 0.15, -0.15, 0.15, 0.15, -0.15, 0.15, 0.15, -0.15, 0.15, 0.15, -0.15, -0.15, -0.15, -0.15, -0.15, 0.15, -0.15, -0.15, -0.15, -0.15, 0.15, -0.15, 0.15, -0.15, 0.15, 0.15, -0.15, 0.15, -0.15, 0.15, 0.15, 0.15, -0.15, 0.15, 0.15, 0.15 ]
+        }
+      }, {
+        "name" : "intercept",
+        "value" : {
+          "type" : "double",
+          "value" : 1.3974989686120836
+        }
+      }, {
+        "name" : "instances",
+        "value" : {
+          "type" : "array(array(double))",
+          "size-1" : 60,
+          "size-2" : 1,
+          "value" : [ -0.023093791040722806, 0.40078924370621627, 0.4374286466081016, -0.2268724140552435, 0.2345878115649311, -0.15045893680354633, -0.44164504753740136, 1.1433942270247412, -0.1133008968106269, 1.2913265691526115, 1.0721289290379434, 1.2985664093528673, 0.2851610861630415, -1.4892817530382996, -1.1920580757895376, -1.1298902939882822, 0.17459330006558169, -0.03443412945136732, 1.3641673402175996, 0.09533590213401227, -0.34296663541322886, -2.604200889454755, -1.3117188740474632, -1.7161722522631557, -1.5469585567452122, 0.16643981079824513, 1.541378351562666, -1.2533978920861963, -0.04782493703947221, -1.0742687635430064, -1.2081361687931913, -0.21018698997517304, 1.6277402280982993, 1.3390216415921294, 0.08381737799939828, 0.10759983834987694, 0.2522154571111911, -0.08894222242509167, -0.008603236794774658, -1.694741435729894, 0.1013896078724885, -0.04509503850750227, -0.15150077396112652, -0.043549598016715235, -2.500344372261837, -0.045187957663267, -1.3062171023029068, -0.31722207952643194, 1.8345969321754696, 1.1980206130499702, -0.015296288594253181, 1.5446490462794777, 0.42458240536065356, -2.0008917893289686, 1.1080029529305813, -1.0883348853521813, -0.02796262418601371, -1.6236595713864053, 1.773348590748642, 2.0796236464073345 ]
+        }
+      }, {
+        "name" : "kernel",
+        "value" : {
+          "type" : "string",
+          "value" : "hyperbolic-tangent"
+        }
+      }, {
+        "name" : "kernel-source-means",
+        "value" : {
+          "type" : "array(double)",
+          "size" : 1,
+          "value" : [ -0.6103196010752969 ]
+        }
+      }, {
+        "name" : "kernel-source-sds",
+        "value" : {
+          "type" : "array(double)",
+          "size" : 1,
+          "value" : [ 5.470498144987709 ]
+        }
+      }, {
+        "name" : "kernel-target-means",
+        "value" : {
+          "type" : "array(double)",
+          "size" : 1,
+          "value" : [ 11.806350514646457 ]
+        }
+      }, {
+        "name" : "kernel-target-sds",
+        "value" : {
+          "type" : "array(double)",
+          "size" : 1,
+          "value" : [ 5.222154183635049 ]
+        }
+      } ],
+      "outputParameters" : { }
+    }, {
+      "inputDimensions" : [ "x:0" ],
+      "name" : "laplacian-svr",
+      "outputDimensions" : [ "y:3" ],
+      "parameters" : [ {
+        "name" : "ε",
+        "value" : {
+          "type" : "double",
+          "value" : 1.4
+        }
+      }, {
+        "name" : "σ",
+        "value" : {
+          "type" : "double",
+          "value" : 3.0
+        }
+      }, {
+        "name" : "soft-margin",
+        "value" : {
+          "type" : "double",
+          "value" : 0.15
+        }
+      }, {
+        "name" : "tolerance",
+        "value" : {
+          "type" : "double",
+          "value" : 0.1
+        }
+      } ],
+      "state" : [ {
+        "name" : "weights",
+        "value" : {
+          "type" : "array(double)",
+          "size" : 8,
+          "value" : [ -0.15, -0.15, -0.15, -0.15, 0.15, 0.15, 0.15, 0.15 ]
+        }
+      }, {
+        "name" : "intercept",
+        "value" : {
+          "type" : "double",
+          "value" : 0.0157650813252283
+        }
+      }, {
+        "name" : "instances",
+        "value" : {
+          "type" : "array(array(double))",
+          "size-1" : 8,
+          "size-2" : 1,
+          "value" : [ 0.09533590213401227, 0.08381737799939828, 0.10759983834987694, 0.1013896078724885, -2.500344372261837, 1.8345969321754696, -2.0008917893289686, 2.0796236464073345 ]
+        }
+      }, {
+        "name" : "kernel",
+        "value" : {
+          "type" : "string",
+          "value" : "laplacian"
+        }
+      }, {
+        "name" : "kernel-source-means",
+        "value" : {
+          "type" : "array(double)",
+          "size" : 1,
+          "value" : [ -0.6103196010752969 ]
+        }
+      }, {
+        "name" : "kernel-source-sds",
+        "value" : {
+          "type" : "array(double)",
+          "size" : 1,
+          "value" : [ 5.470498144987709 ]
+        }
+      }, {
+        "name" : "kernel-target-means",
+        "value" : {
+          "type" : "array(double)",
+          "size" : 1,
+          "value" : [ 11.806350514646457 ]
+        }
+      }, {
+        "name" : "kernel-target-sds",
+        "value" : {
+          "type" : "array(double)",
+          "size" : 1,
+          "value" : [ 5.222154183635049 ]
+        }
+      } ],
+      "outputParameters" : { }
+    }, {
+      "inputDimensions" : [ "x:0" ],
+      "name" : "linear-svr",
+      "outputDimensions" : [ "y:4" ],
+      "parameters" : [ {
+        "name" : "ε",
+        "value" : {
+          "type" : "double",
+          "value" : 1.4
+        }
+      }, {
+        "name" : "σ",
+        "value" : {
+          "type" : "double",
+          "value" : 3.0
+        }
+      }, {
+        "name" : "soft-margin",
+        "value" : {
+          "type" : "double",
+          "value" : 0.15
+        }
+      }, {
+        "name" : "tolerance",
+        "value" : {
+          "type" : "double",
+          "value" : 0.1
+        }
+      } ],
+      "state" : [ {
+        "name" : "weights",
+        "value" : {
+          "type" : "array(double)",
+          "size" : 12,
+          "value" : [ -0.11467900437569942, -0.15, -0.15, 0.15, -0.15, -0.15, -0.15, 0.15, 0.15, 0.15, 0.11467900437569942, 0.15 ]
+        }
+      }, {
+        "name" : "intercept",
+        "value" : {
+          "type" : "double",
+          "value" : -0.15557435037557635
+        }
+      }, {
+        "name" : "instances",
+        "value" : {
+          "type" : "array(array(double))",
+          "size-1" : 12,
+          "size-2" : 1,
+          "value" : [ 0.17459330006558169, 0.09533590213401227, 0.16643981079824513, 1.6277402280982993, 0.08381737799939828, 0.10759983834987694, 0.1013896078724885, -2.500344372261837, 1.8345969321754696, -2.0008917893289686, -1.6236595713864053, 2.0796236464073345 ]
+        }
+      }, {
+        "name" : "kernel",
+        "value" : {
+          "type" : "string",
+          "value" : "linear"
+        }
+      }, {
+        "name" : "kernel-source-means",
+        "value" : {
+          "type" : "array(double)",
+          "size" : 1,
+          "value" : [ -0.6103196010752969 ]
+        }
+      }, {
+        "name" : "kernel-source-sds",
+        "value" : {
+          "type" : "array(double)",
+          "size" : 1,
+          "value" : [ 5.470498144987709 ]
+        }
+      }, {
+        "name" : "kernel-target-means",
+        "value" : {
+          "type" : "array(double)",
+          "size" : 1,
+          "value" : [ 11.806350514646457 ]
+        }
+      }, {
+        "name" : "kernel-target-sds",
+        "value" : {
+          "type" : "array(double)",
+          "size" : 1,
+          "value" : [ 5.222154183635049 ]
+        }
+      } ],
+      "outputParameters" : { }
+    }, {
+      "inputDimensions" : [ "x:0" ],
+      "name" : "pearson-svr",
+      "outputDimensions" : [ "y:5" ],
+      "parameters" : [ {
+        "name" : "ε",
+        "value" : {
+          "type" : "double",
+          "value" : 1.4
+        }
+      }, {
+        "name" : "σ",
+        "value" : {
+          "type" : "double",
+          "value" : 3.0
+        }
+      }, {
+        "name" : "soft-margin",
+        "value" : {
+          "type" : "double",
+          "value" : 0.15
+        }
+      }, {
+        "name" : "tolerance",
+        "value" : {
+          "type" : "double",
+          "value" : 0.1
+        }
+      }, {
+        "name" : "ω",
+        "value" : {
+          "type" : "double",
+          "value" : 0.2
+        }
+      } ],
+      "state" : [ {
+        "name" : "weights",
+        "value" : {
+          "type" : "array(double)",
+          "size" : 11,
+          "value" : [ -0.0638878310361942, -0.15, 0.09473920275117723, -0.08635110753490154, -0.15, -0.15, 0.15, 0.05526079724882276, 0.15, 0.08635110753490154, 0.0638878310361942 ]
+        }
+      }, {
+        "name" : "intercept",
+        "value" : {
+          "type" : "double",
+          "value" : -0.03587301284851803
+        }
+      }, {
+        "name" : "instances",
+        "value" : {
+          "type" : "array(array(double))",
+          "size-1" : 11,
+          "size-2" : 1,
+          "value" : [ 0.2851610861630415, 0.09533590213401227, -2.604200889454755, 0.08381737799939828, 0.10759983834987694, 0.1013896078724885, -2.500344372261837, 1.8345969321754696, -2.0008917893289686, -1.6236595713864053, 2.0796236464073345 ]
+        }
+      }, {
+        "name" : "kernel",
+        "value" : {
+          "type" : "string",
+          "value" : "pearson"
+        }
+      }, {
+        "name" : "kernel-source-means",
+        "value" : {
+          "type" : "array(double)",
+          "size" : 1,
+          "value" : [ -0.6103196010752969 ]
+        }
+      }, {
+        "name" : "kernel-source-sds",
+        "value" : {
+          "type" : "array(double)",
+          "size" : 1,
+          "value" : [ 5.470498144987709 ]
+        }
+      }, {
+        "name" : "kernel-target-means",
+        "value" : {
+          "type" : "array(double)",
+          "size" : 1,
+          "value" : [ 11.806350514646457 ]
+        }
+      }, {
+        "name" : "kernel-target-sds",
+        "value" : {
+          "type" : "array(double)",
+          "size" : 1,
+          "value" : [ 5.222154183635049 ]
+        }
+      } ],
+      "outputParameters" : { }
+    }, {
+      "inputDimensions" : [ "x:0" ],
+      "name" : "polynomial-svr",
+      "outputDimensions" : [ "y:6" ],
+      "parameters" : [ {
+        "name" : "ε",
+        "value" : {
+          "type" : "double",
+          "value" : 1.4
+        }
+      }, {
+        "name" : "σ",
+        "value" : {
+          "type" : "double",
+          "value" : 3.0
+        }
+      }, {
+        "name" : "soft-margin",
+        "value" : {
+          "type" : "double",
+          "value" : 0.15
+        }
+      }, {
+        "name" : "tolerance",
+        "value" : {
+          "type" : "double",
+          "value" : 0.1
+        }
+      }, {
+        "name" : "degree",
+        "value" : {
+          "type" : "integer",
+          "value" : 2
+        }
+      }, {
+        "name" : "scale",
+        "value" : {
+          "type" : "double",
+          "value" : 1.0
+        }
+      }, {
+        "name" : "offset",
+        "value" : {
+          "type" : "double",
+          "value" : 1.0
+        }
+      } ],
+      "state" : [ {
+        "name" : "weights",
+        "value" : {
+          "type" : "array(double)",
+          "size" : 3,
+          "value" : [ 0.06996345943024668, -0.1386385001529027, 0.068675040722656 ]
+        }
+      }, {
+        "name" : "intercept",
+        "value" : {
+          "type" : "double",
+          "value" : -0.8266398863432209
+        }
+      }, {
+        "name" : "instances",
+        "value" : {
+          "type" : "array(array(double))",
+          "size-1" : 3,
+          "size-2" : 1,
+          "value" : [ 1.2985664093528673, 0.10759983834987694, -1.6236595713864053 ]
+        }
+      }, {
+        "name" : "kernel",
+        "value" : {
+          "type" : "string",
+          "value" : "polynomial"
+        }
+      }, {
+        "name" : "kernel-source-means",
+        "value" : {
+          "type" : "array(double)",
+          "size" : 1,
+          "value" : [ -0.6103196010752969 ]
+        }
+      }, {
+        "name" : "kernel-source-sds",
+        "value" : {
+          "type" : "array(double)",
+          "size" : 1,
+          "value" : [ 5.470498144987709 ]
+        }
+      }, {
+        "name" : "kernel-target-means",
+        "value" : {
+          "type" : "array(double)",
+          "size" : 1,
+          "value" : [ 11.806350514646457 ]
+        }
+      }, {
+        "name" : "kernel-target-sds",
+        "value" : {
+          "type" : "array(double)",
+          "size" : 1,
+          "value" : [ 5.222154183635049 ]
+        }
+      } ],
+      "outputParameters" : { }
+    }, {
+      "inputDimensions" : [ "x:0" ],
+      "name" : "thin-plate-spline-svr",
+      "outputDimensions" : [ "y:7" ],
+      "parameters" : [ {
+        "name" : "ε",
+        "value" : {
+          "type" : "double",
+          "value" : 1.4
+        }
+      }, {
+        "name" : "σ",
+        "value" : {
+          "type" : "double",
+          "value" : 3.0
+        }
+      }, {
+        "name" : "soft-margin",
+        "value" : {
+          "type" : "double",
+          "value" : 0.15
+        }
+      }, {
+        "name" : "tolerance",
+        "value" : {
+          "type" : "double",
+          "value" : 0.1
+        }
+      } ],
+      "state" : [ {
+        "name" : "weights",
+        "value" : {
+          "type" : "array(double)",
+          "size" : 2,
+          "value" : [ "NaN", "NaN" ]
+        }
+      }, {
+        "name" : "intercept",
+        "value" : {
+          "type" : "double",
+          "value" : -0.0
+        }
+      }, {
+        "name" : "instances",
+        "value" : {
+          "type" : "array(array(double))",
+          "size-1" : 2,
+          "size-2" : 1,
+          "value" : [ 0.10759983834987694, -2.500344372261837 ]
+        }
+      }, {
+        "name" : "kernel",
+        "value" : {
+          "type" : "string",
+          "value" : "thin-plate-spline"
+        }
+      }, {
+        "name" : "kernel-source-means",
+        "value" : {
+          "type" : "array(double)",
+          "size" : 1,
+          "value" : [ -0.6103196010752969 ]
+        }
+      }, {
+        "name" : "kernel-source-sds",
+        "value" : {
+          "type" : "array(double)",
+          "size" : 1,
+          "value" : [ 5.470498144987709 ]
+        }
+      }, {
+        "name" : "kernel-target-means",
+        "value" : {
+          "type" : "array(double)",
+          "size" : 1,
+          "value" : [ 11.806350514646457 ]
+        }
+      }, {
+        "name" : "kernel-target-sds",
+        "value" : {
+          "type" : "array(double)",
+          "size" : 1,
+          "value" : [ 5.222154183635049 ]
+        }
+      } ],
+      "outputParameters" : { }
+    } ],
+    "inputDimensions" : [ "x:0" ],
+    "name" : "transfer",
+    "outputDimensions" : [ "y:0", "y:1", "y:2", "y:3", "y:4", "y:5", "y:6", "y:7" ]
+  } ],
+  "outputParameters" : {
+    "y:2" : [ {
+      "name" : "r²",
+      "value" : {
+        "type" : "double",
+        "value" : -2.975012056690023
+      }
+    } ],
+    "y:1" : [ {
+      "name" : "r²",
+      "value" : {
+        "type" : "double",
+        "value" : "NaN"
+      }
+    } ],
+    "y:4" : [ {
+      "name" : "r²",
+      "value" : {
+        "type" : "double",
+        "value" : 0.010689669282402225
+      }
+    } ],
+    "y:3" : [ {
+      "name" : "r²",
+      "value" : {
+        "type" : "double",
+        "value" : 0.1659502698569817
+      }
+    } ],
+    "y:6" : [ {
+      "name" : "r²",
+      "value" : {
+        "type" : "double",
+        "value" : 0.14275343403643304
+      }
+    } ],
+    "y:5" : [ {
+      "name" : "r²",
+      "value" : {
+        "type" : "double",
+        "value" : 0.20063992660797703
+      }
+    } ],
+    "y:7" : [ {
+      "name" : "r²",
+      "value" : {
+        "type" : "double",
+        "value" : "NaN"
+      }
+    } ],
+    "y:0" : [ {
+      "name" : "r²",
+      "value" : {
+        "type" : "double",
+        "value" : 0.05441052242333999
+      }
+    } ]
+  }
+}

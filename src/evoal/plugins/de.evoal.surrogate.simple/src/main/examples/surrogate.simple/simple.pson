@@ -1,0 +1,112 @@
+{
+  "mappings" : [ {
+    "functions" : [ {
+      "inputDimensions" : [ "x:0" ],
+      "name" : "identity",
+      "outputDimensions" : [ "y:0" ],
+      "parameters" : [ ],
+      "state" : [ ],
+      "outputParameters" : { }
+    }, {
+      "inputDimensions" : [ "x:0" ],
+      "name" : "linear-regression",
+      "outputDimensions" : [ "y:1" ],
+      "parameters" : [ {
+        "name" : "intercept",
+        "value" : {
+          "type" : "double",
+          "value" : 0.0
+        }
+      }, {
+        "name" : "slope",
+        "value" : {
+          "type" : "double",
+          "value" : 1.0
+        }
+      } ],
+      "state" : [ {
+        "name" : "intercept",
+        "value" : {
+          "type" : "double",
+          "value" : 11.712570037202154
+        }
+      }, {
+        "name" : "slope",
+        "value" : {
+          "type" : "double",
+          "value" : -0.15365798063682554
+        }
+      }, {
+        "name" : "r²",
+        "value" : {
+          "type" : "double",
+          "value" : 0.025909832934437375
+        }
+      } ],
+      "outputParameters" : { }
+    }, {
+      "inputDimensions" : [ "x:0" ],
+      "name" : "simple-quadratic-regression",
+      "outputDimensions" : [ "y:2" ],
+      "parameters" : [ {
+        "name" : "intercept",
+        "value" : {
+          "type" : "double",
+          "value" : 0.0
+        }
+      }, {
+        "name" : "slope",
+        "value" : {
+          "type" : "double",
+          "value" : 1.0
+        }
+      } ],
+      "state" : [ {
+        "name" : "intercept",
+        "value" : {
+          "type" : "double",
+          "value" : 8.826315970399465
+        }
+      }, {
+        "name" : "slope",
+        "value" : {
+          "type" : "double",
+          "value" : 0.09933588719842316
+        }
+      }, {
+        "name" : "r²",
+        "value" : {
+          "type" : "double",
+          "value" : 0.5440278766948579
+        }
+      } ],
+      "outputParameters" : { }
+    } ],
+    "inputDimensions" : [ "x:0" ],
+    "name" : "transfer",
+    "outputDimensions" : [ "y:0", "y:1", "y:2" ]
+  } ],
+  "outputParameters" : {
+    "y:2" : [ {
+      "name" : "r²",
+      "value" : {
+        "type" : "double",
+        "value" : 0.5485875979279088
+      }
+    } ],
+    "y:1" : [ {
+      "name" : "r²",
+      "value" : {
+        "type" : "double",
+        "value" : 0.03565073460509294
+      }
+    } ],
+    "y:0" : [ {
+      "name" : "r²",
+      "value" : {
+        "type" : "double",
+        "value" : -7.063682935513912
+      }
+    } ]
+  }
+}

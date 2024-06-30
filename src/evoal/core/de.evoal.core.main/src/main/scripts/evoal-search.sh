@@ -14,7 +14,7 @@ fi
 cd "$1" || exit 1
 
 POSITIONAL_ARGUMENTS=( "$@" )
-POSITIONAL_ARGUMENTS=("${POSITIONAL_ARGUMENTS[@]:3}")
+ADDITIONAL_ARGUMENTS=("${POSITIONAL_ARGUMENTS[@]:3}")
 
 declare -a LOCAL_JVM_ARGUMENTS=()
 
@@ -27,13 +27,13 @@ if [ ${EVOAL_DEBUG+x} ]; then
 fi
 
 if [ ${EVOAL_LOGGING+x} ]; then
-  POSITIONAL_ARGUMENTS+=( "-Bcore:logging=$EVOAL_LOGGING" )
+  ADDITIONAL_ARGUMENTS+=( "-Bcore:logging=$EVOAL_LOGGING" )
 fi
 
 set -x
 java ${LOCAL_JVM_ARGUMENTS[@]} \
      ${EVOAL_JVM_ARGUMENTS[@]} \
-     ${POSITIONAL_ARGUMENTS[@]} \
-     -Bcore:main=heuristic-search \
+     "-Bcore:main=heuristic-search" \
      "-Bcore:optimisation-configuration-file=$2" \
-     "-Bcore:evaluation-output-folder=$3"
+     "-Bcore:evaluation-output-folder=$3" \
+     ${ADDITIONAL_ARGUMENTS[@]}
