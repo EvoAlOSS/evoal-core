@@ -5,7 +5,7 @@ import java.util.List;
 
 import de.evoal.core.api.properties.Properties;
 
-import de.evoal.core.api.correlations.Range;
+import de.evoal.optimisation.api.correlations.Range;
 import smile.math.matrix.Matrix;
 
 public class Hypercube {

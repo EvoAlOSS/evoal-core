@@ -19,9 +19,20 @@
             <artifactId>core.arff</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
+
         <dependency>
             <groupId>${project.parent.groupId}</groupId>
-            <artifactId>core.ea</artifactId>
+            <artifactId>optimisation.api</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.parent.groupId}</groupId>
+            <artifactId>optimisation.ea</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.parent.groupId}</groupId>
+            <artifactId>optimisation.pso</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
         <dependency>
@@ -37,11 +48,6 @@
         <dependency>
             <groupId>${project.parent.groupId}</groupId>
             <artifactId>surrogate.smile</artifactId>
-            <version>${project.parent.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.parent.groupId}</groupId>
-            <artifactId>core.pso</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
         <dependency>

@@ -2,8 +2,7 @@ package de.evoal.surrogate.main.cdi;
 
 import de.evoal.core.api.board.Blackboard;
 import de.evoal.core.api.board.BlackboardEntry;
-import de.evoal.core.api.board.CoreBlackboardEntries;
-import de.evoal.core.api.properties.PropertiesPair;
+import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.event.Observes;
@@ -17,7 +16,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.File;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @ApplicationScoped
 @Slf4j
@@ -35,7 +33,7 @@ public class TargetPointLoader {
 
     @SneakyThrows
     public void load(final @Observes BlackboardEntry entry) {
-        if (!CoreBlackboardEntries.TARGET_POINTS_FILE.equals(entry.getLabel())) {
+        if (!OptimisationBlackboardEntries.TARGET_POINTS_FILE.equals(entry.getLabel())) {
             return;
         }
 

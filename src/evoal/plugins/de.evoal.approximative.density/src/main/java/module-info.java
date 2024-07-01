@@ -12,7 +12,7 @@ module de.evoal.approximative.density {
     requires de.evoal.surrogate.api;
 
     requires smile.math;
-    requires de.evoal.core.ea;
+    requires de.evoal.optimisation.api;
     requires de.evoal.languages.model.base;
 
     opens de.evoal.approximative.density;

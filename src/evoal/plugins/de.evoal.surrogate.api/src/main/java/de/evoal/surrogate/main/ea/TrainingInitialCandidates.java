@@ -1,7 +1,7 @@
 package de.evoal.surrogate.main.ea;
 
 import de.evoal.core.api.board.Blackboard;
-import de.evoal.core.api.optimisation.InitialCandidatesProvider;
+import de.evoal.optimisation.api.model.InitialCandidatesProvider;
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.properties.stream.FileBasedPropertiesStreamSupplier;

@@ -1,22 +1,19 @@
 package de.evoal.generator.main.cdi;
 
 import de.evoal.core.api.languages.ExpressionEvaluator;
-import de.evoal.core.api.optimisation.OptimisationFunction;
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.properties.PropertySpecification;
-import de.evoal.core.api.utils.LanguageHelper;
 import de.evoal.generator.api.GeneratorFunction;
-import de.evoal.languages.model.base.AttributeDefinition;
 import de.evoal.languages.model.ddl.DataDescription;
 import de.evoal.languages.model.generator.GeneratorFactory;
 import de.evoal.languages.model.generator.Step;
-import de.evoal.languages.model.base.Attribute;
 import de.evoal.languages.model.instance.DataReference;
 import de.evoal.languages.model.base.Instance;
 import de.evoal.languages.model.instance.InstanceFactory;
 import lombok.SneakyThrows;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import de.evoal.optimisation.api.model.OptimisationFunction;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;

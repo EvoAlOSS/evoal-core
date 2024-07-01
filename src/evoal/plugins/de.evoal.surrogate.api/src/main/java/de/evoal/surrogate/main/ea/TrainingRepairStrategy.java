@@ -5,7 +5,7 @@ import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.properties.stream.FileBasedPropertiesStreamSupplier;
 import de.evoal.core.api.properties.stream.PropertiesStreamSupplier;
-import de.evoal.core.api.constraints.strategies.RepairStrategy;
+import de.evoal.optimisation.api.constraints.strategies.RepairStrategy;
 import de.evoal.languages.model.base.Instance;
 import de.evoal.surrogate.api.SurrogateBlackboardEntries;
 import io.jenetics.util.RandomRegistry;

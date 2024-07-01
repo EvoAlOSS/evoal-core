@@ -11,11 +11,12 @@ module de.evoal.surrogate.api {
     requires org.eclipse.emf.ecore;
     requires org.eclipse.emf.common;
     requires org.eclipse.xtext;
-    requires com.fasterxml.jackson.databind;
-    requires smile.math;
-    requires commons.math3;
-    requires io.jenetics.base;
 
+    requires com.fasterxml.jackson.databind;
+
+    requires commons.math3;
+    requires smile.math;
+    requires io.jenetics.base;
 
     requires de.evoal.core.main;
     requires de.evoal.languages.model.ddl;
@@ -27,7 +28,7 @@ module de.evoal.surrogate.api {
     requires de.evoal.languages.model.base.dsl;
     requires de.evoal.languages.model.mll.dsl;
     requires de.evoal.languages.model.instance;
-    requires de.evoal.core.ea;
+    requires de.evoal.optimisation.api;
     requires com.google.guice;
     requires de.evoal.languages.model.utils;
 

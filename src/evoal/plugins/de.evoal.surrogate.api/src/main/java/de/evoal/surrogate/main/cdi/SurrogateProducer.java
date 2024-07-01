@@ -2,7 +2,7 @@ package de.evoal.surrogate.main.cdi;
 
 import de.evoal.core.api.board.Blackboard;
 import de.evoal.core.api.board.BlackboardEntry;
-import de.evoal.core.api.board.CoreBlackboardEntries;
+import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
 import de.evoal.core.api.properties.info.PropertiesDependencies;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.properties.PropertySpecification;
@@ -58,7 +58,7 @@ public class SurrogateProducer {
         this.configuration = loader.apply(file);
         
         final EObject mlConfiguration = board.get(SurrogateBlackboardEntries.SURROGATE_CONFIGURATION);
-        final EObject eaConfiguration = board.get(CoreBlackboardEntries.OPTIMISATION_CONFIGURATION);
+        final EObject eaConfiguration = board.get(OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION);
 
         final Map<String, PropertySpecification> specifications = new HashMap<>();
         addDataFrom(specifications, mlConfiguration);

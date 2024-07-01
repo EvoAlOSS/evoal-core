@@ -1,0 +1,103 @@
+import "definitions" from de.evoal.optimisation.core;
+
+module de.evoal.optimisation.pso.optimisation {
+	type 'particle-swarm-optimisation' extends 'algorithm' {
+	    'swarm' : instance 'swarm';
+	    'size-of-population'  : int;
+	    'number-of-generations' : int;
+	    'neighborhood-size' : int;
+	    'mover' : instance 'pso-mover';
+	    'topology' : string;
+	}
+
+	abstract type 'swarm' {
+	}
+
+	type 'default-swarm' extends 'swarm' {
+	}
+
+	type 'arpso-swarm' extends 'swarm' {
+        'diversity-low' : real;
+        'diversity-high' : real;
+	}
+
+    /**
+     * Base type for all particle swarm moving strategies.
+     */
+	abstract type 'pso-mover' {
+	    'boundary-type' : string;
+	}
+
+    /**
+     * Basic PSO moving strategy.
+     */
+	type 'basic-mover' extends 'pso-mover' {
+	    /**
+	     * Starting value of inertia weight.
+	     */
+	    'inertia-start' : int;
+
+	    /**
+	     * Ending value of inertia weight.
+	     */
+	    'inertia-end' : int;
+
+        /**
+         * Parameter c1 of basic PSO kinematic equation.
+         */
+        'c1' : int;
+
+        /**
+         * Paramter c2 of basic PSO kinematic equation.
+         */
+         'c2' : int;
+	}
+
+    /**
+     * Fully informed particle swarm (FIPS) mover of Rui Mendes.
+     */
+	type 'fips-mover' extends 'pso-mover' {
+	    /**
+	     * Parameter phi of FIPS mover.
+	     */
+	    phi : int;
+	}
+
+	type 'constriction-factor-mover' extends 'pso-mover' {
+         /**
+          * Parameter c1 of basic PSO kinematic equation.
+          */
+         'c1' : int;
+
+         /**
+          * Paramter c2 of basic PSO kinematic equation.
+          */
+          'c2' : int;
+    }
+
+    /**
+     *  Attractive-repulsive PSO Mover (short ARPSOMover), based on the paper of
+     *    Riget and Vesterstrom.
+     */
+    type 'attractive-repulsive-mover' extends 'pso-mover' {
+	    /**
+	     * Starting value of inertia weight.
+	     */
+	    'inertia-start' : int;
+
+	    /**
+	     * Ending value of inertia weight.
+	     */
+	    'inertia-end' : int;
+
+        /**
+         * Parameter c1 of basic PSO kinematic equation.
+         */
+        'c1' : int;
+
+        /**
+         * Parameter c2 of basic PSO kinematic equation.
+         */
+         'c2' : int;
+    }
+}

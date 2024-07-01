@@ -1,0 +1,12 @@
+package de.evoal.optimisation.ea.api.initial;
+
+import de.evoal.languages.model.base.Instance;
+import io.jenetics.Gene;
+import io.jenetics.engine.Engine;
+import io.jenetics.engine.EvolutionStream;
+
+public interface InitialPopulation<G extends Gene<?, G>, C extends Comparable<C>> {
+    InitialPopulation init(final Instance initialization);
+
+    EvolutionStream<G, C> create(final Engine<G, C> engine);
+}

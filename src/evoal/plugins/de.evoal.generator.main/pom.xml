@@ -24,5 +24,12 @@
 			<artifactId>de.evoal.languages.model.generator.dsl</artifactId>
 			<version>${evoal.languages.version}</version>
 		</dependency>
+
+		<dependency>
+			<groupId>de.evoal</groupId>
+			<artifactId>optimisation.api</artifactId>
+			<version>${project.version}</version>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
 </project>

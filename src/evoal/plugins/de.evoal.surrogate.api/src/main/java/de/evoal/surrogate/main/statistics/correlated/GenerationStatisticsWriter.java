@@ -1,15 +1,16 @@
 package de.evoal.surrogate.main.statistics.correlated;
 
-import de.evoal.core.api.board.CoreBlackboardEntries;
+import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
 import de.evoal.core.api.cdi.ConfigurationValue;
-import de.evoal.core.api.optimisation.OptimisationValue;
-import de.evoal.core.api.statistics.*;
-import de.evoal.core.api.statistics.io.Writer;
-import de.evoal.core.api.statistics.io.WriterException;
-import de.evoal.core.api.statistics.io.WriterStrategy;
-import de.evoal.core.api.statistics.writer.Column;
-import de.evoal.core.api.statistics.writer.ColumnType;
-import de.evoal.core.api.statistics.writer.StatisticsWriter;
+import de.evoal.optimisation.api.model.OptimisationValue;
+import de.evoal.optimisation.api.statistics.Candidate;
+import de.evoal.optimisation.api.statistics.IterationResult;
+import de.evoal.optimisation.api.statistics.io.Writer;
+import de.evoal.optimisation.api.statistics.io.WriterException;
+import de.evoal.optimisation.api.statistics.io.WriterStrategy;
+import de.evoal.optimisation.api.statistics.writer.Column;
+import de.evoal.optimisation.api.statistics.writer.ColumnType;
+import de.evoal.optimisation.api.statistics.writer.StatisticsWriter;
 import de.evoal.core.api.utils.LanguageHelper;
 import de.evoal.languages.model.base.Instance;
 import de.evoal.core.api.properties.Properties;
@@ -61,7 +62,7 @@ public class GenerationStatisticsWriter implements StatisticsWriter {
     @Inject
     private Provider<Function<Properties, Properties>> fitnessFactory;
 
-    @Inject @ConfigurationValue(entry = CoreBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.optimisation-function")
+    @Inject @ConfigurationValue(entry = OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.optimisation-function")
     private Instance config;
 
     @Inject

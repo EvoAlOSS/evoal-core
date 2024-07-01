@@ -10,7 +10,6 @@ import de.evoal.languages.model.dl.dsl.DefinitionLanguageStandaloneSetup;
 import de.evoal.languages.model.mll.dsl.MachineLearningLanguageStandaloneSetup;
 import de.evoal.languages.model.mll.MachineLearningModule;
 import de.evoal.languages.model.mll.impl.MllPackageImpl;
-import de.evoal.languages.model.utils.scoping.ClasspathGlobalScopeProvider;
 import de.evoal.surrogate.api.SurrogateBlackboardEntries;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.emf.common.util.URI;

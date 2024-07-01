@@ -15,15 +15,23 @@
 	<dependencies>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>core.ea</artifactId>
+			<artifactId>optimisation.api</artifactId>
 			<version>${project.version}</version>
 			<scope>provided</scope>
 		</dependency>
+
 		<dependency>
-			<groupId>de.evoal</groupId>
-			<artifactId>core.ea</artifactId>
-			<version>0.9.0-SNAPSHOT</version>
-			<scope>compile</scope>
+			<groupId>com.github.haifengl</groupId>
+			<artifactId>smile-math</artifactId>
+			<version>${smile.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>io.jenetics</groupId>
+			<artifactId>jenetics</artifactId>
+			<version>${jenetics.version}</version>
+			<scope>provided</scope>
 		</dependency>
 
 		<dependency>

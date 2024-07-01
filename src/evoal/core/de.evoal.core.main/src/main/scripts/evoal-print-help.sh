@@ -14,7 +14,7 @@ fi
 cd "$1" || exit 1
 
 POSITIONAL_ARGUMENTS=( "$@" )
-POSITIONAL_ARGUMENTS=("${POSITIONAL_ARGUMENTS[@]:0}")
+ADDITIONAL_ARGUMENTS=("${POSITIONAL_ARGUMENTS[@]:0}")
 
 declare -a LOCAL_JVM_ARGUMENTS=()
 
@@ -33,5 +33,5 @@ fi
 set -x
 java ${LOCAL_JVM_ARGUMENTS[@]} \
      ${EVOAL_JVM_ARGUMENTS[@]} \
-     ${POSITIONAL_ARGUMENTS[@]} \
+     ${ADDITIONAL_ARGUMENTS[@]} \
      --help

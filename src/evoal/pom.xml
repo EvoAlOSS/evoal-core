@@ -21,7 +21,7 @@
         <evoal.languages.version>1.0.0-SNAPSHOT</evoal.languages.version>
 
         <deltaspike.version>1.9.6</deltaspike.version>
-        <jackson.version>2.13.4</jackson.version>
+        <jackson.version>2.13.4.1</jackson.version>
         <jacoco.version>0.8.10</jacoco.version>
         <jenetics.version>7.1.0</jenetics.version>
         <lombok.version>1.18.24</lombok.version>

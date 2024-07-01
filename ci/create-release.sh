@@ -1,6 +1,6 @@
 #!/bin/bash
 
-RELEASE_PLUGINS="generator.main surrogate.api surrogate.simple surrogate.smile approximative.density core.arff core.ea"
+RELEASE_PLUGINS="core.arff generator.main optimisation.api optimisation.ea optimisation.pso approximative.density surrogate.api surrogate.simple surrogate.smile" 
 EVOAL_HOME=evoal
 PROJECT_HOME=src/evoal/
 

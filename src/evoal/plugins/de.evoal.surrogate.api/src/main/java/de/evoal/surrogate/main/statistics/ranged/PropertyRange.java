@@ -1,7 +1,7 @@
 package de.evoal.surrogate.main.statistics.ranged;
 
 
-import de.evoal.core.api.correlations.Range;
+import de.evoal.optimisation.api.correlations.Range;
 
 public class PropertyRange {
 	private final int indexOfChromosome;

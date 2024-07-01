@@ -18,7 +18,6 @@ import de.evoal.surrogate.api.training.TrainingDataManager;
 import lombok.NonNull;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-import org.eclipse.emf.common.util.EList;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;

@@ -1,7 +1,7 @@
 import "definitions" from de.evoal.core.math;
 
-import "definitions" from de.evoal.core.optimisation;
-import "definitions" from de.evoal.core.ea.optimisation;
+import "definitions" from de.evoal.optimisation.core;
+import "definitions" from de.evoal.optimisation.ea.optimisation;
 import "definitions" from de.evoal.surrogate.optimisation;
 
 import "data" from surrogate;

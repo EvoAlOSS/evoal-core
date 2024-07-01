@@ -1,4 +1,4 @@
-import "definitions" from de.evoal.core.optimisation;
+import "definitions" from de.evoal.optimisation.core;
 import "definitions" from de.evoal.generator.generator;
 
 module de.evoal.generator.optimisation {

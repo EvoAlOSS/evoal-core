@@ -1,12 +1,16 @@
 module de.evoal.generator.main {
     requires java.base;
 
+    requires jakarta.inject.api;
+    requires jakarta.enterprise.cdi.api;
+
+    requires com.google.guice;
+
     requires lombok;
 
     requires org.slf4j;
 
-    requires jakarta.inject.api;
-    requires jakarta.enterprise.cdi.api;
+    requires commons.math3;
 
     requires org.eclipse.emf.common;
     requires org.eclipse.emf.ecore;
@@ -23,10 +27,10 @@ module de.evoal.generator.main {
     requires de.evoal.languages.model.base.dsl;
     requires de.evoal.languages.model.generator.dsl;
 
-    requires de.evoal.core.main;
-    requires commons.math3;
-    requires com.google.guice;
     requires de.evoal.languages.model.utils;
+
+    requires de.evoal.core.main;
+    requires de.evoal.optimisation.api;
 
     opens de.evoal.generator;
 

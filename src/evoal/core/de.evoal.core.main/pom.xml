@@ -47,7 +47,7 @@
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
-			<version>1.4.5</version>
+			<version>1.4.12</version>
 		</dependency>
 
 		<!-- Deltaspike uses JUL. Use the JUL bridge to reroute it SLF4J -->
@@ -128,7 +128,6 @@
 			<version>1.8</version>
 			<scope>compile</scope>
 		</dependency>
-
 
 		<!-- dependencies to language models -->
 		<dependency>

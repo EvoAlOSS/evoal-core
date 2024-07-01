@@ -1,6 +1,6 @@
 package de.evoal.surrogate.main.ea;
 
-import de.evoal.core.api.optimisation.OptimisationFunction;
+import de.evoal.optimisation.api.model.OptimisationFunction;
 import de.evoal.core.api.properties.Properties;
 import de.evoal.languages.model.base.Instance;
 import de.evoal.surrogate.api.function.SurrogateFunction;

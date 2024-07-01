@@ -235,8 +235,7 @@ module de.evoal.generator.generator {
 		 */
 		distributions : array instance distribution;
 	}
-	
-	
+
 	/**
 	 * A distribution specification.
 	 */

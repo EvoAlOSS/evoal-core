@@ -7,7 +7,6 @@ import de.evoal.core.api.cdi.MainClass;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import de.evoal.languages.model.mll.MachineLearningModule;
 import de.evoal.surrogate.api.SurrogateBlackboardEntries;

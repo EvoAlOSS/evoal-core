@@ -6,7 +6,6 @@ import java.util.stream.Stream;
 
 import de.evoal.core.api.cdi.BeanFactory;
 import de.evoal.core.api.properties.stream.PropertiesStreamSupplier;
-import de.evoal.languages.model.ddl.DataDescription;
 import de.evoal.surrogate.api.configuration.FunctionCombinerConfiguration;
 import de.evoal.surrogate.api.configuration.PartialFunctionConfiguration;
 import de.evoal.surrogate.api.configuration.SurrogateConfiguration;

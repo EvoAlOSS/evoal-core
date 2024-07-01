@@ -37,9 +37,9 @@ java ${LOCAL_JVM_ARGUMENTS[@]} \
      ${EVOAL_JVM_ARGUMENTS[@]} \
      ${POSITIONAL_ARGUMENTS[@]} \
      -Bcore:main=heuristic-search \
-     "-Bcore:optimisation-configuration-file=$2" \
+     "-Boptimisation:optimisation-configuration-file=$2" \
      "-Bsurrogate:configuration-file=$3" \
      "-Bsurrogate:pre-trained=$4" \
      "-Bsurrogate:training-data=$5"\
-     "-Bcore:evaluation-output-folder=$6" \
-     "-Bcore:constraint-folder=$7"
+     "-Boptimisation:evaluation-output-folder=$6" \
+     "-Boptimisation:constraint-folder=$7"
