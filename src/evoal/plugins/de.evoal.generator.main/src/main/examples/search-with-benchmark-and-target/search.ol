@@ -13,7 +13,7 @@ module search {
 		description := "Simple search";
 		'search-space' := [data 'x:0'];
 		'optimisation-space' := [data 'y:0'];
-		'maximise' := true;
+		'maximise' := false;
 		'optimisation-function' := 'benchmark-function' {
 			'benchmarks' := [
 				'benchmark-configuration' { function := ackley {};    reads := [data 'x:0']; writes := [data 'y:0']; }
@@ -23,9 +23,9 @@ module search {
 		
 		
 	configure 'evolutionary-algorithm' for 'example-search' {
-		'number-of-generations' := 5;
-		'size-of-population' := 20;
-		'maximum-age' := 5;
+		'number-of-generations' := 20;
+		'size-of-population' := 50;
+		'maximum-age' := 20;
 		'offspring-fraction' := 0.7;
 	
 		'initialisation' := 'random-population' {};
@@ -43,7 +43,11 @@ module search {
 			];
 	    };
 	
-	    handlers := [];
+	    handlers := [
+	        'kill-at-birth' {
+	            'repair-strategy' := 'repair-with-random' {};
+	        }
+        ];
 	
 	    selectors := selectors {
 	        offspring := 'roulette-wheel-selector' {};
