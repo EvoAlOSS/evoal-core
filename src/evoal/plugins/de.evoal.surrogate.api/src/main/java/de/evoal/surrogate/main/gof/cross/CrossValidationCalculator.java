@@ -26,7 +26,7 @@ import java.util.List;
  * Calculates cross validation values.
  */
 @Dependent
-@Named("cross-validation")
+@Named("de.evoal.surrogate.ml.cross-validation")
 @Slf4j
 public class CrossValidationCalculator implements SurrogateInformationCalculator {
 

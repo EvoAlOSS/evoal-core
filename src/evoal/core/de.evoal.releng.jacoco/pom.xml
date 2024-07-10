@@ -47,11 +47,6 @@
         </dependency>
         <dependency>
             <groupId>${project.parent.groupId}</groupId>
-            <artifactId>surrogate.smile</artifactId>
-            <version>${project.parent.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.parent.groupId}</groupId>
             <artifactId>generator.main</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
@@ -72,7 +67,7 @@
         </dependency>
         <dependency>
             <groupId>${project.parent.groupId}</groupId>
-            <artifactId>approximative.density</artifactId>
+            <artifactId>surrogate.adaption</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
     </dependencies>

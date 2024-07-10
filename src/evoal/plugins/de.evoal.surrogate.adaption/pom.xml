@@ -1,0 +1,150 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>de.evoal</groupId>
+		<artifactId>core.plugin</artifactId>
+		<version>${revision}</version>
+	</parent>
+
+	<artifactId>surrogate.adaption</artifactId>
+	<name>EvoAl - Plugins - Surrogate - Adaption</name>
+
+	<dependencies>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>optimisation.api</artifactId>
+			<version>${project.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>surrogate.api</artifactId>
+			<version>${project.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.github.haifengl</groupId>
+			<artifactId>smile-core</artifactId>
+			<version>${smile.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.github.haifengl</groupId>
+			<artifactId>smile-math</artifactId>
+			<version>${smile.math.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>de.evoal</groupId>
+			<artifactId>surrogate.smile</artifactId>
+			<version>0.9.0-SNAPSHOT</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- Dependencies for OpenBLAS implementation              -->
+		<!-- This version crashes for me with a segmentation fault -->
+		<!--
+		<dependency>
+			<groupId>org.bytedeco</groupId>
+			<artifactId>javacpp</artifactId>
+			<version>1.5.8</version>
+			<scope>runtime</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.bytedeco</groupId>
+			<artifactId>javacpp</artifactId>
+			<version>1.5.8</version>
+			<scope>runtime</scope>
+			<classifier>linux-x86_64</classifier>
+		</dependency>
+
+		<dependency>
+			<groupId>org.bytedeco</groupId>
+			<artifactId>openblas</artifactId>
+			<version>0.3.21-1.5.8</version>	
+			<scope>runtime</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.bytedeco</groupId>
+			<artifactId>openblas</artifactId>
+			<version>0.3.21-1.5.8</version>
+			<classifier>linux-x86_64</classifier>
+			<scope>runtime</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.bytedeco</groupId>
+			<artifactId>arpack-ng</artifactId>
+			<version>3.8.0-1.5.8</version>
+			<scope>runtime</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.bytedeco</groupId>
+			<artifactId>arpack-ng</artifactId>
+			<version>3.8.0-1.5.8</version>
+			<scope>runtime</scope>
+			<classifier>linux-x86_64</classifier>
+		</dependency>
+		-->
+
+		<!-- Dependencies for MKL implementation              -->
+		<dependency>
+			<groupId>com.github.haifengl</groupId>
+			<artifactId>smile-mkl</artifactId>
+			<version>${smile.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.bytedeco</groupId>
+			<artifactId>javacpp</artifactId>
+			<version>1.5.8</version>
+			<scope>runtime</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.bytedeco</groupId>
+			<artifactId>javacpp</artifactId>
+			<version>1.5.8</version>
+			<scope>runtime</scope>
+			<classifier>linux-x86_64</classifier>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.bytedeco</groupId>
+			<artifactId>mkl</artifactId>
+			<version>2022.2-1.5.8</version>
+			<scope>runtime</scope>
+		</dependency>
+
+	    <dependency>
+			<groupId>org.bytedeco</groupId>
+			<artifactId>mkl</artifactId>
+			<version>2022.2-1.5.8</version>
+			<classifier>linux-x86_64</classifier>
+			<scope>runtime</scope>
+		</dependency>		
+
+	    <dependency>
+            <groupId>org.bytedeco</groupId>
+            <artifactId>mkl-platform</artifactId>
+			<version>2022.2-1.5.8</version>
+		</dependency>
+
+	    <dependency>
+            <groupId>org.bytedeco</groupId>
+            <artifactId>mkl-platform-redist</artifactId>
+			<version>2022.2-1.5.8</version>
+		</dependency>
+
+	</dependencies>
+</project>

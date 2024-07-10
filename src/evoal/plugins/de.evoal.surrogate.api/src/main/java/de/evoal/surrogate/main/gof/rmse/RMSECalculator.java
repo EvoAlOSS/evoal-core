@@ -26,7 +26,7 @@ import java.util.stream.DoubleStream;
  * Calculates the root mean squared error.
  */
 @Dependent
-@Named("rmse")
+@Named("de.evoal.surrogate.ml.rmse")
 @Slf4j
 public class RMSECalculator implements SurrogateInformationCalculator {
 

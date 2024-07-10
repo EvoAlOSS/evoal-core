@@ -4,6 +4,7 @@ import de.evoal.core.api.utils.InitializationException;
 import de.evoal.core.api.utils.LanguageHelper;
 import de.evoal.core.api.utils.Requirements;
 import de.evoal.languages.model.base.Attribute;
+import de.evoal.languages.model.base.FunctionDefinition;
 import de.evoal.languages.model.base.Instance;
 import de.evoal.languages.model.dl.util.FQNProvider;
 import lombok.NonNull;

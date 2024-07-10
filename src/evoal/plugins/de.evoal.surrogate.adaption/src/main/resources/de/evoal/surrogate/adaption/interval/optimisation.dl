@@ -1,0 +1,12 @@
+import "definitions" from de.evoal.core.optimisation;
+
+module de.evoal.surrogate.adaption.interval.optimisation {
+	/**
+	 * Base type for density-based fitness value handling.
+	 */
+	abstract type adjusted extends 'decorated-fitness-function' {
+	}
+	
+	type 'adjusted-predicted-fitness' extends 'adjusted' {}
+	type 'adjusted-modified-fitness' extends adjusted {}
+}

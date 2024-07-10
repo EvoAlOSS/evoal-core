@@ -4,10 +4,13 @@ import de.evoal.core.api.cdi.BeanFactory;
 import de.evoal.core.api.languages.ExpressionEvaluator;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.utils.ConstantSwitch;
+import de.evoal.core.api.utils.Requirements;
 import de.evoal.languages.model.base.DefinedFunctionName;
+import de.evoal.languages.model.base.FunctionDefinition;
 import de.evoal.languages.model.ddl.DataDescription;
 import de.evoal.languages.model.base.Call;
 import de.evoal.languages.model.base.StringLiteral;
+import de.evoal.languages.model.dl.util.FQNProvider;
 import de.evoal.languages.model.mll.*;
 import de.evoal.languages.model.mll.util.MllSwitch;
 import de.evoal.surrogate.api.SurrogateInformationCalculator;
@@ -18,8 +21,11 @@ import de.evoal.surrogate.api.training.TrainingDataManager;
 import lombok.NonNull;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.deltaspike.core.api.provider.BeanProvider;
+import org.eclipse.emf.common.util.EList;
 
 import javax.enterprise.context.Dependent;
+import javax.enterprise.inject.spi.Bean;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.File;
@@ -52,6 +58,25 @@ public class StatementExecutor extends MllSwitch<Object> {
     @Inject
     private TrainingDataManager manager;
 
+    /**
+     * Returns an instance of the given {@code definition}.
+     *
+     * @param definition Definition of the function
+     * @return A valid instance
+     */
+    private SurrogateInformationCalculator createFunction(final FunctionDefinition definition) {
+        Requirements.requireNotNull(definition);
+
+        final String name = new FQNProvider().get(definition);
+        log.info("Creating surrogate function of name {}.", name);
+
+        try {
+            return BeanFactory.create(name, SurrogateInformationCalculator.class);
+        } catch(final IllegalStateException | IllegalArgumentException e) {
+            log.error("Failed to create contextual reference of type '{}' with name '{}'.", definition, name);
+            throw e;
+        }
+    }
 
     /**
      * Variable pattern
@@ -133,7 +158,7 @@ public class StatementExecutor extends MllSwitch<Object> {
         log.info("Handling call of {} ...", function.getDefinition().getName());
 
         log.info("Creating GOF instance.");
-        final SurrogateInformationCalculator calculator = BeanFactory.create(function.getDefinition().getName(), SurrogateInformationCalculator.class);
+        final SurrogateInformationCalculator calculator = createFunction(function.getDefinition());
 
         log.info("Calculating parameter values.");
         final List<Object> parameters = call.getParameters()

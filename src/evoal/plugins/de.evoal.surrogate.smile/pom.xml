@@ -24,6 +24,7 @@
 			<groupId>com.github.haifengl</groupId>
 			<artifactId>smile-core</artifactId>
 			<version>${smile.version}</version>
+			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 </project>

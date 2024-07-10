@@ -4,6 +4,7 @@ import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.surrogate.api.configuration.Parameter;
 import de.evoal.surrogate.api.configuration.PartialFunctionConfiguration;
 import de.evoal.surrogate.api.function.PartialSurrogateFunction;
+import de.evoal.surrogate.smile.api.KernelBasedSVRFunction;
 import lombok.extern.slf4j.Slf4j;
 import smile.regression.KernelMachine;
 

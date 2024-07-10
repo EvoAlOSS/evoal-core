@@ -27,6 +27,7 @@
         <lombok.version>1.18.24</lombok.version>
         <slf4j.api.version>2.0.0</slf4j.api.version>
         <smile.version>2.6.0</smile.version>
+        <smile.math.version>2.6.0</smile.math.version>
 		<tycho.version>3.0.1</tycho.version>
     </properties>
 

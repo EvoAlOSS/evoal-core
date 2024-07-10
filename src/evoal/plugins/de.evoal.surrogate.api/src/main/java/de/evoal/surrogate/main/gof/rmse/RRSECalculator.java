@@ -20,7 +20,7 @@ import java.util.List;
  * Calculates the root mean squared error.
  */
 @Dependent
-@Named("rrse")
+@Named("de.evoal.surrogate.ml.rrse")
 @Slf4j
 public class RRSECalculator implements SurrogateInformationCalculator {
 

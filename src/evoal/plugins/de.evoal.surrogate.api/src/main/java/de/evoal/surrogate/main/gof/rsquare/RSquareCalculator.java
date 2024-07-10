@@ -23,7 +23,7 @@ import java.util.List;
  * Calculates cross validation values.
  */
 @Dependent
-@Named("R²")
+@Named("de.evoal.surrogate.ml.R²")
 @Slf4j
 public class RSquareCalculator implements SurrogateInformationCalculator {
 

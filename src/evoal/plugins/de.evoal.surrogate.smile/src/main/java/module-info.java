@@ -15,9 +15,11 @@ module de.evoal.surrogate.smile {
     requires de.evoal.core.main;
     requires de.evoal.surrogate.api;
 
+    // export API for down-stream plugins
+    exports de.evoal.surrogate.smile.api;
+
+    // TODO limit export to the Xtext component that resolves imports
     opens de.evoal.surrogate.smile;
 
-    exports de.evoal.surrogate.smile.svr to de.evoal.approximative.interval;
-
-    opens de.evoal.surrogate.smile.svr;
+    opens de.evoal.surrogate.smile.svr to weld.core.impl;
 }

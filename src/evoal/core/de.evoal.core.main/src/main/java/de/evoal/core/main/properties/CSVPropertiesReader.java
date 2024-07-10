@@ -22,6 +22,8 @@ import java.nio.charset.StandardCharsets;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Slf4j
 @Dependent
@@ -49,11 +51,11 @@ public class CSVPropertiesReader implements PropertiesReader {
         // sanity check
         final List<String> names = parser.getHeaderNames();
         log.info("Found the properties {} in the input file", names);
-        Requirements.requireTrue(specification.getProperties()
-                                              .stream()
-                                              .map(PropertySpecification::name)
-                                              .allMatch(name -> names.contains(name)),
-                        "Not all properties are specified in the input file.");
+
+        specification.getProperties()
+                     .stream()
+                     .map(PropertySpecification::name)
+                     .forEach(name -> Requirements.requireTrue(names.contains(name), "Attribute of name '" + name + "/" + name.hashCode() + "' could not be found in " + names.stream().map(n -> "'" + n + "/" + n.hashCode()  + "'").collect(Collectors.joining(", "))));
 
         return this;
     }
@@ -77,6 +79,8 @@ public class CSVPropertiesReader implements PropertiesReader {
     private Properties readProperties() throws ParseException {
         final CSVRecord record = iterator.next();
         final Properties p = new Properties(specification);
+
+        log.info("Read properties");
 
         for(final PropertySpecification s : specification.getProperties()) {
             final String strValue = record.get(s.name());

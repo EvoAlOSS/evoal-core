@@ -222,8 +222,9 @@ public class ConditionConverter extends BaseSwitch<Object> {
     public Object caseValueReference(final ValueReference object) {
         if(object instanceof SelfReference) {
             Requirements.requireNotNull(context);
+
             final String propertyName = context.getName();
-            if(fitnessSpec.contains(new PropertySpecification(context.getName(), context))) {
+            if(fitnessSpec.contains(new PropertySpecification(propertyName, context))) {
                 final int propertyIndex = fitnessSpec.indexOf(propertyName);
 
                 usedProperties.add(fitnessSpec.getProperties().get(propertyIndex));
@@ -252,7 +253,7 @@ public class ConditionConverter extends BaseSwitch<Object> {
             usedProperties.add(fitnessSpec.getProperties().get(propertyIndex));
 
             return (BiFunction<Properties, Properties, Object>) (gen, fit) -> fit.get(propertyIndex);
-        } else {
+        } else if(genoSpec.contains(new PropertySpecification(description.getName(), description))) {
             final String propertyName = description.getName();
             final int propertyIndex = genoSpec.indexOf(propertyName);
 
@@ -261,6 +262,8 @@ public class ConditionConverter extends BaseSwitch<Object> {
             return (BiFunction<Properties, Properties, Object>) (gen, fit) -> gen.get(propertyIndex);
 
         }
+
+        throw new IllegalStateException("Unknown property");
     }
 
     @Override

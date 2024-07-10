@@ -22,21 +22,21 @@ import java.util.Optional;
 @ApplicationScoped
 @Slf4j
 public class ConstraintProducer {
-    private PropertiesSpecification optisationSpaceSpecification;
+    private PropertiesSpecification optimisationSpaceSpecification;
     private PropertiesSpecification searchSpaceSecification;
 
     @Produces
     @ApplicationScoped
     public Constraints create(final DataConstraints constraints,
                               @Named("search-space-specification") final PropertiesSpecification searchSpaceSecification,
-                              @Named("optimisation-space-specification") final PropertiesSpecification optisationSpaceSpecification) {
-        this.optisationSpaceSpecification = optisationSpaceSpecification;
+                              @Named("optimisation-space-specification") final PropertiesSpecification optimisationSpaceSpecification) {
+        this.optimisationSpaceSpecification = optimisationSpaceSpecification;
         this.searchSpaceSecification = searchSpaceSecification;
-
 
         final Constraints result = new Constraints();
 
         constraints.stream()
+                .peek(p -> System.out.println(p))
                    .forEach(p -> {
                        final DataDescription context = p.getFirst();
 
@@ -65,13 +65,18 @@ public class ConstraintProducer {
         final Constraint result = new Constraint();
         result.setGroup(BaseLanguageHelper.findString(constraint.getParameters().get(1)));
 
-        final ConditionConverter converter = new ConditionConverter(searchSpaceSecification, optisationSpaceSpecification, context);
-        converter.doSwitch(constraint.getParameters().get(0));
+        final ConditionConverter converter = new ConditionConverter(searchSpaceSecification, optimisationSpaceSpecification, context);
+        try {
+            converter.doSwitch(constraint.getParameters().get(0));
 
-        result.setFunction(converter.getFunction());
-        result.setUsedProperties(converter.getUsedProperties());
-        result.setConstraintType(converter.getType());
+            result.setFunction(converter.getFunction());
+            result.setUsedProperties(converter.getUsedProperties());
+            result.setConstraintType(converter.getType());
 
-        return Optional.of(result);
+            return Optional.of(result);
+        } catch(final IllegalStateException e) {
+            log.info("Failed to convert expression to condition.", e);
+            return Optional.empty();
+        }
     }
 }

@@ -23,11 +23,10 @@
 		<module>de.evoal.optimisation.ea</module>
 		<module>de.evoal.optimisation.pso</module>
 
-		<module>de.evoal.approximative.density</module>
-
 		<module>de.evoal.surrogate.api</module>
 		<module>de.evoal.surrogate.simple</module>
 		<module>de.evoal.surrogate.smile</module>
+		<module>de.evoal.surrogate.adaption</module>
 	</modules>
 
 	<dependencies>

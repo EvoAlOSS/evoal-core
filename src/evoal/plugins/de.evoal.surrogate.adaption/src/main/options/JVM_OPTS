@@ -1,0 +1,1 @@
+JVM_OPTS=( -Dorg.bytedeco.javacpp.logger.debug=true )
