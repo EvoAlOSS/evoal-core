@@ -1,4 +1,4 @@
-import "definitions" from de.evoal.core.optimisation;
+import "definitions" from de.evoal.optimisation.core;
 
 module de.evoal.surrogate.adaption.interval.optimisation {
 	/**
