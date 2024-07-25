@@ -4,10 +4,9 @@ import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.properties.PropertySpecification;
 import de.evoal.core.api.utils.InitializationException;
-import de.evoal.languages.model.base.Instance;
-import de.evoal.languages.model.ddl.DataDescription;
 import de.evoal.languages.model.generator.Step;
 import de.evoal.languages.model.instance.DataReference;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
@@ -20,12 +19,12 @@ public abstract class AbstractGeneratorFunction implements GeneratorFunction {
     /**
      * The properties the generator function writes.
      */
-    protected PropertiesSpecification writeSpecification;
+    protected @Getter PropertiesSpecification writeSpecification;
 
     /**
      * The properties the generator function reads.
      */
-    protected PropertiesSpecification readSpecification;
+    protected @Getter PropertiesSpecification readSpecification;
 
     @Override
     public GeneratorFunction init(final Step configuration) throws InitializationException {

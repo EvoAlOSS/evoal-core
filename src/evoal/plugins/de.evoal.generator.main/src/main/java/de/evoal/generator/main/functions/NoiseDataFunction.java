@@ -8,30 +8,26 @@ import de.evoal.core.api.properties.PropertySpecification;
 import de.evoal.core.api.utils.InitializationException;
 import de.evoal.generator.api.AbstractGeneratorFunction;
 import de.evoal.generator.api.GeneratorFunction;
-import de.evoal.generator.main.utils.ConfigurationHelper;
+import de.evoal.generator.main.functions.distributions.Distribution;
+import de.evoal.generator.main.functions.distributions.DistributionsFactory;
 import de.evoal.languages.model.generator.Step;
-import org.apache.commons.math3.distribution.NormalDistribution;
-import org.apache.commons.math3.distribution.RealDistribution;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Named;
 
 @Dependent
-@Named("de.evoal.generator.generator.normally-distributed-noise")
-public class NormalNoiseFunction extends AbstractGeneratorFunction {
+@Named("de.evoal.generator.generator.noise-data")
+public class NoiseDataFunction extends AbstractGeneratorFunction {
 
 	/**
 	 * The different distributions to apply.
 	 */
-	private final List<RealDistribution> distributions = new ArrayList<>();
+	private final List<Distribution> distributions = new ArrayList<>();
 
 	public GeneratorFunction init(final Step configuration) throws InitializationException {
 		super.init(configuration);
 
-		ConfigurationHelper.readDistributions(configuration.getInstance(), "distributions")
-				.stream()
-				.map(d -> new NormalDistribution(d.μ(), d.σ()))
-				.forEach(distributions::add);
+        distributions.addAll(DistributionsFactory.readDistributions(configuration.getInstance(), "distributions"));
 
 		return this;
 	}

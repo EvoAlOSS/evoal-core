@@ -225,10 +225,10 @@ module de.evoal.generator.generator {
 	}
 	
 	/**
-	 * Adds normally distributed noise to data. For each data to noise, you can
-	 *   specify a separate distribution.
+	 * Adds noise to data. For each data to noise, you can specify a
+	 *   separate distribution.
 	 */
-	type 'normally-distributed-noise' {
+	type 'noise-data' {
 		/**
 		 * The different distributions to use. Make sure it matches the size of
 		 *   the data the function writes.
@@ -249,6 +249,20 @@ module de.evoal.generator.generator {
 		 * The distribution's standard deviation.
 		 */
 		'σ' : real;	
+	}
+
+	/**
+	 * Specification for uniform distribution.
+	 */
+	type 'uniform-distribution' extends distribution {
+	    /**
+	    * parameter for lower bound
+	    */
+	    'lower' :real;
+	    /**
+	    * parameter for upper bound
+	    */
+	    'upper' : real;
 	}
 	
 	

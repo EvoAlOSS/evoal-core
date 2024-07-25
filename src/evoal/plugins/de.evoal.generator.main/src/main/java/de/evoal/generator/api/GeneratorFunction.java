@@ -1,8 +1,7 @@
 package de.evoal.generator.api;
 
-
-import de.evoal.core.api.cdi.EvoalComponent;
 import de.evoal.core.api.properties.Properties;
+import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.utils.InitializationException;
 import de.evoal.languages.model.generator.Step;
 
@@ -16,4 +15,14 @@ public interface GeneratorFunction {
     default GeneratorFunction init(final Step configuration) throws InitializationException {
         return this;
     }
+
+    /**
+     * Returns the specification properties read by the generator function.
+     */
+    PropertiesSpecification getReadSpecification();
+
+    /**
+     * Returns the specification properties written by the generator function.
+     */
+    PropertiesSpecification getWriteSpecification();
 }

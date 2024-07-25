@@ -3,8 +3,6 @@ package de.evoal.core.api.cdi;
 import de.evoal.core.api.utils.InitializationException;
 import de.evoal.core.api.utils.LanguageHelper;
 import de.evoal.core.api.utils.Requirements;
-import de.evoal.languages.model.base.Attribute;
-import de.evoal.languages.model.base.FunctionDefinition;
 import de.evoal.languages.model.base.Instance;
 import de.evoal.languages.model.dl.util.FQNProvider;
 import lombok.NonNull;
@@ -97,6 +95,14 @@ public final class BeanFactory {
         Requirements.requireNotNull(configuration);
 
         final String name = new FQNProvider().get(configuration);
+
+        return createComponent(type, name, configuration);
+    }
+
+    public static <T extends EvoalComponent<T>> T createComponent(final Class<T> type, final Instance configuration, final String nameSuffix) {
+        Requirements.requireNotNull(configuration);
+
+        final String name = new FQNProvider().get(configuration) + nameSuffix;
 
         return createComponent(type, name, configuration);
     }

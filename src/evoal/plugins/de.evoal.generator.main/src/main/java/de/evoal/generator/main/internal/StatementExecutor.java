@@ -114,7 +114,7 @@ public class StatementExecutor extends GeneratorSwitch<Object> {
                      .filter(Objects::nonNull)
                      .filter(Pipeline.class::isInstance)
                      .map(Pipeline.class::cast)
-                     .collect(Collectors.toUnmodifiableList());
+                     .toList();
 
         String filename = stmt.getFile();
 
@@ -146,21 +146,27 @@ public class StatementExecutor extends GeneratorSwitch<Object> {
         log.info("Writing {} with {} data points.", filename, count);
         new File(filename).getAbsoluteFile().getParentFile().mkdirs();
 
-        final PropertiesSpecification specification = PropertiesSpecification.builder().build();
-        final Properties emptyProperties = new Properties(specification);
+        // we start with an empty specification (and empty properties)
+        final PropertiesSpecification emptySpecification = PropertiesSpecification.builder()
+                                                                             .build();
+        final Properties emptyProperties = new Properties(emptySpecification);
+
 
         Stream<Properties> stream = Stream.generate(() -> emptyProperties);
+        PropertiesSpecification specification = emptySpecification;
 
         for(final Pipeline pipe : pipelines) {
             for(final GeneratorFunction function : pipe.getSteps()) {
                 stream = stream.map(function::apply);
+                specification = PropertiesSpecification.builder()
+                                                       .add(specification)
+                                                       .add(function.getWriteSpecification())
+                                                       .build();
             }
         }
 
-        PropertiesSpecification.Builder resultSpec = PropertiesSpecification.builder();
-        stream = stream.peek(p -> resultSpec.add(p.getSpecification()));
-
-        try(final PropertiesWriter writer = PropertiesIOFactory.writer(new File(filename), resultSpec.build())) {
+        log.info("Writing properties stream with specification {} to {}.", specification, filename);
+        try(final PropertiesWriter writer = PropertiesIOFactory.writer(new File(filename), specification)) {
             stream.limit(count)
                   .forEach(p -> {
                       try {

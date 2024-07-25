@@ -1,6 +1,4 @@
 module de.evoal.generator.main {
-    requires java.base;
-
     requires jakarta.inject.api;
     requires jakarta.enterprise.cdi.api;
 
@@ -42,4 +40,5 @@ module de.evoal.generator.main {
 
     exports de.evoal.generator.api;
     opens de.evoal.generator.api to weld.core.impl;
+    opens de.evoal.generator.main.functions.distributions;
 }
