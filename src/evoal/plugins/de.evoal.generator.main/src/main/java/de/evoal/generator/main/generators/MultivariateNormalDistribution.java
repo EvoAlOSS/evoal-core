@@ -4,14 +4,21 @@ import de.evoal.core.api.utils.InitializationException;
 import de.evoal.generator.api.GeneratorFunction;
 import de.evoal.languages.model.generator.Step;
 import de.evoal.languages.model.base.*;
+import de.evoal.core.api.languages.ExpressionEvaluator;
 import lombok.NonNull;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Named;
+import javax.inject.Inject;
 
+@Slf4j
 @Named("de.evoal.generator.generator.multivariate-normal-distribution")
 @Dependent
 public class MultivariateNormalDistribution extends MultivariateRealDistributionBase {
+
+    @Inject
+    private ExpressionEvaluator evaluator;
 
     @Override
     public GeneratorFunction init(final Step configuration) throws InitializationException {
@@ -26,30 +33,12 @@ public class MultivariateNormalDistribution extends MultivariateRealDistribution
     }
 
     private double[][] readCovariance(final @NonNull Instance instance) {
-        final Array array = (Array) instance.findAttribute("covariances")
-                                            .getValue();
-
-        return array.getValues()
-                .stream()
-                .map(Array.class::cast)
-                .map(this::readArray)
-                .toArray(i -> new double[i][]);
-    }
-
-    private double []readArray(final @NonNull Array value) {
-        return value.getValues()
-                    .stream()
-                    .mapToDouble(this::readDouble)
-                    .toArray();
-    }
-
-    private double readDouble(final Value value) {
-        return ((RealLiteral)value).getLiteral();
+        final double[][] covariances = evaluator.attributeToDoubleArrayArray(instance, "covariance");
+        return covariances;
     }
 
     private double[] readMeans(final @NonNull Instance instance) {
-        final Attribute meansAttribute = instance.findAttribute("means");
-
-        return readArray((Array)meansAttribute.getValue());
+        double[] means = evaluator.attributeToDoubleArray(instance, "means");
+        return means;
     }
 }

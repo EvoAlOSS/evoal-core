@@ -1,0 +1,55 @@
+import "definitions" from de.evoal.core.math;
+import "definitions" from de.evoal.generator.generator;
+import "data" from 'ackley';
+
+
+module 'ackley' {
+	/**
+	 * A simple pipeline exemplifying the use of multivariate normal distribution
+	 * and noise generation
+	 */
+	pipeline 'main-pipeline' [
+		/**
+		 * Bivariate normal distribution.
+		 */
+		step {
+			component 'multivariate-normal-distribution' {
+				'means' := [-10.00, 0.0];
+				'covariance' := [
+                  [11.1111, 8.8889],
+                  [8.8889, 11.1111]
+                ];
+
+			}
+
+			writes [data 'x.0', data 'x.1'];
+		}
+	    step {
+		    component 'noise-data' {
+		    /* define distribution per data */
+			distributions := [
+			    'normal-distribution' {
+				'μ' := 0.0;
+				'σ' := 1.0;
+			    },
+			    'uniform-distribution' {
+				'lower' := -5.0;
+				'upper' := 5.0;
+			    }
+			];
+		    }
+
+		    reads [data 'x.0', data 'x.1'];
+		    writes [data 'x.0', data 'x.1'];
+	    }
+	    step {
+	        component 'ackley' {
+	        }
+
+	        reads [data 'x.0', data 'x.1'];
+	        writes [data 'y.0'];
+	     }
+	]
+
+	write "points.json" with 25 samples from executing [ pipeline 'main-pipeline'];
+}
