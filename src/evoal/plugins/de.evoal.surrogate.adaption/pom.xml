@@ -43,7 +43,7 @@
 		<dependency>
 			<groupId>de.evoal</groupId>
 			<artifactId>surrogate.smile</artifactId>
-			<version>0.9.0-SNAPSHOT</version>
+			<version>${project.version}</version>
 			<scope>provided</scope>
 		</dependency>
 

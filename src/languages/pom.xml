@@ -16,7 +16,7 @@
 		<maven.compiler.source>17</maven.compiler.source>
 		<maven.compiler.target>17</maven.compiler.target>
 
-		<tycho.version>3.0.1</tycho.version>
+		<tycho.version>3.0.5</tycho.version>
 		<xtend.version>2.29.0</xtend.version>
 		<xtext.version>2.29.0</xtext.version>
 

@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: EvoAl Core UI
 Bundle-SymbolicName: de.evoal.ui.core;singleton:=true
-Bundle-Version: 1.0.0.qualifier
+Bundle-Version: 2024.10.0.qualifier
 Export-Package: de.evoal.ui.core,
  de.evoal.ui.core.builtin,
  de.evoal.ui.core.runner

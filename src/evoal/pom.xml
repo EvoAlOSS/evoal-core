@@ -17,8 +17,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-		<revision>0.9.0-SNAPSHOT</revision>
-        <evoal.languages.version>1.0.0-SNAPSHOT</evoal.languages.version>
+<!--		<version>2024.10.0-SNAPSHOT</version>-->
+        <evoal.languages.version>2024.10.0-SNAPSHOT</evoal.languages.version>
 
         <deltaspike.version>1.9.6</deltaspike.version>
         <jackson.version>2.13.4.1</jackson.version>

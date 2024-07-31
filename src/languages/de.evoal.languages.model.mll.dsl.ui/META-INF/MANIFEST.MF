@@ -3,7 +3,7 @@ Automatic-Module-Name: de.evoal.languages.model.mll.dsl.ui
 Bundle-ManifestVersion: 2
 Bundle-Name: de.evoal.languages.model.mll.dsl.ui
 Bundle-Vendor: My CompanyXSXC
-Bundle-Version: 1.0.0.qualifier
+Bundle-Version: 2024.10.0.qualifier
 Bundle-SymbolicName: de.evoal.languages.model.mll.dsl.ui; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: de.evoal.languages.model.mll.dsl,
