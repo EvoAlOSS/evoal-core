@@ -14,6 +14,7 @@
         </httpHeaders>
       </configuration>
     </server>
+
     <server>
       <id>evoal-artifacts</id>
       <configuration>
@@ -25,15 +26,34 @@
         </httpHeaders>
       </configuration>
     </server>
+
+    <server>
+      <id>central-proxy</id>
+      <configuration>
+        <httpHeaders>
+          <property>
+            <name>Job-Token</name>
+            <value>${env.CI_JOB_TOKEN}</value>
+          </property>
+        </httpHeaders>
+      </configuration>
+    </server>
   </servers>
 
-    <mirrors>
+  <mirrors>
     <mirror>
       <id>local-eclipse-mirror</id>
       <mirrorOf>eclipse-2022-12</mirrorOf>
       <url>file:${user.home}/.m2/p2-mirror/eclipse-mirror</url>
       <layout>p2</layout>
       <mirrorOfLayouts>p2</mirrorOfLayouts>
+    </mirror>
+
+    <mirror>
+      <id>central-proxy</id>
+      <name>GitLab proxy of central repo</name>
+      <url>https://gitlab.informatik.uni-bremen.de/api/v4/projects/30380/dependency_proxy/packages/maven</url>
+      <mirrorOf>central</mirrorOf>
     </mirror>
   </mirrors>
 </settings>

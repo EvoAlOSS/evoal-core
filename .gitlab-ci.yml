@@ -9,10 +9,12 @@ workflow:
       variables:
         MAVEN_VERSION: "2024.10.0-rc1.${CI_PIPELINE_IID}"
         TYCHO_VERSION: "2024.10.0-SNAPSHOT"
+        EVOAL_LANGUAGES_VERSION: "2024.10.0-SNAPSHOT"
     - if: $CI_COMMIT_TAG != null
       variables:
         MAVEN_VERSION: "2024.10.0"
         TYCHO_VERSION: "2024.10.0"
+        EVOAL_LANGUAGES_VERSION: "2024.10.0"
 
 variables:
   # This will supress any download for dependencies and plugins or upload messages,
@@ -31,6 +33,7 @@ variables:
     -s ${CI_PROJECT_DIR}/ci/settings.xml
     -Dbranch=$CI_COMMIT_REF_NAME
     -Drevision=${MAVEN_VERSION}
+    -Devoal.languages.version=${EVOAL_LANGUAGES_VERSION}
     --batch-mode
     --errors
     -T2.0C
@@ -67,11 +70,19 @@ variables:
 default:
   tags: ["docker"]
   cache:
-    key: "$CI_PIPELINE_ID" # bind cache to pipeline
-    paths:
-      - .m2
-      - src/languages/*/target/
-      - src/evoal/*/*/target/
+    - key:
+        files:
+          - $LANGUAGES_POM
+          - $EVOAL_POM
+      paths:
+        - .m2/[!d]*
+
+#  cache:
+#    key: "$CI_PIPELINE_ID" # bind cache to pipeline
+#    paths:
+#      - .m2
+#      - src/languages/*/target/
+#      - src/evoal/*/*/target/
 
 stages:
   - Domain Specific Languages
@@ -99,6 +110,7 @@ stages:
 ## Situations
 ##   - push to non-protected branches
 ##   - merge_request to any branch build
+##   - creation of tag
 ##
 ##  Requirements
 ##    - none
@@ -116,6 +128,10 @@ dsl:compile-and-install:
     - if: $CI_COMMIT_TAG
     - when: never
   script:
+    - >-
+      if [ "$CI_COMMIT_TAG" ]; then
+        ci/change-version-number.sh
+      fi
     - mvn $TYCHO_CLI_OPTS -f $LANGUAGES_POM -Dbranch=$CI_COMMIT_REF_NAME flatten:flatten install
   artifacts:
     untracked: false
@@ -123,12 +139,15 @@ dsl:compile-and-install:
     expire_in: "30 days"
     paths:
       - src/languages/de.evoal.languages.releng.site/target/de.evoal.languages.releng.site-*.zip
+      - .m2/repository/de/evoal
+      - src/languages/*/target/
 
 #############################################################
 ## Compile and test EvoAl
 ##
 ## Situations
 ##   - push to non-protected branches
+##   - creation of tag
 ##
 ##  Requirements
 ##    - mvn install of DSLs
@@ -141,6 +160,10 @@ evoal:compile-and-test:
           $CI_COMMIT_TAG == null
     - if: $CI_COMMIT_TAG
     - when: never
+  dependencies: ["dsl:compile-and-install"]
+  needs:
+    - job: "dsl:compile-and-install"
+      artifacts: true
   script:
     - mvn $MAVEN_CLI_OPTS -f $EVOAL_POM -Dbranch=$CI_COMMIT_REF_NAME -pl "!de.evoal:releng.jacoco" flatten:flatten package
   artifacts:
@@ -150,12 +173,16 @@ evoal:compile-and-test:
     expire_in: "30 days"
     reports:
       junit: src/evoal/*/*/target/surefire-reports/TEST-*.xml
+    paths:
+      - src/languages/*/target/
+      - src/evoal/*/*/target/
 
 #############################################################
 ## Deploy DSL to package registry
 ##
 ## Situations
 ##   - push to non-protected branches
+##   - creation of tag
 ##
 ##  Requirements
 ##    - none
@@ -166,8 +193,17 @@ dsl:deploy:
   rules:
     - if: $CI_PIPELINE_SOURCE == "push" &&
           $CI_COMMIT_TAG == null
+    - if: $CI_COMMIT_TAG
     - when: never
+  dependencies: ["dsl:compile-and-install"]
+  needs:
+    - job: "dsl:compile-and-install"
+      artifacts: true
   script:
+    - >-
+      if [ "$CI_COMMIT_TAG" ]; then
+        ci/change-version-number.sh
+      fi
     - mvn $TYCHO_CLI_OPTS -f $LANGUAGES_POM -Dbranch=$CI_COMMIT_REF_NAME -pl "!de.evoal.languages:de.evoal.languages.model.dl.dsl.tests,!de.evoal.languages:de.evoal.languages.model.generator.dsl.tests"  -DskipTests flatten:flatten deploy
 
 
@@ -176,6 +212,7 @@ dsl:deploy:
 ##
 ## Situations
 ##   - push to non-protected branches
+##   - creation of tag
 ##
 ##  Requirements
 ##    - mvn install of DSLs
@@ -186,7 +223,14 @@ evoal:deploy:
   rules:
     - if: $CI_PIPELINE_SOURCE == "push" &&
           $CI_COMMIT_TAG == null
+    - if: $CI_COMMIT_TAG
     - when: never
+  dependencies: ["dsl:compile-and-install", "evoal:compile-and-test"]
+  needs:
+    - job: "dsl:compile-and-install"
+      artifacts: true
+    - job: "evoal:compile-and-test"
+      artifacts: true
   script:
     - mvn $MAVEN_CLI_OPTS -f $EVOAL_POM -Dbranch=$CI_COMMIT_REF_NAME -pl "!de.evoal:releng.jacoco" -DskipTests flatten:flatten deploy
 
@@ -195,6 +239,7 @@ evoal:deploy:
 ##
 ## Situations
 ##   - push to non-protected branches
+##   - creation of tag
 ##
 ##  Requirements
 ##    - mvn package of DSLs
@@ -204,11 +249,17 @@ all:package:
   stage: Release
   image: $EVOAL_IMAGE
   dependencies: ["dsl:compile-and-install", "evoal:compile-and-test"]
+  needs:
+    - job: "dsl:compile-and-install"
+      artifacts: true
+    - job: "evoal:compile-and-test"
+      artifacts: true
   script:
     - ci/create-release.sh "$CI_JOB_NAME"
   rules:
     - if: $CI_PIPELINE_SOURCE == "push" &&
           $CI_COMMIT_TAG == null
+    - if: $CI_COMMIT_TAG
     - when: never
   artifacts:
     name: "evoal-$CI_COMMIT_REF_NAME-$CI_COMMIT_SHORT_SHA-release"
@@ -221,6 +272,7 @@ all:package:
 ##
 ## Situations
 ##   - push to non-protected branches
+##   - creation of tag
 ##
 ##  Requirements
 ##    - none
@@ -233,6 +285,7 @@ pages:
   rules:
     - if: $CI_PIPELINE_SOURCE == "push" &&
           $CI_COMMIT_TAG == null
+    - if: $CI_COMMIT_TAG
     - when: never
   script:
     - python3 ci/create-pages.py
@@ -270,6 +323,10 @@ evoal:unit:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event" &&
           $CI_COMMIT_TAG == null
     - when: never
+  dependencies: ["dsl:compile-and-install"]
+  needs:
+    - job: "dsl:compile-and-install"
+      artifacts: true
   script:
     - mvn $MAVEN_CLI_OPTS -f $EVOAL_POM -Dbranch=$CI_COMMIT_REF_NAME -DskipTests package
     - ci/create-release.sh
@@ -305,6 +362,10 @@ evoal:coverage:
           $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "develop" &&
           $CI_COMMIT_TAG == null
     - when: never
+  dependencies: ["evoal:unit"]
+  needs:
+    - job: evoal:unit
+      artifacts: true
   script:
     - jacoco_paths=`find src -path "**/src/main/java" -type d | sed -e 's@^@'"$CI_PROJECT_DIR"'/@'`
     - python /opt/cover2cover.py src/evoal/core/de.evoal.releng.jacoco/target/site/jacoco-aggregate/jacoco.xml $jacoco_paths > src/evoal/core/de.evoal.releng.jacoco/target/site/coverage.xml
@@ -412,3 +473,4 @@ publish:
     paths:
       - evoal
     when: on_success
+    
