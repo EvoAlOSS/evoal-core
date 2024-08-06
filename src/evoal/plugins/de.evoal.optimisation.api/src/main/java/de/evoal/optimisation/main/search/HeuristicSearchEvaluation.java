@@ -72,9 +72,8 @@ public class HeuristicSearchEvaluation implements MainClass {
         if(targetFile != null) {
             PropertiesPairStreamSupplier targetStream = BeanFactory.create("target-stream", PropertiesPairStreamSupplier.class);
             targets = targetStream.get().toList();
+            log.info("Processing {} targets during evaluation.", targets.size());
         }
-
-        log.info("Processing {} targets during evaluation.", targets.size());
 
         final long startTime = System.currentTimeMillis();
         process();
