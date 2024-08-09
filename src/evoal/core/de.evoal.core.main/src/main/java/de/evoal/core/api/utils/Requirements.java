@@ -292,7 +292,7 @@ public final class Requirements {
      * @throws IllegalArgumentException Iff the passed value is not a probability.
      */
     public static double requireProbability(final double value) {
-        if(value < 0.0 || value > 0.0) {
+        if(value < 0.0 || value > 1.0) {
             throw new IllegalArgumentException("Passed value is not a probability: " + value);
         }
 

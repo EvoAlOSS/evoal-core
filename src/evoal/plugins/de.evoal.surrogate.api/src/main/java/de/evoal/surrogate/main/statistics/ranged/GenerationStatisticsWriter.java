@@ -29,7 +29,7 @@ import lombok.extern.slf4j.Slf4j;
  * Small helper class for collecting and writing the generation-based statistics.
  */
 @Slf4j
-@Named("range-correlated")
+@Named("de.evoal.surrogate.optimisation.range-correlated")
 @Dependent
 public class GenerationStatisticsWriter implements StatisticsWriter {
     @Inject

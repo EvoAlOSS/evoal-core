@@ -13,6 +13,7 @@ import de.evoal.optimisation.api.statistics.writer.ColumnType;
 import de.evoal.optimisation.api.statistics.writer.StatisticsWriter;
 import de.evoal.core.api.utils.LanguageHelper;
 import de.evoal.languages.model.base.Instance;
+import de.evoal.languages.model.base.TypeDefinition;
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.surrogate.api.training.TrainingDataManager;
@@ -36,31 +37,17 @@ import java.util.stream.Collectors;
  * Small helper class for collecting and writing the generation-based statistics.
  */
 @Slf4j
-@Named("correlated")
+@Named("de.evoal.surrogate.optimisation.correlated")
 @Dependent
 public class GenerationStatisticsWriter implements StatisticsWriter {
-    /**
-     * List of all existing fitness functions.
-     */
-    private List<Function<Properties, Properties>> functions;
 
     @Inject
     private LanguageHelper helper;
-
-    /**
-     * List of all function names
-     */
-    // TODO @Inject @Named("function-names")
-    private List<String> functionNames;
-
 
     private long startTime;
 
     private IterationResult generationWithBestIndividual;
     private long endTime;
-
-    @Inject
-    private Provider<Function<Properties, Properties>> fitnessFactory;
 
     @Inject @ConfigurationValue(entry = OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.optimisation-function")
     private Instance config;
@@ -73,43 +60,34 @@ public class GenerationStatisticsWriter implements StatisticsWriter {
 
     @Inject @Named("surrogate-target-properties-specification")
     private PropertiesSpecification targetSpec;
-        private List<Properties> sourceTrainingPoints;
+
+    @Inject
+    @ConfigurationValue(entry = OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "problem.maximise")
+    private boolean maximise;
+    private List<Properties> sourceTrainingPoints;
+
+    private Writer writer;
 
     /**
      * Creates a new GenerationStatistics instance.
      */
 
     @Inject
+    @Named("csv")
     private WriterStrategy strategy;
 
     @PostConstruct
     public void init() {
-        final String selectedFunctionName = helper.lookup(config, "name");
-
         startTime = System.currentTimeMillis();
-        // create fitness functions for comparison
-        this.functionNames.sort((a, b) -> {
-            if(selectedFunctionName.equals(a)) {
-                return Integer.MIN_VALUE;
-            } else if(selectedFunctionName.equals(b)) {
-                return Integer.MAX_VALUE;
-            } else {
-                return String.CASE_INSENSITIVE_ORDER.compare(a, b);
-            }
-        });
-        this.functions = functionNames.stream()
-                .map(name -> {
-                    setFitnessType(config, name);
-                    return fitnessFactory.get();
-                })
-                .collect(Collectors.toList());
-
-        // restore fitness function
-        setFitnessType(config, selectedFunctionName);
     }
 
     @Override
     public StatisticsWriter init(Instance configuration) {
+        try {
+            this.writer = createWriter();
+        } catch (WriterException e) {
+            log.error("Could not create Correlated Statistics Writer: ", e);
+        }
         return this;
     }
 
@@ -145,8 +123,8 @@ public class GenerationStatisticsWriter implements StatisticsWriter {
         for(int t = 0; t < trainingsSize; t++) {
             for(int d = 0; d < dimensions; ++d) {
                 final double value = sourceTrainingPoints
-                                            .get(t)
-                                            .getAsDouble(d);
+                        .get(t)
+                        .getAsDouble(d);
                 trainingsMatrix.set(d, t, value);
                 onTheFlyMatrix.set(d, t, value);
             }
@@ -216,11 +194,7 @@ public class GenerationStatisticsWriter implements StatisticsWriter {
         columns.add(new Column("generation", ColumnType.Integer));
         columns.add(new Column("individual", ColumnType.String));
         columns.add(new Column("age", ColumnType.Integer));
-
-        final int nmrOfFunctions = functionNames.size();
-        for (int i = 0; i < nmrOfFunctions; ++i) {
-            columns.add(new Column(functionNames.get(i), ColumnType.Double));
-        }
+        columns.add(new Column("fitness-function", ColumnType.Double));
 
         for (int x = 0; x < sourceSpec.size(); ++x) {
             for (int y = 0; y < sourceSpec.size(); ++y) {
@@ -246,23 +220,17 @@ public class GenerationStatisticsWriter implements StatisticsWriter {
     private Object[] dataOfBest() {
         fetchTrainingData();
 
-        final Object [] data = new Object[3 + functionNames.size() + (int)Math.pow(sourceSpec.size(), 2) + 2 + (int)Math.pow(sourceSpec.size(), 2) + 2 + 1];
-
+        final Object [] data = new Object[3 + 1 + (int)Math.pow(sourceSpec.size(), 2) + 2 + (int)Math.pow(sourceSpec.size(), 2) + 2 + 1];
         final Candidate bestCandidate = generationWithBestIndividual.bestCandidate();
         final Properties candidate = bestCandidate.searchSpaceRepresentation();
 
         data[0] = generationWithBestIndividual.iteration();
         data[1] = Arrays.toString(candidate.getValues());
         data[2] = bestCandidate.age();
+        final OptimisationValue fitness = (OptimisationValue) bestCandidate.value();
+        data[3] = fitness;
 
-        for(int i = 0; i < functions.size(); ++i) {
-            final OptimisationValue fitness = (OptimisationValue) functions.get(i).apply(candidate);
-            data[3 + i] = fitness;
-            throw new IllegalArgumentException("fix me");
-        }
-
-        calculateCovariance(candidate, data, 3 + functions.size());
-
+        calculateCovariance(candidate, data, 3 + 1);
         data[data.length - 1] = endTime - startTime;
 
         return data;
@@ -270,21 +238,13 @@ public class GenerationStatisticsWriter implements StatisticsWriter {
 
     private void fetchTrainingData() {
         final PropertiesSpecification spec = PropertiesSpecification.builder()
-                                                                    .add(sourceSpec)
-                                                                    .add(targetSpec)
-                                                                    .build();
+                .add(sourceSpec)
+                .add(targetSpec)
+                .build();
 
         sourceTrainingPoints = manager.getTrainingStream()
-                                      .apply(spec)
-                                      .collect(Collectors.toList());
-    }
-
-    /**
-     * Changes the fitness type entry in the given config object.
-     */
-    private static void setFitnessType(final Instance config, final String name) {
-        //config.put("name", name);
-        throw new IllegalStateException("We have to change the actual fitness type by looking up the correct definition.");
+                .apply(spec)
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -295,19 +255,20 @@ public class GenerationStatisticsWriter implements StatisticsWriter {
     private void updateBestGeneration(final IterationResult result) {
         if(generationWithBestIndividual == null) {
             generationWithBestIndividual = result;
-        } else if(generationWithBestIndividual.bestCandidate().value().compareTo(result.bestCandidate().value()) <= 0) {
-            generationWithBestIndividual = result;
+        } else {
+            int comparison = generationWithBestIndividual.bestCandidate().value().compareTo(result.bestCandidate().value());
+            if (this.maximise && comparison <= 0 || !this.maximise && comparison >= 0) {
+                generationWithBestIndividual = result;
+            }
         }
     }
 
     public void write() {
         endTime = System.currentTimeMillis();
         try {
-            final Writer writer = createWriter();
-
             writer.addRecord(dataOfBest());
 
-            writer.close();
+            strategy.close(writer);
         } catch (final WriterException e) {
             log.error("Failed to write statistics:", e);
         }

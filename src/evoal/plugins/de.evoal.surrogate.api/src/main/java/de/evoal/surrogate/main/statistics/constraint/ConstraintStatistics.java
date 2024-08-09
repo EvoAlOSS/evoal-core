@@ -31,7 +31,7 @@ import java.util.stream.Stream;
  * Small helper class for collecting and writing the generation-based statistics.
  */
 @Slf4j
-@Named("constraint-statistics")
+@Named("de.evoal.surrogate.optimisation.constraint-statistics")
 @Dependent
 public class ConstraintStatistics implements StatisticsWriter {
     private final static int NUMBER_OF_STATISTICS_PER_CONSTRAINT = 5;

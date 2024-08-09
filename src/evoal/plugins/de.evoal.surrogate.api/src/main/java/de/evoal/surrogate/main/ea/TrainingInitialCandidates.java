@@ -8,6 +8,7 @@ import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.properties.stream.FileBasedPropertiesStreamSupplier;
 import de.evoal.core.api.properties.stream.PropertiesStreamSupplier;
+import de.evoal.surrogate.api.training.TrainingDataManager;
 import de.evoal.languages.model.base.Instance;
 import de.evoal.surrogate.api.SurrogateBlackboardEntries;
 import lombok.extern.slf4j.Slf4j;
@@ -95,8 +96,6 @@ public class TrainingInitialCandidates implements InitialCandidatesProvider {
         final File trainingFile = new File(filename);
         return new FileBasedPropertiesStreamSupplier(trainingFile, totalSpecification);
     }
-
-
 
     @Override
     public Stream<Properties> create() {
