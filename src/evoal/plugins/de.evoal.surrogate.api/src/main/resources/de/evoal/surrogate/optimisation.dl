@@ -41,6 +41,7 @@ module de.evoal.surrogate.optimisation {
 	 * Use training data as initial population.
 	 */
 	type training extends 'initial-population' {
+	    'training-file' : string;
 	}
 	
 	/**

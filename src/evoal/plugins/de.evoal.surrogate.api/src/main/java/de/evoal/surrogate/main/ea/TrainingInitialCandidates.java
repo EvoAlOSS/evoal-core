@@ -1,6 +1,8 @@
 package de.evoal.surrogate.main.ea;
 
 import de.evoal.core.api.board.Blackboard;
+import de.evoal.core.api.utils.LanguageHelper;
+import de.evoal.languages.model.base.Attribute;
 import de.evoal.optimisation.api.model.InitialCandidatesProvider;
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;
@@ -10,6 +12,7 @@ import de.evoal.languages.model.base.Instance;
 import de.evoal.surrogate.api.SurrogateBlackboardEntries;
 import lombok.extern.slf4j.Slf4j;
 
+import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.File;
@@ -20,28 +23,29 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Slf4j
+@Named("de.evoal.surrogate.optimisation.training")
+@Dependent
 public class TrainingInitialCandidates implements InitialCandidatesProvider {
     @Inject
     private Blackboard board;
 
     @Inject
-    @Named("genotype-specification")
+    @Named("search-space-specification")
     private PropertiesSpecification sourceSpecification;
 
     @Inject
-    @Named("surrogate-target-properties-specification")
+    @Named("optimisation-space-specification")
     private PropertiesSpecification targetSpecification;
 
     private PropertiesSpecification totalSpecification;
 
+    private PropertiesStreamSupplier streamSupplier;
+
+    @Inject
+    private LanguageHelper helper;
+
     private Stream<Properties> createInitialPopulation() {
-        final String filename = board.get(SurrogateBlackboardEntries.SURROGATE_TRAINING_DATA_FILE);
-        final File trainingFile = new File(filename);
-
-        log.info("Using training data from {} for population.", filename);
-
-        final PropertiesStreamSupplier stream = new FileBasedPropertiesStreamSupplier(trainingFile, PropertiesSpecification.builder().add(sourceSpecification).add(targetSpecification).build());
-        final List<Properties> properties = stream.apply(totalSpecification)
+        final List<Properties> properties = streamSupplier.apply(totalSpecification)
                         .map(p -> new Properties(sourceSpecification).putAll(p))
                         .collect(Collectors.toList());
 
@@ -62,8 +66,37 @@ public class TrainingInitialCandidates implements InitialCandidatesProvider {
                                 .add(targetSpecification)
                                 .build();
 
+        final Attribute trainingFile = configuration.findAttribute("training-file");
+        if(trainingFile == null) {
+            streamSupplier = createStreamFromBlackboard();
+        } else {
+            streamSupplier = createStreamFromConfiguration(configuration);
+        }
+
         return this;
     }
+
+    private PropertiesStreamSupplier createStreamFromBlackboard() {
+        final String filename = board.get(SurrogateBlackboardEntries.SURROGATE_TRAINING_DATA_FILE);
+
+        return createStreamFromFilename(filename);
+    }
+
+    private PropertiesStreamSupplier createStreamFromConfiguration(Instance configuration) {
+        final String filename = helper.lookup(configuration, "training-file");
+
+        return createStreamFromFilename(filename);
+    }
+
+
+    private PropertiesStreamSupplier createStreamFromFilename(final String filename) {
+        log.info("Using training data from {} for population.", filename);
+
+        final File trainingFile = new File(filename);
+        return new FileBasedPropertiesStreamSupplier(trainingFile, totalSpecification);
+    }
+
+
 
     @Override
     public Stream<Properties> create() {
