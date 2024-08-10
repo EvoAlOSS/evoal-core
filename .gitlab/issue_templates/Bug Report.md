@@ -4,7 +4,7 @@
 
 ## Component
 
-(search, generator, Eclipse, ...)
+(evoal.core, optimisation.ea, generator.main, Eclipse, ...)
 
 ## Steps to reproduce
 

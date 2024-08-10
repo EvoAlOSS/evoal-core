@@ -8,11 +8,7 @@
 
 ## Component
 
-(search, generator, Eclipse, ...)
-
-## Expected Result
-
-(What should be the result of this issue)
+(evoal.core, optimisation.ea, generator.main, Eclipse, ...)
 
 ## Improvement
 
