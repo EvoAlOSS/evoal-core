@@ -1,7 +1,5 @@
 package de.evoal.core.api.board;
 
-import org.jboss.weld.junit5.EnableWeld;
-import org.jboss.weld.junit5.WeldJunit5Extension;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

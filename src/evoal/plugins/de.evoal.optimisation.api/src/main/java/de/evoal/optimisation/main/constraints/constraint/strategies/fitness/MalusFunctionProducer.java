@@ -1,13 +1,13 @@
 package de.evoal.optimisation.main.constraints.constraint.strategies.fitness;
 
 import de.evoal.core.api.cdi.ConfigurationValue;
+import de.evoal.core.api.utils.AttributeHelper;
 import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
 import de.evoal.optimisation.api.constraints.model.Constraint;
 import de.evoal.optimisation.api.constraints.model.Constraints;
 import de.evoal.optimisation.api.constraints.strategies.fitness.MalusForFitnessStrategy;
 import de.evoal.optimisation.api.constraints.strategies.fitness.MalusFunction;
 import de.evoal.core.api.properties.info.PropertiesDependencies;
-import de.evoal.core.api.utils.LanguageHelper;
 import de.evoal.optimisation.api.constraints.calculation.CalculationFactory;
 import de.evoal.optimisation.api.constraints.calculation.CalculationStrategy;
 import de.evoal.core.api.properties.PropertiesSpecification;
@@ -29,14 +29,14 @@ import java.util.stream.Collectors;
 @ApplicationScoped
 public class MalusFunctionProducer {
     @Inject
-    private Provider<LanguageHelper> helper;
+    private Provider<AttributeHelper> helper;
 
     @Inject
     private ConfigurationUtils configUtil;
 
     @ApplicationScoped @Produces
     public MalusForFitnessStrategy create(
-            final @ConfigurationValue(entry = OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.handlers") Instance [] handlers,
+            final @ConfigurationValue(entry = OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.handlers") List<Instance> handlers,
             final @Named("search-space-specification") PropertiesSpecification source,
             final @Named("optimisation-space-specification") PropertiesSpecification target,
             final @Named("output-dependencies") PropertiesDependencies dependencies,

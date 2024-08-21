@@ -2,18 +2,18 @@ package de.evoal.optimisation.api.constraints.calculation;
 
 import de.evoal.core.api.cdi.BeanFactory;
 import de.evoal.core.api.cdi.ConfigurationValue;
+import de.evoal.core.api.utils.AttributeHelper;
 import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
 import de.evoal.optimisation.api.constraints.model.Constraint;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
 
-import de.evoal.core.api.utils.LanguageHelper;
 import de.evoal.languages.model.base.Instance;
 
 import javax.inject.Inject;
-import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @ApplicationScoped
@@ -21,23 +21,22 @@ public class CalculationFactory {
     private final Map<String, Instance> calculationConfigurationByCategory = new HashMap<>();
 
     @Inject
-    private LanguageHelper helper;
+    private AttributeHelper helper;
 
     @Inject
     @ConfigurationValue(entry = OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.handlers")
-    private Instance [] handlerConfigurations;
+    private List<Instance> handlerConfigurations;
 
     @PostConstruct
     public void init() {
-        Arrays.stream(handlerConfigurations)
-                             .map(Instance.class::cast)
-                             .filter(LanguageHelper.filterInstanceByType("constraint-handler"))
-                             .forEach(i -> {
-                                 final String category = helper.lookup(i, "category");
-                                 final Instance config = helper.lookup(i, "calculation");
+       handlerConfigurations.stream()
+                            .filter(AttributeHelper.filterInstanceByType("constraint-handler"))
+                            .forEach(i -> {
+                                final String category = helper.lookup(i, "category");
+                                final Instance config = helper.lookup(i, "calculation");
 
-                                 calculationConfigurationByCategory.put(category, config);
-                             });
+                                calculationConfigurationByCategory.put(category, config);
+                            });
     }
 
     public CalculationStrategy create(final Constraint constraint) {

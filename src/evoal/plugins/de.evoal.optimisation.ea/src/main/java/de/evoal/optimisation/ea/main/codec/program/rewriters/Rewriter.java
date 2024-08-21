@@ -8,7 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public abstract class Rewriter<T extends Operation> implements TreeRewriter<Op<Double>> {
-    private  Class<T> nodeType;
+    private final Class<T> nodeType;
 
     Rewriter(final Class<T> nodeType) {
         this.nodeType = nodeType;

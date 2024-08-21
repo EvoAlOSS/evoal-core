@@ -1,6 +1,6 @@
 package de.evoal.optimisation.main.comparator;
 
-import de.evoal.core.api.languages.ExpressionEvaluator;
+import de.evoal.core.api.languages.AttributeEvaluator;
 import de.evoal.optimisation.api.model.OptimisationValueComparator;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.languages.model.base.Instance;
@@ -19,7 +19,7 @@ public class HierarchicalComparator implements OptimisationValueComparator {
     private PropertiesSpecification optimisationSpecification;
 
     @Inject
-    private ExpressionEvaluator evaluator;
+    private AttributeEvaluator evaluator;
 
     @Override
     public HierarchicalValue toValue(final double[] fitnessValues) {

@@ -1,6 +1,5 @@
 package de.evoal.optimisation.main.statistics.io.csv;
 
-import de.evoal.core.api.board.CoreBlackboardEntries;
 import de.evoal.core.api.cdi.BlackboardValue;
 import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
 import de.evoal.optimisation.api.statistics.io.Writer;

@@ -9,7 +9,6 @@ import de.evoal.core.api.properties.io.PropertiesIOFactory;
 import de.evoal.core.api.properties.io.PropertiesReader;
 import de.evoal.core.api.properties.io.PropertiesWriter;
 import de.evoal.core.arff.cdi.ArffBlackboardEntries;
-import de.evoal.languages.model.base.Definition;
 import de.evoal.languages.model.ddl.DataDescriptionModule;
 import de.evoal.languages.model.ddl.dsl.DataDescriptionLanguageStandaloneSetup;
 import de.evoal.languages.model.ddl.impl.DdlPackageImpl;

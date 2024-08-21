@@ -27,14 +27,14 @@ import lombok.Getter;
  * Class defining a particle - the basic unit of a swarm.
  */
 public class Particle {
-    private int id;
+    private final int id;
 
     @Getter
-    private Mover mover;
+    private final Mover mover;
 
-    private State current;
+    private final State current;
 
-    private State personalBest;
+    private final State personalBest;
 
     /**
      * Creates a new instance of Particle.

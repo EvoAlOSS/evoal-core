@@ -4,7 +4,7 @@ import de.evoal.core.api.cdi.BeanFactory;
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.properties.PropertySpecification;
-import de.evoal.core.api.utils.LanguageHelper;
+import de.evoal.core.api.utils.AttributeHelper;
 import de.evoal.core.api.utils.Requirements;
 import de.evoal.optimisation.ea.api.codec.CustomCodec;
 import de.evoal.optimisation.ea.api.codec.model.ModelChromosome;
@@ -35,7 +35,7 @@ public class ModelGenotypeCodec implements CustomCodec<ModelGene> {
     private static final String MODEL_DATA_NAME = "de.evoal.optimisation.ea.mdo.model";
 
     @Inject
-    private LanguageHelper helper;
+    private AttributeHelper helper;
 
     @Inject
     private @Named("genotype-specification") PropertiesSpecification specification;

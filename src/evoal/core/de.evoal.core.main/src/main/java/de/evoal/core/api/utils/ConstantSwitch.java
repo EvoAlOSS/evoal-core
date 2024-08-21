@@ -3,9 +3,6 @@ package de.evoal.core.api.utils;
 import de.evoal.languages.model.base.*;
 import de.evoal.languages.model.base.util.BaseSwitch;
 
-
-import java.util.Objects;
-
 public class ConstantSwitch extends BaseSwitch<Object> {
     private ConstantSwitch() {
     }

@@ -1,9 +1,9 @@
 package de.evoal.optimisation.main.constraints.constraint.strategies.calculations;
 
+import de.evoal.core.api.utils.AttributeHelper;
 import de.evoal.optimisation.api.constraints.model.Constraint;
 import de.evoal.optimisation.api.constraints.model.ConstraintResult;
 import de.evoal.optimisation.api.constraints.strategies.CalculationResult;
-import de.evoal.core.api.utils.LanguageHelper;
 import de.evoal.optimisation.api.constraints.calculation.CalculationStrategy;
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;
@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 @Named("standard-deviation-calculation")
 public class StandardDeviationCalculation implements CalculationStrategy {
     @Inject
-    private LanguageHelper helper;
+    private AttributeHelper helper;
 
     @Inject
     private Deviations deviations;

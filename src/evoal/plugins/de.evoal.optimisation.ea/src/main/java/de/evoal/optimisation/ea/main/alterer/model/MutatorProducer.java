@@ -1,7 +1,7 @@
 package de.evoal.optimisation.ea.main.alterer.model;
 
 import de.evoal.core.api.cdi.BeanFactory;
-import de.evoal.core.api.utils.LanguageHelper;
+import de.evoal.core.api.utils.AttributeHelper;
 import de.evoal.optimisation.ea.api.operators.AltererComponentProvider;
 import de.evoal.optimisation.ea.main.alterer.model.crossover.FeatureSwapCrossover;
 import de.evoal.optimisation.ea.main.alterer.model.mutator.ArrayReorderMutator;
@@ -18,7 +18,7 @@ import javax.inject.Named;
 @ApplicationScoped
 public class MutatorProducer {
     @Inject
-    private LanguageHelper helper;
+    private AttributeHelper helper;
 
     private double probability(final Instance instance) {
         return helper.lookup(instance, "probability");

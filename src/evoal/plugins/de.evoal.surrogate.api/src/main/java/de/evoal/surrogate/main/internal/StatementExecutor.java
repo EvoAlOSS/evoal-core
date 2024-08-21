@@ -1,7 +1,7 @@
 package de.evoal.surrogate.main.internal;
 
 import de.evoal.core.api.cdi.BeanFactory;
-import de.evoal.core.api.languages.ExpressionEvaluator;
+import de.evoal.core.api.languages.AttributeEvaluator;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.utils.ConstantSwitch;
 import de.evoal.core.api.utils.Requirements;
@@ -21,11 +21,8 @@ import de.evoal.surrogate.api.training.TrainingDataManager;
 import lombok.NonNull;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.deltaspike.core.api.provider.BeanProvider;
-import org.eclipse.emf.common.util.EList;
 
 import javax.enterprise.context.Dependent;
-import javax.enterprise.inject.spi.Bean;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.File;
@@ -44,7 +41,7 @@ import java.util.stream.Stream;
 public class StatementExecutor extends MllSwitch<Object> {
 
     @Inject
-    private ExpressionEvaluator evaluator;
+    private AttributeEvaluator evaluator;
 
     private SurrogateConfiguration config;
 

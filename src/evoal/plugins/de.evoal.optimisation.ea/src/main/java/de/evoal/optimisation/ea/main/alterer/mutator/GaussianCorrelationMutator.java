@@ -8,7 +8,6 @@ import java.util.random.RandomGenerator;
 
 import static io.jenetics.internal.math.Basics.clamp;
 import static java.lang.Math.nextDown;
-import static java.lang.String.format;
 
 public class GaussianCorrelationMutator<
         G extends NumericGene<?, G>,

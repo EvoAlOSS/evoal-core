@@ -1,12 +1,10 @@
 package de.evoal.optimisation.ea.main.codec.program.rewriters;
 
 import de.evoal.optimisation.ea.main.codec.program.operations.PlusOperation;
-import io.jenetics.ext.rewriting.TreePattern;
 import io.jenetics.ext.util.TreeNode;
 import io.jenetics.prog.op.Const;
 import io.jenetics.prog.op.EphemeralConst;
 import io.jenetics.prog.op.Op;
-import io.jenetics.prog.op.Var;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Optional;

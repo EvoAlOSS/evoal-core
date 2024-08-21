@@ -180,11 +180,16 @@ public class TypeDefinitionImpl extends DefinitionImpl implements TypeDefinition
 	 */
 	@Override
 	public AttributeDefinition findAttribute(final String name) {
-		return getAttributes().stream()
-						.filter(a -> a.getName().equals(name))
-						.findFirst()
-						.orElse(null);
+		AttributeDefinition attribute =  getAttributes().stream()
+			.filter(a -> a.getName().equals(name))
+			.findFirst()
+			.orElse(null);
 		
+		if(attribute == null && getSuperType() != null) {
+			attribute = getSuperType().findAttribute(name);
+		}
+		
+		return attribute;
 	}
 
 	/**

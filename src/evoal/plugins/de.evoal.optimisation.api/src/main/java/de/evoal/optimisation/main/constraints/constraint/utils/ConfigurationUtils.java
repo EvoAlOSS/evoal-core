@@ -1,34 +1,31 @@
 package de.evoal.optimisation.main.constraints.constraint.utils;
 
 import de.evoal.core.api.cdi.BeanFactory;
-import de.evoal.core.api.utils.LanguageHelper;
+import de.evoal.core.api.utils.AttributeHelper;
 import de.evoal.languages.model.base.Instance;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @ApplicationScoped
 public class ConfigurationUtils {
     @Inject
-    private LanguageHelper helper;
+    private AttributeHelper helper;
 
-    public List<Instance> findConstraintHandlerByHandlingStrategy(final Instance [] handlers, final String name) {
-        return Arrays.stream(handlers)
-                       .map(Instance.class::cast)
-                       .filter(LanguageHelper.filterInstanceByType("constraint-handler"))
+    public List<Instance> findConstraintHandlerByHandlingStrategy(final List<Instance> handlers, final String name) {
+        return handlers.stream()
+                       .filter(AttributeHelper.filterInstanceByType("constraint-handler"))
                        .filter(helper.filterByAttributesInstanceType("constraint-handling", name))
                        .collect(Collectors.toList());
     }
 
-    public Instance findConstraintHandlerByHandlingStrategyAndCategory(final Instance [] handlers, final String name, final String category) {
-        return Arrays.stream(handlers)
-                .map(Instance.class::cast)
-                .filter(LanguageHelper.filterInstanceByType("constraint-handler"))
+    public Instance findConstraintHandlerByHandlingStrategyAndCategory(final List<Instance> handlers, final String name, final String category) {
+        return handlers.stream()
+                .filter(AttributeHelper.filterInstanceByType("constraint-handler"))
                 .filter(helper.filterByAttributesInstanceType("constraint-handling", name))
-                .filter(i -> category.equals(BeanFactory.create(LanguageHelper.class).lookup(i, "category")))
+                .filter(i -> category.equals(BeanFactory.create(AttributeHelper.class).lookup(i, "category")))
                 .findFirst()
                 .get();
     }

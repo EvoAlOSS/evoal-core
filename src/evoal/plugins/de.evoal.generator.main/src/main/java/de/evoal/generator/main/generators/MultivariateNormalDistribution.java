@@ -1,10 +1,10 @@
 package de.evoal.generator.main.generators;
 
+import de.evoal.core.api.languages.AttributeEvaluator;
 import de.evoal.core.api.utils.InitializationException;
 import de.evoal.generator.api.GeneratorFunction;
 import de.evoal.languages.model.generator.Step;
 import de.evoal.languages.model.base.*;
-import de.evoal.core.api.languages.ExpressionEvaluator;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 
@@ -18,7 +18,7 @@ import javax.inject.Inject;
 public class MultivariateNormalDistribution extends MultivariateRealDistributionBase {
 
     @Inject
-    private ExpressionEvaluator evaluator;
+    private AttributeEvaluator evaluator;
 
     @Override
     public GeneratorFunction init(final Step configuration) throws InitializationException {

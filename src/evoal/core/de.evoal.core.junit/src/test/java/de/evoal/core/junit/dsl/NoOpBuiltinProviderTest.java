@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 
 import java.net.URI;
 import java.util.Collection;
-import java.util.Collections;
 
 public class NoOpBuiltinProviderTest {
     @Test

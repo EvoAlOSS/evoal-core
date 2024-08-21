@@ -9,10 +9,10 @@ import de.evoal.core.api.cdi.BeanFactory;
 import de.evoal.core.api.cdi.Component;
 import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
-import de.evoal.core.api.languages.ExpressionEvaluator;
+import de.evoal.core.api.languages.AttributeEvaluator;
 import de.evoal.optimisation.api.model.InitialCandidatesProvider;
 import de.evoal.optimisation.api.model.OptimisationAlgorithm;
-import de.evoal.core.api.utils.LanguageHelper;
+import de.evoal.core.api.utils.AttributeHelper;
 import de.evoal.optimisation.api.model.OptimisationValue;
 
 import de.evoal.optimisation.api.statistics.writer.StatisticsWriter;
@@ -43,10 +43,10 @@ public class EvolutionaryAlgorithmOptimisation implements OptimisationAlgorithm 
 	private Blackboard board;
 
 	@Inject
-	private ExpressionEvaluator evaluator;
+	private AttributeEvaluator evaluator;
 
 	@Inject
-	private LanguageHelper helper;
+	private AttributeHelper helper;
 
 	@Inject
 	@ConfigurationValue(entry = OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.number-of-generations")

@@ -1,7 +1,7 @@
 package de.evoal.surrogate.api.configuration;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import de.evoal.core.api.languages.ExpressionEvaluator;
+import de.evoal.core.api.languages.AttributeEvaluator;
 import de.evoal.languages.model.ddl.DataDescription;
 import de.evoal.languages.model.mll.PartialSurrogateFunctionDefinition;
 import de.evoal.languages.model.mll.SurrogateLayerDefinition;
@@ -64,7 +64,7 @@ public class FunctionCombinerConfiguration {
                 .forEach(outputDimensions::add);
     }
 
-    public static FunctionCombinerConfiguration from(final SurrogateLayerDefinition definition, ExpressionEvaluator evaluator) {
+    public static FunctionCombinerConfiguration from(final SurrogateLayerDefinition definition, AttributeEvaluator evaluator) {
         final FunctionCombinerConfiguration configuration = new FunctionCombinerConfiguration();
         configuration.setName(definition.getName());
 

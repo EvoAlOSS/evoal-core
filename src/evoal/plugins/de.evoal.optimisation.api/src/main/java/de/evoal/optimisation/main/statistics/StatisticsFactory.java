@@ -3,26 +3,25 @@ package de.evoal.optimisation.main.statistics;
 import de.evoal.core.api.cdi.Component;
 import de.evoal.core.api.cdi.ComponentProducer;
 import de.evoal.core.api.cdi.ConfigurationValue;
-import de.evoal.core.api.languages.ExpressionEvaluator;
+import de.evoal.core.api.languages.AttributeEvaluator;
 import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
 import de.evoal.optimisation.api.statistics.writer.StatisticsWriter;
 import de.evoal.optimisation.main.statistics.internal.MultipleStatisticsWriter;
-import de.evoal.languages.model.base.Array;
 import de.evoal.languages.model.base.Instance;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.Dependent;
 import javax.enterprise.inject.Produces;
 
-import de.evoal.languages.model.base.Value;
-
 import javax.inject.Inject;
+import java.util.Collections;
+import java.util.List;
 import java.util.stream.Stream;
 
 @ApplicationScoped
 public class StatisticsFactory {
     @Inject
-    private ExpressionEvaluator evaluator;
+    private AttributeEvaluator evaluator;
 
     @Inject
     private ComponentProducer producer;
@@ -31,23 +30,18 @@ public class StatisticsFactory {
     @Dependent
     @Component
     public StatisticsWriter create(
-            final @ConfigurationValue(entry = OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "problem.documentation") Array problemWriter,
-            final @ConfigurationValue(entry = OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.documentation") Array algorithmWriter) {
+            @ConfigurationValue(entry = OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "problem.documentation") List<Instance> problemWriter,
+            @ConfigurationValue(entry = OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.documentation") List<Instance> algorithmWriter) {
 
-        Stream<Value> problemStream = Stream.empty();
-        Stream<Value> algorithmStream = Stream.empty();
-
-        if(problemWriter != null) {
-            problemStream = problemWriter.getValues().stream();
+        if(problemWriter == null) {
+            problemWriter = Collections.emptyList();
         }
 
-        if(algorithmWriter != null) {
-            algorithmStream = algorithmWriter.getValues().stream();
+        if(algorithmWriter == null) {
+            algorithmWriter = Collections.emptyList();
         }
 
-        final StatisticsWriter [] writers = Stream.concat(problemStream, algorithmStream)
-                                                  .map(evaluator::evaluate)
-                                                  .map(Instance.class::cast)
+        final StatisticsWriter [] writers = Stream.concat(problemWriter.stream(), algorithmWriter.stream())
                                                   .map(i -> producer.create(StatisticsWriter.class, i))
                                                   .toArray(i -> new StatisticsWriter[i]);
 

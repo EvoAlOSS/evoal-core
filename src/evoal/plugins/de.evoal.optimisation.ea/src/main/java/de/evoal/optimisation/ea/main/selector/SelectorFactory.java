@@ -2,7 +2,7 @@ package de.evoal.optimisation.ea.main.selector;
 
 import de.evoal.core.api.cdi.BeanFactory;
 import de.evoal.core.api.cdi.ConfigurationValue;
-import de.evoal.core.api.utils.LanguageHelper;
+import de.evoal.core.api.utils.AttributeHelper;
 import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
 import de.evoal.optimisation.ea.api.operators.SelectorComponent;
 import de.evoal.optimisation.ea.api.operators.SelectorComponentProvider;
@@ -21,7 +21,7 @@ import javax.inject.Named;
 @Slf4j
 public class SelectorFactory {
 	@Inject
-	private LanguageHelper helper;
+	private AttributeHelper helper;
 
 	@Inject
 	@ConfigurationValue(entry = OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.size-of-population")

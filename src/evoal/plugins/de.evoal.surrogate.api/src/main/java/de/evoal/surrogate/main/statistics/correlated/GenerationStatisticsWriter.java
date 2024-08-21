@@ -1,5 +1,6 @@
 package de.evoal.surrogate.main.statistics.correlated;
 
+import de.evoal.core.api.utils.AttributeHelper;
 import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
 import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.optimisation.api.model.OptimisationValue;
@@ -11,9 +12,7 @@ import de.evoal.optimisation.api.statistics.io.WriterStrategy;
 import de.evoal.optimisation.api.statistics.writer.Column;
 import de.evoal.optimisation.api.statistics.writer.ColumnType;
 import de.evoal.optimisation.api.statistics.writer.StatisticsWriter;
-import de.evoal.core.api.utils.LanguageHelper;
 import de.evoal.languages.model.base.Instance;
-import de.evoal.languages.model.base.TypeDefinition;
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.surrogate.api.training.TrainingDataManager;
@@ -25,12 +24,10 @@ import smile.math.matrix.Matrix;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.inject.Provider;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
@@ -42,7 +39,7 @@ import java.util.stream.Collectors;
 public class GenerationStatisticsWriter implements StatisticsWriter {
 
     @Inject
-    private LanguageHelper helper;
+    private AttributeHelper helper;
 
     private long startTime;
 

@@ -1,6 +1,6 @@
 package de.evoal.optimisation.main.comparator;
 
-import de.evoal.core.api.languages.ExpressionEvaluator;
+import de.evoal.core.api.languages.AttributeEvaluator;
 import de.evoal.optimisation.api.model.OptimisationValueComparator;
 import de.evoal.languages.model.base.Instance;
 
@@ -14,7 +14,7 @@ public class WeightedSumComparator implements OptimisationValueComparator {
     private double [] weights;
 
     @Inject
-    private ExpressionEvaluator evaluator;
+    private AttributeEvaluator evaluator;
 
     @Override
     public WeightedSumOptimisationValue toValue(final double[] fitnessValues) {

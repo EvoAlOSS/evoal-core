@@ -1,10 +1,9 @@
 package de.evoal.optimisation.ea.main.codec.vector;
 
-import de.evoal.core.api.languages.ExpressionEvaluator;
+import de.evoal.core.api.languages.AttributeEvaluator;
+import de.evoal.core.api.utils.AttributeHelper;
 import de.evoal.core.api.utils.InitializationException;
-import de.evoal.core.api.utils.LanguageHelper;
 import de.evoal.optimisation.ea.api.codec.CustomCodecDescriber;
-import de.evoal.languages.model.base.Attribute;
 import de.evoal.languages.model.base.Instance;
 import de.evoal.languages.model.base.Definition;
 import lombok.extern.slf4j.Slf4j;
@@ -12,7 +11,6 @@ import lombok.extern.slf4j.Slf4j;
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,10 +22,10 @@ public class VectorGenotypeDescriber implements CustomCodecDescriber {
     private Instance configuration;
 
     @Inject
-    private LanguageHelper helper;
+    private AttributeHelper helper;
 
     @Inject
-    private ExpressionEvaluator evaluator;
+    private AttributeEvaluator evaluator;
 
     @Override
     public CustomCodecDescriber init(final Instance configuration) throws InitializationException {
@@ -40,16 +38,11 @@ public class VectorGenotypeDescriber implements CustomCodecDescriber {
     @Override
     public List<Definition> describe() {
         log.info("Describing Genotype.");
-        final Object [] genes = helper.lookup(configuration, "chromosomes");
+        final List<Instance> genes = helper.lookup(configuration, "chromosomes");
 
-        return Arrays.stream(genes)
-                .map(Instance.class::cast)
-                .map(i -> i.findAttribute("genes"))
-                .map(Attribute::getValue)
-                .map(evaluator::evaluate)
-                .flatMap(l -> ((List<Instance>)(List)l).stream())
-                .map(i -> evaluator.attributeToObject(i, "content"))
-                .map(Definition.class::cast)
+        return genes.stream()
+                .flatMap(i -> helper.<List<Instance>>lookup(i, "genes").stream())
+                .map(i -> helper.<Definition>lookup(i, "content"))
                 .collect(Collectors.toList());
     }
 }

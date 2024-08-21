@@ -10,27 +10,27 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Optional;
 
-public class LanguageHelperRegressionTest {
+public class AttributeHelperRegressionTest {
     private void assertAttributeTypeOfA(final AttributeDefinition attribute) {
         Assertions.assertNotNull(attribute);
         Assertions.assertEquals("a", attribute.getName());
-        Assertions.assertTrue(attribute.getType() instanceof ArrayType);
+        Assertions.assertInstanceOf(ArrayType.class, attribute.getType());
         final ArrayType typeA = (ArrayType) attribute.getType();
-        Assertions.assertTrue(typeA.getElements() instanceof RealType);
+        Assertions.assertInstanceOf(RealType.class, typeA.getElements());
     }
 
     private void assertAttributeTypeOfC(final AttributeDefinition attribute) {
         Assertions.assertNotNull(attribute);
-        Assertions.assertTrue(attribute.getType() instanceof ArrayType);
+        Assertions.assertInstanceOf(ArrayType.class, attribute.getType());
         final ArrayType typeC = (ArrayType) attribute.getType();
-        Assertions.assertTrue(typeC.getElements() instanceof ArrayType);
+        Assertions.assertInstanceOf(ArrayType.class, typeC.getElements());
         final ArrayType typetypeC = (ArrayType) typeC.getElements();
-        Assertions.assertTrue(typetypeC.getElements() instanceof RealType);
+        Assertions.assertInstanceOf(RealType.class, typetypeC.getElements());
     }
 
     private void assertAttributeTypeOfM(final AttributeDefinition attribute) {
         Assertions.assertNotNull(attribute);
-        Assertions.assertTrue(attribute.getType() instanceof RealType);
+        Assertions.assertInstanceOf(RealType.class, attribute.getType());
     }
 
     @Test

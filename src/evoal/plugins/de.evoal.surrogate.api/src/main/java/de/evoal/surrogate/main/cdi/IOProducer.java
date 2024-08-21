@@ -1,9 +1,7 @@
 package de.evoal.surrogate.main.cdi;
 
 import java.io.*;
-import java.util.Map;
 import java.util.function.BiConsumer;
-import java.util.function.BiFunction;
 import java.util.function.Function;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -11,7 +9,6 @@ import javax.enterprise.inject.Produces;
 import javax.inject.Named;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import de.evoal.core.api.properties.PropertySpecification;
 import de.evoal.surrogate.api.configuration.SurrogateConfiguration;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;

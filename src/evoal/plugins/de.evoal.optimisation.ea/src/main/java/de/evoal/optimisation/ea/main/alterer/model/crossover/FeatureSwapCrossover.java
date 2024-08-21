@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 
 @Slf4j
 public class FeatureSwapCrossover extends TreeCrossover implements AltererComponent {
-    private RandomGenerator random = RandomRegistry.random();
+    private final RandomGenerator random = RandomRegistry.random();
 
     /**
      * Constructs an alterer with a given recombination probability.

@@ -1,7 +1,6 @@
 package de.evoal.surrogate.api.function;
 
 import java.util.List;
-import java.util.function.Function;
 
 import de.evoal.surrogate.api.configuration.Parameter;
 import de.evoal.surrogate.api.configuration.PartialFunctionConfiguration;

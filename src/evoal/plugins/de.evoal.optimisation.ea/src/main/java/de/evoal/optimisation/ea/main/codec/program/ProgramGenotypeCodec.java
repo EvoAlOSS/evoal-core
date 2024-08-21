@@ -4,7 +4,7 @@ import de.evoal.core.api.cdi.BeanFactory;
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.properties.PropertySpecification;
-import de.evoal.core.api.utils.LanguageHelper;
+import de.evoal.core.api.utils.AttributeHelper;
 import de.evoal.core.api.utils.Requirements;
 import de.evoal.optimisation.ea.api.codec.CustomCodec;
 import de.evoal.optimisation.ea.api.codec.program.Operation;
@@ -35,7 +35,6 @@ import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Function;
@@ -46,7 +45,7 @@ import java.util.stream.IntStream;
 @Slf4j
 public class ProgramGenotypeCodec implements CustomCodec<ProgramGene<Double>> {
     @Inject
-    private LanguageHelper helper;
+    private AttributeHelper helper;
 
     @Inject
     private @Named("genotype-specification") PropertiesSpecification specification;
@@ -58,24 +57,20 @@ public class ProgramGenotypeCodec implements CustomCodec<ProgramGene<Double>> {
 
     private PropertiesSpecification mapping;
 
-    private PropertiesSpecification variablesSpecification;
-
     private List<GenotypeInformation> information;
 
     @Override
     public ProgramGenotypeCodec init(final Instance config) {
         log.info("Initialising program genotype codec");
-        final Object[] chromosomeConfigurations = helper.lookup(config, "chromosomes");
+        final List<Instance> chromosomeConfigurations = helper.lookup(config, "chromosomes");
 
         final FQNProvider provider = new FQNProvider();
 
-        Requirements.requireFalse(Arrays.stream(chromosomeConfigurations)
-                                        .map(Instance.class::cast)
+        Requirements.requireFalse(chromosomeConfigurations.stream()
                                         .anyMatch(i -> !"de.evoal.optimisation.ea.genetic-programming.program-chromosome".equals(provider.get(i))),
                                  "Non program-chromosome are not allowed.");
 
-        genotypeSpec = Arrays.stream(chromosomeConfigurations)
-                             .map(Instance.class::cast)
+        genotypeSpec = chromosomeConfigurations.stream()
                              .filter(i -> "de.evoal.optimisation.ea.genetic-programming.program-chromosome".equals(provider.get(i)))
                              .map(i -> helper.<DataDescription>lookup(i, "content"))
                              .collect(Collectors.toList());
@@ -98,11 +93,11 @@ public class ProgramGenotypeCodec implements CustomCodec<ProgramGene<Double>> {
                                          .addDescriptions(genotypeSpec.stream())
                                          .build();
 
-        Requirements.requireTrue(mapping.size() == chromosomeConfigurations.length, "Required to be of same size.");
+        Requirements.requireSameSize(mapping.getProperties(), chromosomeConfigurations);
 
         information = IntStream.range(0, mapping.size())
                                .mapToObj(i -> {
-                                    final Instance configuration = (Instance) chromosomeConfigurations[i];
+                                    final Instance configuration = chromosomeConfigurations.get(i);
 
                                     return toChromosome(configuration, i);
                                })
@@ -121,9 +116,8 @@ public class ProgramGenotypeCodec implements CustomCodec<ProgramGene<Double>> {
 
         final List<EphemeralConst<Double>> eConstants = new ArrayList<>();
 
-        final Object [] emphConfigurations = helper.lookup(configuration, "ephemeral-constants");
-        Arrays.stream(emphConfigurations)
-                .map(Instance.class::cast)
+        final List<Instance> emphConfigurations = helper.lookup(configuration, "ephemeral-constants");
+        emphConfigurations.stream()
                 .forEach(i -> {
                     int count = helper.lookup(i, "count");
                     int lower = helper.lookup(i, "lower");
@@ -134,9 +128,8 @@ public class ProgramGenotypeCodec implements CustomCodec<ProgramGene<Double>> {
                             .forEach(eConstants::add);
                 });
 
-        Object [] validatorConfiguration = helper.lookup(configuration, "validators");
-        List<TreeValidator> validators = Arrays.stream(validatorConfiguration)
-                .map(Instance.class::cast)
+        List<Instance> validatorConfiguration = helper.lookup(configuration, "validators");
+        List<TreeValidator> validators = validatorConfiguration.stream()
                 .map(i -> BeanFactory.createComponent(TreeValidator.class, i))
                 .collect(Collectors.toList());
 
@@ -162,9 +155,8 @@ public class ProgramGenotypeCodec implements CustomCodec<ProgramGene<Double>> {
                                        validator);
     }
 
-    private List<Op<Double>> readOperations(final Object [] operations) {
-        return Arrays.stream(operations)
-                     .map(Instance.class::cast)
+    private List<Op<Double>> readOperations(final List<Instance> operations) {
+        return operations.stream()
                      .map(i -> BeanFactory.createComponent(Operation.class, i))
                      .map(c -> (Op<Double>)(Op<?>)c)
                      .collect(Collectors.toList());
@@ -177,15 +169,14 @@ public class ProgramGenotypeCodec implements CustomCodec<ProgramGene<Double>> {
                 .collect(Collectors.toList());
     }
 
-    private PropertiesSpecification readVariablesSpecification(final Object [] variables) {
+    private PropertiesSpecification readVariablesSpecification(final List<Definition> variables) {
         return PropertiesSpecification.builder()
-                                      .add(Arrays.stream(variables).map(Definition.class::cast))
+                                      .add(variables.stream())
                                       .build();
     }
 
-    private <T> List<Const<Double>> readConstants(final Object [] constants) {
-        return Arrays.stream(constants)
-                     .map(Instance.class::cast)
+    private <T> List<Const<Double>> readConstants(final List<Instance> constants) {
+        return constants.stream()
                      .map(constant -> {
                          final String name = helper.lookup(constant, "name");
                          final double value = helper.lookup(constant, "value");

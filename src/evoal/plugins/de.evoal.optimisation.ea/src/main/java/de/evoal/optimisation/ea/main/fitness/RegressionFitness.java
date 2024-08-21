@@ -1,18 +1,17 @@
 package de.evoal.optimisation.ea.main.fitness;
 
 import de.evoal.core.api.cdi.BeanFactory;
+import de.evoal.core.api.utils.AttributeHelper;
 import de.evoal.optimisation.api.model.OptimisationFunction;
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.utils.InitializationException;
-import de.evoal.core.api.utils.LanguageHelper;
 import de.evoal.optimisation.ea.api.fitness.GoodnessOfFitFunction;
 import de.evoal.languages.model.base.Instance;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,7 +20,7 @@ import java.util.stream.Collectors;
 public class RegressionFitness implements OptimisationFunction {
 
     @Inject
-    private LanguageHelper helper;
+    private AttributeHelper helper;
 
     @Inject
     @Named("optimisation-space-specification")
@@ -35,10 +34,9 @@ public class RegressionFitness implements OptimisationFunction {
 
     @Override
     public OptimisationFunction init(final Instance configuration) throws InitializationException {
-        final Object [] calculations = helper.lookup(configuration, "calculations");
+        final List<Instance> calculations = helper.lookup(configuration, "calculations");
 
-        gofFunctions = Arrays.stream(calculations)
-                             .map(Instance.class::cast)
+        gofFunctions = calculations.stream()
                              .map(i -> BeanFactory.createComponent(GoodnessOfFitFunction.class, i))
                              .collect(Collectors.toList());
 

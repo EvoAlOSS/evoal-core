@@ -6,7 +6,6 @@ import de.evoal.surrogate.api.configuration.Parameter;
 import de.evoal.surrogate.api.configuration.PartialFunctionConfiguration;
 import de.evoal.surrogate.api.function.AbstractPartialSurrogateFunctionFactory;
 import de.evoal.surrogate.api.function.PartialSurrogateFunction;
-import smile.classification.KNN;
 
 import java.util.List;
 

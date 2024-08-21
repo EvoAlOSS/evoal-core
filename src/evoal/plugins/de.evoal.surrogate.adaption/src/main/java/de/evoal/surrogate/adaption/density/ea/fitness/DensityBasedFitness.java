@@ -1,10 +1,10 @@
 package de.evoal.surrogate.adaption.density.ea.fitness;
 
+import de.evoal.core.api.utils.AttributeHelper;
 import de.evoal.surrogate.adaption.density.model.DensityData;
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.properties.info.PropertiesRanges;
-import de.evoal.core.api.utils.LanguageHelper;
 import de.evoal.core.api.utils.Requirements;
 import de.evoal.languages.model.base.Instance;
 import de.evoal.optimisation.api.model.OptimisationFunction;
@@ -24,7 +24,7 @@ import java.util.function.BiFunction;
 @Vetoed
 public abstract class DensityBasedFitness extends OptimisationFunctionDecorator {
     @Inject
-    private LanguageHelper helper;
+    private AttributeHelper helper;
 
     private final BiFunction<PartialFunctionConfiguration, String, DensityData> modelCreator;
 

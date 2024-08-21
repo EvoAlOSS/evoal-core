@@ -1,6 +1,6 @@
 package de.evoal.generator.main.functions.distributions;
 
-import de.evoal.core.api.utils.LanguageHelper;
+import de.evoal.core.api.utils.AttributeHelper;
 import de.evoal.languages.model.base.Instance;
 import lombok.Data;
 import org.apache.commons.math3.distribution.RealDistribution;
@@ -19,7 +19,7 @@ public class UniformDistribution implements Distribution {
     private RealDistribution distribution;
 
     @Inject
-    private LanguageHelper helper;
+    private AttributeHelper helper;
 
     @Override
     public UniformDistribution init(final Instance configuration) {

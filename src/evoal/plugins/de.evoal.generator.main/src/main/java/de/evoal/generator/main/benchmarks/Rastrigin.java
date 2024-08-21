@@ -1,6 +1,6 @@
 package de.evoal.generator.main.benchmarks;
 
-import de.evoal.core.api.languages.ExpressionEvaluator;
+import de.evoal.core.api.languages.AttributeEvaluator;
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertySpecification;
 import de.evoal.core.api.utils.InitializationException;
@@ -16,7 +16,7 @@ import javax.inject.Named;
 @Named("de.evoal.generator.generator.rastrigin")
 public class Rastrigin extends AbstractGeneratorFunction {
     @Inject
-    private ExpressionEvaluator evaluator;
+    private AttributeEvaluator evaluator;
 
     private double a;
 

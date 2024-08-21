@@ -1,6 +1,6 @@
 package de.evoal.generator.main.functions;
 
-import de.evoal.core.api.languages.ExpressionEvaluator;
+import de.evoal.core.api.languages.AttributeEvaluator;
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.utils.InitializationException;
 import de.evoal.generator.api.AbstractGeneratorFunction;
@@ -18,7 +18,7 @@ public class ConstantFunction extends AbstractGeneratorFunction {
 	private double [] constants = {};
 
 	@Inject
-	private ExpressionEvaluator evaluator;
+	private AttributeEvaluator evaluator;
 
 
 	public Properties apply(final Properties in) {

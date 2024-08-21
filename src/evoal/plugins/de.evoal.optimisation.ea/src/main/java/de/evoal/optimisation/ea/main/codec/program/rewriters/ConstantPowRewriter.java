@@ -1,6 +1,5 @@
 package de.evoal.optimisation.ea.main.codec.program.rewriters;
 
-import de.evoal.optimisation.ea.main.codec.program.operations.PlusOperation;
 import de.evoal.optimisation.ea.main.codec.program.operations.PowOperation;
 import io.jenetics.ext.util.TreeNode;
 import io.jenetics.prog.op.Const;

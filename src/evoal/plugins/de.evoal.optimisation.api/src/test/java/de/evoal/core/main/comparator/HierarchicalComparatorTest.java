@@ -1,6 +1,6 @@
 package de.evoal.core.main.comparator;
 
-import de.evoal.core.api.languages.ExpressionEvaluator;
+import de.evoal.core.api.languages.AttributeEvaluator;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.languages.model.base.Instance;
 import de.evoal.languages.model.ddl.DataDescription;
@@ -21,7 +21,7 @@ class HierarchicalComparatorTest {
     private PropertiesSpecification optimisationSpecification;
 
     @Mock
-    private ExpressionEvaluator evaluator;
+    private AttributeEvaluator evaluator;
 
     @Mock
     private Instance config;

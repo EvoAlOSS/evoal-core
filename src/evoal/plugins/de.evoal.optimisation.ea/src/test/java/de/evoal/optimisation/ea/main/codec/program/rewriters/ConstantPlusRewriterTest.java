@@ -2,11 +2,8 @@ package de.evoal.optimisation.ea.main.codec.program.rewriters;
 
 
 import de.evoal.optimisation.ea.main.codec.program.operations.PlusOperation;
-import io.jenetics.ext.util.FlatTreeNode;
-import io.jenetics.ext.util.Tree;
 import io.jenetics.ext.util.TreeNode;
 import io.jenetics.prog.op.Const;
-import io.jenetics.prog.op.MathExpr;
 import io.jenetics.prog.op.Op;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

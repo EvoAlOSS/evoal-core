@@ -17,5 +17,5 @@ public interface EvoalComponent<T extends EvoalComponent<T>> {
      */
     public default T init(final Instance configuration) throws InitializationException {
         return (T)this;
-    };
+    }
 }

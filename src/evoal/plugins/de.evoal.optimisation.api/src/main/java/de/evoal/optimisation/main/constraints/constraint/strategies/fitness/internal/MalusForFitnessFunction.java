@@ -1,10 +1,10 @@
 package de.evoal.optimisation.main.constraints.constraint.strategies.fitness.internal;
 
+import de.evoal.core.api.utils.AttributeHelper;
 import de.evoal.optimisation.api.constraints.model.Constraint;
 import de.evoal.optimisation.api.constraints.model.ConstraintResult;
 import de.evoal.optimisation.api.constraints.strategies.fitness.MalusFunction;
 import de.evoal.core.api.properties.Properties;
-import de.evoal.core.api.utils.LanguageHelper;
 import de.evoal.languages.model.base.Instance;
 
 public class MalusForFitnessFunction implements MalusFunction {
@@ -12,7 +12,7 @@ public class MalusForFitnessFunction implements MalusFunction {
     private final Constraint constraint;
     private final double smoothing;
 
-    public MalusForFitnessFunction(final LanguageHelper helper, final Constraint constraint, final Instance configuration, final int index) {
+    public MalusForFitnessFunction(final AttributeHelper helper, final Constraint constraint, final Instance configuration, final int index) {
         this.constraint = constraint;
         smoothing = helper.lookup(configuration, "smoothing");
     }

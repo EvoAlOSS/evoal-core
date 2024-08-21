@@ -1,6 +1,6 @@
 package de.evoal.optimisation.main.statistics.individuals;
 
-import de.evoal.core.api.languages.ExpressionEvaluator;
+import de.evoal.core.api.languages.AttributeEvaluator;
 import de.evoal.optimisation.api.model.OptimisationValue;
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;
@@ -35,7 +35,7 @@ public class BestCandidatePerGeneration implements StatisticsWriter {
     protected WriterStrategy strategy;
 
     @Inject
-    private ExpressionEvaluator evaluator;
+    private AttributeEvaluator evaluator;
 
     @Inject
     @Named("search-space-specification")

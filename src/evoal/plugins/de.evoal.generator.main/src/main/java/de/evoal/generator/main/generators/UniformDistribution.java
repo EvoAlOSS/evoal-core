@@ -1,6 +1,6 @@
 package de.evoal.generator.main.generators;
 
-import de.evoal.core.api.languages.ExpressionEvaluator;
+import de.evoal.core.api.languages.AttributeEvaluator;
 import de.evoal.core.api.utils.InitializationException;
 import de.evoal.generator.api.GeneratorFunction;
 import de.evoal.languages.model.base.Instance;
@@ -17,7 +17,7 @@ import javax.inject.Named;
 @Slf4j
 public class UniformDistribution extends RealDistributionBase {
 	@Inject
-	private ExpressionEvaluator evaluator;
+	private AttributeEvaluator evaluator;
 
 
 	public GeneratorFunction init(final Step configuration) throws InitializationException {

@@ -1,7 +1,7 @@
 package de.evoal.optimisation.ea.main.codec.vector;
 
 import de.evoal.core.api.cdi.BeanFactory;
-import de.evoal.core.api.utils.LanguageHelper;
+import de.evoal.core.api.utils.AttributeHelper;
 import de.evoal.optimisation.ea.api.codec.CustomCodec;
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;
@@ -17,7 +17,6 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -29,17 +28,16 @@ public class VectorGenotypeCodec<G extends Gene<?, G>> implements CustomCodec<G>
     private @Named("genotype-specification") PropertiesSpecification specification;
 
     @Inject
-    private LanguageHelper helper;
+    private AttributeHelper helper;
 
     private List<DynamicChromosome> dynamicTemplates;
 
     @Override
     public VectorGenotypeCodec<G> init(final Instance config) {
         log.info("LanguageHelper is {}", helper);
-        final Object [] chromosomeConfigurations = helper.lookup(config, "chromosomes");
+        final List<Instance> chromosomeConfigurations = helper.lookup(config, "chromosomes");
 
-        dynamicTemplates = Arrays.stream(chromosomeConfigurations)
-                                 .map(Instance.class::cast)
+        dynamicTemplates = chromosomeConfigurations.stream()
                                  .map(i -> BeanFactory.createComponent(DynamicChromosome.class, i))
                                  .collect(Collectors.toList());
 

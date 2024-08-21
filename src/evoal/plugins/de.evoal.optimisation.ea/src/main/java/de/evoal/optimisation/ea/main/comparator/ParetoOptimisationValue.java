@@ -30,7 +30,7 @@ public class ParetoOptimisationValue implements OptimisationValue {
         return this.makeAbsolute().compareTo(((ParetoOptimisationValue)other).makeAbsolute());
     }
     
-    private final Vec<double[]> makeAbsolute(){
+    private Vec<double[]> makeAbsolute(){
     	final double [] values = fitnessValues.data();
     	final double [] negativeAbsoluteValues = Arrays.stream(values)
     			                                       .map(d -> -Math.abs(d))

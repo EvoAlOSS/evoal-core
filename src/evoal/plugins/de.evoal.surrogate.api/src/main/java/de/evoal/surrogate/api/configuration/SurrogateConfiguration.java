@@ -1,6 +1,6 @@
 package de.evoal.surrogate.api.configuration;
 
-import de.evoal.core.api.languages.ExpressionEvaluator;
+import de.evoal.core.api.languages.AttributeEvaluator;
 import de.evoal.languages.model.mll.SurrogateDefinition;
 import de.evoal.surrogate.api.function.SurrogateFunction;
 import lombok.Data;
@@ -37,7 +37,7 @@ public class SurrogateConfiguration {
 		}
 	}
 
-	public static SurrogateConfiguration from(final SurrogateDefinition definition, final ExpressionEvaluator evaluator) {
+	public static SurrogateConfiguration from(final SurrogateDefinition definition, final AttributeEvaluator evaluator) {
 		final SurrogateConfiguration configuration = new SurrogateConfiguration();
 
 		definition.getLayers()

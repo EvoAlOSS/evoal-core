@@ -1,12 +1,11 @@
 package de.evoal.core.api.utils;
 
-import de.evoal.core.api.languages.ExpressionEvaluator;
+import de.evoal.core.api.languages.AttributeEvaluator;
 import de.evoal.languages.model.base.*;
 import de.evoal.languages.model.ol.AlgorithmInstance;
 import de.evoal.languages.model.ol.OptimisationModule;
 import de.evoal.languages.model.ol.ProblemInstance;
 import lombok.extern.slf4j.Slf4j;
-import org.eclipse.emf.ecore.EObject;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -16,29 +15,32 @@ import java.util.List;
 import java.util.function.Predicate;
 
 /**
- * Helper component for processing instances.
+ * Helper component for doing attribute lookups. It is a slightly advanced version of
+ *   {@link de.evoal.core.api.languages.AttributeEvaluator}.
  */
 @ApplicationScoped
 @Slf4j
-public class LanguageHelper {
+public class AttributeHelper {
+    /**
+     * We need the attribute evaluator for the actual attribute lookup
+     */
     @Inject
-    private ExpressionEvaluator evaluator;
+    private AttributeEvaluator evaluator;
 
     public <T> T lookup(final OptimisationModule model, final String path) {
-        log.debug("Locking up '{}':", path);
+        log.debug("Locking up '{}' in optimisation module", path);
 
-        if(path == null) {
-            log.warn("Asking for a null-path.");
-            throw new IllegalArgumentException("Path is not allowed to be null");
-        } else if(path.isEmpty()) {
+        requirePathIsNotNull(path);
+
+        if(path.isEmpty()) {
             return (T)model;
         }
 
         final List<String> splittedPath = new LinkedList<>(Arrays.asList(path.split("\\.")));
+        final String firstPath = splittedPath.get(0);
+        splittedPath.remove(0);
 
-        if("problem".equals(splittedPath.get(0))) {
-            splittedPath.remove(0);
-
+        if("problem".equals(firstPath)) {
             ProblemInstance problem = model.getProblem();
 
             if(problem == null) {
@@ -46,39 +48,38 @@ public class LanguageHelper {
             }
 
             return lookup(problem, splittedPath);
-        } else if("algorithm".equals(splittedPath.get(0))) {
-            splittedPath.remove(0);
+        } else if("algorithm".equals(firstPath)) {
             return lookup(model.getAlgorithm(), splittedPath);
         }
 
-        log.error("Cannot lookup path '{}'.", path);
+        log.error("Cannot lookup path '{}' in optimisation module.", path);
         throw new IllegalArgumentException("Invalid path '" + path + "' for optimisation model.");
     }
 
     private <T> T lookup(final ProblemInstance problem, final List<String> path) {
         log.debug("Locking up '{}':", path);
 
-        if(path.size() == 0) {
+        if(path.isEmpty()) {
             return (T)problem;
         }
 
         Object value = null;
         switch (path.get(0)) {
-                case "name":
-                    value = problem.getName();
-                    path.remove(0);
-                    break;
-                case "documentation":
-                    value = problem.getDocumentation();
-                    path.remove(0);
-                    break;
-                case "instance":
-                    path.remove(0);
-                default:
-                    value = problem;
+            case "name":
+                value = problem.getName();
+                path.remove(0);
+                break;
+            case "documentation":
+                value = evaluator.evaluate(problem.getDocumentation());
+                path.remove(0);
+                break;
+            case "instance":
+                path.remove(0);
+            default:
+                value = problem;
         }
 
-        if(path.size() == 0) {
+        if(path.isEmpty()) {
             return (T)value;
         }
 
@@ -91,9 +92,7 @@ public class LanguageHelper {
     }
 
     private <T> T lookup(final AlgorithmInstance algorithm, final List<String> path) {
-        log.debug("Locking up '{}':", path);
-
-        if(path.size() == 0) {
+        if(path.isEmpty()) {
             return (T)algorithm;
         }
 
@@ -104,7 +103,7 @@ public class LanguageHelper {
                 path.remove(0);
                 break;
             case "documentation":
-                value = algorithm.getDocumentation();
+                value = evaluator.evaluate(algorithm.getDocumentation());
                 path.remove(0);
                 break;
             case "instance":
@@ -113,7 +112,7 @@ public class LanguageHelper {
                 value = algorithm;
         }
 
-        if(path.size() == 0) {
+        if(path.isEmpty()) {
             return (T)value;
         }
 
@@ -125,11 +124,19 @@ public class LanguageHelper {
         return lookup((Instance)value, path);
     }
 
+    /**
+     * Looks up the attribute reachable by following the given path.
+     *
+     * @param instance The instance to use.
+     * @param path A attribute path, such as "name" or "attribute1.name".
+     * @return The found value or the default value if no value is present.
+     *
+     * @param <T> The type of the target value.
+     */
     public <T> T lookup(final Instance instance, final String path) {
-        if(path == null) {
-            log.warn("Asking for a null-path.");
-            throw new IllegalArgumentException("Path is not allowed to be null");
-        } else if(path.isEmpty()) {
+        requirePathIsNotNull(path);
+
+        if(path.isEmpty()) {
             return (T)instance;
         }
 
@@ -139,10 +146,9 @@ public class LanguageHelper {
     private <T> T lookup(final Instance instance, final List<String> path) {
         log.debug("Locking up '{}':", path);
 
-        if(path == null) {
-            log.warn("Asking for a null-path.");
-            throw new IllegalArgumentException("Path is not allowed to be null");
-        } else if(path.isEmpty()) {
+        requirePathIsNotNull(path);
+
+        if(path.isEmpty()) {
             return (T)instance;
         }
 
@@ -158,25 +164,26 @@ public class LanguageHelper {
                     throw new IllegalStateException("Configuration is not valid.");
                 }
 
-                final Attribute attribute = ((Instance)current).findAttribute(part);
+                final Instance currentAsInstance = (Instance)current;
 
-                if(attribute != null) {
-                    current = attribute.getValue();
-                } else if("name".equals(part)) {
-                    current = ((Instance)current).getDefinition().getName();
+                if("name".equals(part)) {
+                    current = currentAsInstance.getDefinition().getName();
                 } else {
-                    log.warn("Failed to lookup part '{}' of path '{}'. Returning null.", part, path);
-                    log.warn("Current instance is: {}", ((Instance) current).getDefinition().getName());
-                    log.warn("Available attributes:");
-                    for(final Attribute a : ((Instance) current).getAttributes()) {
-                        log.warn("  {}", a.getDefinition().getName());
+                    final AttributeDefinition definition = currentAsInstance.getDefinition().findAttribute(part);
+
+                    if(definition == null) {
+                        log.warn("Failed to lookup part '{}' of path '{}'. Returning null.", part, path);
+                        log.warn("Current instance is: {}", ((Instance) current).getDefinition().getName());
+                        log.warn("Available attributes:");
+                        for(final Attribute a : ((Instance) current).getAttributes()) {
+                            log.warn("  {}", a.getDefinition().getName());
+                        }
+
+                        log.error("Selecting non-existing path '{}'.", path);
+                        throw new IllegalStateException("Selecting non-existing field: " + part);
                     }
 
-                    log.error("Selecting non-existing path '{}'.", path);
-                    throw new IllegalStateException("Selecting non-existing field: " + part);
-                }
-                if(attribute != null) {
-                    current = convertToJava(current, attribute.getDefinition().getType());
+                    current = evaluator.attributeToJava(currentAsInstance, part, definition.getType());
                 }
             } catch(final NullPointerException e) {
                 log.error("Failed to lookup part '{}' of path '{}'.", part, path);
@@ -192,42 +199,18 @@ public class LanguageHelper {
         return (T) current;
     }
 
-    private Object convertToJava(final Object current, final Type type) {
-        log.info("Converting " + current +  " to " + type);
-
-        if((type instanceof InstanceType || type instanceof DataType) && current instanceof OrExpression) {
-            return evaluator.evaluate(current);
-        } else if(type instanceof LiteralType) {
-            if(!(current instanceof EObject)) {
-                log.info("Current is not an EObject, returning value.");
-                return current;
-            }
-
-            return readExpression(current, type);
-        } else if(type instanceof ArrayType) {
-            return readArray(current, type);
-        }
-
-        return current;
-    }
-
-    private Object readArray(final Object current, final Type type) {
-        final List<Object> array = (List<Object>)evaluator.evaluate(current);
-
-        return array.stream()
-                    .map(current1 -> convertToJava(current1, ((ArrayType)type).getElements()))
-                    .toArray();
-    }
-
-    private Object readExpression(final Object current, final Type type) {
-        return evaluator.evaluate(current);
-    }
-
     public static Predicate<? super Value> filterInstanceByType(final String instanceTypeName) {
         return i -> instanceTypeName.equals(((Instance)i).getDefinition().getName());
     }
 
     public Predicate<? super Instance> filterByAttributesInstanceType(final String attributeName, final String attributeTypeName) {
         return i -> attributeTypeName.equals(evaluator.attributeToInstance(i, attributeName).getDefinition().getName());
+    }
+
+    private void requirePathIsNotNull(final Object path) {
+        if(path == null) {
+            log.warn("Asking for a null-path.");
+            throw new IllegalArgumentException("Path is not allowed to be null");
+        }
     }
 }

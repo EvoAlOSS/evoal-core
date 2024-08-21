@@ -2,8 +2,7 @@ package de.evoal.surrogate.api.configuration;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import de.evoal.core.api.languages.ExpressionEvaluator;
-import de.evoal.languages.model.base.Literal;
+import de.evoal.core.api.languages.AttributeEvaluator;
 import de.evoal.surrogate.main.jackson.ReflectiveDeserializer;
 import de.evoal.surrogate.main.jackson.ReflectiveSerializer;
 import de.evoal.languages.model.base.Attribute;
@@ -23,7 +22,7 @@ public class Parameter {
 	@JsonSerialize(using = ReflectiveSerializer.class)
 	private Object value;
 
-	public static Parameter from(final Attribute attribute, final ExpressionEvaluator evaluator) {
+	public static Parameter from(final Attribute attribute, final AttributeEvaluator evaluator) {
 		final Parameter parameter = new Parameter();
 		parameter.setName(attribute.getDefinition().getName());
 		parameter.setValue(evaluator.attributeToObject(attribute));

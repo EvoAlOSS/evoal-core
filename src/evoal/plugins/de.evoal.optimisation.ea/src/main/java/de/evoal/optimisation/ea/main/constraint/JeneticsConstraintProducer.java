@@ -2,6 +2,7 @@ package de.evoal.optimisation.ea.main.constraint;
 
 import de.evoal.core.api.cdi.BeanFactory;
 import de.evoal.core.api.cdi.ConfigurationValue;
+import de.evoal.core.api.utils.AttributeHelper;
 import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
 import de.evoal.optimisation.api.constraints.calculation.CalculationFactory;
 import de.evoal.optimisation.api.constraints.calculation.CalculationStrategy;
@@ -11,7 +12,6 @@ import de.evoal.optimisation.api.constraints.strategies.RepairStrategy;
 import de.evoal.optimisation.api.model.OptimisationFunction;
 import de.evoal.optimisation.ea.api.codec.CustomCodec;
 import de.evoal.core.api.properties.PropertiesSpecification;
-import de.evoal.core.api.utils.LanguageHelper;
 import de.evoal.optimisation.main.constraints.constraint.utils.ConfigurationUtils;
 import de.evoal.languages.model.base.*;
 
@@ -27,14 +27,14 @@ import java.util.stream.Collectors;
 @ApplicationScoped
 public class JeneticsConstraintProducer {
     @Inject
-    private LanguageHelper helper;
+    private AttributeHelper helper;
 
     @Inject
     private ConfigurationUtils configUtil;
 
     @Produces
     public List<io.jenetics.engine.Constraint> create(
-            final @ConfigurationValue(entry = OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.handlers") Instance [] handlerConfigurations,
+            final @ConfigurationValue(entry = OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.handlers") List<Instance> handlerConfigurations,
             final @Named("optimisation-space-specification") PropertiesSpecification optimisationSpec,
             final @Named("optimisation-function") OptimisationFunction function,
             final @Named("codec") CustomCodec codec,

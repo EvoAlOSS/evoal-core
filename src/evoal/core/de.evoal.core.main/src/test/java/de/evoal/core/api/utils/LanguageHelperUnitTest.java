@@ -1,12 +1,6 @@
 package de.evoal.core.api.utils;
 
-import org.junit.jupiter.api.*;
 import org.jboss.weld.junit5.EnableWeld;
-
-import de.evoal.languages.model.base.Instance;
-import de.evoal.languages.model.ol.OptimisationModule;
-
-import javax.inject.Inject;
 
 
 @EnableWeld

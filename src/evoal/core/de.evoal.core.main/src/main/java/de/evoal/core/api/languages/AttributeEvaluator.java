@@ -12,9 +12,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
+/**
+ * The attribute evaluator helps client classes to do the attribute value lookup
+ *   correctly. It provides dedicated functions that a) lookup default values if
+ *   the actual value is not present, and b) cast the result to the correct type.
+ */
 @ApplicationScoped
 @Slf4j
-public class ExpressionEvaluator {
+public class AttributeEvaluator {
     /**
      * Map that caches default values of attributes.
      */
@@ -137,11 +142,15 @@ public class ExpressionEvaluator {
         return number;
     }
 
+    /**
+     * @deprecated
+     */
     public Object attributeToObject(final Attribute attribute) {
         return evaluator.doSwitch(attribute.getValue());
     }
 
-    public Object attributeToObject(final Instance instance, final String attributeName) {
+    private Object attributeToObject(final Instance instance, final String attributeName) {
+        log.info("Attribute to object: {}", attributeName);
         final Attribute attribute = instance.findAttribute(attributeName);
 
         Object result = null;
@@ -163,7 +172,75 @@ public class ExpressionEvaluator {
         return result;
     }
 
+    /**
+     * @deprecated
+     */
     public Object evaluate(final Object current) {
+        if(current == null ) {
+            log.info("Skipping evaluation of null value");
+            return null;
+        }
+
+        if(!(current instanceof EObject)) {
+            throw new IllegalArgumentException("Expression " + current.getClass().getSimpleName() + " did not evaluate to an EObject instance.");
+        }
+
         return evaluator.doSwitch((EObject) current);
+    }
+
+    public Object attributeToJava(final Instance instance, final String name, final Type target) {
+        if(target instanceof RealType) {
+            return attributeToDouble(instance, name);
+        } else if(target instanceof IntType) {
+            return attributeToInteger(instance, name);
+        } else if(target instanceof BooleanType) {
+            return attributeToBoolean(instance, name);
+        } else if(target instanceof InstanceType) {
+            return attributeToInstance(instance, name);
+        } else if(target instanceof ArrayType aType) {
+            return attributeToObject(instance, name);
+        } else {
+            log.warn("Converting type {} by using Object.", target.eClass().getName());
+            return attributeToObject(instance, name);
+        }
+    }
+
+    private Object attributeToList(final Object current, final Type type) {
+        final List<Object> array = (List<Object>)evaluate(current);
+
+        return array.stream()
+                .map(current1 -> convertToJava(current1, ((ArrayType)type).getElements()))
+                .toArray();
+    }
+
+    private Object convertToJava(final Object current, final Type type) {
+        log.info("Converting {} to {}", current, type);
+
+        if((type instanceof InstanceType || type instanceof DataType) && current instanceof OrExpression) {
+            return evaluate(current);
+        } else if(type instanceof LiteralType) {
+            if(!(current instanceof EObject)) {
+                log.info("Current is not an EObject, returning value.");
+                return current;
+            }
+
+            return readExpression(current, type);
+        } else if(type instanceof ArrayType) {
+            return readArray(current, type);
+        }
+
+        return current;
+    }
+
+    private Object readArray(final Object current, final Type type) {
+        final List<Object> array = (List<Object>)evaluate(current);
+
+        return array.stream()
+                .map(current1 -> convertToJava(current1, ((ArrayType)type).getElements()))
+                .toArray();
+    }
+
+    private Object readExpression(final Object current, final Type type) {
+        return evaluate(current);
     }
 }

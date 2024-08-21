@@ -15,7 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class IdentityFunction extends AbstractPartialSurrogateFunction {
-	protected Function<Properties, Object> converter;
+	protected final Function<Properties, Object> converter;
 
 	public IdentityFunction(final PartialFunctionConfiguration configuration, final PropertiesSpecification input, final PropertiesSpecification actualInput, final PropertiesSpecification output) {
 		super(configuration, Collections.emptyList(), input, output);

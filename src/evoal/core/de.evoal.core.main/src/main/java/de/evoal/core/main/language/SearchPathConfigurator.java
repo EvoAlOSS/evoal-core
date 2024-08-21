@@ -9,7 +9,6 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 import java.io.File;
-import java.util.Arrays;
 
 @ApplicationScoped
 public class SearchPathConfigurator {

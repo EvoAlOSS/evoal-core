@@ -2,7 +2,6 @@ package de.evoal.optimisation.ea.main.fitness;
 
 import de.evoal.core.api.board.Blackboard;
 import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
-import de.evoal.core.api.languages.ExpressionEvaluator;
 import de.evoal.optimisation.api.model.OptimisationFunction;
 import de.evoal.optimisation.api.model.OptimisationFunctionDecorator;
 import de.evoal.core.api.properties.Properties;
@@ -29,9 +28,6 @@ public class DistanceFitness extends OptimisationFunctionDecorator {
      * The target to search for.
      */
     private Properties target;
-
-    @Inject
-    private ExpressionEvaluator evaluator;
 
     @Override
     public double[] evaluate(final Properties properties) {
@@ -74,8 +70,7 @@ public class DistanceFitness extends OptimisationFunctionDecorator {
     private Properties toProperties(final Instance [] array) {
         PropertiesSpecification specification = PropertiesSpecification.builder()
                                                                        .add(Arrays.stream(array)
-                                                                                 .map(i -> helper.lookup(i, "name"))
-                                                                                 .map(evaluator::evaluate)
+                                                                                 .map(i -> helper.<DataDescription>lookup(i, "name"))
                                                                                  .map(DataDescription.class::cast)
                                                                            )
                                                                        .build();
@@ -83,8 +78,7 @@ public class DistanceFitness extends OptimisationFunctionDecorator {
         final Properties properties = new Properties(specification);
         Arrays.stream(array)
                 .forEach(i -> {
-                    final Object obj = helper.lookup(i, "name");
-                    final DataDescription dd = (DataDescription) evaluator.evaluate(obj);
+                    final DataDescription dd = helper.<DataDescription>lookup(i, "name");
                     final Object val = helper.lookup(i, "val");
 
                     properties.put(specification.indexOf(dd.getName()), val);

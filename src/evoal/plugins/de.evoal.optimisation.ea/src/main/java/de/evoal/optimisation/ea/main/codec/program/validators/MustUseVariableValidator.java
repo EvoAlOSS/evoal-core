@@ -2,7 +2,7 @@ package de.evoal.optimisation.ea.main.codec.program.validators;
 
 import de.evoal.core.api.cdi.EvoalComponent;
 import de.evoal.core.api.utils.InitializationException;
-import de.evoal.core.api.utils.LanguageHelper;
+import de.evoal.core.api.utils.AttributeHelper;
 import de.evoal.optimisation.ea.api.codec.program.TreeValidator;
 import de.evoal.languages.model.base.Instance;
 import io.jenetics.prog.ProgramChromosome;
@@ -19,7 +19,7 @@ import javax.inject.Named;
 public class MustUseVariableValidator implements TreeValidator {
 
     @Inject
-    private LanguageHelper helper;
+    private AttributeHelper helper;
 
     private int requiredCount;
 

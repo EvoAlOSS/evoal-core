@@ -207,7 +207,7 @@
     </eAnnotations>
     <eOperations name="findAttribute" eType="#//AttributeDefinition">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="body" value="return getAttributes().stream()&#xA;&#x9;&#x9;&#x9;&#x9;.filter(a -> a.getName().equals(name))&#xA;&#x9;&#x9;&#x9;&#x9;.findFirst()&#xA;&#x9;&#x9;&#x9;&#x9;.orElse(null);&#xA;"/>
+        <details key="body" value="AttributeDefinition attribute =  getAttributes().stream()&#xA;&#x9;.filter(a -> a.getName().equals(name))&#xA;&#x9;.findFirst()&#xA;&#x9;.orElse(null);&#xA;&#xA;if(attribute == null &amp;&amp; getSuperType() != null) {&#xA;&#x9;attribute = getSuperType().findAttribute(name);&#xA;}&#xA;&#xA;return attribute;"/>
       </eAnnotations>
       <eParameters name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>

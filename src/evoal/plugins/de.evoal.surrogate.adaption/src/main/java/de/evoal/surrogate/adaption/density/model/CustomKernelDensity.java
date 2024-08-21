@@ -1,9 +1,6 @@
 package de.evoal.surrogate.adaption.density.model;
 
-import smile.math.MathEx;
 import smile.stat.distribution.GaussianDistribution;
-
-import java.util.Arrays;
 
 public class CustomKernelDensity {
     private static final long serialVersionUID = 2L;

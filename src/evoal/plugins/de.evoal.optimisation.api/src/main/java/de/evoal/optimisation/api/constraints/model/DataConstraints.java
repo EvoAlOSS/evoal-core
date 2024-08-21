@@ -22,8 +22,7 @@ public class DataConstraints {
         models.stream()
               .flatMap(m -> m.getDescriptions().stream())
               .forEach(d -> {
-                  final List<Expression> constraints = new LinkedList<>();
-                  constraints.addAll(d.getConstraints());
+                  final List<Expression> constraints = new LinkedList<>(d.getConstraints());
 
                   if(d instanceof TypedDataDescription) {
                       constraints.addAll(((TypedDataDescription)d).getType().getConstraints());

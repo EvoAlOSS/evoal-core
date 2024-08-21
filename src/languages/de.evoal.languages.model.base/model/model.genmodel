@@ -128,7 +128,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//TypeDefinition/attributes"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//TypeDefinition/superType"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//TypeDefinition/abstract"/>
-      <genOperations ecoreOperation="model.ecore#//TypeDefinition/findAttribute" body="return getAttributes().stream()&#xA;&#x9;&#x9;&#x9;&#x9;.filter(a -> a.getName().equals(name))&#xA;&#x9;&#x9;&#x9;&#x9;.findFirst()&#xA;&#x9;&#x9;&#x9;&#x9;.orElse(null);&#xA;">
+      <genOperations ecoreOperation="model.ecore#//TypeDefinition/findAttribute" body="AttributeDefinition attribute =  getAttributes().stream()&#xA;&#x9;.filter(a -> a.getName().equals(name))&#xA;&#x9;.findFirst()&#xA;&#x9;.orElse(null);&#xA;&#xA;if(attribute == null &amp;&amp; getSuperType() != null) {&#xA;&#x9;attribute = getSuperType().findAttribute(name);&#xA;}&#xA;&#xA;return attribute;">
         <genParameters ecoreParameter="model.ecore#//TypeDefinition/findAttribute/name"/>
       </genOperations>
     </genClasses>

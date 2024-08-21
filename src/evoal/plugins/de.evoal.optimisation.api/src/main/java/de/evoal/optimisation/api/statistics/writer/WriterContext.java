@@ -11,12 +11,12 @@ public class WriterContext {
     /**
      * List of columns to prepend to a newly created writer.
      */
-    protected List<Column> columns = new LinkedList<>();
+    protected final List<Column> columns = new LinkedList<>();
 
     /**
      * Bindings of columns to their values.
      */
-    protected Map<Column, Object> values = new HashMap<>();
+    protected final Map<Column, Object> values = new HashMap<>();
 
     /**
      * Adds a new column to the context.

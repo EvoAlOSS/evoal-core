@@ -17,7 +17,7 @@ import de.evoal.optimisation.ea.main.alterer.mutator.SwapCorrelationMutator;
 import de.evoal.optimisation.api.correlations.Correlations;
 import de.evoal.optimisation.ea.main.codec.program.rewriters.*;
 import de.evoal.languages.model.base.Instance;
-import de.evoal.core.api.utils.LanguageHelper;
+import de.evoal.core.api.utils.AttributeHelper;
 import io.jenetics.*;
 import io.jenetics.ext.SingleNodeCrossover;
 import io.jenetics.ext.TreeGene;
@@ -46,7 +46,7 @@ public class AltererFactory {
 	private BiFunction<Double, Double, Alterer> factory;
 
 	@Inject
-	private LanguageHelper helper;
+	private AttributeHelper helper;
 
 	/**
 	 * Creates an alterer based on the heuristic configuration.

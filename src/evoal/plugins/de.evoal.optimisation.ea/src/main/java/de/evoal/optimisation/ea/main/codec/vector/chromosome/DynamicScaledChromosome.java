@@ -1,6 +1,6 @@
 package de.evoal.optimisation.ea.main.codec.vector.chromosome;
 
-import de.evoal.core.api.languages.ExpressionEvaluator;
+import de.evoal.core.api.languages.AttributeEvaluator;
 import de.evoal.core.api.properties.PropertySpecification;
 import de.evoal.core.api.properties.info.PropertiesBoundaries;
 import de.evoal.core.api.utils.Requirements;
@@ -14,7 +14,7 @@ import javax.inject.Inject;
 @Slf4j
 public abstract class DynamicScaledChromosome extends DynamicBoundedDoubleChromosome {
     @Inject
-    private ExpressionEvaluator evaluator;
+    private AttributeEvaluator evaluator;
 
     @Inject
     private PropertiesBoundaries boundaries;

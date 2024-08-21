@@ -2,7 +2,7 @@ package de.evoal.optimisation.ea.main.producer;
 
 import de.evoal.core.api.cdi.BeanFactory;
 import de.evoal.core.api.cdi.ConfigurationValue;
-import de.evoal.core.api.languages.ExpressionEvaluator;
+import de.evoal.core.api.languages.AttributeEvaluator;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
 import de.evoal.optimisation.ea.api.codec.CustomCodecDescriber;
@@ -23,7 +23,7 @@ import java.util.List;
 public class SpecificationProducer {
 
     @Inject
-    private ExpressionEvaluator evaluator;
+    private AttributeEvaluator evaluator;
 
     @Produces
     @Dependent

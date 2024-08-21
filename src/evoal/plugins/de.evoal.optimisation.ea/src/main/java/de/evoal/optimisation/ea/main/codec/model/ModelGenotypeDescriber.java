@@ -1,8 +1,7 @@
 package de.evoal.optimisation.ea.main.codec.model;
 
-import de.evoal.core.api.languages.ExpressionEvaluator;
+import de.evoal.core.api.utils.AttributeHelper;
 import de.evoal.core.api.utils.InitializationException;
-import de.evoal.core.api.utils.LanguageHelper;
 import de.evoal.optimisation.ea.api.codec.CustomCodecDescriber;
 import de.evoal.languages.model.base.Definition;
 import de.evoal.languages.model.base.Instance;
@@ -23,10 +22,7 @@ public class ModelGenotypeDescriber implements CustomCodecDescriber {
     private Instance configuration;
 
     @Inject
-    private LanguageHelper helper;
-
-    @Inject
-    private ExpressionEvaluator evaluator;
+    private AttributeHelper helper;
 
     @Override
     public CustomCodecDescriber init(final Instance configuration) throws InitializationException {
@@ -43,7 +39,7 @@ public class ModelGenotypeDescriber implements CustomCodecDescriber {
 
         return Arrays.stream(genes)
                 .map(Instance.class::cast)
-                .map(i -> evaluator.attributeToObject(i, "root"))
+                .map(i -> helper.lookup(i, "root"))
                 .map(Definition.class::cast)
                 .collect(Collectors.toList());
     }

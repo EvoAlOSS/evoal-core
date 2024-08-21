@@ -1,11 +1,11 @@
 package de.evoal.generator.main.benchmarks;
 
+import de.evoal.core.api.languages.AttributeEvaluator;
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertySpecification;
 import de.evoal.core.api.utils.InitializationException;
 import de.evoal.generator.api.AbstractGeneratorFunction;
 import de.evoal.generator.api.GeneratorFunction;
-import de.evoal.core.api.languages.ExpressionEvaluator;
 import de.evoal.languages.model.base.Instance;
 import de.evoal.languages.model.generator.Step;
 import lombok.extern.slf4j.Slf4j;
@@ -25,7 +25,7 @@ public class Ackley extends AbstractGeneratorFunction {
     private double c = 6.283185307179586;
 
     @Inject
-    private ExpressionEvaluator evaluator;
+    private AttributeEvaluator evaluator;
 
     @Override
     public Properties apply(final Properties in) {

@@ -5,8 +5,6 @@ import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.surrogate.api.configuration.PartialFunctionConfiguration;
 
-import java.util.stream.Stream;
-
 /**
  * Factory for creating regression functions.
  */

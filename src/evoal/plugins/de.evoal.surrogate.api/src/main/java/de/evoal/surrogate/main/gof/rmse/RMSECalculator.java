@@ -10,17 +10,11 @@ import de.evoal.surrogate.api.configuration.Parameter;
 import de.evoal.surrogate.api.configuration.SurrogateConfiguration;
 import de.evoal.surrogate.api.function.SurrogateFunction;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.math3.stat.descriptive.moment.Mean;
-import org.apache.commons.math3.stat.descriptive.moment.StandardDeviation;
-import org.apache.commons.math3.util.Pair;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Named;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.function.Function;
-import java.util.stream.DoubleStream;
 
 /**
  * Calculates the root mean squared error.

@@ -4,7 +4,6 @@ import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.utils.Requirements;
 import de.evoal.languages.model.ddl.BaseDataDescription;
-import de.evoal.languages.model.ddl.DataDescription;
 import de.evoal.languages.model.ddl.RepresentationType;
 import de.evoal.surrogate.api.configuration.Parameter;
 import de.evoal.surrogate.api.configuration.PartialFunctionConfiguration;

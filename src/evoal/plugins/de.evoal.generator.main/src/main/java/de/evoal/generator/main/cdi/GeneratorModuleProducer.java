@@ -15,7 +15,6 @@ import de.evoal.languages.model.base.impl.BasePackageImpl;
 import de.evoal.languages.model.generator.dsl.GeneratorDSLStandaloneSetup;
 import de.evoal.languages.model.generator.GeneratorModule;
 import de.evoal.languages.model.generator.impl.GeneratorPackageImpl;
-import de.evoal.languages.model.utils.scoping.ClasspathGlobalScopeProvider;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.enterprise.context.ApplicationScoped;

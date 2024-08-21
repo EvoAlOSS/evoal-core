@@ -7,7 +7,6 @@ import de.evoal.core.api.properties.io.PropertiesReader;
 import de.evoal.core.api.utils.EvoalIOException;
 import de.evoal.core.api.utils.Requirements;
 import de.evoal.languages.model.ddl.BaseDataDescription;
-import de.evoal.languages.model.ddl.DataDescription;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.csv.CSVFormat;
@@ -23,7 +22,6 @@ import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 @Slf4j
 @Dependent
@@ -55,7 +53,7 @@ public class CSVPropertiesReader implements PropertiesReader {
         specification.getProperties()
                      .stream()
                      .map(PropertySpecification::name)
-                     .forEach(name -> Requirements.requireTrue(names.contains(name), "Attribute of name '" + name + "/" + name.hashCode() + "' could not be found in " + names.stream().map(n -> "'" + n + "/" + n.hashCode()  + "'").collect(Collectors.joining(", "))));
+                     .forEach(name -> Requirements.requireTrue(names.contains(name), "Attribute of name '" + name + "' hash(" + name.hashCode() + ") could not be found in " + names.stream().map(n -> "'" + n + "' hash(" + n.hashCode()  + ")").collect(Collectors.joining(", "))));
 
         return this;
     }

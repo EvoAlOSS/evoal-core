@@ -7,7 +7,6 @@ import de.evoal.languages.model.generator.Step;
 import de.evoal.languages.model.base.Array;
 import de.evoal.languages.model.base.Instance;
 
-import javax.inject.Named;
 import java.util.List;
 import java.util.stream.Collectors;
 

@@ -14,7 +14,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.Dependent;
 import javax.enterprise.inject.Produces;
 import javax.inject.Named;
-import java.util.Arrays;
+import java.util.List;
 
 @ApplicationScoped
 @Slf4j
@@ -29,9 +29,9 @@ public class OptimisationFunctionProducer {
     @Produces
     @Dependent
     @Named("search-space-specification")
-    public PropertiesSpecification createSearchSpaceSpecification(final @ConfigurationValue(entry = OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "problem.search-space") Definition[] references) {
+    public PropertiesSpecification createSearchSpaceSpecification(final @ConfigurationValue(entry = OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "problem.search-space") List<Definition> references) {
         return PropertiesSpecification.builder()
-                .add(Arrays.stream(references))
+                .add(references.stream())
                 .build();
     }
 
@@ -39,9 +39,9 @@ public class OptimisationFunctionProducer {
     @Produces
     @Dependent
     @Named("optimisation-space-specification")
-    public PropertiesSpecification createOptimisationSpaceSpecification(final @ConfigurationValue(entry = OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "problem.optimisation-space") Definition[] references) {
+    public PropertiesSpecification createOptimisationSpaceSpecification(final @ConfigurationValue(entry = OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "problem.optimisation-space") List<Definition> references) {
         return PropertiesSpecification.builder()
-                .add(Arrays.stream(references))
+                .add(references.stream())
                 .build();
     }
 

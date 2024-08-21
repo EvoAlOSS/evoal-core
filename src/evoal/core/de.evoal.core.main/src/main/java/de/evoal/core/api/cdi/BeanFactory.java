@@ -1,7 +1,7 @@
 package de.evoal.core.api.cdi;
 
+import de.evoal.core.api.utils.AttributeHelper;
 import de.evoal.core.api.utils.InitializationException;
-import de.evoal.core.api.utils.LanguageHelper;
 import de.evoal.core.api.utils.Requirements;
 import de.evoal.languages.model.base.Instance;
 import de.evoal.languages.model.dl.util.FQNProvider;
@@ -129,7 +129,7 @@ public final class BeanFactory {
     }
 
     public static <T extends EvoalComponent<T>> T createComponentForAttribute(final Class<T> type, final Instance configuration, final String attributeName) {
-        final LanguageHelper helper = BeanFactory.create(LanguageHelper.class);
+        final AttributeHelper helper = BeanFactory.create(AttributeHelper.class);
         final Instance child = helper.lookup(configuration, attributeName);
 
         return createComponent(type, child);

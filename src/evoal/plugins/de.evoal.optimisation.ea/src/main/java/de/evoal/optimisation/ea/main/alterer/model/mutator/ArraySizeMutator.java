@@ -19,7 +19,7 @@ import java.util.stream.StreamSupport;
 
 @Slf4j
 public class ArraySizeMutator<A extends Comparable<? super A>> extends EvoAlMutator implements AltererComponent {
-    private RandomGenerator generator = RandomRegistry.random();
+    private final RandomGenerator generator = RandomRegistry.random();
 
     public ArraySizeMutator(double probability) {
         super(probability);

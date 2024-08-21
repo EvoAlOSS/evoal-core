@@ -1,7 +1,7 @@
 package de.evoal.surrogate.api.configuration;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import de.evoal.core.api.languages.ExpressionEvaluator;
+import de.evoal.core.api.languages.AttributeEvaluator;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.properties.PropertySpecification;
 import de.evoal.languages.model.ddl.DataDescription;
@@ -68,7 +68,7 @@ public class PartialFunctionConfiguration {
 		}
 	}
 
-	public static PartialFunctionConfiguration from(final PartialSurrogateFunctionDefinition definition, ExpressionEvaluator evaluator) {
+	public static PartialFunctionConfiguration from(final PartialSurrogateFunctionDefinition definition, AttributeEvaluator evaluator) {
 		final PartialFunctionConfiguration configuration = new PartialFunctionConfiguration();
 		configuration.setName(definition.getDefinition().getName());
 

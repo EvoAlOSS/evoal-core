@@ -1,8 +1,8 @@
 package de.evoal.generator.main.generators;
 
+import de.evoal.core.api.languages.AttributeEvaluator;
 import de.evoal.core.api.utils.InitializationException;
 import de.evoal.generator.api.GeneratorFunction;
-import de.evoal.core.api.languages.ExpressionEvaluator;
 import de.evoal.languages.model.base.Instance;
 import de.evoal.languages.model.generator.Step;
 import lombok.extern.slf4j.Slf4j;
@@ -17,7 +17,7 @@ import javax.inject.Named;
 public class NormalDistribution extends RealDistributionBase {
 
     @Inject
-    private ExpressionEvaluator evaluator;
+    private AttributeEvaluator evaluator;
 
     @Override
     public GeneratorFunction init(final Step configuration) throws InitializationException {

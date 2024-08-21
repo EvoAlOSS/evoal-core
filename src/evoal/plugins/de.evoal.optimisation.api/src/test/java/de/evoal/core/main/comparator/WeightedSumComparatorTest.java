@@ -1,6 +1,6 @@
 package de.evoal.core.main.comparator;
 
-import de.evoal.core.api.languages.ExpressionEvaluator;
+import de.evoal.core.api.languages.AttributeEvaluator;
 import de.evoal.languages.model.base.Instance;
 import de.evoal.optimisation.main.comparator.WeightedSumComparator;
 import de.evoal.optimisation.main.comparator.WeightedSumOptimisationValue;
@@ -16,7 +16,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 public class WeightedSumComparatorTest {
 
     @Mock
-    private ExpressionEvaluator evaluator;
+    private AttributeEvaluator evaluator;
 
     @Mock
     private Instance configuration;
