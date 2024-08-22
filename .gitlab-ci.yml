@@ -85,6 +85,7 @@ default:
 #      - src/evoal/*/*/target/
 
 stages:
+  - Maintenance
   - Domain Specific Languages
   - EvoAl
   - Quality
@@ -473,4 +474,15 @@ publish:
     paths:
       - evoal
     when: on_success
-    
+
+
+package cleanup:
+  stage: Maintenance
+  image: library/python:3.10-alpine
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "schedule" &&
+          $MAINTENANCE_CLEANUP == "true"
+      when: always
+    - when: never
+  script:
+    - python3 ci/clean-packages.py
