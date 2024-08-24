@@ -1,0 +1,13 @@
+import "definitions" from de.evoal.generator.generator;
+
+/**
+ * Generator extensions based on surrogate models.
+ */
+module de.evoal.surrogate.generator {
+
+    /**
+     * Uses a pre-trained surrogate model as function.
+     */
+	type surrogate extends 'benchmark' {
+	}
+}

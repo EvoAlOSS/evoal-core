@@ -1,6 +1,7 @@
 module de.evoal.surrogate.api {
     requires jakarta.inject.api;
     requires jakarta.enterprise.cdi.api;
+    requires com.google.guice;
 
     requires java.annotation;
 
@@ -18,7 +19,6 @@ module de.evoal.surrogate.api {
     requires smile.math;
     requires io.jenetics.base;
 
-    requires de.evoal.core.main;
     requires de.evoal.languages.model.ddl;
     requires de.evoal.languages.model.dl;
     requires de.evoal.languages.model.base;
@@ -28,15 +28,17 @@ module de.evoal.surrogate.api {
     requires de.evoal.languages.model.base.dsl;
     requires de.evoal.languages.model.mll.dsl;
     requires de.evoal.languages.model.instance;
-    requires de.evoal.optimisation.api;
-    requires com.google.guice;
     requires de.evoal.languages.model.utils;
 
+    requires de.evoal.core.main;
+    requires de.evoal.optimisation.api;
+    requires de.evoal.generator.main;
+
+    // export resources
     exports de.evoal.surrogate.api;
     exports de.evoal.surrogate.api.function;
     exports de.evoal.surrogate.api.configuration;
 
-    // export resources
     opens de.evoal.surrogate;
 
     // open packages for CDI
@@ -47,6 +49,7 @@ module de.evoal.surrogate.api {
     opens de.evoal.surrogate.main to weld.core.impl;
     opens de.evoal.surrogate.main.cdi to weld.core.impl;
     opens de.evoal.surrogate.main.ea to weld.core.impl;
+    opens de.evoal.surrogate.main.generator to weld.core.impl;
     opens de.evoal.surrogate.main.internal to weld.core.impl;
     opens de.evoal.surrogate.main.jackson to weld.core.impl, com.fasterxml.jackson.databind;
     opens de.evoal.surrogate.main.gof.cross to weld.core.impl;

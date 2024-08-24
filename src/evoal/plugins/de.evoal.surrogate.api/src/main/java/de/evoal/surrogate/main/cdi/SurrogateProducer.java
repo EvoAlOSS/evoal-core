@@ -32,6 +32,7 @@ import javax.inject.Named;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -41,7 +42,16 @@ public class SurrogateProducer {
 
     private SurrogateConfiguration configuration;
 
-    public void setPreTrainedSurrogate(final @Observes BlackboardEntry event, final Blackboard board, final Function<@NonNull File, @NonNull SurrogateConfiguration> loader) {
+    /**
+     * Sets the pre-trained surrogate model if the configuration is set via the black board .
+     *
+     * @param event Event fired if a black board entry is set
+     * @param board The black board
+     * @param loader The function to load the pre-trained function
+     */
+    public void setPreTrainedSurrogate(final @Observes BlackboardEntry event,
+                                       final Blackboard board,
+                                       final Function<@NonNull File,  @NonNull SurrogateConfiguration> loader) {
         if(!event.isSame(SurrogateBlackboardEntries.SURROGATE_PRETRAINED_FILE)) {
             return;
         }
@@ -55,14 +65,31 @@ public class SurrogateProducer {
             return;
         }
 
+        if(!file.canRead()) {
+            log.error("Cannot read pre-trained surrogate model: {}", file);
+            return;
+        }
+
         this.configuration = loader.apply(file);
-        
-        final EObject mlConfiguration = board.get(SurrogateBlackboardEntries.SURROGATE_CONFIGURATION);
-        final EObject eaConfiguration = board.get(OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION);
 
         final Map<String, PropertySpecification> specifications = new HashMap<>();
-        addDataFrom(specifications, mlConfiguration);
-        addDataFrom(specifications, eaConfiguration);
+
+        boolean addedMLConfiguration = false;
+        boolean addedOLConfiguration = false;
+
+        if(board.getOrNull(SurrogateBlackboardEntries.SURROGATE_CONFIGURATION) != null) {
+            final EObject mlConfiguration = board.get(SurrogateBlackboardEntries.SURROGATE_CONFIGURATION);
+            addDataFrom(specifications, mlConfiguration);
+            addedMLConfiguration = true;
+        }
+
+        if(board.getOrNull(OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION) != null) {
+            final EObject eaConfiguration = board.get(OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION);
+            addDataFrom(specifications, eaConfiguration);
+            addedOLConfiguration = true;
+        }
+
+        Requirements.requireTrue(addedMLConfiguration || addedOLConfiguration, "No configuration found");
 
         linkData(specifications);
     }
@@ -118,6 +145,12 @@ public class SurrogateProducer {
     }
 
     private void addDataFrom(final Map<String, PropertySpecification> specifications, final EObject eTree) {
+        final Consumer<DataDescription> addToSpecifications = description -> {
+            final PropertySpecification spec = new PropertySpecification(description.getName(), description);
+
+            specifications.put(spec.name(), spec);
+        };
+
         final TreeIterator<EObject> contentIterator = eTree.eAllContents();
         while(contentIterator.hasNext()) {
             final EObject content = contentIterator.next();
@@ -128,40 +161,17 @@ public class SurrogateProducer {
                 specifications.put(spec.name(), spec);
             } else if(content instanceof final SurrogateDefinition def) {
                 def.getInputs()
-                        .stream()
-                        .forEach(descr -> {
-                            final PropertySpecification spec = new PropertySpecification(descr.getName(), descr);
-
-                            specifications.put(spec.name(), spec);
-                        });
+                   .forEach(addToSpecifications);
 
                 def.getOutputs()
-                        .stream()
-                        .forEach(descr -> {
-                            final PropertySpecification spec = new PropertySpecification(descr.getName(), descr);
-
-                            specifications.put(spec.name(), spec);
-                        });
-
+                   .forEach(addToSpecifications);
             } else if(content instanceof final PartialSurrogateFunctionDefinition def) {
                 def.getInputs()
-                        .stream()
-                        .forEach(descr -> {
-                            final PropertySpecification spec = new PropertySpecification(descr.getName(), descr);
-
-                            specifications.put(spec.name(), spec);
-                        });
+                   .forEach(addToSpecifications);
 
                 def.getOutputs()
-                        .stream()
-                        .forEach(descr -> {
-                            final PropertySpecification spec = new PropertySpecification(descr.getName(), descr);
-
-                            specifications.put(spec.name(), spec);
-                        });
-
+                   .forEach(addToSpecifications);
             }
-
         }
     }
 
@@ -196,7 +206,8 @@ public class SurrogateProducer {
     }
 
     @Produces @Dependent
-    public SurrogateFunction createSurrogateFunction(final Blackboard board, @Named("genotype-specification") PropertiesSpecification specification) {
+    public SurrogateFunction createSurrogateFunction(final Blackboard board,
+                                                     @Named("surrogate-source-properties-specification") final PropertiesSpecification specification) {
         final SurrogateConfiguration configuration = this.configuration;
 
         Requirements.requireNotNull(configuration);

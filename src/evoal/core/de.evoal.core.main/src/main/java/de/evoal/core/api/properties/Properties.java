@@ -151,13 +151,19 @@ public class Properties {
 		return Objects.equals(specification, other.specification) && Arrays.equals(values, other.values);
 	}
 
+    public boolean contains(final PropertySpecification otherSpec) {
+        return specification.contains(otherSpec);
+    }
+
     public boolean contains(final PropertiesSpecification otherSpec) {
         return specification.contains(otherSpec);
     }
 
     public Properties putAll(final Properties properties) {
         for(final PropertySpecification spec : getSpecification().getProperties()) {
-            put(spec, properties.get(spec));
+            if(properties.contains(spec)) {
+                put(spec, properties.get(spec));
+            }
         }
 
         return this;
