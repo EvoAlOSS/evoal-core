@@ -5,12 +5,14 @@
 package de.evoal.languages.model.mll.dsl;
 
 import org.eclipse.xtext.conversion.IValueConverterService;
+import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 import org.eclipse.xtext.scoping.impl.DefaultGlobalScopeProvider;
 import org.eclipse.xtext.scoping.impl.ImportUriResolver;
 
 import de.evoal.languages.model.mll.dsl.scoping.MachineLearningLanguageLocalScopeProvider;
+import de.evoal.languages.model.mll.dsl.scoping.MachineLearningLanguageResourceDescriptionStrategy;
 import de.evoal.languages.model.utils.converter.ValueConverterService;
 import de.evoal.languages.model.utils.scoping.ClasspathGlobalScopeProvider;
 import de.evoal.languages.model.utils.scoping.ClasspathGlobalScopeProvider.CustomUriResolver;
@@ -47,4 +49,13 @@ public class MachineLearningLanguageRuntimeModule extends AbstractMachineLearnin
     public Class<? extends IValueConverterService> bindIValueConverterService() {
             return ValueConverterService.class;
     }
+    
+    /*
+     * If you enable this strategy, the NamesAreUniqueValidator will not
+     * work as expected.
+     */
+    public Class<? extends IDefaultResourceDescriptionStrategy> bindIDefaultResourceDescriptionStrategy() {
+            return  MachineLearningLanguageResourceDescriptionStrategy.class;
+    }
+
 }

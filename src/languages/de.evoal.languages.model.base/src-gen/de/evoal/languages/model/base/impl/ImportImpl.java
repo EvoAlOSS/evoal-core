@@ -152,6 +152,10 @@ public class ImportImpl extends MinimalEObjectImpl.Container implements Import {
 		        result += ".ddl";
 		        break;
 		
+		  case "surrogate":
+		        result += ".mll";
+		        break;
+		
 		    case "definitions":
 		        result += ".dl";
 		        break;
