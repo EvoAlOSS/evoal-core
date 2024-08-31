@@ -3,6 +3,8 @@
  */
 package de.evoal.languages.model.generator;
 
+import de.evoal.languages.model.base.Literal;
+
 import org.eclipse.emf.common.util.EList;
 
 /**
@@ -47,38 +49,38 @@ public interface ApplyStatement extends Statement {
 	void setFile(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Count</b></em>' attribute.
+	 * Returns the value of the '<em><b>Count</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Count</em>' attribute.
-	 * @see #setCount(int)
+	 * @return the value of the '<em>Count</em>' containment reference.
+	 * @see #setCount(Literal)
 	 * @see de.evoal.languages.model.generator.GeneratorPackage#getApplyStatement_Count()
-	 * @model required="true"
+	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	int getCount();
+	Literal getCount();
 
 	/**
-	 * Sets the value of the '{@link de.evoal.languages.model.generator.ApplyStatement#getCount <em>Count</em>}' attribute.
+	 * Sets the value of the '{@link de.evoal.languages.model.generator.ApplyStatement#getCount <em>Count</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Count</em>' attribute.
+	 * @param value the new value of the '<em>Count</em>' containment reference.
 	 * @see #getCount()
 	 * @generated
 	 */
-	void setCount(int value);
+	void setCount(Literal value);
 
 	/**
 	 * Returns the value of the '<em><b>Pipelines</b></em>' containment reference list.
-	 * The list contents are of type {@link de.evoal.languages.model.generator.PipelineReference}.
+	 * The list contents are of type {@link de.evoal.languages.model.base.Literal}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Pipelines</em>' containment reference list.
 	 * @see de.evoal.languages.model.generator.GeneratorPackage#getApplyStatement_Pipelines()
-	 * @model containment="true" ordered="false"
+	 * @model containment="true"
 	 *        annotation="http://www.eclipse.org/OCL/Collection nullFree='false'"
 	 * @generated
 	 */
-	EList<PipelineReference> getPipelines();
+	EList<Literal> getPipelines();
 
 } // ApplyStatement

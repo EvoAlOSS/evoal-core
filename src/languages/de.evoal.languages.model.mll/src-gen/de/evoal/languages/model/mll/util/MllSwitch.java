@@ -150,10 +150,10 @@ public class MllSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case MllPackage.STRING_LITERAL_RANGE: {
-				StringLiteralRange stringLiteralRange = (StringLiteralRange)theEObject;
-				T result = caseStringLiteralRange(stringLiteralRange);
-				if (result == null) result = caseRange(stringLiteralRange);
+			case MllPackage.LITERAL_RANGE: {
+				LiteralRange literalRange = (LiteralRange)theEObject;
+				T result = caseLiteralRange(literalRange);
+				if (result == null) result = caseRange(literalRange);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -342,17 +342,17 @@ public class MllSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>String Literal Range</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Literal Range</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>String Literal Range</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Literal Range</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseStringLiteralRange(StringLiteralRange object) {
+	public T caseLiteralRange(LiteralRange object) {
 		return null;
 	}
 

@@ -3,6 +3,7 @@
  */
 package de.evoal.languages.model.generator;
 
+import de.evoal.languages.model.base.Literal;
 
 /**
  * <!-- begin-user-doc -->
@@ -20,7 +21,7 @@ package de.evoal.languages.model.generator;
  * @model
  * @generated
  */
-public interface PipelineDefinitionReference extends PipelineReference {
+public interface PipelineDefinitionReference extends Literal {
 	/**
 	 * Returns the value of the '<em><b>Pipeline</b></em>' reference.
 	 * <!-- begin-user-doc -->

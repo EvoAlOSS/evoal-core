@@ -3,6 +3,8 @@
  */
 package de.evoal.languages.model.generator;
 
+import de.evoal.languages.model.base.BasePackage;
+
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
@@ -21,7 +23,7 @@ import org.eclipse.emf.ecore.EReference;
  * <!-- end-user-doc -->
  * @see de.evoal.languages.model.generator.GeneratorFactory
  * @model kind="package"
- *        annotation="http://www.eclipse.org/OCL/Import ddl='platform:/resource/de.evoal.languages.model.ddl/model/model.ecore#/' dl='platform:/resource/de.evoal.languages.model.dl/model/model.ecore#/' ecore='http://www.eclipse.org/emf/2002/Ecore' ins='platform:/resource/de.evoal.languages.model.instance/model/model.ecore#/'"
+ *        annotation="http://www.eclipse.org/OCL/Import base='platform:/resource/de.evoal.languages.model.base/model/model.ecore#/' ddl='platform:/resource/de.evoal.languages.model.ddl/model/model.ecore#/' dl='platform:/resource/de.evoal.languages.model.dl/model/model.ecore#/' ecore='http://www.eclipse.org/emf/2002/Ecore' ins='platform:/resource/de.evoal.languages.model.instance/model/model.ecore#/'"
  * @generated
  */
 public interface GeneratorPackage extends EPackage {
@@ -290,7 +292,7 @@ public interface GeneratorPackage extends EPackage {
 	int COUNTER_RANGE = 6;
 
 	/**
-	 * The feature id for the '<em><b>Start</b></em>' attribute.
+	 * The feature id for the '<em><b>Start</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -299,7 +301,7 @@ public interface GeneratorPackage extends EPackage {
 	int COUNTER_RANGE__START = RANGE_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>End</b></em>' attribute.
+	 * The feature id for the '<em><b>End</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -317,51 +319,32 @@ public interface GeneratorPackage extends EPackage {
 	int COUNTER_RANGE_FEATURE_COUNT = RANGE_FEATURE_COUNT + 2;
 
 	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.generator.impl.PipelineArrayImpl <em>Pipeline Array</em>}' class.
+	 * The meta object id for the '{@link de.evoal.languages.model.generator.impl.LiteralRangeImpl <em>Literal Range</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.generator.impl.PipelineArrayImpl
-	 * @see de.evoal.languages.model.generator.impl.GeneratorPackageImpl#getPipelineArray()
+	 * @see de.evoal.languages.model.generator.impl.LiteralRangeImpl
+	 * @see de.evoal.languages.model.generator.impl.GeneratorPackageImpl#getLiteralRange()
 	 * @generated
 	 */
-	int PIPELINE_ARRAY = 7;
+	int LITERAL_RANGE = 7;
 
 	/**
-	 * The feature id for the '<em><b>References</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Elements</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PIPELINE_ARRAY__REFERENCES = RANGE_FEATURE_COUNT + 0;
+	int LITERAL_RANGE__ELEMENTS = RANGE_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the '<em>Pipeline Array</em>' class.
+	 * The number of structural features of the '<em>Literal Range</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PIPELINE_ARRAY_FEATURE_COUNT = RANGE_FEATURE_COUNT + 1;
-
-	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.generator.impl.PipelineReferenceImpl <em>Pipeline Reference</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.generator.impl.PipelineReferenceImpl
-	 * @see de.evoal.languages.model.generator.impl.GeneratorPackageImpl#getPipelineReference()
-	 * @generated
-	 */
-	int PIPELINE_REFERENCE = 8;
-
-	/**
-	 * The number of structural features of the '<em>Pipeline Reference</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PIPELINE_REFERENCE_FEATURE_COUNT = 0;
+	int LITERAL_RANGE_FEATURE_COUNT = RANGE_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.generator.impl.PipelineDefinitionReferenceImpl <em>Pipeline Definition Reference</em>}' class.
@@ -371,7 +354,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see de.evoal.languages.model.generator.impl.GeneratorPackageImpl#getPipelineDefinitionReference()
 	 * @generated
 	 */
-	int PIPELINE_DEFINITION_REFERENCE = 9;
+	int PIPELINE_DEFINITION_REFERENCE = 8;
 
 	/**
 	 * The feature id for the '<em><b>Pipeline</b></em>' reference.
@@ -380,7 +363,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PIPELINE_DEFINITION_REFERENCE__PIPELINE = PIPELINE_REFERENCE_FEATURE_COUNT + 0;
+	int PIPELINE_DEFINITION_REFERENCE__PIPELINE = BasePackage.LITERAL_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Pipeline Definition Reference</em>' class.
@@ -389,7 +372,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PIPELINE_DEFINITION_REFERENCE_FEATURE_COUNT = PIPELINE_REFERENCE_FEATURE_COUNT + 1;
+	int PIPELINE_DEFINITION_REFERENCE_FEATURE_COUNT = BasePackage.LITERAL_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.generator.impl.VariableReferenceImpl <em>Variable Reference</em>}' class.
@@ -399,7 +382,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see de.evoal.languages.model.generator.impl.GeneratorPackageImpl#getVariableReference()
 	 * @generated
 	 */
-	int VARIABLE_REFERENCE = 10;
+	int VARIABLE_REFERENCE = 9;
 
 	/**
 	 * The feature id for the '<em><b>Loop</b></em>' reference.
@@ -408,7 +391,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_REFERENCE__LOOP = PIPELINE_REFERENCE_FEATURE_COUNT + 0;
+	int VARIABLE_REFERENCE__LOOP = BasePackage.LITERAL_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Variable Reference</em>' class.
@@ -417,7 +400,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_REFERENCE_FEATURE_COUNT = PIPELINE_REFERENCE_FEATURE_COUNT + 1;
+	int VARIABLE_REFERENCE_FEATURE_COUNT = BasePackage.LITERAL_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.generator.impl.ApplyStatementImpl <em>Apply Statement</em>}' class.
@@ -427,7 +410,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see de.evoal.languages.model.generator.impl.GeneratorPackageImpl#getApplyStatement()
 	 * @generated
 	 */
-	int APPLY_STATEMENT = 11;
+	int APPLY_STATEMENT = 10;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' attribute.
@@ -439,7 +422,7 @@ public interface GeneratorPackage extends EPackage {
 	int APPLY_STATEMENT__FILE = STATEMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Count</b></em>' attribute.
+	 * The feature id for the '<em><b>Count</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -669,57 +652,47 @@ public interface GeneratorPackage extends EPackage {
 	EClass getCounterRange();
 
 	/**
-	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.generator.CounterRange#getStart <em>Start</em>}'.
+	 * Returns the meta object for the containment reference '{@link de.evoal.languages.model.generator.CounterRange#getStart <em>Start</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Start</em>'.
+	 * @return the meta object for the containment reference '<em>Start</em>'.
 	 * @see de.evoal.languages.model.generator.CounterRange#getStart()
 	 * @see #getCounterRange()
 	 * @generated
 	 */
-	EAttribute getCounterRange_Start();
+	EReference getCounterRange_Start();
 
 	/**
-	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.generator.CounterRange#getEnd <em>End</em>}'.
+	 * Returns the meta object for the containment reference '{@link de.evoal.languages.model.generator.CounterRange#getEnd <em>End</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>End</em>'.
+	 * @return the meta object for the containment reference '<em>End</em>'.
 	 * @see de.evoal.languages.model.generator.CounterRange#getEnd()
 	 * @see #getCounterRange()
 	 * @generated
 	 */
-	EAttribute getCounterRange_End();
+	EReference getCounterRange_End();
 
 	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.generator.PipelineArray <em>Pipeline Array</em>}'.
+	 * Returns the meta object for class '{@link de.evoal.languages.model.generator.LiteralRange <em>Literal Range</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Pipeline Array</em>'.
-	 * @see de.evoal.languages.model.generator.PipelineArray
+	 * @return the meta object for class '<em>Literal Range</em>'.
+	 * @see de.evoal.languages.model.generator.LiteralRange
 	 * @generated
 	 */
-	EClass getPipelineArray();
+	EClass getLiteralRange();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.generator.PipelineArray#getReferences <em>References</em>}'.
+	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.generator.LiteralRange#getElements <em>Elements</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>References</em>'.
-	 * @see de.evoal.languages.model.generator.PipelineArray#getReferences()
-	 * @see #getPipelineArray()
+	 * @return the meta object for the containment reference list '<em>Elements</em>'.
+	 * @see de.evoal.languages.model.generator.LiteralRange#getElements()
+	 * @see #getLiteralRange()
 	 * @generated
 	 */
-	EReference getPipelineArray_References();
-
-	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.generator.PipelineReference <em>Pipeline Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Pipeline Reference</em>'.
-	 * @see de.evoal.languages.model.generator.PipelineReference
-	 * @generated
-	 */
-	EClass getPipelineReference();
+	EReference getLiteralRange_Elements();
 
 	/**
 	 * Returns the meta object for class '{@link de.evoal.languages.model.generator.PipelineDefinitionReference <em>Pipeline Definition Reference</em>}'.
@@ -785,15 +758,15 @@ public interface GeneratorPackage extends EPackage {
 	EAttribute getApplyStatement_File();
 
 	/**
-	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.generator.ApplyStatement#getCount <em>Count</em>}'.
+	 * Returns the meta object for the containment reference '{@link de.evoal.languages.model.generator.ApplyStatement#getCount <em>Count</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Count</em>'.
+	 * @return the meta object for the containment reference '<em>Count</em>'.
 	 * @see de.evoal.languages.model.generator.ApplyStatement#getCount()
 	 * @see #getApplyStatement()
 	 * @generated
 	 */
-	EAttribute getApplyStatement_Count();
+	EReference getApplyStatement_Count();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.generator.ApplyStatement#getPipelines <em>Pipelines</em>}'.
@@ -995,48 +968,38 @@ public interface GeneratorPackage extends EPackage {
 		EClass COUNTER_RANGE = eINSTANCE.getCounterRange();
 
 		/**
-		 * The meta object literal for the '<em><b>Start</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Start</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute COUNTER_RANGE__START = eINSTANCE.getCounterRange_Start();
+		EReference COUNTER_RANGE__START = eINSTANCE.getCounterRange_Start();
 
 		/**
-		 * The meta object literal for the '<em><b>End</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>End</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute COUNTER_RANGE__END = eINSTANCE.getCounterRange_End();
+		EReference COUNTER_RANGE__END = eINSTANCE.getCounterRange_End();
 
 		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.generator.impl.PipelineArrayImpl <em>Pipeline Array</em>}' class.
+		 * The meta object literal for the '{@link de.evoal.languages.model.generator.impl.LiteralRangeImpl <em>Literal Range</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.generator.impl.PipelineArrayImpl
-		 * @see de.evoal.languages.model.generator.impl.GeneratorPackageImpl#getPipelineArray()
+		 * @see de.evoal.languages.model.generator.impl.LiteralRangeImpl
+		 * @see de.evoal.languages.model.generator.impl.GeneratorPackageImpl#getLiteralRange()
 		 * @generated
 		 */
-		EClass PIPELINE_ARRAY = eINSTANCE.getPipelineArray();
+		EClass LITERAL_RANGE = eINSTANCE.getLiteralRange();
 
 		/**
-		 * The meta object literal for the '<em><b>References</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Elements</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference PIPELINE_ARRAY__REFERENCES = eINSTANCE.getPipelineArray_References();
-
-		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.generator.impl.PipelineReferenceImpl <em>Pipeline Reference</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.generator.impl.PipelineReferenceImpl
-		 * @see de.evoal.languages.model.generator.impl.GeneratorPackageImpl#getPipelineReference()
-		 * @generated
-		 */
-		EClass PIPELINE_REFERENCE = eINSTANCE.getPipelineReference();
+		EReference LITERAL_RANGE__ELEMENTS = eINSTANCE.getLiteralRange_Elements();
 
 		/**
 		 * The meta object literal for the '{@link de.evoal.languages.model.generator.impl.PipelineDefinitionReferenceImpl <em>Pipeline Definition Reference</em>}' class.
@@ -1093,12 +1056,12 @@ public interface GeneratorPackage extends EPackage {
 		EAttribute APPLY_STATEMENT__FILE = eINSTANCE.getApplyStatement_File();
 
 		/**
-		 * The meta object literal for the '<em><b>Count</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Count</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute APPLY_STATEMENT__COUNT = eINSTANCE.getApplyStatement_Count();
+		EReference APPLY_STATEMENT__COUNT = eINSTANCE.getApplyStatement_Count();
 
 		/**
 		 * The meta object literal for the '<em><b>Pipelines</b></em>' containment reference list feature.

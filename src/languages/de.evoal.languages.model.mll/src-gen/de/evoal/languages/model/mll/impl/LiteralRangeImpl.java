@@ -2,10 +2,10 @@
  */
 package de.evoal.languages.model.mll.impl;
 
-import de.evoal.languages.model.base.StringLiteral;
+import de.evoal.languages.model.base.Literal;
 
+import de.evoal.languages.model.mll.LiteralRange;
 import de.evoal.languages.model.mll.MllPackage;
-import de.evoal.languages.model.mll.StringLiteralRange;
 
 import java.util.Collection;
 
@@ -21,18 +21,18 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>String Literal Range</b></em>'.
+ * An implementation of the model object '<em><b>Literal Range</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link de.evoal.languages.model.mll.impl.StringLiteralRangeImpl#getElements <em>Elements</em>}</li>
+ *   <li>{@link de.evoal.languages.model.mll.impl.LiteralRangeImpl#getElements <em>Elements</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class StringLiteralRangeImpl extends RangeImpl implements StringLiteralRange {
+public class LiteralRangeImpl extends RangeImpl implements LiteralRange {
 	/**
 	 * The cached value of the '{@link #getElements() <em>Elements</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -41,14 +41,14 @@ public class StringLiteralRangeImpl extends RangeImpl implements StringLiteralRa
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<StringLiteral> elements;
+	protected EList<Literal> elements;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected StringLiteralRangeImpl() {
+	protected LiteralRangeImpl() {
 		super();
 	}
 
@@ -59,7 +59,7 @@ public class StringLiteralRangeImpl extends RangeImpl implements StringLiteralRa
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return MllPackage.Literals.STRING_LITERAL_RANGE;
+		return MllPackage.Literals.LITERAL_RANGE;
 	}
 
 	/**
@@ -68,9 +68,9 @@ public class StringLiteralRangeImpl extends RangeImpl implements StringLiteralRa
 	 * @generated
 	 */
 	@Override
-	public EList<StringLiteral> getElements() {
+	public EList<Literal> getElements() {
 		if (elements == null) {
-			elements = new EObjectContainmentEList<StringLiteral>(StringLiteral.class, this, MllPackage.STRING_LITERAL_RANGE__ELEMENTS);
+			elements = new EObjectContainmentEList<Literal>(Literal.class, this, MllPackage.LITERAL_RANGE__ELEMENTS);
 		}
 		return elements;
 	}
@@ -83,7 +83,7 @@ public class StringLiteralRangeImpl extends RangeImpl implements StringLiteralRa
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case MllPackage.STRING_LITERAL_RANGE__ELEMENTS:
+			case MllPackage.LITERAL_RANGE__ELEMENTS:
 				return ((InternalEList<?>)getElements()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -97,7 +97,7 @@ public class StringLiteralRangeImpl extends RangeImpl implements StringLiteralRa
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case MllPackage.STRING_LITERAL_RANGE__ELEMENTS:
+			case MllPackage.LITERAL_RANGE__ELEMENTS:
 				return getElements();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -112,9 +112,9 @@ public class StringLiteralRangeImpl extends RangeImpl implements StringLiteralRa
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case MllPackage.STRING_LITERAL_RANGE__ELEMENTS:
+			case MllPackage.LITERAL_RANGE__ELEMENTS:
 				getElements().clear();
-				getElements().addAll((Collection<? extends StringLiteral>)newValue);
+				getElements().addAll((Collection<? extends Literal>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -128,7 +128,7 @@ public class StringLiteralRangeImpl extends RangeImpl implements StringLiteralRa
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case MllPackage.STRING_LITERAL_RANGE__ELEMENTS:
+			case MllPackage.LITERAL_RANGE__ELEMENTS:
 				getElements().clear();
 				return;
 		}
@@ -143,10 +143,10 @@ public class StringLiteralRangeImpl extends RangeImpl implements StringLiteralRa
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case MllPackage.STRING_LITERAL_RANGE__ELEMENTS:
+			case MllPackage.LITERAL_RANGE__ELEMENTS:
 				return elements != null && !elements.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
 
-} //StringLiteralRangeImpl
+} //LiteralRangeImpl

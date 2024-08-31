@@ -137,7 +137,7 @@ dsl:compile-and-install:
   artifacts:
     untracked: false
     when: on_success
-    expire_in: "30 days"
+    expire_in: "14 days"
     paths:
       - src/languages/de.evoal.languages.releng.site/target/de.evoal.languages.releng.site-*.zip
       - .m2/repository/de/evoal
@@ -171,7 +171,7 @@ evoal:compile-and-test:
     untracked: false
     when: on_success
     access: all
-    expire_in: "30 days"
+    expire_in: "14 days"
     reports:
       junit: src/evoal/*/*/target/surefire-reports/TEST-*.xml
     paths:
@@ -265,6 +265,7 @@ all:package:
   artifacts:
     name: "evoal-$CI_COMMIT_REF_NAME-$CI_COMMIT_SHORT_SHA-release"
     when: on_success
+    expire_in: "14 days"
     paths:
       - evoal
 
@@ -337,6 +338,7 @@ evoal:unit:
   coverage: /Total.*?([0-9]{1,3})%/
   artifacts:
     when: on_success
+    expire_in: "14 days"
     reports:
       junit: src/evoal/*/*/target/surefire-reports/TEST-*.xml
     paths:

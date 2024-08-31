@@ -3,6 +3,7 @@
  */
 package de.evoal.languages.model.generator;
 
+import de.evoal.languages.model.base.Literal;
 
 /**
  * <!-- begin-user-doc -->
@@ -23,47 +24,47 @@ package de.evoal.languages.model.generator;
  */
 public interface CounterRange extends Range {
 	/**
-	 * Returns the value of the '<em><b>Start</b></em>' attribute.
+	 * Returns the value of the '<em><b>Start</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Start</em>' attribute.
-	 * @see #setStart(int)
+	 * @return the value of the '<em>Start</em>' containment reference.
+	 * @see #setStart(Literal)
 	 * @see de.evoal.languages.model.generator.GeneratorPackage#getCounterRange_Start()
-	 * @model required="true"
+	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	int getStart();
+	Literal getStart();
 
 	/**
-	 * Sets the value of the '{@link de.evoal.languages.model.generator.CounterRange#getStart <em>Start</em>}' attribute.
+	 * Sets the value of the '{@link de.evoal.languages.model.generator.CounterRange#getStart <em>Start</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Start</em>' attribute.
+	 * @param value the new value of the '<em>Start</em>' containment reference.
 	 * @see #getStart()
 	 * @generated
 	 */
-	void setStart(int value);
+	void setStart(Literal value);
 
 	/**
-	 * Returns the value of the '<em><b>End</b></em>' attribute.
+	 * Returns the value of the '<em><b>End</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>End</em>' attribute.
-	 * @see #setEnd(int)
+	 * @return the value of the '<em>End</em>' containment reference.
+	 * @see #setEnd(Literal)
 	 * @see de.evoal.languages.model.generator.GeneratorPackage#getCounterRange_End()
-	 * @model required="true"
+	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	int getEnd();
+	Literal getEnd();
 
 	/**
-	 * Sets the value of the '{@link de.evoal.languages.model.generator.CounterRange#getEnd <em>End</em>}' attribute.
+	 * Sets the value of the '{@link de.evoal.languages.model.generator.CounterRange#getEnd <em>End</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>End</em>' attribute.
+	 * @param value the new value of the '<em>End</em>' containment reference.
 	 * @see #getEnd()
 	 * @generated
 	 */
-	void setEnd(int value);
+	void setEnd(Literal value);
 
 } // CounterRange

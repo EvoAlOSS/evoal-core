@@ -38,29 +38,37 @@ ForStatementRule returns ForStatement:
 ;
 
 RangeRule returns Range:
-	PipelineArrayRule | CounterRangeRule
+	CounterRangeRule | LiteralRangeRule
 ;
+
+LiteralRangeRule returns LiteralRange:
+	'[' elements += LiteralRule (',' elements += LiteralRule)* ']'
+;
+
 
 CounterRangeRule returns CounterRange:
-	'[' start = INT 'to' end = INT ']'
+	'[' start = IntegerLiteralRule 'to' end = IntegerLiteralRule ']'
 ;
 
-PipelineArrayRule returns PipelineArray:
-	{PipelineArray} 'pipelines' ('[' references += PipelineReferenceRule (',' references += PipelineReferenceRule)* ']')?
+
+ApplyStatementRule returns ApplyStatement:
+	'write' file = STRING 'with' count = LiteralRule 'samples' 'from' 'executing' '[' pipelines += LiteralRule (',' pipelines += LiteralRule)* ']' ';'
 ;
 
-PipelineReferenceRule returns PipelineReference:
-	PipelineDefinitionReferenceRule | VariableReferenceRule;
-	
+@Override
+LiteralRule returns base::Literal:
+	NumberLiteralRule
+		| StringLiteralRule
+		| BooleanLiteralRule
+		| InstanceLiteralRule
+		| PipelineDefinitionReferenceRule
+		| VariableReferenceRule
+;
+
 PipelineDefinitionReferenceRule returns PipelineDefinitionReference:
 	'pipeline' pipeline = [PipelineDefinition|QualifiedName]
 ;
 
 VariableReferenceRule returns VariableReference:
 	loop = [ForStatement|ID]
-;
-
-
-ApplyStatementRule returns ApplyStatement:
-	'write' file = STRING 'with' count = INT 'samples' 'from' 'executing' '[' pipelines += PipelineReferenceRule (',' pipelines += PipelineReferenceRule)* ']' ';'
 ;

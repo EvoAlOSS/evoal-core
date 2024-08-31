@@ -21,9 +21,10 @@ import org.eclipse.emf.ecore.EReference;
  * </ul>
  * <!-- end-user-doc -->
  * <!-- begin-model-doc -->
- * /*
+ * 
  * The definition language allows us to define types and functions for
- * configuration purposes.import ecore : 'http://www.eclipse.org/emf/2002/Ecore';
+ *   configuration purposes
+ * 
  * <!-- end-model-doc -->
  * @see de.evoal.languages.model.mll.MllFactory
  * @model kind="package"
@@ -553,14 +554,14 @@ public interface MllPackage extends EPackage {
 	int COUNTER_RANGE_FEATURE_COUNT = RANGE_FEATURE_COUNT + 2;
 
 	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.mll.impl.StringLiteralRangeImpl <em>String Literal Range</em>}' class.
+	 * The meta object id for the '{@link de.evoal.languages.model.mll.impl.LiteralRangeImpl <em>Literal Range</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.mll.impl.StringLiteralRangeImpl
-	 * @see de.evoal.languages.model.mll.impl.MllPackageImpl#getStringLiteralRange()
+	 * @see de.evoal.languages.model.mll.impl.LiteralRangeImpl
+	 * @see de.evoal.languages.model.mll.impl.MllPackageImpl#getLiteralRange()
 	 * @generated
 	 */
-	int STRING_LITERAL_RANGE = 12;
+	int LITERAL_RANGE = 12;
 
 	/**
 	 * The feature id for the '<em><b>Elements</b></em>' containment reference list.
@@ -569,17 +570,16 @@ public interface MllPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STRING_LITERAL_RANGE__ELEMENTS = RANGE_FEATURE_COUNT + 0;
+	int LITERAL_RANGE__ELEMENTS = RANGE_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the '<em>String Literal Range</em>' class.
+	 * The number of structural features of the '<em>Literal Range</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STRING_LITERAL_RANGE_FEATURE_COUNT = RANGE_FEATURE_COUNT + 1;
-
+	int LITERAL_RANGE_FEATURE_COUNT = RANGE_FEATURE_COUNT + 1;
 
 	/**
 	 * Returns the meta object for class '{@link de.evoal.languages.model.mll.MachineLearningModule <em>Machine Learning Module</em>}'.
@@ -999,25 +999,25 @@ public interface MllPackage extends EPackage {
 	EAttribute getCounterRange_End();
 
 	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.mll.StringLiteralRange <em>String Literal Range</em>}'.
+	 * Returns the meta object for class '{@link de.evoal.languages.model.mll.LiteralRange <em>Literal Range</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>String Literal Range</em>'.
-	 * @see de.evoal.languages.model.mll.StringLiteralRange
+	 * @return the meta object for class '<em>Literal Range</em>'.
+	 * @see de.evoal.languages.model.mll.LiteralRange
 	 * @generated
 	 */
-	EClass getStringLiteralRange();
+	EClass getLiteralRange();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.mll.StringLiteralRange#getElements <em>Elements</em>}'.
+	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.mll.LiteralRange#getElements <em>Elements</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Elements</em>'.
-	 * @see de.evoal.languages.model.mll.StringLiteralRange#getElements()
-	 * @see #getStringLiteralRange()
+	 * @see de.evoal.languages.model.mll.LiteralRange#getElements()
+	 * @see #getLiteralRange()
 	 * @generated
 	 */
-	EReference getStringLiteralRange_Elements();
+	EReference getLiteralRange_Elements();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -1378,14 +1378,14 @@ public interface MllPackage extends EPackage {
 		EAttribute COUNTER_RANGE__END = eINSTANCE.getCounterRange_End();
 
 		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.mll.impl.StringLiteralRangeImpl <em>String Literal Range</em>}' class.
+		 * The meta object literal for the '{@link de.evoal.languages.model.mll.impl.LiteralRangeImpl <em>Literal Range</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.mll.impl.StringLiteralRangeImpl
-		 * @see de.evoal.languages.model.mll.impl.MllPackageImpl#getStringLiteralRange()
+		 * @see de.evoal.languages.model.mll.impl.LiteralRangeImpl
+		 * @see de.evoal.languages.model.mll.impl.MllPackageImpl#getLiteralRange()
 		 * @generated
 		 */
-		EClass STRING_LITERAL_RANGE = eINSTANCE.getStringLiteralRange();
+		EClass LITERAL_RANGE = eINSTANCE.getLiteralRange();
 
 		/**
 		 * The meta object literal for the '<em><b>Elements</b></em>' containment reference list feature.
@@ -1393,7 +1393,7 @@ public interface MllPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference STRING_LITERAL_RANGE__ELEMENTS = eINSTANCE.getStringLiteralRange_Elements();
+		EReference LITERAL_RANGE__ELEMENTS = eINSTANCE.getLiteralRange_Elements();
 
 	}
 

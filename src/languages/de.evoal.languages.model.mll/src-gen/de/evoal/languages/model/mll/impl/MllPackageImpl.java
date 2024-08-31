@@ -12,6 +12,7 @@ import de.evoal.languages.model.mll.BlockStatement;
 import de.evoal.languages.model.mll.CallStatement;
 import de.evoal.languages.model.mll.CounterRange;
 import de.evoal.languages.model.mll.ForStatement;
+import de.evoal.languages.model.mll.LiteralRange;
 import de.evoal.languages.model.mll.MachineLearningModule;
 import de.evoal.languages.model.mll.MllFactory;
 import de.evoal.languages.model.mll.MllPackage;
@@ -20,7 +21,6 @@ import de.evoal.languages.model.mll.PredictStatement;
 import de.evoal.languages.model.mll.Prediction;
 import de.evoal.languages.model.mll.Range;
 import de.evoal.languages.model.mll.Statement;
-import de.evoal.languages.model.mll.StringLiteralRange;
 import de.evoal.languages.model.mll.SurrogateDefinition;
 import de.evoal.languages.model.mll.SurrogateLayerDefinition;
 
@@ -127,7 +127,7 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass stringLiteralRangeEClass = null;
+	private EClass literalRangeEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -590,8 +590,8 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 	 * @generated
 	 */
 	@Override
-	public EClass getStringLiteralRange() {
-		return stringLiteralRangeEClass;
+	public EClass getLiteralRange() {
+		return literalRangeEClass;
 	}
 
 	/**
@@ -600,8 +600,8 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getStringLiteralRange_Elements() {
-		return (EReference)stringLiteralRangeEClass.getEStructuralFeatures().get(0);
+	public EReference getLiteralRange_Elements() {
+		return (EReference)literalRangeEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -684,8 +684,8 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 		createEAttribute(counterRangeEClass, COUNTER_RANGE__START);
 		createEAttribute(counterRangeEClass, COUNTER_RANGE__END);
 
-		stringLiteralRangeEClass = createEClass(STRING_LITERAL_RANGE);
-		createEReference(stringLiteralRangeEClass, STRING_LITERAL_RANGE__ELEMENTS);
+		literalRangeEClass = createEClass(LITERAL_RANGE);
+		createEReference(literalRangeEClass, LITERAL_RANGE__ELEMENTS);
 	}
 
 	/**
@@ -726,7 +726,7 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 		predictStatementEClass.getESuperTypes().add(this.getStatement());
 		forStatementEClass.getESuperTypes().add(this.getStatement());
 		counterRangeEClass.getESuperTypes().add(this.getRange());
-		stringLiteralRangeEClass.getESuperTypes().add(this.getRange());
+		literalRangeEClass.getESuperTypes().add(this.getRange());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(machineLearningModuleEClass, MachineLearningModule.class, "MachineLearningModule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -780,8 +780,8 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 		initEAttribute(getCounterRange_Start(), ecorePackage.getEInt(), "start", null, 1, 1, CounterRange.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCounterRange_End(), ecorePackage.getEInt(), "end", null, 1, 1, CounterRange.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(stringLiteralRangeEClass, StringLiteralRange.class, "StringLiteralRange", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getStringLiteralRange_Elements(), theBasePackage.getStringLiteral(), null, "elements", null, 0, -1, StringLiteralRange.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEClass(literalRangeEClass, LiteralRange.class, "LiteralRange", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getLiteralRange_Elements(), theBasePackage.getLiteral(), null, "elements", null, 0, -1, LiteralRange.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);
@@ -905,7 +905,7 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 			   "nullFree", "false"
 		   });
 		addAnnotation
-		  (getStringLiteralRange_Elements(),
+		  (getLiteralRange_Elements(),
 		   source,
 		   new String[] {
 			   "nullFree", "false"

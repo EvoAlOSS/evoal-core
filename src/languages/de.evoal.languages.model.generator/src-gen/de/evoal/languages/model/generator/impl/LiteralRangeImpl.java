@@ -3,9 +3,10 @@
  */
 package de.evoal.languages.model.generator.impl;
 
+import de.evoal.languages.model.base.Literal;
+
 import de.evoal.languages.model.generator.GeneratorPackage;
-import de.evoal.languages.model.generator.PipelineArray;
-import de.evoal.languages.model.generator.PipelineReference;
+import de.evoal.languages.model.generator.LiteralRange;
 
 import java.util.Collection;
 
@@ -21,34 +22,34 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Pipeline Array</b></em>'.
+ * An implementation of the model object '<em><b>Literal Range</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link de.evoal.languages.model.generator.impl.PipelineArrayImpl#getReferences <em>References</em>}</li>
+ *   <li>{@link de.evoal.languages.model.generator.impl.LiteralRangeImpl#getElements <em>Elements</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class PipelineArrayImpl extends RangeImpl implements PipelineArray {
+public class LiteralRangeImpl extends RangeImpl implements LiteralRange {
 	/**
-	 * The cached value of the '{@link #getReferences() <em>References</em>}' containment reference list.
+	 * The cached value of the '{@link #getElements() <em>Elements</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getReferences()
+	 * @see #getElements()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<PipelineReference> references;
+	protected EList<Literal> elements;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected PipelineArrayImpl() {
+	protected LiteralRangeImpl() {
 		super();
 	}
 
@@ -59,7 +60,7 @@ public class PipelineArrayImpl extends RangeImpl implements PipelineArray {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return GeneratorPackage.Literals.PIPELINE_ARRAY;
+		return GeneratorPackage.Literals.LITERAL_RANGE;
 	}
 
 	/**
@@ -68,11 +69,11 @@ public class PipelineArrayImpl extends RangeImpl implements PipelineArray {
 	 * @generated
 	 */
 	@Override
-	public EList<PipelineReference> getReferences() {
-		if (references == null) {
-			references = new EObjectContainmentEList<PipelineReference>(PipelineReference.class, this, GeneratorPackage.PIPELINE_ARRAY__REFERENCES);
+	public EList<Literal> getElements() {
+		if (elements == null) {
+			elements = new EObjectContainmentEList<Literal>(Literal.class, this, GeneratorPackage.LITERAL_RANGE__ELEMENTS);
 		}
-		return references;
+		return elements;
 	}
 
 	/**
@@ -83,8 +84,8 @@ public class PipelineArrayImpl extends RangeImpl implements PipelineArray {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case GeneratorPackage.PIPELINE_ARRAY__REFERENCES:
-				return ((InternalEList<?>)getReferences()).basicRemove(otherEnd, msgs);
+			case GeneratorPackage.LITERAL_RANGE__ELEMENTS:
+				return ((InternalEList<?>)getElements()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -97,8 +98,8 @@ public class PipelineArrayImpl extends RangeImpl implements PipelineArray {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case GeneratorPackage.PIPELINE_ARRAY__REFERENCES:
-				return getReferences();
+			case GeneratorPackage.LITERAL_RANGE__ELEMENTS:
+				return getElements();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -112,9 +113,9 @@ public class PipelineArrayImpl extends RangeImpl implements PipelineArray {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case GeneratorPackage.PIPELINE_ARRAY__REFERENCES:
-				getReferences().clear();
-				getReferences().addAll((Collection<? extends PipelineReference>)newValue);
+			case GeneratorPackage.LITERAL_RANGE__ELEMENTS:
+				getElements().clear();
+				getElements().addAll((Collection<? extends Literal>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -128,8 +129,8 @@ public class PipelineArrayImpl extends RangeImpl implements PipelineArray {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case GeneratorPackage.PIPELINE_ARRAY__REFERENCES:
-				getReferences().clear();
+			case GeneratorPackage.LITERAL_RANGE__ELEMENTS:
+				getElements().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -143,10 +144,10 @@ public class PipelineArrayImpl extends RangeImpl implements PipelineArray {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case GeneratorPackage.PIPELINE_ARRAY__REFERENCES:
-				return references != null && !references.isEmpty();
+			case GeneratorPackage.LITERAL_RANGE__ELEMENTS:
+				return elements != null && !elements.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
 
-} //PipelineArrayImpl
+} //LiteralRangeImpl

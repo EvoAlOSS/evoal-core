@@ -61,8 +61,8 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//CounterRange/start"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//CounterRange/end"/>
     </genClasses>
-    <genClasses ecoreClass="model.ecore#//StringLiteralRange">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//StringLiteralRange/elements"/>
+    <genClasses ecoreClass="model.ecore#//LiteralRange">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//LiteralRange/elements"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

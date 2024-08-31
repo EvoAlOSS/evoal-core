@@ -60,15 +60,15 @@ ForStatementRule returns ForStatement:
 ;
 
 RangeRule returns Range:
-	CounterRangeRule | StringLiterRangeRule	
+	CounterRangeRule | LiteralRangeRule	
 ;
 
 CounterRangeRule returns CounterRange:
 	'[' start = INT 'to' end = INT ']'
 ;
 
-StringLiterRangeRule returns StringLiteralRange:
-	'[' elements += StringLiteralRule (',' elements += StringLiteralRule)* ']'
+LiteralRangeRule returns LiteralRange:
+	'[' elements += LiteralRule (',' elements += LiteralRule)* ']'
 ;
 
 BlockStatementRule returns BlockStatement:

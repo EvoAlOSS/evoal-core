@@ -31,13 +31,12 @@
     </genClasses>
     <genClasses ecoreClass="model.ecore#//Range"/>
     <genClasses ecoreClass="model.ecore#//CounterRange">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//CounterRange/start"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//CounterRange/end"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference model.ecore#//CounterRange/start"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference model.ecore#//CounterRange/end"/>
     </genClasses>
-    <genClasses ecoreClass="model.ecore#//PipelineArray">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//PipelineArray/references"/>
+    <genClasses ecoreClass="model.ecore#//LiteralRange">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//LiteralRange/elements"/>
     </genClasses>
-    <genClasses ecoreClass="model.ecore#//PipelineReference"/>
     <genClasses ecoreClass="model.ecore#//PipelineDefinitionReference">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//PipelineDefinitionReference/pipeline"/>
     </genClasses>
@@ -46,7 +45,7 @@
     </genClasses>
     <genClasses ecoreClass="model.ecore#//ApplyStatement">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//ApplyStatement/file"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//ApplyStatement/count"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference model.ecore#//ApplyStatement/count"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//ApplyStatement/pipelines"/>
     </genClasses>
   </genPackages>

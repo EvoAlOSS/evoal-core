@@ -86,22 +86,13 @@ public interface GeneratorFactory extends EFactory {
 	CounterRange createCounterRange();
 
 	/**
-	 * Returns a new object of class '<em>Pipeline Array</em>'.
+	 * Returns a new object of class '<em>Literal Range</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Pipeline Array</em>'.
+	 * @return a new object of class '<em>Literal Range</em>'.
 	 * @generated
 	 */
-	PipelineArray createPipelineArray();
-
-	/**
-	 * Returns a new object of class '<em>Pipeline Reference</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Pipeline Reference</em>'.
-	 * @generated
-	 */
-	PipelineReference createPipelineReference();
+	LiteralRange createLiteralRange();
 
 	/**
 	 * Returns a new object of class '<em>Pipeline Definition Reference</em>'.

@@ -3,13 +3,16 @@
  */
 package de.evoal.languages.model.generator.impl;
 
+import de.evoal.languages.model.base.Literal;
 import de.evoal.languages.model.generator.CounterRange;
 import de.evoal.languages.model.generator.GeneratorPackage;
 
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
@@ -28,44 +31,24 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  */
 public class CounterRangeImpl extends RangeImpl implements CounterRange {
 	/**
-	 * The default value of the '{@link #getStart() <em>Start</em>}' attribute.
+	 * The cached value of the '{@link #getStart() <em>Start</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getStart()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int START_EDEFAULT = 0;
+	protected Literal start;
 
 	/**
-	 * The cached value of the '{@link #getStart() <em>Start</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getStart()
-	 * @generated
-	 * @ordered
-	 */
-	protected int start = START_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getEnd() <em>End</em>}' attribute.
+	 * The cached value of the '{@link #getEnd() <em>End</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getEnd()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int END_EDEFAULT = 0;
-
-	/**
-	 * The cached value of the '{@link #getEnd() <em>End</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getEnd()
-	 * @generated
-	 * @ordered
-	 */
-	protected int end = END_EDEFAULT;
+	protected Literal end;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -92,7 +75,7 @@ public class CounterRangeImpl extends RangeImpl implements CounterRange {
 	 * @generated
 	 */
 	@Override
-	public int getStart() {
+	public Literal getStart() {
 		return start;
 	}
 
@@ -101,12 +84,14 @@ public class CounterRangeImpl extends RangeImpl implements CounterRange {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public void setStart(int newStart) {
-		int oldStart = start;
+	public NotificationChain basicSetStart(Literal newStart, NotificationChain msgs) {
+		Literal oldStart = start;
 		start = newStart;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, GeneratorPackage.COUNTER_RANGE__START, oldStart, start));
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, GeneratorPackage.COUNTER_RANGE__START, oldStart, newStart);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
 	}
 
 	/**
@@ -115,7 +100,27 @@ public class CounterRangeImpl extends RangeImpl implements CounterRange {
 	 * @generated
 	 */
 	@Override
-	public int getEnd() {
+	public void setStart(Literal newStart) {
+		if (newStart != start) {
+			NotificationChain msgs = null;
+			if (start != null)
+				msgs = ((InternalEObject)start).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - GeneratorPackage.COUNTER_RANGE__START, null, msgs);
+			if (newStart != null)
+				msgs = ((InternalEObject)newStart).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - GeneratorPackage.COUNTER_RANGE__START, null, msgs);
+			msgs = basicSetStart(newStart, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, GeneratorPackage.COUNTER_RANGE__START, newStart, newStart));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Literal getEnd() {
 		return end;
 	}
 
@@ -124,12 +129,50 @@ public class CounterRangeImpl extends RangeImpl implements CounterRange {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public void setEnd(int newEnd) {
-		int oldEnd = end;
+	public NotificationChain basicSetEnd(Literal newEnd, NotificationChain msgs) {
+		Literal oldEnd = end;
 		end = newEnd;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, GeneratorPackage.COUNTER_RANGE__END, oldEnd, end));
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, GeneratorPackage.COUNTER_RANGE__END, oldEnd, newEnd);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setEnd(Literal newEnd) {
+		if (newEnd != end) {
+			NotificationChain msgs = null;
+			if (end != null)
+				msgs = ((InternalEObject)end).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - GeneratorPackage.COUNTER_RANGE__END, null, msgs);
+			if (newEnd != null)
+				msgs = ((InternalEObject)newEnd).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - GeneratorPackage.COUNTER_RANGE__END, null, msgs);
+			msgs = basicSetEnd(newEnd, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, GeneratorPackage.COUNTER_RANGE__END, newEnd, newEnd));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case GeneratorPackage.COUNTER_RANGE__START:
+				return basicSetStart(null, msgs);
+			case GeneratorPackage.COUNTER_RANGE__END:
+				return basicSetEnd(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -157,10 +200,10 @@ public class CounterRangeImpl extends RangeImpl implements CounterRange {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case GeneratorPackage.COUNTER_RANGE__START:
-				setStart((Integer)newValue);
+				setStart((Literal)newValue);
 				return;
 			case GeneratorPackage.COUNTER_RANGE__END:
-				setEnd((Integer)newValue);
+				setEnd((Literal)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -175,10 +218,10 @@ public class CounterRangeImpl extends RangeImpl implements CounterRange {
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case GeneratorPackage.COUNTER_RANGE__START:
-				setStart(START_EDEFAULT);
+				setStart((Literal)null);
 				return;
 			case GeneratorPackage.COUNTER_RANGE__END:
-				setEnd(END_EDEFAULT);
+				setEnd((Literal)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -193,29 +236,11 @@ public class CounterRangeImpl extends RangeImpl implements CounterRange {
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case GeneratorPackage.COUNTER_RANGE__START:
-				return start != START_EDEFAULT;
+				return start != null;
 			case GeneratorPackage.COUNTER_RANGE__END:
-				return end != END_EDEFAULT;
+				return end != null;
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuilder result = new StringBuilder(super.toString());
-		result.append(" (start: ");
-		result.append(start);
-		result.append(", end: ");
-		result.append(end);
-		result.append(')');
-		return result.toString();
 	}
 
 } //CounterRangeImpl

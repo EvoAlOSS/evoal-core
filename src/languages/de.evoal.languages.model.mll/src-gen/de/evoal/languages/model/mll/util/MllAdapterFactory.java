@@ -120,8 +120,8 @@ public class MllAdapterFactory extends AdapterFactoryImpl {
 				return createCounterRangeAdapter();
 			}
 			@Override
-			public Adapter caseStringLiteralRange(StringLiteralRange object) {
-				return createStringLiteralRangeAdapter();
+			public Adapter caseLiteralRange(LiteralRange object) {
+				return createLiteralRangeAdapter();
 			}
 			@Override
 			public Adapter caseValue(Value object) {
@@ -324,16 +324,16 @@ public class MllAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.mll.StringLiteralRange <em>String Literal Range</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.mll.LiteralRange <em>Literal Range</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.evoal.languages.model.mll.StringLiteralRange
+	 * @see de.evoal.languages.model.mll.LiteralRange
 	 * @generated
 	 */
-	public Adapter createStringLiteralRangeAdapter() {
+	public Adapter createLiteralRangeAdapter() {
 		return null;
 	}
 

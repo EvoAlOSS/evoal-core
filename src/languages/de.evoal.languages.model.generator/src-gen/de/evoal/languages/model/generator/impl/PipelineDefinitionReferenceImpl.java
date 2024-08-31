@@ -3,6 +3,7 @@
  */
 package de.evoal.languages.model.generator.impl;
 
+import de.evoal.languages.model.base.impl.LiteralImpl;
 import de.evoal.languages.model.generator.GeneratorPackage;
 import de.evoal.languages.model.generator.PipelineDefinition;
 import de.evoal.languages.model.generator.PipelineDefinitionReference;
@@ -27,7 +28,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *
  * @generated
  */
-public class PipelineDefinitionReferenceImpl extends PipelineReferenceImpl implements PipelineDefinitionReference {
+public class PipelineDefinitionReferenceImpl extends LiteralImpl implements PipelineDefinitionReference {
 	/**
 	 * The cached value of the '{@link #getPipeline() <em>Pipeline</em>}' reference.
 	 * <!-- begin-user-doc -->

@@ -3,6 +3,8 @@
  */
 package de.evoal.languages.model.generator.util;
 
+import de.evoal.languages.model.base.Literal;
+import de.evoal.languages.model.base.Value;
 import de.evoal.languages.model.generator.*;
 
 import org.eclipse.emf.common.notify.Adapter;
@@ -97,12 +99,8 @@ public class GeneratorAdapterFactory extends AdapterFactoryImpl {
 				return createCounterRangeAdapter();
 			}
 			@Override
-			public Adapter casePipelineArray(PipelineArray object) {
-				return createPipelineArrayAdapter();
-			}
-			@Override
-			public Adapter casePipelineReference(PipelineReference object) {
-				return createPipelineReferenceAdapter();
+			public Adapter caseLiteralRange(LiteralRange object) {
+				return createLiteralRangeAdapter();
 			}
 			@Override
 			public Adapter casePipelineDefinitionReference(PipelineDefinitionReference object) {
@@ -115,6 +113,14 @@ public class GeneratorAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseApplyStatement(ApplyStatement object) {
 				return createApplyStatementAdapter();
+			}
+			@Override
+			public Adapter caseValue(Value object) {
+				return createValueAdapter();
+			}
+			@Override
+			public Adapter caseLiteral(Literal object) {
+				return createLiteralAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -235,30 +241,44 @@ public class GeneratorAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.generator.PipelineArray <em>Pipeline Array</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.generator.LiteralRange <em>Literal Range</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.evoal.languages.model.generator.PipelineArray
+	 * @see de.evoal.languages.model.generator.LiteralRange
 	 * @generated
 	 */
-	public Adapter createPipelineArrayAdapter() {
+	public Adapter createLiteralRangeAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.generator.PipelineReference <em>Pipeline Reference</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.Value <em>Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.evoal.languages.model.generator.PipelineReference
+	 * @see de.evoal.languages.model.base.Value
 	 * @generated
 	 */
-	public Adapter createPipelineReferenceAdapter() {
+	public Adapter createValueAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.Literal <em>Literal</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.evoal.languages.model.base.Literal
+	 * @generated
+	 */
+	public Adapter createLiteralAdapter() {
 		return null;
 	}
 

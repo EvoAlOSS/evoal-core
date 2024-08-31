@@ -15,10 +15,9 @@ import de.evoal.languages.model.generator.ForStatement;
 import de.evoal.languages.model.generator.GeneratorFactory;
 import de.evoal.languages.model.generator.GeneratorModule;
 import de.evoal.languages.model.generator.GeneratorPackage;
-import de.evoal.languages.model.generator.PipelineArray;
+import de.evoal.languages.model.generator.LiteralRange;
 import de.evoal.languages.model.generator.PipelineDefinition;
 import de.evoal.languages.model.generator.PipelineDefinitionReference;
-import de.evoal.languages.model.generator.PipelineReference;
 import de.evoal.languages.model.generator.Range;
 import de.evoal.languages.model.generator.Statement;
 import de.evoal.languages.model.generator.Step;
@@ -94,14 +93,7 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass pipelineArrayEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass pipelineReferenceEClass = null;
+	private EClass literalRangeEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -386,8 +378,8 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 	 * @generated
 	 */
 	@Override
-	public EAttribute getCounterRange_Start() {
-		return (EAttribute)counterRangeEClass.getEStructuralFeatures().get(0);
+	public EReference getCounterRange_Start() {
+		return (EReference)counterRangeEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -396,8 +388,8 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 	 * @generated
 	 */
 	@Override
-	public EAttribute getCounterRange_End() {
-		return (EAttribute)counterRangeEClass.getEStructuralFeatures().get(1);
+	public EReference getCounterRange_End() {
+		return (EReference)counterRangeEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -406,8 +398,8 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 	 * @generated
 	 */
 	@Override
-	public EClass getPipelineArray() {
-		return pipelineArrayEClass;
+	public EClass getLiteralRange() {
+		return literalRangeEClass;
 	}
 
 	/**
@@ -416,18 +408,8 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 	 * @generated
 	 */
 	@Override
-	public EReference getPipelineArray_References() {
-		return (EReference)pipelineArrayEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getPipelineReference() {
-		return pipelineReferenceEClass;
+	public EReference getLiteralRange_Elements() {
+		return (EReference)literalRangeEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -496,8 +478,8 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 	 * @generated
 	 */
 	@Override
-	public EAttribute getApplyStatement_Count() {
-		return (EAttribute)applyStatementEClass.getEStructuralFeatures().get(1);
+	public EReference getApplyStatement_Count() {
+		return (EReference)applyStatementEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -564,13 +546,11 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 		rangeEClass = createEClass(RANGE);
 
 		counterRangeEClass = createEClass(COUNTER_RANGE);
-		createEAttribute(counterRangeEClass, COUNTER_RANGE__START);
-		createEAttribute(counterRangeEClass, COUNTER_RANGE__END);
+		createEReference(counterRangeEClass, COUNTER_RANGE__START);
+		createEReference(counterRangeEClass, COUNTER_RANGE__END);
 
-		pipelineArrayEClass = createEClass(PIPELINE_ARRAY);
-		createEReference(pipelineArrayEClass, PIPELINE_ARRAY__REFERENCES);
-
-		pipelineReferenceEClass = createEClass(PIPELINE_REFERENCE);
+		literalRangeEClass = createEClass(LITERAL_RANGE);
+		createEReference(literalRangeEClass, LITERAL_RANGE__ELEMENTS);
 
 		pipelineDefinitionReferenceEClass = createEClass(PIPELINE_DEFINITION_REFERENCE);
 		createEReference(pipelineDefinitionReferenceEClass, PIPELINE_DEFINITION_REFERENCE__PIPELINE);
@@ -580,7 +560,7 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 
 		applyStatementEClass = createEClass(APPLY_STATEMENT);
 		createEAttribute(applyStatementEClass, APPLY_STATEMENT__FILE);
-		createEAttribute(applyStatementEClass, APPLY_STATEMENT__COUNT);
+		createEReference(applyStatementEClass, APPLY_STATEMENT__COUNT);
 		createEReference(applyStatementEClass, APPLY_STATEMENT__PIPELINES);
 	}
 
@@ -618,9 +598,9 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 		// Add supertypes to classes
 		forStatementEClass.getESuperTypes().add(this.getStatement());
 		counterRangeEClass.getESuperTypes().add(this.getRange());
-		pipelineArrayEClass.getESuperTypes().add(this.getRange());
-		pipelineDefinitionReferenceEClass.getESuperTypes().add(this.getPipelineReference());
-		variableReferenceEClass.getESuperTypes().add(this.getPipelineReference());
+		literalRangeEClass.getESuperTypes().add(this.getRange());
+		pipelineDefinitionReferenceEClass.getESuperTypes().add(theBasePackage.getLiteral());
+		variableReferenceEClass.getESuperTypes().add(theBasePackage.getLiteral());
 		applyStatementEClass.getESuperTypes().add(this.getStatement());
 
 		// Initialize classes and features; add operations and parameters
@@ -649,13 +629,11 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 		initEClass(rangeEClass, Range.class, "Range", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(counterRangeEClass, CounterRange.class, "CounterRange", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getCounterRange_Start(), ecorePackage.getEInt(), "start", null, 1, 1, CounterRange.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getCounterRange_End(), ecorePackage.getEInt(), "end", null, 1, 1, CounterRange.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCounterRange_Start(), theBasePackage.getLiteral(), null, "start", null, 1, 1, CounterRange.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCounterRange_End(), theBasePackage.getLiteral(), null, "end", null, 1, 1, CounterRange.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(pipelineArrayEClass, PipelineArray.class, "PipelineArray", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getPipelineArray_References(), this.getPipelineReference(), null, "references", null, 0, -1, PipelineArray.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-
-		initEClass(pipelineReferenceEClass, PipelineReference.class, "PipelineReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(literalRangeEClass, LiteralRange.class, "LiteralRange", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getLiteralRange_Elements(), theBasePackage.getLiteral(), null, "elements", null, 1, -1, LiteralRange.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		initEClass(pipelineDefinitionReferenceEClass, PipelineDefinitionReference.class, "PipelineDefinitionReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getPipelineDefinitionReference_Pipeline(), this.getPipelineDefinition(), null, "pipeline", null, 1, 1, PipelineDefinitionReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -665,8 +643,8 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 
 		initEClass(applyStatementEClass, ApplyStatement.class, "ApplyStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getApplyStatement_File(), ecorePackage.getEString(), "file", null, 0, 1, ApplyStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getApplyStatement_Count(), ecorePackage.getEInt(), "count", null, 1, 1, ApplyStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getApplyStatement_Pipelines(), this.getPipelineReference(), null, "pipelines", null, 0, -1, ApplyStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getApplyStatement_Count(), theBasePackage.getLiteral(), null, "count", null, 1, 1, ApplyStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getApplyStatement_Pipelines(), theBasePackage.getLiteral(), null, "pipelines", null, 0, -1, ApplyStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);
@@ -690,6 +668,7 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 		  (this,
 		   source,
 		   new String[] {
+			   "base", "platform:/resource/de.evoal.languages.model.base/model/model.ecore#/",
 			   "ddl", "platform:/resource/de.evoal.languages.model.ddl/model/model.ecore#/",
 			   "dl", "platform:/resource/de.evoal.languages.model.dl/model/model.ecore#/",
 			   "ecore", "http://www.eclipse.org/emf/2002/Ecore",
@@ -724,7 +703,7 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 			   "nullFree", "false"
 		   });
 		addAnnotation
-		  (getPipelineArray_References(),
+		  (getLiteralRange_Elements(),
 		   source,
 		   new String[] {
 			   "nullFree", "false"

@@ -3,6 +3,8 @@
  */
 package de.evoal.languages.model.generator.util;
 
+import de.evoal.languages.model.base.Literal;
+import de.evoal.languages.model.base.Value;
 import de.evoal.languages.model.generator.*;
 
 import org.eclipse.emf.ecore.EObject;
@@ -111,30 +113,26 @@ public class GeneratorSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case GeneratorPackage.PIPELINE_ARRAY: {
-				PipelineArray pipelineArray = (PipelineArray)theEObject;
-				T result = casePipelineArray(pipelineArray);
-				if (result == null) result = caseRange(pipelineArray);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case GeneratorPackage.PIPELINE_REFERENCE: {
-				PipelineReference pipelineReference = (PipelineReference)theEObject;
-				T result = casePipelineReference(pipelineReference);
+			case GeneratorPackage.LITERAL_RANGE: {
+				LiteralRange literalRange = (LiteralRange)theEObject;
+				T result = caseLiteralRange(literalRange);
+				if (result == null) result = caseRange(literalRange);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case GeneratorPackage.PIPELINE_DEFINITION_REFERENCE: {
 				PipelineDefinitionReference pipelineDefinitionReference = (PipelineDefinitionReference)theEObject;
 				T result = casePipelineDefinitionReference(pipelineDefinitionReference);
-				if (result == null) result = casePipelineReference(pipelineDefinitionReference);
+				if (result == null) result = caseLiteral(pipelineDefinitionReference);
+				if (result == null) result = caseValue(pipelineDefinitionReference);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case GeneratorPackage.VARIABLE_REFERENCE: {
 				VariableReference variableReference = (VariableReference)theEObject;
 				T result = caseVariableReference(variableReference);
-				if (result == null) result = casePipelineReference(variableReference);
+				if (result == null) result = caseLiteral(variableReference);
+				if (result == null) result = caseValue(variableReference);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -255,32 +253,47 @@ public class GeneratorSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Pipeline Array</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Literal Range</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Pipeline Array</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Literal Range</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T casePipelineArray(PipelineArray object) {
+	public T caseLiteralRange(LiteralRange object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Pipeline Reference</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Value</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Pipeline Reference</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Value</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T casePipelineReference(PipelineReference object) {
+	public T caseValue(Value object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Literal</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Literal</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseLiteral(Literal object) {
 		return null;
 	}
 

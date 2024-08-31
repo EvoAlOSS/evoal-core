@@ -3,6 +3,7 @@
  */
 package de.evoal.languages.model.generator;
 
+import de.evoal.languages.model.base.Literal;
 
 /**
  * <!-- begin-user-doc -->
@@ -20,7 +21,7 @@ package de.evoal.languages.model.generator;
  * @model
  * @generated
  */
-public interface VariableReference extends PipelineReference {
+public interface VariableReference extends Literal {
 	/**
 	 * Returns the value of the '<em><b>Loop</b></em>' reference.
 	 * <!-- begin-user-doc -->

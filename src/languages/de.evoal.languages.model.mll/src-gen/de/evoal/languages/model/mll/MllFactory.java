@@ -112,13 +112,13 @@ public interface MllFactory extends EFactory {
 	CounterRange createCounterRange();
 
 	/**
-	 * Returns a new object of class '<em>String Literal Range</em>'.
+	 * Returns a new object of class '<em>Literal Range</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>String Literal Range</em>'.
+	 * @return a new object of class '<em>Literal Range</em>'.
 	 * @generated
 	 */
-	StringLiteralRange createStringLiteralRange();
+	LiteralRange createLiteralRange();
 
 	/**
 	 * Returns the package supported by this factory.

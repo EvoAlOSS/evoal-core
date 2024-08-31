@@ -5,11 +5,8 @@ import de.evoal.core.api.languages.AttributeEvaluator;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.utils.ConstantSwitch;
 import de.evoal.core.api.utils.Requirements;
-import de.evoal.languages.model.base.DefinedFunctionName;
-import de.evoal.languages.model.base.FunctionDefinition;
+import de.evoal.languages.model.base.*;
 import de.evoal.languages.model.ddl.DataDescription;
-import de.evoal.languages.model.base.Call;
-import de.evoal.languages.model.base.StringLiteral;
 import de.evoal.languages.model.dl.util.FQNProvider;
 import de.evoal.languages.model.mll.*;
 import de.evoal.languages.model.mll.util.MllSwitch;
@@ -240,10 +237,10 @@ public class StatementExecutor extends MllSwitch<Object> {
     }
 
     @Override
-    public Object caseStringLiteralRange(final StringLiteralRange range) {
+    public Object caseLiteralRange(final LiteralRange range) {
         return range.getElements()
                     .stream()
-                    .map(StringLiteral::getValue);
+                    .map(Literal::getValue);
     }
 
     private void saveTrainedSurrogateFunctionFunction(final File outputFilename) {

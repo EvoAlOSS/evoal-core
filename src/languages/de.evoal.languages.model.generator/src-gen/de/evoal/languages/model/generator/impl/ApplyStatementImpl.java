@@ -3,9 +3,9 @@
  */
 package de.evoal.languages.model.generator.impl;
 
+import de.evoal.languages.model.base.Literal;
 import de.evoal.languages.model.generator.ApplyStatement;
 import de.evoal.languages.model.generator.GeneratorPackage;
-import de.evoal.languages.model.generator.PipelineReference;
 
 import java.util.Collection;
 
@@ -59,24 +59,14 @@ public class ApplyStatementImpl extends StatementImpl implements ApplyStatement 
 	protected String file = FILE_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getCount() <em>Count</em>}' attribute.
+	 * The cached value of the '{@link #getCount() <em>Count</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getCount()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int COUNT_EDEFAULT = 0;
-
-	/**
-	 * The cached value of the '{@link #getCount() <em>Count</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getCount()
-	 * @generated
-	 * @ordered
-	 */
-	protected int count = COUNT_EDEFAULT;
+	protected Literal count;
 
 	/**
 	 * The cached value of the '{@link #getPipelines() <em>Pipelines</em>}' containment reference list.
@@ -86,7 +76,7 @@ public class ApplyStatementImpl extends StatementImpl implements ApplyStatement 
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<PipelineReference> pipelines;
+	protected EList<Literal> pipelines;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -136,7 +126,7 @@ public class ApplyStatementImpl extends StatementImpl implements ApplyStatement 
 	 * @generated
 	 */
 	@Override
-	public int getCount() {
+	public Literal getCount() {
 		return count;
 	}
 
@@ -145,12 +135,14 @@ public class ApplyStatementImpl extends StatementImpl implements ApplyStatement 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public void setCount(int newCount) {
-		int oldCount = count;
+	public NotificationChain basicSetCount(Literal newCount, NotificationChain msgs) {
+		Literal oldCount = count;
 		count = newCount;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, GeneratorPackage.APPLY_STATEMENT__COUNT, oldCount, count));
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, GeneratorPackage.APPLY_STATEMENT__COUNT, oldCount, newCount);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
 	}
 
 	/**
@@ -159,9 +151,29 @@ public class ApplyStatementImpl extends StatementImpl implements ApplyStatement 
 	 * @generated
 	 */
 	@Override
-	public EList<PipelineReference> getPipelines() {
+	public void setCount(Literal newCount) {
+		if (newCount != count) {
+			NotificationChain msgs = null;
+			if (count != null)
+				msgs = ((InternalEObject)count).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - GeneratorPackage.APPLY_STATEMENT__COUNT, null, msgs);
+			if (newCount != null)
+				msgs = ((InternalEObject)newCount).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - GeneratorPackage.APPLY_STATEMENT__COUNT, null, msgs);
+			msgs = basicSetCount(newCount, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, GeneratorPackage.APPLY_STATEMENT__COUNT, newCount, newCount));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EList<Literal> getPipelines() {
 		if (pipelines == null) {
-			pipelines = new EObjectContainmentEList<PipelineReference>(PipelineReference.class, this, GeneratorPackage.APPLY_STATEMENT__PIPELINES);
+			pipelines = new EObjectContainmentEList<Literal>(Literal.class, this, GeneratorPackage.APPLY_STATEMENT__PIPELINES);
 		}
 		return pipelines;
 	}
@@ -174,6 +186,8 @@ public class ApplyStatementImpl extends StatementImpl implements ApplyStatement 
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case GeneratorPackage.APPLY_STATEMENT__COUNT:
+				return basicSetCount(null, msgs);
 			case GeneratorPackage.APPLY_STATEMENT__PIPELINES:
 				return ((InternalEList<?>)getPipelines()).basicRemove(otherEnd, msgs);
 		}
@@ -211,11 +225,11 @@ public class ApplyStatementImpl extends StatementImpl implements ApplyStatement 
 				setFile((String)newValue);
 				return;
 			case GeneratorPackage.APPLY_STATEMENT__COUNT:
-				setCount((Integer)newValue);
+				setCount((Literal)newValue);
 				return;
 			case GeneratorPackage.APPLY_STATEMENT__PIPELINES:
 				getPipelines().clear();
-				getPipelines().addAll((Collection<? extends PipelineReference>)newValue);
+				getPipelines().addAll((Collection<? extends Literal>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -233,7 +247,7 @@ public class ApplyStatementImpl extends StatementImpl implements ApplyStatement 
 				setFile(FILE_EDEFAULT);
 				return;
 			case GeneratorPackage.APPLY_STATEMENT__COUNT:
-				setCount(COUNT_EDEFAULT);
+				setCount((Literal)null);
 				return;
 			case GeneratorPackage.APPLY_STATEMENT__PIPELINES:
 				getPipelines().clear();
@@ -253,7 +267,7 @@ public class ApplyStatementImpl extends StatementImpl implements ApplyStatement 
 			case GeneratorPackage.APPLY_STATEMENT__FILE:
 				return FILE_EDEFAULT == null ? file != null : !FILE_EDEFAULT.equals(file);
 			case GeneratorPackage.APPLY_STATEMENT__COUNT:
-				return count != COUNT_EDEFAULT;
+				return count != null;
 			case GeneratorPackage.APPLY_STATEMENT__PIPELINES:
 				return pipelines != null && !pipelines.isEmpty();
 		}
@@ -272,8 +286,6 @@ public class ApplyStatementImpl extends StatementImpl implements ApplyStatement 
 		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (file: ");
 		result.append(file);
-		result.append(", count: ");
-		result.append(count);
 		result.append(')');
 		return result.toString();
 	}

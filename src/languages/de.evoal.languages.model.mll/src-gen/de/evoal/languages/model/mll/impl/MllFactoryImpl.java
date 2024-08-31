@@ -66,7 +66,7 @@ public class MllFactoryImpl extends EFactoryImpl implements MllFactory {
 			case MllPackage.PREDICT_STATEMENT: return createPredictStatement();
 			case MllPackage.FOR_STATEMENT: return createForStatement();
 			case MllPackage.COUNTER_RANGE: return createCounterRange();
-			case MllPackage.STRING_LITERAL_RANGE: return createStringLiteralRange();
+			case MllPackage.LITERAL_RANGE: return createLiteralRange();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -188,9 +188,9 @@ public class MllFactoryImpl extends EFactoryImpl implements MllFactory {
 	 * @generated
 	 */
 	@Override
-	public StringLiteralRange createStringLiteralRange() {
-		StringLiteralRangeImpl stringLiteralRange = new StringLiteralRangeImpl();
-		return stringLiteralRange;
+	public LiteralRange createLiteralRange() {
+		LiteralRangeImpl literalRange = new LiteralRangeImpl();
+		return literalRange;
 	}
 
 	/**

@@ -64,8 +64,7 @@ public class GeneratorFactoryImpl extends EFactoryImpl implements GeneratorFacto
 			case GeneratorPackage.FOR_STATEMENT: return createForStatement();
 			case GeneratorPackage.RANGE: return createRange();
 			case GeneratorPackage.COUNTER_RANGE: return createCounterRange();
-			case GeneratorPackage.PIPELINE_ARRAY: return createPipelineArray();
-			case GeneratorPackage.PIPELINE_REFERENCE: return createPipelineReference();
+			case GeneratorPackage.LITERAL_RANGE: return createLiteralRange();
 			case GeneratorPackage.PIPELINE_DEFINITION_REFERENCE: return createPipelineDefinitionReference();
 			case GeneratorPackage.VARIABLE_REFERENCE: return createVariableReference();
 			case GeneratorPackage.APPLY_STATEMENT: return createApplyStatement();
@@ -157,20 +156,9 @@ public class GeneratorFactoryImpl extends EFactoryImpl implements GeneratorFacto
 	 * @generated
 	 */
 	@Override
-	public PipelineArray createPipelineArray() {
-		PipelineArrayImpl pipelineArray = new PipelineArrayImpl();
-		return pipelineArray;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public PipelineReference createPipelineReference() {
-		PipelineReferenceImpl pipelineReference = new PipelineReferenceImpl();
-		return pipelineReference;
+	public LiteralRange createLiteralRange() {
+		LiteralRangeImpl literalRange = new LiteralRangeImpl();
+		return literalRange;
 	}
 
 	/**

@@ -3,6 +3,7 @@
  */
 package de.evoal.languages.model.generator.impl;
 
+import de.evoal.languages.model.base.impl.LiteralImpl;
 import de.evoal.languages.model.generator.ForStatement;
 import de.evoal.languages.model.generator.GeneratorPackage;
 import de.evoal.languages.model.generator.VariableReference;
@@ -27,7 +28,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *
  * @generated
  */
-public class VariableReferenceImpl extends PipelineReferenceImpl implements VariableReference {
+public class VariableReferenceImpl extends LiteralImpl implements VariableReference {
 	/**
 	 * The cached value of the '{@link #getLoop() <em>Loop</em>}' reference.
 	 * <!-- begin-user-doc -->
