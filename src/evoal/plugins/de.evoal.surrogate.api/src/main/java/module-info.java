@@ -15,9 +15,7 @@ module de.evoal.surrogate.api {
 
     requires com.fasterxml.jackson.databind;
 
-    requires commons.math3;
     requires smile.math;
-    requires io.jenetics.base;
 
     requires de.evoal.languages.model.ddl;
     requires de.evoal.languages.model.dl;

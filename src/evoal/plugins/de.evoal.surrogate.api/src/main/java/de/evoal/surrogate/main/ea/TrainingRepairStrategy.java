@@ -8,7 +8,6 @@ import de.evoal.core.api.properties.stream.PropertiesStreamSupplier;
 import de.evoal.optimisation.api.constraints.strategies.RepairStrategy;
 import de.evoal.languages.model.base.Instance;
 import de.evoal.surrogate.api.SurrogateBlackboardEntries;
-import io.jenetics.util.RandomRegistry;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.enterprise.context.Dependent;
@@ -16,6 +15,8 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.File;
 import java.util.List;
+import java.util.Random;
+import java.util.random.RandomGenerator;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -33,6 +34,8 @@ public class TrainingRepairStrategy implements RepairStrategy {
     private PropertiesSpecification targetSpecification;
 
     private List<Properties> trainingData;
+
+    private final RandomGenerator random = new Random();
 
     @Override
     public RepairStrategy init(final Instance configuration) {
@@ -61,8 +64,7 @@ public class TrainingRepairStrategy implements RepairStrategy {
 
     @Override
     public Properties apply(final Properties candidate, long generation) {
-        int index = RandomRegistry.random()
-                                  .nextInt(0, trainingData.size());
+        final int index = random.nextInt(0, trainingData.size());
 
         return trainingData.get(index);
     }
