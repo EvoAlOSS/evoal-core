@@ -2,7 +2,7 @@
 <feature
       id="de.evoal.languages.releng.feature"
       label="EvoAl DSLs"
-      version="2024.10.0.qualifier"
+      version="2025.4.0.qualifier"
       provider-name="EvoAl Project">
 
    <description>

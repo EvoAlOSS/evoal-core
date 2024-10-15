@@ -3,7 +3,7 @@ Automatic-Module-Name: de.evoal.languages.model.base.dsl.ide
 Bundle-ManifestVersion: 2
 Bundle-Name: de.evoal.languages.model.base.dsl.ide
 Bundle-Vendor: My Company
-Bundle-Version: 2024.10.0.qualifier
+Bundle-Version: 2025.4.0.qualifier
 Bundle-SymbolicName: de.evoal.languages.model.base.dsl.ide; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: de.evoal.languages.model.base.dsl,
