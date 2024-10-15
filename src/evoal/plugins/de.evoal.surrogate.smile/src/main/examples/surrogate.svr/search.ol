@@ -70,5 +70,11 @@ module search {
 	    };
 	
 		'optimisation-function' := 'surrogate' {};
+
+		documenting := [
+		    'best-candidate-per-generation' {},
+		    'candidates-per-generation' {},
+		    'prediction-per-individual' {}
+        ];
 	}
 }

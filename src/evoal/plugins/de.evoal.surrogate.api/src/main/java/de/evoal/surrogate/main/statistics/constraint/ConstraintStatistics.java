@@ -1,5 +1,7 @@
 package de.evoal.surrogate.main.statistics.constraint;
 
+import de.evoal.core.api.properties.Properties;
+import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.optimisation.api.statistics.Candidate;
 import de.evoal.optimisation.api.statistics.IterationResult;
 import de.evoal.optimisation.api.statistics.io.Writer;
@@ -24,6 +26,7 @@ import javax.inject.Named;
 import java.util.ArrayList;
 import java.util.DoubleSummaryStatistics;
 import java.util.List;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -37,6 +40,9 @@ public class ConstraintStatistics implements StatisticsWriter {
     private final static int NUMBER_OF_STATISTICS_PER_CONSTRAINT = 5;
 
     private final List<Column> columns = new ArrayList<>();
+
+    @Inject @Named("optimisation-space-specification")
+    private PropertiesSpecification objectiveSpecification;
 
     @Inject
     private CalculationFactory factory;
@@ -75,7 +81,7 @@ public class ConstraintStatistics implements StatisticsWriter {
         }
     }
 
-    private Object[] toData(final int generation, final Stream<Candidate> candidates) {
+    private Object[] toData(final int generation, final Supplier<Stream<Candidate>> candidates) {
         final Object [] data = new Object[1 + constraints.getConstraints().size() * NUMBER_OF_STATISTICS_PER_CONSTRAINT];
 
         data[0] = generation;
@@ -84,9 +90,15 @@ public class ConstraintStatistics implements StatisticsWriter {
             final CalculationStrategy strategy = calculators[index];
 
             final List<CalculationResult> calculationResults =
-                candidates
-                        .map(Candidate::searchSpaceRepresentation)
-// TODO                        .map(strategy::calculate)
+                candidates.get()
+                        .map(cand -> {
+                            try {
+                                return strategy.calculate(cand.searchSpaceRepresentation(), new Properties(objectiveSpecification, cand.value().toStatistics()));
+                            } catch (final Exception e) {
+                                e.printStackTrace();
+                                throw e;
+                            }
+                        }) // TODO FIXME
                         .map(CalculationResult.class::cast)
                         .collect(Collectors.toList());
 
@@ -116,7 +128,7 @@ public class ConstraintStatistics implements StatisticsWriter {
     @Override
     public void add(final IterationResult result) {
             try {
-                final Object [] data = toData(result.iteration(), result.candidates());
+                final Object [] data = toData(result.iteration(), () -> result.candidates());
                 writer.addRecord(data);
             } catch (final WriterException e) {
                 log.error("Failed to add record.", e);

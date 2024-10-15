@@ -62,8 +62,6 @@ public class RMSECalculator implements SurrogateInformationCalculator {
 					}
 				});
 
-
-
 		for(int i = 0; i < data.size(); ++i) {
 			final double average = data.get(i)
 					.stream()

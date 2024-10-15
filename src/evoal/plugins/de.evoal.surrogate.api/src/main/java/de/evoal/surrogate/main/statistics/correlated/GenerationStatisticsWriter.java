@@ -1,9 +1,10 @@
 package de.evoal.surrogate.main.statistics.correlated;
 
-import de.evoal.core.api.utils.AttributeHelper;
+import de.evoal.core.api.board.Blackboard;
+import de.evoal.core.api.properties.stream.FileBasedPropertiesStreamSupplier;
+import de.evoal.core.api.properties.stream.PropertiesStreamSupplier;
 import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
 import de.evoal.core.api.cdi.ConfigurationValue;
-import de.evoal.optimisation.api.model.OptimisationValue;
 import de.evoal.optimisation.api.statistics.Candidate;
 import de.evoal.optimisation.api.statistics.IterationResult;
 import de.evoal.optimisation.api.statistics.io.Writer;
@@ -15,7 +16,7 @@ import de.evoal.optimisation.api.statistics.writer.StatisticsWriter;
 import de.evoal.languages.model.base.Instance;
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;
-import de.evoal.surrogate.api.training.TrainingDataManager;
+import de.evoal.surrogate.api.SurrogateBlackboardEntries;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.Dependent;
 import lombok.extern.slf4j.Slf4j;
@@ -24,6 +25,7 @@ import smile.math.matrix.Matrix;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -38,19 +40,14 @@ import java.util.stream.Collectors;
 @Dependent
 public class GenerationStatisticsWriter implements StatisticsWriter {
 
-    @Inject
-    private AttributeHelper helper;
-
     private long startTime;
 
     private IterationResult generationWithBestIndividual;
+
     private long endTime;
 
-    @Inject @ConfigurationValue(entry = OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.optimisation-function")
-    private Instance config;
-
     @Inject
-    private TrainingDataManager manager;
+    private Blackboard board;
 
     @Inject @Named("surrogate-source-properties-specification")
     private PropertiesSpecification sourceSpec;
@@ -146,7 +143,7 @@ public class GenerationStatisticsWriter implements StatisticsWriter {
     }
 
     private Matrix createBestGenerationMatrix() {
-        final List<Candidate> candidates = generationWithBestIndividual.candidates().collect(Collectors.toList());
+        final List<Candidate> candidates = generationWithBestIndividual.candidates().toList();
 
         final int dimensions = sourceSpec.size();
         final Optional<Integer> optSize = generationWithBestIndividual.candidateCount();
@@ -191,7 +188,6 @@ public class GenerationStatisticsWriter implements StatisticsWriter {
         columns.add(new Column("generation", ColumnType.Integer));
         columns.add(new Column("individual", ColumnType.String));
         columns.add(new Column("age", ColumnType.Integer));
-        columns.add(new Column("fitness-function", ColumnType.Double));
 
         for (int x = 0; x < sourceSpec.size(); ++x) {
             for (int y = 0; y < sourceSpec.size(); ++y) {
@@ -217,17 +213,15 @@ public class GenerationStatisticsWriter implements StatisticsWriter {
     private Object[] dataOfBest() {
         fetchTrainingData();
 
-        final Object [] data = new Object[3 + 1 + (int)Math.pow(sourceSpec.size(), 2) + 2 + (int)Math.pow(sourceSpec.size(), 2) + 2 + 1];
+        final Object [] data = new Object[3 + (int)Math.pow(sourceSpec.size(), 2) + 2 + (int)Math.pow(sourceSpec.size(), 2) + 2 + 1];
         final Candidate bestCandidate = generationWithBestIndividual.bestCandidate();
         final Properties candidate = bestCandidate.searchSpaceRepresentation();
 
         data[0] = generationWithBestIndividual.iteration();
         data[1] = Arrays.toString(candidate.getValues());
         data[2] = bestCandidate.age();
-        final OptimisationValue fitness = (OptimisationValue) bestCandidate.value();
-        data[3] = fitness;
 
-        calculateCovariance(candidate, data, 3 + 1);
+        calculateCovariance(candidate, data, 2 + 1);
         data[data.length - 1] = endTime - startTime;
 
         return data;
@@ -239,7 +233,7 @@ public class GenerationStatisticsWriter implements StatisticsWriter {
                 .add(targetSpec)
                 .build();
 
-        sourceTrainingPoints = manager.getTrainingStream()
+        sourceTrainingPoints = createStreamFromBlackboard(spec)
                 .apply(spec)
                 .collect(Collectors.toList());
     }
@@ -269,5 +263,15 @@ public class GenerationStatisticsWriter implements StatisticsWriter {
         } catch (final WriterException e) {
             log.error("Failed to write statistics:", e);
         }
+    }
+
+    private PropertiesStreamSupplier createStreamFromBlackboard(final PropertiesSpecification totalSpecification) {
+        final String filename = board.get(SurrogateBlackboardEntries.SURROGATE_TRAINING_DATA_FILE);
+
+        log.info("Using training data from {} for statistics.", filename);
+
+        final File trainingFile = new File(filename);
+
+        return new FileBasedPropertiesStreamSupplier(trainingFile, totalSpecification);
     }
 }

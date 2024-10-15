@@ -10,8 +10,6 @@ pushd evoal/examples
 
 export EVOAL_VM=-javaagent:${CI_PROJECT_DIR}/.m2/repository/org/jacoco/org.jacoco.agent/0.8.10/org.jacoco.agent-0.8.10-runtime.jar=dumponexit=true
 
-BLACKLIST=( "surrogate.adaption-search" "surrogate.adaption-training" )
-
 set -e
 for EXAMPLE in *; do
     if [ ! -d $EXAMPLE ]; then

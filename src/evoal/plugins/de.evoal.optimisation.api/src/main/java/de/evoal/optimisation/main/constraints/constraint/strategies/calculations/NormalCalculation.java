@@ -12,7 +12,7 @@ import lombok.NonNull;
 import javax.inject.Named;
 
 @Dependent
-@Named("normal-calculation")
+@Named("de.evoal.optimisation.ea.optimisation.normal-calculation")
 public class NormalCalculation implements CalculationStrategy {
     private Instance configuration;
     private Constraint constraint;

@@ -10,12 +10,18 @@ module de.evoal.surrogate.simple.ml {
 	 */
 	type identity extends surrogate {
 	}
-	
+
+	/**
+	 * A surrogate model that is based on a linear regression.
+	 */
 	type 'linear-regression' extends surrogate {
 	    intercept : real;
 	    slope : real;
 	}
 	
+	/**
+	 * A surrogate model that is based on a simple quadratic regression.
+	 */
 	type 'simple-quadratic-regression' extends surrogate {
 	    intercept : real;
 	    slope : real;

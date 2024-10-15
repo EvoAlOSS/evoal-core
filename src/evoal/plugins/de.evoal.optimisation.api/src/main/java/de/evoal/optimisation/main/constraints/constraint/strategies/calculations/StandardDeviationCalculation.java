@@ -22,7 +22,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Dependent
-@Named("standard-deviation-calculation")
+@Named("de.evoal.optimisation.ea.optimisation.standard-deviation-calculation")
 public class StandardDeviationCalculation implements CalculationStrategy {
     @Inject
     private AttributeHelper helper;

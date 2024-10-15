@@ -161,8 +161,12 @@ module de.evoal.optimisation.ea.optimisation {
 	}
 
 	/**
-	 * The roulette-wheel selector is also known as fitness proportional selector. The fitness value <i>f<sub>i</sub></i>
-	 *   is used to calculate the selection probability of individual <i>i</i>.
+	 * The roulette-wheel selector is also known as fitness proportional selector.
+	 *   The fitness value <i>f<sub>i</sub></i> is used to calculate the selection
+	 *   probability of individual <i>i</i>.
+	 *
+	 * Please be aware that this selector requires the usage of the numeric comparator.
+	 * @constraint algorithm.comparator instanceof 'de.evoal.optimisation.core.numeric-comparator';
 	 */
 	type 'roulette-wheel-selector' extends selector {
 	}

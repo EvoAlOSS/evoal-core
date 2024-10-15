@@ -11,7 +11,7 @@ import javax.inject.Named;
 import java.util.stream.Stream;
 
 @Dependent
-@Named("repair-with-random")
+@Named("de.evoal.optimisation.ea.optimisation.repair-with-random")
 public class RandomGenotypeStrategy implements RepairStrategy {
 
     @Inject //@Named("de.evoal.optimisation.core.random-population")
@@ -22,10 +22,5 @@ public class RandomGenotypeStrategy implements RepairStrategy {
         final Stream<Properties> stream = generator.create();
         return stream.findFirst()
                      .get();
-    }
-
-    @Override
-    public RepairStrategy init(Instance configuration) {
-        return null;
     }
 }

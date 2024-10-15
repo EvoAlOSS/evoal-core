@@ -1,5 +1,8 @@
 import "definitions" from de.evoal.surrogate.ml;
 
+/**
+ * Module containing support vector regression-based surrogat models.
+ */
 module de.evoal.surrogate.smile.ml {
 	abstract type 'epsilon-svr' extends surrogate {
 		/**

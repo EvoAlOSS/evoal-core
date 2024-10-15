@@ -9,6 +9,7 @@ import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import io.jenetics.Gene;
 import io.jenetics.Phenotype;
+import lombok.NonNull;
 
 public class JeneticsConstraintStrategy<
         G extends Gene<?, G>,
@@ -21,7 +22,11 @@ public class JeneticsConstraintStrategy<
     private final PropertiesSpecification fitnessSpec;
     private final RepairStrategy repair;
 
-    public JeneticsConstraintStrategy(final CalculationStrategy calculation, final CustomCodec<G> codec, final OptimisationFunction function, final PropertiesSpecification fitnessSpec, final RepairStrategy repair) {
+    public JeneticsConstraintStrategy(@NonNull final CalculationStrategy calculation,
+                                      @NonNull final CustomCodec<G> codec,
+                                      @NonNull final OptimisationFunction function,
+                                      @NonNull final PropertiesSpecification fitnessSpec,
+                                      @NonNull final RepairStrategy repair) {
         this.calculation = calculation;
         this.codec = codec;
         this.function = function;

@@ -31,5 +31,5 @@ it's very hard to read otherwise.)
 
 (Link a person/ people, that can answer questions about this issue, e.g. yourself)
 
-/label ~bug
+/label ~"issue-type::bug" ~"workflow::discussion"
 /cc @berber

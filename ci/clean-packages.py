@@ -2,6 +2,7 @@ import json
 import http.client
 import os
 import os.path
+import sys
 
 
 # Script for generating a Gitlab Pages site that serves all existing EvoAl
@@ -32,6 +33,35 @@ response = connection.getresponse()
 for tag in json.loads(response.read()):
     tags.append(branch['name'])
 
+# delete all artifacts that can be deleted
+connection.request("DELETE", BASE_URL + "artifacts", headers = headers)
+response = connection.getresponse()
+response.read()
+
+# delete job artifacts of deleted branches
+job_page=1
+job_ids=[]
+while True:
+    print("Query page %s" % (job_page,))
+    connection.request("GET", BASE_URL + "jobs?id=30380&page=%s&per_page=100" % (job_page,), headers = headers)
+    response = connection.getresponse()#
+
+    jobs = json.loads(response.read())
+    job_ids += [job['id'] for job in jobs if job['ref'] not in branches and job['ref'][0].isdigit() and job['artifacts']]
+
+    if not jobs:
+        break
+
+    job_page+=1
+
+print("Deleting artifacts of %s jobs" % (len(job_ids),))
+for job_id in job_ids:
+    connection.request("DELETE", BASE_URL + "jobs/%s/artifacts" % (job_id,), headers = headers)
+    response = connection.getresponse()
+    response.read()
+
+
+# delete packages
 connection.request("GET", BASE_URL + "packages?per_page=100", headers = headers)
 response = connection.getresponse()
 

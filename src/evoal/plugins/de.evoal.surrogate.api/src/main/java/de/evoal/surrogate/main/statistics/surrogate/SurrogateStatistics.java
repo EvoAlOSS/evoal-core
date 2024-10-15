@@ -23,7 +23,7 @@ import lombok.extern.slf4j.Slf4j;
  * Small helper class for collecting and writing the generation-based statistics.
  */
 @Slf4j
-@Named("prediction-per-individual")
+@Named("de.evoal.surrogate.optimisation.prediction-per-individual")
 @Dependent
 public class SurrogateStatistics extends AbstractCandidateStatisticsWriter {
     /**

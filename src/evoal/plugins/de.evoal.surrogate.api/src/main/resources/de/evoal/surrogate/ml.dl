@@ -4,9 +4,122 @@ module de.evoal.surrogate.ml {
      */
 	abstract type surrogate {
 	}
-	
+
+	/**
+	 * Runs a cross validation for a model training.
+	 */
 	def void 'cross-validation'(int times);
+
+    /**
+     * Calculates <i>R²</i>.
+     */
 	def void 'R²'();
+
+	/**
+	 * Calculates the <i>root mean squared error</i>:
+	 *
+	 * <math display="block" class="tml-display" style="display:block math;">
+     *   <mrow>
+     *     <mi>r</mi>
+     *     <mi>m</mi>
+     *     <mi>s</mi>
+     *     <mi>e</mi>
+     *     <mo>=</mo>
+     *     <msqrt>
+     *       <mfrac>
+     *         <mrow>
+     *           <msubsup>
+     *             <mo stretchy="true">∑</mo>
+     *             <mrow>
+     *               <mi>i</mi>
+     *               <mo>=</mo>
+     *               <mn>1</mn>
+     *             </mrow>
+     *             <mi>n</mi>
+     *           </msubsup>
+     *           <mrow>
+     *             <mo form="prefix" stretchy="false" lspace="0em" rspace="0em">(</mo>
+     *             <msub>
+     *               <mi>y</mi>
+     *               <mi>t</mi>
+     *             </msub>
+     *             <mo>−</mo>
+     *             <msub>
+     *               <mover>
+     *                 <mi>y</mi>
+     *                 <mo stretchy="false" class="tml-xshift" style="math-style:normal;math-depth:0;">^</mo>
+     *               </mover>
+     *               <mi>t</mi>
+     *             </msub>
+     *             <msup>
+     *               <mo form="postfix" stretchy="false">)</mo>
+     *               <mn>2</mn>
+     *             </msup>
+     *           </mrow>
+     *         </mrow>
+     *         <mi>n</mi>
+     *       </mfrac>
+     *     </msqrt>
+     *   </mrow>
+     * </math>
+	 */
 	def void rmse();
+
+	/**
+	 * Calcuates the <i>root relative squared error</i>:
+	 *
+	 * <math display="block" class="tml-display" style="display:block math;">
+     *    <mrow>
+     *     <mi>r</mi>
+     *     <mi>r</mi>
+     *     <mi>s</mi>
+     *     <mi>e</mi>
+     *     <mo>=</mo>
+     *     <msqrt>
+     *       <mfrac>
+     *         <mrow>
+     *           <msubsup>
+     *             <mo stretchy="true">∑</mo>
+     *             <mrow>
+     *               <mi>i</mi>
+     *               <mo>=</mo>
+     *               <mn>1</mn>
+     *             </mrow>
+     *             <mi>n</mi>
+     *           </msubsup>
+     *           <msup>
+     *             <mrow>
+     *               <mo fence="true" form="prefix">(</mo>
+     *               <mfrac>
+     *                 <mrow>
+     *                   <msub>
+     *                     <mi>y</mi>
+     *                     <mi>i</mi>
+     *                   </msub>
+     *                   <mo>−</mo>
+     *                   <msub>
+     *                     <mover>
+     *                       <mi>y</mi>
+     *                       <mo stretchy="false" class="tml-xshift" style="math-style:normal;math-depth:0;">^</mo>
+     *                     </mover>
+     *                     <mi>i</mi>
+     *                   </msub>
+     *                 </mrow>
+     *                 <msub>
+     *                   <mi>y</mi>
+     *                   <mi>i</mi>
+     *                 </msub>
+     *               </mfrac>
+     *               <mo fence="true" form="postfix">)</mo>
+     *             </mrow>
+     *             <mn>2</mn>
+     *           </msup>
+     *         </mrow>
+     *         <mi>n</mi>
+     *       </mfrac>
+     *     </msqrt>
+     *   </mrow>
+     * </math>
+	 */
 	def void rrse();
 }

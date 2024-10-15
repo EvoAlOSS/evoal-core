@@ -3,6 +3,7 @@ package de.evoal.optimisation.api.constraints.calculation;
 import de.evoal.core.api.cdi.BeanFactory;
 import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.core.api.utils.AttributeHelper;
+import de.evoal.languages.model.dl.util.FQNProvider;
 import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
 import de.evoal.optimisation.api.constraints.model.Constraint;
 
@@ -41,9 +42,9 @@ public class CalculationFactory {
 
     public CalculationStrategy create(final Constraint constraint) {
         final Instance config = calculationConfigurationByCategory.get(constraint.getGroup());
-        final String calculationName = helper.lookup(config, "name");
+        final String name = new FQNProvider().get(config);
 
-        final CalculationStrategy strategy = BeanFactory.create(calculationName, CalculationStrategy.class);
+        final CalculationStrategy strategy = BeanFactory.create(name, CalculationStrategy.class);
         strategy.init(constraint, config);
 
         return strategy;
