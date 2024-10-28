@@ -15,9 +15,10 @@ import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.Arrays;
+import java.util.List;
 
 @Dependent
-@Named("de.evoal.core.optimisation.optimisation-distance")
+@Named("de.evoal.optimisation.core.optimisation-distance")
 @Slf4j
 public class DistanceFitness extends OptimisationFunctionDecorator {
 
@@ -52,14 +53,12 @@ public class DistanceFitness extends OptimisationFunctionDecorator {
     public OptimisationFunction init(final Instance config) {
         super.init(config);
 
-        final Object[] target = helper.lookup(config, "target");
-        final Instance[] asInstance = new Instance[target.length];
-        System.arraycopy(target, 0, asInstance, 0, target.length);
+        final List<Instance> target = helper.lookup(config, "target");
 
         if(target == null) {
             this.target = board.get(OptimisationBlackboardEntries.TARGET_PROPERTIES);
         } else {
-            this.target = toProperties(asInstance);
+            this.target = toProperties(target);
             log.info("Binding target properties based on information found in MLL to {}.", this.target);
             board.bind(OptimisationBlackboardEntries.TARGET_PROPERTIES, this.target);
         }
@@ -67,20 +66,19 @@ public class DistanceFitness extends OptimisationFunctionDecorator {
         return this;
     }
 
-    private Properties toProperties(final Instance [] array) {
+    private Properties toProperties(final List<Instance> array) {
         PropertiesSpecification specification = PropertiesSpecification.builder()
-                                                                       .add(Arrays.stream(array)
-                                                                                 .map(i -> helper.<DataDescription>lookup(i, "name"))
-                                                                                 .map(DataDescription.class::cast)
-                                                                           )
-                                                                       .build();
+                .add(array.stream()
+                        .map(i -> helper.<DataDescription>lookup(i, "var"))
+                        .map(DataDescription.class::cast)
+                )
+                .build();
 
         final Properties properties = new Properties(specification);
-        Arrays.stream(array)
+        array
                 .forEach(i -> {
-                    final DataDescription dd = helper.<DataDescription>lookup(i, "name");
+                    final DataDescription dd = helper.<DataDescription>lookup(i, "var");
                     final Object val = helper.lookup(i, "val");
-
                     properties.put(specification.indexOf(dd.getName()), val);
                 });
 

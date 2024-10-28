@@ -28,7 +28,7 @@ public class AttributeHelper {
     private AttributeEvaluator evaluator;
 
     public <T> T lookup(final OptimisationModule model, final String path) {
-        log.debug("Locking up '{}' in optimisation module", path);
+        log.debug("Looking up '{}' in optimisation module", path);
 
         requirePathIsNotNull(path);
 
@@ -57,7 +57,7 @@ public class AttributeHelper {
     }
 
     private <T> T lookup(final ProblemInstance problem, final List<String> path) {
-        log.debug("Locking up '{}':", path);
+        log.debug("Looking up '{}':", path);
 
         if(path.isEmpty()) {
             return (T)problem;
@@ -144,7 +144,7 @@ public class AttributeHelper {
     }
 
     private <T> T lookup(final Instance instance, final List<String> path) {
-        log.debug("Locking up '{}':", path);
+        log.debug("Looking up '{}':", path);
 
         requirePathIsNotNull(path);
 
