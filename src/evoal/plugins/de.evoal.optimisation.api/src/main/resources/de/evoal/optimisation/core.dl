@@ -112,7 +112,7 @@ module de.evoal.optimisation.core {
 		/**
 		 * The data to bind.
 		 */
-		'var' : data;
+		var : data;
 		
 		/**
 		 * The actual value.
@@ -213,7 +213,29 @@ module de.evoal.optimisation.core {
 	 *   process respects the boundaries defined at the data definition-level.
 	 */
 	type 'random-population' extends 'initial-population' {
-	}	
+	}
+
+    /**
+    * specify an individual as a list of variables
+    * specified variables should correspond to the total
+    * specification (search and optimisation space)
+    */
+    type 'candidate' {
+        'values': array instance variable;
+    }
+
+    /**
+    * reads candidate from file and uses this candidate
+    * as the starting point.
+    */
+    type 'specify-candidates' extends 'initial-population' {
+        'candidate-file' : string;
+
+        'candidate-list': array instance candidate;
+
+        //determines order of candidates read from file. Random (default) or linear.
+        'random': boolean := true;
+    }
 	
 	abstract type 'statistics-writer' {
 	}

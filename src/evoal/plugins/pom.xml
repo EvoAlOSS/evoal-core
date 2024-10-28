@@ -21,6 +21,8 @@
 
 		<module>de.evoal.optimisation.api</module>
 		<module>de.evoal.optimisation.ea</module>
+		<module>de.evoal.optimisation.hc</module>
+		<module>de.evoal.optimisation.sa</module>
 		<module>de.evoal.optimisation.pso</module>
 
 		<module>de.evoal.surrogate.api</module>
