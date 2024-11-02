@@ -86,8 +86,8 @@ public class GenerationStatisticsWriter implements StatisticsWriter {
     }
 
     private Matrix calculateCovarianceMatrix(final Matrix data) {
-        final int dimensions = data.nrows();
-        final int dataSize = data.ncols();
+        final int dimensions = data.nrow();
+        final int dataSize = data.ncol();
         final double [] means = data.rowMeans();
 
         final Matrix covarianceMatrix = new Matrix(dimensions, dimensions);
@@ -132,13 +132,13 @@ public class GenerationStatisticsWriter implements StatisticsWriter {
 
         {
             final Matrix onTheFlyCovarianceMatrix = calculateCovarianceMatrix(onTheFlyMatrix);
-            calculateDifference(new Matrix(trainingsCovarianceMatrix.toArray()), onTheFlyCovarianceMatrix, data, index);
+            calculateDifference(Matrix.of(trainingsCovarianceMatrix.toArray()), onTheFlyCovarianceMatrix, data, index);
         }
 
         {
             final Matrix bestGenerationMatrix = createBestGenerationMatrix();
             final Matrix bestGenerationCovariance = calculateCovarianceMatrix(bestGenerationMatrix);
-            calculateDifference(new Matrix(trainingsCovarianceMatrix.toArray()), bestGenerationCovariance, data, index +  dimensions * dimensions + 2);
+            calculateDifference(Matrix.of(trainingsCovarianceMatrix.toArray()), bestGenerationCovariance, data, index +  dimensions * dimensions + 2);
         }
     }
 
@@ -170,16 +170,16 @@ public class GenerationStatisticsWriter implements StatisticsWriter {
         double sumOfAbs = 0.0;
         double sumOfSquares = 0.0;
 
-        for(int x = 0; x < differenceMatrix.nrows(); ++x) {
-            for (int y = 0; y < differenceMatrix.ncols(); ++y) {
-                data[start + x * differenceMatrix.nrows() + y] = differenceMatrix.get(x,y);
+        for(int x = 0; x < differenceMatrix.nrow(); ++x) {
+            for (int y = 0; y < differenceMatrix.ncol(); ++y) {
+                data[start + x * differenceMatrix.nrow() + y] = differenceMatrix.get(x,y);
                 sumOfAbs += Math.abs(differenceMatrix.get(x, y));
                 sumOfSquares += (Math.pow(differenceMatrix.get(x, y), 2));
             }
         }
 
-        data[start + differenceMatrix.nrows() * differenceMatrix.ncols()] = sumOfAbs;
-        data[start + differenceMatrix.nrows() * differenceMatrix.ncols() + 1] = sumOfSquares;
+        data[start + differenceMatrix.nrow() * differenceMatrix.ncol()] = sumOfAbs;
+        data[start + differenceMatrix.nrow() * differenceMatrix.ncol() + 1] = sumOfSquares;
     }
 
     private Writer createWriter() throws WriterException {

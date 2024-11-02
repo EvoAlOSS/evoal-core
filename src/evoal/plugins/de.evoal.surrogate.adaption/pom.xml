@@ -31,12 +31,13 @@
 			<groupId>com.github.haifengl</groupId>
 			<artifactId>smile-core</artifactId>
 			<version>${smile.version}</version>
+			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>com.github.haifengl</groupId>
-			<artifactId>smile-math</artifactId>
-			<version>${smile.math.version}</version>
+			<artifactId>smile-base</artifactId>
+			<version>${smile.version}</version>
 			<scope>provided</scope>
 		</dependency>
 
@@ -97,10 +98,11 @@
 		-->
 
 		<!-- Dependencies for MKL implementation              -->
+		<!--
 		<dependency>
 			<groupId>com.github.haifengl</groupId>
 			<artifactId>smile-mkl</artifactId>
-			<version>${smile.version}</version>
+			<version>${smile.mkl.version}</version>
 			<scope>runtime</scope>
 		</dependency>
 
@@ -145,6 +147,7 @@
             <artifactId>mkl-platform-redist</artifactId>
 			<version>2022.2-1.5.8</version>
 		</dependency>
+		-->
 
 	</dependencies>
 </project>

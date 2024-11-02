@@ -187,7 +187,7 @@ public final class KernelHelper {
 		final List<Parameter> result = new LinkedList<>();
 		addParameter("weights", machine.weights(), result);
 		addParameter("intercept", machine.intercept(), result);
-		addParameter("instances", machine.instances(), result);
+		addParameter("instances", machine.vectors(), result);
 		addParameter(KERNEL_PARAMETER, kernelName, result);
 
 		return result;

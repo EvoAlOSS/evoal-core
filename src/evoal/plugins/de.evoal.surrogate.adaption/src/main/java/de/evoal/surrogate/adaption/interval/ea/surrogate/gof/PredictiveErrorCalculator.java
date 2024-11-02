@@ -108,16 +108,16 @@ public class PredictiveErrorCalculator implements SurrogateInformationCalculator
 
         final double sumOfTrainingsMatrix = invertedKernelTrainingsMatrix.sum();
         final Matrix regularisationMatrix = new Matrix(numberOfPoints, numberOfPoints, 1/sumOfTrainingsMatrix);
-        final Matrix independentSmoothingMatrix = new Matrix(invertedKernelTrainingsMatrix.toArray());
+        final Matrix independentSmoothingMatrix = Matrix.of(invertedKernelTrainingsMatrix.toArray());
 
         final Matrix matrix1 = invertedKernelTrainingsMatrix.mm(regularisationMatrix)
                                                          .mm(invertedKernelTrainingsMatrix);
-        independentSmoothingMatrix.sub(1.0, matrix1);
+        independentSmoothingMatrix.sub(matrix1);
 
         final Matrix independentSmoothingVector = new Matrix(1, numberOfPoints, 1/sumOfTrainingsMatrix)
                                                             .mm(invertedKernelTrainingsMatrix);
 
-        final Matrix trainingsSmoothingMatrix = new Matrix(kernelTrainingsMatrixNotAdded.mm(independentSmoothingMatrix).toArray());
+        final Matrix trainingsSmoothingMatrix = Matrix.of(kernelTrainingsMatrixNotAdded.mm(independentSmoothingMatrix).toArray());
 
 
 
@@ -125,8 +125,8 @@ public class PredictiveErrorCalculator implements SurrogateInformationCalculator
 
         final Matrix tmp1 = trainingsSmoothingMatrix.transpose()
                                                     .mm(trainingsSmoothingMatrix)
-                                                    .sub(1.0, trainingsSmoothingMatrix)
-                                                    .sub(1.0, trainingsSmoothingMatrix.transpose());
+                                                    .sub(trainingsSmoothingMatrix)
+                                                    .sub(trainingsSmoothingMatrix.transpose());
 
         final double [] delta = tmp1.diag();
 

@@ -7,7 +7,7 @@ module de.evoal.surrogate.smile {
     requires jakarta.enterprise.cdi.api;
 
     requires smile.core;
-    requires smile.math;
+    requires smile.base;
     requires commons.math3;
 
     requires de.evoal.languages.model.ddl;

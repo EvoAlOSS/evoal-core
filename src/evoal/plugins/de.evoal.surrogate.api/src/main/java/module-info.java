@@ -15,7 +15,6 @@ module de.evoal.surrogate.api {
 
     requires com.fasterxml.jackson.databind;
 
-    requires smile.math;
 
     requires de.evoal.languages.model.ddl;
     requires de.evoal.languages.model.dl;
@@ -31,6 +30,7 @@ module de.evoal.surrogate.api {
     requires de.evoal.core.main;
     requires de.evoal.optimisation.api;
     requires de.evoal.generator.main;
+    requires smile.base;
 
     // export resources
     exports de.evoal.surrogate.api;

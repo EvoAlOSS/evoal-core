@@ -6,7 +6,7 @@ module de.evoal.surrogate.adaption {
     requires jakarta.inject.api;
     requires jakarta.enterprise.cdi.api;
 
-    requires smile.math;
+    requires smile.base;
     requires commons.math3;
 
     requires de.evoal.languages.model.base;

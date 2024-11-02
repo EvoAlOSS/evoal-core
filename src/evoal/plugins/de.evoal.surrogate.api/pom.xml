@@ -36,7 +36,7 @@
 
 		<dependency>
 			<groupId>com.github.haifengl</groupId>
-			<artifactId>smile-math</artifactId>
+			<artifactId>smile-base</artifactId>
 			<version>${smile.version}</version>
 			<scope>provided</scope>
 		</dependency>
@@ -50,6 +50,13 @@
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-core</artifactId>
 			<version>5.3.1</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- CSV IO -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-csv</artifactId>
+			<version>1.8</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

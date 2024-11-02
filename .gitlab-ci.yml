@@ -67,15 +67,21 @@ variables:
   MIRROR_POM: "src/mirror/pom.xml"
 
 # copy target folder and .m2 repository
-default:
-  tags: ["docker"]
-  cache:
-    - key:
-        files:
-          - $LANGUAGES_POM
-          - $EVOAL_POM
-      paths:
-        - .m2/[!d]*
+#default:
+#  tags: ["docker"]
+#  cache:
+#    - key:
+#        files:
+#          - $LANGUAGES_POM
+#          - $EVOAL_POM
+#      paths: # We exclude de/evoal and org/b* ... 
+#        - .m2/repository/[a-c]*
+#        - .m2/repository/d[!e]*
+#        - .m2/repository/[e-n]*
+#        - .m2/repository/oro/*
+#        - .m2/repository/org/a*
+#        - .m2/repository/org/[c-z]*
+#        - .m2/repository/[p-z]*
 
 #  cache:
 #    key: "$CI_PIPELINE_ID" # bind cache to pipeline
@@ -166,7 +172,8 @@ evoal:compile-and-test:
     - job: "dsl:compile-and-install"
       artifacts: true
   script:
-    - mvn $MAVEN_CLI_OPTS -f $EVOAL_POM -Dbranch=$CI_COMMIT_REF_NAME -pl "!de.evoal:releng.jacoco" flatten:flatten package
+    - mvn $MAVEN_CLI_OPTS -f $EVOAL_POM -Dbranch=$CI_COMMIT_REF_NAME -pl "!de.evoal:releng.jacoco" flatten:flatten compile
+    - find . -name target | xargs du -ch
   artifacts:
     untracked: false
     when: on_success
@@ -246,7 +253,7 @@ evoal:deploy:
 ##    - mvn package of DSLs
 ##    - mvn package of EvoAl
 ##
-all:package:
+.all:package:
   stage: Release
   image: $EVOAL_IMAGE
   dependencies: ["dsl:compile-and-install", "evoal:compile-and-test"]
@@ -256,16 +263,63 @@ all:package:
     - job: "evoal:compile-and-test"
       artifacts: true
   script:
+    - mvn $MAVEN_CLI_OPTS -f $EVOAL_POM -Dbranch=$CI_COMMIT_REF_NAME -DskipTests -pl "!de.evoal:releng.jacoco" flatten:flatten install
     - ci/create-release.sh "$CI_JOB_NAME"
   rules:
     - if: $CI_PIPELINE_SOURCE == "push" &&
           $CI_COMMIT_TAG == null
     - if: $CI_COMMIT_TAG
     - when: never
+
+all:package:linux-x86_64:
+  extends: .all:package
+  after_script:
+    - find evoal -name "*macosx-arm64*jar" | xargs rm 
+    - find evoal -name "*macosx-x86_64*jar" | xargs rm 
+    - find evoal -name "*windows-x86_64*jar" | xargs rm 
   artifacts:
-    name: "evoal-$CI_COMMIT_REF_NAME-$CI_COMMIT_SHORT_SHA-release"
+    name: "evoal-$CI_COMMIT_REF_NAME-$CI_COMMIT_SHORT_SHA-release-linux-x86_64"
     when: on_success
-    expire_in: "14 days"
+    expire_in: "7 days"
+    paths:
+      - evoal
+
+all:package:macosx-arm64:
+  extends: .all:package
+  after_script:
+    - find evoal -name "*linux-x86_64*jar" | xargs rm 
+    - find evoal -name "*macosx-x86_64*jar" | xargs rm 
+    - find evoal -name "*windows-x86_64*jar" | xargs rm 
+  artifacts:
+    name: "evoal-$CI_COMMIT_REF_NAME-$CI_COMMIT_SHORT_SHA-release-macosx-arm64"
+    when: on_success
+    expire_in: "7 days"
+    paths:
+      - evoal
+
+all:package:macosx-x86_64:
+  extends: .all:package
+  after_script:
+    - find evoal -name "*linux-x86_64*jar" | xargs rm 
+    - find evoal -name "*macosx-arm64*jar" | xargs rm 
+    - find evoal -name "*windows-x86_64*jar" | xargs rm 
+  artifacts:
+    name: "evoal-$CI_COMMIT_REF_NAME-$CI_COMMIT_SHORT_SHA-release-macosx-x86_64"
+    when: on_success
+    expire_in: "7 days"
+    paths:
+      - evoal
+
+all:package:windows-x86_64:
+  extends: .all:package
+  after_script:
+    - find evoal -name "*macosx-arm64*jar" | xargs rm 
+    - find evoal -name "*macosx-x86_64*jar" | xargs rm 
+    - find evoal -name "*linux-x86_64*jar" | xargs rm 
+  artifacts:
+    name: "evoal-$CI_COMMIT_REF_NAME-$CI_COMMIT_SHORT_SHA-release-windows-x86_64"
+    when: on_success
+    expire_in: "7 days"
     paths:
       - evoal
 
@@ -448,12 +502,21 @@ release-notes:
 publish:
   stage: Release
   dependencies:
-    - all:package
+    - all:package:linux-x86_64
+    - all:package:macosx-arm64
+    - all:package:macosx-x86_64
+    - all:package:windows-x86_64
     - release-notes
   needs:
     - job: release-notes
       artifacts: true
-    - job: all:package
+    - job: all:package:linux-x86_64
+      artifacts: true
+    - job: all:package:macosx-arm64
+      artifacts: true
+    - job: all:package:macosx-x86_64
+      artifacts: true
+    - job: all:package:windows-x86_64
       artifacts: true
   image: registry.gitlab.com/gitlab-org/release-cli:latest
   rules:

@@ -82,8 +82,8 @@ public class ReflectiveSerializer extends StdSerializer<Object> {
     }
 
     private void serializeArray(final Matrix o, final JsonGenerator jsonGenerator) throws IOException {
-        final int nrows = o.nrows();
-        final int ncols = o.ncols();
+        final int nrows = o.nrow();
+        final int ncols = o.ncol();
 
         jsonGenerator.writeStartObject();
         jsonGenerator.writeStringField("type", "matrix");

@@ -15,9 +15,9 @@ import de.evoal.surrogate.smile.api.KernelBasedSVRFunction;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.math3.stat.descriptive.moment.Mean;
 import org.apache.commons.math3.stat.descriptive.moment.StandardDeviation;
+import smile.base.svm.SVR;
 import smile.math.kernel.MercerKernel;
 import smile.regression.KernelMachine;
-import smile.regression.SVR;
 
 import java.util.*;
 import java.util.function.Function;
@@ -96,7 +96,8 @@ public abstract class KernelBasedSVRFunctionFactory extends AbstractPartialSurro
 		final double margin = ((Number)params.get(KernelHelper.SOFT_MARGIN_PARAMETER)).doubleValue();
 		final double tolerance = ((Number)params.get(KernelHelper.TOLERANCE_PARAMETER)).doubleValue();
 
-		final KernelMachine<double []> regression = SVR.fit(sourceArray, targetArray, toKernel.apply(params), epsilon, margin, tolerance);
+		final SVR<double []> svr = new SVR<>(toKernel.apply(params), epsilon, margin, tolerance);
+		final KernelMachine<double []> regression = svr.fit(sourceArray, targetArray);
 
 		return new KernelBasedSVRFunction(configuration, regression, nameOfKernel, requiredInput, actualInput, producedOutput, margin, sourceMeans, sourceSD, targetMean, targetSD);
 	}
