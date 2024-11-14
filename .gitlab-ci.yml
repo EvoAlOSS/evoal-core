@@ -276,13 +276,14 @@ all:package:linux-x86_64:
   after_script:
     - find evoal -name "*macosx-arm64*jar" | xargs rm 
     - find evoal -name "*macosx-x86_64*jar" | xargs rm 
-    - find evoal -name "*windows-x86_64*jar" | xargs rm 
+    - find evoal -name "*windows-x86_64*jar" | xargs rm
+    - mv evoal evoal-linux-x86_64
   artifacts:
     name: "evoal-$CI_COMMIT_REF_NAME-$CI_COMMIT_SHORT_SHA-release-linux-x86_64"
     when: on_success
     expire_in: "7 days"
     paths:
-      - evoal
+      - evoal-linux-x86_64
 
 all:package:macosx-arm64:
   extends: .all:package
@@ -290,12 +291,13 @@ all:package:macosx-arm64:
     - find evoal -name "*linux-x86_64*jar" | xargs rm 
     - find evoal -name "*macosx-x86_64*jar" | xargs rm 
     - find evoal -name "*windows-x86_64*jar" | xargs rm 
+    - mv evoal evoal-macosx-arm64
   artifacts:
     name: "evoal-$CI_COMMIT_REF_NAME-$CI_COMMIT_SHORT_SHA-release-macosx-arm64"
     when: on_success
     expire_in: "7 days"
     paths:
-      - evoal
+      - evoal-macosx-arm64
 
 all:package:macosx-x86_64:
   extends: .all:package
@@ -303,12 +305,13 @@ all:package:macosx-x86_64:
     - find evoal -name "*linux-x86_64*jar" | xargs rm 
     - find evoal -name "*macosx-arm64*jar" | xargs rm 
     - find evoal -name "*windows-x86_64*jar" | xargs rm 
+    - mv evoal evoal-macosx-x86_64
   artifacts:
     name: "evoal-$CI_COMMIT_REF_NAME-$CI_COMMIT_SHORT_SHA-release-macosx-x86_64"
     when: on_success
     expire_in: "7 days"
     paths:
-      - evoal
+      - evoal-macosx-x86_64
 
 all:package:windows-x86_64:
   extends: .all:package
@@ -316,12 +319,13 @@ all:package:windows-x86_64:
     - find evoal -name "*macosx-arm64*jar" | xargs rm 
     - find evoal -name "*macosx-x86_64*jar" | xargs rm 
     - find evoal -name "*linux-x86_64*jar" | xargs rm 
+    - mv evoal evoal-windows-x86_64    
   artifacts:
     name: "evoal-$CI_COMMIT_REF_NAME-$CI_COMMIT_SHORT_SHA-release-windows-x86_64"
     when: on_success
     expire_in: "7 days"
     paths:
-      - evoal
+      - evoal-windows-x86_64
 
 #############################################################
 ## Create Gitlab Page with Update Sites 
@@ -524,6 +528,12 @@ publish:
     - when: never
   script:
     - cat release_notes.md
+    - >
+      for PLATFORM in linux-x86_64 macosx-arm64 macosx-x86_64  windows-x86_64; do
+        export ARCHIVE=evoal-${CI_COMMIT_TAG}-${PLATFORM}.zip
+        zip -r $ARCHIVE $PLATFORM
+        curl --header "JOB-TOKEN: $CI_JOB_TOKEN" --upload-file $ARCHIVE "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/releases/${CI_COMMIT_TAG}/$ARCHIVE"
+      done
   release:
     tag_name: $CI_COMMIT_TAG
     name: "EvoAl Release $CI_COMMIT_TAG"
@@ -531,15 +541,18 @@ publish:
     ref: '$CI_COMMIT_SHA'    
     assets:
       links:
-        - name: 'EvoAl - $CI_COMMIT_TAG'
-          url: "$CI_JOB_URL/artifacts/download?file_type=archive"
+        - name: 'EvoAl - $CI_COMMIT_TAG - Linux x86_64'
+          url: "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/releases/${CI_COMMIT_TAG}/evoal-${CI_COMMIT_TAG}-linux-x86_64.zip"
           link_type: package
-  artifacts:
-    name: evoal-${CI_COMMIT_TAG}
-    paths:
-      - evoal
-    when: on_success
-
+        - name: 'EvoAl - $CI_COMMIT_TAG - MacOS X ARM64'
+          url: "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/releases/${CI_COMMIT_TAG}/evoal-${CI_COMMIT_TAG}-macosx-arm64.zip"
+          link_type: package
+        - name: 'EvoAl - $CI_COMMIT_TAG - MacOS X x86_64'
+          url: "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/releases/${CI_COMMIT_TAG}/evoal-${CI_COMMIT_TAG}-macosx-x86_64.zip"
+          link_type: package
+        - name: 'EvoAl - $CI_COMMIT_TAG - Windows x86_64'
+          url: "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/releases/${CI_COMMIT_TAG}/evoal-${CI_COMMIT_TAG}-windows-x86_64.zip"
+          link_type: package
 
 package cleanup:
   stage: Maintenance

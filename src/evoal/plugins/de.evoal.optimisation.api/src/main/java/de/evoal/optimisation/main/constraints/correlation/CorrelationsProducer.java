@@ -45,7 +45,9 @@ public class CorrelationsProducer {
                              .map(BaseLanguageHelper::findCall)
                              .filter(Objects::nonNull)
                              .map(Call.class::cast)
-                             .filter(c -> "connection".equals(((de.evoal.languages.model.base.DefinedFunctionName)c.getFunction()).getDefinition().getName()))
+                                    // TODO Do this correctly
+                             .filter(c -> "connection".equals(((de.evoal.languages.model.base.DefinedFunctionName)c.getFunction()).getDefinition().getName()) ||
+                                          "ranged-connection".equals(((de.evoal.languages.model.base.DefinedFunctionName)c.getFunction()).getDefinition().getName()))
                              .map(c -> convert(c, context))
                              .filter(Optional::isPresent)
                              .map(Optional::get)

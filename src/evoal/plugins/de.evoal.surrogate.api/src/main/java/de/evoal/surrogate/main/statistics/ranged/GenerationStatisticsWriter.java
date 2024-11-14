@@ -41,7 +41,7 @@ public class GenerationStatisticsWriter implements StatisticsWriter {
     @Inject
     private Correlations correlations;
 
-    private List<Hypercube> hypercubeDefinitions;
+    private List<Hypercube> hypercubeDefinitions = new ArrayList<>();
 
     private List<Hypercube> initialGenerationCubes;
 
