@@ -38,7 +38,7 @@ import java.util.random.RandomGenerator;
  *  Attractive-Repulsive PSO Mover, ARPSOMover.
  *  Based on paper of Riget and Vesterstrom.
  */
-@Dependent @Named("de.evoal.core.pso.optimisation.attractive-repulsive-mover")
+@Dependent @Named("de.evoal.optimisation.pso.optimisation.arpso-mover")
 public class ARPSOMover implements Mover {
     @Inject
     private PropertiesBoundaries boundaries;

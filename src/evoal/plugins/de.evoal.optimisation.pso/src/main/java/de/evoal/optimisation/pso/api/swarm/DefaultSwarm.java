@@ -44,7 +44,7 @@ import java.util.stream.Stream;
  *  A collection of particles.
  */
 @Dependent
-@Named("de.evoal.core.pso.optimisation.default-swarm")
+@Named("de.evoal.optimisation.pso.optimisation.default-swarm")
 @Slf4j
 public class DefaultSwarm implements Swarm {
 

@@ -7,6 +7,7 @@ module de.evoal.optimisation.pso.optimisation {
 	    'number-of-generations' : int;
 	    'neighborhood-size' : int;
 	    'mover' : instance 'pso-mover';
+	    //specify GLOBAL, STAR, RING, or SQUARE topology
 	    'topology' : string;
 	}
 
@@ -17,14 +18,15 @@ module de.evoal.optimisation.pso.optimisation {
 	}
 
 	type 'arpso-swarm' extends 'swarm' {
-        'diversity-low' : real;
-        'diversity-high' : real;
+        'diversity-low' : real; //example: 0.000005
+        'diversity-high' : real; //example: 0.25
 	}
 
     /**
      * Base type for all particle swarm moving strategies.
      */
 	abstract type 'pso-mover' {
+	    //specify WRAP, BOUNCE, or STICK boundary type
 	    'boundary-type' : string;
 	}
 
@@ -35,22 +37,22 @@ module de.evoal.optimisation.pso.optimisation {
 	    /**
 	     * Starting value of inertia weight.
 	     */
-	    'inertia-start' : int;
+	    'inertia-start' : real;
 
 	    /**
 	     * Ending value of inertia weight.
 	     */
-	    'inertia-end' : int;
+	    'inertia-end' : real;
 
         /**
-         * Parameter c1 of basic PSO kinematic equation.
+         * Parameter c1 of basic PSO kinematic equation. Weights influence of individual memory.
          */
-        'c1' : int;
+        'c1' : real;
 
         /**
-         * Paramter c2 of basic PSO kinematic equation.
+         * Paramter c2 of basic PSO kinematic equation. Weights influence of collective memory.
          */
-         'c2' : int;
+         'c2' : real;
 	}
 
     /**
@@ -60,44 +62,44 @@ module de.evoal.optimisation.pso.optimisation {
 	    /**
 	     * Parameter phi of FIPS mover.
 	     */
-	    phi : int;
+	    phi : real;
 	}
 
 	type 'constriction-factor-mover' extends 'pso-mover' {
          /**
-          * Parameter c1 of basic PSO kinematic equation.
+          * Parameter c1 of basic PSO kinematic equation. Weights influence of individual memory.
           */
-         'c1' : int;
+         'c1' : real;
 
          /**
-          * Paramter c2 of basic PSO kinematic equation.
+          * Paramter c2 of basic PSO kinematic equation. Weights influence of collective memory.
           */
-          'c2' : int;
+          'c2' : real;
     }
 
     /**
      *  Attractive-repulsive PSO Mover (short ARPSOMover), based on the paper of
      *    Riget and Vesterstrom.
      */
-    type 'attractive-repulsive-mover' extends 'pso-mover' {
+    type 'arpso-mover' extends 'pso-mover' {
 	    /**
-	     * Starting value of inertia weight.
+	     * Starting value of inertia weight. Should be less than 1.
 	     */
-	    'inertia-start' : int;
+	    'inertia-start' : real;
 
 	    /**
 	     * Ending value of inertia weight.
 	     */
-	    'inertia-end' : int;
+	    'inertia-end' : real;
 
         /**
-         * Parameter c1 of basic PSO kinematic equation.
+         * Parameter c1 of basic PSO kinematic equation. Weights influence of individual memory.
          */
-        'c1' : int;
+        'c1' : real;
 
         /**
-         * Parameter c2 of basic PSO kinematic equation.
+         * Parameter c2 of basic PSO kinematic equation. Weights influence of collective memory.
          */
-         'c2' : int;
+         'c2' : real;
     }
 }

@@ -13,7 +13,7 @@ import javax.inject.Named;
 
 @Slf4j
 @Dependent
-@Named("de.evoal.core.pso.optimisation.particle-swarm-optimisation")
+@Named("de.evoal.optimisation.pso.optimisation.particle-swarm-optimisation")
 public class ParticleSwarmAlgorithm implements OptimisationAlgorithm {
 
     private Swarm swarm;

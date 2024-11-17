@@ -19,6 +19,8 @@ package de.evoal.optimisation.pso.main.impl;
 
 import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.core.api.properties.info.PropertiesBoundaries;
+import de.evoal.core.api.properties.Properties;
+import de.evoal.optimisation.pso.api.BoundaryType;
 import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
 import de.evoal.optimisation.pso.api.swarm.Particle;
 import de.evoal.optimisation.pso.api.swarm.DefaultSwarm;
@@ -35,7 +37,7 @@ import javax.inject.Named;
  * @author Jeff Ridder
  */
 @Dependent
-@Named("de.evoal.core.pso.optimisation.arpso-swarm")
+@Named("de.evoal.optimisation.pso.optimisation.arpso-swarm")
 @Slf4j
 public class ARPSOSwarm extends DefaultSwarm {
     @Inject
@@ -95,18 +97,17 @@ public class ARPSOSwarm extends DefaultSwarm {
         }
 
         //  Find max diagonal in search space
-//        ValueLimitSet vLim = particles[0].getValueLimitSet();
+        Properties properties = particles[0].getCurrentPosition();
         double diag_length = 0.;
-        /*
-        for (int i = 0; i < vLim.getSize(); i++) {
-            PropertiesBoundaries.Boundaries bounds =
-            double diff = vLim.getValueLimits(i).getMaximum() - vLim.getValueLimits(i).
-                getMinimum();
 
+
+        for (int i=0; i<properties.size();i++) {
+            PropertiesBoundaries.Boundaries bounds = boundaries.get(properties.getSpecification().get(i));
+            double maximum = bounds.upper().doubleValue();
+            double minimum = bounds.lower().doubleValue();
+            double diff = maximum - minimum;
             diag_length += diff * diff;
         }
-        */if(true)
-        throw new RuntimeException();
 
         diag_length = Math.sqrt(diag_length);
 
