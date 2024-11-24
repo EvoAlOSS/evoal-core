@@ -1,5 +1,3 @@
-# Help Request
-
 ## Use case
 
 (What do you want to do?)
@@ -10,4 +8,6 @@
 
 ## What is your question or problem
 
+/label ~"issue-type::help-request" ~"workflow::discussion"
+/cc @berber @cplump
 

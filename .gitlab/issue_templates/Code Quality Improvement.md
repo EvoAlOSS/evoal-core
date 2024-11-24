@@ -1,22 +1,25 @@
-## Task
+## Description
 
-(changes, code cleanup, refactoring, architecture, ...)
-
-## Summary
-
-(Summarise what should be done)
+(Describe what should be done)
 
 ## Component
-
-(evoal.core, optimisation.ea, generator.main, Eclipse, ...)
+* [ ] Documentation
+* [ ] Eclipse
+* [ ] evoal.core
+* [ ] generator.main
+* [ ] optimisation.ea
+* [ ] optimisation.hc
+* [ ] optimisation.pso
+* [ ] optimisation.sa
+* [ ] surrogate.adaption
+* [ ] surrogate.smile
 
 ## Improvement
 
 (How does this issue improve our project?)
 
 ## Contact Person
-
 (Link a person/ people, that can answer questions about this issue, e.g. yourself)
 
-/label ~code-quality
+/label ~"issue-type::dicussion" ~"workflow::code-quality"
 /cc @berber

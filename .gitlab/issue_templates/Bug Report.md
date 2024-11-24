@@ -2,30 +2,34 @@
 
 (Summarise the bug encountered concisely)
 
-## Component
-
-(evoal.core, optimisation.ea, generator.main, Eclipse, ...)
+## Used components
+* [ ] Documentation
+* [ ] Eclipse
+* [ ] evoal.core
+* [ ] generator.main
+* [ ] optimisation.ea
+* [ ] optimisation.hc
+* [ ] optimisation.pso
+* [ ] optimisation.sa
+* [ ] surrogate.adaption
+* [ ] surrogate.smile
 
 ## Steps to reproduce
 
-(How one can reproduce the issue)
+(How one can reproduce the issue. Attach some configuration files to allow us to reproduce the bug)
 
 ## Current Behaviour
 
-(What is EvoAl's behaviour)
-
-## Expected Behavior
-
-(What should happen instead)
+(What is EvoAl's behaviour?)
 
 ## Relevant logs and/or screenshots
 
 (Paste any relevant logs - use code blocks (```) to format console output, logs, and code, as
 it's very hard to read otherwise.)
 
-## Possible fixes
+## Expected Behavior
 
-(If you can, link to the line of code that might be responsible for the problem)
+(What should happen instead)
 
 ## Contact Person
 
