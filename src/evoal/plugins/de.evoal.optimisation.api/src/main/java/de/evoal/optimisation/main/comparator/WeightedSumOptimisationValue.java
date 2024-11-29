@@ -47,6 +47,23 @@ public class WeightedSumOptimisationValue implements OptimisationValue {
     }
 
     @Override
+    public double distanceFrom(final @NonNull OptimisationValue other) {
+        if(!(other instanceof WeightedSumOptimisationValue)) {
+            throw new IllegalArgumentException("Only allowed to compare WeightedSumFitnessValue");
+        }
+
+        double ownFitness = 0.0;
+        double otherFitness = 0.0;
+
+        for(int index = 0; index < fitnessValues.length; ++index) {
+            ownFitness = ownFitness + this.normalizedWeights[index] * Math.abs(this.fitnessValues[index]);
+            otherFitness = otherFitness + this.normalizedWeights[index] * Math.abs(((WeightedSumOptimisationValue)other).getFitnessValues()[index]);
+        }
+
+        return Math.abs(ownFitness - otherFitness);
+    }
+
+    @Override
     public String toString() {
     	return "WeightedSum [fit=" + Arrays.toString(fitnessValues) + ", w=" + Arrays.toString(normalizedWeights) + "]";
     }

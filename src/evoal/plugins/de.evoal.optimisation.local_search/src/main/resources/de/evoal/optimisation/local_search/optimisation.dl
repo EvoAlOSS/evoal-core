@@ -1,0 +1,106 @@
+import "definitions" from de.evoal.optimisation.core;
+
+module de.evoal.optimisation.local_search.optimisation {
+
+    /**
+    * the hill climbing algorithm starts at an initial point
+    * and searches for neighbours (according to neighbour-choosing-strategy)
+    * with better objective values. It terminates when no improvement is found
+    * or when the number-of-iterations is reached.
+    */
+	type 'hill-climbing-algorithm' extends 'algorithm' {
+    	'number-of-iterations' : int;
+    	'neighbour-choosing-strategy' : instance 'choosing-strategy';
+	}
+
+    /**
+    * the threshold accepting algorithm
+    */
+    type 'threshold-accepting-algorithm' extends 'algorithm' {
+        'number-of-iterations' : int;
+        'neighbour-choosing-strategy' : instance 'choosing-strategy';
+        'initial-threshold' : real;
+        'decreasing-function' : instance 'decreasing-strategy';
+    }
+
+    /**
+    * simulated annealing algorithm is a metaheuristic optimisation
+    * algorithm that seeks new solutions from a set of neighbours
+    * and accepts these solutions according to an acceptance probability
+    * function. This probability is affected by the temperature, which is
+    * decremented according to cooling schedule.
+    */
+    type 'simulated-annealing-algorithm' extends 'algorithm' {
+        'number-of-iterations' : int;
+        'neighbour-choosing-strategy' : instance 'choosing-strategy';
+        'initial-temperature' : real;
+        'decreasing-function' : instance 'decreasing-strategy';
+        'acceptance-probability' : instance 'probability-acceptance-function';
+    }
+
+    /**
+    * Neighbour choosing strategy for hill-climbing algorithm
+    */
+	abstract type 'choosing-strategy' {
+	}
+
+    /**
+    * This strategy tries moving the given step size
+    * in all possible directions until improvement is found
+    */
+	type 'manual-strategy' extends 'choosing-strategy' {
+	    /**
+	    * specify a step size for each variable of the
+	    * search space.
+	    */
+    	'step-size' : array instance variable;
+	}
+
+    /**
+    * Cooling strategies determine how temperature is decreased in each iteration
+    */
+    abstract type 'decreasing-strategy' {}
+
+    /**
+    * T(k) = T_0 - (k * T_0/#iterations)
+    */
+    type 'linear-decrease' extends 'decreasing-strategy' {}
+
+    /**
+    * T(k) = T(k-1) * cooling_rate
+    */
+    type 'geometric-decrease' extends 'decreasing-strategy' {
+        'decrease-rate' : real;
+    }
+
+    /**
+    * T(k) = T_0/log(k+1)
+    */
+    type 'logarithmic-decrease' extends 'decreasing-strategy' {}
+
+    /**
+    * T(k) = T_0 * exp(-k^(1/N))
+    */
+    type 'exponential-decrease' extends 'decreasing-strategy' {}
+
+    /**
+    * T(k) = T(k-1) - (rate*k)
+    */
+    type 'arithmetic-decrease' extends 'decreasing-strategy' {
+        'rate' : real;
+    }
+
+    /**
+    * Determines probability of accepting neighbouring solutions based
+    * on fitness and temperature.
+    */
+    abstract type 'probability-acceptance-function' {}
+
+    /**
+    * Exponential acceptance function determines acceptance probability according to formula:
+    * P(f(s), f(s'), T) = exp(max( (f(s')-f(s)/T(k)), 0) for maximisation
+    * P(f(s), f(s'), T) = exp(max( -(f(s')-f(s)/T(k)), 0) for minimisation
+    */
+    type 'exponential-probability' extends 'probability-acceptance-function' {}
+
+}

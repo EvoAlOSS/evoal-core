@@ -29,6 +29,23 @@ public class ParetoOptimisationValue implements OptimisationValue {
 
         return this.makeAbsolute().compareTo(((ParetoOptimisationValue)other).makeAbsolute());
     }
+
+    @Override
+    public double distanceFrom(final OptimisationValue other) {
+        if(!(other instanceof ParetoOptimisationValue)) {
+            throw new IllegalArgumentException("Only allowed to compare pareto fitness values");
+        }
+
+        Vec<double[]> thisVec = this.makeAbsolute();
+        Vec<double[]> otherVec = ((ParetoOptimisationValue)other).makeAbsolute();
+
+        double sum = 0.0;
+        for (int i = 0; i < thisVec.length(); i++) {
+            double elementDistance = thisVec.distance(otherVec, i);
+            sum += elementDistance * elementDistance;
+        }
+        return Math.sqrt(sum);
+    }
     
     private Vec<double[]> makeAbsolute(){
     	final double [] values = fitnessValues.data();

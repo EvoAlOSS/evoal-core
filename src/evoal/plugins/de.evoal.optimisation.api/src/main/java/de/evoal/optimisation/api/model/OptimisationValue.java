@@ -20,4 +20,6 @@ public interface OptimisationValue extends Comparable<OptimisationValue> {
     default boolean isWorse(final OptimisationValue other, final boolean maximise){
         return maximise ? this.compareTo(other) < 0 : this.compareTo(other) > 0;
     }
+
+    double distanceFrom(final OptimisationValue other);
 }

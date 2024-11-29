@@ -33,6 +33,15 @@ public class NumericOptimisationValue extends Number implements OptimisationValu
     }
 
     @Override
+    public double distanceFrom(final @NonNull OptimisationValue other) {
+        if(!(other instanceof NumericOptimisationValue)) {
+            throw new IllegalArgumentException("Only allowed to compare NumericOptimisationValue");
+        }
+
+        return Math.abs(this.fitnessValue.doubleValue()-((NumericOptimisationValue) other).fitnessValue.doubleValue());
+    }
+
+    @Override
     public String toString() {
     	return "NumericOptimisationValue [" + fitnessValue + "]";
     }

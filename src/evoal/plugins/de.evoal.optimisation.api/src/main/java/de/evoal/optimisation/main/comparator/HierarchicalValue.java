@@ -36,6 +36,21 @@ public class HierarchicalValue implements OptimisationValue {
     }
 
     @Override
+    public double distanceFrom(final @NonNull OptimisationValue other) {
+        if(other instanceof HierarchicalValue hv) {
+            for(int index : orderIndices) {
+                if(fitnessValues[index] != hv.fitnessValues[index]) {
+                    return Math.abs(fitnessValues[index] - hv.fitnessValues[index]);
+                }
+            }
+
+            return 0.0;
+        } else{
+            throw new IllegalArgumentException("Only allowed to compare HierarchicalValue");
+        }
+    }
+
+    @Override
     public String toString() {
     	return "HierarchicalValue [fit=" + Arrays.toString(fitnessValues) + ", order=" + Arrays.toString(orderIndices) + "]";
     }
