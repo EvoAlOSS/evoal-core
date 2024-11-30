@@ -9,7 +9,7 @@ import javax.inject.Named;
 
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;
-import de.evoal.optimisation.api.statistics.Candidate;
+import de.evoal.optimisation.api.model.Candidate;
 import de.evoal.optimisation.api.statistics.io.Writer;
 import de.evoal.optimisation.api.statistics.io.WriterException;
 import de.evoal.optimisation.api.statistics.writer.AbstractCandidateStatisticsWriter;
@@ -51,13 +51,13 @@ public class SurrogateStatistics extends AbstractCandidateStatisticsWriter {
     }
 
     @Override
-    protected Object[] toData(final int index, final int iteration, final Candidate candidate) {
+    protected Object[] toData(final int index, final int iteration, final Candidate individual) {
         final Object [] data = new Object[2 + targetSpecification.size()];
 
         data[0] = iteration;
         data[1] = index;
 
-        final Properties representation = candidate.searchSpaceRepresentation();
+        final Properties representation = individual.searchSpaceRepresentation();
         final Properties predicted = predictive.apply(representation);
 
         for(int i = 0; i < predicted.size(); ++i) {

@@ -2,8 +2,8 @@ package de.evoal.surrogate.main.statistics.constraint;
 
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;
-import de.evoal.optimisation.api.statistics.Candidate;
-import de.evoal.optimisation.api.statistics.IterationResult;
+import de.evoal.optimisation.api.model.Candidate;
+import de.evoal.optimisation.api.model.Iteration;
 import de.evoal.optimisation.api.statistics.io.Writer;
 import de.evoal.optimisation.api.statistics.io.WriterException;
 import de.evoal.optimisation.api.statistics.io.WriterStrategy;
@@ -126,7 +126,7 @@ public class ConstraintStatistics implements StatisticsWriter {
     }
 
     @Override
-    public void add(final IterationResult result) {
+    public void add(final Iteration result) {
             try {
                 final Object [] data = toData(result.iteration(), () -> result.candidates());
                 writer.addRecord(data);

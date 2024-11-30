@@ -56,6 +56,6 @@ module 'pso-arpso-arpso' {
 		
 		topology := "STAR";
 		
-		documenting := ['candidates-per-generation'{}, 'best-candidate-per-generation' {}];
+		documenting := ['individuals-per-generation'{}, 'best-individual-per-generation' {}];
 	}
 }

@@ -82,6 +82,10 @@ module example {
     }];
     };
 
-    documenting := [ 'best-candidate-per-generation' {} ];
+    'stopping-criteria' := [
+        'iteration-count' { 'maximum-iterations' := 10; }
+    ];
+
+    documenting := [ 'best-candidate-per-iteration' {} ];
   }
 }

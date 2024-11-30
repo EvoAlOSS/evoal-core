@@ -39,6 +39,8 @@ public final class Evoal {
         installJavaLoggingToSLF4JBridge();
         log.info("Starting up EvoAl");
 
+        int errorCode = 0;
+
         log.info("Booting CDI container");
         final CdiContainer cdiContainer = CdiContainerLoader.getCdiContainer();
         cdiContainer.boot();
@@ -69,11 +71,13 @@ public final class Evoal {
                 main.run();
             } catch (final Throwable e) {
                 log.error("Main class threw an exception.", e);
+                errorCode = 1;
             }
         }
         
         log.info("Shutting down CDI container");
         cdiContainer.shutdown();
+        System.exit(errorCode);
     }
 
     private static void printUsage() {

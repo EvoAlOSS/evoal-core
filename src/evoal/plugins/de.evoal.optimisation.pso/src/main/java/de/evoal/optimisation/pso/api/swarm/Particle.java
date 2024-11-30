@@ -17,9 +17,9 @@
  */
 package de.evoal.optimisation.pso.api.swarm;
 
+import de.evoal.optimisation.api.model.Candidate;
 import de.evoal.optimisation.api.model.OptimisationValue;
 import de.evoal.core.api.properties.Properties;
-import de.evoal.optimisation.api.statistics.Candidate;
 import de.evoal.optimisation.pso.api.optimiser.Mover;
 import lombok.Getter;
 

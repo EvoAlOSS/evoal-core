@@ -2,11 +2,12 @@ import json
 import http.client
 import os
 import os.path
-import sys
 
-
-# Script for generating a Gitlab Pages site that serves all existing EvoAl
-#   Update Sites for Eclipse. 
+# Script for cleaning up the GitLab packages. Otherwise, we generate to many packages
+#   and have problems with the quota.
+# We want to delete all packages that
+#   a) belong to deleted branches/tags
+#   b) are not the latest build of the branch 
 
 SERVER   = os.environ.get('CI_SERVER_HOST')
 PROJECT  = os.environ.get('CI_PROJECT_ID')
@@ -21,45 +22,63 @@ tags = []
 connection = http.client.HTTPSConnection(SERVER)
 headers = {'PRIVATE-TOKEN' : TOKEN}
 
-# collect list of all available branches
+# collect list of all available branches in variable branches
 connection.request("GET", BASE_URL + "repository/branches", headers = headers)
 response = connection.getresponse()
 for branch in json.loads(response.read()):
     branches.append(branch['name'])
 
-# collect list of all available tags
+# collect list of all available tags in variable tags
 connection.request("GET", BASE_URL + "repository/tags", headers = headers)
 response = connection.getresponse()
 for tag in json.loads(response.read()):
-    tags.append(branch['name'])
+    tags.append(tag['name'])
 
 # delete all artifacts that can be deleted
-connection.request("DELETE", BASE_URL + "artifacts", headers = headers)
-response = connection.getresponse()
-response.read()
+#connection.request("DELETE", BASE_URL + "artifacts", headers = headers)
+#response = connection.getresponse()
+#response.read()
 
 # delete job artifacts of deleted branches
 job_page=1
-job_ids=[]
+jobs_to_delete=[]
+
+
+existing = set() # collect already existing jobs 
+
+# collect all job ids
 while True:
-    print("Query page %s" % (job_page,))
     connection.request("GET", BASE_URL + "jobs?id=30380&page=%s&per_page=100" % (job_page,), headers = headers)
-    response = connection.getresponse()#
-
+    response = connection.getresponse()
     jobs = json.loads(response.read())
-    job_ids += [job['id'] for job in jobs if job['ref'] not in branches and job['ref'][0].isdigit() and job['artifacts']]
 
+    # terminate the loop if there are no jobs in a result 
     if not jobs:
         break
 
+    jobs = [job for job in jobs if not job['tag']] # ignore tags
+    jobs = [job for job in jobs if job['ref'][0].isdigit()]  # keep feature branches
+    jobs = [job for job in jobs if job['artifacts']] # keep only jobs with artifacts
+
+    tmp = jobs
+    jobs = []
+    for job in tmp:
+        if job['ref'] not in branches:
+             # keep only jobs in deleted branches 
+             jobs.append(job)
+        elif (job['ref'], job['name']) not in existing:
+            # keep only newest jobs 
+            jobs.append(job)
+            existing.add((job['ref'], job['name']))
+
+    jobs_to_delete += jobs
     job_page+=1
 
-print("Deleting artifacts of %s jobs" % (len(job_ids),))
-for job_id in job_ids:
-    connection.request("DELETE", BASE_URL + "jobs/%s/artifacts" % (job_id,), headers = headers)
-    response = connection.getresponse()
-    response.read()
-
+print("Found %s jobs to delete" % (len(jobs_to_delete),))
+for job in jobs_to_delete:
+     connection.request("DELETE", BASE_URL + "jobs/%s/artifacts" % (job['id'],), headers = headers)
+     connection.getresponse() \
+               .read()
 
 # delete packages
 connection.request("GET", BASE_URL + "packages?per_page=100", headers = headers)
@@ -76,15 +95,18 @@ while currentPage > 0:
 
     for package in json.loads(response.read()):
         if "tags" in package and package["tags"]:
+            print("Found tag " + str(package['tags']))
             tag = package["tags"]["ref"]
 
             if tag not in tags:
                 print ("Have to delete %s" % (package["name"], ))
 
+            continue
+
         if "pipeline" in package and package["pipeline"]:
             branch = package["pipeline"]["ref"]
 
-            if branch[0] in FIGURES and branch not in branches:
+            if branch[0] in FIGURES and not (branch in branches or branch in tags):
                 print ("Deleting '%s' -- %s" % (package["name"], branch))
 
                 deleteAPI = package["_links"]["delete_api_path"]

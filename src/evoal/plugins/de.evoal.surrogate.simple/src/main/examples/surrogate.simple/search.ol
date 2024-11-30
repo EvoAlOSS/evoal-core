@@ -61,7 +61,7 @@ module search {
 	                        probability := 0.5;
 	
 	                }
-	        ];
+	          ];
 	        mutator := [
 	                'mean-alterer' {
 	                        probability := 0.5;
@@ -70,5 +70,9 @@ module search {
 	    };
 	
 		'optimisation-function' := 'surrogate' {};
+
+		'stopping-criteria' := [
+            'iteration-count' { 'maximum-iterations' := 10; }
+		];
 	}
 }

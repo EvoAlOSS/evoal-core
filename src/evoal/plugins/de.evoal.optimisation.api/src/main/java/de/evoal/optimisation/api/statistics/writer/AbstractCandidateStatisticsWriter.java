@@ -1,10 +1,10 @@
 package de.evoal.optimisation.api.statistics.writer;
 
+import de.evoal.optimisation.api.model.Candidate;
 import de.evoal.optimisation.api.statistics.io.Writer;
 import de.evoal.optimisation.api.statistics.io.WriterException;
 import de.evoal.optimisation.api.statistics.io.WriterStrategy;
-import de.evoal.optimisation.api.statistics.Candidate;
-import de.evoal.optimisation.api.statistics.IterationResult;
+import de.evoal.optimisation.api.model.Iteration;
 import de.evoal.languages.model.base.Instance;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -21,7 +21,7 @@ public abstract class AbstractCandidateStatisticsWriter implements StatisticsWri
     private Writer writer;
 
     @Override
-    public void add(final IterationResult result) {
+    public void add(final Iteration result) {
         final AtomicInteger counter = new AtomicInteger(0);
 
         result.candidates()
@@ -47,7 +47,7 @@ public abstract class AbstractCandidateStatisticsWriter implements StatisticsWri
 
     protected abstract Writer createWriter(final Instance configuration) throws WriterException ;
 
-    protected abstract Object [] toData(final int index, final int iteration, final Candidate candidate);
+    protected abstract Object [] toData(final int index, final int iteration, final Candidate individual);
 
     public void write() {
         try {

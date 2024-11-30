@@ -139,6 +139,11 @@ module de.evoal.optimisation.core {
          * Comparator to use for comparing results of the optimisation function.
          */
 	    'comparator' : instance comparator;
+
+	    /**
+	     * Configurable stopping criterion.
+	     */
+	    'stopping-criteria' : array instance 'stopping-criterion';
 	}
 
 	/**
@@ -255,7 +260,7 @@ module de.evoal.optimisation.core {
 	 *   <li>optimisation-space-variable-n</li>
 	 * </ul>
      */
-	type 'best-candidate-per-generation' extends 'statistics-writer' {
+	type 'best-candidate-per-iteration' extends 'statistics-writer' {
 	    /**
 	     * If set to <tt>true</tt>, every search space variable is prefixed with
 	     *   "<tt>search-space-value-</tt>" and every optimisation space variable
@@ -292,7 +297,7 @@ module de.evoal.optimisation.core {
      *   <li>optimisation-space-variable-n</li>
      * </ul>
      */
-    type 'candidates-per-generation' extends 'statistics-writer' {
+    type 'candidates-per-iteration' extends 'statistics-writer' {
         /**
          * If set to <tt>true</tt>, every search space variable is prefixed with
          *   "<tt>search-space-value-</tt>" and every optimisation space variable
@@ -317,4 +322,20 @@ module de.evoal.optimisation.core {
 	 * Does not write any statistics. Can be used to disable statistics output.
 	 */
 	type none extends 'statistics-writer' {}
+
+    /**
+     * Base class for all stopping criteria of optimisation algorithms.
+     */
+	abstract type 'stopping-criterion' {
+	}
+
+    /**
+     * Stopping criterion that stops after a fixed number of iterations.
+     */
+	type 'iteration-count' extends 'stopping-criterion' {
+	    /**
+	     * Maximum number of iterations.
+	     */
+        'maximum-iterations' : int := 10;
+	}
 }

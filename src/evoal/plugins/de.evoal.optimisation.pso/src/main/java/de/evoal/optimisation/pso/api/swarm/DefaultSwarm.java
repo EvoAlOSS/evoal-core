@@ -24,7 +24,7 @@ import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
 import de.evoal.optimisation.pso.api.optimiser.Mover;
 import de.evoal.optimisation.pso.api.optimiser.Swarm;
 import de.evoal.optimisation.pso.main.impl.NeighborhoodTopology;
-import de.evoal.optimisation.pso.main.statistics.PSOIterationResult;
+import de.evoal.optimisation.pso.main.statistics.PSOIteration;
 import de.evoal.optimisation.api.model.InitialCandidatesProvider;
 import de.evoal.optimisation.api.model.OptimisationFunction;
 import de.evoal.optimisation.api.model.OptimisationValue;
@@ -140,7 +140,7 @@ public class DefaultSwarm implements Swarm {
     }
 
     private void logGeneration() {
-        statistics.add(new PSOIterationResult(generation, maximise, this));
+        statistics.add(new PSOIteration(generation, maximise, this));
     }
 
     /**

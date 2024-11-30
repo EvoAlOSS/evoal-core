@@ -3,6 +3,7 @@ package de.evoal.optimisation.ea.main.search;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.function.Predicate;
 
 import de.evoal.core.api.board.Blackboard;
 import de.evoal.core.api.cdi.BeanFactory;
@@ -15,12 +16,14 @@ import de.evoal.optimisation.api.model.OptimisationAlgorithm;
 import de.evoal.core.api.utils.AttributeHelper;
 import de.evoal.optimisation.api.model.OptimisationValue;
 
+import de.evoal.optimisation.api.model.StoppingCriterion;
 import de.evoal.optimisation.api.statistics.writer.StatisticsWriter;
 import de.evoal.optimisation.ea.api.codec.CustomCodec;
 import de.evoal.optimisation.ea.main.alterer.AltererFactory;
 import de.evoal.optimisation.ea.main.fitness.JeneticsFitnessFunction;
 import de.evoal.optimisation.ea.main.initial.InitialStream;
 import de.evoal.optimisation.ea.main.jenetics.ConstraintList;
+import de.evoal.optimisation.ea.main.statistics.IterationAdapter;
 import de.evoal.optimisation.ea.main.statistics.JeneticsStatisticsWriter;
 import de.evoal.languages.model.base.Attribute;
 import de.evoal.languages.model.ol.OptimisationModule;
@@ -96,6 +99,10 @@ public class EvolutionaryAlgorithmOptimisation implements OptimisationAlgorithm 
 	@Inject @Named("initial")
 	private InitialCandidatesProvider provider;
 
+	/**
+	 * Stopping criterion.
+	 */
+	private Predicate<? super EvolutionResult<?, OptimisationValue>> stoppingCriterion = (Predicate<EvolutionResult<?, OptimisationValue>>) optimisationValueEvolutionResult -> true;
 
 	public void run() {
 		setup();
@@ -114,13 +121,12 @@ public class EvolutionaryAlgorithmOptimisation implements OptimisationAlgorithm 
 											.executor(executor)
 											.build();
         
-        EvolutionStatistics<OptimisationValue, MinMax<OptimisationValue>> statistics = EvolutionStatistics.ofComparable();
-		EvolutionStream<?, OptimisationValue> initialStream = BeanFactory.create(InitialStream.class).init(provider, engine).create();
-		JeneticsStatisticsWriter writer = new JeneticsStatisticsWriter(this.statistics);
+        final EvolutionStatistics<OptimisationValue, MinMax<OptimisationValue>> statistics = EvolutionStatistics.ofComparable();
+		final EvolutionStream<?, OptimisationValue> initialStream = BeanFactory.create(InitialStream.class).init(provider, engine).create();
+		final JeneticsStatisticsWriter writer = new JeneticsStatisticsWriter(this.statistics);
 
         final EvolutionResult<?, OptimisationValue> result
-        		=  initialStream.limit(Limits.byFixedGeneration(numberOfGenerations))
-//        						.limit(Limits.byExecutionTime(Duration.ofMinutes(5)))
+        		=  initialStream.limit(stoppingCriterion)
 //		        				.parallel()
 		        				.peek(writer::add)
 		                		.peek(statistics)
@@ -135,8 +141,8 @@ public class EvolutionaryAlgorithmOptimisation implements OptimisationAlgorithm 
 	private void setup() {
 		final OptimisationModule configuration = board.get(OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION);
 
+		// create list of alterers
 		final de.evoal.languages.model.base.Instance alterers = helper.lookup(configuration, "algorithm.alterers");
-
 		for(final Attribute category: alterers.getAttributes()) {
 			final String name = category.getDefinition().getName();
 			log.info("Processing alterer category '{}'.", name);
@@ -148,6 +154,21 @@ public class EvolutionaryAlgorithmOptimisation implements OptimisationAlgorithm 
 					.computeIfAbsent(name, k -> new ArrayList<>())
 					.add(factory.create(alterer));
 			}
+		}
+
+		// create list of stopping criteria
+		final List<de.evoal.languages.model.base.Instance> criteria = helper.lookup(configuration, "algorithm.stopping-criteria");
+		for(final de.evoal.languages.model.base.Instance criterion : criteria) {
+			final Predicate<? super EvolutionResult<?, OptimisationValue>> limit = new Predicate<>() {
+				private StoppingCriterion delegate = BeanFactory.createComponent(StoppingCriterion.class, criterion);
+
+				@Override
+				public boolean test(final EvolutionResult<?, OptimisationValue> result) {
+					return delegate.isSatisfied(new IterationAdapter(result));
+				}
+			};
+
+			stoppingCriterion = stoppingCriterion.and((Predicate)limit.negate());
 		}
 	}
 

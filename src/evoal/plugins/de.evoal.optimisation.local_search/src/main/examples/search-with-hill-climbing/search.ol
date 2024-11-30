@@ -42,9 +42,9 @@ module search {
             ];
         };
 
-        //initial candidates can be randomly generated, read from a file, or specified directly in this file (as seen here)
+        //initial individuals can be randomly generated, read from a file, or specified directly in this file (as seen here)
         //note that a random order means that the starting individual will be randomly selected from those specified.
-        //with non-random orders, the first candidate in the list serves as the initial candidate
+        //with non-random orders, the first individual in the list serves as the initial individual
 		'initialisation' := 'specify-candidates' { 'candidate-list' := [
 			'candidate' { 'values' := [ 'variable'{var := data 'x:0'; val := 1.0;}, 'variable'{var := data 'x:1'; val := 5.0;}, 'variable'{var := data 'y:0'; val := 5.0;}];},
 			'candidate' { 'values' := [ 'variable'{var := data 'x:0'; val := 15.0;}, 'variable'{var := data 'x:1'; val := 1.0;}, 'variable'{var := data 'y:0'; val := 5.0;}];}];
@@ -55,8 +55,8 @@ module search {
         //we already specified the optimisation function in the problem configuration. We reference that here.
 		'optimisation-function' := 'problem-function' {};
 
-        //we can document our results. For the hill-climbing algorithm, candidates-per-generation and
-        //best-candidate-per-generation work identically
-		documenting := ['candidates-per-generation' {}];
+        //we can document our results. For the hill-climbing algorithm, individuals-per-generation and
+        //best-individual-per-generation work identically
+		documenting := ['candidates-per-iteration' {}];
 	}
 }

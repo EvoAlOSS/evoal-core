@@ -71,9 +71,13 @@ module search {
 	
 		'optimisation-function' := 'surrogate' {};
 
+		'stopping-criteria' := [
+            'iteration-count' { 'maximum-iterations' := 10; }
+		];
+
 		documenting := [
-		    'best-candidate-per-generation' {},
-		    'candidates-per-generation' {},
+           'best-candidate-per-iteration' {},
+           'candidates-per-iteration' {},
 		    'prediction-per-individual' {}
         ];
 	}

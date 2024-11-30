@@ -9,8 +9,8 @@ import de.evoal.optimisation.api.model.OptimisationValue;
 import de.evoal.optimisation.api.model.OptimisationValueComparator;
 import de.evoal.optimisation.api.model.InitialCandidatesProvider;
 import de.evoal.core.api.properties.Properties;
-import de.evoal.optimisation.api.statistics.SimpleCandidate;
-import de.evoal.optimisation.api.statistics.SimpleIterationResult;
+import de.evoal.optimisation.api.model.impl.SimpleCandidate;
+import de.evoal.optimisation.api.model.impl.SimpleIteration;
 import de.evoal.optimisation.api.statistics.writer.StatisticsWriter;
 import de.evoal.languages.model.base.Instance;
 import de.evoal.optimisation.local_search.api.neighbour.NeighbourChoosingStrategy;
@@ -97,6 +97,6 @@ public class HillClimbing implements OptimisationAlgorithm {
     }
 
     private void addStatistics(SimpleCandidate candidate, int iterationNumber) {
-        this.statistics.add(new SimpleIterationResult(iterationNumber, Collections.singleton(candidate), candidate));
+        this.statistics.add(new SimpleIteration(iterationNumber, Collections.singleton(candidate), candidate));
     }
 }

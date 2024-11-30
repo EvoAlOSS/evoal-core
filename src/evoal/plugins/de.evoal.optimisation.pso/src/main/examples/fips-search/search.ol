@@ -36,6 +36,6 @@ module search {
 		'initialisation' := 'random-population' {};
 		'comparator' := 'numeric-comparator' {};
 		'optimisation-function' := 'problem-function' {};
-		documenting := [ 'candidates-per-generation' {} ];
+		documenting := [ 'candidates-per-iteration' {} ];
 	}
 }

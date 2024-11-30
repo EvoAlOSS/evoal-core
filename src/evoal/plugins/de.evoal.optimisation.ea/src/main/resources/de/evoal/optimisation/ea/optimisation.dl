@@ -172,7 +172,7 @@ module de.evoal.optimisation.ea.optimisation {
 	}
 
     /**
-     * The elite selector copies a small proportion of the fittest candidates, without changes, into the next
+     * The elite selector copies a small proportion of the fittest individuals, without changes, into the next
      *   generation. This may have a dramatic impact on performance by ensuring that the GA doesn't waste time
      *   re-discovering previously refused partial solutions. Individuals that are preserved through elitism remain
      *   eligible for selection as parents of the next generation. Elitism is also related with memory: remember the

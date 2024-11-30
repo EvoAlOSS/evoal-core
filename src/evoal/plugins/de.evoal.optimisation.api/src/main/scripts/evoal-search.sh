@@ -37,3 +37,5 @@ java ${LOCAL_JVM_ARGUMENTS[@]} \
      "-Boptimisation:optimisation-configuration-file=$2" \
      "-Boptimisation:evaluation-output-folder=$3" \
      ${ADDITIONAL_ARGUMENTS[@]}
+
+exit $?

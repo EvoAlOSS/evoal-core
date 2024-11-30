@@ -3,8 +3,8 @@ package de.evoal.surrogate.main.statistics.ranged;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.properties.PropertySpecification;
 import de.evoal.core.api.properties.info.PropertiesBoundaries;
-import de.evoal.optimisation.api.statistics.Candidate;
-import de.evoal.optimisation.api.statistics.IterationResult;
+import de.evoal.optimisation.api.model.Candidate;
+import de.evoal.optimisation.api.model.Iteration;
 import de.evoal.optimisation.api.statistics.io.Writer;
 import de.evoal.optimisation.api.statistics.io.WriterException;
 import de.evoal.optimisation.api.statistics.io.WriterStrategy;
@@ -92,7 +92,7 @@ public class GenerationStatisticsWriter implements StatisticsWriter {
     }
 
     @Override
-    public void add(final IterationResult result) {
+    public void add(final Iteration result) {
         if(initialGenerationCubes == null) {
             initialGenerationCubes = fillHypercubes(result);
         }
@@ -118,7 +118,7 @@ public class GenerationStatisticsWriter implements StatisticsWriter {
 		}
     }
     
-    private List<Hypercube> fillHypercubes(final IterationResult result){
+    private List<Hypercube> fillHypercubes(final Iteration result){
     	final List<Hypercube> currentCandidates = new ArrayList<>();
 
     	for(int j = 0; j < hypercubeDefinitions.size(); j++) {

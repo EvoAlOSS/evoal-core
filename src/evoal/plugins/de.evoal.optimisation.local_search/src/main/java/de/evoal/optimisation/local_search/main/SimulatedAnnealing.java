@@ -1,7 +1,6 @@
 package de.evoal.optimisation.local_search.main;
 
 import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
-import de.evoal.core.api.cdi.BeanFactory;
 import de.evoal.core.api.cdi.Component;
 import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.optimisation.api.model.OptimisationAlgorithm;
@@ -9,8 +8,8 @@ import de.evoal.optimisation.api.model.OptimisationFunction;
 import de.evoal.optimisation.api.model.OptimisationValue;
 import de.evoal.optimisation.api.model.OptimisationValueComparator;
 import de.evoal.core.api.properties.Properties;
-import de.evoal.optimisation.api.statistics.SimpleCandidate;
-import de.evoal.optimisation.api.statistics.SimpleIterationResult;
+import de.evoal.optimisation.api.model.impl.SimpleCandidate;
+import de.evoal.optimisation.api.model.impl.SimpleIteration;
 import de.evoal.optimisation.api.statistics.writer.StatisticsWriter;
 import de.evoal.languages.model.base.Instance;
 import de.evoal.optimisation.api.model.InitialCandidatesProvider;
@@ -22,7 +21,6 @@ import lombok.extern.slf4j.Slf4j;
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Optional;
 import java.util.Random;
@@ -104,7 +102,7 @@ public class SimulatedAnnealing implements OptimisationAlgorithm {
             }).findFirst();
 
             if (nextCandidate.isEmpty()) {
-                addStatistics(new  SimpleCandidate(currentCandidate, currentValue, 2), iterationNumber);
+                addStatistics(new SimpleCandidate(currentCandidate, currentValue, 2), iterationNumber);
                 log.info("No neighbour accepted in iteration {}. Terminating optimisation.", iterationNumber);
                 break;
             }
@@ -124,6 +122,6 @@ public class SimulatedAnnealing implements OptimisationAlgorithm {
     }
 
     private void addStatistics(SimpleCandidate candidate, int iterationNumber) {
-        this.statistics.add(new SimpleIterationResult(iterationNumber, Collections.singleton(candidate), candidate));
+        this.statistics.add(new SimpleIteration(iterationNumber, Collections.singleton(candidate), candidate));
     }
 }

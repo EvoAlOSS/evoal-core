@@ -16,6 +16,6 @@ public class JeneticsStatisticsWriter {
     }
 
     public void add(final EvolutionResult<?, OptimisationValue> result) {
-        writer.add(new IterationResultAdapter(result));
+        writer.add(new IterationAdapter(result));
     }
 }

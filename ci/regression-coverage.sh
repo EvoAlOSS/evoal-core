@@ -1,16 +1,22 @@
 #!/bin/bash
 
-JACOCO_PATH=/Users/berber/bin/jacoco
-set -e
+set -ex
 
 echo "Downloading Jacoco-Agent"
-mkdir -p ${CI_PROJECT_DIR}/.m2/repository/org/jacoco/org.jacoco.agent/0.8.10/
-curl -o ${CI_PROJECT_DIR}/.m2/repository/org/jacoco/org.jacoco.agent/0.8.10/org.jacoco.agent-0.8.10-runtime.jar https://repo1.maven.org/maven2/org/jacoco/org.jacoco.agent/0.8.10/org.jacoco.agent-0.8.10-runtime.jar
+JACOCO_JAR=${CI_PROJECT_DIR}/.m2/repository/org/jacoco/org.jacoco.agent/0.8.10/org.jacoco.agent-0.8.10-runtime.jar
+
+
+if [ ! -e ${JACOCO_JAR} ]; then
+  mkdir -p `dirname $JACOCO_JAR`
+  curl -o ${JACOCO_JAR} https://repo1.maven.org/maven2/org/jacoco/org.jacoco.agent/0.8.10/org.jacoco.agent-0.8.10-runtime.jar
+fi
+
 pushd evoal/examples
 
-export EVOAL_VM=-javaagent:${CI_PROJECT_DIR}/.m2/repository/org/jacoco/org.jacoco.agent/0.8.10/org.jacoco.agent-0.8.10-runtime.jar=dumponexit=true
 
-set -e
+export EVOAL_VM=-javaagent:${JACOCO_JAR}=dumponexit=true
+
+#set +x +e
 for EXAMPLE in *; do
     if [ ! -d $EXAMPLE ]; then
       continue

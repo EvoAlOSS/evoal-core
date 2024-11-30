@@ -74,5 +74,9 @@ module search {
 	    };
 	
 		'optimisation-function' := 'problem-function' {};
+
+        'stopping-criteria' := [
+            'iteration-count' { 'maximum-iterations' := 10; }
+        ];
 	}
 }

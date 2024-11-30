@@ -5,8 +5,8 @@ import de.evoal.core.api.properties.stream.FileBasedPropertiesStreamSupplier;
 import de.evoal.core.api.properties.stream.PropertiesStreamSupplier;
 import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
 import de.evoal.core.api.cdi.ConfigurationValue;
-import de.evoal.optimisation.api.statistics.Candidate;
-import de.evoal.optimisation.api.statistics.IterationResult;
+import de.evoal.optimisation.api.model.Candidate;
+import de.evoal.optimisation.api.model.Iteration;
 import de.evoal.optimisation.api.statistics.io.Writer;
 import de.evoal.optimisation.api.statistics.io.WriterException;
 import de.evoal.optimisation.api.statistics.io.WriterStrategy;
@@ -42,7 +42,7 @@ public class GenerationStatisticsWriter implements StatisticsWriter {
 
     private long startTime;
 
-    private IterationResult generationWithBestIndividual;
+    private Iteration generationWithBestIndividual;
 
     private long endTime;
 
@@ -143,16 +143,16 @@ public class GenerationStatisticsWriter implements StatisticsWriter {
     }
 
     private Matrix createBestGenerationMatrix() {
-        final List<Candidate> candidates = generationWithBestIndividual.candidates().toList();
+        final List<Candidate> individuals = generationWithBestIndividual.candidates().toList();
 
         final int dimensions = sourceSpec.size();
         final Optional<Integer> optSize = generationWithBestIndividual.candidateCount();
-        final int size = optSize.orElse(candidates.size());
+        final int size = optSize.orElse(individuals.size());
 
         final Matrix result = new Matrix(dimensions, size);
 
         for(int i = 0; i < size; ++i) {
-            final Candidate candidate = candidates.get(i);
+            final Candidate candidate = individuals.get(i);
             final Properties individual = candidate.searchSpaceRepresentation();
 
             final Object [] data = individual.getValues();
@@ -214,12 +214,12 @@ public class GenerationStatisticsWriter implements StatisticsWriter {
         fetchTrainingData();
 
         final Object [] data = new Object[3 + (int)Math.pow(sourceSpec.size(), 2) + 2 + (int)Math.pow(sourceSpec.size(), 2) + 2 + 1];
-        final Candidate bestCandidate = generationWithBestIndividual.bestCandidate();
-        final Properties candidate = bestCandidate.searchSpaceRepresentation();
+        final Candidate bestIndividual = generationWithBestIndividual.bestCandidate();
+        final Properties candidate = bestIndividual.searchSpaceRepresentation();
 
         data[0] = generationWithBestIndividual.iteration();
         data[1] = Arrays.toString(candidate.getValues());
-        data[2] = bestCandidate.age();
+        data[2] = bestIndividual.age();
 
         calculateCovariance(candidate, data, 2 + 1);
         data[data.length - 1] = endTime - startTime;
@@ -239,11 +239,11 @@ public class GenerationStatisticsWriter implements StatisticsWriter {
     }
 
     @Override
-    public void add(final IterationResult result) {
+    public void add(final Iteration result) {
         updateBestGeneration(result);
     }
 
-    private void updateBestGeneration(final IterationResult result) {
+    private void updateBestGeneration(final Iteration result) {
         if(generationWithBestIndividual == null) {
             generationWithBestIndividual = result;
         } else {

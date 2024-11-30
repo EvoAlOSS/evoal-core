@@ -32,7 +32,7 @@ module search {
 		
 		'comparator' := 'numeric-comparator' {};
 	
-	    genotype := 'vector-genotype' {
+	     genotype := 'vector-genotype' {
 	        chromosomes := [
 				'bit-chromosome' {
 	                    scale := 12;
@@ -75,6 +75,10 @@ module search {
 	
 		'optimisation-function' := 'problem-function' {};
 
-		documenting := ['candidates-per-generation' {}];
+        'stopping-criteria' := [
+            'iteration-count' { 'maximum-iterations' := 10; }
+        ];
+
+		documenting := ['candidates-per-iteration' {}];
 	}
 }

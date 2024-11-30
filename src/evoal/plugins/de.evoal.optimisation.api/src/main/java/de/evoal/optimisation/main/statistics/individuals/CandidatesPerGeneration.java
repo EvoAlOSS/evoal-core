@@ -5,7 +5,7 @@ import de.evoal.optimisation.api.model.OptimisationValue;
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.properties.PropertySpecification;
-import de.evoal.optimisation.api.statistics.Candidate;
+import de.evoal.optimisation.api.model.Candidate;
 import de.evoal.optimisation.api.statistics.io.Writer;
 import de.evoal.optimisation.api.statistics.io.WriterException;
 import de.evoal.optimisation.api.statistics.writer.AbstractCandidateStatisticsWriter;
@@ -26,7 +26,7 @@ import java.util.List;
  * Small helper class for collecting and writing the generation-based statistics.
  */
 @Slf4j
-@Named("de.evoal.optimisation.core.candidates-per-generation")
+@Named("de.evoal.optimisation.core.candidates-per-iteration")
 @Dependent
 public class CandidatesPerGeneration extends AbstractCandidateStatisticsWriter {
 
@@ -95,9 +95,9 @@ public class CandidatesPerGeneration extends AbstractCandidateStatisticsWriter {
     }
 
     @Override
-    protected Object [] toData(final int index, final int iteration, final Candidate candidate) {
-        final Properties searchSpace = candidate.searchSpaceRepresentation();
-        final OptimisationValue optimisationSpace = candidate.value();
+    protected Object [] toData(final int index, final int iteration, final Candidate individual) {
+        final Properties searchSpace = individual.searchSpaceRepresentation();
+        final OptimisationValue optimisationSpace = individual.value();
 
         final int searchSpaceSize = searchSpaceSpecification.size();
 

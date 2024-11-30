@@ -1,6 +1,6 @@
 package de.evoal.optimisation.main.statistics.nop;
 
-import de.evoal.optimisation.api.statistics.IterationResult;
+import de.evoal.optimisation.api.model.Iteration;
 import de.evoal.languages.model.base.Instance;
 import de.evoal.optimisation.api.statistics.writer.StatisticsWriter;
 
@@ -12,7 +12,7 @@ import javax.inject.Named;
 @Dependent
 public class NopStatistics implements StatisticsWriter {
     @Override
-    public void add(final IterationResult evolutionResult) {
+    public void add(final Iteration evolutionResult) {
     }
 
     @Override

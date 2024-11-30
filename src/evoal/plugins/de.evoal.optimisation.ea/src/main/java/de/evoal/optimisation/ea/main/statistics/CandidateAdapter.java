@@ -2,7 +2,7 @@ package de.evoal.optimisation.ea.main.statistics;
 
 import de.evoal.optimisation.api.model.OptimisationValue;
 import de.evoal.core.api.properties.Properties;
-import de.evoal.optimisation.api.statistics.Candidate;
+import de.evoal.optimisation.api.model.Candidate;
 import de.evoal.optimisation.ea.api.codec.CustomCodec;
 import io.jenetics.Phenotype;
 

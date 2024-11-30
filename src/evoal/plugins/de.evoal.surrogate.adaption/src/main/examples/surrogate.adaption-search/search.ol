@@ -83,6 +83,10 @@ module search {
 			};
 		};
 
+		'stopping-criteria' := [
+            'iteration-count' { 'maximum-iterations' := 10; }
+		];
+
 		documenting := [
             'correlated' {}//,
 //            'range-correlated' {}
