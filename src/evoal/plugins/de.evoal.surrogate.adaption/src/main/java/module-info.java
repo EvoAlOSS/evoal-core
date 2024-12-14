@@ -17,6 +17,9 @@ module de.evoal.surrogate.adaption {
     requires de.evoal.surrogate.api;
     requires de.evoal.surrogate.smile;
 
+    exports de.evoal.surrogate.adaption.interval.model;
+    exports de.evoal.surrogate.adaption.density.model;
+
     opens de.evoal.surrogate.adaption.density;
     opens de.evoal.surrogate.adaption.interval;
 
