@@ -1,0 +1,24 @@
+import "definitions" from de.evoal.core.math;
+import "definitions" from 'de.evoal.pipeline.base';
+
+module de.evoal.pipeline.io {
+	/**
+	 * Reads the specified data from a file.
+	 */
+	type reader {
+		/**
+		 * Name of the file to read.
+		 */
+		filename : string;
+	}
+	
+	/**
+	 * Writes the specified data to a file.
+	 */
+	type writer {
+		/**
+		 * Name of the file to write.
+		 */
+		filename : string;
+	}
+}

@@ -1049,7 +1049,7 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getTypeDefinition_Attributes() {
+	public EReference getTypeDefinition_Constraints() {
 		return (EReference)typeDefinitionEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -1059,7 +1059,7 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getTypeDefinition_SuperType() {
+	public EReference getTypeDefinition_Attributes() {
 		return (EReference)typeDefinitionEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -1069,8 +1069,18 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 	 * @generated
 	 */
 	@Override
+	public EReference getTypeDefinition_SuperType() {
+		return (EReference)typeDefinitionEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EAttribute getTypeDefinition_Abstract() {
-		return (EAttribute)typeDefinitionEClass.getEStructuralFeatures().get(2);
+		return (EAttribute)typeDefinitionEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -1099,7 +1109,7 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getAttributeDefinition_Type() {
+	public EReference getAttributeDefinition_Constraints() {
 		return (EReference)attributeDefinitionEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -1109,8 +1119,18 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 	 * @generated
 	 */
 	@Override
+	public EReference getAttributeDefinition_Type() {
+		return (EReference)attributeDefinitionEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EAttribute getAttributeDefinition_Name() {
-		return (EAttribute)attributeDefinitionEClass.getEStructuralFeatures().get(1);
+		return (EAttribute)attributeDefinitionEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -1120,7 +1140,7 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 	 */
 	@Override
 	public EReference getAttributeDefinition_Initialisation() {
-		return (EReference)attributeDefinitionEClass.getEStructuralFeatures().get(2);
+		return (EReference)attributeDefinitionEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -1682,12 +1702,14 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 		createEAttribute(definitionEClass, DEFINITION__NAME);
 
 		typeDefinitionEClass = createEClass(TYPE_DEFINITION);
+		createEReference(typeDefinitionEClass, TYPE_DEFINITION__CONSTRAINTS);
 		createEReference(typeDefinitionEClass, TYPE_DEFINITION__ATTRIBUTES);
 		createEReference(typeDefinitionEClass, TYPE_DEFINITION__SUPER_TYPE);
 		createEAttribute(typeDefinitionEClass, TYPE_DEFINITION__ABSTRACT);
 		createEOperation(typeDefinitionEClass, TYPE_DEFINITION___FIND_ATTRIBUTE__STRING);
 
 		attributeDefinitionEClass = createEClass(ATTRIBUTE_DEFINITION);
+		createEReference(attributeDefinitionEClass, ATTRIBUTE_DEFINITION__CONSTRAINTS);
 		createEReference(attributeDefinitionEClass, ATTRIBUTE_DEFINITION__TYPE);
 		createEAttribute(attributeDefinitionEClass, ATTRIBUTE_DEFINITION__NAME);
 		createEReference(attributeDefinitionEClass, ATTRIBUTE_DEFINITION__INITIALISATION);
@@ -1865,7 +1887,7 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 		initEClass(numberLiteralEClass, NumberLiteral.class, "NumberLiteral", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getNumberLiteral_Factor(), this.getFactor(), "factor", "None", 1, 1, NumberLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEOperation(getNumberLiteral__GetValue(), ecorePackage.getEJavaObject(), "getValue", 1, 1, IS_UNIQUE, IS_ORDERED);
+		initEOperation(getNumberLiteral__GetValue(), null, "getValue", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(integerLiteralEClass, IntegerLiteral.class, "IntegerLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getIntegerLiteral_Literal(), ecorePackage.getEInt(), "literal", null, 1, 1, IntegerLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1900,6 +1922,7 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 		initEAttribute(getDefinition_Name(), ecorePackage.getEString(), "name", null, 0, 1, Definition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(typeDefinitionEClass, TypeDefinition.class, "TypeDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getTypeDefinition_Constraints(), this.getInstance(), null, "constraints", null, 0, -1, TypeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getTypeDefinition_Attributes(), this.getAttributeDefinition(), null, "attributes", null, 0, -1, TypeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getTypeDefinition_SuperType(), this.getTypeDefinition(), null, "superType", null, 0, 1, TypeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTypeDefinition_Abstract(), ecorePackage.getEBoolean(), "abstract", "false", 1, 1, TypeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1908,6 +1931,7 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 		addEParameter(op, ecorePackage.getEString(), "name", 1, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(attributeDefinitionEClass, AttributeDefinition.class, "AttributeDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getAttributeDefinition_Constraints(), this.getInstance(), null, "constraints", null, 0, -1, AttributeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getAttributeDefinition_Type(), this.getType(), null, "type", null, 1, 1, AttributeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAttributeDefinition_Name(), ecorePackage.getEString(), "name", null, 1, 1, AttributeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAttributeDefinition_Initialisation(), this.getExpression(), null, "initialisation", null, 0, 1, AttributeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2107,6 +2131,18 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 		   });
 		addAnnotation
 		  (getCall_Parameters(),
+		   source,
+		   new String[] {
+			   "nullFree", "false"
+		   });
+		addAnnotation
+		  (getTypeDefinition_Constraints(),
+		   source,
+		   new String[] {
+			   "nullFree", "false"
+		   });
+		addAnnotation
+		  (getAttributeDefinition_Constraints(),
 		   source,
 		   new String[] {
 			   "nullFree", "false"

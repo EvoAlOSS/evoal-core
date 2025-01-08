@@ -18,6 +18,8 @@ module de.evoal.generator.main {
     requires de.evoal.languages.model.dl;
     requires de.evoal.languages.model.base;
     requires de.evoal.languages.model.generator;
+    requires de.evoal.languages.model.pipeline;
+    requires de.evoal.languages.model.dynamic;
     requires de.evoal.languages.model.instance;
 
     requires de.evoal.languages.model.ddl.dsl;
@@ -29,8 +31,10 @@ module de.evoal.generator.main {
 
     requires de.evoal.core.main;
     requires de.evoal.optimisation.api;
+    requires com.google.common;
 
     opens de.evoal.generator;
+    opens de.evoal.pipeline;
 
     opens de.evoal.generator.main;
     opens de.evoal.generator.main.benchmarks;
@@ -41,4 +45,16 @@ module de.evoal.generator.main {
     exports de.evoal.generator.api;
     opens de.evoal.generator.api to weld.core.impl;
     opens de.evoal.generator.main.functions.distributions;
+
+
+    opens de.evoal.pipeline.api.board to weld.core.impl;
+    opens de.evoal.pipeline.api.cdi to weld.core.impl;
+    opens de.evoal.pipeline.api.distribution to weld.core.impl;
+
+    opens de.evoal.pipeline.impl to weld.core.impl;
+    opens de.evoal.pipeline.impl.components.benchmarks to weld.core.impl;
+    opens de.evoal.pipeline.impl.components.io to weld.core.impl;
+    opens de.evoal.pipeline.impl.components.misc to weld.core.impl;
+    opens de.evoal.pipeline.impl.components.distributions to weld.core.impl;
+    opens de.evoal.pipeline.impl.internal to weld.core.impl;
 }

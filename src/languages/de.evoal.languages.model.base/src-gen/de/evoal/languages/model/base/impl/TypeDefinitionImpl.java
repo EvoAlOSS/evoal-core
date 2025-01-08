@@ -4,6 +4,7 @@ package de.evoal.languages.model.base.impl;
 
 import de.evoal.languages.model.base.AttributeDefinition;
 import de.evoal.languages.model.base.BasePackage;
+import de.evoal.languages.model.base.Instance;
 import de.evoal.languages.model.base.TypeDefinition;
 
 import java.lang.reflect.InvocationTargetException;
@@ -30,6 +31,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link de.evoal.languages.model.base.impl.TypeDefinitionImpl#getConstraints <em>Constraints</em>}</li>
  *   <li>{@link de.evoal.languages.model.base.impl.TypeDefinitionImpl#getAttributes <em>Attributes</em>}</li>
  *   <li>{@link de.evoal.languages.model.base.impl.TypeDefinitionImpl#getSuperType <em>Super Type</em>}</li>
  *   <li>{@link de.evoal.languages.model.base.impl.TypeDefinitionImpl#isAbstract <em>Abstract</em>}</li>
@@ -38,6 +40,16 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * @generated
  */
 public class TypeDefinitionImpl extends DefinitionImpl implements TypeDefinition {
+	/**
+	 * The cached value of the '{@link #getConstraints() <em>Constraints</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getConstraints()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Instance> constraints;
+
 	/**
 	 * The cached value of the '{@link #getAttributes() <em>Attributes</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -95,6 +107,19 @@ public class TypeDefinitionImpl extends DefinitionImpl implements TypeDefinition
 	@Override
 	protected EClass eStaticClass() {
 		return BasePackage.Literals.TYPE_DEFINITION;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EList<Instance> getConstraints() {
+		if (constraints == null) {
+			constraints = new EObjectContainmentEList<Instance>(Instance.class, this, BasePackage.TYPE_DEFINITION__CONSTRAINTS);
+		}
+		return constraints;
 	}
 
 	/**
@@ -200,6 +225,8 @@ public class TypeDefinitionImpl extends DefinitionImpl implements TypeDefinition
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case BasePackage.TYPE_DEFINITION__CONSTRAINTS:
+				return ((InternalEList<?>)getConstraints()).basicRemove(otherEnd, msgs);
 			case BasePackage.TYPE_DEFINITION__ATTRIBUTES:
 				return ((InternalEList<?>)getAttributes()).basicRemove(otherEnd, msgs);
 		}
@@ -214,6 +241,8 @@ public class TypeDefinitionImpl extends DefinitionImpl implements TypeDefinition
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case BasePackage.TYPE_DEFINITION__CONSTRAINTS:
+				return getConstraints();
 			case BasePackage.TYPE_DEFINITION__ATTRIBUTES:
 				return getAttributes();
 			case BasePackage.TYPE_DEFINITION__SUPER_TYPE:
@@ -234,6 +263,10 @@ public class TypeDefinitionImpl extends DefinitionImpl implements TypeDefinition
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case BasePackage.TYPE_DEFINITION__CONSTRAINTS:
+				getConstraints().clear();
+				getConstraints().addAll((Collection<? extends Instance>)newValue);
+				return;
 			case BasePackage.TYPE_DEFINITION__ATTRIBUTES:
 				getAttributes().clear();
 				getAttributes().addAll((Collection<? extends AttributeDefinition>)newValue);
@@ -256,6 +289,9 @@ public class TypeDefinitionImpl extends DefinitionImpl implements TypeDefinition
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case BasePackage.TYPE_DEFINITION__CONSTRAINTS:
+				getConstraints().clear();
+				return;
 			case BasePackage.TYPE_DEFINITION__ATTRIBUTES:
 				getAttributes().clear();
 				return;
@@ -277,6 +313,8 @@ public class TypeDefinitionImpl extends DefinitionImpl implements TypeDefinition
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case BasePackage.TYPE_DEFINITION__CONSTRAINTS:
+				return constraints != null && !constraints.isEmpty();
 			case BasePackage.TYPE_DEFINITION__ATTRIBUTES:
 				return attributes != null && !attributes.isEmpty();
 			case BasePackage.TYPE_DEFINITION__SUPER_TYPE:

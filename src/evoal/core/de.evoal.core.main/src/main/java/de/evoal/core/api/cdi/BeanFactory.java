@@ -11,6 +11,7 @@ import org.apache.deltaspike.core.api.provider.BeanProvider;
 
 import javax.enterprise.inject.spi.Bean;
 import java.util.Set;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 /**
@@ -91,12 +92,41 @@ public final class BeanFactory {
         }
     }
 
+    public static <T extends EvoalComponent<T>> T createComponent(final Class<T> type, final String name, final Instance configuration, final Consumer<T> preInit) {
+        Requirements.requireNotNull(type);
+        Requirements.requireNotNull(name);
+        Requirements.requireNotNull(configuration);
+        Requirements.requireNotNull(preInit);
+
+        log.info("Creating bean for instance of type {}.", name);
+        try {
+            final T instance = BeanProvider.getContextualReference(name, false, type);
+            preInit.accept(instance);
+            instance.init(configuration);
+
+            return instance;
+        } catch (final IllegalStateException | IllegalArgumentException | InitializationException e) {
+            log.error("Failed to create contextual reference of type '{}' with name '{}'.", type, name);
+            logInstantiationError(type, e);
+
+            throw new RuntimeException("Failed to instantiate component due to an error.", e);
+        }
+    }
+
     public static <T extends EvoalComponent<T>> T createComponent(final Class<T> type, final Instance configuration) {
         Requirements.requireNotNull(configuration);
 
         final String name = new FQNProvider().get(configuration);
 
         return createComponent(type, name, configuration);
+    }
+
+    public static <T extends EvoalComponent<T>> T createComponent(final Class<T> type, final Instance configuration, final Consumer<T> preInit) {
+        Requirements.requireNotNull(configuration);
+
+        final String name = new FQNProvider().get(configuration);
+
+        return createComponent(type, name, configuration, preInit);
     }
 
     public static <T extends EvoalComponent<T>> T createComponent(final Class<T> type, final Instance configuration, final String nameSuffix) {

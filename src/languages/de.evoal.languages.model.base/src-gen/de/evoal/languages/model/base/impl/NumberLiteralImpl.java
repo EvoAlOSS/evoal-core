@@ -6,8 +6,10 @@ import de.evoal.languages.model.base.BasePackage;
 import de.evoal.languages.model.base.Factor;
 import de.evoal.languages.model.base.NumberLiteral;
 
+import java.lang.reflect.InvocationTargetException;
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -94,6 +96,18 @@ public abstract class NumberLiteralImpl extends LiteralImpl implements NumberLit
 	 * @generated
 	 */
 	@Override
+	public Number getValue() {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case BasePackage.NUMBER_LITERAL__FACTOR:
@@ -144,6 +158,21 @@ public abstract class NumberLiteralImpl extends LiteralImpl implements NumberLit
 				return factor != FACTOR_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		switch (operationID) {
+			case BasePackage.NUMBER_LITERAL___GET_VALUE:
+				getValue();
+				return null;
+		}
+		return super.eInvoke(operationID, arguments);
 	}
 
 	/**

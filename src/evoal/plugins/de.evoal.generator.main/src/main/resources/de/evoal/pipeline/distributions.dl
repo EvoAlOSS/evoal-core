@@ -1,0 +1,75 @@
+import "definitions" from de.evoal.core.math;
+import "definitions" from 'de.evoal.pipeline.base';
+import "definitions" from de.evoal.core.constraints;
+
+module de.evoal.pipeline.distributions {
+    /**
+     * Base type for all distributions.
+     */
+	abstract type distribution {}
+
+    /**
+     * Multivariate normal distribution.
+     */
+	type 'multivariate-normal-distribution' extends distribution {
+	    /**
+	     * Mean value for each dimension.
+	     */
+		means : array real;
+
+		/**
+		 * Covariance values between all dimension.
+		 */
+		covariance : array array real;
+	}
+
+	/**
+	 * A distribution specification.
+	 */
+	type 'normal-distribution' extends distribution {
+		/**
+		 * The distribution's expected value.
+		 */
+		'μ' : real;
+
+		/**
+		 * The distribution's standard deviation.
+		 */
+		'σ' : real;
+	}
+
+	/**
+	 * Specification for uniform distribution.
+	 */
+	type 'uniform-distribution' extends distribution {
+	    /**
+	    * parameter for lower bound
+	    */
+	    'lower' :real;
+	    /**
+	    * parameter for upper bound
+	    */
+	    'upper' : real;
+	}
+
+	type 'distribution-based-data' extends Source {
+		/**
+		 * The different distributions to use. Make sure it matches the size of
+		 *   the data the function writes.
+		 */
+		distributions : array instance distribution;
+	}
+
+
+	/**
+	 * Adds noise to data. For each data to noise, you can specify a
+	 *   separate distribution.
+	 */
+	type 'noise-data' {
+		/**
+		 * The different distributions to use. Make sure it matches the size of
+		 *   the data the function writes.
+		 */
+		distributions : array instance distribution;
+	}
+}

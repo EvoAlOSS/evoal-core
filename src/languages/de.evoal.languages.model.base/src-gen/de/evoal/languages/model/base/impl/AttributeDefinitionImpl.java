@@ -5,16 +5,21 @@ package de.evoal.languages.model.base.impl;
 import de.evoal.languages.model.base.AttributeDefinition;
 import de.evoal.languages.model.base.BasePackage;
 import de.evoal.languages.model.base.Expression;
+import de.evoal.languages.model.base.Instance;
 import de.evoal.languages.model.base.Type;
 
+import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -24,6 +29,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link de.evoal.languages.model.base.impl.AttributeDefinitionImpl#getConstraints <em>Constraints</em>}</li>
  *   <li>{@link de.evoal.languages.model.base.impl.AttributeDefinitionImpl#getType <em>Type</em>}</li>
  *   <li>{@link de.evoal.languages.model.base.impl.AttributeDefinitionImpl#getName <em>Name</em>}</li>
  *   <li>{@link de.evoal.languages.model.base.impl.AttributeDefinitionImpl#getInitialisation <em>Initialisation</em>}</li>
@@ -32,6 +38,16 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * @generated
  */
 public class AttributeDefinitionImpl extends MinimalEObjectImpl.Container implements AttributeDefinition {
+	/**
+	 * The cached value of the '{@link #getConstraints() <em>Constraints</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getConstraints()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Instance> constraints;
+
 	/**
 	 * The cached value of the '{@link #getType() <em>Type</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -89,6 +105,19 @@ public class AttributeDefinitionImpl extends MinimalEObjectImpl.Container implem
 	@Override
 	protected EClass eStaticClass() {
 		return BasePackage.Literals.ATTRIBUTE_DEFINITION;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EList<Instance> getConstraints() {
+		if (constraints == null) {
+			constraints = new EObjectContainmentEList<Instance>(Instance.class, this, BasePackage.ATTRIBUTE_DEFINITION__CONSTRAINTS);
+		}
+		return constraints;
 	}
 
 	/**
@@ -212,6 +241,8 @@ public class AttributeDefinitionImpl extends MinimalEObjectImpl.Container implem
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case BasePackage.ATTRIBUTE_DEFINITION__CONSTRAINTS:
+				return ((InternalEList<?>)getConstraints()).basicRemove(otherEnd, msgs);
 			case BasePackage.ATTRIBUTE_DEFINITION__TYPE:
 				return basicSetType(null, msgs);
 			case BasePackage.ATTRIBUTE_DEFINITION__INITIALISATION:
@@ -228,6 +259,8 @@ public class AttributeDefinitionImpl extends MinimalEObjectImpl.Container implem
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case BasePackage.ATTRIBUTE_DEFINITION__CONSTRAINTS:
+				return getConstraints();
 			case BasePackage.ATTRIBUTE_DEFINITION__TYPE:
 				return getType();
 			case BasePackage.ATTRIBUTE_DEFINITION__NAME:
@@ -243,9 +276,14 @@ public class AttributeDefinitionImpl extends MinimalEObjectImpl.Container implem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case BasePackage.ATTRIBUTE_DEFINITION__CONSTRAINTS:
+				getConstraints().clear();
+				getConstraints().addAll((Collection<? extends Instance>)newValue);
+				return;
 			case BasePackage.ATTRIBUTE_DEFINITION__TYPE:
 				setType((Type)newValue);
 				return;
@@ -267,6 +305,9 @@ public class AttributeDefinitionImpl extends MinimalEObjectImpl.Container implem
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case BasePackage.ATTRIBUTE_DEFINITION__CONSTRAINTS:
+				getConstraints().clear();
+				return;
 			case BasePackage.ATTRIBUTE_DEFINITION__TYPE:
 				setType((Type)null);
 				return;
@@ -288,6 +329,8 @@ public class AttributeDefinitionImpl extends MinimalEObjectImpl.Container implem
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case BasePackage.ATTRIBUTE_DEFINITION__CONSTRAINTS:
+				return constraints != null && !constraints.isEmpty();
 			case BasePackage.ATTRIBUTE_DEFINITION__TYPE:
 				return type != null;
 			case BasePackage.ATTRIBUTE_DEFINITION__NAME:

@@ -4,6 +4,7 @@ package de.evoal.languages.model.ddl.impl;
 
 import de.evoal.languages.model.base.Expression;
 
+import de.evoal.languages.model.base.Instance;
 import de.evoal.languages.model.base.impl.DefinitionImpl;
 import de.evoal.languages.model.ddl.DataDescription;
 import de.evoal.languages.model.ddl.DdlPackage;
@@ -26,6 +27,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * </p>
  * <ul>
  *   <li>{@link de.evoal.languages.model.ddl.impl.DataDescriptionImpl#getConstraints <em>Constraints</em>}</li>
+ *   <li>{@link de.evoal.languages.model.ddl.impl.DataDescriptionImpl#getConstraints2 <em>Constraints2</em>}</li>
  * </ul>
  *
  * @generated
@@ -40,6 +42,16 @@ public abstract class DataDescriptionImpl extends DefinitionImpl implements Data
 	 * @ordered
 	 */
 	protected EList<Expression> constraints;
+
+	/**
+	 * The cached value of the '{@link #getConstraints2() <em>Constraints2</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getConstraints2()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Instance> constraints2;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -79,10 +91,25 @@ public abstract class DataDescriptionImpl extends DefinitionImpl implements Data
 	 * @generated
 	 */
 	@Override
+	public EList<Instance> getConstraints2() {
+		if (constraints2 == null) {
+			constraints2 = new EObjectContainmentEList<Instance>(Instance.class, this, DdlPackage.DATA_DESCRIPTION__CONSTRAINTS2);
+		}
+		return constraints2;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case DdlPackage.DATA_DESCRIPTION__CONSTRAINTS:
 				return ((InternalEList<?>)getConstraints()).basicRemove(otherEnd, msgs);
+			case DdlPackage.DATA_DESCRIPTION__CONSTRAINTS2:
+				return ((InternalEList<?>)getConstraints2()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -97,6 +124,8 @@ public abstract class DataDescriptionImpl extends DefinitionImpl implements Data
 		switch (featureID) {
 			case DdlPackage.DATA_DESCRIPTION__CONSTRAINTS:
 				return getConstraints();
+			case DdlPackage.DATA_DESCRIPTION__CONSTRAINTS2:
+				return getConstraints2();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -114,6 +143,10 @@ public abstract class DataDescriptionImpl extends DefinitionImpl implements Data
 				getConstraints().clear();
 				getConstraints().addAll((Collection<? extends Expression>)newValue);
 				return;
+			case DdlPackage.DATA_DESCRIPTION__CONSTRAINTS2:
+				getConstraints2().clear();
+				getConstraints2().addAll((Collection<? extends Instance>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -129,6 +162,9 @@ public abstract class DataDescriptionImpl extends DefinitionImpl implements Data
 			case DdlPackage.DATA_DESCRIPTION__CONSTRAINTS:
 				getConstraints().clear();
 				return;
+			case DdlPackage.DATA_DESCRIPTION__CONSTRAINTS2:
+				getConstraints2().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -143,6 +179,8 @@ public abstract class DataDescriptionImpl extends DefinitionImpl implements Data
 		switch (featureID) {
 			case DdlPackage.DATA_DESCRIPTION__CONSTRAINTS:
 				return constraints != null && !constraints.isEmpty();
+			case DdlPackage.DATA_DESCRIPTION__CONSTRAINTS2:
+				return constraints2 != null && !constraints2.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

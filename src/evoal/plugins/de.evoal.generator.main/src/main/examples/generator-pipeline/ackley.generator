@@ -1,0 +1,38 @@
+import "definitions" from de.evoal.core.math;
+import "definitions" from 'de.evoal.pipeline.base';
+import "definitions" from 'de.evoal.pipeline.benchmarks';
+import "definitions" from 'de.evoal.pipeline.distributions';
+import "data" from ackley;
+
+
+module ackley {
+	/**
+	 * Introduce a simple pipeline that generates some test data using
+	 *   the Ackley function.
+	 */
+	pipeline 'main-pipeline' [
+		/**
+		 * First, we generate some normally distributed data.
+		 */
+		step {
+			component 'distribution-based-data' {
+				distributions := ['normal-distribution' {
+					'μ' := 0.0;
+					'σ' := 5.12;
+				}];
+			}
+			
+			writes [data 'x:0'];
+		}
+
+	    step {
+	        component 'ackley' {
+	        }
+	
+	        reads [data 'x:0'];
+	        writes [data 'y:0'];
+	     }
+	]
+	
+	write "ackley.arff" with 1000 samples from executing [ pipeline 'main-pipeline'];
+}

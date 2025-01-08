@@ -1047,13 +1047,22 @@ public interface BasePackage extends EPackage {
 	int TYPE_DEFINITION__NAME = DEFINITION__NAME;
 
 	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_DEFINITION__CONSTRAINTS = DEFINITION_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Attributes</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_DEFINITION__ATTRIBUTES = DEFINITION_FEATURE_COUNT + 0;
+	int TYPE_DEFINITION__ATTRIBUTES = DEFINITION_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Super Type</b></em>' reference.
@@ -1062,7 +1071,7 @@ public interface BasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_DEFINITION__SUPER_TYPE = DEFINITION_FEATURE_COUNT + 1;
+	int TYPE_DEFINITION__SUPER_TYPE = DEFINITION_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
@@ -1071,7 +1080,7 @@ public interface BasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_DEFINITION__ABSTRACT = DEFINITION_FEATURE_COUNT + 2;
+	int TYPE_DEFINITION__ABSTRACT = DEFINITION_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Type Definition</em>' class.
@@ -1080,7 +1089,7 @@ public interface BasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_DEFINITION_FEATURE_COUNT = DEFINITION_FEATURE_COUNT + 3;
+	int TYPE_DEFINITION_FEATURE_COUNT = DEFINITION_FEATURE_COUNT + 4;
 
 	/**
 	 * The operation id for the '<em>Find Attribute</em>' operation.
@@ -1111,13 +1120,22 @@ public interface BasePackage extends EPackage {
 	int ATTRIBUTE_DEFINITION = 24;
 
 	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE_DEFINITION__CONSTRAINTS = 0;
+
+	/**
 	 * The feature id for the '<em><b>Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ATTRIBUTE_DEFINITION__TYPE = 0;
+	int ATTRIBUTE_DEFINITION__TYPE = 1;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1126,7 +1144,7 @@ public interface BasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ATTRIBUTE_DEFINITION__NAME = 1;
+	int ATTRIBUTE_DEFINITION__NAME = 2;
 
 	/**
 	 * The feature id for the '<em><b>Initialisation</b></em>' containment reference.
@@ -1135,7 +1153,7 @@ public interface BasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ATTRIBUTE_DEFINITION__INITIALISATION = 2;
+	int ATTRIBUTE_DEFINITION__INITIALISATION = 3;
 
 	/**
 	 * The number of structural features of the '<em>Attribute Definition</em>' class.
@@ -1144,7 +1162,7 @@ public interface BasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ATTRIBUTE_DEFINITION_FEATURE_COUNT = 3;
+	int ATTRIBUTE_DEFINITION_FEATURE_COUNT = 4;
 
 	/**
 	 * The number of operations of the '<em>Attribute Definition</em>' class.
@@ -2553,6 +2571,17 @@ public interface BasePackage extends EPackage {
 	EClass getTypeDefinition();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.base.TypeDefinition#getConstraints <em>Constraints</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Constraints</em>'.
+	 * @see de.evoal.languages.model.base.TypeDefinition#getConstraints()
+	 * @see #getTypeDefinition()
+	 * @generated
+	 */
+	EReference getTypeDefinition_Constraints();
+
+	/**
 	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.base.TypeDefinition#getAttributes <em>Attributes</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2604,6 +2633,17 @@ public interface BasePackage extends EPackage {
 	 * @generated
 	 */
 	EClass getAttributeDefinition();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.base.AttributeDefinition#getConstraints <em>Constraints</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Constraints</em>'.
+	 * @see de.evoal.languages.model.base.AttributeDefinition#getConstraints()
+	 * @see #getAttributeDefinition()
+	 * @generated
+	 */
+	EReference getAttributeDefinition_Constraints();
 
 	/**
 	 * Returns the meta object for the containment reference '{@link de.evoal.languages.model.base.AttributeDefinition#getType <em>Type</em>}'.
@@ -3635,6 +3675,14 @@ public interface BasePackage extends EPackage {
 		EClass TYPE_DEFINITION = eINSTANCE.getTypeDefinition();
 
 		/**
+		 * The meta object literal for the '<em><b>Constraints</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TYPE_DEFINITION__CONSTRAINTS = eINSTANCE.getTypeDefinition_Constraints();
+
+		/**
 		 * The meta object literal for the '<em><b>Attributes</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3675,6 +3723,14 @@ public interface BasePackage extends EPackage {
 		 * @generated
 		 */
 		EClass ATTRIBUTE_DEFINITION = eINSTANCE.getAttributeDefinition();
+
+		/**
+		 * The meta object literal for the '<em><b>Constraints</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ATTRIBUTE_DEFINITION__CONSTRAINTS = eINSTANCE.getAttributeDefinition_Constraints();
 
 		/**
 		 * The meta object literal for the '<em><b>Type</b></em>' containment reference feature.

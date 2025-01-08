@@ -152,12 +152,18 @@ BooleanLiteralRule returns BooleanLiteral:
 ;
 
 TypeDefinitionRule returns TypeDefinition:
+	(constraints += ConstraintRule)*
 	(abstract?='abstract')? 'type' name = StringOrId ('extends' superType = [TypeDefinition|QualifiedName])? '{'
 		attributes += AttributeDefinitionRule*
 	'}'
 ;
 
+ConstraintRule returns Instance:
+	'@' InstanceLiteralRule
+;
+
 AttributeDefinitionRule returns AttributeDefinition:
+	(constraints += ConstraintRule)*
 	name = StringOrId ':' type = TypeRule (':=' initialisation = ExpressionRule)? ';'
 ;
 

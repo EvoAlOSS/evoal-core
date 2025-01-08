@@ -5,6 +5,8 @@ package de.evoal.languages.model.base.impl;
 import de.evoal.languages.model.base.BasePackage;
 import de.evoal.languages.model.base.IntegerLiteral;
 
+import de.evoal.languages.model.base.Literal;
+import de.evoal.languages.model.base.NumberLiteral;
 import java.lang.reflect.InvocationTargetException;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -158,6 +160,28 @@ public class IntegerLiteralImpl extends NumberLiteralImpl implements IntegerLite
 				return literal != LITERAL_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedOperationID(int baseOperationID, Class<?> baseClass) {
+		if (baseClass == Literal.class) {
+			switch (baseOperationID) {
+				case BasePackage.LITERAL___GET_VALUE: return BasePackage.INTEGER_LITERAL___GET_VALUE;
+				default: return super.eDerivedOperationID(baseOperationID, baseClass);
+			}
+		}
+		if (baseClass == NumberLiteral.class) {
+			switch (baseOperationID) {
+				case BasePackage.NUMBER_LITERAL___GET_VALUE: return BasePackage.INTEGER_LITERAL___GET_VALUE;
+				default: return super.eDerivedOperationID(baseOperationID, baseClass);
+			}
+		}
+		return super.eDerivedOperationID(baseOperationID, baseClass);
 	}
 
 	/**

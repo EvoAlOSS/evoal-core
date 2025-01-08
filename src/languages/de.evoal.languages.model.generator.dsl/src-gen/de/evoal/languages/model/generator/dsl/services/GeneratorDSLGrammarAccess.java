@@ -1212,6 +1212,7 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 	}
 	
 	//TypeDefinitionRule returns TypeDefinition:
+	//    (constraints += ConstraintRule)*
 	//    (abstract?='abstract')? 'type' name = StringOrId ('extends' superType = [TypeDefinition|QualifiedName])? '{'
 	//        attributes += AttributeDefinitionRule*
 	//    '}'
@@ -1224,7 +1225,19 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 		return getTypeDefinitionRuleAccess().getRule();
 	}
 	
+	//ConstraintRule returns Instance:
+	//    '@' InstanceLiteralRule
+	//;
+	public BaseLanguageGrammarAccess.ConstraintRuleElements getConstraintRuleAccess() {
+		return gaBaseLanguage.getConstraintRuleAccess();
+	}
+	
+	public ParserRule getConstraintRuleRule() {
+		return getConstraintRuleAccess().getRule();
+	}
+	
 	//AttributeDefinitionRule returns AttributeDefinition:
+	//    (constraints += ConstraintRule)*
 	//    name = StringOrId ':' type = TypeRule (':=' initialisation = ExpressionRule)? ';'
 	//;
 	public BaseLanguageGrammarAccess.AttributeDefinitionRuleElements getAttributeDefinitionRuleAccess() {

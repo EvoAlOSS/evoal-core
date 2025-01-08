@@ -1,0 +1,28 @@
+import "definitions" from de.evoal.core.math;
+
+module de.evoal.pipeline.base {
+    /**
+     * Base type for all pipeline elements.
+     */
+    abstract type Component {}
+
+    /**
+     * A single step in a pipeline
+     */
+    abstract type Step extends Component {}
+
+    /**
+     * A step that processes input data and generates output data.
+     */
+    abstract type Processor extends Step {}
+
+    /**
+     * A component that generates data without consuming.
+     */
+    abstract type Source extends Step {}
+
+    /**
+     * A component that generates data without consuming.
+     */
+    abstract type Sink extends Step {}
+}

@@ -1,0 +1,18 @@
+module de.evoal.core.constraints {
+    abstract type Constraint {
+    }
+
+    type LowerBoundary extends Constraint {
+        boundary : int;
+        inclusive : boolean := true;
+    }
+
+    type UpperBoundary extends Constraint {
+        boundary : int;
+        inclusive : boolean := true;
+    }
+
+    type MultiVariateConstraint extends Constraint {
+        'expression' : expression   ;
+    }
+}

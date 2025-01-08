@@ -307,6 +307,10 @@
 		<module>de.evoal.languages.model.generator.dsl.ide</module>
 		<module>de.evoal.languages.model.generator.dsl.ui</module>
 
+		<module>de.evoal.languages.model.pipeline</module>
+		<module>de.evoal.languages.model.dynamic</module>
+		<module>de.evoal.languages.model.constraints</module>
+
 		<module>de.evoal.languages.model.interpreter</module>
 
 		<module>de.evoal.languages.releng.feature</module>

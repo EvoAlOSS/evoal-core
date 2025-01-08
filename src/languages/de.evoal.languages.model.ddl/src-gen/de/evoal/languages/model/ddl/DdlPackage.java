@@ -170,13 +170,22 @@ public interface DdlPackage extends EPackage {
 	int DATA_TYPE_DEFINITION__CONSTRAINTS = 3;
 
 	/**
+	 * The feature id for the '<em><b>Constraints2</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_TYPE_DEFINITION__CONSTRAINTS2 = 4;
+
+	/**
 	 * The number of structural features of the '<em>Data Type Definition</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DATA_TYPE_DEFINITION_FEATURE_COUNT = 4;
+	int DATA_TYPE_DEFINITION_FEATURE_COUNT = 5;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.ddl.impl.DataDescriptionImpl <em>Data Description</em>}' class.
@@ -207,13 +216,22 @@ public interface DdlPackage extends EPackage {
 	int DATA_DESCRIPTION__CONSTRAINTS = BasePackage.DEFINITION_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Constraints2</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_DESCRIPTION__CONSTRAINTS2 = BasePackage.DEFINITION_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Data Description</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DATA_DESCRIPTION_FEATURE_COUNT = BasePackage.DEFINITION_FEATURE_COUNT + 1;
+	int DATA_DESCRIPTION_FEATURE_COUNT = BasePackage.DEFINITION_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.ddl.impl.BaseDataDescriptionImpl <em>Base Data Description</em>}' class.
@@ -242,6 +260,15 @@ public interface DdlPackage extends EPackage {
 	 * @ordered
 	 */
 	int BASE_DATA_DESCRIPTION__CONSTRAINTS = DATA_DESCRIPTION__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Constraints2</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BASE_DATA_DESCRIPTION__CONSTRAINTS2 = DATA_DESCRIPTION__CONSTRAINTS2;
 
 	/**
 	 * The feature id for the '<em><b>Representation</b></em>' attribute.
@@ -288,6 +315,15 @@ public interface DdlPackage extends EPackage {
 	 * @ordered
 	 */
 	int TYPED_BASE_DATA_DESCRIPTION__CONSTRAINTS = BASE_DATA_DESCRIPTION__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Constraints2</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPED_BASE_DATA_DESCRIPTION__CONSTRAINTS2 = BASE_DATA_DESCRIPTION__CONSTRAINTS2;
 
 	/**
 	 * The feature id for the '<em><b>Representation</b></em>' attribute.
@@ -355,6 +391,15 @@ public interface DdlPackage extends EPackage {
 	int UNTYPED_BASE_DATA_DESCRIPTION__CONSTRAINTS = BASE_DATA_DESCRIPTION__CONSTRAINTS;
 
 	/**
+	 * The feature id for the '<em><b>Constraints2</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNTYPED_BASE_DATA_DESCRIPTION__CONSTRAINTS2 = BASE_DATA_DESCRIPTION__CONSTRAINTS2;
+
+	/**
 	 * The feature id for the '<em><b>Representation</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -398,6 +443,15 @@ public interface DdlPackage extends EPackage {
 	 * @ordered
 	 */
 	int STRUCTURED_DATA_DESCRIPTION__CONSTRAINTS = DATA_DESCRIPTION__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Constraints2</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURED_DATA_DESCRIPTION__CONSTRAINTS2 = DATA_DESCRIPTION__CONSTRAINTS2;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -605,6 +659,17 @@ public interface DdlPackage extends EPackage {
 	EReference getDataTypeDefinition_Constraints();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.ddl.DataTypeDefinition#getConstraints2 <em>Constraints2</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Constraints2</em>'.
+	 * @see de.evoal.languages.model.ddl.DataTypeDefinition#getConstraints2()
+	 * @see #getDataTypeDefinition()
+	 * @generated
+	 */
+	EReference getDataTypeDefinition_Constraints2();
+
+	/**
 	 * Returns the meta object for class '{@link de.evoal.languages.model.ddl.DataDescription <em>Data Description</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -624,6 +689,17 @@ public interface DdlPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getDataDescription_Constraints();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.ddl.DataDescription#getConstraints2 <em>Constraints2</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Constraints2</em>'.
+	 * @see de.evoal.languages.model.ddl.DataDescription#getConstraints2()
+	 * @see #getDataDescription()
+	 * @generated
+	 */
+	EReference getDataDescription_Constraints2();
 
 	/**
 	 * Returns the meta object for class '{@link de.evoal.languages.model.ddl.BaseDataDescription <em>Base Data Description</em>}'.
@@ -875,6 +951,14 @@ public interface DdlPackage extends EPackage {
 		EReference DATA_TYPE_DEFINITION__CONSTRAINTS = eINSTANCE.getDataTypeDefinition_Constraints();
 
 		/**
+		 * The meta object literal for the '<em><b>Constraints2</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DATA_TYPE_DEFINITION__CONSTRAINTS2 = eINSTANCE.getDataTypeDefinition_Constraints2();
+
+		/**
 		 * The meta object literal for the '{@link de.evoal.languages.model.ddl.impl.DataDescriptionImpl <em>Data Description</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -891,6 +975,14 @@ public interface DdlPackage extends EPackage {
 		 * @generated
 		 */
 		EReference DATA_DESCRIPTION__CONSTRAINTS = eINSTANCE.getDataDescription_Constraints();
+
+		/**
+		 * The meta object literal for the '<em><b>Constraints2</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DATA_DESCRIPTION__CONSTRAINTS2 = eINSTANCE.getDataDescription_Constraints2();
 
 		/**
 		 * The meta object literal for the '{@link de.evoal.languages.model.ddl.impl.BaseDataDescriptionImpl <em>Base Data Description</em>}' class.

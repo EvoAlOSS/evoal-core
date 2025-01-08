@@ -287,6 +287,16 @@ public class DdlPackageImpl extends EPackageImpl implements DdlPackage {
 	 * @generated
 	 */
 	@Override
+	public EReference getDataTypeDefinition_Constraints2() {
+		return (EReference)dataTypeDefinitionEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getDataDescription() {
 		return dataDescriptionEClass;
 	}
@@ -299,6 +309,16 @@ public class DdlPackageImpl extends EPackageImpl implements DdlPackage {
 	@Override
 	public EReference getDataDescription_Constraints() {
 		return (EReference)dataDescriptionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getDataDescription_Constraints2() {
+		return (EReference)dataDescriptionEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -472,9 +492,11 @@ public class DdlPackageImpl extends EPackageImpl implements DdlPackage {
 		createEAttribute(dataTypeDefinitionEClass, DATA_TYPE_DEFINITION__NAME);
 		createEAttribute(dataTypeDefinitionEClass, DATA_TYPE_DEFINITION__DESCRIPTION);
 		createEReference(dataTypeDefinitionEClass, DATA_TYPE_DEFINITION__CONSTRAINTS);
+		createEReference(dataTypeDefinitionEClass, DATA_TYPE_DEFINITION__CONSTRAINTS2);
 
 		dataDescriptionEClass = createEClass(DATA_DESCRIPTION);
 		createEReference(dataDescriptionEClass, DATA_DESCRIPTION__CONSTRAINTS);
+		createEReference(dataDescriptionEClass, DATA_DESCRIPTION__CONSTRAINTS2);
 
 		baseDataDescriptionEClass = createEClass(BASE_DATA_DESCRIPTION);
 		createEAttribute(baseDataDescriptionEClass, BASE_DATA_DESCRIPTION__REPRESENTATION);
@@ -550,9 +572,11 @@ public class DdlPackageImpl extends EPackageImpl implements DdlPackage {
 		initEAttribute(getDataTypeDefinition_Name(), ecorePackage.getEString(), "name", null, 1, 1, DataTypeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDataTypeDefinition_Description(), ecorePackage.getEString(), "description", null, 0, 1, DataTypeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDataTypeDefinition_Constraints(), theBasePackage.getExpression(), null, "constraints", null, 0, -1, DataTypeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getDataTypeDefinition_Constraints2(), theBasePackage.getInstance(), null, "constraints2", null, 0, -1, DataTypeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		initEClass(dataDescriptionEClass, DataDescription.class, "DataDescription", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getDataDescription_Constraints(), theBasePackage.getExpression(), null, "constraints", null, 0, -1, DataDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getDataDescription_Constraints2(), theBasePackage.getInstance(), null, "constraints2", null, 0, -1, DataDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		initEClass(baseDataDescriptionEClass, BaseDataDescription.class, "BaseDataDescription", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getBaseDataDescription_Representation(), this.getRepresentationType(), "representation", "real", 1, 1, BaseDataDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -656,7 +680,19 @@ public class DdlPackageImpl extends EPackageImpl implements DdlPackage {
 			   "nullFree", "false"
 		   });
 		addAnnotation
+		  (getDataTypeDefinition_Constraints2(),
+		   source,
+		   new String[] {
+			   "nullFree", "false"
+		   });
+		addAnnotation
 		  (getDataDescription_Constraints(),
+		   source,
+		   new String[] {
+			   "nullFree", "false"
+		   });
+		addAnnotation
+		  (getDataDescription_Constraints2(),
 		   source,
 		   new String[] {
 			   "nullFree", "false"

@@ -1,0 +1,17 @@
+import "definitions" from de.evoal.core.math;
+import "definitions" from 'de.evoal.pipeline.base';
+
+module de.evoal.pipeline.misc {
+	/**
+	 * Adds constant values for the specified data.
+	 */
+	type constants {
+		/**
+		 * The constant values to append.
+		 */
+		constants : array real;	
+	}
+	
+	type 'constraint-validation' {	
+	}
+}

@@ -125,6 +125,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//Definition/name"/>
     </genClasses>
     <genClasses ecoreClass="model.ecore#//TypeDefinition">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//TypeDefinition/constraints"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//TypeDefinition/attributes"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//TypeDefinition/superType"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//TypeDefinition/abstract"/>
@@ -133,6 +134,7 @@
       </genOperations>
     </genClasses>
     <genClasses ecoreClass="model.ecore#//AttributeDefinition">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//AttributeDefinition/constraints"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//AttributeDefinition/type"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//AttributeDefinition/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//AttributeDefinition/initialisation"/>

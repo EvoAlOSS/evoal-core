@@ -37,9 +37,11 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//DataTypeDefinition/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//DataTypeDefinition/description"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//DataTypeDefinition/constraints"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//DataTypeDefinition/constraints2"/>
     </genClasses>
     <genClasses ecoreClass="model.ecore#//DataDescription">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//DataDescription/constraints"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//DataDescription/constraints2"/>
     </genClasses>
     <genClasses image="false" ecoreClass="model.ecore#//BaseDataDescription">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//BaseDataDescription/representation"/>

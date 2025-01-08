@@ -49,9 +49,9 @@ public interface NumberLiteral extends Literal {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model kind="operation" required="true"
+	 * @model kind="operation"
 	 * @generated
 	 */
-	Object getValue();
+	Number getValue();
 
 } // NumberLiteral

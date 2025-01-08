@@ -17,6 +17,7 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * </p>
  * <ul>
+ *   <li>{@link de.evoal.languages.model.base.TypeDefinition#getConstraints <em>Constraints</em>}</li>
  *   <li>{@link de.evoal.languages.model.base.TypeDefinition#getAttributes <em>Attributes</em>}</li>
  *   <li>{@link de.evoal.languages.model.base.TypeDefinition#getSuperType <em>Super Type</em>}</li>
  *   <li>{@link de.evoal.languages.model.base.TypeDefinition#isAbstract <em>Abstract</em>}</li>
@@ -27,6 +28,22 @@ import org.eclipse.emf.common.util.EList;
  * @generated
  */
 public interface TypeDefinition extends Definition {
+	/**
+	 * Returns the value of the '<em><b>Constraints</b></em>' containment reference list.
+	 * The list contents are of type {@link de.evoal.languages.model.base.Instance}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Possible constraints for the attribute
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Constraints</em>' containment reference list.
+	 * @see de.evoal.languages.model.base.BasePackage#getTypeDefinition_Constraints()
+	 * @model containment="true" ordered="false"
+	 *        annotation="http://www.eclipse.org/OCL/Collection nullFree='false'"
+	 * @generated
+	 */
+	EList<Instance> getConstraints();
+
 	/**
 	 * Returns the value of the '<em><b>Attributes</b></em>' containment reference list.
 	 * The list contents are of type {@link de.evoal.languages.model.base.AttributeDefinition}.
