@@ -16,7 +16,7 @@ import java.util.Iterator;
 import java.util.List;
 
 @Dependent
-@Named("de.evoal.pipeline.distribution.noise-data")
+@Named("de.evoal.pipeline.distributions.noise-data")
 public class NoiseData extends ComponentImpl {
 
 	/**

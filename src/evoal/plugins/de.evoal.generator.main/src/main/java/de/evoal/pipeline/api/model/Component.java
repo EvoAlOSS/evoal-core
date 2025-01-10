@@ -26,4 +26,9 @@ public interface Component {
      * @return The passed object.
      */
     public @NonNull TypedEObject apply(final @NonNull TypedEObject object);
+
+    /**
+     * Gets called to signal component that the pipeline was closed.
+     */
+    public void close();
 }

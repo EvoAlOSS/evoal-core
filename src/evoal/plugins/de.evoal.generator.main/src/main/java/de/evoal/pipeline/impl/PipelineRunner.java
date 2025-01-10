@@ -84,6 +84,6 @@ public class PipelineRunner implements MainClass {
 		new StatementExecutor(definitionLoader, pipelineTable, space)
 				.execute(pModule.getStatements());
 
-		log.info("Finished pipeline.");
+        log.info("Finished pipeline.");
 	}
 }

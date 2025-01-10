@@ -5,30 +5,38 @@ import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.properties.PropertySpecification;
 import de.evoal.core.api.properties.stream.FileBasedPropertiesStreamSupplier;
 import de.evoal.core.api.utils.AttributeHelper;
+import de.evoal.core.api.utils.ConverterFunctions;
 import de.evoal.core.api.utils.InitializationException;
 import de.evoal.core.api.utils.Requirements;
 import de.evoal.languages.model.base.Definition;
 import de.evoal.languages.model.base.Instance;
+import de.evoal.languages.model.ddl.BaseDataDescription;
+import de.evoal.languages.model.ddl.RepresentationType;
 import de.evoal.languages.model.dynamic.DynamicPackage;
 import de.evoal.pipeline.api.model.ComponentImpl;
 import de.evoal.pipeline.api.model.TypedEObject;
-import de.evoal.pipeline.impl.internal.DynamicAnnotationsPackage;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.EcorePackage;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.File;
-import java.util.Collection;
-import java.util.Iterator;
+import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Stream;
 
 @Dependent
 @Slf4j
 @Named("de.evoal.pipeline.io.reader")
 public class Reader extends ComponentImpl {
+    private Function<Properties, Object> [] converters;
+
+    private EStructuralFeature [] features;
+
     @Inject
     private AttributeHelper helper;
 
@@ -36,7 +44,6 @@ public class Reader extends ComponentImpl {
 
     private PropertySpecification [] pSpec;
 
-    private EStructuralFeature [] features;
 
     @Override
     public @NonNull TypedEObject apply(@NonNull TypedEObject object) {
@@ -47,7 +54,7 @@ public class Reader extends ComponentImpl {
         final Properties p = iterator.next();
 
         for(int i = 0; i < pSpec.length; i++) {
-            object.eSet(features[i], p.get(pSpec[i]));
+            object.eSet(features[i], converters[i].apply(p));
         }
 
         return object;
@@ -61,7 +68,6 @@ public class Reader extends ComponentImpl {
         final File file = new File(filename);
 
         log.info("Reading data from {}", file.getAbsolutePath());
-        final DynamicAnnotationsPackage daPackage = DynamicAnnotationsPackage.eINSTANCE;
 
         final Collection<EStructuralFeature> writes = getWrites();
 
@@ -83,10 +89,42 @@ public class Reader extends ComponentImpl {
         features = writes.toArray(EStructuralFeature[]::new);
         Requirements.requireSameSize(pSpec, features);
 
+        final List<Function<Properties, Object>> inputConverts = new LinkedList<>();
+
+        for(int i = 0; i < features.length; ++i) {
+            final PropertySpecification spec = specification.getProperties().get(i);
+
+            Requirements.requireInstanceOf(spec.type(), BaseDataDescription.class);
+            final BaseDataDescription bdd = (BaseDataDescription) spec.type();
+
+            inputConverts.add(toConverter(features[i], i));
+        }
+
+        converters = inputConverts.toArray(new Function[0]);
+        Requirements.requireSameSize(pSpec, converters);
+
+
         iterator = new FileBasedPropertiesStreamSupplier(file, specification)
                 .get()
                 .iterator();
 
         return this;
+    }
+
+    private final static EcorePackage ePackage = EcorePackage.eINSTANCE;
+    private Function<Properties, Object> toConverter(final EStructuralFeature feature, final int index) {
+        final EClassifier classifier = feature.getEType();
+
+        if(ePackage.getEDouble().equals(classifier)) {
+            return p -> ((Number)p.get(index)).doubleValue();
+        } else if(ePackage.getEInt().equals(classifier)) {
+            return p -> ((Number)p.get(index)).intValue();
+        } else if(ePackage.getEBoolean().equals(classifier)) {
+            return p -> ((Number)p.get(index)).intValue() != 0;
+        } else if(ePackage.getEString().equals(classifier)) {
+            return p -> Objects.toString(p.get(index));
+        }
+
+        throw new UnsupportedOperationException("Not yet implemented: " +classifier.getName());
     }
 }

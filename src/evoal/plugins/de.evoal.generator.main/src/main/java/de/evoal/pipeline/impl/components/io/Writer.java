@@ -12,7 +12,6 @@ import de.evoal.languages.model.base.Instance;
 import de.evoal.languages.model.dynamic.DynamicPackage;
 import de.evoal.pipeline.api.model.ComponentImpl;
 import de.evoal.pipeline.api.model.TypedEObject;
-import de.evoal.pipeline.impl.internal.DynamicAnnotationsPackage;
 import lombok.NonNull;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -38,6 +37,7 @@ public class Writer extends ComponentImpl {
 
     private EStructuralFeature [] features;
 
+    int counter = 0;
     @Override
     @SneakyThrows(EvoalIOException.class)
     public @NonNull TypedEObject apply(@NonNull TypedEObject object) {
@@ -48,6 +48,7 @@ public class Writer extends ComponentImpl {
         }
 
         writer.add(properties);
+        log.info("Adding {}", ++counter);
 
         return object;
     }
@@ -60,7 +61,6 @@ public class Writer extends ComponentImpl {
         final File file = new File(filename);
 
         log.info("Writing data to {}", file.getAbsolutePath());
-        final DynamicAnnotationsPackage daPackage = DynamicAnnotationsPackage.eINSTANCE;
         final Collection<EStructuralFeature> reads = getReads();
 
         final Stream<Definition> definitions =
@@ -86,5 +86,14 @@ public class Writer extends ComponentImpl {
         }
 
         return this;
+    }
+
+    @Override
+    public void close() {
+        try {
+            writer.close();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

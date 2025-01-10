@@ -132,6 +132,8 @@ public class StatementExecutor extends PipelineSwitch<Object> {
         executor.setSpace(space);
         executor.execute(pipeline, countLimit);
 
+        pipeline.close();
+
         return null;
     }
 
@@ -165,7 +167,10 @@ public class StatementExecutor extends PipelineSwitch<Object> {
         }
 
         log.info("Writing results to {}.", filename);
-        new File(filename).getAbsoluteFile().getParentFile().mkdirs();
+        new File(filename)
+                .getAbsoluteFile()
+                .getParentFile()
+                .mkdirs();
 
         log.info("Generating writer");
         final DefinitionModule module = loader.load("classpath:/de/evoal/pipeline/io.dl");

@@ -16,13 +16,31 @@ module ackley {
 		 */
 		step {
 			component 'distribution-based-data' {
-				distributions := ['normal-distribution' {
+				distributions := [
+				  'normal-distribution' {
 					'μ' := 0.0;
-					'σ' := 5.12;
-				}];
+					'σ' := 8192.0;
+				  },
+				  'normal-distribution' {
+					'μ' := 0.0;
+					'σ' := 8192.0;
+				  },
+				  'normal-distribution' {
+					'μ' := 0.0;
+					'σ' := 8192.0;
+				  },
+				  'normal-distribution' {
+					'μ' := 0.0;
+					'σ' := 8192.0;
+				  },
+				  'normal-distribution' {
+					'μ' := 0.0;
+					'σ' := 8192.0;
+				  }
+				  ];
 			}
 			
-			writes [data 'x:0'];
+			writes [data 'x:0', data 'x:1', data 'x:2', data 'x:3', data 'x:4'];
 		}
 
 	    step {
@@ -32,7 +50,23 @@ module ackley {
 	        reads [data 'x:0'];
 	        writes [data 'y:0'];
 	     }
+
+		step {
+			component 'noise-data' {
+				/* define distribution per data */
+				distributions := [
+					// noise for y:0
+					'normal-distribution' {
+						'μ' := 0.0;
+						'σ' := 1.0;
+					}
+				];
+		    }
+
+			reads [data 'y:0'];
+			writes [data 'y:0'];
+		}
 	]
 	
-	write "ackley.arff" with 1000 samples from executing [ pipeline 'main-pipeline'];
+	write "ackley.csv" with 1000 samples from executing [ pipeline 'main-pipeline'];
 }

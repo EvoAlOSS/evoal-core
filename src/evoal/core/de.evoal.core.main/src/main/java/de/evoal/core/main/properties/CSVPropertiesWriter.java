@@ -25,13 +25,19 @@ public class CSVPropertiesWriter implements PropertiesWriter {
 
     private FileWriter csvWriter;
 
+    private File filename;
+
     private final NumberFormat nf = NumberFormat.getInstance(Locale.US);
+
+    private int recordCounter = 0;
 
     private PropertiesSpecification specification;
 
     @Override
     public void add(@NonNull Properties properties) throws EvoalIOException {
         try {
+            recordCounter += 1;
+
             csvPrinter.printRecord(properties.getValues());
         } catch (IOException e) {
             throw new EvoalIOException("Failed to write recored.", e);
@@ -41,6 +47,7 @@ public class CSVPropertiesWriter implements PropertiesWriter {
     @Override
     public PropertiesWriter init(final File outputFile, final PropertiesSpecification specification) throws EvoalIOException {
         log.info("Creating CSV properties writer for {} to file {}.", specification, outputFile);
+        filename = outputFile;
 
         this.specification = specification;
 
@@ -53,8 +60,8 @@ public class CSVPropertiesWriter implements PropertiesWriter {
 
             csvWriter = new FileWriter(outputFile);
             csvPrinter = new CSVPrinter(csvWriter,
-                    CSVFormat.DEFAULT
-                            .withHeader(fileHeader));
+                                        CSVFormat.DEFAULT
+                                            .withHeader(fileHeader));
         } catch (IOException e) {
             throw new EvoalIOException("Failed to open CSV file " + outputFile + " for writing.", e);
         }
@@ -64,6 +71,9 @@ public class CSVPropertiesWriter implements PropertiesWriter {
 
     @Override
     public void close() throws Exception {
+        log.info("Closing CSV writer of '{}' after writing {} records.", filename, recordCounter);
+
+        csvPrinter.close();
         csvWriter.close();
     }
 }

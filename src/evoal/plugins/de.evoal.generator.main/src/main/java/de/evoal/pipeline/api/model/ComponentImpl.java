@@ -25,4 +25,8 @@ public abstract class ComponentImpl implements Component, EvoalComponent<Compone
     public @NonNull LinkedHashSet<EStructuralFeature> getWrites() {
         return writes;
     }
+
+    @Override
+    public void close() {
+    }
 }

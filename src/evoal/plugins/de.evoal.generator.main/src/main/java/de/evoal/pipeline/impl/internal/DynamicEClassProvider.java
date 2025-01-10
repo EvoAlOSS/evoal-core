@@ -54,6 +54,8 @@ public class DynamicEClassProvider {
             annotation.setSource(DynamicPackage.eNS_URI);
             annotation.getContents().add(definition);
 
+            log.info("Creating attribute for '{}'.", ref.getName());
+
             final EAttribute attr = factory.createEAttribute();
             attr.setName(ref.getName());
             attr.setLowerBound(0);

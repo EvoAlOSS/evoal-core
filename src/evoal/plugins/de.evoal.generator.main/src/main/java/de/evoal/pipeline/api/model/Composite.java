@@ -1,6 +1,7 @@
 package de.evoal.pipeline.api.model;
 
 import lombok.NonNull;
+import lombok.extern.slf4j.Slf4j;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
 import java.util.*;
@@ -9,6 +10,7 @@ import java.util.*;
  * A composite component that contains an arbitrary number of children.
  *   Corresponds to an inner node in the pipeline component tree.
  */
+@Slf4j
 public final class Composite implements Component {
     private final List<Component> children = new ArrayList<>();
 
@@ -48,5 +50,10 @@ public final class Composite implements Component {
         children.forEach(c -> c.apply(object));
 
         return object;
+    }
+
+    @Override
+    public void close() {
+        children.forEach(Component::close);
     }
 }
