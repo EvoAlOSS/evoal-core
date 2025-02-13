@@ -7,7 +7,7 @@ import "data" from ackley;
 import "data" from meta;
 
 
-module ackley {
+module recalculate {
 	/**
 	 * Introduce a simple pipeline that generates some test data using
 	 *   the Ackley function.

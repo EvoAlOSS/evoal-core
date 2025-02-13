@@ -85,4 +85,5 @@ module de.evoal.optimisation.api {
     opens de.evoal.optimisation.main.statistics.io.csv to weld.core.impl;
     opens de.evoal.optimisation.main.statistics.nop to weld.core.impl;
     opens de.evoal.optimisation.main.stopping to weld.core.impl;
+    opens de.evoal.optimisation.main.statistics.stopping to weld.core.impl;
 }

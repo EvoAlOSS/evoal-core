@@ -5,7 +5,7 @@ module de.evoal.generator.optimisation {
 	/**
 	 * A combination of kown optimisation functions for benchmarking purposes.
 	 */
-	type 'benchmark-function' extends 'optimisation-function' {
+	type 'benchmark-function' extends 'decorated-optimisation-function' {
 	    /**
          * The binding of benchmark functions to the generated data.
          */

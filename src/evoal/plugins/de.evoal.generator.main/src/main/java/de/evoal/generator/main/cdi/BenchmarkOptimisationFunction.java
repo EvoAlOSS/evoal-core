@@ -5,12 +5,14 @@ import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.properties.PropertySpecification;
 import de.evoal.core.api.utils.AttributeHelper;
 import de.evoal.generator.api.GeneratorFunction;
+import de.evoal.languages.model.base.Attribute;
 import de.evoal.languages.model.ddl.DataDescription;
 import de.evoal.languages.model.generator.GeneratorFactory;
 import de.evoal.languages.model.generator.Step;
 import de.evoal.languages.model.instance.DataReference;
 import de.evoal.languages.model.base.Instance;
 import de.evoal.languages.model.instance.InstanceFactory;
+import de.evoal.optimisation.api.model.OptimisationFunctionDecorator;
 import lombok.SneakyThrows;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import de.evoal.optimisation.api.model.OptimisationFunction;
@@ -22,7 +24,7 @@ import java.util.List;
 
 @Dependent
 @Named("de.evoal.generator.optimisation.benchmark-function")
-public class BenchmarkOptimisationFunction implements OptimisationFunction {
+public class BenchmarkOptimisationFunction extends OptimisationFunctionDecorator {
 
     @Inject
     private AttributeHelper helper;
@@ -44,7 +46,14 @@ public class BenchmarkOptimisationFunction implements OptimisationFunction {
 
     @Override
     public double[] evaluate(final Properties candidate) {
-        final Properties result = new Properties(optimisationSpaceSpecification);
+        double [] current;
+        if(this.decoratedFunction != null) {
+            current = decoratedFunction.evaluate(candidate);
+        } else {
+            current = new double[optimisationSpaceSpecification.size()];
+        }
+
+        final Properties result = new Properties(optimisationSpaceSpecification, current);
 
         for(int i = 0; i < functions.length; ++i) {
             final GeneratorFunction function = functions[i];
@@ -63,6 +72,10 @@ public class BenchmarkOptimisationFunction implements OptimisationFunction {
     @SneakyThrows
     @Override
     public OptimisationFunction init(final Instance config) {
+        if(hasDecoratedFunction(config)) {
+            super.init(config);
+        }
+
         final List<Instance> benchmarkConfigurations = helper.lookup(config, "benchmarks");
 
         functions = new GeneratorFunction[benchmarkConfigurations.size()];

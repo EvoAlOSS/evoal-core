@@ -338,4 +338,12 @@ module de.evoal.optimisation.core {
 	     */
         'maximum-iterations' : int := 10;
 	}
+
+	type 'stopping-per-candidates-per-generation' extends 'statistics-writer' {
+	  criteria : array instance 'stopping-criterion' := [];
+	}
+
+	type 'stopping-per-candidates-per-iteration' extends 'statistics-writer' {
+	  criteria : array instance 'stopping-criterion' := [];
+    }
 }

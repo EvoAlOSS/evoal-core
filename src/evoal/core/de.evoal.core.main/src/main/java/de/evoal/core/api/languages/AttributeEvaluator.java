@@ -127,6 +127,27 @@ public class AttributeEvaluator {
         return (Instance)result;
     }
 
+    public Instance [] attributeToInstanceArray(final Instance instance, final String attributeName) {
+        final Object result = attributeToObject(instance, attributeName);
+
+        if(!(result instanceof List<?> resultList)) {
+            log.error("Expression did not evaluate to a list for attribute {} which was expected.", attributeName);
+            throw new IllegalStateException("Expression evaluation error. Please check your configuration.");
+        }
+
+        final boolean allInstances = resultList.stream()
+                .allMatch(Instance.class::isInstance);
+
+        if(!allInstances) {
+            log.error("Expression did not evaluate to a list of instances for attribute {} which was expected.", attributeName);
+            throw new IllegalStateException("Expression evaluation error. Please check your configuration.");
+        }
+
+        return resultList.stream()
+                .map(Instance.class::cast)
+                .toArray(Instance[]::new);
+    }
+
     public int attributeToInteger(final Instance instance, final String attributeName) {
         return attributeToNumber(instance, attributeName).intValue();
     }

@@ -18,7 +18,7 @@ public abstract class AbstractCandidateStatisticsWriter implements StatisticsWri
     @Inject
     protected WriterStrategy strategy;
 
-    private Writer writer;
+    protected Writer writer;
 
     @Override
     public void add(final Iteration result) {
