@@ -2,5 +2,5 @@
 
 export EVOAL_HOME=$( cd -- "$(dirname $0)/../../" >/dev/null 2>&1 ; pwd -P )
 
-$SHELL $EVOAL_HOME/bin/evoal-generator.sh . surrogate.generator  -Bsurrogate:configuration-file=training.mll -Bsurrogate:pre-trained=surrogate.pson
+$SHELL $EVOAL_HOME/bin/evoal-pipeline.sh . surrogate.generator  -Bsurrogate:configuration-file=training.mll -Bsurrogate:pre-trained=surrogate.pson
 

@@ -1,6 +1,8 @@
 import "definitions" from de.evoal.core.math;
-import "definitions" from de.evoal.generator.generator;
-import "definitions" from de.evoal.surrogate.generator;
+import "definitions" from de.evoal.'pipeline'.base;
+import "definitions" from de.evoal.'pipeline'.distributions;
+
+import "definitions" from de.evoal.surrogate.'pipeline';
 
 import "data" from surrogate;
 
@@ -15,13 +17,18 @@ module surrogate {
 		 * First, we generate some normally distributed data.
 		 */
 		step {
-			component 'normal-distribution' {
-				'μ' := 0.0;
-				'σ' := 5.12;
-			}		
+			component 'distribution-based-data' {
+				distributions := [
+					'normal-distribution' {
+						'μ' := 0.0;
+						'σ' := 5.12;
+					}					
+				];
+			}
 			
 			writes [data 'x:0'];
 		}
+		
 	    step {
 	        component 'surrogate' {
 	        }

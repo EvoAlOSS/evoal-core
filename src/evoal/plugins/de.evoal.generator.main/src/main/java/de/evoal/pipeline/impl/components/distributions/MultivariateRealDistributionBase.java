@@ -1,8 +1,5 @@
 package de.evoal.pipeline.impl.components.distributions;
 
-import de.evoal.core.api.properties.Properties;
-import de.evoal.core.api.properties.PropertySpecification;
-import de.evoal.generator.api.AbstractGeneratorFunction;
 import de.evoal.pipeline.api.distribution.Distribution;
 import lombok.AccessLevel;
 import lombok.Setter;

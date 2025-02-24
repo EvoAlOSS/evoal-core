@@ -1,13 +1,13 @@
-import "definitions" from de.evoal.generator.generator;
+import "definitions" from de.evoal.pipeline.base;
 
 /**
  * Generator extensions based on surrogate models.
  */
-module de.evoal.surrogate.generator {
+module de.evoal.surrogate.pipeline {
 
     /**
      * Uses a pre-trained surrogate model as function.
      */
-	type surrogate extends 'benchmark' {
+	type surrogate extends 'Processor' {
 	}
 }

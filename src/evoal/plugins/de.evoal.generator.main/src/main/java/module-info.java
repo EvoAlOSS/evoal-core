@@ -33,28 +33,23 @@ module de.evoal.generator.main {
     requires de.evoal.optimisation.api;
     requires com.google.common;
 
-    opens de.evoal.generator;
+
+    exports de.evoal.pipeline.api.board;
+    exports de.evoal.pipeline.api.cdi;
+    exports de.evoal.pipeline.api.distribution;
+    exports de.evoal.pipeline.api.executor;
+    exports de.evoal.pipeline.api.model;
+    exports de.evoal.pipeline.api.model.dynamic;
+
     opens de.evoal.pipeline;
-
-    opens de.evoal.generator.main;
-    opens de.evoal.generator.main.benchmarks;
-    opens de.evoal.generator.main.cdi;
-    opens de.evoal.generator.main.functions;
-    opens de.evoal.generator.main.generators;
-
-    exports de.evoal.generator.api;
-    opens de.evoal.generator.api to weld.core.impl;
-    opens de.evoal.generator.main.functions.distributions;
-
-
     opens de.evoal.pipeline.api.board to weld.core.impl;
     opens de.evoal.pipeline.api.cdi to weld.core.impl;
     opens de.evoal.pipeline.api.distribution to weld.core.impl;
-
     opens de.evoal.pipeline.impl to weld.core.impl;
     opens de.evoal.pipeline.impl.components.benchmarks to weld.core.impl;
     opens de.evoal.pipeline.impl.components.io to weld.core.impl;
     opens de.evoal.pipeline.impl.components.misc to weld.core.impl;
     opens de.evoal.pipeline.impl.components.distributions to weld.core.impl;
     opens de.evoal.pipeline.impl.internal to weld.core.impl;
+    opens de.evoal.pipeline.api.model.dynamic to weld.core.impl;
 }

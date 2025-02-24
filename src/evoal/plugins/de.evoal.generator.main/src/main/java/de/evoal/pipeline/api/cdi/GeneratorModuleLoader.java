@@ -1,10 +1,6 @@
 package de.evoal.pipeline.api.cdi;
 
 import com.google.inject.Injector;
-import de.evoal.core.api.board.Blackboard;
-import de.evoal.core.api.board.BlackboardEntry;
-import de.evoal.core.api.cdi.BlackboardValue;
-import de.evoal.generator.api.GeneratorBlackboardEntries;
 import de.evoal.languages.model.base.dsl.BaseLanguageStandaloneSetup;
 import de.evoal.languages.model.base.impl.BasePackageImpl;
 import de.evoal.languages.model.ddl.dsl.DataDescriptionLanguageStandaloneSetup;
@@ -22,8 +18,6 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 
 import javax.enterprise.context.Dependent;
-import javax.enterprise.event.Observes;
-import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.InjectionPoint;
 import java.io.File;
 import java.util.Optional;

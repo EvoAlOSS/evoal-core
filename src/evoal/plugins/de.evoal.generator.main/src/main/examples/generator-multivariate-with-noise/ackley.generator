@@ -1,5 +1,8 @@
 import "definitions" from de.evoal.core.math;
-import "definitions" from de.evoal.generator.generator;
+import "definitions" from de.evoal.'pipeline'.base;
+import "definitions" from de.evoal.'pipeline'.benchmarks;
+import "definitions" from de.evoal.'pipeline'.distributions;
+
 import "data" from 'ackley';
 
 
@@ -13,13 +16,17 @@ module 'ackley' {
 		 * Bivariate normal distribution.
 		 */
 		step {
-			component 'multivariate-normal-distribution' {
-				'means' := [-10.00, 0.0];
-				'covariance' := [
-                  [11.1111, 8.8889],
-                  [8.8889, 11.1111]
-                ];
+			component 'distribution-based-data' {
+				distributions := [
+					'multivariate-normal-distribution' {
+						'means' := [-10.00, 0.0];
+						'covariance' := [
+		                  [11.1111, 8.8889],
+		                  [8.8889, 11.1111]
+		                ];
 
+					}
+				]; 
 			}
 
 			writes [data 'x.0', data 'x.1'];

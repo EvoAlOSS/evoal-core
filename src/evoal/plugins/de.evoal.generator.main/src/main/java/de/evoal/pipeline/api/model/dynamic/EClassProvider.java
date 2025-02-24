@@ -1,4 +1,4 @@
-package de.evoal.pipeline.impl.internal;
+package de.evoal.pipeline.api.model.dynamic;
 
 import de.evoal.languages.model.ddl.BaseDataDescription;
 import de.evoal.languages.model.ddl.DataDescription;
@@ -11,7 +11,6 @@ import de.evoal.languages.model.instance.DataReference;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.*;
-import org.eclipse.emf.ecore.impl.DynamicEObjectImpl;
 import org.eclipse.emf.ecore.util.Diagnostician;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -21,11 +20,9 @@ import java.util.stream.Stream;
 
 @ApplicationScoped
 @Slf4j
-public class DynamicEClassProvider {
-    public static String ORIGIN_SOURCE = "http://www.evoal.de/model/dynamic/2024/04/Origin";
-
+public class EClassProvider {
     private static final EcoreFactory factory = EcoreFactory.eINSTANCE;
-    private static final DynamicPackage dynPackage = DynamicPackage.eINSTANCE;
+    private static final DynamicFactory dynFactory = DynamicFactory.eINSTANCE;
 
     public EClass eClassFor(final GeneratorModule module) {
         log.info("Creating dynamic eclass for module {}.", module.getName());
@@ -47,7 +44,7 @@ public class DynamicEClassProvider {
         result.setName("Space");
 
         for(final DataDescription ref : references) {
-            final Definition definition = DynamicFactory.eINSTANCE.createDefinition();
+            final Definition definition = dynFactory.createDefinition();
             definition.setSource(ref);
 
             final EAnnotation annotation = factory.createEAnnotation();
