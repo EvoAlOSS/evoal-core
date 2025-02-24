@@ -52,6 +52,6 @@ module de.evoal.optimisation.ea.mdo {
         /**
          * The root class name
          */
-        root : instance model;
+        root : data;
 	}
 }

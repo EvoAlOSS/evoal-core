@@ -54,17 +54,17 @@ public class ModelGenotypeCodec implements CustomCodec<ModelGene> {
     @Override
     public ModelGenotypeCodec init(final Instance config) {
         log.info("Initialising model genotype codec");
-        final Object[] chromosomeConfigurations = helper.lookup(config, "chromosomes");
+        final List<Instance> chromosomeConfigurations = helper.lookup(config, "chromosomes");
 
         final FQNProvider provider = new FQNProvider();
 
-        Requirements.requireFalse(Arrays.stream(chromosomeConfigurations)
-                                        .map(Instance.class::cast)
+        Requirements.requireFalse(chromosomeConfigurations
+                                        .stream()
                                         .anyMatch(i -> !CHROMOSOME_NAME.equals(provider.get(i))),
                                  "Non model-chromosome are not allowed.");
 
-        genotypeSpec = Arrays.stream(chromosomeConfigurations)
-                             .map(Instance.class::cast)
+        genotypeSpec = chromosomeConfigurations
+                             .stream()
                              .filter(i -> CHROMOSOME_NAME.equals(provider.get(i)))
                              .map(i -> helper.<DataDescription>lookup(i, "root"))
                              .collect(Collectors.toList());
@@ -87,11 +87,11 @@ public class ModelGenotypeCodec implements CustomCodec<ModelGene> {
                                          .addDescriptions(genotypeSpec.stream())
                                          .build();
 
-        Requirements.requireTrue(mapping.size() == chromosomeConfigurations.length, "Required to be of same size.");
+        Requirements.requireTrue(mapping.size() == chromosomeConfigurations.size(), "Required to be of same size.");
 
         information = IntStream.range(0, mapping.size())
                                .mapToObj(i -> {
-                                    final Instance configuration = (Instance) chromosomeConfigurations[i];
+                                    final Instance configuration = (Instance) chromosomeConfigurations.get(i);
 
                                     return toChromosome(configuration, i);
                                })
@@ -149,11 +149,12 @@ public class ModelGenotypeCodec implements CustomCodec<ModelGene> {
 
         while(!working.isEmpty()) {
             final TypeDefinition currentType = working.iterator().next();
+            working.remove(currentType);
+
             if(visited.contains(currentType)) {
                 continue;
             }
 
-            working.remove(currentType);
             visited.add(currentType);
 
             for(final AttributeDefinition attr : currentType.getAttributes()) {
@@ -182,11 +183,12 @@ public class ModelGenotypeCodec implements CustomCodec<ModelGene> {
 
         while(!working.isEmpty()) {
             final TypeDefinition currentType = working.iterator().next();
+            working.remove(currentType);
+
             if(visited.contains(currentType)) {
                 continue;
             }
 
-            working.remove(currentType);
             visited.add(currentType);
 
             for(final AttributeDefinition attr : currentType.getAttributes()) {

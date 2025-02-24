@@ -2,6 +2,7 @@ package de.evoal.optimisation.ea.main.codec.model;
 
 import de.evoal.core.api.utils.AttributeHelper;
 import de.evoal.core.api.utils.InitializationException;
+import de.evoal.languages.model.ddl.StructuredDataDescription;
 import de.evoal.optimisation.ea.api.codec.CustomCodecDescriber;
 import de.evoal.languages.model.base.Definition;
 import de.evoal.languages.model.base.Instance;
@@ -35,12 +36,12 @@ public class ModelGenotypeDescriber implements CustomCodecDescriber {
     @Override
     public List<Definition> describe() {
         log.info("Describing Genotype.");
-        final Object [] genes = helper.lookup(configuration, "chromosomes");
+        final List<Instance> genes = helper.lookup(configuration, "chromosomes");
 
-        return Arrays.stream(genes)
-                .map(Instance.class::cast)
-                .map(i -> helper.lookup(i, "root"))
-                .map(Definition.class::cast)
+        return genes
+                .stream()
+                .map(i -> helper.<StructuredDataDescription>lookup(i, "root"))
+                .map(StructuredDataDescription::getType)
                 .collect(Collectors.toList());
     }
 }

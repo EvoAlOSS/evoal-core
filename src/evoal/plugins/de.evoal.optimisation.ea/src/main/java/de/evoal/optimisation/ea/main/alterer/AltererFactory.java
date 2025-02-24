@@ -1,6 +1,6 @@
 package de.evoal.optimisation.ea.main.alterer;
 
-import java.util.Arrays;
+import java.util.List;
 import java.util.function.BiFunction;
 
 import de.evoal.core.api.cdi.BeanFactory;
@@ -9,11 +9,8 @@ import de.evoal.optimisation.ea.api.codec.CustomCodec;
 import de.evoal.optimisation.ea.api.operators.AltererComponent;
 import de.evoal.optimisation.ea.api.operators.AltererComponentProvider;
 import de.evoal.optimisation.ea.main.alterer.internal.MeanCorrelationAlterer;
-import de.evoal.optimisation.ea.main.alterer.mutator.SingleBitFlipMutator;
+import de.evoal.optimisation.ea.main.alterer.mutator.*;
 import de.evoal.optimisation.ea.main.alterer.crossover.*;
-import de.evoal.optimisation.ea.main.alterer.mutator.SingleBitFlipCorrelationMutator;
-import de.evoal.optimisation.ea.main.alterer.mutator.SingleChoiceMutator;
-import de.evoal.optimisation.ea.main.alterer.mutator.SwapCorrelationMutator;
 import de.evoal.optimisation.api.correlations.Correlations;
 import de.evoal.optimisation.ea.main.codec.program.rewriters.*;
 import de.evoal.languages.model.base.Instance;
@@ -87,20 +84,30 @@ public class AltererFactory {
 			case "single-node-crossover": return (Alterer<G, OptimisationValue>) createSingleNodeCrossover(config);
 
 			case "single-choice-mutator": return createSingleChoiceMutator(config);
+			case "single-choice-in-sequence-mutator": return createSingleChoiceInSequenceMutator(config);
 		}
 
 		return BeanFactory.createComponent(AltererComponent.class, AltererComponentProvider.class, config);
 	}
 
 	private <G extends Gene<?, G>> Alterer<G, OptimisationValue> createSingleChoiceMutator(final Instance config) {
-		final Object[] alterers = helper.lookup(config, "alterers");
+		final List<Instance> alterers = helper.lookup(config, "alterers");
 		final ISeq<Alterer> components =
-				Arrays.stream(alterers)
-						.map(Instance.class::cast)
+				alterers.stream()
 						.map(a -> create(a))
 						.collect(ISeq.toISeq());
 
 		return new SingleChoiceMutator(components);
+	}
+
+	private <G extends Gene<?, G>> Alterer<G, OptimisationValue> createSingleChoiceInSequenceMutator(final Instance config) {
+		final List<Instance> alterers = helper.lookup(config, "alterers");
+		final ISeq<Alterer> components =
+				alterers.stream()
+						.map(a -> create(a))
+						.collect(ISeq.toISeq());
+
+		return new SingleChoiceInSequenceMutator(components);
 	}
 
 	private <G extends TreeGene<?, G>> Alterer<G, OptimisationValue> createSingleNodeCrossover(Instance config) {
