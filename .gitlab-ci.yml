@@ -278,12 +278,13 @@ all:package:linux-x86_64:
     - find evoal -name "*macosx-x86_64*jar" | xargs rm 
     - find evoal -name "*windows-x86_64*jar" | xargs rm
     - mv evoal evoal-linux-x86_64
+    - zip -r evoal-linux-x86_64.zip evoal-linux-x86_64
   artifacts:
     name: "evoal-$CI_COMMIT_REF_NAME-$CI_COMMIT_SHORT_SHA-release-linux-x86_64"
     when: on_success
     expire_in: "7 days"
     paths:
-      - evoal-linux-x86_64
+      - evoal-linux-x86_64.zip
 
 all:package:macosx-arm64:
   extends: .all:package
@@ -292,12 +293,13 @@ all:package:macosx-arm64:
     - find evoal -name "*macosx-x86_64*jar" | xargs rm 
     - find evoal -name "*windows-x86_64*jar" | xargs rm 
     - mv evoal evoal-macosx-arm64
+    - zip -r evoal-macosx-arm64.zip evoal-macosx-arm64
   artifacts:
     name: "evoal-$CI_COMMIT_REF_NAME-$CI_COMMIT_SHORT_SHA-release-macosx-arm64"
     when: on_success
     expire_in: "7 days"
     paths:
-      - evoal-macosx-arm64
+      - evoal-macosx-arm64.zip
 
 all:package:macosx-x86_64:
   extends: .all:package
@@ -306,12 +308,13 @@ all:package:macosx-x86_64:
     - find evoal -name "*macosx-arm64*jar" | xargs rm 
     - find evoal -name "*windows-x86_64*jar" | xargs rm 
     - mv evoal evoal-macosx-x86_64
+    - zip -r evoal-macosx-x86_64.zip evoal-macosx-x86_64
   artifacts:
     name: "evoal-$CI_COMMIT_REF_NAME-$CI_COMMIT_SHORT_SHA-release-macosx-x86_64"
     when: on_success
     expire_in: "7 days"
     paths:
-      - evoal-macosx-x86_64
+      - evoal-macosx-x86_64.zip
 
 all:package:windows-x86_64:
   extends: .all:package
@@ -320,12 +323,13 @@ all:package:windows-x86_64:
     - find evoal -name "*macosx-x86_64*jar" | xargs rm 
     - find evoal -name "*linux-x86_64*jar" | xargs rm 
     - mv evoal evoal-windows-x86_64    
+    - zip -r evoal-windows-x86_64.zip evoal-windows-x86_64
   artifacts:
     name: "evoal-$CI_COMMIT_REF_NAME-$CI_COMMIT_SHORT_SHA-release-windows-x86_64"
     when: on_success
     expire_in: "7 days"
     paths:
-      - evoal-windows-x86_64
+      - evoal-windows-x86_64.zip
 
 #############################################################
 ## Create Gitlab Page with Update Sites 
@@ -529,9 +533,8 @@ publish:
   script:
     - cat release_notes.md
     - >
-      for PLATFORM in linux-x86_64 macosx-arm64 macosx-x86_64  windows-x86_64; do
+      for PLATFORM in linux-x86_64.zip macosx-arm64.zip macosx-x86_64.zip windows-x86_64.zip; do
         export ARCHIVE=evoal-${CI_COMMIT_TAG}-${PLATFORM}.zip
-        zip -r $ARCHIVE $PLATFORM
         curl --header "JOB-TOKEN: $CI_JOB_TOKEN" --upload-file $ARCHIVE "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/releases/${CI_COMMIT_TAG}/$ARCHIVE"
       done
   release:
