@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -ex
+set -e -x -u
 
 echo "Downloading Jacoco-Agent"
 JACOCO_JAR=${CI_PROJECT_DIR}/.m2/repository/org/jacoco/org.jacoco.agent/0.8.10/org.jacoco.agent-0.8.10-runtime.jar

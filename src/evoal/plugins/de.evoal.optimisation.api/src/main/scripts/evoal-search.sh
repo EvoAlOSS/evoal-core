@@ -30,7 +30,7 @@ if [ ${EVOAL_LOGGING+x} ]; then
   ADDITIONAL_ARGUMENTS+=( "-Bcore:logging=$EVOAL_LOGGING" )
 fi
 
-set -x
+set -x -e -u
 java ${LOCAL_JVM_ARGUMENTS[@]} \
      ${EVOAL_JVM_ARGUMENTS[@]} \
      "-Bcore:main=heuristic-search" \

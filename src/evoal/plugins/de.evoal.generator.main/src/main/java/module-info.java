@@ -51,5 +51,6 @@ module de.evoal.generator.main {
     opens de.evoal.pipeline.impl.components.misc to weld.core.impl;
     opens de.evoal.pipeline.impl.components.distributions to weld.core.impl;
     opens de.evoal.pipeline.impl.internal to weld.core.impl;
+    opens de.evoal.pipeline.impl.optimisation to weld.core.impl;
     opens de.evoal.pipeline.api.model.dynamic to weld.core.impl;
 }
