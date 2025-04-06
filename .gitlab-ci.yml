@@ -274,11 +274,7 @@ evoal:deploy:
 all:package:linux-x86_64:
   extends: .all:package
   after_script:
-    - find evoal -name "*macosx-arm64*jar" | xargs rm 
-    - find evoal -name "*macosx-x86_64*jar" | xargs rm 
-    - find evoal -name "*windows-x86_64*jar" | xargs rm
-    - mv evoal evoal-linux-x86_64
-    - zip -r evoal-linux-x86_64.zip evoal-linux-x86_64
+    - bin/create-and-upload-release.sh linux-x86_64
   artifacts:
     name: "evoal-$CI_COMMIT_REF_NAME-$CI_COMMIT_SHORT_SHA-release-linux-x86_64"
     when: on_success
@@ -289,11 +285,7 @@ all:package:linux-x86_64:
 all:package:macosx-arm64:
   extends: .all:package
   after_script:
-    - find evoal -name "*linux-x86_64*jar" | xargs rm 
-    - find evoal -name "*macosx-x86_64*jar" | xargs rm 
-    - find evoal -name "*windows-x86_64*jar" | xargs rm 
-    - mv evoal evoal-macosx-arm64
-    - zip -r evoal-macosx-arm64.zip evoal-macosx-arm64
+    - bin/create-and-upload-release.sh macosx-arm64
   artifacts:
     name: "evoal-$CI_COMMIT_REF_NAME-$CI_COMMIT_SHORT_SHA-release-macosx-arm64"
     when: on_success
@@ -304,11 +296,7 @@ all:package:macosx-arm64:
 all:package:macosx-x86_64:
   extends: .all:package
   after_script:
-    - find evoal -name "*linux-x86_64*jar" | xargs rm 
-    - find evoal -name "*macosx-arm64*jar" | xargs rm 
-    - find evoal -name "*windows-x86_64*jar" | xargs rm 
-    - mv evoal evoal-macosx-x86_64
-    - zip -r evoal-macosx-x86_64.zip evoal-macosx-x86_64
+    - bin/create-and-upload-release.sh macosx-x86_64
   artifacts:
     name: "evoal-$CI_COMMIT_REF_NAME-$CI_COMMIT_SHORT_SHA-release-macosx-x86_64"
     when: on_success
@@ -319,11 +307,7 @@ all:package:macosx-x86_64:
 all:package:windows-x86_64:
   extends: .all:package
   after_script:
-    - find evoal -name "*macosx-arm64*jar" | xargs rm 
-    - find evoal -name "*macosx-x86_64*jar" | xargs rm 
-    - find evoal -name "*linux-x86_64*jar" | xargs rm 
-    - mv evoal evoal-windows-x86_64    
-    - zip -r evoal-windows-x86_64.zip evoal-windows-x86_64
+    - bin/create-and-upload-release.sh windows-x86_64    
   artifacts:
     name: "evoal-$CI_COMMIT_REF_NAME-$CI_COMMIT_SHORT_SHA-release-windows-x86_64"
     when: on_success
@@ -493,6 +477,7 @@ release-notes:
     - when: never
   script:
     - apk add curl jq
+    - 'curl -H "PRIVATE-TOKEN: $CI_API_TOKEN" "$CI_API_V4_URL/projects/$CI_PROJECT_ID/repository/changelog?version=$CI_COMMIT_TAG"'
     - 'curl -H "PRIVATE-TOKEN: $CI_API_TOKEN" "$CI_API_V4_URL/projects/$CI_PROJECT_ID/repository/changelog?version=$CI_COMMIT_TAG" | jq -r .notes > release_notes.md'
   artifacts:
     paths:
@@ -519,24 +504,15 @@ publish:
     - job: release-notes
       artifacts: true
     - job: all:package:linux-x86_64
-      artifacts: true
     - job: all:package:macosx-arm64
-      artifacts: true
     - job: all:package:macosx-x86_64
-      artifacts: true
     - job: all:package:windows-x86_64
-      artifacts: true
   image: registry.gitlab.com/gitlab-org/release-cli:latest
   rules:
     - if: $CI_COMMIT_TAG
     - when: never
   script:
     - cat release_notes.md
-    - >
-      for PLATFORM in linux-x86_64.zip macosx-arm64.zip macosx-x86_64.zip windows-x86_64.zip; do
-        export ARCHIVE=evoal-${CI_COMMIT_TAG}-${PLATFORM}.zip
-        curl --header "JOB-TOKEN: $CI_JOB_TOKEN" --upload-file $ARCHIVE "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/releases/${CI_COMMIT_TAG}/$ARCHIVE"
-      done
   release:
     tag_name: $CI_COMMIT_TAG
     name: "EvoAl Release $CI_COMMIT_TAG"
