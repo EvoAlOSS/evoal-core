@@ -274,7 +274,7 @@ evoal:deploy:
 all:package:linux-x86_64:
   extends: .all:package
   after_script:
-    - bin/create-and-upload-release.sh linux-x86_64
+    - ci/create-and-upload-release.sh linux-x86_64
   artifacts:
     name: "evoal-$CI_COMMIT_REF_NAME-$CI_COMMIT_SHORT_SHA-release-linux-x86_64"
     when: on_success
@@ -285,7 +285,7 @@ all:package:linux-x86_64:
 all:package:macosx-arm64:
   extends: .all:package
   after_script:
-    - bin/create-and-upload-release.sh macosx-arm64
+    - ci/create-and-upload-release.sh macosx-arm64
   artifacts:
     name: "evoal-$CI_COMMIT_REF_NAME-$CI_COMMIT_SHORT_SHA-release-macosx-arm64"
     when: on_success
@@ -296,7 +296,7 @@ all:package:macosx-arm64:
 all:package:macosx-x86_64:
   extends: .all:package
   after_script:
-    - bin/create-and-upload-release.sh macosx-x86_64
+    - ci/create-and-upload-release.sh macosx-x86_64
   artifacts:
     name: "evoal-$CI_COMMIT_REF_NAME-$CI_COMMIT_SHORT_SHA-release-macosx-x86_64"
     when: on_success
@@ -307,7 +307,7 @@ all:package:macosx-x86_64:
 all:package:windows-x86_64:
   extends: .all:package
   after_script:
-    - bin/create-and-upload-release.sh windows-x86_64    
+    - ci/create-and-upload-release.sh windows-x86_64    
   artifacts:
     name: "evoal-$CI_COMMIT_REF_NAME-$CI_COMMIT_SHORT_SHA-release-windows-x86_64"
     when: on_success
