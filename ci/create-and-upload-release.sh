@@ -19,5 +19,5 @@ if [[ "$PLATFORM" != "windows-x86_64" ]]; then
 fi 
 
 mv evoal evoal-$PLATFORM
-zip -r $ARCHIVE.zip evoal-$PLATFORM
+jar Mcf $ARCHIVE.zip evoal-$PLATFORM
 curl --header "JOB-TOKEN: $CI_JOB_TOKEN" --upload-file $ARCHIVE "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/releases/${CI_COMMIT_TAG}/$ARCHIVE"
