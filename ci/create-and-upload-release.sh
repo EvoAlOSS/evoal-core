@@ -21,4 +21,4 @@ fi
 
 mv evoal evoal-$PLATFORM
 jar Mcf $ARCHIVE evoal-$PLATFORM
-curl --header "JOB-TOKEN: $CI_JOB_TOKEN" --upload-file $ARCHIVE "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/releases/${CI_COMMIT_TAG}/$ARCHIVE"
+curl --location --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file $ARCHIVE "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/evoal-release/${CI_COMMIT_TAG}/$ARCHIVE"
