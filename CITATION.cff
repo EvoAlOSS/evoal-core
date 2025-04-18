@@ -19,5 +19,7 @@ authors:
 url: 'https://www.evoal.de'
 keywords:
   - optimisation
-  - evolutionary algorithms
+  - nature-inspired optimisation
+  - evolutionary algorithm
+  - machine learning
 license: Apache-2.0

@@ -543,3 +543,16 @@ package cleanup:
     - when: never
   script:
     - python3 ci/clean-packages.py
+
+
+auto merge:
+  stage: Maintenance
+  image: alpine:latest
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "schedule" &&
+          $AUTOMATIC_MERGE == "true"
+      when: always
+    - when: never
+  script:
+    - apk add curl jq
+    - ./ci/auto-merge-branches.sh develop release
