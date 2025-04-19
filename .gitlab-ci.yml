@@ -555,4 +555,6 @@ auto merge:
     - when: never
   script:
     - apk add curl jq
+    - ls
+    - ls ci
     - ci/auto-merge-branches.sh develop release
