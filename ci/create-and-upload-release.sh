@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 set -e -x -u
 PLATFORM=$1
 ARCHIVE=evoal-${CI_COMMIT_TAG}-${PLATFORM}.zip

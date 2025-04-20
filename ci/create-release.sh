@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 RELEASE_PLUGINS="core.arff generator.main optimisation.api optimisation.ea optimisation.local_search optimisation.pso surrogate.api surrogate.simple surrogate.smile surrogate.adaption" 
 EVOAL_HOME=evoal

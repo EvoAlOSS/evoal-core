@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 SOURCE_BRANCH=$1
 TARGET_BRANCH=$2
