@@ -1,0 +1,48 @@
+import "definitions" from de.evoal.core.math;
+import "definitions" from 'de.evoal.pipeline.base';
+import "definitions" from de.evoal.core.constraints;
+
+module de.evoal.pipeline.sequences {
+
+    /**
+     * The pipeline component for generating custom sequences.
+     */
+    type 'sequence-generator' extends Source {
+        /**
+         *  The different sequences to generate. The sequences are generated in order of appearance.
+         *    Thus, if a value (let's name it b) generated here is based on a value generated here as
+         *    well (let's call it a), make sure that the generator for 'a' is configured before the
+         *    generator of 'b'.
+         *
+         * @important Make sure it matches the size of the data the function writes.
+         *
+         * TODO: Add an constraint that checks that all elements are written.
+         */
+        sequences : array instance sequence;
+    }
+
+   /**
+     * Base type for all sequence providers‚.
+     */
+	abstract type 'sequence-provider' {}
+
+	 /**
+      * Sequence provider that generates data
+      */
+	type 'expression-based-sequence' extends 'sequence-provider' {
+	    /**
+	     * The data to generate from this sequence.
+	     */
+	    variable: data;
+
+	    /**
+	     * The initial value to use.
+	     */
+		initial: real :=0.0;
+
+        /**
+         * The expression to evaluate.
+         */
+		'expression': expression;
+	}
+}

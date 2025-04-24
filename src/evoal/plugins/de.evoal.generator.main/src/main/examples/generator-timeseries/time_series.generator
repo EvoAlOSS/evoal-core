@@ -1,0 +1,38 @@
+import "definitions" from de.evoal.core.math;
+import "definitions" from 'de.evoal.pipeline.base';
+import "definitions" from 'de.evoal.pipeline.sequences';
+import "data" from 'time_value';
+
+module 'time_series' {
+    /**
+     * A simple pipeline creating a dataSequence that counts up by one
+     */
+    pipeline 'main-pipeline' [
+        /**
+         * Generate two data sequences
+         */
+        step {
+            component 'sequence-generator' {
+                // Generate a time and a value data series. Value is based on time.‚
+                sequences := [
+                    // Generate a time value that starts with 1 and is increased for every new data set
+                    'expression-based-sequence' {
+                        variable   := data time;
+                        initial    := 1;
+                        'expression' := data time + 1;
+                    },
+                    // Generate value based on the generated time value
+                    'expression-based-sequence' {
+                        variable   := data value;
+                        initial    := 1;
+                       'expression' := data time * 42;
+                    }
+                ];
+            }
+
+            writes [data time, data value];
+        }
+    ]
+
+    write "time.json" with 25 samples from executing [ pipeline 'main-pipeline'];
+}

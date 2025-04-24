@@ -1,19 +1,18 @@
 package de.evoal.languages.model.interpreter;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Objects;
 
 import org.eclipse.emf.ecore.EObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.evoal.languages.model.base.AddOrSubtractExpression;
+import de.evoal.languages.model.base.AddOrSubtractOperator;
 import de.evoal.languages.model.base.AndExpression;
 import de.evoal.languages.model.base.Array;
 import de.evoal.languages.model.base.Attribute;
 import de.evoal.languages.model.base.Call;
 import de.evoal.languages.model.base.ComparisonExpression;
-import de.evoal.languages.model.base.ConstantDefinition;
 import de.evoal.languages.model.base.ConstantReference;
 import de.evoal.languages.model.base.Instance;
 import de.evoal.languages.model.base.Literal;
@@ -28,28 +27,48 @@ import de.evoal.languages.model.base.ValueReference;
 import de.evoal.languages.model.base.XorExpression;
 import de.evoal.languages.model.base.util.BaseSwitch;
 
-public class ConstantExpressionEvaluator extends BaseSwitch<Object> {
+public abstract class AbstractExpressionEvaluator extends BaseSwitch<Object> {
 	/**
 	 * Logger instance.
 	 */
-	private final static Logger log = LoggerFactory.getLogger(ConstantExpressionEvaluator.class);
+	private final static Logger log = LoggerFactory.getLogger(AbstractExpressionEvaluator.class);
 	
 	/**
-	 * Cache for calculated constants.
-	 * 
-	 * TODO Should we register a single cache for each resource to reduce calculation time?
+	 * For evaluating constants.
 	 */
-	private Map<EObject, Object> constantCache = new HashMap<>();
+	private ConstantEvaluator constants = null;
+	
+	protected void setConstantEvaluator(final ConstantEvaluator constants) {
+		this.constants = constants;
+	}
 
 	@Override
 	public Object caseAddOrSubtractExpression(final AddOrSubtractExpression object) {
-		Object result = doSwitch(object.getLeftOperand());
-		
-		for(int i = 0; i < object.getOperands().size(); i++) {
-			throw new IllegalStateException("Not yet implemented");
-		}
-				
-		return result;
+        Object result = this.doSwitch(object.getLeftOperand());
+
+        for(int i = 0; i < object.getOperands().size(); ++i) {
+            final Object rOp = doSwitch(object.getOperands().get(i));
+ 
+            result = switch(object.getOperators().get(i)) {
+                case ADD:
+                	if(result instanceof Number && rOp instanceof Number) {
+                		yield ArithmeticNumberOperations.add(result, rOp);
+                	} else if(result instanceof String || rOp instanceof String) {
+                		yield Objects.toString(result) + Objects.toString(rOp);
+                	} else {
+                		throw new IllegalStateException("Failed to add values " + Objects.toString(result) + " and " + Objects.toString(rOp));
+                	}
+                	
+                case SUBTRACT:
+                	if(result instanceof Number && rOp instanceof Number) {
+                		yield ArithmeticNumberOperations.minus(result, rOp);
+                	} else {
+                		throw new IllegalStateException("Failed to subtract values " + Objects.toString(result) + " and " + Objects.toString(rOp));
+                	}
+            };
+        }
+
+        return result;
 	}
 
 	@Override
@@ -102,6 +121,16 @@ public class ConstantExpressionEvaluator extends BaseSwitch<Object> {
 		Object result = doSwitch(object.getLeftOperand());
 		
 		for(final PartialComparisonExpression subExpression : object.getComparison()) {
+			final Object rOp = doSwitch(subExpression.getSubExpression());
+
+			result = switch(subExpression.getOperator()) {
+				case EQUAL: 	        yield Objects.equals(result, rOp);
+				case UNEQUAL:       yield !Objects.equals(result, rOp);
+				case GREATER_EQUAL: yield BooleanNumberOperations.isGreaterThanOrEqualTo(result, rOp);
+				case GREATER_THAN:  yield BooleanNumberOperations.isGreaterThan(result, rOp);
+				case LESS_EQUAL:    yield BooleanNumberOperations.isLesserThanOrEqualTo(result, rOp);
+				case LESS_THAN:	    yield BooleanNumberOperations.isLesserThan(result, rOp);
+			};
 			throw new IllegalStateException("Not yet implemented");
 		}
 	
@@ -110,25 +139,11 @@ public class ConstantExpressionEvaluator extends BaseSwitch<Object> {
 
 	@Override
 	public Object caseConstantReference(final ConstantReference object) {
-		final ConstantDefinition definition = object.getDefinition();
-
-		if(definition == null) {
-			log.warn("Definition of constant is null.");
-			return null;
+		if(constants == null) {
+			throw new IllegalStateException("There is no constant evaluator");
 		}
 		
-		//System.out.println("Definition is: " + definition);
-		//System.out.println("  is a proxy:  " + definition.eIsProxy());
-		//System.out.println("  its value:   " + definition.getValue());
-
-		if(constantCache.containsKey(definition)) {
-			return constantCache.get(definition);
-		}
-		
-		final Object value = doSwitch(definition.getValue());
-		constantCache.put(definition, value);
-
-		return value;
+		return constants.evaluate(object);
 	}
 
 	@Override
@@ -148,17 +163,11 @@ public class ConstantExpressionEvaluator extends BaseSwitch<Object> {
 		for(int i = 0; i < object.getOperands().size(); ++i) {
 			final Object rOp = doSwitch(object.getOperands().get(i));
 			
-			switch(object.getOperators().get(i)) {
-			case DIVIDE:
-				result = ArithmeticNumberOperations.divide(result, rOp);
-				break;
-			case MODULO:
-				result = ArithmeticNumberOperations.modulo(result, rOp);
-				break;
-			case MULTIPLY:
-				result = ArithmeticNumberOperations.multiply(result, rOp);
-				break;
-			}
+			result = switch(object.getOperators().get(i)) {
+				case DIVIDE:   yield ArithmeticNumberOperations.divide(result, rOp);
+				case MODULO:   yield ArithmeticNumberOperations.modulo(result, rOp);
+				case MULTIPLY: yield ArithmeticNumberOperations.multiply(result, rOp);
+			};
 		}
 				
 		return result;
@@ -217,23 +226,33 @@ public class ConstantExpressionEvaluator extends BaseSwitch<Object> {
 		Object result = doSwitch(object.getLeftOperand());
 		
 		if(object.getRightOperand() != null) {
-			throw new IllegalStateException("Not yet implemented");			
+			final Object rOp = doSwitch(object.getRightOperand());
+			result = ArithmeticNumberOperations.pow(result, rOp);
 		}
 
 		return result;
 	}
 
 	@Override
-	public Object caseUnaryAddOrSubtractExpression(UnaryAddOrSubtractExpression object) {
+	public Object caseUnaryAddOrSubtractExpression(final UnaryAddOrSubtractExpression object) {
 		Object result = doSwitch(object.getSubExpression());
 		
 		if(!object.getOperators().isEmpty()) {
-			throw new IllegalStateException("Not yet implemented");			
+			if(!(result instanceof Number)) {
+				throw new IllegalStateException("Cannot apply unary add/subtract to value " + result);				
+			}
+			
+			for(final AddOrSubtractOperator op : object.getOperators()) {
+				result = switch(op) {
+					case ADD:      yield result;
+					case SUBTRACT: yield ArithmeticNumberOperations.multiply(result, -1);
+				};
+			}
 		}
 
 		return result;
 	}
-
+	
 	@Override
 	public Object caseValueReference(final ValueReference object) {
 		if(object instanceof de.evoal.languages.model.ddl.DataReference) {
@@ -245,7 +264,6 @@ public class ConstantExpressionEvaluator extends BaseSwitch<Object> {
 		}
 		throw new IllegalStateException("Not yet implemented: " + object.eClass() + " -- " + object);			
 	}
-
 	
 	@Override
 	public Object caseXorExpression(XorExpression object) {

@@ -8,26 +8,46 @@ import java.util.function.BiFunction;
 public final class BooleanNumberOperations {
     private BooleanNumberOperations() {}
 
-    public static Boolean isLesserThanOrEqualTo(final Object op1, final Object op2) {
+    public static Boolean isGreaterThan(final Object op1, final Object op2) {
         return dispatch(op1,
                         op2,
-                        BooleanNumberOperations::isLesserThanOrEqualToAsDouble,
-                        BooleanNumberOperations::isLesserThanOrEqualToAsLong,
-                        BooleanNumberOperations::isLesserThanOrEqualToAsInteger);
+                        BooleanNumberOperations::isGreaterThanAsDouble,
+                        BooleanNumberOperations::isGreaterThanAsLong,
+                        BooleanNumberOperations::isGreaterThanAsInteger);
     }
 
-    private static Boolean isLesserThanOrEqualToAsDouble(final Number op1, final Number op2) {
-        return op1.doubleValue() <= op2.doubleValue();
+    private static Boolean isGreaterThanAsDouble(final Number op1, final Number op2) {
+        return op1.doubleValue() > op2.doubleValue();
+    }
+    
+    private static Boolean isGreaterThanAsLong(final Number op1, final Number op2) {
+        return op1.longValue() > op2.longValue();
     }
 
-    private static Boolean isLesserThanOrEqualToAsLong(final Number op1, final Number op2) {
-        return op1.longValue() <= op2.longValue();
+    private static Boolean isGreaterThanAsInteger(final Number op1, final Number op2) {
+        return op1.intValue() > op2.intValue();
     }
 
-    private static Boolean isLesserThanOrEqualToAsInteger(final Number op1, final Number op2) {
-        return op1.intValue() <= op2.intValue();
+    public static Boolean isGreaterThanOrEqualTo(final Object op1, final Object op2) {
+        return dispatch(op1,
+                        op2,
+                        BooleanNumberOperations::isGreaterThanOrEqualToAsDouble,
+                        BooleanNumberOperations::isGreaterThanOrEqualToAsLong,
+                        BooleanNumberOperations::isGreaterThanOrEqualToAsInteger);
     }
 
+    private static Boolean isGreaterThanOrEqualToAsDouble(final Number op1, final Number op2) {
+        return op1.doubleValue() >= op2.doubleValue();
+    }
+
+    private static Boolean isGreaterThanOrEqualToAsLong(final Number op1, final Number op2) {
+        return op1.longValue() >= op2.longValue();
+    }
+
+    private static Boolean isGreaterThanOrEqualToAsInteger(final Number op1, final Number op2) {
+        return op1.intValue() >= op2.intValue();
+    }
+    
     public static Boolean isLesserThan(final Object op1, final Object op2) {
         return dispatch(op1,
                         op2,
@@ -46,6 +66,26 @@ public final class BooleanNumberOperations {
 
     private static Boolean isLesserThanAsInteger(final Number op1, final Number op2) {
         return op1.intValue() < op2.intValue();
+    }
+
+    public static Boolean isLesserThanOrEqualTo(final Object op1, final Object op2) {
+        return dispatch(op1,
+                        op2,
+                        BooleanNumberOperations::isLesserThanOrEqualToAsDouble,
+                        BooleanNumberOperations::isLesserThanOrEqualToAsLong,
+                        BooleanNumberOperations::isLesserThanOrEqualToAsInteger);
+    }
+
+    private static Boolean isLesserThanOrEqualToAsDouble(final Number op1, final Number op2) {
+        return op1.doubleValue() <= op2.doubleValue();
+    }
+
+    private static Boolean isLesserThanOrEqualToAsLong(final Number op1, final Number op2) {
+        return op1.longValue() <= op2.longValue();
+    }
+
+    private static Boolean isLesserThanOrEqualToAsInteger(final Number op1, final Number op2) {
+        return op1.intValue() <= op2.intValue();
     }
 
     public static Boolean dispatch(final Object lOp, final Object rOp,

@@ -40,11 +40,13 @@ module de.evoal.generator.main {
     exports de.evoal.pipeline.api.executor;
     exports de.evoal.pipeline.api.model;
     exports de.evoal.pipeline.api.model.dynamic;
+    exports de.evoal.pipeline.api.sequence;
 
     opens de.evoal.pipeline;
     opens de.evoal.pipeline.api.board to weld.core.impl;
     opens de.evoal.pipeline.api.cdi to weld.core.impl;
     opens de.evoal.pipeline.api.distribution to weld.core.impl;
+    opens de.evoal.pipeline.api.sequence to weld.core.impl;
     opens de.evoal.pipeline.impl to weld.core.impl;
     opens de.evoal.pipeline.impl.components.benchmarks to weld.core.impl;
     opens de.evoal.pipeline.impl.components.io to weld.core.impl;
@@ -53,4 +55,5 @@ module de.evoal.generator.main {
     opens de.evoal.pipeline.impl.internal to weld.core.impl;
     opens de.evoal.pipeline.impl.optimisation to weld.core.impl;
     opens de.evoal.pipeline.api.model.dynamic to weld.core.impl;
+    opens de.evoal.pipeline.impl.components.sequences to weld.core.impl;
 }

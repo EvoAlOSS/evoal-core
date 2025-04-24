@@ -2,7 +2,7 @@ package de.evoal.core.api.languages;
 
 import de.evoal.languages.model.base.*;
 import de.evoal.languages.model.ddl.DataDescription;
-import de.evoal.languages.model.interpreter.ConstantExpressionEvaluator;
+import de.evoal.languages.model.interpreter.ConstantEvaluator;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.emf.ecore.EObject;
 
@@ -28,7 +28,7 @@ public class AttributeEvaluator {
     /**
      * For evaluating expressions
      */
-    private final ConstantExpressionEvaluator evaluator = new ConstantExpressionEvaluator();
+    private final ConstantEvaluator evaluator = new ConstantEvaluator();
 
     public boolean attributeToBoolean(final Instance instance, final String attributeName) {
         return (Boolean) attributeToObject(instance, attributeName);
