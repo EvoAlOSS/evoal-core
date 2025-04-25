@@ -165,7 +165,9 @@ public class GenerationStatisticsWriter implements StatisticsWriter {
     	}
     	
     	//we should have a list of sorted double values for each dimension now, containing all values existing in the dvl ranges
-        hypercubeDefinitions.clear();
+        //TODO changed because it was throwing error when null/ empty
+        if (hypercubeDefinitions == null) hypercubeDefinitions = new ArrayList<>();
+        else hypercubeDefinitions.clear();
     	addVariationsOfNextDimension(dimensions, 0, new HypercubeBuilder(dimensions), listOfBoundaries, hypercubeDefinitions);
     }
     

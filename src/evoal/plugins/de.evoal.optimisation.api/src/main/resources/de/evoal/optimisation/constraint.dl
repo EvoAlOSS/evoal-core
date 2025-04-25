@@ -16,4 +16,6 @@ module de.evoal.optimisation.constraint {
 	def void 'ranged-connection'(data ref1, expression range1, data ref2, expression range2, real connection);
 
 	def void constraint(expression exp, string category);
+
+	def void range(real lower, real upper);
 }
