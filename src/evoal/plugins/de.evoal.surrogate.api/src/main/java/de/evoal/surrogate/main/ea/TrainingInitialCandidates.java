@@ -15,6 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.enterprise.context.Dependent;
 import java.io.File;
 import java.util.List;
 import java.util.function.Supplier;
@@ -48,7 +49,6 @@ public class TrainingInitialCandidates implements InitialCandidatesProvider {
         final List<Properties> properties = streamSupplier.apply(totalSpecification)
                         .map(p -> new Properties(sourceSpecification).putAll(p))
                         .collect(Collectors.toList());
-
         final int upperLimit = properties.size();
         final RandomGenerator random = RandomGenerator.getDefault();
         final Supplier<Properties> chooseRandomly = () -> {

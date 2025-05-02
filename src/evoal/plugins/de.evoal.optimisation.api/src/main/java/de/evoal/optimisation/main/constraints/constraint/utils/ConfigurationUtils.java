@@ -8,6 +8,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.Optional;
 
 @ApplicationScoped
 public class ConfigurationUtils {
@@ -28,5 +29,11 @@ public class ConfigurationUtils {
                 .filter(i -> category.equals(BeanFactory.create(AttributeHelper.class).lookup(i, "category")))
                 .findFirst()
                 .get();
+    }
+
+    public Optional<Instance> findEpsilonHandler(final List<Instance> handlers) {
+        return handlers.stream()
+                .filter(AttributeHelper.filterInstanceByType("epsilon-handler"))
+                .findFirst();
     }
 }

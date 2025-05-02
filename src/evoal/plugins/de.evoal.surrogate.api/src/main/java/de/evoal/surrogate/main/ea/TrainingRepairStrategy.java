@@ -21,6 +21,7 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @Dependent
+@Named("de.evoal.surrogate.optimisation.repair-with-training")
 public class TrainingRepairStrategy implements RepairStrategy {
     @Inject
     private Blackboard board;

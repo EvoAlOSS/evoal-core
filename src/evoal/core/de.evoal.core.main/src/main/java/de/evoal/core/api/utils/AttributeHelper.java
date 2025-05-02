@@ -199,7 +199,7 @@ public class AttributeHelper {
         return (T) current;
     }
 
-    public static Predicate<? super Value> filterInstanceByType(final String instanceTypeName) {
+    public static <T extends Value> Predicate<T> filterInstanceByType(final String instanceTypeName) {
         return i -> instanceTypeName.equals(((Instance)i).getDefinition().getName());
     }
 

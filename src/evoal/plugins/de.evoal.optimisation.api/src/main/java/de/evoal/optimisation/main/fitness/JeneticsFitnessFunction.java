@@ -1,4 +1,4 @@
-package de.evoal.optimisation.ea.main.fitness;
+package de.evoal.optimisation.main.fitness;
 
 import de.evoal.optimisation.api.model.OptimisationValue;
 import de.evoal.core.api.properties.Properties;

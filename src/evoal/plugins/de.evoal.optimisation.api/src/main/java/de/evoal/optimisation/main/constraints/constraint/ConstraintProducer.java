@@ -3,9 +3,17 @@ package de.evoal.optimisation.main.constraints.constraint;
 import de.evoal.optimisation.api.constraints.model.Constraint;
 import de.evoal.optimisation.api.constraints.model.Constraints;
 import de.evoal.optimisation.api.constraints.model.DataConstraints;
+import de.evoal.core.api.cdi.ConfigurationValue;
+import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
+import de.evoal.optimisation.main.constraints.constraint.utils.ConfigurationUtils;
+import de.evoal.core.api.languages.AttributeEvaluator;
+import de.evoal.languages.model.base.Instance;
 import de.evoal.core.api.properties.PropertiesSpecification;
+import de.evoal.core.api.properties.PropertySpecification;
 import javax.enterprise.context.ApplicationScoped;
+import de.evoal.core.api.utils.Requirements;
 import javax.enterprise.inject.Produces;
+import de.evoal.optimisation.main.constraints.constraint.utils.EpsilonUtils;
 import javax.inject.Named;
 
 import de.evoal.optimisation.main.constraints.constraint.ast.ConditionConverter;
@@ -15,7 +23,9 @@ import de.evoal.languages.model.base.DefinedFunctionName;
 import de.evoal.languages.model.ddl.DataDescription;
 import de.evoal.languages.model.base.Call;
 import lombok.extern.slf4j.Slf4j;
+import javax.inject.Inject;
 
+import java.util.*;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -25,11 +35,22 @@ public class ConstraintProducer {
     private PropertiesSpecification optimisationSpaceSpecification;
     private PropertiesSpecification searchSpaceSecification;
 
+    @Inject
+    private ConfigurationUtils configUtil;
+    @Inject
+    private AttributeEvaluator attributeEvaluator;
+
+    @Inject
+    private EpsilonUtils epsilonUtils;
+
     @Produces
     @ApplicationScoped
     public Constraints create(final DataConstraints constraints,
                               @Named("search-space-specification") final PropertiesSpecification searchSpaceSecification,
-                              @Named("optimisation-space-specification") final PropertiesSpecification optimisationSpaceSpecification) {
+                              @Named("optimisation-space-specification") final PropertiesSpecification optimisationSpaceSpecification,
+                              final @ConfigurationValue(entry = OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.handlers") List<Instance> handlerConfigurations) {
+
+
         this.optimisationSpaceSpecification = optimisationSpaceSpecification;
         this.searchSpaceSecification = searchSpaceSecification;
 
@@ -51,6 +72,23 @@ public class ConstraintProducer {
                         .map(Optional::get)
                         .forEach(result.getConstraints()::add);
         });
+
+        //TODO here would be I think where to add the constraints of the epsilon handler...
+        /*
+           access handler config, read out constraints and add to constraints list...
+         */
+        Optional<Instance> epsilonHandler = configUtil.findEpsilonHandler(handlerConfigurations);
+        epsilonHandler.ifPresent(handler -> {
+            DataDescription[] epsilonData = attributeEvaluator.attributeToDataDescriptionArray(handler, "objectives");
+            double[] bounds = attributeEvaluator.attributeToDoubleArray(handler, "bounds");
+            Requirements.requireSameSize(bounds, epsilonData);
+            for (int i=0; i<epsilonData.length;i++) {
+                PropertySpecification data = optimisationSpaceSpecification.find(epsilonData[i].getName());
+                int dataIndex = optimisationSpaceSpecification.indexOf(data);
+                result.getConstraints().add(epsilonUtils.convert(data, dataIndex, bounds[i]));
+            }
+        });
+
         log.info("Loaded {} constraints.", result.getConstraints().size());
 
         return result;

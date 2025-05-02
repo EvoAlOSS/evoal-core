@@ -8,7 +8,9 @@ import org.apache.commons.math3.util.Pair;
 
 import java.util.*;
 import java.util.stream.Stream;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class DataConstraints {
     private final List<Expression> globalConstraints = new LinkedList<>();
     private final Map<DataDescription, List<Expression>> dataConstraints = new HashMap<>();

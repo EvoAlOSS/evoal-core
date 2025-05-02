@@ -122,6 +122,41 @@ module de.evoal.optimisation.ea.optimisation {
 	abstract type 'repair-strategy' {}
 	
 	type 'repair-with-random' extends 'repair-strategy' {}
+
+	/**
+	 * Repair strategy for 'de.evoal.optimisation.core.epsilon-comparator'.
+	 */
+	type 'epsilon-repair' extends 'repair-strategy' {}
+
+    /**
+     * Constraint handler for 'de.evoal.optimisation.core.epsilon-comparator'.
+     */
+	type 'epsilon-handler' extends 'constraint-handler' {
+	    /**
+	     * Category of handler.
+	     */
+	    category : string := "epsilon";
+
+	    /**
+	     * How to calculate the constraints.
+	     */
+        calculation : instance 'constraint-calculation' := 'normal-calculation'{};
+
+        /**
+         * How to deal with violating individuals.
+         */
+        'constraint-handling' : instance 'constraint-handling' := 'kill-at-birth' {'repair-strategy' := 'epsilon-repair'{};};
+
+        /**
+         * Objectives to check.
+         */
+        objectives : array data;
+
+        /**
+         * Allowed bounds for the objectives.
+         */
+	    bounds : array real;
+	}
 	
 	type 'malus-for-fitness' extends 'constraint-handling' {
 		smoothing : real;

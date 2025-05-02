@@ -32,6 +32,7 @@ module de.evoal.optimisation.ea {
     exports de.evoal.optimisation.ea.api.codec;
     exports de.evoal.optimisation.ea.api.initial;
     exports de.evoal.optimisation.ea.api.operators;
+    exports de.evoal.optimisation.ea.main.fitness;
 
     opens de.evoal.optimisation.ea;
     opens de.evoal.optimisation.ea.main.alterer to weld.core.impl;

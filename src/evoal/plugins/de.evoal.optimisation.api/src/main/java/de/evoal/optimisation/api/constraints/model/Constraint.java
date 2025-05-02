@@ -6,11 +6,13 @@ import lombok.Data;
 
 import java.util.List;
 import java.util.function.BiFunction;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * A single evaluable constraint. A constraint ca be applied to an individual
  * (properties) and produces a {@link ConstraintResult} in return.
  */
+@Slf4j
 @Data
 public class Constraint {
     /**
@@ -41,7 +43,9 @@ public class Constraint {
      */
     public ConstraintResult apply(final Properties genotypeProps, final Properties fitnessProps) {
         final ConstraintResult result = new ConstraintResult();
-
+        log.info("applying constraint and generating constraint result. Data is following:");
+        log.info("constraint type: " + getConstraintType());
+        log.info("used properties: " + usedProperties.toString());
         result.setConstraint(this);
         result.setComparisonDifference(((Number)function.apply(genotypeProps, fitnessProps)).doubleValue());
         result.getUsedProperties().addAll(usedProperties);

@@ -20,7 +20,7 @@ import de.evoal.optimisation.api.model.StoppingCriterion;
 import de.evoal.optimisation.api.statistics.writer.StatisticsWriter;
 import de.evoal.optimisation.ea.api.codec.CustomCodec;
 import de.evoal.optimisation.ea.main.alterer.AltererFactory;
-import de.evoal.optimisation.ea.main.fitness.JeneticsFitnessFunction;
+import de.evoal.optimisation.main.fitness.JeneticsFitnessFunction;
 import de.evoal.optimisation.ea.main.initial.InitialStream;
 import de.evoal.optimisation.ea.main.jenetics.ConstraintList;
 import de.evoal.optimisation.ea.main.statistics.IterationAdapter;

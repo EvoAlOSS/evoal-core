@@ -55,6 +55,9 @@ module de.evoal.optimisation.api {
     exports de.evoal.optimisation.api.model.impl;
     exports de.evoal.optimisation.api.statistics.io;
     exports de.evoal.optimisation.api.statistics.writer;
+    exports de.evoal.optimisation.main.fitness;
+    exports de.evoal.optimisation.main.constraints.constraint.strategies.constraint;
+    exports de.evoal.optimisation.main.constraints.constraint.strategies.calculations;
 
     opens de.evoal.optimisation.api.board to weld.core.impl;
     opens de.evoal.optimisation.api.cdi to weld.core.impl;

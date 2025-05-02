@@ -179,6 +179,17 @@ module de.evoal.optimisation.core {
 	 */
 	type 'numeric-comparator' extends comparator {
 	}
+
+    /**
+    * Comparator for multiobjective optimisation that considers a single
+    *   objective and enforces the other objectives to be in bounds.
+    */
+    type 'epsilon-comparator' extends comparator {
+        /**
+         * The objective to optimise.
+         */
+        'goal-objective' : data;
+    }
 	
 	/**
 	 * A fitness function during the optimisation (not at the problem-level).

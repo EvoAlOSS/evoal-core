@@ -31,7 +31,8 @@ public class CalculationFactory {
     @PostConstruct
     public void init() {
        handlerConfigurations.stream()
-                            .filter(AttributeHelper.filterInstanceByType("constraint-handler"))
+                            .filter(AttributeHelper.filterInstanceByType("constraint-handler")
+                                    .or(AttributeHelper.filterInstanceByType("epsilon-handler")))
                             .forEach(i -> {
                                 final String category = helper.lookup(i, "category");
                                 final Instance config = helper.lookup(i, "calculation");

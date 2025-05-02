@@ -34,6 +34,10 @@ public class AttributeEvaluator {
         return (Boolean) attributeToObject(instance, attributeName);
     }
 
+    public DataDescription attributeToDataDescription(final Instance instance, final String attributeName) {
+        return (DataDescription) attributeToObject(instance, attributeName);
+    }
+
     public double attributeToDouble(final Instance instance, final String attributeName) {
         return attributeToNumber(instance, attributeName).doubleValue();
     }

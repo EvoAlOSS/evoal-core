@@ -23,4 +23,9 @@ public class RandomGenotypeStrategy implements RepairStrategy {
         return stream.findFirst()
                      .get();
     }
+
+    @Override
+    public RepairStrategy init(Instance configuration) {
+        return this;
+    }
 }

@@ -2,11 +2,12 @@ package de.evoal.optimisation.ea.main.alterer.mutator;
 
 import de.evoal.optimisation.api.correlations.Correlations;
 import de.evoal.optimisation.ea.api.codec.CustomCodec;
+import de.evoal.optimisation.ea.main.jenetics.NaiveBoundedBitChromosome;
 import io.jenetics.*;
 import io.jenetics.util.MSeq;
-
 import java.util.random.RandomGenerator;
-
+import lombok.extern.slf4j.Slf4j;
+@Slf4j
 public class SingleBitFlipCorrelationMutator<
         C extends Comparable<? super C>
         >
@@ -14,7 +15,7 @@ public class SingleBitFlipCorrelationMutator<
 {
 
     /**
-     * Constructs an alterer with a given filip probability.
+     * Constructs an alterer with a given flip probability.
      *
      * @param probability the flip probability.
      * @throws IllegalArgumentException if the {@code probability} is not in the
@@ -72,18 +73,23 @@ public class SingleBitFlipCorrelationMutator<
                 index = findNearestIndex(genes, index, false);
                 newBit = true;
                 direction = SingleBitFlipCorrelationMutatorMemento.FlipDirection.UP;
+                break;
             }
 
             case TRANSITIVE_DOWN: {
                 index = findNearestIndex(genes, index, true);
                 newBit = false;
                 direction = SingleBitFlipCorrelationMutatorMemento.FlipDirection.DOWN;
+                break;
             }
         }
-
+//        double oldValue = ((NaiveBoundedBitChromosome) chromosome.newInstance(genes.toISeq())).doubleValue();
         genes.set(index, BitGene.of(newBit));
         memento.setDirection(direction);
-
+//        double newValue = ((NaiveBoundedBitChromosome) chromosome.newInstance(genes.toISeq())).doubleValue();
+//        log.error("direction: " + memento.getDirection());
+//        log.error("previous value: " + oldValue);
+//        log.error("new value: " + newValue);
         return new MutatorResult(
                 chromosome.newInstance(genes.toISeq()),
                 1

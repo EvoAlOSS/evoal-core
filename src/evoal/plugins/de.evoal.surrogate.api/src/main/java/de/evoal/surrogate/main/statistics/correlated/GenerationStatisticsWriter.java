@@ -40,11 +40,13 @@ import java.util.stream.Collectors;
 @Dependent
 public class GenerationStatisticsWriter implements StatisticsWriter {
 
-    private long startTime;
+    private long endTime;
+
+    private Iteration firstGeneration;
 
     private Iteration generationWithBestIndividual;
 
-    private long endTime;
+    private long startTime;
 
     @Inject
     private Blackboard board;
@@ -55,9 +57,11 @@ public class GenerationStatisticsWriter implements StatisticsWriter {
     @Inject @Named("surrogate-target-properties-specification")
     private PropertiesSpecification targetSpec;
 
+
     @Inject
     @ConfigurationValue(entry = OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "problem.maximise")
     private boolean maximise;
+
     private List<Properties> sourceTrainingPoints;
 
     private Writer writer;
@@ -107,7 +111,10 @@ public class GenerationStatisticsWriter implements StatisticsWriter {
 
     private void calculateCovariance(final Properties candidate, final Object[] data, final int index) {
         final int dimensions = sourceSpec.size();
-        final int trainingsSize = sourceTrainingPoints.size();
+        List<Candidate> candidateList = firstGeneration.candidates().toList();
+
+        final int trainingsSize = candidateList.size();
+        log.error("training size is... " + trainingsSize);
         final int onTheFlySize = trainingsSize + 1;
 
         final Matrix trainingsMatrix = new Matrix(dimensions, trainingsSize);
@@ -116,6 +123,7 @@ public class GenerationStatisticsWriter implements StatisticsWriter {
         // calculate covariance matrix for trainings data
         for(int t = 0; t < trainingsSize; t++) {
             for(int d = 0; d < dimensions; ++d) {
+
                 final double value = sourceTrainingPoints
                         .get(t)
                         .getAsDouble(d);
@@ -129,16 +137,18 @@ public class GenerationStatisticsWriter implements StatisticsWriter {
         }
 
         final Matrix trainingsCovarianceMatrix = calculateCovarianceMatrix(trainingsMatrix);
+        final Matrix firstGenerationMatrix = createFirstGenerationMatrix();
+        final Matrix firstGenerationCovariance = calculateCovarianceMatrix(firstGenerationMatrix);
 
         {
             final Matrix onTheFlyCovarianceMatrix = calculateCovarianceMatrix(onTheFlyMatrix);
-            calculateDifference(Matrix.of(trainingsCovarianceMatrix.toArray()), onTheFlyCovarianceMatrix, data, index);
+            calculateDifference(firstGenerationCovariance, onTheFlyCovarianceMatrix, data, index);
         }
 
         {
             final Matrix bestGenerationMatrix = createBestGenerationMatrix();
             final Matrix bestGenerationCovariance = calculateCovarianceMatrix(bestGenerationMatrix);
-            calculateDifference(Matrix.of(trainingsCovarianceMatrix.toArray()), bestGenerationCovariance, data, index +  dimensions * dimensions + 2);
+            calculateDifference(firstGenerationCovariance, bestGenerationCovariance, data, index +  dimensions * dimensions + 2);
         }
     }
 
@@ -153,6 +163,29 @@ public class GenerationStatisticsWriter implements StatisticsWriter {
 
         for(int i = 0; i < size; ++i) {
             final Candidate candidate = individuals.get(i);
+            final Properties individual = candidate.searchSpaceRepresentation();
+
+            final Object [] data = individual.getValues();
+
+            for(int j = 0; j < data.length; ++j) {
+                result.set(i, j, (Double)data[j]);
+            }
+        }
+
+        return result;
+    }
+
+    private Matrix createFirstGenerationMatrix() {
+        final List<Candidate> candidates = firstGeneration.candidates().collect(Collectors.toList());
+
+        final int dimensions = sourceSpec.size();
+        final Optional<Integer> optSize = firstGeneration.candidateCount();
+        final int size = optSize.orElse(candidates.size());
+
+        final Matrix result = new Matrix(dimensions, size);
+
+        for(int i = 0; i < size; ++i) {
+            final Candidate candidate = candidates.get(i);
             final Properties individual = candidate.searchSpaceRepresentation();
 
             final Object [] data = individual.getValues();
@@ -211,15 +244,16 @@ public class GenerationStatisticsWriter implements StatisticsWriter {
     }
 
     private Object[] dataOfBest() {
+
         fetchTrainingData();
 
-        final Object [] data = new Object[3 + (int)Math.pow(sourceSpec.size(), 2) + 2 + (int)Math.pow(sourceSpec.size(), 2) + 2 + 1];
-        final Candidate bestIndividual = generationWithBestIndividual.bestCandidate();
-        final Properties candidate = bestIndividual.searchSpaceRepresentation();
+        final Object [] data = new Object[3 + 1 + (int)Math.pow(sourceSpec.size(), 2) + 2 + (int)Math.pow(sourceSpec.size(), 2) + 2 + 1];
+        final Candidate bestCandidate = generationWithBestIndividual.bestCandidate();
+        final Properties candidate = bestCandidate.searchSpaceRepresentation();
 
         data[0] = generationWithBestIndividual.iteration();
         data[1] = Arrays.toString(candidate.getValues());
-        data[2] = bestIndividual.age();
+        data[2] = bestCandidate.age();
 
         calculateCovariance(candidate, data, 2 + 1);
         data[data.length - 1] = endTime - startTime;
@@ -245,6 +279,7 @@ public class GenerationStatisticsWriter implements StatisticsWriter {
 
     private void updateBestGeneration(final Iteration result) {
         if(generationWithBestIndividual == null) {
+            firstGeneration = result;
             generationWithBestIndividual = result;
         } else {
             int comparison = generationWithBestIndividual.bestCandidate().value().compareTo(result.bestCandidate().value());

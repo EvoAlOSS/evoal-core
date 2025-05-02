@@ -13,6 +13,8 @@ import de.evoal.optimisation.api.model.OptimisationFunction;
 import de.evoal.optimisation.ea.api.codec.CustomCodec;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.optimisation.main.constraints.constraint.utils.ConfigurationUtils;
+import de.evoal.optimisation.main.constraints.constraint.strategies.constraint.EpsilonStrategy;
+import de.evoal.optimisation.main.constraints.constraint.strategies.calculations.NormalCalculation;
 import de.evoal.languages.model.base.*;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -23,6 +25,7 @@ import javax.inject.Named;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.Optional;
 
 @ApplicationScoped
 public class JeneticsConstraintProducer {
@@ -43,22 +46,32 @@ public class JeneticsConstraintProducer {
 
         // collect group information to handle
         final List<Instance> groups = configUtil.findConstraintHandlerByHandlingStrategy(handlerConfigurations, "kill-at-birth");
+
+        Optional<Instance> epsilonHandler = configUtil.findEpsilonHandler(handlerConfigurations);
+        epsilonHandler.ifPresent(handler -> {
+            groups.add(handler);
+        });
+
         final Map<String, Instance> configurationMap = groups.stream()
                                                              .collect(Collectors.toMap(i -> (String)(helper.lookup(i, "category")), Function.identity()));
+
         final List<Constraint> listOfConstraints = constraints.getConstraints();
 
-        return listOfConstraints
+        List<io.jenetics.engine.Constraint> jConstraints = new ArrayList<>();
+        jConstraints.addAll(listOfConstraints
                     .stream()
                     .filter(c -> configurationMap.containsKey(c.getGroup()))
                     .map(s -> {
                         final Instance handlerConfiguration = configurationMap.get(s.getGroup());
-                        final Instance repairConfiguration = helper.lookup(handlerConfiguration, "constraint-handling.repair-strategy");
+                        final Instance repairConfiguration = (s.getGroup().equals("epsilon")) ? handlerConfiguration
+                                : helper.lookup(handlerConfiguration, "constraint-handling.repair-strategy");
 
                         final CalculationStrategy cStrategy = factory.create(s);
                         final RepairStrategy rStrategy = BeanFactory.createComponent(RepairStrategy.class, repairConfiguration);
 
                         return new JeneticsConstraintStrategy(cStrategy, codec, function, optimisationSpec, rStrategy);
                     })
-                    .collect(Collectors.toList());
+                    .collect(Collectors.toList()));
+        return jConstraints;
     }
 }

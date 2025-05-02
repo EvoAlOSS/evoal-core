@@ -3,6 +3,7 @@ package de.evoal.optimisation.ea.main.fitness;
 import de.evoal.core.api.cdi.BeanFactory;
 import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
+import de.evoal.optimisation.main.fitness.JeneticsFitnessFunction;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.Dependent;
