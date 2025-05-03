@@ -1,6 +1,8 @@
 grammar de.evoal.languages.model.dl.dsl.DefinitionLanguage with de.evoal.languages.model.base.dsl.BaseLanguage
 
 import "https://www.evoal.de/languages/dl/1.0.0"
+import "https://www.evoal.de/languages/ddl/1.0.0" as ddl
+import "https://www.evoal.de/languages/base/1.0.0" as base
 
 
 DefinitionModelRule returns DefinitionModule:
@@ -8,4 +10,35 @@ DefinitionModelRule returns DefinitionModule:
 	'module' name = QualifiedName '{'
 		((types += TypeDefinitionRule ) | (functions += FunctionDefinitionRule ) | constants += ConstantDefinitionRule)*
 	'}'
+;
+
+@Override
+ReferenceRule returns base::ValueReference:
+	ConstantReferenceRule | DataReferenceRule
+;
+
+DataReferenceRule returns ddl::DataReference:	
+	'data' definition = [ddl::DataDescription|QualifiedName]
+;
+
+@Override
+TypeRule returns base::Type:
+	StringTypeRule | IntTypeRule | RealTypeRule | BooleanTypeRule | LiteralTypeRule | ArrayTypeRule | InstanceTypeRule | VoidTypeRule | ExpressionTypeRule | DataTypeRule | DefinedDataTypeRule
+;
+
+DefinedDataTypeRule returns ddl::DataType:
+	definition = [ddl::DataDescription|QualifiedName]
+;
+
+EnumLiteralReferenceRule returns ddl::EnumLiteralReference:
+	literal = [ddl::EnumLiteral|QualifiedName]
+;
+
+@Override
+LiteralRule returns base::Literal:
+	NumberLiteralRule
+		| StringLiteralRule
+		| BooleanLiteralRule
+		| InstanceLiteralRule
+		| EnumLiteralReferenceRule
 ;

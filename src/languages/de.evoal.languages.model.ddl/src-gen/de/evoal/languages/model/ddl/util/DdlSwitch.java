@@ -3,6 +3,8 @@
 package de.evoal.languages.model.ddl.util;
 
 import de.evoal.languages.model.base.Definition;
+import de.evoal.languages.model.base.Literal;
+import de.evoal.languages.model.base.Type;
 import de.evoal.languages.model.base.Value;
 import de.evoal.languages.model.base.ValueReference;
 
@@ -82,6 +84,26 @@ public class DdlSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case DdlPackage.BASE_DATA_TYPE_DEFINITION: {
+				BaseDataTypeDefinition baseDataTypeDefinition = (BaseDataTypeDefinition)theEObject;
+				T result = caseBaseDataTypeDefinition(baseDataTypeDefinition);
+				if (result == null) result = caseDataTypeDefinition(baseDataTypeDefinition);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case DdlPackage.ENUM_LITERAL: {
+				EnumLiteral enumLiteral = (EnumLiteral)theEObject;
+				T result = caseEnumLiteral(enumLiteral);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case DdlPackage.ENUM_TYPE_DEFINITION: {
+				EnumTypeDefinition enumTypeDefinition = (EnumTypeDefinition)theEObject;
+				T result = caseEnumTypeDefinition(enumTypeDefinition);
+				if (result == null) result = caseDataTypeDefinition(enumTypeDefinition);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case DdlPackage.DATA_DESCRIPTION: {
 				DataDescription dataDescription = (DataDescription)theEObject;
 				T result = caseDataDescription(dataDescription);
@@ -139,6 +161,21 @@ public class DdlSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case DdlPackage.DATA_TYPE: {
+				DataType dataType = (DataType)theEObject;
+				T result = caseDataType(dataType);
+				if (result == null) result = caseType(dataType);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case DdlPackage.ENUM_LITERAL_REFERENCE: {
+				EnumLiteralReference enumLiteralReference = (EnumLiteralReference)theEObject;
+				T result = caseEnumLiteralReference(enumLiteralReference);
+				if (result == null) result = caseLiteral(enumLiteralReference);
+				if (result == null) result = caseValue(enumLiteralReference);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -170,6 +207,51 @@ public class DdlSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseDataTypeDefinition(DataTypeDefinition object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Base Data Type Definition</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Base Data Type Definition</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseBaseDataTypeDefinition(BaseDataTypeDefinition object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Enum Literal</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Enum Literal</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseEnumLiteral(EnumLiteral object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Enum Type Definition</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Enum Type Definition</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseEnumTypeDefinition(EnumTypeDefinition object) {
 		return null;
 	}
 
@@ -279,6 +361,36 @@ public class DdlSwitch<T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Data Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Data Type</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDataType(DataType object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Enum Literal Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Enum Literal Reference</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseEnumLiteralReference(EnumLiteralReference object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Definition</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -320,6 +432,36 @@ public class DdlSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseValueReference(ValueReference object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Type</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseType(Type object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Literal</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Literal</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseLiteral(Literal object) {
 		return null;
 	}
 

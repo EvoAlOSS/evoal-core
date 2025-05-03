@@ -188,6 +188,171 @@ public interface DdlPackage extends EPackage {
 	int DATA_TYPE_DEFINITION_FEATURE_COUNT = 5;
 
 	/**
+	 * The meta object id for the '{@link de.evoal.languages.model.ddl.impl.BaseDataTypeDefinitionImpl <em>Base Data Type Definition</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.evoal.languages.model.ddl.impl.BaseDataTypeDefinitionImpl
+	 * @see de.evoal.languages.model.ddl.impl.DdlPackageImpl#getBaseDataTypeDefinition()
+	 * @generated
+	 */
+	int BASE_DATA_TYPE_DEFINITION = 2;
+
+	/**
+	 * The feature id for the '<em><b>Scale</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BASE_DATA_TYPE_DEFINITION__SCALE = DATA_TYPE_DEFINITION__SCALE;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BASE_DATA_TYPE_DEFINITION__NAME = DATA_TYPE_DEFINITION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BASE_DATA_TYPE_DEFINITION__DESCRIPTION = DATA_TYPE_DEFINITION__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BASE_DATA_TYPE_DEFINITION__CONSTRAINTS = DATA_TYPE_DEFINITION__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Constraints2</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BASE_DATA_TYPE_DEFINITION__CONSTRAINTS2 = DATA_TYPE_DEFINITION__CONSTRAINTS2;
+
+	/**
+	 * The number of structural features of the '<em>Base Data Type Definition</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BASE_DATA_TYPE_DEFINITION_FEATURE_COUNT = DATA_TYPE_DEFINITION_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link de.evoal.languages.model.ddl.impl.EnumLiteralImpl <em>Enum Literal</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.evoal.languages.model.ddl.impl.EnumLiteralImpl
+	 * @see de.evoal.languages.model.ddl.impl.DdlPackageImpl#getEnumLiteral()
+	 * @generated
+	 */
+	int ENUM_LITERAL = 3;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUM_LITERAL__NAME = 0;
+
+	/**
+	 * The number of structural features of the '<em>Enum Literal</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUM_LITERAL_FEATURE_COUNT = 1;
+
+	/**
+	 * The meta object id for the '{@link de.evoal.languages.model.ddl.impl.EnumTypeDefinitionImpl <em>Enum Type Definition</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.evoal.languages.model.ddl.impl.EnumTypeDefinitionImpl
+	 * @see de.evoal.languages.model.ddl.impl.DdlPackageImpl#getEnumTypeDefinition()
+	 * @generated
+	 */
+	int ENUM_TYPE_DEFINITION = 4;
+
+	/**
+	 * The feature id for the '<em><b>Scale</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUM_TYPE_DEFINITION__SCALE = DATA_TYPE_DEFINITION__SCALE;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUM_TYPE_DEFINITION__NAME = DATA_TYPE_DEFINITION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUM_TYPE_DEFINITION__DESCRIPTION = DATA_TYPE_DEFINITION__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUM_TYPE_DEFINITION__CONSTRAINTS = DATA_TYPE_DEFINITION__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Constraints2</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUM_TYPE_DEFINITION__CONSTRAINTS2 = DATA_TYPE_DEFINITION__CONSTRAINTS2;
+
+	/**
+	 * The feature id for the '<em><b>Literals</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUM_TYPE_DEFINITION__LITERALS = DATA_TYPE_DEFINITION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Enum Type Definition</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUM_TYPE_DEFINITION_FEATURE_COUNT = DATA_TYPE_DEFINITION_FEATURE_COUNT + 1;
+
+	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.ddl.impl.DataDescriptionImpl <em>Data Description</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -195,7 +360,7 @@ public interface DdlPackage extends EPackage {
 	 * @see de.evoal.languages.model.ddl.impl.DdlPackageImpl#getDataDescription()
 	 * @generated
 	 */
-	int DATA_DESCRIPTION = 2;
+	int DATA_DESCRIPTION = 5;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -241,7 +406,7 @@ public interface DdlPackage extends EPackage {
 	 * @see de.evoal.languages.model.ddl.impl.DdlPackageImpl#getBaseDataDescription()
 	 * @generated
 	 */
-	int BASE_DATA_DESCRIPTION = 3;
+	int BASE_DATA_DESCRIPTION = 6;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -296,7 +461,7 @@ public interface DdlPackage extends EPackage {
 	 * @see de.evoal.languages.model.ddl.impl.DdlPackageImpl#getTypedBaseDataDescription()
 	 * @generated
 	 */
-	int TYPED_BASE_DATA_DESCRIPTION = 4;
+	int TYPED_BASE_DATA_DESCRIPTION = 7;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -360,7 +525,7 @@ public interface DdlPackage extends EPackage {
 	 * @see de.evoal.languages.model.ddl.impl.DdlPackageImpl#getStructuredDataDescription()
 	 * @generated
 	 */
-	int STRUCTURED_DATA_DESCRIPTION = 6;
+	int STRUCTURED_DATA_DESCRIPTION = 9;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.ddl.impl.UntypedBaseDataDescriptionImpl <em>Untyped Base Data Description</em>}' class.
@@ -370,7 +535,7 @@ public interface DdlPackage extends EPackage {
 	 * @see de.evoal.languages.model.ddl.impl.DdlPackageImpl#getUntypedBaseDataDescription()
 	 * @generated
 	 */
-	int UNTYPED_BASE_DATA_DESCRIPTION = 5;
+	int UNTYPED_BASE_DATA_DESCRIPTION = 8;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -479,7 +644,7 @@ public interface DdlPackage extends EPackage {
 	 * @see de.evoal.languages.model.ddl.impl.DdlPackageImpl#getDataReference()
 	 * @generated
 	 */
-	int DATA_REFERENCE = 7;
+	int DATA_REFERENCE = 10;
 
 	/**
 	 * The feature id for the '<em><b>Definition</b></em>' reference.
@@ -507,7 +672,7 @@ public interface DdlPackage extends EPackage {
 	 * @see de.evoal.languages.model.ddl.impl.DdlPackageImpl#getSelfReference()
 	 * @generated
 	 */
-	int SELF_REFERENCE = 8;
+	int SELF_REFERENCE = 11;
 
 	/**
 	 * The number of structural features of the '<em>Self Reference</em>' class.
@@ -519,6 +684,62 @@ public interface DdlPackage extends EPackage {
 	int SELF_REFERENCE_FEATURE_COUNT = BasePackage.VALUE_REFERENCE_FEATURE_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link de.evoal.languages.model.ddl.impl.DataTypeImpl <em>Data Type</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.evoal.languages.model.ddl.impl.DataTypeImpl
+	 * @see de.evoal.languages.model.ddl.impl.DdlPackageImpl#getDataType()
+	 * @generated
+	 */
+	int DATA_TYPE = 12;
+
+	/**
+	 * The feature id for the '<em><b>Definition</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_TYPE__DEFINITION = BasePackage.TYPE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Data Type</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_TYPE_FEATURE_COUNT = BasePackage.TYPE_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link de.evoal.languages.model.ddl.impl.EnumLiteralReferenceImpl <em>Enum Literal Reference</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.evoal.languages.model.ddl.impl.EnumLiteralReferenceImpl
+	 * @see de.evoal.languages.model.ddl.impl.DdlPackageImpl#getEnumLiteralReference()
+	 * @generated
+	 */
+	int ENUM_LITERAL_REFERENCE = 13;
+
+	/**
+	 * The feature id for the '<em><b>Literal</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUM_LITERAL_REFERENCE__LITERAL = BasePackage.LITERAL_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Enum Literal Reference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUM_LITERAL_REFERENCE_FEATURE_COUNT = BasePackage.LITERAL_FEATURE_COUNT + 1;
+
+	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.ddl.ScaleType <em>Scale Type</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -526,7 +747,7 @@ public interface DdlPackage extends EPackage {
 	 * @see de.evoal.languages.model.ddl.impl.DdlPackageImpl#getScaleType()
 	 * @generated
 	 */
-	int SCALE_TYPE = 9;
+	int SCALE_TYPE = 14;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.ddl.RepresentationType <em>Representation Type</em>}' enum.
@@ -536,7 +757,7 @@ public interface DdlPackage extends EPackage {
 	 * @see de.evoal.languages.model.ddl.impl.DdlPackageImpl#getRepresentationType()
 	 * @generated
 	 */
-	int REPRESENTATION_TYPE = 10;
+	int REPRESENTATION_TYPE = 15;
 
 
 	/**
@@ -668,6 +889,58 @@ public interface DdlPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getDataTypeDefinition_Constraints2();
+
+	/**
+	 * Returns the meta object for class '{@link de.evoal.languages.model.ddl.BaseDataTypeDefinition <em>Base Data Type Definition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Base Data Type Definition</em>'.
+	 * @see de.evoal.languages.model.ddl.BaseDataTypeDefinition
+	 * @generated
+	 */
+	EClass getBaseDataTypeDefinition();
+
+	/**
+	 * Returns the meta object for class '{@link de.evoal.languages.model.ddl.EnumLiteral <em>Enum Literal</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Enum Literal</em>'.
+	 * @see de.evoal.languages.model.ddl.EnumLiteral
+	 * @generated
+	 */
+	EClass getEnumLiteral();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.ddl.EnumLiteral#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see de.evoal.languages.model.ddl.EnumLiteral#getName()
+	 * @see #getEnumLiteral()
+	 * @generated
+	 */
+	EAttribute getEnumLiteral_Name();
+
+	/**
+	 * Returns the meta object for class '{@link de.evoal.languages.model.ddl.EnumTypeDefinition <em>Enum Type Definition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Enum Type Definition</em>'.
+	 * @see de.evoal.languages.model.ddl.EnumTypeDefinition
+	 * @generated
+	 */
+	EClass getEnumTypeDefinition();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.ddl.EnumTypeDefinition#getLiterals <em>Literals</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Literals</em>'.
+	 * @see de.evoal.languages.model.ddl.EnumTypeDefinition#getLiterals()
+	 * @see #getEnumTypeDefinition()
+	 * @generated
+	 */
+	EReference getEnumTypeDefinition_Literals();
 
 	/**
 	 * Returns the meta object for class '{@link de.evoal.languages.model.ddl.DataDescription <em>Data Description</em>}'.
@@ -817,6 +1090,48 @@ public interface DdlPackage extends EPackage {
 	EClass getSelfReference();
 
 	/**
+	 * Returns the meta object for class '{@link de.evoal.languages.model.ddl.DataType <em>Data Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Data Type</em>'.
+	 * @see de.evoal.languages.model.ddl.DataType
+	 * @generated
+	 */
+	EClass getDataType();
+
+	/**
+	 * Returns the meta object for the reference '{@link de.evoal.languages.model.ddl.DataType#getDefinition <em>Definition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Definition</em>'.
+	 * @see de.evoal.languages.model.ddl.DataType#getDefinition()
+	 * @see #getDataType()
+	 * @generated
+	 */
+	EReference getDataType_Definition();
+
+	/**
+	 * Returns the meta object for class '{@link de.evoal.languages.model.ddl.EnumLiteralReference <em>Enum Literal Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Enum Literal Reference</em>'.
+	 * @see de.evoal.languages.model.ddl.EnumLiteralReference
+	 * @generated
+	 */
+	EClass getEnumLiteralReference();
+
+	/**
+	 * Returns the meta object for the reference '{@link de.evoal.languages.model.ddl.EnumLiteralReference#getLiteral <em>Literal</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Literal</em>'.
+	 * @see de.evoal.languages.model.ddl.EnumLiteralReference#getLiteral()
+	 * @see #getEnumLiteralReference()
+	 * @generated
+	 */
+	EReference getEnumLiteralReference_Literal();
+
+	/**
 	 * Returns the meta object for enum '{@link de.evoal.languages.model.ddl.ScaleType <em>Scale Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -959,6 +1274,52 @@ public interface DdlPackage extends EPackage {
 		EReference DATA_TYPE_DEFINITION__CONSTRAINTS2 = eINSTANCE.getDataTypeDefinition_Constraints2();
 
 		/**
+		 * The meta object literal for the '{@link de.evoal.languages.model.ddl.impl.BaseDataTypeDefinitionImpl <em>Base Data Type Definition</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.evoal.languages.model.ddl.impl.BaseDataTypeDefinitionImpl
+		 * @see de.evoal.languages.model.ddl.impl.DdlPackageImpl#getBaseDataTypeDefinition()
+		 * @generated
+		 */
+		EClass BASE_DATA_TYPE_DEFINITION = eINSTANCE.getBaseDataTypeDefinition();
+
+		/**
+		 * The meta object literal for the '{@link de.evoal.languages.model.ddl.impl.EnumLiteralImpl <em>Enum Literal</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.evoal.languages.model.ddl.impl.EnumLiteralImpl
+		 * @see de.evoal.languages.model.ddl.impl.DdlPackageImpl#getEnumLiteral()
+		 * @generated
+		 */
+		EClass ENUM_LITERAL = eINSTANCE.getEnumLiteral();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ENUM_LITERAL__NAME = eINSTANCE.getEnumLiteral_Name();
+
+		/**
+		 * The meta object literal for the '{@link de.evoal.languages.model.ddl.impl.EnumTypeDefinitionImpl <em>Enum Type Definition</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.evoal.languages.model.ddl.impl.EnumTypeDefinitionImpl
+		 * @see de.evoal.languages.model.ddl.impl.DdlPackageImpl#getEnumTypeDefinition()
+		 * @generated
+		 */
+		EClass ENUM_TYPE_DEFINITION = eINSTANCE.getEnumTypeDefinition();
+
+		/**
+		 * The meta object literal for the '<em><b>Literals</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ENUM_TYPE_DEFINITION__LITERALS = eINSTANCE.getEnumTypeDefinition_Literals();
+
+		/**
 		 * The meta object literal for the '{@link de.evoal.languages.model.ddl.impl.DataDescriptionImpl <em>Data Description</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1083,6 +1444,42 @@ public interface DdlPackage extends EPackage {
 		 * @generated
 		 */
 		EClass SELF_REFERENCE = eINSTANCE.getSelfReference();
+
+		/**
+		 * The meta object literal for the '{@link de.evoal.languages.model.ddl.impl.DataTypeImpl <em>Data Type</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.evoal.languages.model.ddl.impl.DataTypeImpl
+		 * @see de.evoal.languages.model.ddl.impl.DdlPackageImpl#getDataType()
+		 * @generated
+		 */
+		EClass DATA_TYPE = eINSTANCE.getDataType();
+
+		/**
+		 * The meta object literal for the '<em><b>Definition</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DATA_TYPE__DEFINITION = eINSTANCE.getDataType_Definition();
+
+		/**
+		 * The meta object literal for the '{@link de.evoal.languages.model.ddl.impl.EnumLiteralReferenceImpl <em>Enum Literal Reference</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.evoal.languages.model.ddl.impl.EnumLiteralReferenceImpl
+		 * @see de.evoal.languages.model.ddl.impl.DdlPackageImpl#getEnumLiteralReference()
+		 * @generated
+		 */
+		EClass ENUM_LITERAL_REFERENCE = eINSTANCE.getEnumLiteralReference();
+
+		/**
+		 * The meta object literal for the '<em><b>Literal</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ENUM_LITERAL_REFERENCE__LITERAL = eINSTANCE.getEnumLiteralReference_Literal();
 
 		/**
 		 * The meta object literal for the '{@link de.evoal.languages.model.ddl.ScaleType <em>Scale Type</em>}' enum.

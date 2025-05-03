@@ -3,6 +3,8 @@
 package de.evoal.languages.model.ddl.util;
 
 import de.evoal.languages.model.base.Definition;
+import de.evoal.languages.model.base.Literal;
+import de.evoal.languages.model.base.Type;
 import de.evoal.languages.model.base.Value;
 import de.evoal.languages.model.base.ValueReference;
 
@@ -80,6 +82,18 @@ public class DdlAdapterFactory extends AdapterFactoryImpl {
 				return createDataTypeDefinitionAdapter();
 			}
 			@Override
+			public Adapter caseBaseDataTypeDefinition(BaseDataTypeDefinition object) {
+				return createBaseDataTypeDefinitionAdapter();
+			}
+			@Override
+			public Adapter caseEnumLiteral(EnumLiteral object) {
+				return createEnumLiteralAdapter();
+			}
+			@Override
+			public Adapter caseEnumTypeDefinition(EnumTypeDefinition object) {
+				return createEnumTypeDefinitionAdapter();
+			}
+			@Override
 			public Adapter caseDataDescription(DataDescription object) {
 				return createDataDescriptionAdapter();
 			}
@@ -108,6 +122,14 @@ public class DdlAdapterFactory extends AdapterFactoryImpl {
 				return createSelfReferenceAdapter();
 			}
 			@Override
+			public Adapter caseDataType(DataType object) {
+				return createDataTypeAdapter();
+			}
+			@Override
+			public Adapter caseEnumLiteralReference(EnumLiteralReference object) {
+				return createEnumLiteralReferenceAdapter();
+			}
+			@Override
 			public Adapter caseDefinition(Definition object) {
 				return createDefinitionAdapter();
 			}
@@ -118,6 +140,14 @@ public class DdlAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseValueReference(ValueReference object) {
 				return createValueReferenceAdapter();
+			}
+			@Override
+			public Adapter caseType(Type object) {
+				return createTypeAdapter();
+			}
+			@Override
+			public Adapter caseLiteral(Literal object) {
+				return createLiteralAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -164,6 +194,48 @@ public class DdlAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createDataTypeDefinitionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.ddl.BaseDataTypeDefinition <em>Base Data Type Definition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.evoal.languages.model.ddl.BaseDataTypeDefinition
+	 * @generated
+	 */
+	public Adapter createBaseDataTypeDefinitionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.ddl.EnumLiteral <em>Enum Literal</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.evoal.languages.model.ddl.EnumLiteral
+	 * @generated
+	 */
+	public Adapter createEnumLiteralAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.ddl.EnumTypeDefinition <em>Enum Type Definition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.evoal.languages.model.ddl.EnumTypeDefinition
+	 * @generated
+	 */
+	public Adapter createEnumTypeDefinitionAdapter() {
 		return null;
 	}
 
@@ -266,6 +338,34 @@ public class DdlAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.ddl.DataType <em>Data Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.evoal.languages.model.ddl.DataType
+	 * @generated
+	 */
+	public Adapter createDataTypeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.ddl.EnumLiteralReference <em>Enum Literal Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.evoal.languages.model.ddl.EnumLiteralReference
+	 * @generated
+	 */
+	public Adapter createEnumLiteralReferenceAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.Definition <em>Definition</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -304,6 +404,34 @@ public class DdlAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createValueReferenceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.Type <em>Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.evoal.languages.model.base.Type
+	 * @generated
+	 */
+	public Adapter createTypeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.Literal <em>Literal</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.evoal.languages.model.base.Literal
+	 * @generated
+	 */
+	public Adapter createLiteralAdapter() {
 		return null;
 	}
 

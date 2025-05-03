@@ -58,12 +58,16 @@ public class DdlFactoryImpl extends EFactoryImpl implements DdlFactory {
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case DdlPackage.DATA_DESCRIPTION_MODULE: return createDataDescriptionModule();
-			case DdlPackage.DATA_TYPE_DEFINITION: return createDataTypeDefinition();
+			case DdlPackage.BASE_DATA_TYPE_DEFINITION: return createBaseDataTypeDefinition();
+			case DdlPackage.ENUM_LITERAL: return createEnumLiteral();
+			case DdlPackage.ENUM_TYPE_DEFINITION: return createEnumTypeDefinition();
 			case DdlPackage.TYPED_BASE_DATA_DESCRIPTION: return createTypedBaseDataDescription();
 			case DdlPackage.UNTYPED_BASE_DATA_DESCRIPTION: return createUntypedBaseDataDescription();
 			case DdlPackage.STRUCTURED_DATA_DESCRIPTION: return createStructuredDataDescription();
 			case DdlPackage.DATA_REFERENCE: return createDataReference();
 			case DdlPackage.SELF_REFERENCE: return createSelfReference();
+			case DdlPackage.DATA_TYPE: return createDataType();
+			case DdlPackage.ENUM_LITERAL_REFERENCE: return createEnumLiteralReference();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -120,9 +124,31 @@ public class DdlFactoryImpl extends EFactoryImpl implements DdlFactory {
 	 * @generated
 	 */
 	@Override
-	public DataTypeDefinition createDataTypeDefinition() {
-		DataTypeDefinitionImpl dataTypeDefinition = new DataTypeDefinitionImpl();
-		return dataTypeDefinition;
+	public BaseDataTypeDefinition createBaseDataTypeDefinition() {
+		BaseDataTypeDefinitionImpl baseDataTypeDefinition = new BaseDataTypeDefinitionImpl();
+		return baseDataTypeDefinition;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EnumLiteral createEnumLiteral() {
+		EnumLiteralImpl enumLiteral = new EnumLiteralImpl();
+		return enumLiteral;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EnumTypeDefinition createEnumTypeDefinition() {
+		EnumTypeDefinitionImpl enumTypeDefinition = new EnumTypeDefinitionImpl();
+		return enumTypeDefinition;
 	}
 
 	/**
@@ -178,6 +204,28 @@ public class DdlFactoryImpl extends EFactoryImpl implements DdlFactory {
 	public SelfReference createSelfReference() {
 		SelfReferenceImpl selfReference = new SelfReferenceImpl();
 		return selfReference;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public DataType createDataType() {
+		DataTypeImpl dataType = new DataTypeImpl();
+		return dataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EnumLiteralReference createEnumLiteralReference() {
+		EnumLiteralReferenceImpl enumLiteralReference = new EnumLiteralReferenceImpl();
+		return enumLiteralReference;
 	}
 
 	/**

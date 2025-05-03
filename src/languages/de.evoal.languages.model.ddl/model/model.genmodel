@@ -39,6 +39,13 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//DataTypeDefinition/constraints"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//DataTypeDefinition/constraints2"/>
     </genClasses>
+    <genClasses ecoreClass="model.ecore#//BaseDataTypeDefinition"/>
+    <genClasses ecoreClass="model.ecore#//EnumLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//EnumLiteral/name"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//EnumTypeDefinition">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//EnumTypeDefinition/literals"/>
+    </genClasses>
     <genClasses ecoreClass="model.ecore#//DataDescription">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//DataDescription/constraints"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//DataDescription/constraints2"/>
@@ -62,5 +69,11 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//DataReference/definition"/>
     </genClasses>
     <genClasses ecoreClass="model.ecore#//SelfReference"/>
+    <genClasses ecoreClass="model.ecore#//DataType">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//DataType/definition"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//EnumLiteralReference">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//EnumLiteralReference/literal"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>

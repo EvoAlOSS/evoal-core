@@ -4,12 +4,17 @@ package de.evoal.languages.model.ddl.impl;
 
 import de.evoal.languages.model.base.BasePackage;
 import de.evoal.languages.model.ddl.BaseDataDescription;
+import de.evoal.languages.model.ddl.BaseDataTypeDefinition;
 import de.evoal.languages.model.ddl.DataDescription;
 import de.evoal.languages.model.ddl.DataDescriptionModule;
 import de.evoal.languages.model.ddl.DataReference;
+import de.evoal.languages.model.ddl.DataType;
 import de.evoal.languages.model.ddl.DataTypeDefinition;
 import de.evoal.languages.model.ddl.DdlFactory;
 import de.evoal.languages.model.ddl.DdlPackage;
+import de.evoal.languages.model.ddl.EnumLiteral;
+import de.evoal.languages.model.ddl.EnumLiteralReference;
+import de.evoal.languages.model.ddl.EnumTypeDefinition;
 import de.evoal.languages.model.ddl.RepresentationType;
 import de.evoal.languages.model.ddl.ScaleType;
 import de.evoal.languages.model.ddl.SelfReference;
@@ -44,6 +49,27 @@ public class DdlPackageImpl extends EPackageImpl implements DdlPackage {
 	 * @generated
 	 */
 	private EClass dataTypeDefinitionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass baseDataTypeDefinitionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass enumLiteralEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass enumTypeDefinitionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -93,6 +119,20 @@ public class DdlPackageImpl extends EPackageImpl implements DdlPackage {
 	 * @generated
 	 */
 	private EClass selfReferenceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass dataTypeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass enumLiteralReferenceEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -297,6 +337,56 @@ public class DdlPackageImpl extends EPackageImpl implements DdlPackage {
 	 * @generated
 	 */
 	@Override
+	public EClass getBaseDataTypeDefinition() {
+		return baseDataTypeDefinitionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getEnumLiteral() {
+		return enumLiteralEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getEnumLiteral_Name() {
+		return (EAttribute)enumLiteralEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getEnumTypeDefinition() {
+		return enumTypeDefinitionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getEnumTypeDefinition_Literals() {
+		return (EReference)enumTypeDefinitionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getDataDescription() {
 		return dataDescriptionEClass;
 	}
@@ -437,6 +527,46 @@ public class DdlPackageImpl extends EPackageImpl implements DdlPackage {
 	 * @generated
 	 */
 	@Override
+	public EClass getDataType() {
+		return dataTypeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getDataType_Definition() {
+		return (EReference)dataTypeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getEnumLiteralReference() {
+		return enumLiteralReferenceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getEnumLiteralReference_Literal() {
+		return (EReference)enumLiteralReferenceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EEnum getScaleType() {
 		return scaleTypeEEnum;
 	}
@@ -494,6 +624,14 @@ public class DdlPackageImpl extends EPackageImpl implements DdlPackage {
 		createEReference(dataTypeDefinitionEClass, DATA_TYPE_DEFINITION__CONSTRAINTS);
 		createEReference(dataTypeDefinitionEClass, DATA_TYPE_DEFINITION__CONSTRAINTS2);
 
+		baseDataTypeDefinitionEClass = createEClass(BASE_DATA_TYPE_DEFINITION);
+
+		enumLiteralEClass = createEClass(ENUM_LITERAL);
+		createEAttribute(enumLiteralEClass, ENUM_LITERAL__NAME);
+
+		enumTypeDefinitionEClass = createEClass(ENUM_TYPE_DEFINITION);
+		createEReference(enumTypeDefinitionEClass, ENUM_TYPE_DEFINITION__LITERALS);
+
 		dataDescriptionEClass = createEClass(DATA_DESCRIPTION);
 		createEReference(dataDescriptionEClass, DATA_DESCRIPTION__CONSTRAINTS);
 		createEReference(dataDescriptionEClass, DATA_DESCRIPTION__CONSTRAINTS2);
@@ -514,6 +652,12 @@ public class DdlPackageImpl extends EPackageImpl implements DdlPackage {
 		createEReference(dataReferenceEClass, DATA_REFERENCE__DEFINITION);
 
 		selfReferenceEClass = createEClass(SELF_REFERENCE);
+
+		dataTypeEClass = createEClass(DATA_TYPE);
+		createEReference(dataTypeEClass, DATA_TYPE__DEFINITION);
+
+		enumLiteralReferenceEClass = createEClass(ENUM_LITERAL_REFERENCE);
+		createEReference(enumLiteralReferenceEClass, ENUM_LITERAL_REFERENCE__LITERAL);
 
 		// Create enums
 		scaleTypeEEnum = createEEnum(SCALE_TYPE);
@@ -551,6 +695,8 @@ public class DdlPackageImpl extends EPackageImpl implements DdlPackage {
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
+		baseDataTypeDefinitionEClass.getESuperTypes().add(this.getDataTypeDefinition());
+		enumTypeDefinitionEClass.getESuperTypes().add(this.getDataTypeDefinition());
 		dataDescriptionEClass.getESuperTypes().add(theBasePackage.getDefinition());
 		baseDataDescriptionEClass.getESuperTypes().add(this.getDataDescription());
 		typedBaseDataDescriptionEClass.getESuperTypes().add(this.getBaseDataDescription());
@@ -558,6 +704,8 @@ public class DdlPackageImpl extends EPackageImpl implements DdlPackage {
 		structuredDataDescriptionEClass.getESuperTypes().add(this.getDataDescription());
 		dataReferenceEClass.getESuperTypes().add(theBasePackage.getValueReference());
 		selfReferenceEClass.getESuperTypes().add(theBasePackage.getValueReference());
+		dataTypeEClass.getESuperTypes().add(theBasePackage.getType());
+		enumLiteralReferenceEClass.getESuperTypes().add(theBasePackage.getLiteral());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(dataDescriptionModuleEClass, DataDescriptionModule.class, "DataDescriptionModule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -567,12 +715,20 @@ public class DdlPackageImpl extends EPackageImpl implements DdlPackage {
 		initEReference(getDataDescriptionModule_Descriptions(), this.getDataDescription(), null, "descriptions", null, 0, -1, DataDescriptionModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getDataDescriptionModule_Constraints(), theBasePackage.getExpression(), null, "constraints", null, 0, -1, DataDescriptionModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
-		initEClass(dataTypeDefinitionEClass, DataTypeDefinition.class, "DataTypeDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(dataTypeDefinitionEClass, DataTypeDefinition.class, "DataTypeDefinition", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getDataTypeDefinition_Scale(), this.getScaleType(), "scale", null, 0, 1, DataTypeDefinition.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDataTypeDefinition_Name(), ecorePackage.getEString(), "name", null, 1, 1, DataTypeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDataTypeDefinition_Description(), ecorePackage.getEString(), "description", null, 0, 1, DataTypeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDataTypeDefinition_Constraints(), theBasePackage.getExpression(), null, "constraints", null, 0, -1, DataTypeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getDataTypeDefinition_Constraints2(), theBasePackage.getInstance(), null, "constraints2", null, 0, -1, DataTypeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+
+		initEClass(baseDataTypeDefinitionEClass, BaseDataTypeDefinition.class, "BaseDataTypeDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(enumLiteralEClass, EnumLiteral.class, "EnumLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getEnumLiteral_Name(), ecorePackage.getEString(), "name", null, 1, 1, EnumLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(enumTypeDefinitionEClass, EnumTypeDefinition.class, "EnumTypeDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getEnumTypeDefinition_Literals(), this.getEnumLiteral(), null, "literals", null, 0, -1, EnumTypeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		initEClass(dataDescriptionEClass, DataDescription.class, "DataDescription", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getDataDescription_Constraints(), theBasePackage.getExpression(), null, "constraints", null, 0, -1, DataDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
@@ -598,6 +754,12 @@ public class DdlPackageImpl extends EPackageImpl implements DdlPackage {
 		initEReference(getDataReference_Definition(), this.getDataDescription(), null, "definition", null, 1, 1, DataReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(selfReferenceEClass, SelfReference.class, "SelfReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(dataTypeEClass, DataType.class, "DataType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getDataType_Definition(), this.getDataDescription(), null, "definition", null, 1, 1, DataType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(enumLiteralReferenceEClass, EnumLiteralReference.class, "EnumLiteralReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getEnumLiteralReference_Literal(), this.getEnumLiteral(), null, "literal", null, 1, 1, EnumLiteralReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(scaleTypeEEnum, ScaleType.class, "ScaleType");
@@ -681,6 +843,12 @@ public class DdlPackageImpl extends EPackageImpl implements DdlPackage {
 		   });
 		addAnnotation
 		  (getDataTypeDefinition_Constraints2(),
+		   source,
+		   new String[] {
+			   "nullFree", "false"
+		   });
+		addAnnotation
+		  (getEnumTypeDefinition_Literals(),
 		   source,
 		   new String[] {
 			   "nullFree", "false"

@@ -14,3 +14,16 @@ DataReferenceRule returns DataReference:
 	{DataReference}
 	'data' definition = [ddl::DataDescription|QualifiedName]
 ;
+
+EnumLiteralReferenceRule returns ddl::EnumLiteralReference:
+	literal = [ddl::EnumLiteral|QualifiedName]
+;
+
+@Override
+LiteralRule returns base::Literal:
+	NumberLiteralRule
+		| StringLiteralRule
+		| BooleanLiteralRule
+		| InstanceLiteralRule
+		| EnumLiteralReferenceRule
+;

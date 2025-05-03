@@ -14,7 +14,9 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * A data type that allows reuse of information.
+ * 
+ * Base type for type definitions
+ * 
  * <!-- end-model-doc -->
  *
  * <p>
@@ -29,7 +31,7 @@ import org.eclipse.emf.ecore.EObject;
  * </ul>
  *
  * @see de.evoal.languages.model.ddl.DdlPackage#getDataTypeDefinition()
- * @model
+ * @model abstract="true"
  * @generated
  */
 public interface DataTypeDefinition extends EObject {

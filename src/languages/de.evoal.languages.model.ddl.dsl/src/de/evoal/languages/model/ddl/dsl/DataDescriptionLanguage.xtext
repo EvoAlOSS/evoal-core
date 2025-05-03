@@ -28,13 +28,29 @@ enum RepresentationType returns RepresentationType:
 	Integer = 'integer' |
 	Boolean = 'boolean' |
 	String = 'string';
-	
 
 DataTypeDefinitionRule returns DataTypeDefinition:
+	BaseDataTypeDefinitionRule | EnumTypeDefinitionRule
+;
+
+BaseDataTypeDefinitionRule returns BaseDataTypeDefinition:
 	(constraints2 += BaseLanguage::ConstraintRule)*
 	scale = ScaleType 'type' name = StringOrId ('description' ':' description = STRING)? ('with' 'constraints' ':' (constraints += StatementRule)*)?
 ';'
 ;
+
+EnumLiteralRule returns EnumLiteral:
+	name = StringOrId
+;
+
+EnumTypeDefinitionRule returns EnumTypeDefinition:
+	(constraints2 += BaseLanguage::ConstraintRule)*
+	scale = ScaleType 'enum' name = StringOrId '(' literals += EnumLiteralRule (',' literals += EnumLiteralRule)* ')'
+	('description' ':' description = STRING)?
+	('with' 'constraints' ':' (constraints += StatementRule)*)?
+';'
+;
+
 
 DataDescriptionRule returns DataDescription:
 	TypedBaseDataDescriptionRule | UntypedBaseDataDescriptionRule | StructuredDataDescriptionRule
@@ -42,10 +58,16 @@ DataDescriptionRule returns DataDescription:
 
 TypedBaseDataDescriptionRule returns TypedBaseDataDescription:
 	(constraints2 += BaseLanguage::ConstraintRule)*
-	representation=RepresentationType 'data' name = StringOrId 'of' 'type' type = [DataTypeDefinition|QualifiedName] ('with' 'constraints' ':' (constraints += StatementRule)*)?
+	representation=RepresentationType 'data' name = StringOrId 'of' 
+	(('type' type = [BaseDataTypeDefinition|QualifiedName])|
+	 ('enum' type = [EnumTypeDefinition|QualifiedName]))
+	('with' 'constraints' ':' (constraints += StatementRule)*)?
 	';'
 ;
 
+/**
+ * A
+ */
 UntypedBaseDataDescriptionRule returns UntypedBaseDataDescription:
 	(constraints2 += BaseLanguage::ConstraintRule)*
  (scale = ScaleType)? representation=RepresentationType 'data' name = StringOrId 	('with' 'constraints' ':' (constraints += StatementRule)*)?
@@ -73,4 +95,17 @@ DataReferenceRule returns DataReference:
 SelfReferenceRule returns SelfReference:
 	{SelfReference}
 	'value'
+;
+
+EnumLiteralReferenceRule returns EnumLiteralReference:
+	literal = [EnumLiteral|QualifiedName]
+;
+
+@Override
+LiteralRule returns base::Literal:
+	NumberLiteralRule
+		| StringLiteralRule
+		| BooleanLiteralRule
+		| InstanceLiteralRule
+		| EnumLiteralReferenceRule
 ;

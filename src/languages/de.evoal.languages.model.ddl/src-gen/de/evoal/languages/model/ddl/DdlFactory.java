@@ -31,13 +31,31 @@ public interface DdlFactory extends EFactory {
 	DataDescriptionModule createDataDescriptionModule();
 
 	/**
-	 * Returns a new object of class '<em>Data Type Definition</em>'.
+	 * Returns a new object of class '<em>Base Data Type Definition</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Data Type Definition</em>'.
+	 * @return a new object of class '<em>Base Data Type Definition</em>'.
 	 * @generated
 	 */
-	DataTypeDefinition createDataTypeDefinition();
+	BaseDataTypeDefinition createBaseDataTypeDefinition();
+
+	/**
+	 * Returns a new object of class '<em>Enum Literal</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Enum Literal</em>'.
+	 * @generated
+	 */
+	EnumLiteral createEnumLiteral();
+
+	/**
+	 * Returns a new object of class '<em>Enum Type Definition</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Enum Type Definition</em>'.
+	 * @generated
+	 */
+	EnumTypeDefinition createEnumTypeDefinition();
 
 	/**
 	 * Returns a new object of class '<em>Typed Base Data Description</em>'.
@@ -83,6 +101,24 @@ public interface DdlFactory extends EFactory {
 	 * @generated
 	 */
 	SelfReference createSelfReference();
+
+	/**
+	 * Returns a new object of class '<em>Data Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Data Type</em>'.
+	 * @generated
+	 */
+	DataType createDataType();
+
+	/**
+	 * Returns a new object of class '<em>Enum Literal Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Enum Literal Reference</em>'.
+	 * @generated
+	 */
+	EnumLiteralReference createEnumLiteralReference();
 
 	/**
 	 * Returns the package supported by this factory.

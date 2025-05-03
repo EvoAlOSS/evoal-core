@@ -40,7 +40,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *
  * @generated
  */
-public class DataTypeDefinitionImpl extends MinimalEObjectImpl.Container implements DataTypeDefinition {
+public abstract class DataTypeDefinitionImpl extends MinimalEObjectImpl.Container implements DataTypeDefinition {
 	/**
 	 * The default value of the '{@link #getScale() <em>Scale</em>}' attribute.
 	 * <!-- begin-user-doc -->
