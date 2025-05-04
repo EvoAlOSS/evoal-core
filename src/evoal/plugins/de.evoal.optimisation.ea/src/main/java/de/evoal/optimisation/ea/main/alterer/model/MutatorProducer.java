@@ -7,7 +7,7 @@ import de.evoal.optimisation.ea.main.alterer.model.crossover.FeatureSwapCrossove
 import de.evoal.optimisation.ea.main.alterer.model.mutator.ArrayReorderMutator;
 import de.evoal.optimisation.ea.main.alterer.model.mutator.ArraySizeMutator;
 import de.evoal.optimisation.ea.main.alterer.model.mutator.LiteralMutator;
-import de.evoal.languages.model.base.Instance;
+import de.evoal.languages.model.base.expressions.Instance;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.Dependent;

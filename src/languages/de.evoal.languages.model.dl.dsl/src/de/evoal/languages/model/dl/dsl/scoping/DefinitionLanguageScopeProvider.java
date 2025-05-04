@@ -3,12 +3,6 @@
  */
 package de.evoal.languages.model.dl.dsl.scoping;
 
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
-import org.eclipse.xtext.scoping.IScope;
-
-import de.evoal.languages.model.base.BasePackage;
-import de.evoal.languages.model.base.Instance;
 
 /**
  * This class contains custom scoping description.

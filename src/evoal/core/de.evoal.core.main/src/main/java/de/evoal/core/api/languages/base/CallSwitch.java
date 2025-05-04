@@ -1,11 +1,11 @@
 package de.evoal.core.api.languages.base;
 
-import de.evoal.languages.model.base.*;
-import de.evoal.languages.model.base.util.BaseSwitch;
+import de.evoal.languages.model.base.expressions.*;
+import de.evoal.languages.model.base.expressions.util.ExpressionsSwitch;
 
 import java.util.Objects;
 
-public class CallSwitch extends BaseSwitch<Call> {
+public class CallSwitch extends ExpressionsSwitch<Call> {
     @Override
     public Call caseOrExpression(final OrExpression object) {
         Objects.equals(object.getSubExpressions().size(), 1);

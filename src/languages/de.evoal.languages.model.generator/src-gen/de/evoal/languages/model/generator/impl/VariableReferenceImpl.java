@@ -3,7 +3,8 @@
  */
 package de.evoal.languages.model.generator.impl;
 
-import de.evoal.languages.model.base.impl.LiteralImpl;
+import de.evoal.languages.model.base.expressions.impl.LiteralImpl;
+
 import de.evoal.languages.model.generator.ForStatement;
 import de.evoal.languages.model.generator.GeneratorPackage;
 import de.evoal.languages.model.generator.VariableReference;

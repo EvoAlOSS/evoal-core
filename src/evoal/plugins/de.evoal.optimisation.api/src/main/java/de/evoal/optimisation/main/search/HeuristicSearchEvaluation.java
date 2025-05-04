@@ -12,7 +12,7 @@ import de.evoal.core.api.properties.stream.PropertiesPairStreamSupplier;
 import de.evoal.optimisation.api.statistics.writer.Column;
 import de.evoal.optimisation.api.statistics.writer.ColumnType;
 import de.evoal.optimisation.api.statistics.writer.WriterContext;
-import de.evoal.languages.model.base.Instance;
+import de.evoal.languages.model.base.expressions.Instance;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.inject.Inject;

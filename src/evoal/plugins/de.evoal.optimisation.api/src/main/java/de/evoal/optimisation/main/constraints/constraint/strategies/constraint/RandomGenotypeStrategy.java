@@ -3,7 +3,7 @@ package de.evoal.optimisation.main.constraints.constraint.strategies.constraint;
 import de.evoal.optimisation.api.constraints.strategies.RepairStrategy;
 import de.evoal.core.api.properties.Properties;
 import de.evoal.optimisation.main.initial.RandomInitialCandidates;
-import de.evoal.languages.model.base.Instance;
+import de.evoal.languages.model.base.expressions.Instance;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;

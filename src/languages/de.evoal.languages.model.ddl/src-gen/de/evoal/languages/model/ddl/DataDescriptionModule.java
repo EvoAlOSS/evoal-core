@@ -2,8 +2,11 @@
  */
 package de.evoal.languages.model.ddl;
 
-import de.evoal.languages.model.base.Expression;
 import de.evoal.languages.model.base.Import;
+
+import de.evoal.languages.model.base.definitions.DataDescription;
+import de.evoal.languages.model.base.definitions.Definition;
+import de.evoal.languages.model.base.expressions.Expression;
 
 import org.eclipse.emf.common.util.EList;
 
@@ -37,6 +40,24 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface DataDescriptionModule extends EObject {
 	/**
+	 * Returns the value of the '<em><b>Imports</b></em>' containment reference list.
+	 * The list contents are of type {@link de.evoal.languages.model.base.Import}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * 
+	 * List of imports for Xtext dependency resolution.
+	 * 
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Imports</em>' containment reference list.
+	 * @see de.evoal.languages.model.ddl.DdlPackage#getDataDescriptionModule_Imports()
+	 * @model containment="true" ordered="false"
+	 *        annotation="http://www.eclipse.org/OCL/Collection nullFree='false'"
+	 * @generated
+	 */
+	EList<Import> getImports();
+
+	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -64,26 +85,8 @@ public interface DataDescriptionModule extends EObject {
 	void setName(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Imports</b></em>' containment reference list.
-	 * The list contents are of type {@link de.evoal.languages.model.base.Import}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * 
-	 * List of imports for Xtext dependency resolution.
-	 * 
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Imports</em>' containment reference list.
-	 * @see de.evoal.languages.model.ddl.DdlPackage#getDataDescriptionModule_Imports()
-	 * @model containment="true" ordered="false"
-	 *        annotation="http://www.eclipse.org/OCL/Collection nullFree='false'"
-	 * @generated
-	 */
-	EList<Import> getImports();
-
-	/**
 	 * Returns the value of the '<em><b>Types</b></em>' containment reference list.
-	 * The list contents are of type {@link de.evoal.languages.model.ddl.DataTypeDefinition}.
+	 * The list contents are of type {@link de.evoal.languages.model.base.definitions.Definition}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
@@ -98,11 +101,11 @@ public interface DataDescriptionModule extends EObject {
 	 *        annotation="http://www.eclipse.org/OCL/Collection nullFree='false'"
 	 * @generated
 	 */
-	EList<DataTypeDefinition> getTypes();
+	EList<Definition> getTypes();
 
 	/**
 	 * Returns the value of the '<em><b>Descriptions</b></em>' containment reference list.
-	 * The list contents are of type {@link de.evoal.languages.model.ddl.DataDescription}.
+	 * The list contents are of type {@link de.evoal.languages.model.base.definitions.DataDescription}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
@@ -120,7 +123,7 @@ public interface DataDescriptionModule extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Constraints</b></em>' containment reference list.
-	 * The list contents are of type {@link de.evoal.languages.model.base.Expression}.
+	 * The list contents are of type {@link de.evoal.languages.model.base.expressions.Expression}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->

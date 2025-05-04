@@ -6,7 +6,7 @@ import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertySpecification;
 import de.evoal.core.api.utils.VariableToPropertiesHelper;
 
-import de.evoal.languages.model.base.Instance;
+import de.evoal.languages.model.base.expressions.Instance;
 import de.evoal.languages.model.interpreter.ArithmeticNumberOperations;
 import de.evoal.optimisation.local_search.api.neighbour.NeighbourChoosingStrategy;
 

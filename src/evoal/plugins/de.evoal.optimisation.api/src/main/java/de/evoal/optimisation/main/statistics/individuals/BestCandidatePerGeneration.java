@@ -12,8 +12,8 @@ import de.evoal.optimisation.api.statistics.io.WriterStrategy;
 import de.evoal.optimisation.api.statistics.writer.Column;
 import de.evoal.optimisation.api.statistics.writer.ColumnType;
 import de.evoal.optimisation.api.statistics.writer.StatisticsWriter;
-import de.evoal.languages.model.base.Instance;
-import de.evoal.languages.model.ddl.BaseDataDescription;
+import de.evoal.languages.model.base.expressions.Instance;
+import de.evoal.languages.model.base.definitions.BaseDataDescription;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 

@@ -7,13 +7,13 @@ import org.eclipse.xtext.scoping.IScope;
 
 import com.google.inject.Inject;
 
-import de.evoal.languages.model.base.BasePackage;
+import de.evoal.languages.model.base.expressions.ExpressionsPackage;
 import de.evoal.languages.model.instance.dsl.scoping.InstanceLanguageLocalScopeProvider;
 import de.evoal.languages.model.utils.scoping.WildcardEnabledLocalScopeProvider;
 
 public class GeneratorDSLLocalScopeProvider extends WildcardEnabledLocalScopeProvider {
-	private static EClass instance = BasePackage.eINSTANCE.getInstance();
-	private static EReference attributeDefinition = BasePackage.eINSTANCE.getAttribute_Definition();
+	private static EClass instance = ExpressionsPackage.eINSTANCE.getInstance();
+	private static EReference attributeDefinition = ExpressionsPackage.eINSTANCE.getAttribute_Definition();
 	
 	@Inject
 	private InstanceLanguageLocalScopeProvider instanceScopes;

@@ -13,7 +13,7 @@ import de.evoal.optimisation.ea.main.alterer.mutator.*;
 import de.evoal.optimisation.ea.main.alterer.crossover.*;
 import de.evoal.optimisation.api.correlations.Correlations;
 import de.evoal.optimisation.ea.main.codec.program.rewriters.*;
-import de.evoal.languages.model.base.Instance;
+import de.evoal.languages.model.base.expressions.Instance;
 import de.evoal.core.api.utils.AttributeHelper;
 import io.jenetics.*;
 import io.jenetics.ext.SingleNodeCrossover;

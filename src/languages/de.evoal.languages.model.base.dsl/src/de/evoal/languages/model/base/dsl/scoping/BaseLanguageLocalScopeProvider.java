@@ -9,16 +9,16 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.Scopes;
 
-import de.evoal.languages.model.base.AttributeDefinition;
-import de.evoal.languages.model.base.BasePackage;
-import de.evoal.languages.model.base.Instance;
-import de.evoal.languages.model.base.TypeDefinition;
+import de.evoal.languages.model.base.definitions.AttributeDefinition;
+import de.evoal.languages.model.base.expressions.Instance;
+import de.evoal.languages.model.base.definitions.TypeDefinition;
+import de.evoal.languages.model.base.expressions.ExpressionsPackage;
 import de.evoal.languages.model.utils.scoping.WildcardEnabledLocalScopeProvider;
 
 public class BaseLanguageLocalScopeProvider extends WildcardEnabledLocalScopeProvider {
 	
-	private static EClass instance = BasePackage.eINSTANCE.getInstance();
-	private static EReference instanceDefinition = BasePackage.eINSTANCE.getInstance_Definition();
+	private static EClass instance = ExpressionsPackage.eINSTANCE.getInstance();
+	private static EReference instanceDefinition = ExpressionsPackage.eINSTANCE.getInstance_Definition();
  	
 	@Override
 	public IScope getScope(final EObject context, final EReference reference) {
@@ -31,7 +31,7 @@ public class BaseLanguageLocalScopeProvider extends WildcardEnabledLocalScopePro
 			}
 			
 			return getLocalElementsScope(typeScope, context, reference);
-		}  else if(instance.isSuperTypeOf(context.eClass()) && BasePackage.eINSTANCE.getAttribute_Definition().equals(reference)) {
+		}  else if(instance.isSuperTypeOf(context.eClass()) && ExpressionsPackage.eINSTANCE.getAttribute_Definition().equals(reference)) {
 			return scopeOf(((Instance)context).getDefinition());
 		}
 

@@ -3,7 +3,7 @@
  */
 package de.evoal.languages.model.ol;
 
-import de.evoal.languages.model.base.BasePackage;
+import de.evoal.languages.model.base.expressions.ExpressionsPackage;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -131,7 +131,7 @@ public interface OLPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROBLEM_INSTANCE__DEFINITION = BasePackage.INSTANCE__DEFINITION;
+	int PROBLEM_INSTANCE__DEFINITION = ExpressionsPackage.INSTANCE__DEFINITION;
 
 	/**
 	 * The feature id for the '<em><b>Attributes</b></em>' containment reference list.
@@ -140,7 +140,7 @@ public interface OLPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROBLEM_INSTANCE__ATTRIBUTES = BasePackage.INSTANCE__ATTRIBUTES;
+	int PROBLEM_INSTANCE__ATTRIBUTES = ExpressionsPackage.INSTANCE__ATTRIBUTES;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -149,7 +149,7 @@ public interface OLPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROBLEM_INSTANCE__NAME = BasePackage.INSTANCE_FEATURE_COUNT + 0;
+	int PROBLEM_INSTANCE__NAME = ExpressionsPackage.INSTANCE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Documentation</b></em>' containment reference.
@@ -158,7 +158,7 @@ public interface OLPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROBLEM_INSTANCE__DOCUMENTATION = BasePackage.INSTANCE_FEATURE_COUNT + 1;
+	int PROBLEM_INSTANCE__DOCUMENTATION = ExpressionsPackage.INSTANCE_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Problem Instance</em>' class.
@@ -167,7 +167,7 @@ public interface OLPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROBLEM_INSTANCE_FEATURE_COUNT = BasePackage.INSTANCE_FEATURE_COUNT + 2;
+	int PROBLEM_INSTANCE_FEATURE_COUNT = ExpressionsPackage.INSTANCE_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.ol.impl.AlgorithmInstanceImpl <em>Algorithm Instance</em>}' class.
@@ -186,7 +186,7 @@ public interface OLPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ALGORITHM_INSTANCE__DEFINITION = BasePackage.INSTANCE__DEFINITION;
+	int ALGORITHM_INSTANCE__DEFINITION = ExpressionsPackage.INSTANCE__DEFINITION;
 
 	/**
 	 * The feature id for the '<em><b>Attributes</b></em>' containment reference list.
@@ -195,7 +195,7 @@ public interface OLPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ALGORITHM_INSTANCE__ATTRIBUTES = BasePackage.INSTANCE__ATTRIBUTES;
+	int ALGORITHM_INSTANCE__ATTRIBUTES = ExpressionsPackage.INSTANCE__ATTRIBUTES;
 
 	/**
 	 * The feature id for the '<em><b>Problem</b></em>' reference.
@@ -204,7 +204,7 @@ public interface OLPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ALGORITHM_INSTANCE__PROBLEM = BasePackage.INSTANCE_FEATURE_COUNT + 0;
+	int ALGORITHM_INSTANCE__PROBLEM = ExpressionsPackage.INSTANCE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Documentation</b></em>' containment reference.
@@ -213,7 +213,7 @@ public interface OLPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ALGORITHM_INSTANCE__DOCUMENTATION = BasePackage.INSTANCE_FEATURE_COUNT + 1;
+	int ALGORITHM_INSTANCE__DOCUMENTATION = ExpressionsPackage.INSTANCE_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Algorithm Instance</em>' class.
@@ -222,7 +222,7 @@ public interface OLPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ALGORITHM_INSTANCE_FEATURE_COUNT = BasePackage.INSTANCE_FEATURE_COUNT + 2;
+	int ALGORITHM_INSTANCE_FEATURE_COUNT = ExpressionsPackage.INSTANCE_FEATURE_COUNT + 2;
 
 
 	/**

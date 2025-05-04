@@ -4,7 +4,7 @@ import de.evoal.core.api.cdi.BeanFactory;
 import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
 import de.evoal.optimisation.api.model.InitialCandidatesProvider;
-import de.evoal.languages.model.base.Instance;
+import de.evoal.languages.model.base.expressions.Instance;
 
 import javax.enterprise.context.Dependent;
 import javax.enterprise.inject.Produces;

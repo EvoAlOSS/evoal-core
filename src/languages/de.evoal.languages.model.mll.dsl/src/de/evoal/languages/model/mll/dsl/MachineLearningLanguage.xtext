@@ -3,6 +3,7 @@ grammar de.evoal.languages.model.mll.dsl.MachineLearningLanguage with de.evoal.l
 import "https://www.evoal.de/languages/mll/1.0.0" 
 import "https://www.evoal.de/languages/ddl/1.0.0" as ddl
 import "https://www.evoal.de/languages/base/1.0.0" as base
+import "https://www.evoal.de/languages/base/definitions/1.0.0" as defs
 
 MachineLearningModuleRule returns MachineLearningModule:
 	(imports += ImportRule)*
@@ -16,9 +17,9 @@ MachineLearningModuleRule returns MachineLearningModule:
 SurrogateDefinitionRule returns SurrogateDefinition: 
 	"prediction" name = StringOrId
 	"maps"
-		inputs += [ddl::DataDescription|QualifiedName] ("," inputs += [ddl::DataDescription|QualifiedName])* 
+		inputs += [defs::DataDescription|QualifiedName] ("," inputs += [defs::DataDescription|QualifiedName])* 
 	"to"
-		outputs += [ddl::DataDescription|QualifiedName] ("," outputs += [ddl::DataDescription|QualifiedName])* 
+		outputs += [defs::DataDescription|QualifiedName] ("," outputs += [defs::DataDescription|QualifiedName])* 
 
 	"using"
 		(layers += SurrogateLayerDefinitionRule)+
@@ -31,11 +32,11 @@ SurrogateLayerDefinitionRule returns SurrogateLayerDefinition:
 ;
 		
 PartialSurrogateFunctionDefinitionRule returns PartialSurrogateFunctionDefinition:
-	"function" definition = [base::TypeDefinition|QualifiedName]
+	"function" definition = [defs::TypeDefinition|QualifiedName]
 	"mapping"
-		inputs += [ddl::DataDescription|QualifiedName] ("," inputs += [ddl::DataDescription|QualifiedName])* 
+		inputs += [defs::DataDescription|QualifiedName] ("," inputs += [defs::DataDescription|QualifiedName])* 
 	"to"
-		outputs += [ddl::DataDescription|QualifiedName] ("," outputs += [ddl::DataDescription|QualifiedName])* 
+		outputs += [defs::DataDescription|QualifiedName] ("," outputs += [defs::DataDescription|QualifiedName])* 
 	("with" "parameters"
 		((attributes+= BaseLanguage::AttributeRule)+ ))?
 ;

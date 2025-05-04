@@ -1,7 +1,7 @@
 package de.evoal.core.api.cdi;
 
 import de.evoal.core.api.utils.InitializationException;
-import de.evoal.languages.model.base.Instance;
+import de.evoal.languages.model.base.expressions.Instance;
 
 /**
  * Base class for components that allow initialisation using an init method.

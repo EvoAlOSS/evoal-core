@@ -6,7 +6,7 @@ import de.evoal.optimisation.ea.api.codec.CustomCodec;
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.optimisation.ea.main.codec.vector.chromosome.DynamicChromosome;
-import de.evoal.languages.model.base.Instance;
+import de.evoal.languages.model.base.expressions.Instance;
 import io.jenetics.Chromosome;
 import io.jenetics.Gene;
 import io.jenetics.Genotype;

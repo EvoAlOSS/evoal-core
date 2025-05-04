@@ -7,8 +7,8 @@ import de.evoal.optimisation.api.model.OptimisationFunctionDecorator;
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.utils.Requirements;
-import de.evoal.languages.model.base.*;
-import de.evoal.languages.model.ddl.DataDescription;
+import de.evoal.languages.model.base.expressions.*;
+import de.evoal.languages.model.base.definitions.DataDescription;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.enterprise.context.Dependent;

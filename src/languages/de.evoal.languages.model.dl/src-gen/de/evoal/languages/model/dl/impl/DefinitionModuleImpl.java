@@ -3,10 +3,11 @@
  */
 package de.evoal.languages.model.dl.impl;
 
-import de.evoal.languages.model.base.ConstantDefinition;
-import de.evoal.languages.model.base.FunctionDefinition;
 import de.evoal.languages.model.base.Import;
-import de.evoal.languages.model.base.TypeDefinition;
+
+import de.evoal.languages.model.base.definitions.ConstantDefinition;
+import de.evoal.languages.model.base.definitions.FunctionDefinition;
+import de.evoal.languages.model.base.definitions.TypeDefinition;
 
 import de.evoal.languages.model.dl.DefinitionModule;
 import de.evoal.languages.model.dl.DlPackage;

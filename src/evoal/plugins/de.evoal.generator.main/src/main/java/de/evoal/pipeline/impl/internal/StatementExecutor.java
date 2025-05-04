@@ -1,6 +1,8 @@
 package de.evoal.pipeline.impl.internal;
 
-import de.evoal.languages.model.base.*;
+import de.evoal.languages.model.base.definitions.AttributeDefinition;
+import de.evoal.languages.model.base.definitions.TypeDefinition;
+import de.evoal.languages.model.base.expressions.*;
 import de.evoal.languages.model.dl.DefinitionModule;
 import de.evoal.languages.model.pipeline.*;
 import de.evoal.languages.model.pipeline.util.PipelineSwitch;
@@ -25,7 +27,7 @@ import java.util.stream.Stream;
 @Slf4j
 public class StatementExecutor extends PipelineSwitch<Object> {
 
-    public static final BaseFactory BASE_FACTORY = BaseFactory.eINSTANCE;
+    public static final ExpressionsFactory EXPR_FACTORY = ExpressionsFactory.eINSTANCE;
     /**
      * Regular expression for matching variable expressions in strings.
      */
@@ -186,42 +188,42 @@ public class StatementExecutor extends PipelineSwitch<Object> {
                 .findFirst()
                 .get();
 
-        final StringLiteral filenameLiteral = BASE_FACTORY.createStringLiteral();
+        final StringLiteral filenameLiteral = EXPR_FACTORY.createStringLiteral();
         filenameLiteral.setValue(filename);
 
-        final UnaryAddOrSubtractExpression unaryAddOrSubtractExpression = BASE_FACTORY.createUnaryAddOrSubtractExpression();
+        final UnaryAddOrSubtractExpression unaryAddOrSubtractExpression = EXPR_FACTORY.createUnaryAddOrSubtractExpression();
         unaryAddOrSubtractExpression.setSubExpression(filenameLiteral);
 
-        final PowerOfExpression powerOfExpression = BASE_FACTORY.createPowerOfExpression();
+        final PowerOfExpression powerOfExpression = EXPR_FACTORY.createPowerOfExpression();
         powerOfExpression.setLeftOperand(unaryAddOrSubtractExpression);
 
-        final MultiplyDivideModuloExpression mdmExpression = BASE_FACTORY.createMultiplyDivideModuloExpression();
+        final MultiplyDivideModuloExpression mdmExpression = EXPR_FACTORY.createMultiplyDivideModuloExpression();
         mdmExpression.setLeftOperand(powerOfExpression);
 
-        final AddOrSubtractExpression addOrSubtractExpression = BASE_FACTORY.createAddOrSubtractExpression();
+        final AddOrSubtractExpression addOrSubtractExpression = EXPR_FACTORY.createAddOrSubtractExpression();
         addOrSubtractExpression.setLeftOperand(mdmExpression);
 
-        final ComparisonExpression comparisonExpression = BASE_FACTORY.createComparisonExpression();
+        final ComparisonExpression comparisonExpression = EXPR_FACTORY.createComparisonExpression();
         comparisonExpression.setLeftOperand(addOrSubtractExpression);
 
-        final NotExpression notExpression = BASE_FACTORY.createNotExpression();
+        final NotExpression notExpression = EXPR_FACTORY.createNotExpression();
         notExpression.setNegated(false);
         notExpression.setOperand(comparisonExpression);
 
-        final AndExpression andExpression = BASE_FACTORY.createAndExpression();
+        final AndExpression andExpression = EXPR_FACTORY.createAndExpression();
         andExpression.getSubExpressions().add(notExpression);
 
-        final XorExpression xorExpression = BASE_FACTORY.createXorExpression();
+        final XorExpression xorExpression = EXPR_FACTORY.createXorExpression();
         xorExpression.getSubExpressions().add(andExpression);
 
-        final OrExpression orExpression = BASE_FACTORY.createOrExpression();
+        final OrExpression orExpression = EXPR_FACTORY.createOrExpression();
         orExpression.getSubExpressions().add(xorExpression);
 
-        final Attribute filenameAttribute = BASE_FACTORY.createAttribute();
+        final Attribute filenameAttribute = EXPR_FACTORY.createAttribute();
         filenameAttribute.setDefinition(filenameDefinition);
         filenameAttribute.setValue(orExpression);
 
-        final Instance writerInstance = BASE_FACTORY.createInstance();
+        final Instance writerInstance = EXPR_FACTORY.createInstance();
         writerInstance.getAttributes().add(filenameAttribute);
         writerInstance.setDefinition(writerDefinition);
 

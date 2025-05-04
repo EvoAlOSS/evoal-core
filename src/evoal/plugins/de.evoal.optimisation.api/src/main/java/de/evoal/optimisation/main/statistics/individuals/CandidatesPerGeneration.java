@@ -12,8 +12,8 @@ import de.evoal.optimisation.api.statistics.writer.AbstractCandidateStatisticsWr
 import de.evoal.optimisation.api.statistics.writer.Column;
 import de.evoal.optimisation.api.statistics.writer.ColumnType;
 import de.evoal.core.api.utils.Requirements;
-import de.evoal.languages.model.base.Instance;
-import de.evoal.languages.model.ddl.BaseDataDescription;
+import de.evoal.languages.model.base.expressions.Instance;
+import de.evoal.languages.model.base.definitions.BaseDataDescription;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.enterprise.context.Dependent;

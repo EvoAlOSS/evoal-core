@@ -2,10 +2,6 @@
  */
 package de.evoal.languages.model.mll.impl;
 
-import de.evoal.languages.model.base.impl.InstanceImpl;
-
-import de.evoal.languages.model.ddl.DataDescription;
-
 import de.evoal.languages.model.mll.MllPackage;
 import de.evoal.languages.model.mll.PartialSurrogateFunctionDefinition;
 
@@ -31,7 +27,7 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
  *
  * @generated
  */
-public class PartialSurrogateFunctionDefinitionImpl extends InstanceImpl implements PartialSurrogateFunctionDefinition {
+public class PartialSurrogateFunctionDefinitionImpl extends de.evoal.languages.model.base.expressions.impl.InstanceImpl implements PartialSurrogateFunctionDefinition {
 	/**
 	 * The cached value of the '{@link #getInputs() <em>Inputs</em>}' reference list.
 	 * <!-- begin-user-doc -->
@@ -40,7 +36,7 @@ public class PartialSurrogateFunctionDefinitionImpl extends InstanceImpl impleme
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<DataDescription> inputs;
+	protected EList<de.evoal.languages.model.base.definitions.DataDescription> inputs;
 
 	/**
 	 * The cached value of the '{@link #getOutputs() <em>Outputs</em>}' reference list.
@@ -50,7 +46,7 @@ public class PartialSurrogateFunctionDefinitionImpl extends InstanceImpl impleme
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<DataDescription> outputs;
+	protected EList<de.evoal.languages.model.base.definitions.DataDescription> outputs;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -77,9 +73,9 @@ public class PartialSurrogateFunctionDefinitionImpl extends InstanceImpl impleme
 	 * @generated
 	 */
 	@Override
-	public EList<DataDescription> getInputs() {
+	public EList<de.evoal.languages.model.base.definitions.DataDescription> getInputs() {
 		if (inputs == null) {
-			inputs = new EObjectResolvingEList<DataDescription>(DataDescription.class, this, MllPackage.PARTIAL_SURROGATE_FUNCTION_DEFINITION__INPUTS);
+			inputs = new EObjectResolvingEList<de.evoal.languages.model.base.definitions.DataDescription>(de.evoal.languages.model.base.definitions.DataDescription.class, this, MllPackage.PARTIAL_SURROGATE_FUNCTION_DEFINITION__INPUTS);
 		}
 		return inputs;
 	}
@@ -90,9 +86,9 @@ public class PartialSurrogateFunctionDefinitionImpl extends InstanceImpl impleme
 	 * @generated
 	 */
 	@Override
-	public EList<DataDescription> getOutputs() {
+	public EList<de.evoal.languages.model.base.definitions.DataDescription> getOutputs() {
 		if (outputs == null) {
-			outputs = new EObjectResolvingEList<DataDescription>(DataDescription.class, this, MllPackage.PARTIAL_SURROGATE_FUNCTION_DEFINITION__OUTPUTS);
+			outputs = new EObjectResolvingEList<de.evoal.languages.model.base.definitions.DataDescription>(de.evoal.languages.model.base.definitions.DataDescription.class, this, MllPackage.PARTIAL_SURROGATE_FUNCTION_DEFINITION__OUTPUTS);
 		}
 		return outputs;
 	}
@@ -124,11 +120,11 @@ public class PartialSurrogateFunctionDefinitionImpl extends InstanceImpl impleme
 		switch (featureID) {
 			case MllPackage.PARTIAL_SURROGATE_FUNCTION_DEFINITION__INPUTS:
 				getInputs().clear();
-				getInputs().addAll((Collection<? extends DataDescription>)newValue);
+				getInputs().addAll((Collection<? extends de.evoal.languages.model.base.definitions.DataDescription>)newValue);
 				return;
 			case MllPackage.PARTIAL_SURROGATE_FUNCTION_DEFINITION__OUTPUTS:
 				getOutputs().clear();
-				getOutputs().addAll((Collection<? extends DataDescription>)newValue);
+				getOutputs().addAll((Collection<? extends de.evoal.languages.model.base.definitions.DataDescription>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

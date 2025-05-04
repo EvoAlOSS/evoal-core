@@ -2,8 +2,6 @@
  */
 package de.evoal.languages.model.mll.impl;
 
-import de.evoal.languages.model.base.Literal;
-
 import de.evoal.languages.model.mll.LiteralRange;
 import de.evoal.languages.model.mll.MllPackage;
 
@@ -41,7 +39,7 @@ public class LiteralRangeImpl extends RangeImpl implements LiteralRange {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Literal> elements;
+	protected EList<de.evoal.languages.model.base.expressions.Literal> elements;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -68,9 +66,9 @@ public class LiteralRangeImpl extends RangeImpl implements LiteralRange {
 	 * @generated
 	 */
 	@Override
-	public EList<Literal> getElements() {
+	public EList<de.evoal.languages.model.base.expressions.Literal> getElements() {
 		if (elements == null) {
-			elements = new EObjectContainmentEList<Literal>(Literal.class, this, MllPackage.LITERAL_RANGE__ELEMENTS);
+			elements = new EObjectContainmentEList<de.evoal.languages.model.base.expressions.Literal>(de.evoal.languages.model.base.expressions.Literal.class, this, MllPackage.LITERAL_RANGE__ELEMENTS);
 		}
 		return elements;
 	}
@@ -114,7 +112,7 @@ public class LiteralRangeImpl extends RangeImpl implements LiteralRange {
 		switch (featureID) {
 			case MllPackage.LITERAL_RANGE__ELEMENTS:
 				getElements().clear();
-				getElements().addAll((Collection<? extends Literal>)newValue);
+				getElements().addAll((Collection<? extends de.evoal.languages.model.base.expressions.Literal>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

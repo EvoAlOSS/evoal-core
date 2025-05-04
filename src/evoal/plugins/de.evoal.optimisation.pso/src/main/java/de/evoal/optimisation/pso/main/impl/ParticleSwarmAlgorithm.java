@@ -4,7 +4,7 @@ import de.evoal.core.api.cdi.BeanFactory;
 import de.evoal.core.api.utils.AttributeHelper;
 import de.evoal.optimisation.api.model.OptimisationAlgorithm;
 import de.evoal.optimisation.pso.api.optimiser.Swarm;
-import de.evoal.languages.model.base.Instance;
+import de.evoal.languages.model.base.expressions.Instance;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.enterprise.context.Dependent;

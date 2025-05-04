@@ -1,8 +1,8 @@
 package de.evoal.core.api.languages.base;
 
-import de.evoal.languages.model.ddl.DataDescription;
-import de.evoal.languages.model.base.Call;
-import de.evoal.languages.model.base.Expression;
+import de.evoal.languages.model.base.definitions.DataDescription;
+import de.evoal.languages.model.base.expressions.Expression;
+import de.evoal.languages.model.base.expressions.Call;
 
 public final class BaseLanguageHelper {
     private BaseLanguageHelper() {

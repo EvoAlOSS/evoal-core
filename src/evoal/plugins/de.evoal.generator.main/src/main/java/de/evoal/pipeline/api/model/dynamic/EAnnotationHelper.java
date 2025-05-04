@@ -1,6 +1,6 @@
 package de.evoal.pipeline.api.model.dynamic;
 
-import de.evoal.languages.model.ddl.DataDescription;
+import de.evoal.languages.model.base.definitions.DataDescription;
 import de.evoal.languages.model.dynamic.Definition;
 import de.evoal.languages.model.dynamic.DynamicPackage;
 import org.eclipse.emf.ecore.EAttribute;

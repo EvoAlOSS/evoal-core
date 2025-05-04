@@ -1,7 +1,9 @@
 package de.evoal.core.api.languages;
 
-import de.evoal.languages.model.base.*;
-import de.evoal.languages.model.ddl.DataDescription;
+import de.evoal.languages.model.base.definitions.*;
+import de.evoal.languages.model.base.expressions.*;
+import de.evoal.languages.model.base.types.*;
+import de.evoal.languages.model.base.types.DataType;
 import de.evoal.languages.model.interpreter.ConstantEvaluator;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.emf.ecore.EObject;

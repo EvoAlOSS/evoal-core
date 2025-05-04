@@ -1,7 +1,7 @@
 package de.evoal.optimisation.ea.api.codec;
 
 import de.evoal.core.api.cdi.EvoalComponent;
-import de.evoal.languages.model.base.Definition;
+import de.evoal.languages.model.base.definitions.Definition;
 
 import java.util.List;
 

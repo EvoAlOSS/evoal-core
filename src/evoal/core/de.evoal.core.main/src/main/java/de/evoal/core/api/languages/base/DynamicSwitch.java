@@ -6,8 +6,8 @@ import de.evoal.languages.model.interpreter.AbstractExpressionEvaluator;
 import de.evoal.languages.model.interpreter.ConstantEvaluator;
 import lombok.extern.slf4j.Slf4j;
 
-import de.evoal.languages.model.base.*;
-import de.evoal.languages.model.ddl.DataDescription;
+import de.evoal.languages.model.base.expressions.*;
+import de.evoal.languages.model.base.definitions.DataDescription;
 
 @Slf4j
 public class DynamicSwitch extends AbstractExpressionEvaluator {

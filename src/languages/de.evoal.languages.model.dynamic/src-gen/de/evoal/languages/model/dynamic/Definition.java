@@ -38,12 +38,12 @@ public interface Definition extends EObject {
 	 * 
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Source</em>' reference.
-	 * @see #setSource(de.evoal.languages.model.base.Definition)
+	 * @see #setSource(de.evoal.languages.model.base.definitions.Definition)
 	 * @see de.evoal.languages.model.dynamic.DynamicPackage#getDefinition_Source()
 	 * @model required="true"
 	 * @generated
 	 */
-	de.evoal.languages.model.base.Definition getSource();
+	de.evoal.languages.model.base.definitions.Definition getSource();
 
 	/**
 	 * Sets the value of the '{@link de.evoal.languages.model.dynamic.Definition#getSource <em>Source</em>}' reference.
@@ -53,6 +53,6 @@ public interface Definition extends EObject {
 	 * @see #getSource()
 	 * @generated
 	 */
-	void setSource(de.evoal.languages.model.base.Definition value);
+	void setSource(de.evoal.languages.model.base.definitions.Definition value);
 
 } // Definition

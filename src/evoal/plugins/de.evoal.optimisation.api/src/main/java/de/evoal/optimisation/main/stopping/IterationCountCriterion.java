@@ -2,7 +2,7 @@ package de.evoal.optimisation.main.stopping;
 
 import de.evoal.core.api.languages.AttributeEvaluator;
 import de.evoal.core.api.utils.InitializationException;
-import de.evoal.languages.model.base.Instance;
+import de.evoal.languages.model.base.expressions.Instance;
 import de.evoal.optimisation.api.model.Iteration;
 import de.evoal.optimisation.api.model.StoppingCriterion;
 

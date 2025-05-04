@@ -3,7 +3,11 @@
  */
 package de.evoal.languages.model.dynamic.impl;
 
-import de.evoal.languages.model.base.BasePackage;
+import de.evoal.languages.model.base.definitions.DefinitionsPackage;
+
+import de.evoal.languages.model.base.expressions.ExpressionsPackage;
+
+import de.evoal.languages.model.base.types.TypesPackage;
 
 import de.evoal.languages.model.dynamic.Definition;
 import de.evoal.languages.model.dynamic.DynamicFactory;
@@ -76,7 +80,9 @@ public class DynamicPackageImpl extends EPackageImpl implements DynamicPackage {
 		isInited = true;
 
 		// Initialize simple dependencies
-		BasePackage.eINSTANCE.eClass();
+		DefinitionsPackage.eINSTANCE.eClass();
+		ExpressionsPackage.eINSTANCE.eClass();
+		TypesPackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
 		theDynamicPackage.createPackageContents();
@@ -169,7 +175,7 @@ public class DynamicPackageImpl extends EPackageImpl implements DynamicPackage {
 		setNsURI(eNS_URI);
 
 		// Obtain other dependent packages
-		BasePackage theBasePackage = (BasePackage)EPackage.Registry.INSTANCE.getEPackage(BasePackage.eNS_URI);
+		DefinitionsPackage theDefinitionsPackage = (DefinitionsPackage)EPackage.Registry.INSTANCE.getEPackage(DefinitionsPackage.eNS_URI);
 
 		// Create type parameters
 
@@ -179,7 +185,7 @@ public class DynamicPackageImpl extends EPackageImpl implements DynamicPackage {
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(definitionEClass, Definition.class, "Definition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getDefinition_Source(), theBasePackage.getDefinition(), null, "source", null, 1, 1, Definition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDefinition_Source(), theDefinitionsPackage.getDefinition(), null, "source", null, 1, 1, Definition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

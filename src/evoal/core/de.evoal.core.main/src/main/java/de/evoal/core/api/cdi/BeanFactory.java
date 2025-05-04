@@ -3,7 +3,7 @@ package de.evoal.core.api.cdi;
 import de.evoal.core.api.utils.AttributeHelper;
 import de.evoal.core.api.utils.InitializationException;
 import de.evoal.core.api.utils.Requirements;
-import de.evoal.languages.model.base.Instance;
+import de.evoal.languages.model.base.expressions.Instance;
 import de.evoal.languages.model.dl.util.FQNProvider;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;

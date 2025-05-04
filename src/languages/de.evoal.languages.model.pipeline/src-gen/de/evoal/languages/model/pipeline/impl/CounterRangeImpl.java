@@ -3,7 +3,7 @@
  */
 package de.evoal.languages.model.pipeline.impl;
 
-import de.evoal.languages.model.base.Literal;
+import de.evoal.languages.model.base.expressions.Literal;
 
 import de.evoal.languages.model.pipeline.CounterRange;
 import de.evoal.languages.model.pipeline.PipelinePackage;

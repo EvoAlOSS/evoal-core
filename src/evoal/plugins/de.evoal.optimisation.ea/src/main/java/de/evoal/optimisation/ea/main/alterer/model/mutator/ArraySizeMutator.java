@@ -1,10 +1,11 @@
 package de.evoal.optimisation.ea.main.alterer.model.mutator;
 
+import de.evoal.languages.model.base.types.ArrayType;
 import de.evoal.optimisation.ea.api.alterer.EvoAlMutator;
 import de.evoal.optimisation.ea.api.operators.AltererComponent;
 import de.evoal.optimisation.ea.api.codec.model.ModelChromosome;
 import de.evoal.optimisation.ea.api.codec.model.ModelGene;
-import de.evoal.languages.model.base.*;
+import de.evoal.languages.model.base.expressions.*;
 import io.jenetics.Chromosome;
 import io.jenetics.MutatorResult;
 import io.jenetics.util.RandomRegistry;

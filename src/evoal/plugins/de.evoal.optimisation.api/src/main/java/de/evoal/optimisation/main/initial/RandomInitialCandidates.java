@@ -6,9 +6,9 @@ import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.properties.PropertySpecification;
 import de.evoal.core.api.properties.info.PropertiesBoundaries;
 import de.evoal.core.api.utils.Requirements;
-import de.evoal.languages.model.ddl.RepresentationType;
-import de.evoal.languages.model.ddl.TypedBaseDataDescription;
-import de.evoal.languages.model.ddl.UntypedBaseDataDescription;
+import de.evoal.languages.model.base.definitions.RepresentationType;
+import de.evoal.languages.model.base.definitions.TypedBaseDataDescription;
+import de.evoal.languages.model.base.definitions.UntypedBaseDataDescription;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.enterprise.context.Dependent;

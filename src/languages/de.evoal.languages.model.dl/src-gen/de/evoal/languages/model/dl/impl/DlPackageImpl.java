@@ -5,6 +5,12 @@ package de.evoal.languages.model.dl.impl;
 
 import de.evoal.languages.model.base.BasePackage;
 
+import de.evoal.languages.model.base.definitions.DefinitionsPackage;
+
+import de.evoal.languages.model.base.expressions.ExpressionsPackage;
+
+import de.evoal.languages.model.base.types.TypesPackage;
+
 import de.evoal.languages.model.dl.DefinitionModule;
 import de.evoal.languages.model.dl.DlFactory;
 import de.evoal.languages.model.dl.DlPackage;
@@ -77,7 +83,10 @@ public class DlPackageImpl extends EPackageImpl implements DlPackage {
 		isInited = true;
 
 		// Initialize simple dependencies
+		DefinitionsPackage.eINSTANCE.eClass();
+		ExpressionsPackage.eINSTANCE.eClass();
 		BasePackage.eINSTANCE.eClass();
+		TypesPackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
 		theDlPackage.createPackageContents();
@@ -215,6 +224,7 @@ public class DlPackageImpl extends EPackageImpl implements DlPackage {
 
 		// Obtain other dependent packages
 		BasePackage theBasePackage = (BasePackage)EPackage.Registry.INSTANCE.getEPackage(BasePackage.eNS_URI);
+		DefinitionsPackage theDefinitionsPackage = (DefinitionsPackage)EPackage.Registry.INSTANCE.getEPackage(DefinitionsPackage.eNS_URI);
 
 		// Create type parameters
 
@@ -226,9 +236,9 @@ public class DlPackageImpl extends EPackageImpl implements DlPackage {
 		initEClass(definitionModuleEClass, DefinitionModule.class, "DefinitionModule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getDefinitionModule_Imports(), theBasePackage.getImport(), null, "imports", null, 0, -1, DefinitionModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDefinitionModule_Name(), ecorePackage.getEString(), "name", null, 1, 1, DefinitionModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getDefinitionModule_Types(), theBasePackage.getTypeDefinition(), null, "types", null, 0, -1, DefinitionModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEReference(getDefinitionModule_Functions(), theBasePackage.getFunctionDefinition(), null, "functions", null, 0, -1, DefinitionModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEReference(getDefinitionModule_Constants(), theBasePackage.getConstantDefinition(), null, "constants", null, 0, -1, DefinitionModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDefinitionModule_Types(), theDefinitionsPackage.getTypeDefinition(), null, "types", null, 0, -1, DefinitionModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getDefinitionModule_Functions(), theDefinitionsPackage.getFunctionDefinition(), null, "functions", null, 0, -1, DefinitionModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getDefinitionModule_Constants(), theDefinitionsPackage.getConstantDefinition(), null, "constants", null, 0, -1, DefinitionModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);
@@ -252,7 +262,8 @@ public class DlPackageImpl extends EPackageImpl implements DlPackage {
 		  (this,
 		   source,
 		   new String[] {
-			   "el", "platform:/resource/de.evoal.languages.model.base/model/model.ecore#/"
+			   "base", "platform:/resource/de.evoal.languages.model.base/model/model.ecore#/",
+			   "defs", "platform:/resource/de.evoal.languages.model.base/model/definitions.ecore#/"
 		   });
 	}
 

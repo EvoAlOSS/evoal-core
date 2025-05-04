@@ -7,8 +7,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.evoal.languages.model.base.ConstantDefinition;
-import de.evoal.languages.model.base.ConstantReference;
+import de.evoal.languages.model.base.definitions.ConstantDefinition;
+import de.evoal.languages.model.base.expressions.ConstantReference;
 
 
 public class ConstantEvaluator extends AbstractExpressionEvaluator {

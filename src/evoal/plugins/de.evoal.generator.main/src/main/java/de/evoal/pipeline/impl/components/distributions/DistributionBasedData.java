@@ -1,6 +1,6 @@
 package de.evoal.pipeline.impl.components.distributions;
 
-import de.evoal.languages.model.base.Instance;
+import de.evoal.languages.model.base.expressions.Instance;
 import de.evoal.pipeline.api.distribution.Distribution;
 import de.evoal.pipeline.api.distribution.DistributionFactory;
 import de.evoal.pipeline.api.model.ComponentImpl;

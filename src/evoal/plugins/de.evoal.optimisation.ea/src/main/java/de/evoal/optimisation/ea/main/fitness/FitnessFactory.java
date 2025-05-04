@@ -13,7 +13,7 @@ import de.evoal.optimisation.api.model.OptimisationFunction;
 import de.evoal.optimisation.api.model.OptimisationValueComparator;
 import de.evoal.optimisation.api.model.OptimisationValue;
 import de.evoal.core.api.properties.Properties;
-import de.evoal.languages.model.base.Instance;
+import de.evoal.languages.model.base.expressions.Instance;
 import lombok.extern.slf4j.Slf4j;
 
 @ApplicationScoped

@@ -5,6 +5,7 @@ import "https://www.evoal.de/languages/ol/1.0.0"
 import "https://www.evoal.de/languages/ddl/1.0.0" as ddl
 import "https://www.evoal.de/languages/instance/1.0.0" as instance
 import "https://www.evoal.de/languages/base/1.0.0" as base
+import "https://www.evoal.de/languages/base/definitions/1.0.0" as definitions
 
 OptimisationModelRule returns OptimisationModule:
 	(imports += ImportRule)*
@@ -17,7 +18,7 @@ OptimisationModelRule returns OptimisationModule:
 ;
 
 ProblemRule returns ProblemInstance:
-	"specify" definition=[base::TypeDefinition|QualifiedName] name = StringOrId "{"
+	"specify" definition=[definitions::TypeDefinition|QualifiedName] name = StringOrId "{"
 		attributes+=AttributeRule*
 	
 		("documenting" ":=" documentation = ArrayRule ';')?
@@ -25,7 +26,7 @@ ProblemRule returns ProblemInstance:
 ;
 
 AlgorithmInstanceRule returns AlgorithmInstance:
-	"configure" definition=[base::TypeDefinition|QualifiedName] "for" problem = [ProblemInstance|QualifiedName] "{"
+	"configure" definition=[definitions::TypeDefinition|QualifiedName] "for" problem = [ProblemInstance|QualifiedName] "{"
 		attributes+=AttributeRule*
 		
 		("documenting" ":=" documentation = ArrayRule ';')?

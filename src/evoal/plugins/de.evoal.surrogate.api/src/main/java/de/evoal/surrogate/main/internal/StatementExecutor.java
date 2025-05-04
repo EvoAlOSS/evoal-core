@@ -5,8 +5,10 @@ import de.evoal.core.api.languages.AttributeEvaluator;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.utils.ConstantSwitch;
 import de.evoal.core.api.utils.Requirements;
-import de.evoal.languages.model.base.*;
-import de.evoal.languages.model.ddl.DataDescription;
+import de.evoal.languages.model.base.definitions.DefinedFunctionName;
+import de.evoal.languages.model.base.definitions.FunctionDefinition;
+import de.evoal.languages.model.base.expressions.*;
+import de.evoal.languages.model.base.definitions.DataDescription;
 import de.evoal.languages.model.dl.util.FQNProvider;
 import de.evoal.languages.model.mll.*;
 import de.evoal.languages.model.mll.util.MllSwitch;
@@ -148,11 +150,11 @@ public class StatementExecutor extends MllSwitch<Object> {
 
     private void handleGoodnessOfFitCall(final CallStatement statement) {
         final Call call = statement.getCall();
-        final DefinedFunctionName function = (DefinedFunctionName)call.getFunction();
-        log.info("Handling call of {} ...", function.getDefinition().getName());
+        final FunctionDefinition function = call.getFunction();
+        log.info("Handling call of {} ...", function.getName());
 
         log.info("Creating GOF instance.");
-        final SurrogateInformationCalculator calculator = createFunction(function.getDefinition());
+        final SurrogateInformationCalculator calculator = createFunction(function);
 
         log.info("Calculating parameter values.");
         final List<Object> parameters = call.getParameters()
@@ -168,7 +170,7 @@ public class StatementExecutor extends MllSwitch<Object> {
         calculator.execute();
         final long endTime = System.currentTimeMillis();
 
-        log.info("Calculation of {} took {} ms.", function.getDefinition().getName(), (endTime - startTime));
+        log.info("Calculation of {} took {} ms.", function.getName(), (endTime - startTime));
     }
 
     private File calculateFilename(String filename) {

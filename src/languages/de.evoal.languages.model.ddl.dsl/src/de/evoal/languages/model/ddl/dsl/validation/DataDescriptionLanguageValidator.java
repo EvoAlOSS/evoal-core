@@ -10,12 +10,12 @@ import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
 
-import de.evoal.languages.model.base.Expression;
-import de.evoal.languages.model.ddl.BaseDataDescription;
+import de.evoal.languages.model.base.expressions.Expression;
+import de.evoal.languages.model.base.definitions.BaseDataDescription;
 import de.evoal.languages.model.ddl.DataDescriptionModule;
 import de.evoal.languages.model.ddl.DdlPackage;
-import de.evoal.languages.model.ddl.EnumTypeDefinition;
-import de.evoal.languages.model.ddl.ScaleType;
+import de.evoal.languages.model.base.definitions.EnumDefinition;
+import de.evoal.languages.model.base.definitions.ScaleType;
 import de.evoal.languages.model.utils.validator.ModuleValidator;
 import de.evoal.languages.model.utils.validator.ScaleValidator;
 
@@ -57,9 +57,9 @@ public class DataDescriptionLanguageValidator extends AbstractDataDescriptionLan
 			ScaleValidator.check(expression, descr.getScale(), this);
 		}
 	}
-	
+	/*
 	@Check(CheckType.FAST)
-	public void checkEnumTypeDefinition(final EnumTypeDefinition def) {
+	public void checkEnumTypeDefinition(final EnumDefinition def) {
 		if(ScaleType.CARDINAL.equals(def.getScale())) {
 			error("An enum should not be cardinal.", def, DdlPackage.eINSTANCE.getDataTypeDefinition_Scale());
 		} else if(ScaleType.QUOTIENT.equals(def.getScale())) {
@@ -67,4 +67,5 @@ public class DataDescriptionLanguageValidator extends AbstractDataDescriptionLan
 		}
 
 	}
+	*/
 }

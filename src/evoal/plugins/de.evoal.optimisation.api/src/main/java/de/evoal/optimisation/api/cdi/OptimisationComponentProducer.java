@@ -5,7 +5,7 @@ import de.evoal.core.api.cdi.Component;
 import de.evoal.core.api.cdi.ComponentProducer;
 import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.core.api.cdi.EvoalComponent;
-import de.evoal.languages.model.base.Instance;
+import de.evoal.languages.model.base.expressions.Instance;
 import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
 import de.evoal.optimisation.api.model.InitialCandidatesProvider;
 import de.evoal.optimisation.api.model.OptimisationFunction;

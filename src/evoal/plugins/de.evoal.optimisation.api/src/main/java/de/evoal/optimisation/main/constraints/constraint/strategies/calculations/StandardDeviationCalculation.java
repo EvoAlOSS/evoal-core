@@ -12,7 +12,7 @@ import javax.enterprise.context.Dependent;
 
 import de.evoal.core.api.utils.ArithmeticOperations;
 import de.evoal.optimisation.main.constraints.deviation.model.Deviations;
-import de.evoal.languages.model.base.Instance;
+import de.evoal.languages.model.base.expressions.Instance;
 import lombok.NonNull;
 import org.apache.commons.math3.util.Pair;
 

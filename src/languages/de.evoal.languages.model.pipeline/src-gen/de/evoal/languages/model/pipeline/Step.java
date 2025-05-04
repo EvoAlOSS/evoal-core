@@ -3,11 +3,10 @@
  */
 package de.evoal.languages.model.pipeline;
 
-import de.evoal.languages.model.base.Instance;
+import de.evoal.languages.model.base.expressions.Instance;
 
 import org.eclipse.emf.common.util.EList;
 
-import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 

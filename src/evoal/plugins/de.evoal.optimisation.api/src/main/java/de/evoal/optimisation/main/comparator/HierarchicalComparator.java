@@ -3,8 +3,8 @@ package de.evoal.optimisation.main.comparator;
 import de.evoal.core.api.languages.AttributeEvaluator;
 import de.evoal.optimisation.api.model.OptimisationValueComparator;
 import de.evoal.core.api.properties.PropertiesSpecification;
-import de.evoal.languages.model.base.Instance;
-import de.evoal.languages.model.ddl.DataDescription;
+import de.evoal.languages.model.base.expressions.Instance;
+import de.evoal.languages.model.base.definitions.DataDescription;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;

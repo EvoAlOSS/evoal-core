@@ -3,7 +3,7 @@
  */
 package de.evoal.languages.model.constraints.impl;
 
-import de.evoal.languages.model.base.Expression;
+import de.evoal.languages.model.base.expressions.Expression;
 
 import de.evoal.languages.model.constraints.ConstraintsPackage;
 import de.evoal.languages.model.constraints.MultiVariateConstraint;
@@ -118,6 +118,7 @@ public class MultiVariateConstraintImpl extends ConstraintImpl implements MultiV
 	 */
 	@Override
 	public Diagnostic check(final EObject object) {
+		
 		return Diagnostic.OK_INSTANCE;
 	}
 

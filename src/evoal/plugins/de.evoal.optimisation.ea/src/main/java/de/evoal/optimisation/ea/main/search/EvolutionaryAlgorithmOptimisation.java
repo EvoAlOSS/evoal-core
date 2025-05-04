@@ -25,7 +25,7 @@ import de.evoal.optimisation.ea.main.initial.InitialStream;
 import de.evoal.optimisation.ea.main.jenetics.ConstraintList;
 import de.evoal.optimisation.ea.main.statistics.IterationAdapter;
 import de.evoal.optimisation.ea.main.statistics.JeneticsStatisticsWriter;
-import de.evoal.languages.model.base.Attribute;
+import de.evoal.languages.model.base.expressions.Attribute;
 import de.evoal.languages.model.ol.OptimisationModule;
 import io.jenetics.*;
 import io.jenetics.engine.*;
@@ -142,14 +142,14 @@ public class EvolutionaryAlgorithmOptimisation implements OptimisationAlgorithm 
 		final OptimisationModule configuration = board.get(OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION);
 
 		// create list of alterers
-		final de.evoal.languages.model.base.Instance alterers = helper.lookup(configuration, "algorithm.alterers");
+		final de.evoal.languages.model.base.expressions.Instance alterers = helper.lookup(configuration, "algorithm.alterers");
 		for(final Attribute category: alterers.getAttributes()) {
 			final String name = category.getDefinition().getName();
 			log.info("Processing alterer category '{}'.", name);
 
-			final List<de.evoal.languages.model.base.Instance> listOfAltererConfigurations = (List<de.evoal.languages.model.base.Instance>)evaluator.evaluate(category.getValue());
+			final List<de.evoal.languages.model.base.expressions.Instance> listOfAltererConfigurations = (List<de.evoal.languages.model.base.expressions.Instance>)evaluator.evaluate(category.getValue());
 
-			for(final de.evoal.languages.model.base.Instance alterer : listOfAltererConfigurations) {
+			for(final de.evoal.languages.model.base.expressions.Instance alterer : listOfAltererConfigurations) {
 				this.alterers
 					.computeIfAbsent(name, k -> new ArrayList<>())
 					.add(factory.create(alterer));
@@ -157,8 +157,8 @@ public class EvolutionaryAlgorithmOptimisation implements OptimisationAlgorithm 
 		}
 
 		// create list of stopping criteria
-		final List<de.evoal.languages.model.base.Instance> criteria = helper.lookup(configuration, "algorithm.stopping-criteria");
-		for(final de.evoal.languages.model.base.Instance criterion : criteria) {
+		final List<de.evoal.languages.model.base.expressions.Instance> criteria = helper.lookup(configuration, "algorithm.stopping-criteria");
+		for(final de.evoal.languages.model.base.expressions.Instance criterion : criteria) {
 			final Predicate<? super EvolutionResult<?, OptimisationValue>> limit = new Predicate<>() {
 				private StoppingCriterion delegate = BeanFactory.createComponent(StoppingCriterion.class, criterion);
 

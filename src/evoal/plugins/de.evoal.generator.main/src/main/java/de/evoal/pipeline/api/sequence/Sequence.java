@@ -1,7 +1,7 @@
 package de.evoal.pipeline.api.sequence;
 
 import de.evoal.core.api.cdi.EvoalComponent;
-import de.evoal.languages.model.ddl.DataDescription;
+import de.evoal.languages.model.base.definitions.DataDescription;
 
 import java.util.Map;
 

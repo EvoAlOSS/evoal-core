@@ -5,7 +5,7 @@ import de.evoal.optimisation.api.constraints.model.Constraint;
 import de.evoal.optimisation.api.constraints.model.ConstraintResult;
 import de.evoal.optimisation.api.constraints.strategies.fitness.MalusFunction;
 import de.evoal.core.api.properties.Properties;
-import de.evoal.languages.model.base.Instance;
+import de.evoal.languages.model.base.expressions.Instance;
 
 public class MalusForFitnessFunction implements MalusFunction {
 

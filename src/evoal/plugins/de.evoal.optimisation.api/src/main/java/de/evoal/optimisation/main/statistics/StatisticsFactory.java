@@ -7,7 +7,7 @@ import de.evoal.core.api.languages.AttributeEvaluator;
 import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
 import de.evoal.optimisation.api.statistics.writer.StatisticsWriter;
 import de.evoal.optimisation.main.statistics.internal.MultipleStatisticsWriter;
-import de.evoal.languages.model.base.Instance;
+import de.evoal.languages.model.base.expressions.Instance;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.Dependent;

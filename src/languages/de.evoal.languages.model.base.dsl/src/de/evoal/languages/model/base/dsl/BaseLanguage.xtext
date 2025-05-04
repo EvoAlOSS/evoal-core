@@ -2,6 +2,9 @@
 grammar de.evoal.languages.model.base.dsl.BaseLanguage with org.eclipse.xtext.common.Terminals
 
 import "https://www.evoal.de/languages/base/1.0.0" 
+import "https://www.evoal.de/languages/base/definitions/1.0.0"
+import "https://www.evoal.de/languages/base/expressions/1.0.0" 
+import "https://www.evoal.de/languages/base/types/1.0.0"  as types
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 
 ExpressionRule returns Expression:
@@ -78,13 +81,18 @@ ParanthesesRule returns Parantheses:
 ;
 
 CallRule returns Call:
-	function=FunctionNameRule '(' (parameters += ExpressionRule (',' parameters += ExpressionRule)* )? ')'
+	function=[FunctionDefinition|QualifiedName] '(' (parameters += ExpressionRule (',' parameters += ExpressionRule)* )? ')'
 ;
 
 
 ReferenceRule returns ValueReference:
-	ConstantReferenceRule
+	ConstantReferenceRule | DataReferenceRule
 ;
+
+DataReferenceRule returns DataReference:
+	'data' definition = [DataDescription|QualifiedName] 
+;
+
 
 ConstantReferenceRule returns ConstantReference:
 	definition = [ConstantDefinition|QualifiedName]
@@ -167,56 +175,66 @@ AttributeDefinitionRule returns AttributeDefinition:
 	name = StringOrId ':' type = TypeRule (':=' initialisation = ExpressionRule)? ';'
 ;
 
-TypeRule returns Type:
-	StringTypeRule | IntTypeRule | RealTypeRule | BooleanTypeRule | LiteralTypeRule | ArrayTypeRule | InstanceTypeRule | VoidTypeRule | ExpressionTypeRule | DataTypeRule
+TypeRule returns types::Type:
+	StringTypeRule
+	| IntTypeRule
+	| RealTypeRule
+	| BooleanTypeRule
+	| ArrayTypeRule
+	| InstanceTypeRule
+	| VoidTypeRule
+	| ExpressionTypeRule
+	| LiteralTypeRule
+	| DataTypeRule
 ;
 
-LiteralTypeRule returns LiteralType:
-	{LiteralType} 'literal'
+
+LiteralTypeRule returns types::LiteralType:
+	{types::LiteralType} 'literal'
 ;
 
-InstanceTypeRule returns InstanceType:
-	{InstanceType}
+DataTypeRule returns types::DataType:
+	{types::DataType}
+	'data'
+;
+
+InstanceTypeRule returns types::InstanceType:
+	{types::InstanceType}
 	'instance' definition = [TypeDefinition|QualifiedName]
 ;
 
-StringTypeRule returns StringType:
-	{StringType}
+StringTypeRule returns types::StringType:
+	{types::StringType}
 	'string'
 ;
 
-ExpressionTypeRule returns ExpressionType:
-	{ExpressionType}
+ExpressionTypeRule returns types::ExpressionType:
+	{types::ExpressionType}
 	'expression'
 ;
 
-IntTypeRule returns IntType:
-	{IntType}
+IntTypeRule returns types::IntType:
+	{types::IntType}
 	'int'
 ;
 
-RealTypeRule returns RealType:
-	{RealType}
+RealTypeRule returns types::RealType:
+	{types::RealType}
 	'real'
 ;
 
-BooleanTypeRule returns BooleanType:
-	{BooleanType}
+BooleanTypeRule returns types::BooleanType:
+	{types::BooleanType}
 	'boolean'
 ;
 
 
-VoidTypeRule returns VoidType:
-	{VoidType}
+VoidTypeRule returns types::VoidType:
+	{types::VoidType}
 	'void'
 ;
 
-DataTypeRule returns DataType:
-	{DataType}
-	'data'
-;
-
-ArrayTypeRule returns ArrayType:
+ArrayTypeRule returns types::ArrayType:
 	'array'	 elements = TypeRule
 ;
 
@@ -234,11 +252,6 @@ ParameterRule returns Parameter:
 
 ImportRule returns Import:
 	'import' language=STRING 'from' importedNamespace=QualifiedName ";"
-;
-
-
-FunctionNameRule returns DefinedFunctionName:
-	definition = [FunctionDefinition|QualifiedName]
 ;
 
 QualifiedName:

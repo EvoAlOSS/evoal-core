@@ -3,16 +3,17 @@
  */
 package de.evoal.languages.model.generator.impl;
 
-import de.evoal.languages.model.base.Literal;
+import de.evoal.languages.model.base.expressions.Literal;
+
 import de.evoal.languages.model.generator.CounterRange;
 import de.evoal.languages.model.generator.GeneratorPackage;
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.common.notify.NotificationChain;
-import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**

@@ -2,7 +2,7 @@ package de.evoal.optimisation.main.statistics.stopping;
 
 import de.evoal.core.api.cdi.BeanFactory;
 import de.evoal.core.api.languages.AttributeEvaluator;
-import de.evoal.languages.model.base.Instance;
+import de.evoal.languages.model.base.expressions.Instance;
 import de.evoal.optimisation.api.model.*;
 import de.evoal.optimisation.api.statistics.io.Writer;
 import de.evoal.optimisation.api.statistics.io.WriterException;

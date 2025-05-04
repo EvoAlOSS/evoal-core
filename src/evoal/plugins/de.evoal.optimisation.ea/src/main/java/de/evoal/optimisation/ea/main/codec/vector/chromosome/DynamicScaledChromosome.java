@@ -4,8 +4,8 @@ import de.evoal.core.api.languages.AttributeEvaluator;
 import de.evoal.core.api.properties.PropertySpecification;
 import de.evoal.core.api.properties.info.PropertiesBoundaries;
 import de.evoal.core.api.utils.Requirements;
-import de.evoal.languages.model.ddl.DataDescription;
-import de.evoal.languages.model.base.Instance;
+import de.evoal.languages.model.base.definitions.DataDescription;
+import de.evoal.languages.model.base.expressions.Instance;
 import io.jenetics.util.DoubleRange;
 import lombok.extern.slf4j.Slf4j;
 

@@ -7,18 +7,17 @@ import org.eclipse.xtext.scoping.IScope;
 
 import com.google.inject.Inject;
 
-import de.evoal.languages.model.base.BasePackage;
 import de.evoal.languages.model.base.dsl.scoping.BaseLanguageLocalScopeProvider;
-import de.evoal.languages.model.instance.InstancePackage;
+import de.evoal.languages.model.base.expressions.ExpressionsPackage;
 import de.evoal.languages.model.utils.scoping.WildcardEnabledLocalScopeProvider;
 
 public class InstanceLanguageLocalScopeProvider extends WildcardEnabledLocalScopeProvider {
 	
-	private final static EClass dataReference = InstancePackage.eINSTANCE.getDataReference();
-	private final static EReference dataDefinition = InstancePackage.eINSTANCE.getDataReference_Definition();
-private final static EClass instance = BasePackage.eINSTANCE.getInstance();
-	private final static EReference instanceDefinition = BasePackage.eINSTANCE.getInstance_Definition();
-	private final static EReference attributeDefinition = BasePackage.eINSTANCE.getAttribute_Definition();
+	private final static EClass dataReference = ExpressionsPackage.eINSTANCE.getDataReference();
+	private final static EReference dataDefinition = ExpressionsPackage.eINSTANCE.getDataReference_Definition();
+	private final static EClass instance = ExpressionsPackage.eINSTANCE.getInstance();
+	private final static EReference instanceDefinition = ExpressionsPackage.eINSTANCE.getInstance_Definition();
+	private final static EReference attributeDefinition = ExpressionsPackage.eINSTANCE.getAttribute_Definition();
 
 	@Inject
 	private BaseLanguageLocalScopeProvider provider;

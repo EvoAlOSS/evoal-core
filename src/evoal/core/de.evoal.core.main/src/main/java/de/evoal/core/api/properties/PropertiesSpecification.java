@@ -1,7 +1,7 @@
 package de.evoal.core.api.properties;
 
-import de.evoal.languages.model.base.Definition;
-import de.evoal.languages.model.ddl.DataDescription;
+import de.evoal.languages.model.base.definitions.Definition;
+import de.evoal.languages.model.base.definitions.DataDescription;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

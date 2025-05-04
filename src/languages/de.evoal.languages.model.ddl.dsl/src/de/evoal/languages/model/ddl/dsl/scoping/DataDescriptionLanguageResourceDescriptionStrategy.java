@@ -2,6 +2,7 @@ package de.evoal.languages.model.ddl.dsl.scoping;
 
 import com.google.inject.Singleton;
 
+import de.evoal.languages.model.base.definitions.DefinitionsPackage;
 import de.evoal.languages.model.ddl.DdlPackage;
 import de.evoal.languages.model.utils.scoping.FilteringResourceDescriptionsStrategy;
 
@@ -10,13 +11,13 @@ public class DataDescriptionLanguageResourceDescriptionStrategy extends Filterin
 	public DataDescriptionLanguageResourceDescriptionStrategy() {
 		super(
 				DdlPackage.eINSTANCE.getDataDescriptionModule(),
-				DdlPackage.eINSTANCE.getDataTypeDefinition(),
-				DdlPackage.eINSTANCE.getDataDescription(),
-				DdlPackage.eINSTANCE.getTypedBaseDataDescription(),
-				DdlPackage.eINSTANCE.getUntypedBaseDataDescription(),
-				DdlPackage.eINSTANCE.getStructuredDataDescription(),
-				DdlPackage.eINSTANCE.getEnumTypeDefinition(),
-				DdlPackage.eINSTANCE.getEnumLiteral()
+				DefinitionsPackage.eINSTANCE.getDataTypeDefinition(),
+				DefinitionsPackage.eINSTANCE.getDataDescription(),
+				DefinitionsPackage.eINSTANCE.getTypedBaseDataDescription(),
+				DefinitionsPackage.eINSTANCE.getUntypedBaseDataDescription(),
+				DefinitionsPackage.eINSTANCE.getStructuredDataDescription(),
+				DefinitionsPackage.eINSTANCE.getEnumDefinition(),
+				DefinitionsPackage.eINSTANCE.getEnumLiteralDefinition()
 			 );
 	}
 }

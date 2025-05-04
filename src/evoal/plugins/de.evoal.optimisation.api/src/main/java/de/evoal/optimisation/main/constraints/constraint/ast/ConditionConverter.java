@@ -1,24 +1,24 @@
 package de.evoal.optimisation.main.constraints.constraint.ast;
 
 import de.evoal.core.api.utils.Requirements;
+import de.evoal.languages.model.base.expressions.util.ExpressionsSwitch;
 import de.evoal.optimisation.api.constraints.model.ConstraintType;
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.properties.PropertySpecification;
 
 import de.evoal.core.api.utils.ArithmeticOperations;
-import de.evoal.languages.model.ddl.DataDescription;
-import de.evoal.languages.model.ddl.DataReference;
-import de.evoal.languages.model.ddl.SelfReference;
-import de.evoal.languages.model.base.*;
-import de.evoal.languages.model.base.util.BaseSwitch;
+import de.evoal.languages.model.base.definitions.DataDescription;
+import de.evoal.languages.model.base.expressions.DataReference;
+import de.evoal.languages.model.base.expressions.SelfReference;
+import de.evoal.languages.model.base.expressions.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.BiFunction;
 
-public class ConditionConverter extends BaseSwitch<Object> {
+public class ConditionConverter extends ExpressionsSwitch<Object> {
     private BiFunction<Properties, Properties, Object> function;
     private final List<PropertySpecification> usedProperties = new ArrayList<>();
     private final PropertiesSpecification genoSpec;

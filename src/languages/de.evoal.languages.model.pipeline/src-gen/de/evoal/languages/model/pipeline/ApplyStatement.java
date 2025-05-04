@@ -3,7 +3,7 @@
  */
 package de.evoal.languages.model.pipeline;
 
-import de.evoal.languages.model.base.Literal;
+import de.evoal.languages.model.base.expressions.Literal;
 
 import org.eclipse.emf.common.util.EList;
 
@@ -72,7 +72,7 @@ public interface ApplyStatement extends Statement {
 
 	/**
 	 * Returns the value of the '<em><b>Pipelines</b></em>' containment reference list.
-	 * The list contents are of type {@link de.evoal.languages.model.base.Literal}.
+	 * The list contents are of type {@link de.evoal.languages.model.pipeline.PipelineDefinitionReference}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Pipelines</em>' containment reference list.
@@ -81,6 +81,6 @@ public interface ApplyStatement extends Statement {
 	 *        annotation="http://www.eclipse.org/OCL/Collection nullFree='false'"
 	 * @generated
 	 */
-	EList<Literal> getPipelines();
+	EList<PipelineDefinitionReference> getPipelines();
 
 } // ApplyStatement

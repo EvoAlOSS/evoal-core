@@ -14,7 +14,7 @@ import de.evoal.optimisation.api.statistics.writer.StatisticsWriter;
 import de.evoal.optimisation.api.correlations.Correlation;
 import de.evoal.optimisation.api.correlations.Correlations;
 import de.evoal.optimisation.api.correlations.RangedCorrelation;
-import de.evoal.languages.model.base.Instance;
+import de.evoal.languages.model.base.expressions.Instance;
 
 import java.util.*;
 import javax.annotation.PostConstruct;

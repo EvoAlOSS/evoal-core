@@ -3,7 +3,7 @@
  */
 package de.evoal.languages.model.pipeline.impl;
 
-import de.evoal.languages.model.base.Instance;
+import de.evoal.languages.model.base.expressions.Instance;
 
 import de.evoal.languages.model.pipeline.PipelinePackage;
 import de.evoal.languages.model.pipeline.Step;
@@ -15,7 +15,6 @@ import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
 
-import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;

@@ -10,7 +10,7 @@ import de.evoal.optimisation.api.constraints.model.Constraint;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
 
-import de.evoal.languages.model.base.Instance;
+import de.evoal.languages.model.base.expressions.Instance;
 
 import javax.inject.Inject;
 import java.util.HashMap;

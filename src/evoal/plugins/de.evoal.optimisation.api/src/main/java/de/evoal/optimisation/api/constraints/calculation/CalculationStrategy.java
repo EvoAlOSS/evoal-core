@@ -3,7 +3,7 @@ package de.evoal.optimisation.api.constraints.calculation;
 import de.evoal.optimisation.api.constraints.strategies.CalculationResult;
 import de.evoal.optimisation.api.constraints.model.Constraint;
 import de.evoal.core.api.properties.Properties;
-import de.evoal.languages.model.base.Instance;
+import de.evoal.languages.model.base.expressions.Instance;
 import lombok.NonNull;
 
 /**

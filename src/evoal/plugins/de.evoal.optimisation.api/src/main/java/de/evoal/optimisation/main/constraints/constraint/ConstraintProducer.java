@@ -1,5 +1,6 @@
 package de.evoal.optimisation.main.constraints.constraint;
 
+import de.evoal.languages.model.base.definitions.FunctionDefinition;
 import de.evoal.optimisation.api.constraints.model.Constraint;
 import de.evoal.optimisation.api.constraints.model.Constraints;
 import de.evoal.optimisation.api.constraints.model.DataConstraints;
@@ -7,7 +8,7 @@ import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
 import de.evoal.optimisation.main.constraints.constraint.utils.ConfigurationUtils;
 import de.evoal.core.api.languages.AttributeEvaluator;
-import de.evoal.languages.model.base.Instance;
+import de.evoal.languages.model.base.expressions.Instance;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.properties.PropertySpecification;
 import javax.enterprise.context.ApplicationScoped;
@@ -19,9 +20,9 @@ import javax.inject.Named;
 import de.evoal.optimisation.main.constraints.constraint.ast.ConditionConverter;
 import de.evoal.core.api.languages.base.BaseLanguageHelper;
 import de.evoal.core.api.languages.base.LogHelper;
-import de.evoal.languages.model.base.DefinedFunctionName;
-import de.evoal.languages.model.ddl.DataDescription;
-import de.evoal.languages.model.base.Call;
+import de.evoal.languages.model.base.definitions.DefinedFunctionName;
+import de.evoal.languages.model.base.definitions.DataDescription;
+import de.evoal.languages.model.base.expressions.Call;
 import lombok.extern.slf4j.Slf4j;
 import javax.inject.Inject;
 
@@ -66,7 +67,7 @@ public class ConstraintProducer {
                         .map(BaseLanguageHelper::findCall)
                         .filter(Objects::nonNull)
                         .map(Call.class::cast)
-                        .filter(c -> "constraint".equals(((DefinedFunctionName)c.getFunction()).getDefinition().getName()))
+                        .filter(c -> "constraint".equals(c.getFunction().getName()))
                         .map(c -> convert(c, context))
                         .filter(Optional::isPresent)
                         .map(Optional::get)

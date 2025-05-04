@@ -3,8 +3,8 @@ package de.evoal.optimisation.main.constraints.correlation.el;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.languages.base.DataReferenceSwitch;
 import de.evoal.optimisation.api.correlations.Range;
-import de.evoal.languages.model.ddl.DataDescription;
-import de.evoal.languages.model.base.Expression;
+import de.evoal.languages.model.base.definitions.DataDescription;
+import de.evoal.languages.model.base.expressions.Expression;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j

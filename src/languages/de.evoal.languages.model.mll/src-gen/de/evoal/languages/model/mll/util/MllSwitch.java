@@ -2,10 +2,8 @@
  */
 package de.evoal.languages.model.mll.util;
 
-import de.evoal.languages.model.base.Instance;
-import de.evoal.languages.model.base.Literal;
-import de.evoal.languages.model.base.Value;
-
+import de.evoal.languages.model.base.expressions.ConstantValue;
+import de.evoal.languages.model.base.expressions.Expression;
 import de.evoal.languages.model.mll.*;
 
 import org.eclipse.emf.ecore.EObject;
@@ -93,6 +91,8 @@ public class MllSwitch<T> extends Switch<T> {
 				T result = casePartialSurrogateFunctionDefinition(partialSurrogateFunctionDefinition);
 				if (result == null) result = caseInstance(partialSurrogateFunctionDefinition);
 				if (result == null) result = caseLiteral(partialSurrogateFunctionDefinition);
+				if (result == null) result = caseConstantValue(partialSurrogateFunctionDefinition);
+				if (result == null) result = caseExpression(partialSurrogateFunctionDefinition);
 				if (result == null) result = caseValue(partialSurrogateFunctionDefinition);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -367,7 +367,37 @@ public class MllSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseValue(Value object) {
+	public T caseValue(de.evoal.languages.model.base.expressions.Value object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Expression</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseExpression(Expression object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Constant Value</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Constant Value</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseConstantValue(ConstantValue object) {
 		return null;
 	}
 
@@ -382,7 +412,7 @@ public class MllSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseLiteral(Literal object) {
+	public T caseLiteral(de.evoal.languages.model.base.expressions.Literal object) {
 		return null;
 	}
 
@@ -397,7 +427,7 @@ public class MllSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseInstance(Instance object) {
+	public T caseInstance(de.evoal.languages.model.base.expressions.Instance object) {
 		return null;
 	}
 

@@ -7,7 +7,7 @@ import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
 import de.evoal.optimisation.ea.api.operators.SelectorComponent;
 import de.evoal.optimisation.ea.api.operators.SelectorComponentProvider;
 import de.evoal.optimisation.ea.main.comparator.ParetoOptimisationValue;
-import de.evoal.languages.model.base.Instance;
+import de.evoal.languages.model.base.expressions.Instance;
 import io.jenetics.*;
 import io.jenetics.ext.moea.NSGA2Selector;
 import lombok.extern.slf4j.Slf4j;

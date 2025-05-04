@@ -1,11 +1,11 @@
 package de.evoal.optimisation.main.producer;
 
 import de.evoal.optimisation.api.constraints.model.DataConstraints;
-import de.evoal.languages.model.ddl.DataDescription;
+import de.evoal.languages.model.base.definitions.DataDescription;
 import de.evoal.languages.model.ddl.DataDescriptionModule;
-import de.evoal.languages.model.ddl.TypedDataDescription;
+import de.evoal.languages.model.base.definitions.TypedBaseDataDescription;
 import de.evoal.languages.model.ol.OptimisationModule;
-import de.evoal.languages.model.instance.DataReference;
+import de.evoal.languages.model.base.expressions.DataReference;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 
@@ -42,9 +42,9 @@ public class DataConstraintProducer {
 
         // collect models of types of descriptions
         descriptions.stream()
-                .filter(TypedDataDescription.class::isInstance)
-                .map(TypedDataDescription.class::cast)
-                .map(TypedDataDescription::getType)
+                .filter(TypedBaseDataDescription.class::isInstance)
+                .map(TypedBaseDataDescription.class::cast)
+                .map(TypedBaseDataDescription::getType)
                 .map(DataConstraintProducer::findModel)
                 .filter(Objects::nonNull)
                 .forEach(models::add);

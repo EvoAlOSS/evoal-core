@@ -2,14 +2,14 @@ package de.evoal.pipeline.api.model.dynamic;
 
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.properties.PropertySpecification;
-import de.evoal.languages.model.ddl.BaseDataDescription;
-import de.evoal.languages.model.ddl.DataDescription;
-import de.evoal.languages.model.ddl.RepresentationType;
+import de.evoal.languages.model.base.definitions.BaseDataDescription;
+import de.evoal.languages.model.base.definitions.DataDescription;
+import de.evoal.languages.model.base.definitions.RepresentationType;
 import de.evoal.languages.model.dynamic.Definition;
 import de.evoal.languages.model.dynamic.DynamicFactory;
 import de.evoal.languages.model.dynamic.DynamicPackage;
 import de.evoal.languages.model.generator.GeneratorModule;
-import de.evoal.languages.model.instance.DataReference;
+import de.evoal.languages.model.base.expressions.DataReference;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.*;

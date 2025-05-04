@@ -3,7 +3,7 @@
  */
 package de.evoal.languages.model.pipeline;
 
-import de.evoal.languages.model.base.BasePackage;
+import de.evoal.languages.model.base.expressions.ExpressionsPackage;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -23,7 +23,7 @@ import org.eclipse.emf.ecore.EReference;
  * <!-- end-user-doc -->
  * @see de.evoal.languages.model.pipeline.PipelineFactory
  * @model kind="package"
- *        annotation="http://www.eclipse.org/OCL/Import base='platform:/resource/de.evoal.languages.model.base/model/model.ecore#/' ddl='platform:/resource/de.evoal.languages.model.ddl/model/model.ecore#/' dl='platform:/resource/de.evoal.languages.model.dl/model/model.ecore#/' ecore='http://www.eclipse.org/emf/2002/Ecore' ins='platform:/resource/de.evoal.languages.model.instance/model/model.ecore#/'"
+ *        annotation="http://www.eclipse.org/OCL/Import base='platform:/resource/de.evoal.languages.model.base/model/model.ecore#/' ddl='platform:/resource/de.evoal.languages.model.ddl/model/model.ecore#/' dl='platform:/resource/de.evoal.languages.model.dl/model/model.ecore#/' ecore='http://www.eclipse.org/emf/2002/Ecore' expr='platform:/resource/de.evoal.languages.model.base/model/expressions.ecore#/' ins='platform:/resource/de.evoal.languages.model.instance/model/model.ecore#/'"
  * @generated
  */
 public interface PipelinePackage extends EPackage {
@@ -363,7 +363,7 @@ public interface PipelinePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PIPELINE_DEFINITION_REFERENCE__PIPELINE = BasePackage.LITERAL_FEATURE_COUNT + 0;
+	int PIPELINE_DEFINITION_REFERENCE__PIPELINE = ExpressionsPackage.LITERAL_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Definition Reference</em>' class.
@@ -372,7 +372,7 @@ public interface PipelinePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PIPELINE_DEFINITION_REFERENCE_FEATURE_COUNT = BasePackage.LITERAL_FEATURE_COUNT + 1;
+	int PIPELINE_DEFINITION_REFERENCE_FEATURE_COUNT = ExpressionsPackage.LITERAL_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.pipeline.impl.VariableReferenceImpl <em>Variable Reference</em>}' class.
@@ -391,7 +391,7 @@ public interface PipelinePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_REFERENCE__LOOP = BasePackage.LITERAL_FEATURE_COUNT + 0;
+	int VARIABLE_REFERENCE__LOOP = ExpressionsPackage.VALUE_REFERENCE_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Variable Reference</em>' class.
@@ -400,7 +400,7 @@ public interface PipelinePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_REFERENCE_FEATURE_COUNT = BasePackage.LITERAL_FEATURE_COUNT + 1;
+	int VARIABLE_REFERENCE_FEATURE_COUNT = ExpressionsPackage.VALUE_REFERENCE_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.pipeline.impl.ApplyStatementImpl <em>Apply Statement</em>}' class.

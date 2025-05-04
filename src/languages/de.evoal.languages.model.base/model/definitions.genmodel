@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/de.evoal.languages.model.base/src-gen" editDirectory="/de.evoal.languages.base.model.edit/src-gen"
+    modelPluginID="de.evoal.languages.model.base" modelName="BaseLanguage" editPluginClass="de.evoal.languages.base.provider.BaseLanguageEditPlugin"
+    editorPluginClass="de.evoal.languages.base.presentation.BaseLanguageEditorPlugin"
+    rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" testsDirectory=""
+    testSuiteClass="de.evoal.languages.base.tests.BaseLanguageAllTests" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="17.0" copyrightFields="false" usedGenPackages="expressions.genmodel#//expressions types.genmodel#//types"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>definitions.ecore</foreignModel>
+  <genPackages prefix="Definitions" basePackage="de.evoal.languages.model.base" disposableProviderFactory="true"
+      generateModelWizard="false" ecorePackage="definitions.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="definitions.ecore#//ScaleType">
+      <genEnumLiterals ecoreEnumLiteral="definitions.ecore#//ScaleType/Nominal"/>
+      <genEnumLiterals ecoreEnumLiteral="definitions.ecore#//ScaleType/Ordinal"/>
+      <genEnumLiterals ecoreEnumLiteral="definitions.ecore#//ScaleType/Cardinal"/>
+      <genEnumLiterals ecoreEnumLiteral="definitions.ecore#//ScaleType/Quotient"/>
+      <genEnumLiterals ecoreEnumLiteral="definitions.ecore#//ScaleType/Unknown"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="definitions.ecore#//RepresentationType">
+      <genEnumLiterals ecoreEnumLiteral="definitions.ecore#//RepresentationType/Real"/>
+      <genEnumLiterals ecoreEnumLiteral="definitions.ecore#//RepresentationType/Integer"/>
+      <genEnumLiterals ecoreEnumLiteral="definitions.ecore#//RepresentationType/Boolean"/>
+      <genEnumLiterals ecoreEnumLiteral="definitions.ecore#//RepresentationType/String"/>
+    </genEnums>
+    <genClasses image="false" ecoreClass="definitions.ecore#//Constrained">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference definitions.ecore#//Constrained/constraints"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="definitions.ecore#//Definition">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute definitions.ecore#//Definition/name"/>
+    </genClasses>
+    <genClasses ecoreClass="definitions.ecore#//ScaledDefinition">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute definitions.ecore#//ScaledDefinition/scale"/>
+    </genClasses>
+    <genClasses ecoreClass="definitions.ecore#//TypeDefinition">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference definitions.ecore#//TypeDefinition/attributes"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference definitions.ecore#//TypeDefinition/superType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute definitions.ecore#//TypeDefinition/abstract"/>
+      <genOperations ecoreOperation="definitions.ecore#//TypeDefinition/findAttribute"
+          body="AttributeDefinition attribute =  getAttributes().stream()&#xA;&#x9;.filter(a -> a.getName().equals(name))&#xA;&#x9;.findFirst()&#xA;&#x9;.orElse(null);&#xA;&#xA;if(attribute == null &amp;&amp; getSuperType() != null) {&#xA;&#x9;attribute = getSuperType().findAttribute(name);&#xA;}&#xA;&#xA;return attribute;">
+        <genParameters ecoreParameter="definitions.ecore#//TypeDefinition/findAttribute/name"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="definitions.ecore#//AttributeDefinition">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference definitions.ecore#//AttributeDefinition/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference definitions.ecore#//AttributeDefinition/initialisation"/>
+    </genClasses>
+    <genClasses ecoreClass="definitions.ecore#//EnumLiteralDefinition"/>
+    <genClasses ecoreClass="definitions.ecore#//EnumDefinition">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference definitions.ecore#//EnumDefinition/literals"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="definitions.ecore#//DataTypeDefinition"/>
+    <genClasses ecoreClass="definitions.ecore#//DataTypeTypeDefinition"/>
+    <genClasses image="false" ecoreClass="definitions.ecore#//DataDescription"/>
+    <genClasses image="false" ecoreClass="definitions.ecore#//BaseDataDescription">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute definitions.ecore#//BaseDataDescription/representation"/>
+      <genOperations ecoreOperation="definitions.ecore#//BaseDataDescription/getScale"/>
+    </genClasses>
+    <genClasses ecoreClass="definitions.ecore#//TypedBaseDataDescription">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference definitions.ecore#//TypedBaseDataDescription/type"/>
+      <genOperations ecoreOperation="definitions.ecore#//TypedBaseDataDescription/getScale"
+          body="return getType() == null ? null : getType().getScale();"/>
+    </genClasses>
+    <genClasses ecoreClass="definitions.ecore#//UntypedBaseDataDescription"/>
+    <genClasses ecoreClass="definitions.ecore#//StructuredDataDescription">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference definitions.ecore#//StructuredDataDescription/type"/>
+    </genClasses>
+    <genClasses ecoreClass="definitions.ecore#//DataType">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference definitions.ecore#//DataType/definition"/>
+    </genClasses>
+    <genClasses ecoreClass="definitions.ecore#//FunctionDefinition">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference definitions.ecore#//FunctionDefinition/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference definitions.ecore#//FunctionDefinition/parameters"/>
+    </genClasses>
+    <genClasses ecoreClass="definitions.ecore#//Parameter">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference definitions.ecore#//Parameter/type"/>
+    </genClasses>
+    <genClasses ecoreClass="definitions.ecore#//ConstantDefinition">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference definitions.ecore#//ConstantDefinition/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference definitions.ecore#//ConstantDefinition/value"/>
+    </genClasses>
+    <genClasses ecoreClass="definitions.ecore#//FunctionName"/>
+    <genClasses ecoreClass="definitions.ecore#//DefinedFunctionName">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference definitions.ecore#//DefinedFunctionName/definition"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

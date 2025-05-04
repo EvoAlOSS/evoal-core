@@ -6,8 +6,8 @@ import de.evoal.core.api.languages.AttributeEvaluator;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
 import de.evoal.optimisation.ea.api.codec.CustomCodecDescriber;
-import de.evoal.languages.model.base.Definition;
-import de.evoal.languages.model.base.Instance;
+import de.evoal.languages.model.base.definitions.Definition;
+import de.evoal.languages.model.base.expressions.Instance;
 import de.evoal.languages.model.dl.util.FQNProvider;
 import lombok.extern.slf4j.Slf4j;
 

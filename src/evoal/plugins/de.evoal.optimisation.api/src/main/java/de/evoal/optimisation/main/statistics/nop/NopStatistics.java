@@ -1,7 +1,7 @@
 package de.evoal.optimisation.main.statistics.nop;
 
 import de.evoal.optimisation.api.model.Iteration;
-import de.evoal.languages.model.base.Instance;
+import de.evoal.languages.model.base.expressions.Instance;
 import de.evoal.optimisation.api.statistics.writer.StatisticsWriter;
 
 import javax.enterprise.context.Dependent;

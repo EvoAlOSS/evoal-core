@@ -2,8 +2,8 @@ package de.evoal.optimisation.api.model;
 
 import de.evoal.core.api.cdi.BeanFactory;
 import de.evoal.core.api.utils.AttributeHelper;
-import de.evoal.languages.model.base.Attribute;
-import de.evoal.languages.model.base.Instance;
+import de.evoal.languages.model.base.expressions.Attribute;
+import de.evoal.languages.model.base.expressions.Instance;
 
 import javax.inject.Inject;
 

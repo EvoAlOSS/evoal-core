@@ -3,8 +3,8 @@ package de.evoal.optimisation.ea.main.codec.program;
 import de.evoal.core.api.utils.AttributeHelper;
 import de.evoal.core.api.utils.InitializationException;
 import de.evoal.optimisation.ea.api.codec.CustomCodecDescriber;
-import de.evoal.languages.model.base.Definition;
-import de.evoal.languages.model.base.Instance;
+import de.evoal.languages.model.base.definitions.Definition;
+import de.evoal.languages.model.base.expressions.Instance;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.enterprise.context.Dependent;

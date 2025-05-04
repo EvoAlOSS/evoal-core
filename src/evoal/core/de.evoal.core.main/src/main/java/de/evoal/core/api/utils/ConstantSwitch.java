@@ -1,9 +1,9 @@
 package de.evoal.core.api.utils;
 
-import de.evoal.languages.model.base.*;
-import de.evoal.languages.model.base.util.BaseSwitch;
+import de.evoal.languages.model.base.expressions.*;
+import de.evoal.languages.model.base.expressions.util.ExpressionsSwitch;
 
-public class ConstantSwitch extends BaseSwitch<Object> {
+public class ConstantSwitch extends ExpressionsSwitch<Object> {
     private ConstantSwitch() {
     }
 

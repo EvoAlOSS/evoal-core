@@ -4,10 +4,9 @@ package de.evoal.languages.model.mll.impl;
 
 import de.evoal.languages.model.base.BasePackage;
 
-import de.evoal.languages.model.ddl.DdlPackage;
-
-import de.evoal.languages.model.instance.InstancePackage;
-
+import de.evoal.languages.model.base.definitions.DefinitionsPackage;
+import de.evoal.languages.model.base.expressions.ExpressionsPackage;
+import de.evoal.languages.model.base.types.TypesPackage;
 import de.evoal.languages.model.mll.BlockStatement;
 import de.evoal.languages.model.mll.CallStatement;
 import de.evoal.languages.model.mll.CounterRange;
@@ -176,9 +175,10 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 		isInited = true;
 
 		// Initialize simple dependencies
-		DdlPackage.eINSTANCE.eClass();
-		InstancePackage.eINSTANCE.eClass();
 		BasePackage.eINSTANCE.eClass();
+		DefinitionsPackage.eINSTANCE.eClass();
+		ExpressionsPackage.eINSTANCE.eClass();
+		TypesPackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
 		theMllPackage.createPackageContents();
@@ -713,14 +713,15 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 
 		// Obtain other dependent packages
 		BasePackage theBasePackage = (BasePackage)EPackage.Registry.INSTANCE.getEPackage(BasePackage.eNS_URI);
-		DdlPackage theDdlPackage = (DdlPackage)EPackage.Registry.INSTANCE.getEPackage(DdlPackage.eNS_URI);
+		DefinitionsPackage theDefinitionsPackage = (DefinitionsPackage)EPackage.Registry.INSTANCE.getEPackage(DefinitionsPackage.eNS_URI);
+		ExpressionsPackage theExpressionsPackage = (ExpressionsPackage)EPackage.Registry.INSTANCE.getEPackage(ExpressionsPackage.eNS_URI);
 
 		// Create type parameters
 
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
-		partialSurrogateFunctionDefinitionEClass.getESuperTypes().add(theBasePackage.getInstance());
+		partialSurrogateFunctionDefinitionEClass.getESuperTypes().add(theExpressionsPackage.getInstance());
 		callStatementEClass.getESuperTypes().add(this.getStatement());
 		blockStatementEClass.getESuperTypes().add(this.getStatement());
 		predictStatementEClass.getESuperTypes().add(this.getStatement());
@@ -737,8 +738,8 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 
 		initEClass(surrogateDefinitionEClass, SurrogateDefinition.class, "SurrogateDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getSurrogateDefinition_Name(), ecorePackage.getEString(), "name", null, 1, 1, SurrogateDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getSurrogateDefinition_Inputs(), theDdlPackage.getDataDescription(), null, "inputs", null, 1, -1, SurrogateDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEReference(getSurrogateDefinition_Outputs(), theDdlPackage.getDataDescription(), null, "outputs", null, 1, -1, SurrogateDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getSurrogateDefinition_Inputs(), theDefinitionsPackage.getDataDescription(), null, "inputs", null, 1, -1, SurrogateDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getSurrogateDefinition_Outputs(), theDefinitionsPackage.getDataDescription(), null, "outputs", null, 1, -1, SurrogateDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getSurrogateDefinition_Layers(), this.getSurrogateLayerDefinition(), null, "layers", null, 1, -1, SurrogateDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		initEClass(surrogateLayerDefinitionEClass, SurrogateLayerDefinition.class, "SurrogateLayerDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -746,19 +747,19 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 		initEReference(getSurrogateLayerDefinition_Functions(), this.getPartialSurrogateFunctionDefinition(), null, "functions", null, 1, -1, SurrogateLayerDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(partialSurrogateFunctionDefinitionEClass, PartialSurrogateFunctionDefinition.class, "PartialSurrogateFunctionDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getPartialSurrogateFunctionDefinition_Inputs(), theDdlPackage.getDataDescription(), null, "inputs", null, 1, -1, PartialSurrogateFunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEReference(getPartialSurrogateFunctionDefinition_Outputs(), theDdlPackage.getDataDescription(), null, "outputs", null, 1, -1, PartialSurrogateFunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getPartialSurrogateFunctionDefinition_Inputs(), theDefinitionsPackage.getDataDescription(), null, "inputs", null, 1, -1, PartialSurrogateFunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getPartialSurrogateFunctionDefinition_Outputs(), theDefinitionsPackage.getDataDescription(), null, "outputs", null, 1, -1, PartialSurrogateFunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		initEClass(predictionEClass, Prediction.class, "Prediction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getPrediction_Definition(), this.getSurrogateDefinition(), null, "definition", null, 1, 1, Prediction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getPrediction_Inputs(), theDdlPackage.getDataDescription(), null, "inputs", null, 1, -1, Prediction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEReference(getPrediction_Outputs(), theDdlPackage.getDataDescription(), null, "outputs", null, 1, -1, Prediction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getPrediction_Inputs(), theDefinitionsPackage.getDataDescription(), null, "inputs", null, 1, -1, Prediction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getPrediction_Outputs(), theDefinitionsPackage.getDataDescription(), null, "outputs", null, 1, -1, Prediction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getPrediction_Quality(), this.getBlockStatement(), null, "quality", null, 0, 1, Prediction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(statementEClass, Statement.class, "Statement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(callStatementEClass, CallStatement.class, "CallStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getCallStatement_Call(), theBasePackage.getCall(), null, "call", null, 1, 1, CallStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCallStatement_Call(), theExpressionsPackage.getCall(), null, "call", null, 1, 1, CallStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(blockStatementEClass, BlockStatement.class, "BlockStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getBlockStatement_Statements(), this.getStatement(), null, "statements", null, 0, -1, BlockStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
@@ -781,7 +782,7 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 		initEAttribute(getCounterRange_End(), ecorePackage.getEInt(), "end", null, 1, 1, CounterRange.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(literalRangeEClass, LiteralRange.class, "LiteralRange", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getLiteralRange_Elements(), theBasePackage.getLiteral(), null, "elements", null, 0, -1, LiteralRange.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getLiteralRange_Elements(), theExpressionsPackage.getLiteral(), null, "elements", null, 0, -1, LiteralRange.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);
@@ -805,9 +806,11 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 		  (this,
 		   source,
 		   new String[] {
+			   "base", "platform:/resource/de.evoal.languages.model.base/model/model.ecore#/",
 			   "ddl", "platform:/resource/de.evoal.languages.model.ddl/model/model.ecore#/",
+			   "defs", "platform:/resource/de.evoal.languages.model.base/model/definitions.ecore#/",
 			   "ecore", "http://www.eclipse.org/emf/2002/Ecore",
-			   "el", "platform:/resource/de.evoal.languages.model.base/model/model.ecore#/",
+			   "expr", "platform:/resource/de.evoal.languages.model.base/model/expressions.ecore#/",
 			   "instance", "platform:/resource/de.evoal.languages.model.instance/model/model.ecore#/"
 		   });
 	}

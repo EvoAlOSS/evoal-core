@@ -33,6 +33,7 @@ Workflow {
 			name = "de.evoal.languages.model.generator.dsl.GeneratorDSL"
 			fileExtensions = "generator"
 
+			referencedResource = "platform:/resource/de.evoal.languages.model.ddl/model/model.genmodel"
 			referencedResource = "platform:/resource/de.evoal.languages.model.instance/model/model.genmodel"
 			referencedResource = "platform:/resource/de.evoal.languages.model.generator/model/model.genmodel"
 

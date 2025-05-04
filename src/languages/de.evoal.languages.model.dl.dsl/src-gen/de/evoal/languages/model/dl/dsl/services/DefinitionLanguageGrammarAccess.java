@@ -10,7 +10,6 @@ import de.evoal.languages.model.base.dsl.services.BaseLanguageGrammarAccess;
 import java.util.List;
 import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
-import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.EnumRule;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
@@ -100,202 +99,9 @@ public class DefinitionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_5() { return cRightCurlyBracketKeyword_5; }
 	}
-	public class ReferenceRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.dl.dsl.DefinitionLanguage.ReferenceRule");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cConstantReferenceRuleParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cDataReferenceRuleParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		
-		//@Override
-		//ReferenceRule returns base::ValueReference:
-		//    ConstantReferenceRule | DataReferenceRule
-		//;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//ConstantReferenceRule | DataReferenceRule
-		public Alternatives getAlternatives() { return cAlternatives; }
-		
-		//ConstantReferenceRule
-		public RuleCall getConstantReferenceRuleParserRuleCall_0() { return cConstantReferenceRuleParserRuleCall_0; }
-		
-		//DataReferenceRule
-		public RuleCall getDataReferenceRuleParserRuleCall_1() { return cDataReferenceRuleParserRuleCall_1; }
-	}
-	public class DataReferenceRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.dl.dsl.DefinitionLanguage.DataReferenceRule");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cDataKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cDefinitionAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final CrossReference cDefinitionDataDescriptionCrossReference_1_0 = (CrossReference)cDefinitionAssignment_1.eContents().get(0);
-		private final RuleCall cDefinitionDataDescriptionQualifiedNameParserRuleCall_1_0_1 = (RuleCall)cDefinitionDataDescriptionCrossReference_1_0.eContents().get(1);
-		
-		//DataReferenceRule returns ddl::DataReference:
-		//    'data' definition = [ddl::DataDescription|QualifiedName]
-		//;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//'data' definition = [ddl::DataDescription|QualifiedName]
-		public Group getGroup() { return cGroup; }
-		
-		//'data'
-		public Keyword getDataKeyword_0() { return cDataKeyword_0; }
-		
-		//definition = [ddl::DataDescription|QualifiedName]
-		public Assignment getDefinitionAssignment_1() { return cDefinitionAssignment_1; }
-		
-		//[ddl::DataDescription|QualifiedName]
-		public CrossReference getDefinitionDataDescriptionCrossReference_1_0() { return cDefinitionDataDescriptionCrossReference_1_0; }
-		
-		//QualifiedName
-		public RuleCall getDefinitionDataDescriptionQualifiedNameParserRuleCall_1_0_1() { return cDefinitionDataDescriptionQualifiedNameParserRuleCall_1_0_1; }
-	}
-	public class TypeRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.dl.dsl.DefinitionLanguage.TypeRule");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cStringTypeRuleParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cIntTypeRuleParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		private final RuleCall cRealTypeRuleParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
-		private final RuleCall cBooleanTypeRuleParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
-		private final RuleCall cLiteralTypeRuleParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
-		private final RuleCall cArrayTypeRuleParserRuleCall_5 = (RuleCall)cAlternatives.eContents().get(5);
-		private final RuleCall cInstanceTypeRuleParserRuleCall_6 = (RuleCall)cAlternatives.eContents().get(6);
-		private final RuleCall cVoidTypeRuleParserRuleCall_7 = (RuleCall)cAlternatives.eContents().get(7);
-		private final RuleCall cExpressionTypeRuleParserRuleCall_8 = (RuleCall)cAlternatives.eContents().get(8);
-		private final RuleCall cDataTypeRuleParserRuleCall_9 = (RuleCall)cAlternatives.eContents().get(9);
-		private final RuleCall cDefinedDataTypeRuleParserRuleCall_10 = (RuleCall)cAlternatives.eContents().get(10);
-		
-		//@Override
-		//TypeRule returns base::Type:
-		//    StringTypeRule | IntTypeRule | RealTypeRule | BooleanTypeRule | LiteralTypeRule | ArrayTypeRule | InstanceTypeRule | VoidTypeRule | ExpressionTypeRule | DataTypeRule | DefinedDataTypeRule
-		//;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//StringTypeRule | IntTypeRule | RealTypeRule | BooleanTypeRule | LiteralTypeRule | ArrayTypeRule | InstanceTypeRule | VoidTypeRule | ExpressionTypeRule | DataTypeRule | DefinedDataTypeRule
-		public Alternatives getAlternatives() { return cAlternatives; }
-		
-		//StringTypeRule
-		public RuleCall getStringTypeRuleParserRuleCall_0() { return cStringTypeRuleParserRuleCall_0; }
-		
-		//IntTypeRule
-		public RuleCall getIntTypeRuleParserRuleCall_1() { return cIntTypeRuleParserRuleCall_1; }
-		
-		//RealTypeRule
-		public RuleCall getRealTypeRuleParserRuleCall_2() { return cRealTypeRuleParserRuleCall_2; }
-		
-		//BooleanTypeRule
-		public RuleCall getBooleanTypeRuleParserRuleCall_3() { return cBooleanTypeRuleParserRuleCall_3; }
-		
-		//LiteralTypeRule
-		public RuleCall getLiteralTypeRuleParserRuleCall_4() { return cLiteralTypeRuleParserRuleCall_4; }
-		
-		//ArrayTypeRule
-		public RuleCall getArrayTypeRuleParserRuleCall_5() { return cArrayTypeRuleParserRuleCall_5; }
-		
-		//InstanceTypeRule
-		public RuleCall getInstanceTypeRuleParserRuleCall_6() { return cInstanceTypeRuleParserRuleCall_6; }
-		
-		//VoidTypeRule
-		public RuleCall getVoidTypeRuleParserRuleCall_7() { return cVoidTypeRuleParserRuleCall_7; }
-		
-		//ExpressionTypeRule
-		public RuleCall getExpressionTypeRuleParserRuleCall_8() { return cExpressionTypeRuleParserRuleCall_8; }
-		
-		//DataTypeRule
-		public RuleCall getDataTypeRuleParserRuleCall_9() { return cDataTypeRuleParserRuleCall_9; }
-		
-		//DefinedDataTypeRule
-		public RuleCall getDefinedDataTypeRuleParserRuleCall_10() { return cDefinedDataTypeRuleParserRuleCall_10; }
-	}
-	public class DefinedDataTypeRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.dl.dsl.DefinitionLanguage.DefinedDataTypeRule");
-		private final Assignment cDefinitionAssignment = (Assignment)rule.eContents().get(1);
-		private final CrossReference cDefinitionDataDescriptionCrossReference_0 = (CrossReference)cDefinitionAssignment.eContents().get(0);
-		private final RuleCall cDefinitionDataDescriptionQualifiedNameParserRuleCall_0_1 = (RuleCall)cDefinitionDataDescriptionCrossReference_0.eContents().get(1);
-		
-		//DefinedDataTypeRule returns ddl::DataType:
-		//    definition = [ddl::DataDescription|QualifiedName]
-		//;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//definition = [ddl::DataDescription|QualifiedName]
-		public Assignment getDefinitionAssignment() { return cDefinitionAssignment; }
-		
-		//[ddl::DataDescription|QualifiedName]
-		public CrossReference getDefinitionDataDescriptionCrossReference_0() { return cDefinitionDataDescriptionCrossReference_0; }
-		
-		//QualifiedName
-		public RuleCall getDefinitionDataDescriptionQualifiedNameParserRuleCall_0_1() { return cDefinitionDataDescriptionQualifiedNameParserRuleCall_0_1; }
-	}
-	public class EnumLiteralReferenceRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.dl.dsl.DefinitionLanguage.EnumLiteralReferenceRule");
-		private final Assignment cLiteralAssignment = (Assignment)rule.eContents().get(1);
-		private final CrossReference cLiteralEnumLiteralCrossReference_0 = (CrossReference)cLiteralAssignment.eContents().get(0);
-		private final RuleCall cLiteralEnumLiteralQualifiedNameParserRuleCall_0_1 = (RuleCall)cLiteralEnumLiteralCrossReference_0.eContents().get(1);
-		
-		//EnumLiteralReferenceRule returns ddl::EnumLiteralReference:
-		//    literal = [ddl::EnumLiteral|QualifiedName]
-		//;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//literal = [ddl::EnumLiteral|QualifiedName]
-		public Assignment getLiteralAssignment() { return cLiteralAssignment; }
-		
-		//[ddl::EnumLiteral|QualifiedName]
-		public CrossReference getLiteralEnumLiteralCrossReference_0() { return cLiteralEnumLiteralCrossReference_0; }
-		
-		//QualifiedName
-		public RuleCall getLiteralEnumLiteralQualifiedNameParserRuleCall_0_1() { return cLiteralEnumLiteralQualifiedNameParserRuleCall_0_1; }
-	}
-	public class LiteralRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.dl.dsl.DefinitionLanguage.LiteralRule");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cNumberLiteralRuleParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cStringLiteralRuleParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		private final RuleCall cBooleanLiteralRuleParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
-		private final RuleCall cInstanceLiteralRuleParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
-		private final RuleCall cEnumLiteralReferenceRuleParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
-		
-		//@Override
-		//LiteralRule returns base::Literal:
-		//    NumberLiteralRule
-		//        | StringLiteralRule
-		//        | BooleanLiteralRule
-		//        | InstanceLiteralRule
-		//        | EnumLiteralReferenceRule
-		//;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//NumberLiteralRule
-		//    | StringLiteralRule
-		//    | BooleanLiteralRule
-		//    | InstanceLiteralRule
-		//    | EnumLiteralReferenceRule
-		public Alternatives getAlternatives() { return cAlternatives; }
-		
-		//NumberLiteralRule
-		public RuleCall getNumberLiteralRuleParserRuleCall_0() { return cNumberLiteralRuleParserRuleCall_0; }
-		
-		//StringLiteralRule
-		public RuleCall getStringLiteralRuleParserRuleCall_1() { return cStringLiteralRuleParserRuleCall_1; }
-		
-		//BooleanLiteralRule
-		public RuleCall getBooleanLiteralRuleParserRuleCall_2() { return cBooleanLiteralRuleParserRuleCall_2; }
-		
-		//InstanceLiteralRule
-		public RuleCall getInstanceLiteralRuleParserRuleCall_3() { return cInstanceLiteralRuleParserRuleCall_3; }
-		
-		//EnumLiteralReferenceRule
-		public RuleCall getEnumLiteralReferenceRuleParserRuleCall_4() { return cEnumLiteralReferenceRuleParserRuleCall_4; }
-	}
 	
 	
 	private final DefinitionModelRuleElements pDefinitionModelRule;
-	private final ReferenceRuleElements pReferenceRule;
-	private final DataReferenceRuleElements pDataReferenceRule;
-	private final TypeRuleElements pTypeRule;
-	private final DefinedDataTypeRuleElements pDefinedDataTypeRule;
-	private final EnumLiteralReferenceRuleElements pEnumLiteralReferenceRule;
-	private final LiteralRuleElements pLiteralRule;
 	
 	private final Grammar grammar;
 	
@@ -311,12 +117,6 @@ public class DefinitionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 		this.gaBaseLanguage = gaBaseLanguage;
 		this.gaTerminals = gaTerminals;
 		this.pDefinitionModelRule = new DefinitionModelRuleElements();
-		this.pReferenceRule = new ReferenceRuleElements();
-		this.pDataReferenceRule = new DataReferenceRuleElements();
-		this.pTypeRule = new TypeRuleElements();
-		this.pDefinedDataTypeRule = new DefinedDataTypeRuleElements();
-		this.pEnumLiteralReferenceRule = new EnumLiteralReferenceRuleElements();
-		this.pLiteralRule = new LiteralRuleElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -362,79 +162,6 @@ public class DefinitionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 	
 	public ParserRule getDefinitionModelRuleRule() {
 		return getDefinitionModelRuleAccess().getRule();
-	}
-	
-	//@Override
-	//ReferenceRule returns base::ValueReference:
-	//    ConstantReferenceRule | DataReferenceRule
-	//;
-	public ReferenceRuleElements getReferenceRuleAccess() {
-		return pReferenceRule;
-	}
-	
-	public ParserRule getReferenceRuleRule() {
-		return getReferenceRuleAccess().getRule();
-	}
-	
-	//DataReferenceRule returns ddl::DataReference:
-	//    'data' definition = [ddl::DataDescription|QualifiedName]
-	//;
-	public DataReferenceRuleElements getDataReferenceRuleAccess() {
-		return pDataReferenceRule;
-	}
-	
-	public ParserRule getDataReferenceRuleRule() {
-		return getDataReferenceRuleAccess().getRule();
-	}
-	
-	//@Override
-	//TypeRule returns base::Type:
-	//    StringTypeRule | IntTypeRule | RealTypeRule | BooleanTypeRule | LiteralTypeRule | ArrayTypeRule | InstanceTypeRule | VoidTypeRule | ExpressionTypeRule | DataTypeRule | DefinedDataTypeRule
-	//;
-	public TypeRuleElements getTypeRuleAccess() {
-		return pTypeRule;
-	}
-	
-	public ParserRule getTypeRuleRule() {
-		return getTypeRuleAccess().getRule();
-	}
-	
-	//DefinedDataTypeRule returns ddl::DataType:
-	//    definition = [ddl::DataDescription|QualifiedName]
-	//;
-	public DefinedDataTypeRuleElements getDefinedDataTypeRuleAccess() {
-		return pDefinedDataTypeRule;
-	}
-	
-	public ParserRule getDefinedDataTypeRuleRule() {
-		return getDefinedDataTypeRuleAccess().getRule();
-	}
-	
-	//EnumLiteralReferenceRule returns ddl::EnumLiteralReference:
-	//    literal = [ddl::EnumLiteral|QualifiedName]
-	//;
-	public EnumLiteralReferenceRuleElements getEnumLiteralReferenceRuleAccess() {
-		return pEnumLiteralReferenceRule;
-	}
-	
-	public ParserRule getEnumLiteralReferenceRuleRule() {
-		return getEnumLiteralReferenceRuleAccess().getRule();
-	}
-	
-	//@Override
-	//LiteralRule returns base::Literal:
-	//    NumberLiteralRule
-	//        | StringLiteralRule
-	//        | BooleanLiteralRule
-	//        | InstanceLiteralRule
-	//        | EnumLiteralReferenceRule
-	//;
-	public LiteralRuleElements getLiteralRuleAccess() {
-		return pLiteralRule;
-	}
-	
-	public ParserRule getLiteralRuleRule() {
-		return getLiteralRuleAccess().getRule();
 	}
 	
 	//ExpressionRule returns Expression:
@@ -630,7 +357,7 @@ public class DefinitionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 	}
 	
 	//CallRule returns Call:
-	//    function=FunctionNameRule '(' (parameters += ExpressionRule (',' parameters += ExpressionRule)* )? ')'
+	//    function=[FunctionDefinition|QualifiedName] '(' (parameters += ExpressionRule (',' parameters += ExpressionRule)* )? ')'
 	//;
 	public BaseLanguageGrammarAccess.CallRuleElements getCallRuleAccess() {
 		return gaBaseLanguage.getCallRuleAccess();
@@ -638,6 +365,28 @@ public class DefinitionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 	
 	public ParserRule getCallRuleRule() {
 		return getCallRuleAccess().getRule();
+	}
+	
+	//ReferenceRule returns ValueReference:
+	//    ConstantReferenceRule | DataReferenceRule
+	//;
+	public BaseLanguageGrammarAccess.ReferenceRuleElements getReferenceRuleAccess() {
+		return gaBaseLanguage.getReferenceRuleAccess();
+	}
+	
+	public ParserRule getReferenceRuleRule() {
+		return getReferenceRuleAccess().getRule();
+	}
+	
+	//DataReferenceRule returns DataReference:
+	//    'data' definition = [DataDescription|QualifiedName]
+	//;
+	public BaseLanguageGrammarAccess.DataReferenceRuleElements getDataReferenceRuleAccess() {
+		return gaBaseLanguage.getDataReferenceRuleAccess();
+	}
+	
+	public ParserRule getDataReferenceRuleRule() {
+		return getDataReferenceRuleAccess().getRule();
 	}
 	
 	//ConstantReferenceRule returns ConstantReference:
@@ -649,6 +398,20 @@ public class DefinitionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 	
 	public ParserRule getConstantReferenceRuleRule() {
 		return getConstantReferenceRuleAccess().getRule();
+	}
+	
+	//LiteralRule returns Literal:
+	//    NumberLiteralRule
+	//        | StringLiteralRule
+	//        | BooleanLiteralRule
+	//        | InstanceLiteralRule
+	//;
+	public BaseLanguageGrammarAccess.LiteralRuleElements getLiteralRuleAccess() {
+		return gaBaseLanguage.getLiteralRuleAccess();
+	}
+	
+	public ParserRule getLiteralRuleRule() {
+		return getLiteralRuleAccess().getRule();
 	}
 	
 	//InstanceLiteralRule returns Instance:
@@ -797,8 +560,28 @@ public class DefinitionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 		return getAttributeDefinitionRuleAccess().getRule();
 	}
 	
-	//LiteralTypeRule returns LiteralType:
-	//    {LiteralType} 'literal'
+	//TypeRule returns types::Type:
+	//    StringTypeRule
+	//    | IntTypeRule
+	//    | RealTypeRule
+	//    | BooleanTypeRule
+	//    | ArrayTypeRule
+	//    | InstanceTypeRule
+	//    | VoidTypeRule
+	//    | ExpressionTypeRule
+	//    | LiteralTypeRule
+	//    | DataTypeRule
+	//;
+	public BaseLanguageGrammarAccess.TypeRuleElements getTypeRuleAccess() {
+		return gaBaseLanguage.getTypeRuleAccess();
+	}
+	
+	public ParserRule getTypeRuleRule() {
+		return getTypeRuleAccess().getRule();
+	}
+	
+	//LiteralTypeRule returns types::LiteralType:
+	//    {types::LiteralType} 'literal'
 	//;
 	public BaseLanguageGrammarAccess.LiteralTypeRuleElements getLiteralTypeRuleAccess() {
 		return gaBaseLanguage.getLiteralTypeRuleAccess();
@@ -808,92 +591,8 @@ public class DefinitionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 		return getLiteralTypeRuleAccess().getRule();
 	}
 	
-	//InstanceTypeRule returns InstanceType:
-	//    {InstanceType}
-	//    'instance' definition = [TypeDefinition|QualifiedName]
-	//;
-	public BaseLanguageGrammarAccess.InstanceTypeRuleElements getInstanceTypeRuleAccess() {
-		return gaBaseLanguage.getInstanceTypeRuleAccess();
-	}
-	
-	public ParserRule getInstanceTypeRuleRule() {
-		return getInstanceTypeRuleAccess().getRule();
-	}
-	
-	//StringTypeRule returns StringType:
-	//    {StringType}
-	//    'string'
-	//;
-	public BaseLanguageGrammarAccess.StringTypeRuleElements getStringTypeRuleAccess() {
-		return gaBaseLanguage.getStringTypeRuleAccess();
-	}
-	
-	public ParserRule getStringTypeRuleRule() {
-		return getStringTypeRuleAccess().getRule();
-	}
-	
-	//ExpressionTypeRule returns ExpressionType:
-	//    {ExpressionType}
-	//    'expression'
-	//;
-	public BaseLanguageGrammarAccess.ExpressionTypeRuleElements getExpressionTypeRuleAccess() {
-		return gaBaseLanguage.getExpressionTypeRuleAccess();
-	}
-	
-	public ParserRule getExpressionTypeRuleRule() {
-		return getExpressionTypeRuleAccess().getRule();
-	}
-	
-	//IntTypeRule returns IntType:
-	//    {IntType}
-	//    'int'
-	//;
-	public BaseLanguageGrammarAccess.IntTypeRuleElements getIntTypeRuleAccess() {
-		return gaBaseLanguage.getIntTypeRuleAccess();
-	}
-	
-	public ParserRule getIntTypeRuleRule() {
-		return getIntTypeRuleAccess().getRule();
-	}
-	
-	//RealTypeRule returns RealType:
-	//    {RealType}
-	//    'real'
-	//;
-	public BaseLanguageGrammarAccess.RealTypeRuleElements getRealTypeRuleAccess() {
-		return gaBaseLanguage.getRealTypeRuleAccess();
-	}
-	
-	public ParserRule getRealTypeRuleRule() {
-		return getRealTypeRuleAccess().getRule();
-	}
-	
-	//BooleanTypeRule returns BooleanType:
-	//    {BooleanType}
-	//    'boolean'
-	//;
-	public BaseLanguageGrammarAccess.BooleanTypeRuleElements getBooleanTypeRuleAccess() {
-		return gaBaseLanguage.getBooleanTypeRuleAccess();
-	}
-	
-	public ParserRule getBooleanTypeRuleRule() {
-		return getBooleanTypeRuleAccess().getRule();
-	}
-	
-	//VoidTypeRule returns VoidType:
-	//    {VoidType}
-	//    'void'
-	//;
-	public BaseLanguageGrammarAccess.VoidTypeRuleElements getVoidTypeRuleAccess() {
-		return gaBaseLanguage.getVoidTypeRuleAccess();
-	}
-	
-	public ParserRule getVoidTypeRuleRule() {
-		return getVoidTypeRuleAccess().getRule();
-	}
-	
-	//DataTypeRule returns DataType:
-	//    {DataType}
+	//DataTypeRule returns types::DataType:
+	//    {types::DataType}
 	//    'data'
 	//;
 	public BaseLanguageGrammarAccess.DataTypeRuleElements getDataTypeRuleAccess() {
@@ -904,7 +603,91 @@ public class DefinitionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 		return getDataTypeRuleAccess().getRule();
 	}
 	
-	//ArrayTypeRule returns ArrayType:
+	//InstanceTypeRule returns types::InstanceType:
+	//    {types::InstanceType}
+	//    'instance' definition = [TypeDefinition|QualifiedName]
+	//;
+	public BaseLanguageGrammarAccess.InstanceTypeRuleElements getInstanceTypeRuleAccess() {
+		return gaBaseLanguage.getInstanceTypeRuleAccess();
+	}
+	
+	public ParserRule getInstanceTypeRuleRule() {
+		return getInstanceTypeRuleAccess().getRule();
+	}
+	
+	//StringTypeRule returns types::StringType:
+	//    {types::StringType}
+	//    'string'
+	//;
+	public BaseLanguageGrammarAccess.StringTypeRuleElements getStringTypeRuleAccess() {
+		return gaBaseLanguage.getStringTypeRuleAccess();
+	}
+	
+	public ParserRule getStringTypeRuleRule() {
+		return getStringTypeRuleAccess().getRule();
+	}
+	
+	//ExpressionTypeRule returns types::ExpressionType:
+	//    {types::ExpressionType}
+	//    'expression'
+	//;
+	public BaseLanguageGrammarAccess.ExpressionTypeRuleElements getExpressionTypeRuleAccess() {
+		return gaBaseLanguage.getExpressionTypeRuleAccess();
+	}
+	
+	public ParserRule getExpressionTypeRuleRule() {
+		return getExpressionTypeRuleAccess().getRule();
+	}
+	
+	//IntTypeRule returns types::IntType:
+	//    {types::IntType}
+	//    'int'
+	//;
+	public BaseLanguageGrammarAccess.IntTypeRuleElements getIntTypeRuleAccess() {
+		return gaBaseLanguage.getIntTypeRuleAccess();
+	}
+	
+	public ParserRule getIntTypeRuleRule() {
+		return getIntTypeRuleAccess().getRule();
+	}
+	
+	//RealTypeRule returns types::RealType:
+	//    {types::RealType}
+	//    'real'
+	//;
+	public BaseLanguageGrammarAccess.RealTypeRuleElements getRealTypeRuleAccess() {
+		return gaBaseLanguage.getRealTypeRuleAccess();
+	}
+	
+	public ParserRule getRealTypeRuleRule() {
+		return getRealTypeRuleAccess().getRule();
+	}
+	
+	//BooleanTypeRule returns types::BooleanType:
+	//    {types::BooleanType}
+	//    'boolean'
+	//;
+	public BaseLanguageGrammarAccess.BooleanTypeRuleElements getBooleanTypeRuleAccess() {
+		return gaBaseLanguage.getBooleanTypeRuleAccess();
+	}
+	
+	public ParserRule getBooleanTypeRuleRule() {
+		return getBooleanTypeRuleAccess().getRule();
+	}
+	
+	//VoidTypeRule returns types::VoidType:
+	//    {types::VoidType}
+	//    'void'
+	//;
+	public BaseLanguageGrammarAccess.VoidTypeRuleElements getVoidTypeRuleAccess() {
+		return gaBaseLanguage.getVoidTypeRuleAccess();
+	}
+	
+	public ParserRule getVoidTypeRuleRule() {
+		return getVoidTypeRuleAccess().getRule();
+	}
+	
+	//ArrayTypeRule returns types::ArrayType:
 	//    'array'     elements = TypeRule
 	//;
 	public BaseLanguageGrammarAccess.ArrayTypeRuleElements getArrayTypeRuleAccess() {
@@ -957,17 +740,6 @@ public class DefinitionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 	
 	public ParserRule getImportRuleRule() {
 		return getImportRuleAccess().getRule();
-	}
-	
-	//FunctionNameRule returns DefinedFunctionName:
-	//    definition = [FunctionDefinition|QualifiedName]
-	//;
-	public BaseLanguageGrammarAccess.FunctionNameRuleElements getFunctionNameRuleAccess() {
-		return gaBaseLanguage.getFunctionNameRuleAccess();
-	}
-	
-	public ParserRule getFunctionNameRuleRule() {
-		return getFunctionNameRuleAccess().getRule();
 	}
 	
 	//QualifiedName:

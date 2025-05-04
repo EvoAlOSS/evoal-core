@@ -3,8 +3,8 @@
  */
 package de.evoal.languages.model.ol;
 
-import de.evoal.languages.model.base.Array;
-import de.evoal.languages.model.base.Instance;
+import de.evoal.languages.model.base.expressions.Array;
+import de.evoal.languages.model.base.expressions.Instance;
 
 /**
  * <!-- begin-user-doc -->

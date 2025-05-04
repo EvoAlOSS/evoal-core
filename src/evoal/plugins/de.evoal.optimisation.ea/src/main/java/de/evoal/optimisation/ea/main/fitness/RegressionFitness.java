@@ -7,7 +7,7 @@ import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.utils.InitializationException;
 import de.evoal.optimisation.ea.api.fitness.GoodnessOfFitFunction;
-import de.evoal.languages.model.base.Instance;
+import de.evoal.languages.model.base.expressions.Instance;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;

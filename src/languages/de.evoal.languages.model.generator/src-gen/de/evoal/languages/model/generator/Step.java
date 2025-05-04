@@ -3,9 +3,8 @@
  */
 package de.evoal.languages.model.generator;
 
-import de.evoal.languages.model.base.Instance;
-
-import de.evoal.languages.model.instance.DataReference;
+import de.evoal.languages.model.base.expressions.DataReference;
+import de.evoal.languages.model.base.expressions.Instance;
 
 import org.eclipse.emf.common.util.EList;
 
@@ -54,7 +53,7 @@ public interface Step extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Reads</b></em>' containment reference list.
-	 * The list contents are of type {@link de.evoal.languages.model.instance.DataReference}.
+	 * The list contents are of type {@link de.evoal.languages.model.base.expressions.DataReference}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Reads</em>' containment reference list.
@@ -67,7 +66,7 @@ public interface Step extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Writes</b></em>' containment reference list.
-	 * The list contents are of type {@link de.evoal.languages.model.instance.DataReference}.
+	 * The list contents are of type {@link de.evoal.languages.model.base.expressions.DataReference}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Writes</em>' containment reference list.

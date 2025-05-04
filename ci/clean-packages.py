@@ -16,7 +16,9 @@ BASE_URL = "/api/v4/projects/%s/" % (PROJECT,)
 
 FIGURES = set(['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'])
 
+# list of all existing branches
 branches = []
+# list of all existing tags
 tags = []
 
 connection = http.client.HTTPSConnection(SERVER)
@@ -39,14 +41,26 @@ for tag in json.loads(response.read()):
 #response = connection.getresponse()
 #response.read()
 
+
+###########
+###########
+print("Existing branches:")
+for branch in branches:
+    print("  %s", (branch,))
+
+print("Existing tags:")
+for tag in tags:
+    print("  %s", (tag,))
+
+
 # delete job artifacts of deleted branches
 job_page=1
 jobs_to_delete=[]
 
-
 existing = set() # collect already existing jobs 
 
-# collect all job ids
+# collect all job ids to delete
+print("Collecting jobs for deletion:")
 while True:
     connection.request("GET", BASE_URL + "jobs?id=30380&page=%s&per_page=100" % (job_page,), headers = headers)
     response = connection.getresponse()
@@ -64,20 +78,23 @@ while True:
     jobs = []
     for job in tmp:
         if job['ref'] not in branches:
-             # keep only jobs in deleted branches 
+             print("  '%s' -- tag '%s' is already deleted", (job['id'], job['ref'])) 
              jobs.append(job)
         elif (job['ref'], job['name']) not in existing:
-            # keep only newest jobs 
-            jobs.append(job)
+            # keep newest jobs by  
             existing.add((job['ref'], job['name']))
+        else:
+            print("  '%s' -- '%s/%s' is present in a newer build", (job['id'], job['ref'], job['name'])) 
+            jobs.append(job)
 
     jobs_to_delete += jobs
     job_page+=1
 
 print("Found %s jobs to delete" % (len(jobs_to_delete),))
 for job in jobs_to_delete:
-     connection.request("DELETE", BASE_URL + "jobs/%s/artifacts" % (job['id'],), headers = headers)
-     connection.getresponse() \
+    print("  deleting artifacts of job %s" % (job['id'],))
+    connection.request("DELETE", BASE_URL + "jobs/%s/artifacts" % (job['id'],), headers = headers)
+    connection.getresponse() \
                .read()
 
 # delete packages
@@ -88,6 +105,7 @@ maxPage = int(response.headers["X-Total-Pages"])
 currentPage = maxPage 
 response.read() #  discard response
 
+print("Deleting packages ...")
 counter = 0
 while currentPage > 0:
     connection.request("GET", BASE_URL + "packages?per_page=100&page=%s" % (currentPage,), headers = headers)
@@ -95,19 +113,14 @@ while currentPage > 0:
 
     for package in json.loads(response.read()):
         if "tags" in package and package["tags"]:
-            print("Found tag " + str(package['tags']))
             tag = package["tags"]["ref"]
-
-            if tag not in tags:
-                print ("Have to delete %s" % (package["name"], ))
-
             continue
 
         if "pipeline" in package and package["pipeline"]:
             branch = package["pipeline"]["ref"]
 
             if branch[0] in FIGURES and not (branch in branches or branch in tags):
-                print ("Deleting '%s' -- %s" % (package["name"], branch))
+                print ("  '%s' -- %s" % (package["name"], branch))
 
                 deleteAPI = package["_links"]["delete_api_path"]
                 connection.request("DELETE", deleteAPI, headers = headers)

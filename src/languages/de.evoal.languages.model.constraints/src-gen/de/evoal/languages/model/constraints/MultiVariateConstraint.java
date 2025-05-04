@@ -3,7 +3,7 @@
  */
 package de.evoal.languages.model.constraints;
 
-import de.evoal.languages.model.base.Expression;
+import de.evoal.languages.model.base.expressions.Expression;
 
 import org.eclipse.emf.common.util.Diagnostic;
 

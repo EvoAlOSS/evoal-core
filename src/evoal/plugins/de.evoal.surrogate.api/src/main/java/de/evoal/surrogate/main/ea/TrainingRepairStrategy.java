@@ -6,7 +6,7 @@ import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.properties.stream.FileBasedPropertiesStreamSupplier;
 import de.evoal.core.api.properties.stream.PropertiesStreamSupplier;
 import de.evoal.optimisation.api.constraints.strategies.RepairStrategy;
-import de.evoal.languages.model.base.Instance;
+import de.evoal.languages.model.base.expressions.Instance;
 import de.evoal.surrogate.api.SurrogateBlackboardEntries;
 import lombok.extern.slf4j.Slf4j;
 

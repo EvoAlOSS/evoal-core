@@ -2,7 +2,7 @@ package de.evoal.languages.model.dl.dsl.scoping;
 
 import com.google.inject.Singleton;
 
-import de.evoal.languages.model.base.BasePackage;
+import de.evoal.languages.model.base.definitions.DefinitionsPackage;
 import de.evoal.languages.model.dl.DlPackage;
 import de.evoal.languages.model.utils.scoping.FilteringResourceDescriptionsStrategy;
 
@@ -11,10 +11,10 @@ public class DefinitionLanguageResourceDescriptionStrategy extends FilteringReso
 	public DefinitionLanguageResourceDescriptionStrategy() {
 		super(
 				DlPackage.eINSTANCE.getDefinitionModule(),
-				BasePackage.eINSTANCE.getConstantDefinition(),
-				BasePackage.eINSTANCE.getTypeDefinition(),
-				BasePackage.eINSTANCE.getAttributeDefinition(),
-				BasePackage.eINSTANCE.getFunctionDefinition()
+				DefinitionsPackage.eINSTANCE.getConstantDefinition(),
+				DefinitionsPackage.eINSTANCE.getTypeDefinition(),
+				DefinitionsPackage.eINSTANCE.getAttributeDefinition(),
+				DefinitionsPackage.eINSTANCE.getFunctionDefinition()
 			 );
 	}
 }

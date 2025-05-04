@@ -22,23 +22,23 @@ import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
 public class DataDescriptionLanguageSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected DataDescriptionLanguageGrammarAccess grammarAccess;
-	protected AbstractElementAlias match_BaseDataTypeDefinitionRule___WithKeyword_5_0_ConstraintsKeyword_5_1_ColonKeyword_5_2__q;
+	protected AbstractElementAlias match_BaseDataTypeTypeDefinitionRule___WithKeyword_4_0_ConstraintsKeyword_4_1_ColonKeyword_4_2__q;
 	protected AbstractElementAlias match_DataDescriptionModelRule___ConstraintsKeyword_6_0_ColonKeyword_6_1__q;
 	protected AbstractElementAlias match_DataDescriptionModelRule___DataKeyword_5_0_ColonKeyword_5_1__q;
 	protected AbstractElementAlias match_DataDescriptionModelRule___TypesKeyword_4_0_ColonKeyword_4_1__q;
-	protected AbstractElementAlias match_EnumTypeDefinitionRule___WithKeyword_9_0_ConstraintsKeyword_9_1_ColonKeyword_9_2__q;
-	protected AbstractElementAlias match_TypedBaseDataDescriptionRule___WithKeyword_6_0_ConstraintsKeyword_6_1_ColonKeyword_6_2__q;
+	protected AbstractElementAlias match_EnumTypeDefinitionRule___WithKeyword_8_0_ConstraintsKeyword_8_1_ColonKeyword_8_2__q;
+	protected AbstractElementAlias match_TypedBaseDataDescriptionRule___WithKeyword_4_0_ConstraintsKeyword_4_1_ColonKeyword_4_2__q;
 	protected AbstractElementAlias match_UntypedBaseDataDescriptionRule___WithKeyword_5_0_ConstraintsKeyword_5_1_ColonKeyword_5_2__q;
 	
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (DataDescriptionLanguageGrammarAccess) access;
-		match_BaseDataTypeDefinitionRule___WithKeyword_5_0_ConstraintsKeyword_5_1_ColonKeyword_5_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getBaseDataTypeDefinitionRuleAccess().getWithKeyword_5_0()), new TokenAlias(false, false, grammarAccess.getBaseDataTypeDefinitionRuleAccess().getConstraintsKeyword_5_1()), new TokenAlias(false, false, grammarAccess.getBaseDataTypeDefinitionRuleAccess().getColonKeyword_5_2()));
+		match_BaseDataTypeTypeDefinitionRule___WithKeyword_4_0_ConstraintsKeyword_4_1_ColonKeyword_4_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getBaseDataTypeTypeDefinitionRuleAccess().getWithKeyword_4_0()), new TokenAlias(false, false, grammarAccess.getBaseDataTypeTypeDefinitionRuleAccess().getConstraintsKeyword_4_1()), new TokenAlias(false, false, grammarAccess.getBaseDataTypeTypeDefinitionRuleAccess().getColonKeyword_4_2()));
 		match_DataDescriptionModelRule___ConstraintsKeyword_6_0_ColonKeyword_6_1__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getDataDescriptionModelRuleAccess().getConstraintsKeyword_6_0()), new TokenAlias(false, false, grammarAccess.getDataDescriptionModelRuleAccess().getColonKeyword_6_1()));
 		match_DataDescriptionModelRule___DataKeyword_5_0_ColonKeyword_5_1__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getDataDescriptionModelRuleAccess().getDataKeyword_5_0()), new TokenAlias(false, false, grammarAccess.getDataDescriptionModelRuleAccess().getColonKeyword_5_1()));
 		match_DataDescriptionModelRule___TypesKeyword_4_0_ColonKeyword_4_1__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getDataDescriptionModelRuleAccess().getTypesKeyword_4_0()), new TokenAlias(false, false, grammarAccess.getDataDescriptionModelRuleAccess().getColonKeyword_4_1()));
-		match_EnumTypeDefinitionRule___WithKeyword_9_0_ConstraintsKeyword_9_1_ColonKeyword_9_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getEnumTypeDefinitionRuleAccess().getWithKeyword_9_0()), new TokenAlias(false, false, grammarAccess.getEnumTypeDefinitionRuleAccess().getConstraintsKeyword_9_1()), new TokenAlias(false, false, grammarAccess.getEnumTypeDefinitionRuleAccess().getColonKeyword_9_2()));
-		match_TypedBaseDataDescriptionRule___WithKeyword_6_0_ConstraintsKeyword_6_1_ColonKeyword_6_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getTypedBaseDataDescriptionRuleAccess().getWithKeyword_6_0()), new TokenAlias(false, false, grammarAccess.getTypedBaseDataDescriptionRuleAccess().getConstraintsKeyword_6_1()), new TokenAlias(false, false, grammarAccess.getTypedBaseDataDescriptionRuleAccess().getColonKeyword_6_2()));
+		match_EnumTypeDefinitionRule___WithKeyword_8_0_ConstraintsKeyword_8_1_ColonKeyword_8_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getEnumTypeDefinitionRuleAccess().getWithKeyword_8_0()), new TokenAlias(false, false, grammarAccess.getEnumTypeDefinitionRuleAccess().getConstraintsKeyword_8_1()), new TokenAlias(false, false, grammarAccess.getEnumTypeDefinitionRuleAccess().getColonKeyword_8_2()));
+		match_TypedBaseDataDescriptionRule___WithKeyword_4_0_ConstraintsKeyword_4_1_ColonKeyword_4_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getTypedBaseDataDescriptionRuleAccess().getWithKeyword_4_0()), new TokenAlias(false, false, grammarAccess.getTypedBaseDataDescriptionRuleAccess().getConstraintsKeyword_4_1()), new TokenAlias(false, false, grammarAccess.getTypedBaseDataDescriptionRuleAccess().getColonKeyword_4_2()));
 		match_UntypedBaseDataDescriptionRule___WithKeyword_5_0_ConstraintsKeyword_5_1_ColonKeyword_5_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getUntypedBaseDataDescriptionRuleAccess().getWithKeyword_5_0()), new TokenAlias(false, false, grammarAccess.getUntypedBaseDataDescriptionRuleAccess().getConstraintsKeyword_5_1()), new TokenAlias(false, false, grammarAccess.getUntypedBaseDataDescriptionRuleAccess().getColonKeyword_5_2()));
 	}
 	
@@ -54,18 +54,18 @@ public class DataDescriptionLanguageSyntacticSequencer extends AbstractSyntactic
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			if (match_BaseDataTypeDefinitionRule___WithKeyword_5_0_ConstraintsKeyword_5_1_ColonKeyword_5_2__q.equals(syntax))
-				emit_BaseDataTypeDefinitionRule___WithKeyword_5_0_ConstraintsKeyword_5_1_ColonKeyword_5_2__q(semanticObject, getLastNavigableState(), syntaxNodes);
+			if (match_BaseDataTypeTypeDefinitionRule___WithKeyword_4_0_ConstraintsKeyword_4_1_ColonKeyword_4_2__q.equals(syntax))
+				emit_BaseDataTypeTypeDefinitionRule___WithKeyword_4_0_ConstraintsKeyword_4_1_ColonKeyword_4_2__q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_DataDescriptionModelRule___ConstraintsKeyword_6_0_ColonKeyword_6_1__q.equals(syntax))
 				emit_DataDescriptionModelRule___ConstraintsKeyword_6_0_ColonKeyword_6_1__q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_DataDescriptionModelRule___DataKeyword_5_0_ColonKeyword_5_1__q.equals(syntax))
 				emit_DataDescriptionModelRule___DataKeyword_5_0_ColonKeyword_5_1__q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_DataDescriptionModelRule___TypesKeyword_4_0_ColonKeyword_4_1__q.equals(syntax))
 				emit_DataDescriptionModelRule___TypesKeyword_4_0_ColonKeyword_4_1__q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if (match_EnumTypeDefinitionRule___WithKeyword_9_0_ConstraintsKeyword_9_1_ColonKeyword_9_2__q.equals(syntax))
-				emit_EnumTypeDefinitionRule___WithKeyword_9_0_ConstraintsKeyword_9_1_ColonKeyword_9_2__q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if (match_TypedBaseDataDescriptionRule___WithKeyword_6_0_ConstraintsKeyword_6_1_ColonKeyword_6_2__q.equals(syntax))
-				emit_TypedBaseDataDescriptionRule___WithKeyword_6_0_ConstraintsKeyword_6_1_ColonKeyword_6_2__q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_EnumTypeDefinitionRule___WithKeyword_8_0_ConstraintsKeyword_8_1_ColonKeyword_8_2__q.equals(syntax))
+				emit_EnumTypeDefinitionRule___WithKeyword_8_0_ConstraintsKeyword_8_1_ColonKeyword_8_2__q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_TypedBaseDataDescriptionRule___WithKeyword_4_0_ConstraintsKeyword_4_1_ColonKeyword_4_2__q.equals(syntax))
+				emit_TypedBaseDataDescriptionRule___WithKeyword_4_0_ConstraintsKeyword_4_1_ColonKeyword_4_2__q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_UntypedBaseDataDescriptionRule___WithKeyword_5_0_ConstraintsKeyword_5_1_ColonKeyword_5_2__q.equals(syntax))
 				emit_UntypedBaseDataDescriptionRule___WithKeyword_5_0_ConstraintsKeyword_5_1_ColonKeyword_5_2__q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else acceptNodes(getLastNavigableState(), syntaxNodes);
@@ -78,12 +78,11 @@ public class DataDescriptionLanguageSyntacticSequencer extends AbstractSyntactic
 	 *     ('with' 'constraints' ':')?
 	 *
 	 * This ambiguous syntax occurs at:
-	 *     description=STRING (ambiguity) ';' (rule end)
 	 *     name=StringOrId (ambiguity) ';' (rule end)
 	 
 	 * </pre>
 	 */
-	protected void emit_BaseDataTypeDefinitionRule___WithKeyword_5_0_ConstraintsKeyword_5_1_ColonKeyword_5_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_BaseDataTypeTypeDefinitionRule___WithKeyword_4_0_ConstraintsKeyword_4_1_ColonKeyword_4_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
@@ -142,12 +141,11 @@ public class DataDescriptionLanguageSyntacticSequencer extends AbstractSyntactic
 	 *     ('with' 'constraints' ':')?
 	 *
 	 * This ambiguous syntax occurs at:
-	 *     description=STRING (ambiguity) ';' (rule end)
 	 *     literals+=EnumLiteralRule ')' (ambiguity) ';' (rule end)
 	 
 	 * </pre>
 	 */
-	protected void emit_EnumTypeDefinitionRule___WithKeyword_9_0_ConstraintsKeyword_9_1_ColonKeyword_9_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_EnumTypeDefinitionRule___WithKeyword_8_0_ConstraintsKeyword_8_1_ColonKeyword_8_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
@@ -157,12 +155,11 @@ public class DataDescriptionLanguageSyntacticSequencer extends AbstractSyntactic
 	 *     ('with' 'constraints' ':')?
 	 *
 	 * This ambiguous syntax occurs at:
-	 *     type=[BaseDataTypeDefinition|QualifiedName] (ambiguity) ';' (rule end)
-	 *     type=[EnumTypeDefinition|QualifiedName] (ambiguity) ';' (rule end)
+	 *     name=StringOrId 'of' (ambiguity) ';' (rule end)
 	 
 	 * </pre>
 	 */
-	protected void emit_TypedBaseDataDescriptionRule___WithKeyword_6_0_ConstraintsKeyword_6_1_ColonKeyword_6_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_TypedBaseDataDescriptionRule___WithKeyword_4_0_ConstraintsKeyword_4_1_ColonKeyword_4_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	

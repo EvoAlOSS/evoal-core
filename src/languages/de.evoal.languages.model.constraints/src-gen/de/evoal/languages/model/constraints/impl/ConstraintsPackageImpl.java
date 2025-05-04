@@ -3,7 +3,11 @@
  */
 package de.evoal.languages.model.constraints.impl;
 
-import de.evoal.languages.model.base.BasePackage;
+import de.evoal.languages.model.base.definitions.DefinitionsPackage;
+
+import de.evoal.languages.model.base.expressions.ExpressionsPackage;
+
+import de.evoal.languages.model.base.types.TypesPackage;
 
 import de.evoal.languages.model.constraints.Constraint;
 import de.evoal.languages.model.constraints.ConstraintsFactory;
@@ -119,7 +123,9 @@ public class ConstraintsPackageImpl extends EPackageImpl implements ConstraintsP
 		isInited = true;
 
 		// Initialize simple dependencies
-		BasePackage.eINSTANCE.eClass();
+		DefinitionsPackage.eINSTANCE.eClass();
+		ExpressionsPackage.eINSTANCE.eClass();
+		TypesPackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
 		theConstraintsPackage.createPackageContents();
@@ -327,7 +333,7 @@ public class ConstraintsPackageImpl extends EPackageImpl implements ConstraintsP
 		setNsURI(eNS_URI);
 
 		// Obtain other dependent packages
-		BasePackage theBasePackage = (BasePackage)EPackage.Registry.INSTANCE.getEPackage(BasePackage.eNS_URI);
+		ExpressionsPackage theExpressionsPackage = (ExpressionsPackage)EPackage.Registry.INSTANCE.getEPackage(ExpressionsPackage.eNS_URI);
 
 		// Create type parameters
 
@@ -360,7 +366,7 @@ public class ConstraintsPackageImpl extends EPackageImpl implements ConstraintsP
 		addEParameter(op, ecorePackage.getEObject(), "object", 1, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(multiVariateConstraintEClass, MultiVariateConstraint.class, "MultiVariateConstraint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getMultiVariateConstraint_Condition(), theBasePackage.getExpression(), null, "condition", null, 1, 1, MultiVariateConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMultiVariateConstraint_Condition(), theExpressionsPackage.getExpression(), null, "condition", null, 1, 1, MultiVariateConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(multiVariateConstraintEClass, this.getDiagnostic(), "check", 1, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEObject(), "object", 1, 1, IS_UNIQUE, IS_ORDERED);

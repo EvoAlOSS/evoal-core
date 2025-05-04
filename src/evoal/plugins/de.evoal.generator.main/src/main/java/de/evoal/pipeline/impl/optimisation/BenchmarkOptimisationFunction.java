@@ -5,12 +5,12 @@ import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.properties.PropertySpecification;
 import de.evoal.core.api.utils.AttributeHelper;
-import de.evoal.languages.model.ddl.DataDescription;
+import de.evoal.languages.model.base.definitions.DataDescription;
+import de.evoal.languages.model.base.expressions.ExpressionsFactory;
 import de.evoal.languages.model.pipeline.PipelineFactory;
 import de.evoal.languages.model.pipeline.Step;
-import de.evoal.languages.model.instance.DataReference;
-import de.evoal.languages.model.base.Instance;
-import de.evoal.languages.model.instance.InstanceFactory;
+import de.evoal.languages.model.base.expressions.DataReference;
+import de.evoal.languages.model.base.expressions.Instance;
 import de.evoal.pipeline.api.model.Component;
 import de.evoal.pipeline.api.model.ComponentImpl;
 import de.evoal.pipeline.api.model.TypedEObject;
@@ -104,7 +104,7 @@ public class BenchmarkOptimisationFunction implements OptimisationFunction {
 
             final List<DataDescription> readReferences = helper.lookup(benchmarkConfiguration, "reads");
             readReferences.forEach(dr -> {
-                final DataReference reference = InstanceFactory.eINSTANCE.createDataReference();
+                final DataReference reference = ExpressionsFactory.eINSTANCE.createDataReference();
                 reference.setDefinition(dr);
                 stepConfiguration.getReads().add(mapping.get(dr));
             });
@@ -112,7 +112,7 @@ public class BenchmarkOptimisationFunction implements OptimisationFunction {
             final List<DataDescription> writeReferences = (List<DataDescription>) helper.lookup(benchmarkConfiguration, "writes");
             writeReferences
                     .forEach(dr -> {
-                        final DataReference reference = InstanceFactory.eINSTANCE.createDataReference();
+                        final DataReference reference = ExpressionsFactory.eINSTANCE.createDataReference();
                         reference.setDefinition(dr);
                         stepConfiguration.getWrites().add(mapping.get(dr));
                     });

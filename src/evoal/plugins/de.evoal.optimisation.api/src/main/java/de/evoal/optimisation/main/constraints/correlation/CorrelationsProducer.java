@@ -11,8 +11,8 @@ import javax.enterprise.inject.Produces;
 import de.evoal.optimisation.main.constraints.correlation.el.AstHelper;
 import de.evoal.core.api.languages.base.BaseLanguageHelper;
 import de.evoal.core.api.languages.base.LogHelper;
-import de.evoal.languages.model.ddl.DataDescription;
-import de.evoal.languages.model.base.Call;
+import de.evoal.languages.model.base.definitions.DataDescription;
+import de.evoal.languages.model.base.expressions.Call;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.inject.Named;
@@ -46,8 +46,8 @@ public class CorrelationsProducer {
                              .filter(Objects::nonNull)
                              .map(Call.class::cast)
                                     // TODO Do this correctly
-                             .filter(c -> "connection".equals(((de.evoal.languages.model.base.DefinedFunctionName)c.getFunction()).getDefinition().getName()) ||
-                                          "ranged-connection".equals(((de.evoal.languages.model.base.DefinedFunctionName)c.getFunction()).getDefinition().getName()))
+                             .filter(c -> "connection".equals(c. getFunction().getName())  ||
+                                          "ranged-connection".equals(c.getFunction().getName()))
                              .map(c -> convert(c, context))
                              .filter(Optional::isPresent)
                              .map(Optional::get)

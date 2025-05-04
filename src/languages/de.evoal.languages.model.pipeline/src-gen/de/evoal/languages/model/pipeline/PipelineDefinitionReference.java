@@ -3,7 +3,8 @@
  */
 package de.evoal.languages.model.pipeline;
 
-import de.evoal.languages.model.base.Literal;
+import de.evoal.languages.model.base.expressions.Literal;
+import de.evoal.languages.model.base.expressions.ValueReference;
 
 /**
  * <!-- begin-user-doc -->

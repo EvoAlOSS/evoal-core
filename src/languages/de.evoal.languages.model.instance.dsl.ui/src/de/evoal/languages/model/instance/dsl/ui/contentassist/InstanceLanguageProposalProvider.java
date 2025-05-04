@@ -19,10 +19,11 @@ import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 
 import com.google.common.base.Predicate;
 
-import de.evoal.languages.model.base.Attribute;
-import de.evoal.languages.model.base.AttributeDefinition;
-import de.evoal.languages.model.base.Instance;
-import de.evoal.languages.model.base.TypeDefinition;
+import de.evoal.languages.model.base.definitions.AttributeDefinition;
+import de.evoal.languages.model.base.definitions.TypeDefinition;
+import de.evoal.languages.model.base.expressions.Attribute;
+import de.evoal.languages.model.base.expressions.Instance;
+
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#content-assist

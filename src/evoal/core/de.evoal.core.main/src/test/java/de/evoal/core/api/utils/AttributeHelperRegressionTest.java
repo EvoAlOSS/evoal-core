@@ -1,10 +1,12 @@
 package de.evoal.core.api.utils;
 
 import de.evoal.core.junit.dsl.LanguageHelper;
+import de.evoal.languages.model.base.expressions.Attribute;
 import de.evoal.languages.model.dl.DefinitionModule;
 import de.evoal.languages.model.generator.GeneratorModule;
 import de.evoal.languages.model.generator.Step;
-import de.evoal.languages.model.base.*;
+import de.evoal.languages.model.base.types.*;
+import de.evoal.languages.model.base.definitions.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

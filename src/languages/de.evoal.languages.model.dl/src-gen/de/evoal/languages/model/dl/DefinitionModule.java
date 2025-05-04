@@ -3,10 +3,11 @@
  */
 package de.evoal.languages.model.dl;
 
-import de.evoal.languages.model.base.ConstantDefinition;
-import de.evoal.languages.model.base.FunctionDefinition;
 import de.evoal.languages.model.base.Import;
-import de.evoal.languages.model.base.TypeDefinition;
+
+import de.evoal.languages.model.base.definitions.ConstantDefinition;
+import de.evoal.languages.model.base.definitions.FunctionDefinition;
+import de.evoal.languages.model.base.definitions.TypeDefinition;
 
 import org.eclipse.emf.common.util.EList;
 
@@ -74,7 +75,7 @@ public interface DefinitionModule extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Types</b></em>' containment reference list.
-	 * The list contents are of type {@link de.evoal.languages.model.base.TypeDefinition}.
+	 * The list contents are of type {@link de.evoal.languages.model.base.definitions.TypeDefinition}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
@@ -89,7 +90,7 @@ public interface DefinitionModule extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Functions</b></em>' containment reference list.
-	 * The list contents are of type {@link de.evoal.languages.model.base.FunctionDefinition}.
+	 * The list contents are of type {@link de.evoal.languages.model.base.definitions.FunctionDefinition}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
@@ -105,7 +106,7 @@ public interface DefinitionModule extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Constants</b></em>' containment reference list.
-	 * The list contents are of type {@link de.evoal.languages.model.base.ConstantDefinition}.
+	 * The list contents are of type {@link de.evoal.languages.model.base.definitions.ConstantDefinition}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Constants</em>' containment reference list.

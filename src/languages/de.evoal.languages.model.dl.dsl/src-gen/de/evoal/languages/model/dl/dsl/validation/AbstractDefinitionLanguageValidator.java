@@ -15,8 +15,10 @@ public abstract class AbstractDefinitionLanguageValidator extends BaseLanguageVa
 	protected List<EPackage> getEPackages() {
 		List<EPackage> result = new ArrayList<EPackage>(super.getEPackages());
 		result.add(EPackage.Registry.INSTANCE.getEPackage("https://www.evoal.de/languages/dl/1.0.0"));
+		result.add(EPackage.Registry.INSTANCE.getEPackage("https://www.evoal.de/languages/base/expressions/1.0.0"));
+		result.add(EPackage.Registry.INSTANCE.getEPackage("https://www.evoal.de/languages/base/definitions/1.0.0"));
+		result.add(EPackage.Registry.INSTANCE.getEPackage("https://www.evoal.de/languages/base/types/1.0.0"));
 		result.add(EPackage.Registry.INSTANCE.getEPackage("https://www.evoal.de/languages/base/1.0.0"));
-		result.add(EPackage.Registry.INSTANCE.getEPackage("https://www.evoal.de/languages/ddl/1.0.0"));
 		return result;
 	}
 }

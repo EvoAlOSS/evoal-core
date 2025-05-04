@@ -2,12 +2,13 @@
  */
 package de.evoal.languages.model.ddl.impl;
 
-import de.evoal.languages.model.base.Expression;
 import de.evoal.languages.model.base.Import;
 
-import de.evoal.languages.model.ddl.DataDescription;
+import de.evoal.languages.model.base.definitions.DataDescription;
+import de.evoal.languages.model.base.definitions.Definition;
+import de.evoal.languages.model.base.expressions.Expression;
+
 import de.evoal.languages.model.ddl.DataDescriptionModule;
-import de.evoal.languages.model.ddl.DataTypeDefinition;
 import de.evoal.languages.model.ddl.DdlPackage;
 
 import java.util.Collection;
@@ -82,7 +83,7 @@ public class DataDescriptionModuleImpl extends MinimalEObjectImpl.Container impl
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<DataTypeDefinition> types;
+	protected EList<Definition> types;
 
 	/**
 	 * The cached value of the '{@link #getDescriptions() <em>Descriptions</em>}' containment reference list.
@@ -129,6 +130,19 @@ public class DataDescriptionModuleImpl extends MinimalEObjectImpl.Container impl
 	 * @generated
 	 */
 	@Override
+	public EList<Import> getImports() {
+		if (imports == null) {
+			imports = new EObjectContainmentEList<Import>(Import.class, this, DdlPackage.DATA_DESCRIPTION_MODULE__IMPORTS);
+		}
+		return imports;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -152,22 +166,9 @@ public class DataDescriptionModuleImpl extends MinimalEObjectImpl.Container impl
 	 * @generated
 	 */
 	@Override
-	public EList<Import> getImports() {
-		if (imports == null) {
-			imports = new EObjectContainmentEList<Import>(Import.class, this, DdlPackage.DATA_DESCRIPTION_MODULE__IMPORTS);
-		}
-		return imports;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EList<DataTypeDefinition> getTypes() {
+	public EList<Definition> getTypes() {
 		if (types == null) {
-			types = new EObjectContainmentEList<DataTypeDefinition>(DataTypeDefinition.class, this, DdlPackage.DATA_DESCRIPTION_MODULE__TYPES);
+			types = new EObjectContainmentEList<Definition>(Definition.class, this, DdlPackage.DATA_DESCRIPTION_MODULE__TYPES);
 		}
 		return types;
 	}
@@ -258,7 +259,7 @@ public class DataDescriptionModuleImpl extends MinimalEObjectImpl.Container impl
 				return;
 			case DdlPackage.DATA_DESCRIPTION_MODULE__TYPES:
 				getTypes().clear();
-				getTypes().addAll((Collection<? extends DataTypeDefinition>)newValue);
+				getTypes().addAll((Collection<? extends Definition>)newValue);
 				return;
 			case DdlPackage.DATA_DESCRIPTION_MODULE__DESCRIPTIONS:
 				getDescriptions().clear();

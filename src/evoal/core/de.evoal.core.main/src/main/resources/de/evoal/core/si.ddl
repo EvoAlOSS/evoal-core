@@ -1,66 +1,105 @@
 module de.evoal.core.si {
 	types:
-		cardinal type Newton description : "SI-Unit for force, measure in Newton[N=kg*m/s*s]."
+		/**
+		 * SI-Unit for force, measure in Newton[N=kg*m/s*s].
+		 */
+		cardinal type Newton
 			with constraints:
 				value >= 0.0;
 		;
 		
-		quotient type Meter description: "SI-Unit for lengths, measured in metres[m]."
+		/**
+		 * SI-Unit for lengths, measured in metres[m].
+		 */
+		quotient type Meter
 			with constraints: 
 				value >= 0.0;
 		;
 		
-		quotient type Second description: "SI-Unit for time, measured in seconds[s]."
+		/**
+		 * SI-Unit for time, measured in seconds[s].
+		 */
+		quotient type Second 
 			with constraints: 
 				value >= 0.0;
 		;
 		
-		quotient type Kilogram description: "SI-Unit for mass, measured in kilogram[kg]."
+		/**
+		 * SI-Unit for mass, measured in kilogram[kg].
+		 */
+		quotient type Kilogram
 			with constraints: 
 				value >= 0.0;
 		;
 		
-		quotient type Ampere description: "SI-Unit for eletric current, measured in ampere[A]."
+		/**
+		 * SI-Unit for eletric current, measured in ampere[A].
+		 */
+		quotient type Ampere
 			with constraints: 
 				value >= 0.0;
 		;
 		
-		quotient type Kelvin description: "SI-Unit for thermodynamic temperature, measured in kelvin[K]."
+		/**
+		 * SI-Unit for thermodynamic temperature, measured in kelvin[K].
+		 */
+		quotient type Kelvin
 			with constraints:
 				value >= 0.0;
 		;
 		
-		quotient type Mole description: "SI-Unit for amount of substance, measure in mole[mol]."
+		/**
+		 * SI-Unit for amount of substance, measure in mole[mol].
+		 */
+		quotient type Mole
 			with constraints:
 				value >= 0.0;
 		;
 		
-		quotient type Candela description: "SI-Unit for luminous intensity, measured in candela[cd]."
+		/**
+		 * SI-Unit for luminous intensity, measured in candela[cd].
+		 */
+		quotient type Candela
 			with constraints:
 				value >= 0.0;
 		;
 		
-		quotient type Hertz description: "SI-Unit for frequency, measured in hertz[Hz=1/s]."
+		/**
+		 * SI-Unit for frequency, measured in hertz[Hz=1/s].
+		 */
+		quotient type Hertz
 			with constraints: 
 				value >= 0.0;
 		;
 		
-		quotient type Speed description: "SI-Unit for frequency, measured in metre per second[m/s]."
+		/**
+		 * SI-Unit for frequency, measured in metre per second[m/s].
+		 */
+		quotient type Speed
 			with constraints:
 				value >= 0.0;
 		;
 		
-		quotient type Pascal description: "SI-Unit for pressure, measure in Pascal[Pa=kg/m*s*s]."
+		/**
+		 * SI-Unit for pressure, measure in Pascal[Pa=kg/m*s*s].
+		 */
+		quotient type Pascal
 			with constraints:
 				value >= 0.0;
 		;
 		
-		cardinal type Celsius description: "SI-Unit for temperature relative to 273.15 K, measured in Celsius[°C=K]"
+		/**
+		 * SI-Unit for temperature relative to 273.15 K, measured in Celsius[°C=K]
+		 */
+		cardinal type Celsius
 			with constraints:
 				value >= -273.15; 
 		;
 		
-		quotient type Area description: "SI-Unit for areas, measured in square meter[m*m]"
+		/**
+		 * SI-Unit for areas, measured in square meter[m*m].
+		 */
+		quotient type Area
 			with constraints:
 				value >= 0.0;
 		;

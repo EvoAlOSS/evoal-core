@@ -1,6 +1,6 @@
 package de.evoal.optimisation.ea.api.initial;
 
-import de.evoal.languages.model.base.Instance;
+import de.evoal.languages.model.base.expressions.Instance;
 import io.jenetics.Gene;
 import io.jenetics.engine.Engine;
 import io.jenetics.engine.EvolutionStream;

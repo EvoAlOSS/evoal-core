@@ -4,8 +4,8 @@ import de.evoal.core.api.utils.AttributeHelper;
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.properties.PropertySpecification;
-import de.evoal.languages.model.base.Instance;
-import de.evoal.languages.model.ddl.DataDescription;
+import de.evoal.languages.model.base.expressions.Instance;
+import de.evoal.languages.model.base.definitions.DataDescription;
 import lombok.extern.slf4j.Slf4j;
 import javax.enterprise.context.ApplicationScoped;
 

@@ -1,12 +1,12 @@
 package de.evoal.pipeline.impl.internal;
 
 import de.evoal.core.api.utils.Requirements;
-import de.evoal.languages.model.base.Definition;
+import de.evoal.languages.model.base.definitions.Definition;
 import de.evoal.languages.model.base.Import;
-import de.evoal.languages.model.base.Literal;
+import de.evoal.languages.model.base.expressions.Literal;
 import de.evoal.languages.model.generator.*;
 import de.evoal.languages.model.generator.util.GeneratorSwitch;
-import de.evoal.languages.model.instance.DataReference;
+import de.evoal.languages.model.base.expressions.DataReference;
 import de.evoal.languages.model.pipeline.PipelineFactory;
 import de.evoal.languages.model.pipeline.PipelineModule;
 import lombok.NonNull;

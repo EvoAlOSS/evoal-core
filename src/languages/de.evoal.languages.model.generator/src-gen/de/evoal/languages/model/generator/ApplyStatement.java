@@ -3,7 +3,7 @@
  */
 package de.evoal.languages.model.generator;
 
-import de.evoal.languages.model.base.Literal;
+import de.evoal.languages.model.base.expressions.Literal;
 
 import org.eclipse.emf.common.util.EList;
 
@@ -72,7 +72,7 @@ public interface ApplyStatement extends Statement {
 
 	/**
 	 * Returns the value of the '<em><b>Pipelines</b></em>' containment reference list.
-	 * The list contents are of type {@link de.evoal.languages.model.base.Literal}.
+	 * The list contents are of type {@link de.evoal.languages.model.base.expressions.Literal}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Pipelines</em>' containment reference list.

@@ -3,7 +3,7 @@
  */
 package de.evoal.languages.model.pipeline;
 
-import de.evoal.languages.model.base.Literal;
+import de.evoal.languages.model.base.expressions.Literal;
 
 import org.eclipse.emf.common.util.EList;
 
@@ -26,7 +26,7 @@ import org.eclipse.emf.common.util.EList;
 public interface LiteralRange extends Range {
 	/**
 	 * Returns the value of the '<em><b>Elements</b></em>' containment reference list.
-	 * The list contents are of type {@link de.evoal.languages.model.base.Literal}.
+	 * The list contents are of type {@link de.evoal.languages.model.base.expressions.Literal}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Elements</em>' containment reference list.

@@ -25,7 +25,7 @@ import org.eclipse.emf.ecore.EReference;
  * <!-- end-model-doc -->
  * @see de.evoal.languages.model.dl.DlFactory
  * @model kind="package"
- *        annotation="http://www.eclipse.org/OCL/Import el='platform:/resource/de.evoal.languages.model.base/model/model.ecore#/'"
+ *        annotation="http://www.eclipse.org/OCL/Import base='platform:/resource/de.evoal.languages.model.base/model/model.ecore#/' defs='platform:/resource/de.evoal.languages.model.base/model/definitions.ecore#/'"
  * @generated
  */
 public interface DlPackage extends EPackage {

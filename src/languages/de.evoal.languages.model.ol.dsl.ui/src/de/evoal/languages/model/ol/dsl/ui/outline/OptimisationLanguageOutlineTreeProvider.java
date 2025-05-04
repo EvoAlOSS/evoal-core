@@ -7,7 +7,7 @@ package de.evoal.languages.model.ol.dsl.ui.outline;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider;
 
-import de.evoal.languages.model.base.Literal;
+import de.evoal.languages.model.base.expressions.Literal;
 
 /**
  * Customization of the default outline structure.

@@ -11,7 +11,7 @@
       <details key="documentation" value="&#xA;Link to the definition of a EStructuralFeature.&#xA;"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
-        eType="ecore:EClass ../../de.evoal.languages.model.base/model/model.ecore#//Definition">
+        eType="ecore:EClass ../../de.evoal.languages.model.base/model/definitions.ecore#//Definition">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="&#xA;The definition (located in a .ddl file).&#xA;"/>
       </eAnnotations>

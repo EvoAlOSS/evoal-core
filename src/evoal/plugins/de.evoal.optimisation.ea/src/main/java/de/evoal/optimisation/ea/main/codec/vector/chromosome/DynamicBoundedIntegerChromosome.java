@@ -2,8 +2,8 @@ package de.evoal.optimisation.ea.main.codec.vector.chromosome;
 
 import de.evoal.core.api.properties.PropertySpecification;
 import de.evoal.core.api.properties.info.PropertiesBoundaries;
-import de.evoal.languages.model.ddl.DataDescription;
-import de.evoal.languages.model.base.Instance;
+import de.evoal.languages.model.base.definitions.DataDescription;
+import de.evoal.languages.model.base.expressions.Instance;
 import io.jenetics.util.IntRange;
 
 import javax.inject.Inject;

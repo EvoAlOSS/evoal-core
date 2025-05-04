@@ -6,7 +6,7 @@ import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.properties.info.PropertiesRanges;
 import de.evoal.core.api.utils.Requirements;
-import de.evoal.languages.model.base.Instance;
+import de.evoal.languages.model.base.expressions.Instance;
 import de.evoal.optimisation.api.model.OptimisationFunction;
 import de.evoal.optimisation.api.model.OptimisationFunctionDecorator;
 import de.evoal.surrogate.api.configuration.PartialFunctionConfiguration;

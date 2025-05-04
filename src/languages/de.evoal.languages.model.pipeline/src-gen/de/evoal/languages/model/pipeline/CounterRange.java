@@ -3,7 +3,7 @@
  */
 package de.evoal.languages.model.pipeline;
 
-import de.evoal.languages.model.base.Literal;
+import de.evoal.languages.model.base.expressions.Literal;
 
 /**
  * <!-- begin-user-doc -->

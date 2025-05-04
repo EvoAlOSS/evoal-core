@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import de.evoal.core.api.languages.AttributeEvaluator;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.properties.PropertySpecification;
-import de.evoal.languages.model.ddl.DataDescription;
+import de.evoal.languages.model.base.definitions.DataDescription;
 import de.evoal.languages.model.mll.PartialSurrogateFunctionDefinition;
 import de.evoal.surrogate.api.function.PartialSurrogateFunction;
 import lombok.Data;

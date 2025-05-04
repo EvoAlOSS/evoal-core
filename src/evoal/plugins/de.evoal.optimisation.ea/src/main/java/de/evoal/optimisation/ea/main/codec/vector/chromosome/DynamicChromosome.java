@@ -4,8 +4,8 @@ import de.evoal.core.api.cdi.EvoalComponent;
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.utils.AttributeHelper;
-import de.evoal.languages.model.ddl.DataDescription;
-import de.evoal.languages.model.base.Instance;
+import de.evoal.languages.model.base.definitions.DataDescription;
+import de.evoal.languages.model.base.expressions.Instance;
 import io.jenetics.Chromosome;
 
 import javax.inject.Inject;

@@ -15,6 +15,3 @@ Require-Bundle: org.eclipse.core.runtime,
 Eclipse-LazyStart: true
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-17
-Export-Package: de.evoal.languages.model.instance,
- de.evoal.languages.model.instance.impl,
- de.evoal.languages.model.instance.util

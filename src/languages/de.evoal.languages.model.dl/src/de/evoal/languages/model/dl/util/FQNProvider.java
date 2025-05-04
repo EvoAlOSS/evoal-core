@@ -4,10 +4,10 @@ import java.util.Objects;
 
 import org.eclipse.emf.ecore.EObject;
 
-import de.evoal.languages.model.base.ConstantDefinition;
-import de.evoal.languages.model.base.FunctionDefinition;
-import de.evoal.languages.model.base.Instance;
-import de.evoal.languages.model.base.TypeDefinition;
+import de.evoal.languages.model.base.definitions.ConstantDefinition;
+import de.evoal.languages.model.base.definitions.FunctionDefinition;
+import de.evoal.languages.model.base.expressions.Instance;
+import de.evoal.languages.model.base.definitions.TypeDefinition;
 import de.evoal.languages.model.dl.DefinitionModule;
 
 public class FQNProvider {

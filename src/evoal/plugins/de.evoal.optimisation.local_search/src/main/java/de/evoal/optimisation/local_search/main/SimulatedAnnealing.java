@@ -11,7 +11,7 @@ import de.evoal.core.api.properties.Properties;
 import de.evoal.optimisation.api.model.impl.SimpleCandidate;
 import de.evoal.optimisation.api.model.impl.SimpleIteration;
 import de.evoal.optimisation.api.statistics.writer.StatisticsWriter;
-import de.evoal.languages.model.base.Instance;
+import de.evoal.languages.model.base.expressions.Instance;
 import de.evoal.optimisation.api.model.InitialCandidatesProvider;
 import de.evoal.optimisation.local_search.api.neighbour.NeighbourChoosingStrategy;
 import de.evoal.optimisation.local_search.api.cooling.DecreasingFunction;

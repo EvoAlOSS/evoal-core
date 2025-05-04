@@ -2,13 +2,13 @@ package de.evoal.surrogate.main.ea;
 
 import de.evoal.core.api.board.Blackboard;
 import de.evoal.core.api.utils.AttributeHelper;
-import de.evoal.languages.model.base.Attribute;
+import de.evoal.languages.model.base.expressions.Attribute;
 import de.evoal.optimisation.api.model.InitialCandidatesProvider;
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.properties.stream.FileBasedPropertiesStreamSupplier;
 import de.evoal.core.api.properties.stream.PropertiesStreamSupplier;
-import de.evoal.languages.model.base.Instance;
+import de.evoal.languages.model.base.expressions.Instance;
 import de.evoal.surrogate.api.SurrogateBlackboardEntries;
 import lombok.extern.slf4j.Slf4j;
 

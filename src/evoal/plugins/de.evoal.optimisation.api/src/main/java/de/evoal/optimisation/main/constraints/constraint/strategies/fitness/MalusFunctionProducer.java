@@ -2,6 +2,7 @@ package de.evoal.optimisation.main.constraints.constraint.strategies.fitness;
 
 import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.core.api.utils.AttributeHelper;
+import de.evoal.languages.model.base.expressions.Instance;
 import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
 import de.evoal.optimisation.api.constraints.model.Constraint;
 import de.evoal.optimisation.api.constraints.model.Constraints;
@@ -17,7 +18,7 @@ import javax.enterprise.inject.Produces;
 
 import de.evoal.optimisation.main.constraints.constraint.strategies.fitness.internal.MalusForFitnessFunction;
 import de.evoal.optimisation.main.constraints.constraint.utils.ConfigurationUtils;
-import de.evoal.languages.model.base.*;
+import de.evoal.languages.model.base.expressions.*;
 import org.apache.commons.math3.util.Pair;
 
 import javax.inject.Inject;

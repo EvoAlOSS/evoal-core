@@ -2,6 +2,7 @@ grammar de.evoal.languages.model.generator.dsl.GeneratorDSL with de.evoal.langua
 
 import "https://www.evoal.de/languages/generator/1.0.0"
 import "https://www.evoal.de/languages/base/1.0.0" as base
+import "https://www.evoal.de/languages/base/expressions/1.0.0" as expressions
 
 GeneratorModuleRule returns GeneratorModule:
 	(imports += ImportRule)*
@@ -56,7 +57,7 @@ ApplyStatementRule returns ApplyStatement:
 ;
 
 @Override
-LiteralRule returns base::Literal:
+LiteralRule returns expressions::Literal:
 	NumberLiteralRule
 		| StringLiteralRule
 		| BooleanLiteralRule

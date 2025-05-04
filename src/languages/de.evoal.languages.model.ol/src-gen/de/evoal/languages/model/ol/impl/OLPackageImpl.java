@@ -5,9 +5,11 @@ package de.evoal.languages.model.ol.impl;
 
 import de.evoal.languages.model.base.BasePackage;
 
-import de.evoal.languages.model.ddl.DdlPackage;
+import de.evoal.languages.model.base.definitions.DefinitionsPackage;
 
-import de.evoal.languages.model.instance.InstancePackage;
+import de.evoal.languages.model.base.expressions.ExpressionsPackage;
+
+import de.evoal.languages.model.base.types.TypesPackage;
 
 import de.evoal.languages.model.ol.AlgorithmInstance;
 import de.evoal.languages.model.ol.OLFactory;
@@ -98,8 +100,9 @@ public class OLPackageImpl extends EPackageImpl implements OLPackage {
 
 		// Initialize simple dependencies
 		BasePackage.eINSTANCE.eClass();
-		DdlPackage.eINSTANCE.eClass();
-		InstancePackage.eINSTANCE.eClass();
+		ExpressionsPackage.eINSTANCE.eClass();
+		DefinitionsPackage.eINSTANCE.eClass();
+		TypesPackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
 		theOLPackage.createPackageContents();
@@ -294,14 +297,15 @@ public class OLPackageImpl extends EPackageImpl implements OLPackage {
 
 		// Obtain other dependent packages
 		BasePackage theBasePackage = (BasePackage)EPackage.Registry.INSTANCE.getEPackage(BasePackage.eNS_URI);
+		ExpressionsPackage theExpressionsPackage = (ExpressionsPackage)EPackage.Registry.INSTANCE.getEPackage(ExpressionsPackage.eNS_URI);
 
 		// Create type parameters
 
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
-		problemInstanceEClass.getESuperTypes().add(theBasePackage.getInstance());
-		algorithmInstanceEClass.getESuperTypes().add(theBasePackage.getInstance());
+		problemInstanceEClass.getESuperTypes().add(theExpressionsPackage.getInstance());
+		algorithmInstanceEClass.getESuperTypes().add(theExpressionsPackage.getInstance());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(optimisationModuleEClass, OptimisationModule.class, "OptimisationModule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -312,11 +316,11 @@ public class OLPackageImpl extends EPackageImpl implements OLPackage {
 
 		initEClass(problemInstanceEClass, ProblemInstance.class, "ProblemInstance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getProblemInstance_Name(), ecorePackage.getEString(), "name", null, 1, 1, ProblemInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getProblemInstance_Documentation(), theBasePackage.getArray(), null, "documentation", null, 0, 1, ProblemInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getProblemInstance_Documentation(), theExpressionsPackage.getArray(), null, "documentation", null, 0, 1, ProblemInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(algorithmInstanceEClass, AlgorithmInstance.class, "AlgorithmInstance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAlgorithmInstance_Problem(), this.getProblemInstance(), null, "problem", null, 1, 1, AlgorithmInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAlgorithmInstance_Documentation(), theBasePackage.getArray(), null, "documentation", null, 0, 1, AlgorithmInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAlgorithmInstance_Documentation(), theExpressionsPackage.getArray(), null, "documentation", null, 0, 1, AlgorithmInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

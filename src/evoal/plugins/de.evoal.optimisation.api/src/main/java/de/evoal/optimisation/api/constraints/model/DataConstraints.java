@@ -1,9 +1,9 @@
 package de.evoal.optimisation.api.constraints.model;
 
-import de.evoal.languages.model.ddl.DataDescription;
+import de.evoal.languages.model.base.definitions.DataDescription;
 import de.evoal.languages.model.ddl.DataDescriptionModule;
-import de.evoal.languages.model.ddl.TypedDataDescription;
-import de.evoal.languages.model.base.Expression;
+import de.evoal.languages.model.base.definitions.TypedBaseDataDescription;
+import de.evoal.languages.model.base.expressions.Expression;
 import org.apache.commons.math3.util.Pair;
 
 import java.util.*;
@@ -26,8 +26,8 @@ public class DataConstraints {
               .forEach(d -> {
                   final List<Expression> constraints = new LinkedList<>(d.getConstraints());
 
-                  if(d instanceof TypedDataDescription) {
-                      constraints.addAll(((TypedDataDescription)d).getType().getConstraints());
+                  if(d instanceof TypedBaseDataDescription) {
+                      constraints.addAll(((TypedBaseDataDescription)d).getType().getConstraints());
                   }
 
                   dataConstraints.put(d, constraints);

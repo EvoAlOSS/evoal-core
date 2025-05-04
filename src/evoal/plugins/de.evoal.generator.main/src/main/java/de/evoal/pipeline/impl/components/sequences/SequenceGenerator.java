@@ -1,7 +1,7 @@
 package de.evoal.pipeline.impl.components.sequences;
 
-import de.evoal.languages.model.base.Instance;
-import de.evoal.languages.model.ddl.DataDescription;
+import de.evoal.languages.model.base.expressions.Instance;
+import de.evoal.languages.model.base.definitions.DataDescription;
 
 import de.evoal.pipeline.api.model.dynamic.EAnnotationHelper;
 import de.evoal.pipeline.api.sequence.Sequence;

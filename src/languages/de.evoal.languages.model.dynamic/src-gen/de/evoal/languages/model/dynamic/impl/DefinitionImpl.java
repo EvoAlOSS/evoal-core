@@ -36,7 +36,7 @@ public class DefinitionImpl extends MinimalEObjectImpl.Container implements Defi
 	 * @generated
 	 * @ordered
 	 */
-	protected de.evoal.languages.model.base.Definition source;
+	protected de.evoal.languages.model.base.definitions.Definition source;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -63,10 +63,10 @@ public class DefinitionImpl extends MinimalEObjectImpl.Container implements Defi
 	 * @generated
 	 */
 	@Override
-	public de.evoal.languages.model.base.Definition getSource() {
+	public de.evoal.languages.model.base.definitions.Definition getSource() {
 		if (source != null && source.eIsProxy()) {
 			InternalEObject oldSource = (InternalEObject)source;
-			source = (de.evoal.languages.model.base.Definition)eResolveProxy(oldSource);
+			source = (de.evoal.languages.model.base.definitions.Definition)eResolveProxy(oldSource);
 			if (source != oldSource) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DynamicPackage.DEFINITION__SOURCE, oldSource, source));
@@ -80,7 +80,7 @@ public class DefinitionImpl extends MinimalEObjectImpl.Container implements Defi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public de.evoal.languages.model.base.Definition basicGetSource() {
+	public de.evoal.languages.model.base.definitions.Definition basicGetSource() {
 		return source;
 	}
 
@@ -90,8 +90,8 @@ public class DefinitionImpl extends MinimalEObjectImpl.Container implements Defi
 	 * @generated
 	 */
 	@Override
-	public void setSource(de.evoal.languages.model.base.Definition newSource) {
-		de.evoal.languages.model.base.Definition oldSource = source;
+	public void setSource(de.evoal.languages.model.base.definitions.Definition newSource) {
+		de.evoal.languages.model.base.definitions.Definition oldSource = source;
 		source = newSource;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DynamicPackage.DEFINITION__SOURCE, oldSource, source));
@@ -121,7 +121,7 @@ public class DefinitionImpl extends MinimalEObjectImpl.Container implements Defi
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case DynamicPackage.DEFINITION__SOURCE:
-				setSource((de.evoal.languages.model.base.Definition)newValue);
+				setSource((de.evoal.languages.model.base.definitions.Definition)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -136,7 +136,7 @@ public class DefinitionImpl extends MinimalEObjectImpl.Container implements Defi
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case DynamicPackage.DEFINITION__SOURCE:
-				setSource((de.evoal.languages.model.base.Definition)null);
+				setSource((de.evoal.languages.model.base.definitions.Definition)null);
 				return;
 		}
 		super.eUnset(featureID);

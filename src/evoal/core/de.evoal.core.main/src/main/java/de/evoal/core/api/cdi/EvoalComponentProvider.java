@@ -1,7 +1,7 @@
 package de.evoal.core.api.cdi;
 
 import de.evoal.core.api.utils.InitializationException;
-import de.evoal.languages.model.base.Instance;
+import de.evoal.languages.model.base.expressions.Instance;
 
 /**
  * Provider of EvoAl components if the components cannot be instantiated directly.

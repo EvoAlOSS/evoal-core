@@ -1,7 +1,9 @@
 package de.evoal.optimisation.ea.main.alterer.model.crossover;
 
+import de.evoal.languages.model.base.definitions.AttributeDefinition;
+import de.evoal.languages.model.base.types.ArrayType;
 import de.evoal.optimisation.ea.api.operators.AltererComponent;
-import de.evoal.languages.model.base.*;
+import de.evoal.languages.model.base.expressions.*;
 import io.jenetics.util.RandomRegistry;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.emf.common.util.TreeIterator;

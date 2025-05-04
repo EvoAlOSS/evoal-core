@@ -5,9 +5,11 @@ package de.evoal.languages.model.generator.impl;
 
 import de.evoal.languages.model.base.BasePackage;
 
-import de.evoal.languages.model.ddl.DdlPackage;
+import de.evoal.languages.model.base.definitions.DefinitionsPackage;
 
-import de.evoal.languages.model.dl.DlPackage;
+import de.evoal.languages.model.base.expressions.ExpressionsPackage;
+
+import de.evoal.languages.model.base.types.TypesPackage;
 
 import de.evoal.languages.model.generator.ApplyStatement;
 import de.evoal.languages.model.generator.CounterRange;
@@ -22,8 +24,6 @@ import de.evoal.languages.model.generator.Range;
 import de.evoal.languages.model.generator.Statement;
 import de.evoal.languages.model.generator.Step;
 import de.evoal.languages.model.generator.VariableReference;
-
-import de.evoal.languages.model.instance.InstancePackage;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -163,10 +163,10 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 		isInited = true;
 
 		// Initialize simple dependencies
-		DdlPackage.eINSTANCE.eClass();
-		DlPackage.eINSTANCE.eClass();
-		InstancePackage.eINSTANCE.eClass();
 		BasePackage.eINSTANCE.eClass();
+		ExpressionsPackage.eINSTANCE.eClass();
+		DefinitionsPackage.eINSTANCE.eClass();
+		TypesPackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
 		theGeneratorPackage.createPackageContents();
@@ -589,7 +589,7 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 
 		// Obtain other dependent packages
 		BasePackage theBasePackage = (BasePackage)EPackage.Registry.INSTANCE.getEPackage(BasePackage.eNS_URI);
-		InstancePackage theInstancePackage = (InstancePackage)EPackage.Registry.INSTANCE.getEPackage(InstancePackage.eNS_URI);
+		ExpressionsPackage theExpressionsPackage = (ExpressionsPackage)EPackage.Registry.INSTANCE.getEPackage(ExpressionsPackage.eNS_URI);
 
 		// Create type parameters
 
@@ -599,8 +599,8 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 		forStatementEClass.getESuperTypes().add(this.getStatement());
 		counterRangeEClass.getESuperTypes().add(this.getRange());
 		literalRangeEClass.getESuperTypes().add(this.getRange());
-		pipelineDefinitionReferenceEClass.getESuperTypes().add(theBasePackage.getLiteral());
-		variableReferenceEClass.getESuperTypes().add(theBasePackage.getLiteral());
+		pipelineDefinitionReferenceEClass.getESuperTypes().add(theExpressionsPackage.getLiteral());
+		variableReferenceEClass.getESuperTypes().add(theExpressionsPackage.getLiteral());
 		applyStatementEClass.getESuperTypes().add(this.getStatement());
 
 		// Initialize classes and features; add operations and parameters
@@ -615,9 +615,9 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 		initEReference(getPipelineDefinition_Steps(), this.getStep(), null, "steps", null, 0, -1, PipelineDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		initEClass(stepEClass, Step.class, "Step", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getStep_Instance(), theBasePackage.getInstance(), null, "instance", null, 1, 1, Step.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getStep_Reads(), theInstancePackage.getDataReference(), null, "reads", null, 0, -1, Step.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEReference(getStep_Writes(), theInstancePackage.getDataReference(), null, "writes", null, 0, -1, Step.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getStep_Instance(), theExpressionsPackage.getInstance(), null, "instance", null, 1, 1, Step.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getStep_Reads(), theExpressionsPackage.getDataReference(), null, "reads", null, 0, -1, Step.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getStep_Writes(), theExpressionsPackage.getDataReference(), null, "writes", null, 0, -1, Step.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		initEClass(statementEClass, Statement.class, "Statement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -629,11 +629,11 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 		initEClass(rangeEClass, Range.class, "Range", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(counterRangeEClass, CounterRange.class, "CounterRange", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getCounterRange_Start(), theBasePackage.getLiteral(), null, "start", null, 1, 1, CounterRange.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getCounterRange_End(), theBasePackage.getLiteral(), null, "end", null, 1, 1, CounterRange.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCounterRange_Start(), theExpressionsPackage.getLiteral(), null, "start", null, 1, 1, CounterRange.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCounterRange_End(), theExpressionsPackage.getLiteral(), null, "end", null, 1, 1, CounterRange.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(literalRangeEClass, LiteralRange.class, "LiteralRange", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getLiteralRange_Elements(), theBasePackage.getLiteral(), null, "elements", null, 1, -1, LiteralRange.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getLiteralRange_Elements(), theExpressionsPackage.getLiteral(), null, "elements", null, 1, -1, LiteralRange.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		initEClass(pipelineDefinitionReferenceEClass, PipelineDefinitionReference.class, "PipelineDefinitionReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getPipelineDefinitionReference_Pipeline(), this.getPipelineDefinition(), null, "pipeline", null, 1, 1, PipelineDefinitionReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -643,8 +643,8 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 
 		initEClass(applyStatementEClass, ApplyStatement.class, "ApplyStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getApplyStatement_File(), ecorePackage.getEString(), "file", null, 0, 1, ApplyStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getApplyStatement_Count(), theBasePackage.getLiteral(), null, "count", null, 1, 1, ApplyStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getApplyStatement_Pipelines(), theBasePackage.getLiteral(), null, "pipelines", null, 0, -1, ApplyStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getApplyStatement_Count(), theExpressionsPackage.getLiteral(), null, "count", null, 1, 1, ApplyStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getApplyStatement_Pipelines(), theExpressionsPackage.getLiteral(), null, "pipelines", null, 0, -1, ApplyStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);
@@ -672,7 +672,8 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 			   "ddl", "platform:/resource/de.evoal.languages.model.ddl/model/model.ecore#/",
 			   "dl", "platform:/resource/de.evoal.languages.model.dl/model/model.ecore#/",
 			   "ecore", "http://www.eclipse.org/emf/2002/Ecore",
-			   "ins", "platform:/resource/de.evoal.languages.model.instance/model/model.ecore#/"
+			   "expr", "platform:/resource/de.evoal.languages.model.base/model/expressions.ecore#/",
+			   "exprs", "platform:/resource/de.evoal.languages.model.base/model/expressions.ecore#/"
 		   });
 	}
 

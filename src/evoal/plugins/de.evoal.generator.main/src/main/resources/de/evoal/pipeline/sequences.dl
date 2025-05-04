@@ -18,7 +18,7 @@ module de.evoal.pipeline.sequences {
          *
          * TODO: Add an constraint that checks that all elements are written.
          */
-        sequences : array instance sequence;
+        sequences : array instance 'sequence-provider';
     }
 
    /**

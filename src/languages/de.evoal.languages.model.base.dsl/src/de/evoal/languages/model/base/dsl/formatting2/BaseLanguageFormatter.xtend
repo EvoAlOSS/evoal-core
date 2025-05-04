@@ -4,8 +4,8 @@
  */
 package de.evoal.languages.model.base.dsl.formatting2
 
-import de.evoal.languages.model.base.OrExpression
-import de.evoal.languages.model.base.XorExpression
+import de.evoal.languages.model.base.expressions.OrExpression
+import de.evoal.languages.model.base.expressions.XorExpression
 import org.eclipse.xtext.formatting2.AbstractFormatter2
 import org.eclipse.xtext.formatting2.IFormattableDocument
 

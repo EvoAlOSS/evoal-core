@@ -5,7 +5,7 @@ import de.evoal.optimisation.api.statistics.io.Writer;
 import de.evoal.optimisation.api.statistics.io.WriterException;
 import de.evoal.optimisation.api.statistics.io.WriterStrategy;
 import de.evoal.optimisation.api.model.Iteration;
-import de.evoal.languages.model.base.Instance;
+import de.evoal.languages.model.base.expressions.Instance;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 

@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import de.evoal.core.api.languages.AttributeEvaluator;
 import de.evoal.surrogate.main.jackson.ReflectiveDeserializer;
 import de.evoal.surrogate.main.jackson.ReflectiveSerializer;
-import de.evoal.languages.model.base.Attribute;
+import de.evoal.languages.model.base.expressions.Attribute;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

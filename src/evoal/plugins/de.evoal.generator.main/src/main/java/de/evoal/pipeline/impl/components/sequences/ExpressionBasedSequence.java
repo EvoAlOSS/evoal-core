@@ -4,9 +4,9 @@ import javax.enterprise.context.Dependent;
 
 import de.evoal.core.api.languages.base.DynamicSwitch;
 import de.evoal.core.api.utils.AttributeHelper;
-import de.evoal.languages.model.base.Expression;
-import de.evoal.languages.model.base.Instance;
-import de.evoal.languages.model.ddl.DataDescription;
+import de.evoal.languages.model.base.expressions.Expression;
+import de.evoal.languages.model.base.expressions.Instance;
+import de.evoal.languages.model.base.definitions.DataDescription;
 import de.evoal.pipeline.api.sequence.Sequence;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;

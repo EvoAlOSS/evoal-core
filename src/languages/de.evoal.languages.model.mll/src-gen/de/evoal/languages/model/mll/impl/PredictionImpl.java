@@ -2,8 +2,6 @@
  */
 package de.evoal.languages.model.mll.impl;
 
-import de.evoal.languages.model.ddl.DataDescription;
-
 import de.evoal.languages.model.mll.BlockStatement;
 import de.evoal.languages.model.mll.MllPackage;
 import de.evoal.languages.model.mll.Prediction;
@@ -59,7 +57,7 @@ public class PredictionImpl extends MinimalEObjectImpl.Container implements Pred
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<DataDescription> inputs;
+	protected EList<de.evoal.languages.model.base.definitions.DataDescription> inputs;
 
 	/**
 	 * The cached value of the '{@link #getOutputs() <em>Outputs</em>}' reference list.
@@ -69,7 +67,7 @@ public class PredictionImpl extends MinimalEObjectImpl.Container implements Pred
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<DataDescription> outputs;
+	protected EList<de.evoal.languages.model.base.definitions.DataDescription> outputs;
 
 	/**
 	 * The cached value of the '{@link #getQuality() <em>Quality</em>}' containment reference.
@@ -146,9 +144,9 @@ public class PredictionImpl extends MinimalEObjectImpl.Container implements Pred
 	 * @generated
 	 */
 	@Override
-	public EList<DataDescription> getInputs() {
+	public EList<de.evoal.languages.model.base.definitions.DataDescription> getInputs() {
 		if (inputs == null) {
-			inputs = new EObjectResolvingEList<DataDescription>(DataDescription.class, this, MllPackage.PREDICTION__INPUTS);
+			inputs = new EObjectResolvingEList<de.evoal.languages.model.base.definitions.DataDescription>(de.evoal.languages.model.base.definitions.DataDescription.class, this, MllPackage.PREDICTION__INPUTS);
 		}
 		return inputs;
 	}
@@ -159,9 +157,9 @@ public class PredictionImpl extends MinimalEObjectImpl.Container implements Pred
 	 * @generated
 	 */
 	@Override
-	public EList<DataDescription> getOutputs() {
+	public EList<de.evoal.languages.model.base.definitions.DataDescription> getOutputs() {
 		if (outputs == null) {
-			outputs = new EObjectResolvingEList<DataDescription>(DataDescription.class, this, MllPackage.PREDICTION__OUTPUTS);
+			outputs = new EObjectResolvingEList<de.evoal.languages.model.base.definitions.DataDescription>(de.evoal.languages.model.base.definitions.DataDescription.class, this, MllPackage.PREDICTION__OUTPUTS);
 		}
 		return outputs;
 	}
@@ -260,11 +258,11 @@ public class PredictionImpl extends MinimalEObjectImpl.Container implements Pred
 				return;
 			case MllPackage.PREDICTION__INPUTS:
 				getInputs().clear();
-				getInputs().addAll((Collection<? extends DataDescription>)newValue);
+				getInputs().addAll((Collection<? extends de.evoal.languages.model.base.definitions.DataDescription>)newValue);
 				return;
 			case MllPackage.PREDICTION__OUTPUTS:
 				getOutputs().clear();
-				getOutputs().addAll((Collection<? extends DataDescription>)newValue);
+				getOutputs().addAll((Collection<? extends de.evoal.languages.model.base.definitions.DataDescription>)newValue);
 				return;
 			case MllPackage.PREDICTION__QUALITY:
 				setQuality((BlockStatement)newValue);

@@ -3,7 +3,8 @@
  */
 package de.evoal.languages.model.pipeline.impl;
 
-import de.evoal.languages.model.base.impl.LiteralImpl;
+import de.evoal.languages.model.base.expressions.impl.LiteralImpl;
+import de.evoal.languages.model.base.expressions.impl.ValueReferenceImpl;
 
 import de.evoal.languages.model.pipeline.PipelineDefinition;
 import de.evoal.languages.model.pipeline.PipelineDefinitionReference;

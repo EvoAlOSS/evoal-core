@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/de.evoal.languages.model.base/src-gen" editDirectory="/de.evoal.languages.base.model.edit/src-gen"
+    modelPluginID="de.evoal.languages.model.base" modelName="BaseLanguage" editPluginClass="de.evoal.languages.base.provider.BaseLanguageEditPlugin"
+    editorPluginClass="de.evoal.languages.base.presentation.BaseLanguageEditorPlugin"
+    rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" testsDirectory="/de.evoal.languages.base.model.tests/src-gen"
+    testSuiteClass="de.evoal.languages.base.tests.BaseLanguageAllTests" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="17.0" copyrightFields="false" usedGenPackages="definitions.genmodel#//definitions types.genmodel#//types"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>expressions.ecore</foreignModel>
+  <genPackages prefix="Expressions" basePackage="de.evoal.languages.model.base" disposableProviderFactory="true"
+      generateModelWizard="false" ecorePackage="expressions.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="expressions.ecore#//ComparisonOperator">
+      <genEnumLiterals ecoreEnumLiteral="expressions.ecore#//ComparisonOperator/GreaterThan"/>
+      <genEnumLiterals ecoreEnumLiteral="expressions.ecore#//ComparisonOperator/GreaterEqual"/>
+      <genEnumLiterals ecoreEnumLiteral="expressions.ecore#//ComparisonOperator/Equal"/>
+      <genEnumLiterals ecoreEnumLiteral="expressions.ecore#//ComparisonOperator/Unequal"/>
+      <genEnumLiterals ecoreEnumLiteral="expressions.ecore#//ComparisonOperator/LessEqual"/>
+      <genEnumLiterals ecoreEnumLiteral="expressions.ecore#//ComparisonOperator/LessThan"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="expressions.ecore#//AddOrSubtractOperator">
+      <genEnumLiterals ecoreEnumLiteral="expressions.ecore#//AddOrSubtractOperator/Add"/>
+      <genEnumLiterals ecoreEnumLiteral="expressions.ecore#//AddOrSubtractOperator/Subtract"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="expressions.ecore#//MultiplyDivideModuloOperator">
+      <genEnumLiterals ecoreEnumLiteral="expressions.ecore#//MultiplyDivideModuloOperator/Multiply"/>
+      <genEnumLiterals ecoreEnumLiteral="expressions.ecore#//MultiplyDivideModuloOperator/Divide"/>
+      <genEnumLiterals ecoreEnumLiteral="expressions.ecore#//MultiplyDivideModuloOperator/Modulo"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="expressions.ecore#//Factor">
+      <genEnumLiterals ecoreEnumLiteral="expressions.ecore#//Factor/Yotta"/>
+      <genEnumLiterals ecoreEnumLiteral="expressions.ecore#//Factor/Zetta"/>
+      <genEnumLiterals ecoreEnumLiteral="expressions.ecore#//Factor/Exa"/>
+      <genEnumLiterals ecoreEnumLiteral="expressions.ecore#//Factor/Peta"/>
+      <genEnumLiterals ecoreEnumLiteral="expressions.ecore#//Factor/Tera"/>
+      <genEnumLiterals ecoreEnumLiteral="expressions.ecore#//Factor/Giga"/>
+      <genEnumLiterals ecoreEnumLiteral="expressions.ecore#//Factor/Mega"/>
+      <genEnumLiterals ecoreEnumLiteral="expressions.ecore#//Factor/Kilo"/>
+      <genEnumLiterals ecoreEnumLiteral="expressions.ecore#//Factor/Hecto"/>
+      <genEnumLiterals ecoreEnumLiteral="expressions.ecore#//Factor/Deka"/>
+      <genEnumLiterals ecoreEnumLiteral="expressions.ecore#//Factor/None"/>
+      <genEnumLiterals ecoreEnumLiteral="expressions.ecore#//Factor/Deci"/>
+      <genEnumLiterals ecoreEnumLiteral="expressions.ecore#//Factor/Centi"/>
+      <genEnumLiterals ecoreEnumLiteral="expressions.ecore#//Factor/Milli"/>
+      <genEnumLiterals ecoreEnumLiteral="expressions.ecore#//Factor/Micro"/>
+      <genEnumLiterals ecoreEnumLiteral="expressions.ecore#//Factor/Nano"/>
+      <genEnumLiterals ecoreEnumLiteral="expressions.ecore#//Factor/Piko"/>
+      <genEnumLiterals ecoreEnumLiteral="expressions.ecore#//Factor/Femto"/>
+      <genEnumLiterals ecoreEnumLiteral="expressions.ecore#//Factor/Atto"/>
+      <genEnumLiterals ecoreEnumLiteral="expressions.ecore#//Factor/Zepto"/>
+      <genEnumLiterals ecoreEnumLiteral="expressions.ecore#//Factor/Yocto"/>
+    </genEnums>
+    <genClasses ecoreClass="expressions.ecore#//Value"/>
+    <genClasses image="false" ecoreClass="expressions.ecore#//Expression"/>
+    <genClasses ecoreClass="expressions.ecore#//OrExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference expressions.ecore#//OrExpression/subExpressions"/>
+    </genClasses>
+    <genClasses ecoreClass="expressions.ecore#//XorExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference expressions.ecore#//XorExpression/subExpressions"/>
+    </genClasses>
+    <genClasses ecoreClass="expressions.ecore#//AndExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference expressions.ecore#//AndExpression/subExpressions"/>
+    </genClasses>
+    <genClasses ecoreClass="expressions.ecore#//NotExpression">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute expressions.ecore#//NotExpression/negated"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference expressions.ecore#//NotExpression/operand"/>
+    </genClasses>
+    <genClasses ecoreClass="expressions.ecore#//ComparisonExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference expressions.ecore#//ComparisonExpression/leftOperand"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference expressions.ecore#//ComparisonExpression/comparison"/>
+    </genClasses>
+    <genClasses ecoreClass="expressions.ecore#//PartialComparisonExpression">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute expressions.ecore#//PartialComparisonExpression/operator"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference expressions.ecore#//PartialComparisonExpression/subExpression"/>
+    </genClasses>
+    <genClasses ecoreClass="expressions.ecore#//AddOrSubtractExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference expressions.ecore#//AddOrSubtractExpression/leftOperand"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute expressions.ecore#//AddOrSubtractExpression/operators"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference expressions.ecore#//AddOrSubtractExpression/operands"/>
+    </genClasses>
+    <genClasses ecoreClass="expressions.ecore#//MultiplyDivideModuloExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference expressions.ecore#//MultiplyDivideModuloExpression/leftOperand"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute expressions.ecore#//MultiplyDivideModuloExpression/operators"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference expressions.ecore#//MultiplyDivideModuloExpression/operands"/>
+    </genClasses>
+    <genClasses ecoreClass="expressions.ecore#//PowerOfExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference expressions.ecore#//PowerOfExpression/leftOperand"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference expressions.ecore#//PowerOfExpression/rightOperand"/>
+    </genClasses>
+    <genClasses ecoreClass="expressions.ecore#//UnaryAddOrSubtractExpression">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute expressions.ecore#//UnaryAddOrSubtractExpression/operators"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference expressions.ecore#//UnaryAddOrSubtractExpression/subExpression"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="expressions.ecore#//ConstantValue"/>
+    <genClasses image="false" ecoreClass="expressions.ecore#//Literal">
+      <genOperations ecoreOperation="expressions.ecore#//Literal/getValue"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="expressions.ecore#//NumberLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute expressions.ecore#//NumberLiteral/factor"/>
+      <genOperations ecoreOperation="expressions.ecore#//NumberLiteral/getValue"/>
+    </genClasses>
+    <genClasses ecoreClass="expressions.ecore#//IntegerLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute expressions.ecore#//IntegerLiteral/literal"/>
+      <genOperations ecoreOperation="expressions.ecore#//IntegerLiteral/getValue"
+          body="return (int)(literal * Math.pow(10, super.getFactor().getValue()));&#xA;"/>
+    </genClasses>
+    <genClasses ecoreClass="expressions.ecore#//RealLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute expressions.ecore#//RealLiteral/literal"/>
+      <genOperations ecoreOperation="expressions.ecore#//RealLiteral/getValue" body="return literal * Math.pow(10, super.getFactor().getValue());&#xA;"/>
+    </genClasses>
+    <genClasses ecoreClass="expressions.ecore#//StringLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute expressions.ecore#//StringLiteral/value"/>
+    </genClasses>
+    <genClasses ecoreClass="expressions.ecore#//Instance">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference expressions.ecore#//Instance/definition"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference expressions.ecore#//Instance/attributes"/>
+      <genOperations ecoreOperation="expressions.ecore#//Instance/findAttribute" body="return this.getAttributes()&#xA;                 .stream()&#xA;                 .filter(n -> name.equals(n.getDefinition().getName()))&#xA;                 .findFirst()&#xA;                 .orElse(null);">
+        <genParameters ecoreParameter="expressions.ecore#//Instance/findAttribute/name"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="expressions.ecore#//Attribute">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference expressions.ecore#//Attribute/definition"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference expressions.ecore#//Attribute/value"/>
+    </genClasses>
+    <genClasses ecoreClass="expressions.ecore#//ValueReference"/>
+    <genClasses ecoreClass="expressions.ecore#//DataReference">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference expressions.ecore#//DataReference/definition"/>
+    </genClasses>
+    <genClasses ecoreClass="expressions.ecore#//SelfReference"/>
+    <genClasses ecoreClass="expressions.ecore#//EnumLiteralReference">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference expressions.ecore#//EnumLiteralReference/definition"/>
+    </genClasses>
+    <genClasses ecoreClass="expressions.ecore#//ConstantReference">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference expressions.ecore#//ConstantReference/definition"/>
+    </genClasses>
+    <genClasses ecoreClass="expressions.ecore#//BooleanLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute expressions.ecore#//BooleanLiteral/value"/>
+      <genOperations ecoreOperation="expressions.ecore#//BooleanLiteral/getValue"
+          body="return isValue();"/>
+    </genClasses>
+    <genClasses ecoreClass="expressions.ecore#//Call">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference expressions.ecore#//Call/function"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference expressions.ecore#//Call/parameters"/>
+    </genClasses>
+    <genClasses ecoreClass="expressions.ecore#//Parantheses">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference expressions.ecore#//Parantheses/subExpression"/>
+    </genClasses>
+    <genClasses ecoreClass="expressions.ecore#//Array">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference expressions.ecore#//Array/values"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

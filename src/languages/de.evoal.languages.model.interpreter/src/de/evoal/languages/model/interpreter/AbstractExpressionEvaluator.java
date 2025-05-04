@@ -6,28 +6,10 @@ import org.eclipse.emf.ecore.EObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.evoal.languages.model.base.AddOrSubtractExpression;
-import de.evoal.languages.model.base.AddOrSubtractOperator;
-import de.evoal.languages.model.base.AndExpression;
-import de.evoal.languages.model.base.Array;
-import de.evoal.languages.model.base.Attribute;
-import de.evoal.languages.model.base.Call;
-import de.evoal.languages.model.base.ComparisonExpression;
-import de.evoal.languages.model.base.ConstantReference;
-import de.evoal.languages.model.base.Instance;
-import de.evoal.languages.model.base.Literal;
-import de.evoal.languages.model.base.MultiplyDivideModuloExpression;
-import de.evoal.languages.model.base.NotExpression;
-import de.evoal.languages.model.base.OrExpression;
-import de.evoal.languages.model.base.Parantheses;
-import de.evoal.languages.model.base.PartialComparisonExpression;
-import de.evoal.languages.model.base.PowerOfExpression;
-import de.evoal.languages.model.base.UnaryAddOrSubtractExpression;
-import de.evoal.languages.model.base.ValueReference;
-import de.evoal.languages.model.base.XorExpression;
-import de.evoal.languages.model.base.util.BaseSwitch;
+import de.evoal.languages.model.base.expressions.*;
+import de.evoal.languages.model.base.expressions.util.ExpressionsSwitch;
 
-public abstract class AbstractExpressionEvaluator extends BaseSwitch<Object> {
+public abstract class AbstractExpressionEvaluator extends ExpressionsSwitch<Object> {
 	/**
 	 * Logger instance.
 	 */
@@ -255,12 +237,8 @@ public abstract class AbstractExpressionEvaluator extends BaseSwitch<Object> {
 	
 	@Override
 	public Object caseValueReference(final ValueReference object) {
-		if(object instanceof de.evoal.languages.model.ddl.DataReference) {
-			return ((de.evoal.languages.model.ddl.DataReference)object).getDefinition();
-		} else if(object instanceof de.evoal.languages.model.instance.DataReference) {
-			return ((de.evoal.languages.model.instance.DataReference)object).getDefinition();
-		} else if(object instanceof de.evoal.languages.model.base.InstanceDefinitionReference) {
-			return ((de.evoal.languages.model.base.InstanceDefinitionReference)object).getDefinition();	
+		if(object instanceof DataReference) {
+			return ((DataReference)object).getDefinition();
 		}
 		throw new IllegalStateException("Not yet implemented: " + object.eClass() + " -- " + object);			
 	}

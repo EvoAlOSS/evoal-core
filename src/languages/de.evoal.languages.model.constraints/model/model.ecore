@@ -61,7 +61,7 @@
       <eParameters name="object" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="condition" lowerBound="1"
-        eType="ecore:EClass ../../de.evoal.languages.model.base/model/model.ecore#//Expression"
+        eType="ecore:EClass ../../de.evoal.languages.model.base/model/expressions.ecore#//Expression"
         containment="true"/>
   </eClassifiers>
 </ecore:EPackage>

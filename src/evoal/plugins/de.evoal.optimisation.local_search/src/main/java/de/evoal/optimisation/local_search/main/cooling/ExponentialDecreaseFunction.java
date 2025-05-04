@@ -5,7 +5,7 @@ import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.languages.AttributeEvaluator;
 import de.evoal.core.api.cdi.ConfigurationValue;
-import de.evoal.languages.model.base.Instance;
+import de.evoal.languages.model.base.expressions.Instance;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.enterprise.context.Dependent;

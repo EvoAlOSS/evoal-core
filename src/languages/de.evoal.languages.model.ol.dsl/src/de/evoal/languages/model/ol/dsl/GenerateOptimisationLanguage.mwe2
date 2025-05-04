@@ -30,6 +30,7 @@ Workflow {
                         referencedResource = "platform:/resource/de.evoal.languages.model.instance/model/model.genmodel"
                         referencedResource = "platform:/resource/de.evoal.languages.model.ol/model/model.genmodel"
                         referencedResource = "platform:/resource/de.evoal.languages.model.base/model/model.genmodel"
+                        referencedResource = "platform:/resource/de.evoal.languages.model.base/model/definitions.genmodel"
                         referencedResource = "platform:/resource/de.evoal.languages.model.ddl/model/model.genmodel"
 
 						fragment = ecore2xtext.Ecore2XtextValueConverterServiceFragment2 auto-inject {}

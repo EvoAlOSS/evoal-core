@@ -3,9 +3,10 @@
  */
 package de.evoal.languages.model.pipeline.impl;
 
-import de.evoal.languages.model.base.Literal;
+import de.evoal.languages.model.base.expressions.Literal;
 
 import de.evoal.languages.model.pipeline.ApplyStatement;
+import de.evoal.languages.model.pipeline.PipelineDefinitionReference;
 import de.evoal.languages.model.pipeline.PipelinePackage;
 
 import java.util.Collection;
@@ -77,7 +78,7 @@ public class ApplyStatementImpl extends StatementImpl implements ApplyStatement 
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Literal> pipelines;
+	protected EList<PipelineDefinitionReference> pipelines;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -172,9 +173,9 @@ public class ApplyStatementImpl extends StatementImpl implements ApplyStatement 
 	 * @generated
 	 */
 	@Override
-	public EList<Literal> getPipelines() {
+	public EList<PipelineDefinitionReference> getPipelines() {
 		if (pipelines == null) {
-			pipelines = new EObjectContainmentEList<Literal>(Literal.class, this, PipelinePackage.APPLY_STATEMENT__PIPELINES);
+			pipelines = new EObjectContainmentEList<PipelineDefinitionReference>(PipelineDefinitionReference.class, this, PipelinePackage.APPLY_STATEMENT__PIPELINES);
 		}
 		return pipelines;
 	}
@@ -230,7 +231,7 @@ public class ApplyStatementImpl extends StatementImpl implements ApplyStatement 
 				return;
 			case PipelinePackage.APPLY_STATEMENT__PIPELINES:
 				getPipelines().clear();
-				getPipelines().addAll((Collection<? extends Literal>)newValue);
+				getPipelines().addAll((Collection<? extends PipelineDefinitionReference>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

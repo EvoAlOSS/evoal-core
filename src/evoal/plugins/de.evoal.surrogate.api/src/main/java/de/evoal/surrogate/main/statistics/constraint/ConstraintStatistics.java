@@ -15,7 +15,7 @@ import de.evoal.optimisation.api.constraints.calculation.CalculationStrategy;
 import de.evoal.optimisation.api.constraints.model.ConstraintResult;
 import de.evoal.optimisation.api.constraints.model.Constraints;
 import de.evoal.optimisation.api.constraints.strategies.CalculationResult;
-import de.evoal.languages.model.base.Instance;
+import de.evoal.languages.model.base.expressions.Instance;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.Dependent;
 import lombok.SneakyThrows;

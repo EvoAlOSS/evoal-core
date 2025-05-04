@@ -2,7 +2,7 @@ package de.evoal.optimisation.api.statistics.writer;
 
 import de.evoal.core.api.cdi.EvoalComponent;
 import de.evoal.optimisation.api.model.Iteration;
-import de.evoal.languages.model.base.Instance;
+import de.evoal.languages.model.base.expressions.Instance;
 
 /**
  * Evaluation-specific data writer for evaluation results. The information

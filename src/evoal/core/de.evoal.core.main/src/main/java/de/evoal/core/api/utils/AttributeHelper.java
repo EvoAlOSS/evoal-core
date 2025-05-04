@@ -1,7 +1,8 @@
 package de.evoal.core.api.utils;
 
 import de.evoal.core.api.languages.AttributeEvaluator;
-import de.evoal.languages.model.base.*;
+import de.evoal.languages.model.base.definitions.AttributeDefinition;
+import de.evoal.languages.model.base.expressions.*;
 import de.evoal.languages.model.ol.AlgorithmInstance;
 import de.evoal.languages.model.ol.OptimisationModule;
 import de.evoal.languages.model.ol.ProblemInstance;

@@ -1,15 +1,13 @@
 package de.evoal.core.api.languages.base;
 
 import de.evoal.core.api.utils.Requirements;
-import de.evoal.languages.model.ddl.DataDescription;
-import de.evoal.languages.model.ddl.DataReference;
-import de.evoal.languages.model.ddl.SelfReference;
-import de.evoal.languages.model.base.*;
-import de.evoal.languages.model.base.util.BaseSwitch;
+import de.evoal.languages.model.base.definitions.DataDescription;
+import de.evoal.languages.model.base.expressions.*;
+import de.evoal.languages.model.base.expressions.util.ExpressionsSwitch;
 
 import java.util.Objects;
 
-public class ValueReferenceSwitch extends BaseSwitch<String> {
+public class ValueReferenceSwitch extends ExpressionsSwitch<String> {
     private final DataDescription context;
 
     public ValueReferenceSwitch(final DataDescription context) {

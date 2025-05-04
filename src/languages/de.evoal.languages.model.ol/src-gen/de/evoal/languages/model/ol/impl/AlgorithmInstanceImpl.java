@@ -3,9 +3,9 @@
  */
 package de.evoal.languages.model.ol.impl;
 
-import de.evoal.languages.model.base.Array;
+import de.evoal.languages.model.base.expressions.Array;
 
-import de.evoal.languages.model.base.impl.InstanceImpl;
+import de.evoal.languages.model.base.expressions.impl.InstanceImpl;
 
 import de.evoal.languages.model.ol.AlgorithmInstance;
 import de.evoal.languages.model.ol.OLPackage;

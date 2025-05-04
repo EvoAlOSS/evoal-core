@@ -6,10 +6,10 @@ package de.evoal.languages.model.ol.dsl.ui.labeling;
 
 import com.google.inject.Inject;
 
-import de.evoal.languages.model.base.Array;
-import de.evoal.languages.model.base.Attribute;
-import de.evoal.languages.model.base.Instance;
-import de.evoal.languages.model.base.Literal;
+import de.evoal.languages.model.base.expressions.Array;
+import de.evoal.languages.model.base.expressions.Attribute;
+import de.evoal.languages.model.base.expressions.Instance;
+import de.evoal.languages.model.base.expressions.Literal;
 import de.evoal.languages.model.ol.OptimisationModule;
 
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;

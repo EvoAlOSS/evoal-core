@@ -25,7 +25,7 @@ import de.evoal.optimisation.pso.api.BoundaryType;
 import de.evoal.optimisation.pso.api.optimiser.Mover;
 import de.evoal.optimisation.pso.api.swarm.Particle;
 import de.evoal.optimisation.pso.api.swarm.State;
-import de.evoal.languages.model.base.Instance;
+import de.evoal.languages.model.base.expressions.Instance;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;

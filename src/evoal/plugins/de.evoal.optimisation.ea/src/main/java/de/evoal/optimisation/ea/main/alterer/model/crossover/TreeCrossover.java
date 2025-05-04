@@ -3,7 +3,7 @@ package de.evoal.optimisation.ea.main.alterer.model.crossover;
 import de.evoal.core.api.utils.Requirements;
 import de.evoal.optimisation.ea.api.codec.model.ModelChromosome;
 import de.evoal.optimisation.ea.api.codec.model.ModelGene;
-import de.evoal.languages.model.base.Instance;
+import de.evoal.languages.model.base.expressions.Instance;
 import io.jenetics.Genotype;
 import io.jenetics.Phenotype;
 import io.jenetics.Recombinator;

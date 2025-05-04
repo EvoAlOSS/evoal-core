@@ -6,7 +6,7 @@ import java.util.function.Function;
 
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.utils.Requirements;
-import de.evoal.languages.model.ddl.BaseDataDescription;
+import de.evoal.languages.model.base.definitions.BaseDataDescription;
 import de.evoal.surrogate.api.configuration.Parameter;
 import de.evoal.surrogate.api.configuration.PartialFunctionConfiguration;
 import de.evoal.surrogate.api.function.AbstractPartialSurrogateFunction;

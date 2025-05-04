@@ -2,8 +2,6 @@
  */
 package de.evoal.languages.model.mll;
 
-import de.evoal.languages.model.ddl.DataDescription;
-
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EObject;
@@ -52,7 +50,7 @@ public interface SurrogateDefinition extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Inputs</b></em>' reference list.
-	 * The list contents are of type {@link de.evoal.languages.model.ddl.DataDescription}.
+	 * The list contents are of type {@link de.evoal.languages.model.base.definitions.DataDescription}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Inputs</em>' reference list.
@@ -61,11 +59,11 @@ public interface SurrogateDefinition extends EObject {
 	 *        annotation="http://www.eclipse.org/OCL/Collection nullFree='false'"
 	 * @generated
 	 */
-	EList<DataDescription> getInputs();
+	EList<de.evoal.languages.model.base.definitions.DataDescription> getInputs();
 
 	/**
 	 * Returns the value of the '<em><b>Outputs</b></em>' reference list.
-	 * The list contents are of type {@link de.evoal.languages.model.ddl.DataDescription}.
+	 * The list contents are of type {@link de.evoal.languages.model.base.definitions.DataDescription}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Outputs</em>' reference list.
@@ -74,7 +72,7 @@ public interface SurrogateDefinition extends EObject {
 	 *        annotation="http://www.eclipse.org/OCL/Collection nullFree='false'"
 	 * @generated
 	 */
-	EList<DataDescription> getOutputs();
+	EList<de.evoal.languages.model.base.definitions.DataDescription> getOutputs();
 
 	/**
 	 * Returns the value of the '<em><b>Layers</b></em>' containment reference list.

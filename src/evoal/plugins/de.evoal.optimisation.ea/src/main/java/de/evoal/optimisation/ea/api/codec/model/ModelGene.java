@@ -1,7 +1,10 @@
 package de.evoal.optimisation.ea.api.codec.model;
 
+import de.evoal.languages.model.base.types.BooleanType;
+import de.evoal.languages.model.base.types.IntType;
+import de.evoal.languages.model.base.types.Type;
 import de.evoal.optimisation.ea.main.codec.model.ModelBuilder;
-import de.evoal.languages.model.base.*;
+import de.evoal.languages.model.base.expressions.*;
 import io.jenetics.Gene;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 

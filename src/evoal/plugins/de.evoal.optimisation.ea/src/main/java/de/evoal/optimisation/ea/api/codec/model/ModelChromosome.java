@@ -1,7 +1,7 @@
 package de.evoal.optimisation.ea.api.codec.model;
 
 import de.evoal.optimisation.ea.main.codec.model.ModelBuilder;
-import de.evoal.languages.model.base.Instance;
+import de.evoal.languages.model.base.expressions.Instance;
 import io.jenetics.AbstractChromosome;
 import io.jenetics.Chromosome;
 import io.jenetics.util.ISeq;

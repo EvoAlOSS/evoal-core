@@ -1,7 +1,7 @@
 package de.evoal.core.api.languages.base;
 
+import de.evoal.languages.model.base.expressions.Call;
 import de.evoal.languages.model.ddl.dsl.DataDescriptionLanguageStandaloneSetup;
-import de.evoal.languages.model.base.Call;
 import org.eclipse.xtext.serializer.impl.Serializer;
 import org.slf4j.Logger;
 

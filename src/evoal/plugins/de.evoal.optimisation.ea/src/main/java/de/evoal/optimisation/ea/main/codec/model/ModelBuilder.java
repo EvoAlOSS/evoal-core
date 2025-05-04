@@ -1,7 +1,10 @@
 package de.evoal.optimisation.ea.main.codec.model;
 
+import de.evoal.languages.model.base.definitions.AttributeDefinition;
+import de.evoal.languages.model.base.definitions.TypeDefinition;
+import de.evoal.languages.model.base.types.*;
 import de.evoal.optimisation.ea.api.codec.model.ModelGene;
-import de.evoal.languages.model.base.*;
+import de.evoal.languages.model.base.expressions.*;
 import io.jenetics.util.RandomRegistry;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
@@ -11,7 +14,7 @@ import java.util.stream.Stream;
 
 @Slf4j
 public record ModelBuilder(TypeDefinition root, Map<TypeDefinition, Set<TypeDefinition>> subtypes, Map<AttributeDefinition, Set<TypeDefinition>> attributes) {
-    private static final BaseFactory FACTORY = BaseFactory.eINSTANCE;
+    private static final ExpressionsFactory FACTORY = ExpressionsFactory.eINSTANCE;
 
     public Instance random() {
         return random(root);

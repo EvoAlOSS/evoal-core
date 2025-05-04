@@ -2,7 +2,7 @@ package de.evoal.pipeline.impl.components.benchmarks;
 
 import de.evoal.core.api.languages.AttributeEvaluator;
 import de.evoal.core.api.utils.InitializationException;
-import de.evoal.languages.model.base.Instance;
+import de.evoal.languages.model.base.expressions.Instance;
 import de.evoal.pipeline.api.model.ComponentImpl;
 import de.evoal.pipeline.api.model.TypedEObject;
 import lombok.NonNull;

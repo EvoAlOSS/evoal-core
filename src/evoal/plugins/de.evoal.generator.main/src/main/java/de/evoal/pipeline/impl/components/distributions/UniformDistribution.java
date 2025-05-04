@@ -1,7 +1,7 @@
 package de.evoal.pipeline.impl.components.distributions;
 
 import de.evoal.core.api.utils.AttributeHelper;
-import de.evoal.languages.model.base.Instance;
+import de.evoal.languages.model.base.expressions.Instance;
 import de.evoal.pipeline.api.distribution.Distribution;
 import org.apache.commons.math3.distribution.RealDistribution;
 

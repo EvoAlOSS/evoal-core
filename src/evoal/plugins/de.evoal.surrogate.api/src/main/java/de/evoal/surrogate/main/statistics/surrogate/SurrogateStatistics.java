@@ -15,7 +15,7 @@ import de.evoal.optimisation.api.statistics.io.WriterException;
 import de.evoal.optimisation.api.statistics.writer.AbstractCandidateStatisticsWriter;
 import de.evoal.optimisation.api.statistics.writer.Column;
 import de.evoal.optimisation.api.statistics.writer.ColumnType;
-import de.evoal.languages.model.base.Instance;
+import de.evoal.languages.model.base.expressions.Instance;
 import de.evoal.surrogate.api.function.SurrogateFunction;
 import lombok.extern.slf4j.Slf4j;
 

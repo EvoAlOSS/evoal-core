@@ -6,7 +6,7 @@ import de.evoal.core.api.properties.PropertySpecification;
 import de.evoal.core.api.properties.io.PropertiesReader;
 import de.evoal.core.api.utils.EvoalIOException;
 import de.evoal.core.api.utils.Requirements;
-import de.evoal.languages.model.ddl.BaseDataDescription;
+import de.evoal.languages.model.base.definitions.BaseDataDescription;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.csv.CSVFormat;

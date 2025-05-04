@@ -1,7 +1,7 @@
 package de.evoal.core.api.utils;
 
 import de.evoal.core.api.properties.Properties;
-import de.evoal.languages.model.ddl.RepresentationType;
+import de.evoal.languages.model.base.definitions.RepresentationType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -1,6 +1,6 @@
 package de.evoal.core.api.properties;
 
-import de.evoal.languages.model.base.Definition;
+import de.evoal.languages.model.base.definitions.Definition;
 import lombok.NonNull;
 
 import java.util.Objects;

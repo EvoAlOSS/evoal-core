@@ -3,7 +3,7 @@
  */
 package de.evoal.languages.model.pipeline;
 
-import de.evoal.languages.model.base.Literal;
+import de.evoal.languages.model.base.expressions.ValueReference;
 
 /**
  * <!-- begin-user-doc -->
@@ -21,7 +21,7 @@ import de.evoal.languages.model.base.Literal;
  * @model
  * @generated
  */
-public interface VariableReference extends Literal {
+public interface VariableReference extends ValueReference {
 	/**
 	 * Returns the value of the '<em><b>Loop</b></em>' reference.
 	 * <!-- begin-user-doc -->

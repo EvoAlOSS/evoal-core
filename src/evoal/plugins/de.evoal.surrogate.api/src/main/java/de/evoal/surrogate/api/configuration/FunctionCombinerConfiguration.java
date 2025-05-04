@@ -2,7 +2,7 @@ package de.evoal.surrogate.api.configuration;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import de.evoal.core.api.languages.AttributeEvaluator;
-import de.evoal.languages.model.ddl.DataDescription;
+import de.evoal.languages.model.base.definitions.DataDescription;
 import de.evoal.languages.model.mll.PartialSurrogateFunctionDefinition;
 import de.evoal.languages.model.mll.SurrogateLayerDefinition;
 import de.evoal.surrogate.api.function.FunctionCombiner;

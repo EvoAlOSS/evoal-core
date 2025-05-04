@@ -4,7 +4,7 @@
     modelPluginID="de.evoal.languages.model.ol" forceOverwrite="true" modelName="ol"
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
-    runtimeVersion="2.20" usedGenPackages="../../de.evoal.languages.model.base/model/model.genmodel#//base ../../de.evoal.languages.model.ddl/model/model.genmodel#//ddl ../../de.evoal.languages.model.instance/model/model.genmodel#//instance">
+    runtimeVersion="2.20" usedGenPackages="../../de.evoal.languages.model.base/model/model.genmodel#//base ../../de.evoal.languages.model.base/model/expressions.genmodel#//expressions ../../de.evoal.languages.model.base/model/definitions.genmodel#//definitions ../../de.evoal.languages.model.base/model/types.genmodel#//types">
   <foreignModel>model.ecore</foreignModel>
   <genPackages prefix="OL" basePackage="de.evoal.languages.model" disposableProviderFactory="true"
       fileExtensions="ol" ecorePackage="model.ecore#/">

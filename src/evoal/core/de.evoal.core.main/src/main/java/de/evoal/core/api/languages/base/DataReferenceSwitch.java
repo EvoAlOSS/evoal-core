@@ -1,14 +1,12 @@
 package de.evoal.core.api.languages.base;
 
-import de.evoal.languages.model.ddl.DataDescription;
-import de.evoal.languages.model.ddl.DataReference;
-import de.evoal.languages.model.ddl.SelfReference;
-import de.evoal.languages.model.base.*;
-import de.evoal.languages.model.base.util.BaseSwitch;
+import de.evoal.languages.model.base.definitions.*;
+import de.evoal.languages.model.base.expressions.*;
+import de.evoal.languages.model.base.expressions.util.ExpressionsSwitch;
 
 import java.util.Objects;
 
-public class DataReferenceSwitch extends BaseSwitch<DataDescription> {
+public class DataReferenceSwitch extends ExpressionsSwitch<DataDescription> {
     @Override
     public DataDescription caseOrExpression(final OrExpression object) {
         Objects.equals(object.getSubExpressions().size(), 1);

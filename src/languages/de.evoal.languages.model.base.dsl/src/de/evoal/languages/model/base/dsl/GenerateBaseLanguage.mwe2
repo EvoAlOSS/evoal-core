@@ -34,6 +34,9 @@ Workflow {
 			name = "de.evoal.languages.model.base.dsl.BaseLanguage"
 			fileExtensions = "base"
 			referencedResource = "platform:/resource/de.evoal.languages.model.base/model/model.genmodel"
+			referencedResource = "platform:/resource/de.evoal.languages.model.base/model/types.genmodel"
+			referencedResource = "platform:/resource/de.evoal.languages.model.base/model/expressions.genmodel"
+			referencedResource = "platform:/resource/de.evoal.languages.model.base/model/definitions.genmodel"
 			
 			fragment = ecore2xtext.Ecore2XtextValueConverterServiceFragment2 auto-inject {}
 			fragment = scoping.ImportNamespacesScopingFragment2 auto-inject {}

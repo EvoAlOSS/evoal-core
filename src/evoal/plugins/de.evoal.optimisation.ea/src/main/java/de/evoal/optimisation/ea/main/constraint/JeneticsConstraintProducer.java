@@ -15,7 +15,7 @@ import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.optimisation.main.constraints.constraint.utils.ConfigurationUtils;
 import de.evoal.optimisation.main.constraints.constraint.strategies.constraint.EpsilonStrategy;
 import de.evoal.optimisation.main.constraints.constraint.strategies.calculations.NormalCalculation;
-import de.evoal.languages.model.base.*;
+import de.evoal.languages.model.base.expressions.*;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
