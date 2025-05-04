@@ -46,6 +46,8 @@ import de.evoal.languages.model.base.types.RealType;
 import de.evoal.languages.model.base.types.StringType;
 import de.evoal.languages.model.base.types.TypesPackage;
 import de.evoal.languages.model.base.types.VoidType;
+import de.evoal.languages.model.instance.InstanceModule;
+import de.evoal.languages.model.instance.InstancePackage;
 import de.evoal.languages.model.instance.dsl.services.InstanceLanguageGrammarAccess;
 import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
@@ -157,6 +159,12 @@ public class InstanceLanguageSemanticSequencer extends BaseLanguageSemanticSeque
 				sequence_XorExpressionRule(context, (XorExpression) semanticObject); 
 				return; 
 			}
+		else if (epackage == InstancePackage.eINSTANCE)
+			switch (semanticObject.eClass().getClassifierID()) {
+			case InstancePackage.INSTANCE_MODULE:
+				sequence_InstanceModuleRule(context, (InstanceModule) semanticObject); 
+				return; 
+			}
 		else if (epackage == TypesPackage.eINSTANCE)
 			switch (semanticObject.eClass().getClassifierID()) {
 			case TypesPackage.ARRAY_TYPE:
@@ -197,16 +205,13 @@ public class InstanceLanguageSemanticSequencer extends BaseLanguageSemanticSeque
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     InstanceLiteralRule returns Instance
-	 *     ValueRule returns Instance
-	 *     LiteralRule returns Instance
-	 *     ConstraintRule returns Instance
+	 *     InstanceModuleRule returns InstanceModule
 	 *
 	 * Constraint:
-	 *     (definition=[TypeDefinition|QualifiedName] attributes+=AttributeRule*)
+	 *     (imports+=ImportRule* (instances+=InstanceLiteralRule instances+=InstanceLiteralRule*)?)
 	 * </pre>
 	 */
-	protected void sequence_InstanceLiteralRule(ISerializationContext context, Instance semanticObject) {
+	protected void sequence_InstanceModuleRule(ISerializationContext context, InstanceModule semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

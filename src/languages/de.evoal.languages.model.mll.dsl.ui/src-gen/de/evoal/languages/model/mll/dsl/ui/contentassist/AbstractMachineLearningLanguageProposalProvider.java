@@ -4,7 +4,7 @@
  */
 package de.evoal.languages.model.mll.dsl.ui.contentassist;
 
-import de.evoal.languages.model.instance.dsl.ui.contentassist.InstanceLanguageProposalProvider;
+import de.evoal.languages.model.base.dsl.ui.contentassist.BaseLanguageProposalProvider;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
@@ -13,11 +13,11 @@ import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 
 /**
- * Represents a generated, default implementation of superclass {@link InstanceLanguageProposalProvider}.
+ * Represents a generated, default implementation of superclass {@link BaseLanguageProposalProvider}.
  * Methods are dynamically dispatched on the first parameter, i.e., you can override them 
  * with a more concrete subtype. 
  */
-public abstract class AbstractMachineLearningLanguageProposalProvider extends InstanceLanguageProposalProvider {
+public abstract class AbstractMachineLearningLanguageProposalProvider extends BaseLanguageProposalProvider {
 
 	public void completeMachineLearningModuleRule_Imports(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		completeRuleCall(((RuleCall)assignment.getTerminal()), context, acceptor);

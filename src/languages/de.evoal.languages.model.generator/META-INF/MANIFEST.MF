@@ -9,7 +9,6 @@ Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
- de.evoal.languages.model.instance;bundle-version="1.0.0",
  de.evoal.languages.model.base;bundle-version="1.0.0",
  de.evoal.languages.model.ddl;bundle-version="1.0.0"
 Eclipse-LazyStart: true

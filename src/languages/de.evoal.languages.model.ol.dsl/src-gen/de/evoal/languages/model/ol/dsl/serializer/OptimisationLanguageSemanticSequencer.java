@@ -12,6 +12,7 @@ import de.evoal.languages.model.base.definitions.ConstantDefinition;
 import de.evoal.languages.model.base.definitions.DefinitionsPackage;
 import de.evoal.languages.model.base.definitions.FunctionDefinition;
 import de.evoal.languages.model.base.definitions.TypeDefinition;
+import de.evoal.languages.model.base.dsl.serializer.BaseLanguageSemanticSequencer;
 import de.evoal.languages.model.base.expressions.AddOrSubtractExpression;
 import de.evoal.languages.model.base.expressions.AndExpression;
 import de.evoal.languages.model.base.expressions.Array;
@@ -45,7 +46,6 @@ import de.evoal.languages.model.base.types.RealType;
 import de.evoal.languages.model.base.types.StringType;
 import de.evoal.languages.model.base.types.TypesPackage;
 import de.evoal.languages.model.base.types.VoidType;
-import de.evoal.languages.model.instance.dsl.serializer.InstanceLanguageSemanticSequencer;
 import de.evoal.languages.model.ol.AlgorithmInstance;
 import de.evoal.languages.model.ol.OLPackage;
 import de.evoal.languages.model.ol.OptimisationModule;
@@ -60,7 +60,7 @@ import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.serializer.ISerializationContext;
 
 @SuppressWarnings("all")
-public class OptimisationLanguageSemanticSequencer extends InstanceLanguageSemanticSequencer {
+public class OptimisationLanguageSemanticSequencer extends BaseLanguageSemanticSequencer {
 
 	@Inject
 	private OptimisationLanguageGrammarAccess grammarAccess;

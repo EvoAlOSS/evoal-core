@@ -6,11 +6,11 @@ import "https://www.evoal.de/languages/ddl/1.0.0" as ddl
 import "https://www.evoal.de/languages/base/definitions/1.0.0" as defs
 import "https://www.evoal.de/languages/base/expressions/1.0.0" as expr
 
-
-// We do not need the instance language anymore ... This is only there for making Xtext happy
-@Override
-InstanceLiteralRule returns expr::Instance:
-	definition = [defs::TypeDefinition|QualifiedName] '{'
-	  attributes += AttributeRule*
-	'}'
+InstanceModuleRule returns InstanceModule:
+	{InstanceModule}
+	(imports += ImportRule)*
+	
+	'instances' '=' '['
+	  ('instance' instances += InstanceLiteralRule (',' 'instance' instances += InstanceLiteralRule)*)?
+	']' ';'	
 ;

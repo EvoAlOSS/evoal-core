@@ -7,7 +7,6 @@ package de.evoal.languages.model.ol.dsl.services;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import de.evoal.languages.model.base.dsl.services.BaseLanguageGrammarAccess;
-import de.evoal.languages.model.instance.dsl.services.InstanceLanguageGrammarAccess;
 import java.util.List;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
@@ -270,19 +269,15 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 	
 	private final Grammar grammar;
 	
-	private final InstanceLanguageGrammarAccess gaInstanceLanguage;
-	
 	private final BaseLanguageGrammarAccess gaBaseLanguage;
 	
 	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public OptimisationLanguageGrammarAccess(GrammarProvider grammarProvider,
-			InstanceLanguageGrammarAccess gaInstanceLanguage,
 			BaseLanguageGrammarAccess gaBaseLanguage,
 			TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
-		this.gaInstanceLanguage = gaInstanceLanguage;
 		this.gaBaseLanguage = gaBaseLanguage;
 		this.gaTerminals = gaTerminals;
 		this.pOptimisationModelRule = new OptimisationModelRuleElements();
@@ -311,10 +306,6 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 		return grammar;
 	}
 	
-	
-	public InstanceLanguageGrammarAccess getInstanceLanguageGrammarAccess() {
-		return gaInstanceLanguage;
-	}
 	
 	public BaseLanguageGrammarAccess getBaseLanguageGrammarAccess() {
 		return gaBaseLanguage;
@@ -366,21 +357,6 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 	
 	public ParserRule getAlgorithmInstanceRuleRule() {
 		return getAlgorithmInstanceRuleAccess().getRule();
-	}
-	
-	//// We do not need the instance language anymore ... This is only there for making Xtext happy
-	//@Override
-	//InstanceLiteralRule returns expr::Instance:
-	//    definition = [defs::TypeDefinition|QualifiedName] '{'
-	//      attributes += AttributeRule*
-	//    '}'
-	//;
-	public InstanceLanguageGrammarAccess.InstanceLiteralRuleElements getInstanceLiteralRuleAccess() {
-		return gaInstanceLanguage.getInstanceLiteralRuleAccess();
-	}
-	
-	public ParserRule getInstanceLiteralRuleRule() {
-		return getInstanceLiteralRuleAccess().getRule();
 	}
 	
 	//ExpressionRule returns Expression:
@@ -631,6 +607,19 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 	
 	public ParserRule getLiteralRuleRule() {
 		return getLiteralRuleAccess().getRule();
+	}
+	
+	//InstanceLiteralRule returns Instance:
+	//    definition = [TypeDefinition|QualifiedName] '{'
+	//      attributes += AttributeRule*
+	//    '}'
+	//;
+	public BaseLanguageGrammarAccess.InstanceLiteralRuleElements getInstanceLiteralRuleAccess() {
+		return gaBaseLanguage.getInstanceLiteralRuleAccess();
+	}
+	
+	public ParserRule getInstanceLiteralRuleRule() {
+		return getInstanceLiteralRuleAccess().getRule();
 	}
 	
 	//AttributeRule returns Attribute:

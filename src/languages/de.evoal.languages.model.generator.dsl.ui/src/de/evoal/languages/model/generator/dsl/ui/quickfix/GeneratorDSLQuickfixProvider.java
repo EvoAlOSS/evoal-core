@@ -3,14 +3,14 @@
  */
 package de.evoal.languages.model.generator.dsl.ui.quickfix;
 
-import de.evoal.languages.model.instance.dsl.ui.quickfix.InstanceLanguageQuickfixProvider;
+import de.evoal.languages.model.base.dsl.ui.quickfix.BaseLanguageQuickfixProvider;
 
 /**
  * Custom quickfixes.
  *
  * See https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#quick-fixes
  */
-public class GeneratorDSLQuickfixProvider extends InstanceLanguageQuickfixProvider {
+public class GeneratorDSLQuickfixProvider extends BaseLanguageQuickfixProvider {
 
 //	@Fix(GeneratorDSLValidator.INVALID_NAME)
 //	public void capitalizeName(final Issue issue, IssueResolutionAcceptor acceptor) {

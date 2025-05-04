@@ -3,7 +3,6 @@ module de.evoal.optimisation.local_search {
     requires de.evoal.core.main;
     requires de.evoal.generator.main;
     requires de.evoal.languages.model.generator;
-    requires de.evoal.languages.model.instance;
     requires de.evoal.languages.model.base;
     requires de.evoal.languages.model.ddl;
     requires de.evoal.languages.model.utils;

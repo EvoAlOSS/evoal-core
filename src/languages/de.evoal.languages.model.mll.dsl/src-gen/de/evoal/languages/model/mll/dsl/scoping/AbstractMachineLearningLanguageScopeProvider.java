@@ -4,7 +4,7 @@
  */
 package de.evoal.languages.model.mll.dsl.scoping;
 
-import de.evoal.languages.model.instance.dsl.scoping.InstanceLanguageScopeProvider;
+import de.evoal.languages.model.base.dsl.scoping.BaseLanguageScopeProvider;
 
-public abstract class AbstractMachineLearningLanguageScopeProvider extends InstanceLanguageScopeProvider {
+public abstract class AbstractMachineLearningLanguageScopeProvider extends BaseLanguageScopeProvider {
 }

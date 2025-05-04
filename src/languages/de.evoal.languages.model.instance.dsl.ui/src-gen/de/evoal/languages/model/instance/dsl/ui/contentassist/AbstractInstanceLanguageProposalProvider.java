@@ -5,6 +5,11 @@
 package de.evoal.languages.model.instance.dsl.ui.contentassist;
 
 import de.evoal.languages.model.base.dsl.ui.contentassist.BaseLanguageProposalProvider;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
+import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 
 /**
  * Represents a generated, default implementation of superclass {@link BaseLanguageProposalProvider}.
@@ -13,4 +18,14 @@ import de.evoal.languages.model.base.dsl.ui.contentassist.BaseLanguageProposalPr
  */
 public abstract class AbstractInstanceLanguageProposalProvider extends BaseLanguageProposalProvider {
 
+	public void completeInstanceModuleRule_Imports(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		completeRuleCall(((RuleCall)assignment.getTerminal()), context, acceptor);
+	}
+	public void completeInstanceModuleRule_Instances(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		completeRuleCall(((RuleCall)assignment.getTerminal()), context, acceptor);
+	}
+
+	public void complete_InstanceModuleRule(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		// subclasses may override
+	}
 }

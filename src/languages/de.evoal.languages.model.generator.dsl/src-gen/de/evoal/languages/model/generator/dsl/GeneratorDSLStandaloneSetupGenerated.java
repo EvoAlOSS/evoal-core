@@ -5,7 +5,7 @@ package de.evoal.languages.model.generator.dsl;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import de.evoal.languages.model.instance.dsl.InstanceLanguageStandaloneSetup;
+import de.evoal.languages.model.base.dsl.BaseLanguageStandaloneSetup;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.resource.IResourceFactory;
@@ -16,7 +16,7 @@ public class GeneratorDSLStandaloneSetupGenerated implements ISetup {
 
 	@Override
 	public Injector createInjectorAndDoEMFRegistration() {
-		InstanceLanguageStandaloneSetup.doSetup();
+		BaseLanguageStandaloneSetup.doSetup();
 
 		Injector injector = createInjector();
 		register(injector);

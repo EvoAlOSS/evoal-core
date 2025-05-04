@@ -3,7 +3,7 @@
  */
 package de.evoal.languages.model.generator.dsl.scoping;
 
-import de.evoal.languages.model.instance.dsl.scoping.InstanceLanguageScopeProvider;
+import de.evoal.languages.model.base.dsl.scoping.BaseLanguageScopeProvider;
 
-public abstract class AbstractGeneratorDSLScopeProvider extends InstanceLanguageScopeProvider {
+public abstract class AbstractGeneratorDSLScopeProvider extends BaseLanguageScopeProvider {
 }

@@ -4,12 +4,6 @@
  */
 package de.evoal.languages.model.ol.dsl.ui.contentassist;
 
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext;
-import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
-
 /**
  * See https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#content-assist
  * on how to customize the content assistant.

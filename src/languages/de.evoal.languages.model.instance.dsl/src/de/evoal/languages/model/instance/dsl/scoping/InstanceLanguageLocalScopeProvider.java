@@ -12,24 +12,25 @@ import de.evoal.languages.model.base.expressions.ExpressionsPackage;
 import de.evoal.languages.model.utils.scoping.WildcardEnabledLocalScopeProvider;
 
 public class InstanceLanguageLocalScopeProvider extends WildcardEnabledLocalScopeProvider {
-	
-	private final static EClass dataReference = ExpressionsPackage.eINSTANCE.getDataReference();
-	private final static EReference dataDefinition = ExpressionsPackage.eINSTANCE.getDataReference_Definition();
-	private final static EClass instance = ExpressionsPackage.eINSTANCE.getInstance();
-	private final static EReference instanceDefinition = ExpressionsPackage.eINSTANCE.getInstance_Definition();
-	private final static EReference attributeDefinition = ExpressionsPackage.eINSTANCE.getAttribute_Definition();
+	private static EClass instance = ExpressionsPackage.eINSTANCE.getInstance();
+	private static EReference attributeDefinition = ExpressionsPackage.eINSTANCE.getAttribute_Definition();
 
 	@Inject
-	private BaseLanguageLocalScopeProvider provider;
+	private BaseLanguageLocalScopeProvider instanceScopes;
+
 
 	@Override
-	public IScope getScope(EObject context, EReference reference) {
-		if(instance.isSuperTypeOf(context.eClass()) && attributeDefinition.equals(reference)) {
-			return provider.getScope(context, reference);
-		} else if(dataReference.equals(context.eClass()) && dataDefinition.equals(reference)) {
-			return getResourceScope(IScope.NULLSCOPE, context, reference);
-		} else if(instanceDefinition.equals(reference)) {
-			return provider.getScope(context, reference);
+	public IScope getScope(final EObject context, final EReference reference) {
+		if(instance.isSuperTypeOf(context.eClass()) && (attributeDefinition.equals(reference))) {
+			// inject fields of types
+			IScope typeScope = IScope.NULLSCOPE;
+				try {
+					typeScope = instanceScopes.getScope(context, reference);
+				} catch(final NullPointerException e) {
+					System.err.println(e);
+				}
+			
+			return getLocalElementsScope(typeScope, context, reference);
 		}
 
 		return super.getScope(context, reference);

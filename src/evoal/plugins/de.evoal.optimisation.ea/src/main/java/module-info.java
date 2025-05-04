@@ -19,7 +19,6 @@ module de.evoal.optimisation.ea {
     requires de.evoal.languages.model.dl;
     requires de.evoal.languages.model.ddl;
     requires de.evoal.languages.model.base;
-    requires de.evoal.languages.model.instance;
     requires de.evoal.languages.model.ol;
 
     requires de.evoal.core.main;

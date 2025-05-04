@@ -10,7 +10,6 @@ module de.evoal.surrogate.adaption {
     requires commons.math3;
 
     requires de.evoal.languages.model.base;
-    requires de.evoal.languages.model.instance;
 
     requires de.evoal.core.main;
     requires de.evoal.optimisation.api;

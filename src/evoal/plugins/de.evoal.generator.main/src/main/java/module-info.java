@@ -20,7 +20,6 @@ module de.evoal.generator.main {
     requires de.evoal.languages.model.generator;
     requires de.evoal.languages.model.pipeline;
     requires de.evoal.languages.model.dynamic;
-    requires de.evoal.languages.model.instance;
 
     requires de.evoal.languages.model.ddl.dsl;
     requires de.evoal.languages.model.dl.dsl;

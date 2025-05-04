@@ -12,6 +12,7 @@ import de.evoal.languages.model.base.definitions.ConstantDefinition;
 import de.evoal.languages.model.base.definitions.DefinitionsPackage;
 import de.evoal.languages.model.base.definitions.FunctionDefinition;
 import de.evoal.languages.model.base.definitions.TypeDefinition;
+import de.evoal.languages.model.base.dsl.serializer.BaseLanguageSemanticSequencer;
 import de.evoal.languages.model.base.expressions.AddOrSubtractExpression;
 import de.evoal.languages.model.base.expressions.AndExpression;
 import de.evoal.languages.model.base.expressions.Array;
@@ -45,7 +46,6 @@ import de.evoal.languages.model.base.types.RealType;
 import de.evoal.languages.model.base.types.StringType;
 import de.evoal.languages.model.base.types.TypesPackage;
 import de.evoal.languages.model.base.types.VoidType;
-import de.evoal.languages.model.instance.dsl.serializer.InstanceLanguageSemanticSequencer;
 import de.evoal.languages.model.mll.BlockStatement;
 import de.evoal.languages.model.mll.CallStatement;
 import de.evoal.languages.model.mll.CounterRange;
@@ -69,7 +69,7 @@ import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 
 @SuppressWarnings("all")
-public class MachineLearningLanguageSemanticSequencer extends InstanceLanguageSemanticSequencer {
+public class MachineLearningLanguageSemanticSequencer extends BaseLanguageSemanticSequencer {
 
 	@Inject
 	private MachineLearningLanguageGrammarAccess grammarAccess;

@@ -60,7 +60,6 @@ public class GeneratorDSLParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getApplyStatementRuleAccess().getGroup(), "rule__ApplyStatementRule__Group__0");
 			builder.put(grammarAccess.getApplyStatementRuleAccess().getGroup_9(), "rule__ApplyStatementRule__Group_9__0");
 			builder.put(grammarAccess.getPipelineDefinitionReferenceRuleAccess().getGroup(), "rule__PipelineDefinitionReferenceRule__Group__0");
-			builder.put(grammarAccess.getInstanceLiteralRuleAccess().getGroup(), "rule__InstanceLiteralRule__Group__0");
 			builder.put(grammarAccess.getOrExpressionRuleAccess().getGroup(), "rule__OrExpressionRule__Group__0");
 			builder.put(grammarAccess.getOrExpressionRuleAccess().getGroup_1(), "rule__OrExpressionRule__Group_1__0");
 			builder.put(grammarAccess.getXorExpressionRuleAccess().getGroup(), "rule__XorExpressionRule__Group__0");
@@ -85,6 +84,7 @@ public class GeneratorDSLParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getCallRuleAccess().getGroup_2(), "rule__CallRule__Group_2__0");
 			builder.put(grammarAccess.getCallRuleAccess().getGroup_2_1(), "rule__CallRule__Group_2_1__0");
 			builder.put(grammarAccess.getDataReferenceRuleAccess().getGroup(), "rule__DataReferenceRule__Group__0");
+			builder.put(grammarAccess.getInstanceLiteralRuleAccess().getGroup(), "rule__InstanceLiteralRule__Group__0");
 			builder.put(grammarAccess.getAttributeRuleAccess().getGroup(), "rule__AttributeRule__Group__0");
 			builder.put(grammarAccess.getRealLiteralRuleAccess().getGroup(), "rule__RealLiteralRule__Group__0");
 			builder.put(grammarAccess.getIntegerLiteralRuleAccess().getGroup(), "rule__IntegerLiteralRule__Group__0");
@@ -136,8 +136,6 @@ public class GeneratorDSLParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getApplyStatementRuleAccess().getPipelinesAssignment_9_1(), "rule__ApplyStatementRule__PipelinesAssignment_9_1");
 			builder.put(grammarAccess.getPipelineDefinitionReferenceRuleAccess().getPipelineAssignment_1(), "rule__PipelineDefinitionReferenceRule__PipelineAssignment_1");
 			builder.put(grammarAccess.getVariableReferenceRuleAccess().getLoopAssignment(), "rule__VariableReferenceRule__LoopAssignment");
-			builder.put(grammarAccess.getInstanceLiteralRuleAccess().getDefinitionAssignment_0(), "rule__InstanceLiteralRule__DefinitionAssignment_0");
-			builder.put(grammarAccess.getInstanceLiteralRuleAccess().getAttributesAssignment_2(), "rule__InstanceLiteralRule__AttributesAssignment_2");
 			builder.put(grammarAccess.getOrExpressionRuleAccess().getSubExpressionsAssignment_0(), "rule__OrExpressionRule__SubExpressionsAssignment_0");
 			builder.put(grammarAccess.getOrExpressionRuleAccess().getSubExpressionsAssignment_1_1(), "rule__OrExpressionRule__SubExpressionsAssignment_1_1");
 			builder.put(grammarAccess.getXorExpressionRuleAccess().getSubExpressionsAssignment_0(), "rule__XorExpressionRule__SubExpressionsAssignment_0");
@@ -168,6 +166,8 @@ public class GeneratorDSLParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getCallRuleAccess().getParametersAssignment_2_1_1(), "rule__CallRule__ParametersAssignment_2_1_1");
 			builder.put(grammarAccess.getDataReferenceRuleAccess().getDefinitionAssignment_1(), "rule__DataReferenceRule__DefinitionAssignment_1");
 			builder.put(grammarAccess.getConstantReferenceRuleAccess().getDefinitionAssignment(), "rule__ConstantReferenceRule__DefinitionAssignment");
+			builder.put(grammarAccess.getInstanceLiteralRuleAccess().getDefinitionAssignment_0(), "rule__InstanceLiteralRule__DefinitionAssignment_0");
+			builder.put(grammarAccess.getInstanceLiteralRuleAccess().getAttributesAssignment_2(), "rule__InstanceLiteralRule__AttributesAssignment_2");
 			builder.put(grammarAccess.getAttributeRuleAccess().getDefinitionAssignment_0(), "rule__AttributeRule__DefinitionAssignment_0");
 			builder.put(grammarAccess.getAttributeRuleAccess().getValueAssignment_2(), "rule__AttributeRule__ValueAssignment_2");
 			builder.put(grammarAccess.getRealLiteralRuleAccess().getLiteralAssignment_0(), "rule__RealLiteralRule__LiteralAssignment_0");

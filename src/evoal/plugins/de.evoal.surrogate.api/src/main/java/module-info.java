@@ -24,7 +24,6 @@ module de.evoal.surrogate.api {
     requires de.evoal.languages.model.dl.dsl;
     requires de.evoal.languages.model.base.dsl;
     requires de.evoal.languages.model.mll.dsl;
-    requires de.evoal.languages.model.instance;
     requires de.evoal.languages.model.utils;
 
     requires de.evoal.core.main;

@@ -8,7 +8,6 @@
     <details key="dl" value="platform:/resource/de.evoal.languages.model.dl/model/model.ecore#/"/>
     <details key="ecore" value="http://www.eclipse.org/emf/2002/Ecore"/>
     <details key="expr" value="platform:/resource/de.evoal.languages.model.base/model/expressions.ecore#/"/>
-    <details key="ins" value="platform:/resource/de.evoal.languages.model.instance/model/model.ecore#/"/>
   </eAnnotations>
   <eClassifiers xsi:type="ecore:EClass" name="PipelineModule">
     <eStructuralFeatures xsi:type="ecore:EReference" name="imports" upperBound="-1"

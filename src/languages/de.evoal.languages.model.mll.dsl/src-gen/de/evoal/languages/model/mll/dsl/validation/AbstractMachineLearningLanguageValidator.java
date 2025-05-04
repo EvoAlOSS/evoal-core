@@ -4,12 +4,12 @@
  */
 package de.evoal.languages.model.mll.dsl.validation;
 
-import de.evoal.languages.model.instance.dsl.validation.InstanceLanguageValidator;
+import de.evoal.languages.model.base.dsl.validation.BaseLanguageValidator;
 import java.util.ArrayList;
 import java.util.List;
 import org.eclipse.emf.ecore.EPackage;
 
-public abstract class AbstractMachineLearningLanguageValidator extends InstanceLanguageValidator {
+public abstract class AbstractMachineLearningLanguageValidator extends BaseLanguageValidator {
 	
 	@Override
 	protected List<EPackage> getEPackages() {

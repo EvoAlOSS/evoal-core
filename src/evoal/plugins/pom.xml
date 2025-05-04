@@ -137,13 +137,6 @@
 
 		<dependency>
 			<groupId>de.evoal.languages</groupId>
-			<artifactId>de.evoal.languages.model.instance</artifactId>
-			<version>${evoal.languages.version}</version>
-			<scope>provided</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>de.evoal.languages</groupId>
 			<artifactId>de.evoal.languages.model.ddl.dsl</artifactId>
 			<version>${evoal.languages.version}</version>
 			<scope>provided</scope>

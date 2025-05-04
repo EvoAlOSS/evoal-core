@@ -8,7 +8,7 @@ import org.eclipse.xtext.scoping.IScope;
 import com.google.inject.Inject;
 
 import de.evoal.languages.model.base.expressions.ExpressionsPackage;
-import de.evoal.languages.model.instance.dsl.scoping.InstanceLanguageLocalScopeProvider;
+import de.evoal.languages.model.base.dsl.scoping.BaseLanguageLocalScopeProvider;
 import de.evoal.languages.model.mll.MllPackage;
 import de.evoal.languages.model.utils.scoping.WildcardEnabledLocalScopeProvider;
 
@@ -18,7 +18,7 @@ public class MachineLearningLanguageLocalScopeProvider extends WildcardEnabledLo
 	private static EReference attributeDefinition = ExpressionsPackage.eINSTANCE.getAttribute_Definition();
 	
 	@Inject
-	private InstanceLanguageLocalScopeProvider instanceScopes;
+	private BaseLanguageLocalScopeProvider instanceScopes;
 	
 	@Override
 	public IScope getScope(final EObject context, final EReference reference) {

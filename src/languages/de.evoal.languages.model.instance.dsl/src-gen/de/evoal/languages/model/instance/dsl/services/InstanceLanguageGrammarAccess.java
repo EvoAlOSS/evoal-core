@@ -8,8 +8,8 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import de.evoal.languages.model.base.dsl.services.BaseLanguageGrammarAccess;
 import java.util.List;
+import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Assignment;
-import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.EnumRule;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
@@ -25,55 +25,97 @@ import org.eclipse.xtext.service.GrammarProvider;
 @Singleton
 public class InstanceLanguageGrammarAccess extends AbstractElementFinder.AbstractGrammarElementFinder {
 	
-	public class InstanceLiteralRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.instance.dsl.InstanceLanguage.InstanceLiteralRule");
+	public class InstanceModuleRuleElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.instance.dsl.InstanceLanguage.InstanceModuleRule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cDefinitionAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final CrossReference cDefinitionTypeDefinitionCrossReference_0_0 = (CrossReference)cDefinitionAssignment_0.eContents().get(0);
-		private final RuleCall cDefinitionTypeDefinitionQualifiedNameParserRuleCall_0_0_1 = (RuleCall)cDefinitionTypeDefinitionCrossReference_0_0.eContents().get(1);
-		private final Keyword cLeftCurlyBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Assignment cAttributesAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cAttributesAttributeRuleParserRuleCall_2_0 = (RuleCall)cAttributesAssignment_2.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Action cInstanceModuleAction_0 = (Action)cGroup.eContents().get(0);
+		private final Assignment cImportsAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cImportsImportRuleParserRuleCall_1_0 = (RuleCall)cImportsAssignment_1.eContents().get(0);
+		private final Keyword cInstancesKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Keyword cEqualsSignKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Keyword cLeftSquareBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Group cGroup_5 = (Group)cGroup.eContents().get(5);
+		private final Keyword cInstanceKeyword_5_0 = (Keyword)cGroup_5.eContents().get(0);
+		private final Assignment cInstancesAssignment_5_1 = (Assignment)cGroup_5.eContents().get(1);
+		private final RuleCall cInstancesInstanceLiteralRuleParserRuleCall_5_1_0 = (RuleCall)cInstancesAssignment_5_1.eContents().get(0);
+		private final Group cGroup_5_2 = (Group)cGroup_5.eContents().get(2);
+		private final Keyword cCommaKeyword_5_2_0 = (Keyword)cGroup_5_2.eContents().get(0);
+		private final Keyword cInstanceKeyword_5_2_1 = (Keyword)cGroup_5_2.eContents().get(1);
+		private final Assignment cInstancesAssignment_5_2_2 = (Assignment)cGroup_5_2.eContents().get(2);
+		private final RuleCall cInstancesInstanceLiteralRuleParserRuleCall_5_2_2_0 = (RuleCall)cInstancesAssignment_5_2_2.eContents().get(0);
+		private final Keyword cRightSquareBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
+		private final Keyword cSemicolonKeyword_7 = (Keyword)cGroup.eContents().get(7);
 		
-		//// We do not need the instance language anymore ... This is only there for making Xtext happy
-		//@Override
-		//InstanceLiteralRule returns expr::Instance:
-		//    definition = [defs::TypeDefinition|QualifiedName] '{'
-		//      attributes += AttributeRule*
-		//    '}'
+		//InstanceModuleRule returns InstanceModule:
+		//    {InstanceModule}
+		//    (imports += ImportRule)*
+		//    'instances' '=' '['
+		//      ('instance' instances += InstanceLiteralRule (',' 'instance' instances += InstanceLiteralRule)*)?
+		//    ']' ';'
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//definition = [defs::TypeDefinition|QualifiedName] '{'
-		//  attributes += AttributeRule*
-		//'}'
+		//{InstanceModule}
+		//(imports += ImportRule)*
+		//'instances' '=' '['
+		//  ('instance' instances += InstanceLiteralRule (',' 'instance' instances += InstanceLiteralRule)*)?
+		//']' ';'
 		public Group getGroup() { return cGroup; }
 		
-		//definition = [defs::TypeDefinition|QualifiedName]
-		public Assignment getDefinitionAssignment_0() { return cDefinitionAssignment_0; }
+		//{InstanceModule}
+		public Action getInstanceModuleAction_0() { return cInstanceModuleAction_0; }
 		
-		//[defs::TypeDefinition|QualifiedName]
-		public CrossReference getDefinitionTypeDefinitionCrossReference_0_0() { return cDefinitionTypeDefinitionCrossReference_0_0; }
+		//(imports += ImportRule)*
+		public Assignment getImportsAssignment_1() { return cImportsAssignment_1; }
 		
-		//QualifiedName
-		public RuleCall getDefinitionTypeDefinitionQualifiedNameParserRuleCall_0_0_1() { return cDefinitionTypeDefinitionQualifiedNameParserRuleCall_0_0_1; }
+		//ImportRule
+		public RuleCall getImportsImportRuleParserRuleCall_1_0() { return cImportsImportRuleParserRuleCall_1_0; }
 		
-		//'{'
-		public Keyword getLeftCurlyBracketKeyword_1() { return cLeftCurlyBracketKeyword_1; }
+		//'instances'
+		public Keyword getInstancesKeyword_2() { return cInstancesKeyword_2; }
 		
-		//attributes += AttributeRule*
-		public Assignment getAttributesAssignment_2() { return cAttributesAssignment_2; }
+		//'='
+		public Keyword getEqualsSignKeyword_3() { return cEqualsSignKeyword_3; }
 		
-		//AttributeRule
-		public RuleCall getAttributesAttributeRuleParserRuleCall_2_0() { return cAttributesAttributeRuleParserRuleCall_2_0; }
+		//'['
+		public Keyword getLeftSquareBracketKeyword_4() { return cLeftSquareBracketKeyword_4; }
 		
-		//'}'
-		public Keyword getRightCurlyBracketKeyword_3() { return cRightCurlyBracketKeyword_3; }
+		//('instance' instances += InstanceLiteralRule (',' 'instance' instances += InstanceLiteralRule)*)?
+		public Group getGroup_5() { return cGroup_5; }
+		
+		//'instance'
+		public Keyword getInstanceKeyword_5_0() { return cInstanceKeyword_5_0; }
+		
+		//instances += InstanceLiteralRule
+		public Assignment getInstancesAssignment_5_1() { return cInstancesAssignment_5_1; }
+		
+		//InstanceLiteralRule
+		public RuleCall getInstancesInstanceLiteralRuleParserRuleCall_5_1_0() { return cInstancesInstanceLiteralRuleParserRuleCall_5_1_0; }
+		
+		//(',' 'instance' instances += InstanceLiteralRule)*
+		public Group getGroup_5_2() { return cGroup_5_2; }
+		
+		//','
+		public Keyword getCommaKeyword_5_2_0() { return cCommaKeyword_5_2_0; }
+		
+		//'instance'
+		public Keyword getInstanceKeyword_5_2_1() { return cInstanceKeyword_5_2_1; }
+		
+		//instances += InstanceLiteralRule
+		public Assignment getInstancesAssignment_5_2_2() { return cInstancesAssignment_5_2_2; }
+		
+		//InstanceLiteralRule
+		public RuleCall getInstancesInstanceLiteralRuleParserRuleCall_5_2_2_0() { return cInstancesInstanceLiteralRuleParserRuleCall_5_2_2_0; }
+		
+		//']'
+		public Keyword getRightSquareBracketKeyword_6() { return cRightSquareBracketKeyword_6; }
+		
+		//';'
+		public Keyword getSemicolonKeyword_7() { return cSemicolonKeyword_7; }
 	}
 	
 	
-	private final InstanceLiteralRuleElements pInstanceLiteralRule;
+	private final InstanceModuleRuleElements pInstanceModuleRule;
 	
 	private final Grammar grammar;
 	
@@ -88,7 +130,7 @@ public class InstanceLanguageGrammarAccess extends AbstractElementFinder.Abstrac
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaBaseLanguage = gaBaseLanguage;
 		this.gaTerminals = gaTerminals;
-		this.pInstanceLiteralRule = new InstanceLiteralRuleElements();
+		this.pInstanceModuleRule = new InstanceModuleRuleElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -122,19 +164,19 @@ public class InstanceLanguageGrammarAccess extends AbstractElementFinder.Abstrac
 	}
 
 	
-	//// We do not need the instance language anymore ... This is only there for making Xtext happy
-	//@Override
-	//InstanceLiteralRule returns expr::Instance:
-	//    definition = [defs::TypeDefinition|QualifiedName] '{'
-	//      attributes += AttributeRule*
-	//    '}'
+	//InstanceModuleRule returns InstanceModule:
+	//    {InstanceModule}
+	//    (imports += ImportRule)*
+	//    'instances' '=' '['
+	//      ('instance' instances += InstanceLiteralRule (',' 'instance' instances += InstanceLiteralRule)*)?
+	//    ']' ';'
 	//;
-	public InstanceLiteralRuleElements getInstanceLiteralRuleAccess() {
-		return pInstanceLiteralRule;
+	public InstanceModuleRuleElements getInstanceModuleRuleAccess() {
+		return pInstanceModuleRule;
 	}
 	
-	public ParserRule getInstanceLiteralRuleRule() {
-		return getInstanceLiteralRuleAccess().getRule();
+	public ParserRule getInstanceModuleRuleRule() {
+		return getInstanceModuleRuleAccess().getRule();
 	}
 	
 	//ExpressionRule returns Expression:
@@ -385,6 +427,19 @@ public class InstanceLanguageGrammarAccess extends AbstractElementFinder.Abstrac
 	
 	public ParserRule getLiteralRuleRule() {
 		return getLiteralRuleAccess().getRule();
+	}
+	
+	//InstanceLiteralRule returns Instance:
+	//    definition = [TypeDefinition|QualifiedName] '{'
+	//      attributes += AttributeRule*
+	//    '}'
+	//;
+	public BaseLanguageGrammarAccess.InstanceLiteralRuleElements getInstanceLiteralRuleAccess() {
+		return gaBaseLanguage.getInstanceLiteralRuleAccess();
+	}
+	
+	public ParserRule getInstanceLiteralRuleRule() {
+		return getInstanceLiteralRuleAccess().getRule();
 	}
 	
 	//AttributeRule returns Attribute:

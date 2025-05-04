@@ -5,7 +5,6 @@ module de.evoal.surrogate.ws {
     requires jakarta.inject.api;
     requires jakarta.enterprise.cdi.api;
 
-    requires de.evoal.languages.model.instance;
 
     requires de.evoal.core.main;
     requires de.evoal.surrogate.api;

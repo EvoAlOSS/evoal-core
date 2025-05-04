@@ -27,7 +27,6 @@ Workflow {
                 language = StandardLanguage {
                         name = "de.evoal.languages.model.ol.dsl.OptimisationLanguage"
                         fileExtensions = "ol"
-                        referencedResource = "platform:/resource/de.evoal.languages.model.instance/model/model.genmodel"
                         referencedResource = "platform:/resource/de.evoal.languages.model.ol/model/model.genmodel"
                         referencedResource = "platform:/resource/de.evoal.languages.model.base/model/model.genmodel"
                         referencedResource = "platform:/resource/de.evoal.languages.model.base/model/definitions.genmodel"

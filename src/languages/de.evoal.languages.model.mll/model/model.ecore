@@ -10,7 +10,6 @@
     <details key="defs" value="platform:/resource/de.evoal.languages.model.base/model/definitions.ecore#/"/>
     <details key="ecore" value="http://www.eclipse.org/emf/2002/Ecore"/>
     <details key="expr" value="platform:/resource/de.evoal.languages.model.base/model/expressions.ecore#/"/>
-    <details key="instance" value="platform:/resource/de.evoal.languages.model.instance/model/model.ecore#/"/>
   </eAnnotations>
   <eClassifiers xsi:type="ecore:EClass" name="MachineLearningModule">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">

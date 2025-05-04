@@ -7,8 +7,8 @@ import org.eclipse.xtext.scoping.IScope;
 
 import com.google.inject.Inject;
 
+import de.evoal.languages.model.base.dsl.scoping.BaseLanguageLocalScopeProvider;
 import de.evoal.languages.model.base.expressions.ExpressionsPackage;
-import de.evoal.languages.model.instance.dsl.scoping.InstanceLanguageLocalScopeProvider;
 import de.evoal.languages.model.utils.scoping.WildcardEnabledLocalScopeProvider;
 
 public class OptimisationLanguageLocalScopeProvider extends WildcardEnabledLocalScopeProvider {
@@ -16,7 +16,7 @@ public class OptimisationLanguageLocalScopeProvider extends WildcardEnabledLocal
 	private static EReference attributeDefinition = ExpressionsPackage.eINSTANCE.getAttribute_Definition();
 
 	@Inject
-	private InstanceLanguageLocalScopeProvider instanceScopes;
+	private BaseLanguageLocalScopeProvider instanceScopes;
 
 
 	@Override

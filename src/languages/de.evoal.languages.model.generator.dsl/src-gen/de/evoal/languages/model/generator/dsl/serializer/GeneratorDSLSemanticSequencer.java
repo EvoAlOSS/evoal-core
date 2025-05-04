@@ -11,6 +11,7 @@ import de.evoal.languages.model.base.definitions.ConstantDefinition;
 import de.evoal.languages.model.base.definitions.DefinitionsPackage;
 import de.evoal.languages.model.base.definitions.FunctionDefinition;
 import de.evoal.languages.model.base.definitions.TypeDefinition;
+import de.evoal.languages.model.base.dsl.serializer.BaseLanguageSemanticSequencer;
 import de.evoal.languages.model.base.expressions.AddOrSubtractExpression;
 import de.evoal.languages.model.base.expressions.AndExpression;
 import de.evoal.languages.model.base.expressions.Array;
@@ -55,7 +56,6 @@ import de.evoal.languages.model.generator.PipelineDefinitionReference;
 import de.evoal.languages.model.generator.Step;
 import de.evoal.languages.model.generator.VariableReference;
 import de.evoal.languages.model.generator.dsl.services.GeneratorDSLGrammarAccess;
-import de.evoal.languages.model.instance.dsl.serializer.InstanceLanguageSemanticSequencer;
 import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -67,7 +67,7 @@ import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 
 @SuppressWarnings("all")
-public class GeneratorDSLSemanticSequencer extends InstanceLanguageSemanticSequencer {
+public class GeneratorDSLSemanticSequencer extends BaseLanguageSemanticSequencer {
 
 	@Inject
 	private GeneratorDSLGrammarAccess grammarAccess;

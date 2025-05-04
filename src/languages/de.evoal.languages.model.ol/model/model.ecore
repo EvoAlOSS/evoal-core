@@ -4,7 +4,6 @@
   <eAnnotations source="http://www.eclipse.org/OCL/Import">
     <details key="ddl" value="platform:/resource/de.evoal.languages.model.ddl/model/model.ecore#/"/>
     <details key="el" value="platform:/resource/de.evoal.languages.model.base/model/model.ecore#/"/>
-    <details key="instance" value="platform:/resource/de.evoal.languages.model.instance/model/model.ecore#/"/>
   </eAnnotations>
   <eClassifiers xsi:type="ecore:EClass" name="OptimisationModule">
     <eStructuralFeatures xsi:type="ecore:EReference" name="imports" upperBound="-1"

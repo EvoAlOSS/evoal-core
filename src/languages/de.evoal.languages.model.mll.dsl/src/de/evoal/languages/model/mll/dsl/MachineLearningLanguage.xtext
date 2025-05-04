@@ -1,4 +1,4 @@
-grammar de.evoal.languages.model.mll.dsl.MachineLearningLanguage with de.evoal.languages.model.instance.dsl.InstanceLanguage
+grammar de.evoal.languages.model.mll.dsl.MachineLearningLanguage with de.evoal.languages.model.base.dsl.BaseLanguage
 
 import "https://www.evoal.de/languages/mll/1.0.0" 
 import "https://www.evoal.de/languages/ddl/1.0.0" as ddl

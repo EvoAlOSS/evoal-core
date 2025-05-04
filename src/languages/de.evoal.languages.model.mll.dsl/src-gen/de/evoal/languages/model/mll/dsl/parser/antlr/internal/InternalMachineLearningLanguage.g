@@ -1062,71 +1062,6 @@ ruleCallStatementRule returns [EObject current=null]
 	)
 ;
 
-// Entry rule entryRuleInstanceLiteralRule
-entryRuleInstanceLiteralRule returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getInstanceLiteralRuleRule()); }
-	iv_ruleInstanceLiteralRule=ruleInstanceLiteralRule
-	{ $current=$iv_ruleInstanceLiteralRule.current; }
-	EOF;
-
-// Rule InstanceLiteralRule
-ruleInstanceLiteralRule returns [EObject current=null]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
-	(
-		(
-			(
-				{
-					/* */
-				}
-				{
-					if ($current==null) {
-						$current = createModelElement(grammarAccess.getInstanceLiteralRuleRule());
-					}
-				}
-				{
-					newCompositeNode(grammarAccess.getInstanceLiteralRuleAccess().getDefinitionTypeDefinitionCrossReference_0_0());
-				}
-				ruleQualifiedName
-				{
-					afterParserOrEnumRuleCall();
-				}
-			)
-		)
-		otherlv_1='{'
-		{
-			newLeafNode(otherlv_1, grammarAccess.getInstanceLiteralRuleAccess().getLeftCurlyBracketKeyword_1());
-		}
-		(
-			(
-				{
-					newCompositeNode(grammarAccess.getInstanceLiteralRuleAccess().getAttributesAttributeRuleParserRuleCall_2_0());
-				}
-				lv_attributes_2_0=ruleAttributeRule
-				{
-					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getInstanceLiteralRuleRule());
-					}
-					add(
-						$current,
-						"attributes",
-						lv_attributes_2_0,
-						"de.evoal.languages.model.base.dsl.BaseLanguage.AttributeRule");
-					afterParserOrEnumRuleCall();
-				}
-			)
-		)*
-		otherlv_3='}'
-		{
-			newLeafNode(otherlv_3, grammarAccess.getInstanceLiteralRuleAccess().getRightCurlyBracketKeyword_3());
-		}
-	)
-;
-
 // Entry rule entryRuleExpressionRule
 entryRuleExpressionRule returns [EObject current=null]:
 	{ newCompositeNode(grammarAccess.getExpressionRuleRule()); }
@@ -2267,6 +2202,71 @@ ruleLiteralRule returns [EObject current=null]
 		{
 			$current = $this_InstanceLiteralRule_3.current;
 			afterParserOrEnumRuleCall();
+		}
+	)
+;
+
+// Entry rule entryRuleInstanceLiteralRule
+entryRuleInstanceLiteralRule returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getInstanceLiteralRuleRule()); }
+	iv_ruleInstanceLiteralRule=ruleInstanceLiteralRule
+	{ $current=$iv_ruleInstanceLiteralRule.current; }
+	EOF;
+
+// Rule InstanceLiteralRule
+ruleInstanceLiteralRule returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			(
+				{
+					/* */
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getInstanceLiteralRuleRule());
+					}
+				}
+				{
+					newCompositeNode(grammarAccess.getInstanceLiteralRuleAccess().getDefinitionTypeDefinitionCrossReference_0_0());
+				}
+				ruleQualifiedName
+				{
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		otherlv_1='{'
+		{
+			newLeafNode(otherlv_1, grammarAccess.getInstanceLiteralRuleAccess().getLeftCurlyBracketKeyword_1());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getInstanceLiteralRuleAccess().getAttributesAttributeRuleParserRuleCall_2_0());
+				}
+				lv_attributes_2_0=ruleAttributeRule
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getInstanceLiteralRuleRule());
+					}
+					add(
+						$current,
+						"attributes",
+						lv_attributes_2_0,
+						"de.evoal.languages.model.base.dsl.BaseLanguage.AttributeRule");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)*
+		otherlv_3='}'
+		{
+			newLeafNode(otherlv_3, grammarAccess.getInstanceLiteralRuleAccess().getRightCurlyBracketKeyword_3());
 		}
 	)
 ;

@@ -32,7 +32,6 @@ module de.evoal.optimisation.api {
     requires de.evoal.languages.model.dl.dsl;
     requires de.evoal.languages.model.ol;
     requires de.evoal.languages.model.ol.dsl;
-    requires de.evoal.languages.model.instance;
     requires de.evoal.languages.model.interpreter;
     requires de.evoal.languages.model.utils;
     requires com.google.guice;
