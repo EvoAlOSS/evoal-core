@@ -21,6 +21,7 @@ TARGET_COMMIT=`curl -s -X GET "$BASE_URL/repository/branches/${TARGET_BRANCH}" \
 
 if [ "$SOURCE_COMMIT" = "$TARGET_COMMIT" ]; then
   echo "    No difference found. Quitting."
+  exit 0
 fi
 echo  "    Commits are $SOURCE_COMMIT and $TARGET_COMMIT. Continuing."
 
@@ -33,6 +34,7 @@ COUNTBRANCHES=`echo ${LISTMR} | grep -o "\"source_branch\":\"${CI_COMMIT_REF_NAM
 
 if [ ! ${COUNTBRANCHES} -eq "0" ]; then
   echo "    Merge request already exists. Quitting."
+  exit 0
 fi
 echo "    no merge request found. Continuing"
 
