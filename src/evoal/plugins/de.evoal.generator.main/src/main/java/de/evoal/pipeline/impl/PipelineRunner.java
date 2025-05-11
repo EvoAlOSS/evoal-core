@@ -3,16 +3,17 @@ package de.evoal.pipeline.impl;
 import de.evoal.core.api.cdi.Application;
 import de.evoal.core.api.cdi.BlackboardValue;
 import de.evoal.core.api.cdi.MainClass;
+import de.evoal.core.interpreter.api.ProgramInterpreter;
+import de.evoal.languages.model.execution.NamedVariable;
+import de.evoal.languages.model.execution.Variable;
 import de.evoal.languages.model.generator.GeneratorModule;
-import de.evoal.languages.model.pipeline.PipelineDefinition;
 import de.evoal.languages.model.pipeline.PipelineModule;
 import de.evoal.pipeline.api.board.PipelineBlackboardEntries;
 import de.evoal.pipeline.api.cdi.DefinitionModuleLoader;
 import de.evoal.pipeline.api.cdi.GeneratorModuleLoader;
 import de.evoal.pipeline.api.cdi.PipelineCollector;
-import de.evoal.pipeline.impl.internal.DSLConverter;
 import de.evoal.pipeline.api.model.dynamic.EClassProvider;
-import de.evoal.pipeline.impl.internal.StatementExecutor;
+import de.evoal.pipeline.impl.internal.GeneratorDSLConverter;
 import org.eclipse.emf.ecore.EClass;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -59,8 +60,8 @@ public class PipelineRunner implements MainClass {
 	@Inject
 	private PipelineCollector converter;
 
-	private static final Collector<PipelineDefinition, ?, Map<String, PipelineDefinition>> toMap =
-			Collectors.toUnmodifiableMap(PipelineDefinition::getName,
+	private static final Collector<NamedVariable, ?, Map<Variable, Object>> toMap =
+			Collectors.toUnmodifiableMap(Function.identity(),
 					Function.identity());
 
 
@@ -71,19 +72,13 @@ public class PipelineRunner implements MainClass {
 		log.info("Executing model-to-model transformation on DSLs");
 		final EClassProvider provider = new EClassProvider();
 		final EClass space = provider.eClassFor(module);
-		final DSLConverter converter = new DSLConverter(space);
+		final GeneratorDSLConverter converter = new GeneratorDSLConverter(definitionLoader, space);
 		final PipelineModule pModule = converter.convert(module);
 
+
 		log.info("Starting pipeline.");
-
-		final Map<String, PipelineDefinition> pipelineTable = pModule
-				.getPipelines()
-				.stream()
-				.collect(toMap);
-
-		new StatementExecutor(definitionLoader, pipelineTable, space)
-				.execute(pModule.getStatements());
-
+		new ProgramInterpreter()
+				.execute(pModule.getProgram(), space);
         log.info("Finished pipeline.");
 	}
 }

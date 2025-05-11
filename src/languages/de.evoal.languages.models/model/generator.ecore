@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="generator" nsURI="https://www.evoal.de/languages/generator/1.0.0"
+    nsPrefix="generator">
+  <eAnnotations source="http://www.eclipse.org/OCL/Import">
+    <details key="base" value="platform:/resource/de.evoal.languages.model.base/model/model.ecore#/"/>
+    <details key="exec" value="execution.ecore#/"/>
+    <details key="expr" value="platform:/resource/de.evoal.languages.model.base/model/expressions.ecore#/"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="GeneratorModule">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&#xA;Name of the module&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="imports" upperBound="-1"
+        eType="ecore:EClass ../../de.evoal.languages.model.base/model/model.ecore#//Import"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&#xA;Import statements&#xA;"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/OCL/Collection">
+        <details key="nullFree" value="false"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pipelines" upperBound="-1"
+        eType="#//PipelineDefinition" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&#xA;The configured pipelines that may be executed.&#xA;"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/OCL/Collection">
+        <details key="nullFree" value="false"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="body" lowerBound="1" eType="ecore:EClass execution.ecore#//Block"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&#xA;The execution of the generator&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PipelineDefinition" eSuperTypes="execution.ecore#//NamedVariable">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="steps" ordered="false"
+        upperBound="-1" eType="#//Step" containment="true">
+      <eAnnotations source="http://www.eclipse.org/OCL/Collection">
+        <details key="nullFree" value="false"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Step">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="instance" lowerBound="1"
+        eType="ecore:EClass ../../de.evoal.languages.model.base/model/expressions.ecore#//Instance"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="reads" ordered="false"
+        upperBound="-1" eType="ecore:EClass ../../de.evoal.languages.model.base/model/expressions.ecore#//DataReference"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/OCL/Collection">
+        <details key="nullFree" value="false"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="writes" ordered="false"
+        upperBound="-1" eType="ecore:EClass ../../de.evoal.languages.model.base/model/expressions.ecore#//DataReference"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/OCL/Collection">
+        <details key="nullFree" value="false"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ApplyStatement" eSuperTypes="execution.ecore#//Statement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="file" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="count" lowerBound="1" eType="ecore:EClass ../../de.evoal.languages.model.base/model/expressions.ecore#//Literal"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pipelines" upperBound="-1"
+        eType="ecore:EClass execution.ecore#//VariableReference" containment="true">
+      <eAnnotations source="http://www.eclipse.org/OCL/Collection">
+        <details key="nullFree" value="false"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+</ecore:EPackage>

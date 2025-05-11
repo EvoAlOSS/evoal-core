@@ -17,7 +17,7 @@ module training {
 						'σ' := 3.0;
 						'soft-margin' := 0.15;
 						tolerance := 0.1;
-	
+
 	for _counter in [1 to 10] loop
 	        predict svr from "data.json"
 	        and measure

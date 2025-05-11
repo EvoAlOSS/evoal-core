@@ -1,0 +1,51 @@
+/**
+ * EvoAl project
+ */
+package de.evoal.languages.model.pipeline;
+
+import de.evoal.languages.model.execution.NamedVariable;
+
+import org.eclipse.emf.common.util.EList;
+
+/**
+ * <!-- begin-user-doc -->
+ * A representation of the model object '<em><b>Definition</b></em>'.
+ * <!-- end-user-doc -->
+ *
+ * <!-- begin-model-doc -->
+ * 
+ * A pipeline is a sequence of steps that process a stream of data.
+ * 
+ * <!-- end-model-doc -->
+ *
+ * <p>
+ * The following features are supported:
+ * </p>
+ * <ul>
+ *   <li>{@link de.evoal.languages.model.pipeline.PipelineDefinition#getSteps <em>Steps</em>}</li>
+ * </ul>
+ *
+ * @see de.evoal.languages.model.pipeline.PipelinePackage#getPipelineDefinition()
+ * @model
+ * @generated
+ */
+public interface PipelineDefinition extends NamedVariable {
+	/**
+	 * Returns the value of the '<em><b>Steps</b></em>' containment reference list.
+	 * The list contents are of type {@link de.evoal.languages.model.pipeline.Step}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * 
+	 * The steps that process the data stream.
+	 * 
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Steps</em>' containment reference list.
+	 * @see de.evoal.languages.model.pipeline.PipelinePackage#getPipelineDefinition_Steps()
+	 * @model containment="true"
+	 *        annotation="http://www.eclipse.org/OCL/Collection nullFree='false'"
+	 * @generated
+	 */
+	EList<Step> getSteps();
+
+} // PipelineDefinition

@@ -35,7 +35,7 @@ import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
  *
  * @generated
  */
-public class UnaryAddOrSubtractExpressionImpl extends ExpressionImpl implements UnaryAddOrSubtractExpression {
+public class UnaryAddOrSubtractExpressionImpl extends ValueImpl implements UnaryAddOrSubtractExpression {
 	/**
 	 * The cached value of the '{@link #getOperators() <em>Operators</em>}' attribute list.
 	 * <!-- begin-user-doc -->

@@ -1,0 +1,532 @@
+/**
+ * EvoAl project
+ */
+package de.evoal.languages.model.pipeline;
+
+import de.evoal.languages.model.execution.ExecutionPackage;
+
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
+
+/**
+ * <!-- begin-user-doc -->
+ * The <b>Package</b> for the model.
+ * It contains accessors for the meta objects to represent
+ * <ul>
+ *   <li>each class,</li>
+ *   <li>each feature of each class,</li>
+ *   <li>each enum,</li>
+ *   <li>and each data type</li>
+ * </ul>
+ * <!-- end-user-doc -->
+ * @see de.evoal.languages.model.pipeline.PipelineFactory
+ * @model kind="package"
+ *        annotation="http://www.eclipse.org/OCL/Import base='platform:/resource/de.evoal.languages.model.base/model/model.ecore#/' ecore='http://www.eclipse.org/emf/2002/Ecore' exec='execution.ecore#/' expr='platform:/resource/de.evoal.languages.model.base/model/expressions.ecore#/'"
+ * @generated
+ */
+public interface PipelinePackage extends EPackage {
+	/**
+	 * The package name.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String eNAME = "pipeline";
+
+	/**
+	 * The package namespace URI.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String eNS_URI = "https://www.evoal.de/languages/pipeline/1.0.0";
+
+	/**
+	 * The package namespace name.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String eNS_PREFIX = "pipeline";
+
+	/**
+	 * The singleton instance of the package.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	PipelinePackage eINSTANCE = de.evoal.languages.model.pipeline.impl.PipelinePackageImpl.init();
+
+	/**
+	 * The meta object id for the '{@link de.evoal.languages.model.pipeline.impl.PipelineModuleImpl <em>Module</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.evoal.languages.model.pipeline.impl.PipelineModuleImpl
+	 * @see de.evoal.languages.model.pipeline.impl.PipelinePackageImpl#getPipelineModule()
+	 * @generated
+	 */
+	int PIPELINE_MODULE = 0;
+
+	/**
+	 * The feature id for the '<em><b>Imports</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PIPELINE_MODULE__IMPORTS = 0;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PIPELINE_MODULE__NAME = 1;
+
+	/**
+	 * The feature id for the '<em><b>Program</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PIPELINE_MODULE__PROGRAM = 2;
+
+	/**
+	 * The number of structural features of the '<em>Module</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PIPELINE_MODULE_FEATURE_COUNT = 3;
+
+	/**
+	 * The meta object id for the '{@link de.evoal.languages.model.pipeline.impl.PipelineDefinitionImpl <em>Definition</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.evoal.languages.model.pipeline.impl.PipelineDefinitionImpl
+	 * @see de.evoal.languages.model.pipeline.impl.PipelinePackageImpl#getPipelineDefinition()
+	 * @generated
+	 */
+	int PIPELINE_DEFINITION = 1;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PIPELINE_DEFINITION__NAME = ExecutionPackage.NAMED_VARIABLE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Steps</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PIPELINE_DEFINITION__STEPS = ExecutionPackage.NAMED_VARIABLE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Definition</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PIPELINE_DEFINITION_FEATURE_COUNT = ExecutionPackage.NAMED_VARIABLE_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link de.evoal.languages.model.pipeline.impl.StepImpl <em>Step</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.evoal.languages.model.pipeline.impl.StepImpl
+	 * @see de.evoal.languages.model.pipeline.impl.PipelinePackageImpl#getStep()
+	 * @generated
+	 */
+	int STEP = 2;
+
+	/**
+	 * The feature id for the '<em><b>Instance</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STEP__INSTANCE = 0;
+
+	/**
+	 * The feature id for the '<em><b>Reads</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STEP__READS = 1;
+
+	/**
+	 * The feature id for the '<em><b>Writes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STEP__WRITES = 2;
+
+	/**
+	 * The number of structural features of the '<em>Step</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STEP_FEATURE_COUNT = 3;
+
+	/**
+	 * The meta object id for the '{@link de.evoal.languages.model.pipeline.impl.ApplyStatementImpl <em>Apply Statement</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.evoal.languages.model.pipeline.impl.ApplyStatementImpl
+	 * @see de.evoal.languages.model.pipeline.impl.PipelinePackageImpl#getApplyStatement()
+	 * @generated
+	 */
+	int APPLY_STATEMENT = 3;
+
+	/**
+	 * The feature id for the '<em><b>File</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APPLY_STATEMENT__FILE = ExecutionPackage.STATEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Count</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APPLY_STATEMENT__COUNT = ExecutionPackage.STATEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Pipelines</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APPLY_STATEMENT__PIPELINES = ExecutionPackage.STATEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>Apply Statement</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APPLY_STATEMENT_FEATURE_COUNT = ExecutionPackage.STATEMENT_FEATURE_COUNT + 3;
+
+
+	/**
+	 * Returns the meta object for class '{@link de.evoal.languages.model.pipeline.PipelineModule <em>Module</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Module</em>'.
+	 * @see de.evoal.languages.model.pipeline.PipelineModule
+	 * @generated
+	 */
+	EClass getPipelineModule();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.pipeline.PipelineModule#getImports <em>Imports</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Imports</em>'.
+	 * @see de.evoal.languages.model.pipeline.PipelineModule#getImports()
+	 * @see #getPipelineModule()
+	 * @generated
+	 */
+	EReference getPipelineModule_Imports();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.pipeline.PipelineModule#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see de.evoal.languages.model.pipeline.PipelineModule#getName()
+	 * @see #getPipelineModule()
+	 * @generated
+	 */
+	EAttribute getPipelineModule_Name();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link de.evoal.languages.model.pipeline.PipelineModule#getProgram <em>Program</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Program</em>'.
+	 * @see de.evoal.languages.model.pipeline.PipelineModule#getProgram()
+	 * @see #getPipelineModule()
+	 * @generated
+	 */
+	EReference getPipelineModule_Program();
+
+	/**
+	 * Returns the meta object for class '{@link de.evoal.languages.model.pipeline.PipelineDefinition <em>Definition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Definition</em>'.
+	 * @see de.evoal.languages.model.pipeline.PipelineDefinition
+	 * @generated
+	 */
+	EClass getPipelineDefinition();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.pipeline.PipelineDefinition#getSteps <em>Steps</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Steps</em>'.
+	 * @see de.evoal.languages.model.pipeline.PipelineDefinition#getSteps()
+	 * @see #getPipelineDefinition()
+	 * @generated
+	 */
+	EReference getPipelineDefinition_Steps();
+
+	/**
+	 * Returns the meta object for class '{@link de.evoal.languages.model.pipeline.Step <em>Step</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Step</em>'.
+	 * @see de.evoal.languages.model.pipeline.Step
+	 * @generated
+	 */
+	EClass getStep();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link de.evoal.languages.model.pipeline.Step#getInstance <em>Instance</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Instance</em>'.
+	 * @see de.evoal.languages.model.pipeline.Step#getInstance()
+	 * @see #getStep()
+	 * @generated
+	 */
+	EReference getStep_Instance();
+
+	/**
+	 * Returns the meta object for the reference list '{@link de.evoal.languages.model.pipeline.Step#getReads <em>Reads</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Reads</em>'.
+	 * @see de.evoal.languages.model.pipeline.Step#getReads()
+	 * @see #getStep()
+	 * @generated
+	 */
+	EReference getStep_Reads();
+
+	/**
+	 * Returns the meta object for the reference list '{@link de.evoal.languages.model.pipeline.Step#getWrites <em>Writes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Writes</em>'.
+	 * @see de.evoal.languages.model.pipeline.Step#getWrites()
+	 * @see #getStep()
+	 * @generated
+	 */
+	EReference getStep_Writes();
+
+	/**
+	 * Returns the meta object for class '{@link de.evoal.languages.model.pipeline.ApplyStatement <em>Apply Statement</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Apply Statement</em>'.
+	 * @see de.evoal.languages.model.pipeline.ApplyStatement
+	 * @generated
+	 */
+	EClass getApplyStatement();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.pipeline.ApplyStatement#getFile <em>File</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>File</em>'.
+	 * @see de.evoal.languages.model.pipeline.ApplyStatement#getFile()
+	 * @see #getApplyStatement()
+	 * @generated
+	 */
+	EAttribute getApplyStatement_File();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link de.evoal.languages.model.pipeline.ApplyStatement#getCount <em>Count</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Count</em>'.
+	 * @see de.evoal.languages.model.pipeline.ApplyStatement#getCount()
+	 * @see #getApplyStatement()
+	 * @generated
+	 */
+	EReference getApplyStatement_Count();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.pipeline.ApplyStatement#getPipelines <em>Pipelines</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Pipelines</em>'.
+	 * @see de.evoal.languages.model.pipeline.ApplyStatement#getPipelines()
+	 * @see #getApplyStatement()
+	 * @generated
+	 */
+	EReference getApplyStatement_Pipelines();
+
+	/**
+	 * Returns the factory that creates the instances of the model.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the factory that creates the instances of the model.
+	 * @generated
+	 */
+	PipelineFactory getPipelineFactory();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * Defines literals for the meta objects that represent
+	 * <ul>
+	 *   <li>each class,</li>
+	 *   <li>each feature of each class,</li>
+	 *   <li>each enum,</li>
+	 *   <li>and each data type</li>
+	 * </ul>
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	interface Literals {
+		/**
+		 * The meta object literal for the '{@link de.evoal.languages.model.pipeline.impl.PipelineModuleImpl <em>Module</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.evoal.languages.model.pipeline.impl.PipelineModuleImpl
+		 * @see de.evoal.languages.model.pipeline.impl.PipelinePackageImpl#getPipelineModule()
+		 * @generated
+		 */
+		EClass PIPELINE_MODULE = eINSTANCE.getPipelineModule();
+
+		/**
+		 * The meta object literal for the '<em><b>Imports</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PIPELINE_MODULE__IMPORTS = eINSTANCE.getPipelineModule_Imports();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PIPELINE_MODULE__NAME = eINSTANCE.getPipelineModule_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Program</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PIPELINE_MODULE__PROGRAM = eINSTANCE.getPipelineModule_Program();
+
+		/**
+		 * The meta object literal for the '{@link de.evoal.languages.model.pipeline.impl.PipelineDefinitionImpl <em>Definition</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.evoal.languages.model.pipeline.impl.PipelineDefinitionImpl
+		 * @see de.evoal.languages.model.pipeline.impl.PipelinePackageImpl#getPipelineDefinition()
+		 * @generated
+		 */
+		EClass PIPELINE_DEFINITION = eINSTANCE.getPipelineDefinition();
+
+		/**
+		 * The meta object literal for the '<em><b>Steps</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PIPELINE_DEFINITION__STEPS = eINSTANCE.getPipelineDefinition_Steps();
+
+		/**
+		 * The meta object literal for the '{@link de.evoal.languages.model.pipeline.impl.StepImpl <em>Step</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.evoal.languages.model.pipeline.impl.StepImpl
+		 * @see de.evoal.languages.model.pipeline.impl.PipelinePackageImpl#getStep()
+		 * @generated
+		 */
+		EClass STEP = eINSTANCE.getStep();
+
+		/**
+		 * The meta object literal for the '<em><b>Instance</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference STEP__INSTANCE = eINSTANCE.getStep_Instance();
+
+		/**
+		 * The meta object literal for the '<em><b>Reads</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference STEP__READS = eINSTANCE.getStep_Reads();
+
+		/**
+		 * The meta object literal for the '<em><b>Writes</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference STEP__WRITES = eINSTANCE.getStep_Writes();
+
+		/**
+		 * The meta object literal for the '{@link de.evoal.languages.model.pipeline.impl.ApplyStatementImpl <em>Apply Statement</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.evoal.languages.model.pipeline.impl.ApplyStatementImpl
+		 * @see de.evoal.languages.model.pipeline.impl.PipelinePackageImpl#getApplyStatement()
+		 * @generated
+		 */
+		EClass APPLY_STATEMENT = eINSTANCE.getApplyStatement();
+
+		/**
+		 * The meta object literal for the '<em><b>File</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute APPLY_STATEMENT__FILE = eINSTANCE.getApplyStatement_File();
+
+		/**
+		 * The meta object literal for the '<em><b>Count</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference APPLY_STATEMENT__COUNT = eINSTANCE.getApplyStatement_Count();
+
+		/**
+		 * The meta object literal for the '<em><b>Pipelines</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference APPLY_STATEMENT__PIPELINES = eINSTANCE.getApplyStatement_Pipelines();
+
+	}
+
+} //PipelinePackage

@@ -38,5 +38,7 @@ module surrogate {
 	     }
 	]
 	
-	write "calculated.json" with 1000 samples from executing [ pipeline 'main-pipeline'];
+	begin
+		write "calculated.json" with 1000 samples from executing [ 'main-pipeline'];
+	end
 }

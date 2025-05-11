@@ -56,7 +56,7 @@
 
 		<dependency>
 			<groupId>de.evoal.languages</groupId>
-			<artifactId>de.evoal.languages.model.generator</artifactId>
+			<artifactId>de.evoal.languages.models</artifactId>
 			<version>${evoal.languages.version}</version>
 			<scope>compile</scope>
 		</dependency>

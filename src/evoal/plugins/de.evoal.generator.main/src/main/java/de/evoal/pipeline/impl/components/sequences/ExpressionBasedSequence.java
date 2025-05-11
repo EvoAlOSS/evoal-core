@@ -1,17 +1,15 @@
 package de.evoal.pipeline.impl.components.sequences;
 
-import javax.enterprise.context.Dependent;
-
 import de.evoal.core.api.languages.base.DynamicSwitch;
 import de.evoal.core.api.utils.AttributeHelper;
+import de.evoal.languages.model.base.definitions.DataDescription;
 import de.evoal.languages.model.base.expressions.Expression;
 import de.evoal.languages.model.base.expressions.Instance;
-import de.evoal.languages.model.base.definitions.DataDescription;
 import de.evoal.pipeline.api.sequence.Sequence;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
-import javax.enterprise.event.Observes;
+import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.Map;

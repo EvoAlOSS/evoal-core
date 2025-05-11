@@ -14,7 +14,7 @@ import org.eclipse.emf.ecore.EClass;
  *
  * @generated
  */
-public abstract class ConstantValueImpl extends ExpressionImpl implements ConstantValue {
+public abstract class ConstantValueImpl extends ValueImpl implements ConstantValue {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

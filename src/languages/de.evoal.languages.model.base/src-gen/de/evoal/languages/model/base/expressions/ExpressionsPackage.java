@@ -4,6 +4,7 @@ package de.evoal.languages.model.base.expressions;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
@@ -72,25 +73,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getValue()
 	 * @generated
 	 */
-	int VALUE = 0;
-
-	/**
-	 * The number of structural features of the '<em>Value</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VALUE_FEATURE_COUNT = 0;
-
-	/**
-	 * The number of operations of the '<em>Value</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VALUE_OPERATION_COUNT = 0;
+	int VALUE = 1;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.expressions.impl.ExpressionImpl <em>Expression</em>}' class.
@@ -100,7 +83,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getExpression()
 	 * @generated
 	 */
-	int EXPRESSION = 1;
+	int EXPRESSION = 0;
 
 	/**
 	 * The number of structural features of the '<em>Expression</em>' class.
@@ -109,7 +92,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXPRESSION_FEATURE_COUNT = VALUE_FEATURE_COUNT + 0;
+	int EXPRESSION_FEATURE_COUNT = 0;
 
 	/**
 	 * The number of operations of the '<em>Expression</em>' class.
@@ -118,7 +101,25 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXPRESSION_OPERATION_COUNT = VALUE_OPERATION_COUNT + 0;
+	int EXPRESSION_OPERATION_COUNT = 0;
+
+	/**
+	 * The number of structural features of the '<em>Value</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VALUE_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>Value</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VALUE_OPERATION_COUNT = EXPRESSION_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.expressions.impl.OrExpressionImpl <em>Or Expression</em>}' class.
@@ -137,7 +138,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OR_EXPRESSION__SUB_EXPRESSIONS = EXPRESSION_FEATURE_COUNT + 0;
+	int OR_EXPRESSION__SUB_EXPRESSIONS = VALUE_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Or Expression</em>' class.
@@ -146,7 +147,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OR_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 1;
+	int OR_EXPRESSION_FEATURE_COUNT = VALUE_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>Or Expression</em>' class.
@@ -155,7 +156,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OR_EXPRESSION_OPERATION_COUNT = EXPRESSION_OPERATION_COUNT + 0;
+	int OR_EXPRESSION_OPERATION_COUNT = VALUE_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.expressions.impl.XorExpressionImpl <em>Xor Expression</em>}' class.
@@ -174,7 +175,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int XOR_EXPRESSION__SUB_EXPRESSIONS = EXPRESSION_FEATURE_COUNT + 0;
+	int XOR_EXPRESSION__SUB_EXPRESSIONS = VALUE_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Xor Expression</em>' class.
@@ -183,7 +184,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int XOR_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 1;
+	int XOR_EXPRESSION_FEATURE_COUNT = VALUE_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>Xor Expression</em>' class.
@@ -192,7 +193,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int XOR_EXPRESSION_OPERATION_COUNT = EXPRESSION_OPERATION_COUNT + 0;
+	int XOR_EXPRESSION_OPERATION_COUNT = VALUE_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.expressions.impl.AndExpressionImpl <em>And Expression</em>}' class.
@@ -211,7 +212,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int AND_EXPRESSION__SUB_EXPRESSIONS = EXPRESSION_FEATURE_COUNT + 0;
+	int AND_EXPRESSION__SUB_EXPRESSIONS = VALUE_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>And Expression</em>' class.
@@ -220,7 +221,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int AND_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 1;
+	int AND_EXPRESSION_FEATURE_COUNT = VALUE_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>And Expression</em>' class.
@@ -229,7 +230,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int AND_EXPRESSION_OPERATION_COUNT = EXPRESSION_OPERATION_COUNT + 0;
+	int AND_EXPRESSION_OPERATION_COUNT = VALUE_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.expressions.impl.NotExpressionImpl <em>Not Expression</em>}' class.
@@ -248,7 +249,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NOT_EXPRESSION__NEGATED = EXPRESSION_FEATURE_COUNT + 0;
+	int NOT_EXPRESSION__NEGATED = VALUE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Operand</b></em>' containment reference.
@@ -257,7 +258,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NOT_EXPRESSION__OPERAND = EXPRESSION_FEATURE_COUNT + 1;
+	int NOT_EXPRESSION__OPERAND = VALUE_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Not Expression</em>' class.
@@ -266,7 +267,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NOT_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
+	int NOT_EXPRESSION_FEATURE_COUNT = VALUE_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of operations of the '<em>Not Expression</em>' class.
@@ -275,7 +276,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NOT_EXPRESSION_OPERATION_COUNT = EXPRESSION_OPERATION_COUNT + 0;
+	int NOT_EXPRESSION_OPERATION_COUNT = VALUE_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.expressions.impl.ComparisonExpressionImpl <em>Comparison Expression</em>}' class.
@@ -294,7 +295,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPARISON_EXPRESSION__LEFT_OPERAND = EXPRESSION_FEATURE_COUNT + 0;
+	int COMPARISON_EXPRESSION__LEFT_OPERAND = VALUE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Comparison</b></em>' containment reference list.
@@ -303,7 +304,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPARISON_EXPRESSION__COMPARISON = EXPRESSION_FEATURE_COUNT + 1;
+	int COMPARISON_EXPRESSION__COMPARISON = VALUE_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Comparison Expression</em>' class.
@@ -312,7 +313,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPARISON_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
+	int COMPARISON_EXPRESSION_FEATURE_COUNT = VALUE_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of operations of the '<em>Comparison Expression</em>' class.
@@ -321,7 +322,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPARISON_EXPRESSION_OPERATION_COUNT = EXPRESSION_OPERATION_COUNT + 0;
+	int COMPARISON_EXPRESSION_OPERATION_COUNT = VALUE_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.expressions.impl.PartialComparisonExpressionImpl <em>Partial Comparison Expression</em>}' class.
@@ -340,7 +341,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PARTIAL_COMPARISON_EXPRESSION__OPERATOR = EXPRESSION_FEATURE_COUNT + 0;
+	int PARTIAL_COMPARISON_EXPRESSION__OPERATOR = VALUE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Sub Expression</b></em>' containment reference.
@@ -349,7 +350,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PARTIAL_COMPARISON_EXPRESSION__SUB_EXPRESSION = EXPRESSION_FEATURE_COUNT + 1;
+	int PARTIAL_COMPARISON_EXPRESSION__SUB_EXPRESSION = VALUE_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Partial Comparison Expression</em>' class.
@@ -358,7 +359,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PARTIAL_COMPARISON_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
+	int PARTIAL_COMPARISON_EXPRESSION_FEATURE_COUNT = VALUE_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of operations of the '<em>Partial Comparison Expression</em>' class.
@@ -367,7 +368,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PARTIAL_COMPARISON_EXPRESSION_OPERATION_COUNT = EXPRESSION_OPERATION_COUNT + 0;
+	int PARTIAL_COMPARISON_EXPRESSION_OPERATION_COUNT = VALUE_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.expressions.impl.AddOrSubtractExpressionImpl <em>Add Or Subtract Expression</em>}' class.
@@ -386,7 +387,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ADD_OR_SUBTRACT_EXPRESSION__LEFT_OPERAND = EXPRESSION_FEATURE_COUNT + 0;
+	int ADD_OR_SUBTRACT_EXPRESSION__LEFT_OPERAND = VALUE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Operators</b></em>' attribute list.
@@ -395,7 +396,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ADD_OR_SUBTRACT_EXPRESSION__OPERATORS = EXPRESSION_FEATURE_COUNT + 1;
+	int ADD_OR_SUBTRACT_EXPRESSION__OPERATORS = VALUE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Operands</b></em>' containment reference list.
@@ -404,7 +405,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ADD_OR_SUBTRACT_EXPRESSION__OPERANDS = EXPRESSION_FEATURE_COUNT + 2;
+	int ADD_OR_SUBTRACT_EXPRESSION__OPERANDS = VALUE_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Add Or Subtract Expression</em>' class.
@@ -413,7 +414,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ADD_OR_SUBTRACT_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 3;
+	int ADD_OR_SUBTRACT_EXPRESSION_FEATURE_COUNT = VALUE_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of operations of the '<em>Add Or Subtract Expression</em>' class.
@@ -422,7 +423,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ADD_OR_SUBTRACT_EXPRESSION_OPERATION_COUNT = EXPRESSION_OPERATION_COUNT + 0;
+	int ADD_OR_SUBTRACT_EXPRESSION_OPERATION_COUNT = VALUE_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.expressions.impl.MultiplyDivideModuloExpressionImpl <em>Multiply Divide Modulo Expression</em>}' class.
@@ -441,7 +442,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MULTIPLY_DIVIDE_MODULO_EXPRESSION__LEFT_OPERAND = EXPRESSION_FEATURE_COUNT + 0;
+	int MULTIPLY_DIVIDE_MODULO_EXPRESSION__LEFT_OPERAND = VALUE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Operators</b></em>' attribute list.
@@ -450,7 +451,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MULTIPLY_DIVIDE_MODULO_EXPRESSION__OPERATORS = EXPRESSION_FEATURE_COUNT + 1;
+	int MULTIPLY_DIVIDE_MODULO_EXPRESSION__OPERATORS = VALUE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Operands</b></em>' containment reference list.
@@ -459,7 +460,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MULTIPLY_DIVIDE_MODULO_EXPRESSION__OPERANDS = EXPRESSION_FEATURE_COUNT + 2;
+	int MULTIPLY_DIVIDE_MODULO_EXPRESSION__OPERANDS = VALUE_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Multiply Divide Modulo Expression</em>' class.
@@ -468,7 +469,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MULTIPLY_DIVIDE_MODULO_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 3;
+	int MULTIPLY_DIVIDE_MODULO_EXPRESSION_FEATURE_COUNT = VALUE_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of operations of the '<em>Multiply Divide Modulo Expression</em>' class.
@@ -477,7 +478,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MULTIPLY_DIVIDE_MODULO_EXPRESSION_OPERATION_COUNT = EXPRESSION_OPERATION_COUNT + 0;
+	int MULTIPLY_DIVIDE_MODULO_EXPRESSION_OPERATION_COUNT = VALUE_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.expressions.impl.PowerOfExpressionImpl <em>Power Of Expression</em>}' class.
@@ -496,7 +497,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int POWER_OF_EXPRESSION__LEFT_OPERAND = EXPRESSION_FEATURE_COUNT + 0;
+	int POWER_OF_EXPRESSION__LEFT_OPERAND = VALUE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Right Operand</b></em>' containment reference.
@@ -505,7 +506,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int POWER_OF_EXPRESSION__RIGHT_OPERAND = EXPRESSION_FEATURE_COUNT + 1;
+	int POWER_OF_EXPRESSION__RIGHT_OPERAND = VALUE_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Power Of Expression</em>' class.
@@ -514,7 +515,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int POWER_OF_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
+	int POWER_OF_EXPRESSION_FEATURE_COUNT = VALUE_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of operations of the '<em>Power Of Expression</em>' class.
@@ -523,7 +524,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int POWER_OF_EXPRESSION_OPERATION_COUNT = EXPRESSION_OPERATION_COUNT + 0;
+	int POWER_OF_EXPRESSION_OPERATION_COUNT = VALUE_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.expressions.impl.UnaryAddOrSubtractExpressionImpl <em>Unary Add Or Subtract Expression</em>}' class.
@@ -542,7 +543,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UNARY_ADD_OR_SUBTRACT_EXPRESSION__OPERATORS = EXPRESSION_FEATURE_COUNT + 0;
+	int UNARY_ADD_OR_SUBTRACT_EXPRESSION__OPERATORS = VALUE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Sub Expression</b></em>' containment reference.
@@ -551,7 +552,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UNARY_ADD_OR_SUBTRACT_EXPRESSION__SUB_EXPRESSION = EXPRESSION_FEATURE_COUNT + 1;
+	int UNARY_ADD_OR_SUBTRACT_EXPRESSION__SUB_EXPRESSION = VALUE_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Unary Add Or Subtract Expression</em>' class.
@@ -560,7 +561,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UNARY_ADD_OR_SUBTRACT_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
+	int UNARY_ADD_OR_SUBTRACT_EXPRESSION_FEATURE_COUNT = VALUE_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of operations of the '<em>Unary Add Or Subtract Expression</em>' class.
@@ -569,7 +570,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UNARY_ADD_OR_SUBTRACT_EXPRESSION_OPERATION_COUNT = EXPRESSION_OPERATION_COUNT + 0;
+	int UNARY_ADD_OR_SUBTRACT_EXPRESSION_OPERATION_COUNT = VALUE_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.expressions.impl.ConstantValueImpl <em>Constant Value</em>}' class.
@@ -588,7 +589,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTANT_VALUE_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 0;
+	int CONSTANT_VALUE_FEATURE_COUNT = VALUE_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of operations of the '<em>Constant Value</em>' class.
@@ -597,7 +598,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTANT_VALUE_OPERATION_COUNT = EXPRESSION_OPERATION_COUNT + 0;
+	int CONSTANT_VALUE_OPERATION_COUNT = VALUE_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.expressions.impl.LiteralImpl <em>Literal</em>}' class.
@@ -1320,6 +1321,17 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 */
 	int FACTOR = 32;
+
+
+	/**
+	 * The meta object id for the '<em>Number</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see java.lang.Number
+	 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getNumber()
+	 * @generated
+	 */
+	int NUMBER = 33;
 
 
 	/**
@@ -2098,6 +2110,17 @@ public interface ExpressionsPackage extends EPackage {
 	EEnum getFactor();
 
 	/**
+	 * Returns the meta object for data type '{@link java.lang.Number <em>Number</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Number</em>'.
+	 * @see java.lang.Number
+	 * @model instanceClass="java.lang.Number" serializeable="false"
+	 * @generated
+	 */
+	EDataType getNumber();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2777,6 +2800,16 @@ public interface ExpressionsPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum FACTOR = eINSTANCE.getFactor();
+
+		/**
+		 * The meta object literal for the '<em>Number</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see java.lang.Number
+		 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getNumber()
+		 * @generated
+		 */
+		EDataType NUMBER = eINSTANCE.getNumber();
 
 	}
 

@@ -11,9 +11,9 @@ module de.evoal.core.junit {
     requires org.eclipse.emf.ecore;
     requires org.eclipse.xtext;
 
+    requires de.evoal.languages.models;
     requires de.evoal.languages.model.ddl;
     requires de.evoal.languages.model.dl;
-    requires de.evoal.languages.model.generator;
     requires de.evoal.languages.model.mll;
     requires de.evoal.languages.model.ol;
 

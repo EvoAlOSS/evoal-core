@@ -5,9 +5,6 @@
 package de.evoal.languages.model.instance.dsl.ui;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
-import org.eclipse.xtext.ui.editor.hover.IEObjectHoverProvider;
-
-import de.evoal.languages.model.instance.dsl.ui.hover.InstanceEObjectDocumentationProvider;
 
 /**
  * Use this class to register components to be used within the Eclipse IDE.

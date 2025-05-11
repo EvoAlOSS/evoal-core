@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="EvoAl project" modelDirectory="/de.evoal.languages.models/src-gen"
+    modelPluginID="de.evoal.languages.models" forceOverwrite="true" modelName="execution"
+    updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
+    runtimeVersion="2.20" usedGenPackages="../../de.evoal.languages.model.base/model/model.genmodel#//base ../../de.evoal.languages.model.base/model/expressions.genmodel#//expressions ../../de.evoal.languages.model.base/model/definitions.genmodel#//definitions ../../de.evoal.languages.model.base/model/types.genmodel#//types">
+  <foreignModel>execution.ecore</foreignModel>
+  <genPackages prefix="Execution" basePackage="de.evoal.languages.model" disposableProviderFactory="true"
+      fileExtensions="execution" ecorePackage="execution.ecore#/">
+    <genClasses ecoreClass="execution.ecore#//ExecutionModule">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference execution.ecore#//ExecutionModule/imports"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute execution.ecore#//ExecutionModule/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference execution.ecore#//ExecutionModule/program"/>
+    </genClasses>
+    <genClasses ecoreClass="execution.ecore#//Program">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference execution.ecore#//Program/functions"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference execution.ecore#//Program/main"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference execution.ecore#//Program/variables"/>
+    </genClasses>
+    <genClasses ecoreClass="execution.ecore#//Function"/>
+    <genClasses ecoreClass="execution.ecore#//ModelFunction">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute execution.ecore#//ModelFunction/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference execution.ecore#//ModelFunction/variables"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference execution.ecore#//ModelFunction/body"/>
+    </genClasses>
+    <genClasses ecoreClass="execution.ecore#//Statement"/>
+    <genClasses image="false" ecoreClass="execution.ecore#//CallStatement"/>
+    <genClasses ecoreClass="execution.ecore#//CallModelFunction">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference execution.ecore#//CallModelFunction/function"/>
+    </genClasses>
+    <genClasses ecoreClass="execution.ecore#//CallBuiltinFunction">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference execution.ecore#//CallBuiltinFunction/definition"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference execution.ecore#//CallBuiltinFunction/parameters"/>
+    </genClasses>
+    <genClasses ecoreClass="execution.ecore#//Block">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference execution.ecore#//Block/statements"/>
+    </genClasses>
+    <genClasses ecoreClass="execution.ecore#//ForStatement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference execution.ecore#//ForStatement/var"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference execution.ecore#//ForStatement/range"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference execution.ecore#//ForStatement/body"/>
+    </genClasses>
+    <genClasses ecoreClass="execution.ecore#//Range"/>
+    <genClasses ecoreClass="execution.ecore#//CounterRange">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference execution.ecore#//CounterRange/start"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference execution.ecore#//CounterRange/end"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference execution.ecore#//CounterRange/increment"/>
+    </genClasses>
+    <genClasses ecoreClass="execution.ecore#//ValueRange">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference execution.ecore#//ValueRange/elements"/>
+    </genClasses>
+    <genClasses ecoreClass="execution.ecore#//VariableReference">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference execution.ecore#//VariableReference/variable"/>
+    </genClasses>
+    <genClasses ecoreClass="execution.ecore#//Variable"/>
+    <genClasses ecoreClass="execution.ecore#//NamedVariable">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute execution.ecore#//NamedVariable/name"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

@@ -4,7 +4,8 @@ import de.evoal.core.api.cdi.EvoalComponent;
 import lombok.NonNull;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.LinkedHashSet;
 
 public abstract class ComponentImpl implements Component, EvoalComponent<ComponentImpl> {
 

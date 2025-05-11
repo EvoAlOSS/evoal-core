@@ -36,5 +36,7 @@ module recalculate {
 	     }
 	]
 	
-	write "ackley-recalc.csv" with 1000 samples from executing [ pipeline 'main-pipeline'];
+	begin
+		write "ackley-recalc.csv" with 1000 samples from executing [ 'main-pipeline'];
+	end
 }

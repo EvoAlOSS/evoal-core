@@ -10,9 +10,9 @@
     <details key="ecore" value="http://www.eclipse.org/emf/2002/Ecore"/>
     <details key="types" value="types.ecore#/"/>
   </eAnnotations>
-  <eClassifiers xsi:type="ecore:EClass" name="Value"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Expression" abstract="true" eSuperTypes="#//Value"/>
-  <eClassifiers xsi:type="ecore:EClass" name="OrExpression" eSuperTypes="#//Expression">
+  <eClassifiers xsi:type="ecore:EClass" name="Expression" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Value" abstract="true" eSuperTypes="#//Expression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OrExpression" eSuperTypes="#//Value">
     <eStructuralFeatures xsi:type="ecore:EReference" name="subExpressions" lowerBound="1"
         upperBound="-1" eType="#//XorExpression" containment="true">
       <eAnnotations source="http://www.eclipse.org/OCL/Collection">
@@ -20,7 +20,7 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="XorExpression" eSuperTypes="#//Expression">
+  <eClassifiers xsi:type="ecore:EClass" name="XorExpression" eSuperTypes="#//Value">
     <eStructuralFeatures xsi:type="ecore:EReference" name="subExpressions" lowerBound="1"
         upperBound="-1" eType="#//AndExpression" containment="true">
       <eAnnotations source="http://www.eclipse.org/OCL/Collection">
@@ -28,7 +28,7 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AndExpression" eSuperTypes="#//Expression">
+  <eClassifiers xsi:type="ecore:EClass" name="AndExpression" eSuperTypes="#//Value">
     <eStructuralFeatures xsi:type="ecore:EReference" name="subExpressions" lowerBound="1"
         upperBound="-1" eType="#//NotExpression" containment="true">
       <eAnnotations source="http://www.eclipse.org/OCL/Collection">
@@ -36,13 +36,13 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="NotExpression" eSuperTypes="#//Expression">
+  <eClassifiers xsi:type="ecore:EClass" name="NotExpression" eSuperTypes="#//Value">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="negated" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="operand" lowerBound="1"
         eType="#//ComparisonExpression" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ComparisonExpression" eSuperTypes="#//Expression">
+  <eClassifiers xsi:type="ecore:EClass" name="ComparisonExpression" eSuperTypes="#//Value">
     <eStructuralFeatures xsi:type="ecore:EReference" name="leftOperand" lowerBound="1"
         eType="#//AddOrSubtractExpression" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="comparison" upperBound="-1"
@@ -52,7 +52,7 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="PartialComparisonExpression" eSuperTypes="#//Expression">
+  <eClassifiers xsi:type="ecore:EClass" name="PartialComparisonExpression" eSuperTypes="#//Value">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" lowerBound="1"
         eType="#//ComparisonOperator"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="subExpression" lowerBound="1"
@@ -66,7 +66,7 @@
     <eLiterals name="LessEqual"/>
     <eLiterals name="LessThan"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AddOrSubtractExpression" eSuperTypes="#//Expression">
+  <eClassifiers xsi:type="ecore:EClass" name="AddOrSubtractExpression" eSuperTypes="#//Value">
     <eStructuralFeatures xsi:type="ecore:EReference" name="leftOperand" lowerBound="1"
         eType="#//MultiplyDivideModuloExpression" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="operators" upperBound="-1"
@@ -86,7 +86,7 @@
     <eLiterals name="Add"/>
     <eLiterals name="Subtract"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="MultiplyDivideModuloExpression" eSuperTypes="#//Expression">
+  <eClassifiers xsi:type="ecore:EClass" name="MultiplyDivideModuloExpression" eSuperTypes="#//Value">
     <eStructuralFeatures xsi:type="ecore:EReference" name="leftOperand" lowerBound="1"
         eType="#//PowerOfExpression" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="operators" upperBound="-1"
@@ -107,13 +107,13 @@
     <eLiterals name="Divide"/>
     <eLiterals name="Modulo"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="PowerOfExpression" eSuperTypes="#//Expression">
+  <eClassifiers xsi:type="ecore:EClass" name="PowerOfExpression" eSuperTypes="#//Value">
     <eStructuralFeatures xsi:type="ecore:EReference" name="leftOperand" lowerBound="1"
         eType="#//UnaryAddOrSubtractExpression" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="rightOperand" eType="#//PowerOfExpression"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="UnaryAddOrSubtractExpression" eSuperTypes="#//Expression">
+  <eClassifiers xsi:type="ecore:EClass" name="UnaryAddOrSubtractExpression" eSuperTypes="#//Value">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="operators" upperBound="-1"
         eType="#//AddOrSubtractOperator">
       <eAnnotations source="http://www.eclipse.org/OCL/Collection">
@@ -123,12 +123,14 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="subExpression" lowerBound="1"
         eType="#//Value" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ConstantValue" abstract="true" eSuperTypes="#//Expression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ConstantValue" abstract="true" eSuperTypes="#//Value"/>
   <eClassifiers xsi:type="ecore:EClass" name="Literal" abstract="true" eSuperTypes="#//ConstantValue">
     <eOperations name="getValue" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="Number" instanceClassName="java.lang.Number"
+      serializable="false"/>
   <eClassifiers xsi:type="ecore:EClass" name="NumberLiteral" abstract="true" eSuperTypes="#//Literal">
-    <eOperations name="getValue"/>
+    <eOperations name="getValue" lowerBound="1" eType="#//Number"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="factor" lowerBound="1"
         eType="#//Factor" defaultValueLiteral="None"/>
   </eClassifiers>

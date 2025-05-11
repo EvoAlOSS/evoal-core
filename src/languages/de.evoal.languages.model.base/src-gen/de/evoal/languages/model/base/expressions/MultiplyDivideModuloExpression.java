@@ -22,7 +22,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface MultiplyDivideModuloExpression extends Expression {
+public interface MultiplyDivideModuloExpression extends Value {
 	/**
 	 * Returns the value of the '<em><b>Left Operand</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

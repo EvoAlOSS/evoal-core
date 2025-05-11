@@ -8,7 +8,6 @@ import de.evoal.languages.model.ddl.impl.DdlPackageImpl;
 import de.evoal.languages.model.dl.DefinitionModule;
 import de.evoal.languages.model.dl.dsl.DefinitionLanguageStandaloneSetup;
 import de.evoal.languages.model.dl.impl.DlPackageImpl;
-import de.evoal.languages.model.generator.GeneratorModule;
 import de.evoal.languages.model.generator.dsl.GeneratorDSLStandaloneSetup;
 import de.evoal.languages.model.generator.impl.GeneratorPackageImpl;
 import lombok.NonNull;
@@ -19,7 +18,6 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 
 import javax.enterprise.context.Dependent;
-import java.io.File;
 import java.util.Optional;
 
 @Dependent @Slf4j

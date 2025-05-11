@@ -31,7 +31,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *
  * @generated
  */
-public class XorExpressionImpl extends ExpressionImpl implements XorExpression {
+public class XorExpressionImpl extends ValueImpl implements XorExpression {
 	/**
 	 * The cached value of the '{@link #getSubExpressions() <em>Sub Expressions</em>}' containment reference list.
 	 * <!-- begin-user-doc -->

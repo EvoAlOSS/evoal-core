@@ -19,6 +19,7 @@ module training {
 						'σ' := 3.0;
 						'soft-margin' := 0.15;
 						tolerance := 0.1;
+						
 	
     predict svr from "data.json"
     and measure

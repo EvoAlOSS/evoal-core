@@ -68,12 +68,12 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	protected ExpressionsSwitch<Adapter> modelSwitch =
 		new ExpressionsSwitch<Adapter>() {
 			@Override
-			public Adapter caseValue(Value object) {
-				return createValueAdapter();
-			}
-			@Override
 			public Adapter caseExpression(Expression object) {
 				return createExpressionAdapter();
+			}
+			@Override
+			public Adapter caseValue(Value object) {
+				return createValueAdapter();
 			}
 			@Override
 			public Adapter caseOrExpression(OrExpression object) {

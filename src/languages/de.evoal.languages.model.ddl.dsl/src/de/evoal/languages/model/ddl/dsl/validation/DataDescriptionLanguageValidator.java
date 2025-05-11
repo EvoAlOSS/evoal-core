@@ -14,7 +14,6 @@ import de.evoal.languages.model.base.expressions.Expression;
 import de.evoal.languages.model.base.definitions.BaseDataDescription;
 import de.evoal.languages.model.ddl.DataDescriptionModule;
 import de.evoal.languages.model.ddl.DdlPackage;
-import de.evoal.languages.model.base.definitions.EnumDefinition;
 import de.evoal.languages.model.base.definitions.ScaleType;
 import de.evoal.languages.model.utils.validator.ModuleValidator;
 import de.evoal.languages.model.utils.validator.ScaleValidator;

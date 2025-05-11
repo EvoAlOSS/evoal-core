@@ -19,6 +19,11 @@ import java.util.stream.Collectors;
  */
 @Slf4j
 public final class BeanFactory {
+    /**
+     * For generating fully qualified names.
+     */
+    private final static FQNProvider fqName = new FQNProvider();
+
     private BeanFactory() {
     }
 
@@ -116,7 +121,7 @@ public final class BeanFactory {
     public static <T extends EvoalComponent<T>> T createComponent(final Class<T> type, final Instance configuration) {
         Requirements.requireNotNull(configuration);
 
-        final String name = new FQNProvider().get(configuration);
+        final String name = fqName.get(configuration);
 
         return createComponent(type, name, configuration);
     }
@@ -124,7 +129,7 @@ public final class BeanFactory {
     public static <T extends EvoalComponent<T>> T createComponent(final Class<T> type, final Instance configuration, final Consumer<T> preInit) {
         Requirements.requireNotNull(configuration);
 
-        final String name = new FQNProvider().get(configuration);
+        final String name = fqName.get(configuration);
 
         return createComponent(type, name, configuration, preInit);
     }
@@ -132,7 +137,7 @@ public final class BeanFactory {
     public static <T extends EvoalComponent<T>> T createComponent(final Class<T> type, final Instance configuration, final String nameSuffix) {
         Requirements.requireNotNull(configuration);
 
-        final String name = new FQNProvider().get(configuration) + nameSuffix;
+        final String name = fqName.get(configuration) + nameSuffix;
 
         return createComponent(type, name, configuration);
     }
@@ -141,7 +146,7 @@ public final class BeanFactory {
         Requirements.requireNotNull(type);
         Requirements.requireNotNull(configuration);
 
-        final String name = new FQNProvider().get(configuration);
+        final String name = fqName.get(configuration);
         Requirements.requireNotNull(name);
 
         log.info("Creating bean for instance of type {}.", name);

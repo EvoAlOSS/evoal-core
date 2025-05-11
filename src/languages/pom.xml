@@ -301,13 +301,12 @@
 		<module>de.evoal.languages.model.ol.dsl.ide</module>
 		<module>de.evoal.languages.model.ol.dsl.ui</module>
 
-		<module>de.evoal.languages.model.generator</module>
 		<module>de.evoal.languages.model.generator.dsl</module>
 		<module>de.evoal.languages.model.generator.dsl.tests</module>
 		<module>de.evoal.languages.model.generator.dsl.ide</module>
 		<module>de.evoal.languages.model.generator.dsl.ui</module>
 
-		<module>de.evoal.languages.model.pipeline</module>
+		<module>de.evoal.languages.models</module>
 		<module>de.evoal.languages.model.dynamic</module>
 		<module>de.evoal.languages.model.constraints</module>
 

@@ -56,7 +56,6 @@
       <import plugin="de.evoal.languages.model.ddl.dsl" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="de.evoal.languages.model.base.dsl.ide" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="de.evoal.languages.model.dl.dsl.ui" version="1.0.0" match="greaterOrEqual"/>
-      <import plugin="de.evoal.languages.model.generator" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="org.antlr.runtime" version="3.2.0" match="compatible"/>
       <import plugin="slf4j.api"/>
    </requires>
@@ -154,10 +153,6 @@
          version="0.0.0"/>
 
    <plugin
-         id="de.evoal.languages.model.generator"
-         version="0.0.0"/>
-
-   <plugin
          id="de.evoal.languages.model.utils"
          version="0.0.0"/>
 
@@ -194,7 +189,7 @@
          version="0.0.0"/>
 
    <plugin
-         id="de.evoal.languages.model.pipeline"
+         id="de.evoal.languages.models"
          version="0.0.0"/>
 
 </feature>

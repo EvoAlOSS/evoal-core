@@ -21,7 +21,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface UnaryAddOrSubtractExpression extends Expression {
+public interface UnaryAddOrSubtractExpression extends Value {
 	/**
 	 * Returns the value of the '<em><b>Operators</b></em>' attribute list.
 	 * The list contents are of type {@link de.evoal.languages.model.base.expressions.AddOrSubtractOperator}.

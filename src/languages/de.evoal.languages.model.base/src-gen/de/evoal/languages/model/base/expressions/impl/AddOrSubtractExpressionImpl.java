@@ -38,7 +38,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *
  * @generated
  */
-public class AddOrSubtractExpressionImpl extends ExpressionImpl implements AddOrSubtractExpression {
+public class AddOrSubtractExpressionImpl extends ValueImpl implements AddOrSubtractExpression {
 	/**
 	 * The cached value of the '{@link #getLeftOperand() <em>Left Operand</em>}' containment reference.
 	 * <!-- begin-user-doc -->

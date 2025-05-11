@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="EvoAl Project" modelDirectory="/de.evoal.languages.models/src-gen"
+    modelPluginID="de.evoal.languages.models" forceOverwrite="true" modelName="generator"
+    updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
+    runtimeVersion="2.20" usedGenPackages="../../de.evoal.languages.model.base/model/definitions.genmodel#//definitions ../../de.evoal.languages.model.base/model/expressions.genmodel#//expressions ../../de.evoal.languages.model.base/model/model.genmodel#//base ../../de.evoal.languages.model.base/model/types.genmodel#//types execution.genmodel#//execution">
+  <foreignModel>generator.ecore</foreignModel>
+  <genPackages prefix="Generator" basePackage="de.evoal.languages.model" disposableProviderFactory="true"
+      fileExtensions="generator" ecorePackage="generator.ecore#/">
+    <genClasses ecoreClass="generator.ecore#//GeneratorModule">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute generator.ecore#//GeneratorModule/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference generator.ecore#//GeneratorModule/imports"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference generator.ecore#//GeneratorModule/pipelines"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference generator.ecore#//GeneratorModule/body"/>
+    </genClasses>
+    <genClasses ecoreClass="generator.ecore#//PipelineDefinition">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference generator.ecore#//PipelineDefinition/steps"/>
+    </genClasses>
+    <genClasses ecoreClass="generator.ecore#//Step">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference generator.ecore#//Step/instance"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference generator.ecore#//Step/reads"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference generator.ecore#//Step/writes"/>
+    </genClasses>
+    <genClasses ecoreClass="generator.ecore#//ApplyStatement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute generator.ecore#//ApplyStatement/file"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference generator.ecore#//ApplyStatement/count"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference generator.ecore#//ApplyStatement/pipelines"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

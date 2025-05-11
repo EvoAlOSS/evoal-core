@@ -22,7 +22,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface AddOrSubtractExpression extends Expression {
+public interface AddOrSubtractExpression extends Value {
 	/**
 	 * Returns the value of the '<em><b>Left Operand</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

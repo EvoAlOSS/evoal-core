@@ -2,8 +2,6 @@
  */
 package de.evoal.languages.model.base.expressions;
 
-import org.eclipse.emf.ecore.EObject;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Value</b></em>'.
@@ -11,8 +9,8 @@ import org.eclipse.emf.ecore.EObject;
  *
  *
  * @see de.evoal.languages.model.base.expressions.ExpressionsPackage#getValue()
- * @model
+ * @model abstract="true"
  * @generated
  */
-public interface Value extends EObject {
+public interface Value extends Expression {
 } // Value

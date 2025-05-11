@@ -3,7 +3,6 @@ package de.evoal.pipeline.api.model.dynamic;
 import de.evoal.languages.model.base.definitions.DataDescription;
 import de.evoal.languages.model.dynamic.Definition;
 import de.evoal.languages.model.dynamic.DynamicPackage;
-import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;

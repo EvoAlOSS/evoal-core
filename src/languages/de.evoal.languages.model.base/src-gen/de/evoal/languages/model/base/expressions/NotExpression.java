@@ -20,7 +20,7 @@ package de.evoal.languages.model.base.expressions;
  * @model
  * @generated
  */
-public interface NotExpression extends Expression {
+public interface NotExpression extends Value {
 	/**
 	 * Returns the value of the '<em><b>Negated</b></em>' attribute.
 	 * The default value is <code>"false"</code>.

@@ -58,5 +58,7 @@ module 'ackley' {
 	     }
 	]
 
-	write "points.json" with 25 samples from executing [ pipeline 'main-pipeline'];
+	begin
+		write "points.json" with 25 samples from executing [ 'main-pipeline'];
+	end
 }

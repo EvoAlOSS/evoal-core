@@ -30,6 +30,7 @@ module de.evoal.surrogate.api {
     requires de.evoal.optimisation.api;
     requires de.evoal.generator.main;
     requires smile.base;
+    requires de.evoal.languages.models;
 
     // export resources
     exports de.evoal.surrogate.api;

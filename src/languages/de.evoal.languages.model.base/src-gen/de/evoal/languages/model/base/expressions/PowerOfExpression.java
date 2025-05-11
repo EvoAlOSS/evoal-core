@@ -20,7 +20,7 @@ package de.evoal.languages.model.base.expressions;
  * @model
  * @generated
  */
-public interface PowerOfExpression extends Expression {
+public interface PowerOfExpression extends Value {
 	/**
 	 * Returns the value of the '<em><b>Left Operand</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

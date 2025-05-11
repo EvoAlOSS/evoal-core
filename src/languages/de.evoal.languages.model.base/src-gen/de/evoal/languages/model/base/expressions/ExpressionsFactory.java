@@ -22,15 +22,6 @@ public interface ExpressionsFactory extends EFactory {
 	ExpressionsFactory eINSTANCE = de.evoal.languages.model.base.expressions.impl.ExpressionsFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>Value</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Value</em>'.
-	 * @generated
-	 */
-	Value createValue();
-
-	/**
 	 * Returns a new object of class '<em>Or Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

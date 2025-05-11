@@ -15,14 +15,14 @@
 	<dependencies>
 		<dependency>
 			<groupId>de.evoal.languages</groupId>
-			<artifactId>de.evoal.languages.model.generator</artifactId>
+			<artifactId>de.evoal.languages.models</artifactId>
 			<version>${evoal.languages.version}</version>
 		</dependency>
 
 		<dependency>
-			<groupId>de.evoal.languages</groupId>
-			<artifactId>de.evoal.languages.model.pipeline</artifactId>
-			<version>${evoal.languages.version}</version>
+			<groupId>de.evoal</groupId>
+			<artifactId>core.interpreter</artifactId>
+			<version>${revision}</version>
 		</dependency>
 
 		<dependency>
@@ -43,10 +43,11 @@
 			<version>${project.version}</version>
 			<scope>provided</scope>
 		</dependency>
+
 		<dependency>
-            		<groupId>net.objecthunter</groupId>
-            		<artifactId>exp4j</artifactId>
-            		<version>0.4.8</version>
-        	</dependency>	
+			<groupId>net.objecthunter</groupId>
+			<artifactId>exp4j</artifactId>
+			<version>0.4.8</version>
+		</dependency>
 	</dependencies>
 </project>

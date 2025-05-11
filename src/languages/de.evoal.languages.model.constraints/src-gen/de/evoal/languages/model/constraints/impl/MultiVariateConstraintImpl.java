@@ -8,17 +8,13 @@ import de.evoal.languages.model.base.expressions.Expression;
 import de.evoal.languages.model.constraints.ConstraintsPackage;
 import de.evoal.languages.model.constraints.MultiVariateConstraint;
 
-import de.evoal.languages.model.interpreter.BooleanNumberOperations;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
-import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;

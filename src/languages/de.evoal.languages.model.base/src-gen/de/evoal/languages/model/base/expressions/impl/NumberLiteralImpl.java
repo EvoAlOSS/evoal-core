@@ -171,8 +171,7 @@ public abstract class NumberLiteralImpl extends LiteralImpl implements NumberLit
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
 			case ExpressionsPackage.NUMBER_LITERAL___GET_VALUE:
-				getValue();
-				return null;
+				return getValue();
 		}
 		return super.eInvoke(operationID, arguments);
 	}

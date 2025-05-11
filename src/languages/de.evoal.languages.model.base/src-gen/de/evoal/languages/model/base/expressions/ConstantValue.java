@@ -13,5 +13,5 @@ package de.evoal.languages.model.base.expressions;
  * @model abstract="true"
  * @generated
  */
-public interface ConstantValue extends Expression {
+public interface ConstantValue extends Value {
 } // ConstantValue

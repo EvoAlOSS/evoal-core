@@ -3,6 +3,7 @@ grammar de.evoal.languages.model.generator.dsl.GeneratorDSL with de.evoal.langua
 import "https://www.evoal.de/languages/generator/1.0.0"
 import "https://www.evoal.de/languages/base/1.0.0" as base
 import "https://www.evoal.de/languages/base/expressions/1.0.0" as expressions
+import "https://www.evoal.de/languages/execution/1.0.0" as execution
 
 GeneratorModuleRule returns GeneratorModule:
 	(imports += ImportRule)*
@@ -10,7 +11,7 @@ GeneratorModuleRule returns GeneratorModule:
 	"module" name = QualifiedName "{"
 		(pipelines += PipelineDefinitionRule)*
 	
-		(statements	+= StatementRule)*
+		body = BodyRule
 	"}"
 ;
 
@@ -28,48 +29,48 @@ StepRule returns Step:
 	'}'
 ;
 
-StatementRule returns Statement:
-	ForStatementRule | ApplyStatementRule	
-;
-
-ForStatementRule returns ForStatement:
-	'for' name = ID 'in' range = RangeRule 'loop'
-		(statements += StatementRule)*
+BodyRule returns execution::Block:
+	{execution::Block}
+	'begin'
+	  (statements += StatementRule)*
 	'end'
 ;
 
-RangeRule returns Range:
+StatementRule returns execution::Statement:
+	ForStatementRule | ApplyStatementRule	
+;
+
+ForStatementRule returns execution::ForStatement:
+	'for' var = NamedVariableRule 'in' range = RangeRule 
+		body = BodyRule
+;
+
+NamedVariableRule returns execution::NamedVariable:
+	name = StringOrId
+;
+
+RangeRule returns execution::Range:
 	CounterRangeRule | LiteralRangeRule
 ;
 
-LiteralRangeRule returns LiteralRange:
-	'[' elements += LiteralRule (',' elements += LiteralRule)* ']'
+LiteralRangeRule returns execution::ValueRange:
+	'[' elements += ValueRule (',' elements += ValueRule)* ']'
 ;
 
-
-CounterRangeRule returns CounterRange:
-	'[' start = IntegerLiteralRule 'to' end = IntegerLiteralRule ']'
+CounterRangeRule returns execution::CounterRange:
+	'[' start = IntegerLiteralRule 'to' end = IntegerLiteralRule 'increment' 'by' increment = IntegerLiteralRule ']'
 ;
-
 
 ApplyStatementRule returns ApplyStatement:
-	'write' file = STRING 'with' count = LiteralRule 'samples' 'from' 'executing' '[' pipelines += LiteralRule (',' pipelines += LiteralRule)* ']' ';'
+	'write' file = STRING 'with' count = LiteralRule 'samples' 'from' 'executing' '[' pipelines += VariableReferenceRule (',' pipelines += VariableReferenceRule)* ']' ';'
 ;
 
 @Override
-LiteralRule returns expressions::Literal:
-	NumberLiteralRule
-		| StringLiteralRule
-		| BooleanLiteralRule
-		| InstanceLiteralRule
-		| PipelineDefinitionReferenceRule
-		| VariableReferenceRule
+ReferenceRule returns expressions::ValueReference:
+	ConstantReferenceRule | DataReferenceRule | VariableReferenceRule /*| PipelineDefinitionReferenceRule  */
 ;
 
-PipelineDefinitionReferenceRule returns PipelineDefinitionReference:
-	'pipeline' pipeline = [PipelineDefinition|QualifiedName]
+VariableReferenceRule returns execution::VariableReference:
+	variable = [execution::NamedVariable|StringOrId]
 ;
 
-VariableReferenceRule returns VariableReference:
-	loop = [ForStatement|ID]
-;

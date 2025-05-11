@@ -7,6 +7,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import de.evoal.languages.model.base.dsl.services.BaseLanguageGrammarAccess;
 import java.util.List;
+import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
@@ -36,15 +37,15 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 		private final Keyword cLeftCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		private final Assignment cPipelinesAssignment_4 = (Assignment)cGroup.eContents().get(4);
 		private final RuleCall cPipelinesPipelineDefinitionRuleParserRuleCall_4_0 = (RuleCall)cPipelinesAssignment_4.eContents().get(0);
-		private final Assignment cStatementsAssignment_5 = (Assignment)cGroup.eContents().get(5);
-		private final RuleCall cStatementsStatementRuleParserRuleCall_5_0 = (RuleCall)cStatementsAssignment_5.eContents().get(0);
+		private final Assignment cBodyAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final RuleCall cBodyBodyRuleParserRuleCall_5_0 = (RuleCall)cBodyAssignment_5.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
 		//GeneratorModuleRule returns GeneratorModule:
 		//    (imports += ImportRule)*
 		//    "module" name = QualifiedName "{"
 		//        (pipelines += PipelineDefinitionRule)*
-		//        (statements    += StatementRule)*
+		//        body = BodyRule
 		//    "}"
 		//;
 		@Override public ParserRule getRule() { return rule; }
@@ -52,7 +53,7 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 		//(imports += ImportRule)*
 		//"module" name = QualifiedName "{"
 		//    (pipelines += PipelineDefinitionRule)*
-		//    (statements    += StatementRule)*
+		//    body = BodyRule
 		//"}"
 		public Group getGroup() { return cGroup; }
 		
@@ -80,11 +81,11 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 		//PipelineDefinitionRule
 		public RuleCall getPipelinesPipelineDefinitionRuleParserRuleCall_4_0() { return cPipelinesPipelineDefinitionRuleParserRuleCall_4_0; }
 		
-		//(statements	+= StatementRule)*
-		public Assignment getStatementsAssignment_5() { return cStatementsAssignment_5; }
+		//body = BodyRule
+		public Assignment getBodyAssignment_5() { return cBodyAssignment_5; }
 		
-		//StatementRule
-		public RuleCall getStatementsStatementRuleParserRuleCall_5_0() { return cStatementsStatementRuleParserRuleCall_5_0; }
+		//BodyRule
+		public RuleCall getBodyBodyRuleParserRuleCall_5_0() { return cBodyBodyRuleParserRuleCall_5_0; }
 		
 		//"}"
 		public Keyword getRightCurlyBracketKeyword_6() { return cRightCurlyBracketKeyword_6; }
@@ -273,13 +274,51 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_6() { return cRightCurlyBracketKeyword_6; }
 	}
+	public class BodyRuleElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.generator.dsl.GeneratorDSL.BodyRule");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cBlockAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cBeginKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cStatementsAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cStatementsStatementRuleParserRuleCall_2_0 = (RuleCall)cStatementsAssignment_2.eContents().get(0);
+		private final Keyword cEndKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		
+		//BodyRule returns execution::Block:
+		//    {execution::Block}
+		//    'begin'
+		//      (statements += StatementRule)*
+		//    'end'
+		//;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//{execution::Block}
+		//'begin'
+		//  (statements += StatementRule)*
+		//'end'
+		public Group getGroup() { return cGroup; }
+		
+		//{execution::Block}
+		public Action getBlockAction_0() { return cBlockAction_0; }
+		
+		//'begin'
+		public Keyword getBeginKeyword_1() { return cBeginKeyword_1; }
+		
+		//(statements += StatementRule)*
+		public Assignment getStatementsAssignment_2() { return cStatementsAssignment_2; }
+		
+		//StatementRule
+		public RuleCall getStatementsStatementRuleParserRuleCall_2_0() { return cStatementsStatementRuleParserRuleCall_2_0; }
+		
+		//'end'
+		public Keyword getEndKeyword_3() { return cEndKeyword_3; }
+	}
 	public class StatementRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.generator.dsl.GeneratorDSL.StatementRule");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cForStatementRuleParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cApplyStatementRuleParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
-		//StatementRule returns Statement:
+		//StatementRule returns execution::Statement:
 		//    ForStatementRule | ApplyStatementRule
 		//;
 		@Override public ParserRule getRule() { return rule; }
@@ -297,36 +336,32 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.generator.dsl.GeneratorDSL.ForStatementRule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cForKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final Assignment cVarAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cVarNamedVariableRuleParserRuleCall_1_0 = (RuleCall)cVarAssignment_1.eContents().get(0);
 		private final Keyword cInKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		private final Assignment cRangeAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final RuleCall cRangeRangeRuleParserRuleCall_3_0 = (RuleCall)cRangeAssignment_3.eContents().get(0);
-		private final Keyword cLoopKeyword_4 = (Keyword)cGroup.eContents().get(4);
-		private final Assignment cStatementsAssignment_5 = (Assignment)cGroup.eContents().get(5);
-		private final RuleCall cStatementsStatementRuleParserRuleCall_5_0 = (RuleCall)cStatementsAssignment_5.eContents().get(0);
-		private final Keyword cEndKeyword_6 = (Keyword)cGroup.eContents().get(6);
+		private final Assignment cBodyAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cBodyBodyRuleParserRuleCall_4_0 = (RuleCall)cBodyAssignment_4.eContents().get(0);
 		
-		//ForStatementRule returns ForStatement:
-		//    'for' name = ID 'in' range = RangeRule 'loop'
-		//        (statements += StatementRule)*
-		//    'end'
+		//ForStatementRule returns execution::ForStatement:
+		//    'for' var = NamedVariableRule 'in' range = RangeRule
+		//        body = BodyRule
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'for' name = ID 'in' range = RangeRule 'loop'
-		//    (statements += StatementRule)*
-		//'end'
+		//'for' var = NamedVariableRule 'in' range = RangeRule
+		//    body = BodyRule
 		public Group getGroup() { return cGroup; }
 		
 		//'for'
 		public Keyword getForKeyword_0() { return cForKeyword_0; }
 		
-		//name = ID
-		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+		//var = NamedVariableRule
+		public Assignment getVarAssignment_1() { return cVarAssignment_1; }
 		
-		//ID
-		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
+		//NamedVariableRule
+		public RuleCall getVarNamedVariableRuleParserRuleCall_1_0() { return cVarNamedVariableRuleParserRuleCall_1_0; }
 		
 		//'in'
 		public Keyword getInKeyword_2() { return cInKeyword_2; }
@@ -337,17 +372,27 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 		//RangeRule
 		public RuleCall getRangeRangeRuleParserRuleCall_3_0() { return cRangeRangeRuleParserRuleCall_3_0; }
 		
-		//'loop'
-		public Keyword getLoopKeyword_4() { return cLoopKeyword_4; }
+		//body = BodyRule
+		public Assignment getBodyAssignment_4() { return cBodyAssignment_4; }
 		
-		//(statements += StatementRule)*
-		public Assignment getStatementsAssignment_5() { return cStatementsAssignment_5; }
+		//BodyRule
+		public RuleCall getBodyBodyRuleParserRuleCall_4_0() { return cBodyBodyRuleParserRuleCall_4_0; }
+	}
+	public class NamedVariableRuleElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.generator.dsl.GeneratorDSL.NamedVariableRule");
+		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
+		private final RuleCall cNameStringOrIdParserRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
 		
-		//StatementRule
-		public RuleCall getStatementsStatementRuleParserRuleCall_5_0() { return cStatementsStatementRuleParserRuleCall_5_0; }
+		//NamedVariableRule returns execution::NamedVariable:
+		//    name = StringOrId
+		//;
+		@Override public ParserRule getRule() { return rule; }
 		
-		//'end'
-		public Keyword getEndKeyword_6() { return cEndKeyword_6; }
+		//name = StringOrId
+		public Assignment getNameAssignment() { return cNameAssignment; }
+		
+		//StringOrId
+		public RuleCall getNameStringOrIdParserRuleCall_0() { return cNameStringOrIdParserRuleCall_0; }
 	}
 	public class RangeRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.generator.dsl.GeneratorDSL.RangeRule");
@@ -355,7 +400,7 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 		private final RuleCall cCounterRangeRuleParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cLiteralRangeRuleParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
-		//RangeRule returns Range:
+		//RangeRule returns execution::Range:
 		//    CounterRangeRule | LiteralRangeRule
 		//;
 		@Override public ParserRule getRule() { return rule; }
@@ -374,41 +419,41 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cLeftSquareBracketKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cElementsAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cElementsLiteralRuleParserRuleCall_1_0 = (RuleCall)cElementsAssignment_1.eContents().get(0);
+		private final RuleCall cElementsValueRuleParserRuleCall_1_0 = (RuleCall)cElementsAssignment_1.eContents().get(0);
 		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
 		private final Keyword cCommaKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
 		private final Assignment cElementsAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
-		private final RuleCall cElementsLiteralRuleParserRuleCall_2_1_0 = (RuleCall)cElementsAssignment_2_1.eContents().get(0);
+		private final RuleCall cElementsValueRuleParserRuleCall_2_1_0 = (RuleCall)cElementsAssignment_2_1.eContents().get(0);
 		private final Keyword cRightSquareBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
-		//LiteralRangeRule returns LiteralRange:
-		//    '[' elements += LiteralRule (',' elements += LiteralRule)* ']'
+		//LiteralRangeRule returns execution::ValueRange:
+		//    '[' elements += ValueRule (',' elements += ValueRule)* ']'
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'[' elements += LiteralRule (',' elements += LiteralRule)* ']'
+		//'[' elements += ValueRule (',' elements += ValueRule)* ']'
 		public Group getGroup() { return cGroup; }
 		
 		//'['
 		public Keyword getLeftSquareBracketKeyword_0() { return cLeftSquareBracketKeyword_0; }
 		
-		//elements += LiteralRule
+		//elements += ValueRule
 		public Assignment getElementsAssignment_1() { return cElementsAssignment_1; }
 		
-		//LiteralRule
-		public RuleCall getElementsLiteralRuleParserRuleCall_1_0() { return cElementsLiteralRuleParserRuleCall_1_0; }
+		//ValueRule
+		public RuleCall getElementsValueRuleParserRuleCall_1_0() { return cElementsValueRuleParserRuleCall_1_0; }
 		
-		//(',' elements += LiteralRule)*
+		//(',' elements += ValueRule)*
 		public Group getGroup_2() { return cGroup_2; }
 		
 		//','
 		public Keyword getCommaKeyword_2_0() { return cCommaKeyword_2_0; }
 		
-		//elements += LiteralRule
+		//elements += ValueRule
 		public Assignment getElementsAssignment_2_1() { return cElementsAssignment_2_1; }
 		
-		//LiteralRule
-		public RuleCall getElementsLiteralRuleParserRuleCall_2_1_0() { return cElementsLiteralRuleParserRuleCall_2_1_0; }
+		//ValueRule
+		public RuleCall getElementsValueRuleParserRuleCall_2_1_0() { return cElementsValueRuleParserRuleCall_2_1_0; }
 		
 		//']'
 		public Keyword getRightSquareBracketKeyword_3() { return cRightSquareBracketKeyword_3; }
@@ -422,14 +467,18 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 		private final Keyword cToKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		private final Assignment cEndAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final RuleCall cEndIntegerLiteralRuleParserRuleCall_3_0 = (RuleCall)cEndAssignment_3.eContents().get(0);
-		private final Keyword cRightSquareBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Keyword cIncrementKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Keyword cByKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		private final Assignment cIncrementAssignment_6 = (Assignment)cGroup.eContents().get(6);
+		private final RuleCall cIncrementIntegerLiteralRuleParserRuleCall_6_0 = (RuleCall)cIncrementAssignment_6.eContents().get(0);
+		private final Keyword cRightSquareBracketKeyword_7 = (Keyword)cGroup.eContents().get(7);
 		
-		//CounterRangeRule returns CounterRange:
-		//    '[' start = IntegerLiteralRule 'to' end = IntegerLiteralRule ']'
+		//CounterRangeRule returns execution::CounterRange:
+		//    '[' start = IntegerLiteralRule 'to' end = IntegerLiteralRule 'increment' 'by' increment = IntegerLiteralRule ']'
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'[' start = IntegerLiteralRule 'to' end = IntegerLiteralRule ']'
+		//'[' start = IntegerLiteralRule 'to' end = IntegerLiteralRule 'increment' 'by' increment = IntegerLiteralRule ']'
 		public Group getGroup() { return cGroup; }
 		
 		//'['
@@ -450,8 +499,20 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 		//IntegerLiteralRule
 		public RuleCall getEndIntegerLiteralRuleParserRuleCall_3_0() { return cEndIntegerLiteralRuleParserRuleCall_3_0; }
 		
+		//'increment'
+		public Keyword getIncrementKeyword_4() { return cIncrementKeyword_4; }
+		
+		//'by'
+		public Keyword getByKeyword_5() { return cByKeyword_5; }
+		
+		//increment = IntegerLiteralRule
+		public Assignment getIncrementAssignment_6() { return cIncrementAssignment_6; }
+		
+		//IntegerLiteralRule
+		public RuleCall getIncrementIntegerLiteralRuleParserRuleCall_6_0() { return cIncrementIntegerLiteralRuleParserRuleCall_6_0; }
+		
 		//']'
-		public Keyword getRightSquareBracketKeyword_4() { return cRightSquareBracketKeyword_4; }
+		public Keyword getRightSquareBracketKeyword_7() { return cRightSquareBracketKeyword_7; }
 	}
 	public class ApplyStatementRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.generator.dsl.GeneratorDSL.ApplyStatementRule");
@@ -467,20 +528,20 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 		private final Keyword cExecutingKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		private final Keyword cLeftSquareBracketKeyword_7 = (Keyword)cGroup.eContents().get(7);
 		private final Assignment cPipelinesAssignment_8 = (Assignment)cGroup.eContents().get(8);
-		private final RuleCall cPipelinesLiteralRuleParserRuleCall_8_0 = (RuleCall)cPipelinesAssignment_8.eContents().get(0);
+		private final RuleCall cPipelinesVariableReferenceRuleParserRuleCall_8_0 = (RuleCall)cPipelinesAssignment_8.eContents().get(0);
 		private final Group cGroup_9 = (Group)cGroup.eContents().get(9);
 		private final Keyword cCommaKeyword_9_0 = (Keyword)cGroup_9.eContents().get(0);
 		private final Assignment cPipelinesAssignment_9_1 = (Assignment)cGroup_9.eContents().get(1);
-		private final RuleCall cPipelinesLiteralRuleParserRuleCall_9_1_0 = (RuleCall)cPipelinesAssignment_9_1.eContents().get(0);
+		private final RuleCall cPipelinesVariableReferenceRuleParserRuleCall_9_1_0 = (RuleCall)cPipelinesAssignment_9_1.eContents().get(0);
 		private final Keyword cRightSquareBracketKeyword_10 = (Keyword)cGroup.eContents().get(10);
 		private final Keyword cSemicolonKeyword_11 = (Keyword)cGroup.eContents().get(11);
 		
 		//ApplyStatementRule returns ApplyStatement:
-		//    'write' file = STRING 'with' count = LiteralRule 'samples' 'from' 'executing' '[' pipelines += LiteralRule (',' pipelines += LiteralRule)* ']' ';'
+		//    'write' file = STRING 'with' count = LiteralRule 'samples' 'from' 'executing' '[' pipelines += VariableReferenceRule (',' pipelines += VariableReferenceRule)* ']' ';'
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'write' file = STRING 'with' count = LiteralRule 'samples' 'from' 'executing' '[' pipelines += LiteralRule (',' pipelines += LiteralRule)* ']' ';'
+		//'write' file = STRING 'with' count = LiteralRule 'samples' 'from' 'executing' '[' pipelines += VariableReferenceRule (',' pipelines += VariableReferenceRule)* ']' ';'
 		public Group getGroup() { return cGroup; }
 		
 		//'write'
@@ -513,23 +574,23 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 		//'['
 		public Keyword getLeftSquareBracketKeyword_7() { return cLeftSquareBracketKeyword_7; }
 		
-		//pipelines += LiteralRule
+		//pipelines += VariableReferenceRule
 		public Assignment getPipelinesAssignment_8() { return cPipelinesAssignment_8; }
 		
-		//LiteralRule
-		public RuleCall getPipelinesLiteralRuleParserRuleCall_8_0() { return cPipelinesLiteralRuleParserRuleCall_8_0; }
+		//VariableReferenceRule
+		public RuleCall getPipelinesVariableReferenceRuleParserRuleCall_8_0() { return cPipelinesVariableReferenceRuleParserRuleCall_8_0; }
 		
-		//(',' pipelines += LiteralRule)*
+		//(',' pipelines += VariableReferenceRule)*
 		public Group getGroup_9() { return cGroup_9; }
 		
 		//','
 		public Keyword getCommaKeyword_9_0() { return cCommaKeyword_9_0; }
 		
-		//pipelines += LiteralRule
+		//pipelines += VariableReferenceRule
 		public Assignment getPipelinesAssignment_9_1() { return cPipelinesAssignment_9_1; }
 		
-		//LiteralRule
-		public RuleCall getPipelinesLiteralRuleParserRuleCall_9_1_0() { return cPipelinesLiteralRuleParserRuleCall_9_1_0; }
+		//VariableReferenceRule
+		public RuleCall getPipelinesVariableReferenceRuleParserRuleCall_9_1_0() { return cPipelinesVariableReferenceRuleParserRuleCall_9_1_0; }
 		
 		//']'
 		public Keyword getRightSquareBracketKeyword_10() { return cRightSquareBracketKeyword_10; }
@@ -537,114 +598,65 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 		//';'
 		public Keyword getSemicolonKeyword_11() { return cSemicolonKeyword_11; }
 	}
-	public class LiteralRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.generator.dsl.GeneratorDSL.LiteralRule");
+	public class ReferenceRuleElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.generator.dsl.GeneratorDSL.ReferenceRule");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cNumberLiteralRuleParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cStringLiteralRuleParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		private final RuleCall cBooleanLiteralRuleParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
-		private final RuleCall cInstanceLiteralRuleParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
-		private final RuleCall cPipelineDefinitionReferenceRuleParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
-		private final RuleCall cVariableReferenceRuleParserRuleCall_5 = (RuleCall)cAlternatives.eContents().get(5);
+		private final RuleCall cConstantReferenceRuleParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cDataReferenceRuleParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cVariableReferenceRuleParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
 		//@Override
-		//LiteralRule returns expressions::Literal:
-		//    NumberLiteralRule
-		//        | StringLiteralRule
-		//        | BooleanLiteralRule
-		//        | InstanceLiteralRule
-		//        | PipelineDefinitionReferenceRule
-		//        | VariableReferenceRule
+		//ReferenceRule returns expressions::ValueReference:
+		//    ConstantReferenceRule | DataReferenceRule | VariableReferenceRule /*| PipelineDefinitionReferenceRule  */
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//NumberLiteralRule
-		//    | StringLiteralRule
-		//    | BooleanLiteralRule
-		//    | InstanceLiteralRule
-		//    | PipelineDefinitionReferenceRule
-		//    | VariableReferenceRule
+		//ConstantReferenceRule | DataReferenceRule | VariableReferenceRule
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
-		//NumberLiteralRule
-		public RuleCall getNumberLiteralRuleParserRuleCall_0() { return cNumberLiteralRuleParserRuleCall_0; }
+		//ConstantReferenceRule
+		public RuleCall getConstantReferenceRuleParserRuleCall_0() { return cConstantReferenceRuleParserRuleCall_0; }
 		
-		//StringLiteralRule
-		public RuleCall getStringLiteralRuleParserRuleCall_1() { return cStringLiteralRuleParserRuleCall_1; }
-		
-		//BooleanLiteralRule
-		public RuleCall getBooleanLiteralRuleParserRuleCall_2() { return cBooleanLiteralRuleParserRuleCall_2; }
-		
-		//InstanceLiteralRule
-		public RuleCall getInstanceLiteralRuleParserRuleCall_3() { return cInstanceLiteralRuleParserRuleCall_3; }
-		
-		//PipelineDefinitionReferenceRule
-		public RuleCall getPipelineDefinitionReferenceRuleParserRuleCall_4() { return cPipelineDefinitionReferenceRuleParserRuleCall_4; }
+		//DataReferenceRule
+		public RuleCall getDataReferenceRuleParserRuleCall_1() { return cDataReferenceRuleParserRuleCall_1; }
 		
 		//VariableReferenceRule
-		public RuleCall getVariableReferenceRuleParserRuleCall_5() { return cVariableReferenceRuleParserRuleCall_5; }
-	}
-	public class PipelineDefinitionReferenceRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.generator.dsl.GeneratorDSL.PipelineDefinitionReferenceRule");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cPipelineKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cPipelineAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final CrossReference cPipelinePipelineDefinitionCrossReference_1_0 = (CrossReference)cPipelineAssignment_1.eContents().get(0);
-		private final RuleCall cPipelinePipelineDefinitionQualifiedNameParserRuleCall_1_0_1 = (RuleCall)cPipelinePipelineDefinitionCrossReference_1_0.eContents().get(1);
-		
-		//PipelineDefinitionReferenceRule returns PipelineDefinitionReference:
-		//    'pipeline' pipeline = [PipelineDefinition|QualifiedName]
-		//;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//'pipeline' pipeline = [PipelineDefinition|QualifiedName]
-		public Group getGroup() { return cGroup; }
-		
-		//'pipeline'
-		public Keyword getPipelineKeyword_0() { return cPipelineKeyword_0; }
-		
-		//pipeline = [PipelineDefinition|QualifiedName]
-		public Assignment getPipelineAssignment_1() { return cPipelineAssignment_1; }
-		
-		//[PipelineDefinition|QualifiedName]
-		public CrossReference getPipelinePipelineDefinitionCrossReference_1_0() { return cPipelinePipelineDefinitionCrossReference_1_0; }
-		
-		//QualifiedName
-		public RuleCall getPipelinePipelineDefinitionQualifiedNameParserRuleCall_1_0_1() { return cPipelinePipelineDefinitionQualifiedNameParserRuleCall_1_0_1; }
+		public RuleCall getVariableReferenceRuleParserRuleCall_2() { return cVariableReferenceRuleParserRuleCall_2; }
 	}
 	public class VariableReferenceRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.generator.dsl.GeneratorDSL.VariableReferenceRule");
-		private final Assignment cLoopAssignment = (Assignment)rule.eContents().get(1);
-		private final CrossReference cLoopForStatementCrossReference_0 = (CrossReference)cLoopAssignment.eContents().get(0);
-		private final RuleCall cLoopForStatementIDTerminalRuleCall_0_1 = (RuleCall)cLoopForStatementCrossReference_0.eContents().get(1);
+		private final Assignment cVariableAssignment = (Assignment)rule.eContents().get(1);
+		private final CrossReference cVariableNamedVariableCrossReference_0 = (CrossReference)cVariableAssignment.eContents().get(0);
+		private final RuleCall cVariableNamedVariableStringOrIdParserRuleCall_0_1 = (RuleCall)cVariableNamedVariableCrossReference_0.eContents().get(1);
 		
-		//VariableReferenceRule returns VariableReference:
-		//    loop = [ForStatement|ID]
+		//VariableReferenceRule returns execution::VariableReference:
+		//    variable = [execution::NamedVariable|StringOrId]
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//loop = [ForStatement|ID]
-		public Assignment getLoopAssignment() { return cLoopAssignment; }
+		//variable = [execution::NamedVariable|StringOrId]
+		public Assignment getVariableAssignment() { return cVariableAssignment; }
 		
-		//[ForStatement|ID]
-		public CrossReference getLoopForStatementCrossReference_0() { return cLoopForStatementCrossReference_0; }
+		//[execution::NamedVariable|StringOrId]
+		public CrossReference getVariableNamedVariableCrossReference_0() { return cVariableNamedVariableCrossReference_0; }
 		
-		//ID
-		public RuleCall getLoopForStatementIDTerminalRuleCall_0_1() { return cLoopForStatementIDTerminalRuleCall_0_1; }
+		//StringOrId
+		public RuleCall getVariableNamedVariableStringOrIdParserRuleCall_0_1() { return cVariableNamedVariableStringOrIdParserRuleCall_0_1; }
 	}
 	
 	
 	private final GeneratorModuleRuleElements pGeneratorModuleRule;
 	private final PipelineDefinitionRuleElements pPipelineDefinitionRule;
 	private final StepRuleElements pStepRule;
+	private final BodyRuleElements pBodyRule;
 	private final StatementRuleElements pStatementRule;
 	private final ForStatementRuleElements pForStatementRule;
+	private final NamedVariableRuleElements pNamedVariableRule;
 	private final RangeRuleElements pRangeRule;
 	private final LiteralRangeRuleElements pLiteralRangeRule;
 	private final CounterRangeRuleElements pCounterRangeRule;
 	private final ApplyStatementRuleElements pApplyStatementRule;
-	private final LiteralRuleElements pLiteralRule;
-	private final PipelineDefinitionReferenceRuleElements pPipelineDefinitionReferenceRule;
+	private final ReferenceRuleElements pReferenceRule;
 	private final VariableReferenceRuleElements pVariableReferenceRule;
 	
 	private final Grammar grammar;
@@ -663,14 +675,15 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 		this.pGeneratorModuleRule = new GeneratorModuleRuleElements();
 		this.pPipelineDefinitionRule = new PipelineDefinitionRuleElements();
 		this.pStepRule = new StepRuleElements();
+		this.pBodyRule = new BodyRuleElements();
 		this.pStatementRule = new StatementRuleElements();
 		this.pForStatementRule = new ForStatementRuleElements();
+		this.pNamedVariableRule = new NamedVariableRuleElements();
 		this.pRangeRule = new RangeRuleElements();
 		this.pLiteralRangeRule = new LiteralRangeRuleElements();
 		this.pCounterRangeRule = new CounterRangeRuleElements();
 		this.pApplyStatementRule = new ApplyStatementRuleElements();
-		this.pLiteralRule = new LiteralRuleElements();
-		this.pPipelineDefinitionReferenceRule = new PipelineDefinitionReferenceRuleElements();
+		this.pReferenceRule = new ReferenceRuleElements();
 		this.pVariableReferenceRule = new VariableReferenceRuleElements();
 	}
 	
@@ -709,7 +722,7 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 	//    (imports += ImportRule)*
 	//    "module" name = QualifiedName "{"
 	//        (pipelines += PipelineDefinitionRule)*
-	//        (statements    += StatementRule)*
+	//        body = BodyRule
 	//    "}"
 	//;
 	public GeneratorModuleRuleElements getGeneratorModuleRuleAccess() {
@@ -748,7 +761,21 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 		return getStepRuleAccess().getRule();
 	}
 	
-	//StatementRule returns Statement:
+	//BodyRule returns execution::Block:
+	//    {execution::Block}
+	//    'begin'
+	//      (statements += StatementRule)*
+	//    'end'
+	//;
+	public BodyRuleElements getBodyRuleAccess() {
+		return pBodyRule;
+	}
+	
+	public ParserRule getBodyRuleRule() {
+		return getBodyRuleAccess().getRule();
+	}
+	
+	//StatementRule returns execution::Statement:
 	//    ForStatementRule | ApplyStatementRule
 	//;
 	public StatementRuleElements getStatementRuleAccess() {
@@ -759,10 +786,9 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 		return getStatementRuleAccess().getRule();
 	}
 	
-	//ForStatementRule returns ForStatement:
-	//    'for' name = ID 'in' range = RangeRule 'loop'
-	//        (statements += StatementRule)*
-	//    'end'
+	//ForStatementRule returns execution::ForStatement:
+	//    'for' var = NamedVariableRule 'in' range = RangeRule
+	//        body = BodyRule
 	//;
 	public ForStatementRuleElements getForStatementRuleAccess() {
 		return pForStatementRule;
@@ -772,7 +798,18 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 		return getForStatementRuleAccess().getRule();
 	}
 	
-	//RangeRule returns Range:
+	//NamedVariableRule returns execution::NamedVariable:
+	//    name = StringOrId
+	//;
+	public NamedVariableRuleElements getNamedVariableRuleAccess() {
+		return pNamedVariableRule;
+	}
+	
+	public ParserRule getNamedVariableRuleRule() {
+		return getNamedVariableRuleAccess().getRule();
+	}
+	
+	//RangeRule returns execution::Range:
 	//    CounterRangeRule | LiteralRangeRule
 	//;
 	public RangeRuleElements getRangeRuleAccess() {
@@ -783,8 +820,8 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 		return getRangeRuleAccess().getRule();
 	}
 	
-	//LiteralRangeRule returns LiteralRange:
-	//    '[' elements += LiteralRule (',' elements += LiteralRule)* ']'
+	//LiteralRangeRule returns execution::ValueRange:
+	//    '[' elements += ValueRule (',' elements += ValueRule)* ']'
 	//;
 	public LiteralRangeRuleElements getLiteralRangeRuleAccess() {
 		return pLiteralRangeRule;
@@ -794,8 +831,8 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 		return getLiteralRangeRuleAccess().getRule();
 	}
 	
-	//CounterRangeRule returns CounterRange:
-	//    '[' start = IntegerLiteralRule 'to' end = IntegerLiteralRule ']'
+	//CounterRangeRule returns execution::CounterRange:
+	//    '[' start = IntegerLiteralRule 'to' end = IntegerLiteralRule 'increment' 'by' increment = IntegerLiteralRule ']'
 	//;
 	public CounterRangeRuleElements getCounterRangeRuleAccess() {
 		return pCounterRangeRule;
@@ -806,7 +843,7 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 	}
 	
 	//ApplyStatementRule returns ApplyStatement:
-	//    'write' file = STRING 'with' count = LiteralRule 'samples' 'from' 'executing' '[' pipelines += LiteralRule (',' pipelines += LiteralRule)* ']' ';'
+	//    'write' file = STRING 'with' count = LiteralRule 'samples' 'from' 'executing' '[' pipelines += VariableReferenceRule (',' pipelines += VariableReferenceRule)* ']' ';'
 	//;
 	public ApplyStatementRuleElements getApplyStatementRuleAccess() {
 		return pApplyStatementRule;
@@ -817,35 +854,19 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 	}
 	
 	//@Override
-	//LiteralRule returns expressions::Literal:
-	//    NumberLiteralRule
-	//        | StringLiteralRule
-	//        | BooleanLiteralRule
-	//        | InstanceLiteralRule
-	//        | PipelineDefinitionReferenceRule
-	//        | VariableReferenceRule
+	//ReferenceRule returns expressions::ValueReference:
+	//    ConstantReferenceRule | DataReferenceRule | VariableReferenceRule /*| PipelineDefinitionReferenceRule  */
 	//;
-	public LiteralRuleElements getLiteralRuleAccess() {
-		return pLiteralRule;
+	public ReferenceRuleElements getReferenceRuleAccess() {
+		return pReferenceRule;
 	}
 	
-	public ParserRule getLiteralRuleRule() {
-		return getLiteralRuleAccess().getRule();
+	public ParserRule getReferenceRuleRule() {
+		return getReferenceRuleAccess().getRule();
 	}
 	
-	//PipelineDefinitionReferenceRule returns PipelineDefinitionReference:
-	//    'pipeline' pipeline = [PipelineDefinition|QualifiedName]
-	//;
-	public PipelineDefinitionReferenceRuleElements getPipelineDefinitionReferenceRuleAccess() {
-		return pPipelineDefinitionReferenceRule;
-	}
-	
-	public ParserRule getPipelineDefinitionReferenceRuleRule() {
-		return getPipelineDefinitionReferenceRuleAccess().getRule();
-	}
-	
-	//VariableReferenceRule returns VariableReference:
-	//    loop = [ForStatement|ID]
+	//VariableReferenceRule returns execution::VariableReference:
+	//    variable = [execution::NamedVariable|StringOrId]
 	//;
 	public VariableReferenceRuleElements getVariableReferenceRuleAccess() {
 		return pVariableReferenceRule;
@@ -1058,17 +1079,6 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 		return getCallRuleAccess().getRule();
 	}
 	
-	//ReferenceRule returns ValueReference:
-	//    ConstantReferenceRule | DataReferenceRule
-	//;
-	public BaseLanguageGrammarAccess.ReferenceRuleElements getReferenceRuleAccess() {
-		return gaBaseLanguage.getReferenceRuleAccess();
-	}
-	
-	public ParserRule getReferenceRuleRule() {
-		return getReferenceRuleAccess().getRule();
-	}
-	
 	//DataReferenceRule returns DataReference:
 	//    'data' definition = [DataDescription|QualifiedName]
 	//;
@@ -1089,6 +1099,20 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 	
 	public ParserRule getConstantReferenceRuleRule() {
 		return getConstantReferenceRuleAccess().getRule();
+	}
+	
+	//LiteralRule returns Literal:
+	//    NumberLiteralRule
+	//        | StringLiteralRule
+	//        | BooleanLiteralRule
+	//        | InstanceLiteralRule
+	//;
+	public BaseLanguageGrammarAccess.LiteralRuleElements getLiteralRuleAccess() {
+		return gaBaseLanguage.getLiteralRuleAccess();
+	}
+	
+	public ParserRule getLiteralRuleRule() {
+		return getLiteralRuleAccess().getRule();
 	}
 	
 	//InstanceLiteralRule returns Instance:

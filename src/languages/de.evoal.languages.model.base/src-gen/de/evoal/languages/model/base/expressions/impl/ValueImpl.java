@@ -7,8 +7,6 @@ import de.evoal.languages.model.base.expressions.Value;
 
 import org.eclipse.emf.ecore.EClass;
 
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Value</b></em>'.
@@ -16,7 +14,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  *
  * @generated
  */
-public class ValueImpl extends MinimalEObjectImpl.Container implements Value {
+public abstract class ValueImpl extends ExpressionImpl implements Value {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

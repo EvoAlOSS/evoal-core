@@ -48,6 +48,7 @@ import de.evoal.languages.model.base.types.impl.TypesPackageImpl;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
@@ -292,6 +293,13 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	private EEnum factorEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType numberEDataType = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -1109,6 +1117,16 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	@Override
+	public EDataType getNumber() {
+		return numberEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public ExpressionsFactory getExpressionsFactory() {
 		return (ExpressionsFactory)getEFactoryInstance();
 	}
@@ -1132,9 +1150,9 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		isCreated = true;
 
 		// Create classes and their features
-		valueEClass = createEClass(VALUE);
-
 		expressionEClass = createEClass(EXPRESSION);
+
+		valueEClass = createEClass(VALUE);
 
 		orExpressionEClass = createEClass(OR_EXPRESSION);
 		createEReference(orExpressionEClass, OR_EXPRESSION__SUB_EXPRESSIONS);
@@ -1236,6 +1254,9 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		addOrSubtractOperatorEEnum = createEEnum(ADD_OR_SUBTRACT_OPERATOR);
 		multiplyDivideModuloOperatorEEnum = createEEnum(MULTIPLY_DIVIDE_MODULO_OPERATOR);
 		factorEEnum = createEEnum(FACTOR);
+
+		// Create data types
+		numberEDataType = createEDataType(NUMBER);
 	}
 
 	/**
@@ -1269,18 +1290,18 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
-		expressionEClass.getESuperTypes().add(this.getValue());
-		orExpressionEClass.getESuperTypes().add(this.getExpression());
-		xorExpressionEClass.getESuperTypes().add(this.getExpression());
-		andExpressionEClass.getESuperTypes().add(this.getExpression());
-		notExpressionEClass.getESuperTypes().add(this.getExpression());
-		comparisonExpressionEClass.getESuperTypes().add(this.getExpression());
-		partialComparisonExpressionEClass.getESuperTypes().add(this.getExpression());
-		addOrSubtractExpressionEClass.getESuperTypes().add(this.getExpression());
-		multiplyDivideModuloExpressionEClass.getESuperTypes().add(this.getExpression());
-		powerOfExpressionEClass.getESuperTypes().add(this.getExpression());
-		unaryAddOrSubtractExpressionEClass.getESuperTypes().add(this.getExpression());
-		constantValueEClass.getESuperTypes().add(this.getExpression());
+		valueEClass.getESuperTypes().add(this.getExpression());
+		orExpressionEClass.getESuperTypes().add(this.getValue());
+		xorExpressionEClass.getESuperTypes().add(this.getValue());
+		andExpressionEClass.getESuperTypes().add(this.getValue());
+		notExpressionEClass.getESuperTypes().add(this.getValue());
+		comparisonExpressionEClass.getESuperTypes().add(this.getValue());
+		partialComparisonExpressionEClass.getESuperTypes().add(this.getValue());
+		addOrSubtractExpressionEClass.getESuperTypes().add(this.getValue());
+		multiplyDivideModuloExpressionEClass.getESuperTypes().add(this.getValue());
+		powerOfExpressionEClass.getESuperTypes().add(this.getValue());
+		unaryAddOrSubtractExpressionEClass.getESuperTypes().add(this.getValue());
+		constantValueEClass.getESuperTypes().add(this.getValue());
 		literalEClass.getESuperTypes().add(this.getConstantValue());
 		numberLiteralEClass.getESuperTypes().add(this.getLiteral());
 		integerLiteralEClass.getESuperTypes().add(this.getNumberLiteral());
@@ -1298,9 +1319,9 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		arrayEClass.getESuperTypes().add(this.getValue());
 
 		// Initialize classes, features, and operations; add parameters
-		initEClass(valueEClass, Value.class, "Value", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
 		initEClass(expressionEClass, Expression.class, "Expression", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(valueEClass, Value.class, "Value", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(orExpressionEClass, OrExpression.class, "OrExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getOrExpression_SubExpressions(), this.getXorExpression(), null, "subExpressions", null, 1, -1, OrExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1350,7 +1371,7 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		initEClass(numberLiteralEClass, NumberLiteral.class, "NumberLiteral", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getNumberLiteral_Factor(), this.getFactor(), "factor", "None", 1, 1, NumberLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEOperation(getNumberLiteral__GetValue(), null, "getValue", 0, 1, IS_UNIQUE, IS_ORDERED);
+		initEOperation(getNumberLiteral__GetValue(), this.getNumber(), "getValue", 1, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(integerLiteralEClass, IntegerLiteral.class, "IntegerLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getIntegerLiteral_Literal(), ecorePackage.getEInt(), "literal", null, 1, 1, IntegerLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1444,6 +1465,9 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		addEEnumLiteral(factorEEnum, Factor.ATTO);
 		addEEnumLiteral(factorEEnum, Factor.ZEPTO);
 		addEEnumLiteral(factorEEnum, Factor.YOCTO);
+
+		// Initialize data types
+		initEDataType(numberEDataType, Number.class, "Number", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

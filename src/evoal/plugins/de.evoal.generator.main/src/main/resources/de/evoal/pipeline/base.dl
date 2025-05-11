@@ -25,4 +25,13 @@ module de.evoal.pipeline.base {
      * A component that generates data without consuming.
      */
     abstract type Sink extends Step {}
+
+    /**
+     * Function for calling the pipeline-based generator.
+     *
+     * @param filename The filename to write.
+     * @param count The number of data points to write.
+     * @param pipelines The pipelines to execute for data generation.
+     */
+    def void generate(string filename, int count, array literal pipelines);
 }

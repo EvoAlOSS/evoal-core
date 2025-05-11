@@ -29,7 +29,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *
  * @generated
  */
-public class PartialComparisonExpressionImpl extends ExpressionImpl implements PartialComparisonExpression {
+public class PartialComparisonExpressionImpl extends ValueImpl implements PartialComparisonExpression {
 	/**
 	 * The default value of the '{@link #getOperator() <em>Operator</em>}' attribute.
 	 * <!-- begin-user-doc -->

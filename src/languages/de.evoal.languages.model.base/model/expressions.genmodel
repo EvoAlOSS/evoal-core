@@ -50,8 +50,9 @@
       <genEnumLiterals ecoreEnumLiteral="expressions.ecore#//Factor/Zepto"/>
       <genEnumLiterals ecoreEnumLiteral="expressions.ecore#//Factor/Yocto"/>
     </genEnums>
-    <genClasses ecoreClass="expressions.ecore#//Value"/>
+    <genDataTypes ecoreDataType="expressions.ecore#//Number"/>
     <genClasses image="false" ecoreClass="expressions.ecore#//Expression"/>
+    <genClasses ecoreClass="expressions.ecore#//Value"/>
     <genClasses ecoreClass="expressions.ecore#//OrExpression">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference expressions.ecore#//OrExpression/subExpressions"/>
     </genClasses>

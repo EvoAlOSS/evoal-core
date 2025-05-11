@@ -6,6 +6,7 @@ import de.evoal.languages.model.base.expressions.Expression;
 import de.evoal.languages.model.base.expressions.ExpressionsPackage;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -14,7 +15,7 @@ import org.eclipse.emf.ecore.EClass;
  *
  * @generated
  */
-public abstract class ExpressionImpl extends ValueImpl implements Expression {
+public abstract class ExpressionImpl extends MinimalEObjectImpl.Container implements Expression {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

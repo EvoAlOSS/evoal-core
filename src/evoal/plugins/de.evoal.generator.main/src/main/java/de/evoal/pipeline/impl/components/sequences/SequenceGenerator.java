@@ -1,22 +1,19 @@
 package de.evoal.pipeline.impl.components.sequences;
 
-import de.evoal.languages.model.base.expressions.Instance;
 import de.evoal.languages.model.base.definitions.DataDescription;
-
+import de.evoal.languages.model.base.expressions.Instance;
+import de.evoal.pipeline.api.model.ComponentImpl;
+import de.evoal.pipeline.api.model.TypedEObject;
 import de.evoal.pipeline.api.model.dynamic.EAnnotationHelper;
 import de.evoal.pipeline.api.sequence.Sequence;
 import de.evoal.pipeline.api.sequence.SequenceFactory;
-import de.evoal.pipeline.api.model.ComponentImpl;
-import de.evoal.pipeline.api.model.TypedEObject;
+import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import javax.inject.Named;
-
-import lombok.NonNull;
-
 import java.util.*;
 
 

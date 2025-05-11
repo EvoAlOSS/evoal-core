@@ -49,7 +49,7 @@ public interface NumberLiteral extends Literal {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model kind="operation"
+	 * @model kind="operation" dataType="de.evoal.languages.model.base.expressions.Number" required="true"
 	 * @generated
 	 */
 	Number getValue();

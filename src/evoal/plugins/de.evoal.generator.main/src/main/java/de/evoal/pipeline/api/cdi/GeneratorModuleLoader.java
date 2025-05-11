@@ -18,7 +18,6 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 
 import javax.enterprise.context.Dependent;
-import javax.enterprise.inject.spi.InjectionPoint;
 import java.io.File;
 import java.util.Optional;
 

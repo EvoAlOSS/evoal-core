@@ -57,7 +57,6 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case ExpressionsPackage.VALUE: return createValue();
 			case ExpressionsPackage.OR_EXPRESSION: return createOrExpression();
 			case ExpressionsPackage.XOR_EXPRESSION: return createXorExpression();
 			case ExpressionsPackage.AND_EXPRESSION: return createAndExpression();
@@ -127,17 +126,6 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Value createValue() {
-		ValueImpl value = new ValueImpl();
-		return value;
 	}
 
 	/**

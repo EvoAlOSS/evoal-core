@@ -1,0 +1,30 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>de.evoal</groupId>
+		<artifactId>core.plugin</artifactId>
+		<version>${revision}</version>
+	</parent>
+
+	<artifactId>core.interpreter</artifactId>
+	<name>EvoAl - Plugins - Execution Model Interpreter</name>
+
+	<dependencies>
+		<dependency>
+			<groupId>de.evoal.languages</groupId>
+			<artifactId>de.evoal.languages.model.base</artifactId>
+			<version>${evoal.languages.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>de.evoal.languages</groupId>
+			<artifactId>de.evoal.languages.models</artifactId>
+			<version>${evoal.languages.version}</version>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
+</project>

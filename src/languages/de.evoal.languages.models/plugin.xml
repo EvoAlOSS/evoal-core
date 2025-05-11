@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated model -->
+      <package
+            uri="https://www.evoal.de/languages/pipeline/1.0.0"
+            class="de.evoal.languages.model.pipeline.PipelinePackage"
+            genModel="model/pipeline.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated execution -->
+      <package
+            uri="https://www.evoal.de/languages/execution/1.0.0"
+            class="de.evoal.languages.model.execution.ExecutionPackage"
+            genModel="model/execution.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated generator -->
+      <package
+            uri="https://www.evoal.de/languages/generator/1.0.0"
+            class="de.evoal.languages.model.generator.GeneratorPackage"
+            genModel="model/generator.genmodel"/>
+   </extension>
+
+</plugin>

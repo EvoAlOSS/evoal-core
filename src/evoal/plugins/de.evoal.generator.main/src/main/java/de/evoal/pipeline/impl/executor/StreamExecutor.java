@@ -5,7 +5,6 @@ import de.evoal.pipeline.api.model.Component;
 import de.evoal.pipeline.api.model.Composite;
 import de.evoal.pipeline.api.model.TypedEObject;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.impl.DynamicEObjectImpl;
 
 import java.util.ArrayList;

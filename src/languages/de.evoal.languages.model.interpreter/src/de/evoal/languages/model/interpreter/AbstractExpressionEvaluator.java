@@ -1,6 +1,7 @@
 package de.evoal.languages.model.interpreter;
 
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import org.eclipse.emf.ecore.EObject;
 import org.slf4j.Logger;
@@ -85,7 +86,7 @@ public abstract class AbstractExpressionEvaluator extends ExpressionsSwitch<Obje
 		return object.getValues()
 					 .stream()
 					 .map(this::doSwitch)
-					 .toList();
+					 .collect(Collectors.toList());
 	}
 
 	@Override

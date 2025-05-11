@@ -38,7 +38,7 @@ Workflow {
 			referencedResource = "platform:/resource/de.evoal.languages.model.base/model/expressions.genmodel"
 			referencedResource = "platform:/resource/de.evoal.languages.model.base/model/types.genmodel"
 			referencedResource = "platform:/resource/de.evoal.languages.model.ddl/model/model.genmodel"
-			referencedResource = "platform:/resource/de.evoal.languages.model.generator/model/model.genmodel"
+			referencedResource = "platform:/resource/de.evoal.languages.models/model/generator.genmodel"
 
             parserGenerator = {
                     options = {
