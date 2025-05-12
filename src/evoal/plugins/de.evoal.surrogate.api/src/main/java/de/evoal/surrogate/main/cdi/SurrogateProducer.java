@@ -12,10 +12,8 @@ import de.evoal.languages.model.base.expressions.DataReference;
 import de.evoal.languages.model.mll.PartialSurrogateFunctionDefinition;
 import de.evoal.languages.model.mll.SurrogateDefinition;
 import de.evoal.surrogate.api.SurrogateBlackboardEntries;
-import de.evoal.surrogate.api.configuration.FunctionCombinerConfiguration;
 import de.evoal.surrogate.api.configuration.PartialFunctionConfiguration;
 import de.evoal.surrogate.api.configuration.SurrogateConfiguration;
-import de.evoal.surrogate.api.function.FunctionCombiner;
 import de.evoal.surrogate.api.function.PartialSurrogateFunction;
 import de.evoal.surrogate.api.function.SurrogateFunction;
 import de.evoal.surrogate.main.internal.SurrogateFactory;
@@ -34,7 +32,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 
 @ApplicationScoped
 @Slf4j
@@ -95,53 +92,52 @@ public class SurrogateProducer {
     }
 
     private void linkData(final Map<String, PropertySpecification> specifications) {
-        for(final FunctionCombinerConfiguration fcc : configuration.getMappings()) {
-            for(final PartialFunctionConfiguration pfc : fcc.getFunctions()) {
-                pfc.setInputData(
-                        PropertiesSpecification.builder()
-                                .add(
-                                        pfc.getInputDimensions()
-                                                .stream()
-                                                .map(specifications::get)
-                                                .map(PropertySpecification::type)
-                                )
-                                .build()
-
-                );
-
-                pfc.setOutputData(
-                        PropertiesSpecification.builder()
-                                .add(
-                                        pfc.getOutputDimensions()
-                                                .stream()
-                                                .map(specifications::get)
-                                                .map(PropertySpecification::type)
-                                )
-                                .build()
-
-                );
-            }
-
-
-            fcc.setInputData(
-                fcc.getInputDimensions()
-                        .stream()
-                        .map(specifications::get)
-                        .map(PropertySpecification::type)
-                        .map(DataDescription.class::cast)
-                        .collect(Collectors.toList())
+        for(final PartialFunctionConfiguration pfc : configuration.getFunctions()) {
+            pfc.setInputData(
+                    PropertiesSpecification.builder()
+                            .add(
+                                    pfc.getInputDimensions()
+                                            .stream()
+                                            .map(specifications::get)
+                                            .map(PropertySpecification::type)
+                            )
+                            .build()
 
             );
 
-            fcc.setOutputData(
-                fcc.getOutputDimensions()
-                        .stream()
-                        .map(specifications::get)
-                        .map(PropertySpecification::type)
-                        .map(DataDescription.class::cast)
-                        .collect(Collectors.toList())
+            pfc.setOutputData(
+                    PropertiesSpecification.builder()
+                            .add(
+                                    pfc.getOutputDimensions()
+                                            .stream()
+                                            .map(specifications::get)
+                                            .map(PropertySpecification::type)
+                            )
+                            .build()
+
             );
         }
+
+        /* XXX
+        fcc.setInputData(
+            fcc.getInputDimensions()
+                    .stream()
+                    .map(specifications::get)
+                    .map(PropertySpecification::type)
+                    .map(DataDescription.class::cast)
+                    .collect(Collectors.toList())
+
+        );
+
+        fcc.setOutputData(
+            fcc.getOutputDimensions()
+                    .stream()
+                    .map(specifications::get)
+                    .map(PropertySpecification::type)
+                    .map(DataDescription.class::cast)
+                    .collect(Collectors.toList())
+        );
+         */
     }
 
     private void addDataFrom(final Map<String, PropertySpecification> specifications, final EObject eTree) {
@@ -186,9 +182,7 @@ public class SurrogateProducer {
     @Named("surrogate-source-properties-specification")
     public PropertiesSpecification createSourceProperties(final SurrogateConfiguration config) {
         return PropertiesSpecification.builder()
-                .addDescriptions(config.getMappings()
-                           .get(0)
-                           .getInputData()
+                .addDescriptions(SurrogateConfiguration.getInputs(config)
                            .stream())
                 .build();
     }
@@ -198,10 +192,8 @@ public class SurrogateProducer {
     @Named("surrogate-target-properties-specification")
     public PropertiesSpecification createTargetProperties(final SurrogateConfiguration config) {
         return PropertiesSpecification.builder()
-                .addDescriptions(config.getMappings()
-                        .get(0)
-                        .getOutputData()
-                        .stream())
+                .addDescriptions(SurrogateConfiguration.getOutputs(config)
+                                                       .stream())
                 .build();
     }
 
@@ -225,14 +217,13 @@ public class SurrogateProducer {
     }
 
     private PropertiesDependencies _calculate(final SurrogateFunction function, final int index, final PropertiesDependencies dependencies) {
-        if(index == function.getMappings().size()) {
+        if(index == function.getFunctions().size()) {
             return dependencies;
         }
 
-        final FunctionCombiner current = function.getMappings().get(index);
-        final PropertiesDependencies next = new PropertiesDependencies(current.getOutputSpecification());
+        final PropertiesDependencies next = new PropertiesDependencies(function.getOutputSpecification());
 
-        for(final PartialSurrogateFunction fn : current.getFunctions()){
+        for(final PartialSurrogateFunction fn : function.getFunctions()){
             for(final PropertySpecification ops : fn.getOutputProperty().getProperties()) {
                 next.add(ops, fn.getUsedProperties());
             }

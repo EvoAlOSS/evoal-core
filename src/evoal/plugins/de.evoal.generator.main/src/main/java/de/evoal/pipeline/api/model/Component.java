@@ -1,5 +1,6 @@
 package de.evoal.pipeline.api.model;
 
+import de.evoal.pipeline.api.model.dynamic.SubSpace;
 import lombok.NonNull;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
@@ -12,12 +13,12 @@ public interface Component {
     /**
      * @return A non-null set of structural features the component will read.
      */
-    public @NonNull LinkedHashSet<EStructuralFeature> getReads();
+    public @NonNull SubSpace getReads();
 
     /**
      * @return A non-null set of structural features the component will write.
      */
-    public @NonNull LinkedHashSet<EStructuralFeature> getWrites();
+    public @NonNull SubSpace getWrites();
 
     /**
      * Applies the component to an object. Therefore, the component reads and writes features.

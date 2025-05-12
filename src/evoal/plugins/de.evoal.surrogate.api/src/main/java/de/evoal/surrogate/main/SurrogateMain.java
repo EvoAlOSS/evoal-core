@@ -8,13 +8,13 @@ import de.evoal.core.api.cdi.MainClass;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
+import de.evoal.core.interpreter.api.ProgramInterpreter;
 import de.evoal.languages.model.mll.MachineLearningModule;
 import de.evoal.languages.model.pipeline.PipelineModule;
 import de.evoal.pipeline.api.model.dynamic.EClassProvider;
 import de.evoal.surrogate.api.SurrogateBlackboardEntries;
-import de.evoal.surrogate.main.internal.DSLConverter;
-import de.evoal.surrogate.main.internal.ProgramExecutor;
-import de.evoal.surrogate.main.internal.InterpreterState;
+import de.evoal.surrogate.main.internal.MLLModelConverter;
+import de.evoal.surrogate.main.internal.MLLProgramExecutionSwitch;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.emf.ecore.EClass;
 
@@ -42,21 +42,14 @@ public class SurrogateMain implements MainClass {
     public void run() {
         log.info("Training surrogate models and measuring GOF values.");
 
-        //final EClassProvider provider = new EClassProvider();
-        //final EClass space = provider.eClassFor(module);
-        //final DSLConverter converter = new DSLConverter(space);
-        //final PipelineModule pModule = converter.convert(module);
+        final EClassProvider provider = new EClassProvider();
+        final EClass space = provider.eClassFor(module);
+        final MLLModelConverter converter = new MLLModelConverter(space);
+        final PipelineModule pModule = converter.convert(module);
 
-        final InterpreterState globalTable = new InterpreterState();
-        //pModule.getProgram()
-        //       .getVariables()
-        //       .stream()
-        //       .forEach(def -> globalTable.put(def, def));
-
-        final ProgramExecutor executor = BeanFactory.create(ProgramExecutor.class);
-        executor.setSymbolTable(globalTable);
-        //executor.execute(pModule.getProgram());
-        executor.execute(module.getStatements());
+        final ProgramInterpreter executor = new ProgramInterpreter((state) -> BeanFactory.create(MLLProgramExecutionSwitch.class)
+                          .setState(state));
+        executor.execute(pModule.getProgram(), space);
 
         log.info("Finished surrogate model training.");
     }

@@ -1,9 +1,7 @@
 package de.evoal.core.interpreter.impl;
 
-import de.evoal.core.api.languages.base.DynamicSwitch;
 import de.evoal.core.interpreter.api.InterpreterState;
 import de.evoal.languages.model.base.expressions.ValueReference;
-import de.evoal.languages.model.base.expressions.util.ExpressionsSwitch;
 import de.evoal.languages.model.execution.VariableReference;
 import de.evoal.languages.model.interpreter.AbstractExpressionEvaluator;
 import lombok.extern.slf4j.Slf4j;

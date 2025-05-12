@@ -25,7 +25,7 @@ public class PropertiesSpecification {
 		public Builder() {
 		}
 
-		public Builder add(final Stream<Definition> data) {
+		public Builder add(final Stream<? extends Definition> data) {
 			data.map(d -> new PropertySpecification(d.getName(), d))
 				.filter(s -> !properties.contains(s))
 				.peek(properties::add)

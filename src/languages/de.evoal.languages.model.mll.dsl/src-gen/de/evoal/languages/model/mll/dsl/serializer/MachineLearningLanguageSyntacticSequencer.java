@@ -12,9 +12,6 @@ import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias;
-import org.eclipse.xtext.serializer.analysis.GrammarAlias.GroupAlias;
-import org.eclipse.xtext.serializer.analysis.GrammarAlias.TokenAlias;
-import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynNavigable;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynTransition;
 import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
 
@@ -22,12 +19,10 @@ import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
 public class MachineLearningLanguageSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected MachineLearningLanguageGrammarAccess grammarAccess;
-	protected AbstractElementAlias match_PredictStatementRule___AndKeyword_4_0_MeasureKeyword_4_1_EndKeyword_4_3__q;
 	
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (MachineLearningLanguageGrammarAccess) access;
-		match_PredictStatementRule___AndKeyword_4_0_MeasureKeyword_4_1_EndKeyword_4_3__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getPredictStatementRuleAccess().getAndKeyword_4_0()), new TokenAlias(false, false, grammarAccess.getPredictStatementRuleAccess().getMeasureKeyword_4_1()), new TokenAlias(false, false, grammarAccess.getPredictStatementRuleAccess().getEndKeyword_4_3()));
 	}
 	
 	@Override
@@ -42,24 +37,8 @@ public class MachineLearningLanguageSyntacticSequencer extends AbstractSyntactic
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			if (match_PredictStatementRule___AndKeyword_4_0_MeasureKeyword_4_1_EndKeyword_4_3__q.equals(syntax))
-				emit_PredictStatementRule___AndKeyword_4_0_MeasureKeyword_4_1_EndKeyword_4_3__q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else acceptNodes(getLastNavigableState(), syntaxNodes);
+			acceptNodes(getLastNavigableState(), syntaxNodes);
 		}
 	}
 
-	/**
-	 * <pre>
-	 * Ambiguous syntax:
-	 *     ('and' 'measure' 'end')?
-	 *
-	 * This ambiguous syntax occurs at:
-	 *     trainingData=STRING (ambiguity) 'and' 'store' 'to' modelFilename=STRING
-	 
-	 * </pre>
-	 */
-	protected void emit_PredictStatementRule___AndKeyword_4_0_MeasureKeyword_4_1_EndKeyword_4_3__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
-		acceptNodes(transition, nodes);
-	}
-	
 }

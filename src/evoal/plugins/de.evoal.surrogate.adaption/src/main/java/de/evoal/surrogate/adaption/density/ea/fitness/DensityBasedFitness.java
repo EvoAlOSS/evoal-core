@@ -10,7 +10,6 @@ import de.evoal.languages.model.base.expressions.Instance;
 import de.evoal.optimisation.api.model.OptimisationFunction;
 import de.evoal.optimisation.api.model.OptimisationFunctionDecorator;
 import de.evoal.surrogate.api.configuration.PartialFunctionConfiguration;
-import de.evoal.surrogate.api.function.FunctionCombiner;
 import de.evoal.surrogate.api.function.PartialSurrogateFunction;
 import de.evoal.surrogate.api.function.SurrogateFunction;
 import lombok.extern.slf4j.Slf4j;
@@ -65,16 +64,12 @@ public abstract class DensityBasedFitness extends OptimisationFunctionDecorator 
         exponent = helper.lookup(config, "exponent");
         rootExponent = helper.lookup(config, "root-exponent");
 
-        // TODO Check this section if it is really correct in all cases.
-        final List<FunctionCombiner> mappings = surrogate.getMappings();
-        final FunctionCombiner mapping = mappings.get(mappings.size() - 1);
+        final List<PartialSurrogateFunction> regressions = surrogate.getFunctions();
+        sourceDensityData = new DensityData[regressions.size()][];
+        targetDensityData = new DensityData[regressions.size()][];
 
-        final PartialSurrogateFunction[] regressions = mapping.getFunctions();
-        sourceDensityData = new DensityData[regressions.length][];
-        targetDensityData = new DensityData[regressions.length][];
-
-        for(int i = 0; i < regressions.length; ++i) {
-            final PartialSurrogateFunction function = regressions[i];
+        for(int i = 0; i < regressions.size(); ++i) {
+            final PartialSurrogateFunction function = regressions.get(i);
             final PropertiesSpecification sourceSpec = function.getUsedProperties();
             final PropertiesSpecification targetSpec = function.getOutputProperty();
 

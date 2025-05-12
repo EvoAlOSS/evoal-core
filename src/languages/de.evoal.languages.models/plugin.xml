@@ -29,4 +29,20 @@
             genModel="model/generator.genmodel"/>
    </extension>
 
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated mll -->
+      <package
+            uri="https://www.evoal.de/languages/mll/1.0.0"
+            class="de.evoal.languages.model.mll.MllPackage"
+            genModel="model/mll.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated dynamic -->
+      <package
+            uri="https://www.evoal.de/languages/dynamic/1.0.0"
+            class="de.evoal.languages.model.dynamic.DynamicPackage"
+            genModel="model/dynamic.genmodel"/>
+   </extension>
+
 </plugin>

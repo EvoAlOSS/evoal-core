@@ -19,7 +19,6 @@ module de.evoal.surrogate.api {
     requires de.evoal.languages.model.ddl;
     requires de.evoal.languages.model.dl;
     requires de.evoal.languages.model.base;
-    requires de.evoal.languages.model.mll;
     requires de.evoal.languages.model.ddl.dsl;
     requires de.evoal.languages.model.dl.dsl;
     requires de.evoal.languages.model.base.dsl;
@@ -31,6 +30,8 @@ module de.evoal.surrogate.api {
     requires de.evoal.generator.main;
     requires smile.base;
     requires de.evoal.languages.models;
+    requires de.evoal.core.interpreter;
+    requires commons.math3;
 
     // export resources
     exports de.evoal.surrogate.api;

@@ -7,7 +7,6 @@ Bundle-Version: 2025.10.0.qualifier
 Bundle-SymbolicName: de.evoal.languages.model.mll.dsl.ide; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: de.evoal.languages.model.mll.dsl,
- de.evoal.languages.model.mll,
  org.eclipse.xtext.ide,
  org.eclipse.xtext.xbase.ide,
  org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",

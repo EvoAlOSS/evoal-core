@@ -291,7 +291,6 @@
 		<module>de.evoal.languages.model.instance.dsl.ide</module>
 		<module>de.evoal.languages.model.instance.dsl.ui</module>
 
-		<module>de.evoal.languages.model.mll</module>
 		<module>de.evoal.languages.model.mll.dsl</module>
 		<module>de.evoal.languages.model.mll.dsl.ide</module>
 		<module>de.evoal.languages.model.mll.dsl.ui</module>
@@ -307,7 +306,6 @@
 		<module>de.evoal.languages.model.generator.dsl.ui</module>
 
 		<module>de.evoal.languages.models</module>
-		<module>de.evoal.languages.model.dynamic</module>
 		<module>de.evoal.languages.model.constraints</module>
 
 		<module>de.evoal.languages.model.interpreter</module>

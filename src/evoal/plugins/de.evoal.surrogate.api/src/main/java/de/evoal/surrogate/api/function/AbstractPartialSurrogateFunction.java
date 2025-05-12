@@ -5,6 +5,7 @@ import java.util.List;
 import de.evoal.surrogate.api.configuration.Parameter;
 import de.evoal.surrogate.api.configuration.PartialFunctionConfiguration;
 import de.evoal.core.api.properties.PropertiesSpecification;
+import lombok.Getter;
 
 /**
  * Base class for regression functions storing the input and output properties.
@@ -22,7 +23,8 @@ public abstract class AbstractPartialSurrogateFunction implements PartialSurroga
 
 	private final PropertiesSpecification input;
 	private final PropertiesSpecification output;
-	private final PartialFunctionConfiguration configuration;
+	@Getter
+    private final PartialFunctionConfiguration configuration;
 	private final List<Parameter> parameters;
 
 	public AbstractPartialSurrogateFunction(final PartialFunctionConfiguration configuration, final List<Parameter> functionParameters, final PropertiesSpecification input, final PropertiesSpecification output) {
@@ -45,9 +47,5 @@ public abstract class AbstractPartialSurrogateFunction implements PartialSurroga
 	@Override
 	public List<Parameter> getParameters() {
 		return parameters;
-	}
-
-	public PartialFunctionConfiguration getConfiguration() {
-		return configuration;
 	}
 }

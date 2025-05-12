@@ -165,13 +165,6 @@
 			<scope>compile</scope>
 		</dependency>
 
-		<dependency>
-			<groupId>de.evoal.languages</groupId>
-			<artifactId>de.evoal.languages.model.mll</artifactId>
-			<version>${evoal.languages.version}</version>
-			<scope>compile</scope>
-		</dependency>
-
 		<!-- dependencies to DSLs -->
 		<dependency>
 			<groupId>de.evoal.languages</groupId>

@@ -4,7 +4,6 @@ import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.utils.Requirements;
 import de.evoal.surrogate.api.configuration.Parameter;
 import de.evoal.surrogate.api.configuration.PartialFunctionConfiguration;
-import de.evoal.surrogate.api.function.FunctionCombiner;
 import de.evoal.surrogate.api.function.SurrogateFunction;
 
 import java.util.List;
@@ -116,10 +115,7 @@ public final class PredictiveErrorData {
     public Pair<Double, Double> calculateBoundaries(final Properties candidate, final int regressionIndex, final SurrogateFunction function, final double confidence) {
         final Properties predicted = function.apply(candidate);
 
-        Requirements.requireSize(function.getMappings(), 1);
-        final FunctionCombiner combiner = function.getMappings().get(0);
-
-        final KernelBasedSVRFunction regression = (KernelBasedSVRFunction) combiner.getFunctions()[regressionIndex];
+        final KernelBasedSVRFunction regression = (KernelBasedSVRFunction) function.getFunctions().get(regressionIndex);
 
         // Calculating Ω
         final Matrix omega = new Matrix(1, numberOfPoints);

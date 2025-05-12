@@ -36,7 +36,7 @@ public class MLLConfigurationProducerTest {
 
         Assertions.assertNotNull(mlc);
         Assertions.assertTrue(mlc.getDefinitions().isEmpty());
-        Assertions.assertTrue(mlc.getStatements().isEmpty());
+        Assertions.assertTrue(mlc.getBody().getStatements().isEmpty());
         Assertions.assertTrue(mlc.getImports().isEmpty());
     }
 
@@ -64,6 +64,6 @@ public class MLLConfigurationProducerTest {
         Assertions.assertNotNull(mlc);
         Assertions.assertEquals(2, mlc.getImports().size());
         Assertions.assertEquals(1, mlc.getDefinitions().size());
-        Assertions.assertTrue(mlc.getStatements().isEmpty());
+        Assertions.assertTrue(mlc.getBody().getStatements().isEmpty());
     }
 }

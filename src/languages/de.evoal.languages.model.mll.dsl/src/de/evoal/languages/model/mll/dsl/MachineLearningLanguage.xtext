@@ -4,35 +4,25 @@ import "https://www.evoal.de/languages/mll/1.0.0"
 import "https://www.evoal.de/languages/ddl/1.0.0" as ddl
 import "https://www.evoal.de/languages/base/1.0.0" as base
 import "https://www.evoal.de/languages/base/definitions/1.0.0" as defs
+import "https://www.evoal.de/languages/execution/1.0.0" as execution
+import "https://www.evoal.de/languages/base/expressions/1.0.0" as expressions
 
 MachineLearningModuleRule returns MachineLearningModule:
 	(imports += ImportRule)*
 
 	"module" name = QualifiedName "{"
 		(definitions+=SurrogateDefinitionRule)*
-		(statements += StatementRule)*
+		body = BodyRule
 	"}"
 ;
 
 SurrogateDefinitionRule returns SurrogateDefinition: 
-	"prediction" name = StringOrId
-	"maps"
-		inputs += [defs::DataDescription|QualifiedName] ("," inputs += [defs::DataDescription|QualifiedName])* 
-	"to"
-		outputs += [defs::DataDescription|QualifiedName] ("," outputs += [defs::DataDescription|QualifiedName])* 
-
-	"using"
-		(layers += SurrogateLayerDefinitionRule)+
-;
-
-SurrogateLayerDefinitionRule returns SurrogateLayerDefinition:
-	"layer" name = StringOrId
-	"with"
+	"function" name = StringOrId "using"
 		(functions += PartialSurrogateFunctionDefinitionRule)+
 ;
 		
 PartialSurrogateFunctionDefinitionRule returns PartialSurrogateFunctionDefinition:
-	"function" definition = [defs::TypeDefinition|QualifiedName]
+	"model" definition = [defs::TypeDefinition|QualifiedName]
 	"mapping"
 		inputs += [defs::DataDescription|QualifiedName] ("," inputs += [defs::DataDescription|QualifiedName])* 
 	"to"
@@ -45,41 +35,53 @@ PredictStatementRule returns PredictStatement:
 	"predict" surrogate = [SurrogateDefinition|QualifiedName]
 		'from' trainingData = STRING
 		('and' 'measure'
-			(statements += CallStatementRule)*
-		 'end'
+			measurements = BodyRule
 		)?
 		'and' 'store' 'to' modelFilename = STRING;
 
-      
-StatementRule returns Statement:
-	CallStatementRule | ForStatementRule | PredictStatementRule;
-	
-ForStatementRule returns ForStatement:
-	'for' name = ID 'in' range = RangeRule 'loop'
-		(statements += StatementRule)*
-	'end'
-;
-
-RangeRule returns Range:
-	CounterRangeRule | LiteralRangeRule	
-;
-
-CounterRangeRule returns CounterRange:
-	'[' start = INT 'to' end = INT ']'
-;
-
-LiteralRangeRule returns LiteralRange:
-	'[' elements += LiteralRule (',' elements += LiteralRule)* ']'
-;
-
-BlockStatementRule returns BlockStatement:
-	{BlockStatement}
+BodyRule returns execution::Block:
+	{execution::Block}
 	'begin'
-	    (statements += StatementRule)*
+	  (statements += StatementRule)*
 	'end'
 ;
 
-CallStatementRule returns CallStatement:
-	call = CallRule ';'
+StatementRule returns execution::Statement:
+	ForStatementRule | PredictStatementRule	| CallBuiltinFunctionRule
 ;
 
+CallBuiltinFunctionRule returns execution::CallBuiltinFunction:
+	definition = [defs::FunctionDefinition|QualifiedName] '('
+	(parameters+= ExpressionRule (',' parameters+= ExpressionRule)*)?
+	')' ';'
+;
+
+ForStatementRule returns execution::ForStatement:
+	'for' var = NamedVariableRule 'in' range = RangeRule 
+		body = BodyRule
+;
+
+NamedVariableRule returns execution::NamedVariable:
+	name = StringOrId
+;
+
+RangeRule returns execution::Range:
+	CounterRangeRule | LiteralRangeRule
+;
+
+LiteralRangeRule returns execution::ValueRange:
+	'[' elements += ValueRule (',' elements += ValueRule)* ']'
+;
+
+CounterRangeRule returns execution::CounterRange:
+	'[' start = IntegerLiteralRule 'to' end = IntegerLiteralRule 'increment' 'by' increment = IntegerLiteralRule ']'
+;
+
+@Override
+ReferenceRule returns expressions::ValueReference:
+	ConstantReferenceRule | DataReferenceRule | VariableReferenceRule /*| PipelineDefinitionReferenceRule  */
+;
+
+VariableReferenceRule returns execution::VariableReference:
+	variable = [execution::NamedVariable|StringOrId]
+;

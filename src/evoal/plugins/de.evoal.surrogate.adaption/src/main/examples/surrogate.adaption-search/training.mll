@@ -6,27 +6,25 @@ import "definitions" from de.evoal.surrogate.adaption.interval.ml;
 import "data" from surrogate;
 
 module training {
-	prediction svr
-		maps 'x:0'
-	    to 'y:0'
-	    using
-	    	layer transfer
-				with function 'gaussian-svr'
-					mapping 'x:0'
-					to 'y:0'
-					with parameters
-						'ε' := 1.4;
-						'σ' := 3.0;
-						'soft-margin' := 0.15;
-						tolerance := 0.1;
+	function svr using
+		model 'gaussian-svr'
+			mapping 'x:0'
+			to 'y:0'
+			with parameters
+				'ε' := 1.4;
+				'σ' := 3.0;
+				'soft-margin' := 0.15;
+				tolerance := 0.1;
 	
-    predict svr from "data.json"
-    and measure
-            'cross-validation'(10);
-            'R²'();
-            'kernel-density-estimation'(0.2);
-            'gaussian-density-estimation'(0.2);
-            'predictive-error'();
-    end
-    and store to "surrogate.pson"
+	begin
+	    predict svr from "data.json"
+	    and measure begin
+	            'cross-validation'(10);
+	            'R²'();
+	            'kernel-density-estimation'(0.2);
+	            'gaussian-density-estimation'(0.2);
+	            'predictive-error'();
+	    end
+	    and store to "surrogate.pson"
+	end
 }

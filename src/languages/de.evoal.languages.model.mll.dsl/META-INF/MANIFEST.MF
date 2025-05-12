@@ -6,8 +6,7 @@ Bundle-Vendor: EvoAl Project
 Bundle-Version: 2025.10.0.qualifier
 Bundle-SymbolicName: de.evoal.languages.model.mll.dsl; singleton:=true
 Bundle-ActivationPolicy: lazy
-Require-Bundle: de.evoal.languages.model.mll,
- org.eclipse.xtext,
+Require-Bundle: org.eclipse.xtext,
  org.eclipse.xtext.xbase,
  org.eclipse.equinox.common;bundle-version="3.5.0",
  de.evoal.languages.model.dl;bundle-version="1.0.0",
@@ -16,7 +15,8 @@ Require-Bundle: de.evoal.languages.model.mll,
  org.eclipse.xtext.util,
  org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
  de.evoal.languages.model.utils;bundle-version="1.0.0",
- de.evoal.languages.model.base.dsl;bundle-version="2025.10.0"
+ de.evoal.languages.model.base.dsl;bundle-version="2025.10.0",
+ de.evoal.languages.models;bundle-version="2025.10.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-17
 Export-Package: de.evoal.languages.model.mll.dsl,
  de.evoal.languages.model.mll.dsl.generator,

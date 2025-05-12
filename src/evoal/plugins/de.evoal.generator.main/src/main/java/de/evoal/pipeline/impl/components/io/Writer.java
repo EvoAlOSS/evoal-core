@@ -12,6 +12,7 @@ import de.evoal.languages.model.base.expressions.Instance;
 import de.evoal.languages.model.dynamic.DynamicPackage;
 import de.evoal.pipeline.api.model.ComponentImpl;
 import de.evoal.pipeline.api.model.TypedEObject;
+import de.evoal.pipeline.api.model.dynamic.SubSpace;
 import lombok.NonNull;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -61,7 +62,7 @@ public class Writer extends ComponentImpl {
         final File file = new File(filename);
 
         log.info("Writing data to {}", file.getAbsolutePath());
-        final Collection<EStructuralFeature> reads = getReads();
+        final SubSpace reads = getReads();
 
         final Stream<Definition> definitions =
                 reads.stream()

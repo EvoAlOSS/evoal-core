@@ -9,6 +9,7 @@ import de.evoal.languages.model.base.definitions.DataDescription;
 import de.evoal.pipeline.api.model.ComponentImpl;
 import de.evoal.pipeline.api.model.TypedEObject;
 import de.evoal.pipeline.api.model.dynamic.EAnnotationHelper;
+import de.evoal.pipeline.api.model.dynamic.SubSpace;
 import de.evoal.surrogate.api.function.SurrogateFunction;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
@@ -49,7 +50,7 @@ public class SurrogateGenerator extends ComponentImpl {
         return super.init(configuration);
     }
 
-    private void addToMappings(final LinkedHashSet<EStructuralFeature> features) {
+    private void addToMappings(final SubSpace features) {
         for(final EStructuralFeature feature : features) {
             final PropertySpecification specification = toSpecification(feature);
 

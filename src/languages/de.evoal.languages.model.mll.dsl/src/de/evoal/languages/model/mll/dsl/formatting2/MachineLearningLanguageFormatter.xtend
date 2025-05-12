@@ -5,7 +5,6 @@
 package de.evoal.languages.model.mll.dsl.formatting2
 
 import de.evoal.languages.model.base.dsl.formatting2.BaseLanguageFormatter
-import de.evoal.languages.model.mll.BlockStatement
 import org.eclipse.xtext.formatting2.IFormattableDocument
 
 class MachineLearningLanguageFormatter extends BaseLanguageFormatter {
@@ -16,13 +15,13 @@ class MachineLearningLanguageFormatter extends BaseLanguageFormatter {
 		machineLearningModule.qualityEstimation.format
 	}
 */
-
+/*
 	def dispatch void format(BlockStatement blockStatement, extension IFormattableDocument document) {
 		// TODO: format HiddenRegions around keywords, attributes, cross references, etc. 
 		for (statement : blockStatement.statements) {
 			statement.format
 		}
 	}
-	
+ */	
 	// TODO: implement for CallStatement
 }

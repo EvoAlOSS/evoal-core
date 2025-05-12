@@ -8,7 +8,6 @@ Bundle-SymbolicName: de.evoal.languages.model.mll.dsl.ui; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: de.evoal.languages.model.mll.dsl,
  de.evoal.languages.model.mll.dsl.ide,
- de.evoal.languages.model.mll,
  org.eclipse.xtext.ui,
  org.eclipse.xtext.ui.shared,
  org.eclipse.xtext.ui.codetemplates.ui,

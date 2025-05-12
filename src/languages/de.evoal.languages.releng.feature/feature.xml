@@ -125,10 +125,6 @@
          version="0.0.0"/>
 
    <plugin
-         id="de.evoal.languages.model.mll"
-         version="0.0.0"/>
-
-   <plugin
          id="de.evoal.languages.model.mll.dsl"
          version="0.0.0"/>
 
@@ -182,10 +178,6 @@
 
    <plugin
          id="de.evoal.languages.model.constraints"
-         version="0.0.0"/>
-
-   <plugin
-         id="de.evoal.languages.model.dynamic"
          version="0.0.0"/>
 
    <plugin

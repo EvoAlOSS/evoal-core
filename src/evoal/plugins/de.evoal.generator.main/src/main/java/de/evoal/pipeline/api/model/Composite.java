@@ -1,5 +1,6 @@
 package de.evoal.pipeline.api.model;
 
+import de.evoal.pipeline.api.model.dynamic.SubSpace;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -30,16 +31,16 @@ public final class Composite implements Component {
     }
 
     @Override
-    public @NonNull LinkedHashSet<EStructuralFeature> getReads() {
-        final LinkedHashSet<EStructuralFeature> reads = new LinkedHashSet<>();
+    public @NonNull SubSpace getReads() {
+        final SubSpace reads = new SubSpace();
         children.forEach(c -> reads.addAll(c.getReads()));
 
         return reads;
     }
 
     @Override
-    public @NonNull LinkedHashSet<EStructuralFeature> getWrites() {
-        final LinkedHashSet<EStructuralFeature> writes = new LinkedHashSet<>();
+    public @NonNull SubSpace getWrites() {
+        final SubSpace writes = new SubSpace();
         children.forEach(c -> writes.addAll(c.getWrites()));
 
         return writes;

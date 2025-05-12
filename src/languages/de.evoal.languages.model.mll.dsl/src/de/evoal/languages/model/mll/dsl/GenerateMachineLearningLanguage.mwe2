@@ -28,9 +28,11 @@ Workflow {
 			name = "de.evoal.languages.model.mll.dsl.MachineLearningLanguage"
 			fileExtensions = "mll"
 			referencedResource = "platform:/resource/de.evoal.languages.model.ddl/model/model.genmodel"
-			referencedResource = "platform:/resource/de.evoal.languages.model.mll/model/model.genmodel"
+			referencedResource = "platform:/resource/de.evoal.languages.models/model/mll.genmodel"
+			referencedResource = "platform:/resource/de.evoal.languages.models/model/execution.genmodel"
 			referencedResource = "platform:/resource/de.evoal.languages.model.base/model/model.genmodel"
 			referencedResource = "platform:/resource/de.evoal.languages.model.base/model/definitions.genmodel"
+			referencedResource = "platform:/resource/de.evoal.languages.model.base/model/expressions.genmodel"
 			
 			fragment = ecore2xtext.Ecore2XtextValueConverterServiceFragment2 auto-inject {}
 			fragment = scoping.ImportNamespacesScopingFragment2 auto-inject {}

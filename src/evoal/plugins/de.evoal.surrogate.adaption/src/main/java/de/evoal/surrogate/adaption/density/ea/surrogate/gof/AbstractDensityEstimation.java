@@ -7,7 +7,6 @@ import de.evoal.core.api.properties.PropertySpecification;
 import de.evoal.core.api.properties.stream.PropertiesStreamSupplier;
 import de.evoal.core.api.utils.Requirements;
 import de.evoal.surrogate.api.SurrogateInformationCalculator;
-import de.evoal.surrogate.api.configuration.FunctionCombinerConfiguration;
 import de.evoal.surrogate.api.configuration.PartialFunctionConfiguration;
 import de.evoal.surrogate.api.configuration.SurrogateConfiguration;
 import de.evoal.surrogate.api.function.SurrogateFunction;
@@ -49,29 +48,27 @@ public abstract class AbstractDensityEstimation implements SurrogateInformationC
 
     @Override
     public void execute() {
-        for(final FunctionCombinerConfiguration mc : configuration.getMappings()) {
-            for(final PartialFunctionConfiguration fc : mc.getFunctions()) {
-                // create properties specification for the configuration
-                sourcePropertiesSpec = fc.getInputData();
-                targetPropertiesSpec = fc.getOutputData();
+        for(final PartialFunctionConfiguration fc : configuration.getFunctions()) {
+            // create properties specification for the configuration
+            sourcePropertiesSpec = fc.getInputData();
+            targetPropertiesSpec = fc.getOutputData();
 
-                for(int i = 0; i < sourcePropertiesSpec.size(); ++i) {
-                    final int index = i;
+            for(int i = 0; i < sourcePropertiesSpec.size(); ++i) {
+                final int index = i;
 
-                    final PropertySpecification propertySpecification = sourcePropertiesSpec.getProperties().get(index);
-                    final Function<PropertiesPair, Double> mapper = pair -> ((Number)pair.getFirst().get(index)).doubleValue();
+                final PropertySpecification propertySpecification = sourcePropertiesSpec.getProperties().get(index);
+                final Function<PropertiesPair, Double> mapper = pair -> ((Number)pair.getFirst().get(index)).doubleValue();
 
-                    calculateDensityData(mapper).attachTo(fc, propertySpecification.name());
-                }
+                calculateDensityData(mapper).attachTo(fc, propertySpecification.name());
+            }
 
-                for(int i = 0; i < targetPropertiesSpec.size(); ++i) {
-                    final int index = i;
+            for(int i = 0; i < targetPropertiesSpec.size(); ++i) {
+                final int index = i;
 
-                    final PropertySpecification propertySpecification = targetPropertiesSpec.getProperties().get(index);
-                    final Function<PropertiesPair, Double> mapper = pair -> ((Number)pair.getFirst().get(index)).doubleValue();
+                final PropertySpecification propertySpecification = targetPropertiesSpec.getProperties().get(index);
+                final Function<PropertiesPair, Double> mapper = pair -> ((Number)pair.getFirst().get(index)).doubleValue();
 
-                    calculateDensityData(mapper).attachTo(fc, propertySpecification.name());
-                }
+                calculateDensityData(mapper).attachTo(fc, propertySpecification.name());
             }
         }
 

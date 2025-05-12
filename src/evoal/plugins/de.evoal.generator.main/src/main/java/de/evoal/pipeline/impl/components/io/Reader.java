@@ -13,6 +13,7 @@ import de.evoal.languages.model.base.expressions.Instance;
 import de.evoal.languages.model.dynamic.DynamicPackage;
 import de.evoal.pipeline.api.model.ComponentImpl;
 import de.evoal.pipeline.api.model.TypedEObject;
+import de.evoal.pipeline.api.model.dynamic.SubSpace;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.emf.ecore.EClassifier;
@@ -67,7 +68,7 @@ public class Reader extends ComponentImpl {
 
         log.info("Reading data from {}", file.getAbsolutePath());
 
-        final Collection<EStructuralFeature> writes = getWrites();
+        final SubSpace writes = getWrites();
 
         final Stream<Definition> definitions =
                 writes.stream()

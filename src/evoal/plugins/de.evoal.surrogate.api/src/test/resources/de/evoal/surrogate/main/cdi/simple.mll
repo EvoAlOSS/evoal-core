@@ -1,11 +1,11 @@
-import "data" from de.evoal.surrogate.main.cdi.unit ;
-import "definitions" from de.evoal.surrogate.main.cdi.type ;
+import "data" from 'de.evoal.surrogate.main.cdi.unit';
+import "definitions" from 'de.evoal.surrogate.main.cdi.type';
 
-module de.evoal.surrogate.main.cdi.simple {
-	prediction p1
-		maps  'x:0'
-		to 'x:0'
-		using layer name
-			with function simple
+module 'de.evoal.surrogate.main.cdi.simple' {
+	function p1
+		using model simple
 			mapping 'x:0' to 'x:0'
+			
+	begin
+	end
 }

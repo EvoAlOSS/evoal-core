@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/de.evoal.languages.models/src-gen" editDirectory="/de.evoal.languages.model.mll.edit/src-gen"
+    editorDirectory="/de.evoal.languages.model.mll.editor/src-gen" modelPluginID="de.evoal.languages.models"
+    modelName="Mll" editPluginClass="de.evoal.languages.model.mll.provider.MllEditPlugin"
+    editorPluginClass="de.evoal.languages.model.mll.presentation.MllEditorPlugin"
+    rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" testsDirectory="/de.evoal.languages.models.tests/src-gen"
+    testSuiteClass="de.evoal.languages.model.mll.tests.MllAllTests" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="8.0" copyrightFields="false" editPluginID="de.evoal.languages.model.mll.edit"
+    editorPluginID="de.evoal.languages.model.mll.editor" usedGenPackages="../../de.evoal.languages.model.base/model/definitions.genmodel#//definitions ../../de.evoal.languages.model.base/model/expressions.genmodel#//expressions ../../de.evoal.languages.model.base/model/model.genmodel#//base ../../de.evoal.languages.model.base/model/types.genmodel#//types execution.genmodel#//execution"
+    importOrganizing="true">
+  <foreignModel>mll.ecore</foreignModel>
+  <genPackages prefix="Mll" basePackage="de.evoal.languages.model" disposableProviderFactory="true"
+      fileExtensions="mlm" ecorePackage="mll.ecore#/">
+    <genClasses ecoreClass="mll.ecore#//MachineLearningModule">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mll.ecore#//MachineLearningModule/imports"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mll.ecore#//MachineLearningModule/definitions"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mll.ecore#//MachineLearningModule/body"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mll.ecore#//MachineLearningModule/name"/>
+    </genClasses>
+    <genClasses ecoreClass="mll.ecore#//SurrogateDefinition">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mll.ecore#//SurrogateDefinition/functions"/>
+      <genOperations ecoreOperation="mll.ecore#//SurrogateDefinition/getInputs" body="&#x9;&#x9;final EList&lt;DataDescription> result = new BasicEList&lt;>();&#xA;&#x9;&#x9;final Set&lt;DataDescription> collection = new HashSet&lt;>();&#xA;&#x9;&#x9;&#xA;&#x9;&#x9;getFunctions().stream()&#xA;&#x9;&#x9;&#x9;.flatMap(d -> d.getInputs().stream())&#xA;&#x9;&#x9;&#x9;.filter(d -> !collection.contains(d))&#xA;&#x9;&#x9;&#x9;.peek(collection::add)&#xA;&#x9;&#x9;&#x9;.forEach(result::add);&#xA;&#x9;&#x9;&#xA;&#x9;&#x9;return result;&#xA;"/>
+      <genOperations ecoreOperation="mll.ecore#//SurrogateDefinition/getOutputs" body="&#x9;&#x9;final EList&lt;DataDescription> result = new BasicEList&lt;>();&#xA;&#x9;&#x9;final Set&lt;DataDescription> collection = new HashSet&lt;>();&#xA;&#x9;&#x9;&#xA;&#x9;&#x9;getFunctions().stream()&#xA;&#x9;&#x9;&#x9;.flatMap(d -> d.getOutputs().stream())&#xA;&#x9;&#x9;&#x9;.filter(d -> !collection.contains(d))&#xA;&#x9;&#x9;&#x9;.peek(collection::add)&#xA;&#x9;&#x9;&#x9;.forEach(result::add);&#xA;&#x9;&#x9;&#xA;&#x9;&#x9;return result;&#xA;"/>
+    </genClasses>
+    <genClasses ecoreClass="mll.ecore#//PartialSurrogateFunctionDefinition">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mll.ecore#//PartialSurrogateFunctionDefinition/inputs"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mll.ecore#//PartialSurrogateFunctionDefinition/outputs"/>
+    </genClasses>
+    <genClasses ecoreClass="mll.ecore#//PredictStatement">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference mll.ecore#//PredictStatement/surrogate"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mll.ecore#//PredictStatement/modelFilename"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mll.ecore#//PredictStatement/trainingData"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mll.ecore#//PredictStatement/measurements"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

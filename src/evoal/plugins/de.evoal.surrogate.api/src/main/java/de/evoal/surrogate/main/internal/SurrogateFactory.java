@@ -6,10 +6,8 @@ import java.util.stream.Stream;
 
 import de.evoal.core.api.cdi.BeanFactory;
 import de.evoal.core.api.properties.stream.PropertiesStreamSupplier;
-import de.evoal.surrogate.api.configuration.FunctionCombinerConfiguration;
 import de.evoal.surrogate.api.configuration.PartialFunctionConfiguration;
 import de.evoal.surrogate.api.configuration.SurrogateConfiguration;
-import de.evoal.surrogate.api.function.FunctionCombiner;
 import de.evoal.surrogate.api.function.PartialSurrogateFunction;
 import de.evoal.surrogate.api.function.PartialSurrogateFunctionFactory;
 import de.evoal.surrogate.api.function.SurrogateFunction;
@@ -20,60 +18,48 @@ import lombok.extern.slf4j.Slf4j;
 import de.evoal.core.api.properties.PropertiesSpecification;
 
 /**
- * Factory class for predictive functions.
+ * Factory class for surrogate functions.
  */
 @Slf4j
 public final class SurrogateFactory {
 
 	/**
-	 * Name of the predictive file
+	 * Name of the surrogate configuration.
 	 */
 	@Getter
 	private final SurrogateConfiguration config;
 
 	/**
-	 * Training points used
+	 * Training points used.
 	 */
 	private final PropertiesStreamSupplier factory;
 
+	/**
+	 * Called to train model based on trainings points, e.g. during initial model training.
+	 */
 	public static SurrogateFunction create(final @NonNull SurrogateConfiguration config, final PropertiesStreamSupplier trainingPoints) {
-		final List<FunctionCombiner> functions =
-				config.getMappings()
+		final List<PartialSurrogateFunction> functions =
+				config.getFunctions()
 						  .stream()
-						  .map(layer -> createLayerFunction(layer, trainingPoints, null))
+						  //.map(func -> createLayerFunction(func, trainingPoints, null))
+						  .map(func -> create(func, func.getInputData(), func.getOutputData(), trainingPoints))
 						  .collect(Collectors.toList());
 
 		return new SurrogateFunction(functions);
 	}
 
+	/**
+	 * Creates a surrogate function based on a pre-loaded model.
+	 */
 	public static SurrogateFunction create(final @NonNull SurrogateConfiguration config, final PropertiesSpecification specification) {
-		final List<FunctionCombiner> functions =
-				config.getMappings()
+		final List<PartialSurrogateFunction> functions =
+				config.getFunctions()
 						.stream()
-						.map(layer -> createLayerFunction(layer, null, specification))
+						//.map(func -> createLayerFunction(func, null, specification))
+						.map(func -> create(func, specification, func.getOutputData(), null))
 						.collect(Collectors.toList());
 
 		return new SurrogateFunction(functions);
-	}
-
-	private static FunctionCombiner createLayerFunction(final FunctionCombinerConfiguration config, final PropertiesStreamSupplier trainingPoints, final PropertiesSpecification specification) {
-		log.info("Creating mapping function for level {}.", config.getName());
-
-		final List<PartialFunctionConfiguration> subConfiguration = config.getFunctions();
-
-		// map source values to properties
-		final PropertiesSpecification sourceSpecification = specification != null ? specification :
-				mergeSpecifications(subConfiguration.stream()
-													.map(PartialFunctionConfiguration::getInputData));
-
-		// map source values to properties
-		final PropertiesSpecification targetSpecification =
-				mergeSpecifications(subConfiguration.stream()
-													.map(PartialFunctionConfiguration::getOutputData));
-
-		final List<PartialSurrogateFunction> subFunctions = createFunctions(subConfiguration, sourceSpecification, targetSpecification, trainingPoints);
-
-		return new FunctionCombiner(subFunctions, sourceSpecification, targetSpecification);
 	}
 
 	private static PropertiesSpecification mergeSpecifications(final Stream<PropertiesSpecification> stream) {
@@ -84,17 +70,9 @@ public final class SurrogateFactory {
 		return builder.build();
 	}
 
-	private static List<PartialSurrogateFunction> createFunctions(final List<PartialFunctionConfiguration> configurations, final PropertiesSpecification source, final PropertiesSpecification target, final PropertiesStreamSupplier trainingPoints) {
-		// create regression functions from configuration
-		final List<PartialSurrogateFunction> functions = new ArrayList<>(configurations.size());
-
-		for(final PartialFunctionConfiguration config : configurations) {
-			functions.add(create(config, source, target, trainingPoints));
-		}
-		
-		return functions;
-	}
-
+	/**
+	 * Internal training function, e.g., used by GoF calculation or from within this factory.
+	 */
 	public static PartialSurrogateFunction create(final PartialFunctionConfiguration config, final PropertiesSpecification source, final PropertiesSpecification target, final PropertiesStreamSupplier trainingPoints) {
 		log.info("Calculating mapping function '{}'.", config.getName());
 		final PropertiesSpecification functionTargetSpecification = config.getOutputData();

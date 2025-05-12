@@ -11,6 +11,7 @@ module de.evoal.surrogate.simple {
 
     requires de.evoal.core.main;
     requires de.evoal.surrogate.api;
+    requires de.evoal.languages.model.base;
 
     opens de.evoal.surrogate.simple;
 

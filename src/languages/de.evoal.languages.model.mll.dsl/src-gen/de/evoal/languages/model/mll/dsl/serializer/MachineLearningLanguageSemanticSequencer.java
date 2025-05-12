@@ -46,17 +46,19 @@ import de.evoal.languages.model.base.types.RealType;
 import de.evoal.languages.model.base.types.StringType;
 import de.evoal.languages.model.base.types.TypesPackage;
 import de.evoal.languages.model.base.types.VoidType;
-import de.evoal.languages.model.mll.BlockStatement;
-import de.evoal.languages.model.mll.CallStatement;
-import de.evoal.languages.model.mll.CounterRange;
-import de.evoal.languages.model.mll.ForStatement;
-import de.evoal.languages.model.mll.LiteralRange;
+import de.evoal.languages.model.execution.Block;
+import de.evoal.languages.model.execution.CallBuiltinFunction;
+import de.evoal.languages.model.execution.CounterRange;
+import de.evoal.languages.model.execution.ExecutionPackage;
+import de.evoal.languages.model.execution.ForStatement;
+import de.evoal.languages.model.execution.NamedVariable;
+import de.evoal.languages.model.execution.ValueRange;
+import de.evoal.languages.model.execution.VariableReference;
 import de.evoal.languages.model.mll.MachineLearningModule;
 import de.evoal.languages.model.mll.MllPackage;
 import de.evoal.languages.model.mll.PartialSurrogateFunctionDefinition;
 import de.evoal.languages.model.mll.PredictStatement;
 import de.evoal.languages.model.mll.SurrogateDefinition;
-import de.evoal.languages.model.mll.SurrogateLayerDefinition;
 import de.evoal.languages.model.mll.dsl.services.MachineLearningLanguageGrammarAccess;
 import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
@@ -102,6 +104,30 @@ public class MachineLearningLanguageSemanticSequencer extends BaseLanguageSemant
 				return; 
 			case DefinitionsPackage.TYPE_DEFINITION:
 				sequence_TypeDefinitionRule(context, (TypeDefinition) semanticObject); 
+				return; 
+			}
+		else if (epackage == ExecutionPackage.eINSTANCE)
+			switch (semanticObject.eClass().getClassifierID()) {
+			case ExecutionPackage.BLOCK:
+				sequence_BodyRule(context, (Block) semanticObject); 
+				return; 
+			case ExecutionPackage.CALL_BUILTIN_FUNCTION:
+				sequence_CallBuiltinFunctionRule(context, (CallBuiltinFunction) semanticObject); 
+				return; 
+			case ExecutionPackage.COUNTER_RANGE:
+				sequence_CounterRangeRule(context, (CounterRange) semanticObject); 
+				return; 
+			case ExecutionPackage.FOR_STATEMENT:
+				sequence_ForStatementRule(context, (ForStatement) semanticObject); 
+				return; 
+			case ExecutionPackage.NAMED_VARIABLE:
+				sequence_NamedVariableRule(context, (NamedVariable) semanticObject); 
+				return; 
+			case ExecutionPackage.VALUE_RANGE:
+				sequence_LiteralRangeRule(context, (ValueRange) semanticObject); 
+				return; 
+			case ExecutionPackage.VARIABLE_REFERENCE:
+				sequence_VariableReferenceRule(context, (VariableReference) semanticObject); 
 				return; 
 			}
 		else if (epackage == ExpressionsPackage.eINSTANCE)
@@ -172,21 +198,6 @@ public class MachineLearningLanguageSemanticSequencer extends BaseLanguageSemant
 			}
 		else if (epackage == MllPackage.eINSTANCE)
 			switch (semanticObject.eClass().getClassifierID()) {
-			case MllPackage.BLOCK_STATEMENT:
-				sequence_BlockStatementRule(context, (BlockStatement) semanticObject); 
-				return; 
-			case MllPackage.CALL_STATEMENT:
-				sequence_CallStatementRule(context, (CallStatement) semanticObject); 
-				return; 
-			case MllPackage.COUNTER_RANGE:
-				sequence_CounterRangeRule(context, (CounterRange) semanticObject); 
-				return; 
-			case MllPackage.FOR_STATEMENT:
-				sequence_ForStatementRule(context, (ForStatement) semanticObject); 
-				return; 
-			case MllPackage.LITERAL_RANGE:
-				sequence_LiteralRangeRule(context, (LiteralRange) semanticObject); 
-				return; 
 			case MllPackage.MACHINE_LEARNING_MODULE:
 				sequence_MachineLearningModuleRule(context, (MachineLearningModule) semanticObject); 
 				return; 
@@ -198,9 +209,6 @@ public class MachineLearningLanguageSemanticSequencer extends BaseLanguageSemant
 				return; 
 			case MllPackage.SURROGATE_DEFINITION:
 				sequence_SurrogateDefinitionRule(context, (SurrogateDefinition) semanticObject); 
-				return; 
-			case MllPackage.SURROGATE_LAYER_DEFINITION:
-				sequence_SurrogateLayerDefinitionRule(context, (SurrogateLayerDefinition) semanticObject); 
 				return; 
 			}
 		else if (epackage == TypesPackage.eINSTANCE)
@@ -243,13 +251,13 @@ public class MachineLearningLanguageSemanticSequencer extends BaseLanguageSemant
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     BlockStatementRule returns BlockStatement
+	 *     BodyRule returns Block
 	 *
 	 * Constraint:
 	 *     statements+=StatementRule*
 	 * </pre>
 	 */
-	protected void sequence_BlockStatementRule(ISerializationContext context, BlockStatement semanticObject) {
+	protected void sequence_BodyRule(ISerializationContext context, Block semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -257,21 +265,15 @@ public class MachineLearningLanguageSemanticSequencer extends BaseLanguageSemant
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     StatementRule returns CallStatement
-	 *     CallStatementRule returns CallStatement
+	 *     StatementRule returns CallBuiltinFunction
+	 *     CallBuiltinFunctionRule returns CallBuiltinFunction
 	 *
 	 * Constraint:
-	 *     call=CallRule
+	 *     (definition=[FunctionDefinition|QualifiedName] (parameters+=ExpressionRule parameters+=ExpressionRule*)?)
 	 * </pre>
 	 */
-	protected void sequence_CallStatementRule(ISerializationContext context, CallStatement semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, MllPackage.Literals.CALL_STATEMENT__CALL) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MllPackage.Literals.CALL_STATEMENT__CALL));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getCallStatementRuleAccess().getCallCallRuleParserRuleCall_0_0(), semanticObject.getCall());
-		feeder.finish();
+	protected void sequence_CallBuiltinFunctionRule(ISerializationContext context, CallBuiltinFunction semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -282,19 +284,22 @@ public class MachineLearningLanguageSemanticSequencer extends BaseLanguageSemant
 	 *     CounterRangeRule returns CounterRange
 	 *
 	 * Constraint:
-	 *     (start=INT end=INT)
+	 *     (start=IntegerLiteralRule end=IntegerLiteralRule increment=IntegerLiteralRule)
 	 * </pre>
 	 */
 	protected void sequence_CounterRangeRule(ISerializationContext context, CounterRange semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, MllPackage.Literals.COUNTER_RANGE__START) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MllPackage.Literals.COUNTER_RANGE__START));
-			if (transientValues.isValueTransient(semanticObject, MllPackage.Literals.COUNTER_RANGE__END) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MllPackage.Literals.COUNTER_RANGE__END));
+			if (transientValues.isValueTransient(semanticObject, ExecutionPackage.Literals.COUNTER_RANGE__START) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ExecutionPackage.Literals.COUNTER_RANGE__START));
+			if (transientValues.isValueTransient(semanticObject, ExecutionPackage.Literals.COUNTER_RANGE__END) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ExecutionPackage.Literals.COUNTER_RANGE__END));
+			if (transientValues.isValueTransient(semanticObject, ExecutionPackage.Literals.COUNTER_RANGE__INCREMENT) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ExecutionPackage.Literals.COUNTER_RANGE__INCREMENT));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getCounterRangeRuleAccess().getStartINTTerminalRuleCall_1_0(), semanticObject.getStart());
-		feeder.accept(grammarAccess.getCounterRangeRuleAccess().getEndINTTerminalRuleCall_3_0(), semanticObject.getEnd());
+		feeder.accept(grammarAccess.getCounterRangeRuleAccess().getStartIntegerLiteralRuleParserRuleCall_1_0(), semanticObject.getStart());
+		feeder.accept(grammarAccess.getCounterRangeRuleAccess().getEndIntegerLiteralRuleParserRuleCall_3_0(), semanticObject.getEnd());
+		feeder.accept(grammarAccess.getCounterRangeRuleAccess().getIncrementIntegerLiteralRuleParserRuleCall_6_0(), semanticObject.getIncrement());
 		feeder.finish();
 	}
 	
@@ -306,25 +311,37 @@ public class MachineLearningLanguageSemanticSequencer extends BaseLanguageSemant
 	 *     ForStatementRule returns ForStatement
 	 *
 	 * Constraint:
-	 *     (name=ID range=RangeRule statements+=StatementRule*)
+	 *     (var=NamedVariableRule range=RangeRule body=BodyRule)
 	 * </pre>
 	 */
 	protected void sequence_ForStatementRule(ISerializationContext context, ForStatement semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, ExecutionPackage.Literals.FOR_STATEMENT__VAR) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ExecutionPackage.Literals.FOR_STATEMENT__VAR));
+			if (transientValues.isValueTransient(semanticObject, ExecutionPackage.Literals.FOR_STATEMENT__RANGE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ExecutionPackage.Literals.FOR_STATEMENT__RANGE));
+			if (transientValues.isValueTransient(semanticObject, ExecutionPackage.Literals.FOR_STATEMENT__BODY) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ExecutionPackage.Literals.FOR_STATEMENT__BODY));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getForStatementRuleAccess().getVarNamedVariableRuleParserRuleCall_1_0(), semanticObject.getVar());
+		feeder.accept(grammarAccess.getForStatementRuleAccess().getRangeRangeRuleParserRuleCall_3_0(), semanticObject.getRange());
+		feeder.accept(grammarAccess.getForStatementRuleAccess().getBodyBodyRuleParserRuleCall_4_0(), semanticObject.getBody());
+		feeder.finish();
 	}
 	
 	
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     RangeRule returns LiteralRange
-	 *     LiteralRangeRule returns LiteralRange
+	 *     RangeRule returns ValueRange
+	 *     LiteralRangeRule returns ValueRange
 	 *
 	 * Constraint:
-	 *     (elements+=LiteralRule elements+=LiteralRule*)
+	 *     (elements+=ValueRule elements+=ValueRule*)
 	 * </pre>
 	 */
-	protected void sequence_LiteralRangeRule(ISerializationContext context, LiteralRange semanticObject) {
+	protected void sequence_LiteralRangeRule(ISerializationContext context, ValueRange semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -335,11 +352,31 @@ public class MachineLearningLanguageSemanticSequencer extends BaseLanguageSemant
 	 *     MachineLearningModuleRule returns MachineLearningModule
 	 *
 	 * Constraint:
-	 *     (imports+=ImportRule* name=QualifiedName definitions+=SurrogateDefinitionRule* statements+=StatementRule*)
+	 *     (imports+=ImportRule* name=QualifiedName definitions+=SurrogateDefinitionRule* body=BodyRule)
 	 * </pre>
 	 */
 	protected void sequence_MachineLearningModuleRule(ISerializationContext context, MachineLearningModule semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     NamedVariableRule returns NamedVariable
+	 *
+	 * Constraint:
+	 *     name=StringOrId
+	 * </pre>
+	 */
+	protected void sequence_NamedVariableRule(ISerializationContext context, NamedVariable semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, ExecutionPackage.Literals.NAMED_VARIABLE__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ExecutionPackage.Literals.NAMED_VARIABLE__NAME));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getNamedVariableRuleAccess().getNameStringOrIdParserRuleCall_0(), semanticObject.getName());
+		feeder.finish();
 	}
 	
 	
@@ -371,7 +408,7 @@ public class MachineLearningLanguageSemanticSequencer extends BaseLanguageSemant
 	 *     StatementRule returns PredictStatement
 	 *
 	 * Constraint:
-	 *     (surrogate=[SurrogateDefinition|QualifiedName] trainingData=STRING statements+=CallStatementRule* modelFilename=STRING)
+	 *     (surrogate=[SurrogateDefinition|QualifiedName] trainingData=STRING measurements=BodyRule? modelFilename=STRING)
 	 * </pre>
 	 */
 	protected void sequence_PredictStatementRule(ISerializationContext context, PredictStatement semanticObject) {
@@ -385,14 +422,7 @@ public class MachineLearningLanguageSemanticSequencer extends BaseLanguageSemant
 	 *     SurrogateDefinitionRule returns SurrogateDefinition
 	 *
 	 * Constraint:
-	 *     (
-	 *         name=StringOrId 
-	 *         inputs+=[DataDescription|QualifiedName] 
-	 *         inputs+=[DataDescription|QualifiedName]* 
-	 *         outputs+=[DataDescription|QualifiedName] 
-	 *         outputs+=[DataDescription|QualifiedName]* 
-	 *         layers+=SurrogateLayerDefinitionRule+
-	 *     )
+	 *     (name=StringOrId functions+=PartialSurrogateFunctionDefinitionRule+)
 	 * </pre>
 	 */
 	protected void sequence_SurrogateDefinitionRule(ISerializationContext context, SurrogateDefinition semanticObject) {
@@ -403,14 +433,22 @@ public class MachineLearningLanguageSemanticSequencer extends BaseLanguageSemant
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     SurrogateLayerDefinitionRule returns SurrogateLayerDefinition
+	 *     ReferenceRule returns VariableReference
+	 *     VariableReferenceRule returns VariableReference
+	 *     ValueRule returns VariableReference
 	 *
 	 * Constraint:
-	 *     (name=StringOrId functions+=PartialSurrogateFunctionDefinitionRule+)
+	 *     variable=[NamedVariable|StringOrId]
 	 * </pre>
 	 */
-	protected void sequence_SurrogateLayerDefinitionRule(ISerializationContext context, SurrogateLayerDefinition semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+	protected void sequence_VariableReferenceRule(ISerializationContext context, VariableReference semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, ExecutionPackage.Literals.VARIABLE_REFERENCE__VARIABLE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ExecutionPackage.Literals.VARIABLE_REFERENCE__VARIABLE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getVariableReferenceRuleAccess().getVariableNamedVariableStringOrIdParserRuleCall_0_1(), semanticObject.eGet(ExecutionPackage.Literals.VARIABLE_REFERENCE__VARIABLE, false));
+		feeder.finish();
 	}
 	
 	

@@ -14,7 +14,6 @@ module de.evoal.core.junit {
     requires de.evoal.languages.models;
     requires de.evoal.languages.model.ddl;
     requires de.evoal.languages.model.dl;
-    requires de.evoal.languages.model.mll;
     requires de.evoal.languages.model.ol;
 
     requires de.evoal.languages.model.ddl.dsl;

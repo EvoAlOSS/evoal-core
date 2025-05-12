@@ -3,6 +3,7 @@ package de.evoal.core.interpreter.api;
 import de.evoal.languages.model.execution.NamedVariable;
 import de.evoal.languages.model.execution.Variable;
 import lombok.NonNull;
+import lombok.extern.slf4j.Slf4j;
 import org.eclipse.emf.ecore.EClass;
 
 import java.util.HashMap;
@@ -12,6 +13,7 @@ import java.util.Optional;
 /**
  * The interpreter state. The state binds variables to values.
  */
+@Slf4j
 public class InterpreterState {
     /**
      * Interpreter states can be hierarchical (leads to variable shadowing).
@@ -52,6 +54,7 @@ public class InterpreterState {
      * @return The value bound or {@code null}.
      */
     public Object get(final Variable variable) {
+        log.info("Looking up variable with name: {}", variable instanceof NamedVariable ? ((NamedVariable)variable).getName() : "<unnamed>" );
         if(bindings.containsKey(variable)) {
             return bindings.get(variable);
         }

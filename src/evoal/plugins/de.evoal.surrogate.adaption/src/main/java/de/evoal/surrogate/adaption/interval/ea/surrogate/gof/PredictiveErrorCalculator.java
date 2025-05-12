@@ -12,7 +12,6 @@ import de.evoal.core.api.properties.stream.PropertiesStreamSupplier;
 import de.evoal.surrogate.adaption.interval.model.PredictiveErrorData;
 import de.evoal.surrogate.api.SurrogateInformationCalculator;
 import de.evoal.surrogate.api.configuration.SurrogateConfiguration;
-import de.evoal.surrogate.api.function.FunctionCombiner;
 import de.evoal.surrogate.api.function.PartialSurrogateFunction;
 import de.evoal.surrogate.api.function.SurrogateFunction;
 import de.evoal.surrogate.smile.api.KernelBasedSVRFunction;
@@ -48,14 +47,12 @@ public class PredictiveErrorCalculator implements SurrogateInformationCalculator
 
     @Override
     public void execute() {
-        for(final FunctionCombiner combiner : function.getMappings()) {
-            for(final PartialSurrogateFunction func : combiner.getFunctions()) {
-                if(!(func instanceof KernelBasedSVRFunction)) {
-                    continue;
-                }
-
-                calculateError((KernelBasedSVRFunction)func);
+        for(final PartialSurrogateFunction func : function.getFunctions()) {
+            if(!(func instanceof KernelBasedSVRFunction)) {
+                continue;
             }
+
+            calculateError((KernelBasedSVRFunction)func);
         }
     }
 
