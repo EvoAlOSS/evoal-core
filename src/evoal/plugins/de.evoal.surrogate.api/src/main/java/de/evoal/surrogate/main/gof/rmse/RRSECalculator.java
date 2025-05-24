@@ -1,20 +1,19 @@
 package de.evoal.surrogate.main.gof.rmse;
 
-import de.evoal.core.api.properties.Properties;
-import de.evoal.core.api.properties.stream.PropertiesBasedPropertiesPairStreamSupplier;
-import de.evoal.core.api.properties.stream.PropertiesPairStreamSupplier;
-import de.evoal.core.api.properties.stream.PropertiesStreamSupplier;
+import de.evoal.core.api.ecore.TypedEObject;
+import de.evoal.core.api.ecore.stream.EObjectPairStreamSupplier;
 import de.evoal.core.api.utils.Requirements;
+import de.evoal.core.interpreter.api.InterpreterState;
 import de.evoal.surrogate.api.SurrogateInformationCalculator;
 import de.evoal.surrogate.api.configuration.Parameter;
 import de.evoal.surrogate.api.configuration.SurrogateConfiguration;
 import de.evoal.surrogate.api.function.SurrogateFunction;
 import lombok.extern.slf4j.Slf4j;
+import org.eclipse.emf.ecore.EStructuralFeature;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Named;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Calculates the root mean squared error.
@@ -37,51 +36,53 @@ public class RRSECalculator implements SurrogateInformationCalculator {
 	/**
 	 * Supplier for the training data.
 	 */
-	private PropertiesStreamSupplier trainingData;
+	private EObjectPairStreamSupplier training;
 
 	@Override
-	public void execute() {
-		log.info("calculating rmse of surrogate function.");
+	public Optional<Object> call(final InterpreterState context, final Object[] arguments) {
+		log.info("calculating rrse of surrogate function.");
 
-		final PropertiesPairStreamSupplier pairStream = new PropertiesBasedPropertiesPairStreamSupplier(trainingData, function.getInputSpecification(), function.getOutputSpecification());
-
-		final List<List<Double>> data = new ArrayList<>();
-		for(int i = 0; i  < function.getOutputSpecification().size(); ++i) {
-			data.add(new ArrayList<>());
+		final Map<EStructuralFeature, List<Double>> data = new HashMap<>();
+		for(final EStructuralFeature feature : function.getOutputSpecification()) {
+			data.put(feature, new ArrayList<>());
 		}
 
-		pairStream.get()
+		training.get()
 				.forEach(p -> {
-					final Properties source = p.getFirst();
-					final Properties expected = p.getSecond();
+					final TypedEObject source = p.getFirst();
+					final TypedEObject expected = p.getSecond();
+					final TypedEObject actual = new TypedEObject(expected.eClass());
 
-					final Properties actual = function.apply(source);
+					function.apply(source, actual);
 
-					for(int i = 0; i < expected.size(); ++i) {
-						data.get(i).add(Math.pow((expected.getAsDouble(i) - actual.getAsDouble(i)) / expected.getAsDouble(i), 2.0));
+					for(final EStructuralFeature feature : actual.eClass().getEAllStructuralFeatures()) {
+						data.get(feature)
+								.add(Math.pow(expected.eGetAsDouble(feature) - actual.eGetAsDouble(feature) / expected.eGetAsDouble(feature), 2.0));
 					}
 				});
 
 
-
-		for(int i = 0; i < data.size(); ++i) {
-			final double average = data.get(i)
+		for(final Map.Entry<EStructuralFeature, List<Double>> entry : data.entrySet()) {
+			final double average = entry
+					.getValue()
 					.stream()
 					.mapToDouble(Double.class::cast)
 					.summaryStatistics()
 					.getAverage();
 
-			final double rrse = Math.pow(average, 0.5);
+			final double rmse = Math.pow(average, 0.5);
 
-			log.info("RRSE of {}: '{}'", function.getOutputSpecification().get(i), rrse);
+			log.info("RRSE of {}: '{}'", entry.getKey().getName(), rmse);
 
 			final Parameter goodnessOfFit = Parameter.builder()
 					.name("rrse")
-					.value(rrse)
+					.value(rmse)
 					.build();
 
-			config.addOutputParameter(function.getOutputSpecification().get(i).name(), goodnessOfFit);
+			config.addOutputParameter(entry.getKey().getName(), goodnessOfFit);
 		}
+
+		return Optional.empty();
 	}
 
 	@Override
@@ -90,13 +91,13 @@ public class RRSECalculator implements SurrogateInformationCalculator {
 	}
 
 	@Override
-	public void configure(final SurrogateFunction function, final SurrogateConfiguration config, final List<Object> parameters, final PropertiesStreamSupplier trainingData) {
-		Requirements.requireEmpty(parameters);
+	public void configure(final SurrogateFunction function, final SurrogateConfiguration config, final EObjectPairStreamSupplier training) {
 		Requirements.requireNotNull(function);
 		Requirements.requireNotNull(config);
+		Requirements.requireNotNull(training);
 
 		this.function = function;
 		this.config = config;
-		this.trainingData = trainingData;
+		this.training = training;
 	}
 }

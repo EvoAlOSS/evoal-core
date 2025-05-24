@@ -69,7 +69,11 @@ module search {
 	        ];
 	    };
 	
-		'optimisation-function' := 'surrogate' {};
+		'optimisation-function' := 'surrogate' {
+            'pson-file' := "svr.pson";
+            'input-space' := [data 'x:0'];
+            'output-space' := [data 'y:0', data 'y:1', data 'y:2', data 'y:3', data 'y:4', data 'y:5', data 'y:6', data 'y:7'];
+		};
 
 		'stopping-criteria' := [
             'iteration-count' { 'maximum-iterations' := 10; }
@@ -78,7 +82,11 @@ module search {
 		documenting := [
            'best-candidate-per-iteration' {},
            'candidates-per-iteration' {},
-		    'prediction-per-individual' {}
+		    'prediction-per-individual' {
+		        'pson-file' := "svr.pson";
+                'input-space' := [data 'x:0'];
+                'output-space' := [data 'y:0', data 'y:1', data 'y:2', data 'y:3', data 'y:4', data 'y:5', data 'y:6', data 'y:7'];
+		    }
         ];
 	}
 }

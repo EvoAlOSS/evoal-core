@@ -1,5 +1,8 @@
 package de.evoal.surrogate.adaption.density.ea.surrogate.gof;
 
+import de.evoal.core.api.ecore.EObjectPair;
+import de.evoal.core.api.ecore.stream.EObjectPairStreamFactory;
+import de.evoal.core.api.ecore.stream.EObjectPairStreamSupplier;
 import de.evoal.core.api.properties.PropertiesPair;
 import de.evoal.core.api.properties.stream.PropertiesBasedPropertiesPairStreamSupplier;
 import de.evoal.core.api.properties.stream.PropertiesPairStreamSupplier;
@@ -22,8 +25,8 @@ import java.util.function.Function;
 public class GaussianDensityEstimation extends AbstractDensityEstimation {
 
     @Override
-    protected GaussianDensityData calculateDensityData(final Function<PropertiesPair, Double> mapper) {
-        final PropertiesPairStreamSupplier supplier = new PropertiesBasedPropertiesPairStreamSupplier(trainingData, sourcePropertiesSpec, targetPropertiesSpec);
+    protected GaussianDensityData calculateDensityData(final Function<EObjectPair, Double> mapper) {
+        final EObjectPairStreamSupplier supplier = EObjectPairStreamFactory.createFromList(sourcePropertiesSpec, targetPropertiesSpec, trainingData);
         final double [] data = supplier.get()
                 .mapToDouble(pair -> mapper.apply(pair))
                 .toArray();

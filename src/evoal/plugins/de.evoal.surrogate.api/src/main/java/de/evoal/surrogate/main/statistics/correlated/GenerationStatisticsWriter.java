@@ -1,10 +1,28 @@
 package de.evoal.surrogate.main.statistics.correlated;
 
+import lombok.extern.slf4j.Slf4j;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.Dependent;
+import javax.inject.Inject;
+import javax.inject.Named;
+
+import smile.math.matrix.Matrix;
+
 import de.evoal.core.api.board.Blackboard;
+import de.evoal.core.api.cdi.ConfigurationValue;
+import de.evoal.core.api.properties.Properties;
+import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.properties.stream.FileBasedPropertiesStreamSupplier;
 import de.evoal.core.api.properties.stream.PropertiesStreamSupplier;
+import de.evoal.languages.model.base.expressions.Instance;
 import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
-import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.optimisation.api.model.Candidate;
 import de.evoal.optimisation.api.model.Iteration;
 import de.evoal.optimisation.api.statistics.io.Writer;
@@ -13,24 +31,9 @@ import de.evoal.optimisation.api.statistics.io.WriterStrategy;
 import de.evoal.optimisation.api.statistics.writer.Column;
 import de.evoal.optimisation.api.statistics.writer.ColumnType;
 import de.evoal.optimisation.api.statistics.writer.StatisticsWriter;
-import de.evoal.languages.model.base.expressions.Instance;
-import de.evoal.core.api.properties.Properties;
-import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.surrogate.api.SurrogateBlackboardEntries;
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.Dependent;
-import lombok.extern.slf4j.Slf4j;
 
-import smile.math.matrix.Matrix;
 
-import javax.inject.Inject;
-import javax.inject.Named;
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 /**
  * Small helper class for collecting and writing the generation-based statistics.
@@ -51,10 +54,10 @@ public class GenerationStatisticsWriter implements StatisticsWriter {
     @Inject
     private Blackboard board;
 
-    @Inject @Named("surrogate-source-properties-specification")
+//    @Inject @Named("surrogate-source-properties-specification")
     private PropertiesSpecification sourceSpec;
 
-    @Inject @Named("surrogate-target-properties-specification")
+//    @Inject @Named("surrogate-target-properties-specification")
     private PropertiesSpecification targetSpec;
 
 

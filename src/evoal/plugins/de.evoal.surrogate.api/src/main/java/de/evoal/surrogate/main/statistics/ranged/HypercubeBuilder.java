@@ -1,9 +1,9 @@
 package de.evoal.surrogate.main.statistics.ranged;
 
-import de.evoal.optimisation.api.correlations.Range;
-
 import java.util.LinkedList;
 import java.util.List;
+
+import de.evoal.optimisation.api.correlations.Range;
 
 public class HypercubeBuilder {
 	private final int dimensions;

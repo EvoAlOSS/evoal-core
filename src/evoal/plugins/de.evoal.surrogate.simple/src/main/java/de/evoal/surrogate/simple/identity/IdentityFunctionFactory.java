@@ -2,6 +2,8 @@ package de.evoal.surrogate.simple.identity;
 
 import java.util.List;
 
+import de.evoal.core.api.ecore.Space;
+import de.evoal.core.api.ecore.stream.EObjectPairStreamSupplier;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.properties.stream.PropertiesPairStreamSupplier;
 import de.evoal.surrogate.api.configuration.Parameter;
@@ -16,12 +18,12 @@ import javax.inject.Named;
 @Named("identity")
 public final class IdentityFunctionFactory extends AbstractPartialSurrogateFunctionFactory {
 	@Override
-	protected PartialSurrogateFunction calculateRegression(final PartialFunctionConfiguration configuration, final List<Parameter> parameters, final PropertiesSpecification actualInput, final PropertiesSpecification requiredInput, final PropertiesSpecification producedOutput, final PropertiesPairStreamSupplier provider) {
-		return new IdentityFunction(configuration, requiredInput, actualInput, producedOutput);
+	protected PartialSurrogateFunction calculateRegression(final PartialFunctionConfiguration configuration, final List<Parameter> parameters, final Space requiredInput, final Space producedOutput, final EObjectPairStreamSupplier provider) {
+		return new IdentityFunction(configuration, requiredInput, producedOutput);
 	}
 
 	@Override
-	protected PartialSurrogateFunction restoreRegression(final PartialFunctionConfiguration configuration, final PropertiesSpecification actualInput, final PropertiesSpecification requiredInput, final PropertiesSpecification producedOutput) {
-		return new IdentityFunction(configuration, requiredInput, actualInput, producedOutput);
+	protected PartialSurrogateFunction restoreRegression(final PartialFunctionConfiguration configuration, final Space requiredInput, final Space producedOutput) {
+		return new IdentityFunction(configuration, requiredInput, producedOutput);
 	}
 }

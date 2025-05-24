@@ -46,7 +46,7 @@ public class StandardDeviationCalculation implements CalculationStrategy {
         return new CalculationResult(calculateMinimalDifference(0, new HashMap<>(), genotype, fitness));
     }
 
-    // TODO Adapt fitness
+    // TODO Adapt malus
     private ConstraintResult calculateMinimalDifference(final int index, final Map<Integer, Double> differences, final Properties genotype, final Properties fitness) {
         if(index == allowedDeviations.size()) {
             final Properties adaptedProperties = new Properties(genotype);

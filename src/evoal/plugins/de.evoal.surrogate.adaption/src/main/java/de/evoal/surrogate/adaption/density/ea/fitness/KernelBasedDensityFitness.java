@@ -7,8 +7,8 @@ import javax.enterprise.context.Dependent;
 import javax.inject.Named;
 
 @Dependent
-@Slf4j
 @Named("de.evoal.surrogate.adaption.density.optimisation.kernel-density")
+@Slf4j
 public class KernelBasedDensityFitness extends DensityBasedFitness {
     public KernelBasedDensityFitness() {
         super(KernelDensityData::new);

@@ -1,11 +1,12 @@
 package de.evoal.surrogate.api.function;
 
+import lombok.Getter;
+
 import java.util.List;
 
+import de.evoal.core.api.ecore.Space;
 import de.evoal.surrogate.api.configuration.Parameter;
 import de.evoal.surrogate.api.configuration.PartialFunctionConfiguration;
-import de.evoal.core.api.properties.PropertiesSpecification;
-import lombok.Getter;
 
 /**
  * Base class for regression functions storing the input and output properties.
@@ -21,13 +22,28 @@ public abstract class AbstractPartialSurrogateFunction implements PartialSurroga
 		parameters.add(parameter);
 	}
 
-	private final PropertiesSpecification input;
-	private final PropertiesSpecification output;
+	/**
+	 * Configuration of the partial surrogate function
+	 */
 	@Getter
-    private final PartialFunctionConfiguration configuration;
+	private final PartialFunctionConfiguration configuration;
+
+	/**
+	 * Input space of the partial surrogate function.
+	 */
+	protected final Space input;
+
+	/**
+	 * Output space of the partial surrogate function.
+	 */
+	protected final Space output;
+
+	/**
+	 * List of parameters
+	 */
 	private final List<Parameter> parameters;
 
-	public AbstractPartialSurrogateFunction(final PartialFunctionConfiguration configuration, final List<Parameter> functionParameters, final PropertiesSpecification input, final PropertiesSpecification output) {
+	public AbstractPartialSurrogateFunction(final PartialFunctionConfiguration configuration, final List<Parameter> functionParameters, final Space input, final Space output) {
 		this.configuration = configuration;
 		this.parameters = functionParameters;
 		this.input = input;
@@ -35,12 +51,12 @@ public abstract class AbstractPartialSurrogateFunction implements PartialSurroga
 	}
 
 	@Override
-	public PropertiesSpecification getUsedProperties() {
+	public Space getUsedProperties() {
 		return input;
 	}
 
 	@Override
-	public PropertiesSpecification getOutputProperty() {
+	public Space getOutputProperty() {
 		return output;
 	}
 

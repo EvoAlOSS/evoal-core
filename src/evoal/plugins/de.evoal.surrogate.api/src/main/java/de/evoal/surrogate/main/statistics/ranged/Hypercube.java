@@ -1,12 +1,13 @@
 package de.evoal.surrogate.main.statistics.ranged;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-import de.evoal.core.api.properties.Properties;
-
-import de.evoal.optimisation.api.correlations.Range;
 import smile.math.matrix.Matrix;
+
+import de.evoal.core.api.properties.Properties;
+import de.evoal.optimisation.api.correlations.Range;
 
 public class Hypercube {
 	private final int dimensions;
@@ -16,11 +17,6 @@ public class Hypercube {
 	public Hypercube(final Hypercube other) {
 		this.dimensions = other.dimensions;
 		this.definition = other.definition;
-	}
-	
-	public Hypercube(Range[] definition) {
-		this.definition = definition;
-		this.dimensions = definition.length;
 	}
 	
 	public Hypercube(final Range[] definition, int dimensions) {
@@ -97,10 +93,6 @@ public class Hypercube {
 	}
 	
 	public boolean equals(Hypercube other) {
-		return  this.definition.equals(other.definition);
-	}
-	
-	public boolean contentEquals(Hypercube other) {
-		return this.definition.equals(other.definition) && this.data.equals(other.data); 
+		return Arrays.equals(this.definition, other.definition);
 	}
 }

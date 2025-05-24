@@ -14,6 +14,7 @@ module de.evoal.surrogate.smile {
 
     requires de.evoal.core.main;
     requires de.evoal.surrogate.api;
+    requires org.eclipse.emf.ecore;
 
     // export API for down-stream plugins
     exports de.evoal.surrogate.smile.api;

@@ -1,8 +1,10 @@
 package de.evoal.optimisation.main.search;
 
 import de.evoal.core.api.board.Blackboard;
+import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
 import de.evoal.core.api.cdi.*;
+import de.evoal.optimisation.api.cdi.TargetPointLoader;
 import de.evoal.optimisation.api.model.OptimisationAlgorithm;
 import de.evoal.core.api.properties.PropertiesPair;
 
@@ -16,6 +18,7 @@ import de.evoal.languages.model.base.expressions.Instance;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 import java.io.File;
 import java.util.List;
 
@@ -57,6 +60,14 @@ public class HeuristicSearchEvaluation implements MainClass {
     private Column runColumn;
 
     @Inject
+    @Named("search-space-specification")
+    private PropertiesSpecification inputSpace;
+
+    @Inject
+    @Named("optimisation-space-specification")
+    private PropertiesSpecification outputSpace;
+
+    @Inject
     @ConfigurationValue(entry = OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm")
     private Instance algorithmConfiguration;
 
@@ -70,8 +81,8 @@ public class HeuristicSearchEvaluation implements MainClass {
         log.info("  running {} iterations.", iterations);
 
         if(targetFile != null) {
-            PropertiesPairStreamSupplier targetStream = BeanFactory.create("target-stream", PropertiesPairStreamSupplier.class);
-            targets = targetStream.get().toList();
+            final TargetPointLoader loader = BeanFactory.create(TargetPointLoader.class);
+            targets = loader.getTargetPropertiesStream(inputSpace, outputSpace).get().toList();
             log.info("Processing {} targets during evaluation.", targets.size());
         }
 

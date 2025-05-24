@@ -1,5 +1,20 @@
 package de.evoal.pipeline.impl.components.io;
 
+import lombok.NonNull;
+import lombok.extern.slf4j.Slf4j;
+
+import java.io.File;
+import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Stream;
+import javax.enterprise.context.Dependent;
+import javax.inject.Inject;
+import javax.inject.Named;
+
+import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.EcorePackage;
+
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.properties.PropertySpecification;
@@ -12,21 +27,8 @@ import de.evoal.languages.model.base.definitions.Definition;
 import de.evoal.languages.model.base.expressions.Instance;
 import de.evoal.languages.model.dynamic.DynamicPackage;
 import de.evoal.pipeline.api.model.ComponentImpl;
-import de.evoal.pipeline.api.model.TypedEObject;
-import de.evoal.pipeline.api.model.dynamic.SubSpace;
-import lombok.NonNull;
-import lombok.extern.slf4j.Slf4j;
-import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.EcorePackage;
-
-import javax.enterprise.context.Dependent;
-import javax.inject.Inject;
-import javax.inject.Named;
-import java.io.File;
-import java.util.*;
-import java.util.function.Function;
-import java.util.stream.Stream;
+import de.evoal.core.api.ecore.TypedEObject;
+import de.evoal.core.api.ecore.Space;
 
 @Dependent
 @Slf4j
@@ -68,7 +70,7 @@ public class Reader extends ComponentImpl {
 
         log.info("Reading data from {}", file.getAbsolutePath());
 
-        final SubSpace writes = getWrites();
+        final Space writes = getWrites();
 
         final Stream<Definition> definitions =
                 writes.stream()

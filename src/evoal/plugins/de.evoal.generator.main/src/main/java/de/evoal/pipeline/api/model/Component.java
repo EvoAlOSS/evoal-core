@@ -1,10 +1,9 @@
 package de.evoal.pipeline.api.model;
 
-import de.evoal.pipeline.api.model.dynamic.SubSpace;
 import lombok.NonNull;
-import org.eclipse.emf.ecore.EStructuralFeature;
 
-import java.util.LinkedHashSet;
+import de.evoal.core.api.ecore.TypedEObject;
+import de.evoal.core.api.ecore.Space;
 
 /**
  * A component of the data pipeline.
@@ -13,12 +12,12 @@ public interface Component {
     /**
      * @return A non-null set of structural features the component will read.
      */
-    public @NonNull SubSpace getReads();
+    public @NonNull Space getReads();
 
     /**
      * @return A non-null set of structural features the component will write.
      */
-    public @NonNull SubSpace getWrites();
+    public @NonNull Space getWrites();
 
     /**
      * Applies the component to an object. Therefore, the component reads and writes features.

@@ -1,25 +1,21 @@
 package de.evoal.pipeline.api.model;
 
-import de.evoal.core.api.cdi.EvoalComponent;
-import de.evoal.pipeline.api.model.dynamic.SubSpace;
 import lombok.Getter;
-import lombok.NonNull;
-import org.eclipse.emf.ecore.EStructuralFeature;
 
-import java.util.Collection;
-import java.util.LinkedHashSet;
+import de.evoal.core.api.cdi.EvoalComponent;
+import de.evoal.core.api.ecore.Space;
 
 public abstract class ComponentImpl implements Component, EvoalComponent<ComponentImpl> {
 
     @Getter
-    private SubSpace reads;
+    private Space reads;
 
     @Getter
-    private SubSpace writes;
+    private Space writes;
 
-    public void setFeatures(final Collection<EStructuralFeature> reads, final Collection<EStructuralFeature> writes) {
-        this.reads = new SubSpace(reads);
-        this.writes = new SubSpace(writes);
+    public void setFeatures(final Space reads, final Space writes) {
+        this.reads = reads;
+        this.writes = writes;
     }
 
     @Override

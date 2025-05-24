@@ -85,7 +85,7 @@ public class ThresholdAccepting implements OptimisationAlgorithm {
                 double[] candidateFitness = fitness.evaluate(p);
                 OptimisationValue alternateValue = comparator.apply(candidateFitness);
                 if (alternateValue.isBetter(finalCurrentValue, this.maximise)) {
-                    log.debug("Neighbour fitness better, accepting.");
+                    log.debug("Neighbour malus better, accepting.");
                     return true;
                 }
                 double dist = alternateValue.distanceFrom(finalCurrentValue);

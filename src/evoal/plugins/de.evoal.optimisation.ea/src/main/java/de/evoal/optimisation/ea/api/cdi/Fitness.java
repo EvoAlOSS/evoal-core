@@ -4,7 +4,7 @@ import javax.inject.Qualifier;
 import java.lang.annotation.*;
 
 /**
- * Annotation for marking fitness functions.
+ * Annotation for marking malus functions.
  */
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
@@ -12,7 +12,7 @@ import java.lang.annotation.*;
 @Target({ElementType.TYPE})
 public @interface Fitness {
     /**
-     * @return Name of the fitness calculator.
+     * @return Name of the malus calculator.
      */
     String value();
 }

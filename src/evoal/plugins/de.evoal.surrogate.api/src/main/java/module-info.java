@@ -35,13 +35,15 @@ module de.evoal.surrogate.api {
 
     // export resources
     exports de.evoal.surrogate.api;
-    exports de.evoal.surrogate.api.function;
+    exports de.evoal.surrogate.api.cdi;
     exports de.evoal.surrogate.api.configuration;
+    exports de.evoal.surrogate.api.function;
 
     opens de.evoal.surrogate;
 
     // open packages for CDI
     opens de.evoal.surrogate.api to weld.core.impl;
+    opens de.evoal.surrogate.api.cdi to weld.core.impl;
     opens de.evoal.surrogate.api.configuration to com.fasterxml.jackson.databind;
     opens de.evoal.surrogate.api.training to weld.core.impl;
 
@@ -58,4 +60,6 @@ module de.evoal.surrogate.api {
     opens de.evoal.surrogate.main.statistics.correlated to weld.core.impl;
     opens de.evoal.surrogate.main.statistics.ranged to weld.core.impl;
     opens de.evoal.surrogate.main.statistics.surrogate to weld.core.impl;
+    opens de.evoal.surrogate.main.ea.constraints.strategies.malus to weld.core.impl;
+    opens de.evoal.surrogate.main.ea.fitness to weld.core.impl;
 }

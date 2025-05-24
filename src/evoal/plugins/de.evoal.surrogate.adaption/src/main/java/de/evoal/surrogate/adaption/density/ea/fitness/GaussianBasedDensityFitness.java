@@ -7,8 +7,8 @@ import javax.enterprise.context.Dependent;
 import javax.inject.Named;
 
 @Dependent
-@Slf4j
 @Named("de.evoal.surrogate.adaption.density.optimisation.gaussian-density")
+@Slf4j
 public class GaussianBasedDensityFitness extends DensityBasedFitness {
     public GaussianBasedDensityFitness() {
         super(GaussianDensityData::new);

@@ -146,6 +146,13 @@
 
 		<dependency>
 			<groupId>de.evoal.languages</groupId>
+			<artifactId>de.evoal.languages.models</artifactId>
+			<version>${evoal.languages.version}</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>de.evoal.languages</groupId>
 			<artifactId>de.evoal.languages.model.ol</artifactId>
 			<version>${evoal.languages.version}</version>
 			<scope>compile</scope>

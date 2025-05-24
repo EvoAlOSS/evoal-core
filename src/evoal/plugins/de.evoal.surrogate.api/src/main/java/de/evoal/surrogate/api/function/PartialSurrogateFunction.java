@@ -2,10 +2,11 @@ package de.evoal.surrogate.api.function;
 
 import java.util.Collection;
 
+import de.evoal.core.api.ecore.TypedEObject;
+import de.evoal.core.api.ecore.Space;
 import de.evoal.surrogate.api.configuration.PartialFunctionConfiguration;
 import de.evoal.surrogate.api.configuration.Parameter;
-import de.evoal.core.api.properties.Properties;
-import de.evoal.core.api.properties.PropertiesSpecification;
+import lombok.NonNull;
 
 /**
  * A partial surrogate function calculates only specific properties. Several
@@ -18,14 +19,14 @@ public interface PartialSurrogateFunction {
 	 *   value.
 	 *
 	 * @param input The input properties for the regression.
-	 * @return The calculated value.
+	 * @return The parameter.
 	 */
-    Object [] apply(final Properties input);
+	void apply(final @NonNull TypedEObject input, final @NonNull TypedEObject output);
 
 	/**
 	 * @return The generated property.
 	 */
-    PropertiesSpecification getOutputProperty();
+    Space getOutputProperty();
 
 	/**
 	 * @return A collection of parameters to restore the regression function.
@@ -35,7 +36,7 @@ public interface PartialSurrogateFunction {
 	/**
 	 * @return An empty properties vector containing all consumed properties.
 	 */
-    PropertiesSpecification getUsedProperties();
+    Space getUsedProperties();
 
 	/**
 	 * @return The configuration object.

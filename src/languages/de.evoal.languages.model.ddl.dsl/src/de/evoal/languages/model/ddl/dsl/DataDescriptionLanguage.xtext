@@ -60,8 +60,8 @@ DataDescriptionRule returns definitions::DataDescription:
 ;
 
 TypedBaseDataDescriptionRule returns definitions::TypedBaseDataDescription:
-	representation=RepresentationType 'data' name = StringOrId 'of' 
-	// ???
+	(constraints += BaseLanguage::ConstraintRule)*
+	representation=RepresentationType 'data' name = StringOrId 'of' 'type' type= [definitions::DataTypeTypeDefinition|StringOrId] 
 	('with' 'constraints' ':' (constraints += StatementRule)*)?
 	';'
 ;

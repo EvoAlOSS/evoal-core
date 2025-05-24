@@ -4,7 +4,7 @@ import de.evoal.core.api.cdi.EvoalComponent;
 
 /**
  * A stopping criterion determines if an optimisation algorithm should stop optimising.
- *   There are different strategies that can be used, such as, number of iterations,
+ *   There are different constraints that can be used, such as, number of iterations,
  *   population diversity, or convergence.
  */
 @FunctionalInterface

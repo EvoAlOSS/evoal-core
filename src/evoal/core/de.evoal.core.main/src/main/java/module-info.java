@@ -30,6 +30,7 @@ module de.evoal.core.main {
     requires de.evoal.languages.model.ddl.dsl;
     requires de.evoal.languages.model.dl;
     requires de.evoal.languages.model.dl.dsl;
+    requires de.evoal.languages.models;
     requires de.evoal.languages.model.ol;
     requires de.evoal.languages.model.ol.dsl;
     requires de.evoal.languages.model.interpreter;
@@ -41,16 +42,29 @@ module de.evoal.core.main {
 
     exports de.evoal.core.api.board;
     exports de.evoal.core.api.cdi;
+    exports de.evoal.core.api.dynamic;
     exports de.evoal.core.api.languages;
     exports de.evoal.core.api.languages.base;
     exports de.evoal.core.api.properties;
     exports de.evoal.core.api.properties.info;
     exports de.evoal.core.api.properties.io;
     exports de.evoal.core.api.properties.stream;
+
+    exports de.evoal.core.api.ecore;
+    exports de.evoal.core.api.ecore.info;
+    exports de.evoal.core.api.ecore.io;
+    exports de.evoal.core.api.ecore.misc;
+    exports de.evoal.core.api.ecore.stream;
+
     exports de.evoal.core.api.utils;
 
     opens de.evoal.core.api.board to weld.core.impl;
     opens de.evoal.core.api.cdi to weld.core.impl;
+    opens de.evoal.core.api.dynamic to weld.core.impl;
+    opens de.evoal.core.api.ecore to weld.core.impl;
+    opens de.evoal.core.api.ecore.info to weld.core.impl;
+    opens de.evoal.core.api.ecore.io to weld.core.impl;
+    opens de.evoal.core.api.ecore.stream to weld.core.impl;
     opens de.evoal.core.api.languages to weld.core.impl;
     opens de.evoal.core.api.properties to weld.core.impl;
     opens de.evoal.core.api.properties.info to weld.core.impl;
@@ -58,6 +72,7 @@ module de.evoal.core.main {
     opens de.evoal.core.api.properties.stream to weld.core.impl;
     opens de.evoal.core.api.utils to weld.core.impl;
 
+    opens de.evoal.core.main.ecore to weld.core.impl;
     opens de.evoal.core.main.language to weld.core.impl;
     opens de.evoal.core.main.properties to weld.core.impl;
 }

@@ -341,7 +341,13 @@ public class DataDescriptionLanguageSemanticSequencer extends BaseLanguageSemant
 	 *     TypedBaseDataDescriptionRule returns TypedBaseDataDescription
 	 *
 	 * Constraint:
-	 *     (representation=RepresentationType name=StringOrId constraints+=StatementRule*)
+	 *     (
+	 *         constraints+=ConstraintRule* 
+	 *         representation=RepresentationType 
+	 *         name=StringOrId 
+	 *         type=[DataTypeTypeDefinition|StringOrId] 
+	 *         constraints+=StatementRule*
+	 *     )
 	 * </pre>
 	 */
 	protected void sequence_TypedBaseDataDescriptionRule(ISerializationContext context, TypedBaseDataDescription semanticObject) {

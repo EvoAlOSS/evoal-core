@@ -69,7 +69,11 @@ module search {
 	        ];
 	    };
 	
-		'optimisation-function' := 'surrogate' {};
+		'optimisation-function' := 'surrogate' {
+            'pson-file' := "simple.pson";
+            'input-space' := [data 'x:0'];
+            'output-space' := [data 'y:0', data 'y:1', data 'y:2'];
+		};
 
 		'stopping-criteria' := [
             'iteration-count' { 'maximum-iterations' := 10; }

@@ -21,7 +21,7 @@ public interface OptimisationValueComparator extends EvoalComponent<Optimisation
     }
 
     /**
-     * Creates an optimisation value instance for raw fitness values.
+     * Creates an optimisation value instance for raw malus values.
      *
      * @param optimisationValues the raw values.
      * @return The calculated optimisation value.

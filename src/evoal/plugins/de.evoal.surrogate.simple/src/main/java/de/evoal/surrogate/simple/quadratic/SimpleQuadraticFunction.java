@@ -1,21 +1,20 @@
 package de.evoal.surrogate.simple.quadratic;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.LinkedList;
 import java.util.List;
-import java.util.function.Function;
+import java.util.function.BiConsumer;
 
+import org.apache.commons.math3.stat.regression.SimpleRegression;
+import org.eclipse.emf.ecore.EStructuralFeature;
+
+import de.evoal.core.api.ecore.Space;
+import de.evoal.core.api.ecore.TypedEObject;
 import de.evoal.core.api.utils.Requirements;
-import de.evoal.languages.model.base.definitions.BaseDataDescription;
 import de.evoal.surrogate.api.configuration.Parameter;
 import de.evoal.surrogate.api.configuration.PartialFunctionConfiguration;
 import de.evoal.surrogate.api.function.AbstractPartialSurrogateFunction;
-import de.evoal.core.api.properties.Properties;
-import de.evoal.core.api.utils.ConverterFunctions;
-import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.math3.stat.regression.SimpleRegression;
-
-import de.evoal.core.api.properties.PropertiesSpecification;
-import de.evoal.core.api.properties.PropertySpecification;
 
 @Slf4j
 public class SimpleQuadraticFunction extends AbstractPartialSurrogateFunction {
@@ -50,9 +49,9 @@ public class SimpleQuadraticFunction extends AbstractPartialSurrogateFunction {
 	/**
 	 * Actual function for prediction.
 	 */
-	private final Function<Properties, Object> regression;
+	private final BiConsumer<TypedEObject, TypedEObject> regression;
 
-	public SimpleQuadraticFunction(final PartialFunctionConfiguration configuration, final List<Parameter> functionParameters, final PropertiesSpecification input, final PropertiesSpecification actualInput, final PropertiesSpecification output) {
+	public SimpleQuadraticFunction(final PartialFunctionConfiguration configuration, final List<Parameter> functionParameters, final Space input, final Space output) {
 		super(configuration, functionParameters, input, output);
 		
 		final double slope = getSlope();
@@ -60,20 +59,17 @@ public class SimpleQuadraticFunction extends AbstractPartialSurrogateFunction {
 
 		log.info("Using quadratic regression f(x) = {} * x^2 + {}.", slope, intercept);
 
-		final PropertySpecification inputProperty = input.getProperties().get(0);
-		final int propertyIndex = actualInput.indexOf(inputProperty);
+		Requirements.requireSize(input, 1);
+		Requirements.requireSize(output, 1);
+		final EStructuralFeature iFeature = input.iterator().next();
+		final EStructuralFeature oFeature = output.iterator().next();
 
-		Requirements.requireInstanceOf(inputProperty.type(), BaseDataDescription.class);
-		Requirements.requireInstanceOf(output.getProperties().get(0).type(), BaseDataDescription.class);
-
-		final Function<Properties, Double> inputConverter = ConverterFunctions.convertToDouble(((BaseDataDescription)inputProperty.type()).getRepresentation(), propertyIndex);
-		final Function<Double, Object> outputConverter = ConverterFunctions.convertDoubleTo(((BaseDataDescription)output.get(0).type()).getRepresentation());
-
-		this.regression = vector -> outputConverter.apply(intercept + slope * Math.pow(inputConverter.apply(vector), 2.0));
+		this.regression = (in, out) -> out.eSet(oFeature, intercept + slope * Math.pow(in.eGetAsDouble(iFeature), 2.0));
 	}
 
-	public Object [] apply(final Properties input) {
-		return new Object [] {regression.apply(input)};
+	@Override
+	public void apply(final TypedEObject input, final TypedEObject output) {
+		regression.accept(input, output);
 	}
 
 	private double getIntercept() {

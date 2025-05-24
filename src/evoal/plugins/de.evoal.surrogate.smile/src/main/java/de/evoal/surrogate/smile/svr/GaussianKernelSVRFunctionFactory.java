@@ -1,5 +1,6 @@
 package de.evoal.surrogate.smile.svr;
 
+import de.evoal.core.api.ecore.Space;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.surrogate.api.configuration.Parameter;
 import de.evoal.surrogate.api.configuration.PartialFunctionConfiguration;
@@ -20,7 +21,7 @@ public class GaussianKernelSVRFunctionFactory extends KernelBasedSVRFunctionFact
 	}
 
 	@Override
-	protected PartialSurrogateFunction restoreRegression(final PartialFunctionConfiguration configuration, final PropertiesSpecification actualInput, final PropertiesSpecification requiredInput, final PropertiesSpecification producedOutput) {
+	protected PartialSurrogateFunction restoreRegression(final PartialFunctionConfiguration configuration, final Space input, final Space output) {
 		final KernelMachine<double []> regression = KernelHelper.fromParameters(configuration.getParameters(), configuration.getState());
 
 		final double margin = configuration.getParameters()
@@ -57,6 +58,6 @@ public class GaussianKernelSVRFunctionFactory extends KernelBasedSVRFunctionFact
 				.get();
 
 
-		return new KernelBasedSVRFunction(configuration, regression, "gaussian", requiredInput, actualInput, producedOutput, margin, sourceMeans, sourceSDs, targetMeans, targetSDs);
+		return new KernelBasedSVRFunction(configuration, regression, "gaussian", input, output, margin, sourceMeans, sourceSDs, targetMeans, targetSDs);
 	}
 }

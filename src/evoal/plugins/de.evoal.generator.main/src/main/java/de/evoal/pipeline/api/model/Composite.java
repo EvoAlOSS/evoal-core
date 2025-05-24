@@ -1,11 +1,13 @@
 package de.evoal.pipeline.api.model;
 
-import de.evoal.pipeline.api.model.dynamic.SubSpace;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
-import org.eclipse.emf.ecore.EStructuralFeature;
 
 import java.util.*;
+
+import de.evoal.core.api.ecore.Space;
+import de.evoal.core.api.ecore.TypedEObject;
+import de.evoal.core.api.ecore.misc.SpaceHelper;
 
 /**
  * A composite component that contains an arbitrary number of children.
@@ -13,6 +15,9 @@ import java.util.*;
  */
 @Slf4j
 public final class Composite implements Component {
+    /**
+     * List of children to execute.
+     */
     private final List<Component> children = new ArrayList<>();
 
     public Composite(final @NonNull Collection<Component> children) {
@@ -31,19 +36,19 @@ public final class Composite implements Component {
     }
 
     @Override
-    public @NonNull SubSpace getReads() {
-        final SubSpace reads = new SubSpace();
-        children.forEach(c -> reads.addAll(c.getReads()));
-
-        return reads;
+    public @NonNull Space getReads() {
+        return SpaceHelper.fromFeatureStream(
+                children.stream()
+                        .flatMap(c -> c.getReads().stream())
+        );
     }
 
     @Override
-    public @NonNull SubSpace getWrites() {
-        final SubSpace writes = new SubSpace();
-        children.forEach(c -> writes.addAll(c.getWrites()));
-
-        return writes;
+    public @NonNull Space getWrites() {
+        return SpaceHelper.fromFeatureStream(
+                children.stream()
+                        .flatMap(c -> c.getWrites().stream())
+        );
     }
 
     @Override

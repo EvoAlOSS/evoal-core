@@ -1,9 +1,25 @@
 package de.evoal.surrogate.main.internal;
 
+import lombok.NonNull;
+import lombok.extern.slf4j.Slf4j;
+
+import javax.enterprise.context.Dependent;
+import javax.inject.Inject;
+import javax.inject.Named;
+import java.io.File;
+import java.util.*;
+import java.util.function.BiConsumer;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+
+import org.eclipse.emf.ecore.EStructuralFeature;
+
 import de.evoal.core.api.cdi.BeanFactory;
+import de.evoal.core.api.ecore.Space;
+import de.evoal.core.api.ecore.stream.EObjectPairStreamFactory;
+import de.evoal.core.api.ecore.stream.FileBasedEObjectStreamSupplier;
 import de.evoal.core.api.languages.AttributeEvaluator;
-import de.evoal.core.api.properties.PropertiesSpecification;
-import de.evoal.core.api.properties.stream.FileBasedPropertiesStreamSupplier;
 import de.evoal.core.api.utils.ConstantSwitch;
 import de.evoal.core.api.utils.Requirements;
 import de.evoal.core.interpreter.api.InterpreterState;
@@ -15,40 +31,28 @@ import de.evoal.languages.model.execution.CallBuiltinFunction;
 import de.evoal.languages.model.execution.Statement;
 import de.evoal.languages.model.mll.PredictStatement;
 import de.evoal.languages.model.mll.SurrogateDefinition;
+import de.evoal.core.api.dynamic.EAnnotationHelper;
 import de.evoal.surrogate.api.SurrogateInformationCalculator;
 import de.evoal.surrogate.api.configuration.SurrogateConfiguration;
 import de.evoal.surrogate.api.function.SurrogateFunction;
 import de.evoal.surrogate.api.training.TrainingDataManager;
-import lombok.NonNull;
-import lombok.extern.slf4j.Slf4j;
 
-import javax.enterprise.context.Dependent;
-import javax.inject.Inject;
-import javax.inject.Named;
-import java.io.File;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
-import java.util.function.BiConsumer;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 @Dependent
 @Slf4j
 public class MLLProgramExecutionSwitch extends ProgramExecutionSwitch {
     /**
-     * Variable pattern
+     * Pattern for finding variable access.
      */
     private final static Pattern varPattern = Pattern.compile("\\$\\{[^}]*}");
 
     private SurrogateConfiguration config;
 
-    private SurrogateDefinition definition;
-
     @Inject
     private AttributeEvaluator evaluator;
+
+    @Inject
+    private EAnnotationHelper helper;
 
     private SurrogateFunction function;
 
@@ -58,7 +62,6 @@ public class MLLProgramExecutionSwitch extends ProgramExecutionSwitch {
     @Inject
     @Named("surrogate-writer")
     private BiConsumer<@NonNull SurrogateConfiguration, @NonNull File> surrogateWriter;
-
 
     public MLLProgramExecutionSwitch setState(final InterpreterState context) {
         super.context = context;
@@ -90,24 +93,22 @@ public class MLLProgramExecutionSwitch extends ProgramExecutionSwitch {
 
         final long startTime = System.currentTimeMillis();
 
+        // create configuration
+        final Map<DataDescription, EStructuralFeature> featureMap = helper.featuresOf(context.getSpace());
+        this.config = SurrogateConfiguration.from(definition, featureMap, evaluator);
+
         // collect specifications
-        final PropertiesSpecification inputSpec = collectSpecification(definition.getInputs());
-        final PropertiesSpecification outputSpec = collectSpecification(definition.getOutputs());
-        final PropertiesSpecification trainingSpec = PropertiesSpecification.builder()
-                .add(inputSpec)
-                .add(outputSpec)
-                .build();
+        final Space inputSpec = helper.subSpaceOf(context.getSpace(), definition.getInputs());
+        final Space outputSpec = helper.subSpaceOf(context.getSpace(), definition.getOutputs());
+        final Space trainingSpec = inputSpec.merge(outputSpec);
 
-        manager.setTrainingStream(new FileBasedPropertiesStreamSupplier(input, trainingSpec));
-
-        this.definition = definition;
-        this.config = SurrogateConfiguration.from(definition, evaluator);
+        manager.setTrainingStream(EObjectPairStreamFactory.createFromList(inputSpec, outputSpec, new FileBasedEObjectStreamSupplier(input, trainingSpec)));
 
         log.info("Training surrogate function.");
         this.function = new SurrogateFactory(config, manager.getTrainingStream()).create();
 
         final long endTime = System.currentTimeMillis();
-        log.info("Calculation of surrogate took " + (endTime - startTime) + " ms.");
+        log.info("Calculation of surrogate took {} ms.", endTime - startTime);
 
         statements.stream()
                   .filter(CallBuiltinFunction.class::isInstance)
@@ -146,12 +147,6 @@ public class MLLProgramExecutionSwitch extends ProgramExecutionSwitch {
         return new File(filename);
     }
 
-    private PropertiesSpecification collectSpecification(final List<DataDescription> descriptions) {
-        return PropertiesSpecification.builder()
-                .addDescriptions(descriptions.stream())
-                .build();
-    }
-
     private void handleGoodnessOfFitCall(final CallBuiltinFunction call) {
         final FunctionDefinition function = call.getDefinition();
         log.info("Handling call of {} ...", function.getName());
@@ -166,11 +161,11 @@ public class MLLProgramExecutionSwitch extends ProgramExecutionSwitch {
                 .collect(Collectors.toList());
 
         log.info("Configuring GOF instance.");
-        calculator.configure(this.function, config, parameters, manager.getTrainingStream());
+        calculator.configure(this.function, config, manager.getTrainingStream());
 
         log.info("Calling GOF instance.");
         final long startTime = System.currentTimeMillis();
-        calculator.execute();
+        calculator.call(context, parameters.toArray());
         final long endTime = System.currentTimeMillis();
 
         log.info("Calculation of {} took {} ms.", function.getName(), (endTime - startTime));

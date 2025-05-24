@@ -1,6 +1,7 @@
 package de.evoal.pipeline.impl.internal;
 
 import de.evoal.core.api.cdi.BeanFactory;
+import de.evoal.core.api.ecore.Space;
 import de.evoal.languages.model.pipeline.PipelineDefinition;
 import de.evoal.languages.model.pipeline.Step;
 import de.evoal.pipeline.api.model.Component;
@@ -18,7 +19,10 @@ import java.util.stream.Collectors;
  */
 @Slf4j
 public class PipelineInstantiator {
+    private final EClass space;
+
     public PipelineInstantiator(final @NonNull EClass space) {
+        this.space = space;
     }
 
     /**
@@ -65,6 +69,10 @@ public class PipelineInstantiator {
      */
     private Component toComponent(final Step step) {
         log.info("Instantiating component {}", step.getInstance().getDefinition().getName());
-        return BeanFactory.createComponent(ComponentImpl.class, step.getInstance(), c -> c.setFeatures(step.getReads(), step.getWrites()));
+
+        final Space inputSpace = new Space(space, step.getReads());
+        final Space outputSpace = new Space(space, step.getWrites());
+
+        return BeanFactory.createComponent(ComponentImpl.class, step.getInstance(), c -> c.setFeatures(inputSpace, outputSpace));
     }
 }

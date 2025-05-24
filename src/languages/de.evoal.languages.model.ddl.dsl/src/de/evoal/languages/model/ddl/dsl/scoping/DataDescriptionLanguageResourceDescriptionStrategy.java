@@ -12,6 +12,7 @@ public class DataDescriptionLanguageResourceDescriptionStrategy extends Filterin
 		super(
 				DdlPackage.eINSTANCE.getDataDescriptionModule(),
 				DefinitionsPackage.eINSTANCE.getDataTypeDefinition(),
+				DefinitionsPackage.eINSTANCE.getDataTypeTypeDefinition(),
 				DefinitionsPackage.eINSTANCE.getDataDescription(),
 				DefinitionsPackage.eINSTANCE.getTypedBaseDataDescription(),
 				DefinitionsPackage.eINSTANCE.getUntypedBaseDataDescription(),

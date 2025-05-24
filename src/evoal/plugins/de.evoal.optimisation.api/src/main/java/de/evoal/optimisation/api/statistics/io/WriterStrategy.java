@@ -7,7 +7,7 @@ import javax.inject.Inject;
 import java.util.List;
 
 /**
- * Base class for writer strategies (different serializing backends). A strategy
+ * Base class for writer constraints (different serializing backends). A strategy
  * can decide to reuse files, to store them in different formats, and so on.
  */
 public abstract class WriterStrategy {

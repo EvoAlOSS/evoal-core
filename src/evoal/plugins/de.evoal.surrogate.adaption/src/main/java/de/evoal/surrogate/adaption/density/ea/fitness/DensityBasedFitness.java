@@ -1,6 +1,11 @@
 package de.evoal.surrogate.adaption.density.ea.fitness;
 
+import de.evoal.core.api.dynamic.EAnnotationHelper;
+import de.evoal.core.api.ecore.misc.SpaceHelper;
+import de.evoal.core.api.properties.PropertySpecification;
 import de.evoal.core.api.utils.AttributeHelper;
+import de.evoal.languages.model.base.definitions.DataDescription;
+import de.evoal.languages.model.base.definitions.Definition;
 import de.evoal.surrogate.adaption.density.model.DensityData;
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;
@@ -13,6 +18,7 @@ import de.evoal.surrogate.api.configuration.PartialFunctionConfiguration;
 import de.evoal.surrogate.api.function.PartialSurrogateFunction;
 import de.evoal.surrogate.api.function.SurrogateFunction;
 import lombok.extern.slf4j.Slf4j;
+import org.eclipse.emf.ecore.EStructuralFeature;
 
 import javax.enterprise.inject.Vetoed;
 import javax.inject.Inject;
@@ -47,6 +53,8 @@ public abstract class DensityBasedFitness extends OptimisationFunctionDecorator 
     private double rootExponent;
 
     @Inject
+    private EAnnotationHelper mapperBetweenWorlds;
+
     private SurrogateFunction surrogate;
 
     private QuadrupelFunction<DensityData[], DensityData, Properties, Double, Double> probabilityCalculator;
@@ -57,7 +65,7 @@ public abstract class DensityBasedFitness extends OptimisationFunctionDecorator 
 
     @Override
     public OptimisationFunction init(final Instance config) {
-        log.info("Setting up density-based fitness calculation.");
+        log.info("Setting up density-based malus calculation.");
         super.init(config);
 
         kind = helper.lookup(config, "kind");
@@ -70,8 +78,12 @@ public abstract class DensityBasedFitness extends OptimisationFunctionDecorator 
 
         for(int i = 0; i < regressions.size(); ++i) {
             final PartialSurrogateFunction function = regressions.get(i);
-            final PropertiesSpecification sourceSpec = function.getUsedProperties();
-            final PropertiesSpecification targetSpec = function.getOutputProperty();
+            final PropertiesSpecification sourceSpec = PropertiesSpecification.builder()
+                            .add(mapperBetweenWorlds.dataDescriptionsOf(function.getUsedProperties()).stream())
+                            .build();
+            final PropertiesSpecification targetSpec = PropertiesSpecification.builder()
+                            .add(mapperBetweenWorlds.dataDescriptionsOf(function.getOutputProperty()).stream())
+                            .build();
 
             Requirements.requireSizeGreaterThan(sourceSpec, 0);
             Requirements.requireSize(targetSpec, 1);
@@ -129,11 +141,17 @@ public abstract class DensityBasedFitness extends OptimisationFunctionDecorator 
      */
     private double sourceBasedProbabilityCalculator(final DensityData [] sourceData, final DensityData targetData, final Properties candidate, final double predicted) {
         double result = 1.0;
-        for(int i = 0; i < candidate.size(); ++i) {
-            final double probability = sourceData[i].probability(((Number)candidate.get(i)).doubleValue());
-            final double offset = 1 / ((Number)ranges.get(surrogate.getInputSpecification().get(i))).doubleValue();
+
+        int index = 0;
+        for(final EStructuralFeature feature : surrogate.getInputSpecification()) {
+            final DataDescription dd = mapperBetweenWorlds.dataDescriptionOf(feature).get();
+
+            final double probability = sourceData[index].probability(((Number)candidate.get(index)).doubleValue());
+            final double offset = 1 / ((Number)ranges.get(new PropertySpecification(dd.getName(), dd))).doubleValue();
 
             result *= Math.pow(Math.min(1.0, probability + offset), 1.0 / candidate.size());
+
+            index += 1;
         }
 
         return result;
@@ -143,8 +161,11 @@ public abstract class DensityBasedFitness extends OptimisationFunctionDecorator 
      * Fix the range problem.
      */
     private double targetBasedProbabilityCalculator(final DensityData [] sourceData, final DensityData targetData, final Properties candidate, final double predicted) {
+        final EStructuralFeature feature = surrogate.getOutputSpecification().iterator().next();
+        final DataDescription dd = mapperBetweenWorlds.dataDescriptionOf(feature).get();
+
         final double probability = targetData.probability(predicted);
-        final double offset = 1 / ((Number)ranges.get(surrogate.getOutputSpecification().get(0))).doubleValue();
+        final double offset = 1 / ((Number)ranges.get(new PropertySpecification(dd.getName(), dd))).doubleValue();
 
         return Math.min(1.0, probability + offset);
     }

@@ -21,6 +21,8 @@ public final class FunctionFactory {
     public static <T extends EvoalBuiltinFunction<T>> T createBuiltinFunction(final Class<T> type, final FunctionDefinition definition) {
         final String name = new FQNProvider().get(definition);
 
+        log.info("Creating EvoAl builtin function {}", name);
+
         return BeanFactory.create(name, type);
     }
 }

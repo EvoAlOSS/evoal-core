@@ -19,7 +19,14 @@
 			<version>${project.version}</version>
 			<scope>provided</scope>
 		</dependency>
-		
+
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>core.interpreter</artifactId>
+			<version>${project.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>surrogate.api</artifactId>
@@ -47,8 +54,14 @@
 			<version>${project.version}</version>
 			<scope>provided</scope>
 		</dependency>
+        <dependency>
+            <groupId>de.evoal</groupId>
+            <artifactId>core.interpreter</artifactId>
+            <version>2025.10.0.rc1.SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
 
-		<!-- Dependencies for OpenBLAS implementation              -->
+        <!-- Dependencies for OpenBLAS implementation              -->
 		<!-- This version crashes for me with a segmentation fault -->
 		<!--
 		<dependency>

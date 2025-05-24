@@ -383,73 +383,96 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 	public class TypedBaseDataDescriptionRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.ddl.dsl.DataDescriptionLanguage.TypedBaseDataDescriptionRule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cRepresentationAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cRepresentationRepresentationTypeEnumRuleCall_0_0 = (RuleCall)cRepresentationAssignment_0.eContents().get(0);
-		private final Keyword cDataKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cNameStringOrIdParserRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
-		private final Keyword cOfKeyword_3 = (Keyword)cGroup.eContents().get(3);
-		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
-		private final Keyword cWithKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
-		private final Keyword cConstraintsKeyword_4_1 = (Keyword)cGroup_4.eContents().get(1);
-		private final Keyword cColonKeyword_4_2 = (Keyword)cGroup_4.eContents().get(2);
-		private final Assignment cConstraintsAssignment_4_3 = (Assignment)cGroup_4.eContents().get(3);
-		private final RuleCall cConstraintsStatementRuleParserRuleCall_4_3_0 = (RuleCall)cConstraintsAssignment_4_3.eContents().get(0);
-		private final Keyword cSemicolonKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		private final Assignment cConstraintsAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cConstraintsConstraintRuleParserRuleCall_0_0 = (RuleCall)cConstraintsAssignment_0.eContents().get(0);
+		private final Assignment cRepresentationAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cRepresentationRepresentationTypeEnumRuleCall_1_0 = (RuleCall)cRepresentationAssignment_1.eContents().get(0);
+		private final Keyword cDataKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cNameAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cNameStringOrIdParserRuleCall_3_0 = (RuleCall)cNameAssignment_3.eContents().get(0);
+		private final Keyword cOfKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Keyword cTypeKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		private final Assignment cTypeAssignment_6 = (Assignment)cGroup.eContents().get(6);
+		private final CrossReference cTypeDataTypeTypeDefinitionCrossReference_6_0 = (CrossReference)cTypeAssignment_6.eContents().get(0);
+		private final RuleCall cTypeDataTypeTypeDefinitionStringOrIdParserRuleCall_6_0_1 = (RuleCall)cTypeDataTypeTypeDefinitionCrossReference_6_0.eContents().get(1);
+		private final Group cGroup_7 = (Group)cGroup.eContents().get(7);
+		private final Keyword cWithKeyword_7_0 = (Keyword)cGroup_7.eContents().get(0);
+		private final Keyword cConstraintsKeyword_7_1 = (Keyword)cGroup_7.eContents().get(1);
+		private final Keyword cColonKeyword_7_2 = (Keyword)cGroup_7.eContents().get(2);
+		private final Assignment cConstraintsAssignment_7_3 = (Assignment)cGroup_7.eContents().get(3);
+		private final RuleCall cConstraintsStatementRuleParserRuleCall_7_3_0 = (RuleCall)cConstraintsAssignment_7_3.eContents().get(0);
+		private final Keyword cSemicolonKeyword_8 = (Keyword)cGroup.eContents().get(8);
 		
 		//TypedBaseDataDescriptionRule returns definitions::TypedBaseDataDescription:
-		//    representation=RepresentationType 'data' name = StringOrId 'of'
-		//    // ???
+		//    (constraints += BaseLanguage::ConstraintRule)*
+		//    representation=RepresentationType 'data' name = StringOrId 'of' 'type' type= [definitions::DataTypeTypeDefinition|StringOrId]
 		//    ('with' 'constraints' ':' (constraints += StatementRule)*)?
 		//    ';'
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//representation=RepresentationType 'data' name = StringOrId 'of'
-		//// ???
+		//(constraints += BaseLanguage::ConstraintRule)*
+		//representation=RepresentationType 'data' name = StringOrId 'of' 'type' type= [definitions::DataTypeTypeDefinition|StringOrId]
 		//('with' 'constraints' ':' (constraints += StatementRule)*)?
 		//';'
 		public Group getGroup() { return cGroup; }
 		
+		//(constraints += BaseLanguage::ConstraintRule)*
+		public Assignment getConstraintsAssignment_0() { return cConstraintsAssignment_0; }
+		
+		//BaseLanguage::ConstraintRule
+		public RuleCall getConstraintsConstraintRuleParserRuleCall_0_0() { return cConstraintsConstraintRuleParserRuleCall_0_0; }
+		
 		//representation=RepresentationType
-		public Assignment getRepresentationAssignment_0() { return cRepresentationAssignment_0; }
+		public Assignment getRepresentationAssignment_1() { return cRepresentationAssignment_1; }
 		
 		//RepresentationType
-		public RuleCall getRepresentationRepresentationTypeEnumRuleCall_0_0() { return cRepresentationRepresentationTypeEnumRuleCall_0_0; }
+		public RuleCall getRepresentationRepresentationTypeEnumRuleCall_1_0() { return cRepresentationRepresentationTypeEnumRuleCall_1_0; }
 		
 		//'data'
-		public Keyword getDataKeyword_1() { return cDataKeyword_1; }
+		public Keyword getDataKeyword_2() { return cDataKeyword_2; }
 		
 		//name = StringOrId
-		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
+		public Assignment getNameAssignment_3() { return cNameAssignment_3; }
 		
 		//StringOrId
-		public RuleCall getNameStringOrIdParserRuleCall_2_0() { return cNameStringOrIdParserRuleCall_2_0; }
+		public RuleCall getNameStringOrIdParserRuleCall_3_0() { return cNameStringOrIdParserRuleCall_3_0; }
 		
 		//'of'
-		public Keyword getOfKeyword_3() { return cOfKeyword_3; }
+		public Keyword getOfKeyword_4() { return cOfKeyword_4; }
 		
-		//// ???
+		//'type'
+		public Keyword getTypeKeyword_5() { return cTypeKeyword_5; }
+		
+		//type= [definitions::DataTypeTypeDefinition|StringOrId]
+		public Assignment getTypeAssignment_6() { return cTypeAssignment_6; }
+		
+		//[definitions::DataTypeTypeDefinition|StringOrId]
+		public CrossReference getTypeDataTypeTypeDefinitionCrossReference_6_0() { return cTypeDataTypeTypeDefinitionCrossReference_6_0; }
+		
+		//StringOrId
+		public RuleCall getTypeDataTypeTypeDefinitionStringOrIdParserRuleCall_6_0_1() { return cTypeDataTypeTypeDefinitionStringOrIdParserRuleCall_6_0_1; }
+		
 		//('with' 'constraints' ':' (constraints += StatementRule)*)?
-		public Group getGroup_4() { return cGroup_4; }
+		public Group getGroup_7() { return cGroup_7; }
 		
 		//'with'
-		public Keyword getWithKeyword_4_0() { return cWithKeyword_4_0; }
+		public Keyword getWithKeyword_7_0() { return cWithKeyword_7_0; }
 		
 		//'constraints'
-		public Keyword getConstraintsKeyword_4_1() { return cConstraintsKeyword_4_1; }
+		public Keyword getConstraintsKeyword_7_1() { return cConstraintsKeyword_7_1; }
 		
 		//':'
-		public Keyword getColonKeyword_4_2() { return cColonKeyword_4_2; }
+		public Keyword getColonKeyword_7_2() { return cColonKeyword_7_2; }
 		
 		//(constraints += StatementRule)*
-		public Assignment getConstraintsAssignment_4_3() { return cConstraintsAssignment_4_3; }
+		public Assignment getConstraintsAssignment_7_3() { return cConstraintsAssignment_7_3; }
 		
 		//StatementRule
-		public RuleCall getConstraintsStatementRuleParserRuleCall_4_3_0() { return cConstraintsStatementRuleParserRuleCall_4_3_0; }
+		public RuleCall getConstraintsStatementRuleParserRuleCall_7_3_0() { return cConstraintsStatementRuleParserRuleCall_7_3_0; }
 		
 		//';'
-		public Keyword getSemicolonKeyword_5() { return cSemicolonKeyword_5; }
+		public Keyword getSemicolonKeyword_8() { return cSemicolonKeyword_8; }
 	}
 	public class UntypedBaseDataDescriptionRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.ddl.dsl.DataDescriptionLanguage.UntypedBaseDataDescriptionRule");
@@ -941,8 +964,8 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 	}
 	
 	//TypedBaseDataDescriptionRule returns definitions::TypedBaseDataDescription:
-	//    representation=RepresentationType 'data' name = StringOrId 'of'
-	//    // ???
+	//    (constraints += BaseLanguage::ConstraintRule)*
+	//    representation=RepresentationType 'data' name = StringOrId 'of' 'type' type= [definitions::DataTypeTypeDefinition|StringOrId]
 	//    ('with' 'constraints' ':' (constraints += StatementRule)*)?
 	//    ';'
 	//;

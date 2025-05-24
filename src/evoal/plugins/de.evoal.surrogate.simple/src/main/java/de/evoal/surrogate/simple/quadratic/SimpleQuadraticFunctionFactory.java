@@ -1,20 +1,22 @@
 package de.evoal.surrogate.simple.quadratic;
 
-import java.util.List;
+import lombok.extern.slf4j.Slf4j;
 
-import de.evoal.core.api.properties.stream.PropertiesPairStreamSupplier;
+import java.util.List;
+import javax.enterprise.context.Dependent;
+import javax.inject.Named;
+
+import org.apache.commons.math3.stat.regression.SimpleRegression;
+import org.eclipse.emf.ecore.EStructuralFeature;
+
+import de.evoal.core.api.ecore.Space;
+import de.evoal.core.api.ecore.stream.EObjectPairStreamSupplier;
+import de.evoal.core.api.utils.Requirements;
 import de.evoal.surrogate.api.configuration.Parameter;
 import de.evoal.surrogate.api.configuration.PartialFunctionConfiguration;
 import de.evoal.surrogate.api.function.AbstractPartialSurrogateFunctionFactory;
 import de.evoal.surrogate.api.function.PartialSurrogateFunction;
 import de.evoal.surrogate.simple.linear.LinearFunction;
-import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.math3.stat.regression.SimpleRegression;
-
-import de.evoal.core.api.properties.PropertiesSpecification;
-
-import javax.enterprise.context.Dependent;
-import javax.inject.Named;
 
 @Dependent
 @Named("simple-quadratic-regression")
@@ -22,25 +24,26 @@ import javax.inject.Named;
 public final class SimpleQuadraticFunctionFactory extends AbstractPartialSurrogateFunctionFactory {
 
 	@Override
-	public PartialSurrogateFunction calculateRegression(final PartialFunctionConfiguration configuration, final List<Parameter> parameters, final PropertiesSpecification actualInput, final PropertiesSpecification requiredInput, final PropertiesSpecification producedOutput, final PropertiesPairStreamSupplier provider) {
-		log.info("Calculate linear mapping from {} to {}.", requiredInput, producedOutput);
+	public PartialSurrogateFunction calculateRegression(final PartialFunctionConfiguration configuration, final List<Parameter> parameters, final Space input, final Space output, final EObjectPairStreamSupplier provider) {
+		log.info("Calculate quadratic mapping from {} to {}.", input, output);
 
-		assert requiredInput.getProperties().size() == 1;
-		assert producedOutput.getProperties().size() == 1;
+		Requirements.requireSize(input, 1);
+		Requirements.requireSize(output, 1);
+		final EStructuralFeature iFeature = input.iterator().next();
+		final EStructuralFeature oFeature = output.iterator().next();
 
 		final SimpleRegression regression = new SimpleRegression(true);
 
 		provider.get()
 				.forEach(coordinate -> {
-					log.info("Mapping - ({}) to ({}).", coordinate.getFirst(), coordinate.getSecond());
-					regression.addData(Math.pow(coordinate.getFirst().getAsDouble(0), 2), coordinate.getSecond().getAsDouble(0));
+					regression.addData(Math.pow(coordinate.getFirst().eGetAsDouble(iFeature), 2), coordinate.getSecond().eGetAsDouble(oFeature));
 				});
 
-		return new SimpleQuadraticFunction(configuration, LinearFunction.toParameters(regression), requiredInput, actualInput, producedOutput);
+		return new SimpleQuadraticFunction(configuration, LinearFunction.toParameters(regression), input, output);
 	}
 
 	@Override
-	protected PartialSurrogateFunction restoreRegression(final PartialFunctionConfiguration configuration, final PropertiesSpecification actualInput, final PropertiesSpecification requiredInput, final PropertiesSpecification producedOutput) {
-		return new SimpleQuadraticFunction(configuration, configuration.getState(), requiredInput, actualInput, producedOutput);
+	protected PartialSurrogateFunction restoreRegression(final PartialFunctionConfiguration configuration, final Space input, final Space output) {
+		return new SimpleQuadraticFunction(configuration, configuration.getState(), input, output);
 	}
 }

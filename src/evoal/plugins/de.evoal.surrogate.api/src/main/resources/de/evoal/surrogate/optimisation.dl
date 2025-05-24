@@ -35,6 +35,20 @@ module de.evoal.surrogate.optimisation {
 	 * </mathml>
 	 */
 	type surrogate extends 'fitness-function' {
+	    /**
+	     * The pre-trained model to load.
+	     */
+        'pson-file' : string;
+
+        /**
+         * The input space of the model.
+         */
+        'input-space' : array data;
+
+        /**
+         * The output space of the model.
+         */
+        'output-space' : array data;
 	}
 	
 	/**
@@ -82,6 +96,20 @@ module de.evoal.surrogate.optimisation {
 	 * </ul>
      */
 	type 'prediction-per-individual' extends 'statistics-writer' {
-	}
+	    /**
+	     * The pre-trained model to load.
+	     */
+        'pson-file' : string;
+
+        /**
+         * The input space of the model.
+         */
+        'input-space' : array data;
+
+        /**
+         * The output space of the model.
+         */
+        'output-space' : array data;
+    }
 
 }

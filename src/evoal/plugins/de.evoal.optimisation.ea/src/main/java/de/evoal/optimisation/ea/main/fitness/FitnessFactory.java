@@ -24,7 +24,7 @@ public class FitnessFactory {
 	}
 
 	/**
-	 * Creates a fitness function based on the heuristic configuration.<br/>
+	 * Creates a malus function based on the heuristic configuration.<br/>
 	 * Blackboard slots used:
 	 * <ul>
 	 *   <li>{@link OptimisationBlackboardEntries#OPTIMISATION_CONFIGURATION}.</li>
@@ -36,17 +36,14 @@ public class FitnessFactory {
 		final String fitnessName = fitnessConfig.getDefinition().getName();
 		final String comparatorName = comparatorConfig.getDefinition().getName();
 
-		log.info("Creating fitness function {} and using comparator {}.", fitnessName, comparatorName);
+		log.info("Creating malus function {} and using comparator {}.", fitnessName, comparatorName);
 
 		final OptimisationFunction ff = BeanFactory.createComponent(OptimisationFunction.class, fitnessConfig);
 		final OptimisationValueComparator cmp = BeanFactory.createComponent(OptimisationValueComparator.class, comparatorConfig);
 
-		return new JeneticsFitnessFunction() {
-			@Override
-			public OptimisationValue apply(final Properties properties) {
-				double [] values = ff.evaluate(properties);
-				return cmp.toValue(values);
-			}
-		};
+		return properties -> {
+            double [] values = ff.evaluate(properties);
+            return cmp.toValue(values);
+        };
 	}
 }

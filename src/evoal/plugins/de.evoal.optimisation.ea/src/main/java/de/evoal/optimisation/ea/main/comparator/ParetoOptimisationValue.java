@@ -24,7 +24,7 @@ public class ParetoOptimisationValue implements OptimisationValue {
     @Override
     public int compareTo(final OptimisationValue other) {
         if(!(other instanceof ParetoOptimisationValue)) {
-            throw new IllegalArgumentException("Only allowed to compare pareto fitness values");
+            throw new IllegalArgumentException("Only allowed to compare pareto malus values");
         }
 
         return this.makeAbsolute().compareTo(((ParetoOptimisationValue)other).makeAbsolute());
@@ -33,7 +33,7 @@ public class ParetoOptimisationValue implements OptimisationValue {
     @Override
     public double distanceFrom(final OptimisationValue other) {
         if(!(other instanceof ParetoOptimisationValue)) {
-            throw new IllegalArgumentException("Only allowed to compare pareto fitness values");
+            throw new IllegalArgumentException("Only allowed to compare pareto malus values");
         }
 
         Vec<double[]> thisVec = this.makeAbsolute();

@@ -1,15 +1,17 @@
 package de.evoal.surrogate.api.configuration;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import de.evoal.core.api.languages.AttributeEvaluator;
-import de.evoal.surrogate.main.jackson.ReflectiveDeserializer;
-import de.evoal.surrogate.main.jackson.ReflectiveSerializer;
-import de.evoal.languages.model.base.expressions.Attribute;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import de.evoal.core.api.languages.AttributeEvaluator;
+import de.evoal.languages.model.base.expressions.Attribute;
+import de.evoal.surrogate.main.jackson.ReflectiveDeserializer;
+import de.evoal.surrogate.main.jackson.ReflectiveSerializer;
 
 @AllArgsConstructor
 @Builder

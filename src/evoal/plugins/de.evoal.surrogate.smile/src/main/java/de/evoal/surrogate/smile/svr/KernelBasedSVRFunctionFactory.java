@@ -1,27 +1,30 @@
 package de.evoal.surrogate.smile.svr;
 
-import de.evoal.core.api.properties.Properties;
-import de.evoal.core.api.properties.PropertiesSpecification;
-import de.evoal.core.api.properties.PropertySpecification;
-import de.evoal.core.api.properties.stream.PropertiesPairStreamSupplier;
+import lombok.extern.slf4j.Slf4j;
+
+import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
+import org.apache.commons.math3.stat.descriptive.moment.Mean;
+import org.apache.commons.math3.stat.descriptive.moment.StandardDeviation;
+
+import org.eclipse.emf.ecore.EStructuralFeature;
+
+import smile.base.svm.SVR;
+import smile.math.kernel.MercerKernel;
+import smile.regression.KernelMachine;
+
+import de.evoal.core.api.ecore.Space;
+import de.evoal.core.api.ecore.TypedEObject;
+import de.evoal.core.api.ecore.stream.EObjectPairStreamSupplier;
 import de.evoal.core.api.utils.Requirements;
-import de.evoal.languages.model.base.definitions.BaseDataDescription;
-import de.evoal.languages.model.base.definitions.RepresentationType;
 import de.evoal.surrogate.api.configuration.Parameter;
 import de.evoal.surrogate.api.configuration.PartialFunctionConfiguration;
 import de.evoal.surrogate.api.function.AbstractPartialSurrogateFunctionFactory;
 import de.evoal.surrogate.api.function.PartialSurrogateFunction;
 import de.evoal.surrogate.smile.api.KernelBasedSVRFunction;
-import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.math3.stat.descriptive.moment.Mean;
-import org.apache.commons.math3.stat.descriptive.moment.StandardDeviation;
-import smile.base.svm.SVR;
-import smile.math.kernel.MercerKernel;
-import smile.regression.KernelMachine;
 
-import java.util.*;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 @Slf4j
 public abstract class KernelBasedSVRFunctionFactory extends AbstractPartialSurrogateFunctionFactory {
@@ -38,15 +41,15 @@ public abstract class KernelBasedSVRFunctionFactory extends AbstractPartialSurro
 	}
 
 	@Override
-	protected PartialSurrogateFunction calculateRegression(final PartialFunctionConfiguration configuration, final List<Parameter> parameters, final PropertiesSpecification actualInput, final PropertiesSpecification requiredInput, final PropertiesSpecification producedOutput, final PropertiesPairStreamSupplier provider) {
-		log.info("Calculate SVR surrogate from {} to {}.", requiredInput, producedOutput);
+	protected PartialSurrogateFunction calculateRegression(final PartialFunctionConfiguration configuration, final List<Parameter> parameters, final Space input, final Space output, final EObjectPairStreamSupplier provider) {
+		log.info("Calculate SVR surrogate from {} to {}.", input, output);
 
-		Requirements.requireSizeGreaterThan(requiredInput.getProperties(), 0);
-		Requirements.requireSize(producedOutput.getProperties(), 1);
+		Requirements.requireSizeGreaterThan(input, 0);
+		Requirements.requireSize(output, 1);
 
 		// do sanity checks and log information for the user
-		final Function<Properties, double []> sourceConverter = createConverter(requiredInput);
-		final Function<Properties, double []> targetConverter = createConverter(producedOutput);
+		final Function<TypedEObject, double []> sourceConverter = createConverter(input);
+		final Function<TypedEObject, double []> targetConverter = createConverter(output);
 
 		final List<double []> sources = new ArrayList<>();
 		final List<Double> targets = new ArrayList<>();
@@ -62,26 +65,26 @@ public abstract class KernelBasedSVRFunctionFactory extends AbstractPartialSurro
 		double [][] sourceArray = sources.toArray(new double [][] {});
 		double [] targetArray = targets.stream().mapToDouble(Double.class::cast).toArray();
 
-		double [] sourceMeans = new double [requiredInput.size()];
-		double [] sourceSD = new double [requiredInput.size()];
+		double [] sourceMeans = new double [input.size()];
+		double [] sourceSD = new double [input.size()];
 
 		double [] targetMean = new double [1];
 		double [] targetSD = new double [1];
 
-		for(int propertyIndex = 0; propertyIndex < requiredInput.size(); ++propertyIndex) {
+		for(int featureIndex = 0; featureIndex < input.size(); ++featureIndex) {
 			double [] values = new double [sourceArray.length];
 			for(int individualIndex = 0; individualIndex < sourceArray.length; ++individualIndex) {
-				values[individualIndex] = sourceArray[individualIndex][propertyIndex];
+				values[individualIndex] = sourceArray[individualIndex][featureIndex];
 			}
 
-			calculateStatisticalInformation(values, propertyIndex, sourceMeans, sourceSD);
+			calculateStatisticalInformation(values, featureIndex, sourceMeans, sourceSD);
 		}
 		calculateStatisticalInformation(targetArray, 0, targetMean, targetSD);
 
 
 		// start scaling of trainings data
 		for(int individualIndex = 0; individualIndex < sourceArray.length; ++individualIndex) {
-			for (int propertyIndex = 0; propertyIndex < requiredInput.size(); ++propertyIndex) {
+			for (int propertyIndex = 0; propertyIndex < input.size(); ++propertyIndex) {
 				sourceArray[individualIndex][propertyIndex] = (sourceArray[individualIndex][propertyIndex] - sourceMeans[propertyIndex]) / sourceSD[propertyIndex];
 
 			}
@@ -99,7 +102,7 @@ public abstract class KernelBasedSVRFunctionFactory extends AbstractPartialSurro
 		final SVR<double []> svr = new SVR<>(toKernel.apply(params), epsilon, margin, tolerance);
 		final KernelMachine<double []> regression = svr.fit(sourceArray, targetArray);
 
-		return new KernelBasedSVRFunction(configuration, regression, nameOfKernel, requiredInput, actualInput, producedOutput, margin, sourceMeans, sourceSD, targetMean, targetSD);
+		return new KernelBasedSVRFunction(configuration, regression, nameOfKernel, input, output, margin, sourceMeans, sourceSD, targetMean, targetSD);
 	}
 
 	private void calculateStatisticalInformation(final double[] values, final int index, final double[] means, final double[] sds) {
@@ -110,21 +113,12 @@ public abstract class KernelBasedSVRFunctionFactory extends AbstractPartialSurro
 	/**
 	 * Creates a data converter function based on the given properties specification.
 	 */
-	private Function<Properties, double[]> createConverter(final PropertiesSpecification specification) {
-		final Function<Properties, Double>[] converters = new Function[specification.size()];
+	private Function<TypedEObject, double[]> createConverter(final Space specification) {
+		final Function<TypedEObject, Double>[] converters = new Function[specification.size()];
 
-		for(int i = 0; i < converters.length; ++i) {
-			final PropertySpecification spec = specification.getProperties().get(i);
-			Requirements.requireInstanceOf(spec.type(), BaseDataDescription.class);
-			final RepresentationType type = ((BaseDataDescription)spec.type()).getRepresentation();
-
-			final int index = i;
-			if(RepresentationType.REAL.equals(type)) {
-				converters[i] = p -> p.getAsDouble(spec);
-			} else {
-				log.warn("Property {} is of type {}. SVR only supports real values. Trying to add an automatic conversion.", spec, type);
-				converters[i] = p -> ((Number)p.get(spec)).doubleValue();
-			}
+		int index = 0;
+		for(final EStructuralFeature feature : specification) {
+			converters[index++] = obj -> obj.eGetAsDouble(feature);
 		}
 
 		return p -> {

@@ -1,23 +1,26 @@
 package de.evoal.surrogate.main.gof.rsquare;
 
+import de.evoal.core.api.ecore.Space;
+import de.evoal.core.api.ecore.TypedEObject;
+import de.evoal.core.api.ecore.stream.EObjectPairStreamSupplier;
 import de.evoal.core.api.properties.Properties;
-import de.evoal.core.api.properties.stream.PropertiesBasedPropertiesPairStreamSupplier;
-import de.evoal.core.api.properties.stream.PropertiesPairStreamSupplier;
-import de.evoal.core.api.properties.stream.PropertiesStreamSupplier;
 import de.evoal.core.api.utils.Requirements;
+import de.evoal.core.interpreter.api.InterpreterState;
 import de.evoal.surrogate.api.SurrogateInformationCalculator;
 import de.evoal.surrogate.api.configuration.Parameter;
 import de.evoal.surrogate.api.configuration.SurrogateConfiguration;
 import de.evoal.surrogate.api.function.SurrogateFunction;
+import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.math3.stat.descriptive.moment.Mean;
 import org.apache.commons.math3.stat.descriptive.moment.StandardDeviation;
 import org.apache.commons.math3.util.Pair;
+import org.eclipse.emf.ecore.EStructuralFeature;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Named;
 import java.util.Arrays;
-import java.util.List;
+import java.util.Optional;
 
 /**
  * Calculates cross validation values.
@@ -38,20 +41,20 @@ public class RSquareCalculator implements SurrogateInformationCalculator {
 	private SurrogateFunction function;
 
 	/**
-	 * Supplier for the trainings data.
+	 * Supplier for the training data.
 	 */
-	private PropertiesStreamSupplier trainingData;
+	private EObjectPairStreamSupplier training;
 
 	@Override
-	public void execute() {
+	public Optional<Object> call(final InterpreterState context, final Object[] arguments) {
+		final Space inSpace = function.getInputSpecification();
+		final Space outSpace = function.getOutputSpecification();
+
 		log.info("calculating r² of surrogate function.");
-
-		final PropertiesPairStreamSupplier pairStream = new PropertiesBasedPropertiesPairStreamSupplier(trainingData, function.getInputSpecification(), function.getOutputSpecification());
-
-		final double [][] yValues = pairStream.get()
-											  .map(Pair::getSecond)
-				   							  .map(Properties::getValuesAsDouble)
-											  .toArray(size -> new double[size][]);
+		final double [][] yValues = training.get()
+											.map(Pair::getSecond)
+				   							.map(t -> outSpace.stream().mapToDouble(f -> t.eGetAsDouble(f)).toArray())
+											.toArray(size -> new double[size][]);
 
 		final double [] means = new double [yValues[0].length];
 		for(int i = 0; i < means.length; ++i) {
@@ -70,30 +73,31 @@ public class RSquareCalculator implements SurrogateInformationCalculator {
 		}
 
 		final double [][] errors =
-				pairStream.get()
+				training.get()
 						.map(pair -> {
-							final Properties input = pair.getFirst();
-							final Properties calculated = function.apply(input);
+							final TypedEObject input = pair.getFirst();
+							final TypedEObject expected = pair.getSecond();
+							final TypedEObject calculated = new TypedEObject(expected.eClass());
 
-							final Object [] values = calculated.getValues();
-							final double [] distances = new double[values.length];
+							function.apply(input, calculated);
 
-							for(int i = 0; i < values.length; ++i) {
-								distances[i] = Math.pow(((Number)pair.getSecond().get(i)).doubleValue() - ((Number)values[i]).doubleValue(), 2);
-							}
-
-							return distances;
+							return expected.eClass()
+											.getEAllStructuralFeatures()
+											.stream()
+											.mapToDouble(f -> Math.pow(expected.eGetAsDouble(f) - calculated.eGetAsDouble(f), 2))
+											.toArray();
 						}).toArray(size -> new double [size][]);
 
-		for(int y = 0; y < errors[0].length; ++y) {
+		int index = 0;
+		for(final EStructuralFeature feature : outSpace) {
 			double error = 0.0;
 
 			for(int x = 0; x < errors.length; ++x) {
-				error += errors[x][y];
+				error += errors[x][index];
 			}
 
 			final double unexplainedVariation = error;
-			final double totalVariation = Math.pow(sds[y], 2) * yValues.length;
+			final double totalVariation = Math.pow(sds[index], 2) * yValues.length;
 			final double rSquare = 1 - unexplainedVariation / totalVariation;
 
 			log.info("unexplained variation: '{}', total variation: {}, rSquare: {}", unexplainedVariation, totalVariation, rSquare);
@@ -103,8 +107,12 @@ public class RSquareCalculator implements SurrogateInformationCalculator {
 					.value(rSquare)
 					.build();
 
-			config.addOutputParameter(function.getOutputSpecification().getProperties().get(y).name(), goodnessOfFit);
+			config.addOutputParameter(feature.getName(), goodnessOfFit);
+
+			index += 1;
 		}
+
+		return Optional.empty();
 	}
 
 	@Override
@@ -113,13 +121,12 @@ public class RSquareCalculator implements SurrogateInformationCalculator {
 	}
 
 	@Override
-	public void configure(final SurrogateFunction function, final SurrogateConfiguration config, final List<Object> parameters, final PropertiesStreamSupplier trainingData) {
-		Requirements.requireEmpty(parameters);
+	public void configure(final @NonNull SurrogateFunction function, final @NonNull SurrogateConfiguration config, final @NonNull EObjectPairStreamSupplier training) {
 		Requirements.requireNotNull(function);
 		Requirements.requireNotNull(config);
 
 		this.function = function;
 		this.config = config;
-		this.trainingData = trainingData;
+		this.training = training;
 	}
 }

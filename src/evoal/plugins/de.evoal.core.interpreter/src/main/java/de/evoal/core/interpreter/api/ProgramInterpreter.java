@@ -25,7 +25,7 @@ public class ProgramInterpreter {
     }
 
     public void execute(final Program program, final EClass space) {
-        log.info("Executing program '{}'.", program.getMain());
+        log.info("Executing program '{}'.", program.getMain().getName());
         state = new InterpreterState();
         state.setSpace(space);
 
@@ -36,7 +36,7 @@ public class ProgramInterpreter {
     }
 
     public void executeAndKeepState(final Program program) {
-        log.info("Executing program '{}' and keeping interpreter state.", program.getMain());
+        log.info("Executing program '{}' and keeping interpreter state.", program.getMain().getName());
 
         final ProgramExecutionSwitch executionSwitch = executionSupplier.apply(state);
         final Function mainFunction = program.getMain();

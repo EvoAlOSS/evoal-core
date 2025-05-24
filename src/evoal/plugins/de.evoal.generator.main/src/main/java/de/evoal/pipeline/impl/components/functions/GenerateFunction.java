@@ -12,7 +12,7 @@ import de.evoal.languages.model.pipeline.Step;
 import de.evoal.pipeline.api.cdi.DefinitionModuleLoader;
 import de.evoal.pipeline.api.executor.PipelineExecutor;
 import de.evoal.pipeline.api.model.Composite;
-import de.evoal.pipeline.api.model.TypedEObject;
+import de.evoal.core.api.ecore.TypedEObject;
 import de.evoal.pipeline.impl.executor.StreamExecutor;
 import de.evoal.pipeline.impl.internal.PipelineInstantiator;
 import lombok.extern.slf4j.Slf4j;
@@ -35,7 +35,10 @@ import java.util.stream.Stream;
 @ApplicationScoped
 @Named("de.evoal.pipeline.base.generate")
 public class GenerateFunction implements EvoalBuiltinFunction {
-    private final ExpressionsFactory exprFactory = ExpressionsFactory.eINSTANCE;
+    /**
+     * For generating expressions
+     */
+    private final static ExpressionsFactory exprFactory = ExpressionsFactory.eINSTANCE;
 
     @Inject
     private DefinitionModuleLoader loader;
@@ -43,7 +46,7 @@ public class GenerateFunction implements EvoalBuiltinFunction {
     private final Pattern varPattern = Pattern.compile("\\$\\{[^}]*}");
 
     @Override
-    public Object call(final InterpreterState context, final Object[] arguments) {
+    public Optional<Object> call(final InterpreterState context, final Object[] arguments) {
         final String filename = (String) arguments[0];
         final Integer count = (Integer) arguments[1];
         final List<PipelineDefinition> pipelines  = (List<PipelineDefinition>) arguments[2];

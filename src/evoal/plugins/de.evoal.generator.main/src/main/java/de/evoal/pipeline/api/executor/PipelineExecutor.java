@@ -1,7 +1,7 @@
 package de.evoal.pipeline.api.executor;
 
 import de.evoal.pipeline.api.model.Composite;
-import de.evoal.pipeline.api.model.TypedEObject;
+import de.evoal.core.api.ecore.TypedEObject;
 import org.eclipse.emf.ecore.EClass;
 
 import java.util.Optional;

@@ -1,9 +1,5 @@
 package de.evoal.surrogate.api.function;
 
-import de.evoal.core.api.properties.Properties;
-import de.evoal.core.api.properties.PropertiesSpecification;
-import de.evoal.core.api.properties.PropertySpecification;
-import de.evoal.surrogate.api.configuration.SurrogateConfiguration;
 import lombok.Data;
 import lombok.NonNull;
 
@@ -11,17 +7,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import de.evoal.core.api.ecore.TypedEObject;
+import de.evoal.core.api.ecore.Space;
+import de.evoal.core.api.properties.PropertySpecification;
+import de.evoal.surrogate.api.configuration.SurrogateConfiguration;
+
+
 /**
  * A surrogate function replaces the actual function used in the optimisation
  * if the actual function is too expensive to calculate or even unknown. A
- * surrogate function transforms input properties into output properties
- * according to a known oder learned function.<br/>
- *
- * A surrogate function may consist of several chained combined functions (c.f.,
- * {@link FunctionCombiner}. The surrogate function then takes the input and
- * calculates an output' using a combined function. The output' is then used
- * as input for the next combined function in the chain. The output of the last
- * combined function is the result of the surrogate function.
+ * surrogate function transforms some input to some output  according to a
+ * known oder learned function.
  */
 @Data
 public final class SurrogateFunction {
@@ -33,12 +29,12 @@ public final class SurrogateFunction {
 	/**
 	 * Property specification of the input of the complete surrogate function.
 	 */
-	private final PropertiesSpecification inputSpecification;
+	private final Space inputSpecification;
 
 	/**
 	 * Property specification of the output of the complete surrogate function.
 	 */
-	private final PropertiesSpecification outputSpecification;
+	private final Space outputSpecification;
 
 	/**
 	 * A map storing the indices of all property specifications in the output properties.
@@ -52,31 +48,13 @@ public final class SurrogateFunction {
 	 */
 	public SurrogateFunction(final @NonNull List<PartialSurrogateFunction> functions) {
 		this.functions = functions;
-		this.inputSpecification = PropertiesSpecification.builder()
-														 .add(SurrogateConfiguration.getInputs(functions).stream())
-														 .build();
-		this.outputSpecification = PropertiesSpecification.builder()
-														  .add(SurrogateConfiguration.getOutputs(functions).stream())
-													  	  .build();
-
-		for(final PartialSurrogateFunction function : functions) {
-			for(final PropertySpecification specification : function.getOutputProperty().getProperties())   {
-				indices.put(specification, outputSpecification.indexOf(specification));
-			}
-		}
+		this.inputSpecification = SurrogateConfiguration.getInputs(functions);
+		this.outputSpecification = SurrogateConfiguration.getOutputs(functions);
 	}
 
-	public Properties apply(final Properties input) {
-		final Properties output = new Properties(outputSpecification);
-
+	public void apply(final @NonNull TypedEObject input, final @NonNull TypedEObject output) {
 		for(final PartialSurrogateFunction entry : functions) {
-			final Object [] values = entry.apply(input);
-
-			for(int index = 0; index < values.length; ++index) {
-				output.set(indices.get(entry.getOutputProperty().getProperties().get(index)), values[index]);
-			}
+			entry.apply(input, output);
 		}
-
-		return output;
 	}
 }

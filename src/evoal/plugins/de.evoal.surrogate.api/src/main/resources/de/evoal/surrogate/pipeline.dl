@@ -9,5 +9,15 @@ module de.evoal.surrogate.pipeline {
      * Uses a pre-trained surrogate model as function.
      */
 	type surrogate extends 'Processor' {
+	    /**
+	     * Name of the pson file storing surrogate model.
+	     **/
+	    'pson-file' : string;
+
+
+        /**
+         * The training model configuration.
+         */
+        'training-model' : string;
 	}
 }

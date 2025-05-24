@@ -1,6 +1,10 @@
 package de.evoal.surrogate.adaption.density.ea.surrogate.gof;
 
+import de.evoal.core.api.ecore.EObjectPair;
+import de.evoal.core.api.ecore.stream.EObjectPairStreamFactory;
+import de.evoal.core.api.ecore.stream.EObjectPairStreamSupplier;
 import de.evoal.surrogate.adaption.density.model.DensityData;
+import de.evoal.surrogate.adaption.density.model.GaussianDensityData;
 import de.evoal.surrogate.adaption.density.model.KernelDensityData;
 import de.evoal.core.api.properties.PropertiesPair;
 import de.evoal.core.api.properties.stream.PropertiesBasedPropertiesPairStreamSupplier;
@@ -22,8 +26,8 @@ import java.util.function.Function;
 public class KernelDensityEstimation extends AbstractDensityEstimation {
 
     @Override
-    protected DensityData calculateDensityData(final Function<PropertiesPair, Double> mapper) {
-        final PropertiesPairStreamSupplier supplier = new PropertiesBasedPropertiesPairStreamSupplier(trainingData, sourcePropertiesSpec, targetPropertiesSpec);
+    protected KernelDensityData calculateDensityData(final Function<EObjectPair, Double> mapper) {
+        final EObjectPairStreamSupplier supplier = EObjectPairStreamFactory.createFromList(sourcePropertiesSpec, targetPropertiesSpec, trainingData);
         final double [] data = supplier.get()
                 .mapToDouble(pair -> mapper.apply(pair))
                 .toArray();

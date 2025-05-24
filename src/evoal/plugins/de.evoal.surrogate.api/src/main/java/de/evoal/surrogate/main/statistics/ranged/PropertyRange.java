@@ -1,6 +1,5 @@
 package de.evoal.surrogate.main.statistics.ranged;
 
-
 import de.evoal.optimisation.api.correlations.Range;
 
 public class PropertyRange {

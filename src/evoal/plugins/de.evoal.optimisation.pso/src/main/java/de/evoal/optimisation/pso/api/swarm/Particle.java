@@ -49,7 +49,7 @@ public class Particle {
     }
 
     /**
-     * Returns the current state (position, velocity, fitness) of the particle.
+     * Returns the current state (position, velocity, malus) of the particle.
      * @return current state.
      */
     public State getCurrentState()
@@ -76,9 +76,9 @@ public class Particle {
     }
 
     /**
-     * Sets the current fitness of the particle.  This should be called only by an
+     * Sets the current malus of the particle.  This should be called only by an
      * IEvaluator object.
-     * @param fitness The fitness of the particle.
+     * @param fitness The malus of the particle.
      */
     public void setCurrentFitness(final OptimisationValue fitness)
     {
@@ -86,8 +86,8 @@ public class Particle {
     }
 
     /**
-     * Returns the current fitness of the particle.
-     * @return current fitness.
+     * Returns the current malus of the particle.
+     * @return current malus.
      */
     public OptimisationValue getCurrentFitness()
     {
@@ -113,8 +113,8 @@ public class Particle {
     }
 
     /**
-     * Sets the best fitness of the particle.
-     * @param bestFitness best fitness.
+     * Sets the best malus of the particle.
+     * @param bestFitness best malus.
      */
     public void setBestFitness(final OptimisationValue bestFitness)
     {
@@ -122,8 +122,8 @@ public class Particle {
     }
 
     /**
-     * Returns the best fitness of the particle.
-     * @return best fitness.
+     * Returns the best malus of the particle.
+     * @return best malus.
      */
     public OptimisationValue getBestFitness()
     {

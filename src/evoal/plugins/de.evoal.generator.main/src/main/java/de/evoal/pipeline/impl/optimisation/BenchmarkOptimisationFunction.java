@@ -1,6 +1,21 @@
 package de.evoal.pipeline.impl.optimisation;
 
+import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
+
+import java.util.List;
+import java.util.Map;
+import javax.enterprise.context.Dependent;
+import javax.inject.Inject;
+import javax.inject.Named;
+
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+
 import de.evoal.core.api.cdi.BeanFactory;
+import de.evoal.core.api.ecore.Space;
+import de.evoal.core.api.ecore.TypedEObject;
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.properties.PropertySpecification;
@@ -14,21 +29,8 @@ import de.evoal.languages.model.pipeline.Step;
 import de.evoal.optimisation.api.model.OptimisationFunction;
 import de.evoal.pipeline.api.model.Component;
 import de.evoal.pipeline.api.model.ComponentImpl;
-import de.evoal.pipeline.api.model.TypedEObject;
-import de.evoal.pipeline.api.model.dynamic.EAnnotationHelper;
-import de.evoal.pipeline.api.model.dynamic.EClassProvider;
-import lombok.SneakyThrows;
-import lombok.extern.slf4j.Slf4j;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.impl.DynamicEObjectImpl;
-import org.eclipse.emf.ecore.util.EcoreUtil;
-
-import javax.enterprise.context.Dependent;
-import javax.inject.Inject;
-import javax.inject.Named;
-import java.util.List;
-import java.util.Map;
+import de.evoal.core.api.dynamic.EAnnotationHelper;
+import de.evoal.core.api.dynamic.EClassProvider;
 
 @Slf4j
 @Dependent
@@ -61,7 +63,7 @@ public class BenchmarkOptimisationFunction implements OptimisationFunction {
 
     @Override
     public double[] evaluate(final Properties candidate) {
-        final TypedEObject temporary =  new TypedEObject(new DynamicEObjectImpl(eClass));
+        final TypedEObject temporary =  new TypedEObject(eClass);
 
         // copy all input values
         for(final PropertySpecification spec : candidate.getSpecification().getProperties()) {
@@ -137,7 +139,9 @@ public class BenchmarkOptimisationFunction implements OptimisationFunction {
      */
     private Component toComponent(final de.evoal.languages.model.pipeline.Step step) {
         log.info("Instantiating component {}", step.getInstance().getDefinition().getName());
-        return BeanFactory.createComponent(ComponentImpl.class, step.getInstance(), c -> c.setFeatures(step.getReads(), step.getWrites()));
+        final Space inputSpace = new Space(eClass, step.getReads());
+        final Space outputSpace = new Space(eClass, step.getWrites());
+        return BeanFactory.createComponent(ComponentImpl.class, step.getInstance(), c -> c.setFeatures(inputSpace, outputSpace));
     }
 }
 

@@ -2,12 +2,15 @@ package de.evoal.surrogate.api.function;
 
 import java.util.List;
 
+import de.evoal.core.api.ecore.stream.EObjectPairStreamFactory;
+import de.evoal.core.api.ecore.stream.EObjectPairStreamSupplier;
 import de.evoal.core.api.properties.stream.PropertiesBasedPropertiesPairStreamSupplier;
 import de.evoal.core.api.properties.stream.PropertiesPairStreamSupplier;
 import de.evoal.core.api.properties.stream.PropertiesStreamSupplier;
+import de.evoal.core.api.ecore.Space;
 import de.evoal.surrogate.api.configuration.PartialFunctionConfiguration;
 import de.evoal.surrogate.api.configuration.Parameter;
-import de.evoal.core.api.properties.PropertiesSpecification;
+import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -15,22 +18,22 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 public abstract class AbstractPartialSurrogateFunctionFactory implements PartialSurrogateFunctionFactory {
-	protected abstract PartialSurrogateFunction calculateRegression(final PartialFunctionConfiguration configuration, final List<Parameter> parameters, final PropertiesSpecification actualInput, final PropertiesSpecification requiredInput, PropertiesSpecification producedOutput, final PropertiesPairStreamSupplier provider);
+	protected abstract PartialSurrogateFunction calculateRegression(final PartialFunctionConfiguration configuration, final List<Parameter> parameters, final Space requiredInput, Space producedOutput, final EObjectPairStreamSupplier provider);
 
 	@Override
-	public final PartialSurrogateFunction create(final PartialFunctionConfiguration configuration, final PropertiesSpecification actualInput, final PropertiesSpecification requiredInput, final PropertiesSpecification producedOutput, final PropertiesStreamSupplier training) {
-		if(configuration.getState().isEmpty()) {
-			final PropertiesPairStreamSupplier provider = new PropertiesBasedPropertiesPairStreamSupplier(training, requiredInput, producedOutput);
-			final PartialSurrogateFunction function = calculateRegression(configuration, configuration.getParameters(), actualInput, requiredInput, producedOutput, provider);
+	public final PartialSurrogateFunction create(final @NonNull PartialFunctionConfiguration configuration, final @NonNull Space requiredInput, final @NonNull Space producedOutput, final EObjectPairStreamSupplier training) {
+		if(training == null) {
+			return restoreRegression(configuration, requiredInput, producedOutput);
+		} else {
+			final EObjectPairStreamSupplier provider = EObjectPairStreamFactory.createFromList(requiredInput, producedOutput, training);
+			final PartialSurrogateFunction function = calculateRegression(configuration, configuration.getParameters(), requiredInput, producedOutput, provider);
 			
 			configuration.getState()
 					     .addAll(function.getParameters());
 
 			return function;	
-		} else {
-			return restoreRegression(configuration, actualInput, requiredInput, producedOutput);
 		}
 	}
 
-	protected abstract PartialSurrogateFunction restoreRegression(final PartialFunctionConfiguration configuration, final PropertiesSpecification actualInput, final PropertiesSpecification requiredInput, final PropertiesSpecification producedOutput);
+	protected abstract PartialSurrogateFunction restoreRegression(final PartialFunctionConfiguration configuration, final Space requiredInput, final Space producedOutput);
 }

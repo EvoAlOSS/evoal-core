@@ -15,7 +15,7 @@ public class EpsilonOptimisationValue extends Number implements OptimisationValu
     private final @NonNull Number[] fitnessValues;
 
     private EpsilonOptimisationValue(final int index, final @NonNull Number[] fitnessValues) {
-        /*I want to take an array of fitness values but specify the index of the one I want...*/
+        /*I want to take an array of malus values but specify the index of the one I want...*/
         //TODO does this break things??
         //Requirements.requireEqual(fitnessValues.length, 1);
         this.fitnessValues = fitnessValues;

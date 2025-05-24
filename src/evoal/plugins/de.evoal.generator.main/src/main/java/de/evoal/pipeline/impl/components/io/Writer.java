@@ -1,5 +1,17 @@
 package de.evoal.pipeline.impl.components.io;
 
+import lombok.NonNull;
+import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
+
+import java.io.File;
+import java.util.stream.Stream;
+import javax.enterprise.context.Dependent;
+import javax.inject.Inject;
+import javax.inject.Named;
+
+import org.eclipse.emf.ecore.EStructuralFeature;
+
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.properties.io.PropertiesIOFactory;
@@ -11,19 +23,8 @@ import de.evoal.languages.model.base.definitions.Definition;
 import de.evoal.languages.model.base.expressions.Instance;
 import de.evoal.languages.model.dynamic.DynamicPackage;
 import de.evoal.pipeline.api.model.ComponentImpl;
-import de.evoal.pipeline.api.model.TypedEObject;
-import de.evoal.pipeline.api.model.dynamic.SubSpace;
-import lombok.NonNull;
-import lombok.SneakyThrows;
-import lombok.extern.slf4j.Slf4j;
-import org.eclipse.emf.ecore.EStructuralFeature;
-
-import javax.enterprise.context.Dependent;
-import javax.inject.Inject;
-import javax.inject.Named;
-import java.io.File;
-import java.util.Collection;
-import java.util.stream.Stream;
+import de.evoal.core.api.ecore.TypedEObject;
+import de.evoal.core.api.ecore.Space;
 
 @Dependent
 @Slf4j
@@ -62,7 +63,7 @@ public class Writer extends ComponentImpl {
         final File file = new File(filename);
 
         log.info("Writing data to {}", file.getAbsolutePath());
-        final SubSpace reads = getReads();
+        final Space reads = getReads();
 
         final Stream<Definition> definitions =
                 reads.stream()

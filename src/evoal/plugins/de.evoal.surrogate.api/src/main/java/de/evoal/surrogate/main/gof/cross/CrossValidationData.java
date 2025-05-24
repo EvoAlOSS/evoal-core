@@ -2,11 +2,17 @@ package de.evoal.surrogate.main.gof.cross;
 
 import de.evoal.surrogate.api.configuration.Parameter;
 import de.evoal.surrogate.api.configuration.PartialFunctionConfiguration;
+import lombok.Getter;
 
+/**
+ * The cross validation data serialised to the pson file.
+ */
 public class CrossValidationData {
     private final int k;
+    @Getter
     private final double mean;
     private final int partitionSize;
+    @Getter
     private final double sd;
 
     public CrossValidationData(final int k, final double mean, final int partitionSize, final double sd) {
@@ -14,14 +20,6 @@ public class CrossValidationData {
         this.mean = mean;
         this.partitionSize = partitionSize;
         this.sd = sd;
-    }
-
-    public double getMean() {
-        return mean;
-    }
-
-    public double getSd() {
-        return sd;
     }
 
     public void attachTo(final PartialFunctionConfiguration regression, final String outputName) {

@@ -3,12 +3,12 @@ package de.evoal.surrogate.adaption.interval.ea.surrogate.gof;
 import javax.enterprise.context.Dependent;
 import javax.inject.Named;
 
-import de.evoal.core.api.properties.Properties;
-import de.evoal.core.api.properties.PropertiesPair;
-import de.evoal.core.api.properties.PropertiesSpecification;
-import de.evoal.core.api.properties.PropertySpecification;
-import de.evoal.core.api.properties.stream.PropertiesBasedPropertiesPairStreamSupplier;
-import de.evoal.core.api.properties.stream.PropertiesStreamSupplier;
+import de.evoal.core.api.ecore.EObjectPair;
+import de.evoal.core.api.ecore.Space;
+import de.evoal.core.api.ecore.TypedEObject;
+import de.evoal.core.api.ecore.stream.EObjectPairStreamFactory;
+import de.evoal.core.api.ecore.stream.EObjectPairStreamSupplier;
+import de.evoal.core.interpreter.api.InterpreterState;
 import de.evoal.surrogate.adaption.interval.model.PredictiveErrorData;
 import de.evoal.surrogate.api.SurrogateInformationCalculator;
 import de.evoal.surrogate.api.configuration.SurrogateConfiguration;
@@ -16,12 +16,10 @@ import de.evoal.surrogate.api.function.PartialSurrogateFunction;
 import de.evoal.surrogate.api.function.SurrogateFunction;
 import de.evoal.surrogate.smile.api.KernelBasedSVRFunction;
 import org.apache.commons.math3.util.Pair;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import smile.math.matrix.Matrix;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.IntStream;
 
 @Dependent
@@ -30,23 +28,23 @@ public class PredictiveErrorCalculator implements SurrogateInformationCalculator
     /**
      * Points for training.
      */
-    private final List<PropertiesPair> training = new ArrayList<>();
+    private final List<EObjectPair> training = new ArrayList<>();
 
     /**
      * Prediction function
      */
     private SurrogateFunction function;
 
-    private PropertiesStreamSupplier trainingStream;
+    private EObjectPairStreamSupplier trainingStream;
 
     @Override
-    public void configure(final SurrogateFunction function, final SurrogateConfiguration config, final List<Object> parameters, final PropertiesStreamSupplier trainingData) {
+    public void configure(final SurrogateFunction function, final SurrogateConfiguration config, final EObjectPairStreamSupplier trainingData) {
         this.function = function;
         this.trainingStream = trainingData;
     }
 
     @Override
-    public void execute() {
+    public Optional<Object> call(final InterpreterState context, final Object[] arguments) {
         for(final PartialSurrogateFunction func : function.getFunctions()) {
             if(!(func instanceof KernelBasedSVRFunction)) {
                 continue;
@@ -54,35 +52,39 @@ public class PredictiveErrorCalculator implements SurrogateInformationCalculator
 
             calculateError((KernelBasedSVRFunction)func);
         }
+
+        return Optional.empty();
     }
 
     private void calculateError(final KernelBasedSVRFunction kernelFunction) {
         initializeTrainingData(kernelFunction.getUsedProperties(), kernelFunction.getOutputProperty());
 
-        final Map<PropertySpecification, PredictiveErrorData> result = new HashMap<>();
+        final Map<EStructuralFeature, PredictiveErrorData> result = new HashMap<>();
 
         final int numberOfPoints = training.size();
 
         // initialize result map with empty data
         kernelFunction.getOutputProperty()
-                      .getProperties()
-                      .forEach(p -> result.put(p, new PredictiveErrorData(numberOfPoints)));
+                      .forEach(feature -> result.put(feature, new PredictiveErrorData(numberOfPoints)));
 
         for(int pointIndex = 0; pointIndex < numberOfPoints; ++pointIndex) {
-            final Properties source = training.get(pointIndex).getFirst();
-            final Properties predicted = new Properties(kernelFunction.getOutputProperty(), kernelFunction.apply(source));
-            final Properties calculated = training.get(pointIndex).getSecond();
+            final TypedEObject source = training.get(pointIndex).getFirst();
+            final TypedEObject calculated = training.get(pointIndex).getSecond();
+            final TypedEObject predicted = kernelFunction.getOutputProperty().newEObject();
 
-            for(int i = 0; i < calculated.size(); ++i) {
-                final PredictiveErrorData errorData =  result.get(kernelFunction.getOutputProperty().getProperties().get(i));
+            kernelFunction.apply(source, predicted);
 
-                errorData.setPredictionError(pointIndex, calculated.getAsDouble(i) - predicted.getAsDouble(i));
-                errorData.setCalculatedValue(pointIndex, calculated.getAsDouble(i));
+//            for(int i = 0; i < calculated.size(); ++i) {
+            for(final EStructuralFeature feature : kernelFunction.getOutputProperty()) {
+                final PredictiveErrorData errorData =  result.get(feature);
+
+                errorData.setPredictionError(pointIndex, calculated.eGetAsDouble(feature) - predicted.eGetAsDouble(feature));
+                errorData.setCalculatedValue(pointIndex, calculated.eGetAsDouble(feature));
             }
         }
 
         final KernelBasedSVRFunction regression = kernelFunction;
-        final PropertySpecification targetSpec = kernelFunction.getOutputProperty().getProperties().get(0);
+        final EStructuralFeature targetSpec = kernelFunction.getOutputProperty().iterator().next();
         final PredictiveErrorData errorData = result.get(targetSpec);
 
         final Matrix kernelTrainingsMatrix = new Matrix(numberOfPoints, numberOfPoints);
@@ -94,7 +96,7 @@ public class PredictiveErrorCalculator implements SurrogateInformationCalculator
                  .forEach(p -> {
                      final Integer index1 = p.getFirst();
                      final Integer index2 = p.getSecond();
-                     double kernelValue = calculateKernelValue(regression, index1, index2);
+                     double kernelValue = calculateKernelValue(regression, kernelFunction.getUsedProperties(), kernelFunction.getOutputProperty(), index1, index2);
 
                      kernelTrainingsMatrixNotAdded.set(index1, index2, kernelValue);
                      kernelTrainingsMatrix.set(index1, index2, index1.equals(index2) ? kernelValue + 1.0 / regression.getGamma() : kernelValue);
@@ -152,12 +154,18 @@ public class PredictiveErrorCalculator implements SurrogateInformationCalculator
                      sigma[ri] = denominator / nominator;
                  });
 
+        final Space inputSpace = kernelFunction.getUsedProperties();
+
         final double [][] trainingPoints = new double[training.size()][];
         for(int ti = 0; ti < trainingPoints.length; ++ti) {
-            final PropertiesPair trainingPoint = training.get(ti);
-            final Properties value = trainingPoint.getFirst();
+            final EObjectPair trainingPoint = training.get(ti);
+            final TypedEObject value = trainingPoint.getFirst();
 
-            trainingPoints[ti] = value.getValuesAsDouble();
+            int index = 0;
+            trainingPoints[ti] = new double[inputSpace.size()];
+            for(final EStructuralFeature feature : inputSpace) {
+                trainingPoints[ti][index++] = value.eGetAsDouble(feature);
+            }
         }
 
 
@@ -167,24 +175,41 @@ public class PredictiveErrorCalculator implements SurrogateInformationCalculator
         errorData.setIndependentSmoothingMatrix(independentSmoothingMatrix);
         errorData.setIndependentSmoothingVector(independentSmoothingVector);
 
-        errorData.attachTo(kernelFunction.getConfiguration(), kernelFunction.getOutputProperty().getProperties().get(0).name());
+        errorData.attachTo(kernelFunction.getConfiguration(), targetSpec.getName());
     }
 
-    private void initializeTrainingData(final PropertiesSpecification input, final PropertiesSpecification output) {
+    private void initializeTrainingData(final Space input, final Space output) {
         training.clear();
 
-        new PropertiesBasedPropertiesPairStreamSupplier(trainingStream, input, output)
+        EObjectPairStreamFactory.createFromList(input, output, trainingStream)
                 .get()
                 .forEach(training::add);
     }
 
-    private Double calculateKernelValue(final KernelBasedSVRFunction regression, final Integer index1, final Integer index2) {
-        final Properties sp1 = training.get(index1).getFirst();
-        final Properties sp2 = training.get(index2).getFirst();
+    private Double calculateKernelValue(final KernelBasedSVRFunction regression,
+                                        final Space space1,
+                                        final Space space2,
+                                        final Integer index1,
+                                        final Integer index2) {
+        final TypedEObject sp1 = training.get(index1).getFirst();
+        final TypedEObject sp2 = training.get(index2).getFirst();
+
+        final double [] data1 = new double[space1.size()];
+        final double [] data2 = new double[space2.size()];
+
+        int i1 = 0;
+        for(final EStructuralFeature feature : space1) {
+            data1[i1++] = sp1.eGetAsDouble(feature);
+        }
+
+        int i2 = 0;
+        for(final EStructuralFeature feature : space2) {
+            data2[i2++] = sp2.eGetAsDouble(feature);
+        }
 
         return regression.getRegression()
                 .kernel()
-                .k(sp1.getValuesAsDouble(), sp2.getValuesAsDouble());
+                .k(data1, data2);
     }
 
     public String toString() {

@@ -1,17 +1,17 @@
 package de.evoal.pipeline.impl.executor;
 
-import de.evoal.pipeline.api.executor.PipelineExecutor;
-import de.evoal.pipeline.api.model.Component;
-import de.evoal.pipeline.api.model.Composite;
-import de.evoal.pipeline.api.model.TypedEObject;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.impl.DynamicEObjectImpl;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Stream;
+
+import org.eclipse.emf.ecore.EClass;
+
+import de.evoal.pipeline.api.executor.PipelineExecutor;
+import de.evoal.pipeline.api.model.Component;
+import de.evoal.pipeline.api.model.Composite;
+import de.evoal.core.api.ecore.TypedEObject;
 
 public class StreamExecutor implements PipelineExecutor {
     private EClass space;
@@ -24,7 +24,7 @@ public class StreamExecutor implements PipelineExecutor {
     @Override
     public void execute(final Composite pipeline, final Optional<Function<Stream<TypedEObject>, Stream<TypedEObject>>> limiter) {
         // we start with an empty instance
-        Stream<TypedEObject> stream = Stream.generate(() -> new TypedEObject(new DynamicEObjectImpl(space)));
+        Stream<TypedEObject> stream = Stream.generate(() -> new TypedEObject(space));
 
         final Collection<Component> components = toCollection(pipeline);
         for(Component component : components) {

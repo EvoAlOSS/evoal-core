@@ -138,6 +138,22 @@ public final class Requirements {
     /**
      * Requires the collection {@code collection} to be present and of size {@code size}.
      *
+     * @param array The array to check.
+     * @param size The required size.
+     *
+     * @throws NullPointerException iff either {@code a} or {@code b} is {@code null}.
+     * @throws IllegalArgumentException iff the size of {@code a} and {@code b} differ.
+     */
+    public static void requireSize(final Object [] array, final int size) {
+        Objects.requireNonNull(array, "Array is not allowed to be null");
+
+        if(array.length != size) {
+            throw new IllegalArgumentException("Arrays is expected to have length (" + size + "): " + array.length);
+        }
+    }
+    /**
+     * Requires the collection {@code collection} to be present and of size {@code size}.
+     *
      * @param collection The collection to check.
      * @param size The required size.
      *
@@ -201,6 +217,7 @@ public final class Requirements {
             throw new IllegalArgumentException("Specification expected size (" + size + ") is not met: " + specification.size());
         }
     }
+
     /**
      * Requires the collection {@code collection} to be present but empty.
      *
@@ -214,6 +231,22 @@ public final class Requirements {
 
         if(!collection.isEmpty()) {
             throw new IllegalArgumentException("Collections is expected to have size (0): " + collection.size());
+        }
+    }
+
+    /**
+     * Requires the collection {@code collection} to be present but not empty.
+     *
+     * @param collection The collection to check.
+     *
+     * @throws NullPointerException iff {@code collection}  is {@code null}.
+     * @throws IllegalArgumentException iff the size of {@code collection} is 0.
+     */
+    public static void requireNotEmpty(final Collection<?> collection) {
+        Objects.requireNonNull(collection, "Collection is not allowed to be null");
+
+        if(collection.isEmpty()) {
+            throw new IllegalArgumentException("Collections is expected to have a size greater than 0: " + collection.size());
         }
     }
 

@@ -1,7 +1,7 @@
 package de.evoal.pipeline.impl.components.benchmarks;
 
 import de.evoal.pipeline.api.model.ComponentImpl;
-import de.evoal.pipeline.api.model.TypedEObject;
+import de.evoal.core.api.ecore.TypedEObject;
 import lombok.NonNull;
 import org.eclipse.emf.ecore.EStructuralFeature;
 

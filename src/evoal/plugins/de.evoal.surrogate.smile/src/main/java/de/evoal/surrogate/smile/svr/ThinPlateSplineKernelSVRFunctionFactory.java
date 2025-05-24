@@ -1,15 +1,17 @@
 package de.evoal.surrogate.smile.svr;
 
-import de.evoal.core.api.properties.PropertiesSpecification;
+import lombok.extern.slf4j.Slf4j;
+
+import javax.enterprise.context.Dependent;
+import javax.inject.Named;
+
+import smile.regression.KernelMachine;
+
+import de.evoal.core.api.ecore.Space;
 import de.evoal.surrogate.api.configuration.Parameter;
 import de.evoal.surrogate.api.configuration.PartialFunctionConfiguration;
 import de.evoal.surrogate.api.function.PartialSurrogateFunction;
 import de.evoal.surrogate.smile.api.KernelBasedSVRFunction;
-import lombok.extern.slf4j.Slf4j;
-import smile.regression.KernelMachine;
-
-import javax.enterprise.context.Dependent;
-import javax.inject.Named;
 
 @Dependent
 @Named("thin-plate-spline-svr")
@@ -20,7 +22,7 @@ public class ThinPlateSplineKernelSVRFunctionFactory extends KernelBasedSVRFunct
 	}
 
 	@Override
-	protected PartialSurrogateFunction restoreRegression(final PartialFunctionConfiguration configuration, final PropertiesSpecification actualInput, final PropertiesSpecification requiredInput, final PropertiesSpecification producedOutput) {
+	protected PartialSurrogateFunction restoreRegression(final PartialFunctionConfiguration configuration, final Space input, final Space output) {
 		final KernelMachine<double []> regression = KernelHelper.fromParameters(configuration.getParameters(), configuration.getState());
 
 		final double margin = configuration.getParameters()
@@ -56,6 +58,6 @@ public class ThinPlateSplineKernelSVRFunctionFactory extends KernelBasedSVRFunct
 				.findFirst()
 				.get();
 
-		return new KernelBasedSVRFunction(configuration, regression, "thin-plate-spine-smile", requiredInput, actualInput, producedOutput, margin, sourceMeans, sourceSDs, targetMeans, targetSDs);
+		return new KernelBasedSVRFunction(configuration, regression, "thin-plate-spine-smile", input, output, margin, sourceMeans, sourceSDs, targetMeans, targetSDs);
 	}
 }

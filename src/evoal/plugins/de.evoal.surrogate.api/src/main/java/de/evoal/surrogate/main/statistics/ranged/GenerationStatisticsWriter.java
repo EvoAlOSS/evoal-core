@@ -1,9 +1,19 @@
 package de.evoal.surrogate.main.statistics.ranged;
 
+import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
+
+import java.util.*;
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.Dependent;
+import javax.inject.Inject;
+import javax.inject.Named;
+
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.properties.PropertySpecification;
 import de.evoal.core.api.properties.info.PropertiesBoundaries;
 import de.evoal.optimisation.api.model.Candidate;
+import de.evoal.languages.model.base.expressions.Instance;
 import de.evoal.optimisation.api.model.Iteration;
 import de.evoal.optimisation.api.statistics.io.Writer;
 import de.evoal.optimisation.api.statistics.io.WriterException;
@@ -14,16 +24,6 @@ import de.evoal.optimisation.api.statistics.writer.StatisticsWriter;
 import de.evoal.optimisation.api.correlations.Correlation;
 import de.evoal.optimisation.api.correlations.Correlations;
 import de.evoal.optimisation.api.correlations.RangedCorrelation;
-import de.evoal.languages.model.base.expressions.Instance;
-
-import java.util.*;
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.Dependent;
-import javax.inject.Inject;
-import javax.inject.Named;
-import lombok.SneakyThrows;
-import lombok.extern.slf4j.Slf4j;
-
 
 /**
  * Small helper class for collecting and writing the generation-based statistics.
@@ -121,15 +121,15 @@ public class GenerationStatisticsWriter implements StatisticsWriter {
     private List<Hypercube> fillHypercubes(final Iteration result){
     	final List<Hypercube> currentCandidates = new ArrayList<>();
 
-    	for(int j = 0; j < hypercubeDefinitions.size(); j++) {
-    		final Hypercube hypercube = new Hypercube(hypercubeDefinitions.get(j));
+        for (final Hypercube hypercubeDefinition : hypercubeDefinitions) {
+            final Hypercube hypercube = new Hypercube(hypercubeDefinition);
 
             result.candidates()
                     .map(Candidate::searchSpaceRepresentation)
                     .forEach(hypercube::addDataPoint);
 
-    		currentCandidates.add(hypercube);
-    	}
+            currentCandidates.add(hypercube);
+        }
     	return currentCandidates;
     }
 
@@ -143,8 +143,6 @@ public class GenerationStatisticsWriter implements StatisticsWriter {
     
     /**
      * This methods builds all hypercubes resulting from the given ranges of the dvl. It need only be performed once., 
-     * @param listOfRanges
-     * @return
      */
     public void generateHypercubesFromRanges(final List<PropertyRange> listOfRanges, final int dimensions) {
     	final List<SortedSet<Double>> listOfBoundaries = new ArrayList<>(dimensions);
@@ -158,11 +156,10 @@ public class GenerationStatisticsWriter implements StatisticsWriter {
     	}
 
     	//sorts every range into the correct dimension and sorts the interval values afterwards. 
-    	for(int j = 0; j < listOfRanges.size(); j++) {
-    		final PropertyRange currentRange = listOfRanges.get(j);
-    		listOfBoundaries.get(currentRange.getIndexOfChromosome()).add(currentRange.getLower());
-    		listOfBoundaries.get(currentRange.getIndexOfChromosome()).add(currentRange.getUpper());
-    	}
+        for (final PropertyRange currentRange : listOfRanges) {
+            listOfBoundaries.get(currentRange.getIndexOfChromosome()).add(currentRange.getLower());
+            listOfBoundaries.get(currentRange.getIndexOfChromosome()).add(currentRange.getUpper());
+        }
     	
     	//we should have a list of sorted double values for each dimension now, containing all values existing in the dvl ranges
         //TODO changed because it was throwing error when null/ empty

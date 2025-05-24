@@ -86,7 +86,7 @@ public class DefaultSwarm implements Swarm {
     private StatisticsWriter statistics;
 
     /**
-     * Initializes the particles in the swarm. Randomly sets initial position and evaluates fitness of that position.
+     * Initializes the particles in the swarm. Randomly sets initial position and evaluates malus of that position.
      */
     private void initializeParticles() {
         log.info("Initializing swarm with {} members.", sizeOfPopulation);

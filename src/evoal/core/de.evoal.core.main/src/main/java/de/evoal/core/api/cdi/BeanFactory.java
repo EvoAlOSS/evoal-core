@@ -69,7 +69,7 @@ public final class BeanFactory {
         Requirements.requireNotNull(name);
         Requirements.requireNotNull(type);
 
-        log.info("Creating bean of type {} with name {}.", type, name);
+        log.info("Creating bean of type '{}' with name '{}'.", type, name);
 
         try {
             return BeanProvider.getContextualReference(name, false, type);

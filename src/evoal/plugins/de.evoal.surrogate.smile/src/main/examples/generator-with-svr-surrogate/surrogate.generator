@@ -31,6 +31,8 @@ module surrogate {
 		
 	    step {
 	        component 'surrogate' {
+	            'pson-file' := "surrogate.pson";
+	            'training-model' := "training.mll";
 	        }
 	
 	        reads [data 'x:0'];

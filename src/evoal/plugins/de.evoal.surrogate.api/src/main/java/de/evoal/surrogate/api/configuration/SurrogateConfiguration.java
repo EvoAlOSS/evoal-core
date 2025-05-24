@@ -1,20 +1,31 @@
 package de.evoal.surrogate.api.configuration;
 
+import de.evoal.core.api.ecore.misc.SpaceHelper;
+import lombok.Data;
+
+import java.util.*;
+
+import org.eclipse.emf.ecore.EStructuralFeature;
+
+import de.evoal.core.api.ecore.Space;
 import de.evoal.core.api.languages.AttributeEvaluator;
-import de.evoal.core.api.properties.PropertySpecification;
 import de.evoal.languages.model.base.definitions.DataDescription;
 import de.evoal.languages.model.mll.SurrogateDefinition;
 import de.evoal.surrogate.api.function.PartialSurrogateFunction;
 import de.evoal.surrogate.api.function.SurrogateFunction;
-import lombok.Data;
-
-import java.util.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Configuration of a {@link SurrogateFunction}.
  */
 @Data
 public class SurrogateConfiguration {
+	/**
+	 * Logger
+	 */
+	private final static Logger log = LoggerFactory.getLogger(SurrogateConfiguration.class);
+
 	/**
 	 * List of functions within this mapping.
 	 */
@@ -40,12 +51,18 @@ public class SurrogateConfiguration {
 		}
 	}
 
-	public static SurrogateConfiguration from(final SurrogateDefinition definition, final AttributeEvaluator evaluator) {
+	public void link(final Space space) {
+		functions.forEach(f -> f.link(space));
+	}
+
+	public static SurrogateConfiguration from(final SurrogateDefinition definition, final Map<DataDescription, EStructuralFeature> featureMap, final AttributeEvaluator evaluator) {
+		log.info("Create surrogate configuration from {}.", definition.getName());
+
 		final SurrogateConfiguration configuration = new SurrogateConfiguration();
 
 		definition.getFunctions()
 				  .stream()
-				  .map(d -> PartialFunctionConfiguration.from(d, evaluator))
+				  .map(d -> PartialFunctionConfiguration.from(d, featureMap, evaluator))
 				  .forEach(configuration.functions::add);
 
 		return configuration;
@@ -62,62 +79,43 @@ public class SurrogateConfiguration {
 		return configuration;
 	}
 
-	public static List<DataDescription> getInputs(final SurrogateConfiguration configuration) {
-		final Set<DataDescription> inputs = new HashSet<>();
+	@Deprecated
+	public static Space getInputs(final SurrogateConfiguration configuration) {
+		return SpaceHelper.fromFeatureStream(
+				configuration.functions
+						.stream()
+						.flatMap(f -> f.getInputData().stream())
 
-		return configuration.functions
-							.stream()
-							.flatMap(f -> f.getInputData().getProperties().stream())
-							.filter(spec -> !inputs.contains(spec.type()))
-							.map(PropertySpecification::type)
-							.map(DataDescription.class::cast)
-							.peek(inputs::add)
-							.toList();
+		);
 	}
 
-	public static List<DataDescription> getOutputs(final SurrogateConfiguration configuration) {
-		final Set<DataDescription> outputs = new HashSet<>();
+	@Deprecated
+	public static Space getOutputs(final SurrogateConfiguration configuration) {
+		return SpaceHelper.fromFeatureStream(
+				configuration.functions
+						.stream()
+						.flatMap(f -> f.getOutputData().stream())
 
-		return configuration.functions
-				.stream()
-				.flatMap(f -> f.getOutputData().getProperties().stream())
-				.filter(spec -> !outputs.contains(spec.type()))
-				.map(PropertySpecification::type)
-				.map(DataDescription.class::cast)
-				.peek(outputs::add)
-				.toList();
+		);
 	}
 
-	/**
-	 * @Deprecated
-	 */
-	public static List<DataDescription> getInputs(final List<PartialSurrogateFunction> configurations) {
-		final Set<DataDescription> inputs = new HashSet<>();
+	@Deprecated
+	public static Space getInputs(final List<PartialSurrogateFunction> configurations) {
+		return SpaceHelper.fromFeatureStream(
+				configurations
+						.stream()
+						.flatMap(f -> f.getUsedProperties().stream())
 
-		return configurations
-				.stream()
-				.flatMap(f -> f.getUsedProperties().getProperties().stream())
-				.filter(spec -> !inputs.contains(spec.type()))
-				.map(PropertySpecification::type)
-				.map(DataDescription.class::cast)
-				.peek(inputs::add)
-				.toList();
+		);
 	}
 
-	/**
-	 * @Deprecated
-	 */
-	public static List<DataDescription> getOutputs(final List<PartialSurrogateFunction> configurations) {
-		final Set<DataDescription> outputs = new HashSet<>();
+	@Deprecated
+	public static Space getOutputs(final List<PartialSurrogateFunction> configurations) {
+		return SpaceHelper.fromFeatureStream(
+				configurations
+						.stream()
+						.flatMap(f -> f.getOutputProperty().stream())
 
-		return configurations
-				.stream()
-				.flatMap(f -> f.getOutputProperty().getProperties().stream())
-				.filter(spec -> !outputs.contains(spec.type()))
-				.map(PropertySpecification::type)
-				.map(DataDescription.class::cast)
-				.map(DataDescription.class::cast)
-				.peek(outputs::add)
-				.toList();
+		);
 	}
 }

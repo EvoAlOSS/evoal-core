@@ -30,8 +30,8 @@ public class TrainingRepairStrategy implements RepairStrategy {
     @Named("genotype-specification")
     private PropertiesSpecification sourceSpecification;
 
-    @Inject
-    @Named("surrogate-target-properties-specification")
+//    @Inject
+//    @Named("surrogate-target-properties-specification")
     private PropertiesSpecification targetSpecification;
 
     private List<Properties> trainingData;

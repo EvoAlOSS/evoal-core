@@ -15,6 +15,8 @@ module de.evoal.surrogate.adaption {
     requires de.evoal.optimisation.api;
     requires de.evoal.surrogate.api;
     requires de.evoal.surrogate.smile;
+    requires de.evoal.core.interpreter;
+    requires org.eclipse.emf.ecore;
 
     exports de.evoal.surrogate.adaption.interval.model;
     exports de.evoal.surrogate.adaption.density.model;
