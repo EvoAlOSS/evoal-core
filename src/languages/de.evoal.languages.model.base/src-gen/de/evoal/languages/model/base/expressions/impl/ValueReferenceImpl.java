@@ -14,7 +14,7 @@ import org.eclipse.emf.ecore.EClass;
  *
  * @generated
  */
-public class ValueReferenceImpl extends ConstantValueImpl implements ValueReference {
+public class ValueReferenceImpl extends ConstantExpressionImpl implements ValueReference {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

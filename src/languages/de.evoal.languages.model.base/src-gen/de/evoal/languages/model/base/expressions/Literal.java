@@ -13,7 +13,7 @@ package de.evoal.languages.model.base.expressions;
  * @model abstract="true"
  * @generated
  */
-public interface Literal extends ConstantValue {
+public interface Literal extends ConstantExpression {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

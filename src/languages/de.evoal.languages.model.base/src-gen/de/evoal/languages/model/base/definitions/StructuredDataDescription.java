@@ -31,12 +31,12 @@ public interface StructuredDataDescription extends DataDescription {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Type</em>' reference.
-	 * @see #setType(TypeDefinition)
+	 * @see #setType(ClassDefinition)
 	 * @see de.evoal.languages.model.base.definitions.DefinitionsPackage#getStructuredDataDescription_Type()
 	 * @model required="true"
 	 * @generated
 	 */
-	TypeDefinition getType();
+	ClassDefinition getType();
 
 	/**
 	 * Sets the value of the '{@link de.evoal.languages.model.base.definitions.StructuredDataDescription#getType <em>Type</em>}' reference.
@@ -46,6 +46,6 @@ public interface StructuredDataDescription extends DataDescription {
 	 * @see #getType()
 	 * @generated
 	 */
-	void setType(TypeDefinition value);
+	void setType(ClassDefinition value);
 
 } // StructuredDataDescription

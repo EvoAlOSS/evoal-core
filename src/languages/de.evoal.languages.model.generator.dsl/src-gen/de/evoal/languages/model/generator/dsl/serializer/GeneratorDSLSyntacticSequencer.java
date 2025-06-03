@@ -57,7 +57,7 @@ public class GeneratorDSLSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     ('reads' '[' ']' ';')?
 	 *
 	 * This ambiguous syntax occurs at:
-	 *     instance=InstanceLiteralRule (ambiguity) 'writes' '[' writes+=DataReferenceRule
+	 *     instance=InstanceLiteralRule (ambiguity) 'writes' '[' writes+=BaseDataReferenceRule
 	 *     instance=InstanceLiteralRule (ambiguity) ('writes' '[' ']' ';')? '}' (rule end)
 	 
 	 * </pre>
@@ -73,7 +73,7 @@ public class GeneratorDSLSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     instance=InstanceLiteralRule ('reads' '[' ']' ';')? (ambiguity) '}' (rule end)
-	 *     reads+=DataReferenceRule ']' ';' (ambiguity) '}' (rule end)
+	 *     reads+=BaseDataReferenceRule ']' ';' (ambiguity) '}' (rule end)
 	 
 	 * </pre>
 	 */

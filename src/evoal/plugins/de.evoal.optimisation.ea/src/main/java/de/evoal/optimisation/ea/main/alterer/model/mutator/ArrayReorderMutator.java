@@ -61,8 +61,8 @@ public class ArrayReorderMutator<A extends Comparable<? super A>> extends EvoAlM
                 int index2 = random.nextInt(0, array.getValues().size());
 
                 log.info("Swapping children {} and {}.", index1, index2);
-                final Value value1 = EcoreUtil.copy(array.getValues().get(index1));
-                final Value value2 = EcoreUtil.copy(array.getValues().get(index2));
+                final ReadExpression value1 = EcoreUtil.copy(array.getValues().get(index1));
+                final ReadExpression value2 = EcoreUtil.copy(array.getValues().get(index2));
 
                 array.getValues().set(index1, value2);
                 array.getValues().set(index2, value1);

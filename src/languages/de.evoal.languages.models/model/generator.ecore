@@ -4,8 +4,10 @@
     nsPrefix="generator">
   <eAnnotations source="http://www.eclipse.org/OCL/Import">
     <details key="base" value="platform:/resource/de.evoal.languages.model.base/model/model.ecore#/"/>
+    <details key="defs" value="platform:/resource/de.evoal.languages.model.base/model/definitions.ecore#/"/>
     <details key="exec" value="execution.ecore#/"/>
     <details key="expr" value="platform:/resource/de.evoal.languages.model.base/model/expressions.ecore#/"/>
+    <details key="types" value="platform:/resource/de.evoal.languages.model.base/model/types.ecore#/"/>
   </eAnnotations>
   <eClassifiers xsi:type="ecore:EClass" name="GeneratorModule">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
@@ -52,14 +54,14 @@
         eType="ecore:EClass ../../de.evoal.languages.model.base/model/expressions.ecore#//Instance"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="reads" ordered="false"
-        upperBound="-1" eType="ecore:EClass ../../de.evoal.languages.model.base/model/expressions.ecore#//DataReference"
+        upperBound="-1" eType="ecore:EClass ../../de.evoal.languages.model.base/model/expressions.ecore#//TypeDefinitionReference"
         containment="true">
       <eAnnotations source="http://www.eclipse.org/OCL/Collection">
         <details key="nullFree" value="false"/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="writes" ordered="false"
-        upperBound="-1" eType="ecore:EClass ../../de.evoal.languages.model.base/model/expressions.ecore#//DataReference"
+        upperBound="-1" eType="ecore:EClass ../../de.evoal.languages.model.base/model/expressions.ecore#//TypeDefinitionReference"
         containment="true">
       <eAnnotations source="http://www.eclipse.org/OCL/Collection">
         <details key="nullFree" value="false"/>

@@ -14,5 +14,4 @@ package de.evoal.languages.model.base.definitions;
  * @generated
  */
 public interface DataTypeTypeDefinition extends DataTypeDefinition, ScaledDefinition {
-
 } // DataTypeTypeDefinition

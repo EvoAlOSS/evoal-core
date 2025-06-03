@@ -11,9 +11,6 @@
   <genPackages prefix="Types" basePackage="de.evoal.languages.model.base" disposableProviderFactory="true"
       generateModelWizard="false" ecorePackage="types.ecore#/">
     <genClasses image="false" ecoreClass="types.ecore#//Type"/>
-    <genClasses ecoreClass="types.ecore#//InstanceType">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference types.ecore#//InstanceType/definition"/>
-    </genClasses>
     <genClasses ecoreClass="types.ecore#//BaseType"/>
     <genClasses ecoreClass="types.ecore#//StringType"/>
     <genClasses ecoreClass="types.ecore#//IntType"/>
@@ -26,5 +23,8 @@
     <genClasses ecoreClass="types.ecore#//ExpressionType"/>
     <genClasses ecoreClass="types.ecore#//LiteralType"/>
     <genClasses ecoreClass="types.ecore#//DataType"/>
+    <genClasses ecoreClass="types.ecore#//DefinitionReference">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference types.ecore#//DefinitionReference/definition"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>

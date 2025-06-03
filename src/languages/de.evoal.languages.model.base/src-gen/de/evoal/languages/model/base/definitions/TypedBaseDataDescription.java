@@ -32,12 +32,12 @@ public interface TypedBaseDataDescription extends BaseDataDescription {
 	 * The type associated to this data description.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Type</em>' reference.
-	 * @see #setType(DataTypeTypeDefinition)
+	 * @see #setType(Definition)
 	 * @see de.evoal.languages.model.base.definitions.DefinitionsPackage#getTypedBaseDataDescription_Type()
 	 * @model required="true"
 	 * @generated
 	 */
-	DataTypeTypeDefinition getType();
+	Definition getType();
 
 	/**
 	 * Sets the value of the '{@link de.evoal.languages.model.base.definitions.TypedBaseDataDescription#getType <em>Type</em>}' reference.
@@ -47,7 +47,7 @@ public interface TypedBaseDataDescription extends BaseDataDescription {
 	 * @see #getType()
 	 * @generated
 	 */
-	void setType(DataTypeTypeDefinition value);
+	void setType(Definition value);
 
 	/**
 	 * <!-- begin-user-doc -->

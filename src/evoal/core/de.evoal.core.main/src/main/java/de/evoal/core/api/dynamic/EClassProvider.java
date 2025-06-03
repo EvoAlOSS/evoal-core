@@ -5,7 +5,7 @@ import de.evoal.core.api.properties.PropertySpecification;
 import de.evoal.languages.model.base.definitions.BaseDataDescription;
 import de.evoal.languages.model.base.definitions.DataDescription;
 import de.evoal.languages.model.base.definitions.RepresentationType;
-import de.evoal.languages.model.base.expressions.DataReference;
+import de.evoal.languages.model.base.expressions.TypeDefinitionReference;
 import de.evoal.languages.model.dynamic.Definition;
 import de.evoal.languages.model.dynamic.DynamicFactory;
 import de.evoal.languages.model.dynamic.DynamicPackage;
@@ -41,7 +41,9 @@ public class EClassProvider {
                     .stream()
                     .flatMap(p -> p.getSteps().stream())
                     .flatMap(s -> Stream.concat(s.getReads().stream(), s.getWrites().stream()))
-                    .map(DataReference::getDefinition)
+                    .map(TypeDefinitionReference::getDefinition)
+                    .filter(DataDescription.class::isInstance)
+                    .map(DataDescription.class::cast)
                     .collect(Collectors.toSet());
 
         final EClass result = eClassOf(references);

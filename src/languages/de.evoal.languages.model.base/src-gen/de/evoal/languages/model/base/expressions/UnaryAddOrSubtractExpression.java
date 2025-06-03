@@ -21,7 +21,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface UnaryAddOrSubtractExpression extends Value {
+public interface UnaryAddOrSubtractExpression extends ReadExpression {
 	/**
 	 * Returns the value of the '<em><b>Operators</b></em>' attribute list.
 	 * The list contents are of type {@link de.evoal.languages.model.base.expressions.AddOrSubtractOperator}.
@@ -41,12 +41,12 @@ public interface UnaryAddOrSubtractExpression extends Value {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Sub Expression</em>' containment reference.
-	 * @see #setSubExpression(Value)
+	 * @see #setSubExpression(ReadExpression)
 	 * @see de.evoal.languages.model.base.expressions.ExpressionsPackage#getUnaryAddOrSubtractExpression_SubExpression()
 	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	Value getSubExpression();
+	ReadExpression getSubExpression();
 
 	/**
 	 * Sets the value of the '{@link de.evoal.languages.model.base.expressions.UnaryAddOrSubtractExpression#getSubExpression <em>Sub Expression</em>}' containment reference.
@@ -56,6 +56,6 @@ public interface UnaryAddOrSubtractExpression extends Value {
 	 * @see #getSubExpression()
 	 * @generated
 	 */
-	void setSubExpression(Value value);
+	void setSubExpression(ReadExpression value);
 
 } // UnaryAddOrSubtractExpression

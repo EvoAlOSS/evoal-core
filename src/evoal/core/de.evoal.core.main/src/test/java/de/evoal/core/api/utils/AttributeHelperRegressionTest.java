@@ -43,7 +43,7 @@ public class AttributeHelperRegressionTest {
         Assertions.assertNotNull(model.getTypes());
         Assertions.assertEquals(1, model.getTypes().size());
 
-        final TypeDefinition type = model.getTypes().get(0);
+        final ClassDefinition type = model.getTypes().get(0);
         Assertions.assertEquals("shekel", type.getName());
         Assertions.assertNull(type.getSuperType());
         Assertions.assertEquals(3, type.getAttributes().size());

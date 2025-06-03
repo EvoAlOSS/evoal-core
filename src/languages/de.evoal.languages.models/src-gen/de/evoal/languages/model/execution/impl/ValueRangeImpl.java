@@ -3,8 +3,9 @@
  */
 package de.evoal.languages.model.execution.impl;
 
-import de.evoal.languages.model.base.expressions.Value;
+import de.evoal.languages.model.base.expressions.ConstantExpression;
 
+import de.evoal.languages.model.base.expressions.ReadExpression;
 import de.evoal.languages.model.execution.ExecutionPackage;
 import de.evoal.languages.model.execution.ValueRange;
 
@@ -42,7 +43,7 @@ public class ValueRangeImpl extends RangeImpl implements ValueRange {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Value> elements;
+	protected EList<ReadExpression> elements;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -69,9 +70,9 @@ public class ValueRangeImpl extends RangeImpl implements ValueRange {
 	 * @generated
 	 */
 	@Override
-	public EList<Value> getElements() {
+	public EList<ReadExpression> getElements() {
 		if (elements == null) {
-			elements = new EObjectContainmentEList<Value>(Value.class, this, ExecutionPackage.VALUE_RANGE__ELEMENTS);
+			elements = new EObjectContainmentEList<ReadExpression>(ReadExpression.class, this, ExecutionPackage.VALUE_RANGE__ELEMENTS);
 		}
 		return elements;
 	}
@@ -115,7 +116,7 @@ public class ValueRangeImpl extends RangeImpl implements ValueRange {
 		switch (featureID) {
 			case ExecutionPackage.VALUE_RANGE__ELEMENTS:
 				getElements().clear();
-				getElements().addAll((Collection<? extends Value>)newValue);
+				getElements().addAll((Collection<? extends ReadExpression>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

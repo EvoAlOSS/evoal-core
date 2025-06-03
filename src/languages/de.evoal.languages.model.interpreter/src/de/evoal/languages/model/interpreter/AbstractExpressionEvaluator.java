@@ -7,6 +7,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import de.evoal.languages.model.base.definitions.ConstantDefinition;
+import de.evoal.languages.model.base.definitions.EnumLiteralDefinition;
 import de.evoal.languages.model.base.expressions.*;
 import de.evoal.languages.model.base.expressions.util.ExpressionsSwitch;
 
@@ -121,12 +123,16 @@ public abstract class AbstractExpressionEvaluator extends ExpressionsSwitch<Obje
 	}
 
 	@Override
-	public Object caseConstantReference(final ConstantReference object) {
-		if(constants == null) {
-			throw new IllegalStateException("There is no constant evaluator");
+	public Object caseLiteralDefinitionReference(final LiteralDefinitionReference object) {
+		if(object.getDefinition() instanceof ConstantDefinition) {
+			if(constants == null) {
+				throw new IllegalStateException("There is no constant evaluator");
+			}
+			
+			return constants.evaluate(object);			
 		}
 		
-		return constants.evaluate(object);
+		return super.caseLiteralDefinitionReference(object);
 	}
 
 	@Override
@@ -135,7 +141,9 @@ public abstract class AbstractExpressionEvaluator extends ExpressionsSwitch<Obje
 	}
 
 	@Override
-	public Object caseLiteral(Literal object) {
+	public Object caseLiteral(final Literal object) {
+		log.info("Vising {}", object);
+		
 		return object.getValue();
 	}
 
@@ -238,8 +246,10 @@ public abstract class AbstractExpressionEvaluator extends ExpressionsSwitch<Obje
 	
 	@Override
 	public Object caseValueReference(final ValueReference object) {
-		if(object instanceof DataReference) {
-			return ((DataReference)object).getDefinition();
+		if(object instanceof LiteralDefinitionReference literal) {
+			return literal.getDefinition();
+		} else if(object instanceof TypeDefinitionReference type) {
+			return type.getDefinition();
 		}
 		throw new IllegalStateException("Not yet implemented: " + object.eClass() + " -- " + object);			
 	}

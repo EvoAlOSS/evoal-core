@@ -28,7 +28,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *
  * @generated
  */
-public class PowerOfExpressionImpl extends ValueImpl implements PowerOfExpression {
+public class PowerOfExpressionImpl extends ReadExpressionImpl implements PowerOfExpression {
 	/**
 	 * The cached value of the '{@link #getLeftOperand() <em>Left Operand</em>}' containment reference.
 	 * <!-- begin-user-doc -->

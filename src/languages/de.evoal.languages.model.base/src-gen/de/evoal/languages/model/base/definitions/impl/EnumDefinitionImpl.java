@@ -5,9 +5,9 @@ package de.evoal.languages.model.base.definitions.impl;
 import de.evoal.languages.model.base.definitions.DefinitionsPackage;
 import de.evoal.languages.model.base.definitions.EnumDefinition;
 import de.evoal.languages.model.base.definitions.EnumLiteralDefinition;
-
 import de.evoal.languages.model.base.definitions.ScaleType;
 import de.evoal.languages.model.base.definitions.ScaledDefinition;
+
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -36,7 +37,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *
  * @generated
  */
-public class EnumDefinitionImpl extends DefinitionImpl implements EnumDefinition {
+public class EnumDefinitionImpl extends TypeDefinitionImpl implements EnumDefinition {
 	/**
 	 * The default value of the '{@link #getScale() <em>Scale</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -46,6 +47,7 @@ public class EnumDefinitionImpl extends DefinitionImpl implements EnumDefinition
 	 * @ordered
 	 */
 	protected static final ScaleType SCALE_EDEFAULT = ScaleType.NOMINAL;
+
 	/**
 	 * The cached value of the '{@link #getScale() <em>Scale</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -55,6 +57,7 @@ public class EnumDefinitionImpl extends DefinitionImpl implements EnumDefinition
 	 * @ordered
 	 */
 	protected ScaleType scale = SCALE_EDEFAULT;
+
 	/**
 	 * The cached value of the '{@link #getLiterals() <em>Literals</em>}' containment reference list.
 	 * <!-- begin-user-doc -->

@@ -1,14 +1,17 @@
 import "definitions" from de.evoal.optimisation.core;
 
 module de.evoal.optimisation.pso.optimisation {
+	nominal enum 'boundary-handling' ( wrap, bounce, stick );
+	
+	nominal enum 'topology' ( global, star, ring, square );
+	
 	type 'particle-swarm-optimisation' extends 'algorithm' {
-	    'swarm' : instance 'swarm';
+	    'swarm' : instance swarm;
 	    'size-of-population'  : int;
 	    'number-of-generations' : int;
 	    'neighborhood-size' : int;
 	    'mover' : instance 'pso-mover';
-	    //specify GLOBAL, STAR, RING, or SQUARE topology
-	    'topology' : string;
+	    'topology' : enum topology := topology.global;
 	}
 
 	abstract type 'swarm' {
@@ -27,7 +30,7 @@ module de.evoal.optimisation.pso.optimisation {
      */
 	abstract type 'pso-mover' {
 	    //specify WRAP, BOUNCE, or STICK boundary type
-	    'boundary-type' : string;
+	    'boundary-type' : enum  'boundary-handling' := 'boundary-handling.wrap';
 	}
 
     /**

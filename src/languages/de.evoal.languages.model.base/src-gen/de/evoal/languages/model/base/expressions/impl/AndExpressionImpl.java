@@ -31,7 +31,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *
  * @generated
  */
-public class AndExpressionImpl extends ValueImpl implements AndExpression {
+public class AndExpressionImpl extends ReadExpressionImpl implements AndExpression {
 	/**
 	 * The cached value of the '{@link #getSubExpressions() <em>Sub Expressions</em>}' containment reference list.
 	 * <!-- begin-user-doc -->

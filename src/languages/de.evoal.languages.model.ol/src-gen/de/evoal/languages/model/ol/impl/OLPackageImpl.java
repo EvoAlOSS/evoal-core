@@ -343,8 +343,7 @@ public class OLPackageImpl extends EPackageImpl implements OLPackage {
 		   source,
 		   new String[] {
 			   "ddl", "platform:/resource/de.evoal.languages.model.ddl/model/model.ecore#/",
-			   "el", "platform:/resource/de.evoal.languages.model.base/model/model.ecore#/",
-			   "instance", "platform:/resource/de.evoal.languages.model.instance/model/model.ecore#/"
+			   "el", "platform:/resource/de.evoal.languages.model.base/model/model.ecore#/"
 		   });
 	}
 

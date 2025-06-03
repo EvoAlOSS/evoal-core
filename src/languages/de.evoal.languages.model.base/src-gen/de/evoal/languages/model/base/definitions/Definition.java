@@ -10,7 +10,7 @@ package de.evoal.languages.model.base.definitions;
  *
  * <!-- begin-model-doc -->
  * 
- * Base class for all definitions
+ * Base class for all definitions.
  * 
  * <!-- end-model-doc -->
  *

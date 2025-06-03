@@ -3,9 +3,11 @@
  */
 package de.evoal.languages.model.generator;
 
-import de.evoal.languages.model.base.expressions.DataReference;
+import de.evoal.languages.model.base.definitions.Definition;
 import de.evoal.languages.model.base.expressions.Instance;
 
+import de.evoal.languages.model.base.expressions.TypeDefinitionReference;
+import de.evoal.languages.model.base.types.DefinitionReference;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EObject;
@@ -53,7 +55,7 @@ public interface Step extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Reads</b></em>' containment reference list.
-	 * The list contents are of type {@link de.evoal.languages.model.base.expressions.DataReference}.
+	 * The list contents are of type {@link de.evoal.languages.model.base.expressions.TypeDefinitionReference}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Reads</em>' containment reference list.
@@ -62,11 +64,11 @@ public interface Step extends EObject {
 	 *        annotation="http://www.eclipse.org/OCL/Collection nullFree='false'"
 	 * @generated
 	 */
-	EList<DataReference> getReads();
+	EList<TypeDefinitionReference> getReads();
 
 	/**
 	 * Returns the value of the '<em><b>Writes</b></em>' containment reference list.
-	 * The list contents are of type {@link de.evoal.languages.model.base.expressions.DataReference}.
+	 * The list contents are of type {@link de.evoal.languages.model.base.expressions.TypeDefinitionReference}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Writes</em>' containment reference list.
@@ -75,6 +77,6 @@ public interface Step extends EObject {
 	 *        annotation="http://www.eclipse.org/OCL/Collection nullFree='false'"
 	 * @generated
 	 */
-	EList<DataReference> getWrites();
+	EList<TypeDefinitionReference> getWrites();
 
 } // Step

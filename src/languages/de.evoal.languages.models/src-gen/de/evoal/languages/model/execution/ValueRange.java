@@ -3,8 +3,9 @@
  */
 package de.evoal.languages.model.execution;
 
-import de.evoal.languages.model.base.expressions.Value;
+import de.evoal.languages.model.base.expressions.ConstantExpression;
 
+import de.evoal.languages.model.base.expressions.ReadExpression;
 import org.eclipse.emf.common.util.EList;
 
 /**
@@ -32,7 +33,7 @@ import org.eclipse.emf.common.util.EList;
 public interface ValueRange extends Range {
 	/**
 	 * Returns the value of the '<em><b>Elements</b></em>' containment reference list.
-	 * The list contents are of type {@link de.evoal.languages.model.base.expressions.Value}.
+	 * The list contents are of type {@link de.evoal.languages.model.base.expressions.ReadExpression}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
@@ -46,6 +47,6 @@ public interface ValueRange extends Range {
 	 *        annotation="http://www.eclipse.org/OCL/Collection nullFree='false'"
 	 * @generated
 	 */
-	EList<Value> getElements();
+	EList<ReadExpression> getElements();
 
 } // ValueRange

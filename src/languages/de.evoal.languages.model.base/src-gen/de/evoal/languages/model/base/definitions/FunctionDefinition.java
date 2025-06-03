@@ -3,6 +3,7 @@
 package de.evoal.languages.model.base.definitions;
 
 import de.evoal.languages.model.base.types.Type;
+
 import org.eclipse.emf.common.util.EList;
 
 /**

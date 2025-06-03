@@ -61,8 +61,8 @@ public class LiteralMutator<A extends Comparable<? super A>> extends EvoAlMutato
                 iLiteral.setLiteral(value);
             } else if(literal instanceof BooleanLiteral bLiteral) {
                 boolean value = random.nextBoolean();
-                log.info("Replacing {} by {}.", bLiteral.isValue(), value);
-                bLiteral.setValue(value);
+                log.info("Replacing {} by {}.", bLiteral.isLiteral(), value);
+                bLiteral.setLiteral(value);
             } else {
                 throw new IllegalStateException("");
             }

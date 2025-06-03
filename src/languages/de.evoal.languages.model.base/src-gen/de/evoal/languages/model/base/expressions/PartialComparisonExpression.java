@@ -20,7 +20,7 @@ package de.evoal.languages.model.base.expressions;
  * @model
  * @generated
  */
-public interface PartialComparisonExpression extends Value {
+public interface PartialComparisonExpression extends ReadExpression {
 	/**
 	 * Returns the value of the '<em><b>Operator</b></em>' attribute.
 	 * The literals are from the enumeration {@link de.evoal.languages.model.base.expressions.ComparisonOperator}.

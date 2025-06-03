@@ -117,13 +117,22 @@ public interface DlPackage extends EPackage {
 	int DEFINITION_MODULE__CONSTANTS = 4;
 
 	/**
+	 * The feature id for the '<em><b>Enums</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEFINITION_MODULE__ENUMS = 5;
+
+	/**
 	 * The number of structural features of the '<em>Definition Module</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DEFINITION_MODULE_FEATURE_COUNT = 5;
+	int DEFINITION_MODULE_FEATURE_COUNT = 6;
 
 
 	/**
@@ -190,6 +199,17 @@ public interface DlPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getDefinitionModule_Constants();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.dl.DefinitionModule#getEnums <em>Enums</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Enums</em>'.
+	 * @see de.evoal.languages.model.dl.DefinitionModule#getEnums()
+	 * @see #getDefinitionModule()
+	 * @generated
+	 */
+	EReference getDefinitionModule_Enums();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -262,6 +282,14 @@ public interface DlPackage extends EPackage {
 		 * @generated
 		 */
 		EReference DEFINITION_MODULE__CONSTANTS = eINSTANCE.getDefinitionModule_Constants();
+
+		/**
+		 * The meta object literal for the '<em><b>Enums</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DEFINITION_MODULE__ENUMS = eINSTANCE.getDefinitionModule_Enums();
 
 	}
 

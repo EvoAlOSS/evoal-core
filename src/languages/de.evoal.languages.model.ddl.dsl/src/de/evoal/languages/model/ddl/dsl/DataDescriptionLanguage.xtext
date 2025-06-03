@@ -61,7 +61,11 @@ DataDescriptionRule returns definitions::DataDescription:
 
 TypedBaseDataDescriptionRule returns definitions::TypedBaseDataDescription:
 	(constraints += BaseLanguage::ConstraintRule)*
-	representation=RepresentationType 'data' name = StringOrId 'of' 'type' type= [definitions::DataTypeTypeDefinition|StringOrId] 
+	representation=RepresentationType 'data' name = StringOrId 'of'
+	(
+		('type' type = [definitions::DataTypeTypeDefinition|QualifiedName])|
+		('enum' type = [definitions::EnumDefinition|QualifiedName])
+	)
 	('with' 'constraints' ':' (constraints += StatementRule)*)?
 	';'
 ;
@@ -77,7 +81,7 @@ UntypedBaseDataDescriptionRule returns definitions::UntypedBaseDataDescription:
 
 StructuredDataDescriptionRule returns definitions::StructuredDataDescription:
 	(constraints += BaseLanguage::ConstraintRule)*
-	'data' name = StringOrId 'of' 'instance'  type = [definitions::TypeDefinition|QualifiedName] ';'
+	'data' name = StringOrId 'of' 'instance'  type = [definitions::ClassDefinition|QualifiedName] ';'
 ;
 
 StatementRule returns expressions::Expression:
@@ -86,8 +90,10 @@ StatementRule returns expressions::Expression:
 
 
 @Override
-ReferenceRule returns expressions::ValueReference:
-	ConstantReferenceRule | DataReferenceRule | SelfReferenceRule
+ReferenceRule returns expressions::ConstantExpression:
+	LiteralDefinitionReferenceRule
+	| TypeDefinitionReferenceRule
+	| SelfReferenceRule
 ;
 
 SelfReferenceRule returns expressions::SelfReference:

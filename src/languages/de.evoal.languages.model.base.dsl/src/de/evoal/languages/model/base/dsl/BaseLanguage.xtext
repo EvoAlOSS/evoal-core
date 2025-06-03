@@ -65,15 +65,19 @@ PowerOfExpressionRule returns PowerOfExpression :
 ;
 
 UnaryAddOrSubtractExpressionRule returns UnaryAddOrSubtractExpression :
-	( operators+=AddOrSubtractOperatorRule )* subExpression = ValueRule
+	( operators+=AddOrSubtractOperatorRule )* subExpression = ReadExpressionRule
 ;
 
-ValueRule returns Value:
-	ArrayRule | CallRule | LiteralRule | ParanthesesRule | ReferenceRule;
+ReadExpressionRule returns ReadExpression:
+	ArrayRule
+	| CallRule
+	| LiteralRule
+	| ParanthesesRule
+	| ReferenceRule;
 
 ArrayRule returns Array:
 	{Array}
-	'[' (values += ValueRule (',' values += ValueRule)* )? ']' 
+	'[' (values += ReadExpressionRule (',' values += ReadExpressionRule)* )? ']' 
 ;
 
 ParanthesesRule returns Parantheses:
@@ -84,29 +88,37 @@ CallRule returns Call:
 	function=[FunctionDefinition|QualifiedName] '(' (parameters += ExpressionRule (',' parameters += ExpressionRule)* )? ')'
 ;
 
-
-ReferenceRule returns ValueReference:
-	ConstantReferenceRule | DataReferenceRule
+ReferenceRule returns ConstantExpression:
+	LiteralDefinitionReferenceRule
+	| TypeDefinitionReferenceRule
 ;
 
-DataReferenceRule returns DataReference:
-	'data' definition = [DataDescription|QualifiedName] 
+LiteralDefinitionReferenceRule returns LiteralDefinitionReference:
+	definition = [LiteralDefinition|QualifiedName]
 ;
 
+TypeDefinitionReferenceRule returns TypeDefinitionReference:
+	BaseDataReferenceRule 
+	| StructuredDataDescriptionReferenceRule;
+	
 
-ConstantReferenceRule returns ConstantReference:
-	definition = [ConstantDefinition|QualifiedName]
+BaseDataReferenceRule returns TypeDefinitionReference:
+	'data' definition = [BaseDataDescription|QualifiedName]
+;
+
+StructuredDataDescriptionReferenceRule returns TypeDefinitionReference:
+	'instance' definition = [StructuredDataDescription|QualifiedName]
 ;
 
 LiteralRule returns Literal:
 	NumberLiteralRule
 		| StringLiteralRule
 		| BooleanLiteralRule
-		| InstanceLiteralRule
+		| InstanceLiteralRule		
 ;
 
 InstanceLiteralRule returns Instance:
-	definition = [TypeDefinition|QualifiedName] '{'
+	definition = [ClassDefinition|QualifiedName] '{'
 	  attributes += AttributeRule*
 	'}'
 ;
@@ -123,13 +135,12 @@ RealLiteralRule returns RealLiteral :
 	literal = DOUBLE (factor = FactorRule)?
 ;
 
-
 IntegerLiteralRule returns IntegerLiteral:
 	literal = INT (factor = FactorRule)?
 ;
 
 StringLiteralRule returns StringLiteral:
-	value = STRING
+	literal = STRING
 ;
 
 enum FactorRule returns Factor:
@@ -156,12 +167,12 @@ enum FactorRule returns Factor:
 ;
 
 BooleanLiteralRule returns BooleanLiteral:
-	{BooleanLiteral} (value ?= 'true' |  'false')
+	{BooleanLiteral} (literal ?= 'true' |  'false')
 ;
 
-TypeDefinitionRule returns TypeDefinition:
+ClassDefinitionRule returns ClassDefinition:
 	(constraints += ConstraintRule)*
-	(abstract?='abstract')? 'type' name = StringOrId ('extends' superType = [TypeDefinition|QualifiedName])? '{'
+	(abstract?='abstract')? 'type' name = StringOrId ('extends' superType = [ClassDefinition|QualifiedName])? '{'
 		attributes += AttributeDefinitionRule*
 	'}'
 ;
@@ -176,18 +187,30 @@ AttributeDefinitionRule returns AttributeDefinition:
 ;
 
 TypeRule returns types::Type:
-	StringTypeRule
-	| IntTypeRule
-	| RealTypeRule
-	| BooleanTypeRule
-	| ArrayTypeRule
-	| InstanceTypeRule
-	| VoidTypeRule
+	ArrayTypeRule
+	| BaseTypeRule
+	| TypeReferenceRule
+	| EnumReferenceRule
 	| ExpressionTypeRule
 	| LiteralTypeRule
 	| DataTypeRule
 ;
 
+BaseTypeRule returns types::BaseType:
+	StringTypeRule
+	| IntTypeRule
+	| RealTypeRule
+	| BooleanTypeRule
+	| VoidTypeRule	
+;
+
+EnumReferenceRule returns  types::DefinitionReference:
+	'enum' definition = [EnumDefinition|QualifiedName]
+;
+
+TypeReferenceRule returns types::DefinitionReference:
+	'instance' definition = [ClassDefinition|QualifiedName]
+;
 
 LiteralTypeRule returns types::LiteralType:
 	{types::LiteralType} 'literal'
@@ -196,11 +219,6 @@ LiteralTypeRule returns types::LiteralType:
 DataTypeRule returns types::DataType:
 	{types::DataType}
 	'data'
-;
-
-InstanceTypeRule returns types::InstanceType:
-	{types::InstanceType}
-	'instance' definition = [TypeDefinition|QualifiedName]
 ;
 
 StringTypeRule returns types::StringType:

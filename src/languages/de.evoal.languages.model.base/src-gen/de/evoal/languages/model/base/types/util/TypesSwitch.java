@@ -72,13 +72,6 @@ public class TypesSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TypesPackage.INSTANCE_TYPE: {
-				InstanceType instanceType = (InstanceType)theEObject;
-				T result = caseInstanceType(instanceType);
-				if (result == null) result = caseType(instanceType);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case TypesPackage.BASE_TYPE: {
 				BaseType baseType = (BaseType)theEObject;
 				T result = caseBaseType(baseType);
@@ -155,6 +148,13 @@ public class TypesSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case TypesPackage.DEFINITION_REFERENCE: {
+				DefinitionReference definitionReference = (DefinitionReference)theEObject;
+				T result = caseDefinitionReference(definitionReference);
+				if (result == null) result = caseType(definitionReference);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -171,21 +171,6 @@ public class TypesSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseType(Type object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Instance Type</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Instance Type</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseInstanceType(InstanceType object) {
 		return null;
 	}
 
@@ -336,6 +321,21 @@ public class TypesSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseDataType(DataType object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Definition Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Definition Reference</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDefinitionReference(DefinitionReference object) {
 		return null;
 	}
 

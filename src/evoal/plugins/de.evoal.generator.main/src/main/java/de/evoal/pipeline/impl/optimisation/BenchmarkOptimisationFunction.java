@@ -1,5 +1,6 @@
 package de.evoal.pipeline.impl.optimisation;
 
+import de.evoal.languages.model.base.expressions.TypeDefinitionReference;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
@@ -21,7 +22,6 @@ import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.properties.PropertySpecification;
 import de.evoal.core.api.utils.AttributeHelper;
 import de.evoal.languages.model.base.definitions.DataDescription;
-import de.evoal.languages.model.base.expressions.DataReference;
 import de.evoal.languages.model.base.expressions.ExpressionsFactory;
 import de.evoal.languages.model.base.expressions.Instance;
 import de.evoal.languages.model.pipeline.PipelineFactory;
@@ -104,7 +104,7 @@ public class BenchmarkOptimisationFunction implements OptimisationFunction {
 
             final List<DataDescription> readReferences = helper.lookup(benchmarkConfiguration, "reads");
             readReferences.forEach(dr -> {
-                final DataReference reference = ExpressionsFactory.eINSTANCE.createDataReference();
+                final TypeDefinitionReference reference = ExpressionsFactory.eINSTANCE.createTypeDefinitionReference();
                 reference.setDefinition(dr);
                 stepConfiguration.getReads().add(mapping.get(dr));
             });
@@ -112,7 +112,7 @@ public class BenchmarkOptimisationFunction implements OptimisationFunction {
             final List<DataDescription> writeReferences = (List<DataDescription>) helper.lookup(benchmarkConfiguration, "writes");
             writeReferences
                     .forEach(dr -> {
-                        final DataReference reference = ExpressionsFactory.eINSTANCE.createDataReference();
+                        final TypeDefinitionReference reference = ExpressionsFactory.eINSTANCE.createTypeDefinitionReference();
                         reference.setDefinition(dr);
                         stepConfiguration.getWrites().add(mapping.get(dr));
                     });

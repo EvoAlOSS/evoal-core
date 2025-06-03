@@ -22,22 +22,13 @@ public interface DefinitionsFactory extends EFactory {
 	DefinitionsFactory eINSTANCE = de.evoal.languages.model.base.definitions.impl.DefinitionsFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>Scaled Definition</em>'.
+	 * Returns a new object of class '<em>Class Definition</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Scaled Definition</em>'.
+	 * @return a new object of class '<em>Class Definition</em>'.
 	 * @generated
 	 */
-	ScaledDefinition createScaledDefinition();
-
-	/**
-	 * Returns a new object of class '<em>Type Definition</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Type Definition</em>'.
-	 * @generated
-	 */
-	TypeDefinition createTypeDefinition();
+	ClassDefinition createClassDefinition();
 
 	/**
 	 * Returns a new object of class '<em>Attribute Definition</em>'.
@@ -101,15 +92,6 @@ public interface DefinitionsFactory extends EFactory {
 	 * @generated
 	 */
 	StructuredDataDescription createStructuredDataDescription();
-
-	/**
-	 * Returns a new object of class '<em>Data Type</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Data Type</em>'.
-	 * @generated
-	 */
-	DataType createDataType();
 
 	/**
 	 * Returns a new object of class '<em>Function Definition</em>'.

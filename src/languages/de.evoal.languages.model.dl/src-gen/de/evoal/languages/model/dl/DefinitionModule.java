@@ -5,9 +5,10 @@ package de.evoal.languages.model.dl;
 
 import de.evoal.languages.model.base.Import;
 
+import de.evoal.languages.model.base.definitions.ClassDefinition;
 import de.evoal.languages.model.base.definitions.ConstantDefinition;
+import de.evoal.languages.model.base.definitions.EnumDefinition;
 import de.evoal.languages.model.base.definitions.FunctionDefinition;
-import de.evoal.languages.model.base.definitions.TypeDefinition;
 
 import org.eclipse.emf.common.util.EList;
 
@@ -32,6 +33,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link de.evoal.languages.model.dl.DefinitionModule#getTypes <em>Types</em>}</li>
  *   <li>{@link de.evoal.languages.model.dl.DefinitionModule#getFunctions <em>Functions</em>}</li>
  *   <li>{@link de.evoal.languages.model.dl.DefinitionModule#getConstants <em>Constants</em>}</li>
+ *   <li>{@link de.evoal.languages.model.dl.DefinitionModule#getEnums <em>Enums</em>}</li>
  * </ul>
  *
  * @see de.evoal.languages.model.dl.DlPackage#getDefinitionModule()
@@ -75,7 +77,7 @@ public interface DefinitionModule extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Types</b></em>' containment reference list.
-	 * The list contents are of type {@link de.evoal.languages.model.base.definitions.TypeDefinition}.
+	 * The list contents are of type {@link de.evoal.languages.model.base.definitions.ClassDefinition}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
@@ -86,7 +88,7 @@ public interface DefinitionModule extends EObject {
 	 * @model containment="true" ordered="false"
 	 * @generated
 	 */
-	EList<TypeDefinition> getTypes();
+	EList<ClassDefinition> getTypes();
 
 	/**
 	 * Returns the value of the '<em><b>Functions</b></em>' containment reference list.
@@ -115,5 +117,18 @@ public interface DefinitionModule extends EObject {
 	 * @generated
 	 */
 	EList<ConstantDefinition> getConstants();
+
+	/**
+	 * Returns the value of the '<em><b>Enums</b></em>' containment reference list.
+	 * The list contents are of type {@link de.evoal.languages.model.base.definitions.EnumDefinition}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Enums</em>' containment reference list.
+	 * @see de.evoal.languages.model.dl.DlPackage#getDefinitionModule_Enums()
+	 * @model containment="true" ordered="false"
+	 *        annotation="http://www.eclipse.org/OCL/Collection nullFree='false'"
+	 * @generated
+	 */
+	EList<EnumDefinition> getEnums();
 
 } // DefinitionModule

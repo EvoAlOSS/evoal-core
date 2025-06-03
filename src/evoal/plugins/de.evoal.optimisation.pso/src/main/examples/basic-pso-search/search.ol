@@ -35,10 +35,10 @@ module search {
 		    'inertia-end' := 0.25;
 		    'c1' := 2.05;
 		    'c2' := 2.05;
-		    'boundary-type' := "BOUNCE";
+		    'boundary-type' := 'boundary-handling.bounce';
         };
-        'topology' := "GLOBAL";
-		'initialisation' := 'random-population' {};
+        'topology' := 'topology.global';
+        'initialisation' := 'random-population' {};
 		'comparator' := 'numeric-comparator' {};
 		'optimisation-function' := 'problem-function' {};
 		documenting := [ 'candidates-per-iteration' {} ];

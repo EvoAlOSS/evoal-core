@@ -17,7 +17,7 @@ OptimisationModelRule returns OptimisationModule:
 ;
 
 ProblemRule returns ProblemInstance:
-	"specify" definition=[definitions::TypeDefinition|QualifiedName] name = StringOrId "{"
+	"specify" definition=[definitions::ClassDefinition|QualifiedName] name = StringOrId "{"
 		attributes+=AttributeRule*
 	
 		("documenting" ":=" documentation = ArrayRule ';')?
@@ -25,7 +25,7 @@ ProblemRule returns ProblemInstance:
 ;
 
 AlgorithmInstanceRule returns AlgorithmInstance:
-	"configure" definition=[definitions::TypeDefinition|QualifiedName] "for" problem = [ProblemInstance|QualifiedName] "{"
+	"configure" definition=[definitions::ClassDefinition|QualifiedName] "for" problem = [ProblemInstance|QualifiedName] "{"
 		attributes+=AttributeRule*
 		
 		("documenting" ":=" documentation = ArrayRule ';')?

@@ -38,7 +38,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *
  * @generated
  */
-public class MultiplyDivideModuloExpressionImpl extends ValueImpl implements MultiplyDivideModuloExpression {
+public class MultiplyDivideModuloExpressionImpl extends ReadExpressionImpl implements MultiplyDivideModuloExpression {
 	/**
 	 * The cached value of the '{@link #getLeftOperand() <em>Left Operand</em>}' containment reference.
 	 * <!-- begin-user-doc -->

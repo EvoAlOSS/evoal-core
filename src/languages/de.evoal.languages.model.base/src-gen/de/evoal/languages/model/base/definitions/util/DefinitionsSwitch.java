@@ -79,17 +79,34 @@ public class DefinitionsSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case DefinitionsPackage.TYPE_DEFINITION: {
+				TypeDefinition typeDefinition = (TypeDefinition)theEObject;
+				T result = caseTypeDefinition(typeDefinition);
+				if (result == null) result = caseDefinition(typeDefinition);
+				if (result == null) result = caseConstrained(typeDefinition);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case DefinitionsPackage.LITERAL_DEFINITION: {
+				LiteralDefinition literalDefinition = (LiteralDefinition)theEObject;
+				T result = caseLiteralDefinition(literalDefinition);
+				if (result == null) result = caseDefinition(literalDefinition);
+				if (result == null) result = caseConstrained(literalDefinition);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case DefinitionsPackage.SCALED_DEFINITION: {
 				ScaledDefinition scaledDefinition = (ScaledDefinition)theEObject;
 				T result = caseScaledDefinition(scaledDefinition);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case DefinitionsPackage.TYPE_DEFINITION: {
-				TypeDefinition typeDefinition = (TypeDefinition)theEObject;
-				T result = caseTypeDefinition(typeDefinition);
-				if (result == null) result = caseDefinition(typeDefinition);
-				if (result == null) result = caseConstrained(typeDefinition);
+			case DefinitionsPackage.CLASS_DEFINITION: {
+				ClassDefinition classDefinition = (ClassDefinition)theEObject;
+				T result = caseClassDefinition(classDefinition);
+				if (result == null) result = caseTypeDefinition(classDefinition);
+				if (result == null) result = caseDefinition(classDefinition);
+				if (result == null) result = caseConstrained(classDefinition);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -104,6 +121,7 @@ public class DefinitionsSwitch<T> extends Switch<T> {
 			case DefinitionsPackage.ENUM_LITERAL_DEFINITION: {
 				EnumLiteralDefinition enumLiteralDefinition = (EnumLiteralDefinition)theEObject;
 				T result = caseEnumLiteralDefinition(enumLiteralDefinition);
+				if (result == null) result = caseLiteralDefinition(enumLiteralDefinition);
 				if (result == null) result = caseDefinition(enumLiteralDefinition);
 				if (result == null) result = caseConstrained(enumLiteralDefinition);
 				if (result == null) result = defaultCase(theEObject);
@@ -112,8 +130,9 @@ public class DefinitionsSwitch<T> extends Switch<T> {
 			case DefinitionsPackage.ENUM_DEFINITION: {
 				EnumDefinition enumDefinition = (EnumDefinition)theEObject;
 				T result = caseEnumDefinition(enumDefinition);
-				if (result == null) result = caseDefinition(enumDefinition);
+				if (result == null) result = caseTypeDefinition(enumDefinition);
 				if (result == null) result = caseScaledDefinition(enumDefinition);
+				if (result == null) result = caseDefinition(enumDefinition);
 				if (result == null) result = caseConstrained(enumDefinition);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -121,6 +140,7 @@ public class DefinitionsSwitch<T> extends Switch<T> {
 			case DefinitionsPackage.DATA_TYPE_DEFINITION: {
 				DataTypeDefinition dataTypeDefinition = (DataTypeDefinition)theEObject;
 				T result = caseDataTypeDefinition(dataTypeDefinition);
+				if (result == null) result = caseTypeDefinition(dataTypeDefinition);
 				if (result == null) result = caseDefinition(dataTypeDefinition);
 				if (result == null) result = caseConstrained(dataTypeDefinition);
 				if (result == null) result = defaultCase(theEObject);
@@ -131,6 +151,7 @@ public class DefinitionsSwitch<T> extends Switch<T> {
 				T result = caseDataTypeTypeDefinition(dataTypeTypeDefinition);
 				if (result == null) result = caseDataTypeDefinition(dataTypeTypeDefinition);
 				if (result == null) result = caseScaledDefinition(dataTypeTypeDefinition);
+				if (result == null) result = caseTypeDefinition(dataTypeTypeDefinition);
 				if (result == null) result = caseDefinition(dataTypeTypeDefinition);
 				if (result == null) result = caseConstrained(dataTypeTypeDefinition);
 				if (result == null) result = defaultCase(theEObject);
@@ -140,6 +161,7 @@ public class DefinitionsSwitch<T> extends Switch<T> {
 				DataDescription dataDescription = (DataDescription)theEObject;
 				T result = caseDataDescription(dataDescription);
 				if (result == null) result = caseDataTypeDefinition(dataDescription);
+				if (result == null) result = caseTypeDefinition(dataDescription);
 				if (result == null) result = caseDefinition(dataDescription);
 				if (result == null) result = caseConstrained(dataDescription);
 				if (result == null) result = defaultCase(theEObject);
@@ -150,6 +172,7 @@ public class DefinitionsSwitch<T> extends Switch<T> {
 				T result = caseBaseDataDescription(baseDataDescription);
 				if (result == null) result = caseDataDescription(baseDataDescription);
 				if (result == null) result = caseDataTypeDefinition(baseDataDescription);
+				if (result == null) result = caseTypeDefinition(baseDataDescription);
 				if (result == null) result = caseDefinition(baseDataDescription);
 				if (result == null) result = caseConstrained(baseDataDescription);
 				if (result == null) result = defaultCase(theEObject);
@@ -161,6 +184,7 @@ public class DefinitionsSwitch<T> extends Switch<T> {
 				if (result == null) result = caseBaseDataDescription(typedBaseDataDescription);
 				if (result == null) result = caseDataDescription(typedBaseDataDescription);
 				if (result == null) result = caseDataTypeDefinition(typedBaseDataDescription);
+				if (result == null) result = caseTypeDefinition(typedBaseDataDescription);
 				if (result == null) result = caseDefinition(typedBaseDataDescription);
 				if (result == null) result = caseConstrained(typedBaseDataDescription);
 				if (result == null) result = defaultCase(theEObject);
@@ -173,6 +197,7 @@ public class DefinitionsSwitch<T> extends Switch<T> {
 				if (result == null) result = caseScaledDefinition(untypedBaseDataDescription);
 				if (result == null) result = caseDataDescription(untypedBaseDataDescription);
 				if (result == null) result = caseDataTypeDefinition(untypedBaseDataDescription);
+				if (result == null) result = caseTypeDefinition(untypedBaseDataDescription);
 				if (result == null) result = caseDefinition(untypedBaseDataDescription);
 				if (result == null) result = caseConstrained(untypedBaseDataDescription);
 				if (result == null) result = defaultCase(theEObject);
@@ -183,14 +208,9 @@ public class DefinitionsSwitch<T> extends Switch<T> {
 				T result = caseStructuredDataDescription(structuredDataDescription);
 				if (result == null) result = caseDataDescription(structuredDataDescription);
 				if (result == null) result = caseDataTypeDefinition(structuredDataDescription);
+				if (result == null) result = caseTypeDefinition(structuredDataDescription);
 				if (result == null) result = caseDefinition(structuredDataDescription);
 				if (result == null) result = caseConstrained(structuredDataDescription);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case DefinitionsPackage.DATA_TYPE: {
-				DataType dataType = (DataType)theEObject;
-				T result = caseDataType(dataType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -213,6 +233,7 @@ public class DefinitionsSwitch<T> extends Switch<T> {
 			case DefinitionsPackage.CONSTANT_DEFINITION: {
 				ConstantDefinition constantDefinition = (ConstantDefinition)theEObject;
 				T result = caseConstantDefinition(constantDefinition);
+				if (result == null) result = caseLiteralDefinition(constantDefinition);
 				if (result == null) result = caseDefinition(constantDefinition);
 				if (result == null) result = caseConstrained(constantDefinition);
 				if (result == null) result = defaultCase(theEObject);
@@ -266,6 +287,36 @@ public class DefinitionsSwitch<T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Type Definition</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Type Definition</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTypeDefinition(TypeDefinition object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Literal Definition</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Literal Definition</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseLiteralDefinition(LiteralDefinition object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Scaled Definition</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -281,17 +332,17 @@ public class DefinitionsSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Type Definition</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Class Definition</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Type Definition</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Class Definition</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseTypeDefinition(TypeDefinition object) {
+	public T caseClassDefinition(ClassDefinition object) {
 		return null;
 	}
 
@@ -442,21 +493,6 @@ public class DefinitionsSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseStructuredDataDescription(StructuredDataDescription object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Data Type</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Data Type</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseDataType(DataType object) {
 		return null;
 	}
 

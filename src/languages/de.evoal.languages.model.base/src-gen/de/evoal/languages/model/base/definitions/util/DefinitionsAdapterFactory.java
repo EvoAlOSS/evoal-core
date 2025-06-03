@@ -76,12 +76,20 @@ public class DefinitionsAdapterFactory extends AdapterFactoryImpl {
 				return createDefinitionAdapter();
 			}
 			@Override
+			public Adapter caseTypeDefinition(TypeDefinition object) {
+				return createTypeDefinitionAdapter();
+			}
+			@Override
+			public Adapter caseLiteralDefinition(LiteralDefinition object) {
+				return createLiteralDefinitionAdapter();
+			}
+			@Override
 			public Adapter caseScaledDefinition(ScaledDefinition object) {
 				return createScaledDefinitionAdapter();
 			}
 			@Override
-			public Adapter caseTypeDefinition(TypeDefinition object) {
-				return createTypeDefinitionAdapter();
+			public Adapter caseClassDefinition(ClassDefinition object) {
+				return createClassDefinitionAdapter();
 			}
 			@Override
 			public Adapter caseAttributeDefinition(AttributeDefinition object) {
@@ -122,10 +130,6 @@ public class DefinitionsAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseStructuredDataDescription(StructuredDataDescription object) {
 				return createStructuredDataDescriptionAdapter();
-			}
-			@Override
-			public Adapter caseDataType(DataType object) {
-				return createDataTypeAdapter();
 			}
 			@Override
 			public Adapter caseFunctionDefinition(FunctionDefinition object) {
@@ -196,6 +200,34 @@ public class DefinitionsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.definitions.TypeDefinition <em>Type Definition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.evoal.languages.model.base.definitions.TypeDefinition
+	 * @generated
+	 */
+	public Adapter createTypeDefinitionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.definitions.LiteralDefinition <em>Literal Definition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.evoal.languages.model.base.definitions.LiteralDefinition
+	 * @generated
+	 */
+	public Adapter createLiteralDefinitionAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.definitions.ScaledDefinition <em>Scaled Definition</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -210,16 +242,16 @@ public class DefinitionsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.definitions.TypeDefinition <em>Type Definition</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.definitions.ClassDefinition <em>Class Definition</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.evoal.languages.model.base.definitions.TypeDefinition
+	 * @see de.evoal.languages.model.base.definitions.ClassDefinition
 	 * @generated
 	 */
-	public Adapter createTypeDefinitionAdapter() {
+	public Adapter createClassDefinitionAdapter() {
 		return null;
 	}
 
@@ -360,20 +392,6 @@ public class DefinitionsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createStructuredDataDescriptionAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.definitions.DataType <em>Data Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.evoal.languages.model.base.definitions.DataType
-	 * @generated
-	 */
-	public Adapter createDataTypeAdapter() {
 		return null;
 	}
 

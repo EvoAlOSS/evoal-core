@@ -14,8 +14,8 @@ import de.evoal.languages.model.base.types.ArrayType;
 import de.evoal.languages.model.base.types.BaseType;
 import de.evoal.languages.model.base.types.BooleanType;
 import de.evoal.languages.model.base.types.DataType;
+import de.evoal.languages.model.base.types.DefinitionReference;
 import de.evoal.languages.model.base.types.ExpressionType;
-import de.evoal.languages.model.base.types.InstanceType;
 import de.evoal.languages.model.base.types.IntType;
 import de.evoal.languages.model.base.types.LiteralType;
 import de.evoal.languages.model.base.types.RealType;
@@ -44,13 +44,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * @generated
 	 */
 	private EClass typeEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass instanceTypeEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -121,6 +114,13 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * @generated
 	 */
 	private EClass dataTypeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass definitionReferenceEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -200,26 +200,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	@Override
 	public EClass getType() {
 		return typeEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getInstanceType() {
-		return instanceTypeEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getInstanceType_Definition() {
-		return (EReference)instanceTypeEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -338,6 +318,26 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * @generated
 	 */
 	@Override
+	public EClass getDefinitionReference() {
+		return definitionReferenceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getDefinitionReference_Definition() {
+		return (EReference)definitionReferenceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public TypesFactory getTypesFactory() {
 		return (TypesFactory)getEFactoryInstance();
 	}
@@ -363,9 +363,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		// Create classes and their features
 		typeEClass = createEClass(TYPE);
 
-		instanceTypeEClass = createEClass(INSTANCE_TYPE);
-		createEReference(instanceTypeEClass, INSTANCE_TYPE__DEFINITION);
-
 		baseTypeEClass = createEClass(BASE_TYPE);
 
 		stringTypeEClass = createEClass(STRING_TYPE);
@@ -386,6 +383,9 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		literalTypeEClass = createEClass(LITERAL_TYPE);
 
 		dataTypeEClass = createEClass(DATA_TYPE);
+
+		definitionReferenceEClass = createEClass(DEFINITION_REFERENCE);
+		createEReference(definitionReferenceEClass, DEFINITION_REFERENCE__DEFINITION);
 	}
 
 	/**
@@ -419,7 +419,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
-		instanceTypeEClass.getESuperTypes().add(this.getType());
 		baseTypeEClass.getESuperTypes().add(this.getType());
 		stringTypeEClass.getESuperTypes().add(this.getBaseType());
 		intTypeEClass.getESuperTypes().add(this.getBaseType());
@@ -430,12 +429,10 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		expressionTypeEClass.getESuperTypes().add(this.getType());
 		literalTypeEClass.getESuperTypes().add(this.getType());
 		dataTypeEClass.getESuperTypes().add(this.getType());
+		definitionReferenceEClass.getESuperTypes().add(this.getType());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(typeEClass, Type.class, "Type", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(instanceTypeEClass, InstanceType.class, "InstanceType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getInstanceType_Definition(), theDefinitionsPackage.getTypeDefinition(), null, "definition", null, 1, 1, InstanceType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(baseTypeEClass, BaseType.class, "BaseType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -457,6 +454,9 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		initEClass(literalTypeEClass, LiteralType.class, "LiteralType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(dataTypeEClass, DataType.class, "DataType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(definitionReferenceEClass, DefinitionReference.class, "DefinitionReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getDefinitionReference_Definition(), theDefinitionsPackage.getDefinition(), null, "definition", null, 1, 1, DefinitionReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

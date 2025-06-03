@@ -4,6 +4,7 @@ import de.evoal.languages.model.base.definitions.*;
 import de.evoal.languages.model.base.expressions.*;
 import de.evoal.languages.model.base.types.*;
 import de.evoal.languages.model.base.types.DataType;
+import de.evoal.languages.model.base.types.DefinitionReference;
 import de.evoal.languages.model.interpreter.ConstantEvaluator;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.emf.ecore.EObject;
@@ -122,10 +123,26 @@ public class AttributeEvaluator {
                 .toArray(double[][]::new);
     }
 
-    public Instance attributeToInstance(final Instance instance, final String attributeName) {
+    public Object attributeTo(final Instance instance, final String attributeName) {
         final Object result = attributeToObject(instance, attributeName);
 
-        if(!(result instanceof Instance)) {
+        if(result instanceof Instance
+            || result instanceof EnumLiteralDefinition) {
+            // nothing to do
+        } else {
+            log.error("Expression did not evaluate to an Instance or EnumLiteral for attribute {} which was expected.", attributeName);
+            throw new IllegalStateException("Expression evaluation error. Please check your configuration.");
+        }
+
+        return result;
+    }
+
+    public Instance attributeToInstance(final Instance instance, final String attributeName) {
+        final Object result = attributeTo(instance, attributeName);
+
+        if(result instanceof Instance) {
+            // nothing to do
+        } else {
             log.error("Expression did not evaluate to an Instance for attribute {} which was expected.", attributeName);
             throw new IllegalStateException("Expression evaluation error. Please check your configuration.");
         }
@@ -222,8 +239,8 @@ public class AttributeEvaluator {
             return attributeToInteger(instance, name);
         } else if(target instanceof BooleanType) {
             return attributeToBoolean(instance, name);
-        } else if(target instanceof InstanceType) {
-            return attributeToInstance(instance, name);
+        } else if(target instanceof DefinitionReference) {
+            return attributeTo(instance, name);
         } else if(target instanceof ArrayType aType) {
             return attributeToObject(instance, name);
         } else {
@@ -243,7 +260,7 @@ public class AttributeEvaluator {
     private Object convertToJava(final Object current, final Type type) {
         log.info("Converting {} to {}", current, type);
 
-        if((type instanceof InstanceType || type instanceof DataType) && current instanceof OrExpression) {
+        if((type instanceof DefinitionReference || type instanceof DataType) && current instanceof OrExpression) {
             return evaluate(current);
         } else if(type instanceof LiteralType) {
             if(!(current instanceof EObject)) {

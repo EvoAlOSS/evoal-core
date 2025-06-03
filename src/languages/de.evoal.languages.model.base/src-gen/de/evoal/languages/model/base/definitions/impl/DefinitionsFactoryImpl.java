@@ -57,8 +57,7 @@ public class DefinitionsFactoryImpl extends EFactoryImpl implements DefinitionsF
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case DefinitionsPackage.SCALED_DEFINITION: return createScaledDefinition();
-			case DefinitionsPackage.TYPE_DEFINITION: return createTypeDefinition();
+			case DefinitionsPackage.CLASS_DEFINITION: return createClassDefinition();
 			case DefinitionsPackage.ATTRIBUTE_DEFINITION: return createAttributeDefinition();
 			case DefinitionsPackage.ENUM_LITERAL_DEFINITION: return createEnumLiteralDefinition();
 			case DefinitionsPackage.ENUM_DEFINITION: return createEnumDefinition();
@@ -66,7 +65,6 @@ public class DefinitionsFactoryImpl extends EFactoryImpl implements DefinitionsF
 			case DefinitionsPackage.TYPED_BASE_DATA_DESCRIPTION: return createTypedBaseDataDescription();
 			case DefinitionsPackage.UNTYPED_BASE_DATA_DESCRIPTION: return createUntypedBaseDataDescription();
 			case DefinitionsPackage.STRUCTURED_DATA_DESCRIPTION: return createStructuredDataDescription();
-			case DefinitionsPackage.DATA_TYPE: return createDataType();
 			case DefinitionsPackage.FUNCTION_DEFINITION: return createFunctionDefinition();
 			case DefinitionsPackage.PARAMETER: return createParameter();
 			case DefinitionsPackage.CONSTANT_DEFINITION: return createConstantDefinition();
@@ -117,20 +115,9 @@ public class DefinitionsFactoryImpl extends EFactoryImpl implements DefinitionsF
 	 * @generated
 	 */
 	@Override
-	public ScaledDefinition createScaledDefinition() {
-		ScaledDefinitionImpl scaledDefinition = new ScaledDefinitionImpl();
-		return scaledDefinition;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public TypeDefinition createTypeDefinition() {
-		TypeDefinitionImpl typeDefinition = new TypeDefinitionImpl();
-		return typeDefinition;
+	public ClassDefinition createClassDefinition() {
+		ClassDefinitionImpl classDefinition = new ClassDefinitionImpl();
+		return classDefinition;
 	}
 
 	/**
@@ -208,17 +195,6 @@ public class DefinitionsFactoryImpl extends EFactoryImpl implements DefinitionsF
 	public StructuredDataDescription createStructuredDataDescription() {
 		StructuredDataDescriptionImpl structuredDataDescription = new StructuredDataDescriptionImpl();
 		return structuredDataDescription;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public DataType createDataType() {
-		DataTypeImpl dataType = new DataTypeImpl();
-		return dataType;
 	}
 
 	/**

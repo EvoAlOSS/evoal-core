@@ -31,7 +31,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *
  * @generated
  */
-public class ConstantDefinitionImpl extends DefinitionImpl implements ConstantDefinition {
+public class ConstantDefinitionImpl extends LiteralDefinitionImpl implements ConstantDefinition {
 	/**
 	 * The cached value of the '{@link #getType() <em>Type</em>}' containment reference.
 	 * <!-- begin-user-doc -->

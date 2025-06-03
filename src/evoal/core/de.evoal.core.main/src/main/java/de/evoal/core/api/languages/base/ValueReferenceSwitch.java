@@ -118,7 +118,7 @@ public class ValueReferenceSwitch extends ExpressionsSwitch<String> {
             return context.getName();
         }
 
-        if(!(object instanceof final DataReference reference)) {
+        if(!(object instanceof final DefinitionReference reference)) {
             throw new IllegalStateException("Value reference is not a data reference.");
         }
 

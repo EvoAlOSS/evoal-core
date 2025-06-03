@@ -4,9 +4,9 @@ import de.evoal.core.interpreter.api.cdi.EvoalBuiltinFunction;
 import de.evoal.core.interpreter.api.cdi.FunctionFactory;
 import de.evoal.core.interpreter.impl.LiteralSwitch;
 import de.evoal.languages.model.base.definitions.FunctionDefinition;
-import de.evoal.languages.model.base.expressions.ConstantValue;
+import de.evoal.languages.model.base.expressions.DefinitionReference;
 import de.evoal.languages.model.base.expressions.Expression;
-import de.evoal.languages.model.base.expressions.Value;
+import de.evoal.languages.model.base.expressions.ReadExpression;
 import de.evoal.languages.model.base.expressions.ValueReference;
 import de.evoal.languages.model.execution.*;
 import de.evoal.languages.model.execution.util.ExecutionSwitch;
@@ -81,11 +81,6 @@ public class ProgramExecutionSwitch extends ExecutionSwitch<Object> {
     }
 
     @Override
-    public Object caseValue(Value object) {
-        return super.caseValue(object);
-    }
-
-    @Override
     public Object caseExpression(Expression object) {
         return super.caseExpression(object);
     }
@@ -93,11 +88,6 @@ public class ProgramExecutionSwitch extends ExecutionSwitch<Object> {
     @Override
     public Object caseValueReference(ValueReference object) {
         return super.caseValueReference(object);
-    }
-
-    @Override
-    public Object caseConstantValue(ConstantValue object) {
-        return super.caseConstantValue(object);
     }
 
     @Override

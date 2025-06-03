@@ -20,8 +20,8 @@ import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import com.google.common.base.Predicate;
 
 import de.evoal.languages.model.base.definitions.AttributeDefinition;
-import de.evoal.languages.model.base.definitions.TypeDefinition;
 import de.evoal.languages.model.base.expressions.Attribute;
+import de.evoal.languages.model.base.definitions.ClassDefinition;
 import de.evoal.languages.model.base.expressions.Instance;
 
 
@@ -74,10 +74,10 @@ public class InstanceLanguageProposalProvider extends AbstractInstanceLanguagePr
 					
 					final AttributeDefinition def = (AttributeDefinition)description.getEObjectOrProxy();
 					
-					return isSubtypeOf(instance.getDefinition(), (TypeDefinition)def.eContainer());
+					return isSubtypeOf(instance.getDefinition(), (ClassDefinition)def.eContainer());
 				}
 
-				private static boolean isSubtypeOf(final TypeDefinition subType, final TypeDefinition superType) {
+				private static boolean isSubtypeOf(final ClassDefinition subType, final ClassDefinition superType) {
 					if(subType == null) {
 						return false;
 					}

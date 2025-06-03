@@ -62,7 +62,7 @@ public class ArraySizeMutator<A extends Comparable<? super A>> extends EvoAlMuta
                 final int elementIndex = generator.nextInt(0, array.getValues().size() + 1);
 
                 log.info("Adding a new child to array at position {}", elementIndex);
-                final Value newChild = mc.builder().random("", ((ArrayType)attribute.getDefinition().getType()).getElements());
+                final ReadExpression newChild = mc.builder().random("", ((ArrayType)attribute.getDefinition().getType()).getElements());
                 if(elementIndex == array.getValues().size()) {
                     array.getValues().add(newChild);
                 } else {

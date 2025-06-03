@@ -4,8 +4,8 @@ package de.evoal.languages.model.base.expressions.impl;
 
 import de.evoal.languages.model.base.expressions.AddOrSubtractOperator;
 import de.evoal.languages.model.base.expressions.ExpressionsPackage;
+import de.evoal.languages.model.base.expressions.ReadExpression;
 import de.evoal.languages.model.base.expressions.UnaryAddOrSubtractExpression;
-import de.evoal.languages.model.base.expressions.Value;
 
 import java.util.Collection;
 
@@ -35,7 +35,7 @@ import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
  *
  * @generated
  */
-public class UnaryAddOrSubtractExpressionImpl extends ValueImpl implements UnaryAddOrSubtractExpression {
+public class UnaryAddOrSubtractExpressionImpl extends ReadExpressionImpl implements UnaryAddOrSubtractExpression {
 	/**
 	 * The cached value of the '{@link #getOperators() <em>Operators</em>}' attribute list.
 	 * <!-- begin-user-doc -->
@@ -54,7 +54,7 @@ public class UnaryAddOrSubtractExpressionImpl extends ValueImpl implements Unary
 	 * @generated
 	 * @ordered
 	 */
-	protected Value subExpression;
+	protected ReadExpression subExpression;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -94,7 +94,7 @@ public class UnaryAddOrSubtractExpressionImpl extends ValueImpl implements Unary
 	 * @generated
 	 */
 	@Override
-	public Value getSubExpression() {
+	public ReadExpression getSubExpression() {
 		return subExpression;
 	}
 
@@ -103,8 +103,8 @@ public class UnaryAddOrSubtractExpressionImpl extends ValueImpl implements Unary
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetSubExpression(Value newSubExpression, NotificationChain msgs) {
-		Value oldSubExpression = subExpression;
+	public NotificationChain basicSetSubExpression(ReadExpression newSubExpression, NotificationChain msgs) {
+		ReadExpression oldSubExpression = subExpression;
 		subExpression = newSubExpression;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ExpressionsPackage.UNARY_ADD_OR_SUBTRACT_EXPRESSION__SUB_EXPRESSION, oldSubExpression, newSubExpression);
@@ -119,7 +119,7 @@ public class UnaryAddOrSubtractExpressionImpl extends ValueImpl implements Unary
 	 * @generated
 	 */
 	@Override
-	public void setSubExpression(Value newSubExpression) {
+	public void setSubExpression(ReadExpression newSubExpression) {
 		if (newSubExpression != subExpression) {
 			NotificationChain msgs = null;
 			if (subExpression != null)
@@ -177,7 +177,7 @@ public class UnaryAddOrSubtractExpressionImpl extends ValueImpl implements Unary
 				getOperators().addAll((Collection<? extends AddOrSubtractOperator>)newValue);
 				return;
 			case ExpressionsPackage.UNARY_ADD_OR_SUBTRACT_EXPRESSION__SUB_EXPRESSION:
-				setSubExpression((Value)newValue);
+				setSubExpression((ReadExpression)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -195,7 +195,7 @@ public class UnaryAddOrSubtractExpressionImpl extends ValueImpl implements Unary
 				getOperators().clear();
 				return;
 			case ExpressionsPackage.UNARY_ADD_OR_SUBTRACT_EXPRESSION__SUB_EXPRESSION:
-				setSubExpression((Value)null);
+				setSubExpression((ReadExpression)null);
 				return;
 		}
 		super.eUnset(featureID);

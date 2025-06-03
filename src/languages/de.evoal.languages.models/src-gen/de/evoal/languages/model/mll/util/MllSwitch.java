@@ -2,12 +2,11 @@
  */
 package de.evoal.languages.model.mll.util;
 
-import de.evoal.languages.model.base.expressions.ConstantValue;
+import de.evoal.languages.model.base.expressions.ConstantExpression;
 import de.evoal.languages.model.base.expressions.Expression;
 import de.evoal.languages.model.base.expressions.Instance;
 import de.evoal.languages.model.base.expressions.Literal;
-import de.evoal.languages.model.base.expressions.Value;
-
+import de.evoal.languages.model.base.expressions.ReadExpression;
 import de.evoal.languages.model.execution.NamedVariable;
 import de.evoal.languages.model.execution.Statement;
 import de.evoal.languages.model.execution.Variable;
@@ -93,8 +92,8 @@ public class MllSwitch<T> extends Switch<T> {
 				T result = casePartialSurrogateFunctionDefinition(partialSurrogateFunctionDefinition);
 				if (result == null) result = caseInstance(partialSurrogateFunctionDefinition);
 				if (result == null) result = caseLiteral(partialSurrogateFunctionDefinition);
-				if (result == null) result = caseConstantValue(partialSurrogateFunctionDefinition);
-				if (result == null) result = caseValue(partialSurrogateFunctionDefinition);
+				if (result == null) result = caseConstantExpression(partialSurrogateFunctionDefinition);
+				if (result == null) result = caseReadExpression(partialSurrogateFunctionDefinition);
 				if (result == null) result = caseExpression(partialSurrogateFunctionDefinition);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -216,32 +215,32 @@ public class MllSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Value</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Read Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Value</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Read Expression</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseValue(Value object) {
+	public T caseReadExpression(ReadExpression object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Constant Value</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Constant Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Constant Value</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Constant Expression</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseConstantValue(ConstantValue object) {
+	public T caseConstantExpression(ConstantExpression object) {
 		return null;
 	}
 

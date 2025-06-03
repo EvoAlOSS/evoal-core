@@ -8,7 +8,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.evoal.languages.model.base.definitions.ConstantDefinition;
-import de.evoal.languages.model.base.expressions.ConstantReference;
+import de.evoal.languages.model.base.expressions.DefinitionReference;
+import de.evoal.languages.model.base.expressions.LiteralDefinitionReference;
 
 
 public class ConstantEvaluator extends AbstractExpressionEvaluator {
@@ -28,9 +29,15 @@ public class ConstantEvaluator extends AbstractExpressionEvaluator {
 		setConstantEvaluator(this);
 	}
 	
+	
+	
 	@Override
-	public Object caseConstantReference(final ConstantReference object) {
-		final ConstantDefinition definition = object.getDefinition();
+	public Object caseLiteralDefinitionReference(final LiteralDefinitionReference object) {
+		if(!(object.getDefinition() instanceof ConstantDefinition)) {
+			return super.caseLiteralDefinitionReference(object);
+		}
+
+		final ConstantDefinition definition = (ConstantDefinition)object.getDefinition();
 
 		if(definition == null) {
 			log.warn("Definition of constant is null.");
@@ -47,8 +54,13 @@ public class ConstantEvaluator extends AbstractExpressionEvaluator {
 		return value;
 	}
 
-	public Object evaluate(final ConstantReference object) {
-		final ConstantDefinition definition = object.getDefinition();
+	public Object evaluate(final LiteralDefinitionReference object) {
+		if(!(object.getDefinition() instanceof ConstantDefinition)) {
+			log.warn("Not a definition reference. Returning null.");
+			return null;
+		}
+
+		final ConstantDefinition definition = (ConstantDefinition)object.getDefinition();
 
 		if(definition == null) {
 			log.warn("Definition of constant is null.");

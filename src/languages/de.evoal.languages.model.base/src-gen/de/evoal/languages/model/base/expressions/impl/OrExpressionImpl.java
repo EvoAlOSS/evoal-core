@@ -31,7 +31,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *
  * @generated
  */
-public class OrExpressionImpl extends ValueImpl implements OrExpression {
+public class OrExpressionImpl extends ReadExpressionImpl implements OrExpression {
 	/**
 	 * The cached value of the '{@link #getSubExpressions() <em>Sub Expressions</em>}' containment reference list.
 	 * <!-- begin-user-doc -->

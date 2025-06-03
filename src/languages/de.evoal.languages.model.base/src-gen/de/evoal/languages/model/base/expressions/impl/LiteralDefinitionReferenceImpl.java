@@ -2,10 +2,10 @@
  */
 package de.evoal.languages.model.base.expressions.impl;
 
-import de.evoal.languages.model.base.definitions.ConstantDefinition;
+import de.evoal.languages.model.base.definitions.LiteralDefinition;
 
-import de.evoal.languages.model.base.expressions.ConstantReference;
 import de.evoal.languages.model.base.expressions.ExpressionsPackage;
+import de.evoal.languages.model.base.expressions.LiteralDefinitionReference;
 
 import org.eclipse.emf.common.notify.Notification;
 
@@ -16,18 +16,18 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Constant Reference</b></em>'.
+ * An implementation of the model object '<em><b>Literal Definition Reference</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link de.evoal.languages.model.base.expressions.impl.ConstantReferenceImpl#getDefinition <em>Definition</em>}</li>
+ *   <li>{@link de.evoal.languages.model.base.expressions.impl.LiteralDefinitionReferenceImpl#getDefinition <em>Definition</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class ConstantReferenceImpl extends ValueReferenceImpl implements ConstantReference {
+public class LiteralDefinitionReferenceImpl extends ValueReferenceImpl implements LiteralDefinitionReference {
 	/**
 	 * The cached value of the '{@link #getDefinition() <em>Definition</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -36,13 +36,14 @@ public class ConstantReferenceImpl extends ValueReferenceImpl implements Constan
 	 * @generated
 	 * @ordered
 	 */
-	protected ConstantDefinition definition;
+	protected LiteralDefinition definition;
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ConstantReferenceImpl() {
+	protected LiteralDefinitionReferenceImpl() {
 		super();
 	}
 
@@ -53,7 +54,7 @@ public class ConstantReferenceImpl extends ValueReferenceImpl implements Constan
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return ExpressionsPackage.Literals.CONSTANT_REFERENCE;
+		return ExpressionsPackage.Literals.LITERAL_DEFINITION_REFERENCE;
 	}
 
 	/**
@@ -62,13 +63,13 @@ public class ConstantReferenceImpl extends ValueReferenceImpl implements Constan
 	 * @generated
 	 */
 	@Override
-	public ConstantDefinition getDefinition() {
+	public LiteralDefinition getDefinition() {
 		if (definition != null && definition.eIsProxy()) {
 			InternalEObject oldDefinition = (InternalEObject)definition;
-			definition = (ConstantDefinition)eResolveProxy(oldDefinition);
+			definition = (LiteralDefinition)eResolveProxy(oldDefinition);
 			if (definition != oldDefinition) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExpressionsPackage.CONSTANT_REFERENCE__DEFINITION, oldDefinition, definition));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExpressionsPackage.LITERAL_DEFINITION_REFERENCE__DEFINITION, oldDefinition, definition));
 			}
 		}
 		return definition;
@@ -79,7 +80,7 @@ public class ConstantReferenceImpl extends ValueReferenceImpl implements Constan
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ConstantDefinition basicGetDefinition() {
+	public LiteralDefinition basicGetDefinition() {
 		return definition;
 	}
 
@@ -89,11 +90,11 @@ public class ConstantReferenceImpl extends ValueReferenceImpl implements Constan
 	 * @generated
 	 */
 	@Override
-	public void setDefinition(ConstantDefinition newDefinition) {
-		ConstantDefinition oldDefinition = definition;
+	public void setDefinition(LiteralDefinition newDefinition) {
+		LiteralDefinition oldDefinition = definition;
 		definition = newDefinition;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExpressionsPackage.CONSTANT_REFERENCE__DEFINITION, oldDefinition, definition));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExpressionsPackage.LITERAL_DEFINITION_REFERENCE__DEFINITION, oldDefinition, definition));
 	}
 
 	/**
@@ -104,7 +105,7 @@ public class ConstantReferenceImpl extends ValueReferenceImpl implements Constan
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ExpressionsPackage.CONSTANT_REFERENCE__DEFINITION:
+			case ExpressionsPackage.LITERAL_DEFINITION_REFERENCE__DEFINITION:
 				if (resolve) return getDefinition();
 				return basicGetDefinition();
 		}
@@ -119,8 +120,8 @@ public class ConstantReferenceImpl extends ValueReferenceImpl implements Constan
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ExpressionsPackage.CONSTANT_REFERENCE__DEFINITION:
-				setDefinition((ConstantDefinition)newValue);
+			case ExpressionsPackage.LITERAL_DEFINITION_REFERENCE__DEFINITION:
+				setDefinition((LiteralDefinition)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -134,8 +135,8 @@ public class ConstantReferenceImpl extends ValueReferenceImpl implements Constan
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ExpressionsPackage.CONSTANT_REFERENCE__DEFINITION:
-				setDefinition((ConstantDefinition)null);
+			case ExpressionsPackage.LITERAL_DEFINITION_REFERENCE__DEFINITION:
+				setDefinition((LiteralDefinition)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -149,10 +150,10 @@ public class ConstantReferenceImpl extends ValueReferenceImpl implements Constan
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ExpressionsPackage.CONSTANT_REFERENCE__DEFINITION:
+			case ExpressionsPackage.LITERAL_DEFINITION_REFERENCE__DEFINITION:
 				return definition != null;
 		}
 		return super.eIsSet(featureID);
 	}
 
-} //ConstantReferenceImpl
+} //LiteralDefinitionReferenceImpl

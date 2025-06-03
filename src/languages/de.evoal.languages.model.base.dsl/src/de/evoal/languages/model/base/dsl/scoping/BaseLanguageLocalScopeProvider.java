@@ -10,8 +10,8 @@ import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.Scopes;
 
 import de.evoal.languages.model.base.definitions.AttributeDefinition;
+import de.evoal.languages.model.base.definitions.ClassDefinition;
 import de.evoal.languages.model.base.expressions.Instance;
-import de.evoal.languages.model.base.definitions.TypeDefinition;
 import de.evoal.languages.model.base.expressions.ExpressionsPackage;
 import de.evoal.languages.model.utils.scoping.WildcardEnabledLocalScopeProvider;
 
@@ -38,9 +38,9 @@ public class BaseLanguageLocalScopeProvider extends WildcardEnabledLocalScopePro
 		return super.getScope(context, reference);
 	}
 
-	private IScope scopeOf(final TypeDefinition definition) {
+	private IScope scopeOf(final ClassDefinition definition) {
 		List<AttributeDefinition> attributes = new LinkedList<>();
-		TypeDefinition current = definition;
+		ClassDefinition current = definition;
 		
 		while(current != null) {
 			attributes.addAll(current.getAttributes());

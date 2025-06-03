@@ -14,7 +14,7 @@ import org.eclipse.emf.ecore.EClass;
  *
  * @generated
  */
-public abstract class DataTypeDefinitionImpl extends DefinitionImpl implements DataTypeDefinition {
+public abstract class DataTypeDefinitionImpl extends TypeDefinitionImpl implements DataTypeDefinition {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

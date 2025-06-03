@@ -20,7 +20,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface AndExpression extends Value {
+public interface AndExpression extends ReadExpression {
 	/**
 	 * Returns the value of the '<em><b>Sub Expressions</b></em>' containment reference list.
 	 * The list contents are of type {@link de.evoal.languages.model.base.expressions.NotExpression}.

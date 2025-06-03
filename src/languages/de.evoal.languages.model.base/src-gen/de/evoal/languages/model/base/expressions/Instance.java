@@ -2,7 +2,7 @@
  */
 package de.evoal.languages.model.base.expressions;
 
-import de.evoal.languages.model.base.definitions.TypeDefinition;
+import de.evoal.languages.model.base.definitions.ClassDefinition;
 import org.eclipse.emf.common.util.EList;
 
 /**
@@ -28,12 +28,12 @@ public interface Instance extends Literal {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Definition</em>' reference.
-	 * @see #setDefinition(TypeDefinition)
+	 * @see #setDefinition(ClassDefinition)
 	 * @see de.evoal.languages.model.base.expressions.ExpressionsPackage#getInstance_Definition()
 	 * @model required="true"
 	 * @generated
 	 */
-	TypeDefinition getDefinition();
+	ClassDefinition getDefinition();
 
 	/**
 	 * Sets the value of the '{@link de.evoal.languages.model.base.expressions.Instance#getDefinition <em>Definition</em>}' reference.
@@ -43,7 +43,7 @@ public interface Instance extends Literal {
 	 * @see #getDefinition()
 	 * @generated
 	 */
-	void setDefinition(TypeDefinition value);
+	void setDefinition(ClassDefinition value);
 
 	/**
 	 * Returns the value of the '<em><b>Attributes</b></em>' containment reference list.

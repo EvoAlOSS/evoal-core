@@ -12,7 +12,7 @@ package de.evoal.languages.model.base.expressions;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link de.evoal.languages.model.base.expressions.StringLiteral#getValue <em>Value</em>}</li>
+ *   <li>{@link de.evoal.languages.model.base.expressions.StringLiteral#getLiteral <em>Literal</em>}</li>
  * </ul>
  *
  * @see de.evoal.languages.model.base.expressions.ExpressionsPackage#getStringLiteral()
@@ -21,25 +21,33 @@ package de.evoal.languages.model.base.expressions;
  */
 public interface StringLiteral extends Literal {
 	/**
-	 * Returns the value of the '<em><b>Value</b></em>' attribute.
+	 * Returns the value of the '<em><b>Literal</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Value</em>' attribute.
-	 * @see #setValue(String)
-	 * @see de.evoal.languages.model.base.expressions.ExpressionsPackage#getStringLiteral_Value()
+	 * @return the value of the '<em>Literal</em>' attribute.
+	 * @see #setLiteral(String)
+	 * @see de.evoal.languages.model.base.expressions.ExpressionsPackage#getStringLiteral_Literal()
 	 * @model required="true"
 	 * @generated
 	 */
-	String getValue();
+	String getLiteral();
 
 	/**
-	 * Sets the value of the '{@link de.evoal.languages.model.base.expressions.StringLiteral#getValue <em>Value</em>}' attribute.
+	 * Sets the value of the '{@link de.evoal.languages.model.base.expressions.StringLiteral#getLiteral <em>Literal</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Value</em>' attribute.
-	 * @see #getValue()
+	 * @param value the new value of the '<em>Literal</em>' attribute.
+	 * @see #getLiteral()
 	 * @generated
 	 */
-	void setValue(String value);
+	void setLiteral(String value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" required="true"
+	 * @generated
+	 */
+	String getValue();
 
 } // StringLiteral

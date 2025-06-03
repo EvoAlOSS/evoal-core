@@ -11,9 +11,11 @@ public class DefinitionLanguageResourceDescriptionStrategy extends FilteringReso
 	public DefinitionLanguageResourceDescriptionStrategy() {
 		super(
 				DlPackage.eINSTANCE.getDefinitionModule(),
-				DefinitionsPackage.eINSTANCE.getConstantDefinition(),
-				DefinitionsPackage.eINSTANCE.getTypeDefinition(),
 				DefinitionsPackage.eINSTANCE.getAttributeDefinition(),
+				DefinitionsPackage.eINSTANCE.getConstantDefinition(),
+				DefinitionsPackage.eINSTANCE.getClassDefinition(),
+				DefinitionsPackage.eINSTANCE.getEnumDefinition(),
+				DefinitionsPackage.eINSTANCE.getEnumLiteralDefinition(),
 				DefinitionsPackage.eINSTANCE.getFunctionDefinition()
 			 );
 	}

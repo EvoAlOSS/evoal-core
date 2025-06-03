@@ -26,7 +26,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  *
  * @generated
  */
-public class ScaledDefinitionImpl extends MinimalEObjectImpl.Container implements ScaledDefinition {
+public abstract class ScaledDefinitionImpl extends MinimalEObjectImpl.Container implements ScaledDefinition {
 	/**
 	 * The default value of the '{@link #getScale() <em>Scale</em>}' attribute.
 	 * <!-- begin-user-doc -->

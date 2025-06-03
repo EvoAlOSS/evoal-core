@@ -4,10 +4,10 @@ package de.evoal.languages.model.base.definitions.impl;
 
 import de.evoal.languages.model.base.definitions.AttributeDefinition;
 import de.evoal.languages.model.base.definitions.BaseDataDescription;
+import de.evoal.languages.model.base.definitions.ClassDefinition;
 import de.evoal.languages.model.base.definitions.ConstantDefinition;
 import de.evoal.languages.model.base.definitions.Constrained;
 import de.evoal.languages.model.base.definitions.DataDescription;
-import de.evoal.languages.model.base.definitions.DataType;
 import de.evoal.languages.model.base.definitions.DataTypeDefinition;
 import de.evoal.languages.model.base.definitions.DataTypeTypeDefinition;
 import de.evoal.languages.model.base.definitions.DefinedFunctionName;
@@ -18,6 +18,7 @@ import de.evoal.languages.model.base.definitions.EnumDefinition;
 import de.evoal.languages.model.base.definitions.EnumLiteralDefinition;
 import de.evoal.languages.model.base.definitions.FunctionDefinition;
 import de.evoal.languages.model.base.definitions.FunctionName;
+import de.evoal.languages.model.base.definitions.LiteralDefinition;
 import de.evoal.languages.model.base.definitions.Parameter;
 import de.evoal.languages.model.base.definitions.RepresentationType;
 import de.evoal.languages.model.base.definitions.ScaleType;
@@ -70,6 +71,20 @@ public class DefinitionsPackageImpl extends EPackageImpl implements DefinitionsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass typeDefinitionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass literalDefinitionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass scaledDefinitionEClass = null;
 
 	/**
@@ -77,7 +92,7 @@ public class DefinitionsPackageImpl extends EPackageImpl implements DefinitionsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass typeDefinitionEClass = null;
+	private EClass classDefinitionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -148,13 +163,6 @@ public class DefinitionsPackageImpl extends EPackageImpl implements DefinitionsP
 	 * @generated
 	 */
 	private EClass structuredDataDescriptionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass dataTypeEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -321,6 +329,26 @@ public class DefinitionsPackageImpl extends EPackageImpl implements DefinitionsP
 	 * @generated
 	 */
 	@Override
+	public EClass getTypeDefinition() {
+		return typeDefinitionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getLiteralDefinition() {
+		return literalDefinitionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getScaledDefinition() {
 		return scaledDefinitionEClass;
 	}
@@ -341,8 +369,8 @@ public class DefinitionsPackageImpl extends EPackageImpl implements DefinitionsP
 	 * @generated
 	 */
 	@Override
-	public EClass getTypeDefinition() {
-		return typeDefinitionEClass;
+	public EClass getClassDefinition() {
+		return classDefinitionEClass;
 	}
 
 	/**
@@ -351,8 +379,8 @@ public class DefinitionsPackageImpl extends EPackageImpl implements DefinitionsP
 	 * @generated
 	 */
 	@Override
-	public EReference getTypeDefinition_Attributes() {
-		return (EReference)typeDefinitionEClass.getEStructuralFeatures().get(0);
+	public EReference getClassDefinition_Attributes() {
+		return (EReference)classDefinitionEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -361,8 +389,8 @@ public class DefinitionsPackageImpl extends EPackageImpl implements DefinitionsP
 	 * @generated
 	 */
 	@Override
-	public EReference getTypeDefinition_SuperType() {
-		return (EReference)typeDefinitionEClass.getEStructuralFeatures().get(1);
+	public EReference getClassDefinition_SuperType() {
+		return (EReference)classDefinitionEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -371,8 +399,8 @@ public class DefinitionsPackageImpl extends EPackageImpl implements DefinitionsP
 	 * @generated
 	 */
 	@Override
-	public EAttribute getTypeDefinition_Abstract() {
-		return (EAttribute)typeDefinitionEClass.getEStructuralFeatures().get(2);
+	public EAttribute getClassDefinition_Abstract() {
+		return (EAttribute)classDefinitionEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -381,8 +409,8 @@ public class DefinitionsPackageImpl extends EPackageImpl implements DefinitionsP
 	 * @generated
 	 */
 	@Override
-	public EOperation getTypeDefinition__FindAttribute__String() {
-		return typeDefinitionEClass.getEOperations().get(0);
+	public EOperation getClassDefinition__FindAttribute__String() {
+		return classDefinitionEClass.getEOperations().get(0);
 	}
 
 	/**
@@ -571,26 +599,6 @@ public class DefinitionsPackageImpl extends EPackageImpl implements DefinitionsP
 	 * @generated
 	 */
 	@Override
-	public EClass getDataType() {
-		return dataTypeEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getDataType_Definition() {
-		return (EReference)dataTypeEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EClass getFunctionDefinition() {
 		return functionDefinitionEClass;
 	}
@@ -750,14 +758,18 @@ public class DefinitionsPackageImpl extends EPackageImpl implements DefinitionsP
 		definitionEClass = createEClass(DEFINITION);
 		createEAttribute(definitionEClass, DEFINITION__NAME);
 
+		typeDefinitionEClass = createEClass(TYPE_DEFINITION);
+
+		literalDefinitionEClass = createEClass(LITERAL_DEFINITION);
+
 		scaledDefinitionEClass = createEClass(SCALED_DEFINITION);
 		createEAttribute(scaledDefinitionEClass, SCALED_DEFINITION__SCALE);
 
-		typeDefinitionEClass = createEClass(TYPE_DEFINITION);
-		createEReference(typeDefinitionEClass, TYPE_DEFINITION__ATTRIBUTES);
-		createEReference(typeDefinitionEClass, TYPE_DEFINITION__SUPER_TYPE);
-		createEAttribute(typeDefinitionEClass, TYPE_DEFINITION__ABSTRACT);
-		createEOperation(typeDefinitionEClass, TYPE_DEFINITION___FIND_ATTRIBUTE__STRING);
+		classDefinitionEClass = createEClass(CLASS_DEFINITION);
+		createEReference(classDefinitionEClass, CLASS_DEFINITION__ATTRIBUTES);
+		createEReference(classDefinitionEClass, CLASS_DEFINITION__SUPER_TYPE);
+		createEAttribute(classDefinitionEClass, CLASS_DEFINITION__ABSTRACT);
+		createEOperation(classDefinitionEClass, CLASS_DEFINITION___FIND_ATTRIBUTE__STRING);
 
 		attributeDefinitionEClass = createEClass(ATTRIBUTE_DEFINITION);
 		createEReference(attributeDefinitionEClass, ATTRIBUTE_DEFINITION__TYPE);
@@ -786,9 +798,6 @@ public class DefinitionsPackageImpl extends EPackageImpl implements DefinitionsP
 
 		structuredDataDescriptionEClass = createEClass(STRUCTURED_DATA_DESCRIPTION);
 		createEReference(structuredDataDescriptionEClass, STRUCTURED_DATA_DESCRIPTION__TYPE);
-
-		dataTypeEClass = createEClass(DATA_TYPE);
-		createEReference(dataTypeEClass, DATA_TYPE__DEFINITION);
 
 		functionDefinitionEClass = createEClass(FUNCTION_DEFINITION);
 		createEReference(functionDefinitionEClass, FUNCTION_DEFINITION__TYPE);
@@ -845,12 +854,13 @@ public class DefinitionsPackageImpl extends EPackageImpl implements DefinitionsP
 		// Add supertypes to classes
 		definitionEClass.getESuperTypes().add(this.getConstrained());
 		typeDefinitionEClass.getESuperTypes().add(this.getDefinition());
-		typeDefinitionEClass.getESuperTypes().add(this.getConstrained());
+		literalDefinitionEClass.getESuperTypes().add(this.getDefinition());
+		classDefinitionEClass.getESuperTypes().add(this.getTypeDefinition());
 		attributeDefinitionEClass.getESuperTypes().add(this.getDefinition());
-		enumLiteralDefinitionEClass.getESuperTypes().add(this.getDefinition());
-		enumDefinitionEClass.getESuperTypes().add(this.getDefinition());
+		enumLiteralDefinitionEClass.getESuperTypes().add(this.getLiteralDefinition());
+		enumDefinitionEClass.getESuperTypes().add(this.getTypeDefinition());
 		enumDefinitionEClass.getESuperTypes().add(this.getScaledDefinition());
-		dataTypeDefinitionEClass.getESuperTypes().add(this.getDefinition());
+		dataTypeDefinitionEClass.getESuperTypes().add(this.getTypeDefinition());
 		dataTypeTypeDefinitionEClass.getESuperTypes().add(this.getDataTypeDefinition());
 		dataTypeTypeDefinitionEClass.getESuperTypes().add(this.getScaledDefinition());
 		dataDescriptionEClass.getESuperTypes().add(this.getDataTypeDefinition());
@@ -861,7 +871,7 @@ public class DefinitionsPackageImpl extends EPackageImpl implements DefinitionsP
 		structuredDataDescriptionEClass.getESuperTypes().add(this.getDataDescription());
 		functionDefinitionEClass.getESuperTypes().add(this.getDefinition());
 		parameterEClass.getESuperTypes().add(this.getDefinition());
-		constantDefinitionEClass.getESuperTypes().add(this.getDefinition());
+		constantDefinitionEClass.getESuperTypes().add(this.getLiteralDefinition());
 		definedFunctionNameEClass.getESuperTypes().add(this.getFunctionName());
 
 		// Initialize classes, features, and operations; add parameters
@@ -871,15 +881,19 @@ public class DefinitionsPackageImpl extends EPackageImpl implements DefinitionsP
 		initEClass(definitionEClass, Definition.class, "Definition", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getDefinition_Name(), ecorePackage.getEString(), "name", null, 0, 1, Definition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(scaledDefinitionEClass, ScaledDefinition.class, "ScaledDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(typeDefinitionEClass, TypeDefinition.class, "TypeDefinition", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(literalDefinitionEClass, LiteralDefinition.class, "LiteralDefinition", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(scaledDefinitionEClass, ScaledDefinition.class, "ScaledDefinition", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getScaledDefinition_Scale(), this.getScaleType(), "scale", null, 0, 1, ScaledDefinition.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(typeDefinitionEClass, TypeDefinition.class, "TypeDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getTypeDefinition_Attributes(), this.getAttributeDefinition(), null, "attributes", null, 0, -1, TypeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEReference(getTypeDefinition_SuperType(), this.getTypeDefinition(), null, "superType", null, 0, 1, TypeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getTypeDefinition_Abstract(), ecorePackage.getEBoolean(), "abstract", "false", 1, 1, TypeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(classDefinitionEClass, ClassDefinition.class, "ClassDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getClassDefinition_Attributes(), this.getAttributeDefinition(), null, "attributes", null, 0, -1, ClassDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getClassDefinition_SuperType(), this.getClassDefinition(), null, "superType", null, 0, 1, ClassDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getClassDefinition_Abstract(), ecorePackage.getEBoolean(), "abstract", "false", 1, 1, ClassDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		EOperation op = initEOperation(getTypeDefinition__FindAttribute__String(), this.getAttributeDefinition(), "findAttribute", 0, 1, IS_UNIQUE, IS_ORDERED);
+		EOperation op = initEOperation(getClassDefinition__FindAttribute__String(), this.getAttributeDefinition(), "findAttribute", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "name", 1, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(attributeDefinitionEClass, AttributeDefinition.class, "AttributeDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -903,17 +917,14 @@ public class DefinitionsPackageImpl extends EPackageImpl implements DefinitionsP
 		initEOperation(getBaseDataDescription__GetScale(), this.getScaleType(), "getScale", 1, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(typedBaseDataDescriptionEClass, TypedBaseDataDescription.class, "TypedBaseDataDescription", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getTypedBaseDataDescription_Type(), this.getDataTypeTypeDefinition(), null, "type", null, 1, 1, TypedBaseDataDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTypedBaseDataDescription_Type(), this.getDefinition(), null, "type", null, 1, 1, TypedBaseDataDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEOperation(getTypedBaseDataDescription__GetScale(), this.getScaleType(), "getScale", 1, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(untypedBaseDataDescriptionEClass, UntypedBaseDataDescription.class, "UntypedBaseDataDescription", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(structuredDataDescriptionEClass, StructuredDataDescription.class, "StructuredDataDescription", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getStructuredDataDescription_Type(), this.getTypeDefinition(), null, "type", null, 1, 1, StructuredDataDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(dataTypeEClass, DataType.class, "DataType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getDataType_Definition(), this.getDataDescription(), null, "definition", null, 1, 1, DataType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getStructuredDataDescription_Type(), this.getClassDefinition(), null, "type", null, 1, 1, StructuredDataDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(functionDefinitionEClass, FunctionDefinition.class, "FunctionDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getFunctionDefinition_Type(), theTypesPackage.getType(), null, "type", null, 1, 1, FunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

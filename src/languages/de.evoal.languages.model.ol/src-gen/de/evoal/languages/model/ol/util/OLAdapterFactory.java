@@ -3,11 +3,11 @@
  */
 package de.evoal.languages.model.ol.util;
 
-import de.evoal.languages.model.base.expressions.ConstantValue;
+import de.evoal.languages.model.base.expressions.ConstantExpression;
 import de.evoal.languages.model.base.expressions.Expression;
 import de.evoal.languages.model.base.expressions.Instance;
 import de.evoal.languages.model.base.expressions.Literal;
-import de.evoal.languages.model.base.expressions.Value;
+import de.evoal.languages.model.base.expressions.ReadExpression;
 
 import de.evoal.languages.model.ol.*;
 
@@ -87,16 +87,16 @@ public class OLAdapterFactory extends AdapterFactoryImpl {
 				return createAlgorithmInstanceAdapter();
 			}
 			@Override
-			public Adapter caseValue(Value object) {
-				return createValueAdapter();
-			}
-			@Override
 			public Adapter caseExpression(Expression object) {
 				return createExpressionAdapter();
 			}
 			@Override
-			public Adapter caseConstantValue(ConstantValue object) {
-				return createConstantValueAdapter();
+			public Adapter caseReadExpression(ReadExpression object) {
+				return createReadExpressionAdapter();
+			}
+			@Override
+			public Adapter caseConstantExpression(ConstantExpression object) {
+				return createConstantExpressionAdapter();
 			}
 			@Override
 			public Adapter caseLiteral(Literal object) {
@@ -169,20 +169,6 @@ public class OLAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.expressions.Value <em>Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.evoal.languages.model.base.expressions.Value
-	 * @generated
-	 */
-	public Adapter createValueAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.expressions.Expression <em>Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -197,16 +183,30 @@ public class OLAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.expressions.ConstantValue <em>Constant Value</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.expressions.ReadExpression <em>Read Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.evoal.languages.model.base.expressions.ConstantValue
+	 * @see de.evoal.languages.model.base.expressions.ReadExpression
 	 * @generated
 	 */
-	public Adapter createConstantValueAdapter() {
+	public Adapter createReadExpressionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.expressions.ConstantExpression <em>Constant Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.evoal.languages.model.base.expressions.ConstantExpression
+	 * @generated
+	 */
+	public Adapter createConstantExpressionAdapter() {
 		return null;
 	}
 

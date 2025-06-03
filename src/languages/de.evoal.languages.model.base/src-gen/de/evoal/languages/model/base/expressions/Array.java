@@ -20,10 +20,10 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface Array extends Value {
+public interface Array extends ReadExpression {
 	/**
 	 * Returns the value of the '<em><b>Values</b></em>' containment reference list.
-	 * The list contents are of type {@link de.evoal.languages.model.base.expressions.Value}.
+	 * The list contents are of type {@link de.evoal.languages.model.base.expressions.ReadExpression}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Values</em>' containment reference list.
@@ -31,6 +31,6 @@ public interface Array extends Value {
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<Value> getValues();
+	EList<ReadExpression> getValues();
 
 } // Array

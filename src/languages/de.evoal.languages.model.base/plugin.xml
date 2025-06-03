@@ -28,7 +28,7 @@
             uri="https://www.evoal.de/languages/base/definitions/1.0.0"
             class="de.evoal.languages.model.base.definitions.DefinitionsPackage"/>
    </extension>
-   
+
    <extension point="org.eclipse.emf.ecore.generated_package">
       <!-- @generated expressions -->
       <package

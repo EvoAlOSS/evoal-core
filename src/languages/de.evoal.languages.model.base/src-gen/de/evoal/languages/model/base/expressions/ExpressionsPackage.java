@@ -66,16 +66,6 @@ public interface ExpressionsPackage extends EPackage {
 	ExpressionsPackage eINSTANCE = de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.base.expressions.impl.ValueImpl <em>Value</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.base.expressions.impl.ValueImpl
-	 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getValue()
-	 * @generated
-	 */
-	int VALUE = 1;
-
-	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.expressions.impl.ExpressionImpl <em>Expression</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -104,22 +94,88 @@ public interface ExpressionsPackage extends EPackage {
 	int EXPRESSION_OPERATION_COUNT = 0;
 
 	/**
-	 * The number of structural features of the '<em>Value</em>' class.
+	 * The meta object id for the '{@link de.evoal.languages.model.base.expressions.impl.ReadExpressionImpl <em>Read Expression</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @see de.evoal.languages.model.base.expressions.impl.ReadExpressionImpl
+	 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getReadExpression()
 	 * @generated
-	 * @ordered
 	 */
-	int VALUE_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 0;
+	int READ_EXPRESSION = 1;
 
 	/**
-	 * The number of operations of the '<em>Value</em>' class.
+	 * The number of structural features of the '<em>Read Expression</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VALUE_OPERATION_COUNT = EXPRESSION_OPERATION_COUNT + 0;
+	int READ_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>Read Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int READ_EXPRESSION_OPERATION_COUNT = EXPRESSION_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link de.evoal.languages.model.base.expressions.impl.ConstantExpressionImpl <em>Constant Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.evoal.languages.model.base.expressions.impl.ConstantExpressionImpl
+	 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getConstantExpression()
+	 * @generated
+	 */
+	int CONSTANT_EXPRESSION = 2;
+
+	/**
+	 * The number of structural features of the '<em>Constant Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTANT_EXPRESSION_FEATURE_COUNT = READ_EXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>Constant Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTANT_EXPRESSION_OPERATION_COUNT = READ_EXPRESSION_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link de.evoal.languages.model.base.expressions.impl.WriteExpressionImpl <em>Write Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.evoal.languages.model.base.expressions.impl.WriteExpressionImpl
+	 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getWriteExpression()
+	 * @generated
+	 */
+	int WRITE_EXPRESSION = 3;
+
+	/**
+	 * The number of structural features of the '<em>Write Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WRITE_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>Write Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WRITE_EXPRESSION_OPERATION_COUNT = EXPRESSION_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.expressions.impl.OrExpressionImpl <em>Or Expression</em>}' class.
@@ -129,7 +185,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getOrExpression()
 	 * @generated
 	 */
-	int OR_EXPRESSION = 2;
+	int OR_EXPRESSION = 4;
 
 	/**
 	 * The feature id for the '<em><b>Sub Expressions</b></em>' containment reference list.
@@ -138,7 +194,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OR_EXPRESSION__SUB_EXPRESSIONS = VALUE_FEATURE_COUNT + 0;
+	int OR_EXPRESSION__SUB_EXPRESSIONS = READ_EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Or Expression</em>' class.
@@ -147,7 +203,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OR_EXPRESSION_FEATURE_COUNT = VALUE_FEATURE_COUNT + 1;
+	int OR_EXPRESSION_FEATURE_COUNT = READ_EXPRESSION_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>Or Expression</em>' class.
@@ -156,7 +212,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OR_EXPRESSION_OPERATION_COUNT = VALUE_OPERATION_COUNT + 0;
+	int OR_EXPRESSION_OPERATION_COUNT = READ_EXPRESSION_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.expressions.impl.XorExpressionImpl <em>Xor Expression</em>}' class.
@@ -166,7 +222,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getXorExpression()
 	 * @generated
 	 */
-	int XOR_EXPRESSION = 3;
+	int XOR_EXPRESSION = 5;
 
 	/**
 	 * The feature id for the '<em><b>Sub Expressions</b></em>' containment reference list.
@@ -175,7 +231,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int XOR_EXPRESSION__SUB_EXPRESSIONS = VALUE_FEATURE_COUNT + 0;
+	int XOR_EXPRESSION__SUB_EXPRESSIONS = READ_EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Xor Expression</em>' class.
@@ -184,7 +240,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int XOR_EXPRESSION_FEATURE_COUNT = VALUE_FEATURE_COUNT + 1;
+	int XOR_EXPRESSION_FEATURE_COUNT = READ_EXPRESSION_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>Xor Expression</em>' class.
@@ -193,7 +249,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int XOR_EXPRESSION_OPERATION_COUNT = VALUE_OPERATION_COUNT + 0;
+	int XOR_EXPRESSION_OPERATION_COUNT = READ_EXPRESSION_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.expressions.impl.AndExpressionImpl <em>And Expression</em>}' class.
@@ -203,7 +259,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getAndExpression()
 	 * @generated
 	 */
-	int AND_EXPRESSION = 4;
+	int AND_EXPRESSION = 6;
 
 	/**
 	 * The feature id for the '<em><b>Sub Expressions</b></em>' containment reference list.
@@ -212,7 +268,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int AND_EXPRESSION__SUB_EXPRESSIONS = VALUE_FEATURE_COUNT + 0;
+	int AND_EXPRESSION__SUB_EXPRESSIONS = READ_EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>And Expression</em>' class.
@@ -221,7 +277,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int AND_EXPRESSION_FEATURE_COUNT = VALUE_FEATURE_COUNT + 1;
+	int AND_EXPRESSION_FEATURE_COUNT = READ_EXPRESSION_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>And Expression</em>' class.
@@ -230,7 +286,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int AND_EXPRESSION_OPERATION_COUNT = VALUE_OPERATION_COUNT + 0;
+	int AND_EXPRESSION_OPERATION_COUNT = READ_EXPRESSION_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.expressions.impl.NotExpressionImpl <em>Not Expression</em>}' class.
@@ -240,7 +296,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getNotExpression()
 	 * @generated
 	 */
-	int NOT_EXPRESSION = 5;
+	int NOT_EXPRESSION = 7;
 
 	/**
 	 * The feature id for the '<em><b>Negated</b></em>' attribute.
@@ -249,7 +305,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NOT_EXPRESSION__NEGATED = VALUE_FEATURE_COUNT + 0;
+	int NOT_EXPRESSION__NEGATED = READ_EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Operand</b></em>' containment reference.
@@ -258,7 +314,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NOT_EXPRESSION__OPERAND = VALUE_FEATURE_COUNT + 1;
+	int NOT_EXPRESSION__OPERAND = READ_EXPRESSION_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Not Expression</em>' class.
@@ -267,7 +323,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NOT_EXPRESSION_FEATURE_COUNT = VALUE_FEATURE_COUNT + 2;
+	int NOT_EXPRESSION_FEATURE_COUNT = READ_EXPRESSION_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of operations of the '<em>Not Expression</em>' class.
@@ -276,7 +332,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NOT_EXPRESSION_OPERATION_COUNT = VALUE_OPERATION_COUNT + 0;
+	int NOT_EXPRESSION_OPERATION_COUNT = READ_EXPRESSION_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.expressions.impl.ComparisonExpressionImpl <em>Comparison Expression</em>}' class.
@@ -286,7 +342,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getComparisonExpression()
 	 * @generated
 	 */
-	int COMPARISON_EXPRESSION = 6;
+	int COMPARISON_EXPRESSION = 8;
 
 	/**
 	 * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -295,7 +351,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPARISON_EXPRESSION__LEFT_OPERAND = VALUE_FEATURE_COUNT + 0;
+	int COMPARISON_EXPRESSION__LEFT_OPERAND = READ_EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Comparison</b></em>' containment reference list.
@@ -304,7 +360,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPARISON_EXPRESSION__COMPARISON = VALUE_FEATURE_COUNT + 1;
+	int COMPARISON_EXPRESSION__COMPARISON = READ_EXPRESSION_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Comparison Expression</em>' class.
@@ -313,7 +369,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPARISON_EXPRESSION_FEATURE_COUNT = VALUE_FEATURE_COUNT + 2;
+	int COMPARISON_EXPRESSION_FEATURE_COUNT = READ_EXPRESSION_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of operations of the '<em>Comparison Expression</em>' class.
@@ -322,7 +378,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPARISON_EXPRESSION_OPERATION_COUNT = VALUE_OPERATION_COUNT + 0;
+	int COMPARISON_EXPRESSION_OPERATION_COUNT = READ_EXPRESSION_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.expressions.impl.PartialComparisonExpressionImpl <em>Partial Comparison Expression</em>}' class.
@@ -332,7 +388,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getPartialComparisonExpression()
 	 * @generated
 	 */
-	int PARTIAL_COMPARISON_EXPRESSION = 7;
+	int PARTIAL_COMPARISON_EXPRESSION = 9;
 
 	/**
 	 * The feature id for the '<em><b>Operator</b></em>' attribute.
@@ -341,7 +397,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PARTIAL_COMPARISON_EXPRESSION__OPERATOR = VALUE_FEATURE_COUNT + 0;
+	int PARTIAL_COMPARISON_EXPRESSION__OPERATOR = READ_EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Sub Expression</b></em>' containment reference.
@@ -350,7 +406,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PARTIAL_COMPARISON_EXPRESSION__SUB_EXPRESSION = VALUE_FEATURE_COUNT + 1;
+	int PARTIAL_COMPARISON_EXPRESSION__SUB_EXPRESSION = READ_EXPRESSION_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Partial Comparison Expression</em>' class.
@@ -359,7 +415,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PARTIAL_COMPARISON_EXPRESSION_FEATURE_COUNT = VALUE_FEATURE_COUNT + 2;
+	int PARTIAL_COMPARISON_EXPRESSION_FEATURE_COUNT = READ_EXPRESSION_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of operations of the '<em>Partial Comparison Expression</em>' class.
@@ -368,7 +424,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PARTIAL_COMPARISON_EXPRESSION_OPERATION_COUNT = VALUE_OPERATION_COUNT + 0;
+	int PARTIAL_COMPARISON_EXPRESSION_OPERATION_COUNT = READ_EXPRESSION_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.expressions.impl.AddOrSubtractExpressionImpl <em>Add Or Subtract Expression</em>}' class.
@@ -378,7 +434,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getAddOrSubtractExpression()
 	 * @generated
 	 */
-	int ADD_OR_SUBTRACT_EXPRESSION = 8;
+	int ADD_OR_SUBTRACT_EXPRESSION = 10;
 
 	/**
 	 * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -387,7 +443,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ADD_OR_SUBTRACT_EXPRESSION__LEFT_OPERAND = VALUE_FEATURE_COUNT + 0;
+	int ADD_OR_SUBTRACT_EXPRESSION__LEFT_OPERAND = READ_EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Operators</b></em>' attribute list.
@@ -396,7 +452,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ADD_OR_SUBTRACT_EXPRESSION__OPERATORS = VALUE_FEATURE_COUNT + 1;
+	int ADD_OR_SUBTRACT_EXPRESSION__OPERATORS = READ_EXPRESSION_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Operands</b></em>' containment reference list.
@@ -405,7 +461,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ADD_OR_SUBTRACT_EXPRESSION__OPERANDS = VALUE_FEATURE_COUNT + 2;
+	int ADD_OR_SUBTRACT_EXPRESSION__OPERANDS = READ_EXPRESSION_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Add Or Subtract Expression</em>' class.
@@ -414,7 +470,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ADD_OR_SUBTRACT_EXPRESSION_FEATURE_COUNT = VALUE_FEATURE_COUNT + 3;
+	int ADD_OR_SUBTRACT_EXPRESSION_FEATURE_COUNT = READ_EXPRESSION_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of operations of the '<em>Add Or Subtract Expression</em>' class.
@@ -423,7 +479,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ADD_OR_SUBTRACT_EXPRESSION_OPERATION_COUNT = VALUE_OPERATION_COUNT + 0;
+	int ADD_OR_SUBTRACT_EXPRESSION_OPERATION_COUNT = READ_EXPRESSION_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.expressions.impl.MultiplyDivideModuloExpressionImpl <em>Multiply Divide Modulo Expression</em>}' class.
@@ -433,7 +489,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getMultiplyDivideModuloExpression()
 	 * @generated
 	 */
-	int MULTIPLY_DIVIDE_MODULO_EXPRESSION = 9;
+	int MULTIPLY_DIVIDE_MODULO_EXPRESSION = 11;
 
 	/**
 	 * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -442,7 +498,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MULTIPLY_DIVIDE_MODULO_EXPRESSION__LEFT_OPERAND = VALUE_FEATURE_COUNT + 0;
+	int MULTIPLY_DIVIDE_MODULO_EXPRESSION__LEFT_OPERAND = READ_EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Operators</b></em>' attribute list.
@@ -451,7 +507,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MULTIPLY_DIVIDE_MODULO_EXPRESSION__OPERATORS = VALUE_FEATURE_COUNT + 1;
+	int MULTIPLY_DIVIDE_MODULO_EXPRESSION__OPERATORS = READ_EXPRESSION_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Operands</b></em>' containment reference list.
@@ -460,7 +516,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MULTIPLY_DIVIDE_MODULO_EXPRESSION__OPERANDS = VALUE_FEATURE_COUNT + 2;
+	int MULTIPLY_DIVIDE_MODULO_EXPRESSION__OPERANDS = READ_EXPRESSION_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Multiply Divide Modulo Expression</em>' class.
@@ -469,7 +525,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MULTIPLY_DIVIDE_MODULO_EXPRESSION_FEATURE_COUNT = VALUE_FEATURE_COUNT + 3;
+	int MULTIPLY_DIVIDE_MODULO_EXPRESSION_FEATURE_COUNT = READ_EXPRESSION_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of operations of the '<em>Multiply Divide Modulo Expression</em>' class.
@@ -478,7 +534,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MULTIPLY_DIVIDE_MODULO_EXPRESSION_OPERATION_COUNT = VALUE_OPERATION_COUNT + 0;
+	int MULTIPLY_DIVIDE_MODULO_EXPRESSION_OPERATION_COUNT = READ_EXPRESSION_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.expressions.impl.PowerOfExpressionImpl <em>Power Of Expression</em>}' class.
@@ -488,7 +544,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getPowerOfExpression()
 	 * @generated
 	 */
-	int POWER_OF_EXPRESSION = 10;
+	int POWER_OF_EXPRESSION = 12;
 
 	/**
 	 * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -497,7 +553,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int POWER_OF_EXPRESSION__LEFT_OPERAND = VALUE_FEATURE_COUNT + 0;
+	int POWER_OF_EXPRESSION__LEFT_OPERAND = READ_EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Right Operand</b></em>' containment reference.
@@ -506,7 +562,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int POWER_OF_EXPRESSION__RIGHT_OPERAND = VALUE_FEATURE_COUNT + 1;
+	int POWER_OF_EXPRESSION__RIGHT_OPERAND = READ_EXPRESSION_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Power Of Expression</em>' class.
@@ -515,7 +571,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int POWER_OF_EXPRESSION_FEATURE_COUNT = VALUE_FEATURE_COUNT + 2;
+	int POWER_OF_EXPRESSION_FEATURE_COUNT = READ_EXPRESSION_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of operations of the '<em>Power Of Expression</em>' class.
@@ -524,7 +580,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int POWER_OF_EXPRESSION_OPERATION_COUNT = VALUE_OPERATION_COUNT + 0;
+	int POWER_OF_EXPRESSION_OPERATION_COUNT = READ_EXPRESSION_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.expressions.impl.UnaryAddOrSubtractExpressionImpl <em>Unary Add Or Subtract Expression</em>}' class.
@@ -534,7 +590,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getUnaryAddOrSubtractExpression()
 	 * @generated
 	 */
-	int UNARY_ADD_OR_SUBTRACT_EXPRESSION = 11;
+	int UNARY_ADD_OR_SUBTRACT_EXPRESSION = 13;
 
 	/**
 	 * The feature id for the '<em><b>Operators</b></em>' attribute list.
@@ -543,7 +599,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UNARY_ADD_OR_SUBTRACT_EXPRESSION__OPERATORS = VALUE_FEATURE_COUNT + 0;
+	int UNARY_ADD_OR_SUBTRACT_EXPRESSION__OPERATORS = READ_EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Sub Expression</b></em>' containment reference.
@@ -552,7 +608,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UNARY_ADD_OR_SUBTRACT_EXPRESSION__SUB_EXPRESSION = VALUE_FEATURE_COUNT + 1;
+	int UNARY_ADD_OR_SUBTRACT_EXPRESSION__SUB_EXPRESSION = READ_EXPRESSION_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Unary Add Or Subtract Expression</em>' class.
@@ -561,7 +617,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UNARY_ADD_OR_SUBTRACT_EXPRESSION_FEATURE_COUNT = VALUE_FEATURE_COUNT + 2;
+	int UNARY_ADD_OR_SUBTRACT_EXPRESSION_FEATURE_COUNT = READ_EXPRESSION_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of operations of the '<em>Unary Add Or Subtract Expression</em>' class.
@@ -570,35 +626,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UNARY_ADD_OR_SUBTRACT_EXPRESSION_OPERATION_COUNT = VALUE_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.base.expressions.impl.ConstantValueImpl <em>Constant Value</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.base.expressions.impl.ConstantValueImpl
-	 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getConstantValue()
-	 * @generated
-	 */
-	int CONSTANT_VALUE = 12;
-
-	/**
-	 * The number of structural features of the '<em>Constant Value</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONSTANT_VALUE_FEATURE_COUNT = VALUE_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>Constant Value</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONSTANT_VALUE_OPERATION_COUNT = VALUE_OPERATION_COUNT + 0;
+	int UNARY_ADD_OR_SUBTRACT_EXPRESSION_OPERATION_COUNT = READ_EXPRESSION_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.expressions.impl.LiteralImpl <em>Literal</em>}' class.
@@ -608,7 +636,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getLiteral()
 	 * @generated
 	 */
-	int LITERAL = 13;
+	int LITERAL = 14;
 
 	/**
 	 * The number of structural features of the '<em>Literal</em>' class.
@@ -617,7 +645,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LITERAL_FEATURE_COUNT = CONSTANT_VALUE_FEATURE_COUNT + 0;
+	int LITERAL_FEATURE_COUNT = CONSTANT_EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
 	 * The operation id for the '<em>Get Value</em>' operation.
@@ -626,7 +654,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LITERAL___GET_VALUE = CONSTANT_VALUE_OPERATION_COUNT + 0;
+	int LITERAL___GET_VALUE = CONSTANT_EXPRESSION_OPERATION_COUNT + 0;
 
 	/**
 	 * The number of operations of the '<em>Literal</em>' class.
@@ -635,7 +663,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LITERAL_OPERATION_COUNT = CONSTANT_VALUE_OPERATION_COUNT + 1;
+	int LITERAL_OPERATION_COUNT = CONSTANT_EXPRESSION_OPERATION_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.expressions.impl.NumberLiteralImpl <em>Number Literal</em>}' class.
@@ -645,7 +673,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getNumberLiteral()
 	 * @generated
 	 */
-	int NUMBER_LITERAL = 14;
+	int NUMBER_LITERAL = 15;
 
 	/**
 	 * The feature id for the '<em><b>Factor</b></em>' attribute.
@@ -691,7 +719,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getIntegerLiteral()
 	 * @generated
 	 */
-	int INTEGER_LITERAL = 15;
+	int INTEGER_LITERAL = 16;
 
 	/**
 	 * The feature id for the '<em><b>Factor</b></em>' attribute.
@@ -746,7 +774,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getRealLiteral()
 	 * @generated
 	 */
-	int REAL_LITERAL = 16;
+	int REAL_LITERAL = 17;
 
 	/**
 	 * The feature id for the '<em><b>Factor</b></em>' attribute.
@@ -801,16 +829,16 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getStringLiteral()
 	 * @generated
 	 */
-	int STRING_LITERAL = 17;
+	int STRING_LITERAL = 18;
 
 	/**
-	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * The feature id for the '<em><b>Literal</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STRING_LITERAL__VALUE = LITERAL_FEATURE_COUNT + 0;
+	int STRING_LITERAL__LITERAL = LITERAL_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>String Literal</em>' class.
@@ -828,7 +856,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STRING_LITERAL___GET_VALUE = LITERAL___GET_VALUE;
+	int STRING_LITERAL___GET_VALUE = LITERAL_OPERATION_COUNT + 0;
 
 	/**
 	 * The number of operations of the '<em>String Literal</em>' class.
@@ -837,7 +865,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STRING_LITERAL_OPERATION_COUNT = LITERAL_OPERATION_COUNT + 0;
+	int STRING_LITERAL_OPERATION_COUNT = LITERAL_OPERATION_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.expressions.impl.InstanceImpl <em>Instance</em>}' class.
@@ -847,7 +875,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getInstance()
 	 * @generated
 	 */
-	int INSTANCE = 18;
+	int INSTANCE = 19;
 
 	/**
 	 * The feature id for the '<em><b>Definition</b></em>' reference.
@@ -911,7 +939,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getAttribute()
 	 * @generated
 	 */
-	int ATTRIBUTE = 19;
+	int ATTRIBUTE = 20;
 
 	/**
 	 * The feature id for the '<em><b>Definition</b></em>' reference.
@@ -957,7 +985,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getValueReference()
 	 * @generated
 	 */
-	int VALUE_REFERENCE = 20;
+	int VALUE_REFERENCE = 21;
 
 	/**
 	 * The number of structural features of the '<em>Value Reference</em>' class.
@@ -966,7 +994,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VALUE_REFERENCE_FEATURE_COUNT = CONSTANT_VALUE_FEATURE_COUNT + 0;
+	int VALUE_REFERENCE_FEATURE_COUNT = CONSTANT_EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of operations of the '<em>Value Reference</em>' class.
@@ -975,44 +1003,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VALUE_REFERENCE_OPERATION_COUNT = CONSTANT_VALUE_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.base.expressions.impl.DataReferenceImpl <em>Data Reference</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.base.expressions.impl.DataReferenceImpl
-	 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getDataReference()
-	 * @generated
-	 */
-	int DATA_REFERENCE = 21;
-
-	/**
-	 * The feature id for the '<em><b>Definition</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATA_REFERENCE__DEFINITION = VALUE_REFERENCE_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Data Reference</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATA_REFERENCE_FEATURE_COUNT = VALUE_REFERENCE_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of operations of the '<em>Data Reference</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATA_REFERENCE_OPERATION_COUNT = VALUE_REFERENCE_OPERATION_COUNT + 0;
+	int VALUE_REFERENCE_OPERATION_COUNT = CONSTANT_EXPRESSION_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.expressions.impl.SelfReferenceImpl <em>Self Reference</em>}' class.
@@ -1043,14 +1034,14 @@ public interface ExpressionsPackage extends EPackage {
 	int SELF_REFERENCE_OPERATION_COUNT = VALUE_REFERENCE_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.base.expressions.impl.EnumLiteralReferenceImpl <em>Enum Literal Reference</em>}' class.
+	 * The meta object id for the '{@link de.evoal.languages.model.base.expressions.impl.LiteralDefinitionReferenceImpl <em>Literal Definition Reference</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.base.expressions.impl.EnumLiteralReferenceImpl
-	 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getEnumLiteralReference()
+	 * @see de.evoal.languages.model.base.expressions.impl.LiteralDefinitionReferenceImpl
+	 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getLiteralDefinitionReference()
 	 * @generated
 	 */
-	int ENUM_LITERAL_REFERENCE = 23;
+	int LITERAL_DEFINITION_REFERENCE = 23;
 
 	/**
 	 * The feature id for the '<em><b>Definition</b></em>' reference.
@@ -1059,35 +1050,35 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ENUM_LITERAL_REFERENCE__DEFINITION = VALUE_REFERENCE_FEATURE_COUNT + 0;
+	int LITERAL_DEFINITION_REFERENCE__DEFINITION = VALUE_REFERENCE_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the '<em>Enum Literal Reference</em>' class.
+	 * The number of structural features of the '<em>Literal Definition Reference</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ENUM_LITERAL_REFERENCE_FEATURE_COUNT = VALUE_REFERENCE_FEATURE_COUNT + 1;
+	int LITERAL_DEFINITION_REFERENCE_FEATURE_COUNT = VALUE_REFERENCE_FEATURE_COUNT + 1;
 
 	/**
-	 * The number of operations of the '<em>Enum Literal Reference</em>' class.
+	 * The number of operations of the '<em>Literal Definition Reference</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ENUM_LITERAL_REFERENCE_OPERATION_COUNT = VALUE_REFERENCE_OPERATION_COUNT + 0;
+	int LITERAL_DEFINITION_REFERENCE_OPERATION_COUNT = VALUE_REFERENCE_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.base.expressions.impl.ConstantReferenceImpl <em>Constant Reference</em>}' class.
+	 * The meta object id for the '{@link de.evoal.languages.model.base.expressions.impl.TypeDefinitionReferenceImpl <em>Type Definition Reference</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.base.expressions.impl.ConstantReferenceImpl
-	 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getConstantReference()
+	 * @see de.evoal.languages.model.base.expressions.impl.TypeDefinitionReferenceImpl
+	 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getTypeDefinitionReference()
 	 * @generated
 	 */
-	int CONSTANT_REFERENCE = 24;
+	int TYPE_DEFINITION_REFERENCE = 24;
 
 	/**
 	 * The feature id for the '<em><b>Definition</b></em>' reference.
@@ -1096,25 +1087,25 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTANT_REFERENCE__DEFINITION = VALUE_REFERENCE_FEATURE_COUNT + 0;
+	int TYPE_DEFINITION_REFERENCE__DEFINITION = VALUE_REFERENCE_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the '<em>Constant Reference</em>' class.
+	 * The number of structural features of the '<em>Type Definition Reference</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTANT_REFERENCE_FEATURE_COUNT = VALUE_REFERENCE_FEATURE_COUNT + 1;
+	int TYPE_DEFINITION_REFERENCE_FEATURE_COUNT = VALUE_REFERENCE_FEATURE_COUNT + 1;
 
 	/**
-	 * The number of operations of the '<em>Constant Reference</em>' class.
+	 * The number of operations of the '<em>Type Definition Reference</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTANT_REFERENCE_OPERATION_COUNT = VALUE_REFERENCE_OPERATION_COUNT + 0;
+	int TYPE_DEFINITION_REFERENCE_OPERATION_COUNT = VALUE_REFERENCE_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.expressions.impl.BooleanLiteralImpl <em>Boolean Literal</em>}' class.
@@ -1127,13 +1118,13 @@ public interface ExpressionsPackage extends EPackage {
 	int BOOLEAN_LITERAL = 25;
 
 	/**
-	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * The feature id for the '<em><b>Literal</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BOOLEAN_LITERAL__VALUE = LITERAL_FEATURE_COUNT + 0;
+	int BOOLEAN_LITERAL__LITERAL = LITERAL_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Boolean Literal</em>' class.
@@ -1179,7 +1170,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CALL__FUNCTION = VALUE_FEATURE_COUNT + 0;
+	int CALL__FUNCTION = READ_EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -1188,7 +1179,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CALL__PARAMETERS = VALUE_FEATURE_COUNT + 1;
+	int CALL__PARAMETERS = READ_EXPRESSION_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Call</em>' class.
@@ -1197,7 +1188,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CALL_FEATURE_COUNT = VALUE_FEATURE_COUNT + 2;
+	int CALL_FEATURE_COUNT = READ_EXPRESSION_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of operations of the '<em>Call</em>' class.
@@ -1206,7 +1197,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CALL_OPERATION_COUNT = VALUE_OPERATION_COUNT + 0;
+	int CALL_OPERATION_COUNT = READ_EXPRESSION_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.expressions.impl.ParanthesesImpl <em>Parantheses</em>}' class.
@@ -1225,7 +1216,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PARANTHESES__SUB_EXPRESSION = VALUE_FEATURE_COUNT + 0;
+	int PARANTHESES__SUB_EXPRESSION = READ_EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Parantheses</em>' class.
@@ -1234,7 +1225,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PARANTHESES_FEATURE_COUNT = VALUE_FEATURE_COUNT + 1;
+	int PARANTHESES_FEATURE_COUNT = READ_EXPRESSION_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>Parantheses</em>' class.
@@ -1243,7 +1234,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PARANTHESES_OPERATION_COUNT = VALUE_OPERATION_COUNT + 0;
+	int PARANTHESES_OPERATION_COUNT = READ_EXPRESSION_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.expressions.impl.ArrayImpl <em>Array</em>}' class.
@@ -1262,7 +1253,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ARRAY__VALUES = VALUE_FEATURE_COUNT + 0;
+	int ARRAY__VALUES = READ_EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Array</em>' class.
@@ -1271,7 +1262,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ARRAY_FEATURE_COUNT = VALUE_FEATURE_COUNT + 1;
+	int ARRAY_FEATURE_COUNT = READ_EXPRESSION_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>Array</em>' class.
@@ -1280,7 +1271,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ARRAY_OPERATION_COUNT = VALUE_OPERATION_COUNT + 0;
+	int ARRAY_OPERATION_COUNT = READ_EXPRESSION_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.expressions.ComparisonOperator <em>Comparison Operator</em>}' enum.
@@ -1322,7 +1313,6 @@ public interface ExpressionsPackage extends EPackage {
 	 */
 	int FACTOR = 32;
 
-
 	/**
 	 * The meta object id for the '<em>Number</em>' data type.
 	 * <!-- begin-user-doc -->
@@ -1335,16 +1325,6 @@ public interface ExpressionsPackage extends EPackage {
 
 
 	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.base.expressions.Value <em>Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Value</em>'.
-	 * @see de.evoal.languages.model.base.expressions.Value
-	 * @generated
-	 */
-	EClass getValue();
-
-	/**
 	 * Returns the meta object for class '{@link de.evoal.languages.model.base.expressions.Expression <em>Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1353,6 +1333,36 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getExpression();
+
+	/**
+	 * Returns the meta object for class '{@link de.evoal.languages.model.base.expressions.ReadExpression <em>Read Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Read Expression</em>'.
+	 * @see de.evoal.languages.model.base.expressions.ReadExpression
+	 * @generated
+	 */
+	EClass getReadExpression();
+
+	/**
+	 * Returns the meta object for class '{@link de.evoal.languages.model.base.expressions.ConstantExpression <em>Constant Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Constant Expression</em>'.
+	 * @see de.evoal.languages.model.base.expressions.ConstantExpression
+	 * @generated
+	 */
+	EClass getConstantExpression();
+
+	/**
+	 * Returns the meta object for class '{@link de.evoal.languages.model.base.expressions.WriteExpression <em>Write Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Write Expression</em>'.
+	 * @see de.evoal.languages.model.base.expressions.WriteExpression
+	 * @generated
+	 */
+	EClass getWriteExpression();
 
 	/**
 	 * Returns the meta object for class '{@link de.evoal.languages.model.base.expressions.OrExpression <em>Or Expression</em>}'.
@@ -1664,16 +1674,6 @@ public interface ExpressionsPackage extends EPackage {
 	EReference getUnaryAddOrSubtractExpression_SubExpression();
 
 	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.base.expressions.ConstantValue <em>Constant Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Constant Value</em>'.
-	 * @see de.evoal.languages.model.base.expressions.ConstantValue
-	 * @generated
-	 */
-	EClass getConstantValue();
-
-	/**
 	 * Returns the meta object for class '{@link de.evoal.languages.model.base.expressions.Literal <em>Literal</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1797,15 +1797,25 @@ public interface ExpressionsPackage extends EPackage {
 	EClass getStringLiteral();
 
 	/**
-	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.base.expressions.StringLiteral#getValue <em>Value</em>}'.
+	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.base.expressions.StringLiteral#getLiteral <em>Literal</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Value</em>'.
-	 * @see de.evoal.languages.model.base.expressions.StringLiteral#getValue()
+	 * @return the meta object for the attribute '<em>Literal</em>'.
+	 * @see de.evoal.languages.model.base.expressions.StringLiteral#getLiteral()
 	 * @see #getStringLiteral()
 	 * @generated
 	 */
-	EAttribute getStringLiteral_Value();
+	EAttribute getStringLiteral_Literal();
+
+	/**
+	 * Returns the meta object for the '{@link de.evoal.languages.model.base.expressions.StringLiteral#getValue() <em>Get Value</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Value</em>' operation.
+	 * @see de.evoal.languages.model.base.expressions.StringLiteral#getValue()
+	 * @generated
+	 */
+	EOperation getStringLiteral__GetValue();
 
 	/**
 	 * Returns the meta object for class '{@link de.evoal.languages.model.base.expressions.Instance <em>Instance</em>}'.
@@ -1892,27 +1902,6 @@ public interface ExpressionsPackage extends EPackage {
 	EClass getValueReference();
 
 	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.base.expressions.DataReference <em>Data Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Data Reference</em>'.
-	 * @see de.evoal.languages.model.base.expressions.DataReference
-	 * @generated
-	 */
-	EClass getDataReference();
-
-	/**
-	 * Returns the meta object for the reference '{@link de.evoal.languages.model.base.expressions.DataReference#getDefinition <em>Definition</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Definition</em>'.
-	 * @see de.evoal.languages.model.base.expressions.DataReference#getDefinition()
-	 * @see #getDataReference()
-	 * @generated
-	 */
-	EReference getDataReference_Definition();
-
-	/**
 	 * Returns the meta object for class '{@link de.evoal.languages.model.base.expressions.SelfReference <em>Self Reference</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1923,46 +1912,46 @@ public interface ExpressionsPackage extends EPackage {
 	EClass getSelfReference();
 
 	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.base.expressions.EnumLiteralReference <em>Enum Literal Reference</em>}'.
+	 * Returns the meta object for class '{@link de.evoal.languages.model.base.expressions.LiteralDefinitionReference <em>Literal Definition Reference</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Enum Literal Reference</em>'.
-	 * @see de.evoal.languages.model.base.expressions.EnumLiteralReference
+	 * @return the meta object for class '<em>Literal Definition Reference</em>'.
+	 * @see de.evoal.languages.model.base.expressions.LiteralDefinitionReference
 	 * @generated
 	 */
-	EClass getEnumLiteralReference();
+	EClass getLiteralDefinitionReference();
 
 	/**
-	 * Returns the meta object for the reference '{@link de.evoal.languages.model.base.expressions.EnumLiteralReference#getDefinition <em>Definition</em>}'.
+	 * Returns the meta object for the reference '{@link de.evoal.languages.model.base.expressions.LiteralDefinitionReference#getDefinition <em>Definition</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Definition</em>'.
-	 * @see de.evoal.languages.model.base.expressions.EnumLiteralReference#getDefinition()
-	 * @see #getEnumLiteralReference()
+	 * @see de.evoal.languages.model.base.expressions.LiteralDefinitionReference#getDefinition()
+	 * @see #getLiteralDefinitionReference()
 	 * @generated
 	 */
-	EReference getEnumLiteralReference_Definition();
+	EReference getLiteralDefinitionReference_Definition();
 
 	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.base.expressions.ConstantReference <em>Constant Reference</em>}'.
+	 * Returns the meta object for class '{@link de.evoal.languages.model.base.expressions.TypeDefinitionReference <em>Type Definition Reference</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Constant Reference</em>'.
-	 * @see de.evoal.languages.model.base.expressions.ConstantReference
+	 * @return the meta object for class '<em>Type Definition Reference</em>'.
+	 * @see de.evoal.languages.model.base.expressions.TypeDefinitionReference
 	 * @generated
 	 */
-	EClass getConstantReference();
+	EClass getTypeDefinitionReference();
 
 	/**
-	 * Returns the meta object for the reference '{@link de.evoal.languages.model.base.expressions.ConstantReference#getDefinition <em>Definition</em>}'.
+	 * Returns the meta object for the reference '{@link de.evoal.languages.model.base.expressions.TypeDefinitionReference#getDefinition <em>Definition</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Definition</em>'.
-	 * @see de.evoal.languages.model.base.expressions.ConstantReference#getDefinition()
-	 * @see #getConstantReference()
+	 * @see de.evoal.languages.model.base.expressions.TypeDefinitionReference#getDefinition()
+	 * @see #getTypeDefinitionReference()
 	 * @generated
 	 */
-	EReference getConstantReference_Definition();
+	EReference getTypeDefinitionReference_Definition();
 
 	/**
 	 * Returns the meta object for class '{@link de.evoal.languages.model.base.expressions.BooleanLiteral <em>Boolean Literal</em>}'.
@@ -1975,15 +1964,15 @@ public interface ExpressionsPackage extends EPackage {
 	EClass getBooleanLiteral();
 
 	/**
-	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.base.expressions.BooleanLiteral#isValue <em>Value</em>}'.
+	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.base.expressions.BooleanLiteral#isLiteral <em>Literal</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Value</em>'.
-	 * @see de.evoal.languages.model.base.expressions.BooleanLiteral#isValue()
+	 * @return the meta object for the attribute '<em>Literal</em>'.
+	 * @see de.evoal.languages.model.base.expressions.BooleanLiteral#isLiteral()
 	 * @see #getBooleanLiteral()
 	 * @generated
 	 */
-	EAttribute getBooleanLiteral_Value();
+	EAttribute getBooleanLiteral_Literal();
 
 	/**
 	 * Returns the meta object for the '{@link de.evoal.languages.model.base.expressions.BooleanLiteral#getValue() <em>Get Value</em>}' operation.
@@ -2144,16 +2133,6 @@ public interface ExpressionsPackage extends EPackage {
 	 */
 	interface Literals {
 		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.base.expressions.impl.ValueImpl <em>Value</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.base.expressions.impl.ValueImpl
-		 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getValue()
-		 * @generated
-		 */
-		EClass VALUE = eINSTANCE.getValue();
-
-		/**
 		 * The meta object literal for the '{@link de.evoal.languages.model.base.expressions.impl.ExpressionImpl <em>Expression</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2162,6 +2141,36 @@ public interface ExpressionsPackage extends EPackage {
 		 * @generated
 		 */
 		EClass EXPRESSION = eINSTANCE.getExpression();
+
+		/**
+		 * The meta object literal for the '{@link de.evoal.languages.model.base.expressions.impl.ReadExpressionImpl <em>Read Expression</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.evoal.languages.model.base.expressions.impl.ReadExpressionImpl
+		 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getReadExpression()
+		 * @generated
+		 */
+		EClass READ_EXPRESSION = eINSTANCE.getReadExpression();
+
+		/**
+		 * The meta object literal for the '{@link de.evoal.languages.model.base.expressions.impl.ConstantExpressionImpl <em>Constant Expression</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.evoal.languages.model.base.expressions.impl.ConstantExpressionImpl
+		 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getConstantExpression()
+		 * @generated
+		 */
+		EClass CONSTANT_EXPRESSION = eINSTANCE.getConstantExpression();
+
+		/**
+		 * The meta object literal for the '{@link de.evoal.languages.model.base.expressions.impl.WriteExpressionImpl <em>Write Expression</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.evoal.languages.model.base.expressions.impl.WriteExpressionImpl
+		 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getWriteExpression()
+		 * @generated
+		 */
+		EClass WRITE_EXPRESSION = eINSTANCE.getWriteExpression();
 
 		/**
 		 * The meta object literal for the '{@link de.evoal.languages.model.base.expressions.impl.OrExpressionImpl <em>Or Expression</em>}' class.
@@ -2416,16 +2425,6 @@ public interface ExpressionsPackage extends EPackage {
 		EReference UNARY_ADD_OR_SUBTRACT_EXPRESSION__SUB_EXPRESSION = eINSTANCE.getUnaryAddOrSubtractExpression_SubExpression();
 
 		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.base.expressions.impl.ConstantValueImpl <em>Constant Value</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.base.expressions.impl.ConstantValueImpl
-		 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getConstantValue()
-		 * @generated
-		 */
-		EClass CONSTANT_VALUE = eINSTANCE.getConstantValue();
-
-		/**
 		 * The meta object literal for the '{@link de.evoal.languages.model.base.expressions.impl.LiteralImpl <em>Literal</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2532,12 +2531,20 @@ public interface ExpressionsPackage extends EPackage {
 		EClass STRING_LITERAL = eINSTANCE.getStringLiteral();
 
 		/**
-		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Literal</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute STRING_LITERAL__VALUE = eINSTANCE.getStringLiteral_Value();
+		EAttribute STRING_LITERAL__LITERAL = eINSTANCE.getStringLiteral_Literal();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Value</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation STRING_LITERAL___GET_VALUE = eINSTANCE.getStringLiteral__GetValue();
 
 		/**
 		 * The meta object literal for the '{@link de.evoal.languages.model.base.expressions.impl.InstanceImpl <em>Instance</em>}' class.
@@ -2610,24 +2617,6 @@ public interface ExpressionsPackage extends EPackage {
 		EClass VALUE_REFERENCE = eINSTANCE.getValueReference();
 
 		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.base.expressions.impl.DataReferenceImpl <em>Data Reference</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.base.expressions.impl.DataReferenceImpl
-		 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getDataReference()
-		 * @generated
-		 */
-		EClass DATA_REFERENCE = eINSTANCE.getDataReference();
-
-		/**
-		 * The meta object literal for the '<em><b>Definition</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference DATA_REFERENCE__DEFINITION = eINSTANCE.getDataReference_Definition();
-
-		/**
 		 * The meta object literal for the '{@link de.evoal.languages.model.base.expressions.impl.SelfReferenceImpl <em>Self Reference</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2638,14 +2627,14 @@ public interface ExpressionsPackage extends EPackage {
 		EClass SELF_REFERENCE = eINSTANCE.getSelfReference();
 
 		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.base.expressions.impl.EnumLiteralReferenceImpl <em>Enum Literal Reference</em>}' class.
+		 * The meta object literal for the '{@link de.evoal.languages.model.base.expressions.impl.LiteralDefinitionReferenceImpl <em>Literal Definition Reference</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.base.expressions.impl.EnumLiteralReferenceImpl
-		 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getEnumLiteralReference()
+		 * @see de.evoal.languages.model.base.expressions.impl.LiteralDefinitionReferenceImpl
+		 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getLiteralDefinitionReference()
 		 * @generated
 		 */
-		EClass ENUM_LITERAL_REFERENCE = eINSTANCE.getEnumLiteralReference();
+		EClass LITERAL_DEFINITION_REFERENCE = eINSTANCE.getLiteralDefinitionReference();
 
 		/**
 		 * The meta object literal for the '<em><b>Definition</b></em>' reference feature.
@@ -2653,17 +2642,17 @@ public interface ExpressionsPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ENUM_LITERAL_REFERENCE__DEFINITION = eINSTANCE.getEnumLiteralReference_Definition();
+		EReference LITERAL_DEFINITION_REFERENCE__DEFINITION = eINSTANCE.getLiteralDefinitionReference_Definition();
 
 		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.base.expressions.impl.ConstantReferenceImpl <em>Constant Reference</em>}' class.
+		 * The meta object literal for the '{@link de.evoal.languages.model.base.expressions.impl.TypeDefinitionReferenceImpl <em>Type Definition Reference</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.base.expressions.impl.ConstantReferenceImpl
-		 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getConstantReference()
+		 * @see de.evoal.languages.model.base.expressions.impl.TypeDefinitionReferenceImpl
+		 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getTypeDefinitionReference()
 		 * @generated
 		 */
-		EClass CONSTANT_REFERENCE = eINSTANCE.getConstantReference();
+		EClass TYPE_DEFINITION_REFERENCE = eINSTANCE.getTypeDefinitionReference();
 
 		/**
 		 * The meta object literal for the '<em><b>Definition</b></em>' reference feature.
@@ -2671,7 +2660,7 @@ public interface ExpressionsPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CONSTANT_REFERENCE__DEFINITION = eINSTANCE.getConstantReference_Definition();
+		EReference TYPE_DEFINITION_REFERENCE__DEFINITION = eINSTANCE.getTypeDefinitionReference_Definition();
 
 		/**
 		 * The meta object literal for the '{@link de.evoal.languages.model.base.expressions.impl.BooleanLiteralImpl <em>Boolean Literal</em>}' class.
@@ -2684,12 +2673,12 @@ public interface ExpressionsPackage extends EPackage {
 		EClass BOOLEAN_LITERAL = eINSTANCE.getBooleanLiteral();
 
 		/**
-		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Literal</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute BOOLEAN_LITERAL__VALUE = eINSTANCE.getBooleanLiteral_Value();
+		EAttribute BOOLEAN_LITERAL__LITERAL = eINSTANCE.getBooleanLiteral_Literal();
 
 		/**
 		 * The meta object literal for the '<em><b>Get Value</b></em>' operation.

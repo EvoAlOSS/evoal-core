@@ -24,8 +24,8 @@ PipelineDefinitionRule returns PipelineDefinition:
 StepRule returns Step:
 	'step' '{'
  	    'component' instance = InstanceLiteralRule
- 	    ('reads' '[' (reads += DataReferenceRule (',' reads += DataReferenceRule)*)? ']' ';')?
- 	    ('writes' '[' (writes += DataReferenceRule (',' writes += DataReferenceRule)*)? ']' ';')?
+ 	    ('reads' '[' (reads += BaseDataReferenceRule(',' reads += BaseDataReferenceRule)*)? ']' ';')?
+ 	    ('writes' '[' (writes += BaseDataReferenceRule (',' writes += BaseDataReferenceRule)*)? ']' ';')?
 	'}'
 ;
 
@@ -54,7 +54,7 @@ RangeRule returns execution::Range:
 ;
 
 LiteralRangeRule returns execution::ValueRange:
-	'[' elements += ValueRule (',' elements += ValueRule)* ']'
+	'[' elements += ReadExpressionRule (',' elements += ReadExpressionRule)* ']'
 ;
 
 CounterRangeRule returns execution::CounterRange:
@@ -66,8 +66,10 @@ ApplyStatementRule returns ApplyStatement:
 ;
 
 @Override
-ReferenceRule returns expressions::ValueReference:
-	ConstantReferenceRule | DataReferenceRule | VariableReferenceRule /*| PipelineDefinitionReferenceRule  */
+ReferenceRule returns expressions::ConstantExpression:
+	LiteralDefinitionReferenceRule
+	| TypeDefinitionReferenceRule
+	| VariableReferenceRule
 ;
 
 VariableReferenceRule returns execution::VariableReference:

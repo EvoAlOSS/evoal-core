@@ -36,7 +36,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *
  * @generated
  */
-public class ComparisonExpressionImpl extends ValueImpl implements ComparisonExpression {
+public class ComparisonExpressionImpl extends ReadExpressionImpl implements ComparisonExpression {
 	/**
 	 * The cached value of the '{@link #getLeftOperand() <em>Left Operand</em>}' containment reference.
 	 * <!-- begin-user-doc -->

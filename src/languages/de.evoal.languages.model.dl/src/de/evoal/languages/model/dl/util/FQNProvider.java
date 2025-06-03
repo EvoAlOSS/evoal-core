@@ -4,17 +4,17 @@ import java.util.Objects;
 
 import org.eclipse.emf.ecore.EObject;
 
+import de.evoal.languages.model.base.definitions.ClassDefinition;
 import de.evoal.languages.model.base.definitions.ConstantDefinition;
 import de.evoal.languages.model.base.definitions.FunctionDefinition;
 import de.evoal.languages.model.base.expressions.Instance;
-import de.evoal.languages.model.base.definitions.TypeDefinition;
 import de.evoal.languages.model.dl.DefinitionModule;
 
 public class FQNProvider {
 	/**
 	 * Returns the FQN of the passed type definition.
 	 */
-	public String get(final TypeDefinition def) {
+	public String get(final ClassDefinition def) {
 		final EObject module = def.eContainer();
 		
 		Objects.requireNonNull(module);

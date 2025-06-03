@@ -7,9 +7,9 @@ import de.evoal.core.api.properties.PropertySpecification;
 import de.evoal.core.api.utils.AttributeHelper;
 import de.evoal.core.api.utils.Requirements;
 import de.evoal.languages.model.base.definitions.AttributeDefinition;
-import de.evoal.languages.model.base.definitions.TypeDefinition;
+import de.evoal.languages.model.base.definitions.ClassDefinition;
 import de.evoal.languages.model.base.types.ArrayType;
-import de.evoal.languages.model.base.types.InstanceType;
+import de.evoal.languages.model.base.types.DefinitionReference;
 import de.evoal.languages.model.base.types.Type;
 import de.evoal.optimisation.ea.api.codec.CustomCodec;
 import de.evoal.optimisation.ea.api.codec.model.ModelChromosome;
@@ -105,7 +105,7 @@ public class ModelGenotypeCodec implements CustomCodec<ModelGene> {
         return this;
     }
 
-    private static boolean isSubclassOfModel(final TypeDefinition definition) {
+    private static boolean isSubclassOfModel(final ClassDefinition definition) {
         final FQNProvider provider = new FQNProvider();
 
         if(MODEL_DATA_NAME.equals(provider.get(definition))) {
@@ -123,8 +123,8 @@ public class ModelGenotypeCodec implements CustomCodec<ModelGene> {
         final StructuredDataDescription type = (StructuredDataDescription)genotypeSpec.get(genotypeIndex);
 
         log.info("Converting configuration with base {} to chromosome.", type.getName());
-        final Map<TypeDefinition, Set<TypeDefinition>> subtypes = createSubtypeTable(type);
-        final Map<AttributeDefinition, Set<TypeDefinition>> attributes = createAttributeTable(type, subtypes);
+        final Map<ClassDefinition, Set<ClassDefinition>> subtypes = createSubtypeTable(type);
+        final Map<AttributeDefinition, Set<ClassDefinition>> attributes = createAttributeTable(type, subtypes);
         final Set<AttributeDefinition> arrays = collectArrays(type);
 
 /*
@@ -148,12 +148,12 @@ public class ModelGenotypeCodec implements CustomCodec<ModelGene> {
     private Set<AttributeDefinition> collectArrays(StructuredDataDescription type) {
         final Set<AttributeDefinition> arrays = new HashSet<>();
 
-        final Set<TypeDefinition> working = new HashSet<>();
-        final Set<TypeDefinition> visited = new HashSet<>();
+        final Set<ClassDefinition> working = new HashSet<>();
+        final Set<ClassDefinition> visited = new HashSet<>();
         working.add(type.getType());
 
         while(!working.isEmpty()) {
-            final TypeDefinition currentType = working.iterator().next();
+            final ClassDefinition currentType = working.iterator().next();
             working.remove(currentType);
 
             if(visited.contains(currentType)) {
@@ -170,8 +170,8 @@ public class ModelGenotypeCodec implements CustomCodec<ModelGene> {
                     attrType = arrayType.getElements();
                 }
 
-                if(attrType instanceof InstanceType instanceType) {
-                    working.add(instanceType.getDefinition());
+                if(attrType instanceof DefinitionReference instanceType) {
+                    working.add((ClassDefinition) instanceType.getDefinition());
                 }
             }
         }
@@ -179,15 +179,15 @@ public class ModelGenotypeCodec implements CustomCodec<ModelGene> {
         return arrays;
     }
 
-    private Map<AttributeDefinition, Set<TypeDefinition>> createAttributeTable(final StructuredDataDescription type, final Map<TypeDefinition, Set<TypeDefinition>> subtypes) {
-        final Map<AttributeDefinition, Set<TypeDefinition>> attributes = new HashMap<>();
+    private Map<AttributeDefinition, Set<ClassDefinition>> createAttributeTable(final StructuredDataDescription type, final Map<ClassDefinition, Set<ClassDefinition>> subtypes) {
+        final Map<AttributeDefinition, Set<ClassDefinition>> attributes = new HashMap<>();
 
-        final Set<TypeDefinition> working = new HashSet<>();
-        final Set<TypeDefinition> visited = new HashSet<>();
+        final Set<ClassDefinition> working = new HashSet<>();
+        final Set<ClassDefinition> visited = new HashSet<>();
         working.add(type.getType());
 
         while(!working.isEmpty()) {
-            final TypeDefinition currentType = working.iterator().next();
+            final ClassDefinition currentType = working.iterator().next();
             working.remove(currentType);
 
             if(visited.contains(currentType)) {
@@ -203,10 +203,10 @@ public class ModelGenotypeCodec implements CustomCodec<ModelGene> {
                     attrType = ((ArrayType)attrType).getElements();
                 }
 
-                if(attrType instanceof InstanceType instanceType) {
-                    final Set<TypeDefinition> types = subtypes.get(instanceType.getDefinition());
+                if(attrType instanceof DefinitionReference instanceType) {
+                    final Set<ClassDefinition> types = subtypes.get(instanceType.getDefinition());
                     attributes.put(attr, types);
-                    working.add(instanceType.getDefinition());
+                    working.add((ClassDefinition) instanceType.getDefinition());
                 }
             }
         }
@@ -214,20 +214,20 @@ public class ModelGenotypeCodec implements CustomCodec<ModelGene> {
         return attributes;
     }
 
-    private Map<TypeDefinition, Set<TypeDefinition>> createSubtypeTable(final StructuredDataDescription root) {
+    private Map<ClassDefinition, Set<ClassDefinition>> createSubtypeTable(final StructuredDataDescription root) {
         final DefinitionModule module = (DefinitionModule) root.getType().eContainer();
-        final Map<TypeDefinition, Set<TypeDefinition>> subtypes = new HashMap<>();
+        final Map<ClassDefinition, Set<ClassDefinition>> subtypes = new HashMap<>();
 
-        for(final TypeDefinition type : module.getTypes()) {
+        for(final ClassDefinition type : module.getTypes()) {
             subtypes.put(type, new HashSet<>());
         }
 
-        for(final TypeDefinition type : module.getTypes()) {
+        for(final ClassDefinition type : module.getTypes()) {
             if(type.isAbstract()) {
                 continue;
             }
 
-            TypeDefinition parent = type;
+            ClassDefinition parent = type;
             while(parent != null) {
                 if(subtypes.containsKey(parent)) {
                     subtypes.get(parent).add(type);

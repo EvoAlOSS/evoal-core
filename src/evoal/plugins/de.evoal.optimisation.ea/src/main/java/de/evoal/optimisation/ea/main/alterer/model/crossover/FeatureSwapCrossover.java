@@ -62,7 +62,7 @@ public class FeatureSwapCrossover extends TreeCrossover implements AltererCompon
                 final int index1 = random.nextInt(0, array1.getValues().size());
                 final int index2 = random.nextInt(0, array2.getValues().size());
 
-                final Value temporary = array1.getValues().get(index1);
+                final ReadExpression temporary = array1.getValues().get(index1);
                 array1.getValues().set(index1, EcoreUtil.copy(array2.getValues().get(index2)));
                 array2.getValues().set(index2, temporary);
             } else {

@@ -15,10 +15,7 @@ import de.evoal.languages.model.base.expressions.BooleanLiteral;
 import de.evoal.languages.model.base.expressions.Call;
 import de.evoal.languages.model.base.expressions.ComparisonExpression;
 import de.evoal.languages.model.base.expressions.ComparisonOperator;
-import de.evoal.languages.model.base.expressions.ConstantReference;
-import de.evoal.languages.model.base.expressions.ConstantValue;
-import de.evoal.languages.model.base.expressions.DataReference;
-import de.evoal.languages.model.base.expressions.EnumLiteralReference;
+import de.evoal.languages.model.base.expressions.ConstantExpression;
 import de.evoal.languages.model.base.expressions.Expression;
 import de.evoal.languages.model.base.expressions.ExpressionsFactory;
 import de.evoal.languages.model.base.expressions.ExpressionsPackage;
@@ -26,6 +23,7 @@ import de.evoal.languages.model.base.expressions.Factor;
 import de.evoal.languages.model.base.expressions.Instance;
 import de.evoal.languages.model.base.expressions.IntegerLiteral;
 import de.evoal.languages.model.base.expressions.Literal;
+import de.evoal.languages.model.base.expressions.LiteralDefinitionReference;
 import de.evoal.languages.model.base.expressions.MultiplyDivideModuloExpression;
 import de.evoal.languages.model.base.expressions.MultiplyDivideModuloOperator;
 import de.evoal.languages.model.base.expressions.NotExpression;
@@ -34,12 +32,14 @@ import de.evoal.languages.model.base.expressions.OrExpression;
 import de.evoal.languages.model.base.expressions.Parantheses;
 import de.evoal.languages.model.base.expressions.PartialComparisonExpression;
 import de.evoal.languages.model.base.expressions.PowerOfExpression;
+import de.evoal.languages.model.base.expressions.ReadExpression;
 import de.evoal.languages.model.base.expressions.RealLiteral;
 import de.evoal.languages.model.base.expressions.SelfReference;
 import de.evoal.languages.model.base.expressions.StringLiteral;
+import de.evoal.languages.model.base.expressions.TypeDefinitionReference;
 import de.evoal.languages.model.base.expressions.UnaryAddOrSubtractExpression;
-import de.evoal.languages.model.base.expressions.Value;
 import de.evoal.languages.model.base.expressions.ValueReference;
+import de.evoal.languages.model.base.expressions.WriteExpression;
 import de.evoal.languages.model.base.expressions.XorExpression;
 
 import de.evoal.languages.model.base.types.TypesPackage;
@@ -68,14 +68,28 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass valueEClass = null;
+	private EClass expressionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass expressionEClass = null;
+	private EClass readExpressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass constantExpressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass writeExpressionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -152,13 +166,6 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass constantValueEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass literalEClass = null;
 
 	/**
@@ -215,13 +222,6 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass dataReferenceEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass selfReferenceEClass = null;
 
 	/**
@@ -229,14 +229,14 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass enumLiteralReferenceEClass = null;
+	private EClass literalDefinitionReferenceEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass constantReferenceEClass = null;
+	private EClass typeDefinitionReferenceEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -377,8 +377,8 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	@Override
-	public EClass getValue() {
-		return valueEClass;
+	public EClass getExpression() {
+		return expressionEClass;
 	}
 
 	/**
@@ -387,8 +387,28 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	@Override
-	public EClass getExpression() {
-		return expressionEClass;
+	public EClass getReadExpression() {
+		return readExpressionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getConstantExpression() {
+		return constantExpressionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getWriteExpression() {
+		return writeExpressionEClass;
 	}
 
 	/**
@@ -687,16 +707,6 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	@Override
-	public EClass getConstantValue() {
-		return constantValueEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EClass getLiteral() {
 		return literalEClass;
 	}
@@ -817,8 +827,18 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	@Override
-	public EAttribute getStringLiteral_Value() {
+	public EAttribute getStringLiteral_Literal() {
 		return (EAttribute)stringLiteralEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getStringLiteral__GetValue() {
+		return stringLiteralEClass.getEOperations().get(0);
 	}
 
 	/**
@@ -907,26 +927,6 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	@Override
-	public EClass getDataReference() {
-		return dataReferenceEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getDataReference_Definition() {
-		return (EReference)dataReferenceEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EClass getSelfReference() {
 		return selfReferenceEClass;
 	}
@@ -937,8 +937,8 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	@Override
-	public EClass getEnumLiteralReference() {
-		return enumLiteralReferenceEClass;
+	public EClass getLiteralDefinitionReference() {
+		return literalDefinitionReferenceEClass;
 	}
 
 	/**
@@ -947,8 +947,8 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	@Override
-	public EReference getEnumLiteralReference_Definition() {
-		return (EReference)enumLiteralReferenceEClass.getEStructuralFeatures().get(0);
+	public EReference getLiteralDefinitionReference_Definition() {
+		return (EReference)literalDefinitionReferenceEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -957,8 +957,8 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	@Override
-	public EClass getConstantReference() {
-		return constantReferenceEClass;
+	public EClass getTypeDefinitionReference() {
+		return typeDefinitionReferenceEClass;
 	}
 
 	/**
@@ -967,8 +967,8 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	@Override
-	public EReference getConstantReference_Definition() {
-		return (EReference)constantReferenceEClass.getEStructuralFeatures().get(0);
+	public EReference getTypeDefinitionReference_Definition() {
+		return (EReference)typeDefinitionReferenceEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -987,7 +987,7 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	@Override
-	public EAttribute getBooleanLiteral_Value() {
+	public EAttribute getBooleanLiteral_Literal() {
 		return (EAttribute)booleanLiteralEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -1152,7 +1152,11 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		// Create classes and their features
 		expressionEClass = createEClass(EXPRESSION);
 
-		valueEClass = createEClass(VALUE);
+		readExpressionEClass = createEClass(READ_EXPRESSION);
+
+		constantExpressionEClass = createEClass(CONSTANT_EXPRESSION);
+
+		writeExpressionEClass = createEClass(WRITE_EXPRESSION);
 
 		orExpressionEClass = createEClass(OR_EXPRESSION);
 		createEReference(orExpressionEClass, OR_EXPRESSION__SUB_EXPRESSIONS);
@@ -1193,8 +1197,6 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		createEAttribute(unaryAddOrSubtractExpressionEClass, UNARY_ADD_OR_SUBTRACT_EXPRESSION__OPERATORS);
 		createEReference(unaryAddOrSubtractExpressionEClass, UNARY_ADD_OR_SUBTRACT_EXPRESSION__SUB_EXPRESSION);
 
-		constantValueEClass = createEClass(CONSTANT_VALUE);
-
 		literalEClass = createEClass(LITERAL);
 		createEOperation(literalEClass, LITERAL___GET_VALUE);
 
@@ -1211,7 +1213,8 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		createEOperation(realLiteralEClass, REAL_LITERAL___GET_VALUE);
 
 		stringLiteralEClass = createEClass(STRING_LITERAL);
-		createEAttribute(stringLiteralEClass, STRING_LITERAL__VALUE);
+		createEAttribute(stringLiteralEClass, STRING_LITERAL__LITERAL);
+		createEOperation(stringLiteralEClass, STRING_LITERAL___GET_VALUE);
 
 		instanceEClass = createEClass(INSTANCE);
 		createEReference(instanceEClass, INSTANCE__DEFINITION);
@@ -1224,19 +1227,16 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 
 		valueReferenceEClass = createEClass(VALUE_REFERENCE);
 
-		dataReferenceEClass = createEClass(DATA_REFERENCE);
-		createEReference(dataReferenceEClass, DATA_REFERENCE__DEFINITION);
-
 		selfReferenceEClass = createEClass(SELF_REFERENCE);
 
-		enumLiteralReferenceEClass = createEClass(ENUM_LITERAL_REFERENCE);
-		createEReference(enumLiteralReferenceEClass, ENUM_LITERAL_REFERENCE__DEFINITION);
+		literalDefinitionReferenceEClass = createEClass(LITERAL_DEFINITION_REFERENCE);
+		createEReference(literalDefinitionReferenceEClass, LITERAL_DEFINITION_REFERENCE__DEFINITION);
 
-		constantReferenceEClass = createEClass(CONSTANT_REFERENCE);
-		createEReference(constantReferenceEClass, CONSTANT_REFERENCE__DEFINITION);
+		typeDefinitionReferenceEClass = createEClass(TYPE_DEFINITION_REFERENCE);
+		createEReference(typeDefinitionReferenceEClass, TYPE_DEFINITION_REFERENCE__DEFINITION);
 
 		booleanLiteralEClass = createEClass(BOOLEAN_LITERAL);
-		createEAttribute(booleanLiteralEClass, BOOLEAN_LITERAL__VALUE);
+		createEAttribute(booleanLiteralEClass, BOOLEAN_LITERAL__LITERAL);
 		createEOperation(booleanLiteralEClass, BOOLEAN_LITERAL___GET_VALUE);
 
 		callEClass = createEClass(CALL);
@@ -1290,38 +1290,42 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
-		valueEClass.getESuperTypes().add(this.getExpression());
-		orExpressionEClass.getESuperTypes().add(this.getValue());
-		xorExpressionEClass.getESuperTypes().add(this.getValue());
-		andExpressionEClass.getESuperTypes().add(this.getValue());
-		notExpressionEClass.getESuperTypes().add(this.getValue());
-		comparisonExpressionEClass.getESuperTypes().add(this.getValue());
-		partialComparisonExpressionEClass.getESuperTypes().add(this.getValue());
-		addOrSubtractExpressionEClass.getESuperTypes().add(this.getValue());
-		multiplyDivideModuloExpressionEClass.getESuperTypes().add(this.getValue());
-		powerOfExpressionEClass.getESuperTypes().add(this.getValue());
-		unaryAddOrSubtractExpressionEClass.getESuperTypes().add(this.getValue());
-		constantValueEClass.getESuperTypes().add(this.getValue());
-		literalEClass.getESuperTypes().add(this.getConstantValue());
+		readExpressionEClass.getESuperTypes().add(this.getExpression());
+		constantExpressionEClass.getESuperTypes().add(this.getReadExpression());
+		writeExpressionEClass.getESuperTypes().add(this.getExpression());
+		orExpressionEClass.getESuperTypes().add(this.getReadExpression());
+		xorExpressionEClass.getESuperTypes().add(this.getReadExpression());
+		andExpressionEClass.getESuperTypes().add(this.getReadExpression());
+		notExpressionEClass.getESuperTypes().add(this.getReadExpression());
+		comparisonExpressionEClass.getESuperTypes().add(this.getReadExpression());
+		partialComparisonExpressionEClass.getESuperTypes().add(this.getReadExpression());
+		addOrSubtractExpressionEClass.getESuperTypes().add(this.getReadExpression());
+		multiplyDivideModuloExpressionEClass.getESuperTypes().add(this.getReadExpression());
+		powerOfExpressionEClass.getESuperTypes().add(this.getReadExpression());
+		unaryAddOrSubtractExpressionEClass.getESuperTypes().add(this.getReadExpression());
+		literalEClass.getESuperTypes().add(this.getConstantExpression());
 		numberLiteralEClass.getESuperTypes().add(this.getLiteral());
 		integerLiteralEClass.getESuperTypes().add(this.getNumberLiteral());
 		realLiteralEClass.getESuperTypes().add(this.getNumberLiteral());
 		stringLiteralEClass.getESuperTypes().add(this.getLiteral());
 		instanceEClass.getESuperTypes().add(this.getLiteral());
-		valueReferenceEClass.getESuperTypes().add(this.getConstantValue());
-		dataReferenceEClass.getESuperTypes().add(this.getValueReference());
+		valueReferenceEClass.getESuperTypes().add(this.getConstantExpression());
 		selfReferenceEClass.getESuperTypes().add(this.getValueReference());
-		enumLiteralReferenceEClass.getESuperTypes().add(this.getValueReference());
-		constantReferenceEClass.getESuperTypes().add(this.getValueReference());
+		literalDefinitionReferenceEClass.getESuperTypes().add(this.getValueReference());
+		typeDefinitionReferenceEClass.getESuperTypes().add(this.getValueReference());
 		booleanLiteralEClass.getESuperTypes().add(this.getLiteral());
-		callEClass.getESuperTypes().add(this.getValue());
-		paranthesesEClass.getESuperTypes().add(this.getValue());
-		arrayEClass.getESuperTypes().add(this.getValue());
+		callEClass.getESuperTypes().add(this.getReadExpression());
+		paranthesesEClass.getESuperTypes().add(this.getReadExpression());
+		arrayEClass.getESuperTypes().add(this.getReadExpression());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(expressionEClass, Expression.class, "Expression", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(valueEClass, Value.class, "Value", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(readExpressionEClass, ReadExpression.class, "ReadExpression", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(constantExpressionEClass, ConstantExpression.class, "ConstantExpression", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(writeExpressionEClass, WriteExpression.class, "WriteExpression", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(orExpressionEClass, OrExpression.class, "OrExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getOrExpression_SubExpressions(), this.getXorExpression(), null, "subExpressions", null, 1, -1, OrExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1360,9 +1364,7 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 
 		initEClass(unaryAddOrSubtractExpressionEClass, UnaryAddOrSubtractExpression.class, "UnaryAddOrSubtractExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getUnaryAddOrSubtractExpression_Operators(), this.getAddOrSubtractOperator(), "operators", null, 0, -1, UnaryAddOrSubtractExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getUnaryAddOrSubtractExpression_SubExpression(), this.getValue(), null, "subExpression", null, 1, 1, UnaryAddOrSubtractExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(constantValueEClass, ConstantValue.class, "ConstantValue", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getUnaryAddOrSubtractExpression_SubExpression(), this.getReadExpression(), null, "subExpression", null, 1, 1, UnaryAddOrSubtractExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(literalEClass, Literal.class, "Literal", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1384,10 +1386,12 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		initEOperation(getRealLiteral__GetValue(), ecorePackage.getEDoubleObject(), "getValue", 1, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(stringLiteralEClass, StringLiteral.class, "StringLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getStringLiteral_Value(), ecorePackage.getEString(), "value", null, 1, 1, StringLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getStringLiteral_Literal(), ecorePackage.getEString(), "literal", null, 1, 1, StringLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEOperation(getStringLiteral__GetValue(), ecorePackage.getEString(), "getValue", 1, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(instanceEClass, Instance.class, "Instance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getInstance_Definition(), theDefinitionsPackage.getTypeDefinition(), null, "definition", null, 1, 1, Instance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getInstance_Definition(), theDefinitionsPackage.getClassDefinition(), null, "definition", null, 1, 1, Instance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getInstance_Attributes(), this.getAttribute(), null, "attributes", null, 0, -1, Instance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		EOperation op = initEOperation(getInstance__FindAttribute__String(), this.getAttribute(), "findAttribute", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -1399,21 +1403,18 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 
 		initEClass(valueReferenceEClass, ValueReference.class, "ValueReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(dataReferenceEClass, DataReference.class, "DataReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getDataReference_Definition(), theDefinitionsPackage.getDataDescription(), null, "definition", null, 0, 1, DataReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
 		initEClass(selfReferenceEClass, SelfReference.class, "SelfReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(enumLiteralReferenceEClass, EnumLiteralReference.class, "EnumLiteralReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getEnumLiteralReference_Definition(), theDefinitionsPackage.getEnumLiteralDefinition(), null, "definition", null, 0, 1, EnumLiteralReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(literalDefinitionReferenceEClass, LiteralDefinitionReference.class, "LiteralDefinitionReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getLiteralDefinitionReference_Definition(), theDefinitionsPackage.getLiteralDefinition(), null, "definition", null, 0, 1, LiteralDefinitionReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(constantReferenceEClass, ConstantReference.class, "ConstantReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getConstantReference_Definition(), theDefinitionsPackage.getConstantDefinition(), null, "definition", null, 0, 1, ConstantReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(typeDefinitionReferenceEClass, TypeDefinitionReference.class, "TypeDefinitionReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getTypeDefinitionReference_Definition(), theDefinitionsPackage.getTypeDefinition(), null, "definition", null, 0, 1, TypeDefinitionReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(booleanLiteralEClass, BooleanLiteral.class, "BooleanLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getBooleanLiteral_Value(), ecorePackage.getEBoolean(), "value", null, 1, 1, BooleanLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBooleanLiteral_Literal(), ecorePackage.getEBoolean(), "literal", null, 1, 1, BooleanLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEOperation(getBooleanLiteral__GetValue(), ecorePackage.getEBoolean(), "getValue", 1, 1, IS_UNIQUE, IS_ORDERED);
+		initEOperation(getBooleanLiteral__GetValue(), ecorePackage.getEBooleanObject(), "getValue", 1, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(callEClass, Call.class, "Call", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCall_Function(), theDefinitionsPackage.getFunctionDefinition(), null, "function", null, 0, 1, Call.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1423,7 +1424,7 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		initEReference(getParantheses_SubExpression(), this.getExpression(), null, "subExpression", null, 1, 1, Parantheses.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(arrayEClass, Array.class, "Array", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getArray_Values(), this.getValue(), null, "values", null, 0, -1, Array.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getArray_Values(), this.getReadExpression(), null, "values", null, 0, -1, Array.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(comparisonOperatorEEnum, ComparisonOperator.class, "ComparisonOperator");

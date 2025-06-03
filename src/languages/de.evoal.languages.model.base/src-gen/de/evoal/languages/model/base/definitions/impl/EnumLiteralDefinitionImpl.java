@@ -14,7 +14,7 @@ import org.eclipse.emf.ecore.EClass;
  *
  * @generated
  */
-public class EnumLiteralDefinitionImpl extends DefinitionImpl implements EnumLiteralDefinition {
+public class EnumLiteralDefinitionImpl extends LiteralDefinitionImpl implements EnumLiteralDefinition {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

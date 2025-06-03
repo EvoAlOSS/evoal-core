@@ -168,6 +168,16 @@ public class DlPackageImpl extends EPackageImpl implements DlPackage {
 	 * @generated
 	 */
 	@Override
+	public EReference getDefinitionModule_Enums() {
+		return (EReference)definitionModuleEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public DlFactory getDlFactory() {
 		return (DlFactory)getEFactoryInstance();
 	}
@@ -197,6 +207,7 @@ public class DlPackageImpl extends EPackageImpl implements DlPackage {
 		createEReference(definitionModuleEClass, DEFINITION_MODULE__TYPES);
 		createEReference(definitionModuleEClass, DEFINITION_MODULE__FUNCTIONS);
 		createEReference(definitionModuleEClass, DEFINITION_MODULE__CONSTANTS);
+		createEReference(definitionModuleEClass, DEFINITION_MODULE__ENUMS);
 	}
 
 	/**
@@ -236,9 +247,10 @@ public class DlPackageImpl extends EPackageImpl implements DlPackage {
 		initEClass(definitionModuleEClass, DefinitionModule.class, "DefinitionModule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getDefinitionModule_Imports(), theBasePackage.getImport(), null, "imports", null, 0, -1, DefinitionModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDefinitionModule_Name(), ecorePackage.getEString(), "name", null, 1, 1, DefinitionModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getDefinitionModule_Types(), theDefinitionsPackage.getTypeDefinition(), null, "types", null, 0, -1, DefinitionModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getDefinitionModule_Types(), theDefinitionsPackage.getClassDefinition(), null, "types", null, 0, -1, DefinitionModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getDefinitionModule_Functions(), theDefinitionsPackage.getFunctionDefinition(), null, "functions", null, 0, -1, DefinitionModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getDefinitionModule_Constants(), theDefinitionsPackage.getConstantDefinition(), null, "constants", null, 0, -1, DefinitionModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDefinitionModule_Enums(), theDefinitionsPackage.getEnumDefinition(), null, "enums", null, 0, -1, DefinitionModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);
@@ -277,6 +289,12 @@ public class DlPackageImpl extends EPackageImpl implements DlPackage {
 		String source = "http://www.eclipse.org/OCL/Collection";
 		addAnnotation
 		  (getDefinitionModule_Functions(),
+		   source,
+		   new String[] {
+			   "nullFree", "false"
+		   });
+		addAnnotation
+		  (getDefinitionModule_Enums(),
 		   source,
 		   new String[] {
 			   "nullFree", "false"

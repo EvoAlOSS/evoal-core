@@ -18,5 +18,4 @@ package de.evoal.languages.model.base.definitions;
  * @generated
  */
 public interface UntypedBaseDataDescription extends BaseDataDescription, ScaledDefinition {
-
 } // UntypedBaseDataDescription

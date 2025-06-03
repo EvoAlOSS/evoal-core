@@ -2,14 +2,37 @@ grammar de.evoal.languages.model.dl.dsl.DefinitionLanguage with de.evoal.languag
 
 import "https://www.evoal.de/languages/dl/1.0.0"
 import "https://www.evoal.de/languages/ddl/1.0.0" as ddl
-import "https://www.evoal.de/languages/base/expressions/1.0.0" as expr
+import "https://www.evoal.de/languages/base/definitions/1.0.0" as definitions
+import "https://www.evoal.de/languages/base/expressions/1.0.0" as expressions
 import "https://www.evoal.de/languages/base/types/1.0.0" as types
 
 
 DefinitionModelRule returns DefinitionModule:
 	(imports += ImportRule)*
 	'module' name = QualifiedName '{'
-		((types += TypeDefinitionRule ) | (functions += FunctionDefinitionRule ) | constants += ConstantDefinitionRule)*
+		((enums += EnumTypeDefinitionRule) | (types += ClassDefinitionRule ) | (functions += FunctionDefinitionRule ) | constants += ConstantDefinitionRule)*
 	'}'
 ;
 
+EnumLiteralRule returns definitions::EnumLiteralDefinition:
+	name = StringOrId
+;
+
+EnumTypeDefinitionRule returns definitions::EnumDefinition:
+	(constraints += BaseLanguage::ConstraintRule)*
+	scale = ScaleType 
+	'enum' name = StringOrId '(' literals += EnumLiteralRule (',' literals += EnumLiteralRule)* ')'
+	('with' 'constraints' ':' (constraints += StatementRule)*)?
+';'
+;
+
+enum ScaleType returns definitions::ScaleType:
+	Nominal = 'nominal' |
+	Ordinal = 'ordinal' |
+	Cardinal = 'cardinal' |
+	Quotient = 'quotient'
+;
+
+StatementRule returns expressions::Expression:
+	BaseLanguage::ExpressionRule ';'
+;

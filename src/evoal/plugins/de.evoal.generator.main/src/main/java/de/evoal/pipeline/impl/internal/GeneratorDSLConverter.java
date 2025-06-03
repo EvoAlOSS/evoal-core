@@ -4,6 +4,7 @@ import de.evoal.languages.model.base.Import;
 import de.evoal.languages.model.base.definitions.Definition;
 import de.evoal.languages.model.base.definitions.FunctionDefinition;
 import de.evoal.languages.model.base.expressions.*;
+import de.evoal.languages.model.base.types.DefinitionReference;
 import de.evoal.languages.model.dl.DefinitionModule;
 import de.evoal.languages.model.execution.*;
 import de.evoal.languages.model.execution.VariableReference;
@@ -109,14 +110,14 @@ public class GeneratorDSLConverter extends GeneratorSwitch<Object> {
 
         obj.getReads()
                 .stream()
-                .map(DataReference::getDefinition)
+                .map(TypeDefinitionReference::getDefinition)
                 .map(Definition::getName)
                 .map(features::get)
                 .forEach(ef -> result.getReads().add((EAttribute)ef));
 
         obj.getWrites()
                 .stream()
-                .map(DataReference::getDefinition)
+                .map(TypeDefinitionReference::getDefinition)
                 .map(Definition::getName)
                 .map(features::get)
                 .forEach(ef -> result.getWrites().add((EAttribute)ef));
@@ -139,7 +140,7 @@ public class GeneratorDSLConverter extends GeneratorSwitch<Object> {
         result.setDefinition(generateFunction);
 
         final StringLiteral filename = exprFactory.createStringLiteral();
-        filename.setValue(obj.getFile());
+        filename.setLiteral(obj.getFile());
 
         result.getParameters().add(filename);
 

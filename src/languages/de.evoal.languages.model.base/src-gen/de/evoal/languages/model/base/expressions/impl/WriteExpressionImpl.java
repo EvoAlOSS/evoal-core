@@ -3,24 +3,24 @@
 package de.evoal.languages.model.base.expressions.impl;
 
 import de.evoal.languages.model.base.expressions.ExpressionsPackage;
-import de.evoal.languages.model.base.expressions.Value;
+import de.evoal.languages.model.base.expressions.WriteExpression;
 
 import org.eclipse.emf.ecore.EClass;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Value</b></em>'.
+ * An implementation of the model object '<em><b>Write Expression</b></em>'.
  * <!-- end-user-doc -->
  *
  * @generated
  */
-public abstract class ValueImpl extends ExpressionImpl implements Value {
+public abstract class WriteExpressionImpl extends ExpressionImpl implements WriteExpression {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ValueImpl() {
+	protected WriteExpressionImpl() {
 		super();
 	}
 
@@ -31,7 +31,7 @@ public abstract class ValueImpl extends ExpressionImpl implements Value {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return ExpressionsPackage.Literals.VALUE;
+		return ExpressionsPackage.Literals.WRITE_EXPRESSION;
 	}
 
-} //ValueImpl
+} //WriteExpressionImpl

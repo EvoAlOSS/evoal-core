@@ -328,7 +328,7 @@ public class InstanceLanguageGrammarAccess extends AbstractElementFinder.Abstrac
 	}
 	
 	//UnaryAddOrSubtractExpressionRule returns UnaryAddOrSubtractExpression :
-	//    ( operators+=AddOrSubtractOperatorRule )* subExpression = ValueRule
+	//    ( operators+=AddOrSubtractOperatorRule )* subExpression = ReadExpressionRule
 	//;
 	public BaseLanguageGrammarAccess.UnaryAddOrSubtractExpressionRuleElements getUnaryAddOrSubtractExpressionRuleAccess() {
 		return gaBaseLanguage.getUnaryAddOrSubtractExpressionRuleAccess();
@@ -338,19 +338,23 @@ public class InstanceLanguageGrammarAccess extends AbstractElementFinder.Abstrac
 		return getUnaryAddOrSubtractExpressionRuleAccess().getRule();
 	}
 	
-	//ValueRule returns Value:
-	//    ArrayRule | CallRule | LiteralRule | ParanthesesRule | ReferenceRule;
-	public BaseLanguageGrammarAccess.ValueRuleElements getValueRuleAccess() {
-		return gaBaseLanguage.getValueRuleAccess();
+	//ReadExpressionRule returns ReadExpression:
+	//    ArrayRule
+	//    | CallRule
+	//    | LiteralRule
+	//    | ParanthesesRule
+	//    | ReferenceRule;
+	public BaseLanguageGrammarAccess.ReadExpressionRuleElements getReadExpressionRuleAccess() {
+		return gaBaseLanguage.getReadExpressionRuleAccess();
 	}
 	
-	public ParserRule getValueRuleRule() {
-		return getValueRuleAccess().getRule();
+	public ParserRule getReadExpressionRuleRule() {
+		return getReadExpressionRuleAccess().getRule();
 	}
 	
 	//ArrayRule returns Array:
 	//    {Array}
-	//    '[' (values += ValueRule (',' values += ValueRule)* )? ']'
+	//    '[' (values += ReadExpressionRule (',' values += ReadExpressionRule)* )? ']'
 	//;
 	public BaseLanguageGrammarAccess.ArrayRuleElements getArrayRuleAccess() {
 		return gaBaseLanguage.getArrayRuleAccess();
@@ -382,8 +386,9 @@ public class InstanceLanguageGrammarAccess extends AbstractElementFinder.Abstrac
 		return getCallRuleAccess().getRule();
 	}
 	
-	//ReferenceRule returns ValueReference:
-	//    ConstantReferenceRule | DataReferenceRule
+	//ReferenceRule returns ConstantExpression:
+	//    LiteralDefinitionReferenceRule
+	//    | TypeDefinitionReferenceRule
 	//;
 	public BaseLanguageGrammarAccess.ReferenceRuleElements getReferenceRuleAccess() {
 		return gaBaseLanguage.getReferenceRuleAccess();
@@ -393,26 +398,48 @@ public class InstanceLanguageGrammarAccess extends AbstractElementFinder.Abstrac
 		return getReferenceRuleAccess().getRule();
 	}
 	
-	//DataReferenceRule returns DataReference:
-	//    'data' definition = [DataDescription|QualifiedName]
+	//LiteralDefinitionReferenceRule returns LiteralDefinitionReference:
+	//    definition = [LiteralDefinition|QualifiedName]
 	//;
-	public BaseLanguageGrammarAccess.DataReferenceRuleElements getDataReferenceRuleAccess() {
-		return gaBaseLanguage.getDataReferenceRuleAccess();
+	public BaseLanguageGrammarAccess.LiteralDefinitionReferenceRuleElements getLiteralDefinitionReferenceRuleAccess() {
+		return gaBaseLanguage.getLiteralDefinitionReferenceRuleAccess();
 	}
 	
-	public ParserRule getDataReferenceRuleRule() {
-		return getDataReferenceRuleAccess().getRule();
+	public ParserRule getLiteralDefinitionReferenceRuleRule() {
+		return getLiteralDefinitionReferenceRuleAccess().getRule();
 	}
 	
-	//ConstantReferenceRule returns ConstantReference:
-	//    definition = [ConstantDefinition|QualifiedName]
+	//TypeDefinitionReferenceRule returns TypeDefinitionReference:
+	//    BaseDataReferenceRule
+	//    | StructuredDataDescriptionReferenceRule;
+	public BaseLanguageGrammarAccess.TypeDefinitionReferenceRuleElements getTypeDefinitionReferenceRuleAccess() {
+		return gaBaseLanguage.getTypeDefinitionReferenceRuleAccess();
+	}
+	
+	public ParserRule getTypeDefinitionReferenceRuleRule() {
+		return getTypeDefinitionReferenceRuleAccess().getRule();
+	}
+	
+	//BaseDataReferenceRule returns TypeDefinitionReference:
+	//    'data' definition = [BaseDataDescription|QualifiedName]
 	//;
-	public BaseLanguageGrammarAccess.ConstantReferenceRuleElements getConstantReferenceRuleAccess() {
-		return gaBaseLanguage.getConstantReferenceRuleAccess();
+	public BaseLanguageGrammarAccess.BaseDataReferenceRuleElements getBaseDataReferenceRuleAccess() {
+		return gaBaseLanguage.getBaseDataReferenceRuleAccess();
 	}
 	
-	public ParserRule getConstantReferenceRuleRule() {
-		return getConstantReferenceRuleAccess().getRule();
+	public ParserRule getBaseDataReferenceRuleRule() {
+		return getBaseDataReferenceRuleAccess().getRule();
+	}
+	
+	//StructuredDataDescriptionReferenceRule returns TypeDefinitionReference:
+	//    'instance' definition = [StructuredDataDescription|QualifiedName]
+	//;
+	public BaseLanguageGrammarAccess.StructuredDataDescriptionReferenceRuleElements getStructuredDataDescriptionReferenceRuleAccess() {
+		return gaBaseLanguage.getStructuredDataDescriptionReferenceRuleAccess();
+	}
+	
+	public ParserRule getStructuredDataDescriptionReferenceRuleRule() {
+		return getStructuredDataDescriptionReferenceRuleAccess().getRule();
 	}
 	
 	//LiteralRule returns Literal:
@@ -430,7 +457,7 @@ public class InstanceLanguageGrammarAccess extends AbstractElementFinder.Abstrac
 	}
 	
 	//InstanceLiteralRule returns Instance:
-	//    definition = [TypeDefinition|QualifiedName] '{'
+	//    definition = [ClassDefinition|QualifiedName] '{'
 	//      attributes += AttributeRule*
 	//    '}'
 	//;
@@ -487,7 +514,7 @@ public class InstanceLanguageGrammarAccess extends AbstractElementFinder.Abstrac
 	}
 	
 	//StringLiteralRule returns StringLiteral:
-	//    value = STRING
+	//    literal = STRING
 	//;
 	public BaseLanguageGrammarAccess.StringLiteralRuleElements getStringLiteralRuleAccess() {
 		return gaBaseLanguage.getStringLiteralRuleAccess();
@@ -528,7 +555,7 @@ public class InstanceLanguageGrammarAccess extends AbstractElementFinder.Abstrac
 	}
 	
 	//BooleanLiteralRule returns BooleanLiteral:
-	//    {BooleanLiteral} (value ?= 'true' |  'false')
+	//    {BooleanLiteral} (literal ?= 'true' |  'false')
 	//;
 	public BaseLanguageGrammarAccess.BooleanLiteralRuleElements getBooleanLiteralRuleAccess() {
 		return gaBaseLanguage.getBooleanLiteralRuleAccess();
@@ -538,18 +565,18 @@ public class InstanceLanguageGrammarAccess extends AbstractElementFinder.Abstrac
 		return getBooleanLiteralRuleAccess().getRule();
 	}
 	
-	//TypeDefinitionRule returns TypeDefinition:
+	//ClassDefinitionRule returns ClassDefinition:
 	//    (constraints += ConstraintRule)*
-	//    (abstract?='abstract')? 'type' name = StringOrId ('extends' superType = [TypeDefinition|QualifiedName])? '{'
+	//    (abstract?='abstract')? 'type' name = StringOrId ('extends' superType = [ClassDefinition|QualifiedName])? '{'
 	//        attributes += AttributeDefinitionRule*
 	//    '}'
 	//;
-	public BaseLanguageGrammarAccess.TypeDefinitionRuleElements getTypeDefinitionRuleAccess() {
-		return gaBaseLanguage.getTypeDefinitionRuleAccess();
+	public BaseLanguageGrammarAccess.ClassDefinitionRuleElements getClassDefinitionRuleAccess() {
+		return gaBaseLanguage.getClassDefinitionRuleAccess();
 	}
 	
-	public ParserRule getTypeDefinitionRuleRule() {
-		return getTypeDefinitionRuleAccess().getRule();
+	public ParserRule getClassDefinitionRuleRule() {
+		return getClassDefinitionRuleAccess().getRule();
 	}
 	
 	//ConstraintRule returns Instance:
@@ -576,13 +603,10 @@ public class InstanceLanguageGrammarAccess extends AbstractElementFinder.Abstrac
 	}
 	
 	//TypeRule returns types::Type:
-	//    StringTypeRule
-	//    | IntTypeRule
-	//    | RealTypeRule
-	//    | BooleanTypeRule
-	//    | ArrayTypeRule
-	//    | InstanceTypeRule
-	//    | VoidTypeRule
+	//    ArrayTypeRule
+	//    | BaseTypeRule
+	//    | TypeReferenceRule
+	//    | EnumReferenceRule
 	//    | ExpressionTypeRule
 	//    | LiteralTypeRule
 	//    | DataTypeRule
@@ -593,6 +617,43 @@ public class InstanceLanguageGrammarAccess extends AbstractElementFinder.Abstrac
 	
 	public ParserRule getTypeRuleRule() {
 		return getTypeRuleAccess().getRule();
+	}
+	
+	//BaseTypeRule returns types::BaseType:
+	//    StringTypeRule
+	//    | IntTypeRule
+	//    | RealTypeRule
+	//    | BooleanTypeRule
+	//    | VoidTypeRule
+	//;
+	public BaseLanguageGrammarAccess.BaseTypeRuleElements getBaseTypeRuleAccess() {
+		return gaBaseLanguage.getBaseTypeRuleAccess();
+	}
+	
+	public ParserRule getBaseTypeRuleRule() {
+		return getBaseTypeRuleAccess().getRule();
+	}
+	
+	//EnumReferenceRule returns  types::DefinitionReference:
+	//    'enum' definition = [EnumDefinition|QualifiedName]
+	//;
+	public BaseLanguageGrammarAccess.EnumReferenceRuleElements getEnumReferenceRuleAccess() {
+		return gaBaseLanguage.getEnumReferenceRuleAccess();
+	}
+	
+	public ParserRule getEnumReferenceRuleRule() {
+		return getEnumReferenceRuleAccess().getRule();
+	}
+	
+	//TypeReferenceRule returns types::DefinitionReference:
+	//    'instance' definition = [ClassDefinition|QualifiedName]
+	//;
+	public BaseLanguageGrammarAccess.TypeReferenceRuleElements getTypeReferenceRuleAccess() {
+		return gaBaseLanguage.getTypeReferenceRuleAccess();
+	}
+	
+	public ParserRule getTypeReferenceRuleRule() {
+		return getTypeReferenceRuleAccess().getRule();
 	}
 	
 	//LiteralTypeRule returns types::LiteralType:
@@ -616,18 +677,6 @@ public class InstanceLanguageGrammarAccess extends AbstractElementFinder.Abstrac
 	
 	public ParserRule getDataTypeRuleRule() {
 		return getDataTypeRuleAccess().getRule();
-	}
-	
-	//InstanceTypeRule returns types::InstanceType:
-	//    {types::InstanceType}
-	//    'instance' definition = [TypeDefinition|QualifiedName]
-	//;
-	public BaseLanguageGrammarAccess.InstanceTypeRuleElements getInstanceTypeRuleAccess() {
-		return gaBaseLanguage.getInstanceTypeRuleAccess();
-	}
-	
-	public ParserRule getInstanceTypeRuleRule() {
-		return getInstanceTypeRuleAccess().getRule();
 	}
 	
 	//StringTypeRule returns types::StringType:

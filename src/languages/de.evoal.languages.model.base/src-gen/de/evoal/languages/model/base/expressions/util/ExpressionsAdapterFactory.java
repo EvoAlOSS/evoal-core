@@ -72,8 +72,16 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 				return createExpressionAdapter();
 			}
 			@Override
-			public Adapter caseValue(Value object) {
-				return createValueAdapter();
+			public Adapter caseReadExpression(ReadExpression object) {
+				return createReadExpressionAdapter();
+			}
+			@Override
+			public Adapter caseConstantExpression(ConstantExpression object) {
+				return createConstantExpressionAdapter();
+			}
+			@Override
+			public Adapter caseWriteExpression(WriteExpression object) {
+				return createWriteExpressionAdapter();
 			}
 			@Override
 			public Adapter caseOrExpression(OrExpression object) {
@@ -116,10 +124,6 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 				return createUnaryAddOrSubtractExpressionAdapter();
 			}
 			@Override
-			public Adapter caseConstantValue(ConstantValue object) {
-				return createConstantValueAdapter();
-			}
-			@Override
 			public Adapter caseLiteral(Literal object) {
 				return createLiteralAdapter();
 			}
@@ -152,20 +156,16 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 				return createValueReferenceAdapter();
 			}
 			@Override
-			public Adapter caseDataReference(DataReference object) {
-				return createDataReferenceAdapter();
-			}
-			@Override
 			public Adapter caseSelfReference(SelfReference object) {
 				return createSelfReferenceAdapter();
 			}
 			@Override
-			public Adapter caseEnumLiteralReference(EnumLiteralReference object) {
-				return createEnumLiteralReferenceAdapter();
+			public Adapter caseLiteralDefinitionReference(LiteralDefinitionReference object) {
+				return createLiteralDefinitionReferenceAdapter();
 			}
 			@Override
-			public Adapter caseConstantReference(ConstantReference object) {
-				return createConstantReferenceAdapter();
+			public Adapter caseTypeDefinitionReference(TypeDefinitionReference object) {
+				return createTypeDefinitionReferenceAdapter();
 			}
 			@Override
 			public Adapter caseBooleanLiteral(BooleanLiteral object) {
@@ -204,20 +204,6 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.expressions.Value <em>Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.evoal.languages.model.base.expressions.Value
-	 * @generated
-	 */
-	public Adapter createValueAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.expressions.Expression <em>Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -228,6 +214,48 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createExpressionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.expressions.ReadExpression <em>Read Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.evoal.languages.model.base.expressions.ReadExpression
+	 * @generated
+	 */
+	public Adapter createReadExpressionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.expressions.ConstantExpression <em>Constant Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.evoal.languages.model.base.expressions.ConstantExpression
+	 * @generated
+	 */
+	public Adapter createConstantExpressionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.expressions.WriteExpression <em>Write Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.evoal.languages.model.base.expressions.WriteExpression
+	 * @generated
+	 */
+	public Adapter createWriteExpressionAdapter() {
 		return null;
 	}
 
@@ -372,20 +400,6 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.expressions.ConstantValue <em>Constant Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.evoal.languages.model.base.expressions.ConstantValue
-	 * @generated
-	 */
-	public Adapter createConstantValueAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.expressions.Literal <em>Literal</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -498,20 +512,6 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.expressions.DataReference <em>Data Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.evoal.languages.model.base.expressions.DataReference
-	 * @generated
-	 */
-	public Adapter createDataReferenceAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.expressions.SelfReference <em>Self Reference</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -526,30 +526,30 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.expressions.EnumLiteralReference <em>Enum Literal Reference</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.expressions.LiteralDefinitionReference <em>Literal Definition Reference</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.evoal.languages.model.base.expressions.EnumLiteralReference
+	 * @see de.evoal.languages.model.base.expressions.LiteralDefinitionReference
 	 * @generated
 	 */
-	public Adapter createEnumLiteralReferenceAdapter() {
+	public Adapter createLiteralDefinitionReferenceAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.expressions.ConstantReference <em>Constant Reference</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.expressions.TypeDefinitionReference <em>Type Definition Reference</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.evoal.languages.model.base.expressions.ConstantReference
+	 * @see de.evoal.languages.model.base.expressions.TypeDefinitionReference
 	 * @generated
 	 */
-	public Adapter createConstantReferenceAdapter() {
+	public Adapter createTypeDefinitionReferenceAdapter() {
 		return null;
 	}
 

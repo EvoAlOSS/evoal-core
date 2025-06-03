@@ -33,9 +33,9 @@ module search {
 		'mover' := 'constriction-factor-mover' {
 		    'c1' := 2.05;
 		    'c2' := 2.05;
-		    'boundary-type' := "BOUNCE";
+		    'boundary-type' := 'boundary-handling.bounce';
         };
-        'topology' := "GLOBAL";
+        'topology' := 'topology.global';
 		'initialisation' := 'random-population' {};
 		'comparator' := 'numeric-comparator' {};
 		'optimisation-function' := 'problem-function' {};

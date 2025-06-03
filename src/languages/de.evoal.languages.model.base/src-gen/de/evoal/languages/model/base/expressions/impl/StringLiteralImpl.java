@@ -5,8 +5,10 @@ package de.evoal.languages.model.base.expressions.impl;
 import de.evoal.languages.model.base.expressions.ExpressionsPackage;
 import de.evoal.languages.model.base.expressions.StringLiteral;
 
+import java.lang.reflect.InvocationTargetException;
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -19,31 +21,31 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link de.evoal.languages.model.base.expressions.impl.StringLiteralImpl#getValue <em>Value</em>}</li>
+ *   <li>{@link de.evoal.languages.model.base.expressions.impl.StringLiteralImpl#getLiteral <em>Literal</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class StringLiteralImpl extends LiteralImpl implements StringLiteral {
 	/**
-	 * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
+	 * The default value of the '{@link #getLiteral() <em>Literal</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getValue()
+	 * @see #getLiteral()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String VALUE_EDEFAULT = null;
+	protected static final String LITERAL_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
+	 * The cached value of the '{@link #getLiteral() <em>Literal</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getValue()
+	 * @see #getLiteral()
 	 * @generated
 	 * @ordered
 	 */
-	protected String value = VALUE_EDEFAULT;
+	protected String literal = LITERAL_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -70,8 +72,8 @@ public class StringLiteralImpl extends LiteralImpl implements StringLiteral {
 	 * @generated
 	 */
 	@Override
-	public String getValue() {
-		return value;
+	public String getLiteral() {
+		return literal;
 	}
 
 	/**
@@ -80,11 +82,22 @@ public class StringLiteralImpl extends LiteralImpl implements StringLiteral {
 	 * @generated
 	 */
 	@Override
-	public void setValue(String newValue) {
-		String oldValue = value;
-		value = newValue;
+	public void setLiteral(String newLiteral) {
+		String oldLiteral = literal;
+		literal = newLiteral;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExpressionsPackage.STRING_LITERAL__VALUE, oldValue, value));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExpressionsPackage.STRING_LITERAL__LITERAL, oldLiteral, literal));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getValue() {
+		return literal;
+		
 	}
 
 	/**
@@ -95,8 +108,8 @@ public class StringLiteralImpl extends LiteralImpl implements StringLiteral {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ExpressionsPackage.STRING_LITERAL__VALUE:
-				return getValue();
+			case ExpressionsPackage.STRING_LITERAL__LITERAL:
+				return getLiteral();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -109,8 +122,8 @@ public class StringLiteralImpl extends LiteralImpl implements StringLiteral {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ExpressionsPackage.STRING_LITERAL__VALUE:
-				setValue((String)newValue);
+			case ExpressionsPackage.STRING_LITERAL__LITERAL:
+				setLiteral((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -124,8 +137,8 @@ public class StringLiteralImpl extends LiteralImpl implements StringLiteral {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ExpressionsPackage.STRING_LITERAL__VALUE:
-				setValue(VALUE_EDEFAULT);
+			case ExpressionsPackage.STRING_LITERAL__LITERAL:
+				setLiteral(LITERAL_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -139,10 +152,24 @@ public class StringLiteralImpl extends LiteralImpl implements StringLiteral {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ExpressionsPackage.STRING_LITERAL__VALUE:
-				return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
+			case ExpressionsPackage.STRING_LITERAL__LITERAL:
+				return LITERAL_EDEFAULT == null ? literal != null : !LITERAL_EDEFAULT.equals(literal);
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		switch (operationID) {
+			case ExpressionsPackage.STRING_LITERAL___GET_VALUE:
+				return getValue();
+		}
+		return super.eInvoke(operationID, arguments);
 	}
 
 	/**
@@ -155,8 +182,8 @@ public class StringLiteralImpl extends LiteralImpl implements StringLiteral {
 		if (eIsProxy()) return super.toString();
 
 		StringBuilder result = new StringBuilder(super.toString());
-		result.append(" (value: ");
-		result.append(value);
+		result.append(" (literal: ");
+		result.append(literal);
 		result.append(')');
 		return result.toString();
 	}

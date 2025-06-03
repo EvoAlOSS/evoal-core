@@ -5,8 +5,8 @@ package de.evoal.languages.model.base.definitions.impl;
 import de.evoal.languages.model.base.definitions.DataTypeTypeDefinition;
 import de.evoal.languages.model.base.definitions.DefinitionsPackage;
 import de.evoal.languages.model.base.definitions.ScaleType;
-
 import de.evoal.languages.model.base.definitions.ScaledDefinition;
+
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;

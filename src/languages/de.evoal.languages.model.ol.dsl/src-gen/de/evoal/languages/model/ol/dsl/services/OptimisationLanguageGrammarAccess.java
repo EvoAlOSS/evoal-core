@@ -94,8 +94,8 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cSpecifyKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cDefinitionAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final CrossReference cDefinitionTypeDefinitionCrossReference_1_0 = (CrossReference)cDefinitionAssignment_1.eContents().get(0);
-		private final RuleCall cDefinitionTypeDefinitionQualifiedNameParserRuleCall_1_0_1 = (RuleCall)cDefinitionTypeDefinitionCrossReference_1_0.eContents().get(1);
+		private final CrossReference cDefinitionClassDefinitionCrossReference_1_0 = (CrossReference)cDefinitionAssignment_1.eContents().get(0);
+		private final RuleCall cDefinitionClassDefinitionQualifiedNameParserRuleCall_1_0_1 = (RuleCall)cDefinitionClassDefinitionCrossReference_1_0.eContents().get(1);
 		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cNameStringOrIdParserRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
 		private final Keyword cLeftCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
@@ -110,14 +110,14 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
 		//ProblemRule returns ProblemInstance:
-		//    "specify" definition=[definitions::TypeDefinition|QualifiedName] name = StringOrId "{"
+		//    "specify" definition=[definitions::ClassDefinition|QualifiedName] name = StringOrId "{"
 		//        attributes+=AttributeRule*
 		//        ("documenting" ":=" documentation = ArrayRule ';')?
 		//    "}"
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//"specify" definition=[definitions::TypeDefinition|QualifiedName] name = StringOrId "{"
+		//"specify" definition=[definitions::ClassDefinition|QualifiedName] name = StringOrId "{"
 		//    attributes+=AttributeRule*
 		//    ("documenting" ":=" documentation = ArrayRule ';')?
 		//"}"
@@ -126,14 +126,14 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 		//"specify"
 		public Keyword getSpecifyKeyword_0() { return cSpecifyKeyword_0; }
 		
-		//definition=[definitions::TypeDefinition|QualifiedName]
+		//definition=[definitions::ClassDefinition|QualifiedName]
 		public Assignment getDefinitionAssignment_1() { return cDefinitionAssignment_1; }
 		
-		//[definitions::TypeDefinition|QualifiedName]
-		public CrossReference getDefinitionTypeDefinitionCrossReference_1_0() { return cDefinitionTypeDefinitionCrossReference_1_0; }
+		//[definitions::ClassDefinition|QualifiedName]
+		public CrossReference getDefinitionClassDefinitionCrossReference_1_0() { return cDefinitionClassDefinitionCrossReference_1_0; }
 		
 		//QualifiedName
-		public RuleCall getDefinitionTypeDefinitionQualifiedNameParserRuleCall_1_0_1() { return cDefinitionTypeDefinitionQualifiedNameParserRuleCall_1_0_1; }
+		public RuleCall getDefinitionClassDefinitionQualifiedNameParserRuleCall_1_0_1() { return cDefinitionClassDefinitionQualifiedNameParserRuleCall_1_0_1; }
 		
 		//name = StringOrId
 		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
@@ -176,8 +176,8 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cConfigureKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cDefinitionAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final CrossReference cDefinitionTypeDefinitionCrossReference_1_0 = (CrossReference)cDefinitionAssignment_1.eContents().get(0);
-		private final RuleCall cDefinitionTypeDefinitionQualifiedNameParserRuleCall_1_0_1 = (RuleCall)cDefinitionTypeDefinitionCrossReference_1_0.eContents().get(1);
+		private final CrossReference cDefinitionClassDefinitionCrossReference_1_0 = (CrossReference)cDefinitionAssignment_1.eContents().get(0);
+		private final RuleCall cDefinitionClassDefinitionQualifiedNameParserRuleCall_1_0_1 = (RuleCall)cDefinitionClassDefinitionCrossReference_1_0.eContents().get(1);
 		private final Keyword cForKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		private final Assignment cProblemAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final CrossReference cProblemProblemInstanceCrossReference_3_0 = (CrossReference)cProblemAssignment_3.eContents().get(0);
@@ -194,14 +194,14 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 		private final Keyword cRightCurlyBracketKeyword_7 = (Keyword)cGroup.eContents().get(7);
 		
 		//AlgorithmInstanceRule returns AlgorithmInstance:
-		//    "configure" definition=[definitions::TypeDefinition|QualifiedName] "for" problem = [ProblemInstance|QualifiedName] "{"
+		//    "configure" definition=[definitions::ClassDefinition|QualifiedName] "for" problem = [ProblemInstance|QualifiedName] "{"
 		//        attributes+=AttributeRule*
 		//        ("documenting" ":=" documentation = ArrayRule ';')?
 		//    "}"
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//"configure" definition=[definitions::TypeDefinition|QualifiedName] "for" problem = [ProblemInstance|QualifiedName] "{"
+		//"configure" definition=[definitions::ClassDefinition|QualifiedName] "for" problem = [ProblemInstance|QualifiedName] "{"
 		//    attributes+=AttributeRule*
 		//    ("documenting" ":=" documentation = ArrayRule ';')?
 		//"}"
@@ -210,14 +210,14 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 		//"configure"
 		public Keyword getConfigureKeyword_0() { return cConfigureKeyword_0; }
 		
-		//definition=[definitions::TypeDefinition|QualifiedName]
+		//definition=[definitions::ClassDefinition|QualifiedName]
 		public Assignment getDefinitionAssignment_1() { return cDefinitionAssignment_1; }
 		
-		//[definitions::TypeDefinition|QualifiedName]
-		public CrossReference getDefinitionTypeDefinitionCrossReference_1_0() { return cDefinitionTypeDefinitionCrossReference_1_0; }
+		//[definitions::ClassDefinition|QualifiedName]
+		public CrossReference getDefinitionClassDefinitionCrossReference_1_0() { return cDefinitionClassDefinitionCrossReference_1_0; }
 		
 		//QualifiedName
-		public RuleCall getDefinitionTypeDefinitionQualifiedNameParserRuleCall_1_0_1() { return cDefinitionTypeDefinitionQualifiedNameParserRuleCall_1_0_1; }
+		public RuleCall getDefinitionClassDefinitionQualifiedNameParserRuleCall_1_0_1() { return cDefinitionClassDefinitionQualifiedNameParserRuleCall_1_0_1; }
 		
 		//"for"
 		public Keyword getForKeyword_2() { return cForKeyword_2; }
@@ -332,7 +332,7 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 	}
 	
 	//ProblemRule returns ProblemInstance:
-	//    "specify" definition=[definitions::TypeDefinition|QualifiedName] name = StringOrId "{"
+	//    "specify" definition=[definitions::ClassDefinition|QualifiedName] name = StringOrId "{"
 	//        attributes+=AttributeRule*
 	//        ("documenting" ":=" documentation = ArrayRule ';')?
 	//    "}"
@@ -346,7 +346,7 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 	}
 	
 	//AlgorithmInstanceRule returns AlgorithmInstance:
-	//    "configure" definition=[definitions::TypeDefinition|QualifiedName] "for" problem = [ProblemInstance|QualifiedName] "{"
+	//    "configure" definition=[definitions::ClassDefinition|QualifiedName] "for" problem = [ProblemInstance|QualifiedName] "{"
 	//        attributes+=AttributeRule*
 	//        ("documenting" ":=" documentation = ArrayRule ';')?
 	//    "}"
@@ -508,7 +508,7 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 	}
 	
 	//UnaryAddOrSubtractExpressionRule returns UnaryAddOrSubtractExpression :
-	//    ( operators+=AddOrSubtractOperatorRule )* subExpression = ValueRule
+	//    ( operators+=AddOrSubtractOperatorRule )* subExpression = ReadExpressionRule
 	//;
 	public BaseLanguageGrammarAccess.UnaryAddOrSubtractExpressionRuleElements getUnaryAddOrSubtractExpressionRuleAccess() {
 		return gaBaseLanguage.getUnaryAddOrSubtractExpressionRuleAccess();
@@ -518,19 +518,23 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 		return getUnaryAddOrSubtractExpressionRuleAccess().getRule();
 	}
 	
-	//ValueRule returns Value:
-	//    ArrayRule | CallRule | LiteralRule | ParanthesesRule | ReferenceRule;
-	public BaseLanguageGrammarAccess.ValueRuleElements getValueRuleAccess() {
-		return gaBaseLanguage.getValueRuleAccess();
+	//ReadExpressionRule returns ReadExpression:
+	//    ArrayRule
+	//    | CallRule
+	//    | LiteralRule
+	//    | ParanthesesRule
+	//    | ReferenceRule;
+	public BaseLanguageGrammarAccess.ReadExpressionRuleElements getReadExpressionRuleAccess() {
+		return gaBaseLanguage.getReadExpressionRuleAccess();
 	}
 	
-	public ParserRule getValueRuleRule() {
-		return getValueRuleAccess().getRule();
+	public ParserRule getReadExpressionRuleRule() {
+		return getReadExpressionRuleAccess().getRule();
 	}
 	
 	//ArrayRule returns Array:
 	//    {Array}
-	//    '[' (values += ValueRule (',' values += ValueRule)* )? ']'
+	//    '[' (values += ReadExpressionRule (',' values += ReadExpressionRule)* )? ']'
 	//;
 	public BaseLanguageGrammarAccess.ArrayRuleElements getArrayRuleAccess() {
 		return gaBaseLanguage.getArrayRuleAccess();
@@ -562,8 +566,9 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 		return getCallRuleAccess().getRule();
 	}
 	
-	//ReferenceRule returns ValueReference:
-	//    ConstantReferenceRule | DataReferenceRule
+	//ReferenceRule returns ConstantExpression:
+	//    LiteralDefinitionReferenceRule
+	//    | TypeDefinitionReferenceRule
 	//;
 	public BaseLanguageGrammarAccess.ReferenceRuleElements getReferenceRuleAccess() {
 		return gaBaseLanguage.getReferenceRuleAccess();
@@ -573,26 +578,48 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 		return getReferenceRuleAccess().getRule();
 	}
 	
-	//DataReferenceRule returns DataReference:
-	//    'data' definition = [DataDescription|QualifiedName]
+	//LiteralDefinitionReferenceRule returns LiteralDefinitionReference:
+	//    definition = [LiteralDefinition|QualifiedName]
 	//;
-	public BaseLanguageGrammarAccess.DataReferenceRuleElements getDataReferenceRuleAccess() {
-		return gaBaseLanguage.getDataReferenceRuleAccess();
+	public BaseLanguageGrammarAccess.LiteralDefinitionReferenceRuleElements getLiteralDefinitionReferenceRuleAccess() {
+		return gaBaseLanguage.getLiteralDefinitionReferenceRuleAccess();
 	}
 	
-	public ParserRule getDataReferenceRuleRule() {
-		return getDataReferenceRuleAccess().getRule();
+	public ParserRule getLiteralDefinitionReferenceRuleRule() {
+		return getLiteralDefinitionReferenceRuleAccess().getRule();
 	}
 	
-	//ConstantReferenceRule returns ConstantReference:
-	//    definition = [ConstantDefinition|QualifiedName]
+	//TypeDefinitionReferenceRule returns TypeDefinitionReference:
+	//    BaseDataReferenceRule
+	//    | StructuredDataDescriptionReferenceRule;
+	public BaseLanguageGrammarAccess.TypeDefinitionReferenceRuleElements getTypeDefinitionReferenceRuleAccess() {
+		return gaBaseLanguage.getTypeDefinitionReferenceRuleAccess();
+	}
+	
+	public ParserRule getTypeDefinitionReferenceRuleRule() {
+		return getTypeDefinitionReferenceRuleAccess().getRule();
+	}
+	
+	//BaseDataReferenceRule returns TypeDefinitionReference:
+	//    'data' definition = [BaseDataDescription|QualifiedName]
 	//;
-	public BaseLanguageGrammarAccess.ConstantReferenceRuleElements getConstantReferenceRuleAccess() {
-		return gaBaseLanguage.getConstantReferenceRuleAccess();
+	public BaseLanguageGrammarAccess.BaseDataReferenceRuleElements getBaseDataReferenceRuleAccess() {
+		return gaBaseLanguage.getBaseDataReferenceRuleAccess();
 	}
 	
-	public ParserRule getConstantReferenceRuleRule() {
-		return getConstantReferenceRuleAccess().getRule();
+	public ParserRule getBaseDataReferenceRuleRule() {
+		return getBaseDataReferenceRuleAccess().getRule();
+	}
+	
+	//StructuredDataDescriptionReferenceRule returns TypeDefinitionReference:
+	//    'instance' definition = [StructuredDataDescription|QualifiedName]
+	//;
+	public BaseLanguageGrammarAccess.StructuredDataDescriptionReferenceRuleElements getStructuredDataDescriptionReferenceRuleAccess() {
+		return gaBaseLanguage.getStructuredDataDescriptionReferenceRuleAccess();
+	}
+	
+	public ParserRule getStructuredDataDescriptionReferenceRuleRule() {
+		return getStructuredDataDescriptionReferenceRuleAccess().getRule();
 	}
 	
 	//LiteralRule returns Literal:
@@ -610,7 +637,7 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 	}
 	
 	//InstanceLiteralRule returns Instance:
-	//    definition = [TypeDefinition|QualifiedName] '{'
+	//    definition = [ClassDefinition|QualifiedName] '{'
 	//      attributes += AttributeRule*
 	//    '}'
 	//;
@@ -667,7 +694,7 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 	}
 	
 	//StringLiteralRule returns StringLiteral:
-	//    value = STRING
+	//    literal = STRING
 	//;
 	public BaseLanguageGrammarAccess.StringLiteralRuleElements getStringLiteralRuleAccess() {
 		return gaBaseLanguage.getStringLiteralRuleAccess();
@@ -708,7 +735,7 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 	}
 	
 	//BooleanLiteralRule returns BooleanLiteral:
-	//    {BooleanLiteral} (value ?= 'true' |  'false')
+	//    {BooleanLiteral} (literal ?= 'true' |  'false')
 	//;
 	public BaseLanguageGrammarAccess.BooleanLiteralRuleElements getBooleanLiteralRuleAccess() {
 		return gaBaseLanguage.getBooleanLiteralRuleAccess();
@@ -718,18 +745,18 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 		return getBooleanLiteralRuleAccess().getRule();
 	}
 	
-	//TypeDefinitionRule returns TypeDefinition:
+	//ClassDefinitionRule returns ClassDefinition:
 	//    (constraints += ConstraintRule)*
-	//    (abstract?='abstract')? 'type' name = StringOrId ('extends' superType = [TypeDefinition|QualifiedName])? '{'
+	//    (abstract?='abstract')? 'type' name = StringOrId ('extends' superType = [ClassDefinition|QualifiedName])? '{'
 	//        attributes += AttributeDefinitionRule*
 	//    '}'
 	//;
-	public BaseLanguageGrammarAccess.TypeDefinitionRuleElements getTypeDefinitionRuleAccess() {
-		return gaBaseLanguage.getTypeDefinitionRuleAccess();
+	public BaseLanguageGrammarAccess.ClassDefinitionRuleElements getClassDefinitionRuleAccess() {
+		return gaBaseLanguage.getClassDefinitionRuleAccess();
 	}
 	
-	public ParserRule getTypeDefinitionRuleRule() {
-		return getTypeDefinitionRuleAccess().getRule();
+	public ParserRule getClassDefinitionRuleRule() {
+		return getClassDefinitionRuleAccess().getRule();
 	}
 	
 	//ConstraintRule returns Instance:
@@ -756,13 +783,10 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 	}
 	
 	//TypeRule returns types::Type:
-	//    StringTypeRule
-	//    | IntTypeRule
-	//    | RealTypeRule
-	//    | BooleanTypeRule
-	//    | ArrayTypeRule
-	//    | InstanceTypeRule
-	//    | VoidTypeRule
+	//    ArrayTypeRule
+	//    | BaseTypeRule
+	//    | TypeReferenceRule
+	//    | EnumReferenceRule
 	//    | ExpressionTypeRule
 	//    | LiteralTypeRule
 	//    | DataTypeRule
@@ -773,6 +797,43 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 	
 	public ParserRule getTypeRuleRule() {
 		return getTypeRuleAccess().getRule();
+	}
+	
+	//BaseTypeRule returns types::BaseType:
+	//    StringTypeRule
+	//    | IntTypeRule
+	//    | RealTypeRule
+	//    | BooleanTypeRule
+	//    | VoidTypeRule
+	//;
+	public BaseLanguageGrammarAccess.BaseTypeRuleElements getBaseTypeRuleAccess() {
+		return gaBaseLanguage.getBaseTypeRuleAccess();
+	}
+	
+	public ParserRule getBaseTypeRuleRule() {
+		return getBaseTypeRuleAccess().getRule();
+	}
+	
+	//EnumReferenceRule returns  types::DefinitionReference:
+	//    'enum' definition = [EnumDefinition|QualifiedName]
+	//;
+	public BaseLanguageGrammarAccess.EnumReferenceRuleElements getEnumReferenceRuleAccess() {
+		return gaBaseLanguage.getEnumReferenceRuleAccess();
+	}
+	
+	public ParserRule getEnumReferenceRuleRule() {
+		return getEnumReferenceRuleAccess().getRule();
+	}
+	
+	//TypeReferenceRule returns types::DefinitionReference:
+	//    'instance' definition = [ClassDefinition|QualifiedName]
+	//;
+	public BaseLanguageGrammarAccess.TypeReferenceRuleElements getTypeReferenceRuleAccess() {
+		return gaBaseLanguage.getTypeReferenceRuleAccess();
+	}
+	
+	public ParserRule getTypeReferenceRuleRule() {
+		return getTypeReferenceRuleAccess().getRule();
 	}
 	
 	//LiteralTypeRule returns types::LiteralType:
@@ -796,18 +857,6 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 	
 	public ParserRule getDataTypeRuleRule() {
 		return getDataTypeRuleAccess().getRule();
-	}
-	
-	//InstanceTypeRule returns types::InstanceType:
-	//    {types::InstanceType}
-	//    'instance' definition = [TypeDefinition|QualifiedName]
-	//;
-	public BaseLanguageGrammarAccess.InstanceTypeRuleElements getInstanceTypeRuleAccess() {
-		return gaBaseLanguage.getInstanceTypeRuleAccess();
-	}
-	
-	public ParserRule getInstanceTypeRuleRule() {
-		return getInstanceTypeRuleAccess().getRule();
 	}
 	
 	//StringTypeRule returns types::StringType:

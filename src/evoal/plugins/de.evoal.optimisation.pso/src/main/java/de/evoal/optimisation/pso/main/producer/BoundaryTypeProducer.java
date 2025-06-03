@@ -1,25 +1,32 @@
 package de.evoal.optimisation.pso.main.producer;
 
 import de.evoal.core.api.cdi.ConfigurationValue;
+import de.evoal.languages.model.base.definitions.EnumLiteralDefinition;
 import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
 import de.evoal.optimisation.pso.api.BoundaryType;
 import de.evoal.optimisation.pso.main.impl.NeighborhoodTopology;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
 import javax.inject.Singleton;
 
+@Slf4j
 @ApplicationScoped
 public class BoundaryTypeProducer {
     @Produces
     @Singleton
-    public BoundaryType createBoundaryType(@ConfigurationValue(entry = OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.mover.boundary-type") String typeName) {
-        return BoundaryType.valueOf(typeName);
+    public BoundaryType createBoundaryType(@ConfigurationValue(entry = OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.mover.boundary-type") EnumLiteralDefinition name) {
+        log.info("Looking up boundary type {}", name.getName());
+
+        return BoundaryType.valueOf(name.getName().toUpperCase());
     }
 
     @Produces
     @Singleton
-    public NeighborhoodTopology.Topology createTopology(@ConfigurationValue(entry = OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.topology") String topologyName) {
-        return NeighborhoodTopology.Topology.valueOf(topologyName);
+    public NeighborhoodTopology.Topology createTopology(@ConfigurationValue(entry = OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.topology") EnumLiteralDefinition name) {
+        log.info("Looking up topology {}", name.getName());
+
+        return NeighborhoodTopology.Topology.valueOf(name.getName().toUpperCase());
     }
 }

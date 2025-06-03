@@ -3,6 +3,7 @@
 package de.evoal.languages.model.base.definitions;
 
 import de.evoal.languages.model.base.expressions.Expression;
+
 import de.evoal.languages.model.base.types.Type;
 
 /**
@@ -28,7 +29,7 @@ import de.evoal.languages.model.base.types.Type;
  * @model
  * @generated
  */
-public interface ConstantDefinition extends Definition {
+public interface ConstantDefinition extends LiteralDefinition {
 	/**
 	 * Returns the value of the '<em><b>Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

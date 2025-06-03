@@ -85,7 +85,7 @@ public class StringSwitch extends ExpressionsSwitch<String> {
 
     @Override
     public String caseStringLiteral(StringLiteral object) {
-        return object.getValue();
+        return object.getLiteral();
     }
 
     @Override

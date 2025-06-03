@@ -10,6 +10,7 @@ import de.evoal.languages.model.base.dsl.services.BaseLanguageGrammarAccess;
 import java.util.List;
 import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.EnumLiteralDeclaration;
 import org.eclipse.xtext.EnumRule;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
@@ -35,25 +36,27 @@ public class DefinitionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 		private final RuleCall cNameQualifiedNameParserRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
 		private final Keyword cLeftCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		private final Alternatives cAlternatives_4 = (Alternatives)cGroup.eContents().get(4);
-		private final Assignment cTypesAssignment_4_0 = (Assignment)cAlternatives_4.eContents().get(0);
-		private final RuleCall cTypesTypeDefinitionRuleParserRuleCall_4_0_0 = (RuleCall)cTypesAssignment_4_0.eContents().get(0);
-		private final Assignment cFunctionsAssignment_4_1 = (Assignment)cAlternatives_4.eContents().get(1);
-		private final RuleCall cFunctionsFunctionDefinitionRuleParserRuleCall_4_1_0 = (RuleCall)cFunctionsAssignment_4_1.eContents().get(0);
-		private final Assignment cConstantsAssignment_4_2 = (Assignment)cAlternatives_4.eContents().get(2);
-		private final RuleCall cConstantsConstantDefinitionRuleParserRuleCall_4_2_0 = (RuleCall)cConstantsAssignment_4_2.eContents().get(0);
+		private final Assignment cEnumsAssignment_4_0 = (Assignment)cAlternatives_4.eContents().get(0);
+		private final RuleCall cEnumsEnumTypeDefinitionRuleParserRuleCall_4_0_0 = (RuleCall)cEnumsAssignment_4_0.eContents().get(0);
+		private final Assignment cTypesAssignment_4_1 = (Assignment)cAlternatives_4.eContents().get(1);
+		private final RuleCall cTypesClassDefinitionRuleParserRuleCall_4_1_0 = (RuleCall)cTypesAssignment_4_1.eContents().get(0);
+		private final Assignment cFunctionsAssignment_4_2 = (Assignment)cAlternatives_4.eContents().get(2);
+		private final RuleCall cFunctionsFunctionDefinitionRuleParserRuleCall_4_2_0 = (RuleCall)cFunctionsAssignment_4_2.eContents().get(0);
+		private final Assignment cConstantsAssignment_4_3 = (Assignment)cAlternatives_4.eContents().get(3);
+		private final RuleCall cConstantsConstantDefinitionRuleParserRuleCall_4_3_0 = (RuleCall)cConstantsAssignment_4_3.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//DefinitionModelRule returns DefinitionModule:
 		//    (imports += ImportRule)*
 		//    'module' name = QualifiedName '{'
-		//        ((types += TypeDefinitionRule ) | (functions += FunctionDefinitionRule ) | constants += ConstantDefinitionRule)*
+		//        ((enums += EnumTypeDefinitionRule) | (types += ClassDefinitionRule ) | (functions += FunctionDefinitionRule ) | constants += ConstantDefinitionRule)*
 		//    '}'
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//(imports += ImportRule)*
 		//'module' name = QualifiedName '{'
-		//    ((types += TypeDefinitionRule ) | (functions += FunctionDefinitionRule ) | constants += ConstantDefinitionRule)*
+		//    ((enums += EnumTypeDefinitionRule) | (types += ClassDefinitionRule ) | (functions += FunctionDefinitionRule ) | constants += ConstantDefinitionRule)*
 		//'}'
 		public Group getGroup() { return cGroup; }
 		
@@ -75,33 +78,237 @@ public class DefinitionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
 		
-		//((types += TypeDefinitionRule ) | (functions += FunctionDefinitionRule ) | constants += ConstantDefinitionRule)*
+		//((enums += EnumTypeDefinitionRule) | (types += ClassDefinitionRule ) | (functions += FunctionDefinitionRule ) | constants += ConstantDefinitionRule)*
 		public Alternatives getAlternatives_4() { return cAlternatives_4; }
 		
-		//(types += TypeDefinitionRule )
-		public Assignment getTypesAssignment_4_0() { return cTypesAssignment_4_0; }
+		//(enums += EnumTypeDefinitionRule)
+		public Assignment getEnumsAssignment_4_0() { return cEnumsAssignment_4_0; }
 		
-		//TypeDefinitionRule
-		public RuleCall getTypesTypeDefinitionRuleParserRuleCall_4_0_0() { return cTypesTypeDefinitionRuleParserRuleCall_4_0_0; }
+		//EnumTypeDefinitionRule
+		public RuleCall getEnumsEnumTypeDefinitionRuleParserRuleCall_4_0_0() { return cEnumsEnumTypeDefinitionRuleParserRuleCall_4_0_0; }
+		
+		//(types += ClassDefinitionRule )
+		public Assignment getTypesAssignment_4_1() { return cTypesAssignment_4_1; }
+		
+		//ClassDefinitionRule
+		public RuleCall getTypesClassDefinitionRuleParserRuleCall_4_1_0() { return cTypesClassDefinitionRuleParserRuleCall_4_1_0; }
 		
 		//(functions += FunctionDefinitionRule )
-		public Assignment getFunctionsAssignment_4_1() { return cFunctionsAssignment_4_1; }
+		public Assignment getFunctionsAssignment_4_2() { return cFunctionsAssignment_4_2; }
 		
 		//FunctionDefinitionRule
-		public RuleCall getFunctionsFunctionDefinitionRuleParserRuleCall_4_1_0() { return cFunctionsFunctionDefinitionRuleParserRuleCall_4_1_0; }
+		public RuleCall getFunctionsFunctionDefinitionRuleParserRuleCall_4_2_0() { return cFunctionsFunctionDefinitionRuleParserRuleCall_4_2_0; }
 		
 		//constants += ConstantDefinitionRule
-		public Assignment getConstantsAssignment_4_2() { return cConstantsAssignment_4_2; }
+		public Assignment getConstantsAssignment_4_3() { return cConstantsAssignment_4_3; }
 		
 		//ConstantDefinitionRule
-		public RuleCall getConstantsConstantDefinitionRuleParserRuleCall_4_2_0() { return cConstantsConstantDefinitionRuleParserRuleCall_4_2_0; }
+		public RuleCall getConstantsConstantDefinitionRuleParserRuleCall_4_3_0() { return cConstantsConstantDefinitionRuleParserRuleCall_4_3_0; }
 		
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_5() { return cRightCurlyBracketKeyword_5; }
 	}
+	public class EnumLiteralRuleElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.dl.dsl.DefinitionLanguage.EnumLiteralRule");
+		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
+		private final RuleCall cNameStringOrIdParserRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
+		
+		//EnumLiteralRule returns definitions::EnumLiteralDefinition:
+		//    name = StringOrId
+		//;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//name = StringOrId
+		public Assignment getNameAssignment() { return cNameAssignment; }
+		
+		//StringOrId
+		public RuleCall getNameStringOrIdParserRuleCall_0() { return cNameStringOrIdParserRuleCall_0; }
+	}
+	public class EnumTypeDefinitionRuleElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.dl.dsl.DefinitionLanguage.EnumTypeDefinitionRule");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cConstraintsAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cConstraintsConstraintRuleParserRuleCall_0_0 = (RuleCall)cConstraintsAssignment_0.eContents().get(0);
+		private final Assignment cScaleAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cScaleScaleTypeEnumRuleCall_1_0 = (RuleCall)cScaleAssignment_1.eContents().get(0);
+		private final Keyword cEnumKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cNameAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cNameStringOrIdParserRuleCall_3_0 = (RuleCall)cNameAssignment_3.eContents().get(0);
+		private final Keyword cLeftParenthesisKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Assignment cLiteralsAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final RuleCall cLiteralsEnumLiteralRuleParserRuleCall_5_0 = (RuleCall)cLiteralsAssignment_5.eContents().get(0);
+		private final Group cGroup_6 = (Group)cGroup.eContents().get(6);
+		private final Keyword cCommaKeyword_6_0 = (Keyword)cGroup_6.eContents().get(0);
+		private final Assignment cLiteralsAssignment_6_1 = (Assignment)cGroup_6.eContents().get(1);
+		private final RuleCall cLiteralsEnumLiteralRuleParserRuleCall_6_1_0 = (RuleCall)cLiteralsAssignment_6_1.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_7 = (Keyword)cGroup.eContents().get(7);
+		private final Group cGroup_8 = (Group)cGroup.eContents().get(8);
+		private final Keyword cWithKeyword_8_0 = (Keyword)cGroup_8.eContents().get(0);
+		private final Keyword cConstraintsKeyword_8_1 = (Keyword)cGroup_8.eContents().get(1);
+		private final Keyword cColonKeyword_8_2 = (Keyword)cGroup_8.eContents().get(2);
+		private final Assignment cConstraintsAssignment_8_3 = (Assignment)cGroup_8.eContents().get(3);
+		private final RuleCall cConstraintsStatementRuleParserRuleCall_8_3_0 = (RuleCall)cConstraintsAssignment_8_3.eContents().get(0);
+		private final Keyword cSemicolonKeyword_9 = (Keyword)cGroup.eContents().get(9);
+		
+		//EnumTypeDefinitionRule returns definitions::EnumDefinition:
+		//    (constraints += BaseLanguage::ConstraintRule)*
+		//    scale = ScaleType
+		//    'enum' name = StringOrId '(' literals += EnumLiteralRule (',' literals += EnumLiteralRule)* ')'
+		//    ('with' 'constraints' ':' (constraints += StatementRule)*)?
+		//';'
+		//;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//    (constraints += BaseLanguage::ConstraintRule)*
+		//    scale = ScaleType
+		//    'enum' name = StringOrId '(' literals += EnumLiteralRule (',' literals += EnumLiteralRule)* ')'
+		//    ('with' 'constraints' ':' (constraints += StatementRule)*)?
+		//';'
+		public Group getGroup() { return cGroup; }
+		
+		//(constraints += BaseLanguage::ConstraintRule)*
+		public Assignment getConstraintsAssignment_0() { return cConstraintsAssignment_0; }
+		
+		//BaseLanguage::ConstraintRule
+		public RuleCall getConstraintsConstraintRuleParserRuleCall_0_0() { return cConstraintsConstraintRuleParserRuleCall_0_0; }
+		
+		//scale = ScaleType
+		public Assignment getScaleAssignment_1() { return cScaleAssignment_1; }
+		
+		//ScaleType
+		public RuleCall getScaleScaleTypeEnumRuleCall_1_0() { return cScaleScaleTypeEnumRuleCall_1_0; }
+		
+		//'enum'
+		public Keyword getEnumKeyword_2() { return cEnumKeyword_2; }
+		
+		//name = StringOrId
+		public Assignment getNameAssignment_3() { return cNameAssignment_3; }
+		
+		//StringOrId
+		public RuleCall getNameStringOrIdParserRuleCall_3_0() { return cNameStringOrIdParserRuleCall_3_0; }
+		
+		//'('
+		public Keyword getLeftParenthesisKeyword_4() { return cLeftParenthesisKeyword_4; }
+		
+		//literals += EnumLiteralRule
+		public Assignment getLiteralsAssignment_5() { return cLiteralsAssignment_5; }
+		
+		//EnumLiteralRule
+		public RuleCall getLiteralsEnumLiteralRuleParserRuleCall_5_0() { return cLiteralsEnumLiteralRuleParserRuleCall_5_0; }
+		
+		//(',' literals += EnumLiteralRule)*
+		public Group getGroup_6() { return cGroup_6; }
+		
+		//','
+		public Keyword getCommaKeyword_6_0() { return cCommaKeyword_6_0; }
+		
+		//literals += EnumLiteralRule
+		public Assignment getLiteralsAssignment_6_1() { return cLiteralsAssignment_6_1; }
+		
+		//EnumLiteralRule
+		public RuleCall getLiteralsEnumLiteralRuleParserRuleCall_6_1_0() { return cLiteralsEnumLiteralRuleParserRuleCall_6_1_0; }
+		
+		//')'
+		public Keyword getRightParenthesisKeyword_7() { return cRightParenthesisKeyword_7; }
+		
+		//('with' 'constraints' ':' (constraints += StatementRule)*)?
+		public Group getGroup_8() { return cGroup_8; }
+		
+		//'with'
+		public Keyword getWithKeyword_8_0() { return cWithKeyword_8_0; }
+		
+		//'constraints'
+		public Keyword getConstraintsKeyword_8_1() { return cConstraintsKeyword_8_1; }
+		
+		//':'
+		public Keyword getColonKeyword_8_2() { return cColonKeyword_8_2; }
+		
+		//(constraints += StatementRule)*
+		public Assignment getConstraintsAssignment_8_3() { return cConstraintsAssignment_8_3; }
+		
+		//StatementRule
+		public RuleCall getConstraintsStatementRuleParserRuleCall_8_3_0() { return cConstraintsStatementRuleParserRuleCall_8_3_0; }
+		
+		//';'
+		public Keyword getSemicolonKeyword_9() { return cSemicolonKeyword_9; }
+	}
+	public class StatementRuleElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.dl.dsl.DefinitionLanguage.StatementRule");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final RuleCall cExpressionRuleParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
+		private final Keyword cSemicolonKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		
+		//StatementRule returns expressions::Expression:
+		//    BaseLanguage::ExpressionRule ';'
+		//;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//BaseLanguage::ExpressionRule ';'
+		public Group getGroup() { return cGroup; }
+		
+		//BaseLanguage::ExpressionRule
+		public RuleCall getExpressionRuleParserRuleCall_0() { return cExpressionRuleParserRuleCall_0; }
+		
+		//';'
+		public Keyword getSemicolonKeyword_1() { return cSemicolonKeyword_1; }
+	}
 	
+	public class ScaleTypeElements extends AbstractElementFinder.AbstractEnumRuleElementFinder {
+		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.dl.dsl.DefinitionLanguage.ScaleType");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final EnumLiteralDeclaration cNominalEnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
+		private final Keyword cNominalNominalKeyword_0_0 = (Keyword)cNominalEnumLiteralDeclaration_0.eContents().get(0);
+		private final EnumLiteralDeclaration cOrdinalEnumLiteralDeclaration_1 = (EnumLiteralDeclaration)cAlternatives.eContents().get(1);
+		private final Keyword cOrdinalOrdinalKeyword_1_0 = (Keyword)cOrdinalEnumLiteralDeclaration_1.eContents().get(0);
+		private final EnumLiteralDeclaration cCardinalEnumLiteralDeclaration_2 = (EnumLiteralDeclaration)cAlternatives.eContents().get(2);
+		private final Keyword cCardinalCardinalKeyword_2_0 = (Keyword)cCardinalEnumLiteralDeclaration_2.eContents().get(0);
+		private final EnumLiteralDeclaration cQuotientEnumLiteralDeclaration_3 = (EnumLiteralDeclaration)cAlternatives.eContents().get(3);
+		private final Keyword cQuotientQuotientKeyword_3_0 = (Keyword)cQuotientEnumLiteralDeclaration_3.eContents().get(0);
+		
+		//enum ScaleType returns definitions::ScaleType:
+		//    Nominal = 'nominal' |
+		//    Ordinal = 'ordinal' |
+		//    Cardinal = 'cardinal' |
+		//    Quotient = 'quotient'
+		//;
+		public EnumRule getRule() { return rule; }
+		
+		//Nominal = 'nominal' |
+		//Ordinal = 'ordinal' |
+		//Cardinal = 'cardinal' |
+		//Quotient = 'quotient'
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//Nominal = 'nominal'
+		public EnumLiteralDeclaration getNominalEnumLiteralDeclaration_0() { return cNominalEnumLiteralDeclaration_0; }
+		
+		//'nominal'
+		public Keyword getNominalNominalKeyword_0_0() { return cNominalNominalKeyword_0_0; }
+		
+		//Ordinal = 'ordinal'
+		public EnumLiteralDeclaration getOrdinalEnumLiteralDeclaration_1() { return cOrdinalEnumLiteralDeclaration_1; }
+		
+		//'ordinal'
+		public Keyword getOrdinalOrdinalKeyword_1_0() { return cOrdinalOrdinalKeyword_1_0; }
+		
+		//Cardinal = 'cardinal'
+		public EnumLiteralDeclaration getCardinalEnumLiteralDeclaration_2() { return cCardinalEnumLiteralDeclaration_2; }
+		
+		//'cardinal'
+		public Keyword getCardinalCardinalKeyword_2_0() { return cCardinalCardinalKeyword_2_0; }
+		
+		//Quotient = 'quotient'
+		public EnumLiteralDeclaration getQuotientEnumLiteralDeclaration_3() { return cQuotientEnumLiteralDeclaration_3; }
+		
+		//'quotient'
+		public Keyword getQuotientQuotientKeyword_3_0() { return cQuotientQuotientKeyword_3_0; }
+	}
 	
 	private final DefinitionModelRuleElements pDefinitionModelRule;
+	private final EnumLiteralRuleElements pEnumLiteralRule;
+	private final EnumTypeDefinitionRuleElements pEnumTypeDefinitionRule;
+	private final ScaleTypeElements eScaleType;
+	private final StatementRuleElements pStatementRule;
 	
 	private final Grammar grammar;
 	
@@ -117,6 +324,10 @@ public class DefinitionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 		this.gaBaseLanguage = gaBaseLanguage;
 		this.gaTerminals = gaTerminals;
 		this.pDefinitionModelRule = new DefinitionModelRuleElements();
+		this.pEnumLiteralRule = new EnumLiteralRuleElements();
+		this.pEnumTypeDefinitionRule = new EnumTypeDefinitionRuleElements();
+		this.eScaleType = new ScaleTypeElements();
+		this.pStatementRule = new StatementRuleElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -153,7 +364,7 @@ public class DefinitionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 	//DefinitionModelRule returns DefinitionModule:
 	//    (imports += ImportRule)*
 	//    'module' name = QualifiedName '{'
-	//        ((types += TypeDefinitionRule ) | (functions += FunctionDefinitionRule ) | constants += ConstantDefinitionRule)*
+	//        ((enums += EnumTypeDefinitionRule) | (types += ClassDefinitionRule ) | (functions += FunctionDefinitionRule ) | constants += ConstantDefinitionRule)*
 	//    '}'
 	//;
 	public DefinitionModelRuleElements getDefinitionModelRuleAccess() {
@@ -162,6 +373,57 @@ public class DefinitionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 	
 	public ParserRule getDefinitionModelRuleRule() {
 		return getDefinitionModelRuleAccess().getRule();
+	}
+	
+	//EnumLiteralRule returns definitions::EnumLiteralDefinition:
+	//    name = StringOrId
+	//;
+	public EnumLiteralRuleElements getEnumLiteralRuleAccess() {
+		return pEnumLiteralRule;
+	}
+	
+	public ParserRule getEnumLiteralRuleRule() {
+		return getEnumLiteralRuleAccess().getRule();
+	}
+	
+	//EnumTypeDefinitionRule returns definitions::EnumDefinition:
+	//    (constraints += BaseLanguage::ConstraintRule)*
+	//    scale = ScaleType
+	//    'enum' name = StringOrId '(' literals += EnumLiteralRule (',' literals += EnumLiteralRule)* ')'
+	//    ('with' 'constraints' ':' (constraints += StatementRule)*)?
+	//';'
+	//;
+	public EnumTypeDefinitionRuleElements getEnumTypeDefinitionRuleAccess() {
+		return pEnumTypeDefinitionRule;
+	}
+	
+	public ParserRule getEnumTypeDefinitionRuleRule() {
+		return getEnumTypeDefinitionRuleAccess().getRule();
+	}
+	
+	//enum ScaleType returns definitions::ScaleType:
+	//    Nominal = 'nominal' |
+	//    Ordinal = 'ordinal' |
+	//    Cardinal = 'cardinal' |
+	//    Quotient = 'quotient'
+	//;
+	public ScaleTypeElements getScaleTypeAccess() {
+		return eScaleType;
+	}
+	
+	public EnumRule getScaleTypeRule() {
+		return getScaleTypeAccess().getRule();
+	}
+	
+	//StatementRule returns expressions::Expression:
+	//    BaseLanguage::ExpressionRule ';'
+	//;
+	public StatementRuleElements getStatementRuleAccess() {
+		return pStatementRule;
+	}
+	
+	public ParserRule getStatementRuleRule() {
+		return getStatementRuleAccess().getRule();
 	}
 	
 	//ExpressionRule returns Expression:
@@ -313,7 +575,7 @@ public class DefinitionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 	}
 	
 	//UnaryAddOrSubtractExpressionRule returns UnaryAddOrSubtractExpression :
-	//    ( operators+=AddOrSubtractOperatorRule )* subExpression = ValueRule
+	//    ( operators+=AddOrSubtractOperatorRule )* subExpression = ReadExpressionRule
 	//;
 	public BaseLanguageGrammarAccess.UnaryAddOrSubtractExpressionRuleElements getUnaryAddOrSubtractExpressionRuleAccess() {
 		return gaBaseLanguage.getUnaryAddOrSubtractExpressionRuleAccess();
@@ -323,19 +585,23 @@ public class DefinitionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 		return getUnaryAddOrSubtractExpressionRuleAccess().getRule();
 	}
 	
-	//ValueRule returns Value:
-	//    ArrayRule | CallRule | LiteralRule | ParanthesesRule | ReferenceRule;
-	public BaseLanguageGrammarAccess.ValueRuleElements getValueRuleAccess() {
-		return gaBaseLanguage.getValueRuleAccess();
+	//ReadExpressionRule returns ReadExpression:
+	//    ArrayRule
+	//    | CallRule
+	//    | LiteralRule
+	//    | ParanthesesRule
+	//    | ReferenceRule;
+	public BaseLanguageGrammarAccess.ReadExpressionRuleElements getReadExpressionRuleAccess() {
+		return gaBaseLanguage.getReadExpressionRuleAccess();
 	}
 	
-	public ParserRule getValueRuleRule() {
-		return getValueRuleAccess().getRule();
+	public ParserRule getReadExpressionRuleRule() {
+		return getReadExpressionRuleAccess().getRule();
 	}
 	
 	//ArrayRule returns Array:
 	//    {Array}
-	//    '[' (values += ValueRule (',' values += ValueRule)* )? ']'
+	//    '[' (values += ReadExpressionRule (',' values += ReadExpressionRule)* )? ']'
 	//;
 	public BaseLanguageGrammarAccess.ArrayRuleElements getArrayRuleAccess() {
 		return gaBaseLanguage.getArrayRuleAccess();
@@ -367,8 +633,9 @@ public class DefinitionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 		return getCallRuleAccess().getRule();
 	}
 	
-	//ReferenceRule returns ValueReference:
-	//    ConstantReferenceRule | DataReferenceRule
+	//ReferenceRule returns ConstantExpression:
+	//    LiteralDefinitionReferenceRule
+	//    | TypeDefinitionReferenceRule
 	//;
 	public BaseLanguageGrammarAccess.ReferenceRuleElements getReferenceRuleAccess() {
 		return gaBaseLanguage.getReferenceRuleAccess();
@@ -378,26 +645,48 @@ public class DefinitionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 		return getReferenceRuleAccess().getRule();
 	}
 	
-	//DataReferenceRule returns DataReference:
-	//    'data' definition = [DataDescription|QualifiedName]
+	//LiteralDefinitionReferenceRule returns LiteralDefinitionReference:
+	//    definition = [LiteralDefinition|QualifiedName]
 	//;
-	public BaseLanguageGrammarAccess.DataReferenceRuleElements getDataReferenceRuleAccess() {
-		return gaBaseLanguage.getDataReferenceRuleAccess();
+	public BaseLanguageGrammarAccess.LiteralDefinitionReferenceRuleElements getLiteralDefinitionReferenceRuleAccess() {
+		return gaBaseLanguage.getLiteralDefinitionReferenceRuleAccess();
 	}
 	
-	public ParserRule getDataReferenceRuleRule() {
-		return getDataReferenceRuleAccess().getRule();
+	public ParserRule getLiteralDefinitionReferenceRuleRule() {
+		return getLiteralDefinitionReferenceRuleAccess().getRule();
 	}
 	
-	//ConstantReferenceRule returns ConstantReference:
-	//    definition = [ConstantDefinition|QualifiedName]
+	//TypeDefinitionReferenceRule returns TypeDefinitionReference:
+	//    BaseDataReferenceRule
+	//    | StructuredDataDescriptionReferenceRule;
+	public BaseLanguageGrammarAccess.TypeDefinitionReferenceRuleElements getTypeDefinitionReferenceRuleAccess() {
+		return gaBaseLanguage.getTypeDefinitionReferenceRuleAccess();
+	}
+	
+	public ParserRule getTypeDefinitionReferenceRuleRule() {
+		return getTypeDefinitionReferenceRuleAccess().getRule();
+	}
+	
+	//BaseDataReferenceRule returns TypeDefinitionReference:
+	//    'data' definition = [BaseDataDescription|QualifiedName]
 	//;
-	public BaseLanguageGrammarAccess.ConstantReferenceRuleElements getConstantReferenceRuleAccess() {
-		return gaBaseLanguage.getConstantReferenceRuleAccess();
+	public BaseLanguageGrammarAccess.BaseDataReferenceRuleElements getBaseDataReferenceRuleAccess() {
+		return gaBaseLanguage.getBaseDataReferenceRuleAccess();
 	}
 	
-	public ParserRule getConstantReferenceRuleRule() {
-		return getConstantReferenceRuleAccess().getRule();
+	public ParserRule getBaseDataReferenceRuleRule() {
+		return getBaseDataReferenceRuleAccess().getRule();
+	}
+	
+	//StructuredDataDescriptionReferenceRule returns TypeDefinitionReference:
+	//    'instance' definition = [StructuredDataDescription|QualifiedName]
+	//;
+	public BaseLanguageGrammarAccess.StructuredDataDescriptionReferenceRuleElements getStructuredDataDescriptionReferenceRuleAccess() {
+		return gaBaseLanguage.getStructuredDataDescriptionReferenceRuleAccess();
+	}
+	
+	public ParserRule getStructuredDataDescriptionReferenceRuleRule() {
+		return getStructuredDataDescriptionReferenceRuleAccess().getRule();
 	}
 	
 	//LiteralRule returns Literal:
@@ -415,7 +704,7 @@ public class DefinitionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 	}
 	
 	//InstanceLiteralRule returns Instance:
-	//    definition = [TypeDefinition|QualifiedName] '{'
+	//    definition = [ClassDefinition|QualifiedName] '{'
 	//      attributes += AttributeRule*
 	//    '}'
 	//;
@@ -472,7 +761,7 @@ public class DefinitionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 	}
 	
 	//StringLiteralRule returns StringLiteral:
-	//    value = STRING
+	//    literal = STRING
 	//;
 	public BaseLanguageGrammarAccess.StringLiteralRuleElements getStringLiteralRuleAccess() {
 		return gaBaseLanguage.getStringLiteralRuleAccess();
@@ -513,7 +802,7 @@ public class DefinitionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 	}
 	
 	//BooleanLiteralRule returns BooleanLiteral:
-	//    {BooleanLiteral} (value ?= 'true' |  'false')
+	//    {BooleanLiteral} (literal ?= 'true' |  'false')
 	//;
 	public BaseLanguageGrammarAccess.BooleanLiteralRuleElements getBooleanLiteralRuleAccess() {
 		return gaBaseLanguage.getBooleanLiteralRuleAccess();
@@ -523,18 +812,18 @@ public class DefinitionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 		return getBooleanLiteralRuleAccess().getRule();
 	}
 	
-	//TypeDefinitionRule returns TypeDefinition:
+	//ClassDefinitionRule returns ClassDefinition:
 	//    (constraints += ConstraintRule)*
-	//    (abstract?='abstract')? 'type' name = StringOrId ('extends' superType = [TypeDefinition|QualifiedName])? '{'
+	//    (abstract?='abstract')? 'type' name = StringOrId ('extends' superType = [ClassDefinition|QualifiedName])? '{'
 	//        attributes += AttributeDefinitionRule*
 	//    '}'
 	//;
-	public BaseLanguageGrammarAccess.TypeDefinitionRuleElements getTypeDefinitionRuleAccess() {
-		return gaBaseLanguage.getTypeDefinitionRuleAccess();
+	public BaseLanguageGrammarAccess.ClassDefinitionRuleElements getClassDefinitionRuleAccess() {
+		return gaBaseLanguage.getClassDefinitionRuleAccess();
 	}
 	
-	public ParserRule getTypeDefinitionRuleRule() {
-		return getTypeDefinitionRuleAccess().getRule();
+	public ParserRule getClassDefinitionRuleRule() {
+		return getClassDefinitionRuleAccess().getRule();
 	}
 	
 	//ConstraintRule returns Instance:
@@ -561,13 +850,10 @@ public class DefinitionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 	}
 	
 	//TypeRule returns types::Type:
-	//    StringTypeRule
-	//    | IntTypeRule
-	//    | RealTypeRule
-	//    | BooleanTypeRule
-	//    | ArrayTypeRule
-	//    | InstanceTypeRule
-	//    | VoidTypeRule
+	//    ArrayTypeRule
+	//    | BaseTypeRule
+	//    | TypeReferenceRule
+	//    | EnumReferenceRule
 	//    | ExpressionTypeRule
 	//    | LiteralTypeRule
 	//    | DataTypeRule
@@ -578,6 +864,43 @@ public class DefinitionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 	
 	public ParserRule getTypeRuleRule() {
 		return getTypeRuleAccess().getRule();
+	}
+	
+	//BaseTypeRule returns types::BaseType:
+	//    StringTypeRule
+	//    | IntTypeRule
+	//    | RealTypeRule
+	//    | BooleanTypeRule
+	//    | VoidTypeRule
+	//;
+	public BaseLanguageGrammarAccess.BaseTypeRuleElements getBaseTypeRuleAccess() {
+		return gaBaseLanguage.getBaseTypeRuleAccess();
+	}
+	
+	public ParserRule getBaseTypeRuleRule() {
+		return getBaseTypeRuleAccess().getRule();
+	}
+	
+	//EnumReferenceRule returns  types::DefinitionReference:
+	//    'enum' definition = [EnumDefinition|QualifiedName]
+	//;
+	public BaseLanguageGrammarAccess.EnumReferenceRuleElements getEnumReferenceRuleAccess() {
+		return gaBaseLanguage.getEnumReferenceRuleAccess();
+	}
+	
+	public ParserRule getEnumReferenceRuleRule() {
+		return getEnumReferenceRuleAccess().getRule();
+	}
+	
+	//TypeReferenceRule returns types::DefinitionReference:
+	//    'instance' definition = [ClassDefinition|QualifiedName]
+	//;
+	public BaseLanguageGrammarAccess.TypeReferenceRuleElements getTypeReferenceRuleAccess() {
+		return gaBaseLanguage.getTypeReferenceRuleAccess();
+	}
+	
+	public ParserRule getTypeReferenceRuleRule() {
+		return getTypeReferenceRuleAccess().getRule();
 	}
 	
 	//LiteralTypeRule returns types::LiteralType:
@@ -601,18 +924,6 @@ public class DefinitionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 	
 	public ParserRule getDataTypeRuleRule() {
 		return getDataTypeRuleAccess().getRule();
-	}
-	
-	//InstanceTypeRule returns types::InstanceType:
-	//    {types::InstanceType}
-	//    'instance' definition = [TypeDefinition|QualifiedName]
-	//;
-	public BaseLanguageGrammarAccess.InstanceTypeRuleElements getInstanceTypeRuleAccess() {
-		return gaBaseLanguage.getInstanceTypeRuleAccess();
-	}
-	
-	public ParserRule getInstanceTypeRuleRule() {
-		return getInstanceTypeRuleAccess().getRule();
 	}
 	
 	//StringTypeRule returns types::StringType:

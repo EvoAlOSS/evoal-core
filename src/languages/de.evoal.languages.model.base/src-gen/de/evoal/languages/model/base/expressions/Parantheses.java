@@ -19,7 +19,7 @@ package de.evoal.languages.model.base.expressions;
  * @model
  * @generated
  */
-public interface Parantheses extends Value {
+public interface Parantheses extends ReadExpression {
 	/**
 	 * Returns the value of the '<em><b>Sub Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

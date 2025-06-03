@@ -56,7 +56,6 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case TypesPackage.INSTANCE_TYPE: return createInstanceType();
 			case TypesPackage.BASE_TYPE: return createBaseType();
 			case TypesPackage.STRING_TYPE: return createStringType();
 			case TypesPackage.INT_TYPE: return createIntType();
@@ -67,20 +66,10 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 			case TypesPackage.EXPRESSION_TYPE: return createExpressionType();
 			case TypesPackage.LITERAL_TYPE: return createLiteralType();
 			case TypesPackage.DATA_TYPE: return createDataType();
+			case TypesPackage.DEFINITION_REFERENCE: return createDefinitionReference();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public InstanceType createInstanceType() {
-		InstanceTypeImpl instanceType = new InstanceTypeImpl();
-		return instanceType;
 	}
 
 	/**
@@ -191,6 +180,17 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	public DataType createDataType() {
 		DataTypeImpl dataType = new DataTypeImpl();
 		return dataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public DefinitionReference createDefinitionReference() {
+		DefinitionReferenceImpl definitionReference = new DefinitionReferenceImpl();
+		return definitionReference;
 	}
 
 	/**

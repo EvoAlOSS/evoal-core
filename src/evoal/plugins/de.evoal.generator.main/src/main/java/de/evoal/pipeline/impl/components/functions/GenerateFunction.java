@@ -3,7 +3,7 @@ package de.evoal.pipeline.impl.components.functions;
 import de.evoal.core.interpreter.api.cdi.EvoalBuiltinFunction;
 import de.evoal.core.interpreter.api.InterpreterState;
 import de.evoal.languages.model.base.definitions.AttributeDefinition;
-import de.evoal.languages.model.base.definitions.TypeDefinition;
+import de.evoal.languages.model.base.definitions.ClassDefinition;
 import de.evoal.languages.model.base.expressions.*;
 import de.evoal.languages.model.dl.DefinitionModule;
 import de.evoal.languages.model.pipeline.PipelineDefinition;
@@ -102,7 +102,7 @@ public class GenerateFunction implements EvoalBuiltinFunction {
 
         log.info("Generating writer");
         final DefinitionModule module = loader.load("classpath:/de/evoal/pipeline/io.dl");
-        final TypeDefinition writerDefinition = module.getTypes()
+        final ClassDefinition writerDefinition = module.getTypes()
                 .stream()
                 .filter(t -> "writer".equals(t.getName()))
                 .findFirst()
@@ -115,7 +115,7 @@ public class GenerateFunction implements EvoalBuiltinFunction {
                 .get();
 
         final StringLiteral filenameLiteral = exprFactory.createStringLiteral();
-        filenameLiteral.setValue(filename);
+        filenameLiteral.setLiteral(filename);
 
         final Attribute filenameAttribute = exprFactory.createAttribute();
         filenameAttribute.setDefinition(filenameDefinition);

@@ -1,11 +1,11 @@
 package de.evoal.optimisation.main.producer;
 
+import de.evoal.languages.model.base.expressions.DefinitionReference;
 import de.evoal.optimisation.api.constraints.model.DataConstraints;
 import de.evoal.languages.model.base.definitions.DataDescription;
 import de.evoal.languages.model.ddl.DataDescriptionModule;
 import de.evoal.languages.model.base.definitions.TypedBaseDataDescription;
 import de.evoal.languages.model.ol.OptimisationModule;
-import de.evoal.languages.model.base.expressions.DataReference;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 
@@ -29,9 +29,11 @@ public class DataConstraintProducer {
 
         // collect all referenced data descriptions
         final Set<DataDescription> descriptions = StreamSupport.stream(iterable.spliterator(), false)
-                                                               .filter(DataReference.class::isInstance)
-                                                               .map(DataReference.class::cast)
-                                                               .map(DataReference::getDefinition)
+                                                               .filter(DefinitionReference.class::isInstance)
+                                                               .map(DefinitionReference.class::cast)
+                                                               .map(DefinitionReference::getDefinition)
+                                                               .filter(DataDescription.class::isInstance)
+                                                               .map(DataDescription.class::cast)
                                                                .collect(Collectors.toSet());
 
         // collect models of descriptions

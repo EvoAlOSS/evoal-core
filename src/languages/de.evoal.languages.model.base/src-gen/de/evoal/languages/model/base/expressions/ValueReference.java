@@ -13,5 +13,5 @@ package de.evoal.languages.model.base.expressions;
  * @model
  * @generated
  */
-public interface ValueReference extends ConstantValue {
+public interface ValueReference extends ConstantExpression {
 } // ValueReference

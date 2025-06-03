@@ -2,9 +2,9 @@
  */
 package de.evoal.languages.model.base.definitions.impl;
 
+import de.evoal.languages.model.base.definitions.ClassDefinition;
 import de.evoal.languages.model.base.definitions.DefinitionsPackage;
 import de.evoal.languages.model.base.definitions.StructuredDataDescription;
-import de.evoal.languages.model.base.definitions.TypeDefinition;
 
 import org.eclipse.emf.common.notify.Notification;
 
@@ -35,7 +35,7 @@ public class StructuredDataDescriptionImpl extends DataDescriptionImpl implement
 	 * @generated
 	 * @ordered
 	 */
-	protected TypeDefinition type;
+	protected ClassDefinition type;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -62,10 +62,10 @@ public class StructuredDataDescriptionImpl extends DataDescriptionImpl implement
 	 * @generated
 	 */
 	@Override
-	public TypeDefinition getType() {
+	public ClassDefinition getType() {
 		if (type != null && type.eIsProxy()) {
 			InternalEObject oldType = (InternalEObject)type;
-			type = (TypeDefinition)eResolveProxy(oldType);
+			type = (ClassDefinition)eResolveProxy(oldType);
 			if (type != oldType) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DefinitionsPackage.STRUCTURED_DATA_DESCRIPTION__TYPE, oldType, type));
@@ -79,7 +79,7 @@ public class StructuredDataDescriptionImpl extends DataDescriptionImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TypeDefinition basicGetType() {
+	public ClassDefinition basicGetType() {
 		return type;
 	}
 
@@ -89,8 +89,8 @@ public class StructuredDataDescriptionImpl extends DataDescriptionImpl implement
 	 * @generated
 	 */
 	@Override
-	public void setType(TypeDefinition newType) {
-		TypeDefinition oldType = type;
+	public void setType(ClassDefinition newType) {
+		ClassDefinition oldType = type;
 		type = newType;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DefinitionsPackage.STRUCTURED_DATA_DESCRIPTION__TYPE, oldType, type));
@@ -120,7 +120,7 @@ public class StructuredDataDescriptionImpl extends DataDescriptionImpl implement
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case DefinitionsPackage.STRUCTURED_DATA_DESCRIPTION__TYPE:
-				setType((TypeDefinition)newValue);
+				setType((ClassDefinition)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -135,7 +135,7 @@ public class StructuredDataDescriptionImpl extends DataDescriptionImpl implement
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case DefinitionsPackage.STRUCTURED_DATA_DESCRIPTION__TYPE:
-				setType((TypeDefinition)null);
+				setType((ClassDefinition)null);
 				return;
 		}
 		super.eUnset(featureID);

@@ -166,15 +166,6 @@ public interface ExpressionsFactory extends EFactory {
 	ValueReference createValueReference();
 
 	/**
-	 * Returns a new object of class '<em>Data Reference</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Data Reference</em>'.
-	 * @generated
-	 */
-	DataReference createDataReference();
-
-	/**
 	 * Returns a new object of class '<em>Self Reference</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -184,22 +175,22 @@ public interface ExpressionsFactory extends EFactory {
 	SelfReference createSelfReference();
 
 	/**
-	 * Returns a new object of class '<em>Enum Literal Reference</em>'.
+	 * Returns a new object of class '<em>Literal Definition Reference</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Enum Literal Reference</em>'.
+	 * @return a new object of class '<em>Literal Definition Reference</em>'.
 	 * @generated
 	 */
-	EnumLiteralReference createEnumLiteralReference();
+	LiteralDefinitionReference createLiteralDefinitionReference();
 
 	/**
-	 * Returns a new object of class '<em>Constant Reference</em>'.
+	 * Returns a new object of class '<em>Type Definition Reference</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Constant Reference</em>'.
+	 * @return a new object of class '<em>Type Definition Reference</em>'.
 	 * @generated
 	 */
-	ConstantReference createConstantReference();
+	TypeDefinitionReference createTypeDefinitionReference();
 
 	/**
 	 * Returns a new object of class '<em>Boolean Literal</em>'.

@@ -107,7 +107,7 @@ public class ConstantSwitch extends ExpressionsSwitch<Object> {
 
     @Override
     public Object caseBooleanLiteral(BooleanLiteral object) {
-        return object.isValue();
+        return object.isLiteral();
     }
 
     @Override

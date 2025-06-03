@@ -376,8 +376,8 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 
 		initEClass(stepEClass, Step.class, "Step", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getStep_Instance(), theExpressionsPackage.getInstance(), null, "instance", null, 1, 1, Step.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getStep_Reads(), theExpressionsPackage.getDataReference(), null, "reads", null, 0, -1, Step.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEReference(getStep_Writes(), theExpressionsPackage.getDataReference(), null, "writes", null, 0, -1, Step.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getStep_Reads(), theExpressionsPackage.getTypeDefinitionReference(), null, "reads", null, 0, -1, Step.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getStep_Writes(), theExpressionsPackage.getTypeDefinitionReference(), null, "writes", null, 0, -1, Step.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		initEClass(applyStatementEClass, ApplyStatement.class, "ApplyStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getApplyStatement_File(), ecorePackage.getEString(), "file", null, 0, 1, ApplyStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -407,8 +407,10 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 		   source,
 		   new String[] {
 			   "base", "platform:/resource/de.evoal.languages.model.base/model/model.ecore#/",
+			   "defs", "platform:/resource/de.evoal.languages.model.base/model/definitions.ecore#/",
 			   "exec", "execution.ecore#/",
-			   "expr", "platform:/resource/de.evoal.languages.model.base/model/expressions.ecore#/"
+			   "expr", "platform:/resource/de.evoal.languages.model.base/model/expressions.ecore#/",
+			   "types", "platform:/resource/de.evoal.languages.model.base/model/types.ecore#/"
 		   });
 	}
 

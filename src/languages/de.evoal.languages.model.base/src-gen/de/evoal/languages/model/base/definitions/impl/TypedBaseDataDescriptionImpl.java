@@ -2,7 +2,7 @@
  */
 package de.evoal.languages.model.base.definitions.impl;
 
-import de.evoal.languages.model.base.definitions.DataTypeTypeDefinition;
+import de.evoal.languages.model.base.definitions.Definition;
 import de.evoal.languages.model.base.definitions.DefinitionsPackage;
 import de.evoal.languages.model.base.definitions.ScaleType;
 import de.evoal.languages.model.base.definitions.TypedBaseDataDescription;
@@ -40,7 +40,7 @@ public class TypedBaseDataDescriptionImpl extends BaseDataDescriptionImpl implem
 	 * @generated
 	 * @ordered
 	 */
-	protected DataTypeTypeDefinition type;
+	protected Definition type;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -67,10 +67,10 @@ public class TypedBaseDataDescriptionImpl extends BaseDataDescriptionImpl implem
 	 * @generated
 	 */
 	@Override
-	public DataTypeTypeDefinition getType() {
+	public Definition getType() {
 		if (type != null && type.eIsProxy()) {
 			InternalEObject oldType = (InternalEObject)type;
-			type = (DataTypeTypeDefinition)eResolveProxy(oldType);
+			type = (Definition)eResolveProxy(oldType);
 			if (type != oldType) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DefinitionsPackage.TYPED_BASE_DATA_DESCRIPTION__TYPE, oldType, type));
@@ -84,7 +84,7 @@ public class TypedBaseDataDescriptionImpl extends BaseDataDescriptionImpl implem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public DataTypeTypeDefinition basicGetType() {
+	public Definition basicGetType() {
 		return type;
 	}
 
@@ -94,8 +94,8 @@ public class TypedBaseDataDescriptionImpl extends BaseDataDescriptionImpl implem
 	 * @generated
 	 */
 	@Override
-	public void setType(DataTypeTypeDefinition newType) {
-		DataTypeTypeDefinition oldType = type;
+	public void setType(Definition newType) {
+		Definition oldType = type;
 		type = newType;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DefinitionsPackage.TYPED_BASE_DATA_DESCRIPTION__TYPE, oldType, type));
@@ -108,7 +108,8 @@ public class TypedBaseDataDescriptionImpl extends BaseDataDescriptionImpl implem
 	 */
 	@Override
 	public ScaleType getScale() {
-		return getType() == null ? null : getType().getScale();
+		return getType() == null || !(getType() instanceof TypedBaseDataDescription) ? null : ((TypedBaseDataDescription)getType()).getScale();
+		
 	}
 
 	/**
@@ -135,7 +136,7 @@ public class TypedBaseDataDescriptionImpl extends BaseDataDescriptionImpl implem
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case DefinitionsPackage.TYPED_BASE_DATA_DESCRIPTION__TYPE:
-				setType((DataTypeTypeDefinition)newValue);
+				setType((Definition)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -150,7 +151,7 @@ public class TypedBaseDataDescriptionImpl extends BaseDataDescriptionImpl implem
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case DefinitionsPackage.TYPED_BASE_DATA_DESCRIPTION__TYPE:
-				setType((DataTypeTypeDefinition)null);
+				setType((Definition)null);
 				return;
 		}
 		super.eUnset(featureID);

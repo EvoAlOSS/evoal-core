@@ -6,7 +6,7 @@ import "data" from surrogate;
 module training {
 	function svr using
 	  model 'gaussian-svr'
-		mapping 'x:0'
+		mapping 'x:0' 
 		to 'y:0'
 		with parameters
 			'ε' := 1.4;

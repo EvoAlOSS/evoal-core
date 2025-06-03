@@ -72,17 +72,32 @@ public class ExpressionsSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ExpressionsPackage.VALUE: {
-				Value value = (Value)theEObject;
-				T result = caseValue(value);
-				if (result == null) result = caseExpression(value);
+			case ExpressionsPackage.READ_EXPRESSION: {
+				ReadExpression readExpression = (ReadExpression)theEObject;
+				T result = caseReadExpression(readExpression);
+				if (result == null) result = caseExpression(readExpression);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ExpressionsPackage.CONSTANT_EXPRESSION: {
+				ConstantExpression constantExpression = (ConstantExpression)theEObject;
+				T result = caseConstantExpression(constantExpression);
+				if (result == null) result = caseReadExpression(constantExpression);
+				if (result == null) result = caseExpression(constantExpression);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ExpressionsPackage.WRITE_EXPRESSION: {
+				WriteExpression writeExpression = (WriteExpression)theEObject;
+				T result = caseWriteExpression(writeExpression);
+				if (result == null) result = caseExpression(writeExpression);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case ExpressionsPackage.OR_EXPRESSION: {
 				OrExpression orExpression = (OrExpression)theEObject;
 				T result = caseOrExpression(orExpression);
-				if (result == null) result = caseValue(orExpression);
+				if (result == null) result = caseReadExpression(orExpression);
 				if (result == null) result = caseExpression(orExpression);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -90,7 +105,7 @@ public class ExpressionsSwitch<T> extends Switch<T> {
 			case ExpressionsPackage.XOR_EXPRESSION: {
 				XorExpression xorExpression = (XorExpression)theEObject;
 				T result = caseXorExpression(xorExpression);
-				if (result == null) result = caseValue(xorExpression);
+				if (result == null) result = caseReadExpression(xorExpression);
 				if (result == null) result = caseExpression(xorExpression);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -98,7 +113,7 @@ public class ExpressionsSwitch<T> extends Switch<T> {
 			case ExpressionsPackage.AND_EXPRESSION: {
 				AndExpression andExpression = (AndExpression)theEObject;
 				T result = caseAndExpression(andExpression);
-				if (result == null) result = caseValue(andExpression);
+				if (result == null) result = caseReadExpression(andExpression);
 				if (result == null) result = caseExpression(andExpression);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -106,7 +121,7 @@ public class ExpressionsSwitch<T> extends Switch<T> {
 			case ExpressionsPackage.NOT_EXPRESSION: {
 				NotExpression notExpression = (NotExpression)theEObject;
 				T result = caseNotExpression(notExpression);
-				if (result == null) result = caseValue(notExpression);
+				if (result == null) result = caseReadExpression(notExpression);
 				if (result == null) result = caseExpression(notExpression);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -114,7 +129,7 @@ public class ExpressionsSwitch<T> extends Switch<T> {
 			case ExpressionsPackage.COMPARISON_EXPRESSION: {
 				ComparisonExpression comparisonExpression = (ComparisonExpression)theEObject;
 				T result = caseComparisonExpression(comparisonExpression);
-				if (result == null) result = caseValue(comparisonExpression);
+				if (result == null) result = caseReadExpression(comparisonExpression);
 				if (result == null) result = caseExpression(comparisonExpression);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -122,7 +137,7 @@ public class ExpressionsSwitch<T> extends Switch<T> {
 			case ExpressionsPackage.PARTIAL_COMPARISON_EXPRESSION: {
 				PartialComparisonExpression partialComparisonExpression = (PartialComparisonExpression)theEObject;
 				T result = casePartialComparisonExpression(partialComparisonExpression);
-				if (result == null) result = caseValue(partialComparisonExpression);
+				if (result == null) result = caseReadExpression(partialComparisonExpression);
 				if (result == null) result = caseExpression(partialComparisonExpression);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -130,7 +145,7 @@ public class ExpressionsSwitch<T> extends Switch<T> {
 			case ExpressionsPackage.ADD_OR_SUBTRACT_EXPRESSION: {
 				AddOrSubtractExpression addOrSubtractExpression = (AddOrSubtractExpression)theEObject;
 				T result = caseAddOrSubtractExpression(addOrSubtractExpression);
-				if (result == null) result = caseValue(addOrSubtractExpression);
+				if (result == null) result = caseReadExpression(addOrSubtractExpression);
 				if (result == null) result = caseExpression(addOrSubtractExpression);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -138,7 +153,7 @@ public class ExpressionsSwitch<T> extends Switch<T> {
 			case ExpressionsPackage.MULTIPLY_DIVIDE_MODULO_EXPRESSION: {
 				MultiplyDivideModuloExpression multiplyDivideModuloExpression = (MultiplyDivideModuloExpression)theEObject;
 				T result = caseMultiplyDivideModuloExpression(multiplyDivideModuloExpression);
-				if (result == null) result = caseValue(multiplyDivideModuloExpression);
+				if (result == null) result = caseReadExpression(multiplyDivideModuloExpression);
 				if (result == null) result = caseExpression(multiplyDivideModuloExpression);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -146,7 +161,7 @@ public class ExpressionsSwitch<T> extends Switch<T> {
 			case ExpressionsPackage.POWER_OF_EXPRESSION: {
 				PowerOfExpression powerOfExpression = (PowerOfExpression)theEObject;
 				T result = casePowerOfExpression(powerOfExpression);
-				if (result == null) result = caseValue(powerOfExpression);
+				if (result == null) result = caseReadExpression(powerOfExpression);
 				if (result == null) result = caseExpression(powerOfExpression);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -154,24 +169,16 @@ public class ExpressionsSwitch<T> extends Switch<T> {
 			case ExpressionsPackage.UNARY_ADD_OR_SUBTRACT_EXPRESSION: {
 				UnaryAddOrSubtractExpression unaryAddOrSubtractExpression = (UnaryAddOrSubtractExpression)theEObject;
 				T result = caseUnaryAddOrSubtractExpression(unaryAddOrSubtractExpression);
-				if (result == null) result = caseValue(unaryAddOrSubtractExpression);
+				if (result == null) result = caseReadExpression(unaryAddOrSubtractExpression);
 				if (result == null) result = caseExpression(unaryAddOrSubtractExpression);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ExpressionsPackage.CONSTANT_VALUE: {
-				ConstantValue constantValue = (ConstantValue)theEObject;
-				T result = caseConstantValue(constantValue);
-				if (result == null) result = caseValue(constantValue);
-				if (result == null) result = caseExpression(constantValue);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case ExpressionsPackage.LITERAL: {
 				Literal literal = (Literal)theEObject;
 				T result = caseLiteral(literal);
-				if (result == null) result = caseConstantValue(literal);
-				if (result == null) result = caseValue(literal);
+				if (result == null) result = caseConstantExpression(literal);
+				if (result == null) result = caseReadExpression(literal);
 				if (result == null) result = caseExpression(literal);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -180,8 +187,8 @@ public class ExpressionsSwitch<T> extends Switch<T> {
 				NumberLiteral numberLiteral = (NumberLiteral)theEObject;
 				T result = caseNumberLiteral(numberLiteral);
 				if (result == null) result = caseLiteral(numberLiteral);
-				if (result == null) result = caseConstantValue(numberLiteral);
-				if (result == null) result = caseValue(numberLiteral);
+				if (result == null) result = caseConstantExpression(numberLiteral);
+				if (result == null) result = caseReadExpression(numberLiteral);
 				if (result == null) result = caseExpression(numberLiteral);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -191,8 +198,8 @@ public class ExpressionsSwitch<T> extends Switch<T> {
 				T result = caseIntegerLiteral(integerLiteral);
 				if (result == null) result = caseNumberLiteral(integerLiteral);
 				if (result == null) result = caseLiteral(integerLiteral);
-				if (result == null) result = caseConstantValue(integerLiteral);
-				if (result == null) result = caseValue(integerLiteral);
+				if (result == null) result = caseConstantExpression(integerLiteral);
+				if (result == null) result = caseReadExpression(integerLiteral);
 				if (result == null) result = caseExpression(integerLiteral);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -202,8 +209,8 @@ public class ExpressionsSwitch<T> extends Switch<T> {
 				T result = caseRealLiteral(realLiteral);
 				if (result == null) result = caseNumberLiteral(realLiteral);
 				if (result == null) result = caseLiteral(realLiteral);
-				if (result == null) result = caseConstantValue(realLiteral);
-				if (result == null) result = caseValue(realLiteral);
+				if (result == null) result = caseConstantExpression(realLiteral);
+				if (result == null) result = caseReadExpression(realLiteral);
 				if (result == null) result = caseExpression(realLiteral);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -212,8 +219,8 @@ public class ExpressionsSwitch<T> extends Switch<T> {
 				StringLiteral stringLiteral = (StringLiteral)theEObject;
 				T result = caseStringLiteral(stringLiteral);
 				if (result == null) result = caseLiteral(stringLiteral);
-				if (result == null) result = caseConstantValue(stringLiteral);
-				if (result == null) result = caseValue(stringLiteral);
+				if (result == null) result = caseConstantExpression(stringLiteral);
+				if (result == null) result = caseReadExpression(stringLiteral);
 				if (result == null) result = caseExpression(stringLiteral);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -222,8 +229,8 @@ public class ExpressionsSwitch<T> extends Switch<T> {
 				Instance instance = (Instance)theEObject;
 				T result = caseInstance(instance);
 				if (result == null) result = caseLiteral(instance);
-				if (result == null) result = caseConstantValue(instance);
-				if (result == null) result = caseValue(instance);
+				if (result == null) result = caseConstantExpression(instance);
+				if (result == null) result = caseReadExpression(instance);
 				if (result == null) result = caseExpression(instance);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -237,19 +244,9 @@ public class ExpressionsSwitch<T> extends Switch<T> {
 			case ExpressionsPackage.VALUE_REFERENCE: {
 				ValueReference valueReference = (ValueReference)theEObject;
 				T result = caseValueReference(valueReference);
-				if (result == null) result = caseConstantValue(valueReference);
-				if (result == null) result = caseValue(valueReference);
+				if (result == null) result = caseConstantExpression(valueReference);
+				if (result == null) result = caseReadExpression(valueReference);
 				if (result == null) result = caseExpression(valueReference);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ExpressionsPackage.DATA_REFERENCE: {
-				DataReference dataReference = (DataReference)theEObject;
-				T result = caseDataReference(dataReference);
-				if (result == null) result = caseValueReference(dataReference);
-				if (result == null) result = caseConstantValue(dataReference);
-				if (result == null) result = caseValue(dataReference);
-				if (result == null) result = caseExpression(dataReference);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -257,29 +254,29 @@ public class ExpressionsSwitch<T> extends Switch<T> {
 				SelfReference selfReference = (SelfReference)theEObject;
 				T result = caseSelfReference(selfReference);
 				if (result == null) result = caseValueReference(selfReference);
-				if (result == null) result = caseConstantValue(selfReference);
-				if (result == null) result = caseValue(selfReference);
+				if (result == null) result = caseConstantExpression(selfReference);
+				if (result == null) result = caseReadExpression(selfReference);
 				if (result == null) result = caseExpression(selfReference);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ExpressionsPackage.ENUM_LITERAL_REFERENCE: {
-				EnumLiteralReference enumLiteralReference = (EnumLiteralReference)theEObject;
-				T result = caseEnumLiteralReference(enumLiteralReference);
-				if (result == null) result = caseValueReference(enumLiteralReference);
-				if (result == null) result = caseConstantValue(enumLiteralReference);
-				if (result == null) result = caseValue(enumLiteralReference);
-				if (result == null) result = caseExpression(enumLiteralReference);
+			case ExpressionsPackage.LITERAL_DEFINITION_REFERENCE: {
+				LiteralDefinitionReference literalDefinitionReference = (LiteralDefinitionReference)theEObject;
+				T result = caseLiteralDefinitionReference(literalDefinitionReference);
+				if (result == null) result = caseValueReference(literalDefinitionReference);
+				if (result == null) result = caseConstantExpression(literalDefinitionReference);
+				if (result == null) result = caseReadExpression(literalDefinitionReference);
+				if (result == null) result = caseExpression(literalDefinitionReference);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ExpressionsPackage.CONSTANT_REFERENCE: {
-				ConstantReference constantReference = (ConstantReference)theEObject;
-				T result = caseConstantReference(constantReference);
-				if (result == null) result = caseValueReference(constantReference);
-				if (result == null) result = caseConstantValue(constantReference);
-				if (result == null) result = caseValue(constantReference);
-				if (result == null) result = caseExpression(constantReference);
+			case ExpressionsPackage.TYPE_DEFINITION_REFERENCE: {
+				TypeDefinitionReference typeDefinitionReference = (TypeDefinitionReference)theEObject;
+				T result = caseTypeDefinitionReference(typeDefinitionReference);
+				if (result == null) result = caseValueReference(typeDefinitionReference);
+				if (result == null) result = caseConstantExpression(typeDefinitionReference);
+				if (result == null) result = caseReadExpression(typeDefinitionReference);
+				if (result == null) result = caseExpression(typeDefinitionReference);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -287,8 +284,8 @@ public class ExpressionsSwitch<T> extends Switch<T> {
 				BooleanLiteral booleanLiteral = (BooleanLiteral)theEObject;
 				T result = caseBooleanLiteral(booleanLiteral);
 				if (result == null) result = caseLiteral(booleanLiteral);
-				if (result == null) result = caseConstantValue(booleanLiteral);
-				if (result == null) result = caseValue(booleanLiteral);
+				if (result == null) result = caseConstantExpression(booleanLiteral);
+				if (result == null) result = caseReadExpression(booleanLiteral);
 				if (result == null) result = caseExpression(booleanLiteral);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -296,7 +293,7 @@ public class ExpressionsSwitch<T> extends Switch<T> {
 			case ExpressionsPackage.CALL: {
 				Call call = (Call)theEObject;
 				T result = caseCall(call);
-				if (result == null) result = caseValue(call);
+				if (result == null) result = caseReadExpression(call);
 				if (result == null) result = caseExpression(call);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -304,7 +301,7 @@ public class ExpressionsSwitch<T> extends Switch<T> {
 			case ExpressionsPackage.PARANTHESES: {
 				Parantheses parantheses = (Parantheses)theEObject;
 				T result = caseParantheses(parantheses);
-				if (result == null) result = caseValue(parantheses);
+				if (result == null) result = caseReadExpression(parantheses);
 				if (result == null) result = caseExpression(parantheses);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -312,28 +309,13 @@ public class ExpressionsSwitch<T> extends Switch<T> {
 			case ExpressionsPackage.ARRAY: {
 				Array array = (Array)theEObject;
 				T result = caseArray(array);
-				if (result == null) result = caseValue(array);
+				if (result == null) result = caseReadExpression(array);
 				if (result == null) result = caseExpression(array);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			default: return defaultCase(theEObject);
 		}
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Value</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Value</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseValue(Value object) {
-		return null;
 	}
 
 	/**
@@ -348,6 +330,51 @@ public class ExpressionsSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseExpression(Expression object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Read Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Read Expression</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseReadExpression(ReadExpression object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Constant Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Constant Expression</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseConstantExpression(ConstantExpression object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Write Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Write Expression</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseWriteExpression(WriteExpression object) {
 		return null;
 	}
 
@@ -502,21 +529,6 @@ public class ExpressionsSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Constant Value</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Constant Value</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseConstantValue(ConstantValue object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Literal</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -637,21 +649,6 @@ public class ExpressionsSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Data Reference</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Data Reference</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseDataReference(DataReference object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Self Reference</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -667,32 +664,32 @@ public class ExpressionsSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Enum Literal Reference</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Literal Definition Reference</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Enum Literal Reference</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Literal Definition Reference</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseEnumLiteralReference(EnumLiteralReference object) {
+	public T caseLiteralDefinitionReference(LiteralDefinitionReference object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Constant Reference</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Type Definition Reference</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Constant Reference</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Type Definition Reference</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseConstantReference(ConstantReference object) {
+	public T caseTypeDefinitionReference(TypeDefinitionReference object) {
 		return null;
 	}
 

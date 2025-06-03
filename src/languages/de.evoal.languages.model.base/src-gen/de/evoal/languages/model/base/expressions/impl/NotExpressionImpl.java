@@ -28,7 +28,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *
  * @generated
  */
-public class NotExpressionImpl extends ValueImpl implements NotExpression {
+public class NotExpressionImpl extends ReadExpressionImpl implements NotExpression {
 	/**
 	 * The default value of the '{@link #isNegated() <em>Negated</em>}' attribute.
 	 * <!-- begin-user-doc -->

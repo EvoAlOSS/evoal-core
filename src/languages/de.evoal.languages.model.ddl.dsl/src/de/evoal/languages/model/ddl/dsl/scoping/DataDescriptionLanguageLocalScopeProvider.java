@@ -7,17 +7,17 @@ import org.eclipse.xtext.scoping.IScope;
 
 import com.google.inject.Inject;
 
+import de.evoal.languages.model.base.definitions.ClassDefinition;
 import de.evoal.languages.model.base.definitions.DefinitionsPackage;
-import de.evoal.languages.model.base.definitions.TypeDefinition;
 import de.evoal.languages.model.base.dsl.scoping.BaseLanguageLocalScopeProvider;
 import de.evoal.languages.model.base.expressions.ExpressionsPackage;
 import de.evoal.languages.model.utils.scoping.WildcardEnabledLocalScopeProvider;
 
 public class DataDescriptionLanguageLocalScopeProvider extends WildcardEnabledLocalScopeProvider {
 	private static EReference attributeDefinition = ExpressionsPackage.eINSTANCE.getAttribute_Definition();
-	private static EReference attributes = DefinitionsPackage.eINSTANCE.getTypeDefinition_Attributes();
+	private static EReference attributes = DefinitionsPackage.eINSTANCE.getClassDefinition_Attributes();
 	private static EClass instance = ExpressionsPackage.eINSTANCE.getInstance();
-	private static EClass typeDefinition = DefinitionsPackage.eINSTANCE.getTypeDefinition();
+	private static EClass typeDefinition = DefinitionsPackage.eINSTANCE.getClassDefinition();
 
 	@Inject
 	private BaseLanguageLocalScopeProvider baseScopes;
@@ -26,7 +26,7 @@ public class DataDescriptionLanguageLocalScopeProvider extends WildcardEnabledLo
 	public IScope getScope(final EObject context, final EReference reference) {
 		if(typeDefinition.equals(context.eClass()) && (attributes.equals(reference))) {
 			// inject fields of types
-			final TypeDefinition definition = (TypeDefinition)context;
+			final ClassDefinition definition = (ClassDefinition)context;
 			IScope typeScope = IScope.NULLSCOPE;
 			if(definition.getSuperType() != null) {
 				typeScope = super.getScope(definition.getSuperType(), reference);

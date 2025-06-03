@@ -8,10 +8,10 @@ import com.google.inject.Inject;
 import de.evoal.languages.model.base.BasePackage;
 import de.evoal.languages.model.base.Import;
 import de.evoal.languages.model.base.definitions.AttributeDefinition;
+import de.evoal.languages.model.base.definitions.ClassDefinition;
 import de.evoal.languages.model.base.definitions.ConstantDefinition;
 import de.evoal.languages.model.base.definitions.DefinitionsPackage;
 import de.evoal.languages.model.base.definitions.FunctionDefinition;
-import de.evoal.languages.model.base.definitions.TypeDefinition;
 import de.evoal.languages.model.base.dsl.services.BaseLanguageGrammarAccess;
 import de.evoal.languages.model.base.expressions.AddOrSubtractExpression;
 import de.evoal.languages.model.base.expressions.AndExpression;
@@ -20,11 +20,10 @@ import de.evoal.languages.model.base.expressions.Attribute;
 import de.evoal.languages.model.base.expressions.BooleanLiteral;
 import de.evoal.languages.model.base.expressions.Call;
 import de.evoal.languages.model.base.expressions.ComparisonExpression;
-import de.evoal.languages.model.base.expressions.ConstantReference;
-import de.evoal.languages.model.base.expressions.DataReference;
 import de.evoal.languages.model.base.expressions.ExpressionsPackage;
 import de.evoal.languages.model.base.expressions.Instance;
 import de.evoal.languages.model.base.expressions.IntegerLiteral;
+import de.evoal.languages.model.base.expressions.LiteralDefinitionReference;
 import de.evoal.languages.model.base.expressions.MultiplyDivideModuloExpression;
 import de.evoal.languages.model.base.expressions.NotExpression;
 import de.evoal.languages.model.base.expressions.OrExpression;
@@ -33,13 +32,14 @@ import de.evoal.languages.model.base.expressions.PartialComparisonExpression;
 import de.evoal.languages.model.base.expressions.PowerOfExpression;
 import de.evoal.languages.model.base.expressions.RealLiteral;
 import de.evoal.languages.model.base.expressions.StringLiteral;
+import de.evoal.languages.model.base.expressions.TypeDefinitionReference;
 import de.evoal.languages.model.base.expressions.UnaryAddOrSubtractExpression;
 import de.evoal.languages.model.base.expressions.XorExpression;
 import de.evoal.languages.model.base.types.ArrayType;
 import de.evoal.languages.model.base.types.BooleanType;
 import de.evoal.languages.model.base.types.DataType;
+import de.evoal.languages.model.base.types.DefinitionReference;
 import de.evoal.languages.model.base.types.ExpressionType;
-import de.evoal.languages.model.base.types.InstanceType;
 import de.evoal.languages.model.base.types.IntType;
 import de.evoal.languages.model.base.types.LiteralType;
 import de.evoal.languages.model.base.types.RealType;
@@ -80,6 +80,9 @@ public class BaseLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 			case DefinitionsPackage.ATTRIBUTE_DEFINITION:
 				sequence_AttributeDefinitionRule(context, (AttributeDefinition) semanticObject); 
 				return; 
+			case DefinitionsPackage.CLASS_DEFINITION:
+				sequence_ClassDefinitionRule(context, (ClassDefinition) semanticObject); 
+				return; 
 			case DefinitionsPackage.CONSTANT_DEFINITION:
 				sequence_ConstantDefinitionRule(context, (ConstantDefinition) semanticObject); 
 				return; 
@@ -88,9 +91,6 @@ public class BaseLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 				return; 
 			case DefinitionsPackage.PARAMETER:
 				sequence_ParameterRule(context, (de.evoal.languages.model.base.definitions.Parameter) semanticObject); 
-				return; 
-			case DefinitionsPackage.TYPE_DEFINITION:
-				sequence_TypeDefinitionRule(context, (TypeDefinition) semanticObject); 
 				return; 
 			}
 		else if (epackage == ExpressionsPackage.eINSTANCE)
@@ -116,17 +116,14 @@ public class BaseLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 			case ExpressionsPackage.COMPARISON_EXPRESSION:
 				sequence_ComparisonExpressionRule(context, (ComparisonExpression) semanticObject); 
 				return; 
-			case ExpressionsPackage.CONSTANT_REFERENCE:
-				sequence_ConstantReferenceRule(context, (ConstantReference) semanticObject); 
-				return; 
-			case ExpressionsPackage.DATA_REFERENCE:
-				sequence_DataReferenceRule(context, (DataReference) semanticObject); 
-				return; 
 			case ExpressionsPackage.INSTANCE:
 				sequence_InstanceLiteralRule(context, (Instance) semanticObject); 
 				return; 
 			case ExpressionsPackage.INTEGER_LITERAL:
 				sequence_IntegerLiteralRule(context, (IntegerLiteral) semanticObject); 
+				return; 
+			case ExpressionsPackage.LITERAL_DEFINITION_REFERENCE:
+				sequence_LiteralDefinitionReferenceRule(context, (LiteralDefinitionReference) semanticObject); 
 				return; 
 			case ExpressionsPackage.MULTIPLY_DIVIDE_MODULO_EXPRESSION:
 				sequence_MultiplyDivideModuloExpressionRule(context, (MultiplyDivideModuloExpression) semanticObject); 
@@ -152,6 +149,22 @@ public class BaseLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 			case ExpressionsPackage.STRING_LITERAL:
 				sequence_StringLiteralRule(context, (StringLiteral) semanticObject); 
 				return; 
+			case ExpressionsPackage.TYPE_DEFINITION_REFERENCE:
+				if (rule == grammarAccess.getReadExpressionRuleRule()
+						|| rule == grammarAccess.getReferenceRuleRule()
+						|| rule == grammarAccess.getTypeDefinitionReferenceRuleRule()) {
+					sequence_BaseDataReferenceRule_StructuredDataDescriptionReferenceRule(context, (TypeDefinitionReference) semanticObject); 
+					return; 
+				}
+				else if (rule == grammarAccess.getBaseDataReferenceRuleRule()) {
+					sequence_BaseDataReferenceRule(context, (TypeDefinitionReference) semanticObject); 
+					return; 
+				}
+				else if (rule == grammarAccess.getStructuredDataDescriptionReferenceRuleRule()) {
+					sequence_StructuredDataDescriptionReferenceRule(context, (TypeDefinitionReference) semanticObject); 
+					return; 
+				}
+				else break;
 			case ExpressionsPackage.UNARY_ADD_OR_SUBTRACT_EXPRESSION:
 				sequence_UnaryAddOrSubtractExpressionRule(context, (UnaryAddOrSubtractExpression) semanticObject); 
 				return; 
@@ -170,11 +183,22 @@ public class BaseLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 			case TypesPackage.DATA_TYPE:
 				sequence_DataTypeRule(context, (DataType) semanticObject); 
 				return; 
+			case TypesPackage.DEFINITION_REFERENCE:
+				if (rule == grammarAccess.getEnumReferenceRuleRule()) {
+					sequence_EnumReferenceRule(context, (DefinitionReference) semanticObject); 
+					return; 
+				}
+				else if (rule == grammarAccess.getTypeRuleRule()) {
+					sequence_EnumReferenceRule_TypeReferenceRule(context, (DefinitionReference) semanticObject); 
+					return; 
+				}
+				else if (rule == grammarAccess.getTypeReferenceRuleRule()) {
+					sequence_TypeReferenceRule(context, (DefinitionReference) semanticObject); 
+					return; 
+				}
+				else break;
 			case TypesPackage.EXPRESSION_TYPE:
 				sequence_ExpressionTypeRule(context, (ExpressionType) semanticObject); 
-				return; 
-			case TypesPackage.INSTANCE_TYPE:
-				sequence_InstanceTypeRule(context, (InstanceType) semanticObject); 
 				return; 
 			case TypesPackage.INT_TYPE:
 				sequence_IntTypeRule(context, (IntType) semanticObject); 
@@ -227,11 +251,11 @@ public class BaseLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     ValueRule returns Array
+	 *     ReadExpressionRule returns Array
 	 *     ArrayRule returns Array
 	 *
 	 * Constraint:
-	 *     (values+=ValueRule values+=ValueRule*)?
+	 *     (values+=ReadExpressionRule values+=ReadExpressionRule*)?
 	 * </pre>
 	 */
 	protected void sequence_ArrayRule(ISerializationContext context, Array semanticObject) {
@@ -300,12 +324,48 @@ public class BaseLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     ValueRule returns BooleanLiteral
+	 *     ReadExpressionRule returns TypeDefinitionReference
+	 *     ReferenceRule returns TypeDefinitionReference
+	 *     TypeDefinitionReferenceRule returns TypeDefinitionReference
+	 *
+	 * Constraint:
+	 *     (definition=[BaseDataDescription|QualifiedName] | definition=[StructuredDataDescription|QualifiedName])
+	 * </pre>
+	 */
+	protected void sequence_BaseDataReferenceRule_StructuredDataDescriptionReferenceRule(ISerializationContext context, TypeDefinitionReference semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     BaseDataReferenceRule returns TypeDefinitionReference
+	 *
+	 * Constraint:
+	 *     definition=[BaseDataDescription|QualifiedName]
+	 * </pre>
+	 */
+	protected void sequence_BaseDataReferenceRule(ISerializationContext context, TypeDefinitionReference semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, ExpressionsPackage.Literals.TYPE_DEFINITION_REFERENCE__DEFINITION) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ExpressionsPackage.Literals.TYPE_DEFINITION_REFERENCE__DEFINITION));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getBaseDataReferenceRuleAccess().getDefinitionBaseDataDescriptionQualifiedNameParserRuleCall_1_0_1(), semanticObject.eGet(ExpressionsPackage.Literals.TYPE_DEFINITION_REFERENCE__DEFINITION, false));
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     ReadExpressionRule returns BooleanLiteral
 	 *     LiteralRule returns BooleanLiteral
 	 *     BooleanLiteralRule returns BooleanLiteral
 	 *
 	 * Constraint:
-	 *     value?='true'?
+	 *     literal?='true'?
 	 * </pre>
 	 */
 	protected void sequence_BooleanLiteralRule(ISerializationContext context, BooleanLiteral semanticObject) {
@@ -317,6 +377,7 @@ public class BaseLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 	 * <pre>
 	 * Contexts:
 	 *     TypeRule returns BooleanType
+	 *     BaseTypeRule returns BooleanType
 	 *     BooleanTypeRule returns BooleanType
 	 *
 	 * Constraint:
@@ -331,7 +392,7 @@ public class BaseLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     ValueRule returns Call
+	 *     ReadExpressionRule returns Call
 	 *     CallRule returns Call
 	 *
 	 * Constraint:
@@ -339,6 +400,26 @@ public class BaseLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 	 * </pre>
 	 */
 	protected void sequence_CallRule(ISerializationContext context, Call semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     ClassDefinitionRule returns ClassDefinition
+	 *
+	 * Constraint:
+	 *     (
+	 *         constraints+=ConstraintRule* 
+	 *         abstract?='abstract'? 
+	 *         name=StringOrId 
+	 *         superType=[ClassDefinition|QualifiedName]? 
+	 *         attributes+=AttributeDefinitionRule*
+	 *     )
+	 * </pre>
+	 */
+	protected void sequence_ClassDefinitionRule(ISerializationContext context, ClassDefinition semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -386,50 +467,6 @@ public class BaseLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     ValueRule returns ConstantReference
-	 *     ReferenceRule returns ConstantReference
-	 *     ConstantReferenceRule returns ConstantReference
-	 *
-	 * Constraint:
-	 *     definition=[ConstantDefinition|QualifiedName]
-	 * </pre>
-	 */
-	protected void sequence_ConstantReferenceRule(ISerializationContext context, ConstantReference semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, ExpressionsPackage.Literals.CONSTANT_REFERENCE__DEFINITION) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ExpressionsPackage.Literals.CONSTANT_REFERENCE__DEFINITION));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getConstantReferenceRuleAccess().getDefinitionConstantDefinitionQualifiedNameParserRuleCall_0_1(), semanticObject.eGet(ExpressionsPackage.Literals.CONSTANT_REFERENCE__DEFINITION, false));
-		feeder.finish();
-	}
-	
-	
-	/**
-	 * <pre>
-	 * Contexts:
-	 *     ValueRule returns DataReference
-	 *     ReferenceRule returns DataReference
-	 *     DataReferenceRule returns DataReference
-	 *
-	 * Constraint:
-	 *     definition=[DataDescription|QualifiedName]
-	 * </pre>
-	 */
-	protected void sequence_DataReferenceRule(ISerializationContext context, DataReference semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, ExpressionsPackage.Literals.DATA_REFERENCE__DEFINITION) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ExpressionsPackage.Literals.DATA_REFERENCE__DEFINITION));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getDataReferenceRuleAccess().getDefinitionDataDescriptionQualifiedNameParserRuleCall_1_0_1(), semanticObject.eGet(ExpressionsPackage.Literals.DATA_REFERENCE__DEFINITION, false));
-		feeder.finish();
-	}
-	
-	
-	/**
-	 * <pre>
-	 * Contexts:
 	 *     TypeRule returns DataType
 	 *     DataTypeRule returns DataType
 	 *
@@ -438,6 +475,40 @@ public class BaseLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 	 * </pre>
 	 */
 	protected void sequence_DataTypeRule(ISerializationContext context, DataType semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     EnumReferenceRule returns DefinitionReference
+	 *
+	 * Constraint:
+	 *     definition=[EnumDefinition|QualifiedName]
+	 * </pre>
+	 */
+	protected void sequence_EnumReferenceRule(ISerializationContext context, DefinitionReference semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, TypesPackage.Literals.DEFINITION_REFERENCE__DEFINITION) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, TypesPackage.Literals.DEFINITION_REFERENCE__DEFINITION));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getEnumReferenceRuleAccess().getDefinitionEnumDefinitionQualifiedNameParserRuleCall_1_0_1(), semanticObject.eGet(TypesPackage.Literals.DEFINITION_REFERENCE__DEFINITION, false));
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     TypeRule returns DefinitionReference
+	 *
+	 * Constraint:
+	 *     (definition=[EnumDefinition|QualifiedName] | definition=[ClassDefinition|QualifiedName])
+	 * </pre>
+	 */
+	protected void sequence_EnumReferenceRule_TypeReferenceRule(ISerializationContext context, DefinitionReference semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -497,13 +568,13 @@ public class BaseLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     ValueRule returns Instance
+	 *     ReadExpressionRule returns Instance
 	 *     LiteralRule returns Instance
 	 *     InstanceLiteralRule returns Instance
 	 *     ConstraintRule returns Instance
 	 *
 	 * Constraint:
-	 *     (definition=[TypeDefinition|QualifiedName] attributes+=AttributeRule*)
+	 *     (definition=[ClassDefinition|QualifiedName] attributes+=AttributeRule*)
 	 * </pre>
 	 */
 	protected void sequence_InstanceLiteralRule(ISerializationContext context, Instance semanticObject) {
@@ -514,28 +585,8 @@ public class BaseLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     TypeRule returns InstanceType
-	 *     InstanceTypeRule returns InstanceType
-	 *
-	 * Constraint:
-	 *     definition=[TypeDefinition|QualifiedName]
-	 * </pre>
-	 */
-	protected void sequence_InstanceTypeRule(ISerializationContext context, InstanceType semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, TypesPackage.Literals.INSTANCE_TYPE__DEFINITION) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, TypesPackage.Literals.INSTANCE_TYPE__DEFINITION));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getInstanceTypeRuleAccess().getDefinitionTypeDefinitionQualifiedNameParserRuleCall_2_0_1(), semanticObject.eGet(TypesPackage.Literals.INSTANCE_TYPE__DEFINITION, false));
-		feeder.finish();
-	}
-	
-	
-	/**
-	 * <pre>
-	 * Contexts:
 	 *     TypeRule returns IntType
+	 *     BaseTypeRule returns IntType
 	 *     IntTypeRule returns IntType
 	 *
 	 * Constraint:
@@ -550,7 +601,7 @@ public class BaseLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     ValueRule returns IntegerLiteral
+	 *     ReadExpressionRule returns IntegerLiteral
 	 *     LiteralRule returns IntegerLiteral
 	 *     NumberLiteralRule returns IntegerLiteral
 	 *     IntegerLiteralRule returns IntegerLiteral
@@ -561,6 +612,28 @@ public class BaseLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 	 */
 	protected void sequence_IntegerLiteralRule(ISerializationContext context, IntegerLiteral semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     ReadExpressionRule returns LiteralDefinitionReference
+	 *     ReferenceRule returns LiteralDefinitionReference
+	 *     LiteralDefinitionReferenceRule returns LiteralDefinitionReference
+	 *
+	 * Constraint:
+	 *     definition=[LiteralDefinition|QualifiedName]
+	 * </pre>
+	 */
+	protected void sequence_LiteralDefinitionReferenceRule(ISerializationContext context, LiteralDefinitionReference semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, ExpressionsPackage.Literals.LITERAL_DEFINITION_REFERENCE__DEFINITION) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ExpressionsPackage.Literals.LITERAL_DEFINITION_REFERENCE__DEFINITION));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getLiteralDefinitionReferenceRuleAccess().getDefinitionLiteralDefinitionQualifiedNameParserRuleCall_0_1(), semanticObject.eGet(ExpressionsPackage.Literals.LITERAL_DEFINITION_REFERENCE__DEFINITION, false));
+		feeder.finish();
 	}
 	
 	
@@ -648,7 +721,7 @@ public class BaseLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     ValueRule returns Parantheses
+	 *     ReadExpressionRule returns Parantheses
 	 *     ParanthesesRule returns Parantheses
 	 *
 	 * Constraint:
@@ -706,7 +779,7 @@ public class BaseLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     ValueRule returns RealLiteral
+	 *     ReadExpressionRule returns RealLiteral
 	 *     LiteralRule returns RealLiteral
 	 *     NumberLiteralRule returns RealLiteral
 	 *     RealLiteralRule returns RealLiteral
@@ -724,6 +797,7 @@ public class BaseLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 	 * <pre>
 	 * Contexts:
 	 *     TypeRule returns RealType
+	 *     BaseTypeRule returns RealType
 	 *     RealTypeRule returns RealType
 	 *
 	 * Constraint:
@@ -738,21 +812,21 @@ public class BaseLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     ValueRule returns StringLiteral
+	 *     ReadExpressionRule returns StringLiteral
 	 *     LiteralRule returns StringLiteral
 	 *     StringLiteralRule returns StringLiteral
 	 *
 	 * Constraint:
-	 *     value=STRING
+	 *     literal=STRING
 	 * </pre>
 	 */
 	protected void sequence_StringLiteralRule(ISerializationContext context, StringLiteral semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, ExpressionsPackage.Literals.STRING_LITERAL__VALUE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ExpressionsPackage.Literals.STRING_LITERAL__VALUE));
+			if (transientValues.isValueTransient(semanticObject, ExpressionsPackage.Literals.STRING_LITERAL__LITERAL) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ExpressionsPackage.Literals.STRING_LITERAL__LITERAL));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getStringLiteralRuleAccess().getValueSTRINGTerminalRuleCall_0(), semanticObject.getValue());
+		feeder.accept(grammarAccess.getStringLiteralRuleAccess().getLiteralSTRINGTerminalRuleCall_0(), semanticObject.getLiteral());
 		feeder.finish();
 	}
 	
@@ -761,6 +835,7 @@ public class BaseLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 	 * <pre>
 	 * Contexts:
 	 *     TypeRule returns StringType
+	 *     BaseTypeRule returns StringType
 	 *     StringTypeRule returns StringType
 	 *
 	 * Constraint:
@@ -775,20 +850,40 @@ public class BaseLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     TypeDefinitionRule returns TypeDefinition
+	 *     StructuredDataDescriptionReferenceRule returns TypeDefinitionReference
 	 *
 	 * Constraint:
-	 *     (
-	 *         constraints+=ConstraintRule* 
-	 *         abstract?='abstract'? 
-	 *         name=StringOrId 
-	 *         superType=[TypeDefinition|QualifiedName]? 
-	 *         attributes+=AttributeDefinitionRule*
-	 *     )
+	 *     definition=[StructuredDataDescription|QualifiedName]
 	 * </pre>
 	 */
-	protected void sequence_TypeDefinitionRule(ISerializationContext context, TypeDefinition semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+	protected void sequence_StructuredDataDescriptionReferenceRule(ISerializationContext context, TypeDefinitionReference semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, ExpressionsPackage.Literals.TYPE_DEFINITION_REFERENCE__DEFINITION) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ExpressionsPackage.Literals.TYPE_DEFINITION_REFERENCE__DEFINITION));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getStructuredDataDescriptionReferenceRuleAccess().getDefinitionStructuredDataDescriptionQualifiedNameParserRuleCall_1_0_1(), semanticObject.eGet(ExpressionsPackage.Literals.TYPE_DEFINITION_REFERENCE__DEFINITION, false));
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     TypeReferenceRule returns DefinitionReference
+	 *
+	 * Constraint:
+	 *     definition=[ClassDefinition|QualifiedName]
+	 * </pre>
+	 */
+	protected void sequence_TypeReferenceRule(ISerializationContext context, DefinitionReference semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, TypesPackage.Literals.DEFINITION_REFERENCE__DEFINITION) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, TypesPackage.Literals.DEFINITION_REFERENCE__DEFINITION));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getTypeReferenceRuleAccess().getDefinitionClassDefinitionQualifiedNameParserRuleCall_1_0_1(), semanticObject.eGet(TypesPackage.Literals.DEFINITION_REFERENCE__DEFINITION, false));
+		feeder.finish();
 	}
 	
 	
@@ -798,7 +893,7 @@ public class BaseLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 	 *     UnaryAddOrSubtractExpressionRule returns UnaryAddOrSubtractExpression
 	 *
 	 * Constraint:
-	 *     (operators+=AddOrSubtractOperatorRule* subExpression=ValueRule)
+	 *     (operators+=AddOrSubtractOperatorRule* subExpression=ReadExpressionRule)
 	 * </pre>
 	 */
 	protected void sequence_UnaryAddOrSubtractExpressionRule(ISerializationContext context, UnaryAddOrSubtractExpression semanticObject) {
@@ -810,6 +905,7 @@ public class BaseLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 	 * <pre>
 	 * Contexts:
 	 *     TypeRule returns VoidType
+	 *     BaseTypeRule returns VoidType
 	 *     VoidTypeRule returns VoidType
 	 *
 	 * Constraint:

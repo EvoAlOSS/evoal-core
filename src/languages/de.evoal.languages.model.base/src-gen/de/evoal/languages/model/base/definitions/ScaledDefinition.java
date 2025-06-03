@@ -9,6 +9,12 @@ import org.eclipse.emf.ecore.EObject;
  * A representation of the model object '<em><b>Scaled Definition</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * 
+ * Some definitions are scaled.
+ * 
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * </p>
@@ -17,7 +23,7 @@ import org.eclipse.emf.ecore.EObject;
  * </ul>
  *
  * @see de.evoal.languages.model.base.definitions.DefinitionsPackage#getScaledDefinition()
- * @model
+ * @model abstract="true"
  * @generated
  */
 public interface ScaledDefinition extends EObject {

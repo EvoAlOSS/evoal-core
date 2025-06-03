@@ -19,5 +19,5 @@ package de.evoal.languages.model.base.definitions;
  * @model
  * @generated
  */
-public interface EnumLiteralDefinition extends Definition {
+public interface EnumLiteralDefinition extends LiteralDefinition {
 } // EnumLiteralDefinition

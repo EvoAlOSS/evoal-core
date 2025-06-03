@@ -143,6 +143,98 @@ public interface DefinitionsPackage extends EPackage {
 	int DEFINITION_OPERATION_COUNT = CONSTRAINED_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link de.evoal.languages.model.base.definitions.impl.TypeDefinitionImpl <em>Type Definition</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.evoal.languages.model.base.definitions.impl.TypeDefinitionImpl
+	 * @see de.evoal.languages.model.base.definitions.impl.DefinitionsPackageImpl#getTypeDefinition()
+	 * @generated
+	 */
+	int TYPE_DEFINITION = 2;
+
+	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_DEFINITION__CONSTRAINTS = DEFINITION__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_DEFINITION__NAME = DEFINITION__NAME;
+
+	/**
+	 * The number of structural features of the '<em>Type Definition</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_DEFINITION_FEATURE_COUNT = DEFINITION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>Type Definition</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_DEFINITION_OPERATION_COUNT = DEFINITION_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link de.evoal.languages.model.base.definitions.impl.LiteralDefinitionImpl <em>Literal Definition</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.evoal.languages.model.base.definitions.impl.LiteralDefinitionImpl
+	 * @see de.evoal.languages.model.base.definitions.impl.DefinitionsPackageImpl#getLiteralDefinition()
+	 * @generated
+	 */
+	int LITERAL_DEFINITION = 3;
+
+	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LITERAL_DEFINITION__CONSTRAINTS = DEFINITION__CONSTRAINTS;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LITERAL_DEFINITION__NAME = DEFINITION__NAME;
+
+	/**
+	 * The number of structural features of the '<em>Literal Definition</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LITERAL_DEFINITION_FEATURE_COUNT = DEFINITION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>Literal Definition</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LITERAL_DEFINITION_OPERATION_COUNT = DEFINITION_OPERATION_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.definitions.impl.ScaledDefinitionImpl <em>Scaled Definition</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -150,7 +242,7 @@ public interface DefinitionsPackage extends EPackage {
 	 * @see de.evoal.languages.model.base.definitions.impl.DefinitionsPackageImpl#getScaledDefinition()
 	 * @generated
 	 */
-	int SCALED_DEFINITION = 2;
+	int SCALED_DEFINITION = 4;
 
 	/**
 	 * The feature id for the '<em><b>Scale</b></em>' attribute.
@@ -180,14 +272,14 @@ public interface DefinitionsPackage extends EPackage {
 	int SCALED_DEFINITION_OPERATION_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.base.definitions.impl.TypeDefinitionImpl <em>Type Definition</em>}' class.
+	 * The meta object id for the '{@link de.evoal.languages.model.base.definitions.impl.ClassDefinitionImpl <em>Class Definition</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.base.definitions.impl.TypeDefinitionImpl
-	 * @see de.evoal.languages.model.base.definitions.impl.DefinitionsPackageImpl#getTypeDefinition()
+	 * @see de.evoal.languages.model.base.definitions.impl.ClassDefinitionImpl
+	 * @see de.evoal.languages.model.base.definitions.impl.DefinitionsPackageImpl#getClassDefinition()
 	 * @generated
 	 */
-	int TYPE_DEFINITION = 3;
+	int CLASS_DEFINITION = 5;
 
 	/**
 	 * The feature id for the '<em><b>Constraints</b></em>' containment reference list.
@@ -196,7 +288,7 @@ public interface DefinitionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_DEFINITION__CONSTRAINTS = DEFINITION__CONSTRAINTS;
+	int CLASS_DEFINITION__CONSTRAINTS = TYPE_DEFINITION__CONSTRAINTS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -205,7 +297,7 @@ public interface DefinitionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_DEFINITION__NAME = DEFINITION__NAME;
+	int CLASS_DEFINITION__NAME = TYPE_DEFINITION__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Attributes</b></em>' containment reference list.
@@ -214,7 +306,7 @@ public interface DefinitionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_DEFINITION__ATTRIBUTES = DEFINITION_FEATURE_COUNT + 0;
+	int CLASS_DEFINITION__ATTRIBUTES = TYPE_DEFINITION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Super Type</b></em>' reference.
@@ -223,7 +315,7 @@ public interface DefinitionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_DEFINITION__SUPER_TYPE = DEFINITION_FEATURE_COUNT + 1;
+	int CLASS_DEFINITION__SUPER_TYPE = TYPE_DEFINITION_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
@@ -232,16 +324,16 @@ public interface DefinitionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_DEFINITION__ABSTRACT = DEFINITION_FEATURE_COUNT + 2;
+	int CLASS_DEFINITION__ABSTRACT = TYPE_DEFINITION_FEATURE_COUNT + 2;
 
 	/**
-	 * The number of structural features of the '<em>Type Definition</em>' class.
+	 * The number of structural features of the '<em>Class Definition</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_DEFINITION_FEATURE_COUNT = DEFINITION_FEATURE_COUNT + 3;
+	int CLASS_DEFINITION_FEATURE_COUNT = TYPE_DEFINITION_FEATURE_COUNT + 3;
 
 	/**
 	 * The operation id for the '<em>Find Attribute</em>' operation.
@@ -250,16 +342,16 @@ public interface DefinitionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_DEFINITION___FIND_ATTRIBUTE__STRING = DEFINITION_OPERATION_COUNT + 0;
+	int CLASS_DEFINITION___FIND_ATTRIBUTE__STRING = TYPE_DEFINITION_OPERATION_COUNT + 0;
 
 	/**
-	 * The number of operations of the '<em>Type Definition</em>' class.
+	 * The number of operations of the '<em>Class Definition</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_DEFINITION_OPERATION_COUNT = DEFINITION_OPERATION_COUNT + 1;
+	int CLASS_DEFINITION_OPERATION_COUNT = TYPE_DEFINITION_OPERATION_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.definitions.impl.AttributeDefinitionImpl <em>Attribute Definition</em>}' class.
@@ -269,7 +361,7 @@ public interface DefinitionsPackage extends EPackage {
 	 * @see de.evoal.languages.model.base.definitions.impl.DefinitionsPackageImpl#getAttributeDefinition()
 	 * @generated
 	 */
-	int ATTRIBUTE_DEFINITION = 4;
+	int ATTRIBUTE_DEFINITION = 6;
 
 	/**
 	 * The feature id for the '<em><b>Constraints</b></em>' containment reference list.
@@ -333,7 +425,7 @@ public interface DefinitionsPackage extends EPackage {
 	 * @see de.evoal.languages.model.base.definitions.impl.DefinitionsPackageImpl#getEnumLiteralDefinition()
 	 * @generated
 	 */
-	int ENUM_LITERAL_DEFINITION = 5;
+	int ENUM_LITERAL_DEFINITION = 7;
 
 	/**
 	 * The feature id for the '<em><b>Constraints</b></em>' containment reference list.
@@ -342,7 +434,7 @@ public interface DefinitionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ENUM_LITERAL_DEFINITION__CONSTRAINTS = DEFINITION__CONSTRAINTS;
+	int ENUM_LITERAL_DEFINITION__CONSTRAINTS = LITERAL_DEFINITION__CONSTRAINTS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -351,7 +443,7 @@ public interface DefinitionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ENUM_LITERAL_DEFINITION__NAME = DEFINITION__NAME;
+	int ENUM_LITERAL_DEFINITION__NAME = LITERAL_DEFINITION__NAME;
 
 	/**
 	 * The number of structural features of the '<em>Enum Literal Definition</em>' class.
@@ -360,7 +452,7 @@ public interface DefinitionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ENUM_LITERAL_DEFINITION_FEATURE_COUNT = DEFINITION_FEATURE_COUNT + 0;
+	int ENUM_LITERAL_DEFINITION_FEATURE_COUNT = LITERAL_DEFINITION_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of operations of the '<em>Enum Literal Definition</em>' class.
@@ -369,7 +461,7 @@ public interface DefinitionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ENUM_LITERAL_DEFINITION_OPERATION_COUNT = DEFINITION_OPERATION_COUNT + 0;
+	int ENUM_LITERAL_DEFINITION_OPERATION_COUNT = LITERAL_DEFINITION_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.definitions.impl.EnumDefinitionImpl <em>Enum Definition</em>}' class.
@@ -379,7 +471,7 @@ public interface DefinitionsPackage extends EPackage {
 	 * @see de.evoal.languages.model.base.definitions.impl.DefinitionsPackageImpl#getEnumDefinition()
 	 * @generated
 	 */
-	int ENUM_DEFINITION = 6;
+	int ENUM_DEFINITION = 8;
 
 	/**
 	 * The feature id for the '<em><b>Constraints</b></em>' containment reference list.
@@ -388,7 +480,7 @@ public interface DefinitionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ENUM_DEFINITION__CONSTRAINTS = DEFINITION__CONSTRAINTS;
+	int ENUM_DEFINITION__CONSTRAINTS = TYPE_DEFINITION__CONSTRAINTS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -397,7 +489,7 @@ public interface DefinitionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ENUM_DEFINITION__NAME = DEFINITION__NAME;
+	int ENUM_DEFINITION__NAME = TYPE_DEFINITION__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Scale</b></em>' attribute.
@@ -406,7 +498,7 @@ public interface DefinitionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ENUM_DEFINITION__SCALE = DEFINITION_FEATURE_COUNT + 0;
+	int ENUM_DEFINITION__SCALE = TYPE_DEFINITION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Literals</b></em>' containment reference list.
@@ -415,7 +507,7 @@ public interface DefinitionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ENUM_DEFINITION__LITERALS = DEFINITION_FEATURE_COUNT + 1;
+	int ENUM_DEFINITION__LITERALS = TYPE_DEFINITION_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Enum Definition</em>' class.
@@ -424,7 +516,7 @@ public interface DefinitionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ENUM_DEFINITION_FEATURE_COUNT = DEFINITION_FEATURE_COUNT + 2;
+	int ENUM_DEFINITION_FEATURE_COUNT = TYPE_DEFINITION_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of operations of the '<em>Enum Definition</em>' class.
@@ -433,7 +525,7 @@ public interface DefinitionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ENUM_DEFINITION_OPERATION_COUNT = DEFINITION_OPERATION_COUNT + 0;
+	int ENUM_DEFINITION_OPERATION_COUNT = TYPE_DEFINITION_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.definitions.impl.DataTypeDefinitionImpl <em>Data Type Definition</em>}' class.
@@ -443,7 +535,7 @@ public interface DefinitionsPackage extends EPackage {
 	 * @see de.evoal.languages.model.base.definitions.impl.DefinitionsPackageImpl#getDataTypeDefinition()
 	 * @generated
 	 */
-	int DATA_TYPE_DEFINITION = 7;
+	int DATA_TYPE_DEFINITION = 9;
 
 	/**
 	 * The feature id for the '<em><b>Constraints</b></em>' containment reference list.
@@ -452,7 +544,7 @@ public interface DefinitionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DATA_TYPE_DEFINITION__CONSTRAINTS = DEFINITION__CONSTRAINTS;
+	int DATA_TYPE_DEFINITION__CONSTRAINTS = TYPE_DEFINITION__CONSTRAINTS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -461,7 +553,7 @@ public interface DefinitionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DATA_TYPE_DEFINITION__NAME = DEFINITION__NAME;
+	int DATA_TYPE_DEFINITION__NAME = TYPE_DEFINITION__NAME;
 
 	/**
 	 * The number of structural features of the '<em>Data Type Definition</em>' class.
@@ -470,7 +562,7 @@ public interface DefinitionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DATA_TYPE_DEFINITION_FEATURE_COUNT = DEFINITION_FEATURE_COUNT + 0;
+	int DATA_TYPE_DEFINITION_FEATURE_COUNT = TYPE_DEFINITION_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of operations of the '<em>Data Type Definition</em>' class.
@@ -479,7 +571,7 @@ public interface DefinitionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DATA_TYPE_DEFINITION_OPERATION_COUNT = DEFINITION_OPERATION_COUNT + 0;
+	int DATA_TYPE_DEFINITION_OPERATION_COUNT = TYPE_DEFINITION_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.definitions.impl.DataTypeTypeDefinitionImpl <em>Data Type Type Definition</em>}' class.
@@ -489,7 +581,7 @@ public interface DefinitionsPackage extends EPackage {
 	 * @see de.evoal.languages.model.base.definitions.impl.DefinitionsPackageImpl#getDataTypeTypeDefinition()
 	 * @generated
 	 */
-	int DATA_TYPE_TYPE_DEFINITION = 8;
+	int DATA_TYPE_TYPE_DEFINITION = 10;
 
 	/**
 	 * The feature id for the '<em><b>Constraints</b></em>' containment reference list.
@@ -544,7 +636,7 @@ public interface DefinitionsPackage extends EPackage {
 	 * @see de.evoal.languages.model.base.definitions.impl.DefinitionsPackageImpl#getDataDescription()
 	 * @generated
 	 */
-	int DATA_DESCRIPTION = 9;
+	int DATA_DESCRIPTION = 11;
 
 	/**
 	 * The feature id for the '<em><b>Constraints</b></em>' containment reference list.
@@ -590,7 +682,7 @@ public interface DefinitionsPackage extends EPackage {
 	 * @see de.evoal.languages.model.base.definitions.impl.DefinitionsPackageImpl#getBaseDataDescription()
 	 * @generated
 	 */
-	int BASE_DATA_DESCRIPTION = 10;
+	int BASE_DATA_DESCRIPTION = 12;
 
 	/**
 	 * The feature id for the '<em><b>Constraints</b></em>' containment reference list.
@@ -654,7 +746,7 @@ public interface DefinitionsPackage extends EPackage {
 	 * @see de.evoal.languages.model.base.definitions.impl.DefinitionsPackageImpl#getTypedBaseDataDescription()
 	 * @generated
 	 */
-	int TYPED_BASE_DATA_DESCRIPTION = 11;
+	int TYPED_BASE_DATA_DESCRIPTION = 13;
 
 	/**
 	 * The feature id for the '<em><b>Constraints</b></em>' containment reference list.
@@ -727,7 +819,7 @@ public interface DefinitionsPackage extends EPackage {
 	 * @see de.evoal.languages.model.base.definitions.impl.DefinitionsPackageImpl#getUntypedBaseDataDescription()
 	 * @generated
 	 */
-	int UNTYPED_BASE_DATA_DESCRIPTION = 12;
+	int UNTYPED_BASE_DATA_DESCRIPTION = 14;
 
 	/**
 	 * The feature id for the '<em><b>Constraints</b></em>' containment reference list.
@@ -800,7 +892,7 @@ public interface DefinitionsPackage extends EPackage {
 	 * @see de.evoal.languages.model.base.definitions.impl.DefinitionsPackageImpl#getStructuredDataDescription()
 	 * @generated
 	 */
-	int STRUCTURED_DATA_DESCRIPTION = 13;
+	int STRUCTURED_DATA_DESCRIPTION = 15;
 
 	/**
 	 * The feature id for the '<em><b>Constraints</b></em>' containment reference list.
@@ -848,43 +940,6 @@ public interface DefinitionsPackage extends EPackage {
 	int STRUCTURED_DATA_DESCRIPTION_OPERATION_COUNT = DATA_DESCRIPTION_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.base.definitions.impl.DataTypeImpl <em>Data Type</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.base.definitions.impl.DataTypeImpl
-	 * @see de.evoal.languages.model.base.definitions.impl.DefinitionsPackageImpl#getDataType()
-	 * @generated
-	 */
-	int DATA_TYPE = 14;
-
-	/**
-	 * The feature id for the '<em><b>Definition</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATA_TYPE__DEFINITION = 0;
-
-	/**
-	 * The number of structural features of the '<em>Data Type</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATA_TYPE_FEATURE_COUNT = 1;
-
-	/**
-	 * The number of operations of the '<em>Data Type</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATA_TYPE_OPERATION_COUNT = 0;
-
-	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.definitions.impl.FunctionDefinitionImpl <em>Function Definition</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -892,7 +947,7 @@ public interface DefinitionsPackage extends EPackage {
 	 * @see de.evoal.languages.model.base.definitions.impl.DefinitionsPackageImpl#getFunctionDefinition()
 	 * @generated
 	 */
-	int FUNCTION_DEFINITION = 15;
+	int FUNCTION_DEFINITION = 16;
 
 	/**
 	 * The feature id for the '<em><b>Constraints</b></em>' containment reference list.
@@ -956,7 +1011,7 @@ public interface DefinitionsPackage extends EPackage {
 	 * @see de.evoal.languages.model.base.definitions.impl.DefinitionsPackageImpl#getParameter()
 	 * @generated
 	 */
-	int PARAMETER = 16;
+	int PARAMETER = 17;
 
 	/**
 	 * The feature id for the '<em><b>Constraints</b></em>' containment reference list.
@@ -1011,7 +1066,7 @@ public interface DefinitionsPackage extends EPackage {
 	 * @see de.evoal.languages.model.base.definitions.impl.DefinitionsPackageImpl#getConstantDefinition()
 	 * @generated
 	 */
-	int CONSTANT_DEFINITION = 17;
+	int CONSTANT_DEFINITION = 18;
 
 	/**
 	 * The feature id for the '<em><b>Constraints</b></em>' containment reference list.
@@ -1020,7 +1075,7 @@ public interface DefinitionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTANT_DEFINITION__CONSTRAINTS = DEFINITION__CONSTRAINTS;
+	int CONSTANT_DEFINITION__CONSTRAINTS = LITERAL_DEFINITION__CONSTRAINTS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1029,7 +1084,7 @@ public interface DefinitionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTANT_DEFINITION__NAME = DEFINITION__NAME;
+	int CONSTANT_DEFINITION__NAME = LITERAL_DEFINITION__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' containment reference.
@@ -1038,7 +1093,7 @@ public interface DefinitionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTANT_DEFINITION__TYPE = DEFINITION_FEATURE_COUNT + 0;
+	int CONSTANT_DEFINITION__TYPE = LITERAL_DEFINITION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' containment reference.
@@ -1047,7 +1102,7 @@ public interface DefinitionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTANT_DEFINITION__VALUE = DEFINITION_FEATURE_COUNT + 1;
+	int CONSTANT_DEFINITION__VALUE = LITERAL_DEFINITION_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Constant Definition</em>' class.
@@ -1056,7 +1111,7 @@ public interface DefinitionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTANT_DEFINITION_FEATURE_COUNT = DEFINITION_FEATURE_COUNT + 2;
+	int CONSTANT_DEFINITION_FEATURE_COUNT = LITERAL_DEFINITION_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of operations of the '<em>Constant Definition</em>' class.
@@ -1065,7 +1120,7 @@ public interface DefinitionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTANT_DEFINITION_OPERATION_COUNT = DEFINITION_OPERATION_COUNT + 0;
+	int CONSTANT_DEFINITION_OPERATION_COUNT = LITERAL_DEFINITION_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.definitions.impl.FunctionNameImpl <em>Function Name</em>}' class.
@@ -1075,7 +1130,7 @@ public interface DefinitionsPackage extends EPackage {
 	 * @see de.evoal.languages.model.base.definitions.impl.DefinitionsPackageImpl#getFunctionName()
 	 * @generated
 	 */
-	int FUNCTION_NAME = 18;
+	int FUNCTION_NAME = 19;
 
 	/**
 	 * The number of structural features of the '<em>Function Name</em>' class.
@@ -1103,7 +1158,7 @@ public interface DefinitionsPackage extends EPackage {
 	 * @see de.evoal.languages.model.base.definitions.impl.DefinitionsPackageImpl#getDefinedFunctionName()
 	 * @generated
 	 */
-	int DEFINED_FUNCTION_NAME = 19;
+	int DEFINED_FUNCTION_NAME = 20;
 
 	/**
 	 * The feature id for the '<em><b>Definition</b></em>' reference.
@@ -1140,7 +1195,7 @@ public interface DefinitionsPackage extends EPackage {
 	 * @see de.evoal.languages.model.base.definitions.impl.DefinitionsPackageImpl#getScaleType()
 	 * @generated
 	 */
-	int SCALE_TYPE = 20;
+	int SCALE_TYPE = 21;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.definitions.RepresentationType <em>Representation Type</em>}' enum.
@@ -1150,7 +1205,7 @@ public interface DefinitionsPackage extends EPackage {
 	 * @see de.evoal.languages.model.base.definitions.impl.DefinitionsPackageImpl#getRepresentationType()
 	 * @generated
 	 */
-	int REPRESENTATION_TYPE = 21;
+	int REPRESENTATION_TYPE = 22;
 
 
 	/**
@@ -1196,6 +1251,26 @@ public interface DefinitionsPackage extends EPackage {
 	EAttribute getDefinition_Name();
 
 	/**
+	 * Returns the meta object for class '{@link de.evoal.languages.model.base.definitions.TypeDefinition <em>Type Definition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Type Definition</em>'.
+	 * @see de.evoal.languages.model.base.definitions.TypeDefinition
+	 * @generated
+	 */
+	EClass getTypeDefinition();
+
+	/**
+	 * Returns the meta object for class '{@link de.evoal.languages.model.base.definitions.LiteralDefinition <em>Literal Definition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Literal Definition</em>'.
+	 * @see de.evoal.languages.model.base.definitions.LiteralDefinition
+	 * @generated
+	 */
+	EClass getLiteralDefinition();
+
+	/**
 	 * Returns the meta object for class '{@link de.evoal.languages.model.base.definitions.ScaledDefinition <em>Scaled Definition</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1217,57 +1292,57 @@ public interface DefinitionsPackage extends EPackage {
 	EAttribute getScaledDefinition_Scale();
 
 	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.base.definitions.TypeDefinition <em>Type Definition</em>}'.
+	 * Returns the meta object for class '{@link de.evoal.languages.model.base.definitions.ClassDefinition <em>Class Definition</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Type Definition</em>'.
-	 * @see de.evoal.languages.model.base.definitions.TypeDefinition
+	 * @return the meta object for class '<em>Class Definition</em>'.
+	 * @see de.evoal.languages.model.base.definitions.ClassDefinition
 	 * @generated
 	 */
-	EClass getTypeDefinition();
+	EClass getClassDefinition();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.base.definitions.TypeDefinition#getAttributes <em>Attributes</em>}'.
+	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.base.definitions.ClassDefinition#getAttributes <em>Attributes</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Attributes</em>'.
-	 * @see de.evoal.languages.model.base.definitions.TypeDefinition#getAttributes()
-	 * @see #getTypeDefinition()
+	 * @see de.evoal.languages.model.base.definitions.ClassDefinition#getAttributes()
+	 * @see #getClassDefinition()
 	 * @generated
 	 */
-	EReference getTypeDefinition_Attributes();
+	EReference getClassDefinition_Attributes();
 
 	/**
-	 * Returns the meta object for the reference '{@link de.evoal.languages.model.base.definitions.TypeDefinition#getSuperType <em>Super Type</em>}'.
+	 * Returns the meta object for the reference '{@link de.evoal.languages.model.base.definitions.ClassDefinition#getSuperType <em>Super Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Super Type</em>'.
-	 * @see de.evoal.languages.model.base.definitions.TypeDefinition#getSuperType()
-	 * @see #getTypeDefinition()
+	 * @see de.evoal.languages.model.base.definitions.ClassDefinition#getSuperType()
+	 * @see #getClassDefinition()
 	 * @generated
 	 */
-	EReference getTypeDefinition_SuperType();
+	EReference getClassDefinition_SuperType();
 
 	/**
-	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.base.definitions.TypeDefinition#isAbstract <em>Abstract</em>}'.
+	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.base.definitions.ClassDefinition#isAbstract <em>Abstract</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Abstract</em>'.
-	 * @see de.evoal.languages.model.base.definitions.TypeDefinition#isAbstract()
-	 * @see #getTypeDefinition()
+	 * @see de.evoal.languages.model.base.definitions.ClassDefinition#isAbstract()
+	 * @see #getClassDefinition()
 	 * @generated
 	 */
-	EAttribute getTypeDefinition_Abstract();
+	EAttribute getClassDefinition_Abstract();
 
 	/**
-	 * Returns the meta object for the '{@link de.evoal.languages.model.base.definitions.TypeDefinition#findAttribute(java.lang.String) <em>Find Attribute</em>}' operation.
+	 * Returns the meta object for the '{@link de.evoal.languages.model.base.definitions.ClassDefinition#findAttribute(java.lang.String) <em>Find Attribute</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the '<em>Find Attribute</em>' operation.
-	 * @see de.evoal.languages.model.base.definitions.TypeDefinition#findAttribute(java.lang.String)
+	 * @see de.evoal.languages.model.base.definitions.ClassDefinition#findAttribute(java.lang.String)
 	 * @generated
 	 */
-	EOperation getTypeDefinition__FindAttribute__String();
+	EOperation getClassDefinition__FindAttribute__String();
 
 	/**
 	 * Returns the meta object for class '{@link de.evoal.languages.model.base.definitions.AttributeDefinition <em>Attribute Definition</em>}'.
@@ -1454,27 +1529,6 @@ public interface DefinitionsPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getStructuredDataDescription_Type();
-
-	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.base.definitions.DataType <em>Data Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Data Type</em>'.
-	 * @see de.evoal.languages.model.base.definitions.DataType
-	 * @generated
-	 */
-	EClass getDataType();
-
-	/**
-	 * Returns the meta object for the reference '{@link de.evoal.languages.model.base.definitions.DataType#getDefinition <em>Definition</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Definition</em>'.
-	 * @see de.evoal.languages.model.base.definitions.DataType#getDefinition()
-	 * @see #getDataType()
-	 * @generated
-	 */
-	EReference getDataType_Definition();
 
 	/**
 	 * Returns the meta object for class '{@link de.evoal.languages.model.base.definitions.FunctionDefinition <em>Function Definition</em>}'.
@@ -1672,6 +1726,26 @@ public interface DefinitionsPackage extends EPackage {
 		EAttribute DEFINITION__NAME = eINSTANCE.getDefinition_Name();
 
 		/**
+		 * The meta object literal for the '{@link de.evoal.languages.model.base.definitions.impl.TypeDefinitionImpl <em>Type Definition</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.evoal.languages.model.base.definitions.impl.TypeDefinitionImpl
+		 * @see de.evoal.languages.model.base.definitions.impl.DefinitionsPackageImpl#getTypeDefinition()
+		 * @generated
+		 */
+		EClass TYPE_DEFINITION = eINSTANCE.getTypeDefinition();
+
+		/**
+		 * The meta object literal for the '{@link de.evoal.languages.model.base.definitions.impl.LiteralDefinitionImpl <em>Literal Definition</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.evoal.languages.model.base.definitions.impl.LiteralDefinitionImpl
+		 * @see de.evoal.languages.model.base.definitions.impl.DefinitionsPackageImpl#getLiteralDefinition()
+		 * @generated
+		 */
+		EClass LITERAL_DEFINITION = eINSTANCE.getLiteralDefinition();
+
+		/**
 		 * The meta object literal for the '{@link de.evoal.languages.model.base.definitions.impl.ScaledDefinitionImpl <em>Scaled Definition</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1690,14 +1764,14 @@ public interface DefinitionsPackage extends EPackage {
 		EAttribute SCALED_DEFINITION__SCALE = eINSTANCE.getScaledDefinition_Scale();
 
 		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.base.definitions.impl.TypeDefinitionImpl <em>Type Definition</em>}' class.
+		 * The meta object literal for the '{@link de.evoal.languages.model.base.definitions.impl.ClassDefinitionImpl <em>Class Definition</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.base.definitions.impl.TypeDefinitionImpl
-		 * @see de.evoal.languages.model.base.definitions.impl.DefinitionsPackageImpl#getTypeDefinition()
+		 * @see de.evoal.languages.model.base.definitions.impl.ClassDefinitionImpl
+		 * @see de.evoal.languages.model.base.definitions.impl.DefinitionsPackageImpl#getClassDefinition()
 		 * @generated
 		 */
-		EClass TYPE_DEFINITION = eINSTANCE.getTypeDefinition();
+		EClass CLASS_DEFINITION = eINSTANCE.getClassDefinition();
 
 		/**
 		 * The meta object literal for the '<em><b>Attributes</b></em>' containment reference list feature.
@@ -1705,7 +1779,7 @@ public interface DefinitionsPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference TYPE_DEFINITION__ATTRIBUTES = eINSTANCE.getTypeDefinition_Attributes();
+		EReference CLASS_DEFINITION__ATTRIBUTES = eINSTANCE.getClassDefinition_Attributes();
 
 		/**
 		 * The meta object literal for the '<em><b>Super Type</b></em>' reference feature.
@@ -1713,7 +1787,7 @@ public interface DefinitionsPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference TYPE_DEFINITION__SUPER_TYPE = eINSTANCE.getTypeDefinition_SuperType();
+		EReference CLASS_DEFINITION__SUPER_TYPE = eINSTANCE.getClassDefinition_SuperType();
 
 		/**
 		 * The meta object literal for the '<em><b>Abstract</b></em>' attribute feature.
@@ -1721,7 +1795,7 @@ public interface DefinitionsPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute TYPE_DEFINITION__ABSTRACT = eINSTANCE.getTypeDefinition_Abstract();
+		EAttribute CLASS_DEFINITION__ABSTRACT = eINSTANCE.getClassDefinition_Abstract();
 
 		/**
 		 * The meta object literal for the '<em><b>Find Attribute</b></em>' operation.
@@ -1729,7 +1803,7 @@ public interface DefinitionsPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EOperation TYPE_DEFINITION___FIND_ATTRIBUTE__STRING = eINSTANCE.getTypeDefinition__FindAttribute__String();
+		EOperation CLASS_DEFINITION___FIND_ATTRIBUTE__STRING = eINSTANCE.getClassDefinition__FindAttribute__String();
 
 		/**
 		 * The meta object literal for the '{@link de.evoal.languages.model.base.definitions.impl.AttributeDefinitionImpl <em>Attribute Definition</em>}' class.
@@ -1894,24 +1968,6 @@ public interface DefinitionsPackage extends EPackage {
 		 * @generated
 		 */
 		EReference STRUCTURED_DATA_DESCRIPTION__TYPE = eINSTANCE.getStructuredDataDescription_Type();
-
-		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.base.definitions.impl.DataTypeImpl <em>Data Type</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.base.definitions.impl.DataTypeImpl
-		 * @see de.evoal.languages.model.base.definitions.impl.DefinitionsPackageImpl#getDataType()
-		 * @generated
-		 */
-		EClass DATA_TYPE = eINSTANCE.getDataType();
-
-		/**
-		 * The meta object literal for the '<em><b>Definition</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference DATA_TYPE__DEFINITION = eINSTANCE.getDataType_Definition();
 
 		/**
 		 * The meta object literal for the '{@link de.evoal.languages.model.base.definitions.impl.FunctionDefinitionImpl <em>Function Definition</em>}' class.

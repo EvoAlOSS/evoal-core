@@ -6,6 +6,7 @@ import de.evoal.languages.model.base.expressions.Expression;
 import de.evoal.languages.model.base.expressions.ExpressionsPackage;
 
 import org.eclipse.emf.ecore.EClass;
+
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 /**

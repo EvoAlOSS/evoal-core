@@ -5,8 +5,6 @@ import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.evoal.languages.model.base.definitions.BaseDataDescription;
-import de.evoal.languages.model.base.definitions.DataDescription;
 import de.evoal.languages.model.base.definitions.ScaleType;
 import de.evoal.languages.model.base.expressions.*;
 import de.evoal.languages.model.base.expressions.util.ExpressionsSwitch;
@@ -238,14 +236,15 @@ public class ScaleValidator extends ExpressionsSwitch<ScaleType> {
 		return doSwitch(object.getSubExpression());
 	}
 
+	/*
 	@Override
 	public ScaleType caseValueReference(final ValueReference object) {
 		DataDescription description = null;
 
 		if(object instanceof SelfReference) {
 			return scaleTypeOfValue;
-		} else if(object instanceof DataReference) {
-			DataReference reference = (DataReference)object;
+		} else if(object instanceof DataTypeReference) {
+			DataTypeReference reference = (DataTypeReference)object;
 			
 			description = reference.getDefinition();
 		}
@@ -258,9 +257,10 @@ public class ScaleValidator extends ExpressionsSwitch<ScaleType> {
 	}
 
 	@Override
-	public ScaleType caseConstantReference(final ConstantReference object) {
+	public ScaleType caseDefinitionReference(final DefinitionReference object) {
 		return doSwitch(object.getDefinition().getType());
 	}
+	*/
 
 	@Override
 	public ScaleType caseArray(Array object) {

@@ -13,5 +13,5 @@ package de.evoal.languages.model.base.definitions;
  * @model abstract="true"
  * @generated
  */
-public interface DataTypeDefinition extends Definition {
+public interface DataTypeDefinition extends TypeDefinition {
 } // DataTypeDefinition

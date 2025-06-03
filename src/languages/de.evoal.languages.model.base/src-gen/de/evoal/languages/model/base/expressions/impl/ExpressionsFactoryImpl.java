@@ -73,10 +73,9 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 			case ExpressionsPackage.INSTANCE: return createInstance();
 			case ExpressionsPackage.ATTRIBUTE: return createAttribute();
 			case ExpressionsPackage.VALUE_REFERENCE: return createValueReference();
-			case ExpressionsPackage.DATA_REFERENCE: return createDataReference();
 			case ExpressionsPackage.SELF_REFERENCE: return createSelfReference();
-			case ExpressionsPackage.ENUM_LITERAL_REFERENCE: return createEnumLiteralReference();
-			case ExpressionsPackage.CONSTANT_REFERENCE: return createConstantReference();
+			case ExpressionsPackage.LITERAL_DEFINITION_REFERENCE: return createLiteralDefinitionReference();
+			case ExpressionsPackage.TYPE_DEFINITION_REFERENCE: return createTypeDefinitionReference();
 			case ExpressionsPackage.BOOLEAN_LITERAL: return createBooleanLiteral();
 			case ExpressionsPackage.CALL: return createCall();
 			case ExpressionsPackage.PARANTHESES: return createParantheses();
@@ -310,17 +309,6 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 	 * @generated
 	 */
 	@Override
-	public DataReference createDataReference() {
-		DataReferenceImpl dataReference = new DataReferenceImpl();
-		return dataReference;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public SelfReference createSelfReference() {
 		SelfReferenceImpl selfReference = new SelfReferenceImpl();
 		return selfReference;
@@ -332,9 +320,9 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 	 * @generated
 	 */
 	@Override
-	public EnumLiteralReference createEnumLiteralReference() {
-		EnumLiteralReferenceImpl enumLiteralReference = new EnumLiteralReferenceImpl();
-		return enumLiteralReference;
+	public LiteralDefinitionReference createLiteralDefinitionReference() {
+		LiteralDefinitionReferenceImpl literalDefinitionReference = new LiteralDefinitionReferenceImpl();
+		return literalDefinitionReference;
 	}
 
 	/**
@@ -343,9 +331,9 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 	 * @generated
 	 */
 	@Override
-	public ConstantReference createConstantReference() {
-		ConstantReferenceImpl constantReference = new ConstantReferenceImpl();
-		return constantReference;
+	public TypeDefinitionReference createTypeDefinitionReference() {
+		TypeDefinitionReferenceImpl typeDefinitionReference = new TypeDefinitionReferenceImpl();
+		return typeDefinitionReference;
 	}
 
 	/**

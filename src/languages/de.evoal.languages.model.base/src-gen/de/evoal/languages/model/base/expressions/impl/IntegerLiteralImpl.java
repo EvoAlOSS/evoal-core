@@ -4,9 +4,9 @@ package de.evoal.languages.model.base.expressions.impl;
 
 import de.evoal.languages.model.base.expressions.ExpressionsPackage;
 import de.evoal.languages.model.base.expressions.IntegerLiteral;
-
 import de.evoal.languages.model.base.expressions.Literal;
 import de.evoal.languages.model.base.expressions.NumberLiteral;
+
 import java.lang.reflect.InvocationTargetException;
 
 import org.eclipse.emf.common.notify.Notification;

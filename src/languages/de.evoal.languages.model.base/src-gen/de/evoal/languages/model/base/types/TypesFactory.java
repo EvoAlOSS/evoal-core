@@ -22,15 +22,6 @@ public interface TypesFactory extends EFactory {
 	TypesFactory eINSTANCE = de.evoal.languages.model.base.types.impl.TypesFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>Instance Type</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Instance Type</em>'.
-	 * @generated
-	 */
-	InstanceType createInstanceType();
-
-	/**
 	 * Returns a new object of class '<em>Base Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -119,6 +110,15 @@ public interface TypesFactory extends EFactory {
 	 * @generated
 	 */
 	DataType createDataType();
+
+	/**
+	 * Returns a new object of class '<em>Definition Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Definition Reference</em>'.
+	 * @generated
+	 */
+	DefinitionReference createDefinitionReference();
 
 	/**
 	 * Returns the package supported by this factory.

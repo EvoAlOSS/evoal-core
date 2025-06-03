@@ -52,7 +52,9 @@
     </genEnums>
     <genDataTypes ecoreDataType="expressions.ecore#//Number"/>
     <genClasses image="false" ecoreClass="expressions.ecore#//Expression"/>
-    <genClasses ecoreClass="expressions.ecore#//Value"/>
+    <genClasses image="false" ecoreClass="expressions.ecore#//ReadExpression"/>
+    <genClasses image="false" ecoreClass="expressions.ecore#//ConstantExpression"/>
+    <genClasses image="false" ecoreClass="expressions.ecore#//WriteExpression"/>
     <genClasses ecoreClass="expressions.ecore#//OrExpression">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference expressions.ecore#//OrExpression/subExpressions"/>
     </genClasses>
@@ -92,7 +94,6 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute expressions.ecore#//UnaryAddOrSubtractExpression/operators"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference expressions.ecore#//UnaryAddOrSubtractExpression/subExpression"/>
     </genClasses>
-    <genClasses image="false" ecoreClass="expressions.ecore#//ConstantValue"/>
     <genClasses image="false" ecoreClass="expressions.ecore#//Literal">
       <genOperations ecoreOperation="expressions.ecore#//Literal/getValue"/>
     </genClasses>
@@ -110,7 +111,8 @@
       <genOperations ecoreOperation="expressions.ecore#//RealLiteral/getValue" body="return literal * Math.pow(10, super.getFactor().getValue());&#xA;"/>
     </genClasses>
     <genClasses ecoreClass="expressions.ecore#//StringLiteral">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute expressions.ecore#//StringLiteral/value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute expressions.ecore#//StringLiteral/literal"/>
+      <genOperations ecoreOperation="expressions.ecore#//StringLiteral/getValue" body="return literal;&#xA;"/>
     </genClasses>
     <genClasses ecoreClass="expressions.ecore#//Instance">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference expressions.ecore#//Instance/definition"/>
@@ -124,20 +126,17 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference expressions.ecore#//Attribute/value"/>
     </genClasses>
     <genClasses ecoreClass="expressions.ecore#//ValueReference"/>
-    <genClasses ecoreClass="expressions.ecore#//DataReference">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference expressions.ecore#//DataReference/definition"/>
-    </genClasses>
     <genClasses ecoreClass="expressions.ecore#//SelfReference"/>
-    <genClasses ecoreClass="expressions.ecore#//EnumLiteralReference">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference expressions.ecore#//EnumLiteralReference/definition"/>
+    <genClasses ecoreClass="expressions.ecore#//LiteralDefinitionReference">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference expressions.ecore#//LiteralDefinitionReference/definition"/>
     </genClasses>
-    <genClasses ecoreClass="expressions.ecore#//ConstantReference">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference expressions.ecore#//ConstantReference/definition"/>
+    <genClasses ecoreClass="expressions.ecore#//TypeDefinitionReference">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference expressions.ecore#//TypeDefinitionReference/definition"/>
     </genClasses>
     <genClasses ecoreClass="expressions.ecore#//BooleanLiteral">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute expressions.ecore#//BooleanLiteral/value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute expressions.ecore#//BooleanLiteral/literal"/>
       <genOperations ecoreOperation="expressions.ecore#//BooleanLiteral/getValue"
-          body="return isValue();"/>
+          body="return isLiteral();"/>
     </genClasses>
     <genClasses ecoreClass="expressions.ecore#//Call">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference expressions.ecore#//Call/function"/>

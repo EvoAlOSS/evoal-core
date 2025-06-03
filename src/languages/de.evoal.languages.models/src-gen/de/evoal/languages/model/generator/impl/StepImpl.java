@@ -3,9 +3,11 @@
  */
 package de.evoal.languages.model.generator.impl;
 
-import de.evoal.languages.model.base.expressions.DataReference;
+import de.evoal.languages.model.base.definitions.Definition;
 import de.evoal.languages.model.base.expressions.Instance;
 
+import de.evoal.languages.model.base.expressions.TypeDefinitionReference;
+import de.evoal.languages.model.base.types.DefinitionReference;
 import de.evoal.languages.model.generator.GeneratorPackage;
 import de.evoal.languages.model.generator.Step;
 
@@ -59,7 +61,7 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<DataReference> reads;
+	protected EList<TypeDefinitionReference> reads;
 
 	/**
 	 * The cached value of the '{@link #getWrites() <em>Writes</em>}' containment reference list.
@@ -69,7 +71,7 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<DataReference> writes;
+	protected EList<TypeDefinitionReference> writes;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -141,9 +143,9 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step {
 	 * @generated
 	 */
 	@Override
-	public EList<DataReference> getReads() {
+	public EList<TypeDefinitionReference> getReads() {
 		if (reads == null) {
-			reads = new EObjectContainmentEList<DataReference>(DataReference.class, this, GeneratorPackage.STEP__READS);
+			reads = new EObjectContainmentEList<TypeDefinitionReference>(TypeDefinitionReference.class, this, GeneratorPackage.STEP__READS);
 		}
 		return reads;
 	}
@@ -154,9 +156,9 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step {
 	 * @generated
 	 */
 	@Override
-	public EList<DataReference> getWrites() {
+	public EList<TypeDefinitionReference> getWrites() {
 		if (writes == null) {
-			writes = new EObjectContainmentEList<DataReference>(DataReference.class, this, GeneratorPackage.STEP__WRITES);
+			writes = new EObjectContainmentEList<TypeDefinitionReference>(TypeDefinitionReference.class, this, GeneratorPackage.STEP__WRITES);
 		}
 		return writes;
 	}
@@ -211,11 +213,11 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step {
 				return;
 			case GeneratorPackage.STEP__READS:
 				getReads().clear();
-				getReads().addAll((Collection<? extends DataReference>)newValue);
+				getReads().addAll((Collection<? extends TypeDefinitionReference>)newValue);
 				return;
 			case GeneratorPackage.STEP__WRITES:
 				getWrites().clear();
-				getWrites().addAll((Collection<? extends DataReference>)newValue);
+				getWrites().addAll((Collection<? extends TypeDefinitionReference>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

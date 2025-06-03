@@ -1,8 +1,9 @@
 package de.evoal.optimisation.ea.main.codec.model;
 
 import de.evoal.languages.model.base.definitions.AttributeDefinition;
-import de.evoal.languages.model.base.definitions.TypeDefinition;
+import de.evoal.languages.model.base.definitions.ClassDefinition;
 import de.evoal.languages.model.base.types.*;
+import de.evoal.languages.model.base.types.DefinitionReference;
 import de.evoal.optimisation.ea.api.codec.model.ModelGene;
 import de.evoal.languages.model.base.expressions.*;
 import io.jenetics.util.RandomRegistry;
@@ -13,7 +14,7 @@ import java.util.*;
 import java.util.stream.Stream;
 
 @Slf4j
-public record ModelBuilder(TypeDefinition root, Map<TypeDefinition, Set<TypeDefinition>> subtypes, Map<AttributeDefinition, Set<TypeDefinition>> attributes) {
+public record ModelBuilder(ClassDefinition root, Map<ClassDefinition, Set<ClassDefinition>> subtypes, Map<AttributeDefinition, Set<ClassDefinition>> attributes) {
     private static final ExpressionsFactory FACTORY = ExpressionsFactory.eINSTANCE;
 
     public Instance random() {
@@ -33,9 +34,9 @@ public record ModelBuilder(TypeDefinition root, Map<TypeDefinition, Set<TypeDefi
 
         for(final Attribute attr : tree.getAttributes()) {
             final Type type = attr.getDefinition().getType();
-            if(type instanceof InstanceType) {
+            if(type instanceof DefinitionReference) {
                 toIterable(genes, findInstance(attr.getValue()));
-            } else if(type instanceof ArrayType arrayType && arrayType.getElements() instanceof InstanceType instanceType) {
+            } else if(type instanceof ArrayType arrayType && arrayType.getElements() instanceof DefinitionReference instanceType) {
                 final Array array = findArray(attr.getValue());
                 array.getValues()
                         .stream()
@@ -77,7 +78,7 @@ public record ModelBuilder(TypeDefinition root, Map<TypeDefinition, Set<TypeDefi
      * @param definition Instance type.
      * @return A valid instance.
      */
-    private @NonNull Instance random(final TypeDefinition definition) {
+    private @NonNull Instance random(final ClassDefinition definition) {
         log.info("Creating instance of type {}", definition.getName());
         final Instance instance = FACTORY.createInstance();
         instance.setDefinition(definition);
@@ -89,7 +90,7 @@ public record ModelBuilder(TypeDefinition root, Map<TypeDefinition, Set<TypeDefi
         return instance;
     }
 
-    private Collection<AttributeDefinition> allAttributes(final TypeDefinition definition) {
+    private Collection<AttributeDefinition> allAttributes(final ClassDefinition definition) {
         if(definition == null) {
             return new ArrayList<>();
         }
@@ -116,7 +117,7 @@ public record ModelBuilder(TypeDefinition root, Map<TypeDefinition, Set<TypeDefi
         return attribute;
     }
 
-    private @NonNull Expression toExpression(@NonNull Value value) {
+    private @NonNull Expression toExpression(@NonNull ReadExpression value) {
         final OrExpression or = FACTORY.createOrExpression();
 
         final XorExpression xor = FACTORY.createXorExpression();
@@ -149,12 +150,12 @@ public record ModelBuilder(TypeDefinition root, Map<TypeDefinition, Set<TypeDefi
         return or;
     }
 
-    public @NonNull Value random(final @NonNull String name, final @NonNull Type type) {
+    public @NonNull ReadExpression random(final @NonNull String name, final @NonNull Type type) {
         if(type instanceof ArrayType arrayType) {
             return random(name, arrayType);
-        } else if(type instanceof InstanceType instanceType) {
-            final Set<TypeDefinition> definitions = subtypes.get((TypeDefinition)instanceType.getDefinition());
-            final List<TypeDefinition> types = new ArrayList<>(definitions);
+        } else if(type instanceof DefinitionReference instanceType) {
+            final Set<ClassDefinition> definitions = subtypes.get((ClassDefinition)instanceType.getDefinition());
+            final List<ClassDefinition> types = new ArrayList<>(definitions);
             int index = RandomRegistry.random().nextInt(definitions.size());
             return random(types.get(index));
         } else if(type instanceof IntType) {
@@ -166,7 +167,7 @@ public record ModelBuilder(TypeDefinition root, Map<TypeDefinition, Set<TypeDefi
         }
     }
 
-    private @NonNull Value random(final String name, final IntType type) {
+    private @NonNull ReadExpression random(final String name, final IntType type) {
         final IntegerLiteral literal = FACTORY.createIntegerLiteral();
         int value = RandomRegistry.random().nextInt(0, 4);
         if("value".equals(name)) {
@@ -178,19 +179,19 @@ public record ModelBuilder(TypeDefinition root, Map<TypeDefinition, Set<TypeDefi
         return literal;
     }
 
-    private @NonNull Value random(final BooleanType type) {
+    private @NonNull ReadExpression random(final BooleanType type) {
         final BooleanLiteral literal = FACTORY.createBooleanLiteral();
-        literal.setValue(RandomRegistry.random().nextInt(0, 2) == 1);
+        literal.setLiteral(RandomRegistry.random().nextInt(0, 2) == 1);
 
         return literal;
     }
 
-    private @NonNull Value random(@NonNull  final String name, final @NonNull ArrayType type) {
+    private @NonNull ReadExpression random(@NonNull  final String name, final @NonNull ArrayType type) {
         int count = "entries".equals(name) ? RandomRegistry.random().nextInt(1,5) : 1; // ; // TODO What about a gaussian distribution?
 
         final Array array = FACTORY.createArray();
         for(int i = 0; i < count; i++) {
-            final Value child = random(name, type.getElements());
+            final ReadExpression child = random(name, type.getElements());
             array.getValues().add(child);
         }
 
@@ -206,7 +207,7 @@ public record ModelBuilder(TypeDefinition root, Map<TypeDefinition, Set<TypeDefi
                         t = ((ArrayType)t).getElements();
                     }
 
-                    return t instanceof InstanceType;
+                    return t instanceof DefinitionReference;
                 })
                 .flatMap(a -> {
                     Type t = a.getDefinition().getType();

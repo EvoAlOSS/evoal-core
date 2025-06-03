@@ -3,6 +3,7 @@
 package de.evoal.languages.model.base.definitions;
 
 import de.evoal.languages.model.base.expressions.Expression;
+
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EObject;
@@ -13,7 +14,9 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Abstract base class for elements that can be constrained.
+ * 
+ * Constraint aspect. Any element inheriting this constraint can hold constraints.
+ * 
  * <!-- end-model-doc -->
  *
  * <p>
@@ -34,7 +37,7 @@ public interface Constrained extends EObject {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * The constraints for the element
+	 * The constraints.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Constraints</em>' containment reference list.
 	 * @see de.evoal.languages.model.base.definitions.DefinitionsPackage#getConstrained_Constraints()

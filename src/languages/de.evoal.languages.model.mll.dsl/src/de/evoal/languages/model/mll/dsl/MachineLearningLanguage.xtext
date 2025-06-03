@@ -22,7 +22,7 @@ SurrogateDefinitionRule returns SurrogateDefinition:
 ;
 		
 PartialSurrogateFunctionDefinitionRule returns PartialSurrogateFunctionDefinition:
-	"model" definition = [defs::TypeDefinition|QualifiedName]
+	"model" definition = [defs::ClassDefinition|QualifiedName]
 	"mapping"
 		inputs += [defs::DataDescription|QualifiedName] ("," inputs += [defs::DataDescription|QualifiedName])* 
 	"to"
@@ -70,7 +70,7 @@ RangeRule returns execution::Range:
 ;
 
 LiteralRangeRule returns execution::ValueRange:
-	'[' elements += ValueRule (',' elements += ValueRule)* ']'
+	'[' elements += ReadExpressionRule (',' elements += ReadExpressionRule)* ']'
 ;
 
 CounterRangeRule returns execution::CounterRange:
@@ -79,7 +79,9 @@ CounterRangeRule returns execution::CounterRange:
 
 @Override
 ReferenceRule returns expressions::ValueReference:
-	ConstantReferenceRule | DataReferenceRule | VariableReferenceRule /*| PipelineDefinitionReferenceRule  */
+	LiteralDefinitionReferenceRule
+	| TypeDefinitionReferenceRule 
+	| VariableReferenceRule
 ;
 
 VariableReferenceRule returns execution::VariableReference:

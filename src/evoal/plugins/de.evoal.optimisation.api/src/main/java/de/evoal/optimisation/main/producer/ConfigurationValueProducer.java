@@ -4,6 +4,7 @@ import de.evoal.core.api.board.Blackboard;
 import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.core.api.utils.AttributeHelper;
 import de.evoal.languages.model.base.definitions.Definition;
+import de.evoal.languages.model.base.definitions.EnumLiteralDefinition;
 import de.evoal.languages.model.base.expressions.*;
 import de.evoal.languages.model.ol.OptimisationModule;
 import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
@@ -80,6 +81,14 @@ public class ConfigurationValueProducer {
     @Produces
     @ConfigurationValue(entry = OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "")
     public Boolean injectBooleanValue(final InjectionPoint ip, final Blackboard board) {
+        final ConfigurationValue value = ip.getAnnotated().getAnnotation(ConfigurationValue.class);
+
+        return lookup(board.get(value.entry()), value.access());
+    }
+
+    @Produces
+    @ConfigurationValue(entry = OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "")
+    public EnumLiteralDefinition injectEnumLiteralValue(final InjectionPoint ip, final Blackboard board) {
         final ConfigurationValue value = ip.getAnnotated().getAnnotation(ConfigurationValue.class);
 
         return lookup(board.get(value.entry()), value.access());

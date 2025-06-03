@@ -4,7 +4,7 @@ package de.evoal.languages.model.base.expressions.impl;
 
 import de.evoal.languages.model.base.expressions.Array;
 import de.evoal.languages.model.base.expressions.ExpressionsPackage;
-import de.evoal.languages.model.base.expressions.Value;
+import de.evoal.languages.model.base.expressions.ReadExpression;
 
 import java.util.Collection;
 
@@ -31,7 +31,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *
  * @generated
  */
-public class ArrayImpl extends ValueImpl implements Array {
+public class ArrayImpl extends ReadExpressionImpl implements Array {
 	/**
 	 * The cached value of the '{@link #getValues() <em>Values</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -40,7 +40,7 @@ public class ArrayImpl extends ValueImpl implements Array {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Value> values;
+	protected EList<ReadExpression> values;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -67,9 +67,9 @@ public class ArrayImpl extends ValueImpl implements Array {
 	 * @generated
 	 */
 	@Override
-	public EList<Value> getValues() {
+	public EList<ReadExpression> getValues() {
 		if (values == null) {
-			values = new EObjectContainmentEList<Value>(Value.class, this, ExpressionsPackage.ARRAY__VALUES);
+			values = new EObjectContainmentEList<ReadExpression>(ReadExpression.class, this, ExpressionsPackage.ARRAY__VALUES);
 		}
 		return values;
 	}
@@ -113,7 +113,7 @@ public class ArrayImpl extends ValueImpl implements Array {
 		switch (featureID) {
 			case ExpressionsPackage.ARRAY__VALUES:
 				getValues().clear();
-				getValues().addAll((Collection<? extends Value>)newValue);
+				getValues().addAll((Collection<? extends ReadExpression>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

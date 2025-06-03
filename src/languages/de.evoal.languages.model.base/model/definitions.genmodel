@@ -29,16 +29,18 @@
     <genClasses image="false" ecoreClass="definitions.ecore#//Definition">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute definitions.ecore#//Definition/name"/>
     </genClasses>
+    <genClasses image="false" ecoreClass="definitions.ecore#//TypeDefinition"/>
+    <genClasses image="false" ecoreClass="definitions.ecore#//LiteralDefinition"/>
     <genClasses ecoreClass="definitions.ecore#//ScaledDefinition">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute definitions.ecore#//ScaledDefinition/scale"/>
     </genClasses>
-    <genClasses ecoreClass="definitions.ecore#//TypeDefinition">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference definitions.ecore#//TypeDefinition/attributes"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference definitions.ecore#//TypeDefinition/superType"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute definitions.ecore#//TypeDefinition/abstract"/>
-      <genOperations ecoreOperation="definitions.ecore#//TypeDefinition/findAttribute"
+    <genClasses ecoreClass="definitions.ecore#//ClassDefinition">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference definitions.ecore#//ClassDefinition/attributes"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference definitions.ecore#//ClassDefinition/superType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute definitions.ecore#//ClassDefinition/abstract"/>
+      <genOperations ecoreOperation="definitions.ecore#//ClassDefinition/findAttribute"
           body="AttributeDefinition attribute =  getAttributes().stream()&#xA;&#x9;.filter(a -> a.getName().equals(name))&#xA;&#x9;.findFirst()&#xA;&#x9;.orElse(null);&#xA;&#xA;if(attribute == null &amp;&amp; getSuperType() != null) {&#xA;&#x9;attribute = getSuperType().findAttribute(name);&#xA;}&#xA;&#xA;return attribute;">
-        <genParameters ecoreParameter="definitions.ecore#//TypeDefinition/findAttribute/name"/>
+        <genParameters ecoreParameter="definitions.ecore#//ClassDefinition/findAttribute/name"/>
       </genOperations>
     </genClasses>
     <genClasses ecoreClass="definitions.ecore#//AttributeDefinition">
@@ -59,14 +61,11 @@
     <genClasses ecoreClass="definitions.ecore#//TypedBaseDataDescription">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference definitions.ecore#//TypedBaseDataDescription/type"/>
       <genOperations ecoreOperation="definitions.ecore#//TypedBaseDataDescription/getScale"
-          body="return getType() == null ? null : getType().getScale();"/>
+          body="return getType() == null || !(getType() instanceof TypedBaseDataDescription) ? null : ((TypedBaseDataDescription)getType()).getScale();&#xA;"/>
     </genClasses>
     <genClasses ecoreClass="definitions.ecore#//UntypedBaseDataDescription"/>
     <genClasses ecoreClass="definitions.ecore#//StructuredDataDescription">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference definitions.ecore#//StructuredDataDescription/type"/>
-    </genClasses>
-    <genClasses ecoreClass="definitions.ecore#//DataType">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference definitions.ecore#//DataType/definition"/>
     </genClasses>
     <genClasses ecoreClass="definitions.ecore#//FunctionDefinition">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference definitions.ecore#//FunctionDefinition/type"/>

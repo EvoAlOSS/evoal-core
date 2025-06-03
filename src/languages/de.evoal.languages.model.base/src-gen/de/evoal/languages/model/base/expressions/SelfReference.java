@@ -2,6 +2,7 @@
  */
 package de.evoal.languages.model.base.expressions;
 
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Self Reference</b></em>'.

@@ -9,7 +9,6 @@ import de.evoal.core.api.properties.PropertySpecification;
 
 import de.evoal.core.api.utils.ArithmeticOperations;
 import de.evoal.languages.model.base.definitions.DataDescription;
-import de.evoal.languages.model.base.expressions.DataReference;
 import de.evoal.languages.model.base.expressions.SelfReference;
 import de.evoal.languages.model.base.expressions.*;
 
@@ -215,7 +214,7 @@ public class ConditionConverter extends ExpressionsSwitch<Object> {
 
     @Override
     public Object caseStringLiteral(final StringLiteral object) {
-        return (BiFunction<Properties, Properties, Object>) (gen, fit) -> Double.parseDouble(object.getValue());
+        return (BiFunction<Properties, Properties, Object>) (gen, fit) -> Double.parseDouble(object.getLiteral());
     }
 
     @Override
@@ -241,11 +240,11 @@ public class ConditionConverter extends ExpressionsSwitch<Object> {
             }
         }
 
-        if(!(object instanceof final DataReference reference)) {
+        if(!(object instanceof final DefinitionReference reference)) {
             throw new IllegalStateException("Value reference is not a data reference.");
         }
 
-        final DataDescription description = reference.getDefinition();
+        final DataDescription description = (DataDescription) reference.getDefinition();
         if(fitnessSpec.contains(new PropertySpecification(description.getName(), description))) {
             final String propertyName = description.getName();
             final int propertyIndex = fitnessSpec.indexOf(propertyName);

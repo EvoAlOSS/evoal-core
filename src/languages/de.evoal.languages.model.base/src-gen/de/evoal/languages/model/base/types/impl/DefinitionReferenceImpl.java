@@ -1,11 +1,11 @@
 /**
  */
-package de.evoal.languages.model.base.expressions.impl;
+package de.evoal.languages.model.base.types.impl;
 
-import de.evoal.languages.model.base.definitions.DataDescription;
+import de.evoal.languages.model.base.definitions.Definition;
 
-import de.evoal.languages.model.base.expressions.DataReference;
-import de.evoal.languages.model.base.expressions.ExpressionsPackage;
+import de.evoal.languages.model.base.types.DefinitionReference;
+import de.evoal.languages.model.base.types.TypesPackage;
 
 import org.eclipse.emf.common.notify.Notification;
 
@@ -16,18 +16,18 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Data Reference</b></em>'.
+ * An implementation of the model object '<em><b>Definition Reference</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link de.evoal.languages.model.base.expressions.impl.DataReferenceImpl#getDefinition <em>Definition</em>}</li>
+ *   <li>{@link de.evoal.languages.model.base.types.impl.DefinitionReferenceImpl#getDefinition <em>Definition</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class DataReferenceImpl extends ValueReferenceImpl implements DataReference {
+public class DefinitionReferenceImpl extends TypeImpl implements DefinitionReference {
 	/**
 	 * The cached value of the '{@link #getDefinition() <em>Definition</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -36,14 +36,14 @@ public class DataReferenceImpl extends ValueReferenceImpl implements DataReferen
 	 * @generated
 	 * @ordered
 	 */
-	protected DataDescription definition;
+	protected Definition definition;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected DataReferenceImpl() {
+	protected DefinitionReferenceImpl() {
 		super();
 	}
 
@@ -54,7 +54,7 @@ public class DataReferenceImpl extends ValueReferenceImpl implements DataReferen
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return ExpressionsPackage.Literals.DATA_REFERENCE;
+		return TypesPackage.Literals.DEFINITION_REFERENCE;
 	}
 
 	/**
@@ -63,13 +63,13 @@ public class DataReferenceImpl extends ValueReferenceImpl implements DataReferen
 	 * @generated
 	 */
 	@Override
-	public DataDescription getDefinition() {
+	public Definition getDefinition() {
 		if (definition != null && definition.eIsProxy()) {
 			InternalEObject oldDefinition = (InternalEObject)definition;
-			definition = (DataDescription)eResolveProxy(oldDefinition);
+			definition = (Definition)eResolveProxy(oldDefinition);
 			if (definition != oldDefinition) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExpressionsPackage.DATA_REFERENCE__DEFINITION, oldDefinition, definition));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TypesPackage.DEFINITION_REFERENCE__DEFINITION, oldDefinition, definition));
 			}
 		}
 		return definition;
@@ -80,7 +80,7 @@ public class DataReferenceImpl extends ValueReferenceImpl implements DataReferen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public DataDescription basicGetDefinition() {
+	public Definition basicGetDefinition() {
 		return definition;
 	}
 
@@ -90,11 +90,11 @@ public class DataReferenceImpl extends ValueReferenceImpl implements DataReferen
 	 * @generated
 	 */
 	@Override
-	public void setDefinition(DataDescription newDefinition) {
-		DataDescription oldDefinition = definition;
+	public void setDefinition(Definition newDefinition) {
+		Definition oldDefinition = definition;
 		definition = newDefinition;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExpressionsPackage.DATA_REFERENCE__DEFINITION, oldDefinition, definition));
+			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.DEFINITION_REFERENCE__DEFINITION, oldDefinition, definition));
 	}
 
 	/**
@@ -105,7 +105,7 @@ public class DataReferenceImpl extends ValueReferenceImpl implements DataReferen
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ExpressionsPackage.DATA_REFERENCE__DEFINITION:
+			case TypesPackage.DEFINITION_REFERENCE__DEFINITION:
 				if (resolve) return getDefinition();
 				return basicGetDefinition();
 		}
@@ -120,8 +120,8 @@ public class DataReferenceImpl extends ValueReferenceImpl implements DataReferen
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ExpressionsPackage.DATA_REFERENCE__DEFINITION:
-				setDefinition((DataDescription)newValue);
+			case TypesPackage.DEFINITION_REFERENCE__DEFINITION:
+				setDefinition((Definition)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -135,8 +135,8 @@ public class DataReferenceImpl extends ValueReferenceImpl implements DataReferen
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ExpressionsPackage.DATA_REFERENCE__DEFINITION:
-				setDefinition((DataDescription)null);
+			case TypesPackage.DEFINITION_REFERENCE__DEFINITION:
+				setDefinition((Definition)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -150,10 +150,10 @@ public class DataReferenceImpl extends ValueReferenceImpl implements DataReferen
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ExpressionsPackage.DATA_REFERENCE__DEFINITION:
+			case TypesPackage.DEFINITION_REFERENCE__DEFINITION:
 				return definition != null;
 		}
 		return super.eIsSet(featureID);
 	}
 
-} //DataReferenceImpl
+} //DefinitionReferenceImpl

@@ -109,7 +109,7 @@ public class DataReferenceSwitch extends ExpressionsSwitch<DataDescription> {
         if(object instanceof SelfReference) {
             throw  new IllegalStateException("Not yet implemented");
         } else {
-            return ((DataReference)object).getDefinition();
+            return (DataDescription) ((DefinitionReference)object).getDefinition();
         }
     }
 }

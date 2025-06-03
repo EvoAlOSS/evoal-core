@@ -12,7 +12,7 @@ package de.evoal.languages.model.base.expressions;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link de.evoal.languages.model.base.expressions.BooleanLiteral#isValue <em>Value</em>}</li>
+ *   <li>{@link de.evoal.languages.model.base.expressions.BooleanLiteral#isLiteral <em>Literal</em>}</li>
  * </ul>
  *
  * @see de.evoal.languages.model.base.expressions.ExpressionsPackage#getBooleanLiteral()
@@ -21,26 +21,26 @@ package de.evoal.languages.model.base.expressions;
  */
 public interface BooleanLiteral extends Literal {
 	/**
-	 * Returns the value of the '<em><b>Value</b></em>' attribute.
+	 * Returns the value of the '<em><b>Literal</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Value</em>' attribute.
-	 * @see #setValue(boolean)
-	 * @see de.evoal.languages.model.base.expressions.ExpressionsPackage#getBooleanLiteral_Value()
+	 * @return the value of the '<em>Literal</em>' attribute.
+	 * @see #setLiteral(boolean)
+	 * @see de.evoal.languages.model.base.expressions.ExpressionsPackage#getBooleanLiteral_Literal()
 	 * @model required="true"
 	 * @generated
 	 */
-	boolean isValue();
+	boolean isLiteral();
 
 	/**
-	 * Sets the value of the '{@link de.evoal.languages.model.base.expressions.BooleanLiteral#isValue <em>Value</em>}' attribute.
+	 * Sets the value of the '{@link de.evoal.languages.model.base.expressions.BooleanLiteral#isLiteral <em>Literal</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Value</em>' attribute.
-	 * @see #isValue()
+	 * @param value the new value of the '<em>Literal</em>' attribute.
+	 * @see #isLiteral()
 	 * @generated
 	 */
-	void setValue(boolean value);
+	void setLiteral(boolean value);
 
 	/**
 	 * <!-- begin-user-doc -->

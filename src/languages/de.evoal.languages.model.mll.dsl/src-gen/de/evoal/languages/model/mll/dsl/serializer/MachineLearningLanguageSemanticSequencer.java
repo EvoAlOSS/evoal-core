@@ -8,10 +8,10 @@ import com.google.inject.Inject;
 import de.evoal.languages.model.base.BasePackage;
 import de.evoal.languages.model.base.Import;
 import de.evoal.languages.model.base.definitions.AttributeDefinition;
+import de.evoal.languages.model.base.definitions.ClassDefinition;
 import de.evoal.languages.model.base.definitions.ConstantDefinition;
 import de.evoal.languages.model.base.definitions.DefinitionsPackage;
 import de.evoal.languages.model.base.definitions.FunctionDefinition;
-import de.evoal.languages.model.base.definitions.TypeDefinition;
 import de.evoal.languages.model.base.dsl.serializer.BaseLanguageSemanticSequencer;
 import de.evoal.languages.model.base.expressions.AddOrSubtractExpression;
 import de.evoal.languages.model.base.expressions.AndExpression;
@@ -20,11 +20,10 @@ import de.evoal.languages.model.base.expressions.Attribute;
 import de.evoal.languages.model.base.expressions.BooleanLiteral;
 import de.evoal.languages.model.base.expressions.Call;
 import de.evoal.languages.model.base.expressions.ComparisonExpression;
-import de.evoal.languages.model.base.expressions.ConstantReference;
-import de.evoal.languages.model.base.expressions.DataReference;
 import de.evoal.languages.model.base.expressions.ExpressionsPackage;
 import de.evoal.languages.model.base.expressions.Instance;
 import de.evoal.languages.model.base.expressions.IntegerLiteral;
+import de.evoal.languages.model.base.expressions.LiteralDefinitionReference;
 import de.evoal.languages.model.base.expressions.MultiplyDivideModuloExpression;
 import de.evoal.languages.model.base.expressions.NotExpression;
 import de.evoal.languages.model.base.expressions.OrExpression;
@@ -33,13 +32,14 @@ import de.evoal.languages.model.base.expressions.PartialComparisonExpression;
 import de.evoal.languages.model.base.expressions.PowerOfExpression;
 import de.evoal.languages.model.base.expressions.RealLiteral;
 import de.evoal.languages.model.base.expressions.StringLiteral;
+import de.evoal.languages.model.base.expressions.TypeDefinitionReference;
 import de.evoal.languages.model.base.expressions.UnaryAddOrSubtractExpression;
 import de.evoal.languages.model.base.expressions.XorExpression;
 import de.evoal.languages.model.base.types.ArrayType;
 import de.evoal.languages.model.base.types.BooleanType;
 import de.evoal.languages.model.base.types.DataType;
+import de.evoal.languages.model.base.types.DefinitionReference;
 import de.evoal.languages.model.base.types.ExpressionType;
-import de.evoal.languages.model.base.types.InstanceType;
 import de.evoal.languages.model.base.types.IntType;
 import de.evoal.languages.model.base.types.LiteralType;
 import de.evoal.languages.model.base.types.RealType;
@@ -93,6 +93,9 @@ public class MachineLearningLanguageSemanticSequencer extends BaseLanguageSemant
 			case DefinitionsPackage.ATTRIBUTE_DEFINITION:
 				sequence_AttributeDefinitionRule(context, (AttributeDefinition) semanticObject); 
 				return; 
+			case DefinitionsPackage.CLASS_DEFINITION:
+				sequence_ClassDefinitionRule(context, (ClassDefinition) semanticObject); 
+				return; 
 			case DefinitionsPackage.CONSTANT_DEFINITION:
 				sequence_ConstantDefinitionRule(context, (ConstantDefinition) semanticObject); 
 				return; 
@@ -101,9 +104,6 @@ public class MachineLearningLanguageSemanticSequencer extends BaseLanguageSemant
 				return; 
 			case DefinitionsPackage.PARAMETER:
 				sequence_ParameterRule(context, (de.evoal.languages.model.base.definitions.Parameter) semanticObject); 
-				return; 
-			case DefinitionsPackage.TYPE_DEFINITION:
-				sequence_TypeDefinitionRule(context, (TypeDefinition) semanticObject); 
 				return; 
 			}
 		else if (epackage == ExecutionPackage.eINSTANCE)
@@ -153,17 +153,14 @@ public class MachineLearningLanguageSemanticSequencer extends BaseLanguageSemant
 			case ExpressionsPackage.COMPARISON_EXPRESSION:
 				sequence_ComparisonExpressionRule(context, (ComparisonExpression) semanticObject); 
 				return; 
-			case ExpressionsPackage.CONSTANT_REFERENCE:
-				sequence_ConstantReferenceRule(context, (ConstantReference) semanticObject); 
-				return; 
-			case ExpressionsPackage.DATA_REFERENCE:
-				sequence_DataReferenceRule(context, (DataReference) semanticObject); 
-				return; 
 			case ExpressionsPackage.INSTANCE:
 				sequence_InstanceLiteralRule(context, (Instance) semanticObject); 
 				return; 
 			case ExpressionsPackage.INTEGER_LITERAL:
 				sequence_IntegerLiteralRule(context, (IntegerLiteral) semanticObject); 
+				return; 
+			case ExpressionsPackage.LITERAL_DEFINITION_REFERENCE:
+				sequence_LiteralDefinitionReferenceRule(context, (LiteralDefinitionReference) semanticObject); 
 				return; 
 			case ExpressionsPackage.MULTIPLY_DIVIDE_MODULO_EXPRESSION:
 				sequence_MultiplyDivideModuloExpressionRule(context, (MultiplyDivideModuloExpression) semanticObject); 
@@ -189,6 +186,22 @@ public class MachineLearningLanguageSemanticSequencer extends BaseLanguageSemant
 			case ExpressionsPackage.STRING_LITERAL:
 				sequence_StringLiteralRule(context, (StringLiteral) semanticObject); 
 				return; 
+			case ExpressionsPackage.TYPE_DEFINITION_REFERENCE:
+				if (rule == grammarAccess.getReferenceRuleRule()
+						|| rule == grammarAccess.getReadExpressionRuleRule()
+						|| rule == grammarAccess.getTypeDefinitionReferenceRuleRule()) {
+					sequence_BaseDataReferenceRule_StructuredDataDescriptionReferenceRule(context, (TypeDefinitionReference) semanticObject); 
+					return; 
+				}
+				else if (rule == grammarAccess.getBaseDataReferenceRuleRule()) {
+					sequence_BaseDataReferenceRule(context, (TypeDefinitionReference) semanticObject); 
+					return; 
+				}
+				else if (rule == grammarAccess.getStructuredDataDescriptionReferenceRuleRule()) {
+					sequence_StructuredDataDescriptionReferenceRule(context, (TypeDefinitionReference) semanticObject); 
+					return; 
+				}
+				else break;
 			case ExpressionsPackage.UNARY_ADD_OR_SUBTRACT_EXPRESSION:
 				sequence_UnaryAddOrSubtractExpressionRule(context, (UnaryAddOrSubtractExpression) semanticObject); 
 				return; 
@@ -222,11 +235,22 @@ public class MachineLearningLanguageSemanticSequencer extends BaseLanguageSemant
 			case TypesPackage.DATA_TYPE:
 				sequence_DataTypeRule(context, (DataType) semanticObject); 
 				return; 
+			case TypesPackage.DEFINITION_REFERENCE:
+				if (rule == grammarAccess.getEnumReferenceRuleRule()) {
+					sequence_EnumReferenceRule(context, (DefinitionReference) semanticObject); 
+					return; 
+				}
+				else if (rule == grammarAccess.getTypeRuleRule()) {
+					sequence_EnumReferenceRule_TypeReferenceRule(context, (DefinitionReference) semanticObject); 
+					return; 
+				}
+				else if (rule == grammarAccess.getTypeReferenceRuleRule()) {
+					sequence_TypeReferenceRule(context, (DefinitionReference) semanticObject); 
+					return; 
+				}
+				else break;
 			case TypesPackage.EXPRESSION_TYPE:
 				sequence_ExpressionTypeRule(context, (ExpressionType) semanticObject); 
-				return; 
-			case TypesPackage.INSTANCE_TYPE:
-				sequence_InstanceTypeRule(context, (InstanceType) semanticObject); 
 				return; 
 			case TypesPackage.INT_TYPE:
 				sequence_IntTypeRule(context, (IntType) semanticObject); 
@@ -338,7 +362,7 @@ public class MachineLearningLanguageSemanticSequencer extends BaseLanguageSemant
 	 *     LiteralRangeRule returns ValueRange
 	 *
 	 * Constraint:
-	 *     (elements+=ValueRule elements+=ValueRule*)
+	 *     (elements+=ReadExpressionRule elements+=ReadExpressionRule*)
 	 * </pre>
 	 */
 	protected void sequence_LiteralRangeRule(ISerializationContext context, ValueRange semanticObject) {
@@ -387,7 +411,7 @@ public class MachineLearningLanguageSemanticSequencer extends BaseLanguageSemant
 	 *
 	 * Constraint:
 	 *     (
-	 *         definition=[TypeDefinition|QualifiedName] 
+	 *         definition=[ClassDefinition|QualifiedName] 
 	 *         inputs+=[DataDescription|QualifiedName] 
 	 *         inputs+=[DataDescription|QualifiedName]* 
 	 *         outputs+=[DataDescription|QualifiedName] 
@@ -435,7 +459,7 @@ public class MachineLearningLanguageSemanticSequencer extends BaseLanguageSemant
 	 * Contexts:
 	 *     ReferenceRule returns VariableReference
 	 *     VariableReferenceRule returns VariableReference
-	 *     ValueRule returns VariableReference
+	 *     ReadExpressionRule returns VariableReference
 	 *
 	 * Constraint:
 	 *     variable=[NamedVariable|StringOrId]

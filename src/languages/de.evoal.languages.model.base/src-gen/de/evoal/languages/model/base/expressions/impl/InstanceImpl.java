@@ -2,10 +2,11 @@
  */
 package de.evoal.languages.model.base.expressions.impl;
 
-import de.evoal.languages.model.base.definitions.TypeDefinition;
+import de.evoal.languages.model.base.definitions.ClassDefinition;
 import de.evoal.languages.model.base.expressions.Attribute;
 import de.evoal.languages.model.base.expressions.ExpressionsPackage;
 import de.evoal.languages.model.base.expressions.Instance;
+
 import java.lang.reflect.InvocationTargetException;
 
 import java.util.Collection;
@@ -46,7 +47,7 @@ public class InstanceImpl extends LiteralImpl implements Instance {
 	 * @generated
 	 * @ordered
 	 */
-	protected TypeDefinition definition;
+	protected ClassDefinition definition;
 
 	/**
 	 * The cached value of the '{@link #getAttributes() <em>Attributes</em>}' containment reference list.
@@ -83,10 +84,10 @@ public class InstanceImpl extends LiteralImpl implements Instance {
 	 * @generated
 	 */
 	@Override
-	public TypeDefinition getDefinition() {
+	public ClassDefinition getDefinition() {
 		if (definition != null && definition.eIsProxy()) {
 			InternalEObject oldDefinition = (InternalEObject)definition;
-			definition = (TypeDefinition)eResolveProxy(oldDefinition);
+			definition = (ClassDefinition)eResolveProxy(oldDefinition);
 			if (definition != oldDefinition) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExpressionsPackage.INSTANCE__DEFINITION, oldDefinition, definition));
@@ -100,7 +101,7 @@ public class InstanceImpl extends LiteralImpl implements Instance {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TypeDefinition basicGetDefinition() {
+	public ClassDefinition basicGetDefinition() {
 		return definition;
 	}
 
@@ -110,8 +111,8 @@ public class InstanceImpl extends LiteralImpl implements Instance {
 	 * @generated
 	 */
 	@Override
-	public void setDefinition(TypeDefinition newDefinition) {
-		TypeDefinition oldDefinition = definition;
+	public void setDefinition(ClassDefinition newDefinition) {
+		ClassDefinition oldDefinition = definition;
 		definition = newDefinition;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ExpressionsPackage.INSTANCE__DEFINITION, oldDefinition, definition));
@@ -185,7 +186,7 @@ public class InstanceImpl extends LiteralImpl implements Instance {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case ExpressionsPackage.INSTANCE__DEFINITION:
-				setDefinition((TypeDefinition)newValue);
+				setDefinition((ClassDefinition)newValue);
 				return;
 			case ExpressionsPackage.INSTANCE__ATTRIBUTES:
 				getAttributes().clear();
@@ -204,7 +205,7 @@ public class InstanceImpl extends LiteralImpl implements Instance {
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case ExpressionsPackage.INSTANCE__DEFINITION:
-				setDefinition((TypeDefinition)null);
+				setDefinition((ClassDefinition)null);
 				return;
 			case ExpressionsPackage.INSTANCE__ATTRIBUTES:
 				getAttributes().clear();

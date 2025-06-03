@@ -26,7 +26,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface EnumDefinition extends Definition, ScaledDefinition {
+public interface EnumDefinition extends TypeDefinition, ScaledDefinition {
 	/**
 	 * Returns the value of the '<em><b>Literals</b></em>' containment reference list.
 	 * The list contents are of type {@link de.evoal.languages.model.base.definitions.EnumLiteralDefinition}.

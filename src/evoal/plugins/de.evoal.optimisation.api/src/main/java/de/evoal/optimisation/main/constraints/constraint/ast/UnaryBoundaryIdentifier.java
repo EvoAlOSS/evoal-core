@@ -3,7 +3,6 @@ package de.evoal.optimisation.main.constraints.constraint.ast;
 import de.evoal.core.api.utils.Requirements;
 import de.evoal.languages.model.base.definitions.DataDescription;
 import de.evoal.languages.model.base.expressions.util.ExpressionsSwitch;
-import de.evoal.languages.model.base.expressions.DataReference;
 import de.evoal.languages.model.base.expressions.SelfReference;
 import de.evoal.languages.model.base.expressions.*;
 import lombok.extern.slf4j.Slf4j;
@@ -161,7 +160,7 @@ public class UnaryBoundaryIdentifier extends ExpressionsSwitch<Object> {
             return context;
         }
 
-        if(!(object instanceof final DataReference reference)) {
+        if(!(object instanceof final DefinitionReference reference)) {
             throw new IllegalStateException("Value reference is not a data reference: " + object.eClass());
         }
 

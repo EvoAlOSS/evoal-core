@@ -5,9 +5,10 @@ package de.evoal.languages.model.dl.impl;
 
 import de.evoal.languages.model.base.Import;
 
+import de.evoal.languages.model.base.definitions.ClassDefinition;
 import de.evoal.languages.model.base.definitions.ConstantDefinition;
+import de.evoal.languages.model.base.definitions.EnumDefinition;
 import de.evoal.languages.model.base.definitions.FunctionDefinition;
-import de.evoal.languages.model.base.definitions.TypeDefinition;
 
 import de.evoal.languages.model.dl.DefinitionModule;
 import de.evoal.languages.model.dl.DlPackage;
@@ -41,6 +42,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link de.evoal.languages.model.dl.impl.DefinitionModuleImpl#getTypes <em>Types</em>}</li>
  *   <li>{@link de.evoal.languages.model.dl.impl.DefinitionModuleImpl#getFunctions <em>Functions</em>}</li>
  *   <li>{@link de.evoal.languages.model.dl.impl.DefinitionModuleImpl#getConstants <em>Constants</em>}</li>
+ *   <li>{@link de.evoal.languages.model.dl.impl.DefinitionModuleImpl#getEnums <em>Enums</em>}</li>
  * </ul>
  *
  * @generated
@@ -84,7 +86,7 @@ public class DefinitionModuleImpl extends MinimalEObjectImpl.Container implement
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<TypeDefinition> types;
+	protected EList<ClassDefinition> types;
 
 	/**
 	 * The cached value of the '{@link #getFunctions() <em>Functions</em>}' containment reference list.
@@ -105,6 +107,16 @@ public class DefinitionModuleImpl extends MinimalEObjectImpl.Container implement
 	 * @ordered
 	 */
 	protected EList<ConstantDefinition> constants;
+
+	/**
+	 * The cached value of the '{@link #getEnums() <em>Enums</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getEnums()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<EnumDefinition> enums;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -167,9 +179,9 @@ public class DefinitionModuleImpl extends MinimalEObjectImpl.Container implement
 	 * @generated
 	 */
 	@Override
-	public EList<TypeDefinition> getTypes() {
+	public EList<ClassDefinition> getTypes() {
 		if (types == null) {
-			types = new EObjectContainmentEList<TypeDefinition>(TypeDefinition.class, this, DlPackage.DEFINITION_MODULE__TYPES);
+			types = new EObjectContainmentEList<ClassDefinition>(ClassDefinition.class, this, DlPackage.DEFINITION_MODULE__TYPES);
 		}
 		return types;
 	}
@@ -206,6 +218,19 @@ public class DefinitionModuleImpl extends MinimalEObjectImpl.Container implement
 	 * @generated
 	 */
 	@Override
+	public EList<EnumDefinition> getEnums() {
+		if (enums == null) {
+			enums = new EObjectContainmentEList<EnumDefinition>(EnumDefinition.class, this, DlPackage.DEFINITION_MODULE__ENUMS);
+		}
+		return enums;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case DlPackage.DEFINITION_MODULE__IMPORTS:
@@ -216,6 +241,8 @@ public class DefinitionModuleImpl extends MinimalEObjectImpl.Container implement
 				return ((InternalEList<?>)getFunctions()).basicRemove(otherEnd, msgs);
 			case DlPackage.DEFINITION_MODULE__CONSTANTS:
 				return ((InternalEList<?>)getConstants()).basicRemove(otherEnd, msgs);
+			case DlPackage.DEFINITION_MODULE__ENUMS:
+				return ((InternalEList<?>)getEnums()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -238,6 +265,8 @@ public class DefinitionModuleImpl extends MinimalEObjectImpl.Container implement
 				return getFunctions();
 			case DlPackage.DEFINITION_MODULE__CONSTANTS:
 				return getConstants();
+			case DlPackage.DEFINITION_MODULE__ENUMS:
+				return getEnums();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -260,7 +289,7 @@ public class DefinitionModuleImpl extends MinimalEObjectImpl.Container implement
 				return;
 			case DlPackage.DEFINITION_MODULE__TYPES:
 				getTypes().clear();
-				getTypes().addAll((Collection<? extends TypeDefinition>)newValue);
+				getTypes().addAll((Collection<? extends ClassDefinition>)newValue);
 				return;
 			case DlPackage.DEFINITION_MODULE__FUNCTIONS:
 				getFunctions().clear();
@@ -269,6 +298,10 @@ public class DefinitionModuleImpl extends MinimalEObjectImpl.Container implement
 			case DlPackage.DEFINITION_MODULE__CONSTANTS:
 				getConstants().clear();
 				getConstants().addAll((Collection<? extends ConstantDefinition>)newValue);
+				return;
+			case DlPackage.DEFINITION_MODULE__ENUMS:
+				getEnums().clear();
+				getEnums().addAll((Collection<? extends EnumDefinition>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -297,6 +330,9 @@ public class DefinitionModuleImpl extends MinimalEObjectImpl.Container implement
 			case DlPackage.DEFINITION_MODULE__CONSTANTS:
 				getConstants().clear();
 				return;
+			case DlPackage.DEFINITION_MODULE__ENUMS:
+				getEnums().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -319,6 +355,8 @@ public class DefinitionModuleImpl extends MinimalEObjectImpl.Container implement
 				return functions != null && !functions.isEmpty();
 			case DlPackage.DEFINITION_MODULE__CONSTANTS:
 				return constants != null && !constants.isEmpty();
+			case DlPackage.DEFINITION_MODULE__ENUMS:
+				return enums != null && !enums.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

@@ -72,10 +72,6 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 				return createTypeAdapter();
 			}
 			@Override
-			public Adapter caseInstanceType(InstanceType object) {
-				return createInstanceTypeAdapter();
-			}
-			@Override
 			public Adapter caseBaseType(BaseType object) {
 				return createBaseTypeAdapter();
 			}
@@ -116,6 +112,10 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 				return createDataTypeAdapter();
 			}
 			@Override
+			public Adapter caseDefinitionReference(DefinitionReference object) {
+				return createDefinitionReferenceAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -146,20 +146,6 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTypeAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.types.InstanceType <em>Instance Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.evoal.languages.model.base.types.InstanceType
-	 * @generated
-	 */
-	public Adapter createInstanceTypeAdapter() {
 		return null;
 	}
 
@@ -300,6 +286,20 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createDataTypeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.types.DefinitionReference <em>Definition Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.evoal.languages.model.base.types.DefinitionReference
+	 * @generated
+	 */
+	public Adapter createDefinitionReferenceAdapter() {
 		return null;
 	}
 
