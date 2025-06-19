@@ -3,11 +3,9 @@
  */
 package de.evoal.languages.model.generator;
 
-import de.evoal.languages.model.base.definitions.Definition;
 import de.evoal.languages.model.base.expressions.Instance;
 
 import de.evoal.languages.model.base.expressions.TypeDefinitionReference;
-import de.evoal.languages.model.base.types.DefinitionReference;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EObject;

@@ -13,7 +13,6 @@ import de.evoal.languages.model.base.types.TypesPackage;
 
 import de.evoal.languages.model.execution.ExecutionPackage;
 
-import de.evoal.languages.model.pipeline.ApplyStatement;
 import de.evoal.languages.model.pipeline.PipelineDefinition;
 import de.evoal.languages.model.pipeline.PipelineFactory;
 import de.evoal.languages.model.pipeline.PipelineModule;
@@ -54,13 +53,6 @@ public class PipelinePackageImpl extends EPackageImpl implements PipelinePackage
 	 * @generated
 	 */
 	private EClass stepEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass applyStatementEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -235,46 +227,6 @@ public class PipelinePackageImpl extends EPackageImpl implements PipelinePackage
 	 * @generated
 	 */
 	@Override
-	public EClass getApplyStatement() {
-		return applyStatementEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getApplyStatement_File() {
-		return (EAttribute)applyStatementEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getApplyStatement_Count() {
-		return (EReference)applyStatementEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getApplyStatement_Pipelines() {
-		return (EReference)applyStatementEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public PipelineFactory getPipelineFactory() {
 		return (PipelineFactory)getEFactoryInstance();
 	}
@@ -310,11 +262,6 @@ public class PipelinePackageImpl extends EPackageImpl implements PipelinePackage
 		createEReference(stepEClass, STEP__INSTANCE);
 		createEReference(stepEClass, STEP__READS);
 		createEReference(stepEClass, STEP__WRITES);
-
-		applyStatementEClass = createEClass(APPLY_STATEMENT);
-		createEAttribute(applyStatementEClass, APPLY_STATEMENT__FILE);
-		createEReference(applyStatementEClass, APPLY_STATEMENT__COUNT);
-		createEReference(applyStatementEClass, APPLY_STATEMENT__PIPELINES);
 	}
 
 	/**
@@ -351,7 +298,6 @@ public class PipelinePackageImpl extends EPackageImpl implements PipelinePackage
 
 		// Add supertypes to classes
 		pipelineDefinitionEClass.getESuperTypes().add(theExecutionPackage.getNamedVariable());
-		applyStatementEClass.getESuperTypes().add(theExecutionPackage.getStatement());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(pipelineModuleEClass, PipelineModule.class, "PipelineModule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -366,11 +312,6 @@ public class PipelinePackageImpl extends EPackageImpl implements PipelinePackage
 		initEReference(getStep_Instance(), theExpressionsPackage.getInstance(), null, "instance", null, 1, 1, Step.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getStep_Reads(), ecorePackage.getEStructuralFeature(), null, "reads", null, 0, -1, Step.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getStep_Writes(), ecorePackage.getEStructuralFeature(), null, "writes", null, 0, -1, Step.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-
-		initEClass(applyStatementEClass, ApplyStatement.class, "ApplyStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getApplyStatement_File(), ecorePackage.getEString(), "file", null, 0, 1, ApplyStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getApplyStatement_Count(), theExpressionsPackage.getLiteral(), null, "count", null, 1, 1, ApplyStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getApplyStatement_Pipelines(), theExecutionPackage.getVariableReference(), null, "pipelines", null, 0, -1, ApplyStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);
@@ -423,12 +364,6 @@ public class PipelinePackageImpl extends EPackageImpl implements PipelinePackage
 		   });
 		addAnnotation
 		  (getStep_Writes(),
-		   source,
-		   new String[] {
-			   "nullFree", "false"
-		   });
-		addAnnotation
-		  (getApplyStatement_Pipelines(),
 		   source,
 		   new String[] {
 			   "nullFree", "false"

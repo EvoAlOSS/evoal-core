@@ -1,4 +1,4 @@
-module de.evoal.core.constraints {
+module 'de.evoal.core.constraints' {
     abstract type Constraint {
     }
 
@@ -13,6 +13,6 @@ module de.evoal.core.constraints {
     }
 
     type MultiVariateConstraint extends Constraint {
-        'expression' : expression   ;
+        'expression' : expression;
     }
 }

@@ -4,7 +4,6 @@
 package de.evoal.languages.model.pipeline.util;
 
 import de.evoal.languages.model.execution.NamedVariable;
-import de.evoal.languages.model.execution.Statement;
 import de.evoal.languages.model.execution.Variable;
 
 import de.evoal.languages.model.pipeline.*;
@@ -91,13 +90,6 @@ public class PipelineSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case PipelinePackage.APPLY_STATEMENT: {
-				ApplyStatement applyStatement = (ApplyStatement)theEObject;
-				T result = caseApplyStatement(applyStatement);
-				if (result == null) result = caseStatement(applyStatement);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -148,21 +140,6 @@ public class PipelineSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Apply Statement</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Apply Statement</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseApplyStatement(ApplyStatement object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Variable</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -189,21 +166,6 @@ public class PipelineSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseNamedVariable(NamedVariable object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Statement</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Statement</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseStatement(Statement object) {
 		return null;
 	}
 

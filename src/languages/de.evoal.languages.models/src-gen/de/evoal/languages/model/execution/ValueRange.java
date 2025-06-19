@@ -3,8 +3,6 @@
  */
 package de.evoal.languages.model.execution;
 
-import de.evoal.languages.model.base.expressions.ConstantExpression;
-
 import de.evoal.languages.model.base.expressions.ReadExpression;
 import org.eclipse.emf.common.util.EList;
 

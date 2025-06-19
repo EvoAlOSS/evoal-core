@@ -3,11 +3,9 @@
  */
 package de.evoal.languages.model.generator.impl;
 
-import de.evoal.languages.model.base.definitions.Definition;
 import de.evoal.languages.model.base.expressions.Instance;
 
 import de.evoal.languages.model.base.expressions.TypeDefinitionReference;
-import de.evoal.languages.model.base.types.DefinitionReference;
 import de.evoal.languages.model.generator.GeneratorPackage;
 import de.evoal.languages.model.generator.Step;
 

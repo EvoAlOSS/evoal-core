@@ -50,15 +50,6 @@ public interface PipelineFactory extends EFactory {
 	Step createStep();
 
 	/**
-	 * Returns a new object of class '<em>Apply Statement</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Apply Statement</em>'.
-	 * @generated
-	 */
-	ApplyStatement createApplyStatement();
-
-	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

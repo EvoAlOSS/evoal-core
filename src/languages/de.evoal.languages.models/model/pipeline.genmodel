@@ -21,10 +21,5 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference pipeline.ecore#//Step/reads"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference pipeline.ecore#//Step/writes"/>
     </genClasses>
-    <genClasses ecoreClass="pipeline.ecore#//ApplyStatement">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute pipeline.ecore#//ApplyStatement/file"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference pipeline.ecore#//ApplyStatement/count"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference pipeline.ecore#//ApplyStatement/pipelines"/>
-    </genClasses>
   </genPackages>
 </genmodel:GenModel>

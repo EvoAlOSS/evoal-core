@@ -189,53 +189,6 @@ public interface PipelinePackage extends EPackage {
 	int STEP_FEATURE_COUNT = 3;
 
 	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.pipeline.impl.ApplyStatementImpl <em>Apply Statement</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.pipeline.impl.ApplyStatementImpl
-	 * @see de.evoal.languages.model.pipeline.impl.PipelinePackageImpl#getApplyStatement()
-	 * @generated
-	 */
-	int APPLY_STATEMENT = 3;
-
-	/**
-	 * The feature id for the '<em><b>File</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int APPLY_STATEMENT__FILE = ExecutionPackage.STATEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Count</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int APPLY_STATEMENT__COUNT = ExecutionPackage.STATEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Pipelines</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int APPLY_STATEMENT__PIPELINES = ExecutionPackage.STATEMENT_FEATURE_COUNT + 2;
-
-	/**
-	 * The number of structural features of the '<em>Apply Statement</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int APPLY_STATEMENT_FEATURE_COUNT = ExecutionPackage.STATEMENT_FEATURE_COUNT + 3;
-
-
-	/**
 	 * Returns the meta object for class '{@link de.evoal.languages.model.pipeline.PipelineModule <em>Module</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -341,49 +294,6 @@ public interface PipelinePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getStep_Writes();
-
-	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.pipeline.ApplyStatement <em>Apply Statement</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Apply Statement</em>'.
-	 * @see de.evoal.languages.model.pipeline.ApplyStatement
-	 * @generated
-	 */
-	EClass getApplyStatement();
-
-	/**
-	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.pipeline.ApplyStatement#getFile <em>File</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>File</em>'.
-	 * @see de.evoal.languages.model.pipeline.ApplyStatement#getFile()
-	 * @see #getApplyStatement()
-	 * @generated
-	 */
-	EAttribute getApplyStatement_File();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link de.evoal.languages.model.pipeline.ApplyStatement#getCount <em>Count</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Count</em>'.
-	 * @see de.evoal.languages.model.pipeline.ApplyStatement#getCount()
-	 * @see #getApplyStatement()
-	 * @generated
-	 */
-	EReference getApplyStatement_Count();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.pipeline.ApplyStatement#getPipelines <em>Pipelines</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Pipelines</em>'.
-	 * @see de.evoal.languages.model.pipeline.ApplyStatement#getPipelines()
-	 * @see #getApplyStatement()
-	 * @generated
-	 */
-	EReference getApplyStatement_Pipelines();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -492,40 +402,6 @@ public interface PipelinePackage extends EPackage {
 		 * @generated
 		 */
 		EReference STEP__WRITES = eINSTANCE.getStep_Writes();
-
-		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.pipeline.impl.ApplyStatementImpl <em>Apply Statement</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.pipeline.impl.ApplyStatementImpl
-		 * @see de.evoal.languages.model.pipeline.impl.PipelinePackageImpl#getApplyStatement()
-		 * @generated
-		 */
-		EClass APPLY_STATEMENT = eINSTANCE.getApplyStatement();
-
-		/**
-		 * The meta object literal for the '<em><b>File</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute APPLY_STATEMENT__FILE = eINSTANCE.getApplyStatement_File();
-
-		/**
-		 * The meta object literal for the '<em><b>Count</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference APPLY_STATEMENT__COUNT = eINSTANCE.getApplyStatement_Count();
-
-		/**
-		 * The meta object literal for the '<em><b>Pipelines</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference APPLY_STATEMENT__PIPELINES = eINSTANCE.getApplyStatement_Pipelines();
 
 	}
 

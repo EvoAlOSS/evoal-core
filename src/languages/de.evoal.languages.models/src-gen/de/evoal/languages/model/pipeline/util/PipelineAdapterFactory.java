@@ -4,7 +4,6 @@
 package de.evoal.languages.model.pipeline.util;
 
 import de.evoal.languages.model.execution.NamedVariable;
-import de.evoal.languages.model.execution.Statement;
 import de.evoal.languages.model.execution.Variable;
 
 import de.evoal.languages.model.pipeline.*;
@@ -85,20 +84,12 @@ public class PipelineAdapterFactory extends AdapterFactoryImpl {
 				return createStepAdapter();
 			}
 			@Override
-			public Adapter caseApplyStatement(ApplyStatement object) {
-				return createApplyStatementAdapter();
-			}
-			@Override
 			public Adapter caseVariable(Variable object) {
 				return createVariableAdapter();
 			}
 			@Override
 			public Adapter caseNamedVariable(NamedVariable object) {
 				return createNamedVariableAdapter();
-			}
-			@Override
-			public Adapter caseStatement(Statement object) {
-				return createStatementAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -163,20 +154,6 @@ public class PipelineAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.pipeline.ApplyStatement <em>Apply Statement</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.evoal.languages.model.pipeline.ApplyStatement
-	 * @generated
-	 */
-	public Adapter createApplyStatementAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.execution.Variable <em>Variable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -201,20 +178,6 @@ public class PipelineAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createNamedVariableAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.execution.Statement <em>Statement</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.evoal.languages.model.execution.Statement
-	 * @generated
-	 */
-	public Adapter createStatementAdapter() {
 		return null;
 	}
 
