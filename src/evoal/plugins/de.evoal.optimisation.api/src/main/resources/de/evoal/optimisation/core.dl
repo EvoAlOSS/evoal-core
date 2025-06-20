@@ -350,6 +350,16 @@ module de.evoal.optimisation.core {
         'maximum-iterations' : int := 10;
 	}
 
+    /**
+     * Stopping criterion that stops when a file is created.
+     */
+	type 'file-check' extends 'stopping-criterion' {
+	    /**
+	     * Name of file.
+	     */
+        'file' : string := "evoal-stop.txt";
+	}
+
 	type 'stopping-per-candidates-per-generation' extends 'statistics-writer' {
 	  criteria : array instance 'stopping-criterion' := [];
 	}

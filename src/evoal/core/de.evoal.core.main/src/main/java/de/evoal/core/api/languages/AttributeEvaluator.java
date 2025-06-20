@@ -186,6 +186,18 @@ public class AttributeEvaluator {
         return number;
     }
 
+
+    public String attributeToString(final Instance instance, final String attributeName) {
+        final Object result = attributeToObject(instance, attributeName);
+
+        if(!(result instanceof String string)) {
+            log.error("Expression did not evaluate to a string value for attribute {} which was expected.", attributeName);
+            throw new IllegalStateException("Expression evaluation error. Please check your configuration.");
+        }
+
+        return string;
+    }
+
     /**
      * @deprecated
      */

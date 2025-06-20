@@ -1,6 +1,6 @@
 import "definitions" from de.evoal.core.math;
 import "definitions" from 'de.evoal.pipeline.base';
-import "definitions" from de.evoal.core.constraints;
+import "definitions" from 'de.evoal.core.constraints';
 
 module de.evoal.pipeline.sequences {
 

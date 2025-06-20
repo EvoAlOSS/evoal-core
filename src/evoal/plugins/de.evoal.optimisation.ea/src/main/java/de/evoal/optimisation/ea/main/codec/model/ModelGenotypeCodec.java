@@ -170,8 +170,10 @@ public class ModelGenotypeCodec implements CustomCodec<ModelGene> {
                     attrType = arrayType.getElements();
                 }
 
-                if(attrType instanceof DefinitionReference instanceType) {
-                    working.add((ClassDefinition) instanceType.getDefinition());
+                if(attrType instanceof DefinitionReference reference) {
+                    if(reference.getDefinition() instanceof ClassDefinition definition) {
+                        working.add(definition);
+                    }
                 }
             }
         }
@@ -203,10 +205,13 @@ public class ModelGenotypeCodec implements CustomCodec<ModelGene> {
                     attrType = ((ArrayType)attrType).getElements();
                 }
 
-                if(attrType instanceof DefinitionReference instanceType) {
-                    final Set<ClassDefinition> types = subtypes.get(instanceType.getDefinition());
-                    attributes.put(attr, types);
-                    working.add((ClassDefinition) instanceType.getDefinition());
+                if(attrType instanceof DefinitionReference reference) {
+                    if(reference.getDefinition() instanceof ClassDefinition definition) {
+                        final Set<ClassDefinition> types = subtypes.get(definition);
+                        attributes.put(attr, types);
+
+                        working.add(definition);
+                    }
                 }
             }
         }

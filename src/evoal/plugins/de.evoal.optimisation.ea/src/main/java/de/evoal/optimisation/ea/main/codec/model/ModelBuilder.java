@@ -2,6 +2,7 @@ package de.evoal.optimisation.ea.main.codec.model;
 
 import de.evoal.languages.model.base.definitions.AttributeDefinition;
 import de.evoal.languages.model.base.definitions.ClassDefinition;
+import de.evoal.languages.model.base.definitions.EnumDefinition;
 import de.evoal.languages.model.base.types.*;
 import de.evoal.languages.model.base.types.DefinitionReference;
 import de.evoal.optimisation.ea.api.codec.model.ModelGene;
@@ -34,9 +35,10 @@ public record ModelBuilder(ClassDefinition root, Map<ClassDefinition, Set<ClassD
 
         for(final Attribute attr : tree.getAttributes()) {
             final Type type = attr.getDefinition().getType();
-            if(type instanceof DefinitionReference) {
+
+            if(type instanceof DefinitionReference reference && reference.getDefinition() instanceof ClassDefinition) {
                 toIterable(genes, findInstance(attr.getValue()));
-            } else if(type instanceof ArrayType arrayType && arrayType.getElements() instanceof DefinitionReference instanceType) {
+            } else if(type instanceof ArrayType arrayType && arrayType.getElements() instanceof DefinitionReference reference && reference.getDefinition() instanceof ClassDefinition definition) {
                 final Array array = findArray(attr.getValue());
                 array.getValues()
                         .stream()
@@ -153,11 +155,17 @@ public record ModelBuilder(ClassDefinition root, Map<ClassDefinition, Set<ClassD
     public @NonNull ReadExpression random(final @NonNull String name, final @NonNull Type type) {
         if(type instanceof ArrayType arrayType) {
             return random(name, arrayType);
-        } else if(type instanceof DefinitionReference instanceType) {
-            final Set<ClassDefinition> definitions = subtypes.get((ClassDefinition)instanceType.getDefinition());
-            final List<ClassDefinition> types = new ArrayList<>(definitions);
-            int index = RandomRegistry.random().nextInt(definitions.size());
-            return random(types.get(index));
+        } else if(type instanceof DefinitionReference reference) {
+            if(reference.getDefinition() instanceof ClassDefinition definition) {
+                final Set<ClassDefinition> definitions = subtypes.get(definition);
+                final List<ClassDefinition> types = new ArrayList<>(definitions);
+                int index = RandomRegistry.random().nextInt(definitions.size());
+                return random(types.get(index));
+            } else if(reference.getDefinition() instanceof EnumDefinition definition) {
+                return random(definition);
+            } else {
+                throw new IllegalArgumentException("Unsupported referenced type " + reference.getDefinition());
+            }
         } else if(type instanceof IntType) {
             return random(name, (IntType) type);
         } else if(type instanceof BooleanType) {
@@ -167,7 +175,18 @@ public record ModelBuilder(ClassDefinition root, Map<ClassDefinition, Set<ClassD
         }
     }
 
+    private @NonNull LiteralDefinitionReference random(final EnumDefinition definition) {
+        final LiteralDefinitionReference reference = FACTORY.createLiteralDefinitionReference();
+
+        int index = RandomRegistry.random().nextInt(0, definition.getLiterals().size());
+
+        reference.setDefinition(definition.getLiterals().get(index));
+
+        return reference;
+    }
+
     private @NonNull ReadExpression random(final String name, final IntType type) {
+        if(true)throw new IllegalArgumentException("Integer " + name + " of type " + type);
         final IntegerLiteral literal = FACTORY.createIntegerLiteral();
         int value = RandomRegistry.random().nextInt(0, 4);
         if("value".equals(name)) {
