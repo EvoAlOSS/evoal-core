@@ -1,6 +1,7 @@
 package de.evoal.core.api.utils;
 
 import java.util.function.BiFunction;
+import java.util.function.Function;
 
 /**
  * Helper class for mathematical operations on numbers.
@@ -43,6 +44,20 @@ public final class ArithmeticOperations {
         }
 
         throw new IllegalArgumentException("Parameters of types " + op1 + " and " + op2 + " are not supported.");
+    }
+
+    private static Number dispatch(final Object op, final Function<Number, Number> doubleHandler, final Function<Number, Number> longHandler, final Function<Number, Number> integerHandler) {
+        Requirements.requireInstanceOf(op, Number.class);
+
+        if (op instanceof Double || op instanceof Float) {
+            return doubleHandler.apply((Number) op);
+        } else if (op instanceof Long) {
+            return longHandler.apply((Number) op);
+        } else if (op instanceof Integer || op instanceof Short || op instanceof Byte) {
+            return integerHandler.apply((Number) op);
+        }
+
+        throw new IllegalArgumentException("Parameter of types " + op + " is not supported.");
     }
 
     public static Number divide(final Object op1, final Object op2) {
@@ -150,5 +165,12 @@ public final class ArithmeticOperations {
         }
 
         return result;
+    }
+
+    public static Number abs(final Object op) {
+        return dispatch(op,
+                d -> Math.abs(d.doubleValue()),
+                l -> Math.abs(l.longValue()),
+                i -> Math.abs(i.intValue()));
     }
 }

@@ -104,7 +104,34 @@ module de.evoal.optimisation.core {
 		 */
 		target : array instance variable;
 	}
-	
+
+	type 'search-space-distance' extends 'optimisation-function' {
+		/**
+		 * The search space target to search for.
+		 */
+		target : array instance variable;
+
+		/**
+		 * Mapping of search space to optimisation space.
+		 */
+		mapping : array instance mapping;
+	}
+
+	/**
+	 * Mapping of variables.
+	 */
+	type mapping {
+		/**
+		 * The input data.
+		 */
+		input : data;
+
+		/**
+		 * The output data.
+		 */
+		output : data;
+	}
+
 	/**
 	 * A binding of a variable.
 	 */

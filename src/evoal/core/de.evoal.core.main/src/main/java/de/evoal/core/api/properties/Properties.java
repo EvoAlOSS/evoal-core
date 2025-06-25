@@ -54,6 +54,10 @@ public class Properties {
         return (Integer)values[i];
     }
 
+    public Number getAsNumber(int i) {
+        return (Number)values[i];
+    }
+
     public Object get(final PropertySpecification spec) {
         return values[specification.indexOf(spec)];
     }
@@ -64,6 +68,10 @@ public class Properties {
 
     public Integer getAsInteger(final PropertySpecification spec) {
         return (Integer)values[specification.indexOf(spec)];
+    }
+
+    public Number getAsNumber(final PropertySpecification spec) {
+        return (Number)values[specification.indexOf(spec)];
     }
 
     public PropertiesSpecification getSpecification() {

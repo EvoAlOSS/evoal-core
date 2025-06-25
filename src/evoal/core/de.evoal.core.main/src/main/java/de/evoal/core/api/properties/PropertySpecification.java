@@ -1,5 +1,6 @@
 package de.evoal.core.api.properties;
 
+import de.evoal.languages.model.base.definitions.DataDescription;
 import de.evoal.languages.model.base.definitions.Definition;
 import lombok.NonNull;
 
@@ -34,5 +35,9 @@ public record PropertySpecification(@NonNull String name, Definition type) imple
 	@Override
 	public int compareTo(final Object other) {
 		return name.compareTo(((PropertySpecification)other).name());
+	}
+
+	public static PropertySpecification of(@NonNull DataDescription descr) {
+		return new PropertySpecification(descr.getName(), descr);
 	}
 }

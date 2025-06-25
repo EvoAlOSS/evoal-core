@@ -1,4 +1,4 @@
-package de.evoal.optimisation.ea.main.fitness;
+package de.evoal.optimisation.main.fitness;
 
 import de.evoal.core.api.board.Blackboard;
 import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
@@ -14,13 +14,12 @@ import lombok.extern.slf4j.Slf4j;
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.util.Arrays;
 import java.util.List;
 
 @Dependent
 @Named("de.evoal.optimisation.core.optimisation-distance")
 @Slf4j
-public class DistanceFitness extends OptimisationFunctionDecorator {
+public class OptimisationDistanceFitness extends OptimisationFunctionDecorator {
 
     @Inject
     private Blackboard board;
