@@ -2,6 +2,7 @@
  */
 package de.evoal.languages.model.base.expressions.impl;
 
+import de.evoal.languages.model.base.definitions.AttributeDefinition;
 import de.evoal.languages.model.base.definitions.ClassDefinition;
 import de.evoal.languages.model.base.expressions.Attribute;
 import de.evoal.languages.model.base.expressions.ExpressionsPackage;
@@ -151,6 +152,20 @@ public class InstanceImpl extends LiteralImpl implements Instance {
 	 * @generated
 	 */
 	@Override
+	public Attribute findAttribute(final AttributeDefinition definition) {
+		return this.getAttributes()
+		                 .stream()
+		                 .filter(a -> definition.equals(a.getDefinition()))
+		                 .findFirst()
+		                 .orElse(null);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case ExpressionsPackage.INSTANCE__ATTRIBUTES:
@@ -240,6 +255,8 @@ public class InstanceImpl extends LiteralImpl implements Instance {
 		switch (operationID) {
 			case ExpressionsPackage.INSTANCE___FIND_ATTRIBUTE__STRING:
 				return findAttribute((String)arguments.get(0));
+			case ExpressionsPackage.INSTANCE___FIND_ATTRIBUTE__ATTRIBUTEDEFINITION:
+				return findAttribute((AttributeDefinition)arguments.get(0));
 		}
 		return super.eInvoke(operationID, arguments);
 	}

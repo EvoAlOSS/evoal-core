@@ -101,4 +101,12 @@ public interface ClassDefinition extends TypeDefinition {
 	 */
 	AttributeDefinition findAttribute(String name);
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" ordered="false"
+	 * @generated
+	 */
+	EList<AttributeDefinition> getAllAttributes();
+
 } // ClassDefinition

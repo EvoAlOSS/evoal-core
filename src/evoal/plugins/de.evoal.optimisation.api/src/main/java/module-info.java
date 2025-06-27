@@ -37,6 +37,8 @@ module de.evoal.optimisation.api {
     requires com.google.guice;
     requires commons.math3;
     requires de.evoal.core.main;
+    requires jakarta.ejb.api;
+    requires org.fusesource.jansi;
 
     opens de.evoal.optimisation; // export dl files.
 

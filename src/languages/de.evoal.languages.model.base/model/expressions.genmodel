@@ -120,6 +120,10 @@
       <genOperations ecoreOperation="expressions.ecore#//Instance/findAttribute" body="return this.getAttributes()&#xA;                 .stream()&#xA;                 .filter(n -> name.equals(n.getDefinition().getName()))&#xA;                 .findFirst()&#xA;                 .orElse(null);">
         <genParameters ecoreParameter="expressions.ecore#//Instance/findAttribute/name"/>
       </genOperations>
+      <genOperations ecoreOperation="expressions.ecore#//Instance/findAttribute.1"
+          body="return this.getAttributes()&#xA;                 .stream()&#xA;                 .filter(a -> definition.equals(a.getDefinition()))&#xA;                 .findFirst()&#xA;                 .orElse(null);">
+        <genParameters ecoreParameter="expressions.ecore#//Instance/findAttribute.1/definition"/>
+      </genOperations>
     </genClasses>
     <genClasses ecoreClass="expressions.ecore#//Attribute">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference expressions.ecore#//Attribute/definition"/>

@@ -887,6 +887,16 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	@Override
+	public EOperation getInstance__FindAttribute__AttributeDefinition() {
+		return instanceEClass.getEOperations().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getAttribute() {
 		return attributeEClass;
 	}
@@ -1220,6 +1230,7 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		createEReference(instanceEClass, INSTANCE__DEFINITION);
 		createEReference(instanceEClass, INSTANCE__ATTRIBUTES);
 		createEOperation(instanceEClass, INSTANCE___FIND_ATTRIBUTE__STRING);
+		createEOperation(instanceEClass, INSTANCE___FIND_ATTRIBUTE__ATTRIBUTEDEFINITION);
 
 		attributeEClass = createEClass(ATTRIBUTE);
 		createEReference(attributeEClass, ATTRIBUTE__DEFINITION);
@@ -1396,6 +1407,9 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 
 		EOperation op = initEOperation(getInstance__FindAttribute__String(), this.getAttribute(), "findAttribute", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "name", 1, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = initEOperation(getInstance__FindAttribute__AttributeDefinition(), this.getAttribute(), "findAttribute", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theDefinitionsPackage.getAttributeDefinition(), "definition", 1, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(attributeEClass, Attribute.class, "Attribute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAttribute_Definition(), theDefinitionsPackage.getAttributeDefinition(), null, "definition", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

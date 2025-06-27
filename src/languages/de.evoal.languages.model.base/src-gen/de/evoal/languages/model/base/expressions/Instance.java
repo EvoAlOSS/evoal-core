@@ -2,6 +2,7 @@
  */
 package de.evoal.languages.model.base.expressions;
 
+import de.evoal.languages.model.base.definitions.AttributeDefinition;
 import de.evoal.languages.model.base.definitions.ClassDefinition;
 import org.eclipse.emf.common.util.EList;
 
@@ -64,5 +65,13 @@ public interface Instance extends Literal {
 	 * @generated
 	 */
 	Attribute findAttribute(String name);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model definitionRequired="true"
+	 * @generated
+	 */
+	Attribute findAttribute(AttributeDefinition definition);
 
 } // Instance

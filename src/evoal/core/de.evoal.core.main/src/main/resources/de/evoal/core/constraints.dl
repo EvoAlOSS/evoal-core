@@ -1,18 +1,61 @@
 module 'de.evoal.core.constraints' {
+    /**
+     * Base type for EvoAl constraints.
+     */
     abstract type Constraint {
     }
 
+    /**
+     * A lower bound for numeric values.
+     */
     type LowerBoundary extends Constraint {
-        boundary : int;
+        /**
+         * The lower bound value (integer or real).
+         */
+        boundary : literal;
+
+        /**
+         * If the bound is included (or not).
+         */
         inclusive : boolean := true;
     }
 
+    /**
+     * An upper bound for numeric values.
+     */
     type UpperBoundary extends Constraint {
-        boundary : int;
+        /**
+         * The upper bound value (integer or real).
+         */
+        boundary : literal;
+
+        /**
+         * If the bound is included (or not).
+         */
         inclusive : boolean := true;
     }
 
     type MultiVariateConstraint extends Constraint {
         'expression' : expression;
+    }
+
+    /**
+     * Constraint that specifies a minimum number of elements for arrays.
+     */
+    type MinimumNumberOfElements extends Constraint {
+        /**
+         * The minimum number of elements
+         */
+        bound : int;
+    }
+
+    /**
+     * Constraint that specifies a minimum number of elements for arrays.
+     */
+    type MaximumNumberOfElements extends Constraint {
+        /**
+         * The minimum number of elements
+         */
+        bound : int;
     }
 }

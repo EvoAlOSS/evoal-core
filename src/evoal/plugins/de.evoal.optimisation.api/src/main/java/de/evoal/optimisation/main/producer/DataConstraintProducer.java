@@ -1,6 +1,9 @@
 package de.evoal.optimisation.main.producer;
 
+import de.evoal.core.api.cdi.BlackboardValue;
+import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.languages.model.base.expressions.DefinitionReference;
+import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
 import de.evoal.optimisation.api.constraints.model.DataConstraints;
 import de.evoal.languages.model.base.definitions.DataDescription;
 import de.evoal.languages.model.ddl.DataDescriptionModule;

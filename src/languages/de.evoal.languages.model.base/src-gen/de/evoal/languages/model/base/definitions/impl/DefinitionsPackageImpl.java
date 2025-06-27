@@ -419,6 +419,16 @@ public class DefinitionsPackageImpl extends EPackageImpl implements DefinitionsP
 	 * @generated
 	 */
 	@Override
+	public EOperation getClassDefinition__GetAllAttributes() {
+		return classDefinitionEClass.getEOperations().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getAttributeDefinition() {
 		return attributeDefinitionEClass;
 	}
@@ -770,6 +780,7 @@ public class DefinitionsPackageImpl extends EPackageImpl implements DefinitionsP
 		createEReference(classDefinitionEClass, CLASS_DEFINITION__SUPER_TYPE);
 		createEAttribute(classDefinitionEClass, CLASS_DEFINITION__ABSTRACT);
 		createEOperation(classDefinitionEClass, CLASS_DEFINITION___FIND_ATTRIBUTE__STRING);
+		createEOperation(classDefinitionEClass, CLASS_DEFINITION___GET_ALL_ATTRIBUTES);
 
 		attributeDefinitionEClass = createEClass(ATTRIBUTE_DEFINITION);
 		createEReference(attributeDefinitionEClass, ATTRIBUTE_DEFINITION__TYPE);
@@ -895,6 +906,8 @@ public class DefinitionsPackageImpl extends EPackageImpl implements DefinitionsP
 
 		EOperation op = initEOperation(getClassDefinition__FindAttribute__String(), this.getAttributeDefinition(), "findAttribute", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "name", 1, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEOperation(getClassDefinition__GetAllAttributes(), this.getAttributeDefinition(), "getAllAttributes", 0, -1, IS_UNIQUE, !IS_ORDERED);
 
 		initEClass(attributeDefinitionEClass, AttributeDefinition.class, "AttributeDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAttributeDefinition_Type(), theTypesPackage.getType(), null, "type", null, 1, 1, AttributeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

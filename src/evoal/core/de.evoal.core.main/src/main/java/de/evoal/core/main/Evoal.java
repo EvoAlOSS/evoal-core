@@ -9,6 +9,7 @@ import de.evoal.core.api.cdi.MainClass;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.spi.Bean;
 
+import de.evoal.core.api.utils.EvoAlShutDownException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.deltaspike.cdise.api.CdiContainer;
 import org.apache.deltaspike.cdise.api.CdiContainerLoader;
@@ -69,6 +70,8 @@ public final class Evoal {
                 }
 
                 main.run();
+            } catch(final EvoAlShutDownException e) {
+                errorCode = e.getErrorCode();
             } catch (final Throwable e) {
                 log.error("Main class threw an exception.", e);
                 errorCode = 1;

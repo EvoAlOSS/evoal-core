@@ -262,6 +262,28 @@
 		</dependency>
 
 		<dependency>
+			<groupId>com.github.haifengl</groupId>
+			<artifactId>smile-base</artifactId>
+			<version>${smile.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.github.haifengl</groupId>
+			<artifactId>smile-core</artifactId>
+			<version>${smile.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+
+		<!-- Nice output for users -->
+		<dependency>
+			<groupId>org.fusesource.jansi</groupId>
+			<artifactId>jansi</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
+		<!-- Testing stuff -->
+		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter</artifactId>
 		</dependency>
@@ -285,20 +307,6 @@
 			<artifactId>mockito-junit-jupiter</artifactId>
 			<version>5.3.1</version>
 			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>com.github.haifengl</groupId>
-			<artifactId>smile-base</artifactId>
-			<version>${smile.version}</version>
-			<scope>runtime</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>com.github.haifengl</groupId>
-			<artifactId>smile-core</artifactId>
-			<version>${smile.version}</version>
-			<scope>runtime</scope>
 		</dependency>
 	</dependencies>
 

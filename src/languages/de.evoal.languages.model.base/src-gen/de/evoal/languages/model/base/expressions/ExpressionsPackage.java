@@ -923,13 +923,22 @@ public interface ExpressionsPackage extends EPackage {
 	int INSTANCE___FIND_ATTRIBUTE__STRING = LITERAL_OPERATION_COUNT + 0;
 
 	/**
+	 * The operation id for the '<em>Find Attribute</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INSTANCE___FIND_ATTRIBUTE__ATTRIBUTEDEFINITION = LITERAL_OPERATION_COUNT + 1;
+
+	/**
 	 * The number of operations of the '<em>Instance</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INSTANCE_OPERATION_COUNT = LITERAL_OPERATION_COUNT + 1;
+	int INSTANCE_OPERATION_COUNT = LITERAL_OPERATION_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.expressions.impl.AttributeImpl <em>Attribute</em>}' class.
@@ -1860,6 +1869,16 @@ public interface ExpressionsPackage extends EPackage {
 	EOperation getInstance__FindAttribute__String();
 
 	/**
+	 * Returns the meta object for the '{@link de.evoal.languages.model.base.expressions.Instance#findAttribute(de.evoal.languages.model.base.definitions.AttributeDefinition) <em>Find Attribute</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Find Attribute</em>' operation.
+	 * @see de.evoal.languages.model.base.expressions.Instance#findAttribute(de.evoal.languages.model.base.definitions.AttributeDefinition)
+	 * @generated
+	 */
+	EOperation getInstance__FindAttribute__AttributeDefinition();
+
+	/**
 	 * Returns the meta object for class '{@link de.evoal.languages.model.base.expressions.Attribute <em>Attribute</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2579,6 +2598,14 @@ public interface ExpressionsPackage extends EPackage {
 		 * @generated
 		 */
 		EOperation INSTANCE___FIND_ATTRIBUTE__STRING = eINSTANCE.getInstance__FindAttribute__String();
+
+		/**
+		 * The meta object literal for the '<em><b>Find Attribute</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation INSTANCE___FIND_ATTRIBUTE__ATTRIBUTEDEFINITION = eINSTANCE.getInstance__FindAttribute__AttributeDefinition();
 
 		/**
 		 * The meta object literal for the '{@link de.evoal.languages.model.base.expressions.impl.AttributeImpl <em>Attribute</em>}' class.

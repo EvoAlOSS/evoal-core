@@ -193,6 +193,12 @@
       </eAnnotations>
       <eParameters name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
+    <eOperations name="findAttribute" eType="#//Attribute">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return this.getAttributes()&#xA;                 .stream()&#xA;                 .filter(a -> definition.equals(a.getDefinition()))&#xA;                 .findFirst()&#xA;                 .orElse(null);"/>
+      </eAnnotations>
+      <eParameters name="definition" lowerBound="1" eType="ecore:EClass definitions.ecore#//AttributeDefinition"/>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="definition" lowerBound="1"
         eType="ecore:EClass definitions.ecore#//ClassDefinition"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"

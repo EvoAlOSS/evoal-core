@@ -13,6 +13,7 @@ import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
@@ -199,6 +200,27 @@ public class ClassDefinitionImpl extends TypeDefinitionImpl implements ClassDefi
 	 * @generated
 	 */
 	@Override
+	public EList<AttributeDefinition> getAllAttributes() {
+		EList<AttributeDefinition> attributes = new BasicEList<>();
+		
+		ClassDefinition current = this;
+		
+		while(current != null) {
+			attributes.addAll(current.getAttributes());
+		
+			current = current.getSuperType();
+		}
+		
+		return attributes;		
+		
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case DefinitionsPackage.CLASS_DEFINITION__ATTRIBUTES:
@@ -298,6 +320,8 @@ public class ClassDefinitionImpl extends TypeDefinitionImpl implements ClassDefi
 		switch (operationID) {
 			case DefinitionsPackage.CLASS_DEFINITION___FIND_ATTRIBUTE__STRING:
 				return findAttribute((String)arguments.get(0));
+			case DefinitionsPackage.CLASS_DEFINITION___GET_ALL_ATTRIBUTES:
+				return getAllAttributes();
 		}
 		return super.eInvoke(operationID, arguments);
 	}

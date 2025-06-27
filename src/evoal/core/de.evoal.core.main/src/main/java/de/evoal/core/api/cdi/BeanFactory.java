@@ -3,6 +3,7 @@ package de.evoal.core.api.cdi;
 import de.evoal.core.api.utils.AttributeHelper;
 import de.evoal.core.api.utils.InitializationException;
 import de.evoal.core.api.utils.Requirements;
+import de.evoal.core.api.validation.model.Validator;
 import de.evoal.languages.model.base.expressions.Instance;
 import de.evoal.languages.model.dl.util.FQNProvider;
 import lombok.NonNull;
@@ -10,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.deltaspike.core.api.provider.BeanProvider;
 
 import javax.enterprise.inject.spi.Bean;
+import java.util.Collection;
 import java.util.Set;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
@@ -172,5 +174,12 @@ public final class BeanFactory {
 
     public static <T> T injectFields(final T instance) {
         return BeanProvider.injectFields(instance);
+    }
+
+    public static <T extends Validator> Collection<? extends T> createComponents(final Class<T> clazz) {
+        return BeanProvider.getBeanDefinitions(clazz, true, true)
+                .stream()
+                .map(bean -> BeanProvider.getContextualReference(clazz, bean))
+                .collect(Collectors.toUnmodifiableList());
     }
 }

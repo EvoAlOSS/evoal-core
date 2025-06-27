@@ -1,5 +1,6 @@
-module de.evoal.optimisation.core {
+import "definitions" from 'de.evoal.core.constraints';
 
+module de.evoal.optimisation.core {
 	/**
 	 * The algorithm-independent problem description.
 	 */
@@ -12,17 +13,20 @@ module de.evoal.optimisation.core {
         /**
          * Description of the optimisation space.
          */
+        @MinimumNumberOfElements{ bound := 1; }
 	    'optimisation-space' : array data;
 
         /**
          * Optional search space description.
          */
+        @MinimumNumberOfElements{ bound := 1; }
     	'search-space' : array data;
 
 		/**
 		 * The optimisation function (if known) that maps between search and
 		 *   optimisation space.
 		 */
+        @MinimumNumberOfElements{ bound := 1; }
         'optimisation-function' : instance 'optimisation-function';
 
 		/**
@@ -102,6 +106,7 @@ module de.evoal.optimisation.core {
 		 * The target to search for. This value may be unset if the value is set
 		 *   by EvoAl itself during evaluation.
 		 */
+        @MinimumNumberOfElements{ bound := 1; }
 		target : array instance variable;
 	}
 
@@ -170,6 +175,7 @@ module de.evoal.optimisation.core {
 	    /**
 	     * Configurable stopping criterion.
 	     */
+        @MinimumNumberOfElements{ bound := 1; }
 	    'stopping-criteria' : array instance 'stopping-criterion';
 	}
 
@@ -186,6 +192,7 @@ module de.evoal.optimisation.core {
 		/**
 		 * Weights for summing the dimensions.
 		 */
+        @MinimumNumberOfElements{ bound := 1; }
 		weights : array real;
 	}
 
@@ -198,6 +205,7 @@ module de.evoal.optimisation.core {
 	    /**
 	     * Comparison order of the fitness data.
 	     */
+        @MinimumNumberOfElements{ bound := 1; }
 	    order : array data;
 	}
 	
@@ -264,6 +272,7 @@ module de.evoal.optimisation.core {
     * specification (search and optimisation space)
     */
     type 'candidate' {
+        @MinimumNumberOfElements{ bound := 1; }
         'values': array instance variable;
     }
 
@@ -374,6 +383,7 @@ module de.evoal.optimisation.core {
 	    /**
 	     * Maximum number of iterations.
 	     */
+	     @LowerBoundary { boundary := 0; }
         'maximum-iterations' : int := 10;
 	}
 

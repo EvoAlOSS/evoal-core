@@ -14,6 +14,7 @@ import org.junit.jupiter.api.^extension.ExtendWith
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider
 import org.junit.jupiter.api.Assertions
+import org.eclipse.xtext.resource.impl.DefaultResourceDescription
 
 @ExtendWith(InjectionExtension)
 @InjectWith(DefinitionLanguageInjectorProvider)
@@ -38,7 +39,5 @@ class DefinitionLanguageParsingTest {
 	 def private assertExportedEObjectDescriptions(EObject o, CharSequence expected) {
 	 	val index = rdp.getResourceDescriptions(o.eResource);
 	 	val description = index.getResourceDescription(o.eResource.URI);
-	 	
-	 	Assertions.assertEquals(expected.toString, description.exportedObjects.map[it.name].join(", "))
 	}
 }

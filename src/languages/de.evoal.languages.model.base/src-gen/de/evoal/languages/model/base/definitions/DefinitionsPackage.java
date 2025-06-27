@@ -345,13 +345,22 @@ public interface DefinitionsPackage extends EPackage {
 	int CLASS_DEFINITION___FIND_ATTRIBUTE__STRING = TYPE_DEFINITION_OPERATION_COUNT + 0;
 
 	/**
+	 * The operation id for the '<em>Get All Attributes</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_DEFINITION___GET_ALL_ATTRIBUTES = TYPE_DEFINITION_OPERATION_COUNT + 1;
+
+	/**
 	 * The number of operations of the '<em>Class Definition</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_DEFINITION_OPERATION_COUNT = TYPE_DEFINITION_OPERATION_COUNT + 1;
+	int CLASS_DEFINITION_OPERATION_COUNT = TYPE_DEFINITION_OPERATION_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.definitions.impl.AttributeDefinitionImpl <em>Attribute Definition</em>}' class.
@@ -1345,6 +1354,16 @@ public interface DefinitionsPackage extends EPackage {
 	EOperation getClassDefinition__FindAttribute__String();
 
 	/**
+	 * Returns the meta object for the '{@link de.evoal.languages.model.base.definitions.ClassDefinition#getAllAttributes() <em>Get All Attributes</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get All Attributes</em>' operation.
+	 * @see de.evoal.languages.model.base.definitions.ClassDefinition#getAllAttributes()
+	 * @generated
+	 */
+	EOperation getClassDefinition__GetAllAttributes();
+
+	/**
 	 * Returns the meta object for class '{@link de.evoal.languages.model.base.definitions.AttributeDefinition <em>Attribute Definition</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1804,6 +1823,14 @@ public interface DefinitionsPackage extends EPackage {
 		 * @generated
 		 */
 		EOperation CLASS_DEFINITION___FIND_ATTRIBUTE__STRING = eINSTANCE.getClassDefinition__FindAttribute__String();
+
+		/**
+		 * The meta object literal for the '<em><b>Get All Attributes</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation CLASS_DEFINITION___GET_ALL_ATTRIBUTES = eINSTANCE.getClassDefinition__GetAllAttributes();
 
 		/**
 		 * The meta object literal for the '{@link de.evoal.languages.model.base.definitions.impl.AttributeDefinitionImpl <em>Attribute Definition</em>}' class.

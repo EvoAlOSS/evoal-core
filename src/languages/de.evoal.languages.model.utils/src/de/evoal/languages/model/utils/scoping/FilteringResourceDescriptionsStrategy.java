@@ -1,5 +1,9 @@
 package de.evoal.languages.model.utils.scoping;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
@@ -16,11 +20,11 @@ public class FilteringResourceDescriptionsStrategy extends DefaultResourceDescri
 	@Inject
 	private IQualifiedNameProvider nameProvider;
 
-	
-	private final EClass[] classes;
+	private final Set<EClass> classes;
 	
 	public FilteringResourceDescriptionsStrategy(final EClass ... classes) {
-		this.classes = classes;
+		this.classes = new HashSet<>();
+		this.classes.addAll(Arrays.asList(classes));
 	}
 	
 	@Override

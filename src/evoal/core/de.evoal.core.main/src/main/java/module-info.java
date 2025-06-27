@@ -37,7 +37,7 @@ module de.evoal.core.main {
     requires de.evoal.languages.model.utils;
     requires com.google.guice;
     requires commons.math3;
-
+    requires jakarta.ejb.api;
     opens de.evoal.core; // export dl files.
 
     exports de.evoal.core.api.board;
@@ -55,8 +55,8 @@ module de.evoal.core.main {
     exports de.evoal.core.api.ecore.io;
     exports de.evoal.core.api.ecore.misc;
     exports de.evoal.core.api.ecore.stream;
-
     exports de.evoal.core.api.utils;
+    exports de.evoal.core.api.validation.context;
 
     opens de.evoal.core.api.board to weld.core.impl;
     opens de.evoal.core.api.cdi to weld.core.impl;
@@ -75,4 +75,13 @@ module de.evoal.core.main {
     opens de.evoal.core.main.ecore to weld.core.impl;
     opens de.evoal.core.main.language to weld.core.impl;
     opens de.evoal.core.main.properties to weld.core.impl;
+    opens de.evoal.core.main.validation to weld.core.impl;
+    opens de.evoal.core.api.validation.context to weld.core.impl;
+    exports de.evoal.core.main.validation;
+    exports de.evoal.core.main.validation.constraints;
+    exports de.evoal.core.api.validation.components;
+    opens de.evoal.core.api.validation.components to weld.core.impl;
+    exports de.evoal.core.api.validation.model;
+    opens de.evoal.core.api.validation.model to weld.core.impl;
+    opens de.evoal.core.main.validation.constraints to weld.core.impl;
 }
