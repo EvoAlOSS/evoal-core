@@ -61,6 +61,8 @@ module search {
         //we already specified the optimisation function in the problem configuration. We reference that here.
 		'optimisation-function' := 'problem-function' {};
 
+		'stopping-criteria' := [ 'iteration-count' { 'maximum-iterations' := 200; } ];
+
         //we can document our results. For the hill-climbing algorithm, individuals-per-generation and
         //best-individual-per-generation work identically
 		documenting := ['candidates-per-iteration' {}];

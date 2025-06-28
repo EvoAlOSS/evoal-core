@@ -1759,10 +1759,24 @@ ruleAttributeDefinitionRule returns [EObject current=null]
 		}
 		(
 			(
+				lv_optional_3_0='optional'
 				{
-					newCompositeNode(grammarAccess.getAttributeDefinitionRuleAccess().getTypeTypeRuleParserRuleCall_3_0());
+					newLeafNode(lv_optional_3_0, grammarAccess.getAttributeDefinitionRuleAccess().getOptionalOptionalKeyword_3_0());
 				}
-				lv_type_3_0=ruleTypeRule
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getAttributeDefinitionRuleRule());
+					}
+					setWithLastConsumed($current, "optional", lv_optional_3_0 != null, "optional");
+				}
+			)
+		)?
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getAttributeDefinitionRuleAccess().getTypeTypeRuleParserRuleCall_4_0());
+				}
+				lv_type_4_0=ruleTypeRule
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getAttributeDefinitionRuleRule());
@@ -1770,23 +1784,23 @@ ruleAttributeDefinitionRule returns [EObject current=null]
 					set(
 						$current,
 						"type",
-						lv_type_3_0,
+						lv_type_4_0,
 						"de.evoal.languages.model.base.dsl.BaseLanguage.TypeRule");
 					afterParserOrEnumRuleCall();
 				}
 			)
 		)
 		(
-			otherlv_4=':='
+			otherlv_5=':='
 			{
-				newLeafNode(otherlv_4, grammarAccess.getAttributeDefinitionRuleAccess().getColonEqualsSignKeyword_4_0());
+				newLeafNode(otherlv_5, grammarAccess.getAttributeDefinitionRuleAccess().getColonEqualsSignKeyword_5_0());
 			}
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getAttributeDefinitionRuleAccess().getInitialisationExpressionRuleParserRuleCall_4_1_0());
+						newCompositeNode(grammarAccess.getAttributeDefinitionRuleAccess().getInitialisationExpressionRuleParserRuleCall_5_1_0());
 					}
-					lv_initialisation_5_0=ruleExpressionRule
+					lv_initialisation_6_0=ruleExpressionRule
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getAttributeDefinitionRuleRule());
@@ -1794,16 +1808,16 @@ ruleAttributeDefinitionRule returns [EObject current=null]
 						set(
 							$current,
 							"initialisation",
-							lv_initialisation_5_0,
+							lv_initialisation_6_0,
 							"de.evoal.languages.model.base.dsl.BaseLanguage.ExpressionRule");
 						afterParserOrEnumRuleCall();
 					}
 				)
 			)
 		)?
-		otherlv_6=';'
+		otherlv_7=';'
 		{
-			newLeafNode(otherlv_6, grammarAccess.getAttributeDefinitionRuleAccess().getSemicolonKeyword_5());
+			newLeafNode(otherlv_7, grammarAccess.getAttributeDefinitionRuleAccess().getSemicolonKeyword_6());
 		}
 	)
 ;

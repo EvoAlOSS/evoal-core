@@ -39,6 +39,7 @@ module search {
 		'initialisation' := 'random-population' {};
 		'comparator' := 'numeric-comparator' {};
 		'optimisation-function' := 'problem-function' {};
+		'stopping-criteria' := [ 'iteration-count' { 'maximum-iterations' := 200; } ];
 		documenting := [ 'candidates-per-iteration' {} ];
 	}
 }

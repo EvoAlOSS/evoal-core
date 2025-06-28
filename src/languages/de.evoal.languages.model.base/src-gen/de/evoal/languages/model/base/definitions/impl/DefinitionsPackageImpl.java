@@ -459,6 +459,16 @@ public class DefinitionsPackageImpl extends EPackageImpl implements DefinitionsP
 	 * @generated
 	 */
 	@Override
+	public EAttribute getAttributeDefinition_Optional() {
+		return (EAttribute)attributeDefinitionEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getEnumLiteralDefinition() {
 		return enumLiteralDefinitionEClass;
 	}
@@ -785,6 +795,7 @@ public class DefinitionsPackageImpl extends EPackageImpl implements DefinitionsP
 		attributeDefinitionEClass = createEClass(ATTRIBUTE_DEFINITION);
 		createEReference(attributeDefinitionEClass, ATTRIBUTE_DEFINITION__TYPE);
 		createEReference(attributeDefinitionEClass, ATTRIBUTE_DEFINITION__INITIALISATION);
+		createEAttribute(attributeDefinitionEClass, ATTRIBUTE_DEFINITION__OPTIONAL);
 
 		enumLiteralDefinitionEClass = createEClass(ENUM_LITERAL_DEFINITION);
 
@@ -912,6 +923,7 @@ public class DefinitionsPackageImpl extends EPackageImpl implements DefinitionsP
 		initEClass(attributeDefinitionEClass, AttributeDefinition.class, "AttributeDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAttributeDefinition_Type(), theTypesPackage.getType(), null, "type", null, 1, 1, AttributeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAttributeDefinition_Initialisation(), theExpressionsPackage.getExpression(), null, "initialisation", null, 0, 1, AttributeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAttributeDefinition_Optional(), ecorePackage.getEBoolean(), "optional", "false", 1, 1, AttributeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(enumLiteralDefinitionEClass, EnumLiteralDefinition.class, "EnumLiteralDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

@@ -5,7 +5,6 @@ import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
 import de.evoal.optimisation.api.model.OptimisationFunction;
 import de.evoal.core.api.properties.PropertiesSpecification;
-import de.evoal.languages.model.base.expressions.Attribute;
 import de.evoal.languages.model.base.definitions.Definition;
 import de.evoal.languages.model.base.expressions.Instance;
 import lombok.extern.slf4j.Slf4j;
@@ -43,15 +42,5 @@ public class OptimisationFunctionProducer {
         return PropertiesSpecification.builder()
                 .add(references.stream())
                 .build();
-    }
-
-    private static Instance findInner(final Instance fitnessConfig) {
-        final Attribute subFunction = fitnessConfig.findAttribute("function");
-
-        if(subFunction != null) {
-            return findInner((Instance)subFunction.getValue());
-        }
-
-        return fitnessConfig;
     }
 }

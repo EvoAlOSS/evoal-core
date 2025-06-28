@@ -26,7 +26,6 @@ module de.evoal.optimisation.core {
 		 * The optimisation function (if known) that maps between search and
 		 *   optimisation space.
 		 */
-        @MinimumNumberOfElements{ bound := 1; }
         'optimisation-function' : instance 'optimisation-function';
 
 		/**
@@ -281,9 +280,9 @@ module de.evoal.optimisation.core {
     * as the starting point.
     */
     type 'specify-candidates' extends 'initial-population' {
-        'candidate-file' : string;
+        'candidate-file' : optional string;
 
-        'candidate-list': array instance candidate;
+        'candidate-list': optional array instance candidate;
 
         //determines order of candidates read from file. Random (default) or linear.
         'random': boolean := true;

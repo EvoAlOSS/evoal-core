@@ -290,7 +290,7 @@ public class BaseLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 	 *     AttributeDefinitionRule returns AttributeDefinition
 	 *
 	 * Constraint:
-	 *     (constraints+=ConstraintRule* name=StringOrId type=TypeRule initialisation=ExpressionRule?)
+	 *     (constraints+=ConstraintRule* name=StringOrId optional?='optional'? type=TypeRule initialisation=ExpressionRule?)
 	 * </pre>
 	 */
 	protected void sequence_AttributeDefinitionRule(ISerializationContext context, AttributeDefinition semanticObject) {

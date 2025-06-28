@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <ul>
  *   <li>{@link de.evoal.languages.model.base.definitions.impl.AttributeDefinitionImpl#getType <em>Type</em>}</li>
  *   <li>{@link de.evoal.languages.model.base.definitions.impl.AttributeDefinitionImpl#getInitialisation <em>Initialisation</em>}</li>
+ *   <li>{@link de.evoal.languages.model.base.definitions.impl.AttributeDefinitionImpl#isOptional <em>Optional</em>}</li>
  * </ul>
  *
  * @generated
@@ -51,6 +52,26 @@ public class AttributeDefinitionImpl extends DefinitionImpl implements Attribute
 	 * @ordered
 	 */
 	protected Expression initialisation;
+
+	/**
+	 * The default value of the '{@link #isOptional() <em>Optional</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isOptional()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean OPTIONAL_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isOptional() <em>Optional</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isOptional()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean optional = OPTIONAL_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -167,6 +188,29 @@ public class AttributeDefinitionImpl extends DefinitionImpl implements Attribute
 	 * @generated
 	 */
 	@Override
+	public boolean isOptional() {
+		return optional;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setOptional(boolean newOptional) {
+		boolean oldOptional = optional;
+		optional = newOptional;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DefinitionsPackage.ATTRIBUTE_DEFINITION__OPTIONAL, oldOptional, optional));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case DefinitionsPackage.ATTRIBUTE_DEFINITION__TYPE:
@@ -189,6 +233,8 @@ public class AttributeDefinitionImpl extends DefinitionImpl implements Attribute
 				return getType();
 			case DefinitionsPackage.ATTRIBUTE_DEFINITION__INITIALISATION:
 				return getInitialisation();
+			case DefinitionsPackage.ATTRIBUTE_DEFINITION__OPTIONAL:
+				return isOptional();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -206,6 +252,9 @@ public class AttributeDefinitionImpl extends DefinitionImpl implements Attribute
 				return;
 			case DefinitionsPackage.ATTRIBUTE_DEFINITION__INITIALISATION:
 				setInitialisation((Expression)newValue);
+				return;
+			case DefinitionsPackage.ATTRIBUTE_DEFINITION__OPTIONAL:
+				setOptional((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -225,6 +274,9 @@ public class AttributeDefinitionImpl extends DefinitionImpl implements Attribute
 			case DefinitionsPackage.ATTRIBUTE_DEFINITION__INITIALISATION:
 				setInitialisation((Expression)null);
 				return;
+			case DefinitionsPackage.ATTRIBUTE_DEFINITION__OPTIONAL:
+				setOptional(OPTIONAL_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -241,8 +293,26 @@ public class AttributeDefinitionImpl extends DefinitionImpl implements Attribute
 				return type != null;
 			case DefinitionsPackage.ATTRIBUTE_DEFINITION__INITIALISATION:
 				return initialisation != null;
+			case DefinitionsPackage.ATTRIBUTE_DEFINITION__OPTIONAL:
+				return optional != OPTIONAL_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuilder result = new StringBuilder(super.toString());
+		result.append(" (optional: ");
+		result.append(optional);
+		result.append(')');
+		return result.toString();
 	}
 
 } //AttributeDefinitionImpl

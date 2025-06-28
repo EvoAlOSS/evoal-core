@@ -409,13 +409,22 @@ public interface DefinitionsPackage extends EPackage {
 	int ATTRIBUTE_DEFINITION__INITIALISATION = DEFINITION_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Optional</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE_DEFINITION__OPTIONAL = DEFINITION_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Attribute Definition</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ATTRIBUTE_DEFINITION_FEATURE_COUNT = DEFINITION_FEATURE_COUNT + 2;
+	int ATTRIBUTE_DEFINITION_FEATURE_COUNT = DEFINITION_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of operations of the '<em>Attribute Definition</em>' class.
@@ -1396,6 +1405,17 @@ public interface DefinitionsPackage extends EPackage {
 	EReference getAttributeDefinition_Initialisation();
 
 	/**
+	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.base.definitions.AttributeDefinition#isOptional <em>Optional</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Optional</em>'.
+	 * @see de.evoal.languages.model.base.definitions.AttributeDefinition#isOptional()
+	 * @see #getAttributeDefinition()
+	 * @generated
+	 */
+	EAttribute getAttributeDefinition_Optional();
+
+	/**
 	 * Returns the meta object for class '{@link de.evoal.languages.model.base.definitions.EnumLiteralDefinition <em>Enum Literal Definition</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1857,6 +1877,14 @@ public interface DefinitionsPackage extends EPackage {
 		 * @generated
 		 */
 		EReference ATTRIBUTE_DEFINITION__INITIALISATION = eINSTANCE.getAttributeDefinition_Initialisation();
+
+		/**
+		 * The meta object literal for the '<em><b>Optional</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ATTRIBUTE_DEFINITION__OPTIONAL = eINSTANCE.getAttributeDefinition_Optional();
 
 		/**
 		 * The meta object literal for the '{@link de.evoal.languages.model.base.definitions.impl.EnumLiteralDefinitionImpl <em>Enum Literal Definition</em>}' class.

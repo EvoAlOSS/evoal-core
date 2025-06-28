@@ -1027,22 +1027,24 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameStringOrIdParserRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		private final Keyword cColonKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cTypeAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cTypeTypeRuleParserRuleCall_3_0 = (RuleCall)cTypeAssignment_3.eContents().get(0);
-		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
-		private final Keyword cColonEqualsSignKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
-		private final Assignment cInitialisationAssignment_4_1 = (Assignment)cGroup_4.eContents().get(1);
-		private final RuleCall cInitialisationExpressionRuleParserRuleCall_4_1_0 = (RuleCall)cInitialisationAssignment_4_1.eContents().get(0);
-		private final Keyword cSemicolonKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		private final Assignment cOptionalAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final Keyword cOptionalOptionalKeyword_3_0 = (Keyword)cOptionalAssignment_3.eContents().get(0);
+		private final Assignment cTypeAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cTypeTypeRuleParserRuleCall_4_0 = (RuleCall)cTypeAssignment_4.eContents().get(0);
+		private final Group cGroup_5 = (Group)cGroup.eContents().get(5);
+		private final Keyword cColonEqualsSignKeyword_5_0 = (Keyword)cGroup_5.eContents().get(0);
+		private final Assignment cInitialisationAssignment_5_1 = (Assignment)cGroup_5.eContents().get(1);
+		private final RuleCall cInitialisationExpressionRuleParserRuleCall_5_1_0 = (RuleCall)cInitialisationAssignment_5_1.eContents().get(0);
+		private final Keyword cSemicolonKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
 		//AttributeDefinitionRule returns AttributeDefinition:
 		//    (constraints += ConstraintRule)*
-		//    name = StringOrId ':' type = TypeRule (':=' initialisation = ExpressionRule)? ';'
+		//    name = StringOrId ':' (optional ?= 'optional')? type = TypeRule (':=' initialisation = ExpressionRule)? ';'
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//(constraints += ConstraintRule)*
-		//name = StringOrId ':' type = TypeRule (':=' initialisation = ExpressionRule)? ';'
+		//name = StringOrId ':' (optional ?= 'optional')? type = TypeRule (':=' initialisation = ExpressionRule)? ';'
 		public Group getGroup() { return cGroup; }
 		
 		//(constraints += ConstraintRule)*
@@ -1060,26 +1062,32 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		//':'
 		public Keyword getColonKeyword_2() { return cColonKeyword_2; }
 		
+		//(optional ?= 'optional')?
+		public Assignment getOptionalAssignment_3() { return cOptionalAssignment_3; }
+		
+		//'optional'
+		public Keyword getOptionalOptionalKeyword_3_0() { return cOptionalOptionalKeyword_3_0; }
+		
 		//type = TypeRule
-		public Assignment getTypeAssignment_3() { return cTypeAssignment_3; }
+		public Assignment getTypeAssignment_4() { return cTypeAssignment_4; }
 		
 		//TypeRule
-		public RuleCall getTypeTypeRuleParserRuleCall_3_0() { return cTypeTypeRuleParserRuleCall_3_0; }
+		public RuleCall getTypeTypeRuleParserRuleCall_4_0() { return cTypeTypeRuleParserRuleCall_4_0; }
 		
 		//(':=' initialisation = ExpressionRule)?
-		public Group getGroup_4() { return cGroup_4; }
+		public Group getGroup_5() { return cGroup_5; }
 		
 		//':='
-		public Keyword getColonEqualsSignKeyword_4_0() { return cColonEqualsSignKeyword_4_0; }
+		public Keyword getColonEqualsSignKeyword_5_0() { return cColonEqualsSignKeyword_5_0; }
 		
 		//initialisation = ExpressionRule
-		public Assignment getInitialisationAssignment_4_1() { return cInitialisationAssignment_4_1; }
+		public Assignment getInitialisationAssignment_5_1() { return cInitialisationAssignment_5_1; }
 		
 		//ExpressionRule
-		public RuleCall getInitialisationExpressionRuleParserRuleCall_4_1_0() { return cInitialisationExpressionRuleParserRuleCall_4_1_0; }
+		public RuleCall getInitialisationExpressionRuleParserRuleCall_5_1_0() { return cInitialisationExpressionRuleParserRuleCall_5_1_0; }
 		
 		//';'
-		public Keyword getSemicolonKeyword_5() { return cSemicolonKeyword_5; }
+		public Keyword getSemicolonKeyword_6() { return cSemicolonKeyword_6; }
 	}
 	public class TypeRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.base.dsl.BaseLanguage.TypeRule");
@@ -2580,7 +2588,7 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 	
 	//AttributeDefinitionRule returns AttributeDefinition:
 	//    (constraints += ConstraintRule)*
-	//    name = StringOrId ':' type = TypeRule (':=' initialisation = ExpressionRule)? ';'
+	//    name = StringOrId ':' (optional ?= 'optional')? type = TypeRule (':=' initialisation = ExpressionRule)? ';'
 	//;
 	public AttributeDefinitionRuleElements getAttributeDefinitionRuleAccess() {
 		return pAttributeDefinitionRule;

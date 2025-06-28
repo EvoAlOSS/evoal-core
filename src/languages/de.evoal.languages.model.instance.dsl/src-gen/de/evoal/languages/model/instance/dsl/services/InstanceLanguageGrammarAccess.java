@@ -592,7 +592,7 @@ public class InstanceLanguageGrammarAccess extends AbstractElementFinder.Abstrac
 	
 	//AttributeDefinitionRule returns AttributeDefinition:
 	//    (constraints += ConstraintRule)*
-	//    name = StringOrId ':' type = TypeRule (':=' initialisation = ExpressionRule)? ';'
+	//    name = StringOrId ':' (optional ?= 'optional')? type = TypeRule (':=' initialisation = ExpressionRule)? ';'
 	//;
 	public BaseLanguageGrammarAccess.AttributeDefinitionRuleElements getAttributeDefinitionRuleAccess() {
 		return gaBaseLanguage.getAttributeDefinitionRuleAccess();

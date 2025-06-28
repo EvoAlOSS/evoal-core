@@ -36,7 +36,7 @@ set -x
 java ${LOCAL_JVM_ARGUMENTS[@]} \
      ${EVOAL_JVM_ARGUMENTS[@]} \
      "-Bcore:main=heuristic-search-evaluation" \
-     "-Boptimisation:optimisation-configuration-file=$2" \
      "-Boptimisation:evaluation-output-folder=$3" \
      "-Boptimisation:evaluation-iterations=$4" \
-     ${ADDITIONAL_ARGUMENTS[@]}
+     ${ADDITIONAL_ARGUMENTS[@]} \
+     "-Boptimisation:optimisation-configuration-file=$2" \

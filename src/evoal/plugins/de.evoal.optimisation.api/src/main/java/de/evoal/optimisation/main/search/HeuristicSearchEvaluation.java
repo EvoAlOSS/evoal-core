@@ -2,6 +2,7 @@ package de.evoal.optimisation.main.search;
 
 import de.evoal.core.api.board.Blackboard;
 import de.evoal.core.api.properties.PropertiesSpecification;
+import de.evoal.languages.model.ol.OptimisationModule;
 import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
 import de.evoal.core.api.cdi.*;
 import de.evoal.optimisation.api.cdi.TargetPointLoader;
@@ -10,15 +11,15 @@ import de.evoal.core.api.properties.PropertiesPair;
 
 import javax.enterprise.context.ApplicationScoped;
 
-import de.evoal.core.api.properties.stream.PropertiesPairStreamSupplier;
 import de.evoal.optimisation.api.statistics.writer.Column;
 import de.evoal.optimisation.api.statistics.writer.ColumnType;
 import de.evoal.optimisation.api.statistics.writer.WriterContext;
-import de.evoal.languages.model.base.expressions.Instance;
+import de.evoal.optimisation.main.producer.OptimisationModuleLoader;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.inject.Provider;
 import java.io.File;
 import java.util.List;
 
@@ -43,6 +44,9 @@ public class HeuristicSearchEvaluation implements MainClass {
     private WriterContext context;
 
     @Inject
+    private OptimisationModuleLoader loader;
+
+    @Inject
     @BlackboardValue(OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION_FILE)
     private String olFile;
 
@@ -59,17 +63,13 @@ public class HeuristicSearchEvaluation implements MainClass {
     private Column targetColumn;
     private Column runColumn;
 
-    @Inject
-    @Named("search-space-specification")
-    private PropertiesSpecification inputSpace;
+    @Inject @Named("search-space-specification")
+    private Provider<PropertiesSpecification> inputSpaceProvider;
 
-    @Inject
-    @Named("optimisation-space-specification")
-    private PropertiesSpecification outputSpace;
+    @Inject @Named("optimisation-space-specification")
+    private Provider<PropertiesSpecification> outputSpaceProvider;
 
-    @Inject
-    @ConfigurationValue(entry = OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm")
-    private Instance algorithmConfiguration;
+    private OptimisationModule algorithmConfiguration;
 
     @Override
     public void run() {
@@ -80,9 +80,12 @@ public class HeuristicSearchEvaluation implements MainClass {
         log.info("  heuristic configuration loaded from ({})", olFile);
         log.info("  running {} iterations.", iterations);
 
+        algorithmConfiguration = loader.load(olFile);
+        board.bind(OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, algorithmConfiguration);
+
         if(targetFile != null) {
             final TargetPointLoader loader = BeanFactory.create(TargetPointLoader.class);
-            targets = loader.getTargetPropertiesStream(inputSpace, outputSpace).get().toList();
+            targets = loader.getTargetPropertiesStream(inputSpaceProvider.get(), outputSpaceProvider.get()).get().toList();
             log.info("Processing {} targets during evaluation.", targets.size());
         }
 
@@ -131,7 +134,7 @@ public class HeuristicSearchEvaluation implements MainClass {
             board.bind(OptimisationBlackboardEntries.EVALUATION_RUN, run);
             context.bindColumn(runColumn, i);
 
-            BeanFactory.createComponent(OptimisationAlgorithm.class, algorithmConfiguration)
+            BeanFactory.createComponent(OptimisationAlgorithm.class, algorithmConfiguration.getAlgorithm())
                        .run();
         }
     }

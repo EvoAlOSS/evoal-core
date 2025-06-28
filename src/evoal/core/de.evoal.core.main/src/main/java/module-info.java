@@ -20,6 +20,8 @@ module de.evoal.core.main {
 
     requires com.fasterxml.jackson.databind;
 
+    requires org.fusesource.jansi;
+
     requires org.eclipse.emf.common;
     requires org.eclipse.emf.ecore;
     requires org.eclipse.xtext;
@@ -72,6 +74,7 @@ module de.evoal.core.main {
     opens de.evoal.core.api.properties.stream to weld.core.impl;
     opens de.evoal.core.api.utils to weld.core.impl;
 
+    opens de.evoal.core.main to weld.core.impl;
     opens de.evoal.core.main.ecore to weld.core.impl;
     opens de.evoal.core.main.language to weld.core.impl;
     opens de.evoal.core.main.properties to weld.core.impl;

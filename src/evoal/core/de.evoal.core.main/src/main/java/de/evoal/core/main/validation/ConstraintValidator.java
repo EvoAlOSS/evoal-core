@@ -32,11 +32,15 @@ public class ConstraintValidator implements InstanceValidator {
         final EList<AttributeDefinition> attributes = definition.getAllAttributes();
 
         for(final AttributeDefinition attribute : attributes) {
-            final List<Expression> constraints = attribute.getConstraints();
             final Attribute attr = instance.findAttribute(attribute);
 
-            constraints.stream()
-                       .forEach(c-> check(new EObjectContext(context, attr.getDefinition().getName()), c, attr));
+            if(attr == null) {
+                continue;
+            }
+
+            attribute.getConstraints()
+                     .stream()
+                     .forEach(c-> check(new EObjectContext(context, attr.getDefinition().getName()), c, attr));
         }
     }
 

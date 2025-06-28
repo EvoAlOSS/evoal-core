@@ -73,6 +73,7 @@ public class AttributeExistsValidator implements MetaValidator {
         definition.getAllAttributes()
                   .stream()
                   .filter(a -> Objects.isNull(a.getInitialisation()))
+                  .filter(a -> !a.isOptional())
                   .filter(a -> instance.findAttribute(a) == null)
                   .peek(a -> log.info("Attribute {} is missing.", a.getName()))
                   .forEach(a -> events.fire(new Diagnostics(Diagnostics.Level.Error, new EObjectContext(context, toPath(instance, a.getName()), instance), "Required attribute '" + a.getName() + "' not specified.")));

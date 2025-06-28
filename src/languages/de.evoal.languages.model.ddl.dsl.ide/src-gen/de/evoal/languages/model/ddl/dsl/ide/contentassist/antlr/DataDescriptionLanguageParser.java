@@ -102,7 +102,7 @@ public class DataDescriptionLanguageParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getClassDefinitionRuleAccess().getGroup_4(), "rule__ClassDefinitionRule__Group_4__0");
 			builder.put(grammarAccess.getConstraintRuleAccess().getGroup(), "rule__ConstraintRule__Group__0");
 			builder.put(grammarAccess.getAttributeDefinitionRuleAccess().getGroup(), "rule__AttributeDefinitionRule__Group__0");
-			builder.put(grammarAccess.getAttributeDefinitionRuleAccess().getGroup_4(), "rule__AttributeDefinitionRule__Group_4__0");
+			builder.put(grammarAccess.getAttributeDefinitionRuleAccess().getGroup_5(), "rule__AttributeDefinitionRule__Group_5__0");
 			builder.put(grammarAccess.getEnumReferenceRuleAccess().getGroup(), "rule__EnumReferenceRule__Group__0");
 			builder.put(grammarAccess.getTypeReferenceRuleAccess().getGroup(), "rule__TypeReferenceRule__Group__0");
 			builder.put(grammarAccess.getLiteralTypeRuleAccess().getGroup(), "rule__LiteralTypeRule__Group__0");
@@ -200,8 +200,9 @@ public class DataDescriptionLanguageParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getClassDefinitionRuleAccess().getAttributesAssignment_6(), "rule__ClassDefinitionRule__AttributesAssignment_6");
 			builder.put(grammarAccess.getAttributeDefinitionRuleAccess().getConstraintsAssignment_0(), "rule__AttributeDefinitionRule__ConstraintsAssignment_0");
 			builder.put(grammarAccess.getAttributeDefinitionRuleAccess().getNameAssignment_1(), "rule__AttributeDefinitionRule__NameAssignment_1");
-			builder.put(grammarAccess.getAttributeDefinitionRuleAccess().getTypeAssignment_3(), "rule__AttributeDefinitionRule__TypeAssignment_3");
-			builder.put(grammarAccess.getAttributeDefinitionRuleAccess().getInitialisationAssignment_4_1(), "rule__AttributeDefinitionRule__InitialisationAssignment_4_1");
+			builder.put(grammarAccess.getAttributeDefinitionRuleAccess().getOptionalAssignment_3(), "rule__AttributeDefinitionRule__OptionalAssignment_3");
+			builder.put(grammarAccess.getAttributeDefinitionRuleAccess().getTypeAssignment_4(), "rule__AttributeDefinitionRule__TypeAssignment_4");
+			builder.put(grammarAccess.getAttributeDefinitionRuleAccess().getInitialisationAssignment_5_1(), "rule__AttributeDefinitionRule__InitialisationAssignment_5_1");
 			builder.put(grammarAccess.getEnumReferenceRuleAccess().getDefinitionAssignment_1(), "rule__EnumReferenceRule__DefinitionAssignment_1");
 			builder.put(grammarAccess.getTypeReferenceRuleAccess().getDefinitionAssignment_1(), "rule__TypeReferenceRule__DefinitionAssignment_1");
 			builder.put(grammarAccess.getArrayTypeRuleAccess().getElementsAssignment_1(), "rule__ArrayTypeRule__ElementsAssignment_1");

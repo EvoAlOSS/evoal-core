@@ -76,18 +76,6 @@ public class OptimisationModuleLoader {
             log.info("Pre-Loading model URI {}", modelURI);
             final ArrayList<URI> order = extractLoadingGraph(olInjector, loadingStack);
 
-            //            final Resource r1 = resourceSet.getResource(URI.createURI("classpath:/de/evoal/core/math.dl"), true);
-//            final Resource r2 = resourceSet.getResource(URI.createURI("classpath:/de/evoal/core/constraints.dl"), true);
-           /*
-            final TreeIterator<EObject> iter = r.getAllContents();
-            while (iter.hasNext()) {
-                final EObject object = iter.next();
-                if(object instanceof ClassDefinition cd) {
-                    log.info("Found CD {}", cd.getName());
-                }
-            }
-*/
-
             log.info("Loading the model and transitive resources.");
 
             log.info("Loading ol model from URI {}.", modelURI);
@@ -116,6 +104,7 @@ public class OptimisationModuleLoader {
 
     public void receive(@Observes(notifyObserver = Reception.IF_EXISTS) final Diagnostics diag) {
         if(Diagnostics.Level.Error.equals(diag.level())) {
+            log.error("Observed {} error.", diag);
             observedErrors = true;
         }
     }
@@ -214,5 +203,4 @@ public class OptimisationModuleLoader {
 
         return loadingStack;
     }
-
 }

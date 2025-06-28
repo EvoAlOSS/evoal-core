@@ -21,6 +21,7 @@ import de.evoal.languages.model.base.types.Type;
  * <ul>
  *   <li>{@link de.evoal.languages.model.base.definitions.AttributeDefinition#getType <em>Type</em>}</li>
  *   <li>{@link de.evoal.languages.model.base.definitions.AttributeDefinition#getInitialisation <em>Initialisation</em>}</li>
+ *   <li>{@link de.evoal.languages.model.base.definitions.AttributeDefinition#isOptional <em>Optional</em>}</li>
  * </ul>
  *
  * @see de.evoal.languages.model.base.definitions.DefinitionsPackage#getAttributeDefinition()
@@ -77,5 +78,33 @@ public interface AttributeDefinition extends Definition {
 	 * @generated
 	 */
 	void setInitialisation(Expression value);
+
+	/**
+	 * Returns the value of the '<em><b>Optional</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * 
+	 * If a property binding is required.
+	 * 
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Optional</em>' attribute.
+	 * @see #setOptional(boolean)
+	 * @see de.evoal.languages.model.base.definitions.DefinitionsPackage#getAttributeDefinition_Optional()
+	 * @model default="false" required="true"
+	 * @generated
+	 */
+	boolean isOptional();
+
+	/**
+	 * Sets the value of the '{@link de.evoal.languages.model.base.definitions.AttributeDefinition#isOptional <em>Optional</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Optional</em>' attribute.
+	 * @see #isOptional()
+	 * @generated
+	 */
+	void setOptional(boolean value);
 
 } // AttributeDefinition

@@ -1,9 +1,6 @@
 import "definitions" from de.evoal.core.math;
 
 import "definitions" from de.evoal.optimisation.core;
-import "definitions" from de.evoal.generator.optimisation;
-import "definitions" from de.evoal.generator.generator;
-
 import "definitions" from de.evoal.optimisation.ea.optimisation;
 import "definitions" from de.evoal.optimisation.ea.'genetic-programming';
 

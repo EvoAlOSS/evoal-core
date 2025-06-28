@@ -48,6 +48,7 @@
     <genClasses ecoreClass="definitions.ecore#//AttributeDefinition">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference definitions.ecore#//AttributeDefinition/type"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference definitions.ecore#//AttributeDefinition/initialisation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute definitions.ecore#//AttributeDefinition/optional"/>
     </genClasses>
     <genClasses ecoreClass="definitions.ecore#//EnumLiteralDefinition"/>
     <genClasses ecoreClass="definitions.ecore#//EnumDefinition">

@@ -38,7 +38,6 @@ module de.evoal.optimisation.api {
     requires commons.math3;
     requires de.evoal.core.main;
     requires jakarta.ejb.api;
-    requires org.fusesource.jansi;
 
     opens de.evoal.optimisation; // export dl files.
 
@@ -54,6 +53,7 @@ module de.evoal.optimisation.api {
     exports de.evoal.optimisation.api.model.impl;
     exports de.evoal.optimisation.api.statistics.io;
     exports de.evoal.optimisation.api.statistics.writer;
+
     exports de.evoal.optimisation.main.fitness;
     exports de.evoal.optimisation.main.constraints.constraint.strategies.constraint;
     exports de.evoal.optimisation.main.constraints.constraint.strategies.calculations;

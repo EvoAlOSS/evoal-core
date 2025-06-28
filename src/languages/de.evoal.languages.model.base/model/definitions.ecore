@@ -101,6 +101,12 @@
         <details key="documentation" value="A default value for the attribute."/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="optional" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&#xA;If a property binding is required.&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EnumLiteralDefinition" eSuperTypes="#//LiteralDefinition">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
