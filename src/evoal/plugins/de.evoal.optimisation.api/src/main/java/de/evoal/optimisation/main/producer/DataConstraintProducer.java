@@ -1,9 +1,6 @@
 package de.evoal.optimisation.main.producer;
 
-import de.evoal.core.api.cdi.BlackboardValue;
-import de.evoal.core.api.cdi.ConfigurationValue;
-import de.evoal.languages.model.base.expressions.DefinitionReference;
-import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
+import de.evoal.languages.model.base.expressions.TypeDefinitionReference;
 import de.evoal.optimisation.api.constraints.model.DataConstraints;
 import de.evoal.languages.model.base.definitions.DataDescription;
 import de.evoal.languages.model.ddl.DataDescriptionModule;
@@ -32,9 +29,9 @@ public class DataConstraintProducer {
 
         // collect all referenced data descriptions
         final Set<DataDescription> descriptions = StreamSupport.stream(iterable.spliterator(), false)
-                                                               .filter(DefinitionReference.class::isInstance)
-                                                               .map(DefinitionReference.class::cast)
-                                                               .map(DefinitionReference::getDefinition)
+                                                               .filter(TypeDefinitionReference.class::isInstance)
+                                                               .map(TypeDefinitionReference.class::cast)
+                                                               .map(TypeDefinitionReference::getDefinition)
                                                                .filter(DataDescription.class::isInstance)
                                                                .map(DataDescription.class::cast)
                                                                .collect(Collectors.toSet());
