@@ -108,8 +108,10 @@ public class DataReferenceSwitch extends ExpressionsSwitch<DataDescription> {
     public DataDescription caseValueReference(final ValueReference object) {
         if(object instanceof SelfReference) {
             throw  new IllegalStateException("Not yet implemented");
+        } else if(object instanceof TypeDefinitionReference){
+            return (DataDescription) ((TypeDefinitionReference)object).getDefinition();
         } else {
-            return (DataDescription) ((DefinitionReference)object).getDefinition();
+            throw new IllegalArgumentException("Type of reference not yet supported: " + object.getClass().getName());
         }
     }
 }
