@@ -29,4 +29,5 @@ module de.evoal.optimisation.local_search {
     opens de.evoal.optimisation.local_search.api.neighbour to weld.core.impl;
     opens de.evoal.optimisation.local_search.api.cooling to weld.core.impl;
     opens de.evoal.optimisation.local_search.api.probability to weld.core.impl;
+    opens de.evoal.optimisation.local_search.main.accepting to weld.core.impl;
 }

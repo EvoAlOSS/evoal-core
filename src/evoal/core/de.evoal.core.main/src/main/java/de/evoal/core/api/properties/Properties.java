@@ -128,7 +128,7 @@ public class Properties {
                 notFirst = true;
             }
 
-            builder.append(specification.properties.get(i));
+            builder.append(specification.properties.get(i).name());
             builder.append(" -> ");
             builder.append(values[i]);
         }

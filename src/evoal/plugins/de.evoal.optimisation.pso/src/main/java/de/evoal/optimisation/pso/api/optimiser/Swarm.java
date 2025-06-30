@@ -26,9 +26,9 @@ import de.evoal.optimisation.pso.api.swarm.Particle;
 public interface Swarm extends EvoalComponent<Swarm> {
 
     /**
-     * @return The size of the swarm population.
+     * Evaluates the fitness of all particles.
      */
-    public long size();
+    void evaluate();
 
     /**
      * @return All particles of the swarm.
@@ -36,7 +36,24 @@ public interface Swarm extends EvoalComponent<Swarm> {
     public Particle[] getParticles();
 
     /**
-     * Executes the optimiser by simulating the swarm.
+     * Creates the initial population.
      */
-    public void run();
+    void initialise();
+
+    /**
+     * Moves the swarm.
+     */
+    void move(final int generation, final int numberOfGenerations);
+
+    /**
+     * Sets the particles of the swarm.
+     *
+     * @param particles The particles.
+     */
+    void setParticles(Particle[] particles);
+
+    /**
+     * @return The size of the swarm population.
+     */
+    public long size();
 }

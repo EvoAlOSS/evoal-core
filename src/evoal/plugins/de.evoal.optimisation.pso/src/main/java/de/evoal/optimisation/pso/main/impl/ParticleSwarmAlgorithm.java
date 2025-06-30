@@ -1,10 +1,16 @@
 package de.evoal.optimisation.pso.main.impl;
 
 import de.evoal.core.api.cdi.BeanFactory;
+import de.evoal.core.api.cdi.Component;
+import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.core.api.utils.AttributeHelper;
-import de.evoal.optimisation.api.model.OptimisationAlgorithm;
+import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
+import de.evoal.optimisation.api.cdi.StoppingCriterionProducer;
+import de.evoal.optimisation.api.model.*;
+import de.evoal.optimisation.api.statistics.writer.StatisticsWriter;
 import de.evoal.optimisation.pso.api.optimiser.Swarm;
 import de.evoal.languages.model.base.expressions.Instance;
+import de.evoal.optimisation.pso.main.statistics.PSOIteration;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.enterprise.context.Dependent;
@@ -16,21 +22,67 @@ import javax.inject.Named;
 @Named("de.evoal.optimisation.pso.optimisation.particle-swarm-optimisation")
 public class ParticleSwarmAlgorithm implements OptimisationAlgorithm {
 
-    private Swarm swarm;
+    @Inject @Dependent @Component
+    private OptimisationValueComparator comparator;
+
+    private StoppingCriterion criterion;
 
     @Inject
     private AttributeHelper helper;
 
+    @Inject
+    @ConfigurationValue(entry = OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "problem.maximise")
+    private boolean maximise;
+
+    private int maximumNumberOfGenerations;
+
+    @Inject @Dependent @Component
+    private OptimisationFunction optimisationFunction;
+
+    @Inject
+    private StoppingCriterionProducer producer;
+
+    /**
+     * Swarm size
+     */
+    private int sizeOfPopulation;
+
+    @Inject @Component
+    private StatisticsWriter statistics;
+
+    /**
+     * The used swarm implementation
+     */
+    private Swarm swarm;
+
     @Override
     public OptimisationAlgorithm init(final Instance configuration) {
-        final Instance swarmConfiguration = helper.lookup(configuration, "swarm");
-        swarm = BeanFactory.createComponent(Swarm.class, swarmConfiguration);
+        swarm = BeanFactory.createComponent(Swarm.class, helper.lookup(configuration, "swarm"));
+        criterion = producer.create(configuration);
+        maximumNumberOfGenerations = helper.lookup(configuration, "number-of-generations");
 
         return this;
     }
 
     @Override
     public void run() {
-        swarm.run();
+        int generation = 0;
+        swarm.initialise();
+
+        Iteration snapshot = new PSOIteration(generation, maximise, swarm);
+        statistics.add(snapshot);
+        while(criterion.shouldTerminate(snapshot)) {
+            generation = generation + 1;
+
+            log.info("Processing generation: {}", generation);
+
+            swarm.move(generation, maximumNumberOfGenerations);
+            swarm.evaluate();
+
+            snapshot = new PSOIteration(generation, maximise, swarm);
+            statistics.add(snapshot);
+        }
+
+        statistics.write();
     }
 }

@@ -24,7 +24,7 @@ module search {
 	}
 
 
-	configure 'threshold-accepting-algorithm' for 'example-search' {
+	configure 'local-search' for 'example-search' {
 
         //maximum number of iterations
 	    'number-of-iterations' := 200;
@@ -43,10 +43,12 @@ module search {
             ];
         };
 
-        'initial-threshold' := 10.0;
-
-        //choose threshold decreasing function
-        'decreasing-function' := 'linear-decrease' {};
+        'accepting-strategy' := 'threshold-accepting' {
+	        'initial-threshold' := 10.0;
+	
+	        //choose threshold decreasing function
+	        'decreasing-function' := 'linear-decrease' {};
+        };
 
         //initial individuals can be randomly generated, read from a file, or specified directly in this file (as seen here)
         //note that a random order means that the starting individual will be randomly selected from those specified.

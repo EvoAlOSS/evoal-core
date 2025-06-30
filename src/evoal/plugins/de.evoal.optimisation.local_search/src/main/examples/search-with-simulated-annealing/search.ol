@@ -23,7 +23,7 @@ module search {
 		};
 	}
 
-	configure 'simulated-annealing-algorithm' for 'example-search' {
+	configure 'local-search' for 'example-search' {
 
         //maximum number of iterations
 	    'number-of-iterations' := 200;
@@ -53,14 +53,16 @@ module search {
         //currently, only single-objective optimisation is supported
 		'comparator' := 'numeric-comparator' {};
 
-        //starting temperature for algorithm
-		'initial-temperature' := 50.0;
-
-		//choose cooling schedule
-        'decreasing-function' := 'geometric-decrease' { 'decrease-rate' := 0.95;};
-
-        //choose acceptance probability function
-        'acceptance-probability' := 'exponential-probability' {};
+        'accepting-strategy' := 'simulated-annealing' {
+	        //starting temperature for algorithm
+			'initial-temperature' := 50.0;
+	
+			//choose cooling schedule
+	        'decreasing-function' := 'geometric-decrease' { 'decrease-rate' := 0.95;};
+	
+	        //choose acceptance probability function
+	        'acceptance-probability' := 'exponential-probability' {};        	
+        };
 
         //we already specified the optimisation function in the problem configuration. We reference that here.
 		'optimisation-function' := 'problem-function' {};

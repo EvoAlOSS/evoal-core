@@ -24,7 +24,7 @@ module search {
 	}
 
 
-	configure 'hill-climbing-algorithm' for 'example-search' {
+	configure 'local-search' for 'example-search' {
 
         //maximum number of iterations
 	    'number-of-iterations' := 200;
@@ -42,6 +42,8 @@ module search {
                                  }
             ];
         };
+        
+        'accepting-strategy' := 'hill-climber' {};
 
         //initial individuals can be randomly generated, read from a file, or specified directly in this file (as seen here)
         //note that a random order means that the starting individual will be randomly selected from those specified.

@@ -20,8 +20,6 @@ import javax.inject.Named;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Optional;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Logs stopping criteria information for an entire iteration.
@@ -84,7 +82,7 @@ public class StoppingCritertionPerGeneration implements StatisticsWriter {
         for(int i = 0; i < stoppingCriteria.length; i++) {
             final StoppingCriterion criterion = stoppingCriteria[i];
 
-            final boolean satisfied = criterion.isSatisfied(result);
+            final boolean satisfied = criterion.shouldTerminate(result);
 
             data[i + 1] = satisfied ? 1 : 0;
         }

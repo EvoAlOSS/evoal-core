@@ -20,16 +20,17 @@ package de.evoal.optimisation.pso.api.swarm;
 import de.evoal.core.api.cdi.Component;
 import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.core.api.properties.Properties;
+import de.evoal.core.api.utils.AttributeHelper;
 import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
 import de.evoal.optimisation.pso.api.optimiser.Mover;
 import de.evoal.optimisation.pso.api.optimiser.Swarm;
 import de.evoal.optimisation.pso.main.impl.NeighborhoodTopology;
-import de.evoal.optimisation.pso.main.statistics.PSOIteration;
 import de.evoal.optimisation.api.model.InitialCandidatesProvider;
 import de.evoal.optimisation.api.model.OptimisationFunction;
 import de.evoal.optimisation.api.model.OptimisationValue;
 import de.evoal.optimisation.api.model.OptimisationValueComparator;
-import de.evoal.optimisation.api.statistics.writer.StatisticsWriter;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.enterprise.context.Dependent;
@@ -47,14 +48,11 @@ import java.util.stream.Stream;
 @Named("de.evoal.optimisation.pso.optimisation.default-swarm")
 @Slf4j
 public class DefaultSwarm implements Swarm {
-
     @Inject @Dependent @Component
     private OptimisationValueComparator comparator;
 
-    /**
-     * Current generation.
-     */
-    protected int generation = 0;
+    @Inject
+    private AttributeHelper helper;
 
     @Inject
     @ConfigurationValue(entry = OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "problem.maximise")
@@ -66,13 +64,10 @@ public class DefaultSwarm implements Swarm {
     @Inject
     private NeighborhoodTopology neighborhoodTopology;
 
-    @Inject
-    @ConfigurationValue(entry = OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.number-of-generations")
-    protected int numberOfGenerations;
-
     @Inject @Dependent @Component
     private OptimisationFunction optimisationFunction;
 
+    @Getter @Setter
     protected Particle[] particles;
 
     @Inject @Component
@@ -82,71 +77,11 @@ public class DefaultSwarm implements Swarm {
     @ConfigurationValue(entry = OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.size-of-population")
     private int sizeOfPopulation;
 
-    @Inject @Component
-    private StatisticsWriter statistics;
-
-    /**
-     * Initializes the particles in the swarm. Randomly sets initial position and evaluates malus of that position.
-     */
-    private void initializeParticles() {
-        log.info("Initializing swarm with {} members.", sizeOfPopulation);
-        final AtomicInteger counter = new AtomicInteger();
-
-        particles = ((Stream<Properties>)provider.create())
-            .limit(sizeOfPopulation)
-            .map(candidate -> {
-                final OptimisationValue ov = comparator.toValue(optimisationFunction.apply(candidate));
-                return new Particle(counter.getAndIncrement(), new State(candidate, ov), mover);
-            })
-            .toArray(Particle[]::new);
-    }
-
-    /**
-     * Evaluates the particles in the swarm.
-     */
-    protected void evaluateParticles() {
-        for (Particle particle : particles) {
-            final Properties candidate = particle.getCurrentPosition();
-            final OptimisationValue ov = comparator.toValue(optimisationFunction.apply(candidate));
-
-            particle.setCurrentFitness(ov);
-
-            if (ov.isBetter(particle.getBestFitness(), maximise)) {
-                particle.setBestPosition(particle.getCurrentPosition());
-                particle.setBestFitness(particle.getCurrentFitness());
-            }
-        }
-    }
-
-    /**
-     * Iterates the swarm.
-     */
-    @Override
-    public void run() {
-        initializeParticles();
-        logGeneration();
-
-        while(generation < numberOfGenerations) {
-            generation = generation + 1;
-
-            log.info("Processing generation: {}", generation);
-
-            moveParticles();
-            evaluateParticles();
-            logGeneration();
-        }
-
-        statistics.write();
-    }
-
-    private void logGeneration() {
-        statistics.add(new PSOIteration(generation, maximise, this));
-    }
-
     /**
      * Moves the particles in the swarm.
      */
-    protected void moveParticles() {
+    @Override
+    public void move(final int generation, final int numberOfGenerations) {
         IntStream.range(0, particles.length)
                  .parallel()
                  .forEach(i -> particles[i].moveParticle(getNeighbors(i), generation, numberOfGenerations));
@@ -165,7 +100,7 @@ public class DefaultSwarm implements Swarm {
 
     @Override
     public long size() {
-        return sizeOfPopulation;
+        return particles.length;
     }
 
     @Override
@@ -175,5 +110,37 @@ public class DefaultSwarm implements Swarm {
         System.arraycopy(particles, 0, result, 0, particles.length);
 
         return result;
+    }
+
+    /**
+     * Evaluates the particles in the swarm.
+     */
+    @Override
+    public void evaluate() {
+        for (Particle particle : particles) {
+            final Properties candidate = particle.getCurrentPosition();
+            final OptimisationValue ov = comparator.toValue(optimisationFunction.apply(candidate));
+
+            particle.setCurrentFitness(ov);
+
+            if (ov.isBetter(particle.getBestFitness(), maximise)) {
+                particle.setBestPosition(particle.getCurrentPosition());
+                particle.setBestFitness(particle.getCurrentFitness());
+            }
+        }
+    }
+
+    @Override
+    public void initialise() {
+        log.info("Initializing swarm with {} members.", sizeOfPopulation);
+        final AtomicInteger counter = new AtomicInteger();
+
+        particles = ((Stream<Properties>)provider.create())
+                .limit(sizeOfPopulation)
+                .map(candidate -> {
+                    final OptimisationValue ov = comparator.toValue(optimisationFunction.apply(candidate));
+                    return new Particle(counter.getAndIncrement(), new State(candidate, ov), mover);
+                })
+                .toArray(Particle[]::new);
     }
 }

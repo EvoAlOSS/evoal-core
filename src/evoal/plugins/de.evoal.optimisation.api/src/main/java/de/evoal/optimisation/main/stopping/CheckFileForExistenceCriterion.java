@@ -20,7 +20,7 @@ public class CheckFileForExistenceCriterion implements StoppingCriterion {
     private File file;
 
     @Override
-    public boolean isSatisfied(final Iteration iteration) {
+    public boolean shouldTerminate(final Iteration iteration) {
         return file.exists();
     }
 

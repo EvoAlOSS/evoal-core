@@ -11,6 +11,7 @@ import de.evoal.core.api.cdi.Component;
 import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
 import de.evoal.core.api.languages.AttributeEvaluator;
+import de.evoal.optimisation.api.cdi.StoppingCriterionProducer;
 import de.evoal.optimisation.api.model.InitialCandidatesProvider;
 import de.evoal.optimisation.api.model.OptimisationAlgorithm;
 import de.evoal.core.api.utils.AttributeHelper;
@@ -99,6 +100,9 @@ public class EvolutionaryAlgorithmOptimisation implements OptimisationAlgorithm 
 	@Inject @Named("initial")
 	private InitialCandidatesProvider provider;
 
+	@Inject
+	private StoppingCriterionProducer stoppingProducer;
+
 	/**
 	 * Stopping criterion.
 	 */
@@ -156,20 +160,9 @@ public class EvolutionaryAlgorithmOptimisation implements OptimisationAlgorithm 
 			}
 		}
 
-		// create list of stopping criteria
-		final List<de.evoal.languages.model.base.expressions.Instance> criteria = helper.lookup(configuration, "algorithm.stopping-criteria");
-		for(final de.evoal.languages.model.base.expressions.Instance criterion : criteria) {
-			final Predicate<? super EvolutionResult<?, OptimisationValue>> limit = new Predicate<>() {
-				private StoppingCriterion delegate = BeanFactory.createComponent(StoppingCriterion.class, criterion);
+		final StoppingCriterion criterion = stoppingProducer.create(configuration.getAlgorithm());
 
-				@Override
-				public boolean test(final EvolutionResult<?, OptimisationValue> result) {
-					return delegate.isSatisfied(new IterationAdapter(result));
-				}
-			};
-
-			stoppingCriterion = stoppingCriterion.and((Predicate)limit.negate());
-		}
+		this.stoppingCriterion = (result) -> criterion.shouldTerminate(new IterationAdapter(result));
 	}
 
 	private <G extends Gene<?, G>> Alterer<?, OptimisationValue> flattenAltererMap() {

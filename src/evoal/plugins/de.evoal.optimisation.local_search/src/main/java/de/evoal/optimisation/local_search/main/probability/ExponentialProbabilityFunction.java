@@ -31,7 +31,7 @@ public class ExponentialProbabilityFunction implements AcceptanceProbabilityFunc
     @Override
     public double apply(double[] currentFitness, double[] neighbourFitness, double temperature) {
         log.info("current malus is {}, neighbour malus is {}", currentFitness, neighbourFitness);
-        log.info("temp passed to acceptance function is {}", temperature);
+        log.info("  temp passed to acceptance function is {}", temperature);
         if ((maximise && neighbourFitness[0] > currentFitness[0]) || (!maximise && neighbourFitness[0] < currentFitness[0])) {
             log.info("neighbour malus better than current malus. Taking neighbouring solution.");
             return 1.0;
@@ -40,9 +40,11 @@ public class ExponentialProbabilityFunction implements AcceptanceProbabilityFunc
             log.info("temperature is 0.0. No changes possible");
             return 0.0;
         }
+
         int sign = maximise ? 1 : -1;
         double probability = Math.exp(sign*(neighbourFitness[0] - currentFitness[0])/temperature);
         log.info("Acceptance probability is {}", probability);
+
         return probability;
     }
 

@@ -20,7 +20,6 @@ package de.evoal.optimisation.pso.main.impl;
 import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.core.api.properties.info.PropertiesBoundaries;
 import de.evoal.core.api.properties.Properties;
-import de.evoal.optimisation.pso.api.BoundaryType;
 import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
 import de.evoal.optimisation.pso.api.swarm.Particle;
 import de.evoal.optimisation.pso.api.swarm.DefaultSwarm;
@@ -54,7 +53,8 @@ public class ARPSOSwarm extends DefaultSwarm {
     /**
      * Moves the particles by first considering the swarm diversity in order to set whether the swarm is attracting or repelling.
      */
-    protected void moveParticles() {
+    @Override
+    public void move(final int generation, final int numberOfGenerations) {
         if(mover instanceof ARPSOMover arMover) {
             //  Assess diversity and set direction on the mover
             double diversity = this.getDiversity(particles);

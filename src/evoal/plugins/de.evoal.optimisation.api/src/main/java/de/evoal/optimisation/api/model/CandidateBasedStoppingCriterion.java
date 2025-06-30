@@ -12,7 +12,7 @@ public abstract class CandidateBasedStoppingCriterion implements StoppingCriteri
     /**
      * @return {@code true} iff the algorithm should stop.
      */
-    public boolean isSatisfied(final Iteration iteration) {
+    public boolean shouldTerminate(final Iteration iteration) {
         final int iterationNumber = iteration.iteration();
         final Candidate bestCandidate = iteration.bestCandidate();
         final Optional<Integer> numberOfCandidates = iteration.candidateCount();

@@ -1,3 +1,5 @@
+import "definitions" from 'de.evoal.core.constraints';
+
 import "definitions" from de.evoal.optimisation.core;
 
 module de.evoal.optimisation.pso.optimisation {
@@ -8,7 +10,10 @@ module de.evoal.optimisation.pso.optimisation {
 	type 'particle-swarm-optimisation' extends 'algorithm' {
 	    'swarm' : instance swarm;
 	    'size-of-population'  : int;
-	    'number-of-generations' : int;
+
+	     @LowerBoundary { boundary := 0; }
+        'number-of-generations' : int := 10;
+
 	    'neighborhood-size' : int;
 	    'mover' : instance 'pso-mover';
 	    'topology' : enum topology := topology.global;

@@ -15,7 +15,7 @@ import javax.inject.Named;
 public class AcceptanceProbabilityFunctionFactory {
 
     @Inject
-    @ConfigurationValue(entry = OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.acceptance-probability")
+    @ConfigurationValue(entry = OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.accepting-strategy.acceptance-probability")
     private Instance config;
 
     /**

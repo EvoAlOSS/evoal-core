@@ -15,7 +15,7 @@ import javax.inject.Named;
 public class DecreasingFunctionFactory {
 
     @Inject
-    @ConfigurationValue(entry = OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.decreasing-function")
+    @ConfigurationValue(entry = OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.accepting-strategy.decreasing-function")
     private Instance config;
 
     /**

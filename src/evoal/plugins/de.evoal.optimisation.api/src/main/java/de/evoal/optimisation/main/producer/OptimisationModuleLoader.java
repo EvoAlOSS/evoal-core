@@ -129,6 +129,7 @@ public class OptimisationModuleLoader {
 
     private @NonNull ArrayList<URI> extractLoadingGraph(final @NonNull Injector injector, final @NonNull ArrayList<URI> loadingStack) {
         log.info("Extracting loading graph from {} initial files.", loadingStack.size());
+        loadingStack.forEach(u -> log.info("  {}", u));
         final XtextResourceSet temporarySet = injector.getInstance(XtextResourceSet.class);
         temporarySet.addLoadOption(XtextResource.OPTION_RESOLVE_ALL, Boolean.TRUE);
         temporarySet.addLoadOption(XtextResource.OPTION_ENCODING, "UTF-8");

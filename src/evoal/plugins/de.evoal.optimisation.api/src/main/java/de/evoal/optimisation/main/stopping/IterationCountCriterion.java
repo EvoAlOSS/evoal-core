@@ -19,8 +19,8 @@ public class IterationCountCriterion implements StoppingCriterion {
     private int maxIterations = 10;
 
     @Override
-    public boolean isSatisfied(final Iteration iteration) {
-        return iteration.iteration() > maxIterations;
+    public boolean shouldTerminate(final Iteration iteration) {
+        return iteration.iteration() >= maxIterations;
     }
 
     @Override

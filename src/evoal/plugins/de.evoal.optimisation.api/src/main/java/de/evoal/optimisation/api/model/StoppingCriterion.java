@@ -12,5 +12,5 @@ public interface StoppingCriterion extends EvoalComponent<StoppingCriterion> {
     /**
      * @return {@code true} iff the algorithm should stop.
      */
-    public boolean isSatisfied(final Iteration iteration);
+    public boolean shouldTerminate(final Iteration iteration);
 }
