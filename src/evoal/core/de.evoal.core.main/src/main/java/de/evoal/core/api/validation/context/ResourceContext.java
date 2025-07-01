@@ -16,6 +16,10 @@ public class ResourceContext extends DiagnosticsContext {
 
     @Override
     public String toString() {
+        if (resource == null || this.resource.getURI() == null || this.resource.getURI().toFileString() == null) {
+            return "File: Unknown";
+        }
+
         final Path localDir = Paths.get(".").toAbsolutePath();
         final Path resource = Paths.get(this.resource.getURI().toFileString());
 

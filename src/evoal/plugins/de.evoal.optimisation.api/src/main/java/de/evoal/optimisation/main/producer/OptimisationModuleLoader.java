@@ -171,7 +171,7 @@ public class OptimisationModuleLoader {
                     .forEach(f -> deps.add(temporarySet.getResource(URI.createURI("classpath:/" + f), true)));
         });
 
-        // build order
+        // collect all files to load (transitively)
         final ArrayList<Resource> loadingOrder = new ArrayList<>();
         final ArrayList<Resource> workingList = new ArrayList<>();
         workingList.add(eResource);
@@ -186,13 +186,42 @@ public class OptimisationModuleLoader {
             workingList.addAll(dependencies.getOrDefault(resource, Collections.emptySet()));
         }
 
+        // do cycle detection
+        Map<Resource, List<Set<Resource>>> cycles = findCycles(loadingOrder, dependencies);
+        Map<Resource, Integer> cycleSizes = cycles.entrySet()
+                                        .stream()
+                                        .collect(Collectors.toMap(Map.Entry::getKey, e -> e.getValue().stream().mapToInt(Set::size).sum()));
+
+        // sort them so dependencies are loaded first
         workingList.addAll(loadingOrder);
         loadingOrder.clear();
 
         while(!workingList.isEmpty()) {
-            final List<Resource> toAdd = workingList.stream()
+            List<Resource> toAdd = workingList.stream()
                             .filter(r -> loadingOrder.containsAll(dependencies.getOrDefault(r, Collections.emptySet())))
                             .toList();
+
+            if(toAdd.isEmpty()) {
+                log.info("Resolving cycle");
+                // We have a cycle that is blocking the ordering
+                int smallest = Integer.MAX_VALUE;
+                Resource smallestResource = null;
+
+                for(final Resource r : workingList) {
+                    if(!cycleSizes.containsKey(r)) {
+                        continue;
+                    }
+
+                    int size = cycleSizes.get(r);
+
+                    if(size < smallest) {
+                        smallest = size;
+                        smallestResource = r;
+                    }
+                }
+
+                toAdd = cycles.get(smallestResource).stream().flatMap(p -> p.stream()).collect(Collectors.toUnmodifiableList());
+            }
 
             loadingOrder.addAll(toAdd);
             workingList.removeAll(toAdd);
@@ -203,5 +232,40 @@ public class OptimisationModuleLoader {
         }
 
         return loadingStack;
+    }
+
+    private Map<Resource, List<Set<Resource>>> findCycles(final ArrayList<Resource> loadingOrder, Map<Resource, Set<Resource>> dependencies) {
+        final Map<Resource, List<Set<Resource>>> cycles = new HashMap<>();
+
+        for(final Resource resource : loadingOrder) {
+            cycles.put(resource, findCycles(resource, Collections.singleton(resource), resource, dependencies));
+        }
+
+        return cycles;
+    }
+
+    private List<Set<Resource>> findCycles(final Resource start, final Set<Resource> path, final Resource last, final Map<Resource, Set<Resource>> dependencies) {
+        // last dependency closed the cycle. Return the cycle.
+        if(start == last) {
+            return Collections.singletonList(path);
+        }
+
+        final Set<Resource> deps = dependencies.get(last);
+
+        // No outgoing edges for last node in path -> No path found
+        if(deps == null) {
+            return Collections.emptyList();
+        }
+
+        final List<Set<Resource>> cycles = new ArrayList<>();
+        for(final Resource dep : deps) {
+            final Set<Resource> nextPath = new HashSet<>(path);
+            nextPath.add(dep);
+
+            cycles.addAll(findCycles(start, nextPath, dep, dependencies));
+        }
+
+        return cycles;
+
     }
 }
