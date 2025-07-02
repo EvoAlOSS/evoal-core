@@ -71,7 +71,7 @@ public class ParticleSwarmAlgorithm implements OptimisationAlgorithm {
 
         Iteration snapshot = new PSOIteration(generation, maximise, swarm);
         statistics.add(snapshot);
-        while(criterion.shouldTerminate(snapshot)) {
+        while(!criterion.shouldTerminate(snapshot)) {
             generation = generation + 1;
 
             log.info("Processing generation: {}", generation);
