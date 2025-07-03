@@ -49,7 +49,7 @@ public class MultipleAttributeValidator implements MetaValidator {
 
     @Override
     public void validate(final @NonNull Resource res) {
-        log.info("Checking if  attributes are defined multiple times in '{}'.", res.getURI());
+        log.info("Checking if attribute values are defined multiple times in '{}'.", res.getURI());
 
         final DiagnosticsContext resourceContext = new ResourceContext(res);
 
@@ -87,6 +87,8 @@ public class MultipleAttributeValidator implements MetaValidator {
         while(current != null) {
             if(current instanceof Attribute attr) {
                 path = "." + attr.getDefinition().getName() + path;
+            } else if(current instanceof ClassDefinition d) {
+                path = d.getName() + path;
             } else if(current instanceof Array arr) {
                 for(int index = 0; index < arr.getValues().size(); ++index) {
                     if(child == arr.getValues().get(index)) {

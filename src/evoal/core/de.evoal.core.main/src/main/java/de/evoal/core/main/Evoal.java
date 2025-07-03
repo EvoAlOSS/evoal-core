@@ -4,22 +4,19 @@ import de.evoal.core.api.board.Blackboard;
 import de.evoal.core.api.board.BlackboardEntries;
 import de.evoal.core.api.board.CoreBlackboardEntries;
 import de.evoal.core.api.cdi.Application;
+import de.evoal.core.api.cdi.BeanFactory;
 import de.evoal.core.api.cdi.Commandline;
 import de.evoal.core.api.cdi.MainClass;
 import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.event.Observes;
 import javax.enterprise.inject.spi.Bean;
 
 import de.evoal.core.api.utils.EvoAlShutDownException;
-import de.evoal.core.api.validation.context.DiagnosticsContext;
-import de.evoal.core.api.validation.model.Diagnostics;
+import de.evoal.core.main.validation.DiagnosticsPrinter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.deltaspike.cdise.api.CdiContainer;
 import org.apache.deltaspike.cdise.api.CdiContainerLoader;
 import org.apache.deltaspike.core.api.provider.BeanProvider;
 import org.apache.deltaspike.core.util.metadata.AnnotationInstanceProvider;
-import org.fusesource.jansi.Ansi;
-import org.fusesource.jansi.AnsiConsole;
 import org.slf4j.bridge.SLF4JBridgeHandler;
 
 import java.lang.reflect.Field;
@@ -52,7 +49,6 @@ public final class Evoal {
         cdiContainer.boot();
         cdiContainer.getContextControl()
                     .startContext(ApplicationScoped.class);
-        cdiContainer.getBeanManager().fireEvent(new Diagnostics(Diagnostics.Level.Error, new DiagnosticsContext(), "asdfasdfadslkfjasdkjlfnadskjfnasdljfn"));
 
         if(args.length == 0 || args.length == 1 && "--help".equals(args[0])) {
             printUsage();
@@ -61,6 +57,8 @@ public final class Evoal {
             final Blackboard board = BeanProvider.getContextualReference(Blackboard.class);
             board.bind(CoreBlackboardEntries.LOGGING_LEVEL, "ERROR"); // bind logging level to default value
             board.readArguments(args);
+
+            final DiagnosticsPrinter printer = BeanFactory.create(DiagnosticsPrinter.class);
 
             log.info("Fetching main class");
             try {
