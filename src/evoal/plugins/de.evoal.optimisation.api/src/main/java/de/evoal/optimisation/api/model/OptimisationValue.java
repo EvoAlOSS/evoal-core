@@ -13,12 +13,12 @@ public interface OptimisationValue extends Comparable<OptimisationValue> {
         return this.compareTo(other) == 0;
     }
 
-    default boolean isBetter(final OptimisationValue other, final boolean maximise) {
-        return maximise ? this.compareTo(other) > 0 : this.compareTo(other) < 0;
+    default boolean isBetter(final OptimisationValue other) {
+        return this.compareTo(other) > 0;
     }
 
-    default boolean isWorse(final OptimisationValue other, final boolean maximise){
-        return maximise ? this.compareTo(other) < 0 : this.compareTo(other) > 0;
+    default boolean isWorse(final OptimisationValue other){
+        return this.compareTo(other) < 0;
     }
 
     double distanceFrom(final OptimisationValue other);

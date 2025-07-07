@@ -30,19 +30,13 @@ public class PSOIteration implements Iteration {
     private final int iteration;
 
     /**
-     * If we are maximising.
-     */
-    private final boolean maximise;
-
-    /**
      * Size of population.
      */
     private final long populationSize;
 
-    public PSOIteration(final int iteration, final boolean maximise, final Swarm swarm) {
+    public PSOIteration(final int iteration, final Swarm swarm) {
         log.info("Iteration {} results with {} particles.", iteration, swarm.size());
         this.iteration = iteration;
-        this.maximise = maximise;
         this.populationSize = swarm.size();
         this.individuals = Arrays.stream(swarm.getParticles())
                                 .map(Particle::toCandidate)
@@ -50,7 +44,7 @@ public class PSOIteration implements Iteration {
 
         this.bestIndividual = this.individuals.get(0);
         for(final Candidate p : this.individuals) {
-            if(p.value().isBetter(this.bestCandidate().value(), maximise)) {
+            if(p.value().isBetter(this.bestCandidate().value())) {
                 this.bestIndividual = p;
             }
         }

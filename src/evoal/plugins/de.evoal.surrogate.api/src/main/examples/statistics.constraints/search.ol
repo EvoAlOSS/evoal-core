@@ -8,19 +8,17 @@ import "definitions" from de.evoal.surrogate.optimisation;
 
 import "definitions" from de.evoal.optimisation.ea.optimisation;
 
-import "data" from search;
+import "data" from 'search';
 
-module search {
+module 'search' {
 	specify problem 'example-search-with-constraints' {
-		description := "Simple search with constraints";
-		'search-space' := [data 'x:0', data 'x:1', data 'x:2'];
-		'optimisation-space' := [data 'y:0'];
-		'maximise' := false;
-		'optimisation-function' := 'benchmark-function' {
+		search for data 'x:0', data 'x:1', data 'x:2'
+		map with 'benchmark-function' {
 			'benchmarks' := [
 				'benchmark-configuration' { function := ackley {};    reads := [data 'x:0', data 'x:1', data 'x:2']; writes := [data 'y:0']; }
 			];
-		};
+		}
+		and minimise data 'y:0'
 	}
 		
 		
@@ -106,6 +104,6 @@ module search {
             'iteration-count' { 'maximum-iterations' := 10; }
 		];
 
-		documenting:= ['constraint-statistics'{}];
+		document:= ['constraint-statistics'{}];
 	}
 }

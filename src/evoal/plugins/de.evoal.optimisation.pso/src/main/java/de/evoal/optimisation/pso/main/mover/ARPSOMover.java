@@ -65,10 +65,6 @@ public class ARPSOMover implements Mover {
     @Getter @Setter
     private int direction = 1;
 
-    @Inject
-    @ConfigurationValue(entry = OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "problem.maximise")
-    private boolean maximise;
-
     @Override
     public ARPSOMover init(final Instance configuration) {
         return this;
@@ -88,7 +84,7 @@ public class ARPSOMover implements Mover {
                              final int currentIteration,
                              final int maxIterations)
     {
-        final Properties neighborhoodBestPosition = Particle.getNeighborhoodBestPosition(neighbors, maximise);
+        final Properties neighborhoodBestPosition = Particle.getNeighborhoodBestPosition(neighbors);
 
         final Properties currentPosition = current.getPosition();
         final Double[] current_velocity = current.getVelocity();

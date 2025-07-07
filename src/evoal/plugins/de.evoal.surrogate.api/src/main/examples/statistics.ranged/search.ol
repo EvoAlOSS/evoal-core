@@ -12,15 +12,13 @@ import "data" from 'search';
 
 module 'search' {
 	specify problem 'example-search-with-ranged-correlations' {
-		description := "Simple search with ranged correlations";
-		'search-space' := [data 'x:0', data 'x:1', data 'x:2'];
-		'optimisation-space' := [data 'y:0'];
-		'maximise' := false;
-		'optimisation-function' := 'benchmark-function' {
+		search for data 'x:0', data 'x:1', data 'x:2'
+		map with 'benchmark-function' {
 			'benchmarks' := [
 				'benchmark-configuration' { function := ackley {};    reads := [data 'x:0', data 'x:1', data 'x:2']; writes := [data 'y:0']; }
 			];
-		};
+		}
+		and minimise data 'y:0'
 	}
 		
 		
@@ -100,6 +98,6 @@ module 'search' {
             'iteration-count' { 'maximum-iterations' := 10; }
 		];
 
-		documenting:= ['range-correlated'{}];
+		document := ['range-correlated'{}];
 	}
 }

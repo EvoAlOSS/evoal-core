@@ -147,13 +147,13 @@ public class Particle {
      * @param particles Java array of particles from which best position is to be determined.
      * @return position vector.
      */
-    public static Properties getNeighborhoodBestPosition(final Particle[] particles, final boolean maximise) {
+    public static Properties getNeighborhoodBestPosition(final Particle[] particles) {
         // initialise with first particle
         Particle best = particles[0];
         OptimisationValue bestFitness = best.getBestFitness();
 
         for (final Particle p : particles) {
-            if (p.getBestFitness().isBetter(bestFitness, maximise)) {
+            if (p.getBestFitness().isBetter(bestFitness)) {
                 best = p;
                 bestFitness = p.getBestFitness();
             }

@@ -6,6 +6,7 @@ package de.evoal.languages.model.ol.impl;
 import de.evoal.languages.model.ol.*;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
@@ -59,9 +60,42 @@ public class OLFactoryImpl extends EFactoryImpl implements OLFactory {
 		switch (eClass.getClassifierID()) {
 			case OLPackage.OPTIMISATION_MODULE: return createOptimisationModule();
 			case OLPackage.PROBLEM_INSTANCE: return createProblemInstance();
+			case OLPackage.MAXIMISE_GOAL: return createMaximiseGoal();
+			case OLPackage.MINIMISE_GOAL: return createMinimiseGoal();
+			case OLPackage.TARGET_GOAL: return createTargetGoal();
 			case OLPackage.ALGORITHM_INSTANCE: return createAlgorithmInstance();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object createFromString(EDataType eDataType, String initialValue) {
+		switch (eDataType.getClassifierID()) {
+			case OLPackage.DIRECTION:
+				return createDirectionFromString(eDataType, initialValue);
+			default:
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String convertToString(EDataType eDataType, Object instanceValue) {
+		switch (eDataType.getClassifierID()) {
+			case OLPackage.DIRECTION:
+				return convertDirectionToString(eDataType, instanceValue);
+			default:
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
 	}
 
@@ -93,9 +127,62 @@ public class OLFactoryImpl extends EFactoryImpl implements OLFactory {
 	 * @generated
 	 */
 	@Override
+	public MaximiseGoal createMaximiseGoal() {
+		MaximiseGoalImpl maximiseGoal = new MaximiseGoalImpl();
+		return maximiseGoal;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public MinimiseGoal createMinimiseGoal() {
+		MinimiseGoalImpl minimiseGoal = new MinimiseGoalImpl();
+		return minimiseGoal;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public TargetGoal createTargetGoal() {
+		TargetGoalImpl targetGoal = new TargetGoalImpl();
+		return targetGoal;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public AlgorithmInstance createAlgorithmInstance() {
 		AlgorithmInstanceImpl algorithmInstance = new AlgorithmInstanceImpl();
 		return algorithmInstance;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Direction createDirectionFromString(EDataType eDataType, String initialValue) {
+		Direction result = Direction.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertDirectionToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
 	}
 
 	/**

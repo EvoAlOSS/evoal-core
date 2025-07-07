@@ -16,13 +16,11 @@ import javax.inject.Named;
 import smile.math.matrix.Matrix;
 
 import de.evoal.core.api.board.Blackboard;
-import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.properties.stream.FileBasedPropertiesStreamSupplier;
 import de.evoal.core.api.properties.stream.PropertiesStreamSupplier;
 import de.evoal.languages.model.base.expressions.Instance;
-import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
 import de.evoal.optimisation.api.model.Candidate;
 import de.evoal.optimisation.api.model.Iteration;
 import de.evoal.optimisation.api.statistics.io.Writer;
@@ -60,10 +58,6 @@ public class GenerationStatisticsWriter implements StatisticsWriter {
 //    @Inject @Named("surrogate-target-properties-specification")
     private PropertiesSpecification targetSpec;
 
-
-    @Inject
-    @ConfigurationValue(entry = OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "problem.maximise")
-    private boolean maximise;
 
     private List<Properties> sourceTrainingPoints;
 
@@ -285,8 +279,8 @@ public class GenerationStatisticsWriter implements StatisticsWriter {
             firstGeneration = result;
             generationWithBestIndividual = result;
         } else {
-            int comparison = generationWithBestIndividual.bestCandidate().value().compareTo(result.bestCandidate().value());
-            if (this.maximise && comparison <= 0 || !this.maximise && comparison >= 0) {
+            boolean isBetter = generationWithBestIndividual.bestCandidate().value().isBetter(result.bestCandidate().value());
+            if (isBetter) {
                 generationWithBestIndividual = result;
             }
         }

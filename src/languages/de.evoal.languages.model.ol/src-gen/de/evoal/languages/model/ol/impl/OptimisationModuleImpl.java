@@ -34,35 +34,15 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link de.evoal.languages.model.ol.impl.OptimisationModuleImpl#getImports <em>Imports</em>}</li>
- *   <li>{@link de.evoal.languages.model.ol.impl.OptimisationModuleImpl#getProblem <em>Problem</em>}</li>
  *   <li>{@link de.evoal.languages.model.ol.impl.OptimisationModuleImpl#getAlgorithm <em>Algorithm</em>}</li>
+ *   <li>{@link de.evoal.languages.model.ol.impl.OptimisationModuleImpl#getImports <em>Imports</em>}</li>
  *   <li>{@link de.evoal.languages.model.ol.impl.OptimisationModuleImpl#getName <em>Name</em>}</li>
+ *   <li>{@link de.evoal.languages.model.ol.impl.OptimisationModuleImpl#getProblem <em>Problem</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class OptimisationModuleImpl extends MinimalEObjectImpl.Container implements OptimisationModule {
-	/**
-	 * The cached value of the '{@link #getImports() <em>Imports</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getImports()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Import> imports;
-
-	/**
-	 * The cached value of the '{@link #getProblem() <em>Problem</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getProblem()
-	 * @generated
-	 * @ordered
-	 */
-	protected ProblemInstance problem;
-
 	/**
 	 * The cached value of the '{@link #getAlgorithm() <em>Algorithm</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -72,6 +52,16 @@ public class OptimisationModuleImpl extends MinimalEObjectImpl.Container impleme
 	 * @ordered
 	 */
 	protected AlgorithmInstance algorithm;
+
+	/**
+	 * The cached value of the '{@link #getImports() <em>Imports</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getImports()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Import> imports;
 
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -92,6 +82,16 @@ public class OptimisationModuleImpl extends MinimalEObjectImpl.Container impleme
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getProblem() <em>Problem</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getProblem()
+	 * @generated
+	 * @ordered
+	 */
+	protected ProblemInstance problem;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -246,12 +246,12 @@ public class OptimisationModuleImpl extends MinimalEObjectImpl.Container impleme
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case OLPackage.OPTIMISATION_MODULE__ALGORITHM:
+				return basicSetAlgorithm(null, msgs);
 			case OLPackage.OPTIMISATION_MODULE__IMPORTS:
 				return ((InternalEList<?>)getImports()).basicRemove(otherEnd, msgs);
 			case OLPackage.OPTIMISATION_MODULE__PROBLEM:
 				return basicSetProblem(null, msgs);
-			case OLPackage.OPTIMISATION_MODULE__ALGORITHM:
-				return basicSetAlgorithm(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -264,14 +264,14 @@ public class OptimisationModuleImpl extends MinimalEObjectImpl.Container impleme
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case OLPackage.OPTIMISATION_MODULE__IMPORTS:
-				return getImports();
-			case OLPackage.OPTIMISATION_MODULE__PROBLEM:
-				return getProblem();
 			case OLPackage.OPTIMISATION_MODULE__ALGORITHM:
 				return getAlgorithm();
+			case OLPackage.OPTIMISATION_MODULE__IMPORTS:
+				return getImports();
 			case OLPackage.OPTIMISATION_MODULE__NAME:
 				return getName();
+			case OLPackage.OPTIMISATION_MODULE__PROBLEM:
+				return getProblem();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -285,18 +285,18 @@ public class OptimisationModuleImpl extends MinimalEObjectImpl.Container impleme
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case OLPackage.OPTIMISATION_MODULE__ALGORITHM:
+				setAlgorithm((AlgorithmInstance)newValue);
+				return;
 			case OLPackage.OPTIMISATION_MODULE__IMPORTS:
 				getImports().clear();
 				getImports().addAll((Collection<? extends Import>)newValue);
 				return;
-			case OLPackage.OPTIMISATION_MODULE__PROBLEM:
-				setProblem((ProblemInstance)newValue);
-				return;
-			case OLPackage.OPTIMISATION_MODULE__ALGORITHM:
-				setAlgorithm((AlgorithmInstance)newValue);
-				return;
 			case OLPackage.OPTIMISATION_MODULE__NAME:
 				setName((String)newValue);
+				return;
+			case OLPackage.OPTIMISATION_MODULE__PROBLEM:
+				setProblem((ProblemInstance)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -310,17 +310,17 @@ public class OptimisationModuleImpl extends MinimalEObjectImpl.Container impleme
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case OLPackage.OPTIMISATION_MODULE__IMPORTS:
-				getImports().clear();
-				return;
-			case OLPackage.OPTIMISATION_MODULE__PROBLEM:
-				setProblem((ProblemInstance)null);
-				return;
 			case OLPackage.OPTIMISATION_MODULE__ALGORITHM:
 				setAlgorithm((AlgorithmInstance)null);
 				return;
+			case OLPackage.OPTIMISATION_MODULE__IMPORTS:
+				getImports().clear();
+				return;
 			case OLPackage.OPTIMISATION_MODULE__NAME:
 				setName(NAME_EDEFAULT);
+				return;
+			case OLPackage.OPTIMISATION_MODULE__PROBLEM:
+				setProblem((ProblemInstance)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -334,14 +334,14 @@ public class OptimisationModuleImpl extends MinimalEObjectImpl.Container impleme
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case OLPackage.OPTIMISATION_MODULE__IMPORTS:
-				return imports != null && !imports.isEmpty();
-			case OLPackage.OPTIMISATION_MODULE__PROBLEM:
-				return problem != null;
 			case OLPackage.OPTIMISATION_MODULE__ALGORITHM:
 				return algorithm != null;
+			case OLPackage.OPTIMISATION_MODULE__IMPORTS:
+				return imports != null && !imports.isEmpty();
 			case OLPackage.OPTIMISATION_MODULE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case OLPackage.OPTIMISATION_MODULE__PROBLEM:
+				return problem != null;
 		}
 		return super.eIsSet(featureID);
 	}

@@ -32,6 +32,7 @@ public class OptimisationLanguageParser extends AbstractContentAssistParser {
 		}
 		
 		private static void init(ImmutableMap.Builder<AbstractElement, String> builder, OptimisationLanguageGrammarAccess grammarAccess) {
+			builder.put(grammarAccess.getOptimisationGoalRuleAccess().getAlternatives(), "rule__OptimisationGoalRule__Alternatives");
 			builder.put(grammarAccess.getReadExpressionRuleAccess().getAlternatives(), "rule__ReadExpressionRule__Alternatives");
 			builder.put(grammarAccess.getReferenceRuleAccess().getAlternatives(), "rule__ReferenceRule__Alternatives");
 			builder.put(grammarAccess.getTypeDefinitionReferenceRuleAccess().getAlternatives(), "rule__TypeDefinitionReferenceRule__Alternatives");
@@ -47,7 +48,12 @@ public class OptimisationLanguageParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getFactorRuleAccess().getAlternatives(), "rule__FactorRule__Alternatives");
 			builder.put(grammarAccess.getOptimisationModelRuleAccess().getGroup(), "rule__OptimisationModelRule__Group__0");
 			builder.put(grammarAccess.getProblemRuleAccess().getGroup(), "rule__ProblemRule__Group__0");
-			builder.put(grammarAccess.getProblemRuleAccess().getGroup_5(), "rule__ProblemRule__Group_5__0");
+			builder.put(grammarAccess.getProblemRuleAccess().getGroup_7(), "rule__ProblemRule__Group_7__0");
+			builder.put(grammarAccess.getProblemRuleAccess().getGroup_13(), "rule__ProblemRule__Group_13__0");
+			builder.put(grammarAccess.getProblemRuleAccess().getGroup_14(), "rule__ProblemRule__Group_14__0");
+			builder.put(grammarAccess.getMaximiseGoalRuleAccess().getGroup(), "rule__MaximiseGoalRule__Group__0");
+			builder.put(grammarAccess.getMinimiseGoalRuleAccess().getGroup(), "rule__MinimiseGoalRule__Group__0");
+			builder.put(grammarAccess.getTargetGoalRuleAccess().getGroup(), "rule__TargetGoalRule__Group__0");
 			builder.put(grammarAccess.getAlgorithmInstanceRuleAccess().getGroup(), "rule__AlgorithmInstanceRule__Group__0");
 			builder.put(grammarAccess.getAlgorithmInstanceRuleAccess().getGroup_6(), "rule__AlgorithmInstanceRule__Group_6__0");
 			builder.put(grammarAccess.getOrExpressionRuleAccess().getGroup(), "rule__OrExpressionRule__Group__0");
@@ -110,8 +116,16 @@ public class OptimisationLanguageParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getOptimisationModelRuleAccess().getAlgorithmAssignment_5(), "rule__OptimisationModelRule__AlgorithmAssignment_5");
 			builder.put(grammarAccess.getProblemRuleAccess().getDefinitionAssignment_1(), "rule__ProblemRule__DefinitionAssignment_1");
 			builder.put(grammarAccess.getProblemRuleAccess().getNameAssignment_2(), "rule__ProblemRule__NameAssignment_2");
-			builder.put(grammarAccess.getProblemRuleAccess().getAttributesAssignment_4(), "rule__ProblemRule__AttributesAssignment_4");
-			builder.put(grammarAccess.getProblemRuleAccess().getDocumentationAssignment_5_2(), "rule__ProblemRule__DocumentationAssignment_5_2");
+			builder.put(grammarAccess.getProblemRuleAccess().getSearchSpaceAssignment_6(), "rule__ProblemRule__SearchSpaceAssignment_6");
+			builder.put(grammarAccess.getProblemRuleAccess().getSearchSpaceAssignment_7_1(), "rule__ProblemRule__SearchSpaceAssignment_7_1");
+			builder.put(grammarAccess.getProblemRuleAccess().getOptimisationFunctionAssignment_10(), "rule__ProblemRule__OptimisationFunctionAssignment_10");
+			builder.put(grammarAccess.getProblemRuleAccess().getOptimisationSpaceAssignment_12(), "rule__ProblemRule__OptimisationSpaceAssignment_12");
+			builder.put(grammarAccess.getProblemRuleAccess().getOptimisationSpaceAssignment_13_1(), "rule__ProblemRule__OptimisationSpaceAssignment_13_1");
+			builder.put(grammarAccess.getProblemRuleAccess().getDocumentationAssignment_14_1(), "rule__ProblemRule__DocumentationAssignment_14_1");
+			builder.put(grammarAccess.getMaximiseGoalRuleAccess().getDataAssignment_1(), "rule__MaximiseGoalRule__DataAssignment_1");
+			builder.put(grammarAccess.getMinimiseGoalRuleAccess().getDataAssignment_1(), "rule__MinimiseGoalRule__DataAssignment_1");
+			builder.put(grammarAccess.getTargetGoalRuleAccess().getDataAssignment_1(), "rule__TargetGoalRule__DataAssignment_1");
+			builder.put(grammarAccess.getTargetGoalRuleAccess().getValueAssignment_3(), "rule__TargetGoalRule__ValueAssignment_3");
 			builder.put(grammarAccess.getAlgorithmInstanceRuleAccess().getDefinitionAssignment_1(), "rule__AlgorithmInstanceRule__DefinitionAssignment_1");
 			builder.put(grammarAccess.getAlgorithmInstanceRuleAccess().getProblemAssignment_3(), "rule__AlgorithmInstanceRule__ProblemAssignment_3");
 			builder.put(grammarAccess.getAlgorithmInstanceRuleAccess().getAttributesAssignment_5(), "rule__AlgorithmInstanceRule__AttributesAssignment_5");

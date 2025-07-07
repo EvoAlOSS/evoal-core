@@ -47,9 +47,12 @@ import de.evoal.languages.model.base.types.StringType;
 import de.evoal.languages.model.base.types.TypesPackage;
 import de.evoal.languages.model.base.types.VoidType;
 import de.evoal.languages.model.ol.AlgorithmInstance;
+import de.evoal.languages.model.ol.MaximiseGoal;
+import de.evoal.languages.model.ol.MinimiseGoal;
 import de.evoal.languages.model.ol.OLPackage;
 import de.evoal.languages.model.ol.OptimisationModule;
 import de.evoal.languages.model.ol.ProblemInstance;
+import de.evoal.languages.model.ol.TargetGoal;
 import de.evoal.languages.model.ol.dsl.services.OptimisationLanguageGrammarAccess;
 import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
@@ -58,6 +61,8 @@ import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Parameter;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.serializer.ISerializationContext;
+import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
+import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 
 @SuppressWarnings("all")
 public class OptimisationLanguageSemanticSequencer extends BaseLanguageSemanticSequencer {
@@ -179,11 +184,20 @@ public class OptimisationLanguageSemanticSequencer extends BaseLanguageSemanticS
 			case OLPackage.ALGORITHM_INSTANCE:
 				sequence_AlgorithmInstanceRule(context, (AlgorithmInstance) semanticObject); 
 				return; 
+			case OLPackage.MAXIMISE_GOAL:
+				sequence_MaximiseGoalRule(context, (MaximiseGoal) semanticObject); 
+				return; 
+			case OLPackage.MINIMISE_GOAL:
+				sequence_MinimiseGoalRule(context, (MinimiseGoal) semanticObject); 
+				return; 
 			case OLPackage.OPTIMISATION_MODULE:
 				sequence_OptimisationModelRule(context, (OptimisationModule) semanticObject); 
 				return; 
 			case OLPackage.PROBLEM_INSTANCE:
 				sequence_ProblemRule(context, (ProblemInstance) semanticObject); 
+				return; 
+			case OLPackage.TARGET_GOAL:
+				sequence_TargetGoalRule(context, (TargetGoal) semanticObject); 
 				return; 
 			}
 		else if (epackage == TypesPackage.eINSTANCE)
@@ -251,6 +265,48 @@ public class OptimisationLanguageSemanticSequencer extends BaseLanguageSemanticS
 	/**
 	 * <pre>
 	 * Contexts:
+	 *     OptimisationGoalRule returns MaximiseGoal
+	 *     MaximiseGoalRule returns MaximiseGoal
+	 *
+	 * Constraint:
+	 *     data=TypeDefinitionReferenceRule
+	 * </pre>
+	 */
+	protected void sequence_MaximiseGoalRule(ISerializationContext context, MaximiseGoal semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, OLPackage.Literals.OPTIMISATION_GOAL__DATA) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, OLPackage.Literals.OPTIMISATION_GOAL__DATA));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getMaximiseGoalRuleAccess().getDataTypeDefinitionReferenceRuleParserRuleCall_1_0(), semanticObject.getData());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     OptimisationGoalRule returns MinimiseGoal
+	 *     MinimiseGoalRule returns MinimiseGoal
+	 *
+	 * Constraint:
+	 *     data=TypeDefinitionReferenceRule
+	 * </pre>
+	 */
+	protected void sequence_MinimiseGoalRule(ISerializationContext context, MinimiseGoal semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, OLPackage.Literals.OPTIMISATION_GOAL__DATA) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, OLPackage.Literals.OPTIMISATION_GOAL__DATA));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getMinimiseGoalRuleAccess().getDataTypeDefinitionReferenceRuleParserRuleCall_1_0(), semanticObject.getData());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
 	 *     OptimisationModelRule returns OptimisationModule
 	 *
 	 * Constraint:
@@ -268,11 +324,44 @@ public class OptimisationLanguageSemanticSequencer extends BaseLanguageSemanticS
 	 *     ProblemRule returns ProblemInstance
 	 *
 	 * Constraint:
-	 *     (definition=[ClassDefinition|QualifiedName] name=StringOrId attributes+=AttributeRule* documentation=ArrayRule?)
+	 *     (
+	 *         definition=[ClassDefinition|QualifiedName] 
+	 *         name=StringOrId 
+	 *         searchSpace+=TypeDefinitionReferenceRule 
+	 *         searchSpace+=TypeDefinitionReferenceRule* 
+	 *         optimisationFunction=InstanceLiteralRule 
+	 *         optimisationSpace+=OptimisationGoalRule 
+	 *         optimisationSpace+=OptimisationGoalRule* 
+	 *         documentation=ArrayRule?
+	 *     )
 	 * </pre>
 	 */
 	protected void sequence_ProblemRule(ISerializationContext context, ProblemInstance semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     OptimisationGoalRule returns TargetGoal
+	 *     TargetGoalRule returns TargetGoal
+	 *
+	 * Constraint:
+	 *     (data=TypeDefinitionReferenceRule value=LiteralRule)
+	 * </pre>
+	 */
+	protected void sequence_TargetGoalRule(ISerializationContext context, TargetGoal semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, OLPackage.Literals.OPTIMISATION_GOAL__DATA) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, OLPackage.Literals.OPTIMISATION_GOAL__DATA));
+			if (transientValues.isValueTransient(semanticObject, OLPackage.Literals.TARGET_GOAL__VALUE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, OLPackage.Literals.TARGET_GOAL__VALUE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getTargetGoalRuleAccess().getDataTypeDefinitionReferenceRuleParserRuleCall_1_0(), semanticObject.getData());
+		feeder.accept(grammarAccess.getTargetGoalRuleAccess().getValueLiteralRuleParserRuleCall_3_0(), semanticObject.getValue());
+		feeder.finish();
 	}
 	
 	

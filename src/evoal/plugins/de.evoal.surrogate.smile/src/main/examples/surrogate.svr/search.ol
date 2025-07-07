@@ -6,13 +6,20 @@ import "definitions" from de.evoal.surrogate.optimisation;
 
 import "data" from surrogate;
 
-module search {
+module 'search' {
 	specify problem 'example-search' {
-		description := "Simple search";
-		'search-space' := [data 'x:0'];
-		'optimisation-space' := [data 'y:0', data 'y:1', data 'y:2', data 'y:3', data 'y:4', data 'y:5', data 'y:6', data 'y:7'];
-		'maximise' := true;
-		'optimisation-function' := 'unknown-function' {};
+		search for data 'x:0'
+		
+		map with 'unknown-function' {}
+		
+		and maximise data 'y:0',
+		    maximise data 'y:1',
+		    maximise data 'y:2',
+			maximise data 'y:3',
+			maximise data 'y:4',
+			maximise data 'y:5',
+			maximise data 'y:6',
+			maximise data 'y:7'
 	}
 		
 		
@@ -79,7 +86,7 @@ module search {
             'iteration-count' { 'maximum-iterations' := 10; }
 		];
 
-		documenting := [
+		document := [
            'best-candidate-per-iteration' {},
            'candidates-per-iteration' {},
 		    'prediction-per-individual' {

@@ -14,14 +14,20 @@ import org.eclipse.emf.ecore.EObject;
  * A representation of the model object '<em><b>Optimisation Module</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * 
+ * Root model element for the optimisation model.
+ * 
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link de.evoal.languages.model.ol.OptimisationModule#getImports <em>Imports</em>}</li>
- *   <li>{@link de.evoal.languages.model.ol.OptimisationModule#getProblem <em>Problem</em>}</li>
  *   <li>{@link de.evoal.languages.model.ol.OptimisationModule#getAlgorithm <em>Algorithm</em>}</li>
+ *   <li>{@link de.evoal.languages.model.ol.OptimisationModule#getImports <em>Imports</em>}</li>
  *   <li>{@link de.evoal.languages.model.ol.OptimisationModule#getName <em>Name</em>}</li>
+ *   <li>{@link de.evoal.languages.model.ol.OptimisationModule#getProblem <em>Problem</em>}</li>
  * </ul>
  *
  * @see de.evoal.languages.model.ol.OLPackage#getOptimisationModule()
@@ -34,6 +40,11 @@ public interface OptimisationModule extends EObject {
 	 * The list contents are of type {@link de.evoal.languages.model.base.Import}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * 
+	 * List of import statements.
+	 * 
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Imports</em>' containment reference list.
 	 * @see de.evoal.languages.model.ol.OLPackage#getOptimisationModule_Imports()
 	 * @model containment="true"
@@ -45,6 +56,11 @@ public interface OptimisationModule extends EObject {
 	 * Returns the value of the '<em><b>Problem</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * 
+	 * The problem specification.
+	 * 
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Problem</em>' containment reference.
 	 * @see #setProblem(ProblemInstance)
 	 * @see de.evoal.languages.model.ol.OLPackage#getOptimisationModule_Problem()
@@ -67,6 +83,11 @@ public interface OptimisationModule extends EObject {
 	 * Returns the value of the '<em><b>Algorithm</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * 
+	 * An algorithm specification.
+	 * 
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Algorithm</em>' containment reference.
 	 * @see #setAlgorithm(AlgorithmInstance)
 	 * @see de.evoal.languages.model.ol.OLPackage#getOptimisationModule_Algorithm()
@@ -89,6 +110,11 @@ public interface OptimisationModule extends EObject {
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * 
+	 * Name of the module.
+	 * 
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
 	 * @see de.evoal.languages.model.ol.OLPackage#getOptimisationModule_Name()

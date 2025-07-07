@@ -83,6 +83,22 @@ public class OLAdapterFactory extends AdapterFactoryImpl {
 				return createProblemInstanceAdapter();
 			}
 			@Override
+			public Adapter caseOptimisationGoal(OptimisationGoal object) {
+				return createOptimisationGoalAdapter();
+			}
+			@Override
+			public Adapter caseMaximiseGoal(MaximiseGoal object) {
+				return createMaximiseGoalAdapter();
+			}
+			@Override
+			public Adapter caseMinimiseGoal(MinimiseGoal object) {
+				return createMinimiseGoalAdapter();
+			}
+			@Override
+			public Adapter caseTargetGoal(TargetGoal object) {
+				return createTargetGoalAdapter();
+			}
+			@Override
 			public Adapter caseAlgorithmInstance(AlgorithmInstance object) {
 				return createAlgorithmInstanceAdapter();
 			}
@@ -151,6 +167,62 @@ public class OLAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createProblemInstanceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.ol.OptimisationGoal <em>Optimisation Goal</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.evoal.languages.model.ol.OptimisationGoal
+	 * @generated
+	 */
+	public Adapter createOptimisationGoalAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.ol.MaximiseGoal <em>Maximise Goal</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.evoal.languages.model.ol.MaximiseGoal
+	 * @generated
+	 */
+	public Adapter createMaximiseGoalAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.ol.MinimiseGoal <em>Minimise Goal</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.evoal.languages.model.ol.MinimiseGoal
+	 * @generated
+	 */
+	public Adapter createMinimiseGoalAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.ol.TargetGoal <em>Target Goal</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.evoal.languages.model.ol.TargetGoal
+	 * @generated
+	 */
+	public Adapter createTargetGoalAdapter() {
 		return null;
 	}
 

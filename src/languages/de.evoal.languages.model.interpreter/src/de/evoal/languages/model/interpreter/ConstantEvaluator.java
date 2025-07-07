@@ -8,7 +8,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.evoal.languages.model.base.definitions.ConstantDefinition;
-import de.evoal.languages.model.base.expressions.DefinitionReference;
 import de.evoal.languages.model.base.expressions.LiteralDefinitionReference;
 
 

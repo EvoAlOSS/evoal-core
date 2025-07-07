@@ -48,7 +48,6 @@ public class OptimisationComponentProducer {
         return create(OptimisationValueComparator.class, OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, "algorithm.comparator");
     }
 
-
     @Produces
     @Dependent
     @Component

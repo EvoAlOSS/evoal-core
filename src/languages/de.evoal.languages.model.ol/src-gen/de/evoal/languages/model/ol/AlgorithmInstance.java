@@ -11,6 +11,12 @@ import de.evoal.languages.model.base.expressions.Instance;
  * A representation of the model object '<em><b>Algorithm Instance</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * 
+ * An optimisation algirthm instance.
+ * 
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * </p>
@@ -28,6 +34,11 @@ public interface AlgorithmInstance extends Instance {
 	 * Returns the value of the '<em><b>Problem</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * 
+	 * The problem to solve.
+	 * 
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Problem</em>' reference.
 	 * @see #setProblem(ProblemInstance)
 	 * @see de.evoal.languages.model.ol.OLPackage#getAlgorithmInstance_Problem()
@@ -50,6 +61,11 @@ public interface AlgorithmInstance extends Instance {
 	 * Returns the value of the '<em><b>Documentation</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * 
+	 * The data to log.
+	 * 
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Documentation</em>' containment reference.
 	 * @see #setDocumentation(Array)
 	 * @see de.evoal.languages.model.ol.OLPackage#getAlgorithmInstance_Documentation()

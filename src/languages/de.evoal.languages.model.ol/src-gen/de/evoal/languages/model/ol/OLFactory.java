@@ -41,6 +41,33 @@ public interface OLFactory extends EFactory {
 	ProblemInstance createProblemInstance();
 
 	/**
+	 * Returns a new object of class '<em>Maximise Goal</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Maximise Goal</em>'.
+	 * @generated
+	 */
+	MaximiseGoal createMaximiseGoal();
+
+	/**
+	 * Returns a new object of class '<em>Minimise Goal</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Minimise Goal</em>'.
+	 * @generated
+	 */
+	MinimiseGoal createMinimiseGoal();
+
+	/**
+	 * Returns a new object of class '<em>Target Goal</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Target Goal</em>'.
+	 * @generated
+	 */
+	TargetGoal createTargetGoal();
+
+	/**
 	 * Returns a new object of class '<em>Algorithm Instance</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

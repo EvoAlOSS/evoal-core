@@ -1,7 +1,7 @@
 import "definitions" from de.evoal.core.api.utils.definitions;
 
 
-module de.evoal.core.api.utils.regressions.LangiageHelperTest {
+module de.evoal.core.api.utils.regressions.LanguageHelperTest {
 	declare 'p' as parent {
 		child := A {
 			'boolean-field' := true;	
@@ -15,6 +15,6 @@ module de.evoal.core.api.utils.regressions.LangiageHelperTest {
 				[42]
 			];
 		};
-	} documenting := [];
+	} document := [];
 	
 }

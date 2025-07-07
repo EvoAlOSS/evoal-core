@@ -62,10 +62,6 @@ public class BasicMover implements Mover {
     @ConfigurationValue(entry = OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.mover.c2")
     private double c2;
 
-    @Inject
-    @ConfigurationValue(entry = OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "problem.maximise")
-    private boolean maximise;
-
     @Override
     public BasicMover init(final Instance configuration) {
         return this;
@@ -85,7 +81,7 @@ public class BasicMover implements Mover {
                              final Particle[] neighbors,
                              final int currentIteration,
                              int maxIterations) {
-        final Properties neighborhoodBestPosition = Particle.getNeighborhoodBestPosition(neighbors, maximise);
+        final Properties neighborhoodBestPosition = Particle.getNeighborhoodBestPosition(neighbors);
 
         final Properties currentPosition = current.getPosition();
         final Double[] currentVelocity = current.getVelocity();

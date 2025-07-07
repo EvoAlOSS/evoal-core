@@ -6,15 +6,19 @@ import lombok.Getter;
 import lombok.NonNull;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.function.Function;
 
 public class WeightedSumOptimisationValue implements OptimisationValue {
     @Getter
     private final @NonNull double[] fitnessValues;
     private final @NonNull double[] normalizedWeights;
+    private Function<Double, Double> valueConversions[];
 
-    private WeightedSumOptimisationValue(final @NonNull double[] weights, final @NonNull double[] fitnessValues) {
+    private WeightedSumOptimisationValue(final @NonNull  List<Function<Double, Double>> valueConversions, final @NonNull double[] weights, final @NonNull double[] fitnessValues) {
         Requirements.requireSameSize(weights, fitnessValues);
 
+        this.valueConversions = valueConversions.toArray(s -> new Function[s]);
         this.normalizedWeights = new double[weights.length];
         System.arraycopy(weights, 0, normalizedWeights, 0, weights.length);
         this.fitnessValues = fitnessValues;
@@ -25,13 +29,13 @@ public class WeightedSumOptimisationValue implements OptimisationValue {
         }
     }
 
-    public static WeightedSumOptimisationValue of(final double [] weights, final double [] fitnessValues) {
-        return new WeightedSumOptimisationValue(weights, fitnessValues);
+    public static WeightedSumOptimisationValue of(List<Function<Double, Double>> valueConversions, final double [] weights, final double [] fitnessValues) {
+        return new WeightedSumOptimisationValue(valueConversions, weights, fitnessValues);
     }
 
     @Override
     public int compareTo(final @NonNull OptimisationValue other) {
-        if(!(other instanceof WeightedSumOptimisationValue)) {
+        if(!(other instanceof WeightedSumOptimisationValue otherValue)) {
             throw new IllegalArgumentException("Only allowed to compare WeightedSumFitnessValue");
         }
 
@@ -39,11 +43,11 @@ public class WeightedSumOptimisationValue implements OptimisationValue {
         double otherFitness = 0.0;
 
         for(int index = 0; index < fitnessValues.length; ++index) {
-            ownFitness = ownFitness + this.normalizedWeights[index] * Math.abs(this.fitnessValues[index]);
-            otherFitness = otherFitness + this.normalizedWeights[index] * Math.abs(((WeightedSumOptimisationValue)other).getFitnessValues()[index]);
+            ownFitness   += this.normalizedWeights[index] * this.valueConversions[index].apply(Math.abs(this.fitnessValues[index]));
+            otherFitness += this.normalizedWeights[index] * this.valueConversions[index].apply(Math.abs(otherValue.getFitnessValues()[index]));
         }
 
-        return ownFitness == otherFitness ? 0 : (int)Math.signum(ownFitness - otherFitness);
+        return Double.compare(ownFitness, otherFitness);
     }
 
     @Override

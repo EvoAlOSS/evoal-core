@@ -54,10 +54,6 @@ public class DefaultSwarm implements Swarm {
     @Inject
     private AttributeHelper helper;
 
-    @Inject
-    @ConfigurationValue(entry = OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "problem.maximise")
-    private boolean maximise;
-
     @Inject @Dependent @Component @ConfigurationValue(entry = OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.mover")
     protected Mover mover;
 
@@ -123,7 +119,7 @@ public class DefaultSwarm implements Swarm {
 
             particle.setCurrentFitness(ov);
 
-            if (ov.isBetter(particle.getBestFitness(), maximise)) {
+            if (ov.isBetter(particle.getBestFitness())) {
                 particle.setBestPosition(particle.getCurrentPosition());
                 particle.setBestFitness(particle.getCurrentFitness());
             }

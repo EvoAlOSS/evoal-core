@@ -1,5 +1,6 @@
 package de.evoal.optimisation.local_search.main.accepting;
 
+import de.evoal.core.api.cdi.Component;
 import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.utils.InitializationException;
@@ -23,7 +24,7 @@ public class SimulatedAnnealingStrategy implements AcceptingStrategy {
 
     private final Random random = new Random();
 
-    @Inject @Named("comparator")
+    @Inject @Dependent @Component
     private OptimisationValueComparator comparator;
 
     @Inject
@@ -37,10 +38,6 @@ public class SimulatedAnnealingStrategy implements AcceptingStrategy {
     @Inject
     @Named("optimisation-function")
     private OptimisationFunction fitness;
-
-    @Inject
-    @ConfigurationValue(entry = OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "problem.maximise")
-    private boolean maximise;
 
     @Inject
     @Named("acceptance-function")

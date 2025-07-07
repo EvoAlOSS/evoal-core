@@ -8,15 +8,37 @@
   <foreignModel>model.ecore</foreignModel>
   <genPackages prefix="OL" basePackage="de.evoal.languages.model" disposableProviderFactory="true"
       fileExtensions="ol" ecorePackage="model.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="model.ecore#//Direction">
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//Direction/Maximise"/>
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//Direction/Minimise"/>
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//Direction/Target"/>
+    </genEnums>
     <genClasses ecoreClass="model.ecore#//OptimisationModule">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//OptimisationModule/imports"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//OptimisationModule/problem"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//OptimisationModule/algorithm"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//OptimisationModule/imports"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//OptimisationModule/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//OptimisationModule/problem"/>
     </genClasses>
     <genClasses ecoreClass="model.ecore#//ProblemInstance">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//ProblemInstance/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//ProblemInstance/documentation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//ProblemInstance/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//ProblemInstance/optimisationFunction"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//ProblemInstance/optimisationSpace"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//ProblemInstance/searchSpace"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//OptimisationGoal">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//OptimisationGoal/data"/>
+      <genOperations ecoreOperation="model.ecore#//OptimisationGoal/getDirection"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//MaximiseGoal">
+      <genOperations ecoreOperation="model.ecore#//MaximiseGoal/getDirection" body="return Direction.MAXIMISE;"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//MinimiseGoal">
+      <genOperations ecoreOperation="model.ecore#//MinimiseGoal/getDirection" body="return Direction.MINIMISE;"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//TargetGoal">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//TargetGoal/value"/>
+      <genOperations ecoreOperation="model.ecore#//TargetGoal/getDirection" body="return Direction.TARGET;"/>
     </genClasses>
     <genClasses ecoreClass="model.ecore#//AlgorithmInstance">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//AlgorithmInstance/problem"/>

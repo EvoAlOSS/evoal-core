@@ -90,6 +90,33 @@ public class OLSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case OLPackage.OPTIMISATION_GOAL: {
+				OptimisationGoal optimisationGoal = (OptimisationGoal)theEObject;
+				T result = caseOptimisationGoal(optimisationGoal);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case OLPackage.MAXIMISE_GOAL: {
+				MaximiseGoal maximiseGoal = (MaximiseGoal)theEObject;
+				T result = caseMaximiseGoal(maximiseGoal);
+				if (result == null) result = caseOptimisationGoal(maximiseGoal);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case OLPackage.MINIMISE_GOAL: {
+				MinimiseGoal minimiseGoal = (MinimiseGoal)theEObject;
+				T result = caseMinimiseGoal(minimiseGoal);
+				if (result == null) result = caseOptimisationGoal(minimiseGoal);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case OLPackage.TARGET_GOAL: {
+				TargetGoal targetGoal = (TargetGoal)theEObject;
+				T result = caseTargetGoal(targetGoal);
+				if (result == null) result = caseOptimisationGoal(targetGoal);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case OLPackage.ALGORITHM_INSTANCE: {
 				AlgorithmInstance algorithmInstance = (AlgorithmInstance)theEObject;
 				T result = caseAlgorithmInstance(algorithmInstance);
@@ -132,6 +159,66 @@ public class OLSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseProblemInstance(ProblemInstance object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Optimisation Goal</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Optimisation Goal</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseOptimisationGoal(OptimisationGoal object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Maximise Goal</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Maximise Goal</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseMaximiseGoal(MaximiseGoal object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Minimise Goal</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Minimise Goal</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseMinimiseGoal(MinimiseGoal object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Target Goal</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Target Goal</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTargetGoal(TargetGoal object) {
 		return null;
 	}
 

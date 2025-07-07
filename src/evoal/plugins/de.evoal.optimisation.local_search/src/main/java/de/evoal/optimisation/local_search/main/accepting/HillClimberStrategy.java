@@ -1,5 +1,6 @@
 package de.evoal.optimisation.local_search.main.accepting;
 
+import de.evoal.core.api.cdi.Component;
 import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.core.api.properties.Properties;
 import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
@@ -20,21 +21,14 @@ public class HillClimberStrategy implements AcceptingStrategy {
     @Named("optimisation-function")
     private OptimisationFunction fitness;
 
-    @Inject @Named("comparator")
+    @Inject @Dependent @Component
     private OptimisationValueComparator comparator;
-
-    @Inject
-    @ConfigurationValue(entry = OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "problem.maximise")
-    private boolean maximise;
 
     @Override
     public boolean acceptCandidate(final Properties candidate, final OptimisationValue bestFitnessValue) {
         final double[] candidateFitness = fitness.evaluate(candidate);
         final OptimisationValue alternateBestValue = comparator.apply(candidateFitness);
-        if(maximise) {
-            return alternateBestValue.compareTo(bestFitnessValue) > 0;
-        } else {
-            return alternateBestValue.compareTo(bestFitnessValue) < 0;
-        }
+
+        return alternateBestValue.isBetter(bestFitnessValue);
     }
 }

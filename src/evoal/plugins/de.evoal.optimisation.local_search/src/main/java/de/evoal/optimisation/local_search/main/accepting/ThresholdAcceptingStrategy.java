@@ -1,5 +1,6 @@
 package de.evoal.optimisation.local_search.main.accepting;
 
+import de.evoal.core.api.cdi.Component;
 import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.core.api.properties.Properties;
 import de.evoal.languages.model.base.expressions.Instance;
@@ -24,12 +25,8 @@ public class ThresholdAcceptingStrategy implements AcceptingStrategy {
     @Named("optimisation-function")
     private OptimisationFunction fitness;
 
-    @Inject @Named("comparator")
+    @Inject @Dependent @Component
     private OptimisationValueComparator comparator;
-
-    @Inject
-    @ConfigurationValue(entry = OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "problem.maximise")
-    private boolean maximise;
 
     @Inject
     @ConfigurationValue(entry = OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.accepting-strategy.initial-threshold")
@@ -53,7 +50,7 @@ public class ThresholdAcceptingStrategy implements AcceptingStrategy {
         double[] candidateFitness = fitness.evaluate(candidate);
         OptimisationValue alternateValue = comparator.apply(candidateFitness);
 
-        if (alternateValue.isBetter(bestFitnessValue, this.maximise)) {
+        if (alternateValue.isBetter(bestFitnessValue)) {
             log.debug("Neighbour malus better, accepting.");
             return true;
         }

@@ -1,11 +1,12 @@
 package de.evoal.optimisation.main.comparator;
 
 import de.evoal.optimisation.api.model.OptimisationValue;
-import de.evoal.core.api.utils.Requirements;
 import lombok.Getter;
 import lombok.NonNull;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.function.Function;
 
 public class EpsilonOptimisationValue extends Number implements OptimisationValue {
     @Getter
@@ -14,16 +15,22 @@ public class EpsilonOptimisationValue extends Number implements OptimisationValu
     @Getter
     private final @NonNull Number[] fitnessValues;
 
-    private EpsilonOptimisationValue(final int index, final @NonNull Number[] fitnessValues) {
+    private final @NonNull List<Function<Double, Double>> valueConversions;
+
+    private EpsilonOptimisationValue(final @NonNull List<Function<Double, Double>> valueConversions, final int index, final @NonNull Number[] fitnessValues) {
         /*I want to take an array of malus values but specify the index of the one I want...*/
         //TODO does this break things??
         //Requirements.requireEqual(fitnessValues.length, 1);
+        this.valueConversions = valueConversions;
         this.fitnessValues = fitnessValues;
         this.fitnessValue = fitnessValues[index];
+
+        throw new IllegalStateException("Fix me");
     }
 
-    public static EpsilonOptimisationValue of(final int index, final double [] fitnessValues) {
-        return new EpsilonOptimisationValue(index,
+    public static EpsilonOptimisationValue of(final @NonNull List<Function<Double, Double>> valueConversions, final int index, final double [] fitnessValues) {
+        return new EpsilonOptimisationValue(valueConversions,
+                index,
                 Arrays.stream(fitnessValues)
                         .mapToObj(Double::valueOf)
                         .toArray(s -> new Number [s]));

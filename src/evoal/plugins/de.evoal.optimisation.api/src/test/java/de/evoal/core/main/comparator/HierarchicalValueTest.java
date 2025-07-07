@@ -5,6 +5,9 @@ import de.evoal.optimisation.main.comparator.HierarchicalValue;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import java.util.List;
+import java.util.function.Function;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class HierarchicalValueTest {
@@ -14,7 +17,7 @@ class HierarchicalValueTest {
         int[] orderIndices = {0, 1, 2};
         double[] fitnessValues = {0.5, 0.7, 0.9};
 
-        HierarchicalValue value = HierarchicalValue.of(orderIndices, fitnessValues);
+        HierarchicalValue value = HierarchicalValue.of(List.of(Function.identity(), Function.identity(), Function.identity()), orderIndices, fitnessValues);
 
         assertArrayEquals(fitnessValues, value.getFitnessValues(), 0.0001);
     }
@@ -25,8 +28,8 @@ class HierarchicalValueTest {
         double[] fitnessValues1 = {0.5, 0.7, 0.9};
         double[] fitnessValues2 = {0.6, 0.7, 0.9};
 
-        HierarchicalValue value1 = HierarchicalValue.of(orderIndices, fitnessValues1);
-        HierarchicalValue value2 = HierarchicalValue.of(orderIndices, fitnessValues2);
+        HierarchicalValue value1 = HierarchicalValue.of(List.of(Function.identity(), Function.identity(), Function.identity()), orderIndices, fitnessValues1);
+        HierarchicalValue value2 = HierarchicalValue.of(List.of(Function.identity(), Function.identity(), Function.identity()), orderIndices, fitnessValues2);
 
         assertTrue(value1.compareTo(value2) < 0);
         assertTrue(value2.compareTo(value1) > 0);
@@ -37,8 +40,8 @@ class HierarchicalValueTest {
         int[] orderIndices = {0, 1, 2};
         double[] fitnessValues = {0.5, 0.7, 0.9};
 
-        HierarchicalValue value1 = HierarchicalValue.of(orderIndices, fitnessValues);
-        HierarchicalValue value2 = HierarchicalValue.of(orderIndices, fitnessValues);
+        HierarchicalValue value1 = HierarchicalValue.of(List.of(Function.identity(), Function.identity(), Function.identity()), orderIndices, fitnessValues);
+        HierarchicalValue value2 = HierarchicalValue.of(List.of(Function.identity(), Function.identity(), Function.identity()), orderIndices, fitnessValues);
 
         assertEquals(0, value1.compareTo(value2));
     }
@@ -50,8 +53,8 @@ class HierarchicalValueTest {
         double[] fitnessValues1 = {0.5, 0.7, 0.9};
         double[] fitnessValues2 = {0.9, 0.7, 0.5};
 
-        HierarchicalValue value1 = HierarchicalValue.of(orderIndices1, fitnessValues1);
-        HierarchicalValue value2 = HierarchicalValue.of(orderIndices2, fitnessValues2);
+        HierarchicalValue value1 = HierarchicalValue.of(List.of(Function.identity(), Function.identity(), Function.identity()), orderIndices1, fitnessValues1);
+        HierarchicalValue value2 = HierarchicalValue.of(List.of(Function.identity(), Function.identity(), Function.identity()), orderIndices2, fitnessValues2);
 
         assertTrue(value1.compareTo(value2) < 0);
     }
@@ -61,7 +64,7 @@ class HierarchicalValueTest {
         int[] orderIndices = {0, 1, 2};
         double[] fitnessValues = {0.5, 0.7, 0.9};
 
-        HierarchicalValue value = HierarchicalValue.of(orderIndices, fitnessValues);
+        HierarchicalValue value = HierarchicalValue.of(List.of(Function.identity(), Function.identity(), Function.identity()), orderIndices, fitnessValues);
 
         Object[] statistics = value.toStatistics();
 
@@ -75,7 +78,7 @@ class HierarchicalValueTest {
         int[] orderIndices = {0, 1, 2};
         double[] fitnessValues = {0.5, 0.7, 0.9};
 
-        HierarchicalValue value = HierarchicalValue.of(orderIndices, fitnessValues);
+        HierarchicalValue value = HierarchicalValue.of(List.of(Function.identity(), Function.identity(), Function.identity()), orderIndices, fitnessValues);
 
         String expected = "HierarchicalValue [fit=[0.5, 0.7, 0.9], order=[0, 1, 2]]";
         assertEquals(expected, value.toString());
@@ -86,7 +89,7 @@ class HierarchicalValueTest {
         int[] orderIndices = {0, 1, 2};
         double[] fitnessValues = {0.5, 0.7, 0.9};
 
-        HierarchicalValue value = HierarchicalValue.of(orderIndices, fitnessValues);
+        HierarchicalValue value = HierarchicalValue.of(List.of(Function.identity(), Function.identity(), Function.identity()), orderIndices, fitnessValues);
 
         OptimisationValue other = Mockito.mock(OptimisationValue.class);
 

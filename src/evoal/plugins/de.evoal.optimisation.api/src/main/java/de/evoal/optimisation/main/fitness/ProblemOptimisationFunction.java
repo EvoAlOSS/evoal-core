@@ -2,6 +2,7 @@ package de.evoal.optimisation.main.fitness;
 
 import de.evoal.core.api.cdi.BeanFactory;
 import de.evoal.core.api.cdi.ConfigurationValue;
+import de.evoal.languages.model.ol.ProblemInstance;
 import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
 import de.evoal.optimisation.api.model.OptimisationFunction;
 import de.evoal.core.api.properties.Properties;
@@ -18,14 +19,13 @@ import javax.inject.Named;
 @Slf4j
 public class ProblemOptimisationFunction implements OptimisationFunction {
     @Inject
-    @ConfigurationValue(entry = OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "problem.optimisation-function")
+    @ConfigurationValue(entry = OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "problem")
     private Instance problemConfiguration;
 
     /**
      * The actual problem function to use
      */
     private OptimisationFunction delegate;
-
 
     @Override
     public double[] evaluate(final Properties candidate) {
@@ -34,6 +34,7 @@ public class ProblemOptimisationFunction implements OptimisationFunction {
 
     @Override
     public OptimisationFunction init(final Instance config) {
+        problemConfiguration = ((ProblemInstance)problemConfiguration).getOptimisationFunction();
         delegate = BeanFactory.createComponent(OptimisationFunction.class, problemConfiguration);
 
         return this;

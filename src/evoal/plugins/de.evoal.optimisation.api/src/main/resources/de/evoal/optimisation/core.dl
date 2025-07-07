@@ -5,33 +5,6 @@ module de.evoal.optimisation.core {
 	 * The algorithm-independent problem description.
 	 */
 	type problem {
-		/**
-		 * A description of the problem.
-		 */
-		description : string;
-
-        /**
-         * Description of the optimisation space.
-         */
-        @MinimumNumberOfElements{ bound := 1; }
-	    'optimisation-space' : array data;
-
-        /**
-         * Optional search space description.
-         */
-        @MinimumNumberOfElements{ bound := 1; }
-    	'search-space' : array data;
-
-		/**
-		 * The optimisation function (if known) that maps between search and
-		 *   optimisation space.
-		 */
-        'optimisation-function' : instance 'optimisation-function';
-
-		/**
-		 * Do we have to search for a maximum or a minimum?
-		 */
-		maximise : boolean;
     }
 
 	/**

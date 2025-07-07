@@ -7,7 +7,7 @@ import java.util.function.BiFunction;
  */
 public final class BooleanNumberOperations {
     private BooleanNumberOperations() {}
-
+    
     public static Boolean isGreaterThan(final Object op1, final Object op2) {
         return dispatch(op1,
                         op2,

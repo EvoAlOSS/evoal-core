@@ -9,13 +9,13 @@ import "definitions" from de.evoal.surrogate.adaption.interval.optimisation;
 
 import "data" from surrogate;
 
-module search {
+module 'search' {
 	specify problem 'example-search' {
-		description := "Simple search";
-		'search-space' := [data 'x:0'];
-		'optimisation-space' := [data 'y:0'];
-		'maximise' := true;
-		'optimisation-function' := 'unknown-function' {};
+		search for data 'x:0'
+		
+		map with 'unknown-function' {}
+		
+		and maximise data 'y:0'
 	}
 		
 		
@@ -87,7 +87,7 @@ module search {
             'iteration-count' { 'maximum-iterations' := 10; }
 		];
 
-		documenting := [
+		document := [
             'correlated' {}//,
 //            'range-correlated' {}
 		];

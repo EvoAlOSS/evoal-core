@@ -7,6 +7,7 @@ import de.evoal.languages.model.base.definitions.Definition;
 import de.evoal.languages.model.base.definitions.EnumLiteralDefinition;
 import de.evoal.languages.model.base.expressions.*;
 import de.evoal.languages.model.ol.OptimisationModule;
+import de.evoal.languages.model.ol.ProblemInstance;
 import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
 import lombok.extern.slf4j.Slf4j;
 

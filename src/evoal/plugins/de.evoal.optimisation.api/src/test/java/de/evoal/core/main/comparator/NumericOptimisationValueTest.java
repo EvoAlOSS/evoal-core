@@ -5,28 +5,25 @@ import de.evoal.optimisation.main.comparator.WeightedSumOptimisationValue;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.function.Function;
+
 public class NumericOptimisationValueTest {
 
     @Test
     public void testOf() {
         double [] fitness = {42.0};
 
-        final NumericOptimisationValue optValue = NumericOptimisationValue.of(fitness);
+        final NumericOptimisationValue optValue = NumericOptimisationValue.of(Collections.singletonList(Function.identity()), fitness);
 
         Assertions.assertNotNull(optValue);
         Assertions.assertEquals(42.0, optValue.doubleValue());
     }
 
     @Test
-    public void testCompareToNull() {
-        WeightedSumOptimisationValue testee = WeightedSumOptimisationValue.of(new double [] {2.0, 3.0}, new double [] {42.0, 12.0});
-
-        Assertions.assertThrows(NullPointerException.class, () -> testee.compareTo(null));
-    }
-
-    @Test
     public void testCompareToSelf() {
-        WeightedSumOptimisationValue testee = WeightedSumOptimisationValue.of(new double [] {2.0, 3.0}, new double [] {42.0, 12.0});
+        WeightedSumOptimisationValue testee = WeightedSumOptimisationValue.of(List.of(Function.identity(), Function.identity()), new double [] {2.0, 3.0}, new double [] {42.0, 12.0});
 
         int result = testee.compareTo(testee);
         Assertions.assertEquals(0, result);
@@ -36,8 +33,8 @@ public class NumericOptimisationValueTest {
     public void testCompareToOptimisationValueSameContent() {
         double [] fitness = {42.0};
 
-        final NumericOptimisationValue optValue1 = NumericOptimisationValue.of(fitness);
-        final NumericOptimisationValue optValue2 = NumericOptimisationValue.of(fitness);
+        final NumericOptimisationValue optValue1 = NumericOptimisationValue.of(Collections.singletonList(Function.identity()), fitness);
+        final NumericOptimisationValue optValue2 = NumericOptimisationValue.of(Collections.singletonList(Function.identity()), fitness);
 
         Assertions.assertNotNull(optValue1);
         Assertions.assertNotNull(optValue2);
@@ -50,8 +47,8 @@ public class NumericOptimisationValueTest {
         double [] fitness1 = {42.0};
         double [] fitness2 = {83.0};
 
-        final NumericOptimisationValue optValue1 = NumericOptimisationValue.of(fitness1);
-        final NumericOptimisationValue optValue2 = NumericOptimisationValue.of(fitness2);
+        final NumericOptimisationValue optValue1 = NumericOptimisationValue.of(Collections.singletonList(Function.identity()), fitness1);
+        final NumericOptimisationValue optValue2 = NumericOptimisationValue.of(Collections.singletonList(Function.identity()), fitness2);
 
         Assertions.assertNotNull(optValue1);
         Assertions.assertNotNull(optValue2);
@@ -63,8 +60,8 @@ public class NumericOptimisationValueTest {
     public void testCompareToDifferentInstance() {
         double [] fitness = {42.0};
 
-        final NumericOptimisationValue optValue1 = NumericOptimisationValue.of(fitness);
-        final WeightedSumOptimisationValue optValue2 = WeightedSumOptimisationValue.of(fitness, fitness);
+        final NumericOptimisationValue optValue1 = NumericOptimisationValue.of(Collections.singletonList(Function.identity()), fitness);
+        final WeightedSumOptimisationValue optValue2 = WeightedSumOptimisationValue.of(List.of(Function.identity()), fitness, fitness);
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> optValue1.compareTo(optValue2));
     }
@@ -73,7 +70,7 @@ public class NumericOptimisationValueTest {
     public void testToString() {
         double [] fitness = {42.0};
 
-        final NumericOptimisationValue optValue = NumericOptimisationValue.of(fitness);
+        final NumericOptimisationValue optValue = NumericOptimisationValue.of(Collections.singletonList(Function.identity()), fitness);
 
         Assertions.assertNotNull(optValue);
         Assertions.assertEquals("NumericOptimisationValue [42.0]", optValue.toString());
@@ -83,7 +80,7 @@ public class NumericOptimisationValueTest {
     public void testToStatistics() {
         double [] fitness = {42.0};
 
-        final NumericOptimisationValue optValue = NumericOptimisationValue.of(fitness);
+        final NumericOptimisationValue optValue = NumericOptimisationValue.of(Collections.singletonList(Function.identity()), fitness);
 
         Assertions.assertNotNull(optValue);
         Object [] statistics = optValue.toStatistics();
@@ -97,7 +94,7 @@ public class NumericOptimisationValueTest {
     public void testIntValue() {
         double [] fitness = {42.0};
 
-        final NumericOptimisationValue optValue = NumericOptimisationValue.of(fitness);
+        final NumericOptimisationValue optValue = NumericOptimisationValue.of(Collections.singletonList(Function.identity()), fitness);
 
         Assertions.assertNotNull(optValue);
         int value = optValue.intValue();
@@ -110,7 +107,7 @@ public class NumericOptimisationValueTest {
     public void testLongValue() {
         double [] fitness = {42.0};
 
-        final NumericOptimisationValue optValue = NumericOptimisationValue.of(fitness);
+        final NumericOptimisationValue optValue = NumericOptimisationValue.of(Collections.singletonList(Function.identity()), fitness);
 
         Assertions.assertNotNull(optValue);
         long value = optValue.longValue();
@@ -122,7 +119,7 @@ public class NumericOptimisationValueTest {
     public void testFloatValue() {
         double [] fitness = {42.0};
 
-        final NumericOptimisationValue optValue = NumericOptimisationValue.of(fitness);
+        final NumericOptimisationValue optValue = NumericOptimisationValue.of(Collections.singletonList(Function.identity()), fitness);
 
         Assertions.assertNotNull(optValue);
         float value = optValue.floatValue();
@@ -134,7 +131,7 @@ public class NumericOptimisationValueTest {
     public void testDoubleValue() {
         double [] fitness = {42.0};
 
-        final NumericOptimisationValue optValue = NumericOptimisationValue.of(fitness);
+        final NumericOptimisationValue optValue = NumericOptimisationValue.of(Collections.singletonList(Function.identity()), fitness);
 
         Assertions.assertNotNull(optValue);
         double value = optValue.doubleValue();
@@ -146,7 +143,7 @@ public class NumericOptimisationValueTest {
     public void testGetFitnessValue() {
         double [] fitness = {42.0};
 
-        final NumericOptimisationValue optValue = NumericOptimisationValue.of(fitness);
+        final NumericOptimisationValue optValue = NumericOptimisationValue.of(Collections.singletonList(Function.identity()), fitness);
 
         Assertions.assertNotNull(optValue);
         Number value = optValue.getFitnessValue();

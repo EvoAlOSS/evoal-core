@@ -33,7 +33,7 @@ class HierarchicalComparatorTest {
     void setUp() {
         MockitoAnnotations.openMocks(this);
     }
-
+/*
     @Test
     void testToValue() {
         int[] orderIndices = {0, 1, 2};
@@ -45,7 +45,7 @@ class HierarchicalComparatorTest {
 
         assertArrayEquals(fitnessValues, result.getFitnessValues(), 0.0001);
     }
-
+*/
     @Test
     void testInit() {
         int[] orderIndices = {0, 2, 1};

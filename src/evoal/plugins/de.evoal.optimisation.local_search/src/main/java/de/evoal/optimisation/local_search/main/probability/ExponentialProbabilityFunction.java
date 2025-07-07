@@ -1,5 +1,8 @@
 package de.evoal.optimisation.local_search.main.probability;
 
+import de.evoal.core.api.cdi.Component;
+import de.evoal.optimisation.api.model.OptimisationValue;
+import de.evoal.optimisation.api.model.OptimisationValueComparator;
 import de.evoal.optimisation.local_search.api.probability.AcceptanceProbabilityFunction;
 import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
 import de.evoal.core.api.languages.AttributeEvaluator;
@@ -20,19 +23,21 @@ import javax.inject.Named;
 @Dependent
 @Named("de.evoal.optimisation.local_search.optimisation.exponential-probability")
 public class ExponentialProbabilityFunction implements AcceptanceProbabilityFunction {
+    @Inject @Dependent @Component
+    private OptimisationValueComparator comparator;
 
     @Inject
     private AttributeEvaluator evaluator;
-
-    @Inject
-    @ConfigurationValue(entry = OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "problem.maximise")
-    private boolean maximise;
 
     @Override
     public double apply(double[] currentFitness, double[] neighbourFitness, double temperature) {
         log.info("current malus is {}, neighbour malus is {}", currentFitness, neighbourFitness);
         log.info("  temp passed to acceptance function is {}", temperature);
-        if ((maximise && neighbourFitness[0] > currentFitness[0]) || (!maximise && neighbourFitness[0] < currentFitness[0])) {
+
+        final OptimisationValue thisFitness = comparator.apply(currentFitness);
+        final OptimisationValue otherFitness = comparator.apply(neighbourFitness);
+
+        if (otherFitness.isBetter(thisFitness)) {
             log.info("neighbour malus better than current malus. Taking neighbouring solution.");
             return 1.0;
         }
@@ -41,8 +46,8 @@ public class ExponentialProbabilityFunction implements AcceptanceProbabilityFunc
             return 0.0;
         }
 
-        int sign = maximise ? 1 : -1;
-        double probability = Math.exp(sign*(neighbourFitness[0] - currentFitness[0])/temperature);
+        // TODO What about multi-dimensional problems
+        double probability = Math.exp(Math.abs(neighbourFitness[0] - currentFitness[0])/temperature);
         log.info("Acceptance probability is {}", probability);
 
         return probability;

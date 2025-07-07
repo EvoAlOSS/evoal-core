@@ -18,16 +18,38 @@ OptimisationModelRule returns OptimisationModule:
 
 ProblemRule returns ProblemInstance:
 	"specify" definition=[definitions::ClassDefinition|QualifiedName] name = StringOrId "{"
-		attributes+=AttributeRule*
+		'search' 'for' searchSpace+=TypeDefinitionReferenceRule (',' searchSpace+=TypeDefinitionReferenceRule)*
+		
+		'map' 'with' optimisationFunction=InstanceLiteralRule
+
+		'and' optimisationSpace += OptimisationGoalRule (',' optimisationSpace += OptimisationGoalRule)* 
 	
-		("documenting" ":=" documentation = ArrayRule ';')?
+		("document" documentation = ArrayRule '.')?
 	"}"
+;
+
+OptimisationGoalRule returns OptimisationGoal:
+	MaximiseGoalRule | MinimiseGoalRule | TargetGoalRule
+;
+
+MaximiseGoalRule returns MaximiseGoal:
+	'maximise' data=TypeDefinitionReferenceRule
+;
+
+
+MinimiseGoalRule returns MinimiseGoal:
+	'minimise' data=TypeDefinitionReferenceRule
+;
+
+
+TargetGoalRule returns TargetGoal:
+	'optimise' data=TypeDefinitionReferenceRule 'towards' value=LiteralRule
 ;
 
 AlgorithmInstanceRule returns AlgorithmInstance:
 	"configure" definition=[definitions::ClassDefinition|QualifiedName] "for" problem = [ProblemInstance|QualifiedName] "{"
 		attributes+=AttributeRule*
 		
-		("documenting" ":=" documentation = ArrayRule ';')?
+		("document" ":=" documentation = ArrayRule ';')?
 	"}"
 ;

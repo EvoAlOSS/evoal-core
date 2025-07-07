@@ -33,7 +33,6 @@ public class ExponentialDecreaseFunction implements DecreasingFunction {
 
     private int searchSpecSize;
 
-
     @Override
     public double decrease(double currentTemp, double initialTemp, int iteration) {
         double newTemp = initialTemp * Math.exp(-1 * (Math.pow(iteration, (1/this.searchSpecSize))));

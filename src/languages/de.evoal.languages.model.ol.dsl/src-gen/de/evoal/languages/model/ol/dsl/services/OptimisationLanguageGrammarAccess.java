@@ -8,6 +8,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import de.evoal.languages.model.base.dsl.services.BaseLanguageGrammarAccess;
 import java.util.List;
+import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.EnumRule;
@@ -99,27 +100,47 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cNameStringOrIdParserRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
 		private final Keyword cLeftCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
-		private final Assignment cAttributesAssignment_4 = (Assignment)cGroup.eContents().get(4);
-		private final RuleCall cAttributesAttributeRuleParserRuleCall_4_0 = (RuleCall)cAttributesAssignment_4.eContents().get(0);
-		private final Group cGroup_5 = (Group)cGroup.eContents().get(5);
-		private final Keyword cDocumentingKeyword_5_0 = (Keyword)cGroup_5.eContents().get(0);
-		private final Keyword cColonEqualsSignKeyword_5_1 = (Keyword)cGroup_5.eContents().get(1);
-		private final Assignment cDocumentationAssignment_5_2 = (Assignment)cGroup_5.eContents().get(2);
-		private final RuleCall cDocumentationArrayRuleParserRuleCall_5_2_0 = (RuleCall)cDocumentationAssignment_5_2.eContents().get(0);
-		private final Keyword cSemicolonKeyword_5_3 = (Keyword)cGroup_5.eContents().get(3);
-		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
+		private final Keyword cSearchKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Keyword cForKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		private final Assignment cSearchSpaceAssignment_6 = (Assignment)cGroup.eContents().get(6);
+		private final RuleCall cSearchSpaceTypeDefinitionReferenceRuleParserRuleCall_6_0 = (RuleCall)cSearchSpaceAssignment_6.eContents().get(0);
+		private final Group cGroup_7 = (Group)cGroup.eContents().get(7);
+		private final Keyword cCommaKeyword_7_0 = (Keyword)cGroup_7.eContents().get(0);
+		private final Assignment cSearchSpaceAssignment_7_1 = (Assignment)cGroup_7.eContents().get(1);
+		private final RuleCall cSearchSpaceTypeDefinitionReferenceRuleParserRuleCall_7_1_0 = (RuleCall)cSearchSpaceAssignment_7_1.eContents().get(0);
+		private final Keyword cMapKeyword_8 = (Keyword)cGroup.eContents().get(8);
+		private final Keyword cWithKeyword_9 = (Keyword)cGroup.eContents().get(9);
+		private final Assignment cOptimisationFunctionAssignment_10 = (Assignment)cGroup.eContents().get(10);
+		private final RuleCall cOptimisationFunctionInstanceLiteralRuleParserRuleCall_10_0 = (RuleCall)cOptimisationFunctionAssignment_10.eContents().get(0);
+		private final Keyword cAndKeyword_11 = (Keyword)cGroup.eContents().get(11);
+		private final Assignment cOptimisationSpaceAssignment_12 = (Assignment)cGroup.eContents().get(12);
+		private final RuleCall cOptimisationSpaceOptimisationGoalRuleParserRuleCall_12_0 = (RuleCall)cOptimisationSpaceAssignment_12.eContents().get(0);
+		private final Group cGroup_13 = (Group)cGroup.eContents().get(13);
+		private final Keyword cCommaKeyword_13_0 = (Keyword)cGroup_13.eContents().get(0);
+		private final Assignment cOptimisationSpaceAssignment_13_1 = (Assignment)cGroup_13.eContents().get(1);
+		private final RuleCall cOptimisationSpaceOptimisationGoalRuleParserRuleCall_13_1_0 = (RuleCall)cOptimisationSpaceAssignment_13_1.eContents().get(0);
+		private final Group cGroup_14 = (Group)cGroup.eContents().get(14);
+		private final Keyword cDocumentKeyword_14_0 = (Keyword)cGroup_14.eContents().get(0);
+		private final Assignment cDocumentationAssignment_14_1 = (Assignment)cGroup_14.eContents().get(1);
+		private final RuleCall cDocumentationArrayRuleParserRuleCall_14_1_0 = (RuleCall)cDocumentationAssignment_14_1.eContents().get(0);
+		private final Keyword cFullStopKeyword_14_2 = (Keyword)cGroup_14.eContents().get(2);
+		private final Keyword cRightCurlyBracketKeyword_15 = (Keyword)cGroup.eContents().get(15);
 		
 		//ProblemRule returns ProblemInstance:
 		//    "specify" definition=[definitions::ClassDefinition|QualifiedName] name = StringOrId "{"
-		//        attributes+=AttributeRule*
-		//        ("documenting" ":=" documentation = ArrayRule ';')?
+		//        'search' 'for' searchSpace+=TypeDefinitionReferenceRule (',' searchSpace+=TypeDefinitionReferenceRule)*
+		//        'map' 'with' optimisationFunction=InstanceLiteralRule
+		//        'and' optimisationSpace += OptimisationGoalRule (',' optimisationSpace += OptimisationGoalRule)*
+		//        ("document" documentation = ArrayRule '.')?
 		//    "}"
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"specify" definition=[definitions::ClassDefinition|QualifiedName] name = StringOrId "{"
-		//    attributes+=AttributeRule*
-		//    ("documenting" ":=" documentation = ArrayRule ';')?
+		//    'search' 'for' searchSpace+=TypeDefinitionReferenceRule (',' searchSpace+=TypeDefinitionReferenceRule)*
+		//    'map' 'with' optimisationFunction=InstanceLiteralRule
+		//    'and' optimisationSpace += OptimisationGoalRule (',' optimisationSpace += OptimisationGoalRule)*
+		//    ("document" documentation = ArrayRule '.')?
 		//"}"
 		public Group getGroup() { return cGroup; }
 		
@@ -144,32 +165,188 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
 		
-		//attributes+=AttributeRule*
-		public Assignment getAttributesAssignment_4() { return cAttributesAssignment_4; }
+		//'search'
+		public Keyword getSearchKeyword_4() { return cSearchKeyword_4; }
 		
-		//AttributeRule
-		public RuleCall getAttributesAttributeRuleParserRuleCall_4_0() { return cAttributesAttributeRuleParserRuleCall_4_0; }
+		//'for'
+		public Keyword getForKeyword_5() { return cForKeyword_5; }
 		
-		//("documenting" ":=" documentation = ArrayRule ';')?
-		public Group getGroup_5() { return cGroup_5; }
+		//searchSpace+=TypeDefinitionReferenceRule
+		public Assignment getSearchSpaceAssignment_6() { return cSearchSpaceAssignment_6; }
 		
-		//"documenting"
-		public Keyword getDocumentingKeyword_5_0() { return cDocumentingKeyword_5_0; }
+		//TypeDefinitionReferenceRule
+		public RuleCall getSearchSpaceTypeDefinitionReferenceRuleParserRuleCall_6_0() { return cSearchSpaceTypeDefinitionReferenceRuleParserRuleCall_6_0; }
 		
-		//":="
-		public Keyword getColonEqualsSignKeyword_5_1() { return cColonEqualsSignKeyword_5_1; }
+		//(',' searchSpace+=TypeDefinitionReferenceRule)*
+		public Group getGroup_7() { return cGroup_7; }
+		
+		//','
+		public Keyword getCommaKeyword_7_0() { return cCommaKeyword_7_0; }
+		
+		//searchSpace+=TypeDefinitionReferenceRule
+		public Assignment getSearchSpaceAssignment_7_1() { return cSearchSpaceAssignment_7_1; }
+		
+		//TypeDefinitionReferenceRule
+		public RuleCall getSearchSpaceTypeDefinitionReferenceRuleParserRuleCall_7_1_0() { return cSearchSpaceTypeDefinitionReferenceRuleParserRuleCall_7_1_0; }
+		
+		//'map'
+		public Keyword getMapKeyword_8() { return cMapKeyword_8; }
+		
+		//'with'
+		public Keyword getWithKeyword_9() { return cWithKeyword_9; }
+		
+		//optimisationFunction=InstanceLiteralRule
+		public Assignment getOptimisationFunctionAssignment_10() { return cOptimisationFunctionAssignment_10; }
+		
+		//InstanceLiteralRule
+		public RuleCall getOptimisationFunctionInstanceLiteralRuleParserRuleCall_10_0() { return cOptimisationFunctionInstanceLiteralRuleParserRuleCall_10_0; }
+		
+		//'and'
+		public Keyword getAndKeyword_11() { return cAndKeyword_11; }
+		
+		//optimisationSpace += OptimisationGoalRule
+		public Assignment getOptimisationSpaceAssignment_12() { return cOptimisationSpaceAssignment_12; }
+		
+		//OptimisationGoalRule
+		public RuleCall getOptimisationSpaceOptimisationGoalRuleParserRuleCall_12_0() { return cOptimisationSpaceOptimisationGoalRuleParserRuleCall_12_0; }
+		
+		//(',' optimisationSpace += OptimisationGoalRule)*
+		public Group getGroup_13() { return cGroup_13; }
+		
+		//','
+		public Keyword getCommaKeyword_13_0() { return cCommaKeyword_13_0; }
+		
+		//optimisationSpace += OptimisationGoalRule
+		public Assignment getOptimisationSpaceAssignment_13_1() { return cOptimisationSpaceAssignment_13_1; }
+		
+		//OptimisationGoalRule
+		public RuleCall getOptimisationSpaceOptimisationGoalRuleParserRuleCall_13_1_0() { return cOptimisationSpaceOptimisationGoalRuleParserRuleCall_13_1_0; }
+		
+		//("document" documentation = ArrayRule '.')?
+		public Group getGroup_14() { return cGroup_14; }
+		
+		//"document"
+		public Keyword getDocumentKeyword_14_0() { return cDocumentKeyword_14_0; }
 		
 		//documentation = ArrayRule
-		public Assignment getDocumentationAssignment_5_2() { return cDocumentationAssignment_5_2; }
+		public Assignment getDocumentationAssignment_14_1() { return cDocumentationAssignment_14_1; }
 		
 		//ArrayRule
-		public RuleCall getDocumentationArrayRuleParserRuleCall_5_2_0() { return cDocumentationArrayRuleParserRuleCall_5_2_0; }
+		public RuleCall getDocumentationArrayRuleParserRuleCall_14_1_0() { return cDocumentationArrayRuleParserRuleCall_14_1_0; }
 		
-		//';'
-		public Keyword getSemicolonKeyword_5_3() { return cSemicolonKeyword_5_3; }
+		//'.'
+		public Keyword getFullStopKeyword_14_2() { return cFullStopKeyword_14_2; }
 		
 		//"}"
-		public Keyword getRightCurlyBracketKeyword_6() { return cRightCurlyBracketKeyword_6; }
+		public Keyword getRightCurlyBracketKeyword_15() { return cRightCurlyBracketKeyword_15; }
+	}
+	public class OptimisationGoalRuleElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.ol.dsl.OptimisationLanguage.OptimisationGoalRule");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cMaximiseGoalRuleParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cMinimiseGoalRuleParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cTargetGoalRuleParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		
+		//OptimisationGoalRule returns OptimisationGoal:
+		//    MaximiseGoalRule | MinimiseGoalRule | TargetGoalRule
+		//;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//MaximiseGoalRule | MinimiseGoalRule | TargetGoalRule
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//MaximiseGoalRule
+		public RuleCall getMaximiseGoalRuleParserRuleCall_0() { return cMaximiseGoalRuleParserRuleCall_0; }
+		
+		//MinimiseGoalRule
+		public RuleCall getMinimiseGoalRuleParserRuleCall_1() { return cMinimiseGoalRuleParserRuleCall_1; }
+		
+		//TargetGoalRule
+		public RuleCall getTargetGoalRuleParserRuleCall_2() { return cTargetGoalRuleParserRuleCall_2; }
+	}
+	public class MaximiseGoalRuleElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.ol.dsl.OptimisationLanguage.MaximiseGoalRule");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cMaximiseKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cDataAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cDataTypeDefinitionReferenceRuleParserRuleCall_1_0 = (RuleCall)cDataAssignment_1.eContents().get(0);
+		
+		//MaximiseGoalRule returns MaximiseGoal:
+		//    'maximise' data=TypeDefinitionReferenceRule
+		//;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'maximise' data=TypeDefinitionReferenceRule
+		public Group getGroup() { return cGroup; }
+		
+		//'maximise'
+		public Keyword getMaximiseKeyword_0() { return cMaximiseKeyword_0; }
+		
+		//data=TypeDefinitionReferenceRule
+		public Assignment getDataAssignment_1() { return cDataAssignment_1; }
+		
+		//TypeDefinitionReferenceRule
+		public RuleCall getDataTypeDefinitionReferenceRuleParserRuleCall_1_0() { return cDataTypeDefinitionReferenceRuleParserRuleCall_1_0; }
+	}
+	public class MinimiseGoalRuleElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.ol.dsl.OptimisationLanguage.MinimiseGoalRule");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cMinimiseKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cDataAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cDataTypeDefinitionReferenceRuleParserRuleCall_1_0 = (RuleCall)cDataAssignment_1.eContents().get(0);
+		
+		//MinimiseGoalRule returns MinimiseGoal:
+		//    'minimise' data=TypeDefinitionReferenceRule
+		//;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'minimise' data=TypeDefinitionReferenceRule
+		public Group getGroup() { return cGroup; }
+		
+		//'minimise'
+		public Keyword getMinimiseKeyword_0() { return cMinimiseKeyword_0; }
+		
+		//data=TypeDefinitionReferenceRule
+		public Assignment getDataAssignment_1() { return cDataAssignment_1; }
+		
+		//TypeDefinitionReferenceRule
+		public RuleCall getDataTypeDefinitionReferenceRuleParserRuleCall_1_0() { return cDataTypeDefinitionReferenceRuleParserRuleCall_1_0; }
+	}
+	public class TargetGoalRuleElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.ol.dsl.OptimisationLanguage.TargetGoalRule");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cOptimiseKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cDataAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cDataTypeDefinitionReferenceRuleParserRuleCall_1_0 = (RuleCall)cDataAssignment_1.eContents().get(0);
+		private final Keyword cTowardsKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cValueAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cValueLiteralRuleParserRuleCall_3_0 = (RuleCall)cValueAssignment_3.eContents().get(0);
+		
+		//TargetGoalRule returns TargetGoal:
+		//    'optimise' data=TypeDefinitionReferenceRule 'towards' value=LiteralRule
+		//;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'optimise' data=TypeDefinitionReferenceRule 'towards' value=LiteralRule
+		public Group getGroup() { return cGroup; }
+		
+		//'optimise'
+		public Keyword getOptimiseKeyword_0() { return cOptimiseKeyword_0; }
+		
+		//data=TypeDefinitionReferenceRule
+		public Assignment getDataAssignment_1() { return cDataAssignment_1; }
+		
+		//TypeDefinitionReferenceRule
+		public RuleCall getDataTypeDefinitionReferenceRuleParserRuleCall_1_0() { return cDataTypeDefinitionReferenceRuleParserRuleCall_1_0; }
+		
+		//'towards'
+		public Keyword getTowardsKeyword_2() { return cTowardsKeyword_2; }
+		
+		//value=LiteralRule
+		public Assignment getValueAssignment_3() { return cValueAssignment_3; }
+		
+		//LiteralRule
+		public RuleCall getValueLiteralRuleParserRuleCall_3_0() { return cValueLiteralRuleParserRuleCall_3_0; }
 	}
 	public class AlgorithmInstanceRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.ol.dsl.OptimisationLanguage.AlgorithmInstanceRule");
@@ -186,7 +363,7 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 		private final Assignment cAttributesAssignment_5 = (Assignment)cGroup.eContents().get(5);
 		private final RuleCall cAttributesAttributeRuleParserRuleCall_5_0 = (RuleCall)cAttributesAssignment_5.eContents().get(0);
 		private final Group cGroup_6 = (Group)cGroup.eContents().get(6);
-		private final Keyword cDocumentingKeyword_6_0 = (Keyword)cGroup_6.eContents().get(0);
+		private final Keyword cDocumentKeyword_6_0 = (Keyword)cGroup_6.eContents().get(0);
 		private final Keyword cColonEqualsSignKeyword_6_1 = (Keyword)cGroup_6.eContents().get(1);
 		private final Assignment cDocumentationAssignment_6_2 = (Assignment)cGroup_6.eContents().get(2);
 		private final RuleCall cDocumentationArrayRuleParserRuleCall_6_2_0 = (RuleCall)cDocumentationAssignment_6_2.eContents().get(0);
@@ -196,14 +373,14 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 		//AlgorithmInstanceRule returns AlgorithmInstance:
 		//    "configure" definition=[definitions::ClassDefinition|QualifiedName] "for" problem = [ProblemInstance|QualifiedName] "{"
 		//        attributes+=AttributeRule*
-		//        ("documenting" ":=" documentation = ArrayRule ';')?
+		//        ("document" ":=" documentation = ArrayRule ';')?
 		//    "}"
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"configure" definition=[definitions::ClassDefinition|QualifiedName] "for" problem = [ProblemInstance|QualifiedName] "{"
 		//    attributes+=AttributeRule*
-		//    ("documenting" ":=" documentation = ArrayRule ';')?
+		//    ("document" ":=" documentation = ArrayRule ';')?
 		//"}"
 		public Group getGroup() { return cGroup; }
 		
@@ -240,11 +417,11 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 		//AttributeRule
 		public RuleCall getAttributesAttributeRuleParserRuleCall_5_0() { return cAttributesAttributeRuleParserRuleCall_5_0; }
 		
-		//("documenting" ":=" documentation = ArrayRule ';')?
+		//("document" ":=" documentation = ArrayRule ';')?
 		public Group getGroup_6() { return cGroup_6; }
 		
-		//"documenting"
-		public Keyword getDocumentingKeyword_6_0() { return cDocumentingKeyword_6_0; }
+		//"document"
+		public Keyword getDocumentKeyword_6_0() { return cDocumentKeyword_6_0; }
 		
 		//":="
 		public Keyword getColonEqualsSignKeyword_6_1() { return cColonEqualsSignKeyword_6_1; }
@@ -265,6 +442,10 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 	
 	private final OptimisationModelRuleElements pOptimisationModelRule;
 	private final ProblemRuleElements pProblemRule;
+	private final OptimisationGoalRuleElements pOptimisationGoalRule;
+	private final MaximiseGoalRuleElements pMaximiseGoalRule;
+	private final MinimiseGoalRuleElements pMinimiseGoalRule;
+	private final TargetGoalRuleElements pTargetGoalRule;
 	private final AlgorithmInstanceRuleElements pAlgorithmInstanceRule;
 	
 	private final Grammar grammar;
@@ -282,6 +463,10 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 		this.gaTerminals = gaTerminals;
 		this.pOptimisationModelRule = new OptimisationModelRuleElements();
 		this.pProblemRule = new ProblemRuleElements();
+		this.pOptimisationGoalRule = new OptimisationGoalRuleElements();
+		this.pMaximiseGoalRule = new MaximiseGoalRuleElements();
+		this.pMinimiseGoalRule = new MinimiseGoalRuleElements();
+		this.pTargetGoalRule = new TargetGoalRuleElements();
 		this.pAlgorithmInstanceRule = new AlgorithmInstanceRuleElements();
 	}
 	
@@ -333,8 +518,10 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 	
 	//ProblemRule returns ProblemInstance:
 	//    "specify" definition=[definitions::ClassDefinition|QualifiedName] name = StringOrId "{"
-	//        attributes+=AttributeRule*
-	//        ("documenting" ":=" documentation = ArrayRule ';')?
+	//        'search' 'for' searchSpace+=TypeDefinitionReferenceRule (',' searchSpace+=TypeDefinitionReferenceRule)*
+	//        'map' 'with' optimisationFunction=InstanceLiteralRule
+	//        'and' optimisationSpace += OptimisationGoalRule (',' optimisationSpace += OptimisationGoalRule)*
+	//        ("document" documentation = ArrayRule '.')?
 	//    "}"
 	//;
 	public ProblemRuleElements getProblemRuleAccess() {
@@ -345,10 +532,54 @@ public class OptimisationLanguageGrammarAccess extends AbstractElementFinder.Abs
 		return getProblemRuleAccess().getRule();
 	}
 	
+	//OptimisationGoalRule returns OptimisationGoal:
+	//    MaximiseGoalRule | MinimiseGoalRule | TargetGoalRule
+	//;
+	public OptimisationGoalRuleElements getOptimisationGoalRuleAccess() {
+		return pOptimisationGoalRule;
+	}
+	
+	public ParserRule getOptimisationGoalRuleRule() {
+		return getOptimisationGoalRuleAccess().getRule();
+	}
+	
+	//MaximiseGoalRule returns MaximiseGoal:
+	//    'maximise' data=TypeDefinitionReferenceRule
+	//;
+	public MaximiseGoalRuleElements getMaximiseGoalRuleAccess() {
+		return pMaximiseGoalRule;
+	}
+	
+	public ParserRule getMaximiseGoalRuleRule() {
+		return getMaximiseGoalRuleAccess().getRule();
+	}
+	
+	//MinimiseGoalRule returns MinimiseGoal:
+	//    'minimise' data=TypeDefinitionReferenceRule
+	//;
+	public MinimiseGoalRuleElements getMinimiseGoalRuleAccess() {
+		return pMinimiseGoalRule;
+	}
+	
+	public ParserRule getMinimiseGoalRuleRule() {
+		return getMinimiseGoalRuleAccess().getRule();
+	}
+	
+	//TargetGoalRule returns TargetGoal:
+	//    'optimise' data=TypeDefinitionReferenceRule 'towards' value=LiteralRule
+	//;
+	public TargetGoalRuleElements getTargetGoalRuleAccess() {
+		return pTargetGoalRule;
+	}
+	
+	public ParserRule getTargetGoalRuleRule() {
+		return getTargetGoalRuleAccess().getRule();
+	}
+	
 	//AlgorithmInstanceRule returns AlgorithmInstance:
 	//    "configure" definition=[definitions::ClassDefinition|QualifiedName] "for" problem = [ProblemInstance|QualifiedName] "{"
 	//        attributes+=AttributeRule*
-	//        ("documenting" ":=" documentation = ArrayRule ';')?
+	//        ("document" ":=" documentation = ArrayRule ';')?
 	//    "}"
 	//;
 	public AlgorithmInstanceRuleElements getAlgorithmInstanceRuleAccess() {

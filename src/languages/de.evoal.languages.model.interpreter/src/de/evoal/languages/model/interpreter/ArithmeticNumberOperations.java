@@ -1,5 +1,6 @@
 package de.evoal.languages.model.interpreter;
 
+import java.util.Comparator;
 import java.util.function.BiFunction;
 
 /**
@@ -26,6 +27,14 @@ public final class ArithmeticNumberOperations {
 
     private static Number addAsInteger(final Number op1, final Number op2) {
         return op1.intValue() + op2.intValue();
+    }
+    
+    public static int compare(final Number op1, final Number op2) {
+    	return dispatch(op1, op2,
+    					(p1, p2) -> Double.compare(p1.doubleValue(), p2.doubleValue()),
+    					(p1, p2) -> Long.compare(p1.longValue(), p2.longValue()),
+    					(p1, p2) -> Integer.compare(p1.intValue(), p2.intValue())
+    					).intValue();
     }
 
     public static Number dispatch(final Object lOp, final Object rOp,

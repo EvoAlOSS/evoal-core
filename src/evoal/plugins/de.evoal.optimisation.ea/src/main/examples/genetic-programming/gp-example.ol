@@ -8,12 +8,10 @@ import "data" from 'gp-example';
 
 module example {
   specify problem 'regression-function-search' {
-    description := "Genetic Programming Example";
-    'search-space' := [data 'regression-function'];
-    'optimisation-space' := [data 'ℝ'];
-    'maximise' := false;
-    'optimisation-function' := 'unknown-function' {
-    };
+  	search for data 'regression-function'
+  	map with 'unknown-function' {}
+  	
+  	and minimise data 'ℝ'
   }
 
   configure 'evolutionary-algorithm' for 'regression-function-search' {
@@ -83,6 +81,6 @@ module example {
         'iteration-count' { 'maximum-iterations' := 10; }
     ];
 
-    documenting := [ 'best-candidate-per-iteration' {} ];
+    document := [ 'best-candidate-per-iteration' {} ];
   }
 }

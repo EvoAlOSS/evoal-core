@@ -1,21 +1,25 @@
 package de.evoal.optimisation.main.comparator;
 
-import de.evoal.optimisation.api.model.OptimisationValueComparator;
-import de.evoal.languages.model.base.expressions.Instance;
+import lombok.NonNull;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.enterprise.context.Dependent;
+import javax.inject.Inject;
 import javax.inject.Named;
+import java.util.List;
+import java.util.function.Function;
+
+import de.evoal.optimisation.api.model.OptimisationValueComparator;
 
 @Dependent
 @Named("de.evoal.optimisation.core.numeric-comparator")
+@Slf4j
 public class NumericOptimisationComparator implements OptimisationValueComparator {
-    @Override
-    public NumericOptimisationValue toValue(final double[] fitnessValues) {
-        return NumericOptimisationValue.of(fitnessValues);
-    }
+    @Inject @Named("optimisation-value-conversions")
+    private List<Function<Double, Double>> valueConversions;
 
     @Override
-    public OptimisationValueComparator init(final Instance config) {
-        return this;
+    public NumericOptimisationValue toValue(final double[] fitnessValues) {
+        return NumericOptimisationValue.of(valueConversions, fitnessValues);
     }
 }

@@ -35,7 +35,7 @@ import de.evoal.optimisation.local_search.api.neighbour.NeighbourChoosingStrateg
 public class LocalSearchAlgorithm implements OptimisationAlgorithm {
     private AcceptingStrategy acceptingStrategy;
 
-    @Inject @Named("comparator")
+    @Inject @Dependent @Component
     private OptimisationValueComparator comparator;
 
     /**

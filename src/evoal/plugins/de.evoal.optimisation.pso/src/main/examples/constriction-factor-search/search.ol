@@ -9,21 +9,20 @@ import "definitions" from de.evoal.pipeline.optimisation;
 import "definitions" from de.evoal.optimisation.ea.optimisation;
 import "definitions" from de.evoal.optimisation.pso.optimisation;
 
-import "data" from search;
+import "data" from 'search';
 
-module search {
+module 'search' {
 	specify problem 'example-search' {
-		description := "Simple search";
-		'search-space' := [data 'x:0'];
-		'optimisation-space' := [data 'y:0'];
-		'maximise' := false;
-		'optimisation-function' := 'benchmark-function' {
+		search for data 'x:0'
+
+		 map with 'benchmark-function' {
 			'benchmarks' := [
 				'benchmark-configuration' { function := ackley {};    reads := [data 'x:0']; writes := [data 'y:0']; }
 			];
-		};
+		}
+		
+		and minimise data 'y:0'
 	}
-
 
 	configure 'particle-swarm-optimisation' for 'example-search' {
 		'number-of-generations' := 200;
@@ -40,6 +39,6 @@ module search {
 		'comparator' := 'numeric-comparator' {};
 		'optimisation-function' := 'problem-function' {};
 		'stopping-criteria' := [ 'iteration-count' { 'maximum-iterations' := 200; } ];
-		documenting := [ 'candidates-per-iteration' {} ];
+		document := [ 'candidates-per-iteration' {} ];
 	}
 }

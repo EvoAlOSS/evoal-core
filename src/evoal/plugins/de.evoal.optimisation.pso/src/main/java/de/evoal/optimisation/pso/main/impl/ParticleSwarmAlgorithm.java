@@ -2,9 +2,7 @@ package de.evoal.optimisation.pso.main.impl;
 
 import de.evoal.core.api.cdi.BeanFactory;
 import de.evoal.core.api.cdi.Component;
-import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.core.api.utils.AttributeHelper;
-import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
 import de.evoal.optimisation.api.cdi.StoppingCriterionProducer;
 import de.evoal.optimisation.api.model.*;
 import de.evoal.optimisation.api.statistics.writer.StatisticsWriter;
@@ -30,10 +28,6 @@ public class ParticleSwarmAlgorithm implements OptimisationAlgorithm {
     @Inject
     private AttributeHelper helper;
 
-    @Inject
-    @ConfigurationValue(entry = OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "problem.maximise")
-    private boolean maximise;
-
     private int maximumNumberOfGenerations;
 
     @Inject @Dependent @Component
@@ -41,11 +35,6 @@ public class ParticleSwarmAlgorithm implements OptimisationAlgorithm {
 
     @Inject
     private StoppingCriterionProducer producer;
-
-    /**
-     * Swarm size
-     */
-    private int sizeOfPopulation;
 
     @Inject @Component
     private StatisticsWriter statistics;
@@ -69,7 +58,7 @@ public class ParticleSwarmAlgorithm implements OptimisationAlgorithm {
         int generation = 0;
         swarm.initialise();
 
-        Iteration snapshot = new PSOIteration(generation, maximise, swarm);
+        Iteration snapshot = new PSOIteration(generation, swarm);
         statistics.add(snapshot);
         while(!criterion.shouldTerminate(snapshot)) {
             generation = generation + 1;
@@ -79,7 +68,7 @@ public class ParticleSwarmAlgorithm implements OptimisationAlgorithm {
             swarm.move(generation, maximumNumberOfGenerations);
             swarm.evaluate();
 
-            snapshot = new PSOIteration(generation, maximise, swarm);
+            snapshot = new PSOIteration(generation, swarm);
             statistics.add(snapshot);
         }
 

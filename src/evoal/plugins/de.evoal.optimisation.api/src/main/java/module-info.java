@@ -38,6 +38,7 @@ module de.evoal.optimisation.api {
     requires commons.math3;
     requires de.evoal.core.main;
     requires jakarta.ejb.api;
+    requires com.google.common;
 
     opens de.evoal.optimisation; // export dl files.
 

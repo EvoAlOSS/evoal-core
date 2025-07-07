@@ -9,21 +9,26 @@ import de.evoal.languages.model.base.definitions.DataDescription;
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.util.List;
+import java.util.function.Function;
 
 @Dependent
 @Named("de.evoal.optimisation.core.hierarchical-comparator")
 public class HierarchicalComparator implements OptimisationValueComparator {
+    @Inject
+    private AttributeEvaluator evaluator;
+
     private int[] orderIndices;
 
     @Inject @Named("optimisation-space-specification")
     private PropertiesSpecification optimisationSpecification;
 
-    @Inject
-    private AttributeEvaluator evaluator;
+    @Inject @Named("optimisation-value-conversions")
+    private List<Function<Double, Double>> valueConversions;
 
     @Override
     public HierarchicalValue toValue(final double[] fitnessValues) {
-        return HierarchicalValue.of(orderIndices, fitnessValues);
+        return HierarchicalValue.of(valueConversions, orderIndices, fitnessValues);
     }
 
     @Override

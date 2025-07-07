@@ -61,10 +61,6 @@ public class EvolutionaryAlgorithmOptimisation implements OptimisationAlgorithm 
 	private int sizeOfPopulation;
 
 	@Inject
-	@ConfigurationValue(entry = OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "problem.maximise")
-	private Boolean maximize;
-
-	@Inject
 	@ConfigurationValue(entry = OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.maximum-age")
 	private int maximumAge;
 
@@ -118,7 +114,7 @@ public class EvolutionaryAlgorithmOptimisation implements OptimisationAlgorithm 
 											.offspringSelector(this.offspringSelector)
 											.offspringFraction(offspringFraction)
 											.survivorsSelector(this.survivorSelector)
-											.optimize(maximize ? Optimize.MAXIMUM : Optimize.MINIMUM)
+											.optimize(Optimize.MAXIMUM)
 											.populationSize(sizeOfPopulation)
 											.constraint(constraint)
 											.maximalPhenotypeAge(maximumAge)

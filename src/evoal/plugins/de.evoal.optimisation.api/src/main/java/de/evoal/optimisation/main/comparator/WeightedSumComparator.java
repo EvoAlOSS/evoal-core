@@ -7,10 +7,15 @@ import de.evoal.languages.model.base.expressions.Instance;
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.util.List;
+import java.util.function.Function;
 
 @Dependent
 @Named("de.evoal.optimisation.core.weighted-sum")
 public class WeightedSumComparator implements OptimisationValueComparator {
+    @Inject @Named("optimisation-value-conversions")
+    private List<Function<Double, Double>> valueConversions;
+
     private double [] weights;
 
     @Inject
@@ -18,7 +23,7 @@ public class WeightedSumComparator implements OptimisationValueComparator {
 
     @Override
     public WeightedSumOptimisationValue toValue(final double[] fitnessValues) {
-        return WeightedSumOptimisationValue.of(weights, fitnessValues);
+        return WeightedSumOptimisationValue.of(valueConversions, weights, fitnessValues);
     }
 
     @Override

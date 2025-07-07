@@ -5,27 +5,34 @@ import lombok.Getter;
 import lombok.NonNull;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.function.Function;
 
 public class HierarchicalValue implements OptimisationValue {
     @Getter
     private final @NonNull double[] fitnessValues;
     private final @NonNull int[] orderIndices;
+    private final @NonNull Function<Double, Double> [] valueConversions;
 
-    private HierarchicalValue(final @NonNull int[] orderIndices, final @NonNull double[] fitnessValues) {
+    private HierarchicalValue(final @NonNull List<Function<Double, Double>> valueConversions,  final @NonNull int[] orderIndices, final @NonNull double[] fitnessValues) {
         this.orderIndices = Arrays.copyOf(orderIndices, orderIndices.length);
         this.fitnessValues = fitnessValues;
+        this.valueConversions = valueConversions.toArray(size -> new Function[size]);
     }
 
-    public static HierarchicalValue of(final int[] orderIndices, final double [] fitnessValues) {
-        return new HierarchicalValue(orderIndices, fitnessValues);
+    public static HierarchicalValue of(final @NonNull List<Function<Double, Double>> valueConversions, final int[] orderIndices, final double [] fitnessValues) {
+        return new HierarchicalValue(valueConversions, orderIndices, fitnessValues);
     }
 
     @Override
     public int compareTo(final @NonNull OptimisationValue other) {
         if(other instanceof HierarchicalValue hv) {
             for(int index : orderIndices) {
-                if(fitnessValues[index] != hv.fitnessValues[index]) {
-                    return Double.compare(fitnessValues[index], hv.fitnessValues[index]);
+                final double thisNormalizedValue = valueConversions[index].apply(fitnessValues[index]);
+                final double otherNormalizedValue = valueConversions[index].apply(hv.fitnessValues[index]);
+
+                if(thisNormalizedValue != otherNormalizedValue) {
+                    return Double.compare(thisNormalizedValue, otherNormalizedValue);
                 }
             }
 
