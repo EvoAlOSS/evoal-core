@@ -158,7 +158,7 @@ public class EvolutionaryAlgorithmOptimisation implements OptimisationAlgorithm 
 
 		final StoppingCriterion criterion = stoppingProducer.create(configuration.getAlgorithm());
 
-		this.stoppingCriterion = (result) -> criterion.shouldTerminate(new IterationAdapter(result));
+		this.stoppingCriterion = (result) -> criterion.shouldContinue(new IterationAdapter(result));
 	}
 
 	private <G extends Gene<?, G>> Alterer<?, OptimisationValue> flattenAltererMap() {

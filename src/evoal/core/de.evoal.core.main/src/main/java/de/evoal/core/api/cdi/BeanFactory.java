@@ -17,7 +17,7 @@ import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 /**
- * Deltaspike wrapper for reducing dependencies in extension.
+ * Deltaspike wrapper for reducing dependencies in extensions.
  */
 @Slf4j
 public final class BeanFactory {
@@ -83,15 +83,12 @@ public final class BeanFactory {
     }
 
     public static <T extends EvoalComponent<T>> T createComponent(final Class<T> type, final String name, final Instance configuration) {
-        Requirements.requireNotNull(type);
         Requirements.requireNotNull(configuration);
-        Requirements.requireNotNull(name);
 
-        log.info("Creating bean for instance of type {}.", name);
         try {
-            return BeanProvider.getContextualReference(name, false, type)
+            return create(name, type)
                     .init(configuration);
-        } catch (final IllegalStateException | IllegalArgumentException | InitializationException e) {
+        } catch (final InitializationException e) {
             log.error("Failed to create contextual reference of type '{}' with name '{}'.", type, name);
             logInstantiationError(type, e);
 
@@ -100,19 +97,15 @@ public final class BeanFactory {
     }
 
     public static <T extends EvoalComponent<T>> T createComponent(final Class<T> type, final String name, final Instance configuration, final Consumer<T> preInit) {
-        Requirements.requireNotNull(type);
-        Requirements.requireNotNull(name);
-        Requirements.requireNotNull(configuration);
         Requirements.requireNotNull(preInit);
 
-        log.info("Creating bean for instance of type {}.", name);
         try {
-            final T instance = BeanProvider.getContextualReference(name, false, type);
+            final T instance = create(name, type);
             preInit.accept(instance);
             instance.init(configuration);
 
             return instance;
-        } catch (final IllegalStateException | IllegalArgumentException | InitializationException e) {
+        } catch (final InitializationException e) {
             log.error("Failed to create contextual reference of type '{}' with name '{}'.", type, name);
             logInstantiationError(type, e);
 
@@ -179,6 +172,7 @@ public final class BeanFactory {
     public static <T extends Validator> Collection<? extends T> createComponents(final Class<T> clazz) {
         return BeanProvider.getBeanDefinitions(clazz, true, true)
                 .stream()
+                .peek(b -> log.info("Creating bean for instance of type {}.", b.getName()))
                 .map(bean -> BeanProvider.getContextualReference(clazz, bean))
                 .collect(Collectors.toUnmodifiableList());
     }

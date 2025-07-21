@@ -21,11 +21,10 @@ public class StoppingCriterionProducer {
         // create list of stopping criteria
         final List<Instance> criteria = helper.lookup(algorithm, "stopping-criteria");
 
-        for(final de.evoal.languages.model.base.expressions.Instance delegateConfig : criteria) {
-            final StoppingCriterion delegate = BeanFactory.createComponent(StoppingCriterion.class, delegateConfig);
-
-            criterion.add(delegate);
-        }
+        // instantiate all criteria and add it to the criterion combiner
+        criteria.stream()
+                .map(config -> BeanFactory.createComponent(StoppingCriterion.class, config))
+                .forEach(criterion::add);
 
         return criterion;
     }

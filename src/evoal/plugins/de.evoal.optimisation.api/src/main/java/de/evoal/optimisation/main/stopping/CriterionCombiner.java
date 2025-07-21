@@ -8,25 +8,30 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Evaluates all stopping critera one after another and stops (and returns {@code true})
- *   as soon as a stopping criterion returns {@code true}.
+ * Evaluates all stopping criteria one after another and stops (and returns {@code true})
+ *   as soon as a stopping criterion returns {@code true}. The evaluation is a lazy one
+ *   so the first criterion that returns {@code true} will stop any further evaluation.
  */
 @Vetoed
 public class CriterionCombiner implements StoppingCriterion {
-    private List<StoppingCriterion> criteria = new LinkedList<>();
+    /**
+     * List of all criteria to check.
+     */
+    private final List<StoppingCriterion> criteria = new LinkedList<>();
 
+    /**
+     * Adds a new criterion to the list of criteria to check.
+     *
+     * @param criterion The criterion to add.
+     */
     public void add(final StoppingCriterion criterion) {
         criteria.add(criterion);
     }
 
     @Override
     public boolean shouldTerminate(final Iteration iteration) {
-        for(final StoppingCriterion criterion : criteria) {
-            if(criterion.shouldTerminate(iteration)) {
-                return true;
-            }
-        }
-
-        return false;
+        return criteria
+                .stream()
+                .anyMatch(c -> c.shouldTerminate(iteration));
     }
 }

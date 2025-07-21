@@ -84,7 +84,7 @@ public class LocalSearchAlgorithm implements OptimisationAlgorithm {
 
         // 2. iterate  until stopping criteria is met or there is no new neighbour
         int iterationNumber = 1;
-        while(!criterion.shouldTerminate(state)) {
+        while(criterion.shouldContinue(state)) {
             // 2.1 Just a final copy to satisfy Java
             final OptimisationValue finalCandidateFitess = candidateFitness;
 
