@@ -23,18 +23,25 @@ tags = []
 
 connection = http.client.HTTPSConnection(SERVER)
 headers = {'PRIVATE-TOKEN' : TOKEN}
+headers = {}
 
 # collect list of all available branches in variable branches
+print("Searching existing branches:")
 connection.request("GET", BASE_URL + "repository/branches", headers = headers)
 response = connection.getresponse()
 for branch in json.loads(response.read()):
-    branches.append(branch['name'])
+    name = branch['name']
+    print("  found branch: ", name)
+    branches.append(name)
 
 # collect list of all available tags in variable tags
+print("Searching existing tags:")
 connection.request("GET", BASE_URL + "repository/tags", headers = headers)
 response = connection.getresponse()
 for tag in json.loads(response.read()):
-    tags.append(tag['name'])
+    name = tag['name']
+    print("  found tag: ", name)
+    tags.append(name)
 
 # delete all artifacts that can be deleted
 #connection.request("DELETE", BASE_URL + "artifacts", headers = headers)
@@ -44,15 +51,6 @@ for tag in json.loads(response.read()):
 
 ###########
 ###########
-print("Existing branches:")
-for branch in branches:
-    print("  %s", (branch,))
-
-print("Existing tags:")
-for tag in tags:
-    print("  %s", (tag,))
-
-
 # delete job artifacts of deleted branches
 job_page=1
 jobs_to_delete=[]
@@ -63,7 +61,7 @@ existing = set() # collect already existing jobs
 print("Collecting jobs for deletion:")
 while True:
     connection.request("GET", BASE_URL + "jobs?id=30380&page=%s&per_page=100" % (job_page,), headers = headers)
-    response = connection.getresponse()
+    response = connection.getresponse() 
     jobs = json.loads(response.read())
 
     # terminate the loop if there are no jobs in a result 

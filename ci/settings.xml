@@ -48,12 +48,13 @@
       <layout>p2</layout>
       <mirrorOfLayouts>p2</mirrorOfLayouts>
     </mirror>
-
+<!--
     <mirror>
       <id>central-proxy</id>
       <name>GitLab proxy of central repo</name>
       <url>https://gitlab.informatik.uni-bremen.de/api/v4/projects/30380/dependency_proxy/packages/maven</url>
       <mirrorOf>central</mirrorOf>
     </mirror>
+-->    
   </mirrors>
 </settings>
