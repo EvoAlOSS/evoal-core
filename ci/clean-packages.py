@@ -22,8 +22,11 @@ branches = []
 tags = []
 
 connection = http.client.HTTPSConnection(SERVER)
-headers = {'PRIVATE-TOKEN' : TOKEN}
-headers = {}
+
+if "CI_JOB_TOKEN" in os.environ.keys():
+    headers = {'JOB-TOKEN' : os.environ.get('CI_JOB_TOKEN')}
+else:
+    headers = {'PRIVATE-TOKEN' : TOKEN}
 
 # collect list of all available branches in variable branches
 print("Searching existing branches:")
