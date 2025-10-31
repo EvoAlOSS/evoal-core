@@ -3,7 +3,7 @@ Automatic-Module-Name: de.evoal.languages.model.ol.dsl.ide
 Bundle-ManifestVersion: 2
 Bundle-Name: de.evoal.languages.model.ol.dsl.ide
 Bundle-Vendor: My Company
-Bundle-Version: 2025.10.0.qualifier
+Bundle-Version: 2026.4.0.qualifier
 Bundle-SymbolicName: de.evoal.languages.model.ol.dsl.ide; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: de.evoal.languages.model.ol.dsl,
@@ -11,7 +11,7 @@ Require-Bundle: de.evoal.languages.model.ol.dsl,
  org.eclipse.xtext.ide,
  org.eclipse.xtext.xbase.ide,
  org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
- de.evoal.languages.model.base.dsl.ide;bundle-version="2025.10.0"
+ de.evoal.languages.model.base.dsl.ide;bundle-version="2026.4.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-17
 Export-Package: de.evoal.languages.model.ol.dsl.ide.contentassist.antlr.internal,
  de.evoal.languages.model.ol.dsl.ide.contentassist.antlr

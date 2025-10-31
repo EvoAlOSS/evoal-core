@@ -3,7 +3,7 @@ Automatic-Module-Name: de.evoal.languages.model.ol.dsl
 Bundle-ManifestVersion: 2
 Bundle-Name: de.evoal.languages.model.ol.dsl
 Bundle-Vendor: My Company
-Bundle-Version: 2025.10.0.qualifier
+Bundle-Version: 2026.4.0.qualifier
 Bundle-SymbolicName: de.evoal.languages.model.ol.dsl; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: de.evoal.languages.model.ol,
@@ -15,8 +15,8 @@ Require-Bundle: de.evoal.languages.model.ol,
  org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
  de.evoal.languages.model.utils;bundle-version="1.0.0",
  de.evoal.languages.model.dl;bundle-version="1.0.0",
- de.evoal.languages.model.ddl;bundle-version="2025.10.0",
- de.evoal.languages.model.base.dsl;bundle-version="2025.10.0";visibility:=reexport,
+ de.evoal.languages.model.ddl;bundle-version="2026.4.0",
+ de.evoal.languages.model.base.dsl;bundle-version="2026.4.0";visibility:=reexport,
  io.typefox.xtext2langium;bundle-version="0.4.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-17
 Export-Package: de.evoal.languages.model.ol.dsl.validation,

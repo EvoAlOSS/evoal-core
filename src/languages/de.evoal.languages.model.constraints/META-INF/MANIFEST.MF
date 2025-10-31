@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: de.evoal.languages.model.constraints;singleton:=true
 Automatic-Module-Name: de.evoal.languages.model.constraints
-Bundle-Version: 2025.10.0.qualifier
+Bundle-Version: 2026.4.0.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
@@ -11,7 +11,7 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
  de.evoal.languages.model.base;bundle-version="1.0.0",
  de.evoal.languages.model.ddl;bundle-version="1.0.0",
- de.evoal.languages.model.interpreter;bundle-version="2025.10.0"
+ de.evoal.languages.model.interpreter;bundle-version="2026.4.0"
 Eclipse-LazyStart: true
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-17
