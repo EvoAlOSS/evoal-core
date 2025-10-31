@@ -1,106 +1,54 @@
 {
-  "functions" : [ {
-    "inputDimensions" : [ "x:0" ],
-    "name" : "identity",
-    "outputDimensions" : [ "y:0" ],
-    "parameters" : [ ],
-    "state" : [ ],
-    "outputParameters" : { }
+  "inputFeatures" : [ "x:0" ],
+  "name" : "de.evoal.surrogate.simple.ml.linear-regression",
+  "outputFeatures" : [ "y:0" ],
+  "state" : [ {
+    "name" : "slope",
+    "value" : {
+      "type" : "double",
+      "value" : -0.15365798063682554
+    }
   }, {
-    "inputDimensions" : [ "x:0" ],
-    "name" : "linear-regression",
-    "outputDimensions" : [ "y:1" ],
-    "parameters" : [ {
-      "name" : "intercept",
-      "value" : {
-        "type" : "double",
-        "value" : 0.0
-      }
-    }, {
-      "name" : "slope",
-      "value" : {
-        "type" : "double",
-        "value" : 1.0
-      }
-    } ],
-    "state" : [ {
-      "name" : "intercept",
-      "value" : {
-        "type" : "double",
-        "value" : 11.712570037202154
-      }
-    }, {
-      "name" : "slope",
-      "value" : {
-        "type" : "double",
-        "value" : -0.15365798063682554
-      }
-    }, {
-      "name" : "r²",
-      "value" : {
-        "type" : "double",
-        "value" : 0.025909832934437375
-      }
-    } ],
-    "outputParameters" : { }
+    "name" : "intercept",
+    "value" : {
+      "type" : "double",
+      "value" : 11.712570037202154
+    }
   }, {
-    "inputDimensions" : [ "x:0" ],
-    "name" : "simple-quadratic-regression",
-    "outputDimensions" : [ "y:2" ],
-    "parameters" : [ {
-      "name" : "intercept",
-      "value" : {
-        "type" : "double",
-        "value" : 0.0
-      }
-    }, {
-      "name" : "slope",
-      "value" : {
-        "type" : "double",
-        "value" : 1.0
-      }
-    } ],
-    "state" : [ {
-      "name" : "intercept",
-      "value" : {
-        "type" : "double",
-        "value" : 8.826315970399465
-      }
-    }, {
-      "name" : "slope",
-      "value" : {
-        "type" : "double",
-        "value" : 0.09933588719842316
-      }
-    }, {
-      "name" : "r²",
-      "value" : {
-        "type" : "double",
-        "value" : 0.5440278766948579
-      }
-    } ],
-    "outputParameters" : { }
+    "name" : "r²",
+    "value" : {
+      "type" : "double",
+      "value" : 0.025909832934437375
+    }
   } ],
+  "predictionPipeline" : {
+    "type" : "pipeline-definition",
+    "name" : "predicting",
+    "steps" : [ {
+      "type" : "pipeline-step",
+      "definition" : {
+        "type" : "pipeline-definition",
+        "name" : "preparation",
+        "steps" : [ ]
+      }
+    }, {
+      "type" : "concrete-step",
+      "reads" : [ "x:0" ],
+      "writes" : [ "y:0" ],
+      "configuration" : {
+        "type" : "instance",
+        "class-definition" : "de.evoal.surrogate.pipeline.model-prediction",
+        "attributes" : [ ]
+      }
+    } ]
+  },
+  "inputParameters" : { },
   "outputParameters" : {
-    "y:2" : [ {
-      "name" : "r²",
-      "value" : {
-        "type" : "double",
-        "value" : 0.5485875979279088
-      }
-    } ],
-    "y:1" : [ {
-      "name" : "r²",
-      "value" : {
-        "type" : "double",
-        "value" : 0.03565073460509294
-      }
-    } ],
     "y:0" : [ {
       "name" : "r²",
       "value" : {
         "type" : "double",
-        "value" : -7.063682935513912
+        "value" : 0.03565073460509294
       }
     } ]
   }

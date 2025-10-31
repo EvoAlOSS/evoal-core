@@ -8,6 +8,7 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.*;
 import org.eclipse.emf.ecore.impl.DynamicEObjectImpl;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -19,6 +20,10 @@ public class TypedEObject implements EObject {
 
     public TypedEObject(final @NonNull EClass clazz) {
         this.delegate = new DynamicEObjectImpl(clazz);
+    }
+
+    public TypedEObject(final @NonNull EObject object) {
+        this.delegate = EcoreUtil.copy(object);
     }
 
     @Override
@@ -134,5 +139,9 @@ public class TypedEObject implements EObject {
     @Override
     public void eNotify(Notification notification) {
         delegate.eNotify(notification);
+    }
+
+    public final TypedEObject copy() {
+        return new TypedEObject(delegate);
     }
 }

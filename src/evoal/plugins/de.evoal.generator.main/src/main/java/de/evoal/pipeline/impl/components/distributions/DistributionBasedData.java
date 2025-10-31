@@ -3,7 +3,7 @@ package de.evoal.pipeline.impl.components.distributions;
 import de.evoal.languages.model.base.expressions.Instance;
 import de.evoal.pipeline.api.distribution.Distribution;
 import de.evoal.pipeline.api.distribution.DistributionFactory;
-import de.evoal.pipeline.api.model.ComponentImpl;
+import de.evoal.pipeline.api.model.PipelineComponentImpl;
 import de.evoal.core.api.ecore.TypedEObject;
 import lombok.NonNull;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -16,7 +16,7 @@ import java.util.List;
 
 @Named("de.evoal.pipeline.distributions.distribution-based-data")
 @Dependent
-public class DistributionBasedData extends ComponentImpl {
+public class DistributionBasedData extends PipelineComponentImpl {
     /**
      * List of distributions to use to sample data
      */

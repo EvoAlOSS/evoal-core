@@ -3,6 +3,7 @@
  */
 package de.evoal.languages.model.generator;
 
+import de.evoal.languages.model.base.expressions.ExpressionsPackage;
 import de.evoal.languages.model.execution.ExecutionPackage;
 
 import org.eclipse.emf.ecore.EAttribute;
@@ -162,13 +163,60 @@ public interface GeneratorPackage extends EPackage {
 	int STEP = 2;
 
 	/**
+	 * The number of structural features of the '<em>Step</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STEP_FEATURE_COUNT = ExpressionsPackage.LITERAL_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link de.evoal.languages.model.generator.impl.PipelineStepImpl <em>Pipeline Step</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.evoal.languages.model.generator.impl.PipelineStepImpl
+	 * @see de.evoal.languages.model.generator.impl.GeneratorPackageImpl#getPipelineStep()
+	 * @generated
+	 */
+	int PIPELINE_STEP = 3;
+
+	/**
+	 * The feature id for the '<em><b>Definition</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PIPELINE_STEP__DEFINITION = STEP_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Pipeline Step</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PIPELINE_STEP_FEATURE_COUNT = STEP_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link de.evoal.languages.model.generator.impl.ConcreteStepImpl <em>Concrete Step</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.evoal.languages.model.generator.impl.ConcreteStepImpl
+	 * @see de.evoal.languages.model.generator.impl.GeneratorPackageImpl#getConcreteStep()
+	 * @generated
+	 */
+	int CONCRETE_STEP = 4;
+
+	/**
 	 * The feature id for the '<em><b>Instance</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STEP__INSTANCE = 0;
+	int CONCRETE_STEP__INSTANCE = STEP_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Reads</b></em>' containment reference list.
@@ -177,7 +225,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STEP__READS = 1;
+	int CONCRETE_STEP__READS = STEP_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Writes</b></em>' containment reference list.
@@ -186,16 +234,16 @@ public interface GeneratorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STEP__WRITES = 2;
+	int CONCRETE_STEP__WRITES = STEP_FEATURE_COUNT + 2;
 
 	/**
-	 * The number of structural features of the '<em>Step</em>' class.
+	 * The number of structural features of the '<em>Concrete Step</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STEP_FEATURE_COUNT = 3;
+	int CONCRETE_STEP_FEATURE_COUNT = STEP_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.generator.impl.ApplyStatementImpl <em>Apply Statement</em>}' class.
@@ -205,7 +253,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see de.evoal.languages.model.generator.impl.GeneratorPackageImpl#getApplyStatement()
 	 * @generated
 	 */
-	int APPLY_STATEMENT = 3;
+	int APPLY_STATEMENT = 5;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' attribute.
@@ -330,37 +378,68 @@ public interface GeneratorPackage extends EPackage {
 	EClass getStep();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link de.evoal.languages.model.generator.Step#getInstance <em>Instance</em>}'.
+	 * Returns the meta object for class '{@link de.evoal.languages.model.generator.PipelineStep <em>Pipeline Step</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Pipeline Step</em>'.
+	 * @see de.evoal.languages.model.generator.PipelineStep
+	 * @generated
+	 */
+	EClass getPipelineStep();
+
+	/**
+	 * Returns the meta object for the reference '{@link de.evoal.languages.model.generator.PipelineStep#getDefinition <em>Definition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Definition</em>'.
+	 * @see de.evoal.languages.model.generator.PipelineStep#getDefinition()
+	 * @see #getPipelineStep()
+	 * @generated
+	 */
+	EReference getPipelineStep_Definition();
+
+	/**
+	 * Returns the meta object for class '{@link de.evoal.languages.model.generator.ConcreteStep <em>Concrete Step</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Concrete Step</em>'.
+	 * @see de.evoal.languages.model.generator.ConcreteStep
+	 * @generated
+	 */
+	EClass getConcreteStep();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link de.evoal.languages.model.generator.ConcreteStep#getInstance <em>Instance</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Instance</em>'.
-	 * @see de.evoal.languages.model.generator.Step#getInstance()
-	 * @see #getStep()
+	 * @see de.evoal.languages.model.generator.ConcreteStep#getInstance()
+	 * @see #getConcreteStep()
 	 * @generated
 	 */
-	EReference getStep_Instance();
+	EReference getConcreteStep_Instance();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.generator.Step#getReads <em>Reads</em>}'.
+	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.generator.ConcreteStep#getReads <em>Reads</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Reads</em>'.
-	 * @see de.evoal.languages.model.generator.Step#getReads()
-	 * @see #getStep()
+	 * @see de.evoal.languages.model.generator.ConcreteStep#getReads()
+	 * @see #getConcreteStep()
 	 * @generated
 	 */
-	EReference getStep_Reads();
+	EReference getConcreteStep_Reads();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.generator.Step#getWrites <em>Writes</em>}'.
+	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.generator.ConcreteStep#getWrites <em>Writes</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Writes</em>'.
-	 * @see de.evoal.languages.model.generator.Step#getWrites()
-	 * @see #getStep()
+	 * @see de.evoal.languages.model.generator.ConcreteStep#getWrites()
+	 * @see #getConcreteStep()
 	 * @generated
 	 */
-	EReference getStep_Writes();
+	EReference getConcreteStep_Writes();
 
 	/**
 	 * Returns the meta object for class '{@link de.evoal.languages.model.generator.ApplyStatement <em>Apply Statement</em>}'.
@@ -498,12 +577,40 @@ public interface GeneratorPackage extends EPackage {
 		EClass STEP = eINSTANCE.getStep();
 
 		/**
+		 * The meta object literal for the '{@link de.evoal.languages.model.generator.impl.PipelineStepImpl <em>Pipeline Step</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.evoal.languages.model.generator.impl.PipelineStepImpl
+		 * @see de.evoal.languages.model.generator.impl.GeneratorPackageImpl#getPipelineStep()
+		 * @generated
+		 */
+		EClass PIPELINE_STEP = eINSTANCE.getPipelineStep();
+
+		/**
+		 * The meta object literal for the '<em><b>Definition</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PIPELINE_STEP__DEFINITION = eINSTANCE.getPipelineStep_Definition();
+
+		/**
+		 * The meta object literal for the '{@link de.evoal.languages.model.generator.impl.ConcreteStepImpl <em>Concrete Step</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.evoal.languages.model.generator.impl.ConcreteStepImpl
+		 * @see de.evoal.languages.model.generator.impl.GeneratorPackageImpl#getConcreteStep()
+		 * @generated
+		 */
+		EClass CONCRETE_STEP = eINSTANCE.getConcreteStep();
+
+		/**
 		 * The meta object literal for the '<em><b>Instance</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference STEP__INSTANCE = eINSTANCE.getStep_Instance();
+		EReference CONCRETE_STEP__INSTANCE = eINSTANCE.getConcreteStep_Instance();
 
 		/**
 		 * The meta object literal for the '<em><b>Reads</b></em>' containment reference list feature.
@@ -511,7 +618,7 @@ public interface GeneratorPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference STEP__READS = eINSTANCE.getStep_Reads();
+		EReference CONCRETE_STEP__READS = eINSTANCE.getConcreteStep_Reads();
 
 		/**
 		 * The meta object literal for the '<em><b>Writes</b></em>' containment reference list feature.
@@ -519,7 +626,7 @@ public interface GeneratorPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference STEP__WRITES = eINSTANCE.getStep_Writes();
+		EReference CONCRETE_STEP__WRITES = eINSTANCE.getConcreteStep_Writes();
 
 		/**
 		 * The meta object literal for the '{@link de.evoal.languages.model.generator.impl.ApplyStatementImpl <em>Apply Statement</em>}' class.

@@ -20,7 +20,8 @@ Require-Bundle: org.eclipse.xtext,
  org.eclipse.core.runtime;bundle-version="3.26.100",
  de.evoal.languages.model.ddl.dsl;bundle-version="1.0.0",
  de.evoal.languages.model.base.dsl;bundle-version="2025.10.0";visibility:=reexport,
- de.evoal.languages.models;bundle-version="2025.10.0";visibility:=reexport
+ de.evoal.languages.models;bundle-version="2025.10.0";visibility:=reexport,
+ io.typefox.xtext2langium;bundle-version="0.4.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-17
 Export-Package: de.evoal.languages.model.generator.dsl,
  de.evoal.languages.model.generator.dsl.services,

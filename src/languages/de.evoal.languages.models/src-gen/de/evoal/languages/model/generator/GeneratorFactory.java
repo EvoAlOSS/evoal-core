@@ -41,13 +41,22 @@ public interface GeneratorFactory extends EFactory {
 	PipelineDefinition createPipelineDefinition();
 
 	/**
-	 * Returns a new object of class '<em>Step</em>'.
+	 * Returns a new object of class '<em>Pipeline Step</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Step</em>'.
+	 * @return a new object of class '<em>Pipeline Step</em>'.
 	 * @generated
 	 */
-	Step createStep();
+	PipelineStep createPipelineStep();
+
+	/**
+	 * Returns a new object of class '<em>Concrete Step</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Concrete Step</em>'.
+	 * @generated
+	 */
+	ConcreteStep createConcreteStep();
 
 	/**
 	 * Returns a new object of class '<em>Apply Statement</em>'.

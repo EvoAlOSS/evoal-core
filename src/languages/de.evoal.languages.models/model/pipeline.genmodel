@@ -17,9 +17,15 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference pipeline.ecore#//PipelineDefinition/steps"/>
     </genClasses>
     <genClasses ecoreClass="pipeline.ecore#//Step">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference pipeline.ecore#//Step/instance"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference pipeline.ecore#//Step/reads"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference pipeline.ecore#//Step/writes"/>
+      <genOperations ecoreOperation="pipeline.ecore#//Step/getValue" body="return this;&#xA;"/>
+    </genClasses>
+    <genClasses ecoreClass="pipeline.ecore#//ConcreteStep">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference pipeline.ecore#//ConcreteStep/instance"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference pipeline.ecore#//ConcreteStep/reads"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference pipeline.ecore#//ConcreteStep/writes"/>
+    </genClasses>
+    <genClasses ecoreClass="pipeline.ecore#//PipelineStep">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference pipeline.ecore#//PipelineStep/definition"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

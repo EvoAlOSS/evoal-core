@@ -44,6 +44,16 @@ public class EAnnotationHelper {
         return features;
     }
 
+    public Map<DataDescription, EStructuralFeature> featuresOf(final Space space) {
+        final Map<DataDescription, EStructuralFeature> features = new HashMap<>();
+
+        for (final EStructuralFeature feature : space.getEClass().getEAllStructuralFeatures()) {
+            features.put(dataDescriptionOf(feature).get(), feature);
+        }
+
+        return features;
+    }
+
     public List<DataDescription> dataDescriptionsOf(final Space space) {
         return space.stream()
                 .map(this::dataDescriptionOf)
@@ -58,11 +68,10 @@ public class EAnnotationHelper {
                 .build();
     }
 
-    public Space subSpaceOf(final EClass space, final List<DataDescription> descriptions) {
+    public Space subSpaceOf(final Space space, final List<DataDescription> descriptions) {
         final Map<DataDescription, EStructuralFeature> featureMap = featuresOf(space);
 
-        return new Space(
-            space,
+        return space.subSpace(
             descriptions.stream()
                         .map(featureMap::get)
         );

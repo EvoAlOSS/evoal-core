@@ -41,13 +41,22 @@ public interface PipelineFactory extends EFactory {
 	PipelineDefinition createPipelineDefinition();
 
 	/**
+	 * Returns a new object of class '<em>Concrete Step</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Concrete Step</em>'.
+	 * @generated
+	 */
+	ConcreteStep createConcreteStep();
+
+	/**
 	 * Returns a new object of class '<em>Step</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>Step</em>'.
 	 * @generated
 	 */
-	Step createStep();
+	PipelineStep createPipelineStep();
 
 	/**
 	 * Returns the package supported by this factory.

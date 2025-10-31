@@ -3,7 +3,7 @@ package de.evoal.pipeline.impl.components.benchmarks;
 import de.evoal.core.api.languages.AttributeEvaluator;
 import de.evoal.core.api.utils.InitializationException;
 import de.evoal.languages.model.base.expressions.Instance;
-import de.evoal.pipeline.api.model.ComponentImpl;
+import de.evoal.pipeline.api.model.PipelineComponentImpl;
 import de.evoal.core.api.ecore.TypedEObject;
 import lombok.NonNull;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -14,7 +14,7 @@ import javax.inject.Named;
 
 @Dependent
 @Named("de.evoal.pipeline.benchmarks.rastrigin")
-public class Rastrigin extends ComponentImpl {
+public class Rastrigin extends PipelineComponentImpl {
     @Inject
     private AttributeEvaluator evaluator;
 
@@ -38,7 +38,7 @@ public class Rastrigin extends ComponentImpl {
     }
 
     @Override
-    public ComponentImpl init(final Instance instance) throws InitializationException {
+    public PipelineComponentImpl init(final Instance instance) throws InitializationException {
         a = evaluator.attributeToDouble(instance, "a");
 
         return this;

@@ -1,5 +1,6 @@
 package de.evoal.surrogate.main.internal;
 
+import de.evoal.surrogate.api.function.ModelFunction;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 
@@ -7,34 +8,12 @@ import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.File;
-import java.util.*;
-import java.util.function.BiConsumer;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
-import org.eclipse.emf.ecore.EStructuralFeature;
-
-import de.evoal.core.api.cdi.BeanFactory;
-import de.evoal.core.api.ecore.Space;
-import de.evoal.core.api.ecore.stream.EObjectPairStreamFactory;
-import de.evoal.core.api.ecore.stream.FileBasedEObjectStreamSupplier;
 import de.evoal.core.api.languages.AttributeEvaluator;
-import de.evoal.core.api.utils.ConstantSwitch;
-import de.evoal.core.api.utils.Requirements;
 import de.evoal.core.interpreter.api.InterpreterState;
 import de.evoal.core.interpreter.api.ProgramExecutionSwitch;
-import de.evoal.languages.model.base.definitions.DataDescription;
-import de.evoal.languages.model.base.definitions.FunctionDefinition;
-import de.evoal.languages.model.dl.util.FQNProvider;
-import de.evoal.languages.model.execution.CallBuiltinFunction;
-import de.evoal.languages.model.execution.Statement;
-import de.evoal.languages.model.mll.PredictStatement;
-import de.evoal.languages.model.mll.SurrogateDefinition;
 import de.evoal.core.api.dynamic.EAnnotationHelper;
-import de.evoal.surrogate.api.SurrogateInformationCalculator;
-import de.evoal.surrogate.api.configuration.SurrogateConfiguration;
-import de.evoal.surrogate.api.function.SurrogateFunction;
 import de.evoal.surrogate.api.training.TrainingDataManager;
 
 
@@ -46,29 +25,24 @@ public class MLLProgramExecutionSwitch extends ProgramExecutionSwitch {
      */
     private final static Pattern varPattern = Pattern.compile("\\$\\{[^}]*}");
 
-    private SurrogateConfiguration config;
-
     @Inject
     private AttributeEvaluator evaluator;
 
     @Inject
     private EAnnotationHelper helper;
 
-    private SurrogateFunction function;
+    private ModelFunction function;
 
     @Inject
     private TrainingDataManager manager;
 
-    @Inject
-    @Named("surrogate-writer")
-    private BiConsumer<@NonNull SurrogateConfiguration, @NonNull File> surrogateWriter;
 
     public MLLProgramExecutionSwitch setState(final InterpreterState context) {
         super.context = context;
 
         return this;
     }
-
+/*
     @Override
     public Object caseStatement(final Statement statement) {
         if(statement instanceof PredictStatement predictStatement) {
@@ -183,7 +157,7 @@ public class MLLProgramExecutionSwitch extends ProgramExecutionSwitch {
      *
      * @param definition Definition of the function
      * @return A valid instance
-     */
+     * /
     private SurrogateInformationCalculator createFunction(final FunctionDefinition definition) {
         Requirements.requireNotNull(definition);
 
@@ -197,4 +171,5 @@ public class MLLProgramExecutionSwitch extends ProgramExecutionSwitch {
             throw e;
         }
     }
+    */
 }

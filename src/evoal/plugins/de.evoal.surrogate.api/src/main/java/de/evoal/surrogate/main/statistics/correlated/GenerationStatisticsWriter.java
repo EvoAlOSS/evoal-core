@@ -1,5 +1,13 @@
 package de.evoal.surrogate.main.statistics.correlated;
 
+import de.evoal.core.api.dynamic.EAnnotationHelper;
+import de.evoal.core.api.dynamic.EClassProvider;
+import de.evoal.core.api.ecore.Space;
+import de.evoal.core.api.ecore.TypedEObject;
+import de.evoal.core.api.ecore.stream.EObjectStreamSupplier;
+import de.evoal.core.api.ecore.stream.FileBasedEObjectStreamSupplier;
+import de.evoal.core.api.utils.AttributeHelper;
+import de.evoal.languages.model.base.definitions.DataDescription;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
@@ -13,6 +21,8 @@ import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import smile.math.matrix.Matrix;
 
 import de.evoal.core.api.board.Blackboard;
@@ -40,6 +50,14 @@ import de.evoal.surrogate.api.SurrogateBlackboardEntries;
 @Named("de.evoal.surrogate.optimisation.correlated")
 @Dependent
 public class GenerationStatisticsWriter implements StatisticsWriter {
+    @Inject
+    private EAnnotationHelper helper;
+
+    @Inject
+    private AttributeHelper attribute;
+
+    @Inject
+    private EClassProvider dynamic;
 
     private long endTime;
 
@@ -52,14 +70,12 @@ public class GenerationStatisticsWriter implements StatisticsWriter {
     @Inject
     private Blackboard board;
 
-//    @Inject @Named("surrogate-source-properties-specification")
-    private PropertiesSpecification sourceSpec;
+    private Space sourceSpec;
 
-//    @Inject @Named("surrogate-target-properties-specification")
-    private PropertiesSpecification targetSpec;
+    private Space targetSpec;
 
 
-    private List<Properties> sourceTrainingPoints;
+    private List<TypedEObject> sourceTrainingPoints;
 
     private Writer writer;
 
@@ -77,8 +93,16 @@ public class GenerationStatisticsWriter implements StatisticsWriter {
     }
 
     @Override
-    public StatisticsWriter init(Instance configuration) {
+    public StatisticsWriter init(final Instance configuration) {
         try {
+            final List<DataDescription> inputSpace = attribute.lookup(configuration, "input-space");
+            final List<DataDescription> outputSpace = attribute.lookup(configuration, "output-space");
+
+            final EClass dynamicEClass = dynamic.eClassFor(inputSpace, outputSpace);
+            final Space dynamicSpace = new Space(dynamicEClass);
+            sourceSpec = helper.subSpaceOf(dynamicSpace, inputSpace);
+            targetSpec = helper.subSpaceOf(dynamicSpace, outputSpace);
+
             this.writer = createWriter();
         } catch (WriterException e) {
             log.error("Could not create Correlated Statistics Writer: ", e);
@@ -111,19 +135,24 @@ public class GenerationStatisticsWriter implements StatisticsWriter {
         List<Candidate> candidateList = firstGeneration.candidates().toList();
 
         final int trainingsSize = candidateList.size();
-        log.error("training size is... " + trainingsSize);
+        log.info("training size is {}.", trainingsSize);
         final int onTheFlySize = trainingsSize + 1;
 
         final Matrix trainingsMatrix = new Matrix(dimensions, trainingsSize);
         final Matrix onTheFlyMatrix = new Matrix(dimensions, onTheFlySize);
 
+        final List<EStructuralFeature> features = new ArrayList<>(sourceSpec.size());
+        sourceSpec.iterator().forEachRemaining(features::add);
+
         // calculate covariance matrix for trainings data
         for(int t = 0; t < trainingsSize; t++) {
             for(int d = 0; d < dimensions; ++d) {
 
+                // According to the specification of the used toList collector, sourceTrainingPoints is an ArrayList,
+                //   making the .get call an O(1) operation
                 final double value = sourceTrainingPoints
                         .get(t)
-                        .getAsDouble(d);
+                        .eGetAsDouble(features.get(d));
                 trainingsMatrix.set(d, t, value);
                 onTheFlyMatrix.set(d, t, value);
             }
@@ -259,14 +288,11 @@ public class GenerationStatisticsWriter implements StatisticsWriter {
     }
 
     private void fetchTrainingData() {
-        final PropertiesSpecification spec = PropertiesSpecification.builder()
-                .add(sourceSpec)
-                .add(targetSpec)
-                .build();
+        final Space spec = sourceSpec.merge(targetSpec);
 
         sourceTrainingPoints = createStreamFromBlackboard(spec)
                 .apply(spec)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Override
@@ -297,13 +323,13 @@ public class GenerationStatisticsWriter implements StatisticsWriter {
         }
     }
 
-    private PropertiesStreamSupplier createStreamFromBlackboard(final PropertiesSpecification totalSpecification) {
+    private EObjectStreamSupplier createStreamFromBlackboard(final Space specification) {
         final String filename = board.get(SurrogateBlackboardEntries.SURROGATE_TRAINING_DATA_FILE);
 
         log.info("Using training data from {} for statistics.", filename);
 
         final File trainingFile = new File(filename);
 
-        return new FileBasedPropertiesStreamSupplier(trainingFile, totalSpecification);
+        return new FileBasedEObjectStreamSupplier(trainingFile, specification);
     }
 }

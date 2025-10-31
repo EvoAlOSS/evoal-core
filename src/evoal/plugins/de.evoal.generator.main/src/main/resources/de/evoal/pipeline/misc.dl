@@ -14,4 +14,8 @@ module de.evoal.pipeline.misc {
 	
 	type 'constraint-validation' {	
 	}
+
+	type 'limit' {
+	    count : int;
+	}
 }

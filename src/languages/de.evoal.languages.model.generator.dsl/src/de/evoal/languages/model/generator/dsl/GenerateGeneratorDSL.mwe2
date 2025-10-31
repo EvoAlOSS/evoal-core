@@ -46,6 +46,9 @@ Workflow {
                     }
             }
             
+			fragment = io.typefox.xtext2langium.Xtext2LangiumFragment {
+			        outputPath = './langium'
+		    }
 
 			serializer = {
 				generateStub = false

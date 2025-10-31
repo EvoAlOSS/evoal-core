@@ -1,15 +1,23 @@
 package de.evoal.pipeline.api.executor;
 
-import de.evoal.pipeline.api.model.Composite;
-import de.evoal.core.api.ecore.TypedEObject;
-import org.eclipse.emf.ecore.EClass;
+import de.evoal.core.api.ecore.Space;
+import de.evoal.pipeline.api.model.PipelineComposite;
 
-import java.util.Optional;
-import java.util.function.Function;
-import java.util.stream.Stream;
-
+/**
+ * A pipeline executor receives a pipeline and executes according to a strategy.
+ */
 public interface PipelineExecutor {
-    void setSpace(EClass space);
+    /**
+     * The pipeline's space.
+     *
+     * @param space The space.
+     */
+    void setSpace(final Space space);
 
-    void execute(Composite pipeline, Optional<Function<Stream<TypedEObject>, Stream<TypedEObject>>> countLimit);
+    /**
+     * Executes the pipeline on an optional data stream.
+     *
+     * @param pipeline The pipeline to execute.
+     */
+    void execute(final PipelineComposite pipeline);
 }

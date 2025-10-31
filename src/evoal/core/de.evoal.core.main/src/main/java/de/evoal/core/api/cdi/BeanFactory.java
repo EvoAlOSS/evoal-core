@@ -113,6 +113,24 @@ public final class BeanFactory {
         }
     }
 
+    public static <T extends EvoalComponent<T>> T createComponent(final Class<T> type, final Instance configuration, final String suffix, final Consumer<T> preInit) {
+        Requirements.requireNotNull(preInit);
+        final String name = fqName.get(configuration) + suffix;
+
+        try {
+            final T instance = create(name, type);
+            preInit.accept(instance);
+            instance.init(configuration);
+
+            return instance;
+        } catch (final InitializationException e) {
+            log.error("Failed to create contextual reference of type '{}' with name '{}'.", type, name);
+            logInstantiationError(type, e);
+
+            throw new RuntimeException("Failed to instantiate component due to an error.", e);
+        }
+    }
+
     public static <T extends EvoalComponent<T>> T createComponent(final Class<T> type, final Instance configuration) {
         Requirements.requireNotNull(configuration);
 

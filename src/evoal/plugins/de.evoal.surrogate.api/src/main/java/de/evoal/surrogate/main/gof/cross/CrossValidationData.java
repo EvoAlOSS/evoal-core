@@ -1,7 +1,5 @@
 package de.evoal.surrogate.main.gof.cross;
 
-import de.evoal.surrogate.api.configuration.Parameter;
-import de.evoal.surrogate.api.configuration.PartialFunctionConfiguration;
 import lombok.Getter;
 
 /**
@@ -21,15 +19,15 @@ public class CrossValidationData {
         this.partitionSize = partitionSize;
         this.sd = sd;
     }
-
-    public void attachTo(final PartialFunctionConfiguration regression, final String outputName) {
+/*
+    public void attachTo(final SurrogateConfiguration regression, final String outputName) {
         attach(regression, outputName, "cross-validation-k", k);
         attach(regression, outputName, "cross-validation-mean", mean);
         attach(regression, outputName, "cross-validation-partition-size", partitionSize);
         attach(regression, outputName, "cross-validation-sd", sd);
     }
 
-    private void attach(final PartialFunctionConfiguration regression, final String output, final String name, final Object value) {
+    private void attach(final SurrogateConfiguration regression, final String output, final String name, final Object value) {
         final Parameter parameter = Parameter.builder()
                                              .name(name)
                                              .value(value)
@@ -37,4 +35,5 @@ public class CrossValidationData {
 
         regression.addOutputParameter(output, parameter);
     }
+    */
 }

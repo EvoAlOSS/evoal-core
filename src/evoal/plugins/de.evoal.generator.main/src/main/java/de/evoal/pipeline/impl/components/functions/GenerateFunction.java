@@ -1,22 +1,22 @@
 package de.evoal.pipeline.impl.components.functions;
 
+import de.evoal.core.api.ecore.Space;
 import de.evoal.core.interpreter.api.cdi.EvoalBuiltinFunction;
 import de.evoal.core.interpreter.api.InterpreterState;
 import de.evoal.languages.model.base.definitions.AttributeDefinition;
 import de.evoal.languages.model.base.definitions.ClassDefinition;
 import de.evoal.languages.model.base.expressions.*;
 import de.evoal.languages.model.dl.DefinitionModule;
+import de.evoal.languages.model.pipeline.ConcreteStep;
 import de.evoal.languages.model.pipeline.PipelineDefinition;
 import de.evoal.languages.model.pipeline.PipelineFactory;
-import de.evoal.languages.model.pipeline.Step;
 import de.evoal.pipeline.api.cdi.DefinitionModuleLoader;
 import de.evoal.pipeline.api.executor.PipelineExecutor;
-import de.evoal.pipeline.api.model.Composite;
+import de.evoal.pipeline.api.executor.StreamExecutor;
+import de.evoal.pipeline.api.model.PipelineComposite;
 import de.evoal.core.api.ecore.TypedEObject;
-import de.evoal.pipeline.impl.executor.StreamExecutor;
 import de.evoal.pipeline.impl.internal.PipelineInstantiator;
 import lombok.extern.slf4j.Slf4j;
-import org.eclipse.emf.ecore.EClass;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -51,7 +51,7 @@ public class GenerateFunction implements EvoalBuiltinFunction {
         final Integer count = (Integer) arguments[1];
         final List<PipelineDefinition> pipelines  = (List<PipelineDefinition>) arguments[2];
 
-        final EClass space = context.getSpace();
+        final Space space = context.getSpace();
 
         final PipelineDefinition writer = generateWriterPipeline(context, filename);
         log.info("Writing {} data points.", count);
@@ -60,12 +60,12 @@ public class GenerateFunction implements EvoalBuiltinFunction {
         pipelines.add(writer);
 
         final PipelineInstantiator converter = new PipelineInstantiator(space);
-        final Composite pipeline = converter.convert(pipelines);
+        final PipelineComposite pipeline = converter.definitionsToComposite(pipelines);
         final PipelineExecutor executor = new StreamExecutor();
         final Optional<Function<Stream<TypedEObject>, Stream<TypedEObject>>> countLimit = Optional.of(stream -> stream.limit(count));
 
         executor.setSpace(space);
-        executor.execute(pipeline, countLimit);
+        executor.execute(pipeline);
 
         pipeline.close();
 
@@ -125,8 +125,9 @@ public class GenerateFunction implements EvoalBuiltinFunction {
         writerInstance.getAttributes().add(filenameAttribute);
         writerInstance.setDefinition(writerDefinition);
 
-        final Step writerStep = PipelineFactory.eINSTANCE.createStep();
-        writerStep.getReads().addAll(context.getSpace().getEAttributes());
+        final ConcreteStep writerStep = PipelineFactory.eINSTANCE.createConcreteStep();
+        writerStep.getReads()
+                  .addAll(context.getSpace());
         writerStep.setInstance(writerInstance);
 
         final PipelineDefinition definition = PipelineFactory.eINSTANCE.createPipelineDefinition();

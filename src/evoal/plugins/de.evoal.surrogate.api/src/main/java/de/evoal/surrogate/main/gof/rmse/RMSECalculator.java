@@ -1,15 +1,11 @@
 package de.evoal.surrogate.main.gof.rmse;
 
+import de.evoal.core.api.ecore.Space;
 import de.evoal.core.api.ecore.TypedEObject;
-import de.evoal.core.api.ecore.stream.EObjectPairStreamFactory;
 import de.evoal.core.api.ecore.stream.EObjectPairStreamSupplier;
-import de.evoal.core.api.ecore.stream.EObjectStreamSupplier;
 import de.evoal.core.interpreter.api.InterpreterState;
-import de.evoal.surrogate.api.SurrogateInformationCalculator;
-import de.evoal.surrogate.api.configuration.Parameter;
-import de.evoal.surrogate.api.configuration.SurrogateConfiguration;
-import de.evoal.surrogate.api.function.SurrogateFunction;
-import lombok.NonNull;
+import de.evoal.surrogate.api.io.pson.Parameter;
+import de.evoal.surrogate.api.training.SurrogateInformationCalculator;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
@@ -23,31 +19,18 @@ import java.util.*;
 @Dependent
 @Named("de.evoal.surrogate.ml.rmse")
 @Slf4j
-public class RMSECalculator implements SurrogateInformationCalculator {
-
-	/**
-	 * Surrogate configuration for attaching the calculated r² value.
-	 */
-	private SurrogateConfiguration config;
-
-	/**
-	 * The actual surrogate function.
-	 */
-	private SurrogateFunction function;
-
-	/**
-	 * Supplier for the training data.
-	 */
-	private EObjectPairStreamSupplier trainingData;
-
+public class RMSECalculator extends SurrogateInformationCalculator {
 	@Override
-	public Optional<Object> call(final InterpreterState context, final Object[] arguments) {
+	public Optional<Object> calculate(final InterpreterState context, final Object[] arguments) {
 		log.info("calculating rmse of surrogate function.");
 
-		final EObjectPairStreamSupplier pairStream = EObjectPairStreamFactory.createFromList(function.getInputSpecification(), function.getOutputSpecification(), trainingData);
+		final Space inputSpace = functionData.function().getInput();
+		final Space outputSpace = functionData.function().getOutput();
+
+		final EObjectPairStreamSupplier pairStream = helper.loadTrainingDataPaired(context);
 
 		final Map<EStructuralFeature, List<Double>> data = new HashMap<>();
-		for(final EStructuralFeature feature : function.getOutputSpecification()) {
+		for(final EStructuralFeature feature : outputSpace) {
 			data.put(feature, new ArrayList<>());
 		}
 
@@ -57,7 +40,8 @@ public class RMSECalculator implements SurrogateInformationCalculator {
 					final TypedEObject expected = p.getSecond();
 					final TypedEObject actual = new TypedEObject(expected.eClass());
 
-					function.apply(source, actual);
+					functionData.function()
+							.apply(source, actual);
 
 					for(final EStructuralFeature feature : actual.eClass().getEAllStructuralFeatures()) {
 						data.get(feature)
@@ -78,11 +62,13 @@ public class RMSECalculator implements SurrogateInformationCalculator {
 			log.info("RMSE of {}: '{}'", entry.getKey().getName(), rmse);
 
 			final Parameter goodnessOfFit = Parameter.builder()
-					.name("rmse")
+					.name("de.evoal.surrogate.ml.rmse")
 					.value(rmse)
 					.build();
 
-			config.addOutputParameter(entry.getKey().getName(), goodnessOfFit);
+			functionData.writer()
+					.get()
+					.addOutputFeatureInformation(entry.getKey(), goodnessOfFit);
 		}
 
 		return Optional.empty();
@@ -91,12 +77,5 @@ public class RMSECalculator implements SurrogateInformationCalculator {
 	@Override
 	public String toString() {
 		return "rmse";
-	}
-
-	@Override
-	public void configure(final @NonNull SurrogateFunction function, final @NonNull SurrogateConfiguration config, final @NonNull EObjectPairStreamSupplier trainingData) {
-		this.function = function;
-		this.config = config;
-		this.trainingData = trainingData;
 	}
 }

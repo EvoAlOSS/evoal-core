@@ -59,7 +59,8 @@ public class GeneratorFactoryImpl extends EFactoryImpl implements GeneratorFacto
 		switch (eClass.getClassifierID()) {
 			case GeneratorPackage.GENERATOR_MODULE: return createGeneratorModule();
 			case GeneratorPackage.PIPELINE_DEFINITION: return createPipelineDefinition();
-			case GeneratorPackage.STEP: return createStep();
+			case GeneratorPackage.PIPELINE_STEP: return createPipelineStep();
+			case GeneratorPackage.CONCRETE_STEP: return createConcreteStep();
 			case GeneratorPackage.APPLY_STATEMENT: return createApplyStatement();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -94,9 +95,20 @@ public class GeneratorFactoryImpl extends EFactoryImpl implements GeneratorFacto
 	 * @generated
 	 */
 	@Override
-	public Step createStep() {
-		StepImpl step = new StepImpl();
-		return step;
+	public PipelineStep createPipelineStep() {
+		PipelineStepImpl pipelineStep = new PipelineStepImpl();
+		return pipelineStep;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ConcreteStep createConcreteStep() {
+		ConcreteStepImpl concreteStep = new ConcreteStepImpl();
+		return concreteStep;
 	}
 
 	/**

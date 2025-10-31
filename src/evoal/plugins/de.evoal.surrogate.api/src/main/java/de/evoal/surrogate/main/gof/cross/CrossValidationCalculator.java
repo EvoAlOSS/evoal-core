@@ -1,9 +1,10 @@
 package de.evoal.surrogate.main.gof.cross;
 
 import de.evoal.core.api.ecore.stream.EObjectPairStreamSupplier;
+import de.evoal.surrogate.api.function.ModelFunction;
+import de.evoal.surrogate.api.io.ModelWriter;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.Arrays;
 import java.util.Optional;
 import javax.enterprise.context.Dependent;
 import javax.inject.Named;
@@ -17,13 +18,7 @@ import de.evoal.core.api.ecore.stream.EObjectPairStreamFactory;
 import de.evoal.core.api.ecore.Space;
 import de.evoal.core.api.utils.Requirements;
 import de.evoal.core.interpreter.api.InterpreterState;
-import de.evoal.surrogate.api.SurrogateInformationCalculator;
-import de.evoal.surrogate.api.configuration.PartialFunctionConfiguration;
-import de.evoal.surrogate.api.configuration.SurrogateConfiguration;
-import de.evoal.surrogate.api.function.PartialSurrogateFunction;
-import de.evoal.surrogate.api.function.SurrogateFunction;
-import de.evoal.surrogate.main.internal.SurrogateFactory;
-
+import de.evoal.surrogate.api.training.SurrogateInformationCalculator;
 
 /**
  * Calculates cross validation values.
@@ -31,12 +26,12 @@ import de.evoal.surrogate.main.internal.SurrogateFactory;
 @Dependent
 @Named("de.evoal.surrogate.ml.cross-validation")
 @Slf4j
-public class CrossValidationCalculator implements SurrogateInformationCalculator {
+public class CrossValidationCalculator /* extends SurrogateInformationCalculator */{
 
 	/**
 	 * The surrogate function to use.
 	 */
-	private SurrogateFunction function;
+	private ModelFunction function;
 
 	/**
 	 * The number of groups for the validation.
@@ -44,9 +39,9 @@ public class CrossValidationCalculator implements SurrogateInformationCalculator
 	private int k = 1;
 
 	/**
-	 * The surrogate configuration for adding the calculated values
+	 * For appending the fitness values
 	 */
-	private SurrogateConfiguration originalConfiguration;
+	private ModelWriter writer;
 
 	/**
 	 * The training data used
@@ -54,8 +49,9 @@ public class CrossValidationCalculator implements SurrogateInformationCalculator
 	private CrossValidationEObjectStreamSupplier trainingSupplier;
 	private EObjectPairStreamSupplier trainingData;
 
-	@Override
+//	@Override
 	public Optional<Object> call(final InterpreterState context, final Object[] arguments) {
+		/*
 		log.warn("Currently, cross validation is not implemented.");
 		k = (Integer)arguments[0];
 		trainingSupplier = new CrossValidationEObjectStreamSupplier(trainingData, k);
@@ -65,18 +61,18 @@ public class CrossValidationCalculator implements SurrogateInformationCalculator
 		for(int i = 0; i < originalConfiguration.getFunctions().size(); ++i) {
 			final SurrogateConfiguration trainingConfiguration = SurrogateConfiguration.from(originalConfiguration);
 
-			final PartialFunctionConfiguration originalMapping = originalConfiguration.getFunctions().get(i);
-			final PartialFunctionConfiguration trainingMapping = trainingConfiguration.getFunctions().get(i);
+			final SurrogateConfiguration originalMapping = originalConfiguration.getFunctions().get(i);
+			final SurrogateConfiguration trainingMapping = trainingConfiguration.getFunctions().get(i);
 
 			validateMapping(originalMapping, trainingMapping);
 		}
-
+*/
 		return Optional.empty();
 	}
-
-	private void validateMapping(final PartialFunctionConfiguration originalMapping, final PartialFunctionConfiguration trainingMapping) {
+/*
+	private void validateMapping(final SurrogateConfiguration originalMapping, final SurrogateConfiguration trainingMapping) {
 		log.info("Calculating cross validation for mapping {}.", originalMapping.getName());
-		final int rowLength = originalMapping.getOutputDimensions().size() + 2;
+		final int rowLength = originalMapping.getOutputFeatures().size() + 2;
 
 		//final AsciiTable table = new AsciiTable();
 		//table.addRule();
@@ -93,18 +89,20 @@ public class CrossValidationCalculator implements SurrogateInformationCalculator
 
 		//final Space mappingInput = originalMapping.getInputData();
 		//final Space mappingOutput = originalMapping.getOutputData();
-
+/*
 		for(int partition = 1; partition <= k; ++partition) {
 			trainingSupplier.setPartition(partition);
 
 			//final Object[] tableData = new Object[rowLength];
 			//tableData[0] = "Partition " + partition;
 
-			final PartialFunctionConfiguration fConfig = PartialFunctionConfiguration.from(originalMapping);
+			final SurrogateConfiguration fConfig = SurrogateConfiguration.from(originalMapping);
 
 			final Space fInput = fConfig.getInputData();
 			final Space fOutput = fConfig.getOutputData();
-			final PartialSurrogateFunction mapping = SurrogateFactory.create(fConfig, EObjectPairStreamFactory.createFromList(fInput, fOutput, trainingSupplier));
+			if(true)
+				throw new IllegalStateException();
+			final PartialSurrogateFunction mapping = null; //SurrogateFactory.create(fConfig, EObjectPairStreamFactory.createFromList(fInput, fOutput, trainingSupplier));
 
 			// sum of prediction errors in this partition for each output property
 			final double[] correctness = new double[fOutput.size()];
@@ -161,11 +159,13 @@ public class CrossValidationCalculator implements SurrogateInformationCalculator
 				attach(originalMapping,
 				       mappingOutput.getProperties().get(i),
 					   new CrossValidationData(k, avg, k, sd));
-			}*/
+			}* /
 		}
+		*/
 		//table.addRow(tableData);
 		//table.addRule();
 		//System.out.println(table.render(140));
+	/*
 	}
 /*
 	private void attach(final EStructuralFeature feature, final Space specification, final CrossValidationData data) {
@@ -177,16 +177,5 @@ public class CrossValidationCalculator implements SurrogateInformationCalculator
 	@Override
 	public String toString() {
 		return "cross validation";
-	}
-
-	@Override
-	public void configure(final SurrogateFunction function, final SurrogateConfiguration config, final EObjectPairStreamSupplier trainingData) {
-		Requirements.requireNotNull(function);
-		Requirements.requireNotNull(config);
-		Requirements.requireNotNull(trainingData);
-
-		this.function = function;
-		this.originalConfiguration = config;
-		this.trainingData = trainingData;
 	}
 }

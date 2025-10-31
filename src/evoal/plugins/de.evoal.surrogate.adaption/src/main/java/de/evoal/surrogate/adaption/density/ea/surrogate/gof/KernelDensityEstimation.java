@@ -3,12 +3,7 @@ package de.evoal.surrogate.adaption.density.ea.surrogate.gof;
 import de.evoal.core.api.ecore.EObjectPair;
 import de.evoal.core.api.ecore.stream.EObjectPairStreamFactory;
 import de.evoal.core.api.ecore.stream.EObjectPairStreamSupplier;
-import de.evoal.surrogate.adaption.density.model.DensityData;
-import de.evoal.surrogate.adaption.density.model.GaussianDensityData;
 import de.evoal.surrogate.adaption.density.model.KernelDensityData;
-import de.evoal.core.api.properties.PropertiesPair;
-import de.evoal.core.api.properties.stream.PropertiesBasedPropertiesPairStreamSupplier;
-import de.evoal.core.api.properties.stream.PropertiesPairStreamSupplier;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.enterprise.context.Dependent;

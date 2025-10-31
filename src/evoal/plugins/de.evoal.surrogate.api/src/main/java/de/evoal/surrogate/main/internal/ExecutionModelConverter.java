@@ -1,11 +1,10 @@
 package de.evoal.surrogate.main.internal;
 
-import de.evoal.languages.model.base.expressions.Expression;
+import de.evoal.languages.model.dl.DefinitionModule;
 import de.evoal.languages.model.execution.*;
 import de.evoal.languages.model.execution.util.ExecutionSwitch;
-import de.evoal.languages.model.mll.PredictStatement;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
@@ -13,14 +12,25 @@ import java.util.Map;
 
 @Slf4j
 public class ExecutionModelConverter extends ExecutionSwitch<Object> {
+    /**
+     * The converter for converting expressions.
+     */
+    private final ExpressionConverter converter;
+
+    /**
+     * Factory for creating execution model elements.
+     */
     private final static ExecutionFactory execFactory = ExecutionFactory.eINSTANCE;
 
-    private final MLLModelConverter converter;
-    private final EClass space;
+    @Setter
+    private ModelFunction gofFunction = null;
+
+    /**
+     * The variables mapping used.
+     */
     private final Map<Variable, Variable> variables;
 
-    public ExecutionModelConverter(final EClass space, final Map<Variable, Variable> variables, final MLLModelConverter converter) {
-        this.space = space;
+    public ExecutionModelConverter(final Map<Variable, Variable> variables, final ExpressionConverter converter) {
         this.variables = variables;
         this.converter = converter;
     }
@@ -39,25 +49,31 @@ public class ExecutionModelConverter extends ExecutionSwitch<Object> {
     }
 
     @Override
-    public Statement caseStatement(final Statement statement) {
-        if(statement instanceof PredictStatement predictStatement) {
-            return converter.casePredictStatement(predictStatement);
-        }
+    public CallStatement caseCallBuiltinFunction(final CallBuiltinFunction call) {
+        if(callsGofBuiltin(call)) {
+            final CallModelFunction result = execFactory.createCallModelFunction();
+            result.setFunction(gofFunction);
 
-        return (Statement) super.caseStatement(statement);
-    }
+            return result;
+        } else {
+            final CallBuiltinFunction result = execFactory.createCallBuiltinFunction();
+            result.setDefinition(call.getDefinition());
 
-    @Override
-    public CallBuiltinFunction caseCallBuiltinFunction(final CallBuiltinFunction function) {
-        final CallBuiltinFunction result = execFactory.createCallBuiltinFunction();
-        result.setDefinition(function.getDefinition());
-
-        function.getParameters()
+            call.getParameters()
                 .stream()
-                .map(EcoreUtil::copy)
+                .map(converter::doSwitch)
                 .forEachOrdered(result.getParameters()::add);
 
-        return result;
+            return result;
+        }
+    }
+
+    private boolean callsGofBuiltin(final CallBuiltinFunction call) {
+        final String builtinName = "de.evoal.surrogate.pipeline.gof-calculator";
+
+        final String functionName = ((DefinitionModule)call.getDefinition().eContainer()).getName() + "." + call.getDefinition().getName();
+
+        return builtinName.equals(functionName);
     }
 
 

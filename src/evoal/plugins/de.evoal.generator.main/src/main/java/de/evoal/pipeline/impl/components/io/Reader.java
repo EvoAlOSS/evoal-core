@@ -1,5 +1,7 @@
 package de.evoal.pipeline.impl.components.io;
 
+import de.evoal.core.api.dynamic.EAnnotationHelper;
+import de.evoal.pipeline.api.model.PipelineSource;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 
@@ -7,6 +9,7 @@ import java.io.File;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -23,18 +26,21 @@ import de.evoal.core.api.utils.AttributeHelper;
 import de.evoal.core.api.utils.InitializationException;
 import de.evoal.core.api.utils.Requirements;
 import de.evoal.languages.model.base.definitions.BaseDataDescription;
-import de.evoal.languages.model.base.definitions.Definition;
 import de.evoal.languages.model.base.expressions.Instance;
-import de.evoal.languages.model.dynamic.DynamicPackage;
-import de.evoal.pipeline.api.model.ComponentImpl;
+import de.evoal.pipeline.api.model.PipelineComponentImpl;
 import de.evoal.core.api.ecore.TypedEObject;
 import de.evoal.core.api.ecore.Space;
 
-@Dependent
 @Slf4j
+@Dependent
 @Named("de.evoal.pipeline.io.reader")
-public class Reader extends ComponentImpl {
+public class Reader extends PipelineComponentImpl implements PipelineSource {
+    private final static EcorePackage ePackage = EcorePackage.eINSTANCE;
+
     private Function<Properties, Object> [] converters;
+
+    @Inject
+    private EAnnotationHelper provider;
 
     private EStructuralFeature [] features;
 
@@ -45,9 +51,10 @@ public class Reader extends ComponentImpl {
 
     private PropertySpecification [] pSpec;
 
-
     @Override
     public @NonNull TypedEObject apply(@NonNull TypedEObject object) {
+        log.info("Reading data set.");
+
         if(!iterator.hasNext()) {
             throw new IllegalStateException("Iterator is empty");
         }
@@ -62,28 +69,19 @@ public class Reader extends ComponentImpl {
     }
 
     @Override
-    public ComponentImpl init(final Instance configuration) throws InitializationException {
+    public PipelineComponentImpl init(final Instance configuration) throws InitializationException {
         super.init(configuration);
 
         final String filename = helper.lookup(configuration, "filename");
         final File file = new File(filename);
 
         log.info("Reading data from {}", file.getAbsolutePath());
+        Requirements.requireTrue(file.exists());
+        Requirements.requireTrue(file.canRead());
 
         final Space writes = getWrites();
-
-        final Stream<Definition> definitions =
-                writes.stream()
-                        .map(ef -> ef.getEAnnotation(DynamicPackage.eNS_URI))
-                        .flatMap(a -> a.getContents().stream())
-                        .filter(de.evoal.languages.model.dynamic.Definition.class::isInstance)
-                        .map(de.evoal.languages.model.dynamic.Definition.class::cast)
-                        .map(de.evoal.languages.model.dynamic.Definition::getSource);
-
         final PropertiesSpecification specification =
-                PropertiesSpecification.builder()
-                        .add(definitions)
-                        .build();
+                provider.specificationOf(writes);
 
         // order should be (by construction) be the same.
         pSpec = specification.getProperties().toArray(PropertySpecification[]::new);
@@ -104,7 +102,6 @@ public class Reader extends ComponentImpl {
         converters = inputConverts.toArray(new Function[0]);
         Requirements.requireSameSize(pSpec, converters);
 
-
         iterator = new FileBasedPropertiesStreamSupplier(file, specification)
                 .get()
                 .iterator();
@@ -112,7 +109,6 @@ public class Reader extends ComponentImpl {
         return this;
     }
 
-    private final static EcorePackage ePackage = EcorePackage.eINSTANCE;
     private Function<Properties, Object> toConverter(final EStructuralFeature feature, final int index) {
         final EClassifier classifier = feature.getEType();
 
@@ -127,5 +123,23 @@ public class Reader extends ComponentImpl {
         }
 
         throw new UnsupportedOperationException("Not yet implemented: " +classifier.getName());
+    }
+
+    @Override
+    public @NonNull Stream<@NonNull TypedEObject> toStream() {
+        log.info("Generating data stream for space {}.", getPipelineSpace());
+
+        return StreamSupport.stream(
+                Spliterators.spliteratorUnknownSize(iterator, Spliterator.ORDERED),
+                false)
+                .map(p -> {
+                    final TypedEObject object = getPipelineSpace().newEObject();
+
+                    for(int i = 0; i < pSpec.length; i++) {
+                        object.eSet(features[i], converters[i].apply(p));
+                    }
+
+                    return object;
+                });
     }
 }

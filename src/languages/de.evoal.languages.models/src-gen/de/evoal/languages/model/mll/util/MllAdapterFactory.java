@@ -2,15 +2,10 @@
  */
 package de.evoal.languages.model.mll.util;
 
-import de.evoal.languages.model.base.expressions.ConstantExpression;
-import de.evoal.languages.model.base.expressions.Expression;
-import de.evoal.languages.model.base.expressions.Instance;
-import de.evoal.languages.model.base.expressions.Literal;
-import de.evoal.languages.model.base.expressions.ReadExpression;
 import de.evoal.languages.model.execution.NamedVariable;
-import de.evoal.languages.model.execution.Statement;
 import de.evoal.languages.model.execution.Variable;
 import de.evoal.languages.model.mll.*;
+
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 
@@ -79,16 +74,8 @@ public class MllAdapterFactory extends AdapterFactoryImpl {
 				return createMachineLearningModuleAdapter();
 			}
 			@Override
-			public Adapter caseSurrogateDefinition(SurrogateDefinition object) {
-				return createSurrogateDefinitionAdapter();
-			}
-			@Override
-			public Adapter casePartialSurrogateFunctionDefinition(PartialSurrogateFunctionDefinition object) {
-				return createPartialSurrogateFunctionDefinitionAdapter();
-			}
-			@Override
-			public Adapter casePredictStatement(PredictStatement object) {
-				return createPredictStatementAdapter();
+			public Adapter caseTaskDescription(TaskDescription object) {
+				return createTaskDescriptionAdapter();
 			}
 			@Override
 			public Adapter caseVariable(Variable object) {
@@ -97,30 +84,6 @@ public class MllAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseNamedVariable(NamedVariable object) {
 				return createNamedVariableAdapter();
-			}
-			@Override
-			public Adapter caseExpression(Expression object) {
-				return createExpressionAdapter();
-			}
-			@Override
-			public Adapter caseReadExpression(ReadExpression object) {
-				return createReadExpressionAdapter();
-			}
-			@Override
-			public Adapter caseConstantExpression(ConstantExpression object) {
-				return createConstantExpressionAdapter();
-			}
-			@Override
-			public Adapter caseLiteral(Literal object) {
-				return createLiteralAdapter();
-			}
-			@Override
-			public Adapter caseInstance(Instance object) {
-				return createInstanceAdapter();
-			}
-			@Override
-			public Adapter caseStatement(Statement object) {
-				return createStatementAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -157,44 +120,16 @@ public class MllAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.mll.SurrogateDefinition <em>Surrogate Definition</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.mll.TaskDescription <em>Task Description</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.evoal.languages.model.mll.SurrogateDefinition
+	 * @see de.evoal.languages.model.mll.TaskDescription
 	 * @generated
 	 */
-	public Adapter createSurrogateDefinitionAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.mll.PartialSurrogateFunctionDefinition <em>Partial Surrogate Function Definition</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.evoal.languages.model.mll.PartialSurrogateFunctionDefinition
-	 * @generated
-	 */
-	public Adapter createPartialSurrogateFunctionDefinitionAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.mll.PredictStatement <em>Predict Statement</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.evoal.languages.model.mll.PredictStatement
-	 * @generated
-	 */
-	public Adapter createPredictStatementAdapter() {
+	public Adapter createTaskDescriptionAdapter() {
 		return null;
 	}
 
@@ -223,90 +158,6 @@ public class MllAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createNamedVariableAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.expressions.Expression <em>Expression</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.evoal.languages.model.base.expressions.Expression
-	 * @generated
-	 */
-	public Adapter createExpressionAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.expressions.ReadExpression <em>Read Expression</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.evoal.languages.model.base.expressions.ReadExpression
-	 * @generated
-	 */
-	public Adapter createReadExpressionAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.expressions.ConstantExpression <em>Constant Expression</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.evoal.languages.model.base.expressions.ConstantExpression
-	 * @generated
-	 */
-	public Adapter createConstantExpressionAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.expressions.Literal <em>Literal</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.evoal.languages.model.base.expressions.Literal
-	 * @generated
-	 */
-	public Adapter createLiteralAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.expressions.Instance <em>Instance</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.evoal.languages.model.base.expressions.Instance
-	 * @generated
-	 */
-	public Adapter createInstanceAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.execution.Statement <em>Statement</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.evoal.languages.model.execution.Statement
-	 * @generated
-	 */
-	public Adapter createStatementAdapter() {
 		return null;
 	}
 

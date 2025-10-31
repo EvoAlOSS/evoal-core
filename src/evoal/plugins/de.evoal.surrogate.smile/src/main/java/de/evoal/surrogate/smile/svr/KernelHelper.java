@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import de.evoal.surrogate.api.configuration.Parameter;
+import de.evoal.surrogate.api.io.pson.Parameter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,7 +24,7 @@ public final class KernelHelper {
 
 	private static final String OFFSET_PARAMETER = "offset";
 
-	private static final String SIGMA_PARAMETER = "σ";
+	public static final String SIGMA_PARAMETER = "σ";
 
 	public static final String SOFT_MARGIN_PARAMETER = "soft-margin";
 
@@ -54,13 +54,13 @@ public final class KernelHelper {
 						 .collect(Collectors.toMap(Parameter::getName, Parameter::getValue));
 	}
 
-	public static KernelMachine<double []> fromParameters(final List<Parameter> parameters, final List<Parameter> kernelParameters) {
-		final Map<String, Object> kernelParameterMap = toMap(kernelParameters);
+	public static KernelMachine<double []> fromParameters(final List<Parameter> parameters) {
+		final Map<String, Object> parameterMap = toMap(parameters);
 
-		final MercerKernel<double []> kernel = toKernel(toMap(parameters), kernelParameterMap);
-		final double[][] instances =(double[][]) kernelParameterMap.get("instances");
-		final double[] weight = (double[]) kernelParameterMap.get("weights");
-		final double b = (double)kernelParameterMap.get("intercept");
+		final MercerKernel<double []> kernel = toKernel(toMap(parameters), parameterMap);
+		final double[][] instances =(double[][]) parameterMap.get("instances");
+		final double[] weight = (double[]) parameterMap.get("weights");
+		final double b = (double)parameterMap.get("intercept");
 		
 		return new KernelMachine<>(kernel, instances, weight, b);
 	}
@@ -113,7 +113,7 @@ public final class KernelHelper {
 	public static MercerKernel<double []> toPearsonKernel(final Map<String, Object> parameters) {
 		log.info("  Using kernel 'pearson'");
 		final double sigma = (double) parameters.get(SIGMA_PARAMETER);
-		final double omega = (double)parameters.get("ω");
+		final double omega = (double) parameters.get("ω");
 		log.info("    parameter ω={} and σ={}.", omega, sigma);
 
 		return new PearsonKernel(omega, sigma);
@@ -122,9 +122,9 @@ public final class KernelHelper {
 	public static MercerKernel<double []> toPolynomialKernel(final Map<String, Object> parameters) {
 		log.info("  Using kernel 'polynomial'");
 		final double sigma = (double) parameters.get(SIGMA_PARAMETER);
-		final int degree = (int)parameters.get(DEGREE_PARAMETER);
-		final double scale = (double)parameters.get(SCALE_PARAMETER);
-		final double offset = (double)parameters.get(OFFSET_PARAMETER);
+		final int degree = (int) parameters.get(DEGREE_PARAMETER);
+		final double scale = (double) parameters.get(SCALE_PARAMETER);
+		final double offset = (double) parameters.get(OFFSET_PARAMETER);
 
 		log.info("    parameter σ={}.", sigma);
 		log.info("    parameter degeree is {}, scale is {}, and offset is {}.", degree, scale, offset);
@@ -143,42 +143,17 @@ public final class KernelHelper {
 	public static MercerKernel<double []> toKernel(final Map<String, Object> parameters, final Map<String, Object> state) {
 		log.info("  Using kernel '{}'", state.get(KERNEL_PARAMETER));
 
-		switch((String)state.get(KERNEL_PARAMETER)) {
-		case "gaussian": {
-			return toGaussianKernel(parameters);
-		}
-
-		case "hellinger": {
-			return toHellingerKernel(parameters);
-		}
-		
-		case "hyperbolic-tangent": {
-			return toHyperbolicTangentKernel(parameters);
-		}
-
-		case "laplacian": {
-			return toLaplacianKernel(parameters);
-		}
-
-		case "linear": {
-			return toLinearKernel(parameters);
-		}
-
-		case "pearson": {
-			return toPearsonKernel(parameters);
-		}
-
-		case "polynomial": {
-			return toPolynomialKernel(parameters);
-		}
-
-		case "thin-plate-spline": {
-			return toThinPlateSplineKernel(parameters);
-		}
-		}
-		 
-
-		throw new IllegalArgumentException("The kernel " + parameters.get(KERNEL_PARAMETER) + " is not supported.");
+		return switch((String)state.get(KERNEL_PARAMETER)) {
+			case "de.evoal.surrogate.smile.ml.gaussian-svr" 			-> toGaussianKernel(parameters);
+			case "de.evoal.surrogate.smile.ml.hellinger-svr" 			-> toHellingerKernel(parameters);
+			case "de.evoal.surrogate.smile.ml.hyperbolic-tangent-svr" 	-> toHyperbolicTangentKernel(parameters);
+			case "de.evoal.surrogate.smile.ml.laplacian-svr" 			-> toLaplacianKernel(parameters);
+			case "de.evoal.surrogate.smile.ml.linear-svr" 				-> toLinearKernel(parameters);
+			case "de.evoal.surrogate.smile.ml.pearson-svr" 				-> toPearsonKernel(parameters);
+			case "de.evoal.surrogate.smile.ml.polynomial-svr" 			-> toPolynomialKernel(parameters);
+			case "de.evoal.surrogate.smile.ml.thin-plate-spline-svr" 	-> toThinPlateSplineKernel(parameters);
+			default 	-> throw new IllegalArgumentException("The kernel " + parameters.get(KERNEL_PARAMETER) + " is not supported.");
+		};
 	}
 
 	public static List<Parameter> toParameters(final Regression<double[]> regression, final String kernelName) {

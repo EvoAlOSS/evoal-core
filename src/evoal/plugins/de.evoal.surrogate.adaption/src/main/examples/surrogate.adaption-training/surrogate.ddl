@@ -1,8 +1,12 @@
+import "definitions" from 'de.evoal.core.constraints';
+
 module surrogate {
 	data:
 		/**
 		 * Source dimension of the training data.
 		 */
+		@LowerBoundary{ boundary := -5.12; 'inclusive' := true; }
+		@UpperBoundary{ boundary := 5.12; 'inclusive' := true; }
 		quotient real data 'x:0';
 		
 		

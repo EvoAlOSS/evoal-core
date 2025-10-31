@@ -3,9 +3,6 @@ package de.evoal.surrogate.adaption.density.ea.surrogate.gof;
 import de.evoal.core.api.ecore.EObjectPair;
 import de.evoal.core.api.ecore.stream.EObjectPairStreamFactory;
 import de.evoal.core.api.ecore.stream.EObjectPairStreamSupplier;
-import de.evoal.core.api.properties.PropertiesPair;
-import de.evoal.core.api.properties.stream.PropertiesBasedPropertiesPairStreamSupplier;
-import de.evoal.core.api.properties.stream.PropertiesPairStreamSupplier;
 import de.evoal.surrogate.adaption.density.model.GaussianDensityData;
 import lombok.extern.slf4j.Slf4j;
 import smile.stat.distribution.GaussianDistribution;
@@ -28,7 +25,7 @@ public class GaussianDensityEstimation extends AbstractDensityEstimation {
     protected GaussianDensityData calculateDensityData(final Function<EObjectPair, Double> mapper) {
         final EObjectPairStreamSupplier supplier = EObjectPairStreamFactory.createFromList(sourcePropertiesSpec, targetPropertiesSpec, trainingData);
         final double [] data = supplier.get()
-                .mapToDouble(pair -> mapper.apply(pair))
+                .mapToDouble(mapper::apply)
                 .toArray();
 
         final GaussianDistribution distribution = GaussianDistribution.fit(data);

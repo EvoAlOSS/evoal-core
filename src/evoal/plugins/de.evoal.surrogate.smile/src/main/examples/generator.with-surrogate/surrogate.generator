@@ -1,0 +1,45 @@
+import "definitions" from de.evoal.core.math;
+import "definitions" from de.evoal.'pipeline'.base;
+import "definitions" from de.evoal.'pipeline'.distributions;
+
+import "definitions" from de.evoal.surrogate.'pipeline';
+
+import "data" from surrogate;
+
+
+module surrogate {
+	/**
+	 * Introduce a simple pipeline that generates some test data using
+	 *   a surrogate model.
+	 */
+	pipeline 'main-pipeline' [
+		/**
+		 * First, we generate some normally distributed data.
+		 */
+		step {
+			component 'distribution-based-data' {
+				distributions := [
+					'normal-distribution' {
+						'μ' := 0.0;
+						'σ' := 5.12;
+					}					
+				];
+			}
+			
+			writes [data 'x:0'];
+		}
+		
+	    step {
+	        component 'surrogate' {
+	            'model-file' := "svr.pson";
+	        }
+	
+	        reads [data 'x:0'];
+	        writes [data 'y:0'];
+	     }
+	]
+	
+	begin
+		write "calculated.json" with 1000 samples from executing [ 'main-pipeline'];
+	end
+}

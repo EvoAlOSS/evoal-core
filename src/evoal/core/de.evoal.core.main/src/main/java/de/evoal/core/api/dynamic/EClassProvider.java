@@ -9,7 +9,10 @@ import de.evoal.languages.model.base.expressions.TypeDefinitionReference;
 import de.evoal.languages.model.dynamic.Definition;
 import de.evoal.languages.model.dynamic.DynamicFactory;
 import de.evoal.languages.model.dynamic.DynamicPackage;
+import de.evoal.languages.model.generator.ConcreteStep;
 import de.evoal.languages.model.generator.GeneratorModule;
+import de.evoal.languages.model.generator.PipelineStep;
+import de.evoal.languages.model.generator.Step;
 import de.evoal.languages.model.mll.MachineLearningModule;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.emf.common.util.Diagnostic;
@@ -21,13 +24,16 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * Component for generating a dynamic ecore package for a given model.
+ */
 @ApplicationScoped
 @Slf4j
 public class EClassProvider {
     private static final EcoreFactory factory = EcoreFactory.eINSTANCE;
     private static final DynamicFactory dynFactory = DynamicFactory.eINSTANCE;
 
-    private Map<Object, EClass> eClassCache = new HashMap<>();
+    private final Map<Object, EClass> eClassCache = new HashMap<>();
 
     public EClass eClassFor(final GeneratorModule module) {
         log.info("Creating dynamic eclass for module {}.", module.getName());
@@ -40,7 +46,7 @@ public class EClassProvider {
             module.getPipelines()
                     .stream()
                     .flatMap(p -> p.getSteps().stream())
-                    .flatMap(s -> Stream.concat(s.getReads().stream(), s.getWrites().stream()))
+                    .flatMap(EClassProvider::toUsedDataStream)
                     .map(TypeDefinitionReference::getDefinition)
                     .filter(DataDescription.class::isInstance)
                     .map(DataDescription.class::cast)
@@ -53,6 +59,19 @@ public class EClassProvider {
         return result;
     }
 
+    private static Stream<TypeDefinitionReference> toUsedDataStream(final Step step) {
+        if(step instanceof ConcreteStep concrete) {
+            return Stream.concat(concrete.getReads().stream(), concrete.getWrites().stream());
+        } else if(step instanceof PipelineStep pipeline) {
+            return pipeline.getDefinition()
+                    .getSteps()
+                    .stream()
+                    .flatMap(EClassProvider::toUsedDataStream);
+        } else {
+            throw new IllegalArgumentException("Unsupported step: " + step.eClass().getName());
+        }
+    }
+
     public EClass eClassFor(final MachineLearningModule module) {
         log.info("Creating dynamic eclass for module {}.", module.getName());
         if(eClassCache.containsKey(module)) {
@@ -61,10 +80,11 @@ public class EClassProvider {
 
         // create a set of all used data
         final Set<DataDescription> references =
-                module.getDefinitions()
-                        .stream()
-                        .flatMap(p -> Stream.concat(p.getInputs().stream(), p.getOutputs().stream()))
-                        .collect(Collectors.toSet());
+                Stream.concat(
+                            module.getTask().getInputs().stream(),
+                            module.getTask().getOutputs().stream()
+                        )
+                      .collect(Collectors.toSet());
 
         final EClass result = eClassOf(references);
 

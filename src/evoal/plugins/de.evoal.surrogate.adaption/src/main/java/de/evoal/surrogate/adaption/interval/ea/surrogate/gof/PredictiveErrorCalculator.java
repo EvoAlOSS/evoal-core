@@ -10,11 +10,10 @@ import de.evoal.core.api.ecore.stream.EObjectPairStreamFactory;
 import de.evoal.core.api.ecore.stream.EObjectPairStreamSupplier;
 import de.evoal.core.interpreter.api.InterpreterState;
 import de.evoal.surrogate.adaption.interval.model.PredictiveErrorData;
-import de.evoal.surrogate.api.SurrogateInformationCalculator;
-import de.evoal.surrogate.api.configuration.SurrogateConfiguration;
-import de.evoal.surrogate.api.function.PartialSurrogateFunction;
-import de.evoal.surrogate.api.function.SurrogateFunction;
+import de.evoal.surrogate.api.function.ModelFunction;
+import de.evoal.surrogate.api.training.SurrogateInformationCalculator;
 import de.evoal.surrogate.smile.api.KernelBasedSVRFunction;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.math3.util.Pair;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import smile.math.matrix.Matrix;
@@ -22,60 +21,52 @@ import smile.math.matrix.Matrix;
 import java.util.*;
 import java.util.stream.IntStream;
 
+@Slf4j
 @Dependent
 @Named("de.evoal.surrogate.adaption.interval.ml.predictive-error")
-public class PredictiveErrorCalculator implements SurrogateInformationCalculator {
+public class PredictiveErrorCalculator extends SurrogateInformationCalculator {
     /**
      * Points for training.
      */
     private final List<EObjectPair> training = new ArrayList<>();
 
-    /**
-     * Prediction function
-     */
-    private SurrogateFunction function;
-
     private EObjectPairStreamSupplier trainingStream;
 
     @Override
-    public void configure(final SurrogateFunction function, final SurrogateConfiguration config, final EObjectPairStreamSupplier trainingData) {
-        this.function = function;
-        this.trainingStream = trainingData;
-    }
+    public Optional<Object> calculate(final InterpreterState context, final Object[] arguments) {
+        trainingStream = helper.loadTrainingDataPaired(context);
 
-    @Override
-    public Optional<Object> call(final InterpreterState context, final Object[] arguments) {
-        for(final PartialSurrogateFunction func : function.getFunctions()) {
-            if(!(func instanceof KernelBasedSVRFunction)) {
-                continue;
-            }
+        final ModelFunction function = functionData.function();
 
-            calculateError((KernelBasedSVRFunction)func);
+        if(function instanceof KernelBasedSVRFunction svrFunction) {
+            calculateError(svrFunction);
+        } else {
+            log.warn("Cannot calculate predictive error for non-SVR function");
         }
 
         return Optional.empty();
     }
 
     private void calculateError(final KernelBasedSVRFunction kernelFunction) {
-        initializeTrainingData(kernelFunction.getUsedProperties(), kernelFunction.getOutputProperty());
+        initializeTrainingData(kernelFunction.getInput(), kernelFunction.getOutput());
 
         final Map<EStructuralFeature, PredictiveErrorData> result = new HashMap<>();
 
         final int numberOfPoints = training.size();
 
         // initialize result map with empty data
-        kernelFunction.getOutputProperty()
+        kernelFunction.getOutput()
                       .forEach(feature -> result.put(feature, new PredictiveErrorData(numberOfPoints)));
 
         for(int pointIndex = 0; pointIndex < numberOfPoints; ++pointIndex) {
             final TypedEObject source = training.get(pointIndex).getFirst();
             final TypedEObject calculated = training.get(pointIndex).getSecond();
-            final TypedEObject predicted = kernelFunction.getOutputProperty().newEObject();
+            final TypedEObject predicted = kernelFunction.getOutput().newEObject();
 
             kernelFunction.apply(source, predicted);
 
 //            for(int i = 0; i < calculated.size(); ++i) {
-            for(final EStructuralFeature feature : kernelFunction.getOutputProperty()) {
+            for(final EStructuralFeature feature : kernelFunction.getOutput()) {
                 final PredictiveErrorData errorData =  result.get(feature);
 
                 errorData.setPredictionError(pointIndex, calculated.eGetAsDouble(feature) - predicted.eGetAsDouble(feature));
@@ -84,7 +75,7 @@ public class PredictiveErrorCalculator implements SurrogateInformationCalculator
         }
 
         final KernelBasedSVRFunction regression = kernelFunction;
-        final EStructuralFeature targetSpec = kernelFunction.getOutputProperty().iterator().next();
+        final EStructuralFeature targetSpec = kernelFunction.getOutput().iterator().next();
         final PredictiveErrorData errorData = result.get(targetSpec);
 
         final Matrix kernelTrainingsMatrix = new Matrix(numberOfPoints, numberOfPoints);
@@ -96,7 +87,7 @@ public class PredictiveErrorCalculator implements SurrogateInformationCalculator
                  .forEach(p -> {
                      final Integer index1 = p.getFirst();
                      final Integer index2 = p.getSecond();
-                     double kernelValue = calculateKernelValue(regression, kernelFunction.getUsedProperties(), kernelFunction.getOutputProperty(), index1, index2);
+                     double kernelValue = calculateKernelValue(regression, kernelFunction.getInput(), kernelFunction.getOutput(), index1, index2);
 
                      kernelTrainingsMatrixNotAdded.set(index1, index2, kernelValue);
                      kernelTrainingsMatrix.set(index1, index2, index1.equals(index2) ? kernelValue + 1.0 / regression.getGamma() : kernelValue);
@@ -154,7 +145,7 @@ public class PredictiveErrorCalculator implements SurrogateInformationCalculator
                      sigma[ri] = denominator / nominator;
                  });
 
-        final Space inputSpace = kernelFunction.getUsedProperties();
+        final Space inputSpace = kernelFunction.getInput();
 
         final double [][] trainingPoints = new double[training.size()][];
         for(int ti = 0; ti < trainingPoints.length; ++ti) {
@@ -168,14 +159,13 @@ public class PredictiveErrorCalculator implements SurrogateInformationCalculator
             }
         }
 
-
         errorData.setTrainingData(trainingPoints);
         errorData.setSigma(sigma);
         errorData.setDelta(delta);
         errorData.setIndependentSmoothingMatrix(independentSmoothingMatrix);
         errorData.setIndependentSmoothingVector(independentSmoothingVector);
 
-        errorData.attachTo(kernelFunction.getConfiguration(), targetSpec.getName());
+        errorData.attachTo(functionData.writer().get(), targetSpec);
     }
 
     private void initializeTrainingData(final Space input, final Space output) {

@@ -12,10 +12,12 @@ module de.evoal.surrogate.simple {
     requires de.evoal.core.main;
     requires de.evoal.surrogate.api;
     requires de.evoal.languages.model.base;
+    requires org.eclipse.emf.ecore;
+    requires de.evoal.languages.models;
 
     opens de.evoal.surrogate.simple;
 
     exports de.evoal.surrogate.simple.identity to weld.core.impl;
-    exports de.evoal.surrogate.simple.linear to weld.core.impl;
+    exports de.evoal.surrogate.simple.linear to weld.core.impl, de.evoal.surrogate.api;
     exports de.evoal.surrogate.simple.quadratic to weld.core.impl;
 }

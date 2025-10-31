@@ -59,7 +59,8 @@ public class PipelineFactoryImpl extends EFactoryImpl implements PipelineFactory
 		switch (eClass.getClassifierID()) {
 			case PipelinePackage.PIPELINE_MODULE: return createPipelineModule();
 			case PipelinePackage.PIPELINE_DEFINITION: return createPipelineDefinition();
-			case PipelinePackage.STEP: return createStep();
+			case PipelinePackage.CONCRETE_STEP: return createConcreteStep();
+			case PipelinePackage.PIPELINE_STEP: return createPipelineStep();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -93,9 +94,20 @@ public class PipelineFactoryImpl extends EFactoryImpl implements PipelineFactory
 	 * @generated
 	 */
 	@Override
-	public Step createStep() {
-		StepImpl step = new StepImpl();
-		return step;
+	public ConcreteStep createConcreteStep() {
+		ConcreteStepImpl concreteStep = new ConcreteStepImpl();
+		return concreteStep;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public PipelineStep createPipelineStep() {
+		PipelineStepImpl pipelineStep = new PipelineStepImpl();
+		return pipelineStep;
 	}
 
 	/**

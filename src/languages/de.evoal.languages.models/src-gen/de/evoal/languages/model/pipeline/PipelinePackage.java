@@ -3,6 +3,7 @@
  */
 package de.evoal.languages.model.pipeline;
 
+import de.evoal.languages.model.base.expressions.ExpressionsPackage;
 import de.evoal.languages.model.execution.ExecutionPackage;
 
 import org.eclipse.emf.ecore.EAttribute;
@@ -153,13 +154,32 @@ public interface PipelinePackage extends EPackage {
 	int STEP = 2;
 
 	/**
+	 * The number of structural features of the '<em>Step</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STEP_FEATURE_COUNT = ExpressionsPackage.LITERAL_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link de.evoal.languages.model.pipeline.impl.ConcreteStepImpl <em>Concrete Step</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.evoal.languages.model.pipeline.impl.ConcreteStepImpl
+	 * @see de.evoal.languages.model.pipeline.impl.PipelinePackageImpl#getConcreteStep()
+	 * @generated
+	 */
+	int CONCRETE_STEP = 3;
+
+	/**
 	 * The feature id for the '<em><b>Instance</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STEP__INSTANCE = 0;
+	int CONCRETE_STEP__INSTANCE = STEP_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Reads</b></em>' reference list.
@@ -168,7 +188,7 @@ public interface PipelinePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STEP__READS = 1;
+	int CONCRETE_STEP__READS = STEP_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Writes</b></em>' reference list.
@@ -177,7 +197,35 @@ public interface PipelinePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STEP__WRITES = 2;
+	int CONCRETE_STEP__WRITES = STEP_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>Concrete Step</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONCRETE_STEP_FEATURE_COUNT = STEP_FEATURE_COUNT + 3;
+
+	/**
+	 * The meta object id for the '{@link de.evoal.languages.model.pipeline.impl.PipelineStepImpl <em>Step</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.evoal.languages.model.pipeline.impl.PipelineStepImpl
+	 * @see de.evoal.languages.model.pipeline.impl.PipelinePackageImpl#getPipelineStep()
+	 * @generated
+	 */
+	int PIPELINE_STEP = 4;
+
+	/**
+	 * The feature id for the '<em><b>Definition</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PIPELINE_STEP__DEFINITION = STEP_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Step</em>' class.
@@ -186,7 +234,7 @@ public interface PipelinePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STEP_FEATURE_COUNT = 3;
+	int PIPELINE_STEP_FEATURE_COUNT = STEP_FEATURE_COUNT + 1;
 
 	/**
 	 * Returns the meta object for class '{@link de.evoal.languages.model.pipeline.PipelineModule <em>Module</em>}'.
@@ -263,37 +311,68 @@ public interface PipelinePackage extends EPackage {
 	EClass getStep();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link de.evoal.languages.model.pipeline.Step#getInstance <em>Instance</em>}'.
+	 * Returns the meta object for class '{@link de.evoal.languages.model.pipeline.ConcreteStep <em>Concrete Step</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Concrete Step</em>'.
+	 * @see de.evoal.languages.model.pipeline.ConcreteStep
+	 * @generated
+	 */
+	EClass getConcreteStep();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link de.evoal.languages.model.pipeline.ConcreteStep#getInstance <em>Instance</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Instance</em>'.
-	 * @see de.evoal.languages.model.pipeline.Step#getInstance()
-	 * @see #getStep()
+	 * @see de.evoal.languages.model.pipeline.ConcreteStep#getInstance()
+	 * @see #getConcreteStep()
 	 * @generated
 	 */
-	EReference getStep_Instance();
+	EReference getConcreteStep_Instance();
 
 	/**
-	 * Returns the meta object for the reference list '{@link de.evoal.languages.model.pipeline.Step#getReads <em>Reads</em>}'.
+	 * Returns the meta object for the reference list '{@link de.evoal.languages.model.pipeline.ConcreteStep#getReads <em>Reads</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference list '<em>Reads</em>'.
-	 * @see de.evoal.languages.model.pipeline.Step#getReads()
-	 * @see #getStep()
+	 * @see de.evoal.languages.model.pipeline.ConcreteStep#getReads()
+	 * @see #getConcreteStep()
 	 * @generated
 	 */
-	EReference getStep_Reads();
+	EReference getConcreteStep_Reads();
 
 	/**
-	 * Returns the meta object for the reference list '{@link de.evoal.languages.model.pipeline.Step#getWrites <em>Writes</em>}'.
+	 * Returns the meta object for the reference list '{@link de.evoal.languages.model.pipeline.ConcreteStep#getWrites <em>Writes</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference list '<em>Writes</em>'.
-	 * @see de.evoal.languages.model.pipeline.Step#getWrites()
-	 * @see #getStep()
+	 * @see de.evoal.languages.model.pipeline.ConcreteStep#getWrites()
+	 * @see #getConcreteStep()
 	 * @generated
 	 */
-	EReference getStep_Writes();
+	EReference getConcreteStep_Writes();
+
+	/**
+	 * Returns the meta object for class '{@link de.evoal.languages.model.pipeline.PipelineStep <em>Step</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Step</em>'.
+	 * @see de.evoal.languages.model.pipeline.PipelineStep
+	 * @generated
+	 */
+	EClass getPipelineStep();
+
+	/**
+	 * Returns the meta object for the reference '{@link de.evoal.languages.model.pipeline.PipelineStep#getDefinition <em>Definition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Definition</em>'.
+	 * @see de.evoal.languages.model.pipeline.PipelineStep#getDefinition()
+	 * @see #getPipelineStep()
+	 * @generated
+	 */
+	EReference getPipelineStep_Definition();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -380,12 +459,22 @@ public interface PipelinePackage extends EPackage {
 		EClass STEP = eINSTANCE.getStep();
 
 		/**
+		 * The meta object literal for the '{@link de.evoal.languages.model.pipeline.impl.ConcreteStepImpl <em>Concrete Step</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.evoal.languages.model.pipeline.impl.ConcreteStepImpl
+		 * @see de.evoal.languages.model.pipeline.impl.PipelinePackageImpl#getConcreteStep()
+		 * @generated
+		 */
+		EClass CONCRETE_STEP = eINSTANCE.getConcreteStep();
+
+		/**
 		 * The meta object literal for the '<em><b>Instance</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference STEP__INSTANCE = eINSTANCE.getStep_Instance();
+		EReference CONCRETE_STEP__INSTANCE = eINSTANCE.getConcreteStep_Instance();
 
 		/**
 		 * The meta object literal for the '<em><b>Reads</b></em>' reference list feature.
@@ -393,7 +482,7 @@ public interface PipelinePackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference STEP__READS = eINSTANCE.getStep_Reads();
+		EReference CONCRETE_STEP__READS = eINSTANCE.getConcreteStep_Reads();
 
 		/**
 		 * The meta object literal for the '<em><b>Writes</b></em>' reference list feature.
@@ -401,7 +490,25 @@ public interface PipelinePackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference STEP__WRITES = eINSTANCE.getStep_Writes();
+		EReference CONCRETE_STEP__WRITES = eINSTANCE.getConcreteStep_Writes();
+
+		/**
+		 * The meta object literal for the '{@link de.evoal.languages.model.pipeline.impl.PipelineStepImpl <em>Step</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.evoal.languages.model.pipeline.impl.PipelineStepImpl
+		 * @see de.evoal.languages.model.pipeline.impl.PipelinePackageImpl#getPipelineStep()
+		 * @generated
+		 */
+		EClass PIPELINE_STEP = eINSTANCE.getPipelineStep();
+
+		/**
+		 * The meta object literal for the '<em><b>Definition</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PIPELINE_STEP__DEFINITION = eINSTANCE.getPipelineStep_Definition();
 
 	}
 

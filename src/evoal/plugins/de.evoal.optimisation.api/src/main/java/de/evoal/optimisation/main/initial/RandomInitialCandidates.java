@@ -1,5 +1,6 @@
 package de.evoal.optimisation.main.initial;
 
+import de.evoal.core.api.properties.info.PropertyBoundaries;
 import de.evoal.optimisation.api.model.InitialCandidatesProvider;
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;
@@ -39,7 +40,7 @@ public class RandomInitialCandidates implements InitialCandidatesProvider {
             final Properties p =  new Properties(searchSpaceSpecification);
 
             for(final PropertySpecification spec : searchSpaceSpecification.getProperties()) {
-                final PropertiesBoundaries.Boundaries bounds = boundaries.get(spec);
+                final PropertyBoundaries bounds = boundaries.get(spec);
 
                 Requirements.requireTrue(spec.type() instanceof UntypedBaseDataDescription || spec.type() instanceof TypedBaseDataDescription, "Only typed and untyped data allowed");
 

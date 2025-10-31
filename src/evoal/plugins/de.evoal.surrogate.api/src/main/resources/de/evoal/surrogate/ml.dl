@@ -4,6 +4,8 @@ module de.evoal.surrogate.ml {
      */
 	abstract type surrogate {
 	}
+	
+	type 'r-squared' {}
 
 	/**
 	 * Runs a cross validation for a model training.

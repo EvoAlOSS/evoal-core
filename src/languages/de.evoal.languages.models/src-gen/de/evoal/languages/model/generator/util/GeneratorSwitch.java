@@ -3,6 +3,10 @@
  */
 package de.evoal.languages.model.generator.util;
 
+import de.evoal.languages.model.base.expressions.ConstantExpression;
+import de.evoal.languages.model.base.expressions.Expression;
+import de.evoal.languages.model.base.expressions.Literal;
+import de.evoal.languages.model.base.expressions.ReadExpression;
 import de.evoal.languages.model.execution.NamedVariable;
 import de.evoal.languages.model.execution.Statement;
 import de.evoal.languages.model.execution.Variable;
@@ -88,6 +92,32 @@ public class GeneratorSwitch<T> extends Switch<T> {
 			case GeneratorPackage.STEP: {
 				Step step = (Step)theEObject;
 				T result = caseStep(step);
+				if (result == null) result = caseLiteral(step);
+				if (result == null) result = caseConstantExpression(step);
+				if (result == null) result = caseReadExpression(step);
+				if (result == null) result = caseExpression(step);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case GeneratorPackage.PIPELINE_STEP: {
+				PipelineStep pipelineStep = (PipelineStep)theEObject;
+				T result = casePipelineStep(pipelineStep);
+				if (result == null) result = caseStep(pipelineStep);
+				if (result == null) result = caseLiteral(pipelineStep);
+				if (result == null) result = caseConstantExpression(pipelineStep);
+				if (result == null) result = caseReadExpression(pipelineStep);
+				if (result == null) result = caseExpression(pipelineStep);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case GeneratorPackage.CONCRETE_STEP: {
+				ConcreteStep concreteStep = (ConcreteStep)theEObject;
+				T result = caseConcreteStep(concreteStep);
+				if (result == null) result = caseStep(concreteStep);
+				if (result == null) result = caseLiteral(concreteStep);
+				if (result == null) result = caseConstantExpression(concreteStep);
+				if (result == null) result = caseReadExpression(concreteStep);
+				if (result == null) result = caseExpression(concreteStep);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -148,6 +178,36 @@ public class GeneratorSwitch<T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Pipeline Step</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Pipeline Step</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePipelineStep(PipelineStep object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Concrete Step</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Concrete Step</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseConcreteStep(ConcreteStep object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Apply Statement</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -189,6 +249,66 @@ public class GeneratorSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseNamedVariable(NamedVariable object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Expression</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseExpression(Expression object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Read Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Read Expression</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseReadExpression(ReadExpression object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Constant Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Constant Expression</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseConstantExpression(ConstantExpression object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Literal</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Literal</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseLiteral(Literal object) {
 		return null;
 	}
 

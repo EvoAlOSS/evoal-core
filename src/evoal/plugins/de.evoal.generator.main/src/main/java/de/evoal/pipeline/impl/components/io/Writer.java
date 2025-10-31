@@ -22,14 +22,14 @@ import de.evoal.core.api.utils.InitializationException;
 import de.evoal.languages.model.base.definitions.Definition;
 import de.evoal.languages.model.base.expressions.Instance;
 import de.evoal.languages.model.dynamic.DynamicPackage;
-import de.evoal.pipeline.api.model.ComponentImpl;
+import de.evoal.pipeline.api.model.PipelineComponentImpl;
 import de.evoal.core.api.ecore.TypedEObject;
 import de.evoal.core.api.ecore.Space;
 
 @Dependent
 @Slf4j
 @Named("de.evoal.pipeline.io.writer")
-public class Writer extends ComponentImpl {
+public class Writer extends PipelineComponentImpl {
     @Inject
     private AttributeHelper helper;
 
@@ -56,7 +56,7 @@ public class Writer extends ComponentImpl {
     }
 
     @Override
-    public ComponentImpl init(final Instance configuration) throws InitializationException {
+    public PipelineComponentImpl init(final Instance configuration) throws InitializationException {
         super.init(configuration);
 
         final String filename = helper.lookup(configuration, "filename");

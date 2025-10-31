@@ -12,7 +12,7 @@ module 'search' {
 		
 		map with 'unknown-function' {}
 		
-		and maximise data 'y:0', maximise data 'y:1', maximise data 'y:2'
+		and maximise data 'y:0'
 	}
 		
 		
@@ -25,7 +25,7 @@ module 'search' {
 		'initialisation' := 'random-population' {};
 		
 		'comparator' := 'weighted-sum' {
-			'weights' := [1.0, 1.0, 1.0];
+			'weights' := [1.0];
 		};
 	
 	    genotype := 'vector-genotype' {
@@ -70,9 +70,9 @@ module 'search' {
 	    };
 	
 		'optimisation-function' := 'surrogate' {
-            'pson-file' := "simple.pson";
+            'model-file' := "simple.pson";
             'input-space' := [data 'x:0'];
-            'output-space' := [data 'y:0', data 'y:1', data 'y:2'];
+            'output-space' := [data 'y:0'];
 		};
 
 		'stopping-criteria' := [

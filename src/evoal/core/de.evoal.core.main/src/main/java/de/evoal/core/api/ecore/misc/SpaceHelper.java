@@ -24,6 +24,6 @@ public class SpaceHelper {
         final EClass clazz = orderedSet.get(0).getEContainingClass();
         orderedSet.forEach(f -> Requirements.requireEqual(clazz, f.getEContainingClass()));
 
-        return new Space(clazz, orderedSet);
+        return new Space(clazz).subSpace(orderedSet);
     }
 }

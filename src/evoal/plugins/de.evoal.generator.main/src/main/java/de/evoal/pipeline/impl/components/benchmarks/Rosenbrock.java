@@ -1,6 +1,6 @@
 package de.evoal.pipeline.impl.components.benchmarks;
 
-import de.evoal.pipeline.api.model.ComponentImpl;
+import de.evoal.pipeline.api.model.PipelineComponentImpl;
 import de.evoal.core.api.ecore.TypedEObject;
 import lombok.NonNull;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -11,7 +11,7 @@ import java.util.Iterator;
 
 @Dependent
 @Named("de.evoal.pipeline.benchmarks.rosenbrock")
-public class Rosenbrock extends ComponentImpl {
+public class Rosenbrock extends PipelineComponentImpl {
     @Override
     public @NonNull TypedEObject apply(final @NonNull TypedEObject obj) {
         final double n = getReads().size();

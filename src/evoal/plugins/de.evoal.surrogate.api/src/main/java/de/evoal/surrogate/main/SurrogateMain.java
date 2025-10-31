@@ -8,15 +8,21 @@ import de.evoal.core.api.cdi.MainClass;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
+import de.evoal.core.api.dynamic.EAnnotationHelper;
+import de.evoal.core.api.ecore.Space;
 import de.evoal.core.interpreter.api.ProgramInterpreter;
 import de.evoal.languages.model.mll.MachineLearningModule;
+import de.evoal.languages.model.mll.MllPackage;
 import de.evoal.languages.model.pipeline.PipelineModule;
 import de.evoal.core.api.dynamic.EClassProvider;
+import de.evoal.pipeline.api.cdi.DefinitionModuleLoader;
 import de.evoal.surrogate.api.SurrogateBlackboardEntries;
+import de.evoal.surrogate.main.internal.DefaultBehaviourInjector;
 import de.evoal.surrogate.main.internal.MLLModelConverter;
 import de.evoal.surrogate.main.internal.MLLProgramExecutionSwitch;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EStructuralFeature;
 
 /**
  * Program for pre-calculating regressions to minimize runtime overhead of
@@ -39,14 +45,27 @@ public class SurrogateMain implements MainClass {
     @Inject
     private EClassProvider provider;
 
+    @Inject
+    private EAnnotationHelper helper;
+
+    @Inject
+    private DefinitionModuleLoader loader;
+
     @Override
     public void run() {
-        log.info("Training surrogate models and measuring GOF values.");
+        log.info("Generating dynamic EClass for model.");
+        final EClass model = provider.eClassFor(module);
+        final Space space = new Space(model);
 
-        final EClass space = provider.eClassFor(module);
-        final MLLModelConverter converter = new MLLModelConverter(space);
+        log.info("Making implicit behaviour explicit in model.");
+        new DefaultBehaviourInjector(loader, module.getTask().getInputs(), module.getTask().getOutputs()).inject(module);
+
+        log.info("Converting machine learning model to pipeline model.");
+        final EStructuralFeature learningUseCase = MllPackage.eINSTANCE.getMachineLearningModule_LearningUseCase();
+        final MLLModelConverter converter = new MLLModelConverter(loader, helper, space, learningUseCase);
         final PipelineModule pModule = converter.convert(module);
 
+        log.info("Running use case: learning");
         final ProgramInterpreter executor = new ProgramInterpreter((state) -> {
             state.setSpace(space);
             return BeanFactory.create(MLLProgramExecutionSwitch.class)

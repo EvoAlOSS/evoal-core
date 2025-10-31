@@ -13,7 +13,7 @@ public class CustomKernelDensity {
 
     /**
      * Constructor. The bandwidth of kernel will be estimated by the rule of thumb.
-     * @param x the samples to estimate the density function.
+     * @param distribution the samples to estimate the density function.
      */
     public CustomKernelDensity(final GaussianDistribution distribution) {
         gaussian = distribution;

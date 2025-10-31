@@ -3,6 +3,7 @@ package de.evoal.core.api.utils;
 import de.evoal.core.junit.dsl.LanguageHelper;
 import de.evoal.languages.model.base.expressions.Attribute;
 import de.evoal.languages.model.dl.DefinitionModule;
+import de.evoal.languages.model.generator.ConcreteStep;
 import de.evoal.languages.model.generator.GeneratorModule;
 import de.evoal.languages.model.generator.Step;
 import de.evoal.languages.model.base.types.*;
@@ -62,7 +63,7 @@ public class AttributeHelperRegressionTest {
         final GeneratorModule configuration = LanguageHelper.loadFromClasspath("de/evoal/core/api/utils/regressions/shekel.generator");
 
         // fetch step configuration for testee
-        final Step step = configuration.getPipelines().get(0).getSteps().get(0);
+        final ConcreteStep step = (ConcreteStep)configuration.getPipelines().get(0).getSteps().get(0);
 
         Assertions.assertNotNull(step);
         Assertions.assertNotNull(step.getInstance());

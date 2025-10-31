@@ -17,3 +17,7 @@ location "https://download.eclipse.org/releases/2022-12/202212071000" {
 location "https://download.eclipse.org/tools/orbit/downloads/drops/R20221123021534/repository" {
 	org.junit.jupiter.api lazy
 }
+
+location "https://typefox.github.io/xtext2langium/download/updates/v0.4.0/" {
+	io.typefox.xtext2langium lazy
+}

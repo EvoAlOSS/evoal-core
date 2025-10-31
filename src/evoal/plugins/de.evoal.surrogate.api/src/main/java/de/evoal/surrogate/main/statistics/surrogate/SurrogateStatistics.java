@@ -15,7 +15,6 @@ import de.evoal.core.api.dynamic.EClassProvider;
 import de.evoal.core.api.ecore.Space;
 import de.evoal.core.api.ecore.TypedEObject;
 import de.evoal.core.api.properties.Properties;
-import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.properties.PropertySpecification;
 import de.evoal.core.api.utils.AttributeHelper;
 import de.evoal.languages.model.base.definitions.DataDescription;
@@ -28,8 +27,8 @@ import de.evoal.optimisation.api.statistics.writer.ColumnType;
 import de.evoal.languages.model.base.expressions.Instance;
 import de.evoal.optimisation.api.statistics.writer.StatisticsWriter;
 import de.evoal.surrogate.api.cdi.SurrogateProducer;
-import de.evoal.surrogate.api.function.SurrogateFunction;
-import lombok.SneakyThrows;
+import de.evoal.surrogate.api.function.ModelFunction;
+import de.evoal.surrogate.api.function.ModelFunctionData;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -53,7 +52,7 @@ public class SurrogateStatistics extends AbstractCandidateStatisticsWriter {
     /**
      * The predictive function used.
      */
-    protected SurrogateFunction predictive;
+    protected ModelFunctionData predictive;
 
     @Inject
     private SurrogateProducer producer;
@@ -72,14 +71,15 @@ public class SurrogateStatistics extends AbstractCandidateStatisticsWriter {
         final List<DataDescription> outputSpace = attribute.lookup(configuration, "output-space");
 
         final EClass dynamicEClass = dynamic.eClassFor(inputSpace, outputSpace);
-        final Space input = helper.subSpaceOf(dynamicEClass, inputSpace);
-        final Space output = helper.subSpaceOf(dynamicEClass, outputSpace);
+        final Space dynamicSpace = new Space(dynamicEClass);
+        final Space input = helper.subSpaceOf(dynamicSpace, inputSpace);
+        final Space output = helper.subSpaceOf(dynamicSpace, outputSpace);
 
 
-        predictive = producer.load(new File(surrogateConfiguration), input.merge(output));
+        predictive = producer.load(new File(surrogateConfiguration), input, output);
 
-        sourceSpace = predictive.getInputSpecification();
-        targetSpace = predictive.getOutputSpecification();
+        sourceSpace = predictive.function().getInput();
+        targetSpace = predictive.function().getOutput();
 
         super.init(configuration);
 
@@ -121,7 +121,8 @@ public class SurrogateStatistics extends AbstractCandidateStatisticsWriter {
         }
 
         // predict
-        predictive.apply(input, output);
+        predictive.function()
+                  .apply(input, output);
 
         // copy output to log
         int i = 0;

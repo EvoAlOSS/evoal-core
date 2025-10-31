@@ -3,7 +3,7 @@ package de.evoal.pipeline.impl.components.benchmarks;
 import de.evoal.core.api.languages.AttributeEvaluator;
 import de.evoal.core.api.utils.InitializationException;
 import de.evoal.languages.model.base.expressions.Instance;
-import de.evoal.pipeline.api.model.ComponentImpl;
+import de.evoal.pipeline.api.model.PipelineComponentImpl;
 import de.evoal.core.api.ecore.TypedEObject;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
@@ -16,7 +16,7 @@ import javax.inject.Named;
 @Dependent
 @Named("de.evoal.pipeline.benchmarks.ackley")
 @Slf4j
-public class Ackley extends ComponentImpl {
+public class Ackley extends PipelineComponentImpl {
     private double a = 20;
 
     private double b = 0.2;
@@ -49,7 +49,7 @@ public class Ackley extends ComponentImpl {
     }
 
     @Override
-    public ComponentImpl init(final Instance instance) throws InitializationException {
+    public PipelineComponentImpl init(final Instance instance) throws InitializationException {
         super.init(instance);
 
         a = evaluator.attributeToDouble(instance, "a");

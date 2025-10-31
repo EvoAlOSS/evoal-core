@@ -20,6 +20,7 @@ package de.evoal.optimisation.pso.main.impl;
 import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.core.api.properties.info.PropertiesBoundaries;
 import de.evoal.core.api.properties.Properties;
+import de.evoal.core.api.properties.info.PropertyBoundaries;
 import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
 import de.evoal.optimisation.pso.api.swarm.Particle;
 import de.evoal.optimisation.pso.api.swarm.DefaultSwarm;
@@ -102,7 +103,7 @@ public class ARPSOSwarm extends DefaultSwarm {
 
 
         for (int i=0; i<properties.size();i++) {
-            PropertiesBoundaries.Boundaries bounds = boundaries.get(properties.getSpecification().get(i));
+            PropertyBoundaries bounds = boundaries.get(properties.getSpecification().get(i));
             double maximum = bounds.upper().doubleValue();
             double minimum = bounds.lower().doubleValue();
             double diff = maximum - minimum;

@@ -3,6 +3,7 @@ package de.evoal.optimisation.ea.main.codec.vector.chromosome;
 import de.evoal.core.api.languages.AttributeEvaluator;
 import de.evoal.core.api.properties.PropertySpecification;
 import de.evoal.core.api.properties.info.PropertiesBoundaries;
+import de.evoal.core.api.properties.info.PropertyBoundaries;
 import de.evoal.core.api.utils.Requirements;
 import de.evoal.languages.model.base.definitions.DataDescription;
 import de.evoal.languages.model.base.expressions.Instance;
@@ -38,7 +39,7 @@ public abstract class DynamicScaledChromosome extends DynamicBoundedDoubleChromo
 
         final PropertySpecification spec = new PropertySpecification(dataDescription.getName(), dataDescription);
         if(boundaries.contains(spec)) {
-            final PropertiesBoundaries.Boundaries bounds = boundaries.get(spec);
+            final PropertyBoundaries bounds = boundaries.get(spec);
             min = Math.max(min, bounds.lower().doubleValue());
             max = Math.min(max, bounds.upper().doubleValue());
         }

@@ -20,6 +20,7 @@ package de.evoal.optimisation.pso.main.mover;
 import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.info.PropertiesBoundaries;
+import de.evoal.core.api.properties.info.PropertyBoundaries;
 import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
 import de.evoal.optimisation.pso.api.BoundaryType;
 import de.evoal.optimisation.pso.api.optimiser.Mover;
@@ -90,7 +91,7 @@ public class CFMover implements Mover {
             double x = currentPosition.getAsDouble(i);
             double v = currentVelocity[i];
 
-            final PropertiesBoundaries.Boundaries bounds = boundaries.get(currentPosition.getSpecification().get(i));
+            final PropertyBoundaries bounds = boundaries.get(currentPosition.getSpecification().get(i));
             final double maximum = bounds.upper().doubleValue();
             final double minimum = bounds.lower().doubleValue();
 

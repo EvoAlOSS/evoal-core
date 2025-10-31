@@ -86,7 +86,7 @@ public class ExecutionDSLConverter extends ExecutionSwitch<Object> {
         log.info("Converting variable reference to {}.", obj);
 
         final VariableReference result = execFactory.createVariableReference();
-        final Variable var = variables.get(obj.getVariable());
+        final Variable var = variables.get(variables.get(obj.getVariable()));
         result.setVariable(var);
 
         return result;

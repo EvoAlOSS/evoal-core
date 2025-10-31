@@ -1,6 +1,5 @@
 package de.evoal.languages.model.interpreter;
 
-import java.util.Comparator;
 import java.util.function.BiFunction;
 
 /**

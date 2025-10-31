@@ -2,15 +2,10 @@
  */
 package de.evoal.languages.model.mll.util;
 
-import de.evoal.languages.model.base.expressions.ConstantExpression;
-import de.evoal.languages.model.base.expressions.Expression;
-import de.evoal.languages.model.base.expressions.Instance;
-import de.evoal.languages.model.base.expressions.Literal;
-import de.evoal.languages.model.base.expressions.ReadExpression;
 import de.evoal.languages.model.execution.NamedVariable;
-import de.evoal.languages.model.execution.Statement;
 import de.evoal.languages.model.execution.Variable;
 import de.evoal.languages.model.mll.*;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
@@ -79,29 +74,11 @@ public class MllSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case MllPackage.SURROGATE_DEFINITION: {
-				SurrogateDefinition surrogateDefinition = (SurrogateDefinition)theEObject;
-				T result = caseSurrogateDefinition(surrogateDefinition);
-				if (result == null) result = caseNamedVariable(surrogateDefinition);
-				if (result == null) result = caseVariable(surrogateDefinition);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case MllPackage.PARTIAL_SURROGATE_FUNCTION_DEFINITION: {
-				PartialSurrogateFunctionDefinition partialSurrogateFunctionDefinition = (PartialSurrogateFunctionDefinition)theEObject;
-				T result = casePartialSurrogateFunctionDefinition(partialSurrogateFunctionDefinition);
-				if (result == null) result = caseInstance(partialSurrogateFunctionDefinition);
-				if (result == null) result = caseLiteral(partialSurrogateFunctionDefinition);
-				if (result == null) result = caseConstantExpression(partialSurrogateFunctionDefinition);
-				if (result == null) result = caseReadExpression(partialSurrogateFunctionDefinition);
-				if (result == null) result = caseExpression(partialSurrogateFunctionDefinition);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case MllPackage.PREDICT_STATEMENT: {
-				PredictStatement predictStatement = (PredictStatement)theEObject;
-				T result = casePredictStatement(predictStatement);
-				if (result == null) result = caseStatement(predictStatement);
+			case MllPackage.TASK_DESCRIPTION: {
+				TaskDescription taskDescription = (TaskDescription)theEObject;
+				T result = caseTaskDescription(taskDescription);
+				if (result == null) result = caseNamedVariable(taskDescription);
+				if (result == null) result = caseVariable(taskDescription);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -125,47 +102,17 @@ public class MllSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Surrogate Definition</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Task Description</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Surrogate Definition</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Task Description</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseSurrogateDefinition(SurrogateDefinition object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Partial Surrogate Function Definition</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Partial Surrogate Function Definition</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T casePartialSurrogateFunctionDefinition(PartialSurrogateFunctionDefinition object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Predict Statement</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Predict Statement</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T casePredictStatement(PredictStatement object) {
+	public T caseTaskDescription(TaskDescription object) {
 		return null;
 	}
 
@@ -196,96 +143,6 @@ public class MllSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseNamedVariable(NamedVariable object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Expression</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Expression</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseExpression(Expression object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Read Expression</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Read Expression</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseReadExpression(ReadExpression object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Constant Expression</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Constant Expression</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseConstantExpression(ConstantExpression object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Literal</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Literal</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseLiteral(Literal object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Instance</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Instance</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseInstance(Instance object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Statement</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Statement</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseStatement(Statement object) {
 		return null;
 	}
 

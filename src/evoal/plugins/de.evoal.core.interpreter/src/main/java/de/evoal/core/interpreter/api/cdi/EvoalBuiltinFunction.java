@@ -1,5 +1,7 @@
 package de.evoal.core.interpreter.api.cdi;
 
+import de.evoal.core.api.utils.EvoAlEvaluationException;
+import de.evoal.core.api.utils.EvoalException;
 import de.evoal.core.interpreter.api.InterpreterState;
 
 import java.util.Optional;
@@ -15,5 +17,5 @@ public interface EvoalBuiltinFunction<T extends EvoalBuiltinFunction<T>> {
      * @param arguments The actual arguments.
      * @return The function result. Return Optional.empty() if you do not want to return a value.
      */
-    public Optional<Object> call(final InterpreterState context, final Object[] arguments);
+    public Optional<Object> call(final InterpreterState context, final Object[] arguments) throws EvoAlEvaluationException;
 }

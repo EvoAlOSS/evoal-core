@@ -1,7 +1,5 @@
 package de.evoal.surrogate.main.gof.rsquare;
 
-import de.evoal.surrogate.api.configuration.Parameter;
-import de.evoal.surrogate.api.configuration.PartialFunctionConfiguration;
 import lombok.Data;
 
 @Data
@@ -11,6 +9,7 @@ public class RSquareData {
     public RSquareData(final double value) {
         this.value = value;
     }
+    /*
     public void attachTo(final PartialFunctionConfiguration regression, final String outputName) {
         attach(regression, outputName, "r²", value);
     }
@@ -23,4 +22,5 @@ public class RSquareData {
 
         regression.addOutputParameter(output, parameter);
     }
+     */
 }

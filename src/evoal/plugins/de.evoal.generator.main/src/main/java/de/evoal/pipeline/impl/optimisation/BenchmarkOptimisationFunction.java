@@ -1,6 +1,7 @@
 package de.evoal.pipeline.impl.optimisation;
 
 import de.evoal.languages.model.base.expressions.TypeDefinitionReference;
+import de.evoal.languages.model.pipeline.ConcreteStep;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
@@ -25,10 +26,9 @@ import de.evoal.languages.model.base.definitions.DataDescription;
 import de.evoal.languages.model.base.expressions.ExpressionsFactory;
 import de.evoal.languages.model.base.expressions.Instance;
 import de.evoal.languages.model.pipeline.PipelineFactory;
-import de.evoal.languages.model.pipeline.Step;
 import de.evoal.optimisation.api.model.OptimisationFunction;
-import de.evoal.pipeline.api.model.Component;
-import de.evoal.pipeline.api.model.ComponentImpl;
+import de.evoal.pipeline.api.model.PipelineComponent;
+import de.evoal.pipeline.api.model.PipelineComponentImpl;
 import de.evoal.core.api.dynamic.EAnnotationHelper;
 import de.evoal.core.api.dynamic.EClassProvider;
 
@@ -54,7 +54,7 @@ public class BenchmarkOptimisationFunction implements OptimisationFunction {
 
     private PropertiesSpecification mergedSpaceSpecification;
 
-    private Component[] functions;
+    private PipelineComponent[] functions;
 
     private PropertiesSpecification [] functionProperties;
 
@@ -71,7 +71,7 @@ public class BenchmarkOptimisationFunction implements OptimisationFunction {
         }
 
         for(int i = 0; i < functions.length; ++i) {
-            final Component function = functions[i];
+            final PipelineComponent function = functions[i];
             final PropertiesSpecification specification = functionProperties[i];
 
             function.apply(temporary);
@@ -93,13 +93,13 @@ public class BenchmarkOptimisationFunction implements OptimisationFunction {
         eClass = provider.eClassFor(searchSpaceSpecification, optimisationSpaceSpecification);
         mapping = annHelper.featuresOf(eClass);
 
-        functions = new Component[benchmarkConfigurations.size()];
+        functions = new PipelineComponent[benchmarkConfigurations.size()];
         functionProperties = new PropertiesSpecification[benchmarkConfigurations.size()];
         for(int index = 0; index < functions.length; ++index) {
             final Instance benchmarkConfiguration = benchmarkConfigurations.get(index);
             final Instance function = helper.lookup(benchmarkConfiguration, "function");
 
-            final Step stepConfiguration = PipelineFactory.eINSTANCE.createStep();
+            final ConcreteStep stepConfiguration = PipelineFactory.eINSTANCE.createConcreteStep();
             stepConfiguration.setInstance(EcoreUtil.copy(function));
 
             final List<DataDescription> readReferences = helper.lookup(benchmarkConfiguration, "reads");
@@ -137,11 +137,12 @@ public class BenchmarkOptimisationFunction implements OptimisationFunction {
      * @param step The step to instanciate.
      * @return The instanciated component.
      */
-    private Component toComponent(final de.evoal.languages.model.pipeline.Step step) {
+    private PipelineComponent toComponent(final de.evoal.languages.model.pipeline.ConcreteStep step) {
         log.info("Instantiating component {}", step.getInstance().getDefinition().getName());
-        final Space inputSpace = new Space(eClass, step.getReads());
-        final Space outputSpace = new Space(eClass, step.getWrites());
-        return BeanFactory.createComponent(ComponentImpl.class, step.getInstance(), c -> c.setFeatures(inputSpace, outputSpace));
+        final Space space = new Space(eClass);
+        final Space inputSpace = space.subSpace(step.getReads());
+        final Space outputSpace = space.subSpace(step.getWrites());
+        return BeanFactory.createComponent(PipelineComponentImpl.class, step.getInstance(), c -> c.setFeatures(space, inputSpace, outputSpace));
     }
 }
 

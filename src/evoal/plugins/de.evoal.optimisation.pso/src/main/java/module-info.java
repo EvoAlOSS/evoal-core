@@ -2,8 +2,6 @@ module de.evoal.optimisation.pso {
     requires jakarta.enterprise.cdi.api;
     requires jakarta.inject.api;
 
-    requires java.annotation;
-
     requires lombok;
 
     requires org.slf4j;

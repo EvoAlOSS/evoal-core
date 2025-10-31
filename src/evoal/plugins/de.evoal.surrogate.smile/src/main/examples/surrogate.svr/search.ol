@@ -12,14 +12,7 @@ module 'search' {
 		
 		map with 'unknown-function' {}
 		
-		and maximise data 'y:0',
-		    maximise data 'y:1',
-		    maximise data 'y:2',
-			maximise data 'y:3',
-			maximise data 'y:4',
-			maximise data 'y:5',
-			maximise data 'y:6',
-			maximise data 'y:7'
+		and maximise data 'y:0'
 	}
 		
 		
@@ -32,7 +25,7 @@ module 'search' {
 		'initialisation' := 'random-population' {};
 		
 		'comparator' := 'weighted-sum' {
-			'weights' := [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0];
+			'weights' := [1.0];
 		};
 	
 	    genotype := 'vector-genotype' {
@@ -77,9 +70,9 @@ module 'search' {
 	    };
 	
 		'optimisation-function' := 'surrogate' {
-            'pson-file' := "svr.pson";
-            'input-space' := [data 'x:0'];
-            'output-space' := [data 'y:0', data 'y:1', data 'y:2', data 'y:3', data 'y:4', data 'y:5', data 'y:6', data 'y:7'];
+                'model-file' := "svr.pson";
+                'input-space' := [data 'x:0'];
+                'output-space' := [data 'y:0'];
 		};
 
 		'stopping-criteria' := [
@@ -92,7 +85,7 @@ module 'search' {
 		    'prediction-per-individual' {
 		        'pson-file' := "svr.pson";
                 'input-space' := [data 'x:0'];
-                'output-space' := [data 'y:0', data 'y:1', data 'y:2', data 'y:3', data 'y:4', data 'y:5', data 'y:6', data 'y:7'];
+                'output-space' := [data 'y:0'];
 		    }
         ];
 	}

@@ -8,6 +8,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 
 import java.util.Collection;
 import java.util.LinkedHashSet;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -22,13 +23,9 @@ public class Space extends LinkedHashSet<EStructuralFeature> {
         this(eClass, eClass.getEAllStructuralFeatures());
     }
 
-    public Space(final EClass eClass, final Collection<EStructuralFeature> features) {
+    private Space(final EClass eClass, final Collection<EStructuralFeature> features) {
         super(features);
         this.eClass = eClass;
-    }
-
-    public Space(final EClass eClass, final Stream<EStructuralFeature> features) {
-        this(eClass, features.toList());
     }
 
     public TypedEObject newEObject() {
@@ -63,5 +60,13 @@ public class Space extends LinkedHashSet<EStructuralFeature> {
         builder.append("]");
 
         return builder.toString();
+    }
+
+    public Space subSpace(final Collection<EStructuralFeature> features) {
+        return new Space(eClass, features);
+    }
+
+    public Space subSpace(final Stream<EStructuralFeature> features) {
+        return new Space(eClass, features.collect(Collectors.toUnmodifiableList()));
     }
 }

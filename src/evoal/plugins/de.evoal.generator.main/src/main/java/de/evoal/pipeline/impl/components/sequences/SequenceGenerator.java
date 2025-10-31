@@ -2,7 +2,7 @@ package de.evoal.pipeline.impl.components.sequences;
 
 import de.evoal.languages.model.base.definitions.DataDescription;
 import de.evoal.languages.model.base.expressions.Instance;
-import de.evoal.pipeline.api.model.ComponentImpl;
+import de.evoal.pipeline.api.model.PipelineComponentImpl;
 import de.evoal.core.api.ecore.TypedEObject;
 import de.evoal.core.api.dynamic.EAnnotationHelper;
 import de.evoal.pipeline.api.sequence.Sequence;
@@ -20,7 +20,7 @@ import java.util.*;
 @Named("de.evoal.pipeline.sequences.sequence-generator")
 @Dependent
 @Slf4j
-public class SequenceGenerator extends ComponentImpl {
+public class SequenceGenerator extends PipelineComponentImpl {
 
     @Inject
     private EAnnotationHelper helper;

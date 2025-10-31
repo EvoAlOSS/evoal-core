@@ -77,7 +77,11 @@ module 'search' {
 				
 				function := 'adjusted-predicted-fitness' {
 					function := 'adjusted-modified-fitness' {
-						function := 'surrogate' {};
+						function := 'surrogate' {
+            'model-file' := "model.pson";
+            'input-space' := [data 'x:0'];
+            'output-space' := [data 'y:0'];
+						};
 					};
 				};
 			};
@@ -88,7 +92,11 @@ module 'search' {
 		];
 
 		document := [
-            'correlated' {}//,
+            'correlated' {
+                'input-space' := [data 'x:0'];
+                'output-space' := [data 'y:0'];
+            }
+            //,
 //            'range-correlated' {}
 		];
 	}

@@ -284,8 +284,8 @@ public final class Requirements {
      *
      * @throws NullPointerException iff {@code object} is {@code null}.
      */
-    public static void requireNotNull(final Object object) {
-        Objects.requireNonNull(object, "Object is not allowed to be null");
+    public static void requireNotNull(final Object object, String ... message) {
+        Objects.requireNonNull(object, "Object is not allowed to be null" + (message.length == 0 ? "." : ": " + message[0]));
     }
 
     /**

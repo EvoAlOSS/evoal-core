@@ -31,31 +31,13 @@ public interface MllFactory extends EFactory {
 	MachineLearningModule createMachineLearningModule();
 
 	/**
-	 * Returns a new object of class '<em>Surrogate Definition</em>'.
+	 * Returns a new object of class '<em>Task Description</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Surrogate Definition</em>'.
+	 * @return a new object of class '<em>Task Description</em>'.
 	 * @generated
 	 */
-	SurrogateDefinition createSurrogateDefinition();
-
-	/**
-	 * Returns a new object of class '<em>Partial Surrogate Function Definition</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Partial Surrogate Function Definition</em>'.
-	 * @generated
-	 */
-	PartialSurrogateFunctionDefinition createPartialSurrogateFunctionDefinition();
-
-	/**
-	 * Returns a new object of class '<em>Predict Statement</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Predict Statement</em>'.
-	 * @generated
-	 */
-	PredictStatement createPredictStatement();
+	TaskDescription createTaskDescription();
 
 	/**
 	 * Returns the package supported by this factory.

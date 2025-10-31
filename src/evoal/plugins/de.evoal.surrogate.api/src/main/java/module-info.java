@@ -36,30 +36,37 @@ module de.evoal.surrogate.api {
     // export resources
     exports de.evoal.surrogate.api;
     exports de.evoal.surrogate.api.cdi;
-    exports de.evoal.surrogate.api.configuration;
     exports de.evoal.surrogate.api.function;
+    exports de.evoal.surrogate.api.io;
+    exports de.evoal.surrogate.api.io.pson;
+    exports de.evoal.surrogate.api.training;
 
     opens de.evoal.surrogate;
 
     // open packages for CDI
     opens de.evoal.surrogate.api to weld.core.impl;
     opens de.evoal.surrogate.api.cdi to weld.core.impl;
-    opens de.evoal.surrogate.api.configuration to com.fasterxml.jackson.databind;
+    opens de.evoal.surrogate.api.function to weld.core.impl;
+    opens de.evoal.surrogate.api.io to weld.core.impl;
+    opens de.evoal.surrogate.api.io.pson to weld.core.impl, com.fasterxml.jackson.databind;
+    opens de.evoal.surrogate.api.ea.constraints.strategies.malus to weld.core.impl;
     opens de.evoal.surrogate.api.training to weld.core.impl;
 
     opens de.evoal.surrogate.main to weld.core.impl;
     opens de.evoal.surrogate.main.cdi to weld.core.impl;
-    opens de.evoal.surrogate.main.ea to weld.core.impl;
     opens de.evoal.surrogate.main.internal to weld.core.impl;
     opens de.evoal.surrogate.main.jackson to weld.core.impl, com.fasterxml.jackson.databind;
+    opens de.evoal.surrogate.main.gof to weld.core.impl;
     opens de.evoal.surrogate.main.gof.cross to weld.core.impl;
     opens de.evoal.surrogate.main.gof.rmse to weld.core.impl;
     opens de.evoal.surrogate.main.gof.rsquare to weld.core.impl;
+    opens de.evoal.surrogate.main.optimisation to weld.core.impl;
+    opens de.evoal.surrogate.main.optimisation.constraints.strategies.malus to weld.core.impl;
+    opens de.evoal.surrogate.main.optimisation.fitness to weld.core.impl;
     opens de.evoal.surrogate.main.pipeline to weld.core.impl;
     opens de.evoal.surrogate.main.statistics.constraint to weld.core.impl;
     opens de.evoal.surrogate.main.statistics.correlated to weld.core.impl;
     opens de.evoal.surrogate.main.statistics.ranged to weld.core.impl;
     opens de.evoal.surrogate.main.statistics.surrogate to weld.core.impl;
-    opens de.evoal.surrogate.main.ea.constraints.strategies.malus to weld.core.impl;
-    opens de.evoal.surrogate.main.ea.fitness to weld.core.impl;
+    opens de.evoal.surrogate.main.training to weld.core.impl;
 }

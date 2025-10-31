@@ -1,13 +1,11 @@
 package de.evoal.surrogate.main.gof.rmse;
 
+import de.evoal.core.api.ecore.Space;
 import de.evoal.core.api.ecore.TypedEObject;
 import de.evoal.core.api.ecore.stream.EObjectPairStreamSupplier;
-import de.evoal.core.api.utils.Requirements;
 import de.evoal.core.interpreter.api.InterpreterState;
-import de.evoal.surrogate.api.SurrogateInformationCalculator;
-import de.evoal.surrogate.api.configuration.Parameter;
-import de.evoal.surrogate.api.configuration.SurrogateConfiguration;
-import de.evoal.surrogate.api.function.SurrogateFunction;
+import de.evoal.surrogate.api.io.pson.Parameter;
+import de.evoal.surrogate.api.training.SurrogateInformationCalculator;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
@@ -21,39 +19,29 @@ import java.util.*;
 @Dependent
 @Named("de.evoal.surrogate.ml.rrse")
 @Slf4j
-public class RRSECalculator implements SurrogateInformationCalculator {
-
-	/**
-	 * Surrogate configuration for attaching the calculated r² value.
-	 */
-	private SurrogateConfiguration config;
-
-	/**
-	 * The actual surrogate function.
-	 */
-	private SurrogateFunction function;
-
-	/**
-	 * Supplier for the training data.
-	 */
-	private EObjectPairStreamSupplier training;
-
+public class RRSECalculator extends SurrogateInformationCalculator {
 	@Override
-	public Optional<Object> call(final InterpreterState context, final Object[] arguments) {
+	public Optional<Object> calculate(final InterpreterState context, final Object[] arguments) {
 		log.info("calculating rrse of surrogate function.");
 
+		final Space inputSpace = functionData.function().getInput();
+		final Space outputSpace = functionData.function().getOutput();
+
+		final EObjectPairStreamSupplier pairStream = helper.loadTrainingDataPaired(context);
+
 		final Map<EStructuralFeature, List<Double>> data = new HashMap<>();
-		for(final EStructuralFeature feature : function.getOutputSpecification()) {
+		for(final EStructuralFeature feature : outputSpace) {
 			data.put(feature, new ArrayList<>());
 		}
 
-		training.get()
+		pairStream.get()
 				.forEach(p -> {
 					final TypedEObject source = p.getFirst();
 					final TypedEObject expected = p.getSecond();
 					final TypedEObject actual = new TypedEObject(expected.eClass());
 
-					function.apply(source, actual);
+					functionData.function()
+							.apply(source, actual);
 
 					for(final EStructuralFeature feature : actual.eClass().getEAllStructuralFeatures()) {
 						data.get(feature)
@@ -75,11 +63,13 @@ public class RRSECalculator implements SurrogateInformationCalculator {
 			log.info("RRSE of {}: '{}'", entry.getKey().getName(), rmse);
 
 			final Parameter goodnessOfFit = Parameter.builder()
-					.name("rrse")
+					.name("de.evoal.surrogate.ml.rrse")
 					.value(rmse)
 					.build();
 
-			config.addOutputParameter(entry.getKey().getName(), goodnessOfFit);
+			functionData.writer()
+					.get()
+					.addOutputFeatureInformation(entry.getKey(), goodnessOfFit);
 		}
 
 		return Optional.empty();
@@ -88,16 +78,5 @@ public class RRSECalculator implements SurrogateInformationCalculator {
 	@Override
 	public String toString() {
 		return "rrse";
-	}
-
-	@Override
-	public void configure(final SurrogateFunction function, final SurrogateConfiguration config, final EObjectPairStreamSupplier training) {
-		Requirements.requireNotNull(function);
-		Requirements.requireNotNull(config);
-		Requirements.requireNotNull(training);
-
-		this.function = function;
-		this.config = config;
-		this.training = training;
 	}
 }

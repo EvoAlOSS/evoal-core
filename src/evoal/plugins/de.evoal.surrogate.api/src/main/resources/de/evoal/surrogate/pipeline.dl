@@ -1,4 +1,5 @@
 import "definitions" from de.evoal.pipeline.base;
+import "definitions" from de.evoal.surrogate.ml;
 
 /**
  * Generator extensions based on surrogate models.
@@ -12,12 +13,58 @@ module de.evoal.surrogate.pipeline {
 	    /**
 	     * Name of the pson file storing surrogate model.
 	     **/
-	    'pson-file' : string;
-
-
-        /**
-         * The training model configuration.
-         */
-        'training-model' : string;
+	    'model-file' : string;
 	}
+
+	/**
+	 * Component for loading training data and using it for the pipeline. 
+	 */	
+	type 'training-data-loader' {
+		/**
+		 * List of files or directories to use
+		 */
+		'training-files' : array string;
+		
+		/**
+		 * The input features of the model.
+		 */
+         'input-features' : array data;
+         
+         /**
+          * The output features of the model.
+          */
+         'output-features' : array data;
+	}
+
+    /**
+     * Pipeline step for learning a model.
+     */
+	type 'model-learner' extends Processor {
+        /**
+         * The model (and the hyper parameters) to learn.
+         */
+         'model' : instance surrogate;
+         
+	    /**
+	     * Location for storing the model.
+	     */
+	    'model-file' : string;
+
+		/**
+		 * The input features of the model.
+		 */
+         'input-features' : array data;
+         
+         /**
+          * The output features of the model.
+          */
+         'output-features' : array data;
+	}
+
+	type 'model-prediction' extends Processor {}
+	
+	def void 'gof-calculator'();
+		
+	def void 'store-model'();
+
 }

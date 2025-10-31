@@ -57,9 +57,7 @@ public class MllFactoryImpl extends EFactoryImpl implements MllFactory {
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case MllPackage.MACHINE_LEARNING_MODULE: return createMachineLearningModule();
-			case MllPackage.SURROGATE_DEFINITION: return createSurrogateDefinition();
-			case MllPackage.PARTIAL_SURROGATE_FUNCTION_DEFINITION: return createPartialSurrogateFunctionDefinition();
-			case MllPackage.PREDICT_STATEMENT: return createPredictStatement();
+			case MllPackage.TASK_DESCRIPTION: return createTaskDescription();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -82,31 +80,9 @@ public class MllFactoryImpl extends EFactoryImpl implements MllFactory {
 	 * @generated
 	 */
 	@Override
-	public SurrogateDefinition createSurrogateDefinition() {
-		SurrogateDefinitionImpl surrogateDefinition = new SurrogateDefinitionImpl();
-		return surrogateDefinition;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public PartialSurrogateFunctionDefinition createPartialSurrogateFunctionDefinition() {
-		PartialSurrogateFunctionDefinitionImpl partialSurrogateFunctionDefinition = new PartialSurrogateFunctionDefinitionImpl();
-		return partialSurrogateFunctionDefinition;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public PredictStatement createPredictStatement() {
-		PredictStatementImpl predictStatement = new PredictStatementImpl();
-		return predictStatement;
+	public TaskDescription createTaskDescription() {
+		TaskDescriptionImpl taskDescription = new TaskDescriptionImpl();
+		return taskDescription;
 	}
 
 	/**

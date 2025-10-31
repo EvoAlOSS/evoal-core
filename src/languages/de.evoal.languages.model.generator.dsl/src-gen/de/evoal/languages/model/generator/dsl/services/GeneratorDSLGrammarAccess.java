@@ -136,6 +136,26 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 	}
 	public class StepRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.generator.dsl.GeneratorDSL.StepRule");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cConcreteStepRuleParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cPipelineStepRuleParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		
+		//StepRule returns Step:
+		//    ConcreteStepRule | PipelineStepRule
+		//;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//ConcreteStepRule | PipelineStepRule
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//ConcreteStepRule
+		public RuleCall getConcreteStepRuleParserRuleCall_0() { return cConcreteStepRuleParserRuleCall_0; }
+		
+		//PipelineStepRule
+		public RuleCall getPipelineStepRuleParserRuleCall_1() { return cPipelineStepRuleParserRuleCall_1; }
+	}
+	public class ConcreteStepRuleElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.generator.dsl.GeneratorDSL.ConcreteStepRule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cStepKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Keyword cLeftCurlyBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
@@ -168,7 +188,7 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 		private final Keyword cSemicolonKeyword_5_4 = (Keyword)cGroup_5.eContents().get(4);
 		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
-		//StepRule returns Step:
+		//ConcreteStepRule returns ConcreteStep:
 		//    'step' '{'
 		//         'component' instance = InstanceLiteralRule
 		//         ('reads' '[' (reads += BaseDataReferenceRule(',' reads += BaseDataReferenceRule)*)? ']' ';')?
@@ -274,6 +294,34 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_6() { return cRightCurlyBracketKeyword_6; }
 	}
+	public class PipelineStepRuleElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.generator.dsl.GeneratorDSL.PipelineStepRule");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cPipelineKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cDefinitionAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final CrossReference cDefinitionPipelineDefinitionCrossReference_1_0 = (CrossReference)cDefinitionAssignment_1.eContents().get(0);
+		private final RuleCall cDefinitionPipelineDefinitionQualifiedNameParserRuleCall_1_0_1 = (RuleCall)cDefinitionPipelineDefinitionCrossReference_1_0.eContents().get(1);
+		
+		//PipelineStepRule returns PipelineStep:
+		//    'pipeline' definition=[PipelineDefinition|QualifiedName]
+		//;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'pipeline' definition=[PipelineDefinition|QualifiedName]
+		public Group getGroup() { return cGroup; }
+		
+		//'pipeline'
+		public Keyword getPipelineKeyword_0() { return cPipelineKeyword_0; }
+		
+		//definition=[PipelineDefinition|QualifiedName]
+		public Assignment getDefinitionAssignment_1() { return cDefinitionAssignment_1; }
+		
+		//[PipelineDefinition|QualifiedName]
+		public CrossReference getDefinitionPipelineDefinitionCrossReference_1_0() { return cDefinitionPipelineDefinitionCrossReference_1_0; }
+		
+		//QualifiedName
+		public RuleCall getDefinitionPipelineDefinitionQualifiedNameParserRuleCall_1_0_1() { return cDefinitionPipelineDefinitionQualifiedNameParserRuleCall_1_0_1; }
+	}
 	public class BodyRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.generator.dsl.GeneratorDSL.BodyRule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -317,13 +365,14 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cForStatementRuleParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cApplyStatementRuleParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cCallBuiltInFunctionRuleParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
 		//StatementRule returns execution::Statement:
-		//    ForStatementRule | ApplyStatementRule
+		//    ForStatementRule | ApplyStatementRule | CallBuiltInFunctionRule
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//ForStatementRule | ApplyStatementRule
+		//ForStatementRule | ApplyStatementRule | CallBuiltInFunctionRule
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//ForStatementRule
@@ -331,6 +380,9 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 		
 		//ApplyStatementRule
 		public RuleCall getApplyStatementRuleParserRuleCall_1() { return cApplyStatementRuleParserRuleCall_1; }
+		
+		//CallBuiltInFunctionRule
+		public RuleCall getCallBuiltInFunctionRuleParserRuleCall_2() { return cCallBuiltInFunctionRuleParserRuleCall_2; }
 	}
 	public class ForStatementRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.generator.dsl.GeneratorDSL.ForStatementRule");
@@ -647,11 +699,81 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 		//StringOrId
 		public RuleCall getVariableNamedVariableStringOrIdParserRuleCall_0_1() { return cVariableNamedVariableStringOrIdParserRuleCall_0_1; }
 	}
+	public class CallBuiltInFunctionRuleElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.generator.dsl.GeneratorDSL.CallBuiltInFunctionRule");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cDefinitionAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final CrossReference cDefinitionFunctionDefinitionCrossReference_0_0 = (CrossReference)cDefinitionAssignment_0.eContents().get(0);
+		private final RuleCall cDefinitionFunctionDefinitionQualifiedNameParserRuleCall_0_0_1 = (RuleCall)cDefinitionFunctionDefinitionCrossReference_0_0.eContents().get(1);
+		private final Keyword cLeftParenthesisKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final Assignment cParametersAssignment_2_0 = (Assignment)cGroup_2.eContents().get(0);
+		private final RuleCall cParametersExpressionRuleParserRuleCall_2_0_0 = (RuleCall)cParametersAssignment_2_0.eContents().get(0);
+		private final Group cGroup_2_1 = (Group)cGroup_2.eContents().get(1);
+		private final Keyword cCommaKeyword_2_1_0 = (Keyword)cGroup_2_1.eContents().get(0);
+		private final Assignment cParametersAssignment_2_1_1 = (Assignment)cGroup_2_1.eContents().get(1);
+		private final RuleCall cParametersExpressionRuleParserRuleCall_2_1_1_0 = (RuleCall)cParametersAssignment_2_1_1.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Keyword cSemicolonKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		
+		//CallBuiltInFunctionRule returns execution::CallBuiltinFunction:
+		//    definition = [defs::FunctionDefinition|QualifiedName] '('
+		//    (parameters+= ExpressionRule (',' parameters+= ExpressionRule)*)?
+		//    ')' ';'
+		//;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//definition = [defs::FunctionDefinition|QualifiedName] '('
+		//(parameters+= ExpressionRule (',' parameters+= ExpressionRule)*)?
+		//')' ';'
+		public Group getGroup() { return cGroup; }
+		
+		//definition = [defs::FunctionDefinition|QualifiedName]
+		public Assignment getDefinitionAssignment_0() { return cDefinitionAssignment_0; }
+		
+		//[defs::FunctionDefinition|QualifiedName]
+		public CrossReference getDefinitionFunctionDefinitionCrossReference_0_0() { return cDefinitionFunctionDefinitionCrossReference_0_0; }
+		
+		//QualifiedName
+		public RuleCall getDefinitionFunctionDefinitionQualifiedNameParserRuleCall_0_0_1() { return cDefinitionFunctionDefinitionQualifiedNameParserRuleCall_0_0_1; }
+		
+		//'('
+		public Keyword getLeftParenthesisKeyword_1() { return cLeftParenthesisKeyword_1; }
+		
+		//(parameters+= ExpressionRule (',' parameters+= ExpressionRule)*)?
+		public Group getGroup_2() { return cGroup_2; }
+		
+		//parameters+= ExpressionRule
+		public Assignment getParametersAssignment_2_0() { return cParametersAssignment_2_0; }
+		
+		//ExpressionRule
+		public RuleCall getParametersExpressionRuleParserRuleCall_2_0_0() { return cParametersExpressionRuleParserRuleCall_2_0_0; }
+		
+		//(',' parameters+= ExpressionRule)*
+		public Group getGroup_2_1() { return cGroup_2_1; }
+		
+		//','
+		public Keyword getCommaKeyword_2_1_0() { return cCommaKeyword_2_1_0; }
+		
+		//parameters+= ExpressionRule
+		public Assignment getParametersAssignment_2_1_1() { return cParametersAssignment_2_1_1; }
+		
+		//ExpressionRule
+		public RuleCall getParametersExpressionRuleParserRuleCall_2_1_1_0() { return cParametersExpressionRuleParserRuleCall_2_1_1_0; }
+		
+		//')'
+		public Keyword getRightParenthesisKeyword_3() { return cRightParenthesisKeyword_3; }
+		
+		//';'
+		public Keyword getSemicolonKeyword_4() { return cSemicolonKeyword_4; }
+	}
 	
 	
 	private final GeneratorModuleRuleElements pGeneratorModuleRule;
 	private final PipelineDefinitionRuleElements pPipelineDefinitionRule;
 	private final StepRuleElements pStepRule;
+	private final ConcreteStepRuleElements pConcreteStepRule;
+	private final PipelineStepRuleElements pPipelineStepRule;
 	private final BodyRuleElements pBodyRule;
 	private final StatementRuleElements pStatementRule;
 	private final ForStatementRuleElements pForStatementRule;
@@ -662,6 +784,7 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 	private final ApplyStatementRuleElements pApplyStatementRule;
 	private final ReferenceRuleElements pReferenceRule;
 	private final VariableReferenceRuleElements pVariableReferenceRule;
+	private final CallBuiltInFunctionRuleElements pCallBuiltInFunctionRule;
 	
 	private final Grammar grammar;
 	
@@ -679,6 +802,8 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 		this.pGeneratorModuleRule = new GeneratorModuleRuleElements();
 		this.pPipelineDefinitionRule = new PipelineDefinitionRuleElements();
 		this.pStepRule = new StepRuleElements();
+		this.pConcreteStepRule = new ConcreteStepRuleElements();
+		this.pPipelineStepRule = new PipelineStepRuleElements();
 		this.pBodyRule = new BodyRuleElements();
 		this.pStatementRule = new StatementRuleElements();
 		this.pForStatementRule = new ForStatementRuleElements();
@@ -689,6 +814,7 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 		this.pApplyStatementRule = new ApplyStatementRuleElements();
 		this.pReferenceRule = new ReferenceRuleElements();
 		this.pVariableReferenceRule = new VariableReferenceRuleElements();
+		this.pCallBuiltInFunctionRule = new CallBuiltInFunctionRuleElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -751,11 +877,7 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 	}
 	
 	//StepRule returns Step:
-	//    'step' '{'
-	//         'component' instance = InstanceLiteralRule
-	//         ('reads' '[' (reads += BaseDataReferenceRule(',' reads += BaseDataReferenceRule)*)? ']' ';')?
-	//         ('writes' '[' (writes += BaseDataReferenceRule (',' writes += BaseDataReferenceRule)*)? ']' ';')?
-	//    '}'
+	//    ConcreteStepRule | PipelineStepRule
 	//;
 	public StepRuleElements getStepRuleAccess() {
 		return pStepRule;
@@ -763,6 +885,32 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 	
 	public ParserRule getStepRuleRule() {
 		return getStepRuleAccess().getRule();
+	}
+	
+	//ConcreteStepRule returns ConcreteStep:
+	//    'step' '{'
+	//         'component' instance = InstanceLiteralRule
+	//         ('reads' '[' (reads += BaseDataReferenceRule(',' reads += BaseDataReferenceRule)*)? ']' ';')?
+	//         ('writes' '[' (writes += BaseDataReferenceRule (',' writes += BaseDataReferenceRule)*)? ']' ';')?
+	//    '}'
+	//;
+	public ConcreteStepRuleElements getConcreteStepRuleAccess() {
+		return pConcreteStepRule;
+	}
+	
+	public ParserRule getConcreteStepRuleRule() {
+		return getConcreteStepRuleAccess().getRule();
+	}
+	
+	//PipelineStepRule returns PipelineStep:
+	//    'pipeline' definition=[PipelineDefinition|QualifiedName]
+	//;
+	public PipelineStepRuleElements getPipelineStepRuleAccess() {
+		return pPipelineStepRule;
+	}
+	
+	public ParserRule getPipelineStepRuleRule() {
+		return getPipelineStepRuleAccess().getRule();
 	}
 	
 	//BodyRule returns execution::Block:
@@ -780,7 +928,7 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 	}
 	
 	//StatementRule returns execution::Statement:
-	//    ForStatementRule | ApplyStatementRule
+	//    ForStatementRule | ApplyStatementRule | CallBuiltInFunctionRule
 	//;
 	public StatementRuleElements getStatementRuleAccess() {
 		return pStatementRule;
@@ -880,6 +1028,19 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 	
 	public ParserRule getVariableReferenceRuleRule() {
 		return getVariableReferenceRuleAccess().getRule();
+	}
+	
+	//CallBuiltInFunctionRule returns execution::CallBuiltinFunction:
+	//    definition = [defs::FunctionDefinition|QualifiedName] '('
+	//    (parameters+= ExpressionRule (',' parameters+= ExpressionRule)*)?
+	//    ')' ';'
+	//;
+	public CallBuiltInFunctionRuleElements getCallBuiltInFunctionRuleAccess() {
+		return pCallBuiltInFunctionRule;
+	}
+	
+	public ParserRule getCallBuiltInFunctionRuleRule() {
+		return getCallBuiltInFunctionRuleAccess().getRule();
 	}
 	
 	//ExpressionRule returns Expression:

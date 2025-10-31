@@ -1,19 +1,19 @@
 package de.evoal.surrogate.smile.api;
 
-import java.util.LinkedList;
-import java.util.List;
+import lombok.Getter;
+import lombok.NonNull;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
+
 import smile.regression.KernelMachine;
 
 import de.evoal.core.api.ecore.Space;
 import de.evoal.core.api.ecore.TypedEObject;
-import de.evoal.surrogate.api.configuration.Parameter;
-import de.evoal.surrogate.api.configuration.PartialFunctionConfiguration;
-import de.evoal.surrogate.api.function.AbstractPartialSurrogateFunction;
-import de.evoal.surrogate.smile.svr.KernelHelper;
+import de.evoal.surrogate.api.function.ModelFunction;
 
-public class KernelBasedSVRFunction extends AbstractPartialSurrogateFunction {
+import java.util.Map;
+
+public class KernelBasedSVRFunction extends ModelFunction {
 
 	/**
 	 * The SVR's gamma parameter
@@ -23,30 +23,34 @@ public class KernelBasedSVRFunction extends AbstractPartialSurrogateFunction {
 	/**
 	 * Actual SVR
 	 */
-	private final KernelMachine<double []> regression;
-	private final double[] sourceMeans;
-	private final double[] sourceSDs;
-	private final double[] targetMeans;
-	private final double[] targetSDs;
+	protected final KernelMachine<double []> regression;
 
-	public KernelBasedSVRFunction(final PartialFunctionConfiguration configuration, final KernelMachine<double []> regression, final String kernelName, final Space input, final Space output, final double gamma, final double[] sourceMeans, final double[] sourceSDs, final double[] targetMeans, final double[] targetSDs) {
-		super(configuration, KernelHelper.toParameters(regression, kernelName), input, output);
+	@Getter
+	protected final double[] sourceMeans;
+
+	@Getter
+	protected final double[] sourceSDs;
+
+	@Getter
+	protected final double[] targetMeans;
+
+	@Getter
+	protected final double[] targetSDs;
+
+	@Getter
+	private final Map<String, Object> parameters;
+
+	public KernelBasedSVRFunction(final @NonNull String name, final Space input, final Space output, final Map<String, Object> params, final KernelMachine<double []> regression, final double gamma, final double[] sourceMeans, final double[] sourceSDs, final double[] targetMeans, final double[] targetSDs) {
+		super(name, input, output);
 
 		this.sourceMeans = sourceMeans;
 		this.sourceSDs = sourceSDs;
 		this.targetMeans = targetMeans;
 		this.targetSDs = targetSDs;
+		this.parameters = params;
 
 		this.regression = regression;
 		this.gamma = gamma;
-
-		final List<Parameter> parameters = new LinkedList<>();
-		addParameter("kernel-source-means", sourceMeans, parameters);
-		addParameter("kernel-source-sds", sourceSDs, parameters);
-		addParameter("kernel-target-means", targetMeans, parameters);
-		addParameter("kernel-target-sds", targetSDs, parameters);
-
-		getParameters().addAll(parameters);
 	}
 
 	@Override
@@ -72,4 +76,15 @@ public class KernelBasedSVRFunction extends AbstractPartialSurrogateFunction {
 	public double getGamma() {
 		return gamma;
 	}
+
+	/*
+			final List<Parameter> parameters = new LinkedList<>();
+		addParameter("kernel-source-means", sourceMeans, parameters);
+		addParameter("kernel-source-sds", sourceSDs, parameters);
+		addParameter("kernel-target-means", targetMeans, parameters);
+		addParameter("kernel-target-sds", targetSDs, parameters);
+
+		getParameters().addAll(parameters);
+
+	 */
 }

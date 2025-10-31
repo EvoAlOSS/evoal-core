@@ -7,6 +7,7 @@ package de.evoal.languages.model.mll.dsl.services;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import de.evoal.languages.model.base.dsl.services.BaseLanguageGrammarAccess;
+import de.evoal.languages.model.generator.dsl.services.GeneratorDSLGrammarAccess;
 import java.util.List;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Alternatives;
@@ -36,26 +37,73 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cNameQualifiedNameParserRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
 		private final Keyword cLeftCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
-		private final Assignment cDefinitionsAssignment_4 = (Assignment)cGroup.eContents().get(4);
-		private final RuleCall cDefinitionsSurrogateDefinitionRuleParserRuleCall_4_0 = (RuleCall)cDefinitionsAssignment_4.eContents().get(0);
-		private final Assignment cBodyAssignment_5 = (Assignment)cGroup.eContents().get(5);
-		private final RuleCall cBodyBodyRuleParserRuleCall_5_0 = (RuleCall)cBodyAssignment_5.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
+		private final Assignment cTaskAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cTaskTaskDescriptionRuleParserRuleCall_4_0 = (RuleCall)cTaskAssignment_4.eContents().get(0);
+		private final Assignment cValidationAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final RuleCall cValidationValidationPipelineDefinitionRuleParserRuleCall_5_0 = (RuleCall)cValidationAssignment_5.eContents().get(0);
+		private final Assignment cPreparationAssignment_6 = (Assignment)cGroup.eContents().get(6);
+		private final RuleCall cPreparationPreparationPipelineDefinitionRuleParserRuleCall_6_0 = (RuleCall)cPreparationAssignment_6.eContents().get(0);
+		private final Keyword cSpecifyKeyword_7 = (Keyword)cGroup.eContents().get(7);
+		private final Keyword cModelKeyword_8 = (Keyword)cGroup.eContents().get(8);
+		private final Assignment cModelAssignment_9 = (Assignment)cGroup.eContents().get(9);
+		private final RuleCall cModelInstanceLiteralRuleParserRuleCall_9_0 = (RuleCall)cModelAssignment_9.eContents().get(0);
+		private final Group cGroup_10 = (Group)cGroup.eContents().get(10);
+		private final Keyword cSpecifyKeyword_10_0 = (Keyword)cGroup_10.eContents().get(0);
+		private final Keyword cGofKeyword_10_1 = (Keyword)cGroup_10.eContents().get(1);
+		private final Assignment cGofAssignment_10_2 = (Assignment)cGroup_10.eContents().get(2);
+		private final RuleCall cGofBodyRuleParserRuleCall_10_2_0 = (RuleCall)cGofAssignment_10_2.eContents().get(0);
+		private final Group cGroup_11 = (Group)cGroup.eContents().get(11);
+		private final Keyword cUseKeyword_11_0 = (Keyword)cGroup_11.eContents().get(0);
+		private final Keyword cCasesKeyword_11_1 = (Keyword)cGroup_11.eContents().get(1);
+		private final Group cGroup_11_2 = (Group)cGroup_11.eContents().get(2);
+		private final Assignment cLearningUseCaseAssignment_11_2_0 = (Assignment)cGroup_11_2.eContents().get(0);
+		private final RuleCall cLearningUseCaseLearningUseCaseRuleParserRuleCall_11_2_0_0 = (RuleCall)cLearningUseCaseAssignment_11_2_0.eContents().get(0);
+		private final Keyword cSemicolonKeyword_11_2_1 = (Keyword)cGroup_11_2.eContents().get(1);
+		private final Group cGroup_11_3 = (Group)cGroup_11.eContents().get(3);
+		private final Assignment cPredictionUseCaseAssignment_11_3_0 = (Assignment)cGroup_11_3.eContents().get(0);
+		private final RuleCall cPredictionUseCasePredictionUseCaseRuleParserRuleCall_11_3_0_0 = (RuleCall)cPredictionUseCaseAssignment_11_3_0.eContents().get(0);
+		private final Keyword cSemicolonKeyword_11_3_1 = (Keyword)cGroup_11_3.eContents().get(1);
+		private final Keyword cEndKeyword_11_4 = (Keyword)cGroup_11.eContents().get(4);
+		private final Keyword cRightCurlyBracketKeyword_12 = (Keyword)cGroup.eContents().get(12);
 		
 		//MachineLearningModuleRule returns MachineLearningModule:
 		//    (imports += ImportRule)*
 		//    "module" name = QualifiedName "{"
-		//        (definitions+=SurrogateDefinitionRule)*
-		//        body = BodyRule
-		//    "}"
+		//        task = TaskDescriptionRule
+		//        validation=ValidationPipelineDefinitionRule
+		//        preparation=PreparationPipelineDefinitionRule
+		//        'specify' 'model' model = InstanceLiteralRule
+		//        (
+		//            'specify' 'gof'
+		//            gof = BodyRule
+		//        )?
+		//        (
+		//            'use' 'cases'
+		//                (learningUseCase=LearningUseCaseRule ';')?
+		//                (predictionUseCase=PredictionUseCaseRule ';')?
+		//            'end'
+		//        )?
+		//    '}'
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//(imports += ImportRule)*
 		//"module" name = QualifiedName "{"
-		//    (definitions+=SurrogateDefinitionRule)*
-		//    body = BodyRule
-		//"}"
+		//    task = TaskDescriptionRule
+		//    validation=ValidationPipelineDefinitionRule
+		//    preparation=PreparationPipelineDefinitionRule
+		//    'specify' 'model' model = InstanceLiteralRule
+		//    (
+		//        'specify' 'gof'
+		//        gof = BodyRule
+		//    )?
+		//    (
+		//        'use' 'cases'
+		//            (learningUseCase=LearningUseCaseRule ';')?
+		//            (predictionUseCase=PredictionUseCaseRule ';')?
+		//        'end'
+		//    )?
+		//'}'
 		public Group getGroup() { return cGroup; }
 		
 		//(imports += ImportRule)*
@@ -76,302 +124,467 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
 		
-		//(definitions+=SurrogateDefinitionRule)*
-		public Assignment getDefinitionsAssignment_4() { return cDefinitionsAssignment_4; }
+		//task = TaskDescriptionRule
+		public Assignment getTaskAssignment_4() { return cTaskAssignment_4; }
 		
-		//SurrogateDefinitionRule
-		public RuleCall getDefinitionsSurrogateDefinitionRuleParserRuleCall_4_0() { return cDefinitionsSurrogateDefinitionRuleParserRuleCall_4_0; }
+		//TaskDescriptionRule
+		public RuleCall getTaskTaskDescriptionRuleParserRuleCall_4_0() { return cTaskTaskDescriptionRuleParserRuleCall_4_0; }
 		
-		//body = BodyRule
-		public Assignment getBodyAssignment_5() { return cBodyAssignment_5; }
+		//validation=ValidationPipelineDefinitionRule
+		public Assignment getValidationAssignment_5() { return cValidationAssignment_5; }
+		
+		//ValidationPipelineDefinitionRule
+		public RuleCall getValidationValidationPipelineDefinitionRuleParserRuleCall_5_0() { return cValidationValidationPipelineDefinitionRuleParserRuleCall_5_0; }
+		
+		//preparation=PreparationPipelineDefinitionRule
+		public Assignment getPreparationAssignment_6() { return cPreparationAssignment_6; }
+		
+		//PreparationPipelineDefinitionRule
+		public RuleCall getPreparationPreparationPipelineDefinitionRuleParserRuleCall_6_0() { return cPreparationPreparationPipelineDefinitionRuleParserRuleCall_6_0; }
+		
+		//'specify'
+		public Keyword getSpecifyKeyword_7() { return cSpecifyKeyword_7; }
+		
+		//'model'
+		public Keyword getModelKeyword_8() { return cModelKeyword_8; }
+		
+		//model = InstanceLiteralRule
+		public Assignment getModelAssignment_9() { return cModelAssignment_9; }
+		
+		//InstanceLiteralRule
+		public RuleCall getModelInstanceLiteralRuleParserRuleCall_9_0() { return cModelInstanceLiteralRuleParserRuleCall_9_0; }
+		
+		//(
+		//    'specify' 'gof'
+		//    gof = BodyRule
+		//)?
+		public Group getGroup_10() { return cGroup_10; }
+		
+		//'specify'
+		public Keyword getSpecifyKeyword_10_0() { return cSpecifyKeyword_10_0; }
+		
+		//'gof'
+		public Keyword getGofKeyword_10_1() { return cGofKeyword_10_1; }
+		
+		//gof = BodyRule
+		public Assignment getGofAssignment_10_2() { return cGofAssignment_10_2; }
 		
 		//BodyRule
-		public RuleCall getBodyBodyRuleParserRuleCall_5_0() { return cBodyBodyRuleParserRuleCall_5_0; }
+		public RuleCall getGofBodyRuleParserRuleCall_10_2_0() { return cGofBodyRuleParserRuleCall_10_2_0; }
 		
-		//"}"
-		public Keyword getRightCurlyBracketKeyword_6() { return cRightCurlyBracketKeyword_6; }
+		//(
+		//    'use' 'cases'
+		//        (learningUseCase=LearningUseCaseRule ';')?
+		//        (predictionUseCase=PredictionUseCaseRule ';')?
+		//    'end'
+		//)?
+		public Group getGroup_11() { return cGroup_11; }
+		
+		//'use'
+		public Keyword getUseKeyword_11_0() { return cUseKeyword_11_0; }
+		
+		//'cases'
+		public Keyword getCasesKeyword_11_1() { return cCasesKeyword_11_1; }
+		
+		//(learningUseCase=LearningUseCaseRule ';')?
+		public Group getGroup_11_2() { return cGroup_11_2; }
+		
+		//learningUseCase=LearningUseCaseRule
+		public Assignment getLearningUseCaseAssignment_11_2_0() { return cLearningUseCaseAssignment_11_2_0; }
+		
+		//LearningUseCaseRule
+		public RuleCall getLearningUseCaseLearningUseCaseRuleParserRuleCall_11_2_0_0() { return cLearningUseCaseLearningUseCaseRuleParserRuleCall_11_2_0_0; }
+		
+		//';'
+		public Keyword getSemicolonKeyword_11_2_1() { return cSemicolonKeyword_11_2_1; }
+		
+		//(predictionUseCase=PredictionUseCaseRule ';')?
+		public Group getGroup_11_3() { return cGroup_11_3; }
+		
+		//predictionUseCase=PredictionUseCaseRule
+		public Assignment getPredictionUseCaseAssignment_11_3_0() { return cPredictionUseCaseAssignment_11_3_0; }
+		
+		//PredictionUseCaseRule
+		public RuleCall getPredictionUseCasePredictionUseCaseRuleParserRuleCall_11_3_0_0() { return cPredictionUseCasePredictionUseCaseRuleParserRuleCall_11_3_0_0; }
+		
+		//';'
+		public Keyword getSemicolonKeyword_11_3_1() { return cSemicolonKeyword_11_3_1; }
+		
+		//'end'
+		public Keyword getEndKeyword_11_4() { return cEndKeyword_11_4; }
+		
+		//'}'
+		public Keyword getRightCurlyBracketKeyword_12() { return cRightCurlyBracketKeyword_12; }
 	}
-	public class SurrogateDefinitionRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.mll.dsl.MachineLearningLanguage.SurrogateDefinitionRule");
+	public class TaskDescriptionRuleElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.mll.dsl.MachineLearningLanguage.TaskDescriptionRule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cFunctionKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cSpecifyKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cNameStringOrIdParserRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
-		private final Keyword cUsingKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cFunctionsAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cFunctionsPartialSurrogateFunctionDefinitionRuleParserRuleCall_3_0 = (RuleCall)cFunctionsAssignment_3.eContents().get(0);
+		private final Keyword cNameLearningTaskKeyword_1_0 = (Keyword)cNameAssignment_1.eContents().get(0);
+		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Keyword cInputKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Keyword cFeaturesKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Assignment cInputsAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final CrossReference cInputsDataDescriptionCrossReference_5_0 = (CrossReference)cInputsAssignment_5.eContents().get(0);
+		private final RuleCall cInputsDataDescriptionQualifiedNameParserRuleCall_5_0_1 = (RuleCall)cInputsDataDescriptionCrossReference_5_0.eContents().get(1);
+		private final Group cGroup_6 = (Group)cGroup.eContents().get(6);
+		private final Keyword cCommaKeyword_6_0 = (Keyword)cGroup_6.eContents().get(0);
+		private final Assignment cInputsAssignment_6_1 = (Assignment)cGroup_6.eContents().get(1);
+		private final CrossReference cInputsDataDescriptionCrossReference_6_1_0 = (CrossReference)cInputsAssignment_6_1.eContents().get(0);
+		private final RuleCall cInputsDataDescriptionQualifiedNameParserRuleCall_6_1_0_1 = (RuleCall)cInputsDataDescriptionCrossReference_6_1_0.eContents().get(1);
+		private final Keyword cOutputKeyword_7 = (Keyword)cGroup.eContents().get(7);
+		private final Keyword cFeaturesKeyword_8 = (Keyword)cGroup.eContents().get(8);
+		private final Assignment cOutputsAssignment_9 = (Assignment)cGroup.eContents().get(9);
+		private final CrossReference cOutputsDataDescriptionCrossReference_9_0 = (CrossReference)cOutputsAssignment_9.eContents().get(0);
+		private final RuleCall cOutputsDataDescriptionQualifiedNameParserRuleCall_9_0_1 = (RuleCall)cOutputsDataDescriptionCrossReference_9_0.eContents().get(1);
+		private final Group cGroup_10 = (Group)cGroup.eContents().get(10);
+		private final Keyword cCommaKeyword_10_0 = (Keyword)cGroup_10.eContents().get(0);
+		private final Assignment cOutputsAssignment_10_1 = (Assignment)cGroup_10.eContents().get(1);
+		private final CrossReference cOutputsDataDescriptionCrossReference_10_1_0 = (CrossReference)cOutputsAssignment_10_1.eContents().get(0);
+		private final RuleCall cOutputsDataDescriptionQualifiedNameParserRuleCall_10_1_0_1 = (RuleCall)cOutputsDataDescriptionCrossReference_10_1_0.eContents().get(1);
+		private final Keyword cLearningKeyword_11 = (Keyword)cGroup.eContents().get(11);
+		private final Keyword cFromKeyword_12 = (Keyword)cGroup.eContents().get(12);
+		private final Keyword cLeftSquareBracketKeyword_13 = (Keyword)cGroup.eContents().get(13);
+		private final Assignment cLearningDataAssignment_14 = (Assignment)cGroup.eContents().get(14);
+		private final RuleCall cLearningDataSTRINGTerminalRuleCall_14_0 = (RuleCall)cLearningDataAssignment_14.eContents().get(0);
+		private final Group cGroup_15 = (Group)cGroup.eContents().get(15);
+		private final Keyword cCommaKeyword_15_0 = (Keyword)cGroup_15.eContents().get(0);
+		private final Assignment cLearningDataAssignment_15_1 = (Assignment)cGroup_15.eContents().get(1);
+		private final RuleCall cLearningDataSTRINGTerminalRuleCall_15_1_0 = (RuleCall)cLearningDataAssignment_15_1.eContents().get(0);
+		private final Keyword cRightSquareBracketKeyword_16 = (Keyword)cGroup.eContents().get(16);
+		private final Group cGroup_17 = (Group)cGroup.eContents().get(17);
+		private final Keyword cTestingKeyword_17_0 = (Keyword)cGroup_17.eContents().get(0);
+		private final Keyword cWithKeyword_17_1 = (Keyword)cGroup_17.eContents().get(1);
+		private final Keyword cLeftSquareBracketKeyword_17_2 = (Keyword)cGroup_17.eContents().get(2);
+		private final Assignment cTestingDataAssignment_17_3 = (Assignment)cGroup_17.eContents().get(3);
+		private final RuleCall cTestingDataSTRINGTerminalRuleCall_17_3_0 = (RuleCall)cTestingDataAssignment_17_3.eContents().get(0);
+		private final Group cGroup_17_4 = (Group)cGroup_17.eContents().get(4);
+		private final Keyword cCommaKeyword_17_4_0 = (Keyword)cGroup_17_4.eContents().get(0);
+		private final Assignment cTestingDataAssignment_17_4_1 = (Assignment)cGroup_17_4.eContents().get(1);
+		private final RuleCall cTestingDataSTRINGTerminalRuleCall_17_4_1_0 = (RuleCall)cTestingDataAssignment_17_4_1.eContents().get(0);
+		private final Keyword cRightSquareBracketKeyword_17_5 = (Keyword)cGroup_17.eContents().get(5);
+		private final Keyword cSerialiseKeyword_18 = (Keyword)cGroup.eContents().get(18);
+		private final Keyword cToKeyword_19 = (Keyword)cGroup.eContents().get(19);
+		private final Assignment cModelFileAssignment_20 = (Assignment)cGroup.eContents().get(20);
+		private final RuleCall cModelFileSTRINGTerminalRuleCall_20_0 = (RuleCall)cModelFileAssignment_20.eContents().get(0);
+		private final Group cGroup_21 = (Group)cGroup.eContents().get(21);
+		private final Keyword cAndKeyword_21_0 = (Keyword)cGroup_21.eContents().get(0);
+		private final Assignment cGofFileAssignment_21_1 = (Assignment)cGroup_21.eContents().get(1);
+		private final RuleCall cGofFileSTRINGTerminalRuleCall_21_1_0 = (RuleCall)cGofFileAssignment_21_1.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_22 = (Keyword)cGroup.eContents().get(22);
 		
-		//SurrogateDefinitionRule returns SurrogateDefinition:
-		//    "function" name = StringOrId "using"
-		//        (functions += PartialSurrogateFunctionDefinitionRule)+
+		//TaskDescriptionRule returns TaskDescription:
+		//    'specify' name='learning-task' '{'
+		//        'input' 'features' inputs += [defs::DataDescription|QualifiedName] ("," inputs += [defs::DataDescription|QualifiedName])*
+		//        'output' 'features' outputs += [defs::DataDescription|QualifiedName] ("," outputs += [defs::DataDescription|QualifiedName])*
+		//        'learning' 'from' '[' learningData+=STRING (',' learningData+=STRING)* ']'
+		//        ('testing' 'with' '[' testingData+=STRING (',' testingData+=STRING)* ']')?
+		//        'serialise' 'to' modelFile = STRING ('and' gofFile=STRING)?
+		//    '}'
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//"function" name = StringOrId "using"
-		//    (functions += PartialSurrogateFunctionDefinitionRule)+
+		//'specify' name='learning-task' '{'
+		//    'input' 'features' inputs += [defs::DataDescription|QualifiedName] ("," inputs += [defs::DataDescription|QualifiedName])*
+		//    'output' 'features' outputs += [defs::DataDescription|QualifiedName] ("," outputs += [defs::DataDescription|QualifiedName])*
+		//    'learning' 'from' '[' learningData+=STRING (',' learningData+=STRING)* ']'
+		//    ('testing' 'with' '[' testingData+=STRING (',' testingData+=STRING)* ']')?
+		//    'serialise' 'to' modelFile = STRING ('and' gofFile=STRING)?
+		//'}'
 		public Group getGroup() { return cGroup; }
 		
-		//"function"
-		public Keyword getFunctionKeyword_0() { return cFunctionKeyword_0; }
+		//'specify'
+		public Keyword getSpecifyKeyword_0() { return cSpecifyKeyword_0; }
 		
-		//name = StringOrId
+		//name='learning-task'
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
 		
-		//StringOrId
-		public RuleCall getNameStringOrIdParserRuleCall_1_0() { return cNameStringOrIdParserRuleCall_1_0; }
+		//'learning-task'
+		public Keyword getNameLearningTaskKeyword_1_0() { return cNameLearningTaskKeyword_1_0; }
 		
-		//"using"
-		public Keyword getUsingKeyword_2() { return cUsingKeyword_2; }
+		//'{'
+		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
 		
-		//(functions += PartialSurrogateFunctionDefinitionRule)+
-		public Assignment getFunctionsAssignment_3() { return cFunctionsAssignment_3; }
+		//'input'
+		public Keyword getInputKeyword_3() { return cInputKeyword_3; }
 		
-		//PartialSurrogateFunctionDefinitionRule
-		public RuleCall getFunctionsPartialSurrogateFunctionDefinitionRuleParserRuleCall_3_0() { return cFunctionsPartialSurrogateFunctionDefinitionRuleParserRuleCall_3_0; }
+		//'features'
+		public Keyword getFeaturesKeyword_4() { return cFeaturesKeyword_4; }
+		
+		//inputs += [defs::DataDescription|QualifiedName]
+		public Assignment getInputsAssignment_5() { return cInputsAssignment_5; }
+		
+		//[defs::DataDescription|QualifiedName]
+		public CrossReference getInputsDataDescriptionCrossReference_5_0() { return cInputsDataDescriptionCrossReference_5_0; }
+		
+		//QualifiedName
+		public RuleCall getInputsDataDescriptionQualifiedNameParserRuleCall_5_0_1() { return cInputsDataDescriptionQualifiedNameParserRuleCall_5_0_1; }
+		
+		//("," inputs += [defs::DataDescription|QualifiedName])*
+		public Group getGroup_6() { return cGroup_6; }
+		
+		//","
+		public Keyword getCommaKeyword_6_0() { return cCommaKeyword_6_0; }
+		
+		//inputs += [defs::DataDescription|QualifiedName]
+		public Assignment getInputsAssignment_6_1() { return cInputsAssignment_6_1; }
+		
+		//[defs::DataDescription|QualifiedName]
+		public CrossReference getInputsDataDescriptionCrossReference_6_1_0() { return cInputsDataDescriptionCrossReference_6_1_0; }
+		
+		//QualifiedName
+		public RuleCall getInputsDataDescriptionQualifiedNameParserRuleCall_6_1_0_1() { return cInputsDataDescriptionQualifiedNameParserRuleCall_6_1_0_1; }
+		
+		//'output'
+		public Keyword getOutputKeyword_7() { return cOutputKeyword_7; }
+		
+		//'features'
+		public Keyword getFeaturesKeyword_8() { return cFeaturesKeyword_8; }
+		
+		//outputs += [defs::DataDescription|QualifiedName]
+		public Assignment getOutputsAssignment_9() { return cOutputsAssignment_9; }
+		
+		//[defs::DataDescription|QualifiedName]
+		public CrossReference getOutputsDataDescriptionCrossReference_9_0() { return cOutputsDataDescriptionCrossReference_9_0; }
+		
+		//QualifiedName
+		public RuleCall getOutputsDataDescriptionQualifiedNameParserRuleCall_9_0_1() { return cOutputsDataDescriptionQualifiedNameParserRuleCall_9_0_1; }
+		
+		//("," outputs += [defs::DataDescription|QualifiedName])*
+		public Group getGroup_10() { return cGroup_10; }
+		
+		//","
+		public Keyword getCommaKeyword_10_0() { return cCommaKeyword_10_0; }
+		
+		//outputs += [defs::DataDescription|QualifiedName]
+		public Assignment getOutputsAssignment_10_1() { return cOutputsAssignment_10_1; }
+		
+		//[defs::DataDescription|QualifiedName]
+		public CrossReference getOutputsDataDescriptionCrossReference_10_1_0() { return cOutputsDataDescriptionCrossReference_10_1_0; }
+		
+		//QualifiedName
+		public RuleCall getOutputsDataDescriptionQualifiedNameParserRuleCall_10_1_0_1() { return cOutputsDataDescriptionQualifiedNameParserRuleCall_10_1_0_1; }
+		
+		//'learning'
+		public Keyword getLearningKeyword_11() { return cLearningKeyword_11; }
+		
+		//'from'
+		public Keyword getFromKeyword_12() { return cFromKeyword_12; }
+		
+		//'['
+		public Keyword getLeftSquareBracketKeyword_13() { return cLeftSquareBracketKeyword_13; }
+		
+		//learningData+=STRING
+		public Assignment getLearningDataAssignment_14() { return cLearningDataAssignment_14; }
+		
+		//STRING
+		public RuleCall getLearningDataSTRINGTerminalRuleCall_14_0() { return cLearningDataSTRINGTerminalRuleCall_14_0; }
+		
+		//(',' learningData+=STRING)*
+		public Group getGroup_15() { return cGroup_15; }
+		
+		//','
+		public Keyword getCommaKeyword_15_0() { return cCommaKeyword_15_0; }
+		
+		//learningData+=STRING
+		public Assignment getLearningDataAssignment_15_1() { return cLearningDataAssignment_15_1; }
+		
+		//STRING
+		public RuleCall getLearningDataSTRINGTerminalRuleCall_15_1_0() { return cLearningDataSTRINGTerminalRuleCall_15_1_0; }
+		
+		//']'
+		public Keyword getRightSquareBracketKeyword_16() { return cRightSquareBracketKeyword_16; }
+		
+		//('testing' 'with' '[' testingData+=STRING (',' testingData+=STRING)* ']')?
+		public Group getGroup_17() { return cGroup_17; }
+		
+		//'testing'
+		public Keyword getTestingKeyword_17_0() { return cTestingKeyword_17_0; }
+		
+		//'with'
+		public Keyword getWithKeyword_17_1() { return cWithKeyword_17_1; }
+		
+		//'['
+		public Keyword getLeftSquareBracketKeyword_17_2() { return cLeftSquareBracketKeyword_17_2; }
+		
+		//testingData+=STRING
+		public Assignment getTestingDataAssignment_17_3() { return cTestingDataAssignment_17_3; }
+		
+		//STRING
+		public RuleCall getTestingDataSTRINGTerminalRuleCall_17_3_0() { return cTestingDataSTRINGTerminalRuleCall_17_3_0; }
+		
+		//(',' testingData+=STRING)*
+		public Group getGroup_17_4() { return cGroup_17_4; }
+		
+		//','
+		public Keyword getCommaKeyword_17_4_0() { return cCommaKeyword_17_4_0; }
+		
+		//testingData+=STRING
+		public Assignment getTestingDataAssignment_17_4_1() { return cTestingDataAssignment_17_4_1; }
+		
+		//STRING
+		public RuleCall getTestingDataSTRINGTerminalRuleCall_17_4_1_0() { return cTestingDataSTRINGTerminalRuleCall_17_4_1_0; }
+		
+		//']'
+		public Keyword getRightSquareBracketKeyword_17_5() { return cRightSquareBracketKeyword_17_5; }
+		
+		//'serialise'
+		public Keyword getSerialiseKeyword_18() { return cSerialiseKeyword_18; }
+		
+		//'to'
+		public Keyword getToKeyword_19() { return cToKeyword_19; }
+		
+		//modelFile = STRING
+		public Assignment getModelFileAssignment_20() { return cModelFileAssignment_20; }
+		
+		//STRING
+		public RuleCall getModelFileSTRINGTerminalRuleCall_20_0() { return cModelFileSTRINGTerminalRuleCall_20_0; }
+		
+		//('and' gofFile=STRING)?
+		public Group getGroup_21() { return cGroup_21; }
+		
+		//'and'
+		public Keyword getAndKeyword_21_0() { return cAndKeyword_21_0; }
+		
+		//gofFile=STRING
+		public Assignment getGofFileAssignment_21_1() { return cGofFileAssignment_21_1; }
+		
+		//STRING
+		public RuleCall getGofFileSTRINGTerminalRuleCall_21_1_0() { return cGofFileSTRINGTerminalRuleCall_21_1_0; }
+		
+		//'}'
+		public Keyword getRightCurlyBracketKeyword_22() { return cRightCurlyBracketKeyword_22; }
 	}
-	public class PartialSurrogateFunctionDefinitionRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.mll.dsl.MachineLearningLanguage.PartialSurrogateFunctionDefinitionRule");
+	public class ValidationPipelineDefinitionRuleElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.mll.dsl.MachineLearningLanguage.ValidationPipelineDefinitionRule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cModelKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cDefinitionAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final CrossReference cDefinitionClassDefinitionCrossReference_1_0 = (CrossReference)cDefinitionAssignment_1.eContents().get(0);
-		private final RuleCall cDefinitionClassDefinitionQualifiedNameParserRuleCall_1_0_1 = (RuleCall)cDefinitionClassDefinitionCrossReference_1_0.eContents().get(1);
-		private final Keyword cMappingKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cInputsAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final CrossReference cInputsDataDescriptionCrossReference_3_0 = (CrossReference)cInputsAssignment_3.eContents().get(0);
-		private final RuleCall cInputsDataDescriptionQualifiedNameParserRuleCall_3_0_1 = (RuleCall)cInputsDataDescriptionCrossReference_3_0.eContents().get(1);
-		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
-		private final Keyword cCommaKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
-		private final Assignment cInputsAssignment_4_1 = (Assignment)cGroup_4.eContents().get(1);
-		private final CrossReference cInputsDataDescriptionCrossReference_4_1_0 = (CrossReference)cInputsAssignment_4_1.eContents().get(0);
-		private final RuleCall cInputsDataDescriptionQualifiedNameParserRuleCall_4_1_0_1 = (RuleCall)cInputsDataDescriptionCrossReference_4_1_0.eContents().get(1);
-		private final Keyword cToKeyword_5 = (Keyword)cGroup.eContents().get(5);
-		private final Assignment cOutputsAssignment_6 = (Assignment)cGroup.eContents().get(6);
-		private final CrossReference cOutputsDataDescriptionCrossReference_6_0 = (CrossReference)cOutputsAssignment_6.eContents().get(0);
-		private final RuleCall cOutputsDataDescriptionQualifiedNameParserRuleCall_6_0_1 = (RuleCall)cOutputsDataDescriptionCrossReference_6_0.eContents().get(1);
-		private final Group cGroup_7 = (Group)cGroup.eContents().get(7);
-		private final Keyword cCommaKeyword_7_0 = (Keyword)cGroup_7.eContents().get(0);
-		private final Assignment cOutputsAssignment_7_1 = (Assignment)cGroup_7.eContents().get(1);
-		private final CrossReference cOutputsDataDescriptionCrossReference_7_1_0 = (CrossReference)cOutputsAssignment_7_1.eContents().get(0);
-		private final RuleCall cOutputsDataDescriptionQualifiedNameParserRuleCall_7_1_0_1 = (RuleCall)cOutputsDataDescriptionCrossReference_7_1_0.eContents().get(1);
-		private final Group cGroup_8 = (Group)cGroup.eContents().get(8);
-		private final Keyword cWithKeyword_8_0 = (Keyword)cGroup_8.eContents().get(0);
-		private final Keyword cParametersKeyword_8_1 = (Keyword)cGroup_8.eContents().get(1);
-		private final Assignment cAttributesAssignment_8_2 = (Assignment)cGroup_8.eContents().get(2);
-		private final RuleCall cAttributesAttributeRuleParserRuleCall_8_2_0 = (RuleCall)cAttributesAssignment_8_2.eContents().get(0);
+		private final Action cPipelineDefinitionAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cSpecifyKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final Keyword cNameValidationKeyword_2_0 = (Keyword)cNameAssignment_2.eContents().get(0);
+		private final Keyword cStepsKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Keyword cLeftSquareBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Assignment cStepsAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final RuleCall cStepsStepRuleParserRuleCall_5_0 = (RuleCall)cStepsAssignment_5.eContents().get(0);
+		private final Keyword cRightSquareBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
-		//PartialSurrogateFunctionDefinitionRule returns PartialSurrogateFunctionDefinition:
-		//    "model" definition = [defs::ClassDefinition|QualifiedName]
-		//    "mapping"
-		//        inputs += [defs::DataDescription|QualifiedName] ("," inputs += [defs::DataDescription|QualifiedName])*
-		//    "to"
-		//        outputs += [defs::DataDescription|QualifiedName] ("," outputs += [defs::DataDescription|QualifiedName])*
-		//    ("with" "parameters"
-		//        ((attributes+= BaseLanguage::AttributeRule)+ ))?
+		//ValidationPipelineDefinitionRule returns generator::PipelineDefinition:
+		//    {generator::PipelineDefinition}
+		//    'specify' name = 'validation' 'steps' '['
+		//        steps += StepRule*
+		//    ']'
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//"model" definition = [defs::ClassDefinition|QualifiedName]
-		//"mapping"
-		//    inputs += [defs::DataDescription|QualifiedName] ("," inputs += [defs::DataDescription|QualifiedName])*
-		//"to"
-		//    outputs += [defs::DataDescription|QualifiedName] ("," outputs += [defs::DataDescription|QualifiedName])*
-		//("with" "parameters"
-		//    ((attributes+= BaseLanguage::AttributeRule)+ ))?
+		//{generator::PipelineDefinition}
+		//'specify' name = 'validation' 'steps' '['
+		//    steps += StepRule*
+		//']'
 		public Group getGroup() { return cGroup; }
 		
-		//"model"
-		public Keyword getModelKeyword_0() { return cModelKeyword_0; }
+		//{generator::PipelineDefinition}
+		public Action getPipelineDefinitionAction_0() { return cPipelineDefinitionAction_0; }
 		
-		//definition = [defs::ClassDefinition|QualifiedName]
-		public Assignment getDefinitionAssignment_1() { return cDefinitionAssignment_1; }
+		//'specify'
+		public Keyword getSpecifyKeyword_1() { return cSpecifyKeyword_1; }
 		
-		//[defs::ClassDefinition|QualifiedName]
-		public CrossReference getDefinitionClassDefinitionCrossReference_1_0() { return cDefinitionClassDefinitionCrossReference_1_0; }
+		//name = 'validation'
+		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
 		
-		//QualifiedName
-		public RuleCall getDefinitionClassDefinitionQualifiedNameParserRuleCall_1_0_1() { return cDefinitionClassDefinitionQualifiedNameParserRuleCall_1_0_1; }
+		//'validation'
+		public Keyword getNameValidationKeyword_2_0() { return cNameValidationKeyword_2_0; }
 		
-		//"mapping"
-		public Keyword getMappingKeyword_2() { return cMappingKeyword_2; }
+		//'steps'
+		public Keyword getStepsKeyword_3() { return cStepsKeyword_3; }
 		
-		//inputs += [defs::DataDescription|QualifiedName]
-		public Assignment getInputsAssignment_3() { return cInputsAssignment_3; }
+		//'['
+		public Keyword getLeftSquareBracketKeyword_4() { return cLeftSquareBracketKeyword_4; }
 		
-		//[defs::DataDescription|QualifiedName]
-		public CrossReference getInputsDataDescriptionCrossReference_3_0() { return cInputsDataDescriptionCrossReference_3_0; }
+		//steps += StepRule*
+		public Assignment getStepsAssignment_5() { return cStepsAssignment_5; }
 		
-		//QualifiedName
-		public RuleCall getInputsDataDescriptionQualifiedNameParserRuleCall_3_0_1() { return cInputsDataDescriptionQualifiedNameParserRuleCall_3_0_1; }
+		//StepRule
+		public RuleCall getStepsStepRuleParserRuleCall_5_0() { return cStepsStepRuleParserRuleCall_5_0; }
 		
-		//("," inputs += [defs::DataDescription|QualifiedName])*
-		public Group getGroup_4() { return cGroup_4; }
-		
-		//","
-		public Keyword getCommaKeyword_4_0() { return cCommaKeyword_4_0; }
-		
-		//inputs += [defs::DataDescription|QualifiedName]
-		public Assignment getInputsAssignment_4_1() { return cInputsAssignment_4_1; }
-		
-		//[defs::DataDescription|QualifiedName]
-		public CrossReference getInputsDataDescriptionCrossReference_4_1_0() { return cInputsDataDescriptionCrossReference_4_1_0; }
-		
-		//QualifiedName
-		public RuleCall getInputsDataDescriptionQualifiedNameParserRuleCall_4_1_0_1() { return cInputsDataDescriptionQualifiedNameParserRuleCall_4_1_0_1; }
-		
-		//"to"
-		public Keyword getToKeyword_5() { return cToKeyword_5; }
-		
-		//outputs += [defs::DataDescription|QualifiedName]
-		public Assignment getOutputsAssignment_6() { return cOutputsAssignment_6; }
-		
-		//[defs::DataDescription|QualifiedName]
-		public CrossReference getOutputsDataDescriptionCrossReference_6_0() { return cOutputsDataDescriptionCrossReference_6_0; }
-		
-		//QualifiedName
-		public RuleCall getOutputsDataDescriptionQualifiedNameParserRuleCall_6_0_1() { return cOutputsDataDescriptionQualifiedNameParserRuleCall_6_0_1; }
-		
-		//("," outputs += [defs::DataDescription|QualifiedName])*
-		public Group getGroup_7() { return cGroup_7; }
-		
-		//","
-		public Keyword getCommaKeyword_7_0() { return cCommaKeyword_7_0; }
-		
-		//outputs += [defs::DataDescription|QualifiedName]
-		public Assignment getOutputsAssignment_7_1() { return cOutputsAssignment_7_1; }
-		
-		//[defs::DataDescription|QualifiedName]
-		public CrossReference getOutputsDataDescriptionCrossReference_7_1_0() { return cOutputsDataDescriptionCrossReference_7_1_0; }
-		
-		//QualifiedName
-		public RuleCall getOutputsDataDescriptionQualifiedNameParserRuleCall_7_1_0_1() { return cOutputsDataDescriptionQualifiedNameParserRuleCall_7_1_0_1; }
-		
-		//("with" "parameters"
-		//    ((attributes+= BaseLanguage::AttributeRule)+ ))?
-		public Group getGroup_8() { return cGroup_8; }
-		
-		//"with"
-		public Keyword getWithKeyword_8_0() { return cWithKeyword_8_0; }
-		
-		//"parameters"
-		public Keyword getParametersKeyword_8_1() { return cParametersKeyword_8_1; }
-		
-		//((attributes+= BaseLanguage::AttributeRule)+ )
-		public Assignment getAttributesAssignment_8_2() { return cAttributesAssignment_8_2; }
-		
-		//BaseLanguage::AttributeRule
-		public RuleCall getAttributesAttributeRuleParserRuleCall_8_2_0() { return cAttributesAttributeRuleParserRuleCall_8_2_0; }
+		//']'
+		public Keyword getRightSquareBracketKeyword_6() { return cRightSquareBracketKeyword_6; }
 	}
-	public class PredictStatementRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.mll.dsl.MachineLearningLanguage.PredictStatementRule");
+	public class PreparationPipelineDefinitionRuleElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.mll.dsl.MachineLearningLanguage.PreparationPipelineDefinitionRule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cPredictKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cSurrogateAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final CrossReference cSurrogateSurrogateDefinitionCrossReference_1_0 = (CrossReference)cSurrogateAssignment_1.eContents().get(0);
-		private final RuleCall cSurrogateSurrogateDefinitionQualifiedNameParserRuleCall_1_0_1 = (RuleCall)cSurrogateSurrogateDefinitionCrossReference_1_0.eContents().get(1);
-		private final Keyword cFromKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cTrainingDataAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cTrainingDataSTRINGTerminalRuleCall_3_0 = (RuleCall)cTrainingDataAssignment_3.eContents().get(0);
-		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
-		private final Keyword cAndKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
-		private final Keyword cMeasureKeyword_4_1 = (Keyword)cGroup_4.eContents().get(1);
-		private final Assignment cMeasurementsAssignment_4_2 = (Assignment)cGroup_4.eContents().get(2);
-		private final RuleCall cMeasurementsBodyRuleParserRuleCall_4_2_0 = (RuleCall)cMeasurementsAssignment_4_2.eContents().get(0);
-		private final Keyword cAndKeyword_5 = (Keyword)cGroup.eContents().get(5);
-		private final Keyword cStoreKeyword_6 = (Keyword)cGroup.eContents().get(6);
-		private final Keyword cToKeyword_7 = (Keyword)cGroup.eContents().get(7);
-		private final Assignment cModelFilenameAssignment_8 = (Assignment)cGroup.eContents().get(8);
-		private final RuleCall cModelFilenameSTRINGTerminalRuleCall_8_0 = (RuleCall)cModelFilenameAssignment_8.eContents().get(0);
+		private final Action cPipelineDefinitionAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cSpecifyKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final Keyword cNamePreparationKeyword_2_0 = (Keyword)cNameAssignment_2.eContents().get(0);
+		private final Keyword cStepsKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Keyword cLeftSquareBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Assignment cStepsAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final RuleCall cStepsStepRuleParserRuleCall_5_0 = (RuleCall)cStepsAssignment_5.eContents().get(0);
+		private final Keyword cRightSquareBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
-		//PredictStatementRule returns PredictStatement:
-		//    "predict" surrogate = [SurrogateDefinition|QualifiedName]
-		//        'from' trainingData = STRING
-		//        ('and' 'measure'
-		//            measurements = BodyRule
-		//        )?
-		//        'and' 'store' 'to' modelFilename = STRING;
+		//PreparationPipelineDefinitionRule returns generator::PipelineDefinition:
+		//    {generator::PipelineDefinition}
+		//    'specify' name='preparation' 'steps' '['
+		//        steps += StepRule*
+		//    ']'
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//"predict" surrogate = [SurrogateDefinition|QualifiedName]
-		//    'from' trainingData = STRING
-		//    ('and' 'measure'
-		//        measurements = BodyRule
-		//    )?
-		//    'and' 'store' 'to' modelFilename = STRING
+		//{generator::PipelineDefinition}
+		//'specify' name='preparation' 'steps' '['
+		//    steps += StepRule*
+		//']'
 		public Group getGroup() { return cGroup; }
 		
-		//"predict"
-		public Keyword getPredictKeyword_0() { return cPredictKeyword_0; }
+		//{generator::PipelineDefinition}
+		public Action getPipelineDefinitionAction_0() { return cPipelineDefinitionAction_0; }
 		
-		//surrogate = [SurrogateDefinition|QualifiedName]
-		public Assignment getSurrogateAssignment_1() { return cSurrogateAssignment_1; }
+		//'specify'
+		public Keyword getSpecifyKeyword_1() { return cSpecifyKeyword_1; }
 		
-		//[SurrogateDefinition|QualifiedName]
-		public CrossReference getSurrogateSurrogateDefinitionCrossReference_1_0() { return cSurrogateSurrogateDefinitionCrossReference_1_0; }
+		//name='preparation'
+		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
 		
-		//QualifiedName
-		public RuleCall getSurrogateSurrogateDefinitionQualifiedNameParserRuleCall_1_0_1() { return cSurrogateSurrogateDefinitionQualifiedNameParserRuleCall_1_0_1; }
+		//'preparation'
+		public Keyword getNamePreparationKeyword_2_0() { return cNamePreparationKeyword_2_0; }
 		
-		//'from'
-		public Keyword getFromKeyword_2() { return cFromKeyword_2; }
+		//'steps'
+		public Keyword getStepsKeyword_3() { return cStepsKeyword_3; }
 		
-		//trainingData = STRING
-		public Assignment getTrainingDataAssignment_3() { return cTrainingDataAssignment_3; }
+		//'['
+		public Keyword getLeftSquareBracketKeyword_4() { return cLeftSquareBracketKeyword_4; }
 		
-		//STRING
-		public RuleCall getTrainingDataSTRINGTerminalRuleCall_3_0() { return cTrainingDataSTRINGTerminalRuleCall_3_0; }
+		//steps += StepRule*
+		public Assignment getStepsAssignment_5() { return cStepsAssignment_5; }
 		
-		//('and' 'measure'
-		//    measurements = BodyRule
-		//)?
-		public Group getGroup_4() { return cGroup_4; }
+		//StepRule
+		public RuleCall getStepsStepRuleParserRuleCall_5_0() { return cStepsStepRuleParserRuleCall_5_0; }
 		
-		//'and'
-		public Keyword getAndKeyword_4_0() { return cAndKeyword_4_0; }
-		
-		//'measure'
-		public Keyword getMeasureKeyword_4_1() { return cMeasureKeyword_4_1; }
-		
-		//measurements = BodyRule
-		public Assignment getMeasurementsAssignment_4_2() { return cMeasurementsAssignment_4_2; }
-		
-		//BodyRule
-		public RuleCall getMeasurementsBodyRuleParserRuleCall_4_2_0() { return cMeasurementsBodyRuleParserRuleCall_4_2_0; }
-		
-		//'and'
-		public Keyword getAndKeyword_5() { return cAndKeyword_5; }
-		
-		//'store'
-		public Keyword getStoreKeyword_6() { return cStoreKeyword_6; }
-		
-		//'to'
-		public Keyword getToKeyword_7() { return cToKeyword_7; }
-		
-		//modelFilename = STRING
-		public Assignment getModelFilenameAssignment_8() { return cModelFilenameAssignment_8; }
-		
-		//STRING
-		public RuleCall getModelFilenameSTRINGTerminalRuleCall_8_0() { return cModelFilenameSTRINGTerminalRuleCall_8_0; }
+		//']'
+		public Keyword getRightSquareBracketKeyword_6() { return cRightSquareBracketKeyword_6; }
 	}
-	public class BodyRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.mll.dsl.MachineLearningLanguage.BodyRule");
+	public class LearningUseCaseRuleElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.mll.dsl.MachineLearningLanguage.LearningUseCaseRule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cBlockAction_0 = (Action)cGroup.eContents().get(0);
-		private final Keyword cBeginKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Assignment cStatementsAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cStatementsStatementRuleParserRuleCall_2_0 = (RuleCall)cStatementsAssignment_2.eContents().get(0);
-		private final Keyword cEndKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Keyword cSpecifyKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Keyword cLearningKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Keyword cBeginKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cStatementsAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cStatementsStatementRuleParserRuleCall_4_0 = (RuleCall)cStatementsAssignment_4.eContents().get(0);
+		private final Keyword cEndKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
-		//BodyRule returns execution::Block:
+		//LearningUseCaseRule returns execution::Block:
 		//    {execution::Block}
-		//    'begin'
+		//    'specify' 'learning' 'begin'
 		//      (statements += StatementRule)*
 		//    'end'
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{execution::Block}
-		//'begin'
+		//'specify' 'learning' 'begin'
 		//  (statements += StatementRule)*
 		//'end'
 		public Group getGroup() { return cGroup; }
@@ -379,359 +592,128 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 		//{execution::Block}
 		public Action getBlockAction_0() { return cBlockAction_0; }
 		
+		//'specify'
+		public Keyword getSpecifyKeyword_1() { return cSpecifyKeyword_1; }
+		
+		//'learning'
+		public Keyword getLearningKeyword_2() { return cLearningKeyword_2; }
+		
 		//'begin'
-		public Keyword getBeginKeyword_1() { return cBeginKeyword_1; }
+		public Keyword getBeginKeyword_3() { return cBeginKeyword_3; }
 		
 		//(statements += StatementRule)*
-		public Assignment getStatementsAssignment_2() { return cStatementsAssignment_2; }
+		public Assignment getStatementsAssignment_4() { return cStatementsAssignment_4; }
 		
 		//StatementRule
-		public RuleCall getStatementsStatementRuleParserRuleCall_2_0() { return cStatementsStatementRuleParserRuleCall_2_0; }
+		public RuleCall getStatementsStatementRuleParserRuleCall_4_0() { return cStatementsStatementRuleParserRuleCall_4_0; }
 		
 		//'end'
-		public Keyword getEndKeyword_3() { return cEndKeyword_3; }
+		public Keyword getEndKeyword_5() { return cEndKeyword_5; }
 	}
-	public class StatementRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.mll.dsl.MachineLearningLanguage.StatementRule");
+	public class PredictionUseCaseRuleElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.mll.dsl.MachineLearningLanguage.PredictionUseCaseRule");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cPipelineDefinitionAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cSpecifyKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final Keyword cNamePredictingKeyword_2_0 = (Keyword)cNameAssignment_2.eContents().get(0);
+		private final Keyword cBeginKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cStepsAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cStepsStepRuleParserRuleCall_4_0 = (RuleCall)cStepsAssignment_4.eContents().get(0);
+		private final Keyword cEndKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		
+		//PredictionUseCaseRule returns generator::PipelineDefinition:
+		//    {generator::PipelineDefinition}
+		//    'specify' name = 'predicting' 'begin'
+		//       steps += StepRule*
+		//    'end'
+		//;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//{generator::PipelineDefinition}
+		//'specify' name = 'predicting' 'begin'
+		//   steps += StepRule*
+		//'end'
+		public Group getGroup() { return cGroup; }
+		
+		//{generator::PipelineDefinition}
+		public Action getPipelineDefinitionAction_0() { return cPipelineDefinitionAction_0; }
+		
+		//'specify'
+		public Keyword getSpecifyKeyword_1() { return cSpecifyKeyword_1; }
+		
+		//name = 'predicting'
+		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
+		
+		//'predicting'
+		public Keyword getNamePredictingKeyword_2_0() { return cNamePredictingKeyword_2_0; }
+		
+		//'begin'
+		public Keyword getBeginKeyword_3() { return cBeginKeyword_3; }
+		
+		//steps += StepRule*
+		public Assignment getStepsAssignment_4() { return cStepsAssignment_4; }
+		
+		//StepRule
+		public RuleCall getStepsStepRuleParserRuleCall_4_0() { return cStepsStepRuleParserRuleCall_4_0; }
+		
+		//'end'
+		public Keyword getEndKeyword_5() { return cEndKeyword_5; }
+	}
+	public class LiteralRuleElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.mll.dsl.MachineLearningLanguage.LiteralRule");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cForStatementRuleParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cPredictStatementRuleParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		private final RuleCall cCallBuiltinFunctionRuleParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
-		
-		//StatementRule returns execution::Statement:
-		//    ForStatementRule | PredictStatementRule    | CallBuiltinFunctionRule
-		//;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//ForStatementRule | PredictStatementRule	| CallBuiltinFunctionRule
-		public Alternatives getAlternatives() { return cAlternatives; }
-		
-		//ForStatementRule
-		public RuleCall getForStatementRuleParserRuleCall_0() { return cForStatementRuleParserRuleCall_0; }
-		
-		//PredictStatementRule
-		public RuleCall getPredictStatementRuleParserRuleCall_1() { return cPredictStatementRuleParserRuleCall_1; }
-		
-		//CallBuiltinFunctionRule
-		public RuleCall getCallBuiltinFunctionRuleParserRuleCall_2() { return cCallBuiltinFunctionRuleParserRuleCall_2; }
-	}
-	public class CallBuiltinFunctionRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.mll.dsl.MachineLearningLanguage.CallBuiltinFunctionRule");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cDefinitionAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final CrossReference cDefinitionFunctionDefinitionCrossReference_0_0 = (CrossReference)cDefinitionAssignment_0.eContents().get(0);
-		private final RuleCall cDefinitionFunctionDefinitionQualifiedNameParserRuleCall_0_0_1 = (RuleCall)cDefinitionFunctionDefinitionCrossReference_0_0.eContents().get(1);
-		private final Keyword cLeftParenthesisKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
-		private final Assignment cParametersAssignment_2_0 = (Assignment)cGroup_2.eContents().get(0);
-		private final RuleCall cParametersExpressionRuleParserRuleCall_2_0_0 = (RuleCall)cParametersAssignment_2_0.eContents().get(0);
-		private final Group cGroup_2_1 = (Group)cGroup_2.eContents().get(1);
-		private final Keyword cCommaKeyword_2_1_0 = (Keyword)cGroup_2_1.eContents().get(0);
-		private final Assignment cParametersAssignment_2_1_1 = (Assignment)cGroup_2_1.eContents().get(1);
-		private final RuleCall cParametersExpressionRuleParserRuleCall_2_1_1_0 = (RuleCall)cParametersAssignment_2_1_1.eContents().get(0);
-		private final Keyword cRightParenthesisKeyword_3 = (Keyword)cGroup.eContents().get(3);
-		private final Keyword cSemicolonKeyword_4 = (Keyword)cGroup.eContents().get(4);
-		
-		//CallBuiltinFunctionRule returns execution::CallBuiltinFunction:
-		//    definition = [defs::FunctionDefinition|QualifiedName] '('
-		//    (parameters+= ExpressionRule (',' parameters+= ExpressionRule)*)?
-		//    ')' ';'
-		//;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//definition = [defs::FunctionDefinition|QualifiedName] '('
-		//(parameters+= ExpressionRule (',' parameters+= ExpressionRule)*)?
-		//')' ';'
-		public Group getGroup() { return cGroup; }
-		
-		//definition = [defs::FunctionDefinition|QualifiedName]
-		public Assignment getDefinitionAssignment_0() { return cDefinitionAssignment_0; }
-		
-		//[defs::FunctionDefinition|QualifiedName]
-		public CrossReference getDefinitionFunctionDefinitionCrossReference_0_0() { return cDefinitionFunctionDefinitionCrossReference_0_0; }
-		
-		//QualifiedName
-		public RuleCall getDefinitionFunctionDefinitionQualifiedNameParserRuleCall_0_0_1() { return cDefinitionFunctionDefinitionQualifiedNameParserRuleCall_0_0_1; }
-		
-		//'('
-		public Keyword getLeftParenthesisKeyword_1() { return cLeftParenthesisKeyword_1; }
-		
-		//(parameters+= ExpressionRule (',' parameters+= ExpressionRule)*)?
-		public Group getGroup_2() { return cGroup_2; }
-		
-		//parameters+= ExpressionRule
-		public Assignment getParametersAssignment_2_0() { return cParametersAssignment_2_0; }
-		
-		//ExpressionRule
-		public RuleCall getParametersExpressionRuleParserRuleCall_2_0_0() { return cParametersExpressionRuleParserRuleCall_2_0_0; }
-		
-		//(',' parameters+= ExpressionRule)*
-		public Group getGroup_2_1() { return cGroup_2_1; }
-		
-		//','
-		public Keyword getCommaKeyword_2_1_0() { return cCommaKeyword_2_1_0; }
-		
-		//parameters+= ExpressionRule
-		public Assignment getParametersAssignment_2_1_1() { return cParametersAssignment_2_1_1; }
-		
-		//ExpressionRule
-		public RuleCall getParametersExpressionRuleParserRuleCall_2_1_1_0() { return cParametersExpressionRuleParserRuleCall_2_1_1_0; }
-		
-		//')'
-		public Keyword getRightParenthesisKeyword_3() { return cRightParenthesisKeyword_3; }
-		
-		//';'
-		public Keyword getSemicolonKeyword_4() { return cSemicolonKeyword_4; }
-	}
-	public class ForStatementRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.mll.dsl.MachineLearningLanguage.ForStatementRule");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cForKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cVarAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cVarNamedVariableRuleParserRuleCall_1_0 = (RuleCall)cVarAssignment_1.eContents().get(0);
-		private final Keyword cInKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cRangeAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cRangeRangeRuleParserRuleCall_3_0 = (RuleCall)cRangeAssignment_3.eContents().get(0);
-		private final Assignment cBodyAssignment_4 = (Assignment)cGroup.eContents().get(4);
-		private final RuleCall cBodyBodyRuleParserRuleCall_4_0 = (RuleCall)cBodyAssignment_4.eContents().get(0);
-		
-		//ForStatementRule returns execution::ForStatement:
-		//    'for' var = NamedVariableRule 'in' range = RangeRule
-		//        body = BodyRule
-		//;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//'for' var = NamedVariableRule 'in' range = RangeRule
-		//    body = BodyRule
-		public Group getGroup() { return cGroup; }
-		
-		//'for'
-		public Keyword getForKeyword_0() { return cForKeyword_0; }
-		
-		//var = NamedVariableRule
-		public Assignment getVarAssignment_1() { return cVarAssignment_1; }
-		
-		//NamedVariableRule
-		public RuleCall getVarNamedVariableRuleParserRuleCall_1_0() { return cVarNamedVariableRuleParserRuleCall_1_0; }
-		
-		//'in'
-		public Keyword getInKeyword_2() { return cInKeyword_2; }
-		
-		//range = RangeRule
-		public Assignment getRangeAssignment_3() { return cRangeAssignment_3; }
-		
-		//RangeRule
-		public RuleCall getRangeRangeRuleParserRuleCall_3_0() { return cRangeRangeRuleParserRuleCall_3_0; }
-		
-		//body = BodyRule
-		public Assignment getBodyAssignment_4() { return cBodyAssignment_4; }
-		
-		//BodyRule
-		public RuleCall getBodyBodyRuleParserRuleCall_4_0() { return cBodyBodyRuleParserRuleCall_4_0; }
-	}
-	public class NamedVariableRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.mll.dsl.MachineLearningLanguage.NamedVariableRule");
-		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
-		private final RuleCall cNameStringOrIdParserRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
-		
-		//NamedVariableRule returns execution::NamedVariable:
-		//    name = StringOrId
-		//;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//name = StringOrId
-		public Assignment getNameAssignment() { return cNameAssignment; }
-		
-		//StringOrId
-		public RuleCall getNameStringOrIdParserRuleCall_0() { return cNameStringOrIdParserRuleCall_0; }
-	}
-	public class RangeRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.mll.dsl.MachineLearningLanguage.RangeRule");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cCounterRangeRuleParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cLiteralRangeRuleParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		
-		//RangeRule returns execution::Range:
-		//    CounterRangeRule | LiteralRangeRule
-		//;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//CounterRangeRule | LiteralRangeRule
-		public Alternatives getAlternatives() { return cAlternatives; }
-		
-		//CounterRangeRule
-		public RuleCall getCounterRangeRuleParserRuleCall_0() { return cCounterRangeRuleParserRuleCall_0; }
-		
-		//LiteralRangeRule
-		public RuleCall getLiteralRangeRuleParserRuleCall_1() { return cLiteralRangeRuleParserRuleCall_1; }
-	}
-	public class LiteralRangeRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.mll.dsl.MachineLearningLanguage.LiteralRangeRule");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cLeftSquareBracketKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cElementsAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cElementsReadExpressionRuleParserRuleCall_1_0 = (RuleCall)cElementsAssignment_1.eContents().get(0);
-		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
-		private final Keyword cCommaKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
-		private final Assignment cElementsAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
-		private final RuleCall cElementsReadExpressionRuleParserRuleCall_2_1_0 = (RuleCall)cElementsAssignment_2_1.eContents().get(0);
-		private final Keyword cRightSquareBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
-		
-		//LiteralRangeRule returns execution::ValueRange:
-		//    '[' elements += ReadExpressionRule (',' elements += ReadExpressionRule)* ']'
-		//;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//'[' elements += ReadExpressionRule (',' elements += ReadExpressionRule)* ']'
-		public Group getGroup() { return cGroup; }
-		
-		//'['
-		public Keyword getLeftSquareBracketKeyword_0() { return cLeftSquareBracketKeyword_0; }
-		
-		//elements += ReadExpressionRule
-		public Assignment getElementsAssignment_1() { return cElementsAssignment_1; }
-		
-		//ReadExpressionRule
-		public RuleCall getElementsReadExpressionRuleParserRuleCall_1_0() { return cElementsReadExpressionRuleParserRuleCall_1_0; }
-		
-		//(',' elements += ReadExpressionRule)*
-		public Group getGroup_2() { return cGroup_2; }
-		
-		//','
-		public Keyword getCommaKeyword_2_0() { return cCommaKeyword_2_0; }
-		
-		//elements += ReadExpressionRule
-		public Assignment getElementsAssignment_2_1() { return cElementsAssignment_2_1; }
-		
-		//ReadExpressionRule
-		public RuleCall getElementsReadExpressionRuleParserRuleCall_2_1_0() { return cElementsReadExpressionRuleParserRuleCall_2_1_0; }
-		
-		//']'
-		public Keyword getRightSquareBracketKeyword_3() { return cRightSquareBracketKeyword_3; }
-	}
-	public class CounterRangeRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.mll.dsl.MachineLearningLanguage.CounterRangeRule");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cLeftSquareBracketKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cStartAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cStartIntegerLiteralRuleParserRuleCall_1_0 = (RuleCall)cStartAssignment_1.eContents().get(0);
-		private final Keyword cToKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cEndAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cEndIntegerLiteralRuleParserRuleCall_3_0 = (RuleCall)cEndAssignment_3.eContents().get(0);
-		private final Keyword cIncrementKeyword_4 = (Keyword)cGroup.eContents().get(4);
-		private final Keyword cByKeyword_5 = (Keyword)cGroup.eContents().get(5);
-		private final Assignment cIncrementAssignment_6 = (Assignment)cGroup.eContents().get(6);
-		private final RuleCall cIncrementIntegerLiteralRuleParserRuleCall_6_0 = (RuleCall)cIncrementAssignment_6.eContents().get(0);
-		private final Keyword cRightSquareBracketKeyword_7 = (Keyword)cGroup.eContents().get(7);
-		
-		//CounterRangeRule returns execution::CounterRange:
-		//    '[' start = IntegerLiteralRule 'to' end = IntegerLiteralRule 'increment' 'by' increment = IntegerLiteralRule ']'
-		//;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//'[' start = IntegerLiteralRule 'to' end = IntegerLiteralRule 'increment' 'by' increment = IntegerLiteralRule ']'
-		public Group getGroup() { return cGroup; }
-		
-		//'['
-		public Keyword getLeftSquareBracketKeyword_0() { return cLeftSquareBracketKeyword_0; }
-		
-		//start = IntegerLiteralRule
-		public Assignment getStartAssignment_1() { return cStartAssignment_1; }
-		
-		//IntegerLiteralRule
-		public RuleCall getStartIntegerLiteralRuleParserRuleCall_1_0() { return cStartIntegerLiteralRuleParserRuleCall_1_0; }
-		
-		//'to'
-		public Keyword getToKeyword_2() { return cToKeyword_2; }
-		
-		//end = IntegerLiteralRule
-		public Assignment getEndAssignment_3() { return cEndAssignment_3; }
-		
-		//IntegerLiteralRule
-		public RuleCall getEndIntegerLiteralRuleParserRuleCall_3_0() { return cEndIntegerLiteralRuleParserRuleCall_3_0; }
-		
-		//'increment'
-		public Keyword getIncrementKeyword_4() { return cIncrementKeyword_4; }
-		
-		//'by'
-		public Keyword getByKeyword_5() { return cByKeyword_5; }
-		
-		//increment = IntegerLiteralRule
-		public Assignment getIncrementAssignment_6() { return cIncrementAssignment_6; }
-		
-		//IntegerLiteralRule
-		public RuleCall getIncrementIntegerLiteralRuleParserRuleCall_6_0() { return cIncrementIntegerLiteralRuleParserRuleCall_6_0; }
-		
-		//']'
-		public Keyword getRightSquareBracketKeyword_7() { return cRightSquareBracketKeyword_7; }
-	}
-	public class ReferenceRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.mll.dsl.MachineLearningLanguage.ReferenceRule");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cLiteralDefinitionReferenceRuleParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cTypeDefinitionReferenceRuleParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		private final RuleCall cVariableReferenceRuleParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		private final RuleCall cNumberLiteralRuleParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cStringLiteralRuleParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cBooleanLiteralRuleParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		private final RuleCall cInstanceLiteralRuleParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
+		private final RuleCall cStepRuleParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
 		
 		//@Override
-		//ReferenceRule returns expressions::ValueReference:
-		//    LiteralDefinitionReferenceRule
-		//    | TypeDefinitionReferenceRule
-		//    | VariableReferenceRule
+		//LiteralRule returns expressions::Literal:
+		//    NumberLiteralRule
+		//        | StringLiteralRule
+		//        | BooleanLiteralRule
+		//        | InstanceLiteralRule
+		//        | StepRule
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//LiteralDefinitionReferenceRule
-		//| TypeDefinitionReferenceRule
-		//| VariableReferenceRule
+		//NumberLiteralRule
+		//    | StringLiteralRule
+		//    | BooleanLiteralRule
+		//    | InstanceLiteralRule
+		//    | StepRule
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
-		//LiteralDefinitionReferenceRule
-		public RuleCall getLiteralDefinitionReferenceRuleParserRuleCall_0() { return cLiteralDefinitionReferenceRuleParserRuleCall_0; }
+		//NumberLiteralRule
+		public RuleCall getNumberLiteralRuleParserRuleCall_0() { return cNumberLiteralRuleParserRuleCall_0; }
 		
-		//TypeDefinitionReferenceRule
-		public RuleCall getTypeDefinitionReferenceRuleParserRuleCall_1() { return cTypeDefinitionReferenceRuleParserRuleCall_1; }
+		//StringLiteralRule
+		public RuleCall getStringLiteralRuleParserRuleCall_1() { return cStringLiteralRuleParserRuleCall_1; }
 		
-		//VariableReferenceRule
-		public RuleCall getVariableReferenceRuleParserRuleCall_2() { return cVariableReferenceRuleParserRuleCall_2; }
-	}
-	public class VariableReferenceRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.mll.dsl.MachineLearningLanguage.VariableReferenceRule");
-		private final Assignment cVariableAssignment = (Assignment)rule.eContents().get(1);
-		private final CrossReference cVariableNamedVariableCrossReference_0 = (CrossReference)cVariableAssignment.eContents().get(0);
-		private final RuleCall cVariableNamedVariableStringOrIdParserRuleCall_0_1 = (RuleCall)cVariableNamedVariableCrossReference_0.eContents().get(1);
+		//BooleanLiteralRule
+		public RuleCall getBooleanLiteralRuleParserRuleCall_2() { return cBooleanLiteralRuleParserRuleCall_2; }
 		
-		//VariableReferenceRule returns execution::VariableReference:
-		//    variable = [execution::NamedVariable|StringOrId]
-		//;
-		@Override public ParserRule getRule() { return rule; }
+		//InstanceLiteralRule
+		public RuleCall getInstanceLiteralRuleParserRuleCall_3() { return cInstanceLiteralRuleParserRuleCall_3; }
 		
-		//variable = [execution::NamedVariable|StringOrId]
-		public Assignment getVariableAssignment() { return cVariableAssignment; }
-		
-		//[execution::NamedVariable|StringOrId]
-		public CrossReference getVariableNamedVariableCrossReference_0() { return cVariableNamedVariableCrossReference_0; }
-		
-		//StringOrId
-		public RuleCall getVariableNamedVariableStringOrIdParserRuleCall_0_1() { return cVariableNamedVariableStringOrIdParserRuleCall_0_1; }
+		//StepRule
+		public RuleCall getStepRuleParserRuleCall_4() { return cStepRuleParserRuleCall_4; }
 	}
 	
 	
 	private final MachineLearningModuleRuleElements pMachineLearningModuleRule;
-	private final SurrogateDefinitionRuleElements pSurrogateDefinitionRule;
-	private final PartialSurrogateFunctionDefinitionRuleElements pPartialSurrogateFunctionDefinitionRule;
-	private final PredictStatementRuleElements pPredictStatementRule;
-	private final BodyRuleElements pBodyRule;
-	private final StatementRuleElements pStatementRule;
-	private final CallBuiltinFunctionRuleElements pCallBuiltinFunctionRule;
-	private final ForStatementRuleElements pForStatementRule;
-	private final NamedVariableRuleElements pNamedVariableRule;
-	private final RangeRuleElements pRangeRule;
-	private final LiteralRangeRuleElements pLiteralRangeRule;
-	private final CounterRangeRuleElements pCounterRangeRule;
-	private final ReferenceRuleElements pReferenceRule;
-	private final VariableReferenceRuleElements pVariableReferenceRule;
+	private final TaskDescriptionRuleElements pTaskDescriptionRule;
+	private final ValidationPipelineDefinitionRuleElements pValidationPipelineDefinitionRule;
+	private final PreparationPipelineDefinitionRuleElements pPreparationPipelineDefinitionRule;
+	private final LearningUseCaseRuleElements pLearningUseCaseRule;
+	private final PredictionUseCaseRuleElements pPredictionUseCaseRule;
+	private final LiteralRuleElements pLiteralRule;
 	
 	private final Grammar grammar;
+	
+	private final GeneratorDSLGrammarAccess gaGeneratorDSL;
 	
 	private final BaseLanguageGrammarAccess gaBaseLanguage;
 	
@@ -739,25 +721,20 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 
 	@Inject
 	public MachineLearningLanguageGrammarAccess(GrammarProvider grammarProvider,
+			GeneratorDSLGrammarAccess gaGeneratorDSL,
 			BaseLanguageGrammarAccess gaBaseLanguage,
 			TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
+		this.gaGeneratorDSL = gaGeneratorDSL;
 		this.gaBaseLanguage = gaBaseLanguage;
 		this.gaTerminals = gaTerminals;
 		this.pMachineLearningModuleRule = new MachineLearningModuleRuleElements();
-		this.pSurrogateDefinitionRule = new SurrogateDefinitionRuleElements();
-		this.pPartialSurrogateFunctionDefinitionRule = new PartialSurrogateFunctionDefinitionRuleElements();
-		this.pPredictStatementRule = new PredictStatementRuleElements();
-		this.pBodyRule = new BodyRuleElements();
-		this.pStatementRule = new StatementRuleElements();
-		this.pCallBuiltinFunctionRule = new CallBuiltinFunctionRuleElements();
-		this.pForStatementRule = new ForStatementRuleElements();
-		this.pNamedVariableRule = new NamedVariableRuleElements();
-		this.pRangeRule = new RangeRuleElements();
-		this.pLiteralRangeRule = new LiteralRangeRuleElements();
-		this.pCounterRangeRule = new CounterRangeRuleElements();
-		this.pReferenceRule = new ReferenceRuleElements();
-		this.pVariableReferenceRule = new VariableReferenceRuleElements();
+		this.pTaskDescriptionRule = new TaskDescriptionRuleElements();
+		this.pValidationPipelineDefinitionRule = new ValidationPipelineDefinitionRuleElements();
+		this.pPreparationPipelineDefinitionRule = new PreparationPipelineDefinitionRuleElements();
+		this.pLearningUseCaseRule = new LearningUseCaseRuleElements();
+		this.pPredictionUseCaseRule = new PredictionUseCaseRuleElements();
+		this.pLiteralRule = new LiteralRuleElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -782,6 +759,10 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 	}
 	
 	
+	public GeneratorDSLGrammarAccess getGeneratorDSLGrammarAccess() {
+		return gaGeneratorDSL;
+	}
+	
 	public BaseLanguageGrammarAccess getBaseLanguageGrammarAccess() {
 		return gaBaseLanguage;
 	}
@@ -794,9 +775,21 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 	//MachineLearningModuleRule returns MachineLearningModule:
 	//    (imports += ImportRule)*
 	//    "module" name = QualifiedName "{"
-	//        (definitions+=SurrogateDefinitionRule)*
-	//        body = BodyRule
-	//    "}"
+	//        task = TaskDescriptionRule
+	//        validation=ValidationPipelineDefinitionRule
+	//        preparation=PreparationPipelineDefinitionRule
+	//        'specify' 'model' model = InstanceLiteralRule
+	//        (
+	//            'specify' 'gof'
+	//            gof = BodyRule
+	//        )?
+	//        (
+	//            'use' 'cases'
+	//                (learningUseCase=LearningUseCaseRule ';')?
+	//                (predictionUseCase=PredictionUseCaseRule ';')?
+	//            'end'
+	//        )?
+	//    '}'
 	//;
 	public MachineLearningModuleRuleElements getMachineLearningModuleRuleAccess() {
 		return pMachineLearningModuleRule;
@@ -806,48 +799,158 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 		return getMachineLearningModuleRuleAccess().getRule();
 	}
 	
-	//SurrogateDefinitionRule returns SurrogateDefinition:
-	//    "function" name = StringOrId "using"
-	//        (functions += PartialSurrogateFunctionDefinitionRule)+
+	//TaskDescriptionRule returns TaskDescription:
+	//    'specify' name='learning-task' '{'
+	//        'input' 'features' inputs += [defs::DataDescription|QualifiedName] ("," inputs += [defs::DataDescription|QualifiedName])*
+	//        'output' 'features' outputs += [defs::DataDescription|QualifiedName] ("," outputs += [defs::DataDescription|QualifiedName])*
+	//        'learning' 'from' '[' learningData+=STRING (',' learningData+=STRING)* ']'
+	//        ('testing' 'with' '[' testingData+=STRING (',' testingData+=STRING)* ']')?
+	//        'serialise' 'to' modelFile = STRING ('and' gofFile=STRING)?
+	//    '}'
 	//;
-	public SurrogateDefinitionRuleElements getSurrogateDefinitionRuleAccess() {
-		return pSurrogateDefinitionRule;
+	public TaskDescriptionRuleElements getTaskDescriptionRuleAccess() {
+		return pTaskDescriptionRule;
 	}
 	
-	public ParserRule getSurrogateDefinitionRuleRule() {
-		return getSurrogateDefinitionRuleAccess().getRule();
+	public ParserRule getTaskDescriptionRuleRule() {
+		return getTaskDescriptionRuleAccess().getRule();
 	}
 	
-	//PartialSurrogateFunctionDefinitionRule returns PartialSurrogateFunctionDefinition:
-	//    "model" definition = [defs::ClassDefinition|QualifiedName]
-	//    "mapping"
-	//        inputs += [defs::DataDescription|QualifiedName] ("," inputs += [defs::DataDescription|QualifiedName])*
-	//    "to"
-	//        outputs += [defs::DataDescription|QualifiedName] ("," outputs += [defs::DataDescription|QualifiedName])*
-	//    ("with" "parameters"
-	//        ((attributes+= BaseLanguage::AttributeRule)+ ))?
+	//ValidationPipelineDefinitionRule returns generator::PipelineDefinition:
+	//    {generator::PipelineDefinition}
+	//    'specify' name = 'validation' 'steps' '['
+	//        steps += StepRule*
+	//    ']'
 	//;
-	public PartialSurrogateFunctionDefinitionRuleElements getPartialSurrogateFunctionDefinitionRuleAccess() {
-		return pPartialSurrogateFunctionDefinitionRule;
+	public ValidationPipelineDefinitionRuleElements getValidationPipelineDefinitionRuleAccess() {
+		return pValidationPipelineDefinitionRule;
 	}
 	
-	public ParserRule getPartialSurrogateFunctionDefinitionRuleRule() {
-		return getPartialSurrogateFunctionDefinitionRuleAccess().getRule();
+	public ParserRule getValidationPipelineDefinitionRuleRule() {
+		return getValidationPipelineDefinitionRuleAccess().getRule();
 	}
 	
-	//PredictStatementRule returns PredictStatement:
-	//    "predict" surrogate = [SurrogateDefinition|QualifiedName]
-	//        'from' trainingData = STRING
-	//        ('and' 'measure'
-	//            measurements = BodyRule
-	//        )?
-	//        'and' 'store' 'to' modelFilename = STRING;
-	public PredictStatementRuleElements getPredictStatementRuleAccess() {
-		return pPredictStatementRule;
+	//PreparationPipelineDefinitionRule returns generator::PipelineDefinition:
+	//    {generator::PipelineDefinition}
+	//    'specify' name='preparation' 'steps' '['
+	//        steps += StepRule*
+	//    ']'
+	//;
+	public PreparationPipelineDefinitionRuleElements getPreparationPipelineDefinitionRuleAccess() {
+		return pPreparationPipelineDefinitionRule;
 	}
 	
-	public ParserRule getPredictStatementRuleRule() {
-		return getPredictStatementRuleAccess().getRule();
+	public ParserRule getPreparationPipelineDefinitionRuleRule() {
+		return getPreparationPipelineDefinitionRuleAccess().getRule();
+	}
+	
+	//LearningUseCaseRule returns execution::Block:
+	//    {execution::Block}
+	//    'specify' 'learning' 'begin'
+	//      (statements += StatementRule)*
+	//    'end'
+	//;
+	public LearningUseCaseRuleElements getLearningUseCaseRuleAccess() {
+		return pLearningUseCaseRule;
+	}
+	
+	public ParserRule getLearningUseCaseRuleRule() {
+		return getLearningUseCaseRuleAccess().getRule();
+	}
+	
+	//PredictionUseCaseRule returns generator::PipelineDefinition:
+	//    {generator::PipelineDefinition}
+	//    'specify' name = 'predicting' 'begin'
+	//       steps += StepRule*
+	//    'end'
+	//;
+	public PredictionUseCaseRuleElements getPredictionUseCaseRuleAccess() {
+		return pPredictionUseCaseRule;
+	}
+	
+	public ParserRule getPredictionUseCaseRuleRule() {
+		return getPredictionUseCaseRuleAccess().getRule();
+	}
+	
+	//@Override
+	//LiteralRule returns expressions::Literal:
+	//    NumberLiteralRule
+	//        | StringLiteralRule
+	//        | BooleanLiteralRule
+	//        | InstanceLiteralRule
+	//        | StepRule
+	//;
+	public LiteralRuleElements getLiteralRuleAccess() {
+		return pLiteralRule;
+	}
+	
+	public ParserRule getLiteralRuleRule() {
+		return getLiteralRuleAccess().getRule();
+	}
+	
+	//GeneratorModuleRule returns GeneratorModule:
+	//    (imports += ImportRule)*
+	//    "module" name = QualifiedName "{"
+	//        (pipelines += PipelineDefinitionRule)*
+	//        body = BodyRule
+	//    "}"
+	//;
+	public GeneratorDSLGrammarAccess.GeneratorModuleRuleElements getGeneratorModuleRuleAccess() {
+		return gaGeneratorDSL.getGeneratorModuleRuleAccess();
+	}
+	
+	public ParserRule getGeneratorModuleRuleRule() {
+		return getGeneratorModuleRuleAccess().getRule();
+	}
+	
+	//PipelineDefinitionRule returns PipelineDefinition:
+	//    'pipeline' name = StringOrId '['
+	//        steps += StepRule*
+	//    ']'
+	//;
+	public GeneratorDSLGrammarAccess.PipelineDefinitionRuleElements getPipelineDefinitionRuleAccess() {
+		return gaGeneratorDSL.getPipelineDefinitionRuleAccess();
+	}
+	
+	public ParserRule getPipelineDefinitionRuleRule() {
+		return getPipelineDefinitionRuleAccess().getRule();
+	}
+	
+	//StepRule returns Step:
+	//    ConcreteStepRule | PipelineStepRule
+	//;
+	public GeneratorDSLGrammarAccess.StepRuleElements getStepRuleAccess() {
+		return gaGeneratorDSL.getStepRuleAccess();
+	}
+	
+	public ParserRule getStepRuleRule() {
+		return getStepRuleAccess().getRule();
+	}
+	
+	//ConcreteStepRule returns ConcreteStep:
+	//    'step' '{'
+	//         'component' instance = InstanceLiteralRule
+	//         ('reads' '[' (reads += BaseDataReferenceRule(',' reads += BaseDataReferenceRule)*)? ']' ';')?
+	//         ('writes' '[' (writes += BaseDataReferenceRule (',' writes += BaseDataReferenceRule)*)? ']' ';')?
+	//    '}'
+	//;
+	public GeneratorDSLGrammarAccess.ConcreteStepRuleElements getConcreteStepRuleAccess() {
+		return gaGeneratorDSL.getConcreteStepRuleAccess();
+	}
+	
+	public ParserRule getConcreteStepRuleRule() {
+		return getConcreteStepRuleAccess().getRule();
+	}
+	
+	//PipelineStepRule returns PipelineStep:
+	//    'pipeline' definition=[PipelineDefinition|QualifiedName]
+	//;
+	public GeneratorDSLGrammarAccess.PipelineStepRuleElements getPipelineStepRuleAccess() {
+		return gaGeneratorDSL.getPipelineStepRuleAccess();
+	}
+	
+	public ParserRule getPipelineStepRuleRule() {
+		return getPipelineStepRuleAccess().getRule();
 	}
 	
 	//BodyRule returns execution::Block:
@@ -856,8 +959,8 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 	//      (statements += StatementRule)*
 	//    'end'
 	//;
-	public BodyRuleElements getBodyRuleAccess() {
-		return pBodyRule;
+	public GeneratorDSLGrammarAccess.BodyRuleElements getBodyRuleAccess() {
+		return gaGeneratorDSL.getBodyRuleAccess();
 	}
 	
 	public ParserRule getBodyRuleRule() {
@@ -865,35 +968,22 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 	}
 	
 	//StatementRule returns execution::Statement:
-	//    ForStatementRule | PredictStatementRule    | CallBuiltinFunctionRule
+	//    ForStatementRule | ApplyStatementRule | CallBuiltInFunctionRule
 	//;
-	public StatementRuleElements getStatementRuleAccess() {
-		return pStatementRule;
+	public GeneratorDSLGrammarAccess.StatementRuleElements getStatementRuleAccess() {
+		return gaGeneratorDSL.getStatementRuleAccess();
 	}
 	
 	public ParserRule getStatementRuleRule() {
 		return getStatementRuleAccess().getRule();
 	}
 	
-	//CallBuiltinFunctionRule returns execution::CallBuiltinFunction:
-	//    definition = [defs::FunctionDefinition|QualifiedName] '('
-	//    (parameters+= ExpressionRule (',' parameters+= ExpressionRule)*)?
-	//    ')' ';'
-	//;
-	public CallBuiltinFunctionRuleElements getCallBuiltinFunctionRuleAccess() {
-		return pCallBuiltinFunctionRule;
-	}
-	
-	public ParserRule getCallBuiltinFunctionRuleRule() {
-		return getCallBuiltinFunctionRuleAccess().getRule();
-	}
-	
 	//ForStatementRule returns execution::ForStatement:
 	//    'for' var = NamedVariableRule 'in' range = RangeRule
 	//        body = BodyRule
 	//;
-	public ForStatementRuleElements getForStatementRuleAccess() {
-		return pForStatementRule;
+	public GeneratorDSLGrammarAccess.ForStatementRuleElements getForStatementRuleAccess() {
+		return gaGeneratorDSL.getForStatementRuleAccess();
 	}
 	
 	public ParserRule getForStatementRuleRule() {
@@ -903,8 +993,8 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 	//NamedVariableRule returns execution::NamedVariable:
 	//    name = StringOrId
 	//;
-	public NamedVariableRuleElements getNamedVariableRuleAccess() {
-		return pNamedVariableRule;
+	public GeneratorDSLGrammarAccess.NamedVariableRuleElements getNamedVariableRuleAccess() {
+		return gaGeneratorDSL.getNamedVariableRuleAccess();
 	}
 	
 	public ParserRule getNamedVariableRuleRule() {
@@ -914,8 +1004,8 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 	//RangeRule returns execution::Range:
 	//    CounterRangeRule | LiteralRangeRule
 	//;
-	public RangeRuleElements getRangeRuleAccess() {
-		return pRangeRule;
+	public GeneratorDSLGrammarAccess.RangeRuleElements getRangeRuleAccess() {
+		return gaGeneratorDSL.getRangeRuleAccess();
 	}
 	
 	public ParserRule getRangeRuleRule() {
@@ -925,8 +1015,8 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 	//LiteralRangeRule returns execution::ValueRange:
 	//    '[' elements += ReadExpressionRule (',' elements += ReadExpressionRule)* ']'
 	//;
-	public LiteralRangeRuleElements getLiteralRangeRuleAccess() {
-		return pLiteralRangeRule;
+	public GeneratorDSLGrammarAccess.LiteralRangeRuleElements getLiteralRangeRuleAccess() {
+		return gaGeneratorDSL.getLiteralRangeRuleAccess();
 	}
 	
 	public ParserRule getLiteralRangeRuleRule() {
@@ -936,22 +1026,33 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 	//CounterRangeRule returns execution::CounterRange:
 	//    '[' start = IntegerLiteralRule 'to' end = IntegerLiteralRule 'increment' 'by' increment = IntegerLiteralRule ']'
 	//;
-	public CounterRangeRuleElements getCounterRangeRuleAccess() {
-		return pCounterRangeRule;
+	public GeneratorDSLGrammarAccess.CounterRangeRuleElements getCounterRangeRuleAccess() {
+		return gaGeneratorDSL.getCounterRangeRuleAccess();
 	}
 	
 	public ParserRule getCounterRangeRuleRule() {
 		return getCounterRangeRuleAccess().getRule();
 	}
 	
+	//ApplyStatementRule returns ApplyStatement:
+	//    'write' file = STRING 'with' count = LiteralRule 'samples' 'from' 'executing' '[' pipelines += VariableReferenceRule (',' pipelines += VariableReferenceRule)* ']' ';'
+	//;
+	public GeneratorDSLGrammarAccess.ApplyStatementRuleElements getApplyStatementRuleAccess() {
+		return gaGeneratorDSL.getApplyStatementRuleAccess();
+	}
+	
+	public ParserRule getApplyStatementRuleRule() {
+		return getApplyStatementRuleAccess().getRule();
+	}
+	
 	//@Override
-	//ReferenceRule returns expressions::ValueReference:
+	//ReferenceRule returns expressions::ConstantExpression:
 	//    LiteralDefinitionReferenceRule
 	//    | TypeDefinitionReferenceRule
 	//    | VariableReferenceRule
 	//;
-	public ReferenceRuleElements getReferenceRuleAccess() {
-		return pReferenceRule;
+	public GeneratorDSLGrammarAccess.ReferenceRuleElements getReferenceRuleAccess() {
+		return gaGeneratorDSL.getReferenceRuleAccess();
 	}
 	
 	public ParserRule getReferenceRuleRule() {
@@ -961,12 +1062,25 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 	//VariableReferenceRule returns execution::VariableReference:
 	//    variable = [execution::NamedVariable|StringOrId]
 	//;
-	public VariableReferenceRuleElements getVariableReferenceRuleAccess() {
-		return pVariableReferenceRule;
+	public GeneratorDSLGrammarAccess.VariableReferenceRuleElements getVariableReferenceRuleAccess() {
+		return gaGeneratorDSL.getVariableReferenceRuleAccess();
 	}
 	
 	public ParserRule getVariableReferenceRuleRule() {
 		return getVariableReferenceRuleAccess().getRule();
+	}
+	
+	//CallBuiltInFunctionRule returns execution::CallBuiltinFunction:
+	//    definition = [defs::FunctionDefinition|QualifiedName] '('
+	//    (parameters+= ExpressionRule (',' parameters+= ExpressionRule)*)?
+	//    ')' ';'
+	//;
+	public GeneratorDSLGrammarAccess.CallBuiltInFunctionRuleElements getCallBuiltInFunctionRuleAccess() {
+		return gaGeneratorDSL.getCallBuiltInFunctionRuleAccess();
+	}
+	
+	public ParserRule getCallBuiltInFunctionRuleRule() {
+		return getCallBuiltInFunctionRuleAccess().getRule();
 	}
 	
 	//ExpressionRule returns Expression:
@@ -1218,20 +1332,6 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 	
 	public ParserRule getStructuredDataDescriptionReferenceRuleRule() {
 		return getStructuredDataDescriptionReferenceRuleAccess().getRule();
-	}
-	
-	//LiteralRule returns Literal:
-	//    NumberLiteralRule
-	//        | StringLiteralRule
-	//        | BooleanLiteralRule
-	//        | InstanceLiteralRule
-	//;
-	public BaseLanguageGrammarAccess.LiteralRuleElements getLiteralRuleAccess() {
-		return gaBaseLanguage.getLiteralRuleAccess();
-	}
-	
-	public ParserRule getLiteralRuleRule() {
-		return getLiteralRuleAccess().getRule();
 	}
 	
 	//InstanceLiteralRule returns Instance:

@@ -3,6 +3,10 @@
  */
 package de.evoal.languages.model.generator.util;
 
+import de.evoal.languages.model.base.expressions.ConstantExpression;
+import de.evoal.languages.model.base.expressions.Expression;
+import de.evoal.languages.model.base.expressions.Literal;
+import de.evoal.languages.model.base.expressions.ReadExpression;
 import de.evoal.languages.model.execution.NamedVariable;
 import de.evoal.languages.model.execution.Statement;
 import de.evoal.languages.model.execution.Variable;
@@ -85,6 +89,14 @@ public class GeneratorAdapterFactory extends AdapterFactoryImpl {
 				return createStepAdapter();
 			}
 			@Override
+			public Adapter casePipelineStep(PipelineStep object) {
+				return createPipelineStepAdapter();
+			}
+			@Override
+			public Adapter caseConcreteStep(ConcreteStep object) {
+				return createConcreteStepAdapter();
+			}
+			@Override
 			public Adapter caseApplyStatement(ApplyStatement object) {
 				return createApplyStatementAdapter();
 			}
@@ -95,6 +107,22 @@ public class GeneratorAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseNamedVariable(NamedVariable object) {
 				return createNamedVariableAdapter();
+			}
+			@Override
+			public Adapter caseExpression(Expression object) {
+				return createExpressionAdapter();
+			}
+			@Override
+			public Adapter caseReadExpression(ReadExpression object) {
+				return createReadExpressionAdapter();
+			}
+			@Override
+			public Adapter caseConstantExpression(ConstantExpression object) {
+				return createConstantExpressionAdapter();
+			}
+			@Override
+			public Adapter caseLiteral(Literal object) {
+				return createLiteralAdapter();
 			}
 			@Override
 			public Adapter caseStatement(Statement object) {
@@ -163,6 +191,34 @@ public class GeneratorAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.generator.PipelineStep <em>Pipeline Step</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.evoal.languages.model.generator.PipelineStep
+	 * @generated
+	 */
+	public Adapter createPipelineStepAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.generator.ConcreteStep <em>Concrete Step</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.evoal.languages.model.generator.ConcreteStep
+	 * @generated
+	 */
+	public Adapter createConcreteStepAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.generator.ApplyStatement <em>Apply Statement</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -201,6 +257,62 @@ public class GeneratorAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createNamedVariableAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.expressions.Expression <em>Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.evoal.languages.model.base.expressions.Expression
+	 * @generated
+	 */
+	public Adapter createExpressionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.expressions.ReadExpression <em>Read Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.evoal.languages.model.base.expressions.ReadExpression
+	 * @generated
+	 */
+	public Adapter createReadExpressionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.expressions.ConstantExpression <em>Constant Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.evoal.languages.model.base.expressions.ConstantExpression
+	 * @generated
+	 */
+	public Adapter createConstantExpressionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.expressions.Literal <em>Literal</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.evoal.languages.model.base.expressions.Literal
+	 * @generated
+	 */
+	public Adapter createLiteralAdapter() {
 		return null;
 	}
 

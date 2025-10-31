@@ -16,6 +16,26 @@ public final class BooleanNumberOperations {
                         BooleanNumberOperations::isGreaterThanAsInteger);
     }
 
+    private static Boolean isEqualToAsDouble(final Number op1, final Number op2) {
+        return op1.doubleValue() == op2.doubleValue();
+    }
+    
+    private static Boolean isEqualToAsLong(final Number op1, final Number op2) {
+        return op1.longValue() == op2.longValue();
+    }
+
+    private static Boolean isEqualToAsInteger(final Number op1, final Number op2) {
+        return op1.intValue() == op2.intValue();
+    }
+
+    public static Boolean isEqualTo(final Object op1, final Object op2) {
+        return dispatch(op1,
+                        op2,
+                        BooleanNumberOperations::isEqualToAsDouble,
+                        BooleanNumberOperations::isEqualToAsLong,
+                        BooleanNumberOperations::isEqualToAsInteger);
+    }
+    
     private static Boolean isGreaterThanAsDouble(final Number op1, final Number op2) {
         return op1.doubleValue() > op2.doubleValue();
     }

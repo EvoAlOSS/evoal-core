@@ -42,6 +42,11 @@ Workflow {
     		fragment = exporting.QualifiedNamesFragment2 auto-inject {}
     		fragment = builder.BuilderIntegrationFragment2 auto-inject {}
     		
+			fragment = io.typefox.xtext2langium.Xtext2LangiumFragment {
+			        outputPath = './langium'
+		    }
+
+    		
             parserGenerator = {
                     options = {
                             backtrack = true

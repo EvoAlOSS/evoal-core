@@ -1,11 +1,14 @@
 package de.evoal.surrogate.adaption.interval.model;
 
+import de.evoal.surrogate.api.io.ModelReader;
+import de.evoal.surrogate.api.io.ModelWriter;
+import de.evoal.surrogate.api.io.pson.Parameter;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -23,9 +26,6 @@ import de.evoal.core.api.ecore.TypedEObject;
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertySpecification;
 import de.evoal.languages.model.base.definitions.DataDescription;
-import de.evoal.surrogate.api.configuration.Parameter;
-import de.evoal.surrogate.api.configuration.PartialFunctionConfiguration;
-import de.evoal.surrogate.api.function.SurrogateFunction;
 import de.evoal.surrogate.smile.api.KernelBasedSVRFunction;
 
 @Slf4j
@@ -60,8 +60,8 @@ public final class PredictiveErrorData {
         calculatedValues = new double[numberOfPoints];
     }
 
-    public PredictiveErrorData(final PartialFunctionConfiguration configuration) {
-       final Map<String, Object> parameterMap = toMap(configuration.getOutputParameters().get(configuration.getOutputData().iterator().next().getName()));
+    public PredictiveErrorData(final ModelReader reader) {
+       final Map<String, Object> parameterMap = toMap(reader.getOutputFeatureInformation(reader.getOutput().iterator().next()));
 
         parameterMap.keySet().forEach(s -> log.info(" attached parameter: {}", s));
 
@@ -84,32 +84,32 @@ public final class PredictiveErrorData {
         this.calculatedValues[index] = calculatedValue;
     }
 
-    public void attachTo(final PartialFunctionConfiguration regression, final String propertyName) {
-        attach(regression, propertyName, SIGMA, sigma);
-        attach(regression, propertyName, EPSILON, predictionErrors);
-        attach(regression, propertyName, TRAINING, trainingPoints);
-        attach(regression, propertyName, CALCULATED, calculatedValues);
-        attach(regression, propertyName, DELTA, delta);
-        attach(regression, propertyName, ISV, independentSmoothingVector);
-        attach(regression, propertyName, ISM, independentSmoothingMatrix);
+    public void attachTo(final ModelWriter writer, final EStructuralFeature feature) {
+        attach(writer, feature, SIGMA, sigma);
+        attach(writer, feature, EPSILON, predictionErrors);
+        attach(writer, feature, TRAINING, trainingPoints);
+        attach(writer, feature, CALCULATED, calculatedValues);
+        attach(writer, feature, DELTA, delta);
+        attach(writer, feature, ISV, independentSmoothingVector);
+        attach(writer, feature, ISM, independentSmoothingMatrix);
     }
 
-    private void attach(final PartialFunctionConfiguration regression, final String propertyName, final String name, final Object value) {
+    private void attach(final ModelWriter writer, final EStructuralFeature feature, final String name, final Object value) {
         final Parameter parameter = Parameter.builder()
                 .name(name)
                 .value(value)
                 .build();
 
-        regression.addOutputParameter(propertyName, parameter);
+        writer.addOutputFeatureInformation(feature, parameter);
     }
 
-    public static Map<String, Object> toMap(final List<Parameter> parameters) {
+    public static Map<String, Object> toMap(final Collection<Parameter> parameters) {
         return parameters.stream().collect(Collectors.toMap(Parameter::getName, Parameter::getValue));
     }
 
-    public Pair<Double, Double> calculateBoundaries(final Properties candidate, final int regressionIndex, final SurrogateFunction function, final double confidence, final EAnnotationHelper helper) {
-        final Space inputSpace = function.getInputSpecification();
-        final Space outputSpace = function.getOutputSpecification();
+    public Pair<Double, Double> calculateBoundaries(final Properties candidate, final int regressionIndex, final KernelBasedSVRFunction function, final double confidence, final EAnnotationHelper helper) {
+        final Space inputSpace = function.getInput();
+        final Space outputSpace = function.getOutput();
 
         final EStructuralFeature oFeature = new ArrayList<>(outputSpace).get(regressionIndex);
 
@@ -124,8 +124,6 @@ public final class PredictiveErrorData {
 
         function.apply(input, output);
 
-        final KernelBasedSVRFunction regression = (KernelBasedSVRFunction) function.getFunctions().get(regressionIndex);
-
         // Calculating Ω
         final Matrix omega = new Matrix(1, numberOfPoints);
         IntStream.range(0, trainingPoints.length)
@@ -138,7 +136,9 @@ public final class PredictiveErrorData {
                         v2[j] = trainingPoints[i][j];
                     }
 
-                    final double kv = regression.getRegression().kernel().k(v1, v2);
+                    final double kv = function.getRegression()
+                            .kernel()
+                            .k(v1, v2);
 
                     omega.set(0, i, kv);
                 });

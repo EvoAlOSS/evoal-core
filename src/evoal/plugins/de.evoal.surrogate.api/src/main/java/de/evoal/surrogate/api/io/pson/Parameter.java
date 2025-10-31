@@ -1,0 +1,50 @@
+package de.evoal.surrogate.api.io.pson;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import de.evoal.core.api.languages.AttributeEvaluator;
+import de.evoal.languages.model.base.expressions.Attribute;
+import de.evoal.surrogate.main.jackson.ReflectiveDeserializer;
+import de.evoal.surrogate.main.jackson.ReflectiveSerializer;
+
+@AllArgsConstructor
+@Builder
+@Data
+@NoArgsConstructor
+public class Parameter {
+	private String name;
+
+	@JsonDeserialize(using = ReflectiveDeserializer.class)
+	@JsonSerialize(using = ReflectiveSerializer.class)
+	private Object value;
+
+	public static Parameter from(final String name, final Object value) {
+		final Parameter parameter = new Parameter();
+		parameter.setName(name);
+		parameter.setValue(value);
+
+		return parameter;
+	}
+
+	public static Parameter from(final Attribute attribute, final AttributeEvaluator evaluator) {
+		final Parameter parameter = new Parameter();
+		parameter.setName(attribute.getDefinition().getName());
+		parameter.setValue(evaluator.attributeToObject(attribute));
+
+		return parameter;
+	}
+
+	public static Parameter from(final Parameter config) {
+		final Parameter parameter = new Parameter();
+		parameter.setName(config.getName());
+		parameter.setValue(config.getValue());
+
+		return parameter;
+	}
+}

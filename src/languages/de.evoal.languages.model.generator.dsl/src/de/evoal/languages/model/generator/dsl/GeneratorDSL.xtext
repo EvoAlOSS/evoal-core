@@ -2,6 +2,7 @@ grammar de.evoal.languages.model.generator.dsl.GeneratorDSL with de.evoal.langua
 
 import "https://www.evoal.de/languages/generator/1.0.0"
 import "https://www.evoal.de/languages/base/1.0.0" as base
+import "https://www.evoal.de/languages/base/definitions/1.0.0" as defs
 import "https://www.evoal.de/languages/base/expressions/1.0.0" as expressions
 import "https://www.evoal.de/languages/execution/1.0.0" as execution
 
@@ -22,11 +23,19 @@ PipelineDefinitionRule returns PipelineDefinition:
 ;
 
 StepRule returns Step:
+	ConcreteStepRule | PipelineStepRule	
+;
+
+ConcreteStepRule returns ConcreteStep:
 	'step' '{'
  	    'component' instance = InstanceLiteralRule
  	    ('reads' '[' (reads += BaseDataReferenceRule(',' reads += BaseDataReferenceRule)*)? ']' ';')?
  	    ('writes' '[' (writes += BaseDataReferenceRule (',' writes += BaseDataReferenceRule)*)? ']' ';')?
 	'}'
+;
+
+PipelineStepRule returns PipelineStep:
+	'pipeline' definition=[PipelineDefinition|QualifiedName]
 ;
 
 BodyRule returns execution::Block:
@@ -37,7 +46,7 @@ BodyRule returns execution::Block:
 ;
 
 StatementRule returns execution::Statement:
-	ForStatementRule | ApplyStatementRule	
+	ForStatementRule | ApplyStatementRule | CallBuiltInFunctionRule
 ;
 
 ForStatementRule returns execution::ForStatement:
@@ -75,4 +84,11 @@ ReferenceRule returns expressions::ConstantExpression:
 VariableReferenceRule returns execution::VariableReference:
 	variable = [execution::NamedVariable|StringOrId]
 ;
+
+CallBuiltInFunctionRule returns execution::CallBuiltinFunction:
+	definition = [defs::FunctionDefinition|QualifiedName] '('
+	(parameters+= ExpressionRule (',' parameters+= ExpressionRule)*)?
+	')' ';'
+;
+
 

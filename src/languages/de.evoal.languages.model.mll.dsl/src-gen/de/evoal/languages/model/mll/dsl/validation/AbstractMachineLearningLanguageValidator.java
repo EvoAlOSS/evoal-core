@@ -4,17 +4,18 @@
  */
 package de.evoal.languages.model.mll.dsl.validation;
 
-import de.evoal.languages.model.base.dsl.validation.BaseLanguageValidator;
+import de.evoal.languages.model.generator.dsl.validation.GeneratorDSLValidator;
 import java.util.ArrayList;
 import java.util.List;
 import org.eclipse.emf.ecore.EPackage;
 
-public abstract class AbstractMachineLearningLanguageValidator extends BaseLanguageValidator {
+public abstract class AbstractMachineLearningLanguageValidator extends GeneratorDSLValidator {
 	
 	@Override
 	protected List<EPackage> getEPackages() {
 		List<EPackage> result = new ArrayList<EPackage>(super.getEPackages());
 		result.add(EPackage.Registry.INSTANCE.getEPackage("https://www.evoal.de/languages/mll/1.0.0"));
+		result.add(EPackage.Registry.INSTANCE.getEPackage("https://www.evoal.de/languages/generator/1.0.0"));
 		result.add(EPackage.Registry.INSTANCE.getEPackage("https://www.evoal.de/languages/execution/1.0.0"));
 		result.add(EPackage.Registry.INSTANCE.getEPackage("https://www.evoal.de/languages/base/expressions/1.0.0"));
 		result.add(EPackage.Registry.INSTANCE.getEPackage("https://www.evoal.de/languages/base/definitions/1.0.0"));

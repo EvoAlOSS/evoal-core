@@ -13,10 +13,12 @@ import de.evoal.languages.model.base.types.TypesPackage;
 
 import de.evoal.languages.model.execution.ExecutionPackage;
 
+import de.evoal.languages.model.pipeline.ConcreteStep;
 import de.evoal.languages.model.pipeline.PipelineDefinition;
 import de.evoal.languages.model.pipeline.PipelineFactory;
 import de.evoal.languages.model.pipeline.PipelineModule;
 import de.evoal.languages.model.pipeline.PipelinePackage;
+import de.evoal.languages.model.pipeline.PipelineStep;
 import de.evoal.languages.model.pipeline.Step;
 
 import org.eclipse.emf.ecore.EAttribute;
@@ -53,6 +55,20 @@ public class PipelinePackageImpl extends EPackageImpl implements PipelinePackage
 	 * @generated
 	 */
 	private EClass stepEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass concreteStepEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass pipelineStepEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -197,8 +213,8 @@ public class PipelinePackageImpl extends EPackageImpl implements PipelinePackage
 	 * @generated
 	 */
 	@Override
-	public EReference getStep_Instance() {
-		return (EReference)stepEClass.getEStructuralFeatures().get(0);
+	public EClass getConcreteStep() {
+		return concreteStepEClass;
 	}
 
 	/**
@@ -207,8 +223,8 @@ public class PipelinePackageImpl extends EPackageImpl implements PipelinePackage
 	 * @generated
 	 */
 	@Override
-	public EReference getStep_Reads() {
-		return (EReference)stepEClass.getEStructuralFeatures().get(1);
+	public EReference getConcreteStep_Instance() {
+		return (EReference)concreteStepEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -217,8 +233,38 @@ public class PipelinePackageImpl extends EPackageImpl implements PipelinePackage
 	 * @generated
 	 */
 	@Override
-	public EReference getStep_Writes() {
-		return (EReference)stepEClass.getEStructuralFeatures().get(2);
+	public EReference getConcreteStep_Reads() {
+		return (EReference)concreteStepEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getConcreteStep_Writes() {
+		return (EReference)concreteStepEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getPipelineStep() {
+		return pipelineStepEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getPipelineStep_Definition() {
+		return (EReference)pipelineStepEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -259,9 +305,14 @@ public class PipelinePackageImpl extends EPackageImpl implements PipelinePackage
 		createEReference(pipelineDefinitionEClass, PIPELINE_DEFINITION__STEPS);
 
 		stepEClass = createEClass(STEP);
-		createEReference(stepEClass, STEP__INSTANCE);
-		createEReference(stepEClass, STEP__READS);
-		createEReference(stepEClass, STEP__WRITES);
+
+		concreteStepEClass = createEClass(CONCRETE_STEP);
+		createEReference(concreteStepEClass, CONCRETE_STEP__INSTANCE);
+		createEReference(concreteStepEClass, CONCRETE_STEP__READS);
+		createEReference(concreteStepEClass, CONCRETE_STEP__WRITES);
+
+		pipelineStepEClass = createEClass(PIPELINE_STEP);
+		createEReference(pipelineStepEClass, PIPELINE_STEP__DEFINITION);
 	}
 
 	/**
@@ -298,6 +349,9 @@ public class PipelinePackageImpl extends EPackageImpl implements PipelinePackage
 
 		// Add supertypes to classes
 		pipelineDefinitionEClass.getESuperTypes().add(theExecutionPackage.getNamedVariable());
+		stepEClass.getESuperTypes().add(theExpressionsPackage.getLiteral());
+		concreteStepEClass.getESuperTypes().add(this.getStep());
+		pipelineStepEClass.getESuperTypes().add(this.getStep());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(pipelineModuleEClass, PipelineModule.class, "PipelineModule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -308,10 +362,17 @@ public class PipelinePackageImpl extends EPackageImpl implements PipelinePackage
 		initEClass(pipelineDefinitionEClass, PipelineDefinition.class, "PipelineDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getPipelineDefinition_Steps(), this.getStep(), null, "steps", null, 0, -1, PipelineDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(stepEClass, Step.class, "Step", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getStep_Instance(), theExpressionsPackage.getInstance(), null, "instance", null, 1, 1, Step.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getStep_Reads(), ecorePackage.getEStructuralFeature(), null, "reads", null, 0, -1, Step.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEReference(getStep_Writes(), ecorePackage.getEStructuralFeature(), null, "writes", null, 0, -1, Step.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEClass(stepEClass, Step.class, "Step", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		addEOperation(stepEClass, this.getStep(), "getValue", 1, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(concreteStepEClass, ConcreteStep.class, "ConcreteStep", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getConcreteStep_Instance(), theExpressionsPackage.getInstance(), null, "instance", null, 1, 1, ConcreteStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getConcreteStep_Reads(), ecorePackage.getEStructuralFeature(), null, "reads", null, 0, -1, ConcreteStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getConcreteStep_Writes(), ecorePackage.getEStructuralFeature(), null, "writes", null, 0, -1, ConcreteStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+
+		initEClass(pipelineStepEClass, PipelineStep.class, "PipelineStep", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getPipelineStep_Definition(), this.getPipelineDefinition(), null, "definition", null, 1, 1, PipelineStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);
@@ -357,13 +418,13 @@ public class PipelinePackageImpl extends EPackageImpl implements PipelinePackage
 			   "nullFree", "false"
 		   });
 		addAnnotation
-		  (getStep_Reads(),
+		  (getConcreteStep_Reads(),
 		   source,
 		   new String[] {
 			   "nullFree", "false"
 		   });
 		addAnnotation
-		  (getStep_Writes(),
+		  (getConcreteStep_Writes(),
 		   source,
 		   new String[] {
 			   "nullFree", "false"

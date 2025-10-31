@@ -1,72 +1,41 @@
 package de.evoal.surrogate.simple.linear;
 
-import java.util.LinkedList;
-import java.util.List;
 import java.util.function.BiConsumer;
-import java.util.function.BiFunction;
-import java.util.function.Function;
 
 import de.evoal.core.api.ecore.Space;
 import de.evoal.core.api.ecore.TypedEObject;
-import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.utils.Requirements;
-import de.evoal.languages.model.base.definitions.BaseDataDescription;
-import de.evoal.surrogate.api.configuration.Parameter;
-import de.evoal.surrogate.api.configuration.PartialFunctionConfiguration;
-import de.evoal.surrogate.api.function.AbstractPartialSurrogateFunction;
+import de.evoal.surrogate.api.function.ModelFunction;
 
-import de.evoal.core.api.properties.PropertiesSpecification;
-import de.evoal.core.api.properties.PropertySpecification;
-import de.evoal.core.api.utils.ConverterFunctions;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.math3.stat.regression.SimpleRegression;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
 @Slf4j
-public class LinearFunction extends AbstractPartialSurrogateFunction {
-	/**
-	 * Name of the intercept parameter.
-	 */
-	private static final String INTERCEPT_PARAMETER_NAME = "intercept";
-
-	/**
-	 * Name of the r square parameter.
-	 */
-	private static final String R_SQUARE_PARAMETER_NAME = "r²";
-
-	/**
-	 * Name of the slope parameter.
-	 */
-	private static final String SLOPE_PARAMETER_NAME = "slope";
-
-	/**
-	 * Turns an Apache simple regression into a parameter set.
-	 */
-	public static List<Parameter> toParameters(final SimpleRegression regression) {
-		final List<Parameter> result = new LinkedList<>();
-		
-		addParameter(INTERCEPT_PARAMETER_NAME, regression.getIntercept(), result);
-		addParameter(SLOPE_PARAMETER_NAME, regression.getSlope(), result);
-		addParameter(R_SQUARE_PARAMETER_NAME, regression.getRSquare(), result);
-
-		return result;
-	}
+public class LinearFunction extends ModelFunction {
 
 	/**
 	 * Actual function for prediction.
 	 */
 	private final BiConsumer<TypedEObject, TypedEObject> regression;
 
-	public LinearFunction(final PartialFunctionConfiguration configuration, final List<Parameter> functionParameters, final Space input, final Space output) {
-		super(configuration, functionParameters, input, output);
-		
-		final double slope = getSlope();
-		final double intercept = getIntercept();
+	@Getter
+	private final double intercept;
 
+	@Getter
+	private final double slope;
+
+	public LinearFunction(final Space inputFeatures, final Space outputFeatures, final double slope, final double intercept) {
+		super("de.evoal.surrogate.simple.ml.linear-regression", inputFeatures, outputFeatures);
+		
 		Requirements.requireSize(input, 1);
 		Requirements.requireSize(output, 1);
+
 		final EStructuralFeature iFeature = input.iterator().next();
 		final EStructuralFeature oFeature = output.iterator().next();
+
+		this.slope = slope;
+		this.intercept = intercept;
 
 		log.info("Using linear regression f(x) = {} * x + {}.", slope, intercept);
 
@@ -76,21 +45,5 @@ public class LinearFunction extends AbstractPartialSurrogateFunction {
 	@Override
 	public void apply(final TypedEObject input, final TypedEObject output) {
 		regression.accept(input, output);
-	}
-
-	private double getIntercept() {
-		return (double)getParameters().stream()
-				 .filter(p -> INTERCEPT_PARAMETER_NAME.equals(p.getName()))
-				 .findFirst()
-				 .get()
-				 .getValue();
-	}
-
-	private double getSlope() {
-		return (double)getParameters().stream()
-				 .filter(p -> SLOPE_PARAMETER_NAME.equals(p.getName()))
-				 .findFirst()
-				 .get()
-				 .getValue();
 	}
 }

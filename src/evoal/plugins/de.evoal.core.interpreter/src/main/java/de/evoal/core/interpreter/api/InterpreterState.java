@@ -1,10 +1,10 @@
 package de.evoal.core.interpreter.api;
 
+import de.evoal.core.api.ecore.Space;
 import de.evoal.languages.model.execution.NamedVariable;
 import de.evoal.languages.model.execution.Variable;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
-import org.eclipse.emf.ecore.EClass;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,7 +20,7 @@ public class InterpreterState {
      */
     private final Optional<InterpreterState> parentState;
 
-    private Optional<EClass> space = Optional.empty();
+    private Optional<Space> space = Optional.empty();
 
     /**
      * The actual variable to value binding.
@@ -55,6 +55,7 @@ public class InterpreterState {
      */
     public Object get(final Variable variable) {
         log.info("Looking up variable with name: {}", variable instanceof NamedVariable ? ((NamedVariable)variable).getName() : "<unnamed>" );
+        log.info("  in {}", bindings);
         if(bindings.containsKey(variable)) {
             return bindings.get(variable);
         }
@@ -85,11 +86,11 @@ public class InterpreterState {
         );
     }
 
-    public void setSpace(final EClass space) {
+    public void setSpace(final Space space) {
         this.space = Optional.of(space);
     }
 
-    public EClass getSpace() {
+    public Space getSpace() {
         if(space.isPresent()) {
             return space.get();
         }
@@ -100,6 +101,15 @@ public class InterpreterState {
         }
 
         throw new IllegalStateException("Space is not set");
+    }
+
+    @Override
+    public String toString() {
+        return "InterpreterState ["
+                + (parentState.isPresent() ? "parentState=" + parentState.get() + ", " : "")
+                + (space.isPresent() ? "space=" + space.get() + ", " : "")
+                + (bindings.isEmpty() ? "" : "bindings=" + bindings)
+                + "]";
     }
 }
 

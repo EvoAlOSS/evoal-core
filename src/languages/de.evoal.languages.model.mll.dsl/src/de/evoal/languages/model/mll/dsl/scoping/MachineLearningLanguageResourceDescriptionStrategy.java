@@ -9,8 +9,7 @@ import de.evoal.languages.model.utils.scoping.FilteringResourceDescriptionsStrat
 public class MachineLearningLanguageResourceDescriptionStrategy extends FilteringResourceDescriptionsStrategy {
 	public MachineLearningLanguageResourceDescriptionStrategy() {
 		super(
-				MllPackage.eINSTANCE.getMachineLearningModule(),
-				MllPackage.eINSTANCE.getSurrogateDefinition()
+				MllPackage.eINSTANCE.getMachineLearningModule()
 			 );
 	}
 }

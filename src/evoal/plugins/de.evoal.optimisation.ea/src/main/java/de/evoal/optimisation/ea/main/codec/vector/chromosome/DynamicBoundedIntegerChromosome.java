@@ -2,6 +2,7 @@ package de.evoal.optimisation.ea.main.codec.vector.chromosome;
 
 import de.evoal.core.api.properties.PropertySpecification;
 import de.evoal.core.api.properties.info.PropertiesBoundaries;
+import de.evoal.core.api.properties.info.PropertyBoundaries;
 import de.evoal.languages.model.base.definitions.DataDescription;
 import de.evoal.languages.model.base.expressions.Instance;
 import io.jenetics.util.IntRange;
@@ -28,7 +29,7 @@ public abstract class DynamicBoundedIntegerChromosome extends DynamicChromosome 
     }
 
     protected IntRange toRange(final DataDescription dataDescription) {
-        PropertiesBoundaries.Boundaries bounds = boundaries.get(new PropertySpecification(dataDescription.getName(), dataDescription));
+        PropertyBoundaries bounds = boundaries.get(new PropertySpecification(dataDescription.getName(), dataDescription));
 
         return IntRange.of(bounds.lower().intValue() + 1, bounds.upper().intValue() - 1);
     }

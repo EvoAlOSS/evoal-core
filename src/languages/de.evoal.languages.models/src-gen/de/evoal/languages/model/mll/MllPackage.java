@@ -2,7 +2,6 @@
  */
 package de.evoal.languages.model.mll;
 
-import de.evoal.languages.model.base.expressions.ExpressionsPackage;
 import de.evoal.languages.model.execution.ExecutionPackage;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -22,13 +21,12 @@ import org.eclipse.emf.ecore.EReference;
  * <!-- end-user-doc -->
  * <!-- begin-model-doc -->
  * 
- * The definition language allows us to define types and functions for
- *   configuration purposes
+ * The machine learning language allows us to define different aspects of machine learning.
  * 
  * <!-- end-model-doc -->
  * @see de.evoal.languages.model.mll.MllFactory
  * @model kind="package"
- *        annotation="http://www.eclipse.org/OCL/Import base='platform:/resource/de.evoal.languages.model.base/model/model.ecore#/' defs='platform:/resource/de.evoal.languages.model.base/model/definitions.ecore#/' exec='execution.ecore#/' expr='platform:/resource/de.evoal.languages.model.base/model/expressions.ecore#/'"
+ *        annotation="http://www.eclipse.org/OCL/Import base='platform:/resource/de.evoal.languages.model.base/model/model.ecore#/' defs='platform:/resource/de.evoal.languages.model.base/model/definitions.ecore#/' exec='execution.ecore#/' expr='platform:/resource/de.evoal.languages.model.base/model/expressions.ecore#/' generator='generator.ecore#/'"
  * @generated
  */
 public interface MllPackage extends EPackage {
@@ -84,31 +82,76 @@ public interface MllPackage extends EPackage {
 	int MACHINE_LEARNING_MODULE__IMPORTS = 0;
 
 	/**
-	 * The feature id for the '<em><b>Definitions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MACHINE_LEARNING_MODULE__DEFINITIONS = 1;
-
-	/**
-	 * The feature id for the '<em><b>Body</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MACHINE_LEARNING_MODULE__BODY = 2;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MACHINE_LEARNING_MODULE__NAME = 3;
+	int MACHINE_LEARNING_MODULE__NAME = 1;
+
+	/**
+	 * The feature id for the '<em><b>Task</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MACHINE_LEARNING_MODULE__TASK = 2;
+
+	/**
+	 * The feature id for the '<em><b>Validation</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MACHINE_LEARNING_MODULE__VALIDATION = 3;
+
+	/**
+	 * The feature id for the '<em><b>Preparation</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MACHINE_LEARNING_MODULE__PREPARATION = 4;
+
+	/**
+	 * The feature id for the '<em><b>Model</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MACHINE_LEARNING_MODULE__MODEL = 5;
+
+	/**
+	 * The feature id for the '<em><b>Gof</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MACHINE_LEARNING_MODULE__GOF = 6;
+
+	/**
+	 * The feature id for the '<em><b>Learning Use Case</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MACHINE_LEARNING_MODULE__LEARNING_USE_CASE = 7;
+
+	/**
+	 * The feature id for the '<em><b>Prediction Use Case</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MACHINE_LEARNING_MODULE__PREDICTION_USE_CASE = 8;
 
 	/**
 	 * The number of structural features of the '<em>Machine Learning Module</em>' class.
@@ -117,17 +160,17 @@ public interface MllPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MACHINE_LEARNING_MODULE_FEATURE_COUNT = 4;
+	int MACHINE_LEARNING_MODULE_FEATURE_COUNT = 9;
 
 	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.mll.impl.SurrogateDefinitionImpl <em>Surrogate Definition</em>}' class.
+	 * The meta object id for the '{@link de.evoal.languages.model.mll.impl.TaskDescriptionImpl <em>Task Description</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.mll.impl.SurrogateDefinitionImpl
-	 * @see de.evoal.languages.model.mll.impl.MllPackageImpl#getSurrogateDefinition()
+	 * @see de.evoal.languages.model.mll.impl.TaskDescriptionImpl
+	 * @see de.evoal.languages.model.mll.impl.MllPackageImpl#getTaskDescription()
 	 * @generated
 	 */
-	int SURROGATE_DEFINITION = 1;
+	int TASK_DESCRIPTION = 1;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -136,53 +179,7 @@ public interface MllPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SURROGATE_DEFINITION__NAME = ExecutionPackage.NAMED_VARIABLE__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Functions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SURROGATE_DEFINITION__FUNCTIONS = ExecutionPackage.NAMED_VARIABLE_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Surrogate Definition</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SURROGATE_DEFINITION_FEATURE_COUNT = ExecutionPackage.NAMED_VARIABLE_FEATURE_COUNT + 1;
-
-	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.mll.impl.PartialSurrogateFunctionDefinitionImpl <em>Partial Surrogate Function Definition</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.mll.impl.PartialSurrogateFunctionDefinitionImpl
-	 * @see de.evoal.languages.model.mll.impl.MllPackageImpl#getPartialSurrogateFunctionDefinition()
-	 * @generated
-	 */
-	int PARTIAL_SURROGATE_FUNCTION_DEFINITION = 2;
-
-	/**
-	 * The feature id for the '<em><b>Definition</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PARTIAL_SURROGATE_FUNCTION_DEFINITION__DEFINITION = ExpressionsPackage.INSTANCE__DEFINITION;
-
-	/**
-	 * The feature id for the '<em><b>Attributes</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PARTIAL_SURROGATE_FUNCTION_DEFINITION__ATTRIBUTES = ExpressionsPackage.INSTANCE__ATTRIBUTES;
+	int TASK_DESCRIPTION__NAME = ExecutionPackage.NAMED_VARIABLE__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Inputs</b></em>' reference list.
@@ -191,7 +188,7 @@ public interface MllPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PARTIAL_SURROGATE_FUNCTION_DEFINITION__INPUTS = ExpressionsPackage.INSTANCE_FEATURE_COUNT + 0;
+	int TASK_DESCRIPTION__INPUTS = ExecutionPackage.NAMED_VARIABLE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Outputs</b></em>' reference list.
@@ -200,71 +197,52 @@ public interface MllPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PARTIAL_SURROGATE_FUNCTION_DEFINITION__OUTPUTS = ExpressionsPackage.INSTANCE_FEATURE_COUNT + 1;
+	int TASK_DESCRIPTION__OUTPUTS = ExecutionPackage.NAMED_VARIABLE_FEATURE_COUNT + 1;
 
 	/**
-	 * The number of structural features of the '<em>Partial Surrogate Function Definition</em>' class.
+	 * The feature id for the '<em><b>Learning Data</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PARTIAL_SURROGATE_FUNCTION_DEFINITION_FEATURE_COUNT = ExpressionsPackage.INSTANCE_FEATURE_COUNT + 2;
+	int TASK_DESCRIPTION__LEARNING_DATA = ExecutionPackage.NAMED_VARIABLE_FEATURE_COUNT + 2;
 
 	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.mll.impl.PredictStatementImpl <em>Predict Statement</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.mll.impl.PredictStatementImpl
-	 * @see de.evoal.languages.model.mll.impl.MllPackageImpl#getPredictStatement()
-	 * @generated
-	 */
-	int PREDICT_STATEMENT = 3;
-
-	/**
-	 * The feature id for the '<em><b>Surrogate</b></em>' reference.
+	 * The feature id for the '<em><b>Testing Data</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PREDICT_STATEMENT__SURROGATE = ExecutionPackage.STATEMENT_FEATURE_COUNT + 0;
+	int TASK_DESCRIPTION__TESTING_DATA = ExecutionPackage.NAMED_VARIABLE_FEATURE_COUNT + 3;
 
 	/**
-	 * The feature id for the '<em><b>Model Filename</b></em>' attribute.
+	 * The feature id for the '<em><b>Model File</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PREDICT_STATEMENT__MODEL_FILENAME = ExecutionPackage.STATEMENT_FEATURE_COUNT + 1;
+	int TASK_DESCRIPTION__MODEL_FILE = ExecutionPackage.NAMED_VARIABLE_FEATURE_COUNT + 4;
 
 	/**
-	 * The feature id for the '<em><b>Training Data</b></em>' attribute.
+	 * The feature id for the '<em><b>Gof File</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PREDICT_STATEMENT__TRAINING_DATA = ExecutionPackage.STATEMENT_FEATURE_COUNT + 2;
+	int TASK_DESCRIPTION__GOF_FILE = ExecutionPackage.NAMED_VARIABLE_FEATURE_COUNT + 5;
 
 	/**
-	 * The feature id for the '<em><b>Measurements</b></em>' containment reference.
+	 * The number of structural features of the '<em>Task Description</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PREDICT_STATEMENT__MEASUREMENTS = ExecutionPackage.STATEMENT_FEATURE_COUNT + 3;
-
-	/**
-	 * The number of structural features of the '<em>Predict Statement</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PREDICT_STATEMENT_FEATURE_COUNT = ExecutionPackage.STATEMENT_FEATURE_COUNT + 4;
+	int TASK_DESCRIPTION_FEATURE_COUNT = ExecutionPackage.NAMED_VARIABLE_FEATURE_COUNT + 6;
 
 
 	/**
@@ -289,28 +267,6 @@ public interface MllPackage extends EPackage {
 	EReference getMachineLearningModule_Imports();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.mll.MachineLearningModule#getDefinitions <em>Definitions</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Definitions</em>'.
-	 * @see de.evoal.languages.model.mll.MachineLearningModule#getDefinitions()
-	 * @see #getMachineLearningModule()
-	 * @generated
-	 */
-	EReference getMachineLearningModule_Definitions();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link de.evoal.languages.model.mll.MachineLearningModule#getBody <em>Body</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Body</em>'.
-	 * @see de.evoal.languages.model.mll.MachineLearningModule#getBody()
-	 * @see #getMachineLearningModule()
-	 * @generated
-	 */
-	EReference getMachineLearningModule_Body();
-
-	/**
 	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.mll.MachineLearningModule#getName <em>Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -322,111 +278,157 @@ public interface MllPackage extends EPackage {
 	EAttribute getMachineLearningModule_Name();
 
 	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.mll.SurrogateDefinition <em>Surrogate Definition</em>}'.
+	 * Returns the meta object for the containment reference '{@link de.evoal.languages.model.mll.MachineLearningModule#getTask <em>Task</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Surrogate Definition</em>'.
-	 * @see de.evoal.languages.model.mll.SurrogateDefinition
+	 * @return the meta object for the containment reference '<em>Task</em>'.
+	 * @see de.evoal.languages.model.mll.MachineLearningModule#getTask()
+	 * @see #getMachineLearningModule()
 	 * @generated
 	 */
-	EClass getSurrogateDefinition();
+	EReference getMachineLearningModule_Task();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.mll.SurrogateDefinition#getFunctions <em>Functions</em>}'.
+	 * Returns the meta object for the containment reference '{@link de.evoal.languages.model.mll.MachineLearningModule#getValidation <em>Validation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Functions</em>'.
-	 * @see de.evoal.languages.model.mll.SurrogateDefinition#getFunctions()
-	 * @see #getSurrogateDefinition()
+	 * @return the meta object for the containment reference '<em>Validation</em>'.
+	 * @see de.evoal.languages.model.mll.MachineLearningModule#getValidation()
+	 * @see #getMachineLearningModule()
 	 * @generated
 	 */
-	EReference getSurrogateDefinition_Functions();
+	EReference getMachineLearningModule_Validation();
 
 	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.mll.PartialSurrogateFunctionDefinition <em>Partial Surrogate Function Definition</em>}'.
+	 * Returns the meta object for the containment reference '{@link de.evoal.languages.model.mll.MachineLearningModule#getPreparation <em>Preparation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Partial Surrogate Function Definition</em>'.
-	 * @see de.evoal.languages.model.mll.PartialSurrogateFunctionDefinition
+	 * @return the meta object for the containment reference '<em>Preparation</em>'.
+	 * @see de.evoal.languages.model.mll.MachineLearningModule#getPreparation()
+	 * @see #getMachineLearningModule()
 	 * @generated
 	 */
-	EClass getPartialSurrogateFunctionDefinition();
+	EReference getMachineLearningModule_Preparation();
 
 	/**
-	 * Returns the meta object for the reference list '{@link de.evoal.languages.model.mll.PartialSurrogateFunctionDefinition#getInputs <em>Inputs</em>}'.
+	 * Returns the meta object for the containment reference '{@link de.evoal.languages.model.mll.MachineLearningModule#getModel <em>Model</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Model</em>'.
+	 * @see de.evoal.languages.model.mll.MachineLearningModule#getModel()
+	 * @see #getMachineLearningModule()
+	 * @generated
+	 */
+	EReference getMachineLearningModule_Model();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link de.evoal.languages.model.mll.MachineLearningModule#getGof <em>Gof</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Gof</em>'.
+	 * @see de.evoal.languages.model.mll.MachineLearningModule#getGof()
+	 * @see #getMachineLearningModule()
+	 * @generated
+	 */
+	EReference getMachineLearningModule_Gof();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link de.evoal.languages.model.mll.MachineLearningModule#getLearningUseCase <em>Learning Use Case</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Learning Use Case</em>'.
+	 * @see de.evoal.languages.model.mll.MachineLearningModule#getLearningUseCase()
+	 * @see #getMachineLearningModule()
+	 * @generated
+	 */
+	EReference getMachineLearningModule_LearningUseCase();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link de.evoal.languages.model.mll.MachineLearningModule#getPredictionUseCase <em>Prediction Use Case</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Prediction Use Case</em>'.
+	 * @see de.evoal.languages.model.mll.MachineLearningModule#getPredictionUseCase()
+	 * @see #getMachineLearningModule()
+	 * @generated
+	 */
+	EReference getMachineLearningModule_PredictionUseCase();
+
+	/**
+	 * Returns the meta object for class '{@link de.evoal.languages.model.mll.TaskDescription <em>Task Description</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Task Description</em>'.
+	 * @see de.evoal.languages.model.mll.TaskDescription
+	 * @generated
+	 */
+	EClass getTaskDescription();
+
+	/**
+	 * Returns the meta object for the reference list '{@link de.evoal.languages.model.mll.TaskDescription#getInputs <em>Inputs</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference list '<em>Inputs</em>'.
-	 * @see de.evoal.languages.model.mll.PartialSurrogateFunctionDefinition#getInputs()
-	 * @see #getPartialSurrogateFunctionDefinition()
+	 * @see de.evoal.languages.model.mll.TaskDescription#getInputs()
+	 * @see #getTaskDescription()
 	 * @generated
 	 */
-	EReference getPartialSurrogateFunctionDefinition_Inputs();
+	EReference getTaskDescription_Inputs();
 
 	/**
-	 * Returns the meta object for the reference list '{@link de.evoal.languages.model.mll.PartialSurrogateFunctionDefinition#getOutputs <em>Outputs</em>}'.
+	 * Returns the meta object for the reference list '{@link de.evoal.languages.model.mll.TaskDescription#getOutputs <em>Outputs</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference list '<em>Outputs</em>'.
-	 * @see de.evoal.languages.model.mll.PartialSurrogateFunctionDefinition#getOutputs()
-	 * @see #getPartialSurrogateFunctionDefinition()
+	 * @see de.evoal.languages.model.mll.TaskDescription#getOutputs()
+	 * @see #getTaskDescription()
 	 * @generated
 	 */
-	EReference getPartialSurrogateFunctionDefinition_Outputs();
+	EReference getTaskDescription_Outputs();
 
 	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.mll.PredictStatement <em>Predict Statement</em>}'.
+	 * Returns the meta object for the attribute list '{@link de.evoal.languages.model.mll.TaskDescription#getLearningData <em>Learning Data</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Predict Statement</em>'.
-	 * @see de.evoal.languages.model.mll.PredictStatement
+	 * @return the meta object for the attribute list '<em>Learning Data</em>'.
+	 * @see de.evoal.languages.model.mll.TaskDescription#getLearningData()
+	 * @see #getTaskDescription()
 	 * @generated
 	 */
-	EClass getPredictStatement();
+	EAttribute getTaskDescription_LearningData();
 
 	/**
-	 * Returns the meta object for the reference '{@link de.evoal.languages.model.mll.PredictStatement#getSurrogate <em>Surrogate</em>}'.
+	 * Returns the meta object for the attribute list '{@link de.evoal.languages.model.mll.TaskDescription#getTestingData <em>Testing Data</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Surrogate</em>'.
-	 * @see de.evoal.languages.model.mll.PredictStatement#getSurrogate()
-	 * @see #getPredictStatement()
+	 * @return the meta object for the attribute list '<em>Testing Data</em>'.
+	 * @see de.evoal.languages.model.mll.TaskDescription#getTestingData()
+	 * @see #getTaskDescription()
 	 * @generated
 	 */
-	EReference getPredictStatement_Surrogate();
+	EAttribute getTaskDescription_TestingData();
 
 	/**
-	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.mll.PredictStatement#getModelFilename <em>Model Filename</em>}'.
+	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.mll.TaskDescription#getModelFile <em>Model File</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Model Filename</em>'.
-	 * @see de.evoal.languages.model.mll.PredictStatement#getModelFilename()
-	 * @see #getPredictStatement()
+	 * @return the meta object for the attribute '<em>Model File</em>'.
+	 * @see de.evoal.languages.model.mll.TaskDescription#getModelFile()
+	 * @see #getTaskDescription()
 	 * @generated
 	 */
-	EAttribute getPredictStatement_ModelFilename();
+	EAttribute getTaskDescription_ModelFile();
 
 	/**
-	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.mll.PredictStatement#getTrainingData <em>Training Data</em>}'.
+	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.mll.TaskDescription#getGofFile <em>Gof File</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Training Data</em>'.
-	 * @see de.evoal.languages.model.mll.PredictStatement#getTrainingData()
-	 * @see #getPredictStatement()
+	 * @return the meta object for the attribute '<em>Gof File</em>'.
+	 * @see de.evoal.languages.model.mll.TaskDescription#getGofFile()
+	 * @see #getTaskDescription()
 	 * @generated
 	 */
-	EAttribute getPredictStatement_TrainingData();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link de.evoal.languages.model.mll.PredictStatement#getMeasurements <em>Measurements</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Measurements</em>'.
-	 * @see de.evoal.languages.model.mll.PredictStatement#getMeasurements()
-	 * @see #getPredictStatement()
-	 * @generated
-	 */
-	EReference getPredictStatement_Measurements();
+	EAttribute getTaskDescription_GofFile();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -469,22 +471,6 @@ public interface MllPackage extends EPackage {
 		EReference MACHINE_LEARNING_MODULE__IMPORTS = eINSTANCE.getMachineLearningModule_Imports();
 
 		/**
-		 * The meta object literal for the '<em><b>Definitions</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference MACHINE_LEARNING_MODULE__DEFINITIONS = eINSTANCE.getMachineLearningModule_Definitions();
-
-		/**
-		 * The meta object literal for the '<em><b>Body</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference MACHINE_LEARNING_MODULE__BODY = eINSTANCE.getMachineLearningModule_Body();
-
-		/**
 		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -493,32 +479,70 @@ public interface MllPackage extends EPackage {
 		EAttribute MACHINE_LEARNING_MODULE__NAME = eINSTANCE.getMachineLearningModule_Name();
 
 		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.mll.impl.SurrogateDefinitionImpl <em>Surrogate Definition</em>}' class.
+		 * The meta object literal for the '<em><b>Task</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.mll.impl.SurrogateDefinitionImpl
-		 * @see de.evoal.languages.model.mll.impl.MllPackageImpl#getSurrogateDefinition()
 		 * @generated
 		 */
-		EClass SURROGATE_DEFINITION = eINSTANCE.getSurrogateDefinition();
+		EReference MACHINE_LEARNING_MODULE__TASK = eINSTANCE.getMachineLearningModule_Task();
 
 		/**
-		 * The meta object literal for the '<em><b>Functions</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Validation</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference SURROGATE_DEFINITION__FUNCTIONS = eINSTANCE.getSurrogateDefinition_Functions();
+		EReference MACHINE_LEARNING_MODULE__VALIDATION = eINSTANCE.getMachineLearningModule_Validation();
 
 		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.mll.impl.PartialSurrogateFunctionDefinitionImpl <em>Partial Surrogate Function Definition</em>}' class.
+		 * The meta object literal for the '<em><b>Preparation</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.mll.impl.PartialSurrogateFunctionDefinitionImpl
-		 * @see de.evoal.languages.model.mll.impl.MllPackageImpl#getPartialSurrogateFunctionDefinition()
 		 * @generated
 		 */
-		EClass PARTIAL_SURROGATE_FUNCTION_DEFINITION = eINSTANCE.getPartialSurrogateFunctionDefinition();
+		EReference MACHINE_LEARNING_MODULE__PREPARATION = eINSTANCE.getMachineLearningModule_Preparation();
+
+		/**
+		 * The meta object literal for the '<em><b>Model</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MACHINE_LEARNING_MODULE__MODEL = eINSTANCE.getMachineLearningModule_Model();
+
+		/**
+		 * The meta object literal for the '<em><b>Gof</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MACHINE_LEARNING_MODULE__GOF = eINSTANCE.getMachineLearningModule_Gof();
+
+		/**
+		 * The meta object literal for the '<em><b>Learning Use Case</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MACHINE_LEARNING_MODULE__LEARNING_USE_CASE = eINSTANCE.getMachineLearningModule_LearningUseCase();
+
+		/**
+		 * The meta object literal for the '<em><b>Prediction Use Case</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MACHINE_LEARNING_MODULE__PREDICTION_USE_CASE = eINSTANCE.getMachineLearningModule_PredictionUseCase();
+
+		/**
+		 * The meta object literal for the '{@link de.evoal.languages.model.mll.impl.TaskDescriptionImpl <em>Task Description</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.evoal.languages.model.mll.impl.TaskDescriptionImpl
+		 * @see de.evoal.languages.model.mll.impl.MllPackageImpl#getTaskDescription()
+		 * @generated
+		 */
+		EClass TASK_DESCRIPTION = eINSTANCE.getTaskDescription();
 
 		/**
 		 * The meta object literal for the '<em><b>Inputs</b></em>' reference list feature.
@@ -526,7 +550,7 @@ public interface MllPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference PARTIAL_SURROGATE_FUNCTION_DEFINITION__INPUTS = eINSTANCE.getPartialSurrogateFunctionDefinition_Inputs();
+		EReference TASK_DESCRIPTION__INPUTS = eINSTANCE.getTaskDescription_Inputs();
 
 		/**
 		 * The meta object literal for the '<em><b>Outputs</b></em>' reference list feature.
@@ -534,49 +558,39 @@ public interface MllPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference PARTIAL_SURROGATE_FUNCTION_DEFINITION__OUTPUTS = eINSTANCE.getPartialSurrogateFunctionDefinition_Outputs();
+		EReference TASK_DESCRIPTION__OUTPUTS = eINSTANCE.getTaskDescription_Outputs();
 
 		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.mll.impl.PredictStatementImpl <em>Predict Statement</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.mll.impl.PredictStatementImpl
-		 * @see de.evoal.languages.model.mll.impl.MllPackageImpl#getPredictStatement()
-		 * @generated
-		 */
-		EClass PREDICT_STATEMENT = eINSTANCE.getPredictStatement();
-
-		/**
-		 * The meta object literal for the '<em><b>Surrogate</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Learning Data</b></em>' attribute list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference PREDICT_STATEMENT__SURROGATE = eINSTANCE.getPredictStatement_Surrogate();
+		EAttribute TASK_DESCRIPTION__LEARNING_DATA = eINSTANCE.getTaskDescription_LearningData();
 
 		/**
-		 * The meta object literal for the '<em><b>Model Filename</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Testing Data</b></em>' attribute list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute PREDICT_STATEMENT__MODEL_FILENAME = eINSTANCE.getPredictStatement_ModelFilename();
+		EAttribute TASK_DESCRIPTION__TESTING_DATA = eINSTANCE.getTaskDescription_TestingData();
 
 		/**
-		 * The meta object literal for the '<em><b>Training Data</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Model File</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute PREDICT_STATEMENT__TRAINING_DATA = eINSTANCE.getPredictStatement_TrainingData();
+		EAttribute TASK_DESCRIPTION__MODEL_FILE = eINSTANCE.getTaskDescription_ModelFile();
 
 		/**
-		 * The meta object literal for the '<em><b>Measurements</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Gof File</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference PREDICT_STATEMENT__MEASUREMENTS = eINSTANCE.getPredictStatement_Measurements();
+		EAttribute TASK_DESCRIPTION__GOF_FILE = eINSTANCE.getTaskDescription_GofFile();
 
 	}
 

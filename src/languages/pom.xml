@@ -25,6 +25,14 @@
 		<url.eclipse>https://download.eclipse.org/releases/2022-12/202212071000</url.eclipse>
 		<url.orbit>https://download.eclipse.org/tools/orbit/downloads/drops/R20221123021534/repository</url.orbit>
 	</properties>
+	
+	<dependencies>
+		<dependency>
+		    <groupId>io.typefox.xtext2langium</groupId>
+		    <artifactId>io.typefox.xtext2langium</artifactId>
+		    <version>0.4.0</version>
+		</dependency>
+	</dependencies>
 
 	<build>
 		<plugins>
@@ -309,7 +317,7 @@
 		<module>de.evoal.languages.model.constraints</module>
 
 		<module>de.evoal.languages.model.interpreter</module>
-
+		
 		<module>de.evoal.languages.releng.feature</module>
 		<module>de.evoal.languages.releng.site</module>
 	</modules>

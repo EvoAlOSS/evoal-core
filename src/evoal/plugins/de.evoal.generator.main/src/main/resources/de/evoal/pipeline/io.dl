@@ -13,6 +13,12 @@ module de.evoal.pipeline.io {
 	}
 	
 	/**
+	 * Producer of empty instances.
+	 */
+	type empty {
+	}
+
+	/**
 	 * Writes the specified data to a file.
 	 */
 	type writer {

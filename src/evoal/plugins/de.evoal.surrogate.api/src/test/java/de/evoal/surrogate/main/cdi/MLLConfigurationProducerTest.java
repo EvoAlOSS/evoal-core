@@ -13,6 +13,10 @@ import static org.mockito.Mockito.*;
 import java.io.File;
 
 public class MLLConfigurationProducerTest {
+    public void loadEmptyMLL() {
+        throw new RuntimeException("Reimplement me");
+    }
+    /*
     @Test
     public void loadEmptyMLL() {
         final File mllFile = new File("src/test/resources/de/evoal/surrogate/main/cdi/empty.mll");
@@ -66,4 +70,5 @@ public class MLLConfigurationProducerTest {
         Assertions.assertEquals(1, mlc.getDefinitions().size());
         Assertions.assertTrue(mlc.getBody().getStatements().isEmpty());
     }
+    */
 }

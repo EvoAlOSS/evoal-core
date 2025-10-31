@@ -57,7 +57,7 @@
         <dependency>
             <groupId>de.evoal</groupId>
             <artifactId>core.interpreter</artifactId>
-            <version>2025.10.0.rc1.SNAPSHOT</version>
+            <version>${project.version}</version>
             <scope>compile</scope>
         </dependency>
 

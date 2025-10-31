@@ -1,5 +1,6 @@
 package de.evoal.core.api.cdi;
 
+import de.evoal.core.api.ecore.Space;
 import de.evoal.core.api.utils.InitializationException;
 import de.evoal.languages.model.base.expressions.Instance;
 

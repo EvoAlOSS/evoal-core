@@ -3,6 +3,7 @@ package de.evoal.optimisation.main.producer;
 import de.evoal.core.api.properties.PropertySpecification;
 import de.evoal.core.api.properties.info.PropertiesBoundaries;
 import de.evoal.core.api.properties.info.PropertiesRanges;
+import de.evoal.core.api.properties.info.PropertyBoundaries;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
@@ -14,7 +15,7 @@ public class PropertiesRangesProducer {
         final PropertiesRanges ranges = new PropertiesRanges();
 
         for(final PropertySpecification specification : boundaries.getSpecifications()) {
-            final PropertiesBoundaries.Boundaries bounds = boundaries.get(specification);
+            final PropertyBoundaries bounds = boundaries.get(specification);
 
             ranges.put(specification, bounds.upper().doubleValue() - bounds.lower().doubleValue());
         }

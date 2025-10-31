@@ -3,14 +3,9 @@ package de.evoal.surrogate.main.gof.rsquare;
 import de.evoal.core.api.ecore.Space;
 import de.evoal.core.api.ecore.TypedEObject;
 import de.evoal.core.api.ecore.stream.EObjectPairStreamSupplier;
-import de.evoal.core.api.properties.Properties;
-import de.evoal.core.api.utils.Requirements;
 import de.evoal.core.interpreter.api.InterpreterState;
-import de.evoal.surrogate.api.SurrogateInformationCalculator;
-import de.evoal.surrogate.api.configuration.Parameter;
-import de.evoal.surrogate.api.configuration.SurrogateConfiguration;
-import de.evoal.surrogate.api.function.SurrogateFunction;
-import lombok.NonNull;
+import de.evoal.surrogate.api.io.pson.Parameter;
+import de.evoal.surrogate.api.training.SurrogateInformationCalculator;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.math3.stat.descriptive.moment.Mean;
 import org.apache.commons.math3.stat.descriptive.moment.StandardDeviation;
@@ -28,33 +23,23 @@ import java.util.Optional;
 @Dependent
 @Named("de.evoal.surrogate.ml.R²")
 @Slf4j
-public class RSquareCalculator implements SurrogateInformationCalculator {
-
-	/**
-	 * Surrogate configuration for attaching the calculated r² value.
-	 */
-	private SurrogateConfiguration config;
-
-	/**
-	 * The actual surrogate function.
-	 */
-	private SurrogateFunction function;
-
-	/**
-	 * Supplier for the training data.
-	 */
-	private EObjectPairStreamSupplier training;
+public class RSquareCalculator extends SurrogateInformationCalculator {
 
 	@Override
-	public Optional<Object> call(final InterpreterState context, final Object[] arguments) {
-		final Space inSpace = function.getInputSpecification();
-		final Space outSpace = function.getOutputSpecification();
+	public Optional<Object> calculate(final InterpreterState context, final Object[] arguments) {
+		log.info("{}", context);
+
+		final EObjectPairStreamSupplier trainingSupplier = helper.loadTrainingDataPaired(context);
+
+		final Space inSpace = functionData.function().getInput();
+		final Space outSpace = functionData.function().getOutput();
 
 		log.info("calculating r² of surrogate function.");
-		final double [][] yValues = training.get()
+		final double [][] yValues = trainingSupplier
+											.get()
 											.map(Pair::getSecond)
-				   							.map(t -> outSpace.stream().mapToDouble(f -> t.eGetAsDouble(f)).toArray())
-											.toArray(size -> new double[size][]);
+				   							.map(t -> outSpace.stream().mapToDouble(t::eGetAsDouble).toArray())
+											.toArray(double[][]::new);
 
 		final double [] means = new double [yValues[0].length];
 		for(int i = 0; i < means.length; ++i) {
@@ -73,13 +58,15 @@ public class RSquareCalculator implements SurrogateInformationCalculator {
 		}
 
 		final double [][] errors =
-				training.get()
+				trainingSupplier
+						.get()
 						.map(pair -> {
 							final TypedEObject input = pair.getFirst();
 							final TypedEObject expected = pair.getSecond();
 							final TypedEObject calculated = new TypedEObject(expected.eClass());
 
-							function.apply(input, calculated);
+							functionData.function()
+										.apply(input, calculated);
 
 							return expected.eClass()
 											.getEAllStructuralFeatures()
@@ -107,7 +94,9 @@ public class RSquareCalculator implements SurrogateInformationCalculator {
 					.value(rSquare)
 					.build();
 
-			config.addOutputParameter(feature.getName(), goodnessOfFit);
+			functionData.writer()
+					.get()
+					.addOutputFeatureInformation(feature, goodnessOfFit);
 
 			index += 1;
 		}
@@ -118,15 +107,5 @@ public class RSquareCalculator implements SurrogateInformationCalculator {
 	@Override
 	public String toString() {
 		return "r²";
-	}
-
-	@Override
-	public void configure(final @NonNull SurrogateFunction function, final @NonNull SurrogateConfiguration config, final @NonNull EObjectPairStreamSupplier training) {
-		Requirements.requireNotNull(function);
-		Requirements.requireNotNull(config);
-
-		this.function = function;
-		this.config = config;
-		this.training = training;
 	}
 }

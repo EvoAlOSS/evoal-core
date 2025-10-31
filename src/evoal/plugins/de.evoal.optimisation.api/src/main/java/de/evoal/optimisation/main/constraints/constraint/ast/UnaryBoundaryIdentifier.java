@@ -7,11 +7,10 @@ import de.evoal.languages.model.base.expressions.SelfReference;
 import de.evoal.languages.model.base.expressions.*;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.Optional;
+
 @Slf4j
 public class UnaryBoundaryIdentifier extends ExpressionsSwitch<Object> {
-    public record Boundary(boolean isLowerBoundary, DataDescription data, Number boundary) {
-    }
-
     private final DataDescription context;
 
     public UnaryBoundaryIdentifier(final DataDescription context) {
@@ -60,35 +59,22 @@ public class UnaryBoundaryIdentifier extends ExpressionsSwitch<Object> {
         if(!((leftValue instanceof DataDescription && rightValue instanceof Number) ||
              (rightValue instanceof DataDescription && leftValue instanceof Number))) {
             // not a supported relation
-            return null;
+            return Optional.empty();
         }
 
-        switch (object.getComparison().get(0).getOperator()) {
-            case GREATER_EQUAL:
-            case GREATER_THAN: {
-                if(leftValue instanceof DataDescription) {
-                    return new Boundary(true, (DataDescription) leftValue, (Number)rightValue);
-                } else {
-                    // upper
-                    return new Boundary(false, (DataDescription) rightValue, (Number)leftValue);
-                }
-            }
-            case LESS_EQUAL:
-            case LESS_THAN:
-            {
-                if(leftValue instanceof DataDescription) {
-                    return new Boundary(false, (DataDescription) leftValue, (Number)rightValue);
-                } else {
-                    return new Boundary(true, (DataDescription) rightValue, (Number)leftValue);
-                }
-            }
-            case EQUAL:
-            case UNEQUAL: {
-                throw new IllegalArgumentException("(Un)equal is not allowed");
-            }
+        final ComparisonOperator operator = object.getComparison().get(0).getOperator();
+
+        if(ComparisonOperator.EQUAL.equals(operator) || ComparisonOperator.UNEQUAL.equals(operator)) {
+            log.info("The (un)equal operator is not allowed as an boundary comparison.");
+            return Optional.empty();
         }
 
-        return null;
+        final boolean isLowerBoundary = ComparisonOperator.GREATER_EQUAL.equals(operator) || ComparisonOperator.GREATER_THAN.equals(operator);
+        final DataDescription data = (DataDescription) (leftValue instanceof DataDescription ? leftValue : rightValue);
+        final Number boundary = (Number) (leftValue instanceof Number ? leftValue : rightValue);
+        final boolean inclusive = ComparisonOperator.GREATER_EQUAL.equals(operator) || ComparisonOperator.LESS_EQUAL.equals(operator);
+
+        return Optional.of(new Boundary(isLowerBoundary, data, boundary, inclusive));
     }
 
 

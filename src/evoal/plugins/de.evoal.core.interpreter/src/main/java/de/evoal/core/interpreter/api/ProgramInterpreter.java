@@ -1,10 +1,8 @@
 package de.evoal.core.interpreter.api;
 
+import de.evoal.core.api.ecore.Space;
 import de.evoal.languages.model.execution.*;
 import lombok.extern.slf4j.Slf4j;
-import org.eclipse.emf.ecore.EClass;
-
-import java.util.function.Supplier;
 
 @Slf4j
 public class ProgramInterpreter {
@@ -24,17 +22,16 @@ public class ProgramInterpreter {
         executionSupplier = supplier;
     }
 
-    public void execute(final Program program, final EClass space) {
+    public void execute(final Program program, final Space space) {
         log.info("Executing program '{}'.", program.getMain().getName());
         state = new InterpreterState();
         state.setSpace(space);
 
         final ProgramExecutionSwitch executionSwitch = executionSupplier.apply(state);
-        final Function mainFunction = program.getMain();
 
-        executionSwitch.doSwitch(mainFunction);
+        executionSwitch.doSwitch(program);
     }
-
+    /*
     public void executeAndKeepState(final Program program) {
         log.info("Executing program '{}' and keeping interpreter state.", program.getMain().getName());
 
@@ -43,4 +40,5 @@ public class ProgramInterpreter {
 
         executionSwitch.caseFunction(mainFunction);
     }
+    */
 }

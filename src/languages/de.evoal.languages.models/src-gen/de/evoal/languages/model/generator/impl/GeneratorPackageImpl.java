@@ -14,10 +14,12 @@ import de.evoal.languages.model.base.types.TypesPackage;
 import de.evoal.languages.model.execution.ExecutionPackage;
 
 import de.evoal.languages.model.generator.ApplyStatement;
+import de.evoal.languages.model.generator.ConcreteStep;
 import de.evoal.languages.model.generator.GeneratorFactory;
 import de.evoal.languages.model.generator.GeneratorModule;
 import de.evoal.languages.model.generator.GeneratorPackage;
 import de.evoal.languages.model.generator.PipelineDefinition;
+import de.evoal.languages.model.generator.PipelineStep;
 import de.evoal.languages.model.generator.Step;
 
 import org.eclipse.emf.ecore.EAttribute;
@@ -54,6 +56,20 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 	 * @generated
 	 */
 	private EClass stepEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass pipelineStepEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass concreteStepEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -215,8 +231,8 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 	 * @generated
 	 */
 	@Override
-	public EReference getStep_Instance() {
-		return (EReference)stepEClass.getEStructuralFeatures().get(0);
+	public EClass getPipelineStep() {
+		return pipelineStepEClass;
 	}
 
 	/**
@@ -225,8 +241,8 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 	 * @generated
 	 */
 	@Override
-	public EReference getStep_Reads() {
-		return (EReference)stepEClass.getEStructuralFeatures().get(1);
+	public EReference getPipelineStep_Definition() {
+		return (EReference)pipelineStepEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -235,8 +251,38 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 	 * @generated
 	 */
 	@Override
-	public EReference getStep_Writes() {
-		return (EReference)stepEClass.getEStructuralFeatures().get(2);
+	public EClass getConcreteStep() {
+		return concreteStepEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getConcreteStep_Instance() {
+		return (EReference)concreteStepEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getConcreteStep_Reads() {
+		return (EReference)concreteStepEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getConcreteStep_Writes() {
+		return (EReference)concreteStepEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -318,9 +364,14 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 		createEReference(pipelineDefinitionEClass, PIPELINE_DEFINITION__STEPS);
 
 		stepEClass = createEClass(STEP);
-		createEReference(stepEClass, STEP__INSTANCE);
-		createEReference(stepEClass, STEP__READS);
-		createEReference(stepEClass, STEP__WRITES);
+
+		pipelineStepEClass = createEClass(PIPELINE_STEP);
+		createEReference(pipelineStepEClass, PIPELINE_STEP__DEFINITION);
+
+		concreteStepEClass = createEClass(CONCRETE_STEP);
+		createEReference(concreteStepEClass, CONCRETE_STEP__INSTANCE);
+		createEReference(concreteStepEClass, CONCRETE_STEP__READS);
+		createEReference(concreteStepEClass, CONCRETE_STEP__WRITES);
 
 		applyStatementEClass = createEClass(APPLY_STATEMENT);
 		createEAttribute(applyStatementEClass, APPLY_STATEMENT__FILE);
@@ -362,6 +413,9 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 
 		// Add supertypes to classes
 		pipelineDefinitionEClass.getESuperTypes().add(theExecutionPackage.getNamedVariable());
+		stepEClass.getESuperTypes().add(theExpressionsPackage.getLiteral());
+		pipelineStepEClass.getESuperTypes().add(this.getStep());
+		concreteStepEClass.getESuperTypes().add(this.getStep());
 		applyStatementEClass.getESuperTypes().add(theExecutionPackage.getStatement());
 
 		// Initialize classes and features; add operations and parameters
@@ -374,10 +428,17 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 		initEClass(pipelineDefinitionEClass, PipelineDefinition.class, "PipelineDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getPipelineDefinition_Steps(), this.getStep(), null, "steps", null, 0, -1, PipelineDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
-		initEClass(stepEClass, Step.class, "Step", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getStep_Instance(), theExpressionsPackage.getInstance(), null, "instance", null, 1, 1, Step.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getStep_Reads(), theExpressionsPackage.getTypeDefinitionReference(), null, "reads", null, 0, -1, Step.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEReference(getStep_Writes(), theExpressionsPackage.getTypeDefinitionReference(), null, "writes", null, 0, -1, Step.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEClass(stepEClass, Step.class, "Step", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		addEOperation(stepEClass, this.getStep(), "getValue", 1, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(pipelineStepEClass, PipelineStep.class, "PipelineStep", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getPipelineStep_Definition(), this.getPipelineDefinition(), null, "definition", null, 1, 1, PipelineStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(concreteStepEClass, ConcreteStep.class, "ConcreteStep", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getConcreteStep_Instance(), theExpressionsPackage.getInstance(), null, "instance", null, 1, 1, ConcreteStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getConcreteStep_Reads(), theExpressionsPackage.getTypeDefinitionReference(), null, "reads", null, 0, -1, ConcreteStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getConcreteStep_Writes(), theExpressionsPackage.getTypeDefinitionReference(), null, "writes", null, 0, -1, ConcreteStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		initEClass(applyStatementEClass, ApplyStatement.class, "ApplyStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getApplyStatement_File(), ecorePackage.getEString(), "file", null, 0, 1, ApplyStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -441,13 +502,13 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 			   "nullFree", "false"
 		   });
 		addAnnotation
-		  (getStep_Reads(),
+		  (getConcreteStep_Reads(),
 		   source,
 		   new String[] {
 			   "nullFree", "false"
 		   });
 		addAnnotation
-		  (getStep_Writes(),
+		  (getConcreteStep_Writes(),
 		   source,
 		   new String[] {
 			   "nullFree", "false"

@@ -46,6 +46,7 @@ import de.evoal.languages.model.base.types.StringType;
 import de.evoal.languages.model.base.types.TypesPackage;
 import de.evoal.languages.model.base.types.VoidType;
 import de.evoal.languages.model.execution.Block;
+import de.evoal.languages.model.execution.CallBuiltinFunction;
 import de.evoal.languages.model.execution.CounterRange;
 import de.evoal.languages.model.execution.ExecutionPackage;
 import de.evoal.languages.model.execution.ForStatement;
@@ -53,10 +54,11 @@ import de.evoal.languages.model.execution.NamedVariable;
 import de.evoal.languages.model.execution.ValueRange;
 import de.evoal.languages.model.execution.VariableReference;
 import de.evoal.languages.model.generator.ApplyStatement;
+import de.evoal.languages.model.generator.ConcreteStep;
 import de.evoal.languages.model.generator.GeneratorModule;
 import de.evoal.languages.model.generator.GeneratorPackage;
 import de.evoal.languages.model.generator.PipelineDefinition;
-import de.evoal.languages.model.generator.Step;
+import de.evoal.languages.model.generator.PipelineStep;
 import de.evoal.languages.model.generator.dsl.services.GeneratorDSLGrammarAccess;
 import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
@@ -108,6 +110,9 @@ public class GeneratorDSLSemanticSequencer extends BaseLanguageSemanticSequencer
 			switch (semanticObject.eClass().getClassifierID()) {
 			case ExecutionPackage.BLOCK:
 				sequence_BodyRule(context, (Block) semanticObject); 
+				return; 
+			case ExecutionPackage.CALL_BUILTIN_FUNCTION:
+				sequence_CallBuiltInFunctionRule(context, (CallBuiltinFunction) semanticObject); 
 				return; 
 			case ExecutionPackage.COUNTER_RANGE:
 				sequence_CounterRangeRule(context, (CounterRange) semanticObject); 
@@ -209,14 +214,17 @@ public class GeneratorDSLSemanticSequencer extends BaseLanguageSemanticSequencer
 			case GeneratorPackage.APPLY_STATEMENT:
 				sequence_ApplyStatementRule(context, (ApplyStatement) semanticObject); 
 				return; 
+			case GeneratorPackage.CONCRETE_STEP:
+				sequence_ConcreteStepRule(context, (ConcreteStep) semanticObject); 
+				return; 
 			case GeneratorPackage.GENERATOR_MODULE:
 				sequence_GeneratorModuleRule(context, (GeneratorModule) semanticObject); 
 				return; 
 			case GeneratorPackage.PIPELINE_DEFINITION:
 				sequence_PipelineDefinitionRule(context, (PipelineDefinition) semanticObject); 
 				return; 
-			case GeneratorPackage.STEP:
-				sequence_StepRule(context, (Step) semanticObject); 
+			case GeneratorPackage.PIPELINE_STEP:
+				sequence_PipelineStepRule(context, (PipelineStep) semanticObject); 
 				return; 
 			}
 		else if (epackage == TypesPackage.eINSTANCE)
@@ -292,6 +300,40 @@ public class GeneratorDSLSemanticSequencer extends BaseLanguageSemanticSequencer
 	 * </pre>
 	 */
 	protected void sequence_BodyRule(ISerializationContext context, Block semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     StatementRule returns CallBuiltinFunction
+	 *     CallBuiltInFunctionRule returns CallBuiltinFunction
+	 *
+	 * Constraint:
+	 *     (definition=[FunctionDefinition|QualifiedName] (parameters+=ExpressionRule parameters+=ExpressionRule*)?)
+	 * </pre>
+	 */
+	protected void sequence_CallBuiltInFunctionRule(ISerializationContext context, CallBuiltinFunction semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     StepRule returns ConcreteStep
+	 *     ConcreteStepRule returns ConcreteStep
+	 *
+	 * Constraint:
+	 *     (
+	 *         instance=InstanceLiteralRule 
+	 *         (reads+=BaseDataReferenceRule reads+=BaseDataReferenceRule*)? 
+	 *         (writes+=BaseDataReferenceRule writes+=BaseDataReferenceRule*)?
+	 *     )
+	 * </pre>
+	 */
+	protected void sequence_ConcreteStepRule(ISerializationContext context, ConcreteStep semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -416,18 +458,21 @@ public class GeneratorDSLSemanticSequencer extends BaseLanguageSemanticSequencer
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     StepRule returns Step
+	 *     StepRule returns PipelineStep
+	 *     PipelineStepRule returns PipelineStep
 	 *
 	 * Constraint:
-	 *     (
-	 *         instance=InstanceLiteralRule 
-	 *         (reads+=BaseDataReferenceRule reads+=BaseDataReferenceRule*)? 
-	 *         (writes+=BaseDataReferenceRule writes+=BaseDataReferenceRule*)?
-	 *     )
+	 *     definition=[PipelineDefinition|QualifiedName]
 	 * </pre>
 	 */
-	protected void sequence_StepRule(ISerializationContext context, Step semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+	protected void sequence_PipelineStepRule(ISerializationContext context, PipelineStep semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, GeneratorPackage.Literals.PIPELINE_STEP__DEFINITION) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, GeneratorPackage.Literals.PIPELINE_STEP__DEFINITION));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getPipelineStepRuleAccess().getDefinitionPipelineDefinitionQualifiedNameParserRuleCall_1_0_1(), semanticObject.eGet(GeneratorPackage.Literals.PIPELINE_STEP__DEFINITION, false));
+		feeder.finish();
 	}
 	
 	

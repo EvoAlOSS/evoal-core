@@ -4,7 +4,7 @@ import de.evoal.core.api.utils.InitializationException;
 import de.evoal.languages.model.base.expressions.Instance;
 import de.evoal.pipeline.api.distribution.Distribution;
 import de.evoal.pipeline.api.distribution.DistributionFactory;
-import de.evoal.pipeline.api.model.ComponentImpl;
+import de.evoal.pipeline.api.model.PipelineComponentImpl;
 import de.evoal.core.api.ecore.TypedEObject;
 import lombok.NonNull;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -17,7 +17,7 @@ import java.util.List;
 
 @Dependent
 @Named("de.evoal.pipeline.distributions.noise-data")
-public class NoiseData extends ComponentImpl {
+public class NoiseData extends PipelineComponentImpl {
 
 	/**
 	 * The different distributions to apply.
@@ -27,7 +27,7 @@ public class NoiseData extends ComponentImpl {
 	@Inject
 	private DistributionFactory factory;
 
-	public ComponentImpl init(final Instance configuration) throws InitializationException {
+	public PipelineComponentImpl init(final Instance configuration) throws InitializationException {
 		super.init(configuration);
 
         distributions = factory.readDistributions(configuration, "distributions");

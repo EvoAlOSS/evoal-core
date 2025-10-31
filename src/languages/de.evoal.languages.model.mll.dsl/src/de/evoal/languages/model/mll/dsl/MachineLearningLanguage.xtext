@@ -1,89 +1,86 @@
-grammar de.evoal.languages.model.mll.dsl.MachineLearningLanguage with de.evoal.languages.model.base.dsl.BaseLanguage
+grammar de.evoal.languages.model.mll.dsl.MachineLearningLanguage with de.evoal.languages.model.generator.dsl.GeneratorDSL
 
 import "https://www.evoal.de/languages/mll/1.0.0" 
 import "https://www.evoal.de/languages/ddl/1.0.0" as ddl
 import "https://www.evoal.de/languages/base/1.0.0" as base
 import "https://www.evoal.de/languages/base/definitions/1.0.0" as defs
 import "https://www.evoal.de/languages/execution/1.0.0" as execution
+import "https://www.evoal.de/languages/generator/1.0.0" as generator
 import "https://www.evoal.de/languages/base/expressions/1.0.0" as expressions
 
 MachineLearningModuleRule returns MachineLearningModule:
 	(imports += ImportRule)*
 
 	"module" name = QualifiedName "{"
-		(definitions+=SurrogateDefinitionRule)*
-		body = BodyRule
-	"}"
-;
-
-SurrogateDefinitionRule returns SurrogateDefinition: 
-	"function" name = StringOrId "using"
-		(functions += PartialSurrogateFunctionDefinitionRule)+
-;
+		task = TaskDescriptionRule
 		
-PartialSurrogateFunctionDefinitionRule returns PartialSurrogateFunctionDefinition:
-	"model" definition = [defs::ClassDefinition|QualifiedName]
-	"mapping"
-		inputs += [defs::DataDescription|QualifiedName] ("," inputs += [defs::DataDescription|QualifiedName])* 
-	"to"
-		outputs += [defs::DataDescription|QualifiedName] ("," outputs += [defs::DataDescription|QualifiedName])* 
-	("with" "parameters"
-		((attributes+= BaseLanguage::AttributeRule)+ ))?
+		validation=ValidationPipelineDefinitionRule
+
+		preparation=PreparationPipelineDefinitionRule
+		
+		'specify' 'model' model = InstanceLiteralRule
+
+		(
+			'specify' 'gof' 
+			gof = BodyRule
+		)?
+		
+		(
+    		'use' 'cases'
+				(learningUseCase=LearningUseCaseRule ';')?
+			
+				(predictionUseCase=PredictionUseCaseRule ';')?
+	    	'end'
+	    )?
+	'}'
 ;
 
-PredictStatementRule returns PredictStatement:
-	"predict" surrogate = [SurrogateDefinition|QualifiedName]
-		'from' trainingData = STRING
-		('and' 'measure'
-			measurements = BodyRule
-		)?
-		'and' 'store' 'to' modelFilename = STRING;
+TaskDescriptionRule returns TaskDescription:
+	'specify' name='learning-task' '{'
+    	'input' 'features' inputs += [defs::DataDescription|QualifiedName] ("," inputs += [defs::DataDescription|QualifiedName])*
+    	'output' 'features' outputs += [defs::DataDescription|QualifiedName] ("," outputs += [defs::DataDescription|QualifiedName])*
 
-BodyRule returns execution::Block:
+    	'learning' 'from' '[' learningData+=STRING (',' learningData+=STRING)* ']' 
+    	
+    	('testing' 'with' '[' testingData+=STRING (',' testingData+=STRING)* ']')?
+
+	    'serialise' 'to' modelFile = STRING ('and' gofFile=STRING)?
+	'}'
+;
+
+ValidationPipelineDefinitionRule returns generator::PipelineDefinition:
+	{generator::PipelineDefinition}
+	'specify' name = 'validation' 'steps' '['
+		steps += StepRule*
+	']'	
+;
+
+PreparationPipelineDefinitionRule returns generator::PipelineDefinition:
+	{generator::PipelineDefinition}
+	'specify' name='preparation' 'steps' '['
+		steps += StepRule*
+	']'	
+;
+
+LearningUseCaseRule returns execution::Block:
 	{execution::Block}
-	'begin'
+	'specify' 'learning' 'begin'
 	  (statements += StatementRule)*
 	'end'
 ;
 
-StatementRule returns execution::Statement:
-	ForStatementRule | PredictStatementRule	| CallBuiltinFunctionRule
-;
-
-CallBuiltinFunctionRule returns execution::CallBuiltinFunction:
-	definition = [defs::FunctionDefinition|QualifiedName] '('
-	(parameters+= ExpressionRule (',' parameters+= ExpressionRule)*)?
-	')' ';'
-;
-
-ForStatementRule returns execution::ForStatement:
-	'for' var = NamedVariableRule 'in' range = RangeRule 
-		body = BodyRule
-;
-
-NamedVariableRule returns execution::NamedVariable:
-	name = StringOrId
-;
-
-RangeRule returns execution::Range:
-	CounterRangeRule | LiteralRangeRule
-;
-
-LiteralRangeRule returns execution::ValueRange:
-	'[' elements += ReadExpressionRule (',' elements += ReadExpressionRule)* ']'
-;
-
-CounterRangeRule returns execution::CounterRange:
-	'[' start = IntegerLiteralRule 'to' end = IntegerLiteralRule 'increment' 'by' increment = IntegerLiteralRule ']'
+PredictionUseCaseRule returns generator::PipelineDefinition:
+	{generator::PipelineDefinition}
+	'specify' name = 'predicting' 'begin'
+	   steps += StepRule*
+	'end'
 ;
 
 @Override
-ReferenceRule returns expressions::ValueReference:
-	LiteralDefinitionReferenceRule
-	| TypeDefinitionReferenceRule 
-	| VariableReferenceRule
-;
-
-VariableReferenceRule returns execution::VariableReference:
-	variable = [execution::NamedVariable|StringOrId]
+LiteralRule returns expressions::Literal:
+	NumberLiteralRule
+		| StringLiteralRule
+		| BooleanLiteralRule
+		| InstanceLiteralRule
+		| StepRule	
 ;

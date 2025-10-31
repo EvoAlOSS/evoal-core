@@ -11,12 +11,12 @@ import de.evoal.languages.model.base.expressions.ExpressionsPackage;
 import de.evoal.languages.model.base.types.TypesPackage;
 
 import de.evoal.languages.model.execution.ExecutionPackage;
+
+import de.evoal.languages.model.generator.GeneratorPackage;
 import de.evoal.languages.model.mll.MachineLearningModule;
 import de.evoal.languages.model.mll.MllFactory;
 import de.evoal.languages.model.mll.MllPackage;
-import de.evoal.languages.model.mll.PartialSurrogateFunctionDefinition;
-import de.evoal.languages.model.mll.PredictStatement;
-import de.evoal.languages.model.mll.SurrogateDefinition;
+import de.evoal.languages.model.mll.TaskDescription;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
@@ -43,21 +43,7 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass surrogateDefinitionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass partialSurrogateFunctionDefinitionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass predictStatementEClass = null;
+	private EClass taskDescriptionEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -111,6 +97,7 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 		BasePackage.eINSTANCE.eClass();
 		TypesPackage.eINSTANCE.eClass();
 		ExecutionPackage.eINSTANCE.eClass();
+		GeneratorPackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
 		theMllPackage.createPackageContents();
@@ -152,8 +139,8 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getMachineLearningModule_Definitions() {
-		return (EReference)machineLearningModuleEClass.getEStructuralFeatures().get(1);
+	public EAttribute getMachineLearningModule_Name() {
+		return (EAttribute)machineLearningModuleEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -162,7 +149,7 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getMachineLearningModule_Body() {
+	public EReference getMachineLearningModule_Task() {
 		return (EReference)machineLearningModuleEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -172,8 +159,8 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 	 * @generated
 	 */
 	@Override
-	public EAttribute getMachineLearningModule_Name() {
-		return (EAttribute)machineLearningModuleEClass.getEStructuralFeatures().get(3);
+	public EReference getMachineLearningModule_Validation() {
+		return (EReference)machineLearningModuleEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -182,8 +169,8 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 	 * @generated
 	 */
 	@Override
-	public EClass getSurrogateDefinition() {
-		return surrogateDefinitionEClass;
+	public EReference getMachineLearningModule_Preparation() {
+		return (EReference)machineLearningModuleEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -192,8 +179,8 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getSurrogateDefinition_Functions() {
-		return (EReference)surrogateDefinitionEClass.getEStructuralFeatures().get(0);
+	public EReference getMachineLearningModule_Model() {
+		return (EReference)machineLearningModuleEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -202,8 +189,8 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 	 * @generated
 	 */
 	@Override
-	public EClass getPartialSurrogateFunctionDefinition() {
-		return partialSurrogateFunctionDefinitionEClass;
+	public EReference getMachineLearningModule_Gof() {
+		return (EReference)machineLearningModuleEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -212,8 +199,8 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getPartialSurrogateFunctionDefinition_Inputs() {
-		return (EReference)partialSurrogateFunctionDefinitionEClass.getEStructuralFeatures().get(0);
+	public EReference getMachineLearningModule_LearningUseCase() {
+		return (EReference)machineLearningModuleEClass.getEStructuralFeatures().get(7);
 	}
 
 	/**
@@ -222,8 +209,8 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getPartialSurrogateFunctionDefinition_Outputs() {
-		return (EReference)partialSurrogateFunctionDefinitionEClass.getEStructuralFeatures().get(1);
+	public EReference getMachineLearningModule_PredictionUseCase() {
+		return (EReference)machineLearningModuleEClass.getEStructuralFeatures().get(8);
 	}
 
 	/**
@@ -232,8 +219,8 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 	 * @generated
 	 */
 	@Override
-	public EClass getPredictStatement() {
-		return predictStatementEClass;
+	public EClass getTaskDescription() {
+		return taskDescriptionEClass;
 	}
 
 	/**
@@ -242,8 +229,8 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getPredictStatement_Surrogate() {
-		return (EReference)predictStatementEClass.getEStructuralFeatures().get(0);
+	public EReference getTaskDescription_Inputs() {
+		return (EReference)taskDescriptionEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -252,8 +239,8 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 	 * @generated
 	 */
 	@Override
-	public EAttribute getPredictStatement_ModelFilename() {
-		return (EAttribute)predictStatementEClass.getEStructuralFeatures().get(1);
+	public EReference getTaskDescription_Outputs() {
+		return (EReference)taskDescriptionEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -262,8 +249,8 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 	 * @generated
 	 */
 	@Override
-	public EAttribute getPredictStatement_TrainingData() {
-		return (EAttribute)predictStatementEClass.getEStructuralFeatures().get(2);
+	public EAttribute getTaskDescription_LearningData() {
+		return (EAttribute)taskDescriptionEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -272,8 +259,28 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getPredictStatement_Measurements() {
-		return (EReference)predictStatementEClass.getEStructuralFeatures().get(3);
+	public EAttribute getTaskDescription_TestingData() {
+		return (EAttribute)taskDescriptionEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getTaskDescription_ModelFile() {
+		return (EAttribute)taskDescriptionEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getTaskDescription_GofFile() {
+		return (EAttribute)taskDescriptionEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -307,22 +314,22 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 		// Create classes and their features
 		machineLearningModuleEClass = createEClass(MACHINE_LEARNING_MODULE);
 		createEReference(machineLearningModuleEClass, MACHINE_LEARNING_MODULE__IMPORTS);
-		createEReference(machineLearningModuleEClass, MACHINE_LEARNING_MODULE__DEFINITIONS);
-		createEReference(machineLearningModuleEClass, MACHINE_LEARNING_MODULE__BODY);
 		createEAttribute(machineLearningModuleEClass, MACHINE_LEARNING_MODULE__NAME);
+		createEReference(machineLearningModuleEClass, MACHINE_LEARNING_MODULE__TASK);
+		createEReference(machineLearningModuleEClass, MACHINE_LEARNING_MODULE__VALIDATION);
+		createEReference(machineLearningModuleEClass, MACHINE_LEARNING_MODULE__PREPARATION);
+		createEReference(machineLearningModuleEClass, MACHINE_LEARNING_MODULE__MODEL);
+		createEReference(machineLearningModuleEClass, MACHINE_LEARNING_MODULE__GOF);
+		createEReference(machineLearningModuleEClass, MACHINE_LEARNING_MODULE__LEARNING_USE_CASE);
+		createEReference(machineLearningModuleEClass, MACHINE_LEARNING_MODULE__PREDICTION_USE_CASE);
 
-		surrogateDefinitionEClass = createEClass(SURROGATE_DEFINITION);
-		createEReference(surrogateDefinitionEClass, SURROGATE_DEFINITION__FUNCTIONS);
-
-		partialSurrogateFunctionDefinitionEClass = createEClass(PARTIAL_SURROGATE_FUNCTION_DEFINITION);
-		createEReference(partialSurrogateFunctionDefinitionEClass, PARTIAL_SURROGATE_FUNCTION_DEFINITION__INPUTS);
-		createEReference(partialSurrogateFunctionDefinitionEClass, PARTIAL_SURROGATE_FUNCTION_DEFINITION__OUTPUTS);
-
-		predictStatementEClass = createEClass(PREDICT_STATEMENT);
-		createEReference(predictStatementEClass, PREDICT_STATEMENT__SURROGATE);
-		createEAttribute(predictStatementEClass, PREDICT_STATEMENT__MODEL_FILENAME);
-		createEAttribute(predictStatementEClass, PREDICT_STATEMENT__TRAINING_DATA);
-		createEReference(predictStatementEClass, PREDICT_STATEMENT__MEASUREMENTS);
+		taskDescriptionEClass = createEClass(TASK_DESCRIPTION);
+		createEReference(taskDescriptionEClass, TASK_DESCRIPTION__INPUTS);
+		createEReference(taskDescriptionEClass, TASK_DESCRIPTION__OUTPUTS);
+		createEAttribute(taskDescriptionEClass, TASK_DESCRIPTION__LEARNING_DATA);
+		createEAttribute(taskDescriptionEClass, TASK_DESCRIPTION__TESTING_DATA);
+		createEAttribute(taskDescriptionEClass, TASK_DESCRIPTION__MODEL_FILE);
+		createEAttribute(taskDescriptionEClass, TASK_DESCRIPTION__GOF_FILE);
 	}
 
 	/**
@@ -350,42 +357,37 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 
 		// Obtain other dependent packages
 		BasePackage theBasePackage = (BasePackage)EPackage.Registry.INSTANCE.getEPackage(BasePackage.eNS_URI);
+		GeneratorPackage theGeneratorPackage = (GeneratorPackage)EPackage.Registry.INSTANCE.getEPackage(GeneratorPackage.eNS_URI);
+		ExpressionsPackage theExpressionsPackage = (ExpressionsPackage)EPackage.Registry.INSTANCE.getEPackage(ExpressionsPackage.eNS_URI);
 		ExecutionPackage theExecutionPackage = (ExecutionPackage)EPackage.Registry.INSTANCE.getEPackage(ExecutionPackage.eNS_URI);
 		DefinitionsPackage theDefinitionsPackage = (DefinitionsPackage)EPackage.Registry.INSTANCE.getEPackage(DefinitionsPackage.eNS_URI);
-		ExpressionsPackage theExpressionsPackage = (ExpressionsPackage)EPackage.Registry.INSTANCE.getEPackage(ExpressionsPackage.eNS_URI);
 
 		// Create type parameters
 
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
-		surrogateDefinitionEClass.getESuperTypes().add(theExecutionPackage.getNamedVariable());
-		partialSurrogateFunctionDefinitionEClass.getESuperTypes().add(theExpressionsPackage.getInstance());
-		predictStatementEClass.getESuperTypes().add(theExecutionPackage.getStatement());
+		taskDescriptionEClass.getESuperTypes().add(theExecutionPackage.getNamedVariable());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(machineLearningModuleEClass, MachineLearningModule.class, "MachineLearningModule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getMachineLearningModule_Imports(), theBasePackage.getImport(), null, "imports", null, 0, -1, MachineLearningModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEReference(getMachineLearningModule_Definitions(), this.getSurrogateDefinition(), null, "definitions", null, 0, -1, MachineLearningModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEReference(getMachineLearningModule_Body(), theExecutionPackage.getBlock(), null, "body", null, 1, 1, MachineLearningModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMachineLearningModule_Name(), ecorePackage.getEString(), "name", null, 1, 1, MachineLearningModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMachineLearningModule_Task(), this.getTaskDescription(), null, "task", null, 1, 1, MachineLearningModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMachineLearningModule_Validation(), theGeneratorPackage.getPipelineDefinition(), null, "validation", null, 1, 1, MachineLearningModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMachineLearningModule_Preparation(), theGeneratorPackage.getPipelineDefinition(), null, "preparation", null, 1, 1, MachineLearningModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMachineLearningModule_Model(), theExpressionsPackage.getInstance(), null, "model", null, 1, 1, MachineLearningModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMachineLearningModule_Gof(), theExecutionPackage.getBlock(), null, "gof", null, 0, 1, MachineLearningModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMachineLearningModule_LearningUseCase(), theExecutionPackage.getBlock(), null, "learningUseCase", null, 0, 1, MachineLearningModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMachineLearningModule_PredictionUseCase(), theGeneratorPackage.getPipelineDefinition(), null, "predictionUseCase", null, 1, 1, MachineLearningModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(surrogateDefinitionEClass, SurrogateDefinition.class, "SurrogateDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getSurrogateDefinition_Functions(), this.getPartialSurrogateFunctionDefinition(), null, "functions", null, 1, -1, SurrogateDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		addEOperation(surrogateDefinitionEClass, theDefinitionsPackage.getDataDescription(), "getInputs", 0, -1, IS_UNIQUE, IS_ORDERED);
-
-		addEOperation(surrogateDefinitionEClass, theDefinitionsPackage.getDataDescription(), "getOutputs", 0, -1, IS_UNIQUE, IS_ORDERED);
-
-		initEClass(partialSurrogateFunctionDefinitionEClass, PartialSurrogateFunctionDefinition.class, "PartialSurrogateFunctionDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getPartialSurrogateFunctionDefinition_Inputs(), theDefinitionsPackage.getDataDescription(), null, "inputs", null, 1, -1, PartialSurrogateFunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEReference(getPartialSurrogateFunctionDefinition_Outputs(), theDefinitionsPackage.getDataDescription(), null, "outputs", null, 1, -1, PartialSurrogateFunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-
-		initEClass(predictStatementEClass, PredictStatement.class, "PredictStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getPredictStatement_Surrogate(), this.getSurrogateDefinition(), null, "surrogate", null, 1, 1, PredictStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getPredictStatement_ModelFilename(), ecorePackage.getEString(), "modelFilename", null, 1, 1, PredictStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getPredictStatement_TrainingData(), ecorePackage.getEString(), "trainingData", null, 1, 1, PredictStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getPredictStatement_Measurements(), theExecutionPackage.getBlock(), null, "measurements", null, 1, 1, PredictStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(taskDescriptionEClass, TaskDescription.class, "TaskDescription", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getTaskDescription_Inputs(), theDefinitionsPackage.getDataDescription(), null, "inputs", null, 1, -1, TaskDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getTaskDescription_Outputs(), theDefinitionsPackage.getDataDescription(), null, "outputs", null, 1, -1, TaskDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEAttribute(getTaskDescription_LearningData(), ecorePackage.getEString(), "learningData", null, 1, -1, TaskDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEAttribute(getTaskDescription_TestingData(), ecorePackage.getEString(), "testingData", null, 0, -1, TaskDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEAttribute(getTaskDescription_ModelFile(), ecorePackage.getEString(), "modelFile", null, 1, 1, TaskDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTaskDescription_GofFile(), ecorePackage.getEString(), "gofFile", null, 0, 1, TaskDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);
@@ -412,7 +414,8 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 			   "base", "platform:/resource/de.evoal.languages.model.base/model/model.ecore#/",
 			   "defs", "platform:/resource/de.evoal.languages.model.base/model/definitions.ecore#/",
 			   "exec", "execution.ecore#/",
-			   "expr", "platform:/resource/de.evoal.languages.model.base/model/expressions.ecore#/"
+			   "expr", "platform:/resource/de.evoal.languages.model.base/model/expressions.ecore#/",
+			   "generator", "generator.ecore#/"
 		   });
 	}
 
@@ -431,25 +434,25 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 			   "nullFree", "false"
 		   });
 		addAnnotation
-		  (getMachineLearningModule_Definitions(),
+		  (getTaskDescription_Inputs(),
 		   source,
 		   new String[] {
 			   "nullFree", "false"
 		   });
 		addAnnotation
-		  (getSurrogateDefinition_Functions(),
+		  (getTaskDescription_Outputs(),
 		   source,
 		   new String[] {
 			   "nullFree", "false"
 		   });
 		addAnnotation
-		  (getPartialSurrogateFunctionDefinition_Inputs(),
+		  (getTaskDescription_LearningData(),
 		   source,
 		   new String[] {
 			   "nullFree", "false"
 		   });
 		addAnnotation
-		  (getPartialSurrogateFunctionDefinition_Outputs(),
+		  (getTaskDescription_TestingData(),
 		   source,
 		   new String[] {
 			   "nullFree", "false"

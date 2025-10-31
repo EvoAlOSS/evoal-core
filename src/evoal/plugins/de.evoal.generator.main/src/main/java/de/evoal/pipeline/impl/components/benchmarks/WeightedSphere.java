@@ -1,6 +1,6 @@
 package de.evoal.pipeline.impl.components.benchmarks;
 
-import de.evoal.pipeline.api.model.ComponentImpl;
+import de.evoal.pipeline.api.model.PipelineComponentImpl;
 import de.evoal.core.api.ecore.TypedEObject;
 import lombok.NonNull;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -10,7 +10,7 @@ import javax.inject.Named;
 
 @Dependent
 @Named("de.evoal.pipeline.benchmarks.weighted-sphere")
-public class WeightedSphere extends ComponentImpl {
+public class WeightedSphere extends PipelineComponentImpl {
     @Override
     public @NonNull TypedEObject apply(final @NonNull TypedEObject obj) {
         final double n = getReads().size();

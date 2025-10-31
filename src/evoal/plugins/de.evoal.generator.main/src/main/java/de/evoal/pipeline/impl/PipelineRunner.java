@@ -1,30 +1,27 @@
 package de.evoal.pipeline.impl;
 
-import de.evoal.core.api.cdi.Application;
-import de.evoal.core.api.cdi.BlackboardValue;
-import de.evoal.core.api.cdi.MainClass;
-import de.evoal.core.interpreter.api.ProgramInterpreter;
-import de.evoal.languages.model.execution.NamedVariable;
-import de.evoal.languages.model.execution.Variable;
-import de.evoal.languages.model.generator.GeneratorModule;
-import de.evoal.languages.model.pipeline.PipelineModule;
-import de.evoal.pipeline.api.board.PipelineBlackboardEntries;
-import de.evoal.pipeline.api.cdi.DefinitionModuleLoader;
-import de.evoal.pipeline.api.cdi.GeneratorModuleLoader;
-import de.evoal.pipeline.api.cdi.PipelineCollector;
-import de.evoal.core.api.dynamic.EClassProvider;
-import de.evoal.pipeline.impl.internal.GeneratorDSLConverter;
-import org.eclipse.emf.ecore.EClass;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import de.evoal.core.api.ecore.Space;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.util.Map;
-import java.util.function.Function;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
+
+import org.eclipse.emf.ecore.EClass;
+
+import de.evoal.languages.model.generator.GeneratorModule;
+import de.evoal.languages.model.pipeline.PipelineModule;
+
+import de.evoal.core.api.cdi.Application;
+import de.evoal.core.api.cdi.BlackboardValue;
+import de.evoal.core.api.cdi.MainClass;
+import de.evoal.core.api.dynamic.EClassProvider;
+import de.evoal.core.interpreter.api.ProgramInterpreter;
+import de.evoal.pipeline.api.board.PipelineBlackboardEntries;
+import de.evoal.pipeline.api.cdi.DefinitionModuleLoader;
+import de.evoal.pipeline.api.cdi.GeneratorModuleLoader;
+import de.evoal.pipeline.api.cdi.PipelineCollector;
+import de.evoal.pipeline.impl.internal.GeneratorDSLConverter;
 
 /**
  * Main class for EvoAl's data generator.
@@ -39,44 +36,49 @@ a learned model.
 """
 )
 @Named("de.evoal.pipeline.pipeline-runner")
+@Slf4j
 public class PipelineRunner implements MainClass {
 
 	/**
-	 * Logger instance
+	 * Name of the pipeline configuration.
 	 */
-	private final static Logger log = LoggerFactory.getLogger(PipelineRunner.class);
-
 	@Inject
 	@BlackboardValue(PipelineBlackboardEntries.PIPELINE_CONFIGURATION_FILE)
 	private String configurationFilename;
 
-	@Inject
-	private GeneratorModuleLoader loader;
-
-	@Inject
-	private DefinitionModuleLoader definitionLoader;
-
-
+	/**
+	 * For collecting and converting  the pipelines.
+	 */
 	@Inject
 	private PipelineCollector converter;
 
-	private static final Collector<NamedVariable, ?, Map<Variable, Object>> toMap =
-			Collectors.toUnmodifiableMap(Function.identity(),
-					Function.identity());
+	/**
+	 * For loading definition files.
+	 */
+	@Inject
+	private DefinitionModuleLoader definitionLoader;
 
+	/**
+	 * For loading generator modules.
+	 */
+	@Inject
+	private GeneratorModuleLoader loader;
 
 	@Override
 	public void run() {
+		log.info("Loading generator module from '{}'.", configurationFilename);
 		final GeneratorModule module = loader.load(configurationFilename);
 
-		log.info("Executing model-to-model transformation on DSLs");
+		log.info("Generating dynamic EClass for model.");
 		final EClassProvider provider = new EClassProvider();
-		final EClass space = provider.eClassFor(module);
+		final EClass dynamicEClass = provider.eClassFor(module);
+		final Space space = new Space(dynamicEClass);
+
+		log.info("Executing model-to-model on generator model.");
 		final GeneratorDSLConverter converter = new GeneratorDSLConverter(definitionLoader, space);
 		final PipelineModule pModule = converter.convert(module);
 
-
-		log.info("Starting pipeline.");
+		log.info("Running pipeline.");
 		new ProgramInterpreter()
 				.execute(pModule.getProgram(), space);
         log.info("Finished pipeline.");

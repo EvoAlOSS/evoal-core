@@ -4,7 +4,7 @@ import de.evoal.core.api.languages.AttributeEvaluator;
 import de.evoal.core.api.utils.InitializationException;
 import de.evoal.core.api.utils.Requirements;
 import de.evoal.languages.model.base.expressions.Instance;
-import de.evoal.pipeline.api.model.ComponentImpl;
+import de.evoal.pipeline.api.model.PipelineComponentImpl;
 import de.evoal.core.api.ecore.TypedEObject;
 import lombok.NonNull;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -16,7 +16,7 @@ import java.util.Iterator;
 
 @Dependent
 @Named("de.evoal.pipeline.misc.constants")
-public class ConstantFunction extends ComponentImpl {
+public class ConstantFunction extends PipelineComponentImpl {
 
 	private double [] constants = {};
 
@@ -36,7 +36,7 @@ public class ConstantFunction extends ComponentImpl {
 	}
 
 	@Override
-	public ComponentImpl init(final Instance configuration) throws InitializationException {
+	public PipelineComponentImpl init(final Instance configuration) throws InitializationException {
 		super.init(configuration);
 
 		constants = evaluator.attributeToDoubleArray(configuration, "constants");

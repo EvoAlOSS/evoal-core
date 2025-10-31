@@ -1,57 +1,41 @@
 package de.evoal.surrogate.api.cdi;
 
-import de.evoal.core.api.board.Blackboard;
-import de.evoal.core.api.board.BlackboardEntry;
 import de.evoal.core.api.ecore.Space;
-import de.evoal.core.api.ecore.info.FeatureDependencies;
-import de.evoal.core.api.properties.PropertiesSpecification;
-import de.evoal.core.api.properties.info.PropertiesDependencies;
-import de.evoal.core.api.properties.PropertySpecification;
-import de.evoal.core.api.utils.Requirements;
 import de.evoal.core.api.dynamic.EAnnotationHelper;
-import de.evoal.surrogate.api.SurrogateBlackboardEntries;
-import de.evoal.surrogate.api.configuration.SurrogateConfiguration;
-import de.evoal.surrogate.api.function.PartialSurrogateFunction;
-import de.evoal.surrogate.api.function.SurrogateFunction;
-import de.evoal.surrogate.main.internal.SurrogateFactory;
-import lombok.NonNull;
+import de.evoal.surrogate.api.function.ModelFunctionData;
+import de.evoal.surrogate.api.function.ModelFunctionFactory;
 import lombok.extern.slf4j.Slf4j;
-import org.eclipse.emf.ecore.EStructuralFeature;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.event.Observes;
-import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
-import javax.inject.Named;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.Function;
-import java.util.stream.Stream;
 
 @ApplicationScoped
 @Slf4j
 public class SurrogateProducer {
 
     @Inject
-    private EAnnotationHelper helper;
+    private ModelFunctionFactory factory;
 
-    @Inject @Named("surrogate-loader")
-    private Function<@NonNull File, @NonNull SurrogateConfiguration> loader;
+    @Inject
+    private EAnnotationHelper helper;
 
     /**
      * This function cache is necessary to access function from different places
      */
-    private Map<File, SurrogateFunction> functionCache = new HashMap<>();
+    private final Map<File, ModelFunctionData> functionCache = new HashMap<>();
 
     /**
      * Loads a pre-trained surrogate function from file.
      *
      * @param file The file containing the surrogate function.
-     * @param space The functions space.
+     * @param input The function's input space.
+     * @param output The function's output space.
      * @return The loaded function
      */
-    public SurrogateFunction load(final File file, final Space space) {
+    public ModelFunctionData load(final File file, final Space input, final Space output) {
         log.info("Using pre-trained surrogate model {}.", file);
 
         if(functionCache.containsKey(file)) {
@@ -69,16 +53,15 @@ public class SurrogateProducer {
             throw new RuntimeException("Cannot read pre-trained surrogate model: " + file);
         }
 
-        final SurrogateConfiguration configuration = loader.apply(file);
-        configuration.link(space);
 
-        final SurrogateFunction function = SurrogateFactory.create(configuration);
+        final ModelFunctionData function = factory.load(file.toURI(), input, output);
+
         functionCache.put(file, function);
 
         return function;
     }
 
-    public SurrogateFunction loadCached(final File file) {
+    public ModelFunctionData loadCached(final File file) {
         if(!functionCache.containsKey(file)) {
             log.error("Cannot find pre-trained surrogate model: {}", file);
             throw new IllegalStateException("Cannot find pre-trained surrogate model: " + file);
