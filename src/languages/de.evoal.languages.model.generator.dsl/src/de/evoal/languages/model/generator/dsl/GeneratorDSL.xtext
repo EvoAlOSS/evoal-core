@@ -76,7 +76,7 @@ ApplyStatementRule returns ApplyStatement:
 
 @Override
 ReferenceRule returns expressions::ConstantExpression:
-	LiteralDefinitionReferenceRule
+	ValuelDefinitionReferenceRule
 	| TypeDefinitionReferenceRule
 	| VariableReferenceRule
 ;

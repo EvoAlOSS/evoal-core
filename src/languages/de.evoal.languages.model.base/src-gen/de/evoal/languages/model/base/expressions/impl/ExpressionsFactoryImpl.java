@@ -74,6 +74,8 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 			case ExpressionsPackage.ATTRIBUTE: return createAttribute();
 			case ExpressionsPackage.VALUE_REFERENCE: return createValueReference();
 			case ExpressionsPackage.SELF_REFERENCE: return createSelfReference();
+			case ExpressionsPackage.VALUE_DEFINITION_REFERENCE: return createValueDefinitionReference();
+			case ExpressionsPackage.ATTRIBUTE_DEFINITION_REFERENCE: return createAttributeDefinitionReference();
 			case ExpressionsPackage.LITERAL_DEFINITION_REFERENCE: return createLiteralDefinitionReference();
 			case ExpressionsPackage.TYPE_DEFINITION_REFERENCE: return createTypeDefinitionReference();
 			case ExpressionsPackage.BOOLEAN_LITERAL: return createBooleanLiteral();
@@ -312,6 +314,28 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 	public SelfReference createSelfReference() {
 		SelfReferenceImpl selfReference = new SelfReferenceImpl();
 		return selfReference;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ValueDefinitionReference createValueDefinitionReference() {
+		ValueDefinitionReferenceImpl valueDefinitionReference = new ValueDefinitionReferenceImpl();
+		return valueDefinitionReference;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public AttributeDefinitionReference createAttributeDefinitionReference() {
+		AttributeDefinitionReferenceImpl attributeDefinitionReference = new AttributeDefinitionReferenceImpl();
+		return attributeDefinitionReference;
 	}
 
 	/**

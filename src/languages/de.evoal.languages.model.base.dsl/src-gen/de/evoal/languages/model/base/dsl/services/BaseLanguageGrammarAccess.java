@@ -559,44 +559,47 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 	public class ReferenceRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.base.dsl.BaseLanguage.ReferenceRule");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cLiteralDefinitionReferenceRuleParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cValuelDefinitionReferenceRuleParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cTypeDefinitionReferenceRuleParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//ReferenceRule returns ConstantExpression:
-		//    LiteralDefinitionReferenceRule
+		//    ValuelDefinitionReferenceRule
 		//    | TypeDefinitionReferenceRule
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//LiteralDefinitionReferenceRule
+		//ValuelDefinitionReferenceRule
 		//| TypeDefinitionReferenceRule
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
-		//LiteralDefinitionReferenceRule
-		public RuleCall getLiteralDefinitionReferenceRuleParserRuleCall_0() { return cLiteralDefinitionReferenceRuleParserRuleCall_0; }
+		//ValuelDefinitionReferenceRule
+		public RuleCall getValuelDefinitionReferenceRuleParserRuleCall_0() { return cValuelDefinitionReferenceRuleParserRuleCall_0; }
 		
 		//TypeDefinitionReferenceRule
 		public RuleCall getTypeDefinitionReferenceRuleParserRuleCall_1() { return cTypeDefinitionReferenceRuleParserRuleCall_1; }
 	}
-	public class LiteralDefinitionReferenceRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.base.dsl.BaseLanguage.LiteralDefinitionReferenceRule");
+	public class ValuelDefinitionReferenceRuleElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.base.dsl.BaseLanguage.ValuelDefinitionReferenceRule");
 		private final Assignment cDefinitionAssignment = (Assignment)rule.eContents().get(1);
-		private final CrossReference cDefinitionLiteralDefinitionCrossReference_0 = (CrossReference)cDefinitionAssignment.eContents().get(0);
-		private final RuleCall cDefinitionLiteralDefinitionQualifiedNameParserRuleCall_0_1 = (RuleCall)cDefinitionLiteralDefinitionCrossReference_0.eContents().get(1);
+		private final CrossReference cDefinitionValueDefinitionCrossReference_0 = (CrossReference)cDefinitionAssignment.eContents().get(0);
+		private final RuleCall cDefinitionValueDefinitionQualifiedNameParserRuleCall_0_1 = (RuleCall)cDefinitionValueDefinitionCrossReference_0.eContents().get(1);
 		
-		//LiteralDefinitionReferenceRule returns LiteralDefinitionReference:
-		//    definition = [LiteralDefinition|QualifiedName]
+		///**
+		// * Allows us to reference an enum literal.
+		// */
+		//ValuelDefinitionReferenceRule returns ValueDefinitionReference:
+		//    definition = [ValueDefinition|QualifiedName]
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//definition = [LiteralDefinition|QualifiedName]
+		//definition = [ValueDefinition|QualifiedName]
 		public Assignment getDefinitionAssignment() { return cDefinitionAssignment; }
 		
-		//[LiteralDefinition|QualifiedName]
-		public CrossReference getDefinitionLiteralDefinitionCrossReference_0() { return cDefinitionLiteralDefinitionCrossReference_0; }
+		//[ValueDefinition|QualifiedName]
+		public CrossReference getDefinitionValueDefinitionCrossReference_0() { return cDefinitionValueDefinitionCrossReference_0; }
 		
 		//QualifiedName
-		public RuleCall getDefinitionLiteralDefinitionQualifiedNameParserRuleCall_0_1() { return cDefinitionLiteralDefinitionQualifiedNameParserRuleCall_0_1; }
+		public RuleCall getDefinitionValueDefinitionQualifiedNameParserRuleCall_0_1() { return cDefinitionValueDefinitionQualifiedNameParserRuleCall_0_1; }
 	}
 	public class TypeDefinitionReferenceRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.base.dsl.BaseLanguage.TypeDefinitionReferenceRule");
@@ -2035,7 +2038,7 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 	private final ParanthesesRuleElements pParanthesesRule;
 	private final CallRuleElements pCallRule;
 	private final ReferenceRuleElements pReferenceRule;
-	private final LiteralDefinitionReferenceRuleElements pLiteralDefinitionReferenceRule;
+	private final ValuelDefinitionReferenceRuleElements pValuelDefinitionReferenceRule;
 	private final TypeDefinitionReferenceRuleElements pTypeDefinitionReferenceRule;
 	private final BaseDataReferenceRuleElements pBaseDataReferenceRule;
 	private final StructuredDataDescriptionReferenceRuleElements pStructuredDataDescriptionReferenceRule;
@@ -2105,7 +2108,7 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		this.pParanthesesRule = new ParanthesesRuleElements();
 		this.pCallRule = new CallRuleElements();
 		this.pReferenceRule = new ReferenceRuleElements();
-		this.pLiteralDefinitionReferenceRule = new LiteralDefinitionReferenceRuleElements();
+		this.pValuelDefinitionReferenceRule = new ValuelDefinitionReferenceRuleElements();
 		this.pTypeDefinitionReferenceRule = new TypeDefinitionReferenceRuleElements();
 		this.pBaseDataReferenceRule = new BaseDataReferenceRuleElements();
 		this.pStructuredDataDescriptionReferenceRule = new StructuredDataDescriptionReferenceRuleElements();
@@ -2383,7 +2386,7 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 	}
 	
 	//ReferenceRule returns ConstantExpression:
-	//    LiteralDefinitionReferenceRule
+	//    ValuelDefinitionReferenceRule
 	//    | TypeDefinitionReferenceRule
 	//;
 	public ReferenceRuleElements getReferenceRuleAccess() {
@@ -2394,15 +2397,18 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		return getReferenceRuleAccess().getRule();
 	}
 	
-	//LiteralDefinitionReferenceRule returns LiteralDefinitionReference:
-	//    definition = [LiteralDefinition|QualifiedName]
+	///**
+	// * Allows us to reference an enum literal.
+	// */
+	//ValuelDefinitionReferenceRule returns ValueDefinitionReference:
+	//    definition = [ValueDefinition|QualifiedName]
 	//;
-	public LiteralDefinitionReferenceRuleElements getLiteralDefinitionReferenceRuleAccess() {
-		return pLiteralDefinitionReferenceRule;
+	public ValuelDefinitionReferenceRuleElements getValuelDefinitionReferenceRuleAccess() {
+		return pValuelDefinitionReferenceRule;
 	}
 	
-	public ParserRule getLiteralDefinitionReferenceRuleRule() {
-		return getLiteralDefinitionReferenceRuleAccess().getRule();
+	public ParserRule getValuelDefinitionReferenceRuleRule() {
+		return getValuelDefinitionReferenceRuleAccess().getRule();
 	}
 	
 	//TypeDefinitionReferenceRule returns TypeDefinitionReference:

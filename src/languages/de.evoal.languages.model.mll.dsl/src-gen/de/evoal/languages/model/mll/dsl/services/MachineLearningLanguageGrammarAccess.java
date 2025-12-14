@@ -1047,7 +1047,7 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 	
 	//@Override
 	//ReferenceRule returns expressions::ConstantExpression:
-	//    LiteralDefinitionReferenceRule
+	//    ValuelDefinitionReferenceRule
 	//    | TypeDefinitionReferenceRule
 	//    | VariableReferenceRule
 	//;
@@ -1290,15 +1290,18 @@ public class MachineLearningLanguageGrammarAccess extends AbstractElementFinder.
 		return getCallRuleAccess().getRule();
 	}
 	
-	//LiteralDefinitionReferenceRule returns LiteralDefinitionReference:
-	//    definition = [LiteralDefinition|QualifiedName]
+	///**
+	// * Allows us to reference an enum literal.
+	// */
+	//ValuelDefinitionReferenceRule returns ValueDefinitionReference:
+	//    definition = [ValueDefinition|QualifiedName]
 	//;
-	public BaseLanguageGrammarAccess.LiteralDefinitionReferenceRuleElements getLiteralDefinitionReferenceRuleAccess() {
-		return gaBaseLanguage.getLiteralDefinitionReferenceRuleAccess();
+	public BaseLanguageGrammarAccess.ValuelDefinitionReferenceRuleElements getValuelDefinitionReferenceRuleAccess() {
+		return gaBaseLanguage.getValuelDefinitionReferenceRuleAccess();
 	}
 	
-	public ParserRule getLiteralDefinitionReferenceRuleRule() {
-		return getLiteralDefinitionReferenceRuleAccess().getRule();
+	public ParserRule getValuelDefinitionReferenceRuleRule() {
+		return getValuelDefinitionReferenceRuleAccess().getRule();
 	}
 	
 	//TypeDefinitionReferenceRule returns TypeDefinitionReference:

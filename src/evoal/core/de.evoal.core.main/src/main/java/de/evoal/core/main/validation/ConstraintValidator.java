@@ -15,8 +15,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.eclipse.emf.common.util.EList;
 
 import javax.enterprise.context.ApplicationScoped;
-import java.util.List;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
+/**
+ * Instance validator that checks user-defined constraints (using @-syntax in the .dl files).
+ */
 @Slf4j
 @ApplicationScoped
 public class ConstraintValidator implements InstanceValidator {
@@ -29,8 +33,13 @@ public class ConstraintValidator implements InstanceValidator {
     @Override
     public void validate(final @NonNull EObjectContext context, final @NonNull Instance instance) {
         final ClassDefinition definition = instance.getDefinition();
-        final EList<AttributeDefinition> attributes = definition.getAllAttributes();
 
+        log.info("Validating instance {}", definition.getName());
+        collect(instance.getDefinition())
+                .forEach(c -> check(context, c, instance));
+
+        log.info("Validating attributes of {}", definition.getName());
+        final EList<AttributeDefinition> attributes = definition.getAllAttributes();
         for(final AttributeDefinition attribute : attributes) {
             final Attribute attr = instance.findAttribute(attribute);
 
@@ -39,20 +48,37 @@ public class ConstraintValidator implements InstanceValidator {
             }
 
             attribute.getConstraints()
-                     .stream()
-                     .forEach(c-> check(new EObjectContext(context, attr.getDefinition().getName()), c, attr));
+                     .forEach(c -> check(new EObjectContext(context, attr.getDefinition().getName()), c, attr));
         }
     }
 
-    private void check(final @NonNull DiagnosticsContext context, final @NonNull Expression constraint, final @NonNull Attribute attr) {
-        if(!(constraint instanceof Instance)) {
-            log.warn("Constraint validator does currently not support non-instance constraints: {}.", constraint);
-            return;
+    private Stream<Expression> collect(final ClassDefinition definition) {
+        Stream<Expression> constraints = definition.getConstraints().stream();
+
+        if(definition.getSuperType() != null) {
+            final ClassDefinition superType = definition.getSuperType();
+            constraints = Stream.concat(constraints, collect(superType));
         }
 
-        final Instance instance = (Instance) constraint;
-        final ConstraintCheckerComponent checker = BeanFactory.createComponent(ConstraintCheckerComponent.class, instance);
+        return constraints;
 
-        checker.check(context, attr);
+    }
+
+    private void check(final @NonNull DiagnosticsContext context, final @NonNull Expression constraint, final @NonNull Attribute attr) {
+        if(constraint instanceof Instance configuration) {
+            BeanFactory.createComponent(ConstraintCheckerComponent.class, configuration)
+                       .check(context, attr);
+        } else {
+            log.warn("Constraint validator does currently not support non-instance constraints: {}.", constraint);
+        }
+    }
+
+    private void check(final @NonNull DiagnosticsContext context, final @NonNull Expression constraint, final @NonNull Instance instance) {
+        if(constraint instanceof Instance configuration) {
+            BeanFactory.createComponent(ConstraintCheckerComponent.class, configuration)
+                       .check(context, instance);
+        } else {
+            log.warn("Constraint validator does currently not support non-instance constraints: {}.", constraint);
+        }
     }
 }

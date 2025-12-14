@@ -1,9 +1,11 @@
+import "definitions" from 'de.evoal.core.constraints';
 import "definitions" from de.evoal.surrogate.ml;
 
 /**
  * Module containing support vector regression-based surrogat models.
  */
 module de.evoal.surrogate.smile.ml {
+	@MultiVariateConstraint{ 'expression'  := 'soft-margin' < tolerance; }
 	abstract type 'epsilon-svr' extends surrogate {
 		/**
 	     * Some totally <b>accurate</b> description of a very soft margin.

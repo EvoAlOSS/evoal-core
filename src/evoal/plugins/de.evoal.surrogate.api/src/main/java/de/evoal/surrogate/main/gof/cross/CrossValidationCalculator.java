@@ -9,16 +9,7 @@ import java.util.Optional;
 import javax.enterprise.context.Dependent;
 import javax.inject.Named;
 
-import org.apache.commons.math3.stat.descriptive.moment.Mean;
-import org.apache.commons.math3.stat.descriptive.moment.StandardDeviation;
-import org.eclipse.emf.ecore.EStructuralFeature;
-
-import de.evoal.core.api.ecore.TypedEObject;
-import de.evoal.core.api.ecore.stream.EObjectPairStreamFactory;
-import de.evoal.core.api.ecore.Space;
-import de.evoal.core.api.utils.Requirements;
-import de.evoal.core.interpreter.api.InterpreterState;
-import de.evoal.surrogate.api.training.SurrogateInformationCalculator;
+import de.evoal.core.api.interpreter.InterpreterState;
 
 /**
  * Calculates cross validation values.

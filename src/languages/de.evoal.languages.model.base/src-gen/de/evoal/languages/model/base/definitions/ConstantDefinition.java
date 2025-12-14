@@ -12,7 +12,6 @@ import de.evoal.languages.model.base.types.Type;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * 
  * A constant definition.
  * 
  * <!-- end-model-doc -->
@@ -35,7 +34,6 @@ public interface ConstantDefinition extends LiteralDefinition {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * 
 	 * Type of the constant.
 	 * 
 	 * <!-- end-model-doc -->
@@ -62,7 +60,6 @@ public interface ConstantDefinition extends LiteralDefinition {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * 
 	 * Value of the constant.
 	 * 
 	 * <!-- end-model-doc -->

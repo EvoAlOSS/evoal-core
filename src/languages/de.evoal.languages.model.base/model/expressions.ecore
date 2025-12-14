@@ -3,7 +3,7 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="expressions" nsURI="https://www.evoal.de/languages/base/expressions/1.0.0"
     nsPrefix="expr">
   <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-    <details key="documentation" value="&#xA;Package for all expression-like model elements.&#xA;"/>
+    <details key="documentation" value="Package for all expression-like model elements.&#xA;"/>
   </eAnnotations>
   <eAnnotations source="http://www.eclipse.org/OCL/Import">
     <details key="defs" value="definitions.ecore#/"/>
@@ -211,9 +211,22 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ValueReference" eSuperTypes="#//ConstantExpression"/>
   <eClassifiers xsi:type="ecore:EClass" name="SelfReference" eSuperTypes="#//ValueReference"/>
-  <eClassifiers xsi:type="ecore:EClass" name="LiteralDefinitionReference" eSuperTypes="#//ValueReference">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="definition" eType="ecore:EClass definitions.ecore#//LiteralDefinition"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ValueDefinitionReference" eSuperTypes="#//ValueReference">
+    <eOperations name="isEnumLiteralReference" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return this.getDefinition() instanceof &lt;%de.evoal.languages.model.base.definitions.LiteralDefinition%>;"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="isAttributeReference" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return this.getDefinition() instanceof &lt;%de.evoal.languages.model.base.definitions.AttributeDefinition%>;&#xA;"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="definition" lowerBound="1"
+        eType="ecore:EClass definitions.ecore#//ValueDefinition"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AttributeDefinitionReference" eSuperTypes="#//ValueDefinitionReference"/>
+  <eClassifiers xsi:type="ecore:EClass" name="LiteralDefinitionReference" eSuperTypes="#//ValueDefinitionReference"/>
   <eClassifiers xsi:type="ecore:EClass" name="TypeDefinitionReference" eSuperTypes="#//ValueReference">
     <eStructuralFeatures xsi:type="ecore:EReference" name="definition" eType="ecore:EClass definitions.ecore#//TypeDefinition"/>
   </eClassifiers>

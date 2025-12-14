@@ -260,9 +260,31 @@ public class ExpressionsSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case ExpressionsPackage.VALUE_DEFINITION_REFERENCE: {
+				ValueDefinitionReference valueDefinitionReference = (ValueDefinitionReference)theEObject;
+				T result = caseValueDefinitionReference(valueDefinitionReference);
+				if (result == null) result = caseValueReference(valueDefinitionReference);
+				if (result == null) result = caseConstantExpression(valueDefinitionReference);
+				if (result == null) result = caseReadExpression(valueDefinitionReference);
+				if (result == null) result = caseExpression(valueDefinitionReference);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ExpressionsPackage.ATTRIBUTE_DEFINITION_REFERENCE: {
+				AttributeDefinitionReference attributeDefinitionReference = (AttributeDefinitionReference)theEObject;
+				T result = caseAttributeDefinitionReference(attributeDefinitionReference);
+				if (result == null) result = caseValueDefinitionReference(attributeDefinitionReference);
+				if (result == null) result = caseValueReference(attributeDefinitionReference);
+				if (result == null) result = caseConstantExpression(attributeDefinitionReference);
+				if (result == null) result = caseReadExpression(attributeDefinitionReference);
+				if (result == null) result = caseExpression(attributeDefinitionReference);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case ExpressionsPackage.LITERAL_DEFINITION_REFERENCE: {
 				LiteralDefinitionReference literalDefinitionReference = (LiteralDefinitionReference)theEObject;
 				T result = caseLiteralDefinitionReference(literalDefinitionReference);
+				if (result == null) result = caseValueDefinitionReference(literalDefinitionReference);
 				if (result == null) result = caseValueReference(literalDefinitionReference);
 				if (result == null) result = caseConstantExpression(literalDefinitionReference);
 				if (result == null) result = caseReadExpression(literalDefinitionReference);
@@ -660,6 +682,36 @@ public class ExpressionsSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseSelfReference(SelfReference object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Value Definition Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Value Definition Reference</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseValueDefinitionReference(ValueDefinitionReference object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Attribute Definition Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Attribute Definition Reference</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAttributeDefinitionReference(AttributeDefinitionReference object) {
 		return null;
 	}
 

@@ -3310,23 +3310,23 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
     // $ANTLR end "ruleCallRule"
 
 
-    // $ANTLR start "entryRuleLiteralDefinitionReferenceRule"
-    // InternalMachineLearningLanguage.g:980:1: entryRuleLiteralDefinitionReferenceRule : ruleLiteralDefinitionReferenceRule EOF ;
-    public final void entryRuleLiteralDefinitionReferenceRule() throws RecognitionException {
+    // $ANTLR start "entryRuleValuelDefinitionReferenceRule"
+    // InternalMachineLearningLanguage.g:980:1: entryRuleValuelDefinitionReferenceRule : ruleValuelDefinitionReferenceRule EOF ;
+    public final void entryRuleValuelDefinitionReferenceRule() throws RecognitionException {
         try {
-            // InternalMachineLearningLanguage.g:981:1: ( ruleLiteralDefinitionReferenceRule EOF )
-            // InternalMachineLearningLanguage.g:982:1: ruleLiteralDefinitionReferenceRule EOF
+            // InternalMachineLearningLanguage.g:981:1: ( ruleValuelDefinitionReferenceRule EOF )
+            // InternalMachineLearningLanguage.g:982:1: ruleValuelDefinitionReferenceRule EOF
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getLiteralDefinitionReferenceRuleRule()); 
+               before(grammarAccess.getValuelDefinitionReferenceRuleRule()); 
             }
             pushFollow(FOLLOW_1);
-            ruleLiteralDefinitionReferenceRule();
+            ruleValuelDefinitionReferenceRule();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getLiteralDefinitionReferenceRuleRule()); 
+               after(grammarAccess.getValuelDefinitionReferenceRuleRule()); 
             }
             match(input,EOF,FOLLOW_2); if (state.failed) return ;
 
@@ -3341,30 +3341,30 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
         }
         return ;
     }
-    // $ANTLR end "entryRuleLiteralDefinitionReferenceRule"
+    // $ANTLR end "entryRuleValuelDefinitionReferenceRule"
 
 
-    // $ANTLR start "ruleLiteralDefinitionReferenceRule"
-    // InternalMachineLearningLanguage.g:989:1: ruleLiteralDefinitionReferenceRule : ( ( rule__LiteralDefinitionReferenceRule__DefinitionAssignment ) ) ;
-    public final void ruleLiteralDefinitionReferenceRule() throws RecognitionException {
+    // $ANTLR start "ruleValuelDefinitionReferenceRule"
+    // InternalMachineLearningLanguage.g:989:1: ruleValuelDefinitionReferenceRule : ( ( rule__ValuelDefinitionReferenceRule__DefinitionAssignment ) ) ;
+    public final void ruleValuelDefinitionReferenceRule() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalMachineLearningLanguage.g:993:2: ( ( ( rule__LiteralDefinitionReferenceRule__DefinitionAssignment ) ) )
-            // InternalMachineLearningLanguage.g:994:2: ( ( rule__LiteralDefinitionReferenceRule__DefinitionAssignment ) )
+            // InternalMachineLearningLanguage.g:993:2: ( ( ( rule__ValuelDefinitionReferenceRule__DefinitionAssignment ) ) )
+            // InternalMachineLearningLanguage.g:994:2: ( ( rule__ValuelDefinitionReferenceRule__DefinitionAssignment ) )
             {
-            // InternalMachineLearningLanguage.g:994:2: ( ( rule__LiteralDefinitionReferenceRule__DefinitionAssignment ) )
-            // InternalMachineLearningLanguage.g:995:3: ( rule__LiteralDefinitionReferenceRule__DefinitionAssignment )
+            // InternalMachineLearningLanguage.g:994:2: ( ( rule__ValuelDefinitionReferenceRule__DefinitionAssignment ) )
+            // InternalMachineLearningLanguage.g:995:3: ( rule__ValuelDefinitionReferenceRule__DefinitionAssignment )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getLiteralDefinitionReferenceRuleAccess().getDefinitionAssignment()); 
+               before(grammarAccess.getValuelDefinitionReferenceRuleAccess().getDefinitionAssignment()); 
             }
-            // InternalMachineLearningLanguage.g:996:3: ( rule__LiteralDefinitionReferenceRule__DefinitionAssignment )
-            // InternalMachineLearningLanguage.g:996:4: rule__LiteralDefinitionReferenceRule__DefinitionAssignment
+            // InternalMachineLearningLanguage.g:996:3: ( rule__ValuelDefinitionReferenceRule__DefinitionAssignment )
+            // InternalMachineLearningLanguage.g:996:4: rule__ValuelDefinitionReferenceRule__DefinitionAssignment
             {
             pushFollow(FOLLOW_2);
-            rule__LiteralDefinitionReferenceRule__DefinitionAssignment();
+            rule__ValuelDefinitionReferenceRule__DefinitionAssignment();
 
             state._fsp--;
             if (state.failed) return ;
@@ -3372,7 +3372,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getLiteralDefinitionReferenceRuleAccess().getDefinitionAssignment()); 
+               after(grammarAccess.getValuelDefinitionReferenceRuleAccess().getDefinitionAssignment()); 
             }
 
             }
@@ -3392,7 +3392,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
         }
         return ;
     }
-    // $ANTLR end "ruleLiteralDefinitionReferenceRule"
+    // $ANTLR end "ruleValuelDefinitionReferenceRule"
 
 
     // $ANTLR start "entryRuleTypeDefinitionReferenceRule"
@@ -6528,13 +6528,13 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__ReferenceRule__Alternatives"
-    // InternalMachineLearningLanguage.g:1901:1: rule__ReferenceRule__Alternatives : ( ( ruleLiteralDefinitionReferenceRule ) | ( ruleTypeDefinitionReferenceRule ) | ( ruleVariableReferenceRule ) );
+    // InternalMachineLearningLanguage.g:1901:1: rule__ReferenceRule__Alternatives : ( ( ruleValuelDefinitionReferenceRule ) | ( ruleTypeDefinitionReferenceRule ) | ( ruleVariableReferenceRule ) );
     public final void rule__ReferenceRule__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalMachineLearningLanguage.g:1905:1: ( ( ruleLiteralDefinitionReferenceRule ) | ( ruleTypeDefinitionReferenceRule ) | ( ruleVariableReferenceRule ) )
+            // InternalMachineLearningLanguage.g:1905:1: ( ( ruleValuelDefinitionReferenceRule ) | ( ruleTypeDefinitionReferenceRule ) | ( ruleVariableReferenceRule ) )
             int alt5=3;
             switch ( input.LA(1) ) {
             case RULE_QUOTED_ID:
@@ -6591,21 +6591,21 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
 
             switch (alt5) {
                 case 1 :
-                    // InternalMachineLearningLanguage.g:1906:2: ( ruleLiteralDefinitionReferenceRule )
+                    // InternalMachineLearningLanguage.g:1906:2: ( ruleValuelDefinitionReferenceRule )
                     {
-                    // InternalMachineLearningLanguage.g:1906:2: ( ruleLiteralDefinitionReferenceRule )
-                    // InternalMachineLearningLanguage.g:1907:3: ruleLiteralDefinitionReferenceRule
+                    // InternalMachineLearningLanguage.g:1906:2: ( ruleValuelDefinitionReferenceRule )
+                    // InternalMachineLearningLanguage.g:1907:3: ruleValuelDefinitionReferenceRule
                     {
                     if ( state.backtracking==0 ) {
-                       before(grammarAccess.getReferenceRuleAccess().getLiteralDefinitionReferenceRuleParserRuleCall_0()); 
+                       before(grammarAccess.getReferenceRuleAccess().getValuelDefinitionReferenceRuleParserRuleCall_0()); 
                     }
                     pushFollow(FOLLOW_2);
-                    ruleLiteralDefinitionReferenceRule();
+                    ruleValuelDefinitionReferenceRule();
 
                     state._fsp--;
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
-                       after(grammarAccess.getReferenceRuleAccess().getLiteralDefinitionReferenceRuleParserRuleCall_0()); 
+                       after(grammarAccess.getReferenceRuleAccess().getValuelDefinitionReferenceRuleParserRuleCall_0()); 
                     }
 
                     }
@@ -36253,9 +36253,9 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
     // $ANTLR end "rule__CallRule__ParametersAssignment_2_1_1"
 
 
-    // $ANTLR start "rule__LiteralDefinitionReferenceRule__DefinitionAssignment"
-    // InternalMachineLearningLanguage.g:11217:1: rule__LiteralDefinitionReferenceRule__DefinitionAssignment : ( ( ruleQualifiedName ) ) ;
-    public final void rule__LiteralDefinitionReferenceRule__DefinitionAssignment() throws RecognitionException {
+    // $ANTLR start "rule__ValuelDefinitionReferenceRule__DefinitionAssignment"
+    // InternalMachineLearningLanguage.g:11217:1: rule__ValuelDefinitionReferenceRule__DefinitionAssignment : ( ( ruleQualifiedName ) ) ;
+    public final void rule__ValuelDefinitionReferenceRule__DefinitionAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
@@ -36267,13 +36267,13 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
             // InternalMachineLearningLanguage.g:11223:3: ( ruleQualifiedName )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getLiteralDefinitionReferenceRuleAccess().getDefinitionLiteralDefinitionCrossReference_0()); 
+               before(grammarAccess.getValuelDefinitionReferenceRuleAccess().getDefinitionValueDefinitionCrossReference_0()); 
             }
             // InternalMachineLearningLanguage.g:11224:3: ( ruleQualifiedName )
             // InternalMachineLearningLanguage.g:11225:4: ruleQualifiedName
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getLiteralDefinitionReferenceRuleAccess().getDefinitionLiteralDefinitionQualifiedNameParserRuleCall_0_1()); 
+               before(grammarAccess.getValuelDefinitionReferenceRuleAccess().getDefinitionValueDefinitionQualifiedNameParserRuleCall_0_1()); 
             }
             pushFollow(FOLLOW_2);
             ruleQualifiedName();
@@ -36281,13 +36281,13 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getLiteralDefinitionReferenceRuleAccess().getDefinitionLiteralDefinitionQualifiedNameParserRuleCall_0_1()); 
+               after(grammarAccess.getValuelDefinitionReferenceRuleAccess().getDefinitionValueDefinitionQualifiedNameParserRuleCall_0_1()); 
             }
 
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getLiteralDefinitionReferenceRuleAccess().getDefinitionLiteralDefinitionCrossReference_0()); 
+               after(grammarAccess.getValuelDefinitionReferenceRuleAccess().getDefinitionValueDefinitionCrossReference_0()); 
             }
 
             }
@@ -36307,7 +36307,7 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
         }
         return ;
     }
-    // $ANTLR end "rule__LiteralDefinitionReferenceRule__DefinitionAssignment"
+    // $ANTLR end "rule__ValuelDefinitionReferenceRule__DefinitionAssignment"
 
 
     // $ANTLR start "rule__BaseDataReferenceRule__DefinitionAssignment_1"
@@ -37463,17 +37463,17 @@ public class InternalMachineLearningLanguageParser extends AbstractInternalConte
 
     // $ANTLR start synpred9_InternalMachineLearningLanguage
     public final void synpred9_InternalMachineLearningLanguage_fragment() throws RecognitionException {   
-        // InternalMachineLearningLanguage.g:1906:2: ( ( ruleLiteralDefinitionReferenceRule ) )
-        // InternalMachineLearningLanguage.g:1906:2: ( ruleLiteralDefinitionReferenceRule )
+        // InternalMachineLearningLanguage.g:1906:2: ( ( ruleValuelDefinitionReferenceRule ) )
+        // InternalMachineLearningLanguage.g:1906:2: ( ruleValuelDefinitionReferenceRule )
         {
-        // InternalMachineLearningLanguage.g:1906:2: ( ruleLiteralDefinitionReferenceRule )
-        // InternalMachineLearningLanguage.g:1907:3: ruleLiteralDefinitionReferenceRule
+        // InternalMachineLearningLanguage.g:1906:2: ( ruleValuelDefinitionReferenceRule )
+        // InternalMachineLearningLanguage.g:1907:3: ruleValuelDefinitionReferenceRule
         {
         if ( state.backtracking==0 ) {
-           before(grammarAccess.getReferenceRuleAccess().getLiteralDefinitionReferenceRuleParserRuleCall_0()); 
+           before(grammarAccess.getReferenceRuleAccess().getValuelDefinitionReferenceRuleParserRuleCall_0()); 
         }
         pushFollow(FOLLOW_2);
-        ruleLiteralDefinitionReferenceRule();
+        ruleValuelDefinitionReferenceRule();
 
         state._fsp--;
         if (state.failed) return ;

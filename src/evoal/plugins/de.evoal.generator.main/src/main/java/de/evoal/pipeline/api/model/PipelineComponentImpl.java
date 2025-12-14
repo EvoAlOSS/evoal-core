@@ -1,6 +1,6 @@
 package de.evoal.pipeline.api.model;
 
-import de.evoal.core.interpreter.api.InterpreterState;
+import de.evoal.core.api.interpreter.InterpreterState;
 import lombok.Getter;
 
 import de.evoal.core.api.cdi.EvoalComponent;

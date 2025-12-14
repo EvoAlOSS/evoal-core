@@ -1,7 +1,7 @@
 package de.evoal.surrogate.main.gof;
 
-import de.evoal.core.interpreter.api.InterpreterState;
-import de.evoal.core.interpreter.api.cdi.EvoalBuiltinFunction;
+import de.evoal.core.api.interpreter.InterpreterState;
+import de.evoal.core.api.cdi.EvoalBuiltinFunction;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.enterprise.context.ApplicationScoped;

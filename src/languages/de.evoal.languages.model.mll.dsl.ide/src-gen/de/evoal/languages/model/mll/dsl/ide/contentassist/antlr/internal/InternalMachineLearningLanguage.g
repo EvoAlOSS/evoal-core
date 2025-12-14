@@ -976,25 +976,25 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-// Entry rule entryRuleLiteralDefinitionReferenceRule
-entryRuleLiteralDefinitionReferenceRule
+// Entry rule entryRuleValuelDefinitionReferenceRule
+entryRuleValuelDefinitionReferenceRule
 :
-{ before(grammarAccess.getLiteralDefinitionReferenceRuleRule()); }
-	 ruleLiteralDefinitionReferenceRule
-{ after(grammarAccess.getLiteralDefinitionReferenceRuleRule()); } 
+{ before(grammarAccess.getValuelDefinitionReferenceRuleRule()); }
+	 ruleValuelDefinitionReferenceRule
+{ after(grammarAccess.getValuelDefinitionReferenceRuleRule()); } 
 	 EOF 
 ;
 
-// Rule LiteralDefinitionReferenceRule
-ruleLiteralDefinitionReferenceRule 
+// Rule ValuelDefinitionReferenceRule
+ruleValuelDefinitionReferenceRule 
 	@init {
 		int stackSize = keepStackSize();
 	}
 	:
 	(
-		{ before(grammarAccess.getLiteralDefinitionReferenceRuleAccess().getDefinitionAssignment()); }
-		(rule__LiteralDefinitionReferenceRule__DefinitionAssignment)
-		{ after(grammarAccess.getLiteralDefinitionReferenceRuleAccess().getDefinitionAssignment()); }
+		{ before(grammarAccess.getValuelDefinitionReferenceRuleAccess().getDefinitionAssignment()); }
+		(rule__ValuelDefinitionReferenceRule__DefinitionAssignment)
+		{ after(grammarAccess.getValuelDefinitionReferenceRuleAccess().getDefinitionAssignment()); }
 	)
 ;
 finally {
@@ -1904,9 +1904,9 @@ rule__ReferenceRule__Alternatives
 	}
 :
 	(
-		{ before(grammarAccess.getReferenceRuleAccess().getLiteralDefinitionReferenceRuleParserRuleCall_0()); }
-		ruleLiteralDefinitionReferenceRule
-		{ after(grammarAccess.getReferenceRuleAccess().getLiteralDefinitionReferenceRuleParserRuleCall_0()); }
+		{ before(grammarAccess.getReferenceRuleAccess().getValuelDefinitionReferenceRuleParserRuleCall_0()); }
+		ruleValuelDefinitionReferenceRule
+		{ after(grammarAccess.getReferenceRuleAccess().getValuelDefinitionReferenceRuleParserRuleCall_0()); }
 	)
 	|
 	(
@@ -11214,19 +11214,19 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__LiteralDefinitionReferenceRule__DefinitionAssignment
+rule__ValuelDefinitionReferenceRule__DefinitionAssignment
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 	(
-		{ before(grammarAccess.getLiteralDefinitionReferenceRuleAccess().getDefinitionLiteralDefinitionCrossReference_0()); }
+		{ before(grammarAccess.getValuelDefinitionReferenceRuleAccess().getDefinitionValueDefinitionCrossReference_0()); }
 		(
-			{ before(grammarAccess.getLiteralDefinitionReferenceRuleAccess().getDefinitionLiteralDefinitionQualifiedNameParserRuleCall_0_1()); }
+			{ before(grammarAccess.getValuelDefinitionReferenceRuleAccess().getDefinitionValueDefinitionQualifiedNameParserRuleCall_0_1()); }
 			ruleQualifiedName
-			{ after(grammarAccess.getLiteralDefinitionReferenceRuleAccess().getDefinitionLiteralDefinitionQualifiedNameParserRuleCall_0_1()); }
+			{ after(grammarAccess.getValuelDefinitionReferenceRuleAccess().getDefinitionValueDefinitionQualifiedNameParserRuleCall_0_1()); }
 		)
-		{ after(grammarAccess.getLiteralDefinitionReferenceRuleAccess().getDefinitionLiteralDefinitionCrossReference_0()); }
+		{ after(grammarAccess.getValuelDefinitionReferenceRuleAccess().getDefinitionValueDefinitionCrossReference_0()); }
 	)
 ;
 finally {

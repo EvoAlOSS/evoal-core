@@ -2988,11 +2988,11 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleReferenceRule"
-    // InternalGeneratorDSL.g:1091:1: ruleReferenceRule returns [EObject current=null] : (this_LiteralDefinitionReferenceRule_0= ruleLiteralDefinitionReferenceRule | this_TypeDefinitionReferenceRule_1= ruleTypeDefinitionReferenceRule | this_VariableReferenceRule_2= ruleVariableReferenceRule ) ;
+    // InternalGeneratorDSL.g:1091:1: ruleReferenceRule returns [EObject current=null] : (this_ValuelDefinitionReferenceRule_0= ruleValuelDefinitionReferenceRule | this_TypeDefinitionReferenceRule_1= ruleTypeDefinitionReferenceRule | this_VariableReferenceRule_2= ruleVariableReferenceRule ) ;
     public final EObject ruleReferenceRule() throws RecognitionException {
         EObject current = null;
 
-        EObject this_LiteralDefinitionReferenceRule_0 = null;
+        EObject this_ValuelDefinitionReferenceRule_0 = null;
 
         EObject this_TypeDefinitionReferenceRule_1 = null;
 
@@ -3003,10 +3003,10 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalGeneratorDSL.g:1097:2: ( (this_LiteralDefinitionReferenceRule_0= ruleLiteralDefinitionReferenceRule | this_TypeDefinitionReferenceRule_1= ruleTypeDefinitionReferenceRule | this_VariableReferenceRule_2= ruleVariableReferenceRule ) )
-            // InternalGeneratorDSL.g:1098:2: (this_LiteralDefinitionReferenceRule_0= ruleLiteralDefinitionReferenceRule | this_TypeDefinitionReferenceRule_1= ruleTypeDefinitionReferenceRule | this_VariableReferenceRule_2= ruleVariableReferenceRule )
+            // InternalGeneratorDSL.g:1097:2: ( (this_ValuelDefinitionReferenceRule_0= ruleValuelDefinitionReferenceRule | this_TypeDefinitionReferenceRule_1= ruleTypeDefinitionReferenceRule | this_VariableReferenceRule_2= ruleVariableReferenceRule ) )
+            // InternalGeneratorDSL.g:1098:2: (this_ValuelDefinitionReferenceRule_0= ruleValuelDefinitionReferenceRule | this_TypeDefinitionReferenceRule_1= ruleTypeDefinitionReferenceRule | this_VariableReferenceRule_2= ruleVariableReferenceRule )
             {
-            // InternalGeneratorDSL.g:1098:2: (this_LiteralDefinitionReferenceRule_0= ruleLiteralDefinitionReferenceRule | this_TypeDefinitionReferenceRule_1= ruleTypeDefinitionReferenceRule | this_VariableReferenceRule_2= ruleVariableReferenceRule )
+            // InternalGeneratorDSL.g:1098:2: (this_ValuelDefinitionReferenceRule_0= ruleValuelDefinitionReferenceRule | this_TypeDefinitionReferenceRule_1= ruleTypeDefinitionReferenceRule | this_VariableReferenceRule_2= ruleVariableReferenceRule )
             int alt16=3;
             switch ( input.LA(1) ) {
             case RULE_QUOTED_ID:
@@ -3063,7 +3063,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
 
             switch (alt16) {
                 case 1 :
-                    // InternalGeneratorDSL.g:1099:3: this_LiteralDefinitionReferenceRule_0= ruleLiteralDefinitionReferenceRule
+                    // InternalGeneratorDSL.g:1099:3: this_ValuelDefinitionReferenceRule_0= ruleValuelDefinitionReferenceRule
                     {
                     if ( state.backtracking==0 ) {
 
@@ -3072,17 +3072,17 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
                     }
                     if ( state.backtracking==0 ) {
 
-                      			newCompositeNode(grammarAccess.getReferenceRuleAccess().getLiteralDefinitionReferenceRuleParserRuleCall_0());
+                      			newCompositeNode(grammarAccess.getReferenceRuleAccess().getValuelDefinitionReferenceRuleParserRuleCall_0());
                       		
                     }
                     pushFollow(FOLLOW_2);
-                    this_LiteralDefinitionReferenceRule_0=ruleLiteralDefinitionReferenceRule();
+                    this_ValuelDefinitionReferenceRule_0=ruleValuelDefinitionReferenceRule();
 
                     state._fsp--;
                     if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
-                      			current = this_LiteralDefinitionReferenceRule_0;
+                      			current = this_ValuelDefinitionReferenceRule_0;
                       			afterParserOrEnumRuleCall();
                       		
                     }
@@ -6300,28 +6300,28 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
     // $ANTLR end "ruleCallRule"
 
 
-    // $ANTLR start "entryRuleLiteralDefinitionReferenceRule"
-    // InternalGeneratorDSL.g:2228:1: entryRuleLiteralDefinitionReferenceRule returns [EObject current=null] : iv_ruleLiteralDefinitionReferenceRule= ruleLiteralDefinitionReferenceRule EOF ;
-    public final EObject entryRuleLiteralDefinitionReferenceRule() throws RecognitionException {
+    // $ANTLR start "entryRuleValuelDefinitionReferenceRule"
+    // InternalGeneratorDSL.g:2228:1: entryRuleValuelDefinitionReferenceRule returns [EObject current=null] : iv_ruleValuelDefinitionReferenceRule= ruleValuelDefinitionReferenceRule EOF ;
+    public final EObject entryRuleValuelDefinitionReferenceRule() throws RecognitionException {
         EObject current = null;
 
-        EObject iv_ruleLiteralDefinitionReferenceRule = null;
+        EObject iv_ruleValuelDefinitionReferenceRule = null;
 
 
         try {
-            // InternalGeneratorDSL.g:2228:71: (iv_ruleLiteralDefinitionReferenceRule= ruleLiteralDefinitionReferenceRule EOF )
-            // InternalGeneratorDSL.g:2229:2: iv_ruleLiteralDefinitionReferenceRule= ruleLiteralDefinitionReferenceRule EOF
+            // InternalGeneratorDSL.g:2228:70: (iv_ruleValuelDefinitionReferenceRule= ruleValuelDefinitionReferenceRule EOF )
+            // InternalGeneratorDSL.g:2229:2: iv_ruleValuelDefinitionReferenceRule= ruleValuelDefinitionReferenceRule EOF
             {
             if ( state.backtracking==0 ) {
-               newCompositeNode(grammarAccess.getLiteralDefinitionReferenceRuleRule()); 
+               newCompositeNode(grammarAccess.getValuelDefinitionReferenceRuleRule()); 
             }
             pushFollow(FOLLOW_1);
-            iv_ruleLiteralDefinitionReferenceRule=ruleLiteralDefinitionReferenceRule();
+            iv_ruleValuelDefinitionReferenceRule=ruleValuelDefinitionReferenceRule();
 
             state._fsp--;
             if (state.failed) return current;
             if ( state.backtracking==0 ) {
-               current =iv_ruleLiteralDefinitionReferenceRule; 
+               current =iv_ruleValuelDefinitionReferenceRule; 
             }
             match(input,EOF,FOLLOW_2); if (state.failed) return current;
 
@@ -6337,12 +6337,12 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "entryRuleLiteralDefinitionReferenceRule"
+    // $ANTLR end "entryRuleValuelDefinitionReferenceRule"
 
 
-    // $ANTLR start "ruleLiteralDefinitionReferenceRule"
-    // InternalGeneratorDSL.g:2235:1: ruleLiteralDefinitionReferenceRule returns [EObject current=null] : ( ( ruleQualifiedName ) ) ;
-    public final EObject ruleLiteralDefinitionReferenceRule() throws RecognitionException {
+    // $ANTLR start "ruleValuelDefinitionReferenceRule"
+    // InternalGeneratorDSL.g:2235:1: ruleValuelDefinitionReferenceRule returns [EObject current=null] : ( ( ruleQualifiedName ) ) ;
+    public final EObject ruleValuelDefinitionReferenceRule() throws RecognitionException {
         EObject current = null;
 
 
@@ -6366,13 +6366,13 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
 
               				if (current==null) {
-              					current = createModelElement(grammarAccess.getLiteralDefinitionReferenceRuleRule());
+              					current = createModelElement(grammarAccess.getValuelDefinitionReferenceRuleRule());
               				}
               			
             }
             if ( state.backtracking==0 ) {
 
-              				newCompositeNode(grammarAccess.getLiteralDefinitionReferenceRuleAccess().getDefinitionLiteralDefinitionCrossReference_0());
+              				newCompositeNode(grammarAccess.getValuelDefinitionReferenceRuleAccess().getDefinitionValueDefinitionCrossReference_0());
               			
             }
             pushFollow(FOLLOW_2);
@@ -6409,7 +6409,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "ruleLiteralDefinitionReferenceRule"
+    // $ANTLR end "ruleValuelDefinitionReferenceRule"
 
 
     // $ANTLR start "entryRuleTypeDefinitionReferenceRule"
@@ -11960,11 +11960,11 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
 
     // $ANTLR start synpred17_InternalGeneratorDSL
     public final void synpred17_InternalGeneratorDSL_fragment() throws RecognitionException {   
-        EObject this_LiteralDefinitionReferenceRule_0 = null;
+        EObject this_ValuelDefinitionReferenceRule_0 = null;
 
 
-        // InternalGeneratorDSL.g:1099:3: (this_LiteralDefinitionReferenceRule_0= ruleLiteralDefinitionReferenceRule )
-        // InternalGeneratorDSL.g:1099:3: this_LiteralDefinitionReferenceRule_0= ruleLiteralDefinitionReferenceRule
+        // InternalGeneratorDSL.g:1099:3: (this_ValuelDefinitionReferenceRule_0= ruleValuelDefinitionReferenceRule )
+        // InternalGeneratorDSL.g:1099:3: this_ValuelDefinitionReferenceRule_0= ruleValuelDefinitionReferenceRule
         {
         if ( state.backtracking==0 ) {
 
@@ -11972,7 +11972,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalAntlrParser {
           		
         }
         pushFollow(FOLLOW_2);
-        this_LiteralDefinitionReferenceRule_0=ruleLiteralDefinitionReferenceRule();
+        this_ValuelDefinitionReferenceRule_0=ruleValuelDefinitionReferenceRule();
 
         state._fsp--;
         if (state.failed) return ;

@@ -3,8 +3,6 @@ module de.evoal.surrogate.api {
     requires jakarta.enterprise.cdi.api;
     requires com.google.guice;
 
-    requires java.annotation;
-
     requires lombok;
 
     requires org.slf4j;
@@ -30,7 +28,6 @@ module de.evoal.surrogate.api {
     requires de.evoal.generator.main;
     requires smile.base;
     requires de.evoal.languages.models;
-    requires de.evoal.core.interpreter;
     requires commons.math3;
 
     // export resources

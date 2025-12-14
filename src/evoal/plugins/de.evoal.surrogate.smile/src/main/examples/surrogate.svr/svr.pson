@@ -7,13 +7,13 @@
     "value" : {
       "type" : "array(double)",
       "size" : 12,
-      "value" : [ -0.11467900437569942, -0.15, -0.15, 0.15, -0.15, -0.15, -0.15, 0.15, 0.15, 0.15, 0.11467900437569942, 0.15 ]
+      "value" : [ -0.1, -0.1, -0.1, 0.1, -0.1, -0.1, -0.1, 0.1, 0.1, 0.1, 0.1, 0.1 ]
     }
   }, {
     "name" : "intercept",
     "value" : {
       "type" : "double",
-      "value" : -0.15557435037557635
+      "value" : -0.15573073471322701
     }
   }, {
     "name" : "instances",
@@ -39,7 +39,7 @@
     "name" : "soft-margin",
     "value" : {
       "type" : "double",
-      "value" : 0.15
+      "value" : 0.1
     }
   }, {
     "name" : "ε",
@@ -51,7 +51,7 @@
     "name" : "tolerance",
     "value" : {
       "type" : "double",
-      "value" : 0.1
+      "value" : 0.15
     }
   }, {
     "name" : "kernel-source-means",

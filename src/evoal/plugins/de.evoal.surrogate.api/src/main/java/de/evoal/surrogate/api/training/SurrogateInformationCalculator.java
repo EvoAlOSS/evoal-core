@@ -1,7 +1,7 @@
 package de.evoal.surrogate.api.training;
 
-import de.evoal.core.interpreter.api.InterpreterState;
-import de.evoal.core.interpreter.api.cdi.EvoalBuiltinFunction;
+import de.evoal.core.api.interpreter.InterpreterState;
+import de.evoal.core.api.cdi.EvoalBuiltinFunction;
 import de.evoal.languages.model.mll.TaskDescription;
 import de.evoal.surrogate.api.function.ModelFunctionData;
 import lombok.extern.slf4j.Slf4j;

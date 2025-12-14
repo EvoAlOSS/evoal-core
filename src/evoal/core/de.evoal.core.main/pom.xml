@@ -219,6 +219,7 @@
 			<groupId>de.evoal.languages</groupId>
 			<artifactId>de.evoal.languages.model.interpreter</artifactId>
 			<version>${evoal.languages.version}</version>
+            <scope>compile</scope>
 		</dependency>
 
 		<dependency>

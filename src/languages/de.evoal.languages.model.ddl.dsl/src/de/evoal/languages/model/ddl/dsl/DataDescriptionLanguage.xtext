@@ -91,7 +91,7 @@ StatementRule returns expressions::Expression:
 
 @Override
 ReferenceRule returns expressions::ConstantExpression:
-	LiteralDefinitionReferenceRule
+	ValuelDefinitionReferenceRule
 	| TypeDefinitionReferenceRule
 	| SelfReferenceRule
 ;

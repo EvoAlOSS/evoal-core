@@ -17,13 +17,12 @@ public class MetaValidationComponent extends ValidationComponent <MetaValidator>
 
     @PostConstruct
     public void init() {
+        log.info("Collecting validators for meta validation.");
         loadValidators(MetaValidator.class);
     }
 
     public void validate(final ResourceSet rs) {
         rs.getResources()
-          .stream()
           .forEach(r -> validators.forEach(v -> v.validate(r)));
-
     }
 }

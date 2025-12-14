@@ -190,8 +190,8 @@ public final class BeanFactory {
     public static <T extends Validator> Collection<? extends T> createComponents(final Class<T> clazz) {
         return BeanProvider.getBeanDefinitions(clazz, true, true)
                 .stream()
-                .peek(b -> log.info("Creating bean for instance of type {}.", b.getName()))
+                .peek(b -> log.info("Creating bean {}.", b.getBeanClass().getSimpleName()))
                 .map(bean -> BeanProvider.getContextualReference(clazz, bean))
-                .collect(Collectors.toUnmodifiableList());
+                .toList();
     }
 }

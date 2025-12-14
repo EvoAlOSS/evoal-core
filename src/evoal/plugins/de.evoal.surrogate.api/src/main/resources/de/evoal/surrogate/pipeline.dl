@@ -1,5 +1,4 @@
-import "definitions" from de.evoal.pipeline.base;
-import "definitions" from de.evoal.surrogate.ml;
+import "definitions" from 'de.evoal.pipeline.base';
 
 /**
  * Generator extensions based on surrogate models.
@@ -9,7 +8,7 @@ module de.evoal.surrogate.pipeline {
     /**
      * Uses a pre-trained surrogate model as function.
      */
-	type surrogate extends 'Processor' {
+	type surrogate extends Processor {
 	    /**
 	     * Name of the pson file storing surrogate model.
 	     **/
@@ -23,17 +22,17 @@ module de.evoal.surrogate.pipeline {
 		/**
 		 * List of files or directories to use
 		 */
-		'training-files' : array string;
+		'training-files' : optional array string;
 		
 		/**
 		 * The input features of the model.
 		 */
-         'input-features' : array data;
+         'input-features' : optional array data;
          
          /**
           * The output features of the model.
           */
-         'output-features' : array data;
+         'output-features' : optional array data;
 	}
 
     /**
@@ -43,22 +42,22 @@ module de.evoal.surrogate.pipeline {
         /**
          * The model (and the hyper parameters) to learn.
          */
-         'model' : instance surrogate;
+         'model' : optional instance surrogate;
          
 	    /**
 	     * Location for storing the model.
 	     */
-	    'model-file' : string;
+	    'model-file' : optional string;
 
 		/**
 		 * The input features of the model.
 		 */
-         'input-features' : array data;
+         'input-features' : optional array data;
          
          /**
           * The output features of the model.
           */
-         'output-features' : array data;
+         'output-features' : optional array data;
 	}
 
 	type 'model-prediction' extends Processor {}

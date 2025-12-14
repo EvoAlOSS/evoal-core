@@ -14,7 +14,7 @@ import org.eclipse.emf.ecore.EClass;
  *
  * @generated
  */
-public abstract class LiteralDefinitionImpl extends DefinitionImpl implements LiteralDefinition {
+public abstract class LiteralDefinitionImpl extends ValueDefinitionImpl implements LiteralDefinition {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

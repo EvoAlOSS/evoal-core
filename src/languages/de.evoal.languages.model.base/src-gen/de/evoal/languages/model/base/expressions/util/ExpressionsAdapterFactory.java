@@ -160,6 +160,14 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 				return createSelfReferenceAdapter();
 			}
 			@Override
+			public Adapter caseValueDefinitionReference(ValueDefinitionReference object) {
+				return createValueDefinitionReferenceAdapter();
+			}
+			@Override
+			public Adapter caseAttributeDefinitionReference(AttributeDefinitionReference object) {
+				return createAttributeDefinitionReferenceAdapter();
+			}
+			@Override
 			public Adapter caseLiteralDefinitionReference(LiteralDefinitionReference object) {
 				return createLiteralDefinitionReferenceAdapter();
 			}
@@ -522,6 +530,34 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createSelfReferenceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.expressions.ValueDefinitionReference <em>Value Definition Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.evoal.languages.model.base.expressions.ValueDefinitionReference
+	 * @generated
+	 */
+	public Adapter createValueDefinitionReferenceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.expressions.AttributeDefinitionReference <em>Attribute Definition Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.evoal.languages.model.base.expressions.AttributeDefinitionReference
+	 * @generated
+	 */
+	public Adapter createAttributeDefinitionReferenceAdapter() {
 		return null;
 	}
 

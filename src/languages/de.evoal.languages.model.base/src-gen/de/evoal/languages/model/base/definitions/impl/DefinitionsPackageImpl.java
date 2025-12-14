@@ -28,6 +28,7 @@ import de.evoal.languages.model.base.definitions.TypeDefinition;
 import de.evoal.languages.model.base.definitions.TypedBaseDataDescription;
 import de.evoal.languages.model.base.definitions.UntypedBaseDataDescription;
 
+import de.evoal.languages.model.base.definitions.ValueDefinition;
 import de.evoal.languages.model.base.expressions.ExpressionsPackage;
 
 import de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl;
@@ -35,7 +36,6 @@ import de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl;
 import de.evoal.languages.model.base.types.TypesPackage;
 
 import de.evoal.languages.model.base.types.impl.TypesPackageImpl;
-
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
@@ -198,6 +198,13 @@ public class DefinitionsPackageImpl extends EPackageImpl implements DefinitionsP
 	 * @generated
 	 */
 	private EClass definedFunctionNameEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass valueDefinitionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -729,6 +736,16 @@ public class DefinitionsPackageImpl extends EPackageImpl implements DefinitionsP
 	 * @generated
 	 */
 	@Override
+	public EClass getValueDefinition() {
+		return valueDefinitionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EEnum getScaleType() {
 		return scaleTypeEEnum;
 	}
@@ -777,6 +794,8 @@ public class DefinitionsPackageImpl extends EPackageImpl implements DefinitionsP
 
 		definitionEClass = createEClass(DEFINITION);
 		createEAttribute(definitionEClass, DEFINITION__NAME);
+
+		valueDefinitionEClass = createEClass(VALUE_DEFINITION);
 
 		typeDefinitionEClass = createEClass(TYPE_DEFINITION);
 
@@ -875,10 +894,12 @@ public class DefinitionsPackageImpl extends EPackageImpl implements DefinitionsP
 
 		// Add supertypes to classes
 		definitionEClass.getESuperTypes().add(this.getConstrained());
+		valueDefinitionEClass.getESuperTypes().add(this.getDefinition());
 		typeDefinitionEClass.getESuperTypes().add(this.getDefinition());
-		literalDefinitionEClass.getESuperTypes().add(this.getDefinition());
+		literalDefinitionEClass.getESuperTypes().add(this.getValueDefinition());
 		classDefinitionEClass.getESuperTypes().add(this.getTypeDefinition());
 		attributeDefinitionEClass.getESuperTypes().add(this.getDefinition());
+		attributeDefinitionEClass.getESuperTypes().add(this.getValueDefinition());
 		enumLiteralDefinitionEClass.getESuperTypes().add(this.getLiteralDefinition());
 		enumDefinitionEClass.getESuperTypes().add(this.getTypeDefinition());
 		enumDefinitionEClass.getESuperTypes().add(this.getScaledDefinition());
@@ -902,6 +923,8 @@ public class DefinitionsPackageImpl extends EPackageImpl implements DefinitionsP
 
 		initEClass(definitionEClass, Definition.class, "Definition", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getDefinition_Name(), ecorePackage.getEString(), "name", null, 0, 1, Definition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(valueDefinitionEClass, ValueDefinition.class, "ValueDefinition", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(typeDefinitionEClass, TypeDefinition.class, "TypeDefinition", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

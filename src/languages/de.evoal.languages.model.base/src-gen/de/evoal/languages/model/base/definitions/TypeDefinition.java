@@ -9,7 +9,6 @@ package de.evoal.languages.model.base.definitions;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * 
  * Base class for all type definitions.
  * 
  * <!-- end-model-doc -->

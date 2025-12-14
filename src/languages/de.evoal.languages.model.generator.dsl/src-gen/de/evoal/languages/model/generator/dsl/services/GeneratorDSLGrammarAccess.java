@@ -653,25 +653,25 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 	public class ReferenceRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.generator.dsl.GeneratorDSL.ReferenceRule");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cLiteralDefinitionReferenceRuleParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cValuelDefinitionReferenceRuleParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cTypeDefinitionReferenceRuleParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cVariableReferenceRuleParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
 		//@Override
 		//ReferenceRule returns expressions::ConstantExpression:
-		//    LiteralDefinitionReferenceRule
+		//    ValuelDefinitionReferenceRule
 		//    | TypeDefinitionReferenceRule
 		//    | VariableReferenceRule
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//LiteralDefinitionReferenceRule
+		//ValuelDefinitionReferenceRule
 		//| TypeDefinitionReferenceRule
 		//| VariableReferenceRule
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
-		//LiteralDefinitionReferenceRule
-		public RuleCall getLiteralDefinitionReferenceRuleParserRuleCall_0() { return cLiteralDefinitionReferenceRuleParserRuleCall_0; }
+		//ValuelDefinitionReferenceRule
+		public RuleCall getValuelDefinitionReferenceRuleParserRuleCall_0() { return cValuelDefinitionReferenceRuleParserRuleCall_0; }
 		
 		//TypeDefinitionReferenceRule
 		public RuleCall getTypeDefinitionReferenceRuleParserRuleCall_1() { return cTypeDefinitionReferenceRuleParserRuleCall_1; }
@@ -1007,7 +1007,7 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 	
 	//@Override
 	//ReferenceRule returns expressions::ConstantExpression:
-	//    LiteralDefinitionReferenceRule
+	//    ValuelDefinitionReferenceRule
 	//    | TypeDefinitionReferenceRule
 	//    | VariableReferenceRule
 	//;
@@ -1250,15 +1250,18 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 		return getCallRuleAccess().getRule();
 	}
 	
-	//LiteralDefinitionReferenceRule returns LiteralDefinitionReference:
-	//    definition = [LiteralDefinition|QualifiedName]
+	///**
+	// * Allows us to reference an enum literal.
+	// */
+	//ValuelDefinitionReferenceRule returns ValueDefinitionReference:
+	//    definition = [ValueDefinition|QualifiedName]
 	//;
-	public BaseLanguageGrammarAccess.LiteralDefinitionReferenceRuleElements getLiteralDefinitionReferenceRuleAccess() {
-		return gaBaseLanguage.getLiteralDefinitionReferenceRuleAccess();
+	public BaseLanguageGrammarAccess.ValuelDefinitionReferenceRuleElements getValuelDefinitionReferenceRuleAccess() {
+		return gaBaseLanguage.getValuelDefinitionReferenceRuleAccess();
 	}
 	
-	public ParserRule getLiteralDefinitionReferenceRuleRule() {
-		return getLiteralDefinitionReferenceRuleAccess().getRule();
+	public ParserRule getValuelDefinitionReferenceRuleRule() {
+		return getValuelDefinitionReferenceRuleAccess().getRule();
 	}
 	
 	//TypeDefinitionReferenceRule returns TypeDefinitionReference:

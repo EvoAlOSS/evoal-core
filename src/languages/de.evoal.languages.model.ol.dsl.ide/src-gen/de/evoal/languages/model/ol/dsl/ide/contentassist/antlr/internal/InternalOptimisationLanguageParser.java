@@ -2099,23 +2099,23 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
     // $ANTLR end "ruleReferenceRule"
 
 
-    // $ANTLR start "entryRuleLiteralDefinitionReferenceRule"
-    // InternalOptimisationLanguage.g:630:1: entryRuleLiteralDefinitionReferenceRule : ruleLiteralDefinitionReferenceRule EOF ;
-    public final void entryRuleLiteralDefinitionReferenceRule() throws RecognitionException {
+    // $ANTLR start "entryRuleValuelDefinitionReferenceRule"
+    // InternalOptimisationLanguage.g:630:1: entryRuleValuelDefinitionReferenceRule : ruleValuelDefinitionReferenceRule EOF ;
+    public final void entryRuleValuelDefinitionReferenceRule() throws RecognitionException {
         try {
-            // InternalOptimisationLanguage.g:631:1: ( ruleLiteralDefinitionReferenceRule EOF )
-            // InternalOptimisationLanguage.g:632:1: ruleLiteralDefinitionReferenceRule EOF
+            // InternalOptimisationLanguage.g:631:1: ( ruleValuelDefinitionReferenceRule EOF )
+            // InternalOptimisationLanguage.g:632:1: ruleValuelDefinitionReferenceRule EOF
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getLiteralDefinitionReferenceRuleRule()); 
+               before(grammarAccess.getValuelDefinitionReferenceRuleRule()); 
             }
             pushFollow(FOLLOW_1);
-            ruleLiteralDefinitionReferenceRule();
+            ruleValuelDefinitionReferenceRule();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getLiteralDefinitionReferenceRuleRule()); 
+               after(grammarAccess.getValuelDefinitionReferenceRuleRule()); 
             }
             match(input,EOF,FOLLOW_2); if (state.failed) return ;
 
@@ -2130,30 +2130,30 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
         }
         return ;
     }
-    // $ANTLR end "entryRuleLiteralDefinitionReferenceRule"
+    // $ANTLR end "entryRuleValuelDefinitionReferenceRule"
 
 
-    // $ANTLR start "ruleLiteralDefinitionReferenceRule"
-    // InternalOptimisationLanguage.g:639:1: ruleLiteralDefinitionReferenceRule : ( ( rule__LiteralDefinitionReferenceRule__DefinitionAssignment ) ) ;
-    public final void ruleLiteralDefinitionReferenceRule() throws RecognitionException {
+    // $ANTLR start "ruleValuelDefinitionReferenceRule"
+    // InternalOptimisationLanguage.g:639:1: ruleValuelDefinitionReferenceRule : ( ( rule__ValuelDefinitionReferenceRule__DefinitionAssignment ) ) ;
+    public final void ruleValuelDefinitionReferenceRule() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:643:2: ( ( ( rule__LiteralDefinitionReferenceRule__DefinitionAssignment ) ) )
-            // InternalOptimisationLanguage.g:644:2: ( ( rule__LiteralDefinitionReferenceRule__DefinitionAssignment ) )
+            // InternalOptimisationLanguage.g:643:2: ( ( ( rule__ValuelDefinitionReferenceRule__DefinitionAssignment ) ) )
+            // InternalOptimisationLanguage.g:644:2: ( ( rule__ValuelDefinitionReferenceRule__DefinitionAssignment ) )
             {
-            // InternalOptimisationLanguage.g:644:2: ( ( rule__LiteralDefinitionReferenceRule__DefinitionAssignment ) )
-            // InternalOptimisationLanguage.g:645:3: ( rule__LiteralDefinitionReferenceRule__DefinitionAssignment )
+            // InternalOptimisationLanguage.g:644:2: ( ( rule__ValuelDefinitionReferenceRule__DefinitionAssignment ) )
+            // InternalOptimisationLanguage.g:645:3: ( rule__ValuelDefinitionReferenceRule__DefinitionAssignment )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getLiteralDefinitionReferenceRuleAccess().getDefinitionAssignment()); 
+               before(grammarAccess.getValuelDefinitionReferenceRuleAccess().getDefinitionAssignment()); 
             }
-            // InternalOptimisationLanguage.g:646:3: ( rule__LiteralDefinitionReferenceRule__DefinitionAssignment )
-            // InternalOptimisationLanguage.g:646:4: rule__LiteralDefinitionReferenceRule__DefinitionAssignment
+            // InternalOptimisationLanguage.g:646:3: ( rule__ValuelDefinitionReferenceRule__DefinitionAssignment )
+            // InternalOptimisationLanguage.g:646:4: rule__ValuelDefinitionReferenceRule__DefinitionAssignment
             {
             pushFollow(FOLLOW_2);
-            rule__LiteralDefinitionReferenceRule__DefinitionAssignment();
+            rule__ValuelDefinitionReferenceRule__DefinitionAssignment();
 
             state._fsp--;
             if (state.failed) return ;
@@ -2161,7 +2161,7 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getLiteralDefinitionReferenceRuleAccess().getDefinitionAssignment()); 
+               after(grammarAccess.getValuelDefinitionReferenceRuleAccess().getDefinitionAssignment()); 
             }
 
             }
@@ -2181,7 +2181,7 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
         }
         return ;
     }
-    // $ANTLR end "ruleLiteralDefinitionReferenceRule"
+    // $ANTLR end "ruleValuelDefinitionReferenceRule"
 
 
     // $ANTLR start "entryRuleTypeDefinitionReferenceRule"
@@ -5202,13 +5202,13 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__ReferenceRule__Alternatives"
-    // InternalOptimisationLanguage.g:1534:1: rule__ReferenceRule__Alternatives : ( ( ruleLiteralDefinitionReferenceRule ) | ( ruleTypeDefinitionReferenceRule ) );
+    // InternalOptimisationLanguage.g:1534:1: rule__ReferenceRule__Alternatives : ( ( ruleValuelDefinitionReferenceRule ) | ( ruleTypeDefinitionReferenceRule ) );
     public final void rule__ReferenceRule__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalOptimisationLanguage.g:1538:1: ( ( ruleLiteralDefinitionReferenceRule ) | ( ruleTypeDefinitionReferenceRule ) )
+            // InternalOptimisationLanguage.g:1538:1: ( ( ruleValuelDefinitionReferenceRule ) | ( ruleTypeDefinitionReferenceRule ) )
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -5227,21 +5227,21 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
             }
             switch (alt3) {
                 case 1 :
-                    // InternalOptimisationLanguage.g:1539:2: ( ruleLiteralDefinitionReferenceRule )
+                    // InternalOptimisationLanguage.g:1539:2: ( ruleValuelDefinitionReferenceRule )
                     {
-                    // InternalOptimisationLanguage.g:1539:2: ( ruleLiteralDefinitionReferenceRule )
-                    // InternalOptimisationLanguage.g:1540:3: ruleLiteralDefinitionReferenceRule
+                    // InternalOptimisationLanguage.g:1539:2: ( ruleValuelDefinitionReferenceRule )
+                    // InternalOptimisationLanguage.g:1540:3: ruleValuelDefinitionReferenceRule
                     {
                     if ( state.backtracking==0 ) {
-                       before(grammarAccess.getReferenceRuleAccess().getLiteralDefinitionReferenceRuleParserRuleCall_0()); 
+                       before(grammarAccess.getReferenceRuleAccess().getValuelDefinitionReferenceRuleParserRuleCall_0()); 
                     }
                     pushFollow(FOLLOW_2);
-                    ruleLiteralDefinitionReferenceRule();
+                    ruleValuelDefinitionReferenceRule();
 
                     state._fsp--;
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
-                       after(grammarAccess.getReferenceRuleAccess().getLiteralDefinitionReferenceRuleParserRuleCall_0()); 
+                       after(grammarAccess.getReferenceRuleAccess().getValuelDefinitionReferenceRuleParserRuleCall_0()); 
                     }
 
                     }
@@ -23373,9 +23373,9 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
     // $ANTLR end "rule__CallRule__ParametersAssignment_2_1_1"
 
 
-    // $ANTLR start "rule__LiteralDefinitionReferenceRule__DefinitionAssignment"
-    // InternalOptimisationLanguage.g:7125:1: rule__LiteralDefinitionReferenceRule__DefinitionAssignment : ( ( ruleQualifiedName ) ) ;
-    public final void rule__LiteralDefinitionReferenceRule__DefinitionAssignment() throws RecognitionException {
+    // $ANTLR start "rule__ValuelDefinitionReferenceRule__DefinitionAssignment"
+    // InternalOptimisationLanguage.g:7125:1: rule__ValuelDefinitionReferenceRule__DefinitionAssignment : ( ( ruleQualifiedName ) ) ;
+    public final void rule__ValuelDefinitionReferenceRule__DefinitionAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
@@ -23387,13 +23387,13 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
             // InternalOptimisationLanguage.g:7131:3: ( ruleQualifiedName )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getLiteralDefinitionReferenceRuleAccess().getDefinitionLiteralDefinitionCrossReference_0()); 
+               before(grammarAccess.getValuelDefinitionReferenceRuleAccess().getDefinitionValueDefinitionCrossReference_0()); 
             }
             // InternalOptimisationLanguage.g:7132:3: ( ruleQualifiedName )
             // InternalOptimisationLanguage.g:7133:4: ruleQualifiedName
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getLiteralDefinitionReferenceRuleAccess().getDefinitionLiteralDefinitionQualifiedNameParserRuleCall_0_1()); 
+               before(grammarAccess.getValuelDefinitionReferenceRuleAccess().getDefinitionValueDefinitionQualifiedNameParserRuleCall_0_1()); 
             }
             pushFollow(FOLLOW_2);
             ruleQualifiedName();
@@ -23401,13 +23401,13 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getLiteralDefinitionReferenceRuleAccess().getDefinitionLiteralDefinitionQualifiedNameParserRuleCall_0_1()); 
+               after(grammarAccess.getValuelDefinitionReferenceRuleAccess().getDefinitionValueDefinitionQualifiedNameParserRuleCall_0_1()); 
             }
 
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getLiteralDefinitionReferenceRuleAccess().getDefinitionLiteralDefinitionCrossReference_0()); 
+               after(grammarAccess.getValuelDefinitionReferenceRuleAccess().getDefinitionValueDefinitionCrossReference_0()); 
             }
 
             }
@@ -23427,7 +23427,7 @@ public class InternalOptimisationLanguageParser extends AbstractInternalContentA
         }
         return ;
     }
-    // $ANTLR end "rule__LiteralDefinitionReferenceRule__DefinitionAssignment"
+    // $ANTLR end "rule__ValuelDefinitionReferenceRule__DefinitionAssignment"
 
 
     // $ANTLR start "rule__BaseDataReferenceRule__DefinitionAssignment_1"

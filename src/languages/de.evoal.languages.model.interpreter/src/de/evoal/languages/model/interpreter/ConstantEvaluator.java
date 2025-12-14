@@ -29,7 +29,6 @@ public class ConstantEvaluator extends AbstractExpressionEvaluator {
 	}
 	
 	
-	
 	@Override
 	public Object caseLiteralDefinitionReference(final LiteralDefinitionReference object) {
 		if(!(object.getDefinition() instanceof ConstantDefinition)) {

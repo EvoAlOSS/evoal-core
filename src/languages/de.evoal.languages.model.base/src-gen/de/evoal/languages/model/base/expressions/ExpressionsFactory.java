@@ -175,6 +175,24 @@ public interface ExpressionsFactory extends EFactory {
 	SelfReference createSelfReference();
 
 	/**
+	 * Returns a new object of class '<em>Value Definition Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Value Definition Reference</em>'.
+	 * @generated
+	 */
+	ValueDefinitionReference createValueDefinitionReference();
+
+	/**
+	 * Returns a new object of class '<em>Attribute Definition Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Attribute Definition Reference</em>'.
+	 * @generated
+	 */
+	AttributeDefinitionReference createAttributeDefinitionReference();
+
+	/**
 	 * Returns a new object of class '<em>Literal Definition Reference</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

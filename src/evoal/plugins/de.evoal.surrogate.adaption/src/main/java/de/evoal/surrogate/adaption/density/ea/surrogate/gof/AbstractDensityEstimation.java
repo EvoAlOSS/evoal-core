@@ -8,7 +8,7 @@ import de.evoal.core.api.ecore.EObjectPair;
 import de.evoal.core.api.ecore.Space;
 import de.evoal.core.api.ecore.stream.EObjectPairStreamSupplier;
 import de.evoal.core.api.utils.Requirements;
-import de.evoal.core.interpreter.api.InterpreterState;
+import de.evoal.core.api.interpreter.InterpreterState;
 import de.evoal.surrogate.adaption.density.model.DensityData;
 import de.evoal.surrogate.api.function.ModelFunction;
 import de.evoal.surrogate.api.io.pson.Parameter;

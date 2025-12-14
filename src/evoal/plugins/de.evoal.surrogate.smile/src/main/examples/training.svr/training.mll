@@ -21,8 +21,8 @@ module training {
 	specify model 'linear-svr' {
 			'ε' := 1.4;
 			'σ' := 3.0;
-			'soft-margin' := 0.15;
-			tolerance := 0.1;
+			'soft-margin' := 0.1;
+			tolerance := 0.15;
 	}
 
 			

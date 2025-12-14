@@ -1,6 +1,7 @@
 module de.evoal.core.main {
     requires java.base;
     requires java.annotation;
+    requires com.google.guice;
 
     requires jakarta.enterprise.cdi.api;
     requires jakarta.inject.api;
@@ -37,7 +38,6 @@ module de.evoal.core.main {
     requires de.evoal.languages.model.ol.dsl;
     requires de.evoal.languages.model.interpreter;
     requires de.evoal.languages.model.utils;
-    requires com.google.guice;
     requires commons.math3;
     requires jakarta.ejb.api;
     opens de.evoal.core; // export dl files.
@@ -45,6 +45,7 @@ module de.evoal.core.main {
     exports de.evoal.core.api.board;
     exports de.evoal.core.api.cdi;
     exports de.evoal.core.api.dynamic;
+    exports de.evoal.core.api.interpreter;
     exports de.evoal.core.api.languages;
     exports de.evoal.core.api.languages.base;
     exports de.evoal.core.api.properties;

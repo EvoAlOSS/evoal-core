@@ -9,7 +9,6 @@ package de.evoal.languages.model.base.definitions;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * 
  * Representation for structured data descriptions.
  * 
  * <!-- end-model-doc -->

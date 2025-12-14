@@ -9,7 +9,6 @@ package de.evoal.languages.model.base.definitions;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * 
  * Base class for all data description using base types.
  * 
  * <!-- end-model-doc -->
@@ -33,7 +32,6 @@ public interface BaseDataDescription extends DataDescription {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * 
 	 * The in-memory representation of the data.
 	 * 
 	 * <!-- end-model-doc -->

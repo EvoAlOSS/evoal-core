@@ -23,7 +23,6 @@ import org.eclipse.emf.ecore.EReference;
  * </ul>
  * <!-- end-user-doc -->
  * <!-- begin-model-doc -->
- * 
  * Package for all expression-like model elements.
  * 
  * <!-- end-model-doc -->
@@ -1043,14 +1042,14 @@ public interface ExpressionsPackage extends EPackage {
 	int SELF_REFERENCE_OPERATION_COUNT = VALUE_REFERENCE_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.base.expressions.impl.LiteralDefinitionReferenceImpl <em>Literal Definition Reference</em>}' class.
+	 * The meta object id for the '{@link de.evoal.languages.model.base.expressions.impl.ValueDefinitionReferenceImpl <em>Value Definition Reference</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.base.expressions.impl.LiteralDefinitionReferenceImpl
-	 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getLiteralDefinitionReference()
+	 * @see de.evoal.languages.model.base.expressions.impl.ValueDefinitionReferenceImpl
+	 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getValueDefinitionReference()
 	 * @generated
 	 */
-	int LITERAL_DEFINITION_REFERENCE = 23;
+	int VALUE_DEFINITION_REFERENCE = 23;
 
 	/**
 	 * The feature id for the '<em><b>Definition</b></em>' reference.
@@ -1059,7 +1058,117 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LITERAL_DEFINITION_REFERENCE__DEFINITION = VALUE_REFERENCE_FEATURE_COUNT + 0;
+	int VALUE_DEFINITION_REFERENCE__DEFINITION = VALUE_REFERENCE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Value Definition Reference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VALUE_DEFINITION_REFERENCE_FEATURE_COUNT = VALUE_REFERENCE_FEATURE_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>Is Enum Literal Reference</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VALUE_DEFINITION_REFERENCE___IS_ENUM_LITERAL_REFERENCE = VALUE_REFERENCE_OPERATION_COUNT + 0;
+
+	/**
+	 * The operation id for the '<em>Is Attribute Reference</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VALUE_DEFINITION_REFERENCE___IS_ATTRIBUTE_REFERENCE = VALUE_REFERENCE_OPERATION_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Value Definition Reference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VALUE_DEFINITION_REFERENCE_OPERATION_COUNT = VALUE_REFERENCE_OPERATION_COUNT + 2;
+
+	/**
+	 * The meta object id for the '{@link de.evoal.languages.model.base.expressions.impl.AttributeDefinitionReferenceImpl <em>Attribute Definition Reference</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.evoal.languages.model.base.expressions.impl.AttributeDefinitionReferenceImpl
+	 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getAttributeDefinitionReference()
+	 * @generated
+	 */
+	int ATTRIBUTE_DEFINITION_REFERENCE = 24;
+
+	/**
+	 * The feature id for the '<em><b>Definition</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE_DEFINITION_REFERENCE__DEFINITION = VALUE_DEFINITION_REFERENCE__DEFINITION;
+
+	/**
+	 * The number of structural features of the '<em>Attribute Definition Reference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE_DEFINITION_REFERENCE_FEATURE_COUNT = VALUE_DEFINITION_REFERENCE_FEATURE_COUNT + 0;
+
+	/**
+	 * The operation id for the '<em>Is Enum Literal Reference</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE_DEFINITION_REFERENCE___IS_ENUM_LITERAL_REFERENCE = VALUE_DEFINITION_REFERENCE___IS_ENUM_LITERAL_REFERENCE;
+
+	/**
+	 * The operation id for the '<em>Is Attribute Reference</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE_DEFINITION_REFERENCE___IS_ATTRIBUTE_REFERENCE = VALUE_DEFINITION_REFERENCE___IS_ATTRIBUTE_REFERENCE;
+
+	/**
+	 * The number of operations of the '<em>Attribute Definition Reference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE_DEFINITION_REFERENCE_OPERATION_COUNT = VALUE_DEFINITION_REFERENCE_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link de.evoal.languages.model.base.expressions.impl.LiteralDefinitionReferenceImpl <em>Literal Definition Reference</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.evoal.languages.model.base.expressions.impl.LiteralDefinitionReferenceImpl
+	 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getLiteralDefinitionReference()
+	 * @generated
+	 */
+	int LITERAL_DEFINITION_REFERENCE = 25;
+
+	/**
+	 * The feature id for the '<em><b>Definition</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LITERAL_DEFINITION_REFERENCE__DEFINITION = VALUE_DEFINITION_REFERENCE__DEFINITION;
 
 	/**
 	 * The number of structural features of the '<em>Literal Definition Reference</em>' class.
@@ -1068,7 +1177,25 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LITERAL_DEFINITION_REFERENCE_FEATURE_COUNT = VALUE_REFERENCE_FEATURE_COUNT + 1;
+	int LITERAL_DEFINITION_REFERENCE_FEATURE_COUNT = VALUE_DEFINITION_REFERENCE_FEATURE_COUNT + 0;
+
+	/**
+	 * The operation id for the '<em>Is Enum Literal Reference</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LITERAL_DEFINITION_REFERENCE___IS_ENUM_LITERAL_REFERENCE = VALUE_DEFINITION_REFERENCE___IS_ENUM_LITERAL_REFERENCE;
+
+	/**
+	 * The operation id for the '<em>Is Attribute Reference</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LITERAL_DEFINITION_REFERENCE___IS_ATTRIBUTE_REFERENCE = VALUE_DEFINITION_REFERENCE___IS_ATTRIBUTE_REFERENCE;
 
 	/**
 	 * The number of operations of the '<em>Literal Definition Reference</em>' class.
@@ -1077,7 +1204,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LITERAL_DEFINITION_REFERENCE_OPERATION_COUNT = VALUE_REFERENCE_OPERATION_COUNT + 0;
+	int LITERAL_DEFINITION_REFERENCE_OPERATION_COUNT = VALUE_DEFINITION_REFERENCE_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.expressions.impl.TypeDefinitionReferenceImpl <em>Type Definition Reference</em>}' class.
@@ -1087,7 +1214,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getTypeDefinitionReference()
 	 * @generated
 	 */
-	int TYPE_DEFINITION_REFERENCE = 24;
+	int TYPE_DEFINITION_REFERENCE = 26;
 
 	/**
 	 * The feature id for the '<em><b>Definition</b></em>' reference.
@@ -1124,7 +1251,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getBooleanLiteral()
 	 * @generated
 	 */
-	int BOOLEAN_LITERAL = 25;
+	int BOOLEAN_LITERAL = 27;
 
 	/**
 	 * The feature id for the '<em><b>Literal</b></em>' attribute.
@@ -1170,7 +1297,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getCall()
 	 * @generated
 	 */
-	int CALL = 26;
+	int CALL = 28;
 
 	/**
 	 * The feature id for the '<em><b>Function</b></em>' reference.
@@ -1216,7 +1343,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getParantheses()
 	 * @generated
 	 */
-	int PARANTHESES = 27;
+	int PARANTHESES = 29;
 
 	/**
 	 * The feature id for the '<em><b>Sub Expression</b></em>' containment reference.
@@ -1253,7 +1380,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getArray()
 	 * @generated
 	 */
-	int ARRAY = 28;
+	int ARRAY = 30;
 
 	/**
 	 * The feature id for the '<em><b>Values</b></em>' containment reference list.
@@ -1290,7 +1417,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getComparisonOperator()
 	 * @generated
 	 */
-	int COMPARISON_OPERATOR = 29;
+	int COMPARISON_OPERATOR = 31;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.expressions.AddOrSubtractOperator <em>Add Or Subtract Operator</em>}' enum.
@@ -1300,7 +1427,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getAddOrSubtractOperator()
 	 * @generated
 	 */
-	int ADD_OR_SUBTRACT_OPERATOR = 30;
+	int ADD_OR_SUBTRACT_OPERATOR = 32;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.expressions.MultiplyDivideModuloOperator <em>Multiply Divide Modulo Operator</em>}' enum.
@@ -1310,7 +1437,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getMultiplyDivideModuloOperator()
 	 * @generated
 	 */
-	int MULTIPLY_DIVIDE_MODULO_OPERATOR = 31;
+	int MULTIPLY_DIVIDE_MODULO_OPERATOR = 33;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.expressions.Factor <em>Factor</em>}' enum.
@@ -1320,7 +1447,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getFactor()
 	 * @generated
 	 */
-	int FACTOR = 32;
+	int FACTOR = 34;
 
 	/**
 	 * The meta object id for the '<em>Number</em>' data type.
@@ -1330,7 +1457,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getNumber()
 	 * @generated
 	 */
-	int NUMBER = 33;
+	int NUMBER = 35;
 
 
 	/**
@@ -1931,6 +2058,57 @@ public interface ExpressionsPackage extends EPackage {
 	EClass getSelfReference();
 
 	/**
+	 * Returns the meta object for class '{@link de.evoal.languages.model.base.expressions.ValueDefinitionReference <em>Value Definition Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Value Definition Reference</em>'.
+	 * @see de.evoal.languages.model.base.expressions.ValueDefinitionReference
+	 * @generated
+	 */
+	EClass getValueDefinitionReference();
+
+	/**
+	 * Returns the meta object for the reference '{@link de.evoal.languages.model.base.expressions.ValueDefinitionReference#getDefinition <em>Definition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Definition</em>'.
+	 * @see de.evoal.languages.model.base.expressions.ValueDefinitionReference#getDefinition()
+	 * @see #getValueDefinitionReference()
+	 * @generated
+	 */
+	EReference getValueDefinitionReference_Definition();
+
+	/**
+	 * Returns the meta object for the '{@link de.evoal.languages.model.base.expressions.ValueDefinitionReference#isEnumLiteralReference() <em>Is Enum Literal Reference</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Is Enum Literal Reference</em>' operation.
+	 * @see de.evoal.languages.model.base.expressions.ValueDefinitionReference#isEnumLiteralReference()
+	 * @generated
+	 */
+	EOperation getValueDefinitionReference__IsEnumLiteralReference();
+
+	/**
+	 * Returns the meta object for the '{@link de.evoal.languages.model.base.expressions.ValueDefinitionReference#isAttributeReference() <em>Is Attribute Reference</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Is Attribute Reference</em>' operation.
+	 * @see de.evoal.languages.model.base.expressions.ValueDefinitionReference#isAttributeReference()
+	 * @generated
+	 */
+	EOperation getValueDefinitionReference__IsAttributeReference();
+
+	/**
+	 * Returns the meta object for class '{@link de.evoal.languages.model.base.expressions.AttributeDefinitionReference <em>Attribute Definition Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Attribute Definition Reference</em>'.
+	 * @see de.evoal.languages.model.base.expressions.AttributeDefinitionReference
+	 * @generated
+	 */
+	EClass getAttributeDefinitionReference();
+
+	/**
 	 * Returns the meta object for class '{@link de.evoal.languages.model.base.expressions.LiteralDefinitionReference <em>Literal Definition Reference</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1939,17 +2117,6 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getLiteralDefinitionReference();
-
-	/**
-	 * Returns the meta object for the reference '{@link de.evoal.languages.model.base.expressions.LiteralDefinitionReference#getDefinition <em>Definition</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Definition</em>'.
-	 * @see de.evoal.languages.model.base.expressions.LiteralDefinitionReference#getDefinition()
-	 * @see #getLiteralDefinitionReference()
-	 * @generated
-	 */
-	EReference getLiteralDefinitionReference_Definition();
 
 	/**
 	 * Returns the meta object for class '{@link de.evoal.languages.model.base.expressions.TypeDefinitionReference <em>Type Definition Reference</em>}'.
@@ -2654,6 +2821,50 @@ public interface ExpressionsPackage extends EPackage {
 		EClass SELF_REFERENCE = eINSTANCE.getSelfReference();
 
 		/**
+		 * The meta object literal for the '{@link de.evoal.languages.model.base.expressions.impl.ValueDefinitionReferenceImpl <em>Value Definition Reference</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.evoal.languages.model.base.expressions.impl.ValueDefinitionReferenceImpl
+		 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getValueDefinitionReference()
+		 * @generated
+		 */
+		EClass VALUE_DEFINITION_REFERENCE = eINSTANCE.getValueDefinitionReference();
+
+		/**
+		 * The meta object literal for the '<em><b>Definition</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference VALUE_DEFINITION_REFERENCE__DEFINITION = eINSTANCE.getValueDefinitionReference_Definition();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Enum Literal Reference</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation VALUE_DEFINITION_REFERENCE___IS_ENUM_LITERAL_REFERENCE = eINSTANCE.getValueDefinitionReference__IsEnumLiteralReference();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Attribute Reference</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation VALUE_DEFINITION_REFERENCE___IS_ATTRIBUTE_REFERENCE = eINSTANCE.getValueDefinitionReference__IsAttributeReference();
+
+		/**
+		 * The meta object literal for the '{@link de.evoal.languages.model.base.expressions.impl.AttributeDefinitionReferenceImpl <em>Attribute Definition Reference</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.evoal.languages.model.base.expressions.impl.AttributeDefinitionReferenceImpl
+		 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getAttributeDefinitionReference()
+		 * @generated
+		 */
+		EClass ATTRIBUTE_DEFINITION_REFERENCE = eINSTANCE.getAttributeDefinitionReference();
+
+		/**
 		 * The meta object literal for the '{@link de.evoal.languages.model.base.expressions.impl.LiteralDefinitionReferenceImpl <em>Literal Definition Reference</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2662,14 +2873,6 @@ public interface ExpressionsPackage extends EPackage {
 		 * @generated
 		 */
 		EClass LITERAL_DEFINITION_REFERENCE = eINSTANCE.getLiteralDefinitionReference();
-
-		/**
-		 * The meta object literal for the '<em><b>Definition</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference LITERAL_DEFINITION_REFERENCE__DEFINITION = eINSTANCE.getLiteralDefinitionReference_Definition();
 
 		/**
 		 * The meta object literal for the '{@link de.evoal.languages.model.base.expressions.impl.TypeDefinitionReferenceImpl <em>Type Definition Reference</em>}' class.

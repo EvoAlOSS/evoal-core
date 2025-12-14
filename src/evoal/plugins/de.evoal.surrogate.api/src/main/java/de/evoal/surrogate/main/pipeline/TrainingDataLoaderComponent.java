@@ -1,7 +1,7 @@
 package de.evoal.surrogate.main.pipeline;
 
 import de.evoal.core.api.ecore.TypedEObject;
-import de.evoal.core.interpreter.api.InterpreterState;
+import de.evoal.core.api.interpreter.InterpreterState;
 import de.evoal.pipeline.api.model.PipelineComponent;
 import de.evoal.pipeline.api.model.PipelineComponentImpl;
 import de.evoal.pipeline.api.model.PipelineSource;

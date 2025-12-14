@@ -2783,23 +2783,23 @@ public class InternalGeneratorDSLParser extends AbstractInternalContentAssistPar
     // $ANTLR end "ruleCallRule"
 
 
-    // $ANTLR start "entryRuleLiteralDefinitionReferenceRule"
-    // InternalGeneratorDSL.g:829:1: entryRuleLiteralDefinitionReferenceRule : ruleLiteralDefinitionReferenceRule EOF ;
-    public final void entryRuleLiteralDefinitionReferenceRule() throws RecognitionException {
+    // $ANTLR start "entryRuleValuelDefinitionReferenceRule"
+    // InternalGeneratorDSL.g:829:1: entryRuleValuelDefinitionReferenceRule : ruleValuelDefinitionReferenceRule EOF ;
+    public final void entryRuleValuelDefinitionReferenceRule() throws RecognitionException {
         try {
-            // InternalGeneratorDSL.g:830:1: ( ruleLiteralDefinitionReferenceRule EOF )
-            // InternalGeneratorDSL.g:831:1: ruleLiteralDefinitionReferenceRule EOF
+            // InternalGeneratorDSL.g:830:1: ( ruleValuelDefinitionReferenceRule EOF )
+            // InternalGeneratorDSL.g:831:1: ruleValuelDefinitionReferenceRule EOF
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getLiteralDefinitionReferenceRuleRule()); 
+               before(grammarAccess.getValuelDefinitionReferenceRuleRule()); 
             }
             pushFollow(FOLLOW_1);
-            ruleLiteralDefinitionReferenceRule();
+            ruleValuelDefinitionReferenceRule();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getLiteralDefinitionReferenceRuleRule()); 
+               after(grammarAccess.getValuelDefinitionReferenceRuleRule()); 
             }
             match(input,EOF,FOLLOW_2); if (state.failed) return ;
 
@@ -2814,30 +2814,30 @@ public class InternalGeneratorDSLParser extends AbstractInternalContentAssistPar
         }
         return ;
     }
-    // $ANTLR end "entryRuleLiteralDefinitionReferenceRule"
+    // $ANTLR end "entryRuleValuelDefinitionReferenceRule"
 
 
-    // $ANTLR start "ruleLiteralDefinitionReferenceRule"
-    // InternalGeneratorDSL.g:838:1: ruleLiteralDefinitionReferenceRule : ( ( rule__LiteralDefinitionReferenceRule__DefinitionAssignment ) ) ;
-    public final void ruleLiteralDefinitionReferenceRule() throws RecognitionException {
+    // $ANTLR start "ruleValuelDefinitionReferenceRule"
+    // InternalGeneratorDSL.g:838:1: ruleValuelDefinitionReferenceRule : ( ( rule__ValuelDefinitionReferenceRule__DefinitionAssignment ) ) ;
+    public final void ruleValuelDefinitionReferenceRule() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalGeneratorDSL.g:842:2: ( ( ( rule__LiteralDefinitionReferenceRule__DefinitionAssignment ) ) )
-            // InternalGeneratorDSL.g:843:2: ( ( rule__LiteralDefinitionReferenceRule__DefinitionAssignment ) )
+            // InternalGeneratorDSL.g:842:2: ( ( ( rule__ValuelDefinitionReferenceRule__DefinitionAssignment ) ) )
+            // InternalGeneratorDSL.g:843:2: ( ( rule__ValuelDefinitionReferenceRule__DefinitionAssignment ) )
             {
-            // InternalGeneratorDSL.g:843:2: ( ( rule__LiteralDefinitionReferenceRule__DefinitionAssignment ) )
-            // InternalGeneratorDSL.g:844:3: ( rule__LiteralDefinitionReferenceRule__DefinitionAssignment )
+            // InternalGeneratorDSL.g:843:2: ( ( rule__ValuelDefinitionReferenceRule__DefinitionAssignment ) )
+            // InternalGeneratorDSL.g:844:3: ( rule__ValuelDefinitionReferenceRule__DefinitionAssignment )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getLiteralDefinitionReferenceRuleAccess().getDefinitionAssignment()); 
+               before(grammarAccess.getValuelDefinitionReferenceRuleAccess().getDefinitionAssignment()); 
             }
-            // InternalGeneratorDSL.g:845:3: ( rule__LiteralDefinitionReferenceRule__DefinitionAssignment )
-            // InternalGeneratorDSL.g:845:4: rule__LiteralDefinitionReferenceRule__DefinitionAssignment
+            // InternalGeneratorDSL.g:845:3: ( rule__ValuelDefinitionReferenceRule__DefinitionAssignment )
+            // InternalGeneratorDSL.g:845:4: rule__ValuelDefinitionReferenceRule__DefinitionAssignment
             {
             pushFollow(FOLLOW_2);
-            rule__LiteralDefinitionReferenceRule__DefinitionAssignment();
+            rule__ValuelDefinitionReferenceRule__DefinitionAssignment();
 
             state._fsp--;
             if (state.failed) return ;
@@ -2845,7 +2845,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalContentAssistPar
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getLiteralDefinitionReferenceRuleAccess().getDefinitionAssignment()); 
+               after(grammarAccess.getValuelDefinitionReferenceRuleAccess().getDefinitionAssignment()); 
             }
 
             }
@@ -2865,7 +2865,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalContentAssistPar
         }
         return ;
     }
-    // $ANTLR end "ruleLiteralDefinitionReferenceRule"
+    // $ANTLR end "ruleValuelDefinitionReferenceRule"
 
 
     // $ANTLR start "entryRuleTypeDefinitionReferenceRule"
@@ -5906,13 +5906,13 @@ public class InternalGeneratorDSLParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__ReferenceRule__Alternatives"
-    // InternalGeneratorDSL.g:1736:1: rule__ReferenceRule__Alternatives : ( ( ruleLiteralDefinitionReferenceRule ) | ( ruleTypeDefinitionReferenceRule ) | ( ruleVariableReferenceRule ) );
+    // InternalGeneratorDSL.g:1736:1: rule__ReferenceRule__Alternatives : ( ( ruleValuelDefinitionReferenceRule ) | ( ruleTypeDefinitionReferenceRule ) | ( ruleVariableReferenceRule ) );
     public final void rule__ReferenceRule__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalGeneratorDSL.g:1740:1: ( ( ruleLiteralDefinitionReferenceRule ) | ( ruleTypeDefinitionReferenceRule ) | ( ruleVariableReferenceRule ) )
+            // InternalGeneratorDSL.g:1740:1: ( ( ruleValuelDefinitionReferenceRule ) | ( ruleTypeDefinitionReferenceRule ) | ( ruleVariableReferenceRule ) )
             int alt4=3;
             switch ( input.LA(1) ) {
             case RULE_QUOTED_ID:
@@ -5969,21 +5969,21 @@ public class InternalGeneratorDSLParser extends AbstractInternalContentAssistPar
 
             switch (alt4) {
                 case 1 :
-                    // InternalGeneratorDSL.g:1741:2: ( ruleLiteralDefinitionReferenceRule )
+                    // InternalGeneratorDSL.g:1741:2: ( ruleValuelDefinitionReferenceRule )
                     {
-                    // InternalGeneratorDSL.g:1741:2: ( ruleLiteralDefinitionReferenceRule )
-                    // InternalGeneratorDSL.g:1742:3: ruleLiteralDefinitionReferenceRule
+                    // InternalGeneratorDSL.g:1741:2: ( ruleValuelDefinitionReferenceRule )
+                    // InternalGeneratorDSL.g:1742:3: ruleValuelDefinitionReferenceRule
                     {
                     if ( state.backtracking==0 ) {
-                       before(grammarAccess.getReferenceRuleAccess().getLiteralDefinitionReferenceRuleParserRuleCall_0()); 
+                       before(grammarAccess.getReferenceRuleAccess().getValuelDefinitionReferenceRuleParserRuleCall_0()); 
                     }
                     pushFollow(FOLLOW_2);
-                    ruleLiteralDefinitionReferenceRule();
+                    ruleValuelDefinitionReferenceRule();
 
                     state._fsp--;
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
-                       after(grammarAccess.getReferenceRuleAccess().getLiteralDefinitionReferenceRuleParserRuleCall_0()); 
+                       after(grammarAccess.getReferenceRuleAccess().getValuelDefinitionReferenceRuleParserRuleCall_0()); 
                     }
 
                     }
@@ -27683,9 +27683,9 @@ public class InternalGeneratorDSLParser extends AbstractInternalContentAssistPar
     // $ANTLR end "rule__CallRule__ParametersAssignment_2_1_1"
 
 
-    // $ANTLR start "rule__LiteralDefinitionReferenceRule__DefinitionAssignment"
-    // InternalGeneratorDSL.g:8467:1: rule__LiteralDefinitionReferenceRule__DefinitionAssignment : ( ( ruleQualifiedName ) ) ;
-    public final void rule__LiteralDefinitionReferenceRule__DefinitionAssignment() throws RecognitionException {
+    // $ANTLR start "rule__ValuelDefinitionReferenceRule__DefinitionAssignment"
+    // InternalGeneratorDSL.g:8467:1: rule__ValuelDefinitionReferenceRule__DefinitionAssignment : ( ( ruleQualifiedName ) ) ;
+    public final void rule__ValuelDefinitionReferenceRule__DefinitionAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
@@ -27697,13 +27697,13 @@ public class InternalGeneratorDSLParser extends AbstractInternalContentAssistPar
             // InternalGeneratorDSL.g:8473:3: ( ruleQualifiedName )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getLiteralDefinitionReferenceRuleAccess().getDefinitionLiteralDefinitionCrossReference_0()); 
+               before(grammarAccess.getValuelDefinitionReferenceRuleAccess().getDefinitionValueDefinitionCrossReference_0()); 
             }
             // InternalGeneratorDSL.g:8474:3: ( ruleQualifiedName )
             // InternalGeneratorDSL.g:8475:4: ruleQualifiedName
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getLiteralDefinitionReferenceRuleAccess().getDefinitionLiteralDefinitionQualifiedNameParserRuleCall_0_1()); 
+               before(grammarAccess.getValuelDefinitionReferenceRuleAccess().getDefinitionValueDefinitionQualifiedNameParserRuleCall_0_1()); 
             }
             pushFollow(FOLLOW_2);
             ruleQualifiedName();
@@ -27711,13 +27711,13 @@ public class InternalGeneratorDSLParser extends AbstractInternalContentAssistPar
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getLiteralDefinitionReferenceRuleAccess().getDefinitionLiteralDefinitionQualifiedNameParserRuleCall_0_1()); 
+               after(grammarAccess.getValuelDefinitionReferenceRuleAccess().getDefinitionValueDefinitionQualifiedNameParserRuleCall_0_1()); 
             }
 
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getLiteralDefinitionReferenceRuleAccess().getDefinitionLiteralDefinitionCrossReference_0()); 
+               after(grammarAccess.getValuelDefinitionReferenceRuleAccess().getDefinitionValueDefinitionCrossReference_0()); 
             }
 
             }
@@ -27737,7 +27737,7 @@ public class InternalGeneratorDSLParser extends AbstractInternalContentAssistPar
         }
         return ;
     }
-    // $ANTLR end "rule__LiteralDefinitionReferenceRule__DefinitionAssignment"
+    // $ANTLR end "rule__ValuelDefinitionReferenceRule__DefinitionAssignment"
 
 
     // $ANTLR start "rule__BaseDataReferenceRule__DefinitionAssignment_1"
@@ -28893,17 +28893,17 @@ public class InternalGeneratorDSLParser extends AbstractInternalContentAssistPar
 
     // $ANTLR start synpred5_InternalGeneratorDSL
     public final void synpred5_InternalGeneratorDSL_fragment() throws RecognitionException {   
-        // InternalGeneratorDSL.g:1741:2: ( ( ruleLiteralDefinitionReferenceRule ) )
-        // InternalGeneratorDSL.g:1741:2: ( ruleLiteralDefinitionReferenceRule )
+        // InternalGeneratorDSL.g:1741:2: ( ( ruleValuelDefinitionReferenceRule ) )
+        // InternalGeneratorDSL.g:1741:2: ( ruleValuelDefinitionReferenceRule )
         {
-        // InternalGeneratorDSL.g:1741:2: ( ruleLiteralDefinitionReferenceRule )
-        // InternalGeneratorDSL.g:1742:3: ruleLiteralDefinitionReferenceRule
+        // InternalGeneratorDSL.g:1741:2: ( ruleValuelDefinitionReferenceRule )
+        // InternalGeneratorDSL.g:1742:3: ruleValuelDefinitionReferenceRule
         {
         if ( state.backtracking==0 ) {
-           before(grammarAccess.getReferenceRuleAccess().getLiteralDefinitionReferenceRuleParserRuleCall_0()); 
+           before(grammarAccess.getReferenceRuleAccess().getValuelDefinitionReferenceRuleParserRuleCall_0()); 
         }
         pushFollow(FOLLOW_2);
-        ruleLiteralDefinitionReferenceRule();
+        ruleValuelDefinitionReferenceRule();
 
         state._fsp--;
         if (state.failed) return ;

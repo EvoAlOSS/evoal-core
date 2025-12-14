@@ -1046,11 +1046,11 @@ ruleReferenceRule returns [EObject current=null]
 			/* */
 		}
 		{
-			newCompositeNode(grammarAccess.getReferenceRuleAccess().getLiteralDefinitionReferenceRuleParserRuleCall_0());
+			newCompositeNode(grammarAccess.getReferenceRuleAccess().getValuelDefinitionReferenceRuleParserRuleCall_0());
 		}
-		this_LiteralDefinitionReferenceRule_0=ruleLiteralDefinitionReferenceRule
+		this_ValuelDefinitionReferenceRule_0=ruleValuelDefinitionReferenceRule
 		{
-			$current = $this_LiteralDefinitionReferenceRule_0.current;
+			$current = $this_ValuelDefinitionReferenceRule_0.current;
 			afterParserOrEnumRuleCall();
 		}
 		    |
@@ -1068,15 +1068,15 @@ ruleReferenceRule returns [EObject current=null]
 	)
 ;
 
-// Entry rule entryRuleLiteralDefinitionReferenceRule
-entryRuleLiteralDefinitionReferenceRule returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getLiteralDefinitionReferenceRuleRule()); }
-	iv_ruleLiteralDefinitionReferenceRule=ruleLiteralDefinitionReferenceRule
-	{ $current=$iv_ruleLiteralDefinitionReferenceRule.current; }
+// Entry rule entryRuleValuelDefinitionReferenceRule
+entryRuleValuelDefinitionReferenceRule returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getValuelDefinitionReferenceRuleRule()); }
+	iv_ruleValuelDefinitionReferenceRule=ruleValuelDefinitionReferenceRule
+	{ $current=$iv_ruleValuelDefinitionReferenceRule.current; }
 	EOF;
 
-// Rule LiteralDefinitionReferenceRule
-ruleLiteralDefinitionReferenceRule returns [EObject current=null]
+// Rule ValuelDefinitionReferenceRule
+ruleValuelDefinitionReferenceRule returns [EObject current=null]
 @init {
 	enterRule();
 }
@@ -1090,11 +1090,11 @@ ruleLiteralDefinitionReferenceRule returns [EObject current=null]
 			}
 			{
 				if ($current==null) {
-					$current = createModelElement(grammarAccess.getLiteralDefinitionReferenceRuleRule());
+					$current = createModelElement(grammarAccess.getValuelDefinitionReferenceRuleRule());
 				}
 			}
 			{
-				newCompositeNode(grammarAccess.getLiteralDefinitionReferenceRuleAccess().getDefinitionLiteralDefinitionCrossReference_0());
+				newCompositeNode(grammarAccess.getValuelDefinitionReferenceRuleAccess().getDefinitionValueDefinitionCrossReference_0());
 			}
 			ruleQualifiedName
 			{

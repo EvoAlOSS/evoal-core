@@ -9,7 +9,6 @@ package de.evoal.languages.model.base.definitions;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * 
  * Base class for all definitions that can be used for literals.
  * 
  * <!-- end-model-doc -->
@@ -19,5 +18,5 @@ package de.evoal.languages.model.base.definitions;
  * @model abstract="true"
  * @generated
  */
-public interface LiteralDefinition extends Definition {
+public interface LiteralDefinition extends ValueDefinition {
 } // LiteralDefinition

@@ -9,7 +9,7 @@
   </eAnnotations>
   <eClassifiers xsi:type="ecore:EClass" name="Constrained" abstract="true">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="&#xA;Constraint aspect. Any element inheriting this constraint can hold constraints.&#xA;"/>
+      <details key="documentation" value="Constraint aspect. Any element inheriting this constraint can hold constraints.&#xA;"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="constraints" ordered="false"
         upperBound="-1" eType="ecore:EClass expressions.ecore#//Expression" containment="true">
@@ -23,7 +23,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Definition" abstract="true" eSuperTypes="#//Constrained">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="&#xA;Base class for all definitions.&#xA;"/>
+      <details key="documentation" value="Base class for all definitions.&#xA;"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -31,19 +31,20 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ValueDefinition" abstract="true" eSuperTypes="#//Definition"/>
   <eClassifiers xsi:type="ecore:EClass" name="TypeDefinition" abstract="true" eSuperTypes="#//Definition">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="&#xA;Base class for all type definitions.&#xA;"/>
+      <details key="documentation" value="Base class for all type definitions.&#xA;"/>
     </eAnnotations>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="LiteralDefinition" abstract="true" eSuperTypes="#//Definition">
+  <eClassifiers xsi:type="ecore:EClass" name="LiteralDefinition" abstract="true" eSuperTypes="#//ValueDefinition">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="&#xA;Base class for all definitions that can be used for literals.&#xA;"/>
+      <details key="documentation" value="Base class for all definitions that can be used for literals.&#xA;"/>
     </eAnnotations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ScaledDefinition" abstract="true">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="&#xA;Some definitions are scaled.&#xA;"/>
+      <details key="documentation" value="Some definitions are scaled.&#xA;"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="scale" eType="#//ScaleType"
         transient="true">
@@ -85,7 +86,7 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AttributeDefinition" eSuperTypes="#//Definition">
+  <eClassifiers xsi:type="ecore:EClass" name="AttributeDefinition" eSuperTypes="#//Definition #//ValueDefinition">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="An attribute (similar to a Java field)."/>
     </eAnnotations>
@@ -104,23 +105,23 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="optional" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="&#xA;If a property binding is required.&#xA;"/>
+        <details key="documentation" value="If a property binding is required.&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EnumLiteralDefinition" eSuperTypes="#//LiteralDefinition">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="&#xA;An enum literal.&#xA;"/>
+      <details key="documentation" value="An enum literal.&#xA;"/>
     </eAnnotations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EnumDefinition" eSuperTypes="#//TypeDefinition #//ScaledDefinition">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="&#xA;A enum-based type definition.&#xA;"/>
+      <details key="documentation" value="A enum-based type definition.&#xA;"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="literals" ordered="false"
         upperBound="-1" eType="#//EnumLiteralDefinition" containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="&#xA;List of enum literals.&#xA;"/>
+        <details key="documentation" value="List of enum literals.&#xA;"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/OCL/Collection">
         <details key="nullFree" value="false"/>
@@ -142,7 +143,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="DataTypeTypeDefinition" eSuperTypes="#//DataTypeDefinition #//ScaledDefinition"/>
   <eClassifiers xsi:type="ecore:EClass" name="DataDescription" abstract="true" eSuperTypes="#//DataTypeDefinition">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="&#xA;Base class for all data descriptions.&#xA;"/>
+      <details key="documentation" value="Base class for all data descriptions.&#xA;"/>
     </eAnnotations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="RepresentationType">
@@ -154,7 +155,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="BaseDataDescription" abstract="true"
       eSuperTypes="#//DataDescription">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="&#xA;Base class for all data description using base types.&#xA;"/>
+      <details key="documentation" value="Base class for all data description using base types.&#xA;"/>
     </eAnnotations>
     <eOperations name="getScale" lowerBound="1" eType="#//ScaleType">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -164,7 +165,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="representation" lowerBound="1"
         eType="#//RepresentationType" defaultValueLiteral="real">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="&#xA;The in-memory representation of the data.&#xA;"/>
+        <details key="documentation" value="The in-memory representation of the data.&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
@@ -191,7 +192,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="StructuredDataDescription" eSuperTypes="#//DataDescription">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="&#xA;Representation for structured data descriptions.&#xA;"/>
+      <details key="documentation" value="Representation for structured data descriptions.&#xA;"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="#//ClassDefinition"/>
   </eClassifiers>
@@ -228,18 +229,18 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ConstantDefinition" eSuperTypes="#//LiteralDefinition">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="&#xA;A constant definition.&#xA;"/>
+      <details key="documentation" value="A constant definition.&#xA;"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="ecore:EClass types.ecore#//Type"
         containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="&#xA;Type of the constant.&#xA;"/>
+        <details key="documentation" value="Type of the constant.&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="ecore:EClass expressions.ecore#//Expression"
         containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="&#xA;Value of the constant.&#xA;"/>
+        <details key="documentation" value="Value of the constant.&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>

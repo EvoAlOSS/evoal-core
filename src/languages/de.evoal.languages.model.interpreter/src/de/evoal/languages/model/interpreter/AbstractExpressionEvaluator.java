@@ -108,14 +108,14 @@ public abstract class AbstractExpressionEvaluator extends ExpressionsSwitch<Obje
 			final Object rOp = doSwitch(subExpression.getSubExpression());
 
 			result = switch(subExpression.getOperator()) {
-				case EQUAL: 	        yield Objects.equals(result, rOp);
+				case EQUAL: 	    yield Objects.equals(result, rOp);
 				case UNEQUAL:       yield !Objects.equals(result, rOp);
 				case GREATER_EQUAL: yield BooleanNumberOperations.isGreaterThanOrEqualTo(result, rOp);
 				case GREATER_THAN:  yield BooleanNumberOperations.isGreaterThan(result, rOp);
 				case LESS_EQUAL:    yield BooleanNumberOperations.isLesserThanOrEqualTo(result, rOp);
 				case LESS_THAN:	    yield BooleanNumberOperations.isLesserThan(result, rOp);
+				default: 			throw new IllegalStateException("Not yet implemented: " + subExpression.getOperator().getName());
 			};
-			throw new IllegalStateException("Not yet implemented");
 		}
 	
 		return result;
@@ -245,12 +245,17 @@ public abstract class AbstractExpressionEvaluator extends ExpressionsSwitch<Obje
 	
 	@Override
 	public Object caseValueReference(final ValueReference object) {
-		if(object instanceof LiteralDefinitionReference literal) {
-			return literal.getDefinition();
+		if(object instanceof ValueDefinitionReference reference) {
+			if(reference.getDefinition() instanceof ConstantDefinition constant) {
+				return doSwitch(constant.getValue());
+			}
+
+			return reference.getDefinition();
 		} else if(object instanceof TypeDefinitionReference type) {
 			return type.getDefinition();
+		} else {
+			throw new IllegalStateException("Not yet implemented: " + object.eClass() + " -- " + object);
 		}
-		throw new IllegalStateException("Not yet implemented: " + object.eClass() + " -- " + object);			
 	}
 	
 	@Override

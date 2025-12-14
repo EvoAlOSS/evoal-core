@@ -3,7 +3,7 @@ package de.evoal.surrogate.main.gof.rmse;
 import de.evoal.core.api.ecore.Space;
 import de.evoal.core.api.ecore.TypedEObject;
 import de.evoal.core.api.ecore.stream.EObjectPairStreamSupplier;
-import de.evoal.core.interpreter.api.InterpreterState;
+import de.evoal.core.api.interpreter.InterpreterState;
 import de.evoal.surrogate.api.io.pson.Parameter;
 import de.evoal.surrogate.api.training.SurrogateInformationCalculator;
 import lombok.extern.slf4j.Slf4j;

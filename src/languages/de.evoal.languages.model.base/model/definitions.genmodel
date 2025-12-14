@@ -29,6 +29,7 @@
     <genClasses image="false" ecoreClass="definitions.ecore#//Definition">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute definitions.ecore#//Definition/name"/>
     </genClasses>
+    <genClasses image="false" ecoreClass="definitions.ecore#//ValueDefinition"/>
     <genClasses image="false" ecoreClass="definitions.ecore#//TypeDefinition"/>
     <genClasses image="false" ecoreClass="definitions.ecore#//LiteralDefinition"/>
     <genClasses ecoreClass="definitions.ecore#//ScaledDefinition">

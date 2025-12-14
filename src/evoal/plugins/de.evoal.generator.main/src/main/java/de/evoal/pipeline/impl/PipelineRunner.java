@@ -16,7 +16,7 @@ import de.evoal.core.api.cdi.Application;
 import de.evoal.core.api.cdi.BlackboardValue;
 import de.evoal.core.api.cdi.MainClass;
 import de.evoal.core.api.dynamic.EClassProvider;
-import de.evoal.core.interpreter.api.ProgramInterpreter;
+import de.evoal.core.api.interpreter.ProgramInterpreter;
 import de.evoal.pipeline.api.board.PipelineBlackboardEntries;
 import de.evoal.pipeline.api.cdi.DefinitionModuleLoader;
 import de.evoal.pipeline.api.cdi.GeneratorModuleLoader;

@@ -14,7 +14,6 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * 
  * Constraint aspect. Any element inheriting this constraint can hold constraints.
  * 
  * <!-- end-model-doc -->

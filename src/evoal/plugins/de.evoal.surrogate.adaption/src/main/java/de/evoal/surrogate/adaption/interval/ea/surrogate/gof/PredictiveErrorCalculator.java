@@ -8,7 +8,7 @@ import de.evoal.core.api.ecore.Space;
 import de.evoal.core.api.ecore.TypedEObject;
 import de.evoal.core.api.ecore.stream.EObjectPairStreamFactory;
 import de.evoal.core.api.ecore.stream.EObjectPairStreamSupplier;
-import de.evoal.core.interpreter.api.InterpreterState;
+import de.evoal.core.api.interpreter.InterpreterState;
 import de.evoal.surrogate.adaption.interval.model.PredictiveErrorData;
 import de.evoal.surrogate.api.function.ModelFunction;
 import de.evoal.surrogate.api.training.SurrogateInformationCalculator;

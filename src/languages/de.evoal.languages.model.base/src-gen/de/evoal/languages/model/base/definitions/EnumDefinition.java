@@ -10,7 +10,6 @@ import org.eclipse.emf.common.util.EList;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * 
  * A enum-based type definition.
  * 
  * <!-- end-model-doc -->
@@ -33,7 +32,6 @@ public interface EnumDefinition extends TypeDefinition, ScaledDefinition {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * 
 	 * List of enum literals.
 	 * 
 	 * <!-- end-model-doc -->

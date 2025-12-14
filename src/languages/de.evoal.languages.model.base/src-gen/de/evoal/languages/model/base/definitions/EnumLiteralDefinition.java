@@ -9,7 +9,6 @@ package de.evoal.languages.model.base.definitions;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * 
  * An enum literal.
  * 
  * <!-- end-model-doc -->

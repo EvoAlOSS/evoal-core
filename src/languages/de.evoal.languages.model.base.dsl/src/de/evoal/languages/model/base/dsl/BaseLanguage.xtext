@@ -89,12 +89,15 @@ CallRule returns Call:
 ;
 
 ReferenceRule returns ConstantExpression:
-	LiteralDefinitionReferenceRule
+	ValuelDefinitionReferenceRule
 	| TypeDefinitionReferenceRule
 ;
 
-LiteralDefinitionReferenceRule returns LiteralDefinitionReference:
-	definition = [LiteralDefinition|QualifiedName]
+/**
+ * Allows us to reference an enum literal.
+ */
+ValuelDefinitionReferenceRule returns ValueDefinitionReference:
+	definition = [ValueDefinition|QualifiedName]
 ;
 
 TypeDefinitionReferenceRule returns TypeDefinitionReference:

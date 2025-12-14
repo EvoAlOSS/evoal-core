@@ -12,7 +12,7 @@ public class SurrogateBlackboardEntries implements BlackboardEntries {
     /**
      * Loaded surrogate configuration.
      */
-    public static final String SURROGATE_CONFIGURATION = "surrogate:configuration";
+//    public static final String SURROGATE_CONFIGURATION = "surrogate:configuration";
 
     /**
      * Configuration file for the data generator.

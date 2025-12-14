@@ -22,7 +22,6 @@ import de.evoal.languages.model.base.expressions.ComparisonExpression;
 import de.evoal.languages.model.base.expressions.ExpressionsPackage;
 import de.evoal.languages.model.base.expressions.Instance;
 import de.evoal.languages.model.base.expressions.IntegerLiteral;
-import de.evoal.languages.model.base.expressions.LiteralDefinitionReference;
 import de.evoal.languages.model.base.expressions.MultiplyDivideModuloExpression;
 import de.evoal.languages.model.base.expressions.NotExpression;
 import de.evoal.languages.model.base.expressions.OrExpression;
@@ -33,6 +32,7 @@ import de.evoal.languages.model.base.expressions.RealLiteral;
 import de.evoal.languages.model.base.expressions.StringLiteral;
 import de.evoal.languages.model.base.expressions.TypeDefinitionReference;
 import de.evoal.languages.model.base.expressions.UnaryAddOrSubtractExpression;
+import de.evoal.languages.model.base.expressions.ValueDefinitionReference;
 import de.evoal.languages.model.base.expressions.XorExpression;
 import de.evoal.languages.model.base.types.ArrayType;
 import de.evoal.languages.model.base.types.BooleanType;
@@ -168,9 +168,6 @@ public class MachineLearningLanguageSemanticSequencer extends GeneratorDSLSemant
 			case ExpressionsPackage.INTEGER_LITERAL:
 				sequence_IntegerLiteralRule(context, (IntegerLiteral) semanticObject); 
 				return; 
-			case ExpressionsPackage.LITERAL_DEFINITION_REFERENCE:
-				sequence_LiteralDefinitionReferenceRule(context, (LiteralDefinitionReference) semanticObject); 
-				return; 
 			case ExpressionsPackage.MULTIPLY_DIVIDE_MODULO_EXPRESSION:
 				sequence_MultiplyDivideModuloExpressionRule(context, (MultiplyDivideModuloExpression) semanticObject); 
 				return; 
@@ -213,6 +210,9 @@ public class MachineLearningLanguageSemanticSequencer extends GeneratorDSLSemant
 				else break;
 			case ExpressionsPackage.UNARY_ADD_OR_SUBTRACT_EXPRESSION:
 				sequence_UnaryAddOrSubtractExpressionRule(context, (UnaryAddOrSubtractExpression) semanticObject); 
+				return; 
+			case ExpressionsPackage.VALUE_DEFINITION_REFERENCE:
+				sequence_ValuelDefinitionReferenceRule(context, (ValueDefinitionReference) semanticObject); 
 				return; 
 			case ExpressionsPackage.XOR_EXPRESSION:
 				sequence_XorExpressionRule(context, (XorExpression) semanticObject); 

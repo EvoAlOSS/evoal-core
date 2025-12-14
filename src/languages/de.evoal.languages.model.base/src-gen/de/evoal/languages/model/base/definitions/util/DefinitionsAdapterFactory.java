@@ -76,6 +76,10 @@ public class DefinitionsAdapterFactory extends AdapterFactoryImpl {
 				return createDefinitionAdapter();
 			}
 			@Override
+			public Adapter caseValueDefinition(ValueDefinition object) {
+				return createValueDefinitionAdapter();
+			}
+			@Override
 			public Adapter caseTypeDefinition(TypeDefinition object) {
 				return createTypeDefinitionAdapter();
 			}
@@ -462,6 +466,20 @@ public class DefinitionsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createDefinedFunctionNameAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.definitions.ValueDefinition <em>Value Definition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.evoal.languages.model.base.definitions.ValueDefinition
+	 * @generated
+	 */
+	public Adapter createValueDefinitionAdapter() {
 		return null;
 	}
 

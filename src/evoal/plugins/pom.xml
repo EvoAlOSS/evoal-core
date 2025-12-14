@@ -16,7 +16,6 @@
 
 	<modules>
 		<module>de.evoal.core.arff</module>
-		<module>de.evoal.core.interpreter</module>
 
 		<module>de.evoal.generator.main</module>
 

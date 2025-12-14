@@ -1,8 +1,8 @@
 package de.evoal.pipeline.impl.components.functions;
 
 import de.evoal.core.api.ecore.Space;
-import de.evoal.core.interpreter.api.cdi.EvoalBuiltinFunction;
-import de.evoal.core.interpreter.api.InterpreterState;
+import de.evoal.core.api.cdi.EvoalBuiltinFunction;
+import de.evoal.core.api.interpreter.InterpreterState;
 import de.evoal.languages.model.base.definitions.AttributeDefinition;
 import de.evoal.languages.model.base.definitions.ClassDefinition;
 import de.evoal.languages.model.base.expressions.*;

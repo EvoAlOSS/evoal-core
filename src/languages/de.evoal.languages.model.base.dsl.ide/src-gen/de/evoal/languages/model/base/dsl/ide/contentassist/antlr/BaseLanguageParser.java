@@ -127,7 +127,7 @@ public class BaseLanguageParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getCallRuleAccess().getFunctionAssignment_0(), "rule__CallRule__FunctionAssignment_0");
 			builder.put(grammarAccess.getCallRuleAccess().getParametersAssignment_2_0(), "rule__CallRule__ParametersAssignment_2_0");
 			builder.put(grammarAccess.getCallRuleAccess().getParametersAssignment_2_1_1(), "rule__CallRule__ParametersAssignment_2_1_1");
-			builder.put(grammarAccess.getLiteralDefinitionReferenceRuleAccess().getDefinitionAssignment(), "rule__LiteralDefinitionReferenceRule__DefinitionAssignment");
+			builder.put(grammarAccess.getValuelDefinitionReferenceRuleAccess().getDefinitionAssignment(), "rule__ValuelDefinitionReferenceRule__DefinitionAssignment");
 			builder.put(grammarAccess.getBaseDataReferenceRuleAccess().getDefinitionAssignment_1(), "rule__BaseDataReferenceRule__DefinitionAssignment_1");
 			builder.put(grammarAccess.getStructuredDataDescriptionReferenceRuleAccess().getDefinitionAssignment_1(), "rule__StructuredDataDescriptionReferenceRule__DefinitionAssignment_1");
 			builder.put(grammarAccess.getInstanceLiteralRuleAccess().getDefinitionAssignment_0(), "rule__InstanceLiteralRule__DefinitionAssignment_0");

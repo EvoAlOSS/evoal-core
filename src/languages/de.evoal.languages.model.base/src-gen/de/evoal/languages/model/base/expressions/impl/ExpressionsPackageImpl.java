@@ -11,6 +11,7 @@ import de.evoal.languages.model.base.expressions.AddOrSubtractOperator;
 import de.evoal.languages.model.base.expressions.AndExpression;
 import de.evoal.languages.model.base.expressions.Array;
 import de.evoal.languages.model.base.expressions.Attribute;
+import de.evoal.languages.model.base.expressions.AttributeDefinitionReference;
 import de.evoal.languages.model.base.expressions.BooleanLiteral;
 import de.evoal.languages.model.base.expressions.Call;
 import de.evoal.languages.model.base.expressions.ComparisonExpression;
@@ -38,6 +39,7 @@ import de.evoal.languages.model.base.expressions.SelfReference;
 import de.evoal.languages.model.base.expressions.StringLiteral;
 import de.evoal.languages.model.base.expressions.TypeDefinitionReference;
 import de.evoal.languages.model.base.expressions.UnaryAddOrSubtractExpression;
+import de.evoal.languages.model.base.expressions.ValueDefinitionReference;
 import de.evoal.languages.model.base.expressions.ValueReference;
 import de.evoal.languages.model.base.expressions.WriteExpression;
 import de.evoal.languages.model.base.expressions.XorExpression;
@@ -223,6 +225,20 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	private EClass selfReferenceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass valueDefinitionReferenceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass attributeDefinitionReferenceEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -947,8 +963,8 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	@Override
-	public EClass getLiteralDefinitionReference() {
-		return literalDefinitionReferenceEClass;
+	public EClass getValueDefinitionReference() {
+		return valueDefinitionReferenceEClass;
 	}
 
 	/**
@@ -957,8 +973,48 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	@Override
-	public EReference getLiteralDefinitionReference_Definition() {
-		return (EReference)literalDefinitionReferenceEClass.getEStructuralFeatures().get(0);
+	public EReference getValueDefinitionReference_Definition() {
+		return (EReference)valueDefinitionReferenceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getValueDefinitionReference__IsEnumLiteralReference() {
+		return valueDefinitionReferenceEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getValueDefinitionReference__IsAttributeReference() {
+		return valueDefinitionReferenceEClass.getEOperations().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getAttributeDefinitionReference() {
+		return attributeDefinitionReferenceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getLiteralDefinitionReference() {
+		return literalDefinitionReferenceEClass;
 	}
 
 	/**
@@ -1240,8 +1296,14 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 
 		selfReferenceEClass = createEClass(SELF_REFERENCE);
 
+		valueDefinitionReferenceEClass = createEClass(VALUE_DEFINITION_REFERENCE);
+		createEReference(valueDefinitionReferenceEClass, VALUE_DEFINITION_REFERENCE__DEFINITION);
+		createEOperation(valueDefinitionReferenceEClass, VALUE_DEFINITION_REFERENCE___IS_ENUM_LITERAL_REFERENCE);
+		createEOperation(valueDefinitionReferenceEClass, VALUE_DEFINITION_REFERENCE___IS_ATTRIBUTE_REFERENCE);
+
+		attributeDefinitionReferenceEClass = createEClass(ATTRIBUTE_DEFINITION_REFERENCE);
+
 		literalDefinitionReferenceEClass = createEClass(LITERAL_DEFINITION_REFERENCE);
-		createEReference(literalDefinitionReferenceEClass, LITERAL_DEFINITION_REFERENCE__DEFINITION);
 
 		typeDefinitionReferenceEClass = createEClass(TYPE_DEFINITION_REFERENCE);
 		createEReference(typeDefinitionReferenceEClass, TYPE_DEFINITION_REFERENCE__DEFINITION);
@@ -1322,7 +1384,9 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		instanceEClass.getESuperTypes().add(this.getLiteral());
 		valueReferenceEClass.getESuperTypes().add(this.getConstantExpression());
 		selfReferenceEClass.getESuperTypes().add(this.getValueReference());
-		literalDefinitionReferenceEClass.getESuperTypes().add(this.getValueReference());
+		valueDefinitionReferenceEClass.getESuperTypes().add(this.getValueReference());
+		attributeDefinitionReferenceEClass.getESuperTypes().add(this.getValueDefinitionReference());
+		literalDefinitionReferenceEClass.getESuperTypes().add(this.getValueDefinitionReference());
 		typeDefinitionReferenceEClass.getESuperTypes().add(this.getValueReference());
 		booleanLiteralEClass.getESuperTypes().add(this.getLiteral());
 		callEClass.getESuperTypes().add(this.getReadExpression());
@@ -1419,8 +1483,16 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 
 		initEClass(selfReferenceEClass, SelfReference.class, "SelfReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
+		initEClass(valueDefinitionReferenceEClass, ValueDefinitionReference.class, "ValueDefinitionReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getValueDefinitionReference_Definition(), theDefinitionsPackage.getValueDefinition(), null, "definition", null, 1, 1, ValueDefinitionReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEOperation(getValueDefinitionReference__IsEnumLiteralReference(), ecorePackage.getEBoolean(), "isEnumLiteralReference", 1, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEOperation(getValueDefinitionReference__IsAttributeReference(), ecorePackage.getEBoolean(), "isAttributeReference", 1, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(attributeDefinitionReferenceEClass, AttributeDefinitionReference.class, "AttributeDefinitionReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
 		initEClass(literalDefinitionReferenceEClass, LiteralDefinitionReference.class, "LiteralDefinitionReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getLiteralDefinitionReference_Definition(), theDefinitionsPackage.getLiteralDefinition(), null, "definition", null, 0, 1, LiteralDefinitionReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(typeDefinitionReferenceEClass, TypeDefinitionReference.class, "TypeDefinitionReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTypeDefinitionReference_Definition(), theDefinitionsPackage.getTypeDefinition(), null, "definition", null, 0, 1, TypeDefinitionReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

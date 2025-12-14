@@ -3991,11 +3991,11 @@ public class InternalDefinitionLanguageParser extends AbstractInternalAntlrParse
 
 
     // $ANTLR start "ruleReferenceRule"
-    // InternalDefinitionLanguage.g:1426:1: ruleReferenceRule returns [EObject current=null] : (this_LiteralDefinitionReferenceRule_0= ruleLiteralDefinitionReferenceRule | this_TypeDefinitionReferenceRule_1= ruleTypeDefinitionReferenceRule ) ;
+    // InternalDefinitionLanguage.g:1426:1: ruleReferenceRule returns [EObject current=null] : (this_ValuelDefinitionReferenceRule_0= ruleValuelDefinitionReferenceRule | this_TypeDefinitionReferenceRule_1= ruleTypeDefinitionReferenceRule ) ;
     public final EObject ruleReferenceRule() throws RecognitionException {
         EObject current = null;
 
-        EObject this_LiteralDefinitionReferenceRule_0 = null;
+        EObject this_ValuelDefinitionReferenceRule_0 = null;
 
         EObject this_TypeDefinitionReferenceRule_1 = null;
 
@@ -4004,10 +4004,10 @@ public class InternalDefinitionLanguageParser extends AbstractInternalAntlrParse
         	enterRule();
 
         try {
-            // InternalDefinitionLanguage.g:1432:2: ( (this_LiteralDefinitionReferenceRule_0= ruleLiteralDefinitionReferenceRule | this_TypeDefinitionReferenceRule_1= ruleTypeDefinitionReferenceRule ) )
-            // InternalDefinitionLanguage.g:1433:2: (this_LiteralDefinitionReferenceRule_0= ruleLiteralDefinitionReferenceRule | this_TypeDefinitionReferenceRule_1= ruleTypeDefinitionReferenceRule )
+            // InternalDefinitionLanguage.g:1432:2: ( (this_ValuelDefinitionReferenceRule_0= ruleValuelDefinitionReferenceRule | this_TypeDefinitionReferenceRule_1= ruleTypeDefinitionReferenceRule ) )
+            // InternalDefinitionLanguage.g:1433:2: (this_ValuelDefinitionReferenceRule_0= ruleValuelDefinitionReferenceRule | this_TypeDefinitionReferenceRule_1= ruleTypeDefinitionReferenceRule )
             {
-            // InternalDefinitionLanguage.g:1433:2: (this_LiteralDefinitionReferenceRule_0= ruleLiteralDefinitionReferenceRule | this_TypeDefinitionReferenceRule_1= ruleTypeDefinitionReferenceRule )
+            // InternalDefinitionLanguage.g:1433:2: (this_ValuelDefinitionReferenceRule_0= ruleValuelDefinitionReferenceRule | this_TypeDefinitionReferenceRule_1= ruleTypeDefinitionReferenceRule )
             int alt21=2;
             int LA21_0 = input.LA(1);
 
@@ -4026,7 +4026,7 @@ public class InternalDefinitionLanguageParser extends AbstractInternalAntlrParse
             }
             switch (alt21) {
                 case 1 :
-                    // InternalDefinitionLanguage.g:1434:3: this_LiteralDefinitionReferenceRule_0= ruleLiteralDefinitionReferenceRule
+                    // InternalDefinitionLanguage.g:1434:3: this_ValuelDefinitionReferenceRule_0= ruleValuelDefinitionReferenceRule
                     {
                     if ( state.backtracking==0 ) {
 
@@ -4035,17 +4035,17 @@ public class InternalDefinitionLanguageParser extends AbstractInternalAntlrParse
                     }
                     if ( state.backtracking==0 ) {
 
-                      			newCompositeNode(grammarAccess.getReferenceRuleAccess().getLiteralDefinitionReferenceRuleParserRuleCall_0());
+                      			newCompositeNode(grammarAccess.getReferenceRuleAccess().getValuelDefinitionReferenceRuleParserRuleCall_0());
                       		
                     }
                     pushFollow(FOLLOW_2);
-                    this_LiteralDefinitionReferenceRule_0=ruleLiteralDefinitionReferenceRule();
+                    this_ValuelDefinitionReferenceRule_0=ruleValuelDefinitionReferenceRule();
 
                     state._fsp--;
                     if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
-                      			current = this_LiteralDefinitionReferenceRule_0;
+                      			current = this_ValuelDefinitionReferenceRule_0;
                       			afterParserOrEnumRuleCall();
                       		
                     }
@@ -4103,28 +4103,28 @@ public class InternalDefinitionLanguageParser extends AbstractInternalAntlrParse
     // $ANTLR end "ruleReferenceRule"
 
 
-    // $ANTLR start "entryRuleLiteralDefinitionReferenceRule"
-    // InternalDefinitionLanguage.g:1461:1: entryRuleLiteralDefinitionReferenceRule returns [EObject current=null] : iv_ruleLiteralDefinitionReferenceRule= ruleLiteralDefinitionReferenceRule EOF ;
-    public final EObject entryRuleLiteralDefinitionReferenceRule() throws RecognitionException {
+    // $ANTLR start "entryRuleValuelDefinitionReferenceRule"
+    // InternalDefinitionLanguage.g:1461:1: entryRuleValuelDefinitionReferenceRule returns [EObject current=null] : iv_ruleValuelDefinitionReferenceRule= ruleValuelDefinitionReferenceRule EOF ;
+    public final EObject entryRuleValuelDefinitionReferenceRule() throws RecognitionException {
         EObject current = null;
 
-        EObject iv_ruleLiteralDefinitionReferenceRule = null;
+        EObject iv_ruleValuelDefinitionReferenceRule = null;
 
 
         try {
-            // InternalDefinitionLanguage.g:1461:71: (iv_ruleLiteralDefinitionReferenceRule= ruleLiteralDefinitionReferenceRule EOF )
-            // InternalDefinitionLanguage.g:1462:2: iv_ruleLiteralDefinitionReferenceRule= ruleLiteralDefinitionReferenceRule EOF
+            // InternalDefinitionLanguage.g:1461:70: (iv_ruleValuelDefinitionReferenceRule= ruleValuelDefinitionReferenceRule EOF )
+            // InternalDefinitionLanguage.g:1462:2: iv_ruleValuelDefinitionReferenceRule= ruleValuelDefinitionReferenceRule EOF
             {
             if ( state.backtracking==0 ) {
-               newCompositeNode(grammarAccess.getLiteralDefinitionReferenceRuleRule()); 
+               newCompositeNode(grammarAccess.getValuelDefinitionReferenceRuleRule()); 
             }
             pushFollow(FOLLOW_1);
-            iv_ruleLiteralDefinitionReferenceRule=ruleLiteralDefinitionReferenceRule();
+            iv_ruleValuelDefinitionReferenceRule=ruleValuelDefinitionReferenceRule();
 
             state._fsp--;
             if (state.failed) return current;
             if ( state.backtracking==0 ) {
-               current =iv_ruleLiteralDefinitionReferenceRule; 
+               current =iv_ruleValuelDefinitionReferenceRule; 
             }
             match(input,EOF,FOLLOW_2); if (state.failed) return current;
 
@@ -4140,12 +4140,12 @@ public class InternalDefinitionLanguageParser extends AbstractInternalAntlrParse
         }
         return current;
     }
-    // $ANTLR end "entryRuleLiteralDefinitionReferenceRule"
+    // $ANTLR end "entryRuleValuelDefinitionReferenceRule"
 
 
-    // $ANTLR start "ruleLiteralDefinitionReferenceRule"
-    // InternalDefinitionLanguage.g:1468:1: ruleLiteralDefinitionReferenceRule returns [EObject current=null] : ( ( ruleQualifiedName ) ) ;
-    public final EObject ruleLiteralDefinitionReferenceRule() throws RecognitionException {
+    // $ANTLR start "ruleValuelDefinitionReferenceRule"
+    // InternalDefinitionLanguage.g:1468:1: ruleValuelDefinitionReferenceRule returns [EObject current=null] : ( ( ruleQualifiedName ) ) ;
+    public final EObject ruleValuelDefinitionReferenceRule() throws RecognitionException {
         EObject current = null;
 
 
@@ -4169,13 +4169,13 @@ public class InternalDefinitionLanguageParser extends AbstractInternalAntlrParse
             if ( state.backtracking==0 ) {
 
               				if (current==null) {
-              					current = createModelElement(grammarAccess.getLiteralDefinitionReferenceRuleRule());
+              					current = createModelElement(grammarAccess.getValuelDefinitionReferenceRuleRule());
               				}
               			
             }
             if ( state.backtracking==0 ) {
 
-              				newCompositeNode(grammarAccess.getLiteralDefinitionReferenceRuleAccess().getDefinitionLiteralDefinitionCrossReference_0());
+              				newCompositeNode(grammarAccess.getValuelDefinitionReferenceRuleAccess().getDefinitionValueDefinitionCrossReference_0());
               			
             }
             pushFollow(FOLLOW_2);
@@ -4212,7 +4212,7 @@ public class InternalDefinitionLanguageParser extends AbstractInternalAntlrParse
         }
         return current;
     }
-    // $ANTLR end "ruleLiteralDefinitionReferenceRule"
+    // $ANTLR end "ruleValuelDefinitionReferenceRule"
 
 
     // $ANTLR start "entryRuleTypeDefinitionReferenceRule"

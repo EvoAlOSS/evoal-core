@@ -7,7 +7,7 @@ import de.evoal.core.api.ecore.TypedEObject;
 import de.evoal.core.api.ecore.stream.EObjectPairStreamSupplier;
 import de.evoal.core.api.ecore.stream.FileBasedEObjectStreamSupplier;
 import de.evoal.core.api.utils.Requirements;
-import de.evoal.core.interpreter.api.InterpreterState;
+import de.evoal.core.api.interpreter.InterpreterState;
 import de.evoal.languages.model.base.definitions.DataDescription;
 import de.evoal.languages.model.mll.TaskDescription;
 import lombok.NonNull;

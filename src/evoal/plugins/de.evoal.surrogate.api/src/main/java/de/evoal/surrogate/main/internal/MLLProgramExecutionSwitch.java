@@ -1,18 +1,15 @@
 package de.evoal.surrogate.main.internal;
 
 import de.evoal.surrogate.api.function.ModelFunction;
-import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
-import javax.inject.Named;
-import java.io.File;
 import java.util.regex.Pattern;
 
 import de.evoal.core.api.languages.AttributeEvaluator;
-import de.evoal.core.interpreter.api.InterpreterState;
-import de.evoal.core.interpreter.api.ProgramExecutionSwitch;
+import de.evoal.core.api.interpreter.InterpreterState;
+import de.evoal.core.api.interpreter.ProgramExecutionSwitch;
 import de.evoal.core.api.dynamic.EAnnotationHelper;
 import de.evoal.surrogate.api.training.TrainingDataManager;
 

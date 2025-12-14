@@ -39,6 +39,8 @@ module de.evoal.optimisation.api {
     requires de.evoal.core.main;
     requires jakarta.ejb.api;
     requires com.google.common;
+    requires de.evoal.languages.models;
+    requires de.evoal.languages.model.mll.dsl;
 
     opens de.evoal.optimisation; // export dl files.
 

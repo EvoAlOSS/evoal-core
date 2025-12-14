@@ -131,9 +131,15 @@
     </genClasses>
     <genClasses ecoreClass="expressions.ecore#//ValueReference"/>
     <genClasses ecoreClass="expressions.ecore#//SelfReference"/>
-    <genClasses ecoreClass="expressions.ecore#//LiteralDefinitionReference">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference expressions.ecore#//LiteralDefinitionReference/definition"/>
+    <genClasses ecoreClass="expressions.ecore#//ValueDefinitionReference">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference expressions.ecore#//ValueDefinitionReference/definition"/>
+      <genOperations ecoreOperation="expressions.ecore#//ValueDefinitionReference/isEnumLiteralReference"
+          body="return this.getDefinition() instanceof &lt;%de.evoal.languages.model.base.definitions.LiteralDefinition%>;"/>
+      <genOperations ecoreOperation="expressions.ecore#//ValueDefinitionReference/isAttributeReference"
+          body="return this.getDefinition() instanceof &lt;%de.evoal.languages.model.base.definitions.AttributeDefinition%>;&#xA;"/>
     </genClasses>
+    <genClasses ecoreClass="expressions.ecore#//AttributeDefinitionReference"/>
+    <genClasses ecoreClass="expressions.ecore#//LiteralDefinitionReference"/>
     <genClasses ecoreClass="expressions.ecore#//TypeDefinitionReference">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference expressions.ecore#//TypeDefinitionReference/definition"/>
     </genClasses>

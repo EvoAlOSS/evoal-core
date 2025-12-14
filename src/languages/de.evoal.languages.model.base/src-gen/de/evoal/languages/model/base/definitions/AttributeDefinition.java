@@ -28,7 +28,7 @@ import de.evoal.languages.model.base.types.Type;
  * @model
  * @generated
  */
-public interface AttributeDefinition extends Definition {
+public interface AttributeDefinition extends Definition, ValueDefinition {
 	/**
 	 * Returns the value of the '<em><b>Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
@@ -85,7 +85,6 @@ public interface AttributeDefinition extends Definition {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * 
 	 * If a property binding is required.
 	 * 
 	 * <!-- end-model-doc -->
