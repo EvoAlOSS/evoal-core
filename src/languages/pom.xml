@@ -25,7 +25,7 @@
 		<url.eclipse>https://download.eclipse.org/releases/2025-12/</url.eclipse>
 <!--		<url.orbit>https://download.eclipse.org/tools/orbit/downloads/drops/R20221123021534/repository</url.orbit> -->
 	</properties>
-	
+<!--	
 	<dependencies>
 		<dependency>
 		    <groupId>io.typefox.xtext2langium</groupId>
@@ -33,7 +33,7 @@
 		    <version>0.4.0</version>
 		</dependency>
 	</dependencies>
-
+-->
 	<build>
 		<plugins>
 			<plugin>

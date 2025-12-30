@@ -12,7 +12,6 @@ import zipfile
 
 SERVER   = os.environ.get('CI_SERVER_HOST')
 PROJECT  = os.environ.get('CI_PROJECT_ID')
-TOKEN    = os.environ.get('CI_JOB_TOKEN')
 BASE_URL = "/api/v4/projects/%s/repository/" % (PROJECT,)
 
 branches = []
@@ -26,7 +25,11 @@ SECTIONS = [
 ]
 
 connection = http.client.HTTPSConnection(SERVER)
-headers = {'JOB_TOKEN': TOKEN}
+
+if "CI_JOB_TOKEN" in os.environ.keys():
+    headers = {'JOB-TOKEN' : os.environ.get('CI_JOB_TOKEN')}
+else:
+    headers = {'PRIVATE-TOKEN' : os.environ.get('TOKEN')}
 
 if not os.path.exists("public"):
     os.makedirs("public")
@@ -41,13 +44,17 @@ for branch in json.loads(response.read()):
 connection.request("GET", BASE_URL + "tags", headers = headers)
 response = connection.getresponse()
 for tag in json.loads(response.read()):
-    tags.append(branch['name'])
+    tags.append(tag['name'])
 
 # start download update sites and generate index.html for Update Site
 releases = branches + tags
 for release in releases:
+    print("Generating Update Site for %s" % (release,))
+
     path = os.path.join("public", release)
-    if not os.path.exists(path):
+    if os.path.exists(path):
+        print("  path already exist")
+    else:
         os.makedirs(path)
 
     f = open(path + "/index.html", "w")
@@ -60,31 +67,42 @@ for release in releases:
         # read last artifact version
         meta_version_content = urllib.request.urlopen(meta_url + "maven-metadata.xml").read()
         tree = xml.dom.minidom.parseString(meta_version_content)
-        mvn_version = tree.getElementsByTagName("version")[0].childNodes[0].nodeValue
+        mvn_version = tree.getElementsByTagName("version")[-1].childNodes[0].nodeValue
+        print("  found Maven version %s" % (mvn_version,))
  
         # read last upload version
-        meta_content = urllib.request.urlopen(meta_url + mvn_version + "/maven-metadata.xml").read()
-        tree = xml.dom.minidom.parseString(meta_content)
-        version = tree.getElementsByTagName("lastUpdated")[0].childNodes[0].nodeValue
+        try:
+            meta_content = urllib.request.urlopen(meta_url + mvn_version + "/maven-metadata.xml").read()
+            tree = xml.dom.minidom.parseString(meta_content)
+            version = tree.getElementsByTagName("lastUpdated")[0].childNodes[0].nodeValue
 
-        for snapshotVersion in tree.getElementsByTagName("snapshotVersion"):
-            if snapshotVersion.getElementsByTagName("extension")[0].childNodes[0].nodeValue != "zip":
-                continue
-            
-            if snapshotVersion.getElementsByTagName("updated")[0].childNodes[0].nodeValue != version:
-                continue
-            
-            artifactId = tree.getElementsByTagName("artifactId")[0].childNodes[0].nodeValue
-            value = snapshotVersion.getElementsByTagName("value")[0].childNodes[0].nodeValue
+            for snapshotVersion in tree.getElementsByTagName("snapshotVersion"):
+                if snapshotVersion.getElementsByTagName("extension")[0].childNodes[0].nodeValue != "zip":
+                    continue
+                
+                if snapshotVersion.getElementsByTagName("updated")[0].childNodes[0].nodeValue != version:
+                    continue
+                
+                artifactId = tree.getElementsByTagName("artifactId")[0].childNodes[0].nodeValue
+                value = snapshotVersion.getElementsByTagName("value")[0].childNodes[0].nodeValue
 
-            url = meta_url + mvn_version + "/" +  artifactId + "-" + value + ".zip"
+                url = meta_url + mvn_version + "/" +  artifactId + "-" + value + ".zip"
+                #print("  loading %s" % (url,))
+
+                zip_response = urllib.request.urlopen(url)
+                zip = zipfile.ZipFile(io.BytesIO(zip_response.read()))
+                zip.extractall(path)
+        except urllib.error.HTTPError as e:
+            url = meta_url + mvn_version + "/de.evoal.languages.releng.site-" + release + ".zip"            
             print("  loading %s" % (url,))
 
             zip_response = urllib.request.urlopen(url)
             zip = zipfile.ZipFile(io.BytesIO(zip_response.read()))
             zip.extractall(path)
-    except urllib.error.HTTPError:
+
+    except urllib.error.HTTPError as e:
         print ("Failed to download release %s from" % (release,))
+        print(e)
         continue
 
 # Generate landing paage
