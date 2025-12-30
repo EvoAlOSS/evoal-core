@@ -16,8 +16,7 @@ Require-Bundle: de.evoal.languages.model.ddl,
  de.evoal.languages.model.base;bundle-version="1.0.0",
  de.evoal.languages.model.base.dsl;bundle-version="1.0.0",
  de.evoal.languages.model.utils;bundle-version="1.0.0",
- org.eclipse.emf.mwe2.language;bundle-version="2.14.0",
- io.typefox.xtext2langium;bundle-version="0.4.0"
+ org.eclipse.emf.mwe2.language;bundle-version="2.14.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-21
 Export-Package: de.evoal.languages.model.ddl.dsl.formatting2,
  de.evoal.languages.model.ddl.dsl.parser.antlr.internal,

@@ -37,11 +37,6 @@ Workflow {
 			referencedResource = "platform:/resource/de.evoal.languages.model.ddl/model/model.genmodel"
 			referencedResource = "platform:/resource/de.evoal.languages.model.base/model/model.genmodel"
 
-			fragment = io.typefox.xtext2langium.Xtext2LangiumFragment {
-			        outputPath = './langium'
-		    }
-
-
             parserGenerator = {
                     options = {
                             backtrack = true

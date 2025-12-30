@@ -16,8 +16,7 @@ Require-Bundle: org.eclipse.xtext,
  org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
  de.evoal.languages.model.utils;bundle-version="1.0.0",
  de.evoal.languages.models;bundle-version="2026.4.0",
- de.evoal.languages.model.generator.dsl;bundle-version="2026.4.0",
- io.typefox.xtext2langium;bundle-version="0.4.0"
+ de.evoal.languages.model.generator.dsl;bundle-version="2026.4.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-21
 Export-Package: de.evoal.languages.model.mll.dsl,
  de.evoal.languages.model.mll.dsl.generator,
