@@ -11,13 +11,12 @@
   <name>Mirror Parent</name>
   
   <properties>
-    <tycho.version>3.0.0</tycho.version>
-    <tycho-extras.version>3.0.0</tycho-extras.version>
+    <tycho.version>5.0.1</tycho.version>
+    <tycho-extras.version>5.0.1</tycho-extras.version>
 
-    <eclipse.environment>JavaSE-17</eclipse.environment>
+    <eclipse.environment>JavaSE-21</eclipse.environment>
     
-    <url.eclipse>https://download.eclipse.org/releases/2022-12/202212071000</url.eclipse>
-    <url.orbit>https://download.eclipse.org/tools/orbit/downloads/drops/R20221123021534/repository</url.orbit>
+    <url.orbit>https://download.eclipse.org/tools/orbit/simrel/orbit-aggregation/2025-12</url.orbit>
   </properties>
   
   <build>

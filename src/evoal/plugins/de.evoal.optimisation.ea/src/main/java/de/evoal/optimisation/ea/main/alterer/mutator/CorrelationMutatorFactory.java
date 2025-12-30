@@ -4,13 +4,13 @@ import de.evoal.core.api.board.Blackboard;
 import de.evoal.optimisation.api.correlations.Correlations;
 import de.evoal.optimisation.ea.api.codec.CustomCodec;
 import io.jenetics.Alterer;
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Produces;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.inject.Produces;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.inject.Inject;
-import javax.inject.Named;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 import java.util.function.BiFunction;
 
 @ApplicationScoped

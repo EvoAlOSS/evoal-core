@@ -7,7 +7,7 @@ Bundle-Version: 2026.4.0.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Bundle-RequiredExecutionEnvironment: JavaSE-17
+Bundle-RequiredExecutionEnvironment: JavaSE-21
 Export-Package: de.evoal.languages.model.base,
  de.evoal.languages.model.base.definitions,
  de.evoal.languages.model.base.definitions.impl,
@@ -24,4 +24,5 @@ Import-Package: org.slf4j
 Require-Bundle: org.eclipse.emf.ecore;visibility:=reexport,
  de.evoal.languages.model.base;visibility:=reexport,
  org.eclipse.core.runtime
+Eclipse-LazyStart: true
 Bundle-ActivationPolicy: lazy

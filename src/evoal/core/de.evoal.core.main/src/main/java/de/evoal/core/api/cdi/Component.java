@@ -1,6 +1,6 @@
 package de.evoal.core.api.cdi;
 
-import javax.inject.Qualifier;
+import jakarta.inject.Qualifier;
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

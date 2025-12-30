@@ -2,7 +2,7 @@ package de.evoal.core.api.cdi;
 
 import de.evoal.languages.model.base.expressions.Instance;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
 public class ComponentProducer {

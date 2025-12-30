@@ -1,7 +1,7 @@
 package de.evoal.surrogate.api.cdi;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 
 import de.evoal.surrogate.api.function.ModelFunction;
 import org.eclipse.emf.ecore.EStructuralFeature;

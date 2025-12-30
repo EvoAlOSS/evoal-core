@@ -2,8 +2,8 @@ package de.evoal.optimisation.main.stopping;
 
 import de.evoal.optimisation.api.model.Iteration;
 import de.evoal.optimisation.api.model.StoppingCriterion;
+import jakarta.enterprise.inject.Vetoed;
 
-import javax.enterprise.inject.Vetoed;
 import java.util.LinkedList;
 import java.util.List;
 

@@ -9,17 +9,17 @@ import de.evoal.optimisation.api.cdi.TargetPointLoader;
 import de.evoal.optimisation.api.model.OptimisationAlgorithm;
 import de.evoal.core.api.properties.PropertiesPair;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
 import de.evoal.optimisation.api.statistics.writer.Column;
 import de.evoal.optimisation.api.statistics.writer.ColumnType;
 import de.evoal.optimisation.api.statistics.writer.WriterContext;
 import de.evoal.optimisation.main.producer.OptimisationModuleLoader;
+import jakarta.inject.Provider;
 import lombok.extern.slf4j.Slf4j;
 
-import javax.inject.Inject;
-import javax.inject.Named;
-import javax.inject.Provider;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 import java.io.File;
 import java.util.List;
 

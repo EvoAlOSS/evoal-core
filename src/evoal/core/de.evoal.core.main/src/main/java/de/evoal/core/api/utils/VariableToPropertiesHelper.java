@@ -7,9 +7,9 @@ import de.evoal.core.api.properties.PropertySpecification;
 import de.evoal.languages.model.base.expressions.Instance;
 import de.evoal.languages.model.base.definitions.DataDescription;
 import lombok.extern.slf4j.Slf4j;
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.Collections;

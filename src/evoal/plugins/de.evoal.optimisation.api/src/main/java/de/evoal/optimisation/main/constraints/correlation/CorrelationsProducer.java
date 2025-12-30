@@ -5,8 +5,8 @@ import de.evoal.optimisation.api.correlations.Correlation;
 import de.evoal.optimisation.api.correlations.Correlations;
 import de.evoal.optimisation.api.correlations.RangedCorrelation;
 import de.evoal.core.api.properties.PropertiesSpecification;
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Produces;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.inject.Produces;
 
 import de.evoal.optimisation.main.constraints.correlation.el.AstHelper;
 import de.evoal.core.api.languages.base.BaseLanguageHelper;
@@ -15,7 +15,7 @@ import de.evoal.languages.model.base.definitions.DataDescription;
 import de.evoal.languages.model.base.expressions.Call;
 import lombok.extern.slf4j.Slf4j;
 
-import javax.inject.Named;
+import jakarta.inject.Named;
 
 import java.util.Objects;
 import java.util.Optional;

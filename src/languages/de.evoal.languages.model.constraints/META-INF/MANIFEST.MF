@@ -14,7 +14,7 @@ Require-Bundle: org.eclipse.core.runtime,
  de.evoal.languages.model.interpreter;bundle-version="2026.4.0"
 Eclipse-LazyStart: true
 Bundle-ActivationPolicy: lazy
-Bundle-RequiredExecutionEnvironment: JavaSE-17
+Bundle-RequiredExecutionEnvironment: JavaSE-21
 Export-Package: de.evoal.languages.model.constraints,
  de.evoal.languages.model.constraints.impl,
  de.evoal.languages.model.constraints.util

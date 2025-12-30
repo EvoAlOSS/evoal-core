@@ -8,7 +8,7 @@ import de.evoal.core.api.cdi.*;
 import de.evoal.languages.model.ol.OptimisationModule;
 import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
 import de.evoal.optimisation.api.model.OptimisationAlgorithm;
 import de.evoal.optimisation.api.statistics.writer.ColumnType;
@@ -16,7 +16,7 @@ import de.evoal.optimisation.api.statistics.writer.WriterContext;
 import lombok.extern.slf4j.Slf4j;
 import de.evoal.optimisation.main.producer.OptimisationModuleLoader;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 import java.io.File;
 
 @Application(

@@ -4,8 +4,8 @@ import de.evoal.core.api.cdi.BeanFactory;
 import de.evoal.core.api.utils.AttributeHelper;
 import de.evoal.languages.model.base.expressions.Instance;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.Optional;

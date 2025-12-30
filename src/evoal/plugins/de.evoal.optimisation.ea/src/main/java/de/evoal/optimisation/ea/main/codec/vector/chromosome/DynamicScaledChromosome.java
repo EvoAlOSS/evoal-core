@@ -10,7 +10,7 @@ import de.evoal.languages.model.base.expressions.Instance;
 import io.jenetics.util.DoubleRange;
 import lombok.extern.slf4j.Slf4j;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 @Slf4j
 public abstract class DynamicScaledChromosome extends DynamicBoundedDoubleChromosome {

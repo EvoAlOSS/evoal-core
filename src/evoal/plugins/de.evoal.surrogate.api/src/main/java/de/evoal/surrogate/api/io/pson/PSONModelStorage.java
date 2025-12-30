@@ -18,9 +18,9 @@ import java.io.InputStream;
 import java.net.URI;
 import java.util.Optional;
 
-import javax.enterprise.context.Dependent;
-import javax.inject.Inject;
-import javax.inject.Named;
+import jakarta.enterprise.context.Dependent;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 

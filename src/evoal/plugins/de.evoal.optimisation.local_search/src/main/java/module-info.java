@@ -7,8 +7,8 @@ module de.evoal.optimisation.local_search {
     requires de.evoal.optimisation.api;
 
     // CDI related dependencies
-    requires jakarta.inject.api;
-    requires jakarta.enterprise.cdi.api;
+    requires jakarta.inject;
+    requires jakarta.cdi;
 
     // logging
     requires org.slf4j;

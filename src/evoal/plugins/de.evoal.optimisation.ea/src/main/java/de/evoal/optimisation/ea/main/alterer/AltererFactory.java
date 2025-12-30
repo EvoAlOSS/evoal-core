@@ -23,11 +23,11 @@ import io.jenetics.prog.MathRewriteAlterer;
 import io.jenetics.prog.op.Op;
 import io.jenetics.util.ISeq;
 import io.jenetics.util.Mean;
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 import lombok.extern.slf4j.Slf4j;
 
-import javax.inject.Inject;
-import javax.inject.Named;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 @ApplicationScoped
 @Slf4j

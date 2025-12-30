@@ -20,7 +20,7 @@ Require-Bundle: de.evoal.languages.model.mll.dsl,
  de.evoal.languages.model.generator.dsl.ui;bundle-version="2026.4.0",
  de.evoal.languages.model.base.dsl.ui;bundle-version="2026.4.0"
 Import-Package: org.apache.log4j
-Bundle-RequiredExecutionEnvironment: JavaSE-17
+Bundle-RequiredExecutionEnvironment: JavaSE-21
 Export-Package: de.evoal.languages.model.mll.dsl.ui.contentassist,
  de.evoal.languages.model.mll.dsl.ui.quickfix,
  de.evoal.languages.model.mll.dsl.ui.internal

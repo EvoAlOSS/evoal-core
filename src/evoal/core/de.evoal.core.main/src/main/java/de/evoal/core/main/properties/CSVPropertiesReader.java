@@ -13,8 +13,8 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 
-import javax.enterprise.context.Dependent;
-import javax.inject.Named;
+import jakarta.enterprise.context.Dependent;
+import jakarta.inject.Named;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;

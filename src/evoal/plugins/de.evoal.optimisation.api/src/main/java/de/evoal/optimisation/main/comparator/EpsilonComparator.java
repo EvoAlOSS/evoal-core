@@ -6,9 +6,9 @@ import de.evoal.languages.model.base.expressions.Instance;
 import de.evoal.languages.model.base.definitions.DataDescription;
 import de.evoal.core.api.properties.PropertiesSpecification;
 
-import javax.enterprise.context.Dependent;
-import javax.inject.Named;
-import javax.inject.Inject;
+import jakarta.enterprise.context.Dependent;
+import jakarta.inject.Named;
+import jakarta.inject.Inject;
 import java.util.List;
 import java.util.function.Function;
 

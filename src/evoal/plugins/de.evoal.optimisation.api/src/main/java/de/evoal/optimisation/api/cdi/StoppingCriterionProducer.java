@@ -6,8 +6,8 @@ import de.evoal.languages.model.base.expressions.Instance;
 import de.evoal.optimisation.api.model.StoppingCriterion;
 import de.evoal.optimisation.main.stopping.CriterionCombiner;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import java.util.List;
 
 @ApplicationScoped

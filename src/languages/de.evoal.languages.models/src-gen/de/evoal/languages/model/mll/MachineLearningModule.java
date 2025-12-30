@@ -3,9 +3,13 @@
 package de.evoal.languages.model.mll;
 
 import de.evoal.languages.model.base.Import;
+
 import de.evoal.languages.model.base.expressions.Instance;
+
 import de.evoal.languages.model.execution.Block;
+
 import de.evoal.languages.model.generator.PipelineDefinition;
+
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EObject;

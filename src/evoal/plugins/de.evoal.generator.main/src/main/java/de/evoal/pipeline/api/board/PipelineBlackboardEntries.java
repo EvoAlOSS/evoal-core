@@ -3,8 +3,8 @@ package de.evoal.pipeline.api.board;
 import de.evoal.core.api.board.BlackboardEntries;
 import de.evoal.core.api.cdi.Commandline;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Named;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Named;
 
 @ApplicationScoped
 @Named("de.evoal.pipeline.blackboard-entries")

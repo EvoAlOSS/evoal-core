@@ -143,196 +143,6 @@ public interface DefinitionsPackage extends EPackage {
 	int DEFINITION_OPERATION_COUNT = CONSTRAINED_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.base.definitions.impl.TypeDefinitionImpl <em>Type Definition</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.base.definitions.impl.TypeDefinitionImpl
-	 * @see de.evoal.languages.model.base.definitions.impl.DefinitionsPackageImpl#getTypeDefinition()
-	 * @generated
-	 */
-	int TYPE_DEFINITION = 3;
-
-	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.base.definitions.impl.LiteralDefinitionImpl <em>Literal Definition</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.base.definitions.impl.LiteralDefinitionImpl
-	 * @see de.evoal.languages.model.base.definitions.impl.DefinitionsPackageImpl#getLiteralDefinition()
-	 * @generated
-	 */
-	int LITERAL_DEFINITION = 4;
-
-	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.base.definitions.impl.ScaledDefinitionImpl <em>Scaled Definition</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.base.definitions.impl.ScaledDefinitionImpl
-	 * @see de.evoal.languages.model.base.definitions.impl.DefinitionsPackageImpl#getScaledDefinition()
-	 * @generated
-	 */
-	int SCALED_DEFINITION = 5;
-
-	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.base.definitions.impl.ClassDefinitionImpl <em>Class Definition</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.base.definitions.impl.ClassDefinitionImpl
-	 * @see de.evoal.languages.model.base.definitions.impl.DefinitionsPackageImpl#getClassDefinition()
-	 * @generated
-	 */
-	int CLASS_DEFINITION = 6;
-
-	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.base.definitions.impl.AttributeDefinitionImpl <em>Attribute Definition</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.base.definitions.impl.AttributeDefinitionImpl
-	 * @see de.evoal.languages.model.base.definitions.impl.DefinitionsPackageImpl#getAttributeDefinition()
-	 * @generated
-	 */
-	int ATTRIBUTE_DEFINITION = 7;
-
-	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.base.definitions.impl.EnumLiteralDefinitionImpl <em>Enum Literal Definition</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.base.definitions.impl.EnumLiteralDefinitionImpl
-	 * @see de.evoal.languages.model.base.definitions.impl.DefinitionsPackageImpl#getEnumLiteralDefinition()
-	 * @generated
-	 */
-	int ENUM_LITERAL_DEFINITION = 8;
-
-	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.base.definitions.impl.EnumDefinitionImpl <em>Enum Definition</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.base.definitions.impl.EnumDefinitionImpl
-	 * @see de.evoal.languages.model.base.definitions.impl.DefinitionsPackageImpl#getEnumDefinition()
-	 * @generated
-	 */
-	int ENUM_DEFINITION = 9;
-
-	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.base.definitions.impl.DataTypeDefinitionImpl <em>Data Type Definition</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.base.definitions.impl.DataTypeDefinitionImpl
-	 * @see de.evoal.languages.model.base.definitions.impl.DefinitionsPackageImpl#getDataTypeDefinition()
-	 * @generated
-	 */
-	int DATA_TYPE_DEFINITION = 10;
-
-	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.base.definitions.impl.DataTypeTypeDefinitionImpl <em>Data Type Type Definition</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.base.definitions.impl.DataTypeTypeDefinitionImpl
-	 * @see de.evoal.languages.model.base.definitions.impl.DefinitionsPackageImpl#getDataTypeTypeDefinition()
-	 * @generated
-	 */
-	int DATA_TYPE_TYPE_DEFINITION = 11;
-
-	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.base.definitions.impl.DataDescriptionImpl <em>Data Description</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.base.definitions.impl.DataDescriptionImpl
-	 * @see de.evoal.languages.model.base.definitions.impl.DefinitionsPackageImpl#getDataDescription()
-	 * @generated
-	 */
-	int DATA_DESCRIPTION = 12;
-
-	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.base.definitions.impl.BaseDataDescriptionImpl <em>Base Data Description</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.base.definitions.impl.BaseDataDescriptionImpl
-	 * @see de.evoal.languages.model.base.definitions.impl.DefinitionsPackageImpl#getBaseDataDescription()
-	 * @generated
-	 */
-	int BASE_DATA_DESCRIPTION = 13;
-
-	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.base.definitions.impl.TypedBaseDataDescriptionImpl <em>Typed Base Data Description</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.base.definitions.impl.TypedBaseDataDescriptionImpl
-	 * @see de.evoal.languages.model.base.definitions.impl.DefinitionsPackageImpl#getTypedBaseDataDescription()
-	 * @generated
-	 */
-	int TYPED_BASE_DATA_DESCRIPTION = 14;
-
-	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.base.definitions.impl.UntypedBaseDataDescriptionImpl <em>Untyped Base Data Description</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.base.definitions.impl.UntypedBaseDataDescriptionImpl
-	 * @see de.evoal.languages.model.base.definitions.impl.DefinitionsPackageImpl#getUntypedBaseDataDescription()
-	 * @generated
-	 */
-	int UNTYPED_BASE_DATA_DESCRIPTION = 15;
-
-	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.base.definitions.impl.StructuredDataDescriptionImpl <em>Structured Data Description</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.base.definitions.impl.StructuredDataDescriptionImpl
-	 * @see de.evoal.languages.model.base.definitions.impl.DefinitionsPackageImpl#getStructuredDataDescription()
-	 * @generated
-	 */
-	int STRUCTURED_DATA_DESCRIPTION = 16;
-
-	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.base.definitions.impl.FunctionDefinitionImpl <em>Function Definition</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.base.definitions.impl.FunctionDefinitionImpl
-	 * @see de.evoal.languages.model.base.definitions.impl.DefinitionsPackageImpl#getFunctionDefinition()
-	 * @generated
-	 */
-	int FUNCTION_DEFINITION = 17;
-
-	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.base.definitions.impl.ParameterImpl <em>Parameter</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.base.definitions.impl.ParameterImpl
-	 * @see de.evoal.languages.model.base.definitions.impl.DefinitionsPackageImpl#getParameter()
-	 * @generated
-	 */
-	int PARAMETER = 18;
-
-	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.base.definitions.impl.ConstantDefinitionImpl <em>Constant Definition</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.base.definitions.impl.ConstantDefinitionImpl
-	 * @see de.evoal.languages.model.base.definitions.impl.DefinitionsPackageImpl#getConstantDefinition()
-	 * @generated
-	 */
-	int CONSTANT_DEFINITION = 19;
-
-	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.base.definitions.impl.FunctionNameImpl <em>Function Name</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.base.definitions.impl.FunctionNameImpl
-	 * @see de.evoal.languages.model.base.definitions.impl.DefinitionsPackageImpl#getFunctionName()
-	 * @generated
-	 */
-	int FUNCTION_NAME = 20;
-
-	/**
-	 * The meta object id for the '{@link de.evoal.languages.model.base.definitions.impl.DefinedFunctionNameImpl <em>Defined Function Name</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.evoal.languages.model.base.definitions.impl.DefinedFunctionNameImpl
-	 * @see de.evoal.languages.model.base.definitions.impl.DefinitionsPackageImpl#getDefinedFunctionName()
-	 * @generated
-	 */
-	int DEFINED_FUNCTION_NAME = 21;
-
-	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.definitions.impl.ValueDefinitionImpl <em>Value Definition</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -379,6 +189,16 @@ public interface DefinitionsPackage extends EPackage {
 	int VALUE_DEFINITION_OPERATION_COUNT = DEFINITION_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link de.evoal.languages.model.base.definitions.impl.TypeDefinitionImpl <em>Type Definition</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.evoal.languages.model.base.definitions.impl.TypeDefinitionImpl
+	 * @see de.evoal.languages.model.base.definitions.impl.DefinitionsPackageImpl#getTypeDefinition()
+	 * @generated
+	 */
+	int TYPE_DEFINITION = 3;
+
+	/**
 	 * The feature id for the '<em><b>Constraints</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -413,6 +233,16 @@ public interface DefinitionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int TYPE_DEFINITION_OPERATION_COUNT = DEFINITION_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link de.evoal.languages.model.base.definitions.impl.LiteralDefinitionImpl <em>Literal Definition</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.evoal.languages.model.base.definitions.impl.LiteralDefinitionImpl
+	 * @see de.evoal.languages.model.base.definitions.impl.DefinitionsPackageImpl#getLiteralDefinition()
+	 * @generated
+	 */
+	int LITERAL_DEFINITION = 4;
 
 	/**
 	 * The feature id for the '<em><b>Constraints</b></em>' containment reference list.
@@ -451,6 +281,16 @@ public interface DefinitionsPackage extends EPackage {
 	int LITERAL_DEFINITION_OPERATION_COUNT = VALUE_DEFINITION_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link de.evoal.languages.model.base.definitions.impl.ScaledDefinitionImpl <em>Scaled Definition</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.evoal.languages.model.base.definitions.impl.ScaledDefinitionImpl
+	 * @see de.evoal.languages.model.base.definitions.impl.DefinitionsPackageImpl#getScaledDefinition()
+	 * @generated
+	 */
+	int SCALED_DEFINITION = 5;
+
+	/**
 	 * The feature id for the '<em><b>Scale</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -476,6 +316,16 @@ public interface DefinitionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int SCALED_DEFINITION_OPERATION_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link de.evoal.languages.model.base.definitions.impl.ClassDefinitionImpl <em>Class Definition</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.evoal.languages.model.base.definitions.impl.ClassDefinitionImpl
+	 * @see de.evoal.languages.model.base.definitions.impl.DefinitionsPackageImpl#getClassDefinition()
+	 * @generated
+	 */
+	int CLASS_DEFINITION = 6;
 
 	/**
 	 * The feature id for the '<em><b>Constraints</b></em>' containment reference list.
@@ -559,6 +409,16 @@ public interface DefinitionsPackage extends EPackage {
 	int CLASS_DEFINITION_OPERATION_COUNT = TYPE_DEFINITION_OPERATION_COUNT + 2;
 
 	/**
+	 * The meta object id for the '{@link de.evoal.languages.model.base.definitions.impl.AttributeDefinitionImpl <em>Attribute Definition</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.evoal.languages.model.base.definitions.impl.AttributeDefinitionImpl
+	 * @see de.evoal.languages.model.base.definitions.impl.DefinitionsPackageImpl#getAttributeDefinition()
+	 * @generated
+	 */
+	int ATTRIBUTE_DEFINITION = 7;
+
+	/**
 	 * The feature id for the '<em><b>Constraints</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -622,6 +482,16 @@ public interface DefinitionsPackage extends EPackage {
 	int ATTRIBUTE_DEFINITION_OPERATION_COUNT = DEFINITION_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link de.evoal.languages.model.base.definitions.impl.EnumLiteralDefinitionImpl <em>Enum Literal Definition</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.evoal.languages.model.base.definitions.impl.EnumLiteralDefinitionImpl
+	 * @see de.evoal.languages.model.base.definitions.impl.DefinitionsPackageImpl#getEnumLiteralDefinition()
+	 * @generated
+	 */
+	int ENUM_LITERAL_DEFINITION = 8;
+
+	/**
 	 * The feature id for the '<em><b>Constraints</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -656,6 +526,16 @@ public interface DefinitionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int ENUM_LITERAL_DEFINITION_OPERATION_COUNT = LITERAL_DEFINITION_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link de.evoal.languages.model.base.definitions.impl.EnumDefinitionImpl <em>Enum Definition</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.evoal.languages.model.base.definitions.impl.EnumDefinitionImpl
+	 * @see de.evoal.languages.model.base.definitions.impl.DefinitionsPackageImpl#getEnumDefinition()
+	 * @generated
+	 */
+	int ENUM_DEFINITION = 9;
 
 	/**
 	 * The feature id for the '<em><b>Constraints</b></em>' containment reference list.
@@ -712,6 +592,16 @@ public interface DefinitionsPackage extends EPackage {
 	int ENUM_DEFINITION_OPERATION_COUNT = TYPE_DEFINITION_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link de.evoal.languages.model.base.definitions.impl.DataTypeDefinitionImpl <em>Data Type Definition</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.evoal.languages.model.base.definitions.impl.DataTypeDefinitionImpl
+	 * @see de.evoal.languages.model.base.definitions.impl.DefinitionsPackageImpl#getDataTypeDefinition()
+	 * @generated
+	 */
+	int DATA_TYPE_DEFINITION = 10;
+
+	/**
 	 * The feature id for the '<em><b>Constraints</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -746,6 +636,16 @@ public interface DefinitionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int DATA_TYPE_DEFINITION_OPERATION_COUNT = TYPE_DEFINITION_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link de.evoal.languages.model.base.definitions.impl.DataTypeTypeDefinitionImpl <em>Data Type Type Definition</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.evoal.languages.model.base.definitions.impl.DataTypeTypeDefinitionImpl
+	 * @see de.evoal.languages.model.base.definitions.impl.DefinitionsPackageImpl#getDataTypeTypeDefinition()
+	 * @generated
+	 */
+	int DATA_TYPE_TYPE_DEFINITION = 11;
 
 	/**
 	 * The feature id for the '<em><b>Constraints</b></em>' containment reference list.
@@ -793,6 +693,16 @@ public interface DefinitionsPackage extends EPackage {
 	int DATA_TYPE_TYPE_DEFINITION_OPERATION_COUNT = DATA_TYPE_DEFINITION_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link de.evoal.languages.model.base.definitions.impl.DataDescriptionImpl <em>Data Description</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.evoal.languages.model.base.definitions.impl.DataDescriptionImpl
+	 * @see de.evoal.languages.model.base.definitions.impl.DefinitionsPackageImpl#getDataDescription()
+	 * @generated
+	 */
+	int DATA_DESCRIPTION = 12;
+
+	/**
 	 * The feature id for the '<em><b>Constraints</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -827,6 +737,16 @@ public interface DefinitionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int DATA_DESCRIPTION_OPERATION_COUNT = DATA_TYPE_DEFINITION_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link de.evoal.languages.model.base.definitions.impl.BaseDataDescriptionImpl <em>Base Data Description</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.evoal.languages.model.base.definitions.impl.BaseDataDescriptionImpl
+	 * @see de.evoal.languages.model.base.definitions.impl.DefinitionsPackageImpl#getBaseDataDescription()
+	 * @generated
+	 */
+	int BASE_DATA_DESCRIPTION = 13;
 
 	/**
 	 * The feature id for the '<em><b>Constraints</b></em>' containment reference list.
@@ -881,6 +801,16 @@ public interface DefinitionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int BASE_DATA_DESCRIPTION_OPERATION_COUNT = DATA_DESCRIPTION_OPERATION_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link de.evoal.languages.model.base.definitions.impl.TypedBaseDataDescriptionImpl <em>Typed Base Data Description</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.evoal.languages.model.base.definitions.impl.TypedBaseDataDescriptionImpl
+	 * @see de.evoal.languages.model.base.definitions.impl.DefinitionsPackageImpl#getTypedBaseDataDescription()
+	 * @generated
+	 */
+	int TYPED_BASE_DATA_DESCRIPTION = 14;
 
 	/**
 	 * The feature id for the '<em><b>Constraints</b></em>' containment reference list.
@@ -946,6 +876,16 @@ public interface DefinitionsPackage extends EPackage {
 	int TYPED_BASE_DATA_DESCRIPTION_OPERATION_COUNT = BASE_DATA_DESCRIPTION_OPERATION_COUNT + 1;
 
 	/**
+	 * The meta object id for the '{@link de.evoal.languages.model.base.definitions.impl.UntypedBaseDataDescriptionImpl <em>Untyped Base Data Description</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.evoal.languages.model.base.definitions.impl.UntypedBaseDataDescriptionImpl
+	 * @see de.evoal.languages.model.base.definitions.impl.DefinitionsPackageImpl#getUntypedBaseDataDescription()
+	 * @generated
+	 */
+	int UNTYPED_BASE_DATA_DESCRIPTION = 15;
+
+	/**
 	 * The feature id for the '<em><b>Constraints</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1009,6 +949,16 @@ public interface DefinitionsPackage extends EPackage {
 	int UNTYPED_BASE_DATA_DESCRIPTION_OPERATION_COUNT = BASE_DATA_DESCRIPTION_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link de.evoal.languages.model.base.definitions.impl.StructuredDataDescriptionImpl <em>Structured Data Description</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.evoal.languages.model.base.definitions.impl.StructuredDataDescriptionImpl
+	 * @see de.evoal.languages.model.base.definitions.impl.DefinitionsPackageImpl#getStructuredDataDescription()
+	 * @generated
+	 */
+	int STRUCTURED_DATA_DESCRIPTION = 16;
+
+	/**
 	 * The feature id for the '<em><b>Constraints</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1052,6 +1002,16 @@ public interface DefinitionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int STRUCTURED_DATA_DESCRIPTION_OPERATION_COUNT = DATA_DESCRIPTION_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link de.evoal.languages.model.base.definitions.impl.FunctionDefinitionImpl <em>Function Definition</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.evoal.languages.model.base.definitions.impl.FunctionDefinitionImpl
+	 * @see de.evoal.languages.model.base.definitions.impl.DefinitionsPackageImpl#getFunctionDefinition()
+	 * @generated
+	 */
+	int FUNCTION_DEFINITION = 17;
 
 	/**
 	 * The feature id for the '<em><b>Constraints</b></em>' containment reference list.
@@ -1108,6 +1068,16 @@ public interface DefinitionsPackage extends EPackage {
 	int FUNCTION_DEFINITION_OPERATION_COUNT = DEFINITION_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link de.evoal.languages.model.base.definitions.impl.ParameterImpl <em>Parameter</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.evoal.languages.model.base.definitions.impl.ParameterImpl
+	 * @see de.evoal.languages.model.base.definitions.impl.DefinitionsPackageImpl#getParameter()
+	 * @generated
+	 */
+	int PARAMETER = 18;
+
+	/**
 	 * The feature id for the '<em><b>Constraints</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1151,6 +1121,16 @@ public interface DefinitionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int PARAMETER_OPERATION_COUNT = DEFINITION_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link de.evoal.languages.model.base.definitions.impl.ConstantDefinitionImpl <em>Constant Definition</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.evoal.languages.model.base.definitions.impl.ConstantDefinitionImpl
+	 * @see de.evoal.languages.model.base.definitions.impl.DefinitionsPackageImpl#getConstantDefinition()
+	 * @generated
+	 */
+	int CONSTANT_DEFINITION = 19;
 
 	/**
 	 * The feature id for the '<em><b>Constraints</b></em>' containment reference list.
@@ -1207,6 +1187,16 @@ public interface DefinitionsPackage extends EPackage {
 	int CONSTANT_DEFINITION_OPERATION_COUNT = LITERAL_DEFINITION_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link de.evoal.languages.model.base.definitions.impl.FunctionNameImpl <em>Function Name</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.evoal.languages.model.base.definitions.impl.FunctionNameImpl
+	 * @see de.evoal.languages.model.base.definitions.impl.DefinitionsPackageImpl#getFunctionName()
+	 * @generated
+	 */
+	int FUNCTION_NAME = 20;
+
+	/**
 	 * The number of structural features of the '<em>Function Name</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1223,6 +1213,16 @@ public interface DefinitionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int FUNCTION_NAME_OPERATION_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link de.evoal.languages.model.base.definitions.impl.DefinedFunctionNameImpl <em>Defined Function Name</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.evoal.languages.model.base.definitions.impl.DefinedFunctionNameImpl
+	 * @see de.evoal.languages.model.base.definitions.impl.DefinitionsPackageImpl#getDefinedFunctionName()
+	 * @generated
+	 */
+	int DEFINED_FUNCTION_NAME = 21;
 
 	/**
 	 * The feature id for the '<em><b>Definition</b></em>' reference.
@@ -1313,6 +1313,16 @@ public interface DefinitionsPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getDefinition_Name();
+
+	/**
+	 * Returns the meta object for class '{@link de.evoal.languages.model.base.definitions.ValueDefinition <em>Value Definition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Value Definition</em>'.
+	 * @see de.evoal.languages.model.base.definitions.ValueDefinition
+	 * @generated
+	 */
+	EClass getValueDefinition();
 
 	/**
 	 * Returns the meta object for class '{@link de.evoal.languages.model.base.definitions.TypeDefinition <em>Type Definition</em>}'.
@@ -1732,16 +1742,6 @@ public interface DefinitionsPackage extends EPackage {
 	EReference getDefinedFunctionName_Definition();
 
 	/**
-	 * Returns the meta object for class '{@link de.evoal.languages.model.base.definitions.ValueDefinition <em>Value Definition</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Value Definition</em>'.
-	 * @see de.evoal.languages.model.base.definitions.ValueDefinition
-	 * @generated
-	 */
-	EClass getValueDefinition();
-
-	/**
 	 * Returns the meta object for enum '{@link de.evoal.languages.model.base.definitions.ScaleType <em>Scale Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1819,6 +1819,16 @@ public interface DefinitionsPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute DEFINITION__NAME = eINSTANCE.getDefinition_Name();
+
+		/**
+		 * The meta object literal for the '{@link de.evoal.languages.model.base.definitions.impl.ValueDefinitionImpl <em>Value Definition</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.evoal.languages.model.base.definitions.impl.ValueDefinitionImpl
+		 * @see de.evoal.languages.model.base.definitions.impl.DefinitionsPackageImpl#getValueDefinition()
+		 * @generated
+		 */
+		EClass VALUE_DEFINITION = eINSTANCE.getValueDefinition();
 
 		/**
 		 * The meta object literal for the '{@link de.evoal.languages.model.base.definitions.impl.TypeDefinitionImpl <em>Type Definition</em>}' class.
@@ -2177,16 +2187,6 @@ public interface DefinitionsPackage extends EPackage {
 		 * @generated
 		 */
 		EReference DEFINED_FUNCTION_NAME__DEFINITION = eINSTANCE.getDefinedFunctionName_Definition();
-
-		/**
-		 * The meta object literal for the '{@link de.evoal.languages.model.base.definitions.impl.ValueDefinitionImpl <em>Value Definition</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.evoal.languages.model.base.definitions.impl.ValueDefinitionImpl
-		 * @see de.evoal.languages.model.base.definitions.impl.DefinitionsPackageImpl#getValueDefinition()
-		 * @generated
-		 */
-		EClass VALUE_DEFINITION = eINSTANCE.getValueDefinition();
 
 		/**
 		 * The meta object literal for the '{@link de.evoal.languages.model.base.definitions.ScaleType <em>Scale Type</em>}' enum.

@@ -17,9 +17,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
-import javax.enterprise.context.Dependent;
-import javax.inject.Inject;
-import javax.inject.Named;
+import jakarta.enterprise.context.Dependent;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 import java.io.File;
 import java.util.Arrays;
 import java.util.List;

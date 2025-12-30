@@ -1,6 +1,6 @@
 package de.evoal.optimisation.ea.api.cdi;
 
-import javax.inject.Qualifier;
+import jakarta.inject.Qualifier;
 import java.lang.annotation.*;
 
 /**

@@ -15,8 +15,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EcorePackage;
 
-import javax.enterprise.context.Dependent;
-import javax.inject.Inject;
+import jakarta.enterprise.context.Dependent;
+import jakarta.inject.Inject;
 import java.io.File;
 import java.util.*;
 import java.util.stream.Stream;

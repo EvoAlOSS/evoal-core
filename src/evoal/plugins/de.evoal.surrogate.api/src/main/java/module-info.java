@@ -1,6 +1,6 @@
 module de.evoal.surrogate.api {
-    requires jakarta.inject.api;
-    requires jakarta.enterprise.cdi.api;
+    requires jakarta.inject;
+    requires jakarta.cdi;
     requires com.google.guice;
 
     requires lombok;

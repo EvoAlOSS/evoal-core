@@ -4,12 +4,11 @@
 package de.evoal.languages.model.generator.impl;
 
 import de.evoal.languages.model.base.expressions.impl.LiteralImpl;
+
 import de.evoal.languages.model.generator.GeneratorPackage;
 import de.evoal.languages.model.generator.Step;
 
 import org.eclipse.emf.ecore.EClass;
-
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 /**
  * <!-- begin-user-doc -->

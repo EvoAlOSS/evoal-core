@@ -4,7 +4,9 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
-import smile.math.matrix.Matrix;
+import smile.tensor.DenseMatrix;
+import smile.tensor.Matrix;
+import smile.tensor.ScalarType;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -171,7 +173,7 @@ public class ReflectiveDeserializer extends StdDeserializer<Object> {
 
         parser.nextToken();
 
-        final Matrix result = new Matrix(nrows, ncols);
+        final Matrix result = DenseMatrix.zeros(ScalarType.Float64, nrows, ncols);
         for(int i = 0; i < nrows; ++i) {
             for(int j = 0; j < ncols; ++j) {
                 parser.nextValue();

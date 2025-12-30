@@ -6,10 +6,10 @@ import de.evoal.languages.model.base.expressions.*;
 import de.evoal.languages.model.ol.AlgorithmInstance;
 import de.evoal.languages.model.ol.OptimisationModule;
 import de.evoal.languages.model.ol.ProblemInstance;
+import jakarta.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
+import jakarta.enterprise.context.ApplicationScoped;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;

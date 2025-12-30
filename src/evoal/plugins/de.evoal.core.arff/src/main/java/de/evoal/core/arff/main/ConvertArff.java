@@ -12,14 +12,14 @@ import de.evoal.core.arff.cdi.ArffBlackboardEntries;
 import de.evoal.languages.model.ddl.DataDescriptionModule;
 import de.evoal.languages.model.ddl.dsl.DataDescriptionLanguageStandaloneSetup;
 import de.evoal.languages.model.ddl.impl.DdlPackageImpl;
+import jakarta.enterprise.context.ApplicationScoped;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 import java.io.File;
 
 @Slf4j

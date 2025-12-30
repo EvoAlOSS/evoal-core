@@ -11,7 +11,7 @@ import de.evoal.languages.model.mll.impl.MllPackageImpl;
 import de.evoal.surrogate.api.SurrogateBlackboardEntries;
 import org.eclipse.emf.ecore.resource.Resource;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 import java.util.*;
 
 @ApplicationScoped

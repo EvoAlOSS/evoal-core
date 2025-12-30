@@ -13,7 +13,7 @@ Require-Bundle: org.eclipse.core.runtime,
  de.evoal.languages.model.ddl;bundle-version="1.0.0"
 Eclipse-LazyStart: true
 Bundle-ActivationPolicy: lazy
-Bundle-RequiredExecutionEnvironment: JavaSE-17
+Bundle-RequiredExecutionEnvironment: JavaSE-21
 Export-Package: de.evoal.languages.model.ol,
  de.evoal.languages.model.ol.impl,
  de.evoal.languages.model.ol.util

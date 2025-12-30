@@ -13,12 +13,11 @@ import de.evoal.languages.model.base.expressions.Instance;
 import de.evoal.optimisation.api.model.OptimisationFunction;
 import de.evoal.optimisation.api.model.OptimisationFunctionDecorator;
 import de.evoal.surrogate.api.io.ModelReader;
+import jakarta.enterprise.inject.Vetoed;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
-import javax.enterprise.inject.Vetoed;
-import javax.inject.Inject;
-import java.util.List;
+import jakarta.inject.Inject;
 import java.util.function.BiFunction;
 
 @Slf4j

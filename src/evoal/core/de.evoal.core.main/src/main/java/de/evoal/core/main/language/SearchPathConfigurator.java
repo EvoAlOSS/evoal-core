@@ -4,10 +4,10 @@ import de.evoal.core.api.board.Blackboard;
 import de.evoal.core.api.board.BlackboardEntry;
 import de.evoal.core.api.board.CoreBlackboardEntries;
 import de.evoal.languages.model.utils.scoping.ClasspathGlobalScopeProvider;
+import jakarta.enterprise.event.Observes;
+import jakarta.inject.Inject;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.event.Observes;
-import javax.inject.Inject;
+import jakarta.enterprise.context.ApplicationScoped;
 import java.io.File;
 
 @ApplicationScoped

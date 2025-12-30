@@ -5,9 +5,9 @@ import de.evoal.languages.model.base.expressions.Instance;
 import de.evoal.pipeline.api.distribution.Distribution;
 import org.apache.commons.math3.distribution.RealDistribution;
 
-import javax.enterprise.context.Dependent;
-import javax.inject.Inject;
-import javax.inject.Named;
+import jakarta.enterprise.context.Dependent;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 @Named("de.evoal.pipeline.distributions.normal-distribution")
 @Dependent

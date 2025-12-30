@@ -6,11 +6,11 @@ import de.evoal.core.api.utils.Requirements;
 import de.evoal.core.api.validation.model.Validator;
 import de.evoal.languages.model.base.expressions.Instance;
 import de.evoal.languages.model.dl.util.FQNProvider;
+import jakarta.enterprise.inject.spi.Bean;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.deltaspike.core.api.provider.BeanProvider;
 
-import javax.enterprise.inject.spi.Bean;
 import java.util.Collection;
 import java.util.Set;
 import java.util.function.Consumer;

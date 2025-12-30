@@ -1,8 +1,8 @@
 package de.evoal.optimisation.api.constraints.model;
 
 import de.evoal.core.api.properties.Properties;
-import javax.enterprise.inject.Vetoed;
 
+import jakarta.enterprise.inject.Vetoed;
 import lombok.Data;
 
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ public class Constraints {
     /**
      * Applies the constraints to the given properties and produces the results.
      *
-     * @param properties Properties to use
+     * @param genotype Properties to use
      * @return A non-null list of constraint results.
      */
     public List<ConstraintResult> apply(final Properties genotype, final Properties fitness) {

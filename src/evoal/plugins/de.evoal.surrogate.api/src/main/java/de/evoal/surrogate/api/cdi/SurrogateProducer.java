@@ -6,8 +6,8 @@ import de.evoal.surrogate.api.function.ModelFunctionData;
 import de.evoal.surrogate.api.function.ModelFunctionFactory;
 import lombok.extern.slf4j.Slf4j;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;

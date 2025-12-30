@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
-    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/de.evoal.languages.model.ddl/src-gen" editDirectory="/de.evoal.languages.model.ddl.edit/src-gen"
-    editorDirectory="/de.evoal.languages.model.ddl.editor/src-gen" modelPluginID="de.evoal.languages.model.ddl"
-    modelName="Ddl" editPluginClass="de.evoal.languages.model.ddl.provider.DdlEditPlugin"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="(c) EvoAl Project" modelDirectory="/de.evoal.languages.model.ddl/src-gen"
+    editDirectory="/de.evoal.languages.model.ddl.edit/src-gen" editorDirectory="/de.evoal.languages.model.ddl.editor/src-gen"
+    modelPluginID="de.evoal.languages.model.ddl" modelName="Ddl" editPluginClass="de.evoal.languages.model.ddl.provider.DdlEditPlugin"
     editorPluginClass="de.evoal.languages.model.ddl.presentation.DdlEditorPlugin"
     rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" testsDirectory="/de.evoal.languages.model.ddl.tests/src-gen"
     testSuiteClass="de.evoal.languages.model.ddl.tests.DvmAllTests" importerID="org.eclipse.emf.importer.ecore"
-    complianceLevel="17.0" copyrightFields="false" editPluginID="de.evoal.languages.model.ddl.edit"
+    complianceLevel="21.0" copyrightFields="false" editPluginID="de.evoal.languages.model.ddl.edit"
     editorPluginID="de.evoal.languages.model.ddl.editor" usedGenPackages="../../de.evoal.languages.model.base/model/definitions.genmodel#//definitions ../../de.evoal.languages.model.base/model/expressions.genmodel#//expressions ../../de.evoal.languages.model.base/model/model.genmodel#//base ../../de.evoal.languages.model.base/model/types.genmodel#//types"
     importOrganizing="true">
   <foreignModel>model.ecore</foreignModel>

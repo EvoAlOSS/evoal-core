@@ -4,13 +4,13 @@ import de.evoal.core.api.cdi.Application;
 import de.evoal.core.api.cdi.BlackboardValue;
 import de.evoal.core.api.cdi.MainClass;
 import de.evoal.core.arff.cdi.ArffBlackboardEntries;
+import jakarta.enterprise.context.ApplicationScoped;
 import lombok.extern.slf4j.Slf4j;
 import weka.core.Attribute;
 import weka.core.Instances;
 import weka.core.converters.ConverterUtils;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 import java.io.*;
 import java.util.Enumeration;
 

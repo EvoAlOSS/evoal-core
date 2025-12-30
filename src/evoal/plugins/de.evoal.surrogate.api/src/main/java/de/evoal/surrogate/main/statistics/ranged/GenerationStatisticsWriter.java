@@ -1,13 +1,13 @@
 package de.evoal.surrogate.main.statistics.ranged;
 
+import jakarta.annotation.PostConstruct;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.*;
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.Dependent;
-import javax.inject.Inject;
-import javax.inject.Named;
+import jakarta.enterprise.context.Dependent;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.properties.PropertySpecification;

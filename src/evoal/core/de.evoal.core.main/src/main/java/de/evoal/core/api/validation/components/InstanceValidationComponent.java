@@ -3,11 +3,11 @@ package de.evoal.core.api.validation.components;
 import de.evoal.core.api.validation.context.EObjectContext;
 import de.evoal.core.api.validation.model.InstanceValidator;
 import de.evoal.languages.model.base.expressions.Instance;
+import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
-import org.eclipse.emf.ecore.EObject;
 
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
+
 
 /**
  * Component for validating data instances.

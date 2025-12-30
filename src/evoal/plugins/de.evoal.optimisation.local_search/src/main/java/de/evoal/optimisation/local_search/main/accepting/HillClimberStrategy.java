@@ -9,9 +9,9 @@ import de.evoal.optimisation.api.model.OptimisationValue;
 import de.evoal.optimisation.api.model.OptimisationValueComparator;
 import de.evoal.optimisation.local_search.api.accepting.AcceptingStrategy;
 
-import javax.enterprise.context.Dependent;
-import javax.inject.Inject;
-import javax.inject.Named;
+import jakarta.enterprise.context.Dependent;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 @Named("de.evoal.optimisation.local_search.optimisation.hill-climber")
 @Dependent

@@ -9,7 +9,7 @@ import de.evoal.languages.model.base.expressions.Instance;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Slf4j

@@ -5,6 +5,7 @@ package de.evoal.languages.model.mll.impl;
 import de.evoal.languages.model.base.definitions.DataDescription;
 
 import de.evoal.languages.model.execution.impl.NamedVariableImpl;
+
 import de.evoal.languages.model.mll.MllPackage;
 import de.evoal.languages.model.mll.TaskDescription;
 
@@ -17,6 +18,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 

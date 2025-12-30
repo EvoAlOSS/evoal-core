@@ -3,8 +3,8 @@ package de.evoal.optimisation.main.constraints.deviation;
 import de.evoal.optimisation.api.constraints.model.DataConstraints;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.properties.PropertySpecification;
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Produces;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.inject.Produces;
 
 import de.evoal.optimisation.main.constraints.deviation.model.Deviation;
 import de.evoal.optimisation.main.constraints.deviation.model.Deviations;

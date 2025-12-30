@@ -6,8 +6,8 @@ import de.evoal.surrogate.api.io.ModelWriter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Optional;
-import javax.enterprise.context.Dependent;
-import javax.inject.Named;
+import jakarta.enterprise.context.Dependent;
+import jakarta.inject.Named;
 
 import de.evoal.core.api.interpreter.InterpreterState;
 

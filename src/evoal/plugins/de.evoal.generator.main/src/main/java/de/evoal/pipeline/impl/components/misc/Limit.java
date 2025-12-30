@@ -8,9 +8,9 @@ import de.evoal.pipeline.api.model.PipelineComponentImpl;
 import lombok.Getter;
 import lombok.NonNull;
 
-import javax.enterprise.context.Dependent;
-import javax.inject.Inject;
-import javax.inject.Named;
+import jakarta.enterprise.context.Dependent;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 import java.util.Iterator;
 
 @Dependent

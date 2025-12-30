@@ -3,7 +3,7 @@ package de.evoal.surrogate.main.jackson;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
-import smile.math.matrix.Matrix;
+import smile.tensor.Matrix;
 
 import java.io.IOException;
 import java.util.List;

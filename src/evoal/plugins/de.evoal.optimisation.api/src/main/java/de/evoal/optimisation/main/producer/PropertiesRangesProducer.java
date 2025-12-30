@@ -5,12 +5,13 @@ import de.evoal.core.api.properties.info.PropertiesBoundaries;
 import de.evoal.core.api.properties.info.PropertiesRanges;
 import de.evoal.core.api.properties.info.PropertyBoundaries;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Produces;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.inject.Produces;
 
 @ApplicationScoped
 public class PropertiesRangesProducer {
-    @Produces @ApplicationScoped
+    @Produces
+    @ApplicationScoped
     public PropertiesRanges create(final PropertiesBoundaries boundaries) {
         final PropertiesRanges ranges = new PropertiesRanges();
 

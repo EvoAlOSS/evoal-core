@@ -6,9 +6,9 @@ import de.evoal.languages.model.base.expressions.Instance;
 import de.evoal.optimisation.api.model.Iteration;
 import de.evoal.optimisation.api.model.StoppingCriterion;
 
-import javax.enterprise.context.Dependent;
-import javax.inject.Inject;
-import javax.inject.Named;
+import jakarta.enterprise.context.Dependent;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 import java.io.File;
 
 @Dependent

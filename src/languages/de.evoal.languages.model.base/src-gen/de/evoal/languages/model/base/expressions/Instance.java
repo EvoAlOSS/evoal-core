@@ -4,6 +4,7 @@ package de.evoal.languages.model.base.expressions;
 
 import de.evoal.languages.model.base.definitions.AttributeDefinition;
 import de.evoal.languages.model.base.definitions.ClassDefinition;
+
 import org.eclipse.emf.common.util.EList;
 
 /**

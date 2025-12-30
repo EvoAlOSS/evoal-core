@@ -5,8 +5,8 @@ import de.evoal.core.api.ecore.TypedEObject;
 import lombok.NonNull;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
-import javax.enterprise.context.Dependent;
-import javax.inject.Named;
+import jakarta.enterprise.context.Dependent;
+import jakarta.inject.Named;
 
 @Dependent
 @Named("de.evoal.pipeline.benchmarks.weighted-sphere")

@@ -11,11 +11,11 @@ import de.evoal.core.api.languages.AttributeEvaluator;
 import de.evoal.languages.model.base.expressions.Instance;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.properties.PropertySpecification;
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 import de.evoal.core.api.utils.Requirements;
-import javax.enterprise.inject.Produces;
+import jakarta.enterprise.inject.Produces;
 import de.evoal.optimisation.main.constraints.constraint.utils.EpsilonUtils;
-import javax.inject.Named;
+import jakarta.inject.Named;
 
 import de.evoal.optimisation.main.constraints.constraint.ast.ConditionConverter;
 import de.evoal.core.api.languages.base.BaseLanguageHelper;
@@ -24,7 +24,7 @@ import de.evoal.languages.model.base.definitions.DefinedFunctionName;
 import de.evoal.languages.model.base.definitions.DataDescription;
 import de.evoal.languages.model.base.expressions.Call;
 import lombok.extern.slf4j.Slf4j;
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 import java.util.*;
 import java.util.Objects;

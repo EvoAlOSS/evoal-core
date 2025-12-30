@@ -1,7 +1,7 @@
 package de.evoal.optimisation.api.board;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Named;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Named;
 
 @ApplicationScoped
 @Named("optimisation-entries")

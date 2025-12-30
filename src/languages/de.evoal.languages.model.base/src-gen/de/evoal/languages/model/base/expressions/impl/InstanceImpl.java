@@ -4,6 +4,7 @@ package de.evoal.languages.model.base.expressions.impl;
 
 import de.evoal.languages.model.base.definitions.AttributeDefinition;
 import de.evoal.languages.model.base.definitions.ClassDefinition;
+
 import de.evoal.languages.model.base.expressions.Attribute;
 import de.evoal.languages.model.base.expressions.ExpressionsPackage;
 import de.evoal.languages.model.base.expressions.Instance;

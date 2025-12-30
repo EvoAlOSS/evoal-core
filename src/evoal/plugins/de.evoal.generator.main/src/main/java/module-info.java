@@ -1,6 +1,6 @@
 module de.evoal.generator.main {
-    requires jakarta.inject.api;
-    requires jakarta.enterprise.cdi.api;
+    requires jakarta.inject;
+    requires jakarta.cdi;
 
     requires com.google.common;
     requires com.google.guice;

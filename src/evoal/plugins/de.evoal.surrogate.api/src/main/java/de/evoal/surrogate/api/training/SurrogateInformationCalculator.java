@@ -6,7 +6,7 @@ import de.evoal.languages.model.mll.TaskDescription;
 import de.evoal.surrogate.api.function.ModelFunctionData;
 import lombok.extern.slf4j.Slf4j;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 import java.util.Optional;
 
 /**

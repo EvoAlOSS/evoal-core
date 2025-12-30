@@ -3,8 +3,7 @@ package de.evoal.optimisation.main.producer;
 import com.google.inject.Injector;
 import de.evoal.core.api.board.Blackboard;
 import de.evoal.core.api.languages.ModuleLoaderBase;
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Produces;
+import jakarta.enterprise.context.ApplicationScoped;
 
 import de.evoal.languages.model.ddl.dsl.DataDescriptionLanguageStandaloneSetup;
 import de.evoal.languages.model.ddl.impl.DdlPackageImpl;
@@ -14,6 +13,7 @@ import de.evoal.languages.model.ol.OptimisationModule;
 import de.evoal.languages.model.ol.dsl.OptimisationLanguageStandaloneSetup;
 import de.evoal.languages.model.ol.impl.OLPackageImpl;
 import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
+import jakarta.enterprise.inject.Produces;
 import org.eclipse.emf.ecore.resource.Resource;
 
 import java.util.*;

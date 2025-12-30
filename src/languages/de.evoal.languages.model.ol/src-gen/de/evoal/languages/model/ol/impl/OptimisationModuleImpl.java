@@ -118,64 +118,6 @@ public class OptimisationModuleImpl extends MinimalEObjectImpl.Container impleme
 	 * @generated
 	 */
 	@Override
-	public EList<Import> getImports() {
-		if (imports == null) {
-			imports = new EObjectContainmentEList<Import>(Import.class, this, OLPackage.OPTIMISATION_MODULE__IMPORTS);
-		}
-		return imports;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ProblemInstance getProblem() {
-		return problem;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetProblem(ProblemInstance newProblem, NotificationChain msgs) {
-		ProblemInstance oldProblem = problem;
-		problem = newProblem;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OLPackage.OPTIMISATION_MODULE__PROBLEM, oldProblem, newProblem);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setProblem(ProblemInstance newProblem) {
-		if (newProblem != problem) {
-			NotificationChain msgs = null;
-			if (problem != null)
-				msgs = ((InternalEObject)problem).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OLPackage.OPTIMISATION_MODULE__PROBLEM, null, msgs);
-			if (newProblem != null)
-				msgs = ((InternalEObject)newProblem).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - OLPackage.OPTIMISATION_MODULE__PROBLEM, null, msgs);
-			msgs = basicSetProblem(newProblem, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OLPackage.OPTIMISATION_MODULE__PROBLEM, newProblem, newProblem));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public AlgorithmInstance getAlgorithm() {
 		return algorithm;
 	}
@@ -221,6 +163,19 @@ public class OptimisationModuleImpl extends MinimalEObjectImpl.Container impleme
 	 * @generated
 	 */
 	@Override
+	public EList<Import> getImports() {
+		if (imports == null) {
+			imports = new EObjectContainmentEList<Import>(Import.class, this, OLPackage.OPTIMISATION_MODULE__IMPORTS);
+		}
+		return imports;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -236,6 +191,51 @@ public class OptimisationModuleImpl extends MinimalEObjectImpl.Container impleme
 		name = newName;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, OLPackage.OPTIMISATION_MODULE__NAME, oldName, name));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ProblemInstance getProblem() {
+		return problem;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetProblem(ProblemInstance newProblem, NotificationChain msgs) {
+		ProblemInstance oldProblem = problem;
+		problem = newProblem;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OLPackage.OPTIMISATION_MODULE__PROBLEM, oldProblem, newProblem);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setProblem(ProblemInstance newProblem) {
+		if (newProblem != problem) {
+			NotificationChain msgs = null;
+			if (problem != null)
+				msgs = ((InternalEObject)problem).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OLPackage.OPTIMISATION_MODULE__PROBLEM, null, msgs);
+			if (newProblem != null)
+				msgs = ((InternalEObject)newProblem).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - OLPackage.OPTIMISATION_MODULE__PROBLEM, null, msgs);
+			msgs = basicSetProblem(newProblem, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, OLPackage.OPTIMISATION_MODULE__PROBLEM, newProblem, newProblem));
 	}
 
 	/**

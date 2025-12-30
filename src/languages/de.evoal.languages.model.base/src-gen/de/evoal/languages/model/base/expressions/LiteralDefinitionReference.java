@@ -2,6 +2,7 @@
  */
 package de.evoal.languages.model.base.expressions;
 
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Literal Definition Reference</b></em>'.
@@ -13,5 +14,4 @@ package de.evoal.languages.model.base.expressions;
  * @generated
  */
 public interface LiteralDefinitionReference extends ValueDefinitionReference {
-
 } // LiteralDefinitionReference

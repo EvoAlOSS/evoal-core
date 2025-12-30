@@ -5,6 +5,7 @@ import de.evoal.languages.model.base.definitions.DataDescription;
 import de.evoal.languages.model.base.expressions.util.ExpressionsSwitch;
 import de.evoal.languages.model.base.expressions.SelfReference;
 import de.evoal.languages.model.base.expressions.*;
+import de.evoal.languages.model.base.types.DefinitionReference;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Optional;
@@ -151,16 +152,6 @@ public class UnaryBoundaryIdentifier extends ExpressionsSwitch<Object> {
         }
 
         return reference.getDefinition();
-    }
-
-    @Override
-    public Object caseBooleanLiteral(final BooleanLiteral object) {
-        return null;
-    }
-
-    @Override
-    public Object caseCall(Call object) {
-        return null;
     }
 
     @Override

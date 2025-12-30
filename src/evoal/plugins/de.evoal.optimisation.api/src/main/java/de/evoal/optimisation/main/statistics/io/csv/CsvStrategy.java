@@ -7,9 +7,9 @@ import de.evoal.optimisation.api.statistics.io.WriterException;
 import de.evoal.optimisation.api.statistics.io.WriterStrategy;
 import de.evoal.optimisation.api.statistics.writer.Column;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
-import javax.inject.Named;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 import java.io.File;
 import java.util.HashMap;
 import java.util.List;

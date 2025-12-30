@@ -1,9 +1,8 @@
 module de.evoal.optimisation.api {
     requires java.base;
-    requires java.annotation;
 
-    requires jakarta.enterprise.cdi.api;
-    requires jakarta.inject.api;
+    requires jakarta.cdi;
+    requires jakarta.inject;
 
     requires weld.se.core;
     requires deltaspike.cdictrl.api;
@@ -16,7 +15,7 @@ module de.evoal.optimisation.api {
     requires jul.to.slf4j;
     requires ch.qos.logback.classic;
 
-    requires commons.csv;
+    requires org.apache.commons.csv;
 
     requires com.fasterxml.jackson.databind;
 
@@ -37,7 +36,6 @@ module de.evoal.optimisation.api {
     requires com.google.guice;
     requires commons.math3;
     requires de.evoal.core.main;
-    requires jakarta.ejb.api;
     requires com.google.common;
     requires de.evoal.languages.models;
     requires de.evoal.languages.model.mll.dsl;

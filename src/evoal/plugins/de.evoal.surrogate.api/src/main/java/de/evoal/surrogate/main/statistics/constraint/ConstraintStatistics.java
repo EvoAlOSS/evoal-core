@@ -16,13 +16,13 @@ import de.evoal.optimisation.api.constraints.model.ConstraintResult;
 import de.evoal.optimisation.api.constraints.model.Constraints;
 import de.evoal.optimisation.api.constraints.strategies.CalculationResult;
 import de.evoal.languages.model.base.expressions.Instance;
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.Dependent;
+import jakarta.annotation.PostConstruct;
+import jakarta.enterprise.context.Dependent;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
-import javax.inject.Inject;
-import javax.inject.Named;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 import java.util.ArrayList;
 import java.util.DoubleSummaryStatistics;
 import java.util.List;
@@ -57,7 +57,8 @@ public class ConstraintStatistics implements StatisticsWriter {
 
     private Writer writer;
 
-    @PostConstruct @SneakyThrows(WriterException.class)
+    @PostConstruct
+    @SneakyThrows(WriterException.class)
     private void init() {
         createColumns();
 

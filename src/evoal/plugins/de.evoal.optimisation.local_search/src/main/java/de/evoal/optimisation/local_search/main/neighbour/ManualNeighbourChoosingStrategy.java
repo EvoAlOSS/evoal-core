@@ -10,9 +10,9 @@ import de.evoal.languages.model.base.expressions.Instance;
 import de.evoal.languages.model.interpreter.ArithmeticNumberOperations;
 import de.evoal.optimisation.local_search.api.neighbour.NeighbourChoosingStrategy;
 
-import javax.enterprise.context.Dependent;
-import javax.inject.Inject;
-import javax.inject.Named;
+import jakarta.enterprise.context.Dependent;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.Collections;

@@ -27,9 +27,9 @@ import de.evoal.optimisation.pso.api.swarm.DefaultSwarm;
 import de.evoal.optimisation.pso.main.mover.ARPSOMover;
 import lombok.extern.slf4j.Slf4j;
 
-import javax.enterprise.context.Dependent;
-import javax.inject.Inject;
-import javax.inject.Named;
+import jakarta.enterprise.context.Dependent;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 /**
  *  Implements the diversity enhanced particle movement scheme of Riget and Vesterstrom.

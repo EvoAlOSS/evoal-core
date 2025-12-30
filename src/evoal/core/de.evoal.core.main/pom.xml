@@ -16,7 +16,7 @@
 		<javax.activation.version>1.2.0</javax.activation.version>
 
 		<!-- DeltaSpike uses this version in its documentation. Newer version didn't work for some reasons. -->
-		<weld.version>3.1.9.Final</weld.version>
+		<weld.version>5.0.1.Final</weld.version>
 	</properties>
 
 	<dependencies>
@@ -47,14 +47,14 @@
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
-			<version>1.4.12</version>
+			<version>1.5.23</version>
 		</dependency>
 
 		<!-- Deltaspike uses JUL. Use the JUL bridge to reroute it SLF4J -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>jul-to-slf4j</artifactId>
-			<version>2.0.6</version>
+			<version>${slf4j.api.version}</version>
 		</dependency>
 
 		<!-- deltaspike -->
@@ -97,12 +97,14 @@
 		<dependency>
 			<groupId>jakarta.enterprise</groupId>
 			<artifactId>jakarta.enterprise.cdi-api</artifactId>
+			<version>${jakarta.enterprise.cdi-api.version}</version>
 			<scope>compile</scope>
 		</dependency>
 
+
 		<dependency>
-			<groupId>javax.annotation</groupId>
-			<artifactId>javax.annotation-api</artifactId>
+			<groupId>jakarta.annotation</groupId>
+			<artifactId>jakarta.annotation-api</artifactId>
 			<scope>compile</scope>
 		</dependency>
 
@@ -125,7 +127,6 @@
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-csv</artifactId>
-			<version>1.8</version>
 			<scope>compile</scope>
 		</dependency>
 
@@ -189,6 +190,13 @@
 
 		<dependency>
 			<groupId>de.evoal.languages</groupId>
+			<artifactId>de.evoal.languages.model.generator.dsl</artifactId>
+			<version>${evoal.languages.version}</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>de.evoal.languages</groupId>
 			<artifactId>de.evoal.languages.model.ol.dsl</artifactId>
 			<version>${evoal.languages.version}</version>
 			<scope>compile</scope>
@@ -244,13 +252,7 @@
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext</artifactId>
-			<scope>compile</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>org.eclipse.xtext</groupId>
-			<artifactId>org.eclipse.xtext.util</artifactId>
-			<version>2.29.0</version>
+			<version>2.41.1</version>
 			<scope>compile</scope>
 		</dependency>
 
@@ -258,7 +260,6 @@
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-math3</artifactId>
-			<version>3.6.1</version>
 			<scope>compile</scope>
 		</dependency>
 
@@ -299,14 +300,14 @@
 		<dependency>
 			<groupId>org.jboss.weld</groupId>
 			<artifactId>weld-junit5</artifactId>
-			<version>3.1.0.Final</version>
+			<version>${weld.version}</version>
 			<scope>test</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-junit-jupiter</artifactId>
-			<version>5.3.1</version>
+			<version>${mockito.version}</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

@@ -1,15 +1,15 @@
 package de.evoal.core.api.board;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.event.Event;
+import jakarta.enterprise.context.ApplicationScoped;
 
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
+import jakarta.enterprise.event.Event;
+import jakarta.inject.Inject;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.LoggerFactory;
 
-import javax.inject.Inject;
 import java.util.HashMap;
 import java.util.Map;
 

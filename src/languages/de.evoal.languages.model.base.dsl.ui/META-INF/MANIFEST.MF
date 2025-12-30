@@ -18,7 +18,7 @@ Require-Bundle: de.evoal.languages.model.base.dsl,
  org.eclipse.compare,
  org.eclipse.xtext.builder
 Import-Package: org.apache.log4j
-Bundle-RequiredExecutionEnvironment: JavaSE-17
+Bundle-RequiredExecutionEnvironment: JavaSE-21
 Export-Package: de.evoal.languages.model.base.dsl.ui.contentassist,
  de.evoal.languages.model.base.dsl.ui.internal,
  de.evoal.languages.model.base.dsl.ui.quickfix

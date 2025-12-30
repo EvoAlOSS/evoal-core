@@ -36,50 +36,6 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface OptimisationModule extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Imports</b></em>' containment reference list.
-	 * The list contents are of type {@link de.evoal.languages.model.base.Import}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * 
-	 * List of import statements.
-	 * 
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Imports</em>' containment reference list.
-	 * @see de.evoal.languages.model.ol.OLPackage#getOptimisationModule_Imports()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<Import> getImports();
-
-	/**
-	 * Returns the value of the '<em><b>Problem</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * 
-	 * The problem specification.
-	 * 
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Problem</em>' containment reference.
-	 * @see #setProblem(ProblemInstance)
-	 * @see de.evoal.languages.model.ol.OLPackage#getOptimisationModule_Problem()
-	 * @model containment="true"
-	 * @generated
-	 */
-	ProblemInstance getProblem();
-
-	/**
-	 * Sets the value of the '{@link de.evoal.languages.model.ol.OptimisationModule#getProblem <em>Problem</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Problem</em>' containment reference.
-	 * @see #getProblem()
-	 * @generated
-	 */
-	void setProblem(ProblemInstance value);
-
-	/**
 	 * Returns the value of the '<em><b>Algorithm</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -107,6 +63,23 @@ public interface OptimisationModule extends EObject {
 	void setAlgorithm(AlgorithmInstance value);
 
 	/**
+	 * Returns the value of the '<em><b>Imports</b></em>' containment reference list.
+	 * The list contents are of type {@link de.evoal.languages.model.base.Import}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * 
+	 * List of import statements.
+	 * 
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Imports</em>' containment reference list.
+	 * @see de.evoal.languages.model.ol.OLPackage#getOptimisationModule_Imports()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<Import> getImports();
+
+	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -132,5 +105,32 @@ public interface OptimisationModule extends EObject {
 	 * @generated
 	 */
 	void setName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Problem</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * 
+	 * The problem specification.
+	 * 
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Problem</em>' containment reference.
+	 * @see #setProblem(ProblemInstance)
+	 * @see de.evoal.languages.model.ol.OLPackage#getOptimisationModule_Problem()
+	 * @model containment="true"
+	 * @generated
+	 */
+	ProblemInstance getProblem();
+
+	/**
+	 * Sets the value of the '{@link de.evoal.languages.model.ol.OptimisationModule#getProblem <em>Problem</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Problem</em>' containment reference.
+	 * @see #getProblem()
+	 * @generated
+	 */
+	void setProblem(ProblemInstance value);
 
 } // OptimisationModule

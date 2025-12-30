@@ -6,7 +6,7 @@ import de.evoal.core.api.properties.stream.PropertiesStreamSupplier;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
 public class TrainingDataManager {

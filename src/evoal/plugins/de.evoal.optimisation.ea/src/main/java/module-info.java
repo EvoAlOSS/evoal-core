@@ -1,7 +1,6 @@
 module de.evoal.optimisation.ea {
-    requires jakarta.enterprise.cdi.api;
-    requires jakarta.inject.api;
-    requires java.annotation;
+    requires jakarta.cdi;
+    requires jakarta.inject;
 
     requires lombok;
 

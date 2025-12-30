@@ -17,12 +17,14 @@
 			<groupId>de.evoal.languages</groupId>
 			<artifactId>de.evoal.languages.models</artifactId>
 			<version>${evoal.languages.version}</version>
+			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>de.evoal.languages</groupId>
 			<artifactId>de.evoal.languages.model.generator.dsl</artifactId>
 			<version>${evoal.languages.version}</version>
+			<scope>provided</scope>
 		</dependency>
 
 		<dependency>

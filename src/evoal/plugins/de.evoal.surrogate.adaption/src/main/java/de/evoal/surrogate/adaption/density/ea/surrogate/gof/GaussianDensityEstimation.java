@@ -7,8 +7,8 @@ import de.evoal.surrogate.adaption.density.model.GaussianDensityData;
 import lombok.extern.slf4j.Slf4j;
 import smile.stat.distribution.GaussianDistribution;
 
-import javax.enterprise.context.Dependent;
-import javax.inject.Named;
+import jakarta.enterprise.context.Dependent;
+import jakarta.inject.Named;
 import java.util.function.Function;
 
 

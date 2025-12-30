@@ -204,6 +204,20 @@ public class DefinitionsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.definitions.ValueDefinition <em>Value Definition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.evoal.languages.model.base.definitions.ValueDefinition
+	 * @generated
+	 */
+	public Adapter createValueDefinitionAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.definitions.TypeDefinition <em>Type Definition</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -466,20 +480,6 @@ public class DefinitionsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createDefinedFunctionNameAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.definitions.ValueDefinition <em>Value Definition</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.evoal.languages.model.base.definitions.ValueDefinition
-	 * @generated
-	 */
-	public Adapter createValueDefinitionAdapter() {
 		return null;
 	}
 

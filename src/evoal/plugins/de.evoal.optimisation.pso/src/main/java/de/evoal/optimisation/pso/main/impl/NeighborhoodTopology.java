@@ -20,8 +20,8 @@ package de.evoal.optimisation.pso.main.impl;
 import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
 
-import javax.enterprise.context.Dependent;
-import javax.inject.Inject;
+import jakarta.enterprise.context.Dependent;
+import jakarta.inject.Inject;
 
 /**
  * Class to define topologies used by particles to identify neighbors.

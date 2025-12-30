@@ -2,8 +2,8 @@ package de.evoal.optimisation.ea.main.codec.program.operations;
 
 import de.evoal.optimisation.ea.api.codec.program.Operation;
 
-import javax.enterprise.context.Dependent;
-import javax.inject.Named;
+import jakarta.enterprise.context.Dependent;
+import jakarta.inject.Named;
 
 @Dependent
 @Named("de.evoal.optimisation.ea.genetic-programming.plus")

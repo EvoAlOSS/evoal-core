@@ -5,9 +5,9 @@ import de.evoal.core.api.languages.AttributeEvaluator;
 import de.evoal.languages.model.base.expressions.Instance;
 import lombok.extern.slf4j.Slf4j;
 
-import javax.enterprise.context.Dependent;
-import javax.inject.Inject;
-import javax.inject.Named;
+import jakarta.enterprise.context.Dependent;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 /**
  * Geometric cooling schedule determines new temperature according to formula:

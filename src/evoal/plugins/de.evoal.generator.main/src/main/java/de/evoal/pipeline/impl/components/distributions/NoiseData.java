@@ -9,9 +9,9 @@ import de.evoal.core.api.ecore.TypedEObject;
 import lombok.NonNull;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
-import javax.enterprise.context.Dependent;
-import javax.inject.Inject;
-import javax.inject.Named;
+import jakarta.enterprise.context.Dependent;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 import java.util.Iterator;
 import java.util.List;
 

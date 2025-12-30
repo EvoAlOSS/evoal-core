@@ -7,11 +7,11 @@ import de.evoal.core.api.cdi.Application;
 import de.evoal.core.api.cdi.BeanFactory;
 import de.evoal.core.api.cdi.Commandline;
 import de.evoal.core.api.cdi.MainClass;
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.spi.Bean;
+import jakarta.enterprise.context.ApplicationScoped;
 
 import de.evoal.core.api.utils.EvoAlShutDownException;
 import de.evoal.core.main.validation.DiagnosticsPrinter;
+import jakarta.enterprise.inject.spi.Bean;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.deltaspike.cdise.api.CdiContainer;
 import org.apache.deltaspike.cdise.api.CdiContainerLoader;
@@ -160,7 +160,7 @@ public final class Evoal {
     private static void logMainError(final Throwable e) {
         log.error("Filed to create main.", e);
         log.error("Name of main class was not set correctly. Please specify the main class via command line (-B{}=<name>).", CoreBlackboardEntries.MAIN);
-        Set<Bean<MainClass>> beans = BeanProvider.getBeanDefinitions(MainClass.class, true, true);
+        final Set<Bean<MainClass>> beans = BeanProvider.getBeanDefinitions(MainClass.class, true, true);
         log.error("  possible names are:");
 
         for (final Bean<MainClass> bean : beans) {

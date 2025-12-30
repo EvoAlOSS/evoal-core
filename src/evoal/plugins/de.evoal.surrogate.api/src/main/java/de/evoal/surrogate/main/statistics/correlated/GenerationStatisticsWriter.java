@@ -8,6 +8,7 @@ import de.evoal.core.api.ecore.stream.EObjectStreamSupplier;
 import de.evoal.core.api.ecore.stream.FileBasedEObjectStreamSupplier;
 import de.evoal.core.api.utils.AttributeHelper;
 import de.evoal.languages.model.base.definitions.DataDescription;
+import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
@@ -16,20 +17,16 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.Dependent;
-import javax.inject.Inject;
-import javax.inject.Named;
+import jakarta.enterprise.context.Dependent;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import smile.math.matrix.Matrix;
+import smile.tensor.*;
 
 import de.evoal.core.api.board.Blackboard;
 import de.evoal.core.api.properties.Properties;
-import de.evoal.core.api.properties.PropertiesSpecification;
-import de.evoal.core.api.properties.stream.FileBasedPropertiesStreamSupplier;
-import de.evoal.core.api.properties.stream.PropertiesStreamSupplier;
 import de.evoal.languages.model.base.expressions.Instance;
 import de.evoal.optimisation.api.model.Candidate;
 import de.evoal.optimisation.api.model.Iteration;
@@ -40,7 +37,6 @@ import de.evoal.optimisation.api.statistics.writer.Column;
 import de.evoal.optimisation.api.statistics.writer.ColumnType;
 import de.evoal.optimisation.api.statistics.writer.StatisticsWriter;
 import de.evoal.surrogate.api.SurrogateBlackboardEntries;
-
 
 
 /**
@@ -110,17 +106,17 @@ public class GenerationStatisticsWriter implements StatisticsWriter {
         return this;
     }
 
-    private Matrix calculateCovarianceMatrix(final Matrix data) {
+    private DenseMatrix calculateCovarianceMatrix(final DenseMatrix data) {
         final int dimensions = data.nrow();
         final int dataSize = data.ncol();
-        final double [] means = data.rowMeans();
+        final Vector means = data.rowMeans();
 
-        final Matrix covarianceMatrix = new Matrix(dimensions, dimensions);
+        final DenseMatrix covarianceMatrix = DenseMatrix.zeros(ScalarType.Float64, dimensions, dimensions);
         for(int x = 0; x < dimensions; ++x) {
             for(int y = 0; y < dimensions; ++y) {
                 double value = 0.0;
                 for(int t = 0; t < dataSize; ++t) {
-                    value += ((data.get(x, t) - means[x])*(data.get(y, t) - means[y]));
+                    value += ((data.get(x, t) - means.get(x))*(data.get(y, t) - means.get(y)));
                 }
                 value = value / dataSize;
                 covarianceMatrix.set(x, y, value);
@@ -138,8 +134,8 @@ public class GenerationStatisticsWriter implements StatisticsWriter {
         log.info("training size is {}.", trainingsSize);
         final int onTheFlySize = trainingsSize + 1;
 
-        final Matrix trainingsMatrix = new Matrix(dimensions, trainingsSize);
-        final Matrix onTheFlyMatrix = new Matrix(dimensions, onTheFlySize);
+        final DenseMatrix trainingsMatrix = DenseMatrix.zeros(ScalarType.Float64, dimensions, trainingsSize);
+        final DenseMatrix onTheFlyMatrix = DenseMatrix.zeros(ScalarType.Float64, dimensions, onTheFlySize);
 
         final List<EStructuralFeature> features = new ArrayList<>(sourceSpec.size());
         sourceSpec.iterator().forEachRemaining(features::add);
@@ -162,30 +158,30 @@ public class GenerationStatisticsWriter implements StatisticsWriter {
             onTheFlyMatrix.set(d, onTheFlySize - 1, candidate.getAsDouble(d));
         }
 
-        final Matrix trainingsCovarianceMatrix = calculateCovarianceMatrix(trainingsMatrix);
-        final Matrix firstGenerationMatrix = createFirstGenerationMatrix();
-        final Matrix firstGenerationCovariance = calculateCovarianceMatrix(firstGenerationMatrix);
+        final DenseMatrix trainingsCovarianceMatrix = calculateCovarianceMatrix(trainingsMatrix);
+        final DenseMatrix firstGenerationMatrix = createFirstGenerationMatrix();
+        final DenseMatrix firstGenerationCovariance = calculateCovarianceMatrix(firstGenerationMatrix);
 
         {
-            final Matrix onTheFlyCovarianceMatrix = calculateCovarianceMatrix(onTheFlyMatrix);
+            final DenseMatrix onTheFlyCovarianceMatrix = calculateCovarianceMatrix(onTheFlyMatrix);
             calculateDifference(firstGenerationCovariance, onTheFlyCovarianceMatrix, data, index);
         }
 
         {
-            final Matrix bestGenerationMatrix = createBestGenerationMatrix();
-            final Matrix bestGenerationCovariance = calculateCovarianceMatrix(bestGenerationMatrix);
+            final DenseMatrix bestGenerationMatrix = createBestGenerationMatrix();
+            final DenseMatrix bestGenerationCovariance = calculateCovarianceMatrix(bestGenerationMatrix);
             calculateDifference(firstGenerationCovariance, bestGenerationCovariance, data, index +  dimensions * dimensions + 2);
         }
     }
 
-    private Matrix createBestGenerationMatrix() {
+    private DenseMatrix createBestGenerationMatrix() {
         final List<Candidate> individuals = generationWithBestIndividual.candidates().toList();
 
         final int dimensions = sourceSpec.size();
         final Optional<Integer> optSize = generationWithBestIndividual.candidateCount();
         final int size = optSize.orElse(individuals.size());
 
-        final Matrix result = new Matrix(dimensions, size);
+        final DenseMatrix result = DenseMatrix.zeros(ScalarType.Float64, dimensions, size);
 
         for(int i = 0; i < size; ++i) {
             final Candidate candidate = individuals.get(i);
@@ -201,14 +197,14 @@ public class GenerationStatisticsWriter implements StatisticsWriter {
         return result;
     }
 
-    private Matrix createFirstGenerationMatrix() {
+    private DenseMatrix createFirstGenerationMatrix() {
         final List<Candidate> candidates = firstGeneration.candidates().collect(Collectors.toList());
 
         final int dimensions = sourceSpec.size();
         final Optional<Integer> optSize = firstGeneration.candidateCount();
         final int size = optSize.orElse(candidates.size());
 
-        final Matrix result = new Matrix(dimensions, size);
+        final DenseMatrix result = DenseMatrix.zeros(ScalarType.Float64, dimensions, size);
 
         for(int i = 0; i < size; ++i) {
             final Candidate candidate = candidates.get(i);
@@ -224,8 +220,8 @@ public class GenerationStatisticsWriter implements StatisticsWriter {
         return result;
     }
 
-    private void calculateDifference(final Matrix matrix1, final Matrix matrix2, final Object [] data, final int start) {
-        final Matrix differenceMatrix = matrix1.sub(matrix2);
+    private void calculateDifference(final DenseMatrix matrix1, final DenseMatrix matrix2, final Object [] data, final int start) {
+        final DenseMatrix differenceMatrix = matrix1.sub(matrix2);
         double sumOfAbs = 0.0;
         double sumOfSquares = 0.0;
 

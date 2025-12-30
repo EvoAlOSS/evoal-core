@@ -2,7 +2,7 @@ target "EvoAl Languages Target"
 
 with requirements, source
 
-location "https://download.eclipse.org/releases/2022-12/202212071000" {
+location "https://download.eclipse.org/releases/2025-12/" {
   org.eclipse.equinox.sdk.feature.group lazy
   org.eclipse.equinox.p2.sdk.feature.group lazy
   org.eclipse.xtext.sdk.feature.group lazy
@@ -11,11 +11,12 @@ location "https://download.eclipse.org/releases/2022-12/202212071000" {
   // IDE for starting a debug eclipse
   org.eclipse.platform.feature.group lazy
   org.antlr.runtime [3.2.0,4.0.0)
-  org.slf4j.api lazy
+  slf4j.api lazy
+  org.apache.commons.logging lazy
 }
 
-location "https://download.eclipse.org/tools/orbit/downloads/drops/R20221123021534/repository" {
-	org.junit.jupiter.api lazy
+location "https://download.eclipse.org/tools/orbit/simrel/orbit-aggregation/2025-12" {
+	junit-jupiter-api lazy
 }
 
 location "https://typefox.github.io/xtext2langium/download/updates/v0.4.0/" {

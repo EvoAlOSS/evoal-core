@@ -9,7 +9,7 @@ import de.evoal.languages.model.interpreter.ConstantEvaluator;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.emf.ecore.EObject;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

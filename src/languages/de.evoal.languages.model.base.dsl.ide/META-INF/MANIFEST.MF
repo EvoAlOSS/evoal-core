@@ -11,6 +11,6 @@ Require-Bundle: de.evoal.languages.model.base.dsl,
  org.eclipse.xtext.ide,
  org.eclipse.xtext.xbase.ide,
  org.antlr.runtime;bundle-version="[3.2.0,3.2.1)"
-Bundle-RequiredExecutionEnvironment: JavaSE-17
+Bundle-RequiredExecutionEnvironment: JavaSE-21
 Export-Package: de.evoal.languages.model.base.dsl.ide.contentassist.antlr.internal,
  de.evoal.languages.model.base.dsl.ide.contentassist.antlr

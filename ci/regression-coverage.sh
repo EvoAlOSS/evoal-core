@@ -7,12 +7,11 @@ if [ -z ${CI_PROJECT_DIR+x} ]; then
 fi
 
 echo "Downloading Jacoco-Agent"
-JACOCO_JAR=${CI_PROJECT_DIR}/.m2/repository/org/jacoco/org.jacoco.agent/0.8.10/org.jacoco.agent-0.8.10-runtime.jar
-
+JACOCO_JAR=${CI_PROJECT_DIR}/.m2/repository/org/jacoco/org.jacoco.agent/0.8.14/org.jacoco.agent-0.8.14-runtime.jar
 
 if [ ! -e ${JACOCO_JAR} ]; then
   mkdir -p `dirname $JACOCO_JAR`
-  curl -o ${JACOCO_JAR} https://repo1.maven.org/maven2/org/jacoco/org.jacoco.agent/0.8.10/org.jacoco.agent-0.8.10-runtime.jar
+  curl -o ${JACOCO_JAR} https://repo1.maven.org/maven2/org/jacoco/org.jacoco.agent/0.8.14/org.jacoco.agent-0.8.14-runtime.jar
 fi
 
 pushd evoal/examples

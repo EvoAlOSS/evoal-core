@@ -4,9 +4,9 @@
 package de.evoal.languages.model.ol.impl;
 
 import de.evoal.languages.model.base.expressions.Array;
-
 import de.evoal.languages.model.base.expressions.Instance;
 import de.evoal.languages.model.base.expressions.TypeDefinitionReference;
+
 import de.evoal.languages.model.base.expressions.impl.InstanceImpl;
 
 import de.evoal.languages.model.ol.OLPackage;
@@ -14,14 +14,17 @@ import de.evoal.languages.model.ol.OptimisationGoal;
 import de.evoal.languages.model.ol.ProblemInstance;
 
 import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -128,6 +131,51 @@ public class ProblemInstanceImpl extends InstanceImpl implements ProblemInstance
 	 * @generated
 	 */
 	@Override
+	public Array getDocumentation() {
+		return documentation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetDocumentation(Array newDocumentation, NotificationChain msgs) {
+		Array oldDocumentation = documentation;
+		documentation = newDocumentation;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OLPackage.PROBLEM_INSTANCE__DOCUMENTATION, oldDocumentation, newDocumentation);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setDocumentation(Array newDocumentation) {
+		if (newDocumentation != documentation) {
+			NotificationChain msgs = null;
+			if (documentation != null)
+				msgs = ((InternalEObject)documentation).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OLPackage.PROBLEM_INSTANCE__DOCUMENTATION, null, msgs);
+			if (newDocumentation != null)
+				msgs = ((InternalEObject)newDocumentation).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - OLPackage.PROBLEM_INSTANCE__DOCUMENTATION, null, msgs);
+			msgs = basicSetDocumentation(newDocumentation, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, OLPackage.PROBLEM_INSTANCE__DOCUMENTATION, newDocumentation, newDocumentation));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -214,51 +262,6 @@ public class ProblemInstanceImpl extends InstanceImpl implements ProblemInstance
 			searchSpace = new EObjectContainmentEList<TypeDefinitionReference>(TypeDefinitionReference.class, this, OLPackage.PROBLEM_INSTANCE__SEARCH_SPACE);
 		}
 		return searchSpace;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Array getDocumentation() {
-		return documentation;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetDocumentation(Array newDocumentation, NotificationChain msgs) {
-		Array oldDocumentation = documentation;
-		documentation = newDocumentation;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OLPackage.PROBLEM_INSTANCE__DOCUMENTATION, oldDocumentation, newDocumentation);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setDocumentation(Array newDocumentation) {
-		if (newDocumentation != documentation) {
-			NotificationChain msgs = null;
-			if (documentation != null)
-				msgs = ((InternalEObject)documentation).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OLPackage.PROBLEM_INSTANCE__DOCUMENTATION, null, msgs);
-			if (newDocumentation != null)
-				msgs = ((InternalEObject)newDocumentation).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - OLPackage.PROBLEM_INSTANCE__DOCUMENTATION, null, msgs);
-			msgs = basicSetDocumentation(newDocumentation, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OLPackage.PROBLEM_INSTANCE__DOCUMENTATION, newDocumentation, newDocumentation));
 	}
 
 	/**

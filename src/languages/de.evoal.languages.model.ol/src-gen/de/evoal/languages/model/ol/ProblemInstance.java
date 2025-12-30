@@ -6,6 +6,7 @@ package de.evoal.languages.model.ol;
 import de.evoal.languages.model.base.expressions.Array;
 import de.evoal.languages.model.base.expressions.Instance;
 import de.evoal.languages.model.base.expressions.TypeDefinitionReference;
+
 import org.eclipse.emf.common.util.EList;
 
 /**
@@ -35,6 +36,33 @@ import org.eclipse.emf.common.util.EList;
  * @generated
  */
 public interface ProblemInstance extends Instance {
+	/**
+	 * Returns the value of the '<em><b>Documentation</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * 
+	 * The information to protocol.
+	 * 
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Documentation</em>' containment reference.
+	 * @see #setDocumentation(Array)
+	 * @see de.evoal.languages.model.ol.OLPackage#getProblemInstance_Documentation()
+	 * @model containment="true"
+	 * @generated
+	 */
+	Array getDocumentation();
+
+	/**
+	 * Sets the value of the '{@link de.evoal.languages.model.ol.ProblemInstance#getDocumentation <em>Documentation</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Documentation</em>' containment reference.
+	 * @see #getDocumentation()
+	 * @generated
+	 */
+	void setDocumentation(Array value);
+
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -124,32 +152,5 @@ public interface ProblemInstance extends Instance {
 	 * @generated
 	 */
 	EList<TypeDefinitionReference> getSearchSpace();
-
-	/**
-	 * Returns the value of the '<em><b>Documentation</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * 
-	 * The information to protocol.
-	 * 
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Documentation</em>' containment reference.
-	 * @see #setDocumentation(Array)
-	 * @see de.evoal.languages.model.ol.OLPackage#getProblemInstance_Documentation()
-	 * @model containment="true"
-	 * @generated
-	 */
-	Array getDocumentation();
-
-	/**
-	 * Sets the value of the '{@link de.evoal.languages.model.ol.ProblemInstance#getDocumentation <em>Documentation</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Documentation</em>' containment reference.
-	 * @see #getDocumentation()
-	 * @generated
-	 */
-	void setDocumentation(Array value);
 
 } // ProblemInstance

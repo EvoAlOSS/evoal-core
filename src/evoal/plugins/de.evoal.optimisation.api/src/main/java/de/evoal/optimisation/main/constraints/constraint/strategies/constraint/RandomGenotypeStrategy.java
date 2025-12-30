@@ -5,9 +5,9 @@ import de.evoal.core.api.properties.Properties;
 import de.evoal.optimisation.main.initial.RandomInitialCandidates;
 import de.evoal.languages.model.base.expressions.Instance;
 
-import javax.enterprise.context.Dependent;
-import javax.inject.Inject;
-import javax.inject.Named;
+import jakarta.enterprise.context.Dependent;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 import java.util.stream.Stream;
 
 @Dependent

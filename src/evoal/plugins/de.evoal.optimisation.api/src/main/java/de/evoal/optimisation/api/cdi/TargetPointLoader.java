@@ -13,13 +13,13 @@ import de.evoal.core.api.properties.stream.PropertiesBasedPropertiesPairStreamSu
 import de.evoal.core.api.properties.stream.PropertiesBasedPropertiesStreamSupplier;
 import de.evoal.core.api.properties.stream.PropertiesPairStreamSupplier;
 import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.event.Observes;
+import jakarta.enterprise.context.ApplicationScoped;
 
+import jakarta.enterprise.event.Observes;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 import java.io.File;
 import java.util.stream.Collectors;
 

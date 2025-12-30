@@ -4,9 +4,9 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.Collections;
 import java.util.Optional;
-import javax.enterprise.context.Dependent;
-import javax.inject.Inject;
-import javax.inject.Named;
+import jakarta.enterprise.context.Dependent;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 import de.evoal.languages.model.base.expressions.Instance;
 

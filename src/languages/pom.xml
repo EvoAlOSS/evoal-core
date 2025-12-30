@@ -13,17 +13,17 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<maven.compiler.source>17</maven.compiler.source>
-		<maven.compiler.target>17</maven.compiler.target>
+		<maven.compiler.source>21</maven.compiler.source>
+		<maven.compiler.target>21</maven.compiler.target>
 
-		<tycho.version>3.0.5</tycho.version>
-		<xtend.version>2.29.0</xtend.version>
-		<xtext.version>2.29.0</xtext.version>
+		<tycho.version>5.0.1</tycho.version>
+		<xtend.version>2.41.0</xtend.version>
+		<xtext.version>2.41.0</xtext.version>
 
-		<eclipse.environment>JavaSE-17</eclipse.environment>
+		<eclipse.environment>JavaSE-21</eclipse.environment>
 
-		<url.eclipse>https://download.eclipse.org/releases/2022-12/202212071000</url.eclipse>
-		<url.orbit>https://download.eclipse.org/tools/orbit/downloads/drops/R20221123021534/repository</url.orbit>
+		<url.eclipse>https://download.eclipse.org/releases/2025-12/</url.eclipse>
+<!--		<url.orbit>https://download.eclipse.org/tools/orbit/downloads/drops/R20221123021534/repository</url.orbit> -->
 	</properties>
 	
 	<dependencies>
@@ -78,8 +78,9 @@
 			</plugin>
 
 			<plugin>
-				<groupId>org.eclipse.xtend</groupId>
+				<groupId>org.eclipse.xtext</groupId>
 				<artifactId>xtend-maven-plugin</artifactId>
+				<version>${xtend.version}</version>
 			</plugin>
 
 			<plugin>
@@ -196,7 +197,7 @@
 
 				<!-- Generate xtend artifacts during build. -->
 				<plugin>
-					<groupId>org.eclipse.xtend</groupId>
+					<groupId>org.eclipse.xtext</groupId>
 					<artifactId>xtend-maven-plugin</artifactId>
 					<version>${xtend.version}</version>
 					<executions>
@@ -235,33 +236,6 @@
 					</executions>
 				</plugin>
 
-
-				<!--This plugin's configuration is used to store Eclipse m2e settings 
-					only. It has no influence on the Maven build itself. -->
-				<plugin>
-					<groupId>org.eclipse.m2e</groupId>
-					<artifactId>lifecycle-mapping</artifactId>
-					<version>1.0.0</version>
-					<configuration>
-						<lifecycleMappingMetadata>
-							<pluginExecutions>
-								<pluginExecution>
-									<pluginExecutionFilter>
-										<groupId>org.eclipse.tycho</groupId>
-										<artifactId>target-platform-configuration</artifactId>
-										<versionRange>[2.5.0,)</versionRange>
-										<goals>
-											<goal>target-platform</goal>
-										</goals>
-									</pluginExecutionFilter>
-									<action>
-										<ignore></ignore>
-									</action>
-								</pluginExecution>
-							</pluginExecutions>
-						</lifecycleMappingMetadata>
-					</configuration>
-				</plugin>
 
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
@@ -339,7 +313,7 @@
 
 	<repositories>
 		<repository>
-			<id>eclipse-2022-12</id>
+			<id>eclipse-2025-12</id>
 			<url>${url.eclipse}</url>
 			<layout>p2</layout>
 		</repository>

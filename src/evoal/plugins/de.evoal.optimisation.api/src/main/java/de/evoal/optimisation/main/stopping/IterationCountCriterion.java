@@ -7,9 +7,9 @@ import de.evoal.optimisation.api.model.Iteration;
 import de.evoal.optimisation.api.model.StoppingCriterion;
 import lombok.extern.slf4j.Slf4j;
 
-import javax.enterprise.context.Dependent;
-import javax.inject.Inject;
-import javax.inject.Named;
+import jakarta.enterprise.context.Dependent;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 @Slf4j
 @Dependent

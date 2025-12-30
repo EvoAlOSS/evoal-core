@@ -4,7 +4,6 @@
 package de.evoal.languages.model.generator;
 
 import de.evoal.languages.model.base.expressions.Literal;
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -17,7 +16,6 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface Step extends Literal {
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

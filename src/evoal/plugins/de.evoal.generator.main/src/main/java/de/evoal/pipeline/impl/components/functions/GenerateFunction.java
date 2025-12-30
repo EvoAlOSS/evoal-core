@@ -18,9 +18,9 @@ import de.evoal.core.api.ecore.TypedEObject;
 import de.evoal.pipeline.impl.internal.PipelineInstantiator;
 import lombok.extern.slf4j.Slf4j;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
-import javax.inject.Named;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 import java.io.File;
 import java.util.HashSet;
 import java.util.List;

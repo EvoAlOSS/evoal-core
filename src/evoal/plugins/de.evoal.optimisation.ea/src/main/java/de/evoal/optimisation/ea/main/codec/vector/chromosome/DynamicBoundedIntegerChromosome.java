@@ -7,7 +7,7 @@ import de.evoal.languages.model.base.definitions.DataDescription;
 import de.evoal.languages.model.base.expressions.Instance;
 import io.jenetics.util.IntRange;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 import java.util.List;
 import java.util.stream.Collectors;
 

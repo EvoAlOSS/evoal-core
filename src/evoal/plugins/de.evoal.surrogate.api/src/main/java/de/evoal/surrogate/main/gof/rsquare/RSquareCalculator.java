@@ -12,8 +12,8 @@ import org.apache.commons.math3.stat.descriptive.moment.StandardDeviation;
 import org.apache.commons.math3.util.Pair;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
-import javax.enterprise.context.Dependent;
-import javax.inject.Named;
+import jakarta.enterprise.context.Dependent;
+import jakarta.inject.Named;
 import java.util.Arrays;
 import java.util.Optional;
 

@@ -3,8 +3,8 @@ package de.evoal.surrogate.main.internal;
 import de.evoal.surrogate.api.function.ModelFunction;
 import lombok.extern.slf4j.Slf4j;
 
-import javax.enterprise.context.Dependent;
-import javax.inject.Inject;
+import jakarta.enterprise.context.Dependent;
+import jakarta.inject.Inject;
 import java.util.regex.Pattern;
 
 import de.evoal.core.api.languages.AttributeEvaluator;

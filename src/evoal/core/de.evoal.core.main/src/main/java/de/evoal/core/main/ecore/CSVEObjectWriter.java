@@ -4,14 +4,14 @@ import de.evoal.core.api.ecore.Space;
 import de.evoal.core.api.ecore.TypedEObject;
 import de.evoal.core.api.ecore.io.EObjectWriter;
 import de.evoal.core.api.utils.EvoalIOException;
+import jakarta.inject.Named;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
-import javax.enterprise.context.Dependent;
-import javax.inject.Named;
+import jakarta.enterprise.context.Dependent;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;

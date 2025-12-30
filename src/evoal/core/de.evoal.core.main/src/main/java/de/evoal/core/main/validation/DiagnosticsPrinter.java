@@ -1,11 +1,11 @@
 package de.evoal.core.main.validation;
 
 import de.evoal.core.api.validation.model.Diagnostics;
+import jakarta.enterprise.event.Observes;
 import org.fusesource.jansi.Ansi;
 import org.fusesource.jansi.AnsiConsole;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.event.Observes;
+import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
 public class DiagnosticsPrinter {

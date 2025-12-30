@@ -1,4 +1,4 @@
-FROM library/maven:3.8.7-eclipse-temurin-17
+FROM library/maven:3.9.12-eclipse-temurin-25-alpine
 COPY pom-eclipse.xml /tmp
 COPY pom-orbit.xml /tmp
 RUN mvn -f /tmp/pom-eclipse.xml package

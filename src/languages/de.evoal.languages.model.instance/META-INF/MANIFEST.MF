@@ -17,4 +17,4 @@ Export-Package: de.evoal.languages.model.instance,
  de.evoal.languages.model.instance.impl,
  de.evoal.languages.model.instance.util
 Bundle-ActivationPolicy: lazy
-Bundle-RequiredExecutionEnvironment: JavaSE-17
+Bundle-RequiredExecutionEnvironment: JavaSE-21

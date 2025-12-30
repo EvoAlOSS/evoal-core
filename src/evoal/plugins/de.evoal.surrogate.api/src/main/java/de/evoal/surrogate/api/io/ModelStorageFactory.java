@@ -5,7 +5,7 @@ import de.evoal.core.api.ecore.Space;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 import java.net.URI;
 
 @ApplicationScoped

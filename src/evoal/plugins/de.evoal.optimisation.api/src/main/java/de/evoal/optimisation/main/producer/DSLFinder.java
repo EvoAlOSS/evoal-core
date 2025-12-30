@@ -1,6 +1,6 @@
 package de.evoal.optimisation.main.producer;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;

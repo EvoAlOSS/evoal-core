@@ -4,6 +4,7 @@
 package de.evoal.languages.model.pipeline;
 
 import de.evoal.languages.model.base.expressions.ExpressionsPackage;
+
 import de.evoal.languages.model.execution.ExecutionPackage;
 
 import org.eclipse.emf.ecore.EAttribute;
@@ -235,6 +236,7 @@ public interface PipelinePackage extends EPackage {
 	 * @ordered
 	 */
 	int PIPELINE_STEP_FEATURE_COUNT = STEP_FEATURE_COUNT + 1;
+
 
 	/**
 	 * Returns the meta object for class '{@link de.evoal.languages.model.pipeline.PipelineModule <em>Module</em>}'.

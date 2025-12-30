@@ -3,13 +3,17 @@
 package de.evoal.languages.model.mll.impl;
 
 import de.evoal.languages.model.base.Import;
+
 import de.evoal.languages.model.base.expressions.Instance;
 
 import de.evoal.languages.model.execution.Block;
+
 import de.evoal.languages.model.generator.PipelineDefinition;
+
 import de.evoal.languages.model.mll.MachineLearningModule;
 import de.evoal.languages.model.mll.MllPackage;
 import de.evoal.languages.model.mll.TaskDescription;
+
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;

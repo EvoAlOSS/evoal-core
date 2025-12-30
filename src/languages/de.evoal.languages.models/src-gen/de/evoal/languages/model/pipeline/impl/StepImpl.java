@@ -4,12 +4,11 @@
 package de.evoal.languages.model.pipeline.impl;
 
 import de.evoal.languages.model.base.expressions.impl.LiteralImpl;
+
 import de.evoal.languages.model.pipeline.PipelinePackage;
 import de.evoal.languages.model.pipeline.Step;
 
 import org.eclipse.emf.ecore.EClass;
-
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 /**
  * <!-- begin-user-doc -->

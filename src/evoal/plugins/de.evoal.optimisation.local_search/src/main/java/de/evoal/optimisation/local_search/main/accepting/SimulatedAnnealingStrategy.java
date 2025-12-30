@@ -13,9 +13,9 @@ import de.evoal.optimisation.local_search.api.accepting.AcceptingStrategy;
 import de.evoal.optimisation.local_search.api.cooling.DecreasingFunction;
 import de.evoal.optimisation.local_search.api.probability.AcceptanceProbabilityFunction;
 
-import javax.enterprise.context.Dependent;
-import javax.inject.Inject;
-import javax.inject.Named;
+import jakarta.enterprise.context.Dependent;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 import java.util.Random;
 
 @Named("de.evoal.optimisation.local_search.optimisation.simulated-annealing")

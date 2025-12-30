@@ -4,7 +4,7 @@ import de.evoal.core.api.cdi.BeanFactory;
 import de.evoal.core.api.utils.AttributeHelper;
 import de.evoal.languages.model.base.expressions.Instance;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 /**
  * An optimisation function decorator. The decorator calls the decorated function

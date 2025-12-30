@@ -7,14 +7,13 @@ import de.evoal.languages.model.base.definitions.Definition;
 import de.evoal.languages.model.base.definitions.EnumLiteralDefinition;
 import de.evoal.languages.model.base.expressions.*;
 import de.evoal.languages.model.ol.OptimisationModule;
-import de.evoal.languages.model.ol.ProblemInstance;
 import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
+import jakarta.enterprise.inject.spi.InjectionPoint;
 import lombok.extern.slf4j.Slf4j;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Produces;
-import javax.enterprise.inject.spi.InjectionPoint;
-import javax.inject.Inject;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.inject.Produces;
+import jakarta.inject.Inject;
 import java.util.List;
 
 @ApplicationScoped

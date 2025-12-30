@@ -8,8 +8,8 @@ import de.evoal.surrogate.api.io.ModelStorageFactory;
 import de.evoal.surrogate.api.io.ModelWriter;
 import lombok.extern.slf4j.Slf4j;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import java.net.URI;
 import java.util.Optional;
 

@@ -27,7 +27,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 
 /**

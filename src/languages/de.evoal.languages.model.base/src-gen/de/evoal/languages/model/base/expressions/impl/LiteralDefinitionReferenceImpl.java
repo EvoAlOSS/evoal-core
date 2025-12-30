@@ -4,6 +4,7 @@ package de.evoal.languages.model.base.expressions.impl;
 
 import de.evoal.languages.model.base.expressions.ExpressionsPackage;
 import de.evoal.languages.model.base.expressions.LiteralDefinitionReference;
+
 import org.eclipse.emf.ecore.EClass;
 
 /**

@@ -7,8 +7,8 @@ import de.evoal.optimisation.ea.main.jenetics.BoundedDoubleGene;
 import io.jenetics.Chromosome;
 import io.jenetics.util.DoubleRange;
 
-import javax.enterprise.context.Dependent;
-import javax.inject.Named;
+import jakarta.enterprise.context.Dependent;
+import jakarta.inject.Named;
 import java.util.ArrayList;
 import java.util.List;
 

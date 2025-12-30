@@ -8,14 +8,14 @@ import de.evoal.core.api.utils.EvoalIOException;
 import de.evoal.core.api.utils.Requirements;
 import de.evoal.languages.model.base.definitions.BaseDataDescription;
 import de.evoal.languages.model.base.definitions.RepresentationType;
+import jakarta.enterprise.context.Dependent;
 import lombok.extern.slf4j.Slf4j;
 import weka.core.Attribute;
 import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.converters.ConverterUtils;
 
-import javax.enterprise.context.Dependent;
-import javax.inject.Named;
+import jakarta.inject.Named;
 import java.io.File;
 
 @Slf4j

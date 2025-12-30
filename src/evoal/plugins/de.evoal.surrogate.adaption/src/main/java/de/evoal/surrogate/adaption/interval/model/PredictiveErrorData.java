@@ -18,8 +18,6 @@ import org.apache.commons.math3.util.Pair;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
 
-import smile.math.matrix.Matrix;
-
 import de.evoal.core.api.dynamic.EAnnotationHelper;
 import de.evoal.core.api.ecore.Space;
 import de.evoal.core.api.ecore.TypedEObject;
@@ -27,6 +25,8 @@ import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertySpecification;
 import de.evoal.languages.model.base.definitions.DataDescription;
 import de.evoal.surrogate.smile.api.KernelBasedSVRFunction;
+import smile.tensor.DenseMatrix;
+import smile.tensor.ScalarType;
 
 @Slf4j
 public final class PredictiveErrorData {
@@ -44,9 +44,9 @@ public final class PredictiveErrorData {
     private final int numberOfPoints;
     private final double[] calculatedValues;
     @Setter
-    private Matrix independentSmoothingMatrix;
+    private DenseMatrix independentSmoothingMatrix;
     @Setter
-    private Matrix independentSmoothingVector;
+    private DenseMatrix independentSmoothingVector;
     @Setter
     private double[] delta;
     @Setter
@@ -70,8 +70,8 @@ public final class PredictiveErrorData {
         trainingPoints = (double[][]) parameterMap.get(TRAINING);
         calculatedValues = (double[]) parameterMap.get(CALCULATED);
         delta = (double[])parameterMap.get(DELTA);
-        independentSmoothingVector = (Matrix)parameterMap.get(ISV);
-        independentSmoothingMatrix = (Matrix)parameterMap.get(ISM);
+        independentSmoothingVector = (DenseMatrix)parameterMap.get(ISV);
+        independentSmoothingMatrix = (DenseMatrix)parameterMap.get(ISM);
 
         numberOfPoints = predictionErrors.length;
     }
@@ -125,7 +125,7 @@ public final class PredictiveErrorData {
         function.apply(input, output);
 
         // Calculating Ω
-        final Matrix omega = new Matrix(1, numberOfPoints);
+        final DenseMatrix omega = DenseMatrix.zeros(ScalarType.Float64, 1, numberOfPoints);
         IntStream.range(0, trainingPoints.length)
                 .forEach(i -> {
                     double [] v1 = new double[candidate.size()];
@@ -143,9 +143,9 @@ public final class PredictiveErrorData {
                     omega.set(0, i, kv);
                 });
 
-        final Matrix candidateSmoothing = omega.mm(independentSmoothingMatrix)
-                .add(1.0, independentSmoothingVector);
-
+        final DenseMatrix candidateSmoothing = omega
+                .mm(independentSmoothingMatrix)
+                .add(independentSmoothingVector);
 
         // calculate bias
         double bias = 0.0;

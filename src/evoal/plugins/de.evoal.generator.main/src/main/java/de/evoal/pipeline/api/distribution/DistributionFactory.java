@@ -4,7 +4,7 @@ import de.evoal.core.api.cdi.BeanFactory;
 import de.evoal.core.api.utils.AttributeHelper;
 import de.evoal.languages.model.base.expressions.Instance;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 import java.util.List;
 
 @ApplicationScoped

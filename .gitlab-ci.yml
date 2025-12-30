@@ -56,8 +56,8 @@ variables:
     -DdeployAtEnd=true
 
   # custom docker image for building our Java stuff
-  ECLIPSE_IMAGE: gitlab.informatik.uni-bremen.de:5005/evoal/source/evoal-core/evoal/eclipse-mirror:2022-12
-  EVOAL_IMAGE: gitlab.informatik.uni-bremen.de:5005/evoal/source/evoal-core/evoal/maven-with-bash:3.8.6
+  ECLIPSE_IMAGE: gitlab.informatik.uni-bremen.de:5005/evoal/source/evoal-core/evoal/eclipse-mirror:2025-12
+  EVOAL_IMAGE: gitlab.informatik.uni-bremen.de:5005/evoal/source/evoal-core/evoal/maven-with-bash:3.9.12
   SECURE_LOG_LEVEL: "debug"
 
   ######################

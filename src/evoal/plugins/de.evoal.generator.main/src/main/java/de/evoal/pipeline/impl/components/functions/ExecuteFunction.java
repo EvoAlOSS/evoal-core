@@ -14,9 +14,9 @@ import de.evoal.pipeline.api.model.PipelineComposite;
 import de.evoal.pipeline.impl.internal.PipelineInstantiator;
 import lombok.extern.slf4j.Slf4j;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
-import javax.inject.Named;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 import java.util.*;
 
 @Slf4j

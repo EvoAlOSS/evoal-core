@@ -1,6 +1,6 @@
 module de.evoal.surrogate.simple {
-    requires jakarta.inject.api;
-    requires jakarta.enterprise.cdi.api;
+    requires jakarta.inject;
+    requires jakarta.cdi;
     requires lombok;
 
     requires org.slf4j;

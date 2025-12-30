@@ -6,9 +6,9 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
 import java.util.stream.Stream;
-import javax.enterprise.context.Dependent;
-import javax.inject.Inject;
-import javax.inject.Named;
+import jakarta.enterprise.context.Dependent;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
 

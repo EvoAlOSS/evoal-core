@@ -7,8 +7,8 @@ import de.evoal.optimisation.ea.main.jenetics.GrayHelper;
 import io.jenetics.Chromosome;
 import io.jenetics.util.DoubleRange;
 
-import javax.enterprise.context.Dependent;
-import javax.inject.Named;
+import jakarta.enterprise.context.Dependent;
+import jakarta.inject.Named;
 
 @Dependent
 @Named("de.evoal.optimisation.ea.optimisation.gray-chromosome")

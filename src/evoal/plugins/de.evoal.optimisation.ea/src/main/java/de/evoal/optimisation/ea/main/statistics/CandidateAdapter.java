@@ -6,9 +6,9 @@ import de.evoal.optimisation.api.model.Candidate;
 import de.evoal.optimisation.ea.api.codec.CustomCodec;
 import io.jenetics.Phenotype;
 
-import javax.enterprise.context.Dependent;
-import javax.inject.Inject;
-import javax.inject.Named;
+import jakarta.enterprise.context.Dependent;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 /**
  * An adapter, c.f. GOF: adapter pattern, for adapting Jenetic's {@link Phenotype} to

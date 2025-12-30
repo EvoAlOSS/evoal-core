@@ -27,8 +27,8 @@ import de.evoal.languages.model.base.definitions.StructuredDataDescription;
 import de.evoal.languages.model.base.definitions.TypeDefinition;
 import de.evoal.languages.model.base.definitions.TypedBaseDataDescription;
 import de.evoal.languages.model.base.definitions.UntypedBaseDataDescription;
-
 import de.evoal.languages.model.base.definitions.ValueDefinition;
+
 import de.evoal.languages.model.base.expressions.ExpressionsPackage;
 
 import de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl;
@@ -36,6 +36,7 @@ import de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl;
 import de.evoal.languages.model.base.types.TypesPackage;
 
 import de.evoal.languages.model.base.types.impl.TypesPackageImpl;
+
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
@@ -65,6 +66,13 @@ public class DefinitionsPackageImpl extends EPackageImpl implements DefinitionsP
 	 * @generated
 	 */
 	private EClass definitionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass valueDefinitionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -204,13 +212,6 @@ public class DefinitionsPackageImpl extends EPackageImpl implements DefinitionsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass valueDefinitionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EEnum scaleTypeEEnum = null;
 
 	/**
@@ -328,6 +329,16 @@ public class DefinitionsPackageImpl extends EPackageImpl implements DefinitionsP
 	@Override
 	public EAttribute getDefinition_Name() {
 		return (EAttribute)definitionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getValueDefinition() {
+		return valueDefinitionEClass;
 	}
 
 	/**
@@ -728,16 +739,6 @@ public class DefinitionsPackageImpl extends EPackageImpl implements DefinitionsP
 	@Override
 	public EReference getDefinedFunctionName_Definition() {
 		return (EReference)definedFunctionNameEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getValueDefinition() {
-		return valueDefinitionEClass;
 	}
 
 	/**

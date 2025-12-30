@@ -5,9 +5,9 @@ import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
 import de.evoal.optimisation.main.fitness.JeneticsFitnessFunction;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.Dependent;
-import javax.enterprise.inject.Produces;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.Dependent;
+import jakarta.enterprise.inject.Produces;
 
 import de.evoal.optimisation.api.model.OptimisationFunction;
 import de.evoal.optimisation.api.model.OptimisationValueComparator;

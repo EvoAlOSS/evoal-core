@@ -6,8 +6,8 @@ package de.evoal.languages.model.generator;
 import de.evoal.languages.model.base.expressions.Literal;
 
 import de.evoal.languages.model.execution.Statement;
-
 import de.evoal.languages.model.execution.VariableReference;
+
 import org.eclipse.emf.common.util.EList;
 
 /**

@@ -7,8 +7,8 @@ import de.evoal.optimisation.ea.main.jenetics.BoundedIntegerGene;
 import io.jenetics.Chromosome;
 import io.jenetics.util.IntRange;
 
-import javax.enterprise.context.Dependent;
-import javax.inject.Named;
+import jakarta.enterprise.context.Dependent;
+import jakarta.inject.Named;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;

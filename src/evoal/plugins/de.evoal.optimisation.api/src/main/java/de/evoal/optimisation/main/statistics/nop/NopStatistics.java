@@ -4,9 +4,9 @@ import de.evoal.optimisation.api.model.Iteration;
 import de.evoal.languages.model.base.expressions.Instance;
 import de.evoal.optimisation.api.statistics.writer.StatisticsWriter;
 
-import javax.enterprise.context.Dependent;
+import jakarta.enterprise.context.Dependent;
 
-import javax.inject.Named;
+import jakarta.inject.Named;
 
 @Named("de.evoal.optimisation.core.none")
 @Dependent

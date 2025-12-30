@@ -6,9 +6,9 @@ import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
 import de.evoal.optimisation.ea.api.codec.CustomCodec;
 import de.evoal.languages.model.base.expressions.Instance;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Produces;
-import javax.inject.Named;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.inject.Produces;
+import jakarta.inject.Named;
 
 @ApplicationScoped
 public class CodecProducer {

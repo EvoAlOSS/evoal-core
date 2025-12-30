@@ -3,8 +3,8 @@ package de.evoal.optimisation.main.fitness;
 import de.evoal.optimisation.api.model.OptimisationFunction;
 import de.evoal.core.api.properties.Properties;
 
-import javax.enterprise.context.Dependent;
-import javax.inject.Named;
+import jakarta.enterprise.context.Dependent;
+import jakarta.inject.Named;
 
 @Dependent
 @Named("de.evoal.optimisation.core.unknown-function")

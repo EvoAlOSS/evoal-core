@@ -1,7 +1,7 @@
 package de.evoal.surrogate.adaption.interval.ea.surrogate.gof;
 
-import javax.enterprise.context.Dependent;
-import javax.inject.Named;
+import jakarta.enterprise.context.Dependent;
+import jakarta.inject.Named;
 
 import de.evoal.core.api.ecore.EObjectPair;
 import de.evoal.core.api.ecore.Space;
@@ -16,7 +16,8 @@ import de.evoal.surrogate.smile.api.KernelBasedSVRFunction;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.math3.util.Pair;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import smile.math.matrix.Matrix;
+import smile.tensor.DenseMatrix;
+import smile.tensor.ScalarType;
 
 import java.util.*;
 import java.util.stream.IntStream;
@@ -78,8 +79,8 @@ public class PredictiveErrorCalculator extends SurrogateInformationCalculator {
         final EStructuralFeature targetSpec = kernelFunction.getOutput().iterator().next();
         final PredictiveErrorData errorData = result.get(targetSpec);
 
-        final Matrix kernelTrainingsMatrix = new Matrix(numberOfPoints, numberOfPoints);
-        final Matrix kernelTrainingsMatrixNotAdded = new Matrix(numberOfPoints, numberOfPoints);
+        final DenseMatrix kernelTrainingsMatrix = DenseMatrix.zeros(ScalarType.Float64, numberOfPoints, numberOfPoints);
+        final DenseMatrix kernelTrainingsMatrixNotAdded = DenseMatrix.zeros(ScalarType.Float64, numberOfPoints, numberOfPoints);
         IntStream.rangeClosed(0, numberOfPoints - 1)
                  .boxed()
                  .flatMap(x -> IntStream.rangeClosed(0, numberOfPoints - 1).mapToObj(y -> new Pair<>(x, y)))
@@ -94,31 +95,33 @@ public class PredictiveErrorCalculator extends SurrogateInformationCalculator {
                  });
 
 
-        final Matrix invertedKernelTrainingsMatrix = kernelTrainingsMatrix.inverse();
+        final DenseMatrix invertedKernelTrainingsMatrix = kernelTrainingsMatrix.inverse();
 
-        final double sumOfTrainingsMatrix = invertedKernelTrainingsMatrix.sum();
-        final Matrix regularisationMatrix = new Matrix(numberOfPoints, numberOfPoints, 1/sumOfTrainingsMatrix);
-        final Matrix independentSmoothingMatrix = Matrix.of(invertedKernelTrainingsMatrix.toArray());
+        final double sumOfTrainingsMatrix = invertedKernelTrainingsMatrix.colSums().sum();
+        final DenseMatrix regularisationMatrix = DenseMatrix.zeros(ScalarType.Float64, numberOfPoints, numberOfPoints);
+        regularisationMatrix.fill(1.0 / sumOfTrainingsMatrix);
+        final DenseMatrix independentSmoothingMatrix = invertedKernelTrainingsMatrix.copy();
 
-        final Matrix matrix1 = invertedKernelTrainingsMatrix.mm(regularisationMatrix)
+        final DenseMatrix matrix1 = invertedKernelTrainingsMatrix.mm(regularisationMatrix)
                                                          .mm(invertedKernelTrainingsMatrix);
         independentSmoothingMatrix.sub(matrix1);
 
-        final Matrix independentSmoothingVector = new Matrix(1, numberOfPoints, 1/sumOfTrainingsMatrix)
-                                                            .mm(invertedKernelTrainingsMatrix);
+        DenseMatrix independentSmoothingVector = DenseMatrix.zeros(ScalarType.Float64, 1, numberOfPoints);
+        independentSmoothingVector.fill(1.0 / sumOfTrainingsMatrix);
+        independentSmoothingVector = independentSmoothingMatrix.mm(invertedKernelTrainingsMatrix);
 
-        final Matrix trainingsSmoothingMatrix = Matrix.of(kernelTrainingsMatrixNotAdded.mm(independentSmoothingMatrix).toArray());
+        final DenseMatrix trainingsSmoothingMatrix = kernelTrainingsMatrixNotAdded.mm(independentSmoothingMatrix).copy();
 
 
 
-        trainingsSmoothingMatrix.add(1.0, regularisationMatrix.mm(invertedKernelTrainingsMatrix));
+        trainingsSmoothingMatrix.add(regularisationMatrix.mm(invertedKernelTrainingsMatrix));
 
-        final Matrix tmp1 = trainingsSmoothingMatrix.transpose()
+        final DenseMatrix tmp1 = trainingsSmoothingMatrix.transpose()
                                                     .mm(trainingsSmoothingMatrix)
                                                     .sub(trainingsSmoothingMatrix)
                                                     .sub(trainingsSmoothingMatrix.transpose());
 
-        final double [] delta = tmp1.diag();
+        final double [] delta = tmp1.diagonal().toArray(new double[0]);
 
         final double [] sigma = new double[numberOfPoints];
 

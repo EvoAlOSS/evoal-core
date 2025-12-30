@@ -4,9 +4,9 @@ import de.evoal.optimisation.api.model.OptimisationValueComparator;
 import de.evoal.optimisation.api.model.OptimisationValue;
 import de.evoal.languages.model.base.expressions.Instance;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
-import javax.inject.Named;
+import jakarta.inject.Named;
 
 @ApplicationScoped
 @Named("de.evoal.optimisation.ea.optimisation.pareto")

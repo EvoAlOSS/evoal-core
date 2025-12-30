@@ -4,6 +4,7 @@ import de.evoal.core.api.utils.Requirements;
 import de.evoal.languages.model.base.definitions.DataDescription;
 import de.evoal.languages.model.base.expressions.*;
 import de.evoal.languages.model.base.expressions.util.ExpressionsSwitch;
+import de.evoal.languages.model.base.types.DefinitionReference;
 
 import java.util.Objects;
 

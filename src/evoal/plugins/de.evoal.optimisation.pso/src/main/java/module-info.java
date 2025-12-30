@@ -1,6 +1,6 @@
 module de.evoal.optimisation.pso {
-    requires jakarta.enterprise.cdi.api;
-    requires jakarta.inject.api;
+    requires jakarta.cdi;
+    requires jakarta.inject;
 
     requires lombok;
 

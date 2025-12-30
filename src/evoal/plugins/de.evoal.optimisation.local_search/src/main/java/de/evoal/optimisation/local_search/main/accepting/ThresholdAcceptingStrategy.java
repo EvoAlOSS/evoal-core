@@ -12,9 +12,9 @@ import de.evoal.optimisation.local_search.api.accepting.AcceptingStrategy;
 import de.evoal.optimisation.local_search.api.cooling.DecreasingFunction;
 import lombok.extern.slf4j.Slf4j;
 
-import javax.enterprise.context.Dependent;
-import javax.inject.Inject;
-import javax.inject.Named;
+import jakarta.enterprise.context.Dependent;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 @Named("de.evoal.optimisation.local_search.optimisation.threshold-accepting")
 @Dependent

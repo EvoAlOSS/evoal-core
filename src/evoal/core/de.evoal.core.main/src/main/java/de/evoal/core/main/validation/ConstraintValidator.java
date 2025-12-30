@@ -14,7 +14,7 @@ import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.emf.common.util.EList;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 

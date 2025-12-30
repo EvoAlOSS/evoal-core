@@ -5,6 +5,7 @@ import de.evoal.core.api.ecore.TypedEObject;
 import de.evoal.core.api.ecore.io.EObjectReader;
 import de.evoal.core.api.utils.EvoalIOException;
 import de.evoal.core.api.utils.Requirements;
+import jakarta.inject.Named;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.csv.CSVFormat;
@@ -12,8 +13,7 @@ import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 import org.eclipse.emf.ecore.*;
 
-import javax.enterprise.context.Dependent;
-import javax.inject.Named;
+import jakarta.enterprise.context.Dependent;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;

@@ -17,5 +17,5 @@ Require-Bundle: de.evoal.languages.model.base.dsl.ui,
  org.eclipse.xtext.xbase.ui.testing
 Import-Package: org.junit.jupiter.api;version="[5.1.0,6.0.0)",
  org.junit.jupiter.api.extension;version="[5.1.0,6.0.0)"
-Bundle-RequiredExecutionEnvironment: JavaSE-17
+Bundle-RequiredExecutionEnvironment: JavaSE-21
 Export-Package: de.evoal.languages.model.base.dsl.ui.tests;x-internal=true

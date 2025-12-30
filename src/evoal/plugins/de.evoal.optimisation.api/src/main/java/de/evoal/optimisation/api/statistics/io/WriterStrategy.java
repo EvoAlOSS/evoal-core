@@ -3,7 +3,7 @@ package de.evoal.optimisation.api.statistics.io;
 import de.evoal.optimisation.api.statistics.writer.Column;
 import de.evoal.optimisation.api.statistics.writer.WriterContext;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 import java.util.List;
 
 /**

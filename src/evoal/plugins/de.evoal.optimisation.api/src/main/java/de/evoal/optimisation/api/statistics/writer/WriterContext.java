@@ -1,6 +1,6 @@
 package de.evoal.optimisation.api.statistics.writer;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 import java.util.*;
 
 /**

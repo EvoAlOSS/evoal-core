@@ -2,6 +2,7 @@ package de.evoal.optimisation.main.constraints.constraint.ast;
 
 import de.evoal.core.api.utils.Requirements;
 import de.evoal.languages.model.base.expressions.util.ExpressionsSwitch;
+import de.evoal.languages.model.base.types.DefinitionReference;
 import de.evoal.optimisation.api.constraints.model.ConstraintType;
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;

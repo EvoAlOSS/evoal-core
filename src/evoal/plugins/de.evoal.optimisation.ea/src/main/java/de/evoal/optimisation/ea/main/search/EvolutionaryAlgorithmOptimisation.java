@@ -31,13 +31,12 @@ import de.evoal.languages.model.ol.OptimisationModule;
 import io.jenetics.*;
 import io.jenetics.engine.*;
 import io.jenetics.stat.MinMax;
+import jakarta.enterprise.context.Dependent;
+import jakarta.enterprise.inject.Instance;
 import lombok.extern.slf4j.Slf4j;
 
-import javax.enterprise.context.Dependent;
-import javax.enterprise.inject.Instance;
-
-import javax.inject.Inject;
-import javax.inject.Named;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 @Slf4j
 @Dependent

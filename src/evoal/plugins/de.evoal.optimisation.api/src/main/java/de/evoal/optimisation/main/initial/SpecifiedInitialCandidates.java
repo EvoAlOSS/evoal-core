@@ -12,9 +12,9 @@ import de.evoal.languages.model.base.expressions.Instance;
 import lombok.extern.slf4j.Slf4j;
 import de.evoal.core.api.utils.VariableToPropertiesHelper;
 
-import javax.enterprise.context.Dependent;
-import javax.inject.Inject;
-import javax.inject.Named;
+import jakarta.enterprise.context.Dependent;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 import java.util.ArrayList;
 import java.util.function.Supplier;
 import java.util.random.RandomGenerator;

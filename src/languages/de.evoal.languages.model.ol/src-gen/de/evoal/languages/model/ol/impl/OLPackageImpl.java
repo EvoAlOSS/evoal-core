@@ -20,8 +20,8 @@ import de.evoal.languages.model.ol.OLPackage;
 import de.evoal.languages.model.ol.OptimisationGoal;
 import de.evoal.languages.model.ol.OptimisationModule;
 import de.evoal.languages.model.ol.ProblemInstance;
-
 import de.evoal.languages.model.ol.TargetGoal;
+
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
@@ -175,28 +175,18 @@ public class OLPackageImpl extends EPackageImpl implements OLPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getOptimisationModule_Imports() {
-		return (EReference)optimisationModuleEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getOptimisationModule_Problem() {
-		return (EReference)optimisationModuleEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EReference getOptimisationModule_Algorithm() {
 		return (EReference)optimisationModuleEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getOptimisationModule_Imports() {
+		return (EReference)optimisationModuleEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -215,8 +205,28 @@ public class OLPackageImpl extends EPackageImpl implements OLPackage {
 	 * @generated
 	 */
 	@Override
+	public EReference getOptimisationModule_Problem() {
+		return (EReference)optimisationModuleEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getProblemInstance() {
 		return problemInstanceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getProblemInstance_Documentation() {
+		return (EReference)problemInstanceEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -257,16 +267,6 @@ public class OLPackageImpl extends EPackageImpl implements OLPackage {
 	@Override
 	public EReference getProblemInstance_SearchSpace() {
 		return (EReference)problemInstanceEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getProblemInstance_Documentation() {
-		return (EReference)problemInstanceEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**

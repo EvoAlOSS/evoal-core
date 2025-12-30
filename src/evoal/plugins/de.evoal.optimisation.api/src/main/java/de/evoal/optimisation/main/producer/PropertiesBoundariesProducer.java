@@ -8,9 +8,9 @@ import de.evoal.core.api.properties.info.PropertiesBoundaries;
 import de.evoal.optimisation.main.constraints.constraint.ast.BoundaryIdentifier;
 import lombok.extern.slf4j.Slf4j;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Produces;
-import javax.inject.Named;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.inject.Produces;
+import jakarta.inject.Named;
 import java.util.stream.Stream;
 
 @ApplicationScoped @Slf4j

@@ -8,7 +8,7 @@ import de.evoal.optimisation.api.model.OptimisationFunctionDecorator;
 import de.evoal.surrogate.adaption.interval.model.PredictiveErrorData;
 import org.apache.commons.math3.util.Pair;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 import java.util.List;
 
 public abstract class AbstractFitnessAdjustedPredicted extends OptimisationFunctionDecorator {

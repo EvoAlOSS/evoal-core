@@ -4,8 +4,8 @@ import de.evoal.core.api.cdi.Application;
 import de.evoal.core.api.cdi.BeanFactory;
 import de.evoal.core.api.cdi.MainClass;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 
 import de.evoal.core.api.dynamic.EAnnotationHelper;
 import de.evoal.core.api.ecore.Space;

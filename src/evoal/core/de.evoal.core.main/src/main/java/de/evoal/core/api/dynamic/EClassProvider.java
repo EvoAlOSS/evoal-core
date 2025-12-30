@@ -19,7 +19,7 @@ import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.*;
 import org.eclipse.emf.ecore.util.Diagnostician;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;

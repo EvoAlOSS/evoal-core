@@ -6,7 +6,7 @@ import de.evoal.pipeline.impl.internal.NamedPipeline;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 
-import javax.enterprise.context.Dependent;
+import jakarta.enterprise.context.Dependent;
 import java.util.Collection;
 import java.util.Collections;
 

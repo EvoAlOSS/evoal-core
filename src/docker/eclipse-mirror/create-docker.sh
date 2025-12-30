@@ -1,2 +1,2 @@
-docker build -t gitlab.informatik.uni-bremen.de:5005/evoal/source/evoal-core/evoal/eclipse-mirror:2022-12 .
-#docker push gitlab.informatik.uni-bremen.de:5005/evoal/source/evoal-core/evoal/eclipse-mirror:2022-12
+docker build --platform linux/amd64 -t gitlab.informatik.uni-bremen.de:5005/evoal/source/evoal-core/evoal/eclipse-mirror:2025-12 .
+docker push --platform linux/amd64 gitlab.informatik.uni-bremen.de:5005/evoal/source/evoal-core/evoal/eclipse-mirror:2025-12

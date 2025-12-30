@@ -4,12 +4,12 @@ import de.evoal.optimisation.api.constraints.model.Constraint;
 import de.evoal.optimisation.api.constraints.strategies.CalculationResult;
 import de.evoal.optimisation.api.constraints.calculation.CalculationStrategy;
 import de.evoal.core.api.properties.Properties;
-import javax.enterprise.context.Dependent;
+import jakarta.enterprise.context.Dependent;
 
 import de.evoal.languages.model.base.expressions.Instance;
 import lombok.NonNull;
 
-import javax.inject.Named;
+import jakarta.inject.Named;
 
 @Dependent
 @Named("de.evoal.optimisation.ea.optimisation.normal-calculation")

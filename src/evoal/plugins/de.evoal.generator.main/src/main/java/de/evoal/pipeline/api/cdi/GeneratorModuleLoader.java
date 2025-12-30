@@ -17,7 +17,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 
-import javax.enterprise.context.Dependent;
+import jakarta.enterprise.context.Dependent;
 import java.io.File;
 import java.util.Optional;
 

@@ -5,8 +5,8 @@ import de.evoal.surrogate.smile.svr.AbstractKernelLerner;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 
-import javax.enterprise.context.Dependent;
-import javax.inject.Named;
+import jakarta.enterprise.context.Dependent;
+import jakarta.inject.Named;
 
 @Dependent
 @Named("de.evoal.surrogate.smile.ml.pearson-svr-learner")

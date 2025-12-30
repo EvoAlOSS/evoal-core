@@ -3,8 +3,8 @@ module de.evoal.surrogate.adaption {
 
     requires org.slf4j;
 
-    requires jakarta.inject.api;
-    requires jakarta.enterprise.cdi.api;
+    requires jakarta.inject;
+    requires jakarta.cdi;
 
     requires smile.base;
     requires commons.math3;

@@ -12,8 +12,8 @@ import de.evoal.core.api.utils.Requirements;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
-import javax.enterprise.context.Dependent;
-import javax.inject.Named;
+import jakarta.enterprise.context.Dependent;
+import jakarta.inject.Named;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;

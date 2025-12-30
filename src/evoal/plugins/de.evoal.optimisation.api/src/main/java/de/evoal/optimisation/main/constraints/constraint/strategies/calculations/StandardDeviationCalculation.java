@@ -8,7 +8,7 @@ import de.evoal.optimisation.api.constraints.calculation.CalculationStrategy;
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.properties.PropertySpecification;
-import javax.enterprise.context.Dependent;
+import jakarta.enterprise.context.Dependent;
 
 import de.evoal.core.api.utils.ArithmeticOperations;
 import de.evoal.optimisation.main.constraints.deviation.model.Deviations;
@@ -16,8 +16,8 @@ import de.evoal.languages.model.base.expressions.Instance;
 import lombok.NonNull;
 import org.apache.commons.math3.util.Pair;
 
-import javax.inject.Inject;
-import javax.inject.Named;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 import java.util.*;
 import java.util.stream.Collectors;
 

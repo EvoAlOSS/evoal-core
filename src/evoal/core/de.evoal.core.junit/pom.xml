@@ -22,7 +22,7 @@
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext</artifactId>
-			<version>2.29.1</version>
+			<version>${xtext.version}</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
@@ -133,7 +133,7 @@
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-junit-jupiter</artifactId>
-			<version>5.3.1</version>
+			<version>${mockito.version}</version>
 			<scope>test</scope>
 		</dependency>
 

@@ -12,10 +12,10 @@ import io.jenetics.*;
 import io.jenetics.ext.moea.NSGA2Selector;
 import lombok.extern.slf4j.Slf4j;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Produces;
-import javax.inject.Inject;
-import javax.inject.Named;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.inject.Produces;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 @ApplicationScoped
 @Slf4j

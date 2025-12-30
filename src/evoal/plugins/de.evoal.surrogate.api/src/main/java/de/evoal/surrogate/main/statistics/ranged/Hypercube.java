@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import smile.math.matrix.Matrix;
+import smile.tensor.DenseMatrix;
+import smile.tensor.Matrix;
 
 import de.evoal.core.api.properties.Properties;
 import de.evoal.optimisation.api.correlations.Range;
+import smile.tensor.ScalarType;
 
 public class Hypercube {
 	private final int dimensions;
@@ -51,12 +53,12 @@ public class Hypercube {
 		}
 	}
 	
-	public Matrix computeCovarianceMatrix(){
+	public DenseMatrix computeCovarianceMatrix(){
 		final int dimensions = this.dimensions;
         final int dataSize = data.size();
 
         if(dataSize == 0) {
-        	return new Matrix(dimensions, dimensions);
+			return DenseMatrix.zeros(ScalarType.Float64, dimensions, dimensions);
 		}
 
         final double [] means = new double[dimensions];
@@ -67,7 +69,7 @@ public class Hypercube {
         }
 
 
-        final Matrix covarianceMatrix = new Matrix(dimensions, dimensions);
+        final DenseMatrix covarianceMatrix = DenseMatrix.zeros(ScalarType.Float64, dimensions, dimensions);
         for(int x = 0; x < dimensions; ++x) {
             for(int y = 0; y < dimensions; ++y) {
                 double value = 0.0;
@@ -83,12 +85,12 @@ public class Hypercube {
 	}
 	
 	public double computeSquaredDistanceToCovarianceMatrix(Hypercube other) {
-		Matrix otherCovariance = other.computeCovarianceMatrix();
-		Matrix thisCovariance = this.computeCovarianceMatrix();
-		
-		Matrix difference = thisCovariance.sub(otherCovariance); 
-		difference.mul(difference);
-		return difference.sum();
+		final DenseMatrix otherCovariance = other.computeCovarianceMatrix();
+		final DenseMatrix thisCovariance = this.computeCovarianceMatrix();
+
+		final DenseMatrix difference = thisCovariance.sub(otherCovariance);
+		final DenseMatrix squared = difference.mm(difference);
+		return squared.colSums().sum();
 		
 	}
 	

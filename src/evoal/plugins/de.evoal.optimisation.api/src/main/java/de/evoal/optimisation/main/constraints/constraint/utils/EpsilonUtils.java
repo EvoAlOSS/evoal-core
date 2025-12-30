@@ -8,7 +8,7 @@ import de.evoal.core.api.properties.PropertySpecification;
 import de.evoal.optimisation.api.constraints.model.Constraint;
 import de.evoal.optimisation.api.constraints.model.ConstraintType;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 import java.util.*;
 import java.util.function.BiFunction;
 

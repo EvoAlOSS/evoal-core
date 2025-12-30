@@ -12,11 +12,11 @@ import de.evoal.optimisation.api.model.OptimisationFunction;
 import de.evoal.optimisation.api.model.OptimisationValueComparator;
 import de.evoal.optimisation.main.producer.ConfigurationValueProducer;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.Dependent;
-import javax.enterprise.inject.Produces;
-import javax.enterprise.inject.spi.InjectionPoint;
-import javax.inject.Inject;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.Dependent;
+import jakarta.enterprise.inject.Produces;
+import jakarta.enterprise.inject.spi.InjectionPoint;
+import jakarta.inject.Inject;
 
 @ApplicationScoped
 public class OptimisationComponentProducer {

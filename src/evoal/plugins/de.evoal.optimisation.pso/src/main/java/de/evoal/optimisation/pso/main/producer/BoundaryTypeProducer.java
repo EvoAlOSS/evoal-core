@@ -5,11 +5,11 @@ import de.evoal.languages.model.base.definitions.EnumLiteralDefinition;
 import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
 import de.evoal.optimisation.pso.api.BoundaryType;
 import de.evoal.optimisation.pso.main.impl.NeighborhoodTopology;
+import jakarta.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Produces;
-import javax.inject.Singleton;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.inject.Produces;
 
 @Slf4j
 @ApplicationScoped
