@@ -35,7 +35,7 @@ for EXAMPLE in *; do
     pushd $EXAMPLE
     for SCRIPT in *sh; do
         echo "Executing example: $SH $SCRIPT"
-        $SH $SCRIPT
+        $SHELL $SCRIPT
     done
     popd
 done
