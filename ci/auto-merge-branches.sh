@@ -3,9 +3,7 @@
 SOURCE_BRANCH=$1
 TARGET_BRANCH=$2
 
-#TOKEN    = os.environ.get('PROJECT_ACCESS_TOKEN')
 BASE_URL="${CI_SERVER_PROTOCOL}://$CI_SERVER_HOST/api/v4/projects/$CI_PROJECT_ID/"
-
 
 echo "Creating a merge request to merge '$SOURCE_BRANCH' into '$TARGET_BRANCH'"
 
@@ -18,6 +16,20 @@ SOURCE_COMMIT=`curl -s -X GET "$BASE_URL/repository/branches/${SOURCE_BRANCH}" \
                     --header "PRIVATE-TOKEN:${PROJECT_ACCESS_TOKEN}" | jq .commit.id`
 TARGET_COMMIT=`curl -s -X GET "$BASE_URL/repository/branches/${TARGET_BRANCH}" \
                     --header "PRIVATE-TOKEN:${PROJECT_ACCESS_TOKEN}" | jq .commit.id`
+
+if [[ "$SOURCE_COMMIT" = "null" ]]; then
+    echo "  !!! Could not find source commit id."
+    exit 1
+else
+    echo "    source commit id: ${SOURCE_COMMIT}"
+fi
+
+if [[ "$TARGET_COMMIT" = "null" ]]; then
+    echo "  !!! Could not find target commit id."
+    exit 1
+else
+    echo "    target commit id: ${TARGET_COMMIT}"
+fi
 
 if [ "$SOURCE_COMMIT" = "$TARGET_COMMIT" ]; then
   echo "    No difference found. Quitting."
