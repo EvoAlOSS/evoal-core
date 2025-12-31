@@ -14,12 +14,11 @@ if [ ! -e ${JACOCO_JAR} ]; then
   curl -o ${JACOCO_JAR} https://repo1.maven.org/maven2/org/jacoco/org.jacoco.agent/0.8.14/org.jacoco.agent-0.8.14-runtime.jar
 fi
 
+echo "Changing into examples folder"
 pushd evoal/examples
-
 
 export EVOAL_VM=-javaagent:${JACOCO_JAR}=dumponexit=true
 
-#set +x +e
 for EXAMPLE in *; do
     if [ ! -d $EXAMPLE ]; then
       continue
@@ -35,8 +34,8 @@ for EXAMPLE in *; do
 
     pushd $EXAMPLE
     for SCRIPT in *sh; do
-        echo "Executing example: $SCRIPT"
-        ./$SCRIPT
+        echo "Executing example: $SH $SCRIPT"
+        $SH $SCRIPT
     done
     popd
 done
