@@ -57,7 +57,7 @@ variables:
 
   # custom docker image for building our Java stuff
   ECLIPSE_IMAGE: gitlab.informatik.uni-bremen.de:5005/evoal/source/evoal-core/evoal/eclipse-mirror:2025-12
-  EVOAL_IMAGE: gitlab.informatik.uni-bremen.de:5005/evoal/source/evoal-core/evoal/maven-with-bash:3.9.12
+  EVOAL_IMAGE: gitlab.informatik.uni-bremen.de:5005/evoal/source/evoal-core/evoal/maven-with-bash:3.9.15
   SECURE_LOG_LEVEL: "debug"
 
   ######################
@@ -376,7 +376,6 @@ evoal:unit:
     - job: "dsl:compile-and-install"
       artifacts: true
   script:
-#    - mvn $MAVEN_CLI_OPTS -f $EVOAL_POM -Dbranch=$CI_COMMIT_REF_NAME -DskipTests package
     - mvn $MAVEN_CLI_OPTS -f $EVOAL_POM -Dbranch=$CI_COMMIT_REF_NAME -Pjacoco verify package
     - /bin/bash ci/create-release.sh
     - /bin/bash ci/regression-coverage.sh

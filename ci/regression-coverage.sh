@@ -34,8 +34,8 @@ for EXAMPLE in *; do
 
     pushd $EXAMPLE
     for SCRIPT in *sh; do
-        echo "Executing example: $SH $SCRIPT"
-        $SHELL $SCRIPT
+        echo "Executing example: /bin/bash $SCRIPT"
+        /bin/bash $SCRIPT
     done
     popd
 done

@@ -72,26 +72,32 @@ while True:
         break
 
     jobs = [job for job in jobs if not job['tag']] # ignore tags
-    jobs = [job for job in jobs if job['ref'][0].isdigit()]  # keep feature branches
+    #jobs = [job for job in jobs if job['ref'][0].isdigit()]  # keep feature branches
     jobs = [job for job in jobs if job['artifacts']] # keep only jobs with artifacts
 
-    tmp = jobs
+    loaded = jobs
     jobs = []
-    for job in tmp:
-        if job['ref'] not in branches:
-             print("  '%s' -- tag '%s' is already deleted", (job['id'], job['ref'])) 
-             jobs.append(job)
+    for job in loaded:
+        #print(job)
+        if job['erased_at']:
+            print("  '%s' -- '%s': job already deleted." % (job['ref'], job['name']))
+        elif job['ref'] not in branches:
+            print("  '%s' -- '%s': branch already deleted" % (job['ref'], job['name']))
+            jobs.append(job)
+            pass
         elif (job['ref'], job['name']) not in existing:
             # keep newest jobs by  
+            print("  '%s' --> '%s': not yet seen" % (job['ref'], job['name'])) 
             existing.add((job['ref'], job['name']))
         else:
-            print("  '%s' -- '%s/%s' is present in a newer build", (job['id'], job['ref'], job['name'])) 
+            print("  '%s' -- '%s': is present in a newer build" % (job['ref'], job['name'])) 
             jobs.append(job)
 
     jobs_to_delete += jobs
     job_page+=1
 
 print("Found %s jobs to delete" % (len(jobs_to_delete),))
+sys.exit(1)
 for job in jobs_to_delete:
     print("  deleting artifacts of job %s" % (job['id'],))
     connection.request("DELETE", BASE_URL + "jobs/%s/artifacts" % (job['id'],), headers = headers)
