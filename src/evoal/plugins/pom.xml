@@ -26,7 +26,9 @@
 
 		<module>de.evoal.surrogate.api</module>
 		<module>de.evoal.surrogate.simple</module>
-		<module>de.evoal.surrogate.smile</module>
+        <module>de.evoal.surrogate.knn</module>
+<!--        <module>de.evoal.surrogate.randomforest</module>-->
+        <module>de.evoal.surrogate.smile</module>
         <module>de.evoal.surrogate.adaption</module>
 	</modules>
 

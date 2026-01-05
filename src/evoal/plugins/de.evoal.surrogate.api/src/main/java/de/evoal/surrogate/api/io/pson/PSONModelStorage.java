@@ -5,8 +5,10 @@ import de.evoal.core.api.ecore.Space;
 import de.evoal.languages.model.pipeline.PipelineDefinition;
 import de.evoal.pipeline.api.cdi.DefinitionModuleLoader;
 import de.evoal.surrogate.api.io.ModelStorage;
+import de.evoal.surrogate.main.jackson.ParameterSerializer;
 import de.evoal.surrogate.main.jackson.PipelineDeserializer;
 import de.evoal.surrogate.main.jackson.PipelineSerializer;
+import de.evoal.surrogate.main.jackson.ParameterDeserializer;
 import lombok.Getter;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -46,9 +48,9 @@ public class PSONModelStorage implements ModelStorage {
     public void store(final SurrogateConfiguration configuration) {
         log.info("Storing predictive configuration from {}.", file);
 
-        final PipelineSerializer serializer = new PipelineSerializer();
         final SimpleModule module = new SimpleModule();
-        module.addSerializer(PipelineDefinition.class, serializer);
+        module.addSerializer(PipelineDefinition.class, new PipelineSerializer());
+        module.addSerializer(Parameter.class, new ParameterSerializer());
 
         new ObjectMapper()
                 .registerModule(module)
@@ -80,9 +82,14 @@ public class PSONModelStorage implements ModelStorage {
     public void load() {
         try(final InputStream is = new FileInputStream(file)) {
             final Space functionSpace = inputSpace.merge(outputSpace);
-            final PipelineDeserializer serializer = new PipelineDeserializer(loader, functionSpace);
+            final PipelineDeserializer pipelineDeserializer = new PipelineDeserializer(loader, functionSpace);
+            final ParameterDeserializer parameterDeserializer = new ParameterDeserializer();
+            parameterDeserializer.setSourceSpace(inputSpace);
+            parameterDeserializer.setTargetSpace(outputSpace);
+
             final SimpleModule module = new SimpleModule();
-            module.addDeserializer(PipelineDefinition.class, serializer);
+            module.addDeserializer(PipelineDefinition.class, pipelineDeserializer);
+            module.addDeserializer(Parameter.class, parameterDeserializer);
 
             final SurrogateConfiguration configuration =
                     new ObjectMapper()

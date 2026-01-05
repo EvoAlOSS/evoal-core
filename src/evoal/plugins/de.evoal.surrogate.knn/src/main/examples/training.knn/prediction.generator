@@ -1,0 +1,64 @@
+import "definitions" from 'de.evoal.core.math';
+import "definitions" from 'de.evoal.pipeline.base';
+import "definitions" from 'de.evoal.pipeline.benchmarks';
+import "definitions" from 'de.evoal.pipeline.distributions';
+import "definitions" from 'de.evoal.surrogate.pipeline';
+
+import "data" from surrogate;
+
+
+module prediction {
+	/**
+	 * Introduce a simple pipeline that generates some test data using
+	 *   the generated KNN model.
+	 */
+	pipeline 'main-pipeline' [
+		/**
+		 * First, we generate some normally distributed data.
+		 */
+		step {
+			component 'distribution-based-data' {
+				distributions := [
+					'normal-distribution' {
+						'μ' := 0.0;
+						'σ' := 5.12;
+					},
+					'normal-distribution' {
+						'μ' := 0.0;
+						'σ' := 5.12;
+					},
+					'normal-distribution' {
+						'μ' := 0.0;
+						'σ' := 5.12;
+					},
+					'normal-distribution' {
+						'μ' := 0.0;
+						'σ' := 5.12;
+					},
+					'normal-distribution' {
+						'μ' := 0.0;
+						'σ' := 5.12;
+					},
+					'normal-distribution' {
+						'μ' := 0.0;
+						'σ' := 5.12;
+					}
+				];
+			}
+			
+			writes [data 'x:0', data 'x:1', data 'x:2', data 'x:3', data 'x:4', data 'x:5'];
+		}
+	    step {
+	        component 'surrogate' {
+	            'model-file' := "knn.pson";
+	        }
+	
+	        reads [data 'x:0', data 'x:1', data 'x:2', data 'x:3', data 'x:4', data 'x:5'];
+	        writes [data 'y:0'];
+	     }
+	]
+	
+	begin
+		write "generated.json" with 1000 samples from executing [ 'main-pipeline'];
+	end
+}

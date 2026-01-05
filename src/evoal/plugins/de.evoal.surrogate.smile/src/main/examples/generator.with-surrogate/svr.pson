@@ -1,85 +1,74 @@
 {
   "inputFeatures" : [ "x:0" ],
-  "name" : "de.evoal.surrogate.smile.ml.linear-svr",
+  "name" : "de.evoal.surrogate.smile.ml.epsilon-svr",
   "outputFeatures" : [ "y:0" ],
   "state" : [ {
-    "name" : "weights",
+    "name" : "model",
     "value" : {
-      "type" : "array(double)",
-      "size" : 12,
-      "value" : [ -0.1, -0.1, -0.1, 0.1, -0.1, -0.1, -0.1, 0.1, 0.1, 0.1, 0.1, 0.1 ]
-    }
-  }, {
-    "name" : "intercept",
-    "value" : {
-      "type" : "double",
-      "value" : -0.15573073471322701
-    }
-  }, {
-    "name" : "instances",
-    "value" : {
-      "type" : "array(array(double))",
-      "size-1" : 12,
-      "size-2" : 1,
-      "value" : [ 0.17459330006558169, 0.09533590213401227, 0.16643981079824513, 1.6277402280982993, 0.08381737799939828, 0.10759983834987694, 0.1013896078724885, -2.500344372261837, 1.8345969321754696, -2.0008917893289686, -1.6236595713864053, 2.0796236464073345 ]
-    }
-  }, {
-    "name" : "kernel",
-    "value" : {
-      "type" : "string",
-      "value" : "de.evoal.surrogate.smile.ml.linear-svr"
-    }
-  }, {
-    "name" : "σ",
-    "value" : {
-      "type" : "double",
-      "value" : 3.0
-    }
-  }, {
-    "name" : "soft-margin",
-    "value" : {
-      "type" : "double",
-      "value" : 0.1
-    }
-  }, {
-    "name" : "ε",
-    "value" : {
-      "type" : "double",
-      "value" : 1.4
-    }
-  }, {
-    "name" : "tolerance",
-    "value" : {
-      "type" : "double",
-      "value" : 0.15
-    }
-  }, {
-    "name" : "kernel-source-means",
-    "value" : {
-      "type" : "array(double)",
-      "size" : 1,
-      "value" : [ -0.6103196010752969 ]
-    }
-  }, {
-    "name" : "kernel-source-sds",
-    "value" : {
-      "type" : "array(double)",
-      "size" : 1,
-      "value" : [ 5.470498144987709 ]
-    }
-  }, {
-    "name" : "kernel-target-means",
-    "value" : {
-      "type" : "array(double)",
-      "size" : 1,
-      "value" : [ 11.806350514646457 ]
-    }
-  }, {
-    "name" : "kernel-target-sds",
-    "value" : {
-      "type" : "array(double)",
-      "size" : 1,
-      "value" : [ 5.222154183635049 ]
+      "type" : "dict",
+      "normalization" : {
+        "type" : "dict",
+        "kernel-target-sds" : {
+          "type" : "array(double)",
+          "size" : 1,
+          "value" : [ 5.222154183635049 ]
+        },
+        "kernel-source-sds" : {
+          "type" : "array(double)",
+          "size" : 1,
+          "value" : [ 5.470498144987709 ]
+        },
+        "kernel-source-means" : {
+          "type" : "array(double)",
+          "size" : 1,
+          "value" : [ -0.6103196010752969 ]
+        },
+        "kernel-target-means" : {
+          "type" : "array(double)",
+          "size" : 1,
+          "value" : [ 11.806350514646457 ]
+        }
+      },
+      "regression" : {
+        "type" : "dict",
+        "instances" : {
+          "type" : "array(array(double))",
+          "size-1" : 12,
+          "size-2" : 1,
+          "value" : [ 0.17459330006558169, 0.09533590213401227, 0.16643981079824513, 1.6277402280982993, 0.08381737799939828, 0.10759983834987694, 0.1013896078724885, -2.500344372261837, 1.8345969321754696, -2.0008917893289686, -1.6236595713864053, 2.0796236464073345 ]
+        },
+        "intercept" : {
+          "type" : "double",
+          "value" : -0.15573073471322701
+        },
+        "weights" : {
+          "type" : "array(double)",
+          "size" : 12,
+          "value" : [ -0.1, -0.1, -0.1, 0.1, -0.1, -0.1, -0.1, 0.1, 0.1, 0.1, 0.1, 0.1 ]
+        }
+      },
+      "parameters" : {
+        "type" : "dict",
+        "soft-margin" : {
+          "type" : "double",
+          "value" : 0.1
+        },
+        "ε" : {
+          "type" : "double",
+          "value" : 1.4
+        },
+        "kernel" : {
+          "type" : "dict",
+          "_type" : {
+            "type" : "string",
+            "value" : "de.evoal.surrogate.smile.ml.linear"
+          }
+        },
+        "tolerance" : {
+          "type" : "double",
+          "value" : 0.15
+        }
+      }
     }
   } ],
   "predictionPipeline" : {
@@ -109,7 +98,7 @@
       "name" : "r²",
       "value" : {
         "type" : "double",
-        "value" : -0.1000584036880574
+        "value" : 0.010522211245244661
       }
     } ]
   }

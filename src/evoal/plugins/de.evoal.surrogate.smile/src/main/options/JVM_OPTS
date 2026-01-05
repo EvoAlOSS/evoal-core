@@ -1,0 +1,1 @@
+JVM_OPTS=( --enable-native-access=smile.base )

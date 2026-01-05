@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <!-- Plugin dependency for configuring maven properly -->
+  <parent>
+    <groupId>de.evoal</groupId>
+    <artifactId>core.plugin</artifactId>
+    <version>${revision}</version>
+  </parent>
+
+  <!-- Replace settings to your needs -->
+  <artifactId>surrogate.knn</artifactId>
+  <name>EvoAl - Plugins - Surrogate - KNN</name>
+
+  <dependencies>
+    <dependency>
+      <groupId>de.evoal</groupId>
+      <artifactId>surrogate.api</artifactId>
+      <version>${project.parent.version}</version>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
+</project>

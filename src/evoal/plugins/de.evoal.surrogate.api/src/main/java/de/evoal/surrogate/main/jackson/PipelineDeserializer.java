@@ -14,6 +14,7 @@ import de.evoal.pipeline.api.cdi.DefinitionModuleLoader;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
 import java.io.IOException;
@@ -59,8 +60,7 @@ public class PipelineDeserializer extends StdDeserializer<PipelineDefinition> {
             case "instance" -> getInstance(parser);
 
             default -> {
-                System.err.println("Unsupported type: " + type);
-                throw new IllegalArgumentException();
+                throw new IllegalArgumentException("Unsupported type: " + type + ".");
             }
         };
 
@@ -92,7 +92,7 @@ public class PipelineDeserializer extends StdDeserializer<PipelineDefinition> {
 
         assertArrayStart(parser);
 
-        AtomicInteger counter = new AtomicInteger();
+        //AtomicInteger counter = new AtomicInteger();
         while(!parser.hasToken(JsonToken.END_ARRAY)) {
             //log.info("[PD{}]   reading child number {}.", pdLevel, counter.getAndIncrement());
             result.getSteps()
@@ -195,13 +195,14 @@ public class PipelineDeserializer extends StdDeserializer<PipelineDefinition> {
 
     private ClassDefinition findClassDefinition(final String name) {
         final int index = name.lastIndexOf(".");
-        String packageName = name.substring(0, index);
+        final String packageName = name.substring(0, index);
         final String className = name.substring(index + 1);
 
         log.info("Searching definition of class {} in package {}.", className, packageName);
 
-        packageName = "classpath:/" + packageName.replace(".", "/") + ".dl";
-        final DefinitionModule module = loader.load(packageName);
+        final String uri = "classpath:/" + packageName.replace(".", "/") + ".dl";
+        final URI modelURI = URI.createURI(uri);
+        final DefinitionModule module = loader.load(modelURI);
 
         return module.getTypes()
                 .stream()

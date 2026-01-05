@@ -43,7 +43,7 @@ public class RMSECalculator extends SurrogateInformationCalculator {
 					functionData.function()
 							.apply(source, actual);
 
-					for(final EStructuralFeature feature : actual.eClass().getEAllStructuralFeatures()) {
+					for(final EStructuralFeature feature : outputSpace) {
 						data.get(feature)
 							.add(Math.pow(expected.eGetAsDouble(feature) - actual.eGetAsDouble(feature), 2.0));
 					}

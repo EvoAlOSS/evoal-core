@@ -18,11 +18,12 @@ module training {
 	
 	specify preparation steps []
 
-	specify model 'linear-svr' {
-			'ε' := 1.4;
-			'σ' := 3.0;
-			'soft-margin' := 0.1;
-			tolerance := 0.15;
+	specify model 'epsilon-svr' {
+		'ε' := 1.4;
+		'soft-margin' := 0.1;
+		tolerance := 0.15;
+		
+		'kernel' := linear {};
 	}
 
 			

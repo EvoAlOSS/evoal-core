@@ -5,51 +5,443 @@ import "definitions" from de.evoal.surrogate.ml;
  * Module containing support vector regression-based surrogat models.
  */
 module de.evoal.surrogate.smile.ml {
-	@MultiVariateConstraint{ 'expression'  := 'soft-margin' < tolerance; }
-	abstract type 'epsilon-svr' extends surrogate {
+	/**
+	 * Base type for all supported Mercer kernels (used by SVR and Gaussian
+	 *   Processes).
+	 */
+	abstract type kernel {
+	}
+	
+	/**
+	 * A linear kernel
+	 */
+	type linear extends kernel {
+	}
+
+	/**
+	 * The polynomial kernel: 
+	 * 
+	 * <math class="tml-display" style="display:block math;">
+	 *   <mrow>
+	 *     <mi>k</mi>
+	 *     <mo form="prefix" stretchy="false">(</mo>
+	 *     <mi>u</mi>
+	 *     <mo separator="true">,</mo>
+	 *     <mi>v</mi>
+	 *     <mo form="postfix" stretchy="false">)</mo>
+	 *     <mo>=</mo>
+	 *     <mo form="prefix" stretchy="false">(</mo>
+	 *     <mi>γ</mi>
+ 	 *     <msup>
+	 *       <mi>u</mi>
+	 *       <mi class="tml-sml-pad">T</mi>
+	 *     </msup>
+	 *     <mi>v</mi>
+	 *     <mo>−</mo>
+	 *     <mi>λ</mi>
+	 *     <msup>
+	 *       <mo form="postfix" stretchy="false">)</mo>
+	 *       <mi>d</mi>
+	 *     </msup>
+	 *   </mrow>
+	 * </math> <br/>
+     * where γ is the scale of the used inner product, λ the offset of the used
+     *   inner product, and d the order of the polynomial kernel.
+	 */
+	type polynomial extends kernel {
 		/**
-	     * Some totally <b>accurate</b> description of a very soft margin.
-	     */
-		'soft-margin'   : real;
-		tolerance       : real;
-		'ε'             : real;
-	}
-	
-	type  'gaussian-svr' extends 'epsilon-svr' {
-		'σ'             : real;
-	}
-	
-	type 'hellinger-svr' extends 'epsilon-svr' {
-		'σ'             : real;
-	}
-	
-	type 'hyperbolic-tangent-svr' extends 'epsilon-svr' {
-		'σ'             : real;
-		scale           : real;
-		offset          : real;
-	}
-	
-	type 'laplacian-svr' extends 'epsilon-svr' {
-		'σ'             : real;
-	}
-	
-	type 'linear-svr' extends 'epsilon-svr' {
-		'σ'             : real;
-	}
-	
-	type 'pearson-svr' extends 'epsilon-svr' {
-		'σ'             : real;
-		'ω'             : real;
-	}
-	
-	type 'polynomial-svr' extends 'epsilon-svr' {
-		'σ'             : real;
+		 * Order of the polynomial.
+		 */
 		'degree'        : int;
+		
+		/**
+		 * Scale of the inner product.
+		 */
 		'scale'         : real;
+		
+		/**
+		 * Offset of the inner product.
+		 */
 		'offset'        : real;
 	}
 	
-	type 'thin-plate-spline-svr' extends 'epsilon-svr' {
+	/**
+	 * Gaussian kernel, also referred as RBF kernel or squared exponential kernel:
+	 * <math class="tml-display" style="display:block math;">
+	 *   <mrow>
+	 *     <mi>k</mi>
+	 *     <mo form="prefix" stretchy="false">(</mo>
+	 *     <mi>u</mi>
+	 *     <mo separator="true">,</mo>
+	 *     <mi>v</mi>
+	 *     <mo form="postfix" stretchy="false">)</mo>
+	 *     <mo>=</mo>
+	 *     <mi>e</mi>
+	 *     <mi>x</mi>
+	 *     <mi>p</mi>
+	 *     <mo form="prefix" stretchy="false">(</mo>
+	 *     <mo form="prefix" stretchy="false">−</mo>
+	 *     <mi>|</mi>
+	 *     <mi>|</mi>
+	 *     <mi>u</mi>
+	 *     <mo>−</mo>
+	 *     <mi>v</mi>
+	 *     <mi>|</mi>
+	 *     <msup>
+	 *       <mi>|</mi>
+	 *       <mn>2</mn>
+	 *     </msup>
+	 *     <mi>/</mi>
+	 *     <mn>2</mn>
+	 *     <msup>
+	 *       <mi>σ</mi>
+	 *       <mn>2</mn>
+	 *     </msup>
+	 *     <mo form="postfix" stretchy="false">)</mo>
+	 *   </mrow>
+	 * </math><br/>
+	 * 
+	 * where σ > 0 is the scale parameter of the kernel.<br/>
+	 * The Gaussian kernel is a good choice for a great deal of applications, although
+	 *   sometimes it is remarked as being overused.
+	 */
+	type  'gaussian' extends kernel {
+		/**
+		 * The length scale of kernel.
+		 */
+		@LowerBoundary{ boundary := 0.0; inclusive := false; }
 		'σ'             : real;
 	}
+	
+	/**
+	 * The class of Matérn kernels is a generalization of the Gaussian/RBF. It
+	 *   has an additional parameter ν, which controls the smoothness of the
+	 *   kernel function. The smaller ν, the less smooth the approximated function
+	 *   is. As ν -> inf, the kernel becomes equivalent to the Gaussian/RBF kernel.
+	 *   When ν = 1/2, the kernel becomes identical to the Laplacian kernel. The
+	 *   Matérn kernel become especially simple when ν is half-integer. Important
+     *   intermediate values are 3/2 (once differentiable functions) and 5/2 (twice
+     *   differentiable functions).
+	 */
+	type 'matérn' extends kernel {
+		/**
+		 * length scale of kernel.
+		 */
+		'σ'				: real;
+		
+		/**
+		 * The smoothness of the kernel function.<br/>
+		 * 
+		 * TODO: Only 0.5, 1.5, 2.5 and Inf are accepted.
+		 */
+	    'ν'				: real;
+	}
+	
+	/**
+	 * Laplacian kernel, also referred as exponential kernel:
+	 * <math class="tml-display" style="display:block math;">
+	 *   <mrow>
+	 *     <mi>k</mi>
+	 *     <mo form="prefix" stretchy="false">(</mo>
+	 *     <mi>u</mi>
+	 *     <mo separator="true">,</mo>
+	 *     <mi>v</mi>
+	 *     <mo form="postfix" stretchy="false">)</mo>
+	 *     <mo>=</mo>
+	 *     <mi>e</mi>
+	 *     <mi>x</mi>
+	 *     <mi>p</mi>
+	 *     <mo form="prefix" stretchy="false">(</mo>
+	 *     <mo form="prefix" stretchy="false">−</mo>
+	 *     <mi>|</mi>
+	 *     <mi>|</mi>
+	 *     <mi>u</mi>
+	 *     <mo>−</mo>
+	 *     <mi>v</mi>
+	 *     <mi>|</mi>
+	 *     <mi>|</mi>
+	 *     <mi>/</mi>
+	 *     <mi>σ</mi>
+	 *     <mo form="postfix" stretchy="false">)</mo>
+	 *   </mrow>
+	 * </math><br/>
+	 * where σ > 0 is the scale parameter of the kernel.
+	 */
+	type laplacian extends kernel {
+		/**
+		 * The length scale of kernel.
+		 */
+		@LowerBoundary{ boundary := 0.0; inclusive := false; }
+		'σ'             : real;		
+	}
+	
+	/**
+	 * The hyperbolic tangent kernel:
+	 * <math class="tml-display" style="display:block math;">
+	 *   <mrow>
+	 *     <mi>k</mi>
+	 *     <mo form="prefix" stretchy="false">(</mo>
+	 *     <mi>u</mi>
+	 *     <mo separator="true">,</mo>
+	 *     <mi>v</mi>
+	 *     <mo form="postfix" stretchy="false">)</mo>
+	 *     <mo>=</mo>
+	 *     <mi>t</mi>
+	 *     <mi>a</mi>
+	 *     <mi>n</mi>
+ 	 *    <mi>h</mi>
+	 *     <mo form="prefix" stretchy="false">(</mo>
+	 *     <mi>γ</mi>
+	 *     <msup>
+	 *       <mi>u</mi>
+	 *       <mi class="tml-sml-pad">T</mi>
+	 *     </msup>
+	 *     <mi>v</mi>
+	 *     <mo>−</mo>
+	 *     <mi>λ</mi>
+	 *     <mo form="postfix" stretchy="false">)</mo>
+	 *   </mrow>
+	 * </math><br/>
+	 * 
+	 * where γ is the scale of the used inner product and λ is the offset of the
+	 * used inner product. If the offset is negative the likelihood of obtaining
+	 * a kernel matrix that is not positive definite is much higher (since then
+	 * even some diagonal elements may be negative), hence if this kernel has to
+	 * be used, the offset should always be positive. Note, however, that this is
+	 * no guarantee that the kernel will be positive.<br/>
+	 * The hyperbolic tangent kernel was quite popular for support vector machines
+	 * due to its origin from neural networks. However, it should be used carefully
+	 * since the kernel matrix may not be positive semi-definite. Besides, it was
+	 * reported the hyperbolic tangent kernel is not better than the Gaussian kernel
+	 * in general.
+	 */
+	type 'hyperbolic-tangent' extends kernel {
+		/**
+		 * The scale parameter.
+		 */
+		scale           : real;
+		
+		/**
+		 * The offset parameter 
+		 */
+		offset          : real;		
+	}
+	
+	/**
+	 * Pearson VII universal kernel. The Pearson VII function is often used for curve
+     *   fitting of X-ray diffraction scans and single bands in infrared spectra.<br/>
+     * <br/>
+	 * References<br/>
+	 * B. Üstün, W.J. Melssen, and L. Buydens. Facilitating the Application of Support
+	 *   Vector Regression by Using a Universal Pearson VII Function Based Kernel, 2006.
+	 */
+	type 'pearson' extends 'kernel' {
+		
+		/**
+		 * Pearson width.
+		 */
+		'σ'             : real;
+
+		/**
+		 * The tailing factor of the peak.
+		 */
+		'ω'             : real;
+	}
+	
+	
+	/**
+	 * The Thin Plate Spline kernel:
+	 * <math class="tml-display" style="display:block math;">
+	 *   <mrow>
+	 *     <mi>k</mi>
+	 *     <mo form="prefix" stretchy="false">(</mo>
+	 *     <mi>u</mi>
+	 *     <mo separator="true">,</mo>
+	 *     <mi>v</mi>
+	 *     <mo form="postfix" stretchy="false">)</mo>
+	 *     <mo>=</mo>
+	 *     <mo form="prefix" stretchy="false">(</mo>
+	 *     <mi>|</mi>
+	 *     <mi>|</mi>
+	 *     <mi>u</mi>
+	 *     <mo>−</mo>
+	 *     <mi>v</mi>
+	 *     <mi>|</mi>
+	 *     <mi>|</mi>
+	 *     <mi>/</mi>
+	 *     <mi>σ</mi>
+	 *     <msup>
+	 *       <mo form="postfix" stretchy="false">)</mo>
+	 *       <mn>2</mn>
+	 *     </msup>
+	 *     <mi>l</mi>
+	 *     <mi>o</mi>
+	 *     <mi>g</mi>
+	 *     <mo form="prefix" stretchy="false">(</mo>
+	 *     <mi>|</mi>
+	 *     <mi>|</mi>
+	 *     <mi>u</mi>
+	 *     <mo>−</mo>
+	 *     <mi>v</mi>
+	 *     <mi>|</mi>
+	 *     <mi>|</mi>
+	 *     <mi>/</mi>
+	 *     <mi>σ</mi>
+	 *     <mo form="postfix" stretchy="false">)</mo>
+	 *   </mrow>
+	 * </math>
+	 * <br/>
+	 * where σ > 0 is the scale parameter of the kernel.
+	 */
+	type 'thin-plate-spline' extends kernel {
+		/**
+		 * The length scale of kernel.
+		 */
+		@LowerBoundary{ boundary := 0.0; inclusive := false; }
+		'σ'             : real;				
+	}
+
+	/**
+	 * The Hellinger kernel.<br/>
+	 * The Hellinger distance is used to quantify the similarity between two
+	 *   probability distributions. It is a type of f-divergence. The Hellinger
+	 *   distance 
+     * <math class="tml-display" style="display:block math;">
+     *   <mrow>
+     *     <mi>H</mi>
+     *     <mo form="prefix" stretchy="false">(</mo>
+     *     <mi>P</mi>
+     *     <mo separator="true">,</mo>
+     *     <mi>Q</mi>
+     *     <mo form="postfix" stretchy="false">)</mo>
+     *   </mrow>
+     * </math>
+	 *   on discrete distributions is equivalent to the Euclidean distance of the
+	 *   square root vectors. The Hellinger kernel is
+	 * <math class="tml-display" style="display:block math;">
+	 *   <mrow>
+	 *     <mn>1</mn>
+	 *     <mo>−</mo>
+	 *     <mi>H</mi>
+	 *     <mn>2</mn>
+	 *     <mo form="prefix" stretchy="false">(</mo>
+	 *     <mi>P</mi>
+	 *     <mo separator="true">,</mo>
+	 *     <mi>Q</mi>
+	 *     <mo form="postfix" stretchy="false">)</mo>
+	 *   </mrow>
+	 * </math>
+	 * , which is equivalent to the dot product of the square root vectors.
+	 */	
+	type hellinger extends kernel {
+	}
+	
+	/**
+	 * The sum kernel takes two kernels and combines them via k1(x, y) + k2(x, y)
+	 */
+	type sum extends kernel {
+		/**
+		 * The first kernel to combine
+		 */
+		'kernel-1' : instance kernel;
+
+		/**
+		 * The second kernel to combine
+		 */
+		'kernel-2' : instance kernel;
+	}
+
+	/**
+	 * The product kernel takes two kernels and combines them via k1(x, y) * k2(x, y)
+	 */
+	type product extends kernel {
+		/**
+		 * The first kernel to combine
+		 */
+		'kernel-1' : instance kernel;
+
+		/**
+		 * The second kernel to combine
+		 */
+		'kernel-2' : instance kernel;
+	}
+
+	/**
+	 * Epsilon support vector regression. Like SVMs for classification, the model
+	 *   produced by SVR depends only on a subset of the training data, because
+     *   the cost function ignores any training data close to the model prediction
+     *   (within a threshold ε).<br/>
+     * <br/>
+	 * References:<br/>
+	 * <ul>
+	 *   <li>A. J Smola and B. Scholkopf. A Tutorial on Support Vector Regression.</li>
+	 *   <li>Gary William Flake and Steve Lawrence. Efficient SVM Regression Training
+     *       with SMO.</li>
+	 *   <li>Christopher J. C. Burges. A Tutorial on Support Vector Machines for Pattern
+	 *       Recognition. Data Mining and Knowledge Discovery 2:121-167, 1998.</li>
+	 *   <li>John Platt. Sequential Minimal Optimization: A Fast Algorithm for Training
+     *       Support Vector Machines.</li>
+	 *   <li>Rong-En Fan, Pai-Hsuen, and Chih-Jen Lin. Working Set Selection Using Second
+     *       Order Information for Training Support Vector Machines. JMLR, 6:1889-1918, 2005.</li>
+	 *   <li>Antoine Bordes, Seyda Ertekin, Jason Weston and Leon Bottou. Fast Kernel
+	 *       Classifiers with Online and Active Learning, Journal of Machine Learning Research,
+     *      6:1579-1619, 2005.</li>
+	 *   <li>Tobias Glasmachers and Christian Igel. Second Order SMO Improves SVM Online and
+     *       Active Learning.</li>
+	 *   <li>Chih-Chung Chang and Chih-Jen Lin. LIBSVM: a Library for Support Vector Machines.</li>
+	 * </ul>
+	 */
+	@MultiVariateConstraint{ 'expression'  := 'soft-margin' < tolerance; }
+	type 'epsilon-svr' extends surrogate {
+		/**
+	     * The soft margin penalty parameter.
+	     */
+		'soft-margin'   : real;
+		
+		/**
+		 * The tolerance of convergence test.
+		 */
+		tolerance       : real;
+		
+		/**
+		 * The loss function error threshold
+		 */
+		'ε'             : real;
+
+		/**
+		 * The kernel function that is used.
+		 */
+		kernel			: instance kernel;
+	}
+
+    /**
+     * A Gaussian Process surrogate model.
+     */
+    type 'gaussian-process' extends surrogate {
+
+        /**
+         * The kernel function to be used.
+         */
+        'kernel' : instance kernel;
+
+        /**
+         * The noise level to be used.
+         */
+        'noise' : real;
+
+        /**
+         * Whether normalization should be applied.
+         */
+        'normalize' : boolean;
+
+        /**
+         * The tolerance parameters.
+         */
+        'tolerance' : real;
+
+        /**
+         * The number of iterations.
+         */
+        'iterations' : int;
+    }
 }

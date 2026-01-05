@@ -12,6 +12,7 @@ import de.evoal.pipeline.api.cdi.DefinitionModuleLoader;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
@@ -162,7 +163,7 @@ public class DefaultBehaviourInjector {
 
     private void injectReaderComponentIntoLearningPipeline(final MachineLearningModule mlm) {
         log.info("Injecting reader step into learning pipeline.");
-        final DefinitionModule pipeModule = loader.load("classpath:/de/evoal/pipeline/io.dl");
+        final DefinitionModule pipeModule = loader.load(URI.createURI("classpath:/de/evoal/pipeline/io.dl"));
         final ClassDefinition readerDefinition = pipeModule.getTypes()
                 .stream()
                 .filter(t -> "reader".equals(t.getName()))

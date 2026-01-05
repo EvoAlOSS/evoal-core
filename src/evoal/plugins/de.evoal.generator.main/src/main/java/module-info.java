@@ -29,6 +29,7 @@ module de.evoal.generator.main {
 
     requires de.evoal.core.main;
     requires de.evoal.optimisation.api;
+    requires de.evoal.languages.model.ol;
 
     exports de.evoal.pipeline.api.board;
     exports de.evoal.pipeline.api.cdi;

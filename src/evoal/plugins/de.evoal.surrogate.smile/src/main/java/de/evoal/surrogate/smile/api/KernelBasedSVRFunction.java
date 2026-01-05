@@ -1,8 +1,8 @@
 package de.evoal.surrogate.smile.api;
 
 import lombok.Getter;
-import lombok.NonNull;
 
+import lombok.NonNull;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
 import smile.regression.KernelMachine;
@@ -18,6 +18,7 @@ public class KernelBasedSVRFunction extends ModelFunction {
 	/**
 	 * The SVR's gamma parameter
 	 */
+	@Getter
 	private final double gamma;
 
 	/**
@@ -40,21 +41,21 @@ public class KernelBasedSVRFunction extends ModelFunction {
 	@Getter
 	private final Map<String, Object> parameters;
 
-	public KernelBasedSVRFunction(final @NonNull String name, final Space input, final Space output, final Map<String, Object> params, final KernelMachine<double []> regression, final double gamma, final double[] sourceMeans, final double[] sourceSDs, final double[] targetMeans, final double[] targetSDs) {
-		super(name, input, output);
+	public KernelBasedSVRFunction(final Space input, final Space output, final Map<String, Object> parameters, final KernelMachine<double []> regression, final double gamma, final double[] sourceMeans, final double[] sourceSDs, final double[] targetMeans, final double[] targetSDs) {
+		super("de.evoal.surrogate.smile.ml.epsilon-svr", input, output);
 
 		this.sourceMeans = sourceMeans;
 		this.sourceSDs = sourceSDs;
 		this.targetMeans = targetMeans;
 		this.targetSDs = targetSDs;
-		this.parameters = params;
+		this.parameters = parameters;
 
 		this.regression = regression;
 		this.gamma = gamma;
 	}
 
 	@Override
-	public void apply(final TypedEObject input, final TypedEObject output) {
+	public void apply(final @NonNull TypedEObject input, final @NonNull TypedEObject output) {
 		final double [] inputData = new double[this.input.size()];
 
 		int index = 0;
@@ -72,19 +73,4 @@ public class KernelBasedSVRFunction extends ModelFunction {
 	public KernelMachine<double []> getRegression() {
 		return regression;
 	}
-
-	public double getGamma() {
-		return gamma;
-	}
-
-	/*
-			final List<Parameter> parameters = new LinkedList<>();
-		addParameter("kernel-source-means", sourceMeans, parameters);
-		addParameter("kernel-source-sds", sourceSDs, parameters);
-		addParameter("kernel-target-means", targetMeans, parameters);
-		addParameter("kernel-target-sds", targetSDs, parameters);
-
-		getParameters().addAll(parameters);
-
-	 */
 }

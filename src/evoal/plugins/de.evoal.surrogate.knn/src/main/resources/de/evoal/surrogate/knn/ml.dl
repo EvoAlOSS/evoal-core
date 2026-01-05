@@ -1,0 +1,19 @@
+import "definitions" from 'de.evoal.core.constraints';
+import "definitions" from 'de.evoal.surrogate.ml';
+
+/**
+ * Module providing a K-Nearest Neighbours.
+ */
+module de.evoal.surrogate.knn.ml {
+
+    /**
+     * A surrogate model implementing the K-Nearest Neighbours algorithm.
+     */
+	type knn extends surrogate {
+	    /**
+	     * The number of neighbours to take into account.
+	     */
+	    @LowerBoundary{ inclusive := true; boundary := 1; }
+	    'k' : int;
+	}
+}

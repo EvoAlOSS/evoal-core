@@ -17,6 +17,8 @@ module de.evoal.surrogate.smile {
     requires org.eclipse.emf.ecore;
     requires de.evoal.languages.model.base;
     requires de.evoal.languages.models;
+    requires de.evoal.languages.model.dl;
+    requires de.evoal.languages.model.interpreter;
 
     // export API for down-stream plugins
     exports de.evoal.surrogate.smile.api;
@@ -24,13 +26,6 @@ module de.evoal.surrogate.smile {
     // TODO limit export to the Xtext component that resolves imports
     opens de.evoal.surrogate.smile;
 
+    opens de.evoal.surrogate.smile.gaussian to weld.core.impl;
     opens de.evoal.surrogate.smile.svr to weld.core.impl;
-    opens de.evoal.surrogate.smile.svr.gaussian to weld.core.impl;
-    opens de.evoal.surrogate.smile.svr.hellinger to weld.core.impl;
-    opens de.evoal.surrogate.smile.svr.hyperbolic to weld.core.impl;
-    opens de.evoal.surrogate.smile.svr.laplacian to weld.core.impl;
-    opens de.evoal.surrogate.smile.svr.linear to weld.core.impl;
-    opens de.evoal.surrogate.smile.svr.pearson to weld.core.impl;
-    opens de.evoal.surrogate.smile.svr.polynomial to weld.core.impl;
-    opens de.evoal.surrogate.smile.svr.thinplatespline to weld.core.impl;
 }

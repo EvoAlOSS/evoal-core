@@ -35,7 +35,7 @@ public abstract class ModuleLoaderBase<T extends EObject> {
     protected boolean observedErrors = false;
 
     public T load(final String filename) {
-        log.info("Loading machine learning configuration from '{}'.",filename);
+        log.info("Loading DSL configuration from file '{}'.",filename);
 
         final File configurationFile = new File(filename);
         if(!configurationFile.exists()) {
@@ -55,8 +55,19 @@ public abstract class ModuleLoaderBase<T extends EObject> {
 
         initializeEMF();
 
-        return read(configurationFile);
+        final URI modelURI = URI.createFileURI(configurationFile.getAbsolutePath());
+
+        return read(modelURI);
     }
+
+    public T load(final URI modelURI) {
+        log.info("Loading DSL configuration from URI '{}'.", modelURI);
+
+        initializeEMF();
+
+        return read(modelURI);
+    }
+
 
     /**
      * Initialize the model packages and perform the parser setup.
@@ -66,11 +77,11 @@ public abstract class ModuleLoaderBase<T extends EObject> {
     /**
      * Parses the given generator file and returns the corresponding model.
      *
-     * @param modelFile The model file to read.
+     * @param modelURI The model file to read.
      * @return The data validation model or an empty optional.
      */
-    private T read(final File modelFile) {
-        log.info("Reading model file {}.", modelFile);
+    private T read(final URI modelURI) {
+        log.info("Reading model file {}.", modelURI);
 
         final Injector injector = setupInjector();
 
@@ -79,7 +90,6 @@ public abstract class ModuleLoaderBase<T extends EObject> {
         resourceSet.addLoadOption(XtextResource.OPTION_ENCODING, "UTF-8");
 
         try {
-            final URI modelURI = URI.createFileURI(modelFile.getAbsolutePath());
 
             final ArrayList<URI> loadingStack = new ArrayList<>();
             loadingStack.add(modelURI);
@@ -100,7 +110,7 @@ public abstract class ModuleLoaderBase<T extends EObject> {
             validator.validate(resourceSet);
 
             if (observedErrors) {
-                log.error("An error was found while validating '{}'. Please fix the shown errors and rerun EvoAl.", modelFile);
+                log.error("An error was found while validating '{}'. Please fix the shown errors and rerun EvoAl.", modelURI);
                 throw new EvoAlShutDownException(3);
             }
 
@@ -108,7 +118,7 @@ public abstract class ModuleLoaderBase<T extends EObject> {
         } catch (final EvoAlShutDownException e) {
             throw e;
         } catch (final Exception e) {
-            log.error("Unable to load configuration file '{}'.", modelFile, e);
+            log.error("Unable to load configuration file '{}'.", modelURI, e);
             throw new RuntimeException(e);
         }
     }

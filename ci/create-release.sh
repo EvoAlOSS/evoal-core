@@ -1,6 +1,6 @@
 #!/bin/sh
 
-RELEASE_PLUGINS="core.arff generator.main optimisation.api optimisation.ea optimisation.local_search optimisation.pso surrogate.api surrogate.simple surrogate.smile surrogate.adaption" 
+RELEASE_PLUGINS="core.arff generator.main optimisation.api optimisation.ea optimisation.local_search optimisation.pso surrogate.api surrogate.knn surrogate.simple surrogate.smile surrogate.adaption" 
 EVOAL_HOME=evoal
 PROJECT_HOME=src/evoal/
 
@@ -65,6 +65,7 @@ for NAME in $RELEASE_PLUGINS; do
 
       for SCRIPT in $PROJECT_HOME/plugins/de.evoal.$NAME/src/main/scripts/*; do
         cp $SCRIPT "$EVOAL_HOME/bin/`basename $SCRIPT`"
+        chmod 600 "$EVOAL_HOME/bin/`basename $SCRIPT`"
       done
     fi
 done

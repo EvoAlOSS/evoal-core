@@ -17,6 +17,7 @@ import de.evoal.languages.model.pipeline.PipelineModule;
 import de.evoal.pipeline.api.cdi.DefinitionModuleLoader;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.*;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
@@ -144,7 +145,7 @@ public class GeneratorDSLConverter extends GeneratorSwitch<Object> {
     @Override
     public Object caseApplyStatement(final ApplyStatement obj) {
         log.info("Converting apply statement.");
-        final DefinitionModule module = loader.load("classpath:/de/evoal/pipeline/base.dl");
+        final DefinitionModule module = loader.load(URI.createURI("classpath:/de/evoal/pipeline/base.dl"));
         final FunctionDefinition generateFunction = module.getFunctions()
                 .stream()
                 .filter(t ->"generate".equals(t.getName()))
@@ -183,7 +184,7 @@ public class GeneratorDSLConverter extends GeneratorSwitch<Object> {
 
     private void addLimiter(final Array pipelines, final Literal limit) {
         log.info("Adding empty object generator.");
-        final DefinitionModule module = loader.load("classpath:/de/evoal/pipeline/misc.dl");
+        final DefinitionModule module = loader.load(URI.createURI("classpath:/de/evoal/pipeline/misc.dl"));
         final ClassDefinition limitFunction = module.getTypes()
                 .stream()
                 .filter(t ->"limit".equals(t.getName()))
@@ -226,7 +227,7 @@ public class GeneratorDSLConverter extends GeneratorSwitch<Object> {
 
     private void addGenerator(final Array pipelines) {
         log.info("Adding empty object generator.");
-        final DefinitionModule module = loader.load("classpath:/de/evoal/pipeline/io.dl");
+        final DefinitionModule module = loader.load(URI.createURI("classpath:/de/evoal/pipeline/io.dl"));
         final ClassDefinition generateFunction = module.getTypes()
                 .stream()
                 .filter(t ->"empty".equals(t.getName()))

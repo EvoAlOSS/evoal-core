@@ -17,6 +17,7 @@ import de.evoal.pipeline.api.model.PipelineComposite;
 import de.evoal.core.api.ecore.TypedEObject;
 import de.evoal.pipeline.impl.internal.PipelineInstantiator;
 import lombok.extern.slf4j.Slf4j;
+import org.eclipse.emf.common.util.URI;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -101,7 +102,7 @@ public class GenerateFunction implements EvoalBuiltinFunction {
                 .mkdirs();
 
         log.info("Generating writer");
-        final DefinitionModule module = loader.load("classpath:/de/evoal/pipeline/io.dl");
+        final DefinitionModule module = loader.load(URI.createURI("classpath:/de/evoal/pipeline/io.dl"));
         final ClassDefinition writerDefinition = module.getTypes()
                 .stream()
                 .filter(t -> "writer".equals(t.getName()))

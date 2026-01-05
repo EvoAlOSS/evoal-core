@@ -6,6 +6,7 @@ import de.evoal.core.api.utils.Requirements;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.List;
 import java.util.stream.Stream;
 
 /**
@@ -50,6 +51,26 @@ public class EObjectPairStreamFactory {
                 }
             };
         }
+        throw new UnsupportedOperationException();
+    }
+
+    public static EObjectPairStreamSupplier createFromList(final @NonNull Space first, final @NonNull Space second, final @NonNull List<EObjectPair> base) {
+        log.info("Creating supplier for {} and {}.", first, second);
+
+        if(first.getEClass() == second.getEClass()) {
+            return new EObjectPairStreamSupplier() {
+                @Override
+                public Stream<EObjectPair> get() {
+                    return base.stream()
+                            .filter(obj -> first.stream().allMatch(obj.getFirst()::eIsSet))
+                            .filter(obj -> second.stream().allMatch(obj.getSecond()::eIsSet));
+                }
+            };
+        } else {
+
+        }
+
+
         throw new UnsupportedOperationException();
     }
 }

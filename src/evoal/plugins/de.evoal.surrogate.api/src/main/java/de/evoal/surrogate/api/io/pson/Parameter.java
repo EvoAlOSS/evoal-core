@@ -1,28 +1,20 @@
 package de.evoal.surrogate.api.io.pson;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import lombok.*;
 
 import de.evoal.core.api.languages.AttributeEvaluator;
 import de.evoal.languages.model.base.expressions.Attribute;
-import de.evoal.surrogate.main.jackson.ReflectiveDeserializer;
-import de.evoal.surrogate.main.jackson.ReflectiveSerializer;
 
 @AllArgsConstructor
 @Builder
 @Data
 @NoArgsConstructor
 public class Parameter {
-	private String name;
+	private @NonNull String name;
 
-	@JsonDeserialize(using = ReflectiveDeserializer.class)
-	@JsonSerialize(using = ReflectiveSerializer.class)
-	private Object value;
+//	@JsonDeserialize(using = ReflectiveDeserializer.class)
+//	@JsonSerialize(using = ReflectiveSerializer.class)
+	private @NonNull Object value;
 
 	public static Parameter from(final String name, final Object value) {
 		final Parameter parameter = new Parameter();
