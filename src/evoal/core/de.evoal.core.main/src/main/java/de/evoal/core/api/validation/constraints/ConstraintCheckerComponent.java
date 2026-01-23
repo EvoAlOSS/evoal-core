@@ -15,5 +15,14 @@ public interface ConstraintCheckerComponent extends EvoalComponent<ConstraintChe
      * @param context The context of the check.
      * @param container The container that has the constraint attached.
      */
-    public void check(final DiagnosticsContext context, final EObject container);
+    public void checkOnInstance(final DiagnosticsContext context, final EObject container);
+
+    /**
+     * Implements the actual check. The check fires instances of {@link de.evoal.core.api.validation.model.Diagnostics}
+     *  if a violation is found.
+     *
+     * @param context The context of the check.
+     * @param object The object to be checked.
+     */
+    public void checkOnEcore(final DiagnosticsContext context, final Object object);
 }

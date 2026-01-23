@@ -1,4 +1,5 @@
 import "definitions" from 'de.evoal.pipeline.base';
+import "definitions" from 'de.evoal.surrogate.ml';
 
 /**
  * Generator extensions based on surrogate models.
@@ -8,7 +9,7 @@ module de.evoal.surrogate.pipeline {
     /**
      * Uses a pre-trained surrogate model as function.
      */
-	type surrogate extends Processor {
+	type 'trained-model' extends Processor {
 	    /**
 	     * Name of the pson file storing surrogate model.
 	     **/

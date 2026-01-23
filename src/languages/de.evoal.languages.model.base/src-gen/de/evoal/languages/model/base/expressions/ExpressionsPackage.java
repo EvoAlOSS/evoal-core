@@ -1042,6 +1042,43 @@ public interface ExpressionsPackage extends EPackage {
 	int SELF_REFERENCE_OPERATION_COUNT = VALUE_REFERENCE_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link de.evoal.languages.model.base.expressions.impl.ConfigurationReferenceImpl <em>Configuration Reference</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.evoal.languages.model.base.expressions.impl.ConfigurationReferenceImpl
+	 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getConfigurationReference()
+	 * @generated
+	 */
+	int CONFIGURATION_REFERENCE = 23;
+
+	/**
+	 * The feature id for the '<em><b>Reference</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONFIGURATION_REFERENCE__REFERENCE = VALUE_REFERENCE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Configuration Reference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONFIGURATION_REFERENCE_FEATURE_COUNT = VALUE_REFERENCE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Configuration Reference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONFIGURATION_REFERENCE_OPERATION_COUNT = VALUE_REFERENCE_OPERATION_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.expressions.impl.ValueDefinitionReferenceImpl <em>Value Definition Reference</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1049,7 +1086,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getValueDefinitionReference()
 	 * @generated
 	 */
-	int VALUE_DEFINITION_REFERENCE = 23;
+	int VALUE_DEFINITION_REFERENCE = 24;
 
 	/**
 	 * The feature id for the '<em><b>Definition</b></em>' reference.
@@ -1104,7 +1141,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getAttributeDefinitionReference()
 	 * @generated
 	 */
-	int ATTRIBUTE_DEFINITION_REFERENCE = 24;
+	int ATTRIBUTE_DEFINITION_REFERENCE = 25;
 
 	/**
 	 * The feature id for the '<em><b>Definition</b></em>' reference.
@@ -1159,7 +1196,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getLiteralDefinitionReference()
 	 * @generated
 	 */
-	int LITERAL_DEFINITION_REFERENCE = 25;
+	int LITERAL_DEFINITION_REFERENCE = 26;
 
 	/**
 	 * The feature id for the '<em><b>Definition</b></em>' reference.
@@ -1214,7 +1251,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getTypeDefinitionReference()
 	 * @generated
 	 */
-	int TYPE_DEFINITION_REFERENCE = 26;
+	int TYPE_DEFINITION_REFERENCE = 27;
 
 	/**
 	 * The feature id for the '<em><b>Definition</b></em>' reference.
@@ -1251,7 +1288,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getBooleanLiteral()
 	 * @generated
 	 */
-	int BOOLEAN_LITERAL = 27;
+	int BOOLEAN_LITERAL = 28;
 
 	/**
 	 * The feature id for the '<em><b>Literal</b></em>' attribute.
@@ -1297,7 +1334,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getCall()
 	 * @generated
 	 */
-	int CALL = 28;
+	int CALL = 29;
 
 	/**
 	 * The feature id for the '<em><b>Function</b></em>' reference.
@@ -1343,7 +1380,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getParantheses()
 	 * @generated
 	 */
-	int PARANTHESES = 29;
+	int PARANTHESES = 30;
 
 	/**
 	 * The feature id for the '<em><b>Sub Expression</b></em>' containment reference.
@@ -1380,7 +1417,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getArray()
 	 * @generated
 	 */
-	int ARRAY = 30;
+	int ARRAY = 31;
 
 	/**
 	 * The feature id for the '<em><b>Values</b></em>' containment reference list.
@@ -1417,7 +1454,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getComparisonOperator()
 	 * @generated
 	 */
-	int COMPARISON_OPERATOR = 31;
+	int COMPARISON_OPERATOR = 32;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.expressions.AddOrSubtractOperator <em>Add Or Subtract Operator</em>}' enum.
@@ -1427,7 +1464,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getAddOrSubtractOperator()
 	 * @generated
 	 */
-	int ADD_OR_SUBTRACT_OPERATOR = 32;
+	int ADD_OR_SUBTRACT_OPERATOR = 33;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.expressions.MultiplyDivideModuloOperator <em>Multiply Divide Modulo Operator</em>}' enum.
@@ -1437,7 +1474,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getMultiplyDivideModuloOperator()
 	 * @generated
 	 */
-	int MULTIPLY_DIVIDE_MODULO_OPERATOR = 33;
+	int MULTIPLY_DIVIDE_MODULO_OPERATOR = 34;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.base.expressions.Factor <em>Factor</em>}' enum.
@@ -1447,7 +1484,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getFactor()
 	 * @generated
 	 */
-	int FACTOR = 34;
+	int FACTOR = 35;
 
 	/**
 	 * The meta object id for the '<em>Number</em>' data type.
@@ -1457,7 +1494,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getNumber()
 	 * @generated
 	 */
-	int NUMBER = 35;
+	int NUMBER = 36;
 
 
 	/**
@@ -2056,6 +2093,27 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getSelfReference();
+
+	/**
+	 * Returns the meta object for class '{@link de.evoal.languages.model.base.expressions.ConfigurationReference <em>Configuration Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Configuration Reference</em>'.
+	 * @see de.evoal.languages.model.base.expressions.ConfigurationReference
+	 * @generated
+	 */
+	EClass getConfigurationReference();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.base.expressions.ConfigurationReference#getReference <em>Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Reference</em>'.
+	 * @see de.evoal.languages.model.base.expressions.ConfigurationReference#getReference()
+	 * @see #getConfigurationReference()
+	 * @generated
+	 */
+	EAttribute getConfigurationReference_Reference();
 
 	/**
 	 * Returns the meta object for class '{@link de.evoal.languages.model.base.expressions.ValueDefinitionReference <em>Value Definition Reference</em>}'.
@@ -2819,6 +2877,24 @@ public interface ExpressionsPackage extends EPackage {
 		 * @generated
 		 */
 		EClass SELF_REFERENCE = eINSTANCE.getSelfReference();
+
+		/**
+		 * The meta object literal for the '{@link de.evoal.languages.model.base.expressions.impl.ConfigurationReferenceImpl <em>Configuration Reference</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.evoal.languages.model.base.expressions.impl.ConfigurationReferenceImpl
+		 * @see de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl#getConfigurationReference()
+		 * @generated
+		 */
+		EClass CONFIGURATION_REFERENCE = eINSTANCE.getConfigurationReference();
+
+		/**
+		 * The meta object literal for the '<em><b>Reference</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CONFIGURATION_REFERENCE__REFERENCE = eINSTANCE.getConfigurationReference_Reference();
 
 		/**
 		 * The meta object literal for the '{@link de.evoal.languages.model.base.expressions.impl.ValueDefinitionReferenceImpl <em>Value Definition Reference</em>}' class.

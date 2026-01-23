@@ -132,6 +132,9 @@
     </genClasses>
     <genClasses ecoreClass="expressions.ecore#//ValueReference"/>
     <genClasses ecoreClass="expressions.ecore#//SelfReference"/>
+    <genClasses ecoreClass="expressions.ecore#//ConfigurationReference">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute expressions.ecore#//ConfigurationReference/reference"/>
+    </genClasses>
     <genClasses ecoreClass="expressions.ecore#//ValueDefinitionReference">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference expressions.ecore#//ValueDefinitionReference/definition"/>
       <genOperations ecoreOperation="expressions.ecore#//ValueDefinitionReference/isEnumLiteralReference"

@@ -17,7 +17,7 @@ import de.evoal.pipeline.api.model.PipelineComponentImpl;
 import de.evoal.surrogate.api.cdi.SurrogateProducer;
 
 @Dependent
-@Named("de.evoal.surrogate.pipeline.surrogate")
+@Named("de.evoal.surrogate.pipeline.trained-model")
 @Slf4j
 public class SurrogateGenerator extends PipelineComponentImpl {
 

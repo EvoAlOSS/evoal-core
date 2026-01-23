@@ -175,6 +175,15 @@ public interface ExpressionsFactory extends EFactory {
 	SelfReference createSelfReference();
 
 	/**
+	 * Returns a new object of class '<em>Configuration Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Configuration Reference</em>'.
+	 * @generated
+	 */
+	ConfigurationReference createConfigurationReference();
+
+	/**
 	 * Returns a new object of class '<em>Value Definition Reference</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

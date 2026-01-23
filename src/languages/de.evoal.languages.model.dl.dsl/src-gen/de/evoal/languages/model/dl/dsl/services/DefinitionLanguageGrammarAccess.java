@@ -635,6 +635,7 @@ public class DefinitionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 	
 	//ReferenceRule returns ConstantExpression:
 	//    ValuelDefinitionReferenceRule
+	//    | ConfigurationReferenceRule
 	//    | TypeDefinitionReferenceRule
 	//;
 	public BaseLanguageGrammarAccess.ReferenceRuleElements getReferenceRuleAccess() {
@@ -643,6 +644,17 @@ public class DefinitionLanguageGrammarAccess extends AbstractElementFinder.Abstr
 	
 	public ParserRule getReferenceRuleRule() {
 		return getReferenceRuleAccess().getRule();
+	}
+	
+	//ConfigurationReferenceRule returns ConfigurationReference:
+	//    'tree' reference = StringOrId
+	//;
+	public BaseLanguageGrammarAccess.ConfigurationReferenceRuleElements getConfigurationReferenceRuleAccess() {
+		return gaBaseLanguage.getConfigurationReferenceRuleAccess();
+	}
+	
+	public ParserRule getConfigurationReferenceRuleRule() {
+		return getConfigurationReferenceRuleAccess().getRule();
 	}
 	
 	///**

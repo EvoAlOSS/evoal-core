@@ -15,8 +15,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.eclipse.emf.common.util.EList;
 
 import jakarta.enterprise.context.ApplicationScoped;
+import org.eclipse.emf.ecore.EObject;
+
 import java.util.stream.Stream;
-import java.util.stream.StreamSupport;
 
 /**
  * Instance validator that checks user-defined constraints (using @-syntax in the .dl files).
@@ -36,7 +37,7 @@ public class ConstraintValidator implements InstanceValidator {
 
         log.info("Validating instance {}", definition.getName());
         collect(instance.getDefinition())
-                .forEach(c -> check(context, c, instance));
+                .forEach(c -> checkOnInstance(context, c, instance));
 
         log.info("Validating attributes of {}", definition.getName());
         final EList<AttributeDefinition> attributes = definition.getAllAttributes();
@@ -48,7 +49,7 @@ public class ConstraintValidator implements InstanceValidator {
             }
 
             attribute.getConstraints()
-                     .forEach(c -> check(new EObjectContext(context, attr.getDefinition().getName()), c, attr));
+                     .forEach(c -> checkOnInstance(new EObjectContext(context, attr.getDefinition().getName()), c, attr));
         }
     }
 
@@ -64,21 +65,28 @@ public class ConstraintValidator implements InstanceValidator {
 
     }
 
-    private void check(final @NonNull DiagnosticsContext context, final @NonNull Expression constraint, final @NonNull Attribute attr) {
+    public void checkOnInstance(final @NonNull DiagnosticsContext context, final @NonNull Expression constraint, final @NonNull EObject object) {
         if(constraint instanceof Instance configuration) {
             BeanFactory.createComponent(ConstraintCheckerComponent.class, configuration)
-                       .check(context, attr);
+                       .checkOnInstance(context, object);
         } else {
-            log.warn("Constraint validator does currently not support non-instance constraints: {}.", constraint);
+            log.atWarn()
+                .setMessage("Constraint validator does currently not support constraints of type: {}.")
+                .addArgument(() -> constraint.eClass().getName())
+                .log();
         }
     }
 
-    private void check(final @NonNull DiagnosticsContext context, final @NonNull Expression constraint, final @NonNull Instance instance) {
+
+    public void checkOnEcore(final @NonNull DiagnosticsContext context, final @NonNull Expression constraint, final @NonNull Object object) {
         if(constraint instanceof Instance configuration) {
             BeanFactory.createComponent(ConstraintCheckerComponent.class, configuration)
-                       .check(context, instance);
+                    .checkOnEcore(context, object);
         } else {
-            log.warn("Constraint validator does currently not support non-instance constraints: {}.", constraint);
+            log.atWarn()
+                    .setMessage("Constraint validator does currently not support constraints of type: {}.")
+                    .addArgument(() -> constraint.eClass().getName())
+                    .log();
         }
     }
 }

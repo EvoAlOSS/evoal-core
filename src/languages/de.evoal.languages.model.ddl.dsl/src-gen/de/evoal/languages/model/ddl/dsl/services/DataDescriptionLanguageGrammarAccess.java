@@ -1296,6 +1296,17 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 		return getCallRuleAccess().getRule();
 	}
 	
+	//ConfigurationReferenceRule returns ConfigurationReference:
+	//    'tree' reference = StringOrId
+	//;
+	public BaseLanguageGrammarAccess.ConfigurationReferenceRuleElements getConfigurationReferenceRuleAccess() {
+		return gaBaseLanguage.getConfigurationReferenceRuleAccess();
+	}
+	
+	public ParserRule getConfigurationReferenceRuleRule() {
+		return getConfigurationReferenceRuleAccess().getRule();
+	}
+	
 	///**
 	// * Allows us to reference an enum literal.
 	// */

@@ -16,6 +16,7 @@ import de.evoal.languages.model.base.expressions.BooleanLiteral;
 import de.evoal.languages.model.base.expressions.Call;
 import de.evoal.languages.model.base.expressions.ComparisonExpression;
 import de.evoal.languages.model.base.expressions.ComparisonOperator;
+import de.evoal.languages.model.base.expressions.ConfigurationReference;
 import de.evoal.languages.model.base.expressions.ConstantExpression;
 import de.evoal.languages.model.base.expressions.Expression;
 import de.evoal.languages.model.base.expressions.ExpressionsFactory;
@@ -225,6 +226,13 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	private EClass selfReferenceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass configurationReferenceEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -963,6 +971,26 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	@Override
+	public EClass getConfigurationReference() {
+		return configurationReferenceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getConfigurationReference_Reference() {
+		return (EAttribute)configurationReferenceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getValueDefinitionReference() {
 		return valueDefinitionReferenceEClass;
 	}
@@ -1296,6 +1324,9 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 
 		selfReferenceEClass = createEClass(SELF_REFERENCE);
 
+		configurationReferenceEClass = createEClass(CONFIGURATION_REFERENCE);
+		createEAttribute(configurationReferenceEClass, CONFIGURATION_REFERENCE__REFERENCE);
+
 		valueDefinitionReferenceEClass = createEClass(VALUE_DEFINITION_REFERENCE);
 		createEReference(valueDefinitionReferenceEClass, VALUE_DEFINITION_REFERENCE__DEFINITION);
 		createEOperation(valueDefinitionReferenceEClass, VALUE_DEFINITION_REFERENCE___IS_ENUM_LITERAL_REFERENCE);
@@ -1384,6 +1415,7 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		instanceEClass.getESuperTypes().add(this.getLiteral());
 		valueReferenceEClass.getESuperTypes().add(this.getConstantExpression());
 		selfReferenceEClass.getESuperTypes().add(this.getValueReference());
+		configurationReferenceEClass.getESuperTypes().add(this.getValueReference());
 		valueDefinitionReferenceEClass.getESuperTypes().add(this.getValueReference());
 		attributeDefinitionReferenceEClass.getESuperTypes().add(this.getValueDefinitionReference());
 		literalDefinitionReferenceEClass.getESuperTypes().add(this.getValueDefinitionReference());
@@ -1482,6 +1514,9 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		initEClass(valueReferenceEClass, ValueReference.class, "ValueReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(selfReferenceEClass, SelfReference.class, "SelfReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(configurationReferenceEClass, ConfigurationReference.class, "ConfigurationReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getConfigurationReference_Reference(), ecorePackage.getEString(), "reference", null, 1, 1, ConfigurationReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(valueDefinitionReferenceEClass, ValueDefinitionReference.class, "ValueDefinitionReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getValueDefinitionReference_Definition(), theDefinitionsPackage.getValueDefinition(), null, "definition", null, 1, 1, ValueDefinitionReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
