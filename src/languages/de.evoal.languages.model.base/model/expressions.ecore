@@ -211,6 +211,10 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ValueReference" eSuperTypes="#//ConstantExpression"/>
   <eClassifiers xsi:type="ecore:EClass" name="SelfReference" eSuperTypes="#//ValueReference"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ConfigurationReference" eSuperTypes="#//ValueReference">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="reference" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ValueDefinitionReference" eSuperTypes="#//ValueReference">
     <eOperations name="isEnumLiteralReference" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">

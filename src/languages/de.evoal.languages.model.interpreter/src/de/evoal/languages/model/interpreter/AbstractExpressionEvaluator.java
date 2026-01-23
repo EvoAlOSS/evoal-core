@@ -253,6 +253,10 @@ public abstract class AbstractExpressionEvaluator extends ExpressionsSwitch<Obje
 			return reference.getDefinition();
 		} else if(object instanceof TypeDefinitionReference type) {
 			return type.getDefinition();
+		} else if(object instanceof TypeDefinitionReference type) {
+			return type.getDefinition();
+		} else if(object instanceof ConfigurationReference) {
+			return object;
 		} else {
 			throw new IllegalStateException("Not yet implemented: " + object.eClass() + " -- " + object);
 		}

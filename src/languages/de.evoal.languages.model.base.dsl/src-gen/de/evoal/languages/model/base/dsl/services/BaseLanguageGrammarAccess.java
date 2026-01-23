@@ -560,23 +560,53 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.base.dsl.BaseLanguage.ReferenceRule");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cValuelDefinitionReferenceRuleParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cTypeDefinitionReferenceRuleParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cConfigurationReferenceRuleParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cTypeDefinitionReferenceRuleParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
 		//ReferenceRule returns ConstantExpression:
 		//    ValuelDefinitionReferenceRule
+		//    | ConfigurationReferenceRule
 		//    | TypeDefinitionReferenceRule
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//ValuelDefinitionReferenceRule
+		//| ConfigurationReferenceRule
 		//| TypeDefinitionReferenceRule
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//ValuelDefinitionReferenceRule
 		public RuleCall getValuelDefinitionReferenceRuleParserRuleCall_0() { return cValuelDefinitionReferenceRuleParserRuleCall_0; }
 		
+		//ConfigurationReferenceRule
+		public RuleCall getConfigurationReferenceRuleParserRuleCall_1() { return cConfigurationReferenceRuleParserRuleCall_1; }
+		
 		//TypeDefinitionReferenceRule
-		public RuleCall getTypeDefinitionReferenceRuleParserRuleCall_1() { return cTypeDefinitionReferenceRuleParserRuleCall_1; }
+		public RuleCall getTypeDefinitionReferenceRuleParserRuleCall_2() { return cTypeDefinitionReferenceRuleParserRuleCall_2; }
+	}
+	public class ConfigurationReferenceRuleElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.base.dsl.BaseLanguage.ConfigurationReferenceRule");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cTreeKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cReferenceAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cReferenceStringOrIdParserRuleCall_1_0 = (RuleCall)cReferenceAssignment_1.eContents().get(0);
+		
+		//ConfigurationReferenceRule returns ConfigurationReference:
+		//    'tree' reference = StringOrId
+		//;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'tree' reference = StringOrId
+		public Group getGroup() { return cGroup; }
+		
+		//'tree'
+		public Keyword getTreeKeyword_0() { return cTreeKeyword_0; }
+		
+		//reference = StringOrId
+		public Assignment getReferenceAssignment_1() { return cReferenceAssignment_1; }
+		
+		//StringOrId
+		public RuleCall getReferenceStringOrIdParserRuleCall_1_0() { return cReferenceStringOrIdParserRuleCall_1_0; }
 	}
 	public class ValuelDefinitionReferenceRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.base.dsl.BaseLanguage.ValuelDefinitionReferenceRule");
@@ -2038,6 +2068,7 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 	private final ParanthesesRuleElements pParanthesesRule;
 	private final CallRuleElements pCallRule;
 	private final ReferenceRuleElements pReferenceRule;
+	private final ConfigurationReferenceRuleElements pConfigurationReferenceRule;
 	private final ValuelDefinitionReferenceRuleElements pValuelDefinitionReferenceRule;
 	private final TypeDefinitionReferenceRuleElements pTypeDefinitionReferenceRule;
 	private final BaseDataReferenceRuleElements pBaseDataReferenceRule;
@@ -2108,6 +2139,7 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		this.pParanthesesRule = new ParanthesesRuleElements();
 		this.pCallRule = new CallRuleElements();
 		this.pReferenceRule = new ReferenceRuleElements();
+		this.pConfigurationReferenceRule = new ConfigurationReferenceRuleElements();
 		this.pValuelDefinitionReferenceRule = new ValuelDefinitionReferenceRuleElements();
 		this.pTypeDefinitionReferenceRule = new TypeDefinitionReferenceRuleElements();
 		this.pBaseDataReferenceRule = new BaseDataReferenceRuleElements();
@@ -2387,6 +2419,7 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 	
 	//ReferenceRule returns ConstantExpression:
 	//    ValuelDefinitionReferenceRule
+	//    | ConfigurationReferenceRule
 	//    | TypeDefinitionReferenceRule
 	//;
 	public ReferenceRuleElements getReferenceRuleAccess() {
@@ -2395,6 +2428,17 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 	
 	public ParserRule getReferenceRuleRule() {
 		return getReferenceRuleAccess().getRule();
+	}
+	
+	//ConfigurationReferenceRule returns ConfigurationReference:
+	//    'tree' reference = StringOrId
+	//;
+	public ConfigurationReferenceRuleElements getConfigurationReferenceRuleAccess() {
+		return pConfigurationReferenceRule;
+	}
+	
+	public ParserRule getConfigurationReferenceRuleRule() {
+		return getConfigurationReferenceRuleAccess().getRule();
 	}
 	
 	///**

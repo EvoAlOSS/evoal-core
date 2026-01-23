@@ -8,6 +8,7 @@ import de.evoal.core.api.validation.model.Diagnostics;
 import de.evoal.languages.model.base.expressions.*;
 import de.evoal.languages.model.interpreter.BooleanNumberOperations;
 import lombok.extern.slf4j.Slf4j;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 import jakarta.enterprise.context.Dependent;
@@ -44,7 +45,7 @@ public class UpperBoundaryChecker implements ConstraintCheckerComponent {
     }
 
     @Override
-    public void check(final DiagnosticsContext context, final EObject container) {
+    public void checkOnInstance(final DiagnosticsContext context, final EObject container) {
         if(!(container instanceof Attribute)) {
             events.fire(new Diagnostics(Diagnostics.Level.Warning, context, "LowerBoundaryChecker can only be used for attributes."));
             return;
@@ -63,6 +64,18 @@ public class UpperBoundaryChecker implements ConstraintCheckerComponent {
         if(comparator.apply(data.getValue(), bound)) {
             events.fire(Diagnostics.of(Diagnostics.Level.Error, context, "Value is smaller than specified lower bound: " + bound));
         }
+    }
+
+    @Override
+    public void checkOnEcore(final DiagnosticsContext context, final Object object) {
+        if(object instanceof EList<?> list) {
+            if(comparator.apply(list.size(), bound)) {
+                events.fire(Diagnostics.of(Diagnostics.Level.Error, context, "List size is smaller than specified lower bound: " + bound));
+            }
+        } else {
+            throw new IllegalArgumentException("Cannot check " + object.getClass());
+        }
+
     }
 
     private ReadExpression findArray(final Expression value) {

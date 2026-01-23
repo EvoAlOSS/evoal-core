@@ -1447,13 +1447,67 @@ ruleReferenceRule returns [EObject current=null]
 			/* */
 		}
 		{
-			newCompositeNode(grammarAccess.getReferenceRuleAccess().getTypeDefinitionReferenceRuleParserRuleCall_1());
+			newCompositeNode(grammarAccess.getReferenceRuleAccess().getConfigurationReferenceRuleParserRuleCall_1());
 		}
-		this_TypeDefinitionReferenceRule_1=ruleTypeDefinitionReferenceRule
+		this_ConfigurationReferenceRule_1=ruleConfigurationReferenceRule
 		{
-			$current = $this_TypeDefinitionReferenceRule_1.current;
+			$current = $this_ConfigurationReferenceRule_1.current;
 			afterParserOrEnumRuleCall();
 		}
+		    |
+		{
+			/* */
+		}
+		{
+			newCompositeNode(grammarAccess.getReferenceRuleAccess().getTypeDefinitionReferenceRuleParserRuleCall_2());
+		}
+		this_TypeDefinitionReferenceRule_2=ruleTypeDefinitionReferenceRule
+		{
+			$current = $this_TypeDefinitionReferenceRule_2.current;
+			afterParserOrEnumRuleCall();
+		}
+	)
+;
+
+// Entry rule entryRuleConfigurationReferenceRule
+entryRuleConfigurationReferenceRule returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getConfigurationReferenceRuleRule()); }
+	iv_ruleConfigurationReferenceRule=ruleConfigurationReferenceRule
+	{ $current=$iv_ruleConfigurationReferenceRule.current; }
+	EOF;
+
+// Rule ConfigurationReferenceRule
+ruleConfigurationReferenceRule returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0='tree'
+		{
+			newLeafNode(otherlv_0, grammarAccess.getConfigurationReferenceRuleAccess().getTreeKeyword_0());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getConfigurationReferenceRuleAccess().getReferenceStringOrIdParserRuleCall_1_0());
+				}
+				lv_reference_1_0=ruleStringOrId
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getConfigurationReferenceRuleRule());
+					}
+					set(
+						$current,
+						"reference",
+						lv_reference_1_0,
+						"de.evoal.languages.model.base.dsl.BaseLanguage.StringOrId");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
 	)
 ;
 

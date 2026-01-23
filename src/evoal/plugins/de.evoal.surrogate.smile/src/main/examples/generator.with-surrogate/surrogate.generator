@@ -29,8 +29,11 @@ module surrogate {
 			writes [data 'x:0'];
 		}
 		
+		/**
+		 * Second, we use a trained model to predict values
+		 */
 	    step {
-	        component 'surrogate' {
+	        component 'trained-model' {
 	            'model-file' := "svr.pson";
 	        }
 	
@@ -38,7 +41,11 @@ module surrogate {
 	        writes [data 'y:0'];
 	     }
 	]
-	
+
+	/**
+	 * Execute the main pipeline, generate 1000 samples and store the result in
+	 *   calculated.json.
+	 */
 	begin
 		write "calculated.json" with 1000 samples from executing [ 'main-pipeline'];
 	end

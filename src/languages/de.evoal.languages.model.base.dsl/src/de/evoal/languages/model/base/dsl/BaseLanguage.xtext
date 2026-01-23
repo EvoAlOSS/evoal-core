@@ -90,7 +90,12 @@ CallRule returns Call:
 
 ReferenceRule returns ConstantExpression:
 	ValuelDefinitionReferenceRule
+	| ConfigurationReferenceRule
 	| TypeDefinitionReferenceRule
+;
+
+ConfigurationReferenceRule returns ConfigurationReference:
+	'tree' reference = StringOrId
 ;
 
 /**

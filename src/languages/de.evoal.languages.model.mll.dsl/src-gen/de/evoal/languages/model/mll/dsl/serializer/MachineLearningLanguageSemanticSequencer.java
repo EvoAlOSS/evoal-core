@@ -19,6 +19,7 @@ import de.evoal.languages.model.base.expressions.Attribute;
 import de.evoal.languages.model.base.expressions.BooleanLiteral;
 import de.evoal.languages.model.base.expressions.Call;
 import de.evoal.languages.model.base.expressions.ComparisonExpression;
+import de.evoal.languages.model.base.expressions.ConfigurationReference;
 import de.evoal.languages.model.base.expressions.ExpressionsPackage;
 import de.evoal.languages.model.base.expressions.Instance;
 import de.evoal.languages.model.base.expressions.IntegerLiteral;
@@ -161,6 +162,9 @@ public class MachineLearningLanguageSemanticSequencer extends GeneratorDSLSemant
 				return; 
 			case ExpressionsPackage.COMPARISON_EXPRESSION:
 				sequence_ComparisonExpressionRule(context, (ComparisonExpression) semanticObject); 
+				return; 
+			case ExpressionsPackage.CONFIGURATION_REFERENCE:
+				sequence_ConfigurationReferenceRule(context, (ConfigurationReference) semanticObject); 
 				return; 
 			case ExpressionsPackage.INSTANCE:
 				sequence_InstanceLiteralRule(context, (Instance) semanticObject); 

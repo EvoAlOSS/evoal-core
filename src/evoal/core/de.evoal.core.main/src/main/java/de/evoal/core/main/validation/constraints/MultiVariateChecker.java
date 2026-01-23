@@ -13,6 +13,7 @@ import de.evoal.languages.model.execution.ExecutionFactory;
 import de.evoal.languages.model.execution.ExecutionPackage;
 import de.evoal.languages.model.execution.NamedVariable;
 import lombok.extern.slf4j.Slf4j;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
@@ -43,7 +44,7 @@ public class MultiVariateChecker implements ConstraintCheckerComponent {
     }
 
     @Override
-    public void check(final DiagnosticsContext context, final EObject container) {
+    public void checkOnInstance(final DiagnosticsContext context, final EObject container) {
         if(!(container instanceof Instance)) {
             events.fire(new Diagnostics(Diagnostics.Level.Warning, context, "MultiVariateConstraint can only be used for instances."));
             return;
@@ -65,6 +66,13 @@ public class MultiVariateChecker implements ConstraintCheckerComponent {
             events.fire(Diagnostics.of(Diagnostics.Level.Error, context, "Constraint \"" + constraint + "\" is violated" ));
         }
     }
+
+
+    @Override
+    public void checkOnEcore(final DiagnosticsContext context, final Object object) {
+        throw new IllegalArgumentException("Cannot check " + object.getClass());
+    }
+
 
     private String serialize(final Expression expression) {
         final Resource resource = expression.eResource();

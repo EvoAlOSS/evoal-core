@@ -20,9 +20,8 @@ module 'training' {
 	
 	specify preparation steps []
 	
-	specify model 'gaussian-svr' {
+	specify model 'epsilon-svr' {
 		'ε' := 1.4;
-		'σ' := 3.0;
 		'soft-margin' := 0.15;
 		tolerance := 0.1;
 	}

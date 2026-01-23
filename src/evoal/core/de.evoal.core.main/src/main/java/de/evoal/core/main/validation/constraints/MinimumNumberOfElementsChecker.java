@@ -7,6 +7,7 @@ import de.evoal.core.api.validation.context.DiagnosticsContext;
 import de.evoal.core.api.validation.model.Diagnostics;
 import de.evoal.languages.model.base.expressions.*;
 import lombok.extern.slf4j.Slf4j;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 import jakarta.enterprise.context.Dependent;
@@ -38,7 +39,7 @@ public class MinimumNumberOfElementsChecker implements ConstraintCheckerComponen
     }
 
     @Override
-    public void check(final DiagnosticsContext context, final EObject container) {
+    public void checkOnInstance(final DiagnosticsContext context, final EObject container) {
         if(!(container instanceof Attribute)) {
             events.fire(new Diagnostics(Diagnostics.Level.Warning, context, "MinimumNumberOfElements can only be used for attributes."));
             return;
@@ -56,6 +57,18 @@ public class MinimumNumberOfElementsChecker implements ConstraintCheckerComponen
 
         if(data.getValues().size() < bound) {
             events.fire(Diagnostics.of(Diagnostics.Level.Error, context, "MinimumNumberOfElements must have at least " + bound + " elements."));
+        }
+    }
+
+
+    @Override
+    public void checkOnEcore(final DiagnosticsContext context, final Object object) {
+        if(object instanceof EList<?> list) {
+            if(list.size() < bound) {
+                events.fire(Diagnostics.of(Diagnostics.Level.Error, context, "List size is smaller than specified lower bound: " + bound));
+            }
+        } else {
+            throw new IllegalArgumentException("Cannot check " + object.getClass());
         }
     }
 

@@ -260,6 +260,16 @@ public class ExpressionsSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case ExpressionsPackage.CONFIGURATION_REFERENCE: {
+				ConfigurationReference configurationReference = (ConfigurationReference)theEObject;
+				T result = caseConfigurationReference(configurationReference);
+				if (result == null) result = caseValueReference(configurationReference);
+				if (result == null) result = caseConstantExpression(configurationReference);
+				if (result == null) result = caseReadExpression(configurationReference);
+				if (result == null) result = caseExpression(configurationReference);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case ExpressionsPackage.VALUE_DEFINITION_REFERENCE: {
 				ValueDefinitionReference valueDefinitionReference = (ValueDefinitionReference)theEObject;
 				T result = caseValueDefinitionReference(valueDefinitionReference);
@@ -682,6 +692,21 @@ public class ExpressionsSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseSelfReference(SelfReference object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Configuration Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Configuration Reference</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseConfigurationReference(ConfigurationReference object) {
 		return null;
 	}
 

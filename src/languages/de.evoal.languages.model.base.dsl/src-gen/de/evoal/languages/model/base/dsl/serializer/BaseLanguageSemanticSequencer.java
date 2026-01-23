@@ -20,6 +20,7 @@ import de.evoal.languages.model.base.expressions.Attribute;
 import de.evoal.languages.model.base.expressions.BooleanLiteral;
 import de.evoal.languages.model.base.expressions.Call;
 import de.evoal.languages.model.base.expressions.ComparisonExpression;
+import de.evoal.languages.model.base.expressions.ConfigurationReference;
 import de.evoal.languages.model.base.expressions.ExpressionsPackage;
 import de.evoal.languages.model.base.expressions.Instance;
 import de.evoal.languages.model.base.expressions.IntegerLiteral;
@@ -115,6 +116,9 @@ public class BaseLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 				return; 
 			case ExpressionsPackage.COMPARISON_EXPRESSION:
 				sequence_ComparisonExpressionRule(context, (ComparisonExpression) semanticObject); 
+				return; 
+			case ExpressionsPackage.CONFIGURATION_REFERENCE:
+				sequence_ConfigurationReferenceRule(context, (ConfigurationReference) semanticObject); 
 				return; 
 			case ExpressionsPackage.INSTANCE:
 				sequence_InstanceLiteralRule(context, (Instance) semanticObject); 
@@ -435,6 +439,28 @@ public class BaseLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 	 */
 	protected void sequence_ComparisonExpressionRule(ISerializationContext context, ComparisonExpression semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     ReadExpressionRule returns ConfigurationReference
+	 *     ReferenceRule returns ConfigurationReference
+	 *     ConfigurationReferenceRule returns ConfigurationReference
+	 *
+	 * Constraint:
+	 *     reference=StringOrId
+	 * </pre>
+	 */
+	protected void sequence_ConfigurationReferenceRule(ISerializationContext context, ConfigurationReference semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, ExpressionsPackage.Literals.CONFIGURATION_REFERENCE__REFERENCE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ExpressionsPackage.Literals.CONFIGURATION_REFERENCE__REFERENCE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getConfigurationReferenceRuleAccess().getReferenceStringOrIdParserRuleCall_1_0(), semanticObject.getReference());
+		feeder.finish();
 	}
 	
 	
