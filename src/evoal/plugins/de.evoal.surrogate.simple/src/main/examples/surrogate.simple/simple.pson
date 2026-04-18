@@ -14,12 +14,6 @@
       "type" : "double",
       "value" : 11.712570037202154
     }
-  }, {
-    "name" : "r²",
-    "value" : {
-      "type" : "double",
-      "value" : 0.025909832934437375
-    }
   } ],
   "predictionPipeline" : {
     "type" : "pipeline-definition",

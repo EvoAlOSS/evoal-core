@@ -58,7 +58,6 @@ public class ConstraintProducer {
         final Constraints result = new Constraints();
 
         constraints.stream()
-                .peek(p -> System.out.println(p))
                    .forEach(p -> {
                        final DataDescription context = p.getFirst();
 

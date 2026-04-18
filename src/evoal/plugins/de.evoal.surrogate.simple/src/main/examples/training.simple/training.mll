@@ -21,8 +21,6 @@ module 'training' {
 	specify preparation steps []
 	
 	specify model 'linear-regression' {
-		intercept := 0.0;
-		slope := 1.0; 
 	}
 			
 	specify gof begin 
