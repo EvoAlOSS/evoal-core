@@ -24,6 +24,7 @@ public class ModelStorageFactory {
         final String filetype = parts[parts.length - 1];
 
         log.info("Creating model storage for type '{}'.", filetype);
+        log.info("Creating model storage for type '{}'.", ModelStorage.class.toString());
 
         return BeanFactory.create(filetype, ModelStorage.class)
                           .setLocation(location)

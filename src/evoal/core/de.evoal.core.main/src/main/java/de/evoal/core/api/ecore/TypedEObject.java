@@ -84,6 +84,10 @@ public class TypedEObject implements EObject {
         return ((Number)delegate.eGet(eStructuralFeature)).doubleValue();
     }
 
+    public float eGetAsFloat(EStructuralFeature eStructuralFeature) {
+        return ((Number)delegate.eGet(eStructuralFeature)).floatValue();
+    }
+
     public Integer eGetAsInteger(EStructuralFeature eStructuralFeature) {
         return ((Number)delegate.eGet(eStructuralFeature)).intValue();
     }

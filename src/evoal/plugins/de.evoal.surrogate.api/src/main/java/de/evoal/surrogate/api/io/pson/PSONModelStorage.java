@@ -52,6 +52,7 @@ public class PSONModelStorage implements ModelStorage {
         module.addSerializer(PipelineDefinition.class, new PipelineSerializer());
         module.addSerializer(Parameter.class, new ParameterSerializer());
 
+
         new ObjectMapper()
                 .registerModule(module)
                 .writerWithDefaultPrettyPrinter()

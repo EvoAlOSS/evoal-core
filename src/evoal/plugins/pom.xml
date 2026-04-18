@@ -173,7 +173,7 @@
 			<scope>provided</scope>
 		</dependency>
 
-		<!-- Dependency to EvoAl core -->
+        <!-- Dependency to EvoAl core -->
 		<dependency>
 			<groupId>de.evoal</groupId>
 			<artifactId>core.main</artifactId>

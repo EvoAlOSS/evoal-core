@@ -402,7 +402,7 @@ evoal:unit:
 ##
 evoal:coverage:
   stage: Quality
-  image: haynes/jacoco2cobertura:1.0.7
+  image: haynes/jacoco2cobertura:1.0.11
   rules:
     - if: $CI_MERGE_REQUEST_TITLE =~ /^Draft/
       when: never
