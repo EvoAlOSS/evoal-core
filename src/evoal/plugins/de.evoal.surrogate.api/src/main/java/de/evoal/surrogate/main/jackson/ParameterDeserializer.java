@@ -1,9 +1,5 @@
 package de.evoal.surrogate.main.jackson;
 
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonToken;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import de.evoal.core.api.ecore.EObjectPair;
 import de.evoal.core.api.ecore.Space;
 import de.evoal.core.api.ecore.TypedEObject;
@@ -14,8 +10,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import smile.tensor.DenseMatrix;
 import smile.tensor.ScalarType;
+import tools.jackson.core.JsonParser;
+import tools.jackson.core.JsonToken;
+import tools.jackson.databind.DeserializationContext;
+import tools.jackson.databind.deser.std.StdDeserializer;
 
-import java.io.IOException;
 import java.util.*;
 
 @Slf4j
@@ -33,7 +32,10 @@ public class ParameterDeserializer extends StdDeserializer<Parameter> {
     }
 
     @Override
-    public Parameter deserialize(final JsonParser parser, final DeserializationContext context) throws IOException {
+    public Class<?> handledType() { return super.handledType(); }
+
+    @Override
+    public Parameter deserialize(final JsonParser parser, final DeserializationContext context) {
         log.debug("Deserializing parameter");
         final Runnable checker = objectBalanceChecker(parser);
 
@@ -60,15 +62,15 @@ public class ParameterDeserializer extends StdDeserializer<Parameter> {
         return Parameter.builder().name(name).value(value).build();
     }
 
-    private Object parseValue(final JsonParser parser) throws IOException {
+    private Object parseValue(final JsonParser parser) {
         log.debug(" parsing value");
 
         Object result = null;
-        if(JsonToken.START_ARRAY.equals(parser.getCurrentToken())) {
+        if(JsonToken.START_ARRAY.equals(parser.currentToken())) {
             log.debug("{} found start of array, switching to read a list.", " ".repeat(indentation));
 
             result = parseListValue(parser);
-        } else if(JsonToken.START_OBJECT.equals(parser.getCurrentToken())) {
+        } else if(JsonToken.START_OBJECT.equals(parser.currentToken())) {
             log.debug("{} found start of object, switching to reading an object.", " ".repeat(indentation));
             result = parseObject(parser);
         }
@@ -77,7 +79,7 @@ public class ParameterDeserializer extends StdDeserializer<Parameter> {
         return result;
     }
 
-    private Object parseObject(final JsonParser parser) throws IOException {
+    private Object parseObject(final JsonParser parser) {
         log.debug("{}parsing object", " ".repeat(indentation * 2));
         final Runnable checker = objectBalanceChecker(parser);
 
@@ -114,11 +116,11 @@ public class ParameterDeserializer extends StdDeserializer<Parameter> {
         return value;
     }
 
-    private Object parseDictValue(final JsonParser parser) throws IOException {
+    private Object parseDictValue(final JsonParser parser) {
         final Map<String, Object> dict = new HashMap<>();
 
-        while(!JsonToken.END_OBJECT.equals(parser.getCurrentToken())) {
-            final String name = parser.getCurrentName();
+        while(!JsonToken.END_OBJECT.equals(parser.currentToken())) {
+            final String name = parser.currentName();
             advance(parser); // go to value of entry
 
             final Object value = parseObject(parser);
@@ -128,12 +130,12 @@ public class ParameterDeserializer extends StdDeserializer<Parameter> {
         return dict;
     }
 
-    private List<Object> parseListValue(final JsonParser parser) throws IOException {
+    private List<Object> parseListValue(final JsonParser parser) {
         final List<Object> result = new ArrayList<>();
 
         assertTokenTypeAndAdvance(parser, JsonToken.START_ARRAY);
 
-        while(!JsonToken.END_ARRAY.equals(parser.getCurrentToken())) {
+        while(!JsonToken.END_ARRAY.equals(parser.currentToken())) {
             final Object value = parseObject(parser);
             result.add(value);
         }
@@ -143,13 +145,13 @@ public class ParameterDeserializer extends StdDeserializer<Parameter> {
         return result;
     }
 
-    private List<Object> getArrayValue(final JsonParser parser) throws IOException {
+    private List<Object> getArrayValue(final JsonParser parser) {
         final List<Object> result = new ArrayList<>();
 
         advance(parser);
         assertTokenTypeAndAdvance(parser, JsonToken.START_ARRAY);
 
-        while(!JsonToken.END_ARRAY.equals(parser.getCurrentToken())) {
+        while(!JsonToken.END_ARRAY.equals(parser.currentToken())) {
             final Object value = parseObject(parser);
             advance(parser);
 
@@ -160,7 +162,7 @@ public class ParameterDeserializer extends StdDeserializer<Parameter> {
         return result;
     }
 
-    private Object getDoubleArrayValue(final JsonParser parser) throws IOException {
+    private Object getDoubleArrayValue(final JsonParser parser) {
         assertFieldNameAndAdvance(parser, "size");
         final int size = parser.getValueAsInt();
         advance(parser);
@@ -178,7 +180,7 @@ public class ParameterDeserializer extends StdDeserializer<Parameter> {
         return result;
     }
 
-    private Object getDoubleArrayArrayValue(final JsonParser parser) throws IOException {
+    private Object getDoubleArrayArrayValue(final JsonParser parser) {
         assertFieldNameAndAdvance(parser, "size-1");
         final int size1 = parser.getValueAsInt();
         advance(parser);
@@ -203,7 +205,7 @@ public class ParameterDeserializer extends StdDeserializer<Parameter> {
         return result;
     }
 
-    private Object getMatrixValue(final JsonParser parser) throws IOException {
+    private Object getMatrixValue(final JsonParser parser) {
         advance(parser);
         assertFieldName(parser, "nrows");
         final int nrows = parser.getValueAsInt();
@@ -229,7 +231,7 @@ public class ParameterDeserializer extends StdDeserializer<Parameter> {
         return result;
     }
 
-    private EObjectPair getObjectPair(final JsonParser parser) throws IOException {
+    private EObjectPair getObjectPair(final JsonParser parser) {
         Requirements.requireNotNull(sourceSpace);
         Requirements.requireNotNull(targetSpace);
 
@@ -246,22 +248,22 @@ public class ParameterDeserializer extends StdDeserializer<Parameter> {
         return new EObjectPair(result, result);
     }
 
-    private void parseEObject(final JsonParser parser, final Space space, final TypedEObject object) throws IOException {
+    private void parseEObject(final JsonParser parser, final Space space, final TypedEObject object) {
         log.info("Reading typed EObject");
 
         assertTokenTypeAndAdvance(parser, JsonToken.START_OBJECT);
 
-        while(!JsonToken.END_OBJECT.equals(parser.getCurrentToken())) {
+        while(!JsonToken.END_OBJECT.equals(parser.currentToken())) {
             parseEObjectDimension(parser, space, object);
         }
 
         assertTokenTypeAndAdvance(parser, JsonToken.END_OBJECT);
     }
 
-    private void parseEObjectDimension(final JsonParser parser, final Space space, final TypedEObject result) throws IOException {
-        log.info("Reading dimension: {}", parser.getCurrentToken());
+    private void parseEObjectDimension(final JsonParser parser, final Space space, final TypedEObject result) {
+        log.info("Reading dimension: {}", parser.currentToken());
 
-        final String attributeName = parser.getCurrentName();
+        final String attributeName = parser.currentName();
         advance(parser); // go to value of dimension
 
         final Object value = parseObject(parser);
@@ -280,7 +282,7 @@ public class ParameterDeserializer extends StdDeserializer<Parameter> {
     }
 
 
-    private Object parseStringValue(final JsonParser parser) throws IOException {
+    private Object parseStringValue(final JsonParser parser) {
         assertFieldNameAndAdvance(parser, "value");
 
         final String result = parser.getValueAsString();
@@ -290,7 +292,7 @@ public class ParameterDeserializer extends StdDeserializer<Parameter> {
         return result;
     }
 
-    private Boolean parseBooleanValue(final JsonParser parser) throws IOException {
+    private Boolean parseBooleanValue(final JsonParser parser) {
         assertFieldNameAndAdvance(parser, "value");
 
         final Boolean result = parser.getValueAsBoolean();
@@ -301,7 +303,7 @@ public class ParameterDeserializer extends StdDeserializer<Parameter> {
     }
 
 
-    private Object parseDoubleValue(final JsonParser parser) throws IOException {
+    private Object parseDoubleValue(final JsonParser parser) {
         assertFieldNameAndAdvance(parser, "value");
 
         final Double result = parser.getValueAsDouble();
@@ -311,7 +313,7 @@ public class ParameterDeserializer extends StdDeserializer<Parameter> {
         return result;
     }
 
-    private Integer parseIntegerValue(final JsonParser parser) throws IOException {
+    private Integer parseIntegerValue(final JsonParser parser) {
         assertFieldNameAndAdvance(parser, "value");
 
         final Integer result = parser.getValueAsInt();
@@ -325,7 +327,7 @@ public class ParameterDeserializer extends StdDeserializer<Parameter> {
     ///////////////////////////////////////////////////////////////////////////
     /// Reading values
 
-    private String readStringValueAndAdvance(final JsonParser parser) throws IOException {
+    private String readStringValueAndAdvance(final JsonParser parser) {
         assertTokenType(parser, JsonToken.VALUE_STRING);
 
         final String value = parser.readValueAs(String.class);
@@ -340,8 +342,8 @@ public class ParameterDeserializer extends StdDeserializer<Parameter> {
     /// Checking object balance
 
     private int nestingLevel = 0;
-    private Runnable objectBalanceChecker(final JsonParser parser) throws IOException {
-        Requirements.requireTrue(JsonToken.START_OBJECT.equals(parser.getCurrentToken()), parser.getCurrentToken().toString());
+    private Runnable objectBalanceChecker(final JsonParser parser) {
+        Requirements.requireTrue(JsonToken.START_OBJECT.equals(parser.currentToken()), parser.currentToken().toString());
         final int expectedLevel = nestingLevel;
 
         log.debug("{} creating checker @{}", " ".repeat(nestingLevel), expectedLevel);
@@ -359,55 +361,55 @@ public class ParameterDeserializer extends StdDeserializer<Parameter> {
     ///////////////////////////////////////////////////////////////////////////
     /// Asserting and advancing tokens
 
-    private void assertArrayStart(final JsonParser parser) throws IOException {
+    private void assertArrayStart(final JsonParser parser) {
         assertTokenTypeAndAdvance(parser, JsonToken.START_ARRAY);
     }
 
-    private void assertArrayEnd(final JsonParser parser) throws IOException {
+    private void assertArrayEnd(final JsonParser parser) {
         assertTokenTypeAndAdvance(parser, JsonToken.END_ARRAY);
     }
 
-    private void assertFieldName(final JsonParser parser, final String expectedName) throws IOException {
-        final JsonToken actual = parser.getCurrentToken();
+    private void assertFieldName(final JsonParser parser, final String expectedName) {
+        final JsonToken actual = parser.currentToken();
 
-        if(!JsonToken.FIELD_NAME.equals(actual)) {
+        if(!JsonToken.PROPERTY_NAME.equals(actual)) {
             throw new IllegalStateException("Expected field name but token is: " + actual);
         }
 
-        final String actualName = parser.getCurrentName();
+        final String actualName = parser.currentName();
         if(!expectedName.equals(actualName)) {
             throw new IllegalStateException("Expected field name '" + expectedName + "' but got '" + actualName + "'");
         }
     }
 
-    private void assertFieldNameAndAdvance(final JsonParser parser, final String name) throws IOException {
-        if(!JsonToken.FIELD_NAME.equals(parser.getCurrentToken())) {
-            throw new IllegalStateException("Expected token " + JsonToken.FIELD_NAME + " got " + parser.getCurrentToken());
+    private void assertFieldNameAndAdvance(final JsonParser parser, final String name) {
+        if(!JsonToken.PROPERTY_NAME.equals(parser.currentToken())) {
+            throw new IllegalStateException("Expected token " + JsonToken.PROPERTY_NAME + " got " + parser.currentToken());
         }
 
-        if(!name.equals(parser.getText())) {
+        if(!name.equals(parser.getString())) {
             throw new IllegalStateException("Expected field " + name + " got " + parser.getText());
         }
 
        advance(parser);
     }
 
-    private void assertTokenType(final JsonParser parser, final JsonToken token) throws IOException {
-        if(!token.equals(parser.getCurrentToken())) {
-            throw new IllegalStateException("Expected token " + token + " got " + parser.getCurrentToken());
+    private void assertTokenType(final JsonParser parser, final JsonToken token) {
+        if(!token.equals(parser.currentToken())) {
+            throw new IllegalStateException("Expected token " + token + " got " + parser.currentToken());
         }
     }
 
-    private void assertTokenTypeAndAdvance(final JsonParser parser, final JsonToken token) throws IOException {
-        if(!token.equals(parser.getCurrentToken())) {
-            throw new IllegalStateException("Expected token " + token + " got " + parser.getCurrentToken());
+    private void assertTokenTypeAndAdvance(final JsonParser parser, final JsonToken token) {
+        if(!token.equals(parser.currentToken())) {
+            throw new IllegalStateException("Expected token " + token + " got " + parser.currentToken());
         }
 
         advance(parser);
     }
 
-    private JsonToken advance(final JsonParser parser) throws IOException {
-        final JsonToken current = parser.getCurrentToken();
+    private JsonToken advance(final JsonParser parser) {
+        final JsonToken current = parser.currentToken();
         final String currentTokenInfo = tokenInfo(parser);
 
         final JsonToken next = parser.nextToken();
@@ -426,14 +428,14 @@ public class ParameterDeserializer extends StdDeserializer<Parameter> {
         return next;
     }
 
-    private String tokenInfo(final JsonParser parser) throws IOException {
+    private String tokenInfo(final JsonParser parser) {
         final JsonToken current = parser.currentToken();
 
         if(current == null) { return "<none>"; }
         String info = current.toString();
 
-        if(JsonToken.FIELD_NAME.equals(current)) {
-            info += " (" + parser.getCurrentName() + ")";
+        if(JsonToken.PROPERTY_NAME.equals(current)) {
+            info += " (" + parser.getString() + ")";
         } else if(JsonToken.VALUE_STRING.equals(current)) {
             info += " (" + parser.getValueAsString() + ")";
         } else if(JsonToken.VALUE_NUMBER_INT.equals(current)) {
@@ -442,7 +444,7 @@ public class ParameterDeserializer extends StdDeserializer<Parameter> {
             info += ": (" + parser.getValueAsDouble() + ")";
         }
 
-        info += " @" + parser.getTokenLocation();
+        info += " @" + parser.currentLocation();
 
         return info;
     }

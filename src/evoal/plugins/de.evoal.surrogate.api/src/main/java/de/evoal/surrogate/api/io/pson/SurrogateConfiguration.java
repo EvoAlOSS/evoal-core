@@ -1,5 +1,7 @@
 package de.evoal.surrogate.api.io.pson;
 
+import de.evoal.surrogate.main.jackson.ParameterDeserializer;
+import de.evoal.surrogate.main.jackson.ParameterSerializer;
 import lombok.Data;
 
 import org.slf4j.Logger;
@@ -17,6 +19,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import de.evoal.languages.model.pipeline.PipelineDefinition;
 
 import de.evoal.core.api.ecore.Space;
+import tools.jackson.databind.annotation.JsonDeserialize;
+import tools.jackson.databind.annotation.JsonSerialize;
 
 /**
  * Configuration of a {@link de.evoal.surrogate.api.function.ModelFunction}.
@@ -34,7 +38,7 @@ public class SurrogateConfiguration {
 	/**
 	 * List of required input features
 	 */
-	private final List<String> inputFeatures = new ArrayList<>();
+	private List<String> inputFeatures = new ArrayList<>();
 
 	/**
 	 * Name of the function to use.
@@ -45,7 +49,7 @@ public class SurrogateConfiguration {
 	/**
 	 * List of calculated properties.
 	 */
-	private final List<String> outputFeatures = new ArrayList<>();
+	private List<String> outputFeatures = new ArrayList<>();
 
 	@JsonIgnore
 	private Space outputData;
@@ -53,7 +57,7 @@ public class SurrogateConfiguration {
 	/**
 	 * The precalculated state of the function.
 	 */
-	private final List<Parameter> state = new ArrayList<>();
+	private List<Parameter> state = new ArrayList<>();
 
 	/**
 	 * The prediction pipeline.
@@ -63,12 +67,12 @@ public class SurrogateConfiguration {
 	/**
 	 * Parameters of inputs
 	 */
-	private final Map<String, List<Parameter>> inputParameters = new HashMap<>();
+	private Map<String, List<Parameter>> inputParameters = new HashMap<>();
 
 	/**
 	 * Parameters of outputs
 	 */
-	private final Map<String, List<Parameter>> outputParameters = new HashMap<>();
+	private Map<String, List<Parameter>> outputParameters = new HashMap<>();
 
 	public void addOutputParameter(final String name, final Parameter parameter) {
 		List<Parameter> content = outputParameters.get(name);
@@ -81,33 +85,6 @@ public class SurrogateConfiguration {
 			content.add(parameter);
 		}
 	}
-	/*
-        public static PartialFunctionConfiguration from(final PartialSurrogateFunctionDefinition definition, final Map<DataDescription, EStructuralFeature> featureMap, final AttributeEvaluator evaluator) {
-            log.info("Create partial function configuration from {}.", definition.getDefinition().getName());
-
-            final PartialFunctionConfiguration configuration = new PartialFunctionConfiguration();
-            configuration.setName(definition.getDefinition().getName());
-
-            final List<EStructuralFeature> inputFeatures = collect(definition.getInputs(), featureMap);
-            final List<EStructuralFeature> outputFeatures = collect(definition.getOutputs(), featureMap);
-
-            final Space inputs = new Space(eClassOf(inputFeatures), inputFeatures);
-            final Space outputs = new Space(eClassOf(outputFeatures), outputFeatures);
-
-            log.info("  from {}.", inputs);
-            log.info("  to {}.", outputs);
-
-            configuration.setInputData(inputs);
-            configuration.setOutputData(outputs);
-
-            definition.getAttributes()
-                      .stream()
-                      .map(a -> Parameter.from(a, evaluator))
-                      .forEach(p -> configuration.getParameters().add(p));
-
-            return configuration;
-        }
-    */
 
 	public static SurrogateConfiguration from(final SurrogateConfiguration config) {
 		final SurrogateConfiguration configuration = new SurrogateConfiguration();
@@ -115,12 +92,7 @@ public class SurrogateConfiguration {
 
 		configuration.setInputData(config.getInputData());
 		configuration.setOutputData(config.getOutputData());
-/*
-		config.getHyperParameters()
-			  .stream()
-			  .map(Parameter::from)
-			  .forEach(p -> configuration.getHyperParameters().add(p));
-*/
+
 		return configuration;
 	}
 

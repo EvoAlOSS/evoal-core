@@ -2,31 +2,21 @@ package de.evoal.surrogate.api.io.onnx;
 
 
 import ai.onnxruntime.*;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.module.SimpleModule;
 import de.evoal.core.api.ecore.Space;
 import de.evoal.languages.model.pipeline.PipelineDefinition;
-import de.evoal.pipeline.api.cdi.DefinitionModuleLoader;
 import de.evoal.surrogate.api.io.ModelStorage;
 
 import de.evoal.surrogate.api.io.pson.Parameter;
 import de.evoal.surrogate.api.io.pson.SurrogateConfiguration;
-import de.evoal.surrogate.main.jackson.ParameterDeserializer;
 import de.evoal.surrogate.main.jackson.ParameterSerializer;
-import de.evoal.surrogate.main.jackson.PipelineDeserializer;
 import de.evoal.surrogate.main.jackson.PipelineSerializer;
-import jakarta.annotation.PostConstruct;
-import jakarta.enterprise.inject.Default;
-import jakarta.inject.Inject;
 import lombok.Getter;
-import lombok.Setter;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
 import ai.onnxruntime.OrtSession;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
@@ -34,6 +24,10 @@ import java.util.Optional;
 
 import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Named;
+import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.cfg.MapperBuilder;
+import tools.jackson.databind.json.JsonMapper;
+import tools.jackson.databind.module.SimpleModule;
 
 
 @Dependent
@@ -74,9 +68,9 @@ public class ONNXModelStorage implements ModelStorage {
         module.addSerializer(PipelineDefinition.class, new PipelineSerializer());
         module.addSerializer(Parameter.class, new ParameterSerializer());
 
-        new ObjectMapper()
-                .registerModule(module)
-                .writerWithDefaultPrettyPrinter()
+        JsonMapper.builder()
+                .addModule(module)
+                .build()
                 .writeValue(file, configuration);
 
         this.session = Optional.of(ortSession);

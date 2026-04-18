@@ -17,7 +17,7 @@ module de.evoal.optimisation.api {
 
     requires org.apache.commons.csv;
 
-    requires com.fasterxml.jackson.databind;
+    requires tools.jackson.databind;
 
     requires org.eclipse.emf.common;
     requires org.eclipse.emf.ecore;

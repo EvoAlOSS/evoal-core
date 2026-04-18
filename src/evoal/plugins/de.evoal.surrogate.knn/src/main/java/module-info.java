@@ -12,8 +12,8 @@ module de.evoal.surrogate.knn {
     requires lombok;
 
     requires commons.math3;
-    requires com.fasterxml.jackson.core;
-    requires com.fasterxml.jackson.databind;
+    requires tools.jackson.core;
+    requires tools.jackson.databind;
     requires org.eclipse.emf.ecore;
     requires de.evoal.languages.model.base;
     requires jakarta.cdi;

@@ -1,9 +1,5 @@
 package de.evoal.surrogate.main.jackson;
 
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonToken;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import de.evoal.core.api.ecore.Space;
 import de.evoal.languages.model.base.definitions.ClassDefinition;
 import de.evoal.languages.model.base.expressions.ExpressionsFactory;
@@ -16,9 +12,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EStructuralFeature;
-
-import java.io.IOException;
-import java.util.concurrent.atomic.AtomicInteger;
+import tools.jackson.core.JsonParser;
+import tools.jackson.core.JsonToken;
+import tools.jackson.databind.DeserializationContext;
+import tools.jackson.databind.deser.std.StdDeserializer;
 
 @Slf4j
 public class PipelineDeserializer extends StdDeserializer<PipelineDefinition> {
@@ -40,15 +37,15 @@ public class PipelineDeserializer extends StdDeserializer<PipelineDefinition> {
     }
 
     @Override
-    public PipelineDefinition deserialize(final JsonParser parser, final DeserializationContext context) throws IOException {
+    public PipelineDefinition deserialize(final JsonParser parser, final DeserializationContext context) {
         return (PipelineDefinition)readObject(parser, false);
     }
 
-    private Object readObject(final JsonParser parser, final boolean advance) throws IOException {
+    private Object readObject(final JsonParser parser, final boolean advance) {
         assertTokenTypeAndAdvance(parser, JsonToken.START_OBJECT);
 
         parser.nextValue();
-        assertFieldName(parser.getCurrentName(), "type");
+        assertFieldName(parser.currentName(), "type");
 
         final String type = parser.getValueAsString();
         log.info("Reading object with type entry: '{}'.", type);
@@ -78,17 +75,17 @@ public class PipelineDeserializer extends StdDeserializer<PipelineDefinition> {
         return value;
     }
 
-    private PipelineDefinition getPipelineDefinition(final JsonParser parser) throws IOException {
+    private PipelineDefinition getPipelineDefinition(final JsonParser parser) {
 //        log.info("[PD{}] Reading pipeline definition '?'.  ");
         final PipelineDefinition result = PipelineFactory.eINSTANCE.createPipelineDefinition();
 
         parser.nextValue();
-        assertFieldName(parser.getCurrentName(), "name");
+        assertFieldName(parser.currentName(), "name");
         result.setName(parser.getValueAsString());
         //log.info("[PD{}]   name is '{}'.", pdLevel, result.getName());
 
         parser.nextValue();
-        assertFieldName(parser.getCurrentName(), "steps");
+        assertFieldName(parser.currentName(), "steps");
 
         assertArrayStart(parser);
 
@@ -113,14 +110,14 @@ public class PipelineDeserializer extends StdDeserializer<PipelineDefinition> {
     }
 
     //int psLevel = 0;
-    private PipelineStep getPipelineStep(final JsonParser parser) throws IOException {
+    private PipelineStep getPipelineStep(final JsonParser parser) {
         //psLevel += 1;
         //log.info("[PS{}] Reading 'compound step'.", psLevel);
         parser.nextValue();
 
         final PipelineStep result = PipelineFactory.eINSTANCE.createPipelineStep();
 
-        assertFieldName(parser.getCurrentName(), "definition");
+        assertFieldName(parser.currentName(), "definition");
 
         result.setDefinition((PipelineDefinition)readObject(parser, true));
 
@@ -133,19 +130,19 @@ public class PipelineDeserializer extends StdDeserializer<PipelineDefinition> {
     }
 
     //int csLevel = 0;
-    private ConcreteStep getConcreteStep(final JsonParser parser) throws IOException {
+    private ConcreteStep getConcreteStep(final JsonParser parser) {
         //csLevel += 1;
         //log.info("[CS{}] Reading 'concrete step'.", csLevel);
         parser.nextValue();
 
         final ConcreteStep result = PipelineFactory.eINSTANCE.createConcreteStep();
-        assertFieldName(parser.getCurrentName(), "reads");
+        assertFieldName(parser.currentName(), "reads");
         readFeatures(parser, result.getReads());
 
-        assertFieldName(parser.getCurrentName(), "writes");
+        assertFieldName(parser.currentName(), "writes");
         readFeatures(parser, result.getWrites());
 
-        assertFieldName(parser.getCurrentName(), "configuration");
+        assertFieldName(parser.currentName(), "configuration");
         result.setInstance((Instance) readObject(parser, true));
 
 
@@ -154,7 +151,7 @@ public class PipelineDeserializer extends StdDeserializer<PipelineDefinition> {
         return result;
     }
 
-    private void readFeatures(final JsonParser parser, final EList<EStructuralFeature> features) throws IOException {
+    private void readFeatures(final JsonParser parser, final EList<EStructuralFeature> features) {
         while(!parser.hasToken(JsonToken.START_ARRAY)) {
             parser.nextValue();
         }
@@ -170,18 +167,18 @@ public class PipelineDeserializer extends StdDeserializer<PipelineDefinition> {
         parser.nextValue();
     }
 
-    private Instance getInstance(final JsonParser parser) throws IOException {
+    private Instance getInstance(final JsonParser parser) {
         //log.info("[IN] Reading 'instance'.");
 
         final Instance result = ExpressionsFactory.eINSTANCE.createInstance();
         parser.nextValue();
 
-        assertFieldName(parser.getCurrentName(), "class-definition");
+        assertFieldName(parser.currentName(), "class-definition");
         final String className = parser.getValueAsString();
         result.setDefinition(findClassDefinition(className));
 
         parser.nextValue();
-        assertFieldName(parser.getCurrentName(), "attributes");
+        assertFieldName(parser.currentName(), "attributes");
 
         while(!parser.hasToken(JsonToken.END_ARRAY)) {
             parser.nextValue();
@@ -211,19 +208,19 @@ public class PipelineDeserializer extends StdDeserializer<PipelineDefinition> {
                 .get();
     }
 
-    private void assertArrayStart(final JsonParser parser) throws IOException {
+    private void assertArrayStart(final JsonParser parser) {
         assertTokenTypeAndAdvance(parser, JsonToken.START_ARRAY);
     }
 
-    private void assertArrayEndAndAdvance(final JsonParser parser) throws IOException {
+    private void assertArrayEndAndAdvance(final JsonParser parser) {
         assertTokenTypeAndAdvance(parser, JsonToken.END_ARRAY);
     }
 
-    private void assertObjectEnd(final JsonParser parser) throws IOException {
+    private void assertObjectEnd(final JsonParser parser) {
         assertTokenType(parser, JsonToken.END_OBJECT);
     }
 /*
-    private void assertObjectEndAndAdvance(final JsonParser parser) throws IOException {
+    private void assertObjectEndAndAdvance(final JsonParser parser) {
         assertTokenTypeAndAdvance(parser, JsonToken.END_OBJECT);
     }
 */
@@ -233,16 +230,16 @@ public class PipelineDeserializer extends StdDeserializer<PipelineDefinition> {
         }
     }
 
-    private void assertTokenTypeAndAdvance(final JsonParser parser, final JsonToken token) throws IOException {
-        if(!token.equals(parser.getCurrentToken())) {
-            throw new IllegalStateException("Expected token " + token + " got " + parser.getCurrentToken());
+    private void assertTokenTypeAndAdvance(final JsonParser parser, final JsonToken token) {
+        if(!token.equals(parser.currentToken())) {
+            throw new IllegalStateException("Expected token " + token + " got " + parser.currentToken());
         }
         parser.nextToken();
     }
 
-    private void assertTokenType(final JsonParser parser, final JsonToken token) throws IOException {
-        if(!token.equals(parser.getCurrentToken())) {
-            throw new IllegalStateException("Expected token " + token + " got " + parser.getCurrentToken());
+    private void assertTokenType(final JsonParser parser, final JsonToken token) {
+        if(!token.equals(parser.currentToken())) {
+            throw new IllegalStateException("Expected token " + token + " got " + parser.currentToken());
         }
     }
 }

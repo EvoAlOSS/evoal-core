@@ -1,7 +1,5 @@
 package de.evoal.core.main.properties;
 
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.properties.PropertySpecification;
@@ -11,6 +9,9 @@ import lombok.extern.slf4j.Slf4j;
 
 import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Named;
+import tools.jackson.core.JsonGenerator;
+import tools.jackson.databind.ObjectMapper;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -40,29 +41,24 @@ public class JsonPropertiesWriter implements PropertiesWriter {
 
     @Override
     public void add(final Properties properties) throws EvoalIOException {
-        try {
-            jsonGenerator.writeStartArray();
-            for (final PropertySpecification spec : properties.getSpecification().getProperties()) {
-                jsonGenerator.writeStartObject();
-                jsonGenerator.writeStringField("name", spec.name());
+        jsonGenerator.writeStartArray();
+        for (final PropertySpecification spec : properties.getSpecification().getProperties()) {
+            jsonGenerator.writeStartObject();
+            jsonGenerator.writeStringProperty("name", spec.name());
 
-                final Object value = properties.get(spec);
-                if (value instanceof Double || value instanceof Float) {
-                    jsonGenerator.writeNumberField("value", ((Number) properties.get(spec)).doubleValue());
-                } else if (value instanceof Integer) {
-                    jsonGenerator.writeNumberField("value", ((Number) properties.get(spec)).longValue());
-                } else if (value instanceof Boolean) {
-                    jsonGenerator.writeBooleanField("value", (Boolean) properties.get(spec));
-                } else if (value instanceof String) {
-                    jsonGenerator.writeStringField("value", (String) properties.get(spec));
-                }
-                jsonGenerator.writeEndObject();
+            final Object value = properties.get(spec);
+            if (value instanceof Double || value instanceof Float) {
+                jsonGenerator.writeNumberProperty("value", ((Number) properties.get(spec)).doubleValue());
+            } else if (value instanceof Integer) {
+                jsonGenerator.writeNumberProperty("value", ((Number) properties.get(spec)).longValue());
+            } else if (value instanceof Boolean) {
+                jsonGenerator.writeBooleanProperty("value", (Boolean) properties.get(spec));
+            } else if (value instanceof String) {
+                jsonGenerator.writeStringProperty("value", (String) properties.get(spec));
             }
-            jsonGenerator.writeEndArray();
-        } catch(final IOException e) {
-            log.error("Failure while writing properties.", e);
-            throw new EvoalIOException("Failure while writing properties.", e);
+            jsonGenerator.writeEndObject();
         }
+        jsonGenerator.writeEndArray();
     }
 
     @Override

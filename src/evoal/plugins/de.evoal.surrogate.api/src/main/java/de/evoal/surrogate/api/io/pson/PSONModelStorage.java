@@ -1,6 +1,5 @@
 package de.evoal.surrogate.api.io.pson;
 
-import com.fasterxml.jackson.databind.module.SimpleModule;
 import de.evoal.core.api.ecore.Space;
 import de.evoal.languages.model.pipeline.PipelineDefinition;
 import de.evoal.pipeline.api.cdi.DefinitionModuleLoader;
@@ -18,13 +17,14 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
+import java.util.List;
 import java.util.Optional;
 
 import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
+import tools.jackson.databind.json.JsonMapper;
+import tools.jackson.databind.module.SimpleModule;
 
 @Dependent
 @Named("pson")
@@ -53,9 +53,9 @@ public class PSONModelStorage implements ModelStorage {
         module.addSerializer(Parameter.class, new ParameterSerializer());
 
 
-        new ObjectMapper()
-                .registerModule(module)
-                .writerWithDefaultPrettyPrinter()
+        JsonMapper.builder()
+                .addModule(module)
+                .build()
                 .writeValue(file, configuration);
     }
 
@@ -81,6 +81,8 @@ public class PSONModelStorage implements ModelStorage {
 
     @SneakyThrows
     public void load() {
+        log.info("Loading predictive configuration from {}.", file);
+
         try(final InputStream is = new FileInputStream(file)) {
             final Space functionSpace = inputSpace.merge(outputSpace);
             final PipelineDeserializer pipelineDeserializer = new PipelineDeserializer(loader, functionSpace);
@@ -89,13 +91,15 @@ public class PSONModelStorage implements ModelStorage {
             parameterDeserializer.setTargetSpace(outputSpace);
 
             final SimpleModule module = new SimpleModule();
-            module.addDeserializer(PipelineDefinition.class, pipelineDeserializer);
             module.addDeserializer(Parameter.class, parameterDeserializer);
+            module.addDeserializer(PipelineDefinition.class, pipelineDeserializer);
 
             final SurrogateConfiguration configuration =
-                    new ObjectMapper()
-                        .registerModule(module)
-                        .readValue(is, SurrogateConfiguration.class);
+                    JsonMapper
+                            .builder()
+                            .addModule(module)
+                            .build()
+                            .readValue(is, SurrogateConfiguration.class);
 
             this.configuration = Optional.of(configuration);
         } catch (final IOException e) {

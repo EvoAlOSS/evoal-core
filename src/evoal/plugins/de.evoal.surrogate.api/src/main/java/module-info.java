@@ -11,7 +11,7 @@ module de.evoal.surrogate.api {
     requires org.eclipse.emf.common;
     requires org.eclipse.xtext;
 
-    requires com.fasterxml.jackson.databind;
+    requires tools.jackson.databind;
 
 
     requires de.evoal.languages.model.ddl;

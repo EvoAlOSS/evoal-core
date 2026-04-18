@@ -1,8 +1,5 @@
 package de.evoal.core.main.properties;
 
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonToken;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.properties.PropertySpecification;
@@ -14,6 +11,10 @@ import lombok.extern.slf4j.Slf4j;
 
 import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Named;
+import tools.jackson.core.JsonParser;
+import tools.jackson.core.JsonToken;
+import tools.jackson.databind.ObjectMapper;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
@@ -66,10 +67,10 @@ public class JsonPropertiesReader implements PropertiesReader {
             Object value = null;
 
             while(!JsonToken.END_OBJECT.equals(jsonParser.currentToken())) {
-                final String fieldName = jsonParser.nextFieldName();
+                final String fieldName = jsonParser.nextName();
 
                 if("name".equals(fieldName)) {
-                    name = jsonParser.nextTextValue();
+                    name = jsonParser.nextStringValue();
                 } else if("value".equals(fieldName)) {
                     final JsonToken token = jsonParser.nextValue();
 

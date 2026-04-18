@@ -1,14 +1,14 @@
 package de.evoal.surrogate.main.jackson;
 
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.SerializerProvider;
-import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 import de.evoal.core.api.ecore.EObjectPair;
 import de.evoal.core.api.ecore.TypedEObject;
 import de.evoal.surrogate.api.io.pson.Parameter;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import smile.tensor.Matrix;
+import tools.jackson.core.JsonGenerator;
+import tools.jackson.databind.SerializationContext;
+import tools.jackson.databind.ser.std.StdSerializer;
 
 import java.io.IOException;
 import java.util.List;
@@ -21,20 +21,20 @@ public class ParameterSerializer extends StdSerializer<Parameter> {
     }
 
     @Override
-    public void serialize(final Parameter parameter, final JsonGenerator jsonGenerator, final SerializerProvider serializerProvider) throws IOException {
+    public void serialize(final Parameter parameter, final JsonGenerator jsonGenerator, final SerializationContext serializerProvider) {
         log.info("Serializing parameter: " + parameter.getName());
         jsonGenerator.writeStartObject();
 
-        jsonGenerator.writeFieldName("name");
+        jsonGenerator.writeName("name");
         jsonGenerator.writeString(parameter.getName());
-        jsonGenerator.writeFieldName("value");
+        jsonGenerator.writeName("value");
 
         serializeValue(parameter.getValue(), jsonGenerator, serializerProvider);
         jsonGenerator.writeEndObject();
         log.info("Serialized parameter: " + parameter.getName());
     }
 
-    private void serializeValue(final Object o, final JsonGenerator jsonGenerator, final SerializerProvider serializerProvider) throws IOException {
+    private void serializeValue(final Object o, final JsonGenerator jsonGenerator, final SerializationContext serializerProvider) {
         if(o instanceof Boolean b) {
             serializeBoolean(b, jsonGenerator);
         } else if(o instanceof Double d) {
@@ -57,73 +57,72 @@ public class ParameterSerializer extends StdSerializer<Parameter> {
             serializePair(pair, jsonGenerator, serializerProvider);
         } else if(o instanceof TypedEObject object) {
             serializeObject(object, jsonGenerator, serializerProvider);
-        } else {
-            throw new IOException("Unsupported object type: " +  o.getClass().getName());
-        }    }
+        }
+    }
 
-    private void serializeBoolean(final boolean o, final JsonGenerator jsonGenerator) throws IOException {
+    private void serializeBoolean(final boolean o, final JsonGenerator jsonGenerator) {
         jsonGenerator.writeStartObject();
-        jsonGenerator.writeStringField("type", "boolean");
-        jsonGenerator.writeBooleanField("value", o);
+        jsonGenerator.writeStringProperty("type", "boolean");
+        jsonGenerator.writeBooleanProperty("value", o);
         jsonGenerator.writeEndObject();
     }
 
 
-    private void serializeDouble(final Double o, final JsonGenerator jsonGenerator) throws IOException {
+    private void serializeDouble(final Double o, final JsonGenerator jsonGenerator) {
         jsonGenerator.writeStartObject();
-        jsonGenerator.writeStringField("type", "double");
-        jsonGenerator.writeNumberField("value", o);
+        jsonGenerator.writeStringProperty("type", "double");
+        jsonGenerator.writeNumberProperty("value", o);
         jsonGenerator.writeEndObject();
     }
 
-    private void serializeInteger(final Integer o, final JsonGenerator jsonGenerator) throws IOException {
+    private void serializeInteger(final Integer o, final JsonGenerator jsonGenerator) {
         jsonGenerator.writeStartObject();
-        jsonGenerator.writeStringField("type", "integer");
-        jsonGenerator.writeNumberField("value", o);
+        jsonGenerator.writeStringProperty("type", "integer");
+        jsonGenerator.writeNumberProperty("value", o);
         jsonGenerator.writeEndObject();
     }
 
-    private void serializePair(final EObjectPair pair, final JsonGenerator generator, final SerializerProvider provider) throws IOException {
+    private void serializePair(final EObjectPair pair, final JsonGenerator generator, final SerializationContext provider) {
         generator.writeStartObject();
-        generator.writeStringField("type", "object-pair");
-        generator.writeFieldName("source");
+        generator.writeStringProperty("type", "object-pair");
+        generator.writeName("source");
         serializeValue(pair.getFirst(), generator, provider);
-        generator.writeFieldName("target");
+        generator.writeName("target");
         serializeValue(pair.getSecond(), generator, provider);
         generator.writeEndObject();
     }
 
-    private void serializeObject(final TypedEObject object, final JsonGenerator generator, final SerializerProvider provider) throws IOException {
+    private void serializeObject(final TypedEObject object, final JsonGenerator generator, final SerializationContext provider) {
         generator.writeStartObject();
         for(final EStructuralFeature feature : object.eClass().getEAllStructuralFeatures()) {
-            generator.writeFieldName(feature.getName());
+            generator.writeName(feature.getName());
             serializeValue(object.eGet(feature), generator, provider);
         }
         generator.writeEndObject();
     }
 
-    private void serializeString(final String o, final JsonGenerator jsonGenerator) throws IOException {
+    private void serializeString(final String o, final JsonGenerator jsonGenerator) {
         jsonGenerator.writeStartObject();
-        jsonGenerator.writeStringField("type", "string");
-        jsonGenerator.writeStringField("value", o);
+        jsonGenerator.writeStringProperty("type", "string");
+        jsonGenerator.writeStringProperty("value", o);
         jsonGenerator.writeEndObject();
     }
 
-    private void serializeArray(final double [] o, final JsonGenerator jsonGenerator) throws IOException {
+    private void serializeArray(final double [] o, final JsonGenerator jsonGenerator) {
         jsonGenerator.writeStartObject();
-        jsonGenerator.writeStringField("type", "array(double)");
-        jsonGenerator.writeNumberField("size", o.length);
-        jsonGenerator.writeFieldName("value");
+        jsonGenerator.writeStringProperty("type", "array(double)");
+        jsonGenerator.writeNumberProperty("size", o.length);
+        jsonGenerator.writeName("value");
         jsonGenerator.writeArray(o, 0, o.length);
         jsonGenerator.writeEndObject();
     }
 
-    private void serializeArray(final double [][] o, final JsonGenerator jsonGenerator) throws IOException {
+    private void serializeArray(final double [][] o, final JsonGenerator jsonGenerator) {
         jsonGenerator.writeStartObject();
-        jsonGenerator.writeStringField("type", "array(array(double))");
-        jsonGenerator.writeNumberField("size-1", o.length);
-        jsonGenerator.writeNumberField("size-2", o.length == 0 ? 0 : o[0].length);
-        jsonGenerator.writeFieldName("value");
+        jsonGenerator.writeStringProperty("type", "array(array(double))");
+        jsonGenerator.writeNumberProperty("size-1", o.length);
+        jsonGenerator.writeNumberProperty("size-2", o.length == 0 ? 0 : o[0].length);
+        jsonGenerator.writeName("value");
         jsonGenerator.writeStartArray(o.length);
         for(int i = 0; i < o.length; ++i) {
             for(int j = 0; j < o[i].length; ++j) {
@@ -134,16 +133,16 @@ public class ParameterSerializer extends StdSerializer<Parameter> {
         jsonGenerator.writeEndObject();
     }
 
-    private void serializeArray(final Matrix o, final JsonGenerator jsonGenerator) throws IOException {
+    private void serializeArray(final Matrix o, final JsonGenerator jsonGenerator) {
         final int nrows = o.nrow();
         final int ncols = o.ncol();
 
         jsonGenerator.writeStartObject();
-        jsonGenerator.writeStringField("type", "matrix");
+        jsonGenerator.writeStringProperty("type", "matrix");
 
-        jsonGenerator.writeNumberField("nrows", nrows);
-        jsonGenerator.writeNumberField("ncols", ncols);
-        jsonGenerator.writeFieldName("value");
+        jsonGenerator.writeNumberProperty("nrows", nrows);
+        jsonGenerator.writeNumberProperty("ncols", ncols);
+        jsonGenerator.writeName("value");
         jsonGenerator.writeStartArray(nrows * ncols);
         for(int i = 0; i < nrows; ++i) {
             for(int j = 0; j < ncols; ++j) {
@@ -154,7 +153,7 @@ public class ParameterSerializer extends StdSerializer<Parameter> {
         jsonGenerator.writeEndObject();
     }
 
-    private void serializeList(final List<?> list, final JsonGenerator generator, final SerializerProvider provider) throws IOException {
+    private void serializeList(final List<?> list, final JsonGenerator generator, final SerializationContext provider) {
         generator.writeStartArray();
 
         for(final Object child : list) {
@@ -164,12 +163,12 @@ public class ParameterSerializer extends StdSerializer<Parameter> {
         generator.writeEndArray();
     }
 
-    private void serializeDict(final Map<String, ?> map, final JsonGenerator generator, final SerializerProvider provider) throws IOException {
+    private void serializeDict(final Map<String, ?> map, final JsonGenerator generator, final SerializationContext provider) {
         generator.writeStartObject();
-        generator.writeStringField("type", "dict");
+        generator.writeStringProperty("type", "dict");
 
         for(final Map.Entry<String, ?> child : map.entrySet()) {
-            generator.writeFieldName(child.getKey());
+            generator.writeName(child.getKey());
             serializeValue(child.getValue(), generator, provider);
         }
 
