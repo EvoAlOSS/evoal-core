@@ -62,6 +62,7 @@ BODY="{
     \"source_branch\": \"${SOURCE_BRANCH}\",
     \"target_branch\": \"${TARGET_BRANCH}\",
     \"remove_source_branch\": false,
+    \"squash\": false,
     \"title\": \"Auto: Merge '${SOURCE_BRANCH}' into '${TARGET_BRANCH}'\",
     \"assignee_id\":\"24\"
 }";
@@ -95,7 +96,7 @@ BODY="{
 
 OUT=`curl -s -X PUT "$BASE_URL/merge_requests/$IID/merge?merge_when_pipeline_succeeds=true" \
          --header "PRIVATE-TOKEN:${PROJECT_ACCESS_TOKEN}" \
-         --header "Content-Type: application/json" #\
+         --header "Content-Type: application/json" \
          --data "${BODY}"`
 
 echo "  Created merge request"

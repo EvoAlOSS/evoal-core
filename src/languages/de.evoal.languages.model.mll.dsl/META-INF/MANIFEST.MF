@@ -3,7 +3,7 @@ Automatic-Module-Name: de.evoal.languages.model.mll.dsl
 Bundle-ManifestVersion: 2
 Bundle-Name: Machine Learning DSL
 Bundle-Vendor: EvoAl Project
-Bundle-Version: 2026.4.0.qualifier
+Bundle-Version: 2026.10.0.qualifier
 Bundle-SymbolicName: de.evoal.languages.model.mll.dsl; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext,
@@ -15,8 +15,8 @@ Require-Bundle: org.eclipse.xtext,
  org.eclipse.xtext.util,
  org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
  de.evoal.languages.model.utils;bundle-version="1.0.0",
- de.evoal.languages.models;bundle-version="2026.4.0",
- de.evoal.languages.model.generator.dsl;bundle-version="2026.4.0"
+ de.evoal.languages.models;bundle-version="2026.10.0",
+ de.evoal.languages.model.generator.dsl;bundle-version="2026.10.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-21
 Export-Package: de.evoal.languages.model.mll.dsl,
  de.evoal.languages.model.mll.dsl.generator,

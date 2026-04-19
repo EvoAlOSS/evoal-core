@@ -3,7 +3,7 @@ Automatic-Module-Name: de.evoal.languages.model.ddl.dsl.ui
 Bundle-ManifestVersion: 2
 Bundle-Name: de.evoal.languages.model.ddl.dsl.ui
 Bundle-Vendor: EvoAl Project
-Bundle-Version: 2026.4.0.qualifier
+Bundle-Version: 2026.10.0.qualifier
 Bundle-SymbolicName: de.evoal.languages.model.ddl.dsl.ui; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: de.evoal.languages.model.ddl.dsl,
