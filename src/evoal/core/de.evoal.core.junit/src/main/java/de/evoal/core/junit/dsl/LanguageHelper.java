@@ -1,6 +1,16 @@
 package de.evoal.core.junit.dsl;
 
+import lombok.extern.slf4j.Slf4j;
+
 import com.google.inject.Injector;
+
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.ISetup;
+import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.resource.XtextResourceSet;
+
 import de.evoal.languages.model.ddl.DdlPackage;
 import de.evoal.languages.model.ddl.dsl.DataDescriptionLanguageStandaloneSetup;
 import de.evoal.languages.model.dl.dsl.DefinitionLanguageStandaloneSetup;
@@ -11,13 +21,6 @@ import de.evoal.languages.model.mll.MllPackage;
 import de.evoal.languages.model.mll.dsl.MachineLearningLanguageStandaloneSetup;
 import de.evoal.languages.model.ol.OLPackage;
 import de.evoal.languages.model.ol.dsl.OptimisationLanguageStandaloneSetup;
-import lombok.extern.slf4j.Slf4j;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.ISetup;
-import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.resource.XtextResourceSet;
 
 @Slf4j
 public final class LanguageHelper {
@@ -26,19 +29,16 @@ public final class LanguageHelper {
     public static <T extends EObject> T loadFromClasspath(final String name) {
         initEMFandXTEXT();
 
-        if(name.endsWith(".ddl")) {
-           return loadFromClasspath(name, new DataDescriptionLanguageStandaloneSetup());
-        } else if(name.endsWith(".dl")) {
-            return loadFromClasspath(name, new DefinitionLanguageStandaloneSetup());
-        } else if(name.endsWith(".generator")) {
-            return loadFromClasspath(name, new GeneratorDSLStandaloneSetup());
-        } else if(name.endsWith(".mll")) {
-            return loadFromClasspath(name, new MachineLearningLanguageStandaloneSetup());
-        } else if(name.endsWith(".ol")) {
-            return loadFromClasspath(name, new OptimisationLanguageStandaloneSetup());
-        }
+        final String fileExtension = name.substring(name.lastIndexOf('.') + 1);
 
-        return null;
+        return switch(fileExtension)  {
+                case "ddl" -> loadFromClasspath(name, new DataDescriptionLanguageStandaloneSetup());
+                case "dl" -> loadFromClasspath(name, new DefinitionLanguageStandaloneSetup());
+                case "generator" -> loadFromClasspath(name, new GeneratorDSLStandaloneSetup());
+                case "mll" -> loadFromClasspath(name, new MachineLearningLanguageStandaloneSetup());
+                case "ol" ->  loadFromClasspath(name, new OptimisationLanguageStandaloneSetup());
+                default -> null;
+            };
     }
 
     private static void initEMFandXTEXT() {
