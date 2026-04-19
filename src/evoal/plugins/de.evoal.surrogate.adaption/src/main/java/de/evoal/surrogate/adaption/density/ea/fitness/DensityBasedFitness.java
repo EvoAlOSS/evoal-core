@@ -1,14 +1,10 @@
 package de.evoal.surrogate.adaption.density.ea.fitness;
 
 import de.evoal.core.api.dynamic.EAnnotationHelper;
-import de.evoal.core.api.properties.PropertySpecification;
 import de.evoal.core.api.utils.AttributeHelper;
-import de.evoal.languages.model.base.definitions.DataDescription;
 import de.evoal.surrogate.adaption.density.model.DensityData;
 import de.evoal.core.api.properties.Properties;
-import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.properties.info.PropertiesRanges;
-import de.evoal.core.api.utils.Requirements;
 import de.evoal.languages.model.base.expressions.Instance;
 import de.evoal.optimisation.api.model.OptimisationFunction;
 import de.evoal.optimisation.api.model.OptimisationFunctionDecorator;

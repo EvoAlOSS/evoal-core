@@ -75,8 +75,7 @@ public class PredictiveErrorCalculator extends SurrogateInformationCalculator {
             }
         }
 
-        final KernelBasedSVRFunction regression = kernelFunction;
-        final EStructuralFeature targetSpec = kernelFunction.getOutput().iterator().next();
+        final EStructuralFeature targetSpec = kernelFunction.getOutput().getFirst();
         final PredictiveErrorData errorData = result.get(targetSpec);
 
         final DenseMatrix kernelTrainingsMatrix = DenseMatrix.zeros(ScalarType.Float64, numberOfPoints, numberOfPoints);
@@ -88,10 +87,10 @@ public class PredictiveErrorCalculator extends SurrogateInformationCalculator {
                  .forEach(p -> {
                      final Integer index1 = p.getFirst();
                      final Integer index2 = p.getSecond();
-                     double kernelValue = calculateKernelValue(regression, kernelFunction.getInput(), kernelFunction.getOutput(), index1, index2);
+                     double kernelValue = calculateKernelValue(kernelFunction, kernelFunction.getInput(), index1, index2);
 
                      kernelTrainingsMatrixNotAdded.set(index1, index2, kernelValue);
-                     kernelTrainingsMatrix.set(index1, index2, index1.equals(index2) ? kernelValue + 1.0 / regression.getGamma() : kernelValue);
+                     kernelTrainingsMatrix.set(index1, index2, index1.equals(index2) ? kernelValue + 1.0 / kernelFunction.getGamma() : kernelValue);
                  });
 
 
@@ -180,23 +179,22 @@ public class PredictiveErrorCalculator extends SurrogateInformationCalculator {
     }
 
     private Double calculateKernelValue(final KernelBasedSVRFunction regression,
-                                        final Space space1,
-                                        final Space space2,
+                                        final Space space,
                                         final Integer index1,
                                         final Integer index2) {
         final TypedEObject sp1 = training.get(index1).getFirst();
         final TypedEObject sp2 = training.get(index2).getFirst();
 
-        final double [] data1 = new double[space1.size()];
-        final double [] data2 = new double[space2.size()];
+        final double [] data1 = new double[space.size()];
+        final double [] data2 = new double[space.size()];
 
         int i1 = 0;
-        for(final EStructuralFeature feature : space1) {
+        for(final EStructuralFeature feature : space) {
             data1[i1++] = sp1.eGetAsDouble(feature);
         }
 
         int i2 = 0;
-        for(final EStructuralFeature feature : space2) {
+        for(final EStructuralFeature feature : space) {
             data2[i2++] = sp2.eGetAsDouble(feature);
         }
 

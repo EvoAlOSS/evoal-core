@@ -24,7 +24,7 @@ public class KernelDensityEstimation extends AbstractDensityEstimation {
     protected KernelDensityData calculateDensityData(final Function<EObjectPair, Double> mapper) {
         final EObjectPairStreamSupplier supplier = EObjectPairStreamFactory.createFromList(sourcePropertiesSpec, targetPropertiesSpec, trainingData);
         final double [] data = supplier.get()
-                .mapToDouble(pair -> mapper.apply(pair))
+                .mapToDouble(mapper::apply)
                 .toArray();
 
         return new KernelDensityData(bandwidth, data);
