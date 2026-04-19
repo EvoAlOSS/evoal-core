@@ -11,7 +11,7 @@ module de.evoal.surrogate.api {
     requires org.eclipse.emf.common;
     requires org.eclipse.xtext;
 
-    requires com.fasterxml.jackson.databind;
+    requires tools.jackson.databind;
 
 
     requires de.evoal.languages.model.ddl;
@@ -29,6 +29,9 @@ module de.evoal.surrogate.api {
     requires smile.base;
     requires de.evoal.languages.models;
     requires commons.math3;
+    requires com.microsoft.onnxruntime;
+    requires org.checkerframework.checker.qual;
+//    requires org.bytedeco.javacpp;
 
     // export resources
     exports de.evoal.surrogate.api;
@@ -66,4 +69,6 @@ module de.evoal.surrogate.api {
     opens de.evoal.surrogate.main.statistics.ranged to weld.core.impl;
     opens de.evoal.surrogate.main.statistics.surrogate to weld.core.impl;
     opens de.evoal.surrogate.main.training to weld.core.impl;
+    exports de.evoal.surrogate.api.io.onnx;
+    opens de.evoal.surrogate.api.io.onnx to weld.core.impl;
 }

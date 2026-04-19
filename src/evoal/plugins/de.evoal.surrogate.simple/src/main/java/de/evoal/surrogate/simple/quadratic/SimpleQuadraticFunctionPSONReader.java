@@ -5,8 +5,12 @@ import de.evoal.surrogate.api.io.pson.SurrogateConfiguration;
 import de.evoal.surrogate.api.io.pson.AbstractPSONReader;
 import lombok.extern.slf4j.Slf4j;
 
+import jakarta.enterprise.context.Dependent;
+import jakarta.inject.Named;
 
 @Slf4j
+@Named("de.evoal.surrogate.simple.ml.simple-quadratic-regression-reader-pson")
+@Dependent
 public class SimpleQuadraticFunctionPSONReader extends AbstractPSONReader {
 	@Override
 	public ModelFunction load() {

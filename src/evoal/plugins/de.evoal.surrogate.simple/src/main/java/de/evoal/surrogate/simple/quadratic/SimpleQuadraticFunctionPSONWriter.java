@@ -8,8 +8,13 @@ import lombok.NonNull;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
+import jakarta.enterprise.context.Dependent;
+import jakarta.inject.Named;
+
 @Setter
 @Slf4j
+@Named("de.evoal.surrogate.simple.ml.simple-quadratic-regression-writer-pson")
+@Dependent
 public class SimpleQuadraticFunctionPSONWriter extends AbstractPSONWriter {
     /**
      * Name of the intercept parameter.

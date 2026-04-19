@@ -46,7 +46,15 @@
 			<artifactId>junit-jupiter</artifactId>
 		</dependency>
 
-		<dependency>
+        <!-- Dependency to ONNX Runtime -->
+        <dependency>
+            <groupId>com.microsoft.onnxruntime</groupId>
+            <artifactId>onnxruntime</artifactId>
+            <version>1.23.2</version>
+        </dependency>
+
+
+        <dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-core</artifactId>
 			<version>${mockito.version}</version>

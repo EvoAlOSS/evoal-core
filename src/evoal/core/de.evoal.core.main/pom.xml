@@ -110,7 +110,7 @@
 
 		<!-- JSON API -->
 		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
+			<groupId>tools.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
 			<version>${jackson.version}</version>
 			<scope>compile</scope>

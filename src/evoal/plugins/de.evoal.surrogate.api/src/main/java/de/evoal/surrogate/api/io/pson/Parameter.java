@@ -12,8 +12,6 @@ import de.evoal.languages.model.base.expressions.Attribute;
 public class Parameter {
 	private @NonNull String name;
 
-//	@JsonDeserialize(using = ReflectiveDeserializer.class)
-//	@JsonSerialize(using = ReflectiveSerializer.class)
 	private @NonNull Object value;
 
 	public static Parameter from(final String name, final Object value) {

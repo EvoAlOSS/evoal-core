@@ -20,7 +20,7 @@
         <evoal.languages.version>2026.4.0-SNAPSHOT</evoal.languages.version>
 
         <deltaspike.version>2.0.1</deltaspike.version>
-        <jackson.version>2.13.4.1</jackson.version>
+        <jackson.version>3.1.2</jackson.version>
         <jacoco.version>0.8.14</jacoco.version>
         <jenetics.version>7.1.0</jenetics.version>
         <lombok.version>1.18.42</lombok.version>

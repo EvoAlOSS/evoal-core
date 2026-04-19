@@ -18,7 +18,7 @@ module de.evoal.core.main {
 
     requires org.apache.commons.csv;
 
-    requires com.fasterxml.jackson.databind;
+    requires tools.jackson.databind;
 
     requires org.fusesource.jansi;
 

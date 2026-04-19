@@ -12,7 +12,7 @@ import de.evoal.surrogate.api.function.ModelFunction;
 @Slf4j
 public class IdentityFunction extends ModelFunction {
 	public IdentityFunction(final Space input, final Space output) {
-		super("de.evoal.surrogate.simple.ml.identity-learner", input, output);
+		super("de.evoal.surrogate.simple.ml.identity", input, output);
 
 		log.info("Using identity mapping from {} to {}.", input, output);
 	}
