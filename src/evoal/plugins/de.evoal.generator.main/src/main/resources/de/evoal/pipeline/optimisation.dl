@@ -1,7 +1,7 @@
-import "definitions" from de.evoal.optimisation.core;
-import "definitions" from de.evoal.pipeline.benchmarks;
+import "definitions" from 'de.evoal.optimisation.core';
+import "definitions" from 'de.evoal.pipeline.benchmarks';
 
-module de.evoal.pipeline.optimisation {
+module 'de.evoal.pipeline.optimisation' {
 	/**
 	 * A combination of known optimisation functions for benchmarking purposes.
 	 */
@@ -24,11 +24,11 @@ module de.evoal.pipeline.optimisation {
 	    /**
 	     * The data the benchmark will read.
 	     */
-	    reads : array data;
+	    'reads' : array data;
 
 	    /**
 	     * The data the benchmark will generate.
 	     */
-	    writes : array data;
+	    'writes' : array data;
 	}
 }

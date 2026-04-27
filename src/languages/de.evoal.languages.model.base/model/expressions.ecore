@@ -210,7 +210,31 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ValueReference" eSuperTypes="#//ConstantExpression"/>
-  <eClassifiers xsi:type="ecore:EClass" name="SelfReference" eSuperTypes="#//ValueReference"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AttributeReference" eSuperTypes="#//ReadExpression">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="*&#xA;Reference to an attribute&#xA;"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="self" lowerBound="1" eType="#//SelfReference"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="*&#xA;Reference to the instance itself.&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="chain" ordered="false"
+        upperBound="-1" eType="#//ValueDefinitionReference" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="*&#xA;Chain of references.&#xA;"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/OCL/Collection">
+        <details key="nullFree" value="false"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SelfReference" eSuperTypes="#//ValueReference">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="*&#xA;A reference to an object itself.&#xA;"/>
+    </eAnnotations>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ConfigurationReference" eSuperTypes="#//ValueReference">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="reference" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

@@ -87,16 +87,3 @@ StructuredDataDescriptionRule returns definitions::StructuredDataDescription:
 StatementRule returns expressions::Expression:
 	BaseLanguage::ExpressionRule ';'
 ;
-
-
-@Override
-ReferenceRule returns expressions::ConstantExpression:
-	ValuelDefinitionReferenceRule
-	| TypeDefinitionReferenceRule
-	| SelfReferenceRule
-;
-
-SelfReferenceRule returns expressions::SelfReference:
-	{expressions::SelfReference}
-	'value'
-;

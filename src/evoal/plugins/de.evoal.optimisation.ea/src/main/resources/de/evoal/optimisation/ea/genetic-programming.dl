@@ -59,7 +59,7 @@ module de.evoal.optimisation.ea.'genetic-programming' {
 	
 	type constant {
 		name : string;
-		value : real;
+		'value' : real;
 	}
 
 	/**

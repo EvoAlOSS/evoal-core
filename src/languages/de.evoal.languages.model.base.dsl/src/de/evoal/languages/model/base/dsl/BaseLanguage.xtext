@@ -88,11 +88,23 @@ CallRule returns Call:
 	function=[FunctionDefinition|QualifiedName] '(' (parameters += ExpressionRule (',' parameters += ExpressionRule)* )? ')'
 ;
 
-ReferenceRule returns ConstantExpression:
+ReferenceRule returns ReadExpression:
 	ValuelDefinitionReferenceRule
 	| ConfigurationReferenceRule
 	| TypeDefinitionReferenceRule
+	| AttributeReferenceRule
 ;
+
+SelfReferenceRule returns SelfReference:
+	{SelfReference} 'self' | {SelfReference} 'value'
+;
+
+AttributeReferenceRule returns AttributeReference:
+    self = SelfReferenceRule
+
+    ('.' chain += ValuelDefinitionReferenceRule)*
+;
+
 
 ConfigurationReferenceRule returns ConfigurationReference:
 	'tree' reference = StringOrId

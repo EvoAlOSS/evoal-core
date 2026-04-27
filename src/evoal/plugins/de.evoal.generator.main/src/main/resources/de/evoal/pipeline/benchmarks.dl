@@ -1,7 +1,7 @@
-import "definitions" from de.evoal.core.math;
+import "definitions" from 'de.evoal.core.math';
 import "definitions" from 'de.evoal.pipeline.base';
 
-module de.evoal.pipeline.benchmarks {
+module 'de.evoal.pipeline.benchmarks' {
     /**
      * Optimisation benchmark functions for testing optimisation problems.
      */

@@ -1251,6 +1251,29 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 		return getCallRuleAccess().getRule();
 	}
 	
+	//SelfReferenceRule returns SelfReference:
+	//    {SelfReference} 'self' | {SelfReference} 'value'
+	//;
+	public BaseLanguageGrammarAccess.SelfReferenceRuleElements getSelfReferenceRuleAccess() {
+		return gaBaseLanguage.getSelfReferenceRuleAccess();
+	}
+	
+	public ParserRule getSelfReferenceRuleRule() {
+		return getSelfReferenceRuleAccess().getRule();
+	}
+	
+	//AttributeReferenceRule returns AttributeReference:
+	//    self = SelfReferenceRule
+	//    ('.' chain += ValuelDefinitionReferenceRule)*
+	//;
+	public BaseLanguageGrammarAccess.AttributeReferenceRuleElements getAttributeReferenceRuleAccess() {
+		return gaBaseLanguage.getAttributeReferenceRuleAccess();
+	}
+	
+	public ParserRule getAttributeReferenceRuleRule() {
+		return getAttributeReferenceRuleAccess().getRule();
+	}
+	
 	//ConfigurationReferenceRule returns ConfigurationReference:
 	//    'tree' reference = StringOrId
 	//;

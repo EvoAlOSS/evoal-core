@@ -12,6 +12,7 @@ import de.evoal.languages.model.base.expressions.AndExpression;
 import de.evoal.languages.model.base.expressions.Array;
 import de.evoal.languages.model.base.expressions.Attribute;
 import de.evoal.languages.model.base.expressions.AttributeDefinitionReference;
+import de.evoal.languages.model.base.expressions.AttributeReference;
 import de.evoal.languages.model.base.expressions.BooleanLiteral;
 import de.evoal.languages.model.base.expressions.Call;
 import de.evoal.languages.model.base.expressions.ComparisonExpression;
@@ -219,6 +220,13 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	private EClass valueReferenceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass attributeReferenceEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -961,6 +969,36 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	@Override
+	public EClass getAttributeReference() {
+		return attributeReferenceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getAttributeReference_Self() {
+		return (EReference)attributeReferenceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getAttributeReference_Chain() {
+		return (EReference)attributeReferenceEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getSelfReference() {
 		return selfReferenceEClass;
 	}
@@ -1322,6 +1360,10 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 
 		valueReferenceEClass = createEClass(VALUE_REFERENCE);
 
+		attributeReferenceEClass = createEClass(ATTRIBUTE_REFERENCE);
+		createEReference(attributeReferenceEClass, ATTRIBUTE_REFERENCE__SELF);
+		createEReference(attributeReferenceEClass, ATTRIBUTE_REFERENCE__CHAIN);
+
 		selfReferenceEClass = createEClass(SELF_REFERENCE);
 
 		configurationReferenceEClass = createEClass(CONFIGURATION_REFERENCE);
@@ -1414,6 +1456,7 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		stringLiteralEClass.getESuperTypes().add(this.getLiteral());
 		instanceEClass.getESuperTypes().add(this.getLiteral());
 		valueReferenceEClass.getESuperTypes().add(this.getConstantExpression());
+		attributeReferenceEClass.getESuperTypes().add(this.getReadExpression());
 		selfReferenceEClass.getESuperTypes().add(this.getValueReference());
 		configurationReferenceEClass.getESuperTypes().add(this.getValueReference());
 		valueDefinitionReferenceEClass.getESuperTypes().add(this.getValueReference());
@@ -1512,6 +1555,10 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		initEReference(getAttribute_Value(), this.getExpression(), null, "value", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(valueReferenceEClass, ValueReference.class, "ValueReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(attributeReferenceEClass, AttributeReference.class, "AttributeReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getAttributeReference_Self(), this.getSelfReference(), null, "self", null, 1, 1, AttributeReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAttributeReference_Chain(), this.getValueDefinitionReference(), null, "chain", null, 0, -1, AttributeReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		initEClass(selfReferenceEClass, SelfReference.class, "SelfReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1677,6 +1724,12 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		   });
 		addAnnotation
 		  (getUnaryAddOrSubtractExpression_Operators(),
+		   source,
+		   new String[] {
+			   "nullFree", "false"
+		   });
+		addAnnotation
+		  (getAttributeReference_Chain(),
 		   source,
 		   new String[] {
 			   "nullFree", "false"

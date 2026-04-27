@@ -8,6 +8,12 @@ package de.evoal.languages.model.base.expressions;
  * A representation of the model object '<em><b>Self Reference</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * *
+ * A reference to an object itself.
+ * 
+ * <!-- end-model-doc -->
+ *
  *
  * @see de.evoal.languages.model.base.expressions.ExpressionsPackage#getSelfReference()
  * @model

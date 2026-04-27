@@ -386,10 +386,11 @@ public class InstanceLanguageGrammarAccess extends AbstractElementFinder.Abstrac
 		return getCallRuleAccess().getRule();
 	}
 	
-	//ReferenceRule returns ConstantExpression:
+	//ReferenceRule returns ReadExpression:
 	//    ValuelDefinitionReferenceRule
 	//    | ConfigurationReferenceRule
 	//    | TypeDefinitionReferenceRule
+	//    | AttributeReferenceRule
 	//;
 	public BaseLanguageGrammarAccess.ReferenceRuleElements getReferenceRuleAccess() {
 		return gaBaseLanguage.getReferenceRuleAccess();
@@ -397,6 +398,29 @@ public class InstanceLanguageGrammarAccess extends AbstractElementFinder.Abstrac
 	
 	public ParserRule getReferenceRuleRule() {
 		return getReferenceRuleAccess().getRule();
+	}
+	
+	//SelfReferenceRule returns SelfReference:
+	//    {SelfReference} 'self' | {SelfReference} 'value'
+	//;
+	public BaseLanguageGrammarAccess.SelfReferenceRuleElements getSelfReferenceRuleAccess() {
+		return gaBaseLanguage.getSelfReferenceRuleAccess();
+	}
+	
+	public ParserRule getSelfReferenceRuleRule() {
+		return getSelfReferenceRuleAccess().getRule();
+	}
+	
+	//AttributeReferenceRule returns AttributeReference:
+	//    self = SelfReferenceRule
+	//    ('.' chain += ValuelDefinitionReferenceRule)*
+	//;
+	public BaseLanguageGrammarAccess.AttributeReferenceRuleElements getAttributeReferenceRuleAccess() {
+		return gaBaseLanguage.getAttributeReferenceRuleAccess();
+	}
+	
+	public ParserRule getAttributeReferenceRuleRule() {
+		return getAttributeReferenceRuleAccess().getRule();
 	}
 	
 	//ConfigurationReferenceRule returns ConfigurationReference:

@@ -12,6 +12,7 @@ import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias;
+import org.eclipse.xtext.serializer.analysis.GrammarAlias.AlternativeAlias;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.GroupAlias;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.TokenAlias;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynNavigable;
@@ -24,12 +25,14 @@ public class GeneratorDSLSyntacticSequencer extends AbstractSyntacticSequencer {
 	protected GeneratorDSLGrammarAccess grammarAccess;
 	protected AbstractElementAlias match_ConcreteStepRule___ReadsKeyword_4_0_LeftSquareBracketKeyword_4_1_RightSquareBracketKeyword_4_3_SemicolonKeyword_4_4__q;
 	protected AbstractElementAlias match_ConcreteStepRule___WritesKeyword_5_0_LeftSquareBracketKeyword_5_1_RightSquareBracketKeyword_5_3_SemicolonKeyword_5_4__q;
+	protected AbstractElementAlias match_SelfReferenceRule_SelfKeyword_0_1_or_ValueKeyword_1_1;
 	
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (GeneratorDSLGrammarAccess) access;
 		match_ConcreteStepRule___ReadsKeyword_4_0_LeftSquareBracketKeyword_4_1_RightSquareBracketKeyword_4_3_SemicolonKeyword_4_4__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getConcreteStepRuleAccess().getReadsKeyword_4_0()), new TokenAlias(false, false, grammarAccess.getConcreteStepRuleAccess().getLeftSquareBracketKeyword_4_1()), new TokenAlias(false, false, grammarAccess.getConcreteStepRuleAccess().getRightSquareBracketKeyword_4_3()), new TokenAlias(false, false, grammarAccess.getConcreteStepRuleAccess().getSemicolonKeyword_4_4()));
 		match_ConcreteStepRule___WritesKeyword_5_0_LeftSquareBracketKeyword_5_1_RightSquareBracketKeyword_5_3_SemicolonKeyword_5_4__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getConcreteStepRuleAccess().getWritesKeyword_5_0()), new TokenAlias(false, false, grammarAccess.getConcreteStepRuleAccess().getLeftSquareBracketKeyword_5_1()), new TokenAlias(false, false, grammarAccess.getConcreteStepRuleAccess().getRightSquareBracketKeyword_5_3()), new TokenAlias(false, false, grammarAccess.getConcreteStepRuleAccess().getSemicolonKeyword_5_4()));
+		match_SelfReferenceRule_SelfKeyword_0_1_or_ValueKeyword_1_1 = new AlternativeAlias(false, false, new TokenAlias(false, false, grammarAccess.getSelfReferenceRuleAccess().getSelfKeyword_0_1()), new TokenAlias(false, false, grammarAccess.getSelfReferenceRuleAccess().getValueKeyword_1_1()));
 	}
 	
 	@Override
@@ -48,6 +51,8 @@ public class GeneratorDSLSyntacticSequencer extends AbstractSyntacticSequencer {
 				emit_ConcreteStepRule___ReadsKeyword_4_0_LeftSquareBracketKeyword_4_1_RightSquareBracketKeyword_4_3_SemicolonKeyword_4_4__q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_ConcreteStepRule___WritesKeyword_5_0_LeftSquareBracketKeyword_5_1_RightSquareBracketKeyword_5_3_SemicolonKeyword_5_4__q.equals(syntax))
 				emit_ConcreteStepRule___WritesKeyword_5_0_LeftSquareBracketKeyword_5_1_RightSquareBracketKeyword_5_3_SemicolonKeyword_5_4__q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_SelfReferenceRule_SelfKeyword_0_1_or_ValueKeyword_1_1.equals(syntax))
+				emit_SelfReferenceRule_SelfKeyword_0_1_or_ValueKeyword_1_1(semanticObject, getLastNavigableState(), syntaxNodes);
 			else acceptNodes(getLastNavigableState(), syntaxNodes);
 		}
 	}
@@ -79,6 +84,20 @@ public class GeneratorDSLSyntacticSequencer extends AbstractSyntacticSequencer {
 	 * </pre>
 	 */
 	protected void emit_ConcreteStepRule___WritesKeyword_5_0_LeftSquareBracketKeyword_5_1_RightSquareBracketKeyword_5_3_SemicolonKeyword_5_4__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * <pre>
+	 * Ambiguous syntax:
+	 *     'self' | 'value'
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     (rule start) (ambiguity) (rule start)
+	 
+	 * </pre>
+	 */
+	protected void emit_SelfReferenceRule_SelfKeyword_0_1_or_ValueKeyword_1_1(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	

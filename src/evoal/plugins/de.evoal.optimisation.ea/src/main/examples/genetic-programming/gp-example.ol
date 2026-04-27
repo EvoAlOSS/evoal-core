@@ -30,7 +30,7 @@ module example {
               content   := data 'regression-function';
               variables := [ data 'x0' ];
               operations := [ plus {}, multiply {}, minus {}, divide {}, sqrt {}, pow {}];
-              constants := [ constant { name := "PI"; value := 'π'; } ];
+              constants := [ constant { name := "PI"; 'value' := 'π'; } ];
               'ephemeral-constants' := [ 'ephemeral-constant' { lower := -50; upper := 50; count := 2; } ];
               'validators' := [ 'must-use-variable' { count := 1; }, 'program-size' { 'max-size' := 64; } ];
 

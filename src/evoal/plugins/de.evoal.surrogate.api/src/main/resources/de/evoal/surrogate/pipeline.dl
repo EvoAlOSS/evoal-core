@@ -4,7 +4,7 @@ import "definitions" from 'de.evoal.surrogate.ml';
 /**
  * Generator extensions based on surrogate models.
  */
-module de.evoal.surrogate.pipeline {
+module 'de.evoal.surrogate.pipeline' {
 
     /**
      * Uses a pre-trained surrogate model as function.

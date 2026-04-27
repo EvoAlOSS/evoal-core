@@ -23,6 +23,7 @@ import de.evoal.languages.model.base.expressions.AddOrSubtractExpression;
 import de.evoal.languages.model.base.expressions.AndExpression;
 import de.evoal.languages.model.base.expressions.Array;
 import de.evoal.languages.model.base.expressions.Attribute;
+import de.evoal.languages.model.base.expressions.AttributeReference;
 import de.evoal.languages.model.base.expressions.BooleanLiteral;
 import de.evoal.languages.model.base.expressions.Call;
 import de.evoal.languages.model.base.expressions.ComparisonExpression;
@@ -141,6 +142,9 @@ public class DataDescriptionLanguageSemanticSequencer extends BaseLanguageSemant
 			case ExpressionsPackage.ATTRIBUTE:
 				sequence_AttributeRule(context, (Attribute) semanticObject); 
 				return; 
+			case ExpressionsPackage.ATTRIBUTE_REFERENCE:
+				sequence_AttributeReferenceRule(context, (AttributeReference) semanticObject); 
+				return; 
 			case ExpressionsPackage.BOOLEAN_LITERAL:
 				sequence_BooleanLiteralRule(context, (BooleanLiteral) semanticObject); 
 				return; 
@@ -187,8 +191,8 @@ public class DataDescriptionLanguageSemanticSequencer extends BaseLanguageSemant
 				sequence_StringLiteralRule(context, (StringLiteral) semanticObject); 
 				return; 
 			case ExpressionsPackage.TYPE_DEFINITION_REFERENCE:
-				if (rule == grammarAccess.getReferenceRuleRule()
-						|| rule == grammarAccess.getReadExpressionRuleRule()
+				if (rule == grammarAccess.getReadExpressionRuleRule()
+						|| rule == grammarAccess.getReferenceRuleRule()
 						|| rule == grammarAccess.getTypeDefinitionReferenceRuleRule()) {
 					sequence_BaseDataReferenceRule_StructuredDataDescriptionReferenceRule(context, (TypeDefinitionReference) semanticObject); 
 					return; 
@@ -327,22 +331,6 @@ public class DataDescriptionLanguageSemanticSequencer extends BaseLanguageSemant
 	 * </pre>
 	 */
 	protected void sequence_EnumTypeDefinitionRule(ISerializationContext context, EnumDefinition semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * <pre>
-	 * Contexts:
-	 *     ReferenceRule returns SelfReference
-	 *     SelfReferenceRule returns SelfReference
-	 *     ReadExpressionRule returns SelfReference
-	 *
-	 * Constraint:
-	 *     {SelfReference}
-	 * </pre>
-	 */
-	protected void sequence_SelfReferenceRule(ISerializationContext context, SelfReference semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

@@ -156,6 +156,10 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 				return createValueReferenceAdapter();
 			}
 			@Override
+			public Adapter caseAttributeReference(AttributeReference object) {
+				return createAttributeReferenceAdapter();
+			}
+			@Override
 			public Adapter caseSelfReference(SelfReference object) {
 				return createSelfReferenceAdapter();
 			}
@@ -520,6 +524,20 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createValueReferenceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.expressions.AttributeReference <em>Attribute Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.evoal.languages.model.base.expressions.AttributeReference
+	 * @generated
+	 */
+	public Adapter createAttributeReferenceAdapter() {
 		return null;
 	}
 

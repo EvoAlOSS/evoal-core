@@ -1,4 +1,4 @@
-module de.evoal.core.math {
+module 'de.evoal.core.math' {
 	/**
 	 * The one and only PI.
 	 */

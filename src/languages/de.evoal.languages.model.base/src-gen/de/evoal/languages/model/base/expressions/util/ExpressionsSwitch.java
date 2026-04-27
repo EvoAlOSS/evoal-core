@@ -250,6 +250,14 @@ public class ExpressionsSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case ExpressionsPackage.ATTRIBUTE_REFERENCE: {
+				AttributeReference attributeReference = (AttributeReference)theEObject;
+				T result = caseAttributeReference(attributeReference);
+				if (result == null) result = caseReadExpression(attributeReference);
+				if (result == null) result = caseExpression(attributeReference);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case ExpressionsPackage.SELF_REFERENCE: {
 				SelfReference selfReference = (SelfReference)theEObject;
 				T result = caseSelfReference(selfReference);
@@ -677,6 +685,21 @@ public class ExpressionsSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseValueReference(ValueReference object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Attribute Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Attribute Reference</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAttributeReference(AttributeReference object) {
 		return null;
 	}
 

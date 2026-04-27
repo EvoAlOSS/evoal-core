@@ -1077,6 +1077,133 @@ ruleReferenceRule returns [EObject current=null]
 			$current = $this_TypeDefinitionReferenceRule_2.current;
 			afterParserOrEnumRuleCall();
 		}
+		    |
+		{
+			/* */
+		}
+		{
+			newCompositeNode(grammarAccess.getReferenceRuleAccess().getAttributeReferenceRuleParserRuleCall_3());
+		}
+		this_AttributeReferenceRule_3=ruleAttributeReferenceRule
+		{
+			$current = $this_AttributeReferenceRule_3.current;
+			afterParserOrEnumRuleCall();
+		}
+	)
+;
+
+// Entry rule entryRuleSelfReferenceRule
+entryRuleSelfReferenceRule returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getSelfReferenceRuleRule()); }
+	iv_ruleSelfReferenceRule=ruleSelfReferenceRule
+	{ $current=$iv_ruleSelfReferenceRule.current; }
+	EOF;
+
+// Rule SelfReferenceRule
+ruleSelfReferenceRule returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			(
+				{
+					/* */
+				}
+				{
+					$current = forceCreateModelElement(
+						grammarAccess.getSelfReferenceRuleAccess().getSelfReferenceAction_0_0(),
+						$current);
+				}
+			)
+			otherlv_1='self'
+			{
+				newLeafNode(otherlv_1, grammarAccess.getSelfReferenceRuleAccess().getSelfKeyword_0_1());
+			}
+		)
+		    |
+		(
+			(
+				{
+					/* */
+				}
+				{
+					$current = forceCreateModelElement(
+						grammarAccess.getSelfReferenceRuleAccess().getSelfReferenceAction_1_0(),
+						$current);
+				}
+			)
+			otherlv_3='value'
+			{
+				newLeafNode(otherlv_3, grammarAccess.getSelfReferenceRuleAccess().getValueKeyword_1_1());
+			}
+		)
+	)
+;
+
+// Entry rule entryRuleAttributeReferenceRule
+entryRuleAttributeReferenceRule returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getAttributeReferenceRuleRule()); }
+	iv_ruleAttributeReferenceRule=ruleAttributeReferenceRule
+	{ $current=$iv_ruleAttributeReferenceRule.current; }
+	EOF;
+
+// Rule AttributeReferenceRule
+ruleAttributeReferenceRule returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getAttributeReferenceRuleAccess().getSelfSelfReferenceRuleParserRuleCall_0_0());
+				}
+				lv_self_0_0=ruleSelfReferenceRule
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getAttributeReferenceRuleRule());
+					}
+					set(
+						$current,
+						"self",
+						lv_self_0_0,
+						"de.evoal.languages.model.base.dsl.BaseLanguage.SelfReferenceRule");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		(
+			otherlv_1='.'
+			{
+				newLeafNode(otherlv_1, grammarAccess.getAttributeReferenceRuleAccess().getFullStopKeyword_1_0());
+			}
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getAttributeReferenceRuleAccess().getChainValuelDefinitionReferenceRuleParserRuleCall_1_1_0());
+					}
+					lv_chain_2_0=ruleValuelDefinitionReferenceRule
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getAttributeReferenceRuleRule());
+						}
+						add(
+							$current,
+							"chain",
+							lv_chain_2_0,
+							"de.evoal.languages.model.base.dsl.BaseLanguage.ValuelDefinitionReferenceRule");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+		)*
 	)
 ;
 

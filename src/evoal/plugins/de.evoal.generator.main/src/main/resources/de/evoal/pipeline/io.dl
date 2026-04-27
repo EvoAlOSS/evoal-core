@@ -1,7 +1,7 @@
-import "definitions" from de.evoal.core.math;
+import "definitions" from 'de.evoal.core.math';
 import "definitions" from 'de.evoal.pipeline.base';
 
-module de.evoal.pipeline.io {
+module 'de.evoal.pipeline.io' {
 	/**
 	 * Reads the specified data from a file.
 	 */

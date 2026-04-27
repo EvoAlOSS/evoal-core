@@ -1,8 +1,8 @@
-import "definitions" from de.evoal.core.math;
+import "definitions" from 'de.evoal.core.math';
 import "definitions" from 'de.evoal.pipeline.base';
 import "definitions" from 'de.evoal.core.constraints';
 
-module de.evoal.pipeline.sequences {
+module 'de.evoal.pipeline.sequences' {
 
     /**
      * The pipeline component for generating custom sequences.

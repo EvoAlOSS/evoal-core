@@ -1,4 +1,4 @@
-import "definitions" from de.evoal.core.math;
+import "definitions" from 'de.evoal.core.math';
 import "definitions" from 'de.evoal.pipeline.base';
 import "definitions" from 'de.evoal.pipeline.benchmarks';
 import "definitions" from 'de.evoal.pipeline.distributions';

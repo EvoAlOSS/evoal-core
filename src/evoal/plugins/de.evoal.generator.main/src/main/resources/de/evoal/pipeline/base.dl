@@ -1,4 +1,4 @@
-module de.evoal.pipeline.base {
+module 'de.evoal.pipeline.base' {
     /**
      * Base type for all pipeline elements.
      */
@@ -36,5 +36,5 @@ module de.evoal.pipeline.base {
     /**
      * Executes a pipeline.
      */
-    def void execute(literal pipeline);
+    def void execute(literal 'pipeline');
 }

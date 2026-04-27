@@ -73,6 +73,7 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 			case ExpressionsPackage.INSTANCE: return createInstance();
 			case ExpressionsPackage.ATTRIBUTE: return createAttribute();
 			case ExpressionsPackage.VALUE_REFERENCE: return createValueReference();
+			case ExpressionsPackage.ATTRIBUTE_REFERENCE: return createAttributeReference();
 			case ExpressionsPackage.SELF_REFERENCE: return createSelfReference();
 			case ExpressionsPackage.CONFIGURATION_REFERENCE: return createConfigurationReference();
 			case ExpressionsPackage.VALUE_DEFINITION_REFERENCE: return createValueDefinitionReference();
@@ -304,6 +305,17 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 	public ValueReference createValueReference() {
 		ValueReferenceImpl valueReference = new ValueReferenceImpl();
 		return valueReference;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public AttributeReference createAttributeReference() {
+		AttributeReferenceImpl attributeReference = new AttributeReferenceImpl();
+		return attributeReference;
 	}
 
 	/**

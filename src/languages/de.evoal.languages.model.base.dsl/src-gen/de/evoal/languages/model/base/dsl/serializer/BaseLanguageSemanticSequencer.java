@@ -17,6 +17,7 @@ import de.evoal.languages.model.base.expressions.AddOrSubtractExpression;
 import de.evoal.languages.model.base.expressions.AndExpression;
 import de.evoal.languages.model.base.expressions.Array;
 import de.evoal.languages.model.base.expressions.Attribute;
+import de.evoal.languages.model.base.expressions.AttributeReference;
 import de.evoal.languages.model.base.expressions.BooleanLiteral;
 import de.evoal.languages.model.base.expressions.Call;
 import de.evoal.languages.model.base.expressions.ComparisonExpression;
@@ -31,6 +32,7 @@ import de.evoal.languages.model.base.expressions.Parantheses;
 import de.evoal.languages.model.base.expressions.PartialComparisonExpression;
 import de.evoal.languages.model.base.expressions.PowerOfExpression;
 import de.evoal.languages.model.base.expressions.RealLiteral;
+import de.evoal.languages.model.base.expressions.SelfReference;
 import de.evoal.languages.model.base.expressions.StringLiteral;
 import de.evoal.languages.model.base.expressions.TypeDefinitionReference;
 import de.evoal.languages.model.base.expressions.UnaryAddOrSubtractExpression;
@@ -108,6 +110,9 @@ public class BaseLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 			case ExpressionsPackage.ATTRIBUTE:
 				sequence_AttributeRule(context, (Attribute) semanticObject); 
 				return; 
+			case ExpressionsPackage.ATTRIBUTE_REFERENCE:
+				sequence_AttributeReferenceRule(context, (AttributeReference) semanticObject); 
+				return; 
 			case ExpressionsPackage.BOOLEAN_LITERAL:
 				sequence_BooleanLiteralRule(context, (BooleanLiteral) semanticObject); 
 				return; 
@@ -146,6 +151,9 @@ public class BaseLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 				return; 
 			case ExpressionsPackage.REAL_LITERAL:
 				sequence_RealLiteralRule(context, (RealLiteral) semanticObject); 
+				return; 
+			case ExpressionsPackage.SELF_REFERENCE:
+				sequence_SelfReferenceRule(context, (SelfReference) semanticObject); 
 				return; 
 			case ExpressionsPackage.STRING_LITERAL:
 				sequence_StringLiteralRule(context, (StringLiteral) semanticObject); 
@@ -298,6 +306,22 @@ public class BaseLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 	 * </pre>
 	 */
 	protected void sequence_AttributeDefinitionRule(ISerializationContext context, AttributeDefinition semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     ReadExpressionRule returns AttributeReference
+	 *     ReferenceRule returns AttributeReference
+	 *     AttributeReferenceRule returns AttributeReference
+	 *
+	 * Constraint:
+	 *     (self=SelfReferenceRule chain+=ValuelDefinitionReferenceRule*)
+	 * </pre>
+	 */
+	protected void sequence_AttributeReferenceRule(ISerializationContext context, AttributeReference semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -809,6 +833,20 @@ public class BaseLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 	 * </pre>
 	 */
 	protected void sequence_RealTypeRule(ISerializationContext context, RealType semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     SelfReferenceRule returns SelfReference
+	 *
+	 * Constraint:
+	 *     {SelfReference}
+	 * </pre>
+	 */
+	protected void sequence_SelfReferenceRule(ISerializationContext context, SelfReference semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

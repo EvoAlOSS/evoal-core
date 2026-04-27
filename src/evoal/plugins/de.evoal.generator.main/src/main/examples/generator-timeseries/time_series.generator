@@ -23,14 +23,14 @@ module 'time_series' {
                     },
                     // Generate value based on the generated time value
                     'expression-based-sequence' {
-                        variable   := data value;
+                        variable   := data 'value';
                         initial    := 1;
                        'expression' := data time * 42;
                     }
                 ];
             }
 
-            writes [data time, data value];
+            writes [data time, data 'value'];
         }
     ]
 

@@ -35,6 +35,7 @@ public class OptimisationLanguageParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getOptimisationGoalRuleAccess().getAlternatives(), "rule__OptimisationGoalRule__Alternatives");
 			builder.put(grammarAccess.getReadExpressionRuleAccess().getAlternatives(), "rule__ReadExpressionRule__Alternatives");
 			builder.put(grammarAccess.getReferenceRuleAccess().getAlternatives(), "rule__ReferenceRule__Alternatives");
+			builder.put(grammarAccess.getSelfReferenceRuleAccess().getAlternatives(), "rule__SelfReferenceRule__Alternatives");
 			builder.put(grammarAccess.getTypeDefinitionReferenceRuleAccess().getAlternatives(), "rule__TypeDefinitionReferenceRule__Alternatives");
 			builder.put(grammarAccess.getLiteralRuleAccess().getAlternatives(), "rule__LiteralRule__Alternatives");
 			builder.put(grammarAccess.getNumberLiteralRuleAccess().getAlternatives(), "rule__NumberLiteralRule__Alternatives");
@@ -79,6 +80,10 @@ public class OptimisationLanguageParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getCallRuleAccess().getGroup(), "rule__CallRule__Group__0");
 			builder.put(grammarAccess.getCallRuleAccess().getGroup_2(), "rule__CallRule__Group_2__0");
 			builder.put(grammarAccess.getCallRuleAccess().getGroup_2_1(), "rule__CallRule__Group_2_1__0");
+			builder.put(grammarAccess.getSelfReferenceRuleAccess().getGroup_0(), "rule__SelfReferenceRule__Group_0__0");
+			builder.put(grammarAccess.getSelfReferenceRuleAccess().getGroup_1(), "rule__SelfReferenceRule__Group_1__0");
+			builder.put(grammarAccess.getAttributeReferenceRuleAccess().getGroup(), "rule__AttributeReferenceRule__Group__0");
+			builder.put(grammarAccess.getAttributeReferenceRuleAccess().getGroup_1(), "rule__AttributeReferenceRule__Group_1__0");
 			builder.put(grammarAccess.getConfigurationReferenceRuleAccess().getGroup(), "rule__ConfigurationReferenceRule__Group__0");
 			builder.put(grammarAccess.getBaseDataReferenceRuleAccess().getGroup(), "rule__BaseDataReferenceRule__Group__0");
 			builder.put(grammarAccess.getStructuredDataDescriptionReferenceRuleAccess().getGroup(), "rule__StructuredDataDescriptionReferenceRule__Group__0");
@@ -159,6 +164,8 @@ public class OptimisationLanguageParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getCallRuleAccess().getFunctionAssignment_0(), "rule__CallRule__FunctionAssignment_0");
 			builder.put(grammarAccess.getCallRuleAccess().getParametersAssignment_2_0(), "rule__CallRule__ParametersAssignment_2_0");
 			builder.put(grammarAccess.getCallRuleAccess().getParametersAssignment_2_1_1(), "rule__CallRule__ParametersAssignment_2_1_1");
+			builder.put(grammarAccess.getAttributeReferenceRuleAccess().getSelfAssignment_0(), "rule__AttributeReferenceRule__SelfAssignment_0");
+			builder.put(grammarAccess.getAttributeReferenceRuleAccess().getChainAssignment_1_1(), "rule__AttributeReferenceRule__ChainAssignment_1_1");
 			builder.put(grammarAccess.getConfigurationReferenceRuleAccess().getReferenceAssignment_1(), "rule__ConfigurationReferenceRule__ReferenceAssignment_1");
 			builder.put(grammarAccess.getValuelDefinitionReferenceRuleAccess().getDefinitionAssignment(), "rule__ValuelDefinitionReferenceRule__DefinitionAssignment");
 			builder.put(grammarAccess.getBaseDataReferenceRuleAccess().getDefinitionAssignment_1(), "rule__BaseDataReferenceRule__DefinitionAssignment_1");

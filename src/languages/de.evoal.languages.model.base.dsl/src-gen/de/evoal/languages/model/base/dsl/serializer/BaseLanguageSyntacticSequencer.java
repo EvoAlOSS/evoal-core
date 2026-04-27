@@ -12,6 +12,9 @@ import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias;
+import org.eclipse.xtext.serializer.analysis.GrammarAlias.AlternativeAlias;
+import org.eclipse.xtext.serializer.analysis.GrammarAlias.TokenAlias;
+import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynNavigable;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynTransition;
 import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
 
@@ -19,10 +22,12 @@ import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
 public class BaseLanguageSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected BaseLanguageGrammarAccess grammarAccess;
+	protected AbstractElementAlias match_SelfReferenceRule_SelfKeyword_0_1_or_ValueKeyword_1_1;
 	
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (BaseLanguageGrammarAccess) access;
+		match_SelfReferenceRule_SelfKeyword_0_1_or_ValueKeyword_1_1 = new AlternativeAlias(false, false, new TokenAlias(false, false, grammarAccess.getSelfReferenceRuleAccess().getSelfKeyword_0_1()), new TokenAlias(false, false, grammarAccess.getSelfReferenceRuleAccess().getValueKeyword_1_1()));
 	}
 	
 	@Override
@@ -37,8 +42,24 @@ public class BaseLanguageSyntacticSequencer extends AbstractSyntacticSequencer {
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			acceptNodes(getLastNavigableState(), syntaxNodes);
+			if (match_SelfReferenceRule_SelfKeyword_0_1_or_ValueKeyword_1_1.equals(syntax))
+				emit_SelfReferenceRule_SelfKeyword_0_1_or_ValueKeyword_1_1(semanticObject, getLastNavigableState(), syntaxNodes);
+			else acceptNodes(getLastNavigableState(), syntaxNodes);
 		}
 	}
 
+	/**
+	 * <pre>
+	 * Ambiguous syntax:
+	 *     'self' | 'value'
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     (rule start) (ambiguity) (rule start)
+	 
+	 * </pre>
+	 */
+	protected void emit_SelfReferenceRule_SelfKeyword_0_1_or_ValueKeyword_1_1(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
 }

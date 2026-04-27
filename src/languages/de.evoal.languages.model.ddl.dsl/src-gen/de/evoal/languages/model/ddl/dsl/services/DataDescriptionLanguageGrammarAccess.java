@@ -8,7 +8,6 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import de.evoal.languages.model.base.dsl.services.BaseLanguageGrammarAccess;
 import java.util.List;
-import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
@@ -674,57 +673,6 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 		//';'
 		public Keyword getSemicolonKeyword_1() { return cSemicolonKeyword_1; }
 	}
-	public class ReferenceRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.ddl.dsl.DataDescriptionLanguage.ReferenceRule");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cValuelDefinitionReferenceRuleParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cTypeDefinitionReferenceRuleParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		private final RuleCall cSelfReferenceRuleParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
-		
-		//@Override
-		//ReferenceRule returns expressions::ConstantExpression:
-		//    ValuelDefinitionReferenceRule
-		//    | TypeDefinitionReferenceRule
-		//    | SelfReferenceRule
-		//;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//ValuelDefinitionReferenceRule
-		//| TypeDefinitionReferenceRule
-		//| SelfReferenceRule
-		public Alternatives getAlternatives() { return cAlternatives; }
-		
-		//ValuelDefinitionReferenceRule
-		public RuleCall getValuelDefinitionReferenceRuleParserRuleCall_0() { return cValuelDefinitionReferenceRuleParserRuleCall_0; }
-		
-		//TypeDefinitionReferenceRule
-		public RuleCall getTypeDefinitionReferenceRuleParserRuleCall_1() { return cTypeDefinitionReferenceRuleParserRuleCall_1; }
-		
-		//SelfReferenceRule
-		public RuleCall getSelfReferenceRuleParserRuleCall_2() { return cSelfReferenceRuleParserRuleCall_2; }
-	}
-	public class SelfReferenceRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.ddl.dsl.DataDescriptionLanguage.SelfReferenceRule");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cSelfReferenceAction_0 = (Action)cGroup.eContents().get(0);
-		private final Keyword cValueKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		
-		//SelfReferenceRule returns expressions::SelfReference:
-		//    {expressions::SelfReference}
-		//    'value'
-		//;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//{expressions::SelfReference}
-		//'value'
-		public Group getGroup() { return cGroup; }
-		
-		//{expressions::SelfReference}
-		public Action getSelfReferenceAction_0() { return cSelfReferenceAction_0; }
-		
-		//'value'
-		public Keyword getValueKeyword_1() { return cValueKeyword_1; }
-	}
 	
 	public class ScaleTypeElements extends AbstractElementFinder.AbstractEnumRuleElementFinder {
 		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.ddl.dsl.DataDescriptionLanguage.ScaleType");
@@ -838,8 +786,6 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 	private final UntypedBaseDataDescriptionRuleElements pUntypedBaseDataDescriptionRule;
 	private final StructuredDataDescriptionRuleElements pStructuredDataDescriptionRule;
 	private final StatementRuleElements pStatementRule;
-	private final ReferenceRuleElements pReferenceRule;
-	private final SelfReferenceRuleElements pSelfReferenceRule;
 	
 	private final Grammar grammar;
 	
@@ -866,8 +812,6 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 		this.pUntypedBaseDataDescriptionRule = new UntypedBaseDataDescriptionRuleElements();
 		this.pStructuredDataDescriptionRule = new StructuredDataDescriptionRuleElements();
 		this.pStatementRule = new StatementRuleElements();
-		this.pReferenceRule = new ReferenceRuleElements();
-		this.pSelfReferenceRule = new SelfReferenceRuleElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -1061,32 +1005,6 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 	
 	public ParserRule getStatementRuleRule() {
 		return getStatementRuleAccess().getRule();
-	}
-	
-	//@Override
-	//ReferenceRule returns expressions::ConstantExpression:
-	//    ValuelDefinitionReferenceRule
-	//    | TypeDefinitionReferenceRule
-	//    | SelfReferenceRule
-	//;
-	public ReferenceRuleElements getReferenceRuleAccess() {
-		return pReferenceRule;
-	}
-	
-	public ParserRule getReferenceRuleRule() {
-		return getReferenceRuleAccess().getRule();
-	}
-	
-	//SelfReferenceRule returns expressions::SelfReference:
-	//    {expressions::SelfReference}
-	//    'value'
-	//;
-	public SelfReferenceRuleElements getSelfReferenceRuleAccess() {
-		return pSelfReferenceRule;
-	}
-	
-	public ParserRule getSelfReferenceRuleRule() {
-		return getSelfReferenceRuleAccess().getRule();
 	}
 	
 	//ExpressionRule returns Expression:
@@ -1294,6 +1212,43 @@ public class DataDescriptionLanguageGrammarAccess extends AbstractElementFinder.
 	
 	public ParserRule getCallRuleRule() {
 		return getCallRuleAccess().getRule();
+	}
+	
+	//ReferenceRule returns ReadExpression:
+	//    ValuelDefinitionReferenceRule
+	//    | ConfigurationReferenceRule
+	//    | TypeDefinitionReferenceRule
+	//    | AttributeReferenceRule
+	//;
+	public BaseLanguageGrammarAccess.ReferenceRuleElements getReferenceRuleAccess() {
+		return gaBaseLanguage.getReferenceRuleAccess();
+	}
+	
+	public ParserRule getReferenceRuleRule() {
+		return getReferenceRuleAccess().getRule();
+	}
+	
+	//SelfReferenceRule returns SelfReference:
+	//    {SelfReference} 'self' | {SelfReference} 'value'
+	//;
+	public BaseLanguageGrammarAccess.SelfReferenceRuleElements getSelfReferenceRuleAccess() {
+		return gaBaseLanguage.getSelfReferenceRuleAccess();
+	}
+	
+	public ParserRule getSelfReferenceRuleRule() {
+		return getSelfReferenceRuleAccess().getRule();
+	}
+	
+	//AttributeReferenceRule returns AttributeReference:
+	//    self = SelfReferenceRule
+	//    ('.' chain += ValuelDefinitionReferenceRule)*
+	//;
+	public BaseLanguageGrammarAccess.AttributeReferenceRuleElements getAttributeReferenceRuleAccess() {
+		return gaBaseLanguage.getAttributeReferenceRuleAccess();
+	}
+	
+	public ParserRule getAttributeReferenceRuleRule() {
+		return getAttributeReferenceRuleAccess().getRule();
 	}
 	
 	//ConfigurationReferenceRule returns ConfigurationReference:

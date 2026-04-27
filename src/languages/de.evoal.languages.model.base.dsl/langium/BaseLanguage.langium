@@ -1,4 +1,5 @@
 grammar BaseLanguage
+
 import 'Terminals'
 import 'expressions-types'
 import 'definitions-types'

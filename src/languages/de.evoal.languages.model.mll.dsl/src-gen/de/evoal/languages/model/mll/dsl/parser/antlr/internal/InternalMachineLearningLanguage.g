@@ -3053,6 +3053,58 @@ ruleCallRule returns [EObject current=null]
 	)
 ;
 
+// Entry rule entryRuleSelfReferenceRule
+entryRuleSelfReferenceRule returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getSelfReferenceRuleRule()); }
+	iv_ruleSelfReferenceRule=ruleSelfReferenceRule
+	{ $current=$iv_ruleSelfReferenceRule.current; }
+	EOF;
+
+// Rule SelfReferenceRule
+ruleSelfReferenceRule returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			(
+				{
+					/* */
+				}
+				{
+					$current = forceCreateModelElement(
+						grammarAccess.getSelfReferenceRuleAccess().getSelfReferenceAction_0_0(),
+						$current);
+				}
+			)
+			otherlv_1='self'
+			{
+				newLeafNode(otherlv_1, grammarAccess.getSelfReferenceRuleAccess().getSelfKeyword_0_1());
+			}
+		)
+		    |
+		(
+			(
+				{
+					/* */
+				}
+				{
+					$current = forceCreateModelElement(
+						grammarAccess.getSelfReferenceRuleAccess().getSelfReferenceAction_1_0(),
+						$current);
+				}
+			)
+			otherlv_3='value'
+			{
+				newLeafNode(otherlv_3, grammarAccess.getSelfReferenceRuleAccess().getValueKeyword_1_1());
+			}
+		)
+	)
+;
+
 // Entry rule entryRuleValuelDefinitionReferenceRule
 entryRuleValuelDefinitionReferenceRule returns [EObject current=null]:
 	{ newCompositeNode(grammarAccess.getValuelDefinitionReferenceRuleRule()); }

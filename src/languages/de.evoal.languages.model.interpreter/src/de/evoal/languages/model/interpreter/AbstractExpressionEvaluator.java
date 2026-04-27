@@ -7,6 +7,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import de.evoal.languages.model.base.definitions.AttributeDefinition;
 import de.evoal.languages.model.base.definitions.ConstantDefinition;
 import de.evoal.languages.model.base.expressions.*;
 import de.evoal.languages.model.base.expressions.util.ExpressionsSwitch;
@@ -282,6 +283,26 @@ public abstract class AbstractExpressionEvaluator extends ExpressionsSwitch<Obje
 		}
 
 		return result;
+	}
+	
+	@Override
+	public Object caseAttributeReference(final AttributeReference reference) {
+		EObject base = (EObject)doSwitch(reference.getSelf());
+		
+		for(final ValueDefinitionReference child: reference.getChain()) {
+			assert child.isAttributeReference();
+			final AttributeDefinition attr = (AttributeDefinition)child.getDefinition();
+			
+			base = ((Instance)base)
+					.getAttributes()
+					.stream()
+					.filter(a -> a.getDefinition().equals(attr))
+					.findFirst()
+					.get()
+					.getValue();
+		}
+		
+		return doSwitch(base);
 	}
 
 	@Override

@@ -1,5 +1,5 @@
 import "definitions" from 'de.evoal.core.constraints';
-import "definitions" from de.evoal.surrogate.ml;
+import "definitions" from 'de.evoal.surrogate.ml';
 
 /**
  * Module containing support vector regression-based surrogat models.
@@ -391,7 +391,7 @@ module de.evoal.surrogate.smile.ml {
 	 *   <li>Chih-Chung Chang and Chih-Jen Lin. LIBSVM: a Library for Support Vector Machines.</li>
 	 * </ul>
 	 */
-	@MultiVariateConstraint{ 'expression'  := 'soft-margin' < tolerance; }
+	@MultiVariateConstraint{  'expression'  := self.'soft-margin' < self.tolerance; }
 	type 'epsilon-svr' extends surrogate {
 		/**
 	     * The soft margin penalty parameter.

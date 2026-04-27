@@ -36,6 +36,11 @@ public class LiteralSwitch extends AbstractExpressionEvaluator {
     }
 
     @Override
+    public Object caseSelfReference(final SelfReference reference) {
+        return state.getByName("self");
+    }
+
+    @Override
     public Object defaultCase(EObject object) {
         log.error("Visitor for {} is not implemented.", object);
         return super.defaultCase(object);

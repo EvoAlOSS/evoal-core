@@ -562,17 +562,20 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		private final RuleCall cValuelDefinitionReferenceRuleParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cConfigurationReferenceRuleParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cTypeDefinitionReferenceRuleParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		private final RuleCall cAttributeReferenceRuleParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
 		
-		//ReferenceRule returns ConstantExpression:
+		//ReferenceRule returns ReadExpression:
 		//    ValuelDefinitionReferenceRule
 		//    | ConfigurationReferenceRule
 		//    | TypeDefinitionReferenceRule
+		//    | AttributeReferenceRule
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//ValuelDefinitionReferenceRule
 		//| ConfigurationReferenceRule
 		//| TypeDefinitionReferenceRule
+		//| AttributeReferenceRule
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//ValuelDefinitionReferenceRule
@@ -583,6 +586,83 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		
 		//TypeDefinitionReferenceRule
 		public RuleCall getTypeDefinitionReferenceRuleParserRuleCall_2() { return cTypeDefinitionReferenceRuleParserRuleCall_2; }
+		
+		//AttributeReferenceRule
+		public RuleCall getAttributeReferenceRuleParserRuleCall_3() { return cAttributeReferenceRuleParserRuleCall_3; }
+	}
+	public class SelfReferenceRuleElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.base.dsl.BaseLanguage.SelfReferenceRule");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
+		private final Action cSelfReferenceAction_0_0 = (Action)cGroup_0.eContents().get(0);
+		private final Keyword cSelfKeyword_0_1 = (Keyword)cGroup_0.eContents().get(1);
+		private final Group cGroup_1 = (Group)cAlternatives.eContents().get(1);
+		private final Action cSelfReferenceAction_1_0 = (Action)cGroup_1.eContents().get(0);
+		private final Keyword cValueKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
+		
+		//SelfReferenceRule returns SelfReference:
+		//    {SelfReference} 'self' | {SelfReference} 'value'
+		//;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//{SelfReference} 'self' | {SelfReference} 'value'
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//{SelfReference} 'self'
+		public Group getGroup_0() { return cGroup_0; }
+		
+		//{SelfReference}
+		public Action getSelfReferenceAction_0_0() { return cSelfReferenceAction_0_0; }
+		
+		//'self'
+		public Keyword getSelfKeyword_0_1() { return cSelfKeyword_0_1; }
+		
+		//{SelfReference} 'value'
+		public Group getGroup_1() { return cGroup_1; }
+		
+		//{SelfReference}
+		public Action getSelfReferenceAction_1_0() { return cSelfReferenceAction_1_0; }
+		
+		//'value'
+		public Keyword getValueKeyword_1_1() { return cValueKeyword_1_1; }
+	}
+	public class AttributeReferenceRuleElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.base.dsl.BaseLanguage.AttributeReferenceRule");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cSelfAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cSelfSelfReferenceRuleParserRuleCall_0_0 = (RuleCall)cSelfAssignment_0.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Keyword cFullStopKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
+		private final Assignment cChainAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final RuleCall cChainValuelDefinitionReferenceRuleParserRuleCall_1_1_0 = (RuleCall)cChainAssignment_1_1.eContents().get(0);
+		
+		//AttributeReferenceRule returns AttributeReference:
+		//    self = SelfReferenceRule
+		//    ('.' chain += ValuelDefinitionReferenceRule)*
+		//;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//self = SelfReferenceRule
+		//('.' chain += ValuelDefinitionReferenceRule)*
+		public Group getGroup() { return cGroup; }
+		
+		//self = SelfReferenceRule
+		public Assignment getSelfAssignment_0() { return cSelfAssignment_0; }
+		
+		//SelfReferenceRule
+		public RuleCall getSelfSelfReferenceRuleParserRuleCall_0_0() { return cSelfSelfReferenceRuleParserRuleCall_0_0; }
+		
+		//('.' chain += ValuelDefinitionReferenceRule)*
+		public Group getGroup_1() { return cGroup_1; }
+		
+		//'.'
+		public Keyword getFullStopKeyword_1_0() { return cFullStopKeyword_1_0; }
+		
+		//chain += ValuelDefinitionReferenceRule
+		public Assignment getChainAssignment_1_1() { return cChainAssignment_1_1; }
+		
+		//ValuelDefinitionReferenceRule
+		public RuleCall getChainValuelDefinitionReferenceRuleParserRuleCall_1_1_0() { return cChainValuelDefinitionReferenceRuleParserRuleCall_1_1_0; }
 	}
 	public class ConfigurationReferenceRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.base.dsl.BaseLanguage.ConfigurationReferenceRule");
@@ -2068,6 +2148,8 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 	private final ParanthesesRuleElements pParanthesesRule;
 	private final CallRuleElements pCallRule;
 	private final ReferenceRuleElements pReferenceRule;
+	private final SelfReferenceRuleElements pSelfReferenceRule;
+	private final AttributeReferenceRuleElements pAttributeReferenceRule;
 	private final ConfigurationReferenceRuleElements pConfigurationReferenceRule;
 	private final ValuelDefinitionReferenceRuleElements pValuelDefinitionReferenceRule;
 	private final TypeDefinitionReferenceRuleElements pTypeDefinitionReferenceRule;
@@ -2139,6 +2221,8 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		this.pParanthesesRule = new ParanthesesRuleElements();
 		this.pCallRule = new CallRuleElements();
 		this.pReferenceRule = new ReferenceRuleElements();
+		this.pSelfReferenceRule = new SelfReferenceRuleElements();
+		this.pAttributeReferenceRule = new AttributeReferenceRuleElements();
 		this.pConfigurationReferenceRule = new ConfigurationReferenceRuleElements();
 		this.pValuelDefinitionReferenceRule = new ValuelDefinitionReferenceRuleElements();
 		this.pTypeDefinitionReferenceRule = new TypeDefinitionReferenceRuleElements();
@@ -2417,10 +2501,11 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		return getCallRuleAccess().getRule();
 	}
 	
-	//ReferenceRule returns ConstantExpression:
+	//ReferenceRule returns ReadExpression:
 	//    ValuelDefinitionReferenceRule
 	//    | ConfigurationReferenceRule
 	//    | TypeDefinitionReferenceRule
+	//    | AttributeReferenceRule
 	//;
 	public ReferenceRuleElements getReferenceRuleAccess() {
 		return pReferenceRule;
@@ -2428,6 +2513,29 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 	
 	public ParserRule getReferenceRuleRule() {
 		return getReferenceRuleAccess().getRule();
+	}
+	
+	//SelfReferenceRule returns SelfReference:
+	//    {SelfReference} 'self' | {SelfReference} 'value'
+	//;
+	public SelfReferenceRuleElements getSelfReferenceRuleAccess() {
+		return pSelfReferenceRule;
+	}
+	
+	public ParserRule getSelfReferenceRuleRule() {
+		return getSelfReferenceRuleAccess().getRule();
+	}
+	
+	//AttributeReferenceRule returns AttributeReference:
+	//    self = SelfReferenceRule
+	//    ('.' chain += ValuelDefinitionReferenceRule)*
+	//;
+	public AttributeReferenceRuleElements getAttributeReferenceRuleAccess() {
+		return pAttributeReferenceRule;
+	}
+	
+	public ParserRule getAttributeReferenceRuleRule() {
+		return getAttributeReferenceRuleAccess().getRule();
 	}
 	
 	//ConfigurationReferenceRule returns ConfigurationReference:
