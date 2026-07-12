@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="optimization" nsURI="https://www.evoal.de/languages/optimization/1.0.0"
+    nsPrefix="opt">
+  <eAnnotations source="http://www.eclipse.org/OCL/Import">
+    <details key="ecore" value="http://www.eclipse.org/emf/2002/Ecore"/>
+  </eAnnotations>
+  <eSubpackages name="memory" nsURI="https://www.evoal.de/languages/memory/1.0.0"
+      nsPrefix="mem">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="*&#xA;The memory model of the optimization.&#xA;"/>
+    </eAnnotations>
+    <eClassifiers xsi:type="ecore:EClass" name="Execution">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="*&#xA;A single optimisation run.&#xA;"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="inputSpace" lowerBound="1"
+          eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClass">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="*&#xA;Definition of the input space (aka the search space of the&#xA;  optimisation problem).&#xA;"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="outputSpace" lowerBound="1"
+          eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClass">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="*&#xA;Definition of the output space (aka the optimisation space of&#xA;  the optimisation problem).&#xA;"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="states" upperBound="-1"
+          eType="#//memory/State" containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="*&#xA;The memory states of the execution.&#xA;"/>
+        </eAnnotations>
+        <eAnnotations source="http://www.eclipse.org/OCL/Collection">
+          <details key="nullFree" value="false"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="State" abstract="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="*&#xA;Base class for memory states.&#xA;"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Iteration" eSuperTypes="#//memory/State">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="*&#xA;A memory state for iteration-based algorithms.&#xA;"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="number" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" changeable="false">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="*&#xA;The iteration number. Please note that iteration 0 represents&#xA;  the initial population. The iteration numbers are used&#xA;  consecutively.&#xA;"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="steps" upperBound="-1"
+          eType="#//memory/IterationStep" containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="*&#xA;Intermediate iteration steps, e.g., recombination and mutation.&#xA;"/>
+        </eAnnotations>
+        <eAnnotations source="http://www.eclipse.org/OCL/Collection">
+          <details key="nullFree" value="false"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="ranks" upperBound="-1"
+          eType="#//memory/Rank" containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="*&#xA;The final individuals of the iteration.&#xA;"/>
+        </eAnnotations>
+        <eAnnotations source="http://www.eclipse.org/OCL/Collection">
+          <details key="nullFree" value="false"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="IterationStep" abstract="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="*&#xA;A single iteration step.&#xA;"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="*&#xA;Step description&#xA;"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="OrderedIterationStep" eSuperTypes="#//memory/IterationStep">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="*&#xA;Result of an iteration step&#xA;"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="ranks" upperBound="-1"
+          eType="#//memory/Rank" containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="*&#xA;List of ranks (result of this step).&#xA;"/>
+        </eAnnotations>
+        <eAnnotations source="http://www.eclipse.org/OCL/Collection">
+          <details key="nullFree" value="false"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="UnorderedIterationStep" eSuperTypes="#//memory/IterationStep">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="individuals" ordered="false"
+          upperBound="-1" eType="#//memory/Individual" containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="*&#xA;List of ranks (result of this step).&#xA;"/>
+        </eAnnotations>
+        <eAnnotations source="http://www.eclipse.org/OCL/Collection">
+          <details key="nullFree" value="false"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Rank">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="*&#xA;A rank of individuals of same fitness.&#xA;"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="number" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="*&#xA;The rank number.&#xA;"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="members" ordered="false"
+          upperBound="-1" eType="#//memory/Individual" containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="*&#xA;The members of the rank.&#xA;"/>
+        </eAnnotations>
+        <eAnnotations source="http://www.eclipse.org/OCL/Collection">
+          <details key="nullFree" value="false"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Individual">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="*&#xA;A single individual at a given point of the execution.&#xA;"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+          changeable="false">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="*&#xA;The unique identifier of the individual.&#xA;"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="input" lowerBound="1"
+          eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="*&#xA;The values of the input space.&#xA;&#xA;@constraint individual.input.eClass() == execution.inputSpace&#xA;"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="output" lowerBound="1"
+          eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="*&#xA;The values of the output space.&#xA;&#xA;@constraint individual.output.eClass() == execution.outputSpace&#xA;"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="relationships" ordered="false"
+          upperBound="-1" eType="#//memory/Relationship" containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="*&#xA;The relations to other individuals.&#xA;"/>
+        </eAnnotations>
+        <eAnnotations source="http://www.eclipse.org/OCL/Collection">
+          <details key="nullFree" value="false"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Relationship" abstract="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="*&#xA;Base class for relationships.&#xA;"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="target" ordered="false"
+          lowerBound="1" upperBound="-1" eType="#//memory/Individual">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="*&#xA;The relationship targets.&#xA;"/>
+        </eAnnotations>
+        <eAnnotations source="http://www.eclipse.org/OCL/Collection">
+          <details key="nullFree" value="false"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Identity" eSuperTypes="#//memory/Relationship">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="*&#xA;The referenced individuals represent the same individual (in a prior iteration).&#xA;"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Mutation" eSuperTypes="#//memory/Relationship">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="*&#xA;The source individual is a mutated version of the target individual.&#xA;"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Recombination" eSuperTypes="#//memory/Relationship">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="*&#xA;The source is a recombined version of the target individuals.&#xA;"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="other" lowerBound="1"
+          eType="#//memory/Recombination">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="*&#xA;The recombination that is the related one.&#xA;"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+  </eSubpackages>
+  <eSubpackages name="execution" nsURI="https://www.evoal.de/languages/execution/1.0.0"
+      nsPrefix="exec">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="*&#xA;Package containing interfaces for a common execution of all algorithms.&#xA;"/>
+    </eAnnotations>
+    <eClassifiers xsi:type="ecore:EClass" name="TerminationCriterion">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="*&#xA;The algorithm's termination criterion. It checks, based on the current&#xA;  iteration, if the algorithm should stop.&#xA;"/>
+      </eAnnotations>
+      <eOperations name="shouldTerminate" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="*&#xA;Checks if the algorithm should terminate.&#xA;&#xA;@param iteration The iteration to check.&#xA;&#xA;@return &lt;code>true&lt;/code> iff the algorithm should terminate.&#xA;"/>
+        </eAnnotations>
+        <eParameters name="iteration" lowerBound="1" eType="#//memory/Iteration"/>
+      </eOperations>
+      <eOperations name="shouldContinue" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="body" value="return !shouldTerminate(iteration);&#xA;"/>
+          <details key="documentation" value="*&#xA;Negation of the method {@link #shouldTerminate}.&#xA;"/>
+        </eAnnotations>
+        <eParameters name="iteration" lowerBound="1" eType="#//memory/Iteration"/>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Selection">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="*&#xA;In several situations an optimisation algorithm selects a subset of&#xA;  a given set of individuals (there are different strategies of how&#xA;  to select these individuals.&#xA;&#xA;Please note that the input and output of this operation are not&#xA;  necessarily sets. Several selections strategies allow selecting an&#xA;  individual multiple times. Thus, in- and output are bags (without&#xA;  order and allowing elements to be contained multiple times).&#xA;"/>
+      </eAnnotations>
+      <eOperations name="select" lowerBound="1" eType="#//memory/IterationStep">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="*&#xA;The actual selection operation.&#xA;&#xA;@param input A bag of individuals.&#xA;&#xA;@return A bag of selected individuals.&#xA;"/>
+        </eAnnotations>
+        <eParameters name="input" lowerBound="1" eType="#//memory/IterationStep"/>
+      </eOperations>
+    </eClassifiers>
+  </eSubpackages>
+</ecore:EPackage>

@@ -45,4 +45,19 @@
             genModel="model/dynamic.genmodel"/>
    </extension>
 
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated optimization -->
+      <package
+            uri="https://www.evoal.de/languages/memory/1.0.0"
+            class="de.evoal.languages.model.optimization.memory.MemoryPackage"
+            genModel="model/optimization.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated optimization -->
+      <package
+            uri="https://www.evoal.de/languages/execution/1.0.0"
+            class="de.evoal.languages.model.optimization.execution.ExecutionPackage"
+            genModel="model/optimization.genmodel"/>
+   </extension>
 </plugin>

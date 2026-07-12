@@ -26,4 +26,10 @@ Export-Package: de.evoal.languages.model.execution,
  de.evoal.languages.model.pipeline.util,
  de.evoal.languages.model.mll,
  de.evoal.languages.model.mll.impl,
- de.evoal.languages.model.mll.util
+ de.evoal.languages.model.mll.util,
+ de.evoal.languages.model.optimization.execution,
+ de.evoal.languages.model.optimization.execution.impl,
+ de.evoal.languages.model.optimization.execution.util,
+ de.evoal.languages.model.optimization.memory,
+ de.evoal.languages.model.optimization.memory.impl,
+ de.evoal.languages.model.optimization.memory.util

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="Copyright Text&#x9;(c) EvoAl project" modelDirectory="/de.evoal.languages.models/src-gen"
+    editDirectory="/de.evoal.languages.model.optimization.edit/src-gen" editorDirectory="/de.evoal.languages.model.optimization.editor/src-gen"
+    modelPluginID="de.evoal.languages.models" modelName="Optimization" editPluginClass="de.evoal.languages.model.optimization.provider.OptimizationEditPlugin"
+    editorPluginClass="de.evoal.languages.model.optimization.presentation.OptimizationEditPlugin"
+    rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" testsDirectory="/de.evoal.languages.models.tests/src-gen"
+    testSuiteClass="de.evoal.languages.model.optimization.tests.OptimizationAllTests"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="21.0" copyrightFields="false"
+    editPluginID="de.evoal.languages.model.optimization.edit" editorPluginID="de.evoal.languages.model.optimization.editor"
+    importOrganizing="true">
+  <foreignModel>optimization.ecore</foreignModel>
+  <genPackages prefix="Optimization" basePackage="de.evoal.languages.model" disposableProviderFactory="true"
+      ecorePackage="optimization.ecore#/">
+    <nestedGenPackages prefix="Memory" disposableProviderFactory="true" ecorePackage="optimization.ecore#//memory">
+      <genClasses image="false" ecoreClass="optimization.ecore#//memory/State"/>
+      <genClasses ecoreClass="optimization.ecore#//memory/Iteration">
+        <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute optimization.ecore#//memory/Iteration/number"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference optimization.ecore#//memory/Iteration/individuals"/>
+      </genClasses>
+      <genClasses ecoreClass="optimization.ecore#//memory/Excecution">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference optimization.ecore#//memory/Excecution/states"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference optimization.ecore#//memory/Excecution/outputSpace"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference optimization.ecore#//memory/Excecution/inputSpace"/>
+      </genClasses>
+      <genClasses ecoreClass="optimization.ecore#//memory/Individual">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute optimization.ecore#//memory/Individual/id"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference optimization.ecore#//memory/Individual/input"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference optimization.ecore#//memory/Individual/output"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference optimization.ecore#//memory/Individual/relationships"/>
+      </genClasses>
+      <genClasses ecoreClass="optimization.ecore#//memory/Relationship">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference optimization.ecore#//memory/Relationship/target"/>
+      </genClasses>
+      <genClasses ecoreClass="optimization.ecore#//memory/Identity"/>
+      <genClasses ecoreClass="optimization.ecore#//memory/Mutation"/>
+      <genClasses ecoreClass="optimization.ecore#//memory/Recombination">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference optimization.ecore#//memory/Recombination/other"/>
+      </genClasses>
+    </nestedGenPackages>
+    <nestedGenPackages prefix="Execution" disposableProviderFactory="true" ecorePackage="optimization.ecore#//execution"/>
+  </genPackages>
+</genmodel:GenModel>

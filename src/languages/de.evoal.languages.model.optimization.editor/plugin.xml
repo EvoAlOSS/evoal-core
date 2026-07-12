@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ Copyright Text	(c) EvoAl project
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <!-- @generated optimization -->
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="de.evoal.languages.model.optimization.memory.presentation.MemoryModelWizardID"
+            name="%_UI_MemoryModelWizard_label"
+            class="de.evoal.languages.model.optimization.memory.presentation.MemoryModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/MemoryModelFile.gif">
+         <description>%_UI_MemoryModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <!-- @generated optimization -->
+      <editor
+            id="de.evoal.languages.model.optimization.memory.presentation.MemoryEditorID"
+            name="%_UI_MemoryEditor_label"
+            icon="icons/full/obj16/MemoryModelFile.gif"
+            extensions="memory"
+            class="de.evoal.languages.model.optimization.memory.presentation.MemoryEditor"
+            contributorClass="de.evoal.languages.model.optimization.memory.presentation.MemoryActionBarContributor">
+      </editor>
+   </extension>
+</plugin>
