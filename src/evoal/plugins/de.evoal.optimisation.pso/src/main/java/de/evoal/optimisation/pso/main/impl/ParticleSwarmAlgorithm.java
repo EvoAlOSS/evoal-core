@@ -37,6 +37,12 @@ public class ParticleSwarmAlgorithm implements OptimisationAlgorithm {
     @Inject
     private AttributeHelper helper;
 
+    /**
+     * Creates the ids of the individuals in the memory model.
+     */
+    @Inject
+    private IndividualIDGenerator idGenerator;
+
     private int maximumNumberOfGenerations;
 
     @Inject @Dependent @Component
@@ -67,7 +73,9 @@ public class ParticleSwarmAlgorithm implements OptimisationAlgorithm {
         int generation = 0;
         swarm.initialise();
 
-        Iteration snapshot = toIteration(generation, swarm);
+        final SwarmMemory memory = new SwarmMemory(idGenerator);
+        final Particle[] initialParticles = swarm.getParticles();
+        Iteration snapshot = memory.toIteration(generation, initialParticles);
 
         statistics.add(snapshot);
         while(criterion.shouldContinue(snapshot)) {
@@ -78,23 +86,11 @@ public class ParticleSwarmAlgorithm implements OptimisationAlgorithm {
             swarm.move(generation, maximumNumberOfGenerations);
             swarm.evaluate();
 
-            snapshot = toIteration(generation, swarm);
+            final Particle[] particles = swarm.getParticles();
+            snapshot = memory.toIteration(generation, particles);
             statistics.add(snapshot);
         }
 
         statistics.write();
-    }
-
-    private Iteration toIteration(final int generation, final Swarm swarm) {
-        final Iteration result = MemoryFactory.eINSTANCE.createIteration();
-
-        result.setNumber(generation);
-
-        final Particle[] particles = swarm.getParticles();
-        final List<Rank> ranks = SwarmRanking.toRanks(particles);
-        result.getRanks().addAll(ranks);
-
-
-        return result;
     }
 }

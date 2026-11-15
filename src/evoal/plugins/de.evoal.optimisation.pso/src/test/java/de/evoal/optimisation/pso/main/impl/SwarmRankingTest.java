@@ -2,6 +2,7 @@ package de.evoal.optimisation.pso.main.impl;
 
 import java.util.List;
 import java.util.random.RandomGenerator;
+import java.util.stream.IntStream;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -12,12 +13,11 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import de.evoal.models.core.ecore.Space;
 import de.evoal.models.core.ecore.TypedEObject;
-import de.evoal.models.v202704.optimisation.execution.OptimisationValue;
 import de.evoal.models.v202704.optimisation.memory.Individual;
+import de.evoal.models.v202704.optimisation.memory.MemoryFactory;
 import de.evoal.models.v202704.optimisation.memory.Rank;
 
 import de.evoal.optimisation.pso.api.swarm.Particle;
@@ -42,12 +42,28 @@ public class SwarmRankingTest {
                    .toList();
     }
 
+    private static Individual individual(final int id) {
+        final Individual individual = MemoryFactory.eINSTANCE.createIndividual();
+        individual.setId(id);
+
+        return individual;
+    }
+
+    /**
+     * @return One individual per particle, its id is the particle's index.
+     */
+    private static Individual[] individualsOf(final Particle[] particles) {
+        return IntStream.range(0, particles.length)
+                        .mapToObj(SwarmRankingTest::individual)
+                        .toArray(Individual[]::new);
+    }
+
     /**
      * Creates a particle whose fitness is the given value (greater is better).
      */
     private Particle particle(final int id, final double value) {
         final TypedEObject position = space.newEObject();
-        final Fitness fitness = new Fitness(value);
+        final TestFitness fitness = new TestFitness(value);
         final State state = new State(position, fitness);
         final RandomGenerator random = RandomGenerator.of("L64X128MixRandom");
 
@@ -66,49 +82,6 @@ public class SwarmRankingTest {
         return new Space(eClass);
     }
 
-    /**
-     * An optimisation value with a single number, greater values are better.
-     */
-    private static final class Fitness extends MinimalEObjectImpl.Container implements OptimisationValue {
-        private final double value;
-
-        private Fitness(final double value) {
-            this.value = value;
-        }
-
-        @Override
-        public int compareTo(final OptimisationValue other) {
-            final Fitness otherFitness = (Fitness) other;
-
-            return Double.compare(value, otherFitness.value);
-        }
-
-        @Override
-        public boolean isBetter(final OptimisationValue other) {
-            return compareTo(other) > 0;
-        }
-
-        @Override
-        public boolean isEqual(final OptimisationValue other) {
-            return compareTo(other) == 0;
-        }
-
-        @Override
-        public boolean isWorse(final OptimisationValue other) {
-            return compareTo(other) < 0;
-        }
-
-        @Override
-        public TypedEObject toOptmisationSpace() {
-            return null;
-        }
-
-        @Override
-        public List<Object> toStatistics() {
-            return List.of(value);
-        }
-    }
-
     @Nested
     @DisplayName("given a swarm whose best particle is not the first one")
     class BestParticleIsNotFirst {
@@ -121,7 +94,8 @@ public class SwarmRankingTest {
         @Test
         public void theBestParticleIsInTheFirstRank() {
             // when
-            final List<Rank> ranks = SwarmRanking.toRanks(particles);
+            final Individual[] individuals = individualsOf(particles);
+            final List<Rank> ranks = SwarmRanking.toRanks(particles, individuals);
 
             // then
             final List<List<Integer>> ids = idsOf(ranks);
@@ -131,7 +105,8 @@ public class SwarmRankingTest {
         @Test
         public void theRanksAreNumberedFromZero() {
             // when
-            final List<Rank> ranks = SwarmRanking.toRanks(particles);
+            final Individual[] individuals = individualsOf(particles);
+            final List<Rank> ranks = SwarmRanking.toRanks(particles, individuals);
 
             // then
             final List<Integer> numbers = ranks.stream()
@@ -154,7 +129,8 @@ public class SwarmRankingTest {
         @Test
         public void particlesOfEqualFitnessShareARankInSwarmOrder() {
             // when
-            final List<Rank> ranks = SwarmRanking.toRanks(particles);
+            final Individual[] individuals = individualsOf(particles);
+            final List<Rank> ranks = SwarmRanking.toRanks(particles, individuals);
 
             // then
             final List<List<Integer>> ids = idsOf(ranks);

@@ -23,8 +23,6 @@ import lombok.Getter;
 
 import de.evoal.models.core.ecore.TypedEObject;
 import de.evoal.models.v202704.optimisation.execution.OptimisationValue;
-import de.evoal.models.v202704.optimisation.memory.Individual;
-import de.evoal.models.v202704.optimisation.memory.MemoryFactory;
 
 import de.evoal.optimisation.pso.api.optimiser.Mover;
 
@@ -191,18 +189,5 @@ public class Particle {
      */
     public void setCurrentFitness(final OptimisationValue fitness) {
         current.setFitness(fitness);
-    }
-
-    /**
-     * @return The current state of the particle as an individual of the memory model.
-     */
-    public Individual toIndividual() {
-        final Individual result = MemoryFactory.eINSTANCE.createIndividual();
-
-        result.setId(this.id);
-        result.setInput(current.getPosition());
-        result.setOutput(current.getFitness().toOptmisationSpace());
-
-        return result;
     }
 }
