@@ -5,6 +5,7 @@ package de.evoal.models.v202704.optimisation.model;
 
 import de.evoal.models.v202704.core.Configuration;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -24,6 +25,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link de.evoal.models.v202704.optimisation.model.OptimisationModule#getAlgorithm <em>Algorithm</em>}</li>
  *   <li>{@link de.evoal.models.v202704.optimisation.model.OptimisationModule#getProblem <em>Problem</em>}</li>
+ *   <li>{@link de.evoal.models.v202704.optimisation.model.OptimisationModule#getDocumentation <em>Documentation</em>}</li>
  * </ul>
  *
  * @see de.evoal.models.v202704.optimisation.model.ModelPackage#getOptimisationModule()
@@ -84,5 +86,25 @@ public interface OptimisationModule extends EObject {
 	 * @generated
 	 */
 	void setProblem(Problem value);
+
+	/**
+	 * Returns the value of the '<em><b>Documentation</b></em>' containment reference list.
+	 * The list contents are of type {@link de.evoal.models.v202704.core.Configuration}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * *
+	 * The statistics writers configured for the algorithm ({@code document := [...]} in the algorithm block).
+	 * They are used in addition to the writers of the problem.
+	 * 
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Documentation</em>' containment reference list.
+	 * @see de.evoal.models.v202704.optimisation.model.ModelPackage#getOptimisationModule_Documentation()
+	 * @model containment="true"
+	 *        annotation="https://evoal.de/v202610/models/core/configured-by type='de.evoal.optimisation.core.statistics-writer'"
+	 *        annotation="http://www.eclipse.org/OCL/Collection nullFree='false'"
+	 * @generated
+	 */
+	EList<Configuration> getDocumentation();
 
 } // OptimisationModule

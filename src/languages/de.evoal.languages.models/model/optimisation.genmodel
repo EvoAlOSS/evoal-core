@@ -129,6 +129,7 @@
       <genClasses ecoreClass="optimisation.ecore#//model/OptimisationModule">
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference optimisation.ecore#//model/OptimisationModule/algorithm"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference optimisation.ecore#//model/OptimisationModule/problem"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference optimisation.ecore#//model/OptimisationModule/documentation"/>
       </genClasses>
       <genClasses ecoreClass="optimisation.ecore#//model/Problem">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute optimisation.ecore#//model/Problem/name"/>

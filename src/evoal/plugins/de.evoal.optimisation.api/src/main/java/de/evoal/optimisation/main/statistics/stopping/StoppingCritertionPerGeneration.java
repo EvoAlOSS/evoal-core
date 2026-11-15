@@ -23,24 +23,65 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Logs stopping criteria information for an entire iteration.
+ * Writes for every iteration which of the configured stopping criteria are
+ *   satisfied to {@code stopping-per-candidates-per-generation.csv} (DL type
+ *   {@code stopping-per-candidates-per-generation}). The columns are described
+ *   in the DL type.
  */
 @Slf4j
 @Named("de.evoal.optimisation.core.stopping-per-candidates-per-generation")
 @Dependent
 public class StoppingCritertionPerGeneration implements StatisticsWriter {
-
+    /**
+     * Evaluates the attributes of the writer's configuration.
+     */
     @Inject
     private AttributeEvaluator evaluator;
 
+    /**
+     * Number of columns of a row.
+     */
     private int numberOfColumns;
 
+    /**
+     * The configured stopping criteria, one column each.
+     */
     private TerminationCriterion[] stoppingCriteria;
 
+    /**
+     * Creates the output the rows are written to.
+     */
     @Inject
     protected WriterStrategy strategy;
 
+    /**
+     * The output, created in {@link #init(EObject)}.
+     */
     protected Writer writer;
+
+    /**
+     * Writes the row of the iteration and flushes the output.
+     */
+    @Override
+    public void add(final Iteration result) {
+        final int iterationNumber = result.getNumber();
+        final Object [] record = toData(iterationNumber, result);
+
+        appendToWriter(record);
+
+        writer.flush();
+    }
+
+    /**
+     * Writes the row. A failure is logged and does not stop the run.
+     */
+    private void appendToWriter(final Object [] record) {
+        try {
+            writer.addRecord(record);
+        } catch (final WriterException e) {
+            log.warn("Failed to writer statistics record.");
+        }
+    }
 
     @Override
     @SneakyThrows(WriterException.class)
@@ -60,21 +101,14 @@ public class StoppingCritertionPerGeneration implements StatisticsWriter {
         }
 
         this.numberOfColumns = columns.size();
-        this.writer = strategy.create("stopping-criteria", columns);
+        this.writer = strategy.create("stopping-per-candidates-per-generation", columns);
 
         return this;
     }
 
-    @Override
-    public void add(final Iteration result) {
-        final int iterationNumber = result.getNumber();
-        final Object [] record = toData(iterationNumber, result);
-
-        appendToWriter(record);
-
-        writer.flush();
-    }
-
+    /**
+     * @return The row of the iteration: its number, then {@code 1} or {@code 0} per criterion.
+     */
     protected Object [] toData(final int iterationNumber, final Iteration result) {
         final Object [] data = new Object[numberOfColumns];
 
@@ -91,18 +125,13 @@ public class StoppingCritertionPerGeneration implements StatisticsWriter {
         return data;
     }
 
-    private void appendToWriter(final Object [] record) {
-        try {
-            writer.addRecord(record);
-        } catch (final WriterException e) {
-            log.warn("Failed to writer statistics record.");
-        }
-    }
-
+    /**
+     * Flushes the output at the end of a run.
+     */
     @Override
     public void write() {
         try {
-            strategy.close(writer);
+            strategy.flush(writer);
         } catch (final WriterException e) {
             log.error("Failed to write statistics:", e);
         }

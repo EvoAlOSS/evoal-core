@@ -204,6 +204,16 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * @generated
 	 */
 	@Override
+	public EReference getOptimisationModule_Documentation() {
+		return (EReference)optimisationModuleEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getProblem() {
 		return problemEClass;
 	}
@@ -370,6 +380,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		optimisationModuleEClass = createEClass(OPTIMISATION_MODULE);
 		createEReference(optimisationModuleEClass, OPTIMISATION_MODULE__ALGORITHM);
 		createEReference(optimisationModuleEClass, OPTIMISATION_MODULE__PROBLEM);
+		createEReference(optimisationModuleEClass, OPTIMISATION_MODULE__DOCUMENTATION);
 
 		problemEClass = createEClass(PROBLEM);
 		createEAttribute(problemEClass, PROBLEM__NAME);
@@ -432,6 +443,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEClass(optimisationModuleEClass, OptimisationModule.class, "OptimisationModule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getOptimisationModule_Algorithm(), theCorePackage.getConfiguration(), null, "algorithm", null, 1, 1, OptimisationModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getOptimisationModule_Problem(), this.getProblem(), null, "problem", null, 1, 1, OptimisationModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getOptimisationModule_Documentation(), theCorePackage.getConfiguration(), null, "documentation", null, 0, -1, OptimisationModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(problemEClass, Problem.class, "Problem", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getProblem_Name(), ecorePackage.getEString(), "name", null, 1, 1, Problem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -481,6 +493,12 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	protected void createConfiguredbyAnnotations() {
 		String source = "https://evoal.de/v202610/models/core/configured-by";
 		addAnnotation
+		  (getOptimisationModule_Documentation(),
+		   source,
+		   new String[] {
+			   "type", "de.evoal.optimisation.core.statistics-writer"
+		   });
+		addAnnotation
 		  (getProblem_OptimisationFunction(),
 		   source,
 		   new String[] {
@@ -502,6 +520,12 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 */
 	protected void createCollectionAnnotations() {
 		String source = "http://www.eclipse.org/OCL/Collection";
+		addAnnotation
+		  (getOptimisationModule_Documentation(),
+		   source,
+		   new String[] {
+			   "nullFree", "false"
+		   });
 		addAnnotation
 		  (getProblem_Documentation(),
 		   source,

@@ -3,6 +3,7 @@ module de.evoal.optimisation.api {
 
     requires jakarta.cdi;
     requires jakarta.inject;
+    requires jakarta.annotation;
 
     requires weld.se.core;
     requires deltaspike.cdictrl.api;

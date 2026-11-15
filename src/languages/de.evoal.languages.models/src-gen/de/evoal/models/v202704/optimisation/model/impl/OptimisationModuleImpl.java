@@ -9,14 +9,18 @@ import de.evoal.models.v202704.optimisation.model.ModelPackage;
 import de.evoal.models.v202704.optimisation.model.OptimisationModule;
 import de.evoal.models.v202704.optimisation.model.Problem;
 
+import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -28,6 +32,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * <ul>
  *   <li>{@link de.evoal.models.v202704.optimisation.model.impl.OptimisationModuleImpl#getAlgorithm <em>Algorithm</em>}</li>
  *   <li>{@link de.evoal.models.v202704.optimisation.model.impl.OptimisationModuleImpl#getProblem <em>Problem</em>}</li>
+ *   <li>{@link de.evoal.models.v202704.optimisation.model.impl.OptimisationModuleImpl#getDocumentation <em>Documentation</em>}</li>
  * </ul>
  *
  * @generated
@@ -52,6 +57,16 @@ public class OptimisationModuleImpl extends MinimalEObjectImpl.Container impleme
 	 * @ordered
 	 */
 	protected Problem problem;
+
+	/**
+	 * The cached value of the '{@link #getDocumentation() <em>Documentation</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDocumentation()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Configuration> documentation;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -168,12 +183,27 @@ public class OptimisationModuleImpl extends MinimalEObjectImpl.Container impleme
 	 * @generated
 	 */
 	@Override
+	public EList<Configuration> getDocumentation() {
+		if (documentation == null) {
+			documentation = new EObjectContainmentEList<Configuration>(Configuration.class, this, ModelPackage.OPTIMISATION_MODULE__DOCUMENTATION);
+		}
+		return documentation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case ModelPackage.OPTIMISATION_MODULE__ALGORITHM:
 				return basicSetAlgorithm(null, msgs);
 			case ModelPackage.OPTIMISATION_MODULE__PROBLEM:
 				return basicSetProblem(null, msgs);
+			case ModelPackage.OPTIMISATION_MODULE__DOCUMENTATION:
+				return ((InternalEList<?>)getDocumentation()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -190,6 +220,8 @@ public class OptimisationModuleImpl extends MinimalEObjectImpl.Container impleme
 				return getAlgorithm();
 			case ModelPackage.OPTIMISATION_MODULE__PROBLEM:
 				return getProblem();
+			case ModelPackage.OPTIMISATION_MODULE__DOCUMENTATION:
+				return getDocumentation();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -199,6 +231,7 @@ public class OptimisationModuleImpl extends MinimalEObjectImpl.Container impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -207,6 +240,10 @@ public class OptimisationModuleImpl extends MinimalEObjectImpl.Container impleme
 				return;
 			case ModelPackage.OPTIMISATION_MODULE__PROBLEM:
 				setProblem((Problem)newValue);
+				return;
+			case ModelPackage.OPTIMISATION_MODULE__DOCUMENTATION:
+				getDocumentation().clear();
+				getDocumentation().addAll((Collection<? extends Configuration>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -226,6 +263,9 @@ public class OptimisationModuleImpl extends MinimalEObjectImpl.Container impleme
 			case ModelPackage.OPTIMISATION_MODULE__PROBLEM:
 				setProblem((Problem)null);
 				return;
+			case ModelPackage.OPTIMISATION_MODULE__DOCUMENTATION:
+				getDocumentation().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -242,6 +282,8 @@ public class OptimisationModuleImpl extends MinimalEObjectImpl.Container impleme
 				return algorithm != null;
 			case ModelPackage.OPTIMISATION_MODULE__PROBLEM:
 				return problem != null;
+			case ModelPackage.OPTIMISATION_MODULE__DOCUMENTATION:
+				return documentation != null && !documentation.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

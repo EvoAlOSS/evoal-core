@@ -86,13 +86,22 @@ public interface ModelPackage extends EPackage {
 	int OPTIMISATION_MODULE__PROBLEM = 1;
 
 	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPTIMISATION_MODULE__DOCUMENTATION = 2;
+
+	/**
 	 * The number of structural features of the '<em>Optimisation Module</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPTIMISATION_MODULE_FEATURE_COUNT = 2;
+	int OPTIMISATION_MODULE_FEATURE_COUNT = 3;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.models.v202704.optimisation.model.impl.ProblemImpl <em>Problem</em>}' class.
@@ -332,6 +341,17 @@ public interface ModelPackage extends EPackage {
 	EReference getOptimisationModule_Problem();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link de.evoal.models.v202704.optimisation.model.OptimisationModule#getDocumentation <em>Documentation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Documentation</em>'.
+	 * @see de.evoal.models.v202704.optimisation.model.OptimisationModule#getDocumentation()
+	 * @see #getOptimisationModule()
+	 * @generated
+	 */
+	EReference getOptimisationModule_Documentation();
+
+	/**
 	 * Returns the meta object for class '{@link de.evoal.models.v202704.optimisation.model.Problem <em>Problem</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -526,6 +546,14 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EReference OPTIMISATION_MODULE__PROBLEM = eINSTANCE.getOptimisationModule_Problem();
+
+		/**
+		 * The meta object literal for the '<em><b>Documentation</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference OPTIMISATION_MODULE__DOCUMENTATION = eINSTANCE.getOptimisationModule_Documentation();
 
 		/**
 		 * The meta object literal for the '{@link de.evoal.models.v202704.optimisation.model.impl.ProblemImpl <em>Problem</em>}' class.

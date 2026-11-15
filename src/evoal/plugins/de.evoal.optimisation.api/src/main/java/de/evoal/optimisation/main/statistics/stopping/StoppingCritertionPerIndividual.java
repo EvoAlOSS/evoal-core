@@ -25,27 +25,72 @@ import org.eclipse.emf.ecore.EObject;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * Logs stopping criteria information for every individual of an iteration.
+ * Writes for every surviving individual of every iteration which of the
+ *   configured candidate-based stopping criteria are satisfied to
+ *   {@code stopping-per-candidates-per-iteration.csv} (DL type
+ *   {@code stopping-per-candidates-per-iteration}). The columns are described
+ *   in the DL type.
  */
 @Slf4j
 @Named("de.evoal.optimisation.core.stopping-per-candidates-per-iteration")
 @Dependent
 public class StoppingCritertionPerIndividual implements StatisticsWriter {
-
+    /**
+     * Evaluates the attributes of the writer's configuration.
+     */
     @Inject
     private AttributeEvaluator evaluator;
 
+    /**
+     * Number of columns of a row.
+     */
     private int numberOfColumns;
 
+    /**
+     * The configured candidate-based stopping criteria, one column each. Other
+     *   criteria are skipped with a warning.
+     */
     private CandidateBasedStoppingCriterion[] stoppingCriteria;
 
+    /**
+     * Creates the output the rows are written to.
+     */
     @Inject
     protected WriterStrategy strategy;
 
+    /**
+     * The output, created in {@link #init(EObject)}.
+     */
     protected Writer writer;
+
+    /**
+     * Writes one row per surviving individual of the iteration and flushes the output.
+     */
+    @Override
+    public void add(final Iteration result) {
+        final int iterationNumber = result.getNumber();
+        final Rank bestCandidates = result.getRanks().getFirst();
+        final int numberOfCandidates = result.numberOfSurvivedIndividuals();
+
+        result.survivedIndividuals()
+              .map(candidate -> toData(iterationNumber, numberOfCandidates, bestCandidates, candidate))
+              .forEach(this::appendToWriter);
+
+        writer.flush();
+    }
+
+    /**
+     * Writes the row. A failure is logged and does not stop the run.
+     */
+    private void appendToWriter(final Object [] record) {
+        try {
+            writer.addRecord(record);
+        } catch (final WriterException e) {
+            log.warn("Failed to writer statistics record.");
+        }
+    }
 
     @Override
     @SneakyThrows(WriterException.class)
@@ -53,7 +98,7 @@ public class StoppingCritertionPerIndividual implements StatisticsWriter {
         final EObject[] configs = evaluator.attributeToEObjectArray(configuration, "criteria");
         stoppingCriteria = Arrays.stream(configs)
                 .map(i -> BeanFactory.createComponent(TerminationCriterion.class, i))
-                .peek(s -> {if (!(s instanceof CandidateBasedStoppingCriterion)) log.warn("One of the configured stopping criteria is not an individual-based one."); })
+                .peek(StoppingCritertionPerIndividual::warnIfNotCandidateBased)
                 .filter(CandidateBasedStoppingCriterion.class::isInstance)
                 .map(CandidateBasedStoppingCriterion.class::cast)
                 .toArray(CandidateBasedStoppingCriterion[]::new);
@@ -68,38 +113,29 @@ public class StoppingCritertionPerIndividual implements StatisticsWriter {
         }
 
         this.numberOfColumns = columns.size();
-        this.writer = strategy.create("candidate-stopping-criteria", columns);
+        this.writer = strategy.create("stopping-per-candidates-per-iteration", columns);
 
         return this;
     }
 
-    @Override
-    public void add(final Iteration result) {
-        final int iterationNumber = result.getNumber();
-        final Rank bestCandidates = result.getRanks().getFirst();
-        final int numberOfCandidates = result.numberOfSurvivedIndividuals();
-
-        final AtomicInteger counter = new AtomicInteger(0);
-
-        result.survivedIndividuals()
-                .map(c -> toData(iterationNumber, counter.getAndIncrement(), numberOfCandidates, bestCandidates, c))
-                .forEach(this::appendToWriter);
-
-        writer.flush();
-    }
-
-    protected Object [] toData(final int iterationNumber, final int candidateNumber, final int numberOfCandidates, final Rank bestCandidates, final Individual candidate) {
+    /**
+     * @return The row of the individual: iteration number, id of the individual
+     *   (memory model), then {@code 1} or {@code 0} per criterion.
+     */
+    protected Object [] toData(final int iterationNumber,
+                               final int numberOfCandidates,
+                               final Rank bestCandidates,
+                               final Individual candidate) {
         final Object [] data = new Object[numberOfColumns];
 
         data[0] = iterationNumber;
-        data[1] = candidateNumber;
+        data[1] = candidate.getId();
 
         for(int i = 0; i < stoppingCriteria.length; i++) {
             final CandidateBasedStoppingCriterion criterion = stoppingCriteria[i];
 
             final boolean satisfied = criterion.isSatisfied(
                     iterationNumber,
-                    candidateNumber,
                     numberOfCandidates,
                     bestCandidates,
                     candidate);
@@ -110,18 +146,22 @@ public class StoppingCritertionPerIndividual implements StatisticsWriter {
         return data;
     }
 
-    private void appendToWriter(final Object [] record) {
-        try {
-            writer.addRecord(record);
-        } catch (final WriterException e) {
-            log.warn("Failed to writer statistics record.");
+    /**
+     * Only candidate-based criteria can be evaluated per individual; the others are skipped.
+     */
+    private static void warnIfNotCandidateBased(final TerminationCriterion criterion) {
+        if(!(criterion instanceof CandidateBasedStoppingCriterion)) {
+            log.warn("One of the configured stopping criteria is not an individual-based one.");
         }
     }
 
+    /**
+     * Flushes the output at the end of a run.
+     */
     @Override
     public void write() {
         try {
-            strategy.close(writer);
+            strategy.flush(writer);
         } catch (final WriterException e) {
             log.error("Failed to write statistics:", e);
         }

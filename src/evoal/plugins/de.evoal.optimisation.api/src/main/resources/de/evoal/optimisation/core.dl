@@ -2,134 +2,134 @@ import "definitions" from 'de.evoal.core.constraints';
 import "definitions" from 'de.evoal.core.base';
 
 module de.evoal.optimisation.core {
-	/**
-	 * The algorithm-independent problem description.
-	 */
-	type problem {
+    /**
+     * The algorithm-independent problem description.
+     */
+    type problem {
     }
 
-	/**
-	 * Abstract base type for functions mapping a solution from the search to
-	 *   the optimisation space.
-	 */
-	abstract type 'optimisation-function' extends configuration {		
-	}
-	
-	/**
-	 * Abstract base class for optimisation functions that call a subsequent optimisation
-	 *   function during calculation.
-	 */
-	abstract type 'decorated-optimisation-function' extends 'optimisation-function' {
-		/**
-		 * Fitness function we are calling during the fitness calculation.
-		 */
-		function : instance 'optimisation-function';
-	}
-	
-	/**
-	 * Place-holder for an unknown optimisation function.
-	 */
-	type 'unknown-function' extends 'optimisation-function' {}
+    /**
+     * Abstract base type for functions mapping a solution from the search to
+     *   the optimisation space.
+     */
+    abstract type 'optimisation-function' extends configuration {
+    }
 
-	/**
-	 * Optimisation function that calculates the difference between a optimisation
-	 *   value and a target value to optimise to:<br/>
-	 *
-	 * <mathml>
-	 *   <math>
-	 *     <mrow>
-	 *       <mi>r</mi>
-	 *       <mi>e</mi>
-	 *       <mi>u</mi>
-	 *       <mi>l</mi>
-	 *       <mi>t</mi>
-	 *       <mo>=</mo>
-	 *       <mi>f</mi>
-	 *       <mi>u</mi>
-	 *       <mi>n</mi>
-	 *       <mi>c</mi>
-	 *       <mi>t</mi>
-	 *       <mi>i</mi>
-	 *       <mi>o</mi>
-	 *       <mi>n</mi>
-	 *       <mo form="prefix" stretchy="false">(</mo>
-	 *       <mi>c</mi>
-	 *       <mi>a</mi>
-	 *       <mi>n</mi>
-	 *       <mi>d</mi>
-	 *       <mi>i</mi>
-	 *       <mi>d</mi>
-	 *       <mi>a</mi>
-	 *       <mi>t</mi>
-	 *       <mi>e</mi>
-	 *       <mo form="postfix" stretchy="false">)</mo>
-	 *       <mo>−</mo>
-	 *       <mi>t</mi>
-	 *       <mi>a</mi>
-	 *       <mi>r</mi>
-	 *       <mi>g</mi>
-	 *       <mi>e</mi>
-	 *       <mi>t</mi>
-	 *     </mrow>
-	 *   </math>
-	 * </mathml>
-	 */
-	type 'optimisation-distance' extends 'decorated-optimisation-function' {
-		/**
-		 * The target to search for. This value may be unset if the value is set
-		 *   by EvoAl itself during evaluation.
-		 */
+    /**
+     * Abstract base class for optimisation functions that call a subsequent optimisation
+     *   function during calculation.
+     */
+    abstract type 'decorated-optimisation-function' extends 'optimisation-function' {
+        /**
+         * Fitness function we are calling during the fitness calculation.
+         */
+        function : instance 'optimisation-function';
+    }
+
+    /**
+     * Place-holder for an unknown optimisation function.
+     */
+    type 'unknown-function' extends 'optimisation-function' {}
+
+    /**
+     * Optimisation function that calculates the difference between a optimisation
+     *   value and a target value to optimise to:<br/>
+     *
+     * <mathml>
+     *   <math>
+     *     <mrow>
+     *       <mi>r</mi>
+     *       <mi>e</mi>
+     *       <mi>u</mi>
+     *       <mi>l</mi>
+     *       <mi>t</mi>
+     *       <mo>=</mo>
+     *       <mi>f</mi>
+     *       <mi>u</mi>
+     *       <mi>n</mi>
+     *       <mi>c</mi>
+     *       <mi>t</mi>
+     *       <mi>i</mi>
+     *       <mi>o</mi>
+     *       <mi>n</mi>
+     *       <mo form="prefix" stretchy="false">(</mo>
+     *       <mi>c</mi>
+     *       <mi>a</mi>
+     *       <mi>n</mi>
+     *       <mi>d</mi>
+     *       <mi>i</mi>
+     *       <mi>d</mi>
+     *       <mi>a</mi>
+     *       <mi>t</mi>
+     *       <mi>e</mi>
+     *       <mo form="postfix" stretchy="false">)</mo>
+     *       <mo>−</mo>
+     *       <mi>t</mi>
+     *       <mi>a</mi>
+     *       <mi>r</mi>
+     *       <mi>g</mi>
+     *       <mi>e</mi>
+     *       <mi>t</mi>
+     *     </mrow>
+     *   </math>
+     * </mathml>
+     */
+    type 'optimisation-distance' extends 'decorated-optimisation-function' {
+        /**
+         * The target to search for. This value may be unset if the value is set
+         *   by EvoAl itself during evaluation.
+         */
         @MinimumNumberOfElements{ bound := 1; }
-		target : array instance variable;
-	}
+        target : array instance variable;
+    }
 
-	type 'search-space-distance' extends 'optimisation-function' {
-		/**
-		 * The search space target to search for.
-		 */
-		target : array instance variable;
+    type 'search-space-distance' extends 'optimisation-function' {
+        /**
+         * The search space target to search for.
+         */
+        target : array instance variable;
 
-		/**
-		 * Mapping of search space to optimisation space.
-		 */
-		mapping : array instance mapping;
-	}
+        /**
+         * Mapping of search space to optimisation space.
+         */
+        mapping : array instance mapping;
+    }
 
-	/**
-	 * Mapping of variables.
-	 */
-	type mapping {
-		/**
-		 * The input data.
-		 */
-		input : data;
+    /**
+     * Mapping of variables.
+     */
+    type mapping {
+        /**
+         * The input data.
+         */
+        input : data;
 
-		/**
-		 * The output data.
-		 */
-		output : data;
-	}
+        /**
+         * The output data.
+         */
+        output : data;
+    }
 
-	/**
-	 * A binding of a variable.
-	 */
-	type variable {
-		/**
-		 * The data to bind.
-		 */
-		var : data;
-		
-		/**
-		 * The actual value.
-		 */
-		val : literal;
-	}
+    /**
+     * A binding of a variable.
+     */
+    type variable {
+        /**
+         * The data to bind.
+         */
+        var : data;
+
+        /**
+         * The actual value.
+         */
+        val : literal;
+    }
 
 
     /**
-	 * Abstract base type for optimisation algorithms.
-	 */	
-	abstract type algorithm extends configuration {
+     * Abstract base type for optimisation algorithms.
+     */
+    abstract type algorithm extends configuration {
         /**
          * Source for initial candidates.
          */
@@ -143,50 +143,50 @@ module de.evoal.optimisation.core {
         /**
          * Comparator to use for comparing results of the optimisation function.
          */
-	    'comparator' : instance comparator;
+        'comparator' : instance comparator;
 
-	    /**
-	     * Configurable stopping criterion.
-	     */
+        /**
+         * Configurable stopping criterion.
+         */
         @MinimumNumberOfElements{ bound := 1; }
-	    'stopping-criteria' : array instance 'stopping-criterion';
-	}
+        'stopping-criteria' : array instance 'stopping-criterion';
+    }
 
-	/**
-	 * Comparator for comparing optimisation function results to each other.
-	 */
-	abstract type comparator extends configuration {}
+    /**
+     * Comparator for comparing optimisation function results to each other.
+     */
+    abstract type comparator extends configuration {}
 
-	/**
-	 * Comparator that calculates a weighted sum for multi-dimensional optimisation
-	 *   values.
-	 */
-	type 'weighted-sum' extends comparator {
-		/**
-		 * Weights for summing the dimensions.
-		 */
+    /**
+     * Comparator that calculates a weighted sum for multi-dimensional optimisation
+     *   values.
+     */
+    type 'weighted-sum' extends comparator {
+        /**
+         * Weights for summing the dimensions.
+         */
         @MinimumNumberOfElements{ bound := 1; }
-		weights : array instance variable;
-	}
+        weights : array instance variable;
+    }
 
-	/**
-	 * Compares the data in the specified order. First, the first data entry is compared.
-	 *   If the values differ, the comparison result is returned. If the values are equal,
-	 *   the next entry is taken into account.
-	 */
-	type 'hierarchical-comparator' extends comparator {
-	    /**
-	     * Comparison order of the fitness data.
-	     */
+    /**
+     * Compares the data in the specified order. First, the first data entry is compared.
+     *   If the values differ, the comparison result is returned. If the values are equal,
+     *   the next entry is taken into account.
+     */
+    type 'hierarchical-comparator' extends comparator {
+        /**
+         * Comparison order of the fitness data.
+         */
         @MinimumNumberOfElements{ bound := 1; }
-	    order : array data;
-	}
+        order : array data;
+    }
 
-	/**
-	 * Comparator for a single number-based fitness value (such as a double).
-	 */
-	type 'numeric-comparator' extends comparator {
-	}
+    /**
+     * Comparator for a single number-based fitness value (such as a double).
+     */
+    type 'numeric-comparator' extends comparator {
+    }
 
     /**
     * Comparator for multiobjective optimisation that considers a single
@@ -198,46 +198,46 @@ module de.evoal.optimisation.core {
          */
         'goal-objective' : data;
     }
-	
-	/**
-	 * A fitness function during the optimisation (not at the problem-level).
-	 */
-	abstract type 'fitness-function' extends 'optimisation-function' {}
-	
-	/**
-	 * Abstract base class for all fitness functions that call a subsequent fitness
-	 *   function during calculation.
-	 */
-	abstract type 'decorated-fitness-function' extends 'fitness-function' {
-		/**
-		 * Fitness function we are calling during the fitness calculation.
-		 */
-		function : instance 'optimisation-function';
-	}
 
-	/**
-	 * Modifies the fitness value based on constraint violation.
-	 */	
-	type 'malus' extends 'decorated-fitness-function' {
-	}
+    /**
+     * A fitness function during the optimisation (not at the problem-level).
+     */
+    abstract type 'fitness-function' extends 'optimisation-function' {}
 
-	type 'random-fitness' extends 'fitness-function' {
-	}
-	
-	type 'problem-function' extends 'fitness-function' {
-	}
-	
-	/**
-	 * Abstract base type for initial population strategies.
-	 */
-	abstract type 'initial-population' extends configuration {}
-	
-	/**
-	 * Chooses the initial population randomly from the search space. The selection
-	 *   process respects the boundaries defined at the data definition-level.
-	 */
-	type 'random-population' extends 'initial-population' {
-	}
+    /**
+     * Abstract base class for all fitness functions that call a subsequent fitness
+     *   function during calculation.
+     */
+    abstract type 'decorated-fitness-function' extends 'fitness-function' {
+        /**
+         * Fitness function we are calling during the fitness calculation.
+         */
+        function : instance 'optimisation-function';
+    }
+
+    /**
+     * Modifies the fitness value based on constraint violation.
+     */
+    type 'malus' extends 'decorated-fitness-function' {
+    }
+
+    type 'random-fitness' extends 'fitness-function' {
+    }
+
+    type 'problem-function' extends 'fitness-function' {
+    }
+
+    /**
+     * Abstract base type for initial population strategies.
+     */
+    abstract type 'initial-population' extends configuration {}
+
+    /**
+     * Chooses the initial population randomly from the search space. The selection
+     *   process respects the boundaries defined at the data definition-level.
+     */
+    type 'random-population' extends 'initial-population' {
+    }
 
     /**
     * specify an individual as a list of variables
@@ -261,60 +261,61 @@ module de.evoal.optimisation.core {
         //determines order of candidates read from file. Random (default) or linear.
         'random': boolean := true;
     }
-	
-	abstract type 'statistics-writer' extends configuration {
-	}
+
+    abstract type 'statistics-writer' extends configuration {
+    }
 
     /**
-     * Writes the best candidate for every generation:
-	 *
-	 * <ul>
-	 *   <li>generation</li>
-	 *   <li>search-space-variable-1</li>
-	 *   <li>search-space-variable-2</li>
-	 *   ...
-	 *   <li>search-space-variable-n</li>
-	 *   <li>optimisation-space-variable-1</li>
-	 *   <li>optimisation-space-variable-2</li>
-	 *   ...
-	 *   <li>optimisation-space-variable-n</li>
-	 * </ul>
-     */
-	type 'best-candidate-per-iteration' extends 'statistics-writer' {
-	    /**
-	     * If set to <tt>true</tt>, every search space variable is prefixed with
-	     *   "<tt>search-space-value-</tt>" and every optimisation space variable
-	     *   is prefixed with "<tt>optimisation-space-value-</tt>". This can be
-	     *   useful if search and optimisation space share variables.
-	     */
-	    'prefix-data' : boolean := false;
-
-	    /**
-	     * If search space variables should be stored.
-	     */
-	    'store-search-space' : boolean := true;
-
-	    /**
-	     * If optimisation space variables should be stored.
-	     */
-	    'store-optimisation-space' : boolean := true;
-	}
-
-    /**
-     * Writes all candidates for every generation:
+     * Writes the best candidates (rank 0) of every iteration.
+     *   File: <tt>best-candidate-per-iteration.csv</tt> in the output folder. Columns:
      *
      * <ul>
+     *   <li>individual-id (id of the individual in the memory model; the same
+     *     individual has the same id in all files)</li>
      *   <li>generation</li>
-     *   <li>index</li>
-     *   <li>search-space-variable-1</li>
-     *   <li>search-space-variable-2</li>
-     *   ...
-     *   <li>search-space-variable-n</li>
-     *   <li>optimisation-space-variable-1</li>
-     *   <li>optimisation-space-variable-2</li>
-     *   ...
-     *   <li>optimisation-space-variable-n</li>
+     *   <li>search-space-variable-1 ... search-space-variable-n</li>
+     *   <li>optimisation-space-variable-1 ... optimisation-space-variable-n</li>
      * </ul>
+     *
+     * In the evaluation setup ({@code heuristic-search-evaluation}), the file
+     *   starts with the columns <tt>run</tt> and, if target points are used,
+     *   <tt>target</tt>. All runs append to the same file.
+     */
+    type 'best-candidate-per-iteration' extends 'statistics-writer' {
+        /**
+         * If set to <tt>true</tt>, every search space variable is prefixed with
+         *   "<tt>search-space-value-</tt>" and every optimisation space variable
+         *   is prefixed with "<tt>optimisation-space-value-</tt>". This can be
+         *   useful if search and optimisation space share variables.
+         */
+        'prefix-data' : boolean := false;
+
+        /**
+         * If search space variables should be stored.
+         */
+        'store-search-space' : boolean := true;
+
+        /**
+         * If optimisation space variables should be stored.
+         */
+        'store-optimisation-space' : boolean := true;
+    }
+
+    /**
+     * Writes all surviving candidates of every iteration.
+     *   File: <tt>candidates-per-iteration.csv</tt> in the output folder. Columns:
+     *
+     * <ul>
+     *   <li>individual-id (id of the individual in the memory model; the same
+     *     individual has the same id in all files)</li>
+     *   <li>generation</li>
+     *   <li>search-space-variable-1 ... search-space-variable-n</li>
+     *   <li>optimisation-space-variable-1 ... optimisation-space-variable-n</li>
+     * </ul>
+     *
+     * In the evaluation setup ({@code heuristic-search-evaluation}), the file
+     *   starts with the columns <tt>run</tt> and, if target points are used,
+     *   <tt>target</tt>. All runs append to the same file.
      */
     type 'candidates-per-iteration' extends 'statistics-writer' {
         /**
@@ -337,43 +338,65 @@ module de.evoal.optimisation.core {
         'store-optimisation-space' : boolean := true;
     }
 
-	/**
-	 * Does not write any statistics. Can be used to disable statistics output.
-	 */
-	type none extends 'statistics-writer' {}
+    /**
+     * Does not write any statistics. Can be used to disable statistics output.
+     */
+    type none extends 'statistics-writer' {}
 
     /**
      * Base class for all stopping criteria of optimisation algorithms.
      */
-	abstract type 'stopping-criterion' extends configuration {
-	}
+    abstract type 'stopping-criterion' extends configuration {
+    }
 
     /**
      * Stopping criterion that stops after a fixed number of iterations.
      */
-	type 'iteration-count' extends 'stopping-criterion' {
-	    /**
-	     * Maximum number of iterations.
-	     */
-	     @LowerBoundary { boundary := 0; }
+    type 'iteration-count' extends 'stopping-criterion' {
+        /**
+         * Maximum number of iterations.
+         */
+        @LowerBoundary { boundary := 0; }
         'maximum-iterations' : int := 10;
-	}
+    }
 
     /**
      * Stopping criterion that stops when a file is created.
      */
-	type 'file-check' extends 'stopping-criterion' {
-	    /**
-	     * Name of file.
-	     */
+    type 'file-check' extends 'stopping-criterion' {
+        /**
+         * Name of file.
+         */
         'file' : string := "evoal-stop.txt";
-	}
+    }
 
-	type 'stopping-per-candidates-per-generation' extends 'statistics-writer' {
-	  criteria : array instance 'stopping-criterion' := [];
-	}
+    /**
+     * Writes for every iteration which of the given stopping criteria are satisfied.
+     *   File: <tt>stopping-per-candidates-per-generation.csv</tt> in the output folder.
+     *   Columns: generation, criterion-0 ... criterion-n
+     *   ({@code 1} if the criterion is satisfied, {@code 0} otherwise).
+     *
+     * In the evaluation setup ({@code heuristic-search-evaluation}), the file
+     *   starts with the columns <tt>run</tt> and, if target points are used,
+     *   <tt>target</tt>. All runs append to the same file.
+     */
+    type 'stopping-per-candidates-per-generation' extends 'statistics-writer' {
+        criteria : array instance 'stopping-criterion' := [];
+    }
 
-	type 'stopping-per-candidates-per-iteration' extends 'statistics-writer' {
-	  criteria : array instance 'stopping-criterion' := [];
+    /**
+     * Writes for every individual of every iteration which of the given
+     *   candidate-based stopping criteria are satisfied.
+     *   File: <tt>stopping-per-candidates-per-iteration.csv</tt> in the output folder.
+     *   Columns: generation, individual-id (id of the individual in the memory
+     *   model), criterion-0 ... criterion-n
+     *   ({@code 1} if the criterion is satisfied, {@code 0} otherwise).
+     *
+     * In the evaluation setup ({@code heuristic-search-evaluation}), the file
+     *   starts with the columns <tt>run</tt> and, if target points are used,
+     *   <tt>target</tt>. All runs append to the same file.
+     */
+    type 'stopping-per-candidates-per-iteration' extends 'statistics-writer' {
+        criteria : array instance 'stopping-criterion' := [];
     }
 }

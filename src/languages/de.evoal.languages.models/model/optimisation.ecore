@@ -327,6 +327,18 @@
           <details key="documentation" value="&#xA; * The actual problem to solve.&#xA; "/>
         </eAnnotations>
       </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="documentation" upperBound="-1"
+          eType="ecore:EClass core.ecore#//Configuration" containment="true">
+        <eAnnotations source="https://evoal.de/v202610/models/core/configured-by">
+          <details key="type" value="de.evoal.optimisation.core.statistics-writer"/>
+        </eAnnotations>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="*&#xA;The statistics writers configured for the algorithm ({@code document := [...]} in the algorithm block).&#xA;They are used in addition to the writers of the problem.&#xA;"/>
+        </eAnnotations>
+        <eAnnotations source="http://www.eclipse.org/OCL/Collection">
+          <details key="nullFree" value="false"/>
+        </eAnnotations>
+      </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Problem">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
