@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="core" nsURI="https://evoal.de/v202704/models/core" nsPrefix="core">
+  <eAnnotations source="http://www.eclipse.org/OCL/Import">
+    <details key="expr" value="platform:/resource/de.evoal.languages.model.base/model/expressions.ecore#/"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EDataType" name="InitializationException" instanceClassName="de.evoal.models.core.exceptions.InitializationException"
+      serializable="false"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EvoalComponent" instanceClassName="de.evoal.models.core.cdi.EvoalComponent">
+    <eTypeParameters name="T">
+      <eBounds eClassifier="#//EvoalComponent">
+        <eTypeArguments eTypeParameter="#//EvoalComponent/T"/>
+      </eBounds>
+    </eTypeParameters>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Configuration">
+    <eAnnotations source="https://evoal.de/v202610/models/core/DL-Mapping">
+      <details key="type" value="de.evoal.core.base.configuration"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="*&#xA;A configuration of algorithm or a pipeline&#xA;"/>
+    </eAnnotations>
+  </eClassifiers>
+</ecore:EPackage>

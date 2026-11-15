@@ -9,10 +9,13 @@ import de.evoal.languages.model.base.expressions.ExpressionsPackage;
 
 import de.evoal.languages.model.base.types.TypesPackage;
 
-import de.evoal.languages.model.dynamic.Definition;
+import de.evoal.languages.model.dynamic.AttributeMapping;
+import de.evoal.languages.model.dynamic.ClassMapping;
+import de.evoal.languages.model.dynamic.DefinitionMapping;
 import de.evoal.languages.model.dynamic.DynamicFactory;
 import de.evoal.languages.model.dynamic.DynamicPackage;
 
+import de.evoal.languages.model.dynamic.Mapping;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -31,7 +34,26 @@ public class DynamicPackageImpl extends EPackageImpl implements DynamicPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass definitionEClass = null;
+	private EClass mappingEClass = null;
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass definitionMappingEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass classMappingEClass = null;
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass attributeMappingEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -104,8 +126,8 @@ public class DynamicPackageImpl extends EPackageImpl implements DynamicPackage {
 	 * @generated
 	 */
 	@Override
-	public EClass getDefinition() {
-		return definitionEClass;
+	public EClass getMapping() {
+		return mappingEClass;
 	}
 
 	/**
@@ -114,8 +136,88 @@ public class DynamicPackageImpl extends EPackageImpl implements DynamicPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getDefinition_Source() {
-		return (EReference)definitionEClass.getEStructuralFeatures().get(0);
+	public EClass getDefinitionMapping() {
+		return definitionMappingEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getDefinitionMapping_Source() {
+		return (EReference)definitionMappingEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getDefinitionMapping_Target() {
+		return (EReference)definitionMappingEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getClassMapping() {
+		return classMappingEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getClassMapping_Source() {
+		return (EReference)classMappingEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getClassMapping_Target() {
+		return (EReference)classMappingEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getAttributeMapping() {
+		return attributeMappingEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getAttributeMapping_Source() {
+		return (EReference)attributeMappingEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getAttributeMapping_Target() {
+		return (EReference)attributeMappingEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -147,8 +249,19 @@ public class DynamicPackageImpl extends EPackageImpl implements DynamicPackage {
 		isCreated = true;
 
 		// Create classes and their features
-		definitionEClass = createEClass(DEFINITION);
-		createEReference(definitionEClass, DEFINITION__SOURCE);
+		mappingEClass = createEClass(MAPPING);
+
+		definitionMappingEClass = createEClass(DEFINITION_MAPPING);
+		createEReference(definitionMappingEClass, DEFINITION_MAPPING__SOURCE);
+		createEReference(definitionMappingEClass, DEFINITION_MAPPING__TARGET);
+
+		classMappingEClass = createEClass(CLASS_MAPPING);
+		createEReference(classMappingEClass, CLASS_MAPPING__SOURCE);
+		createEReference(classMappingEClass, CLASS_MAPPING__TARGET);
+
+		attributeMappingEClass = createEClass(ATTRIBUTE_MAPPING);
+		createEReference(attributeMappingEClass, ATTRIBUTE_MAPPING__SOURCE);
+		createEReference(attributeMappingEClass, ATTRIBUTE_MAPPING__TARGET);
 	}
 
 	/**
@@ -182,10 +295,24 @@ public class DynamicPackageImpl extends EPackageImpl implements DynamicPackage {
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
+		definitionMappingEClass.getESuperTypes().add(this.getMapping());
+		classMappingEClass.getESuperTypes().add(this.getMapping());
+		attributeMappingEClass.getESuperTypes().add(this.getMapping());
 
 		// Initialize classes and features; add operations and parameters
-		initEClass(definitionEClass, Definition.class, "Definition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getDefinition_Source(), theDefinitionsPackage.getDefinition(), null, "source", null, 1, 1, Definition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(mappingEClass, Mapping.class, "Mapping", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(definitionMappingEClass, DefinitionMapping.class, "DefinitionMapping", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getDefinitionMapping_Source(), theDefinitionsPackage.getDefinition(), null, "source", null, 1, 1, DefinitionMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDefinitionMapping_Target(), ecorePackage.getEStructuralFeature(), null, "target", null, 1, 1, DefinitionMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(classMappingEClass, ClassMapping.class, "ClassMapping", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getClassMapping_Source(), theDefinitionsPackage.getClassDefinition(), null, "source", null, 1, 1, ClassMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getClassMapping_Target(), ecorePackage.getEClass(), null, "target", null, 1, 1, ClassMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(attributeMappingEClass, AttributeMapping.class, "AttributeMapping", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getAttributeMapping_Source(), theDefinitionsPackage.getAttributeDefinition(), null, "source", null, 1, 1, AttributeMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAttributeMapping_Target(), ecorePackage.getEStructuralFeature(), null, "target", null, 1, 1, AttributeMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

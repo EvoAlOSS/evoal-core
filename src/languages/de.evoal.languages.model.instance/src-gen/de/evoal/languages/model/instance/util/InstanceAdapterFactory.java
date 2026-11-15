@@ -73,6 +73,10 @@ public class InstanceAdapterFactory extends AdapterFactoryImpl {
 				return createInstanceModuleAdapter();
 			}
 			@Override
+			public Adapter caseModule(de.evoal.languages.model.base.Module object) {
+				return createModuleAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -103,6 +107,20 @@ public class InstanceAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createInstanceModuleAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.Module <em>Module</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.evoal.languages.model.base.Module
+	 * @generated
+	 */
+	public Adapter createModuleAdapter() {
 		return null;
 	}
 

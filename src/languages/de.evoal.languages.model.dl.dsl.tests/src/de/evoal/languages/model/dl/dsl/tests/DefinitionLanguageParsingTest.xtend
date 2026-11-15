@@ -13,8 +13,6 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.^extension.ExtendWith
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider
-import org.junit.jupiter.api.Assertions
-import org.eclipse.xtext.resource.impl.DefaultResourceDescription
 
 @ExtendWith(InjectionExtension)
 @InjectWith(DefinitionLanguageInjectorProvider)

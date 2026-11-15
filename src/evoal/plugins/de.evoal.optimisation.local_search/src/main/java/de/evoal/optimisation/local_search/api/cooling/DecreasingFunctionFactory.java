@@ -4,19 +4,18 @@ import de.evoal.core.api.cdi.BeanFactory;
 import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
 
-import de.evoal.languages.model.base.expressions.Instance;
-
 import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Produces;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import org.eclipse.emf.ecore.EObject;
 
 @Dependent
 public class DecreasingFunctionFactory {
 
     @Inject
     @ConfigurationValue(entry = OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.accepting-strategy.decreasing-function")
-    private Instance config;
+    private EObject config;
 
     /**
      * Creates a Cooling Strategy based on the configuration.

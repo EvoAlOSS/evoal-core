@@ -3,28 +3,19 @@
  */
 package de.evoal.languages.model.ol.impl;
 
-import de.evoal.languages.model.base.Import;
-
+import de.evoal.languages.model.base.impl.ModuleImpl;
 import de.evoal.languages.model.ol.AlgorithmInstance;
 import de.evoal.languages.model.ol.OLPackage;
 import de.evoal.languages.model.ol.OptimisationModule;
 import de.evoal.languages.model.ol.ProblemInstance;
 
-import java.util.Collection;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -35,14 +26,12 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * </p>
  * <ul>
  *   <li>{@link de.evoal.languages.model.ol.impl.OptimisationModuleImpl#getAlgorithm <em>Algorithm</em>}</li>
- *   <li>{@link de.evoal.languages.model.ol.impl.OptimisationModuleImpl#getImports <em>Imports</em>}</li>
- *   <li>{@link de.evoal.languages.model.ol.impl.OptimisationModuleImpl#getName <em>Name</em>}</li>
  *   <li>{@link de.evoal.languages.model.ol.impl.OptimisationModuleImpl#getProblem <em>Problem</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class OptimisationModuleImpl extends MinimalEObjectImpl.Container implements OptimisationModule {
+public class OptimisationModuleImpl extends ModuleImpl implements OptimisationModule {
 	/**
 	 * The cached value of the '{@link #getAlgorithm() <em>Algorithm</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -52,36 +41,6 @@ public class OptimisationModuleImpl extends MinimalEObjectImpl.Container impleme
 	 * @ordered
 	 */
 	protected AlgorithmInstance algorithm;
-
-	/**
-	 * The cached value of the '{@link #getImports() <em>Imports</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getImports()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Import> imports;
-
-	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String NAME_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String name = NAME_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getProblem() <em>Problem</em>}' containment reference.
@@ -163,42 +122,6 @@ public class OptimisationModuleImpl extends MinimalEObjectImpl.Container impleme
 	 * @generated
 	 */
 	@Override
-	public EList<Import> getImports() {
-		if (imports == null) {
-			imports = new EObjectContainmentEList<Import>(Import.class, this, OLPackage.OPTIMISATION_MODULE__IMPORTS);
-		}
-		return imports;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setName(String newName) {
-		String oldName = name;
-		name = newName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OLPackage.OPTIMISATION_MODULE__NAME, oldName, name));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public ProblemInstance getProblem() {
 		return problem;
 	}
@@ -248,8 +171,6 @@ public class OptimisationModuleImpl extends MinimalEObjectImpl.Container impleme
 		switch (featureID) {
 			case OLPackage.OPTIMISATION_MODULE__ALGORITHM:
 				return basicSetAlgorithm(null, msgs);
-			case OLPackage.OPTIMISATION_MODULE__IMPORTS:
-				return ((InternalEList<?>)getImports()).basicRemove(otherEnd, msgs);
 			case OLPackage.OPTIMISATION_MODULE__PROBLEM:
 				return basicSetProblem(null, msgs);
 		}
@@ -266,10 +187,6 @@ public class OptimisationModuleImpl extends MinimalEObjectImpl.Container impleme
 		switch (featureID) {
 			case OLPackage.OPTIMISATION_MODULE__ALGORITHM:
 				return getAlgorithm();
-			case OLPackage.OPTIMISATION_MODULE__IMPORTS:
-				return getImports();
-			case OLPackage.OPTIMISATION_MODULE__NAME:
-				return getName();
 			case OLPackage.OPTIMISATION_MODULE__PROBLEM:
 				return getProblem();
 		}
@@ -281,19 +198,11 @@ public class OptimisationModuleImpl extends MinimalEObjectImpl.Container impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case OLPackage.OPTIMISATION_MODULE__ALGORITHM:
 				setAlgorithm((AlgorithmInstance)newValue);
-				return;
-			case OLPackage.OPTIMISATION_MODULE__IMPORTS:
-				getImports().clear();
-				getImports().addAll((Collection<? extends Import>)newValue);
-				return;
-			case OLPackage.OPTIMISATION_MODULE__NAME:
-				setName((String)newValue);
 				return;
 			case OLPackage.OPTIMISATION_MODULE__PROBLEM:
 				setProblem((ProblemInstance)newValue);
@@ -313,12 +222,6 @@ public class OptimisationModuleImpl extends MinimalEObjectImpl.Container impleme
 			case OLPackage.OPTIMISATION_MODULE__ALGORITHM:
 				setAlgorithm((AlgorithmInstance)null);
 				return;
-			case OLPackage.OPTIMISATION_MODULE__IMPORTS:
-				getImports().clear();
-				return;
-			case OLPackage.OPTIMISATION_MODULE__NAME:
-				setName(NAME_EDEFAULT);
-				return;
 			case OLPackage.OPTIMISATION_MODULE__PROBLEM:
 				setProblem((ProblemInstance)null);
 				return;
@@ -336,30 +239,10 @@ public class OptimisationModuleImpl extends MinimalEObjectImpl.Container impleme
 		switch (featureID) {
 			case OLPackage.OPTIMISATION_MODULE__ALGORITHM:
 				return algorithm != null;
-			case OLPackage.OPTIMISATION_MODULE__IMPORTS:
-				return imports != null && !imports.isEmpty();
-			case OLPackage.OPTIMISATION_MODULE__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case OLPackage.OPTIMISATION_MODULE__PROBLEM:
 				return problem != null;
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuilder result = new StringBuilder(super.toString());
-		result.append(" (name: ");
-		result.append(name);
-		result.append(')');
-		return result.toString();
 	}
 
 } //OptimisationModuleImpl

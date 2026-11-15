@@ -1,7 +1,7 @@
 package de.evoal.surrogate.main.gof.rsquare;
 
-import de.evoal.core.api.ecore.Space;
-import de.evoal.core.api.ecore.TypedEObject;
+import de.evoal.models.core.ecore.Space;
+import de.evoal.models.core.ecore.TypedEObject;
 import de.evoal.core.api.ecore.stream.EObjectPairStreamSupplier;
 import de.evoal.core.api.interpreter.InterpreterState;
 import de.evoal.surrogate.api.io.pson.Parameter;
@@ -63,7 +63,7 @@ public class RSquareCalculator extends SurrogateInformationCalculator {
 						.map(pair -> {
 							final TypedEObject input = pair.getFirst();
 							final TypedEObject expected = pair.getSecond();
-							final TypedEObject calculated = new TypedEObject(expected.eClass());
+							final TypedEObject calculated = new TypedEObject(expected.eSpace());
 
 							functionData.function()
 										.apply(input, calculated);
@@ -73,7 +73,7 @@ public class RSquareCalculator extends SurrogateInformationCalculator {
 											.stream()
 											.mapToDouble(f -> Math.pow(expected.eGetAsDouble(f) - calculated.eGetAsDouble(f), 2))
 											.toArray();
-						}).toArray(size -> new double [size][]);
+						}).toArray(double[][]::new);
 
 		int index = 0;
 		for(final EStructuralFeature feature : outSpace) {

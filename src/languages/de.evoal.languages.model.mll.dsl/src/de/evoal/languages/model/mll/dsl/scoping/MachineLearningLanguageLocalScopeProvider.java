@@ -9,7 +9,6 @@ import com.google.inject.Inject;
 
 import de.evoal.languages.model.base.expressions.ExpressionsPackage;
 import de.evoal.languages.model.base.dsl.scoping.BaseLanguageLocalScopeProvider;
-import de.evoal.languages.model.mll.MllPackage;
 import de.evoal.languages.model.utils.scoping.WildcardEnabledLocalScopeProvider;
 
 public class MachineLearningLanguageLocalScopeProvider extends WildcardEnabledLocalScopeProvider {

@@ -57,7 +57,9 @@ public class DynamicFactoryImpl extends EFactoryImpl implements DynamicFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case DynamicPackage.DEFINITION: return createDefinition();
+			case DynamicPackage.DEFINITION_MAPPING: return createDefinitionMapping();
+			case DynamicPackage.CLASS_MAPPING: return createClassMapping();
+			case DynamicPackage.ATTRIBUTE_MAPPING: return createAttributeMapping();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -69,9 +71,31 @@ public class DynamicFactoryImpl extends EFactoryImpl implements DynamicFactory {
 	 * @generated
 	 */
 	@Override
-	public Definition createDefinition() {
-		DefinitionImpl definition = new DefinitionImpl();
-		return definition;
+	public DefinitionMapping createDefinitionMapping() {
+		DefinitionMappingImpl definitionMapping = new DefinitionMappingImpl();
+		return definitionMapping;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ClassMapping createClassMapping() {
+		ClassMappingImpl classMapping = new ClassMappingImpl();
+		return classMapping;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public AttributeMapping createAttributeMapping() {
+		AttributeMappingImpl attributeMapping = new AttributeMappingImpl();
+		return attributeMapping;
 	}
 
 	/**

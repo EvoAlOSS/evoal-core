@@ -1,8 +1,7 @@
 package de.evoal.optimisation.local_search.api.accepting;
 
-import de.evoal.core.api.cdi.EvoalComponent;
-import de.evoal.core.api.properties.Properties;
-import de.evoal.optimisation.api.model.OptimisationValue;
+import de.evoal.models.v202704.optimisation.execution.OptimisationValue;
+import de.evoal.models.core.cdi.EvoalComponent;
 
 /**
  * An accepting strategy for local searches.
@@ -10,9 +9,13 @@ import de.evoal.optimisation.api.model.OptimisationValue;
 public interface AcceptingStrategy extends EvoalComponent<AcceptingStrategy> {
 
     /**
-     * Iff a potential candidate should be accepted.
+     * Iff a potential candidate should be accepted. The candidate is already evaluated,
+     *   strategies must not evaluate the optimisation function themselves.
+     *
+     * @param candidateValue The optimisation value of the potential candidate.
+     * @param currentValue The optimisation value of the current candidate.
      */
-    public boolean acceptCandidate(final Properties candidate, final OptimisationValue bestFitnessValue);
+    public boolean acceptCandidate(final OptimisationValue candidateValue, final OptimisationValue currentValue);
 
     /**
      * Sets the current iteration.

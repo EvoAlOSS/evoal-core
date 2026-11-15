@@ -2,12 +2,12 @@ package de.evoal.optimisation.local_search.main.cooling;
 
 import de.evoal.optimisation.local_search.api.cooling.DecreasingFunction;
 import de.evoal.core.api.languages.AttributeEvaluator;
-import de.evoal.languages.model.base.expressions.Instance;
 import lombok.extern.slf4j.Slf4j;
 
 import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * Arithmetic cooling schedule decreases temperature according to decreasing arithmetic series.
@@ -31,7 +31,7 @@ public class ArithmeticDecreaseFunction implements DecreasingFunction {
     }
 
     @Override
-    public ArithmeticDecreaseFunction init(final Instance config) {
+    public ArithmeticDecreaseFunction init(final EObject config) {
         this.rate = evaluator.attributeToDouble(config, "rate");
         log.info("Setting arithmetic rate to {}", this.rate);
         return this;

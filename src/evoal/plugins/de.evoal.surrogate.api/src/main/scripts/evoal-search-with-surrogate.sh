@@ -30,6 +30,10 @@ if [ ${EVOAL_LOGGING+x} ]; then
   POSITIONAL_ARGUMENTS+=( "-Bcore:logging=$EVOAL_LOGGING" )
 fi
 
+if [ ${EVOAL_SEED+x} ]; then
+  POSITIONAL_ARGUMENTS+=( "-Bcore:seed=$EVOAL_SEED" )
+fi
+
 
 
 set -x

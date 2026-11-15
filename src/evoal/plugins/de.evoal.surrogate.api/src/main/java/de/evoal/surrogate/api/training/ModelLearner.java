@@ -1,8 +1,8 @@
 package de.evoal.surrogate.api.training;
 
-import de.evoal.core.api.cdi.EvoalComponent;
-import de.evoal.core.api.ecore.Space;
-import de.evoal.core.api.ecore.TypedEObject;
+import de.evoal.models.core.cdi.EvoalComponent;
+import de.evoal.models.core.ecore.Space;
+import de.evoal.models.core.ecore.TypedEObject;
 import de.evoal.surrogate.api.function.ModelFunction;
 import de.evoal.surrogate.api.io.ModelWriter;
 import lombok.NonNull;

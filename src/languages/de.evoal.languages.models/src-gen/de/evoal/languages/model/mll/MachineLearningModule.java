@@ -2,17 +2,11 @@
  */
 package de.evoal.languages.model.mll;
 
-import de.evoal.languages.model.base.Import;
-
 import de.evoal.languages.model.base.expressions.Instance;
 
 import de.evoal.languages.model.execution.Block;
 
 import de.evoal.languages.model.generator.PipelineDefinition;
-
-import org.eclipse.emf.common.util.EList;
-
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -27,8 +21,6 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link de.evoal.languages.model.mll.MachineLearningModule#getImports <em>Imports</em>}</li>
- *   <li>{@link de.evoal.languages.model.mll.MachineLearningModule#getName <em>Name</em>}</li>
  *   <li>{@link de.evoal.languages.model.mll.MachineLearningModule#getTask <em>Task</em>}</li>
  *   <li>{@link de.evoal.languages.model.mll.MachineLearningModule#getValidation <em>Validation</em>}</li>
  *   <li>{@link de.evoal.languages.model.mll.MachineLearningModule#getPreparation <em>Preparation</em>}</li>
@@ -42,50 +34,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface MachineLearningModule extends EObject {
-	/**
-	 * Returns the value of the '<em><b>Imports</b></em>' containment reference list.
-	 * The list contents are of type {@link de.evoal.languages.model.base.Import}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * Import statements
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Imports</em>' containment reference list.
-	 * @see de.evoal.languages.model.mll.MllPackage#getMachineLearningModule_Imports()
-	 * @model containment="true" ordered="false"
-	 *        annotation="http://www.eclipse.org/OCL/Collection nullFree='false'"
-	 * @generated
-	 */
-	EList<Import> getImports();
-
-	/**
-	 * Returns the value of the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * 
-	 * Name of the module (necessary for importing).
-	 * 
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Name</em>' attribute.
-	 * @see #setName(String)
-	 * @see de.evoal.languages.model.mll.MllPackage#getMachineLearningModule_Name()
-	 * @model required="true"
-	 * @generated
-	 */
-	String getName();
-
-	/**
-	 * Sets the value of the '{@link de.evoal.languages.model.mll.MachineLearningModule#getName <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Name</em>' attribute.
-	 * @see #getName()
-	 * @generated
-	 */
-	void setName(String value);
-
+public interface MachineLearningModule extends de.evoal.languages.model.base.Module {
 	/**
 	 * Returns the value of the '<em><b>Task</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

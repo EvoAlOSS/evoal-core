@@ -2,8 +2,8 @@ package de.evoal.surrogate.simple.linear;
 
 import java.util.function.BiConsumer;
 
-import de.evoal.core.api.ecore.Space;
-import de.evoal.core.api.ecore.TypedEObject;
+import de.evoal.models.core.ecore.Space;
+import de.evoal.models.core.ecore.TypedEObject;
 import de.evoal.core.api.utils.Requirements;
 import de.evoal.surrogate.api.function.ModelFunction;
 

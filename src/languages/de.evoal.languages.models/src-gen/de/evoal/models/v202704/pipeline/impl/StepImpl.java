@@ -1,0 +1,51 @@
+/**
+ * (c) EvoAl project
+ */
+package de.evoal.models.v202704.pipeline.impl;
+
+import de.evoal.languages.model.base.expressions.impl.LiteralImpl;
+
+import de.evoal.models.v202704.pipeline.PipelinePackage;
+import de.evoal.models.v202704.pipeline.Step;
+
+import org.eclipse.emf.ecore.EClass;
+
+/**
+ * <!-- begin-user-doc -->
+ * An implementation of the model object '<em><b>Step</b></em>'.
+ * <!-- end-user-doc -->
+ *
+ * @generated
+ */
+public abstract class StepImpl extends LiteralImpl implements Step {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected StepImpl() {
+		super();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return PipelinePackage.Literals.STEP;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Step getValue() {
+		return this;
+		
+	}
+
+} //StepImpl

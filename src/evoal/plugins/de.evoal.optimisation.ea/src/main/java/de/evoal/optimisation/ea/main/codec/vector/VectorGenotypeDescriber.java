@@ -2,7 +2,7 @@ package de.evoal.optimisation.ea.main.codec.vector;
 
 import de.evoal.core.api.languages.AttributeEvaluator;
 import de.evoal.core.api.utils.AttributeHelper;
-import de.evoal.core.api.utils.InitializationException;
+import de.evoal.models.core.exceptions.InitializationException;
 import de.evoal.optimisation.ea.api.codec.CustomCodecDescriber;
 import de.evoal.languages.model.base.expressions.Instance;
 import de.evoal.languages.model.base.definitions.Definition;

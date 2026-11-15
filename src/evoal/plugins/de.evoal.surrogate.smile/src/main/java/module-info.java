@@ -10,15 +10,11 @@ module de.evoal.surrogate.smile {
     requires smile.base;
     requires commons.math3;
 
-    requires de.evoal.languages.model.ddl;
-
     requires de.evoal.core.main;
     requires de.evoal.surrogate.api;
     requires org.eclipse.emf.ecore;
     requires de.evoal.languages.model.base;
     requires de.evoal.languages.models;
-    requires de.evoal.languages.model.dl;
-    requires de.evoal.languages.model.interpreter;
 
     // export API for down-stream plugins
     exports de.evoal.surrogate.smile.api;

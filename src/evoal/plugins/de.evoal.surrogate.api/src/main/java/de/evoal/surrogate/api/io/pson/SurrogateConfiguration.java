@@ -16,9 +16,9 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import de.evoal.languages.model.pipeline.PipelineDefinition;
+import de.evoal.models.v202704.pipeline.PipelineDefinition;
 
-import de.evoal.core.api.ecore.Space;
+import de.evoal.models.core.ecore.Space;
 import tools.jackson.databind.annotation.JsonDeserialize;
 import tools.jackson.databind.annotation.JsonSerialize;
 

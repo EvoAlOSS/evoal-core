@@ -1,8 +1,7 @@
 package de.evoal.core.api.ecore.io;
 
 import de.evoal.core.api.cdi.BeanFactory;
-import de.evoal.core.api.ecore.Space;
-import de.evoal.core.api.properties.PropertiesSpecification;
+import de.evoal.models.core.ecore.Space;
 import de.evoal.core.api.utils.EvoalIOException;
 
 import java.io.File;

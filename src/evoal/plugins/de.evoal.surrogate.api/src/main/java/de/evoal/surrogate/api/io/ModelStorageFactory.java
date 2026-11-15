@@ -1,7 +1,7 @@
 package de.evoal.surrogate.api.io;
 
 import de.evoal.core.api.cdi.BeanFactory;
-import de.evoal.core.api.ecore.Space;
+import de.evoal.models.core.ecore.Space;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 

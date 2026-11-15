@@ -1,7 +1,8 @@
 package de.evoal.optimisation.main.stopping;
 
-import de.evoal.optimisation.api.model.Iteration;
-import de.evoal.optimisation.api.model.StoppingCriterion;
+import de.evoal.models.v202704.optimisation.execution.TerminationCriterion;
+import de.evoal.models.v202704.optimisation.execution.impl.TerminationCriterionImpl;
+import de.evoal.models.v202704.optimisation.memory.Iteration;
 import jakarta.enterprise.inject.Vetoed;
 
 import java.util.LinkedList;
@@ -13,18 +14,18 @@ import java.util.List;
  *   so the first criterion that returns {@code true} will stop any further evaluation.
  */
 @Vetoed
-public class CriterionCombiner implements StoppingCriterion {
+public class CriterionCombiner extends TerminationCriterionImpl {
     /**
      * List of all criteria to check.
      */
-    private final List<StoppingCriterion> criteria = new LinkedList<>();
+    private final List<TerminationCriterion> criteria = new LinkedList<>();
 
     /**
      * Adds a new criterion to the list of criteria to check.
      *
      * @param criterion The criterion to add.
      */
-    public void add(final StoppingCriterion criterion) {
+    public void add(final TerminationCriterion criterion) {
         criteria.add(criterion);
     }
 

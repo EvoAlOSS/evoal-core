@@ -4,8 +4,8 @@ import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Named;
 
 import de.evoal.core.api.ecore.EObjectPair;
-import de.evoal.core.api.ecore.Space;
-import de.evoal.core.api.ecore.TypedEObject;
+import de.evoal.models.core.ecore.Space;
+import de.evoal.models.core.ecore.TypedEObject;
 import de.evoal.core.api.ecore.stream.EObjectPairStreamFactory;
 import de.evoal.core.api.ecore.stream.EObjectPairStreamSupplier;
 import de.evoal.core.api.interpreter.InterpreterState;
@@ -107,7 +107,8 @@ public class PredictiveErrorCalculator extends SurrogateInformationCalculator {
 
         DenseMatrix independentSmoothingVector = DenseMatrix.zeros(ScalarType.Float64, 1, numberOfPoints);
         independentSmoothingVector.fill(1.0 / sumOfTrainingsMatrix);
-        independentSmoothingVector = independentSmoothingMatrix.mm(invertedKernelTrainingsMatrix);
+        // (1/c) * 1ᵀ * Z⁻¹ (row vector, 1 x n)
+        independentSmoothingVector = independentSmoothingVector.mm(invertedKernelTrainingsMatrix);
 
         final DenseMatrix trainingsSmoothingMatrix = kernelTrainingsMatrixNotAdded.mm(independentSmoothingMatrix).copy();
 

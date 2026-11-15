@@ -24,6 +24,7 @@ module 'training' {
 		'ε' := 1.4;
 		'soft-margin' := 0.15;
 		tolerance := 0.1;
+		'kernel' := gaussian { 'σ' := 1.0; };
 	}
 			
 	specify gof begin 

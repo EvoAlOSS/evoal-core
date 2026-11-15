@@ -7,8 +7,8 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.*;
 
-import de.evoal.core.api.ecore.Space;
-import de.evoal.core.api.ecore.TypedEObject;
+import de.evoal.models.core.ecore.Space;
+import de.evoal.models.core.ecore.TypedEObject;
 import de.evoal.core.api.ecore.misc.SpaceHelper;
 
 /**

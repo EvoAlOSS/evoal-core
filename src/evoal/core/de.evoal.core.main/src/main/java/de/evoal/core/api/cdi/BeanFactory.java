@@ -1,20 +1,29 @@
 package de.evoal.core.api.cdi;
 
-import de.evoal.core.api.utils.AttributeHelper;
-import de.evoal.core.api.utils.InitializationException;
-import de.evoal.core.api.utils.Requirements;
-import de.evoal.core.api.validation.model.Validator;
-import de.evoal.languages.model.base.expressions.Instance;
-import de.evoal.languages.model.dl.util.FQNProvider;
-import jakarta.enterprise.inject.spi.Bean;
+import de.evoal.models.core.cdi.EvoalComponent;
+import de.evoal.models.core.utils.FQNProvider;
+import de.evoal.models.v202704.core.Configuration;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.deltaspike.core.api.provider.BeanProvider;
 
 import java.util.Collection;
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
+
+import jakarta.enterprise.inject.spi.Bean;
+
+import org.apache.deltaspike.core.api.provider.BeanProvider;
+
+import de.evoal.models.core.exceptions.InitializationException;
+
+import de.evoal.core.api.dynamic.DynamicEClassProvider;
+import de.evoal.core.api.utils.AttributeHelper;
+import de.evoal.core.api.utils.Requirements;
+import de.evoal.core.api.validation.model.Validator;
+import org.eclipse.emf.ecore.EObject;
+
 
 /**
  * Deltaspike wrapper for reducing dependencies in extensions.
@@ -82,12 +91,14 @@ public final class BeanFactory {
         }
     }
 
-    public static <T extends EvoalComponent<T>> T createComponent(final Class<T> type, final String name, final Instance configuration) {
+    public static <T extends EvoalComponent<T>> T createComponent(final Class<T> type, final String name, final EObject configuration) {
         Requirements.requireNotNull(configuration);
 
         try {
-            return create(name, type)
-                    .init(configuration);
+            final T instance = create(name, type);
+            checkConfiguration(type, configuration);
+
+            return instance.init(configuration);
         } catch (final InitializationException e) {
             log.error("Failed to create contextual reference of type '{}' with name '{}'.", type, name);
             logInstantiationError(type, e);
@@ -96,11 +107,12 @@ public final class BeanFactory {
         }
     }
 
-    public static <T extends EvoalComponent<T>> T createComponent(final Class<T> type, final String name, final Instance configuration, final Consumer<T> preInit) {
+    public static <T extends EvoalComponent<T>> T createComponent(final Class<T> type, final String name, final EObject configuration, final Consumer<T> preInit) {
         Requirements.requireNotNull(preInit);
 
         try {
             final T instance = create(name, type);
+            checkConfiguration(type, configuration);
             preInit.accept(instance);
             instance.init(configuration);
 
@@ -113,12 +125,13 @@ public final class BeanFactory {
         }
     }
 
-    public static <T extends EvoalComponent<T>> T createComponent(final Class<T> type, final Instance configuration, final String suffix, final Consumer<T> preInit) {
+    public static <T extends EvoalComponent<T>> T createComponent(final Class<T> type, final EObject configuration, final String suffix, final Consumer<T> preInit) {
         Requirements.requireNotNull(preInit);
         final String name = fqName.get(configuration) + suffix;
 
         try {
             final T instance = create(name, type);
+            checkConfiguration(type, configuration);
             preInit.accept(instance);
             instance.init(configuration);
 
@@ -131,7 +144,7 @@ public final class BeanFactory {
         }
     }
 
-    public static <T extends EvoalComponent<T>> T createComponent(final Class<T> type, final Instance configuration) {
+    public static <T extends EvoalComponent<T>> T createComponent(final Class<T> type, final EObject configuration) {
         Requirements.requireNotNull(configuration);
 
         final String name = fqName.get(configuration);
@@ -139,7 +152,7 @@ public final class BeanFactory {
         return createComponent(type, name, configuration);
     }
 
-    public static <T extends EvoalComponent<T>> T createComponent(final Class<T> type, final Instance configuration, final Consumer<T> preInit) {
+    public static <T extends EvoalComponent<T>> T createComponent(final Class<T> type, final EObject configuration, final Consumer<T> preInit) {
         Requirements.requireNotNull(configuration);
 
         final String name = fqName.get(configuration);
@@ -147,7 +160,7 @@ public final class BeanFactory {
         return createComponent(type, name, configuration, preInit);
     }
 
-    public static <T extends EvoalComponent<T>> T createComponent(final Class<T> type, final Instance configuration, final String nameSuffix) {
+    public static <T extends EvoalComponent<T>> T createComponent(final Class<T> type, final EObject configuration, final String nameSuffix) {
         Requirements.requireNotNull(configuration);
 
         final String name = fqName.get(configuration) + nameSuffix;
@@ -155,7 +168,7 @@ public final class BeanFactory {
         return createComponent(type, name, configuration);
     }
 
-    public static <S extends EvoalComponent<S>, T extends EvoalComponentProvider<S>> S createComponent(final Class<S> type, final Class<T> provider, final Instance configuration) {
+    public static <S extends EvoalComponent<S>, T extends EvoalComponentProvider<S>> S createComponent(final Class<S> type, final Class<T> provider, final EObject configuration) {
         Requirements.requireNotNull(type);
         Requirements.requireNotNull(configuration);
 
@@ -163,6 +176,8 @@ public final class BeanFactory {
         Requirements.requireNotNull(name);
 
         log.info("Creating bean for instance of type {}.", name);
+        checkConfiguration(type, configuration);
+
         try {
             log.info("Testing component provider of type {} with name {}.", provider, name);
             return BeanProvider.getContextualReference(name, false, provider)
@@ -176,11 +191,37 @@ public final class BeanFactory {
         }
     }
 
-    public static <T extends EvoalComponent<T>> T createComponentForAttribute(final Class<T> type, final Instance configuration, final String attributeName) {
+    public static <T extends EvoalComponent<T>> T createComponentForAttribute(final Class<T> type, final EObject configuration, final String attributeName) {
         final AttributeHelper helper = BeanFactory.create(AttributeHelper.class);
-        final Instance child = helper.lookup(configuration, attributeName);
+        final Configuration child = helper.lookup(configuration, attributeName);
 
         return createComponent(type, child);
+    }
+
+    /**
+     * Checks that the configuration is an instance of the DL type that configures components
+     *   of the given type (see {@link DynamicEClassProvider#findConfiguringType(Class)}).
+     *
+     * @param type The component type.
+     * @param configuration The configuration passed to the component.
+     *
+     * @throws IllegalArgumentException if the configuration is not an instance of the configuring DL type.
+     */
+    private static void checkConfiguration(final Class<?> type, final EObject configuration) {
+        final Optional<String> expected = BeanProvider.getContextualReference(DynamicEClassProvider.class)
+                                                      .findConfiguringType(type);
+        if(expected.isEmpty()) {
+            return;
+        }
+
+        if(!(configuration instanceof Configuration)) {
+            log.warn("Unable to check configuration '{}' of component type '{}', since it is no DL configuration.", configuration.eClass().getName(), type.getName());
+            return;
+        }
+
+        if(!DynamicEClassProvider.isInstanceOf(configuration, expected.get())) {
+            throw new IllegalArgumentException("Configuration of type '" + DynamicEClassProvider.dlTypeOf(configuration) + "' cannot configure a component of type '" + type.getName() + "', which requires a configuration of type '" + expected.get() + "'.");
+        }
     }
 
     public static <T> T injectFields(final T instance) {

@@ -13,8 +13,6 @@
   <genPackages prefix="Mll" basePackage="de.evoal.languages.model" disposableProviderFactory="true"
       fileExtensions="mlm" ecorePackage="mll.ecore#/">
     <genClasses ecoreClass="mll.ecore#//MachineLearningModule">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mll.ecore#//MachineLearningModule/imports"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mll.ecore#//MachineLearningModule/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mll.ecore#//MachineLearningModule/task"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mll.ecore#//MachineLearningModule/validation"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mll.ecore#//MachineLearningModule/preparation"/>

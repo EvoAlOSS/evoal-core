@@ -1,7 +1,7 @@
 package de.evoal.core.main.ecore;
 
-import de.evoal.core.api.ecore.Space;
-import de.evoal.core.api.ecore.TypedEObject;
+import de.evoal.models.core.ecore.Space;
+import de.evoal.models.core.ecore.TypedEObject;
 import de.evoal.core.api.ecore.io.EObjectWriter;
 import de.evoal.core.api.utils.EvoalIOException;
 import lombok.extern.slf4j.Slf4j;

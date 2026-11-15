@@ -2,7 +2,11 @@ package de.evoal.optimisation.main.statistics.stopping;
 
 import de.evoal.core.api.cdi.BeanFactory;
 import de.evoal.core.api.languages.AttributeEvaluator;
-import de.evoal.languages.model.base.expressions.Instance;
+import de.evoal.models.v202704.core.Configuration;
+import de.evoal.models.v202704.optimisation.execution.TerminationCriterion;
+import de.evoal.models.v202704.optimisation.memory.Individual;
+import de.evoal.models.v202704.optimisation.memory.Iteration;
+import de.evoal.models.v202704.optimisation.memory.Rank;
 import de.evoal.optimisation.api.model.*;
 import de.evoal.optimisation.api.statistics.io.Writer;
 import de.evoal.optimisation.api.statistics.io.WriterException;
@@ -16,10 +20,11 @@ import lombok.extern.slf4j.Slf4j;
 import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import org.eclipse.emf.ecore.EObject;
+
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -44,10 +49,10 @@ public class StoppingCritertionPerIndividual implements StatisticsWriter {
 
     @Override
     @SneakyThrows(WriterException.class)
-    public StatisticsWriter init(final Instance configuration) {
-        final Instance [] configs = evaluator.attributeToInstanceArray(configuration, "criteria");
+    public StatisticsWriter init(final EObject configuration) {
+        final EObject[] configs = evaluator.attributeToEObjectArray(configuration, "criteria");
         stoppingCriteria = Arrays.stream(configs)
-                .map(i -> BeanFactory.createComponent(StoppingCriterion.class, i))
+                .map(i -> BeanFactory.createComponent(TerminationCriterion.class, i))
                 .peek(s -> {if (!(s instanceof CandidateBasedStoppingCriterion)) log.warn("One of the configured stopping criteria is not an individual-based one."); })
                 .filter(CandidateBasedStoppingCriterion.class::isInstance)
                 .map(CandidateBasedStoppingCriterion.class::cast)
@@ -56,7 +61,7 @@ public class StoppingCritertionPerIndividual implements StatisticsWriter {
 
         final List<Column> columns = new LinkedList<>();
         columns.add(new Column("generation", ColumnType.Integer));
-        columns.add(new Column("index", ColumnType.Integer));
+        columns.add(new Column("individual-id", ColumnType.Integer));
 
         for(int i = 0; i < stoppingCriteria.length; i++) {
             columns.add(new Column("criterion-" + i, ColumnType.Integer));
@@ -70,20 +75,20 @@ public class StoppingCritertionPerIndividual implements StatisticsWriter {
 
     @Override
     public void add(final Iteration result) {
-        final int iterationNumber = result.iteration();
-        final Candidate bestCandidate = result.bestCandidate();
-        final Optional<Integer> numberOfCandidates = result.candidateCount();
+        final int iterationNumber = result.getNumber();
+        final Rank bestCandidates = result.getRanks().getFirst();
+        final int numberOfCandidates = result.numberOfSurvivedIndividuals();
 
         final AtomicInteger counter = new AtomicInteger(0);
 
-        result.candidates()
-                .map(c -> toData(iterationNumber, counter.getAndIncrement(), numberOfCandidates.get(), bestCandidate, c))
+        result.survivedIndividuals()
+                .map(c -> toData(iterationNumber, counter.getAndIncrement(), numberOfCandidates, bestCandidates, c))
                 .forEach(this::appendToWriter);
 
         writer.flush();
     }
 
-    protected Object [] toData(final int iterationNumber, final int candidateNumber, final int numberOfCandidates, final Candidate bestCandidate, final Candidate candidate) {
+    protected Object [] toData(final int iterationNumber, final int candidateNumber, final int numberOfCandidates, final Rank bestCandidates, final Individual candidate) {
         final Object [] data = new Object[numberOfColumns];
 
         data[0] = iterationNumber;
@@ -96,7 +101,7 @@ public class StoppingCritertionPerIndividual implements StatisticsWriter {
                     iterationNumber,
                     candidateNumber,
                     numberOfCandidates,
-                    bestCandidate,
+                    bestCandidates,
                     candidate);
 
             data[i + 2] = satisfied ? 1 : 0;

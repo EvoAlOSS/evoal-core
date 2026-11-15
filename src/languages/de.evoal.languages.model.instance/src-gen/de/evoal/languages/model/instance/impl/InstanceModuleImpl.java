@@ -3,10 +3,9 @@
  */
 package de.evoal.languages.model.instance.impl;
 
-import de.evoal.languages.model.base.Import;
-
 import de.evoal.languages.model.base.expressions.Instance;
 
+import de.evoal.languages.model.base.impl.ModuleImpl;
 import de.evoal.languages.model.instance.InstanceModule;
 import de.evoal.languages.model.instance.InstancePackage;
 
@@ -19,8 +18,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -32,23 +29,12 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link de.evoal.languages.model.instance.impl.InstanceModuleImpl#getImports <em>Imports</em>}</li>
  *   <li>{@link de.evoal.languages.model.instance.impl.InstanceModuleImpl#getInstances <em>Instances</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class InstanceModuleImpl extends MinimalEObjectImpl.Container implements InstanceModule {
-	/**
-	 * The cached value of the '{@link #getImports() <em>Imports</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getImports()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Import> imports;
-
+public class InstanceModuleImpl extends ModuleImpl implements InstanceModule {
 	/**
 	 * The cached value of the '{@link #getInstances() <em>Instances</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -84,19 +70,6 @@ public class InstanceModuleImpl extends MinimalEObjectImpl.Container implements 
 	 * @generated
 	 */
 	@Override
-	public EList<Import> getImports() {
-		if (imports == null) {
-			imports = new EObjectContainmentEList<Import>(Import.class, this, InstancePackage.INSTANCE_MODULE__IMPORTS);
-		}
-		return imports;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EList<Instance> getInstances() {
 		if (instances == null) {
 			instances = new EObjectContainmentEList<Instance>(Instance.class, this, InstancePackage.INSTANCE_MODULE__INSTANCES);
@@ -112,8 +85,6 @@ public class InstanceModuleImpl extends MinimalEObjectImpl.Container implements 
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case InstancePackage.INSTANCE_MODULE__IMPORTS:
-				return ((InternalEList<?>)getImports()).basicRemove(otherEnd, msgs);
 			case InstancePackage.INSTANCE_MODULE__INSTANCES:
 				return ((InternalEList<?>)getInstances()).basicRemove(otherEnd, msgs);
 		}
@@ -128,8 +99,6 @@ public class InstanceModuleImpl extends MinimalEObjectImpl.Container implements 
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case InstancePackage.INSTANCE_MODULE__IMPORTS:
-				return getImports();
 			case InstancePackage.INSTANCE_MODULE__INSTANCES:
 				return getInstances();
 		}
@@ -145,10 +114,6 @@ public class InstanceModuleImpl extends MinimalEObjectImpl.Container implements 
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case InstancePackage.INSTANCE_MODULE__IMPORTS:
-				getImports().clear();
-				getImports().addAll((Collection<? extends Import>)newValue);
-				return;
 			case InstancePackage.INSTANCE_MODULE__INSTANCES:
 				getInstances().clear();
 				getInstances().addAll((Collection<? extends Instance>)newValue);
@@ -165,9 +130,6 @@ public class InstanceModuleImpl extends MinimalEObjectImpl.Container implements 
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case InstancePackage.INSTANCE_MODULE__IMPORTS:
-				getImports().clear();
-				return;
 			case InstancePackage.INSTANCE_MODULE__INSTANCES:
 				getInstances().clear();
 				return;
@@ -183,8 +145,6 @@ public class InstanceModuleImpl extends MinimalEObjectImpl.Container implements 
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case InstancePackage.INSTANCE_MODULE__IMPORTS:
-				return imports != null && !imports.isEmpty();
 			case InstancePackage.INSTANCE_MODULE__INSTANCES:
 				return instances != null && !instances.isEmpty();
 		}

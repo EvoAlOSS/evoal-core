@@ -1,5 +1,6 @@
 import "definitions" from 'de.evoal.pipeline.base';
 import "definitions" from 'de.evoal.surrogate.ml';
+import "definitions" from 'de.evoal.core.base';
 
 /**
  * Generator extensions based on surrogate models.
@@ -19,7 +20,7 @@ module 'de.evoal.surrogate.pipeline' {
 	/**
 	 * Component for loading training data and using it for the pipeline. 
 	 */	
-	type 'training-data-loader' {
+	type 'training-data-loader' extends configuration {
 		/**
 		 * List of files or directories to use
 		 */

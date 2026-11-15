@@ -3,28 +3,23 @@
  */
 package de.evoal.languages.model.dl.impl;
 
-import de.evoal.languages.model.base.Import;
-
 import de.evoal.languages.model.base.definitions.ClassDefinition;
 import de.evoal.languages.model.base.definitions.ConstantDefinition;
 import de.evoal.languages.model.base.definitions.EnumDefinition;
 import de.evoal.languages.model.base.definitions.FunctionDefinition;
 
+import de.evoal.languages.model.base.impl.ModuleImpl;
 import de.evoal.languages.model.dl.DefinitionModule;
 import de.evoal.languages.model.dl.DlPackage;
 
 import java.util.Collection;
 
-import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
@@ -37,8 +32,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link de.evoal.languages.model.dl.impl.DefinitionModuleImpl#getImports <em>Imports</em>}</li>
- *   <li>{@link de.evoal.languages.model.dl.impl.DefinitionModuleImpl#getName <em>Name</em>}</li>
  *   <li>{@link de.evoal.languages.model.dl.impl.DefinitionModuleImpl#getTypes <em>Types</em>}</li>
  *   <li>{@link de.evoal.languages.model.dl.impl.DefinitionModuleImpl#getFunctions <em>Functions</em>}</li>
  *   <li>{@link de.evoal.languages.model.dl.impl.DefinitionModuleImpl#getConstants <em>Constants</em>}</li>
@@ -47,37 +40,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *
  * @generated
  */
-public class DefinitionModuleImpl extends MinimalEObjectImpl.Container implements DefinitionModule {
-	/**
-	 * The cached value of the '{@link #getImports() <em>Imports</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getImports()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Import> imports;
-
-	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String NAME_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String name = NAME_EDEFAULT;
-
+public class DefinitionModuleImpl extends ModuleImpl implements DefinitionModule {
 	/**
 	 * The cached value of the '{@link #getTypes() <em>Types</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -143,42 +106,6 @@ public class DefinitionModuleImpl extends MinimalEObjectImpl.Container implement
 	 * @generated
 	 */
 	@Override
-	public EList<Import> getImports() {
-		if (imports == null) {
-			imports = new EObjectContainmentEList<Import>(Import.class, this, DlPackage.DEFINITION_MODULE__IMPORTS);
-		}
-		return imports;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setName(String newName) {
-		String oldName = name;
-		name = newName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DlPackage.DEFINITION_MODULE__NAME, oldName, name));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EList<ClassDefinition> getTypes() {
 		if (types == null) {
 			types = new EObjectContainmentEList<ClassDefinition>(ClassDefinition.class, this, DlPackage.DEFINITION_MODULE__TYPES);
@@ -233,8 +160,6 @@ public class DefinitionModuleImpl extends MinimalEObjectImpl.Container implement
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case DlPackage.DEFINITION_MODULE__IMPORTS:
-				return ((InternalEList<?>)getImports()).basicRemove(otherEnd, msgs);
 			case DlPackage.DEFINITION_MODULE__TYPES:
 				return ((InternalEList<?>)getTypes()).basicRemove(otherEnd, msgs);
 			case DlPackage.DEFINITION_MODULE__FUNCTIONS:
@@ -255,10 +180,6 @@ public class DefinitionModuleImpl extends MinimalEObjectImpl.Container implement
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case DlPackage.DEFINITION_MODULE__IMPORTS:
-				return getImports();
-			case DlPackage.DEFINITION_MODULE__NAME:
-				return getName();
 			case DlPackage.DEFINITION_MODULE__TYPES:
 				return getTypes();
 			case DlPackage.DEFINITION_MODULE__FUNCTIONS:
@@ -280,13 +201,6 @@ public class DefinitionModuleImpl extends MinimalEObjectImpl.Container implement
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case DlPackage.DEFINITION_MODULE__IMPORTS:
-				getImports().clear();
-				getImports().addAll((Collection<? extends Import>)newValue);
-				return;
-			case DlPackage.DEFINITION_MODULE__NAME:
-				setName((String)newValue);
-				return;
 			case DlPackage.DEFINITION_MODULE__TYPES:
 				getTypes().clear();
 				getTypes().addAll((Collection<? extends ClassDefinition>)newValue);
@@ -315,12 +229,6 @@ public class DefinitionModuleImpl extends MinimalEObjectImpl.Container implement
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case DlPackage.DEFINITION_MODULE__IMPORTS:
-				getImports().clear();
-				return;
-			case DlPackage.DEFINITION_MODULE__NAME:
-				setName(NAME_EDEFAULT);
-				return;
 			case DlPackage.DEFINITION_MODULE__TYPES:
 				getTypes().clear();
 				return;
@@ -345,10 +253,6 @@ public class DefinitionModuleImpl extends MinimalEObjectImpl.Container implement
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case DlPackage.DEFINITION_MODULE__IMPORTS:
-				return imports != null && !imports.isEmpty();
-			case DlPackage.DEFINITION_MODULE__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case DlPackage.DEFINITION_MODULE__TYPES:
 				return types != null && !types.isEmpty();
 			case DlPackage.DEFINITION_MODULE__FUNCTIONS:
@@ -359,22 +263,6 @@ public class DefinitionModuleImpl extends MinimalEObjectImpl.Container implement
 				return enums != null && !enums.isEmpty();
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuilder result = new StringBuilder(super.toString());
-		result.append(" (name: ");
-		result.append(name);
-		result.append(')');
-		return result.toString();
 	}
 
 } //DefinitionModuleImpl

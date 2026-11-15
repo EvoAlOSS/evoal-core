@@ -1,10 +1,9 @@
 package de.evoal.surrogate.smile.gaussian;
 
-import de.evoal.core.api.ecore.TypedEObject;
+import de.evoal.models.core.ecore.TypedEObject;
 import de.evoal.core.api.utils.AttributeHelper;
-import de.evoal.core.api.utils.InitializationException;
+import de.evoal.models.core.exceptions.InitializationException;
 import de.evoal.core.api.utils.Requirements;
-import de.evoal.languages.model.base.expressions.Instance;
 import de.evoal.surrogate.api.function.ModelFunction;
 import de.evoal.surrogate.api.training.AbstractModelLearner;
 import de.evoal.surrogate.api.training.ModelLearner;
@@ -15,12 +14,12 @@ import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
+import org.eclipse.emf.ecore.EObject;
 import smile.math.kernel.MercerKernel;
 import smile.regression.GaussianProcessRegression;
 
 import java.util.*;
 import java.util.function.Function;
-
 
 /**
  * class for the gaussian process algorithm
@@ -81,7 +80,7 @@ public class GaussianProcessLearner extends AbstractModelLearner {
     }
 
     @Override
-    public ModelLearner init(final Instance configuration) throws InitializationException {
+    public ModelLearner init(final EObject configuration) throws InitializationException {
         super.init(configuration);
 
         noise = helper.lookup(configuration, MLL_NOISE_PARAMETER);
@@ -89,10 +88,10 @@ public class GaussianProcessLearner extends AbstractModelLearner {
         normalize = helper.lookup(configuration, MLL_NORMALIZE_PARAMETER);
         iterations = helper.lookup(configuration, MLL_ITERATIONS_PARAMETER);
 
-        final Instance kernel = helper.lookup(configuration, KernelFactory.MLL_KERNEL_PARAMETER);
+        final EObject kernel = helper.lookup(configuration, KernelFactory.MLL_KERNEL_PARAMETER);
 
         this.configuration.put(MLL_ITERATIONS_PARAMETER, iterations);
-        this.configuration.put(KernelFactory.KERNEL_PARAMETER, KernelFactory.mllToConfiguration(kernel));
+        this.configuration.put(KernelFactory.KERNEL_PARAMETER, KernelFactory.toKernelConfiguration(kernel));
         this.configuration.put(MLL_NOISE_PARAMETER, noise);
         this.configuration.put(MLL_NORMALIZE_PARAMETER, normalize);
         this.configuration.put(MLL_TOLERANCE_PARAMETER, tolerance);

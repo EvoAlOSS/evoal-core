@@ -1,7 +1,7 @@
 package de.evoal.surrogate.smile.utils;
 
-import de.evoal.core.api.ecore.Space;
-import de.evoal.core.api.ecore.TypedEObject;
+import de.evoal.models.core.ecore.Space;
+import de.evoal.models.core.ecore.TypedEObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
 import java.util.function.Function;

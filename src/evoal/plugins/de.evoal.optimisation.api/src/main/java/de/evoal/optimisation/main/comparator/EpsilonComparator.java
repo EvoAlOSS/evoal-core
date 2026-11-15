@@ -1,15 +1,19 @@
 package de.evoal.optimisation.main.comparator;
 
+import de.evoal.core.api.dynamic.EAnnotationHelper;
 import de.evoal.core.api.languages.AttributeEvaluator;
+import de.evoal.models.core.ecore.Space;
+import de.evoal.models.core.ecore.TypedEObject;
 import de.evoal.optimisation.api.model.OptimisationValueComparator;
-import de.evoal.languages.model.base.expressions.Instance;
 import de.evoal.languages.model.base.definitions.DataDescription;
-import de.evoal.core.api.properties.PropertiesSpecification;
 
 import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Named;
 import jakarta.inject.Inject;
-import java.util.List;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
+
+import java.util.Map;
 import java.util.function.Function;
 
 @Dependent
@@ -17,26 +21,31 @@ import java.util.function.Function;
 public class EpsilonComparator implements OptimisationValueComparator {
 
     @Inject
-    private AttributeEvaluator evaluator;
-
-    private int index;
+    private EAnnotationHelper helper;
 
     @Inject
-    @Named("optimisation-space-specification")
-    private PropertiesSpecification optimisationSpec;
+    private AttributeEvaluator evaluator;
+
+    private EStructuralFeature feature;
+
+    @Inject
+    @Named("optimisation-space")
+    private Space optimisationSpace;
 
     @Inject @Named("optimisation-value-conversions")
-    private List<Function<Double, Double>> valueConversions;
+    private Map<EStructuralFeature, Function<Number, Number>> valueConversions;
 
     @Override
-    public EpsilonOptimisationValue toValue(final double[] fitnessValues) {
-        return EpsilonOptimisationValue.of(valueConversions, index, fitnessValues);
+    public EpsilonOptimisationValue toValue(final TypedEObject fitnessValues) {
+        return EpsilonOptimisationValue.of(valueConversions, fitnessValues, feature);
     }
 
     @Override
-    public OptimisationValueComparator init(final Instance config) {
-        DataDescription goalData = evaluator.attributeToDataDescription(config, "goal-objective");
-        this.index = optimisationSpec.indexOf(goalData.getName());
+    public OptimisationValueComparator init(final EObject config) {
+        final DataDescription goalData = evaluator.attributeToDataDescription(config, "goal-objective");
+
+        feature = helper.featureOf(optimisationSpace, goalData);
+
         return this;
     }
 }

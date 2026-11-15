@@ -36,7 +36,7 @@ public enum MultiplyDivideModuloOperator implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	DIVIDE(0, "Divide", "Divide"),
+	DIVIDE(1, "Divide", "Divide"),
 
 	/**
 	 * The '<em><b>Modulo</b></em>' literal object.
@@ -46,7 +46,7 @@ public enum MultiplyDivideModuloOperator implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	MODULO(0, "Modulo", "Modulo");
+	MODULO(2, "Modulo", "Modulo");
 
 	/**
 	 * The '<em><b>Multiply</b></em>' literal value.
@@ -68,7 +68,7 @@ public enum MultiplyDivideModuloOperator implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int DIVIDE_VALUE = 0;
+	public static final int DIVIDE_VALUE = 1;
 
 	/**
 	 * The '<em><b>Modulo</b></em>' literal value.
@@ -79,7 +79,7 @@ public enum MultiplyDivideModuloOperator implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int MODULO_VALUE = 0;
+	public static final int MODULO_VALUE = 2;
 
 	/**
 	 * An array of all the '<em><b>Multiply Divide Modulo Operator</b></em>' enumerators.
@@ -149,6 +149,8 @@ public enum MultiplyDivideModuloOperator implements Enumerator {
 	public static MultiplyDivideModuloOperator get(int value) {
 		switch (value) {
 			case MULTIPLY_VALUE: return MULTIPLY;
+			case DIVIDE_VALUE: return DIVIDE;
+			case MODULO_VALUE: return MODULO;
 		}
 		return null;
 	}

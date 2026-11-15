@@ -1302,7 +1302,7 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		private final CrossReference cDefinitionEnumDefinitionCrossReference_1_0 = (CrossReference)cDefinitionAssignment_1.eContents().get(0);
 		private final RuleCall cDefinitionEnumDefinitionQualifiedNameParserRuleCall_1_0_1 = (RuleCall)cDefinitionEnumDefinitionCrossReference_1_0.eContents().get(1);
 		
-		//EnumReferenceRule returns  types::DefinitionReference:
+		//EnumReferenceRule returns  types::EnumDefinitionReference:
 		//    'enum' definition = [EnumDefinition|QualifiedName]
 		//;
 		@Override public ParserRule getRule() { return rule; }
@@ -1330,7 +1330,7 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		private final CrossReference cDefinitionClassDefinitionCrossReference_1_0 = (CrossReference)cDefinitionAssignment_1.eContents().get(0);
 		private final RuleCall cDefinitionClassDefinitionQualifiedNameParserRuleCall_1_0_1 = (RuleCall)cDefinitionClassDefinitionCrossReference_1_0.eContents().get(1);
 		
-		//TypeReferenceRule returns types::DefinitionReference:
+		//TypeReferenceRule returns types::ClassDefinitionReference:
 		//    'instance' definition = [ClassDefinition|QualifiedName]
 		//;
 		@Override public ParserRule getRule() { return rule; }
@@ -1788,47 +1788,47 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.base.dsl.BaseLanguage.ComparisonOperatorRule");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final EnumLiteralDeclaration cGreaterThanEnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
-		private final Keyword cGreaterThanGreaterThanSignEqualsSignKeyword_0_0 = (Keyword)cGreaterThanEnumLiteralDeclaration_0.eContents().get(0);
+		private final Keyword cGreaterThanGreaterThanSignKeyword_0_0 = (Keyword)cGreaterThanEnumLiteralDeclaration_0.eContents().get(0);
 		private final EnumLiteralDeclaration cGreaterEqualEnumLiteralDeclaration_1 = (EnumLiteralDeclaration)cAlternatives.eContents().get(1);
-		private final Keyword cGreaterEqualGreaterThanSignKeyword_1_0 = (Keyword)cGreaterEqualEnumLiteralDeclaration_1.eContents().get(0);
+		private final Keyword cGreaterEqualGreaterThanSignEqualsSignKeyword_1_0 = (Keyword)cGreaterEqualEnumLiteralDeclaration_1.eContents().get(0);
 		private final EnumLiteralDeclaration cEqualEnumLiteralDeclaration_2 = (EnumLiteralDeclaration)cAlternatives.eContents().get(2);
 		private final Keyword cEqualEqualsSignKeyword_2_0 = (Keyword)cEqualEnumLiteralDeclaration_2.eContents().get(0);
 		private final EnumLiteralDeclaration cUnequalEnumLiteralDeclaration_3 = (EnumLiteralDeclaration)cAlternatives.eContents().get(3);
 		private final Keyword cUnequalExclamationMarkEqualsSignKeyword_3_0 = (Keyword)cUnequalEnumLiteralDeclaration_3.eContents().get(0);
 		private final EnumLiteralDeclaration cLessEqualEnumLiteralDeclaration_4 = (EnumLiteralDeclaration)cAlternatives.eContents().get(4);
-		private final Keyword cLessEqualLessThanSignKeyword_4_0 = (Keyword)cLessEqualEnumLiteralDeclaration_4.eContents().get(0);
+		private final Keyword cLessEqualLessThanSignEqualsSignKeyword_4_0 = (Keyword)cLessEqualEnumLiteralDeclaration_4.eContents().get(0);
 		private final EnumLiteralDeclaration cLessThanEnumLiteralDeclaration_5 = (EnumLiteralDeclaration)cAlternatives.eContents().get(5);
-		private final Keyword cLessThanLessThanSignEqualsSignKeyword_5_0 = (Keyword)cLessThanEnumLiteralDeclaration_5.eContents().get(0);
+		private final Keyword cLessThanLessThanSignKeyword_5_0 = (Keyword)cLessThanEnumLiteralDeclaration_5.eContents().get(0);
 		
 		//enum ComparisonOperatorRule returns ComparisonOperator :
-		//    GreaterThan = ">=" |
-		//    GreaterEqual = ">" |
+		//    GreaterThan = ">" |
+		//    GreaterEqual = ">=" |
 		//    Equal = "=" |
 		//    Unequal = "!=" |
-		//    LessEqual = "<" |
-		//    LessThan = "<="
+		//    LessEqual = "<=" |
+		//    LessThan = "<"
 		//;
 		public EnumRule getRule() { return rule; }
 		
-		//GreaterThan = ">=" |
-		//GreaterEqual = ">" |
+		//GreaterThan = ">" |
+		//GreaterEqual = ">=" |
 		//Equal = "=" |
 		//Unequal = "!=" |
-		//LessEqual = "<" |
-		//LessThan = "<="
+		//LessEqual = "<=" |
+		//LessThan = "<"
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
-		//GreaterThan = ">="
+		//GreaterThan = ">"
 		public EnumLiteralDeclaration getGreaterThanEnumLiteralDeclaration_0() { return cGreaterThanEnumLiteralDeclaration_0; }
 		
-		//">="
-		public Keyword getGreaterThanGreaterThanSignEqualsSignKeyword_0_0() { return cGreaterThanGreaterThanSignEqualsSignKeyword_0_0; }
+		//">"
+		public Keyword getGreaterThanGreaterThanSignKeyword_0_0() { return cGreaterThanGreaterThanSignKeyword_0_0; }
 		
-		//GreaterEqual = ">"
+		//GreaterEqual = ">="
 		public EnumLiteralDeclaration getGreaterEqualEnumLiteralDeclaration_1() { return cGreaterEqualEnumLiteralDeclaration_1; }
 		
-		//">"
-		public Keyword getGreaterEqualGreaterThanSignKeyword_1_0() { return cGreaterEqualGreaterThanSignKeyword_1_0; }
+		//">="
+		public Keyword getGreaterEqualGreaterThanSignEqualsSignKeyword_1_0() { return cGreaterEqualGreaterThanSignEqualsSignKeyword_1_0; }
 		
 		//Equal = "="
 		public EnumLiteralDeclaration getEqualEnumLiteralDeclaration_2() { return cEqualEnumLiteralDeclaration_2; }
@@ -1842,17 +1842,17 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		//"!="
 		public Keyword getUnequalExclamationMarkEqualsSignKeyword_3_0() { return cUnequalExclamationMarkEqualsSignKeyword_3_0; }
 		
-		//LessEqual = "<"
+		//LessEqual = "<="
 		public EnumLiteralDeclaration getLessEqualEnumLiteralDeclaration_4() { return cLessEqualEnumLiteralDeclaration_4; }
 		
-		//"<"
-		public Keyword getLessEqualLessThanSignKeyword_4_0() { return cLessEqualLessThanSignKeyword_4_0; }
+		//"<="
+		public Keyword getLessEqualLessThanSignEqualsSignKeyword_4_0() { return cLessEqualLessThanSignEqualsSignKeyword_4_0; }
 		
-		//LessThan = "<="
+		//LessThan = "<"
 		public EnumLiteralDeclaration getLessThanEnumLiteralDeclaration_5() { return cLessThanEnumLiteralDeclaration_5; }
 		
-		//"<="
-		public Keyword getLessThanLessThanSignEqualsSignKeyword_5_0() { return cLessThanLessThanSignEqualsSignKeyword_5_0; }
+		//"<"
+		public Keyword getLessThanLessThanSignKeyword_5_0() { return cLessThanLessThanSignKeyword_5_0; }
 	}
 	public class AddOrSubtractOperatorRuleElements extends AbstractElementFinder.AbstractEnumRuleElementFinder {
 		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "de.evoal.languages.model.base.dsl.BaseLanguage.AddOrSubtractOperatorRule");
@@ -2372,12 +2372,12 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 	}
 	
 	//enum ComparisonOperatorRule returns ComparisonOperator :
-	//    GreaterThan = ">=" |
-	//    GreaterEqual = ">" |
+	//    GreaterThan = ">" |
+	//    GreaterEqual = ">=" |
 	//    Equal = "=" |
 	//    Unequal = "!=" |
-	//    LessEqual = "<" |
-	//    LessThan = "<="
+	//    LessEqual = "<=" |
+	//    LessThan = "<"
 	//;
 	public ComparisonOperatorRuleElements getComparisonOperatorRuleAccess() {
 		return eComparisonOperatorRule;
@@ -2788,7 +2788,7 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		return getBaseTypeRuleAccess().getRule();
 	}
 	
-	//EnumReferenceRule returns  types::DefinitionReference:
+	//EnumReferenceRule returns  types::EnumDefinitionReference:
 	//    'enum' definition = [EnumDefinition|QualifiedName]
 	//;
 	public EnumReferenceRuleElements getEnumReferenceRuleAccess() {
@@ -2799,7 +2799,7 @@ public class BaseLanguageGrammarAccess extends AbstractElementFinder.AbstractGra
 		return getEnumReferenceRuleAccess().getRule();
 	}
 	
-	//TypeReferenceRule returns types::DefinitionReference:
+	//TypeReferenceRule returns types::ClassDefinitionReference:
 	//    'instance' definition = [ClassDefinition|QualifiedName]
 	//;
 	public TypeReferenceRuleElements getTypeReferenceRuleAccess() {

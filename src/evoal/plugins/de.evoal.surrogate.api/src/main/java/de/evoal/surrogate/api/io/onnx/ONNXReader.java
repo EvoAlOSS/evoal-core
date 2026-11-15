@@ -10,7 +10,7 @@ import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import lombok.NonNull;
 
-import de.evoal.core.api.ecore.Space;
+import de.evoal.models.core.ecore.Space;
 import de.evoal.surrogate.api.function.ModelFunction;
 import org.eclipse.emf.ecore.EStructuralFeature;
 

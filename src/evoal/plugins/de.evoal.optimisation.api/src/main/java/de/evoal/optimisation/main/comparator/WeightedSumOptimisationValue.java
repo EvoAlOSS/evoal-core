@@ -1,85 +1,98 @@
 package de.evoal.optimisation.main.comparator;
 
-import de.evoal.optimisation.api.model.OptimisationValue;
-import de.evoal.core.api.utils.Requirements;
 import lombok.Getter;
 import lombok.NonNull;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.function.Function;
+import java.util.Map;
+import java.util.stream.Collectors;
 
-public class WeightedSumOptimisationValue implements OptimisationValue {
+import org.apache.commons.math3.util.Pair;
+
+import org.eclipse.emf.ecore.EStructuralFeature;
+
+import de.evoal.models.core.ecore.TypedEObject;
+
+import de.evoal.models.v202704.optimisation.execution.OptimisationValue;
+import de.evoal.models.v202704.optimisation.execution.impl.OptimisationValueWithDistanceImpl;
+
+import de.evoal.languages.model.interpreter.numeric.ArithmeticNumberOperations;
+
+
+public class WeightedSumOptimisationValue extends OptimisationValueWithDistanceImpl {
     @Getter
-    private final @NonNull double[] fitnessValues;
-    private final @NonNull double[] normalizedWeights;
-    private Function<Double, Double> valueConversions[];
+    private final TypedEObject fitnessValues;
+    private final Map<EStructuralFeature, Double> weights;
 
-    private WeightedSumOptimisationValue(final @NonNull  List<Function<Double, Double>> valueConversions, final @NonNull double[] weights, final @NonNull double[] fitnessValues) {
-        Requirements.requireSameSize(weights, fitnessValues);
-
-        this.valueConversions = valueConversions.toArray(s -> new Function[s]);
-        this.normalizedWeights = new double[weights.length];
-        System.arraycopy(weights, 0, normalizedWeights, 0, weights.length);
+    private WeightedSumOptimisationValue(final Map<EStructuralFeature, Double> weights, final @NonNull TypedEObject fitnessValues) {
+        this.weights = weights;
         this.fitnessValues = fitnessValues;
-
-        final double sumOfWeights = Arrays.stream(weights).sum();
-        for(int i = 0; i < normalizedWeights.length; ++i) {
-            normalizedWeights[i] = normalizedWeights[i] / sumOfWeights;
-        }
     }
 
-    public static WeightedSumOptimisationValue of(List<Function<Double, Double>> valueConversions, final double [] weights, final double [] fitnessValues) {
-        return new WeightedSumOptimisationValue(valueConversions, weights, fitnessValues);
+    public static WeightedSumOptimisationValue of(final Map<EStructuralFeature, Double> weights, final TypedEObject fitnessValues) {
+        return new WeightedSumOptimisationValue(weights, fitnessValues);
     }
 
     @Override
     public int compareTo(final @NonNull OptimisationValue other) {
-        if(!(other instanceof WeightedSumOptimisationValue otherValue)) {
-            throw new IllegalArgumentException("Only allowed to compare WeightedSumFitnessValue");
-        }
+        final Pair<Number, Number> values = calculate(other);
 
-        double ownFitness = 0.0;
-        double otherFitness = 0.0;
-
-        for(int index = 0; index < fitnessValues.length; ++index) {
-            ownFitness   += this.normalizedWeights[index] * this.valueConversions[index].apply(Math.abs(this.fitnessValues[index]));
-            otherFitness += this.normalizedWeights[index] * this.valueConversions[index].apply(Math.abs(otherValue.getFitnessValues()[index]));
-        }
-
-        return Double.compare(ownFitness, otherFitness);
+        return ArithmeticNumberOperations.compare(values.getFirst(), values.getSecond());
     }
 
     @Override
     public double distanceFrom(final @NonNull OptimisationValue other) {
-        if(!(other instanceof WeightedSumOptimisationValue)) {
+        final Pair<Number, Number> values = calculate(other);
+
+        return ArithmeticNumberOperations.abs(ArithmeticNumberOperations.minus(values.getFirst(), values.getSecond())).doubleValue();
+    }
+
+    private Pair<Number, Number> calculate(@NonNull OptimisationValue other) {
+        if(!(other instanceof WeightedSumOptimisationValue otherValue)) {
             throw new IllegalArgumentException("Only allowed to compare WeightedSumFitnessValue");
         }
 
-        double ownFitness = 0.0;
-        double otherFitness = 0.0;
+        Number ownFitness = 0.0;
+        Number otherFitness = 0.0;
 
-        for(int index = 0; index < fitnessValues.length; ++index) {
-            ownFitness = ownFitness + this.normalizedWeights[index] * Math.abs(this.fitnessValues[index]);
-            otherFitness = otherFitness + this.normalizedWeights[index] * Math.abs(((WeightedSumOptimisationValue)other).getFitnessValues()[index]);
+        for(final EStructuralFeature feature : fitnessValues.eSpace()) {
+            // TODO Do we want to use Math.abs for the fitness values here?
+            ownFitness   = ArithmeticNumberOperations.add(ownFitness, ArithmeticNumberOperations.multiply(this.weights.get(feature), this.fitnessValues.eGetAsNumber(feature)));
+            otherFitness = ArithmeticNumberOperations.add(otherFitness, ArithmeticNumberOperations.multiply(this.weights.get(feature), otherValue.fitnessValues.eGetAsNumber(feature)));
         }
 
-        return Math.abs(ownFitness - otherFitness);
+        return new Pair<>(ownFitness, otherFitness);
     }
 
     @Override
     public String toString() {
-    	return "WeightedSum [fit=" + Arrays.toString(fitnessValues) + ", w=" + Arrays.toString(normalizedWeights) + "]";
+    	return "WeightedSum [fit=[" +
+                fitnessValues
+                        .eSpace()
+                        .stream()
+                        .map(fitnessValues::eGet)
+                        .map(Object::toString)
+                        .collect(Collectors.joining(", ")) +
+                "], w=[" +
+                fitnessValues
+                        .eSpace()
+                        .stream()
+                        .map(weights::get)
+                        .map(Object::toString)
+                        .collect(Collectors.joining(", ")) +
+                "]]";
     }
 
     @Override
-    public Object[] toStatistics() {
-        final Object [] result = new Object[fitnessValues.length];
+    public List<Object> toStatistics() {
+        return fitnessValues.eSpace()
+                .stream()
+                .map(fitnessValues::eGet)
+                .toList();
+    }
 
-        for(int i = 0; i < result.length; ++i) {
-            result[i] = fitnessValues[i];
-        }
-
-        return result;
+    @Override
+    public TypedEObject toOptmisationSpace() {
+        return fitnessValues;
     }
 }

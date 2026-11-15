@@ -13,8 +13,6 @@
   <genPackages prefix="Ddl" basePackage="de.evoal.languages.model" disposableProviderFactory="true"
       ecorePackage="model.ecore#/">
     <genClasses ecoreClass="model.ecore#//DataDescriptionModule">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//DataDescriptionModule/imports"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//DataDescriptionModule/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//DataDescriptionModule/types"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//DataDescriptionModule/descriptions"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//DataDescriptionModule/constraints"/>

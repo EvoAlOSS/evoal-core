@@ -2,6 +2,9 @@
  */
 package de.evoal.languages.model.base.definitions;
 
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EAnnotation;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -18,6 +21,7 @@ package de.evoal.languages.model.base.definitions;
  * </p>
  * <ul>
  *   <li>{@link de.evoal.languages.model.base.definitions.Definition#getName <em>Name</em>}</li>
+ *   <li>{@link de.evoal.languages.model.base.definitions.Definition#getEAnnotations <em>EAnnotations</em>}</li>
  * </ul>
  *
  * @see de.evoal.languages.model.base.definitions.DefinitionsPackage#getDefinition()
@@ -49,5 +53,18 @@ public interface Definition extends Constrained {
 	 * @generated
 	 */
 	void setName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>EAnnotations</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.emf.ecore.EAnnotation}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>EAnnotations</em>' reference list.
+	 * @see de.evoal.languages.model.base.definitions.DefinitionsPackage#getDefinition_EAnnotations()
+	 * @model ordered="false"
+	 *        annotation="http://www.eclipse.org/OCL/Collection nullFree='false'"
+	 * @generated
+	 */
+	EList<EAnnotation> getEAnnotations();
 
 } // Definition

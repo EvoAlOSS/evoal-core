@@ -3,22 +3,20 @@ package de.evoal.core.main.validation.constraints;
 import de.evoal.core.api.interpreter.ExpressionInterpreter;
 import de.evoal.core.api.interpreter.InterpreterState;
 import de.evoal.core.api.utils.AttributeHelper;
-import de.evoal.core.api.utils.InitializationException;
 import de.evoal.core.api.validation.constraints.ConstraintCheckerComponent;
 import de.evoal.core.api.validation.context.DiagnosticsContext;
 import de.evoal.core.api.validation.model.Diagnostics;
 import de.evoal.languages.model.base.expressions.*;
 
 import de.evoal.languages.model.execution.ExecutionFactory;
-import de.evoal.languages.model.execution.ExecutionPackage;
 import de.evoal.languages.model.execution.NamedVariable;
+import de.evoal.models.core.ecore.TypedEObject;
+import de.evoal.models.core.exceptions.InitializationException;
 import lombok.extern.slf4j.Slf4j;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.serializer.ISerializer;
 
 import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.event.Event;
@@ -37,8 +35,9 @@ public class MultiVariateChecker implements ConstraintCheckerComponent {
     private AttributeHelper helper;
 
     @Override
-    public MultiVariateChecker init(final Instance config) throws InitializationException {
-        this.expression = config.findAttribute("expression").getValue();
+    public MultiVariateChecker init(final EObject config) throws InitializationException {
+        final EStructuralFeature feature = config.eClass().getEStructuralFeature("expression");
+        this.expression = (Expression)config.eGet(feature);
 
         return this;
     }

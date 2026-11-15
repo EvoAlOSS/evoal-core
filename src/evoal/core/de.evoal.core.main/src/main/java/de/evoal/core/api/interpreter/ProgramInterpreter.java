@@ -1,6 +1,6 @@
 package de.evoal.core.api.interpreter;
 
-import de.evoal.core.api.ecore.Space;
+import de.evoal.models.core.ecore.Space;
 import de.evoal.languages.model.execution.*;
 import lombok.extern.slf4j.Slf4j;
 

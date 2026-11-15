@@ -129,11 +129,10 @@ public class InternalBaseLanguageLexer extends Lexer {
         try {
             int _type = T__16;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBaseLanguage.g:12:7: ( '>=' )
-            // InternalBaseLanguage.g:12:9: '>='
+            // InternalBaseLanguage.g:12:7: ( '>' )
+            // InternalBaseLanguage.g:12:9: '>'
             {
-            match(">="); 
-
+            match('>'); 
 
             }
 
@@ -150,10 +149,11 @@ public class InternalBaseLanguageLexer extends Lexer {
         try {
             int _type = T__17;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBaseLanguage.g:13:7: ( '>' )
-            // InternalBaseLanguage.g:13:9: '>'
+            // InternalBaseLanguage.g:13:7: ( '>=' )
+            // InternalBaseLanguage.g:13:9: '>='
             {
-            match('>'); 
+            match(">="); 
+
 
             }
 
@@ -211,10 +211,11 @@ public class InternalBaseLanguageLexer extends Lexer {
         try {
             int _type = T__20;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBaseLanguage.g:16:7: ( '<' )
-            // InternalBaseLanguage.g:16:9: '<'
+            // InternalBaseLanguage.g:16:7: ( '<=' )
+            // InternalBaseLanguage.g:16:9: '<='
             {
-            match('<'); 
+            match("<="); 
+
 
             }
 
@@ -231,11 +232,10 @@ public class InternalBaseLanguageLexer extends Lexer {
         try {
             int _type = T__21;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBaseLanguage.g:17:7: ( '<=' )
-            // InternalBaseLanguage.g:17:9: '<='
+            // InternalBaseLanguage.g:17:7: ( '<' )
+            // InternalBaseLanguage.g:17:9: '<'
             {
-            match("<="); 
-
+            match('<'); 
 
             }
 
@@ -2697,7 +2697,7 @@ public class InternalBaseLanguageLexer extends Lexer {
     static final String DFA17_maxS =
         "\1\uffff\1\172\1\75\1\uffff\2\75\1\uffff\1\71\1\uffff\1\57\1\uffff\14\172\1\uffff\5\172\1\122\1\117\1\116\1\172\5\uffff\1\164\1\157\1\uffff\1\162\1\156\2\uffff\1\75\2\uffff\1\170\1\151\1\145\1\157\1\160\1\145\2\uffff\3\uffff\1\154\12\uffff\1\145\17\uffff\1\172\6\uffff\1\162\3\uffff\1\172\1\122\1\104\6\uffff\1\154\1\162\1\154\1\151\1\uffff\1\165\1\164\6\uffff\1\165\1\160\1\164\1\141\1\157\1\164\5\uffff\1\163\1\141\1\uffff\1\141\1\uffff\2\172\1\146\1\151\1\165\1\144\2\145\1\164\1\172\1\155\1\162\1\145\2\154\1\151\1\145\1\172\1\171\2\uffff\1\172\1\156\1\145\3\172\1\141\1\uffff\1\172\1\145\1\162\1\172\1\145\1\157\1\172\1\uffff\1\172\1\uffff\1\147\1\172\3\uffff\1\156\1\uffff\1\163\1\141\1\uffff\1\141\1\156\2\uffff\1\172\1\uffff\1\143\1\163\1\154\1\156\1\141\1\uffff\1\145\1\151\2\172\1\154\1\172\1\157\2\uffff\1\172\1\uffff\1\156\1\uffff\1\172\1\uffff";
     static final String DFA17_acceptS =
-        "\3\uffff\1\4\2\uffff\1\10\1\uffff\1\12\1\uffff\1\14\14\uffff\1\32\11\uffff\1\45\1\46\1\47\1\50\1\51\2\uffff\1\54\2\uffff\1\60\1\61\1\uffff\1\63\1\64\10\uffff\1\106\1\111\1\112\1\uffff\1\35\1\106\1\2\1\3\1\4\1\5\1\77\1\7\1\6\1\10\1\uffff\1\11\1\12\1\107\1\110\1\13\1\14\1\15\1\16\1\17\1\20\1\21\1\22\1\23\1\24\1\25\1\uffff\1\27\1\30\1\31\1\32\1\33\1\34\1\uffff\1\36\1\37\1\40\3\uffff\1\44\1\45\1\46\1\47\1\50\1\51\4\uffff\1\54\2\uffff\1\60\1\61\1\62\1\65\1\63\1\64\6\uffff\1\102\1\103\1\104\1\105\1\111\2\uffff\1\26\1\uffff\1\41\23\uffff\1\42\1\43\7\uffff\1\72\7\uffff\1\56\1\uffff\1\52\2\uffff\1\75\1\55\1\100\1\uffff\1\66\2\uffff\1\73\2\uffff\1\1\1\76\1\uffff\1\53\5\uffff\1\70\7\uffff\1\67\1\74\1\uffff\1\57\1\uffff\1\101\1\uffff\1\71";
+        "\3\uffff\1\4\2\uffff\1\10\1\uffff\1\12\1\uffff\1\14\14\uffff\1\32\11\uffff\1\45\1\46\1\47\1\50\1\51\2\uffff\1\54\2\uffff\1\60\1\61\1\uffff\1\63\1\64\10\uffff\1\106\1\111\1\112\1\uffff\1\35\1\106\1\3\1\2\1\4\1\5\1\77\1\6\1\7\1\10\1\uffff\1\11\1\12\1\107\1\110\1\13\1\14\1\15\1\16\1\17\1\20\1\21\1\22\1\23\1\24\1\25\1\uffff\1\27\1\30\1\31\1\32\1\33\1\34\1\uffff\1\36\1\37\1\40\3\uffff\1\44\1\45\1\46\1\47\1\50\1\51\4\uffff\1\54\2\uffff\1\60\1\61\1\62\1\65\1\63\1\64\6\uffff\1\102\1\103\1\104\1\105\1\111\2\uffff\1\26\1\uffff\1\41\23\uffff\1\42\1\43\7\uffff\1\72\7\uffff\1\56\1\uffff\1\52\2\uffff\1\75\1\55\1\100\1\uffff\1\66\2\uffff\1\73\2\uffff\1\1\1\76\1\uffff\1\53\5\uffff\1\70\7\uffff\1\67\1\74\1\uffff\1\57\1\uffff\1\101\1\uffff\1\71";
     static final String DFA17_specialS =
         "\1\2\65\uffff\1\0\1\1\u009b\uffff}>";
     static final String[] DFA17_transitionS = {

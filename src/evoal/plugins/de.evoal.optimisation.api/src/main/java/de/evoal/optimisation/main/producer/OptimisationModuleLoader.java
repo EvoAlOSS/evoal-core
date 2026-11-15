@@ -1,10 +1,14 @@
 package de.evoal.optimisation.main.producer;
 
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.inject.Produces;
+
+import java.util.*;
+
 import com.google.inject.Injector;
+
 import de.evoal.core.api.board.Blackboard;
 import de.evoal.core.api.languages.ModuleLoaderBase;
-import jakarta.enterprise.context.ApplicationScoped;
-
 import de.evoal.languages.model.ddl.dsl.DataDescriptionLanguageStandaloneSetup;
 import de.evoal.languages.model.ddl.impl.DdlPackageImpl;
 import de.evoal.languages.model.dl.dsl.DefinitionLanguageStandaloneSetup;
@@ -13,10 +17,7 @@ import de.evoal.languages.model.ol.OptimisationModule;
 import de.evoal.languages.model.ol.dsl.OptimisationLanguageStandaloneSetup;
 import de.evoal.languages.model.ol.impl.OLPackageImpl;
 import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
-import jakarta.enterprise.inject.Produces;
 import org.eclipse.emf.ecore.resource.Resource;
-
-import java.util.*;
 
 @ApplicationScoped
 public class OptimisationModuleLoader extends ModuleLoaderBase<OptimisationModule> {
@@ -29,7 +30,6 @@ public class OptimisationModuleLoader extends ModuleLoaderBase<OptimisationModul
         OptimisationLanguageStandaloneSetup.doSetup();
         DefinitionLanguageStandaloneSetup.doSetup();
         DataDescriptionLanguageStandaloneSetup.doSetup();
-
     }
 
     @Override

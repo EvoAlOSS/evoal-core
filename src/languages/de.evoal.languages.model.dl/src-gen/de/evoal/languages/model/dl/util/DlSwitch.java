@@ -70,6 +70,7 @@ public class DlSwitch<T> extends Switch<T> {
 			case DlPackage.DEFINITION_MODULE: {
 				DefinitionModule definitionModule = (DefinitionModule)theEObject;
 				T result = caseDefinitionModule(definitionModule);
+				if (result == null) result = caseModule(definitionModule);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -89,6 +90,21 @@ public class DlSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseDefinitionModule(DefinitionModule object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Module</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Module</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseModule(de.evoal.languages.model.base.Module object) {
 		return null;
 	}
 

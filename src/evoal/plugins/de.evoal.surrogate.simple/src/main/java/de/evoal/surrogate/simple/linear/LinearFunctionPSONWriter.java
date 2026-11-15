@@ -1,6 +1,5 @@
 package de.evoal.surrogate.simple.linear;
 
-import de.evoal.core.api.ecore.Space;
 import de.evoal.surrogate.api.function.ModelFunction;
 import de.evoal.surrogate.api.io.pson.Parameter;
 import de.evoal.surrogate.api.io.pson.SurrogateConfiguration;

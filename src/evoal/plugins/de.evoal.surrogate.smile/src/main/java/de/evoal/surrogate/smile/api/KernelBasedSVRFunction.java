@@ -7,8 +7,8 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 
 import smile.regression.KernelMachine;
 
-import de.evoal.core.api.ecore.Space;
-import de.evoal.core.api.ecore.TypedEObject;
+import de.evoal.models.core.ecore.Space;
+import de.evoal.models.core.ecore.TypedEObject;
 import de.evoal.surrogate.api.function.ModelFunction;
 
 import java.util.Map;

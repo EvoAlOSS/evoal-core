@@ -1,7 +1,10 @@
 package de.evoal.core.api.cdi;
 
-import de.evoal.core.api.utils.InitializationException;
-import de.evoal.languages.model.base.expressions.Instance;
+import de.evoal.models.core.cdi.EvoalComponent;
+import de.evoal.models.core.ecore.TypedEObject;
+import de.evoal.models.core.exceptions.InitializationException;
+
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * Provider of EvoAl components if the components cannot be instantiated directly.
@@ -16,5 +19,5 @@ public interface EvoalComponentProvider<T extends EvoalComponent<T>> {
      * @return The component itself.
      * @throws InitializationException on errors during initialisation.
      */
-    public T create(final Instance configuration) throws InitializationException;
+    public T create(final EObject configuration) throws InitializationException;
 }

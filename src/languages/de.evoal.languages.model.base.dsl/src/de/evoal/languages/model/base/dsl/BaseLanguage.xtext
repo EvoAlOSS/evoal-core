@@ -36,12 +36,12 @@ PartialComparisonExpressionRule returns PartialComparisonExpression :
 ;
 
 enum ComparisonOperatorRule returns ComparisonOperator :
-	GreaterThan = ">=" |
-	GreaterEqual = ">" |
+	GreaterThan = ">" |
+	GreaterEqual = ">=" |
 	Equal = "=" |
 	Unequal = "!=" |
-	LessEqual = "<" |
-	LessThan = "<="
+	LessEqual = "<=" |
+	LessThan = "<"
 ;
 
 AddOrSubtractExpressionRule returns AddOrSubtractExpression:
@@ -224,11 +224,11 @@ BaseTypeRule returns types::BaseType:
 	| VoidTypeRule	
 ;
 
-EnumReferenceRule returns  types::DefinitionReference:
+EnumReferenceRule returns  types::EnumDefinitionReference:
 	'enum' definition = [EnumDefinition|QualifiedName]
 ;
 
-TypeReferenceRule returns types::DefinitionReference:
+TypeReferenceRule returns types::ClassDefinitionReference:
 	'instance' definition = [ClassDefinition|QualifiedName]
 ;
 

@@ -2,9 +2,9 @@ package de.evoal.optimisation.main.initial;
 
 import de.evoal.core.api.cdi.BeanFactory;
 import de.evoal.core.api.cdi.ConfigurationValue;
+import de.evoal.models.v202704.core.Configuration;
 import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
 import de.evoal.optimisation.api.model.InitialCandidatesProvider;
-import de.evoal.languages.model.base.expressions.Instance;
 
 import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Produces;
@@ -16,7 +16,7 @@ public class InitialCandidatesFactory {
 
 	@Inject
 	@ConfigurationValue(entry = OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.initialisation")
-    private Instance initialisation;
+    private Configuration initialisation;
 
 	/**
 	 * Creates an initial generation based on the heuristic configuration.

@@ -1,27 +1,25 @@
 package de.evoal.optimisation.api.cdi;
 
+import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
+
+import java.io.File;
+import java.util.stream.Collectors;
+
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.event.Observes;
+import jakarta.inject.Inject;
+
+import de.evoal.models.core.ecore.Space;
+
+import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
+
 import de.evoal.core.api.board.Blackboard;
 import de.evoal.core.api.board.BlackboardEntry;
-import de.evoal.core.api.ecore.Space;
 import de.evoal.core.api.ecore.stream.EObjectPairStreamFactory;
 import de.evoal.core.api.ecore.stream.EObjectPairStreamSupplier;
 import de.evoal.core.api.ecore.stream.FileBasedEObjectStreamSupplier;
 import de.evoal.core.api.ecore.stream.ListBasedEObjectStreamSupplier;
-import de.evoal.core.api.properties.PropertiesSpecification;
-import de.evoal.core.api.properties.stream.FileBasedPropertiesStreamSupplier;
-import de.evoal.core.api.properties.stream.PropertiesBasedPropertiesPairStreamSupplier;
-import de.evoal.core.api.properties.stream.PropertiesBasedPropertiesStreamSupplier;
-import de.evoal.core.api.properties.stream.PropertiesPairStreamSupplier;
-import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
-import jakarta.enterprise.context.ApplicationScoped;
-
-import jakarta.enterprise.event.Observes;
-import lombok.SneakyThrows;
-import lombok.extern.slf4j.Slf4j;
-
-import jakarta.inject.Inject;
-import java.io.File;
-import java.util.stream.Collectors;
 
 @ApplicationScoped
 @Slf4j
@@ -70,30 +68,6 @@ public class TargetPointLoader {
                     new FileBasedEObjectStreamSupplier(inputFile, spec)
                             .get()
                             .collect(Collectors.toList()));
-        log.info("Loaded {} target points from '{}'", streamSupplier.size(), inputFile);
-
-        return streamSupplier;
-    }
-
-    public PropertiesPairStreamSupplier getTargetPropertiesStream(
-            final PropertiesSpecification sourceSpecification,
-            final PropertiesSpecification targetSpecification
-    ) {
-        log.info("Creating target stream using {} and {}.", sourceSpecification, targetSpecification);
-        final PropertiesBasedPropertiesStreamSupplier properties = loadProperties(sourceSpecification, targetSpecification);
-
-        return new PropertiesBasedPropertiesPairStreamSupplier(properties, sourceSpecification, targetSpecification);
-    }
-
-    private PropertiesBasedPropertiesStreamSupplier loadProperties(final PropertiesSpecification sourceSpecification, final PropertiesSpecification targetSpecification) {
-        final PropertiesSpecification spec = PropertiesSpecification.builder()
-                .add(sourceSpecification)
-                .add(targetSpecification)
-                .build();
-        final PropertiesBasedPropertiesStreamSupplier streamSupplier = new PropertiesBasedPropertiesStreamSupplier(
-                new FileBasedPropertiesStreamSupplier(inputFile, spec)
-                        .get()
-                        .collect(Collectors.toList()));
         log.info("Loaded {} target points from '{}'", streamSupplier.size(), inputFile);
 
         return streamSupplier;

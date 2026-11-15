@@ -1,34 +1,17 @@
 package de.evoal.optimisation.local_search.main.accepting;
 
-import de.evoal.core.api.cdi.Component;
-import de.evoal.core.api.cdi.ConfigurationValue;
-import de.evoal.core.api.properties.Properties;
-import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
-import de.evoal.optimisation.api.model.OptimisationFunction;
-import de.evoal.optimisation.api.model.OptimisationValue;
-import de.evoal.optimisation.api.model.OptimisationValueComparator;
+import de.evoal.models.v202704.optimisation.execution.OptimisationValue;
 import de.evoal.optimisation.local_search.api.accepting.AcceptingStrategy;
 
 import jakarta.enterprise.context.Dependent;
-import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
 @Named("de.evoal.optimisation.local_search.optimisation.hill-climber")
 @Dependent
 public class HillClimberStrategy implements AcceptingStrategy {
 
-    @Inject
-    @Named("optimisation-function")
-    private OptimisationFunction fitness;
-
-    @Inject @Dependent @Component
-    private OptimisationValueComparator comparator;
-
     @Override
-    public boolean acceptCandidate(final Properties candidate, final OptimisationValue bestFitnessValue) {
-        final double[] candidateFitness = fitness.evaluate(candidate);
-        final OptimisationValue alternateBestValue = comparator.apply(candidateFitness);
-
-        return alternateBestValue.isBetter(bestFitnessValue);
+    public boolean acceptCandidate(final OptimisationValue candidateValue, final OptimisationValue currentValue) {
+        return candidateValue.isBetter(currentValue);
     }
 }

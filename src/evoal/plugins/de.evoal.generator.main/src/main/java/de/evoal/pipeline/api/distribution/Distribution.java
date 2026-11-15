@@ -1,6 +1,6 @@
 package de.evoal.pipeline.api.distribution;
 
-import de.evoal.core.api.cdi.EvoalComponent;
+import de.evoal.models.core.cdi.EvoalComponent;
 
 /**
  * A distribution to sample data.

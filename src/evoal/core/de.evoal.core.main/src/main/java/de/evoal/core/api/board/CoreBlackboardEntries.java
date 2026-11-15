@@ -21,4 +21,10 @@ public class CoreBlackboardEntries implements BlackboardEntries {
 
     @Commandline(main="", name="core:search-path", doc="Additional search path entries for DSL lookup.")
     public static final String SEARCH_PATH = "core:search-path";
+
+    /**
+     * Seed for all random numbers. Without a seed, a random seed is chosen and logged.
+     */
+    @Commandline(main="", name="core:seed", doc="Seed for all random numbers (a long value). Without a seed, a random seed is chosen and logged.")
+    public static final String SEED = "core:seed";
 }

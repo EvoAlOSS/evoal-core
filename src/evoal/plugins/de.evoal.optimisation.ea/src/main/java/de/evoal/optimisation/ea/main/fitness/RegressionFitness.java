@@ -1,11 +1,13 @@
 package de.evoal.optimisation.ea.main.fitness;
 
+import de.evoal.models.v202704.optimisation.execution.impl.OptimisationFunctionImpl;
+
 import de.evoal.core.api.cdi.BeanFactory;
 import de.evoal.core.api.utils.AttributeHelper;
-import de.evoal.optimisation.api.model.OptimisationFunction;
+import de.evoal.models.v202704.optimisation.execution.OptimisationFunction;
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;
-import de.evoal.core.api.utils.InitializationException;
+import de.evoal.models.core.exceptions.InitializationException;
 import de.evoal.optimisation.ea.api.fitness.GoodnessOfFitFunction;
 import de.evoal.languages.model.base.expressions.Instance;
 
@@ -17,7 +19,7 @@ import java.util.stream.Collectors;
 
 @Dependent
 @Named("de.evoal.optimisation.ea.genetic-programming.regression-fitness")
-public class RegressionFitness implements OptimisationFunction {
+public class RegressionFitness extends OptimisationFunctionImpl {
 
     @Inject
     private AttributeHelper helper;
@@ -40,7 +42,7 @@ public class RegressionFitness implements OptimisationFunction {
                              .map(i -> BeanFactory.createComponent(GoodnessOfFitFunction.class, i))
                              .collect(Collectors.toList());
 
-        return OptimisationFunction.super.init(configuration);
+        return super.init(configuration);
     }
 
     @Override

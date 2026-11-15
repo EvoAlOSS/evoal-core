@@ -238,28 +238,8 @@ public class ExecutionPackageImpl extends EPackageImpl implements ExecutionPacka
 	 * @generated
 	 */
 	@Override
-	public EReference getExecutionModule_Imports() {
-		return (EReference)executionModuleEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getExecutionModule_Name() {
-		return (EAttribute)executionModuleEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EReference getExecutionModule_Program() {
-		return (EReference)executionModuleEClass.getEStructuralFeatures().get(2);
+		return (EReference)executionModuleEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -632,8 +612,6 @@ public class ExecutionPackageImpl extends EPackageImpl implements ExecutionPacka
 
 		// Create classes and their features
 		executionModuleEClass = createEClass(EXECUTION_MODULE);
-		createEReference(executionModuleEClass, EXECUTION_MODULE__IMPORTS);
-		createEAttribute(executionModuleEClass, EXECUTION_MODULE__NAME);
 		createEReference(executionModuleEClass, EXECUTION_MODULE__PROGRAM);
 
 		programEClass = createEClass(PROGRAM);
@@ -719,6 +697,7 @@ public class ExecutionPackageImpl extends EPackageImpl implements ExecutionPacka
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
+		executionModuleEClass.getESuperTypes().add(theBasePackage.getModule());
 		modelFunctionEClass.getESuperTypes().add(this.getFunction());
 		callStatementEClass.getESuperTypes().add(this.getStatement());
 		callModelFunctionEClass.getESuperTypes().add(this.getCallStatement());
@@ -732,8 +711,6 @@ public class ExecutionPackageImpl extends EPackageImpl implements ExecutionPacka
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(executionModuleEClass, ExecutionModule.class, "ExecutionModule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getExecutionModule_Imports(), theBasePackage.getImport(), null, "imports", null, 0, -1, ExecutionModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getExecutionModule_Name(), ecorePackage.getEString(), "name", null, 1, 1, ExecutionModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getExecutionModule_Program(), this.getProgram(), null, "program", null, 1, 1, ExecutionModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(programEClass, Program.class, "Program", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

@@ -2,6 +2,7 @@
  */
 package de.evoal.languages.model.mll;
 
+import de.evoal.languages.model.base.BasePackage;
 import de.evoal.languages.model.execution.ExecutionPackage;
 
 import org.eclipse.emf.ecore.EAttribute;
@@ -80,7 +81,7 @@ public interface MllPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MACHINE_LEARNING_MODULE__IMPORTS = 0;
+	int MACHINE_LEARNING_MODULE__IMPORTS = BasePackage.MODULE__IMPORTS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -89,7 +90,7 @@ public interface MllPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MACHINE_LEARNING_MODULE__NAME = 1;
+	int MACHINE_LEARNING_MODULE__NAME = BasePackage.MODULE__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Task</b></em>' containment reference.
@@ -98,7 +99,7 @@ public interface MllPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MACHINE_LEARNING_MODULE__TASK = 2;
+	int MACHINE_LEARNING_MODULE__TASK = BasePackage.MODULE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Validation</b></em>' containment reference.
@@ -107,7 +108,7 @@ public interface MllPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MACHINE_LEARNING_MODULE__VALIDATION = 3;
+	int MACHINE_LEARNING_MODULE__VALIDATION = BasePackage.MODULE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Preparation</b></em>' containment reference.
@@ -116,7 +117,7 @@ public interface MllPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MACHINE_LEARNING_MODULE__PREPARATION = 4;
+	int MACHINE_LEARNING_MODULE__PREPARATION = BasePackage.MODULE_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Model</b></em>' containment reference.
@@ -125,7 +126,7 @@ public interface MllPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MACHINE_LEARNING_MODULE__MODEL = 5;
+	int MACHINE_LEARNING_MODULE__MODEL = BasePackage.MODULE_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Gof</b></em>' containment reference.
@@ -134,7 +135,7 @@ public interface MllPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MACHINE_LEARNING_MODULE__GOF = 6;
+	int MACHINE_LEARNING_MODULE__GOF = BasePackage.MODULE_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Learning Use Case</b></em>' containment reference.
@@ -143,7 +144,7 @@ public interface MllPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MACHINE_LEARNING_MODULE__LEARNING_USE_CASE = 7;
+	int MACHINE_LEARNING_MODULE__LEARNING_USE_CASE = BasePackage.MODULE_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Prediction Use Case</b></em>' containment reference.
@@ -152,7 +153,7 @@ public interface MllPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MACHINE_LEARNING_MODULE__PREDICTION_USE_CASE = 8;
+	int MACHINE_LEARNING_MODULE__PREDICTION_USE_CASE = BasePackage.MODULE_FEATURE_COUNT + 6;
 
 	/**
 	 * The number of structural features of the '<em>Machine Learning Module</em>' class.
@@ -161,7 +162,7 @@ public interface MllPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MACHINE_LEARNING_MODULE_FEATURE_COUNT = 9;
+	int MACHINE_LEARNING_MODULE_FEATURE_COUNT = BasePackage.MODULE_FEATURE_COUNT + 7;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.mll.impl.TaskDescriptionImpl <em>Task Description</em>}' class.
@@ -255,28 +256,6 @@ public interface MllPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getMachineLearningModule();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.mll.MachineLearningModule#getImports <em>Imports</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Imports</em>'.
-	 * @see de.evoal.languages.model.mll.MachineLearningModule#getImports()
-	 * @see #getMachineLearningModule()
-	 * @generated
-	 */
-	EReference getMachineLearningModule_Imports();
-
-	/**
-	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.mll.MachineLearningModule#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see de.evoal.languages.model.mll.MachineLearningModule#getName()
-	 * @see #getMachineLearningModule()
-	 * @generated
-	 */
-	EAttribute getMachineLearningModule_Name();
 
 	/**
 	 * Returns the meta object for the containment reference '{@link de.evoal.languages.model.mll.MachineLearningModule#getTask <em>Task</em>}'.
@@ -462,22 +441,6 @@ public interface MllPackage extends EPackage {
 		 * @generated
 		 */
 		EClass MACHINE_LEARNING_MODULE = eINSTANCE.getMachineLearningModule();
-
-		/**
-		 * The meta object literal for the '<em><b>Imports</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference MACHINE_LEARNING_MODULE__IMPORTS = eINSTANCE.getMachineLearningModule_Imports();
-
-		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute MACHINE_LEARNING_MODULE__NAME = eINSTANCE.getMachineLearningModule_Name();
 
 		/**
 		 * The meta object literal for the '<em><b>Task</b></em>' containment reference feature.

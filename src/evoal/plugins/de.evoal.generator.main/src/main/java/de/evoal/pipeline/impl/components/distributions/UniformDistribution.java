@@ -1,13 +1,13 @@
 package de.evoal.pipeline.impl.components.distributions;
 
 import de.evoal.core.api.utils.AttributeHelper;
-import de.evoal.languages.model.base.expressions.Instance;
 import de.evoal.pipeline.api.distribution.Distribution;
 import org.apache.commons.math3.distribution.RealDistribution;
 
 import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import org.eclipse.emf.ecore.EObject;
 
 @Named("de.evoal.pipeline.distributions.uniform-distribution")
 @Dependent
@@ -18,7 +18,7 @@ public class UniformDistribution implements Distribution {
     private AttributeHelper helper;
 
     @Override
-    public UniformDistribution init(final Instance configuration) {
+    public UniformDistribution init(final EObject configuration) {
         double lower = helper.lookup(configuration, "lower");
         double upper = helper.lookup(configuration, "upper");
 

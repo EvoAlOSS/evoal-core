@@ -1,6 +1,6 @@
 package de.evoal.surrogate.api.training;
 
-import de.evoal.core.api.ecore.Space;
+import de.evoal.models.core.ecore.Space;
 import de.evoal.surrogate.api.io.ModelStorage;
 import de.evoal.surrogate.api.io.ModelStorageFactory;
 import de.evoal.surrogate.api.io.ModelWriter;

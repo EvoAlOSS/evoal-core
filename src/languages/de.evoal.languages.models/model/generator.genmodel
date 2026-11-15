@@ -9,8 +9,6 @@
   <genPackages prefix="Generator" basePackage="de.evoal.languages.model" disposableProviderFactory="true"
       fileExtensions="generator" ecorePackage="generator.ecore#/">
     <genClasses ecoreClass="generator.ecore#//GeneratorModule">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute generator.ecore#//GeneratorModule/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference generator.ecore#//GeneratorModule/imports"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference generator.ecore#//GeneratorModule/pipelines"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference generator.ecore#//GeneratorModule/body"/>
     </genClasses>

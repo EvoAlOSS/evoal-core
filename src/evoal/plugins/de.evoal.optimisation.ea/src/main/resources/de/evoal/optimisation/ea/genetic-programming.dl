@@ -1,5 +1,6 @@
 import "definitions" from de.evoal.optimisation.core;
 import "definitions" from de.evoal.optimisation.ea.optimisation;
+import "definitions" from 'de.evoal.core.base';
 
 module de.evoal.optimisation.ea.'genetic-programming' {
     /**
@@ -11,7 +12,7 @@ module de.evoal.optimisation.ea.'genetic-programming' {
     /**
      * Base type for possible program operations.
      */
-	type operation {
+	type operation extends configuration {
 	}
 
     /**
@@ -97,7 +98,7 @@ module de.evoal.optimisation.ea.'genetic-programming' {
         'validators' : array instance 'validator';
 	}
 
-	abstract type 'validator' {}
+	abstract type 'validator' extends configuration {}
 
 	type 'must-use-variable' extends validator {
 	    count : int := 1;
@@ -118,7 +119,7 @@ module de.evoal.optimisation.ea.'genetic-programming' {
         'calculations' : array instance 'quality-of-fit';
     }
 
-    abstract type 'quality-of-fit' {}
+    abstract type 'quality-of-fit' extends configuration {}
 
     type 'squared-error' extends 'quality-of-fit' {
       function : data;

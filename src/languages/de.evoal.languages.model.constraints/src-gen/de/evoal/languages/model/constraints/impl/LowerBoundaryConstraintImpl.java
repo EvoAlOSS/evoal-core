@@ -6,7 +6,7 @@ package de.evoal.languages.model.constraints.impl;
 import de.evoal.languages.model.constraints.ConstraintsPackage;
 import de.evoal.languages.model.constraints.LowerBoundaryConstraint;
 
-import de.evoal.languages.model.interpreter.BooleanNumberOperations;
+import de.evoal.languages.model.interpreter.numeric.BooleanNumberOperations;
 
 import org.eclipse.emf.common.notify.Notification;
 

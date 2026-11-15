@@ -15,8 +15,6 @@
     </genEnums>
     <genClasses ecoreClass="model.ecore#//OptimisationModule">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//OptimisationModule/algorithm"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//OptimisationModule/imports"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//OptimisationModule/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//OptimisationModule/problem"/>
     </genClasses>
     <genClasses ecoreClass="model.ecore#//ProblemInstance">

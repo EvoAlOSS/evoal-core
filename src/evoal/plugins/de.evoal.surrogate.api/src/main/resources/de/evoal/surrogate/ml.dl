@@ -1,8 +1,10 @@
+import "definitions" from 'de.evoal.core.base';
+
 module de.evoal.surrogate.ml {
     /**
      * Base type for all surrogate functions.
      */
-	abstract type surrogate {
+	abstract type surrogate extends configuration {
 	}
 	
 	type 'r-squared' {}

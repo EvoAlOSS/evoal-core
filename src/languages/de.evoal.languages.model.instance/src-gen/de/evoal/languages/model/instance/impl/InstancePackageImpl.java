@@ -117,18 +117,8 @@ public class InstancePackageImpl extends EPackageImpl implements InstancePackage
 	 * @generated
 	 */
 	@Override
-	public EReference getInstanceModule_Imports() {
-		return (EReference)instanceModuleEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EReference getInstanceModule_Instances() {
-		return (EReference)instanceModuleEClass.getEStructuralFeatures().get(1);
+		return (EReference)instanceModuleEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -161,7 +151,6 @@ public class InstancePackageImpl extends EPackageImpl implements InstancePackage
 
 		// Create classes and their features
 		instanceModuleEClass = createEClass(INSTANCE_MODULE);
-		createEReference(instanceModuleEClass, INSTANCE_MODULE__IMPORTS);
 		createEReference(instanceModuleEClass, INSTANCE_MODULE__INSTANCES);
 	}
 
@@ -197,10 +186,10 @@ public class InstancePackageImpl extends EPackageImpl implements InstancePackage
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
+		instanceModuleEClass.getESuperTypes().add(theBasePackage.getModule());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(instanceModuleEClass, InstanceModule.class, "InstanceModule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getInstanceModule_Imports(), theBasePackage.getImport(), null, "imports", null, 0, -1, InstanceModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getInstanceModule_Instances(), theExpressionsPackage.getInstance(), null, "instances", null, 0, -1, InstanceModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		// Create resource
@@ -225,6 +214,7 @@ public class InstancePackageImpl extends EPackageImpl implements InstancePackage
 		  (this,
 		   source,
 		   new String[] {
+			   "base", "platform:/resource/de.evoal.languages.model.base/model/model.ecore#/",
 			   "defs", "platform:/resource/de.evoal.languages.model.base/model/definitions.ecore#/",
 			   "expr", "platform:/resource/de.evoal.languages.model.base/model/expressions.ecore#/"
 		   });
@@ -238,12 +228,6 @@ public class InstancePackageImpl extends EPackageImpl implements InstancePackage
 	 */
 	protected void createCollectionAnnotations() {
 		String source = "http://www.eclipse.org/OCL/Collection";
-		addAnnotation
-		  (getInstanceModule_Imports(),
-		   source,
-		   new String[] {
-			   "nullFree", "false"
-		   });
 		addAnnotation
 		  (getInstanceModule_Instances(),
 		   source,

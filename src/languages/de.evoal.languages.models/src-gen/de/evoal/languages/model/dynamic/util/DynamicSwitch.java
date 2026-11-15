@@ -67,9 +67,30 @@ public class DynamicSwitch<T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case DynamicPackage.DEFINITION: {
-				Definition definition = (Definition)theEObject;
-				T result = caseDefinition(definition);
+			case DynamicPackage.MAPPING: {
+				Mapping mapping = (Mapping)theEObject;
+				T result = caseMapping(mapping);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case DynamicPackage.DEFINITION_MAPPING: {
+				DefinitionMapping definitionMapping = (DefinitionMapping)theEObject;
+				T result = caseDefinitionMapping(definitionMapping);
+				if (result == null) result = caseMapping(definitionMapping);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case DynamicPackage.CLASS_MAPPING: {
+				ClassMapping classMapping = (ClassMapping)theEObject;
+				T result = caseClassMapping(classMapping);
+				if (result == null) result = caseMapping(classMapping);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case DynamicPackage.ATTRIBUTE_MAPPING: {
+				AttributeMapping attributeMapping = (AttributeMapping)theEObject;
+				T result = caseAttributeMapping(attributeMapping);
+				if (result == null) result = caseMapping(attributeMapping);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -78,17 +99,62 @@ public class DynamicSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Definition</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Mapping</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Definition</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Mapping</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseDefinition(Definition object) {
+	public T caseMapping(Mapping object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Definition Mapping</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Definition Mapping</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDefinitionMapping(DefinitionMapping object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Class Mapping</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Class Mapping</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseClassMapping(ClassMapping object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Attribute Mapping</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Attribute Mapping</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAttributeMapping(AttributeMapping object) {
 		return null;
 	}
 

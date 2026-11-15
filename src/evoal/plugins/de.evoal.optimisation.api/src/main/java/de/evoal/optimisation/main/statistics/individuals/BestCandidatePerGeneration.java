@@ -1,35 +1,43 @@
 package de.evoal.optimisation.main.statistics.individuals;
 
-import de.evoal.core.api.languages.AttributeEvaluator;
-import de.evoal.optimisation.api.model.OptimisationValue;
-import de.evoal.core.api.properties.Properties;
-import de.evoal.core.api.properties.PropertiesSpecification;
-import de.evoal.core.api.properties.PropertySpecification;
-import de.evoal.optimisation.api.model.Iteration;
-import de.evoal.optimisation.api.statistics.io.Writer;
-import de.evoal.optimisation.api.statistics.io.WriterException;
-import de.evoal.optimisation.api.statistics.io.WriterStrategy;
-import de.evoal.optimisation.api.statistics.writer.Column;
-import de.evoal.optimisation.api.statistics.writer.ColumnType;
-import de.evoal.optimisation.api.statistics.writer.StatisticsWriter;
-import de.evoal.languages.model.base.expressions.Instance;
-import de.evoal.languages.model.base.definitions.BaseDataDescription;
-import lombok.SneakyThrows;
+import de.evoal.core.api.ecore.misc.EClassifierHelper;
 import lombok.extern.slf4j.Slf4j;
+
+import java.util.LinkedList;
+import java.util.List;
 
 import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
-import java.util.LinkedList;
-import java.util.List;
+
+import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
+
+import de.evoal.models.core.ecore.Space;
+
+import de.evoal.models.v202704.optimisation.memory.Individual;
+import de.evoal.models.v202704.optimisation.memory.Iteration;
+
+import de.evoal.core.api.languages.AttributeEvaluator;
+
+import de.evoal.optimisation.api.statistics.io.Writer;
+import de.evoal.optimisation.api.statistics.io.WriterException;
+import de.evoal.optimisation.api.statistics.io.WriterStrategy;
+import de.evoal.optimisation.api.statistics.writer.AbstractCandidateStatisticsWriter;
+import de.evoal.optimisation.api.statistics.writer.Column;
+import de.evoal.optimisation.api.statistics.writer.ColumnType;
+
 
 /**
- * Small helper class for collecting and writing the generation-based statistics.
+ * Small helper class for collecting and writing the generation-based statistics.<br>
+ *
+ * TODO unify with de.evoal.optimisation.core.candidates-per-iteration
  */
 @Slf4j
 @Named("de.evoal.optimisation.core.best-candidate-per-iteration")
 @Dependent
-public class BestCandidatePerGeneration implements StatisticsWriter {
+public class BestCandidatePerGeneration extends AbstractCandidateStatisticsWriter {
 
     @Inject
     protected WriterStrategy strategy;
@@ -38,14 +46,12 @@ public class BestCandidatePerGeneration implements StatisticsWriter {
     private AttributeEvaluator evaluator;
 
     @Inject
-    @Named("search-space-specification")
-    private PropertiesSpecification searchSpaceSpecification;
+    @Named("search-space")
+    private Space searchSpace;
 
     @Inject
-    @Named("optimisation-space-specification")
-    private PropertiesSpecification optimisationSpaceSpecification;
-
-    private Writer writer;
+    @Named("optimisation-space")
+    private Space optimisationSpace;
 
     private boolean storeOptimisationSpace;
 
@@ -53,90 +59,88 @@ public class BestCandidatePerGeneration implements StatisticsWriter {
 
     private int rowSize;
 
-    @SneakyThrows
+    public BestCandidatePerGeneration() {
+        super(Iteration::bestIndividuals);
+    }
+
     @Override
-    public StatisticsWriter init(final Instance configuration) {
+    protected Writer createWriter(final EObject configuration) throws WriterException {
         final List<Column> columns = new LinkedList<>();
         final boolean prefixColumns = evaluator.attributeToBoolean(configuration, "prefix-data");
         storeSearchSpace = evaluator.attributeToBoolean(configuration, "store-search-space");
         storeOptimisationSpace = evaluator.attributeToBoolean(configuration, "store-optimisation-space");
 
+        columns.add(new Column("individual-id", ColumnType.Integer));
         columns.add(new Column("generation", ColumnType.Integer));
 
         if(storeSearchSpace) {
-            addVariableSpace(searchSpaceSpecification, prefixColumns, "search-space-value-", columns);
+            addVariableSpace(searchSpace, prefixColumns, "search-space-value-", columns);
         }
 
         if(storeOptimisationSpace) {
-            addVariableSpace(optimisationSpaceSpecification, prefixColumns, "optimisation-space-value-", columns);
+            addVariableSpace(optimisationSpace, prefixColumns, "optimisation-space-value-", columns);
         }
 
-        this.writer = strategy.create("best-candidate-statistics", columns);
         this.rowSize = columns.size();
 
-        return this;
+        return strategy.create("optimisation-by-individual", columns);
     }
 
-    private void addVariableSpace(final PropertiesSpecification spaceSpecification, final boolean prefixColumns, final String prefix, final List<Column> columns) {
-        for (int i = 0; i < spaceSpecification.size(); ++i) {
-            final PropertySpecification spec = spaceSpecification.get(i);
-            String columnName = spec.name();
+    private void addVariableSpace(final Space space, final boolean prefixColumns, final String prefix, final List<Column> columns) {
+        for (final EStructuralFeature feature : space) {
+            String columnName = feature.getName();
 
             if (prefixColumns) {
                 columnName = prefix + columnName;
             }
 
-            columns.add(new Column(columnName, toColumnType(spec)));
+            columns.add(new Column(columnName, toColumnType(feature)));
         }
     }
 
-    private ColumnType toColumnType(final PropertySpecification spec) {
-        if(spec.type() instanceof BaseDataDescription) {
-            return switch (((BaseDataDescription)spec.type()).getRepresentation()) {
-                case REAL -> ColumnType.Double;
-                case INTEGER -> ColumnType.Integer;
-                case STRING -> ColumnType.String;
-                case BOOLEAN -> ColumnType.Boolean;
-            };
-        } else {
+    private ColumnType toColumnType(final EStructuralFeature spec) {
+        final EClassifier type = spec.getEType();
+
+        if(EClassifierHelper.isReal(type)) {
+            return ColumnType.Double;
+        } else if(EClassifierHelper.isLongOrShorter(type)) {
+            return ColumnType.Integer;
+        } else if(EClassifierHelper.isBoolean(type)) {
+            return ColumnType.Boolean;
+        } else if(EClassifierHelper.isString(type)) {
             return ColumnType.String;
         }
+
+        throw new IllegalArgumentException("Unsupported EStructuralFeature " + spec.getName());
     }
 
-    @SneakyThrows
     @Override
-    public void add(final Iteration result) {
-        final Properties searchSpace = result.bestCandidate().searchSpaceRepresentation();
-        final OptimisationValue optimisationSpace = result.bestCandidate().value();
+    protected Object [] toData(final int id, final int iteration, final Individual individual) {
+        final Space searchSpace = individual.getInput().eSpace();
+        final Space optimisationSpace = individual.getOutput().eSpace();
 
-        final int searchSpaceSize = searchSpaceSpecification.size();
+        final int searchSpaceSize = searchSpace.size();
 
         final Object [] data = new Object[rowSize];
 
-        data[0] = result.iteration();
+        data[0] = id;
+        data[1] = iteration;
+
         if(storeSearchSpace) {
-            for (int i = 0; i < searchSpaceSize; ++i) {
-                data[1 + i] = searchSpace.get(i);
+            int i = 0;
+            for (final EStructuralFeature feature : searchSpace) {
+                data[2 + i++] = individual.getInput().eGet(feature);
             }
         }
 
         if(storeOptimisationSpace) {
             int searchSpaceOffset = storeSearchSpace ? searchSpaceSize : 0;
-            for (int i = 0; i < optimisationSpaceSpecification.size(); ++i) {
-                data[1 + searchSpaceOffset + i] = optimisationSpace.toStatistics()[i];
+
+            int i = 0;
+            for (final EStructuralFeature feature : optimisationSpace) {
+                data[2 + searchSpaceOffset + i++] = individual.getOutput().eGet(feature);
             }
         }
-
-        writer.addRecord(data);
-        writer.flush();
-    }
-
-    @Override
-    public void write() {
-        try {
-            strategy.close(writer);
-        } catch (final WriterException e) {
-            log.error("Failed to write statistics:", e);
-        }
+        return data;
     }
 }

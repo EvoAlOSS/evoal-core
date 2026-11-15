@@ -1,6 +1,7 @@
 package de.evoal.pipeline.impl.components.io;
 
 import de.evoal.core.api.dynamic.EAnnotationHelper;
+import de.evoal.core.api.ecore.stream.FileBasedEObjectStreamSupplier;
 import de.evoal.pipeline.api.model.PipelineSource;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
@@ -14,28 +15,21 @@ import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
-import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.EcorePackage;
 
-import de.evoal.core.api.properties.Properties;
-import de.evoal.core.api.properties.PropertiesSpecification;
-import de.evoal.core.api.properties.PropertySpecification;
-import de.evoal.core.api.properties.stream.FileBasedPropertiesStreamSupplier;
 import de.evoal.core.api.utils.AttributeHelper;
-import de.evoal.core.api.utils.InitializationException;
+import de.evoal.models.core.exceptions.InitializationException;
 import de.evoal.core.api.utils.Requirements;
-import de.evoal.languages.model.base.definitions.BaseDataDescription;
-import de.evoal.languages.model.base.expressions.Instance;
 import de.evoal.pipeline.api.model.PipelineComponentImpl;
-import de.evoal.core.api.ecore.TypedEObject;
-import de.evoal.core.api.ecore.Space;
+import de.evoal.models.core.ecore.TypedEObject;
+import de.evoal.models.core.ecore.Space;
 
 @Slf4j
 @Dependent
 @Named("de.evoal.pipeline.io.reader")
 public class Reader extends PipelineComponentImpl implements PipelineSource {
-    private final static EcorePackage ePackage = EcorePackage.eINSTANCE;
+//    private final static EcorePackage ePackage = EcorePackage.eINSTANCE;
 
     private Function<Properties, Object> [] converters;
 
@@ -47,9 +41,7 @@ public class Reader extends PipelineComponentImpl implements PipelineSource {
     @Inject
     private AttributeHelper helper;
 
-    private Iterator<Properties> iterator;
-
-    private PropertySpecification [] pSpec;
+    private Iterator<TypedEObject> iterator;
 
     @Override
     public @NonNull TypedEObject apply(@NonNull TypedEObject object) {
@@ -59,17 +51,18 @@ public class Reader extends PipelineComponentImpl implements PipelineSource {
             throw new IllegalStateException("Iterator is empty");
         }
 
-        final Properties p = iterator.next();
+        final TypedEObject p = iterator.next();
 
-        for(int i = 0; i < pSpec.length; i++) {
-            object.eSet(features[i], converters[i].apply(p));
+        final Space space = getWrites();
+        for(final EStructuralFeature feature : space) {
+            object.eSet(feature, p.eGet(feature));
         }
 
         return object;
     }
 
     @Override
-    public PipelineComponentImpl init(final Instance configuration) throws InitializationException {
+    public PipelineComponentImpl init(final EObject configuration) throws InitializationException {
         super.init(configuration);
 
         final String filename = helper.lookup(configuration, "filename");
@@ -79,50 +72,12 @@ public class Reader extends PipelineComponentImpl implements PipelineSource {
         Requirements.requireTrue(file.exists());
         Requirements.requireTrue(file.canRead());
 
-        final Space writes = getWrites();
-        final PropertiesSpecification specification =
-                provider.specificationOf(writes);
-
-        // order should be (by construction) be the same.
-        pSpec = specification.getProperties().toArray(PropertySpecification[]::new);
-        features = writes.toArray(EStructuralFeature[]::new);
-        Requirements.requireSameSize(pSpec, features);
-
-        final List<Function<Properties, Object>> inputConverts = new LinkedList<>();
-
-        for(int i = 0; i < features.length; ++i) {
-            final PropertySpecification spec = specification.getProperties().get(i);
-
-            Requirements.requireInstanceOf(spec.type(), BaseDataDescription.class);
-            final BaseDataDescription bdd = (BaseDataDescription) spec.type();
-
-            inputConverts.add(toConverter(features[i], i));
-        }
-
-        converters = inputConverts.toArray(new Function[0]);
-        Requirements.requireSameSize(pSpec, converters);
-
-        iterator = new FileBasedPropertiesStreamSupplier(file, specification)
+        final Space space = getWrites();
+        iterator = new FileBasedEObjectStreamSupplier(file, space)
                 .get()
                 .iterator();
 
         return this;
-    }
-
-    private Function<Properties, Object> toConverter(final EStructuralFeature feature, final int index) {
-        final EClassifier classifier = feature.getEType();
-
-        if(ePackage.getEDouble().equals(classifier)) {
-            return p -> ((Number)p.get(index)).doubleValue();
-        } else if(ePackage.getEInt().equals(classifier)) {
-            return p -> ((Number)p.get(index)).intValue();
-        } else if(ePackage.getEBoolean().equals(classifier)) {
-            return p -> ((Number)p.get(index)).intValue() != 0;
-        } else if(ePackage.getEString().equals(classifier)) {
-            return p -> Objects.toString(p.get(index));
-        }
-
-        throw new UnsupportedOperationException("Not yet implemented: " +classifier.getName());
     }
 
     @Override
@@ -135,8 +90,9 @@ public class Reader extends PipelineComponentImpl implements PipelineSource {
                 .map(p -> {
                     final TypedEObject object = getPipelineSpace().newEObject();
 
-                    for(int i = 0; i < pSpec.length; i++) {
-                        object.eSet(features[i], converters[i].apply(p));
+                    final Space space = getWrites();
+                    for(final EStructuralFeature feature : space) {
+                        object.eSet(feature, p.eGet(feature));
                     }
 
                     return object;

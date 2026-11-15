@@ -1,11 +1,11 @@
 package de.evoal.surrogate.main.jackson;
 
-import de.evoal.core.api.ecore.Space;
+import de.evoal.models.core.ecore.Space;
 import de.evoal.languages.model.base.definitions.ClassDefinition;
-import de.evoal.languages.model.base.expressions.ExpressionsFactory;
-import de.evoal.languages.model.base.expressions.Instance;
+import de.evoal.core.api.dynamic.ModelTransformer;
+import de.evoal.models.v202704.core.Configuration;
 import de.evoal.languages.model.dl.DefinitionModule;
-import de.evoal.languages.model.pipeline.*;
+import de.evoal.models.v202704.pipeline.*;
 import de.evoal.pipeline.api.cdi.DefinitionModuleLoader;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
@@ -16,6 +16,8 @@ import tools.jackson.core.JsonParser;
 import tools.jackson.core.JsonToken;
 import tools.jackson.databind.DeserializationContext;
 import tools.jackson.databind.deser.std.StdDeserializer;
+
+import java.util.Map;
 
 @Slf4j
 public class PipelineDeserializer extends StdDeserializer<PipelineDefinition> {
@@ -29,11 +31,17 @@ public class PipelineDeserializer extends StdDeserializer<PipelineDefinition> {
      */
     private final @NonNull Space space;
 
-    public PipelineDeserializer(final @NonNull DefinitionModuleLoader loader, final @NonNull Space space) {
+    /**
+     * For creating the runtime configurations of the pipeline steps.
+     */
+    private final @NonNull ModelTransformer transformer;
+
+    public PipelineDeserializer(final @NonNull DefinitionModuleLoader loader, final @NonNull Space space, final @NonNull ModelTransformer transformer) {
         super(Object.class);
 
         this.loader = loader;
         this.space = space;
+        this.transformer = transformer;
     }
 
     @Override
@@ -54,7 +62,7 @@ public class PipelineDeserializer extends StdDeserializer<PipelineDefinition> {
             case "pipeline-definition" -> getPipelineDefinition(parser);
             case "pipeline-step" -> getPipelineStep(parser);
             case "concrete-step" -> getConcreteStep(parser);
-            case "instance" -> getInstance(parser);
+            case "instance" -> getConfiguration(parser);
 
             default -> {
                 throw new IllegalArgumentException("Unsupported type: " + type + ".");
@@ -143,7 +151,7 @@ public class PipelineDeserializer extends StdDeserializer<PipelineDefinition> {
         readFeatures(parser, result.getWrites());
 
         assertFieldName(parser.currentName(), "configuration");
-        result.setInstance((Instance) readObject(parser, true));
+        result.setConfiguration((Configuration) readObject(parser, true));
 
 
         //log.info("[CS{}] Finished 'concrete step'.", csLevel);
@@ -167,15 +175,17 @@ public class PipelineDeserializer extends StdDeserializer<PipelineDefinition> {
         parser.nextValue();
     }
 
-    private Instance getInstance(final JsonParser parser) {
-        //log.info("[IN] Reading 'instance'.");
-
-        final Instance result = ExpressionsFactory.eINSTANCE.createInstance();
+    /**
+     * Reads the configuration of a pipeline step. Only the DL type is stored in the file,
+     *   so the runtime configuration gets the default values of the type. The
+     *   {@code attributes} array is skipped.
+     */
+    private Configuration getConfiguration(final JsonParser parser) {
         parser.nextValue();
 
         assertFieldName(parser.currentName(), "class-definition");
         final String className = parser.getValueAsString();
-        result.setDefinition(findClassDefinition(className));
+        final Configuration result = transformer.createDynamic(findClassDefinition(className), Map.of());
 
         parser.nextValue();
         assertFieldName(parser.currentName(), "attributes");

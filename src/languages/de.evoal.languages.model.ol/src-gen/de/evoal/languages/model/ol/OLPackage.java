@@ -3,6 +3,7 @@
  */
 package de.evoal.languages.model.ol;
 
+import de.evoal.languages.model.base.BasePackage;
 import de.evoal.languages.model.base.expressions.ExpressionsPackage;
 
 import org.eclipse.emf.ecore.EAttribute;
@@ -71,22 +72,13 @@ public interface OLPackage extends EPackage {
 	int OPTIMISATION_MODULE = 0;
 
 	/**
-	 * The feature id for the '<em><b>Algorithm</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPTIMISATION_MODULE__ALGORITHM = 0;
-
-	/**
 	 * The feature id for the '<em><b>Imports</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPTIMISATION_MODULE__IMPORTS = 1;
+	int OPTIMISATION_MODULE__IMPORTS = BasePackage.MODULE__IMPORTS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -95,7 +87,16 @@ public interface OLPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OPTIMISATION_MODULE__NAME = 2;
+	int OPTIMISATION_MODULE__NAME = BasePackage.MODULE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Algorithm</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPTIMISATION_MODULE__ALGORITHM = BasePackage.MODULE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Problem</b></em>' containment reference.
@@ -104,7 +105,7 @@ public interface OLPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OPTIMISATION_MODULE__PROBLEM = 3;
+	int OPTIMISATION_MODULE__PROBLEM = BasePackage.MODULE_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Optimisation Module</em>' class.
@@ -113,7 +114,7 @@ public interface OLPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OPTIMISATION_MODULE_FEATURE_COUNT = 4;
+	int OPTIMISATION_MODULE_FEATURE_COUNT = BasePackage.MODULE_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.ol.impl.ProblemInstanceImpl <em>Problem Instance</em>}' class.
@@ -406,28 +407,6 @@ public interface OLPackage extends EPackage {
 	EReference getOptimisationModule_Algorithm();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.ol.OptimisationModule#getImports <em>Imports</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Imports</em>'.
-	 * @see de.evoal.languages.model.ol.OptimisationModule#getImports()
-	 * @see #getOptimisationModule()
-	 * @generated
-	 */
-	EReference getOptimisationModule_Imports();
-
-	/**
-	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.ol.OptimisationModule#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see de.evoal.languages.model.ol.OptimisationModule#getName()
-	 * @see #getOptimisationModule()
-	 * @generated
-	 */
-	EAttribute getOptimisationModule_Name();
-
-	/**
 	 * Returns the meta object for the containment reference '{@link de.evoal.languages.model.ol.OptimisationModule#getProblem <em>Problem</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -646,22 +625,6 @@ public interface OLPackage extends EPackage {
 		 * @generated
 		 */
 		EReference OPTIMISATION_MODULE__ALGORITHM = eINSTANCE.getOptimisationModule_Algorithm();
-
-		/**
-		 * The meta object literal for the '<em><b>Imports</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference OPTIMISATION_MODULE__IMPORTS = eINSTANCE.getOptimisationModule_Imports();
-
-		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute OPTIMISATION_MODULE__NAME = eINSTANCE.getOptimisationModule_Name();
 
 		/**
 		 * The meta object literal for the '<em><b>Problem</b></em>' containment reference feature.

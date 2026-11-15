@@ -1,7 +1,7 @@
 package de.evoal.core.api.cdi;
 
 import de.evoal.languages.model.base.definitions.FunctionDefinition;
-import de.evoal.languages.model.dl.util.FQNProvider;
+import de.evoal.models.core.utils.FQNProvider;
 import lombok.extern.slf4j.Slf4j;
 
 /**

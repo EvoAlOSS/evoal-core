@@ -112,13 +112,22 @@ public interface TypesFactory extends EFactory {
 	DataType createDataType();
 
 	/**
-	 * Returns a new object of class '<em>Definition Reference</em>'.
+	 * Returns a new object of class '<em>Class Definition Reference</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Definition Reference</em>'.
+	 * @return a new object of class '<em>Class Definition Reference</em>'.
 	 * @generated
 	 */
-	DefinitionReference createDefinitionReference();
+	ClassDefinitionReference createClassDefinitionReference();
+
+	/**
+	 * Returns a new object of class '<em>Enum Definition Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Enum Definition Reference</em>'.
+	 * @generated
+	 */
+	EnumDefinitionReference createEnumDefinitionReference();
 
 	/**
 	 * Returns the package supported by this factory.

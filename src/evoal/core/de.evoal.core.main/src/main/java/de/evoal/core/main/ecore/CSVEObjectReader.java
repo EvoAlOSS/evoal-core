@@ -1,7 +1,8 @@
 package de.evoal.core.main.ecore;
 
-import de.evoal.core.api.ecore.Space;
-import de.evoal.core.api.ecore.TypedEObject;
+import de.evoal.core.api.ecore.misc.EClassifierHelper;
+import de.evoal.models.core.ecore.Space;
+import de.evoal.models.core.ecore.TypedEObject;
 import de.evoal.core.api.ecore.io.EObjectReader;
 import de.evoal.core.api.utils.EvoalIOException;
 import de.evoal.core.api.utils.Requirements;
@@ -34,7 +35,6 @@ public class CSVEObjectReader implements EObjectReader {
     private Iterator<CSVRecord> iterator;
 
     private final NumberFormat nf = NumberFormat.getInstance(Locale.US);
-    private final EcorePackage ePackage = EcorePackage.eINSTANCE;
 
     @Override
     public EObjectReader init(final File inputFile, final Space specification) throws EvoalIOException {
@@ -86,15 +86,18 @@ public class CSVEObjectReader implements EObjectReader {
 
             final EClassifier type = s.getEType();
             Object value = strValue;
-            if(ePackage.getEBoolean().equals(type)) {
+            if(EClassifierHelper.isBoolean(type)) {
                 value = Boolean.parseBoolean(strValue);
-            } else if(ePackage.getEInt().equals(type)) {
-                value = "Infinity".equals(strValue) ? Integer.MAX_VALUE : nf.parse(strValue);
-            } else if(ePackage.getEFloat().equals(type)) {
+            } else if(EClassifierHelper.isInteger(type)) {
+                // NumberFormat.parse returns a Long (or Double), but EMF requires an Integer
+                value = "Infinity".equals(strValue) ? Integer.MAX_VALUE : nf.parse(strValue).intValue();
+            } else if(EClassifierHelper.isLong(type)) {
+                value = "Infinity".equals(strValue) ? Long.MAX_VALUE : nf.parse(strValue).longValue();
+            } else if(EClassifierHelper.isFloat(type)) {
                 value = "Infinity".equals(strValue) ? Float.POSITIVE_INFINITY : nf.parse(strValue).floatValue();
-            } else if(ePackage.getEDouble().equals(type)) {
+            } else if(EClassifierHelper.isDouble(type)) {
                 value = "Infinity".equals(strValue) ? Double.POSITIVE_INFINITY : nf.parse(strValue).doubleValue();
-            } else if(ePackage.getEString().equals(type)) {
+            } else if(EClassifierHelper.isString(type)) {
                 // do nothing as the value was already assigned
             }
 

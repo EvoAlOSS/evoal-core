@@ -1,4 +1,6 @@
 import "definitions" from de.evoal.optimisation.core;
+import "definitions" from 'de.evoal.core.base';
+import "definitions" from 'de.evoal.core.constraints';
 
 module de.evoal.optimisation.local_search.optimisation {
 	/**
@@ -28,7 +30,7 @@ module de.evoal.optimisation.local_search.optimisation {
 	/**
 	 * Base type for all accepting strategies.
 	 */
-	abstract type 'accepting-strategy' {
+	abstract type 'accepting-strategy' extends configuration {
 	}
 
 	/**
@@ -76,25 +78,41 @@ module de.evoal.optimisation.local_search.optimisation {
     /**
     * Neighbour choosing strategy for hill-climbing algorithm
     */
-	abstract type 'choosing-strategy' {
+	abstract type 'choosing-strategy' extends configuration {
 	}
 
     /**
     * This strategy tries moving the given step size
-    * in all possible directions until improvement is found
+    * in all possible directions until improvement is found.
+    *
+    * Each variable is decreased by its step size, kept, or increased by
+    * its step size. All combinations except the unchanged candidate are
+    * neighbours, i.e., 3^n - 1 neighbours for n variables. The number grows
+    * quickly with the size of the search space and the strategy supports
+    * at most 19 variables.
+    *
+    * Neighbours outside of the boundaries of a variable (@LowerBoundary,
+    * @UpperBoundary) are skipped.
+    *
+    * Only numeric variables (integer, real) are changed. Other variables,
+    * e.g., boolean ones, keep their value in every neighbour.
     */
 	type 'manual-strategy' extends 'choosing-strategy' {
 	    /**
 	    * specify a step size for each variable of the
-	    * search space.
+	    * search space. The step size has to fit the type of the
+	    * variable, e.g., integer variables require integral step
+	    * sizes. Non-numeric variables need an entry as well, its
+	    * value is not used. At most 19 variables are supported.
 	    */
+	    @MaximumNumberOfElements { bound := 19; }
     	'step-size' : array instance variable;
 	}
 
     /**
     * Cooling strategies determine how temperature is decreased in each iteration
     */
-    abstract type 'decreasing-strategy' {}
+    abstract type 'decreasing-strategy' extends configuration {}
 
     /**
     * T(k) = T_0 - (k * T_0/#iterations)
@@ -129,7 +147,7 @@ module de.evoal.optimisation.local_search.optimisation {
     * Determines probability of accepting neighbouring solutions based
     * on fitness and temperature.
     */
-    abstract type 'probability-acceptance-function' {}
+    abstract type 'probability-acceptance-function' extends configuration {}
 
     /**
     * Exponential acceptance function determines acceptance probability according to formula:

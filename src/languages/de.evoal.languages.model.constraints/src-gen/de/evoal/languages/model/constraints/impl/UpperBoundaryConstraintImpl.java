@@ -6,7 +6,7 @@ package de.evoal.languages.model.constraints.impl;
 import de.evoal.languages.model.constraints.ConstraintsPackage;
 import de.evoal.languages.model.constraints.UpperBoundaryConstraint;
 
-import de.evoal.languages.model.interpreter.BooleanNumberOperations;
+import de.evoal.languages.model.interpreter.numeric.BooleanNumberOperations;
 
 import org.eclipse.emf.common.notify.Notification;
 
@@ -151,9 +151,9 @@ public class UpperBoundaryConstraintImpl extends ConstraintImpl implements Upper
 		
 		boolean violates = true;
 		if(isInclusive()) {
-			violates = BooleanNumberOperations.isLesserThanOrEqualTo(boundary, value);
-		} else {
 			violates = BooleanNumberOperations.isLesserThan(boundary, value);
+		} else {
+			violates = BooleanNumberOperations.isLesserThanOrEqualTo(boundary, value);
 		}
 		
 		if(violates) {

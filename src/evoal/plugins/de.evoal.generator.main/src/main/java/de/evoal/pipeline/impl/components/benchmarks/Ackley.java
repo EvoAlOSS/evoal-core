@@ -1,12 +1,12 @@
 package de.evoal.pipeline.impl.components.benchmarks;
 
 import de.evoal.core.api.languages.AttributeEvaluator;
-import de.evoal.core.api.utils.InitializationException;
-import de.evoal.languages.model.base.expressions.Instance;
+import de.evoal.models.core.exceptions.InitializationException;
 import de.evoal.pipeline.api.model.PipelineComponentImpl;
-import de.evoal.core.api.ecore.TypedEObject;
+import de.evoal.models.core.ecore.TypedEObject;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
 import jakarta.enterprise.context.Dependent;
@@ -49,7 +49,7 @@ public class Ackley extends PipelineComponentImpl {
     }
 
     @Override
-    public PipelineComponentImpl init(final Instance instance) throws InitializationException {
+    public PipelineComponentImpl init(final EObject instance) throws InitializationException {
         super.init(instance);
 
         a = evaluator.attributeToDouble(instance, "a");

@@ -3,6 +3,7 @@
  */
 package de.evoal.languages.model.instance;
 
+import de.evoal.languages.model.base.BasePackage;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -20,7 +21,7 @@ import org.eclipse.emf.ecore.EReference;
  * <!-- end-user-doc -->
  * @see de.evoal.languages.model.instance.InstanceFactory
  * @model kind="package"
- *        annotation="http://www.eclipse.org/OCL/Import defs='platform:/resource/de.evoal.languages.model.base/model/definitions.ecore#/' expr='platform:/resource/de.evoal.languages.model.base/model/expressions.ecore#/'"
+ *        annotation="http://www.eclipse.org/OCL/Import base='platform:/resource/de.evoal.languages.model.base/model/model.ecore#/' defs='platform:/resource/de.evoal.languages.model.base/model/definitions.ecore#/' expr='platform:/resource/de.evoal.languages.model.base/model/expressions.ecore#/'"
  * @generated
  */
 public interface InstancePackage extends EPackage {
@@ -73,7 +74,16 @@ public interface InstancePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INSTANCE_MODULE__IMPORTS = 0;
+	int INSTANCE_MODULE__IMPORTS = BasePackage.MODULE__IMPORTS;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INSTANCE_MODULE__NAME = BasePackage.MODULE__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Instances</b></em>' containment reference list.
@@ -82,7 +92,7 @@ public interface InstancePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INSTANCE_MODULE__INSTANCES = 1;
+	int INSTANCE_MODULE__INSTANCES = BasePackage.MODULE_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Module</em>' class.
@@ -91,7 +101,7 @@ public interface InstancePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INSTANCE_MODULE_FEATURE_COUNT = 2;
+	int INSTANCE_MODULE_FEATURE_COUNT = BasePackage.MODULE_FEATURE_COUNT + 1;
 
 
 	/**
@@ -103,17 +113,6 @@ public interface InstancePackage extends EPackage {
 	 * @generated
 	 */
 	EClass getInstanceModule();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.instance.InstanceModule#getImports <em>Imports</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Imports</em>'.
-	 * @see de.evoal.languages.model.instance.InstanceModule#getImports()
-	 * @see #getInstanceModule()
-	 * @generated
-	 */
-	EReference getInstanceModule_Imports();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.instance.InstanceModule#getInstances <em>Instances</em>}'.
@@ -157,14 +156,6 @@ public interface InstancePackage extends EPackage {
 		 * @generated
 		 */
 		EClass INSTANCE_MODULE = eINSTANCE.getInstanceModule();
-
-		/**
-		 * The meta object literal for the '<em><b>Imports</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference INSTANCE_MODULE__IMPORTS = eINSTANCE.getInstanceModule_Imports();
 
 		/**
 		 * The meta object literal for the '<em><b>Instances</b></em>' containment reference list feature.

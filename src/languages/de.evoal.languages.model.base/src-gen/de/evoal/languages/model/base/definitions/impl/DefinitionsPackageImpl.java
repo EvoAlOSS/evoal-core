@@ -337,6 +337,16 @@ public class DefinitionsPackageImpl extends EPackageImpl implements DefinitionsP
 	 * @generated
 	 */
 	@Override
+	public EReference getDefinition_EAnnotations() {
+		return (EReference)definitionEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getValueDefinition() {
 		return valueDefinitionEClass;
 	}
@@ -795,6 +805,7 @@ public class DefinitionsPackageImpl extends EPackageImpl implements DefinitionsP
 
 		definitionEClass = createEClass(DEFINITION);
 		createEAttribute(definitionEClass, DEFINITION__NAME);
+		createEReference(definitionEClass, DEFINITION__EANNOTATIONS);
 
 		valueDefinitionEClass = createEClass(VALUE_DEFINITION);
 
@@ -924,6 +935,7 @@ public class DefinitionsPackageImpl extends EPackageImpl implements DefinitionsP
 
 		initEClass(definitionEClass, Definition.class, "Definition", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getDefinition_Name(), ecorePackage.getEString(), "name", null, 0, 1, Definition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDefinition_EAnnotations(), ecorePackage.getEAnnotation(), null, "eAnnotations", null, 0, -1, Definition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		initEClass(valueDefinitionEClass, ValueDefinition.class, "ValueDefinition", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1043,6 +1055,12 @@ public class DefinitionsPackageImpl extends EPackageImpl implements DefinitionsP
 		String source = "http://www.eclipse.org/OCL/Collection";
 		addAnnotation
 		  (getConstrained_Constraints(),
+		   source,
+		   new String[] {
+			   "nullFree", "false"
+		   });
+		addAnnotation
+		  (getDefinition_EAnnotations(),
 		   source,
 		   new String[] {
 			   "nullFree", "false"

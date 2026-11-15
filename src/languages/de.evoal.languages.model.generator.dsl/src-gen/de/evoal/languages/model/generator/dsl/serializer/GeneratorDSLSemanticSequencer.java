@@ -40,8 +40,9 @@ import de.evoal.languages.model.base.expressions.ValueDefinitionReference;
 import de.evoal.languages.model.base.expressions.XorExpression;
 import de.evoal.languages.model.base.types.ArrayType;
 import de.evoal.languages.model.base.types.BooleanType;
+import de.evoal.languages.model.base.types.ClassDefinitionReference;
 import de.evoal.languages.model.base.types.DataType;
-import de.evoal.languages.model.base.types.DefinitionReference;
+import de.evoal.languages.model.base.types.EnumDefinitionReference;
 import de.evoal.languages.model.base.types.ExpressionType;
 import de.evoal.languages.model.base.types.IntType;
 import de.evoal.languages.model.base.types.LiteralType;
@@ -248,23 +249,15 @@ public class GeneratorDSLSemanticSequencer extends BaseLanguageSemanticSequencer
 			case TypesPackage.BOOLEAN_TYPE:
 				sequence_BooleanTypeRule(context, (BooleanType) semanticObject); 
 				return; 
+			case TypesPackage.CLASS_DEFINITION_REFERENCE:
+				sequence_TypeReferenceRule(context, (ClassDefinitionReference) semanticObject); 
+				return; 
 			case TypesPackage.DATA_TYPE:
 				sequence_DataTypeRule(context, (DataType) semanticObject); 
 				return; 
-			case TypesPackage.DEFINITION_REFERENCE:
-				if (rule == grammarAccess.getEnumReferenceRuleRule()) {
-					sequence_EnumReferenceRule(context, (DefinitionReference) semanticObject); 
-					return; 
-				}
-				else if (rule == grammarAccess.getTypeRuleRule()) {
-					sequence_EnumReferenceRule_TypeReferenceRule(context, (DefinitionReference) semanticObject); 
-					return; 
-				}
-				else if (rule == grammarAccess.getTypeReferenceRuleRule()) {
-					sequence_TypeReferenceRule(context, (DefinitionReference) semanticObject); 
-					return; 
-				}
-				else break;
+			case TypesPackage.ENUM_DEFINITION_REFERENCE:
+				sequence_EnumReferenceRule(context, (EnumDefinitionReference) semanticObject); 
+				return; 
 			case TypesPackage.EXPRESSION_TYPE:
 				sequence_ExpressionTypeRule(context, (ExpressionType) semanticObject); 
 				return; 

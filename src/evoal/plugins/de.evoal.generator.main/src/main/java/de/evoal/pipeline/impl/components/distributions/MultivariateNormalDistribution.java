@@ -1,8 +1,7 @@
 package de.evoal.pipeline.impl.components.distributions;
 
 import de.evoal.core.api.languages.AttributeEvaluator;
-import de.evoal.core.api.utils.InitializationException;
-import de.evoal.languages.model.base.expressions.Instance;
+import de.evoal.models.core.exceptions.InitializationException;
 import de.evoal.pipeline.api.distribution.Distribution;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
@@ -10,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import org.eclipse.emf.ecore.EObject;
 
 @Slf4j
 @Named("de.evoal.pipeline.distributions.multivariate-normal-distribution")
@@ -20,7 +20,7 @@ public class MultivariateNormalDistribution extends MultivariateRealDistribution
     private AttributeEvaluator evaluator;
 
     @Override
-    public Distribution init(final Instance configuration) throws InitializationException {
+    public Distribution init(final EObject configuration) throws InitializationException {
         super.init(configuration);
 
         double [] means = readMeans(configuration);
@@ -31,11 +31,11 @@ public class MultivariateNormalDistribution extends MultivariateRealDistribution
         return this;
     }
 
-    private double[][] readCovariance(final @NonNull Instance instance) {
+    private double[][] readCovariance(final @NonNull EObject instance) {
         return evaluator.attributeToDoubleArrayArray(instance, "covariance");
     }
 
-    private double[] readMeans(final @NonNull Instance instance) {
+    private double[] readMeans(final @NonNull EObject instance) {
         return evaluator.attributeToDoubleArray(instance, "means");
     }
 }

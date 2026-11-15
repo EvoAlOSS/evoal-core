@@ -155,6 +155,22 @@ public class TypesSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case TypesPackage.CLASS_DEFINITION_REFERENCE: {
+				ClassDefinitionReference classDefinitionReference = (ClassDefinitionReference)theEObject;
+				T result = caseClassDefinitionReference(classDefinitionReference);
+				if (result == null) result = caseDefinitionReference(classDefinitionReference);
+				if (result == null) result = caseType(classDefinitionReference);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case TypesPackage.ENUM_DEFINITION_REFERENCE: {
+				EnumDefinitionReference enumDefinitionReference = (EnumDefinitionReference)theEObject;
+				T result = caseEnumDefinitionReference(enumDefinitionReference);
+				if (result == null) result = caseDefinitionReference(enumDefinitionReference);
+				if (result == null) result = caseType(enumDefinitionReference);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -336,6 +352,36 @@ public class TypesSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseDefinitionReference(DefinitionReference object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Class Definition Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Class Definition Reference</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseClassDefinitionReference(ClassDefinitionReference object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Enum Definition Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Enum Definition Reference</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseEnumDefinitionReference(EnumDefinitionReference object) {
 		return null;
 	}
 

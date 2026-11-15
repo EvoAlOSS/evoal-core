@@ -1,6 +1,5 @@
 package de.evoal.optimisation.ea.api.operators;
 
-import de.evoal.core.api.cdi.EvoalComponent;
 import io.jenetics.Selector;
 
 /**

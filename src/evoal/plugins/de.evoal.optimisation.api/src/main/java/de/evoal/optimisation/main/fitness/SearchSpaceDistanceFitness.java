@@ -1,53 +1,65 @@
 package de.evoal.optimisation.main.fitness;
 
-import de.evoal.core.api.utils.AttributeHelper;
+import de.evoal.models.v202704.optimisation.execution.impl.OptimisationFunctionImpl;
+
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
+
 import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
-import de.evoal.core.api.board.Blackboard;
-import de.evoal.core.api.properties.Properties;
-import de.evoal.core.api.properties.PropertiesSpecification;
-import de.evoal.core.api.properties.PropertySpecification;
-import de.evoal.core.api.utils.ArithmeticOperations;
-import de.evoal.core.api.utils.Requirements;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
+
+import de.evoal.models.core.ecore.Space;
+import de.evoal.models.core.ecore.TypedEObject;
+
 import de.evoal.languages.model.base.definitions.DataDescription;
-import de.evoal.languages.model.base.expressions.Instance;
-import de.evoal.optimisation.api.model.OptimisationFunction;
+
+import de.evoal.core.api.board.Blackboard;
+import de.evoal.core.api.dynamic.EAnnotationHelper;
+import de.evoal.core.api.utils.AttributeHelper;
+import de.evoal.languages.model.interpreter.numeric.ArithmeticNumberOperations;
+import de.evoal.models.v202704.optimisation.execution.OptimisationFunction;
 
 @Dependent
 @Named("de.evoal.optimisation.core.search-space-distance")
 @Slf4j
-public class SearchSpaceDistanceFitness implements OptimisationFunction {
+public class SearchSpaceDistanceFitness extends OptimisationFunctionImpl {
+
+    @Inject
+    private EAnnotationHelper annotations;
+
+    @Inject
+    private AttributeHelper attributes;
+
+
+    @Inject @Named("optimisation-space")
+    private Space optimisationSpace;
 
     @Inject
     private Blackboard board;
 
-    @Inject
-    protected AttributeHelper helper;
+    @Inject @Named("search-space")
+    private Space searchSpace;
 
-    @Inject @Named("search-space-specification")
-    private PropertiesSpecification searchSpaceSpecification;
-
-    @Inject @Named("optimisation-space-specification")
-    private PropertiesSpecification optimisationSpaceSpecification;
-
-    private BiConsumer<Properties, Properties> fitness;
+    /**
+     * The actual fitness calculation.
+     */
+    private BiConsumer<TypedEObject, TypedEObject> fitness;
 
     @Override
-    public double[] evaluate(final Properties properties) {
-        final Properties result = new Properties(optimisationSpaceSpecification);
+    public TypedEObject evaluate(final TypedEObject properties) {
+        final TypedEObject result = optimisationSpace.newEObject();
 
         fitness.accept(properties, result);
 
-        return result.getValuesAsDouble();
+        return result;
     }
 
     private double distance(final Object o, final double v) {
@@ -55,25 +67,24 @@ public class SearchSpaceDistanceFitness implements OptimisationFunction {
     }
 
     @Override
-    public OptimisationFunction init(final Instance config) {
-        final List<Instance> target = helper.lookup(config, "target");
-        final Map<PropertySpecification, Number> values = toValueMap(target);
+    public OptimisationFunction init(final EObject config) {
+        final Map<DataDescription, EStructuralFeature> sourceMapping = annotations.featuresOf(searchSpace);
+        final Map<DataDescription, EStructuralFeature> targetMapping = annotations.featuresOf(optimisationSpace);
 
-        final List<Instance> mapping = helper.lookup(config, "mapping");
-        final Map<PropertySpecification, PropertySpecification> mappings = toMappingMap(mapping);
+        final List<EObject> target = attributes.lookup(config, "target");
+        final Map<EStructuralFeature, Number> values = toValueMap(sourceMapping, target);
 
-        Requirements.requireEqual(new HashSet<>(searchSpaceSpecification.getProperties()), values.keySet());
-        Requirements.requireEqual(new HashSet<>(searchSpaceSpecification.getProperties()), mappings.keySet());
-        Requirements.requireEqual(new HashSet<>(optimisationSpaceSpecification.getProperties()), new HashSet<>(mappings.values()));
+        final List<EObject> mapping = attributes.lookup(config, "mapping");
+        final Map<EStructuralFeature, EStructuralFeature> mappings = toMappingMap(sourceMapping, targetMapping, mapping);
 
         fitness = (input, output) -> {
-            for(final Map.Entry<PropertySpecification, PropertySpecification> entry : mappings.entrySet()) {
+            for(final Map.Entry<EStructuralFeature, EStructuralFeature> entry : mappings.entrySet()) {
                 final Number targetValue = values.get(entry.getKey());
-                final Number actualValue = input.getAsNumber(entry.getKey());
+                final Number actualValue = input.eGetAsNumber(entry.getKey());
 
-                final Number resultValue = ArithmeticOperations.abs(ArithmeticOperations.minus(targetValue, actualValue));
+                final Number resultValue = ArithmeticNumberOperations.abs(ArithmeticNumberOperations.minus(targetValue, actualValue));
 
-                output.put(entry.getValue(), resultValue);
+                output.eSet(entry.getValue(), resultValue);
             }
         };
 
@@ -81,23 +92,33 @@ public class SearchSpaceDistanceFitness implements OptimisationFunction {
         return this;
     }
 
-    private Map<PropertySpecification, Number> toValueMap(final List<Instance> array) {
+    private Map<EStructuralFeature, Number> toValueMap(final Map<DataDescription, EStructuralFeature> sources, final List<EObject> array) {
         return array.stream()
                     .collect(
                         Collectors.toMap(
-                            i -> PropertySpecification.of(helper.<DataDescription>lookup(i, "var")),
-                            i -> helper.<Number>lookup(i, "val")
+                            i -> inSpace(sources, attributes.lookup(i, "var")),
+                            i -> attributes.<Number>lookup(i, "val")
                         )
                     );
     }
 
-    private Map<PropertySpecification, PropertySpecification> toMappingMap(final List<Instance> array) {
+    private Map<EStructuralFeature, EStructuralFeature> toMappingMap(final Map<DataDescription, EStructuralFeature> sources, final Map<DataDescription, EStructuralFeature> targets, final List<EObject> array) {
         return array.stream()
                 .collect(
                         Collectors.toMap(
-                                i -> PropertySpecification.of(helper.<DataDescription>lookup(i, "input")),
-                                i -> PropertySpecification.of(helper.<DataDescription>lookup(i, "output"))
+                                i -> inSpace(sources, attributes.lookup(i, "input")),
+                                i -> inSpace(targets, attributes.lookup(i, "output"))
                         )
                 );
+    }
+
+    /**
+     * Maps the feature of a {@code data} attribute to the feature of the same data in the
+     *   given space (the configured feature may belong to a different space class).
+     */
+    private EStructuralFeature inSpace(final Map<DataDescription, EStructuralFeature> space, final EStructuralFeature feature) {
+        return annotations.dataDescriptionOf(feature)
+                          .map(space::get)
+                          .orElseThrow(() -> new IllegalStateException("Data '" + feature.getName() + "' is not part of the space."));
     }
 }

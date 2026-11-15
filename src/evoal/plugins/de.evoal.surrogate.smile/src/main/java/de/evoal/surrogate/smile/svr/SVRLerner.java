@@ -19,17 +19,17 @@ import java.util.function.Function;
 import org.apache.commons.math3.stat.descriptive.moment.Mean;
 import org.apache.commons.math3.stat.descriptive.moment.StandardDeviation;
 
+import org.eclipse.emf.ecore.EObject;
 import smile.base.svm.SVR;
 import smile.regression.KernelMachine;
 
-import de.evoal.core.api.ecore.TypedEObject;
+import de.evoal.models.core.ecore.TypedEObject;
 import de.evoal.core.api.utils.AttributeHelper;
-import de.evoal.core.api.utils.InitializationException;
+import de.evoal.models.core.exceptions.InitializationException;
 import de.evoal.core.api.utils.Requirements;
 import de.evoal.languages.model.base.expressions.Instance;
 import de.evoal.surrogate.api.training.AbstractModelLearner;
 import de.evoal.surrogate.api.training.ModelLearner;
-
 
 @Dependent
 @Named("de.evoal.surrogate.smile.ml.epsilon-svr-learner")
@@ -60,7 +60,7 @@ public class SVRLerner extends AbstractModelLearner {
 	}
 
 	@Override
-	public ModelLearner init(final Instance configuration) throws InitializationException {
+	public ModelLearner init(final EObject configuration) throws InitializationException {
 		super.init(configuration);
 
 		// extract and copy algorithm parameters
@@ -73,8 +73,8 @@ public class SVRLerner extends AbstractModelLearner {
 		this.configuration.put(KernelFactory.MLL_TOLERANCE_PARAMETER, tolerance);
 
 		// copy kernel configuration
-		final Instance kernel = helper.lookup(configuration, KernelFactory.MLL_KERNEL_PARAMETER);
-		this.configuration.put(KernelFactory.KERNEL_PARAMETER, KernelFactory.mllToConfiguration(kernel));
+		final EObject kernel = helper.lookup(configuration, KernelFactory.MLL_KERNEL_PARAMETER);
+		this.configuration.put(KernelFactory.KERNEL_PARAMETER, KernelFactory.toKernelConfiguration(kernel));
 
 		return this;
 	}

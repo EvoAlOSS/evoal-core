@@ -1,6 +1,7 @@
 import "definitions" from 'de.evoal.core.constraints';
 
 import "definitions" from de.evoal.optimisation.core;
+import "definitions" from 'de.evoal.core.base';
 
 module de.evoal.optimisation.pso.optimisation {
 	nominal enum 'boundary-handling' ( wrap, bounce, stick );
@@ -19,7 +20,7 @@ module de.evoal.optimisation.pso.optimisation {
 	    'topology' : enum topology := topology.global;
 	}
 
-	abstract type 'swarm' {
+	abstract type 'swarm' extends configuration {
 	}
 
 	type 'default-swarm' extends 'swarm' {
@@ -33,7 +34,7 @@ module de.evoal.optimisation.pso.optimisation {
     /**
      * Base type for all particle swarm moving strategies.
      */
-	abstract type 'pso-mover' {
+	abstract type 'pso-mover' extends configuration {
 	    //specify WRAP, BOUNCE, or STICK boundary type
 	    'boundary-type' : enum  'boundary-handling' := 'boundary-handling.wrap';
 	}

@@ -1524,7 +1524,7 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 		return getBaseTypeRuleAccess().getRule();
 	}
 	
-	//EnumReferenceRule returns  types::DefinitionReference:
+	//EnumReferenceRule returns  types::EnumDefinitionReference:
 	//    'enum' definition = [EnumDefinition|QualifiedName]
 	//;
 	public BaseLanguageGrammarAccess.EnumReferenceRuleElements getEnumReferenceRuleAccess() {
@@ -1535,7 +1535,7 @@ public class GeneratorDSLGrammarAccess extends AbstractElementFinder.AbstractGra
 		return getEnumReferenceRuleAccess().getRule();
 	}
 	
-	//TypeReferenceRule returns types::DefinitionReference:
+	//TypeReferenceRule returns types::ClassDefinitionReference:
 	//    'instance' definition = [ClassDefinition|QualifiedName]
 	//;
 	public BaseLanguageGrammarAccess.TypeReferenceRuleElements getTypeReferenceRuleAccess() {

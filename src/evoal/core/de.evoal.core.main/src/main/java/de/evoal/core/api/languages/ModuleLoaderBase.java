@@ -35,7 +35,7 @@ public abstract class ModuleLoaderBase<T extends EObject> {
     protected boolean observedErrors = false;
 
     public T load(final String filename) {
-        log.info("Loading DSL configuration from file '{}'.",filename);
+        log.info("Loading DSL configuration from file '{}' in '{}'.", filename, new File(".").getAbsolutePath());
 
         final File configurationFile = new File(filename);
         if(!configurationFile.exists()) {

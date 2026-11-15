@@ -1,44 +1,54 @@
 package de.evoal.optimisation.main.comparator;
 
+import de.evoal.core.api.dynamic.EAnnotationHelper;
 import de.evoal.core.api.languages.AttributeEvaluator;
+import de.evoal.models.core.ecore.Space;
+import de.evoal.models.core.ecore.TypedEObject;
 import de.evoal.optimisation.api.model.OptimisationValueComparator;
-import de.evoal.core.api.properties.PropertiesSpecification;
-import de.evoal.languages.model.base.expressions.Instance;
 import de.evoal.languages.model.base.definitions.DataDescription;
 
 import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
+
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
 
 @Dependent
 @Named("de.evoal.optimisation.core.hierarchical-comparator")
 public class HierarchicalComparator implements OptimisationValueComparator {
     @Inject
+    private EAnnotationHelper annotations;
+
+    @Inject
     private AttributeEvaluator evaluator;
 
-    private int[] orderIndices;
+    private List<EStructuralFeature> dimensionOrder;
 
-    @Inject @Named("optimisation-space-specification")
-    private PropertiesSpecification optimisationSpecification;
+    @Inject @Named("optimisation-space")
+    private Space optimisationSpace;
 
     @Inject @Named("optimisation-value-conversions")
-    private List<Function<Double, Double>> valueConversions;
+    private Map<EStructuralFeature, Function<Number, Number>> valueConversions;
 
     @Override
-    public HierarchicalValue toValue(final double[] fitnessValues) {
-        return HierarchicalValue.of(valueConversions, orderIndices, fitnessValues);
+    public HierarchicalValue toValue(final TypedEObject fitnessValues) {
+        return HierarchicalValue.of(valueConversions, fitnessValues, dimensionOrder);
     }
 
     @Override
-    public HierarchicalComparator init(final Instance config) {
+    public HierarchicalComparator init(final EObject config) {
         final DataDescription[] order = evaluator.attributeToDataDescriptionArray(config, "order");
 
-        orderIndices = new int[order.length];
-        for(int i = 0; i < order.length; i++) {
-            orderIndices[i] = optimisationSpecification.indexOf(order[i].getName());
-        }
+        Map<DataDescription, EStructuralFeature> features = annotations.featuresOf(optimisationSpace);
+
+        dimensionOrder = Arrays.stream(order)
+                .map(features::get)
+                .toList();
 
         return this;
     }

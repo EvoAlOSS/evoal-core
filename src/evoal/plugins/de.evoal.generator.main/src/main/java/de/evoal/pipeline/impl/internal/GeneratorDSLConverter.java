@@ -1,8 +1,8 @@
 package de.evoal.pipeline.impl.internal;
 
-import de.evoal.core.api.ecore.Space;
+import de.evoal.core.api.dynamic.ModelTransformer;
+import de.evoal.models.core.ecore.Space;
 import de.evoal.languages.model.base.Import;
-import de.evoal.languages.model.base.definitions.AttributeDefinition;
 import de.evoal.languages.model.base.definitions.ClassDefinition;
 import de.evoal.languages.model.base.definitions.Definition;
 import de.evoal.languages.model.base.definitions.FunctionDefinition;
@@ -12,13 +12,14 @@ import de.evoal.languages.model.execution.*;
 import de.evoal.languages.model.execution.VariableReference;
 import de.evoal.languages.model.generator.*;
 import de.evoal.languages.model.generator.util.GeneratorSwitch;
-import de.evoal.languages.model.pipeline.PipelineFactory;
-import de.evoal.languages.model.pipeline.PipelineModule;
-import de.evoal.pipeline.api.cdi.DefinitionModuleLoader;
+import de.evoal.models.v202704.pipeline.PipelineFactory;
+import de.evoal.models.v202704.pipeline.PipelineModule;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.*;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import java.util.HashMap;
@@ -31,16 +32,37 @@ public class GeneratorDSLConverter extends GeneratorSwitch<Object> {
     private final ExpressionsFactory exprFactory = ExpressionsFactory.eINSTANCE;
     private final PipelineFactory pipeFactory = PipelineFactory.eINSTANCE;
 
+    /**
+     * Name of the pipeline that writes the generated data. It is the last pipeline passed
+     *   to the {@code generate} function, which sets the (resolved) file name at runtime.
+     */
+    public static final String WRITER_PIPELINE = "write-to-file";
+
     private final Map<String, EStructuralFeature> features = new HashMap<>();
     private final Map<Variable, Variable> pipelines = new HashMap<>();
 
-    private final DefinitionModuleLoader loader;
+    /**
+     * The data space of the generator.
+     */
+    private final Space space;
+
+    /**
+     * Creates the runtime objects for configurations.
+     */
+    private final ModelTransformer transformer;
 
     private final ExecutionDSLConverter converter = new ExecutionDSLConverter(this, pipelines);
     private PipelineModule module;
 
-    public GeneratorDSLConverter(final DefinitionModuleLoader loader, final @NonNull Space space) {
-        this.loader = loader;
+    /**
+     * The resource set of the generator module. Additional DL files are loaded into it,
+     *   so they share the definitions (e.g., {@code configuration}) with the generator module.
+     */
+    private ResourceSet resourceSet;
+
+    public GeneratorDSLConverter(final @NonNull Space space, final @NonNull ModelTransformer transformer) {
+        this.space = space;
+        this.transformer = transformer;
         for(final EStructuralFeature feature : space.getEClass().getEStructuralFeatures()) {
             features.put(feature.getName(), feature);
         }
@@ -48,6 +70,7 @@ public class GeneratorDSLConverter extends GeneratorSwitch<Object> {
 
     public PipelineModule convert(final GeneratorModule module) {
         log.info("Converting 'GeneratorModule {}' into a PipelineModule.", module.getName());
+        this.resourceSet = module.eResource().getResourceSet();
         return caseGeneratorModule(module);
     }
 
@@ -90,14 +113,14 @@ public class GeneratorDSLConverter extends GeneratorSwitch<Object> {
     }
 
     @Override
-    public de.evoal.languages.model.pipeline.PipelineDefinition casePipelineDefinition(final PipelineDefinition obj) {
+    public de.evoal.models.v202704.pipeline.PipelineDefinition casePipelineDefinition(final PipelineDefinition obj) {
         log.info("Converting 'PipelineDefinition {}'.", obj.getName());
 
-        final de.evoal.languages.model.pipeline.PipelineDefinition result = pipeFactory.createPipelineDefinition();;
+        final de.evoal.models.v202704.pipeline.PipelineDefinition result = pipeFactory.createPipelineDefinition();;
         result.setName(obj.getName());
 
         for(final Step step : obj.getSteps()) {
-            result.getSteps().add((de.evoal.languages.model.pipeline.Step) doSwitch(step));
+            result.getSteps().add((de.evoal.models.v202704.pipeline.Step) doSwitch(step));
         }
 
         pipelines.put(obj, result);
@@ -106,11 +129,11 @@ public class GeneratorDSLConverter extends GeneratorSwitch<Object> {
     }
 
     @Override
-    public de.evoal.languages.model.pipeline.ConcreteStep caseConcreteStep(final ConcreteStep obj) {
+    public de.evoal.models.v202704.pipeline.ConcreteStep caseConcreteStep(final ConcreteStep obj) {
         log.info("  Converting 'ConcreteStep {}'", obj.getInstance().getDefinition().getName());
-        final de.evoal.languages.model.pipeline.ConcreteStep result = pipeFactory.createConcreteStep();
+        final de.evoal.models.v202704.pipeline.ConcreteStep result = pipeFactory.createConcreteStep();
 
-        result.setInstance(EcoreUtil.copy(obj.getInstance()));
+        result.setConfiguration(transformer.createDynamic(obj.getInstance()));
 
         obj.getReads()
                 .stream()
@@ -130,12 +153,12 @@ public class GeneratorDSLConverter extends GeneratorSwitch<Object> {
     }
 
     @Override
-    public de.evoal.languages.model.pipeline.PipelineStep casePipelineStep(final PipelineStep obj) {
+    public de.evoal.models.v202704.pipeline.PipelineStep casePipelineStep(final PipelineStep obj) {
         log.info("  Converting 'PipelineStep {}'", obj.getDefinition().getName());
-        final de.evoal.languages.model.pipeline.PipelineStep result = pipeFactory.createPipelineStep();
+        final de.evoal.models.v202704.pipeline.PipelineStep result = pipeFactory.createPipelineStep();
 
-        final de.evoal.languages.model.pipeline.PipelineDefinition definition =
-                (de.evoal.languages.model.pipeline.PipelineDefinition) pipelines.get(obj.getDefinition());
+        final de.evoal.models.v202704.pipeline.PipelineDefinition definition =
+                (de.evoal.models.v202704.pipeline.PipelineDefinition) pipelines.get(obj.getDefinition());
 
         result.setDefinition(definition);
 
@@ -145,8 +168,8 @@ public class GeneratorDSLConverter extends GeneratorSwitch<Object> {
     @Override
     public Object caseApplyStatement(final ApplyStatement obj) {
         log.info("Converting apply statement.");
-        final DefinitionModule module = loader.load(URI.createURI("classpath:/de/evoal/pipeline/base.dl"));
-        final FunctionDefinition generateFunction = module.getFunctions()
+        final FunctionDefinition generateFunction = loadDefinitions("base.dl")
+                .getFunctions()
                 .stream()
                 .filter(t ->"generate".equals(t.getName()))
                 .findFirst()
@@ -155,6 +178,7 @@ public class GeneratorDSLConverter extends GeneratorSwitch<Object> {
         final de.evoal.languages.model.execution.CallBuiltinFunction result = execFactory.createCallBuiltinFunction();
         result.setDefinition(generateFunction);
 
+        // the file name may contain ${variables}, it is resolved by the generate function
         final StringLiteral filename = exprFactory.createStringLiteral();
         filename.setLiteral(obj.getFile());
 
@@ -163,96 +187,68 @@ public class GeneratorDSLConverter extends GeneratorSwitch<Object> {
         final Literal count = EcoreUtil.copy(obj.getCount());
         result.getParameters().add(count);
 
-        final Array pipelines = exprFactory.createArray();;
-        addGenerator(pipelines);
+        final Array pipelines = exprFactory.createArray();
+        pipelines.getValues().add(referenceTo(createPipeline("generate-empty", type("io.dl", "empty"), Map.of())));
         obj.getPipelines()
                 .stream()
                 .map(VariableReference::getVariable)
                 .map(this.pipelines::get)
-                .map(v -> {
-                    VariableReference ref = execFactory.createVariableReference();
-                    ref.setVariable(v);
-                    return ref;
-                })
+                .map(this::referenceTo)
                 .forEach(pipelines.getValues()::add);
 
-        addLimiter(pipelines, obj.getCount());
+        pipelines.getValues().add(referenceTo(createPipeline("limit-count", type("misc.dl", "limit"), Map.of("count", obj.getCount().getValue()))));
+
+        final de.evoal.models.v202704.pipeline.PipelineDefinition writer = createPipeline(WRITER_PIPELINE, type("io.dl", "writer"), Map.of("filename", obj.getFile()));
+        ((de.evoal.models.v202704.pipeline.ConcreteStep) writer.getSteps().get(0)).getReads().addAll(space);
+        pipelines.getValues().add(referenceTo(writer));
+
         result.getParameters().add(pipelines);
 
         return result;
     }
 
-    private void addLimiter(final Array pipelines, final Literal limit) {
-        log.info("Adding empty object generator.");
-        final DefinitionModule module = loader.load(URI.createURI("classpath:/de/evoal/pipeline/misc.dl"));
-        final ClassDefinition limitFunction = module.getTypes()
-                .stream()
-                .filter(t ->"limit".equals(t.getName()))
-                .findFirst()
-                .get();
+    /**
+     * Creates a pipeline with a single step that is configured by an instance of the given
+     *   type and registers it as a variable of the program.
+     */
+    private de.evoal.models.v202704.pipeline.PipelineDefinition createPipeline(final String name, final ClassDefinition type, final Map<String, ?> values) {
+        log.info("Adding pipeline '{}'.", name);
 
-        final AttributeDefinition countAttribute = limitFunction
-                .getAllAttributes()
-                .stream()
-                .filter(t ->"count".equals(t.getName()))
-                .findFirst()
-                .get();
+        final de.evoal.models.v202704.pipeline.ConcreteStep step = pipeFactory.createConcreteStep();
+        step.setConfiguration(transformer.createDynamic(type, values));
 
-        final Attribute attribute = exprFactory.createAttribute();
-        attribute.setDefinition(countAttribute);
-        attribute.setValue(EcoreUtil.copy(limit));
-
-        final Instance instance = exprFactory.createInstance();
-        instance.setDefinition(limitFunction);
-        instance.getAttributes().add(attribute);
-
-        final de.evoal.languages.model.pipeline.ConcreteStep step = pipeFactory.createConcreteStep();
-        step.setInstance(instance);
-
-        final de.evoal.languages.model.pipeline.PipelineDefinition genDefinition = pipeFactory.createPipelineDefinition();
-        genDefinition.setName("limit-count");
-        genDefinition.getSteps().add(step);
-
-        this.module
-                .getProgram()
-                .getVariables()
-                .add(genDefinition);
-
-        final VariableReference reference = execFactory.createVariableReference();
-        reference.setVariable(genDefinition);
-
-        pipelines.getValues()
-                .add(reference);
-    }
-
-    private void addGenerator(final Array pipelines) {
-        log.info("Adding empty object generator.");
-        final DefinitionModule module = loader.load(URI.createURI("classpath:/de/evoal/pipeline/io.dl"));
-        final ClassDefinition generateFunction = module.getTypes()
-                .stream()
-                .filter(t ->"empty".equals(t.getName()))
-                .findFirst()
-                .get();
-
-        final Instance instance = exprFactory.createInstance();
-        instance.setDefinition(generateFunction);
-
-        final de.evoal.languages.model.pipeline.ConcreteStep step = pipeFactory.createConcreteStep();
-        step.setInstance(instance);
-
-        final de.evoal.languages.model.pipeline.PipelineDefinition genDefinition = pipeFactory.createPipelineDefinition();
-        genDefinition.setName("generate-empty");
-        genDefinition.getSteps().add(step);
+        final de.evoal.models.v202704.pipeline.PipelineDefinition definition = pipeFactory.createPipelineDefinition();
+        definition.setName(name);
+        definition.getSteps().add(step);
 
         this.module
             .getProgram()
             .getVariables()
-            .add(genDefinition);
+            .add(definition);
 
+        return definition;
+    }
+
+    private VariableReference referenceTo(final Variable variable) {
         final VariableReference reference = execFactory.createVariableReference();
-        reference.setVariable(genDefinition);
+        reference.setVariable(variable);
+        return reference;
+    }
 
-        pipelines.getValues()
-                 .add(0, reference);
+    /**
+     * Loads a DL file of the pipeline plugin into the resource set of the generator module.
+     */
+    private DefinitionModule loadDefinitions(final String file) {
+        final Resource resource = resourceSet.getResource(URI.createURI("classpath:/de/evoal/pipeline/" + file), true);
+        return (DefinitionModule) resource.getContents().get(0);
+    }
+
+    private ClassDefinition type(final String file, final String name) {
+        return loadDefinitions(file)
+                .getTypes()
+                .stream()
+                .filter(t -> name.equals(t.getName()))
+                .findFirst()
+                .orElseThrow(() -> new IllegalStateException("Type '" + name + "' not found in " + file + "."));
     }
 }

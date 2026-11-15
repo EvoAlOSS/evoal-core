@@ -1,6 +1,6 @@
 package de.evoal.core.api.interpreter;
 
-import de.evoal.core.api.ecore.Space;
+import de.evoal.models.core.ecore.Space;
 import de.evoal.languages.model.execution.NamedVariable;
 import de.evoal.languages.model.execution.Variable;
 import lombok.NonNull;

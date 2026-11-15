@@ -1,7 +1,7 @@
 package de.evoal.surrogate.main.gof.cross;
 
 import de.evoal.core.api.ecore.EObjectPair;
-import de.evoal.core.api.ecore.TypedEObject;
+import de.evoal.models.core.ecore.TypedEObject;
 import de.evoal.core.api.ecore.stream.EObjectPairStreamSupplier;
 import de.evoal.core.api.ecore.stream.EObjectStreamSupplier;
 import lombok.Setter;

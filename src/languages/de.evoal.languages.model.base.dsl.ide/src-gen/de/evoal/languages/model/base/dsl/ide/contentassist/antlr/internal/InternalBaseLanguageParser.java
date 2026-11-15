@@ -23,7 +23,7 @@ import java.util.HashMap;
 @SuppressWarnings("all")
 public class InternalBaseLanguageParser extends AbstractInternalContentAssistParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_QUOTED_ID", "RULE_ID", "RULE_DOUBLE", "RULE_INT", "RULE_STRING", "RULE_DIGIT", "RULE_EXPONENT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'false'", "'>='", "'>'", "'='", "'!='", "'<'", "'<='", "'+'", "'-'", "'*'", "'/'", "'%'", "'Y'", "'Z'", "'E'", "'P'", "'T'", "'G'", "'M'", "'k'", "'h'", "'da'", "'d'", "'c'", "'m'", "'\\u00B5'", "'n'", "'p'", "'f'", "'a'", "'z'", "'y'", "'OR'", "'XOR'", "'AND'", "'^'", "'['", "']'", "','", "'('", "')'", "'self'", "'value'", "'.'", "'tree'", "'data'", "'instance'", "'{'", "'}'", "':='", "';'", "'@'", "':'", "'enum'", "'literal'", "'string'", "'expression'", "'int'", "'real'", "'boolean'", "'void'", "'array'", "'!'", "'true'", "'optional'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_QUOTED_ID", "RULE_ID", "RULE_DOUBLE", "RULE_INT", "RULE_STRING", "RULE_DIGIT", "RULE_EXPONENT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'false'", "'>'", "'>='", "'='", "'!='", "'<='", "'<'", "'+'", "'-'", "'*'", "'/'", "'%'", "'Y'", "'Z'", "'E'", "'P'", "'T'", "'G'", "'M'", "'k'", "'h'", "'da'", "'d'", "'c'", "'m'", "'\\u00B5'", "'n'", "'p'", "'f'", "'a'", "'z'", "'y'", "'OR'", "'XOR'", "'AND'", "'^'", "'['", "']'", "','", "'('", "')'", "'self'", "'value'", "'.'", "'tree'", "'data'", "'instance'", "'{'", "'}'", "':='", "';'", "'@'", "':'", "'enum'", "'literal'", "'string'", "'expression'", "'int'", "'real'", "'boolean'", "'void'", "'array'", "'!'", "'true'", "'optional'"
     };
     public static final int T__50=50;
     public static final int T__19=19;
@@ -5805,13 +5805,13 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__ComparisonOperatorRule__Alternatives"
-    // InternalBaseLanguage.g:1643:1: rule__ComparisonOperatorRule__Alternatives : ( ( ( '>=' ) ) | ( ( '>' ) ) | ( ( '=' ) ) | ( ( '!=' ) ) | ( ( '<' ) ) | ( ( '<=' ) ) );
+    // InternalBaseLanguage.g:1643:1: rule__ComparisonOperatorRule__Alternatives : ( ( ( '>' ) ) | ( ( '>=' ) ) | ( ( '=' ) ) | ( ( '!=' ) ) | ( ( '<=' ) ) | ( ( '<' ) ) );
     public final void rule__ComparisonOperatorRule__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBaseLanguage.g:1647:1: ( ( ( '>=' ) ) | ( ( '>' ) ) | ( ( '=' ) ) | ( ( '!=' ) ) | ( ( '<' ) ) | ( ( '<=' ) ) )
+            // InternalBaseLanguage.g:1647:1: ( ( ( '>' ) ) | ( ( '>=' ) ) | ( ( '=' ) ) | ( ( '!=' ) ) | ( ( '<=' ) ) | ( ( '<' ) ) )
             int alt11=6;
             switch ( input.LA(1) ) {
             case 16:
@@ -5854,16 +5854,16 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
 
             switch (alt11) {
                 case 1 :
-                    // InternalBaseLanguage.g:1648:2: ( ( '>=' ) )
+                    // InternalBaseLanguage.g:1648:2: ( ( '>' ) )
                     {
-                    // InternalBaseLanguage.g:1648:2: ( ( '>=' ) )
-                    // InternalBaseLanguage.g:1649:3: ( '>=' )
+                    // InternalBaseLanguage.g:1648:2: ( ( '>' ) )
+                    // InternalBaseLanguage.g:1649:3: ( '>' )
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getComparisonOperatorRuleAccess().getGreaterThanEnumLiteralDeclaration_0()); 
                     }
-                    // InternalBaseLanguage.g:1650:3: ( '>=' )
-                    // InternalBaseLanguage.g:1650:4: '>='
+                    // InternalBaseLanguage.g:1650:3: ( '>' )
+                    // InternalBaseLanguage.g:1650:4: '>'
                     {
                     match(input,16,FOLLOW_2); if (state.failed) return ;
 
@@ -5879,16 +5879,16 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
                     }
                     break;
                 case 2 :
-                    // InternalBaseLanguage.g:1654:2: ( ( '>' ) )
+                    // InternalBaseLanguage.g:1654:2: ( ( '>=' ) )
                     {
-                    // InternalBaseLanguage.g:1654:2: ( ( '>' ) )
-                    // InternalBaseLanguage.g:1655:3: ( '>' )
+                    // InternalBaseLanguage.g:1654:2: ( ( '>=' ) )
+                    // InternalBaseLanguage.g:1655:3: ( '>=' )
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getComparisonOperatorRuleAccess().getGreaterEqualEnumLiteralDeclaration_1()); 
                     }
-                    // InternalBaseLanguage.g:1656:3: ( '>' )
-                    // InternalBaseLanguage.g:1656:4: '>'
+                    // InternalBaseLanguage.g:1656:3: ( '>=' )
+                    // InternalBaseLanguage.g:1656:4: '>='
                     {
                     match(input,17,FOLLOW_2); if (state.failed) return ;
 
@@ -5954,16 +5954,16 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
                     }
                     break;
                 case 5 :
-                    // InternalBaseLanguage.g:1672:2: ( ( '<' ) )
+                    // InternalBaseLanguage.g:1672:2: ( ( '<=' ) )
                     {
-                    // InternalBaseLanguage.g:1672:2: ( ( '<' ) )
-                    // InternalBaseLanguage.g:1673:3: ( '<' )
+                    // InternalBaseLanguage.g:1672:2: ( ( '<=' ) )
+                    // InternalBaseLanguage.g:1673:3: ( '<=' )
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getComparisonOperatorRuleAccess().getLessEqualEnumLiteralDeclaration_4()); 
                     }
-                    // InternalBaseLanguage.g:1674:3: ( '<' )
-                    // InternalBaseLanguage.g:1674:4: '<'
+                    // InternalBaseLanguage.g:1674:3: ( '<=' )
+                    // InternalBaseLanguage.g:1674:4: '<='
                     {
                     match(input,20,FOLLOW_2); if (state.failed) return ;
 
@@ -5979,16 +5979,16 @@ public class InternalBaseLanguageParser extends AbstractInternalContentAssistPar
                     }
                     break;
                 case 6 :
-                    // InternalBaseLanguage.g:1678:2: ( ( '<=' ) )
+                    // InternalBaseLanguage.g:1678:2: ( ( '<' ) )
                     {
-                    // InternalBaseLanguage.g:1678:2: ( ( '<=' ) )
-                    // InternalBaseLanguage.g:1679:3: ( '<=' )
+                    // InternalBaseLanguage.g:1678:2: ( ( '<' ) )
+                    // InternalBaseLanguage.g:1679:3: ( '<' )
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getComparisonOperatorRuleAccess().getLessThanEnumLiteralDeclaration_5()); 
                     }
-                    // InternalBaseLanguage.g:1680:3: ( '<=' )
-                    // InternalBaseLanguage.g:1680:4: '<='
+                    // InternalBaseLanguage.g:1680:3: ( '<' )
+                    // InternalBaseLanguage.g:1680:4: '<'
                     {
                     match(input,21,FOLLOW_2); if (state.failed) return ;
 

@@ -3,6 +3,7 @@
  */
 package de.evoal.languages.model.generator;
 
+import de.evoal.languages.model.base.BasePackage;
 import de.evoal.languages.model.base.expressions.ExpressionsPackage;
 
 import de.evoal.languages.model.execution.ExecutionPackage;
@@ -72,22 +73,22 @@ public interface GeneratorPackage extends EPackage {
 	int GENERATOR_MODULE = 0;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int GENERATOR_MODULE__NAME = 0;
-
-	/**
 	 * The feature id for the '<em><b>Imports</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int GENERATOR_MODULE__IMPORTS = 1;
+	int GENERATOR_MODULE__IMPORTS = BasePackage.MODULE__IMPORTS;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GENERATOR_MODULE__NAME = BasePackage.MODULE__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Pipelines</b></em>' containment reference list.
@@ -96,7 +97,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GENERATOR_MODULE__PIPELINES = 2;
+	int GENERATOR_MODULE__PIPELINES = BasePackage.MODULE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Body</b></em>' containment reference.
@@ -105,7 +106,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GENERATOR_MODULE__BODY = 3;
+	int GENERATOR_MODULE__BODY = BasePackage.MODULE_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Module</em>' class.
@@ -114,7 +115,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GENERATOR_MODULE_FEATURE_COUNT = 4;
+	int GENERATOR_MODULE_FEATURE_COUNT = BasePackage.MODULE_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.generator.impl.PipelineDefinitionImpl <em>Pipeline Definition</em>}' class.
@@ -302,28 +303,6 @@ public interface GeneratorPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getGeneratorModule();
-
-	/**
-	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.generator.GeneratorModule#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see de.evoal.languages.model.generator.GeneratorModule#getName()
-	 * @see #getGeneratorModule()
-	 * @generated
-	 */
-	EAttribute getGeneratorModule_Name();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.generator.GeneratorModule#getImports <em>Imports</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Imports</em>'.
-	 * @see de.evoal.languages.model.generator.GeneratorModule#getImports()
-	 * @see #getGeneratorModule()
-	 * @generated
-	 */
-	EReference getGeneratorModule_Imports();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.generator.GeneratorModule#getPipelines <em>Pipelines</em>}'.
@@ -516,22 +495,6 @@ public interface GeneratorPackage extends EPackage {
 		 * @generated
 		 */
 		EClass GENERATOR_MODULE = eINSTANCE.getGeneratorModule();
-
-		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute GENERATOR_MODULE__NAME = eINSTANCE.getGeneratorModule_Name();
-
-		/**
-		 * The meta object literal for the '<em><b>Imports</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference GENERATOR_MODULE__IMPORTS = eINSTANCE.getGeneratorModule_Imports();
 
 		/**
 		 * The meta object literal for the '<em><b>Pipelines</b></em>' containment reference list feature.

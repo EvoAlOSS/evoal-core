@@ -66,7 +66,8 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 			case TypesPackage.EXPRESSION_TYPE: return createExpressionType();
 			case TypesPackage.LITERAL_TYPE: return createLiteralType();
 			case TypesPackage.DATA_TYPE: return createDataType();
-			case TypesPackage.DEFINITION_REFERENCE: return createDefinitionReference();
+			case TypesPackage.CLASS_DEFINITION_REFERENCE: return createClassDefinitionReference();
+			case TypesPackage.ENUM_DEFINITION_REFERENCE: return createEnumDefinitionReference();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -188,9 +189,20 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	 * @generated
 	 */
 	@Override
-	public DefinitionReference createDefinitionReference() {
-		DefinitionReferenceImpl definitionReference = new DefinitionReferenceImpl();
-		return definitionReference;
+	public ClassDefinitionReference createClassDefinitionReference() {
+		ClassDefinitionReferenceImpl classDefinitionReference = new ClassDefinitionReferenceImpl();
+		return classDefinitionReference;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EnumDefinitionReference createEnumDefinitionReference() {
+		EnumDefinitionReferenceImpl enumDefinitionReference = new EnumDefinitionReferenceImpl();
+		return enumDefinitionReference;
 	}
 
 	/**

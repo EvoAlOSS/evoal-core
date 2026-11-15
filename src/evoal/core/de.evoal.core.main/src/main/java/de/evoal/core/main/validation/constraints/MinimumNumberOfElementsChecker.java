@@ -1,11 +1,12 @@
 package de.evoal.core.main.validation.constraints;
 
 import de.evoal.core.api.utils.AttributeHelper;
-import de.evoal.core.api.utils.InitializationException;
 import de.evoal.core.api.validation.constraints.ConstraintCheckerComponent;
 import de.evoal.core.api.validation.context.DiagnosticsContext;
 import de.evoal.core.api.validation.model.Diagnostics;
 import de.evoal.languages.model.base.expressions.*;
+import de.evoal.models.core.ecore.TypedEObject;
+import de.evoal.models.core.exceptions.InitializationException;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -27,7 +28,7 @@ public class MinimumNumberOfElementsChecker implements ConstraintCheckerComponen
     private AttributeHelper helper;
 
     @Override
-    public ConstraintCheckerComponent init(final Instance config) throws InitializationException {
+    public ConstraintCheckerComponent init(final EObject config) throws InitializationException {
         bound = helper.lookup(config, "bound");
 
         // TODO We should issue an error in case of a negative

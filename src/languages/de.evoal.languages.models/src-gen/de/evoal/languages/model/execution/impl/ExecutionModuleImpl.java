@@ -3,27 +3,18 @@
  */
 package de.evoal.languages.model.execution.impl;
 
-import de.evoal.languages.model.base.Import;
-
+import de.evoal.languages.model.base.impl.ModuleImpl;
 import de.evoal.languages.model.execution.ExecutionModule;
 import de.evoal.languages.model.execution.ExecutionPackage;
 import de.evoal.languages.model.execution.Program;
 
-import java.util.Collection;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -33,44 +24,12 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link de.evoal.languages.model.execution.impl.ExecutionModuleImpl#getImports <em>Imports</em>}</li>
- *   <li>{@link de.evoal.languages.model.execution.impl.ExecutionModuleImpl#getName <em>Name</em>}</li>
  *   <li>{@link de.evoal.languages.model.execution.impl.ExecutionModuleImpl#getProgram <em>Program</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class ExecutionModuleImpl extends MinimalEObjectImpl.Container implements ExecutionModule {
-	/**
-	 * The cached value of the '{@link #getImports() <em>Imports</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getImports()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Import> imports;
-
-	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String NAME_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String name = NAME_EDEFAULT;
-
+public class ExecutionModuleImpl extends ModuleImpl implements ExecutionModule {
 	/**
 	 * The cached value of the '{@link #getProgram() <em>Program</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -98,42 +57,6 @@ public class ExecutionModuleImpl extends MinimalEObjectImpl.Container implements
 	@Override
 	protected EClass eStaticClass() {
 		return ExecutionPackage.Literals.EXECUTION_MODULE;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EList<Import> getImports() {
-		if (imports == null) {
-			imports = new EObjectContainmentEList<Import>(Import.class, this, ExecutionPackage.EXECUTION_MODULE__IMPORTS);
-		}
-		return imports;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setName(String newName) {
-		String oldName = name;
-		name = newName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionPackage.EXECUTION_MODULE__NAME, oldName, name));
 	}
 
 	/**
@@ -189,8 +112,6 @@ public class ExecutionModuleImpl extends MinimalEObjectImpl.Container implements
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ExecutionPackage.EXECUTION_MODULE__IMPORTS:
-				return ((InternalEList<?>)getImports()).basicRemove(otherEnd, msgs);
 			case ExecutionPackage.EXECUTION_MODULE__PROGRAM:
 				return basicSetProgram(null, msgs);
 		}
@@ -205,10 +126,6 @@ public class ExecutionModuleImpl extends MinimalEObjectImpl.Container implements
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ExecutionPackage.EXECUTION_MODULE__IMPORTS:
-				return getImports();
-			case ExecutionPackage.EXECUTION_MODULE__NAME:
-				return getName();
 			case ExecutionPackage.EXECUTION_MODULE__PROGRAM:
 				return getProgram();
 		}
@@ -220,17 +137,9 @@ public class ExecutionModuleImpl extends MinimalEObjectImpl.Container implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ExecutionPackage.EXECUTION_MODULE__IMPORTS:
-				getImports().clear();
-				getImports().addAll((Collection<? extends Import>)newValue);
-				return;
-			case ExecutionPackage.EXECUTION_MODULE__NAME:
-				setName((String)newValue);
-				return;
 			case ExecutionPackage.EXECUTION_MODULE__PROGRAM:
 				setProgram((Program)newValue);
 				return;
@@ -246,12 +155,6 @@ public class ExecutionModuleImpl extends MinimalEObjectImpl.Container implements
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ExecutionPackage.EXECUTION_MODULE__IMPORTS:
-				getImports().clear();
-				return;
-			case ExecutionPackage.EXECUTION_MODULE__NAME:
-				setName(NAME_EDEFAULT);
-				return;
 			case ExecutionPackage.EXECUTION_MODULE__PROGRAM:
 				setProgram((Program)null);
 				return;
@@ -267,30 +170,10 @@ public class ExecutionModuleImpl extends MinimalEObjectImpl.Container implements
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ExecutionPackage.EXECUTION_MODULE__IMPORTS:
-				return imports != null && !imports.isEmpty();
-			case ExecutionPackage.EXECUTION_MODULE__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case ExecutionPackage.EXECUTION_MODULE__PROGRAM:
 				return program != null;
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuilder result = new StringBuilder(super.toString());
-		result.append(" (name: ");
-		result.append(name);
-		result.append(')');
-		return result.toString();
 	}
 
 } //ExecutionModuleImpl

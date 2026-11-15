@@ -1,20 +1,24 @@
 package de.evoal.optimisation.main.fitness;
 
-import de.evoal.core.api.board.Blackboard;
-import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
-import de.evoal.optimisation.api.model.OptimisationFunction;
-import de.evoal.optimisation.api.model.OptimisationFunctionDecorator;
-import de.evoal.core.api.properties.Properties;
-import de.evoal.core.api.properties.PropertiesSpecification;
-import de.evoal.core.api.utils.Requirements;
-import de.evoal.languages.model.base.expressions.*;
-import de.evoal.languages.model.base.definitions.DataDescription;
 import lombok.extern.slf4j.Slf4j;
 
 import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+
 import java.util.List;
+
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
+
+import de.evoal.core.api.board.Blackboard;
+import de.evoal.models.core.ecore.Space;
+import de.evoal.models.core.ecore.TypedEObject;
+import de.evoal.core.api.utils.VariableToEObjectHelper;
+import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
+import de.evoal.models.v202704.optimisation.execution.OptimisationFunction;
+import de.evoal.optimisation.api.model.OptimisationFunctionDecorator;
+import de.evoal.languages.model.base.expressions.*;
 
 @Dependent
 @Named("de.evoal.optimisation.core.optimisation-distance")
@@ -24,21 +28,25 @@ public class OptimisationDistanceFitness extends OptimisationFunctionDecorator {
     @Inject
     private Blackboard board;
 
+    @Inject
+    private VariableToEObjectHelper instanceConverter;
+
+    @Inject @Named("optimisation-space")
+    private Space optimisationSpace;
+
     /**
      * The target to search for.
      */
-    private Properties target;
+    private TypedEObject target;
 
     @Override
-    public double[] evaluate(final Properties properties) {
-        final Object [] target = this.target.getValues();
-        final double [] current = decoratedFunction.evaluate(properties);
+    public TypedEObject evaluate(final TypedEObject input) {
+        final TypedEObject current = decoratedFunction.evaluate(input);
+        final TypedEObject result = optimisationSpace.newEObject();
 
-        Requirements.requireSameSize(current, target);
-
-        final double[] result = new double[target.length];
-        for(int i = 0; i  < target.length; ++i) {
-            result[i] = distance(target[i], current[i]);
+        for(final EStructuralFeature feature : optimisationSpace) {
+            // TODO We have to use a proper function to measure the distance based on the type.
+            result.eSet(feature, distance(target.eGetAsDouble(feature), current.eGetAsDouble(feature)));
         }
 
         return result;
@@ -49,38 +57,19 @@ public class OptimisationDistanceFitness extends OptimisationFunctionDecorator {
     }
 
     @Override
-    public OptimisationFunction init(final Instance config) {
+    public OptimisationFunction init(final EObject config) {
         super.init(config);
 
-        final List<Instance> target = helper.lookup(config, "target");
+        final List<EObject> target = helper.lookup(config, "target");
 
         if(target == null) {
             this.target = board.get(OptimisationBlackboardEntries.TARGET_PROPERTIES);
         } else {
-            this.target = toProperties(target);
+            this.target = instanceConverter.fromVariables(target, optimisationSpace);
             log.info("Binding target properties based on information found in MLL to {}.", this.target);
             board.bind(OptimisationBlackboardEntries.TARGET_PROPERTIES, this.target);
         }
 
         return this;
-    }
-
-    private Properties toProperties(final List<Instance> array) {
-        PropertiesSpecification specification = PropertiesSpecification.builder()
-                .add(array.stream()
-                        .map(i -> helper.<DataDescription>lookup(i, "var"))
-                        .map(DataDescription.class::cast)
-                )
-                .build();
-
-        final Properties properties = new Properties(specification);
-        array
-                .forEach(i -> {
-                    final DataDescription dd = helper.<DataDescription>lookup(i, "var");
-                    final Object val = helper.lookup(i, "val");
-                    properties.put(specification.indexOf(dd.getName()), val);
-                });
-
-        return properties;
     }
 }

@@ -1,10 +1,9 @@
 package de.evoal.surrogate.simple.identity;
 
-import de.evoal.core.api.ecore.Space;
-import de.evoal.core.api.ecore.TypedEObject;
-import de.evoal.core.api.utils.InitializationException;
+import de.evoal.models.core.ecore.Space;
+import de.evoal.models.core.ecore.TypedEObject;
+import de.evoal.models.core.exceptions.InitializationException;
 import de.evoal.core.api.utils.Requirements;
-import de.evoal.languages.model.base.expressions.Instance;
 import de.evoal.surrogate.api.function.ModelFunction;
 import de.evoal.surrogate.api.training.AbstractModelLearner;
 import de.evoal.surrogate.api.training.ModelLearner;
@@ -13,6 +12,8 @@ import lombok.extern.slf4j.Slf4j;
 
 import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Named;
+import org.eclipse.emf.ecore.EObject;
+
 import java.util.function.Function;
 
 @Dependent
@@ -30,7 +31,7 @@ public class IdentityFunctionLearner extends AbstractModelLearner {
 	private Function<TypedEObject, Double> outputFeature;
 
 	@Override
-	public ModelLearner init(final Instance configuration) throws InitializationException {
+	public ModelLearner init(final EObject configuration) throws InitializationException {
 		super.init(configuration);
 
         return this;

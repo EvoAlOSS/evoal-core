@@ -18,9 +18,9 @@
 package de.evoal.optimisation.pso.main.impl;
 
 import de.evoal.core.api.cdi.ConfigurationValue;
-import de.evoal.core.api.properties.info.PropertiesBoundaries;
-import de.evoal.core.api.properties.Properties;
-import de.evoal.core.api.properties.info.PropertyBoundaries;
+import de.evoal.core.api.ecore.info.FeatureBoundaries;
+import de.evoal.models.core.ecore.Space;
+import de.evoal.models.core.ecore.TypedEObject;
 import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
 import de.evoal.optimisation.pso.api.swarm.Particle;
 import de.evoal.optimisation.pso.api.swarm.DefaultSwarm;
@@ -30,6 +30,7 @@ import lombok.extern.slf4j.Slf4j;
 import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import org.eclipse.emf.ecore.EStructuralFeature;
 
 /**
  *  Implements the diversity enhanced particle movement scheme of Riget and Vesterstrom.
@@ -41,7 +42,7 @@ import jakarta.inject.Named;
 @Slf4j
 public class ARPSOSwarm extends DefaultSwarm {
     @Inject
-    private PropertiesBoundaries boundaries;
+    private FeatureBoundaries boundaries;
 
     @Inject
     @ConfigurationValue(entry = OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.swarm.diversity-low")
@@ -82,28 +83,32 @@ public class ARPSOSwarm extends DefaultSwarm {
      * @return the diversity of the swarm.
      */
     protected double getDiversity(final Particle[] particles) {
-        int pos_length = particles[0].getCurrentPosition().size();
+        final Space space  = particles[0].getCurrentPosition().eSpace();
+        final int pos_length = space.size();
 
         //  Find average position
         Double[] ave_position = new Double[pos_length];
-        for (int i = 0; i < pos_length; i++)
+        int i = 0;
+        for (final EStructuralFeature feature : space)
         {
             ave_position[i] = 0.;
             for (Particle p : particles)
             {
-                ave_position[i] += p.getCurrentPosition().getAsDouble(i);
+                ave_position[i] += p.getCurrentPosition().eGetAsDouble(feature);
             }
 
             ave_position[i] /= particles.length;
+
+            i += 1;
         }
 
         //  Find max diagonal in search space
-        Properties properties = particles[0].getCurrentPosition();
+        TypedEObject properties = particles[0].getCurrentPosition();
         double diag_length = 0.;
 
 
-        for (int i=0; i<properties.size();i++) {
-            PropertyBoundaries bounds = boundaries.get(properties.getSpecification().get(i));
+        for (final EStructuralFeature feature : properties.eSpace()) {
+            FeatureBoundaries.Boundaries bounds = boundaries.get(feature);
             double maximum = bounds.upper().doubleValue();
             double minimum = bounds.lower().doubleValue();
             double diff = maximum - minimum;
@@ -116,13 +121,16 @@ public class ARPSOSwarm extends DefaultSwarm {
         for (Particle p : particles)
         {
             double variance = 0.;
-            for (int i = 0; i < pos_length; i++)
+            i = 0;
+            for (final EStructuralFeature feature : space)
             {
                 variance +=
-                    Math.pow(p.getCurrentPosition().getAsDouble(i) - ave_position[i], 2);
+                    Math.pow(p.getCurrentPosition().eGetAsDouble(feature) - ave_position[i], 2);
             }
 
             diversity += Math.sqrt(variance);
+
+            i += 1;
         }
 
         diversity /= (particles.length * diag_length);

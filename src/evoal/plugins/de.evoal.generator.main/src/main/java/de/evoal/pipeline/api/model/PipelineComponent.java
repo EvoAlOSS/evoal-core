@@ -3,8 +3,8 @@ package de.evoal.pipeline.api.model;
 import de.evoal.core.api.interpreter.InterpreterState;
 import lombok.NonNull;
 
-import de.evoal.core.api.ecore.TypedEObject;
-import de.evoal.core.api.ecore.Space;
+import de.evoal.models.core.ecore.TypedEObject;
+import de.evoal.models.core.ecore.Space;
 
 import java.util.Optional;
 

@@ -2,12 +2,12 @@ package de.evoal.optimisation.local_search.main.cooling;
 
 import de.evoal.optimisation.local_search.api.cooling.DecreasingFunction;
 import de.evoal.core.api.languages.AttributeEvaluator;
-import de.evoal.languages.model.base.expressions.Instance;
 import lombok.extern.slf4j.Slf4j;
 
 import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * Geometric cooling schedule determines new temperature according to formula:
@@ -33,7 +33,7 @@ public class GeometricDecreaseFunction implements DecreasingFunction {
     }
 
     @Override
-    public GeometricDecreaseFunction init(final Instance config) {
+    public GeometricDecreaseFunction init(final EObject config) {
         this.rate = evaluator.attributeToDouble(config, "decrease-rate");
         if(this.rate < 0.0 || this.rate > 1.0) {
             log.error("Decrease rate must be between 0 and 1.");

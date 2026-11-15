@@ -125,13 +125,22 @@ public interface DefinitionsPackage extends EPackage {
 	int DEFINITION__NAME = CONSTRAINED_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>EAnnotations</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEFINITION__EANNOTATIONS = CONSTRAINED_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Definition</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DEFINITION_FEATURE_COUNT = CONSTRAINED_FEATURE_COUNT + 1;
+	int DEFINITION_FEATURE_COUNT = CONSTRAINED_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of operations of the '<em>Definition</em>' class.
@@ -169,6 +178,15 @@ public interface DefinitionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int VALUE_DEFINITION__NAME = DEFINITION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>EAnnotations</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VALUE_DEFINITION__EANNOTATIONS = DEFINITION__EANNOTATIONS;
 
 	/**
 	 * The number of structural features of the '<em>Value Definition</em>' class.
@@ -217,6 +235,15 @@ public interface DefinitionsPackage extends EPackage {
 	int TYPE_DEFINITION__NAME = DEFINITION__NAME;
 
 	/**
+	 * The feature id for the '<em><b>EAnnotations</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_DEFINITION__EANNOTATIONS = DEFINITION__EANNOTATIONS;
+
+	/**
 	 * The number of structural features of the '<em>Type Definition</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -261,6 +288,15 @@ public interface DefinitionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int LITERAL_DEFINITION__NAME = VALUE_DEFINITION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>EAnnotations</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LITERAL_DEFINITION__EANNOTATIONS = VALUE_DEFINITION__EANNOTATIONS;
 
 	/**
 	 * The number of structural features of the '<em>Literal Definition</em>' class.
@@ -344,6 +380,15 @@ public interface DefinitionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int CLASS_DEFINITION__NAME = TYPE_DEFINITION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>EAnnotations</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_DEFINITION__EANNOTATIONS = TYPE_DEFINITION__EANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Attributes</b></em>' containment reference list.
@@ -437,6 +482,15 @@ public interface DefinitionsPackage extends EPackage {
 	int ATTRIBUTE_DEFINITION__NAME = DEFINITION__NAME;
 
 	/**
+	 * The feature id for the '<em><b>EAnnotations</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE_DEFINITION__EANNOTATIONS = DEFINITION__EANNOTATIONS;
+
+	/**
 	 * The feature id for the '<em><b>Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -510,6 +564,15 @@ public interface DefinitionsPackage extends EPackage {
 	int ENUM_LITERAL_DEFINITION__NAME = LITERAL_DEFINITION__NAME;
 
 	/**
+	 * The feature id for the '<em><b>EAnnotations</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUM_LITERAL_DEFINITION__EANNOTATIONS = LITERAL_DEFINITION__EANNOTATIONS;
+
+	/**
 	 * The number of structural features of the '<em>Enum Literal Definition</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -554,6 +617,15 @@ public interface DefinitionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int ENUM_DEFINITION__NAME = TYPE_DEFINITION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>EAnnotations</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUM_DEFINITION__EANNOTATIONS = TYPE_DEFINITION__EANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Scale</b></em>' attribute.
@@ -620,6 +692,15 @@ public interface DefinitionsPackage extends EPackage {
 	int DATA_TYPE_DEFINITION__NAME = TYPE_DEFINITION__NAME;
 
 	/**
+	 * The feature id for the '<em><b>EAnnotations</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_TYPE_DEFINITION__EANNOTATIONS = TYPE_DEFINITION__EANNOTATIONS;
+
+	/**
 	 * The number of structural features of the '<em>Data Type Definition</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -664,6 +745,15 @@ public interface DefinitionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int DATA_TYPE_TYPE_DEFINITION__NAME = DATA_TYPE_DEFINITION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>EAnnotations</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_TYPE_TYPE_DEFINITION__EANNOTATIONS = DATA_TYPE_DEFINITION__EANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Scale</b></em>' attribute.
@@ -721,6 +811,15 @@ public interface DefinitionsPackage extends EPackage {
 	int DATA_DESCRIPTION__NAME = DATA_TYPE_DEFINITION__NAME;
 
 	/**
+	 * The feature id for the '<em><b>EAnnotations</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_DESCRIPTION__EANNOTATIONS = DATA_TYPE_DEFINITION__EANNOTATIONS;
+
+	/**
 	 * The number of structural features of the '<em>Data Description</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -765,6 +864,15 @@ public interface DefinitionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int BASE_DATA_DESCRIPTION__NAME = DATA_DESCRIPTION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>EAnnotations</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BASE_DATA_DESCRIPTION__EANNOTATIONS = DATA_DESCRIPTION__EANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Representation</b></em>' attribute.
@@ -829,6 +937,15 @@ public interface DefinitionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int TYPED_BASE_DATA_DESCRIPTION__NAME = BASE_DATA_DESCRIPTION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>EAnnotations</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPED_BASE_DATA_DESCRIPTION__EANNOTATIONS = BASE_DATA_DESCRIPTION__EANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Representation</b></em>' attribute.
@@ -904,6 +1021,15 @@ public interface DefinitionsPackage extends EPackage {
 	int UNTYPED_BASE_DATA_DESCRIPTION__NAME = BASE_DATA_DESCRIPTION__NAME;
 
 	/**
+	 * The feature id for the '<em><b>EAnnotations</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNTYPED_BASE_DATA_DESCRIPTION__EANNOTATIONS = BASE_DATA_DESCRIPTION__EANNOTATIONS;
+
+	/**
 	 * The feature id for the '<em><b>Representation</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -977,6 +1103,15 @@ public interface DefinitionsPackage extends EPackage {
 	int STRUCTURED_DATA_DESCRIPTION__NAME = DATA_DESCRIPTION__NAME;
 
 	/**
+	 * The feature id for the '<em><b>EAnnotations</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURED_DATA_DESCRIPTION__EANNOTATIONS = DATA_DESCRIPTION__EANNOTATIONS;
+
+	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1030,6 +1165,15 @@ public interface DefinitionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int FUNCTION_DEFINITION__NAME = DEFINITION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>EAnnotations</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FUNCTION_DEFINITION__EANNOTATIONS = DEFINITION__EANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' containment reference.
@@ -1096,6 +1240,15 @@ public interface DefinitionsPackage extends EPackage {
 	int PARAMETER__NAME = DEFINITION__NAME;
 
 	/**
+	 * The feature id for the '<em><b>EAnnotations</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETER__EANNOTATIONS = DEFINITION__EANNOTATIONS;
+
+	/**
 	 * The feature id for the '<em><b>Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1149,6 +1302,15 @@ public interface DefinitionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int CONSTANT_DEFINITION__NAME = LITERAL_DEFINITION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>EAnnotations</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTANT_DEFINITION__EANNOTATIONS = LITERAL_DEFINITION__EANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' containment reference.
@@ -1313,6 +1475,17 @@ public interface DefinitionsPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getDefinition_Name();
+
+	/**
+	 * Returns the meta object for the reference list '{@link de.evoal.languages.model.base.definitions.Definition#getEAnnotations <em>EAnnotations</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>EAnnotations</em>'.
+	 * @see de.evoal.languages.model.base.definitions.Definition#getEAnnotations()
+	 * @see #getDefinition()
+	 * @generated
+	 */
+	EReference getDefinition_EAnnotations();
 
 	/**
 	 * Returns the meta object for class '{@link de.evoal.languages.model.base.definitions.ValueDefinition <em>Value Definition</em>}'.
@@ -1819,6 +1992,14 @@ public interface DefinitionsPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute DEFINITION__NAME = eINSTANCE.getDefinition_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>EAnnotations</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DEFINITION__EANNOTATIONS = eINSTANCE.getDefinition_EAnnotations();
 
 		/**
 		 * The meta object literal for the '{@link de.evoal.languages.model.base.definitions.impl.ValueDefinitionImpl <em>Value Definition</em>}' class.

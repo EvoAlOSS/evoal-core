@@ -1,7 +1,7 @@
 package de.evoal.core.api.validation.constraints;
 
-import de.evoal.core.api.cdi.EvoalComponent;
 import de.evoal.core.api.validation.context.DiagnosticsContext;
+import de.evoal.models.core.cdi.EvoalComponent;
 import org.eclipse.emf.ecore.EObject;
 
 /**

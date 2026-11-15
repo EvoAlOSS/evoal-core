@@ -4,7 +4,7 @@ import lombok.NonNull;
 
 import java.util.stream.Stream;
 
-import de.evoal.core.api.ecore.TypedEObject;
+import de.evoal.models.core.ecore.TypedEObject;
 
 /**
  * A source component for producing data.

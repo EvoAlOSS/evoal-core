@@ -1,10 +1,10 @@
 package de.evoal.surrogate.main.pipeline;
 
 import de.evoal.core.api.dynamic.EAnnotationHelper;
-import de.evoal.core.api.ecore.Space;
-import de.evoal.core.api.ecore.TypedEObject;
+import de.evoal.models.core.ecore.Space;
+import de.evoal.models.core.ecore.TypedEObject;
 import de.evoal.core.api.utils.AttributeHelper;
-import de.evoal.core.api.utils.InitializationException;
+import de.evoal.models.core.exceptions.InitializationException;
 import de.evoal.languages.model.base.definitions.DataDescription;
 import de.evoal.languages.model.base.expressions.Instance;
 import de.evoal.languages.model.execution.ExecutionFactory;
@@ -21,6 +21,9 @@ import lombok.extern.slf4j.Slf4j;
 import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
+
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -54,18 +57,18 @@ public class ModelLearnerComponent extends PipelineComponentImpl {
     }
 
     @Override
-    public PipelineComponentImpl init(final Instance configuration) throws InitializationException {
+    public PipelineComponentImpl init(final EObject configuration) throws InitializationException {
         super.init(configuration);
 
         log.info("Looking up component configuration.");
-        final Instance modelConfiguration = helper.lookup(configuration, "model");
+        final EObject modelConfiguration = helper.lookup(configuration, "model");
         final String filename = helper.lookup(configuration, "model-file");
 
-        final List<DataDescription> inputFeatures = helper.lookup(configuration, "input-features");
-        final List<DataDescription> outputFeatures = helper.lookup(configuration, "output-features");
+        final List<EStructuralFeature> inputFeatures = helper.lookup(configuration, "input-features");
+        final List<EStructuralFeature> outputFeatures = helper.lookup(configuration, "output-features");
 
-        final Space inputSpace = annotationsHelper.subSpaceOf(getPipelineSpace(), inputFeatures);
-        final Space outputSpace = annotationsHelper.subSpaceOf(getPipelineSpace(), outputFeatures);
+        final Space inputSpace = getPipelineSpace().subSpace(inputFeatures);
+        final Space outputSpace = getPipelineSpace().subSpace(outputFeatures);
 
         log.info("Creating model learner.");
         try {

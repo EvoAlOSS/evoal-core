@@ -8,16 +8,16 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
 import de.evoal.core.api.dynamic.EAnnotationHelper;
-import de.evoal.core.api.ecore.Space;
+import de.evoal.models.core.ecore.Space;
 import de.evoal.core.api.interpreter.ProgramInterpreter;
 import de.evoal.languages.model.mll.MachineLearningModule;
 import de.evoal.languages.model.mll.MllPackage;
-import de.evoal.languages.model.pipeline.PipelineModule;
+import de.evoal.models.v202704.pipeline.PipelineModule;
 import de.evoal.core.api.dynamic.EClassProvider;
 import de.evoal.pipeline.api.cdi.DefinitionModuleLoader;
 import de.evoal.surrogate.main.cdi.MachineLearningModuleLoader;
 import de.evoal.surrogate.main.internal.DefaultBehaviourInjector;
-import de.evoal.surrogate.main.internal.MLLModelConverter;
+import de.evoal.surrogate.main.internal.SurrogateModelTransformer;
 import de.evoal.surrogate.main.internal.MLLProgramExecutionSwitch;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.emf.ecore.EClass;
@@ -49,6 +49,9 @@ public class SurrogateMain implements MainClass {
     @Inject
     private DefinitionModuleLoader dlLoader;
 
+    @Inject
+    private SurrogateModelTransformer transformer;
+
     @Override
     public void run() {
         log.info("Loading model from configuration.");
@@ -63,8 +66,7 @@ public class SurrogateMain implements MainClass {
 
         log.info("Converting machine learning model to pipeline model.");
         final EStructuralFeature learningUseCase = MllPackage.eINSTANCE.getMachineLearningModule_LearningUseCase();
-        final MLLModelConverter converter = new MLLModelConverter(dlLoader, helper, space, learningUseCase);
-        final PipelineModule pModule = converter.convert(module);
+        final PipelineModule pModule = transformer.transform(module, space, learningUseCase, dlLoader, helper);
 
         log.info("Running use case: learning");
         final ProgramInterpreter executor = new ProgramInterpreter((state) -> {

@@ -1,6 +1,7 @@
 #!/bin/sh
 
-RELEASE_PLUGINS="core.arff generator.main optimisation.api optimisation.ea optimisation.local_search optimisation.pso surrogate.api surrogate.knn surrogate.simple surrogate.smile surrogate.adaption" 
+# optimisation.ea
+RELEASE_PLUGINS="core.arff optimisation.api optimisation.local_search optimisation.pso generator.main surrogate.api surrogate.adaption surrogate.simple surrogate.smile surrogate.knn"
 EVOAL_HOME=evoal
 PROJECT_HOME=src/evoal/
 

@@ -6,8 +6,8 @@ package de.evoal.languages.model.generator.dsl.validation;
 
 import org.eclipse.xtext.validation.Check;
 
+import de.evoal.languages.model.base.BasePackage;
 import de.evoal.languages.model.generator.GeneratorModule;
-import de.evoal.languages.model.generator.GeneratorPackage;
 import de.evoal.languages.model.utils.validator.ModuleValidator;
 
 /**
@@ -31,7 +31,7 @@ public class GeneratorDSLValidator extends AbstractGeneratorDSLValidator {
 	
 	@Check
 	public void checkModule(final GeneratorModule module) {
-		ModuleValidator.check(module, module.getName(), "generator", msg -> error(msg, module, GeneratorPackage.Literals.GENERATOR_MODULE__NAME));
+		ModuleValidator.check(module, module.getName(), "generator", msg -> error(msg, module, BasePackage.Literals.MODULE__NAME));
 	}
 
 }

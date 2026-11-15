@@ -4,17 +4,20 @@ import com.google.inject.Injector;
 import de.evoal.core.api.cdi.Application;
 import de.evoal.core.api.cdi.BlackboardValue;
 import de.evoal.core.api.cdi.MainClass;
-import de.evoal.core.api.properties.PropertiesSpecification;
-import de.evoal.core.api.properties.io.PropertiesIOFactory;
-import de.evoal.core.api.properties.io.PropertiesReader;
-import de.evoal.core.api.properties.io.PropertiesWriter;
+import de.evoal.core.api.dynamic.EClassProvider;
+import de.evoal.core.api.ecore.io.EObjectIOFactory;
+import de.evoal.core.api.ecore.io.EObjectReader;
+import de.evoal.core.api.ecore.io.EObjectWriter;
+import de.evoal.core.api.ecore.misc.SpaceHelper;
 import de.evoal.core.arff.cdi.ArffBlackboardEntries;
 import de.evoal.languages.model.ddl.DataDescriptionModule;
 import de.evoal.languages.model.ddl.dsl.DataDescriptionLanguageStandaloneSetup;
 import de.evoal.languages.model.ddl.impl.DdlPackageImpl;
+import de.evoal.models.core.ecore.Space;
 import jakarta.enterprise.context.ApplicationScoped;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
@@ -45,12 +48,15 @@ public class ConvertArff implements MainClass {
     @BlackboardValue(ArffBlackboardEntries.OUTPUT_FILE)
     private File jsonFile;
 
+    @Inject
+    private EClassProvider dynamicEClassProvider;
+
     @Override
     public void run() {
-        final PropertiesSpecification specification = readSpecification();
+        final Space specification = readSpecification();
 
-        try (final PropertiesReader reader = PropertiesIOFactory.reader(arffFile, specification);
-             final PropertiesWriter writer = PropertiesIOFactory.writer(jsonFile, specification)
+        try (final EObjectReader reader = EObjectIOFactory.reader(arffFile, specification);
+             final EObjectWriter writer = EObjectIOFactory.writer(jsonFile, specification)
         ) {
 
             while(reader.hasNext()) {
@@ -61,13 +67,11 @@ public class ConvertArff implements MainClass {
         }
     }
 
-    private PropertiesSpecification readSpecification() {
+    private Space readSpecification() {
         final DataDescriptionModule model = loadSpecificationFile();
+        final EClass eClass = dynamicEClassProvider.eClassFor(model);
 
-        return PropertiesSpecification
-                    .builder()
-                    .addDescriptions(model.getDescriptions().stream())
-                    .build();
+        return new Space(eClass);
     }
 
     private DataDescriptionModule loadSpecificationFile() {
@@ -111,7 +115,7 @@ public class ConvertArff implements MainClass {
                 throw new IllegalArgumentException("DL file contains errors. Please fix the file.");
             }
 
-            return (DataDescriptionModule) resource.getContents().get(0);
+            return (DataDescriptionModule) resource.getContents().getFirst();
         } catch (final Exception e) {
             log.error("Unable to load data description configuration file '{}'.", ddlFile, e);
             throw new RuntimeException("Unable to load data description configuration file: " + ddlFile, e);

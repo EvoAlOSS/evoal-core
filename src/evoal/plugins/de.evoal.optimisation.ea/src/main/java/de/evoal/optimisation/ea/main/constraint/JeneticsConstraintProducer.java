@@ -9,7 +9,7 @@ import de.evoal.optimisation.api.constraints.calculation.CalculationStrategy;
 import de.evoal.optimisation.api.constraints.model.Constraint;
 import de.evoal.optimisation.api.constraints.model.Constraints;
 import de.evoal.optimisation.api.constraints.strategies.RepairStrategy;
-import de.evoal.optimisation.api.model.OptimisationFunction;
+import de.evoal.models.v202704.optimisation.execution.OptimisationFunction;
 import de.evoal.optimisation.ea.api.codec.CustomCodec;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.optimisation.main.constraints.constraint.utils.ConfigurationUtils;

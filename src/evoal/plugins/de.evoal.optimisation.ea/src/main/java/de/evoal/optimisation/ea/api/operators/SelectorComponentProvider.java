@@ -1,6 +1,4 @@
 package de.evoal.optimisation.ea.api.operators;
 
-import de.evoal.core.api.cdi.EvoalComponentProvider;
-
 public interface SelectorComponentProvider extends EvoalComponentProvider<SelectorComponent> {
 }

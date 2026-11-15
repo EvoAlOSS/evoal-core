@@ -17,8 +17,8 @@
  */
 package de.evoal.optimisation.pso.api.swarm;
 
-import de.evoal.optimisation.api.model.OptimisationValue;
-import de.evoal.core.api.properties.Properties;
+import de.evoal.models.v202704.optimisation.execution.OptimisationValue;
+import de.evoal.models.core.ecore.TypedEObject;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -32,7 +32,7 @@ public class State {
     /**
      * Current position.
      */
-    private Properties position;
+    private TypedEObject position;
 
     /**
      * Current velocity.
@@ -44,11 +44,11 @@ public class State {
      */
     private OptimisationValue fitness;
 
-    public State(final Properties position, final OptimisationValue fitness) {
+    public State(final TypedEObject position, final OptimisationValue fitness) {
         this.position = position;
         this.fitness = fitness;
 
-        this.velocity = new Double[position.size()];
+        this.velocity = new Double[position.eSpace().size()];
         for (int i = 0; i < velocity.length; i++) {
             this.velocity[i] = 0.;
         }

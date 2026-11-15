@@ -17,7 +17,8 @@
  */
 package de.evoal.optimisation.pso.api.optimiser;
 
-import de.evoal.core.api.cdi.EvoalComponent;
+import java.util.random.RandomGenerator;
+import de.evoal.models.core.cdi.EvoalComponent;
 import de.evoal.optimisation.pso.api.swarm.Particle;
 import de.evoal.optimisation.pso.api.swarm.State;
 
@@ -33,10 +34,13 @@ public interface Mover extends EvoalComponent<Mover> {
      * @param neighbors Neighbors of particle being moved.
      * @param currentIteration Current iteration.
      * @param maxIterations Max number of iterations.
+     * @param random The random generator of the particle. Movers must not use other generators,
+     *   since the particles are moved in parallel.
      */
     public void moveParticle(final State current,
                              final State personalBest,
                              final Particle[] neighbors,
                              final int currentIteration,
-                             final int maxIterations);
+                             final int maxIterations,
+                             final RandomGenerator random);
 }

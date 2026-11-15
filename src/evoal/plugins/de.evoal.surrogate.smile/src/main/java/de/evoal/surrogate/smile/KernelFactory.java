@@ -3,6 +3,7 @@ package de.evoal.surrogate.smile;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import de.evoal.core.api.dynamic.DynamicEClassProvider;
 import de.evoal.languages.model.base.definitions.ClassDefinition;
 import de.evoal.languages.model.base.expressions.Attribute;
 import de.evoal.languages.model.base.expressions.Instance;
@@ -10,6 +11,7 @@ import de.evoal.languages.model.dl.DefinitionModule;
 import de.evoal.languages.model.interpreter.ConstantEvaluator;
 import de.evoal.surrogate.api.io.pson.Parameter;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,7 +33,7 @@ public final class KernelFactory {
 	public static final String KERNEL_PARAMETER = "kernel";
 
 	public static final String KERNEL_1_PARAMETER = "kernel-1";
-	public static final String KERNEL_2_PARAMETER = "kernel-1";
+	public static final String KERNEL_2_PARAMETER = "kernel-2";
 
 	public static final String TYPE_PARAMETER = "_type";
 
@@ -235,21 +237,26 @@ public final class KernelFactory {
         }
     */
 	private final static ConstantEvaluator evaluator = new ConstantEvaluator();
-	public static Map<String, Object> mllToConfiguration(final Instance object) {
-		final ClassDefinition definition = object.getDefinition();
 
+	/**
+	 * Converts a runtime kernel configuration into the parameter map that is used for
+	 *   creating the SMILE kernel and that is stored in the PSON file.
+	 */
+	public static Map<String, Object> toKernelConfiguration(final EObject kernel) {
 		final Map<String, Object> result = new HashMap<>();
-		result.put("_type", ((DefinitionModule)definition.eContainer()).getName() + "." + definition.getName());
+		result.put(TYPE_PARAMETER, DynamicEClassProvider.dlTypeOf(kernel));
 
-		for(final Attribute attr : object.getAttributes()) {
-			Object value = attr.getValue();
-			value = evaluator.doSwitch((EObject) value);
-
-			if(value instanceof Instance instance) {
-				value = mllToConfiguration(instance);
+		for(final EStructuralFeature feature : kernel.eClass().getEAllStructuralFeatures()) {
+			if(!kernel.eIsSet(feature)) {
+				continue;
 			}
 
-			result.put(attr.getDefinition().getName(), value);
+			Object value = kernel.eGet(feature);
+			if(value instanceof EObject nested) {
+				value = toKernelConfiguration(nested);
+			}
+
+			result.put(feature.getName(), value);
 		}
 
 		return result;

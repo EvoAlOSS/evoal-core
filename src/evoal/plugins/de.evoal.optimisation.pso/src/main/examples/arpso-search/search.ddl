@@ -1,12 +1,12 @@
+import "definitions" from 'de.evoal.core.constraints';
 module search {
 	data:
 		/**
 		 * Source dimension of the training data.
 		 */
-		quotient real data 'x:0' with constraints:
-            value >= -5.12;
-            value <= 5.12;
-        ;
+		@LowerBoundary { boundary := -5.12; inclusive := true; }
+		@UpperBoundary { boundary := 5.12; inclusive := true; }
+		quotient real data 'x:0';
 
 
 		/**

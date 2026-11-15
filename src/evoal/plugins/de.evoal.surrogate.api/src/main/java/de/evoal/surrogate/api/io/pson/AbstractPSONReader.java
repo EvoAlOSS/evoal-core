@@ -1,6 +1,6 @@
 package de.evoal.surrogate.api.io.pson;
 
-import de.evoal.core.api.ecore.Space;
+import de.evoal.models.core.ecore.Space;
 import de.evoal.surrogate.api.function.ModelFunction;
 import de.evoal.surrogate.api.io.ModelReader;
 import lombok.Getter;
@@ -9,6 +9,7 @@ import lombok.Setter;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
 import java.util.Collection;
+import java.util.List;
 
 public abstract class AbstractPSONReader<F extends ModelFunction, T extends PSONModelStorage> implements ModelReader<F, T> {
     /**
@@ -41,5 +42,13 @@ public abstract class AbstractPSONReader<F extends ModelFunction, T extends PSON
                 .get()
                 .getOutputParameters()
                 .get(feature.getName());
+    }
+
+    @Override
+    public Collection<Parameter> getInputFeatureInformation(final EStructuralFeature feature) {
+        return storage.getConfiguration()
+                .get()
+                .getInputParameters()
+                .getOrDefault(feature.getName(), List.of());
     }
 }

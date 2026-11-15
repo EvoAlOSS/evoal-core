@@ -3,6 +3,7 @@
  */
 package de.evoal.languages.model.execution;
 
+import de.evoal.languages.model.base.BasePackage;
 import de.evoal.languages.model.base.expressions.ExpressionsPackage;
 
 import org.eclipse.emf.ecore.EAttribute;
@@ -76,7 +77,7 @@ public interface ExecutionPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_MODULE__IMPORTS = 0;
+	int EXECUTION_MODULE__IMPORTS = BasePackage.MODULE__IMPORTS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -85,7 +86,7 @@ public interface ExecutionPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_MODULE__NAME = 1;
+	int EXECUTION_MODULE__NAME = BasePackage.MODULE__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Program</b></em>' containment reference.
@@ -94,7 +95,7 @@ public interface ExecutionPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_MODULE__PROGRAM = 2;
+	int EXECUTION_MODULE__PROGRAM = BasePackage.MODULE_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Module</em>' class.
@@ -103,7 +104,7 @@ public interface ExecutionPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_MODULE_FEATURE_COUNT = 3;
+	int EXECUTION_MODULE_FEATURE_COUNT = BasePackage.MODULE_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.languages.model.execution.impl.ProgramImpl <em>Program</em>}' class.
@@ -573,28 +574,6 @@ public interface ExecutionPackage extends EPackage {
 	EClass getExecutionModule();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.execution.ExecutionModule#getImports <em>Imports</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Imports</em>'.
-	 * @see de.evoal.languages.model.execution.ExecutionModule#getImports()
-	 * @see #getExecutionModule()
-	 * @generated
-	 */
-	EReference getExecutionModule_Imports();
-
-	/**
-	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.execution.ExecutionModule#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see de.evoal.languages.model.execution.ExecutionModule#getName()
-	 * @see #getExecutionModule()
-	 * @generated
-	 */
-	EAttribute getExecutionModule_Name();
-
-	/**
 	 * Returns the meta object for the containment reference '{@link de.evoal.languages.model.execution.ExecutionModule#getProgram <em>Program</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -995,22 +974,6 @@ public interface ExecutionPackage extends EPackage {
 		 * @generated
 		 */
 		EClass EXECUTION_MODULE = eINSTANCE.getExecutionModule();
-
-		/**
-		 * The meta object literal for the '<em><b>Imports</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference EXECUTION_MODULE__IMPORTS = eINSTANCE.getExecutionModule_Imports();
-
-		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute EXECUTION_MODULE__NAME = eINSTANCE.getExecutionModule_Name();
 
 		/**
 		 * The meta object literal for the '<em><b>Program</b></em>' containment reference feature.

@@ -6,7 +6,6 @@ import "definitions" from de.evoal.pipeline.benchmarks;
 import "definitions" from de.evoal.pipeline.optimisation;
 
 
-import "definitions" from de.evoal.optimisation.ea.optimisation;
 import "definitions" from de.evoal.optimisation.pso.optimisation;
 
 import "data" from 'search';
@@ -22,6 +21,8 @@ module 'search' {
 		}
 		
 		and minimise data 'y:0'
+
+		document [ 'candidates-per-iteration' {} ].
 	}
 
 	configure 'particle-swarm-optimisation' for 'example-search' {
@@ -39,6 +40,5 @@ module 'search' {
 		'comparator' := 'numeric-comparator' {};
 		'optimisation-function' := 'problem-function' {};
 		'stopping-criteria' := [ 'iteration-count' { 'maximum-iterations' := 200; } ];
-		document := [ 'candidates-per-iteration' {} ];
 	}
 }

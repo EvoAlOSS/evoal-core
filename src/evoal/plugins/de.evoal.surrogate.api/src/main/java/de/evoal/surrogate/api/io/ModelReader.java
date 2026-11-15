@@ -1,6 +1,6 @@
 package de.evoal.surrogate.api.io;
 
-import de.evoal.core.api.ecore.Space;
+import de.evoal.models.core.ecore.Space;
 import de.evoal.surrogate.api.function.ModelFunction;
 import de.evoal.surrogate.api.io.pson.Parameter;
 import de.evoal.surrogate.api.training.ModelLearner;
@@ -37,6 +37,18 @@ public interface ModelReader<F extends ModelFunction, T extends ModelStorage> {
      * @return Output feature information for the given feature.
      */
     Collection<Parameter> getOutputFeatureInformation(final EStructuralFeature feature);
+
+    /**
+     * Returns the information that was stored for an input feature together with the
+     *   model, e.g., by a goodness-of-fit calculator.
+     *
+     * @param feature The input feature.
+     * @return The stored information, or an empty collection if the format does not
+     *   support it or nothing was stored.
+     */
+    default Collection<Parameter> getInputFeatureInformation(final EStructuralFeature feature) {
+        return List.of();
+    }
 
     /**
      * Sets the input and output space of the function to read.

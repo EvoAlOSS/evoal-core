@@ -2,8 +2,9 @@
  */
 package de.evoal.languages.model.base.impl;
 
-import de.evoal.languages.model.base.*;
-
+import de.evoal.languages.model.base.BaseFactory;
+import de.evoal.languages.model.base.BasePackage;
+import de.evoal.languages.model.base.Import;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;

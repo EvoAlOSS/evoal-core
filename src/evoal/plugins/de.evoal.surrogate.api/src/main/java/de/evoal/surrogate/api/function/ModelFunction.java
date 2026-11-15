@@ -3,8 +3,8 @@ package de.evoal.surrogate.api.function;
 import lombok.Getter;
 import lombok.NonNull;
 
-import de.evoal.core.api.ecore.Space;
-import de.evoal.core.api.ecore.TypedEObject;
+import de.evoal.models.core.ecore.Space;
+import de.evoal.models.core.ecore.TypedEObject;
 
 /**
  * Base class for regression functions storing the input and output properties.

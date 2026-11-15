@@ -1,7 +1,7 @@
 package de.evoal.pipeline.impl.internal;
 
 import de.evoal.core.api.utils.Requirements;
-import de.evoal.languages.model.pipeline.PipelineDefinition;
+import de.evoal.models.v202704.pipeline.PipelineDefinition;
 import de.evoal.pipeline.api.model.PipelineSource;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
@@ -10,12 +10,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import de.evoal.languages.model.pipeline.ConcreteStep;
-import de.evoal.languages.model.pipeline.PipelineStep;
-import de.evoal.languages.model.pipeline.Step;
+import de.evoal.models.v202704.pipeline.ConcreteStep;
+import de.evoal.models.v202704.pipeline.PipelineStep;
+import de.evoal.models.v202704.pipeline.Step;
 
 import de.evoal.core.api.cdi.BeanFactory;
-import de.evoal.core.api.ecore.Space;
+import de.evoal.models.core.ecore.Space;
 
 import de.evoal.pipeline.api.model.PipelineComponent;
 import de.evoal.pipeline.api.model.PipelineComponentImpl;
@@ -98,12 +98,12 @@ public class PipelineInstantiator {
      */
     private PipelineComponent toComponent(final Step step) {
         if(step instanceof ConcreteStep concrete) {
-            log.info("Instantiating component {}", concrete.getInstance().getDefinition().getName());
+            log.info("Instantiating component {}", concrete.getConfiguration().eClass().getName());
 
             final Space inputSpace = space.subSpace(concrete.getReads());
             final Space outputSpace = space.subSpace(concrete.getWrites());
 
-            return BeanFactory.createComponent(PipelineComponentImpl.class, concrete.getInstance(), c -> c.setFeatures(space, inputSpace, outputSpace));
+            return BeanFactory.createComponent(PipelineComponentImpl.class, concrete.getConfiguration(), c -> c.setFeatures(space, inputSpace, outputSpace));
         } else if(step instanceof PipelineStep pipeline) {
             return definitionToComposite(pipeline.getDefinition());
         } else {

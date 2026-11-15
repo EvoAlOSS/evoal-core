@@ -1,11 +1,11 @@
 package de.evoal.pipeline.impl.components.distributions;
 
-import de.evoal.languages.model.base.expressions.Instance;
 import de.evoal.pipeline.api.distribution.Distribution;
 import de.evoal.pipeline.api.distribution.DistributionFactory;
 import de.evoal.pipeline.api.model.PipelineComponentImpl;
-import de.evoal.core.api.ecore.TypedEObject;
+import de.evoal.models.core.ecore.TypedEObject;
 import lombok.NonNull;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
 import jakarta.enterprise.context.Dependent;
@@ -26,7 +26,7 @@ public class DistributionBasedData extends PipelineComponentImpl {
     private DistributionFactory factory;
 
     @Override
-    public DistributionBasedData init(final Instance configuration) {
+    public DistributionBasedData init(final EObject configuration) {
         distributions = factory.readDistributions(configuration, "distributions");
 
         return this;

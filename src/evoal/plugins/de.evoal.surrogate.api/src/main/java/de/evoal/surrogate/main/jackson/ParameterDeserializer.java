@@ -1,8 +1,8 @@
 package de.evoal.surrogate.main.jackson;
 
 import de.evoal.core.api.ecore.EObjectPair;
-import de.evoal.core.api.ecore.Space;
-import de.evoal.core.api.ecore.TypedEObject;
+import de.evoal.models.core.ecore.Space;
+import de.evoal.models.core.ecore.TypedEObject;
 import de.evoal.core.api.utils.Requirements;
 import de.evoal.surrogate.api.io.pson.Parameter;
 import lombok.Setter;
@@ -206,18 +206,16 @@ public class ParameterDeserializer extends StdDeserializer<Parameter> {
     }
 
     private Object getMatrixValue(final JsonParser parser) {
-        advance(parser);
-        assertFieldName(parser, "nrows");
+        // same token handling as getDoubleArrayValue: the parser is at the first field name
+        assertFieldNameAndAdvance(parser, "nrows");
         final int nrows = parser.getValueAsInt();
-
         advance(parser);
-        assertFieldName(parser, "ncols");
+
+        assertFieldNameAndAdvance(parser, "ncols");
         final int ncols = parser.getValueAsInt();
-
         advance(parser);
-        assertFieldName(parser, "value");
 
-        advance(parser);
+        assertFieldNameAndAdvance(parser, "value");
 
         final DenseMatrix result = DenseMatrix.zeros(ScalarType.Float64, nrows, ncols);
         for(int i = 0; i < nrows; ++i) {
@@ -226,6 +224,7 @@ public class ParameterDeserializer extends StdDeserializer<Parameter> {
                 result.set(i, j, parser.getValueAsDouble());
             }
         }
+        advance(parser);
         assertArrayEnd(parser);
 
         return result;

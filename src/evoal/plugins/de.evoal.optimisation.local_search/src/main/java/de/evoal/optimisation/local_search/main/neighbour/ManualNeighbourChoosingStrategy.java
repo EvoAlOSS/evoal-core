@@ -1,134 +1,173 @@
 package de.evoal.optimisation.local_search.main.neighbour;
 
-import de.evoal.core.api.languages.AttributeEvaluator;
-import de.evoal.core.api.utils.AttributeHelper;
-import de.evoal.core.api.properties.Properties;
-import de.evoal.core.api.properties.PropertySpecification;
-import de.evoal.core.api.utils.VariableToPropertiesHelper;
-
-import de.evoal.languages.model.base.expressions.Instance;
-import de.evoal.languages.model.interpreter.ArithmeticNumberOperations;
-import de.evoal.optimisation.local_search.api.neighbour.NeighbourChoosingStrategy;
+import java.util.*;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
-import java.util.Arrays;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.Stream;
-import java.util.Iterator;
-import java.util.stream.StreamSupport;
-import java.util.Spliterators;
+
+import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
+
+import de.evoal.languages.model.interpreter.numeric.NumericConversions;
+
+import de.evoal.models.core.ecore.Space;
+import de.evoal.models.core.ecore.TypedEObject;
+import de.evoal.core.api.ecore.info.FeatureBoundaries;
+import de.evoal.core.api.ecore.misc.EClassifierHelper;
+import de.evoal.core.api.utils.AttributeHelper;
+import de.evoal.core.api.utils.VariableToEObjectHelper;
+
+import de.evoal.optimisation.local_search.api.neighbour.NeighbourChoosingStrategy;
+
 
 /**
- * The manual neighbour choosing strategy generates neighbours in real-valued search spaces.
+ * The manual neighbour-choosing strategy generates neighbours in numeric search spaces.
  * All possible permutations (addition of step size, subtraction of step size, identity) are
- * generated as neighbours of the current point.
+ * generated as neighbours of the current point, except the unchanged point itself. For n
+ * features, there are 3<sup>n</sup> - 1 neighbours, so at most 19 features are supported.
+ *
+ * Neighbour values have the type of their feature. Neighbours outside of the boundaries of
+ * a feature ({@link FeatureBoundaries}) are skipped. Non-numeric features are copied unchanged.
  */
 @Named("de.evoal.optimisation.local_search.optimisation.manual-strategy")
 @Dependent
 public class ManualNeighbourChoosingStrategy implements NeighbourChoosingStrategy {
     @Inject
-    protected AttributeEvaluator evaluator;
-    @Inject
     protected AttributeHelper helper;
+
     @Inject
-    protected VariableToPropertiesHelper variableToPropertiesHelper;
-	private Properties stepValues;
+    protected VariableToEObjectHelper variableHelper;
 
+    @Inject
+    protected FeatureBoundaries boundaries;
 
-    private Properties createProperties(Properties currentBestCandidate) {
-        final Properties props = new Properties(currentBestCandidate.getSpecification());
-        props.put(currentBestCandidate.getSpecification().get(0), 0.0);
-        return props;
+    /**
+     * The step sizes, already converted to the types of the features.
+     */
+	private TypedEObject stepValues;
+
+    @Inject @Named("search-space")
+    private Space space;
+
+    @Override
+    public Stream<TypedEObject> neighbours(final TypedEObject currentBestCandidate) {
+        final EStructuralFeature[] orderedFeatures = space.toArray(new EStructuralFeature[0]);
+        final int numberOfNeighbours = (int) Math.pow(3, orderedFeatures.length);
+
+        return IntStream.range(0, numberOfNeighbours)
+                        .mapToObj(index -> toOperations(index, orderedFeatures.length))
+                        .filter(ManualNeighbourChoosingStrategy::changesCandidate)
+                        .map(operations -> toNeighbour(currentBestCandidate, orderedFeatures, operations))
+                        .flatMap(Optional::stream);
     }
 
     @Override
-    public Stream<Properties> neighbours(final Properties currentBestCandidate) {
-        NeighbourIterator iterator = new NeighbourIterator(currentBestCandidate);
-        return StreamSupport.stream(Spliterators.spliteratorUnknownSize(iterator, 0), false);
-    }
-
-    @Override
-    public ManualNeighbourChoosingStrategy init(final Instance config) {
-        final  List<Instance> sv = helper.lookup(config, "step-size");
-        this.stepValues = variableToPropertiesHelper.variablesToProperties(sv);
+    public ManualNeighbourChoosingStrategy init(final EObject config) {
+        final  List<EObject> sv = helper.lookup(config, "step-size");
+        this.stepValues = variableHelper.fromVariables(sv, space);
         return this;
     }
 
     /**
-     * iterates over all possible neighbours based on
-     * 3^n possible combinations of -1, 0, and 1 of length n, where
-     * n is the cardinality of the search space specification.
+     * Calculates the combination of -1, 0, and 1 for the given neighbour index (a number
+     *   in the base 3). The order is the same as before: the first feature changes fastest
+     *   and the all -1 combination comes last.
      */
-    private class NeighbourIterator implements Iterator<Properties> {
+    private static int[] toOperations(final int index, final int length) {
+        final int[] operations = new int[length];
 
-        final int[] elements = new int[]{-1, 0, 1};
-        private int currentIndex = 0;
-        final int length;
-        final Properties baseCandidate;
-        private List<Integer[]> combinations;
-
-        public NeighbourIterator(Properties baseCandidate) {
-            this.baseCandidate = baseCandidate;
-            this.length = baseCandidate.size();
-            this.combinations = createCombinations();
-        }
-        @Override
-        public boolean hasNext() {
-            return this.currentIndex < combinations.size();
+        int remaining = index + 1;
+        for(int i = 0; i < length; i++) {
+            operations[i] = remaining % 3 - 1;
+            remaining /= 3;
         }
 
-        @Override
-        public Properties next() {
-            Properties newCandidate = createProperties(baseCandidate);
+        return operations;
+    }
 
-            for(int j=0; j < baseCandidate.size(); j++) {
-                final PropertySpecification ps = baseCandidate.getSpecification().get(j);
+    /**
+     * @return {@code false} for the identity, i.e., if no feature is changed.
+     */
+    private static boolean changesCandidate(final int[] operations) {
+        return Arrays.stream(operations).anyMatch(operation -> operation != 0);
+    }
 
-                if(this.combinations.get(currentIndex)[j] > 0){
-                    //add step size
-                    newCandidate.put(ps, ArithmeticNumberOperations.add(baseCandidate.get(ps), stepValues.get(ps)));
-                }
-                else if (this.combinations.get(currentIndex)[j] < 0) {
-                    //subtract step size
-                    newCandidate.put(ps, ArithmeticNumberOperations.minus(baseCandidate.get(ps), stepValues.get(ps)));
-                }
-                else {
-                    //don't change the new candidate on this position
-                    newCandidate.put(ps, baseCandidate.get(ps));
-                }
-            }
-            this.currentIndex++;
-            return newCandidate;
-        }
+    /**
+     * Creates the neighbour for the given operations.
+     *
+     * @return The neighbour or nothing if a value is outside of the boundaries of its feature.
+     */
+    private Optional<TypedEObject> toNeighbour(final TypedEObject base, final EStructuralFeature[] features, final int[] operations) {
+        final TypedEObject neighbour = space.newEObject();
 
-        @Override
-        public void remove() {
+        for(int i = 0; i < features.length; i++) {
+            final EStructuralFeature feature = features[i];
+            final Optional<Object> value = neighbourValue(feature, base.eGet(feature), operations[i]);
 
-        }
-
-        private List<Integer[]> createCombinations() {
-            List<Integer[]> combinations = new ArrayList<>();
-            createCombinationsR(new Integer[this.length], 0, combinations);
-            Collections.shuffle(combinations);
-            return combinations;
-        }
-
-        /*recursively create combinations matrix*/
-        private void createCombinationsR(Integer[] array, int index, List<Integer[]> combinations) {
-            if (index == this.length) {
-                combinations.add(array.clone());
-                return;
+            if(value.isEmpty()) {
+                return Optional.empty();
             }
 
-            for (int el : this.elements) {
-                array[index] = el;
-                createCombinationsR(array, index+1, combinations);
-            }
+            neighbour.eSet(feature, value.get());
         }
 
+        return Optional.of(neighbour);
+    }
+
+    /**
+     * Calculates {@code base + operation * step} for a single feature.
+     *
+     * @return The value in the type of the feature or nothing if it is outside of the boundaries.
+     */
+    private Optional<Object> neighbourValue(final EStructuralFeature feature, final Object base, final int operation) {
+        final EClassifier type = feature.getEType();
+
+        if(EClassifierHelper.isReal(type)) {
+            final double value = NumericConversions.toDouble(base) + operation * NumericConversions.toDouble(stepValues.eGet(feature));
+            if(!isWithinBoundaries(feature, value)) {
+                return Optional.empty();
+            }
+
+            return Optional.of(NumericConversions.toType(value, type));
+        } else if(EClassifierHelper.isLongOrShorter(type)) {
+            final long value;
+            try {
+                // long arithmetic does not overflow silently like int arithmetic
+                value = Math.addExact(NumericConversions.toLong(base), operation * NumericConversions.toLong(stepValues.eGet(feature)));
+            } catch(final ArithmeticException e) {
+                return Optional.empty();
+            }
+
+            if(!isWithinBoundaries(feature, value)) {
+                return Optional.empty();
+            }
+
+            return Optional.of(NumericConversions.toType(value, type));
+        } else {
+            // non-numeric features are not changed
+            return Optional.of(base);
+        }
+    }
+
+    private boolean isWithinBoundaries(final EStructuralFeature feature, final double value) {
+        final FeatureBoundaries.Boundaries bounds = boundaries.get(feature);
+        final double lower = bounds.lower().doubleValue();
+        final double upper = bounds.upper().doubleValue();
+
+        return (bounds.lowerIncluded() ? lower <= value : lower < value)
+            && (bounds.UpperIncluded() ? value <= upper : value < upper);
+    }
+
+    private boolean isWithinBoundaries(final EStructuralFeature feature, final long value) {
+        final FeatureBoundaries.Boundaries bounds = boundaries.get(feature);
+        final long lower = bounds.lower().longValue();
+        final long upper = bounds.upper().longValue();
+
+        return (bounds.lowerIncluded() ? lower <= value : lower < value)
+            && (bounds.UpperIncluded() ? value <= upper : value < upper);
     }
 }

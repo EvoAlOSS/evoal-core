@@ -161,28 +161,8 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 	 * @generated
 	 */
 	@Override
-	public EAttribute getGeneratorModule_Name() {
-		return (EAttribute)generatorModuleEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getGeneratorModule_Imports() {
-		return (EReference)generatorModuleEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EReference getGeneratorModule_Pipelines() {
-		return (EReference)generatorModuleEClass.getEStructuralFeatures().get(2);
+		return (EReference)generatorModuleEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -192,7 +172,7 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 	 */
 	@Override
 	public EReference getGeneratorModule_Body() {
-		return (EReference)generatorModuleEClass.getEStructuralFeatures().get(3);
+		return (EReference)generatorModuleEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -355,8 +335,6 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 
 		// Create classes and their features
 		generatorModuleEClass = createEClass(GENERATOR_MODULE);
-		createEAttribute(generatorModuleEClass, GENERATOR_MODULE__NAME);
-		createEReference(generatorModuleEClass, GENERATOR_MODULE__IMPORTS);
 		createEReference(generatorModuleEClass, GENERATOR_MODULE__PIPELINES);
 		createEReference(generatorModuleEClass, GENERATOR_MODULE__BODY);
 
@@ -412,6 +390,7 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
+		generatorModuleEClass.getESuperTypes().add(theBasePackage.getModule());
 		pipelineDefinitionEClass.getESuperTypes().add(theExecutionPackage.getNamedVariable());
 		stepEClass.getESuperTypes().add(theExpressionsPackage.getLiteral());
 		pipelineStepEClass.getESuperTypes().add(this.getStep());
@@ -420,8 +399,6 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(generatorModuleEClass, GeneratorModule.class, "GeneratorModule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getGeneratorModule_Name(), ecorePackage.getEString(), "name", null, 1, 1, GeneratorModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getGeneratorModule_Imports(), theBasePackage.getImport(), null, "imports", null, 0, -1, GeneratorModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getGeneratorModule_Pipelines(), this.getPipelineDefinition(), null, "pipelines", null, 0, -1, GeneratorModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getGeneratorModule_Body(), theExecutionPackage.getBlock(), null, "body", null, 1, 1, GeneratorModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -483,12 +460,6 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 	 */
 	protected void createCollectionAnnotations() {
 		String source = "http://www.eclipse.org/OCL/Collection";
-		addAnnotation
-		  (getGeneratorModule_Imports(),
-		   source,
-		   new String[] {
-			   "nullFree", "false"
-		   });
 		addAnnotation
 		  (getGeneratorModule_Pipelines(),
 		   source,

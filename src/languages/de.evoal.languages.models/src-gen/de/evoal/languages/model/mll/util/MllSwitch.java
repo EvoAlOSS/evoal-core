@@ -72,6 +72,7 @@ public class MllSwitch<T> extends Switch<T> {
 			case MllPackage.MACHINE_LEARNING_MODULE: {
 				MachineLearningModule machineLearningModule = (MachineLearningModule)theEObject;
 				T result = caseMachineLearningModule(machineLearningModule);
+				if (result == null) result = caseModule(machineLearningModule);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -114,6 +115,21 @@ public class MllSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseTaskDescription(TaskDescription object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Module</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Module</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseModule(de.evoal.languages.model.base.Module object) {
 		return null;
 	}
 

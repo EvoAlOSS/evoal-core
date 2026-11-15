@@ -1,5 +1,4 @@
 import "definitions" from de.evoal.optimisation.core;
-import "definitions" from de.evoal.optimisation.ea.optimisation;
 
 module de.evoal.surrogate.optimisation {
 	/**
@@ -55,19 +54,7 @@ module de.evoal.surrogate.optimisation {
 	 * Use training data as initial population.
 	 */
 	type training extends 'initial-population' {
-	    'training-file' : string;
-	}
-	
-	/**
-	 * Repair individuals with training data.
-	 */
-	type 'repair-with-training' extends 'repair-strategy' {
-	}
-	/**
-	* The constraint statistics-writer collects information about the number of violated constraints. 
-	* For each individual it collects the number of violated constraints by category. 
-	*/
-	type 'constraint-statistics' extends 'statistics-writer' {
+	    'training-file' : optional string;
 	}
 	
 	/**

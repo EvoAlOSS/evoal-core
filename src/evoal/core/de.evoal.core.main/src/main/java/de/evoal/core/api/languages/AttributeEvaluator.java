@@ -1,18 +1,18 @@
 package de.evoal.core.api.languages;
 
+import de.evoal.core.api.dynamic.DynamicArrays;
 import de.evoal.languages.model.base.definitions.*;
 import de.evoal.languages.model.base.expressions.*;
-import de.evoal.languages.model.base.types.*;
-import de.evoal.languages.model.base.types.DataType;
-import de.evoal.languages.model.base.types.DefinitionReference;
 import de.evoal.languages.model.interpreter.ConstantEvaluator;
+import de.evoal.languages.model.interpreter.numeric.NumericConversions;
 import lombok.extern.slf4j.Slf4j;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 
 import jakarta.enterprise.context.ApplicationScoped;
-import java.util.HashMap;
+import org.eclipse.emf.ecore.EStructuralFeature;
+
 import java.util.List;
-import java.util.Map;
 import java.util.function.Function;
 
 /**
@@ -24,28 +24,23 @@ import java.util.function.Function;
 @Slf4j
 public class AttributeEvaluator {
     /**
-     * Map that caches default values of attributes.
-     */
-    private final Map<AttributeDefinition, Object> defaultValueCache = new HashMap<>();
-
-    /**
      * For evaluating expressions
      */
     private final ConstantEvaluator evaluator = new ConstantEvaluator();
 
-    public boolean attributeToBoolean(final Instance instance, final String attributeName) {
+    public boolean attributeToBoolean(final EObject instance, final String attributeName) {
         return (Boolean) attributeToObject(instance, attributeName);
     }
 
-    public DataDescription attributeToDataDescription(final Instance instance, final String attributeName) {
+    public DataDescription attributeToDataDescription(final EObject instance, final String attributeName) {
         return (DataDescription) attributeToObject(instance, attributeName);
     }
 
-    public double attributeToDouble(final Instance instance, final String attributeName) {
-        return attributeToNumber(instance, attributeName).doubleValue();
+    public double attributeToDouble(final EObject instance, final String attributeName) {
+        return convertNumber(attributeName, NumericConversions::toDouble, attributeToNumber(instance, attributeName));
     }
 
-    public double[] attributeToDoubleArray(final Instance instance, final String attributeName) {
+    public double[] attributeToDoubleArray(final EObject instance, final String attributeName) {
         final Object result = attributeToObject(instance, attributeName);
 
         if(!(result instanceof List<?> resultList)) {
@@ -62,12 +57,11 @@ public class AttributeEvaluator {
         }
 
         return resultList.stream()
-                .map(Number.class::cast)
-                .mapToDouble(Number::doubleValue)
+                .mapToDouble(v -> convertNumber(attributeName, NumericConversions::toDouble, v))
                 .toArray();
     }
 
-    public DataDescription[] attributeToDataDescriptionArray(final Instance instance, final String attributeName) {
+    public DataDescription[] attributeToDataDescriptionArray(final EObject instance, final String attributeName) {
         final Object result = attributeToObject(instance, attributeName);
 
         if(!(result instanceof List<?> resultList)) {
@@ -87,7 +81,7 @@ public class AttributeEvaluator {
                 .map(DataDescription.class::cast)
                 .toArray(DataDescription[]::new);
     }
-    public double[][] attributeToDoubleArrayArray(final Instance instance, final String attributeName) {
+    public double[][] attributeToDoubleArrayArray(final EObject instance, final String attributeName) {
         final Object result = attributeToObject(instance, attributeName);
 
         if(!(result instanceof List<?> resultList)) {
@@ -113,8 +107,7 @@ public class AttributeEvaluator {
         }
 
         final Function<List<?>, double []> conversion = l -> l.stream()
-                .map(Number.class::cast)
-                .mapToDouble(Number::doubleValue)
+                .mapToDouble(v -> convertNumber(attributeName, NumericConversions::toDouble, v))
                 .toArray();
 
         return resultList.stream()
@@ -123,34 +116,30 @@ public class AttributeEvaluator {
                 .toArray(double[][]::new);
     }
 
-    public Object attributeTo(final Instance instance, final String attributeName) {
+    /**
+     * Reads an attribute whose value is a (nested) configuration, i.e., an object of the
+     *   runtime model (an instance in the DSL).
+     *
+     * @return The configuration object.
+     */
+    public EObject attributeToEObject(final EObject instance, final String attributeName) {
         final Object result = attributeToObject(instance, attributeName);
 
-        if(result instanceof Instance
-            || result instanceof EnumLiteralDefinition) {
-            // nothing to do
-        } else {
-            log.error("Expression did not evaluate to an Instance or EnumLiteral for attribute {} which was expected.", attributeName);
+        if(!(result instanceof EObject eObject)) {
+            log.error("Expression did not evaluate to an instance for attribute {} which was expected.", attributeName);
             throw new IllegalStateException("Expression evaluation error. Please check your configuration.");
         }
 
-        return result;
+        return eObject;
     }
 
-    public Instance attributeToInstance(final Instance instance, final String attributeName) {
-        final Object result = attributeTo(instance, attributeName);
-
-        if(result instanceof Instance) {
-            // nothing to do
-        } else {
-            log.error("Expression did not evaluate to an Instance for attribute {} which was expected.", attributeName);
-            throw new IllegalStateException("Expression evaluation error. Please check your configuration.");
-        }
-
-        return (Instance)result;
-    }
-
-    public Instance [] attributeToInstanceArray(final Instance instance, final String attributeName) {
+    /**
+     * Reads an attribute whose value is an array of (nested) configurations, i.e., objects
+     *   of the runtime model (instances in the DSL).
+     *
+     * @return The configuration objects.
+     */
+    public EObject [] attributeToEObjectArray(final EObject instance, final String attributeName) {
         final Object result = attributeToObject(instance, attributeName);
 
         if(!(result instanceof List<?> resultList)) {
@@ -158,24 +147,37 @@ public class AttributeEvaluator {
             throw new IllegalStateException("Expression evaluation error. Please check your configuration.");
         }
 
-        final boolean allInstances = resultList.stream()
-                .allMatch(Instance.class::isInstance);
+        final boolean allEObjects = resultList.stream()
+                .allMatch(EObject.class::isInstance);
 
-        if(!allInstances) {
+        if(!allEObjects) {
             log.error("Expression did not evaluate to a list of instances for attribute {} which was expected.", attributeName);
             throw new IllegalStateException("Expression evaluation error. Please check your configuration.");
         }
 
         return resultList.stream()
-                .map(Instance.class::cast)
-                .toArray(Instance[]::new);
+                .map(EObject.class::cast)
+                .toArray(EObject[]::new);
     }
 
-    public int attributeToInteger(final Instance instance, final String attributeName) {
-        return attributeToNumber(instance, attributeName).intValue();
+    public int attributeToInteger(final EObject instance, final String attributeName) {
+        return convertNumber(attributeName, NumericConversions::toInteger, attributeToNumber(instance, attributeName));
     }
 
-    private Number attributeToNumber(final Instance instance, final String attributeName) {
+    /**
+     * Converts a numeric attribute value using {@link NumericConversions}, e.g., to
+     *   reject {@code 1.7} for an integer attribute instead of silently truncating it.
+     */
+    private static <T> T convertNumber(final String attributeName, final Function<Object, T> conversion, final Object value) {
+        try {
+            return conversion.apply(value);
+        } catch(final IllegalArgumentException e) {
+            log.error("Invalid value for attribute {}: {}", attributeName, e.getMessage());
+            throw new IllegalStateException("Invalid value for attribute '" + attributeName + "': " + e.getMessage() + " Please check your configuration.", e);
+        }
+    }
+
+    private Number attributeToNumber(final EObject instance, final String attributeName) {
         final Object result = attributeToObject(instance, attributeName);
 
         if(!(result instanceof Number number)) {
@@ -187,7 +189,7 @@ public class AttributeEvaluator {
     }
 
 
-    public String attributeToString(final Instance instance, final String attributeName) {
+    public String attributeToString(final EObject instance, final String attributeName) {
         final Object result = attributeToObject(instance, attributeName);
 
         if(!(result instanceof String string)) {
@@ -198,34 +200,19 @@ public class AttributeEvaluator {
         return string;
     }
 
-    /**
-     * @deprecated
-     */
-    public Object attributeToObject(final Attribute attribute) {
-        return evaluator.doSwitch(attribute.getValue());
-    }
-
-    private Object attributeToObject(final Instance instance, final String attributeName) {
+    private Object attributeToObject(final EObject instance, final String attributeName) {
         log.info("Attribute to object: {}", attributeName);
-        final Attribute attribute = instance.findAttribute(attributeName);
+        final EStructuralFeature feature = instance.eClass().getEStructuralFeature(attributeName);
+        final Object value = instance.eGet(feature);
 
-        Object result = null;
-
-        if(attribute == null) {
-            log.info("Attribute binding not found. Using default value.");
-            final AttributeDefinition definition = instance.getDefinition().findAttribute(attributeName);
-
-            if(defaultValueCache.containsKey(definition)) {
-                result = defaultValueCache.get(definition);
-            } else {
-                result = evaluator.doSwitch(definition.getInitialisation());
-                defaultValueCache.put(definition, result);
-            }
-        } else {
-            result = attributeToObject(attribute);
+        if(value == null) {
+            // default values are assigned when creating the runtime object, so this is a missing required value
+            log.error("No value for attribute '{}' of '{}'.", attributeName, instance.eClass().getName());
+            throw new IllegalStateException("No value for attribute '" + attributeName + "' of '" + instance.eClass().getName() + "'. Please check your configuration.");
         }
 
-        return result;
+        // converts array objects of multi-dimensional arrays into nested lists
+        return DynamicArrays.toJava(value);
     }
 
     /**
@@ -244,59 +231,29 @@ public class AttributeEvaluator {
         return evaluator.doSwitch((EObject) current);
     }
 
-    public Object attributeToJava(final Instance instance, final String name, final Type target) {
-        if(target instanceof RealType) {
-            return attributeToDouble(instance, name);
-        } else if(target instanceof IntType) {
-            return attributeToInteger(instance, name);
-        } else if(target instanceof BooleanType) {
+    /**
+     * Reads the attribute and converts it to the Java type of the given Ecore classifier,
+     *   i.e., the type of the attribute's feature. Numeric values are converted using
+     *   {@link NumericConversions} (element-wise for multi-valued features), booleans and
+     *   strings are checked. All other values, e.g., instances, multi-dimensional arrays,
+     *   data, and literals, are returned as they are (see {@link #attributeToObject}).
+     *
+     * @param instance The configuration to read from.
+     * @param name The attribute name.
+     * @param target The Ecore type of the attribute, e.g., {@code EDouble}.
+     * @return The converted value.
+     */
+    public Object attributeToJava(final EObject instance, final String name, final EClassifier target) {
+        final Class<?> targetClass = target.getInstanceClass();
+
+        if(NumericConversions.isNumeric(target)) {
+            return convertNumber(name, v -> NumericConversions.toType(v, target), attributeToObject(instance, name));
+        } else if(targetClass == boolean.class || targetClass == Boolean.class) {
             return attributeToBoolean(instance, name);
-        } else if(target instanceof DefinitionReference) {
-            return attributeTo(instance, name);
-        } else if(target instanceof ArrayType aType) {
-            return attributeToObject(instance, name);
-        } else {
-            log.warn("Converting type {} by using Object.", target.eClass().getName());
-            return attributeToObject(instance, name);
-        }
-    }
-
-    private Object attributeToList(final Object current, final Type type) {
-        final List<Object> array = (List<Object>)evaluate(current);
-
-        return array.stream()
-                .map(current1 -> convertToJava(current1, ((ArrayType)type).getElements()))
-                .toArray();
-    }
-
-    private Object convertToJava(final Object current, final Type type) {
-        log.info("Converting {} to {}", current, type);
-
-        if((type instanceof DefinitionReference || type instanceof DataType) && current instanceof OrExpression) {
-            return evaluate(current);
-        } else if(type instanceof LiteralType) {
-            if(!(current instanceof EObject)) {
-                log.info("Current is not an EObject, returning value.");
-                return current;
-            }
-
-            return readExpression(current, type);
-        } else if(type instanceof ArrayType) {
-            return readArray(current, type);
+        } else if(targetClass == String.class) {
+            return attributeToString(instance, name);
         }
 
-        return current;
-    }
-
-    private Object readArray(final Object current, final Type type) {
-        final List<Object> array = (List<Object>)evaluate(current);
-
-        return array.stream()
-                .map(current1 -> convertToJava(current1, ((ArrayType)type).getElements()))
-                .toArray();
-    }
-
-    private Object readExpression(final Object current, final Type type) {
-        return evaluate(current);
+        return attributeToObject(instance, name);
     }
 }

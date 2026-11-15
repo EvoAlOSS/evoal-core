@@ -17,17 +17,18 @@
  */
 package de.evoal.optimisation.pso.api.swarm;
 
+import de.evoal.core.api.random.RandomService;
 import de.evoal.core.api.cdi.Component;
 import de.evoal.core.api.cdi.ConfigurationValue;
-import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.utils.AttributeHelper;
+import de.evoal.models.v202704.optimisation.execution.OptimisationValue;
+import de.evoal.models.core.ecore.TypedEObject;
 import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
 import de.evoal.optimisation.pso.api.optimiser.Mover;
 import de.evoal.optimisation.pso.api.optimiser.Swarm;
 import de.evoal.optimisation.pso.main.impl.NeighborhoodTopology;
 import de.evoal.optimisation.api.model.InitialCandidatesProvider;
-import de.evoal.optimisation.api.model.OptimisationFunction;
-import de.evoal.optimisation.api.model.OptimisationValue;
+import de.evoal.models.v202704.optimisation.execution.OptimisationFunction;
 import de.evoal.optimisation.api.model.OptimisationValueComparator;
 import lombok.Getter;
 import lombok.Setter;
@@ -68,6 +69,9 @@ public class DefaultSwarm implements Swarm {
 
     @Inject @Component
     private InitialCandidatesProvider provider;
+
+    @Inject
+    private RandomService randomService;
 
     @Inject
     @ConfigurationValue(entry = OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.size-of-population")
@@ -114,8 +118,8 @@ public class DefaultSwarm implements Swarm {
     @Override
     public void evaluate() {
         for (Particle particle : particles) {
-            final Properties candidate = particle.getCurrentPosition();
-            final OptimisationValue ov = comparator.toValue(optimisationFunction.apply(candidate));
+            final TypedEObject candidate = particle.getCurrentPosition();
+            final OptimisationValue ov = comparator.toValue(optimisationFunction.evaluate(candidate));
 
             particle.setCurrentFitness(ov);
 
@@ -131,11 +135,12 @@ public class DefaultSwarm implements Swarm {
         log.info("Initializing swarm with {} members.", sizeOfPopulation);
         final AtomicInteger counter = new AtomicInteger();
 
-        particles = ((Stream<Properties>)provider.create())
+        particles = ((Stream<TypedEObject>)provider.create())
                 .limit(sizeOfPopulation)
                 .map(candidate -> {
-                    final OptimisationValue ov = comparator.toValue(optimisationFunction.apply(candidate));
-                    return new Particle(counter.getAndIncrement(), new State(candidate, ov), mover);
+                    final OptimisationValue ov = comparator.toValue(optimisationFunction.evaluate(candidate));
+                    final int id = counter.getAndIncrement();
+                    return new Particle(id, new State(candidate, ov), mover, randomService.random("de.evoal.optimisation.pso/particle-" + id));
                 })
                 .toArray(Particle[]::new);
     }

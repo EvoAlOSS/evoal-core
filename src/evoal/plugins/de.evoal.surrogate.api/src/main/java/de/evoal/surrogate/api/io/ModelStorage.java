@@ -1,6 +1,6 @@
 package de.evoal.surrogate.api.io;
 
-import de.evoal.core.api.ecore.Space;
+import de.evoal.models.core.ecore.Space;
 
 import java.net.URI;
 

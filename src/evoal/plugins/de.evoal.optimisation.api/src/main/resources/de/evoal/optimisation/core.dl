@@ -1,4 +1,5 @@
 import "definitions" from 'de.evoal.core.constraints';
+import "definitions" from 'de.evoal.core.base';
 
 module de.evoal.optimisation.core {
 	/**
@@ -11,7 +12,7 @@ module de.evoal.optimisation.core {
 	 * Abstract base type for functions mapping a solution from the search to
 	 *   the optimisation space.
 	 */
-	abstract type 'optimisation-function' {		
+	abstract type 'optimisation-function' extends configuration {		
 	}
 	
 	/**
@@ -128,7 +129,7 @@ module de.evoal.optimisation.core {
     /**
 	 * Abstract base type for optimisation algorithms.
 	 */	
-	abstract type algorithm {
+	abstract type algorithm extends configuration {
         /**
          * Source for initial candidates.
          */
@@ -153,9 +154,9 @@ module de.evoal.optimisation.core {
 
 	/**
 	 * Comparator for comparing optimisation function results to each other.
-	 */	
-	abstract type comparator {}
-	
+	 */
+	abstract type comparator extends configuration {}
+
 	/**
 	 * Comparator that calculates a weighted sum for multi-dimensional optimisation
 	 *   values.
@@ -165,7 +166,7 @@ module de.evoal.optimisation.core {
 		 * Weights for summing the dimensions.
 		 */
         @MinimumNumberOfElements{ bound := 1; }
-		weights : array real;
+		weights : array instance variable;
 	}
 
 	/**
@@ -180,7 +181,7 @@ module de.evoal.optimisation.core {
         @MinimumNumberOfElements{ bound := 1; }
 	    order : array data;
 	}
-	
+
 	/**
 	 * Comparator for a single number-based fitness value (such as a double).
 	 */
@@ -201,7 +202,7 @@ module de.evoal.optimisation.core {
 	/**
 	 * A fitness function during the optimisation (not at the problem-level).
 	 */
-	abstract type 'fitness-function' {}
+	abstract type 'fitness-function' extends 'optimisation-function' {}
 	
 	/**
 	 * Abstract base class for all fitness functions that call a subsequent fitness
@@ -229,7 +230,7 @@ module de.evoal.optimisation.core {
 	/**
 	 * Abstract base type for initial population strategies.
 	 */
-	abstract type 'initial-population' {}
+	abstract type 'initial-population' extends configuration {}
 	
 	/**
 	 * Chooses the initial population randomly from the search space. The selection
@@ -261,7 +262,7 @@ module de.evoal.optimisation.core {
         'random': boolean := true;
     }
 	
-	abstract type 'statistics-writer' {
+	abstract type 'statistics-writer' extends configuration {
 	}
 
     /**
@@ -292,7 +293,6 @@ module de.evoal.optimisation.core {
 	     * If search space variables should be stored.
 	     */
 	    'store-search-space' : boolean := true;
-
 
 	    /**
 	     * If optimisation space variables should be stored.
@@ -345,7 +345,7 @@ module de.evoal.optimisation.core {
     /**
      * Base class for all stopping criteria of optimisation algorithms.
      */
-	abstract type 'stopping-criterion' {
+	abstract type 'stopping-criterion' extends configuration {
 	}
 
     /**

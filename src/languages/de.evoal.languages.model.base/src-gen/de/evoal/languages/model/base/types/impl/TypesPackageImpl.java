@@ -13,8 +13,10 @@ import de.evoal.languages.model.base.expressions.impl.ExpressionsPackageImpl;
 import de.evoal.languages.model.base.types.ArrayType;
 import de.evoal.languages.model.base.types.BaseType;
 import de.evoal.languages.model.base.types.BooleanType;
+import de.evoal.languages.model.base.types.ClassDefinitionReference;
 import de.evoal.languages.model.base.types.DataType;
 import de.evoal.languages.model.base.types.DefinitionReference;
+import de.evoal.languages.model.base.types.EnumDefinitionReference;
 import de.evoal.languages.model.base.types.ExpressionType;
 import de.evoal.languages.model.base.types.IntType;
 import de.evoal.languages.model.base.types.LiteralType;
@@ -26,6 +28,7 @@ import de.evoal.languages.model.base.types.TypesPackage;
 import de.evoal.languages.model.base.types.VoidType;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -121,6 +124,20 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * @generated
 	 */
 	private EClass definitionReferenceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass classDefinitionReferenceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass enumDefinitionReferenceEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -328,8 +345,48 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getDefinitionReference_Definition() {
-		return (EReference)definitionReferenceEClass.getEStructuralFeatures().get(0);
+	public EOperation getDefinitionReference__GetDefinition() {
+		return definitionReferenceEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getClassDefinitionReference() {
+		return classDefinitionReferenceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getClassDefinitionReference_Definition() {
+		return (EReference)classDefinitionReferenceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getEnumDefinitionReference() {
+		return enumDefinitionReferenceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getEnumDefinitionReference_Definition() {
+		return (EReference)enumDefinitionReferenceEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -385,7 +442,13 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		dataTypeEClass = createEClass(DATA_TYPE);
 
 		definitionReferenceEClass = createEClass(DEFINITION_REFERENCE);
-		createEReference(definitionReferenceEClass, DEFINITION_REFERENCE__DEFINITION);
+		createEOperation(definitionReferenceEClass, DEFINITION_REFERENCE___GET_DEFINITION);
+
+		classDefinitionReferenceEClass = createEClass(CLASS_DEFINITION_REFERENCE);
+		createEReference(classDefinitionReferenceEClass, CLASS_DEFINITION_REFERENCE__DEFINITION);
+
+		enumDefinitionReferenceEClass = createEClass(ENUM_DEFINITION_REFERENCE);
+		createEReference(enumDefinitionReferenceEClass, ENUM_DEFINITION_REFERENCE__DEFINITION);
 	}
 
 	/**
@@ -430,6 +493,8 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		literalTypeEClass.getESuperTypes().add(this.getType());
 		dataTypeEClass.getESuperTypes().add(this.getType());
 		definitionReferenceEClass.getESuperTypes().add(this.getType());
+		classDefinitionReferenceEClass.getESuperTypes().add(this.getDefinitionReference());
+		enumDefinitionReferenceEClass.getESuperTypes().add(this.getDefinitionReference());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(typeEClass, Type.class, "Type", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -455,8 +520,15 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 
 		initEClass(dataTypeEClass, DataType.class, "DataType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(definitionReferenceEClass, DefinitionReference.class, "DefinitionReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getDefinitionReference_Definition(), theDefinitionsPackage.getDefinition(), null, "definition", null, 1, 1, DefinitionReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(definitionReferenceEClass, DefinitionReference.class, "DefinitionReference", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEOperation(getDefinitionReference__GetDefinition(), theDefinitionsPackage.getTypeDefinition(), "getDefinition", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(classDefinitionReferenceEClass, ClassDefinitionReference.class, "ClassDefinitionReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getClassDefinitionReference_Definition(), theDefinitionsPackage.getClassDefinition(), null, "definition", null, 1, 1, ClassDefinitionReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(enumDefinitionReferenceEClass, EnumDefinitionReference.class, "EnumDefinitionReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getEnumDefinitionReference_Definition(), theDefinitionsPackage.getEnumDefinition(), null, "definition", null, 1, 1, EnumDefinitionReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

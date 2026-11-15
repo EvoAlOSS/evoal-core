@@ -1,10 +1,10 @@
+import "definitions" from 'de.evoal.core.constraints';
 import "definitions" from de.evoal.optimisation.constraint;
 
 
 module time_value{
 	data:
-		quotient real data 'time' with constraints:
-			value<0;
-		;
+		@UpperBoundary { boundary := 0; inclusive := false; }
+		quotient real data 'time';
 		quotient real data 'value';
 }

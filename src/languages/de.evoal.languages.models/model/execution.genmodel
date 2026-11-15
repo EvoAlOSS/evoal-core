@@ -9,8 +9,6 @@
   <genPackages prefix="Execution" basePackage="de.evoal.languages.model" disposableProviderFactory="true"
       fileExtensions="execution" ecorePackage="execution.ecore#/">
     <genClasses ecoreClass="execution.ecore#//ExecutionModule">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference execution.ecore#//ExecutionModule/imports"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute execution.ecore#//ExecutionModule/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference execution.ecore#//ExecutionModule/program"/>
     </genClasses>
     <genClasses ecoreClass="execution.ecore#//Program">

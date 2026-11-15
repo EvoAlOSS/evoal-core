@@ -1,7 +1,7 @@
 package de.evoal.core.api.ecore.stream;
 
 import de.evoal.core.api.ecore.EObjectPair;
-import de.evoal.core.api.ecore.Space;
+import de.evoal.models.core.ecore.Space;
 import de.evoal.core.api.utils.Requirements;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;

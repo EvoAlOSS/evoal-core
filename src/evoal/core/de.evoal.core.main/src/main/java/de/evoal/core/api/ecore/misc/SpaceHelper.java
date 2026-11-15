@@ -1,6 +1,6 @@
 package de.evoal.core.api.ecore.misc;
 
-import de.evoal.core.api.ecore.Space;
+import de.evoal.models.core.ecore.Space;
 import de.evoal.core.api.utils.Requirements;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EStructuralFeature;

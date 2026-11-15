@@ -185,28 +185,8 @@ public class OLPackageImpl extends EPackageImpl implements OLPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getOptimisationModule_Imports() {
-		return (EReference)optimisationModuleEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getOptimisationModule_Name() {
-		return (EAttribute)optimisationModuleEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EReference getOptimisationModule_Problem() {
-		return (EReference)optimisationModuleEClass.getEStructuralFeatures().get(3);
+		return (EReference)optimisationModuleEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -400,8 +380,6 @@ public class OLPackageImpl extends EPackageImpl implements OLPackage {
 		// Create classes and their features
 		optimisationModuleEClass = createEClass(OPTIMISATION_MODULE);
 		createEReference(optimisationModuleEClass, OPTIMISATION_MODULE__ALGORITHM);
-		createEReference(optimisationModuleEClass, OPTIMISATION_MODULE__IMPORTS);
-		createEAttribute(optimisationModuleEClass, OPTIMISATION_MODULE__NAME);
 		createEReference(optimisationModuleEClass, OPTIMISATION_MODULE__PROBLEM);
 
 		problemInstanceEClass = createEClass(PROBLEM_INSTANCE);
@@ -461,6 +439,7 @@ public class OLPackageImpl extends EPackageImpl implements OLPackage {
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
+		optimisationModuleEClass.getESuperTypes().add(theBasePackage.getModule());
 		problemInstanceEClass.getESuperTypes().add(theExpressionsPackage.getInstance());
 		maximiseGoalEClass.getESuperTypes().add(this.getOptimisationGoal());
 		minimiseGoalEClass.getESuperTypes().add(this.getOptimisationGoal());
@@ -470,8 +449,6 @@ public class OLPackageImpl extends EPackageImpl implements OLPackage {
 		// Initialize classes and features; add operations and parameters
 		initEClass(optimisationModuleEClass, OptimisationModule.class, "OptimisationModule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getOptimisationModule_Algorithm(), this.getAlgorithmInstance(), null, "algorithm", null, 0, 1, OptimisationModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getOptimisationModule_Imports(), theBasePackage.getImport(), null, "imports", null, 0, -1, OptimisationModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getOptimisationModule_Name(), ecorePackage.getEString(), "name", null, 1, 1, OptimisationModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getOptimisationModule_Problem(), this.getProblemInstance(), null, "problem", null, 0, 1, OptimisationModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(problemInstanceEClass, ProblemInstance.class, "ProblemInstance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

@@ -1,7 +1,7 @@
 package de.evoal.pipeline.impl.components.io;
 
-import de.evoal.core.api.ecore.Space;
-import de.evoal.core.api.ecore.TypedEObject;
+import de.evoal.models.core.ecore.Space;
+import de.evoal.models.core.ecore.TypedEObject;
 import de.evoal.pipeline.api.model.PipelineComponentImpl;
 import de.evoal.pipeline.api.model.PipelineSource;
 import lombok.NonNull;

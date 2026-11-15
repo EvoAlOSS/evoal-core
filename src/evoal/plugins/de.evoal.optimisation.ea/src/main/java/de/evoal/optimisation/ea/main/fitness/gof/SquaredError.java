@@ -8,7 +8,7 @@ import de.evoal.core.api.properties.stream.PropertiesBasedPropertiesPairStreamSu
 import de.evoal.core.api.properties.stream.PropertiesPairStreamSupplier;
 import de.evoal.core.api.properties.stream.PropertiesStreamSupplier;
 import de.evoal.core.api.utils.AttributeHelper;
-import de.evoal.core.api.utils.InitializationException;
+import de.evoal.models.core.exceptions.InitializationException;
 import de.evoal.languages.model.base.definitions.Definition;
 import de.evoal.optimisation.ea.api.fitness.GoodnessOfFitFunction;
 import de.evoal.languages.model.base.expressions.Instance;

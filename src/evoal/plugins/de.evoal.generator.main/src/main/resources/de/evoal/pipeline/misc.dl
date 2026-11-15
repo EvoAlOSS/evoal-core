@@ -1,11 +1,12 @@
 import "definitions" from 'de.evoal.core.math';
 import "definitions" from 'de.evoal.pipeline.base';
+import "definitions" from 'de.evoal.core.base';
 
 module 'de.evoal.pipeline.misc' {
 	/**
 	 * Adds constant values for the specified data.
 	 */
-	type constants {
+	type constants extends configuration {
 		/**
 		 * The constant values to append.
 		 */
@@ -15,7 +16,7 @@ module 'de.evoal.pipeline.misc' {
 	type 'constraint-validation' {	
 	}
 
-	type 'limit' {
+	type 'limit' extends configuration {
 	    count : int;
 	}
 }

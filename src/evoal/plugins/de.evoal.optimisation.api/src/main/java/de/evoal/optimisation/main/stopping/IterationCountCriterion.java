@@ -1,20 +1,21 @@
 package de.evoal.optimisation.main.stopping;
 
 import de.evoal.core.api.languages.AttributeEvaluator;
-import de.evoal.core.api.utils.InitializationException;
-import de.evoal.languages.model.base.expressions.Instance;
-import de.evoal.optimisation.api.model.Iteration;
-import de.evoal.optimisation.api.model.StoppingCriterion;
+import de.evoal.models.v202704.optimisation.execution.TerminationCriterion;
+import de.evoal.models.v202704.optimisation.execution.impl.TerminationCriterionImpl;
+import de.evoal.models.v202704.optimisation.memory.Iteration;
+import de.evoal.models.core.exceptions.InitializationException;
 import lombok.extern.slf4j.Slf4j;
 
 import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import org.eclipse.emf.ecore.EObject;
 
 @Slf4j
 @Dependent
 @Named("de.evoal.optimisation.core.iteration-count")
-public class IterationCountCriterion implements StoppingCriterion {
+public class IterationCountCriterion extends TerminationCriterionImpl {
     @Inject
     private AttributeEvaluator evaluator;
 
@@ -22,13 +23,13 @@ public class IterationCountCriterion implements StoppingCriterion {
 
     @Override
     public boolean shouldTerminate(final Iteration iteration) {
-        log.info("Check termination {} > {}.", iteration.iteration(), maxIterations);
+        log.info("Check termination {} > {}.", iteration.getNumber(), maxIterations);
 
-        return iteration.iteration() > maxIterations;
+        return iteration.getNumber() > maxIterations;
     }
 
     @Override
-    public StoppingCriterion init(final Instance configuration) throws InitializationException {
+    public TerminationCriterion init(final EObject configuration) throws InitializationException {
         maxIterations = evaluator.attributeToInteger(configuration, "maximum-iterations");
 
         return this;

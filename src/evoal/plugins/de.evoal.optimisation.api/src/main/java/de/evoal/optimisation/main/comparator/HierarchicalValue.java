@@ -1,38 +1,51 @@
 package de.evoal.optimisation.main.comparator;
 
-import de.evoal.optimisation.api.model.OptimisationValue;
 import lombok.Getter;
 import lombok.NonNull;
 
-import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
-public class HierarchicalValue implements OptimisationValue {
+import org.eclipse.emf.ecore.EStructuralFeature;
+
+import de.evoal.models.core.ecore.TypedEObject;
+
+import de.evoal.languages.model.interpreter.numeric.BooleanNumberOperations;
+import de.evoal.models.v202704.optimisation.execution.OptimisationValue;
+import de.evoal.models.v202704.optimisation.execution.impl.OptimisationValueWithDistanceImpl;
+
+import de.evoal.languages.model.interpreter.numeric.ArithmeticNumberOperations;
+
+
+public class HierarchicalValue extends OptimisationValueWithDistanceImpl {
     @Getter
-    private final @NonNull double[] fitnessValues;
-    private final @NonNull int[] orderIndices;
-    private final @NonNull Function<Double, Double> [] valueConversions;
+    private final @NonNull TypedEObject fitnessValues;
+    private final @NonNull List<EStructuralFeature> featureOrder;
+    private final @NonNull Map<EStructuralFeature, Function<Number, Number>> valueConversions;
 
-    private HierarchicalValue(final @NonNull List<Function<Double, Double>> valueConversions,  final @NonNull int[] orderIndices, final @NonNull double[] fitnessValues) {
-        this.orderIndices = Arrays.copyOf(orderIndices, orderIndices.length);
+    private HierarchicalValue(final @NonNull Map<EStructuralFeature, Function<Number, Number>> valueConversions, final @NonNull TypedEObject fitnessValues, final @NonNull List<EStructuralFeature> featureOrder) {
+        this.featureOrder = featureOrder;
         this.fitnessValues = fitnessValues;
-        this.valueConversions = valueConversions.toArray(size -> new Function[size]);
+        this.valueConversions = valueConversions;
     }
 
-    public static HierarchicalValue of(final @NonNull List<Function<Double, Double>> valueConversions, final int[] orderIndices, final double [] fitnessValues) {
-        return new HierarchicalValue(valueConversions, orderIndices, fitnessValues);
+    public static HierarchicalValue of(final @NonNull Map<EStructuralFeature, Function<Number, Number>> valueConversions, final @NonNull TypedEObject fitnessValues, final @NonNull List<EStructuralFeature> featureOrder) {
+        return new HierarchicalValue(valueConversions, fitnessValues, featureOrder);
     }
 
     @Override
     public int compareTo(final @NonNull OptimisationValue other) {
         if(other instanceof HierarchicalValue hv) {
-            for(int index : orderIndices) {
-                final double thisNormalizedValue = valueConversions[index].apply(fitnessValues[index]);
-                final double otherNormalizedValue = valueConversions[index].apply(hv.fitnessValues[index]);
+            for(int index = 0; index < featureOrder.size(); ++index) {
+                final EStructuralFeature feature1 = featureOrder.get(index);
+                final EStructuralFeature feature2 = hv.featureOrder.get(index);
+                final Number thisNormalizedValue = valueConversions.get(feature1).apply(fitnessValues.eGetAsNumber(feature1));
+                final Number otherNormalizedValue = hv.valueConversions.get(feature2).apply(hv.fitnessValues.eGetAsNumber(feature2));
 
-                if(thisNormalizedValue != otherNormalizedValue) {
-                    return Double.compare(thisNormalizedValue, otherNormalizedValue);
+                if(!BooleanNumberOperations.isEqualTo(thisNormalizedValue, otherNormalizedValue)) {
+                    return ArithmeticNumberOperations.compare(thisNormalizedValue, otherNormalizedValue);
                 }
             }
 
@@ -44,14 +57,14 @@ public class HierarchicalValue implements OptimisationValue {
 
     @Override
     public double distanceFrom(final @NonNull OptimisationValue other) {
-        if(other instanceof HierarchicalValue hv) {
-            for(int index : orderIndices) {
-                if(fitnessValues[index] != hv.fitnessValues[index]) {
-                    return Math.abs(fitnessValues[index] - hv.fitnessValues[index]);
-                }
-            }
+        final double distance = 0.0;
 
-            return 0.0;
+        if(other instanceof HierarchicalValue hv) {
+            return featureOrder
+                    .stream()
+                    .mapToDouble(f -> ArithmeticNumberOperations.minus(fitnessValues.eGetAsNumber(f), hv.fitnessValues.eGetAsNumber(f)).doubleValue())
+                    .map(Math::abs)
+                    .sum();
         } else{
             throw new IllegalArgumentException("Only allowed to compare HierarchicalValue");
         }
@@ -59,17 +72,19 @@ public class HierarchicalValue implements OptimisationValue {
 
     @Override
     public String toString() {
-    	return "HierarchicalValue [fit=" + Arrays.toString(fitnessValues) + ", order=" + Arrays.toString(orderIndices) + "]";
+    	return "HierarchicalValue [fit=" +
+                    fitnessValues +
+                    ", order=" +
+                    featureOrder.stream().map(EStructuralFeature::getName).collect(Collectors.joining(", ")) +
+                "]";
+
     }
 
     @Override
-    public Object[] toStatistics() {
-        final Object [] result = new Object[fitnessValues.length];
-
-        for(int i = 0; i < result.length; ++i) {
-            result[i] = fitnessValues[i];
-        }
-
-        return result;
+    public List<Object> toStatistics() {
+        return featureOrder
+                .stream()
+                .map(fitnessValues::eGet)
+                .toList();
     }
 }

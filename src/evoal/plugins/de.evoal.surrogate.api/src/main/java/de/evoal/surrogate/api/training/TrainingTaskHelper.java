@@ -2,8 +2,8 @@ package de.evoal.surrogate.api.training;
 
 import de.evoal.core.api.dynamic.EAnnotationHelper;
 import de.evoal.core.api.ecore.EObjectPair;
-import de.evoal.core.api.ecore.Space;
-import de.evoal.core.api.ecore.TypedEObject;
+import de.evoal.models.core.ecore.Space;
+import de.evoal.models.core.ecore.TypedEObject;
 import de.evoal.core.api.ecore.stream.EObjectPairStreamSupplier;
 import de.evoal.core.api.ecore.stream.FileBasedEObjectStreamSupplier;
 import de.evoal.core.api.utils.Requirements;
@@ -13,7 +13,6 @@ import de.evoal.languages.model.mll.TaskDescription;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EcorePackage;
 
 import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
@@ -24,11 +23,6 @@ import java.util.stream.Stream;
 @Slf4j
 @Dependent
 public class TrainingTaskHelper {
-    /**
-     * Ecore package for checking types.
-     */
-    private final static EcorePackage ePackage = EcorePackage.eINSTANCE;
-
     @Inject
     private EAnnotationHelper provider;
 

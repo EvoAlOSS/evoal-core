@@ -116,6 +116,14 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 				return createDefinitionReferenceAdapter();
 			}
 			@Override
+			public Adapter caseClassDefinitionReference(ClassDefinitionReference object) {
+				return createClassDefinitionReferenceAdapter();
+			}
+			@Override
+			public Adapter caseEnumDefinitionReference(EnumDefinitionReference object) {
+				return createEnumDefinitionReferenceAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -300,6 +308,34 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createDefinitionReferenceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.types.ClassDefinitionReference <em>Class Definition Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.evoal.languages.model.base.types.ClassDefinitionReference
+	 * @generated
+	 */
+	public Adapter createClassDefinitionReferenceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.types.EnumDefinitionReference <em>Enum Definition Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.evoal.languages.model.base.types.EnumDefinitionReference
+	 * @generated
+	 */
+	public Adapter createEnumDefinitionReferenceAdapter() {
 		return null;
 	}
 

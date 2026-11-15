@@ -1,10 +1,10 @@
 package de.evoal.pipeline.api.model;
 
 import de.evoal.core.api.interpreter.InterpreterState;
+import de.evoal.models.core.cdi.EvoalComponent;
 import lombok.Getter;
 
-import de.evoal.core.api.cdi.EvoalComponent;
-import de.evoal.core.api.ecore.Space;
+import de.evoal.models.core.ecore.Space;
 import lombok.NonNull;
 
 /**

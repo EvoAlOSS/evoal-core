@@ -1,9 +1,8 @@
 package de.evoal.pipeline.impl.components.misc;
 
-import de.evoal.core.api.ecore.TypedEObject;
+import de.evoal.models.core.ecore.TypedEObject;
 import de.evoal.core.api.languages.AttributeEvaluator;
-import de.evoal.core.api.utils.InitializationException;
-import de.evoal.languages.model.base.expressions.Instance;
+import de.evoal.models.core.exceptions.InitializationException;
 import de.evoal.pipeline.api.model.PipelineComponentImpl;
 import lombok.Getter;
 import lombok.NonNull;
@@ -11,6 +10,8 @@ import lombok.NonNull;
 import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import org.eclipse.emf.ecore.EObject;
+
 import java.util.Iterator;
 
 @Dependent
@@ -29,7 +30,7 @@ public class Limit extends PipelineComponentImpl {
 	}
 
 	@Override
-	public PipelineComponentImpl init(final Instance configuration) throws InitializationException {
+	public PipelineComponentImpl init(final EObject configuration) throws InitializationException {
 		super.init(configuration);
 
 		limit = evaluator.attributeToInteger(configuration, "count");

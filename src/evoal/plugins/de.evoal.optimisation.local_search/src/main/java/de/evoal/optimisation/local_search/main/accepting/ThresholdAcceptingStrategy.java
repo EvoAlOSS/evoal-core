@@ -1,13 +1,9 @@
 package de.evoal.optimisation.local_search.main.accepting;
 
-import de.evoal.core.api.cdi.Component;
 import de.evoal.core.api.cdi.ConfigurationValue;
-import de.evoal.core.api.properties.Properties;
-import de.evoal.languages.model.base.expressions.Instance;
+import de.evoal.models.v202704.optimisation.execution.OptimisationValue;
+import de.evoal.models.v202704.optimisation.execution.OptimisationValueWithDistance;
 import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
-import de.evoal.optimisation.api.model.OptimisationFunction;
-import de.evoal.optimisation.api.model.OptimisationValue;
-import de.evoal.optimisation.api.model.OptimisationValueComparator;
 import de.evoal.optimisation.local_search.api.accepting.AcceptingStrategy;
 import de.evoal.optimisation.local_search.api.cooling.DecreasingFunction;
 import lombok.extern.slf4j.Slf4j;
@@ -15,18 +11,12 @@ import lombok.extern.slf4j.Slf4j;
 import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import org.eclipse.emf.ecore.EObject;
 
 @Named("de.evoal.optimisation.local_search.optimisation.threshold-accepting")
 @Dependent
 @Slf4j
 public class ThresholdAcceptingStrategy implements AcceptingStrategy {
-
-    @Inject
-    @Named("optimisation-function")
-    private OptimisationFunction fitness;
-
-    @Inject @Dependent @Component
-    private OptimisationValueComparator comparator;
 
     @Inject
     @ConfigurationValue(entry = OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.accepting-strategy.initial-threshold")
@@ -39,22 +29,25 @@ public class ThresholdAcceptingStrategy implements AcceptingStrategy {
     private DecreasingFunction decreasingFunction;
 
     @Override
-    public AcceptingStrategy init(final Instance configuration) {
+    public AcceptingStrategy init(final EObject configuration) {
         threshold = initialThreshold;
 
         return this;
     }
 
     @Override
-    public boolean acceptCandidate(final Properties candidate, final OptimisationValue bestFitnessValue) {
-        double[] candidateFitness = fitness.evaluate(candidate);
-        OptimisationValue alternateValue = comparator.apply(candidateFitness);
-
-        if (alternateValue.isBetter(bestFitnessValue)) {
+    public boolean acceptCandidate(final OptimisationValue candidateValue, final OptimisationValue currentValue) {
+        if (candidateValue.isBetter(currentValue)) {
             log.debug("Neighbour malus better, accepting.");
             return true;
         }
-        double dist = alternateValue.distanceFrom(bestFitnessValue);
+
+        if(!(candidateValue instanceof OptimisationValueWithDistance distAlt)) {
+            log.warn("Neighbour malus is not a distance value.");
+            return false;
+        }
+
+        double dist = distAlt.distanceFrom(currentValue);
         log.debug("distance: {} threshold: {}", dist, threshold);
 
         return (dist > 0 && dist < threshold);

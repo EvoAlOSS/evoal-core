@@ -1,12 +1,13 @@
 import "definitions" from 'de.evoal.core.math';
 import "definitions" from 'de.evoal.pipeline.base';
 import "definitions" from 'de.evoal.core.constraints';
+import "definitions" from 'de.evoal.core.base';
 
 module 'de.evoal.pipeline.distributions' {
     /**
      * Base type for all distributions.
      */
-	abstract type distribution {}
+	abstract type distribution extends configuration {}
 
     /**
      * Multivariate normal distribution.
@@ -65,7 +66,7 @@ module 'de.evoal.pipeline.distributions' {
 	 * Adds noise to data. For each data to noise, you can specify a
 	 *   separate distribution.
 	 */
-	type 'noise-data' {
+	type 'noise-data' extends configuration {
 		/**
 		 * The different distributions to use. Make sure it matches the size of
 		 *   the data the function writes.

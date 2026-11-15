@@ -3,12 +3,12 @@ package de.evoal.optimisation.local_search.main.cooling;
 import de.evoal.optimisation.local_search.api.cooling.DecreasingFunction;
 import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
 import de.evoal.core.api.cdi.ConfigurationValue;
-import de.evoal.languages.model.base.expressions.Instance;
 import lombok.extern.slf4j.Slf4j;
 
 import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * Logarithmic decrease strategy determines new temperature according to formula:
@@ -27,7 +27,7 @@ public class LogarithmicDecreaseFunction implements DecreasingFunction {
     }
 
     @Override
-    public LogarithmicDecreaseFunction init(final Instance config) {
+    public LogarithmicDecreaseFunction init(final EObject config) {
         return this;
     }
 }

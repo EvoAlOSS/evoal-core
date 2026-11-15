@@ -2,8 +2,8 @@ package de.evoal.optimisation.main.producer;
 
 import de.evoal.core.api.cdi.BlackboardValue;
 import de.evoal.core.api.board.Blackboard;
-import de.evoal.core.api.properties.Properties;
-import de.evoal.core.api.properties.PropertiesSpecification;
+import de.evoal.models.core.ecore.Space;
+import de.evoal.models.core.ecore.TypedEObject;
 import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
 
 import jakarta.enterprise.context.ApplicationScoped;
@@ -57,7 +57,7 @@ public class BlackboardValueProducer {
 
     @Produces
     @BlackboardValue(OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION)
-    public PropertiesSpecification injectPropertiesSpecification(final InjectionPoint ip, final Blackboard board) {
+    public Space injectSpace(final InjectionPoint ip, final Blackboard board) {
         final BlackboardValue value = ip.getAnnotated().getAnnotation(BlackboardValue.class);
 
         return castValue(board.get(value.value()));
@@ -65,7 +65,7 @@ public class BlackboardValueProducer {
 
     @Produces
     @BlackboardValue(OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION)
-    public Properties injectProperties(final InjectionPoint ip, final Blackboard board) {
+    public TypedEObject injectEObject(final InjectionPoint ip, final Blackboard board) {
         final BlackboardValue value = ip.getAnnotated().getAnnotation(BlackboardValue.class);
 
         return castValue(board.get(value.value()));

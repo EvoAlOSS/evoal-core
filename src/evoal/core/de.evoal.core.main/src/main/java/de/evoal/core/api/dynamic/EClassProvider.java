@@ -1,12 +1,15 @@
 package de.evoal.core.api.dynamic;
 
-import de.evoal.core.api.properties.PropertiesSpecification;
-import de.evoal.core.api.properties.PropertySpecification;
+import de.evoal.languages.model.ddl.DataDescriptionModule;
+import de.evoal.languages.model.dynamic.DefinitionMapping;
+import de.evoal.models.core.ecore.Space;
+import de.evoal.core.api.ecore.info.BoundaryExtractor;
+import de.evoal.core.api.ecore.info.FeatureBoundaries;
+import de.evoal.core.api.utils.Requirements;
 import de.evoal.languages.model.base.definitions.BaseDataDescription;
 import de.evoal.languages.model.base.definitions.DataDescription;
 import de.evoal.languages.model.base.definitions.RepresentationType;
 import de.evoal.languages.model.base.expressions.TypeDefinitionReference;
-import de.evoal.languages.model.dynamic.Definition;
 import de.evoal.languages.model.dynamic.DynamicFactory;
 import de.evoal.languages.model.dynamic.DynamicPackage;
 import de.evoal.languages.model.generator.ConcreteStep;
@@ -14,12 +17,17 @@ import de.evoal.languages.model.generator.GeneratorModule;
 import de.evoal.languages.model.generator.PipelineStep;
 import de.evoal.languages.model.generator.Step;
 import de.evoal.languages.model.mll.MachineLearningModule;
+import de.evoal.languages.model.ol.OptimisationGoal;
+import de.evoal.languages.model.ol.ProblemInstance;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.math3.util.Pair;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.*;
 import org.eclipse.emf.ecore.util.Diagnostician;
 
 import jakarta.enterprise.context.ApplicationScoped;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -30,9 +38,19 @@ import java.util.stream.Stream;
 @ApplicationScoped
 @Slf4j
 public class EClassProvider {
+    /**
+     * Ecore factory for creating new ecore objects.
+     */
     private static final EcoreFactory factory = EcoreFactory.eINSTANCE;
+
+    /**
+     * Dynamic factory for creating new dynamic objects.
+     */
     private static final DynamicFactory dynFactory = DynamicFactory.eINSTANCE;
 
+    /**
+     * Keeping track of already mapped classes.
+     */
     private final Map<Object, EClass> eClassCache = new HashMap<>();
 
     public EClass eClassFor(final GeneratorModule module) {
@@ -57,6 +75,59 @@ public class EClassProvider {
         eClassCache.put(module, result);
 
         return result;
+    }
+
+    public EClass eClassFor(final DataDescriptionModule module) {
+        log.info("Creating dynamic eclass for module {}.", module.getName());
+        if(eClassCache.containsKey(module)) {
+            return eClassCache.get(module);
+        }
+
+        // create a set of all used data
+        final Set<DataDescription> references =
+                new HashSet<>(module.getDescriptions());
+
+        final EClass result = eClassOf(references);
+
+        eClassCache.put(module, result);
+
+        return result;
+    }
+
+    public Pair<EClass, EClass> eClassFor(final ProblemInstance problem) {
+        log.info("Creating dynamic eclass for problem {}.", problem.getName());
+        EClass searchSpace = eClassCache.get(problem.getSearchSpace());
+        EClass optimisationSpace = eClassCache.get(problem.getOptimisationSpace());
+
+        if(searchSpace == null) {
+            final Set<DataDescription> references =
+                    problem.getSearchSpace()
+                            .stream()
+                            .map(TypeDefinitionReference::getDefinition)
+                            .filter(DataDescription.class::isInstance)
+                            .map(DataDescription.class::cast)
+                            .collect(Collectors.toSet());
+
+            searchSpace = eClassOf(references);
+        }
+
+        if(optimisationSpace == null) {
+            final Set<DataDescription> references =
+                    problem.getOptimisationSpace()
+                            .stream()
+                            .map(OptimisationGoal::getData)
+                            .map(TypeDefinitionReference::getDefinition)
+                            .filter(DataDescription.class::isInstance)
+                            .map(DataDescription.class::cast)
+                            .collect(Collectors.toSet());
+
+            optimisationSpace = eClassOf(references);
+        }
+
+        eClassCache.put(problem.getSearchSpace(), searchSpace);
+        eClassCache.put(problem.getOptimisationSpace(), optimisationSpace);
+
+        return Pair.create(searchSpace, optimisationSpace);
     }
 
     private static Stream<TypeDefinitionReference> toUsedDataStream(final Step step) {
@@ -103,13 +174,6 @@ public class EClassProvider {
         result.setName("Space");
 
         for(final DataDescription ref : descriptions) {
-            final Definition definition = dynFactory.createDefinition();
-            definition.setSource(ref);
-
-            final EAnnotation annotation = factory.createEAnnotation();
-            annotation.setSource(DynamicPackage.eNS_URI);
-            annotation.getContents().add(definition);
-
             log.info("Creating attribute for '{}'.", ref.getName());
 
             final EAttribute attr = factory.createEAttribute();
@@ -117,9 +181,29 @@ public class EClassProvider {
             attr.setLowerBound(0);
             attr.setUpperBound(1);
             attr.setEType(toEType(ref));
-            attr.getEAnnotations().add(annotation);
 
-            result.getEStructuralFeatures().add(attr);
+            // the boundaries are taken from the @LowerBoundary/@UpperBoundary constraints
+            FeatureBoundaries.annotate(attr, BoundaryExtractor.extract(ref));
+
+            result.getEStructuralFeatures()
+                  .add(attr);
+
+
+            // add mapping to ecore world
+            final DefinitionMapping definition = dynFactory.createDefinitionMapping();
+            definition.setSource(ref);
+            definition.setTarget(attr);
+
+            final EAnnotation annotation = factory.createEAnnotation();
+            annotation.setSource(DynamicPackage.eNS_URI);
+            annotation.getContents().add(definition);
+
+            attr.getEAnnotations()
+                .add(annotation);
+
+            // add mapping to ddl world
+            ref.getEAnnotations()
+               .add(EcoreUtil.copy(annotation));
         }
 
         final Diagnostic diagnostics = Diagnostician.INSTANCE.validate(result);
@@ -161,27 +245,11 @@ public class EClassProvider {
         }
     }
 
-    public EClass eClassFor(final PropertiesSpecification source, final PropertiesSpecification target) {
+    public EClass eClassFor(final Space source, final Space target) {
         final LinkedHashSet<DataDescription> references = new LinkedHashSet<>();
 
-        // create a set of all used data
-        Stream.concat(source.getProperties().stream(),
-                      target.getProperties().stream())
-                .map(PropertySpecification::type)
-                .map(DataDescription.class::cast)
-                .forEach(references::add);
+        Requirements.requireEqual(source.getEClass(), target.getEClass());
 
-        return eClassOf(references);
-    }
-
-    public EClass eClassFor(final List<DataDescription> source, final List<DataDescription> target) {
-        final LinkedHashSet<DataDescription> references = new LinkedHashSet<>();
-
-        // create a set of all used data
-        Stream.concat(source.stream(),
-                      target.stream())
-              .forEach(references::add);
-
-        return eClassOf(references);
+        return source.getEClass();
     }
 }

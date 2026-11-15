@@ -19,6 +19,7 @@ module de.evoal.generator.main {
     requires de.evoal.languages.model.ddl;
     requires de.evoal.languages.model.dl;
     requires de.evoal.languages.models;
+    requires de.evoal.languages.model.interpreter;
 
     requires de.evoal.languages.model.ddl.dsl;
     requires de.evoal.languages.model.dl.dsl;

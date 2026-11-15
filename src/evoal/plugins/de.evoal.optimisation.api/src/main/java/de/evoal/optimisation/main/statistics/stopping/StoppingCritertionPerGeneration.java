@@ -2,9 +2,8 @@ package de.evoal.optimisation.main.statistics.stopping;
 
 import de.evoal.core.api.cdi.BeanFactory;
 import de.evoal.core.api.languages.AttributeEvaluator;
-import de.evoal.languages.model.base.expressions.Instance;
-import de.evoal.optimisation.api.model.Iteration;
-import de.evoal.optimisation.api.model.StoppingCriterion;
+import de.evoal.models.v202704.optimisation.execution.TerminationCriterion;
+import de.evoal.models.v202704.optimisation.memory.Iteration;
 import de.evoal.optimisation.api.statistics.io.Writer;
 import de.evoal.optimisation.api.statistics.io.WriterException;
 import de.evoal.optimisation.api.statistics.io.WriterStrategy;
@@ -17,6 +16,8 @@ import lombok.extern.slf4j.Slf4j;
 import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import org.eclipse.emf.ecore.EObject;
+
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -34,7 +35,7 @@ public class StoppingCritertionPerGeneration implements StatisticsWriter {
 
     private int numberOfColumns;
 
-    private StoppingCriterion[] stoppingCriteria;
+    private TerminationCriterion[] stoppingCriteria;
 
     @Inject
     protected WriterStrategy strategy;
@@ -43,12 +44,12 @@ public class StoppingCritertionPerGeneration implements StatisticsWriter {
 
     @Override
     @SneakyThrows(WriterException.class)
-    public StatisticsWriter init(final Instance configuration) {
-        final Instance [] configs = evaluator.attributeToInstanceArray(configuration, "criteria");
+    public StatisticsWriter init(final EObject configuration) {
+        final EObject[] configs = evaluator.attributeToEObjectArray(configuration, "criteria");
         stoppingCriteria = Arrays.stream(configs)
-                .map(i -> BeanFactory.createComponent(StoppingCriterion.class, i))
-                .map(StoppingCriterion.class::cast)
-                .toArray(StoppingCriterion[]::new);
+                .map(i -> BeanFactory.createComponent(TerminationCriterion.class, i))
+                .map(TerminationCriterion.class::cast)
+                .toArray(TerminationCriterion[]::new);
 
 
         final List<Column> columns = new LinkedList<>();
@@ -66,7 +67,7 @@ public class StoppingCritertionPerGeneration implements StatisticsWriter {
 
     @Override
     public void add(final Iteration result) {
-        final int iterationNumber = result.iteration();
+        final int iterationNumber = result.getNumber();
         final Object [] record = toData(iterationNumber, result);
 
         appendToWriter(record);
@@ -80,7 +81,7 @@ public class StoppingCritertionPerGeneration implements StatisticsWriter {
         data[0] = iterationNumber;
 
         for(int i = 0; i < stoppingCriteria.length; i++) {
-            final StoppingCriterion criterion = stoppingCriteria[i];
+            final TerminationCriterion criterion = stoppingCriteria[i];
 
             final boolean satisfied = criterion.shouldTerminate(result);
 

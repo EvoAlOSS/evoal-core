@@ -1,7 +1,7 @@
 package de.evoal.optimisation.api.model;
 
-import de.evoal.core.api.cdi.EvoalComponent;
-import de.evoal.core.api.properties.Properties;
+import de.evoal.models.core.ecore.TypedEObject;
+import de.evoal.models.core.cdi.EvoalComponent;
 
 import java.util.stream.Stream;
 
@@ -13,5 +13,5 @@ public interface InitialCandidatesProvider extends EvoalComponent<InitialCandida
     /**
      * @return An unlimited stream of search-space candidates.
      */
-    Stream<Properties> create();
+    Stream<TypedEObject> create();
 }

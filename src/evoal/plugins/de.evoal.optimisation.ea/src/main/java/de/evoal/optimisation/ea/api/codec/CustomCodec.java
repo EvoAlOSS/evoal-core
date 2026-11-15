@@ -1,6 +1,5 @@
 package de.evoal.optimisation.ea.api.codec;
 
-import de.evoal.core.api.cdi.EvoalComponent;
 import de.evoal.core.api.properties.Properties;
 import io.jenetics.Gene;
 import io.jenetics.Genotype;

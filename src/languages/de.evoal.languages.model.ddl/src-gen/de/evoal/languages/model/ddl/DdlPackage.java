@@ -2,7 +2,7 @@
  */
 package de.evoal.languages.model.ddl;
 
-import org.eclipse.emf.ecore.EAttribute;
+import de.evoal.languages.model.base.BasePackage;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -73,7 +73,7 @@ public interface DdlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DATA_DESCRIPTION_MODULE__IMPORTS = 0;
+	int DATA_DESCRIPTION_MODULE__IMPORTS = BasePackage.MODULE__IMPORTS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -82,7 +82,7 @@ public interface DdlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DATA_DESCRIPTION_MODULE__NAME = 1;
+	int DATA_DESCRIPTION_MODULE__NAME = BasePackage.MODULE__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Types</b></em>' containment reference list.
@@ -91,7 +91,7 @@ public interface DdlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DATA_DESCRIPTION_MODULE__TYPES = 2;
+	int DATA_DESCRIPTION_MODULE__TYPES = BasePackage.MODULE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Descriptions</b></em>' containment reference list.
@@ -100,7 +100,7 @@ public interface DdlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DATA_DESCRIPTION_MODULE__DESCRIPTIONS = 3;
+	int DATA_DESCRIPTION_MODULE__DESCRIPTIONS = BasePackage.MODULE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Constraints</b></em>' containment reference list.
@@ -109,7 +109,7 @@ public interface DdlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DATA_DESCRIPTION_MODULE__CONSTRAINTS = 4;
+	int DATA_DESCRIPTION_MODULE__CONSTRAINTS = BasePackage.MODULE_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Data Description Module</em>' class.
@@ -118,7 +118,7 @@ public interface DdlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DATA_DESCRIPTION_MODULE_FEATURE_COUNT = 5;
+	int DATA_DESCRIPTION_MODULE_FEATURE_COUNT = BasePackage.MODULE_FEATURE_COUNT + 3;
 
 
 	/**
@@ -130,28 +130,6 @@ public interface DdlPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getDataDescriptionModule();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.ddl.DataDescriptionModule#getImports <em>Imports</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Imports</em>'.
-	 * @see de.evoal.languages.model.ddl.DataDescriptionModule#getImports()
-	 * @see #getDataDescriptionModule()
-	 * @generated
-	 */
-	EReference getDataDescriptionModule_Imports();
-
-	/**
-	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.ddl.DataDescriptionModule#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see de.evoal.languages.model.ddl.DataDescriptionModule#getName()
-	 * @see #getDataDescriptionModule()
-	 * @generated
-	 */
-	EAttribute getDataDescriptionModule_Name();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.ddl.DataDescriptionModule#getTypes <em>Types</em>}'.
@@ -217,22 +195,6 @@ public interface DdlPackage extends EPackage {
 		 * @generated
 		 */
 		EClass DATA_DESCRIPTION_MODULE = eINSTANCE.getDataDescriptionModule();
-
-		/**
-		 * The meta object literal for the '<em><b>Imports</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference DATA_DESCRIPTION_MODULE__IMPORTS = eINSTANCE.getDataDescriptionModule_Imports();
-
-		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute DATA_DESCRIPTION_MODULE__NAME = eINSTANCE.getDataDescriptionModule_Name();
 
 		/**
 		 * The meta object literal for the '<em><b>Types</b></em>' containment reference list feature.

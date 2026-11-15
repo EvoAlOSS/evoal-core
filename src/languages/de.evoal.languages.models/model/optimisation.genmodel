@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="Copyright Text&#x9;(c) EvoAl project" modelDirectory="/de.evoal.languages.models/src-gen"
+    editDirectory="/de.evoal.languages.model.optimisation.edit/src-gen" editorDirectory="/de.evoal.languages.model.optimisation.editor/src-gen"
+    modelPluginID="de.evoal.languages.models" modelName="Optimisation" editPluginClass="de.evoal.languages.model.optimisation.provider.optimisationEditPlugin"
+    editorPluginClass="de.evoal.languages.model.optimisation.presentation.optimisationEditPlugin"
+    rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" testsDirectory="/de.evoal.languages.models.tests/src-gen"
+    testSuiteClass="de.evoal.languages.model.optimisation.tests.optimisationAllTests"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="21.0" copyrightFields="false"
+    editPluginID="de.evoal.languages.model.optimisation.edit" editorPluginID="de.evoal.languages.model.optimisation.editor"
+    usedGenPackages="core.genmodel#//core" importOrganizing="true">
+  <foreignModel>optimisation.ecore</foreignModel>
+  <genPackages prefix="optimisation" basePackage="de.evoal.models.v202704" disposableProviderFactory="true"
+      ecorePackage="optimisation.ecore#/">
+    <genDataTypes ecoreDataType="optimisation.ecore#//Space"/>
+    <genDataTypes ecoreDataType="optimisation.ecore#//TypedEObject"/>
+    <genClasses image="false" ecoreClass="optimisation.ecore#//Comparable">
+      <genTypeParameters ecoreTypeParameter="optimisation.ecore#//Comparable/T"/>
+    </genClasses>
+    <genClasses ecoreClass="optimisation.ecore#//Stream">
+      <genTypeParameters ecoreTypeParameter="optimisation.ecore#//Stream/T"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="optimisation.ecore#//List">
+      <genTypeParameters ecoreTypeParameter="optimisation.ecore#//List/T"/>
+    </genClasses>
+    <nestedGenPackages prefix="Memory" basePackage="de.evoal.models.v202704.optimisation"
+        disposableProviderFactory="true" ecorePackage="optimisation.ecore#//memory">
+      <genClasses ecoreClass="optimisation.ecore#//memory/Execution">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference optimisation.ecore#//memory/Execution/inputSpace"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference optimisation.ecore#//memory/Execution/outputSpace"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference optimisation.ecore#//memory/Execution/states"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="optimisation.ecore#//memory/State"/>
+      <genClasses ecoreClass="optimisation.ecore#//memory/Iteration">
+        <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute optimisation.ecore#//memory/Iteration/number"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference optimisation.ecore#//memory/Iteration/steps"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference optimisation.ecore#//memory/Iteration/ranks"/>
+        <genOperations ecoreOperation="optimisation.ecore#//memory/Iteration/bestIndividuals"
+            body="return getRanks()&#xA;.get(0)&#xA;.getMembers()&#xA;.stream();&#xA;"/>
+        <genOperations ecoreOperation="optimisation.ecore#//memory/Iteration/survivedIndividuals"
+            body="return getRanks()&#xA;.stream()&#xA;.flatMap(r -> r.getMembers().stream());&#xA;"/>
+        <genOperations ecoreOperation="optimisation.ecore#//memory/Iteration/numberOfSurvivedIndividuals"
+            body="return (int) survivedIndividuals().count();&#xA;"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="optimisation.ecore#//memory/IterationStep">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute optimisation.ecore#//memory/IterationStep/description"/>
+      </genClasses>
+      <genClasses ecoreClass="optimisation.ecore#//memory/OrderedIterationStep">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference optimisation.ecore#//memory/OrderedIterationStep/ranks"/>
+      </genClasses>
+      <genClasses ecoreClass="optimisation.ecore#//memory/UnorderedIterationStep">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference optimisation.ecore#//memory/UnorderedIterationStep/individuals"/>
+      </genClasses>
+      <genClasses ecoreClass="optimisation.ecore#//memory/Rank">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute optimisation.ecore#//memory/Rank/number"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference optimisation.ecore#//memory/Rank/members"/>
+      </genClasses>
+      <genClasses ecoreClass="optimisation.ecore#//memory/Individual">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute optimisation.ecore#//memory/Individual/id"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EAttribute optimisation.ecore#//memory/Individual/input"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EAttribute optimisation.ecore#//memory/Individual/output"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference optimisation.ecore#//memory/Individual/relationships"/>
+      </genClasses>
+      <genClasses ecoreClass="optimisation.ecore#//memory/Relationship">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference optimisation.ecore#//memory/Relationship/target"/>
+      </genClasses>
+      <genClasses ecoreClass="optimisation.ecore#//memory/Identity"/>
+      <genClasses ecoreClass="optimisation.ecore#//memory/Mutation"/>
+      <genClasses ecoreClass="optimisation.ecore#//memory/Recombination">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference optimisation.ecore#//memory/Recombination/other"/>
+      </genClasses>
+    </nestedGenPackages>
+    <nestedGenPackages prefix="Execution" basePackage="de.evoal.models.v202704.optimisation"
+        disposableProviderFactory="true" ecorePackage="optimisation.ecore#//execution">
+      <genClasses ecoreClass="optimisation.ecore#//execution/OptimisationFunction">
+        <genOperations ecoreOperation="optimisation.ecore#//execution/OptimisationFunction/evaluate">
+          <genParameters ecoreParameter="optimisation.ecore#//execution/OptimisationFunction/evaluate/input"/>
+        </genOperations>
+      </genClasses>
+      <genClasses ecoreClass="optimisation.ecore#//execution/TerminationCriterion">
+        <genOperations ecoreOperation="optimisation.ecore#//execution/TerminationCriterion/shouldTerminate">
+          <genParameters ecoreParameter="optimisation.ecore#//execution/TerminationCriterion/shouldTerminate/iteration"/>
+        </genOperations>
+        <genOperations ecoreOperation="optimisation.ecore#//execution/TerminationCriterion/shouldContinue"
+            body="return !shouldTerminate(iteration);&#xA;">
+          <genParameters ecoreParameter="optimisation.ecore#//execution/TerminationCriterion/shouldContinue/iteration"/>
+        </genOperations>
+      </genClasses>
+      <genClasses ecoreClass="optimisation.ecore#//execution/Selection">
+        <genOperations ecoreOperation="optimisation.ecore#//execution/Selection/select">
+          <genParameters ecoreParameter="optimisation.ecore#//execution/Selection/select/input"/>
+        </genOperations>
+      </genClasses>
+      <genClasses image="false" ecoreClass="optimisation.ecore#//execution/OptimisationValue">
+        <genOperations ecoreOperation="optimisation.ecore#//execution/OptimisationValue/isBetter"
+            body="return this.compareTo(other) > 0;&#xA;">
+          <genParameters ecoreParameter="optimisation.ecore#//execution/OptimisationValue/isBetter/other"/>
+        </genOperations>
+        <genOperations ecoreOperation="optimisation.ecore#//execution/OptimisationValue/isEqual"
+            body="return this.compareTo(other) == 0;&#xA;">
+          <genParameters ecoreParameter="optimisation.ecore#//execution/OptimisationValue/isEqual/other"/>
+        </genOperations>
+        <genOperations ecoreOperation="optimisation.ecore#//execution/OptimisationValue/isWorse"
+            body="return this.compareTo(other) &lt; 0;&#xA;">
+          <genParameters ecoreParameter="optimisation.ecore#//execution/OptimisationValue/isWorse/other"/>
+        </genOperations>
+        <genOperations ecoreOperation="optimisation.ecore#//execution/OptimisationValue/toOptmisationSpace"/>
+        <genOperations ecoreOperation="optimisation.ecore#//execution/OptimisationValue/toStatistics"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="optimisation.ecore#//execution/OptimisationValueWithDistance">
+        <genOperations ecoreOperation="optimisation.ecore#//execution/OptimisationValueWithDistance/distanceFrom">
+          <genParameters ecoreParameter="optimisation.ecore#//execution/OptimisationValueWithDistance/distanceFrom/other"/>
+        </genOperations>
+      </genClasses>
+    </nestedGenPackages>
+    <nestedGenPackages prefix="Model" basePackage="de.evoal.models.v202704.optimisation"
+        disposableProviderFactory="true" ecorePackage="optimisation.ecore#//model">
+      <genEnums typeSafeEnumCompatible="false" ecoreEnum="optimisation.ecore#//model/Direction">
+        <genEnumLiterals ecoreEnumLiteral="optimisation.ecore#//model/Direction/Maximise"/>
+        <genEnumLiterals ecoreEnumLiteral="optimisation.ecore#//model/Direction/Minimise"/>
+        <genEnumLiterals ecoreEnumLiteral="optimisation.ecore#//model/Direction/Target"/>
+      </genEnums>
+      <genClasses ecoreClass="optimisation.ecore#//model/OptimisationModule">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference optimisation.ecore#//model/OptimisationModule/algorithm"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference optimisation.ecore#//model/OptimisationModule/problem"/>
+      </genClasses>
+      <genClasses ecoreClass="optimisation.ecore#//model/Problem">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute optimisation.ecore#//model/Problem/name"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference optimisation.ecore#//model/Problem/optimisationFunction"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference optimisation.ecore#//model/Problem/optimisationSpace"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference optimisation.ecore#//model/Problem/goals"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference optimisation.ecore#//model/Problem/searchSpace"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference optimisation.ecore#//model/Problem/documentation"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="optimisation.ecore#//model/OptimisationGoal">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference optimisation.ecore#//model/OptimisationGoal/data"/>
+        <genOperations ecoreOperation="optimisation.ecore#//model/OptimisationGoal/getDirection"/>
+      </genClasses>
+      <genClasses ecoreClass="optimisation.ecore#//model/MaximiseGoal">
+        <genOperations ecoreOperation="optimisation.ecore#//model/MaximiseGoal/getDirection"
+            body="return Direction.MAXIMISE;"/>
+      </genClasses>
+      <genClasses ecoreClass="optimisation.ecore#//model/MinimiseGoal">
+        <genOperations ecoreOperation="optimisation.ecore#//model/MinimiseGoal/getDirection"
+            body="return Direction.MINIMISE;"/>
+      </genClasses>
+      <genClasses ecoreClass="optimisation.ecore#//model/TargetGoal">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute optimisation.ecore#//model/TargetGoal/value"/>
+        <genOperations ecoreOperation="optimisation.ecore#//model/TargetGoal/getDirection"
+            body="return Direction.TARGET;"/>
+      </genClasses>
+    </nestedGenPackages>
+  </genPackages>
+</genmodel:GenModel>

@@ -1,13 +1,14 @@
 package de.evoal.optimisation.main.search;
 
 import de.evoal.core.api.board.Blackboard;
-import de.evoal.core.api.properties.PropertiesSpecification;
+import de.evoal.core.api.random.RandomService;
+import de.evoal.core.api.ecore.EObjectPair;
 import de.evoal.languages.model.ol.OptimisationModule;
+import de.evoal.models.core.ecore.Space;
 import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
 import de.evoal.core.api.cdi.*;
 import de.evoal.optimisation.api.cdi.TargetPointLoader;
 import de.evoal.optimisation.api.model.OptimisationAlgorithm;
-import de.evoal.core.api.properties.PropertiesPair;
 
 import jakarta.enterprise.context.ApplicationScoped;
 
@@ -41,6 +42,14 @@ public class HeuristicSearchEvaluation implements MainClass {
     private Blackboard board;
 
     @Inject
+    private RandomService randomService;
+
+    /**
+     * Counts the runs over all targets, each run gets its own random numbers.
+     */
+    private long runCounter = 0;
+
+    @Inject
     private WriterContext context;
 
     @Inject
@@ -58,16 +67,16 @@ public class HeuristicSearchEvaluation implements MainClass {
     @BlackboardValue(OptimisationBlackboardEntries.EVALUATION_OUTPUT_FOLDER)
     private File outputBaseDir;
 
-    private List<PropertiesPair> targets;
+    private List<EObjectPair> targets;
 
     private Column targetColumn;
     private Column runColumn;
 
-    @Inject @Named("search-space-specification")
-    private Provider<PropertiesSpecification> inputSpaceProvider;
+    @Inject @Named("search-space")
+    private Provider<Space> searchSpaceProvider;
 
-    @Inject @Named("optimisation-space-specification")
-    private Provider<PropertiesSpecification> outputSpaceProvider;
+    @Inject @Named("optimisation-space")
+    private Provider<Space> optimisationSpaceProvider;
 
     private OptimisationModule algorithmConfiguration;
 
@@ -85,7 +94,7 @@ public class HeuristicSearchEvaluation implements MainClass {
 
         if(targetFile != null) {
             final TargetPointLoader loader = BeanFactory.create(TargetPointLoader.class);
-            targets = loader.getTargetPropertiesStream(inputSpaceProvider.get(), outputSpaceProvider.get()).get().toList();
+            targets = loader.getTargetObjectStream(searchSpaceProvider.get(), optimisationSpaceProvider.get()).get().toList();
             log.info("Processing {} targets during evaluation.", targets.size());
         }
 
@@ -111,7 +120,7 @@ public class HeuristicSearchEvaluation implements MainClass {
     }
 
     private int targetIndex = 0;
-    private void processTarget(final PropertiesPair target) {
+    private void processTarget(final EObjectPair target) {
         final int targetIndex = this.targetIndex++;
 
         context.bindColumn(targetColumn, targetIndex);
@@ -133,6 +142,7 @@ public class HeuristicSearchEvaluation implements MainClass {
             final String run = convertToString(i, runLength);
             board.bind(OptimisationBlackboardEntries.EVALUATION_RUN, run);
             context.bindColumn(runColumn, i);
+            randomService.startRun(runCounter++);
 
             BeanFactory.createComponent(OptimisationAlgorithm.class, algorithmConfiguration.getAlgorithm())
                        .run();

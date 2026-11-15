@@ -6,8 +6,6 @@ import "definitions" from de.evoal.pipeline.benchmarks;
 import "definitions" from de.evoal.pipeline.optimisation;
 import "definitions" from de.evoal.optimisation.local_search.optimisation;
 
-import "definitions" from de.evoal.optimisation.ea.optimisation;
-
 import "data" from 'search';
 
 module 'search' {
@@ -16,11 +14,15 @@ module 'search' {
 		
 		map with 'benchmark-function' {
 			'benchmarks' := [
-				'benchmark-configuration' { function := rosenbrock {};    reads := [data 'x:0', data 'x:1']; writes := [data 'y:0']; }
+				'benchmark-configuration' { function := rosenbrock {}; reads := [data 'x:0', data 'x:1']; writes := [data 'y:0']; }
 			];
 		}
 		
 		and minimise data 'y:0'
+
+		//we can document our results. For the hill-climbing algorithm, individuals-per-generation and
+		//best-individual-per-generation work identically
+		document ['candidates-per-iteration' {}].
 	}
 
 
@@ -36,10 +38,10 @@ module 'search' {
             'step-size' := [
                 'variable' { var := data 'x:0';
                              val := 0.1;
-                                 },
+                           },
                 'variable' { var := data 'x:1';
                              val := 0.1;
-                                 }
+                           }
             ];
         };
         
@@ -48,10 +50,13 @@ module 'search' {
         //initial individuals can be randomly generated, read from a file, or specified directly in this file (as seen here)
         //note that a random order means that the starting individual will be randomly selected from those specified.
         //with non-random orders, the first individual in the list serves as the initial individual
-		'initialisation' := 'specify-candidates' { 'candidate-list' := [
-			'candidate' { 'values' := [ 'variable'{var := data 'x:0'; val := 1.0;}, 'variable'{var := data 'x:1'; val := 5.0;}, 'variable'{var := data 'y:0'; val := 5.0;}];},
-			'candidate' { 'values' := [ 'variable'{var := data 'x:0'; val := 15.0;}, 'variable'{var := data 'x:1'; val := 1.0;}, 'variable'{var := data 'y:0'; val := 5.0;}];}];
-			'random' := false;};
+		'initialisation' := 'specify-candidates' {
+		    'candidate-list' := [
+                'candidate' { 'values' := [ 'variable'{var := data 'x:0'; val := 2.0;}, 'variable'{var := data 'x:1'; val := 5.0;} ];},
+                'candidate' { 'values' := [ 'variable'{var := data 'x:0'; val := 15.0;}, 'variable'{var := data 'x:1'; val := 4.0;} ];}
+			];
+			'random' := false;
+		};
 
 		'comparator' := 'numeric-comparator' {};
 
@@ -59,9 +64,5 @@ module 'search' {
 		'optimisation-function' := 'problem-function' {};
 
 		'stopping-criteria' := [ 'iteration-count' { 'maximum-iterations' := 200; } ];
-
-        //we can document our results. For the hill-climbing algorithm, individuals-per-generation and
-        //best-individual-per-generation work identically
-		document := ['candidates-per-iteration' {}];
 	}
 }

@@ -2,9 +2,6 @@ package de.evoal.surrogate.api.io.pson;
 
 import lombok.*;
 
-import de.evoal.core.api.languages.AttributeEvaluator;
-import de.evoal.languages.model.base.expressions.Attribute;
-
 @AllArgsConstructor
 @Builder
 @Data
@@ -22,13 +19,11 @@ public class Parameter {
 		return parameter;
 	}
 
-	public static Parameter from(final Attribute attribute, final AttributeEvaluator evaluator) {
-		final Parameter parameter = new Parameter();
-		parameter.setName(attribute.getDefinition().getName());
-		parameter.setValue(evaluator.attributeToObject(attribute));
-
-		return parameter;
-	}
+	/*
+	public static Parameter from(final EObject configuration, final EStructuralFeature feature, final AttributeEvaluator evaluator) {
+    return from(feature.getName(), evaluator.attributeToObject(configuration, feature.getName()));
+}
+	 */
 
 	public static Parameter from(final Parameter config) {
 		final Parameter parameter = new Parameter();

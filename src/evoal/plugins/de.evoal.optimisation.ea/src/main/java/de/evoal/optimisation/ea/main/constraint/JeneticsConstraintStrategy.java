@@ -1,6 +1,6 @@
 package de.evoal.optimisation.ea.main.constraint;
 
-import de.evoal.optimisation.api.model.OptimisationFunction;
+import de.evoal.models.v202704.optimisation.execution.OptimisationFunction;
 import de.evoal.optimisation.api.constraints.calculation.CalculationStrategy;
 import de.evoal.optimisation.api.constraints.strategies.HandlingStrategy;
 import de.evoal.optimisation.ea.api.codec.CustomCodec;

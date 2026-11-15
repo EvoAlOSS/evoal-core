@@ -1,6 +1,6 @@
 package de.evoal.core.api.ecore;
 
-import de.evoal.core.api.properties.Properties;
+import de.evoal.models.core.ecore.TypedEObject;
 import org.apache.commons.math3.util.Pair;
 
 /**

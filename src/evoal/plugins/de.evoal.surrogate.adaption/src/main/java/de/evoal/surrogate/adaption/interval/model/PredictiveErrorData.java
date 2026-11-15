@@ -19,11 +19,8 @@ import org.apache.commons.math3.util.Pair;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
 import de.evoal.core.api.dynamic.EAnnotationHelper;
-import de.evoal.core.api.ecore.Space;
-import de.evoal.core.api.ecore.TypedEObject;
-import de.evoal.core.api.properties.Properties;
-import de.evoal.core.api.properties.PropertySpecification;
-import de.evoal.languages.model.base.definitions.DataDescription;
+import de.evoal.models.core.ecore.Space;
+import de.evoal.models.core.ecore.TypedEObject;
 import de.evoal.surrogate.smile.api.KernelBasedSVRFunction;
 import smile.tensor.DenseMatrix;
 import smile.tensor.ScalarType;
@@ -107,7 +104,7 @@ public final class PredictiveErrorData {
         return parameters.stream().collect(Collectors.toMap(Parameter::getName, Parameter::getValue));
     }
 
-    public Pair<Double, Double> calculateBoundaries(final Properties candidate, final int regressionIndex, final KernelBasedSVRFunction function, final double confidence, final EAnnotationHelper helper) {
+    public Pair<Double, Double> calculateBoundaries(final TypedEObject candidate, final int regressionIndex, final KernelBasedSVRFunction function, final double confidence, final EAnnotationHelper helper) {
         final Space inputSpace = function.getInput();
         final Space outputSpace = function.getOutput();
 
@@ -117,10 +114,8 @@ public final class PredictiveErrorData {
         final TypedEObject output = outputSpace.newEObject();
 
         inputSpace.forEach(f -> {
-                      final DataDescription dd = helper.dataDescriptionOf(f).get();
-                      final Object value = candidate.get(new PropertySpecification(dd.getName(), dd));
-                      input.eSet(f, value);
-                  });
+              input.eSet(f, candidate.eGet(f));
+          });
 
         function.apply(input, output);
 
@@ -128,12 +123,15 @@ public final class PredictiveErrorData {
         final DenseMatrix omega = DenseMatrix.zeros(ScalarType.Float64, 1, numberOfPoints);
         IntStream.range(0, trainingPoints.length)
                 .forEach(i -> {
-                    double [] v1 = new double[candidate.size()];
-                    double [] v2 = new double[candidate.size()];
+                    double [] v1 = new double[inputSpace.size()];
+                    double [] v2 = new double[inputSpace.size()];
 
-                    for(int j = 0; j < v1.length; ++j) {
-                        v1[j] = candidate.getAsDouble(j);
+                    int j = 0;
+                    for(final EStructuralFeature feature : inputSpace) {
+                        v1[j] = candidate.eGetAsDouble(feature);
                         v2[j] = trainingPoints[i][j];
+
+                        j++;
                     }
 
                     final double kv = function.getRegression()

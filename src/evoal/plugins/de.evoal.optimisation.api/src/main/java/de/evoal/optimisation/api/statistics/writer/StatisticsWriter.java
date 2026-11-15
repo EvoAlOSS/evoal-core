@@ -1,8 +1,8 @@
 package de.evoal.optimisation.api.statistics.writer;
 
-import de.evoal.core.api.cdi.EvoalComponent;
-import de.evoal.optimisation.api.model.Iteration;
-import de.evoal.languages.model.base.expressions.Instance;
+import org.eclipse.emf.ecore.EObject;
+import de.evoal.models.v202704.optimisation.memory.Iteration;
+import de.evoal.models.core.cdi.EvoalComponent;
 
 /**
  * Evaluation-specific data writer for evaluation results. The information
@@ -10,7 +10,7 @@ import de.evoal.languages.model.base.expressions.Instance;
  * a certain technique under investigation. What all writer have in common
  * is the table-like structure of data (think of a CSV file).
  *
- * The framework will call {@link #init(Instance)} once before the optimisation
+ * The framework will call {@link #init(EObject)} once before the optimisation
  * algorithm starts. While the algorithm runs, it will call {@link #add(Iteration)}
  * for each generation step. When the algorithm terminates, the framework calls
  * {@link #write()} once to force data serialization.

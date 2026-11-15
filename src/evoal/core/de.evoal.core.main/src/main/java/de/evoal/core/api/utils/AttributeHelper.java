@@ -1,19 +1,20 @@
 package de.evoal.core.api.utils;
 
 import de.evoal.core.api.languages.AttributeEvaluator;
-import de.evoal.languages.model.base.definitions.AttributeDefinition;
-import de.evoal.languages.model.base.expressions.*;
 import de.evoal.languages.model.ol.AlgorithmInstance;
 import de.evoal.languages.model.ol.OptimisationModule;
 import de.evoal.languages.model.ol.ProblemInstance;
+import de.evoal.models.core.ecore.TypedEObject;
 import jakarta.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
 
 import jakarta.enterprise.context.ApplicationScoped;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
+
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.function.Predicate;
 
 /**
  * Helper component for doing attribute lookups. It is a slightly advanced version of
@@ -84,12 +85,13 @@ public class AttributeHelper {
             return (T)value;
         }
 
-        if(!(value instanceof Instance)) {
-            log.error("Lookup did not result in an instance: {}", value);
-            throw new IllegalStateException("Lookup resulted in a non-instance: " + value);
+        if(value instanceof TypedEObject eObject) {
+            return lookup(eObject, path);
         }
 
-        return lookup((Instance)value, path);
+        log.error("Lookup did not result in an instance: {}", value);
+        throw new IllegalStateException("Lookup resulted in a non-instance: " + value);
+
     }
 
     private <T> T lookup(final AlgorithmInstance algorithm, final List<String> path) {
@@ -117,12 +119,12 @@ public class AttributeHelper {
             return (T)value;
         }
 
-        if(!(value instanceof Instance)) {
-            log.error("Lookup did not result in an instance: {}", value);
-            throw new IllegalStateException("Lookup resulted in a non-instance: " + value);
+        if(value instanceof TypedEObject eObject) {
+            return lookup(eObject, path);
         }
 
-        return lookup((Instance)value, path);
+        log.error("Lookup did not result in an instance: {}", value);
+        throw new IllegalStateException("Lookup resulted in a non-instance: " + value);
     }
 
     /**
@@ -134,7 +136,7 @@ public class AttributeHelper {
      *
      * @param <T> The type of the target value.
      */
-    public <T> T lookup(final Instance instance, final String path) {
+    public <T> T lookup(final EObject instance, final String path) {
         requirePathIsNotNull(path);
 
         if(path.isEmpty()) {
@@ -144,7 +146,7 @@ public class AttributeHelper {
         return lookup(instance, Arrays.asList(path.split("\\.")));
     }
 
-    private <T> T lookup(final Instance instance, final List<String> path) {
+    private <T> T lookup(final EObject instance, final List<String> path) {
         log.debug("Looking up '{}':", path);
 
         requirePathIsNotNull(path);
@@ -160,31 +162,31 @@ public class AttributeHelper {
                 if(current == null) {
                     log.error("Unable to select child on null value.");
                     throw new IllegalStateException("Unable to select child on null value.");
-                } else if(!(current instanceof Instance)) {
+                } else if(!(current instanceof EObject)) {
                     log.error("Failed to lookup part '{}' of path '{}' in '{}'.", part, path, current);
                     throw new IllegalStateException("Configuration is not valid.");
                 }
 
-                final Instance currentAsInstance = (Instance)current;
+                final EObject currentAsEObject = (EObject)current;
 
                 if("name".equals(part)) {
-                    current = currentAsInstance.getDefinition().getName();
+                    current = currentAsEObject.eClass().getName();
                 } else {
-                    final AttributeDefinition definition = currentAsInstance.getDefinition().findAttribute(part);
+                    final EStructuralFeature definition = currentAsEObject.eClass().getEStructuralFeature(part);
 
                     if(definition == null) {
                         log.warn("Failed to lookup part '{}' of path '{}'. Returning null.", part, path);
-                        log.warn("Current instance is: {}", ((Instance) current).getDefinition().getName());
+                        log.warn("Current instance is: {}", ((EObject) current).eClass().getName());
                         log.warn("Available attributes:");
-                        for(final Attribute a : ((Instance) current).getAttributes()) {
-                            log.warn("  {}", a.getDefinition().getName());
+                        for(final EStructuralFeature f : ((EObject) current).eClass().getEAllStructuralFeatures()) {
+                            log.warn("  {}",f.getName());
                         }
 
                         log.error("Selecting non-existing path '{}'.", path);
                         throw new IllegalStateException("Selecting non-existing field: " + part);
                     }
 
-                    current = evaluator.attributeToJava(currentAsInstance, part, definition.getType());
+                    current = evaluator.attributeToJava(currentAsEObject, part, definition.getEType());
                 }
             } catch(final NullPointerException e) {
                 log.error("Failed to lookup part '{}' of path '{}'.", part, path);
@@ -192,20 +194,8 @@ public class AttributeHelper {
             }
         }
 
-        if(current instanceof Instance) {
-            log.debug("Mapping '{}' to instance with name '{}'.", path, ((Instance)current).getDefinition().getName());
-        } else {
-            log.debug("Mapping '{}' to '{}'.", path, current);
-        }
+        log.debug("Mapping '{}' to '{}'.", path, current);
         return (T) current;
-    }
-
-    public static <T extends ReadExpression> Predicate<T> filterInstanceByType(final String instanceTypeName) {
-        return i -> instanceTypeName.equals(((Instance)i).getDefinition().getName());
-    }
-
-    public Predicate<? super Instance> filterByAttributesInstanceType(final String attributeName, final String attributeTypeName) {
-        return i -> attributeTypeName.equals(evaluator.attributeToInstance(i, attributeName).getDefinition().getName());
     }
 
     private void requirePathIsNotNull(final Object path) {

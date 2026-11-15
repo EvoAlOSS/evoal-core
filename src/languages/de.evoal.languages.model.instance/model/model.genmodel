@@ -9,7 +9,6 @@
   <genPackages prefix="Instance" basePackage="de.evoal.languages.model" disposableProviderFactory="true"
       fileExtensions="instance" ecorePackage="model.ecore#/">
     <genClasses ecoreClass="model.ecore#//InstanceModule">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//InstanceModule/imports"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//InstanceModule/instances"/>
     </genClasses>
   </genPackages>

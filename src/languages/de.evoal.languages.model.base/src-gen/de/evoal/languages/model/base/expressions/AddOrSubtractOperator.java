@@ -26,7 +26,7 @@ public enum AddOrSubtractOperator implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	ADD(0, "Add", "Add"),
+	ADD(1, "Add", "Add"),
 
 	/**
 	 * The '<em><b>Subtract</b></em>' literal object.
@@ -36,7 +36,7 @@ public enum AddOrSubtractOperator implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	SUBTRACT(0, "Subtract", "Subtract");
+	SUBTRACT(-1, "Subtract", "Subtract");
 
 	/**
 	 * The '<em><b>Add</b></em>' literal value.
@@ -47,7 +47,7 @@ public enum AddOrSubtractOperator implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int ADD_VALUE = 0;
+	public static final int ADD_VALUE = 1;
 
 	/**
 	 * The '<em><b>Subtract</b></em>' literal value.
@@ -58,7 +58,7 @@ public enum AddOrSubtractOperator implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int SUBTRACT_VALUE = 0;
+	public static final int SUBTRACT_VALUE = -1;
 
 	/**
 	 * An array of all the '<em><b>Add Or Subtract Operator</b></em>' enumerators.
@@ -127,6 +127,7 @@ public enum AddOrSubtractOperator implements Enumerator {
 	public static AddOrSubtractOperator get(int value) {
 		switch (value) {
 			case ADD_VALUE: return ADD;
+			case SUBTRACT_VALUE: return SUBTRACT;
 		}
 		return null;
 	}

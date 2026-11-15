@@ -8,8 +8,18 @@
   <foreignModel>dynamic.ecore</foreignModel>
   <genPackages prefix="Dynamic" basePackage="de.evoal.languages.model" disposableProviderFactory="true"
       fileExtensions="dynamic" ecorePackage="dynamic.ecore#/">
-    <genClasses ecoreClass="dynamic.ecore#//Definition">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference dynamic.ecore#//Definition/source"/>
+    <genClasses image="false" ecoreClass="dynamic.ecore#//Mapping"/>
+    <genClasses ecoreClass="dynamic.ecore#//DefinitionMapping">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference dynamic.ecore#//DefinitionMapping/source"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference dynamic.ecore#//DefinitionMapping/target"/>
+    </genClasses>
+    <genClasses ecoreClass="dynamic.ecore#//ClassMapping">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference dynamic.ecore#//ClassMapping/source"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference dynamic.ecore#//ClassMapping/target"/>
+    </genClasses>
+    <genClasses ecoreClass="dynamic.ecore#//AttributeMapping">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference dynamic.ecore#//AttributeMapping/source"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference dynamic.ecore#//AttributeMapping/target"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

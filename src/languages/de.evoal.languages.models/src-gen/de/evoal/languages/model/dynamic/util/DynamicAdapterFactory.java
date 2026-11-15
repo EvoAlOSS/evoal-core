@@ -69,8 +69,20 @@ public class DynamicAdapterFactory extends AdapterFactoryImpl {
 	protected DynamicSwitch<Adapter> modelSwitch =
 		new DynamicSwitch<Adapter>() {
 			@Override
-			public Adapter caseDefinition(Definition object) {
-				return createDefinitionAdapter();
+			public Adapter caseMapping(Mapping object) {
+				return createMappingAdapter();
+			}
+			@Override
+			public Adapter caseDefinitionMapping(DefinitionMapping object) {
+				return createDefinitionMappingAdapter();
+			}
+			@Override
+			public Adapter caseClassMapping(ClassMapping object) {
+				return createClassMappingAdapter();
+			}
+			@Override
+			public Adapter caseAttributeMapping(AttributeMapping object) {
+				return createAttributeMappingAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -93,16 +105,58 @@ public class DynamicAdapterFactory extends AdapterFactoryImpl {
 
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.dynamic.Definition <em>Definition</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.dynamic.Mapping <em>Mapping</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.evoal.languages.model.dynamic.Definition
+	 * @see de.evoal.languages.model.dynamic.Mapping
 	 * @generated
 	 */
-	public Adapter createDefinitionAdapter() {
+	public Adapter createMappingAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.dynamic.DefinitionMapping <em>Definition Mapping</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.evoal.languages.model.dynamic.DefinitionMapping
+	 * @generated
+	 */
+	public Adapter createDefinitionMappingAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.dynamic.ClassMapping <em>Class Mapping</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.evoal.languages.model.dynamic.ClassMapping
+	 * @generated
+	 */
+	public Adapter createClassMappingAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.dynamic.AttributeMapping <em>Attribute Mapping</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.evoal.languages.model.dynamic.AttributeMapping
+	 * @generated
+	 */
+	public Adapter createAttributeMappingAdapter() {
 		return null;
 	}
 

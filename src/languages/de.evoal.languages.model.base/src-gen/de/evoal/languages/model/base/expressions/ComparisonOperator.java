@@ -36,7 +36,7 @@ public enum ComparisonOperator implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	GREATER_EQUAL(0, "GreaterEqual", "GreaterEqual"),
+	GREATER_EQUAL(1, "GreaterEqual", "GreaterEqual"),
 
 	/**
 	 * The '<em><b>Equal</b></em>' literal object.
@@ -46,7 +46,7 @@ public enum ComparisonOperator implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	EQUAL(0, "Equal", "Equal"),
+	EQUAL(2, "Equal", "Equal"),
 
 	/**
 	 * The '<em><b>Unequal</b></em>' literal object.
@@ -56,7 +56,7 @@ public enum ComparisonOperator implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	UNEQUAL(0, "Unequal", "Unequal"),
+	UNEQUAL(3, "Unequal", "Unequal"),
 
 	/**
 	 * The '<em><b>Less Equal</b></em>' literal object.
@@ -66,7 +66,7 @@ public enum ComparisonOperator implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	LESS_EQUAL(0, "LessEqual", "LessEqual"),
+	LESS_EQUAL(4, "LessEqual", "LessEqual"),
 
 	/**
 	 * The '<em><b>Less Than</b></em>' literal object.
@@ -76,7 +76,7 @@ public enum ComparisonOperator implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	LESS_THAN(0, "LessThan", "LessThan");
+	LESS_THAN(5, "LessThan", "LessThan");
 
 	/**
 	 * The '<em><b>Greater Than</b></em>' literal value.
@@ -98,7 +98,7 @@ public enum ComparisonOperator implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int GREATER_EQUAL_VALUE = 0;
+	public static final int GREATER_EQUAL_VALUE = 1;
 
 	/**
 	 * The '<em><b>Equal</b></em>' literal value.
@@ -109,7 +109,7 @@ public enum ComparisonOperator implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int EQUAL_VALUE = 0;
+	public static final int EQUAL_VALUE = 2;
 
 	/**
 	 * The '<em><b>Unequal</b></em>' literal value.
@@ -120,7 +120,7 @@ public enum ComparisonOperator implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int UNEQUAL_VALUE = 0;
+	public static final int UNEQUAL_VALUE = 3;
 
 	/**
 	 * The '<em><b>Less Equal</b></em>' literal value.
@@ -131,7 +131,7 @@ public enum ComparisonOperator implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int LESS_EQUAL_VALUE = 0;
+	public static final int LESS_EQUAL_VALUE = 4;
 
 	/**
 	 * The '<em><b>Less Than</b></em>' literal value.
@@ -142,7 +142,7 @@ public enum ComparisonOperator implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int LESS_THAN_VALUE = 0;
+	public static final int LESS_THAN_VALUE = 5;
 
 	/**
 	 * An array of all the '<em><b>Comparison Operator</b></em>' enumerators.
@@ -215,6 +215,11 @@ public enum ComparisonOperator implements Enumerator {
 	public static ComparisonOperator get(int value) {
 		switch (value) {
 			case GREATER_THAN_VALUE: return GREATER_THAN;
+			case GREATER_EQUAL_VALUE: return GREATER_EQUAL;
+			case EQUAL_VALUE: return EQUAL;
+			case UNEQUAL_VALUE: return UNEQUAL;
+			case LESS_EQUAL_VALUE: return LESS_EQUAL;
+			case LESS_THAN_VALUE: return LESS_THAN;
 		}
 		return null;
 	}

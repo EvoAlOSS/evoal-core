@@ -1,7 +1,7 @@
 package de.evoal.surrogate.api.function;
 
 import de.evoal.core.api.cdi.BeanFactory;
-import de.evoal.core.api.ecore.Space;
+import de.evoal.models.core.ecore.Space;
 import de.evoal.surrogate.api.io.ModelReader;
 import de.evoal.surrogate.api.io.ModelStorage;
 import de.evoal.surrogate.api.io.ModelStorageFactory;

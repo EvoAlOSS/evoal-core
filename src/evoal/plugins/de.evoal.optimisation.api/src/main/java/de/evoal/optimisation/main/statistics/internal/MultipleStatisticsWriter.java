@@ -1,8 +1,8 @@
 package de.evoal.optimisation.main.statistics.internal;
 
-import de.evoal.optimisation.api.model.Iteration;
-import de.evoal.languages.model.base.expressions.Instance;
+import de.evoal.models.v202704.optimisation.memory.Iteration;
 import de.evoal.optimisation.api.statistics.writer.StatisticsWriter;
+import org.eclipse.emf.ecore.EObject;
 
 import java.util.Arrays;
 
@@ -22,7 +22,7 @@ public class MultipleStatisticsWriter implements StatisticsWriter {
     }
 
     @Override
-    public StatisticsWriter init(Instance configuration) {
+    public StatisticsWriter init(EObject configuration) {
         return this;
     }
 

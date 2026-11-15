@@ -1,12 +1,12 @@
 package de.evoal.pipeline.impl.components.distributions;
 
-import de.evoal.core.api.utils.InitializationException;
-import de.evoal.languages.model.base.expressions.Instance;
+import de.evoal.models.core.exceptions.InitializationException;
 import de.evoal.pipeline.api.distribution.Distribution;
 import de.evoal.pipeline.api.distribution.DistributionFactory;
 import de.evoal.pipeline.api.model.PipelineComponentImpl;
-import de.evoal.core.api.ecore.TypedEObject;
+import de.evoal.models.core.ecore.TypedEObject;
 import lombok.NonNull;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
 import jakarta.enterprise.context.Dependent;
@@ -27,7 +27,7 @@ public class NoiseData extends PipelineComponentImpl {
 	@Inject
 	private DistributionFactory factory;
 
-	public PipelineComponentImpl init(final Instance configuration) throws InitializationException {
+	public PipelineComponentImpl init(final EObject configuration) throws InitializationException {
 		super.init(configuration);
 
         distributions = factory.readDistributions(configuration, "distributions");

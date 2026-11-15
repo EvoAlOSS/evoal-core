@@ -1,4 +1,5 @@
 import "definitions" from de.evoal.optimisation.core;
+import "definitions" from 'de.evoal.core.base';
 
 module de.evoal.optimisation.ea.optimisation {
     /**
@@ -48,7 +49,7 @@ module de.evoal.optimisation.ea.optimisation {
     /**
      * Base class for genotypes.
      */
-	abstract type genotype {
+	abstract type genotype extends configuration {
 	}
 
     /**
@@ -64,7 +65,7 @@ module de.evoal.optimisation.ea.optimisation {
 	/**
 	 * Abstract base type for different chromosome types.
 	 */
-	abstract type chromosome {
+	abstract type chromosome extends configuration {
 	    /**
 	     * A chromosome consists of one to multiple genes.
 	     */
@@ -281,7 +282,7 @@ module de.evoal.optimisation.ea.optimisation {
 		crossover : array instance crossover;
 	}
 	
-	abstract type crossover {}
+	abstract type crossover extends configuration {}
 	
 	type 'mean-alterer' extends crossover {
 		probability : real;
@@ -337,7 +338,7 @@ module de.evoal.optimisation.ea.optimisation {
 		'swap-probability' : real;
 	}
 	
-	abstract type mutator {
+	abstract type mutator extends configuration {
 	}
 
     /**

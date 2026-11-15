@@ -1,12 +1,12 @@
 package de.evoal.pipeline.impl.components.misc;
 
 import de.evoal.core.api.languages.AttributeEvaluator;
-import de.evoal.core.api.utils.InitializationException;
+import de.evoal.models.core.exceptions.InitializationException;
 import de.evoal.core.api.utils.Requirements;
-import de.evoal.languages.model.base.expressions.Instance;
 import de.evoal.pipeline.api.model.PipelineComponentImpl;
-import de.evoal.core.api.ecore.TypedEObject;
+import de.evoal.models.core.ecore.TypedEObject;
 import lombok.NonNull;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
 import jakarta.enterprise.context.Dependent;
@@ -36,7 +36,7 @@ public class ConstantFunction extends PipelineComponentImpl {
 	}
 
 	@Override
-	public PipelineComponentImpl init(final Instance configuration) throws InitializationException {
+	public PipelineComponentImpl init(final EObject configuration) throws InitializationException {
 		super.init(configuration);
 
 		constants = evaluator.attributeToDoubleArray(configuration, "constants");

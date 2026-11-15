@@ -4,12 +4,12 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
-import de.evoal.core.api.ecore.Space;
+import de.evoal.models.core.ecore.Space;
 
 import de.evoal.pipeline.api.executor.PipelineExecutor;
 import de.evoal.pipeline.api.model.PipelineComponent;
 import de.evoal.pipeline.api.model.PipelineComposite;
-import de.evoal.core.api.ecore.TypedEObject;
+import de.evoal.models.core.ecore.TypedEObject;
 import de.evoal.pipeline.api.model.PipelineSource;
 import de.evoal.pipeline.impl.components.misc.Limit;
 import lombok.extern.slf4j.Slf4j;

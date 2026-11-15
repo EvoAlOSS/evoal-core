@@ -1,10 +1,9 @@
 package de.evoal.surrogate.main.jackson;
 
-import de.evoal.languages.model.base.expressions.Attribute;
-import de.evoal.languages.model.base.expressions.Instance;
-import de.evoal.languages.model.dl.DefinitionModule;
-import de.evoal.languages.model.pipeline.*;
+import de.evoal.core.api.dynamic.DynamicEClassProvider;
+import de.evoal.models.v202704.pipeline.*;
 import lombok.extern.slf4j.Slf4j;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import tools.jackson.core.JsonGenerator;
 import tools.jackson.databind.SerializationContext;
@@ -23,22 +22,20 @@ public class PipelineSerializer extends StdSerializer<PipelineDefinition> {
         serializePipelineDefinition(value, jsonGenerator, serializerProvider);
     }
 
-    private void serializeInstance(final Instance instance, final JsonGenerator generator, final SerializationContext provider) {
+    /**
+     * Writes the configuration of a pipeline step. Only the DL type is stored; attribute
+     *   values are not stored (as before), so the {@code attributes} array stays empty. The
+     *   type tag {@code instance} is kept for compatibility with existing PSON files.
+     */
+    private void serializeConfiguration(final EObject configuration, final JsonGenerator generator, final SerializationContext provider) {
         generator.writeStartObject();
         generator.writeStringProperty("type", "instance");
-        generator.writeStringProperty("class-definition", ((DefinitionModule)instance.getDefinition().eContainer()).getName() + "." + instance.getDefinition().getName());
+        generator.writeStringProperty("class-definition", DynamicEClassProvider.dlTypeOf(configuration));
 
         generator.writeName("attributes");
         generator.writeStartArray();
-
-        for(final Attribute attr : instance.getAttributes()) {
-            generator.writeStartObject();
-            generator.writeName(attr.getDefinition().getName());
-            generator.writeNull(); // TODO serialize(attr.getValue(), generator, provider);
-            generator.writeEndObject();
-        }
-
         generator.writeEndArray();
+
         generator.writeEndObject();
     }
 
@@ -89,7 +86,7 @@ public class PipelineSerializer extends StdSerializer<PipelineDefinition> {
         generator.writeEndArray();
 
         generator.writeName("configuration");
-        serializeInstance(step.getInstance(), generator, provider);
+        serializeConfiguration(step.getConfiguration(), generator, provider);
 
         generator.writeEndObject();
     }

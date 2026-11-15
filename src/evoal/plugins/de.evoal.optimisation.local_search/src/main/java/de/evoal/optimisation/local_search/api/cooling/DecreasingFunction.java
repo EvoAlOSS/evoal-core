@@ -1,6 +1,6 @@
 package de.evoal.optimisation.local_search.api.cooling;
 
-import de.evoal.core.api.cdi.EvoalComponent;
+import de.evoal.models.core.cdi.EvoalComponent;
 
 /**
  * Interface for cooling schedules for simulated annealing algorithm

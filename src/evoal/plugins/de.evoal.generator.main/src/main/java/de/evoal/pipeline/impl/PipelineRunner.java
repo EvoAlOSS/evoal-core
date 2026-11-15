@@ -1,6 +1,7 @@
 package de.evoal.pipeline.impl;
 
-import de.evoal.core.api.ecore.Space;
+import de.evoal.models.core.ecore.Space;
+import de.evoal.pipeline.impl.internal.GeneratorModelTransformer;
 import lombok.extern.slf4j.Slf4j;
 
 import jakarta.enterprise.context.ApplicationScoped;
@@ -10,7 +11,7 @@ import jakarta.inject.Named;
 import org.eclipse.emf.ecore.EClass;
 
 import de.evoal.languages.model.generator.GeneratorModule;
-import de.evoal.languages.model.pipeline.PipelineModule;
+import de.evoal.models.v202704.pipeline.PipelineModule;
 
 import de.evoal.core.api.cdi.Application;
 import de.evoal.core.api.cdi.BlackboardValue;
@@ -64,6 +65,9 @@ public class PipelineRunner implements MainClass {
 	@Inject
 	private GeneratorModuleLoader loader;
 
+	@Inject
+	private GeneratorModelTransformer transformer;
+
 	@Override
 	public void run() {
 		log.info("Loading generator module from '{}'.", configurationFilename);
@@ -75,8 +79,7 @@ public class PipelineRunner implements MainClass {
 		final Space space = new Space(dynamicEClass);
 
 		log.info("Executing model-to-model on generator model.");
-		final GeneratorDSLConverter converter = new GeneratorDSLConverter(definitionLoader, space);
-		final PipelineModule pModule = converter.convert(module);
+		final PipelineModule pModule = transformer.transform(module, space);
 
 		log.info("Running pipeline.");
 		new ProgramInterpreter()

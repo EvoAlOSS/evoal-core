@@ -1,9 +1,10 @@
 package de.evoal.surrogate.api.io.pson;
 
-import de.evoal.core.api.ecore.Space;
-import de.evoal.languages.model.pipeline.PipelineDefinition;
+import de.evoal.models.core.ecore.Space;
+import de.evoal.models.v202704.pipeline.PipelineDefinition;
 import de.evoal.pipeline.api.cdi.DefinitionModuleLoader;
 import de.evoal.surrogate.api.io.ModelStorage;
+import de.evoal.surrogate.main.internal.SurrogateModelTransformer;
 import de.evoal.surrogate.main.jackson.ParameterSerializer;
 import de.evoal.surrogate.main.jackson.PipelineDeserializer;
 import de.evoal.surrogate.main.jackson.PipelineSerializer;
@@ -40,6 +41,9 @@ public class PSONModelStorage implements ModelStorage {
 
     @Inject
     private DefinitionModuleLoader loader;
+
+    @Inject
+    private SurrogateModelTransformer transformer;
 
     @Getter
     private Space outputSpace;
@@ -85,7 +89,7 @@ public class PSONModelStorage implements ModelStorage {
 
         try(final InputStream is = new FileInputStream(file)) {
             final Space functionSpace = inputSpace.merge(outputSpace);
-            final PipelineDeserializer pipelineDeserializer = new PipelineDeserializer(loader, functionSpace);
+            final PipelineDeserializer pipelineDeserializer = new PipelineDeserializer(loader, functionSpace, transformer.setSpace(functionSpace));
             final ParameterDeserializer parameterDeserializer = new ParameterDeserializer();
             parameterDeserializer.setSourceSpace(inputSpace);
             parameterDeserializer.setTargetSpace(outputSpace);

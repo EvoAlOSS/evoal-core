@@ -1,8 +1,8 @@
 package de.evoal.surrogate.api.io.onnx;
 
 import ai.onnxruntime.*;
-import de.evoal.core.api.ecore.Space;
-import de.evoal.core.api.ecore.TypedEObject;
+import de.evoal.models.core.ecore.Space;
+import de.evoal.models.core.ecore.TypedEObject;
 import de.evoal.core.api.utils.Requirements;
 import de.evoal.surrogate.api.function.ModelFunction;
 import de.evoal.surrogate.api.io.ModelStorage;

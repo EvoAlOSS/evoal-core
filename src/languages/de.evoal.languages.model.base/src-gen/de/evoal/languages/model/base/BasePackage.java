@@ -6,6 +6,7 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
 
 /**
  * <!-- begin-user-doc -->
@@ -114,6 +115,53 @@ public interface BasePackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link de.evoal.languages.model.base.impl.ModuleImpl <em>Module</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.evoal.languages.model.base.impl.ModuleImpl
+	 * @see de.evoal.languages.model.base.impl.BasePackageImpl#getModule()
+	 * @generated
+	 */
+	int MODULE = 1;
+
+	/**
+	 * The feature id for the '<em><b>Imports</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODULE__IMPORTS = 0;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODULE__NAME = 1;
+
+	/**
+	 * The number of structural features of the '<em>Module</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODULE_FEATURE_COUNT = 2;
+
+	/**
+	 * The number of operations of the '<em>Module</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODULE_OPERATION_COUNT = 0;
+
+
+	/**
 	 * Returns the meta object for class '{@link de.evoal.languages.model.base.Import <em>Import</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -154,6 +202,38 @@ public interface BasePackage extends EPackage {
 	 * @generated
 	 */
 	EOperation getImport__GetFilename();
+
+	/**
+	 * Returns the meta object for class '{@link de.evoal.languages.model.base.Module <em>Module</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Module</em>'.
+	 * @see de.evoal.languages.model.base.Module
+	 * @generated
+	 */
+	EClass getModule();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.base.Module#getImports <em>Imports</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Imports</em>'.
+	 * @see de.evoal.languages.model.base.Module#getImports()
+	 * @see #getModule()
+	 * @generated
+	 */
+	EReference getModule_Imports();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.base.Module#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see de.evoal.languages.model.base.Module#getName()
+	 * @see #getModule()
+	 * @generated
+	 */
+	EAttribute getModule_Name();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -211,6 +291,32 @@ public interface BasePackage extends EPackage {
 		 * @generated
 		 */
 		EOperation IMPORT___GET_FILENAME = eINSTANCE.getImport__GetFilename();
+
+		/**
+		 * The meta object literal for the '{@link de.evoal.languages.model.base.impl.ModuleImpl <em>Module</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.evoal.languages.model.base.impl.ModuleImpl
+		 * @see de.evoal.languages.model.base.impl.BasePackageImpl#getModule()
+		 * @generated
+		 */
+		EClass MODULE = eINSTANCE.getModule();
+
+		/**
+		 * The meta object literal for the '<em><b>Imports</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MODULE__IMPORTS = eINSTANCE.getModule_Imports();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MODULE__NAME = eINSTANCE.getModule_Name();
 
 	}
 

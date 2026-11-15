@@ -1,6 +1,5 @@
 package de.evoal.optimisation.ea.api.codec.program;
 
-import de.evoal.core.api.cdi.EvoalComponent;
 import io.jenetics.prog.ProgramChromosome;
 
 public interface TreeValidator<T> extends EvoalComponent<TreeValidator<T>> {

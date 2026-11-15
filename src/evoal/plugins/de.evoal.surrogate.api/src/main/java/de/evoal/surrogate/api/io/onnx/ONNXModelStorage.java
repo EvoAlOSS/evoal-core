@@ -2,8 +2,8 @@ package de.evoal.surrogate.api.io.onnx;
 
 
 import ai.onnxruntime.*;
-import de.evoal.core.api.ecore.Space;
-import de.evoal.languages.model.pipeline.PipelineDefinition;
+import de.evoal.models.core.ecore.Space;
+import de.evoal.models.v202704.pipeline.PipelineDefinition;
 import de.evoal.surrogate.api.io.ModelStorage;
 
 import de.evoal.surrogate.api.io.pson.Parameter;

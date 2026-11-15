@@ -6,14 +6,6 @@
 
 <plugin>
    <extension point="org.eclipse.emf.ecore.generated_package">
-      <!-- @generated model -->
-      <package
-            uri="https://www.evoal.de/languages/pipeline/1.0.0"
-            class="de.evoal.languages.model.pipeline.PipelinePackage"
-            genModel="model/pipeline.genmodel"/>
-   </extension>
-
-   <extension point="org.eclipse.emf.ecore.generated_package">
       <!-- @generated execution -->
       <package
             uri="https://www.evoal.de/languages/execution/1.0.0"
@@ -46,18 +38,51 @@
    </extension>
 
    <extension point="org.eclipse.emf.ecore.generated_package">
-      <!-- @generated optimization -->
+      <!-- @generated optimisation -->
       <package
-            uri="https://www.evoal.de/languages/memory/1.0.0"
-            class="de.evoal.languages.model.optimization.memory.MemoryPackage"
-            genModel="model/optimization.genmodel"/>
+            uri="https://evoal.de/v202704/models/optimisation"
+            class="de.evoal.models.v202704.optimisation.optimisationPackage"
+            genModel="model/optimisation.genmodel"/>
    </extension>
 
    <extension point="org.eclipse.emf.ecore.generated_package">
-      <!-- @generated optimization -->
+      <!-- @generated optimisation -->
       <package
-            uri="https://www.evoal.de/languages/execution/1.0.0"
-            class="de.evoal.languages.model.optimization.execution.ExecutionPackage"
-            genModel="model/optimization.genmodel"/>
+            uri="https://evoal.de/v202704/models/optimisation/memory"
+            class="de.evoal.models.v202704.optimisation.memory.MemoryPackage"
+            genModel="model/optimisation.genmodel"/>
    </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated optimisation -->
+      <package
+            uri="https://evoal.de/v202704/models/optimisation/execution"
+            class="de.evoal.models.v202704.optimisation.execution.ExecutionPackage"
+            genModel="model/optimisation.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated optimisation -->
+      <package
+            uri="https://evoal.de/v202704/models/optimisation/model"
+            class="de.evoal.models.v202704.optimisation.model.ModelPackage"
+            genModel="model/optimisation.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated pipeline -->
+      <package
+            uri="https://evoal.de/v202704/models/pipeline"
+            class="de.evoal.models.v202704.pipeline.PipelinePackage"
+            genModel="model/pipeline.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated core -->
+      <package
+            uri="https://evoal.de/v202704/models/core"
+            class="de.evoal.models.v202704.core.CorePackage"
+            genModel="model/core.genmodel"/>
+   </extension>
+
 </plugin>

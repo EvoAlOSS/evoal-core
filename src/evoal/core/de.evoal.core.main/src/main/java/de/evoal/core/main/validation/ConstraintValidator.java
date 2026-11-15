@@ -10,6 +10,7 @@ import de.evoal.languages.model.base.definitions.ClassDefinition;
 import de.evoal.languages.model.base.expressions.Attribute;
 import de.evoal.languages.model.base.expressions.Expression;
 import de.evoal.languages.model.base.expressions.Instance;
+import de.evoal.models.v202704.core.Configuration;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.emf.common.util.EList;
@@ -67,8 +68,8 @@ public class ConstraintValidator implements InstanceValidator {
 
     public void checkOnInstance(final @NonNull DiagnosticsContext context, final @NonNull Expression constraint, final @NonNull EObject object) {
         if(constraint instanceof Instance configuration) {
-            BeanFactory.createComponent(ConstraintCheckerComponent.class, configuration)
-                       .checkOnInstance(context, object);
+            // TODO BeanFactory.createComponent(ConstraintCheckerComponent.class, configuration)
+            //           .checkOnInstance(context, object);
         } else {
             log.atWarn()
                 .setMessage("Constraint validator does currently not support constraints of type: {}.")
@@ -79,7 +80,7 @@ public class ConstraintValidator implements InstanceValidator {
 
 
     public void checkOnEcore(final @NonNull DiagnosticsContext context, final @NonNull Expression constraint, final @NonNull Object object) {
-        if(constraint instanceof Instance configuration) {
+        if(constraint instanceof Configuration configuration) {
             BeanFactory.createComponent(ConstraintCheckerComponent.class, configuration)
                     .checkOnEcore(context, object);
         } else {

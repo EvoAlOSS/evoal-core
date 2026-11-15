@@ -11,6 +11,8 @@ import de.evoal.languages.model.base.definitions.AttributeDefinition;
 import de.evoal.languages.model.base.definitions.ConstantDefinition;
 import de.evoal.languages.model.base.expressions.*;
 import de.evoal.languages.model.base.expressions.util.ExpressionsSwitch;
+import de.evoal.languages.model.interpreter.numeric.ArithmeticNumberOperations;
+import de.evoal.languages.model.interpreter.numeric.BooleanNumberOperations;
 
 public abstract class AbstractExpressionEvaluator extends ExpressionsSwitch<Object> {
 	/**

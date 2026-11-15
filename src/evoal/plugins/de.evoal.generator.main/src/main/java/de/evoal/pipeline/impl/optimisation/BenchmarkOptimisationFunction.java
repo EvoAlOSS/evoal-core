@@ -1,148 +1,132 @@
 package de.evoal.pipeline.impl.optimisation;
 
-import de.evoal.languages.model.base.expressions.TypeDefinitionReference;
-import de.evoal.languages.model.pipeline.ConcreteStep;
+import de.evoal.models.v202704.optimisation.execution.impl.OptimisationFunctionImpl;
+
+import de.evoal.pipeline.api.model.PipelineComposite;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
-import java.util.Map;
+
 import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
-import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import de.evoal.core.api.cdi.BeanFactory;
-import de.evoal.core.api.ecore.Space;
-import de.evoal.core.api.ecore.TypedEObject;
-import de.evoal.core.api.properties.Properties;
-import de.evoal.core.api.properties.PropertiesSpecification;
-import de.evoal.core.api.properties.PropertySpecification;
+import de.evoal.models.core.ecore.Space;
+import de.evoal.models.core.ecore.TypedEObject;
 import de.evoal.core.api.utils.AttributeHelper;
-import de.evoal.languages.model.base.definitions.DataDescription;
-import de.evoal.languages.model.base.expressions.ExpressionsFactory;
-import de.evoal.languages.model.base.expressions.Instance;
-import de.evoal.languages.model.pipeline.PipelineFactory;
-import de.evoal.optimisation.api.model.OptimisationFunction;
+import de.evoal.models.v202704.optimisation.execution.OptimisationFunction;
 import de.evoal.pipeline.api.model.PipelineComponent;
 import de.evoal.pipeline.api.model.PipelineComponentImpl;
-import de.evoal.core.api.dynamic.EAnnotationHelper;
-import de.evoal.core.api.dynamic.EClassProvider;
 
 @Slf4j
 @Dependent
 @Named("de.evoal.pipeline.optimisation.benchmark-function")
-public class BenchmarkOptimisationFunction implements OptimisationFunction {
+public class BenchmarkOptimisationFunction extends OptimisationFunctionImpl {
 
+    /**
+     * Lookup configuration attributes.
+     */
     @Inject
-    private AttributeHelper helper;
+    private AttributeHelper attributes;
 
-    @Inject @Named("search-space-specification")
-    private PropertiesSpecification searchSpaceSpecification;
+    /**
+     * The instantiated pipeline.
+     */
+    private PipelineComposite benchmarkPipeline;
 
-    @Inject @Named("optimisation-space-specification")
-    private PropertiesSpecification optimisationSpaceSpecification;
+    /**
+     * A merged space (of search and optimisation space) that is used for the
+     *   benchmark pipeline.
+     */
+    private Space mergedSpace;
 
-    @Inject
-    private EClassProvider provider;
+    /**
+     * Optimisation space configuration.
+     */
+    @Inject @Named("optimisation-space")
+    private Space optimisationSpace;
 
-    @Inject
-    private EAnnotationHelper annHelper;
-
-    private PropertiesSpecification mergedSpaceSpecification;
-
-    private PipelineComponent[] functions;
-
-    private PropertiesSpecification [] functionProperties;
-
-    private EClass eClass;
-    private Map<DataDescription, EStructuralFeature> mapping;
+    /**
+     * Search space definition.
+     */
+    @Inject @Named("search-space")
+    private Space searchSpace;
 
     @Override
-    public double[] evaluate(final Properties candidate) {
-        final TypedEObject temporary =  new TypedEObject(eClass);
-
-        // copy all input values
-        for(final PropertySpecification spec : candidate.getSpecification().getProperties()) {
-            temporary.eSet(mapping.get(spec.type()), candidate.get(spec));
+    public TypedEObject evaluate(final TypedEObject candidate) {
+        final TypedEObject result = optimisationSpace.newEObject();
+        final TypedEObject object = mergedSpace.newEObject();
+        for(final EStructuralFeature feature : searchSpace) {
+            object.eSet(feature, candidate.eGet(feature));
         }
 
-        for(int i = 0; i < functions.length; ++i) {
-            final PipelineComponent function = functions[i];
-            final PropertiesSpecification specification = functionProperties[i];
+        benchmarkPipeline.apply(object);
 
-            function.apply(temporary);
+        for(final EStructuralFeature feature : optimisationSpace) {
+            result.eSet(feature, object.eGet(feature));
         }
 
-        final Properties result = new Properties(optimisationSpaceSpecification);
-        for(final PropertySpecification spec : optimisationSpaceSpecification.getProperties()) {
-            result.put(spec, temporary.eGet(mapping.get(spec.type())));
-        }
-
-        return result.getValuesAsDouble();
+        return result;
     }
 
     @SneakyThrows
     @Override
-    public OptimisationFunction init(final Instance config) {
-        final List<Instance> benchmarkConfigurations = helper.lookup(config, "benchmarks");
+    public OptimisationFunction init(final EObject config) {
+        log.info("Using benchmark function as optimisation function");
+        mergedSpace = searchSpace.merge(optimisationSpace);
 
-        eClass = provider.eClassFor(searchSpaceSpecification, optimisationSpaceSpecification);
-        mapping = annHelper.featuresOf(eClass);
+        final List<EObject> benchmarkConfigurations = attributes.lookup(config, "benchmarks");
 
-        functions = new PipelineComponent[benchmarkConfigurations.size()];
-        functionProperties = new PropertiesSpecification[benchmarkConfigurations.size()];
-        for(int index = 0; index < functions.length; ++index) {
-            final Instance benchmarkConfiguration = benchmarkConfigurations.get(index);
-            final Instance function = helper.lookup(benchmarkConfiguration, "function");
+        final List<PipelineComponent> components =
+            benchmarkConfigurations
+                    .stream()
+                    .map(configuration -> {
+                            // In the runtime model, 'function' is a dynamic EObject of the benchmark's
+                            // DL class, and 'reads'/'writes' already hold the merged-space features.
+                            final EObject function = attributes.lookup(configuration, "function");
+                            final List<EStructuralFeature> reads = attributes.lookup(configuration, "reads");
+                            final List<EStructuralFeature> writes = attributes.lookup(configuration, "writes");
 
-            final ConcreteStep stepConfiguration = PipelineFactory.eINSTANCE.createConcreteStep();
-            stepConfiguration.setInstance(EcoreUtil.copy(function));
+                            log.info("  found configuration of benchmark {} (reads {}, writes {})",
+                                    function.eClass().getName(),
+                                    reads.stream().map(EStructuralFeature::getName).toList(),
+                                    writes.stream().map(EStructuralFeature::getName).toList());
 
-            final List<DataDescription> readReferences = helper.lookup(benchmarkConfiguration, "reads");
-            readReferences.forEach(dr -> {
-                final TypeDefinitionReference reference = ExpressionsFactory.eINSTANCE.createTypeDefinitionReference();
-                reference.setDefinition(dr);
-                stepConfiguration.getReads().add(mapping.get(dr));
-            });
+                            return toComponent(function, reads, writes);
+                        })
+                    .toList();
 
-            final List<DataDescription> writeReferences = (List<DataDescription>) helper.lookup(benchmarkConfiguration, "writes");
-            writeReferences
-                    .forEach(dr -> {
-                        final TypeDefinitionReference reference = ExpressionsFactory.eINSTANCE.createTypeDefinitionReference();
-                        reference.setDefinition(dr);
-                        stepConfiguration.getWrites().add(mapping.get(dr));
-                    });
-
-            functions[index] = toComponent(stepConfiguration);
-            functionProperties[index] = PropertiesSpecification.builder()
-                    .addDescriptions(writeReferences.stream())
-                    .build();
-        }
-
-        mergedSpaceSpecification = PropertiesSpecification.builder()
-                .add(searchSpaceSpecification)
-                .add(optimisationSpaceSpecification)
-                .build();
+        benchmarkPipeline = new PipelineComposite(components);
 
         return this;
     }
 
     /**
-     * Converting a step into a component, a single executable element of the pipeline.
+     * Instantiates a benchmark component, a single executable element of the pipeline.
      *
-     * @param step The step to instanciate.
-     * @return The instanciated component.
+     * @param instance The benchmark configuration (dynamic EObject of the runtime model).
+     * @param reads The features the benchmark reads.
+     * @param writes The features the benchmark writes.
+     * @return The instantiated component.
      */
-    private PipelineComponent toComponent(final de.evoal.languages.model.pipeline.ConcreteStep step) {
-        log.info("Instantiating component {}", step.getInstance().getDefinition().getName());
-        final Space space = new Space(eClass);
-        final Space inputSpace = space.subSpace(step.getReads());
-        final Space outputSpace = space.subSpace(step.getWrites());
-        return BeanFactory.createComponent(PipelineComponentImpl.class, step.getInstance(), c -> c.setFeatures(space, inputSpace, outputSpace));
+    private PipelineComponent toComponent(final EObject instance,
+                                          final List<EStructuralFeature> reads,
+                                          final List<EStructuralFeature> writes) {
+        log.info("Instantiating component {}", instance.eClass().getName());
+
+        final Space inputSpace = mergedSpace.subSpace(reads);
+        final Space outputSpace = mergedSpace.subSpace(writes);
+
+        return BeanFactory.createComponent(
+                PipelineComponentImpl.class,
+                instance,
+                c -> c.setFeatures(mergedSpace, inputSpace, outputSpace)
+        );
     }
 }
 

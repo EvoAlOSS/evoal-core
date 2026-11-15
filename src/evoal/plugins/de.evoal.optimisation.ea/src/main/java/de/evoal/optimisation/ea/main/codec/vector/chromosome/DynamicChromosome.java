@@ -1,6 +1,5 @@
 package de.evoal.optimisation.ea.main.codec.vector.chromosome;
 
-import de.evoal.core.api.cdi.EvoalComponent;
 import de.evoal.core.api.properties.Properties;
 import de.evoal.core.api.properties.PropertiesSpecification;
 import de.evoal.core.api.utils.AttributeHelper;

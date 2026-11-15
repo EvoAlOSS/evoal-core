@@ -1,7 +1,7 @@
 package de.evoal.surrogate.main.jackson;
 
 import de.evoal.core.api.ecore.EObjectPair;
-import de.evoal.core.api.ecore.TypedEObject;
+import de.evoal.models.core.ecore.TypedEObject;
 import de.evoal.surrogate.api.io.pson.Parameter;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.emf.ecore.EStructuralFeature;

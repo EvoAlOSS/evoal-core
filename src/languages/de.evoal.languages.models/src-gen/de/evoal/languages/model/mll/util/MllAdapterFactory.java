@@ -79,6 +79,10 @@ public class MllAdapterFactory extends AdapterFactoryImpl {
 				return createTaskDescriptionAdapter();
 			}
 			@Override
+			public Adapter caseModule(de.evoal.languages.model.base.Module object) {
+				return createModuleAdapter();
+			}
+			@Override
 			public Adapter caseVariable(Variable object) {
 				return createVariableAdapter();
 			}
@@ -131,6 +135,20 @@ public class MllAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTaskDescriptionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.evoal.languages.model.base.Module <em>Module</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.evoal.languages.model.base.Module
+	 * @generated
+	 */
+	public Adapter createModuleAdapter() {
 		return null;
 	}
 

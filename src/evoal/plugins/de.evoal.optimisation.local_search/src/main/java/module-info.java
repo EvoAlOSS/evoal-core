@@ -14,6 +14,11 @@ module de.evoal.optimisation.local_search {
     requires org.slf4j;
     requires lombok;
     requires de.evoal.languages.model.interpreter;
+    requires de.evoal.languages.models;
+    requires org.eclipse.emf.ecore;
+    requires deltaspike.cdictrl.api;
+    requires de.evoal.languages.model.ol;
+    requires commons.math3;
 
     exports de.evoal.optimisation.local_search.api.neighbour;
     exports de.evoal.optimisation.local_search.api.probability;

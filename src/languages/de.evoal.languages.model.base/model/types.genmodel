@@ -25,7 +25,13 @@
     <genClasses ecoreClass="types.ecore#//LiteralType"/>
     <genClasses ecoreClass="types.ecore#//DataType"/>
     <genClasses ecoreClass="types.ecore#//DefinitionReference">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference types.ecore#//DefinitionReference/definition"/>
+      <genOperations ecoreOperation="types.ecore#//DefinitionReference/getDefinition"/>
+    </genClasses>
+    <genClasses ecoreClass="types.ecore#//ClassDefinitionReference">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference types.ecore#//ClassDefinitionReference/definition"/>
+    </genClasses>
+    <genClasses ecoreClass="types.ecore#//EnumDefinitionReference">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference types.ecore#//EnumDefinitionReference/definition"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

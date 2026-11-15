@@ -2,42 +2,22 @@
  */
 package de.evoal.languages.model.base.types.impl;
 
-import de.evoal.languages.model.base.definitions.Definition;
-
+import de.evoal.languages.model.base.definitions.TypeDefinition;
 import de.evoal.languages.model.base.types.DefinitionReference;
 import de.evoal.languages.model.base.types.TypesPackage;
 
-import org.eclipse.emf.common.notify.Notification;
-
+import java.lang.reflect.InvocationTargetException;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Definition Reference</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * The following features are implemented:
- * </p>
- * <ul>
- *   <li>{@link de.evoal.languages.model.base.types.impl.DefinitionReferenceImpl#getDefinition <em>Definition</em>}</li>
- * </ul>
  *
  * @generated
  */
-public class DefinitionReferenceImpl extends TypeImpl implements DefinitionReference {
-	/**
-	 * The cached value of the '{@link #getDefinition() <em>Definition</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getDefinition()
-	 * @generated
-	 * @ordered
-	 */
-	protected Definition definition;
-
+public abstract class DefinitionReferenceImpl extends TypeImpl implements DefinitionReference {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -63,25 +43,10 @@ public class DefinitionReferenceImpl extends TypeImpl implements DefinitionRefer
 	 * @generated
 	 */
 	@Override
-	public Definition getDefinition() {
-		if (definition != null && definition.eIsProxy()) {
-			InternalEObject oldDefinition = (InternalEObject)definition;
-			definition = (Definition)eResolveProxy(oldDefinition);
-			if (definition != oldDefinition) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TypesPackage.DEFINITION_REFERENCE__DEFINITION, oldDefinition, definition));
-			}
-		}
-		return definition;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Definition basicGetDefinition() {
-		return definition;
+	public TypeDefinition getDefinition() {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -90,70 +55,12 @@ public class DefinitionReferenceImpl extends TypeImpl implements DefinitionRefer
 	 * @generated
 	 */
 	@Override
-	public void setDefinition(Definition newDefinition) {
-		Definition oldDefinition = definition;
-		definition = newDefinition;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.DEFINITION_REFERENCE__DEFINITION, oldDefinition, definition));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case TypesPackage.DEFINITION_REFERENCE__DEFINITION:
-				if (resolve) return getDefinition();
-				return basicGetDefinition();
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		switch (operationID) {
+			case TypesPackage.DEFINITION_REFERENCE___GET_DEFINITION:
+				return getDefinition();
 		}
-		return super.eGet(featureID, resolve, coreType);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case TypesPackage.DEFINITION_REFERENCE__DEFINITION:
-				setDefinition((Definition)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void eUnset(int featureID) {
-		switch (featureID) {
-			case TypesPackage.DEFINITION_REFERENCE__DEFINITION:
-				setDefinition((Definition)null);
-				return;
-		}
-		super.eUnset(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case TypesPackage.DEFINITION_REFERENCE__DEFINITION:
-				return definition != null;
-		}
-		return super.eIsSet(featureID);
+		return super.eInvoke(operationID, arguments);
 	}
 
 } //DefinitionReferenceImpl

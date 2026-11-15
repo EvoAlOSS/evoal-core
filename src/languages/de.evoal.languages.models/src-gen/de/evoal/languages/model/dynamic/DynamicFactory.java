@@ -23,13 +23,31 @@ public interface DynamicFactory extends EFactory {
 	DynamicFactory eINSTANCE = de.evoal.languages.model.dynamic.impl.DynamicFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>Definition</em>'.
+	 * Returns a new object of class '<em>Definition Mapping</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Definition</em>'.
+	 * @return a new object of class '<em>Definition Mapping</em>'.
 	 * @generated
 	 */
-	Definition createDefinition();
+	DefinitionMapping createDefinitionMapping();
+
+	/**
+	 * Returns a new object of class '<em>Class Mapping</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Class Mapping</em>'.
+	 * @generated
+	 */
+	ClassMapping createClassMapping();
+
+	/**
+	 * Returns a new object of class '<em>Attribute Mapping</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Attribute Mapping</em>'.
+	 * @generated
+	 */
+	AttributeMapping createAttributeMapping();
 
 	/**
 	 * Returns the package supported by this factory.

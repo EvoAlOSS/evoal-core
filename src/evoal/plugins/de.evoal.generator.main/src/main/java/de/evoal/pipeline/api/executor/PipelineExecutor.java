@@ -1,6 +1,6 @@
 package de.evoal.pipeline.api.executor;
 
-import de.evoal.core.api.ecore.Space;
+import de.evoal.models.core.ecore.Space;
 import de.evoal.pipeline.api.model.PipelineComposite;
 
 /**

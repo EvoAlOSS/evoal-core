@@ -17,7 +17,7 @@
  */
 package de.evoal.optimisation.pso.api.optimiser;
 
-import de.evoal.core.api.cdi.EvoalComponent;
+import de.evoal.models.core.cdi.EvoalComponent;
 import de.evoal.optimisation.pso.api.swarm.Particle;
 
 /**

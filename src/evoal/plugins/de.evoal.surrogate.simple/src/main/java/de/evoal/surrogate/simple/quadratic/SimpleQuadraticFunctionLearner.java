@@ -1,16 +1,16 @@
 package de.evoal.surrogate.simple.quadratic;
 
-import de.evoal.core.api.ecore.Space;
-import de.evoal.core.api.ecore.TypedEObject;
-import de.evoal.core.api.utils.InitializationException;
+import de.evoal.models.core.ecore.Space;
+import de.evoal.models.core.ecore.TypedEObject;
+import de.evoal.models.core.exceptions.InitializationException;
 import de.evoal.core.api.utils.Requirements;
-import de.evoal.languages.model.base.expressions.Instance;
 import de.evoal.surrogate.api.function.ModelFunction;
 import de.evoal.surrogate.api.training.AbstractModelLearner;
 import de.evoal.surrogate.api.training.ModelLearner;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.math3.stat.regression.SimpleRegression;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
 import jakarta.enterprise.context.Dependent;
@@ -37,7 +37,7 @@ public class SimpleQuadraticFunctionLearner extends AbstractModelLearner {
 	SimpleRegression regression;
 
 	@Override
-	public ModelLearner init(final Instance configuration) throws InitializationException {
+	public ModelLearner init(final EObject configuration) throws InitializationException {
 		super.init(configuration);
 
         regression = new SimpleRegression(true);

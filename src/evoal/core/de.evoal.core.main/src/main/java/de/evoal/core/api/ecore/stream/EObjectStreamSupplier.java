@@ -1,7 +1,7 @@
 package de.evoal.core.api.ecore.stream;
 
-import de.evoal.core.api.ecore.Space;
-import de.evoal.core.api.ecore.TypedEObject;
+import de.evoal.models.core.ecore.Space;
+import de.evoal.models.core.ecore.TypedEObject;
 
 import java.util.function.Function;
 import java.util.function.Supplier;

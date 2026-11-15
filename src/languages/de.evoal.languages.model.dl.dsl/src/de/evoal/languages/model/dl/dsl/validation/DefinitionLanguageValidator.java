@@ -5,8 +5,8 @@ package de.evoal.languages.model.dl.dsl.validation;
 
 import org.eclipse.xtext.validation.Check;
 
+import de.evoal.languages.model.base.BasePackage;
 import de.evoal.languages.model.dl.DefinitionModule;
-import de.evoal.languages.model.dl.DlPackage;
 import de.evoal.languages.model.utils.validator.ModuleValidator;
 
 /**
@@ -30,7 +30,7 @@ public class DefinitionLanguageValidator extends AbstractDefinitionLanguageValid
 	
 	@Check
 	public void checkModule(final DefinitionModule module) {
-		ModuleValidator.check(module, module.getName(), "dl", msg -> error(msg, module, DlPackage.Literals.DEFINITION_MODULE__NAME));
+		ModuleValidator.check(module, module.getName(), "dl", msg -> error(msg, module, BasePackage.Literals.MODULE__NAME));
 	}
 
 }

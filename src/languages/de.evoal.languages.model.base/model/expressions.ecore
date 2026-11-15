@@ -63,11 +63,11 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="ComparisonOperator">
     <eLiterals name="GreaterThan"/>
-    <eLiterals name="GreaterEqual"/>
-    <eLiterals name="Equal"/>
-    <eLiterals name="Unequal"/>
-    <eLiterals name="LessEqual"/>
-    <eLiterals name="LessThan"/>
+    <eLiterals name="GreaterEqual" value="1"/>
+    <eLiterals name="Equal" value="2"/>
+    <eLiterals name="Unequal" value="3"/>
+    <eLiterals name="LessEqual" value="4"/>
+    <eLiterals name="LessThan" value="5"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AddOrSubtractExpression" eSuperTypes="#//ReadExpression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="leftOperand" lowerBound="1"
@@ -86,8 +86,8 @@
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="AddOrSubtractOperator">
-    <eLiterals name="Add"/>
-    <eLiterals name="Subtract"/>
+    <eLiterals name="Add" value="1"/>
+    <eLiterals name="Subtract" value="-1"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MultiplyDivideModuloExpression" eSuperTypes="#//ReadExpression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="leftOperand" lowerBound="1"
@@ -107,8 +107,8 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="MultiplyDivideModuloOperator">
     <eLiterals name="Multiply"/>
-    <eLiterals name="Divide"/>
-    <eLiterals name="Modulo"/>
+    <eLiterals name="Divide" value="1"/>
+    <eLiterals name="Modulo" value="2"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PowerOfExpression" eSuperTypes="#//ReadExpression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="leftOperand" lowerBound="1"

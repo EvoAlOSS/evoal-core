@@ -1,6 +1,7 @@
 import "definitions" from 'de.evoal.core.math';
 import "definitions" from 'de.evoal.pipeline.base';
 import "definitions" from 'de.evoal.core.constraints';
+import "definitions" from 'de.evoal.core.base';
 
 module 'de.evoal.pipeline.sequences' {
 
@@ -24,7 +25,7 @@ module 'de.evoal.pipeline.sequences' {
    /**
      * Base type for all sequence providers‚.
      */
-	abstract type 'sequence-provider' {}
+	abstract type 'sequence-provider' extends configuration {}
 
 	 /**
       * Sequence provider that generates data

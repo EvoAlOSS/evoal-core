@@ -9,8 +9,6 @@
   <genPackages prefix="Dl" basePackage="de.evoal.languages.model" disposableProviderFactory="true"
       ecorePackage="model.ecore#/">
     <genClasses ecoreClass="model.ecore#//DefinitionModule">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//DefinitionModule/imports"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//DefinitionModule/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//DefinitionModule/types"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//DefinitionModule/functions"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//DefinitionModule/constants"/>

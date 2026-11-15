@@ -3,13 +3,9 @@
  */
 package de.evoal.languages.model.instance;
 
-import de.evoal.languages.model.base.Import;
-
 import de.evoal.languages.model.base.expressions.Instance;
 
 import org.eclipse.emf.common.util.EList;
-
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -20,7 +16,6 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link de.evoal.languages.model.instance.InstanceModule#getImports <em>Imports</em>}</li>
  *   <li>{@link de.evoal.languages.model.instance.InstanceModule#getInstances <em>Instances</em>}</li>
  * </ul>
  *
@@ -28,23 +23,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface InstanceModule extends EObject {
-	/**
-	 * Returns the value of the '<em><b>Imports</b></em>' containment reference list.
-	 * The list contents are of type {@link de.evoal.languages.model.base.Import}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * Import statements
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Imports</em>' containment reference list.
-	 * @see de.evoal.languages.model.instance.InstancePackage#getInstanceModule_Imports()
-	 * @model containment="true" ordered="false"
-	 *        annotation="http://www.eclipse.org/OCL/Collection nullFree='false'"
-	 * @generated
-	 */
-	EList<Import> getImports();
-
+public interface InstanceModule extends de.evoal.languages.model.base.Module {
 	/**
 	 * Returns the value of the '<em><b>Instances</b></em>' containment reference list.
 	 * The list contents are of type {@link de.evoal.languages.model.base.expressions.Instance}.

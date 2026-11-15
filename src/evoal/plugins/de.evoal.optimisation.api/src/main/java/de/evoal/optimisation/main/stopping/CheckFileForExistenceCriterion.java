@@ -1,19 +1,21 @@
 package de.evoal.optimisation.main.stopping;
 
 import de.evoal.core.api.languages.AttributeEvaluator;
-import de.evoal.core.api.utils.InitializationException;
-import de.evoal.languages.model.base.expressions.Instance;
-import de.evoal.optimisation.api.model.Iteration;
-import de.evoal.optimisation.api.model.StoppingCriterion;
 
+import de.evoal.models.v202704.optimisation.execution.TerminationCriterion;
+import de.evoal.models.v202704.optimisation.execution.impl.TerminationCriterionImpl;
+import de.evoal.models.v202704.optimisation.memory.Iteration;
+import de.evoal.models.core.exceptions.InitializationException;
 import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import org.eclipse.emf.ecore.EObject;
+
 import java.io.File;
 
 @Dependent
 @Named("de.evoal.optimisation.core.file-check")
-public class CheckFileForExistenceCriterion implements StoppingCriterion {
+public class CheckFileForExistenceCriterion extends TerminationCriterionImpl {
     @Inject
     private AttributeEvaluator evaluator;
 
@@ -25,8 +27,8 @@ public class CheckFileForExistenceCriterion implements StoppingCriterion {
     }
 
     @Override
-    public StoppingCriterion init(final Instance configuration) throws InitializationException {
-        String filename = (String) evaluator.attributeToString(configuration, "file");
+    public TerminationCriterion init(final EObject configuration) throws InitializationException {
+        String filename = evaluator.attributeToString(configuration, "file");
         file = new File(filename);
 
         return this;

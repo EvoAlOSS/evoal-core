@@ -1,6 +1,6 @@
 package de.evoal.core.api.ecore.stream;
 
-import de.evoal.core.api.ecore.Space;
+import de.evoal.models.core.ecore.Space;
 import de.evoal.core.api.ecore.io.EObjectIOFactory;
 import de.evoal.core.api.ecore.io.EObjectReader;
 import lombok.extern.slf4j.Slf4j;

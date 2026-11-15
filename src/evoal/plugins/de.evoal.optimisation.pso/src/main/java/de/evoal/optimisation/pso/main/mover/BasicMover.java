@@ -18,9 +18,8 @@
 package de.evoal.optimisation.pso.main.mover;
 
 import de.evoal.core.api.cdi.ConfigurationValue;
-import de.evoal.core.api.properties.Properties;
-import de.evoal.core.api.properties.info.PropertiesBoundaries;
-import de.evoal.core.api.properties.info.PropertyBoundaries;
+import de.evoal.core.api.ecore.info.FeatureBoundaries;
+import de.evoal.models.core.ecore.TypedEObject;
 import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
 import de.evoal.optimisation.pso.api.BoundaryType;
 import de.evoal.optimisation.pso.api.optimiser.Mover;
@@ -31,6 +30,9 @@ import de.evoal.languages.model.base.expressions.Instance;
 import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
+
 import java.util.random.RandomGenerator;
 
 /**
@@ -42,7 +44,7 @@ import java.util.random.RandomGenerator;
 @Dependent
 public class BasicMover implements Mover {
     @Inject
-    private PropertiesBoundaries boundaries;
+    private FeatureBoundaries boundaries;
 
     @Inject
     private BoundaryType boundaryType;
@@ -63,11 +65,6 @@ public class BasicMover implements Mover {
     @ConfigurationValue(entry = OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.mover.c2")
     private double c2;
 
-    @Override
-    public BasicMover init(final Instance configuration) {
-        return this;
-    }
-
     /**
      * Moves the particle.
      * @param current The current state (position and velocity) of the particle.
@@ -81,33 +78,35 @@ public class BasicMover implements Mover {
                              final State personalBest,
                              final Particle[] neighbors,
                              final int currentIteration,
-                             int maxIterations) {
-        final Properties neighborhoodBestPosition = Particle.getNeighborhoodBestPosition(neighbors);
+                             int maxIterations,
+                             final RandomGenerator random) {
+        final TypedEObject neighborhoodBestPosition = Particle.getNeighborhoodBestPosition(neighbors);
 
-        final Properties currentPosition = current.getPosition();
+        final TypedEObject currentPosition = current.getPosition();
         final Double[] currentVelocity = current.getVelocity();
 
-        final Properties personalBestPosition = personalBest.getPosition();
+        final TypedEObject personalBestPosition = personalBest.getPosition();
 
-        final Properties nextPosition = new Properties(currentPosition);
+        final TypedEObject nextPosition = new TypedEObject(currentPosition);
         final Double[] nextVelocity = new Double[currentVelocity.length];
 
-        for (int i = 0; i < currentVelocity.length; i++) {
-            double x = currentPosition.getAsDouble(i);
+        int i = 0;
+        for (final EStructuralFeature feature : currentPosition.eSpace()) {
+            double x = currentPosition.eGetAsDouble(feature);
             double v = currentVelocity[i];
 
-            final PropertyBoundaries bounds = boundaries.get(currentPosition.getSpecification().get(i));
+            final FeatureBoundaries.Boundaries bounds = boundaries.get(feature);
             final double maximum = bounds.upper().doubleValue();
             final double minimum = bounds.lower().doubleValue();
 
             double max_v = maximum - minimum;
 
-            double rand1 = RandomGenerator.getDefault().nextDouble();
-            double rand2 = RandomGenerator.getDefault().nextDouble();
+            double rand1 = random.nextDouble();
+            double rand2 = random.nextDouble();
 
             double w = wstart + ((currentIteration + 1.) / (double) maxIterations) * (wend - wstart);
-            double next_v = Math.max(-max_v, Math.min(max_v, w * v + c1 * rand1 * (personalBestPosition.getAsDouble(i) - x) +
-                c2 * rand2 * (neighborhoodBestPosition.getAsDouble(i) - x)));
+            double next_v = Math.max(-max_v, Math.min(max_v, w * v + c1 * rand1 * (personalBestPosition.eGetAsDouble(feature) - x) +
+                c2 * rand2 * (neighborhoodBestPosition.eGetAsDouble(feature) - x)));
 
             double next_x = x + next_v;
 
@@ -125,8 +124,10 @@ public class BasicMover implements Mover {
                 };
             }
 
-            nextPosition.set(i ,next_x); // TODO Cast to data type
+            nextPosition.eSet(feature ,next_x); // TODO Cast to data type
             nextVelocity[i] = next_v;
+
+            i += 1;
         }
         current.setVelocity(nextVelocity);
         current.setPosition(nextPosition);

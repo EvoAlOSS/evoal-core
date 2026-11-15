@@ -15,7 +15,6 @@ import de.evoal.languages.model.dl.DefinitionModule;
 import de.evoal.languages.model.dl.DlFactory;
 import de.evoal.languages.model.dl.DlPackage;
 
-import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -118,7 +117,7 @@ public class DlPackageImpl extends EPackageImpl implements DlPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getDefinitionModule_Imports() {
+	public EReference getDefinitionModule_Types() {
 		return (EReference)definitionModuleEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -128,28 +127,8 @@ public class DlPackageImpl extends EPackageImpl implements DlPackage {
 	 * @generated
 	 */
 	@Override
-	public EAttribute getDefinitionModule_Name() {
-		return (EAttribute)definitionModuleEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getDefinitionModule_Types() {
-		return (EReference)definitionModuleEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EReference getDefinitionModule_Functions() {
-		return (EReference)definitionModuleEClass.getEStructuralFeatures().get(3);
+		return (EReference)definitionModuleEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -159,7 +138,7 @@ public class DlPackageImpl extends EPackageImpl implements DlPackage {
 	 */
 	@Override
 	public EReference getDefinitionModule_Constants() {
-		return (EReference)definitionModuleEClass.getEStructuralFeatures().get(4);
+		return (EReference)definitionModuleEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -169,7 +148,7 @@ public class DlPackageImpl extends EPackageImpl implements DlPackage {
 	 */
 	@Override
 	public EReference getDefinitionModule_Enums() {
-		return (EReference)definitionModuleEClass.getEStructuralFeatures().get(5);
+		return (EReference)definitionModuleEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -202,8 +181,6 @@ public class DlPackageImpl extends EPackageImpl implements DlPackage {
 
 		// Create classes and their features
 		definitionModuleEClass = createEClass(DEFINITION_MODULE);
-		createEReference(definitionModuleEClass, DEFINITION_MODULE__IMPORTS);
-		createEAttribute(definitionModuleEClass, DEFINITION_MODULE__NAME);
 		createEReference(definitionModuleEClass, DEFINITION_MODULE__TYPES);
 		createEReference(definitionModuleEClass, DEFINITION_MODULE__FUNCTIONS);
 		createEReference(definitionModuleEClass, DEFINITION_MODULE__CONSTANTS);
@@ -242,11 +219,10 @@ public class DlPackageImpl extends EPackageImpl implements DlPackage {
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
+		definitionModuleEClass.getESuperTypes().add(theBasePackage.getModule());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(definitionModuleEClass, DefinitionModule.class, "DefinitionModule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getDefinitionModule_Imports(), theBasePackage.getImport(), null, "imports", null, 0, -1, DefinitionModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getDefinitionModule_Name(), ecorePackage.getEString(), "name", null, 1, 1, DefinitionModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDefinitionModule_Types(), theDefinitionsPackage.getClassDefinition(), null, "types", null, 0, -1, DefinitionModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getDefinitionModule_Functions(), theDefinitionsPackage.getFunctionDefinition(), null, "functions", null, 0, -1, DefinitionModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getDefinitionModule_Constants(), theDefinitionsPackage.getConstantDefinition(), null, "constants", null, 0, -1, DefinitionModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

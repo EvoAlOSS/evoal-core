@@ -5,7 +5,6 @@
 package de.evoal.languages.model.mll.dsl.formatting2
 
 import de.evoal.languages.model.base.dsl.formatting2.BaseLanguageFormatter
-import org.eclipse.xtext.formatting2.IFormattableDocument
 
 class MachineLearningLanguageFormatter extends BaseLanguageFormatter {
 	

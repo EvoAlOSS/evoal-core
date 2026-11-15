@@ -18,9 +18,8 @@
 package de.evoal.optimisation.pso.main.mover;
 
 import de.evoal.core.api.cdi.ConfigurationValue;
-import de.evoal.core.api.properties.Properties;
-import de.evoal.core.api.properties.info.PropertiesBoundaries;
-import de.evoal.core.api.properties.info.PropertyBoundaries;
+import de.evoal.core.api.ecore.info.FeatureBoundaries;
+import de.evoal.models.core.ecore.TypedEObject;
 import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
 import de.evoal.optimisation.pso.api.BoundaryType;
 import de.evoal.optimisation.pso.api.optimiser.Mover;
@@ -33,6 +32,9 @@ import lombok.Setter;
 import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
+
 import java.util.random.RandomGenerator;
 
 /**
@@ -42,7 +44,7 @@ import java.util.random.RandomGenerator;
 @Dependent @Named("de.evoal.optimisation.pso.optimisation.arpso-mover")
 public class ARPSOMover implements Mover {
     @Inject
-    private PropertiesBoundaries boundaries;
+    private FeatureBoundaries boundaries;
 
     @Inject
     private BoundaryType boundaryType;
@@ -66,11 +68,6 @@ public class ARPSOMover implements Mover {
     @Getter @Setter
     private int direction = 1;
 
-    @Override
-    public ARPSOMover init(final Instance configuration) {
-        return this;
-    }
-
     /**
      * Moves the particle.
      * @param current The current state (position and velocity) of the particle.
@@ -83,22 +80,24 @@ public class ARPSOMover implements Mover {
                              final State personalBest,
                              final Particle[] neighbors,
                              final int currentIteration,
-                             final int maxIterations)
+                             final int maxIterations,
+                             final RandomGenerator random)
     {
-        final Properties neighborhoodBestPosition = Particle.getNeighborhoodBestPosition(neighbors);
+        final TypedEObject neighborhoodBestPosition = Particle.getNeighborhoodBestPosition(neighbors);
 
-        final Properties currentPosition = current.getPosition();
+        final TypedEObject currentPosition = current.getPosition();
         final Double[] current_velocity = current.getVelocity();
-        final Properties personalBestPosition = personalBest.getPosition();
+        final TypedEObject personalBestPosition = personalBest.getPosition();
 
-        final Properties nextPosition = new Properties(currentPosition);
+        final TypedEObject nextPosition = new TypedEObject(currentPosition);
         final Double[] next_velocity = new Double[current_velocity.length];
 
-        for (int i = 0; i < currentPosition.size(); i++) {
-            double x = currentPosition.getAsDouble(i);
+        int i = 0;
+        for (final EStructuralFeature feature : currentPosition.eSpace()) {
+            double x = currentPosition.eGetAsDouble(feature);
             double v = current_velocity[i];
 
-            final PropertyBoundaries bounds = boundaries.get(currentPosition.getSpecification().get(i));
+            final FeatureBoundaries.Boundaries bounds = boundaries.get(feature);
             final double maximum = bounds.upper().doubleValue();
             final double minimum = bounds.lower().doubleValue();
 
@@ -106,10 +105,10 @@ public class ARPSOMover implements Mover {
 
             double w = wstart + ((double) (currentIteration + 1.) /
                 (double) maxIterations) * (wend - wstart);
-            double next_v = Math.max(-max_v, Math.min(max_v, w * v + direction * (c1 * RandomGenerator.getDefault().
-                nextDouble() * (personalBestPosition.getAsDouble(i) - x) +
-                c2 * RandomGenerator.getDefault().nextDouble() *
-                (neighborhoodBestPosition.getAsDouble(i) - x))));
+            double next_v = Math.max(-max_v, Math.min(max_v, w * v + direction * (c1 * random.
+                nextDouble() * (personalBestPosition.eGetAsDouble(feature) - x) +
+                c2 * random.nextDouble() *
+                (neighborhoodBestPosition.eGetAsDouble(feature) - x))));
 
             double next_x = x + next_v;
 
@@ -130,8 +129,10 @@ public class ARPSOMover implements Mover {
                 };
             }
 
-            nextPosition.set(i, next_x);
+            nextPosition.eSet(feature, next_x);
             next_velocity[i] = next_v;
+
+            i += 1;
         }
         current.setVelocity(next_velocity);
         current.setPosition(nextPosition);

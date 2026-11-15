@@ -17,11 +17,14 @@
  */
 package de.evoal.optimisation.pso.api.swarm;
 
-import de.evoal.optimisation.api.model.Candidate;
-import de.evoal.optimisation.api.model.OptimisationValue;
-import de.evoal.core.api.properties.Properties;
+import de.evoal.models.v202704.optimisation.execution.OptimisationValue;
+import de.evoal.models.v202704.optimisation.memory.Individual;
+import de.evoal.models.v202704.optimisation.memory.MemoryFactory;
+import de.evoal.models.core.ecore.TypedEObject;
 import de.evoal.optimisation.pso.api.optimiser.Mover;
 import lombok.Getter;
+
+import java.util.random.RandomGenerator;
 
 /**
  * Class defining a particle - the basic unit of a swarm.
@@ -37,15 +40,23 @@ public class Particle {
     private final State personalBest;
 
     /**
+     * The particle's own random generator. Since particles are moved in parallel, a generator
+     *   per particle keeps the results independent of the thread scheduling.
+     */
+    private final RandomGenerator random;
+
+    /**
      * Creates a new instance of Particle.
      * @param id The ID number of the new particle.
+     * @param random The particle's own random generator.
      */
-    public Particle(final int id, final State current, final Mover mover) {
+    public Particle(final int id, final State current, final Mover mover, final RandomGenerator random) {
         this.id = id;
         this.current = current;
         this.personalBest = current;
 
         this.mover = mover;
+        this.random = random;
     }
 
     /**
@@ -70,7 +81,7 @@ public class Particle {
      * Returns the current position vector of the particle.
      * @return current position vector.
      */
-    public Properties getCurrentPosition()
+    public TypedEObject getCurrentPosition()
     {
         return current.getPosition();
     }
@@ -98,7 +109,7 @@ public class Particle {
      * Sets the best position of the particle.
      * @param bestPosition position vector.
      */
-    public void setBestPosition(final Properties bestPosition)
+    public void setBestPosition(final TypedEObject bestPosition)
     {
         this.personalBest.setPosition(bestPosition);
     }
@@ -107,7 +118,7 @@ public class Particle {
      * Returns the best position of the particle.
      * @return position vector.
      */
-    public Properties getBestPosition()
+    public TypedEObject getBestPosition()
     {
         return personalBest.getPosition();
     }
@@ -138,7 +149,7 @@ public class Particle {
      */
     public void moveParticle(final Particle[] neighbors, int current_iteration, int max_iterations) {
         mover.moveParticle(current, personalBest, neighbors,
-            current_iteration, max_iterations);
+            current_iteration, max_iterations, random);
     }
 
     /**
@@ -147,7 +158,7 @@ public class Particle {
      * @param particles Java array of particles from which best position is to be determined.
      * @return position vector.
      */
-    public static Properties getNeighborhoodBestPosition(final Particle[] particles) {
+    public static TypedEObject getNeighborhoodBestPosition(final Particle[] particles) {
         // initialise with first particle
         Particle best = particles[0];
         OptimisationValue bestFitness = best.getBestFitness();
@@ -163,20 +174,13 @@ public class Particle {
         return best.getBestPosition();
     }
 
-    public Candidate toCandidate() {
-        return new Candidate() {
-            private final Properties candidate = current.getPosition();
-            private final OptimisationValue value = current.getFitness();
+    public Individual toIndividual() {
+        final Individual result = MemoryFactory.eINSTANCE.createIndividual();
 
-            @Override
-            public Properties searchSpaceRepresentation() {
-                return candidate;
-            }
+        result.setId(this.id);
+        result.setInput(current.getPosition());
+        result.setOutput(current.getFitness().toOptmisationSpace());
 
-            @Override
-            public OptimisationValue value() {
-                return value;
-            }
-        };
+        return result;
     }
 }

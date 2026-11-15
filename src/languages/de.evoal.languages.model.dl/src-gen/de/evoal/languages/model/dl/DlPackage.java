@@ -3,7 +3,7 @@
  */
 package de.evoal.languages.model.dl;
 
-import org.eclipse.emf.ecore.EAttribute;
+import de.evoal.languages.model.base.BasePackage;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -78,7 +78,7 @@ public interface DlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DEFINITION_MODULE__IMPORTS = 0;
+	int DEFINITION_MODULE__IMPORTS = BasePackage.MODULE__IMPORTS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -87,7 +87,7 @@ public interface DlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DEFINITION_MODULE__NAME = 1;
+	int DEFINITION_MODULE__NAME = BasePackage.MODULE__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Types</b></em>' containment reference list.
@@ -96,7 +96,7 @@ public interface DlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DEFINITION_MODULE__TYPES = 2;
+	int DEFINITION_MODULE__TYPES = BasePackage.MODULE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Functions</b></em>' containment reference list.
@@ -105,7 +105,7 @@ public interface DlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DEFINITION_MODULE__FUNCTIONS = 3;
+	int DEFINITION_MODULE__FUNCTIONS = BasePackage.MODULE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Constants</b></em>' containment reference list.
@@ -114,7 +114,7 @@ public interface DlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DEFINITION_MODULE__CONSTANTS = 4;
+	int DEFINITION_MODULE__CONSTANTS = BasePackage.MODULE_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Enums</b></em>' containment reference list.
@@ -123,7 +123,7 @@ public interface DlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DEFINITION_MODULE__ENUMS = 5;
+	int DEFINITION_MODULE__ENUMS = BasePackage.MODULE_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Definition Module</em>' class.
@@ -132,7 +132,7 @@ public interface DlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DEFINITION_MODULE_FEATURE_COUNT = 6;
+	int DEFINITION_MODULE_FEATURE_COUNT = BasePackage.MODULE_FEATURE_COUNT + 4;
 
 
 	/**
@@ -144,28 +144,6 @@ public interface DlPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getDefinitionModule();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.dl.DefinitionModule#getImports <em>Imports</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Imports</em>'.
-	 * @see de.evoal.languages.model.dl.DefinitionModule#getImports()
-	 * @see #getDefinitionModule()
-	 * @generated
-	 */
-	EReference getDefinitionModule_Imports();
-
-	/**
-	 * Returns the meta object for the attribute '{@link de.evoal.languages.model.dl.DefinitionModule#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see de.evoal.languages.model.dl.DefinitionModule#getName()
-	 * @see #getDefinitionModule()
-	 * @generated
-	 */
-	EAttribute getDefinitionModule_Name();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link de.evoal.languages.model.dl.DefinitionModule#getTypes <em>Types</em>}'.
@@ -242,22 +220,6 @@ public interface DlPackage extends EPackage {
 		 * @generated
 		 */
 		EClass DEFINITION_MODULE = eINSTANCE.getDefinitionModule();
-
-		/**
-		 * The meta object literal for the '<em><b>Imports</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference DEFINITION_MODULE__IMPORTS = eINSTANCE.getDefinitionModule_Imports();
-
-		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute DEFINITION_MODULE__NAME = eINSTANCE.getDefinitionModule_Name();
 
 		/**
 		 * The meta object literal for the '<em><b>Types</b></em>' containment reference list feature.

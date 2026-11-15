@@ -8,7 +8,8 @@ import java.util.*;
 import java.util.stream.Stream;
 
 import de.evoal.core.api.dynamic.EAnnotationHelper;
-import de.evoal.core.api.ecore.Space;
+import de.evoal.core.api.dynamic.ModelTransformer;
+import de.evoal.models.core.ecore.Space;
 import de.evoal.languages.model.base.BaseFactory;
 import de.evoal.languages.model.base.Import;
 import de.evoal.languages.model.base.definitions.DataDescription;
@@ -19,9 +20,9 @@ import de.evoal.languages.model.generator.PipelineDefinition;
 import de.evoal.languages.model.generator.PipelineStep;
 import de.evoal.languages.model.generator.util.GeneratorSwitch;
 import de.evoal.languages.model.mll.*;
-import de.evoal.languages.model.pipeline.PipelineFactory;
-import de.evoal.languages.model.pipeline.PipelineModule;
-import de.evoal.languages.model.pipeline.Step;
+import de.evoal.models.v202704.pipeline.PipelineFactory;
+import de.evoal.models.v202704.pipeline.PipelineModule;
+import de.evoal.models.v202704.pipeline.Step;
 import de.evoal.pipeline.api.cdi.DefinitionModuleLoader;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -80,11 +81,17 @@ public class MLLModelConverter extends GeneratorSwitch<Object> {
      */
     private final Space space;
 
-    public MLLModelConverter(final DefinitionModuleLoader loader, final EAnnotationHelper helper, final Space space, final EStructuralFeature usecaseAttribute) {
+    /**
+     * For creating the runtime configurations of the pipeline steps.
+     */
+    private final ModelTransformer transformer;
+
+    public MLLModelConverter(final DefinitionModuleLoader loader, final EAnnotationHelper helper, final Space space, final EStructuralFeature usecaseAttribute, final ModelTransformer transformer) {
         this.loader = loader;
         this.helper = helper;
         this.space = space;
         this.usecase = usecaseAttribute;
+        this.transformer = transformer;
         this.exprConverter = new ExpressionConverter(this);
         this.execConverter = new ExecutionModelConverter(variableMapping, exprConverter);
     }
@@ -175,8 +182,8 @@ public class MLLModelConverter extends GeneratorSwitch<Object> {
     }
 
     @Override
-    public de.evoal.languages.model.pipeline.PipelineDefinition casePipelineDefinition(final PipelineDefinition definition) {
-        final de.evoal.languages.model.pipeline.PipelineDefinition result = pipeFactory.createPipelineDefinition();
+    public de.evoal.models.v202704.pipeline.PipelineDefinition casePipelineDefinition(final PipelineDefinition definition) {
+        final de.evoal.models.v202704.pipeline.PipelineDefinition result = pipeFactory.createPipelineDefinition();
         result.setName(definition.getName());
 
         definition.getSteps()
@@ -192,21 +199,21 @@ public class MLLModelConverter extends GeneratorSwitch<Object> {
     }
 
     @Override
-    public de.evoal.languages.model.pipeline.PipelineStep casePipelineStep(final PipelineStep step) {
+    public de.evoal.models.v202704.pipeline.PipelineStep casePipelineStep(final PipelineStep step) {
         log.info("Concerting pipeline step ...");
-        final de.evoal.languages.model.pipeline.PipelineStep result = pipeFactory.createPipelineStep();
+        final de.evoal.models.v202704.pipeline.PipelineStep result = pipeFactory.createPipelineStep();
 
-        referenceResolution.add(() -> result.setDefinition((de.evoal.languages.model.pipeline.PipelineDefinition) variableMapping.get(step.getDefinition())));
+        referenceResolution.add(() -> result.setDefinition((de.evoal.models.v202704.pipeline.PipelineDefinition) variableMapping.get(step.getDefinition())));
 
         return result;
     }
 
     @Override
-    public de.evoal.languages.model.pipeline.ConcreteStep caseConcreteStep(final ConcreteStep step) {
+    public de.evoal.models.v202704.pipeline.ConcreteStep caseConcreteStep(final ConcreteStep step) {
         log.info("Concerting concrete step '{}' ...", step.getInstance().getDefinition().getName());
 
-        final de.evoal.languages.model.pipeline.ConcreteStep result = pipeFactory.createConcreteStep();
-        result.setInstance(step.getInstance());
+        final de.evoal.models.v202704.pipeline.ConcreteStep result = pipeFactory.createConcreteStep();
+        result.setConfiguration(transformer.createDynamic(step.getInstance()));
 
         final Map<DataDescription, EStructuralFeature> featureMap = helper.featuresOf(space.getEClass());
 

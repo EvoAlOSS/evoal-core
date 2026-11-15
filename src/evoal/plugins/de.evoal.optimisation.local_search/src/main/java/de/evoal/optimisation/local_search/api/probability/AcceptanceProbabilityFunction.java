@@ -1,6 +1,7 @@
 package de.evoal.optimisation.local_search.api.probability;
 
-import de.evoal.core.api.cdi.EvoalComponent;
+import de.evoal.models.v202704.optimisation.execution.OptimisationValue;
+import de.evoal.models.core.cdi.EvoalComponent;
 
 /**
  * Interface for acceptance functions for simulated annealing algorithm.
@@ -13,5 +14,5 @@ public interface AcceptanceProbabilityFunction extends EvoalComponent<Acceptance
      * @param temperature
      * @return  P(f(s), f(s'), T)
      */
-    double apply(double[] currentFitness, double[] neighbourFitness, double temperature);
+    double apply(final OptimisationValue currentFitness, final OptimisationValue neighbourFitness, double temperature);
 }

@@ -1,7 +1,7 @@
 package de.evoal.optimisation.ea.main.codec.model;
 
 import de.evoal.core.api.utils.AttributeHelper;
-import de.evoal.core.api.utils.InitializationException;
+import de.evoal.models.core.exceptions.InitializationException;
 import de.evoal.languages.model.base.definitions.StructuredDataDescription;
 import de.evoal.optimisation.ea.api.codec.CustomCodecDescriber;
 import de.evoal.languages.model.base.definitions.Definition;

@@ -1,8 +1,6 @@
 package de.evoal.surrogate.adaption.density.model;
 
-import de.evoal.surrogate.api.io.ModelReader;
 import de.evoal.surrogate.api.io.pson.Parameter;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import smile.stat.distribution.GaussianDistribution;
 
 import java.util.Collection;
@@ -18,8 +16,13 @@ public class GaussianDensityData implements DensityData {
         this.distribution = distribution;
     }
 
-    public GaussianDensityData(final ModelReader reader, final EStructuralFeature feature) {
-        final Map<String, Object> parameterMap = toMap(reader.getOutputFeatureInformation(feature));
+    /**
+     * Restores the density data from the information stored with a surrogate model.
+     *
+     * @param information The stored information of a single feature.
+     */
+    public GaussianDensityData(final Collection<Parameter> information) {
+        final Map<String, Object> parameterMap = toMap(information);
 
         double mu = (double) parameterMap.get("density-mu");
         double sigma = (double) parameterMap.get("density-sigma");

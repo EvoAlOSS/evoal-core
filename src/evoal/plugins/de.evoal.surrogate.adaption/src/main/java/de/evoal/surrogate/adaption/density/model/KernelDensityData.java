@@ -1,8 +1,6 @@
 package de.evoal.surrogate.adaption.density.model;
 
-import de.evoal.surrogate.api.io.ModelReader;
 import de.evoal.surrogate.api.io.pson.Parameter;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import smile.stat.distribution.KernelDensity;
 
 import java.util.Collection;
@@ -20,8 +18,13 @@ public class KernelDensityData implements DensityData {
         this.trainingData = trainingData;
     }
 
-    public KernelDensityData(final ModelReader configuration, final EStructuralFeature feature) {
-        final Map<String, Object> parameterMap = toMap(configuration.getOutputFeatureInformation(feature));
+    /**
+     * Restores the density data from the information stored with a surrogate model.
+     *
+     * @param information The stored information of a single feature.
+     */
+    public KernelDensityData(final Collection<Parameter> information) {
+        final Map<String, Object> parameterMap = toMap(information);
 
         bandwidth = (double) parameterMap.get("density-bandwidth");
         trainingData = (double[]) parameterMap.get("density-training");

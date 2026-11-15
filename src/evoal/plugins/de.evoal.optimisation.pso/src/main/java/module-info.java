@@ -15,6 +15,7 @@ module de.evoal.optimisation.pso {
 
     requires de.evoal.core.main;
     requires de.evoal.optimisation.api;
+    requires de.evoal.languages.models;
 
     exports de.evoal.optimisation.pso.api.optimiser;
     exports de.evoal.optimisation.pso.api.swarm;

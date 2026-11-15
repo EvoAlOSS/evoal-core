@@ -1,14 +1,14 @@
 package de.evoal.pipeline.impl.components.sequences;
 
-import de.evoal.languages.model.base.definitions.DataDescription;
-import de.evoal.languages.model.base.expressions.Instance;
+import de.evoal.languages.model.interpreter.numeric.NumericConversions;
 import de.evoal.pipeline.api.model.PipelineComponentImpl;
-import de.evoal.core.api.ecore.TypedEObject;
+import de.evoal.models.core.ecore.TypedEObject;
 import de.evoal.core.api.dynamic.EAnnotationHelper;
 import de.evoal.pipeline.api.sequence.Sequence;
 import de.evoal.pipeline.api.sequence.SequenceFactory;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
 import jakarta.enterprise.context.Dependent;
@@ -29,47 +29,42 @@ public class SequenceGenerator extends PipelineComponentImpl {
     private SequenceFactory factory;
 
     /**
-     * List of Sequences to be used to create new points.
+     * The sequence that generates each feature.
      */
-    private final Map<DataDescription, Sequence> valueProviders = new HashMap<>();
+    private final Map<EStructuralFeature, Sequence> valueProviders = new HashMap<>();
 
     /**
-     * A symbol table for the evaluation.
+     * A symbol table for the evaluation (current value of each generated feature).
      */
-    private final HashMap<DataDescription, Object> symbolToValueMapping = new HashMap<DataDescription, Object>();
+    private final Map<EStructuralFeature, Object> symbolToValueMapping = new HashMap<>();
 
     @Override
-    public SequenceGenerator init(final Instance configuration) {
+    public SequenceGenerator init(final EObject configuration) {
         final List<Sequence> sequences = factory.readSequence(configuration, "sequences");
 
         for(Sequence sequence : sequences) {
-            sequence.setSymbolTable(symbolToValueMapping);
-            valueProviders.put(sequence.getVariable(), sequence);
-            symbolToValueMapping.put(sequence.getVariable(), sequence.getInitialValue());
+            final EStructuralFeature variable = sequence.getVariable();
+
+            sequence.setSymbolTable(symbolToValueMapping, helper.featuresOf(variable.getEContainingClass()));
+            valueProviders.put(variable, sequence);
+            symbolToValueMapping.put(variable, sequence.getInitialValue());
         }
 
         return this;
     }
 
-    //Needs testing! I am unsure if this works as I believe it does.
     @Override
     public @NonNull TypedEObject apply(@NonNull TypedEObject object) {
-        final Iterator<EStructuralFeature> iterator = getWrites().iterator();
+        for(final EStructuralFeature feature : getWrites()) {
+            final Sequence sequence = valueProviders.get(feature);
 
-        while(iterator.hasNext()) {
-            final EStructuralFeature feature = iterator.next();
-            final Optional<DataDescription> description = helper.dataDescriptionOf(feature);
-
-            if (description.isPresent()) {
-                final Object value = valueProviders.get(description.get()).next();
-
-                object.eSet(feature, value);
-            } else {
-                throw new RuntimeException("No DataDescription found for feature " + feature);
+            if(sequence == null) {
+                throw new IllegalStateException("No sequence generates the written data '" + feature.getName() + "'.");
             }
+
+            object.eSet(feature, NumericConversions.toType(sequence.next(), feature.getEType()));
         }
 
         return object;
     }
 }
-

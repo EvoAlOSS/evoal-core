@@ -1,12 +1,12 @@
 package de.evoal.pipeline.impl.components.functions;
 
-import de.evoal.core.api.ecore.Space;
+import de.evoal.models.core.ecore.Space;
 import de.evoal.core.api.utils.EvoAlEvaluationException;
 import de.evoal.core.api.interpreter.InterpreterState;
 import de.evoal.core.api.cdi.EvoalBuiltinFunction;
 import de.evoal.languages.model.base.expressions.ExpressionsFactory;
-import de.evoal.languages.model.pipeline.PipelineDefinition;
-import de.evoal.languages.model.pipeline.Step;
+import de.evoal.models.v202704.pipeline.PipelineDefinition;
+import de.evoal.models.v202704.pipeline.Step;
 import de.evoal.pipeline.api.cdi.DefinitionModuleLoader;
 import de.evoal.pipeline.api.executor.PipelineExecutor;
 import de.evoal.pipeline.api.executor.StreamExecutor;

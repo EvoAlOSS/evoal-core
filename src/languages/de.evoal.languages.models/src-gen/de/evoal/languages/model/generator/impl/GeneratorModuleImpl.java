@@ -3,8 +3,7 @@
  */
 package de.evoal.languages.model.generator.impl;
 
-import de.evoal.languages.model.base.Import;
-
+import de.evoal.languages.model.base.impl.ModuleImpl;
 import de.evoal.languages.model.execution.Block;
 
 import de.evoal.languages.model.generator.GeneratorModule;
@@ -22,7 +21,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
@@ -35,45 +33,13 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link de.evoal.languages.model.generator.impl.GeneratorModuleImpl#getName <em>Name</em>}</li>
- *   <li>{@link de.evoal.languages.model.generator.impl.GeneratorModuleImpl#getImports <em>Imports</em>}</li>
  *   <li>{@link de.evoal.languages.model.generator.impl.GeneratorModuleImpl#getPipelines <em>Pipelines</em>}</li>
  *   <li>{@link de.evoal.languages.model.generator.impl.GeneratorModuleImpl#getBody <em>Body</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class GeneratorModuleImpl extends MinimalEObjectImpl.Container implements GeneratorModule {
-	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String NAME_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String name = NAME_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getImports() <em>Imports</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getImports()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Import> imports;
-
+public class GeneratorModuleImpl extends ModuleImpl implements GeneratorModule {
 	/**
 	 * The cached value of the '{@link #getPipelines() <em>Pipelines</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -111,42 +77,6 @@ public class GeneratorModuleImpl extends MinimalEObjectImpl.Container implements
 	@Override
 	protected EClass eStaticClass() {
 		return GeneratorPackage.Literals.GENERATOR_MODULE;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setName(String newName) {
-		String oldName = name;
-		name = newName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, GeneratorPackage.GENERATOR_MODULE__NAME, oldName, name));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EList<Import> getImports() {
-		if (imports == null) {
-			imports = new EObjectContainmentEList<Import>(Import.class, this, GeneratorPackage.GENERATOR_MODULE__IMPORTS);
-		}
-		return imports;
 	}
 
 	/**
@@ -215,8 +145,6 @@ public class GeneratorModuleImpl extends MinimalEObjectImpl.Container implements
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case GeneratorPackage.GENERATOR_MODULE__IMPORTS:
-				return ((InternalEList<?>)getImports()).basicRemove(otherEnd, msgs);
 			case GeneratorPackage.GENERATOR_MODULE__PIPELINES:
 				return ((InternalEList<?>)getPipelines()).basicRemove(otherEnd, msgs);
 			case GeneratorPackage.GENERATOR_MODULE__BODY:
@@ -233,10 +161,6 @@ public class GeneratorModuleImpl extends MinimalEObjectImpl.Container implements
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case GeneratorPackage.GENERATOR_MODULE__NAME:
-				return getName();
-			case GeneratorPackage.GENERATOR_MODULE__IMPORTS:
-				return getImports();
 			case GeneratorPackage.GENERATOR_MODULE__PIPELINES:
 				return getPipelines();
 			case GeneratorPackage.GENERATOR_MODULE__BODY:
@@ -254,13 +178,6 @@ public class GeneratorModuleImpl extends MinimalEObjectImpl.Container implements
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case GeneratorPackage.GENERATOR_MODULE__NAME:
-				setName((String)newValue);
-				return;
-			case GeneratorPackage.GENERATOR_MODULE__IMPORTS:
-				getImports().clear();
-				getImports().addAll((Collection<? extends Import>)newValue);
-				return;
 			case GeneratorPackage.GENERATOR_MODULE__PIPELINES:
 				getPipelines().clear();
 				getPipelines().addAll((Collection<? extends PipelineDefinition>)newValue);
@@ -280,12 +197,6 @@ public class GeneratorModuleImpl extends MinimalEObjectImpl.Container implements
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case GeneratorPackage.GENERATOR_MODULE__NAME:
-				setName(NAME_EDEFAULT);
-				return;
-			case GeneratorPackage.GENERATOR_MODULE__IMPORTS:
-				getImports().clear();
-				return;
 			case GeneratorPackage.GENERATOR_MODULE__PIPELINES:
 				getPipelines().clear();
 				return;
@@ -304,32 +215,12 @@ public class GeneratorModuleImpl extends MinimalEObjectImpl.Container implements
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case GeneratorPackage.GENERATOR_MODULE__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case GeneratorPackage.GENERATOR_MODULE__IMPORTS:
-				return imports != null && !imports.isEmpty();
 			case GeneratorPackage.GENERATOR_MODULE__PIPELINES:
 				return pipelines != null && !pipelines.isEmpty();
 			case GeneratorPackage.GENERATOR_MODULE__BODY:
 				return body != null;
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuilder result = new StringBuilder(super.toString());
-		result.append(" (name: ");
-		result.append(name);
-		result.append(')');
-		return result.toString();
 	}
 
 } //GeneratorModuleImpl

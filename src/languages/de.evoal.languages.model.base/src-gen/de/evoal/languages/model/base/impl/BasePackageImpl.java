@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 /**
@@ -26,6 +27,13 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 	 * @generated
 	 */
 	private EClass importEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass moduleEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -133,6 +141,36 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 	 * @generated
 	 */
 	@Override
+	public EClass getModule() {
+		return moduleEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getModule_Imports() {
+		return (EReference)moduleEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getModule_Name() {
+		return (EAttribute)moduleEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public BaseFactory getBaseFactory() {
 		return (BaseFactory)getEFactoryInstance();
 	}
@@ -160,6 +198,10 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 		createEAttribute(importEClass, IMPORT__LANGUAGE);
 		createEAttribute(importEClass, IMPORT__IMPORTED_NAMESPACE);
 		createEOperation(importEClass, IMPORT___GET_FILENAME);
+
+		moduleEClass = createEClass(MODULE);
+		createEReference(moduleEClass, MODULE__IMPORTS);
+		createEAttribute(moduleEClass, MODULE__NAME);
 	}
 
 	/**
@@ -198,12 +240,18 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 
 		initEOperation(getImport__GetFilename(), ecorePackage.getEString(), "getFilename", 1, 1, IS_UNIQUE, IS_ORDERED);
 
+		initEClass(moduleEClass, de.evoal.languages.model.base.Module.class, "Module", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getModule_Imports(), this.getImport(), null, "imports", null, 0, -1, de.evoal.languages.model.base.Module.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEAttribute(getModule_Name(), ecorePackage.getEString(), "name", null, 1, 1, de.evoal.languages.model.base.Module.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		// Create resource
 		createResource(eNS_URI);
 
 		// Create annotations
 		// http://www.eclipse.org/OCL/Import
 		createImportAnnotations();
+		// http://www.eclipse.org/OCL/Collection
+		createCollectionAnnotations();
 	}
 
 	/**
@@ -219,6 +267,22 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 		   source,
 		   new String[] {
 			   "ecore", "http://www.eclipse.org/emf/2002/Ecore"
+		   });
+	}
+
+	/**
+	 * Initializes the annotations for <b>http://www.eclipse.org/OCL/Collection</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createCollectionAnnotations() {
+		String source = "http://www.eclipse.org/OCL/Collection";
+		addAnnotation
+		  (getModule_Imports(),
+		   source,
+		   new String[] {
+			   "nullFree", "false"
 		   });
 	}
 

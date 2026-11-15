@@ -1,7 +1,7 @@
 package de.evoal.surrogate.main.gof.rmse;
 
-import de.evoal.core.api.ecore.Space;
-import de.evoal.core.api.ecore.TypedEObject;
+import de.evoal.models.core.ecore.Space;
+import de.evoal.models.core.ecore.TypedEObject;
 import de.evoal.core.api.ecore.stream.EObjectPairStreamSupplier;
 import de.evoal.core.api.interpreter.InterpreterState;
 import de.evoal.surrogate.api.io.pson.Parameter;
@@ -38,7 +38,7 @@ public class RMSECalculator extends SurrogateInformationCalculator {
 				.forEach(p -> {
 					final TypedEObject source = p.getFirst();
 					final TypedEObject expected = p.getSecond();
-					final TypedEObject actual = new TypedEObject(expected.eClass());
+					final TypedEObject actual = new TypedEObject(expected.eSpace());
 
 					functionData.function()
 							.apply(source, actual);

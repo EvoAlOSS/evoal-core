@@ -6,8 +6,6 @@ import "definitions" from de.evoal.pipeline.benchmarks;
 import "definitions" from de.evoal.pipeline.optimisation;
 import "definitions" from de.evoal.optimisation.local_search.optimisation;
 
-import "definitions" from de.evoal.optimisation.ea.optimisation;
-
 import "data" from 'search';
 
 module 'search' {
@@ -21,6 +19,10 @@ module 'search' {
 		}
 		
 		and minimise data 'y:0'
+
+		//we can document our results. For the hill-climbing algorithm, individuals-per-generation and
+		//best-individual-per-generation work identically
+		document ['candidates-per-iteration' {}].
 	}
 
 
@@ -64,9 +66,5 @@ module 'search' {
 		'optimisation-function' := 'problem-function' {};
 
 		'stopping-criteria' := [ 'iteration-count' { 'maximum-iterations' := 200; } ];
-
-        //we can document our results. For the hill-climbing algorithm, individuals-per-generation and
-        //best-individual-per-generation work identically
-		document := ['candidates-per-iteration' {}];
 	}
 }

@@ -11,7 +11,7 @@ import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
 import smile.regression.KernelMachine;
 
-import de.evoal.core.api.ecore.Space;
+import de.evoal.models.core.ecore.Space;
 import de.evoal.surrogate.api.io.pson.AbstractPSONReader;
 import de.evoal.surrogate.api.io.pson.Parameter;
 import de.evoal.surrogate.api.io.pson.SurrogateConfiguration;

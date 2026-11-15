@@ -1,6 +1,6 @@
 package de.evoal.surrogate.api.cdi;
 
-import de.evoal.core.api.ecore.Space;
+import de.evoal.models.core.ecore.Space;
 import de.evoal.core.api.dynamic.EAnnotationHelper;
 import de.evoal.surrogate.api.function.ModelFunctionData;
 import de.evoal.surrogate.api.function.ModelFunctionFactory;

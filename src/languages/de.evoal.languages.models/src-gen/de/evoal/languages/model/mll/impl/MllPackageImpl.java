@@ -131,7 +131,7 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getMachineLearningModule_Imports() {
+	public EReference getMachineLearningModule_Task() {
 		return (EReference)machineLearningModuleEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -141,28 +141,8 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 	 * @generated
 	 */
 	@Override
-	public EAttribute getMachineLearningModule_Name() {
-		return (EAttribute)machineLearningModuleEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getMachineLearningModule_Task() {
-		return (EReference)machineLearningModuleEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EReference getMachineLearningModule_Validation() {
-		return (EReference)machineLearningModuleEClass.getEStructuralFeatures().get(3);
+		return (EReference)machineLearningModuleEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -172,7 +152,7 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 	 */
 	@Override
 	public EReference getMachineLearningModule_Preparation() {
-		return (EReference)machineLearningModuleEClass.getEStructuralFeatures().get(4);
+		return (EReference)machineLearningModuleEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -182,7 +162,7 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 	 */
 	@Override
 	public EReference getMachineLearningModule_Model() {
-		return (EReference)machineLearningModuleEClass.getEStructuralFeatures().get(5);
+		return (EReference)machineLearningModuleEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -192,7 +172,7 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 	 */
 	@Override
 	public EReference getMachineLearningModule_Gof() {
-		return (EReference)machineLearningModuleEClass.getEStructuralFeatures().get(6);
+		return (EReference)machineLearningModuleEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -202,7 +182,7 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 	 */
 	@Override
 	public EReference getMachineLearningModule_LearningUseCase() {
-		return (EReference)machineLearningModuleEClass.getEStructuralFeatures().get(7);
+		return (EReference)machineLearningModuleEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -212,7 +192,7 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 	 */
 	@Override
 	public EReference getMachineLearningModule_PredictionUseCase() {
-		return (EReference)machineLearningModuleEClass.getEStructuralFeatures().get(8);
+		return (EReference)machineLearningModuleEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -315,8 +295,6 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 
 		// Create classes and their features
 		machineLearningModuleEClass = createEClass(MACHINE_LEARNING_MODULE);
-		createEReference(machineLearningModuleEClass, MACHINE_LEARNING_MODULE__IMPORTS);
-		createEAttribute(machineLearningModuleEClass, MACHINE_LEARNING_MODULE__NAME);
 		createEReference(machineLearningModuleEClass, MACHINE_LEARNING_MODULE__TASK);
 		createEReference(machineLearningModuleEClass, MACHINE_LEARNING_MODULE__VALIDATION);
 		createEReference(machineLearningModuleEClass, MACHINE_LEARNING_MODULE__PREPARATION);
@@ -369,12 +347,11 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
+		machineLearningModuleEClass.getESuperTypes().add(theBasePackage.getModule());
 		taskDescriptionEClass.getESuperTypes().add(theExecutionPackage.getNamedVariable());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(machineLearningModuleEClass, MachineLearningModule.class, "MachineLearningModule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getMachineLearningModule_Imports(), theBasePackage.getImport(), null, "imports", null, 0, -1, MachineLearningModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEAttribute(getMachineLearningModule_Name(), ecorePackage.getEString(), "name", null, 1, 1, MachineLearningModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMachineLearningModule_Task(), this.getTaskDescription(), null, "task", null, 1, 1, MachineLearningModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMachineLearningModule_Validation(), theGeneratorPackage.getPipelineDefinition(), null, "validation", null, 1, 1, MachineLearningModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMachineLearningModule_Preparation(), theGeneratorPackage.getPipelineDefinition(), null, "preparation", null, 1, 1, MachineLearningModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -429,12 +406,6 @@ public class MllPackageImpl extends EPackageImpl implements MllPackage {
 	 */
 	protected void createCollectionAnnotations() {
 		String source = "http://www.eclipse.org/OCL/Collection";
-		addAnnotation
-		  (getMachineLearningModule_Imports(),
-		   source,
-		   new String[] {
-			   "nullFree", "false"
-		   });
 		addAnnotation
 		  (getTaskDescription_Inputs(),
 		   source,

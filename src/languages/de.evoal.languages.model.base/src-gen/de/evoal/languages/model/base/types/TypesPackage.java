@@ -3,6 +3,7 @@
 package de.evoal.languages.model.base.types;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -384,22 +385,22 @@ public interface TypesPackage extends EPackage {
 	int DEFINITION_REFERENCE = 11;
 
 	/**
-	 * The feature id for the '<em><b>Definition</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DEFINITION_REFERENCE__DEFINITION = TYPE_FEATURE_COUNT + 0;
-
-	/**
 	 * The number of structural features of the '<em>Definition Reference</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DEFINITION_REFERENCE_FEATURE_COUNT = TYPE_FEATURE_COUNT + 1;
+	int DEFINITION_REFERENCE_FEATURE_COUNT = TYPE_FEATURE_COUNT + 0;
+
+	/**
+	 * The operation id for the '<em>Get Definition</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEFINITION_REFERENCE___GET_DEFINITION = TYPE_OPERATION_COUNT + 0;
 
 	/**
 	 * The number of operations of the '<em>Definition Reference</em>' class.
@@ -408,7 +409,100 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DEFINITION_REFERENCE_OPERATION_COUNT = TYPE_OPERATION_COUNT + 0;
+	int DEFINITION_REFERENCE_OPERATION_COUNT = TYPE_OPERATION_COUNT + 1;
+
+
+	/**
+	 * The meta object id for the '{@link de.evoal.languages.model.base.types.impl.ClassDefinitionReferenceImpl <em>Class Definition Reference</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.evoal.languages.model.base.types.impl.ClassDefinitionReferenceImpl
+	 * @see de.evoal.languages.model.base.types.impl.TypesPackageImpl#getClassDefinitionReference()
+	 * @generated
+	 */
+	int CLASS_DEFINITION_REFERENCE = 12;
+
+	/**
+	 * The feature id for the '<em><b>Definition</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_DEFINITION_REFERENCE__DEFINITION = DEFINITION_REFERENCE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Class Definition Reference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_DEFINITION_REFERENCE_FEATURE_COUNT = DEFINITION_REFERENCE_FEATURE_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>Get Definition</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_DEFINITION_REFERENCE___GET_DEFINITION = DEFINITION_REFERENCE___GET_DEFINITION;
+
+	/**
+	 * The number of operations of the '<em>Class Definition Reference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_DEFINITION_REFERENCE_OPERATION_COUNT = DEFINITION_REFERENCE_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link de.evoal.languages.model.base.types.impl.EnumDefinitionReferenceImpl <em>Enum Definition Reference</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.evoal.languages.model.base.types.impl.EnumDefinitionReferenceImpl
+	 * @see de.evoal.languages.model.base.types.impl.TypesPackageImpl#getEnumDefinitionReference()
+	 * @generated
+	 */
+	int ENUM_DEFINITION_REFERENCE = 13;
+
+	/**
+	 * The feature id for the '<em><b>Definition</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUM_DEFINITION_REFERENCE__DEFINITION = DEFINITION_REFERENCE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Enum Definition Reference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUM_DEFINITION_REFERENCE_FEATURE_COUNT = DEFINITION_REFERENCE_FEATURE_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>Get Definition</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUM_DEFINITION_REFERENCE___GET_DEFINITION = DEFINITION_REFERENCE___GET_DEFINITION;
+
+	/**
+	 * The number of operations of the '<em>Enum Definition Reference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUM_DEFINITION_REFERENCE_OPERATION_COUNT = DEFINITION_REFERENCE_OPERATION_COUNT + 0;
 
 
 	/**
@@ -543,15 +637,56 @@ public interface TypesPackage extends EPackage {
 	EClass getDefinitionReference();
 
 	/**
-	 * Returns the meta object for the reference '{@link de.evoal.languages.model.base.types.DefinitionReference#getDefinition <em>Definition</em>}'.
+	 * Returns the meta object for the '{@link de.evoal.languages.model.base.types.DefinitionReference#getDefinition() <em>Get Definition</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Definition</em>' operation.
+	 * @see de.evoal.languages.model.base.types.DefinitionReference#getDefinition()
+	 * @generated
+	 */
+	EOperation getDefinitionReference__GetDefinition();
+
+	/**
+	 * Returns the meta object for class '{@link de.evoal.languages.model.base.types.ClassDefinitionReference <em>Class Definition Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Class Definition Reference</em>'.
+	 * @see de.evoal.languages.model.base.types.ClassDefinitionReference
+	 * @generated
+	 */
+	EClass getClassDefinitionReference();
+
+	/**
+	 * Returns the meta object for the reference '{@link de.evoal.languages.model.base.types.ClassDefinitionReference#getDefinition <em>Definition</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Definition</em>'.
-	 * @see de.evoal.languages.model.base.types.DefinitionReference#getDefinition()
-	 * @see #getDefinitionReference()
+	 * @see de.evoal.languages.model.base.types.ClassDefinitionReference#getDefinition()
+	 * @see #getClassDefinitionReference()
 	 * @generated
 	 */
-	EReference getDefinitionReference_Definition();
+	EReference getClassDefinitionReference_Definition();
+
+	/**
+	 * Returns the meta object for class '{@link de.evoal.languages.model.base.types.EnumDefinitionReference <em>Enum Definition Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Enum Definition Reference</em>'.
+	 * @see de.evoal.languages.model.base.types.EnumDefinitionReference
+	 * @generated
+	 */
+	EClass getEnumDefinitionReference();
+
+	/**
+	 * Returns the meta object for the reference '{@link de.evoal.languages.model.base.types.EnumDefinitionReference#getDefinition <em>Definition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Definition</em>'.
+	 * @see de.evoal.languages.model.base.types.EnumDefinitionReference#getDefinition()
+	 * @see #getEnumDefinitionReference()
+	 * @generated
+	 */
+	EReference getEnumDefinitionReference_Definition();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -705,12 +840,48 @@ public interface TypesPackage extends EPackage {
 		EClass DEFINITION_REFERENCE = eINSTANCE.getDefinitionReference();
 
 		/**
+		 * The meta object literal for the '<em><b>Get Definition</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation DEFINITION_REFERENCE___GET_DEFINITION = eINSTANCE.getDefinitionReference__GetDefinition();
+
+		/**
+		 * The meta object literal for the '{@link de.evoal.languages.model.base.types.impl.ClassDefinitionReferenceImpl <em>Class Definition Reference</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.evoal.languages.model.base.types.impl.ClassDefinitionReferenceImpl
+		 * @see de.evoal.languages.model.base.types.impl.TypesPackageImpl#getClassDefinitionReference()
+		 * @generated
+		 */
+		EClass CLASS_DEFINITION_REFERENCE = eINSTANCE.getClassDefinitionReference();
+
+		/**
 		 * The meta object literal for the '<em><b>Definition</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference DEFINITION_REFERENCE__DEFINITION = eINSTANCE.getDefinitionReference_Definition();
+		EReference CLASS_DEFINITION_REFERENCE__DEFINITION = eINSTANCE.getClassDefinitionReference_Definition();
+
+		/**
+		 * The meta object literal for the '{@link de.evoal.languages.model.base.types.impl.EnumDefinitionReferenceImpl <em>Enum Definition Reference</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.evoal.languages.model.base.types.impl.EnumDefinitionReferenceImpl
+		 * @see de.evoal.languages.model.base.types.impl.TypesPackageImpl#getEnumDefinitionReference()
+		 * @generated
+		 */
+		EClass ENUM_DEFINITION_REFERENCE = eINSTANCE.getEnumDefinitionReference();
+
+		/**
+		 * The meta object literal for the '<em><b>Definition</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ENUM_DEFINITION_REFERENCE__DEFINITION = eINSTANCE.getEnumDefinitionReference_Definition();
 
 	}
 

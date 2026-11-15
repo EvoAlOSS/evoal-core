@@ -1,14 +1,14 @@
 package de.evoal.optimisation.local_search.api.neighbour;
 
-import de.evoal.core.api.properties.Properties;
-import de.evoal.languages.model.base.expressions.Instance;
-import de.evoal.core.api.cdi.EvoalComponent;
+import de.evoal.models.core.ecore.TypedEObject;
+import de.evoal.models.core.cdi.EvoalComponent;
+import org.eclipse.emf.ecore.EObject;
 
 import java.util.stream.Stream;
 
 public interface NeighbourChoosingStrategy extends EvoalComponent<NeighbourChoosingStrategy> {
 
-    NeighbourChoosingStrategy init(final Instance ncs);
+    NeighbourChoosingStrategy init(final EObject ncs);
 
-    Stream<Properties> neighbours(final Properties candidate);
+    Stream<TypedEObject> neighbours(final TypedEObject candidate);
 }

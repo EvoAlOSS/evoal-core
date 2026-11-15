@@ -15,8 +15,8 @@ module de.evoal.surrogate.knn {
     requires tools.jackson.core;
     requires tools.jackson.databind;
     requires org.eclipse.emf.ecore;
-    requires de.evoal.languages.model.base;
     requires jakarta.cdi;
+    requires de.evoal.languages.models;
 
     // open the package to CDI allowing CDI to create instances using reflection.
     // Additionally, we have to open the folder to allow EvoAl to access the .dl file

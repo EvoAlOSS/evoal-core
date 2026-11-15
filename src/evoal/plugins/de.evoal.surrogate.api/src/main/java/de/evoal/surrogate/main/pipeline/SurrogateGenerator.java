@@ -9,12 +9,13 @@ import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import java.io.File;
 
-import de.evoal.core.api.ecore.TypedEObject;
+import de.evoal.models.core.ecore.TypedEObject;
 import de.evoal.core.api.utils.AttributeHelper;
-import de.evoal.core.api.utils.InitializationException;
+import de.evoal.models.core.exceptions.InitializationException;
 import de.evoal.languages.model.base.expressions.Instance;
 import de.evoal.pipeline.api.model.PipelineComponentImpl;
 import de.evoal.surrogate.api.cdi.SurrogateProducer;
+import org.eclipse.emf.ecore.EObject;
 
 @Dependent
 @Named("de.evoal.surrogate.pipeline.trained-model")
@@ -38,7 +39,7 @@ public class SurrogateGenerator extends PipelineComponentImpl {
     }
 
     @Override
-    public SurrogateGenerator init(final Instance configuration) throws InitializationException {
+    public SurrogateGenerator init(final EObject configuration) throws InitializationException {
         final String surrogateConfiguration = attribute.lookup(configuration, "model-file");
         log.info("Loading configuration from {}", surrogateConfiguration);
 

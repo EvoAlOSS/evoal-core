@@ -1,6 +1,6 @@
 package de.evoal.optimisation.api.model;
 
-import de.evoal.core.api.cdi.EvoalComponent;
+import de.evoal.models.core.cdi.EvoalComponent;
 
 /**
  * Interface for all optimisation algorithms.

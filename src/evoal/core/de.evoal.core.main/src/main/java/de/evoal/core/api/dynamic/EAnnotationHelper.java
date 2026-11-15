@@ -1,9 +1,8 @@
 package de.evoal.core.api.dynamic;
 
-import de.evoal.core.api.ecore.Space;
-import de.evoal.core.api.properties.PropertiesSpecification;
+import de.evoal.languages.model.dynamic.DefinitionMapping;
+import de.evoal.models.core.ecore.Space;
 import de.evoal.languages.model.base.definitions.DataDescription;
-import de.evoal.languages.model.dynamic.Definition;
 import de.evoal.languages.model.dynamic.DynamicPackage;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -22,9 +21,9 @@ public class EAnnotationHelper {
                 .stream()
                 .filter(ann -> DynamicPackage.eNS_URI.equals(ann.getSource()))
                 .flatMap(ann -> ann.getContents().stream())
-                .filter(Definition.class::isInstance)
-                .map(Definition.class::cast)
-                .map(Definition::getSource)
+                .filter(DefinitionMapping.class::isInstance)
+                .map(DefinitionMapping.class::cast)
+                .map(DefinitionMapping::getSource)
                 .map(DataDescription.class::cast)
                 .findFirst();
     }
@@ -61,13 +60,6 @@ public class EAnnotationHelper {
                 .toList();
     }
 
-    public PropertiesSpecification specificationOf(final Space space) {
-        return PropertiesSpecification
-                .builder()
-                .add(dataDescriptionsOf(space).stream() )
-                .build();
-    }
-
     public Space subSpaceOf(final Space space, final List<DataDescription> descriptions) {
         final Map<DataDescription, EStructuralFeature> featureMap = featuresOf(space);
 
@@ -75,5 +67,37 @@ public class EAnnotationHelper {
             descriptions.stream()
                         .map(featureMap::get)
         );
+    }
+
+    public EStructuralFeature featureOf(final Space space, final DataDescription description) {
+        for(final EStructuralFeature feature : space) {
+            final Optional<DataDescription> d = dataDescriptionOf(feature);
+
+            if(d.isEmpty() || !d.get().equals(description)) {
+                continue;
+            }
+
+            return feature;
+        }
+
+        throw new RuntimeException("No feature found for " + description);
+    }
+
+    public EStructuralFeature featureOf(final EClass clazz, final DataDescription description) {
+        final Optional<DefinitionMapping> feature =
+            description.getEAnnotations()
+                    .stream()
+                    .filter(a -> DynamicPackage.eNS_URI.equals(a.getSource()))
+                    .map(a -> a.getContents().stream().filter(DefinitionMapping.class::isInstance).findFirst())
+                    .filter(Optional::isPresent)
+                    .map(Optional::get)
+                    .map(DefinitionMapping.class::cast)
+                    .findFirst();
+
+        if(feature.isPresent()) {
+            return feature.get().getTarget();
+        }
+
+        throw new RuntimeException("No feature found for " + description);
     }
 }

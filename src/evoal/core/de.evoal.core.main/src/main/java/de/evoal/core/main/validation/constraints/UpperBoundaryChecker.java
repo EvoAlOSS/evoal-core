@@ -1,12 +1,12 @@
 package de.evoal.core.main.validation.constraints;
 
 import de.evoal.core.api.utils.AttributeHelper;
-import de.evoal.core.api.utils.InitializationException;
 import de.evoal.core.api.validation.constraints.ConstraintCheckerComponent;
 import de.evoal.core.api.validation.context.DiagnosticsContext;
 import de.evoal.core.api.validation.model.Diagnostics;
 import de.evoal.languages.model.base.expressions.*;
-import de.evoal.languages.model.interpreter.BooleanNumberOperations;
+import de.evoal.languages.model.interpreter.numeric.BooleanNumberOperations;
+import de.evoal.models.core.exceptions.InitializationException;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -31,7 +31,7 @@ public class UpperBoundaryChecker implements ConstraintCheckerComponent {
     private BiFunction<Object, Object, Boolean> comparator;
 
     @Override
-    public ConstraintCheckerComponent init(final Instance config) throws InitializationException {
+    public ConstraintCheckerComponent init(final EObject config) throws InitializationException {
         this.bound = helper.lookup(config, "boundary");
         final boolean isBoundaryIncluded = helper.lookup(config, "inclusive");
 

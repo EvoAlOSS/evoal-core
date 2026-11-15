@@ -11,9 +11,9 @@ import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
 
 import de.evoal.languages.model.base.expressions.Expression;
+import de.evoal.languages.model.base.BasePackage;
 import de.evoal.languages.model.base.definitions.BaseDataDescription;
 import de.evoal.languages.model.ddl.DataDescriptionModule;
-import de.evoal.languages.model.ddl.DdlPackage;
 import de.evoal.languages.model.base.definitions.ScaleType;
 import de.evoal.languages.model.utils.validator.ModuleValidator;
 import de.evoal.languages.model.utils.validator.ScaleValidator;
@@ -39,7 +39,7 @@ public class DataDescriptionLanguageValidator extends AbstractDataDescriptionLan
 	
 	@Check
 	public void checkModule(final DataDescriptionModule module) {
-		ModuleValidator.check(module, module.getName(), "ddl", msg -> error(msg, module, DdlPackage.Literals.DATA_DESCRIPTION_MODULE__NAME));
+		ModuleValidator.check(module, module.getName(), "ddl", msg -> error(msg, module, BasePackage.Literals.MODULE__NAME));
 
 		for(final Expression expression : module.getConstraints()) {
 			ScaleValidator.check(expression, ScaleType.UNKNOWN, this);

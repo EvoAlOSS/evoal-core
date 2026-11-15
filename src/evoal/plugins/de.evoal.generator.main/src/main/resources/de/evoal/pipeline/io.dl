@@ -1,11 +1,12 @@
 import "definitions" from 'de.evoal.core.math';
 import "definitions" from 'de.evoal.pipeline.base';
+import "definitions" from 'de.evoal.core.base';
 
 module 'de.evoal.pipeline.io' {
 	/**
 	 * Reads the specified data from a file.
 	 */
-	type reader {
+	type reader extends configuration {
 		/**
 		 * Name of the file to read.
 		 */
@@ -15,13 +16,13 @@ module 'de.evoal.pipeline.io' {
 	/**
 	 * Producer of empty instances.
 	 */
-	type empty {
+	type empty extends configuration {
 	}
 
 	/**
 	 * Writes the specified data to a file.
 	 */
-	type writer {
+	type writer extends configuration {
 		/**
 		 * Name of the file to write.
 		 */

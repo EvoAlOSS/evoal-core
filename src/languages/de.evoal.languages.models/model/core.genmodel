@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel"
+    copyrightText="Copyright Text&#x9;(c) EvoAl project" modelDirectory="/de.evoal.languages.models/src-gen"
+    editDirectory="/de.evoal.languages.model.core.edit/src-gen" editorDirectory="/de.evoal.languages.model.core.editor/src-gen"
+    modelPluginID="de.evoal.languages.models" modelName="Core" editPluginClass="de.evoal.languages.model.optimization.provider.OptimizationEditPlugin"
+    editorPluginClass="de.evoal.languages.model.core.presentation.OptimizationEditPlugin"
+    rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" testsDirectory="/de.evoal.languages.models.tests/src-gen"
+    testSuiteClass="de.evoal.languages.model.core.tests.CoreAllTests" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="21.0" copyrightFields="false" editPluginID="de.evoal.languages.model.core.edit"
+    editorPluginID="de.evoal.languages.model.core.editor" importOrganizing="true">
+  <foreignModel>core.ecore</foreignModel>
+  <genPackages prefix="Core" basePackage="de.evoal.models.v202704" disposableProviderFactory="true"
+      ecorePackage="core.ecore#/">
+    <genDataTypes ecoreDataType="core.ecore#//InitializationException"/>
+    <genClasses ecoreClass="core.ecore#//EvoalComponent">
+      <genTypeParameters ecoreTypeParameter="core.ecore#//EvoalComponent/T"/>
+    </genClasses>
+    <genClasses ecoreClass="core.ecore#//Configuration"/>
+  </genPackages>
+</genmodel:GenModel>

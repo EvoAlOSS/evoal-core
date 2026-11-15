@@ -1,6 +1,6 @@
 package de.evoal.surrogate.api.io;
 
-import de.evoal.languages.model.pipeline.PipelineDefinition;
+import de.evoal.models.v202704.pipeline.PipelineDefinition;
 import de.evoal.surrogate.api.function.ModelFunction;
 import de.evoal.surrogate.api.io.pson.Parameter;
 import de.evoal.surrogate.api.training.ModelLearner;

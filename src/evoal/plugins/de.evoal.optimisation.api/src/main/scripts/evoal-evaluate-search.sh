@@ -32,6 +32,10 @@ if [ ${EVOAL_LOGGING+x} ]; then
   ADDITIONAL_ARGUMENTS+=( "-Bcore:logging=$EVOAL_LOGGING" )
 fi
 
+if [ ${EVOAL_SEED+x} ]; then
+  ADDITIONAL_ARGUMENTS+=( "-Bcore:seed=$EVOAL_SEED" )
+fi
+
 set -x
 java ${LOCAL_JVM_ARGUMENTS[@]} \
      ${EVOAL_JVM_ARGUMENTS[@]} \

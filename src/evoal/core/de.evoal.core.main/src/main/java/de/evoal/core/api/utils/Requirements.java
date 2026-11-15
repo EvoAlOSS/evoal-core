@@ -1,7 +1,5 @@
 package de.evoal.core.api.utils;
 
-import de.evoal.core.api.properties.PropertiesSpecification;
-
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
@@ -169,22 +167,6 @@ public final class Requirements {
     }
 
     /**
-     * Requires the specification {@code specification} to be present and of size {@code size}.
-     *
-     * @param specification The specification to check.
-     * @param size The required size.
-     *
-     * @throws NullPointerException iff {@code specification} is {@code null}.
-     * @throws IllegalArgumentException iff the size of {@code specification} does not math the requirements.
-     */
-    public static void requireSize(final PropertiesSpecification specification, final int size) {
-        Objects.requireNonNull(specification, "Specification is not allowed to be null");
-
-        if(specification.size() != size) {
-            throw new IllegalArgumentException("Specification is expected to have size (" + size + "): " + specification.size());
-        }
-    }
-    /**
      * Requires the collection {@code collection} to be present and of size {@code size}.
      *
      * @param collection The collection to check.
@@ -198,23 +180,6 @@ public final class Requirements {
 
         if(collection.size() <= size) {
             throw new IllegalArgumentException("Collections expected size (" + size + ") is not met: " + collection.size());
-        }
-    }
-
-    /**
-     * Requires the properties specification {@code specification} to be present and of size {@code size}.
-     *
-     * @param specification The specification to check.
-     * @param size The required size.
-     *
-     * @throws NullPointerException iff {@code specification} is {@code null}.
-     * @throws IllegalArgumentException iff {@code size} does not match the requirements.
-     */
-    public static void requireSizeGreaterThan(final PropertiesSpecification specification, final int size) {
-        Objects.requireNonNull(specification, "Specification is not allowed to be null");
-
-        if(specification.size() <= size) {
-            throw new IllegalArgumentException("Specification expected size (" + size + ") is not met: " + specification.size());
         }
     }
 

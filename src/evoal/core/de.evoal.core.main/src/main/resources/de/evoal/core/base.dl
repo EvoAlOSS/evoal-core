@@ -1,0 +1,7 @@
+module 'de.evoal.core.base' {
+    /**
+     * Base type for EvoAl configuration.
+     */
+    abstract type configuration {
+    }
+}

@@ -8,8 +8,7 @@ import de.evoal.languages.model.base.expressions.Expression;
 import de.evoal.languages.model.constraints.ConstraintsPackage;
 import de.evoal.languages.model.constraints.MultiVariateConstraint;
 
-import de.evoal.languages.model.interpreter.BooleanNumberOperations;
-
+import de.evoal.languages.model.interpreter.numeric.BooleanNumberOperations;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
@@ -118,21 +117,6 @@ public class MultiVariateConstraintImpl extends ConstraintImpl implements MultiV
 	 */
 	@Override
 	public Diagnostic check(final EObject object) {
-		final EStructuralFeature feature = features.get(0);
-		final Number value = (Number)object.eGet(feature);
-		
-		boolean violates = true;
-		
-		if(violates) {
-			return new BasicDiagnostic(
-				Diagnostic.ERROR,
-				ConstraintsPackage.eNS_URI,
-				0,
-				"Value " + value + " of " + feature.getName() + " is above upper bound of " + this.toString(),
-				new Object [] { object }
-			);
-		}
-		
 		return Diagnostic.OK_INSTANCE;
 	}
 
