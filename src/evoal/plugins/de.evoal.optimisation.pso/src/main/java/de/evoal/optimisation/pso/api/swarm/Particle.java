@@ -17,26 +17,49 @@
  */
 package de.evoal.optimisation.pso.api.swarm;
 
+import java.util.random.RandomGenerator;
+
+import lombok.Getter;
+
+import de.evoal.models.core.ecore.TypedEObject;
 import de.evoal.models.v202704.optimisation.execution.OptimisationValue;
 import de.evoal.models.v202704.optimisation.memory.Individual;
 import de.evoal.models.v202704.optimisation.memory.MemoryFactory;
-import de.evoal.models.core.ecore.TypedEObject;
-import de.evoal.optimisation.pso.api.optimiser.Mover;
-import lombok.Getter;
 
-import java.util.random.RandomGenerator;
+import de.evoal.optimisation.pso.api.optimiser.Mover;
 
 /**
- * Class defining a particle - the basic unit of a swarm.
+ * Class defining a particle - the basic unit of a swarm. A particle has a
+ *   current state (position, velocity, fitness) and remembers the best state it
+ *   has reached so far (personal best).
+ * <p>
+ * The swarm moves all particles in parallel. Moving a particle changes only
+ *   its current state; the personal bests of all particles are changed only
+ *   while the swarm is evaluated (sequentially). Therefore, the personal bests a
+ *   particle reads from its neighbours do not change during a move, and the
+ *   result does not depend on the thread scheduling.
  */
 public class Particle {
+    /**
+     * The current state of the particle, changed by every move.
+     */
+    private final State current;
+
+    /**
+     * The particle's id (its index in the swarm).
+     */
     private final int id;
 
+    /**
+     * Moves the particle.
+     */
     @Getter
     private final Mover mover;
 
-    private final State current;
-
+    /**
+     * The best state the particle has reached so far. A state of its own, so
+     *   that moving the particle does not change it.
+     */
     private final State personalBest;
 
     /**
@@ -46,117 +69,71 @@ public class Particle {
     private final RandomGenerator random;
 
     /**
-     * Creates a new instance of Particle.
+     * Creates a new particle. The start position is also its first personal best.
+     *
      * @param id The ID number of the new particle.
+     * @param current The start state of the particle.
+     * @param mover Moves the particle.
      * @param random The particle's own random generator.
      */
     public Particle(final int id, final State current, final Mover mover, final RandomGenerator random) {
         this.id = id;
         this.current = current;
-        this.personalBest = current;
+
+        final TypedEObject startPosition = new TypedEObject(current.getPosition());
+        this.personalBest = new State(startPosition, current.getFitness());
 
         this.mover = mover;
         this.random = random;
     }
 
     /**
-     * Returns the current state (position, velocity, malus) of the particle.
-     * @return current state.
+     * @return The best fitness the particle has reached so far.
      */
-    public State getCurrentState()
-    {
-        return current;
-    }
-
-    /**
-     * Returns the personal best state ever achieved by the particle.
-     * @return personal best state.
-     */
-    public State getBestState()
-    {
-        return personalBest;
-    }
-
-    /**
-     * Returns the current position vector of the particle.
-     * @return current position vector.
-     */
-    public TypedEObject getCurrentPosition()
-    {
-        return current.getPosition();
-    }
-
-    /**
-     * Sets the current malus of the particle.  This should be called only by an
-     * IEvaluator object.
-     * @param fitness The malus of the particle.
-     */
-    public void setCurrentFitness(final OptimisationValue fitness)
-    {
-        current.setFitness(fitness);
-    }
-
-    /**
-     * Returns the current malus of the particle.
-     * @return current malus.
-     */
-    public OptimisationValue getCurrentFitness()
-    {
-        return this.current.getFitness();
-    }
-
-    /**
-     * Sets the best position of the particle.
-     * @param bestPosition position vector.
-     */
-    public void setBestPosition(final TypedEObject bestPosition)
-    {
-        this.personalBest.setPosition(bestPosition);
-    }
-
-    /**
-     * Returns the best position of the particle.
-     * @return position vector.
-     */
-    public TypedEObject getBestPosition()
-    {
-        return personalBest.getPosition();
-    }
-
-    /**
-     * Sets the best malus of the particle.
-     * @param bestFitness best malus.
-     */
-    public void setBestFitness(final OptimisationValue bestFitness)
-    {
-        this.personalBest.setFitness(bestFitness);
-    }
-
-    /**
-     * Returns the best malus of the particle.
-     * @return best malus.
-     */
-    public OptimisationValue getBestFitness()
-    {
+    public OptimisationValue getBestFitness() {
         return this.personalBest.getFitness();
     }
 
     /**
-     * Calls the moveParticle method of the particle's IMover.
-     * @param neighbors Java array of my neighbors.
-     * @param current_iteration current iteration.
-     * @param max_iterations max number of iterations.
+     * @return The position of the particle's personal best.
      */
-    public void moveParticle(final Particle[] neighbors, int current_iteration, int max_iterations) {
-        mover.moveParticle(current, personalBest, neighbors,
-            current_iteration, max_iterations, random);
+    public TypedEObject getBestPosition() {
+        return personalBest.getPosition();
     }
 
     /**
-     * Returns the best position amongst the neighors of the particle.
+     * @return The personal best state ever achieved by the particle.
+     */
+    public State getBestState() {
+        return personalBest;
+    }
+
+    /**
+     * @return The current fitness of the particle.
+     */
+    public OptimisationValue getCurrentFitness() {
+        return this.current.getFitness();
+    }
+
+    /**
+     * @return The current position of the particle.
+     */
+    public TypedEObject getCurrentPosition() {
+        return current.getPosition();
+    }
+
+    /**
+     * @return The current state (position, velocity, fitness) of the particle.
+     */
+    public State getCurrentState() {
+        return current;
+    }
+
+    /**
+     * Returns the best position amongst the neighbours of the particle.
      *
-     * @param particles Java array of particles from which best position is to be determined.
-     * @return position vector.
+     * @param particles The particles from which the best position is determined.
+     * @return The personal best position of the best particle.
      */
     public static TypedEObject getNeighborhoodBestPosition(final Particle[] particles) {
         // initialise with first particle
@@ -174,6 +151,51 @@ public class Particle {
         return best.getBestPosition();
     }
 
+    /**
+     * Moves the particle with its mover. Changes only the current state.
+     *
+     * @param neighbors The neighbours of the particle.
+     * @param current_iteration The current iteration.
+     * @param max_iterations The maximum number of iterations.
+     */
+    public void moveParticle(final Particle[] neighbors, int current_iteration, int max_iterations) {
+        mover.moveParticle(current, personalBest, neighbors,
+            current_iteration, max_iterations, random);
+    }
+
+    /**
+     * Sets the best fitness of the particle.
+     *
+     * @param bestFitness The best fitness.
+     */
+    public void setBestFitness(final OptimisationValue bestFitness) {
+        this.personalBest.setFitness(bestFitness);
+    }
+
+    /**
+     * Sets the best position of the particle. The position is copied, so later
+     *   changes of the given object do not change the personal best.
+     *
+     * @param bestPosition The best position.
+     */
+    public void setBestPosition(final TypedEObject bestPosition) {
+        final TypedEObject copy = new TypedEObject(bestPosition);
+        this.personalBest.setPosition(copy);
+    }
+
+    /**
+     * Sets the current fitness of the particle. Called by the swarm when it
+     *   evaluates the particles.
+     *
+     * @param fitness The fitness of the current position.
+     */
+    public void setCurrentFitness(final OptimisationValue fitness) {
+        current.setFitness(fitness);
+    }
+
+    /**
+     * @return The current state of the particle as an individual of the memory model.
+     */
     public Individual toIndividual() {
         final Individual result = MemoryFactory.eINSTANCE.createIndividual();
 
