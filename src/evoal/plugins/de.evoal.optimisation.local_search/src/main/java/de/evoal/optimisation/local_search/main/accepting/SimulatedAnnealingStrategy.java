@@ -33,7 +33,8 @@ public class SimulatedAnnealingStrategy implements AcceptingStrategy {
     private DecreasingFunction coolingStrategy;
 
     @Inject
-    @ConfigurationValue(entry = OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.accepting-strategy.initial-temperature")
+    @ConfigurationValue(entry = OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION,
+                        access = "algorithm.accepting-strategy.initial-temperature")
     private double initialTemperature;
 
     @Inject
@@ -58,7 +59,7 @@ public class SimulatedAnnealingStrategy implements AcceptingStrategy {
     }
 
     @Override
-    public void setIteration(int iteration, int maximum) {
+    public void setIteration(final int iteration) {
         temperature = coolingStrategy.decrease(temperature, initialTemperature, iteration);
     }
 }

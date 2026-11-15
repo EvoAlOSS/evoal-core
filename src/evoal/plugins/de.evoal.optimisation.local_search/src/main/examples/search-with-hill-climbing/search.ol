@@ -28,9 +28,6 @@ module 'search' {
 
 	configure 'local-search' for 'example-search' {
 
-        //maximum number of iterations
-	    'number-of-iterations' := 200;
-
 	    //strategy by which hill climbing algorithm will identify and evaluate neighbours. Here, we choose
 	    //a manual strategy, that will look for a better solutions in all directions (increasing or
 	    //decreasing each value by step-size).

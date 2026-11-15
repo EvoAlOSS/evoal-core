@@ -21,7 +21,6 @@ public interface AcceptingStrategy extends EvoalComponent<AcceptingStrategy> {
      * Sets the current iteration.
      *
      * @param iteration Iteration number.
-     * @param maximum Maximum number of iterations.
      */
-    public default void setIteration(final int iteration, final int maximum) {}
+    public default void setIteration(final int iteration) {}
 }

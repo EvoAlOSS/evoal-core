@@ -29,7 +29,6 @@ module 'search' {
     }
 
     configure 'local-search' for 'regression' {
-        'number-of-iterations' := 10;
         'neighbour-choosing-strategy' := 'manual-strategy' {
             'step-size' := [
                 'variable' { var := data 'x:0'; val := 0.1; },

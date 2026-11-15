@@ -19,7 +19,8 @@ import org.eclipse.emf.ecore.EObject;
 public class ThresholdAcceptingStrategy implements AcceptingStrategy {
 
     @Inject
-    @ConfigurationValue(entry = OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.accepting-strategy.initial-threshold")
+    @ConfigurationValue(entry = OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION,
+                        access = "algorithm.accepting-strategy.initial-threshold")
     private double initialThreshold;
 
     private double threshold;
@@ -54,7 +55,7 @@ public class ThresholdAcceptingStrategy implements AcceptingStrategy {
     }
 
     @Override
-    public void setIteration(final int iteration, final int maximum) {
+    public void setIteration(final int iteration) {
         threshold = decreasingFunction.decrease(threshold, this.initialThreshold, iteration);
     }
 }

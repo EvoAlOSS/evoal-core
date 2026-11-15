@@ -11,12 +11,6 @@ module de.evoal.optimisation.local_search.optimisation {
 	 */
 	type 'local-search' extends 'algorithm' {
 		/**
-		 * Maximum number of iterations. This parameter does not work as a stopping 
-		 *   criterion.
-		 */
-    	'number-of-iterations' : int;
-
-		/**
 		 * Strategy for selecting neighbours.
 		 */
     	'neighbour-choosing-strategy' : instance 'choosing-strategy';
@@ -115,9 +109,20 @@ module de.evoal.optimisation.local_search.optimisation {
     abstract type 'decreasing-strategy' extends configuration {}
 
     /**
-    * T(k) = T_0 - (k * T_0/#iterations)
+    * Decreases the value linearly, so that it reaches 0 after the given number
+    *   of iterations and stays 0: T(k) = T_0 - k * T_0 / iterations.
     */
-    type 'linear-decrease' extends 'decreasing-strategy' {}
+    type 'linear-decrease' extends 'decreasing-strategy' {
+        /**
+         * Number of iterations until the value reaches 0.
+         *
+         * Note: must not exceed 'maximum-iterations' of an 'iteration-count'
+         *   stopping criterion of the algorithm. This is not checked yet, see
+         *   #260.
+         */
+        @LowerBoundary { boundary := 1; }
+        'iterations' : int;
+    }
 
     /**
     * T(k) = T(k-1) * cooling_rate

@@ -15,8 +15,9 @@ import java.lang.annotation.RetentionPolicy;
  *
  *   <pre>
  *     @Inject
- *     @ConfigurationValue(entry = BlackboardEntry.EA_CONFIGURATION, access = "algorithm.number-of-iterations")
- *     private int iterations;
+ *     @ConfigurationValue(entry = OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION,
+ *                         access = "algorithm.accepting-strategy.initial-temperature")
+ *     private double initialTemperature;
  *   </pre>
  *
  *   This example will load the pso configuration from the blackboard and search

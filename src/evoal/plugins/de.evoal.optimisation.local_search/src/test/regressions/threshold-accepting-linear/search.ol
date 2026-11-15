@@ -30,7 +30,6 @@ module 'search' {
     }
 
     configure 'local-search' for 'regression' {
-        'number-of-iterations' := 10;
         'neighbour-choosing-strategy' := 'manual-strategy' {
             'step-size' := [
                 'variable' { var := data 'x:0'; val := 0.1; },
@@ -39,7 +38,7 @@ module 'search' {
         };
         'accepting-strategy' := 'threshold-accepting' {
             'initial-threshold' := 10.0;
-            'decreasing-function' := 'linear-decrease' {};
+            'decreasing-function' := 'linear-decrease' { 'iterations' := 10; };
         };
         'initialisation' := 'specify-candidates' {
             'candidate-list' := [

@@ -27,10 +27,8 @@ import jakarta.inject.Named;
 
 import de.evoal.core.api.cdi.BeanFactory;
 import de.evoal.core.api.cdi.Component;
-import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.core.api.utils.AttributeHelper;
 
-import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
 import de.evoal.optimisation.api.cdi.TerminationCriterionProducer;
 import de.evoal.optimisation.api.model.*;
 
@@ -56,10 +54,6 @@ public class LocalSearchAlgorithm implements OptimisationAlgorithm {
      * The stopping criterion to use.
      */
     private TerminationCriterion criterion;
-
-    @Inject
-    @ConfigurationValue(entry = OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.number-of-iterations")
-    private int maxIterations;
 
     @Inject
     @Named("optimisation-function")
@@ -91,7 +85,8 @@ public class LocalSearchAlgorithm implements OptimisationAlgorithm {
     @Override
     public OptimisationAlgorithm init(final EObject instance) {
         criterion = producer.create(instance);
-        acceptingStrategy = BeanFactory.createComponent(AcceptingStrategy.class, helper.lookup(instance, "accepting-strategy"));
+        final EObject acceptingConfiguration = helper.lookup(instance, "accepting-strategy");
+        acceptingStrategy = BeanFactory.createComponent(AcceptingStrategy.class, acceptingConfiguration);
 
         return this;
     }
@@ -155,7 +150,7 @@ public class LocalSearchAlgorithm implements OptimisationAlgorithm {
             statistics.add(state);
 
             // 2.6 Update iteration-specific data
-            acceptingStrategy.setIteration(iterationNumber, maxIterations);
+            acceptingStrategy.setIteration(iterationNumber);
             iterationNumber += 1;
         }
 
