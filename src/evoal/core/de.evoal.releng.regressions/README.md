@@ -17,7 +17,7 @@ combinations and edge cases. They are not part of the release. User examples
 belong in `src/main/examples`.
 
 Every regression runs with `bin/evoal-search.sh` and `EVOAL_SEED=42` in a copy
-of its folder (`target/regressions/<plugin>/<name>`, including `run.log`).
+of its folder (`target/regressions/<plugin>/<name>/run-<n>`, including `run.log`).
 
 ## Running
 
@@ -32,6 +32,7 @@ mvn -f src/evoal/pom.xml -Pregressions verify
 | Property | Meaning |
 |---|---|
 | `-Devoal.regressions.update=true` | rewrites the references instead of comparing |
+| `-Devoal.regressions.repetitions=2` | runs every regression twice; both outputs must be identical (nightly pipeline) |
 | `-Devoal.regressions.shell=zsh` | shell for the launcher (default `bash`, version 4 or newer) |
 
 ## References

@@ -133,6 +133,8 @@ dsl:compile-and-install:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event" &&
           $CI_COMMIT_TAG == null
     - if: $CI_COMMIT_TAG
+    - if: $CI_PIPELINE_SOURCE == "schedule" &&
+          $NIGHTLY_REGRESSIONS == "true"
     - when: never
   script:
     - >-
@@ -534,6 +536,67 @@ publish:
         - name: 'EvoAl - $CI_COMMIT_TAG - Windows x86_64'
           url: "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/evoal-release/${CI_COMMIT_TAG}/evoal-${CI_COMMIT_TAG}-windows-x86_64.zip"
           link_type: package
+
+###############################################################################
+###############################################################################
+###############################################################################
+####
+#### Nightly steps (pipeline schedule with NIGHTLY_REGRESSIONS == "true")
+####
+###############################################################################
+###############################################################################
+###############################################################################
+
+#############################################################
+## Cancel the nightly pipeline if nothing was merged since
+##   the last successful nightly regression run
+##
+## Situations
+##   - nightly pipeline schedule
+##
+##  Requirements
+##    - CI_API_TOKEN
+##
+nightly:check-changes:
+  stage: Maintenance
+  image: gitlab.informatik.uni-bremen.de:5005/evoal/source/evoal-core/evoal/alpine-with-jq:latest
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "schedule" &&
+          $NIGHTLY_REGRESSIONS == "true"
+    - when: never
+  script:
+    - ci/cancel-unchanged-nightly.sh
+
+#############################################################
+## Run every regression twice: both runs must give the same
+##   output, which must equal the references
+##
+## Situations
+##   - nightly pipeline schedule
+##
+##  Requirements
+##    - mvn install of DSLs
+##
+evoal:nightly-regressions:
+  stage: EvoAl
+  image: $EVOAL_IMAGE
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "schedule" &&
+          $NIGHTLY_REGRESSIONS == "true"
+    - when: never
+  dependencies: ["dsl:compile-and-install"]
+  needs:
+    - job: "dsl:compile-and-install"
+      artifacts: true
+  script:
+    - mvn $MAVEN_CLI_OPTS -f $EVOAL_POM -Dbranch=$CI_COMMIT_REF_NAME -Pregressions -Devoal.regressions.repetitions=2 verify
+  artifacts:
+    when: always
+    expire_in: "14 days"
+    reports:
+      junit: src/evoal/*/*/target/failsafe-reports/TEST-*.xml
+    paths:
+      - src/evoal/core/de.evoal.releng.regressions/target/regressions
 
 package cleanup:
   stage: Maintenance

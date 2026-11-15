@@ -22,6 +22,9 @@
         <!-- root folder of the repository, contains ci/ and the release folder evoal/ -->
         <evoal.regressions.root>${project.basedir}/../../../..</evoal.regressions.root>
 
+        <!-- number of runs per regression, all runs must give the same output (2 in the nightly pipeline) -->
+        <evoal.regressions.repetitions>1</evoal.regressions.repetitions>
+
         <!-- shell that executes the search launcher (bin/evoal-search.sh needs bash 4 or newer, or zsh) -->
         <evoal.regressions.shell>bash</evoal.regressions.shell>
 
@@ -174,6 +177,7 @@
                         </executions>
                         <configuration>
                             <systemPropertyVariables>
+                                <evoal.regressions.repetitions>${evoal.regressions.repetitions}</evoal.regressions.repetitions>
                                 <evoal.regressions.root>${evoal.regressions.root}</evoal.regressions.root>
                                 <evoal.regressions.shell>${evoal.regressions.shell}</evoal.regressions.shell>
                                 <evoal.regressions.update>${evoal.regressions.update}</evoal.regressions.update>

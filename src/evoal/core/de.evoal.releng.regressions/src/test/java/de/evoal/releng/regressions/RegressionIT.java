@@ -20,6 +20,8 @@ import org.junit.jupiter.api.TestFactory;
  *   <li>{@code evoal.regressions.root}: root folder of the repository (required).</li>
  *   <li>{@code evoal.regressions.update}: {@code true} rewrites the references
  *     instead of comparing against them.</li>
+ *   <li>{@code evoal.regressions.repetitions}: number of runs per regression
+ *     (default 1); all runs must give the same output.</li>
  *   <li>{@code evoal.regressions.shell}: shell for the launcher (default {@code bash}).</li>
  *   <li>{@code evoal.regressions.agent}: Java agent for the runs (set by JaCoCo).</li>
  * </ul>
@@ -34,6 +36,11 @@ public class RegressionIT {
      * The working folders of the runs, kept for inspection.
      */
     private static final Path WORKING_FOLDER = Path.of("target", "regressions");
+
+    /**
+     * Number of runs per regression. All runs must give the same output.
+     */
+    private final int repetitions;
 
     /**
      * The root folder of the repository.
@@ -60,6 +67,7 @@ public class RegressionIT {
         final Path release = root.resolve(RELEASE_FOLDER);
         this.runner = new RegressionRunner(release, shell, agent);
         this.update = Boolean.getBoolean("evoal.regressions.update");
+        this.repetitions = Integer.getInteger("evoal.regressions.repetitions", 1);
     }
 
     /**
@@ -67,7 +75,7 @@ public class RegressionIT {
      */
     private void check(final Regression regression) throws InterruptedException {
         final Path workingFolder = workingFolderOf(regression);
-        final Path outputFolder = runner.run(regression, workingFolder);
+        final Path outputFolder = runRepeatedly(regression, workingFolder);
         final Path expectedFolder = regression.expectedFolder();
 
         if(update) {
@@ -94,6 +102,28 @@ public class RegressionIT {
 
         return regressions.stream()
                           .map(this::toTest);
+    }
+
+    /**
+     * Runs the regression {@link #repetitions} times, each run in its own folder
+     *   {@code run-<n>}, and checks that all runs give the same output.
+     *
+     * @return The output folder of the first run.
+     */
+    private Path runRepeatedly(final Regression regression, final Path workingFolder) throws InterruptedException {
+        final Path firstRunFolder = workingFolder.resolve("run-1");
+        final Path firstOutput = runner.run(regression, firstRunFolder);
+
+        for(int run = 2; run <= repetitions; ++run) {
+            final Path runFolder = workingFolder.resolve("run-" + run);
+            final Path output = runner.run(regression, runFolder);
+            final List<String> differences = OutputComparison.differences(firstOutput, output);
+            final String message = "Run " + run + " differs from run 1:\n" + String.join("\n", differences);
+
+            Assertions.assertTrue(differences.isEmpty(), message);
+        }
+
+        return firstOutput;
     }
 
     private DynamicTest toTest(final Regression regression) {
