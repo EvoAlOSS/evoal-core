@@ -1,0 +1,141 @@
+package de.evoal.releng.regressions;
+
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.List;
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+
+public class OutputComparisonTest {
+    private static final String CANDIDATES = "search/candidates-per-iteration.csv";
+
+    private Path actualFolder;
+
+    private Path expectedFolder;
+
+    @TempDir
+    private Path temporaryFolder;
+
+    @BeforeEach
+    public void createReferences() throws IOException {
+        expectedFolder = temporaryFolder.resolve("expected");
+        actualFolder = temporaryFolder.resolve("actual");
+
+        write(expectedFolder, CANDIDATES, "individual-id;x:0", "0;1.0", "1;2.0");
+    }
+
+    private static void write(final Path folder, final String file, final String... lines) throws IOException {
+        final Path path = folder.resolve(file);
+        final Path parent = path.getParent();
+        final List<String> content = List.of(lines);
+
+        Files.createDirectories(parent);
+        Files.write(path, content, StandardCharsets.UTF_8);
+    }
+
+    @Nested
+    @DisplayName("given an output that equals the references")
+    class EqualOutput {
+        @BeforeEach
+        public void createOutput() throws IOException {
+            write(actualFolder, CANDIDATES, "individual-id;x:0", "0;1.0", "1;2.0");
+        }
+
+        @Test
+        public void noDifferenceIsReported() {
+            // when
+            final List<String> differences = OutputComparison.differences(expectedFolder, actualFolder);
+
+            // then
+            Assertions.assertEquals(List.of(), differences);
+        }
+    }
+
+    @Nested
+    @DisplayName("given an output with a changed value")
+    class ChangedValue {
+        @BeforeEach
+        public void createOutput() throws IOException {
+            write(actualFolder, CANDIDATES, "individual-id;x:0", "0;1.0", "1;2.5");
+        }
+
+        @Test
+        public void theFileAndLineAreReported() {
+            // when
+            final List<String> differences = OutputComparison.differences(expectedFolder, actualFolder);
+
+            // then
+            final String expectedDifference = CANDIDATES + ", line 3:\n"
+                    + "  expected: 1;2.0\n"
+                    + "  actual:   1;2.5";
+            Assertions.assertEquals(List.of(expectedDifference), differences);
+        }
+    }
+
+    @Nested
+    @DisplayName("given an output with an additional row")
+    class AdditionalRow {
+        @BeforeEach
+        public void createOutput() throws IOException {
+            write(actualFolder, CANDIDATES, "individual-id;x:0", "0;1.0", "1;2.0", "2;3.0");
+        }
+
+        @Test
+        public void theNumbersOfLinesAreReported() {
+            // when
+            final List<String> differences = OutputComparison.differences(expectedFolder, actualFolder);
+
+            // then
+            final String expectedDifference = CANDIDATES + ": 3 lines expected, 4 lines found.";
+            Assertions.assertEquals(List.of(expectedDifference), differences);
+        }
+    }
+
+    @Nested
+    @DisplayName("given an output with a different set of files")
+    class DifferentFiles {
+        @BeforeEach
+        public void createOutput() throws IOException {
+            write(actualFolder, "search/best-candidate-per-iteration.csv", "individual-id;x:0", "0;1.0");
+        }
+
+        @Test
+        public void missingAndUnexpectedFilesAreReported() {
+            // when
+            final List<String> differences = OutputComparison.differences(expectedFolder, actualFolder);
+
+            // then
+            final List<String> expectedDifferences = List.of(
+                    "Missing file " + CANDIDATES + ".",
+                    "Unexpected file search/best-candidate-per-iteration.csv.");
+            Assertions.assertEquals(expectedDifferences, differences);
+        }
+    }
+
+    @Nested
+    @DisplayName("given references that are replaced by a changed output")
+    class ReplacedReferences {
+        @BeforeEach
+        public void replaceReferences() throws IOException {
+            write(actualFolder, "search/best-candidate-per-iteration.csv", "individual-id;x:0", "0;1.0");
+
+            OutputComparison.replace(expectedFolder, actualFolder);
+        }
+
+        @Test
+        public void theReferencesEqualTheOutput() {
+            // when
+            final List<String> differences = OutputComparison.differences(expectedFolder, actualFolder);
+
+            // then
+            Assertions.assertEquals(List.of(), differences);
+        }
+    }
+}

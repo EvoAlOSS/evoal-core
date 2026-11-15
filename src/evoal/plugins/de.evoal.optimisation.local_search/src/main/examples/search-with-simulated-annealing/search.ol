@@ -49,7 +49,7 @@ module 'search' {
         //with non-random orders, the first individual in the list serves as the initial individual
 		'initialisation' := 'specify-candidates' { 'candidate-list' := [
 			'candidate' { 'values' := [ 'variable'{var := data 'x:0'; val := 1.0;}, 'variable'{var := data 'x:1'; val := 5.0;}, 'variable'{var := data 'y:0'; val := 5.0;}];},
-			'candidate' { 'values' := [ 'variable'{var := data 'x:0'; val := 15.0;}, 'variable'{var := data 'x:1'; val := 1.0;}, 'variable'{var := data 'y:0'; val := 5.0;}];}];
+			'candidate' { 'values' := [ 'variable'{var := data 'x:0'; val := -3.0;}, 'variable'{var := data 'x:1'; val := 1.0;}, 'variable'{var := data 'y:0'; val := 5.0;}];}];
 			'random' := false;};
 
         //currently, only single-objective optimisation is supported

@@ -376,19 +376,23 @@ evoal:unit:
     - job: "dsl:compile-and-install"
       artifacts: true
   script:
-    - mvn $MAVEN_CLI_OPTS -f $EVOAL_POM -Dbranch=$CI_COMMIT_REF_NAME -Pjacoco verify package
-    - /bin/bash ci/create-release.sh
+    # builds, assembles the release (ci/create-release.sh) and runs the regressions against it
+    - mvn $MAVEN_CLI_OPTS -f $EVOAL_POM -Dbranch=$CI_COMMIT_REF_NAME -Pjacoco,regressions verify package
     - /bin/bash ci/regression-coverage.sh
     - cat src/evoal/core/de.evoal.releng.jacoco/target/site/jacoco-aggregate/index.html | grep -o '<tfoot>.*</tfoot>'
   coverage: /Total.*?([0-9]{1,3})%/
   artifacts:
-    when: on_success
+    when: always
     expire_in: "14 days"
     reports:
-      junit: src/evoal/*/*/target/surefire-reports/TEST-*.xml
+      junit:
+        - src/evoal/*/*/target/surefire-reports/TEST-*.xml
+        - src/evoal/*/*/target/failsafe-reports/TEST-*.xml
     paths:
       - src/evoal/*/*/target/site/jacoco-aggregate/jacoco.xml
       - src/evoal/*/*/target/surefire-reports/TEST-*.xml
+      - src/evoal/*/*/target/failsafe-reports/TEST-*.xml
+      - src/evoal/core/de.evoal.releng.regressions/target/regressions
       - src/evoal/core/de.evoal.releng.jacoco/target/site/jacoco-aggregate
 
 #############################################################

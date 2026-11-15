@@ -53,7 +53,7 @@ module 'search' {
 		'initialisation' := 'specify-candidates' {
 		    'candidate-list' := [
                 'candidate' { 'values' := [ 'variable'{var := data 'x:0'; val := 2.0;}, 'variable'{var := data 'x:1'; val := 5.0;} ];},
-                'candidate' { 'values' := [ 'variable'{var := data 'x:0'; val := 15.0;}, 'variable'{var := data 'x:1'; val := 4.0;} ];}
+                'candidate' { 'values' := [ 'variable'{var := data 'x:0'; val := -3.0;}, 'variable'{var := data 'x:1'; val := 4.0;} ];}
 			];
 			'random' := false;
 		};

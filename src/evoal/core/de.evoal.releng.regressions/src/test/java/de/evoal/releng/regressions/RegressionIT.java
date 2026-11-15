@@ -1,0 +1,119 @@
+package de.evoal.releng.regressions;
+
+import java.io.IOException;
+import java.io.UncheckedIOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.List;
+import java.util.stream.Stream;
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DynamicTest;
+import org.junit.jupiter.api.TestFactory;
+
+/**
+ * Runs every regression configuration against the assembled release and compares
+ *   its output with the references.
+ * <p>
+ * System properties:
+ * <ul>
+ *   <li>{@code evoal.regressions.root}: root folder of the repository (required).</li>
+ *   <li>{@code evoal.regressions.update}: {@code true} rewrites the references
+ *     instead of comparing against them.</li>
+ *   <li>{@code evoal.regressions.shell}: shell for the launcher (default {@code bash}).</li>
+ *   <li>{@code evoal.regressions.agent}: Java agent for the runs (set by JaCoCo).</li>
+ * </ul>
+ */
+public class RegressionIT {
+    /**
+     * The release folder, relative to the root of the repository.
+     */
+    private static final String RELEASE_FOLDER = "evoal";
+
+    /**
+     * The working folders of the runs, kept for inspection.
+     */
+    private static final Path WORKING_FOLDER = Path.of("target", "regressions");
+
+    /**
+     * The root folder of the repository.
+     */
+    private final Path root;
+
+    private final RegressionRunner runner;
+
+    /**
+     * Rewrites the references instead of comparing against them.
+     */
+    private final boolean update;
+
+    /**
+     * Creates the test from the system properties.
+     */
+    public RegressionIT() {
+        final String rootName = System.getProperty("evoal.regressions.root", "../../../..");
+        final String shell = System.getProperty("evoal.regressions.shell", "bash");
+        final String agent = System.getProperty("evoal.regressions.agent", "");
+
+        this.root = Path.of(rootName);
+
+        final Path release = root.resolve(RELEASE_FOLDER);
+        this.runner = new RegressionRunner(release, shell, agent);
+        this.update = Boolean.getBoolean("evoal.regressions.update");
+    }
+
+    /**
+     * Compares the output with the references, or rewrites them in update mode.
+     */
+    private void check(final Regression regression) throws InterruptedException {
+        final Path workingFolder = workingFolderOf(regression);
+        final Path outputFolder = runner.run(regression, workingFolder);
+        final Path expectedFolder = regression.expectedFolder();
+
+        if(update) {
+            OutputComparison.replace(expectedFolder, outputFolder);
+            return;
+        }
+
+        final boolean hasReferences = Files.isDirectory(expectedFolder);
+        Assertions.assertTrue(hasReferences, "The regression " + regression + " has no references in "
+                + expectedFolder + ". Create them with -Devoal.regressions.update=true.");
+
+        final List<String> differences = OutputComparison.differences(expectedFolder, outputFolder);
+        Assertions.assertTrue(differences.isEmpty(), () -> String.join("\n", differences));
+    }
+
+    /**
+     * Creates one test per regression configuration.
+     */
+    @TestFactory
+    public Stream<DynamicTest> outputMatchesTheReferences() {
+        final List<Regression> regressions = RegressionFinder.findAll(root);
+        final Path absoluteRoot = root.toAbsolutePath();
+        Assertions.assertFalse(regressions.isEmpty(), "No regressions found below " + absoluteRoot);
+
+        return regressions.stream()
+                          .map(this::toTest);
+    }
+
+    private DynamicTest toTest(final Regression regression) {
+        return DynamicTest.dynamicTest(regression.name(), () -> check(regression));
+    }
+
+    /**
+     * @return A new, empty working folder for the regression.
+     */
+    private static Path workingFolderOf(final Regression regression) {
+        final Path workingFolder = WORKING_FOLDER.resolve(regression.name());
+
+        Folders.deleteRecursively(workingFolder);
+
+        try {
+            Files.createDirectories(workingFolder);
+        } catch(final IOException e) {
+            throw new UncheckedIOException("Cannot create the working folder " + workingFolder, e);
+        }
+
+        return workingFolder;
+    }
+}

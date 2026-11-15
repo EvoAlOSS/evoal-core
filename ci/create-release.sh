@@ -122,3 +122,6 @@ for NAME in $RELEASE_PLUGINS; do
     fi
 done
 
+# the references of the examples (expected/) are not part of the release
+rm -rf "$EVOAL_HOME"/examples/*/expected
+

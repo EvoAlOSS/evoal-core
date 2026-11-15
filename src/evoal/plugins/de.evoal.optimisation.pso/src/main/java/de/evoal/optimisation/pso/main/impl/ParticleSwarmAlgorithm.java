@@ -90,43 +90,11 @@ public class ParticleSwarmAlgorithm implements OptimisationAlgorithm {
 
         result.setNumber(generation);
 
-        result.getRanks()
-              .addAll(toRanks(swarm));
+        final Particle[] particles = swarm.getParticles();
+        final List<Rank> ranks = SwarmRanking.toRanks(particles);
+        result.getRanks().addAll(ranks);
 
 
         return result;
-    }
-
-    private Collection<? extends Rank> toRanks(final Swarm swarm) {
-        final List<Particle> particles = Arrays.asList(swarm.getParticles());
-
-        particles.sort(Comparator.comparing(Particle::getCurrentFitness));
-
-        final List<Rank> ranks = new ArrayList<>();
-
-        int rankNumber = 0;
-        Particle lastParticle = particles.getFirst();
-
-        Rank rank = MemoryFactory.eINSTANCE.createRank();
-        rank.setNumber(rankNumber++);
-        rank.getMembers().add(lastParticle.toIndividual());
-        ranks.add(rank);
-
-        for(int i = 1; i < particles.size(); i++) {
-            Particle particle = particles.get(i);
-
-            if(particle.getCurrentFitness().isWorse(lastParticle.getCurrentFitness())) {
-                rank =  MemoryFactory.eINSTANCE.createRank();
-                rank.setNumber(rankNumber++);
-
-                ranks.add(rank);
-            }
-
-            rank.getMembers().add(particle.toIndividual());
-            lastParticle = particle;
-        }
-
-
-        return ranks;
     }
 }

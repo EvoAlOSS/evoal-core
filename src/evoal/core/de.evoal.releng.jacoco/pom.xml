@@ -88,6 +88,14 @@
             <artifactId>core.main</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
+
+        <!-- includes the coverage of the regression runs (target/jacoco-regressions.exec); the module has no jar -->
+        <dependency>
+            <groupId>${project.parent.groupId}</groupId>
+            <artifactId>releng.regressions</artifactId>
+            <version>${project.parent.version}</version>
+            <type>pom</type>
+        </dependency>
     </dependencies>
 
     <profiles>
