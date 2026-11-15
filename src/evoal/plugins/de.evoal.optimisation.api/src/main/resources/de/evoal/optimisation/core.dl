@@ -354,7 +354,8 @@ module de.evoal.optimisation.core {
      */
     type 'iteration-count' extends 'stopping-criterion' {
         /**
-         * Maximum number of iterations.
+         * Maximum number of iterations. The initial evaluation is iteration 0,
+         * so a run with value n records the iterations 0 to n.
          */
         @LowerBoundary { boundary := 0; }
         'maximum-iterations' : int := 10;

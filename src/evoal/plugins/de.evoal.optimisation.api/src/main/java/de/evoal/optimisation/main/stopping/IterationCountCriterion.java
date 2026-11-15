@@ -23,9 +23,9 @@ public class IterationCountCriterion extends TerminationCriterionImpl {
 
     @Override
     public boolean shouldTerminate(final Iteration iteration) {
-        log.info("Check termination {} > {}.", iteration.getNumber(), maxIterations);
+        log.info("Check termination {} >= {}.", iteration.getNumber(), maxIterations);
 
-        return iteration.getNumber() > maxIterations;
+        return iteration.getNumber() >= maxIterations;
     }
 
     @Override
