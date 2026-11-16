@@ -44,5 +44,9 @@ platforms. Therefore the references are created in the EvoAl CI image:
 ci/regressions-in-docker.sh --update
 ```
 
+The only value that is not compared is the EvoAl version in the memory model
+(`"evoalVersion"`): it is stored as `${evoal.version}` and masked in the output,
+so a new project version does not change the references.
+
 A reference changes only on purpose, in the same merge request as the code
 change that justifies it.

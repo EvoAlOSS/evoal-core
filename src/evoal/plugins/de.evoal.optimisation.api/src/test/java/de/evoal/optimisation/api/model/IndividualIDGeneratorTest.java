@@ -12,4 +12,15 @@ public class IndividualIDGeneratorTest {
         Assertions.assertEquals(1, generator.nextId());
         Assertions.assertEquals(2, generator.nextId());
     }
+
+    @Test
+    public void everyRunStartsAtZero() {
+        final IndividualIDGenerator generator = new IndividualIDGenerator();
+        generator.nextId();
+        generator.nextId();
+
+        generator.startRun();
+
+        Assertions.assertEquals(0, generator.nextId());
+    }
 }

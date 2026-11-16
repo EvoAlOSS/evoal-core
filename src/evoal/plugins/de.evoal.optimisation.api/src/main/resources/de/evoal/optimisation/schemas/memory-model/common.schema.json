@@ -1,0 +1,279 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.evoal.de/schemas/memory-model/2027.4.0/common.schema.json",
+  "title": "EvoAl memory model: shared definitions",
+  "description": "Definitions shared by the files of the memory model writer.",
+  "$defs": {
+    "formatVersion": {
+      "description": "EvoAl release that defines this file format. Changes with a release only if the format changes incompatibly.",
+      "const": "2027.4.0"
+    },
+    "featureName": {
+      "description": "Name of a data description (DDL), e.g. 'x:0'.",
+      "type": "string",
+      "minLength": 1
+    },
+    "individualId": {
+      "description": "Identifier of an individual, unique within a run. Every run starts at 0.",
+      "type": "integer",
+      "minimum": 0
+    },
+    "nonFiniteNumber": {
+      "description": "A number that JSON cannot represent: not a number, positive or negative infinity. Written as a string.",
+      "enum": [
+        "NaN",
+        "Infinity",
+        "-Infinity"
+      ]
+    },
+    "number": {
+      "description": "A number, or a non-finite number written as a string.",
+      "oneOf": [
+        {
+          "type": "number"
+        },
+        {
+          "$ref": "#/$defs/nonFiniteNumber"
+        }
+      ]
+    },
+    "value": {
+      "description": "Value of a feature. Arrays are nested JSON arrays; enum literals are written by name; null if the feature is unset. Non-finite numbers of real features are written as the strings 'NaN', 'Infinity' and '-Infinity' (see nonFiniteNumber).",
+      "oneOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/value"
+          }
+        }
+      ]
+    },
+    "values": {
+      "description": "Values of a space, keyed by feature name.",
+      "type": "object",
+      "propertyNames": {
+        "$ref": "#/$defs/featureName"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/value"
+      }
+    },
+    "bound": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "number"
+        },
+        "inclusive": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "value",
+        "inclusive"
+      ],
+      "additionalProperties": false
+    },
+    "feature": {
+      "description": "A feature (variable) of the search or optimisation space.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "$ref": "#/$defs/featureName"
+        },
+        "type": {
+          "enum": [
+            "boolean",
+            "integer",
+            "real",
+            "string"
+          ]
+        },
+        "scale": {
+          "description": "Scale of the data description, if declared.",
+          "enum": [
+            "nominal",
+            "ordinal",
+            "cardinal",
+            "quotient"
+          ]
+        },
+        "lowerBound": {
+          "$ref": "#/$defs/bound"
+        },
+        "upperBound": {
+          "$ref": "#/$defs/bound"
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ],
+      "additionalProperties": false
+    },
+    "relationship": {
+      "description": "Origin of an individual. Targets may be individuals of earlier iterations.",
+      "type": "object",
+      "properties": {
+        "kind": {
+          "enum": [
+            "identity",
+            "mutation",
+            "recombination"
+          ]
+        },
+        "targets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/individualId"
+          },
+          "minItems": 1
+        },
+        "partner": {
+          "description": "Recombination only: the individual that was created by the same recombination (holder of the 'other' relationship).",
+          "$ref": "#/$defs/individualId"
+        }
+      },
+      "required": [
+        "kind",
+        "targets"
+      ],
+      "additionalProperties": false,
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "recombination"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "partner"
+        ]
+      },
+      "else": {
+        "not": {
+          "required": [
+            "partner"
+          ]
+        }
+      }
+    },
+    "individual": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/individualId"
+        },
+        "input": {
+          "$ref": "#/$defs/values"
+        },
+        "output": {
+          "$ref": "#/$defs/values"
+        },
+        "relationships": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/relationship"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "input",
+        "output",
+        "relationships"
+      ],
+      "additionalProperties": false
+    },
+    "metricName": {
+      "description": "Name of a metric, unique within a run, e.g. 'evaluations.real'.",
+      "type": "string",
+      "minLength": 1
+    },
+    "metricDefinition": {
+      "description": "Defines a metric of the run (MetricDefinition). Every key of a 'metrics' object is defined with the matching scope.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "$ref": "#/$defs/metricName"
+        },
+        "kind": {
+          "description": "'counter': the value never decreases (e.g. the number of evaluations); 'measure': the value can change arbitrarily.",
+          "enum": [
+            "counter",
+            "measure"
+          ]
+        },
+        "valueType": {
+          "description": "'integer' values are JSON integers, 'real' values are JSON numbers.",
+          "enum": [
+            "integer",
+            "real"
+          ]
+        },
+        "scope": {
+          "description": "'execution': recorded once for the run (execution-finished.json); 'iteration': recorded in every iteration (iteration-<number>.json).",
+          "enum": [
+            "execution",
+            "iteration"
+          ]
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "kind",
+        "valueType",
+        "scope",
+        "description"
+      ],
+      "additionalProperties": false
+    },
+    "metrics": {
+      "description": "Values of metrics, keyed by metric name.",
+      "type": "object",
+      "propertyNames": {
+        "$ref": "#/$defs/metricName"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/number"
+      }
+    },
+    "rank": {
+      "description": "Individuals of equal fitness. Rank 0 is the best.",
+      "type": "object",
+      "properties": {
+        "number": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "members": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/individualId"
+          }
+        }
+      },
+      "required": [
+        "number",
+        "members"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

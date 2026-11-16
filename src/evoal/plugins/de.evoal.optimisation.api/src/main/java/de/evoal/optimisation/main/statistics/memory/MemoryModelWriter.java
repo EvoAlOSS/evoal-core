@@ -1,0 +1,289 @@
+package de.evoal.optimisation.main.statistics.memory;
+
+import java.io.File;
+import java.lang.module.ModuleDescriptor;
+import java.nio.file.Path;
+import java.util.List;
+import java.util.Optional;
+
+import jakarta.enterprise.context.Dependent;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
+
+import lombok.extern.slf4j.Slf4j;
+
+import tools.jackson.databind.node.ObjectNode;
+
+import org.eclipse.emf.ecore.EObject;
+
+import de.evoal.core.api.cdi.BlackboardValue;
+import de.evoal.core.api.cdi.ConfigurationValue;
+import de.evoal.core.api.dynamic.EAnnotationHelper;
+import de.evoal.core.api.random.RandomService;
+import de.evoal.core.api.utils.EvoalIOException;
+import de.evoal.models.core.utils.FQNProvider;
+import de.evoal.models.v202704.optimisation.memory.Execution;
+import de.evoal.models.v202704.optimisation.memory.Individual;
+import de.evoal.models.v202704.optimisation.memory.Iteration;
+import de.evoal.models.v202704.optimisation.memory.Rank;
+import de.evoal.models.v202704.optimisation.model.Problem;
+
+import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
+import de.evoal.optimisation.api.execution.EvaluationPosition;
+import de.evoal.optimisation.api.execution.ExecutionRecorder;
+import de.evoal.optimisation.api.statistics.writer.StatisticsWriter;
+
+/**
+ * Writes the memory model of a run as JSON files (DL type {@code memory-model}) into the
+ *   folder {@value #FOLDER_NAME} of the output folder, or into its subfolder of the run in
+ *   the evaluation setup ({@link EvaluationPosition#relativeFolder()}).
+ * <p>
+ * The EvoAl version is the version of this module; all EvoAl modules share one version.
+ * <p>
+ * The writer is created while the metrics are still being defined. Therefore, it prepares
+ *   the folder and writes {@code execution-information.json} with the first iteration,
+ *   when the definitions are complete. It writes {@code execution-finished.json} when the
+ *   algorithm finishes its statistics ({@link #write()}); the execution metrics have to
+ *   be final at that point.
+ */
+@Dependent
+@Named("de.evoal.optimisation.core.memory-model")
+@Slf4j
+public class MemoryModelWriter implements StatisticsWriter {
+    /**
+     * The name of the folder in the output folder.
+     */
+    public static final String FOLDER_NAME = "memory-model";
+
+    /**
+     * The version that is written if the module has no version, e.g. in unit tests.
+     */
+    public static final String UNKNOWN_VERSION = "unknown";
+
+    /**
+     * The configuration of the algorithm, whose DL type is written.
+     */
+    @Inject
+    @ConfigurationValue(entry = OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm")
+    private EObject algorithm;
+
+    /**
+     * Finds the data descriptions of the features.
+     */
+    @Inject
+    private EAnnotationHelper annotationHelper;
+
+    /**
+     * The ids of the best individuals (rank 0) of the last written iteration.
+     */
+    private List<Integer> best = List.of();
+
+    /**
+     * Whether writing failed. Then no further files are written, so the memory model has
+     *   no {@code execution-finished.json}.
+     */
+    private boolean failed;
+
+    /**
+     * The folder of the run, created with the first iteration. {@code null} before.
+     */
+    private MemoryModelFolder folder;
+
+    /**
+     * Converts the memory model to JSON, created with the first iteration.
+     */
+    private MemoryModelJson json;
+
+    /**
+     * The number of written iteration files.
+     */
+    private int numberOfIterations;
+
+    /**
+     * The output folder of the application.
+     */
+    @Inject
+    @BlackboardValue(OptimisationBlackboardEntries.EVALUATION_OUTPUT_FOLDER)
+    private File outputFolder;
+
+    /**
+     * The optimisation problem.
+     */
+    @Inject
+    @ConfigurationValue(entry = OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "problem")
+    private EObject problem;
+
+    /**
+     * Provides the seed of the execution.
+     */
+    @Inject
+    private RandomService randomService;
+
+    /**
+     * Provides the execution and the position of the run.
+     */
+    @Inject
+    private ExecutionRecorder recorder;
+
+    /**
+     * Writes the iteration file. With the first iteration, the folder is prepared and the
+     *   execution information is written.
+     *
+     * A failure to write is logged and stops the writer; the run continues.
+     *
+     * @throws IllegalStateException if the iterations are not numbered 0, 1, 2, ...
+     */
+    @Override
+    public void add(final Iteration iteration) {
+        if(failed) {
+            return;
+        }
+
+        try {
+            if(folder == null) {
+                startRun();
+            }
+
+            requireNextNumber(iteration);
+
+            final ObjectNode document = json.toIteration(iteration);
+            folder.write("iteration-" + iteration.getNumber() + ".json", document);
+
+            numberOfIterations += 1;
+            best = bestOf(iteration);
+        } catch(final EvoalIOException e) {
+            stopWriting(e);
+        }
+    }
+
+    /**
+     * @return The ids of the members of rank 0.
+     */
+    private static List<Integer> bestOf(final Iteration iteration) {
+        return iteration.getRanks()
+                        .stream()
+                        .filter(rank -> rank.getNumber() == 0)
+                        .map(Rank::getMembers)
+                        .flatMap(List::stream)
+                        .map(Individual::getId)
+                        .toList();
+    }
+
+    @Override
+    public StatisticsWriter init(final EObject configuration) {
+        return this;
+    }
+
+    /**
+     * @throws IllegalStateException if the iteration does not have the next number.
+     */
+    private void requireNextNumber(final Iteration iteration) {
+        if(iteration.getNumber() == numberOfIterations) {
+            return;
+        }
+
+        throw new IllegalStateException("The memory model expects iteration " + numberOfIterations
+                                        + ", but got iteration " + iteration.getNumber() + ".");
+    }
+
+    /**
+     * @return The folder of the current run.
+     */
+    private Path runFolder() {
+        final Path baseFolder = outputFolder.toPath()
+                                            .resolve(FOLDER_NAME);
+        final Optional<EvaluationPosition> position = recorder.getEvaluationPosition();
+
+        return position.map(EvaluationPosition::relativeFolder)
+                       .map(baseFolder::resolve)
+                       .orElse(baseFolder);
+    }
+
+    /**
+     * Prepares the folder of the run and writes the execution information.
+     *
+     * @throws IllegalStateException if the problem is not an optimisation problem.
+     * @throws EvoalIOException if the folder cannot be prepared or the file cannot be written.
+     */
+    private void startRun() throws EvoalIOException {
+        if(!(problem instanceof Problem optimisationProblem)) {
+            throw new IllegalStateException("The memory model writer needs the optimisation problem, but got "
+                                            + problem + ".");
+        }
+
+        json = new MemoryModelJson(annotationHelper);
+        folder = new MemoryModelFolder(runFolder());
+        folder.prepare();
+
+        final String algorithmType = new FQNProvider().get(algorithm);
+        final Execution execution = recorder.getExecution();
+        final RunSetup setup = toSetup();
+
+        final ObjectNode document = json.toExecutionInformation(optimisationProblem,
+                                                                algorithmType,
+                                                                execution,
+                                                                setup);
+        folder.write("execution-information.json", document);
+
+        log.info("Writing the memory model to '{}'.", folder.getFolder());
+    }
+
+    /**
+     * Logs the failure and stops writing.
+     */
+    private void stopWriting(final EvoalIOException failure) {
+        failed = true;
+
+        log.error("Failed to write the memory model, no further files are written.", failure);
+    }
+
+    /**
+     * @return The setup of the current run.
+     */
+    private RunSetup toSetup() {
+        final String version = versionOfModule();
+        final long seed = randomService.getSeed();
+        final long run = randomService.getRun();
+        final EvaluationPosition position = recorder.getEvaluationPosition()
+                                                    .orElse(null);
+
+        return new RunSetup(version, seed, run, position);
+    }
+
+    /**
+     * @return The version of this module, {@value #UNKNOWN_VERSION} if it has none (e.g. an
+     *   unnamed module in unit tests).
+     */
+    private static String versionOfModule() {
+        final ModuleDescriptor descriptor = MemoryModelWriter.class.getModule()
+                                                                   .getDescriptor();
+        if(descriptor == null) {
+            return UNKNOWN_VERSION;
+        }
+
+        return descriptor.rawVersion()
+                         .orElse(UNKNOWN_VERSION);
+    }
+
+    /**
+     * Writes {@code execution-finished.json} and removes the folder for incomplete files.
+     *   Does nothing if no iteration was written or writing failed.
+     */
+    @Override
+    public void write() {
+        final boolean nothingToFinish = folder == null || failed;
+        if(nothingToFinish) {
+            return;
+        }
+
+        final Execution execution = recorder.getExecution();
+        final ObjectNode document = json.toExecutionFinished(numberOfIterations, best, execution);
+
+        try {
+            folder.write("execution-finished.json", document);
+            folder.complete();
+        } catch(final EvoalIOException e) {
+            stopWriting(e);
+        }
+    }
+}

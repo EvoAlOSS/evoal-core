@@ -44,6 +44,11 @@ public class ExecutionRecorder {
     private Instance<MetricContributor> contributors;
 
     /**
+     * The position of the current run in the evaluation setup, {@code null} for a single run.
+     */
+    private EvaluationPosition evaluationPosition;
+
+    /**
      * The execution of the current run.
      */
     @Getter
@@ -107,6 +112,13 @@ public class ExecutionRecorder {
     }
 
     /**
+     * @return The position of the current run in the evaluation setup, empty for a single run.
+     */
+    public Optional<EvaluationPosition> getEvaluationPosition() {
+        return Optional.ofNullable(evaluationPosition);
+    }
+
+    /**
      * Records the value of an execution metric, e.g., a limit.
      *
      * @param name The name of the metric.
@@ -167,10 +179,21 @@ public class ExecutionRecorder {
     }
 
     /**
-     * Starts a new run with a new execution and opens its definition phase. All
-     *   contributors reset their state and define their metrics.
+     * Starts a single run (not part of the evaluation setup), see {@link #startRun(EvaluationPosition)}.
      */
     public void startRun() {
+        startRun(null);
+    }
+
+    /**
+     * Starts a new run with a new execution and opens its definition phase. All
+     *   contributors reset their state and define their metrics.
+     *
+     * @param evaluationPosition The position of the run in the evaluation setup, {@code null}
+     *   for a single run.
+     */
+    public void startRun(final EvaluationPosition evaluationPosition) {
+        this.evaluationPosition = evaluationPosition;
         execution = MemoryFactory.eINSTANCE.createExecution();
         phase = Phase.DEFINITION;
 

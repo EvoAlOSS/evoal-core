@@ -278,7 +278,7 @@ module de.evoal.optimisation.core {
      * </ul>
      *
      * In the evaluation setup ({@code heuristic-search-evaluation}), the file
-     *   starts with the columns <tt>run</tt> and, if target points are used,
+     *   starts with the columns <tt>repetition</tt> and, if target points are used,
      *   <tt>target</tt>. All runs append to the same file.
      */
     type 'best-candidate-per-iteration' extends 'statistics-writer' {
@@ -314,7 +314,7 @@ module de.evoal.optimisation.core {
      * </ul>
      *
      * In the evaluation setup ({@code heuristic-search-evaluation}), the file
-     *   starts with the columns <tt>run</tt> and, if target points are used,
+     *   starts with the columns <tt>repetition</tt> and, if target points are used,
      *   <tt>target</tt>. All runs append to the same file.
      */
     type 'candidates-per-iteration' extends 'statistics-writer' {
@@ -345,10 +345,37 @@ module de.evoal.optimisation.core {
      *   metric (e.g., evaluations.real, evaluations.surrogate).
      *
      * In the evaluation setup ({@code heuristic-search-evaluation}), the file
-     *   starts with the columns <tt>run</tt> and, if target points are used,
+     *   starts with the columns <tt>repetition</tt> and, if target points are used,
      *   <tt>target</tt>. All runs append to the same file.
      */
     type 'metrics-per-iteration' extends 'statistics-writer' {}
+
+    /**
+     * Writes the memory model of every run as JSON files into the folder
+     *   <tt>memory-model</tt> in the output folder, while the run is executed:
+     *
+     * <ul>
+     *   <li><tt>execution-information.json</tt> before the first iteration: problem,
+     *     goals, algorithm, search and optimisation space, metric definitions, and what is
+     *     needed to repeat the run (EvoAl version, seed, run).</li>
+     *   <li><tt>iteration-&lt;n&gt;.json</tt> for every iteration: its individuals with
+     *     their values and origin (relationships), its steps, ranks and metrics.</li>
+     *   <li><tt>execution-finished.json</tt> after the last iteration: the number of
+     *     iterations, the best individuals and the execution metrics. Signals that no
+     *     further files follow.</li>
+     * </ul>
+     *
+     * Every file is first written into the subfolder <tt>.incomplete</tt> and then moved
+     *   into place, so readers never see a partially written file. The folder of a run is
+     *   deleted when the run starts. The format is described by JSON schemas
+     *   (<tt>https://www.evoal.de/schemas/memory-model/2027.4.0/</tt>).
+     *
+     * In the evaluation setup ({@code heuristic-search-evaluation}), every run gets its own
+     *   folder <tt>memory-model/repetition-&lt;repetition&gt;</tt>, or
+     *   <tt>memory-model/target-&lt;target&gt;/repetition-&lt;repetition&gt;</tt> if target
+     *   points are used.
+     */
+    type 'memory-model' extends 'statistics-writer' {}
 
     /**
      * Does not write any statistics. Can be used to disable statistics output.
@@ -418,7 +445,7 @@ module de.evoal.optimisation.core {
      *   ({@code 1} if the criterion is satisfied, {@code 0} otherwise).
      *
      * In the evaluation setup ({@code heuristic-search-evaluation}), the file
-     *   starts with the columns <tt>run</tt> and, if target points are used,
+     *   starts with the columns <tt>repetition</tt> and, if target points are used,
      *   <tt>target</tt>. All runs append to the same file.
      */
     type 'stopping-per-candidates-per-generation' extends 'statistics-writer' {
@@ -434,7 +461,7 @@ module de.evoal.optimisation.core {
      *   ({@code 1} if the criterion is satisfied, {@code 0} otherwise).
      *
      * In the evaluation setup ({@code heuristic-search-evaluation}), the file
-     *   starts with the columns <tt>run</tt> and, if target points are used,
+     *   starts with the columns <tt>repetition</tt> and, if target points are used,
      *   <tt>target</tt>. All runs append to the same file.
      */
     type 'stopping-per-candidates-per-iteration' extends 'statistics-writer' {

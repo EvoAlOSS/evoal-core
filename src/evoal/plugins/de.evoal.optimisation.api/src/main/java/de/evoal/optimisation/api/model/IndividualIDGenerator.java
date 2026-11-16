@@ -7,7 +7,8 @@ import jakarta.enterprise.context.ApplicationScoped;
 /**
  * Creates the unique identifiers of the individuals in the memory model
  *   ({@link de.evoal.models.v202704.optimisation.memory.Individual#getId()}).
- *   The identifiers form a sequence starting at 0.
+ *   The identifiers form a sequence starting at 0 in every run, so a run gets the same
+ *   identifiers whether it is executed alone or after other runs.
  */
 @ApplicationScoped
 public class IndividualIDGenerator {
@@ -21,5 +22,12 @@ public class IndividualIDGenerator {
      */
     public int nextId() {
         return next.getAndIncrement();
+    }
+
+    /**
+     * Starts a new run: the next identifier is 0 again.
+     */
+    public void startRun() {
+        next.set(0);
     }
 }

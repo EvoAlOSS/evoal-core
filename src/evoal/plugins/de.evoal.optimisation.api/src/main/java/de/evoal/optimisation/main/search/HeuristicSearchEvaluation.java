@@ -8,7 +8,9 @@ import de.evoal.models.core.ecore.Space;
 import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
 import de.evoal.core.api.cdi.*;
 import de.evoal.optimisation.api.cdi.TargetPointLoader;
+import de.evoal.optimisation.api.execution.EvaluationPosition;
 import de.evoal.optimisation.api.execution.ExecutionRecorder;
+import de.evoal.optimisation.api.model.IndividualIDGenerator;
 import de.evoal.optimisation.api.model.OptimisationAlgorithm;
 
 import jakarta.enterprise.context.ApplicationScoped;
@@ -57,6 +59,9 @@ public class HeuristicSearchEvaluation implements MainClass {
     private ExecutionRecorder executionRecorder;
 
     @Inject
+    private IndividualIDGenerator idGenerator;
+
+    @Inject
     private OptimisationModuleLoader loader;
 
     @Inject
@@ -74,7 +79,7 @@ public class HeuristicSearchEvaluation implements MainClass {
     private List<EObjectPair> targets;
 
     private Column targetColumn;
-    private Column runColumn;
+    private Column repetitionColumn;
 
     @Inject @Named("search-space")
     private Provider<Space> searchSpaceProvider;
@@ -110,7 +115,7 @@ public class HeuristicSearchEvaluation implements MainClass {
     }
 
     private void process() {
-        runColumn = HeuristicSearchUtils.addColumn(context,"run", ColumnType.Integer, 0);
+        repetitionColumn = HeuristicSearchUtils.addColumn(context, "repetition", ColumnType.Integer, 0);
 
         board.bind(OptimisationBlackboardEntries.EVALUATION_OUTPUT_FOLDER, outputBaseDir);
 
@@ -124,8 +129,15 @@ public class HeuristicSearchEvaluation implements MainClass {
     }
 
     private int targetIndex = 0;
+
+    /**
+     * The index of the target point that is currently evaluated.
+     */
+    private int currentTarget;
+
     private void processTarget(final EObjectPair target) {
         final int targetIndex = this.targetIndex++;
+        currentTarget = targetIndex;
 
         context.bindColumn(targetColumn, targetIndex);
 
@@ -145,9 +157,12 @@ public class HeuristicSearchEvaluation implements MainClass {
             log.info("Running {}/{}", i, iterations);
             final String run = convertToString(i, runLength);
             board.bind(OptimisationBlackboardEntries.EVALUATION_RUN, run);
-            context.bindColumn(runColumn, i);
+            context.bindColumn(repetitionColumn, i);
             randomService.startRun(runCounter++);
-            executionRecorder.startRun();
+            idGenerator.startRun();
+
+            final EvaluationPosition position = toEvaluationPosition(i);
+            executionRecorder.startRun(position);
 
             final OptimisationAlgorithm algorithm =
                     BeanFactory.createComponent(OptimisationAlgorithm.class, algorithmConfiguration.getAlgorithm());
@@ -156,6 +171,18 @@ public class HeuristicSearchEvaluation implements MainClass {
             algorithm.run();
             executionRecorder.finishRun();
         }
+    }
+
+    /**
+     * @return The position of the run: the repetition and, if a target file is used, the
+     *   current target point.
+     */
+    private EvaluationPosition toEvaluationPosition(final int repetition) {
+        if(targets == null) {
+            return EvaluationPosition.withoutTarget(repetition, iterations);
+        }
+
+        return EvaluationPosition.withTarget(repetition, iterations, currentTarget, targets.size());
     }
 
     private String convertToString(final int targetIndex, final int length) {

@@ -22,6 +22,7 @@ import de.evoal.models.core.ecore.Space;
 
 import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
 import de.evoal.optimisation.api.execution.ExecutionRecorder;
+import de.evoal.optimisation.api.model.IndividualIDGenerator;
 import de.evoal.optimisation.api.model.OptimisationAlgorithm;
 import de.evoal.optimisation.api.producer.SpaceProducer;
 import de.evoal.optimisation.main.producer.OptimisationModuleLoader;
@@ -48,6 +49,9 @@ public class HeuristicSearchMain implements MainClass {
 
     @Inject
     private ExecutionRecorder executionRecorder;
+
+    @Inject
+    private IndividualIDGenerator idGenerator;
 
     @Inject
     private OptimisationModuleLoader loader;
@@ -87,6 +91,7 @@ public class HeuristicSearchMain implements MainClass {
         board.bind(OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, eConfigurationModel);
 
         randomService.startRun(0);
+        idGenerator.startRun();
         executionRecorder.startRun();
 
         final OptimisationAlgorithm algorithm =

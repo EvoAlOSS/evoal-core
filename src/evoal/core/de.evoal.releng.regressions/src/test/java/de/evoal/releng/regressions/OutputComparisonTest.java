@@ -120,6 +120,57 @@ public class OutputComparisonTest {
     }
 
     @Nested
+    @DisplayName("given a memory model written by another EvoAl version")
+    class OtherEvoalVersion {
+        private static final String INFORMATION = "search/memory-model/execution-information.json";
+
+        @BeforeEach
+        public void createOutput() throws IOException {
+            write(expectedFolder, INFORMATION, "  \"setup\" : {", "    \"evoalVersion\" : \"${evoal.version}\",");
+            write(actualFolder, CANDIDATES, "individual-id;x:0", "0;1.0", "1;2.0");
+            write(actualFolder, INFORMATION, "  \"setup\" : {", "    \"evoalVersion\" : \"2027.4.0\",");
+        }
+
+        @Test
+        public void noDifferenceIsReported() {
+            // when
+            final List<String> differences = OutputComparison.differences(expectedFolder, actualFolder);
+
+            // then
+            Assertions.assertEquals(List.of(), differences);
+        }
+
+        @Test
+        public void replacedReferencesContainThePlaceholder() throws IOException {
+            // when
+            OutputComparison.replace(expectedFolder, actualFolder);
+
+            // then
+            final List<String> lines = Files.readAllLines(expectedFolder.resolve(INFORMATION));
+            Assertions.assertEquals("    \"evoalVersion\" : \"${evoal.version}\",", lines.get(1));
+        }
+    }
+
+    @Nested
+    @DisplayName("given an output with Windows line endings")
+    class WindowsLineEndings {
+        @Test
+        public void replacedReferencesKeepTheLineEndings() throws IOException {
+            // given
+            final Path output = actualFolder.resolve(CANDIDATES);
+            Files.createDirectories(output.getParent());
+            Files.writeString(output, "individual-id;x:0\r\n0;1.0\r\n", StandardCharsets.UTF_8);
+
+            // when
+            OutputComparison.replace(expectedFolder, actualFolder);
+
+            // then
+            final String reference = Files.readString(expectedFolder.resolve(CANDIDATES), StandardCharsets.UTF_8);
+            Assertions.assertEquals("individual-id;x:0\r\n0;1.0\r\n", reference);
+        }
+    }
+
+    @Nested
     @DisplayName("given references that are replaced by a changed output")
     class ReplacedReferences {
         @BeforeEach

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.evoal.de/schemas/memory-model/2027.4.0/execution-finished.schema.json",
+  "title": "EvoAl memory model: execution finished",
+  "description": "Written once after the last iteration, when the run is finished (ExecutionRecorder.finishRun). Signals clients that no further iteration files follow.",
+  "type": "object",
+  "properties": {
+    "formatVersion": { "$ref": "common.schema.json#/$defs/formatVersion" },
+    "numberOfIterations": {
+      "description": "Number of iteration files written (iteration-0.json up to iteration-<numberOfIterations - 1>.json).",
+      "type": "integer",
+      "minimum": 0
+    },
+    "best": {
+      "description": "Ids of the best individuals of the last iteration (rank 0).",
+      "type": "array",
+      "items": { "$ref": "common.schema.json#/$defs/individualId" }
+    },
+    "metrics": {
+      "description": "Final values of the execution metrics (scope 'execution'), e.g. limits.",
+      "$ref": "common.schema.json#/$defs/metrics"
+    }
+  },
+  "required": ["formatVersion", "numberOfIterations", "best", "metrics"],
+  "additionalProperties": false
+}

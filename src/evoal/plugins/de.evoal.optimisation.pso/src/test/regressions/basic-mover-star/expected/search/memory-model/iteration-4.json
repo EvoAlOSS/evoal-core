@@ -1,0 +1,155 @@
+{
+  "formatVersion" : "2027.4.0",
+  "number" : 4,
+  "individuals" : [ {
+    "id" : 38,
+    "input" : {
+      "x:0" : 0.4930304616940553,
+      "x:1" : 0.17357118417129636
+    },
+    "output" : {
+      "y:0" : 3.37885758331035
+    },
+    "relationships" : [ {
+      "kind" : "mutation",
+      "targets" : [ 29 ]
+    } ]
+  }, {
+    "id" : 42,
+    "input" : {
+      "x:0" : 1.3469786699587123,
+      "x:1" : -1.8994207834850236
+    },
+    "output" : {
+      "y:0" : 7.205408847850407
+    },
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 33 ]
+    } ]
+  }, {
+    "id" : 43,
+    "input" : {
+      "x:0" : 2.066409516359723,
+      "x:1" : 1.6915921404383027
+    },
+    "output" : {
+      "y:0" : 7.688988530334566
+    },
+    "relationships" : [ {
+      "kind" : "identity",
+      "targets" : [ 34 ]
+    } ]
+  }, {
+    "id" : 44,
+    "input" : {
+      "x:0" : 1.0677359818316783,
+      "x:1" : -2.505160909357569
+    },
+    "output" : {
+      "y:0" : 8.154281755331114
+    },
+    "relationships" : [ {
+      "kind" : "mutation",
+      "targets" : [ 35 ]
+    } ]
+  }, {
+    "id" : 36,
+    "input" : {
+      "x:0" : 0.9964939602014097,
+      "x:1" : 3.2063472382132048
+    },
+    "output" : {
+      "y:0" : 8.39099600483245
+    },
+    "relationships" : [ {
+      "kind" : "mutation",
+      "targets" : [ 27 ]
+    } ]
+  }, {
+    "id" : 40,
+    "input" : {
+      "x:0" : -0.6625610995053653,
+      "x:1" : -3.3243358567908166
+    },
+    "output" : {
+      "y:0" : 9.719975779925406
+    },
+    "relationships" : [ {
+      "kind" : "mutation",
+      "targets" : [ 31 ]
+    } ]
+  }, {
+    "id" : 41,
+    "input" : {
+      "x:0" : -1.0221943210843527,
+      "x:1" : -3.484511602873086
+    },
+    "output" : {
+      "y:0" : 9.75341995299176
+    },
+    "relationships" : [ {
+      "kind" : "mutation",
+      "targets" : [ 32 ]
+    } ]
+  }, {
+    "id" : 37,
+    "input" : {
+      "x:0" : -1.5150236685907852,
+      "x:1" : 3.698171495339028
+    },
+    "output" : {
+      "y:0" : 10.835171575071675
+    },
+    "relationships" : [ {
+      "kind" : "mutation",
+      "targets" : [ 28 ]
+    } ]
+  }, {
+    "id" : 39,
+    "input" : {
+      "x:0" : -4.319338490324514,
+      "x:1" : 3.5728822965601914
+    },
+    "output" : {
+      "y:0" : 13.149146907740864
+    },
+    "relationships" : [ {
+      "kind" : "mutation",
+      "targets" : [ 30 ]
+    } ]
+  } ],
+  "steps" : [ ],
+  "ranks" : [ {
+    "number" : 0,
+    "members" : [ 38 ]
+  }, {
+    "number" : 1,
+    "members" : [ 42 ]
+  }, {
+    "number" : 2,
+    "members" : [ 43 ]
+  }, {
+    "number" : 3,
+    "members" : [ 44 ]
+  }, {
+    "number" : 4,
+    "members" : [ 36 ]
+  }, {
+    "number" : 5,
+    "members" : [ 40 ]
+  }, {
+    "number" : 6,
+    "members" : [ 41 ]
+  }, {
+    "number" : 7,
+    "members" : [ 37 ]
+  }, {
+    "number" : 8,
+    "members" : [ 39 ]
+  } ],
+  "metrics" : {
+    "evaluations.real" : 45,
+    "evaluations.surrogate" : 0
+  }
+}

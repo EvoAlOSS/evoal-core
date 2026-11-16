@@ -26,7 +26,7 @@ module 'search' {
 
         and minimise data 'y:0'
 
-        document ['candidates-per-iteration' {}, 'best-candidate-per-iteration' {}, 'metrics-per-iteration' {}].
+        document ['candidates-per-iteration' {}, 'best-candidate-per-iteration' {}, 'metrics-per-iteration' {}, 'memory-model' {}].
     }
 
     configure 'local-search' for 'regression' {

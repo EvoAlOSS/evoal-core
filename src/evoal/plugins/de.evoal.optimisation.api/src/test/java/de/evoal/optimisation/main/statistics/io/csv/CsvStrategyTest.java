@@ -125,15 +125,15 @@ public class CsvStrategyTest {
     }
 
     @Nested
-    @DisplayName("given an evaluation run with a run column in the context")
-    class EvaluationRun {
+    @DisplayName("given an evaluation with a repetition column in the context")
+    class EvaluationRepetition {
         @BeforeEach
-        public void addRunColumn() {
-            HeuristicSearchUtils.addColumn(context, "run", ColumnType.Integer, 3);
+        public void addRepetitionColumn() {
+            HeuristicSearchUtils.addColumn(context, "repetition", ColumnType.Integer, 3);
         }
 
         @Test
-        public void theRunColumnComesFirst() throws Exception {
+        public void theRepetitionColumnComesFirst() throws Exception {
             // given
             final Writer writer = strategy.create("candidates-per-iteration", HEADER);
 
@@ -143,7 +143,7 @@ public class CsvStrategyTest {
 
             // then
             final List<String> lines = linesOf("candidates-per-iteration.csv");
-            Assertions.assertEquals(List.of("run,generation,x", "3,0,1.5"), lines);
+            Assertions.assertEquals(List.of("repetition,generation,x", "3,0,1.5"), lines);
         }
     }
 }

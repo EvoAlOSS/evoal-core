@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.evoal.de/schemas/memory-model/2027.4.0/iteration.schema.json",
+  "title": "EvoAl memory model: iteration",
+  "description": "Written as iteration-<number>.json for each iteration. Iteration 0 is the initial population. Every individual created or kept in this iteration is listed once in 'individuals'; steps and ranks refer to them by id. Relationship targets may refer to individuals of earlier iterations.",
+  "type": "object",
+  "properties": {
+    "formatVersion": { "$ref": "common.schema.json#/$defs/formatVersion" },
+    "number": { "type": "integer", "minimum": 0 },
+    "individuals": {
+      "type": "array",
+      "items": { "$ref": "common.schema.json#/$defs/individual" }
+    },
+    "steps": {
+      "description": "Intermediate steps of the iteration (e.g. recombination, mutation, selection) in execution order.",
+      "type": "array",
+      "items": {
+        "oneOf": [
+          {
+            "description": "OrderedIterationStep: the result is ranked.",
+            "type": "object",
+            "properties": {
+              "kind": { "const": "ordered" },
+              "description": { "type": "string" },
+              "ranks": {
+                "type": "array",
+                "items": { "$ref": "common.schema.json#/$defs/rank" }
+              }
+            },
+            "required": ["kind", "description", "ranks"],
+            "additionalProperties": false
+          },
+          {
+            "description": "UnorderedIterationStep: the result is a bag of individuals.",
+            "type": "object",
+            "properties": {
+              "kind": { "const": "unordered" },
+              "description": { "type": "string" },
+              "individuals": {
+                "type": "array",
+                "items": { "$ref": "common.schema.json#/$defs/individualId" }
+              }
+            },
+            "required": ["kind", "description", "individuals"],
+            "additionalProperties": false
+          }
+        ]
+      }
+    },
+    "ranks": {
+      "description": "The final individuals of the iteration (survivors), ranked.",
+      "type": "array",
+      "items": { "$ref": "common.schema.json#/$defs/rank" }
+    },
+    "metrics": {
+      "description": "Values of the iteration metrics (scope 'iteration') at the end of the iteration.",
+      "$ref": "common.schema.json#/$defs/metrics"
+    }
+  },
+  "required": ["formatVersion", "number", "individuals", "steps", "ranks", "metrics"],
+  "additionalProperties": false
+}

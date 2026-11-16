@@ -37,5 +37,13 @@
 			<version>${mockito.version}</version>
 			<scope>test</scope>
 		</dependency>
+
+		<!-- validates the memory model files against their JSON schemas -->
+		<dependency>
+			<groupId>com.networknt</groupId>
+			<artifactId>json-schema-validator</artifactId>
+			<version>${json-schema-validator.version}</version>
+			<scope>test</scope>
+		</dependency>
     </dependencies>
 </project>

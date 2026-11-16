@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.evoal.de/schemas/memory-model/2027.4.0/execution-information.schema.json",
+  "title": "EvoAl memory model: execution information",
+  "description": "Written once before iteration 0, when the definitions of the run are complete (ExecutionRecorder.beginExecution). Describes the problem, the algorithm, the spaces and the metrics of the run.",
+  "type": "object",
+  "properties": {
+    "formatVersion": { "$ref": "common.schema.json#/$defs/formatVersion" },
+    "problem": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "goals": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "properties": {
+              "feature": { "$ref": "common.schema.json#/$defs/featureName" },
+              "direction": { "enum": ["maximise", "minimise", "target"] },
+              "target": { "$ref": "common.schema.json#/$defs/value" }
+            },
+            "required": ["feature", "direction"],
+            "additionalProperties": false,
+            "if": { "properties": { "direction": { "const": "target" } } },
+            "then": { "required": ["target"] },
+            "else": { "not": { "required": ["target"] } }
+          }
+        }
+      },
+      "required": ["name", "goals"],
+      "additionalProperties": false
+    },
+    "algorithm": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Fully qualified DL type of the algorithm, e.g. 'de.evoal.optimisation.local_search.optimisation.local-search'.",
+          "type": "string"
+        }
+      },
+      "required": ["type"],
+      "additionalProperties": false
+    },
+    "searchSpace": {
+      "description": "Features in declaration order.",
+      "type": "array",
+      "items": { "$ref": "common.schema.json#/$defs/feature" }
+    },
+    "optimisationSpace": {
+      "description": "Features in declaration order.",
+      "type": "array",
+      "items": { "$ref": "common.schema.json#/$defs/feature" }
+    },
+    "metricDefinitions": {
+      "description": "All metrics of the run, in definition order.",
+      "type": "array",
+      "items": { "$ref": "common.schema.json#/$defs/metricDefinition" }
+    },
+    "setup": {
+      "description": "What is needed, besides the configuration files and the target file, to repeat the run.",
+      "type": "object",
+      "properties": {
+        "evoalVersion": {
+          "description": "Version of EvoAl that executed the run, e.g. '2027.4.0'.",
+          "type": "string",
+          "minLength": 1
+        },
+        "seed": {
+          "description": "Seed of the EvoAl execution (core:seed), the same for all of its runs. A decimal string, since the 64-bit value exceeds the integers that every JSON reader represents exactly.",
+          "type": "string",
+          "pattern": "^-?[0-9]+$"
+        },
+        "run": {
+          "description": "Index of the run within the EvoAl execution, counted over all repetitions and targets. The random numbers of the run are derived from seed, run and the name of the requesting component.",
+          "type": "integer",
+          "minimum": 0
+        },
+        "repetition": {
+          "description": "Index of the repetition for the current target; only in the evaluation setup.",
+          "type": "integer",
+          "minimum": 0
+        },
+        "target": {
+          "description": "Index of the target point; only in the evaluation setup with a target file.",
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": ["evoalVersion", "seed", "run"],
+      "dependentRequired": { "target": ["repetition"] },
+      "additionalProperties": false
+    }
+  },
+  "required": ["formatVersion", "problem", "algorithm", "searchSpace", "optimisationSpace", "metricDefinitions", "setup"],
+  "additionalProperties": false
+}

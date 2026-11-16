@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.SortedSet;
 import java.util.TreeSet;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -17,8 +19,22 @@ import java.util.stream.Stream;
  * Compares the output of a regression run with its references. The comparison is
  *   exact: both folders contain the same files (by relative path), and every file
  *   has the same lines.
+ * <p>
+ * Only the EvoAl version in the memory model ({@code "evoalVersion" : "..."}) is masked
+ *   ({@value #VERSION_PLACEHOLDER}), in the references and in the compared output. It
+ *   changes with every project version, while the results stay the same.
  */
 public final class OutputComparison {
+    /**
+     * Replaces the EvoAl version in the references.
+     */
+    public static final String VERSION_PLACEHOLDER = "${evoal.version}";
+
+    /**
+     * Finds the EvoAl version in a line of the memory model.
+     */
+    private static final Pattern EVOAL_VERSION = Pattern.compile("(\"evoalVersion\" : \")[^\"]*(\")");
+
     private OutputComparison() {
     }
 
@@ -70,11 +86,18 @@ public final class OutputComparison {
         }
     }
 
+    /**
+     * Copies the file with the EvoAl version masked. Everything else, including the line
+     *   endings, is copied unchanged.
+     */
     private static void copy(final Path source, final Path target) {
         try {
+            final String content = Files.readString(source, StandardCharsets.UTF_8);
+            final String maskedContent = masked(content);
             final Path targetFolder = target.getParent();
+
             Files.createDirectories(targetFolder);
-            Files.copy(source, target);
+            Files.writeString(target, maskedContent, StandardCharsets.UTF_8);
         } catch(final IOException e) {
             throw new UncheckedIOException("Cannot copy " + source + " to " + target, e);
         }
@@ -133,9 +156,25 @@ public final class OutputComparison {
         }
     }
 
+    /**
+     * @return The text with every EvoAl version replaced by {@value #VERSION_PLACEHOLDER}.
+     */
+    static String masked(final String text) {
+        final Matcher matcher = EVOAL_VERSION.matcher(text);
+        final String replacement = "$1" + Matcher.quoteReplacement(VERSION_PLACEHOLDER) + "$2";
+
+        return matcher.replaceAll(replacement);
+    }
+
+    /**
+     * @return The lines of the file, with the EvoAl version masked.
+     */
     private static List<String> readLines(final Path file) {
         try {
-            return Files.readAllLines(file, StandardCharsets.UTF_8);
+            return Files.readAllLines(file, StandardCharsets.UTF_8)
+                        .stream()
+                        .map(OutputComparison::masked)
+                        .toList();
         } catch(final IOException e) {
             throw new UncheckedIOException("Cannot read " + file, e);
         }
