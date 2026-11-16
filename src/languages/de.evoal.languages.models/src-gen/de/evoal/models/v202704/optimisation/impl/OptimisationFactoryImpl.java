@@ -5,8 +5,8 @@ package de.evoal.models.v202704.optimisation.impl;
 
 import de.evoal.models.core.ecore.TypedEObject;
 
-import de.evoal.models.v202704.optimisation.optimisationFactory;
-import de.evoal.models.v202704.optimisation.optimisationPackage;
+import de.evoal.models.v202704.optimisation.OptimisationFactory;
+import de.evoal.models.v202704.optimisation.OptimisationPackage;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
@@ -23,24 +23,24 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin;
  * <!-- end-user-doc -->
  * @generated
  */
-public class optimisationFactoryImpl extends EFactoryImpl implements optimisationFactory {
+public class OptimisationFactoryImpl extends EFactoryImpl implements OptimisationFactory {
 	/**
 	 * Creates the default factory implementation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static optimisationFactory init() {
+	public static OptimisationFactory init() {
 		try {
-			optimisationFactory theoptimisationFactory = (optimisationFactory)EPackage.Registry.INSTANCE.getEFactory(optimisationPackage.eNS_URI);
-			if (theoptimisationFactory != null) {
-				return theoptimisationFactory;
+			OptimisationFactory theOptimisationFactory = (OptimisationFactory)EPackage.Registry.INSTANCE.getEFactory(OptimisationPackage.eNS_URI);
+			if (theOptimisationFactory != null) {
+				return theOptimisationFactory;
 			}
 		}
 		catch (Exception exception) {
 			EcorePlugin.INSTANCE.log(exception);
 		}
-		return new optimisationFactoryImpl();
+		return new OptimisationFactoryImpl();
 	}
 
 	/**
@@ -49,7 +49,7 @@ public class optimisationFactoryImpl extends EFactoryImpl implements optimisatio
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public optimisationFactoryImpl() {
+	public OptimisationFactoryImpl() {
 		super();
 	}
 
@@ -74,8 +74,10 @@ public class optimisationFactoryImpl extends EFactoryImpl implements optimisatio
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
-			case optimisationPackage.TYPED_EOBJECT:
+			case OptimisationPackage.TYPED_EOBJECT:
 				return createTypedEObjectFromString(eDataType, initialValue);
+			case OptimisationPackage.NUMBER:
+				return createNumberFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -89,8 +91,10 @@ public class optimisationFactoryImpl extends EFactoryImpl implements optimisatio
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
-			case optimisationPackage.TYPED_EOBJECT:
+			case OptimisationPackage.TYPED_EOBJECT:
 				return convertTypedEObjectToString(eDataType, instanceValue);
+			case OptimisationPackage.NUMBER:
+				return convertNumberToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -119,9 +123,59 @@ public class optimisationFactoryImpl extends EFactoryImpl implements optimisatio
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Number createNumber(final String it) {
+		if(it == null) {
+		    return null;
+		}
+		
+		try {
+		    return Long.valueOf(it);
+		} catch(final NumberFormatException e) {
+		    return Double.valueOf(it);
+		}
+		
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Number createNumberFromString(EDataType eDataType, String initialValue) {
+		return createNumber(initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertNumber(final Number it) {
+		if(it == null) {
+		    return null;
+		}
+		
+		return it.toString();
+		
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertNumberToString(EDataType eDataType, Object instanceValue) {
+		return convertNumber((Number)instanceValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
-	public optimisationPackage getoptimisationPackage() {
-		return (optimisationPackage)getEPackage();
+	public OptimisationPackage getOptimisationPackage() {
+		return (OptimisationPackage)getEPackage();
 	}
 
 	/**
@@ -131,8 +185,8 @@ public class optimisationFactoryImpl extends EFactoryImpl implements optimisatio
 	 * @generated
 	 */
 	@Deprecated
-	public static optimisationPackage getPackage() {
-		return optimisationPackage.eINSTANCE;
+	public static OptimisationPackage getPackage() {
+		return OptimisationPackage.eINSTANCE;
 	}
 
-} //optimisationFactoryImpl
+} //OptimisationFactoryImpl

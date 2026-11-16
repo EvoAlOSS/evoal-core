@@ -106,5 +106,25 @@ public class ParticleTest {
             // then
             Assertions.assertEquals(3.0, particle.getBestPosition().eGet(x));
         }
+
+        @Test
+        public void undoingAMoveRestoresThePreviousState() {
+            // given
+            final Double[] startVelocity = particle.getCurrentState().getVelocity();
+            particle.moveParticle(new Particle[] {particle}, 0, 10);
+
+            // when
+            particle.undoMove();
+
+            // then
+            Assertions.assertEquals(1.0, particle.getCurrentPosition().eGet(x));
+            Assertions.assertSame(startVelocity, particle.getCurrentState().getVelocity());
+        }
+
+        @Test
+        public void aMoveCannotBeUndoneBeforeTheFirstMove() {
+            // when, then
+            Assertions.assertThrows(IllegalStateException.class, particle::undoMove);
+        }
     }
 }

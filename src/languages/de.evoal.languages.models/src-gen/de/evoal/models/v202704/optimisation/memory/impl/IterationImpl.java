@@ -17,13 +17,16 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.EMap;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EcoreEMap;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
@@ -37,6 +40,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link de.evoal.models.v202704.optimisation.memory.impl.IterationImpl#getNumber <em>Number</em>}</li>
  *   <li>{@link de.evoal.models.v202704.optimisation.memory.impl.IterationImpl#getSteps <em>Steps</em>}</li>
  *   <li>{@link de.evoal.models.v202704.optimisation.memory.impl.IterationImpl#getRanks <em>Ranks</em>}</li>
+ *   <li>{@link de.evoal.models.v202704.optimisation.memory.impl.IterationImpl#getMetrics <em>Metrics</em>}</li>
  * </ul>
  *
  * @generated
@@ -81,6 +85,16 @@ public class IterationImpl extends StateImpl implements Iteration {
 	 * @ordered
 	 */
 	protected EList<Rank> ranks;
+
+	/**
+	 * The cached value of the '{@link #getMetrics() <em>Metrics</em>}' map.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMetrics()
+	 * @generated
+	 * @ordered
+	 */
+	protected EMap<String, Number> metrics;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -156,6 +170,19 @@ public class IterationImpl extends StateImpl implements Iteration {
 	 * @generated
 	 */
 	@Override
+	public EMap<String, Number> getMetrics() {
+		if (metrics == null) {
+			metrics = new EcoreEMap<String,Number>(MemoryPackage.Literals.METRIC_ENTRY, MetricEntryImpl.class, this, MemoryPackage.ITERATION__METRICS);
+		}
+		return metrics;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Stream<Individual> bestIndividuals() {
 		return getRanks()
 		.get(0)
@@ -200,6 +227,8 @@ public class IterationImpl extends StateImpl implements Iteration {
 				return ((InternalEList<?>)getSteps()).basicRemove(otherEnd, msgs);
 			case MemoryPackage.ITERATION__RANKS:
 				return ((InternalEList<?>)getRanks()).basicRemove(otherEnd, msgs);
+			case MemoryPackage.ITERATION__METRICS:
+				return ((InternalEList<?>)getMetrics()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -218,6 +247,9 @@ public class IterationImpl extends StateImpl implements Iteration {
 				return getSteps();
 			case MemoryPackage.ITERATION__RANKS:
 				return getRanks();
+			case MemoryPackage.ITERATION__METRICS:
+				if (coreType) return getMetrics();
+				else return getMetrics().map();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -242,6 +274,9 @@ public class IterationImpl extends StateImpl implements Iteration {
 				getRanks().clear();
 				getRanks().addAll((Collection<? extends Rank>)newValue);
 				return;
+			case MemoryPackage.ITERATION__METRICS:
+				((EStructuralFeature.Setting)getMetrics()).set(newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -263,6 +298,9 @@ public class IterationImpl extends StateImpl implements Iteration {
 			case MemoryPackage.ITERATION__RANKS:
 				getRanks().clear();
 				return;
+			case MemoryPackage.ITERATION__METRICS:
+				getMetrics().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -281,6 +319,8 @@ public class IterationImpl extends StateImpl implements Iteration {
 				return steps != null && !steps.isEmpty();
 			case MemoryPackage.ITERATION__RANKS:
 				return ranks != null && !ranks.isEmpty();
+			case MemoryPackage.ITERATION__METRICS:
+				return metrics != null && !metrics.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

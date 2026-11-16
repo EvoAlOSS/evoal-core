@@ -5,11 +5,13 @@ package de.evoal.models.v202704.optimisation.model.impl;
 
 import de.evoal.models.v202704.core.CorePackage;
 
+import de.evoal.models.v202704.optimisation.OptimisationPackage;
+
 import de.evoal.models.v202704.optimisation.execution.ExecutionPackage;
 
 import de.evoal.models.v202704.optimisation.execution.impl.ExecutionPackageImpl;
 
-import de.evoal.models.v202704.optimisation.impl.optimisationPackageImpl;
+import de.evoal.models.v202704.optimisation.impl.OptimisationPackageImpl;
 
 import de.evoal.models.v202704.optimisation.memory.MemoryPackage;
 
@@ -24,8 +26,6 @@ import de.evoal.models.v202704.optimisation.model.OptimisationGoal;
 import de.evoal.models.v202704.optimisation.model.OptimisationModule;
 import de.evoal.models.v202704.optimisation.model.Problem;
 import de.evoal.models.v202704.optimisation.model.TargetGoal;
-
-import de.evoal.models.v202704.optimisation.optimisationPackage;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -141,8 +141,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		CorePackage.eINSTANCE.eClass();
 
 		// Obtain or create and register interdependencies
-		Object registeredPackage = EPackage.Registry.INSTANCE.getEPackage(optimisationPackage.eNS_URI);
-		optimisationPackageImpl theoptimisationPackage = (optimisationPackageImpl)(registeredPackage instanceof optimisationPackageImpl ? registeredPackage : optimisationPackage.eINSTANCE);
+		Object registeredPackage = EPackage.Registry.INSTANCE.getEPackage(OptimisationPackage.eNS_URI);
+		OptimisationPackageImpl theOptimisationPackage = (OptimisationPackageImpl)(registeredPackage instanceof OptimisationPackageImpl ? registeredPackage : OptimisationPackage.eINSTANCE);
 		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(MemoryPackage.eNS_URI);
 		MemoryPackageImpl theMemoryPackage = (MemoryPackageImpl)(registeredPackage instanceof MemoryPackageImpl ? registeredPackage : MemoryPackage.eINSTANCE);
 		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(ExecutionPackage.eNS_URI);
@@ -150,13 +150,13 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		// Create package meta-data objects
 		theModelPackage.createPackageContents();
-		theoptimisationPackage.createPackageContents();
+		theOptimisationPackage.createPackageContents();
 		theMemoryPackage.createPackageContents();
 		theExecutionPackage.createPackageContents();
 
 		// Initialize created meta-data
 		theModelPackage.initializePackageContents();
-		theoptimisationPackage.initializePackageContents();
+		theOptimisationPackage.initializePackageContents();
 		theMemoryPackage.initializePackageContents();
 		theExecutionPackage.initializePackageContents();
 

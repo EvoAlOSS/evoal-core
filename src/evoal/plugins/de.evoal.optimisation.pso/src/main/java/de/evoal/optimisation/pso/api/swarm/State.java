@@ -44,6 +44,18 @@ public class State {
      */
     private OptimisationValue fitness;
 
+    /**
+     * Creates a copy of a state. The copy shares the position and the velocity with the
+     *   original, since the movers replace them instead of changing them.
+     *
+     * @param other The state to copy.
+     */
+    public State(final State other) {
+        this.position = other.position;
+        this.velocity = other.velocity;
+        this.fitness = other.fitness;
+    }
+
     public State(final TypedEObject position, final OptimisationValue fitness) {
         this.position = position;
         this.fitness = fitness;

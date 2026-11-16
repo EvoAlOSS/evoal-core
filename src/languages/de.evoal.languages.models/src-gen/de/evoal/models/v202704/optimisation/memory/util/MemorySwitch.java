@@ -5,6 +5,8 @@ package de.evoal.models.v202704.optimisation.memory.util;
 
 import de.evoal.models.v202704.optimisation.memory.*;
 
+import java.util.Map;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
@@ -142,6 +144,18 @@ public class MemorySwitch<T> extends Switch<T> {
 				Recombination recombination = (Recombination)theEObject;
 				T result = caseRecombination(recombination);
 				if (result == null) result = caseRelationship(recombination);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case MemoryPackage.METRIC_ENTRY: {
+				@SuppressWarnings("unchecked") Map.Entry<String, Number> metricEntry = (Map.Entry<String, Number>)theEObject;
+				T result = caseMetricEntry(metricEntry);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case MemoryPackage.METRIC_DEFINITION: {
+				MetricDefinition metricDefinition = (MetricDefinition)theEObject;
+				T result = caseMetricDefinition(metricDefinition);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -326,6 +340,36 @@ public class MemorySwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseRecombination(Recombination object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Metric Entry</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Metric Entry</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseMetricEntry(Map.Entry<String, Number> object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Metric Definition</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Metric Definition</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseMetricDefinition(MetricDefinition object) {
 		return null;
 	}
 

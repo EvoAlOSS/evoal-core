@@ -5,7 +5,7 @@ package de.evoal.models.v202704.optimisation.execution;
 
 import de.evoal.models.v202704.core.CorePackage;
 
-import de.evoal.models.v202704.optimisation.optimisationPackage;
+import de.evoal.models.v202704.optimisation.OptimisationPackage;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
@@ -137,7 +137,7 @@ public interface ExecutionPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OPTIMISATION_VALUE_FEATURE_COUNT = optimisationPackage.COMPARABLE_FEATURE_COUNT + 0;
+	int OPTIMISATION_VALUE_FEATURE_COUNT = OptimisationPackage.COMPARABLE_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.models.v202704.optimisation.execution.impl.OptimisationValueWithDistanceImpl <em>Optimisation Value With Distance</em>}' class.

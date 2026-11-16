@@ -4,6 +4,7 @@
 package de.evoal.models.v202704.optimisation.memory;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.EMap;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -26,6 +27,8 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link de.evoal.models.v202704.optimisation.memory.Execution#getInputSpace <em>Input Space</em>}</li>
  *   <li>{@link de.evoal.models.v202704.optimisation.memory.Execution#getOutputSpace <em>Output Space</em>}</li>
  *   <li>{@link de.evoal.models.v202704.optimisation.memory.Execution#getStates <em>States</em>}</li>
+ *   <li>{@link de.evoal.models.v202704.optimisation.memory.Execution#getMetricDefinitions <em>Metric Definitions</em>}</li>
+ *   <li>{@link de.evoal.models.v202704.optimisation.memory.Execution#getMetrics <em>Metrics</em>}</li>
  * </ul>
  *
  * @see de.evoal.models.v202704.optimisation.memory.MemoryPackage#getExecution()
@@ -105,5 +108,43 @@ public interface Execution extends EObject {
 	 * @generated
 	 */
 	EList<State> getStates();
+
+	/**
+	 * Returns the value of the '<em><b>Metric Definitions</b></em>' containment reference list.
+	 * The list contents are of type {@link de.evoal.models.v202704.optimisation.memory.MetricDefinition}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * *
+	 * The metrics this execution and its iterations record. Every key of
+	 *   {@link #getMetrics()} and of {@link Iteration#getMetrics()} is defined here.
+	 * 
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Metric Definitions</em>' containment reference list.
+	 * @see de.evoal.models.v202704.optimisation.memory.MemoryPackage#getExecution_MetricDefinitions()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<MetricDefinition> getMetricDefinitions();
+
+	/**
+	 * Returns the value of the '<em><b>Metrics</b></em>' map.
+	 * The key is of type {@link java.lang.String},
+	 * and the value is of type {@link java.lang.Number},
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * *
+	 * The values of the metrics that describe the whole execution, e.g.,
+	 *   limits, by metric name. The metrics are defined in
+	 *   {@link #getMetricDefinitions()} with the scope {@link MetricScope#EXECUTION}.
+	 * 
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Metrics</em>' map.
+	 * @see de.evoal.models.v202704.optimisation.memory.MemoryPackage#getExecution_Metrics()
+	 * @model mapType="de.evoal.models.v202704.optimisation.memory.MetricEntry&lt;org.eclipse.emf.ecore.EString, de.evoal.models.v202704.optimisation.Number&gt;"
+	 * @generated
+	 */
+	EMap<String, Number> getMetrics();
 
 } // Execution

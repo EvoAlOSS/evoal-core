@@ -339,6 +339,18 @@ module de.evoal.optimisation.core {
     }
 
     /**
+     * Writes the metrics of every iteration, e.g., the number of evaluations.
+     *   File: <tt>metrics-per-iteration.csv</tt> in the output folder.
+     *   Columns: iteration, then one column per metric of the run, named after the
+     *   metric (e.g., evaluations.real, evaluations.surrogate).
+     *
+     * In the evaluation setup ({@code heuristic-search-evaluation}), the file
+     *   starts with the columns <tt>run</tt> and, if target points are used,
+     *   <tt>target</tt>. All runs append to the same file.
+     */
+    type 'metrics-per-iteration' extends 'statistics-writer' {}
+
+    /**
      * Does not write any statistics. Can be used to disable statistics output.
      */
     type none extends 'statistics-writer' {}
@@ -359,6 +371,34 @@ module de.evoal.optimisation.core {
          */
         @LowerBoundary { boundary := 0; }
         'maximum-iterations' : int := 10;
+    }
+
+    /**
+     * What happens if an evaluation budget runs out in the middle of an iteration.
+     *   'finish-iteration': the iteration is finished, so a run can use more
+     *     evaluations than the budget. The run stops after the iteration.
+     *   'cut-off': a run never uses more evaluations than the budget. The run stops
+     *     immediately and records the partial iteration.
+     */
+    nominal enum 'budget-exhaustion' ( 'finish-iteration', 'cut-off' );
+
+    /**
+     * Stopping criterion that stops when the number of evaluations of the real
+     *   optimisation function reaches a budget. Evaluations of a surrogate model are
+     *   counted separately and do not use the budget. The number of evaluations is
+     *   the metric 'evaluations.real' of every iteration.
+     */
+    type 'evaluation-budget' extends 'stopping-criterion' {
+        /**
+         * Maximum number of evaluations of the real optimisation function.
+         */
+        @LowerBoundary { boundary := 1; }
+        'maximum-evaluations' : int;
+
+        /**
+         * What happens if the budget runs out in the middle of an iteration.
+         */
+        'exhaustion' : enum 'budget-exhaustion' := 'budget-exhaustion.finish-iteration';
     }
 
     /**

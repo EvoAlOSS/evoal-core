@@ -3,7 +3,7 @@
  */
 package de.evoal.models.v202704.optimisation.impl;
 
-import de.evoal.models.v202704.optimisation.optimisationPackage;
+import de.evoal.models.v202704.optimisation.OptimisationPackage;
 
 import java.util.stream.Stream;
 
@@ -35,7 +35,7 @@ public abstract class StreamImpl<T> extends MinimalEObjectImpl.Container impleme
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return optimisationPackage.Literals.STREAM;
+		return OptimisationPackage.Literals.STREAM;
 	}
 
 } //StreamImpl

@@ -21,6 +21,7 @@ import de.evoal.languages.model.ol.OptimisationModule;
 import de.evoal.models.core.ecore.Space;
 
 import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
+import de.evoal.optimisation.api.execution.ExecutionRecorder;
 import de.evoal.optimisation.api.model.OptimisationAlgorithm;
 import de.evoal.optimisation.api.producer.SpaceProducer;
 import de.evoal.optimisation.main.producer.OptimisationModuleLoader;
@@ -44,6 +45,9 @@ public class HeuristicSearchMain implements MainClass {
 
     @Inject
     private EClassProvider eClassProvider;
+
+    @Inject
+    private ExecutionRecorder executionRecorder;
 
     @Inject
     private OptimisationModuleLoader loader;
@@ -83,9 +87,14 @@ public class HeuristicSearchMain implements MainClass {
         board.bind(OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, eConfigurationModel);
 
         randomService.startRun(0);
+        executionRecorder.startRun();
 
-        BeanFactory.createComponent(OptimisationAlgorithm.class, eConfigurationModel.getAlgorithm())
-                   .run();
+        final OptimisationAlgorithm algorithm =
+                BeanFactory.createComponent(OptimisationAlgorithm.class, eConfigurationModel.getAlgorithm());
+
+        executionRecorder.beginExecution();
+        algorithm.run();
+        executionRecorder.finishRun();
     }
 
     private void setupSpaces(final OptimisationModule module) {

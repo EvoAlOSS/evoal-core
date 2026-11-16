@@ -6,6 +6,7 @@ package de.evoal.models.v202704.optimisation.memory;
 import java.util.stream.Stream;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.EMap;
 
 /**
  * <!-- begin-user-doc -->
@@ -25,6 +26,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link de.evoal.models.v202704.optimisation.memory.Iteration#getNumber <em>Number</em>}</li>
  *   <li>{@link de.evoal.models.v202704.optimisation.memory.Iteration#getSteps <em>Steps</em>}</li>
  *   <li>{@link de.evoal.models.v202704.optimisation.memory.Iteration#getRanks <em>Ranks</em>}</li>
+ *   <li>{@link de.evoal.models.v202704.optimisation.memory.Iteration#getMetrics <em>Metrics</em>}</li>
  * </ul>
  *
  * @see de.evoal.models.v202704.optimisation.memory.MemoryPackage#getIteration()
@@ -94,6 +96,26 @@ public interface Iteration extends State {
 	 * @generated
 	 */
 	EList<Rank> getRanks();
+
+	/**
+	 * Returns the value of the '<em><b>Metrics</b></em>' map.
+	 * The key is of type {@link java.lang.String},
+	 * and the value is of type {@link java.lang.Number},
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * *
+	 * The values of the metrics at the end of the iteration, by metric
+	 *   name. The metrics are defined in {@link Execution#getMetricDefinitions()}
+	 *   with the scope {@link MetricScope#ITERATION}.
+	 * 
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Metrics</em>' map.
+	 * @see de.evoal.models.v202704.optimisation.memory.MemoryPackage#getIteration_Metrics()
+	 * @model mapType="de.evoal.models.v202704.optimisation.memory.MetricEntry&lt;org.eclipse.emf.ecore.EString, de.evoal.models.v202704.optimisation.Number&gt;"
+	 * @generated
+	 */
+	EMap<String, Number> getMetrics();
 
 	/**
 	 * <!-- begin-user-doc -->

@@ -5,11 +5,13 @@ package de.evoal.models.v202704.optimisation.memory.impl;
 
 import de.evoal.models.v202704.core.CorePackage;
 
+import de.evoal.models.v202704.optimisation.OptimisationPackage;
+
 import de.evoal.models.v202704.optimisation.execution.ExecutionPackage;
 
 import de.evoal.models.v202704.optimisation.execution.impl.ExecutionPackageImpl;
 
-import de.evoal.models.v202704.optimisation.impl.optimisationPackageImpl;
+import de.evoal.models.v202704.optimisation.impl.OptimisationPackageImpl;
 
 import de.evoal.models.v202704.optimisation.memory.Execution;
 import de.evoal.models.v202704.optimisation.memory.Identity;
@@ -18,6 +20,10 @@ import de.evoal.models.v202704.optimisation.memory.Iteration;
 import de.evoal.models.v202704.optimisation.memory.IterationStep;
 import de.evoal.models.v202704.optimisation.memory.MemoryFactory;
 import de.evoal.models.v202704.optimisation.memory.MemoryPackage;
+import de.evoal.models.v202704.optimisation.memory.MetricDefinition;
+import de.evoal.models.v202704.optimisation.memory.MetricKind;
+import de.evoal.models.v202704.optimisation.memory.MetricScope;
+import de.evoal.models.v202704.optimisation.memory.MetricValueType;
 import de.evoal.models.v202704.optimisation.memory.Mutation;
 import de.evoal.models.v202704.optimisation.memory.OrderedIterationStep;
 import de.evoal.models.v202704.optimisation.memory.Rank;
@@ -25,12 +31,16 @@ import de.evoal.models.v202704.optimisation.memory.Recombination;
 import de.evoal.models.v202704.optimisation.memory.Relationship;
 import de.evoal.models.v202704.optimisation.memory.State;
 import de.evoal.models.v202704.optimisation.memory.UnorderedIterationStep;
+
 import de.evoal.models.v202704.optimisation.model.ModelPackage;
+
 import de.evoal.models.v202704.optimisation.model.impl.ModelPackageImpl;
-import de.evoal.models.v202704.optimisation.optimisationPackage;
+
+import java.util.Map;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EGenericType;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
@@ -130,6 +140,41 @@ public class MemoryPackageImpl extends EPackageImpl implements MemoryPackage {
 	private EClass recombinationEClass = null;
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass metricEntryEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass metricDefinitionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum metricKindEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum metricValueTypeEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum metricScopeEEnum = null;
+
+	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
 	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
 	 * package URI value.
@@ -179,8 +224,8 @@ public class MemoryPackageImpl extends EPackageImpl implements MemoryPackage {
 		CorePackage.eINSTANCE.eClass();
 
 		// Obtain or create and register interdependencies
-		Object registeredPackage = EPackage.Registry.INSTANCE.getEPackage(optimisationPackage.eNS_URI);
-		optimisationPackageImpl theoptimisationPackage = (optimisationPackageImpl)(registeredPackage instanceof optimisationPackageImpl ? registeredPackage : optimisationPackage.eINSTANCE);
+		Object registeredPackage = EPackage.Registry.INSTANCE.getEPackage(OptimisationPackage.eNS_URI);
+		OptimisationPackageImpl theOptimisationPackage = (OptimisationPackageImpl)(registeredPackage instanceof OptimisationPackageImpl ? registeredPackage : OptimisationPackage.eINSTANCE);
 		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(ExecutionPackage.eNS_URI);
 		ExecutionPackageImpl theExecutionPackage = (ExecutionPackageImpl)(registeredPackage instanceof ExecutionPackageImpl ? registeredPackage : ExecutionPackage.eINSTANCE);
 		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(ModelPackage.eNS_URI);
@@ -188,13 +233,13 @@ public class MemoryPackageImpl extends EPackageImpl implements MemoryPackage {
 
 		// Create package meta-data objects
 		theMemoryPackage.createPackageContents();
-		theoptimisationPackage.createPackageContents();
+		theOptimisationPackage.createPackageContents();
 		theExecutionPackage.createPackageContents();
 		theModelPackage.createPackageContents();
 
 		// Initialize created meta-data
 		theMemoryPackage.initializePackageContents();
-		theoptimisationPackage.initializePackageContents();
+		theOptimisationPackage.initializePackageContents();
 		theExecutionPackage.initializePackageContents();
 		theModelPackage.initializePackageContents();
 
@@ -252,6 +297,26 @@ public class MemoryPackageImpl extends EPackageImpl implements MemoryPackage {
 	 * @generated
 	 */
 	@Override
+	public EReference getExecution_MetricDefinitions() {
+		return (EReference)executionEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getExecution_Metrics() {
+		return (EReference)executionEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getState() {
 		return stateEClass;
 	}
@@ -294,6 +359,16 @@ public class MemoryPackageImpl extends EPackageImpl implements MemoryPackage {
 	@Override
 	public EReference getIteration_Ranks() {
 		return (EReference)iterationEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getIteration_Metrics() {
+		return (EReference)iterationEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -502,6 +577,126 @@ public class MemoryPackageImpl extends EPackageImpl implements MemoryPackage {
 	 * @generated
 	 */
 	@Override
+	public EClass getMetricEntry() {
+		return metricEntryEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getMetricEntry_Key() {
+		return (EAttribute)metricEntryEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getMetricEntry_Value() {
+		return (EAttribute)metricEntryEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getMetricDefinition() {
+		return metricDefinitionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getMetricDefinition_Name() {
+		return (EAttribute)metricDefinitionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getMetricDefinition_Kind() {
+		return (EAttribute)metricDefinitionEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getMetricDefinition_ValueType() {
+		return (EAttribute)metricDefinitionEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getMetricDefinition_Scope() {
+		return (EAttribute)metricDefinitionEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getMetricDefinition_Description() {
+		return (EAttribute)metricDefinitionEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EEnum getMetricKind() {
+		return metricKindEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EEnum getMetricValueType() {
+		return metricValueTypeEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EEnum getMetricScope() {
+		return metricScopeEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public MemoryFactory getMemoryFactory() {
 		return (MemoryFactory)getEFactoryInstance();
 	}
@@ -529,6 +724,8 @@ public class MemoryPackageImpl extends EPackageImpl implements MemoryPackage {
 		createEReference(executionEClass, EXECUTION__INPUT_SPACE);
 		createEReference(executionEClass, EXECUTION__OUTPUT_SPACE);
 		createEReference(executionEClass, EXECUTION__STATES);
+		createEReference(executionEClass, EXECUTION__METRIC_DEFINITIONS);
+		createEReference(executionEClass, EXECUTION__METRICS);
 
 		stateEClass = createEClass(STATE);
 
@@ -536,6 +733,7 @@ public class MemoryPackageImpl extends EPackageImpl implements MemoryPackage {
 		createEAttribute(iterationEClass, ITERATION__NUMBER);
 		createEReference(iterationEClass, ITERATION__STEPS);
 		createEReference(iterationEClass, ITERATION__RANKS);
+		createEReference(iterationEClass, ITERATION__METRICS);
 
 		iterationStepEClass = createEClass(ITERATION_STEP);
 		createEAttribute(iterationStepEClass, ITERATION_STEP__DESCRIPTION);
@@ -565,6 +763,22 @@ public class MemoryPackageImpl extends EPackageImpl implements MemoryPackage {
 
 		recombinationEClass = createEClass(RECOMBINATION);
 		createEReference(recombinationEClass, RECOMBINATION__OTHER);
+
+		metricEntryEClass = createEClass(METRIC_ENTRY);
+		createEAttribute(metricEntryEClass, METRIC_ENTRY__KEY);
+		createEAttribute(metricEntryEClass, METRIC_ENTRY__VALUE);
+
+		metricDefinitionEClass = createEClass(METRIC_DEFINITION);
+		createEAttribute(metricDefinitionEClass, METRIC_DEFINITION__NAME);
+		createEAttribute(metricDefinitionEClass, METRIC_DEFINITION__KIND);
+		createEAttribute(metricDefinitionEClass, METRIC_DEFINITION__VALUE_TYPE);
+		createEAttribute(metricDefinitionEClass, METRIC_DEFINITION__SCOPE);
+		createEAttribute(metricDefinitionEClass, METRIC_DEFINITION__DESCRIPTION);
+
+		// Create enums
+		metricKindEEnum = createEEnum(METRIC_KIND);
+		metricValueTypeEEnum = createEEnum(METRIC_VALUE_TYPE);
+		metricScopeEEnum = createEEnum(METRIC_SCOPE);
 	}
 
 	/**
@@ -591,7 +805,7 @@ public class MemoryPackageImpl extends EPackageImpl implements MemoryPackage {
 		setNsURI(eNS_URI);
 
 		// Obtain other dependent packages
-		optimisationPackage theoptimisationPackage = (optimisationPackage)EPackage.Registry.INSTANCE.getEPackage(optimisationPackage.eNS_URI);
+		OptimisationPackage theOptimisationPackage = (OptimisationPackage)EPackage.Registry.INSTANCE.getEPackage(OptimisationPackage.eNS_URI);
 
 		// Create type parameters
 
@@ -610,6 +824,8 @@ public class MemoryPackageImpl extends EPackageImpl implements MemoryPackage {
 		initEReference(getExecution_InputSpace(), ecorePackage.getEClass(), null, "inputSpace", null, 1, 1, Execution.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getExecution_OutputSpace(), ecorePackage.getEClass(), null, "outputSpace", null, 1, 1, Execution.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getExecution_States(), this.getState(), null, "states", null, 0, -1, Execution.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getExecution_MetricDefinitions(), this.getMetricDefinition(), null, "metricDefinitions", null, 0, -1, Execution.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getExecution_Metrics(), this.getMetricEntry(), null, "metrics", null, 0, -1, Execution.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(stateEClass, State.class, "State", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -617,15 +833,16 @@ public class MemoryPackageImpl extends EPackageImpl implements MemoryPackage {
 		initEAttribute(getIteration_Number(), ecorePackage.getEInt(), "number", null, 1, 1, Iteration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getIteration_Steps(), this.getIterationStep(), null, "steps", null, 0, -1, Iteration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getIteration_Ranks(), this.getRank(), null, "ranks", null, 0, -1, Iteration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getIteration_Metrics(), this.getMetricEntry(), null, "metrics", null, 0, -1, Iteration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		EOperation op = addEOperation(iterationEClass, null, "bestIndividuals", 1, 1, IS_UNIQUE, IS_ORDERED);
-		EGenericType g1 = createEGenericType(theoptimisationPackage.getStream());
+		EGenericType g1 = createEGenericType(theOptimisationPackage.getStream());
 		EGenericType g2 = createEGenericType(this.getIndividual());
 		g1.getETypeArguments().add(g2);
 		initEOperation(op, g1);
 
 		op = addEOperation(iterationEClass, null, "survivedIndividuals", 1, 1, IS_UNIQUE, IS_ORDERED);
-		g1 = createEGenericType(theoptimisationPackage.getStream());
+		g1 = createEGenericType(theOptimisationPackage.getStream());
 		g2 = createEGenericType(this.getIndividual());
 		g1.getETypeArguments().add(g2);
 		initEOperation(op, g1);
@@ -647,8 +864,8 @@ public class MemoryPackageImpl extends EPackageImpl implements MemoryPackage {
 
 		initEClass(individualEClass, Individual.class, "Individual", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getIndividual_Id(), ecorePackage.getEInt(), "id", null, 1, 1, Individual.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getIndividual_Input(), theoptimisationPackage.getTypedEObject(), "input", null, 1, 1, Individual.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getIndividual_Output(), theoptimisationPackage.getTypedEObject(), "output", null, 1, 1, Individual.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getIndividual_Input(), theOptimisationPackage.getTypedEObject(), "input", null, 1, 1, Individual.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getIndividual_Output(), theOptimisationPackage.getTypedEObject(), "output", null, 1, 1, Individual.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getIndividual_Relationships(), this.getRelationship(), null, "relationships", null, 0, -1, Individual.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		initEClass(relationshipEClass, Relationship.class, "Relationship", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -660,6 +877,30 @@ public class MemoryPackageImpl extends EPackageImpl implements MemoryPackage {
 
 		initEClass(recombinationEClass, Recombination.class, "Recombination", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getRecombination_Other(), this.getRecombination(), null, "other", null, 1, 1, Recombination.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(metricEntryEClass, Map.Entry.class, "MetricEntry", !IS_ABSTRACT, !IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getMetricEntry_Key(), ecorePackage.getEString(), "key", null, 1, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMetricEntry_Value(), theOptimisationPackage.getNumber(), "value", null, 1, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(metricDefinitionEClass, MetricDefinition.class, "MetricDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getMetricDefinition_Name(), ecorePackage.getEString(), "name", null, 1, 1, MetricDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMetricDefinition_Kind(), this.getMetricKind(), "kind", null, 1, 1, MetricDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMetricDefinition_ValueType(), this.getMetricValueType(), "valueType", null, 1, 1, MetricDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMetricDefinition_Scope(), this.getMetricScope(), "scope", null, 1, 1, MetricDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMetricDefinition_Description(), ecorePackage.getEString(), "description", null, 1, 1, MetricDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		// Initialize enums and add enum literals
+		initEEnum(metricKindEEnum, MetricKind.class, "MetricKind");
+		addEEnumLiteral(metricKindEEnum, MetricKind.COUNTER);
+		addEEnumLiteral(metricKindEEnum, MetricKind.MEASURE);
+
+		initEEnum(metricValueTypeEEnum, MetricValueType.class, "MetricValueType");
+		addEEnumLiteral(metricValueTypeEEnum, MetricValueType.INTEGER);
+		addEEnumLiteral(metricValueTypeEEnum, MetricValueType.REAL);
+
+		initEEnum(metricScopeEEnum, MetricScope.class, "MetricScope");
+		addEEnumLiteral(metricScopeEEnum, MetricScope.EXECUTION);
+		addEEnumLiteral(metricScopeEEnum, MetricScope.ITERATION);
 	}
 
 } //MemoryPackageImpl

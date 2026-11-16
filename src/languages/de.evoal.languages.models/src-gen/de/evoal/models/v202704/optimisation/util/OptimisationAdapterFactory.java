@@ -3,7 +3,7 @@
  */
 package de.evoal.models.v202704.optimisation.util;
 
-import de.evoal.models.v202704.optimisation.optimisationPackage;
+import de.evoal.models.v202704.optimisation.OptimisationPackage;
 
 import java.util.List;
 
@@ -21,17 +21,17 @@ import org.eclipse.emf.ecore.EObject;
  * The <b>Adapter Factory</b> for the model.
  * It provides an adapter <code>createXXX</code> method for each class of the model.
  * <!-- end-user-doc -->
- * @see de.evoal.models.v202704.optimisation.optimisationPackage
+ * @see de.evoal.models.v202704.optimisation.OptimisationPackage
  * @generated
  */
-public class optimisationAdapterFactory extends AdapterFactoryImpl {
+public class OptimisationAdapterFactory extends AdapterFactoryImpl {
 	/**
 	 * The cached model package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected static optimisationPackage modelPackage;
+	protected static OptimisationPackage modelPackage;
 
 	/**
 	 * Creates an instance of the adapter factory.
@@ -39,9 +39,9 @@ public class optimisationAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public optimisationAdapterFactory() {
+	public OptimisationAdapterFactory() {
 		if (modelPackage == null) {
-			modelPackage = optimisationPackage.eINSTANCE;
+			modelPackage = OptimisationPackage.eINSTANCE;
 		}
 	}
 
@@ -70,8 +70,8 @@ public class optimisationAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected optimisationSwitch<Adapter> modelSwitch =
-		new optimisationSwitch<Adapter>() {
+	protected OptimisationSwitch<Adapter> modelSwitch =
+		new OptimisationSwitch<Adapter>() {
 			@Override
 			public <T> Adapter caseComparable(Comparable<T> object) {
 				return createComparableAdapter();
@@ -158,4 +158,4 @@ public class optimisationAdapterFactory extends AdapterFactoryImpl {
 		return null;
 	}
 
-} //optimisationAdapterFactory
+} //OptimisationAdapterFactory

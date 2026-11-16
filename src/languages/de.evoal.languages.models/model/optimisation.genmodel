@@ -10,10 +10,12 @@
     editPluginID="de.evoal.languages.model.optimisation.edit" editorPluginID="de.evoal.languages.model.optimisation.editor"
     usedGenPackages="core.genmodel#//core" importOrganizing="true">
   <foreignModel>optimisation.ecore</foreignModel>
-  <genPackages prefix="optimisation" basePackage="de.evoal.models.v202704" disposableProviderFactory="true"
+  <genPackages prefix="Optimisation" basePackage="de.evoal.models.v202704" disposableProviderFactory="true"
       ecorePackage="optimisation.ecore#/">
     <genDataTypes ecoreDataType="optimisation.ecore#//Space"/>
     <genDataTypes ecoreDataType="optimisation.ecore#//TypedEObject"/>
+    <genDataTypes ecoreDataType="optimisation.ecore#//Number" create="if(it == null) {&#xA;    return null;&#xA;}&#xA;&#xA;try {&#xA;    return Long.valueOf(it);&#xA;} catch(final NumberFormatException e) {&#xA;    return Double.valueOf(it);&#xA;}&#xA;"
+        convert="if(it == null) {&#xA;    return null;&#xA;}&#xA;&#xA;return it.toString();&#xA;"/>
     <genClasses image="false" ecoreClass="optimisation.ecore#//Comparable">
       <genTypeParameters ecoreTypeParameter="optimisation.ecore#//Comparable/T"/>
     </genClasses>
@@ -25,18 +27,33 @@
     </genClasses>
     <nestedGenPackages prefix="Memory" basePackage="de.evoal.models.v202704.optimisation"
         disposableProviderFactory="true" ecorePackage="optimisation.ecore#//memory">
+      <genEnums typeSafeEnumCompatible="false" ecoreEnum="optimisation.ecore#//memory/MetricKind">
+        <genEnumLiterals ecoreEnumLiteral="optimisation.ecore#//memory/MetricKind/Counter"/>
+        <genEnumLiterals ecoreEnumLiteral="optimisation.ecore#//memory/MetricKind/Measure"/>
+      </genEnums>
+      <genEnums typeSafeEnumCompatible="false" ecoreEnum="optimisation.ecore#//memory/MetricValueType">
+        <genEnumLiterals ecoreEnumLiteral="optimisation.ecore#//memory/MetricValueType/Integer"/>
+        <genEnumLiterals ecoreEnumLiteral="optimisation.ecore#//memory/MetricValueType/Real"/>
+      </genEnums>
+      <genEnums typeSafeEnumCompatible="false" ecoreEnum="optimisation.ecore#//memory/MetricScope">
+        <genEnumLiterals ecoreEnumLiteral="optimisation.ecore#//memory/MetricScope/Execution"/>
+        <genEnumLiterals ecoreEnumLiteral="optimisation.ecore#//memory/MetricScope/Iteration"/>
+      </genEnums>
       <genClasses ecoreClass="optimisation.ecore#//memory/Execution">
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference optimisation.ecore#//memory/Execution/inputSpace"/>
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference optimisation.ecore#//memory/Execution/outputSpace"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference optimisation.ecore#//memory/Execution/states"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference optimisation.ecore#//memory/Execution/metricDefinitions"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference optimisation.ecore#//memory/Execution/metrics"/>
       </genClasses>
       <genClasses image="false" ecoreClass="optimisation.ecore#//memory/State"/>
       <genClasses ecoreClass="optimisation.ecore#//memory/Iteration">
         <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute optimisation.ecore#//memory/Iteration/number"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference optimisation.ecore#//memory/Iteration/steps"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference optimisation.ecore#//memory/Iteration/ranks"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference optimisation.ecore#//memory/Iteration/metrics"/>
         <genOperations ecoreOperation="optimisation.ecore#//memory/Iteration/bestIndividuals"
             body="return getRanks()&#xA;.get(0)&#xA;.getMembers()&#xA;.stream();&#xA;"/>
         <genOperations ecoreOperation="optimisation.ecore#//memory/Iteration/survivedIndividuals"
@@ -74,6 +91,17 @@
       <genClasses ecoreClass="optimisation.ecore#//memory/Recombination">
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference optimisation.ecore#//memory/Recombination/other"/>
+      </genClasses>
+      <genClasses ecoreClass="optimisation.ecore#//memory/MetricEntry">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute optimisation.ecore#//memory/MetricEntry/key"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute optimisation.ecore#//memory/MetricEntry/value"/>
+      </genClasses>
+      <genClasses ecoreClass="optimisation.ecore#//memory/MetricDefinition">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute optimisation.ecore#//memory/MetricDefinition/name"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute optimisation.ecore#//memory/MetricDefinition/kind"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute optimisation.ecore#//memory/MetricDefinition/valueType"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute optimisation.ecore#//memory/MetricDefinition/scope"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute optimisation.ecore#//memory/MetricDefinition/description"/>
       </genClasses>
     </nestedGenPackages>
     <nestedGenPackages prefix="Execution" basePackage="de.evoal.models.v202704.optimisation"

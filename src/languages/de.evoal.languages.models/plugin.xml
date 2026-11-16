@@ -41,7 +41,7 @@
       <!-- @generated optimisation -->
       <package
             uri="https://evoal.de/v202704/models/optimisation"
-            class="de.evoal.models.v202704.optimisation.optimisationPackage"
+            class="de.evoal.models.v202704.optimisation.OptimisationPackage"
             genModel="model/optimisation.genmodel"/>
    </extension>
 

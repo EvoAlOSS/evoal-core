@@ -3,7 +3,7 @@
  */
 package de.evoal.models.v202704.optimisation.impl;
 
-import de.evoal.models.v202704.optimisation.optimisationPackage;
+import de.evoal.models.v202704.optimisation.OptimisationPackage;
 
 import java.util.List;
 
@@ -35,7 +35,7 @@ public abstract class ListImpl<T> extends MinimalEObjectImpl.Container implement
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return optimisationPackage.Literals.LIST;
+		return OptimisationPackage.Literals.LIST;
 	}
 
 } //ListImpl

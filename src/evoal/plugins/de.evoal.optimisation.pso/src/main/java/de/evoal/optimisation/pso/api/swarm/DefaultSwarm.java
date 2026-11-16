@@ -28,7 +28,8 @@ import de.evoal.optimisation.pso.api.optimiser.Mover;
 import de.evoal.optimisation.pso.api.optimiser.Swarm;
 import de.evoal.optimisation.pso.main.impl.NeighborhoodTopology;
 import de.evoal.optimisation.api.model.InitialCandidatesProvider;
-import de.evoal.models.v202704.optimisation.execution.OptimisationFunction;
+import de.evoal.optimisation.api.evaluation.EvaluationBudgetExhaustedException;
+import de.evoal.optimisation.api.evaluation.EvaluationService;
 import de.evoal.optimisation.api.model.OptimisationValueComparator;
 import lombok.Getter;
 import lombok.Setter;
@@ -37,8 +38,11 @@ import lombok.extern.slf4j.Slf4j;
 import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.Iterator;
+import java.util.List;
+import java.util.random.RandomGenerator;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -61,8 +65,11 @@ public class DefaultSwarm implements Swarm {
     @Inject
     private NeighborhoodTopology neighborhoodTopology;
 
-    @Inject @Dependent @Component
-    private OptimisationFunction optimisationFunction;
+    /**
+     * Evaluates and counts the positions of the particles.
+     */
+    @Inject
+    private EvaluationService evaluationService;
 
     @Getter @Setter
     protected Particle[] particles;
@@ -113,14 +120,27 @@ public class DefaultSwarm implements Swarm {
     }
 
     /**
-     * Evaluates the particles in the swarm.
+     * Evaluates the particles in the swarm, one after another in the order of the swarm.
+     *   If the evaluation budget runs out, the particles that are not evaluated undo their
+     *   last move.
+     *
+     * @throws EvaluationBudgetExhaustedException if the evaluation budget runs out.
      */
     @Override
     public void evaluate() {
-        for (Particle particle : particles) {
+        for(int index = 0; index < particles.length; ++index) {
+            final Particle particle = particles[index];
             final TypedEObject candidate = particle.getCurrentPosition();
-            final OptimisationValue ov = comparator.toValue(optimisationFunction.evaluate(candidate));
 
+            final TypedEObject output;
+            try {
+                output = evaluationService.evaluate(candidate);
+            } catch(final EvaluationBudgetExhaustedException e) {
+                undoMoves(index);
+                throw e;
+            }
+
+            final OptimisationValue ov = comparator.toValue(output);
             particle.setCurrentFitness(ov);
 
             if (ov.isBetter(particle.getBestFitness())) {
@@ -130,18 +150,56 @@ public class DefaultSwarm implements Swarm {
         }
     }
 
+    /**
+     * Creates and evaluates the particles of the initial swarm, one after another. If the
+     *   evaluation budget runs out, the swarm consists of the particles created so far.
+     *
+     * @throws EvaluationBudgetExhaustedException if the evaluation budget runs out.
+     */
     @Override
     public void initialise() {
         log.info("Initializing swarm with {} members.", sizeOfPopulation);
-        final AtomicInteger counter = new AtomicInteger();
 
-        particles = ((Stream<TypedEObject>)provider.create())
+        final Iterator<TypedEObject> candidates = ((Stream<TypedEObject>)provider.create())
                 .limit(sizeOfPopulation)
-                .map(candidate -> {
-                    final OptimisationValue ov = comparator.toValue(optimisationFunction.evaluate(candidate));
-                    final int id = counter.getAndIncrement();
-                    return new Particle(id, new State(candidate, ov), mover, randomService.random("de.evoal.optimisation.pso/particle-" + id));
-                })
-                .toArray(Particle[]::new);
+                .iterator();
+        final List<Particle> created = new ArrayList<>();
+
+        try {
+            while(candidates.hasNext()) {
+                final TypedEObject candidate = candidates.next();
+                final Particle particle = toParticle(created.size(), candidate);
+
+                created.add(particle);
+            }
+        } finally {
+            particles = created.toArray(Particle[]::new);
+        }
+    }
+
+    /**
+     * Evaluates a candidate and creates a particle at its position.
+     *
+     * @param id The id of the particle (its index in the swarm).
+     * @param candidate The start position of the particle.
+     * @return The new particle.
+     */
+    private Particle toParticle(final int id, final TypedEObject candidate) {
+        final TypedEObject output = evaluationService.evaluate(candidate);
+        final OptimisationValue ov = comparator.toValue(output);
+        final State start = new State(candidate, ov);
+        final RandomGenerator random = randomService.random("de.evoal.optimisation.pso/particle-" + id);
+
+        return new Particle(id, start, mover, random);
+    }
+
+    /**
+     * Undoes the last move of the particles from the given index on.
+     *
+     * @param firstIndex The index of the first particle whose move is undone.
+     */
+    private void undoMoves(final int firstIndex) {
+        Arrays.stream(particles, firstIndex, particles.length)
+              .forEach(Particle::undoMove);
     }
 }

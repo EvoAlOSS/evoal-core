@@ -5,6 +5,7 @@ package de.evoal.models.v202704.optimisation.memory.impl;
 
 import de.evoal.models.v202704.optimisation.memory.Execution;
 import de.evoal.models.v202704.optimisation.memory.MemoryPackage;
+import de.evoal.models.v202704.optimisation.memory.MetricDefinition;
 import de.evoal.models.v202704.optimisation.memory.State;
 
 import java.util.Collection;
@@ -13,14 +14,17 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.EMap;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EcoreEMap;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
@@ -34,6 +38,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link de.evoal.models.v202704.optimisation.memory.impl.ExecutionImpl#getInputSpace <em>Input Space</em>}</li>
  *   <li>{@link de.evoal.models.v202704.optimisation.memory.impl.ExecutionImpl#getOutputSpace <em>Output Space</em>}</li>
  *   <li>{@link de.evoal.models.v202704.optimisation.memory.impl.ExecutionImpl#getStates <em>States</em>}</li>
+ *   <li>{@link de.evoal.models.v202704.optimisation.memory.impl.ExecutionImpl#getMetricDefinitions <em>Metric Definitions</em>}</li>
+ *   <li>{@link de.evoal.models.v202704.optimisation.memory.impl.ExecutionImpl#getMetrics <em>Metrics</em>}</li>
  * </ul>
  *
  * @generated
@@ -68,6 +74,26 @@ public class ExecutionImpl extends MinimalEObjectImpl.Container implements Execu
 	 * @ordered
 	 */
 	protected EList<State> states;
+
+	/**
+	 * The cached value of the '{@link #getMetricDefinitions() <em>Metric Definitions</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMetricDefinitions()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<MetricDefinition> metricDefinitions;
+
+	/**
+	 * The cached value of the '{@link #getMetrics() <em>Metrics</em>}' map.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMetrics()
+	 * @generated
+	 * @ordered
+	 */
+	protected EMap<String, Number> metrics;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -187,10 +213,40 @@ public class ExecutionImpl extends MinimalEObjectImpl.Container implements Execu
 	 * @generated
 	 */
 	@Override
+	public EList<MetricDefinition> getMetricDefinitions() {
+		if (metricDefinitions == null) {
+			metricDefinitions = new EObjectContainmentEList<MetricDefinition>(MetricDefinition.class, this, MemoryPackage.EXECUTION__METRIC_DEFINITIONS);
+		}
+		return metricDefinitions;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EMap<String, Number> getMetrics() {
+		if (metrics == null) {
+			metrics = new EcoreEMap<String,Number>(MemoryPackage.Literals.METRIC_ENTRY, MetricEntryImpl.class, this, MemoryPackage.EXECUTION__METRICS);
+		}
+		return metrics;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case MemoryPackage.EXECUTION__STATES:
 				return ((InternalEList<?>)getStates()).basicRemove(otherEnd, msgs);
+			case MemoryPackage.EXECUTION__METRIC_DEFINITIONS:
+				return ((InternalEList<?>)getMetricDefinitions()).basicRemove(otherEnd, msgs);
+			case MemoryPackage.EXECUTION__METRICS:
+				return ((InternalEList<?>)getMetrics()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -211,6 +267,11 @@ public class ExecutionImpl extends MinimalEObjectImpl.Container implements Execu
 				return basicGetOutputSpace();
 			case MemoryPackage.EXECUTION__STATES:
 				return getStates();
+			case MemoryPackage.EXECUTION__METRIC_DEFINITIONS:
+				return getMetricDefinitions();
+			case MemoryPackage.EXECUTION__METRICS:
+				if (coreType) return getMetrics();
+				else return getMetrics().map();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -234,6 +295,13 @@ public class ExecutionImpl extends MinimalEObjectImpl.Container implements Execu
 				getStates().clear();
 				getStates().addAll((Collection<? extends State>)newValue);
 				return;
+			case MemoryPackage.EXECUTION__METRIC_DEFINITIONS:
+				getMetricDefinitions().clear();
+				getMetricDefinitions().addAll((Collection<? extends MetricDefinition>)newValue);
+				return;
+			case MemoryPackage.EXECUTION__METRICS:
+				((EStructuralFeature.Setting)getMetrics()).set(newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -255,6 +323,12 @@ public class ExecutionImpl extends MinimalEObjectImpl.Container implements Execu
 			case MemoryPackage.EXECUTION__STATES:
 				getStates().clear();
 				return;
+			case MemoryPackage.EXECUTION__METRIC_DEFINITIONS:
+				getMetricDefinitions().clear();
+				return;
+			case MemoryPackage.EXECUTION__METRICS:
+				getMetrics().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -273,6 +347,10 @@ public class ExecutionImpl extends MinimalEObjectImpl.Container implements Execu
 				return outputSpace != null;
 			case MemoryPackage.EXECUTION__STATES:
 				return states != null && !states.isEmpty();
+			case MemoryPackage.EXECUTION__METRIC_DEFINITIONS:
+				return metricDefinitions != null && !metricDefinitions.isEmpty();
+			case MemoryPackage.EXECUTION__METRICS:
+				return metrics != null && !metrics.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

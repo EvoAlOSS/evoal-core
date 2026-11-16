@@ -5,6 +5,8 @@ package de.evoal.models.v202704.optimisation.memory.util;
 
 import de.evoal.models.v202704.optimisation.memory.*;
 
+import java.util.Map;
+
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 
@@ -115,6 +117,14 @@ public class MemoryAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseRecombination(Recombination object) {
 				return createRecombinationAdapter();
+			}
+			@Override
+			public Adapter caseMetricEntry(Map.Entry<String, Number> object) {
+				return createMetricEntryAdapter();
+			}
+			@Override
+			public Adapter caseMetricDefinition(MetricDefinition object) {
+				return createMetricDefinitionAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -301,6 +311,34 @@ public class MemoryAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createRecombinationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link java.util.Map.Entry <em>Metric Entry</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see java.util.Map.Entry
+	 * @generated
+	 */
+	public Adapter createMetricEntryAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.evoal.models.v202704.optimisation.memory.MetricDefinition <em>Metric Definition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.evoal.models.v202704.optimisation.memory.MetricDefinition
+	 * @generated
+	 */
+	public Adapter createMetricDefinitionAdapter() {
 		return null;
 	}
 

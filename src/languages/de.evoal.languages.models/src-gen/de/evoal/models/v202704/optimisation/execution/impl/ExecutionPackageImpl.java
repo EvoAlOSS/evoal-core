@@ -5,6 +5,8 @@ package de.evoal.models.v202704.optimisation.execution.impl;
 
 import de.evoal.models.v202704.core.CorePackage;
 
+import de.evoal.models.v202704.optimisation.OptimisationPackage;
+
 import de.evoal.models.v202704.optimisation.execution.ExecutionFactory;
 import de.evoal.models.v202704.optimisation.execution.ExecutionPackage;
 import de.evoal.models.v202704.optimisation.execution.OptimisationFunction;
@@ -13,14 +15,15 @@ import de.evoal.models.v202704.optimisation.execution.OptimisationValueWithDista
 import de.evoal.models.v202704.optimisation.execution.Selection;
 import de.evoal.models.v202704.optimisation.execution.TerminationCriterion;
 
-import de.evoal.models.v202704.optimisation.impl.optimisationPackageImpl;
+import de.evoal.models.v202704.optimisation.impl.OptimisationPackageImpl;
 
 import de.evoal.models.v202704.optimisation.memory.MemoryPackage;
 
 import de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl;
+
 import de.evoal.models.v202704.optimisation.model.ModelPackage;
+
 import de.evoal.models.v202704.optimisation.model.impl.ModelPackageImpl;
-import de.evoal.models.v202704.optimisation.optimisationPackage;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EGenericType;
@@ -121,8 +124,8 @@ public class ExecutionPackageImpl extends EPackageImpl implements ExecutionPacka
 		CorePackage.eINSTANCE.eClass();
 
 		// Obtain or create and register interdependencies
-		Object registeredPackage = EPackage.Registry.INSTANCE.getEPackage(optimisationPackage.eNS_URI);
-		optimisationPackageImpl theoptimisationPackage = (optimisationPackageImpl)(registeredPackage instanceof optimisationPackageImpl ? registeredPackage : optimisationPackage.eINSTANCE);
+		Object registeredPackage = EPackage.Registry.INSTANCE.getEPackage(OptimisationPackage.eNS_URI);
+		OptimisationPackageImpl theOptimisationPackage = (OptimisationPackageImpl)(registeredPackage instanceof OptimisationPackageImpl ? registeredPackage : OptimisationPackage.eINSTANCE);
 		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(MemoryPackage.eNS_URI);
 		MemoryPackageImpl theMemoryPackage = (MemoryPackageImpl)(registeredPackage instanceof MemoryPackageImpl ? registeredPackage : MemoryPackage.eINSTANCE);
 		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(ModelPackage.eNS_URI);
@@ -130,13 +133,13 @@ public class ExecutionPackageImpl extends EPackageImpl implements ExecutionPacka
 
 		// Create package meta-data objects
 		theExecutionPackage.createPackageContents();
-		theoptimisationPackage.createPackageContents();
+		theOptimisationPackage.createPackageContents();
 		theMemoryPackage.createPackageContents();
 		theModelPackage.createPackageContents();
 
 		// Initialize created meta-data
 		theExecutionPackage.initializePackageContents();
-		theoptimisationPackage.initializePackageContents();
+		theOptimisationPackage.initializePackageContents();
 		theMemoryPackage.initializePackageContents();
 		theModelPackage.initializePackageContents();
 
@@ -263,7 +266,7 @@ public class ExecutionPackageImpl extends EPackageImpl implements ExecutionPacka
 
 		// Obtain other dependent packages
 		CorePackage theCorePackage = (CorePackage)EPackage.Registry.INSTANCE.getEPackage(CorePackage.eNS_URI);
-		optimisationPackage theoptimisationPackage = (optimisationPackage)EPackage.Registry.INSTANCE.getEPackage(optimisationPackage.eNS_URI);
+		OptimisationPackage theOptimisationPackage = (OptimisationPackage)EPackage.Registry.INSTANCE.getEPackage(OptimisationPackage.eNS_URI);
 		MemoryPackage theMemoryPackage = (MemoryPackage)EPackage.Registry.INSTANCE.getEPackage(MemoryPackage.eNS_URI);
 
 		// Create type parameters
@@ -279,7 +282,7 @@ public class ExecutionPackageImpl extends EPackageImpl implements ExecutionPacka
 		g2 = createEGenericType(this.getTerminationCriterion());
 		g1.getETypeArguments().add(g2);
 		terminationCriterionEClass.getEGenericSuperTypes().add(g1);
-		g1 = createEGenericType(theoptimisationPackage.getComparable());
+		g1 = createEGenericType(theOptimisationPackage.getComparable());
 		g2 = createEGenericType(this.getOptimisationValue());
 		g1.getETypeArguments().add(g2);
 		optimisationValueEClass.getEGenericSuperTypes().add(g1);
@@ -288,8 +291,8 @@ public class ExecutionPackageImpl extends EPackageImpl implements ExecutionPacka
 		// Initialize classes and features; add operations and parameters
 		initEClass(optimisationFunctionEClass, OptimisationFunction.class, "OptimisationFunction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		EOperation op = addEOperation(optimisationFunctionEClass, theoptimisationPackage.getTypedEObject(), "evaluate", 1, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theoptimisationPackage.getTypedEObject(), "input", 1, 1, IS_UNIQUE, IS_ORDERED);
+		EOperation op = addEOperation(optimisationFunctionEClass, theOptimisationPackage.getTypedEObject(), "evaluate", 1, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theOptimisationPackage.getTypedEObject(), "input", 1, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(terminationCriterionEClass, TerminationCriterion.class, "TerminationCriterion", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -315,10 +318,10 @@ public class ExecutionPackageImpl extends EPackageImpl implements ExecutionPacka
 		op = addEOperation(optimisationValueEClass, ecorePackage.getEBoolean(), "isWorse", 1, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getOptimisationValue(), "other", 1, 1, IS_UNIQUE, IS_ORDERED);
 
-		addEOperation(optimisationValueEClass, theoptimisationPackage.getTypedEObject(), "toOptmisationSpace", 1, 1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(optimisationValueEClass, theOptimisationPackage.getTypedEObject(), "toOptmisationSpace", 1, 1, IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(optimisationValueEClass, null, "toStatistics", 1, 1, IS_UNIQUE, IS_ORDERED);
-		g1 = createEGenericType(theoptimisationPackage.getList());
+		g1 = createEGenericType(theOptimisationPackage.getList());
 		g2 = createEGenericType(ecorePackage.getEJavaObject());
 		g1.getETypeArguments().add(g2);
 		initEOperation(op, g1);

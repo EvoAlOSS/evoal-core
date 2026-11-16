@@ -1,32 +1,39 @@
 package de.evoal.surrogate.main.optimisation;
 
-import de.evoal.core.api.dynamic.EAnnotationHelper;
-import de.evoal.models.core.ecore.Space;
-import de.evoal.models.core.ecore.TypedEObject;
-import de.evoal.core.api.utils.AttributeHelper;
-import de.evoal.models.v202704.optimisation.execution.OptimisationFunction;
-import de.evoal.models.v202704.optimisation.execution.impl.OptimisationFunctionImpl;
-import de.evoal.surrogate.api.cdi.SurrogateProducer;
-import de.evoal.surrogate.api.function.ModelFunction;
-import de.evoal.surrogate.api.function.ModelFunctionData;
-import de.evoal.surrogate.api.function.SurrogateModelProvider;
-import lombok.extern.slf4j.Slf4j;
+import java.io.File;
+import java.util.List;
 
 import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+
+import lombok.extern.slf4j.Slf4j;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
-import java.io.File;
-import java.util.List;
+import de.evoal.core.api.dynamic.EAnnotationHelper;
+import de.evoal.core.api.utils.AttributeHelper;
+import de.evoal.models.core.ecore.Space;
+import de.evoal.models.core.ecore.TypedEObject;
+import de.evoal.models.v202704.optimisation.execution.OptimisationFunction;
+import de.evoal.models.v202704.optimisation.execution.impl.OptimisationFunctionImpl;
+import de.evoal.optimisation.api.evaluation.EvaluationSource;
+import de.evoal.optimisation.api.evaluation.EvaluationSourceProvider;
+
+import de.evoal.surrogate.api.cdi.SurrogateProducer;
+import de.evoal.surrogate.api.function.ModelFunction;
+import de.evoal.surrogate.api.function.ModelFunctionData;
+import de.evoal.surrogate.api.function.SurrogateModelProvider;
 
 /**
- * Surrogate-based fitness function for optimisation.
+ * Surrogate-based fitness function for optimisation. Its evaluations are counted as
+ *   {@link EvaluationSource#SURROGATE} evaluations.
  */
 @Dependent @Named("de.evoal.surrogate.optimisation.surrogate")
 @Slf4j
-public class SurrogateFitnessFunction extends OptimisationFunctionImpl implements SurrogateModelProvider {
+public class SurrogateFitnessFunction extends OptimisationFunctionImpl
+                                      implements EvaluationSourceProvider, SurrogateModelProvider {
 
     @Inject
     private EAnnotationHelper annotations;
@@ -44,6 +51,11 @@ public class SurrogateFitnessFunction extends OptimisationFunctionImpl implement
 
     @Inject
     private SurrogateProducer producer;
+
+    @Override
+    public EvaluationSource getEvaluationSource() {
+        return EvaluationSource.SURROGATE;
+    }
 
     @Override
     public ModelFunctionData getModelFunctionData() {

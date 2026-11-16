@@ -8,6 +8,7 @@ import de.evoal.models.core.ecore.Space;
 import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
 import de.evoal.core.api.cdi.*;
 import de.evoal.optimisation.api.cdi.TargetPointLoader;
+import de.evoal.optimisation.api.execution.ExecutionRecorder;
 import de.evoal.optimisation.api.model.OptimisationAlgorithm;
 
 import jakarta.enterprise.context.ApplicationScoped;
@@ -51,6 +52,9 @@ public class HeuristicSearchEvaluation implements MainClass {
 
     @Inject
     private WriterContext context;
+
+    @Inject
+    private ExecutionRecorder executionRecorder;
 
     @Inject
     private OptimisationModuleLoader loader;
@@ -143,9 +147,14 @@ public class HeuristicSearchEvaluation implements MainClass {
             board.bind(OptimisationBlackboardEntries.EVALUATION_RUN, run);
             context.bindColumn(runColumn, i);
             randomService.startRun(runCounter++);
+            executionRecorder.startRun();
 
-            BeanFactory.createComponent(OptimisationAlgorithm.class, algorithmConfiguration.getAlgorithm())
-                       .run();
+            final OptimisationAlgorithm algorithm =
+                    BeanFactory.createComponent(OptimisationAlgorithm.class, algorithmConfiguration.getAlgorithm());
+
+            executionRecorder.beginExecution();
+            algorithm.run();
+            executionRecorder.finishRun();
         }
     }
 

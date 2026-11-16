@@ -5,7 +5,10 @@ package de.evoal.models.v202704.optimisation.memory.impl;
 
 import de.evoal.models.v202704.optimisation.memory.*;
 
+import java.util.Map;
+
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
@@ -66,8 +69,48 @@ public class MemoryFactoryImpl extends EFactoryImpl implements MemoryFactory {
 			case MemoryPackage.IDENTITY: return createIdentity();
 			case MemoryPackage.MUTATION: return createMutation();
 			case MemoryPackage.RECOMBINATION: return createRecombination();
+			case MemoryPackage.METRIC_ENTRY: return (EObject)createMetricEntry();
+			case MemoryPackage.METRIC_DEFINITION: return createMetricDefinition();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object createFromString(EDataType eDataType, String initialValue) {
+		switch (eDataType.getClassifierID()) {
+			case MemoryPackage.METRIC_KIND:
+				return createMetricKindFromString(eDataType, initialValue);
+			case MemoryPackage.METRIC_VALUE_TYPE:
+				return createMetricValueTypeFromString(eDataType, initialValue);
+			case MemoryPackage.METRIC_SCOPE:
+				return createMetricScopeFromString(eDataType, initialValue);
+			default:
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String convertToString(EDataType eDataType, Object instanceValue) {
+		switch (eDataType.getClassifierID()) {
+			case MemoryPackage.METRIC_KIND:
+				return convertMetricKindToString(eDataType, instanceValue);
+			case MemoryPackage.METRIC_VALUE_TYPE:
+				return convertMetricValueTypeToString(eDataType, instanceValue);
+			case MemoryPackage.METRIC_SCOPE:
+				return convertMetricScopeToString(eDataType, instanceValue);
+			default:
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
 	}
 
@@ -168,6 +211,87 @@ public class MemoryFactoryImpl extends EFactoryImpl implements MemoryFactory {
 	public Recombination createRecombination() {
 		RecombinationImpl recombination = new RecombinationImpl();
 		return recombination;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Map.Entry<String, Number> createMetricEntry() {
+		MetricEntryImpl metricEntry = new MetricEntryImpl();
+		return metricEntry;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public MetricDefinition createMetricDefinition() {
+		MetricDefinitionImpl metricDefinition = new MetricDefinitionImpl();
+		return metricDefinition;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public MetricKind createMetricKindFromString(EDataType eDataType, String initialValue) {
+		MetricKind result = MetricKind.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertMetricKindToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public MetricValueType createMetricValueTypeFromString(EDataType eDataType, String initialValue) {
+		MetricValueType result = MetricValueType.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertMetricValueTypeToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public MetricScope createMetricScopeFromString(EDataType eDataType, String initialValue) {
+		MetricScope result = MetricScope.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertMetricScopeToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
 	}
 
 	/**

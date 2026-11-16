@@ -18,12 +18,12 @@ import org.eclipse.emf.ecore.EPackage;
  *   <li>and each data type</li>
  * </ul>
  * <!-- end-user-doc -->
- * @see de.evoal.models.v202704.optimisation.optimisationFactory
+ * @see de.evoal.models.v202704.optimisation.OptimisationFactory
  * @model kind="package"
  *        annotation="http://www.eclipse.org/OCL/Import core='core.ecore#/' ecore='http://www.eclipse.org/emf/2002/Ecore'"
  * @generated
  */
-public interface optimisationPackage extends EPackage {
+public interface OptimisationPackage extends EPackage {
 	/**
 	 * The package name.
 	 * <!-- begin-user-doc -->
@@ -54,14 +54,14 @@ public interface optimisationPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	optimisationPackage eINSTANCE = de.evoal.models.v202704.optimisation.impl.optimisationPackageImpl.init();
+	OptimisationPackage eINSTANCE = de.evoal.models.v202704.optimisation.impl.OptimisationPackageImpl.init();
 
 	/**
 	 * The meta object id for the '{@link de.evoal.models.v202704.optimisation.impl.ComparableImpl <em>Comparable</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see de.evoal.models.v202704.optimisation.impl.ComparableImpl
-	 * @see de.evoal.models.v202704.optimisation.impl.optimisationPackageImpl#getComparable()
+	 * @see de.evoal.models.v202704.optimisation.impl.OptimisationPackageImpl#getComparable()
 	 * @generated
 	 */
 	int COMPARABLE = 0;
@@ -80,7 +80,7 @@ public interface optimisationPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see de.evoal.models.v202704.optimisation.impl.StreamImpl
-	 * @see de.evoal.models.v202704.optimisation.impl.optimisationPackageImpl#getStream()
+	 * @see de.evoal.models.v202704.optimisation.impl.OptimisationPackageImpl#getStream()
 	 * @generated
 	 */
 	int STREAM = 1;
@@ -99,7 +99,7 @@ public interface optimisationPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see de.evoal.models.v202704.optimisation.impl.ListImpl
-	 * @see de.evoal.models.v202704.optimisation.impl.optimisationPackageImpl#getList()
+	 * @see de.evoal.models.v202704.optimisation.impl.OptimisationPackageImpl#getList()
 	 * @generated
 	 */
 	int LIST = 2;
@@ -118,7 +118,7 @@ public interface optimisationPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see de.evoal.models.core.ecore.Space
-	 * @see de.evoal.models.v202704.optimisation.impl.optimisationPackageImpl#getSpace()
+	 * @see de.evoal.models.v202704.optimisation.impl.OptimisationPackageImpl#getSpace()
 	 * @generated
 	 */
 	int SPACE = 3;
@@ -128,10 +128,20 @@ public interface optimisationPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see de.evoal.models.core.ecore.TypedEObject
-	 * @see de.evoal.models.v202704.optimisation.impl.optimisationPackageImpl#getTypedEObject()
+	 * @see de.evoal.models.v202704.optimisation.impl.OptimisationPackageImpl#getTypedEObject()
 	 * @generated
 	 */
 	int TYPED_EOBJECT = 4;
+
+	/**
+	 * The meta object id for the '<em>Number</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see java.lang.Number
+	 * @see de.evoal.models.v202704.optimisation.impl.OptimisationPackageImpl#getNumber()
+	 * @generated
+	 */
+	int NUMBER = 5;
 
 
 	/**
@@ -190,13 +200,29 @@ public interface optimisationPackage extends EPackage {
 	EDataType getTypedEObject();
 
 	/**
+	 * Returns the meta object for data type '{@link java.lang.Number <em>Number</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+     * <!-- begin-model-doc -->
+     * *
+     * A metric value: a {@link Long} for integral values, a {@link Double} for real values.
+     * 
+     * <!-- end-model-doc -->
+	 * @return the meta object for data type '<em>Number</em>'.
+	 * @see java.lang.Number
+	 * @model instanceClass="java.lang.Number"
+	 * @generated
+	 */
+	EDataType getNumber();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the factory that creates the instances of the model.
 	 * @generated
 	 */
-	optimisationFactory getoptimisationFactory();
+	OptimisationFactory getOptimisationFactory();
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -216,7 +242,7 @@ public interface optimisationPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see de.evoal.models.v202704.optimisation.impl.ComparableImpl
-		 * @see de.evoal.models.v202704.optimisation.impl.optimisationPackageImpl#getComparable()
+		 * @see de.evoal.models.v202704.optimisation.impl.OptimisationPackageImpl#getComparable()
 		 * @generated
 		 */
 		EClass COMPARABLE = eINSTANCE.getComparable();
@@ -226,7 +252,7 @@ public interface optimisationPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see de.evoal.models.v202704.optimisation.impl.StreamImpl
-		 * @see de.evoal.models.v202704.optimisation.impl.optimisationPackageImpl#getStream()
+		 * @see de.evoal.models.v202704.optimisation.impl.OptimisationPackageImpl#getStream()
 		 * @generated
 		 */
 		EClass STREAM = eINSTANCE.getStream();
@@ -236,7 +262,7 @@ public interface optimisationPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see de.evoal.models.v202704.optimisation.impl.ListImpl
-		 * @see de.evoal.models.v202704.optimisation.impl.optimisationPackageImpl#getList()
+		 * @see de.evoal.models.v202704.optimisation.impl.OptimisationPackageImpl#getList()
 		 * @generated
 		 */
 		EClass LIST = eINSTANCE.getList();
@@ -246,7 +272,7 @@ public interface optimisationPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see de.evoal.models.core.ecore.Space
-		 * @see de.evoal.models.v202704.optimisation.impl.optimisationPackageImpl#getSpace()
+		 * @see de.evoal.models.v202704.optimisation.impl.OptimisationPackageImpl#getSpace()
 		 * @generated
 		 */
 		EDataType SPACE = eINSTANCE.getSpace();
@@ -256,11 +282,21 @@ public interface optimisationPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see de.evoal.models.core.ecore.TypedEObject
-		 * @see de.evoal.models.v202704.optimisation.impl.optimisationPackageImpl#getTypedEObject()
+		 * @see de.evoal.models.v202704.optimisation.impl.OptimisationPackageImpl#getTypedEObject()
 		 * @generated
 		 */
 		EDataType TYPED_EOBJECT = eINSTANCE.getTypedEObject();
 
+		/**
+		 * The meta object literal for the '<em>Number</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see java.lang.Number
+		 * @see de.evoal.models.v202704.optimisation.impl.OptimisationPackageImpl#getNumber()
+		 * @generated
+		 */
+		EDataType NUMBER = eINSTANCE.getNumber();
+
 	}
 
-} //optimisationPackage
+} //OptimisationPackage

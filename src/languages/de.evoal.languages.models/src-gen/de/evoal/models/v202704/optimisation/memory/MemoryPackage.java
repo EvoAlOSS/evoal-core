@@ -5,6 +5,7 @@ package de.evoal.models.v202704.optimisation.memory;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -99,13 +100,31 @@ public interface MemoryPackage extends EPackage {
 	int EXECUTION__STATES = 2;
 
 	/**
+	 * The feature id for the '<em><b>Metric Definitions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION__METRIC_DEFINITIONS = 3;
+
+	/**
+	 * The feature id for the '<em><b>Metrics</b></em>' map.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION__METRICS = 4;
+
+	/**
 	 * The number of structural features of the '<em>Execution</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_FEATURE_COUNT = 3;
+	int EXECUTION_FEATURE_COUNT = 5;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.models.v202704.optimisation.memory.impl.StateImpl <em>State</em>}' class.
@@ -164,13 +183,22 @@ public interface MemoryPackage extends EPackage {
 	int ITERATION__RANKS = STATE_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Metrics</b></em>' map.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITERATION__METRICS = STATE_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>Iteration</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ITERATION_FEATURE_COUNT = STATE_FEATURE_COUNT + 3;
+	int ITERATION_FEATURE_COUNT = STATE_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.models.v202704.optimisation.memory.impl.IterationStepImpl <em>Iteration Step</em>}' class.
@@ -487,6 +515,137 @@ public interface MemoryPackage extends EPackage {
 	 */
 	int RECOMBINATION_FEATURE_COUNT = RELATIONSHIP_FEATURE_COUNT + 1;
 
+	/**
+	 * The meta object id for the '{@link de.evoal.models.v202704.optimisation.memory.impl.MetricEntryImpl <em>Metric Entry</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.evoal.models.v202704.optimisation.memory.impl.MetricEntryImpl
+	 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getMetricEntry()
+	 * @generated
+	 */
+	int METRIC_ENTRY = 12;
+
+	/**
+	 * The feature id for the '<em><b>Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int METRIC_ENTRY__KEY = 0;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int METRIC_ENTRY__VALUE = 1;
+
+	/**
+	 * The number of structural features of the '<em>Metric Entry</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int METRIC_ENTRY_FEATURE_COUNT = 2;
+
+	/**
+	 * The meta object id for the '{@link de.evoal.models.v202704.optimisation.memory.impl.MetricDefinitionImpl <em>Metric Definition</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.evoal.models.v202704.optimisation.memory.impl.MetricDefinitionImpl
+	 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getMetricDefinition()
+	 * @generated
+	 */
+	int METRIC_DEFINITION = 13;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int METRIC_DEFINITION__NAME = 0;
+
+	/**
+	 * The feature id for the '<em><b>Kind</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int METRIC_DEFINITION__KIND = 1;
+
+	/**
+	 * The feature id for the '<em><b>Value Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int METRIC_DEFINITION__VALUE_TYPE = 2;
+
+	/**
+	 * The feature id for the '<em><b>Scope</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int METRIC_DEFINITION__SCOPE = 3;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int METRIC_DEFINITION__DESCRIPTION = 4;
+
+	/**
+	 * The number of structural features of the '<em>Metric Definition</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int METRIC_DEFINITION_FEATURE_COUNT = 5;
+
+	/**
+	 * The meta object id for the '{@link de.evoal.models.v202704.optimisation.memory.MetricKind <em>Metric Kind</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.evoal.models.v202704.optimisation.memory.MetricKind
+	 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getMetricKind()
+	 * @generated
+	 */
+	int METRIC_KIND = 14;
+
+	/**
+	 * The meta object id for the '{@link de.evoal.models.v202704.optimisation.memory.MetricValueType <em>Metric Value Type</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.evoal.models.v202704.optimisation.memory.MetricValueType
+	 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getMetricValueType()
+	 * @generated
+	 */
+	int METRIC_VALUE_TYPE = 15;
+
+	/**
+	 * The meta object id for the '{@link de.evoal.models.v202704.optimisation.memory.MetricScope <em>Metric Scope</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.evoal.models.v202704.optimisation.memory.MetricScope
+	 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getMetricScope()
+	 * @generated
+	 */
+	int METRIC_SCOPE = 16;
+
 
 	/**
 	 * Returns the meta object for class '{@link de.evoal.models.v202704.optimisation.memory.Execution <em>Execution</em>}'.
@@ -530,6 +689,28 @@ public interface MemoryPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getExecution_States();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link de.evoal.models.v202704.optimisation.memory.Execution#getMetricDefinitions <em>Metric Definitions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Metric Definitions</em>'.
+	 * @see de.evoal.models.v202704.optimisation.memory.Execution#getMetricDefinitions()
+	 * @see #getExecution()
+	 * @generated
+	 */
+	EReference getExecution_MetricDefinitions();
+
+	/**
+	 * Returns the meta object for the map '{@link de.evoal.models.v202704.optimisation.memory.Execution#getMetrics <em>Metrics</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the map '<em>Metrics</em>'.
+	 * @see de.evoal.models.v202704.optimisation.memory.Execution#getMetrics()
+	 * @see #getExecution()
+	 * @generated
+	 */
+	EReference getExecution_Metrics();
 
 	/**
 	 * Returns the meta object for class '{@link de.evoal.models.v202704.optimisation.memory.State <em>State</em>}'.
@@ -583,6 +764,17 @@ public interface MemoryPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getIteration_Ranks();
+
+	/**
+	 * Returns the meta object for the map '{@link de.evoal.models.v202704.optimisation.memory.Iteration#getMetrics <em>Metrics</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the map '<em>Metrics</em>'.
+	 * @see de.evoal.models.v202704.optimisation.memory.Iteration#getMetrics()
+	 * @see #getIteration()
+	 * @generated
+	 */
+	EReference getIteration_Metrics();
 
 	/**
 	 * Returns the meta object for class '{@link de.evoal.models.v202704.optimisation.memory.IterationStep <em>Iteration Step</em>}'.
@@ -796,6 +988,135 @@ public interface MemoryPackage extends EPackage {
 	EReference getRecombination_Other();
 
 	/**
+	 * Returns the meta object for class '{@link java.util.Map.Entry <em>Metric Entry</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Metric Entry</em>'.
+	 * @see java.util.Map.Entry
+	 * @model keyDataType="org.eclipse.emf.ecore.EString" keyRequired="true"
+	 *        valueDataType="de.evoal.models.v202704.optimisation.Number" valueRequired="true"
+	 * @generated
+	 */
+	EClass getMetricEntry();
+
+	/**
+	 * Returns the meta object for the attribute '{@link java.util.Map.Entry <em>Key</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Key</em>'.
+	 * @see java.util.Map.Entry
+	 * @see #getMetricEntry()
+	 * @generated
+	 */
+	EAttribute getMetricEntry_Key();
+
+	/**
+	 * Returns the meta object for the attribute '{@link java.util.Map.Entry <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Value</em>'.
+	 * @see java.util.Map.Entry
+	 * @see #getMetricEntry()
+	 * @generated
+	 */
+	EAttribute getMetricEntry_Value();
+
+	/**
+	 * Returns the meta object for class '{@link de.evoal.models.v202704.optimisation.memory.MetricDefinition <em>Metric Definition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Metric Definition</em>'.
+	 * @see de.evoal.models.v202704.optimisation.memory.MetricDefinition
+	 * @generated
+	 */
+	EClass getMetricDefinition();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.evoal.models.v202704.optimisation.memory.MetricDefinition#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see de.evoal.models.v202704.optimisation.memory.MetricDefinition#getName()
+	 * @see #getMetricDefinition()
+	 * @generated
+	 */
+	EAttribute getMetricDefinition_Name();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.evoal.models.v202704.optimisation.memory.MetricDefinition#getKind <em>Kind</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Kind</em>'.
+	 * @see de.evoal.models.v202704.optimisation.memory.MetricDefinition#getKind()
+	 * @see #getMetricDefinition()
+	 * @generated
+	 */
+	EAttribute getMetricDefinition_Kind();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.evoal.models.v202704.optimisation.memory.MetricDefinition#getValueType <em>Value Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Value Type</em>'.
+	 * @see de.evoal.models.v202704.optimisation.memory.MetricDefinition#getValueType()
+	 * @see #getMetricDefinition()
+	 * @generated
+	 */
+	EAttribute getMetricDefinition_ValueType();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.evoal.models.v202704.optimisation.memory.MetricDefinition#getScope <em>Scope</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Scope</em>'.
+	 * @see de.evoal.models.v202704.optimisation.memory.MetricDefinition#getScope()
+	 * @see #getMetricDefinition()
+	 * @generated
+	 */
+	EAttribute getMetricDefinition_Scope();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.evoal.models.v202704.optimisation.memory.MetricDefinition#getDescription <em>Description</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Description</em>'.
+	 * @see de.evoal.models.v202704.optimisation.memory.MetricDefinition#getDescription()
+	 * @see #getMetricDefinition()
+	 * @generated
+	 */
+	EAttribute getMetricDefinition_Description();
+
+	/**
+	 * Returns the meta object for enum '{@link de.evoal.models.v202704.optimisation.memory.MetricKind <em>Metric Kind</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Metric Kind</em>'.
+	 * @see de.evoal.models.v202704.optimisation.memory.MetricKind
+	 * @generated
+	 */
+	EEnum getMetricKind();
+
+	/**
+	 * Returns the meta object for enum '{@link de.evoal.models.v202704.optimisation.memory.MetricValueType <em>Metric Value Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Metric Value Type</em>'.
+	 * @see de.evoal.models.v202704.optimisation.memory.MetricValueType
+	 * @generated
+	 */
+	EEnum getMetricValueType();
+
+	/**
+	 * Returns the meta object for enum '{@link de.evoal.models.v202704.optimisation.memory.MetricScope <em>Metric Scope</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Metric Scope</em>'.
+	 * @see de.evoal.models.v202704.optimisation.memory.MetricScope
+	 * @generated
+	 */
+	EEnum getMetricScope();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -852,6 +1173,22 @@ public interface MemoryPackage extends EPackage {
 		EReference EXECUTION__STATES = eINSTANCE.getExecution_States();
 
 		/**
+		 * The meta object literal for the '<em><b>Metric Definitions</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EXECUTION__METRIC_DEFINITIONS = eINSTANCE.getExecution_MetricDefinitions();
+
+		/**
+		 * The meta object literal for the '<em><b>Metrics</b></em>' map feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EXECUTION__METRICS = eINSTANCE.getExecution_Metrics();
+
+		/**
 		 * The meta object literal for the '{@link de.evoal.models.v202704.optimisation.memory.impl.StateImpl <em>State</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -894,6 +1231,14 @@ public interface MemoryPackage extends EPackage {
 		 * @generated
 		 */
 		EReference ITERATION__RANKS = eINSTANCE.getIteration_Ranks();
+
+		/**
+		 * The meta object literal for the '<em><b>Metrics</b></em>' map feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ITERATION__METRICS = eINSTANCE.getIteration_Metrics();
 
 		/**
 		 * The meta object literal for the '{@link de.evoal.models.v202704.optimisation.memory.impl.IterationStepImpl <em>Iteration Step</em>}' class.
@@ -1072,6 +1417,112 @@ public interface MemoryPackage extends EPackage {
 		 * @generated
 		 */
 		EReference RECOMBINATION__OTHER = eINSTANCE.getRecombination_Other();
+
+		/**
+		 * The meta object literal for the '{@link de.evoal.models.v202704.optimisation.memory.impl.MetricEntryImpl <em>Metric Entry</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.evoal.models.v202704.optimisation.memory.impl.MetricEntryImpl
+		 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getMetricEntry()
+		 * @generated
+		 */
+		EClass METRIC_ENTRY = eINSTANCE.getMetricEntry();
+
+		/**
+		 * The meta object literal for the '<em><b>Key</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute METRIC_ENTRY__KEY = eINSTANCE.getMetricEntry_Key();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute METRIC_ENTRY__VALUE = eINSTANCE.getMetricEntry_Value();
+
+		/**
+		 * The meta object literal for the '{@link de.evoal.models.v202704.optimisation.memory.impl.MetricDefinitionImpl <em>Metric Definition</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.evoal.models.v202704.optimisation.memory.impl.MetricDefinitionImpl
+		 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getMetricDefinition()
+		 * @generated
+		 */
+		EClass METRIC_DEFINITION = eINSTANCE.getMetricDefinition();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute METRIC_DEFINITION__NAME = eINSTANCE.getMetricDefinition_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Kind</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute METRIC_DEFINITION__KIND = eINSTANCE.getMetricDefinition_Kind();
+
+		/**
+		 * The meta object literal for the '<em><b>Value Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute METRIC_DEFINITION__VALUE_TYPE = eINSTANCE.getMetricDefinition_ValueType();
+
+		/**
+		 * The meta object literal for the '<em><b>Scope</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute METRIC_DEFINITION__SCOPE = eINSTANCE.getMetricDefinition_Scope();
+
+		/**
+		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute METRIC_DEFINITION__DESCRIPTION = eINSTANCE.getMetricDefinition_Description();
+
+		/**
+		 * The meta object literal for the '{@link de.evoal.models.v202704.optimisation.memory.MetricKind <em>Metric Kind</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.evoal.models.v202704.optimisation.memory.MetricKind
+		 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getMetricKind()
+		 * @generated
+		 */
+		EEnum METRIC_KIND = eINSTANCE.getMetricKind();
+
+		/**
+		 * The meta object literal for the '{@link de.evoal.models.v202704.optimisation.memory.MetricValueType <em>Metric Value Type</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.evoal.models.v202704.optimisation.memory.MetricValueType
+		 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getMetricValueType()
+		 * @generated
+		 */
+		EEnum METRIC_VALUE_TYPE = eINSTANCE.getMetricValueType();
+
+		/**
+		 * The meta object literal for the '{@link de.evoal.models.v202704.optimisation.memory.MetricScope <em>Metric Scope</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.evoal.models.v202704.optimisation.memory.MetricScope
+		 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getMetricScope()
+		 * @generated
+		 */
+		EEnum METRIC_SCOPE = eINSTANCE.getMetricScope();
 
 	}
 

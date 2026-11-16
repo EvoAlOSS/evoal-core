@@ -4,6 +4,7 @@
 package de.evoal.models.v202704.optimisation.model.impl;
 
 import de.evoal.models.v202704.core.Configuration;
+
 import de.evoal.models.v202704.optimisation.model.ModelPackage;
 import de.evoal.models.v202704.optimisation.model.OptimisationGoal;
 import de.evoal.models.v202704.optimisation.model.Problem;

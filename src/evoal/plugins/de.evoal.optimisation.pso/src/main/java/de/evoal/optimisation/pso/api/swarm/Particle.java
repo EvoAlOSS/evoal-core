@@ -67,6 +67,11 @@ public class Particle {
     private final RandomGenerator random;
 
     /**
+     * The current state before the last move, {@code null} before the first move.
+     */
+    private State stateBeforeMove;
+
+    /**
      * Creates a new particle. The start position is also its first personal best.
      *
      * @param id The ID number of the new particle.
@@ -157,6 +162,8 @@ public class Particle {
      * @param max_iterations The maximum number of iterations.
      */
     public void moveParticle(final Particle[] neighbors, int current_iteration, int max_iterations) {
+        stateBeforeMove = new State(current);
+
         mover.moveParticle(current, personalBest, neighbors,
             current_iteration, max_iterations, random);
     }
@@ -189,5 +196,19 @@ public class Particle {
      */
     public void setCurrentFitness(final OptimisationValue fitness) {
         current.setFitness(fitness);
+    }
+
+    /**
+     * Undoes the last move, e.g., because the new position cannot be evaluated any more.
+     *   The particle is back at its previous position with its previous velocity and fitness.
+     */
+    public void undoMove() {
+        if(stateBeforeMove == null) {
+            throw new IllegalStateException("Particle " + id + " has not been moved yet.");
+        }
+
+        current.setPosition(stateBeforeMove.getPosition());
+        current.setVelocity(stateBeforeMove.getVelocity());
+        current.setFitness(stateBeforeMove.getFitness());
     }
 }

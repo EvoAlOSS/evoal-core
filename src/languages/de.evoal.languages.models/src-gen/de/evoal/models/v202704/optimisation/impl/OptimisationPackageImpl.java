@@ -5,16 +5,23 @@ package de.evoal.models.v202704.optimisation.impl;
 
 import de.evoal.models.core.ecore.Space;
 import de.evoal.models.core.ecore.TypedEObject;
+
 import de.evoal.models.v202704.core.CorePackage;
 
+import de.evoal.models.v202704.optimisation.OptimisationFactory;
+import de.evoal.models.v202704.optimisation.OptimisationPackage;
+
 import de.evoal.models.v202704.optimisation.execution.ExecutionPackage;
+
 import de.evoal.models.v202704.optimisation.execution.impl.ExecutionPackageImpl;
+
 import de.evoal.models.v202704.optimisation.memory.MemoryPackage;
+
 import de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl;
+
 import de.evoal.models.v202704.optimisation.model.ModelPackage;
+
 import de.evoal.models.v202704.optimisation.model.impl.ModelPackageImpl;
-import de.evoal.models.v202704.optimisation.optimisationFactory;
-import de.evoal.models.v202704.optimisation.optimisationPackage;
 
 import java.lang.Comparable;
 
@@ -34,7 +41,7 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
  * <!-- end-user-doc -->
  * @generated
  */
-public class optimisationPackageImpl extends EPackageImpl implements optimisationPackage {
+public class OptimisationPackageImpl extends EPackageImpl implements OptimisationPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -71,6 +78,13 @@ public class optimisationPackageImpl extends EPackageImpl implements optimisatio
 	private EDataType typedEObjectEDataType = null;
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType numberEDataType = null;
+
+	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
 	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
 	 * package URI value.
@@ -81,12 +95,12 @@ public class optimisationPackageImpl extends EPackageImpl implements optimisatio
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see org.eclipse.emf.ecore.EPackage.Registry
-	 * @see de.evoal.models.v202704.optimisation.optimisationPackage#eNS_URI
+	 * @see de.evoal.models.v202704.optimisation.OptimisationPackage#eNS_URI
 	 * @see #init()
 	 * @generated
 	 */
-	private optimisationPackageImpl() {
-		super(eNS_URI, optimisationFactory.eINSTANCE);
+	private OptimisationPackageImpl() {
+		super(eNS_URI, OptimisationFactory.eINSTANCE);
 	}
 	/**
 	 * <!-- begin-user-doc -->
@@ -98,7 +112,7 @@ public class optimisationPackageImpl extends EPackageImpl implements optimisatio
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
 	 *
-	 * <p>This method is used to initialize {@link optimisationPackage#eINSTANCE} when that field is accessed.
+	 * <p>This method is used to initialize {@link OptimisationPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -107,12 +121,12 @@ public class optimisationPackageImpl extends EPackageImpl implements optimisatio
 	 * @see #initializePackageContents()
 	 * @generated
 	 */
-	public static optimisationPackage init() {
-		if (isInited) return (optimisationPackage)EPackage.Registry.INSTANCE.getEPackage(optimisationPackage.eNS_URI);
+	public static OptimisationPackage init() {
+		if (isInited) return (OptimisationPackage)EPackage.Registry.INSTANCE.getEPackage(OptimisationPackage.eNS_URI);
 
 		// Obtain or create and register package
-		Object registeredoptimisationPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
-		optimisationPackageImpl theoptimisationPackage = registeredoptimisationPackage instanceof optimisationPackageImpl ? (optimisationPackageImpl)registeredoptimisationPackage : new optimisationPackageImpl();
+		Object registeredOptimisationPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		OptimisationPackageImpl theOptimisationPackage = registeredOptimisationPackage instanceof OptimisationPackageImpl ? (OptimisationPackageImpl)registeredOptimisationPackage : new OptimisationPackageImpl();
 
 		isInited = true;
 
@@ -128,23 +142,23 @@ public class optimisationPackageImpl extends EPackageImpl implements optimisatio
 		ModelPackageImpl theModelPackage = (ModelPackageImpl)(registeredPackage instanceof ModelPackageImpl ? registeredPackage : ModelPackage.eINSTANCE);
 
 		// Create package meta-data objects
-		theoptimisationPackage.createPackageContents();
+		theOptimisationPackage.createPackageContents();
 		theMemoryPackage.createPackageContents();
 		theExecutionPackage.createPackageContents();
 		theModelPackage.createPackageContents();
 
 		// Initialize created meta-data
-		theoptimisationPackage.initializePackageContents();
+		theOptimisationPackage.initializePackageContents();
 		theMemoryPackage.initializePackageContents();
 		theExecutionPackage.initializePackageContents();
 		theModelPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
-		theoptimisationPackage.freeze();
+		theOptimisationPackage.freeze();
 
 		// Update the registry and return the package
-		EPackage.Registry.INSTANCE.put(optimisationPackage.eNS_URI, theoptimisationPackage);
-		return theoptimisationPackage;
+		EPackage.Registry.INSTANCE.put(OptimisationPackage.eNS_URI, theOptimisationPackage);
+		return theOptimisationPackage;
 	}
 
 	/**
@@ -203,8 +217,18 @@ public class optimisationPackageImpl extends EPackageImpl implements optimisatio
 	 * @generated
 	 */
 	@Override
-	public optimisationFactory getoptimisationFactory() {
-		return (optimisationFactory)getEFactoryInstance();
+	public EDataType getNumber() {
+		return numberEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public OptimisationFactory getOptimisationFactory() {
+		return (OptimisationFactory)getEFactoryInstance();
 	}
 
 	/**
@@ -235,6 +259,7 @@ public class optimisationPackageImpl extends EPackageImpl implements optimisatio
 		// Create data types
 		spaceEDataType = createEDataType(SPACE);
 		typedEObjectEDataType = createEDataType(TYPED_EOBJECT);
+		numberEDataType = createEDataType(NUMBER);
 	}
 
 	/**
@@ -289,6 +314,7 @@ public class optimisationPackageImpl extends EPackageImpl implements optimisatio
 		// Initialize data types
 		initEDataType(spaceEDataType, Space.class, "Space", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(typedEObjectEDataType, TypedEObject.class, "TypedEObject", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(numberEDataType, Number.class, "Number", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);
@@ -315,4 +341,4 @@ public class optimisationPackageImpl extends EPackageImpl implements optimisatio
 		   });
 	}
 
-} //optimisationPackageImpl
+} //OptimisationPackageImpl

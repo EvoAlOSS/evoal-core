@@ -1,7 +1,5 @@
 package de.evoal.optimisation.local_search.main;
 
-import de.evoal.models.v202704.optimisation.execution.OptimisationFunction;
-
 import de.evoal.core.api.cdi.RunScoped;
 import de.evoal.core.api.dynamic.EClassProvider;
 import de.evoal.models.v202704.optimisation.execution.OptimisationValue;
@@ -30,6 +28,9 @@ import de.evoal.core.api.cdi.Component;
 import de.evoal.core.api.utils.AttributeHelper;
 
 import de.evoal.optimisation.api.cdi.TerminationCriterionProducer;
+import de.evoal.optimisation.api.evaluation.EvaluationBudgetExhaustedException;
+import de.evoal.optimisation.api.evaluation.EvaluationService;
+import de.evoal.optimisation.api.execution.ExecutionRecorder;
 import de.evoal.optimisation.api.model.*;
 
 import de.evoal.optimisation.local_search.api.accepting.AcceptingStrategy;
@@ -55,9 +56,17 @@ public class LocalSearchAlgorithm implements OptimisationAlgorithm {
      */
     private TerminationCriterion criterion;
 
+    /**
+     * Evaluates and counts the candidates.
+     */
     @Inject
-    @Named("optimisation-function")
-    private OptimisationFunction fitness;
+    private EvaluationService evaluationService;
+
+    /**
+     * Records the metrics of the iterations.
+     */
+    @Inject
+    private ExecutionRecorder executionRecorder;
 
     @Inject
     private AttributeHelper helper;
@@ -101,7 +110,7 @@ public class LocalSearchAlgorithm implements OptimisationAlgorithm {
     private record Evaluated(TypedEObject candidate, TypedEObject output, OptimisationValue value) {}
 
     private Evaluated evaluate(final TypedEObject candidate) {
-        final TypedEObject output = fitness.evaluate(candidate);
+        final TypedEObject output = evaluationService.evaluate(candidate);
         return new Evaluated(candidate, output, comparator.apply(output));
     }
 
@@ -127,11 +136,19 @@ public class LocalSearchAlgorithm implements OptimisationAlgorithm {
             final OptimisationValue currentValue = current.value();
 
             // 2.2 Search for acceptable candidate (lazily, every neighbour is evaluated once)
-            final Optional<Evaluated> acceptableCandidate =
-                    strategy.neighbours(current.candidate())
-                            .map(this::evaluate)
-                            .filter(c -> acceptingStrategy.acceptCandidate(c.value(), currentValue))
-                            .findFirst();
+            final Optional<Evaluated> acceptableCandidate;
+            try {
+                acceptableCandidate = strategy.neighbours(current.candidate())
+                                              .map(this::evaluate)
+                                              .filter(c -> acceptingStrategy.acceptCandidate(c.value(), currentValue))
+                                              .findFirst();
+            } catch(final EvaluationBudgetExhaustedException e) {
+                log.info("{} Terminating optimisation in generation {}.", e.getMessage(), iterationNumber);
+
+                // the candidate stays the same, record the partial iteration
+                statistics.add(toIteration(iterationNumber, current, false));
+                break;
+            }
 
             // 2.3 No candidate found
             if(acceptableCandidate.isEmpty()) {
@@ -196,6 +213,7 @@ public class LocalSearchAlgorithm implements OptimisationAlgorithm {
         final Iteration state = MemoryFactory.eINSTANCE.createIteration();
         state.setNumber(iteration);
         state.getRanks().add(first);
+        executionRecorder.recordMetrics(state);
 
         return state;
     }

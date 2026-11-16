@@ -1,7 +1,5 @@
 package de.evoal.optimisation.pso.main.impl;
 
-import de.evoal.models.v202704.optimisation.execution.OptimisationFunction;
-
 import de.evoal.core.api.cdi.BeanFactory;
 import de.evoal.core.api.cdi.Component;
 import de.evoal.core.api.utils.AttributeHelper;
@@ -10,6 +8,8 @@ import de.evoal.models.v202704.optimisation.memory.Iteration;
 import de.evoal.models.v202704.optimisation.memory.MemoryFactory;
 import de.evoal.models.v202704.optimisation.memory.Rank;
 import de.evoal.optimisation.api.cdi.TerminationCriterionProducer;
+import de.evoal.optimisation.api.evaluation.EvaluationBudgetExhaustedException;
+import de.evoal.optimisation.api.execution.ExecutionRecorder;
 import de.evoal.optimisation.api.model.*;
 import de.evoal.optimisation.api.statistics.writer.StatisticsWriter;
 import de.evoal.optimisation.pso.api.optimiser.Swarm;
@@ -45,8 +45,11 @@ public class ParticleSwarmAlgorithm implements OptimisationAlgorithm {
 
     private int maximumNumberOfGenerations;
 
-    @Inject @Dependent @Component
-    private OptimisationFunction optimisationFunction;
+    /**
+     * Records the metrics of the iterations.
+     */
+    @Inject
+    private ExecutionRecorder executionRecorder;
 
     @Inject
     private TerminationCriterionProducer producer;
@@ -68,29 +71,57 @@ public class ParticleSwarmAlgorithm implements OptimisationAlgorithm {
         return this;
     }
 
+    /**
+     * Runs an evaluation step of the swarm.
+     *
+     * @param step Initialises or evaluates the swarm.
+     * @return {@code false} if the evaluation budget ran out during the step.
+     */
+    private static boolean evaluateWithinBudget(final Runnable step) {
+        try {
+            step.run();
+
+            return true;
+        } catch(final EvaluationBudgetExhaustedException e) {
+            log.info("{} Terminating optimisation.", e.getMessage());
+
+            return false;
+        }
+    }
+
     @Override
     public void run() {
         int generation = 0;
-        swarm.initialise();
+        boolean withinBudget = evaluateWithinBudget(swarm::initialise);
 
         final SwarmMemory memory = new SwarmMemory(idGenerator);
-        final Particle[] initialParticles = swarm.getParticles();
-        Iteration snapshot = memory.toIteration(generation, initialParticles);
+        Iteration snapshot = toIteration(memory, generation);
 
         statistics.add(snapshot);
-        while(criterion.shouldContinue(snapshot)) {
+        while(withinBudget && criterion.shouldContinue(snapshot)) {
             generation = generation + 1;
 
             log.info("Processing generation: {}", generation);
 
             swarm.move(generation, maximumNumberOfGenerations);
-            swarm.evaluate();
+            withinBudget = evaluateWithinBudget(swarm::evaluate);
 
-            final Particle[] particles = swarm.getParticles();
-            snapshot = memory.toIteration(generation, particles);
+            snapshot = toIteration(memory, generation);
             statistics.add(snapshot);
         }
 
         statistics.write();
+    }
+
+    /**
+     * Creates the memory state of the swarm's current particles and records its metrics.
+     */
+    private Iteration toIteration(final SwarmMemory memory, final int generation) {
+        final Particle[] particles = swarm.getParticles();
+        final Iteration iteration = memory.toIteration(generation, particles);
+
+        executionRecorder.recordMetrics(iteration);
+
+        return iteration;
     }
 }

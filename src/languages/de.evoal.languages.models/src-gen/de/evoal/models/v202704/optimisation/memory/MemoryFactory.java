@@ -104,6 +104,15 @@ public interface MemoryFactory extends EFactory {
 	Recombination createRecombination();
 
 	/**
+	 * Returns a new object of class '<em>Metric Definition</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Metric Definition</em>'.
+	 * @generated
+	 */
+	MetricDefinition createMetricDefinition();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

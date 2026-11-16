@@ -10,17 +10,17 @@ import org.eclipse.emf.ecore.EFactory;
  * The <b>Factory</b> for the model.
  * It provides a create method for each non-abstract class of the model.
  * <!-- end-user-doc -->
- * @see de.evoal.models.v202704.optimisation.optimisationPackage
+ * @see de.evoal.models.v202704.optimisation.OptimisationPackage
  * @generated
  */
-public interface optimisationFactory extends EFactory {
+public interface OptimisationFactory extends EFactory {
 	/**
 	 * The singleton instance of the factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	optimisationFactory eINSTANCE = de.evoal.models.v202704.optimisation.impl.optimisationFactoryImpl.init();
+	OptimisationFactory eINSTANCE = de.evoal.models.v202704.optimisation.impl.OptimisationFactoryImpl.init();
 
 	/**
 	 * Returns the package supported by this factory.
@@ -29,6 +29,6 @@ public interface optimisationFactory extends EFactory {
 	 * @return the package supported by this factory.
 	 * @generated
 	 */
-	optimisationPackage getoptimisationPackage();
+	OptimisationPackage getOptimisationPackage();
 
-} //optimisationFactory
+} //OptimisationFactory

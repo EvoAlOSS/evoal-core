@@ -3,7 +3,7 @@
  */
 package de.evoal.models.v202704.optimisation.impl;
 
-import de.evoal.models.v202704.optimisation.optimisationPackage;
+import de.evoal.models.v202704.optimisation.OptimisationPackage;
 
 import java.lang.Comparable;
 
@@ -35,7 +35,7 @@ public abstract class ComparableImpl<T> extends MinimalEObjectImpl.Container imp
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return optimisationPackage.Literals.COMPARABLE;
+		return OptimisationPackage.Literals.COMPARABLE;
 	}
 
 } //ComparableImpl

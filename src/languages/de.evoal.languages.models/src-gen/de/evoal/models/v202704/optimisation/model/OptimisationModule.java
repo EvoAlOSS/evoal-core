@@ -6,6 +6,7 @@ package de.evoal.models.v202704.optimisation.model;
 import de.evoal.models.v202704.core.Configuration;
 
 import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EObject;
 
 /**

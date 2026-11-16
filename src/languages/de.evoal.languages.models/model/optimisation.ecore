@@ -9,6 +9,13 @@
   <eClassifiers xsi:type="ecore:EDataType" name="Space" instanceClassName="de.evoal.models.core.ecore.Space"
       serializable="false"/>
   <eClassifiers xsi:type="ecore:EDataType" name="TypedEObject" instanceClassName="de.evoal.models.core.ecore.TypedEObject"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Number" instanceClassName="java.lang.Number">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="*&#xA;A metric value: a {@link Long} for integral values, a {@link Double} for real values.&#xA;"/>
+      <details key="create" value="if(it == null) {&#xA;    return null;&#xA;}&#xA;&#xA;try {&#xA;    return Long.valueOf(it);&#xA;} catch(final NumberFormatException e) {&#xA;    return Double.valueOf(it);&#xA;}&#xA;"/>
+      <details key="convert" value="if(it == null) {&#xA;    return null;&#xA;}&#xA;&#xA;return it.toString();&#xA;"/>
+    </eAnnotations>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Comparable" instanceClassName="java.lang.Comparable"
       abstract="true">
     <eTypeParameters name="T"/>
@@ -46,6 +53,18 @@
           eType="#//memory/State" containment="true">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
           <details key="documentation" value="*&#xA;The memory states of the execution.&#xA;"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="metricDefinitions" upperBound="-1"
+          eType="#//memory/MetricDefinition" containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="*&#xA;The metrics this execution and its iterations record. Every key of&#xA;  {@link #getMetrics()} and of {@link Iteration#getMetrics()} is defined here.&#xA;"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="metrics" upperBound="-1"
+          eType="#//memory/MetricEntry" containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="*&#xA;The values of the metrics that describe the whole execution, e.g.,&#xA;  limits, by metric name. The metrics are defined in&#xA;  {@link #getMetricDefinitions()} with the scope {@link MetricScope#EXECUTION}.&#xA;"/>
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>
@@ -98,6 +117,12 @@
           eType="#//memory/Rank" containment="true">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
           <details key="documentation" value="*&#xA;The final individuals of the iteration.&#xA;"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="metrics" upperBound="-1"
+          eType="#//memory/MetricEntry" containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="*&#xA;The values of the metrics at the end of the iteration, by metric&#xA;  name. The metrics are defined in {@link Execution#getMetricDefinitions()}&#xA;  with the scope {@link MetricScope#ITERATION}.&#xA;"/>
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>
@@ -207,6 +232,102 @@
           <details key="documentation" value="*&#xA;The recombination that is the related one.&#xA;"/>
         </eAnnotations>
       </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="MetricEntry" instanceClassName="java.util.Map$Entry">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="*&#xA;A metric value of an iteration, by metric name.&#xA;"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="*&#xA;The name of the metric.&#xA;"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1"
+          eType="#//Number">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="*&#xA;The value of the metric.&#xA;"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="MetricDefinition">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="*&#xA;Defines a metric the iterations of an execution record.&#xA;"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="*&#xA;The unique name of the metric, e.g., &lt;code>evaluations.real&lt;/code>.&#xA;"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="kind" lowerBound="1"
+          eType="#//memory/MetricKind">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="*&#xA;How the metric changes over the iterations.&#xA;"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="valueType" lowerBound="1"
+          eType="#//memory/MetricValueType">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="*&#xA;The type of the metric's values.&#xA;"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="scope" lowerBound="1"
+          eType="#//memory/MetricScope">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="*&#xA;Where the values of the metric are recorded.&#xA;"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="*&#xA;What the metric measures.&#xA;"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="MetricKind">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="*&#xA;How a metric changes over the iterations.&#xA;"/>
+      </eAnnotations>
+      <eLiterals name="Counter">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="*&#xA;The value never decreases, e.g., the number of evaluations.&#xA;"/>
+        </eAnnotations>
+      </eLiterals>
+      <eLiterals name="Measure" value="1">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="*&#xA;The value can change arbitrarily, e.g., the diversity of a population.&#xA;"/>
+        </eAnnotations>
+      </eLiterals>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="MetricValueType">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="*&#xA;The type of a metric's values.&#xA;"/>
+      </eAnnotations>
+      <eLiterals name="Integer">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="*&#xA;Integral values, stored as {@link Long}.&#xA;"/>
+        </eAnnotations>
+      </eLiterals>
+      <eLiterals name="Real" value="1">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="*&#xA;Real values, stored as {@link Double}.&#xA;"/>
+        </eAnnotations>
+      </eLiterals>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="MetricScope">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="*&#xA;Where the values of a metric are recorded.&#xA;"/>
+      </eAnnotations>
+      <eLiterals name="Execution">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="*&#xA;Once for the whole execution ({@link Execution#getMetrics()}), e.g., a limit.&#xA;"/>
+        </eAnnotations>
+      </eLiterals>
+      <eLiterals name="Iteration" value="1">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="*&#xA;In every iteration ({@link Iteration#getMetrics()}), e.g., the number of evaluations so far.&#xA;"/>
+        </eAnnotations>
+      </eLiterals>
     </eClassifiers>
   </eSubpackages>
   <eSubpackages name="execution" nsURI="https://evoal.de/v202704/models/optimisation/execution"

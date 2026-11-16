@@ -3,7 +3,7 @@
  */
 package de.evoal.models.v202704.optimisation.util;
 
-import de.evoal.models.v202704.optimisation.optimisationPackage;
+import de.evoal.models.v202704.optimisation.OptimisationPackage;
 
 import java.util.List;
 
@@ -24,17 +24,17 @@ import org.eclipse.emf.ecore.util.Switch;
  * until a non-null result is returned,
  * which is the result of the switch.
  * <!-- end-user-doc -->
- * @see de.evoal.models.v202704.optimisation.optimisationPackage
+ * @see de.evoal.models.v202704.optimisation.OptimisationPackage
  * @generated
  */
-public class optimisationSwitch<T1> extends Switch<T1> {
+public class OptimisationSwitch<T1> extends Switch<T1> {
 	/**
 	 * The cached model package
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected static optimisationPackage modelPackage;
+	protected static OptimisationPackage modelPackage;
 
 	/**
 	 * Creates an instance of the switch.
@@ -42,9 +42,9 @@ public class optimisationSwitch<T1> extends Switch<T1> {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public optimisationSwitch() {
+	public OptimisationSwitch() {
 		if (modelPackage == null) {
-			modelPackage = optimisationPackage.eINSTANCE;
+			modelPackage = OptimisationPackage.eINSTANCE;
 		}
 	}
 
@@ -71,19 +71,19 @@ public class optimisationSwitch<T1> extends Switch<T1> {
 	@Override
 	protected T1 doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case optimisationPackage.COMPARABLE: {
+			case OptimisationPackage.COMPARABLE: {
 				Comparable<?> comparable = (Comparable<?>)theEObject;
 				T1 result = caseComparable(comparable);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case optimisationPackage.STREAM: {
+			case OptimisationPackage.STREAM: {
 				Stream<?> stream = (Stream<?>)theEObject;
 				T1 result = caseStream(stream);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case optimisationPackage.LIST: {
+			case OptimisationPackage.LIST: {
 				List<?> list = (List<?>)theEObject;
 				T1 result = caseList(list);
 				if (result == null) result = defaultCase(theEObject);
@@ -154,4 +154,4 @@ public class optimisationSwitch<T1> extends Switch<T1> {
 		return null;
 	}
 
-} //optimisationSwitch
+} //OptimisationSwitch
