@@ -51,7 +51,8 @@ public class ThresholdAcceptingStrategy implements AcceptingStrategy {
         double dist = distAlt.distanceFrom(currentValue);
         log.debug("distance: {} threshold: {}", dist, threshold);
 
-        return (dist > 0 && dist < threshold);
+        // the distance is not negative; equal neighbours (distance 0) are accepted as well
+        return dist < threshold;
     }
 
     @Override

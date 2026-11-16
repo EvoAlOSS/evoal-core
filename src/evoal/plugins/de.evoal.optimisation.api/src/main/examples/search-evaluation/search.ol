@@ -21,7 +21,8 @@ module 'search' {
 		and minimise data 'y:0'
 
 		// one row per iteration: the current candidate
-		document ['candidates-per-iteration' {}].
+		// the best candidate found so far; the last row of a run is its result
+		document ['best-candidate-so-far' {}].
 	}
 
 	configure 'local-search' for 'rastrigin' {
@@ -37,8 +38,8 @@ module 'search' {
 		'accepting-strategy' := 'simulated-annealing' {
 			'initial-temperature' := 40.0;
 
-			// the temperature falls by 2% per iteration (to about 0.1 after 300 iterations)
-			'decreasing-function' := 'geometric-decrease' { 'decrease-rate' := 0.98; };
+			// the temperature falls by 0.2% per iteration (to about 0.1 after 3000 iterations)
+			'decreasing-function' := 'geometric-decrease' { 'decrease-rate' := 0.998; };
 			'acceptance-probability' := 'exponential-probability' {};
 		};
 
@@ -53,6 +54,6 @@ module 'search' {
 		'comparator' := 'numeric-comparator' {};
 		'optimisation-function' := 'problem-function' {};
 
-		'stopping-criteria' := [ 'iteration-count' { 'maximum-iterations' := 300; } ];
+		'stopping-criteria' := [ 'iteration-count' { 'maximum-iterations' := 3000; } ];
 	}
 }

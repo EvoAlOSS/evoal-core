@@ -49,7 +49,7 @@ EVOAL_SEED=42 ./01-run-search.sh
 ## What to look at
 
 - `output/search/best-candidate-per-iteration.csv`: the best particle of every
-  iteration. `y:0` falls from about 8 to below 0.001 within the 100 iterations,
+  iteration. `y:0` falls from about 8 to about 0.001 within the 100 iterations,
   and `x:0`, `x:1` approach 0.
 - `output/search/candidates-per-iteration.csv`: all 20 particles of every
   iteration (`generation`). Plot `x:0` against `x:1` for some generations:

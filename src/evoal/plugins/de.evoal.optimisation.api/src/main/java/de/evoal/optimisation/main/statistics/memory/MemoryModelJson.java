@@ -460,6 +460,12 @@ public class MemoryModelJson {
         final ArrayNode ranks = toRanks(iteration.getRanks());
         document.set("ranks", ranks);
 
+        // the best individual can belong to an earlier iteration, so it is written as id only
+        final Individual bestSoFar = iteration.getBestSoFar();
+        if(bestSoFar != null) {
+            document.put("bestSoFar", bestSoFar.getId());
+        }
+
         final ObjectNode metrics = toMetrics(iteration.getMetrics());
         document.set("metrics", metrics);
 

@@ -34,7 +34,10 @@ module de.evoal.optimisation.local_search.optimisation {
     }
 
     /**
-     * Accepts worser candidates based on a threshold. The threshold decreases over time.
+     * Accepts a neighbour that is better, equal, or worse by less than a threshold
+     *   (|difference| < threshold). The threshold decreases over time. The neighbours are
+     *   offered in the order of the neighbour choosing strategy; if all of them are
+     *   rejected, the search ends, because the threshold only falls.
      */
     type 'threshold-accepting' extends 'accepting-strategy' {
     	/**
@@ -51,6 +54,11 @@ module de.evoal.optimisation.local_search.optimisation {
     /**
      * Simulated annealing is an acceptance probability function. The probability is affected
      *   by the temperature, which decreases according to a cooling schedule.
+     *
+     * As in the textbook version, every iteration tests a single neighbour, chosen at
+     *   random from all neighbours (the 'neighbour-order' is not used). A better
+     *   neighbour is always accepted, a worse one with the acceptance probability. If the
+     *   neighbour is rejected, the candidate stays and the next iteration tries again.
      */
     type 'simulated-annealing' extends 'accepting-strategy'{
     	/**
@@ -105,6 +113,8 @@ module de.evoal.optimisation.local_search.optimisation {
 	    /**
 	    * Order in which the neighbours are offered to the accepting strategy.
 	    * The local search moves to the first neighbour that is accepted.
+	    * Simulated annealing tests a single random neighbour per iteration and
+	    * does not use the order.
 	    */
 	    'neighbour-order' : enum 'neighbour-order' := 'neighbour-order.random';
 	}
@@ -112,12 +122,14 @@ module de.evoal.optimisation.local_search.optimisation {
 	/**
 	 * Order of the neighbours of the 'manual-strategy'.
 	 *
-	 *   random: a new random order in every iteration (textbook variant). Simulated
-	 *           annealing and threshold accepting then accept a random neighbour,
-	 *           hill climbing moves to a random improving neighbour.
-	 *   fixed:  always the same order, the first variable changes fastest. Simulated
-	 *           annealing and threshold accepting then tend to walk in the direction
-	 *           of the first neighbours, because they accept worse neighbours, too.
+	 *   random: a new random order in every iteration. Threshold accepting then
+	 *           accepts a random acceptable neighbour, hill climbing moves to a
+	 *           random improving neighbour.
+	 *   fixed:  always the same order, the first variable changes fastest. Threshold
+	 *           accepting then tends to walk in the direction of the first
+	 *           neighbours, because it accepts worse neighbours, too.
+	 *
+	 * Simulated annealing does not use the order.
 	 */
 	nominal enum 'neighbour-order' ( random, fixed );
 
@@ -150,7 +162,8 @@ module de.evoal.optimisation.local_search.optimisation {
     }
 
     /**
-    * T(k) = T_0/log(k+1)
+    * T(k) = T_0 / ln(k + e). The shift by e makes T(0) = T_0, and the value falls
+    *   from the first iteration on.
     */
     type 'logarithmic-decrease' extends 'decreasing-strategy' {}
 

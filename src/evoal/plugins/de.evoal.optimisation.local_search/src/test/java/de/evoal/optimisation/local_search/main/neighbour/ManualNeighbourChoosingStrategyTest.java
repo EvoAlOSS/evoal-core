@@ -64,11 +64,21 @@ public class ManualNeighbourChoosingStrategyTest {
     }
 
     /**
+     * Creates the strategy with the fixed neighbour order and the random generator of the
+     *   given seed, which only {@code randomNeighbour} uses.
+     */
+    private ManualNeighbourChoosingStrategy fixedStrategy(final long seed, final Space space, final Object... steps) throws Exception {
+        final ManualNeighbourChoosingStrategy strategy = strategy(space, steps);
+        inject(strategy, "random", RandomService.withSeed(seed).random(ManualNeighbourChoosingStrategy.NAME));
+        return strategy;
+    }
+
+    /**
      * Creates the strategy with the random neighbour order of the given seed.
      */
     private ManualNeighbourChoosingStrategy randomStrategy(final long seed, final Space space, final Object... steps) throws Exception {
-        final ManualNeighbourChoosingStrategy strategy = strategy(space, steps);
-        inject(strategy, "random", RandomService.withSeed(seed).random(ManualNeighbourChoosingStrategy.NAME));
+        final ManualNeighbourChoosingStrategy strategy = fixedStrategy(seed, space, steps);
+        inject(strategy, "randomOrder", true);
         return strategy;
     }
 
@@ -144,6 +154,25 @@ public class ManualNeighbourChoosingStrategyTest {
         }
 
         @Test
+        public void aRandomNeighbourIsRandomEvenWithTheFixedOrder() throws Exception {
+            // given
+            final ManualNeighbourChoosingStrategy strategy = fixedStrategy(42, space, x, 0.5, y, 1.0);
+            final Set<List<Object>> allNeighbours = valuesOf(strategy.neighbours(base).toList(), x, y).stream()
+                                                                                                   .collect(Collectors.toSet());
+
+            // when
+            final Set<List<Object>> chosen = new java.util.HashSet<>();
+            for(int i = 0; i < 200; ++i) {
+                final TypedEObject neighbour = strategy.randomNeighbour(base).orElseThrow();
+                chosen.add(List.of(neighbour.eGet(x), neighbour.eGet(y)));
+            }
+
+            // then: every choice is a neighbour, and 200 draws hit (almost surely) all 8 of them
+            Assertions.assertTrue(allNeighbours.containsAll(chosen));
+            Assertions.assertEquals(allNeighbours, chosen);
+        }
+
+        @Test
         public void theRandomOrderIsReproducibleWithTheSameSeed() throws Exception {
             // when
             final List<List<Object>> first = valuesOf(randomStrategy(42, space, x, 0.5, y, 1.0).neighbours(base).toList(), x, y);
@@ -203,6 +232,42 @@ public class ManualNeighbourChoosingStrategyTest {
 
             // then: 1.0 is excluded by the upper boundary, 0.5 is the unchanged candidate
             Assertions.assertEquals(List.of(0.0), values);
+        }
+
+        @Test
+        public void aRandomNeighbourIsWithinTheBoundaries() throws Exception {
+            // given
+            final EAttribute x = feature("x", EcorePackage.Literals.EDOUBLE);
+            FeatureBoundaries.annotate(x, new Extracted(Optional.of(new Bound(-1.0, true)), Optional.of(new Bound(1.0, false))));
+            final Space space = new Space(eClass);
+
+            final TypedEObject base = space.newEObject();
+            base.eSet(x, 0.5);
+
+            // when
+            final ManualNeighbourChoosingStrategy strategy = fixedStrategy(42, space, x, 0.5);
+
+            // then: the only neighbour within the boundaries is 0.0
+            for(int i = 0; i < 10; ++i) {
+                Assertions.assertEquals(0.0, strategy.randomNeighbour(base).orElseThrow().eGet(x));
+            }
+        }
+
+        @Test
+        public void thereIsNoRandomNeighbourIfAllAreOutsideOfTheBoundaries() throws Exception {
+            // given
+            final EAttribute x = feature("x", EcorePackage.Literals.EDOUBLE);
+            FeatureBoundaries.annotate(x, new Extracted(Optional.of(new Bound(0.5, true)), Optional.of(new Bound(0.5, true))));
+            final Space space = new Space(eClass);
+
+            final TypedEObject base = space.newEObject();
+            base.eSet(x, 0.5);
+
+            // when
+            final Optional<TypedEObject> neighbour = fixedStrategy(42, space, x, 0.5).randomNeighbour(base);
+
+            // then
+            Assertions.assertTrue(neighbour.isEmpty());
         }
 
         @Test

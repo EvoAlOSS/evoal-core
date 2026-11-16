@@ -4,10 +4,24 @@ import "definitions" from de.evoal.optimisation.core;
 import "definitions" from 'de.evoal.core.base';
 
 module de.evoal.optimisation.pso.optimisation {
+	/**
+	 * How a particle is kept within the boundaries of a variable after a move.
+	 *
+	 *   wrap:   the position enters the range from the other side (periodic
+	 *           boundaries); the velocity is kept.
+	 *   bounce: the position is reflected at the boundary and the velocity
+	 *           component is negated.
+	 *   stick:  the position is set to the boundary and the velocity component
+	 *           to 0.
+	 */
 	nominal enum 'boundary-handling' ( wrap, bounce, stick );
 	
 	nominal enum 'topology' ( global, star, ring, square );
 	
+	/**
+	 * Particle swarm optimisation. Supports only real search variables; the
+	 *   memory model's bestSoFar is the best personal best of the swarm.
+	 */
 	type 'particle-swarm-optimisation' extends 'algorithm' {
 	    'swarm' : instance swarm;
 	    'size-of-population'  : int;
@@ -23,6 +37,11 @@ module de.evoal.optimisation.pso.optimisation {
 	type 'default-swarm' extends 'swarm' {
 	}
 
+	/**
+	 * Swarm that switches between attraction and repulsion depending on its
+	 *   diversity (Riget and Vesterstrom). Requires the 'arpso-mover' and a lower and
+	 *   an upper boundary for every search variable.
+	 */
 	type 'arpso-swarm' extends 'swarm' {
         'diversity-low' : real; //example: 0.000005
         'diversity-high' : real; //example: 0.25
@@ -74,11 +93,19 @@ module de.evoal.optimisation.pso.optimisation {
      */
 	type 'fips-mover' extends 'pso-mover' {
 	    /**
-	     * Parameter phi of FIPS mover.
+	     * Parameter phi of FIPS mover. The constriction factor
+	     *   2 / |2 - phi - sqrt(phi^2 - 4 phi)| is only defined for phi >= 4.
 	     */
+	    @LowerBoundary { boundary := 4.0; inclusive := true; }
 	    phi : real;
 	}
 
+	/**
+	 * PSO mover with the constriction factor of Clerc and Kennedy. The factor
+	 *   2 / |2 - phi - sqrt(phi^2 - 4 phi)| with phi = c1 + c2 is only defined for
+	 *   phi >= 4.
+	 */
+	@MultiVariateConstraint { 'expression' := self.'c1' + self.'c2' >= 4.0; }
 	type 'constriction-factor-mover' extends 'pso-mover' {
          /**
           * Parameter c1 of basic PSO kinematic equation. Weights influence of individual memory.

@@ -125,6 +125,11 @@
           <details key="documentation" value="*&#xA;The values of the metrics at the end of the iteration, by metric&#xA;  name. The metrics are defined in {@link Execution#getMetricDefinitions()}&#xA;  with the scope {@link MetricScope#ITERATION}.&#xA;"/>
         </eAnnotations>
       </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="bestSoFar" eType="#//memory/Individual">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="*&#xA;The best individual the algorithm has found up to and including&#xA;  this iteration. It is contained in this or an earlier iteration,&#xA;  e.g., if a local search moved to a worse candidate. Not set if the&#xA;  algorithm does not track the best individual.&#xA;"/>
+        </eAnnotations>
+      </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="IterationStep" abstract="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">

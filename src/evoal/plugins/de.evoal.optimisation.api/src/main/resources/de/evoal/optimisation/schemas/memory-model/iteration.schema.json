@@ -52,6 +52,10 @@
       "type": "array",
       "items": { "$ref": "common.schema.json#/$defs/rank" }
     },
+    "bestSoFar": {
+      "description": "The id of the best individual found up to and including this iteration. It may belong to an earlier iteration. Missing if the algorithm does not track the best individual.",
+      "$ref": "common.schema.json#/$defs/individualId"
+    },
     "metrics": {
       "description": "Values of the iteration metrics (scope 'iteration') at the end of the iteration.",
       "$ref": "common.schema.json#/$defs/metrics"

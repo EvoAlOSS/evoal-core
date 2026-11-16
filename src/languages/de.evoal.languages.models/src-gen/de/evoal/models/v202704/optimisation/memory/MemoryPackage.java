@@ -192,13 +192,22 @@ public interface MemoryPackage extends EPackage {
 	int ITERATION__METRICS = STATE_FEATURE_COUNT + 3;
 
 	/**
+	 * The feature id for the '<em><b>Best So Far</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITERATION__BEST_SO_FAR = STATE_FEATURE_COUNT + 4;
+
+	/**
 	 * The number of structural features of the '<em>Iteration</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ITERATION_FEATURE_COUNT = STATE_FEATURE_COUNT + 4;
+	int ITERATION_FEATURE_COUNT = STATE_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.models.v202704.optimisation.memory.impl.IterationStepImpl <em>Iteration Step</em>}' class.
@@ -777,6 +786,17 @@ public interface MemoryPackage extends EPackage {
 	EReference getIteration_Metrics();
 
 	/**
+	 * Returns the meta object for the reference '{@link de.evoal.models.v202704.optimisation.memory.Iteration#getBestSoFar <em>Best So Far</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Best So Far</em>'.
+	 * @see de.evoal.models.v202704.optimisation.memory.Iteration#getBestSoFar()
+	 * @see #getIteration()
+	 * @generated
+	 */
+	EReference getIteration_BestSoFar();
+
+	/**
 	 * Returns the meta object for class '{@link de.evoal.models.v202704.optimisation.memory.IterationStep <em>Iteration Step</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1239,6 +1259,14 @@ public interface MemoryPackage extends EPackage {
 		 * @generated
 		 */
 		EReference ITERATION__METRICS = eINSTANCE.getIteration_Metrics();
+
+		/**
+		 * The meta object literal for the '<em><b>Best So Far</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ITERATION__BEST_SO_FAR = eINSTANCE.getIteration_BestSoFar();
 
 		/**
 		 * The meta object literal for the '{@link de.evoal.models.v202704.optimisation.memory.impl.IterationStepImpl <em>Iteration Step</em>}' class.

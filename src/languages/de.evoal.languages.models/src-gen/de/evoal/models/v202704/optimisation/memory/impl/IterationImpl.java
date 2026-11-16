@@ -41,6 +41,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link de.evoal.models.v202704.optimisation.memory.impl.IterationImpl#getSteps <em>Steps</em>}</li>
  *   <li>{@link de.evoal.models.v202704.optimisation.memory.impl.IterationImpl#getRanks <em>Ranks</em>}</li>
  *   <li>{@link de.evoal.models.v202704.optimisation.memory.impl.IterationImpl#getMetrics <em>Metrics</em>}</li>
+ *   <li>{@link de.evoal.models.v202704.optimisation.memory.impl.IterationImpl#getBestSoFar <em>Best So Far</em>}</li>
  * </ul>
  *
  * @generated
@@ -95,6 +96,16 @@ public class IterationImpl extends StateImpl implements Iteration {
 	 * @ordered
 	 */
 	protected EMap<String, Number> metrics;
+
+	/**
+	 * The cached value of the '{@link #getBestSoFar() <em>Best So Far</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getBestSoFar()
+	 * @generated
+	 * @ordered
+	 */
+	protected Individual bestSoFar;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -183,6 +194,46 @@ public class IterationImpl extends StateImpl implements Iteration {
 	 * @generated
 	 */
 	@Override
+	public Individual getBestSoFar() {
+		if (bestSoFar != null && bestSoFar.eIsProxy()) {
+			InternalEObject oldBestSoFar = (InternalEObject)bestSoFar;
+			bestSoFar = (Individual)eResolveProxy(oldBestSoFar);
+			if (bestSoFar != oldBestSoFar) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, MemoryPackage.ITERATION__BEST_SO_FAR, oldBestSoFar, bestSoFar));
+			}
+		}
+		return bestSoFar;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Individual basicGetBestSoFar() {
+		return bestSoFar;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setBestSoFar(Individual newBestSoFar) {
+		Individual oldBestSoFar = bestSoFar;
+		bestSoFar = newBestSoFar;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, MemoryPackage.ITERATION__BEST_SO_FAR, oldBestSoFar, bestSoFar));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Stream<Individual> bestIndividuals() {
 		return getRanks()
 		.get(0)
@@ -250,6 +301,9 @@ public class IterationImpl extends StateImpl implements Iteration {
 			case MemoryPackage.ITERATION__METRICS:
 				if (coreType) return getMetrics();
 				else return getMetrics().map();
+			case MemoryPackage.ITERATION__BEST_SO_FAR:
+				if (resolve) return getBestSoFar();
+				return basicGetBestSoFar();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -277,6 +331,9 @@ public class IterationImpl extends StateImpl implements Iteration {
 			case MemoryPackage.ITERATION__METRICS:
 				((EStructuralFeature.Setting)getMetrics()).set(newValue);
 				return;
+			case MemoryPackage.ITERATION__BEST_SO_FAR:
+				setBestSoFar((Individual)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -301,6 +358,9 @@ public class IterationImpl extends StateImpl implements Iteration {
 			case MemoryPackage.ITERATION__METRICS:
 				getMetrics().clear();
 				return;
+			case MemoryPackage.ITERATION__BEST_SO_FAR:
+				setBestSoFar((Individual)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -321,6 +381,8 @@ public class IterationImpl extends StateImpl implements Iteration {
 				return ranks != null && !ranks.isEmpty();
 			case MemoryPackage.ITERATION__METRICS:
 				return metrics != null && !metrics.isEmpty();
+			case MemoryPackage.ITERATION__BEST_SO_FAR:
+				return bestSoFar != null;
 		}
 		return super.eIsSet(featureID);
 	}

@@ -216,6 +216,30 @@ public class MemoryModelJsonTest {
             Assertions.assertEquals("[{\"kind\":\"recombination\",\"targets\":[0,1],\"partner\":3}]",
                                     document.get("individuals").get(0).get("relationships").toString());
         }
+
+        @Test
+        public void theBestSoFarIsWrittenAsIdEvenFromAnEarlierIteration() {
+            // given
+            final Individual best = MemoryModels.individual(0, new double[] {0.0, 0.0}, 0.0);
+            final Individual worse = MemoryModels.individual(1, new double[] {0.5, 0.0}, 0.25);
+            final Iteration iteration = MemoryModels.iteration(1, worse);
+            iteration.setBestSoFar(best);
+
+            // when
+            final ObjectNode document = json.toIteration(iteration);
+
+            // then
+            Assertions.assertEquals(0, document.get("bestSoFar").intValue());
+        }
+
+        @Test
+        public void anIterationWithoutBestSoFarHasNoSuchField() {
+            // when
+            final ObjectNode document = json.toIteration(MemoryModels.iteration(0, MemoryModels.individual(0, new double[] {0.0, 0.0}, 0.0)));
+
+            // then
+            Assertions.assertFalse(document.has("bestSoFar"));
+        }
     }
 
     @Nested

@@ -35,4 +35,14 @@ public interface AcceptingStrategy extends EvoalComponent<AcceptingStrategy> {
      * @param iteration Iteration number.
      */
     public default void setIteration(final int iteration) {}
+
+    /**
+     * Iff the local search offers only a single, randomly chosen neighbour per iteration
+     *   (as in simulated annealing) instead of all neighbours until one is accepted.
+     *
+     * @return {@code false} (default): all neighbours are offered, in the configured order.
+     */
+    public default boolean testsSingleNeighbour() {
+        return false;
+    }
 }

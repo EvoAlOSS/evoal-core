@@ -23,6 +23,7 @@ module 'search' {
 		// every statistics writer that EvoAl offers
 		document [
 			'best-candidate-per-iteration' {},
+			'best-candidate-so-far' {},
 			'candidates-per-iteration' {},
 			'metrics-per-iteration' {},
 			'memory-model' {}

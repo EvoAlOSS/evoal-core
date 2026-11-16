@@ -10,6 +10,7 @@ files stay small enough to read.
 | Writer | Output | Content |
 |---|---|---|
 | `'best-candidate-per-iteration'` | `best-candidate-per-iteration.csv` | the best individuals (rank 0) of every iteration |
+| `'best-candidate-so-far'` | `best-candidate-so-far.csv` | the best individual found up to every iteration |
 | `'candidates-per-iteration'` | `candidates-per-iteration.csv` | all individuals of every iteration |
 | `'metrics-per-iteration'` | `metrics-per-iteration.csv` | the metrics of every iteration, e.g., the number of evaluations |
 | `'memory-model'` | `memory-model/*.json` | the whole run: individuals, their origin, ranks and metrics |
@@ -45,6 +46,10 @@ All files are in `output/search/`.
 - `best-candidate-per-iteration.csv`: the same columns, but only the best
   individual of every iteration. Its `individual-id` is also in
   `candidates-per-iteration.csv`: the same individual has the same id in all files.
+- `best-candidate-so-far.csv`: the same columns, but the best individual found up
+  to and including every iteration. If the swarm gets worse, the row keeps the
+  earlier individual (with its earlier `individual-id`), so the values never get
+  worse.
 - `metrics-per-iteration.csv`: `evaluations.real` is the number of evaluations of
   the optimisation function so far. It grows by 5 per iteration, one per particle.
   `evaluations.surrogate` counts the evaluations of a surrogate model (none here).
@@ -59,7 +64,8 @@ All files are in `output/search/`.
     `mutation` to its individual of the previous iteration. A particle whose
     position did not change has the relationship `identity`. Following the
     relationships backwards gives the path of a particle through the search
-    space.
+    space. `bestSoFar` is the id of the best individual found so far; it can
+    belong to an earlier iteration.
   - `execution-finished.json` (after the last iteration): the number of
     iterations and the ids of the best individuals. Its existence shows that the
     run is complete.

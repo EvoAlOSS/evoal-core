@@ -39,6 +39,7 @@ import de.evoal.optimisation.local_search.api.neighbour.NeighbourChoosingStrateg
  * The neighbours are generated in a new random order for every call of
  * {@link #neighbours(TypedEObject)} (default) or in a fixed order (configuration
  * {@code 'neighbour-order'}). The local search moves to the first accepted neighbour.
+ * {@link #randomNeighbour(TypedEObject)} always chooses at random.
  */
 @Named(ManualNeighbourChoosingStrategy.NAME)
 @Dependent
@@ -66,9 +67,14 @@ public class ManualNeighbourChoosingStrategy implements NeighbourChoosingStrateg
     private RandomService randomService;
 
     /**
-     * The generator of the random order, {@code null} for the fixed order.
+     * The generator of the random order and of {@link #randomNeighbour}.
      */
     private RandomGenerator random;
+
+    /**
+     * Whether {@link #neighbours} returns the neighbours in a random order ({@code 'neighbour-order'}).
+     */
+    private boolean randomOrder;
 
     /**
      * The step sizes, already converted to the types of the features.
@@ -80,10 +86,24 @@ public class ManualNeighbourChoosingStrategy implements NeighbourChoosingStrateg
 
     @Override
     public Stream<TypedEObject> neighbours(final TypedEObject currentBestCandidate) {
+        return neighbours(currentBestCandidate, randomOrder);
+    }
+
+    /**
+     * The first neighbour of a random order is uniformly distributed over all neighbours,
+     *   since every order is equally likely and the neighbours outside of the boundaries are
+     *   skipped.
+     */
+    @Override
+    public Optional<TypedEObject> randomNeighbour(final TypedEObject candidate) {
+        return neighbours(candidate, true).findFirst();
+    }
+
+    private Stream<TypedEObject> neighbours(final TypedEObject currentBestCandidate, final boolean inRandomOrder) {
         final EStructuralFeature[] orderedFeatures = space.toArray(new EStructuralFeature[0]);
         final int numberOfNeighbours = powerOfThree(orderedFeatures.length);
-        final IntStream indices = random == null ? IntStream.range(0, numberOfNeighbours)
-                                                 : RandomOrder.of(numberOfNeighbours, random);
+        final IntStream indices = inRandomOrder ? RandomOrder.of(numberOfNeighbours, random)
+                                                : IntStream.range(0, numberOfNeighbours);
 
         return indices.mapToObj(index -> toOperations(index, orderedFeatures.length))
                         .filter(ManualNeighbourChoosingStrategy::changesCandidate)
@@ -97,9 +117,8 @@ public class ManualNeighbourChoosingStrategy implements NeighbourChoosingStrateg
         this.stepValues = variableHelper.fromVariables(sv, space);
 
         final EEnumLiteral order = helper.lookup(config, "neighbour-order");
-        if(!FIXED_ORDER.equals(order.getName())) {
-            this.random = randomService.random(NAME);
-        }
+        this.randomOrder = !FIXED_ORDER.equals(order.getName());
+        this.random = randomService.random(NAME);
 
         return this;
     }

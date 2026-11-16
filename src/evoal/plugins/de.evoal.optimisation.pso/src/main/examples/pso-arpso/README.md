@@ -46,8 +46,8 @@ EVOAL_SEED=42 ./01-run-search.sh
 
 - The log: every switch is logged as `Repelling at iteration: …` and
   `Attracting at iteration: …`. With `EVOAL_SEED=42`, the swarm switches to
-  repulsion at iterations 66, 100, 125, 150, 175 and 198, and back to
-  attraction a few iterations later each time.
+  repulsion at iterations 92, 124, 155 and 190, and back to attraction 6 to 11
+  iterations later each time.
 - `output/search/candidates-per-iteration.csv`: plot `x:0` against `x:1` for
   the generations around a switch. During repulsion, the particles fly apart;
   during attraction, they contract again.

@@ -99,29 +99,14 @@ public class FIPSMover implements Mover {
 
             double next_v = Math.clamp(k * (v + sum), -max_v, max_v);
 
-            double next_x = x + next_v;
+            final BoundaryHandling.Moved moved = BoundaryHandling.apply(boundaryType, x + next_v, next_v, minimum, maximum);
 
-            if (next_x > maximum) {
-                next_x = switch (boundaryType) {
-                    case BOUNCE -> 2. * maximum - next_x;
-                    case STICK  -> maximum;
-                    case WRAP   ->  -max_v + next_x;
-                };
-            } else if (next_x < minimum) {
-                next_x = switch (boundaryType) {
-                    case BOUNCE -> 2. * minimum - next_x;
-                    case STICK  -> minimum;
-                    case WRAP   -> max_v + next_x;
-                };
-            }
-
-
-            if (next_x < minimum || next_x > maximum)
+            if (moved.position() < minimum || moved.position() > maximum)
             {
-                log.error("Position {} value of {} is out of bounds [min,max]: [{}, {}].", i, next_x, minimum, maximum);
+                log.error("Position {} value of {} is out of bounds [min,max]: [{}, {}].", i, moved.position(), minimum, maximum);
             }
-            nextPosition.eSet(feature, next_x);
-            next_velocity[i] = next_v;
+            nextPosition.eSet(feature, moved.position());
+            next_velocity[i] = moved.velocity();
 
             i += 1;
         }

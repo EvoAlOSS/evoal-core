@@ -48,6 +48,18 @@ public class FeatureBoundaries {
     public boolean contains(final EStructuralFeature specification) { return cache.containsKey(specification); }
 
     /**
+     * @return {@code true} if the feature has a lower and an upper boundary in its data
+     *   description; the range of the feature's type does not count as a boundary.
+     */
+    public static boolean isBounded(final EStructuralFeature feature) {
+        final EAnnotation annotation = feature.getEAnnotation(BOUNDARIES_SOURCE);
+
+        return annotation != null
+            && annotation.getDetails().containsKey(LOWER)
+            && annotation.getDetails().containsKey(UPPER);
+    }
+
+    /**
      * Returns the boundaries of the feature. They are read from the feature's boundary
      *   annotation (see {@link #annotate}). A side without boundary uses the range of the
      *   feature's type.

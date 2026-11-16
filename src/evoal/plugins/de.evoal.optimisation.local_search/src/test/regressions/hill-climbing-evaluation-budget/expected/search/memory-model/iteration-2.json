@@ -20,6 +20,7 @@
     "number" : 0,
     "members" : [ 2 ]
   } ],
+  "bestSoFar" : 2,
   "metrics" : {
     "evaluations.real" : 3,
     "evaluations.surrogate" : 0

@@ -123,27 +123,9 @@ public class ARPSOMover implements Mover {
                 c2 * random.nextDouble() *
                 (neighborhoodBestPosition.eGetAsDouble(feature) - x))));
 
-            double next_x = x + next_v;
-
-            if (next_x > maximum)
-            {
-                next_x = switch (boundaryType) {
-                    case BOUNCE -> 2. * maximum - next_x;
-                    case STICK  -> maximum;
-                    case WRAP   ->  -max_v + next_x;
-                };
-            }
-            else if (next_x < minimum)
-            {
-                next_x = switch (boundaryType) {
-                    case BOUNCE -> 2. * minimum - next_x;
-                    case STICK  -> minimum;
-                    case WRAP   -> max_v + next_x;
-                };
-            }
-
-            nextPosition.eSet(feature, next_x);
-            next_velocity[i] = next_v;
+            final BoundaryHandling.Moved moved = BoundaryHandling.apply(boundaryType, x + next_v, next_v, minimum, maximum);
+            nextPosition.eSet(feature, moved.position());
+            next_velocity[i] = moved.velocity();
 
             i += 1;
         }

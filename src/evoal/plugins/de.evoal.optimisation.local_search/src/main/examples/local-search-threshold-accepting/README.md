@@ -3,7 +3,8 @@
 ## What it shows
 
 Threshold accepting accepts a worse neighbour if it is worse by less than a
-threshold. Unlike simulated annealing, the decision is not random. The
+threshold (and, of course, better and equal neighbours). Unlike simulated
+annealing, the decision is not random. The
 threshold falls over the iterations, so the search accepts smaller and smaller
 steps up and finally behaves like hill climbing.
 
@@ -59,9 +60,9 @@ the current candidate (`x:0`, `x:1`) and its value (`y:0`):
 - While the threshold falls, the search only moves downhill and ends in a
   local minimum. The last row repeats the candidate and the log says
   `No acceptable neighbour in generation … Terminating optimisation.`
-- With `EVOAL_SEED=42`, the search ends after 73 iterations in the global
+- With `EVOAL_SEED=42`, the search ends after 86 iterations in the global
   minimum (0, 0) with `y:0` = 0. Hill climbing from the same start ends at
-  `y:0` = 41. Other seeds end between 0 and 16.
+  `y:0` = 41. Other seeds end between 0 and 9, most of them at 0 or 1.
 
 ## Try next
 

@@ -26,6 +26,9 @@ import de.evoal.optimisation.pso.api.swarm.Particle;
  * <p>
  * A particle is identified by its index in the swarm, so the swarm has to
  *   return its particles in the same order in every iteration.
+ * <p>
+ * Every iteration refers to the best individual of all iterations so far
+ *   ({@code bestSoFar}).
  */
 public class SwarmMemory {
     /**
@@ -38,6 +41,14 @@ public class SwarmMemory {
      *   before the first iteration.
      */
     private Individual[] previousIndividuals = new Individual[0];
+
+    /**
+     * The best individual of all iterations so far and its fitness, {@code null} before
+     *   the first iteration. It is the best personal best of the swarm, since every
+     *   personal best was a current position.
+     */
+    private Individual bestIndividual;
+    private OptimisationValue bestFitness;
 
     /**
      * @param idGenerator Creates the ids of the individuals.
@@ -59,6 +70,12 @@ public class SwarmMemory {
         individual.setId(idGenerator.nextId());
         individual.setInput(position);
         individual.setOutput(output);
+
+        // on equal fitness, the earlier individual stays the best
+        if(bestFitness == null || fitness.isBetter(bestFitness)) {
+            bestIndividual = individual;
+            bestFitness = fitness;
+        }
 
         final boolean hasPredecessor = particleIndex < previousIndividuals.length;
         if(hasPredecessor) {
@@ -88,6 +105,7 @@ public class SwarmMemory {
         final Iteration iteration = MemoryFactory.eINSTANCE.createIteration();
         iteration.setNumber(number);
         iteration.getRanks().addAll(ranks);
+        iteration.setBestSoFar(bestIndividual);
 
         previousIndividuals = individuals;
 

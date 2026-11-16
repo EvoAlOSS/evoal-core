@@ -122,24 +122,9 @@ public class BasicMover implements Mover {
             double next_v = Math.max(-max_v, Math.min(max_v, w * v + c1 * rand1 * (personalBestPosition.eGetAsDouble(feature) - x) +
                 c2 * rand2 * (neighborhoodBestPosition.eGetAsDouble(feature) - x)));
 
-            double next_x = x + next_v;
-
-            if (next_x > maximum) {
-                next_x = switch (boundaryType) {
-                    case BOUNCE -> 2. * maximum - next_x;
-                    case STICK  -> maximum;
-                    case WRAP   ->  -max_v + next_x;
-                };
-            } else if (next_x < minimum) {
-                next_x = switch (boundaryType) {
-                    case BOUNCE -> 2. * minimum - next_x;
-                    case STICK  -> minimum;
-                    case WRAP   -> max_v + next_x;
-                };
-            }
-
-            nextPosition.eSet(feature ,next_x); // TODO Cast to data type
-            nextVelocity[i] = next_v;
+            final BoundaryHandling.Moved moved = BoundaryHandling.apply(boundaryType, x + next_v, next_v, minimum, maximum);
+            nextPosition.eSet(feature, moved.position());
+            nextVelocity[i] = moved.velocity();
 
             i += 1;
         }

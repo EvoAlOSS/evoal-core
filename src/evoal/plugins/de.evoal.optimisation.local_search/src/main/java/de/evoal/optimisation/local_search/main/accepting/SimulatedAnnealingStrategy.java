@@ -59,11 +59,21 @@ public class SimulatedAnnealingStrategy implements AcceptingStrategy {
         return false;
     }
 
+    /**
+     * @return {@code true}: as in the textbook version, every iteration tests a single random
+     *   neighbour, so a worse neighbour is accepted with exactly the acceptance probability.
+     */
+    @Override
+    public boolean testsSingleNeighbour() {
+        return true;
+    }
+
     @Override
     public boolean acceptCandidate(final OptimisationValue candidateValue, final OptimisationValue currentValue) {
         final double acceptanceProb = probabilityFunction.apply(currentValue, candidateValue, temperature);
 
-        return acceptanceProb >= random.nextDouble();
+        // nextDouble() is in [0, 1), so a probability of 0 never accepts and 1 always does
+        return random.nextDouble() < acceptanceProb;
     }
 
     @Override

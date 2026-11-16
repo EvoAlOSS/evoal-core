@@ -148,6 +148,7 @@
     "number" : 8,
     "members" : [ 76 ]
   } ],
+  "bestSoFar" : 38,
   "metrics" : {
     "evaluations.real" : 81,
     "evaluations.surrogate" : 0

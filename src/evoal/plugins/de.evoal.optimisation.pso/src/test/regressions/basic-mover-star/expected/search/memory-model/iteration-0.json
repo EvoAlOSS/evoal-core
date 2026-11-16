@@ -121,6 +121,7 @@
     "number" : 8,
     "members" : [ 0 ]
   } ],
+  "bestSoFar" : 6,
   "metrics" : {
     "evaluations.real" : 9,
     "evaluations.surrogate" : 0

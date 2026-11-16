@@ -54,6 +54,8 @@
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference optimisation.ecore#//memory/Iteration/steps"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference optimisation.ecore#//memory/Iteration/ranks"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference optimisation.ecore#//memory/Iteration/metrics"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference optimisation.ecore#//memory/Iteration/bestSoFar"/>
         <genOperations ecoreOperation="optimisation.ecore#//memory/Iteration/bestIndividuals"
             body="return getRanks()&#xA;.get(0)&#xA;.getMembers()&#xA;.stream();&#xA;"/>
         <genOperations ecoreOperation="optimisation.ecore#//memory/Iteration/survivedIndividuals"

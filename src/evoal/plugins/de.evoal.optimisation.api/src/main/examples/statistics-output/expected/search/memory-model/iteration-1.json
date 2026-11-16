@@ -84,6 +84,7 @@
     "number" : 4,
     "members" : [ 8 ]
   } ],
+  "bestSoFar" : 1,
   "metrics" : {
     "evaluations.real" : 10,
     "evaluations.surrogate" : 0

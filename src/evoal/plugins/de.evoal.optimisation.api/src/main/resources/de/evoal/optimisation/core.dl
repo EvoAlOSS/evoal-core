@@ -302,6 +302,47 @@ module de.evoal.optimisation.core {
     }
 
     /**
+     * Writes the best candidate the algorithm has found up to and including every
+     *   iteration (the memory model's <tt>bestSoFar</tt>). Unlike
+     *   <tt>best-candidate-per-iteration</tt>, it does not get worse if the search
+     *   moves to a worse candidate, e.g., in simulated annealing. The same
+     *   individual appears in every row until a better one is found. Iterations of
+     *   algorithms that do not track the best candidate are left out.
+     *   File: <tt>best-candidate-so-far.csv</tt> in the output folder. Columns:
+     *
+     * <ul>
+     *   <li>individual-id (id of the individual in the memory model; the same
+     *     individual has the same id in all files)</li>
+     *   <li>generation (the iteration, not the one in which the individual was found)</li>
+     *   <li>search-space-variable-1 ... search-space-variable-n</li>
+     *   <li>optimisation-space-variable-1 ... optimisation-space-variable-n</li>
+     * </ul>
+     *
+     * In the evaluation setup ({@code heuristic-search-evaluation}), the file
+     *   starts with the columns <tt>repetition</tt> and, if target points are used,
+     *   <tt>target</tt>. All runs append to the same file.
+     */
+    type 'best-candidate-so-far' extends 'statistics-writer' {
+        /**
+         * If set to <tt>true</tt>, every search space variable is prefixed with
+         *   "<tt>search-space-value-</tt>" and every optimisation space variable
+         *   is prefixed with "<tt>optimisation-space-value-</tt>". This can be
+         *   useful if search and optimisation space share variables.
+         */
+        'prefix-data' : boolean := false;
+
+        /**
+         * If search space variables should be stored.
+         */
+        'store-search-space' : boolean := true;
+
+        /**
+         * If optimisation space variables should be stored.
+         */
+        'store-optimisation-space' : boolean := true;
+    }
+
+    /**
      * Writes all surviving candidates of every iteration.
      *   File: <tt>candidates-per-iteration.csv</tt> in the output folder. Columns:
      *

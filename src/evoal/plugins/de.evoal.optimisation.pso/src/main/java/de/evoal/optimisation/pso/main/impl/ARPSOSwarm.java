@@ -20,16 +20,18 @@ package de.evoal.optimisation.pso.main.impl;
 import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.core.api.ecore.info.FeatureBoundaries;
 import de.evoal.models.core.ecore.Space;
-import de.evoal.models.core.ecore.TypedEObject;
 import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
 import de.evoal.optimisation.pso.api.swarm.Particle;
 import de.evoal.optimisation.pso.api.swarm.DefaultSwarm;
+import de.evoal.models.core.exceptions.InitializationException;
+import de.evoal.optimisation.pso.api.optimiser.Swarm;
 import de.evoal.optimisation.pso.main.mover.ARPSOMover;
 import lombok.extern.slf4j.Slf4j;
 
 import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
 /**
@@ -52,24 +54,52 @@ public class ARPSOSwarm extends DefaultSwarm {
     @ConfigurationValue(entry = OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.swarm.diversity-high")
     private double diversity_high;
 
+    @Inject
+    @Named("search-space")
+    private Space searchSpace;
+
+    /**
+     * The mover whose direction the swarm switches.
+     */
+    private ARPSOMover arpsoMover;
+
+    /**
+     * Checks the preconditions of ARPSO: the diversity is relative to the diagonal of the
+     *   search space, so every variable needs a lower and an upper boundary, and only the
+     *   {@code 'arpso-mover'} can switch between attraction and repulsion.
+     *
+     * @throws InitializationException if a precondition does not hold.
+     */
+    @Override
+    public Swarm init(final EObject configuration) throws InitializationException {
+        if(!(mover instanceof ARPSOMover arMover)) {
+            throw new InitializationException("The 'arpso-swarm' requires the 'arpso-mover', but the mover is " + mover.getClass().getSimpleName() + ".");
+        }
+        arpsoMover = arMover;
+
+        for(final EStructuralFeature feature : searchSpace) {
+            if(!FeatureBoundaries.isBounded(feature)) {
+                throw new InitializationException("The 'arpso-swarm' requires a lower and an upper boundary for every search variable, but '" + feature.getName() + "' has none.");
+            }
+        }
+
+        return this;
+    }
+
     /**
      * Moves the particles by first considering the swarm diversity in order to set whether the swarm is attracting or repelling.
      */
     @Override
     public void move(final int generation) {
-        if(mover instanceof ARPSOMover arMover) {
-            //  Assess diversity and set direction on the mover
-            double diversity = this.getDiversity(particles);
+        //  Assess diversity and set direction on the mover
+        final double diversity = diversity(particles, diagonalLength(particles[0].getCurrentPosition().eSpace()));
 
-            if (diversity < diversity_low && arMover.getDirection() > 0) {
-                //  tell the ARPSOMover to set direction = -1;
-                arMover.setDirection(-1);
-                log.info("Repelling at iteration: {}", generation);
-            } else if (diversity > diversity_high && arMover.getDirection() < 0) {
-                //  tell the ARPSOMover to set direction = 1;
-                arMover.setDirection(1);
-                log.info("Attracting at iteration: {}", generation);
-            }
+        if (diversity < diversity_low && arpsoMover.getDirection() > 0) {
+            arpsoMover.setDirection(-1);
+            log.info("Repelling at iteration: {}", generation);
+        } else if (diversity > diversity_high && arpsoMover.getDirection() < 0) {
+            arpsoMover.setDirection(1);
+            log.info("Attracting at iteration: {}", generation);
         }
 
         for (int p = 0; p < particles.length; p++) {
@@ -78,63 +108,58 @@ public class ARPSOSwarm extends DefaultSwarm {
     }
 
     /**
-     * Returns the diversity factor of the swarm.  This is calculated using the equation of Riget and Vesterstrom.
-     * @param particles The particles in the swarm.
-     * @return the diversity of the swarm.
+     * @return The length of the diagonal of the search space, i.e., of the box given by the
+     *   boundaries of the variables.
      */
-    protected double getDiversity(final Particle[] particles) {
-        final Space space  = particles[0].getCurrentPosition().eSpace();
-        final int pos_length = space.size();
+    private double diagonalLength(final Space space) {
+        double squaredLength = 0.;
+        for (final EStructuralFeature feature : space) {
+            final FeatureBoundaries.Boundaries bounds = boundaries.get(feature);
+            final double range = bounds.upper().doubleValue() - bounds.lower().doubleValue();
+            squaredLength += range * range;
+        }
+
+        return Math.sqrt(squaredLength);
+    }
+
+    /**
+     * Calculates the diversity of the swarm with the equation of Riget and Vesterstrom: the mean
+     *   distance of the particles to their mean position, relative to the diagonal of the
+     *   search space.
+     *
+     * @param particles The particles of the swarm.
+     * @param diagonalLength The length of the diagonal of the search space.
+     * @return The diversity of the swarm.
+     */
+    static double diversity(final Particle[] particles, final double diagonalLength) {
+        final Space space = particles[0].getCurrentPosition().eSpace();
 
         //  Find average position
-        Double[] ave_position = new Double[pos_length];
+        final double[] averagePosition = new double[space.size()];
         int i = 0;
-        for (final EStructuralFeature feature : space)
-        {
-            ave_position[i] = 0.;
-            for (Particle p : particles)
-            {
-                ave_position[i] += p.getCurrentPosition().eGetAsDouble(feature);
+        for (final EStructuralFeature feature : space) {
+            for (final Particle p : particles) {
+                averagePosition[i] += p.getCurrentPosition().eGetAsDouble(feature);
             }
-
-            ave_position[i] /= particles.length;
+            averagePosition[i] /= particles.length;
 
             i += 1;
         }
-
-        //  Find max diagonal in search space
-        TypedEObject properties = particles[0].getCurrentPosition();
-        double diag_length = 0.;
-
-
-        for (final EStructuralFeature feature : properties.eSpace()) {
-            FeatureBoundaries.Boundaries bounds = boundaries.get(feature);
-            double maximum = bounds.upper().doubleValue();
-            double minimum = bounds.lower().doubleValue();
-            double diff = maximum - minimum;
-            diag_length += diff * diff;
-        }
-
-        diag_length = Math.sqrt(diag_length);
 
         double diversity = 0.;
-        for (Particle p : particles)
-        {
-            double variance = 0.;
-            i = 0;
-            for (final EStructuralFeature feature : space)
-            {
-                final double distance = p.getCurrentPosition().eGetAsDouble(feature) - ave_position[i];
-                variance += distance * distance;
+        for (final Particle p : particles) {
+            double squaredDistance = 0.;
+            int j = 0;
+            for (final EStructuralFeature feature : space) {
+                final double distance = p.getCurrentPosition().eGetAsDouble(feature) - averagePosition[j];
+                squaredDistance += distance * distance;
+
+                j += 1;
             }
 
-            diversity += Math.sqrt(variance);
-
-            i += 1;
+            diversity += Math.sqrt(squaredDistance);
         }
 
-        diversity /= (particles.length * diag_length);
-
-        return diversity;
+        return diversity / (particles.length * diagonalLength);
     }
 }

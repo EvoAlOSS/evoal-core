@@ -43,7 +43,8 @@ public class NeighborhoodTopology
          */
         STAR,
         /**
-         * Particle IDs to each side are neighbors.
+         * The 'neighborhood-size' particles around a particle on a ring of all particles
+         *   (including the particle itself).
          */
         RING,
         /**
@@ -64,6 +65,21 @@ public class NeighborhoodTopology
     @ConfigurationValue(entry = OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.neighborhood-size")
     private int neighborhoodSize;
 
+    /**
+     * Creates a topology whose configuration is injected.
+     */
+    public NeighborhoodTopology() {
+    }
+
+    /**
+     * Creates a topology with the given configuration, e.g., for tests.
+     */
+    NeighborhoodTopology(final Topology topology, final int swarmSize, final int neighborhoodSize) {
+        this.topology = topology;
+        this.swarmSize = swarmSize;
+        this.neighborhoodSize = neighborhoodSize;
+    }
+
 
     /**
      * Returns the ID numbers of the neighbors.
@@ -76,12 +92,12 @@ public class NeighborhoodTopology
         if (topology == Topology.RING)
         {
 
+            // the particles around pid on the ring, e.g., pid-2 ... pid+2 for size 5;
+            //   for an even size, one more on the left side
             neighbors = new Integer[neighborhoodSize];
-            for (int i = 0,  n = pid - (neighborhoodSize % 2); i <
-                neighborhoodSize; i++)
+            for (int i = 0, n = pid - neighborhoodSize / 2; i < neighborhoodSize; i++, n++)
             {
-                neighbors[i] = (n + swarmSize) % swarmSize;
-                n++;
+                neighbors[i] = Math.floorMod(n, swarmSize);
             }
         }
         else if (topology == Topology.STAR)

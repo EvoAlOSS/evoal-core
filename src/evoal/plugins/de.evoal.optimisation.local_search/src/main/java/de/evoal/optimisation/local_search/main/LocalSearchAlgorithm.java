@@ -19,6 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Stream;
 import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
@@ -92,6 +93,13 @@ public class LocalSearchAlgorithm implements OptimisationAlgorithm {
      */
     private Individual previousIndividual;
 
+    /**
+     * The best individual found so far and its optimisation value. Simulated annealing and
+     *   threshold accepting also move to worse candidates, so it can be an earlier one.
+     */
+    private Individual bestIndividual;
+    private OptimisationValue bestValue;
+
     @Override
     public OptimisationAlgorithm init(final EObject instance) {
         criterion = producer.create(instance);
@@ -123,6 +131,11 @@ public class LocalSearchAlgorithm implements OptimisationAlgorithm {
         cdiContainer.getContextControl()
                     .startContext(RunScoped.class);
 
+        // the memory of a previous run (e.g. in heuristic-search-evaluation) is not related to this one
+        previousIndividual = null;
+        bestIndividual = null;
+        bestValue = null;
+
         //1. create init new search space candidate
         Evaluated current = evaluate(provider.create().findFirst().get());
 
@@ -136,11 +149,15 @@ public class LocalSearchAlgorithm implements OptimisationAlgorithm {
             // 2.1 Just a final copy to satisfy Java
             final OptimisationValue currentValue = current.value();
 
-            // 2.2 Search for acceptable candidate (lazily, every neighbour is evaluated once)
+            // 2.2 Search for acceptable candidate (lazily, every neighbour is evaluated once). Some
+            //     strategies (simulated annealing) test a single random neighbour per iteration.
+            final Stream<TypedEObject> offeredNeighbours = acceptingStrategy.testsSingleNeighbour()
+                    ? strategy.randomNeighbour(current.candidate()).stream()
+                    : strategy.neighbours(current.candidate());
             final Optional<Evaluated> acceptableCandidate;
             final AtomicInteger numberOfNeighbours = new AtomicInteger();
             try {
-                acceptableCandidate = strategy.neighbours(current.candidate())
+                acceptableCandidate = offeredNeighbours
                                               .peek(neighbour -> numberOfNeighbours.incrementAndGet())
                                               .map(this::evaluate)
                                               .filter(c -> acceptingStrategy.acceptCandidate(c.value(), currentValue))
@@ -184,6 +201,7 @@ public class LocalSearchAlgorithm implements OptimisationAlgorithm {
         }
 
         log.info("Candidate after {} iterations: {}", iterationNumber - 1, current.candidate());
+        log.info("Best candidate found: {} -> {}", bestIndividual.getInput(), bestValue);
 
         this.statistics.write();
         cdiContainer.getContextControl()
@@ -209,6 +227,12 @@ public class LocalSearchAlgorithm implements OptimisationAlgorithm {
         individual.setInput(evaluated.candidate());
         individual.setOutput(evaluated.output());
 
+        // an unchanged candidate is not better than itself, so the earlier individual stays the best
+        if(bestValue == null || evaluated.value().isBetter(bestValue)) {
+            bestIndividual = individual;
+            bestValue = evaluated.value();
+        }
+
         // the candidate is either a neighbour, i.e., a mutated version, of the previous one or the same
         if(previousIndividual != null) {
             final Relationship relationship = moved ? MemoryFactory.eINSTANCE.createMutation()
@@ -225,6 +249,7 @@ public class LocalSearchAlgorithm implements OptimisationAlgorithm {
         final Iteration state = MemoryFactory.eINSTANCE.createIteration();
         state.setNumber(iteration);
         state.getRanks().add(first);
+        state.setBestSoFar(bestIndividual);
         executionRecorder.recordMetrics(state);
 
         return state;

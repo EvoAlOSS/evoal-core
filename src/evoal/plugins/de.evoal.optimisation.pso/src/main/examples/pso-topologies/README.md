@@ -55,12 +55,12 @@ particles of every iteration (`generation`):
 
 - Spread of the swarm: plot `x:0` against `x:1` for the generations 10, 25 and
   50, or compute the mean distance of the particles to their mean position. The
-  ring stays clearly more spread out. Over many seeds, the mean distance after 50
-  iterations is about 0.3–1.0 with the global topology and about 1.2–1.8 in the
-  ring.
+  ring stays clearly more spread out. Over 11 seeds, the mean distance after 50
+  iterations is about 0.3–1.1 (median 0.7) with the global topology and about
+  0.8–2.2 (median 1.6) in the ring.
 - Progress: `best-candidate-per-iteration.csv` falls faster with the global
-  topology. After 50 iterations, the best particle has a value of about 0.03
-  (global) and 0.2 (ring) in a typical run.
+  topology. After 50 iterations, the best particle has a value of about 0.05
+  (global) and 0.4 (ring) in a typical run (median over 11 seeds).
 
 On this small, two-dimensional problem, both topologies find the global minimum
 in most runs, and the global one is faster. The slower contraction of the ring

@@ -178,4 +178,57 @@ public class SwarmMemoryTest {
             Assertions.assertTrue(withoutRelationships);
         }
     }
+
+    /**
+     * Two particles whose fitness changes (greater is better): iteration 0 has the
+     *   fitness values 1 and 2 (ids 0, 1), iteration 1 the values 3 and 2 (ids 2, 3),
+     *   iteration 2 the values 0 and 3 (ids 4, 5).
+     */
+    @Nested
+    @DisplayName("given a swarm whose best particle gets worse")
+    class BestSoFar {
+        private final List<Iteration> iterations = new ArrayList<>();
+
+        private void moveTo(final Particle particle, final double value, final double fitness) {
+            SwarmMemoryTest.this.moveTo(particle, value);
+            particle.setCurrentFitness(new TestFitness(fitness));
+        }
+
+        @BeforeEach
+        public void runSwarm() {
+            final Particle first = particle(0, 1.0);
+            final Particle second = particle(1, 2.0);
+            final Particle[] particles = {first, second};
+            final SwarmMemory memory = new SwarmMemory(new IndividualIDGenerator());
+
+            iterations.add(memory.toIteration(0, particles));
+
+            moveTo(first, 3.0, 3.0);
+            moveTo(second, 2.5, 2.0);
+            iterations.add(memory.toIteration(1, particles));
+
+            moveTo(first, 0.0, 0.0);
+            moveTo(second, 3.5, 3.0);
+            iterations.add(memory.toIteration(2, particles));
+        }
+
+        private int bestSoFarId(final int iteration) {
+            return iterations.get(iteration).getBestSoFar().getId();
+        }
+
+        @Test
+        public void theBestOfTheInitialSwarmIsTheBestSoFar() {
+            Assertions.assertEquals(1, bestSoFarId(0));
+        }
+
+        @Test
+        public void aBetterIndividualBecomesTheBestSoFar() {
+            Assertions.assertEquals(2, bestSoFarId(1));
+        }
+
+        @Test
+        public void theBestSoFarStaysWhenTheSwarmGetsWorseOrOnlyEqual() {
+            Assertions.assertEquals(2, bestSoFarId(2));
+        }
+    }
 }

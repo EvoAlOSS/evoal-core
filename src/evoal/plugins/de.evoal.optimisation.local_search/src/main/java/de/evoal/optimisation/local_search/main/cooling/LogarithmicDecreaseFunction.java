@@ -13,7 +13,10 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * Logarithmic decrease strategy determines new temperature according to formula:
- * T(k) = T_0/log(k+1)
+ * T(k) = T_0 / ln(k + e)
+ * <p>
+ * The shift by e makes T(0) = T_0 and the temperature falls from the first iteration on
+ *   (the classic T_0 / ln(k + 1) starts at 1.44 * T_0 for k = 1).
  */
 @Slf4j
 @Dependent
@@ -22,7 +25,7 @@ public class LogarithmicDecreaseFunction implements DecreasingFunction {
 
     @Override
     public double decrease(double currentTemp, double initialTemp, int iteration) {
-        double newTemp = initialTemp/(EvoalMath.log(iteration+1));
+        double newTemp = initialTemp / EvoalMath.log(iteration + Math.E);
         log.info("reducing to {}", newTemp);
         return Math.max(newTemp, 0);
     }

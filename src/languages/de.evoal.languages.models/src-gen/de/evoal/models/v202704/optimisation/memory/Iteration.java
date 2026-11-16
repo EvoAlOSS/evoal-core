@@ -27,6 +27,7 @@ import org.eclipse.emf.common.util.EMap;
  *   <li>{@link de.evoal.models.v202704.optimisation.memory.Iteration#getSteps <em>Steps</em>}</li>
  *   <li>{@link de.evoal.models.v202704.optimisation.memory.Iteration#getRanks <em>Ranks</em>}</li>
  *   <li>{@link de.evoal.models.v202704.optimisation.memory.Iteration#getMetrics <em>Metrics</em>}</li>
+ *   <li>{@link de.evoal.models.v202704.optimisation.memory.Iteration#getBestSoFar <em>Best So Far</em>}</li>
  * </ul>
  *
  * @see de.evoal.models.v202704.optimisation.memory.MemoryPackage#getIteration()
@@ -116,6 +117,36 @@ public interface Iteration extends State {
 	 * @generated
 	 */
 	EMap<String, Number> getMetrics();
+
+	/**
+	 * Returns the value of the '<em><b>Best So Far</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * *
+	 * The best individual the algorithm has found up to and including
+	 *   this iteration. It is contained in this or an earlier iteration,
+	 *   e.g., if a local search moved to a worse candidate. Not set if the
+	 *   algorithm does not track the best individual.
+	 * 
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Best So Far</em>' reference.
+	 * @see #setBestSoFar(Individual)
+	 * @see de.evoal.models.v202704.optimisation.memory.MemoryPackage#getIteration_BestSoFar()
+	 * @model
+	 * @generated
+	 */
+	Individual getBestSoFar();
+
+	/**
+	 * Sets the value of the '{@link de.evoal.models.v202704.optimisation.memory.Iteration#getBestSoFar <em>Best So Far</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Best So Far</em>' reference.
+	 * @see #getBestSoFar()
+	 * @generated
+	 */
+	void setBestSoFar(Individual value);
 
 	/**
 	 * <!-- begin-user-doc -->

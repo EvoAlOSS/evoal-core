@@ -377,6 +377,16 @@ public class MemoryPackageImpl extends EPackageImpl implements MemoryPackage {
 	 * @generated
 	 */
 	@Override
+	public EReference getIteration_BestSoFar() {
+		return (EReference)iterationEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getIterationStep() {
 		return iterationStepEClass;
 	}
@@ -734,6 +744,7 @@ public class MemoryPackageImpl extends EPackageImpl implements MemoryPackage {
 		createEReference(iterationEClass, ITERATION__STEPS);
 		createEReference(iterationEClass, ITERATION__RANKS);
 		createEReference(iterationEClass, ITERATION__METRICS);
+		createEReference(iterationEClass, ITERATION__BEST_SO_FAR);
 
 		iterationStepEClass = createEClass(ITERATION_STEP);
 		createEAttribute(iterationStepEClass, ITERATION_STEP__DESCRIPTION);
@@ -834,6 +845,7 @@ public class MemoryPackageImpl extends EPackageImpl implements MemoryPackage {
 		initEReference(getIteration_Steps(), this.getIterationStep(), null, "steps", null, 0, -1, Iteration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getIteration_Ranks(), this.getRank(), null, "ranks", null, 0, -1, Iteration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getIteration_Metrics(), this.getMetricEntry(), null, "metrics", null, 0, -1, Iteration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getIteration_BestSoFar(), this.getIndividual(), null, "bestSoFar", null, 0, 1, Iteration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		EOperation op = addEOperation(iterationEClass, null, "bestIndividuals", 1, 1, IS_UNIQUE, IS_ORDERED);
 		EGenericType g1 = createEGenericType(theOptimisationPackage.getStream());

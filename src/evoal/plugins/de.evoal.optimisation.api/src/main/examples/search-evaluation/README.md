@@ -16,7 +16,8 @@ the whole evaluation can be repeated with one seed.
 
 ## Files
 
-- `search.ddl`, `search.ol`: the same as in `local-search-simulated-annealing`.
+- `search.ddl`, `search.ol`: the same as in `local-search-simulated-annealing`,
+  but only the best candidate found so far is written.
 - `01-run-evaluation.sh`: calls `evoal-evaluate-search.sh` with the number of
   runs (10) as the fourth argument.
 
@@ -36,11 +37,10 @@ EVOAL_SEED=42 ./01-run-evaluation.sh
 
 ## What to look at
 
-- `output/search/candidates-per-iteration.csv` starts with the column
-  `repetition` (0 to 9). The last row of every repetition is the result of that
-  run. The results differ from run to run: most runs end in a local minimum
-  with a small value, a few end further up. With `EVOAL_SEED=42`, the results
-  of the 10 runs range from 1 to 16 with a median of 5.
+- `output/search/best-candidate-so-far.csv` starts with the column
+  `repetition` (0 to 9). The last row of every repetition is the best candidate
+  of that run. The results differ from run to run. With `EVOAL_SEED=42`, 8 of
+  the 10 runs find the global minimum 0 and 2 end at 1.
 - To compare configurations, compare the distribution of the results, e.g.,
   their median, not single runs.
 
@@ -48,6 +48,8 @@ EVOAL_SEED=42 ./01-run-evaluation.sh
 
 - Change the accepting strategy to `'hill-climber' {}` (see
   `local-search-hill-climbing`) and compare the results of the 10 runs.
+- Add `'candidates-per-iteration' {}` to `document [...]` to see the current
+  candidate of every iteration, i.e., how far the runs climb out of minima.
 - Add `'memory-model' {}` to `document [...]` in `search.ol`: every run gets its
   own folder `output/search/memory-model/repetition-<n>`.
 - Give the evaluation a file of target points with
