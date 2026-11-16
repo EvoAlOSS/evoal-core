@@ -1,5 +1,6 @@
 package de.evoal.optimisation.local_search.main.cooling;
 
+import de.evoal.core.api.math.EvoalMath;
 import de.evoal.models.core.ecore.Space;
 import de.evoal.optimisation.local_search.api.cooling.DecreasingFunction;
 import de.evoal.core.api.languages.AttributeEvaluator;
@@ -30,7 +31,7 @@ public class ExponentialDecreaseFunction implements DecreasingFunction {
 
     @Override
     public double decrease(double currentTemp, double initialTemp, int iteration) {
-        double newTemp = initialTemp * Math.exp(-1 * (Math.pow(iteration, (1.0 / this.searchSpecSize))));
+        double newTemp = initialTemp * EvoalMath.exp(-1 * (EvoalMath.pow(iteration, (1.0 / this.searchSpecSize))));
         log.info("reducing temperature to {}", newTemp);
         return Math.max(newTemp, 0);
     }

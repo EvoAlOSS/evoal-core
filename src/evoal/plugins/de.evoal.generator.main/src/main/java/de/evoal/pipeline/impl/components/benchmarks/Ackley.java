@@ -1,6 +1,7 @@
 package de.evoal.pipeline.impl.components.benchmarks;
 
 import de.evoal.core.api.languages.AttributeEvaluator;
+import de.evoal.core.api.math.EvoalMath;
 import de.evoal.models.core.exceptions.InitializationException;
 import de.evoal.pipeline.api.model.PipelineComponentImpl;
 import de.evoal.models.core.ecore.TypedEObject;
@@ -37,11 +38,11 @@ public class Ackley extends PipelineComponentImpl {
         for(final EStructuralFeature ef : getReads()) {
             double read_i = obj.eGetAsDouble(ef);
 
-        	sum1 += Math.pow(read_i, 2.0);
-        	sum2 += Math.cos(c * read_i);
+        	sum1 += read_i * read_i;
+        	sum2 += EvoalMath.cos(c * read_i);
         }
 
-        double value = -a * Math.exp(-b * Math.sqrt((1 / n) * sum1)) - Math.exp((1 / n) * sum2) + a + Math.E;
+        double value = -a * EvoalMath.exp(-b * Math.sqrt((1 / n) * sum1)) - EvoalMath.exp((1 / n) * sum2) + a + Math.E;
 
         obj.eSet(getWrites().iterator().next(), value);
 

@@ -81,7 +81,7 @@ public class ManualNeighbourChoosingStrategy implements NeighbourChoosingStrateg
     @Override
     public Stream<TypedEObject> neighbours(final TypedEObject currentBestCandidate) {
         final EStructuralFeature[] orderedFeatures = space.toArray(new EStructuralFeature[0]);
-        final int numberOfNeighbours = (int) Math.pow(3, orderedFeatures.length);
+        final int numberOfNeighbours = powerOfThree(orderedFeatures.length);
         final IntStream indices = random == null ? IntStream.range(0, numberOfNeighbours)
                                                  : RandomOrder.of(numberOfNeighbours, random);
 
@@ -102,6 +102,19 @@ public class ManualNeighbourChoosingStrategy implements NeighbourChoosingStrateg
         }
 
         return this;
+    }
+
+    /**
+     * @return 3 to the power of {@code exponent}. The 'step-size' list has at most 19
+     *   elements, and 3^19 still fits into an {@code int}.
+     */
+    private static int powerOfThree(final int exponent) {
+        int result = 1;
+        for(int i = 0; i < exponent; i++) {
+            result *= 3;
+        }
+
+        return result;
     }
 
     /**

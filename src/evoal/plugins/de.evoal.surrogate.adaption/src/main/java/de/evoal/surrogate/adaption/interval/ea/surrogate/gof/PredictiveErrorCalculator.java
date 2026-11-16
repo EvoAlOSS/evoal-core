@@ -137,7 +137,7 @@ public class PredictiveErrorCalculator extends SurrogateInformationCalculator {
 
                      double denominator = 0.0;
                      for(int l = 0; l < row.length; ++l) {
-                         denominator += row[l] * Math.pow(errors[l], 2);
+                         denominator += row[l] * (errors[l] * errors[l]);
                      }
 
                      double nominator = 1.0;

@@ -47,7 +47,8 @@ public class SimpleQuadraticFunctionLearner extends AbstractModelLearner {
 
 	@Override
 	public void add(final TypedEObject features) {
-		regression.addData(Math.pow(inputFeature.apply(features), 2), outputFeature.apply(features));
+		final double input = inputFeature.apply(features);
+		regression.addData(input * input, outputFeature.apply(features));
 	}
 
 	@Override

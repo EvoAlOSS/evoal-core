@@ -26,7 +26,9 @@ public class Rosenbrock extends PipelineComponentImpl {
             double read_i = obj.eGetAsDouble(ps_i);
             double read_n = obj.eGetAsDouble(ps_n);
 
-            value += 100 * Math.pow(read_n - (Math.pow(read_i,  2.0)), 2.0) + Math.pow(1 - read_i, 2.0);
+            final double valley = read_n - read_i * read_i;
+            final double offset = 1 - read_i;
+            value += 100 * (valley * valley) + offset * offset;
             ps_i = ps_n;
         }
 

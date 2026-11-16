@@ -39,6 +39,7 @@
 
         <commons.csv.version>1.14.1</commons.csv.version>
         <commons.math.version>3.6.1</commons.math.version>
+        <jafama.version>2.3.2</jafama.version>
     </properties>
 
     <modules>
@@ -222,6 +223,12 @@
                 <scope>provided</scope>
             </dependency>
 
+            <dependency>
+                <groupId>net.jafama</groupId>
+                <artifactId>jafama</artifactId>
+                <version>${jafama.version}</version>
+            </dependency>
+
 
         </dependencies>
     </dependencyManagement>
@@ -313,6 +320,76 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>flatten-maven-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <!--
+                  Fails the build if the main code calls a java.lang.Math function whose result
+                  may differ in the last bit between platforms. Such a difference can change a
+                  comparison in a search, so runs with the same seed would differ between machines.
+                  These functions are available through de.evoal.core.api.math.EvoalMath, which
+                  gives the same result everywhere; the StrictMath versions are forbidden as well,
+                  so there is only one implementation. EvoalMath itself is exempted with its
+                  package-private @SuppressForbidden. Exact functions such as abs, min, max, floor
+                  and sqrt stay allowed.
+                -->
+                <groupId>de.thetaphi</groupId>
+                <artifactId>forbiddenapis</artifactId>
+                <version>3.11</version>
+                <configuration>
+                    <suppressAnnotations>
+                        <annotation>de.evoal.core.api.math.SuppressForbidden</annotation>
+                    </suppressAnnotations>
+                    <signatures><![CDATA[
+@defaultMessage The result may differ between platforms; use de.evoal.core.api.math.EvoalMath (or x * x for squares) instead.
+java.lang.Math#sin(double)
+java.lang.Math#cos(double)
+java.lang.Math#tan(double)
+java.lang.Math#asin(double)
+java.lang.Math#acos(double)
+java.lang.Math#atan(double)
+java.lang.Math#atan2(double,double)
+java.lang.Math#sinh(double)
+java.lang.Math#cosh(double)
+java.lang.Math#tanh(double)
+java.lang.Math#exp(double)
+java.lang.Math#expm1(double)
+java.lang.Math#log(double)
+java.lang.Math#log10(double)
+java.lang.Math#log1p(double)
+java.lang.Math#pow(double,double)
+java.lang.Math#cbrt(double)
+java.lang.Math#hypot(double,double)
+@defaultMessage Use de.evoal.core.api.math.EvoalMath (or x * x for squares) instead, so all functions have one implementation.
+java.lang.StrictMath#sin(double)
+java.lang.StrictMath#cos(double)
+java.lang.StrictMath#tan(double)
+java.lang.StrictMath#asin(double)
+java.lang.StrictMath#acos(double)
+java.lang.StrictMath#atan(double)
+java.lang.StrictMath#atan2(double,double)
+java.lang.StrictMath#sinh(double)
+java.lang.StrictMath#cosh(double)
+java.lang.StrictMath#tanh(double)
+java.lang.StrictMath#exp(double)
+java.lang.StrictMath#expm1(double)
+java.lang.StrictMath#log(double)
+java.lang.StrictMath#log10(double)
+java.lang.StrictMath#log1p(double)
+java.lang.StrictMath#pow(double,double)
+java.lang.StrictMath#cbrt(double)
+java.lang.StrictMath#hypot(double,double)
+                    ]]></signatures>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>platform-independent-math</id>
+                        <phase>process-classes</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
 

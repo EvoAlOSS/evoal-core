@@ -83,7 +83,7 @@ public abstract class AbstractFitnessAdjustedPredicted extends OptimisationFunct
 			final double value = current.eGetAsDouble(feature);
 			final Pair<Double, Double> boundaries = errorData.calculateBoundaries(candidate, 0, surrogate, CONFIDENCE, annotations);
 
-			fitness.eSet(feature, (2 * Math.pow(value, 2.0)) / (boundaries.getSecond() - boundaries.getFirst()));
+			fitness.eSet(feature, (2 * value * value) / (boundaries.getSecond() - boundaries.getFirst()));
 		}
 
 		return fitness;

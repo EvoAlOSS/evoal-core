@@ -38,6 +38,7 @@ module de.evoal.core.main {
     requires de.evoal.languages.model.interpreter;
     requires de.evoal.languages.model.utils;
     requires commons.math3;
+    requires net.jafama;
     requires org.eclipse.emf.ecore.xmi;
     //requires jakarta.ejb.api;
     opens de.evoal.core; // export dl files.
@@ -48,6 +49,7 @@ module de.evoal.core.main {
     exports de.evoal.core.api.interpreter;
     exports de.evoal.core.api.languages;
     exports de.evoal.core.api.languages.base;
+    exports de.evoal.core.api.math;
 
     exports de.evoal.core.api.ecore;
     exports de.evoal.core.api.ecore.info;

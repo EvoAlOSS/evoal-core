@@ -30,7 +30,8 @@ is run as users run it, with `EVOAL_HOME` set to the release and
 `<plugin>/examples/<name>`.
 
 To add an example, create an empty `expected/` folder and create the
-references with `ci/regressions-in-docker.sh --update --examples`.
+references as described under [References](#references) (with
+`-Devoal.regressions.examples=true`).
 `ci/create-release.sh` does not copy `expected/` into the release.
 
 ## Running
@@ -52,13 +53,20 @@ mvn -f src/evoal/pom.xml -Pregressions verify
 
 ## References
 
-References are compared exactly, and floating-point results can differ between
-platforms. Therefore the references are created in the EvoAl CI image:
+References are compared exactly. The output is the same on every platform,
+because the plugins use `de.evoal.core.api.math.EvoalMath` instead of the
+platform-dependent `java.lang.Math` functions (`exp`, `log`, `pow`, `cos`, ...);
+the build fails if such a function is called (`forbiddenapis` in
+`src/evoal/pom.xml`).
+Therefore the references can be created and checked locally:
 
 ```sh
-ci/regressions-in-docker.sh --update              # regressions only
-ci/regressions-in-docker.sh --update --examples   # regressions and examples
+mvn -f src/evoal/pom.xml -Pregressions -Devoal.regressions.update=true verify
+mvn -f src/evoal/pom.xml -Pregressions -Devoal.regressions.update=true -Devoal.regressions.examples=true verify
 ```
+
+`ci/regressions-in-docker.sh [--update] [--examples]` does the same in the
+EvoAl CI image, e.g., to reproduce a pipeline failure.
 
 The only value that is not compared is the EvoAl version in the memory model
 (`"evoalVersion"`): it is stored as `${evoal.version}` and masked in the output,

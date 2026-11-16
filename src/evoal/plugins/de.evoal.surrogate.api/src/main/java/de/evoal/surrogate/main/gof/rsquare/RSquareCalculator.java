@@ -71,7 +71,10 @@ public class RSquareCalculator extends SurrogateInformationCalculator {
 							return expected.eClass()
 											.getEAllStructuralFeatures()
 											.stream()
-											.mapToDouble(f -> Math.pow(expected.eGetAsDouble(f) - calculated.eGetAsDouble(f), 2))
+											.mapToDouble(f -> {
+												final double difference = expected.eGetAsDouble(f) - calculated.eGetAsDouble(f);
+												return difference * difference;
+											})
 											.toArray();
 						}).toArray(double[][]::new);
 
@@ -84,7 +87,7 @@ public class RSquareCalculator extends SurrogateInformationCalculator {
 			}
 
 			final double unexplainedVariation = error;
-			final double totalVariation = Math.pow(sds[index], 2) * yValues.length;
+			final double totalVariation = sds[index] * sds[index] * yValues.length;
 			final double rSquare = 1 - unexplainedVariation / totalVariation;
 
 			log.info("unexplained variation: '{}', total variation: {}, rSquare: {}", unexplainedVariation, totalVariation, rSquare);

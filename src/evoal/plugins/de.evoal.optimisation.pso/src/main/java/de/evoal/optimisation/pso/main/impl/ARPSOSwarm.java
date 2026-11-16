@@ -124,8 +124,8 @@ public class ARPSOSwarm extends DefaultSwarm {
             i = 0;
             for (final EStructuralFeature feature : space)
             {
-                variance +=
-                    Math.pow(p.getCurrentPosition().eGetAsDouble(feature) - ave_position[i], 2);
+                final double distance = p.getCurrentPosition().eGetAsDouble(feature) - ave_position[i];
+                variance += distance * distance;
             }
 
             diversity += Math.sqrt(variance);

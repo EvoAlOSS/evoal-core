@@ -1,5 +1,6 @@
 package de.evoal.optimisation.local_search.main.probability;
 
+import de.evoal.core.api.math.EvoalMath;
 import de.evoal.core.api.utils.Requirements;
 import de.evoal.models.core.ecore.Space;
 import de.evoal.models.v202704.optimisation.execution.OptimisationValue;
@@ -47,7 +48,7 @@ public class ExponentialProbabilityFunction implements AcceptanceProbabilityFunc
         // TODO What about multi-dimensional problems
         // the neighbour is not better, so the probability is exp(-|delta| / T) which is in (0, 1]
         final double delta = Math.abs((double)neighbourFitness.toStatistics().getFirst() - (double)currentFitness.toStatistics().getFirst());
-        final double probability = Math.exp(-delta / temperature);
+        final double probability = EvoalMath.exp(-delta / temperature);
         log.info("Acceptance probability is {}", probability);
 
         return probability;

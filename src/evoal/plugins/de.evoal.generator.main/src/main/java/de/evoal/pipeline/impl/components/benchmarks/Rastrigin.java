@@ -1,6 +1,7 @@
 package de.evoal.pipeline.impl.components.benchmarks;
 
 import de.evoal.core.api.languages.AttributeEvaluator;
+import de.evoal.core.api.math.EvoalMath;
 import de.evoal.models.core.exceptions.InitializationException;
 import de.evoal.pipeline.api.model.PipelineComponentImpl;
 import de.evoal.models.core.ecore.TypedEObject;
@@ -29,7 +30,7 @@ public class Rastrigin extends PipelineComponentImpl {
         for(final EStructuralFeature ef : getReads()) {
             double read_i = obj.eGetAsDouble(ef);
 
-            value += (Math.pow(read_i, 2.0) - a * Math.cos(2 * Math.PI * read_i));
+            value += (read_i * read_i - a * EvoalMath.cos(2 * Math.PI * read_i));
         }
 
         obj.eSet(getWrites().iterator().next(), value);

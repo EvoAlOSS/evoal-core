@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import de.evoal.core.api.math.EvoalMath;
 import de.evoal.models.v202704.optimisation.execution.OptimisationValue;
 
 public class ExponentialProbabilityFunctionTest {
@@ -30,8 +31,8 @@ public class ExponentialProbabilityFunctionTest {
         final double slightlyWorse = testee.apply(current, value(11.0, false), 2.0);
         final double muchWorse = testee.apply(current, value(20.0, false), 2.0);
 
-        Assertions.assertEquals(Math.exp(-0.5), slightlyWorse, 1e-12);
-        Assertions.assertEquals(Math.exp(-5.0), muchWorse, 1e-12);
+        Assertions.assertEquals(EvoalMath.exp(-0.5), slightlyWorse, 1e-12);
+        Assertions.assertEquals(EvoalMath.exp(-5.0), muchWorse, 1e-12);
         Assertions.assertTrue(muchWorse < slightlyWorse && slightlyWorse < 1.0);
     }
 

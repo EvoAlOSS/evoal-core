@@ -44,8 +44,9 @@ public class RRSECalculator extends SurrogateInformationCalculator {
 							.apply(source, actual);
 
 					for(final EStructuralFeature feature : actual.eClass().getEAllStructuralFeatures()) {
+						final double difference = expected.eGetAsDouble(feature) - actual.eGetAsDouble(feature) / expected.eGetAsDouble(feature);
 						data.get(feature)
-								.add(Math.pow(expected.eGetAsDouble(feature) - actual.eGetAsDouble(feature) / expected.eGetAsDouble(feature), 2.0));
+								.add(difference * difference);
 					}
 				});
 
@@ -58,7 +59,7 @@ public class RRSECalculator extends SurrogateInformationCalculator {
 					.summaryStatistics()
 					.getAverage();
 
-			final double rmse = Math.pow(average, 0.5);
+			final double rmse = Math.sqrt(average);
 
 			log.info("RRSE of {}: '{}'", entry.getKey().getName(), rmse);
 

@@ -20,7 +20,7 @@ public class WeightedSphere extends PipelineComponentImpl {
         for(final EStructuralFeature feat : getReads()) {
             double read_i = obj.eGetAsDouble(feat);
 
-            value += Math.pow(read_i, 2.0)  * counter++;
+            value += read_i * read_i * counter++;
         }
 
 

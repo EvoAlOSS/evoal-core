@@ -1,6 +1,7 @@
 package de.evoal.surrogate.adaption.density.ea.fitness;
 
 import de.evoal.core.api.ecore.info.FeatureBoundaries;
+import de.evoal.core.api.math.EvoalMath;
 import de.evoal.models.core.ecore.Space;
 import de.evoal.models.core.ecore.TypedEObject;
 import de.evoal.models.v202704.optimisation.execution.OptimisationFunction;
@@ -124,7 +125,7 @@ public abstract class DensityBasedFitness extends OptimisationFunctionDecorator 
 
             final double probability = probabilityCalculator.apply(candidate, feature, predicted);
 
-            fitness.eSet(feature, predicted * Math.pow(probability, rootExponent) + (1 - probability) / Math.pow(probability, exponent));
+            fitness.eSet(feature, predicted * EvoalMath.pow(probability, rootExponent) + (1 - probability) / EvoalMath.pow(probability, exponent));
         }
 
         return fitness;
@@ -147,7 +148,7 @@ public abstract class DensityBasedFitness extends OptimisationFunctionDecorator 
             final EStructuralFeature feature = entry.getKey();
             final double probability = entry.getValue().probability(candidate.eGetAsDouble(feature));
 
-            result *= Math.pow(Math.min(1.0, probability + offsetOf(feature)), 1.0 / sourceDensityData.size());
+            result *= EvoalMath.pow(Math.min(1.0, probability + offsetOf(feature)), 1.0 / sourceDensityData.size());
         }
 
         return result;

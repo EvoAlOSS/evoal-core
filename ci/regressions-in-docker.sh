@@ -1,9 +1,11 @@
 #!/bin/sh
 
 ###############################################################################
-# Builds EvoAl and runs the regressions in the EvoAl CI image, so that the
-#   results are the same as in the merge request pipeline (the references are
-#   compared exactly, and floating-point results may differ between platforms).
+# Builds EvoAl and runs the regressions in the EvoAl CI image, i.e., in the
+#   same environment as the merge request pipeline, e.g., to reproduce a
+#   pipeline failure. The results do not depend on the platform, so
+#   `mvn -f src/evoal/pom.xml -Pregressions verify` gives the same results
+#   locally.
 #
 # Usage: ci/regressions-in-docker.sh [--update] [--examples]
 #   --update    rewrites the references (expected/) instead of comparing.

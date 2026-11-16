@@ -39,7 +39,10 @@ public class SimpleQuadraticFunction extends ModelFunction {
 		final EStructuralFeature iFeature = input.iterator().next();
 		final EStructuralFeature oFeature = output.iterator().next();
 
-		this.regression = (in, out) -> out.eSet(oFeature, intercept + slope * Math.pow(in.eGetAsDouble(iFeature), 2.0));
+		this.regression = (in, out) -> {
+			final double x = in.eGetAsDouble(iFeature);
+			out.eSet(oFeature, intercept + slope * (x * x));
+		};
 	}
 
 	@Override

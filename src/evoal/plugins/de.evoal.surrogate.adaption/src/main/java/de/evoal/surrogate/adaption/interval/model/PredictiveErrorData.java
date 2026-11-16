@@ -164,7 +164,7 @@ public final class PredictiveErrorData {
         double std = 0.0;
         double stdDelta = 1.0;
         for(int i = 0; i < predictionErrors.length; ++i) {
-            std += candidateSmoothing.get(0, i) * Math.pow(predictionErrors[i], 2);
+            std += candidateSmoothing.get(0, i) * (predictionErrors[i] * predictionErrors[i]);
             stdDelta += candidateSmoothing.get(0, i) * delta[i];
         }
 

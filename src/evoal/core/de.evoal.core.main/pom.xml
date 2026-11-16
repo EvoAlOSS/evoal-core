@@ -264,6 +264,12 @@
 		</dependency>
 
 		<dependency>
+			<groupId>net.jafama</groupId>
+			<artifactId>jafama</artifactId>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
 			<groupId>com.github.haifengl</groupId>
 			<artifactId>smile-base</artifactId>
 			<version>${smile.version}</version>

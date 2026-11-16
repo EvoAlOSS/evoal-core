@@ -192,7 +192,7 @@ public class HeuristicSearchEvaluation implements MainClass {
     }
 
     private int calculateFigures(final int number) {
-        return (int)(Math.log10(number));
+        return Integer.toString(number).length() - 1;
     }
 }
 
