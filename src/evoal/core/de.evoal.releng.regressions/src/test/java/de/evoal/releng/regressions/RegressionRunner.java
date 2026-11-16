@@ -87,7 +87,7 @@ public final class RegressionRunner {
         copyConfiguration(regression.folder(), workingFolder);
 
         final Path logFile = workingFolder.resolve(LOG_FILE);
-        final Process process = start(workingFolder, logFile);
+        final Process process = start(regression, workingFolder, logFile);
         final boolean finished = process.waitFor(TIMEOUT_IN_MINUTES, TimeUnit.MINUTES);
 
         if(!finished) {
@@ -135,13 +135,23 @@ public final class RegressionRunner {
         }
     }
 
-    private Process start(final Path workingFolder, final Path logFile) {
+    /**
+     * @return The command that runs the regression: the run script of an example, or the
+     *   search launcher of the release for a regression configuration.
+     */
+    private List<String> commandOf(final Regression regression) {
+        if(regression.isExample()) {
+            return List.of(shell, regression.runScript());
+        }
+
         final Path searchScript = release.resolve(SEARCH_SCRIPT);
-        final ProcessBuilder builder = new ProcessBuilder(shell,
-                                                          searchScript.toString(),
-                                                          ".",
-                                                          Regression.CONFIGURATION_FILE,
-                                                          OUTPUT_FOLDER);
+
+        return List.of(shell, searchScript.toString(), ".", Regression.CONFIGURATION_FILE, OUTPUT_FOLDER);
+    }
+
+    private Process start(final Regression regression, final Path workingFolder, final Path logFile) {
+        final List<String> command = commandOf(regression);
+        final ProcessBuilder builder = new ProcessBuilder(command);
 
         final Map<String, String> environment = builder.environment();
         environment.put("EVOAL_HOME", release.toString());
@@ -162,7 +172,7 @@ public final class RegressionRunner {
         try {
             return builder.start();
         } catch(final IOException e) {
-            throw new UncheckedIOException("Cannot start " + searchScript + " with " + shell, e);
+            throw new UncheckedIOException("Cannot start " + command, e);
         }
     }
 

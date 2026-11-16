@@ -1,6 +1,7 @@
 package de.evoal.optimisation.local_search.main.neighbour;
 
 import java.util.*;
+import java.util.random.RandomGenerator;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -9,6 +10,7 @@ import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
 import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
@@ -18,6 +20,7 @@ import de.evoal.models.core.ecore.Space;
 import de.evoal.models.core.ecore.TypedEObject;
 import de.evoal.core.api.ecore.info.FeatureBoundaries;
 import de.evoal.core.api.ecore.misc.EClassifierHelper;
+import de.evoal.core.api.random.RandomService;
 import de.evoal.core.api.utils.AttributeHelper;
 import de.evoal.core.api.utils.VariableToEObjectHelper;
 
@@ -32,10 +35,24 @@ import de.evoal.optimisation.local_search.api.neighbour.NeighbourChoosingStrateg
  *
  * Neighbour values have the type of their feature. Neighbours outside of the boundaries of
  * a feature ({@link FeatureBoundaries}) are skipped. Non-numeric features are copied unchanged.
+ *
+ * The neighbours are generated in a new random order for every call of
+ * {@link #neighbours(TypedEObject)} (default) or in a fixed order (configuration
+ * {@code 'neighbour-order'}). The local search moves to the first accepted neighbour.
  */
-@Named("de.evoal.optimisation.local_search.optimisation.manual-strategy")
+@Named(ManualNeighbourChoosingStrategy.NAME)
 @Dependent
 public class ManualNeighbourChoosingStrategy implements NeighbourChoosingStrategy {
+    /**
+     * The CDI name of the strategy, also the name of its random stream.
+     */
+    static final String NAME = "de.evoal.optimisation.local_search.optimisation.manual-strategy";
+
+    /**
+     * The name of the literal {@code fixed} of the DL enum {@code 'neighbour-order'}.
+     */
+    private static final String FIXED_ORDER = "fixed";
+
     @Inject
     protected AttributeHelper helper;
 
@@ -44,6 +61,14 @@ public class ManualNeighbourChoosingStrategy implements NeighbourChoosingStrateg
 
     @Inject
     protected FeatureBoundaries boundaries;
+
+    @Inject
+    private RandomService randomService;
+
+    /**
+     * The generator of the random order, {@code null} for the fixed order.
+     */
+    private RandomGenerator random;
 
     /**
      * The step sizes, already converted to the types of the features.
@@ -57,9 +82,10 @@ public class ManualNeighbourChoosingStrategy implements NeighbourChoosingStrateg
     public Stream<TypedEObject> neighbours(final TypedEObject currentBestCandidate) {
         final EStructuralFeature[] orderedFeatures = space.toArray(new EStructuralFeature[0]);
         final int numberOfNeighbours = (int) Math.pow(3, orderedFeatures.length);
+        final IntStream indices = random == null ? IntStream.range(0, numberOfNeighbours)
+                                                 : RandomOrder.of(numberOfNeighbours, random);
 
-        return IntStream.range(0, numberOfNeighbours)
-                        .mapToObj(index -> toOperations(index, orderedFeatures.length))
+        return indices.mapToObj(index -> toOperations(index, orderedFeatures.length))
                         .filter(ManualNeighbourChoosingStrategy::changesCandidate)
                         .map(operations -> toNeighbour(currentBestCandidate, orderedFeatures, operations))
                         .flatMap(Optional::stream);
@@ -69,6 +95,12 @@ public class ManualNeighbourChoosingStrategy implements NeighbourChoosingStrateg
     public ManualNeighbourChoosingStrategy init(final EObject config) {
         final  List<EObject> sv = helper.lookup(config, "step-size");
         this.stepValues = variableHelper.fromVariables(sv, space);
+
+        final EEnumLiteral order = helper.lookup(config, "neighbour-order");
+        if(!FIXED_ORDER.equals(order.getName())) {
+            this.random = randomService.random(NAME);
+        }
+
         return this;
     }
 

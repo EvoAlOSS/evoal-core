@@ -25,6 +25,9 @@
         <!-- number of runs per regression, all runs must give the same output (2 in the nightly pipeline) -->
         <evoal.regressions.repetitions>1</evoal.regressions.repetitions>
 
+        <!-- true also checks the examples that have references (nightly pipeline) -->
+        <evoal.regressions.examples>false</evoal.regressions.examples>
+
         <!-- shell that executes the search launcher (bin/evoal-search.sh needs bash 4 or newer, or zsh) -->
         <evoal.regressions.shell>bash</evoal.regressions.shell>
 
@@ -177,6 +180,7 @@
                         </executions>
                         <configuration>
                             <systemPropertyVariables>
+                                <evoal.regressions.examples>${evoal.regressions.examples}</evoal.regressions.examples>
                                 <evoal.regressions.repetitions>${evoal.regressions.repetitions}</evoal.regressions.repetitions>
                                 <evoal.regressions.root>${evoal.regressions.root}</evoal.regressions.root>
                                 <evoal.regressions.shell>${evoal.regressions.shell}</evoal.regressions.shell>

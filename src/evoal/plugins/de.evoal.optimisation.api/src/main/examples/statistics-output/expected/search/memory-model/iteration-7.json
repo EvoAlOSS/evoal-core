@@ -1,0 +1,91 @@
+{
+  "formatVersion" : "2027.4.0",
+  "number" : 7,
+  "individuals" : [ {
+    "id" : 35,
+    "input" : {
+      "x:0" : 1.0355675190566183,
+      "x:1" : -0.0036124724349670956
+    },
+    "output" : {
+      "y:0" : 1.3236620042201501
+    },
+    "relationships" : [ {
+      "kind" : "mutation",
+      "targets" : [ 30 ]
+    } ]
+  }, {
+    "id" : 38,
+    "input" : {
+      "x:0" : -0.941470355465087,
+      "x:1" : 2.0087604816187548
+    },
+    "output" : {
+      "y:0" : 5.605253498785885
+    },
+    "relationships" : [ {
+      "kind" : "mutation",
+      "targets" : [ 33 ]
+    } ]
+  }, {
+    "id" : 37,
+    "input" : {
+      "x:0" : -0.6221060449738965,
+      "x:1" : -0.09997466698733726
+    },
+    "output" : {
+      "y:0" : 19.504372271131892
+    },
+    "relationships" : [ {
+      "kind" : "mutation",
+      "targets" : [ 32 ]
+    } ]
+  }, {
+    "id" : 36,
+    "input" : {
+      "x:0" : 1.6368854458814952,
+      "x:1" : 3.268008257119
+    },
+    "output" : {
+      "y:0" : 41.012145260188035
+    },
+    "relationships" : [ {
+      "kind" : "mutation",
+      "targets" : [ 31 ]
+    } ]
+  }, {
+    "id" : 39,
+    "input" : {
+      "x:0" : -0.18517712197348968,
+      "x:1" : 4.586970340214783
+    },
+    "output" : {
+      "y:0" : 45.65706751002934
+    },
+    "relationships" : [ {
+      "kind" : "mutation",
+      "targets" : [ 34 ]
+    } ]
+  } ],
+  "steps" : [ ],
+  "ranks" : [ {
+    "number" : 0,
+    "members" : [ 35 ]
+  }, {
+    "number" : 1,
+    "members" : [ 38 ]
+  }, {
+    "number" : 2,
+    "members" : [ 37 ]
+  }, {
+    "number" : 3,
+    "members" : [ 36 ]
+  }, {
+    "number" : 4,
+    "members" : [ 39 ]
+  } ],
+  "metrics" : {
+    "evaluations.real" : 40,
+    "evaluations.surrogate" : 0
+  }
+}

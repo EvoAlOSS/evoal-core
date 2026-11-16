@@ -88,10 +88,10 @@ public class DefaultSwarm implements Swarm {
      * Moves the particles in the swarm.
      */
     @Override
-    public void move(final int generation, final int numberOfGenerations) {
+    public void move(final int generation) {
         IntStream.range(0, particles.length)
                  .parallel()
-                 .forEach(i -> particles[i].moveParticle(getNeighbors(i), generation, numberOfGenerations));
+                 .forEach(i -> particles[i].moveParticle(getNeighbors(i), generation));
     }
 
     /**

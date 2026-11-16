@@ -30,13 +30,13 @@ module 'search' {
     }
 
     configure 'particle-swarm-optimisation' for 'regression' {
-        'number-of-generations' := 10;
         'size-of-population' := 9;
         'neighborhood-size' := 3;
         'swarm' := 'default-swarm' {};
         'mover' := 'basic-mover' {
             'inertia-start' := 0.75;
             'inertia-end' := 0.25;
+            'inertia-iterations' := 10;
             'c1' := 2.05;
             'c2' := 2.05;
             'boundary-type' := 'boundary-handling.wrap';

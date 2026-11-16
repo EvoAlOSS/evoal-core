@@ -42,8 +42,10 @@ public interface Swarm extends EvoalComponent<Swarm> {
 
     /**
      * Moves the swarm.
+     *
+     * @param generation The current generation, starting at 1.
      */
-    void move(final int generation, final int numberOfGenerations);
+    void move(final int generation);
 
     /**
      * Sets the particles of the swarm.

@@ -51,6 +51,14 @@ public class SimulatedAnnealingStrategy implements AcceptingStrategy {
         return this;
     }
 
+    /**
+     * @return {@code false}: a rejection is random, a later iteration may accept a neighbour.
+     */
+    @Override
+    public boolean rejectionIsFinal() {
+        return false;
+    }
+
     @Override
     public boolean acceptCandidate(final OptimisationValue candidateValue, final OptimisationValue currentValue) {
         final double acceptanceProb = probabilityFunction.apply(currentValue, candidateValue, temperature);

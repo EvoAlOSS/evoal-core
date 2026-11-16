@@ -56,7 +56,7 @@ public class ARPSOSwarm extends DefaultSwarm {
      * Moves the particles by first considering the swarm diversity in order to set whether the swarm is attracting or repelling.
      */
     @Override
-    public void move(final int generation, final int numberOfGenerations) {
+    public void move(final int generation) {
         if(mover instanceof ARPSOMover arMover) {
             //  Assess diversity and set direction on the mover
             double diversity = this.getDiversity(particles);
@@ -73,7 +73,7 @@ public class ARPSOSwarm extends DefaultSwarm {
         }
 
         for (int p = 0; p < particles.length; p++) {
-            particles[p].moveParticle(getNeighbors(p), generation, numberOfGenerations);
+            particles[p].moveParticle(getNeighbors(p), generation);
         }
     }
 

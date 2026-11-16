@@ -568,8 +568,8 @@ nightly:check-changes:
     - ci/cancel-unchanged-nightly.sh
 
 #############################################################
-## Run every regression twice: both runs must give the same
-##   output, which must equal the references
+## Run every regression and every example with references twice:
+##   both runs must give the same output, which must equal the references
 ##
 ## Situations
 ##   - nightly pipeline schedule
@@ -589,7 +589,7 @@ evoal:nightly-regressions:
     - job: "dsl:compile-and-install"
       artifacts: true
   script:
-    - mvn $MAVEN_CLI_OPTS -f $EVOAL_POM -Dbranch=$CI_COMMIT_REF_NAME -Pregressions -Devoal.regressions.repetitions=2 verify
+    - mvn $MAVEN_CLI_OPTS -f $EVOAL_POM -Dbranch=$CI_COMMIT_REF_NAME -Pregressions -Devoal.regressions.repetitions=2 -Devoal.regressions.examples=true verify
   artifacts:
     when: always
     expire_in: "14 days"

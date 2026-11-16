@@ -62,8 +62,7 @@ public class ParticleTest {
         public void moveParticle(final State current,
                                  final State personalBest,
                                  final Particle[] neighbors,
-                                 final int currentIteration,
-                                 final int maxIterations,
+                                 final int generation,
                                  final RandomGenerator random) {
             current.setPosition(target);
         }
@@ -87,7 +86,7 @@ public class ParticleTest {
         @Test
         public void movingDoesNotChangeThePersonalBest() {
             // when
-            particle.moveParticle(new Particle[] {particle}, 0, 10);
+            particle.moveParticle(new Particle[] {particle}, 1);
 
             // then
             Assertions.assertEquals(5.0, particle.getCurrentPosition().eGet(x));
@@ -111,7 +110,7 @@ public class ParticleTest {
         public void undoingAMoveRestoresThePreviousState() {
             // given
             final Double[] startVelocity = particle.getCurrentState().getVelocity();
-            particle.moveParticle(new Particle[] {particle}, 0, 10);
+            particle.moveParticle(new Particle[] {particle}, 1);
 
             // when
             particle.undoMove();

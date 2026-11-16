@@ -18,6 +18,18 @@ public interface AcceptingStrategy extends EvoalComponent<AcceptingStrategy> {
     public boolean acceptCandidate(final OptimisationValue candidateValue, final OptimisationValue currentValue);
 
     /**
+     * Iff rejecting all neighbours of the current candidate is final, i.e., the strategy would
+     *   reject them in every later iteration, too. The local search then ends. Otherwise,
+     *   it keeps the candidate and tries again in the next iteration.
+     *
+     * @return {@code true} (default) for deterministic strategies whose acceptance does not
+     *   become less strict over time, {@code false} for randomised strategies.
+     */
+    public default boolean rejectionIsFinal() {
+        return true;
+    }
+
+    /**
      * Sets the current iteration.
      *
      * @param iteration Iteration number.

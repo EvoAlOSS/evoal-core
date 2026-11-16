@@ -7,25 +7,17 @@ import jakarta.inject.Inject;
 
 import lombok.extern.slf4j.Slf4j;
 
-import org.eclipse.emf.ecore.EClass;
-
-import org.apache.commons.math3.util.Pair;
-
 import de.evoal.core.api.board.Blackboard;
 import de.evoal.core.api.cdi.Application;
 import de.evoal.core.api.cdi.BeanFactory;
 import de.evoal.core.api.cdi.MainClass;
-import de.evoal.core.api.dynamic.EClassProvider;
 import de.evoal.core.api.random.RandomService;
-import de.evoal.languages.model.ol.OptimisationModule;
-import de.evoal.models.core.ecore.Space;
+import de.evoal.models.v202704.optimisation.model.OptimisationModule;
 
 import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
 import de.evoal.optimisation.api.execution.ExecutionRecorder;
 import de.evoal.optimisation.api.model.IndividualIDGenerator;
 import de.evoal.optimisation.api.model.OptimisationAlgorithm;
-import de.evoal.optimisation.api.producer.SpaceProducer;
-import de.evoal.optimisation.main.producer.OptimisationModuleLoader;
 
 /**
  * Runs a single heuristic search for the problem and algorithm of an OL file.
@@ -45,25 +37,16 @@ public class HeuristicSearchMain implements MainClass {
     private Blackboard board;
 
     @Inject
-    private EClassProvider eClassProvider;
-
-    @Inject
     private ExecutionRecorder executionRecorder;
 
     @Inject
     private IndividualIDGenerator idGenerator;
 
     @Inject
-    private OptimisationModuleLoader loader;
-
-    @Inject
     private RandomService randomService;
 
     @Inject
-    private SpaceProducer spaceProducer;
-
-    @Inject
-    private OptimisationModelTransformer transformer;
+    private OptimisationConfigurationSetup configurationSetup;
 
     @Override
     public void run() {
@@ -78,38 +61,17 @@ public class HeuristicSearchMain implements MainClass {
         board.bind(OptimisationBlackboardEntries.EVALUATION_OUTPUT_FOLDER, outputBaseDir);
         board.bind(OptimisationBlackboardEntries.EVALUATION_RUN, "0");
 
-        final OptimisationModule configurationModel = loader.load(heuristicFileName);
-        setupSpaces(configurationModel);
-
-        final Space searchSpace = spaceProducer.searchSpace();
-        final Space merged = spaceProducer.optimisationSpace()
-                                          .merge(searchSpace);
-
-        final de.evoal.models.v202704.optimisation.model.OptimisationModule eConfigurationModel =
-                transformer.transform(configurationModel, merged);
-
-        board.bind(OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, eConfigurationModel);
+        final OptimisationModule configuration = configurationSetup.setUp(heuristicFileName);
 
         randomService.startRun(0);
         idGenerator.startRun();
         executionRecorder.startRun();
 
         final OptimisationAlgorithm algorithm =
-                BeanFactory.createComponent(OptimisationAlgorithm.class, eConfigurationModel.getAlgorithm());
+                BeanFactory.createComponent(OptimisationAlgorithm.class, configuration.getAlgorithm());
 
         executionRecorder.beginExecution();
         algorithm.run();
         executionRecorder.finishRun();
-    }
-
-    private void setupSpaces(final OptimisationModule module) {
-        log.info("Setting up search and optimisation space for local search.");
-
-        final Pair<EClass, EClass> spaceClasses = eClassProvider.eClassFor(module.getProblem());
-        final Space searchSpace = new Space(spaceClasses.getFirst());
-        final Space optimisationSpace = new Space(spaceClasses.getSecond());
-
-        spaceProducer.setSearchSpace(searchSpace);
-        spaceProducer.setOptimisationSpace(optimisationSpace);
     }
 }

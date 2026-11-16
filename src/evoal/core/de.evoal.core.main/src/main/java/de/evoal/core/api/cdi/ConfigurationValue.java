@@ -20,9 +20,9 @@ import java.lang.annotation.RetentionPolicy;
  *     private double initialTemperature;
  *   </pre>
  *
- *   This example will load the pso configuration from the blackboard and search
- *   for the attribute {@code algorithm}. Afterwards, it looks up the attribute
- *   {@code number-of-generations}.
+ *   This example loads the optimisation configuration from the blackboard and
+ *   follows the attributes {@code algorithm}, {@code accepting-strategy} and
+ *   {@code initial-temperature}.
  */
 @Documented
 @Retention(RetentionPolicy.RUNTIME)

@@ -5,8 +5,10 @@
 #   results are the same as in the merge request pipeline (the references are
 #   compared exactly, and floating-point results may differ between platforms).
 #
-# Usage: ci/regressions-in-docker.sh [--update]
-#   --update  rewrites the references (expected/) instead of comparing.
+# Usage: ci/regressions-in-docker.sh [--update] [--examples]
+#   --update    rewrites the references (expected/) instead of comparing.
+#   --examples  also runs the examples that have references (as the nightly
+#               pipeline does).
 #
 # Requirements:
 #   - a running Docker daemon, logged in to the GitLab registry
@@ -22,9 +24,14 @@ MAVEN_REPOSITORY=${MAVEN_REPOSITORY:-$HOME/.m2/repository}
 ROOT=$( cd -- "$(dirname "$0")/.." >/dev/null 2>&1 ; pwd -P )
 
 UPDATE=false
-if [ "${1:-}" = "--update" ]; then
-    UPDATE=true
-fi
+EXAMPLES=false
+for ARGUMENT in "$@"; do
+    case "$ARGUMENT" in
+        --update)   UPDATE=true ;;
+        --examples) EXAMPLES=true ;;
+        *)          echo "Unknown argument: $ARGUMENT" >&2; exit 1 ;;
+    esac
+done
 
 docker run --rm \
     --platform linux/amd64 \
@@ -32,4 +39,4 @@ docker run --rm \
     --volume "$MAVEN_REPOSITORY:/root/.m2/repository" \
     --workdir /work \
     "$IMAGE" \
-    mvn --batch-mode -f src/evoal/pom.xml -Pregressions -Devoal.regressions.update="$UPDATE" verify
+    mvn --batch-mode -f src/evoal/pom.xml -Pregressions -Devoal.regressions.update="$UPDATE" -Devoal.regressions.examples="$EXAMPLES" verify

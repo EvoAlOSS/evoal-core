@@ -12,9 +12,6 @@ module de.evoal.optimisation.pso.optimisation {
 	    'swarm' : instance swarm;
 	    'size-of-population'  : int;
 
-	     @LowerBoundary { boundary := 0; }
-        'number-of-generations' : int := 10;
-
 	    'neighborhood-size' : int;
 	    'mover' : instance 'pso-mover';
 	    'topology' : enum topology := topology.global;
@@ -52,6 +49,14 @@ module de.evoal.optimisation.pso.optimisation {
 	     * Ending value of inertia weight.
 	     */
 	    'inertia-end' : real;
+
+	    /**
+	     * Number of generations until the inertia weight reaches 'inertia-end'.
+	     *   The weight changes linearly from 'inertia-start' and stays at
+	     *   'inertia-end' afterwards.
+	     */
+	    @LowerBoundary { boundary := 1; }
+	    'inertia-iterations' : int;
 
         /**
          * Parameter c1 of basic PSO kinematic equation. Weights influence of individual memory.
@@ -100,6 +105,14 @@ module de.evoal.optimisation.pso.optimisation {
 	     * Ending value of inertia weight.
 	     */
 	    'inertia-end' : real;
+
+	    /**
+	     * Number of generations until the inertia weight reaches 'inertia-end'.
+	     *   The weight changes linearly from 'inertia-start' and stays at
+	     *   'inertia-end' afterwards.
+	     */
+	    @LowerBoundary { boundary := 1; }
+	    'inertia-iterations' : int;
 
         /**
          * Parameter c1 of basic PSO kinematic equation. Weights influence of individual memory.

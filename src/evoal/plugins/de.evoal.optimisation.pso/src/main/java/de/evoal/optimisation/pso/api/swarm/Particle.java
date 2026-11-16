@@ -158,14 +158,12 @@ public class Particle {
      * Moves the particle with its mover. Changes only the current state.
      *
      * @param neighbors The neighbours of the particle.
-     * @param current_iteration The current iteration.
-     * @param max_iterations The maximum number of iterations.
+     * @param generation The current generation, starting at 1.
      */
-    public void moveParticle(final Particle[] neighbors, int current_iteration, int max_iterations) {
+    public void moveParticle(final Particle[] neighbors, final int generation) {
         stateBeforeMove = new State(current);
 
-        mover.moveParticle(current, personalBest, neighbors,
-            current_iteration, max_iterations, random);
+        mover.moveParticle(current, personalBest, neighbors, generation, random);
     }
 
     /**

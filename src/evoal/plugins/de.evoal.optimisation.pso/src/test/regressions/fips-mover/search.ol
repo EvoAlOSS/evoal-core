@@ -29,7 +29,6 @@ module 'search' {
     }
 
     configure 'particle-swarm-optimisation' for 'regression' {
-        'number-of-generations' := 10;
         'size-of-population' := 9;
         'neighborhood-size' := 3;
         'swarm' := 'default-swarm' {};

@@ -43,8 +43,6 @@ public class ParticleSwarmAlgorithm implements OptimisationAlgorithm {
     @Inject
     private IndividualIDGenerator idGenerator;
 
-    private int maximumNumberOfGenerations;
-
     /**
      * Records the metrics of the iterations.
      */
@@ -66,7 +64,6 @@ public class ParticleSwarmAlgorithm implements OptimisationAlgorithm {
     public OptimisationAlgorithm init(final EObject configuration) {
         swarm = BeanFactory.createComponent(Swarm.class, helper.lookup(configuration, "swarm"));
         criterion = producer.create(configuration);
-        maximumNumberOfGenerations = helper.lookup(configuration, "number-of-generations");
 
         return this;
     }
@@ -103,7 +100,7 @@ public class ParticleSwarmAlgorithm implements OptimisationAlgorithm {
 
             log.info("Processing generation: {}", generation);
 
-            swarm.move(generation, maximumNumberOfGenerations);
+            swarm.move(generation);
             withinBudget = evaluateWithinBudget(swarm::evaluate);
 
             snapshot = toIteration(memory, generation);

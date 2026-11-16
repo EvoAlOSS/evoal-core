@@ -3,16 +3,27 @@ package de.evoal.releng.regressions;
 import java.nio.file.Path;
 
 /**
- * A regression configuration: a folder in {@code src/test/regressions} of a plugin
- *   that contains the configuration {@value #CONFIGURATION_FILE}, the files it
- *   imports and the references of its output in {@value #EXPECTED_FOLDER}.
+ * A configuration that is run and whose output is compared with references. It is
+ *   either
+ * <ul>
+ *   <li>a regression configuration: a folder in {@code src/test/regressions} of a plugin
+ *     that contains the configuration {@value #CONFIGURATION_FILE} and the files it
+ *     imports. It runs with the search launcher of the release.</li>
+ *   <li>an example: a folder in {@code src/main/examples} of a plugin that contains a
+ *     run script ({@code 01-run-*.sh}). It runs with its own run script, as users
+ *     run it.</li>
+ * </ul>
+ * The references of the output are in {@value #EXPECTED_FOLDER}.
  *
- * @param folder The folder of the regression configuration.
- * @param name The name of the regression, {@code <plugin>/<folder name>}.
+ * @param folder The folder of the configuration.
+ * @param name The name, {@code <plugin>/<folder name>} for a regression configuration
+ *   and {@code <plugin>/examples/<folder name>} for an example.
+ * @param runScript The run script of an example, relative to {@link #folder()}, or
+ *   {@code null} for a regression configuration.
  */
-public record Regression(Path folder, String name) {
+public record Regression(Path folder, String name, String runScript) {
     /**
-     * The optimisation configuration that is run.
+     * The optimisation configuration of a regression configuration.
      */
     public static final String CONFIGURATION_FILE = "search.ol";
 
@@ -22,10 +33,31 @@ public record Regression(Path folder, String name) {
     public static final String EXPECTED_FOLDER = "expected";
 
     /**
+     * Creates a regression configuration.
+     */
+    public static Regression configuration(final Path folder, final String name) {
+        return new Regression(folder, name, null);
+    }
+
+    /**
+     * Creates an example that runs with its own run script.
+     */
+    public static Regression example(final Path folder, final String name, final String runScript) {
+        return new Regression(folder, name, runScript);
+    }
+
+    /**
      * @return The folder that contains the expected output of the regression.
      */
     public Path expectedFolder() {
         return folder.resolve(EXPECTED_FOLDER);
+    }
+
+    /**
+     * @return {@code true} if this is an example that runs with its own run script.
+     */
+    public boolean isExample() {
+        return runScript != null;
     }
 
     @Override

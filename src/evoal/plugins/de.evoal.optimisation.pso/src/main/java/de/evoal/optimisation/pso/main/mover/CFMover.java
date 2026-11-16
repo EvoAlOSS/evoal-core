@@ -62,15 +62,13 @@ public class CFMover implements Mover {
      * @param current The current state (position and velocity) of the particle.
      * @param personalBest The best state ever achieved by the particle.
      * @param neighbors The neighboring particles.
-     * @param currentIteration Current iteration.
-     * @param maxIterations Max number of iterations.
+     * @param generation The current generation, starting at 1.
      */
     @Override
     public void moveParticle(final State current,
                              final State personalBest,
                              final Particle[] neighbors,
-                             final int currentIteration,
-                             int maxIterations,
+                             final int generation,
                              final RandomGenerator random) {
         final TypedEObject neighborhoodBestPosition = Particle.getNeighborhoodBestPosition(neighbors);
 

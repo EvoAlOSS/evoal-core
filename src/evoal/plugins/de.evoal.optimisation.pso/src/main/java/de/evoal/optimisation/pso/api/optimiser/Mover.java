@@ -32,15 +32,13 @@ public interface Mover extends EvoalComponent<Mover> {
      * @param current The current state (position and velocity) of the particle.
      * @param personalBest The best state ever achieved by the particle.
      * @param neighbors Neighbors of particle being moved.
-     * @param currentIteration Current iteration.
-     * @param maxIterations Max number of iterations.
+     * @param generation The current generation, starting at 1.
      * @param random The random generator of the particle. Movers must not use other generators,
      *   since the particles are moved in parallel.
      */
     public void moveParticle(final State current,
                              final State personalBest,
                              final Particle[] neighbors,
-                             final int currentIteration,
-                             final int maxIterations,
+                             final int generation,
                              final RandomGenerator random);
 }

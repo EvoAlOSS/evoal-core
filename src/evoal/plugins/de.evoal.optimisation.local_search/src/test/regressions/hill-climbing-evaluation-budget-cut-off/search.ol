@@ -35,6 +35,7 @@ module 'search' {
                 'variable' { var := data 'x:0'; val := 0.1; },
                 'variable' { var := data 'x:1'; val := 0.1; }
             ];
+            'neighbour-order' := 'neighbour-order.fixed';
         };
         'accepting-strategy' := 'hill-climber' {};
         'initialisation' := 'specify-candidates' {

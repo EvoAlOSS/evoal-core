@@ -101,7 +101,25 @@ module de.evoal.optimisation.local_search.optimisation {
 	    */
 	    @MaximumNumberOfElements { bound := 19; }
     	'step-size' : array instance variable;
+
+	    /**
+	    * Order in which the neighbours are offered to the accepting strategy.
+	    * The local search moves to the first neighbour that is accepted.
+	    */
+	    'neighbour-order' : enum 'neighbour-order' := 'neighbour-order.random';
 	}
+
+	/**
+	 * Order of the neighbours of the 'manual-strategy'.
+	 *
+	 *   random: a new random order in every iteration (textbook variant). Simulated
+	 *           annealing and threshold accepting then accept a random neighbour,
+	 *           hill climbing moves to a random improving neighbour.
+	 *   fixed:  always the same order, the first variable changes fastest. Simulated
+	 *           annealing and threshold accepting then tend to walk in the direction
+	 *           of the first neighbours, because they accept worse neighbours, too.
+	 */
+	nominal enum 'neighbour-order' ( random, fixed );
 
     /**
     * Cooling strategies determine how temperature is decreased in each iteration

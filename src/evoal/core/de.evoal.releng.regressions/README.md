@@ -19,6 +19,20 @@ belong in `src/main/examples`.
 Every regression runs with `bin/evoal-search.sh` and `EVOAL_SEED=42` in a copy
 of its folder (`target/regressions/<plugin>/<name>/run-<n>`, including `run.log`).
 
+## Examples
+
+The examples in `src/evoal/plugins/<plugin>/src/main/examples/<name>` are
+checked as well if the property `evoal.regressions.examples` is `true` (nightly
+pipeline). An example takes part if its folder contains `expected/`; all other
+examples are left out. It must have exactly one run script `01-run-*.sh`, which
+is run as users run it, with `EVOAL_HOME` set to the release and
+`EVOAL_SEED=42`. The script writes into `output/`. Its references are named
+`<plugin>/examples/<name>`.
+
+To add an example, create an empty `expected/` folder and create the
+references with `ci/regressions-in-docker.sh --update --examples`.
+`ci/create-release.sh` does not copy `expected/` into the release.
+
 ## Running
 
 The regressions run with the profile `regressions` (in the merge request
@@ -32,6 +46,7 @@ mvn -f src/evoal/pom.xml -Pregressions verify
 | Property | Meaning |
 |---|---|
 | `-Devoal.regressions.update=true` | rewrites the references instead of comparing |
+| `-Devoal.regressions.examples=true` | also runs the examples that have references |
 | `-Devoal.regressions.repetitions=2` | runs every regression twice; both outputs must be identical (nightly pipeline) |
 | `-Devoal.regressions.shell=zsh` | shell for the launcher (default `bash`, version 4 or newer) |
 
@@ -41,7 +56,8 @@ References are compared exactly, and floating-point results can differ between
 platforms. Therefore the references are created in the EvoAl CI image:
 
 ```sh
-ci/regressions-in-docker.sh --update
+ci/regressions-in-docker.sh --update              # regressions only
+ci/regressions-in-docker.sh --update --examples   # regressions and examples
 ```
 
 The only value that is not compared is the EvoAl version in the memory model

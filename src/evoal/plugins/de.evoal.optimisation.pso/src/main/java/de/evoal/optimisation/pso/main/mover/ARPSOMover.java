@@ -58,6 +58,15 @@ public class ARPSOMover implements Mover {
     private double wend;
 
     @Inject
+    @ConfigurationValue(entry = OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.mover.inertia-iterations")
+    private int inertiaIterations;
+
+    /**
+     * The inertia weight over the generations.
+     */
+    private InertiaSchedule inertia;
+
+    @Inject
     @ConfigurationValue(entry = OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, access = "algorithm.mover.c1")
     private double c1;
 
@@ -68,19 +77,24 @@ public class ARPSOMover implements Mover {
     @Getter @Setter
     private int direction = 1;
 
+    @Override
+    public Mover init(final EObject configuration) {
+        inertia = new InertiaSchedule(wstart, wend, inertiaIterations);
+
+        return this;
+    }
+
     /**
      * Moves the particle.
      * @param current The current state (position and velocity) of the particle.
      * @param personalBest The best state ever achieved by the particle.
      * @param neighbors The neighboring particles.
-     * @param currentIteration Current iteration.
-     * @param maxIterations Max number of iterations.
+     * @param generation The current generation, starting at 1.
      */
     public void moveParticle(final State current,
                              final State personalBest,
                              final Particle[] neighbors,
-                             final int currentIteration,
-                             final int maxIterations,
+                             final int generation,
                              final RandomGenerator random)
     {
         final TypedEObject neighborhoodBestPosition = Particle.getNeighborhoodBestPosition(neighbors);
@@ -103,8 +117,7 @@ public class ARPSOMover implements Mover {
 
             double max_v = maximum - minimum;
 
-            double w = wstart + ((double) (currentIteration + 1.) /
-                (double) maxIterations) * (wend - wstart);
+            double w = inertia.weight(generation);
             double next_v = Math.max(-max_v, Math.min(max_v, w * v + direction * (c1 * random.
                 nextDouble() * (personalBestPosition.eGetAsDouble(feature) - x) +
                 c2 * random.nextDouble() *

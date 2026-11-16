@@ -18,6 +18,7 @@ import de.evoal.optimisation.api.producer.SpaceProducer;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicInteger;
 import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
@@ -137,8 +138,10 @@ public class LocalSearchAlgorithm implements OptimisationAlgorithm {
 
             // 2.2 Search for acceptable candidate (lazily, every neighbour is evaluated once)
             final Optional<Evaluated> acceptableCandidate;
+            final AtomicInteger numberOfNeighbours = new AtomicInteger();
             try {
                 acceptableCandidate = strategy.neighbours(current.candidate())
+                                              .peek(neighbour -> numberOfNeighbours.incrementAndGet())
                                               .map(this::evaluate)
                                               .filter(c -> acceptingStrategy.acceptCandidate(c.value(), currentValue))
                                               .findFirst();
@@ -150,13 +153,22 @@ public class LocalSearchAlgorithm implements OptimisationAlgorithm {
                 break;
             }
 
-            // 2.3 No candidate found
+            // 2.3 No candidate found: the run ends if the rejection is final or there are no
+            //     neighbours at all, otherwise the candidate stays and the next iteration tries again
             if(acceptableCandidate.isEmpty()) {
-                log.info("No improvement in generation {}. Terminating optimisation.", iterationNumber);
+                // the candidate stays the same, record the iteration anyway
+                state = toIteration(iterationNumber, current, false);
+                statistics.add(state);
 
-                // the candidate stays the same, record the final iteration anyway
-                statistics.add(toIteration(iterationNumber, current, false));
-                break;
+                if(acceptingStrategy.rejectionIsFinal() || numberOfNeighbours.get() == 0) {
+                    log.info("No acceptable neighbour in generation {}. Terminating optimisation.", iterationNumber);
+                    break;
+                }
+
+                log.info("No acceptable neighbour in generation {}. Keeping the candidate.", iterationNumber);
+                acceptingStrategy.setIteration(iterationNumber);
+                iterationNumber += 1;
+                continue;
             }
 
             // 2.4 update candidate information

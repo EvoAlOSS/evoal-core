@@ -3,7 +3,7 @@ package de.evoal.optimisation.main.search;
 import de.evoal.core.api.board.Blackboard;
 import de.evoal.core.api.random.RandomService;
 import de.evoal.core.api.ecore.EObjectPair;
-import de.evoal.languages.model.ol.OptimisationModule;
+import de.evoal.models.v202704.optimisation.model.OptimisationModule;
 import de.evoal.models.core.ecore.Space;
 import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
 import de.evoal.core.api.cdi.*;
@@ -18,7 +18,6 @@ import jakarta.enterprise.context.ApplicationScoped;
 import de.evoal.optimisation.api.statistics.writer.Column;
 import de.evoal.optimisation.api.statistics.writer.ColumnType;
 import de.evoal.optimisation.api.statistics.writer.WriterContext;
-import de.evoal.optimisation.main.producer.OptimisationModuleLoader;
 import jakarta.inject.Provider;
 import lombok.extern.slf4j.Slf4j;
 
@@ -35,7 +34,7 @@ Prepares evaluation of a heuristic search by running it multiple times.
 Furthermore, it is possible to use a target file to run it for multiple
 times for different targets.
 
-Each target is searched for 'core:evaluation-iterations' times to allow a
+Each target is searched for 'optimisation:evaluation-iterations' times to allow a
 proper empirical evaluation.
 """
 )
@@ -62,7 +61,7 @@ public class HeuristicSearchEvaluation implements MainClass {
     private IndividualIDGenerator idGenerator;
 
     @Inject
-    private OptimisationModuleLoader loader;
+    private OptimisationConfigurationSetup configurationSetup;
 
     @Inject
     @BlackboardValue(OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION_FILE)
@@ -72,8 +71,9 @@ public class HeuristicSearchEvaluation implements MainClass {
     @BlackboardValue(OptimisationBlackboardEntries.EVALUATION_ITERATIONS)
     private int iterations;
 
-    @Inject
-    @BlackboardValue(OptimisationBlackboardEntries.EVALUATION_OUTPUT_FOLDER)
+    /**
+     * The folder the statistics are written to: {@code <output-folder>/<name of the OL file>}.
+     */
     private File outputBaseDir;
 
     private List<EObjectPair> targets;
@@ -98,8 +98,10 @@ public class HeuristicSearchEvaluation implements MainClass {
         log.info("  heuristic configuration loaded from ({})", olFile);
         log.info("  running {} iterations.", iterations);
 
-        algorithmConfiguration = loader.load(olFile);
-        board.bind(OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION, algorithmConfiguration);
+        final String outputFolder = board.get(OptimisationBlackboardEntries.EVALUATION_OUTPUT_FOLDER);
+        outputBaseDir = HeuristicSearchUtils.calculateOutputBaseDir(new File(outputFolder), new File(olFile));
+
+        algorithmConfiguration = configurationSetup.setUp(olFile);
 
         if(targetFile != null) {
             final TargetPointLoader loader = BeanFactory.create(TargetPointLoader.class);

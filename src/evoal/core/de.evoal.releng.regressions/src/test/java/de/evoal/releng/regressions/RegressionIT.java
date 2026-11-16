@@ -20,6 +20,8 @@ import org.junit.jupiter.api.TestFactory;
  *   <li>{@code evoal.regressions.root}: root folder of the repository (required).</li>
  *   <li>{@code evoal.regressions.update}: {@code true} rewrites the references
  *     instead of comparing against them.</li>
+ *   <li>{@code evoal.regressions.examples}: {@code true} also checks the examples
+ *     that have references (see {@link RegressionFinder}).</li>
  *   <li>{@code evoal.regressions.repetitions}: number of runs per regression
  *     (default 1); all runs must give the same output.</li>
  *   <li>{@code evoal.regressions.shell}: shell for the launcher (default {@code bash}).</li>
@@ -55,6 +57,11 @@ public class RegressionIT {
     private final boolean update;
 
     /**
+     * Also checks the examples that have references (nightly pipeline).
+     */
+    private final boolean withExamples;
+
+    /**
      * Creates the test from the system properties.
      */
     public RegressionIT() {
@@ -67,6 +74,7 @@ public class RegressionIT {
         final Path release = root.resolve(RELEASE_FOLDER);
         this.runner = new RegressionRunner(release, shell, agent);
         this.update = Boolean.getBoolean("evoal.regressions.update");
+        this.withExamples = Boolean.getBoolean("evoal.regressions.examples");
         this.repetitions = Integer.getInteger("evoal.regressions.repetitions", 1);
     }
 
@@ -100,8 +108,10 @@ public class RegressionIT {
         final Path absoluteRoot = root.toAbsolutePath();
         Assertions.assertFalse(regressions.isEmpty(), "No regressions found below " + absoluteRoot);
 
-        return regressions.stream()
-                          .map(this::toTest);
+        final List<Regression> examples = withExamples ? RegressionFinder.findExamples(root) : List.of();
+
+        return Stream.concat(regressions.stream(), examples.stream())
+                     .map(this::toTest);
     }
 
     /**
