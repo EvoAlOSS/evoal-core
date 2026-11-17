@@ -123,6 +123,7 @@ public class EvolutionaryAlgorithmOptimisation implements OptimisationAlgorithm 
         final EvolutionStatistics<OptimisationValue, MinMax<OptimisationValue>> statistics = EvolutionStatistics.ofComparable();
 		final EvolutionStream<?, OptimisationValue> initialStream = BeanFactory.create(InitialStream.class).init(provider, engine).create();
 		final JeneticsStatisticsWriter writer = new JeneticsStatisticsWriter(this.statistics);
+		this.statistics.start();
 
         final EvolutionResult<?, OptimisationValue> result
         		=  initialStream.limit(stoppingCriterion)

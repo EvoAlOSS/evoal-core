@@ -22,6 +22,11 @@ public class MultipleStatisticsWriter implements StatisticsWriter {
     }
 
     @Override
+    public void start() {
+        Arrays.stream(writers).forEach(StatisticsWriter::start);
+    }
+
+    @Override
     public StatisticsWriter init(EObject configuration) {
         return this;
     }

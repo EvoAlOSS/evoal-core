@@ -11,11 +11,19 @@ import de.evoal.models.core.cdi.EvoalComponent;
  * is the table-like structure of data (think of a CSV file).
  *
  * The framework will call {@link #init(EObject)} once before the optimisation
- * algorithm starts. While the algorithm runs, it will call {@link #add(Iteration)}
- * for each generation step. When the algorithm terminates, the framework calls
- * {@link #write()} once to force data serialization.
+ * algorithm starts. When the run starts, it calls {@link #start()} once. While the
+ * algorithm runs, it will call {@link #add(Iteration)} for each generation step. When
+ * the algorithm terminates, the framework calls {@link #write()} once to force data
+ * serialization. The run connects the writers through a {@link StatisticsWriterListener}.
  */
 public interface StatisticsWriter extends EvoalComponent<StatisticsWriter> {
+    /**
+     * Starts the statistics of the run. The metric definitions of the run are complete.
+     *   Does nothing by default.
+     */
+    default void start() {
+    }
+
     /**
      * Adds an optimisation result to the statistics.
      */

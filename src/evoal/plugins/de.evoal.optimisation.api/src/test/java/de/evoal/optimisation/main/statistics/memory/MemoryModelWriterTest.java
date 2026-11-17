@@ -112,9 +112,12 @@ public class MemoryModelWriterTest {
     }
 
     /**
-     * Adds iteration 0 with the start individual and iteration 1 with its mutation.
+     * Starts the writer and adds iteration 0 with the start individual and iteration 1 with
+     *   its mutation.
      */
     private static void addTwoIterations(final MemoryModelWriter writer) {
+        writer.start();
+
         final Individual start = MemoryModels.individual(0, new double[] {1.0, 1.0}, 2.0);
         writer.add(MemoryModels.iteration(0, start));
 
@@ -193,18 +196,27 @@ public class MemoryModelWriterTest {
         }
 
         @Test
-        public void theRunIsDescribedWithTheFirstIteration() throws Exception {
+        public void theRunIsDescribedWhenItStarts() throws Exception {
             // when
-            writer.add(MemoryModels.iteration(0, MemoryModels.individual(0, new double[] {1.0, 1.0}, 2.0)));
+            writer.start();
 
             // then
-            Assertions.assertEquals(List.of(".incomplete", "execution-information.json", "iteration-0.json"),
-                                    contentOf(memoryModel));
+            Assertions.assertEquals(List.of(".incomplete", "execution-information.json"), contentOf(memoryModel));
+        }
+
+        @Test
+        public void anIterationBeforeTheStartIsRejected() {
+            // given
+            final Iteration first = MemoryModels.iteration(0, MemoryModels.individual(0, new double[] {1.0, 1.0}, 2.0));
+
+            // when / then
+            Assertions.assertThrows(IllegalStateException.class, () -> writer.add(first));
         }
 
         @Test
         public void iterationsOutOfOrderAreRejected() {
             // given
+            writer.start();
             writer.add(MemoryModels.iteration(0, MemoryModels.individual(0, new double[] {1.0, 1.0}, 2.0)));
             final Iteration skipped = MemoryModels.iteration(2, MemoryModels.individual(1, new double[] {0.0, 0.0}, 0.0));
 

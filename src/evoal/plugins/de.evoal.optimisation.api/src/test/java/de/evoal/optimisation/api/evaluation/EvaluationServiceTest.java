@@ -25,6 +25,9 @@ import de.evoal.models.v202704.optimisation.memory.MetricScope;
 
 import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
 import de.evoal.optimisation.api.cdi.OptimisationComponentProducer;
+import de.evoal.optimisation.api.events.IndividualEvaluated;
+import de.evoal.optimisation.api.events.RunEventDispatcher;
+import de.evoal.optimisation.api.events.RunListener;
 import de.evoal.optimisation.api.execution.ExecutionRecorder;
 import de.evoal.optimisation.api.execution.MetricContributor;
 
@@ -43,6 +46,10 @@ public class EvaluationServiceTest {
 
     private final EvaluationService service = new EvaluationService();
 
+    private final RunEventDispatcher events = new RunEventDispatcher(recorder);
+
+    private final RunListener listener = Mockito.mock(RunListener.class);
+
     private void evaluateTimes(final int numberOfEvaluations) {
         for(int i = 0; i < numberOfEvaluations; ++i) {
             service.evaluate(candidate);
@@ -54,6 +61,11 @@ public class EvaluationServiceTest {
         final Field producerField = EvaluationService.class.getDeclaredField("componentProducer");
         producerField.setAccessible(true);
         producerField.set(service, componentProducer);
+
+        final Field eventsField = EvaluationService.class.getDeclaredField("events");
+        eventsField.setAccessible(true);
+        eventsField.set(service, events);
+        events.startRun(List.of(listener));
 
         // the recorder starts the service in every run
         @SuppressWarnings("unchecked")
@@ -122,6 +134,27 @@ public class EvaluationServiceTest {
             // then
             Assertions.assertEquals(3, service.numberOfEvaluations(EvaluationSource.REAL));
             Assertions.assertEquals(0, service.numberOfEvaluations(EvaluationSource.SURROGATE));
+        }
+
+        @Test
+        public void publishesTheEvaluation() {
+            // when
+            service.evaluate(candidate);
+
+            // then
+            Mockito.verify(listener).on(new IndividualEvaluated(candidate, output, EvaluationSource.REAL));
+        }
+
+        @Test
+        public void doesNotPublishAFailedEvaluation() {
+            // given
+            Mockito.when(function.evaluate(candidate)).thenThrow(new IllegalStateException("simulation failed"));
+
+            // when
+            Assertions.assertThrows(IllegalStateException.class, () -> service.evaluate(candidate));
+
+            // then
+            Mockito.verifyNoInteractions(listener);
         }
 
         @Test

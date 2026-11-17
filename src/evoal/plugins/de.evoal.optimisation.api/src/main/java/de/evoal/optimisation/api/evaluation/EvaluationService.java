@@ -19,6 +19,8 @@ import de.evoal.models.v202704.optimisation.memory.MetricValueType;
 
 import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
 import de.evoal.optimisation.api.cdi.OptimisationComponentProducer;
+import de.evoal.optimisation.api.events.IndividualEvaluated;
+import de.evoal.optimisation.api.events.RunEventDispatcher;
 import de.evoal.optimisation.api.execution.ExecutionRecorder;
 import de.evoal.optimisation.api.execution.MetricContributor;
 
@@ -48,6 +50,12 @@ public class EvaluationService implements MetricContributor {
      * The number of evaluations per source in the current run.
      */
     private final Map<EvaluationSource, Long> counters = new EnumMap<>(EvaluationSource.class);
+
+    /**
+     * Publishes an {@link IndividualEvaluated} for every successful evaluation.
+     */
+    @Inject
+    private RunEventDispatcher events;
 
     /**
      * The optimisation function of the current run. It is created on the first evaluation of
@@ -88,7 +96,8 @@ public class EvaluationService implements MetricContributor {
     }
 
     /**
-     * Evaluates a candidate and counts the evaluation.
+     * Evaluates a candidate, counts the evaluation and publishes an
+     *   {@link IndividualEvaluated} if the evaluation succeeds.
      *
      * @param candidate The candidate (a point of the search space).
      * @return The result of the optimisation function (a point of the optimisation space).
@@ -104,7 +113,10 @@ public class EvaluationService implements MetricContributor {
         requireBudgetLeft(source);
         counters.merge(source, 1L, Long::sum);
 
-        return currentFunction.evaluate(candidate);
+        final TypedEObject output = currentFunction.evaluate(candidate);
+        events.publish(new IndividualEvaluated(candidate, output, source));
+
+        return output;
     }
 
     /**

@@ -14,9 +14,11 @@ import de.evoal.models.v202704.optimisation.memory.Mutation;
 import de.evoal.models.v202704.optimisation.memory.Relationship;
 import de.evoal.models.v202704.optimisation.memory.Rank;
 import de.evoal.optimisation.api.statistics.writer.StatisticsWriter;
+import de.evoal.optimisation.api.statistics.writer.StatisticsWriterListener;
 import de.evoal.optimisation.api.producer.SpaceProducer;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
@@ -32,6 +34,11 @@ import de.evoal.core.api.utils.AttributeHelper;
 import de.evoal.optimisation.api.cdi.TerminationCriterionProducer;
 import de.evoal.optimisation.api.evaluation.EvaluationBudgetExhaustedException;
 import de.evoal.optimisation.api.evaluation.EvaluationService;
+import de.evoal.optimisation.api.events.IterationFinished;
+import de.evoal.optimisation.api.events.IterationStarted;
+import de.evoal.optimisation.api.events.RunEventDispatcher;
+import de.evoal.optimisation.api.events.RunFinished;
+import de.evoal.optimisation.api.events.RunStarted;
 import de.evoal.optimisation.api.execution.ExecutionRecorder;
 import de.evoal.optimisation.api.model.*;
 
@@ -65,7 +72,13 @@ public class LocalSearchAlgorithm implements OptimisationAlgorithm {
     private EvaluationService evaluationService;
 
     /**
-     * Records the metrics of the iterations.
+     * Publishes the events of the run.
+     */
+    @Inject
+    private RunEventDispatcher events;
+
+    /**
+     * Provides the execution of the run.
      */
     @Inject
     private ExecutionRecorder executionRecorder;
@@ -136,16 +149,22 @@ public class LocalSearchAlgorithm implements OptimisationAlgorithm {
         bestIndividual = null;
         bestValue = null;
 
+        events.startRun(List.of(new StatisticsWriterListener(statistics)));
+        events.publish(new RunStarted(executionRecorder.getExecution()));
+
         //1. create init new search space candidate
+        events.publish(new IterationStarted(0));
         Evaluated current = evaluate(provider.create().findFirst().get());
 
         // Log initial iteration
         Iteration state = toIteration(0, current);
-        statistics.add(state);
+        finishIteration(state);
 
         // 2. iterate  until stopping criteria is met or there is no new neighbour
         int iterationNumber = 1;
         while(criterion.shouldContinue(state)) {
+            events.publish(new IterationStarted(iterationNumber));
+
             // 2.1 Just a final copy to satisfy Java
             final OptimisationValue currentValue = current.value();
 
@@ -166,7 +185,7 @@ public class LocalSearchAlgorithm implements OptimisationAlgorithm {
                 log.info("{} Terminating optimisation in generation {}.", e.getMessage(), iterationNumber);
 
                 // the candidate stays the same, record the partial iteration
-                statistics.add(toIteration(iterationNumber, current, false));
+                finishIteration(toIteration(iterationNumber, current, false));
                 break;
             }
 
@@ -175,7 +194,7 @@ public class LocalSearchAlgorithm implements OptimisationAlgorithm {
             if(acceptableCandidate.isEmpty()) {
                 // the candidate stays the same, record the iteration anyway
                 state = toIteration(iterationNumber, current, false);
-                statistics.add(state);
+                finishIteration(state);
 
                 if(acceptingStrategy.rejectionIsFinal() || numberOfNeighbours.get() == 0) {
                     log.info("No acceptable neighbour in generation {}. Terminating optimisation.", iterationNumber);
@@ -193,7 +212,7 @@ public class LocalSearchAlgorithm implements OptimisationAlgorithm {
 
             // 2.5 Update protocol
             state = toIteration(iterationNumber, current);
-            statistics.add(state);
+            finishIteration(state);
 
             // 2.6 Update iteration-specific data
             acceptingStrategy.setIteration(iterationNumber);
@@ -203,7 +222,9 @@ public class LocalSearchAlgorithm implements OptimisationAlgorithm {
         log.info("Candidate after {} iterations: {}", iterationNumber - 1, current.candidate());
         log.info("Best candidate found: {} -> {}", bestIndividual.getInput(), bestValue);
 
-        this.statistics.write();
+        events.publish(new RunFinished(executionRecorder.getExecution()));
+        events.finishRun();
+
         cdiContainer.getContextControl()
                     .stopContext(RunScoped.class);
 
@@ -250,8 +271,14 @@ public class LocalSearchAlgorithm implements OptimisationAlgorithm {
         state.setNumber(iteration);
         state.getRanks().add(first);
         state.setBestSoFar(bestIndividual);
-        executionRecorder.recordMetrics(state);
 
         return state;
+    }
+
+    /**
+     * Publishes the finished iteration; the dispatcher records its metrics.
+     */
+    private void finishIteration(final Iteration iteration) {
+        events.publish(new IterationFinished(iteration));
     }
 }

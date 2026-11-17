@@ -12,9 +12,15 @@ import de.evoal.models.v202704.optimisation.memory.MemoryFactory;
 import de.evoal.models.v202704.optimisation.memory.Rank;
 import de.evoal.optimisation.api.cdi.TerminationCriterionProducer;
 import de.evoal.optimisation.api.evaluation.EvaluationBudgetExhaustedException;
+import de.evoal.optimisation.api.events.IterationFinished;
+import de.evoal.optimisation.api.events.IterationStarted;
+import de.evoal.optimisation.api.events.RunEventDispatcher;
+import de.evoal.optimisation.api.events.RunFinished;
+import de.evoal.optimisation.api.events.RunStarted;
 import de.evoal.optimisation.api.execution.ExecutionRecorder;
 import de.evoal.optimisation.api.model.*;
 import de.evoal.optimisation.api.statistics.writer.StatisticsWriter;
+import de.evoal.optimisation.api.statistics.writer.StatisticsWriterListener;
 import de.evoal.optimisation.pso.api.optimiser.Swarm;
 import de.evoal.languages.model.base.expressions.Instance;
 import de.evoal.optimisation.pso.api.swarm.Particle;
@@ -48,7 +54,13 @@ public class ParticleSwarmAlgorithm implements OptimisationAlgorithm {
     private IndividualIDGenerator idGenerator;
 
     /**
-     * Records the metrics of the iterations.
+     * Publishes the events of the run.
+     */
+    @Inject
+    private RunEventDispatcher events;
+
+    /**
+     * Provides the execution of the run.
      */
     @Inject
     private ExecutionRecorder executionRecorder;
@@ -108,37 +120,41 @@ public class ParticleSwarmAlgorithm implements OptimisationAlgorithm {
 
     @Override
     public void run() {
+        events.startRun(List.of(new StatisticsWriterListener(statistics)));
+        events.publish(new RunStarted(executionRecorder.getExecution()));
+
         int generation = 0;
+        events.publish(new IterationStarted(generation));
         boolean withinBudget = evaluateWithinBudget(swarm::initialise);
 
         final SwarmMemory memory = new SwarmMemory(idGenerator);
         Iteration snapshot = toIteration(memory, generation);
 
-        statistics.add(snapshot);
+        events.publish(new IterationFinished(snapshot));
         while(withinBudget && criterion.shouldContinue(snapshot)) {
             generation = generation + 1;
 
             log.info("Processing generation: {}", generation);
+            events.publish(new IterationStarted(generation));
 
             swarm.move(generation);
             withinBudget = evaluateWithinBudget(swarm::evaluate);
 
             snapshot = toIteration(memory, generation);
-            statistics.add(snapshot);
+            events.publish(new IterationFinished(snapshot));
         }
 
-        statistics.write();
+        events.publish(new RunFinished(executionRecorder.getExecution()));
+        events.finishRun();
     }
 
     /**
-     * Creates the memory state of the swarm's current particles and records its metrics.
+     * Creates the memory state of the swarm's current particles. The dispatcher records its
+     *   metrics when the iteration is published.
      */
     private Iteration toIteration(final SwarmMemory memory, final int generation) {
         final Particle[] particles = swarm.getParticles();
-        final Iteration iteration = memory.toIteration(generation, particles);
 
-        executionRecorder.recordMetrics(iteration);
-
-        return iteration;
+        return memory.toIteration(generation, particles);
     }
 }

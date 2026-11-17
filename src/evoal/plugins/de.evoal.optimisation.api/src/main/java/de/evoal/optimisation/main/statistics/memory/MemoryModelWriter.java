@@ -41,10 +41,10 @@ import de.evoal.optimisation.api.statistics.writer.StatisticsWriter;
  * The EvoAl version is the version of this module; all EvoAl modules share one version.
  * <p>
  * The writer is created while the metrics are still being defined. Therefore, it prepares
- *   the folder and writes {@code execution-information.json} with the first iteration,
- *   when the definitions are complete. It writes {@code execution-finished.json} when the
- *   algorithm finishes its statistics ({@link #write()}); the execution metrics have to
- *   be final at that point.
+ *   the folder and writes {@code execution-information.json} when the run starts
+ *   ({@link #start()}), when the definitions are complete. It writes
+ *   {@code execution-finished.json} when the run finishes ({@link #write()}); the
+ *   execution metrics have to be final at that point.
  */
 @Dependent
 @Named("de.evoal.optimisation.core.memory-model")
@@ -85,12 +85,12 @@ public class MemoryModelWriter implements StatisticsWriter {
     private boolean failed;
 
     /**
-     * The folder of the run, created with the first iteration. {@code null} before.
+     * The folder of the run, created when the run starts. {@code null} before.
      */
     private MemoryModelFolder folder;
 
     /**
-     * Converts the memory model to JSON, created with the first iteration.
+     * Converts the memory model to JSON, created when the run starts.
      */
     private MemoryModelJson json;
 
@@ -126,12 +126,12 @@ public class MemoryModelWriter implements StatisticsWriter {
     private ExecutionRecorder recorder;
 
     /**
-     * Writes the iteration file. With the first iteration, the folder is prepared and the
-     *   execution information is written.
+     * Writes the iteration file.
      *
      * A failure to write is logged and stops the writer; the run continues.
      *
-     * @throws IllegalStateException if the iterations are not numbered 0, 1, 2, ...
+     * @throws IllegalStateException if the run is not started ({@link #start()}) or the
+     *   iterations are not numbered 0, 1, 2, ...
      */
     @Override
     public void add(final Iteration iteration) {
@@ -139,11 +139,12 @@ public class MemoryModelWriter implements StatisticsWriter {
             return;
         }
 
-        try {
-            if(folder == null) {
-                startRun();
-            }
+        if(folder == null) {
+            throw new IllegalStateException("The memory model writer got iteration " + iteration.getNumber()
+                                            + " before the run started.");
+        }
 
+        try {
             requireNextNumber(iteration);
 
             final ObjectNode document = json.toIteration(iteration);
@@ -202,10 +203,26 @@ public class MemoryModelWriter implements StatisticsWriter {
     /**
      * Prepares the folder of the run and writes the execution information.
      *
+     * A failure to write is logged and stops the writer; the run continues.
+     *
+     * @throws IllegalStateException if the problem is not an optimisation problem.
+     */
+    @Override
+    public void start() {
+        try {
+            prepareRun();
+        } catch(final EvoalIOException e) {
+            stopWriting(e);
+        }
+    }
+
+    /**
+     * Prepares the folder of the run and writes the execution information.
+     *
      * @throws IllegalStateException if the problem is not an optimisation problem.
      * @throws EvoalIOException if the folder cannot be prepared or the file cannot be written.
      */
-    private void startRun() throws EvoalIOException {
+    private void prepareRun() throws EvoalIOException {
         if(!(problem instanceof Problem optimisationProblem)) {
             throw new IllegalStateException("The memory model writer needs the optimisation problem, but got "
                                             + problem + ".");
@@ -267,7 +284,7 @@ public class MemoryModelWriter implements StatisticsWriter {
 
     /**
      * Writes {@code execution-finished.json} and removes the folder for incomplete files.
-     *   Does nothing if no iteration was written or writing failed.
+     *   Does nothing if the run was not started or writing failed.
      */
     @Override
     public void write() {
