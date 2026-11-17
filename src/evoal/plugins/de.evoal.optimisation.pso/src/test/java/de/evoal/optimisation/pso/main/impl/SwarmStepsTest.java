@@ -23,7 +23,7 @@ import de.evoal.optimisation.api.steps.SearchState;
 import de.evoal.optimisation.api.steps.Step;
 
 import de.evoal.optimisation.pso.api.optimiser.Swarm;
-import de.evoal.optimisation.pso.api.swarm.DefaultSwarm;
+import de.evoal.optimisation.pso.main.impl.DefaultSwarm;
 import de.evoal.optimisation.pso.api.swarm.Particle;
 import de.evoal.optimisation.pso.api.swarm.State;
 

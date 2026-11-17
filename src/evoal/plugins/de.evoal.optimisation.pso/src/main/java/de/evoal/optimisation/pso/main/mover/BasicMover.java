@@ -62,7 +62,7 @@ public class BasicMover implements Mover {
     private int inertiaIterations;
 
     /**
-     * The inertia weight over the generations.
+     * The inertia weight over the iterations.
      */
     private InertiaSchedule inertia;
 
@@ -86,13 +86,13 @@ public class BasicMover implements Mover {
      * @param current The current state (position and velocity) of the particle.
      * @param personalBest The best state ever achieved by the particle.
      * @param neighbors The neighboring particles.
-     * @param generation The current generation, starting at 1.
+     * @param iteration The current iteration, starting at 1.
      */
     @Override
     public void moveParticle(final State current,
                              final State personalBest,
                              final Particle[] neighbors,
-                             final int generation,
+                             final int iteration,
                              final RandomGenerator random) {
         final TypedEObject neighborhoodBestPosition = Particle.getNeighborhoodBestPosition(neighbors);
 
@@ -118,7 +118,7 @@ public class BasicMover implements Mover {
             double rand1 = random.nextDouble();
             double rand2 = random.nextDouble();
 
-            double w = inertia.weight(generation);
+            double w = inertia.weight(iteration);
             double next_v = Math.max(-max_v, Math.min(max_v, w * v + c1 * rand1 * (personalBestPosition.eGetAsDouble(feature) - x) +
                 c2 * rand2 * (neighborhoodBestPosition.eGetAsDouble(feature) - x)));
 

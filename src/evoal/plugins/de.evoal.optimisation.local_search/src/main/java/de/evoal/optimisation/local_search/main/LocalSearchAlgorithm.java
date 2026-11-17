@@ -6,27 +6,21 @@ import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
-import lombok.extern.slf4j.Slf4j;
-
 import org.eclipse.emf.ecore.EObject;
 
 import de.evoal.core.api.cdi.BeanFactory;
 import de.evoal.core.api.cdi.Component;
 import de.evoal.core.api.utils.AttributeHelper;
-import de.evoal.models.v202704.optimisation.execution.TerminationCriterion;
 
-import de.evoal.optimisation.api.cdi.TerminationCriterionProducer;
 import de.evoal.optimisation.api.evaluation.EvaluationService;
-import de.evoal.optimisation.api.events.RunEventDispatcher;
 import de.evoal.optimisation.api.model.InitialCandidatesProvider;
-import de.evoal.optimisation.api.model.OptimisationAlgorithm;
 import de.evoal.optimisation.api.model.OptimisationValueComparator;
-import de.evoal.optimisation.api.run.OptimisationRun;
-import de.evoal.optimisation.api.steps.FitnessCalculation;
+import de.evoal.optimisation.api.steps.EvaluateCandidates;
 import de.evoal.optimisation.api.steps.ReplacePopulation;
 import de.evoal.optimisation.api.steps.SampleCandidates;
 import de.evoal.optimisation.api.steps.Step;
 import de.evoal.optimisation.api.steps.Template;
+import de.evoal.optimisation.api.steps.TemplateAlgorithm;
 
 import de.evoal.optimisation.local_search.api.accepting.AcceptingStrategy;
 import de.evoal.optimisation.local_search.api.neighbour.NeighbourChoosingStrategy;
@@ -52,19 +46,13 @@ import de.evoal.optimisation.local_search.api.neighbour.NeighbourChoosingStrateg
  *     ({@link AdjustAcceptingStrategy}).</li>
  * </ol>
  */
-@Slf4j
 @Dependent
 @Named("de.evoal.optimisation.local_search.optimisation.local-search")
-public class LocalSearchAlgorithm implements OptimisationAlgorithm {
+public class LocalSearchAlgorithm extends TemplateAlgorithm {
     private AcceptingStrategy acceptingStrategy;
 
     @Inject @Dependent @Component
     private OptimisationValueComparator comparator;
-
-    /**
-     * The stopping criterion to use.
-     */
-    private TerminationCriterion criterion;
 
     /**
      * Evaluates and counts the candidates.
@@ -75,58 +63,31 @@ public class LocalSearchAlgorithm implements OptimisationAlgorithm {
     @Inject
     private AttributeHelper helper;
 
-    @Inject
-    private TerminationCriterionProducer producer;
-
     @Inject @Named("initial")
     private InitialCandidatesProvider provider;
 
     @Inject @Named("neighbour-strategy")
     private NeighbourChoosingStrategy strategy;
 
-    /**
-     * Executes the run.
-     */
-    @Inject
-    private OptimisationRun kernel;
-
-    /**
-     * Publishes the executed steps.
-     */
-    @Inject
-    private RunEventDispatcher events;
-
     @Override
-    public OptimisationAlgorithm init(final EObject instance) {
-        criterion = producer.create(instance);
-        final EObject acceptingConfiguration = helper.lookup(instance, "accepting-strategy");
+    protected void configure(final EObject configuration) {
+        final EObject acceptingConfiguration = helper.lookup(configuration, "accepting-strategy");
         acceptingStrategy = BeanFactory.createComponent(AcceptingStrategy.class, acceptingConfiguration);
-
-        return this;
     }
 
     @Override
-    public void run() {
-        log.info("Setting up local search algorithm.");
-
-        kernel.execute(criterion, template());
-    }
-
-    /**
-     * @return The template of the local search.
-     */
-    private Template template() {
+    protected Template template() {
         final List<Step> initialisation = List.of(new SampleCandidates(provider, 1),
-                                                  new FitnessCalculation(evaluationService, comparator),
+                                                  new EvaluateCandidates(evaluationService, comparator),
                                                   new ReplacePopulation());
 
         final AcceptNeighbour acceptance = new AcceptNeighbour(acceptingStrategy);
         final List<Step> iteration = List.of(new OfferNeighbours(strategy, acceptingStrategy),
-                                             FitnessCalculation.untilAccepted(evaluationService, comparator,
+                                             EvaluateCandidates.untilAccepted(evaluationService, comparator,
                                                                               acceptance::isAcceptable),
                                              acceptance,
                                              new AdjustAcceptingStrategy(acceptingStrategy));
 
-        return new Template(events, initialisation, iteration);
+        return new Template(initialisation, iteration);
     }
 }

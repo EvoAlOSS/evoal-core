@@ -73,7 +73,6 @@ public class TemplateTest {
     @DisplayName("given a template that replaces its population in every iteration")
     class ReplacingTemplate {
         private final Template template = new Template(
-                events,
                 List.of(acceptance("start", state -> state.setPopulation(List.of(evaluated(1.0, Lineage.NONE),
                                                                                   evaluated(3.0, Lineage.NONE),
                                                                                   evaluated(1.0, Lineage.NONE))))),
@@ -83,7 +82,7 @@ public class TemplateTest {
         @Test
         public void everyExecutedStepIsPublishedWithItsKind() {
             // when
-            template.initialise();
+            template.initialise(events);
             template.population();
             template.iterate(1);
 
@@ -95,7 +94,7 @@ public class TemplateTest {
         @Test
         public void thePopulationHasTheStepsOfItsIterationOnly() {
             // when
-            template.initialise();
+            template.initialise(events);
             final Population initial = template.population();
             template.iterate(1);
             final Population next = template.population();
@@ -108,7 +107,7 @@ public class TemplateTest {
         @Test
         public void thePopulationIsRankedByValue() {
             // when
-            template.initialise();
+            template.initialise(events);
             final Population population = template.population();
 
             // then
@@ -118,7 +117,7 @@ public class TemplateTest {
         @Test
         public void aMemberThatStaysIsAnIdentityOfItself() {
             // when
-            template.initialise();
+            template.initialise(events);
             final Population initial = template.population();
             template.iterate(1);
             final Population population = template.population();
@@ -139,7 +138,7 @@ public class TemplateTest {
         @Test
         public void aStepCanStopTheSearch() {
             // when
-            template.initialise();
+            template.initialise(events);
             template.population();
             final Progress progress = template.iterate(1);
 
@@ -152,13 +151,13 @@ public class TemplateTest {
     public void aTemplateCanDescribeItsMembersItself() {
         // given
         final Candidate member = evaluated(4.0, Lineage.NONE);
-        final Template template = new Template(events, List.of(), List.of()) {
+        final Template template = new Template(List.of(), List.of()) {
             @Override
             protected List<Candidate> members() {
                 return List.of(member);
             }
         };
-        template.initialise();
+        template.initialise(events);
 
         // when
         final Population population = template.population();
@@ -172,10 +171,9 @@ public class TemplateTest {
     public void anUnevaluatedMemberIsRejected() {
         // given
         final Candidate unevaluated = new Candidate(Mockito.mock(TypedEObject.class), Lineage.NONE);
-        final Template template = new Template(events,
-                                               List.of(acceptance("start", state -> state.setPopulation(List.of(unevaluated)))),
-                                               List.of());
-        template.initialise();
+        final Template template = new Template(List.of(acceptance("start", state -> state.setPopulation(List.of(unevaluated)))),
+                                    List.of());
+        template.initialise(events);
 
         // when / then
         Assertions.assertThrows(IllegalArgumentException.class, template::population);
@@ -185,12 +183,11 @@ public class TemplateTest {
     public void anInterruptedIterationKeepsThePopulation() {
         // given
         final Template template = new Template(
-                events,
                 List.of(acceptance("start", state -> state.setPopulation(List.of(evaluated(2.0, Lineage.NONE))))),
                 List.of(acceptance("interrupted", state -> {
                     throw new IllegalStateException("interrupted");
                 })));
-        template.initialise();
+        template.initialise(events);
         final Candidate initial = template.population().members().getFirst();
 
         // when

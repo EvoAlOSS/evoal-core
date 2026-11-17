@@ -23,9 +23,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- *  Describes the state of the particle. The State is the current position,
- *  velocity that resulted in the position, and malus of the particle at that
- *  position.
+ * The state of a particle: a position, the velocity that resulted in the position, and the
+ *   optimisation value of the position.
  */
 @Getter @Setter
 public class State {
@@ -40,7 +39,7 @@ public class State {
     private Double[] velocity;
 
     /**
-     * Current malus.
+     * Optimisation value of the position.
      */
     private OptimisationValue fitness;
 

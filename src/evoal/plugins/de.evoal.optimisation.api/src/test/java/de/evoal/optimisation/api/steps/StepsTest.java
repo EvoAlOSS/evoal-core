@@ -38,7 +38,7 @@ public class StepsTest {
 
         private final EvaluationService evaluationService = Mockito.mock(EvaluationService.class);
 
-        private final FitnessCalculation step = new FitnessCalculation(evaluationService, comparator);
+        private final EvaluateCandidates step = new EvaluateCandidates(evaluationService, comparator);
 
         private final SearchState state = new SearchState();
 
@@ -121,8 +121,8 @@ public class StepsTest {
                                    .limit(values.size()));
         }
 
-        private FitnessCalculation acceptingAbove(final double threshold) {
-            return FitnessCalculation.untilAccepted(evaluationService, comparator, (current, candidate) -> {
+        private EvaluateCandidates acceptingAbove(final double threshold) {
+            return EvaluateCandidates.untilAccepted(evaluationService, comparator, (current, candidate) -> {
                 final double value = (Double) candidate.value().toStatistics().getFirst();
                 tested.add(value);
                 return value > threshold;

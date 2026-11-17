@@ -12,8 +12,8 @@
  *   ...
  * RunFinished
  * </pre>
- * {@link de.evoal.optimisation.api.events.StepExecuted} is published by algorithms that
- *   consist of steps; local search and particle swarm optimisation do not publish it yet.
+ * {@link de.evoal.optimisation.api.events.StepExecuted} is published by the
+ *   {@link de.evoal.optimisation.api.steps.Template} after every step.
  * Listeners observe the run: they must not change the data of an event, so that they
  *   cannot change the search result.
  */

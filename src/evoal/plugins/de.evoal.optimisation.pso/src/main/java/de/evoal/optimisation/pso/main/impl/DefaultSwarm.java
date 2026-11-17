@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.evoal.optimisation.pso.api.swarm;
+package de.evoal.optimisation.pso.main.impl;
 
 import de.evoal.core.api.random.RandomService;
 import de.evoal.core.api.cdi.Component;
@@ -26,7 +26,8 @@ import de.evoal.models.core.ecore.TypedEObject;
 import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
 import de.evoal.optimisation.pso.api.optimiser.Mover;
 import de.evoal.optimisation.pso.api.optimiser.Swarm;
-import de.evoal.optimisation.pso.main.impl.NeighborhoodTopology;
+import de.evoal.optimisation.pso.api.swarm.Particle;
+import de.evoal.optimisation.pso.api.swarm.State;
 import de.evoal.optimisation.api.model.InitialCandidatesProvider;
 import de.evoal.optimisation.api.evaluation.EvaluationBudgetExhaustedException;
 import de.evoal.optimisation.api.evaluation.EvaluationService;
@@ -44,10 +45,12 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.random.RandomGenerator;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 /**
- *  A collection of particles.
+ * The swarm of the basic particle swarm optimisation (DL type {@code 'default-swarm'}): a
+ *   fixed number of particles that move in parallel, each towards its personal best and the
+ *   best of its neighbourhood ({@link NeighborhoodTopology}), and are evaluated one after
+ *   another.
  */
 @Dependent
 @Named("de.evoal.optimisation.pso.optimisation.default-swarm")
@@ -88,10 +91,10 @@ public class DefaultSwarm implements Swarm {
      * Moves the particles in the swarm.
      */
     @Override
-    public void move(final int generation) {
+    public void move(final int iteration) {
         IntStream.range(0, particles.length)
                  .parallel()
-                 .forEach(i -> particles[i].moveParticle(getNeighbors(i), generation));
+                 .forEach(i -> particles[i].moveParticle(getNeighbors(i), iteration));
     }
 
     /**
@@ -103,11 +106,6 @@ public class DefaultSwarm implements Swarm {
         return Arrays.stream(neighborhoodTopology.getNeighborIDs(pid))
                      .map(i -> particles[i])
                      .toArray(Particle[]::new);
-    }
-
-    @Override
-    public long size() {
-        return particles.length;
     }
 
     @Override
@@ -165,7 +163,7 @@ public class DefaultSwarm implements Swarm {
     public void initialise() {
         log.info("Initializing swarm with {} members.", sizeOfPopulation);
 
-        final Iterator<TypedEObject> candidates = ((Stream<TypedEObject>)provider.create())
+        final Iterator<TypedEObject> candidates = provider.create()
                 .limit(sizeOfPopulation)
                 .iterator();
         final List<Particle> created = new ArrayList<>();

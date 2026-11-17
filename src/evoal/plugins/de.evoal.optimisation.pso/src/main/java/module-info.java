@@ -24,5 +24,4 @@ module de.evoal.optimisation.pso {
     opens de.evoal.optimisation.pso.main.impl to weld.core.impl;
     opens de.evoal.optimisation.pso.main.mover to weld.core.impl;
     opens de.evoal.optimisation.pso.main.producer to weld.core.impl;
-    opens de.evoal.optimisation.pso.api.swarm to weld.core.impl;
 }

@@ -22,7 +22,6 @@ import de.evoal.core.api.ecore.info.FeatureBoundaries;
 import de.evoal.models.core.ecore.Space;
 import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
 import de.evoal.optimisation.pso.api.swarm.Particle;
-import de.evoal.optimisation.pso.api.swarm.DefaultSwarm;
 import de.evoal.models.core.exceptions.InitializationException;
 import de.evoal.optimisation.pso.api.optimiser.Swarm;
 import de.evoal.optimisation.pso.main.mover.ARPSOMover;
@@ -91,15 +90,15 @@ public class ARPSOSwarm extends DefaultSwarm {
      *   swarm.
      */
     @Override
-    public void adjust(final int generation) {
+    public void adjust(final int iteration) {
         final double diversity = diversity(particles, diagonalLength(particles[0].getCurrentPosition().eSpace()));
 
         if (diversity < diversity_low && arpsoMover.getDirection() > 0) {
             arpsoMover.setDirection(-1);
-            log.info("Repelling at iteration: {}", generation);
+            log.info("Repelling at iteration: {}", iteration);
         } else if (diversity > diversity_high && arpsoMover.getDirection() < 0) {
             arpsoMover.setDirection(1);
-            log.info("Attracting at iteration: {}", generation);
+            log.info("Attracting at iteration: {}", iteration);
         }
     }
 
@@ -107,9 +106,9 @@ public class ARPSOSwarm extends DefaultSwarm {
      * Moves the particles one after another.
      */
     @Override
-    public void move(final int generation) {
+    public void move(final int iteration) {
         for (int p = 0; p < particles.length; p++) {
-            particles[p].moveParticle(getNeighbors(p), generation);
+            particles[p].moveParticle(getNeighbors(p), iteration);
         }
     }
 

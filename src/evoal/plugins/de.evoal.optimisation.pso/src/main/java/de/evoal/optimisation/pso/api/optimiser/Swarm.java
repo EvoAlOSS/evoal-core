@@ -29,9 +29,9 @@ public interface Swarm extends EvoalComponent<Swarm> {
      * Adjusts the parameters of the swarm before the particles move, e.g., the direction of
      *   ARPSO. Does nothing by default.
      *
-     * @param generation The current generation, starting at 1.
+     * @param iteration The current iteration, starting at 1.
      */
-    default void adjust(final int generation) {
+    default void adjust(final int iteration) {
     }
 
     /**
@@ -52,21 +52,9 @@ public interface Swarm extends EvoalComponent<Swarm> {
     /**
      * Moves the swarm.
      *
-     * @param generation The current generation, starting at 1.
+     * @param iteration The current iteration, starting at 1.
      */
-    void move(final int generation);
-
-    /**
-     * Sets the particles of the swarm.
-     *
-     * @param particles The particles.
-     */
-    void setParticles(Particle[] particles);
-
-    /**
-     * @return The size of the swarm population.
-     */
-    public long size();
+    void move(final int iteration);
 
     /**
      * Updates the personal best of every particle with its current position and fitness, if

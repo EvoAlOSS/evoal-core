@@ -7,8 +7,8 @@ import de.evoal.optimisation.api.evaluation.EvaluationSource;
 
 /**
  * The {@link EvaluationService} evaluated a candidate. The candidate is not yet an
- *   individual of the memory model; the algorithm creates the individual when it builds
- *   the iteration.
+ *   individual of the memory model; the run kernel creates the individual when the
+ *   iteration is finished.
  *
  * @param candidate The evaluated candidate (a point of the search space).
  * @param output The result of the optimisation function (a point of the optimisation space).

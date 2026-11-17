@@ -23,7 +23,7 @@ import de.evoal.optimisation.pso.api.swarm.Particle;
 import de.evoal.optimisation.pso.api.swarm.State;
 
 /**
- * The mover calculates the new position of a particle in each generation.
+ * The mover calculates the new position of a particle in each iteration.
  */
 public interface Mover extends EvoalComponent<Mover> {
     /**
@@ -32,13 +32,13 @@ public interface Mover extends EvoalComponent<Mover> {
      * @param current The current state (position and velocity) of the particle.
      * @param personalBest The best state ever achieved by the particle.
      * @param neighbors Neighbors of particle being moved.
-     * @param generation The current generation, starting at 1.
+     * @param iteration The current iteration, starting at 1.
      * @param random The random generator of the particle. Movers must not use other generators,
      *   since the particles are moved in parallel.
      */
     public void moveParticle(final State current,
                              final State personalBest,
                              final Particle[] neighbors,
-                             final int generation,
+                             final int iteration,
                              final RandomGenerator random);
 }

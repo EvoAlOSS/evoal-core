@@ -7,6 +7,7 @@ import de.evoal.optimisation.api.steps.Adaption;
 import de.evoal.optimisation.api.steps.Initialization;
 import de.evoal.optimisation.api.steps.ParameterAdjustment;
 import de.evoal.optimisation.api.steps.SearchState;
+import de.evoal.optimisation.api.steps.FitnessCalculation;
 import de.evoal.optimisation.api.steps.Step;
 
 import de.evoal.optimisation.pso.api.optimiser.Swarm;
@@ -72,7 +73,7 @@ final class SwarmSteps {
 
             @Override
             public void execute(final SearchState state) {
-                log.info("Processing generation: {}", state.getIteration());
+                log.debug("Moving the particles in iteration {}.", state.getIteration());
 
                 swarm.move(state.getIteration());
             }
@@ -84,7 +85,7 @@ final class SwarmSteps {
      *   runs out, the particles that are not evaluated undo their move.
      */
     static Step evaluate(final Swarm swarm) {
-        return new Step() {
+        return new FitnessCalculation() {
             @Override
             public String description() {
                 return "evaluate the particles";
@@ -93,11 +94,6 @@ final class SwarmSteps {
             @Override
             public void execute(final SearchState state) {
                 swarm.evaluate();
-            }
-
-            @Override
-            public String kind() {
-                return "FitnessCalculation";
             }
         };
     }

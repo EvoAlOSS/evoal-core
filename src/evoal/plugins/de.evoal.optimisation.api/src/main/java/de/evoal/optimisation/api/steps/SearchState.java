@@ -19,7 +19,7 @@ import de.evoal.optimisation.api.run.Candidate;
  *     the selected parents, then their offspring.</li>
  *   <li>the <em>offered</em> candidates: candidates that are created only when a step asks
  *     for them, e.g., the neighbours of a local search, which are evaluated until one is
- *     accepted ({@link FitnessCalculation#untilAccepted}), and the <em>accepted</em>
+ *     accepted ({@link EvaluateCandidates#untilAccepted}), and the <em>accepted</em>
  *     candidate.</li>
  *   <li>the <em>strategy state</em>: further values of the algorithm, e.g., the
  *     temperature or the velocities of the particles.</li>

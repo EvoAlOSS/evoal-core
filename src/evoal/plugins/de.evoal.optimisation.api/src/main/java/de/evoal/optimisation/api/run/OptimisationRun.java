@@ -134,7 +134,7 @@ public class OptimisationRun {
 
             events.publish(new IterationStarted(number));
             try {
-                procedure.initialise();
+                procedure.initialise(events);
             } catch(final EvaluationBudgetExhaustedException e) {
                 logExhaustedBudget(e, number);
                 withinBudget = false;

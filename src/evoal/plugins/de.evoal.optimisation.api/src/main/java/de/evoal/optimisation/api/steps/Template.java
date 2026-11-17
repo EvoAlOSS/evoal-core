@@ -32,9 +32,9 @@ import de.evoal.optimisation.api.run.SearchProcedure;
  */
 public class Template implements SearchProcedure {
     /**
-     * Publishes the executed steps.
+     * Publishes the executed steps; set by the kernel in {@link #initialise(RunEventDispatcher)}.
      */
-    private final RunEventDispatcher events;
+    private RunEventDispatcher events;
 
     /**
      * The executed steps since the last population.
@@ -57,12 +57,10 @@ public class Template implements SearchProcedure {
     private final SearchState state = new SearchState();
 
     /**
-     * @param events Publishes the executed steps.
      * @param initialisation The steps of the initialisation.
      * @param iteration The steps of an iteration.
      */
-    public Template(final RunEventDispatcher events, final List<Step> initialisation, final List<Step> iteration) {
-        this.events = events;
+    public Template(final List<Step> initialisation, final List<Step> iteration) {
         this.initialisation = List.copyOf(initialisation);
         this.iteration = List.copyOf(iteration);
     }
@@ -78,7 +76,8 @@ public class Template implements SearchProcedure {
     }
 
     @Override
-    public void initialise() {
+    public void initialise(final RunEventDispatcher events) {
+        this.events = events;
         state.startIteration(0);
         execute(initialisation);
     }

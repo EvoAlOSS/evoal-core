@@ -6,27 +6,19 @@ import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
-import lombok.extern.slf4j.Slf4j;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
 import de.evoal.core.api.cdi.BeanFactory;
-import de.evoal.core.api.cdi.Component;
 import de.evoal.core.api.ecore.misc.EClassifierHelper;
 import de.evoal.core.api.utils.AttributeHelper;
 import de.evoal.models.core.ecore.Space;
 import de.evoal.models.core.exceptions.InitializationException;
-import de.evoal.models.v202704.optimisation.execution.TerminationCriterion;
 
-import de.evoal.optimisation.api.cdi.TerminationCriterionProducer;
-import de.evoal.optimisation.api.model.OptimisationAlgorithm;
-import de.evoal.optimisation.api.model.OptimisationValueComparator;
-import de.evoal.optimisation.api.events.RunEventDispatcher;
 import de.evoal.optimisation.api.run.Candidate;
-import de.evoal.optimisation.api.run.OptimisationRun;
 import de.evoal.optimisation.api.steps.Step;
 import de.evoal.optimisation.api.steps.Template;
+import de.evoal.optimisation.api.steps.TemplateAlgorithm;
 
 import de.evoal.optimisation.pso.api.optimiser.Swarm;
 
@@ -45,33 +37,11 @@ import de.evoal.optimisation.pso.api.optimiser.Swarm;
  * </ol>
  * The population of an iteration consists of the particles ({@link SwarmPopulation}).
  */
-@Slf4j
 @Dependent
 @Named("de.evoal.optimisation.pso.optimisation.particle-swarm-optimisation")
-public class ParticleSwarmAlgorithm implements OptimisationAlgorithm {
-
-    @Inject @Dependent @Component
-    private OptimisationValueComparator comparator;
-
-    private TerminationCriterion criterion;
-
+public class ParticleSwarmAlgorithm extends TemplateAlgorithm {
     @Inject
     private AttributeHelper helper;
-
-    @Inject
-    private TerminationCriterionProducer producer;
-
-    /**
-     * Executes the run.
-     */
-    @Inject
-    private OptimisationRun kernel;
-
-    /**
-     * Publishes the executed steps.
-     */
-    @Inject
-    private RunEventDispatcher events;
 
     /**
      * The used swarm implementation
@@ -89,7 +59,7 @@ public class ParticleSwarmAlgorithm implements OptimisationAlgorithm {
      * @throws InitializationException if a search variable is not real-valued.
      */
     @Override
-    public OptimisationAlgorithm init(final EObject configuration) throws InitializationException {
+    protected void configure(final EObject configuration) throws InitializationException {
         for(final EStructuralFeature feature : searchSpace) {
             if(!EClassifierHelper.isReal(feature.getEType())) {
                 throw new InitializationException("Particle swarm optimisation supports only real search variables, but '" + feature.getName() + "' is of type " + feature.getEType().getName() + ".");
@@ -97,14 +67,11 @@ public class ParticleSwarmAlgorithm implements OptimisationAlgorithm {
         }
 
         swarm = BeanFactory.createComponent(Swarm.class, helper.lookup(configuration, "swarm"));
-        criterion = producer.create(configuration);
-
-        return this;
     }
 
     @Override
-    public void run() {
-        kernel.execute(criterion, new SwarmTemplate());
+    protected Template template() {
+        return new SwarmTemplate();
     }
 
     /**
@@ -117,8 +84,7 @@ public class ParticleSwarmAlgorithm implements OptimisationAlgorithm {
         private final SwarmPopulation population = new SwarmPopulation();
 
         private SwarmTemplate() {
-            super(events,
-                  List.<Step>of(SwarmSteps.initialise(swarm)),
+            super(List.<Step>of(SwarmSteps.initialise(swarm)),
                   List.of(SwarmSteps.adjust(swarm),
                           SwarmSteps.move(swarm),
                           SwarmSteps.evaluate(swarm),

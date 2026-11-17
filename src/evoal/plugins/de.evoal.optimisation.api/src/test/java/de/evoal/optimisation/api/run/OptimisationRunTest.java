@@ -422,7 +422,7 @@ public class OptimisationRunTest {
         }
 
         @Override
-        public void initialise() {
+        public void initialise(final RunEventDispatcher events) {
             protocol.add("initialise");
             exhaustIn(0);
         }

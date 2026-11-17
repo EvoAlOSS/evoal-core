@@ -105,13 +105,6 @@ public class Particle {
     }
 
     /**
-     * @return The personal best state ever achieved by the particle.
-     */
-    public State getBestState() {
-        return personalBest;
-    }
-
-    /**
      * @return The current fitness of the particle.
      */
     public OptimisationValue getCurrentFitness() {
@@ -158,12 +151,12 @@ public class Particle {
      * Moves the particle with its mover. Changes only the current state.
      *
      * @param neighbors The neighbours of the particle.
-     * @param generation The current generation, starting at 1.
+     * @param iteration The current iteration, starting at 1.
      */
-    public void moveParticle(final Particle[] neighbors, final int generation) {
+    public void moveParticle(final Particle[] neighbors, final int iteration) {
         stateBeforeMove = new State(current);
 
-        mover.moveParticle(current, personalBest, neighbors, generation, random);
+        mover.moveParticle(current, personalBest, neighbors, iteration, random);
     }
 
     /**
