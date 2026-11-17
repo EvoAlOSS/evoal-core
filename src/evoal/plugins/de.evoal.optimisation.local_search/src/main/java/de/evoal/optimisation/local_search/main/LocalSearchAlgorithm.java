@@ -1,55 +1,43 @@
 package de.evoal.optimisation.local_search.main;
 
-import de.evoal.core.api.cdi.RunScoped;
-import de.evoal.core.api.dynamic.EClassProvider;
-import de.evoal.models.v202704.optimisation.execution.OptimisationValue;
-import de.evoal.models.core.ecore.TypedEObject;
-import de.evoal.languages.model.ol.OptimisationModule;
-import de.evoal.models.v202704.optimisation.execution.TerminationCriterion;
-import de.evoal.models.v202704.optimisation.memory.Individual;
-import de.evoal.models.v202704.optimisation.memory.Iteration;
-import de.evoal.models.v202704.optimisation.memory.MemoryFactory;
-import de.evoal.models.v202704.optimisation.memory.Identity;
-import de.evoal.models.v202704.optimisation.memory.Mutation;
-import de.evoal.models.v202704.optimisation.memory.Relationship;
-import de.evoal.models.v202704.optimisation.memory.Rank;
-import de.evoal.optimisation.api.statistics.writer.StatisticsWriter;
-import de.evoal.optimisation.api.statistics.writer.StatisticsWriterListener;
-import de.evoal.optimisation.api.producer.SpaceProducer;
-import lombok.extern.slf4j.Slf4j;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
+
 import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
+import lombok.extern.slf4j.Slf4j;
+
+import org.eclipse.emf.ecore.EObject;
 
 import de.evoal.core.api.cdi.BeanFactory;
 import de.evoal.core.api.cdi.Component;
 import de.evoal.core.api.utils.AttributeHelper;
+import de.evoal.models.core.ecore.TypedEObject;
+import de.evoal.models.v202704.optimisation.execution.OptimisationValue;
+import de.evoal.models.v202704.optimisation.execution.TerminationCriterion;
 
 import de.evoal.optimisation.api.cdi.TerminationCriterionProducer;
-import de.evoal.optimisation.api.evaluation.EvaluationBudgetExhaustedException;
 import de.evoal.optimisation.api.evaluation.EvaluationService;
-import de.evoal.optimisation.api.events.IterationFinished;
-import de.evoal.optimisation.api.events.IterationStarted;
-import de.evoal.optimisation.api.events.RunEventDispatcher;
-import de.evoal.optimisation.api.events.RunFinished;
-import de.evoal.optimisation.api.events.RunStarted;
-import de.evoal.optimisation.api.execution.ExecutionRecorder;
-import de.evoal.optimisation.api.model.*;
+import de.evoal.optimisation.api.model.InitialCandidatesProvider;
+import de.evoal.optimisation.api.model.OptimisationAlgorithm;
+import de.evoal.optimisation.api.model.OptimisationValueComparator;
+import de.evoal.optimisation.api.run.Lineage;
+import de.evoal.optimisation.api.run.Member;
+import de.evoal.optimisation.api.run.OptimisationRun;
+import de.evoal.optimisation.api.run.Population;
+import de.evoal.optimisation.api.run.Progress;
+import de.evoal.optimisation.api.run.SearchProcedure;
 
 import de.evoal.optimisation.local_search.api.accepting.AcceptingStrategy;
 import de.evoal.optimisation.local_search.api.neighbour.NeighbourChoosingStrategy;
-import org.apache.deltaspike.cdise.api.CdiContainer;
-import org.apache.deltaspike.cdise.api.CdiContainerLoader;
-import org.eclipse.emf.ecore.EObject;
 
 /**
- * A local search algorithm.
+ * A local search algorithm. It holds a single candidate and moves to an acceptable
+ *   neighbour in every iteration; the run itself is executed by the {@link OptimisationRun}.
  */
 @Slf4j
 @Dependent
@@ -71,18 +59,6 @@ public class LocalSearchAlgorithm implements OptimisationAlgorithm {
     @Inject
     private EvaluationService evaluationService;
 
-    /**
-     * Publishes the events of the run.
-     */
-    @Inject
-    private RunEventDispatcher events;
-
-    /**
-     * Provides the execution of the run.
-     */
-    @Inject
-    private ExecutionRecorder executionRecorder;
-
     @Inject
     private AttributeHelper helper;
 
@@ -95,23 +71,11 @@ public class LocalSearchAlgorithm implements OptimisationAlgorithm {
     @Inject @Named("neighbour-strategy")
     private NeighbourChoosingStrategy strategy;
 
-    @Inject @Component
-    private StatisticsWriter statistics;
-
+    /**
+     * Executes the run.
+     */
     @Inject
-    private IndividualIDGenerator idGenerator;
-
-    /**
-     * The individual of the previous iteration, i.e., the one the current candidate is a neighbour of.
-     */
-    private Individual previousIndividual;
-
-    /**
-     * The best individual found so far and its optimisation value. Simulated annealing and
-     *   threshold accepting also move to worse candidates, so it can be an earlier one.
-     */
-    private Individual bestIndividual;
-    private OptimisationValue bestValue;
+    private OptimisationRun kernel;
 
     @Override
     public OptimisationAlgorithm init(final EObject instance) {
@@ -140,145 +104,88 @@ public class LocalSearchAlgorithm implements OptimisationAlgorithm {
     public void run() {
         log.info("Setting up local search algorithm.");
 
-        final CdiContainer cdiContainer = CdiContainerLoader.getCdiContainer();
-        cdiContainer.getContextControl()
-                    .startContext(RunScoped.class);
+        kernel.execute(criterion, new Search());
+    }
 
-        // the memory of a previous run (e.g. in heuristic-search-evaluation) is not related to this one
-        previousIndividual = null;
-        bestIndividual = null;
-        bestValue = null;
+    /**
+     * The search of a run: the current candidate and how it relates to the candidate of
+     *   the previous iteration.
+     */
+    private final class Search implements SearchProcedure {
+        /**
+         * The current candidate, {@code null} before it is evaluated.
+         */
+        private Evaluated current;
 
-        events.startRun(List.of(new StatisticsWriterListener(statistics)));
-        events.publish(new RunStarted(executionRecorder.getExecution()));
+        /**
+         * How the current candidate relates to the candidate of the previous iteration.
+         */
+        private Lineage lineage = Lineage.NONE;
 
-        //1. create init new search space candidate
-        events.publish(new IterationStarted(0));
-        Evaluated current = evaluate(provider.create().findFirst().get());
+        @Override
+        public void initialise() {
+            current = evaluate(provider.create().findFirst().get());
+            log.info("0: {} -> {}.", current.candidate(), current.value());
+        }
 
-        // Log initial iteration
-        Iteration state = toIteration(0, current);
-        finishIteration(state);
-
-        // 2. iterate  until stopping criteria is met or there is no new neighbour
-        int iterationNumber = 1;
-        while(criterion.shouldContinue(state)) {
-            events.publish(new IterationStarted(iterationNumber));
-
-            // 2.1 Just a final copy to satisfy Java
+        /**
+         * Searches for an acceptable neighbour; every neighbour is evaluated once. Some
+         *   strategies (simulated annealing) test a single random neighbour per iteration.
+         *
+         * @return {@link Progress#STOP} if no neighbour is acceptable and the rejection is
+         *   final or there are no neighbours at all. Otherwise, the candidate stays and the
+         *   next iteration tries again.
+         */
+        @Override
+        public Progress iterate(final int iteration) {
             final OptimisationValue currentValue = current.value();
 
-            // 2.2 Search for acceptable candidate (lazily, every neighbour is evaluated once). Some
-            //     strategies (simulated annealing) test a single random neighbour per iteration.
+            // the candidate stays the same until a neighbour is accepted
+            lineage = Lineage.identity(0);
+
             final Stream<TypedEObject> offeredNeighbours = acceptingStrategy.testsSingleNeighbour()
                     ? strategy.randomNeighbour(current.candidate()).stream()
                     : strategy.neighbours(current.candidate());
-            final Optional<Evaluated> acceptableCandidate;
             final AtomicInteger numberOfNeighbours = new AtomicInteger();
-            try {
-                acceptableCandidate = offeredNeighbours
-                                              .peek(neighbour -> numberOfNeighbours.incrementAndGet())
-                                              .map(this::evaluate)
-                                              .filter(c -> acceptingStrategy.acceptCandidate(c.value(), currentValue))
-                                              .findFirst();
-            } catch(final EvaluationBudgetExhaustedException e) {
-                log.info("{} Terminating optimisation in generation {}.", e.getMessage(), iterationNumber);
+            final Optional<Evaluated> acceptableCandidate =
+                    offeredNeighbours.peek(neighbour -> numberOfNeighbours.incrementAndGet())
+                                     .map(LocalSearchAlgorithm.this::evaluate)
+                                     .filter(c -> acceptingStrategy.acceptCandidate(c.value(), currentValue))
+                                     .findFirst();
 
-                // the candidate stays the same, record the partial iteration
-                finishIteration(toIteration(iterationNumber, current, false));
-                break;
-            }
-
-            // 2.3 No candidate found: the run ends if the rejection is final or there are no
-            //     neighbours at all, otherwise the candidate stays and the next iteration tries again
             if(acceptableCandidate.isEmpty()) {
-                // the candidate stays the same, record the iteration anyway
-                state = toIteration(iterationNumber, current, false);
-                finishIteration(state);
-
                 if(acceptingStrategy.rejectionIsFinal() || numberOfNeighbours.get() == 0) {
-                    log.info("No acceptable neighbour in generation {}. Terminating optimisation.", iterationNumber);
-                    break;
+                    log.info("No acceptable neighbour in generation {}. Terminating optimisation.", iteration);
+                    return Progress.STOP;
                 }
 
-                log.info("No acceptable neighbour in generation {}. Keeping the candidate.", iterationNumber);
-                acceptingStrategy.setIteration(iterationNumber);
-                iterationNumber += 1;
-                continue;
+                log.info("No acceptable neighbour in generation {}. Keeping the candidate.", iteration);
+                acceptingStrategy.setIteration(iteration);
+                return Progress.CONTINUE;
             }
 
-            // 2.4 update candidate information
+            // the neighbour is a mutated version of the previous candidate
             current = acceptableCandidate.get();
+            lineage = Lineage.mutation(0);
+            log.info("{}: {} -> {}.", iteration, current.candidate(), current.value());
 
-            // 2.5 Update protocol
-            state = toIteration(iterationNumber, current);
-            finishIteration(state);
-
-            // 2.6 Update iteration-specific data
-            acceptingStrategy.setIteration(iterationNumber);
-            iterationNumber += 1;
+            acceptingStrategy.setIteration(iteration);
+            return Progress.CONTINUE;
         }
 
-        log.info("Candidate after {} iterations: {}", iterationNumber - 1, current.candidate());
-        log.info("Best candidate found: {} -> {}", bestIndividual.getInput(), bestValue);
+        /**
+         * @return The current candidate in rank 0, no member before the initial candidate
+         *   is evaluated.
+         */
+        @Override
+        public Population population() {
+            if(current == null) {
+                return new Population(List.of(), List.of());
+            }
 
-        events.publish(new RunFinished(executionRecorder.getExecution()));
-        events.finishRun();
+            final Member member = new Member(current.candidate(), current.output(), current.value(), lineage);
 
-        cdiContainer.getContextControl()
-                    .stopContext(RunScoped.class);
-
-    }
-
-    private Iteration toIteration(final int iteration, final Evaluated evaluated) {
-        return toIteration(iteration, evaluated, true);
-    }
-
-    /**
-     * Creates the memory state of an iteration.
-     *
-     * @param moved {@code true} if the candidate is a neighbour of the previous one ({@link Mutation}),
-     *   {@code false} if it is unchanged ({@link Identity}).
-     */
-    private Iteration toIteration(final int iteration, final Evaluated evaluated, final boolean moved) {
-        log.info("{}: {} -> {}.", iteration, evaluated.candidate(), evaluated.value());
-
-        final Individual individual = MemoryFactory.eINSTANCE.createIndividual();
-        individual.setId(idGenerator.nextId());
-        individual.setInput(evaluated.candidate());
-        individual.setOutput(evaluated.output());
-
-        // an unchanged candidate is not better than itself, so the earlier individual stays the best
-        if(bestValue == null || evaluated.value().isBetter(bestValue)) {
-            bestIndividual = individual;
-            bestValue = evaluated.value();
+            return Population.of(member);
         }
-
-        // the candidate is either a neighbour, i.e., a mutated version, of the previous one or the same
-        if(previousIndividual != null) {
-            final Relationship relationship = moved ? MemoryFactory.eINSTANCE.createMutation()
-                                                    : MemoryFactory.eINSTANCE.createIdentity();
-            relationship.getTarget().add(previousIndividual);
-            individual.getRelationships().add(relationship);
-        }
-        previousIndividual = individual;
-
-        final Rank first = MemoryFactory.eINSTANCE.createRank();
-        first.setNumber(0);
-        first.getMembers().add(individual);
-
-        final Iteration state = MemoryFactory.eINSTANCE.createIteration();
-        state.setNumber(iteration);
-        state.getRanks().add(first);
-        state.setBestSoFar(bestIndividual);
-
-        return state;
-    }
-
-    /**
-     * Publishes the finished iteration; the dispatcher records its metrics.
-     */
-    private void finishIteration(final Iteration iteration) {
-        events.publish(new IterationFinished(iteration));
     }
 }

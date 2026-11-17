@@ -59,6 +59,7 @@ module de.evoal.optimisation.api {
     exports de.evoal.optimisation.api.statistics.io;
     exports de.evoal.optimisation.api.statistics.writer;
     exports de.evoal.optimisation.api.producer;
+    exports de.evoal.optimisation.api.run;
 
     exports de.evoal.optimisation.main.fitness;
 //    exports de.evoal.optimisation.main.constraints.constraint.strategies.constraint;
@@ -78,6 +79,7 @@ module de.evoal.optimisation.api {
     opens de.evoal.optimisation.api.statistics.io to weld.core.impl;
     opens de.evoal.optimisation.api.statistics.writer to weld.core.impl;
     opens de.evoal.optimisation.api.producer to weld.core.impl;
+    opens de.evoal.optimisation.api.run to weld.core.impl;
 
     opens de.evoal.optimisation.main.comparator to weld.core.impl;
 //    opens de.evoal.optimisation.main.constraints.constraint to weld.core.impl;
