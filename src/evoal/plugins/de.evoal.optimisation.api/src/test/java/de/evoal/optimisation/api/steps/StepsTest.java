@@ -1,9 +1,12 @@
 package de.evoal.optimisation.api.steps;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -79,6 +82,75 @@ public class StepsTest {
             Assertions.assertEquals(candidates, state.getCandidates());
             Assertions.assertTrue(candidates.get(0).isEvaluated());
             Assertions.assertFalse(candidates.get(1).isEvaluated());
+        }
+    }
+
+    @Nested
+    @DisplayName("given a fitness calculation until accepted")
+    class UntilAccepted {
+        private final OptimisationValueComparator comparator = Mockito.mock(OptimisationValueComparator.class);
+
+        private final EvaluationService evaluationService = Mockito.mock(EvaluationService.class);
+
+        private final SearchState state = new SearchState();
+
+        /**
+         * The number of offered candidates that were created.
+         */
+        private int created;
+
+        /**
+         * The values of the offered candidates, in their order.
+         */
+        private final List<Double> values = List.of(1.0, 5.0, 2.0, 7.0);
+
+        /**
+         * The candidates the acceptance test was called for, by value.
+         */
+        private final List<Double> tested = new ArrayList<>();
+
+        @BeforeEach
+        public void offer() {
+            final Iterator<Double> results = values.iterator();
+            Mockito.when(comparator.apply(Mockito.any())).thenAnswer(invocation -> new TestValue(results.next()));
+
+            state.setOffered(Stream.generate(() -> {
+                                       created += 1;
+                                       return new Candidate(input(), Lineage.NONE);
+                                   })
+                                   .limit(values.size()));
+        }
+
+        private FitnessCalculation acceptingAbove(final double threshold) {
+            return FitnessCalculation.untilAccepted(evaluationService, comparator, (current, candidate) -> {
+                final double value = (Double) candidate.value().toStatistics().getFirst();
+                tested.add(value);
+                return value > threshold;
+            });
+        }
+
+        @Test
+        public void theCandidatesAreEvaluatedUntilTheFirstAcceptableOne() {
+            // when
+            acceptingAbove(4.0).execute(state);
+
+            // then
+            Assertions.assertEquals(2, created);
+            Assertions.assertEquals(List.of(1.0, 5.0), tested);
+            Assertions.assertEquals(2, state.getCandidates().size());
+            Assertions.assertSame(state.getCandidates().get(1), state.getAccepted().orElseThrow());
+            Mockito.verify(evaluationService, Mockito.times(2)).evaluate(Mockito.any());
+        }
+
+        @Test
+        public void withoutAnAcceptableCandidateAllAreEvaluatedAndNoneIsAccepted() {
+            // when
+            acceptingAbove(10.0).execute(state);
+
+            // then
+            Assertions.assertEquals(List.of(1.0, 5.0, 2.0, 7.0), tested);
+            Assertions.assertEquals(4, state.getCandidates().size());
+            Assertions.assertTrue(state.getAccepted().isEmpty());
         }
     }
 

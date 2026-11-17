@@ -1,9 +1,6 @@
 package de.evoal.optimisation.local_search.main;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Stream;
 
 import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
@@ -16,28 +13,44 @@ import org.eclipse.emf.ecore.EObject;
 import de.evoal.core.api.cdi.BeanFactory;
 import de.evoal.core.api.cdi.Component;
 import de.evoal.core.api.utils.AttributeHelper;
-import de.evoal.models.core.ecore.TypedEObject;
-import de.evoal.models.v202704.optimisation.execution.OptimisationValue;
 import de.evoal.models.v202704.optimisation.execution.TerminationCriterion;
 
 import de.evoal.optimisation.api.cdi.TerminationCriterionProducer;
 import de.evoal.optimisation.api.evaluation.EvaluationService;
+import de.evoal.optimisation.api.events.RunEventDispatcher;
 import de.evoal.optimisation.api.model.InitialCandidatesProvider;
 import de.evoal.optimisation.api.model.OptimisationAlgorithm;
 import de.evoal.optimisation.api.model.OptimisationValueComparator;
-import de.evoal.optimisation.api.run.Candidate;
-import de.evoal.optimisation.api.run.Lineage;
 import de.evoal.optimisation.api.run.OptimisationRun;
-import de.evoal.optimisation.api.run.Population;
-import de.evoal.optimisation.api.run.Progress;
-import de.evoal.optimisation.api.run.SearchProcedure;
+import de.evoal.optimisation.api.steps.FitnessCalculation;
+import de.evoal.optimisation.api.steps.ReplacePopulation;
+import de.evoal.optimisation.api.steps.SampleCandidates;
+import de.evoal.optimisation.api.steps.Step;
+import de.evoal.optimisation.api.steps.Template;
 
 import de.evoal.optimisation.local_search.api.accepting.AcceptingStrategy;
 import de.evoal.optimisation.local_search.api.neighbour.NeighbourChoosingStrategy;
 
 /**
- * A local search algorithm. It holds a single candidate and moves to an acceptable
- *   neighbour in every iteration; the run itself is executed by the {@link OptimisationRun}.
+ * A local search (DL type {@code 'local-search'}) as a template of steps. It holds a single
+ *   candidate.
+ * <p>
+ * Initialisation:
+ * <ol>
+ *   <li>Initialization: take the first candidate of the {@code 'initialisation'},</li>
+ *   <li>FitnessCalculation: evaluate it,</li>
+ *   <li>Acceptance: it becomes the current candidate.</li>
+ * </ol>
+ * Every iteration:
+ * <ol>
+ *   <li>Adaption: offer the neighbours of the current candidate ({@link OfferNeighbours}),</li>
+ *   <li>FitnessCalculation: evaluate them one after the other until the accepting strategy
+ *     accepts one,</li>
+ *   <li>Acceptance: move to the accepted neighbour, or end the search
+ *     ({@link AcceptNeighbour}),</li>
+ *   <li>ParameterAdjustment: pass the iteration to the accepting strategy
+ *     ({@link AdjustAcceptingStrategy}).</li>
+ * </ol>
  */
 @Slf4j
 @Dependent
@@ -77,6 +90,12 @@ public class LocalSearchAlgorithm implements OptimisationAlgorithm {
     @Inject
     private OptimisationRun kernel;
 
+    /**
+     * Publishes the executed steps.
+     */
+    @Inject
+    private RunEventDispatcher events;
+
     @Override
     public OptimisationAlgorithm init(final EObject instance) {
         criterion = producer.create(instance);
@@ -86,119 +105,28 @@ public class LocalSearchAlgorithm implements OptimisationAlgorithm {
         return this;
     }
 
-    /**
-     * A candidate together with its evaluation. Each candidate is evaluated exactly once.
-     *
-     * @param candidate The search-space value.
-     * @param output The result of the optimisation function.
-     * @param value The optimisation value of the output.
-     */
-    private record Evaluated(TypedEObject candidate, TypedEObject output, OptimisationValue value) {}
-
-    private Evaluated evaluate(final TypedEObject candidate) {
-        final TypedEObject output = evaluationService.evaluate(candidate);
-        return new Evaluated(candidate, output, comparator.apply(output));
-    }
-
     @Override
     public void run() {
         log.info("Setting up local search algorithm.");
 
-        kernel.execute(criterion, new Search());
+        kernel.execute(criterion, template());
     }
 
     /**
-     * The search of a run: the current candidate and whether it changed since the previous
-     *   iteration.
+     * @return The template of the local search.
      */
-    private final class Search implements SearchProcedure {
-        /**
-         * The current candidate, {@code null} before it is evaluated.
-         */
-        private Evaluated current;
+    private Template template() {
+        final List<Step> initialisation = List.of(new SampleCandidates(provider, 1),
+                                                  new FitnessCalculation(evaluationService, comparator),
+                                                  new ReplacePopulation());
 
-        /**
-         * Whether the current candidate is a neighbour of the previous one
-         *   ({@link Lineage.Kind#MUTATION}) or the same ({@link Lineage.Kind#IDENTITY}).
-         */
-        private Lineage.Kind change = Lineage.Kind.NONE;
+        final AcceptNeighbour acceptance = new AcceptNeighbour(acceptingStrategy);
+        final List<Step> iteration = List.of(new OfferNeighbours(strategy, acceptingStrategy),
+                                             FitnessCalculation.untilAccepted(evaluationService, comparator,
+                                                                              acceptance::isAcceptable),
+                                             acceptance,
+                                             new AdjustAcceptingStrategy(acceptingStrategy));
 
-        /**
-         * The member of the previous population, {@code null} before the first one.
-         */
-        private Candidate previous;
-
-        @Override
-        public void initialise() {
-            current = evaluate(provider.create().findFirst().get());
-            log.info("0: {} -> {}.", current.candidate(), current.value());
-        }
-
-        /**
-         * Searches for an acceptable neighbour; every neighbour is evaluated once. Some
-         *   strategies (simulated annealing) test a single random neighbour per iteration.
-         *
-         * @return {@link Progress#STOP} if no neighbour is acceptable and the rejection is
-         *   final or there are no neighbours at all. Otherwise, the candidate stays and the
-         *   next iteration tries again.
-         */
-        @Override
-        public Progress iterate(final int iteration) {
-            final OptimisationValue currentValue = current.value();
-
-            // the candidate stays the same until a neighbour is accepted
-            change = Lineage.Kind.IDENTITY;
-
-            final Stream<TypedEObject> offeredNeighbours = acceptingStrategy.testsSingleNeighbour()
-                    ? strategy.randomNeighbour(current.candidate()).stream()
-                    : strategy.neighbours(current.candidate());
-            final AtomicInteger numberOfNeighbours = new AtomicInteger();
-            final Optional<Evaluated> acceptableCandidate =
-                    offeredNeighbours.peek(neighbour -> numberOfNeighbours.incrementAndGet())
-                                     .map(LocalSearchAlgorithm.this::evaluate)
-                                     .filter(c -> acceptingStrategy.acceptCandidate(c.value(), currentValue))
-                                     .findFirst();
-
-            if(acceptableCandidate.isEmpty()) {
-                if(acceptingStrategy.rejectionIsFinal() || numberOfNeighbours.get() == 0) {
-                    log.info("No acceptable neighbour in generation {}. Terminating optimisation.", iteration);
-                    return Progress.STOP;
-                }
-
-                log.info("No acceptable neighbour in generation {}. Keeping the candidate.", iteration);
-                acceptingStrategy.setIteration(iteration);
-                return Progress.CONTINUE;
-            }
-
-            // the neighbour is a mutated version of the previous candidate
-            current = acceptableCandidate.get();
-            change = Lineage.Kind.MUTATION;
-            log.info("{}: {} -> {}.", iteration, current.candidate(), current.value());
-
-            acceptingStrategy.setIteration(iteration);
-            return Progress.CONTINUE;
-        }
-
-        /**
-         * @return The current candidate in rank 0, no member before the initial candidate
-         *   is evaluated.
-         */
-        @Override
-        public Population population() {
-            if(current == null) {
-                return new Population(List.of(), List.of());
-            }
-
-            final Lineage lineage = switch(change) {
-                case NONE -> Lineage.NONE;
-                case IDENTITY -> Lineage.identity(previous);
-                case MUTATION -> Lineage.mutation(previous);
-                case RECOMBINATION -> throw new IllegalStateException("Local search does not recombine.");
-            };
-            final Candidate member = Candidate.evaluated(current.candidate(), current.output(), current.value(), lineage);
-            previous = member;
-
-            return Population.of(member);
-        }
+        return new Template(events, initialisation, iteration);
     }
 }
