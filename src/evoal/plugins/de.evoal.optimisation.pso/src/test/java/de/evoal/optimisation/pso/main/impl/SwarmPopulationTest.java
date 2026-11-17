@@ -18,8 +18,8 @@ import org.eclipse.emf.ecore.EcorePackage;
 import de.evoal.models.core.ecore.Space;
 import de.evoal.models.core.ecore.TypedEObject;
 
+import de.evoal.optimisation.api.run.Candidate;
 import de.evoal.optimisation.api.run.Lineage;
-import de.evoal.optimisation.api.run.Member;
 import de.evoal.optimisation.api.run.Population;
 
 import de.evoal.optimisation.pso.api.swarm.Particle;
@@ -91,8 +91,12 @@ public class SwarmPopulationTest {
             }
         }
 
+        private Candidate memberOf(final int iteration, final int particle) {
+            return populations.get(iteration).members().get(particle);
+        }
+
         private Lineage lineageOf(final int iteration, final int particle) {
-            return populations.get(iteration).members().get(particle).lineage();
+            return memberOf(iteration, particle).lineage();
         }
 
         @Test
@@ -103,19 +107,19 @@ public class SwarmPopulationTest {
 
         @Test
         public void aMovedParticleIsAMutationOfItsPreviousState() {
-            Assertions.assertEquals(Lineage.mutation(0), lineageOf(1, 0));
-            Assertions.assertEquals(Lineage.mutation(0), lineageOf(2, 0));
+            Assertions.assertEquals(Lineage.mutation(memberOf(0, 0)), lineageOf(1, 0));
+            Assertions.assertEquals(Lineage.mutation(memberOf(1, 0)), lineageOf(2, 0));
         }
 
         @Test
         public void anUnchangedParticleIsAnIdentityOfItsPreviousState() {
-            Assertions.assertEquals(Lineage.identity(1), lineageOf(1, 1));
-            Assertions.assertEquals(Lineage.identity(1), lineageOf(2, 1));
+            Assertions.assertEquals(Lineage.identity(memberOf(0, 1)), lineageOf(1, 1));
+            Assertions.assertEquals(Lineage.identity(memberOf(1, 1)), lineageOf(2, 1));
         }
 
         @Test
         public void theMembersAreTheParticlesInSwarmOrder() {
-            final Member first = populations.get(2).members().get(0);
+            final Candidate first = populations.get(2).members().get(0);
 
             Assertions.assertSame(moving.getCurrentPosition(), first.input());
             Assertions.assertSame(moving.getCurrentFitness(), first.value());

@@ -25,8 +25,8 @@ public interface SearchProcedure {
 
     /**
      * Describes the current population. The kernel calls it exactly once after every
-     *   iteration, so the lineage of the population can refer to the population of the
-     *   previous call.
+     *   iteration; the lineage of its members refers to the members of the previous call
+     *   (or to unchanged copies of them).
      *
      * @return The current population.
      */

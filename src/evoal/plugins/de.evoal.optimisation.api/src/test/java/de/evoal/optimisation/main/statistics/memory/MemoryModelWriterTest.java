@@ -26,12 +26,14 @@ import org.junit.jupiter.api.io.TempDir;
 import org.mockito.Mockito;
 
 import de.evoal.core.api.dynamic.EAnnotationHelper;
+import de.evoal.core.api.utils.AttributeHelper;
 import de.evoal.core.api.random.RandomService;
 import de.evoal.models.v202704.optimisation.memory.Execution;
 import de.evoal.models.v202704.optimisation.memory.Individual;
 import de.evoal.models.v202704.optimisation.memory.Iteration;
 import de.evoal.models.v202704.optimisation.memory.Mutation;
 import de.evoal.models.v202704.optimisation.memory.MemoryFactory;
+import de.evoal.models.v202704.optimisation.memory.UnorderedIterationStep;
 
 import de.evoal.optimisation.api.execution.EvaluationPosition;
 import de.evoal.optimisation.api.execution.ExecutionRecorder;
@@ -222,6 +224,55 @@ public class MemoryModelWriterTest {
 
             // when / then
             Assertions.assertThrows(IllegalStateException.class, () -> writer.add(skipped));
+        }
+    }
+
+    @Nested
+    @DisplayName("given an iteration with executed steps")
+    class ExecutedSteps {
+        private Path iterationFile;
+
+        /**
+         * Writes iteration 0 with the step "Initialization: sample", with or without steps.
+         */
+        private String writeIteration(final boolean writeSteps) throws Exception {
+            startRun(null);
+            final MemoryModelWriter writer = writer(outputFolder.toFile());
+            final AttributeHelper attributes = Mockito.mock(AttributeHelper.class);
+            Mockito.when(attributes.lookup(Mockito.any(EObject.class), Mockito.eq("steps"))).thenReturn(writeSteps);
+            inject(writer, "attributes", attributes);
+            writer.init(algorithmConfiguration());
+
+            final Iteration iteration = MemoryModels.iteration(0, MemoryModels.individual(0, new double[] {1.0, 1.0}, 2.0));
+            final UnorderedIterationStep step = MemoryFactory.eINSTANCE.createUnorderedIterationStep();
+            step.setDescription("Initialization: sample");
+            iteration.getSteps().add(step);
+
+            writer.start();
+            writer.add(iteration);
+
+            iterationFile = outputFolder.resolve("memory-model/iteration-0.json");
+            return Files.readString(iterationFile);
+        }
+
+        @Test
+        public void theStepsAreWrittenIfConfigured() throws Exception {
+            // when
+            final String document = writeIteration(true);
+
+            // then
+            Assertions.assertTrue(document.contains("\"description\" : \"Initialization: sample\""));
+            Assertions.assertEquals(List.of(), MemoryModelSchemas.violationsOf(iterationFile));
+        }
+
+        @Test
+        public void theStepsAreNotWrittenByDefault() throws Exception {
+            // when
+            final String document = writeIteration(false);
+
+            // then
+            Assertions.assertFalse(document.contains("Initialization: sample"));
+            Assertions.assertTrue(document.contains("\"steps\" : [ ]"));
         }
     }
 

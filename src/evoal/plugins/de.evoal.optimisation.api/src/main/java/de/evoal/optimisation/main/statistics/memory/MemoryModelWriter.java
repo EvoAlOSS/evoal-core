@@ -20,6 +20,7 @@ import de.evoal.core.api.cdi.BlackboardValue;
 import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.core.api.dynamic.EAnnotationHelper;
 import de.evoal.core.api.random.RandomService;
+import de.evoal.core.api.utils.AttributeHelper;
 import de.evoal.core.api.utils.EvoalIOException;
 import de.evoal.models.core.utils.FQNProvider;
 import de.evoal.models.v202704.optimisation.memory.Execution;
@@ -39,6 +40,9 @@ import de.evoal.optimisation.api.statistics.writer.StatisticsWriter;
  *   the evaluation setup ({@link EvaluationPosition#relativeFolder()}).
  * <p>
  * The EvoAl version is the version of this module; all EvoAl modules share one version.
+ * <p>
+ * The executed steps of the iterations are written only if the configuration asks for
+ *   them ({@code 'steps' := true}).
  * <p>
  * The writer is created while the metrics are still being defined. Therefore, it prepares
  *   the folder and writes {@code execution-information.json} when the run starts
@@ -72,6 +76,12 @@ public class MemoryModelWriter implements StatisticsWriter {
      */
     @Inject
     private EAnnotationHelper annotationHelper;
+
+    /**
+     * Reads the configuration of the writer.
+     */
+    @Inject
+    private AttributeHelper attributes;
 
     /**
      * The ids of the best individuals (rank 0) of the last written iteration.
@@ -126,6 +136,11 @@ public class MemoryModelWriter implements StatisticsWriter {
     private ExecutionRecorder recorder;
 
     /**
+     * Whether the executed steps of the iterations are written.
+     */
+    private boolean steps;
+
+    /**
      * Writes the iteration file.
      *
      * A failure to write is logged and stops the writer; the run continues.
@@ -147,7 +162,7 @@ public class MemoryModelWriter implements StatisticsWriter {
         try {
             requireNextNumber(iteration);
 
-            final ObjectNode document = json.toIteration(iteration);
+            final ObjectNode document = json.toIteration(iteration, steps);
             folder.write("iteration-" + iteration.getNumber() + ".json", document);
 
             numberOfIterations += 1;
@@ -170,8 +185,14 @@ public class MemoryModelWriter implements StatisticsWriter {
                         .toList();
     }
 
+    /**
+     * Reads whether the executed steps are written ({@code 'steps'}).
+     */
     @Override
     public StatisticsWriter init(final EObject configuration) {
+        final Boolean writeSteps = attributes.lookup(configuration, "steps");
+        steps = Boolean.TRUE.equals(writeSteps);
+
         return this;
     }
 

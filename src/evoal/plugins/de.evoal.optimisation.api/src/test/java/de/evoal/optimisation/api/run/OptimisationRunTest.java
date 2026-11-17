@@ -2,7 +2,7 @@ package de.evoal.optimisation.api.run;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.IntFunction;
+import java.util.function.BiFunction;
 
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
@@ -100,8 +100,8 @@ public class OptimisationRunTest {
                .thenAnswer(invocation -> invocation.<Iteration>getArgument(0).getNumber() < lastIteration);
     }
 
-    private static Member member(final double value, final Lineage lineage) {
-        return new Member(Mockito.mock(TypedEObject.class), Mockito.mock(TypedEObject.class), new Value(value), lineage);
+    private static Candidate member(final double value, final Lineage lineage) {
+        return Candidate.evaluated(Mockito.mock(TypedEObject.class), Mockito.mock(TypedEObject.class), new Value(value), lineage);
     }
 
     private static List<Integer> idsOf(final Iteration iteration) {
@@ -135,8 +135,8 @@ public class OptimisationRunTest {
     @Nested
     @DisplayName("given a procedure that always continues")
     class ContinuingProcedure {
-        private final FakeProcedure procedure = new FakeProcedure(number -> {
-            final Lineage lineage = number == 0 ? Lineage.NONE : Lineage.mutation(0);
+        private final FakeProcedure procedure = new FakeProcedure((number, previous) -> {
+            final Lineage lineage = number == 0 ? Lineage.NONE : Lineage.mutation(previous.getFirst());
             return new Population(List.of(member(number, lineage), member(-number, Lineage.NONE)),
                                   List.of(List.of(0), List.of(1)));
         });
@@ -210,9 +210,9 @@ public class OptimisationRunTest {
 
         @BeforeEach
         public void run() {
-            final FakeProcedure procedure = new FakeProcedure(number -> {
-                final Lineage lineage = number == 0 ? Lineage.NONE : Lineage.identity(0);
-                final List<Member> members = List.of(member(values[number][0], lineage),
+            final FakeProcedure procedure = new FakeProcedure((number, previous) -> {
+                final Lineage lineage = number == 0 ? Lineage.NONE : Lineage.identity(previous.getFirst());
+                final List<Candidate> members = List.of(member(values[number][0], lineage),
                                                      member(values[number][1], Lineage.NONE));
 
                 return new Population(members, List.of(List.of(0, 1)));
@@ -256,7 +256,7 @@ public class OptimisationRunTest {
         public void anInterruptedIterationIsRecordedAndEndsTheRun() {
             // given
             lastIteration = 10;
-            final FakeProcedure procedure = new FakeProcedure(number -> Population.of(member(number, Lineage.NONE)));
+            final FakeProcedure procedure = new FakeProcedure((number, previous) -> Population.of(member(number, Lineage.NONE)));
             procedure.exhaustedInIteration = 1;
 
             // when
@@ -270,7 +270,7 @@ public class OptimisationRunTest {
         @Test
         public void anInterruptedInitialisationIsRecordedAndEndsTheRun() {
             // given
-            final FakeProcedure procedure = new FakeProcedure(number -> Population.of(member(number, Lineage.NONE)));
+            final FakeProcedure procedure = new FakeProcedure((number, previous) -> Population.of(member(number, Lineage.NONE)));
             procedure.exhaustedInIteration = 0;
 
             // when
@@ -289,7 +289,7 @@ public class OptimisationRunTest {
         public void theStoppedIterationIsRecordedAndEndsTheRun() {
             // given
             lastIteration = 10;
-            final FakeProcedure procedure = new FakeProcedure(number -> Population.of(member(number, Lineage.NONE)));
+            final FakeProcedure procedure = new FakeProcedure((number, previous) -> Population.of(member(number, Lineage.NONE)));
             procedure.stopInIteration = 2;
 
             // when
@@ -306,8 +306,9 @@ public class OptimisationRunTest {
         @Test
         public void aPredecessorOutsideThePreviousPopulationIsRejectedAndTheScopeIsStopped() {
             // given
-            final FakeProcedure procedure = new FakeProcedure(number -> {
-                final Lineage lineage = number == 0 ? Lineage.NONE : Lineage.mutation(5);
+            final Candidate unknown = member(5, Lineage.NONE);
+            final FakeProcedure procedure = new FakeProcedure((number, previous) -> {
+                final Lineage lineage = number == 0 ? Lineage.NONE : Lineage.mutation(unknown);
                 return Population.of(member(number, lineage));
             });
 
@@ -326,12 +327,12 @@ public class OptimisationRunTest {
         @Test
         public void aRecombinationRefersToAllParents() {
             // given
-            final FakeProcedure procedure = new FakeProcedure(number -> {
+            final FakeProcedure procedure = new FakeProcedure((number, previous) -> {
                 if(number == 0) {
                     return new Population(List.of(member(1, Lineage.NONE), member(2, Lineage.NONE)),
                                           List.of(List.of(0, 1)));
                 }
-                return Population.of(member(3, Lineage.recombination(List.of(0, 1))));
+                return Population.of(member(3, Lineage.recombination(previous)));
             });
             lastIteration = 1;
 
@@ -348,9 +349,9 @@ public class OptimisationRunTest {
     @Test
     public void aLineageMustFitItsKind() {
         Assertions.assertThrows(IllegalArgumentException.class,
-                                () -> new Lineage(Lineage.Kind.MUTATION, List.of(0, 1)));
+                                () -> new Lineage(Lineage.Kind.MUTATION, List.of(member(1, Lineage.NONE), member(2, Lineage.NONE))));
         Assertions.assertThrows(IllegalArgumentException.class,
-                                () -> new Lineage(Lineage.Kind.NONE, List.of(0)));
+                                () -> new Lineage(Lineage.Kind.NONE, List.of(member(1, Lineage.NONE))));
     }
 
     @Test
@@ -359,11 +360,50 @@ public class OptimisationRunTest {
                                 () -> new Population(List.of(member(1, Lineage.NONE)), List.of(List.of(1))));
     }
 
+    @Test
+    public void aMemberMustBeEvaluated() {
+        final Candidate unevaluated = new Candidate(Mockito.mock(TypedEObject.class), Lineage.NONE);
+
+        Assertions.assertThrows(IllegalArgumentException.class,
+                                () -> new Population(List.of(unevaluated), List.of(List.of(0))));
+    }
+
+    @Nested
+    @DisplayName("given a member that refers to an unchanged copy of a previous member")
+    class CopiedPredecessor {
+        @Test
+        public void theCopyStandsForItsOriginal() {
+            // given: the previous member 0 is copied twice, the new member mutates the copy
+            final FakeProcedure procedure = new FakeProcedure((number, previous) -> {
+                if(number == 0) {
+                    return Population.of(member(1, Lineage.NONE));
+                }
+                final Candidate copy = previous.getFirst().copy().copy();
+                return Population.of(member(2, Lineage.mutation(copy)));
+            });
+            lastIteration = 1;
+
+            // when
+            kernel.execute(criterion, procedure);
+
+            // then
+            final Relationship relationship = individual(iterations.get(1), 1).getRelationships().getFirst();
+            Assertions.assertInstanceOf(Mutation.class, relationship);
+            Assertions.assertEquals(List.of(0), targetIds(relationship));
+        }
+    }
+
     /**
      * A procedure whose population of iteration {@code n} is given by a function.
      */
     private final class FakeProcedure implements SearchProcedure {
-        private final IntFunction<Population> populations;
+        /**
+         * Creates the population of an iteration from its number and the members of the
+         *   previous population.
+         */
+        private final BiFunction<Integer, List<Candidate>, Population> populations;
+
+        private List<Candidate> previous = List.of();
 
         private int iteration;
 
@@ -377,7 +417,7 @@ public class OptimisationRunTest {
          */
         private int stopInIteration = -1;
 
-        private FakeProcedure(final IntFunction<Population> populations) {
+        private FakeProcedure(final BiFunction<Integer, List<Candidate>, Population> populations) {
             this.populations = populations;
         }
 
@@ -404,7 +444,10 @@ public class OptimisationRunTest {
 
         @Override
         public Population population() {
-            return populations.apply(iteration);
+            final Population population = populations.apply(iteration, previous);
+            previous = population.members();
+
+            return population;
         }
     }
 

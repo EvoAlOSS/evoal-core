@@ -3,7 +3,8 @@
  * <p>
  * An algorithm describes only its search ({@link de.evoal.optimisation.api.run.SearchProcedure}):
  *   how it creates the initial candidates, what one iteration does, and which candidates it
- *   currently holds ({@link de.evoal.optimisation.api.run.Population}). The kernel
+ *   currently holds ({@link de.evoal.optimisation.api.run.Population} of
+ *   {@link de.evoal.optimisation.api.run.Candidate}s). The kernel
  *   ({@link de.evoal.optimisation.api.run.OptimisationRun}) does the rest of the run: the
  *   {@link de.evoal.core.api.cdi.RunScoped} context, the run events, the iteration numbers,
  *   the termination check, the handling of an exhausted evaluation budget, and the memory

@@ -416,7 +416,14 @@ module de.evoal.optimisation.core {
      *   <tt>memory-model/target-&lt;target&gt;/repetition-&lt;repetition&gt;</tt> if target
      *   points are used.
      */
-    type 'memory-model' extends 'statistics-writer' {}
+    type 'memory-model' extends 'statistics-writer' {
+        /**
+         * Whether the executed steps of every iteration (e.g. "Initialization: sample 10
+         *   candidates") are written into <tt>iteration-&lt;n&gt;.json</tt>. Only algorithms
+         *   that consist of steps, such as random search, record their steps.
+         */
+        'steps' : boolean := false;
+    }
 
     /**
      * Does not write any statistics. Can be used to disable statistics output.

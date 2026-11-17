@@ -1,7 +1,9 @@
 package de.evoal.optimisation.api.run;
 
 import java.util.ArrayList;
+import java.util.IdentityHashMap;
 import java.util.List;
+import java.util.Map;
 
 import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
@@ -41,7 +43,9 @@ import de.evoal.optimisation.api.statistics.writer.StatisticsWriterListener;
  *   kernel creates the memory state of the iteration from the
  *   {@link SearchProcedure#population()} and publishes it. Every member becomes a new
  *   individual with the next id, related to the individuals of the previous iteration
- *   by its {@link Lineage}. The best individual so far is the first individual whose
+ *   by its {@link Lineage}. A predecessor that is not a member of the previous iteration,
+ *   but an unchanged copy of one ({@link Lineage.Kind#IDENTITY}), stands for its original.
+ *   The best individual so far is the first individual whose
  *   optimisation value is better than the values of all earlier ones.
  * <p>
  * The run happens in the {@link de.evoal.core.api.cdi.RunScoped} context, and the
@@ -83,9 +87,9 @@ public class OptimisationRun {
     private OptimisationValue bestValue;
 
     /**
-     * The individuals of the previous iteration, by member index.
+     * The individuals of the members of the previous iteration.
      */
-    private List<Individual> previousIndividuals = List.of();
+    private Map<Candidate, Individual> previousIndividuals = new IdentityHashMap<>();
 
     /**
      * @param events Publishes the events of the run.
@@ -119,7 +123,7 @@ public class OptimisationRun {
         try {
             bestIndividual = null;
             bestValue = null;
-            previousIndividuals = List.of();
+            previousIndividuals = new IdentityHashMap<>();
 
             events.startRun(List.of(new StatisticsWriterListener(statistics)));
             events.publish(new RunStarted(recorder.getExecution()));
@@ -168,17 +172,22 @@ public class OptimisationRun {
      * @return The memory state.
      */
     private Iteration finishIteration(final int number, final Population population) {
-        final List<Individual> individuals = population.members()
-                                                       .stream()
-                                                       .map(this::toIndividual)
-                                                       .toList();
+        final Map<Candidate, Individual> individualsOfMembers = new IdentityHashMap<>();
+        final List<Individual> individuals = new ArrayList<>();
+        for(final Candidate member : population.members()) {
+            final Individual individual = toIndividual(member);
+
+            individuals.add(individual);
+            individualsOfMembers.put(member, individual);
+        }
 
         final Iteration iteration = MemoryFactory.eINSTANCE.createIteration();
         iteration.setNumber(number);
         iteration.getRanks().addAll(toRanks(population.ranks(), individuals));
+        iteration.getSteps().addAll(population.steps());
         iteration.setBestSoFar(bestIndividual);
 
-        previousIndividuals = individuals;
+        previousIndividuals = individualsOfMembers;
 
         events.publish(new IterationFinished(iteration));
 
@@ -188,7 +197,7 @@ public class OptimisationRun {
     /**
      * @return The individual of the member with the next id, related to its predecessors.
      */
-    private Individual toIndividual(final Member member) {
+    private Individual toIndividual(final Candidate member) {
         final Individual individual = MemoryFactory.eINSTANCE.createIndividual();
         individual.setId(idGenerator.nextId());
         individual.setInput(member.input());
@@ -227,7 +236,7 @@ public class OptimisationRun {
 
     /**
      * @return The relationship of the lineage to the individuals of the previous iteration.
-     * @throws IllegalStateException if a predecessor is not a member of the previous iteration.
+     * @throws IllegalStateException if a predecessor does not belong to the previous iteration.
      */
     private Relationship toRelationship(final Lineage lineage) {
         final Relationship relationship = switch(lineage.kind()) {
@@ -237,17 +246,31 @@ public class OptimisationRun {
             case NONE -> throw new IllegalArgumentException("A lineage without predecessors has no relationship.");
         };
 
-        for(final int predecessor : lineage.predecessors()) {
-            if(predecessor < 0 || predecessor >= previousIndividuals.size()) {
-                throw new IllegalStateException("The predecessor " + predecessor + " is not a member of the "
-                                                + "previous iteration (" + previousIndividuals.size()
-                                                + " members).");
-            }
-
-            relationship.getTarget().add(previousIndividuals.get(predecessor));
+        for(final Candidate predecessor : lineage.predecessors()) {
+            relationship.getTarget().add(individualOf(predecessor));
         }
 
         return relationship;
+    }
+
+    /**
+     * @return The individual of the previous iteration that the candidate stands for: its own
+     *   or, for an unchanged copy, the one of its original.
+     * @throws IllegalStateException if the candidate does not belong to the previous iteration.
+     */
+    private Individual individualOf(final Candidate predecessor) {
+        Candidate candidate = predecessor;
+
+        while(!previousIndividuals.containsKey(candidate)) {
+            if(candidate.lineage().kind() != Lineage.Kind.IDENTITY) {
+                throw new IllegalStateException("The predecessor " + predecessor + " is not a member of the "
+                                                + "previous iteration.");
+            }
+
+            candidate = candidate.lineage().predecessor();
+        }
+
+        return previousIndividuals.get(candidate);
     }
 
     private static void logExhaustedBudget(final EvaluationBudgetExhaustedException exception, final int iteration) {

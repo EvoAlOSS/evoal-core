@@ -1,18 +1,17 @@
 package de.evoal.optimisation.api.run;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
- * How a member of a population came from the members of the previous population. The
- *   predecessors are given by their index in the previous population
- *   ({@link Population#members()}).
+ * How a candidate came from other candidates, its predecessors.
  *
  * @param kind The kind of the relationship.
- * @param predecessors The indices of the predecessors in the previous population.
+ * @param predecessors The predecessors.
  */
-public record Lineage(Kind kind, List<Integer> predecessors) {
+public record Lineage(Kind kind, List<Candidate> predecessors) {
     /**
-     * A member without predecessors, e.g., an initial candidate.
+     * A candidate without predecessors, e.g., an initial or sampled candidate.
      */
     public static final Lineage NONE = new Lineage(Kind.NONE, List.of());
 
@@ -20,6 +19,7 @@ public record Lineage(Kind kind, List<Integer> predecessors) {
      * @throws IllegalArgumentException if the number of predecessors does not fit the kind.
      */
     public Lineage {
+        predecessors.forEach(Objects::requireNonNull);
         predecessors = List.copyOf(predecessors);
 
         final boolean fits = switch(kind) {
@@ -29,33 +29,46 @@ public record Lineage(Kind kind, List<Integer> predecessors) {
         };
 
         if(!fits) {
-            throw new IllegalArgumentException("A lineage of kind " + kind + " cannot have the predecessors "
-                                               + predecessors + ".");
+            throw new IllegalArgumentException("A lineage of kind " + kind + " cannot have "
+                                               + predecessors.size() + " predecessors.");
         }
     }
 
     /**
-     * @param predecessor The index of the unchanged member in the previous population.
-     * @return The lineage of a member that is the same candidate as its predecessor.
+     * @param predecessor The unchanged candidate.
+     * @return The lineage of a candidate that is the same as its predecessor.
      */
-    public static Lineage identity(final int predecessor) {
+    public static Lineage identity(final Candidate predecessor) {
         return new Lineage(Kind.IDENTITY, List.of(predecessor));
     }
 
     /**
-     * @param predecessor The index of the mutated member in the previous population.
-     * @return The lineage of a member that is a changed version of its predecessor.
+     * @param predecessor The mutated candidate.
+     * @return The lineage of a candidate that is a changed version of its predecessor.
      */
-    public static Lineage mutation(final int predecessor) {
+    public static Lineage mutation(final Candidate predecessor) {
         return new Lineage(Kind.MUTATION, List.of(predecessor));
     }
 
     /**
-     * @param predecessors The indices of the parents in the previous population.
-     * @return The lineage of a member that combines its predecessors.
+     * @param predecessors The parents.
+     * @return The lineage of a candidate that combines its predecessors.
      */
-    public static Lineage recombination(final List<Integer> predecessors) {
+    public static Lineage recombination(final List<Candidate> predecessors) {
         return new Lineage(Kind.RECOMBINATION, predecessors);
+    }
+
+    /**
+     * @return The only predecessor of an identity or mutation.
+     * @throws IllegalStateException if the lineage has not exactly one predecessor.
+     */
+    public Candidate predecessor() {
+        if(predecessors.size() != 1) {
+            throw new IllegalStateException("A lineage of kind " + kind + " has " + predecessors.size()
+                                            + " predecessors.");
+        }
+
+        return predecessors.getFirst();
     }
 
     /**

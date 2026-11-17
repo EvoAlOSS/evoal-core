@@ -7,8 +7,8 @@ import de.evoal.core.api.utils.TypedEObjects;
 import de.evoal.models.core.ecore.TypedEObject;
 import de.evoal.models.v202704.optimisation.execution.OptimisationValue;
 
+import de.evoal.optimisation.api.run.Candidate;
 import de.evoal.optimisation.api.run.Lineage;
-import de.evoal.optimisation.api.run.Member;
 import de.evoal.optimisation.api.run.Population;
 
 import de.evoal.optimisation.pso.api.swarm.Particle;
@@ -16,7 +16,7 @@ import de.evoal.optimisation.pso.api.swarm.Particle;
 /**
  * Describes the particles of a swarm as population of the run kernel. Every particle is a
  *   member, its index in the swarm is its index in the population. From the second
- *   population on, every member is related to the member of the same particle in the
+ *   population on, every member refers to the member of the same particle in the
  *   previous population: a mutation if the particle moved, an identity if its position
  *   has the same values.
  * <p>
@@ -24,23 +24,23 @@ import de.evoal.optimisation.pso.api.swarm.Particle;
  */
 public class SwarmPopulation {
     /**
-     * The positions of the particles in the previous population, empty before the first one.
+     * The members of the previous population, by particle index; empty before the first one.
      */
-    private List<TypedEObject> previousPositions = List.of();
+    private List<Candidate> previous = List.of();
 
     /**
      * @return A mutation if the position changed, otherwise an identity.
      */
     private Lineage lineageOf(final int particleIndex, final TypedEObject position) {
-        final boolean hasPredecessor = particleIndex < previousPositions.size();
+        final boolean hasPredecessor = particleIndex < previous.size();
         if(!hasPredecessor) {
             return Lineage.NONE;
         }
 
-        final TypedEObject previousPosition = previousPositions.get(particleIndex);
-        final boolean moved = !TypedEObjects.haveSameValues(previousPosition, position);
+        final Candidate predecessor = previous.get(particleIndex);
+        final boolean moved = !TypedEObjects.haveSameValues(predecessor.input(), position);
 
-        return moved ? Lineage.mutation(particleIndex) : Lineage.identity(particleIndex);
+        return moved ? Lineage.mutation(predecessor) : Lineage.identity(predecessor);
     }
 
     /**
@@ -51,8 +51,7 @@ public class SwarmPopulation {
      * @return The population, ranked by the particles' current fitness.
      */
     public Population toPopulation(final Particle[] particles) {
-        final List<Member> members = new ArrayList<>();
-        final List<TypedEObject> positions = new ArrayList<>();
+        final List<Candidate> members = new ArrayList<>();
 
         for(int index = 0; index < particles.length; ++index) {
             final Particle particle = particles[index];
@@ -60,11 +59,10 @@ public class SwarmPopulation {
             final OptimisationValue fitness = particle.getCurrentFitness();
             final TypedEObject output = fitness.toOptmisationSpace();
 
-            members.add(new Member(position, output, fitness, lineageOf(index, position)));
-            positions.add(position);
+            members.add(Candidate.evaluated(position, output, fitness, lineageOf(index, position)));
         }
 
-        previousPositions = positions;
+        previous = members;
 
         return new Population(members, SwarmRanking.toRanks(particles));
     }

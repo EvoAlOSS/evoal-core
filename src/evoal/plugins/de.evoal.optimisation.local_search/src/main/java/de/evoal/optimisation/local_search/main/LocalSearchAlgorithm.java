@@ -25,8 +25,8 @@ import de.evoal.optimisation.api.evaluation.EvaluationService;
 import de.evoal.optimisation.api.model.InitialCandidatesProvider;
 import de.evoal.optimisation.api.model.OptimisationAlgorithm;
 import de.evoal.optimisation.api.model.OptimisationValueComparator;
+import de.evoal.optimisation.api.run.Candidate;
 import de.evoal.optimisation.api.run.Lineage;
-import de.evoal.optimisation.api.run.Member;
 import de.evoal.optimisation.api.run.OptimisationRun;
 import de.evoal.optimisation.api.run.Population;
 import de.evoal.optimisation.api.run.Progress;
@@ -108,8 +108,8 @@ public class LocalSearchAlgorithm implements OptimisationAlgorithm {
     }
 
     /**
-     * The search of a run: the current candidate and how it relates to the candidate of
-     *   the previous iteration.
+     * The search of a run: the current candidate and whether it changed since the previous
+     *   iteration.
      */
     private final class Search implements SearchProcedure {
         /**
@@ -118,9 +118,15 @@ public class LocalSearchAlgorithm implements OptimisationAlgorithm {
         private Evaluated current;
 
         /**
-         * How the current candidate relates to the candidate of the previous iteration.
+         * Whether the current candidate is a neighbour of the previous one
+         *   ({@link Lineage.Kind#MUTATION}) or the same ({@link Lineage.Kind#IDENTITY}).
          */
-        private Lineage lineage = Lineage.NONE;
+        private Lineage.Kind change = Lineage.Kind.NONE;
+
+        /**
+         * The member of the previous population, {@code null} before the first one.
+         */
+        private Candidate previous;
 
         @Override
         public void initialise() {
@@ -141,7 +147,7 @@ public class LocalSearchAlgorithm implements OptimisationAlgorithm {
             final OptimisationValue currentValue = current.value();
 
             // the candidate stays the same until a neighbour is accepted
-            lineage = Lineage.identity(0);
+            change = Lineage.Kind.IDENTITY;
 
             final Stream<TypedEObject> offeredNeighbours = acceptingStrategy.testsSingleNeighbour()
                     ? strategy.randomNeighbour(current.candidate()).stream()
@@ -166,7 +172,7 @@ public class LocalSearchAlgorithm implements OptimisationAlgorithm {
 
             // the neighbour is a mutated version of the previous candidate
             current = acceptableCandidate.get();
-            lineage = Lineage.mutation(0);
+            change = Lineage.Kind.MUTATION;
             log.info("{}: {} -> {}.", iteration, current.candidate(), current.value());
 
             acceptingStrategy.setIteration(iteration);
@@ -183,7 +189,14 @@ public class LocalSearchAlgorithm implements OptimisationAlgorithm {
                 return new Population(List.of(), List.of());
             }
 
-            final Member member = new Member(current.candidate(), current.output(), current.value(), lineage);
+            final Lineage lineage = switch(change) {
+                case NONE -> Lineage.NONE;
+                case IDENTITY -> Lineage.identity(previous);
+                case MUTATION -> Lineage.mutation(previous);
+                case RECOMBINATION -> throw new IllegalStateException("Local search does not recombine.");
+            };
+            final Candidate member = Candidate.evaluated(current.candidate(), current.output(), current.value(), lineage);
+            previous = member;
 
             return Population.of(member);
         }

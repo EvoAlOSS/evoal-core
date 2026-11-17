@@ -1,0 +1,25 @@
+import "definitions" from 'de.evoal.core.constraints';
+
+import "definitions" from de.evoal.optimisation.core;
+import "definitions" from 'de.evoal.core.base';
+
+module de.evoal.optimisation.random_search.optimisation {
+	/**
+	 * Random search samples candidates independently of each other and keeps the best one
+	 *   found so far. It is the simplest search and a baseline for other algorithms: an
+	 *   algorithm that is not better than random search with the same number of
+	 *   evaluations does not use the structure of the problem.
+	 *
+	 * Iteration 0 and every further iteration take the next candidates from the
+	 *   'initialisation' (e.g. 'random-population') and evaluate them. The candidates of an
+	 *   iteration are its population; they have no predecessors. The best candidate so far
+	 *   is recorded in the memory model ('best-candidate-so-far').
+	 */
+	type 'random-search' extends 'algorithm' {
+		/**
+		 * The number of candidates sampled and evaluated per iteration.
+		 */
+		@LowerBoundary { boundary := 1; }
+		'samples-per-iteration' : int;
+	}
+}

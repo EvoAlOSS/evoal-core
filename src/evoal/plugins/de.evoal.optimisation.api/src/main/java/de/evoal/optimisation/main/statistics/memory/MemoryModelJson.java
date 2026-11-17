@@ -443,6 +443,15 @@ public class MemoryModelJson {
      * @return The document {@code iteration-<number>.json}.
      */
     public ObjectNode toIteration(final Iteration iteration) {
+        return toIteration(iteration, true);
+    }
+
+    /**
+     * @param iteration The iteration.
+     * @param withSteps Whether the executed steps are written; otherwise, the steps are empty.
+     * @return The iteration file.
+     */
+    public ObjectNode toIteration(final Iteration iteration, final boolean withSteps) {
         final ObjectNode document = newDocument();
         document.put("number", iteration.getNumber());
 
@@ -452,10 +461,12 @@ public class MemoryModelJson {
                                      .forEach(individuals::add);
 
         final ArrayNode steps = document.putArray("steps");
-        iteration.getSteps()
-                 .stream()
-                 .map(MemoryModelJson::toStep)
-                 .forEach(steps::add);
+        if(withSteps) {
+            iteration.getSteps()
+                     .stream()
+                     .map(MemoryModelJson::toStep)
+                     .forEach(steps::add);
+        }
 
         final ArrayNode ranks = toRanks(iteration.getRanks());
         document.set("ranks", ranks);

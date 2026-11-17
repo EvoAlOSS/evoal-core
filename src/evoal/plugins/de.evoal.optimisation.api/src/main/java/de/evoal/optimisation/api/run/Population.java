@@ -2,22 +2,37 @@ package de.evoal.optimisation.api.run;
 
 import java.util.List;
 
+import de.evoal.models.v202704.optimisation.memory.IterationStep;
+
 /**
- * The candidates an algorithm holds after an iteration and their ranking.
+ * The candidates an algorithm holds after an iteration and their ranking. All members are
+ *   evaluated.
  * <p>
- * The index of a member identifies it within the iteration: the ranks and the lineage of
- *   the next population refer to the members by their index. The kernel creates the
- *   individuals in the order of the members, so the order determines the individual ids.
+ * The ranks refer to the members by their index; the lineage of the members of the next
+ *   population refers to the members themselves. The kernel creates the individuals in the
+ *   order of the members, so the order determines the individual ids.
  *
- * @param members The members, indexed from 0.
+ * @param members The evaluated candidates, indexed from 0.
  * @param ranks The indices of the members of every rank, the best rank first.
+ * @param steps The steps executed in the iteration, in execution order. The kernel adds
+ *   them to the iteration of the memory model.
  */
-public record Population(List<Member> members, List<List<Integer>> ranks) {
+public record Population(List<Candidate> members, List<List<Integer>> ranks, List<IterationStep> steps) {
     /**
-     * @throws IllegalArgumentException if a rank refers to an index that is not a member.
+     * @throws IllegalArgumentException if a member is not evaluated or a rank refers to an
+     *   index that is not a member.
      */
     public Population {
         members = List.copyOf(members);
+
+        members.stream()
+               .filter(member -> !member.isEvaluated())
+               .findFirst()
+               .ifPresent(member -> {
+                   throw new IllegalArgumentException("The member " + member.input() + " is not evaluated.");
+               });
+
+        steps = List.copyOf(steps);
         ranks = ranks.stream()
                      .map(List::copyOf)
                      .toList();
@@ -33,10 +48,20 @@ public record Population(List<Member> members, List<List<Integer>> ranks) {
     }
 
     /**
+     * A population of an iteration without recorded steps.
+     *
+     * @param members The evaluated candidates, indexed from 0.
+     * @param ranks The indices of the members of every rank, the best rank first.
+     */
+    public Population(final List<Candidate> members, final List<List<Integer>> ranks) {
+        this(members, ranks, List.of());
+    }
+
+    /**
      * @param member The only member.
      * @return A population with a single member in rank 0.
      */
-    public static Population of(final Member member) {
+    public static Population of(final Candidate member) {
         return new Population(List.of(member), List.of(List.of(0)));
     }
 }
