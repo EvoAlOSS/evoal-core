@@ -20,7 +20,6 @@ import de.evoal.models.core.ecore.TypedEObject;
 
 import de.evoal.optimisation.api.run.Candidate;
 import de.evoal.optimisation.api.run.Lineage;
-import de.evoal.optimisation.api.run.Population;
 
 import de.evoal.optimisation.pso.api.swarm.Particle;
 import de.evoal.optimisation.pso.api.swarm.State;
@@ -70,7 +69,7 @@ public class SwarmPopulationTest {
     @Nested
     @DisplayName("given the populations of a swarm in three iterations")
     class ThreeIterations {
-        private final List<Population> populations = new ArrayList<>();
+        private final List<List<Candidate>> populations = new ArrayList<>();
 
         private final Particle moving = particle(0, 1.0);
 
@@ -81,18 +80,18 @@ public class SwarmPopulationTest {
             final Particle[] particles = {moving, resting};
             final SwarmPopulation population = new SwarmPopulation();
 
-            populations.add(population.toPopulation(particles));
+            populations.add(population.toMembers(particles));
 
             for(int number = 1; number < 3; ++number) {
                 moveTo(moving, 1.0 + number);
                 moveTo(resting, 2.0);
 
-                populations.add(population.toPopulation(particles));
+                populations.add(population.toMembers(particles));
             }
         }
 
         private Candidate memberOf(final int iteration, final int particle) {
-            return populations.get(iteration).members().get(particle);
+            return populations.get(iteration).get(particle);
         }
 
         private Lineage lineageOf(final int iteration, final int particle) {
@@ -119,16 +118,10 @@ public class SwarmPopulationTest {
 
         @Test
         public void theMembersAreTheParticlesInSwarmOrder() {
-            final Candidate first = populations.get(2).members().get(0);
+            final Candidate first = populations.get(2).get(0);
 
             Assertions.assertSame(moving.getCurrentPosition(), first.input());
             Assertions.assertSame(moving.getCurrentFitness(), first.value());
-        }
-
-        @Test
-        public void theMembersAreRankedByFitness() {
-            // particle 0 has the fitness 1 in iteration 0 and keeps it, particle 1 has 2
-            Assertions.assertEquals(List.of(List.of(1), List.of(0)), populations.get(0).ranks());
         }
     }
 }

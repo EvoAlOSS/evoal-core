@@ -120,9 +120,9 @@ public class DefaultSwarm implements Swarm {
     }
 
     /**
-     * Evaluates the particles in the swarm, one after another in the order of the swarm.
-     *   If the evaluation budget runs out, the particles that are not evaluated undo their
-     *   last move.
+     * Evaluates the particles in the swarm, one after another in the order of the swarm, and
+     *   sets their current fitness. If the evaluation budget runs out, the particles that are
+     *   not evaluated undo their last move.
      *
      * @throws EvaluationBudgetExhaustedException if the evaluation budget runs out.
      */
@@ -142,8 +142,13 @@ public class DefaultSwarm implements Swarm {
 
             final OptimisationValue ov = comparator.toValue(output);
             particle.setCurrentFitness(ov);
+        }
+    }
 
-            if (ov.isBetter(particle.getBestFitness())) {
+    @Override
+    public void updatePersonalBests() {
+        for(final Particle particle : particles) {
+            if (particle.getCurrentFitness().isBetter(particle.getBestFitness())) {
                 particle.setBestPosition(particle.getCurrentPosition());
                 particle.setBestFitness(particle.getCurrentFitness());
             }

@@ -24,8 +24,8 @@ import de.evoal.optimisation.api.run.SearchProcedure;
  *   kind and description. The executed steps of an iteration become the steps of its
  *   memory state ({@link Population#steps()}).
  * <p>
- * The population of an iteration consists of the population of the search state, ranked by
- *   the optimisation values. Afterwards, every member is replaced by a copy that is an
+ * The population of an iteration consists of the {@link #members()}, by default the
+ *   population of the search state, ranked by the optimisation values. Afterwards, every member is replaced by a copy that is an
  *   identity of it ({@link Candidate#copy()}): a member that no step replaces is recorded as
  *   the same candidate in the next iteration, also if the next iteration is interrupted by
  *   an exhausted evaluation budget.
@@ -92,11 +92,20 @@ public class Template implements SearchProcedure {
     }
 
     /**
+     * @return The members of the current population: by default, the population of the
+     *   search state. Templates whose state lives elsewhere (e.g. the particles of a swarm)
+     *   describe it here.
+     */
+    protected List<Candidate> members() {
+        return state.getPopulation();
+    }
+
+    /**
      * @throws IllegalArgumentException if a member of the population is not evaluated.
      */
     @Override
     public Population population() {
-        final List<Candidate> candidates = state.getPopulation();
+        final List<Candidate> candidates = members();
         final List<OptimisationValue> values = candidates.stream()
                                                          .map(Candidate::value)
                                                          .toList();

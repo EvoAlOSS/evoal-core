@@ -26,7 +26,16 @@ import de.evoal.optimisation.pso.api.swarm.Particle;
 public interface Swarm extends EvoalComponent<Swarm> {
 
     /**
-     * Evaluates the fitness of all particles.
+     * Adjusts the parameters of the swarm before the particles move, e.g., the direction of
+     *   ARPSO. Does nothing by default.
+     *
+     * @param generation The current generation, starting at 1.
+     */
+    default void adjust(final int generation) {
+    }
+
+    /**
+     * Evaluates the current positions of all particles and sets their current fitness.
      */
     void evaluate();
 
@@ -58,4 +67,10 @@ public interface Swarm extends EvoalComponent<Swarm> {
      * @return The size of the swarm population.
      */
     public long size();
+
+    /**
+     * Updates the personal best of every particle with its current position and fitness, if
+     *   the current fitness is better.
+     */
+    void updatePersonalBests();
 }

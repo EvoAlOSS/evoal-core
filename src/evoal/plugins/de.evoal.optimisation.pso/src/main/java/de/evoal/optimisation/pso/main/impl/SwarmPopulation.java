@@ -9,12 +9,11 @@ import de.evoal.models.v202704.optimisation.execution.OptimisationValue;
 
 import de.evoal.optimisation.api.run.Candidate;
 import de.evoal.optimisation.api.run.Lineage;
-import de.evoal.optimisation.api.run.Population;
 
 import de.evoal.optimisation.pso.api.swarm.Particle;
 
 /**
- * Describes the particles of a swarm as population of the run kernel. Every particle is a
+ * Describes the particles of a swarm as members of a population of the run kernel. Every particle is a
  *   member, its index in the swarm is its index in the population. From the second
  *   population on, every member refers to the member of the same particle in the
  *   previous population: a mutation if the particle moved, an identity if its position
@@ -44,13 +43,13 @@ public class SwarmPopulation {
     }
 
     /**
-     * Creates the population of the particles' current states and remembers their
-     *   positions for the next population.
+     * Creates the members of the particles' current states and remembers them for the
+     *   lineage of the next population.
      *
      * @param particles The particles of the swarm, in the same order in every iteration.
-     * @return The population, ranked by the particles' current fitness.
+     * @return The members, by particle index.
      */
-    public Population toPopulation(final Particle[] particles) {
+    public List<Candidate> toMembers(final Particle[] particles) {
         final List<Candidate> members = new ArrayList<>();
 
         for(int index = 0; index < particles.length; ++index) {
@@ -64,6 +63,6 @@ public class SwarmPopulation {
 
         previous = members;
 
-        return new Population(members, SwarmRanking.toRanks(particles));
+        return members;
     }
 }

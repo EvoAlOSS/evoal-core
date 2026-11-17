@@ -1,5 +1,7 @@
 package de.evoal.optimisation.pso.main.impl;
 
+import java.util.List;
+
 import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
@@ -20,16 +22,28 @@ import de.evoal.models.v202704.optimisation.execution.TerminationCriterion;
 import de.evoal.optimisation.api.cdi.TerminationCriterionProducer;
 import de.evoal.optimisation.api.model.OptimisationAlgorithm;
 import de.evoal.optimisation.api.model.OptimisationValueComparator;
+import de.evoal.optimisation.api.events.RunEventDispatcher;
+import de.evoal.optimisation.api.run.Candidate;
 import de.evoal.optimisation.api.run.OptimisationRun;
-import de.evoal.optimisation.api.run.Population;
-import de.evoal.optimisation.api.run.Progress;
-import de.evoal.optimisation.api.run.SearchProcedure;
+import de.evoal.optimisation.api.steps.Step;
+import de.evoal.optimisation.api.steps.Template;
 
 import de.evoal.optimisation.pso.api.optimiser.Swarm;
 
 /**
- * Particle swarm optimisation. Every iteration moves and evaluates the particles of the
- *   swarm; the run itself is executed by the {@link OptimisationRun}.
+ * Particle swarm optimisation (DL type {@code 'particle-swarm-optimisation'}) as a template
+ *   of steps ({@link SwarmSteps}). The particles of the swarm are its strategy state.
+ * <p>
+ * Initialisation: create and evaluate the particles (Initialization).
+ * <p>
+ * Every iteration:
+ * <ol>
+ *   <li>ParameterAdjustment: adjust the swarm, e.g., the direction of ARPSO,</li>
+ *   <li>Adaption: move the particles,</li>
+ *   <li>FitnessCalculation: evaluate their new positions,</li>
+ *   <li>Acceptance: update the personal bests.</li>
+ * </ol>
+ * The population of an iteration consists of the particles ({@link SwarmPopulation}).
  */
 @Slf4j
 @Dependent
@@ -52,6 +66,12 @@ public class ParticleSwarmAlgorithm implements OptimisationAlgorithm {
      */
     @Inject
     private OptimisationRun kernel;
+
+    /**
+     * Publishes the executed steps.
+     */
+    @Inject
+    private RunEventDispatcher events;
 
     /**
      * The used swarm implementation
@@ -84,36 +104,30 @@ public class ParticleSwarmAlgorithm implements OptimisationAlgorithm {
 
     @Override
     public void run() {
-        kernel.execute(criterion, new Search());
+        kernel.execute(criterion, new SwarmTemplate());
     }
 
     /**
-     * The search of a run: initialising, moving and evaluating the swarm.
+     * The template of particle swarm optimisation; its population describes the particles.
      */
-    private final class Search implements SearchProcedure {
+    private final class SwarmTemplate extends Template {
         /**
-         * Describes the particles as population.
+         * Describes the particles as members.
          */
         private final SwarmPopulation population = new SwarmPopulation();
 
-        @Override
-        public void initialise() {
-            swarm.initialise();
+        private SwarmTemplate() {
+            super(events,
+                  List.<Step>of(SwarmSteps.initialise(swarm)),
+                  List.of(SwarmSteps.adjust(swarm),
+                          SwarmSteps.move(swarm),
+                          SwarmSteps.evaluate(swarm),
+                          SwarmSteps.updatePersonalBests(swarm)));
         }
 
         @Override
-        public Progress iterate(final int iteration) {
-            log.info("Processing generation: {}", iteration);
-
-            swarm.move(iteration);
-            swarm.evaluate();
-
-            return Progress.CONTINUE;
-        }
-
-        @Override
-        public Population population() {
-            return population.toPopulation(swarm.getParticles());
+        protected List<Candidate> members() {
+            return population.toMembers(swarm.getParticles());
         }
     }
 }

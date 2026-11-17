@@ -87,11 +87,11 @@ public class ARPSOSwarm extends DefaultSwarm {
     }
 
     /**
-     * Moves the particles by first considering the swarm diversity in order to set whether the swarm is attracting or repelling.
+     * Sets whether the swarm is attracting or repelling, depending on the diversity of the
+     *   swarm.
      */
     @Override
-    public void move(final int generation) {
-        //  Assess diversity and set direction on the mover
+    public void adjust(final int generation) {
         final double diversity = diversity(particles, diagonalLength(particles[0].getCurrentPosition().eSpace()));
 
         if (diversity < diversity_low && arpsoMover.getDirection() > 0) {
@@ -101,7 +101,13 @@ public class ARPSOSwarm extends DefaultSwarm {
             arpsoMover.setDirection(1);
             log.info("Attracting at iteration: {}", generation);
         }
+    }
 
+    /**
+     * Moves the particles one after another.
+     */
+    @Override
+    public void move(final int generation) {
         for (int p = 0; p < particles.length; p++) {
             particles[p].moveParticle(getNeighbors(p), generation);
         }

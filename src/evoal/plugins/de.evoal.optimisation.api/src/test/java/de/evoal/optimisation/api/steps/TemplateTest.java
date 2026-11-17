@@ -149,6 +149,26 @@ public class TemplateTest {
     }
 
     @Test
+    public void aTemplateCanDescribeItsMembersItself() {
+        // given
+        final Candidate member = evaluated(4.0, Lineage.NONE);
+        final Template template = new Template(events, List.of(), List.of()) {
+            @Override
+            protected List<Candidate> members() {
+                return List.of(member);
+            }
+        };
+        template.initialise();
+
+        // when
+        final Population population = template.population();
+
+        // then
+        Assertions.assertEquals(List.of(member), population.members());
+        Assertions.assertEquals(List.of(List.of(0)), population.ranks());
+    }
+
+    @Test
     public void anUnevaluatedMemberIsRejected() {
         // given
         final Candidate unevaluated = new Candidate(Mockito.mock(TypedEObject.class), Lineage.NONE);
