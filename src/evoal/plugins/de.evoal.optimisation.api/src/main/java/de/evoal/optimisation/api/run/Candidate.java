@@ -1,7 +1,12 @@
 package de.evoal.optimisation.api.run;
 
+import lombok.NonNull;
+
 import de.evoal.models.core.ecore.TypedEObject;
 import de.evoal.models.v202704.optimisation.execution.OptimisationValue;
+
+import de.evoal.optimisation.api.fitness.Evaluation;
+import de.evoal.optimisation.api.fitness.Fitness;
 
 /**
  * A candidate of the search, evaluated or not. The members of a {@link Population} are
@@ -14,6 +19,11 @@ import de.evoal.models.v202704.optimisation.execution.OptimisationValue;
  */
 public final class Candidate {
     /**
+     * The evaluation of the candidate, {@code null} before the evaluation.
+     */
+    private Evaluation evaluation;
+
+    /**
      * The candidate (a point of the search space).
      */
     private final TypedEObject input;
@@ -22,17 +32,6 @@ public final class Candidate {
      * How the candidate came from other candidates.
      */
     private final Lineage lineage;
-
-    /**
-     * The result of the optimisation function, {@code null} before the evaluation.
-     */
-    private TypedEObject output;
-
-    /**
-     * The optimisation value of the output, {@code null} before the evaluation. It decides
-     *   the ranking and the best individual so far.
-     */
-    private OptimisationValue value;
 
     /**
      * Creates a candidate that is not evaluated yet.
@@ -46,30 +45,12 @@ public final class Candidate {
     }
 
     /**
-     * @param input The candidate (a point of the search space).
-     * @param output The result of the optimisation function.
-     * @param value The optimisation value of the output.
-     * @param lineage How the candidate came from other candidates.
-     * @return An evaluated candidate.
-     */
-    public static Candidate evaluated(final TypedEObject input,
-                                      final TypedEObject output,
-                                      final OptimisationValue value,
-                                      final Lineage lineage) {
-        final Candidate candidate = new Candidate(input, lineage);
-        candidate.evaluate(output, value);
-
-        return candidate;
-    }
-
-    /**
      * @return A new candidate with the same values and evaluation that is an identity of
      *   this candidate.
      */
     public Candidate copy() {
         final Candidate copy = new Candidate(input, Lineage.identity(this));
-        copy.output = output;
-        copy.value = value;
+        copy.evaluation = evaluation;
 
         return copy;
     }
@@ -77,17 +58,42 @@ public final class Candidate {
     /**
      * Sets the result of the evaluation.
      *
-     * @param output The result of the optimisation function.
-     * @param value The optimisation value of the output.
+     * @param evaluation The evaluation of the candidate.
      * @throws IllegalStateException if the candidate is already evaluated.
      */
-    public void evaluate(final TypedEObject output, final OptimisationValue value) {
+    public void evaluate(final @NonNull Evaluation evaluation) {
         if(isEvaluated()) {
             throw new IllegalStateException("The candidate " + input + " is already evaluated.");
         }
 
-        this.output = output;
-        this.value = value;
+        this.evaluation = evaluation;
+    }
+
+    /**
+     * @param input The candidate (a point of the search space).
+     * @param evaluation The evaluation of the candidate.
+     * @param lineage How the candidate came from other candidates.
+     * @return An evaluated candidate.
+     */
+    public static Candidate evaluated(final TypedEObject input, final Evaluation evaluation, final Lineage lineage) {
+        final Candidate candidate = new Candidate(input, lineage);
+        candidate.evaluate(evaluation);
+
+        return candidate;
+    }
+
+    /**
+     * @return The evaluation, {@code null} before the evaluation.
+     */
+    public Evaluation evaluation() {
+        return evaluation;
+    }
+
+    /**
+     * @return The fitness, {@code null} before the evaluation.
+     */
+    public Fitness fitness() {
+        return isEvaluated() ? evaluation.fitness() : null;
     }
 
     /**
@@ -101,7 +107,7 @@ public final class Candidate {
      * @return Whether the candidate is evaluated.
      */
     public boolean isEvaluated() {
-        return value != null;
+        return evaluation != null;
     }
 
     /**
@@ -115,18 +121,19 @@ public final class Candidate {
      * @return The result of the optimisation function, {@code null} before the evaluation.
      */
     public TypedEObject output() {
-        return output;
+        return isEvaluated() ? evaluation.output() : null;
     }
 
     @Override
     public String toString() {
-        return "Candidate[" + input + " -> " + value + "]";
+        return "Candidate[" + input + " -> " + value() + "]";
     }
 
     /**
-     * @return The optimisation value, {@code null} before the evaluation.
+     * @return The optimisation value, {@code null} before the evaluation. It decides the
+     *   ranking and the best individual so far.
      */
     public OptimisationValue value() {
-        return value;
+        return isEvaluated() ? evaluation.value() : null;
     }
 }

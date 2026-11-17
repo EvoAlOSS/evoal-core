@@ -150,7 +150,20 @@ module de.evoal.optimisation.core {
          */
         @MinimumNumberOfElements{ bound := 1; }
         'stopping-criteria' : array instance 'stopping-criterion';
+
+        /**
+         * Further steps of the fitness pipeline. They run in their order after the
+         *   direction steps, which are derived from the goals of the problem and convert
+         *   the objectives into the canonical direction (minimisation).
+         */
+        'fitness-pipeline' : array instance 'fitness-step' := [];
     }
+
+    /**
+     * Abstract base type for the steps of the fitness pipeline. A step computes a new
+     *   fitness of a candidate from the fitness of the previous step.
+     */
+    abstract type 'fitness-step' extends configuration {}
 
     /**
      * Comparator for comparing optimisation function results to each other.

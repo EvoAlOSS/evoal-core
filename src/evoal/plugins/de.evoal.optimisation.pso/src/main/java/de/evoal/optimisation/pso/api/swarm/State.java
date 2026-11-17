@@ -17,17 +17,23 @@
  */
 package de.evoal.optimisation.pso.api.swarm;
 
-import de.evoal.models.v202704.optimisation.execution.OptimisationValue;
-import de.evoal.models.core.ecore.TypedEObject;
 import lombok.Getter;
 import lombok.Setter;
 
+import de.evoal.models.core.ecore.TypedEObject;
+import de.evoal.optimisation.api.fitness.Evaluation;
+
 /**
  * The state of a particle: a position, the velocity that resulted in the position, and the
- *   optimisation value of the position.
+ *   evaluation of the position.
  */
 @Getter @Setter
 public class State {
+    /**
+     * Evaluation of the position.
+     */
+    private Evaluation evaluation;
+
     /**
      * Current position.
      */
@@ -39,11 +45,6 @@ public class State {
     private Double[] velocity;
 
     /**
-     * Optimisation value of the position.
-     */
-    private OptimisationValue fitness;
-
-    /**
      * Creates a copy of a state. The copy shares the position and the velocity with the
      *   original, since the movers replace them instead of changing them.
      *
@@ -52,12 +53,12 @@ public class State {
     public State(final State other) {
         this.position = other.position;
         this.velocity = other.velocity;
-        this.fitness = other.fitness;
+        this.evaluation = other.evaluation;
     }
 
-    public State(final TypedEObject position, final OptimisationValue fitness) {
+    public State(final TypedEObject position, final Evaluation evaluation) {
         this.position = position;
-        this.fitness = fitness;
+        this.evaluation = evaluation;
 
         this.velocity = new Double[position.eSpace().size()];
         for (int i = 0; i < velocity.length; i++) {

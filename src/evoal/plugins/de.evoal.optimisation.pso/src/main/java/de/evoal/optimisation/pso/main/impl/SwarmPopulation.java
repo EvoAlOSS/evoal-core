@@ -5,8 +5,8 @@ import java.util.List;
 
 import de.evoal.core.api.utils.TypedEObjects;
 import de.evoal.models.core.ecore.TypedEObject;
-import de.evoal.models.v202704.optimisation.execution.OptimisationValue;
 
+import de.evoal.optimisation.api.fitness.Evaluation;
 import de.evoal.optimisation.api.run.Candidate;
 import de.evoal.optimisation.api.run.Lineage;
 
@@ -55,10 +55,10 @@ public class SwarmPopulation {
         for(int index = 0; index < particles.length; ++index) {
             final Particle particle = particles[index];
             final TypedEObject position = particle.getCurrentPosition();
-            final OptimisationValue fitness = particle.getCurrentFitness();
-            final TypedEObject output = fitness.toOptmisationSpace();
+            final Evaluation evaluation = particle.getCurrentEvaluation();
+            final Lineage lineage = lineageOf(index, position);
 
-            members.add(Candidate.evaluated(position, output, fitness, lineageOf(index, position)));
+            members.add(Candidate.evaluated(position, evaluation, lineage));
         }
 
         previous = members;

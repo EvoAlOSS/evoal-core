@@ -29,6 +29,9 @@ import de.evoal.optimisation.api.evaluation.EvaluationBudgetExhaustedException;
 import de.evoal.optimisation.api.evaluation.EvaluationSource;
 import de.evoal.optimisation.api.events.RunEventDispatcher;
 import de.evoal.optimisation.api.execution.ExecutionRecorder;
+import de.evoal.optimisation.api.fitness.Evaluation;
+import de.evoal.optimisation.api.fitness.Fitness;
+import de.evoal.optimisation.api.fitness.FitnessLayout;
 import de.evoal.optimisation.api.model.IndividualIDGenerator;
 import de.evoal.optimisation.api.statistics.writer.StatisticsWriter;
 
@@ -101,7 +104,12 @@ public class OptimisationRunTest {
     }
 
     private static Candidate member(final double value, final Lineage lineage) {
-        return Candidate.evaluated(Mockito.mock(TypedEObject.class), Mockito.mock(TypedEObject.class), new Value(value), lineage);
+        final TypedEObject input = Mockito.mock(TypedEObject.class);
+        final TypedEObject output = Mockito.mock(TypedEObject.class);
+        final Fitness fitness = new Fitness(FitnessLayout.EMPTY, new double[0]);
+        final Evaluation evaluation = new Evaluation(output, fitness, new Value(value));
+
+        return Candidate.evaluated(input, evaluation, lineage);
     }
 
     private static List<Integer> idsOf(final Iteration iteration) {

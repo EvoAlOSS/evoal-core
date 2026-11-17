@@ -89,14 +89,14 @@ public class SwarmStepsTest {
     class PersonalBest {
         private final TypedEObject start = position(1.0);
 
-        private final Particle particle = new Particle(0, new State(start, new TestFitness(2.0)), null,
+        private final Particle particle = new Particle(0, new State(start, TestFitness.evaluation(2.0)), null,
                                                        RandomGenerator.of("L64X128MixRandom"));
 
         private final DefaultSwarm swarm = new DefaultSwarm();
 
         private void updateWithFitness(final double fitness) {
             particle.getCurrentState().setPosition(position(fitness));
-            particle.setCurrentFitness(new TestFitness(fitness));
+            particle.setCurrentEvaluation(TestFitness.evaluation(fitness));
             swarm.setParticles(new Particle[] {particle});
 
             swarm.updatePersonalBests();
@@ -108,7 +108,7 @@ public class SwarmStepsTest {
             updateWithFitness(3.0);
 
             // then
-            Assertions.assertEquals(List.of(3.0), particle.getBestFitness().toStatistics());
+            Assertions.assertEquals(List.of(3.0), particle.getBestEvaluation().value().toStatistics());
         }
 
         @Test
@@ -117,7 +117,7 @@ public class SwarmStepsTest {
             updateWithFitness(1.0);
 
             // then
-            Assertions.assertEquals(List.of(2.0), particle.getBestFitness().toStatistics());
+            Assertions.assertEquals(List.of(2.0), particle.getBestEvaluation().value().toStatistics());
         }
     }
 }

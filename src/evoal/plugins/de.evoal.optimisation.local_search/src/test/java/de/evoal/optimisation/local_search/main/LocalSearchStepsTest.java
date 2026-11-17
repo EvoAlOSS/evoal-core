@@ -14,6 +14,9 @@ import org.mockito.Mockito;
 import de.evoal.models.core.ecore.TypedEObject;
 import de.evoal.models.v202704.optimisation.execution.OptimisationValue;
 
+import de.evoal.optimisation.api.fitness.Evaluation;
+import de.evoal.optimisation.api.fitness.Fitness;
+import de.evoal.optimisation.api.fitness.FitnessLayout;
 import de.evoal.optimisation.api.run.Candidate;
 import de.evoal.optimisation.api.run.Lineage;
 import de.evoal.optimisation.api.steps.SearchState;
@@ -29,8 +32,12 @@ public class LocalSearchStepsTest {
     private Candidate current;
 
     private static Candidate evaluated(final TypedEObject input) {
-        return Candidate.evaluated(input, Mockito.mock(TypedEObject.class), Mockito.mock(OptimisationValue.class),
-                                   Lineage.NONE);
+        final TypedEObject output = Mockito.mock(TypedEObject.class);
+        final Fitness fitness = new Fitness(FitnessLayout.EMPTY, new double[0]);
+        final OptimisationValue value = Mockito.mock(OptimisationValue.class);
+        final Evaluation evaluation = new Evaluation(output, fitness, value);
+
+        return Candidate.evaluated(input, evaluation, Lineage.NONE);
     }
 
     @BeforeEach

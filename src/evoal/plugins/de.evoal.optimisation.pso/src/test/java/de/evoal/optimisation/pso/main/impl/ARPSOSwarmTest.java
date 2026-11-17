@@ -39,7 +39,7 @@ public class ARPSOSwarmTest {
         position.eSet(x, xValue);
         position.eSet(y, yValue);
 
-        return new Particle(id, new State(position, new TestFitness(0.0)), null, RandomGenerator.of("L64X128MixRandom"));
+        return new Particle(id, new State(position, TestFitness.evaluation(0.0)), null, RandomGenerator.of("L64X128MixRandom"));
     }
 
     @Test

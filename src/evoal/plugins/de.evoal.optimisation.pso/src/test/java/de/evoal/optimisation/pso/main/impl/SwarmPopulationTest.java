@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EcorePackage;
 import de.evoal.models.core.ecore.Space;
 import de.evoal.models.core.ecore.TypedEObject;
 
+import de.evoal.optimisation.api.fitness.Evaluation;
 import de.evoal.optimisation.api.run.Candidate;
 import de.evoal.optimisation.api.run.Lineage;
 
@@ -36,8 +37,8 @@ public class SwarmPopulationTest {
 
     private Particle particle(final int id, final double value) {
         final TypedEObject position = position(value);
-        final TestFitness fitness = new TestFitness(value);
-        final State state = new State(position, fitness);
+        final Evaluation evaluation = TestFitness.evaluation(value);
+        final State state = new State(position, evaluation);
         final RandomGenerator random = RandomGenerator.of("L64X128MixRandom");
 
         return new Particle(id, state, null, random);
@@ -121,7 +122,7 @@ public class SwarmPopulationTest {
             final Candidate first = populations.get(2).get(0);
 
             Assertions.assertSame(moving.getCurrentPosition(), first.input());
-            Assertions.assertSame(moving.getCurrentFitness(), first.value());
+            Assertions.assertSame(moving.getCurrentEvaluation(), first.evaluation());
         }
     }
 }

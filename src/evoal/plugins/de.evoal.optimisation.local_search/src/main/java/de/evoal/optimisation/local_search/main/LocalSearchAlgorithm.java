@@ -9,12 +9,10 @@ import jakarta.inject.Named;
 import org.eclipse.emf.ecore.EObject;
 
 import de.evoal.core.api.cdi.BeanFactory;
-import de.evoal.core.api.cdi.Component;
 import de.evoal.core.api.utils.AttributeHelper;
 
-import de.evoal.optimisation.api.evaluation.EvaluationService;
+import de.evoal.optimisation.api.fitness.Evaluator;
 import de.evoal.optimisation.api.model.InitialCandidatesProvider;
-import de.evoal.optimisation.api.model.OptimisationValueComparator;
 import de.evoal.optimisation.api.steps.EvaluateCandidates;
 import de.evoal.optimisation.api.steps.ReplacePopulation;
 import de.evoal.optimisation.api.steps.SampleCandidates;
@@ -51,14 +49,11 @@ import de.evoal.optimisation.local_search.api.neighbour.NeighbourChoosingStrateg
 public class LocalSearchAlgorithm extends TemplateAlgorithm {
     private AcceptingStrategy acceptingStrategy;
 
-    @Inject @Dependent @Component
-    private OptimisationValueComparator comparator;
-
     /**
-     * Evaluates and counts the candidates.
+     * Evaluates the candidates.
      */
     @Inject
-    private EvaluationService evaluationService;
+    private Evaluator evaluator;
 
     @Inject
     private AttributeHelper helper;
@@ -78,13 +73,12 @@ public class LocalSearchAlgorithm extends TemplateAlgorithm {
     @Override
     protected Template template() {
         final List<Step> initialisation = List.of(new SampleCandidates(provider, 1),
-                                                  new EvaluateCandidates(evaluationService, comparator),
+                                                  new EvaluateCandidates(evaluator),
                                                   new ReplacePopulation());
 
         final AcceptNeighbour acceptance = new AcceptNeighbour(acceptingStrategy);
         final List<Step> iteration = List.of(new OfferNeighbours(strategy, acceptingStrategy),
-                                             EvaluateCandidates.untilAccepted(evaluationService, comparator,
-                                                                              acceptance::isAcceptable),
+                                             EvaluateCandidates.untilAccepted(evaluator, acceptance::isAcceptable),
                                              acceptance,
                                              new AdjustAcceptingStrategy(acceptingStrategy));
 

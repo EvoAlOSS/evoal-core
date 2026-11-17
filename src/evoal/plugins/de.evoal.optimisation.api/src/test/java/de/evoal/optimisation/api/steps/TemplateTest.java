@@ -18,6 +18,9 @@ import de.evoal.models.v202704.optimisation.memory.IterationStep;
 import de.evoal.optimisation.api.events.RunEventDispatcher;
 import de.evoal.optimisation.api.events.StepExecuted;
 import de.evoal.optimisation.api.execution.ExecutionRecorder;
+import de.evoal.optimisation.api.fitness.Evaluation;
+import de.evoal.optimisation.api.fitness.Fitness;
+import de.evoal.optimisation.api.fitness.FitnessLayout;
 import de.evoal.optimisation.api.run.Candidate;
 import de.evoal.optimisation.api.run.Lineage;
 import de.evoal.optimisation.api.run.Population;
@@ -42,7 +45,11 @@ public class TemplateTest {
 
     private static Candidate evaluated(final double value, final Lineage lineage) {
         final TypedEObject input = Mockito.mock(TypedEObject.class);
-        return Candidate.evaluated(input, Mockito.mock(TypedEObject.class), new TestValue(value), lineage);
+        final TypedEObject output = Mockito.mock(TypedEObject.class);
+        final Fitness fitness = new Fitness(FitnessLayout.EMPTY, new double[0]);
+        final Evaluation evaluation = new Evaluation(output, fitness, new TestValue(value));
+
+        return Candidate.evaluated(input, evaluation, lineage);
     }
 
     /**

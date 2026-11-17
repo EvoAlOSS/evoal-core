@@ -4,20 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiPredicate;
 
-import de.evoal.models.core.ecore.TypedEObject;
-import de.evoal.models.v202704.optimisation.execution.OptimisationValue;
-
-import de.evoal.optimisation.api.evaluation.EvaluationService;
-import de.evoal.optimisation.api.model.OptimisationValueComparator;
+import de.evoal.optimisation.api.fitness.Evaluation;
+import de.evoal.optimisation.api.fitness.Evaluator;
 import de.evoal.optimisation.api.run.Candidate;
 
 /**
  * Evaluates candidates in one of two modes:
  * <ul>
- *   <li><em>batch</em> ({@link #EvaluateCandidates(EvaluationService, OptimisationValueComparator)}):
- *     the current candidates that are not evaluated yet are passed to the
- *     {@link EvaluationService} as a batch, in their order, and the results come back in
- *     the same order. Evaluated candidates are not evaluated again.</li>
+ *   <li><em>batch</em> ({@link #EvaluateCandidates(Evaluator)}): the current candidates
+ *     that are not evaluated yet are evaluated in their order. Evaluated candidates are not
+ *     evaluated again.</li>
  *   <li><em>until accepted</em> ({@link #untilAccepted}): the offered candidates
  *     ({@link SearchState#getOffered()}) are evaluated one after the other until the first
  *     acceptable one. Every evaluated candidate is tested exactly once, so randomised tests
@@ -25,6 +21,8 @@ import de.evoal.optimisation.api.run.Candidate;
  *     current candidates, the acceptable one the accepted candidate
  *     ({@link SearchState#getAccepted()}). No further candidate is created or evaluated.</li>
  * </ul>
+ * The {@link Evaluator} computes the objectives, the fitness and the optimisation value of
+ *   each candidate.
  */
 public final class EvaluateCandidates implements FitnessCalculation {
     /**
@@ -33,46 +31,35 @@ public final class EvaluateCandidates implements FitnessCalculation {
     private final BiPredicate<SearchState, Candidate> acceptable;
 
     /**
-     * Computes the optimisation values.
+     * Evaluates the candidates.
      */
-    private final OptimisationValueComparator comparator;
-
-    /**
-     * Evaluates and counts the candidates.
-     */
-    private final EvaluationService evaluationService;
+    private final Evaluator evaluator;
 
     /**
      * Creates an evaluation in batch mode.
      *
-     * @param evaluationService Evaluates and counts the candidates.
-     * @param comparator Computes the optimisation values.
+     * @param evaluator Evaluates the candidates.
      */
-    public EvaluateCandidates(final EvaluationService evaluationService, final OptimisationValueComparator comparator) {
-        this(evaluationService, comparator, null);
+    public EvaluateCandidates(final Evaluator evaluator) {
+        this(evaluator, null);
     }
 
-    private EvaluateCandidates(final EvaluationService evaluationService,
-                               final OptimisationValueComparator comparator,
-                               final BiPredicate<SearchState, Candidate> acceptable) {
-        this.evaluationService = evaluationService;
-        this.comparator = comparator;
+    private EvaluateCandidates(final Evaluator evaluator, final BiPredicate<SearchState, Candidate> acceptable) {
+        this.evaluator = evaluator;
         this.acceptable = acceptable;
     }
 
     /**
      * Creates an evaluation of the offered candidates until one is acceptable.
      *
-     * @param evaluationService Evaluates and counts the candidates.
-     * @param comparator Computes the optimisation values.
+     * @param evaluator Evaluates the candidates.
      * @param acceptable Tests whether an evaluated candidate is acceptable; it is called once
      *   per evaluated candidate.
      * @return The evaluation.
      */
-    public static EvaluateCandidates untilAccepted(final EvaluationService evaluationService,
-                                                   final OptimisationValueComparator comparator,
+    public static EvaluateCandidates untilAccepted(final Evaluator evaluator,
                                                    final BiPredicate<SearchState, Candidate> acceptable) {
-        return new EvaluateCandidates(evaluationService, comparator, acceptable);
+        return new EvaluateCandidates(evaluator, acceptable);
     }
 
     @Override
@@ -81,9 +68,8 @@ public final class EvaluateCandidates implements FitnessCalculation {
     }
 
     private void evaluate(final Candidate candidate) {
-        final TypedEObject output = evaluationService.evaluate(candidate.input());
-        final OptimisationValue value = comparator.apply(output);
-        candidate.evaluate(output, value);
+        final Evaluation evaluation = evaluator.evaluate(candidate.input());
+        candidate.evaluate(evaluation);
     }
 
     /**

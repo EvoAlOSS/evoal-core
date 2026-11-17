@@ -20,6 +20,12 @@ import de.evoal.models.v202704.optimisation.execution.OptimisationValue;
 import de.evoal.optimisation.api.evaluation.EvaluationBudgetExhaustedException;
 import de.evoal.optimisation.api.evaluation.EvaluationService;
 import de.evoal.optimisation.api.evaluation.EvaluationSource;
+import de.evoal.optimisation.api.fitness.Evaluation;
+import de.evoal.optimisation.api.fitness.Evaluator;
+import de.evoal.optimisation.api.fitness.Fitness;
+import de.evoal.optimisation.api.fitness.FitnessLayout;
+import de.evoal.optimisation.api.fitness.FitnessPipeline;
+import de.evoal.optimisation.api.fitness.Goals;
 import de.evoal.optimisation.api.model.InitialCandidatesProvider;
 import de.evoal.optimisation.api.model.OptimisationValueComparator;
 import de.evoal.optimisation.api.run.Candidate;
@@ -27,27 +33,45 @@ import de.evoal.optimisation.api.run.Lineage;
 import de.evoal.optimisation.api.run.Ranking;
 
 public class StepsTest {
+    /**
+     * @return An evaluator whose fitness pipeline has no goals, so it accepts any output.
+     */
+    private static Evaluator evaluator(final EvaluationService evaluationService,
+                                       final OptimisationValueComparator comparator) {
+        final Goals goals = new Goals(List.of());
+        final FitnessPipeline pipeline = new FitnessPipeline(goals, List.of());
+
+        return new Evaluator(evaluationService, pipeline, comparator);
+    }
+
     private static TypedEObject input() {
         return Mockito.mock(TypedEObject.class);
     }
 
     @Nested
     @DisplayName("given a fitness calculation")
-    class Fitness {
+    class Batch {
         private final OptimisationValueComparator comparator = Mockito.mock(OptimisationValueComparator.class);
 
         private final EvaluationService evaluationService = Mockito.mock(EvaluationService.class);
 
-        private final EvaluateCandidates step = new EvaluateCandidates(evaluationService, comparator);
+        private final EvaluateCandidates step = new EvaluateCandidates(evaluator(evaluationService, comparator));
 
         private final SearchState state = new SearchState();
+
+        @BeforeEach
+        public void evaluateToAnOutput() {
+            Mockito.when(evaluationService.evaluate(Mockito.any())).thenAnswer(invocation -> input());
+        }
 
         @Test
         public void theUnevaluatedCandidatesAreEvaluatedInTheirOrder() {
             // given
             final TypedEObject first = input();
             final TypedEObject second = input();
-            final Candidate done = Candidate.evaluated(input(), input(), new TestValue(1.0), Lineage.NONE);
+            final Fitness fitness = new Fitness(FitnessLayout.EMPTY, new double[0]);
+            final Evaluation evaluation = new Evaluation(input(), fitness, new TestValue(1.0));
+            final Candidate done = Candidate.evaluated(input(), evaluation, Lineage.NONE);
             state.setCandidates(List.of(new Candidate(first, Lineage.NONE), done, new Candidate(second, Lineage.NONE)));
             final OptimisationValue value = new TestValue(2.0);
             Mockito.when(comparator.apply(Mockito.any())).thenReturn(value);
@@ -62,6 +86,7 @@ public class StepsTest {
             order.verifyNoMoreInteractions();
 
             Assertions.assertTrue(state.getCandidates().stream().allMatch(Candidate::isEvaluated));
+            Assertions.assertTrue(state.getCandidates().stream().allMatch(candidate -> candidate.fitness() != null));
             Assertions.assertSame(done, state.getCandidates().get(1));
             Assertions.assertEquals(1.0, done.value().toStatistics().getFirst());
         }
@@ -109,8 +134,15 @@ public class StepsTest {
          */
         private final List<Double> tested = new ArrayList<>();
 
+        /**
+         * Whether the candidates the acceptance test was called for had a fitness.
+         */
+        private final List<Boolean> testedWithFitness = new ArrayList<>();
+
         @BeforeEach
         public void offer() {
+            Mockito.when(evaluationService.evaluate(Mockito.any())).thenAnswer(invocation -> input());
+
             final Iterator<Double> results = values.iterator();
             Mockito.when(comparator.apply(Mockito.any())).thenAnswer(invocation -> new TestValue(results.next()));
 
@@ -122,9 +154,10 @@ public class StepsTest {
         }
 
         private EvaluateCandidates acceptingAbove(final double threshold) {
-            return EvaluateCandidates.untilAccepted(evaluationService, comparator, (current, candidate) -> {
+            return EvaluateCandidates.untilAccepted(evaluator(evaluationService, comparator), (current, candidate) -> {
                 final double value = (Double) candidate.value().toStatistics().getFirst();
                 tested.add(value);
+                testedWithFitness.add(candidate.fitness() != null);
                 return value > threshold;
             });
         }
@@ -140,6 +173,15 @@ public class StepsTest {
             Assertions.assertEquals(2, state.getCandidates().size());
             Assertions.assertSame(state.getCandidates().get(1), state.getAccepted().orElseThrow());
             Mockito.verify(evaluationService, Mockito.times(2)).evaluate(Mockito.any());
+        }
+
+        @Test
+        public void theFitnessIsKnownBeforeTheAcceptanceTest() {
+            // when
+            acceptingAbove(4.0).execute(state);
+
+            // then
+            Assertions.assertEquals(List.of(true, true), testedWithFitness);
         }
 
         @Test

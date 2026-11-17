@@ -62,7 +62,7 @@ module de.evoal.optimisation.random_search.optimisation {
 ```
 
 `'algorithm'` already brings `'initialisation'`, `'comparator'`,
-`'optimisation-function'` and `'stopping-criteria'`.
+`'optimisation-function'`, `'stopping-criteria'` and `'fitness-pipeline'`.
 
 ### 2. The algorithm class
 
@@ -72,11 +72,8 @@ Extend `TemplateAlgorithm` and name the bean `<DL module>.<type name>`:
 @Dependent
 @Named("de.evoal.optimisation.random_search.optimisation.random-search")
 public class RandomSearchAlgorithm extends TemplateAlgorithm {
-    @Inject @Dependent @Component
-    private OptimisationValueComparator comparator;
-
     @Inject
-    private EvaluationService evaluationService;
+    private Evaluator evaluator;
 
     @Inject
     private AttributeHelper helper;
@@ -94,7 +91,7 @@ public class RandomSearchAlgorithm extends TemplateAlgorithm {
     @Override
     protected Template template() {
         final List<Step> steps = List.of(new SampleCandidates(provider, samplesPerIteration),
-                                         new EvaluateCandidates(evaluationService, comparator),
+                                         new EvaluateCandidates(evaluator),
                                          new ReplacePopulation());
 
         return new Template(steps, steps);
@@ -128,15 +125,18 @@ Reusable steps in this module:
 
 - `SampleCandidates(provider, count)`: the next `count` candidates of the provider become
   the current candidates. All executions share one stream of the provider.
-- `EvaluateCandidates(evaluationService, comparator)`: evaluates the current candidates
-  that are not evaluated yet, in their order.
-- `EvaluateCandidates.untilAccepted(evaluationService, comparator, acceptable)`: evaluates
+- `EvaluateCandidates(evaluator)`: evaluates the current candidates that are not evaluated
+  yet, in their order.
+- `EvaluateCandidates.untilAccepted(evaluator, acceptable)`: evaluates
   the offered candidates one after the other until `acceptable` accepts one. Candidates
   after it are neither created nor evaluated.
 - `ReplacePopulation`: the current candidates become the population.
 
-Always evaluate through the `EvaluationService`. It counts the evaluations, enforces the
-evaluation budget and publishes `IndividualEvaluated`.
+Always evaluate through an `Evaluator` (package `api.fitness`). It calls the
+`EvaluationService`, which counts the evaluations, enforces the evaluation budget and
+publishes `IndividualEvaluated`; then the fitness pipeline computes the fitness and the
+comparator the optimisation value. The result is an `Evaluation` (output, fitness,
+optimisation value).
 
 ### 4. The search state
 
@@ -162,8 +162,9 @@ A `Candidate` is a point of the search space with its evaluation. It is identifi
 its object, not by its values: the `Lineage` of other candidates refers to it, and the
 kernel maps it to its individual.
 
-- `new Candidate(input, lineage)` creates an unevaluated candidate, `Candidate.evaluated`
-  an evaluated one. The evaluation is set once.
+- `new Candidate(input, lineage)` creates an unevaluated candidate,
+  `Candidate.evaluated(input, evaluation, lineage)` an evaluated one. The evaluation is
+  set once; `output()`, `fitness()` and `value()` read its parts.
 - `Lineage.NONE` for initial or sampled candidates, `Lineage.identity(c)` for an
   unchanged candidate, `Lineage.mutation(c)` for a changed one, and
   `Lineage.recombination(parents)` for a combination.

@@ -8,12 +8,10 @@ import jakarta.inject.Named;
 
 import org.eclipse.emf.ecore.EObject;
 
-import de.evoal.core.api.cdi.Component;
 import de.evoal.core.api.utils.AttributeHelper;
 
-import de.evoal.optimisation.api.evaluation.EvaluationService;
+import de.evoal.optimisation.api.fitness.Evaluator;
 import de.evoal.optimisation.api.model.InitialCandidatesProvider;
-import de.evoal.optimisation.api.model.OptimisationValueComparator;
 import de.evoal.optimisation.api.steps.EvaluateCandidates;
 import de.evoal.optimisation.api.steps.ReplacePopulation;
 import de.evoal.optimisation.api.steps.SampleCandidates;
@@ -34,14 +32,11 @@ import de.evoal.optimisation.api.steps.TemplateAlgorithm;
 @Dependent
 @Named("de.evoal.optimisation.random_search.optimisation.random-search")
 public class RandomSearchAlgorithm extends TemplateAlgorithm {
-    @Inject @Dependent @Component
-    private OptimisationValueComparator comparator;
-
     /**
-     * Evaluates and counts the candidates.
+     * Evaluates the candidates.
      */
     @Inject
-    private EvaluationService evaluationService;
+    private Evaluator evaluator;
 
     @Inject
     private AttributeHelper helper;
@@ -62,7 +57,7 @@ public class RandomSearchAlgorithm extends TemplateAlgorithm {
     @Override
     protected Template template() {
         final List<Step> steps = List.of(new SampleCandidates(provider, samplesPerIteration),
-                                         new EvaluateCandidates(evaluationService, comparator),
+                                         new EvaluateCandidates(evaluator),
                                          new ReplacePopulation());
 
         return new Template(steps, steps);

@@ -23,12 +23,13 @@ import lombok.Getter;
 
 import de.evoal.models.core.ecore.TypedEObject;
 import de.evoal.models.v202704.optimisation.execution.OptimisationValue;
+import de.evoal.optimisation.api.fitness.Evaluation;
 
 import de.evoal.optimisation.pso.api.optimiser.Mover;
 
 /**
  * Class defining a particle - the basic unit of a swarm. A particle has a
- *   current state (position, velocity, fitness) and remembers the best state it
+ *   current state (position, velocity, evaluation) and remembers the best state it
  *   has reached so far (personal best).
  * <p>
  * The swarm moves all particles in parallel. Moving a particle changes only
@@ -84,17 +85,17 @@ public class Particle {
         this.current = current;
 
         final TypedEObject startPosition = new TypedEObject(current.getPosition());
-        this.personalBest = new State(startPosition, current.getFitness());
+        this.personalBest = new State(startPosition, current.getEvaluation());
 
         this.mover = mover;
         this.random = random;
     }
 
     /**
-     * @return The best fitness the particle has reached so far.
+     * @return The evaluation of the particle's personal best.
      */
-    public OptimisationValue getBestFitness() {
-        return this.personalBest.getFitness();
+    public Evaluation getBestEvaluation() {
+        return this.personalBest.getEvaluation();
     }
 
     /**
@@ -105,10 +106,10 @@ public class Particle {
     }
 
     /**
-     * @return The current fitness of the particle.
+     * @return The evaluation of the particle's current position.
      */
-    public OptimisationValue getCurrentFitness() {
-        return this.current.getFitness();
+    public Evaluation getCurrentEvaluation() {
+        return this.current.getEvaluation();
     }
 
     /**
@@ -119,7 +120,7 @@ public class Particle {
     }
 
     /**
-     * @return The current state (position, velocity, fitness) of the particle.
+     * @return The current state (position, velocity, evaluation) of the particle.
      */
     public State getCurrentState() {
         return current;
@@ -134,12 +135,14 @@ public class Particle {
     public static TypedEObject getNeighborhoodBestPosition(final Particle[] particles) {
         // initialise with first particle
         Particle best = particles[0];
-        OptimisationValue bestFitness = best.getBestFitness();
+        OptimisationValue bestValue = best.getBestEvaluation().value();
 
         for (final Particle p : particles) {
-            if (p.getBestFitness().isBetter(bestFitness)) {
+            final OptimisationValue value = p.getBestEvaluation().value();
+
+            if (value.isBetter(bestValue)) {
                 best = p;
-                bestFitness = p.getBestFitness();
+                bestValue = value;
             }
         }
 
@@ -160,12 +163,12 @@ public class Particle {
     }
 
     /**
-     * Sets the best fitness of the particle.
+     * Sets the evaluation of the particle's personal best.
      *
-     * @param bestFitness The best fitness.
+     * @param evaluation The evaluation of the personal best.
      */
-    public void setBestFitness(final OptimisationValue bestFitness) {
-        this.personalBest.setFitness(bestFitness);
+    public void setBestEvaluation(final Evaluation evaluation) {
+        this.personalBest.setEvaluation(evaluation);
     }
 
     /**
@@ -180,18 +183,18 @@ public class Particle {
     }
 
     /**
-     * Sets the current fitness of the particle. Called by the swarm when it
+     * Sets the evaluation of the particle's current position. Called by the swarm when it
      *   evaluates the particles.
      *
-     * @param fitness The fitness of the current position.
+     * @param evaluation The evaluation of the current position.
      */
-    public void setCurrentFitness(final OptimisationValue fitness) {
-        current.setFitness(fitness);
+    public void setCurrentEvaluation(final Evaluation evaluation) {
+        current.setEvaluation(evaluation);
     }
 
     /**
      * Undoes the last move, e.g., because the new position cannot be evaluated any more.
-     *   The particle is back at its previous position with its previous velocity and fitness.
+     *   The particle is back at its previous position with its previous velocity and evaluation.
      */
     public void undoMove() {
         if(stateBeforeMove == null) {
@@ -200,6 +203,6 @@ public class Particle {
 
         current.setPosition(stateBeforeMove.getPosition());
         current.setVelocity(stateBeforeMove.getVelocity());
-        current.setFitness(stateBeforeMove.getFitness());
+        current.setEvaluation(stateBeforeMove.getEvaluation());
     }
 }

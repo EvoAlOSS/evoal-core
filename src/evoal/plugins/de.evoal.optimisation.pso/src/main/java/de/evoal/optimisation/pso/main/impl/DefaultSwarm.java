@@ -21,7 +21,6 @@ import de.evoal.core.api.random.RandomService;
 import de.evoal.core.api.cdi.Component;
 import de.evoal.core.api.cdi.ConfigurationValue;
 import de.evoal.core.api.utils.AttributeHelper;
-import de.evoal.models.v202704.optimisation.execution.OptimisationValue;
 import de.evoal.models.core.ecore.TypedEObject;
 import de.evoal.optimisation.api.board.OptimisationBlackboardEntries;
 import de.evoal.optimisation.pso.api.optimiser.Mover;
@@ -30,8 +29,8 @@ import de.evoal.optimisation.pso.api.swarm.Particle;
 import de.evoal.optimisation.pso.api.swarm.State;
 import de.evoal.optimisation.api.model.InitialCandidatesProvider;
 import de.evoal.optimisation.api.evaluation.EvaluationBudgetExhaustedException;
-import de.evoal.optimisation.api.evaluation.EvaluationService;
-import de.evoal.optimisation.api.model.OptimisationValueComparator;
+import de.evoal.optimisation.api.fitness.Evaluation;
+import de.evoal.optimisation.api.fitness.Evaluator;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -56,9 +55,6 @@ import java.util.stream.IntStream;
 @Named("de.evoal.optimisation.pso.optimisation.default-swarm")
 @Slf4j
 public class DefaultSwarm implements Swarm {
-    @Inject @Dependent @Component
-    private OptimisationValueComparator comparator;
-
     @Inject
     private AttributeHelper helper;
 
@@ -69,10 +65,10 @@ public class DefaultSwarm implements Swarm {
     private NeighborhoodTopology neighborhoodTopology;
 
     /**
-     * Evaluates and counts the positions of the particles.
+     * Evaluates the positions of the particles.
      */
     @Inject
-    private EvaluationService evaluationService;
+    private Evaluator evaluator;
 
     @Getter @Setter
     protected Particle[] particles;
@@ -119,7 +115,7 @@ public class DefaultSwarm implements Swarm {
 
     /**
      * Evaluates the particles in the swarm, one after another in the order of the swarm, and
-     *   sets their current fitness. If the evaluation budget runs out, the particles that are
+     *   sets their current evaluation. If the evaluation budget runs out, the particles that are
      *   not evaluated undo their last move.
      *
      * @throws EvaluationBudgetExhaustedException if the evaluation budget runs out.
@@ -130,25 +126,27 @@ public class DefaultSwarm implements Swarm {
             final Particle particle = particles[index];
             final TypedEObject candidate = particle.getCurrentPosition();
 
-            final TypedEObject output;
+            final Evaluation evaluation;
             try {
-                output = evaluationService.evaluate(candidate);
+                evaluation = evaluator.evaluate(candidate);
             } catch(final EvaluationBudgetExhaustedException e) {
                 undoMoves(index);
                 throw e;
             }
 
-            final OptimisationValue ov = comparator.toValue(output);
-            particle.setCurrentFitness(ov);
+            particle.setCurrentEvaluation(evaluation);
         }
     }
 
     @Override
     public void updatePersonalBests() {
         for(final Particle particle : particles) {
-            if (particle.getCurrentFitness().isBetter(particle.getBestFitness())) {
+            final Evaluation current = particle.getCurrentEvaluation();
+            final Evaluation best = particle.getBestEvaluation();
+
+            if (current.value().isBetter(best.value())) {
                 particle.setBestPosition(particle.getCurrentPosition());
-                particle.setBestFitness(particle.getCurrentFitness());
+                particle.setBestEvaluation(current);
             }
         }
     }
@@ -188,9 +186,8 @@ public class DefaultSwarm implements Swarm {
      * @return The new particle.
      */
     private Particle toParticle(final int id, final TypedEObject candidate) {
-        final TypedEObject output = evaluationService.evaluate(candidate);
-        final OptimisationValue ov = comparator.toValue(output);
-        final State start = new State(candidate, ov);
+        final Evaluation evaluation = evaluator.evaluate(candidate);
+        final State start = new State(candidate, evaluation);
         final RandomGenerator random = randomService.random("de.evoal.optimisation.pso/particle-" + id);
 
         return new Particle(id, start, mover, random);
