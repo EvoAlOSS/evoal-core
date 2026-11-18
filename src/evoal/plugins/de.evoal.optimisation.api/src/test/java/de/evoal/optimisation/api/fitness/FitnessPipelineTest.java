@@ -28,7 +28,10 @@ import de.evoal.models.v202704.optimisation.model.TargetGoal;
 import de.evoal.optimisation.main.comparator.ComparatorFactory;
 import de.evoal.optimisation.main.comparator.NumericOptimisationValue;
 import de.evoal.optimisation.main.fitness.AbsoluteDistance;
+import de.evoal.optimisation.main.fitness.ObjectiveSelectionStep;
+import de.evoal.optimisation.main.fitness.ScalingStep;
 import de.evoal.optimisation.main.fitness.SquaredDistance;
+import de.evoal.optimisation.main.fitness.WeightedSumStep;
 
 public class FitnessPipelineTest {
     private static Space space(final EDataType type, final String... names) {
@@ -209,6 +212,88 @@ public class FitnessPipelineTest {
 
             // when, then
             Assertions.assertThrows(IllegalStateException.class, () -> broken.apply(input, objectives));
+        }
+    }
+
+    @Nested
+    @DisplayName("given a pipeline with a scalarisation")
+    class WithScalarisation {
+        private final Space space = space(EcorePackage.Literals.EDOUBLE, "a", "b");
+
+        private final EStructuralFeature a = space.getEClass().getEStructuralFeature("a");
+
+        private final EStructuralFeature b = space.getEClass().getEStructuralFeature("b");
+
+        private final Goals goals = new Goals(List.of(new Goal.Minimise(a), new Goal.Maximise(b)));
+
+        private Fitness fitnessOf(final List<FitnessStep> steps, final double valueOfA, final double valueOfB) {
+            final FitnessPipeline pipeline = new FitnessPipeline(goals, steps);
+            final TypedEObject objectives = space.newEObject();
+            objectives.eSet(a, valueOfA);
+            objectives.eSet(b, valueOfB);
+
+            return pipeline.apply(space.newEObject(), objectives);
+        }
+
+        @Test
+        public void theWeightedSumUsesTheCanonicalDirection() {
+            // given: a is minimised, b is maximised, so the fitness is 0.5 * a + 0.5 * (-b)
+            final List<FitnessStep> steps = List.of(new WeightedSumStep(Map.of(), true));
+
+            // when
+            final double better = fitnessOf(steps, 1.0, 5.0).value(0);
+            final double worse = fitnessOf(steps, 2.0, 3.0).value(0);
+
+            // then
+            Assertions.assertEquals(-2.0, better);
+            Assertions.assertEquals(-0.5, worse);
+            Assertions.assertTrue(better < worse);
+        }
+
+        @Test
+        public void scalingBeforeTheWeightedSumScalesTheComponent() {
+            // given
+            final List<FitnessStep> steps = List.of(new ScalingStep(Map.of("b", 10.0)),
+                                                    new WeightedSumStep(Map.of("a", 1.0, "b", 1.0), false));
+
+            // when
+            final Fitness fitness = fitnessOf(steps, 1.0, 20.0);
+
+            // then
+            Assertions.assertEquals(1.0 - 2.0, fitness.value(0));
+        }
+
+        @Test
+        public void theObjectiveSelectionKeepsTheCanonicalFitnessAndTheGoal() {
+            // given
+            final List<FitnessStep> steps = List.of(new ObjectiveSelectionStep("b"));
+
+            // when
+            final Fitness fitness = fitnessOf(steps, 1.0, 5.0);
+
+            // then
+            Assertions.assertArrayEquals(new double[] {-5.0}, fitness.values());
+            Assertions.assertEquals(goals.get(1), fitness.layout().component(0).goal().orElseThrow());
+        }
+
+        @Test
+        public void aScalarisationBeforeTheLastStepIsRejected() {
+            // given
+            final List<FitnessStep> steps = List.of(new WeightedSumStep(Map.of(), true),
+                                                    new ScalingStep(Map.of("weighted-sum", 2.0)));
+
+            // when, then
+            Assertions.assertThrows(IllegalArgumentException.class, () -> new FitnessPipeline(goals, steps));
+        }
+
+        @Test
+        public void aSecondScalarisationIsRejected() {
+            // given
+            final List<FitnessStep> steps = List.of(new WeightedSumStep(Map.of(), true),
+                                                    new WeightedSumStep(Map.of(), false));
+
+            // when, then
+            Assertions.assertThrows(IllegalArgumentException.class, () -> new FitnessPipeline(goals, steps));
         }
     }
 

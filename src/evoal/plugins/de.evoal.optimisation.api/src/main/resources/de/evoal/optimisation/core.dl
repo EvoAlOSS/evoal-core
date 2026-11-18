@@ -145,21 +145,61 @@ module de.evoal.optimisation.core {
     abstract type 'fitness-step' extends configuration {}
 
     /**
+     * Divides fitness components by a reference value: {@code f / r}. Components that are
+     *   not listed stay unchanged.
+     */
+    type scaling extends 'fitness-step' {
+        /**
+         * The reference value of each scaled objective ({@code var}: the objective,
+         *   {@code val}: the reference value, greater than 0). Every objective is listed at
+         *   most once.
+         */
+        @MinimumNumberOfElements{ bound := 1; }
+        references : array instance variable;
+    }
+
+    /**
+     * Keeps the fitness component of one objective and drops all others. The comparator
+     *   then compares this component only.
+     */
+    type 'objective-selection' extends 'fitness-step' {
+        /**
+         * The objective whose fitness is kept.
+         */
+        objective : data;
+    }
+
+    /**
+     * Abstract base type for steps that reduce the fitness to one component. A
+     *   scalarisation must be the last step of {@code 'fitness-pipeline'}, and a pipeline
+     *   has at most one.
+     */
+    abstract type scalarisation extends 'fitness-step' {}
+
+    /**
+     * Reduces the fitness to one component {@code weighted-sum}: the sum of the fitness
+     *   components multiplied by their weights.
+     */
+    type 'weighted-sum' extends scalarisation {
+        /**
+         * The weight of each component ({@code var}: the objective, {@code val}: the
+         *   weight). Either empty, then all components have the same weight, or every
+         *   component is listed exactly once. Weights are not negative and at least one is
+         *   greater than 0.
+         */
+        weights : array instance variable := [];
+
+        /**
+         * Whether the weights are divided by their sum, so that they sum to 1. This only
+         *   changes the scale of the fitness, not the order of the candidates.
+         */
+        normalise : boolean := true;
+    }
+
+    /**
      * Comparator for comparing optimisation function results to each other.
      */
     abstract type comparator extends configuration {}
-
-    /**
-     * Comparator that calculates a weighted sum for multi-dimensional optimisation
-     *   values.
-     */
-    type 'weighted-sum' extends comparator {
-        /**
-         * Weights for summing the dimensions.
-         */
-        @MinimumNumberOfElements{ bound := 1; }
-        weights : array instance variable;
-    }
 
     /**
      * Compares the data in the specified order. First, the first data entry is compared.
@@ -178,17 +218,6 @@ module de.evoal.optimisation.core {
      * Comparator for a single number-based fitness value (such as a double).
      */
     type 'numeric-comparator' extends comparator {
-    }
-
-    /**
-    * Comparator for multiobjective optimisation that considers a single
-    *   objective and enforces the other objectives to be in bounds.
-    */
-    type 'epsilon-comparator' extends comparator {
-        /**
-         * The objective to optimise.
-         */
-        'goal-objective' : data;
     }
 
     /**

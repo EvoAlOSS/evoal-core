@@ -1,0 +1,103 @@
+{
+  "formatVersion" : "2027.4.0",
+  "problem" : {
+    "name" : "regression",
+    "goals" : [ {
+      "feature" : "y:0",
+      "direction" : "minimise"
+    }, {
+      "feature" : "y:1",
+      "direction" : "maximise"
+    } ]
+  },
+  "algorithm" : {
+    "type" : "de.evoal.optimisation.local_search.optimisation.local-search"
+  },
+  "searchSpace" : [ {
+    "name" : "x:0",
+    "type" : "real",
+    "scale" : "quotient",
+    "lowerBound" : {
+      "value" : -5.12,
+      "inclusive" : true
+    },
+    "upperBound" : {
+      "value" : 5.12,
+      "inclusive" : true
+    }
+  }, {
+    "name" : "x:1",
+    "type" : "real",
+    "scale" : "quotient",
+    "lowerBound" : {
+      "value" : -5.12,
+      "inclusive" : true
+    },
+    "upperBound" : {
+      "value" : 5.12,
+      "inclusive" : true
+    }
+  } ],
+  "optimisationSpace" : [ {
+    "name" : "y:0",
+    "type" : "real",
+    "scale" : "quotient"
+  }, {
+    "name" : "y:1",
+    "type" : "real",
+    "scale" : "quotient"
+  } ],
+  "fitness" : {
+    "components" : [ {
+      "name" : "weighted-sum"
+    } ],
+    "steps" : [ {
+      "type" : "de.evoal.optimisation.core.scaling",
+      "attributes" : {
+        "references" : [ {
+          "type" : "de.evoal.optimisation.core.variable",
+          "attributes" : {
+            "var" : "y:0",
+            "val" : 100.0
+          }
+        } ]
+      }
+    }, {
+      "type" : "de.evoal.optimisation.core.weighted-sum",
+      "attributes" : {
+        "weights" : [ {
+          "type" : "de.evoal.optimisation.core.variable",
+          "attributes" : {
+            "var" : "y:0",
+            "val" : 2.0
+          }
+        }, {
+          "type" : "de.evoal.optimisation.core.variable",
+          "attributes" : {
+            "var" : "y:1",
+            "val" : 1.0
+          }
+        } ],
+        "normalise" : true
+      }
+    } ]
+  },
+  "metricDefinitions" : [ {
+    "name" : "evaluations.real",
+    "kind" : "counter",
+    "valueType" : "integer",
+    "scope" : "iteration",
+    "description" : "Number of evaluations of the real optimisation function."
+  }, {
+    "name" : "evaluations.surrogate",
+    "kind" : "counter",
+    "valueType" : "integer",
+    "scope" : "iteration",
+    "description" : "Number of predictions of a surrogate model."
+  } ],
+  "setup" : {
+    "evoalVersion" : "${evoal.version}",
+    "seed" : "42",
+    "run" : 0
+  }
+}

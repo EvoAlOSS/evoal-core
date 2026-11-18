@@ -9,13 +9,14 @@
  *   objective according to its {@link de.evoal.optimisation.api.fitness.Goal}
  *   ({@link de.evoal.optimisation.api.fitness.DirectionStep}); further
  *   {@link de.evoal.optimisation.api.fitness.FitnessStep}s are configured in
- *   {@code 'fitness-pipeline'} of the algorithm.
+ *   {@code 'fitness-pipeline'} of the algorithm. A
+ *   {@link de.evoal.optimisation.api.fitness.Scalarisation} (e.g. a weighted sum) reduces
+ *   the fitness to one component; it must be the last step.
  * <p>
  * An {@link de.evoal.optimisation.api.fitness.Evaluator} evaluates a candidate and returns
  *   an {@link de.evoal.optimisation.api.fitness.Evaluation}: the objectives, the fitness and
  *   the optimisation value of the comparator
  *   ({@link de.evoal.optimisation.api.model.OptimisationValueComparator#toValue(de.evoal.models.core.ecore.TypedEObject, Fitness)}).
- *   The numeric and the hierarchical comparator compare the fitness; the weighted-sum and
- *   the epsilon comparator still compare the objectives.
+ *   The numeric and the hierarchical comparator compare the fitness.
  */
 package de.evoal.optimisation.api.fitness;

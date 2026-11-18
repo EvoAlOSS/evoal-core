@@ -24,9 +24,7 @@ module 'search' {
 
 		'initialisation' := 'random-population' {};
 		
-		'comparator' := 'weighted-sum' {
-			'weights' := [1.0];
-		};
+		'comparator' := 'numeric-comparator' {};
 	
 	    genotype := 'vector-genotype' {
 	        chromosomes := [

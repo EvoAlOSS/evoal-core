@@ -1,6 +1,7 @@
 package de.evoal.optimisation.api.fitness;
 
 import java.util.List;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import de.evoal.models.core.ecore.TypedEObject;
@@ -40,8 +41,11 @@ public final class FitnessPipeline {
      * @param goals The goals of the problem.
      * @param configuredSteps The steps configured in {@code 'fitness-pipeline'}, in their
      *   order; they run after the direction step.
+     * @throws IllegalArgumentException if a {@link Scalarisation} is not the last step.
      */
     public FitnessPipeline(final Goals goals, final List<FitnessStep> configuredSteps) {
+        requireScalarisationIsLast(configuredSteps);
+
         this.goals = goals;
         this.initialLayout = FitnessLayout.of(goals);
         this.steps = Stream.concat(Stream.of(new DirectionStep()), configuredSteps.stream())
@@ -103,6 +107,22 @@ public final class FitnessPipeline {
      */
     public List<FitnessStep> steps() {
         return steps;
+    }
+
+    /**
+     * Checks that only the last step is a {@link Scalarisation}, so a pipeline has at most
+     *   one. There is no check in the language yet.
+     */
+    private static void requireScalarisationIsLast(final List<FitnessStep> configuredSteps) {
+        final int lastIndex = configuredSteps.size() - 1;
+        final boolean scalarisationBeforeLast = IntStream.range(0, lastIndex)
+                                                         .mapToObj(configuredSteps::get)
+                                                         .anyMatch(Scalarisation.class::isInstance);
+
+        if(scalarisationBeforeLast) {
+            throw new IllegalArgumentException("A scalarisation must be the last step of 'fitness-pipeline', and a"
+                                               + " pipeline has at most one: " + configuredSteps + ".");
+        }
     }
 
     private Fitness toInitialFitness(final TypedEObject objectives) {

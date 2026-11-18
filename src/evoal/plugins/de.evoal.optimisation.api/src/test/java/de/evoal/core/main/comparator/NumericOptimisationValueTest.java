@@ -3,13 +3,17 @@ package de.evoal.core.main.comparator;
 import de.evoal.models.core.ecore.Space;
 import de.evoal.models.core.ecore.TypedEObject;
 import de.evoal.optimisation.main.comparator.NumericOptimisationValue;
-import de.evoal.optimisation.main.comparator.WeightedSumOptimisationValue;
+import de.evoal.optimisation.api.fitness.Fitness;
+import de.evoal.optimisation.api.fitness.FitnessComponent;
+import de.evoal.optimisation.api.fitness.FitnessLayout;
+import de.evoal.optimisation.main.comparator.FitnessValue;
 import org.eclipse.emf.ecore.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.function.Function;
 
 public class NumericOptimisationValueTest {
@@ -97,7 +101,9 @@ public class NumericOptimisationValueTest {
         object1.eSet(eFeature, 42.0);
 
         final NumericOptimisationValue optValue1 = NumericOptimisationValue.of(Collections.singletonMap(eFeature, Function.identity()), object1);
-        final WeightedSumOptimisationValue optValue2 = WeightedSumOptimisationValue.of(Collections.singletonMap(eFeature, 0.4), object1);
+        final FitnessLayout layout = new FitnessLayout(List.of(FitnessComponent.named("dimension-1")));
+        final Fitness fitness = new Fitness(layout, new double[] {42.0});
+        final FitnessValue optValue2 = FitnessValue.of(object1, fitness, new int[] {0}, List.of(eFeature));
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> optValue1.compareTo(optValue2));
     }

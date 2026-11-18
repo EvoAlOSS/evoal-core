@@ -18,9 +18,9 @@ import de.evoal.optimisation.api.fitness.Goal;
 import de.evoal.optimisation.api.fitness.Goals;
 
 /**
- * Creates the value conversions of the comparators that still work on the objectives
- *   (weighted sum, epsilon, EA): every objective is converted so that a larger value is
- *   better.
+ * Creates the value conversions for the evolutionary algorithm, which still compares the
+ *   objectives instead of the fitness: every objective is converted so that a larger value
+ *   is better.
  */
 @ApplicationScoped
 public class ComparatorFactory {

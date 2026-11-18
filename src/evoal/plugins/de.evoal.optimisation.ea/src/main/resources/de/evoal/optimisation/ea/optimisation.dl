@@ -135,12 +135,13 @@ module de.evoal.optimisation.ea.optimisation {
 	type 'repair-with-random' extends 'repair-strategy' {}
 
 	/**
-	 * Repair strategy for 'de.evoal.optimisation.core.epsilon-comparator'.
+	 * Repair strategy for the 'epsilon-handler'.
 	 */
 	type 'epsilon-repair' extends 'repair-strategy' {}
 
     /**
-     * Constraint handler for 'de.evoal.optimisation.core.epsilon-comparator'.
+     * Constraint handler that checks the given objectives against their bounds
+     *   (epsilon-constraint method).
      */
 	type 'epsilon-handler' extends 'constraint-handler' {
         /**
