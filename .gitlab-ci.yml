@@ -666,6 +666,12 @@ evoal:package-smoke-test:
     - cd evoal-linux-x86_64/examples/random-search
     - EVOAL_HOME="$(cd ../.. && pwd)" EVOAL_LOGGING=WARN bash 01-run-search.sh
     - test -n "$(find output -type f)"
+  # the tested package for image:evoal (the Kaniko image cannot download it: its
+  #   BusyBox wget fails the TLS handshake with our GitLab)
+  artifacts:
+    expire_in: "1 day"
+    paths:
+      - evoal.zip
 
 #############################################################
 ## EvoAl runtime image (src/docker/evoal), e.g., for GitLab
@@ -681,12 +687,12 @@ image:evoal:
     - .image:evoal-package
   needs:
     - job: evoal:package-smoke-test
-      artifacts: false
+      artifacts: true
   timeout: 30m
   variables:
     IMAGE_NAME: $CI_REGISTRY_IMAGE/evoal/evoal
   script:
-    - 'wget --header "JOB-TOKEN: $CI_JOB_TOKEN" -O src/docker/evoal/evoal.zip "$PACKAGE_URL"'
+    - mv evoal.zip src/docker/evoal/evoal.zip
     - DESTINATIONS=""; for TAG in $IMAGE_TAGS; do DESTINATIONS="$DESTINATIONS --destination $IMAGE_NAME:$TAG"; done
     - /kaniko/executor
       --context "$CI_PROJECT_DIR/src/docker/evoal"

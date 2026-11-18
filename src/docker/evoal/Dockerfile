@@ -3,8 +3,8 @@
 #   /opt/evoal. The pipeline builds it for the branch release (tags nightly and
 #   nightly-<commit>) and for every tag (tags <version> and latest).
 #
-# Build context: a folder with the Linux package as evoal.zip (the job image:evoal
-#   downloads it from the package registry).
+# Build context: a folder with the Linux package as evoal.zip (in the pipeline the
+#   package that evoal:package-smoke-test downloaded and tested).
 
 FROM docker.io/library/eclipse-temurin:25-jre-noble
 
