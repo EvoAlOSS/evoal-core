@@ -124,6 +124,7 @@
         <genOperations ecoreOperation="optimisation.ecore#//execution/OptimisationFunction/evaluate">
           <genParameters ecoreParameter="optimisation.ecore#//execution/OptimisationFunction/evaluate/input"/>
         </genOperations>
+        <genOperations ecoreOperation="optimisation.ecore#//execution/OptimisationFunction/isThreadSafe"/>
       </genClasses>
       <genClasses ecoreClass="optimisation.ecore#//execution/TerminationCriterion">
         <genOperations ecoreOperation="optimisation.ecore#//execution/TerminationCriterion/shouldTerminate">

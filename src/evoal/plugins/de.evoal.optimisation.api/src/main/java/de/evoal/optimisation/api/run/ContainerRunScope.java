@@ -1,29 +1,26 @@
 package de.evoal.optimisation.api.run;
 
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 
-import org.apache.deltaspike.cdise.api.CdiContainerLoader;
-import org.apache.deltaspike.cdise.api.ContextControl;
-
+import de.evoal.core.api.cdi.RunScopeControl;
 import de.evoal.core.api.cdi.RunScoped;
 
 /**
- * Controls the {@link RunScoped} context through the CDI container.
+ * Controls the {@link RunScoped} context of the CDI container on the thread of the run.
  */
 @ApplicationScoped
 public class ContainerRunScope implements RunScope {
-    private static ContextControl contextControl() {
-        return CdiContainerLoader.getCdiContainer()
-                                 .getContextControl();
-    }
+    @Inject
+    private RunScopeControl control;
 
     @Override
     public void start() {
-        contextControl().startContext(RunScoped.class);
+        control.start();
     }
 
     @Override
     public void stop() {
-        contextControl().stopContext(RunScoped.class);
+        control.stop();
     }
 }

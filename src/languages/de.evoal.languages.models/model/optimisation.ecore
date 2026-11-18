@@ -398,6 +398,12 @@
       <eOperations name="evaluate" lowerBound="1" eType="#//TypedEObject">
         <eParameters name="input" lowerBound="1" eType="#//TypedEObject"/>
       </eOperations>
+      <eOperations name="isThreadSafe" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="*&#xA;Checks if several threads may call {@link #evaluate} at the same time. A function&#xA;  that is not thread-safe is evaluated on one thread. Functions that only delegate&#xA;  forward the answer of their delegate.&#xA;&#xA;@return &lt;code>true&lt;/code> iff {@link #evaluate} may be called concurrently.&#xA;"/>
+          <details key="body" value="return false;&#xA;"/>
+        </eAnnotations>
+      </eOperations>
       <eGenericSuperTypes eClassifier="ecore:EClass core.ecore#//EvoalComponent">
         <eTypeArguments eClassifier="#//execution/OptimisationFunction"/>
       </eGenericSuperTypes>

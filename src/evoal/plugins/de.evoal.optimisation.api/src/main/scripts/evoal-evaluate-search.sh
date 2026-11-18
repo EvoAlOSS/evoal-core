@@ -36,6 +36,10 @@ if [ ${EVOAL_SEED+x} ]; then
   ADDITIONAL_ARGUMENTS+=( "-Bcore:seed=$EVOAL_SEED" )
 fi
 
+if [ ${EVOAL_THREADS+x} ]; then
+  ADDITIONAL_ARGUMENTS+=( "-Bcore:evaluation-threads=$EVOAL_THREADS" )
+fi
+
 set -x
 java ${LOCAL_JVM_ARGUMENTS[@]} \
      ${EVOAL_JVM_ARGUMENTS[@]} \

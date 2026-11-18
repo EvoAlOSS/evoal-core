@@ -66,6 +66,16 @@ public class SearchSpaceDistanceFitness extends OptimisationFunctionImpl {
         return Math.abs(((Number)o).doubleValue() - v);
     }
 
+    /**
+     * {@inheritDoc}
+     * <p>
+     * The distance calculation is built in {@link #init} and only read by {@link #evaluate}.
+     */
+    @Override
+    public boolean isThreadSafe() {
+        return true;
+    }
+
     @Override
     public OptimisationFunction init(final EObject config) {
         final Map<DataDescription, EStructuralFeature> sourceMapping = annotations.featuresOf(searchSpace);

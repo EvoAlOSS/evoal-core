@@ -294,6 +294,8 @@ public class ExecutionPackageImpl extends EPackageImpl implements ExecutionPacka
 		EOperation op = addEOperation(optimisationFunctionEClass, theOptimisationPackage.getTypedEObject(), "evaluate", 1, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theOptimisationPackage.getTypedEObject(), "input", 1, 1, IS_UNIQUE, IS_ORDERED);
 
+		addEOperation(optimisationFunctionEClass, ecorePackage.getEBoolean(), "isThreadSafe", 1, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(terminationCriterionEClass, TerminationCriterion.class, "TerminationCriterion", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		op = addEOperation(terminationCriterionEClass, ecorePackage.getEBoolean(), "shouldTerminate", 1, 1, IS_UNIQUE, IS_ORDERED);

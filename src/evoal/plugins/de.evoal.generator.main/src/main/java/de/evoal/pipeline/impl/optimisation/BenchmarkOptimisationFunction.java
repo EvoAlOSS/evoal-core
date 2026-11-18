@@ -3,6 +3,7 @@ package de.evoal.pipeline.impl.optimisation;
 import de.evoal.models.v202704.optimisation.execution.impl.OptimisationFunctionImpl;
 
 import de.evoal.pipeline.api.model.PipelineComposite;
+import de.evoal.core.api.ecore.misc.ConcurrentEClassAccess;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
@@ -74,11 +75,23 @@ public class BenchmarkOptimisationFunction extends OptimisationFunctionImpl {
         return result;
     }
 
+    /**
+     * {@inheritDoc}
+     * <p>
+     * The fields are set in {@link #init} and only read by {@link #evaluate}, which creates new objects per call.
+     */
+    @Override
+    public boolean isThreadSafe() {
+        return true;
+    }
+
     @SneakyThrows
     @Override
     public OptimisationFunction init(final EObject config) {
         log.info("Using benchmark function as optimisation function");
         mergedSpace = searchSpace.merge(optimisationSpace);
+        // evaluate creates objects of the merged class on several threads
+        ConcurrentEClassAccess.prepare(mergedSpace.getEClass());
 
         final List<EObject> benchmarkConfigurations = attributes.lookup(config, "benchmarks");
 

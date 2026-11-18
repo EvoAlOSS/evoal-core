@@ -29,4 +29,21 @@ public interface OptimisationFunction extends EObject, EvoalComponent<Optimisati
 	 */
 	TypedEObject evaluate(TypedEObject input);
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * *
+	 * Checks if several threads may call {@link #evaluate} at the same time. A function
+	 *   that is not thread-safe is evaluated on one thread. Functions that only delegate
+	 *   forward the answer of their delegate.
+	 * 
+	 * @return <code>true</code> iff {@link #evaluate} may be called concurrently.
+	 * 
+	 * <!-- end-model-doc -->
+	 * @model kind="operation" required="true"
+	 * @generated
+	 */
+	boolean isThreadSafe();
+
 } // OptimisationFunction

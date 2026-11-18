@@ -51,4 +51,15 @@ public class OptimisationFunctionImpl extends EvoalComponentImpl<OptimisationFun
 		throw new UnsupportedOperationException();
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean isThreadSafe() {
+		return false;
+		
+	}
+
 } //OptimisationFunctionImpl

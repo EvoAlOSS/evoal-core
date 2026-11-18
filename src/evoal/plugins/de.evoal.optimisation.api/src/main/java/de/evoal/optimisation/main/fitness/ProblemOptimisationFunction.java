@@ -38,6 +38,16 @@ public class ProblemOptimisationFunction extends OptimisationFunctionImpl {
         return delegate.evaluate(candidate);
     }
 
+    /**
+     * {@inheritDoc}
+     * <p>
+     * The problem function only delegates, so it is thread-safe iff its delegate is.
+     */
+    @Override
+    public boolean isThreadSafe() {
+        return delegate.isThreadSafe();
+    }
+
     @Override
     public OptimisationFunction init(final EObject config) {
         problemConfiguration = ((Problem)problemConfiguration).getOptimisationFunction();

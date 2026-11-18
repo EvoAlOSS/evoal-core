@@ -63,6 +63,16 @@ public class RandomFitness extends OptimisationFunctionImpl {
         return optimisationValue;
     }
 
+    /**
+     * {@inheritDoc}
+     * <p>
+     * Every evaluation draws from its own task stream.
+     */
+    @Override
+    public boolean isThreadSafe() {
+        return true;
+    }
+
     @Override
     public RandomFitness init(final EObject configuration) {
         checkFeatureTypes();

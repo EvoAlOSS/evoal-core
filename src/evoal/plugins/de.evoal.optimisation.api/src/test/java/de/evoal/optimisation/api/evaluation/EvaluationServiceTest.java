@@ -1,7 +1,14 @@
 package de.evoal.optimisation.api.evaluation;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.IdentityHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.OptionalLong;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import jakarta.enterprise.inject.Instance;
 
@@ -10,6 +17,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import org.mockito.ArgumentMatchers;
 import org.mockito.Mockito;
@@ -19,6 +28,7 @@ import de.evoal.core.api.random.RandomService;
 import de.evoal.core.api.reproducibility.ReproducibilityProtocol;
 import de.evoal.models.core.ecore.TypedEObject;
 import de.evoal.models.v202704.optimisation.execution.OptimisationFunction;
+import de.evoal.models.v202704.optimisation.execution.impl.OptimisationFunctionImpl;
 import de.evoal.models.v202704.optimisation.memory.Execution;
 import de.evoal.models.v202704.optimisation.memory.Iteration;
 import de.evoal.models.v202704.optimisation.memory.MemoryFactory;
@@ -76,6 +86,8 @@ public class EvaluationServiceTest {
         randomField.setAccessible(true);
         randomField.set(service, randomService);
 
+        useThreads(1);
+
         // the recorder starts the service in every run
         @SuppressWarnings("unchecked")
         final Instance<MetricContributor> contributors = Mockito.mock(Instance.class, Mockito.CALLS_REAL_METHODS);
@@ -90,6 +102,97 @@ public class EvaluationServiceTest {
         final Field protocolField = ExecutionRecorder.class.getDeclaredField("reproducibility");
         protocolField.setAccessible(true);
         protocolField.set(recorder, new ReproducibilityProtocol());
+    }
+
+    /**
+     * Gives the service an executor with the number of threads.
+     */
+    private EvaluationExecutor useThreads(final int threads) throws Exception {
+        final EvaluationExecutor executor = EvaluationExecutor.withThreads(threads);
+
+        final Field executorField = EvaluationService.class.getDeclaredField("executor");
+        executorField.setAccessible(true);
+        executorField.set(service, executor);
+
+        return executor;
+    }
+
+    /**
+     * Makes the producer return the function without stubbing it and starts a run.
+     */
+    private void startRunWithFunction(final OptimisationFunction function) {
+        this.function = function;
+        Mockito.when(componentProducer.create(OptimisationFunction.class,
+                                              OptimisationBlackboardEntries.OPTIMISATION_CONFIGURATION,
+                                              "algorithm.optimisation-function"))
+               .thenReturn(function);
+
+        recorder.startRun();
+        execution = recorder.getExecution();
+    }
+
+    /**
+     * @return {@code n} distinct candidates.
+     */
+    private static List<TypedEObject> candidates(final int n) {
+        final List<TypedEObject> candidates = new ArrayList<>();
+        for(int i = 0; i < n; ++i) {
+            candidates.add(Mockito.mock(TypedEObject.class, "candidate-" + i));
+        }
+
+        return candidates;
+    }
+
+    /**
+     * A function that needs a random time per evaluation, returns one output per candidate
+     *   and records the task context and the concurrency of its calls.
+     */
+    private static class RecordingFunction extends OptimisationFunctionImpl {
+        private final boolean threadSafe;
+
+        private final Map<TypedEObject, TypedEObject> outputs = new IdentityHashMap<>();
+
+        private final Map<TypedEObject, EvaluationTask> tasks = new ConcurrentHashMap<>();
+
+        private final Map<TypedEObject, String> threads = new ConcurrentHashMap<>();
+
+        private final AtomicInteger inFlight = new AtomicInteger();
+
+        private final AtomicInteger maximumInFlight = new AtomicInteger();
+
+        /**
+         * The candidates whose evaluation fails.
+         */
+        private final List<TypedEObject> failing = new ArrayList<>();
+
+        RecordingFunction(final boolean threadSafe, final List<TypedEObject> candidates) {
+            this.threadSafe = threadSafe;
+            candidates.forEach(c -> outputs.put(c, Mockito.mock(TypedEObject.class)));
+        }
+
+        @Override
+        public boolean isThreadSafe() {
+            return threadSafe;
+        }
+
+        @Override
+        public TypedEObject evaluate(final TypedEObject candidate) {
+            maximumInFlight.accumulateAndGet(inFlight.incrementAndGet(), Math::max);
+            try {
+                tasks.put(candidate, EvaluationTask.current().orElseThrow());
+                threads.put(candidate, Thread.currentThread().getName());
+                Thread.sleep(ThreadLocalRandom.current().nextInt(3));
+
+                if(failing.contains(candidate)) {
+                    throw new IllegalArgumentException(((Object)candidate).toString());
+                }
+                return outputs.get(candidate);
+            } catch(final InterruptedException e) {
+                throw new IllegalStateException(e);
+            } finally {
+                inFlight.decrementAndGet();
+            }
+        }
     }
 
     /**
@@ -398,6 +501,152 @@ public class EvaluationServiceTest {
         public void rejectsEvaluations() {
             // when, then
             Assertions.assertThrows(IllegalStateException.class, () -> service.evaluate(candidate));
+        }
+    }
+
+    @Nested
+    @DisplayName("given a batch of candidates")
+    class Batches {
+        private final List<TypedEObject> batch = candidates(40);
+
+        @ParameterizedTest
+        @ValueSource(ints = { 1, 8 })
+        public void returnsTheOutputsInTheOrderOfTheCandidates(final int threads) throws Exception {
+            // given
+            useThreads(threads);
+            final RecordingFunction recording = new RecordingFunction(true, batch);
+            startRunWithFunction(recording);
+
+            // when
+            final List<TypedEObject> outputs = service.evaluateAll(batch);
+
+            // then
+            Assertions.assertEquals(batch.stream().map(recording.outputs::get).toList(), outputs);
+        }
+
+        @ParameterizedTest
+        @ValueSource(ints = { 1, 8 })
+        public void indicesCountersAndEventsDoNotDependOnTheThreads(final int threads) throws Exception {
+            // given
+            useThreads(threads);
+            final RecordingFunction recording = new RecordingFunction(true, batch);
+            startRunWithFunction(recording);
+            final List<TypedEObject> published = new ArrayList<>();
+            Mockito.doAnswer(invocation -> published.add(((IndividualEvaluated)invocation.getArgument(0)).candidate()))
+                   .when(listener)
+                   .on(ArgumentMatchers.any(IndividualEvaluated.class));
+
+            // when
+            service.evaluate(candidate);
+            service.evaluateAll(batch);
+
+            // then
+            for(int i = 0; i < batch.size(); ++i) {
+                Assertions.assertEquals(new EvaluationTask(0, i + 1), recording.tasks.get(batch.get(i)));
+            }
+            Assertions.assertEquals(batch.size() + 1, service.numberOfEvaluations(EvaluationSource.REAL));
+            Assertions.assertEquals(batch, published.subList(1, published.size()));
+        }
+
+        @Test
+        public void usesSeveralThreadsForAThreadSafeFunction() throws Exception {
+            // given
+            useThreads(8);
+            final RecordingFunction recording = new RecordingFunction(true, batch);
+            startRunWithFunction(recording);
+
+            // when
+            service.evaluateAll(batch);
+
+            // then
+            Assertions.assertTrue(recording.threads.values().stream().distinct().count() > 1);
+        }
+
+        @Test
+        public void neverCallsAFunctionThatIsNotThreadSafeConcurrently() throws Exception {
+            // given
+            useThreads(8);
+            final RecordingFunction recording = new RecordingFunction(false, batch);
+            startRunWithFunction(recording);
+
+            // when
+            service.evaluateAll(batch);
+
+            // then
+            Assertions.assertEquals(1, recording.maximumInFlight.get());
+            Assertions.assertEquals(List.of(Thread.currentThread().getName()),
+                                    recording.threads.values().stream().distinct().toList());
+        }
+
+        @ParameterizedTest
+        @ValueSource(ints = { 1, 8 })
+        public void throwsTheFailureWithTheLowestIndexAfterAllEvaluations(final int threads) throws Exception {
+            // given
+            useThreads(threads);
+            final RecordingFunction recording = new RecordingFunction(true, batch);
+            recording.failing.add(batch.get(30));
+            recording.failing.add(batch.get(7));
+            startRunWithFunction(recording);
+
+            // when
+            final IllegalArgumentException failure = Assertions.assertThrows(IllegalArgumentException.class, () -> service.evaluateAll(batch));
+
+            // then
+            Assertions.assertEquals("candidate-7", failure.getMessage());
+            Assertions.assertEquals("candidate-30", failure.getSuppressed()[0].getMessage());
+            Assertions.assertEquals(batch.size(), recording.tasks.size());
+            Assertions.assertEquals(batch.size(), service.numberOfEvaluations(EvaluationSource.REAL));
+            Mockito.verify(listener, Mockito.times(batch.size() - 2)).on(ArgumentMatchers.any(IndividualEvaluated.class));
+        }
+
+        @ParameterizedTest
+        @ValueSource(ints = { 1, 8 })
+        public void rejectsABatchThatExceedsACutOffBudget(final int threads) throws Exception {
+            // given
+            useThreads(threads);
+            final RecordingFunction recording = new RecordingFunction(true, batch);
+            startRunWithFunction(recording);
+            service.limit(EvaluationSource.REAL, batch.size() - 1, ExhaustionPolicy.CUT_OFF);
+
+            // when
+            Assertions.assertThrows(EvaluationBudgetExhaustedException.class, () -> service.evaluateAll(batch));
+
+            // then
+            Assertions.assertTrue(recording.tasks.isEmpty());
+            Assertions.assertEquals(0, service.numberOfEvaluations(EvaluationSource.REAL));
+            Assertions.assertEquals(OptionalLong.of(batch.size() - 1), service.remainingEvaluations());
+        }
+
+        @Test
+        public void evaluatesTheWholeBatchBeyondAFinishIterationBudget() throws Exception {
+            // given
+            useThreads(8);
+            final RecordingFunction recording = new RecordingFunction(true, batch);
+            startRunWithFunction(recording);
+            service.limit(EvaluationSource.REAL, 1, ExhaustionPolicy.FINISH_ITERATION);
+
+            // when
+            service.evaluateAll(batch);
+
+            // then
+            Assertions.assertEquals(batch.size(), service.numberOfEvaluations(EvaluationSource.REAL));
+            Assertions.assertEquals(OptionalLong.empty(), service.remainingEvaluations());
+        }
+
+        @Test
+        public void theThreadsAreStoppedAtTheEndOfTheRun() throws Exception {
+            // given
+            final EvaluationExecutor executor = useThreads(8);
+            startRunWithFunction(new RecordingFunction(true, batch));
+            service.evaluateAll(batch);
+
+            // when
+            final boolean hadThreads = executor.hasThreads();
+            executor.shutdown();
+
+            // then
+            Assertions.assertTrue(hadThreads);
+            Assertions.assertFalse(executor.hasThreads());
         }
     }
 }

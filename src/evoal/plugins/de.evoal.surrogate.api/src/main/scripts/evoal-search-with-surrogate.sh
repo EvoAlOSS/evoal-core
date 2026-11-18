@@ -34,6 +34,10 @@ if [ ${EVOAL_SEED+x} ]; then
   POSITIONAL_ARGUMENTS+=( "-Bcore:seed=$EVOAL_SEED" )
 fi
 
+if [ ${EVOAL_THREADS+x} ]; then
+  POSITIONAL_ARGUMENTS+=( "-Bcore:evaluation-threads=$EVOAL_THREADS" )
+fi
+
 
 
 set -x

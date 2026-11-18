@@ -27,4 +27,10 @@ public class CoreBlackboardEntries implements BlackboardEntries {
      */
     @Commandline(main="", name="core:seed", doc="Seed for all random numbers (a long value). Without a seed, a random seed is chosen and logged.")
     public static final String SEED = "core:seed";
+
+    /**
+     * Number of threads that evaluate candidates in parallel. The results do not depend on it.
+     */
+    @Commandline(main="", name="core:evaluation-threads", doc="Number of threads that evaluate candidates in parallel (default: number of processors). The results do not depend on it.")
+    public static final String EVALUATION_THREADS = "core:evaluation-threads";
 }

@@ -1,13 +1,24 @@
 package de.evoal.optimisation.api.evaluation;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.EnumMap;
+import java.util.IdentityHashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.OptionalLong;
+import java.util.Set;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
+
+import org.eclipse.emf.ecore.EClass;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
 import lombok.extern.slf4j.Slf4j;
 
+import de.evoal.core.api.ecore.misc.ConcurrentEClassAccess;
 import de.evoal.core.api.random.EvaluationTask;
 import de.evoal.core.api.random.RandomService;
 
@@ -43,10 +54,25 @@ import de.evoal.optimisation.api.execution.MetricContributor;
  *   at 0 in every run. The service binds the {@link EvaluationTask} (run and index) around the
  *   call of the optimisation function, so that the function can draw its random numbers
  *   from {@link RandomService#taskRandom(String)}.
+ *
+ * <h2>Parallel evaluation</h2>
+ * {@link #evaluateAll(List)} evaluates a batch of candidates in three parts:
+ * <ol>
+ *   <li><em>reserve</em> (calling thread, in input order): checks the budget for the whole
+ *     batch and assigns the evaluation indices,</li>
+ *   <li><em>compute</em>: calls the optimisation function in the task context of each
+ *     index, on the threads of the {@link EvaluationExecutor} if the function is
+ *     {@linkplain OptimisationFunction#isThreadSafe() thread-safe}, otherwise one after
+ *     another on the calling thread,</li>
+ *   <li><em>complete</em> (calling thread, in index order, after all evaluations have
+ *     ended): counts the evaluations and publishes the events.</li>
+ * </ol>
+ * Therefore, the indices, the counters and the order of the events do not depend on the
+ *   number of threads. The fitness pipeline and the comparator are not part of the service
+ *   and stay on the thread of the algorithm.
  * <p>
  * The counters and limits are reset in every run ({@link ExecutionRecorder#startRun()}).
- *   The service is not thread-safe: the algorithms evaluate their candidates one after
- *   another, so that the counter values do not depend on the thread scheduling.
+ *   The service itself is not thread-safe: only the thread of the algorithm calls it.
  */
 @ApplicationScoped
 @Slf4j
@@ -63,6 +89,23 @@ public class EvaluationService implements MetricContributor {
      * The index of the next evaluation in the current run.
      */
     private long nextIndex;
+
+    /**
+     * The threads that compute the evaluations of a batch. Only used for batches of a
+     *   thread-safe function.
+     */
+    @Inject
+    private EvaluationExecutor executor;
+
+    /**
+     * Whether the classes of the current run have been prepared for parallel evaluations.
+     */
+    private boolean preparedForThreads;
+
+    /**
+     * Whether the current run has reported that its function is evaluated sequentially.
+     */
+    private boolean reportedSequentialEvaluation;
 
     /**
      * Provides the run of the evaluation tasks.
@@ -129,7 +172,7 @@ public class EvaluationService implements MetricContributor {
     }
 
     /**
-     * Evaluates a candidate, counts the evaluation and publishes an
+     * Evaluates a candidate on the calling thread, counts the evaluation and publishes an
      *   {@link IndividualEvaluated} if the evaluation succeeds.
      *
      * @param candidate The candidate (a point of the search space).
@@ -138,19 +181,202 @@ public class EvaluationService implements MetricContributor {
      *   the policy {@link ExhaustionPolicy#CUT_OFF}.
      */
     public TypedEObject evaluate(final TypedEObject candidate) {
+        return evaluateAll(List.of(candidate)).getFirst();
+    }
+
+    /**
+     * Evaluates a batch of candidates, in parallel if the optimisation function is
+     *   thread-safe. All evaluations are counted; for every successful evaluation, an
+     *   {@link IndividualEvaluated} is published in the order of the candidates.
+     * <p>
+     * The batch is evaluated completely or not at all: if a limit with the policy
+     *   {@link ExhaustionPolicy#CUT_OFF} does not allow all evaluations, none is made. Callers
+     *   that want to use the rest of the budget limit the batch to
+     *   {@link #remainingEvaluations()}.
+     *
+     * @param candidates The candidates (points of the search space).
+     * @return The results of the optimisation function, in the order of the candidates.
+     * @throws EvaluationBudgetExhaustedException if the evaluations would exceed a limit with
+     *   the policy {@link ExhaustionPolicy#CUT_OFF}.
+     * @throws RuntimeException the failure of the evaluation with the lowest index, after all
+     *   evaluations have ended. The failures of the other evaluations are suppressed
+     *   exceptions of it.
+     */
+    public List<TypedEObject> evaluateAll(final List<TypedEObject> candidates) {
         requireStartedRun();
 
         final OptimisationFunction currentFunction = currentFunction();
         final EvaluationSource source = EvaluationSource.of(currentFunction);
 
-        requireBudgetLeft(source);
-        counters.merge(source, 1L, Long::sum);
+        final List<EvaluationTask> tasks = reserve(source, candidates.size());
+        final List<Outcome> outcomes = compute(currentFunction, candidates, tasks);
 
-        final EvaluationTask task = new EvaluationTask(randomService.getRun(), nextIndex++);
-        final TypedEObject output = task.call(() -> currentFunction.evaluate(candidate));
-        events.publish(new IndividualEvaluated(candidate, output, source));
+        return complete(source, candidates, outcomes);
+    }
 
-        return output;
+    /**
+     * The number of evaluations of the current optimisation function that the budget still
+     *   allows before {@link #evaluateAll(List)} throws an
+     *   {@link EvaluationBudgetExhaustedException}.
+     *
+     * @return The remaining evaluations, or empty if the source of the current function has no
+     *   limit with the policy {@link ExhaustionPolicy#CUT_OFF}.
+     * @throws IllegalStateException if no run has been started.
+     */
+    public OptionalLong remainingEvaluations() {
+        requireStartedRun();
+
+        final EvaluationSource source = EvaluationSource.of(currentFunction());
+        final Limit limit = limits.get(source);
+        if(limit == null || limit.policy() != ExhaustionPolicy.CUT_OFF) {
+            return OptionalLong.empty();
+        }
+
+        return OptionalLong.of(Math.max(0, limit.maximum() - numberOfEvaluations(source)));
+    }
+
+    /**
+     * Checks the budget for the batch and assigns the evaluation indices.
+     */
+    private List<EvaluationTask> reserve(final EvaluationSource source, final int numberOfCandidates) {
+        requireBudgetFor(source, numberOfCandidates);
+
+        final long run = randomService.getRun();
+        final List<EvaluationTask> tasks = new ArrayList<>(numberOfCandidates);
+        for(int i = 0; i < numberOfCandidates; ++i) {
+            tasks.add(new EvaluationTask(run, nextIndex++));
+        }
+
+        return tasks;
+    }
+
+    /**
+     * Calls the optimisation function for every candidate and waits until all calls have
+     *   ended.
+     */
+    private List<Outcome> compute(final OptimisationFunction currentFunction,
+                                  final List<TypedEObject> candidates,
+                                  final List<EvaluationTask> tasks) {
+        if(candidates.size() <= 1 || !useThreads(currentFunction)) {
+            final List<Outcome> outcomes = new ArrayList<>(candidates.size());
+            for(int i = 0; i < candidates.size(); ++i) {
+                outcomes.add(Outcome.of(tasks.get(i), currentFunction, candidates.get(i)));
+            }
+
+            return outcomes;
+        }
+
+        final List<Outcome> outcomes = new ArrayList<>(candidates.size());
+        int first = 0;
+        if(!preparedForThreads) {
+            // the first evaluation on this thread builds the caches of the classes it uses
+            prepareClassesOf(candidates);
+            outcomes.add(Outcome.of(tasks.getFirst(), currentFunction, candidates.getFirst()));
+            first = 1;
+            preparedForThreads = true;
+        }
+
+        final List<Future<Outcome>> futures = new ArrayList<>(candidates.size() - first);
+        for(int i = first; i < candidates.size(); ++i) {
+            final EvaluationTask task = tasks.get(i);
+            final TypedEObject candidate = candidates.get(i);
+
+            futures.add(executor.submit(() -> Outcome.of(task, currentFunction, candidate)));
+        }
+
+        for(final Future<Outcome> future : futures) {
+            outcomes.add(await(future));
+        }
+
+        return outcomes;
+    }
+
+    /**
+     * @return {@code true} iff the batches of the function are computed on several threads.
+     */
+    private boolean useThreads(final OptimisationFunction currentFunction) {
+        if(executor.threads() <= 1) {
+            return false;
+        }
+
+        if(!currentFunction.isThreadSafe()) {
+            if(!reportedSequentialEvaluation) {
+                log.info("The optimisation function {} is not declared thread-safe, evaluating its candidates one after another.",
+                         currentFunction.getClass().getSimpleName());
+                reportedSequentialEvaluation = true;
+            }
+
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Prepares the classes of the candidates for the use by several threads.
+     */
+    private static void prepareClassesOf(final List<TypedEObject> candidates) {
+        final Set<EClass> classes = Collections.newSetFromMap(new IdentityHashMap<>());
+        for(final TypedEObject candidate : candidates) {
+            final EClass eClass = candidate.eClass();
+
+            if(eClass != null && classes.add(eClass)) {
+                ConcurrentEClassAccess.prepare(eClass);
+            }
+        }
+    }
+
+    /**
+     * Waits for an evaluation. The evaluations catch their failures, so the future only
+     *   fails if the thread is interrupted.
+     */
+    private static Outcome await(final Future<Outcome> future) {
+        try {
+            return future.get();
+        } catch(final InterruptedException e) {
+            Thread.currentThread().interrupt();
+            throw new IllegalStateException("Interrupted while waiting for an evaluation.", e);
+        } catch(final ExecutionException e) {
+            throw new IllegalStateException("An evaluation ended unexpectedly.", e.getCause());
+        }
+    }
+
+    /**
+     * Counts the evaluations and publishes the successful ones in index order.
+     *
+     * @throws RuntimeException the failure with the lowest index, if any.
+     */
+    private List<TypedEObject> complete(final EvaluationSource source,
+                                        final List<TypedEObject> candidates,
+                                        final List<Outcome> outcomes) {
+        counters.merge(source, (long) outcomes.size(), Long::sum);
+
+        Throwable failure = null;
+        final List<TypedEObject> outputs = new ArrayList<>(outcomes.size());
+        for(int i = 0; i < outcomes.size(); ++i) {
+            final Outcome outcome = outcomes.get(i);
+
+            if(outcome.failure() == null) {
+                events.publish(new IndividualEvaluated(candidates.get(i), outcome.output(), source));
+            } else if(failure == null) {
+                failure = outcome.failure();
+            } else {
+                failure.addSuppressed(outcome.failure());
+            }
+            outputs.add(outcome.output());
+        }
+
+        if(failure instanceof RuntimeException exception) {
+            throw exception;
+        }
+        if(failure instanceof Error error) {
+            throw error;
+        }
+        if(failure != null) {
+            throw new IllegalStateException("The evaluation failed.", failure);
+        }
+
+        return outputs;
     }
 
     /**
@@ -203,16 +429,16 @@ public class EvaluationService implements MetricContributor {
 
     /**
      * @throws EvaluationBudgetExhaustedException if the source has a limit with the policy
-     *   {@link ExhaustionPolicy#CUT_OFF} and the limit is reached.
+     *   {@link ExhaustionPolicy#CUT_OFF} that does not allow the evaluations.
      */
-    private void requireBudgetLeft(final EvaluationSource source) {
+    private void requireBudgetFor(final EvaluationSource source, final int numberOfCandidates) {
         final Limit limit = limits.get(source);
         if(limit == null || limit.policy() != ExhaustionPolicy.CUT_OFF) {
             return;
         }
 
         final long numberOfEvaluations = numberOfEvaluations(source);
-        if(numberOfEvaluations >= limit.maximum()) {
+        if(numberOfEvaluations + numberOfCandidates > limit.maximum()) {
             throw new EvaluationBudgetExhaustedException(source, limit.maximum());
         }
     }
@@ -230,6 +456,8 @@ public class EvaluationService implements MetricContributor {
         limits.clear();
         function = null;
         nextIndex = 0;
+        preparedForThreads = false;
+        reportedSequentialEvaluation = false;
 
         for(final EvaluationSource source : EvaluationSource.values()) {
             final MetricDefinition definition = toMetricDefinition(source.getMetricName(),
@@ -265,4 +493,20 @@ public class EvaluationService implements MetricContributor {
      * @param policy What happens if the limit is reached in the middle of an iteration.
      */
     private record Limit(long maximum, ExhaustionPolicy policy) {}
+
+    /**
+     * The result of one evaluation: either the output or the failure.
+     */
+    private record Outcome(TypedEObject output, Throwable failure) {
+        /**
+         * Calls the function in the task context of the evaluation.
+         */
+        static Outcome of(final EvaluationTask task, final OptimisationFunction function, final TypedEObject candidate) {
+            try {
+                return new Outcome(task.call(() -> function.evaluate(candidate)), null);
+            } catch(final RuntimeException | Error e) {
+                return new Outcome(null, e);
+            }
+        }
+    }
 }
