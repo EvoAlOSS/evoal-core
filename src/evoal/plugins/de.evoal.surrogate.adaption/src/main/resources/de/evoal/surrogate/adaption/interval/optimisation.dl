@@ -1,12 +1,12 @@
 import "definitions" from de.evoal.optimisation.core;
 
 module de.evoal.surrogate.adaption.interval.optimisation {
-	/**
-	 * Base type for density-based fitness value handling.
-	 */
-	abstract type adjusted extends 'decorated-fitness-function' {
-	}
-	
-	type 'adjusted-predicted-fitness' extends 'adjusted' {}
-	type 'adjusted-modified-fitness' extends adjusted {}
+    /**
+     * Fitness step that adapts the prediction of an SVR surrogate by the width of its
+     *   prediction interval: {@code 2 · ŷ² / (upper − lower)}. The prediction error data has
+     *   to be calculated during training ('predictive-error'); it exists for the first output
+     *   of the surrogate only. Only objectives with a minimise or maximise goal can be
+     *   adapted, and the step must run before 'scaling'.
+     */
+    type 'prediction-interval' extends 'fitness-step' {}
 }

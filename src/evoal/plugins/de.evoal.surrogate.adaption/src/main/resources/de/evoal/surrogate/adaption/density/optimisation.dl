@@ -1,26 +1,37 @@
 import "definitions" from de.evoal.optimisation.core;
 
 module de.evoal.surrogate.adaption.density.optimisation {
-	/**
-	 * Base type for density-based fitness value handling.
-	 */
-	abstract type density extends 'decorated-fitness-function' {
-	    /**
-	     * Which probability calculation should be used (source-based, target-based, both).
-	     */
-		kind : string;
-	
-		/**
-		 * Exponent for the formula.
-		 */
-		exponent : real;
-	
-		/**
-		 * Exponent for the formula.
-		 */
-		'root-exponent' : real;
-	}
-	
-	type 'kernel-density' extends density {}
-	type 'gaussian-density' extends density {}
+    /**
+     * Base type of the density adaptions: fitness steps that adapt the objectives predicted
+     *   by the surrogate by the probability density {@code p} of the candidate with respect
+     *   to the training data: {@code ŷ · p^'root-exponent' + (1 − p) / p^exponent}. The
+     *   density information has to be calculated during training. Only objectives with a
+     *   minimise or maximise goal can be adapted, and the step must run before 'scaling'.
+     */
+    abstract type density extends 'fitness-step' {
+        /**
+         * Which probability calculation should be used (source-based, target-based, both).
+         */
+        kind : string;
+
+        /**
+         * Exponent of the probability in the penalty term.
+         */
+        exponent : real;
+
+        /**
+         * Exponent of the probability that weights the prediction.
+         */
+        'root-exponent' : real;
+    }
+
+    /**
+     * Density adaption with the kernel density stored with the model.
+     */
+    type 'kernel-density' extends density {}
+
+    /**
+     * Density adaption with the Gaussian density stored with the model.
+     */
+    type 'gaussian-density' extends density {}
 }

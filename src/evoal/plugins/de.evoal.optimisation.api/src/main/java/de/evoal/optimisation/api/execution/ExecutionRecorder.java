@@ -9,12 +9,15 @@ import jakarta.inject.Inject;
 
 import lombok.Getter;
 
+import de.evoal.core.api.reproducibility.ReproducibilityProtocol;
+
 import de.evoal.models.v202704.optimisation.memory.Execution;
 import de.evoal.models.v202704.optimisation.memory.FitnessComponentDefinition;
 import de.evoal.models.v202704.optimisation.memory.Iteration;
 import de.evoal.models.v202704.optimisation.memory.MemoryFactory;
 import de.evoal.models.v202704.optimisation.memory.MetricDefinition;
 import de.evoal.models.v202704.optimisation.memory.MetricScope;
+import de.evoal.models.v202704.optimisation.memory.ReproducibilityNote;
 
 import de.evoal.optimisation.api.fitness.FitnessComponent;
 import de.evoal.optimisation.api.fitness.FitnessLayout;
@@ -33,7 +36,8 @@ import de.evoal.optimisation.api.fitness.Goal;
  *     of the algorithm (e.g., stopping criteria) define all metrics
  *     ({@link #define(MetricDefinition)}). The applications define the components of the
  *     fitness ({@link #defineFitness(FitnessLayout)}).</li>
- *   <li>{@link #beginExecution()} closes the definitions. The applications call it after
+ *   <li>{@link #beginExecution()} closes the definitions and records the notes of the
+ *     {@link ReproducibilityProtocol}. The applications call it after
  *     they created the algorithm and before they run it. From now on, the definitions are
  *     complete and can be written, e.g., to the description of the run. The algorithm
  *     passes every iteration to {@link #recordMetrics(Iteration)}.</li>
@@ -49,6 +53,12 @@ public class ExecutionRecorder {
      */
     @Inject @Any
     private Instance<MetricContributor> contributors;
+
+    /**
+     * The parts of the process whose results may not be reproducible on other platforms.
+     */
+    @Inject
+    private ReproducibilityProtocol reproducibility;
 
     /**
      * The position of the current run in the evaluation setup, {@code null} for a single run.
@@ -74,7 +84,28 @@ public class ExecutionRecorder {
     public void beginExecution() {
         requirePhase(Phase.DEFINITION, "begin the execution");
 
+        recordReproducibilityNotes();
         phase = Phase.EXECUTION;
+    }
+
+    /**
+     * Copies the notes of the {@link ReproducibilityProtocol} into the execution. The
+     *   components report them while they are set up, i.e. before the execution begins.
+     */
+    private void recordReproducibilityNotes() {
+        execution.getReproducibilityNotes().clear();
+        reproducibility.notes()
+                       .stream()
+                       .map(ExecutionRecorder::toNote)
+                       .forEach(execution.getReproducibilityNotes()::add);
+    }
+
+    private static ReproducibilityNote toNote(final de.evoal.core.api.reproducibility.ReproducibilityNote note) {
+        final ReproducibilityNote recorded = MemoryFactory.eINSTANCE.createReproducibilityNote();
+        recorded.setComponent(note.component());
+        recorded.setReason(note.reason());
+
+        return recorded;
     }
 
     /**

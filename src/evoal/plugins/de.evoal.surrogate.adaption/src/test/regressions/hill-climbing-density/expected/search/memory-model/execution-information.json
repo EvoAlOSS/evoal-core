@@ -1,0 +1,63 @@
+{
+  "formatVersion" : "2027.4.0",
+  "problem" : {
+    "name" : "regression",
+    "goals" : [ {
+      "feature" : "y:0",
+      "direction" : "maximise"
+    } ]
+  },
+  "algorithm" : {
+    "type" : "de.evoal.optimisation.local_search.optimisation.local-search"
+  },
+  "searchSpace" : [ {
+    "name" : "x:0",
+    "type" : "real",
+    "scale" : "quotient",
+    "lowerBound" : {
+      "value" : -5.12,
+      "inclusive" : true
+    },
+    "upperBound" : {
+      "value" : 5.12,
+      "inclusive" : true
+    }
+  } ],
+  "optimisationSpace" : [ {
+    "name" : "y:0",
+    "type" : "real",
+    "scale" : "quotient"
+  } ],
+  "fitness" : {
+    "components" : [ {
+      "name" : "y:0",
+      "goal" : "y:0"
+    } ],
+    "steps" : [ {
+      "type" : "de.evoal.surrogate.adaption.density.optimisation.kernel-density",
+      "attributes" : {
+        "kind" : "both",
+        "exponent" : 2.0,
+        "root-exponent" : 1.0
+      }
+    } ]
+  },
+  "metricDefinitions" : [ {
+    "name" : "evaluations.real",
+    "kind" : "counter",
+    "valueType" : "integer",
+    "scope" : "iteration",
+    "description" : "Number of evaluations of the real optimisation function."
+  }, {
+    "name" : "evaluations.surrogate",
+    "kind" : "counter",
+    "valueType" : "integer",
+    "scope" : "iteration",
+    "description" : "Number of predictions of a surrogate model."
+  } ],
+  "setup" : {
+    "evoalVersion" : "${evoal.version}",
+    "seed" : "42",
+    "run" : 0
+  }
+}

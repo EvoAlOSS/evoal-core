@@ -127,13 +127,22 @@ public interface MemoryPackage extends EPackage {
 	int EXECUTION__FITNESS_COMPONENTS = 5;
 
 	/**
+	 * The feature id for the '<em><b>Reproducibility Notes</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION__REPRODUCIBILITY_NOTES = 6;
+
+	/**
 	 * The number of structural features of the '<em>Execution</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_FEATURE_COUNT = 6;
+	int EXECUTION_FEATURE_COUNT = 7;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.models.v202704.optimisation.memory.impl.FitnessComponentDefinitionImpl <em>Fitness Component Definition</em>}' class.
@@ -173,6 +182,43 @@ public interface MemoryPackage extends EPackage {
 	int FITNESS_COMPONENT_DEFINITION_FEATURE_COUNT = 2;
 
 	/**
+	 * The meta object id for the '{@link de.evoal.models.v202704.optimisation.memory.impl.ReproducibilityNoteImpl <em>Reproducibility Note</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.evoal.models.v202704.optimisation.memory.impl.ReproducibilityNoteImpl
+	 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getReproducibilityNote()
+	 * @generated
+	 */
+	int REPRODUCIBILITY_NOTE = 2;
+
+	/**
+	 * The feature id for the '<em><b>Component</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REPRODUCIBILITY_NOTE__COMPONENT = 0;
+
+	/**
+	 * The feature id for the '<em><b>Reason</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REPRODUCIBILITY_NOTE__REASON = 1;
+
+	/**
+	 * The number of structural features of the '<em>Reproducibility Note</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REPRODUCIBILITY_NOTE_FEATURE_COUNT = 2;
+
+	/**
 	 * The meta object id for the '{@link de.evoal.models.v202704.optimisation.memory.impl.StateImpl <em>State</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -180,7 +226,7 @@ public interface MemoryPackage extends EPackage {
 	 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getState()
 	 * @generated
 	 */
-	int STATE = 2;
+	int STATE = 3;
 
 	/**
 	 * The number of structural features of the '<em>State</em>' class.
@@ -199,7 +245,7 @@ public interface MemoryPackage extends EPackage {
 	 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getIteration()
 	 * @generated
 	 */
-	int ITERATION = 3;
+	int ITERATION = 4;
 
 	/**
 	 * The feature id for the '<em><b>Number</b></em>' attribute.
@@ -263,7 +309,7 @@ public interface MemoryPackage extends EPackage {
 	 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getIterationStep()
 	 * @generated
 	 */
-	int ITERATION_STEP = 4;
+	int ITERATION_STEP = 5;
 
 	/**
 	 * The feature id for the '<em><b>Description</b></em>' attribute.
@@ -291,7 +337,7 @@ public interface MemoryPackage extends EPackage {
 	 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getOrderedIterationStep()
 	 * @generated
 	 */
-	int ORDERED_ITERATION_STEP = 5;
+	int ORDERED_ITERATION_STEP = 6;
 
 	/**
 	 * The feature id for the '<em><b>Description</b></em>' attribute.
@@ -328,7 +374,7 @@ public interface MemoryPackage extends EPackage {
 	 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getUnorderedIterationStep()
 	 * @generated
 	 */
-	int UNORDERED_ITERATION_STEP = 6;
+	int UNORDERED_ITERATION_STEP = 7;
 
 	/**
 	 * The feature id for the '<em><b>Description</b></em>' attribute.
@@ -365,7 +411,7 @@ public interface MemoryPackage extends EPackage {
 	 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getRank()
 	 * @generated
 	 */
-	int RANK = 7;
+	int RANK = 8;
 
 	/**
 	 * The feature id for the '<em><b>Number</b></em>' attribute.
@@ -402,7 +448,7 @@ public interface MemoryPackage extends EPackage {
 	 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getIndividual()
 	 * @generated
 	 */
-	int INDIVIDUAL = 8;
+	int INDIVIDUAL = 9;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -466,7 +512,7 @@ public interface MemoryPackage extends EPackage {
 	 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getRelationship()
 	 * @generated
 	 */
-	int RELATIONSHIP = 9;
+	int RELATIONSHIP = 10;
 
 	/**
 	 * The feature id for the '<em><b>Target</b></em>' reference list.
@@ -494,7 +540,7 @@ public interface MemoryPackage extends EPackage {
 	 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getIdentity()
 	 * @generated
 	 */
-	int IDENTITY = 10;
+	int IDENTITY = 11;
 
 	/**
 	 * The feature id for the '<em><b>Target</b></em>' reference list.
@@ -522,7 +568,7 @@ public interface MemoryPackage extends EPackage {
 	 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getMutation()
 	 * @generated
 	 */
-	int MUTATION = 11;
+	int MUTATION = 12;
 
 	/**
 	 * The feature id for the '<em><b>Target</b></em>' reference list.
@@ -550,7 +596,7 @@ public interface MemoryPackage extends EPackage {
 	 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getRecombination()
 	 * @generated
 	 */
-	int RECOMBINATION = 12;
+	int RECOMBINATION = 13;
 
 	/**
 	 * The feature id for the '<em><b>Target</b></em>' reference list.
@@ -587,7 +633,7 @@ public interface MemoryPackage extends EPackage {
 	 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getMetricEntry()
 	 * @generated
 	 */
-	int METRIC_ENTRY = 13;
+	int METRIC_ENTRY = 14;
 
 	/**
 	 * The feature id for the '<em><b>Key</b></em>' attribute.
@@ -624,7 +670,7 @@ public interface MemoryPackage extends EPackage {
 	 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getMetricDefinition()
 	 * @generated
 	 */
-	int METRIC_DEFINITION = 14;
+	int METRIC_DEFINITION = 15;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -688,7 +734,7 @@ public interface MemoryPackage extends EPackage {
 	 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getMetricKind()
 	 * @generated
 	 */
-	int METRIC_KIND = 15;
+	int METRIC_KIND = 16;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.models.v202704.optimisation.memory.MetricValueType <em>Metric Value Type</em>}' enum.
@@ -698,7 +744,7 @@ public interface MemoryPackage extends EPackage {
 	 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getMetricValueType()
 	 * @generated
 	 */
-	int METRIC_VALUE_TYPE = 16;
+	int METRIC_VALUE_TYPE = 17;
 
 	/**
 	 * The meta object id for the '{@link de.evoal.models.v202704.optimisation.memory.MetricScope <em>Metric Scope</em>}' enum.
@@ -708,7 +754,7 @@ public interface MemoryPackage extends EPackage {
 	 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getMetricScope()
 	 * @generated
 	 */
-	int METRIC_SCOPE = 17;
+	int METRIC_SCOPE = 18;
 
 
 	/**
@@ -788,6 +834,17 @@ public interface MemoryPackage extends EPackage {
 	EReference getExecution_FitnessComponents();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link de.evoal.models.v202704.optimisation.memory.Execution#getReproducibilityNotes <em>Reproducibility Notes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Reproducibility Notes</em>'.
+	 * @see de.evoal.models.v202704.optimisation.memory.Execution#getReproducibilityNotes()
+	 * @see #getExecution()
+	 * @generated
+	 */
+	EReference getExecution_ReproducibilityNotes();
+
+	/**
 	 * Returns the meta object for class '{@link de.evoal.models.v202704.optimisation.memory.FitnessComponentDefinition <em>Fitness Component Definition</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -818,6 +875,38 @@ public interface MemoryPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getFitnessComponentDefinition_Objective();
+
+	/**
+	 * Returns the meta object for class '{@link de.evoal.models.v202704.optimisation.memory.ReproducibilityNote <em>Reproducibility Note</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Reproducibility Note</em>'.
+	 * @see de.evoal.models.v202704.optimisation.memory.ReproducibilityNote
+	 * @generated
+	 */
+	EClass getReproducibilityNote();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.evoal.models.v202704.optimisation.memory.ReproducibilityNote#getComponent <em>Component</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Component</em>'.
+	 * @see de.evoal.models.v202704.optimisation.memory.ReproducibilityNote#getComponent()
+	 * @see #getReproducibilityNote()
+	 * @generated
+	 */
+	EAttribute getReproducibilityNote_Component();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.evoal.models.v202704.optimisation.memory.ReproducibilityNote#getReason <em>Reason</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Reason</em>'.
+	 * @see de.evoal.models.v202704.optimisation.memory.ReproducibilityNote#getReason()
+	 * @see #getReproducibilityNote()
+	 * @generated
+	 */
+	EAttribute getReproducibilityNote_Reason();
 
 	/**
 	 * Returns the meta object for class '{@link de.evoal.models.v202704.optimisation.memory.State <em>State</em>}'.
@@ -1326,6 +1415,14 @@ public interface MemoryPackage extends EPackage {
 		EReference EXECUTION__FITNESS_COMPONENTS = eINSTANCE.getExecution_FitnessComponents();
 
 		/**
+		 * The meta object literal for the '<em><b>Reproducibility Notes</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EXECUTION__REPRODUCIBILITY_NOTES = eINSTANCE.getExecution_ReproducibilityNotes();
+
+		/**
 		 * The meta object literal for the '{@link de.evoal.models.v202704.optimisation.memory.impl.FitnessComponentDefinitionImpl <em>Fitness Component Definition</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1350,6 +1447,32 @@ public interface MemoryPackage extends EPackage {
 		 * @generated
 		 */
 		EReference FITNESS_COMPONENT_DEFINITION__OBJECTIVE = eINSTANCE.getFitnessComponentDefinition_Objective();
+
+		/**
+		 * The meta object literal for the '{@link de.evoal.models.v202704.optimisation.memory.impl.ReproducibilityNoteImpl <em>Reproducibility Note</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.evoal.models.v202704.optimisation.memory.impl.ReproducibilityNoteImpl
+		 * @see de.evoal.models.v202704.optimisation.memory.impl.MemoryPackageImpl#getReproducibilityNote()
+		 * @generated
+		 */
+		EClass REPRODUCIBILITY_NOTE = eINSTANCE.getReproducibilityNote();
+
+		/**
+		 * The meta object literal for the '<em><b>Component</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute REPRODUCIBILITY_NOTE__COMPONENT = eINSTANCE.getReproducibilityNote_Component();
+
+		/**
+		 * The meta object literal for the '<em><b>Reason</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute REPRODUCIBILITY_NOTE__REASON = eINSTANCE.getReproducibilityNote_Reason();
 
 		/**
 		 * The meta object literal for the '{@link de.evoal.models.v202704.optimisation.memory.impl.StateImpl <em>State</em>}' class.

@@ -7,5 +7,5 @@ package de.evoal.optimisation.api.fitness;
  * A scalarisation must be the last step of a {@link FitnessPipeline}, and a pipeline has at
  *   most one.
  */
-public interface Scalarisation extends FitnessStep {
+public interface Scalarisation extends ChangesUnits {
 }

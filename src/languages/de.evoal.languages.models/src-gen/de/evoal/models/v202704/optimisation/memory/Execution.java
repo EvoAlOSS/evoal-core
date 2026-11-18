@@ -30,6 +30,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link de.evoal.models.v202704.optimisation.memory.Execution#getMetricDefinitions <em>Metric Definitions</em>}</li>
  *   <li>{@link de.evoal.models.v202704.optimisation.memory.Execution#getMetrics <em>Metrics</em>}</li>
  *   <li>{@link de.evoal.models.v202704.optimisation.memory.Execution#getFitnessComponents <em>Fitness Components</em>}</li>
+ *   <li>{@link de.evoal.models.v202704.optimisation.memory.Execution#getReproducibilityNotes <em>Reproducibility Notes</em>}</li>
  * </ul>
  *
  * @see de.evoal.models.v202704.optimisation.memory.MemoryPackage#getExecution()
@@ -165,5 +166,24 @@ public interface Execution extends EObject {
 	 * @generated
 	 */
 	EList<FitnessComponentDefinition> getFitnessComponents();
+
+	/**
+	 * Returns the value of the '<em><b>Reproducibility Notes</b></em>' containment reference list.
+	 * The list contents are of type {@link de.evoal.models.v202704.optimisation.memory.ReproducibilityNote}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * *
+	 * The parts of the execution whose results may not be reproducible on
+	 *   other platforms, e.g. because they use native numeric libraries. Empty if
+	 *   the execution is fully reproducible with the same seed.
+	 * 
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Reproducibility Notes</em>' containment reference list.
+	 * @see de.evoal.models.v202704.optimisation.memory.MemoryPackage#getExecution_ReproducibilityNotes()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<ReproducibilityNote> getReproducibilityNotes();
 
 } // Execution

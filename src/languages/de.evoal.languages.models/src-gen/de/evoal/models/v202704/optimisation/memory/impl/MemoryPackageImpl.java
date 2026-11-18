@@ -30,6 +30,7 @@ import de.evoal.models.v202704.optimisation.memory.OrderedIterationStep;
 import de.evoal.models.v202704.optimisation.memory.Rank;
 import de.evoal.models.v202704.optimisation.memory.Recombination;
 import de.evoal.models.v202704.optimisation.memory.Relationship;
+import de.evoal.models.v202704.optimisation.memory.ReproducibilityNote;
 import de.evoal.models.v202704.optimisation.memory.State;
 import de.evoal.models.v202704.optimisation.memory.UnorderedIterationStep;
 
@@ -69,6 +70,13 @@ public class MemoryPackageImpl extends EPackageImpl implements MemoryPackage {
 	 * @generated
 	 */
 	private EClass fitnessComponentDefinitionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass reproducibilityNoteEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -335,6 +343,16 @@ public class MemoryPackageImpl extends EPackageImpl implements MemoryPackage {
 	 * @generated
 	 */
 	@Override
+	public EReference getExecution_ReproducibilityNotes() {
+		return (EReference)executionEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getFitnessComponentDefinition() {
 		return fitnessComponentDefinitionEClass;
 	}
@@ -357,6 +375,36 @@ public class MemoryPackageImpl extends EPackageImpl implements MemoryPackage {
 	@Override
 	public EReference getFitnessComponentDefinition_Objective() {
 		return (EReference)fitnessComponentDefinitionEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getReproducibilityNote() {
+		return reproducibilityNoteEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getReproducibilityNote_Component() {
+		return (EAttribute)reproducibilityNoteEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getReproducibilityNote_Reason() {
+		return (EAttribute)reproducibilityNoteEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -795,10 +843,15 @@ public class MemoryPackageImpl extends EPackageImpl implements MemoryPackage {
 		createEReference(executionEClass, EXECUTION__METRIC_DEFINITIONS);
 		createEReference(executionEClass, EXECUTION__METRICS);
 		createEReference(executionEClass, EXECUTION__FITNESS_COMPONENTS);
+		createEReference(executionEClass, EXECUTION__REPRODUCIBILITY_NOTES);
 
 		fitnessComponentDefinitionEClass = createEClass(FITNESS_COMPONENT_DEFINITION);
 		createEAttribute(fitnessComponentDefinitionEClass, FITNESS_COMPONENT_DEFINITION__NAME);
 		createEReference(fitnessComponentDefinitionEClass, FITNESS_COMPONENT_DEFINITION__OBJECTIVE);
+
+		reproducibilityNoteEClass = createEClass(REPRODUCIBILITY_NOTE);
+		createEAttribute(reproducibilityNoteEClass, REPRODUCIBILITY_NOTE__COMPONENT);
+		createEAttribute(reproducibilityNoteEClass, REPRODUCIBILITY_NOTE__REASON);
 
 		stateEClass = createEClass(STATE);
 
@@ -902,10 +955,15 @@ public class MemoryPackageImpl extends EPackageImpl implements MemoryPackage {
 		initEReference(getExecution_MetricDefinitions(), this.getMetricDefinition(), null, "metricDefinitions", null, 0, -1, Execution.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getExecution_Metrics(), this.getMetricEntry(), null, "metrics", null, 0, -1, Execution.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getExecution_FitnessComponents(), this.getFitnessComponentDefinition(), null, "fitnessComponents", null, 0, -1, Execution.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getExecution_ReproducibilityNotes(), this.getReproducibilityNote(), null, "reproducibilityNotes", null, 0, -1, Execution.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(fitnessComponentDefinitionEClass, FitnessComponentDefinition.class, "FitnessComponentDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getFitnessComponentDefinition_Name(), ecorePackage.getEString(), "name", null, 1, 1, FitnessComponentDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getFitnessComponentDefinition_Objective(), ecorePackage.getEStructuralFeature(), null, "objective", null, 0, 1, FitnessComponentDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(reproducibilityNoteEClass, ReproducibilityNote.class, "ReproducibilityNote", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getReproducibilityNote_Component(), ecorePackage.getEString(), "component", null, 1, 1, ReproducibilityNote.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getReproducibilityNote_Reason(), ecorePackage.getEString(), "reason", null, 1, 1, ReproducibilityNote.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(stateEClass, State.class, "State", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

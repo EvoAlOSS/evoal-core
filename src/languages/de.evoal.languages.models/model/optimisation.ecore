@@ -73,6 +73,12 @@
           <details key="documentation" value="*&#xA;The components of the fitness, in the order of the values of&#xA;  {@link Individual#getFitness()}. The same for all individuals of the execution.&#xA;"/>
         </eAnnotations>
       </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="reproducibilityNotes"
+          upperBound="-1" eType="#//memory/ReproducibilityNote" containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="*&#xA;The parts of the execution whose results may not be reproducible on&#xA;  other platforms, e.g. because they use native numeric libraries. Empty if&#xA;  the execution is fully reproducible with the same seed.&#xA;"/>
+        </eAnnotations>
+      </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="FitnessComponentDefinition">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -87,6 +93,23 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="objective" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EStructuralFeature">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
           <details key="documentation" value="*&#xA;The objective of the goal the component was derived from, {@code null}&#xA;  if the component belongs to no goal (e.g., a constraint violation).&#xA;&#xA;@constraint component.objective == null || component.objective.eContainingClass() == execution.outputSpace&#xA;"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ReproducibilityNote">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="*&#xA;A part of an execution whose results may not be reproducible on other&#xA;  platforms.&#xA;"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="component" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="*&#xA;The name of the component, e.g. a fitness step.&#xA;"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="reason" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="*&#xA;Why the results of the component may differ between platforms.&#xA;"/>
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>

@@ -7,6 +7,7 @@ import de.evoal.models.v202704.optimisation.memory.Execution;
 import de.evoal.models.v202704.optimisation.memory.FitnessComponentDefinition;
 import de.evoal.models.v202704.optimisation.memory.MemoryPackage;
 import de.evoal.models.v202704.optimisation.memory.MetricDefinition;
+import de.evoal.models.v202704.optimisation.memory.ReproducibilityNote;
 import de.evoal.models.v202704.optimisation.memory.State;
 
 import java.util.Collection;
@@ -42,6 +43,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link de.evoal.models.v202704.optimisation.memory.impl.ExecutionImpl#getMetricDefinitions <em>Metric Definitions</em>}</li>
  *   <li>{@link de.evoal.models.v202704.optimisation.memory.impl.ExecutionImpl#getMetrics <em>Metrics</em>}</li>
  *   <li>{@link de.evoal.models.v202704.optimisation.memory.impl.ExecutionImpl#getFitnessComponents <em>Fitness Components</em>}</li>
+ *   <li>{@link de.evoal.models.v202704.optimisation.memory.impl.ExecutionImpl#getReproducibilityNotes <em>Reproducibility Notes</em>}</li>
  * </ul>
  *
  * @generated
@@ -106,6 +108,16 @@ public class ExecutionImpl extends MinimalEObjectImpl.Container implements Execu
 	 * @ordered
 	 */
 	protected EList<FitnessComponentDefinition> fitnessComponents;
+
+	/**
+	 * The cached value of the '{@link #getReproducibilityNotes() <em>Reproducibility Notes</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getReproducibilityNotes()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ReproducibilityNote> reproducibilityNotes;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -264,6 +276,19 @@ public class ExecutionImpl extends MinimalEObjectImpl.Container implements Execu
 	 * @generated
 	 */
 	@Override
+	public EList<ReproducibilityNote> getReproducibilityNotes() {
+		if (reproducibilityNotes == null) {
+			reproducibilityNotes = new EObjectContainmentEList<ReproducibilityNote>(ReproducibilityNote.class, this, MemoryPackage.EXECUTION__REPRODUCIBILITY_NOTES);
+		}
+		return reproducibilityNotes;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case MemoryPackage.EXECUTION__STATES:
@@ -274,6 +299,8 @@ public class ExecutionImpl extends MinimalEObjectImpl.Container implements Execu
 				return ((InternalEList<?>)getMetrics()).basicRemove(otherEnd, msgs);
 			case MemoryPackage.EXECUTION__FITNESS_COMPONENTS:
 				return ((InternalEList<?>)getFitnessComponents()).basicRemove(otherEnd, msgs);
+			case MemoryPackage.EXECUTION__REPRODUCIBILITY_NOTES:
+				return ((InternalEList<?>)getReproducibilityNotes()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -301,6 +328,8 @@ public class ExecutionImpl extends MinimalEObjectImpl.Container implements Execu
 				else return getMetrics().map();
 			case MemoryPackage.EXECUTION__FITNESS_COMPONENTS:
 				return getFitnessComponents();
+			case MemoryPackage.EXECUTION__REPRODUCIBILITY_NOTES:
+				return getReproducibilityNotes();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -335,6 +364,10 @@ public class ExecutionImpl extends MinimalEObjectImpl.Container implements Execu
 				getFitnessComponents().clear();
 				getFitnessComponents().addAll((Collection<? extends FitnessComponentDefinition>)newValue);
 				return;
+			case MemoryPackage.EXECUTION__REPRODUCIBILITY_NOTES:
+				getReproducibilityNotes().clear();
+				getReproducibilityNotes().addAll((Collection<? extends ReproducibilityNote>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -365,6 +398,9 @@ public class ExecutionImpl extends MinimalEObjectImpl.Container implements Execu
 			case MemoryPackage.EXECUTION__FITNESS_COMPONENTS:
 				getFitnessComponents().clear();
 				return;
+			case MemoryPackage.EXECUTION__REPRODUCIBILITY_NOTES:
+				getReproducibilityNotes().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -389,6 +425,8 @@ public class ExecutionImpl extends MinimalEObjectImpl.Container implements Execu
 				return metrics != null && !metrics.isEmpty();
 			case MemoryPackage.EXECUTION__FITNESS_COMPONENTS:
 				return fitnessComponents != null && !fitnessComponents.isEmpty();
+			case MemoryPackage.EXECUTION__REPRODUCIBILITY_NOTES:
+				return reproducibilityNotes != null && !reproducibilityNotes.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

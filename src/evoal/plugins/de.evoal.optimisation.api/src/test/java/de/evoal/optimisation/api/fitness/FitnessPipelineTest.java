@@ -297,6 +297,68 @@ public class FitnessPipelineTest {
         }
     }
 
+    /**
+     * A step that requires the units of the objectives and keeps the fitness.
+     */
+    private static final class ObjectiveUnitsStep implements RequiresObjectiveUnits {
+        @Override
+        public Fitness apply(final FitnessContext context, final Fitness current) {
+            return current;
+        }
+    }
+
+    @Nested
+    @DisplayName("given a step that requires the units of the objectives")
+    class ObjectiveUnits {
+        private final Space space = space(EcorePackage.Literals.EDOUBLE, "a");
+
+        private final EStructuralFeature a = space.getEClass().getEStructuralFeature("a");
+
+        private final Goals goals = new Goals(List.of(new Goal.Minimise(a)));
+
+        @Test
+        public void itMayRunBeforeTheScaling() {
+            // given
+            final List<FitnessStep> steps = List.of(new ObjectiveUnitsStep(),
+                                                    new ScalingStep(Map.of("a", 2.0)),
+                                                    new WeightedSumStep(Map.of(), true));
+
+            // when, then
+            Assertions.assertDoesNotThrow(() -> new FitnessPipeline(goals, steps));
+        }
+
+        @Test
+        public void itIsRejectedAfterTheScaling() {
+            // given
+            final List<FitnessStep> steps = List.of(new ScalingStep(Map.of("a", 2.0)), new ObjectiveUnitsStep());
+
+            // when, then
+            Assertions.assertThrows(IllegalArgumentException.class, () -> new FitnessPipeline(goals, steps));
+        }
+
+        @Test
+        public void itIsRejectedAfterAScalarisation() {
+            // given
+            final List<FitnessStep> steps = List.of(new WeightedSumStep(Map.of(), true), new ObjectiveUnitsStep());
+
+            // when, then
+            Assertions.assertThrows(IllegalArgumentException.class, () -> new FitnessPipeline(goals, steps));
+        }
+
+        @Test
+        public void aCanonicalValueIsConvertedBackIntoTheObjective() {
+            Assertions.assertEquals(2.5, DirectionStep.toObjective(new Goal.Minimise(a), 2.5));
+            Assertions.assertEquals(2.5, DirectionStep.toObjective(new Goal.Maximise(a), -2.5));
+        }
+
+        @Test
+        public void theCanonicalValueOfATargetCannotBeConvertedBack() {
+            final Goal.Target target = new Goal.Target(a, 1.0, new AbsoluteDistance());
+
+            Assertions.assertThrows(IllegalArgumentException.class, () -> DirectionStep.toObjective(target, 0.5));
+        }
+    }
+
     @Nested
     @DisplayName("given a pipeline without configured steps")
     class DirectionOnly {

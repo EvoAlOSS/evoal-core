@@ -16,6 +16,8 @@ import de.evoal.surrogate.smile.api.KernelBasedSVRFunction;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.math3.util.Pair;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import de.evoal.core.api.reproducibility.ReproducibilityProtocol;
+import jakarta.inject.Inject;
 import smile.tensor.DenseMatrix;
 import smile.tensor.ScalarType;
 
@@ -26,6 +28,9 @@ import java.util.stream.IntStream;
 @Dependent
 @Named("de.evoal.surrogate.adaption.interval.ml.predictive-error")
 public class PredictiveErrorCalculator extends SurrogateInformationCalculator {
+    @Inject
+    private ReproducibilityProtocol reproducibility;
+
     /**
      * Points for training.
      */
@@ -40,6 +45,7 @@ public class PredictiveErrorCalculator extends SurrogateInformationCalculator {
         final ModelFunction function = functionData.function();
 
         if(function instanceof KernelBasedSVRFunction svrFunction) {
+            reproducibility.reportNativeLibraries("predictive-error");
             calculateError(svrFunction);
         } else {
             log.warn("Cannot calculate predictive error for non-SVR function");

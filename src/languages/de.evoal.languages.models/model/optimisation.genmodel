@@ -48,11 +48,16 @@
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference optimisation.ecore#//memory/Execution/metricDefinitions"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference optimisation.ecore#//memory/Execution/metrics"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference optimisation.ecore#//memory/Execution/fitnessComponents"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference optimisation.ecore#//memory/Execution/reproducibilityNotes"/>
       </genClasses>
       <genClasses ecoreClass="optimisation.ecore#//memory/FitnessComponentDefinition">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute optimisation.ecore#//memory/FitnessComponentDefinition/name"/>
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference optimisation.ecore#//memory/FitnessComponentDefinition/objective"/>
+      </genClasses>
+      <genClasses ecoreClass="optimisation.ecore#//memory/ReproducibilityNote">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute optimisation.ecore#//memory/ReproducibilityNote/component"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute optimisation.ecore#//memory/ReproducibilityNote/reason"/>
       </genClasses>
       <genClasses image="false" ecoreClass="optimisation.ecore#//memory/State"/>
       <genClasses ecoreClass="optimisation.ecore#//memory/Iteration">

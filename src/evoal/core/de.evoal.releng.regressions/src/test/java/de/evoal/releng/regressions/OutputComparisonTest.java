@@ -189,4 +189,60 @@ public class OutputComparisonTest {
             Assertions.assertEquals(List.of(), differences);
         }
     }
+
+    @Nested
+    @DisplayName("given a relative tolerance for numbers")
+    class Tolerance {
+        private static final String EXPECTED = "\"fitness\" : [ 4.938389903142828E-16 ],";
+
+        private static final String ACTUAL = "\"fitness\" : [ 4.938389903142827E-16 ],";
+
+        @Test
+        public void withoutToleranceTheLinesDiffer() {
+            Assertions.assertFalse(OutputComparison.linesMatch(EXPECTED, ACTUAL, 0.0));
+        }
+
+        @Test
+        public void numbersWithinTheToleranceMatch() {
+            Assertions.assertTrue(OutputComparison.linesMatch(EXPECTED, ACTUAL, 1e-12));
+        }
+
+        @Test
+        public void numbersBeyondTheToleranceDiffer() {
+            Assertions.assertFalse(OutputComparison.linesMatch("1.0;2.0", "1.0;2.1", 1e-12));
+        }
+
+        @Test
+        public void theToleranceIsRelative() {
+            Assertions.assertTrue(OutputComparison.linesMatch("1000000.0", "1000000.5", 1e-6));
+            Assertions.assertFalse(OutputComparison.linesMatch("1.0", "1.5", 1e-6));
+        }
+
+        @Test
+        public void zeroOnlyMatchesZero() {
+            Assertions.assertFalse(OutputComparison.linesMatch("0.0", "1.0E-300", 1e-12));
+        }
+
+        @Test
+        public void otherTextMustBeEqual() {
+            Assertions.assertFalse(OutputComparison.linesMatch("x:0;1.0", "x:1;1.0", 1e-12));
+            Assertions.assertFalse(OutputComparison.linesMatch("a;1.0", "b;1.0", 1e-12));
+        }
+
+        @Test
+        public void theToleranceAppliesToFiles() throws IOException {
+            // given
+            write(actualFolder, CANDIDATES, "individual-id;x:0", "0;1.0", "1;2.0");
+            write(expectedFolder, "search/memory-model/iteration-1.json", EXPECTED);
+            write(actualFolder, "search/memory-model/iteration-1.json", ACTUAL);
+
+            // when
+            final List<String> exact = OutputComparison.differences(expectedFolder, actualFolder);
+            final List<String> tolerant = OutputComparison.differences(expectedFolder, actualFolder, 1e-12);
+
+            // then
+            Assertions.assertEquals(1, exact.size());
+            Assertions.assertEquals(List.of(), tolerant);
+        }
+    }
 }

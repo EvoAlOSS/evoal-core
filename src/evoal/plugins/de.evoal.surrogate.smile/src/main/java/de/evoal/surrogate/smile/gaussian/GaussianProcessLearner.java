@@ -1,6 +1,7 @@
 package de.evoal.surrogate.smile.gaussian;
 
 import de.evoal.models.core.ecore.TypedEObject;
+import de.evoal.core.api.reproducibility.ReproducibilityProtocol;
 import de.evoal.core.api.utils.AttributeHelper;
 import de.evoal.models.core.exceptions.InitializationException;
 import de.evoal.core.api.utils.Requirements;
@@ -28,6 +29,9 @@ import java.util.function.Function;
 @Named("de.evoal.surrogate.smile.ml.gaussian-process-learner")
 @Slf4j
 public class GaussianProcessLearner extends AbstractModelLearner {
+    @Inject
+    private ReproducibilityProtocol reproducibility;
+
     public static final String MLL_ITERATIONS_PARAMETER = "iterations";
     public static final String MLL_KERNEL_PARAMETER = "kernel";
     public static final String MLL_NOISE_PARAMETER = "noise";
@@ -129,6 +133,7 @@ public class GaussianProcessLearner extends AbstractModelLearner {
         final Map<String, Object> kernelMap = (Map<String, Object>)configuration.get("kernel");
         final MercerKernel<double[]> mercerKernel = KernelFactory.toKernel(kernelMap);
 
+        reproducibility.reportNativeLibraries("gaussian-process");
         GaussianProcessRegression.Options options = new GaussianProcessRegression.Options(noise, normalize, tolerance, iterations);
 
         try {

@@ -44,6 +44,7 @@ import de.evoal.models.v202704.optimisation.memory.MetricDefinition;
 import de.evoal.models.v202704.optimisation.memory.Mutation;
 import de.evoal.models.v202704.optimisation.memory.OrderedIterationStep;
 import de.evoal.models.v202704.optimisation.memory.Rank;
+import de.evoal.models.v202704.optimisation.memory.ReproducibilityNote;
 import de.evoal.models.v202704.optimisation.memory.Recombination;
 import de.evoal.models.v202704.optimisation.memory.Relationship;
 import de.evoal.models.v202704.optimisation.memory.UnorderedIterationStep;
@@ -349,6 +350,7 @@ public class MemoryModelJson {
                  .forEach(metricDefinitions::add);
 
         final ObjectNode setupNode = toSetup(setup);
+        addReproducibility(setupNode, execution.getReproducibilityNotes());
         document.set("setup", setupNode);
 
         return document;
@@ -681,6 +683,23 @@ public class MemoryModelJson {
      *   integers that every JSON reader represents exactly), run and, in the evaluation setup,
      *   repetition and target.
      */
+    /**
+     * Adds the components whose results may not be reproducible on other platforms, if there
+     *   are any.
+     */
+    private static void addReproducibility(final ObjectNode setupNode, final List<ReproducibilityNote> notes) {
+        if(notes.isEmpty()) {
+            return;
+        }
+
+        final ArrayNode reproducibility = setupNode.putArray("reproducibility");
+        for(final ReproducibilityNote note : notes) {
+            final ObjectNode noteNode = reproducibility.addObject();
+            noteNode.put("component", note.getComponent());
+            noteNode.put("reason", note.getReason());
+        }
+    }
+
     private static ObjectNode toSetup(final RunSetup setup) {
         final ObjectNode setupNode = NODES.objectNode();
         setupNode.put("evoalVersion", setup.evoalVersion());

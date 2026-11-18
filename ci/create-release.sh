@@ -122,6 +122,7 @@ for NAME in $RELEASE_PLUGINS; do
     fi
 done
 
-# the references of the examples (expected/) are not part of the release
+# the references of the examples (expected/) and their regression settings are not part of the release
 rm -rf "$EVOAL_HOME"/examples/*/expected
+rm -f "$EVOAL_HOME"/examples/*/regression.properties
 

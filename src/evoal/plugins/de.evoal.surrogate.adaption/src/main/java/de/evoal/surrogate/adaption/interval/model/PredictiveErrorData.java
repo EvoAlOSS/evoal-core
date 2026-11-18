@@ -58,7 +58,14 @@ public final class PredictiveErrorData {
     }
 
     public PredictiveErrorData(final ModelReader reader) {
-       final Map<String, Object> parameterMap = toMap(reader.getOutputFeatureInformation(reader.getOutput().iterator().next()));
+        final EStructuralFeature firstOutput = reader.getOutput().iterator().next();
+        final Collection<Parameter> information = reader.getOutputFeatureInformation(firstOutput);
+        final Map<String, Object> parameterMap = information == null ? Map.of() : toMap(information);
+        if(!parameterMap.containsKey(EPSILON)) {
+            throw new IllegalStateException("The surrogate model contains no prediction error data. Calculate it during"
+                                            + " training with 'predictive-error'.");
+        }
+
 
         parameterMap.keySet().forEach(s -> log.info(" attached parameter: {}", s));
 

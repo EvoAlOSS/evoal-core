@@ -22,9 +22,10 @@ module de.evoal.surrogate.adaption {
     opens de.evoal.surrogate.adaption.density;
     opens de.evoal.surrogate.adaption.interval;
 
-    opens de.evoal.surrogate.adaption.density.ea.fitness to weld.core.impl;
+    opens de.evoal.surrogate.adaption to weld.core.impl;
+    opens de.evoal.surrogate.adaption.density.fitness to weld.core.impl;
     opens de.evoal.surrogate.adaption.density.ea.surrogate.gof to weld.core.impl;
-    opens de.evoal.surrogate.adaption.interval.ea.fitness to weld.core.impl;
+    opens de.evoal.surrogate.adaption.interval.fitness to weld.core.impl;
     opens de.evoal.surrogate.adaption.interval.ea.surrogate.gof to weld.core.impl;
 }
 

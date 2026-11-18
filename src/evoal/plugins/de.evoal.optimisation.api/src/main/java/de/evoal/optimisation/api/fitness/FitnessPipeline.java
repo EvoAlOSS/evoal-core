@@ -41,10 +41,13 @@ public final class FitnessPipeline {
      * @param goals The goals of the problem.
      * @param configuredSteps The steps configured in {@code 'fitness-pipeline'}, in their
      *   order; they run after the direction step.
-     * @throws IllegalArgumentException if a {@link Scalarisation} is not the last step.
+     * @throws IllegalArgumentException if a {@link Scalarisation} is not the last step, or a
+     *   step that {@link RequiresObjectiveUnits requires the units of the objectives} runs
+     *   after one that {@link ChangesUnits changes them}.
      */
     public FitnessPipeline(final Goals goals, final List<FitnessStep> configuredSteps) {
         requireScalarisationIsLast(configuredSteps);
+        requireObjectiveUnits(configuredSteps);
 
         this.goals = goals;
         this.initialLayout = FitnessLayout.of(goals);
@@ -122,6 +125,28 @@ public final class FitnessPipeline {
         if(scalarisationBeforeLast) {
             throw new IllegalArgumentException("A scalarisation must be the last step of 'fitness-pipeline', and a"
                                                + " pipeline has at most one: " + configuredSteps + ".");
+        }
+    }
+
+    /**
+     * Checks that no step that requires the units of the objectives runs after a step that
+     *   changes them. There is no check in the language yet.
+     */
+    private static void requireObjectiveUnits(final List<FitnessStep> configuredSteps) {
+        final int firstUnitChange = IntStream.range(0, configuredSteps.size())
+                                             .filter(index -> configuredSteps.get(index) instanceof ChangesUnits)
+                                             .findFirst()
+                                             .orElse(configuredSteps.size());
+        final List<FitnessStep> misplaced = configuredSteps.subList(firstUnitChange, configuredSteps.size())
+                                                           .stream()
+                                                           .filter(RequiresObjectiveUnits.class::isInstance)
+                                                           .toList();
+
+        if(!misplaced.isEmpty()) {
+            final FitnessStep unitChange = configuredSteps.get(firstUnitChange);
+
+            throw new IllegalArgumentException("The steps " + misplaced + " work in the units of the objectives and must"
+                                               + " run before '" + unitChange + "', which changes the units.");
         }
     }
 

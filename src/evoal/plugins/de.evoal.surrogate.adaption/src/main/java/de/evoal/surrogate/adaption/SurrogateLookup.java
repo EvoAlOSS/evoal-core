@@ -8,8 +8,8 @@ import de.evoal.surrogate.api.io.ModelReader;
 import lombok.NonNull;
 
 /**
- * Finds the surrogate model that is wrapped by a chain of fitness decorators, e.g.,
- *   {@code kernel-density -> adjusted-predicted-fitness -> surrogate}.
+ * Finds the surrogate model behind an optimisation function: the function itself or a
+ *   function wrapped by decorators.
  */
 public final class SurrogateLookup {
     private SurrogateLookup() {

@@ -41,6 +41,15 @@ public interface MemoryFactory extends EFactory {
 	FitnessComponentDefinition createFitnessComponentDefinition();
 
 	/**
+	 * Returns a new object of class '<em>Reproducibility Note</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Reproducibility Note</em>'.
+	 * @generated
+	 */
+	ReproducibilityNote createReproducibilityNote();
+
+	/**
 	 * Returns a new object of class '<em>Iteration</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

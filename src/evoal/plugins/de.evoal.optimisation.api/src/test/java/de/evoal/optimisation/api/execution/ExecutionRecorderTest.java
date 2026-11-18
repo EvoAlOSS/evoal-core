@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import org.mockito.Mockito;
 
+import de.evoal.core.api.reproducibility.ReproducibilityProtocol;
 import de.evoal.models.v202704.optimisation.memory.Execution;
 import de.evoal.models.v202704.optimisation.memory.FitnessComponentDefinition;
 import de.evoal.models.v202704.optimisation.memory.Iteration;
@@ -24,6 +25,7 @@ import de.evoal.models.v202704.optimisation.memory.MetricDefinition;
 import de.evoal.models.v202704.optimisation.memory.MetricKind;
 import de.evoal.models.v202704.optimisation.memory.MetricScope;
 import de.evoal.models.v202704.optimisation.memory.MetricValueType;
+import de.evoal.models.v202704.optimisation.memory.ReproducibilityNote;
 
 import de.evoal.optimisation.api.fitness.FitnessComponent;
 import de.evoal.optimisation.api.fitness.FitnessLayout;
@@ -33,6 +35,8 @@ public class ExecutionRecorderTest {
     private final FakeContributor contributor = new FakeContributor();
 
     private final ExecutionRecorder recorder = new ExecutionRecorder();
+
+    private final ReproducibilityProtocol protocol = new ReproducibilityProtocol();
 
     private static MetricDefinition definition(final String name, final MetricScope scope) {
         final MetricDefinition definition = MemoryFactory.eINSTANCE.createMetricDefinition();
@@ -56,6 +60,10 @@ public class ExecutionRecorderTest {
         final Field field = ExecutionRecorder.class.getDeclaredField("contributors");
         field.setAccessible(true);
         field.set(recorder, contributors);
+
+        final Field protocolField = ExecutionRecorder.class.getDeclaredField("reproducibility");
+        protocolField.setAccessible(true);
+        protocolField.set(recorder, protocol);
     }
 
     /**
@@ -202,6 +210,38 @@ public class ExecutionRecorderTest {
 
             // then
             Assertions.assertTrue(recorder.getExecution().getFitnessComponents().isEmpty());
+        }
+    }
+
+    @Nested
+    @DisplayName("given components that reported reproducibility notes")
+    class ReproducibilityNotes {
+        @Test
+        public void theNotesAreRecordedWhenTheExecutionBegins() {
+            // given
+            recorder.startRun();
+            protocol.reportNativeLibraries("prediction-interval");
+
+            // when
+            recorder.beginExecution();
+
+            // then
+            final List<String> components = recorder.getExecution()
+                                                    .getReproducibilityNotes()
+                                                    .stream()
+                                                    .map(ReproducibilityNote::getComponent)
+                                                    .toList();
+            Assertions.assertEquals(List.of("prediction-interval"), components);
+        }
+
+        @Test
+        public void withoutNotesNothingIsRecorded() {
+            // when
+            recorder.startRun();
+            recorder.beginExecution();
+
+            // then
+            Assertions.assertTrue(recorder.getExecution().getReproducibilityNotes().isEmpty());
         }
     }
 

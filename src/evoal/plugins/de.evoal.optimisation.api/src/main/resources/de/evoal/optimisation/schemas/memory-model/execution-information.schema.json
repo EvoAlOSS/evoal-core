@@ -118,6 +118,28 @@
           "description": "Index of the target point; only in the evaluation setup with a target file.",
           "type": "integer",
           "minimum": 0
+        },
+        "reproducibility": {
+          "description": "The components whose results may not be reproducible on other platforms, even with the same seed, e.g. because they use native numeric libraries. Missing if the run is fully reproducible.",
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "properties": {
+              "component": {
+                "description": "Name of the component, e.g. a fitness step.",
+                "type": "string",
+                "minLength": 1
+              },
+              "reason": {
+                "description": "Why the results of the component may differ between platforms.",
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": ["component", "reason"],
+            "additionalProperties": false
+          }
         }
       },
       "required": ["evoalVersion", "seed", "run"],

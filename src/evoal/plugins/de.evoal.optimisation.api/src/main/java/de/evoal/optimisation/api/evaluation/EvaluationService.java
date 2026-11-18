@@ -58,8 +58,8 @@ public class EvaluationService implements MetricContributor {
     private RunEventDispatcher events;
 
     /**
-     * The optimisation function of the current run. It is created on the first evaluation of
-     *   a run, so that applications whose algorithms do not use the service do not create it.
+     * The optimisation function of the current run. It is created on first use in a run, so
+     *   that applications whose algorithms do not use the service do not create it.
      */
     private OptimisationFunction function;
 
@@ -80,6 +80,20 @@ public class EvaluationService implements MetricContributor {
 
             iteration.getMetrics().put(source.getMetricName(), numberOfEvaluations);
         }
+    }
+
+    /**
+     * The optimisation function of the current run, e.g. for fitness steps that need the
+     *   surrogate model the candidates are evaluated with. It is created on the first call
+     *   in a run and shared with the evaluations.
+     *
+     * @return The optimisation function of the current run.
+     * @throws IllegalStateException if no run has been started.
+     */
+    public OptimisationFunction optimisationFunction() {
+        requireStartedRun();
+
+        return currentFunction();
     }
 
     /**

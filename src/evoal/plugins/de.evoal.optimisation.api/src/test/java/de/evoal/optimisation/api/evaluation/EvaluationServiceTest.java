@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentMatchers;
 import org.mockito.Mockito;
 
+import de.evoal.core.api.reproducibility.ReproducibilityProtocol;
 import de.evoal.models.core.ecore.TypedEObject;
 import de.evoal.models.v202704.optimisation.execution.OptimisationFunction;
 import de.evoal.models.v202704.optimisation.memory.Execution;
@@ -77,6 +78,10 @@ public class EvaluationServiceTest {
         final Field contributorsField = ExecutionRecorder.class.getDeclaredField("contributors");
         contributorsField.setAccessible(true);
         contributorsField.set(recorder, contributors);
+
+        final Field protocolField = ExecutionRecorder.class.getDeclaredField("reproducibility");
+        protocolField.setAccessible(true);
+        protocolField.set(recorder, new ReproducibilityProtocol());
     }
 
     /**

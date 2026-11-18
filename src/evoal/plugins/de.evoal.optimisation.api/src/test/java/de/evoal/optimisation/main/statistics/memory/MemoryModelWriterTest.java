@@ -25,6 +25,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 import org.mockito.Mockito;
 
+import de.evoal.core.api.reproducibility.ReproducibilityProtocol;
 import de.evoal.core.api.dynamic.EAnnotationHelper;
 import de.evoal.core.api.languages.AttributeEvaluator;
 import de.evoal.core.api.utils.AttributeHelper;
@@ -86,6 +87,7 @@ public class MemoryModelWriterTest {
         @SuppressWarnings("unchecked")
         final Instance<MetricContributor> noContributors = Mockito.mock(Instance.class);
         inject(recorder, "contributors", noContributors);
+        inject(recorder, "reproducibility", new ReproducibilityProtocol());
     }
 
     private static void inject(final Object target, final String name, final Object value) throws Exception {

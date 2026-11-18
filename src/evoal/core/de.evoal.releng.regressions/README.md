@@ -25,6 +25,24 @@ A regression whose folder contains `targets.csv` runs as an evaluation with
 every feature of the search and the optimisation space; goals
 `optimise ... towards target` take their target from it.
 
+## Tolerance
+
+The comparison is exact. A regression or example whose results depend on the platform,
+e.g. because it uses native numeric libraries, can set a relative tolerance for numbers in
+the optional file `regression.properties` in its folder, with the reason as a comment:
+
+```properties
+# The prediction interval multiplies matrices with native BLAS (OpenBLAS), whose
+# results differ in the last digit between platforms.
+tolerance = 1e-12
+```
+
+Two different lines then still match if they differ only in numbers and every pair of
+numbers `a`, `b` satisfies `|a - b| <= tolerance * max(|a|, |b|)`. Without the file the
+tolerance is 0. The repeated runs of `-Devoal.regressions.repetitions` are always compared
+exactly, since they run on the same platform. `ci/create-release.sh` does not copy the file
+into the release.
+
 ## Examples
 
 The examples in `src/evoal/plugins/<plugin>/src/main/examples/<name>` are

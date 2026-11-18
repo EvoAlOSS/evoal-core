@@ -95,7 +95,8 @@ public class RegressionIT {
         Assertions.assertTrue(hasReferences, "The regression " + regression + " has no references in "
                 + expectedFolder + ". Create them with -Devoal.regressions.update=true.");
 
-        final List<String> differences = OutputComparison.differences(expectedFolder, outputFolder);
+        final double tolerance = regression.tolerance();
+        final List<String> differences = OutputComparison.differences(expectedFolder, outputFolder, tolerance);
         Assertions.assertTrue(differences.isEmpty(), () -> String.join("\n", differences));
     }
 

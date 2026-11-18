@@ -79,6 +79,10 @@ public class MemoryAdapterFactory extends AdapterFactoryImpl {
 				return createFitnessComponentDefinitionAdapter();
 			}
 			@Override
+			public Adapter caseReproducibilityNote(ReproducibilityNote object) {
+				return createReproducibilityNoteAdapter();
+			}
+			@Override
 			public Adapter caseState(State object) {
 				return createStateAdapter();
 			}
@@ -175,6 +179,20 @@ public class MemoryAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createFitnessComponentDefinitionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.evoal.models.v202704.optimisation.memory.ReproducibilityNote <em>Reproducibility Note</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.evoal.models.v202704.optimisation.memory.ReproducibilityNote
+	 * @generated
+	 */
+	public Adapter createReproducibilityNoteAdapter() {
 		return null;
 	}
 

@@ -11,10 +11,10 @@ import org.eclipse.emf.ecore.EObject;
 
 import de.evoal.core.api.languages.AttributeEvaluator;
 import de.evoal.core.api.utils.AttributeHelper;
+import de.evoal.optimisation.api.fitness.ChangesUnits;
 import de.evoal.optimisation.api.fitness.Fitness;
 import de.evoal.optimisation.api.fitness.FitnessContext;
 import de.evoal.optimisation.api.fitness.FitnessLayout;
-import de.evoal.optimisation.api.fitness.FitnessStep;
 
 /**
  * Divides fitness components by a reference value: {@code f / r} (DL type
@@ -23,7 +23,7 @@ import de.evoal.optimisation.api.fitness.FitnessStep;
  */
 @Dependent
 @Named("de.evoal.optimisation.core.scaling")
-public class ScalingStep implements FitnessStep {
+public class ScalingStep implements ChangesUnits {
     @Inject
     private AttributeHelper attributes;
 
