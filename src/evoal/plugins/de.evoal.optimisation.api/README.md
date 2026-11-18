@@ -1,7 +1,7 @@
 # Optimisation API: steps, run kernel, fitness pipeline and run events
 
 This module holds what all optimisation algorithms share. This README describes the
-four parts an algorithm, step or listener author works with:
+five parts an algorithm, step, function or listener author works with:
 
 - the **step model** (`de.evoal.optimisation.api.steps`): an algorithm is a template of
   steps after the unified meta-algorithm model (Berger, Plump, Drechsler:
@@ -10,6 +10,8 @@ four parts an algorithm, step or listener author works with:
   the memory model,
 - the **fitness pipeline** (`de.evoal.optimisation.api.fitness`): turns the objectives of
   a candidate into the fitness the comparator compares,
+- **parallel evaluation** (`de.evoal.optimisation.api.evaluation`): how the candidates of
+  a batch are evaluated on several threads without changing the result,
 - the **run events** (`de.evoal.optimisation.api.events`): what a run publishes to its
   listeners.
 
@@ -291,6 +293,69 @@ A comparator creates a `FitnessValue` from the objectives and the fitness. Its
 `distanceFrom` (used by simulated annealing and threshold accepting) is the sum of the
 absolute differences of the compared components. The evolutionary algorithm does not use
 the pipeline yet; it is rebuilt on it.
+
+## Parallel evaluation
+
+The `EvaluationService` evaluates a batch of candidates (`evaluateAll`) on the threads of
+the run (`EvaluationExecutor`). The result of a run does not depend on the number of
+threads: the memory model, the statistics and the references of the regressions are the
+same for 1 or 64 threads.
+
+### Number of threads
+
+| Option | Meaning |
+|---|---|
+| `-Bcore:evaluation-threads=<n>` | number of threads that evaluate (default: number of processors) |
+| `EVOAL_THREADS=<n>` | the same for the start scripts (`evoal-search.sh`, `evoal-evaluate-search.sh`, `evoal-search-with-surrogate.sh`) |
+
+The number of threads is logged, but not recorded in the memory model.
+
+### What runs in parallel
+
+- Only the optimisation function runs on the threads. The fitness pipeline, the
+  comparator, the counters and the `IndividualEvaluated` events run afterwards on the
+  thread of the run, in the order of the candidates.
+- Batches: random search (`EvaluateCandidates` in batch mode) and particle swarm
+  optimisation (initial swarm and every iteration). The particles also move in parallel
+  (ARPSO moves them one after the other). Local search evaluates one neighbour after the
+  other.
+- A budget with `cut-off` covers the first candidates of a batch, as in a sequential
+  run (`Evaluator.evaluateAll`, `BatchEvaluation`).
+
+### Why the result does not depend on the threads
+
+- The `EvaluationService` gives every evaluation an index on the thread of the run, before
+  the batch is submitted (`EvaluationTask`). Results, counters and events are processed in
+  the order of these indices, not in the order the evaluations end.
+- Random numbers drawn during an evaluation come from `RandomService.taskRandom(name)`:
+  a new generator per evaluation, derived from the seed, the run, the name and the index.
+  They do not depend on which thread evaluates or when.
+- Parallel work of an algorithm uses one random stream per entity, e.g., one per particle
+  (`de.evoal.optimisation.pso/particle-<id>`), never a shared one.
+
+### Thread-safe optimisation functions
+
+`OptimisationFunction.isThreadSafe()` (default `false`) declares whether `evaluate` can be
+called on several threads at the same time. A function that is not thread-safe is
+evaluated on the thread of the run, one candidate after the other (logged once per run);
+the result is the same. Thread-safe are the benchmark functions, `'search-space-distance'`
+and `'random-fitness'`; the problem function forwards the answer of the function it
+delegates to. Surrogate functions are not thread-safe yet.
+
+A function that returns `true` has to follow these rules:
+
+- **No shared mutable state in `evaluate`.** Read only what `init` set up; create new
+  objects (e.g. the output) per call.
+- **No new EClasses during a run.** Create merged spaces and other classes in `init`. The
+  service prepares the classes of the candidates (`ConcurrentEClassAccess`) and evaluates
+  the first candidate of the first parallel batch on the thread of the run, so that the
+  lazily built caches of EMF exist before several threads use them.
+- **Random numbers only from `taskRandom`.** `RandomService.random(name)` returns one
+  shared stream per name, whose values would depend on the order of the evaluations.
+
+`ParallelEvaluationReproducibilityTest` (random search, memory model files) and
+`ParallelSwarmReproducibilityTest` (PSO) check this with a function that needs a random
+time per evaluation, for 1, 2 and 8 threads.
 
 ## Run events
 

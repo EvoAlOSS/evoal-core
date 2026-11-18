@@ -5,6 +5,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
@@ -85,6 +86,22 @@ final class MemoryModels {
         annotation.getContents().add(mapping);
 
         feature.getEAnnotations().add(annotation);
+    }
+
+    /**
+     * @return The configuration of an algorithm of the DL type {@code de.evoal.test.algorithm}.
+     */
+    static EObject algorithmConfiguration() {
+        final EPackage root = EcoreFactory.eINSTANCE.createEPackage();
+        final EPackage module = EcoreFactory.eINSTANCE.createEPackage();
+        module.setName("de.evoal.test");
+        root.getESubpackages().add(module);
+
+        final EClass type = EcoreFactory.eINSTANCE.createEClass();
+        type.setName("algorithm");
+        module.getEClassifiers().add(type);
+
+        return EcoreUtil.create(type);
     }
 
     /**

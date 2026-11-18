@@ -16,8 +16,9 @@ Regressions are small (about 10 iterations, 5–10 individuals) and cover
 combinations and edge cases. They are not part of the release. User examples
 belong in `src/main/examples`.
 
-Every regression runs with `bin/evoal-search.sh` and `EVOAL_SEED=42` in a copy
-of its folder (`target/regressions/<plugin>/<name>/run-<n>`, including `run.log`).
+Every regression runs with `bin/evoal-search.sh`, `EVOAL_SEED=42` and
+`EVOAL_THREADS=1` (see `-Devoal.regressions.threads`) in a copy of its folder
+(`target/regressions/<plugin>/<name>/run-<n>`, including `run.log`).
 
 A regression whose folder contains `targets.csv` runs as an evaluation with
 `bin/evoal-evaluate-search.sh`, one repetition per target point
@@ -49,8 +50,8 @@ The examples in `src/evoal/plugins/<plugin>/src/main/examples/<name>` are
 checked as well if the property `evoal.regressions.examples` is `true` (nightly
 pipeline). An example takes part if its folder contains `expected/`; all other
 examples are left out. It must have exactly one run script `01-run-*.sh`, which
-is run as users run it, with `EVOAL_HOME` set to the release and
-`EVOAL_SEED=42`. The script writes into `output/`. Its references are named
+is run as users run it, with `EVOAL_HOME` set to the release,
+`EVOAL_SEED=42` and `EVOAL_THREADS`. The script writes into `output/`. Its references are named
 `<plugin>/examples/<name>`.
 
 To add an example, create an empty `expected/` folder and create the
@@ -74,6 +75,7 @@ mvn -f src/evoal/pom.xml -Pregressions verify
 | `-Devoal.regressions.examples=true` | also runs the examples that have references |
 | `-Devoal.regressions.repetitions=2` | runs every regression twice; both outputs must be identical (nightly pipeline) |
 | `-Devoal.regressions.shell=zsh` | shell for the launcher (default `bash`, version 4 or newer) |
+| `-Devoal.regressions.threads=4` | number of threads that evaluate the candidates (`EVOAL_THREADS`, default 1; merge request pipeline: 4) |
 
 ## References
 
@@ -91,6 +93,11 @@ mvn -f src/evoal/pom.xml -Pregressions -Devoal.regressions.update=true -Devoal.r
 
 `ci/regressions-in-docker.sh [--update] [--examples]` does the same in the
 EvoAl CI image, e.g., to reproduce a pipeline failure.
+
+The references do not depend on the number of threads either (see "Parallel evaluation"
+in the README of `de.evoal.optimisation.api`). They are created with one thread; the merge
+request pipeline checks them with 4 threads (`-Devoal.regressions.threads=4`), the nightly
+pipeline with one.
 
 The only value that is not compared is the EvoAl version in the memory model
 (`"evoalVersion"`): it is stored as `${evoal.version}` and masked in the output,

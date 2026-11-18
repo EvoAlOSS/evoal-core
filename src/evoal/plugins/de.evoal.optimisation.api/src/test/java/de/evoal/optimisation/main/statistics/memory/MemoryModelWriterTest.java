@@ -53,22 +53,6 @@ public class MemoryModelWriterTest {
     private ExecutionRecorder recorder;
 
     /**
-     * @return The configuration of an algorithm of the DL type {@code de.evoal.test.algorithm}.
-     */
-    private static EObject algorithmConfiguration() {
-        final EPackage root = EcoreFactory.eINSTANCE.createEPackage();
-        final EPackage module = EcoreFactory.eINSTANCE.createEPackage();
-        module.setName("de.evoal.test");
-        root.getESubpackages().add(module);
-
-        final EClass type = EcoreFactory.eINSTANCE.createEClass();
-        type.setName("algorithm");
-        module.getEClassifiers().add(type);
-
-        return EcoreUtil.create(type);
-    }
-
-    /**
      * @return The names of the files and folders in the folder, sorted.
      */
     private static List<String> contentOf(final Path folder) throws IOException {
@@ -125,7 +109,7 @@ public class MemoryModelWriterTest {
 
     private MemoryModelWriter writer(final File output) throws Exception {
         final MemoryModelWriter writer = new MemoryModelWriter();
-        inject(writer, "algorithm", algorithmConfiguration());
+        inject(writer, "algorithm", MemoryModels.algorithmConfiguration());
         inject(writer, "annotationHelper", new EAnnotationHelper());
         inject(writer, "attributes", attributes(null));
         inject(writer, "evaluator", Mockito.mock(AttributeEvaluator.class));
@@ -290,7 +274,7 @@ public class MemoryModelWriterTest {
             startRun(null);
             final MemoryModelWriter writer = writer(outputFolder.toFile());
             inject(writer, "attributes", attributes(writeSteps));
-            writer.init(algorithmConfiguration());
+            writer.init(MemoryModels.algorithmConfiguration());
 
             final Iteration iteration = MemoryModels.iteration(0, MemoryModels.individual(0, new double[] {1.0, 1.0}, 2.0));
             final UnorderedIterationStep step = MemoryFactory.eINSTANCE.createUnorderedIterationStep();

@@ -75,16 +75,23 @@ public final class RegressionRunner {
     private final String shell;
 
     /**
+     * The number of threads that evaluate the candidates of a run ({@code EVOAL_THREADS}).
+     */
+    private final int threads;
+
+    /**
      * Creates a runner for regressions.
      *
      * @param release The folder of the assembled release.
      * @param shell The shell that executes the launcher.
      * @param agent The Java agent for the runs, empty for none.
+     * @param threads The number of threads that evaluate the candidates of a run.
      */
-    public RegressionRunner(final Path release, final String shell, final String agent) {
+    public RegressionRunner(final Path release, final String shell, final String agent, final int threads) {
         this.release = release;
         this.shell = shell;
         this.agent = agent;
+        this.threads = threads;
     }
 
     /**
@@ -182,6 +189,7 @@ public final class RegressionRunner {
         final Map<String, String> environment = builder.environment();
         environment.put("EVOAL_HOME", release.toString());
         environment.put("EVOAL_SEED", SEED);
+        environment.put("EVOAL_THREADS", Integer.toString(threads));
         environment.put("EVOAL_LOGGING", "WARN");
         environment.remove("EVOAL_DEBUG");
         environment.remove("EVOAL_VM");

@@ -25,6 +25,8 @@ import org.junit.jupiter.api.TestFactory;
  *   <li>{@code evoal.regressions.repetitions}: number of runs per regression
  *     (default 1); all runs must give the same output.</li>
  *   <li>{@code evoal.regressions.shell}: shell for the launcher (default {@code bash}).</li>
+ *   <li>{@code evoal.regressions.threads}: number of threads that evaluate the candidates
+ *     (default 1); the output does not depend on it.</li>
  *   <li>{@code evoal.regressions.agent}: Java agent for the runs (set by JaCoCo).</li>
  * </ul>
  */
@@ -68,11 +70,12 @@ public class RegressionIT {
         final String rootName = System.getProperty("evoal.regressions.root", "../../../..");
         final String shell = System.getProperty("evoal.regressions.shell", "bash");
         final String agent = System.getProperty("evoal.regressions.agent", "");
+        final int threads = Integer.getInteger("evoal.regressions.threads", 1);
 
         this.root = Path.of(rootName);
 
         final Path release = root.resolve(RELEASE_FOLDER);
-        this.runner = new RegressionRunner(release, shell, agent);
+        this.runner = new RegressionRunner(release, shell, agent, threads);
         this.update = Boolean.getBoolean("evoal.regressions.update");
         this.withExamples = Boolean.getBoolean("evoal.regressions.examples");
         this.repetitions = Integer.getInteger("evoal.regressions.repetitions", 1);

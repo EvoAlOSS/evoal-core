@@ -31,6 +31,9 @@
         <!-- shell that executes the search launcher (bin/evoal-search.sh needs bash 4 or newer, or zsh) -->
         <evoal.regressions.shell>bash</evoal.regressions.shell>
 
+        <!-- number of threads that evaluate the candidates of a run (EVOAL_THREADS); the output does not depend on it -->
+        <evoal.regressions.threads>1</evoal.regressions.threads>
+
         <!-- true rewrites the references instead of comparing against them -->
         <evoal.regressions.update>false</evoal.regressions.update>
 
@@ -191,6 +194,7 @@
                                 <evoal.regressions.repetitions>${evoal.regressions.repetitions}</evoal.regressions.repetitions>
                                 <evoal.regressions.root>${evoal.regressions.root}</evoal.regressions.root>
                                 <evoal.regressions.shell>${evoal.regressions.shell}</evoal.regressions.shell>
+                                <evoal.regressions.threads>${evoal.regressions.threads}</evoal.regressions.threads>
                                 <evoal.regressions.update>${evoal.regressions.update}</evoal.regressions.update>
                             </systemPropertyVariables>
                         </configuration>

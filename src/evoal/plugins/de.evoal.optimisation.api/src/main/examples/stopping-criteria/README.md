@@ -64,3 +64,5 @@ EVOAL_SEED=42 ./01-run-search.sh
 - Lower `'maximum-iterations'` to 5: now the iteration count stops the run first.
 - Add `'file-check' {}` to the list, start the search with a large budget, and
   create the file `evoal-stop.txt` in the example folder while it runs.
+  Since the result then depends on something outside the run, the memory model
+  records a reproducibility note (`execution-information.json`).

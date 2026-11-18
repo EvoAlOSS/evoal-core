@@ -378,8 +378,9 @@ evoal:unit:
     - job: "dsl:compile-and-install"
       artifacts: true
   script:
-    # builds, assembles the release (ci/create-release.sh) and runs the regressions against it
-    - mvn $MAVEN_CLI_OPTS -f $EVOAL_POM -Dbranch=$CI_COMMIT_REF_NAME -Pjacoco,regressions verify package
+    # builds, assembles the release (ci/create-release.sh) and runs the regressions against it,
+    #   with 4 threads (the references are created with one; the nightly pipeline checks one)
+    - mvn $MAVEN_CLI_OPTS -f $EVOAL_POM -Dbranch=$CI_COMMIT_REF_NAME -Pjacoco,regressions -Devoal.regressions.threads=4 verify package
     - /bin/bash ci/regression-coverage.sh
     - cat src/evoal/core/de.evoal.releng.jacoco/target/site/jacoco-aggregate/index.html | grep -o '<tfoot>.*</tfoot>'
   coverage: /Total.*?([0-9]{1,3})%/
@@ -568,7 +569,7 @@ nightly:check-changes:
     - ci/cancel-unchanged-nightly.sh
 
 #############################################################
-## Run every regression and every example with references twice:
+## Run every regression and every example with references twice with one thread:
 ##   both runs must give the same output, which must equal the references
 ##
 ## Situations
