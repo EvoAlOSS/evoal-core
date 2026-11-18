@@ -16,17 +16,6 @@ module de.evoal.optimisation.core {
     }
 
     /**
-     * Abstract base class for optimisation functions that call a subsequent optimisation
-     *   function during calculation.
-     */
-    abstract type 'decorated-optimisation-function' extends 'optimisation-function' {
-        /**
-         * Fitness function we are calling during the fitness calculation.
-         */
-        function : instance 'optimisation-function';
-    }
-
-    /**
      * Place-holder for an unknown optimisation function.
      */
     type 'unknown-function' extends 'optimisation-function' {}
@@ -224,23 +213,6 @@ module de.evoal.optimisation.core {
      * A fitness function during the optimisation (not at the problem-level).
      */
     abstract type 'fitness-function' extends 'optimisation-function' {}
-
-    /**
-     * Abstract base class for all fitness functions that call a subsequent fitness
-     *   function during calculation.
-     */
-    abstract type 'decorated-fitness-function' extends 'fitness-function' {
-        /**
-         * Fitness function we are calling during the fitness calculation.
-         */
-        function : instance 'optimisation-function';
-    }
-
-    /**
-     * Modifies the fitness value based on constraint violation.
-     */
-    type 'malus' extends 'decorated-fitness-function' {
-    }
 
     type 'random-fitness' extends 'fitness-function' {
     }

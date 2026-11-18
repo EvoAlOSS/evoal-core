@@ -39,12 +39,12 @@ public class ThresholdAcceptingStrategy implements AcceptingStrategy {
     @Override
     public boolean acceptCandidate(final OptimisationValue candidateValue, final OptimisationValue currentValue) {
         if (candidateValue.isBetter(currentValue)) {
-            log.debug("Neighbour malus better, accepting.");
+            log.debug("Neighbour value better, accepting.");
             return true;
         }
 
         if(!(candidateValue instanceof OptimisationValueWithDistance distAlt)) {
-            log.warn("Neighbour malus is not a distance value.");
+            log.warn("Neighbour value is not a distance value.");
             return false;
         }
 

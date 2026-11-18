@@ -1,13 +1,15 @@
-# Optimisation API: steps, run kernel and run events
+# Optimisation API: steps, run kernel, fitness pipeline and run events
 
 This module holds what all optimisation algorithms share. This README describes the
-three parts an algorithm author or a listener author works with:
+four parts an algorithm, step or listener author works with:
 
 - the **step model** (`de.evoal.optimisation.api.steps`): an algorithm is a template of
   steps after the unified meta-algorithm model (Berger, Plump, Drechsler:
   *Understandability and (self-)explainability in Optimisation Algorithms*, section 3.4),
 - the **run kernel** (`de.evoal.optimisation.api.run`): executes a template and records
   the memory model,
+- the **fitness pipeline** (`de.evoal.optimisation.api.fitness`): turns the objectives of
+  a candidate into the fitness the comparator compares,
 - the **run events** (`de.evoal.optimisation.api.events`): what a run publishes to its
   listeners.
 
@@ -204,6 +206,91 @@ evaluated undo their move.
 - Regressions go to `src/test/regressions/<name>/` (`search.ol`, `search.ddl`,
   `expected/`), see the README of `de.evoal.releng.regressions`. Examples go to
   `src/main/examples/<name>/`.
+
+## The fitness pipeline
+
+The algorithms do not compare objectives. Every evaluation goes through the same chain:
+
+```
+input ──optimisation function──▶ objectives ──FitnessPipeline──▶ fitness ──comparator──▶ optimisation value
+```
+
+- The **objectives** are the output of the optimisation function, with their declared
+  types. The statistics writers show them.
+- The **fitness** (`Fitness`) is a vector of `double`s in the **canonical direction:
+  smaller is better**. Its `FitnessLayout` names the components; a component that belongs
+  to an objective refers to its `Goal`.
+- The **optimisation value** is what the steps of an algorithm compare (`FitnessValue`).
+
+### Order of the steps
+
+`FitnessPipeline.apply(input, objectives)` runs:
+
+1. one component per goal of the problem, the objective value as `double` (integers up to
+   2^53 are exact),
+2. the `DirectionStep`, derived from the goals: `minimise` keeps `v`, `maximise` gives
+   `-v`, and `optimise ... towards t with d` gives the distance `d(v, t)` (DL type
+   `'target-distance'`: `distance`, `'squared-distance'`, `'relative-distance'`; with
+   `towards target`, `t` is the current target point of an evaluation),
+3. the steps of `'fitness-pipeline'` of the algorithm, in their order, each on the result
+   of the previous one.
+
+`FitnessPipelineProducer` creates the `Goals` and the pipeline for every run. The
+pipeline folds the layouts of the steps when it is built, so the components of the final
+fitness are known before the first evaluation (the memory model records them). It also
+rejects, when it is built:
+
+- a `Scalarisation` that is not the last step (so there is at most one),
+- a step marked `RequiresObjectiveUnits` after one marked `ChangesUnits`.
+
+### Available steps
+
+| DL type | Class | Kind | Effect |
+|---|---|---|---|
+| `scaling` | `ScalingStep` | `ChangesUnits` | divides listed components by a reference value |
+| `'objective-selection'` | `ObjectiveSelectionStep` | | keeps one component |
+| `'weighted-sum'` | `WeightedSumStep` | `Scalarisation` | one component `weighted-sum` |
+| `'prediction-interval'` | `PredictionIntervalStep` (surrogate.adaption) | `RequiresObjectiveUnits` | adapts predicted objectives by the width of their prediction interval |
+| `'gaussian-density'`, `'kernel-density'` | `GaussianDensityStep`, `KernelDensityStep` (surrogate.adaption) | `RequiresObjectiveUnits` | adapts predicted objectives by the density of the training data around the candidate |
+
+The surrogate adaptions apply formulas on objective values; they convert a component back
+with `DirectionStep.toObjective` and the result with `DirectionStep.toCanonical`, so they
+only accept `minimise` and `maximise` goals.
+
+### Writing a fitness step
+
+1. Declare a DL type that extends `'fitness-step'` (or `scalarisation`) in the module's
+   DL file.
+2. Implement `FitnessStep` (or one of the marker interfaces `Scalarisation`,
+   `ChangesUnits`, `RequiresObjectiveUnits`), `@Dependent` and named
+   `<DL module>.<type name>`; read the configuration in `init`.
+3. `apply(context, current)` returns the new fitness. `context` holds the input, the
+   objectives and the goals of the candidate. Do not change `current`, create a new
+   `Fitness`.
+4. If the step adds, removes or renames components, override `layout(input)`; the
+   fitness that `apply` returns must have exactly this layout, otherwise the pipeline
+   throws. New components are created with `FitnessComponent.named(name)`.
+
+`ObjectiveSelectionStep` is a short example of a step that changes the layout.
+
+### Scalarisation or comparator?
+
+A **scalarising function** maps the fitness of one candidate to a single value (weighted
+sum, Tchebycheff, achievement scalarising functions). It is a step, a `Scalarisation`. A
+**relation** between two candidates (lexicographic order, Pareto dominance,
+ε-dominance) cannot be computed per candidate. It is a comparator
+(`OptimisationValueComparator`, DL type `comparator`):
+
+| DL type | Class | Compares |
+|---|---|---|
+| `'numeric-comparator'` | `NumericOptimisationComparator` | the only component (one goal, or after a scalarisation or `'objective-selection'`) |
+| `'hierarchical-comparator'` | `HierarchicalComparator` | the components of the objectives in `order`; the next one only if the previous ones are equal |
+
+A comparator creates a `FitnessValue` from the objectives and the fitness. Its
+`compareTo` is reversed, because `OptimisationValue` treats a greater value as better;
+`distanceFrom` (used by simulated annealing and threshold accepting) is the sum of the
+absolute differences of the compared components. The evolutionary algorithm does not use
+the pipeline yet; it is rebuilt on it.
 
 ## Run events
 

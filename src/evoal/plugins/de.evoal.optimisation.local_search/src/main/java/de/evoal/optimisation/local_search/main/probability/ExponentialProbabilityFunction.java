@@ -33,11 +33,11 @@ public class ExponentialProbabilityFunction implements AcceptanceProbabilityFunc
 
     @Override
     public double apply(final OptimisationValue currentFitness, final OptimisationValue neighbourFitness, double temperature) {
-        log.info("current malus is {}, neighbour malus is {}", currentFitness, neighbourFitness);
+        log.info("current value is {}, neighbour value is {}", currentFitness, neighbourFitness);
         log.info("  temp passed to acceptance function is {}", temperature);
 
         if (neighbourFitness.isBetter(currentFitness)) {
-            log.info("neighbour malus better than current malus. Taking neighbouring solution.");
+            log.info("neighbour value better than current value. Taking neighbouring solution.");
             return 1.0;
         }
 

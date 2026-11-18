@@ -3,8 +3,6 @@ package de.evoal.optimisation.api.fitness;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.SplittableRandom;
-import java.util.function.Function;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -20,13 +18,7 @@ import org.eclipse.emf.ecore.EcorePackage;
 
 import de.evoal.models.core.ecore.Space;
 import de.evoal.models.core.ecore.TypedEObject;
-import de.evoal.models.v202704.optimisation.model.ModelFactory;
-import de.evoal.models.v202704.optimisation.model.OptimisationGoal;
-import de.evoal.models.v202704.optimisation.model.Problem;
-import de.evoal.models.v202704.optimisation.model.TargetGoal;
 
-import de.evoal.optimisation.main.comparator.ComparatorFactory;
-import de.evoal.optimisation.main.comparator.NumericOptimisationValue;
 import de.evoal.optimisation.main.fitness.AbsoluteDistance;
 import de.evoal.optimisation.main.fitness.ObjectiveSelectionStep;
 import de.evoal.optimisation.main.fitness.ScalingStep;
@@ -440,83 +432,6 @@ public class FitnessPipelineTest {
 
             // then
             Assertions.assertEquals((double) Integer.MAX_VALUE, fitness.value(0));
-        }
-    }
-
-    /**
-     * Today's value conversions ({@link ComparatorFactory}) use maximisation; the canonical
-     *   fitness is their negation. So the fitness orders two candidates exactly opposite to
-     *   the numeric comparator.
-     */
-    @Nested
-    @DisplayName("given today's value conversions")
-    class ValueConversions {
-        private final Space space = space(EcorePackage.Literals.EDOUBLE, "y");
-
-        private final EStructuralFeature y = space.getEClass().getEStructuralFeature("y");
-
-        private Map<EStructuralFeature, Function<Number, Number>> conversionsOf(final Goals goals) {
-            final ComparatorFactory factory = new ComparatorFactory();
-
-            return factory.createValueConversions(goals);
-        }
-
-        private static Goals goalsOf(final Problem problem) {
-            return Goals.of(problem, null, configuration -> new AbsoluteDistance());
-        }
-
-        private TypedEObject objectives(final double value) {
-            final TypedEObject objectives = space.newEObject();
-            objectives.eSet(y, value);
-
-            return objectives;
-        }
-
-        @Test
-        public void aMinimisedObjectiveIsOrderedOppositeToTheNumericComparator() {
-            assertOppositeOrder(ModelFactory.eINSTANCE.createMinimiseGoal());
-        }
-
-        @Test
-        public void aMaximisedObjectiveIsOrderedOppositeToTheNumericComparator() {
-            assertOppositeOrder(ModelFactory.eINSTANCE.createMaximiseGoal());
-        }
-
-        @Test
-        public void aTargetIsOrderedOppositeToTheNumericComparator() {
-            final TargetGoal target = ModelFactory.eINSTANCE.createTargetGoal();
-            target.setValue(3.0);
-
-            assertOppositeOrder(target);
-        }
-
-        private void assertOppositeOrder(final OptimisationGoal goal) {
-            // given
-            goal.setData(y);
-            final Problem problem = ModelFactory.eINSTANCE.createProblem();
-            problem.getGoals().add(goal);
-
-            final Goals goals = goalsOf(problem);
-            final Map<EStructuralFeature, Function<Number, Number>> conversions = conversionsOf(goals);
-            final FitnessPipeline pipeline = new FitnessPipeline(goals, List.of());
-            final SplittableRandom random = new SplittableRandom(42);
-
-            for(int pair = 0; pair < 1000; ++pair) {
-                // values on a coarse grid, so that ties occur
-                final TypedEObject first = objectives(random.nextInt(-20, 21) / 4.0);
-                final TypedEObject second = objectives(random.nextInt(-20, 21) / 4.0);
-
-                // when
-                final double firstFitness = pipeline.apply(first, first).value(0);
-                final double secondFitness = pipeline.apply(second, second).value(0);
-                final NumericOptimisationValue firstValue = NumericOptimisationValue.of(conversions, first);
-                final NumericOptimisationValue secondValue = NumericOptimisationValue.of(conversions, second);
-
-                // then
-                final int byFitness = Integer.signum(Double.compare(firstFitness, secondFitness));
-                final int byComparator = Integer.signum(firstValue.compareTo(secondValue));
-                Assertions.assertEquals(-byComparator, byFitness, () -> first + " vs. " + second);
-            }
         }
     }
 }

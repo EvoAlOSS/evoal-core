@@ -3,7 +3,6 @@ package de.evoal.optimisation.main.comparator;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
 
 import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
@@ -55,13 +54,6 @@ public class HierarchicalComparator implements OptimisationValueComparator {
      */
     private FitnessLayout resolvedLayout;
 
-    /**
-     * The value conversions of the problem goals, only used by the evolutionary algorithm,
-     *   which does not compute a fitness yet.
-     */
-    @Inject @Named("optimisation-value-conversions")
-    private Map<EStructuralFeature, Function<Number, Number>> valueConversions;
-
     @Override
     public HierarchicalComparator init(final EObject config) {
         final DataDescription[] order = evaluator.attributeToDataDescriptionArray(config, "order");
@@ -87,15 +79,6 @@ public class HierarchicalComparator implements OptimisationValueComparator {
         }
 
         return fitnessOrder;
-    }
-
-    /**
-     * Creates the optimisation value from the objectives and today's value conversions.
-     *   Only the evolutionary algorithm uses it; it is removed when the algorithm is rebuilt.
-     */
-    @Override
-    public HierarchicalValue toValue(final TypedEObject fitnessValues) {
-        return HierarchicalValue.of(valueConversions, fitnessValues, dimensionOrder);
     }
 
     @Override

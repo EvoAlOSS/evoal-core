@@ -1,11 +1,8 @@
 package de.evoal.optimisation.main.comparator;
 
 import java.util.List;
-import java.util.Map;
-import java.util.function.Function;
 
 import jakarta.enterprise.context.Dependent;
-import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -29,22 +26,6 @@ public class NumericOptimisationComparator implements OptimisationValueComparato
      * The only compared fitness component.
      */
     private static final int[] ORDER = {0};
-
-    /**
-     * The value conversions of the problem goals, only used by the evolutionary algorithm,
-     *   which does not compute a fitness yet.
-     */
-    @Inject @Named("optimisation-value-conversions")
-    private Map<EStructuralFeature, Function<Number, Number>> valueConversions;
-
-    /**
-     * Creates the optimisation value from the objectives and today's value conversions.
-     *   Only the evolutionary algorithm uses it; it is removed when the algorithm is rebuilt.
-     */
-    @Override
-    public NumericOptimisationValue toValue(final TypedEObject fitnessValues) {
-        return NumericOptimisationValue.of(valueConversions, fitnessValues);
-    }
 
     /**
      * @throws IllegalArgumentException if the fitness has not exactly one component.

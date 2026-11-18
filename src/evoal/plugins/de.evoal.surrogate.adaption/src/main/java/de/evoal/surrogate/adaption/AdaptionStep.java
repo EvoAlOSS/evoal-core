@@ -7,6 +7,7 @@ import java.util.Set;
 import jakarta.inject.Inject;
 
 import de.evoal.models.core.ecore.TypedEObject;
+import de.evoal.models.v202704.optimisation.execution.OptimisationFunction;
 import de.evoal.optimisation.api.evaluation.EvaluationService;
 import de.evoal.optimisation.api.fitness.DirectionStep;
 import de.evoal.optimisation.api.fitness.Fitness;
@@ -16,6 +17,7 @@ import de.evoal.optimisation.api.fitness.FitnessLayout;
 import de.evoal.optimisation.api.fitness.Goal;
 import de.evoal.optimisation.api.fitness.RequiresObjectiveUnits;
 import de.evoal.surrogate.api.function.ModelFunctionData;
+import de.evoal.surrogate.api.function.SurrogateModelProvider;
 
 /**
  * Base class of the surrogate adaptions: fitness steps that adapt the components of the
@@ -26,8 +28,7 @@ import de.evoal.surrogate.api.function.ModelFunctionData;
  *   canonical fitness). So a step converts the canonical value of a component back into the
  *   value of its objective, adapts it and converts the result back. This is only possible
  *   for {@code minimise} and {@code maximise} goals; components of target goals are
- *   rejected. Chained adaptions see the result of the previous one, like the former
- *   decorators did.
+ *   rejected. Chained adaptions see the result of the previous one.
  * <p>
  * The surrogate is the optimisation function of the current run. It is looked up, and the
  *   information stored with it is read, when the pipeline is built, so a model without the
@@ -107,7 +108,14 @@ public abstract class AdaptionStep implements RequiresObjectiveUnits {
      *   surrogate model.
      */
     protected ModelFunctionData surrogate() {
-        return SurrogateLookup.find(evaluations.optimisationFunction());
+        final OptimisationFunction function = evaluations.optimisationFunction();
+
+        if(!(function instanceof SurrogateModelProvider provider)) {
+            throw new IllegalStateException("The surrogate adaption needs a surrogate as optimisation function, but the function is '"
+                                            + function + "'.");
+        }
+
+        return provider.getModelFunctionData();
     }
 
     private int[] adaptedIndicesOf(final FitnessLayout layout) {
